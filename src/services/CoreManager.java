@@ -1,6 +1,6 @@
 package services;
 
-import me.joshlarson.control.Manager;
+import resources.control.Manager;
 
 public class CoreManager extends Manager {
 	
