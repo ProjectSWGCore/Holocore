@@ -10,7 +10,7 @@ public class CoreManager extends Manager {
 	public CoreManager() {
 		engineManager = new EngineManager();
 		
-		addChildManager(engineManager);
+		addChildService(engineManager);
 	}
 	
 	/**
