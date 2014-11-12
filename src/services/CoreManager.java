@@ -1,16 +1,20 @@
 package services;
 
 import resources.control.Manager;
+import services.player.PlayerManager;
 
 public class CoreManager extends Manager {
 	
 	private long startTime;
 	private EngineManager engineManager;
+	private PlayerManager playerManager;
 	
 	public CoreManager() {
 		engineManager = new EngineManager();
+		playerManager = new PlayerManager();
 		
 		addChildService(engineManager);
+		addChildService(playerManager);
 	}
 	
 	/**
