@@ -4,12 +4,13 @@ import services.CoreManager;
 
 public class ProjectSWG {
 	
+	private static ProjectSWG server;
 	private final Thread mainThread;
 	private CoreManager manager;
 	private boolean shutdownRequested;
 	
-	public static void main(String [] args) {
-		final ProjectSWG server = new ProjectSWG();
+	public static final void main(String [] args) {
+		server = new ProjectSWG();
 		Runtime.getRuntime().addShutdownHook(new Thread() {
 			public void run() {
 				server.forceShutdown();
@@ -26,7 +27,11 @@ public class ProjectSWG {
 		server.terminate();
 	}
 	
-	public ProjectSWG() {
+	public static final long getCoreTime() {
+		return (long) server.manager.getCoreTime();
+	}
+	
+	private ProjectSWG() {
 		mainThread = Thread.currentThread();
 		shutdownRequested = false;
 	}
@@ -69,6 +74,7 @@ public class ProjectSWG {
 	private void loop() {
 		while (manager.isOperational() && !shutdownRequested) {
 			try {
+				manager.flushPackets(); // Sends any packets that weren't sent
 				Thread.sleep(100); // Checks the state of the server every 100ms
 			} catch (InterruptedException e) {
 				if (!shutdownRequested)
