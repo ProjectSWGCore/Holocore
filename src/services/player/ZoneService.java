@@ -1,5 +1,8 @@
 package services.player;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import network.packets.Packet;
 import network.packets.soe.SessionRequest;
 import network.packets.swg.login.AccountFeatureBits;
@@ -14,6 +17,8 @@ import network.packets.swg.login.creation.RandomNameRequest;
 import network.packets.swg.login.creation.RandomNameResponse;
 import network.packets.swg.zone.HeartBeatMessage;
 import resources.Race;
+import resources.client_info.ClientFactory;
+import resources.client_info.visitors.ProfTemplateData;
 import resources.config.ConfigFile;
 import resources.control.Service;
 import resources.player.Player;
@@ -23,14 +28,19 @@ import utilities.namegen.SWGNameGenerator;
 public class ZoneService extends Service {
 	
 	private SWGNameGenerator nameGenerator;
+	private Map<String, ProfTemplateData> profTemplates;
+	private ClientFactory clientFac;
 	
 	public ZoneService() {
 		nameGenerator = new SWGNameGenerator();
+		clientFac = new ClientFactory();
+		//profTemplates = new HashMap<String, ProfTemplateData>();
 	}
 	
 	@Override
 	public boolean initialize() {
 		nameGenerator.loadAllRules();
+		//loadProfTemplates(); TODO: Uncomment when object creation is implemented
 		return super.initialize();
 	}
 	
@@ -75,7 +85,19 @@ public class ZoneService extends Service {
 	
 	private void handleCharCreation(Player player, ClientCreateCharacter create) {
 		System.out.println("Create Character: " + create.getName());
+		
+		/*for (String item : profTemplates.get(create.getClothes()).getItems(create.getRace())) {
+			// TODO: Create and add item to character, item variable will be the template of the item to create
+		}*/
 	}
 	
-	
+	private void loadProfTemplates() {
+		profTemplates.put("crafting_artisan", (ProfTemplateData) clientFac.getInfoFromFile("creation/profession_defaults_combat_brawler.iff"));
+		profTemplates.put("combat_brawler", (ProfTemplateData) clientFac.getInfoFromFile("creation/profession_defaults_combat_brawler.iff"));
+		profTemplates.put("social_entertainer", (ProfTemplateData) clientFac.getInfoFromFile("creation/profession_defaults_social_entertainer.iff"));
+		profTemplates.put("combat_marksman", (ProfTemplateData) clientFac.getInfoFromFile("creation/profession_defaults_combat_marksman.iff"));
+		profTemplates.put("science_medic", (ProfTemplateData) clientFac.getInfoFromFile("creation/profession_defaults_science_medic.iff"));
+		profTemplates.put("outdoors_scout", (ProfTemplateData) clientFac.getInfoFromFile("creation/profession_defaults_outdoors_scout.iff"));
+		profTemplates.put("jedi", (ProfTemplateData) clientFac.getInfoFromFile("creation/profession_defaults_jedi.iff"));
+	}
 }
