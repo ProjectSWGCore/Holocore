@@ -1,6 +1,7 @@
 package services.player;
 
-import java.util.HashMap;
+import intents.PlayerEventIntent;
+
 import java.util.Map;
 
 import network.packets.Packet;
@@ -22,6 +23,7 @@ import resources.client_info.visitors.ProfTemplateData;
 import resources.config.ConfigFile;
 import resources.control.Service;
 import resources.player.Player;
+import resources.player.PlayerEvent;
 import resources.services.Config;
 import utilities.namegen.SWGNameGenerator;
 
@@ -85,6 +87,8 @@ public class ZoneService extends Service {
 	
 	private void handleCharCreation(Player player, ClientCreateCharacter create) {
 		System.out.println("Create Character: " + create.getName());
+		
+		new PlayerEventIntent(player, PlayerEvent.PE_CREATE_CHARACTER).broadcast();
 		
 		/*for (String item : profTemplates.get(create.getClothes()).getItems(create.getRace())) {
 			// TODO: Create and add item to character, item variable will be the template of the item to create
