@@ -5,7 +5,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import network.packets.Packet;
 import network.packets.swg.login.ClientIdMsg;
-import intents.InboundPacketIntent;
+import intents.GalacticPacketIntent;
 import resources.control.Intent;
 import resources.control.Manager;
 import resources.network.ServerType;
@@ -30,14 +30,14 @@ public class PlayerManager extends Manager {
 	
 	@Override
 	public boolean initialize() {
-		registerForIntent(InboundPacketIntent.TYPE);
+		registerForIntent(GalacticPacketIntent.TYPE);
 		return super.initialize();
 	}
 	
 	@Override
 	public void onIntentReceived(Intent i) {
-		if (i instanceof InboundPacketIntent) {
-			InboundPacketIntent ipi = (InboundPacketIntent) i;
+		if (i instanceof GalacticPacketIntent) {
+			GalacticPacketIntent ipi = (GalacticPacketIntent) i;
 			Packet packet = ipi.getPacket();
 			ServerType type = ipi.getServerType();
 			long networkId = ipi.getNetworkId();

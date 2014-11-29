@@ -6,20 +6,20 @@ import intents.InboundPacketIntent;
 import intents.OutboundPacketIntent;
 import resources.control.Intent;
 import resources.control.Manager;
-import services.player.PlayerManager;
+import services.galaxy.GalacticManager;
 
 public class CoreManager extends Manager {
 	
-	private long startTime;
 	private EngineManager engineManager;
-	private PlayerManager playerManager;
+	private GalacticManager galacticManager;
+	private long startTime;
 	
 	public CoreManager() {
 		engineManager = new EngineManager();
-		playerManager = new PlayerManager();
+		galacticManager = new GalacticManager();
 		
 		addChildService(engineManager);
-		addChildService(playerManager);
+		addChildService(galacticManager);
 	}
 	
 	/**

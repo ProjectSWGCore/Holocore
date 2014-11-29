@@ -40,12 +40,9 @@ public class ProjectSWG {
 		while (!shutdownRequested) {
 			manager = new CoreManager();
 			initialize();
-			System.out.println("ProjectSWG: Initialized. Time: " + manager.getCoreTime() + "ms");
 			start();
-			System.out.println("ProjectSWG: Started. Time: " + manager.getCoreTime() + "ms");
 			loop();
 			terminate();
-			System.out.println("ProjectSWG: Terminated. Time: " + manager.getCoreTime() + "ms");
 			if (!shutdownRequested) {
 				System.out.println("ProjectSWG: Cleaning up memory...");
 				cleanup();
@@ -63,12 +60,14 @@ public class ProjectSWG {
 		System.out.println("ProjectSWG: Initializing...");
 		if (!manager.initialize())
 			throw new CoreException("Failed to initialize.");
+		System.out.println("ProjectSWG: Initialized. Time: " + manager.getCoreTime() + "ms");
 	}
 	
 	private void start() {
 		System.out.println("ProjectSWG: Starting...");
 		if (!manager.start())
 			throw new CoreException("Failed to start.");
+		System.out.println("ProjectSWG: Started. Time: " + manager.getCoreTime() + "ms");
 	}
 	
 	private void loop() {
@@ -88,6 +87,7 @@ public class ProjectSWG {
 			return;
 		if (!manager.terminate())
 			throw new CoreException("Failed to terminate.");
+		System.out.println("ProjectSWG: Terminated. Time: " + manager.getCoreTime() + "ms");
 	}
 	
 	private void cleanup() {

@@ -22,6 +22,8 @@ import resources.client_info.ClientFactory;
 import resources.client_info.visitors.ProfTemplateData;
 import resources.config.ConfigFile;
 import resources.control.Service;
+import resources.objects.creature.CreatureObject;
+import resources.objects.player.PlayerObject;
 import resources.player.Player;
 import resources.player.PlayerEvent;
 import resources.services.Config;
@@ -87,6 +89,8 @@ public class ZoneService extends Service {
 	
 	private void handleCharCreation(Player player, ClientCreateCharacter create) {
 		System.out.println("Create Character: " + create.getName());
+		CreatureObject creatureObj = new CreatureObject();
+		PlayerObject playerObj = new PlayerObject();
 		
 		new PlayerEventIntent(player, PlayerEvent.PE_CREATE_CHARACTER).broadcast();
 		
