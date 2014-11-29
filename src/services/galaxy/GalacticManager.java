@@ -5,19 +5,23 @@ import intents.GalacticPacketIntent;
 import intents.InboundPacketIntent;
 import resources.control.Intent;
 import resources.control.Manager;
+import services.objects.ObjectManager;
 import services.player.PlayerManager;
 
 public class GalacticManager extends Manager {
 	
 	private final Object prevPacketIntentMutex = new Object();
 	
+	private ObjectManager objectManager;
 	private PlayerManager playerManager;
 	private Intent prevPacketIntent;
 	
 	public GalacticManager() {
+		objectManager = new ObjectManager();
 		playerManager = new PlayerManager();
 		prevPacketIntent = null;
 		
+		addChildService(objectManager);
 		addChildService(playerManager);
 	}
 	
@@ -45,7 +49,7 @@ public class GalacticManager extends Manager {
 		synchronized (i) {
 			if (i.isBroadcasted())
 				return;
-			i.setPlayerManager(playerManager);
+			prepareGalacticIntent(i);
 			i.broadcast();
 		}
 	}
@@ -54,9 +58,14 @@ public class GalacticManager extends Manager {
 		synchronized (g) {
 			if (g.isBroadcasted())
 				return;
-			g.setPlayerManager(playerManager);
+			prepareGalacticIntent(g);
 			g.broadcastAfterIntent(i);
 		}
+	}
+	
+	private void prepareGalacticIntent(GalacticIntent i) {
+		i.setObjectManager(objectManager);
+		i.setPlayerManager(playerManager);
 	}
 	
 }
