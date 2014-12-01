@@ -1,5 +1,6 @@
 package services.player;
 
+import intents.GalacticIntent;
 import intents.PlayerEventIntent;
 
 import java.util.Map;
@@ -11,9 +12,10 @@ import network.packets.swg.login.ClientIdMsg;
 import network.packets.swg.login.ClientPermissionsMessage;
 import network.packets.swg.login.ServerId;
 import network.packets.swg.login.ServerString;
-import network.packets.swg.login.creation.ApproveNameRequest;
-import network.packets.swg.login.creation.ApproveNameResponse;
+import network.packets.swg.login.creation.ClientVerifyAndLockNameRequest;
+import network.packets.swg.login.creation.ClientVerifyAndLockNameResponse;
 import network.packets.swg.login.creation.ClientCreateCharacter;
+import network.packets.swg.login.creation.ClientVerifyAndLockNameResponse.ErrorMessage;
 import network.packets.swg.login.creation.RandomNameRequest;
 import network.packets.swg.login.creation.RandomNameResponse;
 import network.packets.swg.zone.HeartBeatMessage;
@@ -27,6 +29,7 @@ import resources.objects.player.PlayerObject;
 import resources.player.Player;
 import resources.player.PlayerEvent;
 import resources.services.Config;
+import services.objects.ObjectManager;
 import utilities.namegen.SWGNameGenerator;
 
 public class ZoneService extends Service {
@@ -48,17 +51,17 @@ public class ZoneService extends Service {
 		return super.initialize();
 	}
 	
-	public void handlePacket(Player player, long networkId, Packet p) {
+	public void handlePacket(GalacticIntent intent, Player player, long networkId, Packet p) {
 		if (p instanceof SessionRequest)
 			sendServerInfo(networkId);
 		if (p instanceof ClientIdMsg)
 			handleClientIdMsg(player, (ClientIdMsg) p);
 		if (p instanceof RandomNameRequest)
 			handleRandomNameRequest(player, (RandomNameRequest) p);
-		if (p instanceof ApproveNameRequest)
-			handleApproveNameRequest(player, (ApproveNameRequest) p);
+		if (p instanceof ClientVerifyAndLockNameRequest)
+			handleApproveNameRequest(player, (ClientVerifyAndLockNameRequest) p);
 		if (p instanceof ClientCreateCharacter)
-			handleCharCreation(player, (ClientCreateCharacter) p);
+			handleCharCreation(intent.getObjectManager(), player, (ClientCreateCharacter) p);
 	}
 	
 	private void sendServerInfo(long networkId) {
@@ -83,14 +86,16 @@ public class ZoneService extends Service {
 		sendPacket(player.getNetworkId(), response);
 	}
 	
-	private void handleApproveNameRequest(Player player, ApproveNameRequest request) {
-		sendPacket(player.getNetworkId(), new ApproveNameResponse(request.getName()));
+	private void handleApproveNameRequest(Player player, ClientVerifyAndLockNameRequest request) {
+		// TODO: Add error checking here... can't approve everybody's name
+		sendPacket(player.getNetworkId(), new ClientVerifyAndLockNameResponse(request.getName(), ErrorMessage.NAME_APPROVED));
 	}
 	
-	private void handleCharCreation(Player player, ClientCreateCharacter create) {
+	private void handleCharCreation(ObjectManager objManager, Player player, ClientCreateCharacter create) {
 		System.out.println("Create Character: " + create.getName());
-		CreatureObject creatureObj = new CreatureObject();
-		PlayerObject playerObj = new PlayerObject();
+		CreatureObject creatureObj = (CreatureObject) objManager.createObject(create.getRace());
+		PlayerObject playerObj = (PlayerObject) objManager.createObject("object/player/shared_player.iff");
+		
 		
 		new PlayerEventIntent(player, PlayerEvent.PE_CREATE_CHARACTER).broadcast();
 		
