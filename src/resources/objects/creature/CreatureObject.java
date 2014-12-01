@@ -4,8 +4,8 @@ import resources.objects.tangible.TangibleObject;
 
 public class CreatureObject extends TangibleObject {
 	
-	public CreatureObject() {
-		
+	public CreatureObject(long objectId) {
+		super(objectId);
 	}
 	
 }

@@ -4,8 +4,8 @@ import resources.objects.SWGObject;
 
 public class TangibleObject extends SWGObject {
 	
-	public TangibleObject() {
-		
+	public TangibleObject(long objectId) {
+		super(objectId);
 	}
 	
 }
