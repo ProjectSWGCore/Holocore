@@ -1,6 +1,11 @@
 package resources.objects.tangible;
 
+import network.packets.swg.zone.SceneEndBaselines;
+import network.packets.swg.zone.UpdatePvpStatusMessage;
+import network.packets.swg.zone.baselines.Baseline.BaselineType;
+import resources.network.BaselineBuilder;
 import resources.objects.SWGObject;
+import resources.player.Player;
 
 public class TangibleObject extends SWGObject {
 	
@@ -13,7 +18,7 @@ public class TangibleObject extends SWGObject {
 	private int		condition		= 0;
 	private int		pvpFlags		= 0;
 	private int		pvpType			= 0;
-	private long	pvpFactionId	= 0;
+	private int		pvpFactionId	= 0;
 	private boolean	visibleGmOnly	= false;
 	private byte []	objectEffects	= new byte[0];
 	
@@ -21,100 +26,136 @@ public class TangibleObject extends SWGObject {
 		super(objectId);
 	}
 	
-	public synchronized byte [] getAppearanceData() {
+	public byte [] getAppearanceData() {
 		return appearanceData;
 	}
 	
-	public synchronized int getDamageTaken() {
+	public int getDamageTaken() {
 		return damageTaken;
 	}
 	
-	public synchronized int getMaxHitPoints() {
+	public int getMaxHitPoints() {
 		return maxHitPoints;
 	}
 	
-	public synchronized int getComponents() {
+	public int getComponents() {
 		return components;
 	}
 	
-	public synchronized boolean isVisible() {
+	public boolean isVisible() {
 		return visible;
 	}
 	
-	public synchronized boolean isInCombat() {
+	public boolean isInCombat() {
 		return inCombat;
 	}
 	
-	public synchronized int getCondition() {
+	public int getCondition() {
 		return condition;
 	}
 	
-	public synchronized int getPvpFlags() {
+	public int getPvpFlags() {
 		return pvpFlags;
 	}
 	
-	public synchronized int getPvpType() {
+	public int getPvpType() {
 		return pvpType;
 	}
 	
-	public synchronized long getPvpFactionId() {
+	public int getPvpFactionId() {
 		return pvpFactionId;
 	}
 	
-	public synchronized boolean isVisibleGmOnly() {
+	public boolean isVisibleGmOnly() {
 		return visibleGmOnly;
 	}
 	
-	public synchronized byte [] getObjectEffects() {
+	public byte [] getObjectEffects() {
 		return objectEffects;
 	}
 	
-	public synchronized void setAppearanceData(byte [] appearanceData) {
+	public void setAppearanceData(byte [] appearanceData) {
 		this.appearanceData = appearanceData;
 	}
 	
-	public synchronized void setDamageTaken(int damageTaken) {
+	public void setDamageTaken(int damageTaken) {
 		this.damageTaken = damageTaken;
 	}
 	
-	public synchronized void setMaxHitPoints(int maxHitPoints) {
+	public void setMaxHitPoints(int maxHitPoints) {
 		this.maxHitPoints = maxHitPoints;
 	}
 	
-	public synchronized void setComponents(int components) {
+	public void setComponents(int components) {
 		this.components = components;
 	}
 	
-	public synchronized void setVisible(boolean visible) {
+	public void setVisible(boolean visible) {
 		this.visible = visible;
 	}
 	
-	public synchronized void setInCombat(boolean inCombat) {
+	public void setInCombat(boolean inCombat) {
 		this.inCombat = inCombat;
 	}
 	
-	public synchronized void setCondition(int condition) {
+	public void setCondition(int condition) {
 		this.condition = condition;
 	}
 	
-	public synchronized void setPvpFlags(int pvpFlags) {
+	public void setPvpFlags(int pvpFlags) {
 		this.pvpFlags = pvpFlags;
 	}
 	
-	public synchronized void setPvpType(int pvpType) {
+	public void setPvpType(int pvpType) {
 		this.pvpType = pvpType;
 	}
 	
-	public synchronized void setPvpFactionId(long pvpFactionId) {
+	public void setPvpFactionId(int pvpFactionId) {
 		this.pvpFactionId = pvpFactionId;
 	}
 	
-	public synchronized void setVisibleGmOnly(boolean visibleGmOnly) {
+	public void setVisibleGmOnly(boolean visibleGmOnly) {
 		this.visibleGmOnly = visibleGmOnly;
 	}
 	
-	public synchronized void setObjectEffects(byte [] objectEffects) {
+	public void setObjectEffects(byte [] objectEffects) {
 		this.objectEffects = objectEffects;
+	}
+	
+	public void createObject(Player target) {
+		super.sendSceneCreateObject(target);
+		
+		BaselineBuilder bb = new BaselineBuilder(this, BaselineType.TANO, 3);
+		createBaseline3(target, bb);
+		bb.sendTo(target);
+		bb = new BaselineBuilder(this, BaselineType.TANO, 6);
+		createBaseline6(target, bb);
+		bb.sendTo(target);
+		
+		createChildrenObjects(target);
+		target.sendPacket(new SceneEndBaselines(getObjectId()));
+	}
+	
+	public void createChildrenObjects(Player target) {
+//		target.sendPacket(new UpdatePvpStatusMessage(pvpType, pvpFactionId, getObjectId()));
+		super.createChildrenObjects(target);
+	}
+	
+	public void createBaseline3(Player target, BaselineBuilder bb) {
+		super.createBaseline3(target, bb);
+		bb.addInt(0); // Faction
+		bb.addInt(0); // Faction Status
+		bb.addArray(appearanceData);
+		bb.addInt(0); // Options Bitmask
+		bb.addInt(0); // Incap Timer
+		bb.addInt(condition);
+		bb.addInt(10000); // Random number that should be high enough - maxCondition
+		bb.addBoolean(false); // isStatic
+	}
+	
+	public void createBaseline6(Player target, BaselineBuilder bb) {
+		super.createBaseline6(target, bb);
+		bb.addInt(0); // Defender List Size
 	}
 	
 }
