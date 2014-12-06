@@ -20,13 +20,9 @@ import network.packets.swg.login.creation.ClientVerifyAndLockNameResponse.ErrorM
 import network.packets.swg.login.creation.CreateCharacterSuccess;
 import network.packets.swg.login.creation.RandomNameRequest;
 import network.packets.swg.login.creation.RandomNameResponse;
-import network.packets.swg.zone.ChatRequestRoomList;
 import network.packets.swg.zone.GalaxyLoopTimesRequest;
 import network.packets.swg.zone.GalaxyLoopTimesResponse;
 import network.packets.swg.zone.HeartBeatMessage;
-import network.packets.swg.zone.insertion.ChatRoomList;
-import network.packets.swg.zone.insertion.ChatRoomList.ChatRoom;
-import network.packets.swg.zone.insertion.CmdStartScene;
 import resources.Location;
 import resources.Race;
 import resources.Terrain;
@@ -121,9 +117,9 @@ public class ZoneService extends Service {
 		creatureObj.addChild(hairObj);
 		Location start = new Location();
 		start.setTerrain(Terrain.TATOOINE);
-		start.setX(3828);
+		start.setX(3525 + (Math.random()-.5) * 5);
 		start.setY(4);
-		start.setZ(-4804);
+		start.setZ(-4807 + (Math.random()-.5) * 5);
 		start.setOrientationX(0);
 		start.setOrientationY(0);
 		start.setOrientationZ(0);
