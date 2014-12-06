@@ -1,11 +1,23 @@
 package resources.objects.creature;
 
+import network.packets.swg.zone.SceneEndBaselines;
+import network.packets.swg.zone.UpdatePostureMessage;
+import network.packets.swg.zone.baselines.Baseline;
+import network.packets.swg.zone.baselines.Baseline.BaselineType;
+import network.packets.swg.zone.baselines.CREO3;
+import network.packets.swg.zone.baselines.CREO6;
+import network.packets.swg.zone.baselines.CREO8;
+import network.packets.swg.zone.baselines.CREO9;
 import resources.Posture;
+import resources.Race;
+import resources.network.BaselineBuilder;
 import resources.objects.tangible.TangibleObject;
+import resources.player.Player;
 
 public class CreatureObject extends TangibleObject {
 	
 	private Posture	posture					= Posture.STANDING;
+	private Race	race					= Race.HUMAN;
 	private int		attributes				= 0;
 	private int		maxAttributes			= 0;
 	private int		unmodifiedMaxAtributes	= 0;
@@ -39,6 +51,10 @@ public class CreatureObject extends TangibleObject {
 	
 	public Posture getPosture() {
 		return posture;
+	}
+	
+	public Race getRace() {
+		return race;
 	}
 	
 	public int getAttributes() {
@@ -149,6 +165,10 @@ public class CreatureObject extends TangibleObject {
 		this.posture = posture;
 	}
 	
+	public void setRace(Race race) {
+		this.race = race;
+	}
+	
 	public void setAttributes(int attributes) {
 		this.attributes = attributes;
 	}
@@ -251,6 +271,121 @@ public class CreatureObject extends TangibleObject {
 	
 	public void setBeast(boolean beast) {
 		this.beast = beast;
+	}
+	
+	public void createObject(Player target) {
+		sendSceneCreateObject(target);
+		
+//		BaselineBuilder bb = null;
+//		bb = new BaselineBuilder(this, BaselineType.CREO, 3);
+//		createBaseline3(target, bb);
+//		bb.sendTo(target);
+//		bb = new BaselineBuilder(this, BaselineType.CREO, 6);
+//		createBaseline6(target, bb);
+//		bb.sendTo(target);
+//		bb = new BaselineBuilder(this, BaselineType.CREO, 1);
+//		createBaseline1(target, bb);
+//		bb.sendTo(target);
+//		bb = new BaselineBuilder(this, BaselineType.CREO, 4);
+//		createBaseline4(target, bb);
+//		bb.sendTo(target);
+//		bb = new BaselineBuilder(this, BaselineType.CREO, 8);
+//		createBaseline8(target, bb);
+//		bb.sendTo(target);
+//		bb = new BaselineBuilder(this, BaselineType.CREO, 9);
+//		createBaseline9(target, bb);
+//		bb.sendTo(target);
+		CREO3 c3 = new CREO3(getTemplate(), getName(), getAppearanceData(), posture.getId(), (float)height, 0);
+		CREO6 c6 = new CREO6(getObjectId());
+		CREO8 c8 = new CREO8();
+		CREO9 c9 = new CREO9();
+		c3.setId(getObjectId()); c3.setType(BaselineType.CREO); c3.setNum(3);
+		c6.setId(getObjectId()); c6.setType(BaselineType.CREO); c6.setNum(6);
+		c8.setId(getObjectId()); c8.setType(BaselineType.CREO); c8.setNum(8);
+		c9.setId(getObjectId()); c9.setType(BaselineType.CREO); c9.setNum(9);
+		target.sendPacket(new Baseline(getObjectId(), c3));
+		target.sendPacket(new Baseline(getObjectId(), c6));
+		target.sendPacket(new Baseline(getObjectId(), c8));
+		target.sendPacket(new Baseline(getObjectId(), c9));
+
+		
+		createChildrenObjects(target);
+		target.sendPacket(new SceneEndBaselines(getObjectId()));
+	}
+	
+	public void createChildrenObjects(Player target) {
+		target.sendPacket(new UpdatePostureMessage(posture.getId(), getObjectId()));
+		super.createChildrenObjects(target);
+	}
+	
+	public void createBaseline1(Player target, BaselineBuilder bb) {
+		super.createBaseline1(target, bb);
+		bb.addShort(5);
+		bb.addInt(getBankBalance());
+		bb.addInt(getCashBalance());
+		bb.addInt(0); // Basic HAM Mod List Size
+		bb.addInt(0); // Skills List Size
+	}
+	
+	public void createBaseline3(Player target, BaselineBuilder bb) {
+		super.createBaseline3(target, bb);
+		bb.addByte(posture.getId());
+		bb.addByte(0); // Faction Rank
+		bb.addLong(0); // Owner - mainly used for pets and vehicles
+		bb.addFloat((float) height);
+		bb.addInt(0); // Battle Fatigue
+		bb.addLong(0); // States Bitmask
+		bb.addInt(0); // Wound HAM List Size
+	}
+	
+	public void createBaseline4(Player target, BaselineBuilder bb) {
+		super.createBaseline4(target, bb);
+		bb.addShort(5);
+		bb.addFloat((float) accelScale);
+		bb.addFloat((float) accelPercent);
+		bb.addInt(0); // Encumberance HAM List Size
+		bb.addInt(0); // Skill Mod List Size
+		bb.addFloat((float) movementScale);
+		bb.addFloat((float) movementPercent);
+		bb.addInt(0); // Listen to ID
+		bb.addFloat((float) runSpeed);
+		bb.addFloat((float) slopeModAngle);
+		bb.addFloat((float) slopeModPercent);
+		bb.addFloat((float) turnScale);
+		bb.addFloat((float) walkSpeed);
+		bb.addFloat((float) waterModPercent);
+		bb.addInt(0); // Group Mission Critical Objects List Size
+	}
+	
+	public void createBaseline6(Player target, BaselineBuilder bb) {
+		super.createBaseline6(target, bb);
+		bb.addShort(difficulty.getDifficulty());
+		bb.addAscii(""); // Current Animation
+		bb.addAscii("neutral"); // Animation Mood
+		bb.addLong(0); // Weapon ID
+		bb.addLong(0); // Group ID
+		bb.addLong(0); // Group Inviter ID
+		bb.addLong(0); // Some odd counter
+		bb.addInt(0); // Guild ID
+		bb.addLong(0); // Target ID
+		bb.addByte(0); // Mood ID
+		bb.addInt(0); // Performance Start Time
+		bb.addInt(0); // Performance ID
+		bb.addInt(0); // Current HAM List Size
+		bb.addInt(0); // Max HAM List Size
+		bb.addInt(0); // Equipment List Size
+		bb.addAscii(""); // Appearance?
+		bb.addBoolean(false);
+	}
+	
+	public void createBaseline8(Player target, BaselineBuilder bb) {
+		super.createBaseline8(target, bb);
+		bb.addShort(0);
+	}
+	
+	public void createBaseline9(Player target, BaselineBuilder bb) {
+		super.createBaseline9(target, bb);
+		bb.addShort(0);
 	}
 	
 }
