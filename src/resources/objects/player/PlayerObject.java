@@ -5,7 +5,6 @@ import network.packets.swg.zone.UpdatePostureMessage;
 import network.packets.swg.zone.baselines.Baseline;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import network.packets.swg.zone.baselines.PLAY6;
-import network.packets.swg.zone.baselines.PLAY9;
 import resources.network.BaselineBuilder;
 import resources.objects.creature.CreatureObject;
 import resources.objects.intangible.IntangibleObject;
@@ -55,26 +54,51 @@ public class PlayerObject extends IntangibleObject {
 		this.showHelmet = showHelmet;
 	}
 	
+	private int getProfessionIcon() {
+		switch (profession) {
+			case "entertainer_1a":
+				return 5;
+			case "medic_1a":
+				return 10;
+			case "officer_1a":
+				return 15;
+			case "bounty_hunter_1a":
+				return 20;
+			case "smuggler_1a":
+				return 25;
+			case "commando_1a":
+				return 30;
+			case "spy_1a":
+				return 35;
+			case "force_sensitive_1a":
+				return 40;
+			case "trader_0a":
+			case "trader_0b":
+			case "trader_0c":
+			case "trader_0d":
+			default:
+				return 0;
+		}
+	}
+	
 	public void createObject(Player target) {
 		super.sendSceneCreateObject(target);
 		
-//		BaselineBuilder bb = new BaselineBuilder(this, BaselineType.PLAY, 3);
-//		createBaseline3(target, bb);
-//		bb.sendTo(target);
+		BaselineBuilder bb = new BaselineBuilder(this, BaselineType.PLAY, 3);
+		createBaseline3(target, bb);
+		bb.sendTo(target);
 //		bb = new BaselineBuilder(this, BaselineType.PLAY, 6);
 //		createBaseline6(target, bb);
 //		bb.sendTo(target);
+		PLAY6 play6 = new PLAY6();
+		play6.setId(getObjectId()); play6.setType(BaselineType.PLAY); play6.setNum(6);
+		target.sendPacket(new Baseline(getObjectId(), play6));
 //		bb = new BaselineBuilder(this, BaselineType.PLAY, 8);
 //		createBaseline8(target, bb);
 //		bb.sendTo(target);
 //		bb = new BaselineBuilder(this, BaselineType.PLAY, 9);
 //		createBaseline9(target, bb);
 //		bb.sendTo(target);
-		PLAY6 play6 = new PLAY6();
-//		PLAY9 play9 = new PLAY9();
-		play6.setId(getObjectId()); play6.setType(BaselineType.PLAY); play6.setNum(6);
-//		play9.setId(getObjectId()); play9.setType(BaselineType.PLAY); play9.setNum(6);
-		target.sendPacket(new Baseline(getObjectId(), play6));
 		
 		createChildrenObjects(target);
 		target.sendPacket(new SceneEndBaselines(getObjectId()));
@@ -89,11 +113,27 @@ public class PlayerObject extends IntangibleObject {
 	public void createBaseline3(Player target, BaselineBuilder bb) {
 		super.createBaseline3(target, bb);
 		bb.addInt(0);
-		bb.addInt(0); // Flags List Size
-		bb.addInt(0); // My Profile List Size
-		bb.addAscii(profession);
+		bb.addInt(4); // Flags List Size
+		for (int i = 0; i < 4; i++) // 4 flags
+			bb.addInt(0);
+		bb.addInt(4); // My Profile List Size
+		for (int i = 0; i < 4; i++) // 4 flags
+			bb.addInt(0);
+		bb.addAscii(""); // Title
 		bb.addInt(0); // Born Date
 		bb.addInt(0); // Total Play Time
+		bb.addInt(getProfessionIcon()); // Profession Icon
+		bb.addAscii(profession);
+		bb.addInt(0); // GCW Points
+		bb.addInt(0); // PvP Kills
+		bb.addLong(0); // Lifetime GCW Points
+		bb.addInt(0); // Lifetime Pvp Kills
+		bb.addInt(0); // Collections
+			bb.addInt(0);
+		bb.addInt(0); // Guild Ranks
+			bb.addInt(0);
+		bb.addBoolean(showHelmet); // Show Helmet
+		bb.addBoolean(showBackpack); // Show Backpack
 	}
 	
 	public void createBaseline6(Player target, BaselineBuilder bb) {
