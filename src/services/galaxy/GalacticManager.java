@@ -14,15 +14,18 @@ public class GalacticManager extends Manager {
 	
 	private ObjectManager objectManager;
 	private PlayerManager playerManager;
+	private GameManager gameManager;
 	private Intent prevPacketIntent;
 	
 	public GalacticManager() {
 		objectManager = new ObjectManager();
 		playerManager = new PlayerManager();
+		gameManager = new GameManager();
 		prevPacketIntent = null;
 		
 		addChildService(objectManager);
 		addChildService(playerManager);
+		addChildService(gameManager);
 	}
 	
 	@Override
