@@ -3,8 +3,6 @@ package services.chat;
 import intents.GalacticPacketIntent;
 import network.packets.Packet;
 import network.packets.swg.zone.ChatRequestRoomList;
-import network.packets.swg.zone.insertion.ChatRoomList;
-import network.packets.swg.zone.insertion.ChatRoomList.ChatRoom;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.player.Player;

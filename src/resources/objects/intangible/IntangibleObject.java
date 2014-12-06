@@ -1,8 +1,6 @@
 package resources.objects.intangible;
 
-import resources.network.BaselineBuilder;
 import resources.objects.SWGObject;
-import resources.player.Player;
 
 public class IntangibleObject extends SWGObject {
 	
