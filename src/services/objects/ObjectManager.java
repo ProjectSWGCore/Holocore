@@ -62,7 +62,7 @@ public class ObjectManager extends Manager {
 				return;
 			double x = oTerrain.getX();
 			double y = oTerrain.getZ();
-			quadTree.get(oTerrain.getTerrain().getFile()).remove(oTerrain.getX(), y, obj);
+			quadTree.get(oTerrain.getTerrain().getFile()).remove(x, y, obj);
 			x = nTerrain.getX();
 			y = nTerrain.getZ();
 			quadTree.get(nTerrain.getTerrain().getFile()).put(x, y, obj);
