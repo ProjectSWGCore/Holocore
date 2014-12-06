@@ -47,14 +47,14 @@ public class PlayerManager extends Manager {
 			else
 				player = players.get(networkId);
 			if (player == null && type == ServerType.LOGIN) {
-				player = new Player(networkId);
+				player = new Player(this, networkId);
 				players.put(networkId, player);
 			}
 			if (player != null) {
 				if (type == ServerType.LOGIN)
 					loginService.handlePacket(player, packet);
 				else if (type == ServerType.ZONE)
-					zoneService.handlePacket(player, networkId, packet);
+					zoneService.handlePacket(ipi, player, networkId, packet);
 			}
 		}
 	}
@@ -78,6 +78,10 @@ public class PlayerManager extends Manager {
 			}
 		}
 		return null;
+	}
+	
+	public Player getPlayerFromNetworkId(long networkId) {
+		return players.get(networkId);
 	}
 	
 }
