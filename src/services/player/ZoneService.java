@@ -5,6 +5,7 @@ import intents.PlayerEventIntent;
 
 import java.util.Map;
 
+import main.ProjectSWG;
 import network.packets.Packet;
 import network.packets.soe.SessionRequest;
 import network.packets.swg.login.AccountFeatureBits;
@@ -16,16 +17,26 @@ import network.packets.swg.login.creation.ClientVerifyAndLockNameRequest;
 import network.packets.swg.login.creation.ClientVerifyAndLockNameResponse;
 import network.packets.swg.login.creation.ClientCreateCharacter;
 import network.packets.swg.login.creation.ClientVerifyAndLockNameResponse.ErrorMessage;
+import network.packets.swg.login.creation.CreateCharacterSuccess;
 import network.packets.swg.login.creation.RandomNameRequest;
 import network.packets.swg.login.creation.RandomNameResponse;
+import network.packets.swg.zone.ChatRequestRoomList;
+import network.packets.swg.zone.GalaxyLoopTimesRequest;
+import network.packets.swg.zone.GalaxyLoopTimesResponse;
 import network.packets.swg.zone.HeartBeatMessage;
+import network.packets.swg.zone.insertion.ChatRoomList;
+import network.packets.swg.zone.insertion.ChatRoomList.ChatRoom;
+import network.packets.swg.zone.insertion.CmdStartScene;
+import resources.Location;
 import resources.Race;
+import resources.Terrain;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.ProfTemplateData;
 import resources.config.ConfigFile;
 import resources.control.Service;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
+import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
 import resources.player.PlayerEvent;
 import resources.services.Config;
@@ -62,6 +73,8 @@ public class ZoneService extends Service {
 			handleApproveNameRequest(player, (ClientVerifyAndLockNameRequest) p);
 		if (p instanceof ClientCreateCharacter)
 			handleCharCreation(intent.getObjectManager(), player, (ClientCreateCharacter) p);
+		if (p instanceof GalaxyLoopTimesRequest)
+			handleGalaxyLoopTimesRequest(player, (GalaxyLoopTimesRequest) p);
 	}
 	
 	private void sendServerInfo(long networkId) {
@@ -74,6 +87,7 @@ public class ZoneService extends Service {
 	
 	private void handleClientIdMsg(Player player, ClientIdMsg clientId) {
 		System.out.println(player.getUsername() + " has connected to the zone server.");
+		player.setGalaxyId(getConfig(ConfigFile.PRIMARY).getInt("ZONE-SERVER-ID", 1));
 		sendPacket(player.getNetworkId(), new HeartBeatMessage());
 		sendPacket(player.getNetworkId(), new AccountFeatureBits());
 		sendPacket(player.getNetworkId(), new ClientPermissionsMessage());
@@ -93,15 +107,43 @@ public class ZoneService extends Service {
 	
 	private void handleCharCreation(ObjectManager objManager, Player player, ClientCreateCharacter create) {
 		System.out.println("Create Character: " + create.getName());
-		CreatureObject creatureObj = (CreatureObject) objManager.createObject(create.getRace());
+		Race race = Race.getRace(create.getRace());
+		CreatureObject creatureObj = (CreatureObject) objManager.createObject(race.getFilename());
 		PlayerObject playerObj = (PlayerObject) objManager.createObject("object/player/shared_player.iff");
-		
+		creatureObj.setRace(Race.getRace(create.getRace()));
+		creatureObj.setAppearanceData(create.getCharCustomization());
+		creatureObj.setHeight(create.getHeight());
+		creatureObj.setName(create.getName());
+		playerObj.setProfession(create.getProfession());
+		TangibleObject hairObj = (TangibleObject) objManager.createObject(create.getHair());
+		hairObj.setAppearanceData(create.getHairCustomization());
+		creatureObj.addChild(playerObj);
+		creatureObj.addChild(hairObj);
+		Location start = new Location();
+		start.setTerrain(Terrain.TATOOINE);
+		start.setX(3828);
+		start.setY(4);
+		start.setZ(-4804);
+		start.setOrientationX(0);
+		start.setOrientationY(0);
+		start.setOrientationZ(0);
+		start.setOrientationW(1);
+		creatureObj.setLocation(start);
+		creatureObj.setPvpType(20);
+		playerObj.setLocation(start);
+		player.setCreatureObject(creatureObj);
+		player.setPlayerObject(playerObj);
+		sendPacket(player, new CreateCharacterSuccess(creatureObj.getObjectId()));
 		
 		new PlayerEventIntent(player, PlayerEvent.PE_CREATE_CHARACTER).broadcast();
 		
 		/*for (String item : profTemplates.get(create.getClothes()).getItems(create.getRace())) {
 			// TODO: Create and add item to character, item variable will be the template of the item to create
 		}*/
+	}
+	
+	private void handleGalaxyLoopTimesRequest(Player player, GalaxyLoopTimesRequest req) {
+		sendPacket(player, new GalaxyLoopTimesResponse(ProjectSWG.getCoreTime()/1000));
 	}
 	
 	private void loadProfTemplates() {
