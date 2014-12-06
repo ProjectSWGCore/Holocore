@@ -27,6 +27,10 @@ public class ProjectSWG {
 		server.terminate();
 	}
 	
+	/**
+	 * Returns the time in milliseconds since the server started initialization
+	 * @return the core time represented as a double
+	 */
 	public static final long getCoreTime() {
 		return (long) server.manager.getCoreTime();
 	}
@@ -71,14 +75,18 @@ public class ProjectSWG {
 	}
 	
 	private void loop() {
-		while (manager.isOperational() && !shutdownRequested) {
+		long loop = 0;
+		while (!shutdownRequested) {
 			try {
 				manager.flushPackets(); // Sends any packets that weren't sent
-				Thread.sleep(100); // Checks the state of the server every 100ms
+				Thread.sleep(10); // Checks the state of the server every 10ms
 			} catch (InterruptedException e) {
 				if (!shutdownRequested)
 					throw new CoreException("Main Thread Interrupted.");
 			}
+			loop++;
+			if (loop % 10 == 0 && !manager.isOperational())
+				break;
 		}
 	}
 	
