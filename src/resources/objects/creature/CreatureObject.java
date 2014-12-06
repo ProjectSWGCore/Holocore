@@ -4,10 +4,7 @@ import network.packets.swg.zone.SceneEndBaselines;
 import network.packets.swg.zone.UpdatePostureMessage;
 import network.packets.swg.zone.baselines.Baseline;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
-import network.packets.swg.zone.baselines.CREO3;
 import network.packets.swg.zone.baselines.CREO6;
-import network.packets.swg.zone.baselines.CREO8;
-import network.packets.swg.zone.baselines.CREO9;
 import resources.Posture;
 import resources.Race;
 import resources.network.BaselineBuilder;
@@ -47,6 +44,7 @@ public class CreatureObject extends TangibleObject {
 	
 	public CreatureObject(long objectId) {
 		super(objectId);
+		setStfFile("species");
 	}
 	
 	public Posture getPosture() {
@@ -276,37 +274,28 @@ public class CreatureObject extends TangibleObject {
 	public void createObject(Player target) {
 		sendSceneCreateObject(target);
 		
-//		BaselineBuilder bb = null;
-//		bb = new BaselineBuilder(this, BaselineType.CREO, 3);
-//		createBaseline3(target, bb);
-//		bb.sendTo(target);
-//		bb = new BaselineBuilder(this, BaselineType.CREO, 6);
-//		createBaseline6(target, bb);
-//		bb.sendTo(target);
+		BaselineBuilder bb = null;
+		CREO6 c6 = new CREO6(getObjectId());
+		c6.setId(getObjectId()); c6.setType(BaselineType.CREO); c6.setNum(6);
 //		bb = new BaselineBuilder(this, BaselineType.CREO, 1);
 //		createBaseline1(target, bb);
 //		bb.sendTo(target);
+		bb = new BaselineBuilder(this, BaselineType.CREO, 3);
+		createBaseline3(target, bb);
+		bb.sendTo(target);
 //		bb = new BaselineBuilder(this, BaselineType.CREO, 4);
 //		createBaseline4(target, bb);
 //		bb.sendTo(target);
-//		bb = new BaselineBuilder(this, BaselineType.CREO, 8);
-//		createBaseline8(target, bb);
+		bb = new BaselineBuilder(this, BaselineType.CREO, 6);
+		createBaseline6(target, bb);
 //		bb.sendTo(target);
-//		bb = new BaselineBuilder(this, BaselineType.CREO, 9);
-//		createBaseline9(target, bb);
-//		bb.sendTo(target);
-		CREO3 c3 = new CREO3(getTemplate(), getName(), getAppearanceData(), posture.getId(), (float)height, 0);
-		CREO6 c6 = new CREO6(getObjectId());
-		CREO8 c8 = new CREO8();
-		CREO9 c9 = new CREO9();
-		c3.setId(getObjectId()); c3.setType(BaselineType.CREO); c3.setNum(3);
-		c6.setId(getObjectId()); c6.setType(BaselineType.CREO); c6.setNum(6);
-		c8.setId(getObjectId()); c8.setType(BaselineType.CREO); c8.setNum(8);
-		c9.setId(getObjectId()); c9.setType(BaselineType.CREO); c9.setNum(9);
-		target.sendPacket(new Baseline(getObjectId(), c3));
 		target.sendPacket(new Baseline(getObjectId(), c6));
-		target.sendPacket(new Baseline(getObjectId(), c8));
-		target.sendPacket(new Baseline(getObjectId(), c9));
+		bb = new BaselineBuilder(this, BaselineType.CREO, 8);
+		createBaseline8(target, bb);
+		bb.sendTo(target);
+		bb = new BaselineBuilder(this, BaselineType.CREO, 9);
+		createBaseline9(target, bb);
+		bb.sendTo(target);
 
 		
 		createChildrenObjects(target);
@@ -323,12 +312,26 @@ public class CreatureObject extends TangibleObject {
 		bb.addShort(5);
 		bb.addInt(getBankBalance());
 		bb.addInt(getCashBalance());
-		bb.addInt(0); // Basic HAM Mod List Size
+		bb.addInt(6); // Base HAM Mod List Size
+		bb.addInt(0);
+		bb.addInt(1000); // Max Health
+		bb.addInt(0);
+		bb.addInt(300); // Max Action
+		bb.addInt(0);
+		bb.addInt(300); // Max Mind
 		bb.addInt(0); // Skills List Size
+		bb.addInt(1);
+		bb.addInt(0);
+		bb.addAscii(race.getSpecies());
 	}
 	
 	public void createBaseline3(Player target, BaselineBuilder bb) {
 		super.createBaseline3(target, bb);
+		bb.addByte(0); // Unknown
+		bb.addShort(0); // Unknown
+		bb.addInt(0); // Unknown
+		bb.addInt(0x00003A98); // Unknown
+		bb.addByte(0); // Unknown
 		bb.addByte(posture.getId());
 		bb.addByte(0); // Faction Rank
 		bb.addLong(0); // Owner - mainly used for pets and vehicles
@@ -343,6 +346,7 @@ public class CreatureObject extends TangibleObject {
 		bb.addShort(5);
 		bb.addFloat((float) accelScale);
 		bb.addFloat((float) accelPercent);
+		bb.addInt(0); // Unknown
 		bb.addInt(0); // Encumberance HAM List Size
 		bb.addInt(0); // Skill Mod List Size
 		bb.addFloat((float) movementScale);
@@ -359,23 +363,36 @@ public class CreatureObject extends TangibleObject {
 	
 	public void createBaseline6(Player target, BaselineBuilder bb) {
 		super.createBaseline6(target, bb);
-		bb.addShort(difficulty.getDifficulty());
+		bb.addInt(level);
+		bb.addInt(0); // Granted Health
 		bb.addAscii(""); // Current Animation
 		bb.addAscii("neutral"); // Animation Mood
 		bb.addLong(0); // Weapon ID
 		bb.addLong(0); // Group ID
 		bb.addLong(0); // Group Inviter ID
-		bb.addLong(0); // Some odd counter
+			bb.addAscii(""); // Group Inviter Name
+			bb.addLong(0); // Some odd counter
 		bb.addInt(0); // Guild ID
-		bb.addLong(0); // Target ID
+		bb.addLong(0); // Look-at Target ID
+		bb.addLong(0); // Intended ID
 		bb.addByte(0); // Mood ID
-		bb.addInt(0); // Performance Start Time
+		bb.addInt(0); // Performance Counter
 		bb.addInt(0); // Performance ID
+		bb.addInt(0); // Attributes
+		bb.addInt(0); // Max Attributes
+		bb.addInt(0); // Equipment List
+		bb.addAscii(""); // Appearance?
+		bb.addBoolean(true); // Visible
 		bb.addInt(0); // Current HAM List Size
 		bb.addInt(0); // Max HAM List Size
-		bb.addInt(0); // Equipment List Size
-		bb.addAscii(""); // Appearance?
-		bb.addBoolean(false);
+		bb.addBoolean(false); // Is Performing
+		bb.addShort(difficulty.getDifficulty());
+		bb.addInt(-1); // Hologram Color
+		bb.addBoolean(true); // Visible On Radar
+		bb.addBoolean(false); // Is Pet
+		bb.addByte(0); // Unknown
+		bb.addInt(0); // Appearance Equipment List Size
+		bb.addLong(0); // Unknown
 	}
 	
 	public void createBaseline8(Player target, BaselineBuilder bb) {
