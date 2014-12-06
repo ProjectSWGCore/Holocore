@@ -1,7 +1,6 @@
 package resources.objects.tangible;
 
 import network.packets.swg.zone.SceneEndBaselines;
-import network.packets.swg.zone.UpdatePvpStatusMessage;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.network.BaselineBuilder;
 import resources.objects.SWGObject;
@@ -146,10 +145,10 @@ public class TangibleObject extends SWGObject {
 		bb.addInt(0); // Faction
 		bb.addInt(0); // Faction Status
 		bb.addArray(appearanceData);
-		bb.addInt(0); // Options Bitmask
+		bb.addInt(1); // Options Bitmask
 		bb.addInt(0); // Incap Timer
 		bb.addInt(condition);
-		bb.addInt(10000); // Random number that should be high enough - maxCondition
+		bb.addInt(0x80); // Random number that should be high enough - maxCondition
 		bb.addBoolean(false); // isStatic
 	}
 	
