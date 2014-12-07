@@ -8,6 +8,8 @@ import resources.player.Player;
 
 public class TangibleObject extends SWGObject {
 	
+	private static final long serialVersionUID = 1L;
+	
 	private byte []	appearanceData	= new byte[0];
 	private int		damageTaken		= 0;
 	private int		maxHitPoints	= 0;

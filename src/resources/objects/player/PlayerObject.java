@@ -12,6 +12,8 @@ import resources.player.Player;
 
 public class PlayerObject extends IntangibleObject {
 	
+	private static final long serialVersionUID = 1L;
+	
 	private String	profession		= "";
 	
 	private String	biography		= "";

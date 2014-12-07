@@ -13,6 +13,8 @@ import resources.player.Player;
 
 public class CreatureObject extends TangibleObject {
 	
+	private static final long serialVersionUID = 1L;
+	
 	private Posture	posture					= Posture.STANDING;
 	private Race	race					= Race.HUMAN;
 	private int		attributes				= 0;
