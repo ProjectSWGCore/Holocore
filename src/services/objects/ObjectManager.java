@@ -28,16 +28,18 @@ import resources.objects.player.PlayerObject;
 import resources.objects.quadtree.QuadTree;
 import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
+import resources.server_info.ObjectDatabase;
+import resources.server_info.ObjectDatabase.Traverser;
 import services.player.PlayerManager;
 
 public class ObjectManager extends Manager {
 	
-	private Map <Long, SWGObject> objects;
+	private ObjectDatabase<SWGObject> objects;
 	private Map <String, QuadTree <SWGObject>> quadTree;
 	private long maxObjectId;
 	
 	public ObjectManager() {
-		objects = new HashMap<Long, SWGObject>();
+		objects = new ObjectDatabase<SWGObject>("odb/objects.db");
 		quadTree = new HashMap<String, QuadTree<SWGObject>>();
 		maxObjectId = 1;
 	}
@@ -49,7 +51,30 @@ public class ObjectManager extends Manager {
 		for (Terrain t : Terrain.values()) {
 			quadTree.put(t.getFile(), new QuadTree<SWGObject>(-5000, -5000, 5000, 5000));
 		}
+		objects.loadToCache();
+		System.out.println("ObjectManager: Loading " + objects.size() + " objects from ObjectDatabase...");
+		objects.traverse(new Traverser<SWGObject>() {
+			@Override
+			public void process(SWGObject obj) {
+				Location l = obj.getLocation();
+				if (l.getTerrain() != null) {
+					QuadTree <SWGObject> tree = quadTree.get(l.getTerrain().getFile());
+					if (tree != null) {
+						System.out.println(l.getX() + ", " + l.getZ());
+						tree.put(l.getX(), l.getZ(), obj);
+					} else {
+						System.err.println("ObjectManager: Unable to load QuadTree for object " + obj.getObjectId() + " and terrain: " + l.getTerrain());
+					}
+				}
+			}
+		});
 		return super.initialize();
+	}
+	
+	@Override
+	public boolean terminate() {
+		objects.save();
+		return super.terminate();
 	}
 	
 	@Override
@@ -69,7 +94,7 @@ public class ObjectManager extends Manager {
 		} else if (i instanceof GalacticPacketIntent) {
 			GalacticPacketIntent gpi = (GalacticPacketIntent) i;
 			if (gpi.getPacket() instanceof SelectCharacter) {
-				zoneInCharacter(gpi.getPlayerManager(), gpi.getNetworkId());
+				zoneInCharacter(gpi.getPlayerManager(), gpi.getNetworkId(), ((SelectCharacter)gpi.getPacket()).getCharacterId());
 			}
 		}
 	}
@@ -84,13 +109,15 @@ public class ObjectManager extends Manager {
 			SWGObject obj = createObjectFromTemplate(objectId, template);
 			obj.setTemplate(template);
 			obj.setLocation(l);
+			objects.put(objectId, obj);
 			return obj;
 		}
 	}
 	
-	private void zoneInCharacter(PlayerManager playerManager, long netId) {
+	private void zoneInCharacter(PlayerManager playerManager, long netId, long characterId) {
 		Player player = playerManager.getPlayerFromNetworkId(netId);
 		if (player != null) {
+			verifyPlayerObjectsSet(player, characterId);
 			long objId = player.getCreatureObject().getObjectId();
 			Race race = ((CreatureObject) player.getCreatureObject()).getRace();
 			Location l = player.getCreatureObject().getLocation();
@@ -105,6 +132,23 @@ public class ObjectManager extends Manager {
 			CreatureObject creature = (CreatureObject) player.getCreatureObject();
 			player.sendPacket(new UpdatePvpStatusMessage(creature.getPvpType(), creature.getPvpFactionId(), creature.getObjectId()));
 			creature.createObject(player);
+		}
+	}
+	
+	private void verifyPlayerObjectsSet(Player player, long characterId) {
+		if (player.getCreatureObject() != null && player.getPlayerObject() != null)
+			return;
+		SWGObject creature = objects.get(characterId);
+		if (creature == null) {
+			System.err.println("ObjectManager: Failed to start zone - CreatureObject could not be fetched from database");
+			throw new NullPointerException("CreatureObject for ID: " + characterId + " cannot be null!");
+		}
+		player.setCreatureObject(creature);
+		for (SWGObject obj : creature.getChildren()) {
+			if (obj instanceof PlayerObject) {
+				player.setPlayerObject(obj);
+				break;
+			}
 		}
 	}
 	

@@ -1,8 +1,5 @@
 package services.player;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
 import network.packets.Packet;
 import network.packets.swg.login.ClientIdMsg;
 import intents.GalacticPacketIntent;
@@ -10,19 +7,21 @@ import resources.control.Intent;
 import resources.control.Manager;
 import resources.network.ServerType;
 import resources.player.Player;
+import resources.server_info.ObjectDatabase;
+import resources.server_info.ObjectDatabase.Traverser;
 
 public class PlayerManager extends Manager {
 	
 	private LoginService loginService;
 	private ZoneService zoneService;
 	
-	private Map <Long, Player> players;
+	private ObjectDatabase <Player> players;
 	
 	public PlayerManager() {
 		loginService = new LoginService();
 		zoneService = new ZoneService();
 		
-		players = new ConcurrentHashMap<Long, Player>();
+		players = new ObjectDatabase<Player>("odb/players.db");
 		
 		addChildService(loginService);
 		addChildService(zoneService);
@@ -31,21 +30,41 @@ public class PlayerManager extends Manager {
 	@Override
 	public boolean initialize() {
 		registerForIntent(GalacticPacketIntent.TYPE);
+		players.loadToCache();
+		players.traverse(new Traverser<Player>() {
+			@Override
+			public void process(Player p) {
+				p.setPlayerManager(PlayerManager.this);
+			}
+		});
 		return super.initialize();
+	}
+	
+	@Override
+	public boolean terminate() {
+		players.save();
+		return super.terminate();
 	}
 	
 	@Override
 	public void onIntentReceived(Intent i) {
 		if (i instanceof GalacticPacketIntent) {
-			GalacticPacketIntent ipi = (GalacticPacketIntent) i;
-			Packet packet = ipi.getPacket();
-			ServerType type = ipi.getServerType();
-			long networkId = ipi.getNetworkId();
+			GalacticPacketIntent gpi = (GalacticPacketIntent) i;
+			Packet packet = gpi.getPacket();
+			ServerType type = gpi.getServerType();
+			long networkId = gpi.getNetworkId();
 			Player player = null;
 			if (type == ServerType.ZONE && packet instanceof ClientIdMsg)
-				player = transitionLoginToZone(networkId, (ClientIdMsg) packet);
-			else
-				player = players.get(networkId);
+				transitionLoginToZone(networkId, gpi.getGalaxy().getId(), (ClientIdMsg) packet);
+			player = players.get(networkId);
+			if (player == null)
+				System.out.println("Player: null");
+			else {
+				System.out.println("Player: " + player.getUsername());
+				System.out.println("        " + player.getUserId());
+				System.out.println("        " + player.getGalaxyId());
+			}
+			System.out.println("Player: " + ((player==null)?"null":player.getUsername()));
 			if (player == null && type == ServerType.LOGIN) {
 				player = new Player(this, networkId);
 				players.put(networkId, player);
@@ -54,30 +73,32 @@ public class PlayerManager extends Manager {
 				if (type == ServerType.LOGIN)
 					loginService.handlePacket(player, packet);
 				else if (type == ServerType.ZONE)
-					zoneService.handlePacket(ipi, player, networkId, packet);
+					zoneService.handlePacket(gpi, player, networkId, packet);
 			}
 		}
 	}
 	
-	private Player transitionLoginToZone(long networkId, ClientIdMsg clientId) {
-		byte [] nToken = clientId.getSessionToken();
-		for (Player p : players.values()) {
-			byte [] pToken = p.getSessionToken();
-			if (pToken.length != nToken.length)
-				continue;
-			boolean match = true;
-			for (int t = 0; t < pToken.length && match; t++) {
-				if (pToken[t] != nToken[t])
-					match = false;
+	private void transitionLoginToZone(final long networkId, final int galaxyId, ClientIdMsg clientId) {
+		final byte [] nToken = clientId.getSessionToken();
+		players.traverse(new Traverser<Player>() {
+			@Override
+			public void process(Player p) {
+				byte [] pToken = p.getSessionToken();
+				if (pToken.length != nToken.length)
+					return;
+				boolean match = true;
+				for (int t = 0; t < pToken.length && match; t++) {
+					if (pToken[t] != nToken[t])
+						match = false;
+				}
+				if (match) {
+					players.remove(p.getNetworkId());
+					p.setNetworkId(networkId);
+					p.setGalaxyId(galaxyId);
+					players.put(networkId, p);
+				}
 			}
-			if (match) {
-				players.remove(p.getNetworkId());
-				p.setNetworkId(networkId);
-				players.put(networkId, p);
-				return p;
-			}
-		}
-		return null;
+		});
 	}
 	
 	public Player getPlayerFromNetworkId(long networkId) {
