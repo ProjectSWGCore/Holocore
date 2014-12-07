@@ -312,14 +312,14 @@ public class CreatureObject extends TangibleObject {
 		bb.addShort(5);
 		bb.addInt(getBankBalance());
 		bb.addInt(getCashBalance());
-		bb.addInt(6); // Base HAM Mod List Size
+		bb.addInt(6); // Base HAM Mod List Size (List, Integer)
 		bb.addInt(0);
 		bb.addInt(1000); // Max Health
 		bb.addInt(0);
 		bb.addInt(300); // Max Action
 		bb.addInt(0);
 		bb.addInt(300); // Max Mind
-		bb.addInt(0); // Skills List Size
+		bb.addInt(0); // Skills List Size (List, Integer)
 		bb.addInt(1);
 		bb.addInt(0);
 		bb.addAscii(race.getSpecies());
@@ -327,11 +327,13 @@ public class CreatureObject extends TangibleObject {
 	
 	public void createBaseline3(Player target, BaselineBuilder bb) {
 		super.createBaseline3(target, bb);
-		bb.addByte(0); // Unknown
+		// We should confirm that this is only part of CREO3 and not TANO3, Core2 doesn't have this
+		bb.addByte(0);
 		bb.addShort(0); // Unknown
 		bb.addInt(0); // Unknown
 		bb.addInt(0x00003A98); // Unknown
 		bb.addByte(0); // Unknown
+		// END
 		bb.addByte(posture.getId());
 		bb.addByte(0); // Faction Rank
 		bb.addLong(0); // Owner - mainly used for pets and vehicles
@@ -346,9 +348,8 @@ public class CreatureObject extends TangibleObject {
 		bb.addShort(5);
 		bb.addFloat((float) accelScale);
 		bb.addFloat((float) accelPercent);
-		bb.addInt(0); // Unknown
-		bb.addInt(0); // Encumberance HAM List Size
-		bb.addInt(0); // Skill Mod List Size
+		bb.addInt(0); // Encumberance HAM List Size (List, Integer)
+		bb.addInt(0); // Skill Mod List Size (Map, k = String v= SkillMod structure)
 		bb.addFloat((float) movementScale);
 		bb.addFloat((float) movementPercent);
 		bb.addInt(0); // Listen to ID
@@ -358,7 +359,9 @@ public class CreatureObject extends TangibleObject {
 		bb.addFloat((float) turnScale);
 		bb.addFloat((float) walkSpeed);
 		bb.addFloat((float) waterModPercent);
-		bb.addInt(0); // Group Mission Critical Objects List Size
+		bb.addInt(0); // Mission Critical Objects list size (Map, k = long v = long)
+		bb.addInt(0); // abilities list size (Map, k = string v = integer)
+		bb.addInt(0); // XP Display Counter (remaining experience to next level up, updates the experience bar on client)
 	}
 	
 	public void createBaseline6(Player target, BaselineBuilder bb) {
@@ -371,27 +374,26 @@ public class CreatureObject extends TangibleObject {
 		bb.addLong(0); // Group ID
 		bb.addLong(0); // Group Inviter ID
 			bb.addAscii(""); // Group Inviter Name
-			bb.addLong(0); // Some odd counter
+			bb.addLong(0); // Invite counter
 		bb.addInt(0); // Guild ID
 		bb.addLong(0); // Look-at Target ID
 		bb.addLong(0); // Intended ID
 		bb.addByte(0); // Mood ID
 		bb.addInt(0); // Performance Counter
 		bb.addInt(0); // Performance ID
-		bb.addInt(0); // Attributes
-		bb.addInt(0); // Max Attributes
-		bb.addInt(0); // Equipment List
-		bb.addAscii(""); // Appearance?
+		bb.addInt(0); // Attributes List Size (List, Integer)
+		bb.addInt(0); // Max Attributes List Size (List, Integer)
+		bb.addInt(0); // Equipment List (List, Equipment structure)
+		bb.addAscii(""); // Appearance (costume)
 		bb.addBoolean(true); // Visible
-		bb.addInt(0); // Current HAM List Size
-		bb.addInt(0); // Max HAM List Size
+		bb.addInt(0); // Buff list (Map, k = Integer v = Buff structure)
 		bb.addBoolean(false); // Is Performing
 		bb.addShort(difficulty.getDifficulty());
 		bb.addInt(-1); // Hologram Color
 		bb.addBoolean(true); // Visible On Radar
 		bb.addBoolean(false); // Is Pet
 		bb.addByte(0); // Unknown
-		bb.addInt(0); // Appearance Equipment List Size
+		bb.addInt(0); // Appearance Equipment List Size (List, Equipment structure)
 		bb.addLong(0); // Unknown
 	}
 	
