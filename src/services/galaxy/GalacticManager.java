@@ -3,6 +3,7 @@ package services.galaxy;
 import intents.GalacticIntent;
 import intents.GalacticPacketIntent;
 import intents.InboundPacketIntent;
+import resources.Galaxy;
 import resources.control.Intent;
 import resources.control.Manager;
 import services.objects.ObjectManager;
@@ -16,8 +17,10 @@ public class GalacticManager extends Manager {
 	private PlayerManager playerManager;
 	private GameManager gameManager;
 	private Intent prevPacketIntent;
+	private Galaxy galaxy;
 	
-	public GalacticManager() {
+	public GalacticManager(Galaxy g) {
+		this.galaxy = g;
 		objectManager = new ObjectManager();
 		playerManager = new PlayerManager();
 		gameManager = new GameManager();
@@ -69,6 +72,7 @@ public class GalacticManager extends Manager {
 	private void prepareGalacticIntent(GalacticIntent i) {
 		i.setObjectManager(objectManager);
 		i.setPlayerManager(playerManager);
+		i.setGalaxy(galaxy);
 	}
 	
 }

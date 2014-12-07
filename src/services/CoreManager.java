@@ -1,26 +1,39 @@
 package services;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import network.packets.soe.DataChannelA;
 import network.packets.swg.SWGPacket;
 import network.packets.swg.zone.baselines.Baseline;
 import intents.InboundPacketIntent;
 import intents.OutboundPacketIntent;
+import resources.Galaxy;
+import resources.config.ConfigFile;
 import resources.control.Intent;
 import resources.control.Manager;
+import resources.services.Config;
 import services.galaxy.GalacticManager;
 
 public class CoreManager extends Manager {
 	
+	private static final int galaxyId = 2;
+
 	private EngineManager engineManager;
 	private GalacticManager galacticManager;
+	private Galaxy galaxy;
 	private long startTime;
 	
 	public CoreManager() {
-		engineManager = new EngineManager();
-		galacticManager = new GalacticManager();
-		
-		addChildService(engineManager);
-		addChildService(galacticManager);
+		galaxy = getGalaxy();
+		if (galaxy != null) {
+			engineManager = new EngineManager(galaxy);
+			galacticManager = new GalacticManager(galaxy);
+			
+			addChildService(engineManager);
+			addChildService(galacticManager);
+		}
 	}
 	
 	/**
@@ -36,7 +49,7 @@ public class CoreManager extends Manager {
 		startTime = System.nanoTime();
 		registerForIntent(InboundPacketIntent.TYPE);
 		registerForIntent(OutboundPacketIntent.TYPE);
-		return super.initialize();
+		return galaxy != null && super.initialize();
 	}
 	
 	@Override
@@ -69,6 +82,36 @@ public class CoreManager extends Manager {
 	 */
 	public double getCoreTime() {
 		return (System.nanoTime()-startTime)/1E6;
+	}
+	
+	private Galaxy getGalaxy() {
+		PreparedStatement getGalaxy = getLocalDatabase().prepareStatement("SELECT * FROM galaxies WHERE id = ?");
+		Config c = getConfig(ConfigFile.PRIMARY);
+		try {
+			getGalaxy.setInt(1, galaxyId);
+			ResultSet set = getGalaxy.executeQuery();
+			if (!set.next()) {
+				System.err.println("CoreManager: No such galaxy exists with ID " + galaxyId + "!");
+				return null;
+			}
+			Galaxy g = new Galaxy();
+			g.setId(set.getInt("id"));
+			g.setName(set.getString("name"));
+			g.setAddress(set.getString("address"));
+			g.setPopulation(set.getInt("population"));
+			g.setTimeZone(set.getInt("timezone"));
+			g.setZonePort(set.getInt("zone_port"));
+			g.setPingPort(set.getInt("ping_port"));
+			g.setStatus(set.getInt("status"));
+			g.setMaxCharacters(c.getInt("GALAXY-MAX-CHARACTERS", 2));
+			g.setOnlinePlayerLimit(c.getInt("GALAXY-MAX-ONLINE", 3000));
+			g.setOnlineFreeTrialLimit(c.getInt("GALAXY-MAX-ONLINE", 3000));
+			g.setRecommended(true);
+			return g;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 }
