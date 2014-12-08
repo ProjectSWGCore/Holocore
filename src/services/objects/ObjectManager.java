@@ -4,7 +4,9 @@ import intents.GalacticPacketIntent;
 import intents.swgobject_events.SWGObjectEventIntent;
 import intents.swgobject_events.SWGObjectMovedIntent;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import main.ProjectSWG;
@@ -96,7 +98,11 @@ public class ObjectManager extends Manager {
 			QuadTree<SWGObject> tree = quadTree.get(nTerrain.getTerrain().getFile());
 			tree.put(x, y, obj);
 			List <Player> updatedAware = new ArrayList<Player>();
-			obj.updateAwareness(tree.getWithinRange(x, y, AWARE_RANGE));
+			for (SWGObject inRange : tree.getWithinRange(x, y, AWARE_RANGE)) {
+				if (inRange.getOwner() != null)
+					updatedAware.add(inRange.getOwner());
+			}
+			obj.updateAwareness(updatedAware);
 		} else if (i instanceof GalacticPacketIntent) {
 			GalacticPacketIntent gpi = (GalacticPacketIntent) i;
 			if (gpi.getPacket() instanceof SelectCharacter) {
