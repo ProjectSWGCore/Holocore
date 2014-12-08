@@ -116,10 +116,9 @@ public class ZoneService extends Service {
 			try {
 				createCharacter.setLong(1, characterId);
 				createCharacter.setString(2, create.getName());
-				createCharacter.setString(3, create.getRace());
+				createCharacter.setString(3, ((CreatureObject)player.getCreatureObject()).getRace().getFilename());
 				createCharacter.setInt(4, player.getUserId());
 				createCharacter.setInt(5, player.getGalaxyId());
-				System.out.println("Galaxy ID: " + player.getGalaxyId());
 				if (createCharacter.executeUpdate() != 1) {
 					System.err.println("ZoneService: Unable to create character and put into database!");
 					sendPacket(player, new CreateCharacterFailure(NameFailureReason.NAME_RETRY));
