@@ -147,16 +147,26 @@ public class TangibleObject extends SWGObject {
 		bb.addInt(0); // Faction
 		bb.addInt(0); // Faction Status
 		bb.addArray(appearanceData);
-		bb.addInt(1); // Options Bitmask
-		bb.addInt(0); // Incap Timer
+		bb.addInt(0); // Component customization (Set, Integer)
+			bb.addInt(0); //updates
+		bb.addInt(128); // Options Bitmask (128 = Attackable)
+		bb.addInt(0); // Incap Timer for players, Use count for objects
 		bb.addInt(condition);
-		bb.addInt(0x80); // Random number that should be high enough - maxCondition
+		bb.addInt(100); // Random number that should be high enough - maxCondition
 		bb.addBoolean(false); // isStatic
+		
+		bb.incremeantOperandCount(9);
 	}
 	
 	public void createBaseline6(Player target, BaselineBuilder bb) {
 		super.createBaseline6(target, bb);
-		bb.addInt(0); // Defender List Size
+		bb.addBoolean(false); // Combat flag
+		bb.addInt(0); // Defenders List (Set, Long)
+		bb.addInt(0); // Unknown List (List, Long)
+		bb.addInt(0); // Unknown List (List, Integer)
+		bb.addLong(0); // Unknown, possibly a list/map or something
+		
+		bb.incremeantOperandCount(5);
 	}
 	
 }

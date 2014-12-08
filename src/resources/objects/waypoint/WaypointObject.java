@@ -1,13 +1,13 @@
 package resources.objects.waypoint;
 
-import network.packets.swg.zone.SceneEndBaselines;
-import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.network.BaselineBuilder;
 import resources.objects.intangible.IntangibleObject;
 import resources.player.Player;
 
 public class WaypointObject extends IntangibleObject {
 
+	private static final long serialVersionUID = 1L;
+	
 	private int cellNumber;
 	private long targetId = 0;
 	private String name = "Waypoint";
@@ -84,13 +84,15 @@ public class WaypointObject extends IntangibleObject {
 	}
 
 	public void createObject(Player target) {
-		super.sendSceneCreateObject(target);
+		// NOTE: Client is never sent a WAYP baseline in NGE, WaypointObject's just go inside the Waypoint List in PLAY.
+		
+		/*super.sendSceneCreateObject(target);
 		
 		BaselineBuilder bb = new BaselineBuilder(this, BaselineType.WAYP, 3);
 		createBaseline3(target, bb);
 		bb.sendTo(target);
 		
 		createChildrenObjects(target);
-		target.sendPacket(new SceneEndBaselines(getObjectId()));
+		target.sendPacket(new SceneEndBaselines(getObjectId()));*/
 	}
 }

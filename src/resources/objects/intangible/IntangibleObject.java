@@ -27,6 +27,8 @@ public class IntangibleObject extends SWGObject {
 	public void createBaseline3(Player target, BaselineBuilder bb) {
 		super.createBaseline3(target, bb);
 		bb.addInt(count);
+		
+		bb.incremeantOperandCount(1);
 	}
 
 	public void createBaseline6(Player target, BaselineBuilder bb) {

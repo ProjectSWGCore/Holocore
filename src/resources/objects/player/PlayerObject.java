@@ -135,6 +135,8 @@ public class PlayerObject extends IntangibleObject {
 			bb.addInt(0);
 		bb.addBoolean(showHelmet); // Show Helmet
 		bb.addBoolean(showBackpack); // Show Backpack
+		
+		bb.incremeantOperandCount(15);
 	}
 	
 	public void createBaseline6(Player target, BaselineBuilder bb) {
@@ -148,16 +150,18 @@ public class PlayerObject extends IntangibleObject {
 		bb.addAscii(""); // Home
 		bb.addByte(0); // Citizenship
 		bb.addAscii(""); // City Region Defender 'region'
-		bb.addByte(0); // City Region Defender byte #1
-		bb.addByte(0); // City Region Defender byte #2
+			bb.addByte(0); // City Region Defender byte #1
+			bb.addByte(0); // City Region Defender byte #2
 		bb.addAscii(""); // Guild Region Defender 'region'
-		bb.addByte(0); // Guild Region Defender byte #1
-		bb.addByte(0); // Guild Region Defender byte #2
+			bb.addByte(0); // Guild Region Defender byte #1
+			bb.addByte(0); // Guild Region Defender byte #2
 		bb.addLong(0); // General?
 		bb.addInt(0); // Guild Rank Title?
 		bb.addShort(0); // Citizen Rank Title? 6 bytes
 		bb.addInt(1); // Speeder Elevation
 		bb.addAscii(""); // Vehicle Attack Command
+		
+		bb.incremeantOperandCount(15);
 	}
 	
 	public void createBaseline8(Player target, BaselineBuilder bb) {
@@ -171,6 +175,8 @@ public class PlayerObject extends IntangibleObject {
 		bb.addInt(0); // Active Quest
 		bb.addInt(0); // Quest Journal
 		bb.addAscii(""); // Profession Wheel Position
+		
+		bb.incremeantOperandCount(9);
 	}
 	
 	public void createBaseline9(Player target, BaselineBuilder bb) {
@@ -206,6 +212,8 @@ public class PlayerObject extends IntangibleObject {
 		bb.addLong(0); // Unk  sometimes 856
 		bb.addLong(0); // Unk  sometimes 8559
 		bb.addInt(0); // Residence Time
+		
+		bb.incremeantOperandCount(31);
 	}
 	
 }

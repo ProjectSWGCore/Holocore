@@ -311,43 +311,37 @@ public class CreatureObject extends TangibleObject {
 	
 	public void createBaseline1(Player target, BaselineBuilder bb) {
 		super.createBaseline1(target, bb);
-		bb.addShort(5);
 		bb.addInt(getBankBalance());
 		bb.addInt(getCashBalance());
 		bb.addInt(6); // Base HAM Mod List Size (List, Integer)
-		bb.addInt(0);
-		bb.addInt(1000); // Max Health
-		bb.addInt(0);
-		bb.addInt(300); // Max Action
-		bb.addInt(0);
-		bb.addInt(300); // Max Mind
-		bb.addInt(0); // Skills List Size (List, Integer)
-		bb.addInt(1);
-		bb.addInt(0);
-		bb.addAscii(race.getSpecies());
+			bb.addInt(0); // update counter
+			bb.addInt(1000); // Max Health
+			bb.addInt(0); // ??
+			bb.addInt(300); // Max Action
+			bb.addInt(0); // ??
+			bb.addInt(300); // Max Mind
+			bb.addInt(0); // ??
+		bb.addInt(1); // Skills List Size (List, Integer)
+			bb.addInt(0); // update counter
+			bb.addAscii(race.getSpecies());
+		
+		bb.incremeantOperandCount(4);
 	}
 	
 	public void createBaseline3(Player target, BaselineBuilder bb) {
 		super.createBaseline3(target, bb);
-		// We should confirm that this is only part of CREO3 and not TANO3, Core2 doesn't have this
-		bb.addByte(0);
-		bb.addShort(0); // Unknown
-		bb.addInt(0); // Unknown
-		bb.addInt(0x00003A98); // Unknown
-		bb.addByte(0); // Unknown
-		// END
 		bb.addByte(posture.getId());
 		bb.addByte(0); // Faction Rank
 		bb.addLong(0); // Owner - mainly used for pets and vehicles
 		bb.addFloat((float) height);
 		bb.addInt(0); // Battle Fatigue
 		bb.addLong(0); // States Bitmask
-		bb.addInt(0); // Wound HAM List Size
+		
+		bb.incremeantOperandCount(6);
 	}
 	
 	public void createBaseline4(Player target, BaselineBuilder bb) {
 		super.createBaseline4(target, bb);
-		bb.addShort(5);
 		bb.addFloat((float) accelScale);
 		bb.addFloat((float) accelPercent);
 		bb.addInt(0); // Encumberance HAM List Size (List, Integer)
@@ -364,6 +358,8 @@ public class CreatureObject extends TangibleObject {
 		bb.addInt(0); // Mission Critical Objects list size (Map, k = long v = long)
 		bb.addInt(0); // abilities list size (Map, k = string v = integer)
 		bb.addInt(0); // XP Display Counter (remaining experience to next level up, updates the experience bar on client)
+		
+		bb.incremeantOperandCount(16);
 	}
 	
 	public void createBaseline6(Player target, BaselineBuilder bb) {
@@ -397,16 +393,18 @@ public class CreatureObject extends TangibleObject {
 		bb.addByte(0); // Unknown
 		bb.addInt(0); // Appearance Equipment List Size (List, Equipment structure)
 		bb.addLong(0); // Unknown
+		
+		bb.incremeantOperandCount(27);
 	}
 	
 	public void createBaseline8(Player target, BaselineBuilder bb) {
 		super.createBaseline8(target, bb);
-		bb.addShort(0);
+		//bb.addShort(0);
 	}
 	
 	public void createBaseline9(Player target, BaselineBuilder bb) {
 		super.createBaseline9(target, bb);
-		bb.addShort(0);
+		//bb.addShort(0);
 	}
 	
 }
