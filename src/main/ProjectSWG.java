@@ -87,6 +87,8 @@ public class ProjectSWG {
 			loop++;
 			if (loop % 10 == 0 && !manager.isOperational())
 				break;
+//			if (!manager.isOperational())
+//				break;
 		}
 	}
 	

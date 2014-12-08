@@ -181,7 +181,7 @@ public class LoginService extends Service {
 			c.setName(set.getString("name"));
 			c.setRaceCrc(Race.getRace(set.getString("race")).getCrc());
 			c.setGalaxyId(set.getInt("galaxyid"));
-			c.setType(0); // 0 = Normal (1 = Jedi, 2 = Spectral)
+			c.setType(1); // 1 = Normal (2 = Jedi, 3 = Spectral)
 			characters.add(c);
 		}
 		return characters.toArray(new SWGCharacter[characters.size()]);
