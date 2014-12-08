@@ -114,7 +114,6 @@ public class PlayerObject extends IntangibleObject {
 	
 	public void createBaseline3(Player target, BaselineBuilder bb) {
 		super.createBaseline3(target, bb);
-		bb.addInt(0);
 		bb.addInt(4); // Flags List Size
 		for (int i = 0; i < 4; i++) // 4 flags
 			bb.addInt(0);
