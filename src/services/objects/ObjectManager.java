@@ -30,6 +30,7 @@ import resources.objects.player.PlayerObject;
 import resources.objects.quadtree.QuadTree;
 import resources.objects.tangible.TangibleObject;
 import resources.objects.waypoint.WaypointObject;
+import resources.objects.weapon.WeaponObject;
 import resources.player.Player;
 import resources.server_info.ObjectDatabase;
 import resources.server_info.ObjectDatabase.Traverser;
@@ -189,7 +190,7 @@ public class ObjectManager extends Manager {
 			case "tangible": return createTangibleObject(objectId, template);
 			case "intangible": return createIntangibleObject(objectId, template);
 			case "waypoint": return createWaypointObject(objectId, template);
-			case "weapon": break;
+			case "weapon": return createWeaponObject(objectId, template);
 			case "building": break;
 			case "cell": break;
 		}
@@ -220,5 +221,9 @@ public class ObjectManager extends Manager {
 	
 	private WaypointObject createWaypointObject(long objectId, String template) {
 		return new WaypointObject(objectId);
+	}
+	
+	private WeaponObject createWeaponObject(long objectId, String template) {
+		return new WeaponObject(objectId);
 	}
 }

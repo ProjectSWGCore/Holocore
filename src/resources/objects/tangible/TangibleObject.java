@@ -129,8 +129,17 @@ public class TangibleObject extends SWGObject {
 		BaselineBuilder bb = new BaselineBuilder(this, BaselineType.TANO, 3);
 		createBaseline3(target, bb);
 		bb.sendTo(target);
+		
 		bb = new BaselineBuilder(this, BaselineType.TANO, 6);
 		createBaseline6(target, bb);
+		bb.sendTo(target);
+		
+		bb = new BaselineBuilder(this, BaselineType.TANO, 8);
+		createBaseline8(target, bb);
+		bb.sendTo(target);
+		
+		bb = new BaselineBuilder(this, BaselineType.TANO, 9);
+		createBaseline9(target, bb);
 		bb.sendTo(target);
 		
 		createChildrenObjects(target);
@@ -162,11 +171,32 @@ public class TangibleObject extends SWGObject {
 		super.createBaseline6(target, bb);
 		bb.addBoolean(false); // Combat flag
 		bb.addInt(0); // Defenders List (Set, Long)
+			bb.addInt(0);
 		bb.addInt(0); // Unknown List (List, Long)
+			bb.addInt(0);
 		bb.addInt(0); // Unknown List (List, Integer)
-		bb.addLong(0); // Unknown, possibly a list/map or something
+			bb.addInt(0);
+		bb.addInt(0); // Unknown, possibly a list/map or something
+			bb.addInt(0);
+		
+		bb.addInt(0);
 		
 		bb.incremeantOperandCount(5);
 	}
 	
+	public void createBaseline8(Player target, BaselineBuilder bb) {
+		super.createBaseline8(target, bb);
+		bb.addShort(0);
+		bb.addShort(0);
+		
+		bb.incremeantOperandCount(2);
+	}
+	
+	public void createBaseline9(Player target, BaselineBuilder bb) {
+		super.createBaseline9(target, bb);
+		bb.addShort(0);
+		bb.addShort(0);
+		
+		bb.incremeantOperandCount(2);
+	}
 }

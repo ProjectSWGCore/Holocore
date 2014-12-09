@@ -38,7 +38,7 @@ public class CreatureObject extends TangibleObject {
 	private long	performanceListenTarget	= 0;
 	private int		guildId					= 0;
 	private byte	rank					= 0;
-	private int		level					= 0;
+	private int		level					= 1;
 	private int		levelHealthGranted		= 0;
 	private int		totalLevelXp			= 0;
 	private CreatureDifficulty	difficulty	= CreatureDifficulty.NORMAL;
@@ -279,22 +279,28 @@ public class CreatureObject extends TangibleObject {
 		BaselineBuilder bb = null;
 		CREO6 c6 = new CREO6(getObjectId());
 		c6.setId(getObjectId()); c6.setType(BaselineType.CREO); c6.setNum(6);
-//		bb = new BaselineBuilder(this, BaselineType.CREO, 1);
+		
+//		bb = new BaselineBuilder(this, BaselineType.CREO, 1); // ZONED IN! ( crash when pressing escape )
 //		createBaseline1(target, bb);
 //		bb.sendTo(target);
+		
 		bb = new BaselineBuilder(this, BaselineType.CREO, 3);
 		createBaseline3(target, bb);
 		bb.sendTo(target);
-//		bb = new BaselineBuilder(this, BaselineType.CREO, 4);
+		
+//		bb = new BaselineBuilder(this, BaselineType.CREO, 4); // ZONED IN! ( crash when pressing escape )
 //		createBaseline4(target, bb);
 //		bb.sendTo(target);
+		
 		bb = new BaselineBuilder(this, BaselineType.CREO, 6);
 		createBaseline6(target, bb);
 //		bb.sendTo(target);
 		target.sendPacket(new Baseline(getObjectId(), c6));
+		
 		bb = new BaselineBuilder(this, BaselineType.CREO, 8);
 		createBaseline8(target, bb);
 		bb.sendTo(target);
+		
 		bb = new BaselineBuilder(this, BaselineType.CREO, 9);
 		createBaseline9(target, bb);
 		bb.sendTo(target);
@@ -341,14 +347,17 @@ public class CreatureObject extends TangibleObject {
 	}
 	
 	public void createBaseline4(Player target, BaselineBuilder bb) {
+		// TODO: Double check structure with an NGE packet
 		super.createBaseline4(target, bb);
 		bb.addFloat((float) accelScale);
 		bb.addFloat((float) accelPercent);
 		bb.addInt(0); // Encumberance HAM List Size (List, Integer)
+			bb.addInt(0);
 		bb.addInt(0); // Skill Mod List Size (Map, k = String v= SkillMod structure)
+			bb.addInt(0);
 		bb.addFloat((float) movementScale);
 		bb.addFloat((float) movementPercent);
-		bb.addInt(0); // Listen to ID
+		bb.addLong(0); // Listen to ID
 		bb.addFloat((float) runSpeed);
 		bb.addFloat((float) slopeModAngle);
 		bb.addFloat((float) slopeModPercent);
@@ -356,7 +365,9 @@ public class CreatureObject extends TangibleObject {
 		bb.addFloat((float) walkSpeed);
 		bb.addFloat((float) waterModPercent);
 		bb.addInt(0); // Mission Critical Objects list size (Map, k = long v = long)
+			bb.addInt(0);
 		bb.addInt(0); // abilities list size (Map, k = string v = integer)
+			bb.addInt(0);
 		bb.addInt(0); // XP Display Counter (remaining experience to next level up, updates the experience bar on client)
 		
 		bb.incremeantOperandCount(16);
@@ -364,7 +375,8 @@ public class CreatureObject extends TangibleObject {
 	
 	public void createBaseline6(Player target, BaselineBuilder bb) {
 		super.createBaseline6(target, bb);
-		bb.addInt(level);
+		
+		bb.addShort(level);
 		bb.addInt(0); // Granted Health
 		bb.addAscii(""); // Current Animation
 		bb.addAscii("neutral"); // Animation Mood
@@ -379,32 +391,47 @@ public class CreatureObject extends TangibleObject {
 		bb.addByte(0); // Mood ID
 		bb.addInt(0); // Performance Counter
 		bb.addInt(0); // Performance ID
-		bb.addInt(0); // Attributes List Size (List, Integer)
-		bb.addInt(0); // Max Attributes List Size (List, Integer)
+		bb.addInt(6); // Attributes List Size (List, Integer)
+			bb.addInt(5);
+			bb.addInt(100);//bb.addInt(0xEA030000);
+			bb.addInt(0);
+			bb.addInt(100);//bb.addInt(0x34010000);
+			bb.addInt(0);
+			bb.addInt(100);//bb.addInt(0x2C010000);
+			bb.addInt(0);
+		bb.addInt(6); // Max Attributes List Size (List, Integer)
+			bb.addInt(5);
+			bb.addInt(100);//bb.addInt(0xEA030000);
+			bb.addInt(0);
+			bb.addInt(100);//bb.addInt(0x34010000);
+			bb.addInt(0);
+			bb.addInt(100);//bb.addInt(0x2C010000);
+			bb.addInt(0);
 		bb.addInt(0); // Equipment List (List, Equipment structure)
+			bb.addInt(0);
 		bb.addAscii(""); // Appearance (costume)
 		bb.addBoolean(true); // Visible
 		bb.addInt(0); // Buff list (Map, k = Integer v = Buff structure)
+			bb.addInt(0);
 		bb.addBoolean(false); // Is Performing
-		bb.addShort(difficulty.getDifficulty());
+		bb.addByte(difficulty.getDifficulty());
 		bb.addInt(-1); // Hologram Color
 		bb.addBoolean(true); // Visible On Radar
 		bb.addBoolean(false); // Is Pet
 		bb.addByte(0); // Unknown
 		bb.addInt(0); // Appearance Equipment List Size (List, Equipment structure)
-		bb.addLong(0); // Unknown
+			bb.addInt(0);
+		bb.addLong(0); // unknown
 		
 		bb.incremeantOperandCount(27);
 	}
 	
 	public void createBaseline8(Player target, BaselineBuilder bb) {
 		super.createBaseline8(target, bb);
-		//bb.addShort(0);
 	}
 	
 	public void createBaseline9(Player target, BaselineBuilder bb) {
 		super.createBaseline9(target, bb);
-		//bb.addShort(0);
 	}
 	
 }

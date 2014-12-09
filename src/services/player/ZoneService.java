@@ -139,6 +139,7 @@ public class ZoneService extends Service {
 		Location start = getStartLocation(create.getStart());
 		Race race = Race.getRace(create.getRace());
 		CreatureObject creatureObj = (CreatureObject) objManager.createObject(race.getFilename());
+		creatureObj.setVolume(0x000F4240);
 		PlayerObject playerObj     = (PlayerObject)   objManager.createObject("object/player/shared_player.iff");
 		TangibleObject hairObj     = (TangibleObject) objManager.createObject(create.getHair());
 		setCreatureObjectValues(creatureObj, create);

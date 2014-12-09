@@ -22,6 +22,7 @@ public class PlayerObject extends IntangibleObject {
 	
 	public PlayerObject(long objectId) {
 		super(objectId);
+		setVolume(0);
 	}
 	
 	public String getProfession() {
