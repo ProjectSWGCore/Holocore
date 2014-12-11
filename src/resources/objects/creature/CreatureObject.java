@@ -3,7 +3,6 @@ package resources.objects.creature;
 import network.packets.swg.zone.SceneEndBaselines;
 import network.packets.swg.zone.UpdatePostureMessage;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
-import network.packets.swg.zone.baselines.CREO6;
 import resources.Posture;
 import resources.Race;
 import resources.network.BaselineBuilder;
@@ -42,6 +41,8 @@ public class CreatureObject extends TangibleObject {
 	private int		totalLevelXp			= 0;
 	private CreatureDifficulty	difficulty	= CreatureDifficulty.NORMAL;
 	private boolean	beast					= false;
+	private int		cashBalance				= 0;
+	private int		bankBalance				= 0;
 	
 	public CreatureObject(long objectId) {
 		super(objectId);
@@ -49,6 +50,14 @@ public class CreatureObject extends TangibleObject {
 		setStfKey(race.getSpecies()); // TODO: remove when automatic stf is in
 	}
 	
+	public int getCashBalance() {
+		return cashBalance;
+	}
+
+	public int getBankBalance() {
+		return bankBalance;
+	}
+
 	public Posture getPosture() {
 		return posture;
 	}
@@ -169,6 +178,14 @@ public class CreatureObject extends TangibleObject {
 		this.race = race;
 	}
 	
+	public void setCashBalance(int cashBalance) {
+		this.cashBalance = cashBalance;
+	}
+
+	public void setBankBalance(int bankBalance) {
+		this.bankBalance = bankBalance;
+	}
+	
 	public void setAttributes(int attributes) {
 		this.attributes = attributes;
 	}
@@ -278,7 +295,7 @@ public class CreatureObject extends TangibleObject {
 		
 		BaselineBuilder bb = null;
 
-		bb = new BaselineBuilder(this, BaselineType.CREO, 1); // ZONED IN! ( crash when pressing escape )
+		bb = new BaselineBuilder(this, BaselineType.CREO, 1);
 		createBaseline1(target, bb);
 		bb.sendTo(target);
 		
@@ -286,7 +303,7 @@ public class CreatureObject extends TangibleObject {
 		createBaseline3(target, bb);
 		bb.sendTo(target);
 		
-		bb = new BaselineBuilder(this, BaselineType.CREO, 4); // ZONED IN! ( crash when pressing escape )
+		bb = new BaselineBuilder(this, BaselineType.CREO, 4);
 		createBaseline4(target, bb);
 		bb.sendTo(target);
 		
@@ -314,8 +331,8 @@ public class CreatureObject extends TangibleObject {
 	
 	public void createBaseline1(Player target, BaselineBuilder bb) {
 		super.createBaseline1(target, bb);
-		bb.addInt(getBankBalance());
-		bb.addInt(getCashBalance());
+		bb.addInt(cashBalance);
+		bb.addInt(bankBalance);
 		bb.addInt(6); // Base HAM Mod List Size (List, Integer)
 			bb.addInt(0); // update counter
 			bb.addInt(1000); // Max Health
@@ -326,7 +343,7 @@ public class CreatureObject extends TangibleObject {
 			bb.addInt(0); // ??
 		bb.addInt(1); // Skills List Size (List, Integer)
 			bb.addInt(0); // update counter
-			bb.addAscii(race.getSpecies());
+			bb.addAscii("species_" + race.getSpecies());
 		
 		bb.incremeantOperandCount(4);
 	}
