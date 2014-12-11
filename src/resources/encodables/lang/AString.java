@@ -7,7 +7,8 @@ import java.nio.charset.Charset;
 import resources.network.BaselineBuilder.Encodable;
 
 public class AString implements Encodable {
-
+	private static final long serialVersionUID = 1L;
+	
 	private String string;
 	
 	public AString(String str) {

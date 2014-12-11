@@ -54,8 +54,7 @@ public class CreatureObject extends TangibleObject {
 	
 	public CreatureObject(long objectId) {
 		super(objectId);
-		setStfFile("species"); // TODO: Remove when automatic stf is in
-		setStfKey(race.getSpecies()); // TODO: remove when automatic stf is in
+		setStf("species", race.getSpecies()); // TODO: Remove when automatic stf is in
 	}
 	
 	public SWGList<Equipment> getEquipmentList() {
