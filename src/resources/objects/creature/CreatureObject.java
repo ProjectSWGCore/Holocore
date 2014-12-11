@@ -5,6 +5,9 @@ import network.packets.swg.zone.UpdatePostureMessage;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.Posture;
 import resources.Race;
+import resources.collections.SWGList;
+import resources.encodables.lang.AString;
+import resources.encodables.player.Equipment;
 import resources.network.BaselineBuilder;
 import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
@@ -36,7 +39,7 @@ public class CreatureObject extends TangibleObject {
 	private long	performanceListenTarget	= 0;
 	private int		guildId					= 0;
 	private byte	rank					= 0;
-	private int		level					= 90;
+	private int		level					= 1;
 	private int		levelHealthGranted		= 0;
 	private int		totalLevelXp			= 0;
 	private CreatureDifficulty	difficulty	= CreatureDifficulty.NORMAL;
@@ -44,10 +47,27 @@ public class CreatureObject extends TangibleObject {
 	private int		cashBalance				= 0;
 	private int		bankBalance				= 0;
 	
+	private SWGList<AString>	skills			= new SWGList<AString>(BaselineType.CREO, 1, 4);
+	private SWGList<Integer>	hamEncumbList	= new SWGList<Integer>(BaselineType.CREO, 4, 2);
+	private SWGList<Equipment>	equipmentList 	= new SWGList<Equipment>(BaselineType.CREO, 6, 15);
+	private SWGList<Equipment>	appearanceList 	= new SWGList<Equipment>(BaselineType.CREO, 6, 26);
+	
 	public CreatureObject(long objectId) {
 		super(objectId);
 		setStfFile("species"); // TODO: Remove when automatic stf is in
 		setStfKey(race.getSpecies()); // TODO: remove when automatic stf is in
+	}
+	
+	public SWGList<Equipment> getEquipmentList() {
+		return equipmentList;
+	}
+	
+	public SWGList<Equipment> getAppearanceList() {
+		return appearanceList;
+	}
+	
+	public SWGList<AString> getSkills() {
+		return skills;
 	}
 	
 	public int getCashBalance() {
@@ -341,9 +361,7 @@ public class CreatureObject extends TangibleObject {
 			bb.addInt(0); // ??
 			bb.addInt(300); // Max Mind
 			bb.addInt(0); // ??
-		bb.addInt(1); // Skills List Size (List, Integer)
-			bb.addInt(0); // update counter
-			bb.addAscii("species_" + race.getSpecies());
+		bb.addObject(skills);
 		
 		bb.incremeantOperandCount(4);
 	}
@@ -365,8 +383,7 @@ public class CreatureObject extends TangibleObject {
 		super.createBaseline4(target, bb);
 		bb.addFloat((float) accelScale);
 		bb.addFloat((float) accelPercent);
-		bb.addInt(0); // Encumberance HAM List Size (List, Integer)
-			bb.addInt(0);
+		bb.addObject(hamEncumbList);
 		bb.addInt(0); // Skill Mod List Size (Map, k = String v= SkillMod structure)
 			bb.addInt(0);
 		bb.addFloat((float) movementScale);
@@ -421,8 +438,7 @@ public class CreatureObject extends TangibleObject {
 			bb.addInt(0);
 			bb.addInt(1000); // ?? it's 300 on new characters
 			bb.addInt(0);
-		bb.addInt(0); // Equipment List (List, Equipment structure)
-			bb.addInt(0);
+		bb.addObject(equipmentList);
 		bb.addAscii(""); // Appearance (costume)
 		bb.addBoolean(true); // Visible
 		bb.addInt(0); // Buff list (Map, k = Integer v = Buff structure)
@@ -433,8 +449,7 @@ public class CreatureObject extends TangibleObject {
 		bb.addBoolean(true); // Visible On Radar
 		bb.addBoolean(false); // Is Pet
 		bb.addByte(0); // Unknown
-		bb.addInt(0); // Appearance Equipment List Size (List, Equipment structure)
-			bb.addInt(0);
+		bb.addObject(appearanceList);
 		bb.addLong(0); // unknown
 		
 		bb.incremeantOperandCount(27);
