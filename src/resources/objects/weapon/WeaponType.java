@@ -1,6 +1,7 @@
 package resources.objects.weapon;
 
 public final class WeaponType {
+	// combat_timing.iff datatable
 	public static final int RIFLE = 0;
 	public static final int CARBINE = 1;
 	public static final int PISTOL = 2;
@@ -14,5 +15,5 @@ public final class WeaponType {
 	public static final int TWOHANDEDSABER = 10;
 	public static final int POLEARMSABER = 11;
 	public static final int HEAVYWEAPON = 12;
-	public static final int FLAMETHROWER = 13;
+	public static final int DIRECTIONALTARGETWEAPON = 13;
 }

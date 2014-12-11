@@ -2,10 +2,12 @@ package resources.objects.weapon;
 
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.network.BaselineBuilder;
+import resources.network.BaselineBuilder.Encodable;
 import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
+import utilities.ByteUtilities;
 
-public class WeaponObject extends TangibleObject {
+public class WeaponObject extends TangibleObject implements Encodable{
 
 	private static final long serialVersionUID = 1L;
 
@@ -91,5 +93,25 @@ public class WeaponObject extends TangibleObject {
 	public void createBaseline9(Player target, BaselineBuilder bb) {
 		super.createBaseline9(target, bb);
 		
+	}
+
+
+	@Override
+	public byte[] encode() {
+		BaselineBuilder bb = new BaselineBuilder(this, BaselineType.WEAO, 3);
+		createBaseline3(null, bb);
+		byte[] data3 = bb.buildAsBaselinePacket();
+		
+		bb = new BaselineBuilder(this, BaselineType.WEAO, 6);
+		createBaseline6(null, bb);
+		byte[] data6 = bb.buildAsBaselinePacket();
+		
+		byte[] ret = new byte[data3.length + data6.length];
+		System.arraycopy(data3, 0, ret, 0, data3.length);
+		System.arraycopy(data6, 0, ret, data3.length, data6.length);
+		
+		
+		System.out.println("WEAP: " + ByteUtilities.getHexString(ret));
+		return ret;
 	}
 }

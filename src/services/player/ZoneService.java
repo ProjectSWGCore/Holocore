@@ -38,6 +38,7 @@ import resources.control.Service;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
 import resources.objects.tangible.TangibleObject;
+import resources.objects.weapon.WeaponObject;
 import resources.player.Player;
 import resources.player.PlayerEvent;
 import resources.services.Config;
@@ -142,6 +143,8 @@ public class ZoneService extends Service {
 		creatureObj.setVolume(0x000F4240);
 		PlayerObject playerObj     = (PlayerObject)   objManager.createObject("object/player/shared_player.iff");
 		TangibleObject hairObj     = (TangibleObject) objManager.createObject(create.getHair());
+		WeaponObject defaultWeap   = (WeaponObject) objManager.createObject("object/weapon/creature/shared_creature_default_weapon.iff");
+		creatureObj.setWeapon(defaultWeap);
 		setCreatureObjectValues(creatureObj, create);
 		playerObj.setProfession(create.getProfession());
 		hairObj.setAppearanceData(create.getHairCustomization());

@@ -7,8 +7,10 @@ import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import network.packets.swg.zone.baselines.CREO6;
 import resources.Posture;
 import resources.Race;
+import resources.common.CRC;
 import resources.network.BaselineBuilder;
 import resources.objects.tangible.TangibleObject;
+import resources.objects.weapon.WeaponObject;
 import resources.player.Player;
 
 public class CreatureObject extends TangibleObject {
@@ -43,6 +45,9 @@ public class CreatureObject extends TangibleObject {
 	private int		totalLevelXp			= 0;
 	private CreatureDifficulty	difficulty	= CreatureDifficulty.NORMAL;
 	private boolean	beast					= false;
+	private long	weaponId				= 0;
+	
+	private WeaponObject weapon; // TODO: Remove once equipment list is up and running
 	
 	public CreatureObject(long objectId) {
 		super(objectId);
@@ -273,6 +278,11 @@ public class CreatureObject extends TangibleObject {
 		this.beast = beast;
 	}
 	
+	public void setWeapon(WeaponObject weapon) { // TODO: Remove method & variable when equipment list is up and running
+		this.weapon = weapon;
+		weaponId = weapon.getObjectId();
+	}
+	
 	public void createObject(Player target) {
 		sendSceneCreateObject(target);
 		
@@ -280,22 +290,22 @@ public class CreatureObject extends TangibleObject {
 		CREO6 c6 = new CREO6(getObjectId());
 		c6.setId(getObjectId()); c6.setType(BaselineType.CREO); c6.setNum(6);
 		
-//		bb = new BaselineBuilder(this, BaselineType.CREO, 1); // ZONED IN! ( crash when pressing escape )
-//		createBaseline1(target, bb);
-//		bb.sendTo(target);
+		bb = new BaselineBuilder(this, BaselineType.CREO, 1); // ZONED IN! ( crash when pressing escape )
+		createBaseline1(target, bb);
+		bb.sendTo(target);
 		
 		bb = new BaselineBuilder(this, BaselineType.CREO, 3);
 		createBaseline3(target, bb);
 		bb.sendTo(target);
 		
-//		bb = new BaselineBuilder(this, BaselineType.CREO, 4); // ZONED IN! ( crash when pressing escape )
-//		createBaseline4(target, bb);
-//		bb.sendTo(target);
+		bb = new BaselineBuilder(this, BaselineType.CREO, 4); // ZONED IN! ( crash when pressing escape )
+		createBaseline4(target, bb);
+		bb.sendTo(target);
 		
 		bb = new BaselineBuilder(this, BaselineType.CREO, 6);
 		createBaseline6(target, bb);
-//		bb.sendTo(target);
-		target.sendPacket(new Baseline(getObjectId(), c6));
+		bb.sendTo(target);
+//		target.sendPacket(new Baseline(getObjectId(), c6));
 		
 		bb = new BaselineBuilder(this, BaselineType.CREO, 8);
 		createBaseline8(target, bb);
@@ -380,7 +390,7 @@ public class CreatureObject extends TangibleObject {
 		bb.addInt(0); // Granted Health
 		bb.addAscii(""); // Current Animation
 		bb.addAscii("neutral"); // Animation Mood
-		bb.addLong(0); // Weapon ID
+		bb.addLong(weaponId); // Weapon ID
 		bb.addLong(0); // Group ID
 		bb.addLong(0); // Group Inviter ID
 			bb.addAscii(""); // Group Inviter Name
@@ -407,8 +417,16 @@ public class CreatureObject extends TangibleObject {
 			bb.addInt(0);
 			bb.addInt(100);//bb.addInt(0x2C010000);
 			bb.addInt(0);
-		bb.addInt(0); // Equipment List (List, Equipment structure)
-			bb.addInt(0);
+		bb.addInt(1); // Equipment List (List, Equipment structure)
+			bb.addInt(1);
+			// TODO: Remove this when equipment list is up and running
+			bb.addShort(0); // customization string
+			bb.addInt(4); // arrangementId
+			bb.addLong(weaponId);
+			System.out.println("Template: " + weapon.getTemplate() + " int: " + CRC.getCrc(weapon.getTemplate()));
+			bb.addInt(CRC.getCrc(weapon.getTemplate()));
+			bb.addBoolean(true); // isWeaponobject
+			bb.addArray(weapon.encode());
 		bb.addAscii(""); // Appearance (costume)
 		bb.addBoolean(true); // Visible
 		bb.addInt(0); // Buff list (Map, k = Integer v = Buff structure)
