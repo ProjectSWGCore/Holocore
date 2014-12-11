@@ -277,9 +277,7 @@ public class CreatureObject extends TangibleObject {
 		sendSceneCreateObject(target);
 		
 		BaselineBuilder bb = null;
-		CREO6 c6 = new CREO6(getObjectId());
-		c6.setId(getObjectId()); c6.setType(BaselineType.CREO); c6.setNum(6);
-		
+
 		bb = new BaselineBuilder(this, BaselineType.CREO, 1); // ZONED IN! ( crash when pressing escape )
 		createBaseline1(target, bb);
 		bb.sendTo(target);
