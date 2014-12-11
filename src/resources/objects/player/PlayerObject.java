@@ -2,9 +2,7 @@ package resources.objects.player;
 
 import network.packets.swg.zone.SceneEndBaselines;
 import network.packets.swg.zone.UpdatePostureMessage;
-import network.packets.swg.zone.baselines.Baseline;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
-import network.packets.swg.zone.baselines.PLAY6;
 import resources.network.BaselineBuilder;
 import resources.objects.creature.CreatureObject;
 import resources.objects.intangible.IntangibleObject;
@@ -90,18 +88,18 @@ public class PlayerObject extends IntangibleObject {
 		BaselineBuilder bb = new BaselineBuilder(this, BaselineType.PLAY, 3);
 		createBaseline3(target, bb);
 		bb.sendTo(target);
-//		bb = new BaselineBuilder(this, BaselineType.PLAY, 6);
-//		createBaseline6(target, bb);
-//		bb.sendTo(target);
-		PLAY6 play6 = new PLAY6();
-		play6.setId(getObjectId()); play6.setType(BaselineType.PLAY); play6.setNum(6);
-		target.sendPacket(new Baseline(getObjectId(), play6));
-//		bb = new BaselineBuilder(this, BaselineType.PLAY, 8);
-//		createBaseline8(target, bb);
-//		bb.sendTo(target);
-//		bb = new BaselineBuilder(this, BaselineType.PLAY, 9);
-//		createBaseline9(target, bb);
-//		bb.sendTo(target);
+		
+		bb = new BaselineBuilder(this, BaselineType.PLAY, 6);
+		createBaseline6(target, bb);
+		bb.sendTo(target);
+		
+		bb = new BaselineBuilder(this, BaselineType.PLAY, 8);
+		createBaseline8(target, bb);
+		bb.sendTo(target);
+		
+		bb = new BaselineBuilder(this, BaselineType.PLAY, 9);
+		createBaseline9(target, bb);
+		bb.sendTo(target);
 		
 		createChildrenObjects(target);
 		target.sendPacket(new SceneEndBaselines(getObjectId()));
@@ -167,14 +165,19 @@ public class PlayerObject extends IntangibleObject {
 	
 	public void createBaseline8(Player target, BaselineBuilder bb) {
 		super.createBaseline8(target, bb);
-		bb.addInt(0); // XP List Size
-		bb.addInt(0); // Waypoint List Size
+		bb.addInt(0); // XP List Size (Map<String, Integer>, k = exp type, v = points
+			bb.addInt(0);
+		bb.addInt(0); // Waypoint List Size (Map<Long, WaypointObject>, k = waypointObjId, v = waypointobj
+			bb.addInt(0);
 		bb.addInt(100); // Current Force Power
 		bb.addInt(100); // Max Force Power
-		bb.addInt(0); // Current FS Quest List
-		bb.addInt(0); // Completed FS Quest List
+		bb.addInt(0); // Current FS Quest List (List)
+			bb.addInt(0);
+		bb.addInt(0); // Completed FS Quest List (List)
+			bb.addInt(0);
 		bb.addInt(0); // Active Quest
-		bb.addInt(0); // Quest Journal
+		bb.addInt(0); // Quest Journal (Map<Integer, Quest>, k = questCRC, v = quest encodable data
+			bb.addInt(0);
 		bb.addAscii(""); // Profession Wheel Position
 		
 		bb.incremeantOperandCount(9);
@@ -185,34 +188,42 @@ public class PlayerObject extends IntangibleObject {
 		bb.addInt(0); // Experimentation Flag
 		bb.addInt(0); // Crafting Stage
 		bb.addLong(0); // Nearest Crafting Station
-		bb.addInt(0); // Draft Schematic List
-		bb.addInt(0); // List of some kind?
+		bb.addInt(0); // Draft Schematic List (List<DraftSchematic>)
+			bb.addInt(0);
+		bb.addInt(0); // Might or might not be a list, two ints that are part of the same delta
+			bb.addInt(0);
 		bb.addInt(0); // Experimentation Points
 		bb.addInt(0); // Accomplishment Counter
-		bb.addInt(0); // Friends List
-		bb.addInt(0); // Ignore List
+		bb.addInt(0); // Friends List (List<String>)
+			bb.addInt(0);
+		bb.addInt(0); // Ignore List (List<String)
+			bb.addInt(0);
 		bb.addInt(0); // Language ID
 		bb.addInt(0); // Current Stomach
-		bb.addInt(0); // Max Stomach
+		bb.addInt(100); // Max Stomach
 		bb.addInt(0); // Current Drink
-		bb.addInt(0); // Max Drink
+		bb.addInt(100); // Max Drink
 		bb.addInt(0); // Current Consumable
-		bb.addInt(0); // Max Consumable
-		bb.addInt(0); // Waypoint List
-		bb.addInt(0); // Defenders List
+		bb.addInt(100); // Max Consumable
+		bb.addInt(0); // Waypoint List Size (Map<Long, WaypointObject>, k = waypointObjId, v = waypointobj)
+			bb.addInt(0);
+		bb.addInt(0); // Defenders List (Set<Long>)
+			bb.addInt(0);
 		bb.addInt(0); // Kill Meter Points
 		bb.addInt(0); // Unk
 		bb.addLong(0); // Pet
-		bb.addInt(0); // Pet Abilities
-		bb.addInt(0); // Active Pet Abilities
+		bb.addInt(0); // Pet Abilities (List<String>)
+			bb.addInt(0);
+		bb.addInt(0); // Active Pet Abilities (List<String>)
+			bb.addInt(0);
 		bb.addByte(0); // Unk  sometimes 0x01 or 0x02
 		bb.addInt(0); // Unk  sometimes 4
 		bb.addLong(0); // Unk  Bitmask starts with 0x20 ends with 0x40
-		bb.addLong(0); // Unk
-		bb.addByte(0); // Unk
+		bb.addLong(0); // Unk Changes from 6 bytes to 9
+		bb.addByte(0); // Unk Changes from 6 bytes to 9
 		bb.addLong(0); // Unk  sometimes 856
 		bb.addLong(0); // Unk  sometimes 8559
-		bb.addInt(0); // Residence Time
+		bb.addInt(0); // Residence Time?  Seen as Saturday 28th May 2011
 		
 		bb.incremeantOperandCount(31);
 	}
