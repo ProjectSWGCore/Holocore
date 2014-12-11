@@ -13,11 +13,14 @@ import main.ProjectSWG;
 import network.packets.swg.zone.HeartBeatMessage;
 import network.packets.swg.zone.ParametersMessage;
 import network.packets.swg.zone.UpdatePvpStatusMessage;
+import network.packets.swg.zone.UpdateTransformsMessage;
 import network.packets.swg.zone.chat.ChatOnConnectAvatar;
 import network.packets.swg.zone.chat.VoiceChatStatus;
 import network.packets.swg.zone.insertion.ChatServerStatus;
 import network.packets.swg.zone.insertion.CmdStartScene;
 import network.packets.swg.zone.insertion.SelectCharacter;
+import network.packets.swg.zone.object_controller.DataTransform;
+import network.packets.swg.zone.object_controller.ObjectController;
 import resources.Location;
 import resources.Race;
 import resources.Terrain;
@@ -72,6 +75,9 @@ public class ObjectManager extends Manager {
 						System.err.println("ObjectManager: Unable to load QuadTree for object " + obj.getObjectId() + " and terrain: " + l.getTerrain());
 					}
 				}
+				if (obj.getObjectId() >= maxObjectId) {
+					maxObjectId = obj.getObjectId() + 1;
+				}
 			}
 		});
 		return super.initialize();
@@ -85,35 +91,32 @@ public class ObjectManager extends Manager {
 	
 	@Override
 	public void onIntentReceived(Intent i) {
-		if (i instanceof SWGObjectMovedIntent) {
-			Location oTerrain = ((SWGObjectMovedIntent) i).getOldLocation();
-			Location nTerrain = ((SWGObjectMovedIntent) i).getNewLocation();
-			SWGObject obj = ((SWGObjectMovedIntent) i).getObject();
-			if (oTerrain.getTerrain() == null || nTerrain.getTerrain() == null)
-				return;
-			double x = oTerrain.getX();
-			double y = oTerrain.getZ();
-			quadTree.get(oTerrain.getTerrain().getFile()).remove(x, y, obj);
-			x = nTerrain.getX();
-			y = nTerrain.getZ();
-			QuadTree<SWGObject> tree = quadTree.get(nTerrain.getTerrain().getFile());
-			tree.put(x, y, obj);
-			List <Player> updatedAware = new ArrayList<Player>();
-			for (SWGObject inRange : tree.getWithinRange(x, y, AWARE_RANGE)) {
-				if (inRange.getOwner() != null)
-					updatedAware.add(inRange.getOwner());
-			}
-			obj.updateAwareness(updatedAware);
-		} else if (i instanceof GalacticPacketIntent) {
+		if (i instanceof GalacticPacketIntent) {
 			GalacticPacketIntent gpi = (GalacticPacketIntent) i;
 			if (gpi.getPacket() instanceof SelectCharacter) {
 				zoneInCharacter(gpi.getPlayerManager(), gpi.getNetworkId(), ((SelectCharacter)gpi.getPacket()).getCharacterId());
+			} else if (gpi.getPacket() instanceof ObjectController) {
+				ObjectController controller = (ObjectController) gpi.getPacket();
+				if (controller.getControllerData() instanceof DataTransform) {
+					DataTransform trans = (DataTransform) controller.getControllerData();
+					SWGObject obj = getObject(trans.getObjectId());
+					Location oldLocation = obj.getLocation();
+					Location newLocation = trans.getLocation();
+					newLocation.setTerrain(oldLocation.getTerrain());
+					moveObject(obj, oldLocation, newLocation);
+				}
 			}
 		}
 	}
 	
+	public SWGObject getObject(long objectId) {
+		synchronized (objects) {
+			return objects.get(objectId);
+		}
+	}
+	
 	public SWGObject createObject(String template) {
-		return createObject(template, new Location());
+		return createObject(template, null);
 	}
 	
 	public SWGObject createObject(String template, Location l) {
@@ -122,11 +125,36 @@ public class ObjectManager extends Manager {
 			SWGObject obj = createObjectFromTemplate(objectId, template);
 			obj.setTemplate(template);
 			obj.setLocation(l);
+			moveObject(obj, null, l);
 			objects.put(objectId, obj);
 			return obj;
 		}
 	}
 	
+	private void moveObject(SWGObject obj, Location oldLocation, Location newLocation) {
+		System.out.println("Moving object: " + obj);
+		System.out.println("    Old: " + oldLocation);
+		System.out.println("    New: " + newLocation);
+		double x = 0, y = 0;
+		List <Player> updatedAware = new ArrayList<Player>();
+		if (oldLocation != null && oldLocation.getTerrain() != null) { // Remove from QuadTree
+			x = oldLocation.getX();
+			y = oldLocation.getZ();
+			quadTree.get(oldLocation.getTerrain().getFile()).remove(x, y, obj);
+		}
+		if (newLocation != null && newLocation.getTerrain() != null) { // Add to QuadTree, update awareness
+			x = newLocation.getX();
+			y = newLocation.getZ();
+			QuadTree<SWGObject> tree = quadTree.get(newLocation.getTerrain().getFile());
+			tree.put(x, y, obj);
+			for (SWGObject inRange : tree.getWithinRange(x, y, AWARE_RANGE)) {
+				if (inRange.getOwner() != null)
+					updatedAware.add(inRange.getOwner());
+			}
+		}
+		obj.updateAwareness(updatedAware);
+	}
+
 	private void zoneInCharacter(PlayerManager playerManager, long netId, long characterId) {
 		Player player = playerManager.getPlayerFromNetworkId(netId);
 		if (player != null) {
