@@ -143,7 +143,7 @@ public class ZoneService extends Service {
 		creatureObj.setVolume(0x000F4240);
 		PlayerObject playerObj     = (PlayerObject)   objManager.createObject("object/player/shared_player.iff");
 		TangibleObject hairObj     = (TangibleObject) objManager.createObject(create.getHair());
-		WeaponObject defaultWeap   = (WeaponObject) objManager.createObject("object/weapon/creature/shared_creature_default_weapon.iff");
+		WeaponObject defaultWeap   = (WeaponObject) objManager.createObject("object/weapon/melee/unarmed/shared_unarmed_default_player.iff");
 		creatureObj.setWeapon(defaultWeap);
 		setCreatureObjectValues(creatureObj, create);
 		playerObj.setProfession(create.getProfession());

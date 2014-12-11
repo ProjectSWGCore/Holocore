@@ -40,18 +40,19 @@ public class CreatureObject extends TangibleObject {
 	private long	performanceListenTarget	= 0;
 	private int		guildId					= 0;
 	private byte	rank					= 0;
-	private int		level					= 1;
+	private int		level					= 90;
 	private int		levelHealthGranted		= 0;
 	private int		totalLevelXp			= 0;
 	private CreatureDifficulty	difficulty	= CreatureDifficulty.NORMAL;
 	private boolean	beast					= false;
 	private long	weaponId				= 0;
-	
+	private long	inventoryId				= 0;
 	private WeaponObject weapon; // TODO: Remove once equipment list is up and running
 	
 	public CreatureObject(long objectId) {
 		super(objectId);
-		setStfFile("species");
+		setStfFile("species"); // TODO: Remove when automatic stf is in
+		setStfKey(race.getSpecies()); // TODO: remove when automatic stf is in
 	}
 	
 	public Posture getPosture() {
@@ -283,6 +284,10 @@ public class CreatureObject extends TangibleObject {
 		weaponId = weapon.getObjectId();
 	}
 	
+	public void setInventoryId(long id) {
+		this.inventoryId = id;
+	}
+	
 	public void createObject(Player target) {
 		sendSceneCreateObject(target);
 		
@@ -389,7 +394,7 @@ public class CreatureObject extends TangibleObject {
 		bb.addShort(level);
 		bb.addInt(0); // Granted Health
 		bb.addAscii(""); // Current Animation
-		bb.addAscii("neutral"); // Animation Mood
+		bb.addAscii("conversation"); // Animation Mood
 		bb.addLong(weaponId); // Weapon ID
 		bb.addLong(0); // Group ID
 		bb.addLong(0); // Group Inviter ID
@@ -403,27 +408,33 @@ public class CreatureObject extends TangibleObject {
 		bb.addInt(0); // Performance ID
 		bb.addInt(6); // Attributes List Size (List, Integer)
 			bb.addInt(5);
-			bb.addInt(100);//bb.addInt(0xEA030000);
+			bb.addInt(2363); // Health
 			bb.addInt(0);
-			bb.addInt(100);//bb.addInt(0x34010000);
+			bb.addInt(3050); // Action
 			bb.addInt(0);
-			bb.addInt(100);//bb.addInt(0x2C010000);
+			bb.addInt(1000); // ?? it's 300 on new characters
 			bb.addInt(0);
 		bb.addInt(6); // Max Attributes List Size (List, Integer)
 			bb.addInt(5);
-			bb.addInt(100);//bb.addInt(0xEA030000);
+			bb.addInt(2363); // Health
 			bb.addInt(0);
-			bb.addInt(100);//bb.addInt(0x34010000);
+			bb.addInt(3050); // Action
 			bb.addInt(0);
-			bb.addInt(100);//bb.addInt(0x2C010000);
+			bb.addInt(1000); // ?? it's 300 on new characters
 			bb.addInt(0);
-		bb.addInt(1); // Equipment List (List, Equipment structure)
-			bb.addInt(1);
+		bb.addInt(2); // Equipment List (List, Equipment structure)
+			bb.addInt(2);
+			// TODO: Remove this when equipment list is up and running
+			bb.addShort(0);
+			bb.addInt(4);
+			bb.addLong(299194);
+			bb.addInt(CRC.getCrc("object/tangible/inventory/shared_creature_inventory.iff"));
+			bb.addBoolean(false);
+			
 			// TODO: Remove this when equipment list is up and running
 			bb.addShort(0); // customization string
 			bb.addInt(4); // arrangementId
 			bb.addLong(weaponId);
-			System.out.println("Template: " + weapon.getTemplate() + " int: " + CRC.getCrc(weapon.getTemplate()));
 			bb.addInt(CRC.getCrc(weapon.getTemplate()));
 			bb.addBoolean(true); // isWeaponobject
 			bb.addArray(weapon.encode());

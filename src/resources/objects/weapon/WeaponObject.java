@@ -17,6 +17,10 @@ public class WeaponObject extends TangibleObject implements Encodable{
 	
 	public WeaponObject(long objectId) {
 		super(objectId);
+		setComplexity(0);
+		setStfFile("weapon_name"); // TODO: Remove when automatic stf is in
+		setStfKey("default_weapon"); // TODO: Remove when automatic stf is in
+		setDetailStfFile("weapon_name", "default_weapon");
 	}
 
 	
@@ -111,7 +115,7 @@ public class WeaponObject extends TangibleObject implements Encodable{
 		System.arraycopy(data6, 0, ret, data3.length, data6.length);
 		
 		
-		System.out.println("WEAP: " + ByteUtilities.getHexString(ret));
+		//System.out.println("WEAP: " + ByteUtilities.getHexString(ret));
 		return ret;
 	}
 }

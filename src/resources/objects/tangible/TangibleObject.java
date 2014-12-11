@@ -181,7 +181,7 @@ public class TangibleObject extends SWGObject {
 		
 		bb.addInt(0);
 		
-		bb.incremeantOperandCount(5);
+		bb.incremeantOperandCount(6);
 	}
 	
 	public void createBaseline8(Player target, BaselineBuilder bb) {

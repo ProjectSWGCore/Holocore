@@ -179,6 +179,7 @@ public class ObjectManager extends Manager {
 	}
 	
 	private SWGObject createObjectFromTemplate(long objectId, String template) {
+		// TODO: Set the stfFile name and set the stfKey automatically based on the template.
 		if (!template.startsWith("object/"))
 			return null;
 		if (!template.endsWith(".iff"))
