@@ -2,15 +2,12 @@ package resources.objects.creature;
 
 import network.packets.swg.zone.SceneEndBaselines;
 import network.packets.swg.zone.UpdatePostureMessage;
-import network.packets.swg.zone.baselines.Baseline;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import network.packets.swg.zone.baselines.CREO6;
 import resources.Posture;
 import resources.Race;
-import resources.common.CRC;
 import resources.network.BaselineBuilder;
 import resources.objects.tangible.TangibleObject;
-import resources.objects.weapon.WeaponObject;
 import resources.player.Player;
 
 public class CreatureObject extends TangibleObject {
@@ -45,9 +42,6 @@ public class CreatureObject extends TangibleObject {
 	private int		totalLevelXp			= 0;
 	private CreatureDifficulty	difficulty	= CreatureDifficulty.NORMAL;
 	private boolean	beast					= false;
-	private long	weaponId				= 0;
-	private long	inventoryId				= 0;
-	private WeaponObject weapon; // TODO: Remove once equipment list is up and running
 	
 	public CreatureObject(long objectId) {
 		super(objectId);
@@ -279,15 +273,6 @@ public class CreatureObject extends TangibleObject {
 		this.beast = beast;
 	}
 	
-	public void setWeapon(WeaponObject weapon) { // TODO: Remove method & variable when equipment list is up and running
-		this.weapon = weapon;
-		weaponId = weapon.getObjectId();
-	}
-	
-	public void setInventoryId(long id) {
-		this.inventoryId = id;
-	}
-	
 	public void createObject(Player target) {
 		sendSceneCreateObject(target);
 		
@@ -310,8 +295,7 @@ public class CreatureObject extends TangibleObject {
 		bb = new BaselineBuilder(this, BaselineType.CREO, 6);
 		createBaseline6(target, bb);
 		bb.sendTo(target);
-//		target.sendPacket(new Baseline(getObjectId(), c6));
-		
+
 		bb = new BaselineBuilder(this, BaselineType.CREO, 8);
 		createBaseline8(target, bb);
 		bb.sendTo(target);
@@ -394,8 +378,8 @@ public class CreatureObject extends TangibleObject {
 		bb.addShort(level);
 		bb.addInt(0); // Granted Health
 		bb.addAscii(""); // Current Animation
-		bb.addAscii("conversation"); // Animation Mood
-		bb.addLong(weaponId); // Weapon ID
+		bb.addAscii("neutral"); // Animation Mood
+		bb.addLong(0); // Weapon ID
 		bb.addLong(0); // Group ID
 		bb.addLong(0); // Group Inviter ID
 			bb.addAscii(""); // Group Inviter Name
@@ -422,22 +406,8 @@ public class CreatureObject extends TangibleObject {
 			bb.addInt(0);
 			bb.addInt(1000); // ?? it's 300 on new characters
 			bb.addInt(0);
-		bb.addInt(2); // Equipment List (List, Equipment structure)
-			bb.addInt(2);
-			// TODO: Remove this when equipment list is up and running
-			bb.addShort(0);
-			bb.addInt(4);
-			bb.addLong(299194);
-			bb.addInt(CRC.getCrc("object/tangible/inventory/shared_creature_inventory.iff"));
-			bb.addBoolean(false);
-			
-			// TODO: Remove this when equipment list is up and running
-			bb.addShort(0); // customization string
-			bb.addInt(4); // arrangementId
-			bb.addLong(weaponId);
-			bb.addInt(CRC.getCrc(weapon.getTemplate()));
-			bb.addBoolean(true); // isWeaponobject
-			bb.addArray(weapon.encode());
+		bb.addInt(0); // Equipment List (List, Equipment structure)
+			bb.addInt(0);
 		bb.addAscii(""); // Appearance (costume)
 		bb.addBoolean(true); // Visible
 		bb.addInt(0); // Buff list (Map, k = Integer v = Buff structure)

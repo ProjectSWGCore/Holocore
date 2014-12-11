@@ -5,7 +5,6 @@ import resources.network.BaselineBuilder;
 import resources.network.BaselineBuilder.Encodable;
 import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
-import utilities.ByteUtilities;
 
 public class WeaponObject extends TangibleObject implements Encodable{
 
@@ -105,7 +104,7 @@ public class WeaponObject extends TangibleObject implements Encodable{
 		BaselineBuilder bb = new BaselineBuilder(this, BaselineType.WEAO, 3);
 		createBaseline3(null, bb);
 		byte[] data3 = bb.buildAsBaselinePacket();
-		
+
 		bb = new BaselineBuilder(this, BaselineType.WEAO, 6);
 		createBaseline6(null, bb);
 		byte[] data6 = bb.buildAsBaselinePacket();
@@ -114,8 +113,6 @@ public class WeaponObject extends TangibleObject implements Encodable{
 		System.arraycopy(data3, 0, ret, 0, data3.length);
 		System.arraycopy(data6, 0, ret, data3.length, data6.length);
 		
-		
-		//System.out.println("WEAP: " + ByteUtilities.getHexString(ret));
 		return ret;
 	}
 }
