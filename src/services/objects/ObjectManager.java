@@ -5,6 +5,7 @@ import intents.swgobject_events.SWGObjectEventIntent;
 import intents.swgobject_events.SWGObjectMovedIntent;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -106,7 +107,7 @@ public class ObjectManager extends Manager {
 				ObjectController controller = (ObjectController) gpi.getPacket();
 				if (controller.getControllerData() instanceof DataTransform) {
 					DataTransform trans = (DataTransform) controller.getControllerData();
-					SWGObject obj = getObject(trans.getObjectId());
+					SWGObject obj = getObject(controller.getObjectId());
 					Location oldLocation = obj.getLocation();
 					Location newLocation = trans.getLocation();
 					newLocation.setTerrain(oldLocation.getTerrain());
@@ -151,15 +152,17 @@ public class ObjectManager extends Manager {
 			quadTree.get(oldLocation.getTerrain().getFile()).remove(x, y, obj);
 		}
 		if (newLocation != null && newLocation.getTerrain() != null) { // Add to QuadTree, update awareness
+			obj.setLocation(newLocation);
 			x = newLocation.getX();
 			y = newLocation.getZ();
 			QuadTree<SWGObject> tree = quadTree.get(newLocation.getTerrain().getFile());
 			tree.put(x, y, obj);
 			for (SWGObject inRange : tree.getWithinRange(x, y, AWARE_RANGE)) {
-				if (inRange.getOwner() != null)
+				if (inRange.getOwner() != null && inRange.getObjectId() != obj.getObjectId() && inRange.getOwner() != obj.getOwner())
 					updatedAware.add(inRange.getOwner());
 			}
 		}
+		System.out.println("Now Aware Of: " + Arrays.toString(updatedAware.toArray(new Player[updatedAware.size()])));
 		obj.updateAwareness(updatedAware);
 	}
 	
