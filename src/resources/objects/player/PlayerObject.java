@@ -7,16 +7,17 @@ import resources.network.BaselineBuilder;
 import resources.objects.creature.CreatureObject;
 import resources.objects.intangible.IntangibleObject;
 import resources.player.Player;
+import utilities.MathUtils;
 
 public class PlayerObject extends IntangibleObject {
 	
 	private static final long serialVersionUID = 1L;
 	
 	private String	profession		= "";
-	
 	private String	biography		= "";
 	private boolean	showBackpack	= true;
 	private boolean	showHelmet		= true;
+	private int 	bornDate		= 0;
 	
 	public PlayerObject(long objectId) {
 		super(objectId);
@@ -53,6 +54,14 @@ public class PlayerObject extends IntangibleObject {
 	
 	public void setShowHelmet(boolean showHelmet) {
 		this.showHelmet = showHelmet;
+	}
+	
+	public void setBornDate(int year, int month, int day) {
+		this.bornDate = MathUtils.numberDaysSince(year, month, day, 2000, 12, 31);
+	}
+	
+	public int getBornDate() {
+		return bornDate;
 	}
 	
 	private int getProfessionIcon() {
@@ -120,7 +129,7 @@ public class PlayerObject extends IntangibleObject {
 		for (int i = 0; i < 4; i++) // 4 flags
 			bb.addInt(0);
 		bb.addAscii(""); // Title
-		bb.addInt(0); // Born Date
+		bb.addInt(bornDate); // Born Date -- 4001 = 12/15/2011 || Number of days after 12/31/2000
 		bb.addInt(0); // Total Play Time
 		bb.addInt(getProfessionIcon()); // Profession Icon
 		bb.addAscii(profession);

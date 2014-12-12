@@ -5,6 +5,7 @@ import intents.PlayerEventIntent;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.Map;
 
 import main.ProjectSWG;
@@ -39,7 +40,6 @@ import resources.encodables.lang.AString;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
 import resources.objects.tangible.TangibleObject;
-import resources.objects.weapon.WeaponObject;
 import resources.player.Player;
 import resources.player.PlayerEvent;
 import resources.services.Config;
@@ -146,7 +146,7 @@ public class ZoneService extends Service {
 		TangibleObject hairObj     = (TangibleObject) objManager.createObject(create.getHair());
 		//WeaponObject defaultWeap   = (WeaponObject) objManager.createObject("object/weapon/melee/unarmed/shared_unarmed_default_player.iff");
 		setCreatureObjectValues(creatureObj, create);
-		playerObj.setProfession(create.getProfession());
+		setPlayerObjectValues(playerObj, create);
 		hairObj.setAppearanceData(create.getHairCustomization());
 		creatureObj.addChild(playerObj);
 		creatureObj.addChild(hairObj);
@@ -164,6 +164,12 @@ public class ZoneService extends Service {
 		creatureObj.setName(create.getName());
 		creatureObj.setPvpType(20);
 		creatureObj.getSkills().add(AString.value("species_" + creatureObj.getRace().getSpecies()));
+	}
+	
+	private void setPlayerObjectValues(PlayerObject playerObj, ClientCreateCharacter create) {
+		playerObj.setProfession(create.getProfession());
+		Calendar date = Calendar.getInstance();
+		playerObj.setBornDate(date.get(Calendar.YEAR), date.get(Calendar.MONTH) + 1, date.get(Calendar.DAY_OF_MONTH));
 	}
 	
 	private void handleGalaxyLoopTimesRequest(Player player, GalaxyLoopTimesRequest req) {
