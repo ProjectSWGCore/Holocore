@@ -106,6 +106,12 @@ public class LoginService extends Service {
 				random.nextBytes(sessionToken);
 				player.setSessionToken(sessionToken);
 				player.setPlayerState(PlayerState.LOGGING_IN);
+				switch(user.getString(5)) {
+					case "player": player.setAccessLevel(AccessLevel.PLAYER); break;
+					case "admin": player.setAccessLevel(AccessLevel.ADMIN); break;
+					case "dev": player.setAccessLevel(AccessLevel.DEV); break;
+					case "qa": player.setAccessLevel(AccessLevel.QA); break;
+				}
 				sendLoginSuccessPacket(player);
 				System.out.println("LoginService: " + player.getUsername() + " has logged in.");
 				new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_SUCCESS).broadcast();

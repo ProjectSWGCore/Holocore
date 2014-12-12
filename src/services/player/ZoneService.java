@@ -39,6 +39,7 @@ import resources.control.Service;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
 import resources.objects.tangible.TangibleObject;
+import resources.player.AccessLevel;
 import resources.player.Player;
 import resources.player.PlayerEvent;
 import resources.services.Config;
@@ -145,6 +146,7 @@ public class ZoneService extends Service {
 		//WeaponObject defaultWeap   = (WeaponObject) objManager.createObject("object/weapon/melee/unarmed/shared_unarmed_default_player.iff");
 		setCreatureObjectValues(creatureObj, create);
 		setPlayerObjectValues(playerObj, create);
+		playerObj.setTag(player.getAccessLevel());
 		creatureObj.addChild(playerObj);
 		if (!create.getHair().isEmpty()) {
 			TangibleObject hairObj     = (TangibleObject) objManager.createObject(create.getHair());
