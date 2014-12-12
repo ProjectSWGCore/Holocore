@@ -100,7 +100,7 @@ public class ZoneService extends Service {
 	
 	private void handleRandomNameRequest(Player player, RandomNameRequest request) {
 		RandomNameResponse response = new RandomNameResponse(request.getRace(), "");
-		String race = Race.getRace(request.getRace()).getIFF().split("_")[0];
+		String race = Race.getRaceByFile(request.getRace()).getSpecies();
 		response.setRandomName(nameGenerator.generateRandomName(race));
 		sendPacket(player.getNetworkId(), response);
 	}
@@ -138,17 +138,19 @@ public class ZoneService extends Service {
 	
 	private long createCharacter(ObjectManager objManager, Player player, ClientCreateCharacter create) {
 		Location start = getStartLocation(create.getStart());
-		Race race = Race.getRace(create.getRace());
+		Race race = Race.getRaceByFile(create.getRace());
 		CreatureObject creatureObj = (CreatureObject) objManager.createObject(race.getFilename());
 		creatureObj.setVolume(0x000F4240);
 		PlayerObject playerObj     = (PlayerObject)   objManager.createObject("object/player/shared_player.iff");
-		TangibleObject hairObj     = (TangibleObject) objManager.createObject(create.getHair());
 		//WeaponObject defaultWeap   = (WeaponObject) objManager.createObject("object/weapon/melee/unarmed/shared_unarmed_default_player.iff");
 		setCreatureObjectValues(creatureObj, create);
 		setPlayerObjectValues(playerObj, create);
-		hairObj.setAppearanceData(create.getHairCustomization());
 		creatureObj.addChild(playerObj);
-		creatureObj.addChild(hairObj);
+		if (!create.getHair().isEmpty()) {
+			TangibleObject hairObj     = (TangibleObject) objManager.createObject(create.getHair());
+			hairObj.setAppearanceData(create.getHairCustomization());
+			creatureObj.addChild(hairObj);
+		}
 		creatureObj.setLocation(start);
 		playerObj.setLocation(start);
 		player.setCreatureObject(creatureObj);
@@ -157,7 +159,7 @@ public class ZoneService extends Service {
 	}
 	
 	private void setCreatureObjectValues(CreatureObject creatureObj, ClientCreateCharacter create) {
-		creatureObj.setRace(Race.getRace(create.getRace()));
+		creatureObj.setRace(Race.getRaceByFile(create.getRace()));
 		creatureObj.setAppearanceData(create.getCharCustomization());
 		creatureObj.setHeight(create.getHeight());
 		creatureObj.setName(create.getName());
