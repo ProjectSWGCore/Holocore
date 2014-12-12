@@ -2,14 +2,15 @@ package resources.objects.creature;
 
 import network.packets.swg.zone.SceneEndBaselines;
 import network.packets.swg.zone.UpdatePostureMessage;
-import network.packets.swg.zone.baselines.Baseline;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
-import network.packets.swg.zone.baselines.CREO6;
 import resources.Posture;
 import resources.Race;
+import resources.collections.SWGList;
+import resources.encodables.player.Equipment;
 import resources.network.BaselineBuilder;
 import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
+import utilities.Encoder.StringType;
 
 public class CreatureObject extends TangibleObject {
 	
@@ -43,12 +44,38 @@ public class CreatureObject extends TangibleObject {
 	private int		totalLevelXp			= 0;
 	private CreatureDifficulty	difficulty	= CreatureDifficulty.NORMAL;
 	private boolean	beast					= false;
+	private int		cashBalance				= 0;
+	private int		bankBalance				= 0;
+	
+	private SWGList<String>	skills				= new SWGList<String>(BaselineType.CREO, 1, 4, false, StringType.ASCII);
+	private SWGList<Integer>	hamEncumbList	= new SWGList<Integer>(BaselineType.CREO, 4, 2);
+	private SWGList<Equipment>	equipmentList 	= new SWGList<Equipment>(BaselineType.CREO, 6, 15);
+	private SWGList<Equipment>	appearanceList 	= new SWGList<Equipment>(BaselineType.CREO, 6, 26);
 	
 	public CreatureObject(long objectId) {
 		super(objectId);
-		setStfFile("species");
 	}
 	
+	public SWGList<Equipment> getEquipmentList() {
+		return equipmentList;
+	}
+	
+	public SWGList<Equipment> getAppearanceList() {
+		return appearanceList;
+	}
+	
+	public SWGList<String> getSkills() {
+		return skills;
+	}
+	
+	public int getCashBalance() {
+		return cashBalance;
+	}
+
+	public int getBankBalance() {
+		return bankBalance;
+	}
+
 	public Posture getPosture() {
 		return posture;
 	}
@@ -169,6 +196,14 @@ public class CreatureObject extends TangibleObject {
 		this.race = race;
 	}
 	
+	public void setCashBalance(int cashBalance) {
+		this.cashBalance = cashBalance;
+	}
+
+	public void setBankBalance(int bankBalance) {
+		this.bankBalance = bankBalance;
+	}
+	
 	public void setAttributes(int attributes) {
 		this.attributes = attributes;
 	}
@@ -277,26 +312,23 @@ public class CreatureObject extends TangibleObject {
 		sendSceneCreateObject(target);
 		
 		BaselineBuilder bb = null;
-		CREO6 c6 = new CREO6(getObjectId());
-		c6.setId(getObjectId()); c6.setType(BaselineType.CREO); c6.setNum(6);
-		
-//		bb = new BaselineBuilder(this, BaselineType.CREO, 1); // ZONED IN! ( crash when pressing escape )
-//		createBaseline1(target, bb);
-//		bb.sendTo(target);
+
+		bb = new BaselineBuilder(this, BaselineType.CREO, 1);
+		createBaseline1(target, bb);
+		bb.sendTo(target);
 		
 		bb = new BaselineBuilder(this, BaselineType.CREO, 3);
 		createBaseline3(target, bb);
 		bb.sendTo(target);
 		
-//		bb = new BaselineBuilder(this, BaselineType.CREO, 4); // ZONED IN! ( crash when pressing escape )
-//		createBaseline4(target, bb);
-//		bb.sendTo(target);
+		bb = new BaselineBuilder(this, BaselineType.CREO, 4);
+		createBaseline4(target, bb);
+		bb.sendTo(target);
 		
 		bb = new BaselineBuilder(this, BaselineType.CREO, 6);
 		createBaseline6(target, bb);
-//		bb.sendTo(target);
-		target.sendPacket(new Baseline(getObjectId(), c6));
-		
+		bb.sendTo(target);
+
 		bb = new BaselineBuilder(this, BaselineType.CREO, 8);
 		createBaseline8(target, bb);
 		bb.sendTo(target);
@@ -317,8 +349,8 @@ public class CreatureObject extends TangibleObject {
 	
 	public void createBaseline1(Player target, BaselineBuilder bb) {
 		super.createBaseline1(target, bb);
-		bb.addInt(getBankBalance());
-		bb.addInt(getCashBalance());
+		bb.addInt(cashBalance);
+		bb.addInt(bankBalance);
 		bb.addInt(6); // Base HAM Mod List Size (List, Integer)
 			bb.addInt(0); // update counter
 			bb.addInt(1000); // Max Health
@@ -327,9 +359,7 @@ public class CreatureObject extends TangibleObject {
 			bb.addInt(0); // ??
 			bb.addInt(300); // Max Mind
 			bb.addInt(0); // ??
-		bb.addInt(1); // Skills List Size (List, Integer)
-			bb.addInt(0); // update counter
-			bb.addAscii(race.getSpecies());
+		bb.addObject(skills);
 		
 		bb.incremeantOperandCount(4);
 	}
@@ -347,12 +377,10 @@ public class CreatureObject extends TangibleObject {
 	}
 	
 	public void createBaseline4(Player target, BaselineBuilder bb) {
-		// TODO: Double check structure with an NGE packet
 		super.createBaseline4(target, bb);
 		bb.addFloat((float) accelScale);
 		bb.addFloat((float) accelPercent);
-		bb.addInt(0); // Encumberance HAM List Size (List, Integer)
-			bb.addInt(0);
+		bb.addObject(hamEncumbList);
 		bb.addInt(0); // Skill Mod List Size (Map, k = String v= SkillMod structure)
 			bb.addInt(0);
 		bb.addFloat((float) movementScale);
@@ -393,22 +421,21 @@ public class CreatureObject extends TangibleObject {
 		bb.addInt(0); // Performance ID
 		bb.addInt(6); // Attributes List Size (List, Integer)
 			bb.addInt(5);
-			bb.addInt(100);//bb.addInt(0xEA030000);
+			bb.addInt(2363); // Health
 			bb.addInt(0);
-			bb.addInt(100);//bb.addInt(0x34010000);
+			bb.addInt(3050); // Action
 			bb.addInt(0);
-			bb.addInt(100);//bb.addInt(0x2C010000);
+			bb.addInt(1000); // ?? it's 300 on new characters
 			bb.addInt(0);
 		bb.addInt(6); // Max Attributes List Size (List, Integer)
 			bb.addInt(5);
-			bb.addInt(100);//bb.addInt(0xEA030000);
+			bb.addInt(2363); // Health
 			bb.addInt(0);
-			bb.addInt(100);//bb.addInt(0x34010000);
+			bb.addInt(3050); // Action
 			bb.addInt(0);
-			bb.addInt(100);//bb.addInt(0x2C010000);
+			bb.addInt(1000); // ?? it's 300 on new characters
 			bb.addInt(0);
-		bb.addInt(0); // Equipment List (List, Equipment structure)
-			bb.addInt(0);
+		bb.addObject(equipmentList);
 		bb.addAscii(""); // Appearance (costume)
 		bb.addBoolean(true); // Visible
 		bb.addInt(0); // Buff list (Map, k = Integer v = Buff structure)
@@ -419,8 +446,7 @@ public class CreatureObject extends TangibleObject {
 		bb.addBoolean(true); // Visible On Radar
 		bb.addBoolean(false); // Is Pet
 		bb.addByte(0); // Unknown
-		bb.addInt(0); // Appearance Equipment List Size (List, Equipment structure)
-			bb.addInt(0);
+		bb.addObject(appearanceList);
 		bb.addLong(0); // unknown
 		
 		bb.incremeantOperandCount(27);

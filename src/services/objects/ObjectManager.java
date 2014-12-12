@@ -24,6 +24,8 @@ import network.packets.swg.zone.object_controller.ObjectController;
 import resources.Location;
 import resources.Race;
 import resources.Terrain;
+import resources.client_info.ClientFactory;
+import resources.client_info.visitors.ObjectData;
 import resources.control.Intent;
 import resources.control.Manager;
 import resources.objects.SWGObject;
@@ -42,6 +44,8 @@ import services.player.PlayerManager;
 public class ObjectManager extends Manager {
 	
 	private static final double AWARE_RANGE = 200;
+	
+	private ClientFactory clientFac;
 	
 	private ObjectDatabase<SWGObject> objects;
 	private Map <String, QuadTree <SWGObject>> quadTree;
@@ -80,6 +84,9 @@ public class ObjectManager extends Manager {
 				}
 			}
 		});
+		
+		clientFac = new ClientFactory();
+		
 		return super.initialize();
 	}
 	
@@ -123,6 +130,7 @@ public class ObjectManager extends Manager {
 		synchronized (objects) {
 			long objectId = getNextObjectId();
 			SWGObject obj = createObjectFromTemplate(objectId, template);
+			addObjectAttributes(obj, template);
 			obj.setTemplate(template);
 			obj.setLocation(l);
 			moveObject(obj, null, l);
@@ -154,7 +162,15 @@ public class ObjectManager extends Manager {
 		}
 		obj.updateAwareness(updatedAware);
 	}
-
+	
+	private void addObjectAttributes(SWGObject obj, String template) {
+		
+		ObjectData attributes = (ObjectData) clientFac.getInfoFromFile(ClientFactory.formatToSharedFile(template));
+		
+		obj.setStf((String) attributes.getAttribute("objectName"));
+		obj.setDetailStf((String) attributes.getAttribute("detailedDescription"));
+	}
+	
 	private void zoneInCharacter(PlayerManager playerManager, long netId, long characterId) {
 		Player player = playerManager.getPlayerFromNetworkId(netId);
 		if (player != null) {

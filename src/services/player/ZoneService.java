@@ -5,6 +5,7 @@ import intents.PlayerEventIntent;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.Map;
 
 import main.ProjectSWG;
@@ -142,8 +143,9 @@ public class ZoneService extends Service {
 		creatureObj.setVolume(0x000F4240);
 		PlayerObject playerObj     = (PlayerObject)   objManager.createObject("object/player/shared_player.iff");
 		TangibleObject hairObj     = (TangibleObject) objManager.createObject(create.getHair());
+		//WeaponObject defaultWeap   = (WeaponObject) objManager.createObject("object/weapon/melee/unarmed/shared_unarmed_default_player.iff");
 		setCreatureObjectValues(creatureObj, create);
-		playerObj.setProfession(create.getProfession());
+		setPlayerObjectValues(playerObj, create);
 		hairObj.setAppearanceData(create.getHairCustomization());
 		creatureObj.addChild(playerObj);
 		creatureObj.addChild(hairObj);
@@ -160,6 +162,13 @@ public class ZoneService extends Service {
 		creatureObj.setHeight(create.getHeight());
 		creatureObj.setName(create.getName());
 		creatureObj.setPvpType(20);
+		creatureObj.getSkills().add("species_" + creatureObj.getRace().getSpecies());
+	}
+	
+	private void setPlayerObjectValues(PlayerObject playerObj, ClientCreateCharacter create) {
+		playerObj.setProfession(create.getProfession());
+		Calendar date = Calendar.getInstance();
+		playerObj.setBornDate(date.get(Calendar.YEAR), date.get(Calendar.MONTH) + 1, date.get(Calendar.DAY_OF_MONTH));
 	}
 	
 	private void handleGalaxyLoopTimesRequest(Player player, GalaxyLoopTimesRequest req) {

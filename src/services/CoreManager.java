@@ -55,15 +55,15 @@ public class CoreManager extends Manager {
 	@Override
 	public void onIntentReceived(Intent i) {
 		if (i instanceof InboundPacketIntent) {
-			InboundPacketIntent in = (InboundPacketIntent) i;
+			/*InboundPacketIntent in = (InboundPacketIntent) i;
 			System.out.println("IN  " + in.getNetworkId() + ":" + in.getServerType() + "\t" + in.getPacket().getClass().getSimpleName());
 			if (in.getPacket() instanceof DataChannelA) {
 				for (SWGPacket p : ((DataChannelA) in.getPacket()).getPackets()) {
 					System.out.println("    " + p.getClass().getSimpleName());
 				}
-			}
+			}*/
 		} else if (i instanceof OutboundPacketIntent) {
-			OutboundPacketIntent out = (OutboundPacketIntent) i;
+			/*OutboundPacketIntent out = (OutboundPacketIntent) i;
 			System.out.println("OUT " + out.getNetworkId() + "     \t" + out.getPacket().getClass().getSimpleName());
 			if (out.getPacket() instanceof DataChannelA) {
 				for (SWGPacket p : ((DataChannelA) out.getPacket()).getPackets()) {
@@ -72,7 +72,7 @@ public class CoreManager extends Manager {
 					else
 						System.out.println("    " + p.getClass().getSimpleName());
 				}
-			}
+			}*/
 		}
 	}
 	
