@@ -17,8 +17,6 @@ public class WeaponObject extends TangibleObject implements Encodable{
 	public WeaponObject(long objectId) {
 		super(objectId);
 		setComplexity(0);
-		setStf("weapon_name", "default_weapon"); // TODO: Remove when automatic stf is in
-		setDetailStf("weapon_name", "default_weapon"); // TODO: Remove when automatic stf is in
 	}
 
 	
