@@ -6,11 +6,11 @@ import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.Posture;
 import resources.Race;
 import resources.collections.SWGList;
-import resources.encodables.lang.AString;
 import resources.encodables.player.Equipment;
 import resources.network.BaselineBuilder;
 import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
+import utilities.Encoder.StringType;
 
 public class CreatureObject extends TangibleObject {
 	
@@ -47,7 +47,7 @@ public class CreatureObject extends TangibleObject {
 	private int		cashBalance				= 0;
 	private int		bankBalance				= 0;
 	
-	private SWGList<AString>	skills			= new SWGList<AString>(BaselineType.CREO, 1, 4);
+	private SWGList<String>	skills				= new SWGList<String>(BaselineType.CREO, 1, 4, false, StringType.ASCII);
 	private SWGList<Integer>	hamEncumbList	= new SWGList<Integer>(BaselineType.CREO, 4, 2);
 	private SWGList<Equipment>	equipmentList 	= new SWGList<Equipment>(BaselineType.CREO, 6, 15);
 	private SWGList<Equipment>	appearanceList 	= new SWGList<Equipment>(BaselineType.CREO, 6, 26);
@@ -64,7 +64,7 @@ public class CreatureObject extends TangibleObject {
 		return appearanceList;
 	}
 	
-	public SWGList<AString> getSkills() {
+	public SWGList<String> getSkills() {
 		return skills;
 	}
 	
@@ -377,7 +377,6 @@ public class CreatureObject extends TangibleObject {
 	}
 	
 	public void createBaseline4(Player target, BaselineBuilder bb) {
-		// TODO: Double check structure with an NGE packet
 		super.createBaseline4(target, bb);
 		bb.addFloat((float) accelScale);
 		bb.addFloat((float) accelPercent);

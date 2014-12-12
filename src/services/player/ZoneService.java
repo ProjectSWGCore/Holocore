@@ -36,7 +36,6 @@ import resources.client_info.ClientFactory;
 import resources.client_info.visitors.ProfTemplateData;
 import resources.config.ConfigFile;
 import resources.control.Service;
-import resources.encodables.lang.AString;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
 import resources.objects.tangible.TangibleObject;
@@ -163,7 +162,7 @@ public class ZoneService extends Service {
 		creatureObj.setHeight(create.getHeight());
 		creatureObj.setName(create.getName());
 		creatureObj.setPvpType(20);
-		creatureObj.getSkills().add(AString.value("species_" + creatureObj.getRace().getSpecies()));
+		creatureObj.getSkills().add("species_" + creatureObj.getRace().getSpecies());
 	}
 	
 	private void setPlayerObjectValues(PlayerObject playerObj, ClientCreateCharacter create) {
