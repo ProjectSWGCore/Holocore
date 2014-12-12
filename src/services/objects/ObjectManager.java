@@ -222,12 +222,6 @@ public class ObjectManager extends Manager {
 	}
 	
 	private TangibleObject createTangibleObject(long objectId, String template) {
-		if (!template.startsWith("tangible/"))
-			return null;
-		template = template.substring(9);
-		switch (getFirstTemplatePart(template)) {
-			
-		}
 		return new TangibleObject(objectId);
 	}
 	
