@@ -138,9 +138,14 @@ public class ObjectManager extends Manager {
 	private void addObjectAttributes(SWGObject obj, String template) {
 		
 		ObjectData attributes = (ObjectData) clientFac.getInfoFromFile(ClientFactory.formatToSharedFile(template));
+		// TODO: Remove debug code when error fixed
+		Object objectName = attributes.getAttribute("objectName");
+		if (objectName != null) obj.setStf((String) objectName);
+		else System.err.println("objectName attribute is null in " + ClientFactory.formatToSharedFile(template));
 		
-		obj.setStf((String) attributes.getAttribute("objectName"));
-		obj.setDetailStf((String) attributes.getAttribute("detailedDescription"));
+		Object detailStf = attributes.getAttribute("detailedDescription");
+		if (detailStf != null) obj.setDetailStf((String) detailStf);
+		else System.err.println("detailedDescription attributes is null in " + ClientFactory.formatToSharedFile(template));
 	}
 	
 	private void zoneInCharacter(PlayerManager playerManager, long netId, long characterId) {
