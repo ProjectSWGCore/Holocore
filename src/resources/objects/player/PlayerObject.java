@@ -113,13 +113,15 @@ public class PlayerObject extends IntangibleObject {
 		createBaseline6(target, bb);
 		bb.sendTo(target);
 		
-		bb = new BaselineBuilder(this, BaselineType.PLAY, 8);
-		createBaseline8(target, bb);
-		bb.sendTo(target);
-		
-		bb = new BaselineBuilder(this, BaselineType.PLAY, 9);
-		createBaseline9(target, bb);
-		bb.sendTo(target);
+		if (getOwner() == target) {
+			bb = new BaselineBuilder(this, BaselineType.PLAY, 8);
+			createBaseline8(target, bb);
+			bb.sendTo(target);
+			
+			bb = new BaselineBuilder(this, BaselineType.PLAY, 9);
+			createBaseline9(target, bb);
+			bb.sendTo(target);
+		}
 		
 		createChildrenObjects(target);
 		target.sendPacket(new SceneEndBaselines(getObjectId()));
