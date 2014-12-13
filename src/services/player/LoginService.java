@@ -42,6 +42,7 @@ public class LoginService extends Service {
 	private PreparedStatement getUser;
 	private PreparedStatement getGalaxies;
 	private PreparedStatement getCharacters;
+	private boolean autoLogin;
 	
 	public LoginService() {
 		random = new Random();
@@ -52,6 +53,7 @@ public class LoginService extends Service {
 		getUser = getLocalDatabase().prepareStatement("SELECT * FROM users WHERE username = ? AND password = ?");
 		getGalaxies = getLocalDatabase().prepareStatement("SELECT * FROM galaxies");
 		getCharacters = getLocalDatabase().prepareStatement("SELECT * FROM characters WHERE userid = ?");
+		autoLogin = (getConfig(ConfigFile.PRIMARY).getInt("AUTO-LOGIN", 0) == 1 ? true : false);
 		return super.initialize();
 	}
 	
@@ -88,7 +90,14 @@ public class LoginService extends Service {
 			return;
 		}
 		try {
+			if (autoLogin) {
+				String[] sessionHash = id.getPassword().split("-");
+				id.setUsername(sessionHash[0]);
+				id.setPassword(sessionHash[1]);
+			}
+
 			ResultSet user = getUser(id.getUsername(), id.getPassword());
+
 			if (user.next()) { // User exists! Right username/password combo!
 				player.setUsername(id.getUsername());
 				player.setUserId(user.getInt("id"));
@@ -97,6 +106,12 @@ public class LoginService extends Service {
 				random.nextBytes(sessionToken);
 				player.setSessionToken(sessionToken);
 				player.setPlayerState(PlayerState.LOGGING_IN);
+				switch(user.getString(5)) {
+					case "player": player.setAccessLevel(AccessLevel.PLAYER); break;
+					case "admin": player.setAccessLevel(AccessLevel.ADMIN); break;
+					case "dev": player.setAccessLevel(AccessLevel.DEV); break;
+					case "qa": player.setAccessLevel(AccessLevel.QA); break;
+				}
 				sendLoginSuccessPacket(player);
 				System.out.println("LoginService: " + player.getUsername() + " has logged in.");
 				new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_SUCCESS).broadcast();

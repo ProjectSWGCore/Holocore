@@ -6,6 +6,7 @@ import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.network.BaselineBuilder;
 import resources.objects.creature.CreatureObject;
 import resources.objects.intangible.IntangibleObject;
+import resources.player.AccessLevel;
 import resources.player.Player;
 import utilities.MathUtils;
 
@@ -18,6 +19,7 @@ public class PlayerObject extends IntangibleObject {
 	private boolean	showBackpack	= true;
 	private boolean	showHelmet		= true;
 	private int 	bornDate		= 0;
+	private int		adminTag		= 0;
 	
 	public PlayerObject(long objectId) {
 		super(objectId);
@@ -62,6 +64,15 @@ public class PlayerObject extends IntangibleObject {
 	
 	public int getBornDate() {
 		return bornDate;
+	}
+	
+	public void setTag(AccessLevel access) {
+		switch(access) {
+		case PLAYER: break;
+		case ADMIN: adminTag = 1; break;
+		case DEV: adminTag = 2; break;
+		case QA: adminTag = 4; break;
+		}
 	}
 	
 	private int getProfessionIcon() {
@@ -149,7 +160,7 @@ public class PlayerObject extends IntangibleObject {
 	
 	public void createBaseline6(Player target, BaselineBuilder bb) {
 		super.createBaseline6(target, bb);
-		bb.addByte(0); // Admin Tag
+		bb.addByte(adminTag); // Admin Tag (0 = none, 1 = CSR, 2 = Developer, 3 = Warden, 4 = QA)
 		bb.addInt(0); // Current Rank
 		bb.addFloat(0); // Rank Progress
 		bb.addInt(0); // Highest Rebel Rank
