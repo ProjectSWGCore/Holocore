@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import main.ProjectSWG;
 import network.packets.Packet;
@@ -39,7 +40,6 @@ import resources.control.Service;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
 import resources.objects.tangible.TangibleObject;
-import resources.player.AccessLevel;
 import resources.player.Player;
 import resources.player.PlayerEvent;
 import resources.services.Config;
@@ -57,7 +57,6 @@ public class ZoneService extends Service {
 	public ZoneService() {
 		nameGenerator = new SWGNameGenerator();
 		clientFac = new ClientFactory();
-		//profTemplates = new HashMap<String, ProfTemplateData>();
 	}
 	
 	@Override
@@ -65,7 +64,7 @@ public class ZoneService extends Service {
 		String createCharacterSql = "INSERT INTO characters (id, name, race, userId, galaxyId) VALUES (?, ?, ?, ?, ?)";
 		createCharacter = getLocalDatabase().prepareStatement(createCharacterSql);
 		nameGenerator.loadAllRules();
-		//loadProfTemplates(); TODO: Uncomment when object creation is implemented
+		//loadProfTemplates();
 		return super.initialize();
 	}
 	
@@ -148,10 +147,12 @@ public class ZoneService extends Service {
 		setPlayerObjectValues(playerObj, create);
 		playerObj.setTag(player.getAccessLevel());
 		if (!create.getHair().isEmpty()) {
-			TangibleObject hairObj     = (TangibleObject) objManager.createObject(create.getHair());
+			TangibleObject hairObj     = (TangibleObject) objManager.createObject(ClientFactory.formatToSharedFile(create.getHair()));
 			hairObj.setAppearanceData(create.getHairCustomization());
 			creatureObj.setSlot("hair", hairObj);
+			creatureObj.addEquipment(hairObj);
 		}
+		//createStarterClothing(objManager, creatureObj, create.getRace(), create.getClothes());
 		creatureObj.setLocation(start);
 		playerObj.setLocation(start);
 		player.setCreatureObject(creatureObj);
@@ -172,6 +173,9 @@ public class ZoneService extends Service {
 		creatureObj.getSkills().add("species_" + creatureObj.getRace().getSpecies());
 		creatureObj.setSlot("inventory", inventory);
 		creatureObj.setSlot("datapad", datapad);
+		
+		creatureObj.addEquipment(inventory);
+		creatureObj.addEquipment(datapad);
 	}
 	
 	private void setPlayerObjectValues(PlayerObject playerObj, ClientCreateCharacter create) {
@@ -184,7 +188,21 @@ public class ZoneService extends Service {
 		sendPacket(player, new GalaxyLoopTimesResponse(ProjectSWG.getCoreTime()/1000));
 	}
 	
+	@SuppressWarnings("unused")
+	private void createStarterClothing(ObjectManager objManager, CreatureObject player, String race, String profession) {
+		TangibleObject inventory = (TangibleObject) player.getSlottedObject("inventory");
+		
+		for (String template : profTemplates.get(profession).getItems(ClientFactory.formatToSharedFile(race))) {
+			TangibleObject clothing = (TangibleObject) objManager.createObject(ClientFactory.formatToSharedFile(template));
+			
+			inventory.addChild(clothing);
+		}
+	}
+	
+	@SuppressWarnings("unused")
 	private void loadProfTemplates() {
+		profTemplates = new ConcurrentHashMap<String, ProfTemplateData>();
+		
 		profTemplates.put("crafting_artisan", (ProfTemplateData) clientFac.getInfoFromFile("creation/profession_defaults_combat_brawler.iff"));
 		profTemplates.put("combat_brawler", (ProfTemplateData) clientFac.getInfoFromFile("creation/profession_defaults_combat_brawler.iff"));
 		profTemplates.put("social_entertainer", (ProfTemplateData) clientFac.getInfoFromFile("creation/profession_defaults_social_entertainer.iff"));
