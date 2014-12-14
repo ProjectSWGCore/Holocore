@@ -5,9 +5,11 @@ import intents.swgobject_events.SWGObjectEventIntent;
 import intents.swgobject_events.SWGObjectMovedIntent;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import main.ProjectSWG;
 import network.packets.swg.zone.HeartBeatMessage;
@@ -23,6 +25,10 @@ import resources.Race;
 import resources.Terrain;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.ObjectData;
+import resources.client_info.visitors.SlotArrangementData;
+import resources.client_info.visitors.SlotDefinitionData;
+import resources.client_info.visitors.SlotDescriptorData;
+import resources.containers.ObjectSlot;
 import resources.control.Intent;
 import resources.control.Manager;
 import resources.objects.SWGObject;
@@ -80,7 +86,9 @@ public class ObjectManager extends Manager {
 		});
 		
 		clientFac = new ClientFactory();
-		
+		// Load up the slot definitions to the datamap in clientFac so we don't have to load it later
+		SlotDefinitionData def = (SlotDefinitionData) clientFac.getInfoFromFile("abstract/slot/slot_definition/slot_definitions.iff"); 
+
 		return super.initialize();
 	}
 	
@@ -136,11 +144,41 @@ public class ObjectManager extends Manager {
 	}
 	
 	private void addObjectAttributes(SWGObject obj, String template) {
+		System.out.println("Adding attributes for template " + template);
 		
 		ObjectData attributes = (ObjectData) clientFac.getInfoFromFile(ClientFactory.formatToSharedFile(template));
 		
-		obj.setStf((String) attributes.getAttribute("objectName"));
-		obj.setDetailStf((String) attributes.getAttribute("detailedDescription"));
+		obj.setStf((String) attributes.getAttribute(ObjectData.OBJ_STF));
+		obj.setDetailStf((String) attributes.getAttribute(ObjectData.DETAIL_STF));
+		
+		addSlotsToObject(obj, attributes);
+	}
+	
+	private void addSlotsToObject(SWGObject obj, ObjectData attributes) {
+
+		if ((String) attributes.getAttribute(ObjectData.SLOT_DESCRIPTOR) != null) {
+			SlotDefinitionData slotDefs = (SlotDefinitionData) clientFac.getInfoFromFile("abstract/slot/slot_definition/slot_definitions.iff");
+			
+			// TODO: These are the slots that the object HAS
+			System.out.println("SlotDescriptor: " + (String) attributes.getAttribute(ObjectData.SLOT_DESCRIPTOR));
+			SlotDescriptorData descriptor = (SlotDescriptorData) clientFac.getInfoFromFile((String) attributes.getAttribute(ObjectData.SLOT_DESCRIPTOR));
+			
+			for (String slotName : descriptor.getSlots()) {
+				System.out.println("Slot: " + slotName);
+				obj.addObjectSlot(new ObjectSlot(slotName));
+			}
+			
+			
+		}
+		
+		if ((String) attributes.getAttribute(ObjectData.ARRANGEMENT_FILE) != null) {
+			// This is what slots the object *USES*
+			System.out.println("Arrangement: " + (String) attributes.getAttribute(ObjectData.ARRANGEMENT_FILE));
+			
+			SlotArrangementData arrangementData = (SlotArrangementData) clientFac.getInfoFromFile((String) attributes.getAttribute(ObjectData.ARRANGEMENT_FILE));
+			
+			obj.setArrangment(arrangementData.getArrangement());
+		}
 	}
 	
 	private void zoneInCharacter(PlayerManager playerManager, long netId, long characterId) {
