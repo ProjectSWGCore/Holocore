@@ -144,29 +144,34 @@ public class ZoneService extends Service {
 		creatureObj.setVolume(0x000F4240);
 		PlayerObject playerObj     = (PlayerObject)   objManager.createObject("object/player/shared_player.iff");
 		//WeaponObject defaultWeap   = (WeaponObject) objManager.createObject("object/weapon/melee/unarmed/shared_unarmed_default_player.iff");
-		setCreatureObjectValues(creatureObj, create);
+		setCreatureObjectValues(objManager, creatureObj, create);
 		setPlayerObjectValues(playerObj, create);
 		playerObj.setTag(player.getAccessLevel());
-		creatureObj.addChild(playerObj);
 		if (!create.getHair().isEmpty()) {
 			TangibleObject hairObj     = (TangibleObject) objManager.createObject(create.getHair());
 			hairObj.setAppearanceData(create.getHairCustomization());
-			creatureObj.addChild(hairObj);
+			creatureObj.setSlot("hair", hairObj);
 		}
 		creatureObj.setLocation(start);
 		playerObj.setLocation(start);
 		player.setCreatureObject(creatureObj);
-		player.setPlayerObject(playerObj);
+		
+		creatureObj.setSlot("ghost", playerObj);
 		return creatureObj.getObjectId();
 	}
 	
-	private void setCreatureObjectValues(CreatureObject creatureObj, ClientCreateCharacter create) {
+	private void setCreatureObjectValues(ObjectManager objManager, CreatureObject creatureObj, ClientCreateCharacter create) {
+		TangibleObject inventory	= (TangibleObject) objManager.createObject("object/tangible/inventory/shared_character_inventory.iff");
+		TangibleObject datapad		= (TangibleObject) objManager.createObject("object/tangible/datapad/shared_character_datapad.iff");
+
 		creatureObj.setRace(Race.getRaceByFile(create.getRace()));
 		creatureObj.setAppearanceData(create.getCharCustomization());
 		creatureObj.setHeight(create.getHeight());
 		creatureObj.setName(create.getName());
 		creatureObj.setPvpType(20);
 		creatureObj.getSkills().add("species_" + creatureObj.getRace().getSpecies());
+		creatureObj.setSlot("inventory", inventory);
+		creatureObj.setSlot("datapad", datapad);
 	}
 	
 	private void setPlayerObjectValues(PlayerObject playerObj, ClientCreateCharacter create) {

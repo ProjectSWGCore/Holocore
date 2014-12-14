@@ -8,6 +8,7 @@ import resources.Race;
 import resources.collections.SWGList;
 import resources.encodables.player.Equipment;
 import resources.network.BaselineBuilder;
+import resources.objects.player.PlayerObject;
 import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
 import utilities.Encoder.StringType;
@@ -182,6 +183,10 @@ public class CreatureObject extends TangibleObject {
 	
 	public CreatureDifficulty getDifficulty() {
 		return difficulty;
+	}
+	
+	public PlayerObject getPlayerObject() {
+		return (PlayerObject) (hasSlot("ghost") ? getSlottedObject("ghost") : null);
 	}
 	
 	public boolean isBeast() {
