@@ -64,7 +64,7 @@ public class ZoneService extends Service {
 		String createCharacterSql = "INSERT INTO characters (id, name, race, userId, galaxyId) VALUES (?, ?, ?, ?, ?)";
 		createCharacter = getLocalDatabase().prepareStatement(createCharacterSql);
 		nameGenerator.loadAllRules();
-		//loadProfTemplates();
+		loadProfTemplates();
 		return super.initialize();
 	}
 	
@@ -152,7 +152,7 @@ public class ZoneService extends Service {
 			creatureObj.setSlot("hair", hairObj);
 			creatureObj.addEquipment(hairObj);
 		}
-		//createStarterClothing(objManager, creatureObj, create.getRace(), create.getClothes());
+		createStarterClothing(objManager, creatureObj, create.getRace(), create.getClothes());
 		creatureObj.setLocation(start);
 		playerObj.setLocation(start);
 		player.setCreatureObject(creatureObj);
@@ -188,18 +188,17 @@ public class ZoneService extends Service {
 		sendPacket(player, new GalaxyLoopTimesResponse(ProjectSWG.getCoreTime()/1000));
 	}
 	
-	@SuppressWarnings("unused")
 	private void createStarterClothing(ObjectManager objManager, CreatureObject player, String race, String profession) {
-		TangibleObject inventory = (TangibleObject) player.getSlottedObject("inventory");
+		//TangibleObject inventory = (TangibleObject) player.getSlottedObject("inventory");
 		
 		for (String template : profTemplates.get(profession).getItems(ClientFactory.formatToSharedFile(race))) {
-			TangibleObject clothing = (TangibleObject) objManager.createObject(ClientFactory.formatToSharedFile(template));
+			TangibleObject clothing = (TangibleObject) objManager.createObject(template);
 			
-			inventory.addChild(clothing);
+			player.addChild(clothing);
+			// TODO: Fix item icons not showing in inventory
 		}
 	}
 	
-	@SuppressWarnings("unused")
 	private void loadProfTemplates() {
 		profTemplates = new ConcurrentHashMap<String, ProfTemplateData>();
 		
