@@ -157,8 +157,18 @@ public class ObjectManager extends Manager {
 		if (oldLocation != null && oldLocation.getTerrain() != null) { // Remove from QuadTree
 			x = oldLocation.getX();
 			y = oldLocation.getZ();
-			if (!quadTree.get(oldLocation.getTerrain()).remove(x, y, obj))
-				System.err.println("Failed to remove previous object from QuadTree!");
+
+			if (quadTree.get(oldLocation.getTerrain()).get(x, y) != null) {
+				if (quadTree.get(oldLocation.getTerrain()).get(x, y) == obj) {
+					if (!quadTree.get(oldLocation.getTerrain()).remove(x, y, obj))
+						System.err.println("Failed to remove previous object from QuadTree!");
+				} else {
+					System.err.println("Expected a different SWGObject!");
+				}
+
+			} else {
+				System.err.println("Tried to get a null obj in the quadtree!");
+			}
 		}
 		if (newLocation != null && newLocation.getTerrain() != null) { // Add to QuadTree, update awareness
 			obj.setLocation(newLocation);
@@ -171,7 +181,10 @@ public class ObjectManager extends Manager {
 					updatedAware.add(inRange.getOwner());
 				}
 			}
-			tree.put(x, y, obj);
+			quadTree.get(newLocation.getTerrain()).put(x, y, obj);
+			if (quadTree.get(newLocation.getTerrain()).get(x, y) == null) {
+				System.err.println("NULL OBJ PUT INTO TREE!");
+			}
 		}
 		System.out.println("Now Aware Of: " + Arrays.toString(updatedAware.toArray(new Player[updatedAware.size()])));
 		obj.updateAwareness(updatedAware);
