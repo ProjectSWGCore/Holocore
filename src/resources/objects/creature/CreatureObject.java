@@ -312,31 +312,37 @@ public class CreatureObject extends TangibleObject {
 		sendSceneCreateObject(target);
 		
 		BaselineBuilder bb = null;
-
-		bb = new BaselineBuilder(this, BaselineType.CREO, 1);
-		createBaseline1(target, bb);
-		bb.sendTo(target);
+		
+		if (getOwner() == target) {
+			bb = new BaselineBuilder(this, BaselineType.CREO, 1);
+			createBaseline1(target, bb);
+			bb.sendTo(target);
+		}
 		
 		bb = new BaselineBuilder(this, BaselineType.CREO, 3);
 		createBaseline3(target, bb);
 		bb.sendTo(target);
 		
-		bb = new BaselineBuilder(this, BaselineType.CREO, 4);
-		createBaseline4(target, bb);
-		bb.sendTo(target);
+		if (getOwner() == target) {
+			bb = new BaselineBuilder(this, BaselineType.CREO, 4);
+			createBaseline4(target, bb);
+			bb.sendTo(target);
+		}
 		
 		bb = new BaselineBuilder(this, BaselineType.CREO, 6);
 		createBaseline6(target, bb);
 		bb.sendTo(target);
-
-		bb = new BaselineBuilder(this, BaselineType.CREO, 8);
-		createBaseline8(target, bb);
-		bb.sendTo(target);
 		
-		bb = new BaselineBuilder(this, BaselineType.CREO, 9);
-		createBaseline9(target, bb);
-		bb.sendTo(target);
-
+		if (getOwner() == target) {
+			bb = new BaselineBuilder(this, BaselineType.CREO, 8);
+			createBaseline8(target, bb);
+			bb.sendTo(target);
+			
+			bb = new BaselineBuilder(this, BaselineType.CREO, 9);
+			createBaseline9(target, bb);
+			bb.sendTo(target);
+		}
+		
 		
 		createChildrenObjects(target);
 		target.sendPacket(new SceneEndBaselines(getObjectId()));

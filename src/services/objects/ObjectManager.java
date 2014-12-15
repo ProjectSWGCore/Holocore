@@ -49,12 +49,12 @@ public class ObjectManager extends Manager {
 	private ClientFactory clientFac;
 	
 	private ObjectDatabase<SWGObject> objects;
-	private Map <String, QuadTree <SWGObject>> quadTree;
+	private Map <Terrain, QuadTree <SWGObject>> quadTree;
 	private long maxObjectId;
 	
 	public ObjectManager() {
 		objects = new ObjectDatabase<SWGObject>("odb/objects.db");
-		quadTree = new HashMap<String, QuadTree<SWGObject>>();
+		quadTree = new HashMap<Terrain, QuadTree<SWGObject>>();
 		maxObjectId = 1;
 	}
 	
@@ -63,7 +63,7 @@ public class ObjectManager extends Manager {
 		registerForIntent(SWGObjectEventIntent.TYPE);
 		registerForIntent(GalacticPacketIntent.TYPE);
 		for (Terrain t : Terrain.values()) {
-			quadTree.put(t.getFile(), new QuadTree<SWGObject>(-5000, -5000, 5000, 5000));
+			quadTree.put(t, new QuadTree<SWGObject>(-5000, -5000, 5000, 5000));
 		}
 		objects.loadToCache();
 		long startLoad = System.nanoTime();
@@ -73,7 +73,7 @@ public class ObjectManager extends Manager {
 			public void process(SWGObject obj) {
 				Location l = obj.getLocation();
 				if (l.getTerrain() != null) {
-					QuadTree <SWGObject> tree = quadTree.get(l.getTerrain().getFile());
+					QuadTree <SWGObject> tree = quadTree.get(l.getTerrain());
 					if (tree != null) {
 						tree.put(l.getX(), l.getZ(), obj);
 					} else {
@@ -154,21 +154,25 @@ public class ObjectManager extends Manager {
 		if (oldLocation != null && oldLocation.getTerrain() != null) { // Remove from QuadTree
 			x = oldLocation.getX();
 			y = oldLocation.getZ();
-			quadTree.get(oldLocation.getTerrain().getFile()).remove(x, y, obj);
+			if (!quadTree.get(oldLocation.getTerrain()).remove(x, y, obj))
+				System.err.println("Failed to remove previous object from QuadTree!");
 		}
 		if (newLocation != null && newLocation.getTerrain() != null) { // Add to QuadTree, update awareness
 			obj.setLocation(newLocation);
 			x = newLocation.getX();
 			y = newLocation.getZ();
-			QuadTree<SWGObject> tree = quadTree.get(newLocation.getTerrain().getFile());
-			tree.put(x, y, obj);
+			QuadTree<SWGObject> tree = quadTree.get(newLocation.getTerrain());
 			for (SWGObject inRange : tree.getWithinRange(x, y, AWARE_RANGE)) {
-				if (inRange.getOwner() != null && inRange.getObjectId() != obj.getObjectId() && inRange.getOwner() != obj.getOwner())
+				if (inRange.getOwner() != null && inRange.getObjectId() != obj.getObjectId()) {
+					inRange.addToAwareness(obj.getOwner());
 					updatedAware.add(inRange.getOwner());
+				}
 			}
+			tree.put(x, y, obj);
 		}
 		System.out.println("Now Aware Of: " + Arrays.toString(updatedAware.toArray(new Player[updatedAware.size()])));
 		obj.updateAwareness(updatedAware);
+		obj.sendDataTransforms();
 	}
 	
 	private void addObjectAttributes(SWGObject obj, String template) {
@@ -208,10 +212,12 @@ public class ObjectManager extends Manager {
 			System.err.println("ObjectManager: Failed to start zone - CreatureObject could not be fetched from database");
 			throw new NullPointerException("CreatureObject for ID: " + characterId + " cannot be null!");
 		}
+		creature.setOwner(player);
 		player.setCreatureObject(creature);
 		for (SWGObject obj : creature.getChildren()) {
 			if (obj instanceof PlayerObject) {
 				player.setPlayerObject(obj);
+				obj.setOwner(player);
 				break;
 			}
 		}

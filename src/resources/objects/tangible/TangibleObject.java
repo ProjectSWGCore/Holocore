@@ -134,13 +134,15 @@ public class TangibleObject extends SWGObject {
 		createBaseline6(target, bb);
 		bb.sendTo(target);
 		
-		bb = new BaselineBuilder(this, BaselineType.TANO, 8);
-		createBaseline8(target, bb);
-		bb.sendTo(target);
-		
-		bb = new BaselineBuilder(this, BaselineType.TANO, 9);
-		createBaseline9(target, bb);
-		bb.sendTo(target);
+		if (getOwner() == target) {
+			bb = new BaselineBuilder(this, BaselineType.TANO, 8);
+			createBaseline8(target, bb);
+			bb.sendTo(target);
+			
+			bb = new BaselineBuilder(this, BaselineType.TANO, 9);
+			createBaseline9(target, bb);
+			bb.sendTo(target);
+		}
 		
 		createChildrenObjects(target);
 		target.sendPacket(new SceneEndBaselines(getObjectId()));
