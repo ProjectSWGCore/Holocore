@@ -163,7 +163,7 @@ public class ObjectManager extends Manager {
 					if (!quadTree.get(oldLocation.getTerrain()).remove(x, y, obj))
 						System.err.println("Failed to remove previous object from QuadTree!");
 				} else {
-					System.err.println("Expected a different SWGObject!");
+					System.err.println("Expected " + quadTree.get(oldLocation.getTerrain()) + " instead of " + obj);
 				}
 
 			} else {
