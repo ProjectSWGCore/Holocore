@@ -27,6 +27,9 @@ import resources.Race;
 import resources.Terrain;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.ObjectData;
+import resources.client_info.visitors.SlotArrangementData;
+import resources.client_info.visitors.SlotDefinitionData;
+import resources.client_info.visitors.SlotDescriptorData;
 import resources.control.Intent;
 import resources.control.Manager;
 import resources.objects.SWGObject;
@@ -88,7 +91,7 @@ public class ObjectManager extends Manager {
 		double loadTime = (System.nanoTime() - startLoad) / 1E6;
 		System.out.printf("ObjectManager: Finished loading %d objects. Time: %fms%n", objects.size(), loadTime);
 		clientFac = new ClientFactory();
-		
+
 		return super.initialize();
 	}
 	
@@ -176,11 +179,32 @@ public class ObjectManager extends Manager {
 	}
 	
 	private void addObjectAttributes(SWGObject obj, String template) {
-		
 		ObjectData attributes = (ObjectData) clientFac.getInfoFromFile(ClientFactory.formatToSharedFile(template));
 		
-		obj.setStf((String) attributes.getAttribute("objectName"));
-		obj.setDetailStf((String) attributes.getAttribute("detailedDescription"));
+		obj.setStf((String) attributes.getAttribute(ObjectData.OBJ_STF));
+		obj.setDetailStf((String) attributes.getAttribute(ObjectData.DETAIL_STF));
+		obj.setVolume((Integer) attributes.getAttribute(ObjectData.VOLUME_LIMIT));
+		
+		addSlotsToObject(obj, attributes);
+	}
+	
+	private void addSlotsToObject(SWGObject obj, ObjectData attributes) {
+
+		if ((String) attributes.getAttribute(ObjectData.SLOT_DESCRIPTOR) != null) {
+			// TODO: These are the slots that the object HAS
+			SlotDescriptorData descriptor = (SlotDescriptorData) clientFac.getInfoFromFile((String) attributes.getAttribute(ObjectData.SLOT_DESCRIPTOR));
+			
+			for (String slotName : descriptor.getSlots()) {
+				obj.addObjectSlot(slotName, null);
+			}
+		}
+		
+		if ((String) attributes.getAttribute(ObjectData.ARRANGEMENT_FILE) != null) {
+			// This is what slots the object *USES*			
+			SlotArrangementData arrangementData = (SlotArrangementData) clientFac.getInfoFromFile((String) attributes.getAttribute(ObjectData.ARRANGEMENT_FILE));
+			
+			obj.setArrangment(arrangementData.getArrangement());
+		}
 	}
 	
 	private void zoneInCharacter(PlayerManager playerManager, long netId, long characterId) {
@@ -212,14 +236,10 @@ public class ObjectManager extends Manager {
 			System.err.println("ObjectManager: Failed to start zone - CreatureObject could not be fetched from database");
 			throw new NullPointerException("CreatureObject for ID: " + characterId + " cannot be null!");
 		}
-		creature.setOwner(player);
-		player.setCreatureObject(creature);
-		for (SWGObject obj : creature.getChildren()) {
-			if (obj instanceof PlayerObject) {
-				player.setPlayerObject(obj);
-				obj.setOwner(player);
-				break;
-			}
+		player.setCreatureObject(creature); // CreatureObject contains the player object!
+		
+		if (player.getPlayerObject() == null) {
+			System.err.println("FATAL: " + player.getUsername() + "'s CreatureObject has a null ghost!");
 		}
 	}
 	

@@ -8,7 +8,10 @@ import resources.Race;
 import resources.collections.SWGList;
 import resources.encodables.player.Equipment;
 import resources.network.BaselineBuilder;
+import resources.objects.SWGObject;
+import resources.objects.player.PlayerObject;
 import resources.objects.tangible.TangibleObject;
+import resources.objects.weapon.WeaponObject;
 import resources.player.Player;
 import utilities.Encoder.StringType;
 
@@ -54,6 +57,17 @@ public class CreatureObject extends TangibleObject {
 	
 	public CreatureObject(long objectId) {
 		super(objectId);
+	}
+	
+	public void addEquipment(SWGObject obj) {
+		if (obj instanceof WeaponObject)
+			equipmentList.add(new Equipment((WeaponObject) obj));
+		else
+			equipmentList.add(new Equipment(obj.getObjectId(), obj.getTemplate()));
+	}
+	
+	public void addAppearanceItem(SWGObject obj) {
+		appearanceList.add(new Equipment(obj.getObjectId(), obj.getTemplate()));
 	}
 	
 	public SWGList<Equipment> getEquipmentList() {
@@ -182,6 +196,10 @@ public class CreatureObject extends TangibleObject {
 	
 	public CreatureDifficulty getDifficulty() {
 		return difficulty;
+	}
+	
+	public PlayerObject getPlayerObject() {
+		return (PlayerObject) (hasSlot("ghost") ? getSlottedObject("ghost") : null);
 	}
 	
 	public boolean isBeast() {

@@ -8,7 +8,8 @@ import resources.network.BaselineBuilder.Encodable;
 import resources.objects.weapon.WeaponObject;
 
 public class Equipment implements Encodable {
-
+	private static final long serialVersionUID = 1L;
+	
 	private WeaponObject 	weapon;
 	private byte[] 			customizationString;
 	private int 			arrangementId = 4;
