@@ -24,7 +24,6 @@ import resources.Terrain;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.ObjectData;
 import resources.client_info.visitors.SlotArrangementData;
-import resources.client_info.visitors.SlotDefinitionData;
 import resources.client_info.visitors.SlotDescriptorData;
 import resources.control.Intent;
 import resources.control.Manager;

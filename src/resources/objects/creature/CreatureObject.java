@@ -6,6 +6,7 @@ import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.Posture;
 import resources.Race;
 import resources.collections.SWGList;
+import resources.collections.SWGMap;
 import resources.encodables.player.Equipment;
 import resources.network.BaselineBuilder;
 import resources.objects.SWGObject;
@@ -55,6 +56,11 @@ public class CreatureObject extends TangibleObject {
 	private SWGList<Integer>	maxAttributes	= new SWGList<Integer>(BaselineType.CREO, 6, 0); // TODO: UpdateType
 	private SWGList<Equipment>	equipmentList 	= new SWGList<Equipment>(BaselineType.CREO, 6, 0); // TODO: UpdateType
 	private SWGList<Equipment>	appearanceList 	= new SWGList<Equipment>(BaselineType.CREO, 6, 0); // TODO: UpdateType
+	
+	private SWGMap<String, Long> 	skillMods			= new SWGMap<>(BaselineType.CREO, 4, 0, false, StringType.ASCII); // TODO: SkillMod structure, UpdateType
+	private SWGMap<Long, Long>		missionCriticalObjs	= new SWGMap<>(BaselineType.CREO, 4, 0); // TODO: UpdateType
+	private SWGMap<String, Integer>	abilities			= new SWGMap<>(BaselineType.CREO, 4, 0, false, StringType.ASCII); // TODO: UpdateType
+	private SWGMap<Integer, Long>	buffs				= new SWGMap<>(BaselineType.CREO, 6, 0); // TODO: Buff structure, UpdateType
 	
 	public CreatureObject(long objectId) {
 		super(objectId);
@@ -439,8 +445,7 @@ public class CreatureObject extends TangibleObject {
 		bb.addFloat((float) accelScale);
 		bb.addFloat((float) accelPercent);
 		bb.addObject(hamEncumbList);
-		bb.addInt(0); // Skill Mod List Size (Map, k = String v= SkillMod structure)
-			bb.addInt(0);
+		bb.addObject(skillMods);
 		bb.addFloat((float) movementScale);
 		bb.addFloat((float) movementPercent);
 		bb.addLong(0); // Listen to ID
@@ -450,10 +455,8 @@ public class CreatureObject extends TangibleObject {
 		bb.addFloat((float) turnScale);
 		bb.addFloat((float) walkSpeed);
 		bb.addFloat((float) waterModPercent);
-		bb.addInt(0); // Mission Critical Objects list size (Map, k = long v = long)
-			bb.addInt(0);
-		bb.addInt(0); // abilities list size (Map, k = string v = integer)
-			bb.addInt(0);
+		bb.addObject(missionCriticalObjs);
+		bb.addObject(abilities);
 		bb.addInt(0); // XP Display Counter (remaining experience to next level up, updates the experience bar on client)
 		
 		bb.incremeantOperandCount(16);
@@ -482,8 +485,7 @@ public class CreatureObject extends TangibleObject {
 		bb.addObject(equipmentList);
 		bb.addAscii(""); // Appearance (costume)
 		bb.addBoolean(true); // Visible
-		bb.addInt(0); // Buff list (Map, k = Integer v = Buff structure)
-			bb.addInt(0);
+		bb.addObject(buffs);
 		bb.addBoolean(false); // Is Performing
 		bb.addByte(difficulty.getDifficulty());
 		bb.addInt(-1); // Hologram Color
