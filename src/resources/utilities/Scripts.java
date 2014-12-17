@@ -56,6 +56,6 @@ public final class Scripts {
 	}
 	
 	private static boolean scriptExists(String file) {
-		return new File(file).exists();
+		return new File(SCRIPTS_PATH + file).exists();
 	}
 }

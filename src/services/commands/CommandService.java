@@ -78,7 +78,7 @@ public class CommandService extends Service {
 		
 		// TODO: Handle for different targetType
 
-		Scripts.execute("commands/generic/" + command.getScriptCallback(), "execute", objManager, playerCreo, target, args);
+		Scripts.execute("commands/generic/" + command.getScriptCallback(), "execute", objManager, player, target, args);
 	}
 	
 	private void loadBaseCommands() {
