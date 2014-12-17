@@ -154,7 +154,7 @@ public class ZoneService extends Service {
 		}
 		createStarterClothing(objManager, creatureObj, create.getRace(), create.getClothes());
 		creatureObj.setLocation(start);
-		playerObj.setLocation(start);
+		//playerObj.setLocation(start); //no location as it's a child of CreatureObject
 		player.setCreatureObject(creatureObj);
 		
 		creatureObj.setSlot("ghost", playerObj);
@@ -189,13 +189,12 @@ public class ZoneService extends Service {
 	}
 	
 	private void createStarterClothing(ObjectManager objManager, CreatureObject player, String race, String profession) {
-		//TangibleObject inventory = (TangibleObject) player.getSlottedObject("inventory");
+		if (player.getSlottedObject("inventory") == null)
+			return;
 		
 		for (String template : profTemplates.get(profession).getItems(ClientFactory.formatToSharedFile(race))) {
 			TangibleObject clothing = (TangibleObject) objManager.createObject(template);
-			
 			player.addChild(clothing);
-			// TODO: Fix item icons not showing in inventory
 		}
 	}
 	
