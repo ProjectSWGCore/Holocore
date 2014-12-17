@@ -8,7 +8,7 @@ public class Command {
 	// defaultPriority
 	private String scriptCallback;
 	// fail
-	private ICommandCallback javaCallback;
+	//private ICommandCallback javaCallback;
 	// fail
 	private float defaultTime;
 	private String characterAbility;
@@ -47,8 +47,6 @@ public class Command {
 	public void setName(String name) { this.name = name; }
 	public String getScriptCallback() { return scriptCallback; }
 	public void setScriptCallback(String scriptCallback) { this.scriptCallback = scriptCallback; }
-	public ICommandCallback getJavaCallback() { return javaCallback; }
-	public void setJavaCallback(ICommandCallback javaCallback) { this.javaCallback = javaCallback; }
 	public float getDefaultTime() { return defaultTime; }
 	public void setDefaultTime(float defaultTime) { this.defaultTime = defaultTime; }
 	public String getCharacterAbility() { return characterAbility; }
