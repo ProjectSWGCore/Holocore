@@ -258,4 +258,8 @@ public class ObjectManager extends Manager {
 	private WeaponObject createWeaponObject(long objectId, String template) {
 		return new WeaponObject(objectId);
 	}
+	
+	public SWGObject getObjectById(long id) {
+		return objects.get(id);
+	}
 }
