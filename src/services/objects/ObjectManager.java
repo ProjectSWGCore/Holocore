@@ -198,7 +198,7 @@ public class ObjectManager extends Manager {
 			}
 			quadTree.get(newLocation.getTerrain()).put(x, y, obj);
 		}
-		System.out.println(obj.getName() + " is aware Of: " + updatedAware.size() + " player(s)");
+		//System.out.println(obj.getName() + " is aware Of: " + updatedAware.size() + " player(s)");
 		obj.updateAwareness(updatedAware);
 		obj.sendDataTransforms();
 	}
