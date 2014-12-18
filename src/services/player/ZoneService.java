@@ -76,7 +76,7 @@ public class ZoneService extends Service {
 		if (p instanceof RandomNameRequest)
 			handleRandomNameRequest(player, (RandomNameRequest) p);
 		if (p instanceof ClientVerifyAndLockNameRequest)
-			handleApproveNameRequest(player, (ClientVerifyAndLockNameRequest) p);
+			handleApproveNameRequest(intent.getPlayerManager(), player, (ClientVerifyAndLockNameRequest) p);
 		if (p instanceof ClientCreateCharacter)
 			handleCharCreation(intent.getObjectManager(), player, (ClientCreateCharacter) p);
 		if (p instanceof GalaxyLoopTimesRequest)
@@ -105,9 +105,12 @@ public class ZoneService extends Service {
 		sendPacket(player.getNetworkId(), response);
 	}
 	
-	private void handleApproveNameRequest(Player player, ClientVerifyAndLockNameRequest request) {
-		// TODO: Add error checking here... can't approve everybody's name
-		sendPacket(player.getNetworkId(), new ClientVerifyAndLockNameResponse(request.getName(), ErrorMessage.NAME_APPROVED));
+	private void handleApproveNameRequest(PlayerManager playerMgr, Player player, ClientVerifyAndLockNameRequest request) {
+		// TODO: Lore reserved name checks
+		if (!playerMgr.doesPlayerNameExisit(request.getName()))
+			sendPacket(player.getNetworkId(), new ClientVerifyAndLockNameResponse(request.getName(), ErrorMessage.NAME_APPROVED));
+		else
+			sendPacket(player.getNetworkId(), new ClientVerifyAndLockNameResponse(request.getName(), ErrorMessage.NAME_DECLINED_IN_USE));
 	}
 	
 	private void handleCharCreation(ObjectManager objManager, Player player, ClientCreateCharacter create) {
