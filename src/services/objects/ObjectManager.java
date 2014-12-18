@@ -141,29 +141,48 @@ public class ObjectManager extends Manager {
 			addObjectAttributes(obj, template);
 			obj.setTemplate(template);
 			obj.setLocation(l);
-			moveObject(obj, null, l); // TODO: Fix so objects in slots/containers aren't in the quadtree
+			addToQuadtree(obj, l);
+//			moveObject(obj, null, l);
 			objects.put(objectId, obj);
 			return obj;
 		}
 	}
 	
+	// Adds an object to the quadtree and refreshes awareness lists in the object added as well as adds the Player to objects in range (if there is one)
+	private void addToQuadtree(SWGObject obj, Location loc) {
+		if (loc == null || loc.isNaN()) // Object is inside a container or it's a slot of an item
+			return;
+
+		double x = loc.getX(), z = loc.getY();
+		
+		List<Player> awarePlayers = new ArrayList<Player>();
+
+		QuadTree<SWGObject> tree = quadTree.get(loc.getTerrain());
+		for (SWGObject inRange : tree.getWithinRange(x, z, AWARE_RANGE)) {
+			if (inRange != null && inRange.getOwner() != null && inRange.getObjectId() != obj.getObjectId()) {
+				if (obj.getOwner() != null)
+					inRange.addToAwareness(obj.getOwner());
+				
+				awarePlayers.add(inRange.getOwner());
+			}
+		}
+		if (awarePlayers.size() > 0)
+			obj.updateAwareness(awarePlayers);
+		
+		quadTree.get(loc.getTerrain()).put(x, z, obj);
+	}
+	
 	private void moveObject(SWGObject obj, Location oldLocation, Location newLocation) {
-		System.out.println("Moving object: " + obj);
-		System.out.println("    Old: " + oldLocation);
-		System.out.println("    New: " + newLocation);
 		double x = 0, y = 0;
 		List <Player> updatedAware = new ArrayList<Player>();
 		if (oldLocation != null && oldLocation.getTerrain() != null) { // Remove from QuadTree
 			x = oldLocation.getX();
 			y = oldLocation.getZ();
 
-			if (quadTree.get(oldLocation.getTerrain()).get(x, y) != null) {
-				if (!quadTree.get(oldLocation.getTerrain()).remove(x, y, obj))
-					System.err.println("Failed to remove previous object from QuadTree!");
-
-			} else {
+			if (quadTree.get(oldLocation.getTerrain()).get(x, y) != null)
+				quadTree.get(oldLocation.getTerrain()).remove(x, y, obj);
+			else
 				System.err.println("Tried to get a null quad in the quadtree!");
-			}
 		}
 		if (newLocation != null && newLocation.getTerrain() != null) { // Add to QuadTree, update awareness
 			obj.setLocation(newLocation);
@@ -173,12 +192,13 @@ public class ObjectManager extends Manager {
 			for (SWGObject inRange : tree.getWithinRange(x, y, AWARE_RANGE)) {
 				if (inRange.getOwner() != null && inRange.getObjectId() != obj.getObjectId()) {
 					inRange.addToAwareness(obj.getOwner());
-					updatedAware.add(inRange.getOwner());
+					if (!updatedAware.contains(inRange.getOwner())) // TODO: This is a really bad fix for duplicates being put into awareness list..
+						updatedAware.add(inRange.getOwner());
 				}
 			}
 			quadTree.get(newLocation.getTerrain()).put(x, y, obj);
 		}
-		System.out.println("Now Aware Of: " + updatedAware.size() + " player(s)");
+		System.out.println(obj.getName() + " is aware Of: " + updatedAware.size() + " player(s)");
 		obj.updateAwareness(updatedAware);
 		obj.sendDataTransforms();
 	}
@@ -196,7 +216,7 @@ public class ObjectManager extends Manager {
 	private void addSlotsToObject(SWGObject obj, ObjectData attributes) {
 
 		if ((String) attributes.getAttribute(ObjectData.SLOT_DESCRIPTOR) != null) {
-			// TODO: These are the slots that the object HAS
+			// These are the slots that the object *HAS*
 			SlotDescriptorData descriptor = (SlotDescriptorData) clientFac.getInfoFromFile((String) attributes.getAttribute(ObjectData.SLOT_DESCRIPTOR));
 			
 			for (String slotName : descriptor.getSlots()) {

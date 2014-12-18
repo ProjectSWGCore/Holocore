@@ -54,7 +54,7 @@ public class CoreManager extends Manager {
 	
 	@Override
 	public void onIntentReceived(Intent i) {
-		if (i instanceof InboundPacketIntent) {
+		/*if (i instanceof InboundPacketIntent) {
 			InboundPacketIntent in = (InboundPacketIntent) i;
 			System.out.println("IN  " + in.getNetworkId() + ":" + in.getServerType() + "\t" + in.getPacket().getClass().getSimpleName());
 			if (in.getPacket() instanceof DataChannelA) {
@@ -73,7 +73,7 @@ public class CoreManager extends Manager {
 						System.out.println("    " + p.getClass().getSimpleName());
 				}
 			}
-		}
+		}*/
 	}
 	
 	/**
