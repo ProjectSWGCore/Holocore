@@ -159,7 +159,7 @@ public class ZoneService extends Service {
 		creatureObj.setLocation(start);
 		//playerObj.setLocation(start); //no location as it's a child of CreatureObject
 		player.setCreatureObject(creatureObj);
-		
+		creatureObj.setOwner(player);
 		creatureObj.setSlot("ghost", playerObj);
 		return creatureObj.getObjectId();
 	}

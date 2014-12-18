@@ -141,7 +141,7 @@ public class ObjectManager extends Manager {
 			addObjectAttributes(obj, template);
 			obj.setTemplate(template);
 			obj.setLocation(l);
-			moveObject(obj, null, l);
+			moveObject(obj, null, l); // TODO: Fix so objects in slots/containers aren't in the quadtree
 			objects.put(objectId, obj);
 			return obj;
 		}
@@ -158,15 +158,11 @@ public class ObjectManager extends Manager {
 			y = oldLocation.getZ();
 
 			if (quadTree.get(oldLocation.getTerrain()).get(x, y) != null) {
-				if (quadTree.get(oldLocation.getTerrain()).get(x, y) == obj) {
-					if (!quadTree.get(oldLocation.getTerrain()).remove(x, y, obj))
-						System.err.println("Failed to remove previous object from QuadTree!");
-				} else {
-					System.err.println("Expected " + quadTree.get(oldLocation.getTerrain()).get(x, y) + " instead of " + obj);
-				}
+				if (!quadTree.get(oldLocation.getTerrain()).remove(x, y, obj))
+					System.err.println("Failed to remove previous object from QuadTree!");
 
 			} else {
-				System.err.println("Tried to get a null obj in the quadtree!");
+				System.err.println("Tried to get a null quad in the quadtree!");
 			}
 		}
 		if (newLocation != null && newLocation.getTerrain() != null) { // Add to QuadTree, update awareness
@@ -181,11 +177,8 @@ public class ObjectManager extends Manager {
 				}
 			}
 			quadTree.get(newLocation.getTerrain()).put(x, y, obj);
-			if (quadTree.get(newLocation.getTerrain()).get(x, y) == null) {
-				System.err.println("NULL OBJ PUT INTO TREE!");
-			}
 		}
-		System.out.println("Now Aware Of: " + Arrays.toString(updatedAware.toArray(new Player[updatedAware.size()])));
+		System.out.println("Now Aware Of: " + updatedAware.size() + " player(s)");
 		obj.updateAwareness(updatedAware);
 		obj.sendDataTransforms();
 	}
