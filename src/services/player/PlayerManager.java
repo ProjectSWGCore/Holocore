@@ -1,5 +1,9 @@
 package services.player;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import network.packets.Packet;
 import network.packets.swg.login.ClientIdMsg;
 import intents.GalacticPacketIntent;
@@ -68,6 +72,21 @@ public class PlayerManager extends Manager {
 					zoneService.handlePacket(gpi, player, networkId, packet);
 			}
 		}
+	}
+	
+	public boolean doesPlayerNameExisit(String characterName) {
+		try {
+			PreparedStatement statement = getLocalDatabase().prepareStatement("SELECT * FROM characters WHERE name = ?");
+			statement.setString(1, characterName);
+			
+			ResultSet results = statement.executeQuery();
+			return results.next();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return false;
 	}
 	
 	private void transitionLoginToZone(final long networkId, final int galaxyId, ClientIdMsg clientId) {

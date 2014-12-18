@@ -3,9 +3,11 @@ package resources.objects.player;
 import network.packets.swg.zone.SceneEndBaselines;
 import network.packets.swg.zone.UpdatePostureMessage;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
+import resources.collections.SWGMap;
 import resources.network.BaselineBuilder;
 import resources.objects.creature.CreatureObject;
 import resources.objects.intangible.IntangibleObject;
+import resources.objects.waypoint.WaypointObject;
 import resources.player.AccessLevel;
 import resources.player.Player;
 import utilities.MathUtils;
@@ -20,6 +22,10 @@ public class PlayerObject extends IntangibleObject {
 	private boolean	showHelmet		= true;
 	private int 	bornDate		= 0;
 	private int		adminTag		= 0;
+	
+	private SWGMap<String, Integer> 		experience	= new SWGMap<>(BaselineType.PLAY, 8, 0); // TODO: UpdateType
+	private SWGMap<Long, WaypointObject> 	waypoints	= new SWGMap<>(BaselineType.PLAY, 8, 0); // TODO: UpdateType
+	private SWGMap<Integer, Integer>		quests		= new SWGMap<>(BaselineType.PLAY, 8, 0); // TODO: UpdateType
 	
 	public PlayerObject(long objectId) {
 		super(objectId);
@@ -187,10 +193,8 @@ public class PlayerObject extends IntangibleObject {
 	
 	public void createBaseline8(Player target, BaselineBuilder bb) {
 		super.createBaseline8(target, bb);
-		bb.addInt(0); // XP List Size (Map<String, Integer>, k = exp type, v = points
-			bb.addInt(0);
-		bb.addInt(0); // Waypoint List Size (Map<Long, WaypointObject>, k = waypointObjId, v = waypointobj
-			bb.addInt(0);
+		bb.addObject(experience);
+		bb.addObject(waypoints);
 		bb.addInt(100); // Current Force Power
 		bb.addInt(100); // Max Force Power
 		bb.addInt(0); // Current FS Quest List (List)
@@ -198,8 +202,7 @@ public class PlayerObject extends IntangibleObject {
 		bb.addInt(0); // Completed FS Quest List (List)
 			bb.addInt(0);
 		bb.addInt(0); // Active Quest
-		bb.addInt(0); // Quest Journal (Map<Integer, Quest>, k = questCRC, v = quest encodable data
-			bb.addInt(0);
+		bb.addObject(quests);
 		bb.addAscii(""); // Profession Wheel Position
 		
 		bb.incremeantOperandCount(9);
@@ -227,8 +230,7 @@ public class PlayerObject extends IntangibleObject {
 		bb.addInt(100); // Max Drink
 		bb.addInt(0); // Current Consumable
 		bb.addInt(100); // Max Consumable
-		bb.addInt(0); // Waypoint List Size (Map<Long, WaypointObject>, k = waypointObjId, v = waypointobj)
-			bb.addInt(0);
+		bb.addObject(waypoints); // TODO: Is there a difference between this one and baseline 8?
 		bb.addInt(0); // Defenders List (Set<Long>)
 			bb.addInt(0);
 		bb.addInt(0); // Kill Meter Points

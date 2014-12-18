@@ -64,7 +64,7 @@ public class ZoneService extends Service {
 		String createCharacterSql = "INSERT INTO characters (id, name, race, userId, galaxyId) VALUES (?, ?, ?, ?, ?)";
 		createCharacter = getLocalDatabase().prepareStatement(createCharacterSql);
 		nameGenerator.loadAllRules();
-		//loadProfTemplates();
+		loadProfTemplates();
 		return super.initialize();
 	}
 	
@@ -76,7 +76,7 @@ public class ZoneService extends Service {
 		if (p instanceof RandomNameRequest)
 			handleRandomNameRequest(player, (RandomNameRequest) p);
 		if (p instanceof ClientVerifyAndLockNameRequest)
-			handleApproveNameRequest(player, (ClientVerifyAndLockNameRequest) p);
+			handleApproveNameRequest(intent.getPlayerManager(), player, (ClientVerifyAndLockNameRequest) p);
 		if (p instanceof ClientCreateCharacter)
 			handleCharCreation(intent.getObjectManager(), player, (ClientCreateCharacter) p);
 		if (p instanceof GalaxyLoopTimesRequest)
@@ -105,9 +105,12 @@ public class ZoneService extends Service {
 		sendPacket(player.getNetworkId(), response);
 	}
 	
-	private void handleApproveNameRequest(Player player, ClientVerifyAndLockNameRequest request) {
-		// TODO: Add error checking here... can't approve everybody's name
-		sendPacket(player.getNetworkId(), new ClientVerifyAndLockNameResponse(request.getName(), ErrorMessage.NAME_APPROVED));
+	private void handleApproveNameRequest(PlayerManager playerMgr, Player player, ClientVerifyAndLockNameRequest request) {
+		// TODO: Lore reserved name checks
+		if (!playerMgr.doesPlayerNameExisit(request.getName()))
+			sendPacket(player.getNetworkId(), new ClientVerifyAndLockNameResponse(request.getName(), ErrorMessage.NAME_APPROVED));
+		else
+			sendPacket(player.getNetworkId(), new ClientVerifyAndLockNameResponse(request.getName(), ErrorMessage.NAME_DECLINED_IN_USE));
 	}
 	
 	private void handleCharCreation(ObjectManager objManager, Player player, ClientCreateCharacter create) {
@@ -152,9 +155,9 @@ public class ZoneService extends Service {
 			creatureObj.setSlot("hair", hairObj);
 			creatureObj.addEquipment(hairObj);
 		}
-		//createStarterClothing(objManager, creatureObj, create.getRace(), create.getClothes());
+		createStarterClothing(objManager, creatureObj, create.getRace(), create.getClothes());
 		creatureObj.setLocation(start);
-		playerObj.setLocation(start);
+		//playerObj.setLocation(start); //no location as it's a child of CreatureObject
 		player.setCreatureObject(creatureObj);
 		
 		creatureObj.setSlot("ghost", playerObj);
@@ -188,18 +191,16 @@ public class ZoneService extends Service {
 		sendPacket(player, new GalaxyLoopTimesResponse(ProjectSWG.getCoreTime()/1000));
 	}
 	
-	@SuppressWarnings("unused")
 	private void createStarterClothing(ObjectManager objManager, CreatureObject player, String race, String profession) {
-		TangibleObject inventory = (TangibleObject) player.getSlottedObject("inventory");
+		if (player.getSlottedObject("inventory") == null)
+			return;
 		
 		for (String template : profTemplates.get(profession).getItems(ClientFactory.formatToSharedFile(race))) {
-			TangibleObject clothing = (TangibleObject) objManager.createObject(ClientFactory.formatToSharedFile(template));
-			
-			inventory.addChild(clothing);
+			TangibleObject clothing = (TangibleObject) objManager.createObject(template);
+			player.addChild(clothing);
 		}
 	}
 	
-	@SuppressWarnings("unused")
 	private void loadProfTemplates() {
 		profTemplates = new ConcurrentHashMap<String, ProfTemplateData>();
 		

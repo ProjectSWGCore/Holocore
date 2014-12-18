@@ -6,6 +6,7 @@ import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.Posture;
 import resources.Race;
 import resources.collections.SWGList;
+import resources.collections.SWGMap;
 import resources.encodables.player.Equipment;
 import resources.network.BaselineBuilder;
 import resources.objects.SWGObject;
@@ -21,8 +22,6 @@ public class CreatureObject extends TangibleObject {
 	
 	private Posture	posture					= Posture.STANDING;
 	private Race	race					= Race.HUMAN;
-	private int		attributes				= 0;
-	private int		maxAttributes			= 0;
 	private int		unmodifiedMaxAtributes	= 0;
 	private int		attributeBonus			= 0;
 	private int		shockWounds				= 0;
@@ -50,24 +49,46 @@ public class CreatureObject extends TangibleObject {
 	private int		cashBalance				= 0;
 	private int		bankBalance				= 0;
 	
-	private SWGList<String>	skills				= new SWGList<String>(BaselineType.CREO, 1, 4, false, StringType.ASCII);
-	private SWGList<Integer>	hamEncumbList	= new SWGList<Integer>(BaselineType.CREO, 4, 2);
-	private SWGList<Equipment>	equipmentList 	= new SWGList<Equipment>(BaselineType.CREO, 6, 15);
-	private SWGList<Equipment>	appearanceList 	= new SWGList<Equipment>(BaselineType.CREO, 6, 26);
+	private SWGList<Integer>	baseAttributes	= new SWGList<Integer>(BaselineType.CREO, 1, 3);
+	private SWGList<String>		skills			= new SWGList<String>(BaselineType.CREO, 1, 4, false, StringType.ASCII);
+	private SWGList<Integer>	hamEncumbList	= new SWGList<Integer>(BaselineType.CREO, 4, 0); // TODO: UpdateType
+	private SWGList<Integer>	attributes		= new SWGList<Integer>(BaselineType.CREO, 6, 0); // TODO: UpdateType
+	private SWGList<Integer>	maxAttributes	= new SWGList<Integer>(BaselineType.CREO, 6, 0); // TODO: UpdateType
+	private SWGList<Equipment>	equipmentList 	= new SWGList<Equipment>(BaselineType.CREO, 6, 0); // TODO: UpdateType
+	private SWGList<Equipment>	appearanceList 	= new SWGList<Equipment>(BaselineType.CREO, 6, 0); // TODO: UpdateType
+	
+	private SWGMap<String, Long> 	skillMods			= new SWGMap<>(BaselineType.CREO, 4, 0, false, StringType.ASCII); // TODO: SkillMod structure, UpdateType
+	private SWGMap<Long, Long>		missionCriticalObjs	= new SWGMap<>(BaselineType.CREO, 4, 0); // TODO: UpdateType
+	private SWGMap<String, Integer>	abilities			= new SWGMap<>(BaselineType.CREO, 4, 0, false, StringType.ASCII); // TODO: UpdateType
+	private SWGMap<Integer, Long>	buffs				= new SWGMap<>(BaselineType.CREO, 6, 0); // TODO: Buff structure, UpdateType
 	
 	public CreatureObject(long objectId) {
 		super(objectId);
+		
+		attributes.add(1000); // Health
+		attributes.add(0);
+		attributes.add(300); // Action
+		attributes.add(0);
+		attributes.add(300); // ??
+		attributes.add(0);
+
+		maxAttributes.addAll(attributes);
+		baseAttributes.addAll(attributes);
 	}
 	
 	public void addEquipment(SWGObject obj) {
-		if (obj instanceof WeaponObject)
-			equipmentList.add(new Equipment((WeaponObject) obj));
-		else
-			equipmentList.add(new Equipment(obj.getObjectId(), obj.getTemplate()));
+		synchronized(equipmentList) {
+			if (obj instanceof WeaponObject)
+				equipmentList.add(new Equipment((WeaponObject) obj));
+			else
+				equipmentList.add(new Equipment(obj.getObjectId(), obj.getTemplate()));
+		}
 	}
 	
 	public void addAppearanceItem(SWGObject obj) {
-		appearanceList.add(new Equipment(obj.getObjectId(), obj.getTemplate()));
+		synchronized(appearanceList) {
+			appearanceList.add(new Equipment(obj.getObjectId(), obj.getTemplate()));
+		}
 	}
 	
 	public SWGList<Equipment> getEquipmentList() {
@@ -96,14 +117,6 @@ public class CreatureObject extends TangibleObject {
 	
 	public Race getRace() {
 		return race;
-	}
-	
-	public int getAttributes() {
-		return attributes;
-	}
-	
-	public int getMaxAttributes() {
-		return maxAttributes;
 	}
 	
 	public int getUnmodifiedMaxAtributes() {
@@ -222,14 +235,6 @@ public class CreatureObject extends TangibleObject {
 		this.bankBalance = bankBalance;
 	}
 	
-	public void setAttributes(int attributes) {
-		this.attributes = attributes;
-	}
-	
-	public void setMaxAttributes(int maxAttributes) {
-		this.maxAttributes = maxAttributes;
-	}
-	
 	public void setUnmodifiedMaxAtributes(int unmodifiedMaxAtributes) {
 		this.unmodifiedMaxAtributes = unmodifiedMaxAtributes;
 	}
@@ -326,6 +331,54 @@ public class CreatureObject extends TangibleObject {
 		this.beast = beast;
 	}
 	
+	public int getHealth() {
+		return attributes.get(0);
+	}
+	
+	public int getMaxHealth() {
+		return maxAttributes.get(0);
+	}
+	
+	public int getBaseHealth() {
+		return baseAttributes.get(0);
+	}
+	
+	public int getAction() {
+		return attributes.get(2);
+	}
+	
+	public int getMaxAction() {
+		return attributes.get(2);
+	}
+	
+	public int getBaseAction() {
+		return attributes.get(2);
+	}
+	
+	public void setHealth(int health) {
+		synchronized(attributes) {
+			attributes.set(0, health);
+		}
+	}
+	
+	public void setMaxHealth(int maxHealth) {
+		synchronized(maxAttributes) {
+			maxAttributes.set(0, maxHealth);
+		}
+	}
+	
+	public void setAction(int action) {
+		synchronized(attributes) {
+			attributes.set(2, action);
+		}
+	}
+	
+	public void setMaxAction(int maxAction) {
+		synchronized(maxAttributes) {
+			maxAttributes.set(2, maxAction);
+		}
+	}
+	
 	public void createObject(Player target) {
 		sendSceneCreateObject(target);
 		
@@ -375,14 +428,7 @@ public class CreatureObject extends TangibleObject {
 		super.createBaseline1(target, bb);
 		bb.addInt(cashBalance);
 		bb.addInt(bankBalance);
-		bb.addInt(6); // Base HAM Mod List Size (List, Integer)
-			bb.addInt(0); // update counter
-			bb.addInt(1000); // Max Health
-			bb.addInt(0); // ??
-			bb.addInt(300); // Max Action
-			bb.addInt(0); // ??
-			bb.addInt(300); // Max Mind
-			bb.addInt(0); // ??
+		bb.addObject(baseAttributes); // Attributes player has without any gear on
 		bb.addObject(skills);
 		
 		bb.incremeantOperandCount(4);
@@ -405,8 +451,7 @@ public class CreatureObject extends TangibleObject {
 		bb.addFloat((float) accelScale);
 		bb.addFloat((float) accelPercent);
 		bb.addObject(hamEncumbList);
-		bb.addInt(0); // Skill Mod List Size (Map, k = String v= SkillMod structure)
-			bb.addInt(0);
+		bb.addObject(skillMods);
 		bb.addFloat((float) movementScale);
 		bb.addFloat((float) movementPercent);
 		bb.addLong(0); // Listen to ID
@@ -416,10 +461,8 @@ public class CreatureObject extends TangibleObject {
 		bb.addFloat((float) turnScale);
 		bb.addFloat((float) walkSpeed);
 		bb.addFloat((float) waterModPercent);
-		bb.addInt(0); // Mission Critical Objects list size (Map, k = long v = long)
-			bb.addInt(0);
-		bb.addInt(0); // abilities list size (Map, k = string v = integer)
-			bb.addInt(0);
+		bb.addObject(missionCriticalObjs);
+		bb.addObject(abilities);
 		bb.addInt(0); // XP Display Counter (remaining experience to next level up, updates the experience bar on client)
 		
 		bb.incremeantOperandCount(16);
@@ -443,27 +486,12 @@ public class CreatureObject extends TangibleObject {
 		bb.addByte(0); // Mood ID
 		bb.addInt(0); // Performance Counter
 		bb.addInt(0); // Performance ID
-		bb.addInt(6); // Attributes List Size (List, Integer)
-			bb.addInt(5);
-			bb.addInt(2363); // Health
-			bb.addInt(0);
-			bb.addInt(3050); // Action
-			bb.addInt(0);
-			bb.addInt(1000); // ?? it's 300 on new characters
-			bb.addInt(0);
-		bb.addInt(6); // Max Attributes List Size (List, Integer)
-			bb.addInt(5);
-			bb.addInt(2363); // Health
-			bb.addInt(0);
-			bb.addInt(3050); // Action
-			bb.addInt(0);
-			bb.addInt(1000); // ?? it's 300 on new characters
-			bb.addInt(0);
+		bb.addObject(attributes);
+		bb.addObject(maxAttributes);
 		bb.addObject(equipmentList);
 		bb.addAscii(""); // Appearance (costume)
 		bb.addBoolean(true); // Visible
-		bb.addInt(0); // Buff list (Map, k = Integer v = Buff structure)
-			bb.addInt(0);
+		bb.addObject(buffs);
 		bb.addBoolean(false); // Is Performing
 		bb.addByte(difficulty.getDifficulty());
 		bb.addInt(-1); // Hologram Color

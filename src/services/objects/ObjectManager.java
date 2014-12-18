@@ -28,7 +28,6 @@ import resources.Terrain;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.ObjectData;
 import resources.client_info.visitors.SlotArrangementData;
-import resources.client_info.visitors.SlotDefinitionData;
 import resources.client_info.visitors.SlotDescriptorData;
 import resources.control.Intent;
 import resources.control.Manager;
@@ -310,5 +309,9 @@ public class ObjectManager extends Manager {
 	
 	private WeaponObject createWeaponObject(long objectId, String template) {
 		return new WeaponObject(objectId);
+	}
+	
+	public SWGObject getObjectById(long id) {
+		return objects.get(id);
 	}
 }
