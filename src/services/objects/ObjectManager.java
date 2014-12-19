@@ -43,6 +43,7 @@ import resources.player.Player;
 import resources.server_info.ObjectDatabase;
 import resources.server_info.ObjectDatabase.Traverser;
 import services.player.PlayerManager;
+import utilities.Console;
 
 public class ObjectManager extends Manager {
 	
@@ -141,7 +142,7 @@ public class ObjectManager extends Manager {
 			addObjectAttributes(obj, template);
 			obj.setTemplate(template);
 			obj.setLocation(l);
-			addToQuadtree(obj, l);
+//			addToQuadtree(obj, l);
 //			moveObject(obj, null, l);
 			objects.put(objectId, obj);
 			return obj;
@@ -149,32 +150,35 @@ public class ObjectManager extends Manager {
 	}
 	
 	// Adds an object to the quadtree and refreshes awareness lists in the object added as well as adds the Player to objects in range (if there is one)
-	private void addToQuadtree(SWGObject obj, Location loc) {
+	public void addToQuadtree(SWGObject obj, Location loc) {
 		if (loc == null || loc.isNaN()) // Object is inside a container or it's a slot of an item
 			return;
 
 		double x = loc.getX(), z = loc.getY();
 		
-		List<Player> awarePlayers = new ArrayList<Player>();
+		//boolean createObject = (obj.getOwner() != null); // Determine if we need to send any createObject packets to obj's owner for any objects within range
 
+		List<Player> observers = new ArrayList<Player>(); // observers of this object
+		
 		QuadTree<SWGObject> tree = quadTree.get(loc.getTerrain());
 		for (SWGObject inRange : tree.getWithinRange(x, z, AWARE_RANGE)) {
-			if (inRange != null && inRange.getOwner() != null && inRange.getObjectId() != obj.getObjectId()) {
-				if (obj.getOwner() != null)
-					inRange.addToAwareness(obj.getOwner());
+			if (inRange != null && inRange.getObjectId() != obj.getObjectId()) {
+				//if (createObject)
+					//inRange.addObserver(obj.getOwner());
 				
-				awarePlayers.add(inRange.getOwner());
+				if (inRange.getOwner() != null)
+					observers.add(inRange.getOwner()); // Add the inRange obj's Player to this objects observer list and send a createObject delta to the inRange owner
 			}
 		}
-		if (awarePlayers.size() > 0)
-			obj.updateAwareness(awarePlayers);
-		
+		obj.updateObserversList(observers);
 		quadTree.get(loc.getTerrain()).put(x, z, obj);
 	}
 	
 	private void moveObject(SWGObject obj, Location oldLocation, Location newLocation) {
+		System.out.println("=== Moving Player: " + obj.getName() + " ===");
 		double x = 0, y = 0;
-		List <Player> updatedAware = new ArrayList<Player>();
+		
+		List<Player> observers = new ArrayList<Player>(); // observers of this object
 		if (oldLocation != null && oldLocation.getTerrain() != null) { // Remove from QuadTree
 			x = oldLocation.getX();
 			y = oldLocation.getZ();
@@ -190,17 +194,19 @@ public class ObjectManager extends Manager {
 			y = newLocation.getZ();
 			QuadTree<SWGObject> tree = quadTree.get(newLocation.getTerrain());
 			for (SWGObject inRange : tree.getWithinRange(x, y, AWARE_RANGE)) {
-				if (inRange.getOwner() != null && inRange.getObjectId() != obj.getObjectId()) {
-					inRange.addToAwareness(obj.getOwner());
-					if (!updatedAware.contains(inRange.getOwner())) // TODO: This is a really bad fix for duplicates being put into awareness list..
-						updatedAware.add(inRange.getOwner());
+				if (inRange != null && inRange.getObjectId() != obj.getObjectId()) {
+					Console.print(obj.getName() + ": In range of " + inRange.getName());
+					inRange.addObserver(obj.getOwner()); // Send a createObject for inRange if the obj's owner doesn't exist in inRange's observers list
+					if (inRange.getOwner() == null)
+						System.out.println("INRANGE OBJ HAS NULL OWNER: " + inRange.getName());
+					else
+						observers.add(inRange.getOwner()); // Add inRange's owner to the updated observers list
 				}
 			}
 			quadTree.get(newLocation.getTerrain()).put(x, y, obj);
 		}
-		//System.out.println(obj.getName() + " is aware Of: " + updatedAware.size() + " player(s)");
-		obj.updateAwareness(updatedAware);
-		obj.sendDataTransforms();
+		obj.updateObserversList(observers); // Send a createObject to the new Player's in this list and a destroyObject to ones that no longer exist in this list compared to old one
+//		obj.sendDataTransforms();
 	}
 	
 	private void addObjectAttributes(SWGObject obj, String template) {
