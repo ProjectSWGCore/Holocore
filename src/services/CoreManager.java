@@ -4,9 +4,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import network.packets.soe.DataChannelA;
-import network.packets.swg.SWGPacket;
-import network.packets.swg.zone.baselines.Baseline;
 import intents.InboundPacketIntent;
 import intents.OutboundPacketIntent;
 import resources.Galaxy;

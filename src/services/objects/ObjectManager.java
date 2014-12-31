@@ -2,10 +2,7 @@ package services.objects;
 
 import intents.GalacticPacketIntent;
 import intents.swgobject_events.SWGObjectEventIntent;
-import intents.swgobject_events.SWGObjectMovedIntent;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,7 +11,6 @@ import main.ProjectSWG;
 import network.packets.swg.zone.HeartBeatMessage;
 import network.packets.swg.zone.ParametersMessage;
 import network.packets.swg.zone.UpdatePvpStatusMessage;
-import network.packets.swg.zone.UpdateTransformsMessage;
 import network.packets.swg.zone.chat.ChatOnConnectAvatar;
 import network.packets.swg.zone.chat.VoiceChatStatus;
 import network.packets.swg.zone.insertion.ChatServerStatus;
