@@ -109,7 +109,7 @@ public class ZoneService extends Service {
 	
 	private void handleApproveNameRequest(PlayerManager playerMgr, Player player, ClientVerifyAndLockNameRequest request) {
 		// TODO: Lore reserved name checks
-		if (!playerMgr.doesPlayerNameExisit(request.getName()))
+		if (!characterExistsForName(request.getName()))
 			sendPacket(player.getNetworkId(), new ClientVerifyAndLockNameResponse(request.getName(), ErrorMessage.NAME_APPROVED));
 		else
 			sendPacket(player.getNetworkId(), new ClientVerifyAndLockNameResponse(request.getName(), ErrorMessage.NAME_DECLINED_IN_USE));
