@@ -9,6 +9,8 @@ import java.util.Calendar;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.python.antlr.PythonParser.return_stmt_return;
+
 import main.ProjectSWG;
 import network.packets.Packet;
 import network.packets.soe.SessionRequest;
@@ -53,6 +55,7 @@ public class ZoneService extends Service {
 	private ClientFactory clientFac;
 	
 	private PreparedStatement createCharacter;
+	private PreparedStatement getCharacter;
 	
 	public ZoneService() {
 		nameGenerator = new SWGNameGenerator();
@@ -63,6 +66,7 @@ public class ZoneService extends Service {
 	public boolean initialize() {
 		String createCharacterSql = "INSERT INTO characters (id, name, race, userId, galaxyId) VALUES (?, ?, ?, ?, ?)";
 		createCharacter = getLocalDatabase().prepareStatement(createCharacterSql);
+		getCharacter = getLocalDatabase().prepareStatement("SELECT * FROM characters WHERE name = ?");
 		nameGenerator.loadAllRules();
 		loadProfTemplates();
 		return super.initialize();
@@ -116,52 +120,73 @@ public class ZoneService extends Service {
 	private void handleCharCreation(ObjectManager objManager, Player player, ClientCreateCharacter create) {
 		System.out.println("Create Character: " + create.getName());
 		long characterId = createCharacter(objManager, player, create);
+		
+		if (createCharacterInDb(characterId, create.getName(), player)) {
+			sendPacket(player, new CreateCharacterSuccess(characterId));
+			new PlayerEventIntent(player, PlayerEvent.PE_CREATE_CHARACTER).broadcast();
+		} else {
+			System.err.println("ZoneService: Unable to create character and put into database!");
+			sendPacket(player, new CreateCharacterFailure(NameFailureReason.NAME_RETRY));
+		}
+	}
+	
+	private boolean createCharacterInDb(long characterId, String name, Player player) {
+		if (characterExistsForName(name))
+			return false;
 		synchronized (createCharacter) {
 			try {
 				createCharacter.setLong(1, characterId);
-				createCharacter.setString(2, create.getName());
+				createCharacter.setString(2, name);
 				createCharacter.setString(3, ((CreatureObject)player.getCreatureObject()).getRace().getFilename());
 				createCharacter.setInt(4, player.getUserId());
 				createCharacter.setInt(5, player.getGalaxyId());
-				if (createCharacter.executeUpdate() != 1) {
-					System.err.println("ZoneService: Unable to create character and put into database!");
-					sendPacket(player, new CreateCharacterFailure(NameFailureReason.NAME_RETRY));
-					return;
-				}
+				return createCharacter.executeUpdate() == 1;
 			} catch (SQLException e) {
-				System.err.println("ZoneService: Unable to create character and put into database!");
 				e.printStackTrace();
-				sendPacket(player, new CreateCharacterFailure(NameFailureReason.NAME_RETRY));
-				return;
+				return false;
 			}
 		}
-		sendPacket(player, new CreateCharacterSuccess(characterId));
-		new PlayerEventIntent(player, PlayerEvent.PE_CREATE_CHARACTER).broadcast();
+	}
+	
+	private boolean characterExistsForName(String name) {
+		synchronized (getCharacter) {
+			try {
+				getCharacter.setString(1, name);
+				return !getCharacter.execute();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return false;
+			}
+		}
 	}
 	
 	private long createCharacter(ObjectManager objManager, Player player, ClientCreateCharacter create) {
-		Location start = getStartLocation(create.getStart());
-		Race race = Race.getRaceByFile(create.getRace());
-		CreatureObject creatureObj = (CreatureObject) objManager.createObject(race.getFilename());
-		creatureObj.setVolume(0x000F4240);
-		PlayerObject playerObj     = (PlayerObject)   objManager.createObject("object/player/shared_player.iff");
-		//WeaponObject defaultWeap   = (WeaponObject) objManager.createObject("object/weapon/melee/unarmed/shared_unarmed_default_player.iff");
+		Location		start		= getStartLocation(create.getStart());
+		Race			race		= Race.getRaceByFile(create.getRace());
+		CreatureObject	creatureObj	= (CreatureObject) objManager.createObject(race.getFilename());
+		PlayerObject	playerObj	= (PlayerObject)   objManager.createObject("object/player/shared_player.iff");
+		
 		setCreatureObjectValues(objManager, creatureObj, create);
 		setPlayerObjectValues(playerObj, create);
-		playerObj.setTag(player.getAccessLevel());
-		if (!create.getHair().isEmpty()) {
-			TangibleObject hairObj     = (TangibleObject) objManager.createObject(ClientFactory.formatToSharedFile(create.getHair()));
-			hairObj.setAppearanceData(create.getHairCustomization());
-			creatureObj.setSlot("hair", hairObj);
-			creatureObj.addEquipment(hairObj);
-		}
+		createHair(objManager, creatureObj, create.getHair(), create.getHairCustomization());
 		createStarterClothing(objManager, creatureObj, create.getRace(), create.getClothes());
+		
+		creatureObj.setVolume(0x000F4240);
 		creatureObj.setLocation(start);
-		//playerObj.setLocation(start); //no location as it's a child of CreatureObject
-		player.setCreatureObject(creatureObj);
 		creatureObj.setOwner(player);
 		creatureObj.setSlot("ghost", playerObj);
+		playerObj.setTag(player.getAccessLevel());
+		player.setCreatureObject(creatureObj);
 		return creatureObj.getObjectId();
+	}
+	
+	private void createHair(ObjectManager objManager, CreatureObject creatureObj, String hair, byte [] customization) {
+		if (hair.isEmpty())
+			return;
+		TangibleObject hairObj = (TangibleObject) objManager.createObject(ClientFactory.formatToSharedFile(hair));
+		hairObj.setAppearanceData(customization);
+		creatureObj.setSlot("hair", hairObj);
+		creatureObj.addEquipment(hairObj);
 	}
 	
 	private void setCreatureObjectValues(ObjectManager objManager, CreatureObject creatureObj, ClientCreateCharacter create) {
