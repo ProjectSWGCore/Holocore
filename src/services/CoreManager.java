@@ -1,9 +1,17 @@
 package services;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import network.packets.Packet;
+import network.packets.soe.DataChannelA;
+import network.packets.soe.MultiPacket;
+import network.packets.swg.SWGPacket;
+import network.packets.swg.zone.baselines.Baseline;
 import intents.InboundPacketIntent;
 import intents.OutboundPacketIntent;
 import resources.Galaxy;
@@ -16,7 +24,18 @@ import services.galaxy.GalacticManager;
 public class CoreManager extends Manager {
 	
 	private static final int galaxyId = 1;
-
+	private static final boolean debugOutput = true;
+	private static PrintStream packetOutput;
+	
+	static {
+		try {
+			packetOutput = new PrintStream(new FileOutputStream("packets.txt", true));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			packetOutput = System.out;
+		}
+	}
+	
 	private EngineManager engineManager;
 	private GalacticManager galacticManager;
 	private Galaxy galaxy;
@@ -51,26 +70,51 @@ public class CoreManager extends Manager {
 	
 	@Override
 	public void onIntentReceived(Intent i) {
-		/*if (i instanceof InboundPacketIntent) {
-			InboundPacketIntent in = (InboundPacketIntent) i;
-			System.out.println("IN  " + in.getNetworkId() + ":" + in.getServerType() + "\t" + in.getPacket().getClass().getSimpleName());
-			if (in.getPacket() instanceof DataChannelA) {
-				for (SWGPacket p : ((DataChannelA) in.getPacket()).getPackets()) {
-					System.out.println("    " + p.getClass().getSimpleName());
-				}
+		if (debugOutput) {
+			if (i instanceof InboundPacketIntent) {
+				InboundPacketIntent in = (InboundPacketIntent) i;
+				packetOutput.println("IN  " + in.getNetworkId() + ":" + in.getServerType());
+				outputPacket(1, in.getPacket());
+			} else if (i instanceof OutboundPacketIntent) {
+				OutboundPacketIntent out = (OutboundPacketIntent) i;
+				packetOutput.println("OUT " + out.getNetworkId());
+				outputPacket(1, out.getPacket());
 			}
-		} else if (i instanceof OutboundPacketIntent) {
-			OutboundPacketIntent out = (OutboundPacketIntent) i;
-			System.out.println("OUT " + out.getNetworkId() + "     \t" + out.getPacket().getClass().getSimpleName());
-			if (out.getPacket() instanceof DataChannelA) {
-				for (SWGPacket p : ((DataChannelA) out.getPacket()).getPackets()) {
-					if (p instanceof Baseline)
-						System.out.println("    Baseline " + ((Baseline)p).getType() + " " + ((Baseline)p).getNum());
-					else
-						System.out.println("    " + p.getClass().getSimpleName());
-				}
+		}
+	}
+	
+	private void outputPacket(int indent, Packet packet) {
+		if (packet instanceof DataChannelA) {
+			for (SWGPacket p : ((DataChannelA) packet).getPackets()) {
+				for (int i = 0; i < indent; i++)
+					packetOutput.print("    ");
+				outputSWG(p);
 			}
-		}*/
+		} else if (packet instanceof MultiPacket) {
+			for (Packet p : ((MultiPacket) packet).getPackets()) {
+				for (int i = 0; i < indent; i++)
+					packetOutput.print("    ");
+				if (p instanceof SWGPacket)
+					outputSWG((SWGPacket) p);
+				if (p instanceof DataChannelA)
+					outputPacket(indent+1, p);
+			}
+		} else if (packet instanceof SWGPacket) {
+			for (int i = 0; i < indent; i++)
+				packetOutput.print("    ");
+			outputSWG((SWGPacket) packet);
+		} else {
+			for (int i = 0; i < indent; i++)
+				packetOutput.print("    ");
+			packetOutput.print(packet.getClass().getSimpleName());
+		}
+	}
+	
+	private void outputSWG(SWGPacket p) {
+		if (p instanceof Baseline)
+			packetOutput.println("Baseline " + ((Baseline)p).getType() + " " + ((Baseline)p).getNum());
+		else
+			packetOutput.println(p.getClass().getSimpleName());
 	}
 	
 	/**
