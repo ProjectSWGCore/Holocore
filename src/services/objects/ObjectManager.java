@@ -2,7 +2,9 @@ package services.objects;
 
 import intents.GalacticPacketIntent;
 import intents.swgobject_events.SWGObjectEventIntent;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -157,7 +159,7 @@ public class ObjectManager extends Manager {
 		for (SWGObject inRange : tree.getWithinRange(x, z, AWARE_RANGE)) {
 			if (inRange != null && inRange.getOwner() != null && inRange.getObjectId() != obj.getObjectId()) {
 				if (obj.getOwner() != null)
-					inRange.addToAwareness(obj.getOwner());
+					inRange.updateAwareness(obj.getOwner(), true);
 				
 				awarePlayers.add(inRange.getOwner());
 			}
@@ -174,27 +176,19 @@ public class ObjectManager extends Manager {
 		if (oldLocation != null && oldLocation.getTerrain() != null) { // Remove from QuadTree
 			x = oldLocation.getX();
 			y = oldLocation.getZ();
-
-			if (quadTree.get(oldLocation.getTerrain()).get(x, y) != null)
-				quadTree.get(oldLocation.getTerrain()).remove(x, y, obj);
-			else
-				System.err.println("Tried to get a null quad in the quadtree!");
+			quadTree.get(oldLocation.getTerrain()).remove(x, y, obj);
 		}
 		if (newLocation != null && newLocation.getTerrain() != null) { // Add to QuadTree, update awareness
 			obj.setLocation(newLocation);
 			x = newLocation.getX();
 			y = newLocation.getZ();
 			QuadTree<SWGObject> tree = quadTree.get(newLocation.getTerrain());
-			for (SWGObject inRange : tree.getWithinRange(x, y, AWARE_RANGE)) {
-				if (inRange.getOwner() != null && inRange.getObjectId() != obj.getObjectId()) {
-					inRange.addToAwareness(obj.getOwner());
-					if (!updatedAware.contains(inRange.getOwner())) // TODO: This is a really bad fix for duplicates being put into awareness list..
-						updatedAware.add(inRange.getOwner());
-				}
-			}
+			for (SWGObject inRange : tree.getWithinRange(x, y, AWARE_RANGE))
+				if (inRange.getOwner() != null && inRange.getObjectId() != obj.getObjectId())
+					updatedAware.add(inRange.getOwner());
 			quadTree.get(newLocation.getTerrain()).put(x, y, obj);
 		}
-		System.out.println(obj.getName() + " is aware Of: " + updatedAware.size() + " player(s)");
+		System.out.println(obj.getName() + " - " + Arrays.toString(updatedAware.toArray()));
 		obj.updateAwareness(updatedAware);
 		obj.sendDataTransforms();
 	}
