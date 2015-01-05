@@ -4,7 +4,6 @@ import intents.GalacticPacketIntent;
 import intents.swgobject_events.SWGObjectEventIntent;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -71,6 +70,7 @@ public class ObjectManager extends Manager {
 		objects.traverse(new Traverser<SWGObject>() {
 			@Override
 			public void process(SWGObject obj) {
+				obj.setOwner(null);
 				Location l = obj.getLocation();
 				if (l.getTerrain() != null) {
 					QuadTree <SWGObject> tree = quadTree.get(l.getTerrain());
@@ -94,6 +94,12 @@ public class ObjectManager extends Manager {
 	
 	@Override
 	public boolean terminate() {
+		objects.traverse(new Traverser<SWGObject>() {
+			@Override
+			public void process(SWGObject obj) {
+				obj.setOwner(null);
+			}
+		});
 		objects.save();
 		return super.terminate();
 	}
@@ -171,24 +177,29 @@ public class ObjectManager extends Manager {
 	}
 	
 	private void moveObject(SWGObject obj, Location oldLocation, Location newLocation) {
-		double x = 0, y = 0;
-		List <Player> updatedAware = new ArrayList<Player>();
 		if (oldLocation != null && oldLocation.getTerrain() != null) { // Remove from QuadTree
-			x = oldLocation.getX();
-			y = oldLocation.getZ();
+			double x = oldLocation.getX();
+			double y = oldLocation.getZ();
 			quadTree.get(oldLocation.getTerrain()).remove(x, y, obj);
 		}
 		if (newLocation != null && newLocation.getTerrain() != null) { // Add to QuadTree, update awareness
 			obj.setLocation(newLocation);
-			x = newLocation.getX();
-			y = newLocation.getZ();
-			QuadTree<SWGObject> tree = quadTree.get(newLocation.getTerrain());
-			for (SWGObject inRange : tree.getWithinRange(x, y, AWARE_RANGE))
-				if (inRange.getOwner() != null && inRange.getObjectId() != obj.getObjectId())
-					updatedAware.add(inRange.getOwner());
-			quadTree.get(newLocation.getTerrain()).put(x, y, obj);
+			updateAwarenessForObject(obj);
+			quadTree.get(newLocation.getTerrain()).put(newLocation.getX(), newLocation.getZ(), obj);
 		}
-		System.out.println(obj.getName() + " - " + Arrays.toString(updatedAware.toArray()));
+	}
+	
+	private void updateAwarenessForObject(SWGObject obj) {
+		Location location = obj.getLocation();
+		List <Player> updatedAware = new ArrayList<Player>();
+		double x = location.getX();
+		double y = location.getZ();
+		QuadTree<SWGObject> tree = quadTree.get(location.getTerrain());
+		for (SWGObject inRange : tree.getWithinRange(x, y, AWARE_RANGE)) {
+			if (inRange.getOwner() != null && inRange.getObjectId() != obj.getObjectId()) {
+				updatedAware.add(inRange.getOwner());
+			}
+		}
 		obj.updateAwareness(updatedAware);
 		obj.sendDataTransforms();
 	}
@@ -240,6 +251,9 @@ public class ObjectManager extends Manager {
 			CreatureObject creature = (CreatureObject) player.getCreatureObject();
 			player.sendPacket(new UpdatePvpStatusMessage(creature.getPvpType(), creature.getPvpFactionId(), creature.getObjectId()));
 			creature.createObject(player);
+			creature.clearAware();
+			moveObject(creature, creature.getLocation(), creature.getLocation());
+			updateAwarenessForObject(creature);
 		}
 	}
 	
@@ -252,6 +266,7 @@ public class ObjectManager extends Manager {
 			throw new NullPointerException("CreatureObject for ID: " + characterId + " cannot be null!");
 		}
 		player.setCreatureObject(creature); // CreatureObject contains the player object!
+		creature.setOwner(player);
 		
 		if (player.getPlayerObject() == null) {
 			System.err.println("FATAL: " + player.getUsername() + "'s CreatureObject has a null ghost!");

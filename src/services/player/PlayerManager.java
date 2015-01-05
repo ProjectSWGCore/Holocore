@@ -3,6 +3,8 @@ package services.player;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 import network.packets.Packet;
 import network.packets.swg.login.ClientIdMsg;
@@ -11,21 +13,18 @@ import resources.control.Intent;
 import resources.control.Manager;
 import resources.network.ServerType;
 import resources.player.Player;
-import resources.server_info.ObjectDatabase;
-import resources.server_info.ObjectDatabase.Traverser;
 
 public class PlayerManager extends Manager {
 	
-	private LoginService loginService;
-	private ZoneService zoneService;
-	
-	private ObjectDatabase <Player> players;
+	private final Map <Long, Player> players;
+	private final LoginService loginService;
+	private final ZoneService zoneService;
 	
 	public PlayerManager() {
 		loginService = new LoginService();
 		zoneService = new ZoneService();
 		
-		players = new ObjectDatabase<Player>("odb/players.db");
+		players = new HashMap<Long, Player>();
 		
 		addChildService(loginService);
 		addChildService(zoneService);
@@ -34,19 +33,11 @@ public class PlayerManager extends Manager {
 	@Override
 	public boolean initialize() {
 		registerForIntent(GalacticPacketIntent.TYPE);
-		players.loadToCache();
-		players.traverse(new Traverser<Player>() {
-			@Override
-			public void process(Player p) {
-				p.setPlayerManager(PlayerManager.this);
-			}
-		});
 		return super.initialize();
 	}
 	
 	@Override
 	public boolean terminate() {
-		players.save();
 		return super.terminate();
 	}
 	
@@ -59,8 +50,9 @@ public class PlayerManager extends Manager {
 			long networkId = gpi.getNetworkId();
 			Player player = null;
 			if (type == ServerType.ZONE && packet instanceof ClientIdMsg)
-				transitionLoginToZone(networkId, gpi.getGalaxy().getId(), (ClientIdMsg) packet);
-			player = players.get(networkId);
+				player = transitionLoginToZone(networkId, gpi.getGalaxy().getId(), (ClientIdMsg) packet);
+			else
+				player = players.get(networkId);
 			if (player == null && type == ServerType.LOGIN) {
 				player = new Player(this, networkId);
 				players.put(networkId, player);
@@ -89,14 +81,13 @@ public class PlayerManager extends Manager {
 		return false;
 	}
 	
-	private void transitionLoginToZone(final long networkId, final int galaxyId, ClientIdMsg clientId) {
+	private Player transitionLoginToZone(final long networkId, final int galaxyId, ClientIdMsg clientId) {
 		final byte [] nToken = clientId.getSessionToken();
-		players.traverse(new Traverser<Player>() {
-			@Override
-			public void process(Player p) {
+		synchronized (players) {
+			for (Player p : players.values()) {
 				byte [] pToken = p.getSessionToken();
 				if (pToken.length != nToken.length)
-					return;
+					continue;
 				boolean match = true;
 				for (int t = 0; t < pToken.length && match; t++) {
 					if (pToken[t] != nToken[t])
@@ -107,9 +98,11 @@ public class PlayerManager extends Manager {
 					p.setNetworkId(networkId);
 					p.setGalaxyId(galaxyId);
 					players.put(networkId, p);
+					return p;
 				}
 			}
-		});
+		}
+		return null;
 	}
 	
 	public Player getPlayerFromNetworkId(long networkId) {

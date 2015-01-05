@@ -380,6 +380,7 @@ public class CreatureObject extends TangibleObject {
 	}
 	
 	public void createObject(Player target) {
+		System.out.println(getName() + " sent to " + target.getCreatureObject().getName());
 		sendSceneCreateObject(target);
 		
 		BaselineBuilder bb = null;
