@@ -1,5 +1,7 @@
 package services.chat;
 
+import java.util.List;
+
 import intents.GalacticPacketIntent;
 import intents.chat.SpatialChatIntent;
 import network.packets.Packet;
@@ -8,6 +10,7 @@ import network.packets.swg.zone.object_controller.ObjectController;
 import network.packets.swg.zone.object_controller.SpatialChat;
 import resources.control.Intent;
 import resources.control.Service;
+import resources.objects.SWGObject;
 import resources.player.Player;
 
 public class ChatService extends Service {
@@ -45,12 +48,25 @@ public class ChatService extends Service {
 	}
 	
 	private void handleSpatialChat(SpatialChatIntent i) {
-		// TODO: Update for awareness
 		Player sender = i.getPlayer();
+		SWGObject actor = sender.getCreatureObject();
+		String chatMsg = i.getMessage();
 		
-		SpatialChat message = new SpatialChat(sender.getCreatureObject().getObjectId(), 0, i.getMessage(), 0);
-		ObjectController controller = new ObjectController(244, sender.getCreatureObject().getObjectId(), message);
+		// Send to self
+		SpatialChat message = new SpatialChat(actor.getObjectId(), 0, chatMsg, 0);
+		ObjectController controller = new ObjectController(244, actor.getObjectId(), message);
 
 		sender.sendPacket(controller);
+		
+		// Notify observers of the chat message
+		List<Player> observers = actor.getObservers();
+		for (Player observer : observers) {
+			if (observer.getCreatureObject() == null)
+				continue;
+			
+			message = new SpatialChat(actor.getObjectId(), 0, chatMsg, 0);
+			controller = new ObjectController(244, observer.getCreatureObject().getObjectId(), message);
+			observer.sendPacket(controller);
+		}
 	}
 }
