@@ -1,10 +1,14 @@
 package resources.objects.waypoint;
 
+import java.nio.ByteBuffer;
+import java.nio.charset.Charset;
+
 import resources.network.BaselineBuilder;
+import resources.network.BaselineBuilder.Encodable;
 import resources.objects.intangible.IntangibleObject;
 import resources.player.Player;
 
-public class WaypointObject extends IntangibleObject {
+public class WaypointObject extends IntangibleObject implements Encodable{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -94,5 +98,22 @@ public class WaypointObject extends IntangibleObject {
 		
 		createChildrenObjects(target);
 		target.sendPacket(new SceneEndBaselines(getObjectId()));*/
+	}
+
+
+	@Override
+	public byte[] encode() {
+		ByteBuffer bb = ByteBuffer.allocate(34 + name.length() * 2);
+		bb.putInt(cellNumber);
+		bb.putFloat((float) getLocation().getX());
+		bb.putFloat((float) getLocation().getY());
+		bb.putFloat((float) getLocation().getZ());
+		bb.putLong(targetId); // unsure when this is anything but 0, have yet to see it change
+		bb.putInt(getLocation().getTerrain().getCrc());
+		bb.putInt(name.length());
+		bb.put(name.getBytes(Charset.forName("UTF-16LE")));
+		bb.put((byte) color);
+		bb.put((byte) (active ? 1 : 0));
+		return bb.array();
 	}
 }

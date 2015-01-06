@@ -11,6 +11,7 @@ import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
 import resources.commands.Command;
 import resources.commands.ICmdCallback;
+import resources.commands.callbacks.WaypointCmdCallback;
 import resources.common.CRC;
 import resources.control.Intent;
 import resources.control.Service;
@@ -60,7 +61,7 @@ public class CommandService extends Service {
 	private void handleCommandRequest(Player player, ObjectManager objManager, CommandQueueEnqueue request) {
 		if (!commands.containsKey(request.getCrc()))
 			return;
-		
+//		System.out.println(commands.get(request.getCrc()).toString());
 		SWGObject target = null;
 		if (request.getTargetId() != 0) { target = objManager.getObjectById(request.getTargetId()); }
 		
@@ -89,25 +90,30 @@ public class CommandService extends Service {
 	private void loadBaseCommands() {
 		ClientFactory clientFac = new ClientFactory();
 		
-		DatatableData baseCommands = (DatatableData) clientFac.getInfoFromFile("datatables/command/command_table.iff");
+		String[] commandTables = new String[] {
+				"command_table", "client_command_table", "command_table_ground"
+		};
 		
-		for (int row = 0; row < baseCommands.getRowCount(); row++) {
-			Command command = new Command((String) baseCommands.getCell(row, 0));
-			command.setCrc(CRC.getCrc(command.getName().toLowerCase()));
-			// Use cppHook if the scriptHook is empty
-			command.setScriptCallback(((String) (((String) baseCommands.getCell(row, 2)).isEmpty() ? baseCommands.getCell(row, 4) : baseCommands.getCell(row, 2))) + ".py");
-			command.setDefaultTime((float) baseCommands.getCell(row, 6));
-			command.setCharacterAbility((String) baseCommands.getCell(row, 7));
+		for (int t = 0; t < commandTables.length; t++) {
+			DatatableData baseCommands = (DatatableData) clientFac.getInfoFromFile("datatables/command/" + commandTables[t] + ".iff");
 			
-			commands.put(command.getCrc(), command);
-			commandCrcLookup.put(command.getName(), command.getCrc());
+			for (int row = 0; row < baseCommands.getRowCount(); row++) {
+				Command command = new Command((String) baseCommands.getCell(row, 0));
+				command.setCrc(CRC.getCrc(command.getName().toLowerCase()));
+				// Use cppHook if the scriptHook is empty
+				command.setScriptCallback(((String) (((String) baseCommands.getCell(row, 2)).isEmpty() ? baseCommands.getCell(row, 4) : baseCommands.getCell(row, 2))) + ".py");
+				command.setDefaultTime((float) baseCommands.getCell(row, 6));
+				command.setCharacterAbility((String) baseCommands.getCell(row, 7));
+				
+				commands.put(command.getCrc(), command);
+				commandCrcLookup.put(command.getName(), command.getCrc());
+			}
 		}
 	}
 	
-	@SuppressWarnings("unused")
 	private void registerCallback(String command, ICmdCallback callback) { commands.get(commandCrcLookup.get(command)).setJavaCallback(callback); }
 	
 	private void registerCallbacks() {
-		// Example: registerCallback("spatialChatInternal", new SpatialChatCallback());
+		registerCallback("waypoint", new WaypointCmdCallback());
 	}
 }

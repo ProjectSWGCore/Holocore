@@ -32,6 +32,12 @@ public class PlayerObject extends IntangibleObject {
 		setVolume(0);
 	}
 	
+	public void addWaypoint(WaypointObject waypoint) {
+		synchronized(waypoints) {
+			waypoints.put(waypoint.getObjectId(), waypoint);
+		}
+	}
+	
 	public String getProfession() {
 		return profession;
 	}
