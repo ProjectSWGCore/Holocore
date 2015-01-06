@@ -4,12 +4,15 @@ import intents.GalacticPacketIntent;
 import intents.chat.SpatialChatIntent;
 import network.packets.Packet;
 import network.packets.swg.zone.ChatRequestRoomList;
+import network.packets.swg.zone.chat.ChatInstantMessageToCharacter;
+import network.packets.swg.zone.chat.ChatInstantMessageToClient;
 import network.packets.swg.zone.object_controller.ObjectController;
 import network.packets.swg.zone.object_controller.SpatialChat;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.player.Player;
+import services.player.PlayerManager;
 
 public class ChatService extends Service {
 	
@@ -32,6 +35,8 @@ public class ChatService extends Service {
 			if (player != null) {
 				if (p instanceof ChatRequestRoomList)
 					handleChatRoomListRequest(player, (ChatRequestRoomList) p);
+				else if (p instanceof ChatInstantMessageToCharacter)
+					handleInstantMessage(((GalacticPacketIntent) i).getPlayerManager(), player, (ChatInstantMessageToCharacter) p);
 			}
 		} 
 		else if (i instanceof SpatialChatIntent)
@@ -66,5 +71,12 @@ public class ChatService extends Service {
 			controller = new ObjectController(244, observer.getCreatureObject().getObjectId(), message);
 			observer.sendPacket(controller);
 		}
+	}
+	
+	private void handleInstantMessage(PlayerManager playerMgr, Player sender, ChatInstantMessageToCharacter request) {
+		String sReceiver = request.getCharacter();
+		String sSender = sender.getCreatureObject().getName();
+		
+		
 	}
 }
