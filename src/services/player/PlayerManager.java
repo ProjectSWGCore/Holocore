@@ -1,8 +1,5 @@
 package services.player;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -66,19 +63,28 @@ public class PlayerManager extends Manager {
 		}
 	}
 	
-	public boolean doesPlayerNameExisit(String characterName) {
-		try {
-			PreparedStatement statement = getLocalDatabase().prepareStatement("SELECT * FROM characters WHERE name = ?");
-			statement.setString(1, characterName);
-			
-			ResultSet results = statement.executeQuery();
-			return results.next();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
+	public Player getPlayerByCreatureName(String name) {
+		synchronized (players) {
+			for (Player p : players.values()) {
+				if (p.getCreatureObject() != null && p.getCreatureObject().getName().equals(name))
+					return p;
+			}
 		}
-		
-		return false;
+		return null;
+	}
+	
+	public Player getPlayerByCreatureFirstName(String name) {
+		synchronized (players) {
+			for (Player p : players.values()) {
+				if (p.getCreatureObject() != null) {
+					String cName = p.getCreatureObject().getName();
+					if (cName.startsWith(name) && (cName.length() == name.length() || cName.charAt(name.length()) == ' ')) {
+						return p;
+					}
+				}
+			}
+		}
+		return null;
 	}
 	
 	private Player transitionLoginToZone(final long networkId, final int galaxyId, ClientIdMsg clientId) {
