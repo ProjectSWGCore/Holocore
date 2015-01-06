@@ -1,7 +1,5 @@
 package services.chat;
 
-import java.util.List;
-
 import intents.GalacticPacketIntent;
 import intents.chat.SpatialChatIntent;
 import network.packets.Packet;
@@ -51,20 +49,20 @@ public class ChatService extends Service {
 		Player sender = i.getPlayer();
 		SWGObject actor = sender.getCreatureObject();
 		String chatMsg = i.getMessage();
+		int chatType = i.getChatType();
 		
 		// Send to self
-		SpatialChat message = new SpatialChat(actor.getObjectId(), 0, chatMsg, 0);
+		SpatialChat message = new SpatialChat(actor.getObjectId(), 0, chatMsg, chatType);
 		ObjectController controller = new ObjectController(244, actor.getObjectId(), message);
 
 		sender.sendPacket(controller);
 		
 		// Notify observers of the chat message
-		List<Player> observers = actor.getObservers();
-		for (Player observer : observers) {
+		for (Player observer : actor.getObservers()) {
 			if (observer.getCreatureObject() == null)
 				continue;
 			
-			message = new SpatialChat(actor.getObjectId(), 0, chatMsg, 0);
+			message = new SpatialChat(actor.getObjectId(), 0, chatMsg, chatType);
 			controller = new ObjectController(244, observer.getCreatureObject().getObjectId(), message);
 			observer.sendPacket(controller);
 		}
