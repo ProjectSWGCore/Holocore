@@ -149,7 +149,6 @@ public class TangibleObject extends SWGObject {
 	}
 	
 	public void createChildrenObjects(Player target) {
-//		target.sendPacket(new UpdatePvpStatusMessage(pvpType, pvpFactionId, getObjectId()));
 		super.createChildrenObjects(target);
 	}
 	
