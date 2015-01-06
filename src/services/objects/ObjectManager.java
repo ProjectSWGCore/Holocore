@@ -118,7 +118,7 @@ public class ObjectManager extends Manager {
 					Location oldLocation = obj.getLocation();
 					Location newLocation = trans.getLocation();
 					newLocation.setTerrain(oldLocation.getTerrain());
-					moveObject(obj, oldLocation, newLocation);
+					moveObject(trans, obj, oldLocation, newLocation);
 				}
 			}
 		}
@@ -146,13 +146,13 @@ public class ObjectManager extends Manager {
 			obj.setTemplate(template);
 			obj.setLocation(l);
 //			addToQuadtree(obj, l);
-			moveObject(obj, null, l);
+			moveObject(null, obj, null, l);
 			objects.put(objectId, obj);
 			return obj;
 		}
 	}
 	
-	private void moveObject(SWGObject obj, Location oldLocation, Location newLocation) {
+	private void moveObject(DataTransform transform, SWGObject obj, Location oldLocation, Location newLocation) {
 		if (oldLocation != null && oldLocation.getTerrain() != null) { // Remove from QuadTree
 			double x = oldLocation.getX();
 			double y = oldLocation.getZ();
@@ -163,6 +163,8 @@ public class ObjectManager extends Manager {
 			updateAwarenessForObject(obj);
 			quadTree.get(newLocation.getTerrain()).put(newLocation.getX(), newLocation.getZ(), obj);
 		}
+		if (transform != null)
+			obj.sendDataTransforms(transform);
 	}
 	
 	private void updateAwarenessForObject(SWGObject obj) {
@@ -177,7 +179,6 @@ public class ObjectManager extends Manager {
 			}
 		}
 		obj.updateAwareness(updatedAware);
-		obj.sendDataTransforms();
 	}
 	
 	private void addObjectAttributes(SWGObject obj, String template) {
@@ -228,7 +229,7 @@ public class ObjectManager extends Manager {
 			player.sendPacket(new UpdatePvpStatusMessage(creature.getPvpType(), creature.getPvpFactionId(), creature.getObjectId()));
 			creature.createObject(player);
 			creature.clearAware();
-			moveObject(creature, creature.getLocation(), creature.getLocation());
+			moveObject(null, creature, creature.getLocation(), creature.getLocation());
 			updateAwarenessForObject(creature);
 		}
 	}

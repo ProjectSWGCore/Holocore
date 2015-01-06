@@ -2,6 +2,7 @@ package resources.objects.creature;
 
 import network.packets.swg.zone.SceneEndBaselines;
 import network.packets.swg.zone.UpdatePostureMessage;
+import network.packets.swg.zone.UpdatePvpStatusMessage;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.Posture;
 import resources.Race;
@@ -380,7 +381,6 @@ public class CreatureObject extends TangibleObject {
 	}
 	
 	public void createObject(Player target) {
-		System.out.println(getName() + " sent to " + target.getCreatureObject().getName());
 		sendSceneCreateObject(target);
 		
 		BaselineBuilder bb = null;
@@ -422,6 +422,7 @@ public class CreatureObject extends TangibleObject {
 	
 	public void createChildrenObjects(Player target) {
 		target.sendPacket(new UpdatePostureMessage(posture.getId(), getObjectId()));
+		if (target != getOwner()) target.sendPacket(new UpdatePvpStatusMessage(UpdatePvpStatusMessage.PLAYER, 0, getObjectId())); // TODO: Change this when adding non-players
 		super.createChildrenObjects(target);
 	}
 	
