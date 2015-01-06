@@ -10,6 +10,7 @@ import intents.GalacticPacketIntent;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
 import resources.commands.Command;
+import resources.commands.ICmdCallback;
 import resources.common.CRC;
 import resources.control.Intent;
 import resources.control.Service;
@@ -32,6 +33,7 @@ public class CommandService extends Service {
 		commandCrcLookup = new ConcurrentHashMap<String, Integer>();
 		registerForIntent(GalacticPacketIntent.TYPE);
 		loadBaseCommands();
+		registerCallbacks();
 		return super.initialize();
 	}
 
@@ -78,7 +80,10 @@ public class CommandService extends Service {
 		
 		// TODO: Handle for different targetType
 
-		Scripts.execute("commands/generic/" + command.getScriptCallback(), "execute", objManager, player, target, args);
+		if (command.hasJavaCallback())
+			command.getJavaCallback().execute(objManager, player, target, args);
+		else
+			Scripts.execute("commands/generic/" + command.getScriptCallback(), "execute", objManager, player, target, args);
 	}
 	
 	private void loadBaseCommands() {
@@ -97,5 +102,12 @@ public class CommandService extends Service {
 			commands.put(command.getCrc(), command);
 			commandCrcLookup.put(command.getName(), command.getCrc());
 		}
+	}
+	
+	@SuppressWarnings("unused")
+	private void registerCallback(String command, ICmdCallback callback) { commands.get(commandCrcLookup.get(command)).setJavaCallback(callback); }
+	
+	private void registerCallbacks() {
+		// Example: registerCallback("spatialChatInternal", new SpatialChatCallback());
 	}
 }
