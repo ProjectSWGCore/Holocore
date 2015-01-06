@@ -6,6 +6,7 @@ import network.packets.Packet;
 import network.packets.swg.zone.ChatRequestRoomList;
 import network.packets.swg.zone.chat.ChatInstantMessageToCharacter;
 import network.packets.swg.zone.chat.ChatInstantMessageToClient;
+import network.packets.swg.zone.chat.ChatOnSendInstantMessage;
 import network.packets.swg.zone.object_controller.ObjectController;
 import network.packets.swg.zone.object_controller.SpatialChat;
 import resources.control.Intent;
@@ -74,9 +75,20 @@ public class ChatService extends Service {
 	}
 	
 	private void handleInstantMessage(PlayerManager playerMgr, Player sender, ChatInstantMessageToCharacter request) {
-		String sReceiver = request.getCharacter();
-		String sSender = sender.getCreatureObject().getName();
+		String strReceiver = request.getCharacter();
+		String strSender = sender.getCreatureObject().getName();
+		Player receiver = playerMgr.getPlayerByCreatureFirstName(strReceiver);
+
+		int errorCode = 0; // 0 = No issue, 4 = "strReceiver is not online"
+		if (receiver == null)
+			errorCode = 4;
 		
+		ChatOnSendInstantMessage response = new ChatOnSendInstantMessage(errorCode, request.getSequence());
+		sender.sendPacket(response);
 		
+		if (errorCode == 4)
+			return;
+		
+		receiver.sendPacket(new ChatInstantMessageToClient(request.getGalaxy(), strSender, request.getMessage()));
 	}
 }
