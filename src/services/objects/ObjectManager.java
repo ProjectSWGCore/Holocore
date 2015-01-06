@@ -145,35 +145,11 @@ public class ObjectManager extends Manager {
 			addObjectAttributes(obj, template);
 			obj.setTemplate(template);
 			obj.setLocation(l);
-			addToQuadtree(obj, l);
-//			moveObject(obj, null, l);
+//			addToQuadtree(obj, l);
+			moveObject(obj, null, l);
 			objects.put(objectId, obj);
 			return obj;
 		}
-	}
-	
-	// Adds an object to the quadtree and refreshes awareness lists in the object added as well as adds the Player to objects in range (if there is one)
-	private void addToQuadtree(SWGObject obj, Location loc) {
-		if (loc == null || loc.isNaN()) // Object is inside a container or it's a slot of an item
-			return;
-
-		double x = loc.getX(), z = loc.getY();
-		
-		List<Player> awarePlayers = new ArrayList<Player>();
-
-		QuadTree<SWGObject> tree = quadTree.get(loc.getTerrain());
-		for (SWGObject inRange : tree.getWithinRange(x, z, AWARE_RANGE)) {
-			if (inRange != null && inRange.getOwner() != null && inRange.getObjectId() != obj.getObjectId()) {
-				if (obj.getOwner() != null)
-					inRange.updateAwareness(obj.getOwner(), true);
-				
-				awarePlayers.add(inRange.getOwner());
-			}
-		}
-		if (awarePlayers.size() > 0)
-			obj.updateAwareness(awarePlayers);
-		
-		quadTree.get(loc.getTerrain()).put(x, z, obj);
 	}
 	
 	private void moveObject(SWGObject obj, Location oldLocation, Location newLocation) {
