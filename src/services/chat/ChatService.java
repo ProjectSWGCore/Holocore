@@ -1,5 +1,7 @@
 package services.chat;
 
+import java.util.Date;
+
 import intents.GalacticPacketIntent;
 import intents.chat.SpatialChatIntent;
 import network.packets.Packet;
@@ -7,24 +9,42 @@ import network.packets.swg.zone.ChatRequestRoomList;
 import network.packets.swg.zone.chat.ChatInstantMessageToCharacter;
 import network.packets.swg.zone.chat.ChatInstantMessageToClient;
 import network.packets.swg.zone.chat.ChatOnSendInstantMessage;
+import network.packets.swg.zone.chat.ChatOnSendPersistentMessage;
+import network.packets.swg.zone.chat.ChatPersistentMessageToClient;
+import network.packets.swg.zone.chat.ChatPersistentMessageToServer;
 import network.packets.swg.zone.object_controller.ObjectController;
 import network.packets.swg.zone.object_controller.SpatialChat;
 import resources.control.Intent;
 import resources.control.Service;
+import resources.encodables.player.Mail;
 import resources.objects.SWGObject;
 import resources.player.Player;
+import resources.server_info.ObjectDatabase;
+import resources.server_info.ObjectDatabase.Traverser;
 import services.player.PlayerManager;
 
 public class ChatService extends Service {
 	
+	private ObjectDatabase<Mail> mails;
+	private int maxMailId;
+	
 	public ChatService() {
-		
+		mails = new ObjectDatabase<Mail>("odb/mails.db");
+		maxMailId = 1;
 	}
 	
 	@Override
 	public boolean initialize() {
 		registerForIntent(GalacticPacketIntent.TYPE);
 		registerForIntent(SpatialChatIntent.TYPE);
+		mails.loadToCache();
+		mails.traverse(new Traverser<Mail>() {
+			@Override
+			public void process(Mail mail) {
+				if (mail.getId() >= maxMailId)
+					maxMailId = mail.getId() + 1;
+			}
+		});
 		return super.initialize();
 	}
 	
@@ -38,6 +58,9 @@ public class ChatService extends Service {
 					handleChatRoomListRequest(player, (ChatRequestRoomList) p);
 				else if (p instanceof ChatInstantMessageToCharacter)
 					handleInstantMessage(((GalacticPacketIntent) i).getPlayerManager(), player, (ChatInstantMessageToCharacter) p);
+				else if (p instanceof ChatPersistentMessageToServer)
+					handleSendPersistentMessage(((GalacticPacketIntent) i).getPlayerManager(), player, 
+							((GalacticPacketIntent) i).getGalaxy().getName(), (ChatPersistentMessageToServer) p);
 			}
 		} 
 		else if (i instanceof SpatialChatIntent)
@@ -94,5 +117,43 @@ public class ChatService extends Service {
 			return;
 		
 		receiver.sendPacket(new ChatInstantMessageToClient(request.getGalaxy(), strSender, request.getMessage()));
+	}
+	
+	private void handleSendPersistentMessage(PlayerManager playerMgr, Player sender, String galaxy, ChatPersistentMessageToServer request) {
+		ChatOnSendPersistentMessage response = new ChatOnSendPersistentMessage(0, request.getCounter());
+		sender.sendPacket(response);
+		
+		String recipientStr = request.getRecipient().toLowerCase();
+		
+		if (recipientStr.contains(" "))
+			recipientStr = recipientStr.split(" ")[0];
+		
+		Player recipient = playerMgr.getPlayerByCreatureFirstName(recipientStr);
+
+		if (recipient == null)
+			return;
+
+		Mail mail = new Mail(sender.getCreatureObject().getName(), request.getSubject(), request.getMessage(), recipient.getCreatureObject().getObjectId());
+		mail.setId(maxMailId);
+		maxMailId++;
+		mail.setTimestamp((int) new Date().getTime() / 1000);
+		
+		mails.put(mail.getId(), mail);
+		
+		sendPersistentMessage(recipient, mail, MailFlagType.HEADER_ONLY, galaxy);
+	}
+	
+	private void sendPersistentMessage(Player receiver, Mail mail, MailFlagType requestType, String galaxy) {
+		int requestFlag = requestType.ordinal();
+		
+		ChatPersistentMessageToClient packet = new ChatPersistentMessageToClient((byte) requestFlag, mail.getSender(), galaxy, mail.getId(), 
+				mail.getSubject(), mail.getMessage(), mail.getTimestamp(), mail.getStatus());
+		
+		receiver.sendPacket(packet);
+	}
+	
+	private enum MailFlagType {
+		FULL_MESSAGE,
+		HEADER_ONLY;
 	}
 }
