@@ -75,8 +75,12 @@ public class ChatService extends Service {
 	}
 	
 	private void handleInstantMessage(PlayerManager playerMgr, Player sender, ChatInstantMessageToCharacter request) {
-		String strReceiver = request.getCharacter();
-		String strSender = sender.getCreatureObject().getName();
+		String strReceiver = request.getCharacter().toLowerCase();
+		String strSender = sender.getCreatureObject().getName().toLowerCase();
+		
+		if (strSender.contains(" "))
+			strSender = strSender.split(" ")[0];
+		
 		Player receiver = playerMgr.getPlayerByCreatureFirstName(strReceiver);
 
 		int errorCode = 0; // 0 = No issue, 4 = "strReceiver is not online"

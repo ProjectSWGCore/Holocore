@@ -74,7 +74,6 @@ public class PlayerManager extends Manager {
 	}
 	
 	public Player getPlayerByCreatureFirstName(String name) {
-		name = name.toLowerCase();
 		synchronized (players) {
 			for (Player p : players.values()) {
 				if (p.getCreatureObject() != null) {
