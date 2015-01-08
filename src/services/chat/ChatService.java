@@ -12,6 +12,7 @@ import network.packets.swg.zone.chat.ChatOnSendInstantMessage;
 import network.packets.swg.zone.chat.ChatOnSendPersistentMessage;
 import network.packets.swg.zone.chat.ChatPersistentMessageToClient;
 import network.packets.swg.zone.chat.ChatPersistentMessageToServer;
+import network.packets.swg.zone.chat.ChatRequestPersistentMessage;
 import network.packets.swg.zone.object_controller.ObjectController;
 import network.packets.swg.zone.object_controller.SpatialChat;
 import resources.control.Intent;
@@ -61,6 +62,8 @@ public class ChatService extends Service {
 				else if (p instanceof ChatPersistentMessageToServer)
 					handleSendPersistentMessage(((GalacticPacketIntent) i).getPlayerManager(), player, 
 							((GalacticPacketIntent) i).getGalaxy().getName(), (ChatPersistentMessageToServer) p);
+				else if (p instanceof ChatRequestPersistentMessage)
+					handlePersistentMessageRequest(player, ((GalacticPacketIntent) i).getGalaxy().getName(), (ChatRequestPersistentMessage) p);
 			}
 		} 
 		else if (i instanceof SpatialChatIntent)
@@ -136,18 +139,45 @@ public class ChatService extends Service {
 		Mail mail = new Mail(sender.getCreatureObject().getName(), request.getSubject(), request.getMessage(), recipient.getCreatureObject().getObjectId());
 		mail.setId(maxMailId);
 		maxMailId++;
-		mail.setTimestamp((int) new Date().getTime() / 1000);
+		mail.setTimestamp((int) (new Date().getTime() / 1000));
 		
 		mails.put(mail.getId(), mail);
 		
 		sendPersistentMessage(recipient, mail, MailFlagType.HEADER_ONLY, galaxy);
 	}
 	
-	private void sendPersistentMessage(Player receiver, Mail mail, MailFlagType requestType, String galaxy) {
-		int requestFlag = requestType.ordinal();
+	private void handlePersistentMessageRequest(Player player, String galaxy, ChatRequestPersistentMessage request) {
+		Mail mail = mails.get(request.getMailId());
 		
-		ChatPersistentMessageToClient packet = new ChatPersistentMessageToClient((byte) requestFlag, mail.getSender(), galaxy, mail.getId(), 
-				mail.getSubject(), mail.getMessage(), mail.getTimestamp(), mail.getStatus());
+		if (mail == null)
+			return;
+		
+		if (mail.getReceiverId() != player.getCreatureObject().getObjectId())
+			return;
+		
+		sendPersistentMessage(player, mail, MailFlagType.FULL_MESSAGE, galaxy);
+	}
+	
+	private void sendPersistentMessage(Player receiver, Mail mail, MailFlagType requestType, String galaxy) {
+		if (receiver == null || receiver.getCreatureObject() == null)
+			return;
+		
+		ChatPersistentMessageToClient packet = null;
+		
+		switch(requestType) {
+		case FULL_MESSAGE:
+			packet = new ChatPersistentMessageToClient((byte) 0, mail.getSender(), galaxy, mail.getId(), mail.getSubject(), mail.getMessage(), 
+					mail.getTimestamp(), mail.getStatus()); 
+			break;
+
+		case HEADER_ONLY:
+			packet = new ChatPersistentMessageToClient((byte) 1, mail.getSender(), galaxy, mail.getId(), mail.getSubject(), "", mail.getTimestamp(), mail.getStatus());
+			break;
+			
+		default: 
+			packet = new ChatPersistentMessageToClient((byte) 1, mail.getSender(), galaxy, mail.getId(), mail.getSubject(), "", mail.getTimestamp(), mail.getStatus());
+			break;
+		}
 		
 		receiver.sendPacket(packet);
 	}
