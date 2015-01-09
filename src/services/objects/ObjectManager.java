@@ -174,7 +174,7 @@ public class ObjectManager extends Manager {
 		double y = location.getZ();
 		QuadTree<SWGObject> tree = quadTree.get(location.getTerrain());
 		for (SWGObject inRange : tree.getWithinRange(x, y, AWARE_RANGE)) {
-			if (inRange.getOwner() != null) {
+			if (inRange.getOwner() != null && inRange.getObjectId() != obj.getObjectId()) {
 				updatedAware.add(inRange.getOwner());
 			}
 		}
@@ -227,6 +227,7 @@ public class ObjectManager extends Manager {
 //			player.getCreatureObject().createObject(player);
 			CreatureObject creature = (CreatureObject) player.getCreatureObject();
 			player.sendPacket(new UpdatePvpStatusMessage(creature.getPvpType(), creature.getPvpFactionId(), creature.getObjectId()));
+			creature.createObject(player);
 			creature.clearAware();
 			moveObject(null, creature, creature.getLocation(), creature.getLocation());
 			updateAwarenessForObject(creature);

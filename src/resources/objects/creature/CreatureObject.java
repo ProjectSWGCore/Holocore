@@ -380,7 +380,7 @@ public class CreatureObject extends TangibleObject {
 		}
 	}
 	
-	protected void createObject(Player target) {
+	public void createObject(Player target) {
 		sendSceneCreateObject(target);
 		
 		BaselineBuilder bb = null;
