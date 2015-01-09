@@ -35,7 +35,7 @@ public class IntangibleObject extends SWGObject {
 		super.createBaseline6(target, bb);
 	}
 	
-	public void createObject(Player target) {
+	protected void createObject(Player target) {
 		super.sendSceneCreateObject(target);
 		
 		BaselineBuilder bb = new BaselineBuilder(this, BaselineType.ITNO, 3);

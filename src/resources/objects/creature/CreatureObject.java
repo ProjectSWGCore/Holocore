@@ -380,7 +380,7 @@ public class CreatureObject extends TangibleObject {
 		}
 	}
 	
-	public void createObject(Player target) {
+	protected void createObject(Player target) {
 		sendSceneCreateObject(target);
 		
 		BaselineBuilder bb = null;
@@ -420,7 +420,7 @@ public class CreatureObject extends TangibleObject {
 		target.sendPacket(new SceneEndBaselines(getObjectId()));
 	}
 	
-	public void createChildrenObjects(Player target) {
+	protected void createChildrenObjects(Player target) {
 		target.sendPacket(new UpdatePostureMessage(posture.getId(), getObjectId()));
 		if (target != getOwner()) target.sendPacket(new UpdatePvpStatusMessage(UpdatePvpStatusMessage.PLAYER, 0, getObjectId())); // TODO: Change this when adding non-players
 		super.createChildrenObjects(target);

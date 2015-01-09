@@ -50,7 +50,7 @@ public class WeaponObject extends TangibleObject implements Encodable{
 	}
 
 
-	public void createObject(Player target) {
+	protected void createObject(Player target) {
 		super.sendSceneCreateObject(target);
 		
 		BaselineBuilder bb = new BaselineBuilder(this, BaselineType.WEAO, 3);

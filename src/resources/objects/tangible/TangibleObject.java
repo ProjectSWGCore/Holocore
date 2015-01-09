@@ -123,7 +123,7 @@ public class TangibleObject extends SWGObject {
 		this.objectEffects = objectEffects;
 	}
 	
-	public void createObject(Player target) {
+	protected void createObject(Player target) {
 		super.sendSceneCreateObject(target);
 		
 		BaselineBuilder bb = new BaselineBuilder(this, BaselineType.TANO, 3);
@@ -148,7 +148,7 @@ public class TangibleObject extends SWGObject {
 		target.sendPacket(new SceneEndBaselines(getObjectId()));
 	}
 	
-	public void createChildrenObjects(Player target) {
+	protected void createChildrenObjects(Player target) {
 		super.createChildrenObjects(target);
 	}
 	

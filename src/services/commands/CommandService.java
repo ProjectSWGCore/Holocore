@@ -101,7 +101,8 @@ public class CommandService extends Service {
 				Command command = new Command((String) baseCommands.getCell(row, 0));
 				command.setCrc(CRC.getCrc(command.getName().toLowerCase()));
 				// Use cppHook if the scriptHook is empty
-				command.setScriptCallback(((String) (((String) baseCommands.getCell(row, 2)).isEmpty() ? baseCommands.getCell(row, 4) : baseCommands.getCell(row, 2))) + ".py");
+				String callback = (String) baseCommands.getCell(row, 2);
+				command.setScriptCallback((callback.isEmpty() ? baseCommands.getCell(row, 4) : callback) + ".py");
 				command.setDefaultTime((float) baseCommands.getCell(row, 6));
 				command.setCharacterAbility((String) baseCommands.getCell(row, 7));
 				

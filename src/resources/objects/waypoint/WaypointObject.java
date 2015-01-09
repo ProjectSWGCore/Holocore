@@ -87,7 +87,7 @@ public class WaypointObject extends IntangibleObject implements Encodable{
 		bb.addBoolean(active);
 	}
 
-	public void createObject(Player target) {
+	protected void createObject(Player target) {
 		// NOTE: Client is never sent a WAYP baseline in NGE, WaypointObject's just go inside the Waypoint List in PLAY.
 		
 		/*super.sendSceneCreateObject(target);

@@ -62,12 +62,12 @@ public class ObjectManager extends Manager {
 		registerForIntent(SWGObjectEventIntent.TYPE);
 		registerForIntent(GalacticPacketIntent.TYPE);
 		for (Terrain t : Terrain.values()) {
-			quadTree.put(t, new QuadTree<SWGObject>(-5000, -5000, 5000, 5000));
+			quadTree.put(t, new QuadTree<SWGObject>(-8192, -8192, 8192, 8192));
 		}
 		objects.loadToCache();
 		long startLoad = System.nanoTime();
 		System.out.println("ObjectManager: Loading " + objects.size() + " objects from ObjectDatabase...");
-		objects.traverse(new Traverser<SWGObject>() {
+		objects.traverseCache(new Traverser<SWGObject>() {
 			@Override
 			public void process(SWGObject obj) {
 				obj.setOwner(null);
@@ -174,7 +174,7 @@ public class ObjectManager extends Manager {
 		double y = location.getZ();
 		QuadTree<SWGObject> tree = quadTree.get(location.getTerrain());
 		for (SWGObject inRange : tree.getWithinRange(x, y, AWARE_RANGE)) {
-			if (inRange.getOwner() != null && inRange.getObjectId() != obj.getObjectId()) {
+			if (inRange.getOwner() != null) {
 				updatedAware.add(inRange.getOwner());
 			}
 		}
@@ -227,7 +227,6 @@ public class ObjectManager extends Manager {
 //			player.getCreatureObject().createObject(player);
 			CreatureObject creature = (CreatureObject) player.getCreatureObject();
 			player.sendPacket(new UpdatePvpStatusMessage(creature.getPvpType(), creature.getPvpFactionId(), creature.getObjectId()));
-			creature.createObject(player);
 			creature.clearAware();
 			moveObject(null, creature, creature.getLocation(), creature.getLocation());
 			updateAwarenessForObject(creature);
