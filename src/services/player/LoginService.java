@@ -111,6 +111,7 @@ public class LoginService extends Service {
 					case "admin": player.setAccessLevel(AccessLevel.ADMIN); break;
 					case "dev": player.setAccessLevel(AccessLevel.DEV); break;
 					case "qa": player.setAccessLevel(AccessLevel.QA); break;
+					default: player.setAccessLevel(AccessLevel.PLAYER); break;
 				}
 				sendLoginSuccessPacket(player);
 				System.out.println("LoginService: " + player.getUsername() + " has logged in.");

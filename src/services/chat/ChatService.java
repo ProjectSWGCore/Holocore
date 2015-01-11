@@ -1,12 +1,16 @@
 package services.chat;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import intents.GalacticPacketIntent;
+import intents.PlayerEventIntent;
 import intents.chat.PersistentMessageIntent;
 import intents.chat.SpatialChatIntent;
 import network.packets.Packet;
 import network.packets.swg.zone.ChatRequestRoomList;
+import network.packets.swg.zone.chat.ChatDeletePersistentMessage;
 import network.packets.swg.zone.chat.ChatInstantMessageToCharacter;
 import network.packets.swg.zone.chat.ChatInstantMessageToClient;
 import network.packets.swg.zone.chat.ChatOnSendInstantMessage;
@@ -40,6 +44,7 @@ public class ChatService extends Service {
 		registerForIntent(GalacticPacketIntent.TYPE);
 		registerForIntent(SpatialChatIntent.TYPE);
 		registerForIntent(PersistentMessageIntent.TYPE);
+		registerForIntent(PlayerEventIntent.TYPE);
 		mails.loadToCache();
 		mails.traverse(new Traverser<Mail>() {
 			@Override
@@ -66,12 +71,25 @@ public class ChatService extends Service {
 							((GalacticPacketIntent) i).getGalaxy().getName(), (ChatPersistentMessageToServer) p);
 				else if (p instanceof ChatRequestPersistentMessage)
 					handlePersistentMessageRequest(player, ((GalacticPacketIntent) i).getGalaxy().getName(), (ChatRequestPersistentMessage) p);
+				else if (p instanceof ChatDeletePersistentMessage)
+					deletePersistentMessage(((ChatDeletePersistentMessage) p).getMailId());
 			}
 		} 
 		else if (i instanceof SpatialChatIntent)
 			handleSpatialChat((SpatialChatIntent) i);
 		else if (i instanceof PersistentMessageIntent)
 			handlePersistentMessageIntent((PersistentMessageIntent) i);
+		else if (i instanceof PlayerEventIntent)
+			handlePlayerEventIntent((PlayerEventIntent) i);
+	}
+	
+	private void handlePlayerEventIntent(PlayerEventIntent intent) {
+		switch(intent.getEvent()) {
+		case PE_ZONE_IN:
+			sendPersistentMessageHeaders(intent.getPlayer(), intent.getGalaxy());
+			break;
+		default: break;
+		}
 	}
 	
 	private void handleChatRoomListRequest(Player player, ChatRequestRoomList request) {
@@ -186,6 +204,29 @@ public class ChatService extends Service {
 		sendPersistentMessage(player, mail, MailFlagType.FULL_MESSAGE, galaxy);
 	}
 	
+	private void sendPersistentMessageHeaders(Player player, String galaxy) {
+		
+		if (player == null || player.getCreatureObject() == null)
+			return;
+		
+		final long receiverId = player.getCreatureObject().getObjectId();
+		
+		final List<Mail> playersMail = new ArrayList<Mail>();
+		
+		mails.traverse(new Traverser<Mail>() {
+			@Override
+			public void process(Mail element) {
+				if (element.getReceiverId() == receiverId)
+					playersMail.add(element);
+			}
+		});
+		
+		if (playersMail.isEmpty())
+			return;
+		
+		for (Mail mail : playersMail) { sendPersistentMessage(player, mail, MailFlagType.HEADER_ONLY, galaxy); }
+	}
+	
 	private void sendPersistentMessage(Player receiver, Mail mail, MailFlagType requestType, String galaxy) {
 		if (receiver == null || receiver.getCreatureObject() == null)
 			return;
@@ -207,6 +248,10 @@ public class ChatService extends Service {
 		}
 		
 		receiver.sendPacket(packet);
+	}
+	
+	private void deletePersistentMessage(int mailId) {
+		mails.remove(mailId);
 	}
 	
 	private enum MailFlagType {

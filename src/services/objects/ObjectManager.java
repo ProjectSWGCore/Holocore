@@ -1,6 +1,7 @@
 package services.objects;
 
 import intents.GalacticPacketIntent;
+import intents.PlayerEventIntent;
 import intents.swgobject_events.SWGObjectEventIntent;
 
 import java.util.ArrayList;
@@ -37,6 +38,7 @@ import resources.objects.tangible.TangibleObject;
 import resources.objects.waypoint.WaypointObject;
 import resources.objects.weapon.WeaponObject;
 import resources.player.Player;
+import resources.player.PlayerEvent;
 import resources.server_info.ObjectDatabase;
 import resources.server_info.ObjectDatabase.Traverser;
 import services.player.PlayerManager;
@@ -109,7 +111,7 @@ public class ObjectManager extends Manager {
 		if (i instanceof GalacticPacketIntent) {
 			GalacticPacketIntent gpi = (GalacticPacketIntent) i;
 			if (gpi.getPacket() instanceof SelectCharacter) {
-				zoneInCharacter(gpi.getPlayerManager(), gpi.getNetworkId(), ((SelectCharacter)gpi.getPacket()).getCharacterId());
+				zoneInCharacter(gpi.getPlayerManager(), gpi.getGalaxy().getName(), gpi.getNetworkId(), ((SelectCharacter)gpi.getPacket()).getCharacterId());
 			} else if (gpi.getPacket() instanceof ObjectController) {
 				ObjectController controller = (ObjectController) gpi.getPacket();
 				if (controller.getControllerData() instanceof DataTransform) {
@@ -210,7 +212,7 @@ public class ObjectManager extends Manager {
 		}
 	}
 	
-	private void zoneInCharacter(PlayerManager playerManager, long netId, long characterId) {
+	private void zoneInCharacter(PlayerManager playerManager, String galaxy, long netId, long characterId) {
 		Player player = playerManager.getPlayerFromNetworkId(netId);
 		if (player != null) {
 			verifyPlayerObjectsSet(player, characterId);
@@ -231,6 +233,7 @@ public class ObjectManager extends Manager {
 			creature.clearAware();
 			moveObject(null, creature, creature.getLocation(), creature.getLocation());
 			updateAwarenessForObject(creature);
+			new PlayerEventIntent(player, galaxy, PlayerEvent.PE_ZONE_IN).broadcast();
 		}
 	}
 	
