@@ -111,6 +111,7 @@ public class LoginService extends Service {
 					case "admin": player.setAccessLevel(AccessLevel.ADMIN); break;
 					case "dev": player.setAccessLevel(AccessLevel.DEV); break;
 					case "qa": player.setAccessLevel(AccessLevel.QA); break;
+					default: player.setAccessLevel(AccessLevel.PLAYER); break;
 				}
 				sendLoginSuccessPacket(player);
 				System.out.println("LoginService: " + player.getUsername() + " has logged in.");
@@ -158,6 +159,12 @@ public class LoginService extends Service {
 		getUser.setString(1, username);
 		getUser.setString(2, password);
 		return getUser.executeQuery();
+	}
+	
+	public ResultSet getCharacter(String character) throws SQLException {
+		PreparedStatement statement = getLocalDatabase().prepareStatement("SELECT * FROM characters WHERE lower(name) = ?");
+		statement.setString(1, character.toLowerCase());
+		return statement.executeQuery();
 	}
 	
 	private List <Galaxy> getGalaxies(Player p) throws SQLException {
