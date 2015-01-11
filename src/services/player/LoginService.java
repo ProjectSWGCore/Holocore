@@ -160,6 +160,12 @@ public class LoginService extends Service {
 		return getUser.executeQuery();
 	}
 	
+	public ResultSet getCharacter(String character) throws SQLException {
+		PreparedStatement statement = getLocalDatabase().prepareStatement("SELECT * FROM characters WHERE lower(name) = ?");
+		statement.setString(1, character.toLowerCase());
+		return statement.executeQuery();
+	}
+	
 	private List <Galaxy> getGalaxies(Player p) throws SQLException {
 		Config c = getConfig(ConfigFile.PRIMARY);
 		ResultSet set = getGalaxies.executeQuery();

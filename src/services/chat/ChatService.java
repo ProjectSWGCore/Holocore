@@ -126,9 +126,7 @@ public class ChatService extends Service {
 	}
 	
 	private void handleSendPersistentMessage(PlayerManager playerMgr, Player sender, String galaxy, ChatPersistentMessageToServer request) {
-		ChatOnSendPersistentMessage response = new ChatOnSendPersistentMessage(0, request.getCounter());
-		sender.sendPacket(response);
-		
+
 		String recipientStr = request.getRecipient().toLowerCase();
 		
 		if (recipientStr.contains(" "))
@@ -136,17 +134,25 @@ public class ChatService extends Service {
 		
 		Player recipient = playerMgr.getPlayerByCreatureFirstName(recipientStr);
 
-		if (recipient == null)
-			return;
+		long recId = (recipient == null ? playerMgr.getCharacterIdByName(request.getRecipient()) : recipient.getCreatureObject().getObjectId());
 
-		Mail mail = new Mail(sender.getCreatureObject().getName(), request.getSubject(), request.getMessage(), recipient.getCreatureObject().getObjectId());
+		int errorCode = 0;
+		
+		if (recId == 0)
+			errorCode = 4;
+		
+		ChatOnSendPersistentMessage response = new ChatOnSendPersistentMessage(errorCode, request.getCounter());
+		sender.sendPacket(response);
+		
+		Mail mail = new Mail(sender.getCreatureObject().getName(), request.getSubject(), request.getMessage(), recId);
 		mail.setId(maxMailId);
 		maxMailId++;
 		mail.setTimestamp((int) (new Date().getTime() / 1000));
 		
 		mails.put(mail.getId(), mail);
 		
-		sendPersistentMessage(recipient, mail, MailFlagType.HEADER_ONLY, galaxy);
+		if (recipient != null)
+			sendPersistentMessage(recipient, mail, MailFlagType.HEADER_ONLY, galaxy);
 	}
 	
 	private void handlePersistentMessageIntent(PersistentMessageIntent intent) {

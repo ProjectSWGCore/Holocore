@@ -1,5 +1,7 @@
 package services.player;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -85,6 +87,19 @@ public class PlayerManager extends Manager {
 			}
 		}
 		return null;
+	}
+	
+	public long getCharacterIdByName(String name) {
+		try {
+			ResultSet result = loginService.getCharacter(name);
+			if (result.next()) {
+				return result.getLong(0);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return 0;
 	}
 	
 	private Player transitionLoginToZone(final long networkId, final int galaxyId, ClientIdMsg clientId) {
