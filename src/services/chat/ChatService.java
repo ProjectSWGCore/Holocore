@@ -3,6 +3,7 @@ package services.chat;
 import java.util.Date;
 
 import intents.GalacticPacketIntent;
+import intents.chat.PersistentMessageIntent;
 import intents.chat.SpatialChatIntent;
 import network.packets.Packet;
 import network.packets.swg.zone.ChatRequestRoomList;
@@ -38,6 +39,7 @@ public class ChatService extends Service {
 	public boolean initialize() {
 		registerForIntent(GalacticPacketIntent.TYPE);
 		registerForIntent(SpatialChatIntent.TYPE);
+		registerForIntent(PersistentMessageIntent.TYPE);
 		mails.loadToCache();
 		mails.traverse(new Traverser<Mail>() {
 			@Override
@@ -68,7 +70,8 @@ public class ChatService extends Service {
 		} 
 		else if (i instanceof SpatialChatIntent)
 			handleSpatialChat((SpatialChatIntent) i);
-
+		else if (i instanceof PersistentMessageIntent)
+			handlePersistentMessageIntent((PersistentMessageIntent) i);
 	}
 	
 	private void handleChatRoomListRequest(Player player, ChatRequestRoomList request) {
@@ -146,6 +149,25 @@ public class ChatService extends Service {
 		sendPersistentMessage(recipient, mail, MailFlagType.HEADER_ONLY, galaxy);
 	}
 	
+	private void handlePersistentMessageIntent(PersistentMessageIntent intent) {
+		if (intent.getReceiver() == null)
+			return;
+		
+		Player recipient = intent.getReceiver().getOwner();
+		
+		if (recipient == null)
+			return;
+		
+		Mail mail = intent.getMail();
+		mail.setId(maxMailId);
+		maxMailId++;
+		mail.setTimestamp((int) (new Date().getTime() / 1000));
+		
+		mails.put(mail.getId(), mail);
+		
+		sendPersistentMessage(recipient, mail, MailFlagType.HEADER_ONLY, intent.getGalaxy());
+	}
+	
 	private void handlePersistentMessageRequest(Player player, String galaxy, ChatRequestPersistentMessage request) {
 		Mail mail = mails.get(request.getMailId());
 		
@@ -166,8 +188,7 @@ public class ChatService extends Service {
 		
 		switch(requestType) {
 		case FULL_MESSAGE:
-			packet = new ChatPersistentMessageToClient((byte) 0, mail.getSender(), galaxy, mail.getId(), mail.getSubject(), mail.getMessage(), 
-					mail.getTimestamp(), mail.getStatus()); 
+			packet = new ChatPersistentMessageToClient((byte) 0, mail.getSender(), galaxy, mail.getId(), mail.getSubject(), mail.getMessage(), mail.getTimestamp(), mail.getStatus()); 
 			break;
 
 		case HEADER_ONLY:
