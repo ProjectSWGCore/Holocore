@@ -7,11 +7,15 @@ import java.util.Map;
 
 import network.packets.Packet;
 import network.packets.swg.login.ClientIdMsg;
+import intents.CloseConnectionIntent;
 import intents.GalacticPacketIntent;
+import intents.PlayerEventIntent;
 import resources.control.Intent;
 import resources.control.Manager;
 import resources.network.ServerType;
 import resources.player.Player;
+import resources.player.PlayerEvent;
+import resources.player.PlayerState;
 
 public class PlayerManager extends Manager {
 	
@@ -32,6 +36,7 @@ public class PlayerManager extends Manager {
 	@Override
 	public boolean initialize() {
 		registerForIntent(GalacticPacketIntent.TYPE);
+		registerForIntent(PlayerEventIntent.TYPE);
 		return super.initialize();
 	}
 	
@@ -57,10 +62,20 @@ public class PlayerManager extends Manager {
 				players.put(networkId, player);
 			}
 			if (player != null) {
+				player.updateLastPacketTimestamp();
 				if (type == ServerType.LOGIN)
 					loginService.handlePacket(player, packet);
 				else if (type == ServerType.ZONE)
 					zoneService.handlePacket(gpi, player, networkId, packet);
+			}
+		} else if (i instanceof PlayerEventIntent) {
+			if (((PlayerEventIntent)i).getEvent() == PlayerEvent.PE_DISAPPEAR) {
+				PlayerEventIntent pei = (PlayerEventIntent) i; // heh.. pee
+				Player p = pei.getPlayer();
+				if (p.getPlayerState() == PlayerState.DISCONNECTED) {
+					players.remove(p.getNetworkId());
+					new CloseConnectionIntent(p.getNetworkId()).broadcast();
+				}
 			}
 		}
 	}

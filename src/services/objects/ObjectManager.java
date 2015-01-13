@@ -63,6 +63,7 @@ public class ObjectManager extends Manager {
 	public boolean initialize() {
 		registerForIntent(SWGObjectEventIntent.TYPE);
 		registerForIntent(GalacticPacketIntent.TYPE);
+		registerForIntent(PlayerEventIntent.TYPE);
 		for (Terrain t : Terrain.values()) {
 			quadTree.put(t, new QuadTree<SWGObject>(-8192, -8192, 8192, 8192));
 		}
@@ -122,6 +123,10 @@ public class ObjectManager extends Manager {
 					newLocation.setTerrain(oldLocation.getTerrain());
 					moveObject(trans, obj, oldLocation, newLocation);
 				}
+			}
+		} else if (i instanceof PlayerEventIntent) {
+			if (((PlayerEventIntent)i).getEvent() == PlayerEvent.PE_DISAPPEAR) {
+				((PlayerEventIntent)i).getPlayer().getCreatureObject().clearAware();
 			}
 		}
 	}
