@@ -33,9 +33,11 @@ public class ConnectionService extends Service {
 					for (Player p : zonedInPlayers) {
 						if (p.getTimeSinceLastPacket() > DISAPPEAR_THRESHOLD) {
 							p.setPlayerState(PlayerState.DISCONNECTED);
+							System.out.println(p.getCreatureObject().getName() + " has disappeared");
 							new PlayerEventIntent(p, PlayerEvent.PE_DISAPPEAR).broadcast();
 						} else if (p.getTimeSinceLastPacket() > LD_THRESHOLD) {
 							p.setPlayerState(PlayerState.LOGGED_OUT);
+							System.out.println(p.getCreatureObject().getName() + " has logged out");
 						}
 					}
 				}
