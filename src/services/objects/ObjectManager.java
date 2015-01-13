@@ -137,6 +137,24 @@ public class ObjectManager extends Manager {
 		}
 	}
 	
+	public SWGObject deleteObject(long objId) {
+		synchronized (objects) {
+			SWGObject obj = objects.remove(objId);
+			if (obj == null)
+				return null;
+			Location loc = obj.getLocation();
+			if (loc != null && loc.getTerrain() != null)
+				quadTree.get(loc.getTerrain()).remove(loc.getX(), loc.getZ(), obj);
+			for (SWGObject child : obj.getChildren())
+				if (child != null)
+					deleteObject(child.getObjectId());
+			for (SWGObject slot : obj.getSlots().values())
+				if (slot != null)
+					deleteObject(slot.getObjectId());
+			return obj;
+		}
+	}
+	
 	public SWGObject createObject(String template) {
 		return createObject(template, null);
 	}

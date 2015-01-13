@@ -64,7 +64,7 @@ public class PlayerManager extends Manager {
 			if (player != null) {
 				player.updateLastPacketTimestamp();
 				if (type == ServerType.LOGIN)
-					loginService.handlePacket(player, packet);
+					loginService.handlePacket(gpi, player, packet);
 				else if (type == ServerType.ZONE)
 					zoneService.handlePacket(gpi, player, networkId, packet);
 			}
