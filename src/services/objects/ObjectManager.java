@@ -281,7 +281,6 @@ public class ObjectManager extends Manager {
 			sendPacket(player, new ParametersMessage());
 			sendPacket(player, new ChatOnConnectAvatar());
 			sendPacket(player, new CmdStartScene(false, objId, race, l, time));
-//			player.getCreatureObject().createObject(player);
 			CreatureObject creature = (CreatureObject) player.getCreatureObject();
 			player.sendPacket(new UpdatePvpStatusMessage(creature.getPvpType(), creature.getPvpFactionId(), creature.getObjectId()));
 			creature.createObject(player);
@@ -299,7 +298,7 @@ public class ObjectManager extends Manager {
 			System.err.println("ObjectManager: Failed to start zone - CreatureObject could not be fetched from database");
 			throw new NullPointerException("CreatureObject for ID: " + characterId + " cannot be null!");
 		}
-		player.setCreatureObject(creature); // CreatureObject contains the player object!
+		player.setCreatureObject(creature);
 		creature.setOwner(player);
 		
 		if (player.getPlayerObject() == null) {
