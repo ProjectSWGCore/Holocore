@@ -57,7 +57,7 @@ public class PlayerManager extends Manager {
 				player = transitionLoginToZone(networkId, gpi.getGalaxy().getId(), (ClientIdMsg) packet);
 			else
 				player = players.get(networkId);
-			if (player == null && type == ServerType.LOGIN) {
+			if (type == ServerType.LOGIN && player == null) {
 				player = new Player(this, networkId);
 				players.put(networkId, player);
 			}

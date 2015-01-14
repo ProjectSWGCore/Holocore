@@ -118,10 +118,7 @@ public class ObjectManager extends Manager {
 				if (controller.getControllerData() instanceof DataTransform) {
 					DataTransform trans = (DataTransform) controller.getControllerData();
 					SWGObject obj = getObject(controller.getObjectId());
-					Location oldLocation = obj.getLocation();
-					Location newLocation = trans.getLocation();
-					newLocation.setTerrain(oldLocation.getTerrain());
-					moveObject(trans, obj, oldLocation, newLocation);
+					moveObject(obj, trans);
 				}
 			}
 		} else if (i instanceof PlayerEventIntent) {
@@ -143,8 +140,12 @@ public class ObjectManager extends Manager {
 			if (obj == null)
 				return null;
 			Location loc = obj.getLocation();
-			if (loc != null && loc.getTerrain() != null)
-				quadTree.get(loc.getTerrain()).remove(loc.getX(), loc.getZ(), obj);
+			if (loc != null && loc.getTerrain() != null) {
+				QuadTree <SWGObject> tree = quadTree.get(loc.getTerrain());
+				synchronized (tree) {
+					tree.remove(loc.getX(), loc.getZ(), obj);
+				}
+			}
 			for (SWGObject child : obj.getChildren())
 				if (child != null)
 					deleteObject(child.getObjectId());
@@ -170,37 +171,68 @@ public class ObjectManager extends Manager {
 			addObjectAttributes(obj, template);
 			obj.setTemplate(template);
 			obj.setLocation(l);
-//			addToQuadtree(obj, l);
-			moveObject(null, obj, null, l);
+			updateAwarenessForObject(obj);
+			addToQuadTree(obj);
 			objects.put(objectId, obj);
 			return obj;
 		}
 	}
 	
-	private void moveObject(DataTransform transform, SWGObject obj, Location oldLocation, Location newLocation) {
-		if (oldLocation != null && oldLocation.getTerrain() != null) { // Remove from QuadTree
-			double x = oldLocation.getX();
-			double y = oldLocation.getZ();
-			quadTree.get(oldLocation.getTerrain()).remove(x, y, obj);
+	private void addToQuadTree(SWGObject obj) {
+		if (obj == null)
+			return;
+		Location loc = obj.getLocation();
+		if (loc == null || loc.getTerrain() == null)
+			return;
+		QuadTree <SWGObject> tree = quadTree.get(loc.getTerrain());
+		synchronized (tree) {
+			tree.put(loc.getX(), loc.getZ(), obj);
 		}
-		if (newLocation != null && newLocation.getTerrain() != null) { // Add to QuadTree, update awareness
+	}
+	
+	private void removeFromQuadTree(SWGObject obj) {
+		if (obj == null)
+			return;
+		Location loc = obj.getLocation();
+		if (loc == null || loc.getTerrain() == null)
+			return;
+		double x = loc.getX();
+		double y = loc.getZ();
+		QuadTree <SWGObject> tree = quadTree.get(loc.getTerrain());
+		synchronized (tree) {
+			tree.remove(x, y, obj);
+		}
+	}
+	
+	private void moveObject(SWGObject obj, DataTransform transform) {
+		removeFromQuadTree(obj);
+		Location newLocation = transform.getLocation();
+		newLocation.setTerrain(obj.getLocation().getTerrain());
+		
+		if (newLocation != null)
 			obj.setLocation(newLocation);
-			updateAwarenessForObject(obj);
-			quadTree.get(newLocation.getTerrain()).put(newLocation.getX(), newLocation.getZ(), obj);
-		}
+		
+		updateAwarenessForObject(obj);
+		addToQuadTree(obj);
+		
 		if (transform != null)
 			obj.sendDataTransforms(transform);
 	}
 	
 	private void updateAwarenessForObject(SWGObject obj) {
 		Location location = obj.getLocation();
+		if (location == null)
+			return;
 		List <Player> updatedAware = new ArrayList<Player>();
 		double x = location.getX();
 		double y = location.getZ();
 		QuadTree<SWGObject> tree = quadTree.get(location.getTerrain());
-		for (SWGObject inRange : tree.getWithinRange(x, y, AWARE_RANGE)) {
-			if (inRange.getOwner() != null && inRange.getObjectId() != obj.getObjectId()) {
-				updatedAware.add(inRange.getOwner());
+		synchronized (tree) {
+			List <SWGObject> range = tree.getWithinRange(x, y, AWARE_RANGE);
+			for (SWGObject inRange : range) {
+				if (inRange.getOwner() != null && inRange.getObjectId() != obj.getObjectId()) {
+					updatedAware.add(inRange.getOwner());
+				}
 			}
 		}
 		obj.updateAwareness(updatedAware);
@@ -254,7 +286,6 @@ public class ObjectManager extends Manager {
 			player.sendPacket(new UpdatePvpStatusMessage(creature.getPvpType(), creature.getPvpFactionId(), creature.getObjectId()));
 			creature.createObject(player);
 			creature.clearAware();
-			moveObject(null, creature, creature.getLocation(), creature.getLocation());
 			updateAwarenessForObject(creature);
 			new PlayerEventIntent(player, galaxy, PlayerEvent.PE_ZONE_IN).broadcast();
 		}
