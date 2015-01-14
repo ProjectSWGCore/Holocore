@@ -1,5 +1,6 @@
 package services.player;
 
+import intents.GalacticIntent;
 import intents.LoginEventIntent;
 import intents.LoginEventIntent.LoginEvent;
 
@@ -18,6 +19,8 @@ import network.packets.swg.ServerUnixEpochTime;
 import network.packets.swg.login.CharacterCreationDisabled;
 import network.packets.swg.login.EnumerateCharacterId;
 import network.packets.swg.login.EnumerateCharacterId.SWGCharacter;
+import network.packets.swg.login.creation.DeleteCharacterRequest;
+import network.packets.swg.login.creation.DeleteCharacterResponse;
 import network.packets.swg.login.LoginClientId;
 import network.packets.swg.login.LoginClientToken;
 import network.packets.swg.login.LoginClusterStatus;
@@ -42,6 +45,7 @@ public class LoginService extends Service {
 	private PreparedStatement getUser;
 	private PreparedStatement getGalaxies;
 	private PreparedStatement getCharacters;
+	private PreparedStatement deleteCharacter;
 	private boolean autoLogin;
 	
 	public LoginService() {
@@ -53,11 +57,12 @@ public class LoginService extends Service {
 		getUser = getLocalDatabase().prepareStatement("SELECT * FROM users WHERE username = ? AND password = ?");
 		getGalaxies = getLocalDatabase().prepareStatement("SELECT * FROM galaxies");
 		getCharacters = getLocalDatabase().prepareStatement("SELECT * FROM characters WHERE userid = ?");
+		deleteCharacter = getLocalDatabase().prepareStatement("DELETE FROM CHARACTERS WHERE id = ?");
 		autoLogin = (getConfig(ConfigFile.PRIMARY).getInt("AUTO-LOGIN", 0) == 1 ? true : false);
 		return super.initialize();
 	}
 	
-	public void handlePacket(Player player, Packet p) {
+	public void handlePacket(GalacticIntent intent, Player player, Packet p) {
 		if (p instanceof SessionRequest) {
 			player.setConnectionId(((SessionRequest)p).getConnectionID());
 			player.setPlayerState(PlayerState.DISCONNECTED);
@@ -65,6 +70,8 @@ public class LoginService extends Service {
 		}
 		if (p instanceof LoginClientId)
 			handleLogin(player, (LoginClientId) p);
+		if (p instanceof DeleteCharacterRequest)
+			handleCharDeletion(intent, player, (DeleteCharacterRequest) p);
 	}
 	
 	private void sendServerInfo(Player player) {
@@ -73,6 +80,11 @@ public class LoginService extends Service {
 		int id = c.getInt("LOGIN-SERVER-ID", 1);
 		sendPacket(player.getNetworkId(), new ServerString(name + ":" + id));
 		sendPacket(player.getNetworkId(), new ServerId(id));
+	}
+	
+	private void handleCharDeletion(GalacticIntent intent, Player player, DeleteCharacterRequest request) {
+		intent.getObjectManager().deleteObject(request.getPlayerId());
+		sendPacket(player, new DeleteCharacterResponse(deleteCharacter(request.getPlayerId())));
 	}
 	
 	private void handleLogin(Player player, LoginClientId id) {
@@ -207,6 +219,18 @@ public class LoginService extends Service {
 			characters.add(c);
 		}
 		return characters.toArray(new SWGCharacter[characters.size()]);
+	}
+	
+	private boolean deleteCharacter(long id) {
+		synchronized (deleteCharacter) {
+			try {
+				deleteCharacter.setLong(1, id);
+				return deleteCharacter.executeUpdate() > 0;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return false;
+		}
 	}
 	
 }
