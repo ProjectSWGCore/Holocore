@@ -21,11 +21,47 @@ public class SuiWindow {
 	//private Map<Integer, PyObject> scriptCallbacks;
 	private Map<Integer, ISuiCallback> javaCallbacks;
 	
+	// TODO: What do component types 2, 7, 8 do?
+	
 	public SuiWindow(String script, Player owner) {
 		this.script = script;
 		this.owner = owner;
 	}
 
+	public final void clearDataSource(String dataSource) {
+		SuiWindowComponent component = new SuiWindowComponent();
+		component.setType((byte) 1);
+		
+		component.getNarrowParams().add(dataSource);
+		
+		components.add(component);
+	}
+	
+	public final void setProperty(String property, String value) {
+		SuiWindowComponent component = new SuiWindowComponent();
+		component.setType((byte) 3);
+		
+		for (String s : property.split(":")) {
+			component.getNarrowParams().add(s);
+		}
+		
+		component.getWideParams().add(value);
+		components.add(component);
+	}
+	
+	public void addDataItem(String name, String value) {
+		SuiWindowComponent component = new SuiWindowComponent();
+		component.setType((byte) 4);
+		
+		for(String str : name.split(":")) {
+			component.getNarrowParams().add(str);
+		}
+		
+		component.getWideParams().add(value);
+		
+		components.add(component);
+	}
+	
 	public final void addCallback(int eventId, String source, byte trigger, List<String> returnParams, ISuiCallback callback) {
 		SuiWindowComponent component = new SuiWindowComponent();
 		component.setType((byte) 5);
@@ -43,15 +79,16 @@ public class SuiWindow {
 		javaCallbacks.put(eventId, callback);
 	}
 	
-	public final void setProperty(String property, String value) {
+	public void addDataSource(String name, String value) {
 		SuiWindowComponent component = new SuiWindowComponent();
-		component.setType((byte) 3);
+		component.setType((byte) 6);
 		
-		for (String s : property.split(":")) {
-			component.getNarrowParams().add(s);
+		for(String str : name.split(":")) {
+			component.getNarrowParams().add(str);
 		}
 		
 		component.getWideParams().add(value);
+		
 		components.add(component);
 	}
 	
