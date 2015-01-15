@@ -150,7 +150,7 @@ public class ZoneService extends Service {
 		synchronized (getCharacter) {
 			try {
 				getCharacter.setString(1, name);
-				return !getCharacter.execute();
+				return getCharacter.executeQuery().next();
 			} catch (SQLException e) {
 				e.printStackTrace();
 				return false;
