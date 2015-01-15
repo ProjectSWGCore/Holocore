@@ -221,7 +221,7 @@ public class ObjectManager extends Manager {
 	
 	private void updateAwarenessForObject(SWGObject obj) {
 		Location location = obj.getLocation();
-		if (location == null)
+		if (location == null || location.getTerrain() == null)
 			return;
 		List <Player> updatedAware = new ArrayList<Player>();
 		double x = location.getX();

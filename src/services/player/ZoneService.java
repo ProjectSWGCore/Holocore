@@ -161,7 +161,7 @@ public class ZoneService extends Service {
 	private long createCharacter(ObjectManager objManager, Player player, ClientCreateCharacter create) {
 		Location		start		= getStartLocation(create.getStart());
 		Race			race		= Race.getRaceByFile(create.getRace());
-		CreatureObject	creatureObj	= (CreatureObject) objManager.createObject(race.getFilename());
+		CreatureObject	creatureObj	= (CreatureObject) objManager.createObject(race.getFilename(), start);
 		PlayerObject	playerObj	= (PlayerObject)   objManager.createObject("object/player/shared_player.iff");
 		
 		setCreatureObjectValues(objManager, creatureObj, create);
@@ -170,7 +170,6 @@ public class ZoneService extends Service {
 		createStarterClothing(objManager, creatureObj, create.getRace(), create.getClothes());
 		
 		creatureObj.setVolume(0x000F4240);
-		creatureObj.setLocation(start);
 		creatureObj.setOwner(player);
 		creatureObj.setSlot("ghost", playerObj);
 		playerObj.setTag(player.getAccessLevel());
