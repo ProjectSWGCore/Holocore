@@ -3,10 +3,12 @@ package services.player;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import network.packets.Packet;
 import network.packets.swg.login.ClientIdMsg;
+import network.packets.swg.zone.insertion.SelectCharacter;
 import intents.CloseConnectionIntent;
 import intents.GalacticPacketIntent;
 import intents.PlayerEventIntent;
@@ -57,6 +59,8 @@ public class PlayerManager extends Manager {
 				player = transitionLoginToZone(networkId, gpi.getGalaxy().getId(), (ClientIdMsg) packet);
 			else
 				player = players.get(networkId);
+			if (player != null && type == ServerType.ZONE && packet instanceof SelectCharacter)
+				removeDuplicatePlayers(player, ((SelectCharacter)packet).getCharacterId());
 			if (type == ServerType.LOGIN && player == null) {
 				player = new Player(this, networkId);
 				players.put(networkId, player);
@@ -70,7 +74,7 @@ public class PlayerManager extends Manager {
 			}
 		} else if (i instanceof PlayerEventIntent) {
 			if (((PlayerEventIntent)i).getEvent() == PlayerEvent.PE_DISAPPEAR) {
-				PlayerEventIntent pei = (PlayerEventIntent) i; // heh.. pee
+				PlayerEventIntent pei = (PlayerEventIntent) i;
 				Player p = pei.getPlayer();
 				if (p.getPlayerState() == PlayerState.DISCONNECTED) {
 					players.remove(p.getNetworkId());
@@ -115,6 +119,17 @@ public class PlayerManager extends Manager {
 		}
 		
 		return 0;
+	}
+	
+	private void removeDuplicatePlayers(Player player, long charId) {
+		synchronized (players) {
+			Iterator <Player> it = players.values().iterator();
+			while (it.hasNext()) {
+				Player p = it.next();
+				if (p != player && p.getCreatureObject().getObjectId() == charId)
+					it.remove();
+			}
+		}
 	}
 	
 	private Player transitionLoginToZone(final long networkId, final int galaxyId, ClientIdMsg clientId) {

@@ -29,7 +29,7 @@ public class CoreManager extends Manager {
 	
 	static {
 		try {
-			packetOutput = new PrintStream(new FileOutputStream("packets.txt", true));
+			packetOutput = new PrintStream(new FileOutputStream("packets.txt", false));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			packetOutput = System.out;
@@ -106,7 +106,7 @@ public class CoreManager extends Manager {
 		} else {
 			for (int i = 0; i < indent; i++)
 				packetOutput.print("    ");
-			packetOutput.print(packet.getClass().getSimpleName());
+			packetOutput.println(packet.getClass().getSimpleName());
 		}
 	}
 	
