@@ -123,7 +123,7 @@ public class ChatService extends Service {
 	
 	private void handleInstantMessage(PlayerManager playerMgr, Player sender, ChatInstantMessageToCharacter request) {
 		String strReceiver = request.getCharacter().toLowerCase();
-		String strSender = sender.getCreatureObject().getName().toLowerCase();
+		String strSender = sender.getCharacterName().toLowerCase();
 		
 		if (strSender.contains(" "))
 			strSender = strSender.split(" ")[0];
@@ -162,7 +162,7 @@ public class ChatService extends Service {
 		ChatOnSendPersistentMessage response = new ChatOnSendPersistentMessage(errorCode, request.getCounter());
 		sender.sendPacket(response);
 		
-		Mail mail = new Mail(sender.getCreatureObject().getName(), request.getSubject(), request.getMessage(), recId);
+		Mail mail = new Mail(sender.getCharacterName(), request.getSubject(), request.getMessage(), recId);
 		mail.setId(maxMailId);
 		maxMailId++;
 		mail.setTimestamp((int) (new Date().getTime() / 1000));

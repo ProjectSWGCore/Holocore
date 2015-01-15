@@ -87,7 +87,7 @@ public class PlayerManager extends Manager {
 	public Player getPlayerByCreatureName(String name) {
 		synchronized (players) {
 			for (Player p : players.values()) {
-				if (p.getCreatureObject() != null && p.getCreatureObject().getName().equalsIgnoreCase(name))
+				if (p.getCreatureObject() != null && p.getCharacterName().equalsIgnoreCase(name))
 					return p;
 			}
 		}
@@ -98,7 +98,7 @@ public class PlayerManager extends Manager {
 		synchronized (players) {
 			for (Player p : players.values()) {
 				if (p.getCreatureObject() != null) {
-					String cName = p.getCreatureObject().getName().toLowerCase();
+					String cName = p.getCharacterName().toLowerCase();
 					if (cName.startsWith(name) && (cName.length() == name.length() || cName.charAt(name.length()) == ' ')) {
 						return p;
 					}
