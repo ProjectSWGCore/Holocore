@@ -15,6 +15,7 @@ import network.packets.swg.zone.baselines.Baseline;
 import intents.InboundPacketIntent;
 import intents.OutboundPacketIntent;
 import resources.Galaxy;
+import resources.Galaxy.GalaxyStatus;
 import resources.config.ConfigFile;
 import resources.control.Intent;
 import resources.control.Manager;
@@ -81,6 +82,10 @@ public class CoreManager extends Manager {
 				outputPacket(1, out.getPacket());
 			}
 		}
+	}
+	
+	public GalaxyStatus getGalaxyStatus() {
+		return galaxy.getStatus();
 	}
 	
 	private void outputPacket(int indent, Packet packet) {
