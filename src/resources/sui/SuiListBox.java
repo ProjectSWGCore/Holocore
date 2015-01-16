@@ -28,6 +28,7 @@ public class SuiListBox extends SuiWindow {
 			break;
 		default: break;
 		}
+		clearDataSource("List.dataList");
 	}
 
 	public SuiListBox(Player owner, String title, String prompt) {
@@ -52,8 +53,14 @@ public class SuiListBox extends SuiWindow {
 		else return item.getId();
 	}
 	
-	public List<SuiListBoxItem> getList() { return list; }
+	public List<String> getSelectedRowReturnList() { 
+		List<String> returnList = new ArrayList<String>();
+		returnList.add("List.lstList:SelectedRow");
+		return returnList;
+	}
 	
+	public List<SuiListBoxItem> getList() { return list; }
+
 	public enum ListBoxType {
 		OK,
 		OK_CANCEL,
