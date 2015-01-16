@@ -18,11 +18,9 @@ import resources.sui.SuiWindow;
 public class SuiService extends Service {
 
 	private Map<Integer, SuiWindow> windows;
-	private int maxWindowId;
 	
 	public SuiService() {
 		windows = new ConcurrentHashMap<Integer, SuiWindow>();
-		maxWindowId = 0;
 	}
 	
 	@Override
