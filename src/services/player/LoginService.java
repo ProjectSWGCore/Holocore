@@ -30,6 +30,7 @@ import network.packets.swg.login.ServerString;
 import network.packets.swg.login.StationIdHasJediSlot;
 import resources.Galaxy;
 import resources.Race;
+import resources.Galaxy.GalaxyStatus;
 import resources.config.ConfigFile;
 import resources.control.Service;
 import resources.player.AccessLevel;
@@ -198,8 +199,8 @@ public class LoginService extends Service {
 			g.setOnlineFreeTrialLimit(c.getInt("GALAXY-MAX-ONLINE", 3000));
 			g.setRecommended(true);
 			// If locked, restricted, or full
-			if (p.getAccessLevel() == AccessLevel.ADMIN && g.getStatus() >= 3)
-				g.setStatus(2);
+			if (p.getAccessLevel() == AccessLevel.ADMIN && g.getStatus() != GalaxyStatus.UP)
+				g.setStatus(GalaxyStatus.UP);
 			galaxies.add(g);
 		}
 		return galaxies;

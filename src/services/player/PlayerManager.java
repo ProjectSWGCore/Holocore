@@ -126,7 +126,7 @@ public class PlayerManager extends Manager {
 			Iterator <Player> it = players.values().iterator();
 			while (it.hasNext()) {
 				Player p = it.next();
-				if (p != player && p.getCreatureObject().getObjectId() == charId)
+				if (p != player && p.getCreatureObject() != null && p.getCreatureObject().getObjectId() == charId)
 					it.remove();
 			}
 		}

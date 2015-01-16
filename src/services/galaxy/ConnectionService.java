@@ -17,8 +17,8 @@ import resources.player.PlayerState;
 
 public class ConnectionService extends Service {
 	
-	private static final double LD_THRESHOLD = TimeUnit.MINUTES.toMillis(5);
-	private static final double DISAPPEAR_THRESHOLD = TimeUnit.MINUTES.toMillis(10);
+	private static final double LD_THRESHOLD = TimeUnit.SECONDS.toMillis(30);
+	private static final double DISAPPEAR_THRESHOLD = TimeUnit.MINUTES.toMillis(5);
 	
 	private final ScheduledExecutorService updateService;
 	private final Runnable updateRunnable;
@@ -33,8 +33,11 @@ public class ConnectionService extends Service {
 					for (Player p : zonedInPlayers) {
 						if (p.getTimeSinceLastPacket() > DISAPPEAR_THRESHOLD) {
 							p.setPlayerState(PlayerState.DISCONNECTED);
+							System.out.println(p.getCharacterName() + " disappeared");
 							new PlayerEventIntent(p, PlayerEvent.PE_DISAPPEAR).broadcast();
 						} else if (p.getTimeSinceLastPacket() > LD_THRESHOLD) {
+							if (p.getPlayerState() != PlayerState.LOGGED_OUT)
+								System.out.println("Logged out " + p.getCharacterName());
 							p.setPlayerState(PlayerState.LOGGED_OUT);
 						}
 					}
@@ -52,7 +55,7 @@ public class ConnectionService extends Service {
 	
 	@Override
 	public boolean start() {
-		updateService.scheduleAtFixedRate(updateRunnable, 1, 1, TimeUnit.SECONDS);
+		updateService.scheduleAtFixedRate(updateRunnable, 10, 10, TimeUnit.SECONDS);
 		return super.start();
 	}
 	
