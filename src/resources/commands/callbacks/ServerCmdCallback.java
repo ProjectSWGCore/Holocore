@@ -8,7 +8,6 @@ import resources.player.Player;
 import resources.sui.ISuiCallback;
 import resources.sui.SuiListBox;
 import resources.sui.SuiListBox.ListBoxType;
-import resources.sui.SuiWindow.Trigger;
 import services.objects.ObjectManager;
 
 public class ServerCmdCallback implements ICmdCallback {
@@ -21,7 +20,7 @@ public class ServerCmdCallback implements ICmdCallback {
 		listBox.addListItem("Kick Player", 1);
 		listBox.addListItem("Ban Player", 2);
 		
-		listBox.addCallback(0, "", Trigger.OK, listBox.getSelectedRowReturnList(), new ServerSuiCallback());
+		listBox.addItemSelectionCallback(0, new ServerSuiCallback());
 		
 		listBox.display();
 	}
@@ -29,8 +28,8 @@ public class ServerCmdCallback implements ICmdCallback {
 	private class ServerSuiCallback implements ISuiCallback {
 
 		@Override
-		public void handleEvent(SWGObject actor, int eventType, List<String> returnParams) {
-			
+		public void handleEvent(Player player, SWGObject actor, int eventType, List<String> returnParams) {
+
 		}
 		
 	}

@@ -46,6 +46,12 @@ public class SuiListBox extends SuiWindow {
 		list.add(item);
 	}
 
+	public void addItemSelectionCallback(int eventId, ISuiCallback callback) {
+		List<String> returnList = new ArrayList<String>();
+		returnList.add("List.lstList:SelectedRow");
+		addCallback(eventId, "", Trigger.OK, returnList, callback);
+	}
+	
 	public long getListItemId(int index) {
 		SuiListBoxItem item = list.get(index);
 		
@@ -53,11 +59,12 @@ public class SuiListBox extends SuiWindow {
 		else return item.getId();
 	}
 	
-	public List<String> getSelectedRowReturnList() { 
-		List<String> returnList = new ArrayList<String>();
-		returnList.add("List.lstList:SelectedRow");
-		return returnList;
+	public SuiListBoxItem getListItem(int index) {
+		SuiListBoxItem item = list.get(index);
+		return item;
 	}
+	
+	public static int getSelectedIndex(List<String> returnParams) { return Integer.valueOf(returnParams.get(0)); }
 	
 	public List<SuiListBoxItem> getList() { return list; }
 

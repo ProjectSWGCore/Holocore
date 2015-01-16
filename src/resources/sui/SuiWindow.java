@@ -4,6 +4,7 @@ import intents.sui.SuiWindowIntent;
 import intents.sui.SuiWindowIntent.SuiWindowEvent;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +20,7 @@ public class SuiWindow {
 	private float maxDistance = 0;
 	private List<SuiWindowComponent> components = new ArrayList<SuiWindowComponent>();
 	//private Map<Integer, PyObject> scriptCallbacks;
-	private Map<Integer, ISuiCallback> javaCallbacks;
+	private Map<Integer, ISuiCallback> javaCallbacks = new HashMap<Integer, ISuiCallback>();
 	
 	// TODO: What do component types 2, 7, 8 do?
 	
@@ -104,7 +105,8 @@ public class SuiWindow {
 	public final float getMaxDistance() { return maxDistance; }
 	public final void setMaxDistance(float maxDistance) { this.maxDistance = maxDistance; }
 	public final List<SuiWindowComponent> getComponents() { return components; }
-
+	public final ISuiCallback getCallback(int eventType) { return javaCallbacks.get(eventType); }
+	
 	public enum Trigger {;
 		public static byte UPDATE = 4;
 		public static byte OK = 9;
