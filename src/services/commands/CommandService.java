@@ -11,6 +11,7 @@ import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
 import resources.commands.Command;
 import resources.commands.ICmdCallback;
+import resources.commands.callbacks.ServerCmdCallback;
 import resources.commands.callbacks.WaypointCmdCallback;
 import resources.common.CRC;
 import resources.control.Intent;
@@ -116,5 +117,6 @@ public class CommandService extends Service {
 	
 	private void registerCallbacks() {
 		registerCallback("waypoint", new WaypointCmdCallback());
+		registerCallback("server", new ServerCmdCallback());
 	}
 }
