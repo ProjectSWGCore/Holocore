@@ -31,12 +31,7 @@ import resources.control.Intent;
 import resources.control.Manager;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
-import resources.objects.intangible.IntangibleObject;
-import resources.objects.player.PlayerObject;
 import resources.objects.quadtree.QuadTree;
-import resources.objects.tangible.TangibleObject;
-import resources.objects.waypoint.WaypointObject;
-import resources.objects.weapon.WeaponObject;
 import resources.player.Player;
 import resources.player.PlayerEvent;
 import resources.server_info.ObjectDatabase;
@@ -64,25 +59,26 @@ public class ObjectManager extends Manager {
 		registerForIntent(SWGObjectEventIntent.TYPE);
 		registerForIntent(GalacticPacketIntent.TYPE);
 		registerForIntent(PlayerEventIntent.TYPE);
+		loadQuadTree();
+		loadObjects();
+		clientFac = new ClientFactory();
+		return super.initialize();
+	}
+	
+	private void loadQuadTree() {
 		for (Terrain t : Terrain.values()) {
 			quadTree.put(t, new QuadTree<SWGObject>(-8192, -8192, 8192, 8192));
 		}
-		objects.loadToCache();
+	}
+	
+	private void loadObjects() {
 		long startLoad = System.nanoTime();
 		System.out.println("ObjectManager: Loading " + objects.size() + " objects from ObjectDatabase...");
+		objects.loadToCache();
 		objects.traverseCache(new Traverser<SWGObject>() {
 			@Override
 			public void process(SWGObject obj) {
-				obj.setOwner(null);
-				Location l = obj.getLocation();
-				if (l.getTerrain() != null) {
-					QuadTree <SWGObject> tree = quadTree.get(l.getTerrain());
-					if (tree != null) {
-						tree.put(l.getX(), l.getZ(), obj);
-					} else {
-						System.err.println("ObjectManager: Unable to load QuadTree for object " + obj.getObjectId() + " and terrain: " + l.getTerrain());
-					}
-				}
+				loadObject(obj);
 				if (obj.getObjectId() >= maxObjectId) {
 					maxObjectId = obj.getObjectId() + 1;
 				}
@@ -90,9 +86,19 @@ public class ObjectManager extends Manager {
 		});
 		double loadTime = (System.nanoTime() - startLoad) / 1E6;
 		System.out.printf("ObjectManager: Finished loading %d objects. Time: %fms%n", objects.size(), loadTime);
-		clientFac = new ClientFactory();
-
-		return super.initialize();
+	}
+	
+	private void loadObject(SWGObject obj) {
+		obj.setOwner(null);
+		Location l = obj.getLocation();
+		if (l.getTerrain() != null) {
+			QuadTree <SWGObject> tree = quadTree.get(l.getTerrain());
+			if (tree != null) {
+				tree.put(l.getX(), l.getZ(), obj);
+			} else {
+				System.err.println("ObjectManager: Unable to load QuadTree for object " + obj.getObjectId() + " and terrain: " + l.getTerrain());
+			}
+		}
 	}
 	
 	@Override
@@ -110,25 +116,33 @@ public class ObjectManager extends Manager {
 	@Override
 	public void onIntentReceived(Intent i) {
 		if (i instanceof GalacticPacketIntent) {
-			GalacticPacketIntent gpi = (GalacticPacketIntent) i;
-			if (gpi.getPacket() instanceof SelectCharacter) {
-				zoneInCharacter(gpi.getPlayerManager(), gpi.getGalaxy().getName(), gpi.getNetworkId(), ((SelectCharacter)gpi.getPacket()).getCharacterId());
-			} else if (gpi.getPacket() instanceof ObjectController) {
-				ObjectController controller = (ObjectController) gpi.getPacket();
-				if (controller.getControllerData() instanceof DataTransform) {
-					DataTransform trans = (DataTransform) controller.getControllerData();
-					SWGObject obj = getObject(controller.getObjectId());
-					moveObject(obj, trans);
-				}
-			}
+			processGalacticPacketIntent((GalacticPacketIntent) i);
 		} else if (i instanceof PlayerEventIntent) {
 			if (((PlayerEventIntent)i).getEvent() == PlayerEvent.PE_DISAPPEAR) {
-				((PlayerEventIntent)i).getPlayer().getCreatureObject().clearAware();
+				SWGObject obj = ((PlayerEventIntent)i).getPlayer().getCreatureObject();
+				obj.setOwner(null);
+				obj.clearAware();
 			}
 		}
 	}
 	
-	public SWGObject getObject(long objectId) {
+	private void processGalacticPacketIntent(GalacticPacketIntent gpi) {
+		if (gpi.getPacket() instanceof SelectCharacter) {
+			PlayerManager pm = gpi.getPlayerManager();
+			String galaxy = gpi.getGalaxy().getName();
+			long characterId = ((SelectCharacter)gpi.getPacket()).getCharacterId();
+			zoneInCharacter(pm, galaxy, gpi.getNetworkId(), characterId);
+		} else if (gpi.getPacket() instanceof ObjectController) {
+			ObjectController controller = (ObjectController) gpi.getPacket();
+			if (controller.getControllerData() instanceof DataTransform) {
+				DataTransform trans = (DataTransform) controller.getControllerData();
+				SWGObject obj = getObjectById(controller.getObjectId());
+				moveObject(obj, trans);
+			}
+		}
+	}
+	
+	public SWGObject getObjectById(long objectId) {
 		synchronized (objects) {
 			return objects.get(objectId);
 		}
@@ -163,7 +177,7 @@ public class ObjectManager extends Manager {
 	public SWGObject createObject(String template, Location l) {
 		synchronized (objects) {
 			long objectId = getNextObjectId();
-			SWGObject obj = createObjectFromTemplate(objectId, template);
+			SWGObject obj = ObjectCreator.createObjectFromTemplate(objectId, template);
 			if (obj == null) {
 				System.err.println("ObjectManager: Unable to create object with template " + template);
 				return null;
@@ -249,8 +263,7 @@ public class ObjectManager extends Manager {
 	}
 	
 	private void addSlotsToObject(SWGObject obj, ObjectData attributes) {
-
-		if ((String) attributes.getAttribute(ObjectData.SLOT_DESCRIPTOR) != null) {
+		if (attributes.getAttribute(ObjectData.SLOT_DESCRIPTOR) != null) {
 			// These are the slots that the object *HAS*
 			SlotDescriptorData descriptor = (SlotDescriptorData) clientFac.getInfoFromFile((String) attributes.getAttribute(ObjectData.SLOT_DESCRIPTOR));
 			
@@ -259,10 +272,9 @@ public class ObjectManager extends Manager {
 			}
 		}
 		
-		if ((String) attributes.getAttribute(ObjectData.ARRANGEMENT_FILE) != null) {
-			// This is what slots the object *USES*			
+		if (attributes.getAttribute(ObjectData.ARRANGEMENT_FILE) != null) {
+			// This is what slots the object *USES*
 			SlotArrangementData arrangementData = (SlotArrangementData) clientFac.getInfoFromFile((String) attributes.getAttribute(ObjectData.ARRANGEMENT_FILE));
-			
 			obj.setArrangment(arrangementData.getArrangement());
 		}
 	}
@@ -312,57 +324,5 @@ public class ObjectManager extends Manager {
 		}
 	}
 	
-	private String getFirstTemplatePart(String template) {
-		int ind = template.indexOf('/');
-		if (ind == -1)
-			return "";
-		return template.substring(0, ind);
-	}
 	
-	private SWGObject createObjectFromTemplate(long objectId, String template) {
-		if (!template.startsWith("object/"))
-			return null;
-		if (!template.endsWith(".iff"))
-			return null;
-		template = template.substring(7, template.length()-7-4);
-		switch (getFirstTemplatePart(template)) {
-			case "creature": return createCreatureObject(objectId, template);
-			case "player": return createPlayerObject(objectId, template);
-			case "tangible": return createTangibleObject(objectId, template);
-			case "intangible": return createIntangibleObject(objectId, template);
-			case "waypoint": return createWaypointObject(objectId, template);
-			case "weapon": return createWeaponObject(objectId, template);
-			case "building": break;
-			case "cell": break;
-		}
-		return null;
-	}
-	
-	private CreatureObject createCreatureObject(long objectId, String template) {
-		return new CreatureObject(objectId);
-	}
-	
-	private PlayerObject createPlayerObject(long objectId, String template) {
-		return new PlayerObject(objectId);
-	}
-	
-	private TangibleObject createTangibleObject(long objectId, String template) {
-		return new TangibleObject(objectId);
-	}
-	
-	private IntangibleObject createIntangibleObject(long objectId, String template) {
-		return new IntangibleObject(objectId);
-	}
-	
-	private WaypointObject createWaypointObject(long objectId, String template) {
-		return new WaypointObject(objectId);
-	}
-	
-	private WeaponObject createWeaponObject(long objectId, String template) {
-		return new WeaponObject(objectId);
-	}
-	
-	public SWGObject getObjectById(long id) {
-		return objects.get(id);
-	}
 }
