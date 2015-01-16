@@ -1,5 +1,8 @@
 package main;
 
+import intents.ServerStatusIntent;
+import intents.ServerStatusIntent.ServerStatus;
+import resources.Galaxy.GalaxyStatus;
 import services.CoreManager;
 
 public class ProjectSWG {
@@ -43,10 +46,15 @@ public class ProjectSWG {
 	private void run() {
 		while (!shutdownRequested) {
 			manager = new CoreManager();
+			new ServerStatusIntent(ServerStatus.INITIALIZING).broadcast();
 			initialize();
 			start();
+			GalaxyStatus status = manager.getGalaxyStatus();
+			new ServerStatusIntent(status==GalaxyStatus.UP?ServerStatus.OPEN:ServerStatus.LOCKED).broadcast();
 			loop();
+			new ServerStatusIntent(ServerStatus.TERMINATING).broadcast();
 			terminate();
+			new ServerStatusIntent(ServerStatus.OFFLINE).broadcast();
 			if (!shutdownRequested) {
 				System.out.println("ProjectSWG: Cleaning up memory...");
 				cleanup();
