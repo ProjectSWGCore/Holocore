@@ -24,73 +24,72 @@ public class SuiWindow {
 	private Map<Integer, PyObject> scriptCallbacks;
 	private Map<Integer, ISuiCallback> javaCallbacks;
 	
-	// TODO: What do component types 2, 7, 8 do?
-	
 	public SuiWindow(String script, Player owner) {
 		this.script = script;
 		this.owner = owner;
 	}
 
 	public final void clearDataSource(String dataSource) {
-		SuiWindowComponent component = new SuiWindowComponent();
-		component.setType((byte) 1);
+		SuiWindowComponent component = createComponent((byte) 1);
 		
 		component.getNarrowParams().add(dataSource);
+		components.add(component);
+	}
+	
+	public final void addChildWidget(String property, String value) {
+		SuiWindowComponent component = createComponent((byte) 2);
 		
+		addNarrowParams(component, property);
+		
+		component.getWideParams().add(value);
 		components.add(component);
 	}
 	
 	public final void setProperty(String property, String value) {
-		SuiWindowComponent component = new SuiWindowComponent();
-		component.setType((byte) 3);
+		SuiWindowComponent component = createComponent((byte) 3);
 		
-		for (String s : property.split(":")) {
-			component.getNarrowParams().add(s);
-		}
+		addNarrowParams(component, property);
 		
 		component.getWideParams().add(value);
 		components.add(component);
 	}
 	
 	public final void addDataItem(String name, String value) {
-		SuiWindowComponent component = new SuiWindowComponent();
-		component.setType((byte) 4);
+		SuiWindowComponent component = createComponent((byte) 4);
 		
-		for(String str : name.split(":")) {
-			component.getNarrowParams().add(str);
-		}
+		addNarrowParams(component, name);
 		
 		component.getWideParams().add(value);
-		
 		components.add(component);
 	}
 
 	private final void addCallbackComponent(String source, byte trigger, List<String> returnParams) {
-		SuiWindowComponent component = new SuiWindowComponent();
-		component.setType((byte) 5);
+		SuiWindowComponent component = createComponent((byte) 5);
+		
 		component.getNarrowParams().add(source);
 		component.getNarrowParams().add(new String(new byte[] { trigger }));
 		component.getNarrowParams().add("handleSUI");
 		
 		for (String returnParam : returnParams) {
-			for (String s : returnParam.split(":")) {
-				component.getNarrowParams().add(s);
-			}
+			addNarrowParams(component, returnParam);
 		}
 		
 		components.add(component);
 	}
 	
 	public final void addDataSource(String name, String value) {
-		SuiWindowComponent component = new SuiWindowComponent();
-		component.setType((byte) 6);
+		SuiWindowComponent component = createComponent((byte) 6);
 		
-		for(String str : name.split(":")) {
-			component.getNarrowParams().add(str);
-		}
+		addNarrowParams(component, name);
 		
 		component.getWideParams().add(value);
+		components.add(component);
+	}
+	
+	public final void clearDataSourceContainer(String dataSource) {
+		SuiWindowComponent component = createComponent((byte) 7);
 		
+		component.getNarrowParams().add(dataSource);
 		components.add(component);
 	}
 	
@@ -110,6 +109,19 @@ public class SuiWindow {
 		scriptCallbacks.put(eventId, callback);
 	}
 
+	private SuiWindowComponent createComponent(byte type) {
+		SuiWindowComponent component = new SuiWindowComponent();
+		component.setType(type);
+		
+		return component;
+	}
+	
+	private void addNarrowParams(SuiWindowComponent component, String property) {
+		for (String s : property.split(":")) {
+			component.getNarrowParams().add(s);
+		}
+	}
+	
 	public final void display() { new SuiWindowIntent(owner, this, SuiWindowEvent.NEW).broadcast(); }
 	public final void display(Player player) { new SuiWindowIntent(player, this, SuiWindowEvent.NEW).broadcast();}
 	
