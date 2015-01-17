@@ -281,25 +281,24 @@ public class ObjectManager extends Manager {
 	
 	private void zoneInCharacter(PlayerManager playerManager, String galaxy, long netId, long characterId) {
 		Player player = playerManager.getPlayerFromNetworkId(netId);
-		if (player != null) {
-			verifyPlayerObjectsSet(player, characterId);
-			long objId = player.getCreatureObject().getObjectId();
-			Race race = ((CreatureObject) player.getCreatureObject()).getRace();
-			Location l = player.getCreatureObject().getLocation();
-			long time = (long)(ProjectSWG.getCoreTime()/1E3);
-			sendPacket(player, new HeartBeatMessage());
-			sendPacket(player, new ChatServerStatus(true));
-			sendPacket(player, new VoiceChatStatus());
-			sendPacket(player, new ParametersMessage());
-			sendPacket(player, new ChatOnConnectAvatar());
-			sendPacket(player, new CmdStartScene(false, objId, race, l, time));
-			CreatureObject creature = (CreatureObject) player.getCreatureObject();
-			player.sendPacket(new UpdatePvpStatusMessage(creature.getPvpType(), creature.getPvpFactionId(), creature.getObjectId()));
-			creature.createObject(player);
-			creature.clearAware();
-			updateAwarenessForObject(creature);
-			new PlayerEventIntent(player, galaxy, PlayerEvent.PE_ZONE_IN).broadcast();
-		}
+		if (player == null)
+			return;
+		verifyPlayerObjectsSet(player, characterId);
+		long objId = player.getCreatureObject().getObjectId();
+		Race race = ((CreatureObject) player.getCreatureObject()).getRace();
+		Location l = player.getCreatureObject().getLocation();
+		long time = (long)(ProjectSWG.getCoreTime()/1E3);
+		CreatureObject creature = (CreatureObject) player.getCreatureObject();
+		sendPacket(player, new HeartBeatMessage());
+		sendPacket(player, new ChatServerStatus(true));
+		sendPacket(player, new VoiceChatStatus());
+		sendPacket(player, new ParametersMessage());
+		sendPacket(player, new ChatOnConnectAvatar());
+		sendPacket(player, new CmdStartScene(false, objId, race, l, time));
+		sendPacket(player, new UpdatePvpStatusMessage(creature.getPvpType(), creature.getPvpFactionId(), creature.getObjectId()));
+		creature.createObject(player);
+		updateAwarenessForObject(creature);
+		new PlayerEventIntent(player, galaxy, PlayerEvent.PE_ZONE_IN).broadcast();
 	}
 	
 	private void verifyPlayerObjectsSet(Player player, long characterId) {
@@ -323,6 +322,5 @@ public class ObjectManager extends Manager {
 			return maxObjectId++;
 		}
 	}
-	
 	
 }

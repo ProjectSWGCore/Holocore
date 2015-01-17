@@ -17,15 +17,15 @@ import resources.player.PlayerState;
 
 public class ConnectionService extends Service {
 	
-	private static final double LD_THRESHOLD = TimeUnit.SECONDS.toMillis(30);
-	private static final double DISAPPEAR_THRESHOLD = TimeUnit.MINUTES.toMillis(5);
+	private static final double LD_THRESHOLD = TimeUnit.SECONDS.toMillis(15);
+	private static final double DISAPPEAR_THRESHOLD = TimeUnit.MINUTES.toMillis(3);
 	
 	private final ScheduledExecutorService updateService;
 	private final Runnable updateRunnable;
 	private final List <Player> zonedInPlayers;
 	
 	public ConnectionService() {
-		updateService = Executors.newScheduledThreadPool(2);
+		updateService = Executors.newSingleThreadScheduledExecutor();
 		zonedInPlayers = new LinkedList<Player>();
 		updateRunnable = new Runnable() {
 			public void run() {
