@@ -297,6 +297,7 @@ public class ObjectManager extends Manager {
 		sendPacket(player, new CmdStartScene(false, objId, race, l, time));
 		sendPacket(player, new UpdatePvpStatusMessage(creature.getPvpType(), creature.getPvpFactionId(), creature.getObjectId()));
 		creature.createObject(player);
+		creature.clearAware();
 		updateAwarenessForObject(creature);
 		new PlayerEventIntent(player, galaxy, PlayerEvent.PE_ZONE_IN).broadcast();
 	}
