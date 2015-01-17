@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.python.core.PyObject;
+
 import resources.player.Player;
 import network.packets.swg.zone.server_ui.SuiCreatePageMessage.SuiWindowComponent;
 
@@ -19,8 +21,8 @@ public class SuiWindow {
 	private long rangeObjId;
 	private float maxDistance = 0;
 	private List<SuiWindowComponent> components = new ArrayList<SuiWindowComponent>();
-	//private Map<Integer, PyObject> scriptCallbacks;
-	private Map<Integer, ISuiCallback> javaCallbacks = new HashMap<Integer, ISuiCallback>();
+	private Map<Integer, PyObject> scriptCallbacks;
+	private Map<Integer, ISuiCallback> javaCallbacks;
 	
 	// TODO: What do component types 2, 7, 8 do?
 	
@@ -50,7 +52,7 @@ public class SuiWindow {
 		components.add(component);
 	}
 	
-	public void addDataItem(String name, String value) {
+	public final void addDataItem(String name, String value) {
 		SuiWindowComponent component = new SuiWindowComponent();
 		component.setType((byte) 4);
 		
@@ -62,8 +64,8 @@ public class SuiWindow {
 		
 		components.add(component);
 	}
-	
-	public final void addCallback(int eventId, String source, byte trigger, List<String> returnParams, ISuiCallback callback) {
+
+	private final void addCallbackComponent(String source, byte trigger, List<String> returnParams) {
 		SuiWindowComponent component = new SuiWindowComponent();
 		component.setType((byte) 5);
 		component.getNarrowParams().add(source);
@@ -77,10 +79,9 @@ public class SuiWindow {
 		}
 		
 		components.add(component);
-		javaCallbacks.put(eventId, callback);
 	}
 	
-	public void addDataSource(String name, String value) {
+	public final void addDataSource(String name, String value) {
 		SuiWindowComponent component = new SuiWindowComponent();
 		component.setType((byte) 6);
 		
@@ -93,6 +94,22 @@ public class SuiWindow {
 		components.add(component);
 	}
 	
+	public final void addCallback(int eventId, String source, byte trigger, List<String> returnParams, ISuiCallback callback) {
+		addCallbackComponent(source, trigger, returnParams);
+		
+		if (javaCallbacks == null)
+			javaCallbacks = new HashMap<Integer, ISuiCallback>();
+		javaCallbacks.put(eventId, callback);
+	}
+	
+	public final void addCallback(int eventId, String source, byte trigger, List<String> returnParams, PyObject callback) {
+		addCallbackComponent(source, trigger, returnParams);
+		
+		if (scriptCallbacks == null)
+			scriptCallbacks = new HashMap<Integer, PyObject>();
+		scriptCallbacks.put(eventId, callback);
+	}
+
 	public final void display() { new SuiWindowIntent(owner, this, SuiWindowEvent.NEW).broadcast(); }
 	public final void display(Player player) { new SuiWindowIntent(player, this, SuiWindowEvent.NEW).broadcast();}
 	
@@ -105,7 +122,8 @@ public class SuiWindow {
 	public final float getMaxDistance() { return maxDistance; }
 	public final void setMaxDistance(float maxDistance) { this.maxDistance = maxDistance; }
 	public final List<SuiWindowComponent> getComponents() { return components; }
-	public final ISuiCallback getCallback(int eventType) { return javaCallbacks.get(eventType); }
+	public final ISuiCallback getJavaCallback(int eventType) { return ((javaCallbacks == null) ? null : javaCallbacks.get(eventType)); }
+	public final PyObject getScriptCallback(int eventType) { return ((scriptCallbacks == null) ? null : scriptCallbacks.get(eventType)); }
 	
 	public enum Trigger {;
 		public static byte UPDATE = 4;

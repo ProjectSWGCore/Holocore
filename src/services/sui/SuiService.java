@@ -4,6 +4,9 @@ import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.python.core.Py;
+import org.python.core.PyObject;
+
 import network.packets.swg.zone.server_ui.SuiCreatePageMessage;
 import network.packets.swg.zone.server_ui.SuiEventNotification;
 import intents.GalacticPacketIntent;
@@ -54,9 +57,14 @@ public class SuiService extends Service {
 		if (window == null)
 			System.err.println("Null window id " + r.getWindowId());
 		
-		ISuiCallback callback = window.getCallback(r.getEventId());
-		if (callback != null)
-			callback.handleEvent(player, player.getCreatureObject(), r.getEventId(), r.getDataStrings());
+		int eventId = r.getEventId();
+		if (window.getJavaCallback(eventId) != null) {
+			ISuiCallback callback = window.getJavaCallback(eventId);
+			callback.handleEvent(player, player.getCreatureObject(), eventId, r.getDataStrings());
+		} else if (window.getScriptCallback(eventId) != null) {
+			PyObject callback = window.getScriptCallback(eventId);
+			callback.__call__(Py.java2py(player), Py.java2py(player.getCreatureObject()), Py.java2py(eventId), Py.java2py(r.getDataStrings()));
+		}
 	}
 	
 	private void displayWindow(Player player, SuiWindow wnd) {
