@@ -5,15 +5,12 @@ import java.util.List;
 
 import resources.player.Player;
 
-public class SuiListBox extends SuiWindow {
+public class SuiListBox extends SuiBaseWindow {
 	private List<SuiListBoxItem> list;
 	
 	public SuiListBox(Player owner, ListBoxType type, String title, String prompt) {
-		super("Script.listBox", owner);
+		super("Script.listBox", owner, title, prompt);
 		list = new ArrayList<SuiListBoxItem>();
-		setProperty("bg.caption.lblTitle:Text", title);
-		setProperty("Prompt.lblPrompt:Text", prompt);
-		
 		switch(type) {
 		case OK:
 			setProperty("btnOk:visible", "True");
