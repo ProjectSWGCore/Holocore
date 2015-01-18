@@ -25,17 +25,18 @@ import resources.control.Service;
 import resources.encodables.player.Mail;
 import resources.objects.SWGObject;
 import resources.player.Player;
-import resources.server_info.ObjectDatabase;
-import resources.server_info.ObjectDatabase.Traverser;
+import resources.server_info.CachedObjectDatabase;
+import resources.server_info.IObjectDatabase;
+import resources.server_info.IObjectDatabase.Traverser;
 import services.player.PlayerManager;
 
 public class ChatService extends Service {
 	
-	private ObjectDatabase<Mail> mails;
+	private IObjectDatabase<Mail> mails;
 	private int maxMailId;
 	
 	public ChatService() {
-		mails = new ObjectDatabase<Mail>("odb/mails.db");
+		mails = new CachedObjectDatabase<Mail>("odb/mails.db");
 		maxMailId = 1;
 	}
 	
@@ -45,7 +46,7 @@ public class ChatService extends Service {
 		registerForIntent(SpatialChatIntent.TYPE);
 		registerForIntent(PersistentMessageIntent.TYPE);
 		registerForIntent(PlayerEventIntent.TYPE);
-		mails.loadToCache();
+		mails.load();
 		mails.traverse(new Traverser<Mail>() {
 			@Override
 			public void process(Mail mail) {

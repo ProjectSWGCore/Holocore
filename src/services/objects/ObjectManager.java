@@ -4,8 +4,8 @@ import intents.GalacticPacketIntent;
 import intents.PlayerEventIntent;
 import intents.swgobject_events.SWGObjectEventIntent;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -34,8 +34,9 @@ import resources.objects.creature.CreatureObject;
 import resources.objects.quadtree.QuadTree;
 import resources.player.Player;
 import resources.player.PlayerEvent;
-import resources.server_info.ObjectDatabase;
-import resources.server_info.ObjectDatabase.Traverser;
+import resources.server_info.CachedObjectDatabase;
+import resources.server_info.IObjectDatabase;
+import resources.server_info.IObjectDatabase.Traverser;
 import services.player.PlayerManager;
 
 public class ObjectManager extends Manager {
@@ -44,12 +45,12 @@ public class ObjectManager extends Manager {
 	
 	private ClientFactory clientFac;
 	
-	private ObjectDatabase<SWGObject> objects;
+	private IObjectDatabase<SWGObject> objects;
 	private Map <Terrain, QuadTree <SWGObject>> quadTree;
 	private long maxObjectId;
 	
 	public ObjectManager() {
-		objects = new ObjectDatabase<SWGObject>("odb/objects.db");
+		objects = new CachedObjectDatabase<SWGObject>("odb/objects.db");
 		quadTree = new HashMap<Terrain, QuadTree<SWGObject>>();
 		maxObjectId = 1;
 	}
@@ -73,9 +74,9 @@ public class ObjectManager extends Manager {
 	
 	private void loadObjects() {
 		long startLoad = System.nanoTime();
-		System.out.println("ObjectManager: Loading " + objects.size() + " objects from ObjectDatabase...");
-		objects.loadToCache();
-		objects.traverseCache(new Traverser<SWGObject>() {
+		System.out.println("ObjectManager: Loading objects from ObjectDatabase...");
+		objects.load();
+		objects.traverse(new Traverser<SWGObject>() {
 			@Override
 			public void process(SWGObject obj) {
 				loadObject(obj);
@@ -237,7 +238,7 @@ public class ObjectManager extends Manager {
 		Location location = obj.getLocation();
 		if (location == null || location.getTerrain() == null)
 			return;
-		List <Player> updatedAware = new ArrayList<Player>();
+		List <Player> updatedAware = new LinkedList<Player>();
 		double x = location.getX();
 		double y = location.getZ();
 		QuadTree<SWGObject> tree = quadTree.get(location.getTerrain());
