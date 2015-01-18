@@ -102,11 +102,9 @@ public class ChatService extends Service {
 		// TODO: Moods and emotes, also figure out one of the unknown ints. Might be that "Player A says to Player B" is one of the unknowns. (targetId in SpatialChat packet)
 		Player sender = i.getPlayer();
 		SWGObject actor = sender.getCreatureObject();
-		String chatMsg = i.getMessage();
-		int chatType = i.getChatType();
-		
+
 		// Send to self
-		SpatialChat message = new SpatialChat(actor.getObjectId(), 0, chatMsg, chatType);
+		SpatialChat message = new SpatialChat(actor.getObjectId(), 0, i.getMessage(), i.getChatType(), i.getMoodId());
 		ObjectController controller = new ObjectController(244, actor.getObjectId(), message);
 
 		sender.sendPacket(controller);
