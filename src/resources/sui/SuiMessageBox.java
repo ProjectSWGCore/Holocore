@@ -1,5 +1,8 @@
 package resources.sui;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import resources.player.Player;
 
 public class SuiMessageBox extends SuiBaseWindow {
@@ -30,6 +33,20 @@ public class SuiMessageBox extends SuiBaseWindow {
 
 	public SuiMessageBox(Player owner, String title, String prompt) {
 		this(owner, MessageBoxType.OK_CANCEL, title, prompt);
+	}
+	
+	public void addOkCancelButtonsCallback(int okEventId, int cancelEventId, ISuiCallback callback) {
+		List<String> returnParams = new ArrayList<String>();
+		returnParams.add("btnOk:Text");
+		returnParams.add("btnCancel:Text");
+		addCallback(okEventId, "", Trigger.OK, returnParams, callback);
+		addCallback(cancelEventId, "", Trigger.CANCEL, returnParams, callback);
+	}
+	
+	public void addOkButtonCallback(int eventId, ISuiCallback callback) {
+		List<String> returnParams = new ArrayList<String>();
+		returnParams.add("btnOk:Text");
+		addCallback(eventId, "", Trigger.OK, returnParams, callback);
 	}
 	
 	public enum MessageBoxType {

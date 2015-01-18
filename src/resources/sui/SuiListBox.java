@@ -43,6 +43,10 @@ public class SuiListBox extends SuiBaseWindow {
 		list.add(item);
 	}
 
+	public void addListItem(String name) {
+		addListItem(name, 0);
+	}
+	
 	public void addItemSelectionCallback(int eventId, ISuiCallback callback) {
 		List<String> returnList = new ArrayList<String>();
 		returnList.add("List.lstList:SelectedRow");
