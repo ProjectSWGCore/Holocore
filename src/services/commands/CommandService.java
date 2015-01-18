@@ -18,6 +18,7 @@ import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
+import resources.player.AccessLevel;
 import resources.player.Player;
 import resources.utilities.Scripts;
 import services.objects.ObjectManager;
@@ -72,6 +73,9 @@ public class CommandService extends Service {
 	private void executeCommand(ObjectManager objManager, Player player, Command command, SWGObject target, String args) {
 		CreatureObject playerCreo = (CreatureObject) player.getCreatureObject();
 		if (playerCreo == null)
+			return;
+		
+		if (command.getGodLevel() > 0 && player.getAccessLevel() == AccessLevel.PLAYER)
 			return;
 		
 		// TODO: Check if the player has the ability
