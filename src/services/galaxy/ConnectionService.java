@@ -77,9 +77,9 @@ public class ConnectionService extends Service {
 			if (((PlayerEventIntent)i).getEvent() == PlayerEvent.PE_ZONE_IN) {
 				Player p = ((PlayerEventIntent)i).getPlayer();
 				synchronized (zonedInPlayers) {
-					if (!zonedInPlayers.contains(p)) {
-						zonedInPlayers.add(p);
-					}
+					if (zonedInPlayers.contains(p))
+						zonedInPlayers.remove(p);
+					zonedInPlayers.add(p);
 				}
 			} else if (((PlayerEventIntent)i).getEvent() == PlayerEvent.PE_DISAPPEAR) {
 				synchronized (zonedInPlayers) {
