@@ -17,7 +17,7 @@ import resources.player.PlayerState;
 
 public class ConnectionService extends Service {
 	
-	private static final double LD_THRESHOLD = TimeUnit.SECONDS.toMillis(15);
+	private static final double LD_THRESHOLD = TimeUnit.SECONDS.toMillis(30);
 	private static final double DISAPPEAR_THRESHOLD = TimeUnit.MINUTES.toMillis(3);
 	
 	private final ScheduledExecutorService updateService;
