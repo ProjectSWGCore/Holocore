@@ -13,7 +13,6 @@ public class ProjectSWG {
 	private boolean shutdownRequested;
 	
 	public static final void main(String [] args) {
-		System.out.println("I am starting up the server.");
 		server = new ProjectSWG();
 		Runtime.getRuntime().addShutdownHook(new Thread() {
 			public void run() {
