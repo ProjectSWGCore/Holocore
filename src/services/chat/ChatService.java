@@ -26,13 +26,13 @@ import resources.encodables.player.Mail;
 import resources.objects.SWGObject;
 import resources.player.Player;
 import resources.server_info.CachedObjectDatabase;
-import resources.server_info.IObjectDatabase;
-import resources.server_info.IObjectDatabase.Traverser;
+import resources.server_info.ObjectDatabase;
+import resources.server_info.ObjectDatabase.Traverser;
 import services.player.PlayerManager;
 
 public class ChatService extends Service {
 	
-	private IObjectDatabase<Mail> mails;
+	private ObjectDatabase<Mail> mails;
 	private int maxMailId;
 	
 	public ChatService() {

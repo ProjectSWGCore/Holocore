@@ -35,8 +35,8 @@ import resources.objects.quadtree.QuadTree;
 import resources.player.Player;
 import resources.player.PlayerEvent;
 import resources.server_info.CachedObjectDatabase;
-import resources.server_info.IObjectDatabase;
-import resources.server_info.IObjectDatabase.Traverser;
+import resources.server_info.ObjectDatabase;
+import resources.server_info.ObjectDatabase.Traverser;
 import services.player.PlayerManager;
 
 public class ObjectManager extends Manager {
@@ -45,7 +45,7 @@ public class ObjectManager extends Manager {
 	
 	private ClientFactory clientFac;
 	
-	private IObjectDatabase<SWGObject> objects;
+	private ObjectDatabase<SWGObject> objects;
 	private Map <Terrain, QuadTree <SWGObject>> quadTree;
 	private long maxObjectId;
 	
