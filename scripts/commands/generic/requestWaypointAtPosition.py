@@ -2,7 +2,10 @@ import sys
 
 #Args: color planet x y z
 def execute(objManager, player, target, args):
-	print(args)
+	#TODO: move content in placeHolder method to here
+	return
+	
+def placeHolder():
 	cmdArgs = args.split(" ", 4)
 	
 	waypoint = objManager.createObject("object/waypoint/shared_waypoint.iff")

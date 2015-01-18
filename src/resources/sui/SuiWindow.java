@@ -89,7 +89,17 @@ public class SuiWindow {
 	public final void clearDataSourceContainer(String dataSource) {
 		SuiWindowComponent component = createComponent((byte) 7);
 		
-		component.getNarrowParams().add(dataSource);
+		addNarrowParams(component, dataSource);
+		
+		components.add(component);
+	}
+	
+	public final void addTableDataSource(String dataSource, String value) {
+		SuiWindowComponent component = createComponent((byte) 8);
+		
+		addNarrowParams(component, dataSource);
+		
+		component.getWideParams().add(value);
 		components.add(component);
 	}
 	

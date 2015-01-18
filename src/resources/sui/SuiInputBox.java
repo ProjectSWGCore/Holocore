@@ -5,13 +5,10 @@ import java.util.List;
 
 import resources.player.Player;
 
-public class SuiInputBox extends SuiWindow {
+public class SuiInputBox extends SuiBaseWindow {
 
 	public SuiInputBox(Player owner, InputBoxType type, String title, String prompt) {
-		super("Script.inputBox", owner);
-		setProperty("bg.caption.lblTitle:Text", title);
-		setProperty("Prompt.lblPrompt:Text", prompt);
-		
+		super("Script.inputBox", owner, title, prompt);
 		switch(type){
 		case OK:
 			setProperty("btnOk:visible", "True");

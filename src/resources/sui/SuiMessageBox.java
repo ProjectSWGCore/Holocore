@@ -2,14 +2,10 @@ package resources.sui;
 
 import resources.player.Player;
 
-public class SuiMessageBox extends SuiWindow {
+public class SuiMessageBox extends SuiBaseWindow {
 
 	public SuiMessageBox(Player owner, MessageBoxType type, String title, String prompt) {
-		super("Script.messageBox", owner);
-		
-		setProperty("bg.caption.lblTitle:Text", title);
-		setProperty("Prompt.lblPrompt:Text", prompt);
-		
+		super("Script.messageBox", owner, title, prompt);
 		switch(type) {
 		case OK:
 			setProperty("btnOk:visible", "True");
