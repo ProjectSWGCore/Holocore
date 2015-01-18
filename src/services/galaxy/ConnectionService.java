@@ -17,7 +17,7 @@ import resources.player.PlayerState;
 
 public class ConnectionService extends Service {
 	
-	private static final double LD_THRESHOLD = TimeUnit.SECONDS.toMillis(15);
+	private static final double LD_THRESHOLD = TimeUnit.SECONDS.toMillis(30);
 	private static final double DISAPPEAR_THRESHOLD = TimeUnit.MINUTES.toMillis(3);
 	
 	private final ScheduledExecutorService updateService;
@@ -77,9 +77,9 @@ public class ConnectionService extends Service {
 			if (((PlayerEventIntent)i).getEvent() == PlayerEvent.PE_ZONE_IN) {
 				Player p = ((PlayerEventIntent)i).getPlayer();
 				synchronized (zonedInPlayers) {
-					if (!zonedInPlayers.contains(p)) {
-						zonedInPlayers.add(p);
-					}
+					if (zonedInPlayers.contains(p))
+						zonedInPlayers.remove(p);
+					zonedInPlayers.add(p);
 				}
 			} else if (((PlayerEventIntent)i).getEvent() == PlayerEvent.PE_DISAPPEAR) {
 				synchronized (zonedInPlayers) {

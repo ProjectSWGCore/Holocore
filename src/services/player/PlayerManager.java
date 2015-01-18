@@ -11,6 +11,7 @@ import network.packets.swg.login.ClientIdMsg;
 import network.packets.swg.zone.insertion.SelectCharacter;
 import intents.CloseConnectionIntent;
 import intents.GalacticPacketIntent;
+import intents.InboundPacketIntent;
 import intents.PlayerEventIntent;
 import resources.control.Intent;
 import resources.control.Manager;
@@ -37,6 +38,7 @@ public class PlayerManager extends Manager {
 	
 	@Override
 	public boolean initialize() {
+		registerForIntent(InboundPacketIntent.TYPE);
 		registerForIntent(GalacticPacketIntent.TYPE);
 		registerForIntent(PlayerEventIntent.TYPE);
 		return super.initialize();
@@ -49,7 +51,12 @@ public class PlayerManager extends Manager {
 	
 	@Override
 	public void onIntentReceived(Intent i) {
-		if (i instanceof GalacticPacketIntent) {
+		if (i instanceof InboundPacketIntent) {
+			long networkId = ((InboundPacketIntent) i).getNetworkId();
+			Player player = players.get(networkId);
+			if (player != null)
+				player.updateLastPacketTimestamp();
+		} else if (i instanceof GalacticPacketIntent) {
 			GalacticPacketIntent gpi = (GalacticPacketIntent) i;
 			Packet packet = gpi.getPacket();
 			ServerType type = gpi.getServerType();
@@ -66,7 +73,6 @@ public class PlayerManager extends Manager {
 				players.put(networkId, player);
 			}
 			if (player != null) {
-				player.updateLastPacketTimestamp();
 				if (type == ServerType.LOGIN)
 					loginService.handlePacket(gpi, player, packet);
 				else if (type == ServerType.ZONE)
