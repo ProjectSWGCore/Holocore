@@ -44,7 +44,7 @@ public class ProjectSWG {
 	}
 	
 	private void run() {
-		while (!shutdownRequested) {
+		while (!shutdownRequested && (manager == null || (manager != null && !manager.isShutdownRequested()))) {
 			manager = new CoreManager();
 			new ServerStatusIntent(ServerStatus.INITIALIZING).broadcast();
 			initialize();
@@ -87,7 +87,7 @@ public class ProjectSWG {
 		while (!shutdownRequested) {
 			try {
 				manager.flushPackets(); // Sends any packets that weren't sent
-				Thread.sleep(10); // Checks the state of the server every 10ms
+				Thread.sleep(50); // Checks the state of the server every 10ms
 			} catch (InterruptedException e) {
 				if (!shutdownRequested)
 					throw new CoreException("Main Thread Interrupted.");
