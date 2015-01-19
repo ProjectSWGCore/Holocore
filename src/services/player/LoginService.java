@@ -170,6 +170,8 @@ public class LoginService extends Service {
 	}
 	
 	private boolean isUserValid(ResultSet set, String password) throws SQLException {
+		if (password.isEmpty())
+			return false;
 		if (set.getString("password").equals(password))
 			return true;
 		password = MD5.digest(MD5.digest(set.getString("password_salt")) + MD5.digest(password));
