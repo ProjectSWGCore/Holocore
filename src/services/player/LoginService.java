@@ -120,7 +120,7 @@ public class LoginService extends Service {
 				random.nextBytes(sessionToken);
 				player.setSessionToken(sessionToken);
 				player.setPlayerState(PlayerState.LOGGING_IN);
-				switch(user.getString(5)) {
+				switch(user.getString("access_level")) {
 					case "player": player.setAccessLevel(AccessLevel.PLAYER); break;
 					case "admin": player.setAccessLevel(AccessLevel.ADMIN); break;
 					case "dev": player.setAccessLevel(AccessLevel.DEV); break;
