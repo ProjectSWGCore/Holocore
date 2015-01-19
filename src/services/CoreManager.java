@@ -41,8 +41,10 @@ public class CoreManager extends Manager {
 	private GalacticManager galacticManager;
 	private Galaxy galaxy;
 	private long startTime;
+	private boolean shutdownRequested;
 	
 	public CoreManager() {
+		shutdownRequested = false;
 		galaxy = getGalaxy();
 		if (galaxy != null) {
 			engineManager = new EngineManager(galaxy);
@@ -59,6 +61,10 @@ public class CoreManager extends Manager {
 	 */
 	public boolean isOperational() {
 		return true;
+	}
+	
+	public boolean isShutdownRequested() {
+		return shutdownRequested;
 	}
 	
 	@Override
