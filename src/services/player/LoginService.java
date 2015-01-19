@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Random;
 
 import main.ProjectSWG;
+import network.encryption.MD5;
 import network.packets.Packet;
 import network.packets.soe.SessionRequest;
 import network.packets.swg.ErrorMessage;
@@ -55,7 +56,7 @@ public class LoginService extends Service {
 	
 	@Override
 	public boolean initialize() {
-		getUser = getLocalDatabase().prepareStatement("SELECT * FROM users WHERE username = ? AND password = ?");
+		getUser = getLocalDatabase().prepareStatement("SELECT * FROM users WHERE username = ?");
 		getGalaxies = getLocalDatabase().prepareStatement("SELECT * FROM galaxies");
 		getCharacters = getLocalDatabase().prepareStatement("SELECT * FROM characters WHERE userid = ?");
 		deleteCharacter = getLocalDatabase().prepareStatement("DELETE FROM CHARACTERS WHERE id = ?");
@@ -109,9 +110,9 @@ public class LoginService extends Service {
 				id.setPassword(sessionHash[1]);
 			}
 
-			ResultSet user = getUser(id.getUsername(), id.getPassword());
-
-			if (user.next()) { // User exists! Right username/password combo!
+			ResultSet user = getUser(id.getUsername());
+			
+			if (user.next() && isUserValid(user, id.getPassword())) { // User exists! Right username/password combo!
 				player.setUsername(id.getUsername());
 				player.setUserId(user.getInt("id"));
 				int tokenLength = getConfig(ConfigFile.PRIMARY).getInt("SESSION-TOKEN-LENGTH", 24);
@@ -168,9 +169,17 @@ public class LoginService extends Service {
 		p.setPlayerState(PlayerState.LOGGED_IN);
 	}
 	
-	private ResultSet getUser(String username, String password) throws SQLException {
+	private boolean isUserValid(ResultSet set, String password) throws SQLException {
+		if (password.isEmpty())
+			return false;
+		if (set.getString("password").equals(password))
+			return true;
+		password = MD5.digest(MD5.digest(set.getString("password_salt")) + MD5.digest(password));
+		return set.getString("password").equals(password);
+	}
+	
+	private ResultSet getUser(String username) throws SQLException {
 		getUser.setString(1, username);
-		getUser.setString(2, password);
 		return getUser.executeQuery();
 	}
 	
