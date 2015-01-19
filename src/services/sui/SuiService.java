@@ -7,6 +7,10 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.python.core.Py;
 import org.python.core.PyObject;
 
+import network.packets.Packet;
+import network.packets.swg.zone.object_controller.ObjectController;
+import network.packets.swg.zone.object_controller.ObjectMenuRequest;
+import network.packets.swg.zone.object_controller.ObjectMenuResponse;
 import network.packets.swg.zone.server_ui.SuiCreatePageMessage;
 import network.packets.swg.zone.server_ui.SuiEventNotification;
 import intents.GalacticPacketIntent;
@@ -38,12 +42,27 @@ public class SuiService extends Service {
 		if (i instanceof SuiWindowIntent)
 			handleSuiWindowIntent((SuiWindowIntent) i);
 		else if (i instanceof GalacticPacketIntent) {
-			if (((GalacticPacketIntent) i).getPacket() instanceof SuiEventNotification) {
-				long netId = ((GalacticPacketIntent) i).getNetworkId();
-				Player player = ((GalacticPacketIntent) i).getPlayerManager().getPlayerFromNetworkId(netId);
+			Packet packet = ((GalacticPacketIntent) i).getPacket();
+			long netId = ((GalacticPacketIntent) i).getNetworkId();
+			Player player = ((GalacticPacketIntent) i).getPlayerManager().getPlayerFromNetworkId(netId);
+			
+			if (packet instanceof ObjectController) {
+				ObjectController controller = ((ObjectController) packet).getController();
+				if (controller instanceof ObjectMenuRequest)
+					handleRadialMenuRequest(player, (ObjectMenuRequest) controller);
+				
+			} else if (packet instanceof SuiEventNotification) {
 				handleSuiEventNotification(player, (SuiEventNotification) (((GalacticPacketIntent) i).getPacket()));
 			}
 		}
+	}
+	
+	private void handleRadialMenuRequest(Player player, ObjectMenuRequest request) {
+		// TODO: Modify when object scripts are in to accept a createRadial definition for radials
+		ObjectMenuResponse response = new ObjectMenuResponse(request.getTargetId(), request.getRequesterId(), request.getOptions(), request.getCounter());
+		ObjectController controller = new ObjectController(ObjectMenuResponse.CRC, player.getCreatureObject().getObjectId(), response);
+		
+		player.sendPacket(controller);
 	}
 	
 	private void handleSuiWindowIntent(SuiWindowIntent i) {
