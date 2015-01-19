@@ -106,7 +106,7 @@ public class ChatService extends Service {
 
 		// Send to self
 		SpatialChat message = new SpatialChat(actor.getObjectId(), 0, i.getMessage(), i.getChatType(), i.getMoodId());
-		ObjectController controller = new ObjectController(244, actor.getObjectId(), message);
+		ObjectController controller = new ObjectController(SpatialChat.CRC, actor.getObjectId(), message);
 
 		sender.sendPacket(controller);
 		

@@ -47,7 +47,7 @@ public class SuiService extends Service {
 			Player player = ((GalacticPacketIntent) i).getPlayerManager().getPlayerFromNetworkId(netId);
 			
 			if (packet instanceof ObjectController) {
-				ObjectController controller = (ObjectController) packet;
+				ObjectController controller = ((ObjectController) packet).getController();
 				if (controller instanceof ObjectMenuRequest)
 					handleRadialMenuRequest(player, (ObjectMenuRequest) controller);
 				
@@ -59,9 +59,8 @@ public class SuiService extends Service {
 	
 	private void handleRadialMenuRequest(Player player, ObjectMenuRequest request) {
 		// TODO: Modify when object scripts are in to accept a createRadial definition for radials
-		System.out.println("handling radial menu : " + request.getTargetId());
 		ObjectMenuResponse response = new ObjectMenuResponse(request.getTargetId(), request.getRequesterId(), request.getOptions(), request.getCounter());
-		ObjectController controller = new ObjectController(244, player.getCreatureObject().getObjectId(), response);
+		ObjectController controller = new ObjectController(ObjectMenuResponse.CRC, player.getCreatureObject().getObjectId(), response);
 		
 		player.sendPacket(controller);
 	}
