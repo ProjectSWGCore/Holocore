@@ -6,6 +6,7 @@ import java.util.List;
 
 import intents.GalacticPacketIntent;
 import intents.PlayerEventIntent;
+import intents.chat.ChatBroadcastIntent;
 import intents.chat.PersistentMessageIntent;
 import intents.chat.SpatialChatIntent;
 import network.packets.Packet;
@@ -18,6 +19,8 @@ import network.packets.swg.zone.chat.ChatOnSendPersistentMessage;
 import network.packets.swg.zone.chat.ChatPersistentMessageToClient;
 import network.packets.swg.zone.chat.ChatPersistentMessageToServer;
 import network.packets.swg.zone.chat.ChatRequestPersistentMessage;
+import network.packets.swg.zone.chat.ChatSystemMessage;
+import network.packets.swg.zone.chat.ChatSystemMessage.SystemChatType;
 import network.packets.swg.zone.object_controller.ObjectController;
 import network.packets.swg.zone.object_controller.SpatialChat;
 import resources.control.Intent;
@@ -46,6 +49,8 @@ public class ChatService extends Service {
 		registerForIntent(SpatialChatIntent.TYPE);
 		registerForIntent(PersistentMessageIntent.TYPE);
 		registerForIntent(PlayerEventIntent.TYPE);
+		registerForIntent(ChatBroadcastIntent.TYPE);
+		
 		mails.load();
 		mails.traverse(new Traverser<Mail>() {
 			@Override
@@ -82,6 +87,8 @@ public class ChatService extends Service {
 			handlePersistentMessageIntent((PersistentMessageIntent) i);
 		else if (i instanceof PlayerEventIntent)
 			handlePlayerEventIntent((PlayerEventIntent) i);
+		else if (i instanceof ChatBroadcastIntent)
+			handleChatBroadcast((ChatBroadcastIntent) i);
 	}
 	
 	private void handlePlayerEventIntent(PlayerEventIntent intent) {
@@ -93,6 +100,15 @@ public class ChatService extends Service {
 		}
 	}
 	
+	private void handleChatBroadcast(ChatBroadcastIntent i) {
+		switch(i.getBroadcastType()) {
+		case AREA: broadcastAreaMessage(i.getMessage(), i.getBroadcaster()); break;
+		default: break;
+		//case PLANET: broadcastPlanetMessage(i.getMessage(), i.getTerrain()); break;
+		//case GALAXY: broadcastGalaxyMessage(i.getMessage()); break;
+		}
+	}
+	
 	private void handleChatRoomListRequest(Player player, ChatRequestRoomList request) {
 //		ChatRoomList list = new ChatRoomList();
 //		list.addChatRoom(new ChatRoom(1, 0, 0, "SWG.Josh Wifi.Chat.tcpa", "SWG", "Josh Wifi", player.getCreatureObject().getName(), player.getCreatureObject().getName(), "Chat"));
@@ -100,7 +116,7 @@ public class ChatService extends Service {
 	}
 	
 	private void handleSpatialChat(SpatialChatIntent i) {
-		// TODO: Moods and emotes, also figure out one of the unknown ints. Might be that "Player A says to Player B" is one of the unknowns. (targetId in SpatialChat packet)
+		// TODO: Emotes, also figure out one of the unknown ints. Might be that "Player A says to Player B" is one of the unknowns. (targetId in SpatialChat packet)
 		Player sender = i.getPlayer();
 		SWGObject actor = sender.getCreatureObject();
 
@@ -201,6 +217,16 @@ public class ChatService extends Service {
 			return;
 		
 		sendPersistentMessage(player, mail, MailFlagType.FULL_MESSAGE, galaxy);
+	}
+	
+	private void broadcastAreaMessage(String message, SWGObject broadcaster) {
+		ChatSystemMessage packet = new ChatSystemMessage(SystemChatType.SCREEN_AND_CHAT.ordinal(), message);
+		broadcaster.getOwner().sendPacket(packet);
+		
+		List<Player> observers = broadcaster.getObservers();
+		for (Player player : observers) {
+			player.sendPacket(packet);
+		}
 	}
 	
 	private void sendPersistentMessageHeaders(Player player, String galaxy) {
