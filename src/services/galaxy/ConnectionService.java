@@ -33,11 +33,11 @@ public class ConnectionService extends Service {
 					for (Player p : zonedInPlayers) {
 						if (p.getTimeSinceLastPacket() > DISAPPEAR_THRESHOLD) {
 							p.setPlayerState(PlayerState.DISCONNECTED);
-							System.out.println("[" + p.getUsername() +"]" + p.getCharacterName() + " disappeared");
+							System.out.println("[" + p.getUsername() +"] " + p.getCharacterName() + " disappeared");
 							new PlayerEventIntent(p, PlayerEvent.PE_DISAPPEAR).broadcast();
 						} else if (p.getTimeSinceLastPacket() > LD_THRESHOLD) {
 							if (p.getPlayerState() != PlayerState.LOGGED_OUT)
-								System.out.println("[" + p.getUsername() +"]" + "Logged out " + p.getCharacterName());
+								System.out.println("[" + p.getUsername() +"] Logged out " + p.getCharacterName());
 							p.setPlayerState(PlayerState.LOGGED_OUT);
 						}
 					}
