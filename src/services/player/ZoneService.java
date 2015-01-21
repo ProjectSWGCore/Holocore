@@ -116,7 +116,7 @@ public class ZoneService extends Service {
 	}
 	
 	private void handleCharCreation(ObjectManager objManager, Player player, ClientCreateCharacter create) {
-		System.out.println("[" + player.getUsername() +"]" + "Create Character: " + create.getName());
+		System.out.println("ZoneService: Create Character: " + create.getName() + "  User: " + player.getUsername() + "  IP: " + create.getAddress() + ":" + create.getPort());
 		long characterId = createCharacter(objManager, player, create);
 		
 		if (createCharacterInDb(characterId, create.getName(), player)) {

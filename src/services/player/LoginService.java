@@ -34,6 +34,8 @@ import resources.Race;
 import resources.Galaxy.GalaxyStatus;
 import resources.config.ConfigFile;
 import resources.control.Service;
+import resources.objects.SWGObject;
+import resources.objects.creature.CreatureObject;
 import resources.player.AccessLevel;
 import resources.player.Player;
 import resources.player.PlayerState;
@@ -85,7 +87,9 @@ public class LoginService extends Service {
 	}
 	
 	private void handleCharDeletion(GalacticIntent intent, Player player, DeleteCharacterRequest request) {
-		intent.getObjectManager().deleteObject(request.getPlayerId());
+		SWGObject obj = intent.getObjectManager().deleteObject(request.getPlayerId());
+		if (obj != null && obj instanceof CreatureObject)
+			System.out.println("LoginService: Delete Character: " + ((CreatureObject)obj).getName() + "  User: " + player.getUsername() + "  IP: " + request.getAddress() + ":" + request.getPort());
 		sendPacket(player, new DeleteCharacterResponse(deleteCharacter(request.getPlayerId())));
 	}
 	
@@ -128,7 +132,7 @@ public class LoginService extends Service {
 					default: player.setAccessLevel(AccessLevel.PLAYER); break;
 				}
 				sendLoginSuccessPacket(player);
-				System.out.println("LoginService: " + player.getUsername() + " has logged in.");
+				System.out.println("LoginService: " + player.getUsername() + " has logged in. IP: " + id.getAddress() + ":" + id.getPort());
 				new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_SUCCESS).broadcast();
 			} else { // User does not exist!
 				String type = "Login Failed!";
