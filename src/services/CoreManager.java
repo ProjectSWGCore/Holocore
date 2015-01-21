@@ -6,6 +6,9 @@ import java.io.PrintStream;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import network.packets.Packet;
 import network.packets.soe.DataChannelA;
@@ -15,6 +18,8 @@ import network.packets.swg.zone.baselines.Baseline;
 import intents.InboundPacketIntent;
 import intents.OutboundPacketIntent;
 import intents.ServerManagementIntent;
+import intents.chat.ChatBroadcastIntent;
+import intents.chat.ChatBroadcastIntent.BroadcastType;
 import resources.Galaxy;
 import resources.Galaxy.GalaxyStatus;
 import resources.config.ConfigFile;
@@ -96,15 +101,50 @@ public class CoreManager extends Manager {
 	
 	private void handleServerManagementIntent(ServerManagementIntent i) {
 		switch(i.getEvent()) {
-		case SHUTDOWN: initiateShutdownSequence();  break;
+		case SHUTDOWN: initiateShutdownSequence(true);  break;
 		default: break;
 		}
 		
 	}
 
-	private void initiateShutdownSequence() {
+	private void initiateShutdownSequence(boolean notifyPlayers) {
 		System.out.println("Beginning server shutdown sequence...");
-		shutdownRequested = true;
+		
+		if (notifyPlayers)
+			createNotificationThread();
+		else
+			shutdownRequested = true;
+	}
+	
+	private void createNotificationThread() {
+		final AtomicInteger runCount = new AtomicInteger();
+		
+		Executors.newSingleThreadScheduledExecutor().scheduleAtFixedRate(new Runnable() {
+			public void run() {
+				switch(runCount.getAndIncrement()) {
+				case 0:
+					new ChatBroadcastIntent("The server will be shutting down in 15 minutes.", BroadcastType.GALAXY).broadcast();
+					System.out.println("ProjectSWG: Shutdown in 15 minutes.");
+					break;
+				case 1:
+					new ChatBroadcastIntent("The server will be shutting down in 10 minutes.", BroadcastType.GALAXY).broadcast();
+					System.out.println("ProjectSWG: Shutdown in 10 minutes.");
+					break;
+				case 2:
+					new ChatBroadcastIntent("The server will be shutting down in 5 minutes.", BroadcastType.GALAXY).broadcast();
+					System.out.println("ProjectSWG: Shutdown in 5 minutes.");
+					break;
+				case 3:
+					new ChatBroadcastIntent("The server will be shutting down in 1 minute.", BroadcastType.GALAXY).broadcast();
+					System.out.println("ProjectSWG: Shutdown in 1 minute.");
+					try { Thread.sleep(60000); } 
+					catch (InterruptedException e) { e.printStackTrace(); }
+					shutdownRequested = true;
+					throw new RuntimeException("Limit reached."); // no "clean" ways to cancel the runnable I can think of
+				}
+			}
+		}, 0, 5, TimeUnit.MINUTES);
+		
 	}
 	
 	public GalaxyStatus getGalaxyStatus() {
