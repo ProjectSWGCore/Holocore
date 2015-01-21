@@ -11,6 +11,7 @@ public class ProjectSWG {
 	private final Thread mainThread;
 	private CoreManager manager;
 	private boolean shutdownRequested;
+	private ServerStatus status;
 	
 	public static final void main(String [] args) {
 		server = new ProjectSWG();
@@ -47,21 +48,19 @@ public class ProjectSWG {
 	private void run() {
 		while (!shutdownRequested && (manager == null || (manager != null && !manager.isShutdownRequested()))) {
 			manager = new CoreManager();
-			new ServerStatusIntent(ServerStatus.INITIALIZING).broadcast();
 			initialize();
 			start();
-			GalaxyStatus status = manager.getGalaxyStatus();
-			new ServerStatusIntent(status==GalaxyStatus.UP?ServerStatus.OPEN:ServerStatus.LOCKED).broadcast();
 			loop();
-			System.out.println("ProjectSWG: Shutting down server.");
-			new ServerStatusIntent(ServerStatus.TERMINATING).broadcast();
 			terminate();
-			new ServerStatusIntent(ServerStatus.OFFLINE).broadcast();
-			/*if (!shutdownRequested) { // Should this be here? It can only be reached at this point if there is a shutdown due to loop() method
-				System.out.println("ProjectSWG: Cleaning up memory...");
+			if (!shutdownRequested && !manager.isShutdownRequested()) {
 				cleanup();
-			}*/
+			}
 		}
+	}
+	
+	private void setStatus(ServerStatus status) {
+		this.status = status;
+		new ServerStatusIntent(status).broadcast();
 	}
 	
 	private void forceShutdown() {
@@ -71,6 +70,7 @@ public class ProjectSWG {
 	}
 	
 	private void initialize() {
+		setStatus(ServerStatus.INITIALIZING);
 		System.out.println("ProjectSWG: Initializing...");
 		if (!manager.initialize())
 			throw new CoreException("Failed to initialize.");
@@ -85,33 +85,30 @@ public class ProjectSWG {
 	}
 	
 	private void loop() {
-		long loop = 0;
-		while (!shutdownRequested && !manager.isShutdownRequested()) {
+		setStatus((manager.getGalaxyStatus() == GalaxyStatus.UP) ? ServerStatus.OPEN : ServerStatus.LOCKED);
+		while (!shutdownRequested && !manager.isShutdownRequested() && manager.isOperational()) {
+			manager.flushPackets(); // Sends any packets that weren't sent
 			try {
-				manager.flushPackets(); // Sends any packets that weren't sent
-				Thread.sleep(50); // Checks the state of the server every 10ms
+				Thread.sleep(50);
 			} catch (InterruptedException e) {
-				if (!shutdownRequested)
-					throw new CoreException("Main Thread Interrupted.");
+				throw new CoreException("Main Thread Interrupted.");
 			}
-			loop++;
-			if (loop % 10 == 0 && !manager.isOperational())
-				break;
-//			if (!manager.isOperational())
-//				break;
 		}
 	}
 	
 	private void terminate() {
-		if (manager == null)
+		if (manager == null || status == ServerStatus.OFFLINE)
 			return;
+		System.out.println("ProjectSWG: Shutting down server...");
+		setStatus(ServerStatus.TERMINATING);
 		if (!manager.terminate())
 			throw new CoreException("Failed to terminate.");
+		setStatus(ServerStatus.OFFLINE);
 		System.out.println("ProjectSWG: Terminated. Time: " + manager.getCoreTime() + "ms");
 	}
 	
-	@SuppressWarnings("unused")
 	private void cleanup() {
+		System.out.println("ProjectSWG: Cleaning up memory...");
 		manager = null;
 		Runtime.getRuntime().gc();
 	}
