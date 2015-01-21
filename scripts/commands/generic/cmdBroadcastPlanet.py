@@ -1,5 +1,6 @@
 from intents.chat import ChatBroadcastIntent
 from intents.chat.ChatBroadcastIntent import BroadcastType
+
 import sys
 
 def execute(objManager, player, target, args):
