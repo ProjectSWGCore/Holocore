@@ -11,8 +11,10 @@ import network.packets.swg.login.ClientIdMsg;
 import network.packets.swg.zone.insertion.SelectCharacter;
 import intents.CloseConnectionIntent;
 import intents.GalacticPacketIntent;
+import intents.NotifyPlayersPacketIntent;
 import intents.InboundPacketIntent;
 import intents.PlayerEventIntent;
+import resources.Terrain;
 import resources.control.Intent;
 import resources.control.Manager;
 import resources.network.ServerType;
@@ -41,6 +43,7 @@ public class PlayerManager extends Manager {
 		registerForIntent(InboundPacketIntent.TYPE);
 		registerForIntent(GalacticPacketIntent.TYPE);
 		registerForIntent(PlayerEventIntent.TYPE);
+		registerForIntent(NotifyPlayersPacketIntent.TYPE);
 		return super.initialize();
 	}
 	
@@ -87,6 +90,12 @@ public class PlayerManager extends Manager {
 					new CloseConnectionIntent(p.getNetworkId()).broadcast();
 				}
 			}
+		} else if (i instanceof NotifyPlayersPacketIntent) {
+			NotifyPlayersPacketIntent intent = (NotifyPlayersPacketIntent) i;
+			if (intent.getTerrain() != null) 
+				notifyPlayersAtPlanet(intent.getTerrain(), intent.getPacket());
+			else
+				notifyPlayers(intent.getPacket());
 		}
 	}
 	
@@ -160,6 +169,24 @@ public class PlayerManager extends Manager {
 			}
 		}
 		return null;
+	}
+	
+	public void notifyPlayers(Packet... packets) {
+		synchronized(players) {
+			for (Player p : players.values()) {
+				if (p != null && p.getCreatureObject() != null)
+					p.sendPacket(packets);
+			}
+		}
+	}
+	
+	public void notifyPlayersAtPlanet(Terrain terrain, Packet... packets) {
+		synchronized(players) {
+			for (Player p : players.values()) {
+				if (p != null && p.getCreatureObject() != null && p.getCreatureObject().getLocation().getTerrain() == terrain)
+					p.sendPacket(packets);
+			}
+		}
 	}
 	
 	public Player getPlayerFromNetworkId(long networkId) {
