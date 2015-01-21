@@ -14,6 +14,7 @@ import network.packets.swg.SWGPacket;
 import network.packets.swg.zone.baselines.Baseline;
 import intents.InboundPacketIntent;
 import intents.OutboundPacketIntent;
+import intents.ServerManagementIntent;
 import resources.Galaxy;
 import resources.Galaxy.GalaxyStatus;
 import resources.config.ConfigFile;
@@ -72,6 +73,7 @@ public class CoreManager extends Manager {
 		startTime = System.nanoTime();
 		registerForIntent(InboundPacketIntent.TYPE);
 		registerForIntent(OutboundPacketIntent.TYPE);
+		registerForIntent(ServerManagementIntent.TYPE);
 		return galaxy != null && super.initialize();
 	}
 	
@@ -88,6 +90,21 @@ public class CoreManager extends Manager {
 				outputPacket(1, out.getPacket());
 			}
 		}
+		if (i instanceof ServerManagementIntent)
+			handleServerManagementIntent((ServerManagementIntent) i);
+	}
+	
+	private void handleServerManagementIntent(ServerManagementIntent i) {
+		switch(i.getEvent()) {
+		case SHUTDOWN: initiateShutdownSequence();  break;
+		default: break;
+		}
+		
+	}
+
+	private void initiateShutdownSequence() {
+		System.out.println("Beginning server shutdown sequence...");
+		shutdownRequested = true;
 	}
 	
 	public GalaxyStatus getGalaxyStatus() {

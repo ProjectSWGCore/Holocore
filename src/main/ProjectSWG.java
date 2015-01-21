@@ -28,6 +28,7 @@ public class ProjectSWG {
 			System.err.println("ProjectSWG: Shutting down - unknown error.");
 		}
 		server.terminate();
+		System.out.println("ProjectSWG: Server shut down.");
 	}
 	
 	/**
@@ -52,13 +53,14 @@ public class ProjectSWG {
 			GalaxyStatus status = manager.getGalaxyStatus();
 			new ServerStatusIntent(status==GalaxyStatus.UP?ServerStatus.OPEN:ServerStatus.LOCKED).broadcast();
 			loop();
+			System.out.println("ProjectSWG: Shutting down server.");
 			new ServerStatusIntent(ServerStatus.TERMINATING).broadcast();
 			terminate();
 			new ServerStatusIntent(ServerStatus.OFFLINE).broadcast();
-			if (!shutdownRequested) {
+			/*if (!shutdownRequested) { // Should this be here? It can only be reached at this point if there is a shutdown due to loop() method
 				System.out.println("ProjectSWG: Cleaning up memory...");
 				cleanup();
-			}
+			}*/
 		}
 	}
 	
@@ -84,7 +86,7 @@ public class ProjectSWG {
 	
 	private void loop() {
 		long loop = 0;
-		while (!shutdownRequested) {
+		while (!shutdownRequested && !manager.isShutdownRequested()) {
 			try {
 				manager.flushPackets(); // Sends any packets that weren't sent
 				Thread.sleep(50); // Checks the state of the server every 10ms
@@ -108,6 +110,7 @@ public class ProjectSWG {
 		System.out.println("ProjectSWG: Terminated. Time: " + manager.getCoreTime() + "ms");
 	}
 	
+	@SuppressWarnings("unused")
 	private void cleanup() {
 		manager = null;
 		Runtime.getRuntime().gc();
