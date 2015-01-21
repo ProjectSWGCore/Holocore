@@ -9,6 +9,7 @@ public class ServerManagementIntent extends Intent {
 	private Player player;
 	private String target;
 	private ServerManagementEvent event;
+	private long time;
 	
 	public ServerManagementIntent(Player p, String target, ServerManagementEvent event) {
 		super(TYPE);
@@ -16,7 +17,13 @@ public class ServerManagementIntent extends Intent {
 		this.target = target;
 		this.event = event;
 	}
-
+	
+	public ServerManagementIntent(long time, ServerManagementEvent event) {
+		this(null, null, event);
+		this.time = time;
+	}
+	
+	public long getTime() { return time; }
 	public Player getPlayer() { return player; }
 	public String getTarget() { return target; }
 	public ServerManagementEvent getEvent() { return event; }

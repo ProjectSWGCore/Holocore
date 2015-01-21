@@ -94,7 +94,7 @@ public class ServerCmdCallback implements ICmdCallback {
 
 				@Override
 				public void handleEvent(Player player, SWGObject actor, int eventType, List<String> returnParams) {
-					new ServerManagementIntent(player, null, ServerManagementEvent.SHUTDOWN).broadcast();
+					new ServerManagementIntent(15, ServerManagementEvent.SHUTDOWN).broadcast();
 				}
 			});
 			

@@ -9,6 +9,8 @@ public class SuiMessageBox extends SuiBaseWindow {
 
 	public SuiMessageBox(Player owner, MessageBoxType type, String title, String prompt) {
 		super("Script.messageBox", owner, title, prompt);
+		
+		setProperty("btnRevert:visible", "False");
 		switch(type) {
 		case OK:
 			setProperty("btnOk:visible", "True");

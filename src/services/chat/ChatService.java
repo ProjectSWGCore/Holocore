@@ -259,11 +259,11 @@ public class ChatService extends Service {
 					broadcastGalaxyMessage(String.format("The server will be shutting down in %d minutes.", time - (interval*2)), null);
 					break;
 				case 3:
-					broadcastGalaxyMessage("The server will be shutting down in 1 minute.", null);
+					broadcastGalaxyMessage("The server will now be shutting down.", null);
 					throw new RuntimeException("Reached max runCount"); // no "clean" ways to cancel the runnable I can think of
 				}
 			}
-		}, 0, time, TimeUnit.MINUTES);
+		}, 0, interval, TimeUnit.MINUTES);
 		
 	}
 	

@@ -100,7 +100,7 @@ public class CoreManager extends Manager {
 	
 	private void handleServerManagementIntent(ServerManagementIntent i) {
 		switch(i.getEvent()) {
-		case SHUTDOWN: initiateShutdownSequence(15);  break;
+		case SHUTDOWN: initiateShutdownSequence(i.getTime());  break;
 		default: break;
 		}
 		
