@@ -5,8 +5,10 @@ import java.util.Date;
 import java.util.List;
 
 import intents.GalacticPacketIntent;
+import intents.NotifyPlayersPacketIntent;
 import intents.PlayerEventIntent;
 import intents.chat.ChatBroadcastIntent;
+import intents.chat.ChatBroadcastIntent.BroadcastType;
 import intents.chat.PersistentMessageIntent;
 import intents.chat.SpatialChatIntent;
 import network.packets.Packet;
@@ -23,6 +25,7 @@ import network.packets.swg.zone.chat.ChatSystemMessage;
 import network.packets.swg.zone.chat.ChatSystemMessage.SystemChatType;
 import network.packets.swg.zone.object_controller.ObjectController;
 import network.packets.swg.zone.object_controller.SpatialChat;
+import resources.Terrain;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.encodables.player.Mail;
@@ -101,14 +104,11 @@ public class ChatService extends Service {
 	}
 	
 	private void handleChatBroadcast(ChatBroadcastIntent i) {
-		switch(i.getBroadcastType()) {
-		case AREA: broadcastAreaMessage(i.getMessage(), i.getBroadcaster()); break;
-		default: break;
-		//case PLANET: broadcastPlanetMessage(i.getMessage(), i.getTerrain()); break;
-		//case GALAXY: broadcastGalaxyMessage(i.getMessage()); break;
-		}
+		if (i.getBroadcastType() == BroadcastType.AREA)
+			broadcastAreaMessage(i.getMessage(), i.getBroadcaster());
+		else broadcastGalaxyMessage(i.getMessage(), i.getTerrain());
 	}
-	
+
 	private void handleChatRoomListRequest(Player player, ChatRequestRoomList request) {
 //		ChatRoomList list = new ChatRoomList();
 //		list.addChatRoom(new ChatRoom(1, 0, 0, "SWG.Josh Wifi.Chat.tcpa", "SWG", "Josh Wifi", player.getCreatureObject().getName(), player.getCreatureObject().getName(), "Chat"));
@@ -227,6 +227,11 @@ public class ChatService extends Service {
 		for (Player player : observers) {
 			player.sendPacket(packet);
 		}
+	}
+	
+	private void broadcastGalaxyMessage(String message, Terrain terrain) {
+		ChatSystemMessage packet = new ChatSystemMessage(SystemChatType.SCREEN_AND_CHAT.ordinal(), message);
+		new NotifyPlayersPacketIntent(packet, terrain).broadcast();
 	}
 	
 	private void sendPersistentMessageHeaders(Player player, String galaxy) {
