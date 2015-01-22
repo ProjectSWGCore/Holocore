@@ -26,16 +26,15 @@ public class ServerCmdCallback implements ICmdCallback {
 		listBox.addListItem("Kick Player", 0);
 		listBox.addListItem("Ban Player", 1);
 		listBox.addListItem("Unban Player", 2);
-		listBox.addListItem("Shutdown Server", 3);
+		listBox.addListItem("Shutdown Server - 15 Minutes", 3);
+		listBox.addListItem("Shutdown Server - Custom Time");
 		
 		listBox.addItemSelectionCallback(0, new ServerSuiCallback());
-		
 		listBox.display();
 	}
 
 	private class ServerSuiCallback implements ISuiCallback {
 
-		@Override
 		public void handleEvent(Player player, SWGObject actor, int eventType, List<String> returnParams) {
 			int selection = SuiListBox.getSelectedIndex(returnParams);
 			
@@ -44,6 +43,7 @@ public class ServerCmdCallback implements ICmdCallback {
 			case 1: handleBanPlayer(player); break;
 			case 2: handleUnbanPlayer(player); break;
 			case 3: handleShutdownServer(player); break;
+			case 4: handleCustomShutdownServer(player); break;
 			default: break;
 			}
 		}
@@ -51,7 +51,6 @@ public class ServerCmdCallback implements ICmdCallback {
 		private void handleKickPlayer(Player actor) {
 			SuiInputBox window = new SuiInputBox(actor, InputBoxType.OK_CANCEL, "Kick Player", "Enter the name of the player that you wish to KICK from the server.");
 			window.addInputTextCallback(0, new ISuiCallback() {
-				@Override
 				public void handleEvent(Player player, SWGObject actor, int eventType, List<String> returnParams) {
 					String name = returnParams.get(0); // input
 					new ServerManagementIntent(player, name, ServerManagementEvent.KICK).broadcast();
@@ -64,7 +63,6 @@ public class ServerCmdCallback implements ICmdCallback {
 		private void handleBanPlayer(Player actor) {
 			SuiInputBox window = new SuiInputBox(actor, InputBoxType.OK_CANCEL, "Ban Player", "Enter the name of the player that you wish to BAN from the server.");
 			window.addInputTextCallback(0, new ISuiCallback() {
-				@Override
 				public void handleEvent(Player player, SWGObject actor, int eventType, List<String> returnParams) {
 					String name = returnParams.get(0); // input
 					new ServerManagementIntent(player, name, ServerManagementEvent.BAN).broadcast();
@@ -77,8 +75,6 @@ public class ServerCmdCallback implements ICmdCallback {
 		private void handleUnbanPlayer(Player actor) {
 			SuiInputBox window = new SuiInputBox(actor, InputBoxType.OK_CANCEL, "Unban Player", "Enter the name of the player that you wish to UNBAN from the server.");
 			window.addInputTextCallback(0, new ISuiCallback() {
-
-				@Override
 				public void handleEvent(Player player, SWGObject actor, int eventType, List<String> returnParams) {
 					String name = returnParams.get(0);
 					new ServerManagementIntent(player, name, ServerManagementEvent.UNBAN).broadcast();
@@ -91,11 +87,25 @@ public class ServerCmdCallback implements ICmdCallback {
 		private void handleShutdownServer(Player actor) {
 			SuiMessageBox window = new SuiMessageBox(actor, MessageBoxType.YES_NO, "Shutdown Server", "Are you sure you wish to begin the shutdown sequence?");
 			window.addOkButtonCallback(0, new ISuiCallback() {
-
-				@Override
 				public void handleEvent(Player player, SWGObject actor, int eventType, List<String> returnParams) {
 					new ServerManagementIntent(15, ServerManagementEvent.SHUTDOWN).broadcast();
 				}
+			});
+			
+			window.display();
+		}
+		
+		private void handleCustomShutdownServer(Player actor) {
+			SuiInputBox window = new SuiInputBox(actor, InputBoxType.OK_CANCEL, "Shutdown Server", "Enter the time until the server shuts down. The shutdown sequence "
+					+ "will begin upon hitting OK.");
+			window.allowStringCharacters(false);
+
+			window.addInputTextCallback(0, new ISuiCallback() {
+				public void handleEvent(Player player, SWGObject actor, int eventType, List<String> returnParams) {
+					long countdown = Long.valueOf(returnParams.get(0));
+					new ServerManagementIntent(countdown, ServerManagementEvent.SHUTDOWN).broadcast();
+				}
+				
 			});
 			
 			window.display();
