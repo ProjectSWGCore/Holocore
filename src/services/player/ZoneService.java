@@ -3,6 +3,7 @@ package services.player;
 import intents.GalacticIntent;
 import intents.PlayerEventIntent;
 
+import java.io.File;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Calendar;
@@ -43,6 +44,7 @@ import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
 import resources.player.PlayerEvent;
 import resources.services.Config;
+import resources.zone.NameFilter;
 import services.objects.ObjectManager;
 import utilities.namegen.SWGNameGenerator;
 
@@ -51,6 +53,7 @@ public class ZoneService extends Service {
 	private SWGNameGenerator nameGenerator;
 	private Map <String, ProfTemplateData> profTemplates;
 	private ClientFactory clientFac;
+	private NameFilter nameFilter;
 	
 	private PreparedStatement createCharacter;
 	private PreparedStatement getCharacter;
@@ -58,6 +61,7 @@ public class ZoneService extends Service {
 	public ZoneService() {
 		nameGenerator = new SWGNameGenerator();
 		clientFac = new ClientFactory();
+		nameFilter = new NameFilter(new File("bad_word_list.txt"));
 	}
 	
 	@Override
@@ -67,7 +71,7 @@ public class ZoneService extends Service {
 		getCharacter = getLocalDatabase().prepareStatement("SELECT * FROM characters WHERE name = ?");
 		nameGenerator.loadAllRules();
 		loadProfTemplates();
-		return super.initialize();
+		return nameFilter.load() && super.initialize();
 	}
 	
 	public void handlePacket(GalacticIntent intent, Player player, long networkId, Packet p) {
@@ -108,23 +112,32 @@ public class ZoneService extends Service {
 	}
 	
 	private void handleApproveNameRequest(PlayerManager playerMgr, Player player, ClientVerifyAndLockNameRequest request) {
-		// TODO: Lore reserved name checks
-		if (!characterExistsForName(request.getName()))
-			sendPacket(player.getNetworkId(), new ClientVerifyAndLockNameResponse(request.getName(), ErrorMessage.NAME_APPROVED));
-		else
-			sendPacket(player.getNetworkId(), new ClientVerifyAndLockNameResponse(request.getName(), ErrorMessage.NAME_DECLINED_IN_USE));
+		String name = request.getName();
+		ErrorMessage err = getNameValidity(name);
+		if (err == ErrorMessage.NAME_APPROVED_MODIFIED)
+			name = nameFilter.cleanName(name);
+		sendPacket(player.getNetworkId(), new ClientVerifyAndLockNameResponse(name, err));
 	}
 	
 	private void handleCharCreation(ObjectManager objManager, Player player, ClientCreateCharacter create) {
 		System.out.println("ZoneService: Create Character: " + create.getName() + "  User: " + player.getUsername() + "  IP: " + create.getAddress() + ":" + create.getPort());
 		long characterId = createCharacter(objManager, player, create);
 		
-		if (createCharacterInDb(characterId, create.getName(), player)) {
+		ErrorMessage err = getNameValidity(create.getName());
+		if (err == ErrorMessage.NAME_APPROVED && createCharacterInDb(characterId, create.getName(), player)) {
 			sendPacket(player, new CreateCharacterSuccess(characterId));
 			new PlayerEventIntent(player, PlayerEvent.PE_CREATE_CHARACTER).broadcast();
 		} else {
-			System.err.println("ZoneService: Unable to create character and put into database!");
-			sendPacket(player, new CreateCharacterFailure(NameFailureReason.NAME_RETRY));
+			NameFailureReason reason = NameFailureReason.NAME_SYNTAX;
+			if (err == ErrorMessage.NAME_APPROVED) { // Then it must have been a database error
+				err = ErrorMessage.NAME_DECLINED_INTERNAL_ERROR;
+				reason = NameFailureReason.NAME_RETRY;
+			} else if (err == ErrorMessage.NAME_DECLINED_IN_USE)
+				reason = NameFailureReason.NAME_IN_USE;
+			else if (err == ErrorMessage.NAME_DECLINED_EMPTY)
+				reason = NameFailureReason.NAME_DECLINED_EMPTY;
+			System.err.println("ZoneService: Unable to create character [Name: " + create.getName() + "  User: " + player.getUsername() + "] and put into database! Reason: " + err);
+			sendPacket(player, new CreateCharacterFailure(reason));
 		}
 	}
 	
@@ -144,6 +157,21 @@ public class ZoneService extends Service {
 				return false;
 			}
 		}
+	}
+	
+	private ErrorMessage getNameValidity(String name) {
+		String modified = nameFilter.cleanName(name);
+		if (nameFilter.isEmpty(modified)) // Empty name
+			return ErrorMessage.NAME_DECLINED_EMPTY;
+		if (nameFilter.containsBadCharacters(modified)) // Has non-alphabetic characters
+			return ErrorMessage.NAME_DECLINED_SYNTAX;
+		if (nameFilter.isProfanity(modified)) // Contains profanity
+			return ErrorMessage.NAME_DECLINED_PROFANE;
+		if (characterExistsForName(modified)) // User already exists
+			return ErrorMessage.NAME_DECLINED_IN_USE;
+		if (!modified.equals(name)) // If we needed to remove double spaces, trim the ends, etc
+			return ErrorMessage.NAME_APPROVED_MODIFIED;
+		return ErrorMessage.NAME_APPROVED;
 	}
 	
 	private boolean characterExistsForName(String name) {
