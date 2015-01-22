@@ -3,10 +3,15 @@ package services.chat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import intents.GalacticPacketIntent;
 import intents.NotifyPlayersPacketIntent;
 import intents.PlayerEventIntent;
+import intents.ServerStatusIntent;
+import intents.ServerStatusIntent.ServerStatus;
 import intents.chat.ChatBroadcastIntent;
 import intents.chat.ChatBroadcastIntent.BroadcastType;
 import intents.chat.PersistentMessageIntent;
@@ -53,7 +58,7 @@ public class ChatService extends Service {
 		registerForIntent(PersistentMessageIntent.TYPE);
 		registerForIntent(PlayerEventIntent.TYPE);
 		registerForIntent(ChatBroadcastIntent.TYPE);
-		
+		registerForIntent(ServerStatusIntent.TYPE);
 		mails.load();
 		mails.traverse(new Traverser<Mail>() {
 			@Override
@@ -92,6 +97,8 @@ public class ChatService extends Service {
 			handlePlayerEventIntent((PlayerEventIntent) i);
 		else if (i instanceof ChatBroadcastIntent)
 			handleChatBroadcast((ChatBroadcastIntent) i);
+		else if (i instanceof ServerStatusIntent && ((ServerStatusIntent) i).getStatus() == ServerStatus.SHUTDOWN_REQUESTED)
+			sendShutdownBroadcasts(((ServerStatusIntent) i).getTime());
 	}
 	
 	private void handlePlayerEventIntent(PlayerEventIntent intent) {
@@ -232,6 +239,32 @@ public class ChatService extends Service {
 	private void broadcastGalaxyMessage(String message, Terrain terrain) {
 		ChatSystemMessage packet = new ChatSystemMessage(SystemChatType.SCREEN_AND_CHAT.ordinal(), message);
 		new NotifyPlayersPacketIntent(packet, terrain).broadcast();
+	}
+	
+	private void sendShutdownBroadcasts(final long time) {
+		final AtomicInteger runCount = new AtomicInteger();
+		
+		final int interval = (int) (time / 3);
+
+		Executors.newSingleThreadScheduledExecutor().scheduleAtFixedRate(new Runnable() {
+			public void run() {
+				switch(runCount.getAndIncrement()) {
+				case 0:
+					broadcastGalaxyMessage(String.format("The server will be shutting down in %d minutes.", time), null);
+					break;
+				case 1:
+					broadcastGalaxyMessage(String.format("The server will be shutting down in %d minutes.", time - interval), null);
+					break;
+				case 2:
+					broadcastGalaxyMessage(String.format("The server will be shutting down in %d minutes.", time - (interval*2)), null);
+					break;
+				case 3:
+					broadcastGalaxyMessage("The server will now be shutting down.", null);
+					throw new RuntimeException("Reached max runCount"); // no "clean" ways to cancel the runnable I can think of
+				}
+			}
+		}, 0, interval, TimeUnit.MINUTES);
+		
 	}
 	
 	private void sendPersistentMessageHeaders(Player player, String galaxy) {
