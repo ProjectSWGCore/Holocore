@@ -71,7 +71,9 @@ public class ZoneService extends Service {
 		getCharacter = getLocalDatabase().prepareStatement("SELECT * FROM characters WHERE name = ?");
 		nameGenerator.loadAllRules();
 		loadProfTemplates();
-		return nameFilter.load() && super.initialize();
+		if (!nameFilter.load())
+			System.out.println("Failed to load name filter!");
+		return super.initialize();
 	}
 	
 	public void handlePacket(GalacticIntent intent, Player player, long networkId, Packet p) {
