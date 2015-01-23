@@ -34,6 +34,7 @@ import resources.objects.creature.CreatureObject;
 import resources.objects.quadtree.QuadTree;
 import resources.player.Player;
 import resources.player.PlayerEvent;
+import resources.player.PlayerState;
 import resources.server_info.CachedObjectDatabase;
 import resources.server_info.ObjectDatabase;
 import resources.server_info.ObjectDatabase.Traverser;
@@ -300,6 +301,7 @@ public class ObjectManager extends Manager {
 		creature.createObject(player);
 		creature.clearAware();
 		updateAwarenessForObject(creature);
+		player.setPlayerState(PlayerState.ZONED_IN);
 		System.out.println("[" + player.getUsername() + "] " + player.getCharacterName() + " is zoning in");
 		new PlayerEventIntent(player, galaxy, PlayerEvent.PE_ZONE_IN).broadcast();
 	}
