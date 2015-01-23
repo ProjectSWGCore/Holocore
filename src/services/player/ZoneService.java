@@ -100,7 +100,7 @@ public class ZoneService extends Service {
 	}
 	
 	private void handleClientIdMsg(Player player, ClientIdMsg clientId) {
-		System.out.println(player.getUsername() + " has connected to the zone server.");
+		System.out.println("[" + player.getUsername() + "] Connected to the zone server. IP: " + clientId.getAddress() + ":" + clientId.getPort());
 		sendPacket(player.getNetworkId(), new HeartBeatMessage());
 		sendPacket(player.getNetworkId(), new AccountFeatureBits());
 		sendPacket(player.getNetworkId(), new ClientPermissionsMessage());
