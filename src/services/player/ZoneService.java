@@ -169,6 +169,8 @@ public class ZoneService extends Service {
 			return ErrorMessage.NAME_DECLINED_SYNTAX;
 		if (nameFilter.isProfanity(modified)) // Contains profanity
 			return ErrorMessage.NAME_DECLINED_PROFANE;
+		if (nameFilter.isFictionallyInappropriate(modified))
+			return ErrorMessage.NAME_DECLINED_FICTIONALLY_INAPPROPRIATE;
 		if (characterExistsForName(modified)) // User already exists
 			return ErrorMessage.NAME_DECLINED_IN_USE;
 		if (!modified.equals(name)) // If we needed to remove double spaces, trim the ends, etc
