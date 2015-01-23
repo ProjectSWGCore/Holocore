@@ -222,6 +222,7 @@ public class CreatureObject extends TangibleObject {
 	
 	public void setPosture(Posture posture) {
 		this.posture = posture;
+		sendDelta(3, 14, posture);
 	}
 	
 	public void setRace(Race race) {
@@ -230,10 +231,12 @@ public class CreatureObject extends TangibleObject {
 	
 	public void setCashBalance(int cashBalance) {
 		this.cashBalance = cashBalance;
+		sendDelta(1, 0, cashBalance);
 	}
 
 	public void setBankBalance(int bankBalance) {
 		this.bankBalance = bankBalance;
+		sendDelta(1, 1, bankBalance);
 	}
 	
 	public void setUnmodifiedMaxAtributes(int unmodifiedMaxAtributes) {
@@ -290,6 +293,7 @@ public class CreatureObject extends TangibleObject {
 	
 	public void setHeight(double height) {
 		this.height = height;
+		sendDelta(3, 17, height);
 	}
 	
 	public void setPerformanceType(int performanceType) {
@@ -437,7 +441,7 @@ public class CreatureObject extends TangibleObject {
 	}
 	
 	public void createBaseline3(Player target, BaselineBuilder bb) {
-		super.createBaseline3(target, bb);
+		super.createBaseline3(target, bb); // 13 variables - TANO3 (9) + BASE3 (4)
 		bb.addByte(posture.getId());
 		bb.addByte(0); // Faction Rank
 		bb.addLong(0); // Owner - mainly used for pets and vehicles
@@ -514,4 +518,7 @@ public class CreatureObject extends TangibleObject {
 		super.createBaseline9(target, bb);
 	}
 	
+	public void sendDelta(int type, int update, Object value) {
+		sendDelta(BaselineType.CREO, type, update, value);
+	}
 }
