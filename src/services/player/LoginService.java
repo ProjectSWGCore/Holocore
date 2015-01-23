@@ -132,7 +132,7 @@ public class LoginService extends Service {
 					default: player.setAccessLevel(AccessLevel.PLAYER); break;
 				}
 				sendLoginSuccessPacket(player);
-				System.out.println("LoginService: " + player.getUsername() + " has logged in. IP: " + id.getAddress() + ":" + id.getPort());
+				System.out.println("[" + player.getUsername() + "] Connected to the login server. IP: " + id.getAddress() + ":" + id.getPort());
 				new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_SUCCESS).broadcast();
 			} else { // User does not exist!
 				String type = "Login Failed!";

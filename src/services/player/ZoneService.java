@@ -61,7 +61,7 @@ public class ZoneService extends Service {
 	public ZoneService() {
 		nameGenerator = new SWGNameGenerator();
 		clientFac = new ClientFactory();
-		nameFilter = new NameFilter(new File("bad_word_list.txt"));
+		nameFilter = new NameFilter(new File("namegen/bad_word_list.txt"));
 	}
 	
 	@Override
@@ -72,7 +72,7 @@ public class ZoneService extends Service {
 		nameGenerator.loadAllRules();
 		loadProfTemplates();
 		if (!nameFilter.load())
-			System.out.println("Failed to load name filter!");
+			System.err.println("Failed to load name filter!");
 		return super.initialize();
 	}
 	
@@ -100,7 +100,7 @@ public class ZoneService extends Service {
 	}
 	
 	private void handleClientIdMsg(Player player, ClientIdMsg clientId) {
-		System.out.println(player.getUsername() + " has connected to the zone server.");
+		System.out.println("[" + player.getUsername() + "] Connected to the zone server. IP: " + clientId.getAddress() + ":" + clientId.getPort());
 		sendPacket(player.getNetworkId(), new HeartBeatMessage());
 		sendPacket(player.getNetworkId(), new AccountFeatureBits());
 		sendPacket(player.getNetworkId(), new ClientPermissionsMessage());

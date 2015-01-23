@@ -302,6 +302,7 @@ public class ObjectManager extends Manager {
 		creature.clearAware();
 		updateAwarenessForObject(creature);
 		player.setPlayerState(PlayerState.ZONED_IN);
+		System.out.println("[" + player.getUsername() + "] " + player.getCharacterName() + " is zoning in");
 		new PlayerEventIntent(player, galaxy, PlayerEvent.PE_ZONE_IN).broadcast();
 	}
 	
@@ -310,8 +311,8 @@ public class ObjectManager extends Manager {
 			return;
 		SWGObject creature = objects.get(characterId);
 		if (creature == null) {
-			System.err.println("ObjectManager: Failed to start zone - CreatureObject could not be fetched from database");
-			throw new NullPointerException("CreatureObject for ID: " + characterId + " cannot be null!");
+			System.err.println("ObjectManager: Failed to start zone - CreatureObject could not be fetched from database [Character: " + characterId + "  User: " + player.getUsername() + "]");
+			return;
 		}
 		player.setCreatureObject(creature);
 		creature.setOwner(player);
