@@ -3,7 +3,6 @@ package services.player;
 import intents.GalacticIntent;
 import intents.PlayerEventIntent;
 
-import java.io.File;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Calendar;
@@ -41,6 +40,7 @@ import resources.control.Service;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
 import resources.objects.tangible.TangibleObject;
+import resources.player.AccessLevel;
 import resources.player.Player;
 import resources.player.PlayerEvent;
 import resources.services.Config;
@@ -61,7 +61,7 @@ public class ZoneService extends Service {
 	public ZoneService() {
 		nameGenerator = new SWGNameGenerator();
 		clientFac = new ClientFactory();
-		nameFilter = new NameFilter(new File("namegen/bad_word_list.txt"));
+		nameFilter = new NameFilter("namegen/bad_word_list.txt", "namegen/reserved_words.txt");
 	}
 	
 	@Override
@@ -115,7 +115,7 @@ public class ZoneService extends Service {
 	
 	private void handleApproveNameRequest(PlayerManager playerMgr, Player player, ClientVerifyAndLockNameRequest request) {
 		String name = request.getName();
-		ErrorMessage err = getNameValidity(name);
+		ErrorMessage err = getNameValidity(name, player.getAccessLevel() != AccessLevel.PLAYER);
 		if (err == ErrorMessage.NAME_APPROVED_MODIFIED)
 			name = nameFilter.cleanName(name);
 		sendPacket(player.getNetworkId(), new ClientVerifyAndLockNameResponse(name, err));
@@ -125,7 +125,7 @@ public class ZoneService extends Service {
 		System.out.println("ZoneService: Create Character: " + create.getName() + "  User: " + player.getUsername() + "  IP: " + create.getAddress() + ":" + create.getPort());
 		long characterId = createCharacter(objManager, player, create);
 		
-		ErrorMessage err = getNameValidity(create.getName());
+		ErrorMessage err = getNameValidity(create.getName(), player.getAccessLevel() != AccessLevel.PLAYER);
 		if (err == ErrorMessage.NAME_APPROVED && createCharacterInDb(characterId, create.getName(), player)) {
 			sendPacket(player, new CreateCharacterSuccess(characterId));
 			new PlayerEventIntent(player, PlayerEvent.PE_CREATE_CHARACTER).broadcast();
@@ -161,7 +161,7 @@ public class ZoneService extends Service {
 		}
 	}
 	
-	private ErrorMessage getNameValidity(String name) {
+	private ErrorMessage getNameValidity(String name, boolean admin) {
 		String modified = nameFilter.cleanName(name);
 		if (nameFilter.isEmpty(modified)) // Empty name
 			return ErrorMessage.NAME_DECLINED_EMPTY;
@@ -169,6 +169,10 @@ public class ZoneService extends Service {
 			return ErrorMessage.NAME_DECLINED_SYNTAX;
 		if (nameFilter.isProfanity(modified)) // Contains profanity
 			return ErrorMessage.NAME_DECLINED_PROFANE;
+		if (nameFilter.isFictionallyInappropriate(modified))
+			return ErrorMessage.NAME_DECLINED_FICTIONALLY_INAPPROPRIATE;
+		if (nameFilter.isReserved(modified) && !admin)
+			return ErrorMessage.NAME_DECLINED_RESERVED;
 		if (characterExistsForName(modified)) // User already exists
 			return ErrorMessage.NAME_DECLINED_IN_USE;
 		if (!modified.equals(name)) // If we needed to remove double spaces, trim the ends, etc
