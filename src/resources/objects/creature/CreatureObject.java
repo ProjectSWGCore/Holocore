@@ -50,18 +50,18 @@ public class CreatureObject extends TangibleObject {
 	private int		cashBalance				= 0;
 	private int		bankBalance				= 0;
 	
-	private SWGList<Integer>	baseAttributes	= new SWGList<Integer>(BaselineType.CREO, 1, 3);
-	private SWGList<String>		skills			= new SWGList<String>(BaselineType.CREO, 1, 4, false, StringType.ASCII);
-	private SWGList<Integer>	hamEncumbList	= new SWGList<Integer>(BaselineType.CREO, 4, 0); // TODO: UpdateType
-	private SWGList<Integer>	attributes		= new SWGList<Integer>(BaselineType.CREO, 6, 0); // TODO: UpdateType
-	private SWGList<Integer>	maxAttributes	= new SWGList<Integer>(BaselineType.CREO, 6, 0); // TODO: UpdateType
-	private SWGList<Equipment>	equipmentList 	= new SWGList<Equipment>(BaselineType.CREO, 6, 0); // TODO: UpdateType
-	private SWGList<Equipment>	appearanceList 	= new SWGList<Equipment>(BaselineType.CREO, 6, 0); // TODO: UpdateType
+	private SWGList<Integer>	baseAttributes	= new SWGList<Integer>(BaselineType.CREO, 1, 2);
+	private SWGList<String>		skills			= new SWGList<String>(BaselineType.CREO, 1, 3, false, StringType.ASCII);
+	private SWGList<Integer>	hamEncumbList	= new SWGList<Integer>(BaselineType.CREO, 4, 2);
+	private SWGList<Integer>	attributes		= new SWGList<Integer>(BaselineType.CREO, 6, 13);
+	private SWGList<Integer>	maxAttributes	= new SWGList<Integer>(BaselineType.CREO, 6, 14);
+	private SWGList<Equipment>	equipmentList 	= new SWGList<Equipment>(BaselineType.CREO, 6, 15);
+	private SWGList<Equipment>	appearanceList 	= new SWGList<Equipment>(BaselineType.CREO, 6, 25);
 	
-	private SWGMap<String, Long> 	skillMods			= new SWGMap<>(BaselineType.CREO, 4, 0, false, StringType.ASCII); // TODO: SkillMod structure, UpdateType
-	private SWGMap<Long, Long>		missionCriticalObjs	= new SWGMap<>(BaselineType.CREO, 4, 0); // TODO: UpdateType
-	private SWGMap<String, Integer>	abilities			= new SWGMap<>(BaselineType.CREO, 4, 0, false, StringType.ASCII); // TODO: UpdateType
-	private SWGMap<Integer, Long>	buffs				= new SWGMap<>(BaselineType.CREO, 6, 0); // TODO: Buff structure, UpdateType
+	private SWGMap<String, Long> 	skillMods			= new SWGMap<>(BaselineType.CREO, 4, 3, false, StringType.ASCII); // TODO: SkillMod structure
+	private SWGMap<Long, Long>		missionCriticalObjs	= new SWGMap<>(BaselineType.CREO, 4, 13);
+	private SWGMap<String, Integer>	abilities			= new SWGMap<>(BaselineType.CREO, 4, 14, false, StringType.ASCII);
+	private SWGMap<Integer, Long>	buffs				= new SWGMap<>(BaselineType.CREO, 6, 18); // TODO: Buff structure
 	
 	public CreatureObject(long objectId) {
 		super(objectId);
@@ -363,24 +363,28 @@ public class CreatureObject extends TangibleObject {
 	public void setHealth(int health) {
 		synchronized(attributes) {
 			attributes.set(0, health);
+			//attributes.sendDeltaMessage(this);
 		}
 	}
 	
 	public void setMaxHealth(int maxHealth) {
 		synchronized(maxAttributes) {
 			maxAttributes.set(0, maxHealth);
+			//maxAttributes.sendDeltaMessage(this);
 		}
 	}
 	
 	public void setAction(int action) {
 		synchronized(attributes) {
 			attributes.set(2, action);
+			//attributes.sendDeltaMessage(this);
 		}
 	}
 	
 	public void setMaxAction(int maxAction) {
 		synchronized(maxAttributes) {
 			maxAttributes.set(2, maxAction);
+			//maxAttributes.sendDeltaMessage(this);
 		}
 	}
 	
@@ -431,7 +435,7 @@ public class CreatureObject extends TangibleObject {
 	}
 	
 	public void createBaseline1(Player target, BaselineBuilder bb) {
-		super.createBaseline1(target, bb);
+		super.createBaseline1(target, bb); // 0 variables
 		bb.addInt(cashBalance);
 		bb.addInt(bankBalance);
 		bb.addObject(baseAttributes); // Attributes player has without any gear on
@@ -453,7 +457,7 @@ public class CreatureObject extends TangibleObject {
 	}
 	
 	public void createBaseline4(Player target, BaselineBuilder bb) {
-		super.createBaseline4(target, bb);
+		super.createBaseline4(target, bb); // 0 variables
 		bb.addFloat((float) accelScale);
 		bb.addFloat((float) accelPercent);
 		bb.addObject(hamEncumbList);
@@ -475,8 +479,7 @@ public class CreatureObject extends TangibleObject {
 	}
 	
 	public void createBaseline6(Player target, BaselineBuilder bb) {
-		super.createBaseline6(target, bb);
-		
+		super.createBaseline6(target, bb); // 8 variables - TANO6 (6) + BASE6 (2)
 		bb.addShort(level);
 		bb.addInt(0); // Granted Health
 		bb.addAscii(""); // Current Animation

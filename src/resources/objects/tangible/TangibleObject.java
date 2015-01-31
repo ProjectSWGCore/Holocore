@@ -153,7 +153,7 @@ public class TangibleObject extends SWGObject {
 	}
 	
 	public void createBaseline3(Player target, BaselineBuilder bb) {
-		super.createBaseline3(target, bb);
+		super.createBaseline3(target, bb); // 4 variables - BASE3 (4)
 		bb.addInt(0); // Faction
 		bb.addInt(0); // Faction Status
 		bb.addArray(appearanceData);

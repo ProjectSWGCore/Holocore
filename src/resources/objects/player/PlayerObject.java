@@ -3,6 +3,7 @@ package resources.objects.player;
 import network.packets.swg.zone.SceneEndBaselines;
 import network.packets.swg.zone.UpdatePostureMessage;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
+import resources.collections.SWGList;
 import resources.collections.SWGMap;
 import resources.network.BaselineBuilder;
 import resources.objects.creature.CreatureObject;
@@ -26,7 +27,7 @@ public class PlayerObject extends IntangibleObject {
 	private SWGMap<String, Integer> 		experience	= new SWGMap<>(BaselineType.PLAY, 8, 0); // TODO: UpdateType
 	private SWGMap<Long, WaypointObject> 	waypoints	= new SWGMap<>(BaselineType.PLAY, 8, 0); // TODO: UpdateType
 	private SWGMap<Integer, Integer>		quests		= new SWGMap<>(BaselineType.PLAY, 8, 0); // TODO: UpdateType
-	
+	private SWGList<Integer>				flags		= new SWGList<>(BaselineType.PLAY, 3, 0);
 	public PlayerObject(long objectId) {
 		super(objectId);
 		setVolume(0);
