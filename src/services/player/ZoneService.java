@@ -26,6 +26,7 @@ import network.packets.swg.login.creation.CreateCharacterFailure.NameFailureReas
 import network.packets.swg.login.creation.CreateCharacterSuccess;
 import network.packets.swg.login.creation.RandomNameRequest;
 import network.packets.swg.login.creation.RandomNameResponse;
+import network.packets.swg.zone.CmdSceneReady;
 import network.packets.swg.zone.GalaxyLoopTimesRequest;
 import network.packets.swg.zone.GalaxyLoopTimesResponse;
 import network.packets.swg.zone.HeartBeatMessage;
@@ -43,6 +44,7 @@ import resources.objects.tangible.TangibleObject;
 import resources.player.AccessLevel;
 import resources.player.Player;
 import resources.player.PlayerEvent;
+import resources.player.PlayerState;
 import resources.services.Config;
 import resources.zone.NameFilter;
 import services.objects.ObjectManager;
@@ -89,6 +91,8 @@ public class ZoneService extends Service {
 			handleCharCreation(intent.getObjectManager(), player, (ClientCreateCharacter) p);
 		if (p instanceof GalaxyLoopTimesRequest)
 			handleGalaxyLoopTimesRequest(player, (GalaxyLoopTimesRequest) p);
+		if (p instanceof CmdSceneReady)
+			handleCmdSceneReady(player, (CmdSceneReady) p);
 	}
 	
 	private void sendServerInfo(Galaxy galaxy, long networkId) {
@@ -99,6 +103,11 @@ public class ZoneService extends Service {
 		sendPacket(networkId, new ServerId(id));
 	}
 	
+	private void handleCmdSceneReady(Player player, CmdSceneReady p) {
+		player.setPlayerState(PlayerState.ZONED_IN);
+		player.sendPacket(p);
+	}
+
 	private void handleClientIdMsg(Player player, ClientIdMsg clientId) {
 		System.out.println("[" + player.getUsername() + "] Connected to the zone server. IP: " + clientId.getAddress() + ":" + clientId.getPort());
 		sendPacket(player.getNetworkId(), new HeartBeatMessage());

@@ -285,6 +285,7 @@ public class ObjectManager extends Manager {
 		Player player = playerManager.getPlayerFromNetworkId(netId);
 		if (player == null)
 			return;
+		player.setPlayerState(PlayerState.ZONING_IN);
 		verifyPlayerObjectsSet(player, characterId);
 		long objId = player.getCreatureObject().getObjectId();
 		Race race = ((CreatureObject) player.getCreatureObject()).getRace();
@@ -301,7 +302,6 @@ public class ObjectManager extends Manager {
 		creature.createObject(player);
 		creature.clearAware();
 		updateAwarenessForObject(creature);
-		player.setPlayerState(PlayerState.ZONED_IN);
 		System.out.println("[" + player.getUsername() + "] " + player.getCharacterName() + " is zoning in");
 		new PlayerEventIntent(player, galaxy, PlayerEvent.PE_ZONE_IN).broadcast();
 	}
