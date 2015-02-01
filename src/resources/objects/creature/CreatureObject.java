@@ -52,16 +52,16 @@ public class CreatureObject extends TangibleObject {
 	
 	private SWGList<Integer>	baseAttributes	= new SWGList<Integer>(BaselineType.CREO, 1, 2);
 	private SWGList<String>		skills			= new SWGList<String>(BaselineType.CREO, 1, 3, false, StringType.ASCII);
-	private SWGList<Integer>	hamEncumbList	= new SWGList<Integer>(BaselineType.CREO, 4, 2, true);
-	private SWGList<Integer>	attributes		= new SWGList<Integer>(BaselineType.CREO, 6, 13, true);
-	private SWGList<Integer>	maxAttributes	= new SWGList<Integer>(BaselineType.CREO, 6, 14, true);
-	private SWGList<Equipment>	equipmentList 	= new SWGList<Equipment>(BaselineType.CREO, 6, 15);
-	private SWGList<Equipment>	appearanceList 	= new SWGList<Equipment>(BaselineType.CREO, 6, 25);
+	private SWGList<Integer>	hamEncumbList	= new SWGList<Integer>(BaselineType.CREO, 4, 10, true);
+	private SWGList<Integer>	attributes		= new SWGList<Integer>(BaselineType.CREO, 6, 21, true);
+	private SWGList<Integer>	maxAttributes	= new SWGList<Integer>(BaselineType.CREO, 6, 22, true);
+	private SWGList<Equipment>	equipmentList 	= new SWGList<Equipment>(BaselineType.CREO, 6, 23);
+	private SWGList<Equipment>	appearanceList 	= new SWGList<Equipment>(BaselineType.CREO, 6, 33);
 	
-	private SWGMap<String, Long> 	skillMods			= new SWGMap<>(BaselineType.CREO, 4, 3, false, StringType.ASCII); // TODO: SkillMod structure
-	private SWGMap<Long, Long>		missionCriticalObjs	= new SWGMap<>(BaselineType.CREO, 4, 13);
-	private SWGMap<String, Integer>	abilities			= new SWGMap<>(BaselineType.CREO, 4, 14, false, StringType.ASCII);
-	private SWGMap<Integer, Long>	buffs				= new SWGMap<>(BaselineType.CREO, 6, 18); // TODO: Buff structure
+	private SWGMap<String, Long> 	skillMods			= new SWGMap<>(BaselineType.CREO, 4, 11, false, StringType.ASCII); // TODO: SkillMod structure
+	private SWGMap<Long, Long>		missionCriticalObjs	= new SWGMap<>(BaselineType.CREO, 4, 21);
+	private SWGMap<String, Integer>	abilities			= new SWGMap<>(BaselineType.CREO, 4, 22, false, StringType.ASCII);
+	private SWGMap<Integer, Long>	buffs				= new SWGMap<>(BaselineType.CREO, 6, 26); // TODO: Buff structure
 	
 	public CreatureObject(long objectId) {
 		super(objectId);
@@ -356,7 +356,7 @@ public class CreatureObject extends TangibleObject {
 	public void setHealth(int health) {
 		synchronized(attributes) {
 			attributes.set(0, health);
-			//attributes.sendDeltaMessage(this);
+			attributes.sendDeltaMessage(this);
 		}
 	}
 	
@@ -370,14 +370,14 @@ public class CreatureObject extends TangibleObject {
 	public void setAction(int action) {
 		synchronized(attributes) {
 			attributes.set(2, action);
-			//attributes.sendDeltaMessage(this);
+			attributes.sendDeltaMessage(this);
 		}
 	}
 	
 	public void setMaxAction(int maxAction) {
 		synchronized(maxAttributes) {
 			maxAttributes.set(2, maxAction);
-			//maxAttributes.sendDeltaMessage(this);
+			maxAttributes.sendDeltaMessage(this);
 		}
 	}
 	
@@ -459,79 +459,79 @@ public class CreatureObject extends TangibleObject {
 	
 	public void createBaseline1(Player target, BaselineBuilder bb) {
 		super.createBaseline1(target, bb); // 0 variables
-		bb.addInt(cashBalance);
-		bb.addInt(bankBalance);
-		bb.addObject(baseAttributes); // Attributes player has without any gear on
-		bb.addObject(skills);
+		bb.addInt(cashBalance); // 0
+		bb.addInt(bankBalance); // 1
+		bb.addObject(baseAttributes); // Attributes player has without any gear on -- 2
+		bb.addObject(skills); // 3
 		
 		bb.incremeantOperandCount(4);
 	}
 	
 	public void createBaseline3(Player target, BaselineBuilder bb) {
 		super.createBaseline3(target, bb); // 13 variables - TANO3 (9) + BASE3 (4)
-		bb.addByte(posture.getId());
-		bb.addByte(0); // Faction Rank
-		bb.addLong(0); // Owner - mainly used for pets and vehicles
-		bb.addFloat((float) height);
-		bb.addInt(0); // Battle Fatigue
-		bb.addLong(0); // States Bitmask
+		bb.addByte(posture.getId()); // 13
+		bb.addByte(0); // Faction Rank -- 14
+		bb.addLong(0); // Owner - mainly used for pets and vehicles -- 15
+		bb.addFloat((float) height); // 16
+		bb.addInt(0); // Battle Fatigue -- 17
+		bb.addLong(0); // States Bitmask -- 18
 		
 		bb.incremeantOperandCount(6);
 	}
 	
 	public void createBaseline4(Player target, BaselineBuilder bb) {
 		super.createBaseline4(target, bb); // 0 variables
-		bb.addFloat((float) accelScale);
-		bb.addFloat((float) accelPercent);
-		bb.addObject(hamEncumbList);
-		bb.addObject(skillMods);
-		bb.addFloat((float) movementScale);
-		bb.addFloat((float) movementPercent);
-		bb.addLong(0); // Listen to ID
-		bb.addFloat((float) runSpeed);
-		bb.addFloat((float) slopeModAngle);
-		bb.addFloat((float) slopeModPercent);
-		bb.addFloat((float) turnScale);
-		bb.addFloat((float) walkSpeed);
-		bb.addFloat((float) waterModPercent);
-		bb.addObject(missionCriticalObjs);
-		bb.addObject(abilities);
-		bb.addInt(0); // XP Display Counter (remaining experience to next level up, updates the experience bar on client)
+		bb.addFloat((float) accelScale); // 8
+		bb.addFloat((float) accelPercent); // 9
+		bb.addObject(hamEncumbList); // 10
+		bb.addObject(skillMods); // 11
+		bb.addFloat((float) movementScale); // 12
+		bb.addFloat((float) movementPercent); // 13
+		bb.addLong(0); // Listen to ID - 14
+		bb.addFloat((float) runSpeed); // 15
+		bb.addFloat((float) slopeModAngle); // 16
+		bb.addFloat((float) slopeModPercent); // 17
+		bb.addFloat((float) turnScale); // 18
+		bb.addFloat((float) walkSpeed); // 19
+		bb.addFloat((float) waterModPercent); // 20
+		bb.addObject(missionCriticalObjs); // 21
+		bb.addObject(abilities); // 22
+		bb.addInt(0); // XP Display Counter (remaining experience to next level up, updates the experience bar on client) - 23
 		
 		bb.incremeantOperandCount(16);
 	}
 	
 	public void createBaseline6(Player target, BaselineBuilder bb) {
 		super.createBaseline6(target, bb); // 8 variables - TANO6 (6) + BASE6 (2)
-		bb.addShort(level);
-		bb.addInt(0); // Granted Health
-		bb.addAscii(""); // Current Animation
-		bb.addAscii("neutral"); // Animation Mood
-		bb.addLong(0); // Weapon ID
-		bb.addLong(0); // Group ID
-		bb.addLong(0); // Group Inviter ID
+		bb.addShort(level); // 8
+		bb.addInt(0); // Granted Health -- 9
+		bb.addAscii(""); // Current Animation -- 10
+		bb.addAscii("neutral"); // Animation Mood -- 11
+		bb.addLong(0); // Weapon ID -- 12
+		bb.addLong(0); // Group ID -- 13
+		bb.addLong(0); // Group Inviter ID -- 14
 			bb.addAscii(""); // Group Inviter Name
 			bb.addLong(0); // Invite counter
-		bb.addInt(0); // Guild ID
-		bb.addLong(0); // Look-at Target ID
-		bb.addLong(0); // Intended ID
-		bb.addByte(0); // Mood ID
-		bb.addInt(0); // Performance Counter
-		bb.addInt(0); // Performance ID
-		bb.addObject(attributes);
-		bb.addObject(maxAttributes);
-		bb.addObject(equipmentList);
-		bb.addAscii(""); // Appearance (costume)
-		bb.addBoolean(true); // Visible
-		bb.addObject(buffs);
-		bb.addBoolean(false); // Is Performing
-		bb.addByte(difficulty.getDifficulty());
-		bb.addInt(-1); // Hologram Color
-		bb.addBoolean(true); // Visible On Radar
-		bb.addBoolean(false); // Is Pet
-		bb.addByte(0); // Unknown
-		bb.addObject(appearanceList);
-		bb.addLong(0); // unknown
+		bb.addInt(0); // Guild ID -- 15
+		bb.addLong(0); // Look-at Target ID -- 16
+		bb.addLong(0); // Intended ID -- 17
+		bb.addByte(0); // Mood ID -- 18
+		bb.addInt(0); // Performance Counter -- 19
+		bb.addInt(0); // Performance ID -- 20
+		bb.addObject(attributes); // 21
+		bb.addObject(maxAttributes); // 22
+		bb.addObject(equipmentList); // 23
+		bb.addAscii(""); // Appearance (costume) -- 24
+		bb.addBoolean(true); // Visible -- 25
+		bb.addObject(buffs); // 26
+		bb.addBoolean(false); // Is Performing -- 27
+		bb.addByte(difficulty.getDifficulty()); // 28
+		bb.addInt(-1); // Hologram Color -- 29
+		bb.addBoolean(true); // Visible On Radar -- 30
+		bb.addBoolean(false); // Is Pet -- 31
+		bb.addByte(0); // Unknown -- 32
+		bb.addObject(appearanceList); // 33
+		bb.addLong(0); // unknown -- 34
 		
 		bb.incremeantOperandCount(27);
 	}
