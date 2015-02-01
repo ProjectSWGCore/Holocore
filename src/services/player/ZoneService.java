@@ -106,6 +106,7 @@ public class ZoneService extends Service {
 	private void handleCmdSceneReady(Player player, CmdSceneReady p) {
 		player.setPlayerState(PlayerState.ZONED_IN);
 		player.sendPacket(p);
+		System.out.println("[" + player.getUsername() +"] " + player.getCharacterName() + " zoned in");
 	}
 
 	private void handleClientIdMsg(Player player, ClientIdMsg clientId) {

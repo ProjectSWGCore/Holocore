@@ -52,9 +52,9 @@ public class CreatureObject extends TangibleObject {
 	
 	private SWGList<Integer>	baseAttributes	= new SWGList<Integer>(BaselineType.CREO, 1, 2);
 	private SWGList<String>		skills			= new SWGList<String>(BaselineType.CREO, 1, 3, false, StringType.ASCII);
-	private SWGList<Integer>	hamEncumbList	= new SWGList<Integer>(BaselineType.CREO, 4, 2);
-	private SWGList<Integer>	attributes		= new SWGList<Integer>(BaselineType.CREO, 6, 13);
-	private SWGList<Integer>	maxAttributes	= new SWGList<Integer>(BaselineType.CREO, 6, 14);
+	private SWGList<Integer>	hamEncumbList	= new SWGList<Integer>(BaselineType.CREO, 4, 2, true);
+	private SWGList<Integer>	attributes		= new SWGList<Integer>(BaselineType.CREO, 6, 13, true);
+	private SWGList<Integer>	maxAttributes	= new SWGList<Integer>(BaselineType.CREO, 6, 14, true);
 	private SWGList<Equipment>	equipmentList 	= new SWGList<Equipment>(BaselineType.CREO, 6, 15);
 	private SWGList<Equipment>	appearanceList 	= new SWGList<Equipment>(BaselineType.CREO, 6, 25);
 	
@@ -65,16 +65,9 @@ public class CreatureObject extends TangibleObject {
 	
 	public CreatureObject(long objectId) {
 		super(objectId);
-		
-		attributes.add(1000); // Health
-		attributes.add(0);
-		attributes.add(300); // Action
-		attributes.add(0);
-		attributes.add(300); // ??
-		attributes.add(0);
-
-		maxAttributes.addAll(attributes);
-		baseAttributes.addAll(attributes);
+		initMaxAttributes();
+		initCurrentAttributes();
+		initBaseAttributes();
 	}
 	
 	public void addEquipment(SWGObject obj) {
@@ -370,7 +363,7 @@ public class CreatureObject extends TangibleObject {
 	public void setMaxHealth(int maxHealth) {
 		synchronized(maxAttributes) {
 			maxAttributes.set(0, maxHealth);
-			//maxAttributes.sendDeltaMessage(this);
+			maxAttributes.sendDeltaMessage(this);
 		}
 	}
 	
@@ -386,6 +379,36 @@ public class CreatureObject extends TangibleObject {
 			maxAttributes.set(2, maxAction);
 			//maxAttributes.sendDeltaMessage(this);
 		}
+	}
+	
+	private void initMaxAttributes() {
+		maxAttributes.add(0, 1000); // Health
+		maxAttributes.add(1, 0);
+		maxAttributes.add(2, 300); // Action
+		maxAttributes.add(3, 0);
+		maxAttributes.add(4, 300); // ??
+		maxAttributes.add(5, 0);
+		maxAttributes.clearDeltaQueue();
+	}
+	
+	private void initCurrentAttributes() {
+		attributes.add(0, 1000); // Health
+		attributes.add(1, 0);
+		attributes.add(2, 300); // Action
+		attributes.add(3, 0);
+		attributes.add(4, 300); // ??
+		attributes.add(5, 0);
+		attributes.clearDeltaQueue();
+	}
+	
+	private void initBaseAttributes() {
+		baseAttributes.add(0, 1000); // Health
+		baseAttributes.add(1, 0);
+		baseAttributes.add(2, 300); // Action
+		baseAttributes.add(3, 0);
+		baseAttributes.add(4, 300); // ??
+		baseAttributes.add(5, 0);
+		baseAttributes.clearDeltaQueue();
 	}
 	
 	public void createObject(Player target) {
