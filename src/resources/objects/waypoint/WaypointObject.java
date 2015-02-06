@@ -1,6 +1,7 @@
 package resources.objects.waypoint;
 
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.nio.charset.Charset;
 
 import resources.network.BaselineBuilder;
@@ -103,7 +104,7 @@ public class WaypointObject extends IntangibleObject implements Encodable{
 
 	@Override
 	public byte[] encode() {
-		ByteBuffer bb = ByteBuffer.allocate(42 + name.length() * 2);
+		ByteBuffer bb = ByteBuffer.allocate(42 + name.length() * 2).order(ByteOrder.LITTLE_ENDIAN);
 		bb.putInt(cellNumber);
 		bb.putFloat((float) getLocation().getX());
 		bb.putFloat((float) getLocation().getY());

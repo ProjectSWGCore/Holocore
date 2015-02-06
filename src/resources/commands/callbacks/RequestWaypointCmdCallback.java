@@ -17,7 +17,6 @@ public class RequestWaypointCmdCallback implements ICmdCallback {
 		
 		WaypointObject waypoint = (WaypointObject) objManager.createObject("object/waypoint/shared_waypoint.iff", player.getCreatureObject().getLocation());
 		ghost.addWaypoint(waypoint);
-		System.out.println("Waypoitn requested.");
 	}
 
 }

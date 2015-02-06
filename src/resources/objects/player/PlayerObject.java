@@ -45,6 +45,7 @@ public class PlayerObject extends IntangibleObject {
 		experience.put(type, value);
 		experience.sendDeltaMessage(this);
 	}
+	
 	public String getProfession() {
 		return profession;
 	}
