@@ -58,9 +58,9 @@ public class CreatureObject extends TangibleObject {
 	private SWGList<Equipment>	equipmentList 	= new SWGList<Equipment>(BaselineType.CREO, 6, 23);
 	private SWGList<Equipment>	appearanceList 	= new SWGList<Equipment>(BaselineType.CREO, 6, 33);
 	
-	private SWGMap<String, Long> 	skillMods			= new SWGMap<>(BaselineType.CREO, 4, 11, false, StringType.ASCII); // TODO: SkillMod structure
+	private SWGMap<String, Long> 	skillMods			= new SWGMap<>(BaselineType.CREO, 4, 11, StringType.ASCII); // TODO: SkillMod structure
 	private SWGMap<Long, Long>		missionCriticalObjs	= new SWGMap<>(BaselineType.CREO, 4, 21);
-	private SWGMap<String, Integer>	abilities			= new SWGMap<>(BaselineType.CREO, 4, 22, false, StringType.ASCII);
+	private SWGMap<String, Integer>	abilities			= new SWGMap<>(BaselineType.CREO, 4, 22, StringType.ASCII);
 	private SWGMap<Integer, Long>	buffs				= new SWGMap<>(BaselineType.CREO, 6, 26); // TODO: Buff structure
 	
 	public CreatureObject(long objectId) {

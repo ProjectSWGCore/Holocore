@@ -9,7 +9,7 @@ public class WaypointCmdCallback implements ICmdCallback {
 
 	@Override
 	public void execute(ObjectManager objManager, Player player, SWGObject target, String args) {
-		// TODO Auto-generated method stub
+		System.out.println("Create Waypoint: " + args);
 	}
 
 }

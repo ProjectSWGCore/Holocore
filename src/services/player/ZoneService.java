@@ -217,6 +217,7 @@ public class ZoneService extends Service {
 		creatureObj.setOwner(player);
 		creatureObj.setSlot("ghost", playerObj);
 		playerObj.setTag(player.getAccessLevel());
+		playerObj.setOwner(player);
 		player.setCreatureObject(creatureObj);
 		return creatureObj.getObjectId();
 	}

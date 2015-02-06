@@ -24,10 +24,11 @@ public class PlayerObject extends IntangibleObject {
 	private int 	bornDate		= 0;
 	private int		adminTag		= 0;
 	
-	private SWGMap<String, Integer> 		experience	= new SWGMap<>(BaselineType.PLAY, 8, 0); // TODO: UpdateType
-	private SWGMap<Long, WaypointObject> 	waypoints	= new SWGMap<>(BaselineType.PLAY, 8, 0); // TODO: UpdateType
-	private SWGMap<Integer, Integer>		quests		= new SWGMap<>(BaselineType.PLAY, 8, 0); // TODO: UpdateType
+	private SWGMap<String, Integer> 		experience	= new SWGMap<>(BaselineType.PLAY, 8, 0);
+	private SWGMap<Long, WaypointObject> 	waypoints	= new SWGMap<>(BaselineType.PLAY, 8, 1);
+	private SWGMap<Integer, Integer>		quests		= new SWGMap<>(BaselineType.PLAY, 8, 7);
 	private SWGList<Integer>				flags		= new SWGList<>(BaselineType.PLAY, 3, 0);
+	
 	public PlayerObject(long objectId) {
 		super(objectId);
 		setVolume(0);
@@ -36,9 +37,14 @@ public class PlayerObject extends IntangibleObject {
 	public void addWaypoint(WaypointObject waypoint) {
 		synchronized(waypoints) {
 			waypoints.put(waypoint.getObjectId(), waypoint);
+			waypoints.sendDeltaMessage(this);
 		}
 	}
 	
+	public void setExperience(String type, int value) {
+		experience.put(type, value);
+		experience.sendDeltaMessage(this);
+	}
 	public String getProfession() {
 		return profession;
 	}
@@ -237,7 +243,8 @@ public class PlayerObject extends IntangibleObject {
 		bb.addInt(100); // Max Drink
 		bb.addInt(0); // Current Consumable
 		bb.addInt(100); // Max Consumable
-		bb.addObject(waypoints); // TODO: Is there a difference between this one and baseline 8?
+		bb.addInt(0); // Waypoints - Is there a difference between this one and baseline 8?
+			bb.addInt(0);
 		bb.addInt(0); // Defenders List (Set<Long>)
 			bb.addInt(0);
 		bb.addInt(0); // Kill Meter Points

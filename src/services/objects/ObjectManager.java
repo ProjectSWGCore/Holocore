@@ -32,6 +32,7 @@ import resources.control.Manager;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.quadtree.QuadTree;
+import resources.objects.waypoint.WaypointObject;
 import resources.player.Player;
 import resources.player.PlayerEvent;
 import resources.player.PlayerState;
@@ -195,7 +196,7 @@ public class ObjectManager extends Manager {
 	}
 	
 	private void addToQuadTree(SWGObject obj) {
-		if (obj == null)
+		if (obj == null || obj instanceof WaypointObject)
 			return;
 		Location loc = obj.getLocation();
 		if (loc == null || loc.getTerrain() == null)
@@ -320,6 +321,8 @@ public class ObjectManager extends Manager {
 		if (player.getPlayerObject() == null) {
 			System.err.println("FATAL: " + player.getUsername() + "'s CreatureObject has a null ghost!");
 		}
+		
+		player.getPlayerObject().setOwner(player);
 	}
 	
 	private long getNextObjectId() {
