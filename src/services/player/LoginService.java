@@ -138,7 +138,7 @@ public class LoginService extends Service {
 				String type = "Login Failed!";
 				String message = "Invalid username or password.";
 				sendPacket(player.getNetworkId(), new ErrorMessage(type, message, false));
-				System.err.println("LoginService: " + id.getUsername() + " tried logging in with invalid user/pass combo!");
+				System.err.println("[" + id.getUsername() + "] Invalid user/pass combo! IP: " + id.getAddress() + ":" + id.getPort());
 				player.setPlayerState(PlayerState.DISCONNECTED);
 				new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_FAIL_INVALID_USER_PASS).broadcast();
 			}
