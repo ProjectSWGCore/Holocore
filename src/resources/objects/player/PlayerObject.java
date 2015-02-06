@@ -27,6 +27,7 @@ public class PlayerObject extends IntangibleObject {
 	private SWGMap<String, Integer> 		experience	= new SWGMap<>(BaselineType.PLAY, 8, 0);
 	private SWGMap<Long, WaypointObject> 	waypoints	= new SWGMap<>(BaselineType.PLAY, 8, 1);
 	private SWGMap<Integer, Integer>		quests		= new SWGMap<>(BaselineType.PLAY, 8, 7);
+	@SuppressWarnings("unused")
 	private SWGList<Integer>				flags		= new SWGList<>(BaselineType.PLAY, 3, 0);
 	
 	public PlayerObject(long objectId) {

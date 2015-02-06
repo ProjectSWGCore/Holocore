@@ -2,12 +2,13 @@ package resources.objects.waypoint;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import java.nio.charset.Charset;
 
+import resources.common.CRC;
 import resources.network.BaselineBuilder;
 import resources.network.BaselineBuilder.Encodable;
 import resources.objects.intangible.IntangibleObject;
 import resources.player.Player;
+import utilities.Encoder;
 
 public class WaypointObject extends IntangibleObject implements Encodable{
 
@@ -15,8 +16,8 @@ public class WaypointObject extends IntangibleObject implements Encodable{
 	
 	private int cellNumber;
 	private long targetId = 0;
-	private String name = "Waypoint";
-	private int color = 1;
+	private String name = "New Waypoint";
+	private WaypointColor color = WaypointColor.BLUE;
 	private boolean active = true;
 	
 	public WaypointObject(long objectId) {
@@ -54,13 +55,12 @@ public class WaypointObject extends IntangibleObject implements Encodable{
 	}
 
 
-	public int getColor() {
+	public WaypointColor getColor() {
 		return color;
 	}
 
 
-	public void setColor(int color) {
-		// BLUE,GREEN,ORANGE,YELLOW,PURPLE,WHITE,MULTICOLOR
+	public void setColor(WaypointColor color) {
 		this.color = color;
 	}
 
@@ -84,7 +84,7 @@ public class WaypointObject extends IntangibleObject implements Encodable{
 		bb.addLong(targetId); // unsure when this is anything but 0, have yet to see it change
 		bb.addInt(getLocation().getTerrain().getCrc());
 		bb.addUnicode(name);
-		bb.addByte(color);
+		bb.addByte(color.getValue());
 		bb.addBoolean(active);
 	}
 
@@ -107,15 +107,26 @@ public class WaypointObject extends IntangibleObject implements Encodable{
 		ByteBuffer bb = ByteBuffer.allocate(42 + name.length() * 2).order(ByteOrder.LITTLE_ENDIAN);
 		bb.putInt(cellNumber);
 		bb.putFloat((float) getLocation().getX());
-		bb.putFloat((float) getLocation().getY());
+		bb.putFloat((float) 0);
 		bb.putFloat((float) getLocation().getZ());
 		bb.putLong(targetId); // unsure when this is anything but 0, have yet to see it change
-		bb.putInt(getLocation().getTerrain().getCrc());
-		bb.putInt(name.length());
-			bb.put(name.getBytes(Charset.forName("UTF-16LE")));
+		bb.putInt(CRC.getCrc("tatooine")); // TODO: Add method to terrain's to just get planet name instead of file name
+		bb.put(Encoder.encodeUnicode(name));
 		bb.putLong(getObjectId());
-		bb.put((byte) color);
+		bb.put((byte) color.getValue());
 		bb.put((byte) (active ? 1 : 0));
 		return bb.array();
+	}
+	
+	public enum WaypointColor{
+		BLUE(1), GREEN(2), ORANGE(3), YELLOW(4), PURPLE(5), WHITE(6), MULTICOLOR(7);
+		
+		int i;
+		
+		private WaypointColor(int i) {
+			this.i = i;
+		}
+		
+		public int getValue() { return i; }
 	}
 }
