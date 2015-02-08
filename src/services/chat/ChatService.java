@@ -145,7 +145,7 @@ public class ChatService extends Service {
 	
 	private void handleInstantMessage(PlayerManager playerMgr, Player sender, ChatInstantMessageToCharacter request) {
 		String strReceiver = request.getCharacter().toLowerCase();
-		String strSender = sender.getCharacterName().toLowerCase();
+		String strSender = sender.getCharacterName();
 		
 		if (strSender.contains(" "))
 			strSender = strSender.split(" ")[0];
