@@ -42,6 +42,25 @@ public class PlayerObject extends IntangibleObject {
 		}
 	}
 	
+	public WaypointObject getWaypoint(long objId) {
+		synchronized(waypoints) {
+			return waypoints.get(objId);
+		}
+	}
+	
+	public void updateWaypoint(WaypointObject obj) {
+		synchronized(waypoints) {
+			waypoints.update(obj.getObjectId(), this);
+		}
+	}
+	
+	public void removeWaypoint(long objId) {
+		synchronized(waypoints) {
+			waypoints.remove(objId);
+			waypoints.sendDeltaMessage(this);
+		}
+	}
+	
 	public void setExperience(String type, int value) {
 		experience.put(type, value);
 		experience.sendDeltaMessage(this);
