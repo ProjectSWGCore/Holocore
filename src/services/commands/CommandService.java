@@ -122,5 +122,6 @@ public class CommandService extends Service {
 		registerCallback("waypoint", new WaypointCmdCallback());
 		registerCallback("requestWaypointAtPosition", new RequestWaypointCmdCallback());
 		registerCallback("server", new ServerCmdCallback());
+		registerCallback("getAttributesBatch", new AttributesCmdCallback());
 	}
 }
