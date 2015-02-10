@@ -123,5 +123,6 @@ public class CommandService extends Service {
 		registerCallback("requestWaypointAtPosition", new RequestWaypointCmdCallback());
 		registerCallback("server", new ServerCmdCallback());
 		registerCallback("getAttributesBatch", new AttributesCmdCallback());
+		registerCallback("socialInternal", new SocialInternalCmdCallback());
 	}
 }

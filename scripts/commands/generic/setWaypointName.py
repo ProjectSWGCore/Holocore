@@ -1,5 +1,6 @@
 import sys
 
+#Args: name
 def execute(objManager, player, target, args):
 	ghost = player.getPlayerObject()
 	if ghost is None:
