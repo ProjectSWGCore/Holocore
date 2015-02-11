@@ -30,6 +30,7 @@ import network.packets.swg.zone.CmdSceneReady;
 import network.packets.swg.zone.GalaxyLoopTimesRequest;
 import network.packets.swg.zone.GalaxyLoopTimesResponse;
 import network.packets.swg.zone.HeartBeatMessage;
+import network.packets.swg.zone.SetWaypointColor;
 import resources.Galaxy;
 import resources.Location;
 import resources.Race;
@@ -41,6 +42,8 @@ import resources.control.Service;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
 import resources.objects.tangible.TangibleObject;
+import resources.objects.waypoint.WaypointObject;
+import resources.objects.waypoint.WaypointObject.WaypointColor;
 import resources.player.AccessLevel;
 import resources.player.Player;
 import resources.player.PlayerEvent;
@@ -93,8 +96,31 @@ public class ZoneService extends Service {
 			handleGalaxyLoopTimesRequest(player, (GalaxyLoopTimesRequest) p);
 		if (p instanceof CmdSceneReady)
 			handleCmdSceneReady(player, (CmdSceneReady) p);
+		if (p instanceof SetWaypointColor)
+			handleSetWaypointColor(player, (SetWaypointColor) p);
 	}
 	
+	private void handleSetWaypointColor(Player player, SetWaypointColor p) {
+		// TODO Should move this to a different service, maybe make a service for other packets similar to this (ie misc.)
+		PlayerObject ghost = (PlayerObject) player.getPlayerObject();
+		
+		WaypointObject waypoint = ghost.getWaypoint(p.getObjId());
+		if (waypoint == null)
+			return;
+		
+		switch(p.getColor()) {
+		case "blue": waypoint.setColor(WaypointColor.BLUE); break;
+		case "green": waypoint.setColor(WaypointColor.GREEN); break;
+		case "orange": waypoint.setColor(WaypointColor.ORANGE); break;
+		case "yellow": waypoint.setColor(WaypointColor.YELLOW); break;
+		case "purple": waypoint.setColor(WaypointColor.PURPLE); break;
+		case "white": waypoint.setColor(WaypointColor.WHITE); break;
+		default: System.err.println("Don't know color " + p.getColor());
+		}
+		
+		ghost.updateWaypoint(waypoint);
+	}
+
 	private void sendServerInfo(Galaxy galaxy, long networkId) {
 		Config c = getConfig(ConfigFile.PRIMARY);
 		String name = c.getString("ZONE-SERVER-NAME", galaxy.getName());

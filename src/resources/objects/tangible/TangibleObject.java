@@ -14,7 +14,6 @@ public class TangibleObject extends SWGObject {
 	private int		damageTaken		= 0;
 	private int		maxHitPoints	= 0;
 	private int		components		= 0;
-	private boolean	visible			= true;
 	private boolean	inCombat		= false;
 	private int		condition		= 0;
 	private int		pvpFlags		= 0;
@@ -41,10 +40,6 @@ public class TangibleObject extends SWGObject {
 	
 	public int getComponents() {
 		return components;
-	}
-	
-	public boolean isVisible() {
-		return visible;
 	}
 	
 	public boolean isInCombat() {
@@ -89,10 +84,6 @@ public class TangibleObject extends SWGObject {
 	
 	public void setComponents(int components) {
 		this.components = components;
-	}
-	
-	public void setVisible(boolean visible) {
-		this.visible = visible;
 	}
 	
 	public void setInCombat(boolean inCombat) {

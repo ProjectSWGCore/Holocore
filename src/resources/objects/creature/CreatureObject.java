@@ -22,10 +22,7 @@ public class CreatureObject extends TangibleObject {
 	private static final long serialVersionUID = 1L;
 	
 	private Posture	posture					= Posture.STANDING;
-	private Race	race					= Race.HUMAN;
-	private int		unmodifiedMaxAtributes	= 0;
-	private int		attributeBonus			= 0;
-	private int		shockWounds				= 0;
+	private Race	race					= Race.HUMAN; 
 	private double	movementScale			= 1;
 	private double	movementPercent			= 1;
 	private double	walkSpeed				= 1.549;
@@ -34,22 +31,36 @@ public class CreatureObject extends TangibleObject {
 	private double	accelPercent			= 1;
 	private double	turnScale				= 1;
 	private double	slopeModAngle			= 1;
-	private double	slopeModPercent			= 1;
+	private double	slopeModPercent			= 1; 
 	private double	waterModPercent			= 0.75;
 	private double	height					= 0;
-	private int		performanceType			= 0;
-	private int		performanceStartTime	= 0;
 	private long	performanceListenTarget	= 0;
 	private int		guildId					= 0;
-	private byte	rank					= 0;
-	private int		level					= 1;
+	private short	level					= 1;
 	private int		levelHealthGranted		= 0;
 	private int		totalLevelXp			= 0;
 	private CreatureDifficulty	difficulty	= CreatureDifficulty.NORMAL;
-	private boolean	beast					= false;
 	private int		cashBalance				= 0;
 	private int		bankBalance				= 0;
-	
+	private String	moodAnimation			= "neutral";
+	private String	animation				= "";
+	private long	equippedWeaponId		= 0;
+	private byte	moodId					= 0;
+	private long 	lookAtTargetId			= 0;
+	private long 	intendedTargetId		= 0;
+	private int 	performanceCounter		= 0;
+	private int 	performanceId			= 0;
+	private String 	costume					= "";
+	private boolean visible					= true;
+	private boolean performing				= false;
+	private boolean shownOnRadar			= true;
+	private boolean beast					= false;
+	private long 	groupId					= 0;
+	private byte 	factionRank				= 0;
+	private long 	ownerId					= 0;
+	private int 	battleFatigue			= 0;
+	private long 	statesBitmask			= 0;
+
 	private SWGList<Integer>	baseAttributes	= new SWGList<Integer>(BaselineType.CREO, 1, 2);
 	private SWGList<String>		skills			= new SWGList<String>(BaselineType.CREO, 1, 3, false, StringType.ASCII);
 	private SWGList<Integer>	hamEncumbList	= new SWGList<Integer>(BaselineType.CREO, 4, 10, true);
@@ -62,7 +73,8 @@ public class CreatureObject extends TangibleObject {
 	private SWGMap<Long, Long>		missionCriticalObjs	= new SWGMap<>(BaselineType.CREO, 4, 21);
 	private SWGMap<String, Integer>	abilities			= new SWGMap<>(BaselineType.CREO, 4, 22, StringType.ASCII);
 	private SWGMap<Integer, Long>	buffs				= new SWGMap<>(BaselineType.CREO, 6, 26); // TODO: Buff structure
-	
+
+
 	public CreatureObject(long objectId) {
 		super(objectId);
 		initMaxAttributes();
@@ -113,18 +125,6 @@ public class CreatureObject extends TangibleObject {
 		return race;
 	}
 	
-	public int getUnmodifiedMaxAtributes() {
-		return unmodifiedMaxAtributes;
-	}
-	
-	public int getAttributeBonus() {
-		return attributeBonus;
-	}
-	
-	public int getShockWounds() {
-		return shockWounds;
-	}
-	
 	public double getMovementScale() {
 		return movementScale;
 	}
@@ -169,24 +169,12 @@ public class CreatureObject extends TangibleObject {
 		return height;
 	}
 	
-	public int getPerformanceType() {
-		return performanceType;
-	}
-	
-	public int getPerformanceStartTime() {
-		return performanceStartTime;
-	}
-	
 	public long getPerformanceListenTarget() {
 		return performanceListenTarget;
 	}
 	
 	public int getGuildId() {
 		return guildId;
-	}
-	
-	public byte getRank() {
-		return rank;
 	}
 	
 	public int getLevel() {
@@ -209,13 +197,9 @@ public class CreatureObject extends TangibleObject {
 		return (PlayerObject) (hasSlot("ghost") ? getSlottedObject("ghost") : null);
 	}
 	
-	public boolean isBeast() {
-		return beast;
-	}
-	
 	public void setPosture(Posture posture) {
 		this.posture = posture;
-		sendDelta(3, 14, posture);
+		sendDelta(3, 14, posture.getId());
 	}
 	
 	public void setRace(Race race) {
@@ -232,56 +216,54 @@ public class CreatureObject extends TangibleObject {
 		sendDelta(1, 1, bankBalance);
 	}
 	
-	public void setUnmodifiedMaxAtributes(int unmodifiedMaxAtributes) {
-		this.unmodifiedMaxAtributes = unmodifiedMaxAtributes;
-	}
-	
-	public void setAttributeBonus(int attributeBonus) {
-		this.attributeBonus = attributeBonus;
-	}
-	
-	public void setShockWounds(int shockWounds) {
-		this.shockWounds = shockWounds;
-	}
-	
 	public void setMovementScale(double movementScale) {
 		this.movementScale = movementScale;
+		sendDelta(4, 12, movementScale);
 	}
 	
 	public void setMovementPercent(double movementPercent) {
 		this.movementPercent = movementPercent;
+		sendDelta(4, 13, movementPercent);
 	}
 	
 	public void setWalkSpeed(double walkSpeed) {
 		this.walkSpeed = walkSpeed;
+		sendDelta(4, 19, walkSpeed);
 	}
 	
 	public void setRunSpeed(double runSpeed) {
 		this.runSpeed = runSpeed;
+		sendDelta(4, 15, runSpeed);
 	}
 	
 	public void setAccelScale(double accelScale) {
 		this.accelScale = accelScale;
+		sendDelta(4, 8, accelScale);
 	}
 	
 	public void setAccelPercent(double accelPercent) {
 		this.accelPercent = accelPercent;
+		sendDelta(4, 9, accelPercent);
 	}
 	
 	public void setTurnScale(double turnScale) {
 		this.turnScale = turnScale;
+		sendDelta(4, 18, turnScale);
 	}
 	
 	public void setSlopeModAngle(double slopeModAngle) {
 		this.slopeModAngle = slopeModAngle;
+		sendDelta(4, 16, slopeModAngle);
 	}
 	
 	public void setSlopeModPercent(double slopeModPercent) {
 		this.slopeModPercent = slopeModPercent;
+		sendDelta(4, 17, slopeModPercent);
 	}
 	
 	public void setWaterModPercent(double waterModPercent) {
 		this.waterModPercent = waterModPercent;
+		sendDelta(4, 20, waterModPercent);
 	}
 	
 	public void setHeight(double height) {
@@ -289,46 +271,199 @@ public class CreatureObject extends TangibleObject {
 		sendDelta(3, 17, height);
 	}
 	
-	public void setPerformanceType(int performanceType) {
-		this.performanceType = performanceType;
-	}
-	
-	public void setPerformanceStartTime(int performanceStartTime) {
-		this.performanceStartTime = performanceStartTime;
-	}
-	
 	public void setPerformanceListenTarget(long performanceListenTarget) {
 		this.performanceListenTarget = performanceListenTarget;
+		sendDelta(4, 14, performanceListenTarget);
 	}
 	
 	public void setGuildId(int guildId) {
 		this.guildId = guildId;
+		sendDelta(6, 15, guildId);
 	}
 	
-	public void setRank(byte rank) {
-		this.rank = rank;
-	}
-	
-	public void setLevel(int level) {
+	public void setLevel(short level) {
 		this.level = level;
+		sendDelta(6, 8, level);
 	}
 	
 	public void setLevelHealthGranted(int levelHealthGranted) {
 		this.levelHealthGranted = levelHealthGranted;
+		sendDelta(6, 9, levelHealthGranted);
 	}
 	
 	public void setTotalLevelXp(int totalLevelXp) {
 		this.totalLevelXp = totalLevelXp;
+		sendDelta(4, 23, totalLevelXp);
 	}
 	
 	public void setDifficulty(CreatureDifficulty difficulty) {
 		this.difficulty = difficulty;
+		sendDelta(6, 26, difficulty.getDifficulty());
 	}
 	
+	public String getMoodAnimation() {
+		return moodAnimation;
+	}
+
+	public void setMoodAnimation(String moodAnimation) {
+		this.moodAnimation = moodAnimation;
+		sendDelta(6, 11, moodAnimation);
+	}
+
+	public boolean isBeast() {
+		return beast;
+	}
+
 	public void setBeast(boolean beast) {
 		this.beast = beast;
+		sendDelta(6, 31, beast);
 	}
-	
+
+	public String getAnimation() {
+		return animation;
+	}
+
+	public void setAnimation(String animation) {
+		this.animation = animation;
+		sendDelta(6, 10, animation);
+	}
+
+	public long getEquippedWeaponId() {
+		return equippedWeaponId;
+	}
+
+	public void setEquippedWeaponId(long equippedWeaponId) {
+		this.equippedWeaponId = equippedWeaponId;
+		sendDelta(6, 12, equippedWeaponId);
+	}
+
+	public byte getMoodId() {
+		return moodId;
+	}
+
+	public void setMoodId(byte moodId) {
+		this.moodId = moodId;
+		sendDelta(6, 18, moodId);
+	}
+
+	public long getLookAtTargetId() {
+		return lookAtTargetId;
+	}
+
+	public void setLookAtTargetId(long lookAtTargetId) {
+		this.lookAtTargetId = lookAtTargetId;
+		sendDelta(6, 16, lookAtTargetId);
+	}
+
+	public long getIntendedTargetId() {
+		return intendedTargetId;
+	}
+
+	public void setIntendedTargetId(long intendedTargetId) {
+		this.intendedTargetId = intendedTargetId;
+		sendDelta(6, 17, intendedTargetId);
+	}
+
+	public int getPerformanceCounter() {
+		return performanceCounter;
+	}
+
+	public void setPerformanceCounter(int performanceCounter) {
+		this.performanceCounter = performanceCounter;
+		sendDelta(6, 19, performanceCounter);
+	}
+
+	public int getPerformanceId() {
+		return performanceId;
+	}
+
+	public void setPerformanceId(int performanceId) {
+		this.performanceId = performanceId;
+		sendDelta(6, 20, performanceId);
+	}
+
+	public String getCostume() {
+		return costume;
+	}
+
+	public void setCostume(String costume) {
+		this.costume = costume;
+		sendDelta(6, 24, costume);
+	}
+
+	public long getGroupId() {
+		return groupId;
+	}
+
+	public void setGroupId(long groupId) {
+		this.groupId = groupId;
+		sendDelta(6, 13, groupId);
+	}
+
+	public byte getFactionRank() {
+		return factionRank;
+	}
+
+	public void setFactionRank(byte factionRank) {
+		this.factionRank = factionRank;
+		sendDelta(3, 14, factionRank);
+	}
+
+	public long getOwnerId() {
+		return ownerId;
+	}
+
+	public void setOwnerId(long ownerId) {
+		this.ownerId = ownerId;
+		sendDelta(3, 15, ownerId);
+	}
+
+	public int getBattleFatigue() {
+		return battleFatigue;
+	}
+
+	public void setBattleFatigue(int battleFatigue) {
+		this.battleFatigue = battleFatigue;
+		sendDelta(3, 17, battleFatigue);
+	}
+
+	public long getStatesBitmask() {
+		return statesBitmask;
+	}
+
+	public void setStatesBitmask(long statesBitmask) {
+		this.statesBitmask = statesBitmask;
+		sendDelta(3, 18, statesBitmask);
+		
+	}
+
+	public boolean isVisible() {
+		return visible;
+	}
+
+	public void setVisible(boolean visible) {
+		this.visible = visible;
+		sendDelta(6, 25, visible);
+	}
+
+	public boolean isPerforming() {
+		return performing;
+	}
+
+	public void setPerforming(boolean performing) {
+		this.performing = performing;
+		sendDelta(6, 27, performing);
+	}
+
+	public boolean isShownOnRadar() {
+		return shownOnRadar;
+	}
+
+	public void setShownOnRadar(boolean shownOnRadar) {
+		this.shownOnRadar = shownOnRadar;
+		sendDelta(6, 30, shownOnRadar);
+	}
+
 	public int getHealth() {
 		return attributes.get(0);
 	}
@@ -470,11 +605,11 @@ public class CreatureObject extends TangibleObject {
 	public void createBaseline3(Player target, BaselineBuilder bb) {
 		super.createBaseline3(target, bb); // 13 variables - TANO3 (9) + BASE3 (4)
 		bb.addByte(posture.getId()); // 13
-		bb.addByte(0); // Faction Rank -- 14
-		bb.addLong(0); // Owner - mainly used for pets and vehicles -- 15
+		bb.addByte(factionRank); // 14
+		bb.addLong(ownerId); // 15
 		bb.addFloat((float) height); // 16
-		bb.addInt(0); // Battle Fatigue -- 17
-		bb.addLong(0); // States Bitmask -- 18
+		bb.addInt(battleFatigue); // 17
+		bb.addLong(statesBitmask); // 18
 		
 		bb.incremeantOperandCount(6);
 	}
@@ -487,7 +622,7 @@ public class CreatureObject extends TangibleObject {
 		bb.addObject(skillMods); // 11
 		bb.addFloat((float) movementScale); // 12
 		bb.addFloat((float) movementPercent); // 13
-		bb.addLong(0); // Listen to ID - 14
+		bb.addLong(performanceListenTarget); // 14
 		bb.addFloat((float) runSpeed); // 15
 		bb.addFloat((float) slopeModAngle); // 16
 		bb.addFloat((float) slopeModPercent); // 17
@@ -496,7 +631,7 @@ public class CreatureObject extends TangibleObject {
 		bb.addFloat((float) waterModPercent); // 20
 		bb.addObject(missionCriticalObjs); // 21
 		bb.addObject(abilities); // 22
-		bb.addInt(0); // XP Display Counter (remaining experience to next level up, updates the experience bar on client) - 23
+		bb.addInt(totalLevelXp); // 23
 		
 		bb.incremeantOperandCount(16);
 	}
@@ -504,31 +639,31 @@ public class CreatureObject extends TangibleObject {
 	public void createBaseline6(Player target, BaselineBuilder bb) {
 		super.createBaseline6(target, bb); // 8 variables - TANO6 (6) + BASE6 (2)
 		bb.addShort(level); // 8
-		bb.addInt(0); // Granted Health -- 9
-		bb.addAscii(""); // Current Animation -- 10
-		bb.addAscii("neutral"); // Animation Mood -- 11
-		bb.addLong(0); // Weapon ID -- 12
-		bb.addLong(0); // Group ID -- 13
+		bb.addInt(levelHealthGranted); // 9
+		bb.addAscii(animation); // 10
+		bb.addAscii(moodAnimation); // 11
+		bb.addLong(equippedWeaponId); // 12
+		bb.addLong(groupId); // 13
 		bb.addLong(0); // Group Inviter ID -- 14
 			bb.addAscii(""); // Group Inviter Name
 			bb.addLong(0); // Invite counter
-		bb.addInt(0); // Guild ID -- 15
-		bb.addLong(0); // Look-at Target ID -- 16
-		bb.addLong(0); // Intended ID -- 17
-		bb.addByte(0); // Mood ID -- 18
-		bb.addInt(0); // Performance Counter -- 19
-		bb.addInt(0); // Performance ID -- 20
+		bb.addInt(guildId); // 15
+		bb.addLong(lookAtTargetId); // 16
+		bb.addLong(intendedTargetId); // 17
+		bb.addByte(moodId); // 18
+		bb.addInt(performanceCounter); // 19
+		bb.addInt(performanceId); // 20
 		bb.addObject(attributes); // 21
 		bb.addObject(maxAttributes); // 22
 		bb.addObject(equipmentList); // 23
-		bb.addAscii(""); // Appearance (costume) -- 24
-		bb.addBoolean(true); // Visible -- 25
+		bb.addAscii(costume); // 24
+		bb.addBoolean(visible); // 25
 		bb.addObject(buffs); // 26
-		bb.addBoolean(false); // Is Performing -- 27
+		bb.addBoolean(performing); // 27
 		bb.addByte(difficulty.getDifficulty()); // 28
 		bb.addInt(-1); // Hologram Color -- 29
-		bb.addBoolean(true); // Visible On Radar -- 30
-		bb.addBoolean(false); // Is Pet -- 31
+		bb.addBoolean(shownOnRadar); // 30
+		bb.addBoolean(beast); // 31
 		bb.addByte(0); // Unknown -- 32
 		bb.addObject(appearanceList); // 33
 		bb.addLong(0); // unknown -- 34
