@@ -113,9 +113,14 @@ public class LoginService extends Service {
 		}
 		try {
 			ResultSet user = getUser(id.getUsername());
-			if (user.next() && isUserValid(user, id.getPassword()))
-				onSuccessfulLogin(user, player, id);
-			else
+			if (user.next()) {
+				if (isUserValid(user, id.getPassword()))
+					onSuccessfulLogin(user, player, id);
+				else if (user.getBoolean("banned"))
+					onLoginBanned(player, id);
+				else
+					onInvalidUserPass(player, id);
+			} else
 				onInvalidUserPass(player, id);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -150,6 +155,15 @@ public class LoginService extends Service {
 		sendLoginSuccessPacket(player);
 		System.out.println("[" + player.getUsername() + "] Connected to the login server. IP: " + id.getAddress() + ":" + id.getPort());
 		new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_SUCCESS).broadcast();
+	}
+	
+	private void onLoginBanned(Player player, LoginClientId id) {
+		String type = "Login Failed!";
+		String message = "Sorry, you're banned!";
+		sendPacket(player.getNetworkId(), new ErrorMessage(type, message, false));
+		System.err.println("[" + id.getUsername() + "] Can't login - Banned! IP: " + id.getAddress() + ":" + id.getPort());
+		player.setPlayerState(PlayerState.DISCONNECTED);
+		new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_FAIL_BANNED).broadcast();
 	}
 	
 	private void onInvalidUserPass(Player player, LoginClientId id) {
@@ -208,6 +222,8 @@ public class LoginService extends Service {
 	
 	private boolean isUserValid(ResultSet set, String password) throws SQLException {
 		if (password.isEmpty())
+			return false;
+		if (set.getBoolean("banned"))
 			return false;
 		if (set.getString("password").equals(password))
 			return true;
