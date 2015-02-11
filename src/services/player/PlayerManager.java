@@ -9,7 +9,6 @@ import java.util.Map;
 import network.packets.Packet;
 import network.packets.swg.login.ClientIdMsg;
 import network.packets.swg.zone.insertion.SelectCharacter;
-import intents.CloseConnectionIntent;
 import intents.GalacticPacketIntent;
 import intents.NotifyPlayersPacketIntent;
 import intents.InboundPacketIntent;
@@ -87,7 +86,6 @@ public class PlayerManager extends Manager {
 				Player p = pei.getPlayer();
 				if (p.getPlayerState() == PlayerState.DISCONNECTED) {
 					players.remove(p.getNetworkId());
-					new CloseConnectionIntent(p.getNetworkId()).broadcast();
 				}
 			}
 		} else if (i instanceof NotifyPlayersPacketIntent) {
