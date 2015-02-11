@@ -8,6 +8,7 @@ import org.python.core.Py;
 import org.python.core.PyObject;
 
 import network.packets.Packet;
+import network.packets.swg.SWGPacket;
 import network.packets.swg.zone.object_controller.ObjectController;
 import network.packets.swg.zone.object_controller.ObjectMenuRequest;
 import network.packets.swg.zone.object_controller.ObjectMenuResponse;
@@ -21,6 +22,7 @@ import resources.control.Service;
 import resources.player.Player;
 import resources.sui.ISuiCallback;
 import resources.sui.SuiWindow;
+import services.player.PlayerManager;
 
 public class SuiService extends Service {
 
@@ -39,22 +41,43 @@ public class SuiService extends Service {
 
 	@Override
 	public void onIntentReceived(Intent i) {
-		if (i instanceof SuiWindowIntent)
-			handleSuiWindowIntent((SuiWindowIntent) i);
-		else if (i instanceof GalacticPacketIntent) {
-			Packet packet = ((GalacticPacketIntent) i).getPacket();
-			long netId = ((GalacticPacketIntent) i).getNetworkId();
-			Player player = ((GalacticPacketIntent) i).getPlayerManager().getPlayerFromNetworkId(netId);
-			
-			if (packet instanceof ObjectController) {
-				ObjectController controller = ((ObjectController) packet).getController();
-				if (controller instanceof ObjectMenuRequest)
-					handleRadialMenuRequest(player, (ObjectMenuRequest) controller);
-				
-			} else if (packet instanceof SuiEventNotification) {
-				handleSuiEventNotification(player, (SuiEventNotification) (((GalacticPacketIntent) i).getPacket()));
-			}
+		switch (i.getType()) {
+			case GalacticPacketIntent.TYPE:
+				if (i instanceof GalacticPacketIntent)
+					processPacket((GalacticPacketIntent) i);
+				break;
+			case SuiWindowIntent.TYPE:
+				if (i instanceof SuiWindowIntent)
+					handleSuiWindowIntent((SuiWindowIntent) i);
+				break;
 		}
+	}
+	
+	private void processPacket(GalacticPacketIntent intent) {
+		Player player = intent.getPlayerManager().getPlayerFromNetworkId(intent.getNetworkId());
+		if (player == null)
+			return;
+		Packet p = intent.getPacket();
+		if (p instanceof SWGPacket)
+			processSwgPacket(intent.getPlayerManager(), player, intent.getGalaxy().getName(), (SWGPacket) p);
+	}
+	
+	private void processSwgPacket(PlayerManager pm, Player player, String galaxyName, SWGPacket p) {
+		switch(p.getPacketType()) {
+			case SUI_EVENT_NOTIFICATION:
+				handleSuiEventNotification(player, (SuiEventNotification) p);
+				break;
+			case OBJECT_CONTROLLER:
+				handleObjectController(player, (ObjectController) p);
+				break;
+			default:break;
+		}
+	}
+	
+	private void handleObjectController(Player player, ObjectController objController) {
+		ObjectController controller = objController.getController();
+		if (controller instanceof ObjectMenuRequest)
+			handleRadialMenuRequest(player, (ObjectMenuRequest) controller);
 	}
 	
 	private void handleRadialMenuRequest(Player player, ObjectMenuRequest request) {
