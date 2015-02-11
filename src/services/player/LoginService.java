@@ -39,6 +39,7 @@ import resources.objects.creature.CreatureObject;
 import resources.player.AccessLevel;
 import resources.player.Player;
 import resources.player.PlayerState;
+import resources.server_info.RelationalDatabase;
 import resources.services.Config;
 
 public class LoginService extends Service {
@@ -47,6 +48,7 @@ public class LoginService extends Service {
 	
 	private Random random;
 	private PreparedStatement getUser;
+	private PreparedStatement getUserInsensitive;
 	private PreparedStatement getGalaxies;
 	private PreparedStatement getCharacters;
 	private PreparedStatement deleteCharacter;
@@ -58,10 +60,12 @@ public class LoginService extends Service {
 	
 	@Override
 	public boolean initialize() {
-		getUser = getLocalDatabase().prepareStatement("SELECT * FROM users WHERE username = ?");
-		getGalaxies = getLocalDatabase().prepareStatement("SELECT * FROM galaxies");
-		getCharacters = getLocalDatabase().prepareStatement("SELECT * FROM characters WHERE userid = ?");
-		deleteCharacter = getLocalDatabase().prepareStatement("DELETE FROM CHARACTERS WHERE id = ?");
+		RelationalDatabase local = getLocalDatabase();
+		getUser = local.prepareStatement("SELECT * FROM users WHERE username = ?");
+		getUserInsensitive = local.prepareStatement("SELECT * FROM users WHERE username ilike ?");
+		getGalaxies = local.prepareStatement("SELECT * FROM galaxies");
+		getCharacters = local.prepareStatement("SELECT * FROM characters WHERE userid = ?");
+		deleteCharacter = local.prepareStatement("DELETE FROM CHARACTERS WHERE id = ?");
 		autoLogin = (getConfig(ConfigFile.PRIMARY).getInt("AUTO-LOGIN", 0) == 1 ? true : false);
 		return super.initialize();
 	}
@@ -99,57 +103,86 @@ public class LoginService extends Service {
 			return;
 		}
 		if (!id.getVersion().equals(REQUIRED_VERSION)) {
-			System.err.println("LoginService: " + id.getUsername() + " cannot login due to invalid version code: " + id.getVersion());
-			String type = "Login Failed!";
-			String message = "Invalid Client Version Code: " + id.getVersion();
-			sendPacket(player.getNetworkId(), new ErrorMessage(type, message, false));
-			player.setPlayerState(PlayerState.DISCONNECTED);
-			new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_FAIL_INVALID_VERSION_CODE).broadcast();
+			onLoginClientVersionError(player, id);
 			return;
 		}
+		if (autoLogin) {
+			String[] sessionHash = id.getPassword().split("-");
+			id.setUsername(sessionHash[0]);
+			id.setPassword(sessionHash[1]);
+		}
 		try {
-			if (autoLogin) {
-				String[] sessionHash = id.getPassword().split("-");
-				id.setUsername(sessionHash[0]);
-				id.setPassword(sessionHash[1]);
-			}
-
 			ResultSet user = getUser(id.getUsername());
-			
-			if (user.next() && isUserValid(user, id.getPassword())) { // User exists! Right username/password combo!
-				player.setUsername(id.getUsername());
-				player.setUserId(user.getInt("id"));
-				int tokenLength = getConfig(ConfigFile.PRIMARY).getInt("SESSION-TOKEN-LENGTH", 24);
-				byte [] sessionToken = new byte[tokenLength];
-				random.nextBytes(sessionToken);
-				player.setSessionToken(sessionToken);
-				player.setPlayerState(PlayerState.LOGGING_IN);
-				switch(user.getString("access_level")) {
-					case "player": player.setAccessLevel(AccessLevel.PLAYER); break;
-					case "admin": player.setAccessLevel(AccessLevel.ADMIN); break;
-					case "dev": player.setAccessLevel(AccessLevel.DEV); break;
-					case "qa": player.setAccessLevel(AccessLevel.QA); break;
-					default: player.setAccessLevel(AccessLevel.PLAYER); break;
-				}
-				sendLoginSuccessPacket(player);
-				System.out.println("[" + player.getUsername() + "] Connected to the login server. IP: " + id.getAddress() + ":" + id.getPort());
-				new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_SUCCESS).broadcast();
-			} else { // User does not exist!
-				String type = "Login Failed!";
-				String message = "Invalid username or password.";
-				sendPacket(player.getNetworkId(), new ErrorMessage(type, message, false));
-				System.err.println("[" + id.getUsername() + "] Invalid user/pass combo! IP: " + id.getAddress() + ":" + id.getPort());
-				player.setPlayerState(PlayerState.DISCONNECTED);
-				new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_FAIL_INVALID_USER_PASS).broadcast();
-			}
+			if (user.next() && isUserValid(user, id.getPassword()))
+				onSuccessfulLogin(user, player, id);
+			else
+				onInvalidUserPass(player, id);
 		} catch (SQLException e) {
 			e.printStackTrace();
-			String type = "Login Failed!";
-			String message = "Server Error.";
-			sendPacket(player.getNetworkId(), new ErrorMessage(type, message, false));
-			player.setPlayerState(PlayerState.DISCONNECTED);
-			new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_FAIL_SERVER_ERROR).broadcast();
+			onLoginServerError(player);
 		}
+	}
+	
+	private void onLoginClientVersionError(Player player, LoginClientId id) {
+		System.err.println("LoginService: " + id.getUsername() + " cannot login due to invalid version code: " + id.getVersion());
+		String type = "Login Failed!";
+		String message = "Invalid Client Version Code: " + id.getVersion();
+		sendPacket(player.getNetworkId(), new ErrorMessage(type, message, false));
+		player.setPlayerState(PlayerState.DISCONNECTED);
+		new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_FAIL_INVALID_VERSION_CODE).broadcast();
+	}
+	
+	private void onSuccessfulLogin(ResultSet user, Player player, LoginClientId id) throws SQLException {
+		player.setUsername(id.getUsername());
+		player.setUserId(user.getInt("id"));
+		int tokenLength = getConfig(ConfigFile.PRIMARY).getInt("SESSION-TOKEN-LENGTH", 24);
+		byte [] sessionToken = new byte[tokenLength];
+		random.nextBytes(sessionToken);
+		player.setSessionToken(sessionToken);
+		player.setPlayerState(PlayerState.LOGGING_IN);
+		switch(user.getString("access_level")) {
+			case "player": player.setAccessLevel(AccessLevel.PLAYER); break;
+			case "admin": player.setAccessLevel(AccessLevel.ADMIN); break;
+			case "dev": player.setAccessLevel(AccessLevel.DEV); break;
+			case "qa": player.setAccessLevel(AccessLevel.QA); break;
+			default: player.setAccessLevel(AccessLevel.PLAYER); break;
+		}
+		sendLoginSuccessPacket(player);
+		System.out.println("[" + player.getUsername() + "] Connected to the login server. IP: " + id.getAddress() + ":" + id.getPort());
+		new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_SUCCESS).broadcast();
+	}
+	
+	private void onInvalidUserPass(Player player, LoginClientId id) {
+		String type = "Login Failed!";
+		String message = "Invalid username or password.";
+		try {
+			String similar = getSimilarUsername(id.getUsername());
+			if (similar != null && !similar.equals(id.getUsername()))
+				message += "\n\nDid you mean: '" + similar + "'?";
+		} catch (SQLException e) {
+			
+		}
+		message += "\n\nMake sure to login to forums first!";
+		sendPacket(player.getNetworkId(), new ErrorMessage(type, message, false));
+		System.err.println("[" + id.getUsername() + "] Invalid user/pass combo! IP: " + id.getAddress() + ":" + id.getPort());
+		player.setPlayerState(PlayerState.DISCONNECTED);
+		new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_FAIL_INVALID_USER_PASS).broadcast();
+	}
+	
+	private void onLoginServerError(Player player) {
+		String type = "Login Failed!";
+		String message = "Server Error.";
+		sendPacket(player.getNetworkId(), new ErrorMessage(type, message, false));
+		player.setPlayerState(PlayerState.DISCONNECTED);
+		new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_FAIL_SERVER_ERROR).broadcast();
+	}
+	
+	private String getSimilarUsername(String user) throws SQLException {
+		getUserInsensitive.setString(1, user);
+		ResultSet set = getUserInsensitive.executeQuery();
+		if (!set.next())
+			return null;
+		return set.getString("username");
 	}
 	
 	private void sendLoginSuccessPacket(Player p) throws SQLException {
