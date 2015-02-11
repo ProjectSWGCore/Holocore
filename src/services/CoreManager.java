@@ -14,6 +14,7 @@ import network.packets.soe.DataChannelA;
 import network.packets.soe.MultiPacket;
 import network.packets.swg.SWGPacket;
 import network.packets.swg.zone.baselines.Baseline;
+import network.packets.swg.zone.object_controller.ObjectController;
 import intents.InboundPacketIntent;
 import intents.OutboundPacketIntent;
 import intents.ServerManagementIntent;
@@ -100,10 +101,9 @@ public class CoreManager extends Manager {
 	
 	private void handleServerManagementIntent(ServerManagementIntent i) {
 		switch(i.getEvent()) {
-		case SHUTDOWN: initiateShutdownSequence(i.getTime());  break;
-		default: break;
+			case SHUTDOWN: initiateShutdownSequence(i.getTime());  break;
+			default: break;
 		}
-		
 	}
 
 	private void initiateShutdownSequence(long time) {
@@ -155,6 +155,8 @@ public class CoreManager extends Manager {
 	private void outputSWG(SWGPacket p) {
 		if (p instanceof Baseline)
 			packetOutput.println("Baseline " + ((Baseline)p).getType() + " " + ((Baseline)p).getNum());
+		else if (p instanceof ObjectController)
+			packetOutput.println("ObjectController 0x" + Integer.toHexString(((ObjectController)p).getControllerCrc()));
 		else
 			packetOutput.println(p.getClass().getSimpleName());
 	}
