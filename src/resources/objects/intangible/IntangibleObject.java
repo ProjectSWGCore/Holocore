@@ -25,14 +25,14 @@ public class IntangibleObject extends SWGObject {
 	}
 
 	public void createBaseline3(Player target, BaselineBuilder bb) {
-		super.createBaseline3(target, bb);
-		bb.addInt(count);
+		super.createBaseline3(target, bb); // 4 variables
+		bb.addInt(count); // 4
 		
 		bb.incremeantOperandCount(1);
 	}
 
 	public void createBaseline6(Player target, BaselineBuilder bb) {
-		super.createBaseline6(target, bb);
+		super.createBaseline6(target, bb); // 2 variables
 	}
 	
 	protected void createObject(Player target) {
