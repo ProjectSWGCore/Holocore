@@ -307,7 +307,7 @@ public class CreatureObject extends TangibleObject {
 
 	public void setMoodAnimation(String moodAnimation) {
 		this.moodAnimation = moodAnimation;
-		sendDelta(6, 11, moodAnimation);
+		sendDelta(6, 11, moodAnimation, StringType.ASCII);
 	}
 
 	public boolean isBeast() {
@@ -325,7 +325,7 @@ public class CreatureObject extends TangibleObject {
 
 	public void setAnimation(String animation) {
 		this.animation = animation;
-		sendDelta(6, 10, animation);
+		sendDelta(6, 10, animation, StringType.ASCII);
 	}
 
 	public long getEquippedWeaponId() {
@@ -388,7 +388,7 @@ public class CreatureObject extends TangibleObject {
 
 	public void setCostume(String costume) {
 		this.costume = costume;
-		sendDelta(6, 24, costume);
+		sendDelta(6, 24, costume, StringType.ASCII);
 	}
 
 	public long getGroupId() {
@@ -681,5 +681,9 @@ public class CreatureObject extends TangibleObject {
 	
 	public void sendDelta(int type, int update, Object value) {
 		sendDelta(BaselineType.CREO, type, update, value);
+	}
+	
+	public void sendDelta(int type, int update, Object value, StringType strType) {
+		sendDelta(BaselineType.CREO, type, update, value, strType);
 	}
 }
