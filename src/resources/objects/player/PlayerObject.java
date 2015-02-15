@@ -17,7 +17,7 @@ import utilities.Encoder.StringType;
 public class PlayerObject extends IntangibleObject {
 	
 	private static final long serialVersionUID = 1L;
-
+	
 	private String	biography		= "";
 	// PLAY 03
 	private SWGList<Integer> 	flagsList			= new SWGList<>(BaselineType.PLAY, 3, 5, false, StringType.UNSPECIFIED, true);
