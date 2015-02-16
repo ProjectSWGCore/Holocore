@@ -63,15 +63,15 @@ public class CreatureObject extends TangibleObject {
 
 	private SWGList<Integer>	baseAttributes	= new SWGList<Integer>(BaselineType.CREO, 1, 2);
 	private SWGList<String>		skills			= new SWGList<String>(BaselineType.CREO, 1, 3, false, StringType.ASCII);
-	private SWGList<Integer>	hamEncumbList	= new SWGList<Integer>(BaselineType.CREO, 4, 10, true);
+	private SWGList<Integer>	hamEncumbList	= new SWGList<Integer>(BaselineType.CREO, 4, 2, true);
 	private SWGList<Integer>	attributes		= new SWGList<Integer>(BaselineType.CREO, 6, 21, true);
 	private SWGList<Integer>	maxAttributes	= new SWGList<Integer>(BaselineType.CREO, 6, 22, true);
 	private SWGList<Equipment>	equipmentList 	= new SWGList<Equipment>(BaselineType.CREO, 6, 23);
 	private SWGList<Equipment>	appearanceList 	= new SWGList<Equipment>(BaselineType.CREO, 6, 33);
 	
-	private SWGMap<String, Long> 	skillMods			= new SWGMap<>(BaselineType.CREO, 4, 11, StringType.ASCII); // TODO: SkillMod structure
-	private SWGMap<Long, Long>		missionCriticalObjs	= new SWGMap<>(BaselineType.CREO, 4, 21);
-	private SWGMap<String, Integer>	abilities			= new SWGMap<>(BaselineType.CREO, 4, 22, StringType.ASCII);
+	private SWGMap<String, Long> 	skillMods			= new SWGMap<>(BaselineType.CREO, 4, 3, StringType.ASCII); // TODO: SkillMod structure
+	private SWGMap<Long, Long>		missionCriticalObjs	= new SWGMap<>(BaselineType.CREO, 4, 13);
+	private SWGMap<String, Integer>	abilities			= new SWGMap<>(BaselineType.CREO, 4, 14, StringType.ASCII);
 	private SWGMap<Integer, Long>	buffs				= new SWGMap<>(BaselineType.CREO, 6, 26); // TODO: Buff structure
 
 
@@ -220,52 +220,52 @@ public class CreatureObject extends TangibleObject {
 	
 	public void setMovementScale(double movementScale) {
 		this.movementScale = movementScale;
-		sendDelta(4, 12, movementScale);
+		sendDelta(4, 4, movementScale);
 	}
 	
 	public void setMovementPercent(double movementPercent) {
 		this.movementPercent = movementPercent;
-		sendDelta(4, 13, movementPercent);
+		sendDelta(4, 5, movementPercent);
 	}
 	
 	public void setWalkSpeed(double walkSpeed) {
 		this.walkSpeed = walkSpeed;
-		sendDelta(4, 19, walkSpeed);
+		sendDelta(4, 11, walkSpeed);
 	}
 	
 	public void setRunSpeed(double runSpeed) {
 		this.runSpeed = runSpeed;
-		sendDelta(4, 15, runSpeed);
+		sendDelta(4, 7, runSpeed);
 	}
 	
 	public void setAccelScale(double accelScale) {
 		this.accelScale = accelScale;
-		sendDelta(4, 8, accelScale);
+		sendDelta(4, 0, accelScale);
 	}
 	
 	public void setAccelPercent(double accelPercent) {
 		this.accelPercent = accelPercent;
-		sendDelta(4, 9, accelPercent);
+		sendDelta(4, 1, accelPercent);
 	}
 	
 	public void setTurnScale(double turnScale) {
 		this.turnScale = turnScale;
-		sendDelta(4, 18, turnScale);
+		sendDelta(4, 10, turnScale);
 	}
 	
 	public void setSlopeModAngle(double slopeModAngle) {
 		this.slopeModAngle = slopeModAngle;
-		sendDelta(4, 16, slopeModAngle);
+		sendDelta(4, 8, slopeModAngle);
 	}
 	
 	public void setSlopeModPercent(double slopeModPercent) {
 		this.slopeModPercent = slopeModPercent;
-		sendDelta(4, 17, slopeModPercent);
+		sendDelta(4, 9, slopeModPercent);
 	}
 	
 	public void setWaterModPercent(double waterModPercent) {
 		this.waterModPercent = waterModPercent;
-		sendDelta(4, 20, waterModPercent);
+		sendDelta(4, 12, waterModPercent);
 	}
 	
 	public void setHeight(double height) {
@@ -275,7 +275,7 @@ public class CreatureObject extends TangibleObject {
 	
 	public void setPerformanceListenTarget(long performanceListenTarget) {
 		this.performanceListenTarget = performanceListenTarget;
-		sendDelta(4, 14, performanceListenTarget);
+		sendDelta(4, 6, performanceListenTarget);
 	}
 	
 	public void setGuildId(int guildId) {
@@ -295,7 +295,7 @@ public class CreatureObject extends TangibleObject {
 	
 	public void setTotalLevelXp(int totalLevelXp) {
 		this.totalLevelXp = totalLevelXp;
-		sendDelta(4, 23, totalLevelXp);
+		sendDelta(4, 15, totalLevelXp);
 	}
 	
 	public void setDifficulty(CreatureDifficulty difficulty) {
@@ -618,22 +618,22 @@ public class CreatureObject extends TangibleObject {
 	
 	public void createBaseline4(Player target, BaselineBuilder bb) {
 		super.createBaseline4(target, bb); // 0 variables
-		bb.addFloat((float) accelScale); // 8
-		bb.addFloat((float) accelPercent); // 9
-		bb.addObject(hamEncumbList); // 10
-		bb.addObject(skillMods); // 11
-		bb.addFloat((float) movementScale); // 12
-		bb.addFloat((float) movementPercent); // 13
-		bb.addLong(performanceListenTarget); // 14
-		bb.addFloat((float) runSpeed); // 15
-		bb.addFloat((float) slopeModAngle); // 16
-		bb.addFloat((float) slopeModPercent); // 17
-		bb.addFloat((float) turnScale); // 18
-		bb.addFloat((float) walkSpeed); // 19
-		bb.addFloat((float) waterModPercent); // 20
-		bb.addObject(missionCriticalObjs); // 21
-		bb.addObject(abilities); // 22
-		bb.addInt(totalLevelXp); // 23
+		bb.addFloat((float) accelScale); // 0
+		bb.addFloat((float) accelPercent); // 1
+		bb.addObject(hamEncumbList); // 2
+		bb.addObject(skillMods); // 3
+		bb.addFloat((float) movementScale); // 4
+		bb.addFloat((float) movementPercent); // 5
+		bb.addLong(performanceListenTarget); // 6
+		bb.addFloat((float) runSpeed); // 7
+		bb.addFloat((float) slopeModAngle); // 8
+		bb.addFloat((float) slopeModPercent); // 9
+		bb.addFloat((float) turnScale); // 10
+		bb.addFloat((float) walkSpeed); // 11
+		bb.addFloat((float) waterModPercent); // 12
+		bb.addObject(missionCriticalObjs); // 13
+		bb.addObject(abilities); // 14
+		bb.addInt(totalLevelXp); // 15
 		
 		bb.incremeantOperandCount(16);
 	}
