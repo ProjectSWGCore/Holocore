@@ -192,6 +192,7 @@ public class CoreManager extends Manager {
 			g.setOnlinePlayerLimit(c.getInt("GALAXY-MAX-ONLINE", 3000));
 			g.setOnlineFreeTrialLimit(c.getInt("GALAXY-MAX-ONLINE", 3000));
 			g.setRecommended(true);
+			set.close();
 			return g;
 		} catch (SQLException e) {
 			e.printStackTrace();

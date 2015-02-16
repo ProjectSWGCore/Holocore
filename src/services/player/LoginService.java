@@ -107,7 +107,7 @@ public class LoginService extends Service {
 			return;
 		}
 		if (autoLogin) {
-			String[] sessionHash = id.getPassword().split("-");
+			String [] sessionHash = id.getPassword().split("-");
 			id.setUsername(sessionHash[0]);
 			id.setPassword(sessionHash[1]);
 		}
