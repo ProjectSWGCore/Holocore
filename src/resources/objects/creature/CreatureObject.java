@@ -88,12 +88,14 @@ public class CreatureObject extends TangibleObject {
 				equipmentList.add(new Equipment((WeaponObject) obj));
 			else
 				equipmentList.add(new Equipment(obj.getObjectId(), obj.getTemplate()));
+			equipmentList.sendDeltaMessage(this);
 		}
 	}
 	
 	public void addAppearanceItem(SWGObject obj) {
 		synchronized(appearanceList) {
 			appearanceList.add(new Equipment(obj.getObjectId(), obj.getTemplate()));
+			appearanceList.sendDeltaMessage(this);
 		}
 	}
 	

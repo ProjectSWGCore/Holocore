@@ -14,7 +14,6 @@ import intents.PlayerEventIntent;
 import intents.ServerStatusIntent;
 import intents.ServerStatusIntent.ServerStatus;
 import intents.chat.ChatBroadcastIntent;
-import intents.chat.ChatBroadcastIntent.BroadcastType;
 import intents.chat.PersistentMessageIntent;
 import intents.chat.SpatialChatIntent;
 import network.packets.Packet;
@@ -35,6 +34,8 @@ import network.packets.swg.zone.object_controller.SpatialChat;
 import resources.Terrain;
 import resources.control.Intent;
 import resources.control.Service;
+import resources.encodables.OutOfBand;
+import resources.encodables.ProsePackage;
 import resources.encodables.player.Mail;
 import resources.objects.SWGObject;
 import resources.player.Player;
@@ -148,10 +149,20 @@ public class ChatService extends Service {
 	}
 	
 	private void handleChatBroadcast(ChatBroadcastIntent i) {
-		if (i.getBroadcastType() == BroadcastType.AREA)
-			broadcastAreaMessage(i.getMessage(), i.getBroadcaster());
-		else
-			broadcastGalaxyMessage(i.getMessage(), i.getTerrain());
+		switch(i.getBroadcastType()) {
+			case AREA:
+				broadcastAreaMessage(i.getMessage(), i.getBroadcaster());
+				break;
+			case PLANET:
+				broadcastGalaxyMessage(i.getMessage(), i.getTerrain()); // TODO: Planet specific system messages
+				break;
+			case GALAXY:
+				broadcastGalaxyMessage(i.getMessage(), i.getTerrain());
+				break;
+			case PERSONAL:
+				broadcastPersonalMessage(i.getProse(), i.getBroadcaster());
+				break;
+		}
 	}
 	
 	private void handleChatRoomListRequest(Player player, ChatRequestRoomList request) {
@@ -252,11 +263,11 @@ public class ChatService extends Service {
 		sendPersistentMessage(player, mail, MailFlagType.FULL_MESSAGE, galaxy);
 	}
 	
-	private void broadcastAreaMessage(String message, SWGObject broadcaster) {
+	private void broadcastAreaMessage(String message, Player broadcaster) {
 		ChatSystemMessage packet = new ChatSystemMessage(SystemChatType.SCREEN_AND_CHAT.ordinal(), message);
-		broadcaster.getOwner().sendPacket(packet);
+		broadcaster.sendPacket(packet);
 		
-		List<Player> observers = broadcaster.getObservers();
+		List<Player> observers = broadcaster.getCreatureObject().getObservers();
 		for (Player player : observers) {
 			player.sendPacket(packet);
 		}
@@ -265,6 +276,11 @@ public class ChatService extends Service {
 	private void broadcastGalaxyMessage(String message, Terrain terrain) {
 		ChatSystemMessage packet = new ChatSystemMessage(SystemChatType.SCREEN_AND_CHAT.ordinal(), message);
 		new NotifyPlayersPacketIntent(packet, terrain).broadcast();
+	}
+	
+	private void broadcastPersonalMessage(ProsePackage prose, Player player) {
+		OutOfBand pckg = new OutOfBand(prose);
+		player.sendPacket(new ChatSystemMessage(SystemChatType.SCREEN_AND_CHAT, pckg));
 	}
 	
 	private void sendShutdownBroadcasts(final long time) {
