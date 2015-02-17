@@ -18,7 +18,7 @@ public class AttributesCmdCallback implements ICmdCallback {
 			if (s.equals("-255") || s.length() == 0)
 				continue;
 			
-			SWGObject obj = objManager.getObjectById(Long.valueOf(s));
+			SWGObject obj = objManager.getObjectById(Long.parseLong(s));
 			if (obj != null)
 				handleSendItemAttributes(obj, player);
 		}

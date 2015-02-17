@@ -69,7 +69,7 @@ public class SuiTableWindow extends SuiBaseWindow {
 		else return cell.getValue();
 	}
 	
-	private class SuiTableColumn {
+	private static class SuiTableColumn {
 		
 		private List<SuiTableCell> cells;
 
@@ -84,7 +84,7 @@ public class SuiTableWindow extends SuiBaseWindow {
 		public List<SuiTableCell> getCells() { return this.cells; }
 	}
 	
-	private class SuiTableCell {
+	private static class SuiTableCell {
 		private String value;
 		private long id;
 		

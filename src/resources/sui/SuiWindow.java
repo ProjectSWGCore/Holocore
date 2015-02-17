@@ -3,6 +3,7 @@ package resources.sui;
 import intents.sui.SuiWindowIntent;
 import intents.sui.SuiWindowIntent.SuiWindowEvent;
 
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -62,12 +63,12 @@ public class SuiWindow {
 		component.getWideParams().add(value);
 		components.add(component);
 	}
-
-	private final void addCallbackComponent(String source, byte trigger, List<String> returnParams) {
+	
+	private final void addCallbackComponent(String source, Trigger trigger, List<String> returnParams) {
 		SuiWindowComponent component = createComponent((byte) 5);
 		
 		component.getNarrowParams().add(source);
-		component.getNarrowParams().add(new String(new byte[] { trigger }));
+		component.getNarrowParams().add(new String(new byte[] {trigger.getByte()}, Charset.forName("UTF-8")));
 		component.getNarrowParams().add("handleSUI");
 		
 		for (String returnParam : returnParams) {
@@ -103,7 +104,7 @@ public class SuiWindow {
 		components.add(component);
 	}
 	
-	public final void addCallback(int eventId, String source, byte trigger, List<String> returnParams, ISuiCallback callback) {
+	public final void addCallback(int eventId, String source, Trigger trigger, List<String> returnParams, ISuiCallback callback) {
 		addCallbackComponent(source, trigger, returnParams);
 		
 		if (javaCallbacks == null)
@@ -111,7 +112,7 @@ public class SuiWindow {
 		javaCallbacks.put(eventId, callback);
 	}
 	
-	public final void addCallback(int eventId, String source, byte trigger, List<String> returnParams, PyObject callback) {
+	public final void addCallback(int eventId, String source, Trigger trigger, List<String> returnParams, PyObject callback) {
 		addCallbackComponent(source, trigger, returnParams);
 		
 		if (scriptCallbacks == null)
@@ -147,9 +148,19 @@ public class SuiWindow {
 	public final ISuiCallback getJavaCallback(int eventType) { return ((javaCallbacks == null) ? null : javaCallbacks.get(eventType)); }
 	public final PyObject getScriptCallback(int eventType) { return ((scriptCallbacks == null) ? null : scriptCallbacks.get(eventType)); }
 	
-	public enum Trigger {;
-		public static byte UPDATE = 4;
-		public static byte OK = 9;
-		public static byte CANCEL = 10;
+	public enum Trigger {
+		UPDATE	((byte) 4),
+		OK		((byte) 9),
+		CANCEL	((byte) 10);
+		
+		private byte b;
+		
+		Trigger(byte b) {
+			this.b = b;
+		}
+		
+		public byte getByte() {
+			return b;
+		}
 	}
 }

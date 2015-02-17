@@ -6,7 +6,7 @@ import java.util.List;
 import resources.player.Player;
 
 public class SuiListBox extends SuiBaseWindow {
-	private List<SuiListBoxItem> list;
+	private List <SuiListBoxItem> list;
 	
 	public SuiListBox(Player owner, ListBoxType type, String title, String prompt) {
 		super("Script.listBox", owner, title, prompt);
@@ -65,7 +65,7 @@ public class SuiListBox extends SuiBaseWindow {
 		return item;
 	}
 	
-	public static int getSelectedIndex(List<String> returnParams) { return Integer.valueOf(returnParams.get(0)); }
+	public static int getSelectedIndex(List<String> returnParams) { return Integer.parseInt(returnParams.get(0)); }
 	
 	public List<SuiListBoxItem> getList() { return list; }
 
@@ -75,7 +75,7 @@ public class SuiListBox extends SuiBaseWindow {
 		DEFAULT;
 	}
 	
-	public class SuiListBoxItem {
+	public static class SuiListBoxItem {
 		private String name;
 		private long id;
 		

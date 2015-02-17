@@ -32,22 +32,22 @@ public class ServerCmdCallback implements ICmdCallback {
 		listBox.addItemSelectionCallback(0, new ServerSuiCallback());
 		listBox.display();
 	}
-
-	private class ServerSuiCallback implements ISuiCallback {
-
+	
+	private static class ServerSuiCallback implements ISuiCallback {
+		
 		public void handleEvent(Player player, SWGObject actor, int eventType, List<String> returnParams) {
 			int selection = SuiListBox.getSelectedIndex(returnParams);
 			
 			switch(selection) {
-			case 0: handleKickPlayer(player); break;
-			case 1: handleBanPlayer(player); break;
-			case 2: handleUnbanPlayer(player); break;
-			case 3: handleShutdownServer(player); break;
-			case 4: handleCustomShutdownServer(player); break;
-			default: break;
+				case 0: handleKickPlayer(player); break;
+				case 1: handleBanPlayer(player); break;
+				case 2: handleUnbanPlayer(player); break;
+				case 3: handleShutdownServer(player); break;
+				case 4: handleCustomShutdownServer(player); break;
+				default: break;
 			}
 		}
-
+		
 		private void handleKickPlayer(Player actor) {
 			SuiInputBox window = new SuiInputBox(actor, InputBoxType.OK_CANCEL, "Kick Player", "Enter the name of the player that you wish to KICK from the server.");
 			window.addInputTextCallback(0, new ISuiCallback() {
@@ -102,7 +102,7 @@ public class ServerCmdCallback implements ICmdCallback {
 
 			window.addInputTextCallback(0, new ISuiCallback() {
 				public void handleEvent(Player player, SWGObject actor, int eventType, List<String> returnParams) {
-					long countdown = Long.valueOf(returnParams.get(0));
+					long countdown = Long.parseLong(returnParams.get(0));
 					new ServerManagementIntent(countdown, ServerManagementEvent.SHUTDOWN).broadcast();
 				}
 				

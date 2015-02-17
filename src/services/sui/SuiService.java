@@ -65,12 +65,15 @@ public class SuiService extends Service {
 	private void processSwgPacket(PlayerManager pm, Player player, String galaxyName, SWGPacket p) {
 		switch(p.getPacketType()) {
 			case SUI_EVENT_NOTIFICATION:
-				handleSuiEventNotification(player, (SuiEventNotification) p);
+				if (p instanceof SuiEventNotification)
+					handleSuiEventNotification(player, (SuiEventNotification) p);
 				break;
 			case OBJECT_CONTROLLER:
-				handleObjectController(player, (ObjectController) p);
+				if (p instanceof ObjectController)
+					handleObjectController(player, (ObjectController) p);
 				break;
-			default:break;
+			default:
+				break;
 		}
 	}
 	
@@ -96,8 +99,10 @@ public class SuiService extends Service {
 	private void handleSuiEventNotification(Player player, SuiEventNotification r) {
 		SuiWindow window = windows.get(r.getWindowId());
 		
-		if (window == null)
+		if (window == null) {
 			System.err.println("Null window id " + r.getWindowId());
+			return;
+		}
 		
 		int eventId = r.getEventId();
 		if (window.getJavaCallback(eventId) != null) {
