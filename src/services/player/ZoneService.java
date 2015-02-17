@@ -109,13 +109,13 @@ public class ZoneService extends Service {
 			return;
 		
 		switch(p.getColor()) {
-		case "blue": waypoint.setColor(WaypointColor.BLUE); break;
-		case "green": waypoint.setColor(WaypointColor.GREEN); break;
-		case "orange": waypoint.setColor(WaypointColor.ORANGE); break;
-		case "yellow": waypoint.setColor(WaypointColor.YELLOW); break;
-		case "purple": waypoint.setColor(WaypointColor.PURPLE); break;
-		case "white": waypoint.setColor(WaypointColor.WHITE); break;
-		default: System.err.println("Don't know color " + p.getColor());
+			case "blue": waypoint.setColor(WaypointColor.BLUE); break;
+			case "green": waypoint.setColor(WaypointColor.GREEN); break;
+			case "orange": waypoint.setColor(WaypointColor.ORANGE); break;
+			case "yellow": waypoint.setColor(WaypointColor.YELLOW); break;
+			case "purple": waypoint.setColor(WaypointColor.PURPLE); break;
+			case "white": waypoint.setColor(WaypointColor.WHITE); break;
+			default: System.err.println("Don't know color " + p.getColor());
 		}
 		
 		ghost.updateWaypoint(waypoint);
@@ -307,15 +307,6 @@ public class ZoneService extends Service {
 	}
 	
 	private Location getStartLocation(String start) {
-		Location location = new Location();
-		location.setTerrain(Terrain.TATOOINE);
-		location.setX(3525 + (Math.random()-.5) * 5);
-		location.setY(4);
-		location.setZ(-4807 + (Math.random()-.5) * 5);
-		location.setOrientationX(0);
-		location.setOrientationY(0);
-		location.setOrientationZ(0);
-		location.setOrientationW(1);
-		return location;
+		return TerrainZoneInsertion.getInsertionForTerrain(Terrain.CORELLIA);
 	}
 }
