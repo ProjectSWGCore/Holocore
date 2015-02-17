@@ -21,7 +21,7 @@ public class CreatureObject extends TangibleObject {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private Posture	posture					= Posture.STANDING;
+	private Posture	posture					= Posture.UPRIGHT;
 	private Race	race					= Race.HUMAN; 
 	private double	movementScale			= 1;
 	private double	movementPercent			= 1;
