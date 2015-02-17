@@ -177,6 +177,7 @@ public class CoreManager extends Manager {
 			ResultSet set = getGalaxy.executeQuery();
 			if (!set.next()) {
 				System.err.println("CoreManager: No such galaxy exists with ID " + galaxyId + "!");
+				set.close();
 				return null;
 			}
 			Galaxy g = new Galaxy();
