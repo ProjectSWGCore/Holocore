@@ -4,6 +4,7 @@ import intents.GalacticIntent;
 import intents.PlayerEventIntent;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Map;
@@ -41,6 +42,7 @@ import resources.client_info.ClientFactory;
 import resources.client_info.visitors.ProfTemplateData;
 import resources.config.ConfigFile;
 import resources.control.Service;
+import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
 import resources.objects.tangible.TangibleObject;
@@ -195,7 +197,7 @@ public class ZoneService extends Service {
 			try {
 				createCharacter.setLong(1, characterId);
 				createCharacter.setString(2, name);
-				createCharacter.setString(3, ((CreatureObject)player.getCreatureObject()).getRace().getFilename());
+				createCharacter.setString(3, ((CreatureObject) player.getCreatureObject()).getRace().getFilename());
 				createCharacter.setInt(4, player.getUserId());
 				createCharacter.setInt(5, player.getGalaxyId());
 				return createCharacter.executeUpdate() == 1;
@@ -227,12 +229,21 @@ public class ZoneService extends Service {
 	
 	private boolean characterExistsForName(String name) {
 		synchronized (getCharacter) {
+			ResultSet set = null;
 			try {
 				getCharacter.setString(1, name);
-				return getCharacter.executeQuery().next();
+				set = getCharacter.executeQuery();
+				return set.next();
 			} catch (SQLException e) {
 				e.printStackTrace();
 				return false;
+			} finally {
+				try {
+					if (set != null)
+						set.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}
@@ -240,8 +251,8 @@ public class ZoneService extends Service {
 	private long createCharacter(ObjectManager objManager, Player player, ClientCreateCharacter create) {
 		Location		start		= getStartLocation(create.getStart());
 		Race			race		= Race.getRaceByFile(create.getRace());
-		CreatureObject	creatureObj	= (CreatureObject) objManager.createObject(race.getFilename(), start);
-		PlayerObject	playerObj	= (PlayerObject)   objManager.createObject("object/player/shared_player.iff");
+		CreatureObject	creatureObj	= createCreature(objManager, race.getFilename(), start);
+		PlayerObject	playerObj	= createPlayer(objManager, "object/player/shared_player.iff");
 		
 		setCreatureObjectValues(objManager, creatureObj, create);
 		setPlayerObjectValues(playerObj, create);
@@ -257,19 +268,40 @@ public class ZoneService extends Service {
 		return creatureObj.getObjectId();
 	}
 	
+	private CreatureObject createCreature(ObjectManager objManager, String template, Location location) {
+		SWGObject obj = objManager.createObject(template, location);
+		if (obj instanceof CreatureObject)
+			return (CreatureObject) obj;
+		return null;
+	}
+	
+	private PlayerObject createPlayer(ObjectManager objManager, String template) {
+		SWGObject obj = objManager.createObject(template);
+		if (obj instanceof PlayerObject)
+			return (PlayerObject) obj;
+		return null;
+	}
+	
+	private TangibleObject createTangible(ObjectManager objManager, String template) {
+		SWGObject obj = objManager.createObject(template);
+		if (obj instanceof TangibleObject)
+			return (TangibleObject) obj;
+		return null;
+	}
+	
 	private void createHair(ObjectManager objManager, CreatureObject creatureObj, String hair, byte [] customization) {
 		if (hair.isEmpty())
 			return;
-		TangibleObject hairObj = (TangibleObject) objManager.createObject(ClientFactory.formatToSharedFile(hair));
+		TangibleObject hairObj = createTangible(objManager, ClientFactory.formatToSharedFile(hair));
 		hairObj.setAppearanceData(customization);
 		creatureObj.setSlot("hair", hairObj);
 		creatureObj.addEquipment(hairObj);
 	}
 	
 	private void setCreatureObjectValues(ObjectManager objManager, CreatureObject creatureObj, ClientCreateCharacter create) {
-		TangibleObject inventory	= (TangibleObject) objManager.createObject("object/tangible/inventory/shared_character_inventory.iff");
-		TangibleObject datapad		= (TangibleObject) objManager.createObject("object/tangible/datapad/shared_character_datapad.iff");
-
+		TangibleObject inventory	= createTangible(objManager, "object/tangible/inventory/shared_character_inventory.iff");
+		TangibleObject datapad		= createTangible(objManager, "object/tangible/datapad/shared_character_datapad.iff");
+		
 		creatureObj.setRace(Race.getRaceByFile(create.getRace()));
 		creatureObj.setAppearanceData(create.getCharCustomization());
 		creatureObj.setHeight(create.getHeight());
@@ -298,7 +330,7 @@ public class ZoneService extends Service {
 			return;
 		
 		for (String template : profTemplates.get(profession).getItems(ClientFactory.formatToSharedFile(race))) {
-			TangibleObject clothing = (TangibleObject) objManager.createObject(template);
+			TangibleObject clothing = createTangible(objManager, template);
 			player.addChild(clothing);
 		}
 	}

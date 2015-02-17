@@ -35,6 +35,16 @@ public class IntangibleObject extends SWGObject {
 		super.createBaseline6(target, bb); // 2 variables
 	}
 	
+	@Override
+	public boolean equals(Object o) {
+		return super.equals(o);
+	}
+	
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
+	
 	protected void createObject(Player target) {
 		super.sendSceneCreateObject(target);
 		

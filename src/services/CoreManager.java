@@ -3,6 +3,7 @@ package services;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -36,8 +37,8 @@ public class CoreManager extends Manager {
 	
 	static {
 		try {
-			packetOutput = new PrintStream(new FileOutputStream("packets.txt", false));
-		} catch (FileNotFoundException e) {
+			packetOutput = new PrintStream(new FileOutputStream("packets.txt", false), true, "UTF-8");
+		} catch (FileNotFoundException | UnsupportedEncodingException e) {
 			e.printStackTrace();
 			packetOutput = System.out;
 		}
@@ -172,12 +173,12 @@ public class CoreManager extends Manager {
 	private Galaxy getGalaxy() {
 		PreparedStatement getGalaxy = getLocalDatabase().prepareStatement("SELECT * FROM galaxies WHERE id = ?");
 		Config c = getConfig(ConfigFile.PRIMARY);
+		ResultSet set = null;
 		try {
 			getGalaxy.setInt(1, galaxyId);
-			ResultSet set = getGalaxy.executeQuery();
+			set = getGalaxy.executeQuery();
 			if (!set.next()) {
 				System.err.println("CoreManager: No such galaxy exists with ID " + galaxyId + "!");
-				set.close();
 				return null;
 			}
 			Galaxy g = new Galaxy();
@@ -193,10 +194,17 @@ public class CoreManager extends Manager {
 			g.setOnlinePlayerLimit(c.getInt("GALAXY-MAX-ONLINE", 3000));
 			g.setOnlineFreeTrialLimit(c.getInt("GALAXY-MAX-ONLINE", 3000));
 			g.setRecommended(true);
-			set.close();
 			return g;
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			if (set != null) {
+				try {
+					set.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 		return null;
 	}

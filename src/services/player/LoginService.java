@@ -193,11 +193,19 @@ public class LoginService extends Service {
 	}
 	
 	private String getSimilarUsername(String user) throws SQLException {
-		getUserInsensitive.setString(1, user);
-		ResultSet set = getUserInsensitive.executeQuery();
-		if (!set.next())
-			return null;
-		return set.getString("username");
+		ResultSet set = null;
+		try {
+			getUserInsensitive.setString(1, user);
+			set = getUserInsensitive.executeQuery();
+			String similar = null;
+			if (set.next())
+				similar = set.getString("username");
+			set.close();
+			return similar;
+		} finally {
+			if (set != null)
+				set.close();
+		}
 	}
 	
 	private void sendLoginSuccessPacket(Player p) throws SQLException {
@@ -247,43 +255,50 @@ public class LoginService extends Service {
 		Config c = getConfig(ConfigFile.PRIMARY);
 		ResultSet set = getGalaxies.executeQuery();
 		List <Galaxy> galaxies = new ArrayList<Galaxy>();
-		while (set.next()) {
-			Galaxy g = new Galaxy();
-			g.setId(set.getInt("id"));
-			g.setName(set.getString("name"));
-			g.setAddress(set.getString("address"));
-			g.setPopulation(set.getInt("population"));
-			g.setTimeZone(set.getInt("timezone"));
-			g.setZonePort(set.getInt("zone_port"));
-			g.setPingPort(set.getInt("ping_port"));
-			g.setStatus(set.getInt("status"));
-			g.setMaxCharacters(c.getInt("GALAXY-MAX-CHARACTERS", 2));
-			g.setOnlinePlayerLimit(c.getInt("GALAXY-MAX-ONLINE", 3000));
-			g.setOnlineFreeTrialLimit(c.getInt("GALAXY-MAX-ONLINE", 3000));
-			g.setRecommended(true);
-			// If locked, restricted, or full
-			if (p.getAccessLevel() == AccessLevel.ADMIN && g.getStatus() != GalaxyStatus.UP)
-				g.setStatus(GalaxyStatus.UP);
-			galaxies.add(g);
+		try {
+			while (set.next()) {
+				Galaxy g = new Galaxy();
+				g.setId(set.getInt("id"));
+				g.setName(set.getString("name"));
+				g.setAddress(set.getString("address"));
+				g.setPopulation(set.getInt("population"));
+				g.setTimeZone(set.getInt("timezone"));
+				g.setZonePort(set.getInt("zone_port"));
+				g.setPingPort(set.getInt("ping_port"));
+				g.setStatus(set.getInt("status"));
+				g.setMaxCharacters(c.getInt("GALAXY-MAX-CHARACTERS", 2));
+				g.setOnlinePlayerLimit(c.getInt("GALAXY-MAX-ONLINE", 3000));
+				g.setOnlineFreeTrialLimit(c.getInt("GALAXY-MAX-ONLINE", 3000));
+				g.setRecommended(true);
+				// If locked, restricted, or full
+				if (p.getAccessLevel() == AccessLevel.ADMIN && g.getStatus() != GalaxyStatus.UP)
+					g.setStatus(GalaxyStatus.UP);
+				galaxies.add(g);
+			}
+			set.close();
+			return galaxies;
+		} finally {
+			set.close();
 		}
-		set.close();
-		return galaxies;
 	}
 	
 	private SWGCharacter [] getCharacters(int userId) throws SQLException {
 		getCharacters.setInt(1, userId);
 		ResultSet set = getCharacters.executeQuery();
 		List <SWGCharacter> characters = new ArrayList<SWGCharacter>();
-		while (set.next()) {
-			SWGCharacter c = new SWGCharacter();
-			c.setId(set.getInt("id"));
-			c.setName(set.getString("name"));
-			c.setRaceCrc(Race.getRaceByFile(set.getString("race")).getCrc());
-			c.setGalaxyId(set.getInt("galaxyid"));
-			c.setType(1); // 1 = Normal (2 = Jedi, 3 = Spectral)
-			characters.add(c);
+		try {
+			while (set.next()) {
+				SWGCharacter c = new SWGCharacter();
+				c.setId(set.getInt("id"));
+				c.setName(set.getString("name"));
+				c.setRaceCrc(Race.getRaceByFile(set.getString("race")).getCrc());
+				c.setGalaxyId(set.getInt("galaxyid"));
+				c.setType(1); // 1 = Normal (2 = Jedi, 3 = Spectral)
+				characters.add(c);
+			}
+		} finally {
+			set.close();
 		}
-		set.close();
 		return characters.toArray(new SWGCharacter[characters.size()]);
 	}
 	

@@ -1,5 +1,6 @@
 package services.commands;
 
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -103,7 +104,7 @@ public class CommandService extends Service {
 			
 			for (int row = 0; row < baseCommands.getRowCount(); row++) {
 				Command command = new Command((String) baseCommands.getCell(row, 0));
-				command.setCrc(CRC.getCrc(command.getName().toLowerCase()));
+				command.setCrc(CRC.getCrc(command.getName().toLowerCase(Locale.ENGLISH)));
 				// Use cppHook if the scriptHook is empty
 				String callback = (String) baseCommands.getCell(row, 2);
 				command.setScriptCallback((callback.isEmpty() ? baseCommands.getCell(row, 4) : callback) + ".py");

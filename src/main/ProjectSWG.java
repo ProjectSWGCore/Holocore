@@ -46,14 +46,14 @@ public class ProjectSWG {
 	}
 	
 	private void run() {
-		while (!shutdownRequested && (manager == null || (manager != null && !manager.isShutdownRequested()))) {
-			manager = new CoreManager();
+		manager = new CoreManager();
+		while (!shutdownRequested && !manager.isShutdownRequested()) {
 			initialize();
 			start();
 			loop();
 			terminate();
 			if (!shutdownRequested && !manager.isShutdownRequested()) {
-				cleanup();
+				manager = new CoreManager();
 			}
 		}
 	}
@@ -105,12 +105,6 @@ public class ProjectSWG {
 			throw new CoreException("Failed to terminate.");
 		setStatus(ServerStatus.OFFLINE);
 		System.out.println("ProjectSWG: Terminated. Time: " + manager.getCoreTime() + "ms");
-	}
-	
-	private void cleanup() {
-		System.out.println("ProjectSWG: Cleaning up memory...");
-		manager = null;
-		Runtime.getRuntime().gc();
 	}
 	
 	private static class CoreException extends RuntimeException {

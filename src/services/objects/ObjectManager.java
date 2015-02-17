@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import main.ProjectSWG;
+import network.packets.Packet;
 import network.packets.swg.zone.HeartBeatMessage;
 import network.packets.swg.zone.ParametersMessage;
 import network.packets.swg.zone.UpdatePvpStatusMessage;
@@ -130,15 +131,17 @@ public class ObjectManager extends Manager {
 	}
 	
 	private void processGalacticPacketIntent(GalacticPacketIntent gpi) {
-		if (gpi.getPacket() instanceof SelectCharacter) {
+		Packet packet = gpi.getPacket();
+		if (packet instanceof SelectCharacter) {
 			PlayerManager pm = gpi.getPlayerManager();
 			String galaxy = gpi.getGalaxy().getName();
-			long characterId = ((SelectCharacter)gpi.getPacket()).getCharacterId();
+			long characterId = ((SelectCharacter) packet).getCharacterId();
 			zoneInCharacter(pm, galaxy, gpi.getNetworkId(), characterId);
-		} else if (gpi.getPacket() instanceof ObjectController) {
-			ObjectController controller = (ObjectController) gpi.getPacket();
-			if (controller.getControllerData() instanceof DataTransform) {
-				DataTransform trans = (DataTransform) controller.getControllerData();
+		} else if (packet instanceof ObjectController) {
+			ObjectController controller = (ObjectController) packet;
+			ObjectController contData = controller.getControllerData();
+			if (contData instanceof DataTransform) {
+				DataTransform trans = (DataTransform) contData;
 				SWGObject obj = getObjectById(controller.getObjectId());
 				moveObject(obj, trans);
 			}
@@ -222,18 +225,17 @@ public class ObjectManager extends Manager {
 	}
 	
 	private void moveObject(SWGObject obj, DataTransform transform) {
+		if (transform == null)
+			return;
 		removeFromQuadTree(obj);
 		Location newLocation = transform.getLocation();
 		newLocation.setTerrain(obj.getLocation().getTerrain());
-		
-		if (newLocation != null)
-			obj.setLocation(newLocation);
+		obj.setLocation(newLocation);
 		
 		updateAwarenessForObject(obj);
 		addToQuadTree(obj);
 		
-		if (transform != null)
-			obj.sendDataTransforms(transform);
+		obj.sendDataTransforms(transform);
 	}
 	
 	private void updateAwarenessForObject(SWGObject obj) {

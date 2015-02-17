@@ -548,6 +548,16 @@ public class CreatureObject extends TangibleObject {
 		baseAttributes.clearDeltaQueue();
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj);
+	}
+	
+	@Override
+	public int hashCode() {
+		return (super.hashCode() * 7 + posture.getId()) * 13 + race.toString().hashCode();
+	}
+	
 	public void createObject(Player target) {
 		sendSceneCreateObject(target);
 		

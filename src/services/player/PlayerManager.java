@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.Map;
 
 import network.packets.Packet;
@@ -111,7 +112,7 @@ public class PlayerManager extends Manager {
 		synchronized (players) {
 			for (Player p : players.values()) {
 				if (p.getCreatureObject() != null) {
-					String cName = p.getCharacterName().toLowerCase();
+					String cName = p.getCharacterName().toLowerCase(Locale.ENGLISH);
 					if (cName.startsWith(name) && (cName.length() == name.length() || cName.charAt(name.length()) == ' ')) {
 						return p;
 					}
@@ -122,16 +123,17 @@ public class PlayerManager extends Manager {
 	}
 	
 	public long getCharacterIdByName(String name) {
+		long id = 0;
 		try {
 			ResultSet result = loginService.getCharacter(name);
-			if (result.next()) {
-				return result.getLong(0);
-			}
+			if (result.next())
+				id = result.getLong("id");
+			result.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-		return 0;
+		return id;
 	}
 	
 	private void removeDuplicatePlayers(Player player, long charId) {

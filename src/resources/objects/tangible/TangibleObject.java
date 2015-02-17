@@ -114,6 +114,16 @@ public class TangibleObject extends SWGObject {
 		this.objectEffects = objectEffects;
 	}
 	
+	@Override
+	public boolean equals(Object o) {
+		return super.equals(o);
+	}
+	
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
+	
 	protected void createObject(Player target) {
 		super.sendSceneCreateObject(target);
 		

@@ -9,7 +9,7 @@ import resources.objects.intangible.IntangibleObject;
 import resources.player.Player;
 import utilities.Encoder;
 
-public class WaypointObject extends IntangibleObject implements Encodable{
+public class WaypointObject extends IntangibleObject implements Encodable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -55,8 +55,7 @@ public class WaypointObject extends IntangibleObject implements Encodable{
 	public boolean isActive() {
 		return active;
 	}
-
-
+	
 	public void setActive(boolean active) {
 		this.active = active;
 	}
@@ -79,6 +78,22 @@ public class WaypointObject extends IntangibleObject implements Encodable{
 		bb.put((byte) color.getValue());
 		bb.put((byte) (active ? 1 : 0));
 		return bb.array();
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (!super.equals(o))
+			return false;
+		if (o instanceof WaypointObject) {
+			WaypointObject wp = (WaypointObject) o;
+			return wp.name.equals(name) && wp.cellNumber == cellNumber && wp.color == color && wp.active == active;
+		}
+		return false;
+	}
+	
+	@Override
+	public int hashCode() {
+		return ((super.hashCode() * 7 + name.hashCode()) * 13 + color.getValue()) * 17 + cellNumber;
 	}
 	
 	public enum WaypointColor{

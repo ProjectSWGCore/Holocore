@@ -7,9 +7,9 @@ import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
 
 public class WeaponObject extends TangibleObject implements Encodable{
-
+	
 	private static final long serialVersionUID = 1L;
-
+	
 	private float attackSpeed = 0.5f;
 	private float maxRange = 5f;
 	private int type = WeaponType.UNARMED;
@@ -18,38 +18,47 @@ public class WeaponObject extends TangibleObject implements Encodable{
 		super(objectId);
 		setComplexity(0);
 	}
-
 	
 	public float getAttackSpeed() {
 		return attackSpeed;
 	}
-
-
+	
 	public void setAttackSpeed(float attackSpeed) {
 		this.attackSpeed = attackSpeed;
 	}
-
-
+	
 	public float getMaxRange() {
 		return maxRange;
 	}
-
-
+	
 	public void setMaxRange(float maxRange) {
 		this.maxRange = maxRange;
 	}
-
-
+	
 	public int getType() {
 		return type;
 	}
-
-
+	
 	public void setType(int type) {
 		this.type = type;
 	}
-
-
+	
+	@Override
+	public boolean equals(Object o) {
+		if (!super.equals(o))
+			return false;
+		if (o instanceof WeaponObject) {
+			WeaponObject w = (WeaponObject) o;
+			return w.type == type;
+		}
+		return false;
+	}
+	
+	@Override
+	public int hashCode() {
+		return super.hashCode() * 7 + type;
+	}
+	
 	protected void createObject(Player target) {
 		super.sendSceneCreateObject(target);
 		
@@ -61,7 +70,7 @@ public class WeaponObject extends TangibleObject implements Encodable{
 		createBaseline6(target, bb);
 		bb.sendTo(target);
 	}
-
+	
 	public void createBaseline3(Player target, BaselineBuilder bb) {
 		super.createBaseline3(target, bb);
 		
@@ -75,7 +84,7 @@ public class WeaponObject extends TangibleObject implements Encodable{
 		
 		bb.incremeantOperandCount(7);
 	}
-
+	
 	public void createBaseline6(Player target, BaselineBuilder bb) {
 		super.createBaseline6(target, bb);
 
@@ -83,19 +92,15 @@ public class WeaponObject extends TangibleObject implements Encodable{
 		
 		bb.incremeantOperandCount(1);
 	}
-
-
+	
 	public void createBaseline8(Player target, BaselineBuilder bb) {
 		super.createBaseline8(target, bb);
-		
 	}
 	
 	public void createBaseline9(Player target, BaselineBuilder bb) {
 		super.createBaseline9(target, bb);
-		
 	}
-
-
+	
 	@Override
 	public byte[] encode() {
 		BaselineBuilder bb = new BaselineBuilder(this, BaselineType.WEAO, 3);
@@ -112,4 +117,5 @@ public class WeaponObject extends TangibleObject implements Encodable{
 		
 		return ret;
 	}
+	
 }

@@ -27,9 +27,9 @@ public class Mail implements Encodable {
 	}
 	
 	@Override
-	public byte[] encode() {
+	public byte [] encode() {
 		// TODO Auto-generated method stub
-		return null;
+		return new byte[0];
 	}
 
 	public int getId() {

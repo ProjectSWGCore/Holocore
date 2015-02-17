@@ -6,6 +6,7 @@ import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.collections.SWGList;
 import resources.collections.SWGMap;
 import resources.network.BaselineBuilder;
+import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.intangible.IntangibleObject;
 import resources.objects.waypoint.WaypointObject;
@@ -359,7 +360,17 @@ public class PlayerObject extends IntangibleObject {
 		profileFlags.setUpdateCount(0);
 		flagsList.setUpdateCount(0);
 	}
-
+	
+	@Override
+	public boolean equals(Object o) {
+		return super.equals(o);
+	}
+	
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
+	
 	protected void createObject(Player target) {
 		super.sendSceneCreateObject(target);
 		
@@ -386,8 +397,9 @@ public class PlayerObject extends IntangibleObject {
 	}
 	
 	public void createChildrenObjects(Player target) {
-		if (getParent() != null && getParent() instanceof CreatureObject)
-			target.sendPacket(new UpdatePostureMessage(((CreatureObject)getParent()).getPosture().getId(), getObjectId()));
+		SWGObject parent = getParent();
+		if (parent != null && parent instanceof CreatureObject)
+			target.sendPacket(new UpdatePostureMessage(((CreatureObject)parent).getPosture().getId(), getObjectId()));
 		super.createChildrenObjects(target);
 	}
 	
