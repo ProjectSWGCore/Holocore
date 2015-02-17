@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 import main.ProjectSWG;
@@ -238,7 +239,7 @@ public class LoginService extends Service {
 	
 	public ResultSet getCharacter(String character) throws SQLException {
 		PreparedStatement statement = getLocalDatabase().prepareStatement("SELECT * FROM characters WHERE lower(name) = ?");
-		statement.setString(1, character.toLowerCase());
+		statement.setString(1, character.toLowerCase(Locale.ENGLISH));
 		return statement.executeQuery();
 	}
 	
@@ -265,6 +266,7 @@ public class LoginService extends Service {
 				g.setStatus(GalaxyStatus.UP);
 			galaxies.add(g);
 		}
+		set.close();
 		return galaxies;
 	}
 	
@@ -281,6 +283,7 @@ public class LoginService extends Service {
 			c.setType(1); // 1 = Normal (2 = Jedi, 3 = Spectral)
 			characters.add(c);
 		}
+		set.close();
 		return characters.toArray(new SWGCharacter[characters.size()]);
 	}
 	
