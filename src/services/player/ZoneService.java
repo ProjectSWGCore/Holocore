@@ -31,6 +31,8 @@ import network.packets.swg.zone.GalaxyLoopTimesRequest;
 import network.packets.swg.zone.GalaxyLoopTimesResponse;
 import network.packets.swg.zone.HeartBeatMessage;
 import network.packets.swg.zone.SetWaypointColor;
+import network.packets.swg.zone.spatial.GetMapLocationsMessage;
+import network.packets.swg.zone.spatial.GetMapLocationsResponseMessage;
 import resources.Galaxy;
 import resources.Location;
 import resources.Race;
@@ -98,8 +100,15 @@ public class ZoneService extends Service {
 			handleCmdSceneReady(player, (CmdSceneReady) p);
 		if (p instanceof SetWaypointColor)
 			handleSetWaypointColor(player, (SetWaypointColor) p);
+		if (p instanceof GetMapLocationsMessage)
+			handleMapLocationsResponse(player, (GetMapLocationsMessage) p);
 	}
 	
+	private void handleMapLocationsResponse(Player player, GetMapLocationsMessage p) {
+		// TODO Implement actual handling in GU2, this is to avoid constant map location requests from the client
+		player.sendPacket(new GetMapLocationsResponseMessage(p.getPlanet()));
+	}
+
 	private void handleSetWaypointColor(Player player, SetWaypointColor p) {
 		// TODO Should move this to a different service, maybe make a service for other packets similar to this (ie misc.)
 		PlayerObject ghost = (PlayerObject) player.getPlayerObject();

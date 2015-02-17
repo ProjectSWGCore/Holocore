@@ -11,12 +11,14 @@ public class RequestWaypointCmdCallback implements ICmdCallback {
 
 	@Override
 	public void execute(ObjectManager objManager, Player player, SWGObject target, String args) {
+		// Args: (^-,=+_)color_1(,+-=_^)=1 planet x 0.0 z
 		PlayerObject ghost = (PlayerObject) player.getPlayerObject();
 		if (ghost == null)
 			return;
 		
+		String[] cmd = args.split(" ", 5);
 		WaypointObject waypoint = (WaypointObject) objManager.createObject("object/waypoint/shared_waypoint.iff", player.getCreatureObject().getLocation());
+		waypoint.setLocation(Double.valueOf(cmd[2]), 0, Double.valueOf(cmd[4]));
 		ghost.addWaypoint(waypoint);
 	}
-
 }
