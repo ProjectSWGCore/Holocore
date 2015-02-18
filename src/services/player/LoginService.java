@@ -94,7 +94,7 @@ public class LoginService extends Service {
 	private void handleCharDeletion(GalacticIntent intent, Player player, DeleteCharacterRequest request) {
 		SWGObject obj = intent.getObjectManager().deleteObject(request.getPlayerId());
 		if (obj != null && obj instanceof CreatureObject)
-			System.out.println("LoginService: Delete Character: " + ((CreatureObject)obj).getName() + "  User: " + player.getUsername() + "  IP: " + request.getAddress() + ":" + request.getPort());
+			System.out.println("[" + player.getUsername() + "] Delete Character: " + ((CreatureObject)obj).getName() + ". IP: " + request.getAddress() + ":" + request.getPort());
 		sendPacket(player, new DeleteCharacterResponse(deleteCharacter(request.getPlayerId())));
 	}
 	
