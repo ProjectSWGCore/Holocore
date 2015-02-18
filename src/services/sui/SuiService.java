@@ -78,17 +78,13 @@ public class SuiService extends Service {
 	}
 	
 	private void handleObjectController(Player player, ObjectController objController) {
-		ObjectController controller = objController.getController();
-		if (controller instanceof ObjectMenuRequest)
-			handleRadialMenuRequest(player, (ObjectMenuRequest) controller);
+		if (objController instanceof ObjectMenuRequest)
+			handleRadialMenuRequest(player, (ObjectMenuRequest) objController);
 	}
 	
 	private void handleRadialMenuRequest(Player player, ObjectMenuRequest request) {
 		// TODO: Modify when object scripts are in to accept a createRadial definition for radials
-		ObjectMenuResponse response = new ObjectMenuResponse(request.getTargetId(), request.getRequesterId(), request.getOptions(), request.getCounter());
-		ObjectController controller = new ObjectController(ObjectMenuResponse.CRC, player.getCreatureObject().getObjectId(), response);
-		
-		player.sendPacket(controller);
+		player.sendPacket(new ObjectMenuResponse(player.getCreatureObject().getObjectId(), request.getTargetId(), request.getRequesterId(), request.getOptions(), request.getCounter()));
 	}
 	
 	private void handleSuiWindowIntent(SuiWindowIntent i) {

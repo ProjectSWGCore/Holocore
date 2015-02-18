@@ -6,7 +6,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import network.packets.Packet;
 import network.packets.swg.zone.object_controller.CommandQueueEnqueue;
-import network.packets.swg.zone.object_controller.ObjectController;
 import intents.GalacticPacketIntent;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
@@ -47,11 +46,8 @@ public class CommandService extends Service {
 			long netId = ((GalacticPacketIntent) i).getNetworkId();
 			Player player = ((GalacticPacketIntent) i).getPlayerManager().getPlayerFromNetworkId(netId);
 			if (player != null) {
-				if (p instanceof ObjectController) {
-					ObjectController controller = ((ObjectController) p).getController();
-					if (controller == null)
-						return;
-
+				if (p instanceof CommandQueueEnqueue) {
+					CommandQueueEnqueue controller = (CommandQueueEnqueue) p;
 					if (controller instanceof CommandQueueEnqueue)
 						handleCommandRequest(player, ((GalacticPacketIntent) i).getObjectManager(), (CommandQueueEnqueue) controller);
 				}
@@ -61,13 +57,13 @@ public class CommandService extends Service {
 	}
 
 	private void handleCommandRequest(Player player, ObjectManager objManager, CommandQueueEnqueue request) {
-		if (!commands.containsKey(request.getCrc()))
+		if (!commands.containsKey(request.getCommandCrc()))
 			return;
 //		System.out.println(commands.get(request.getCrc()).toString());
 		SWGObject target = null;
 		if (request.getTargetId() != 0) { target = objManager.getObjectById(request.getTargetId()); }
 		
-		executeCommand(objManager, player, commands.get(request.getCrc()), target, request.getArguments());
+		executeCommand(objManager, player, commands.get(request.getCommandCrc()), target, request.getArguments());
 	}
 	
 	private void executeCommand(ObjectManager objManager, Player player, Command command, SWGObject target, String args) {

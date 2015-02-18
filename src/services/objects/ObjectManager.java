@@ -138,11 +138,9 @@ public class ObjectManager extends Manager {
 			long characterId = ((SelectCharacter) packet).getCharacterId();
 			zoneInCharacter(pm, galaxy, gpi.getNetworkId(), characterId);
 		} else if (packet instanceof ObjectController) {
-			ObjectController controller = (ObjectController) packet;
-			ObjectController contData = controller.getControllerData();
-			if (contData instanceof DataTransform) {
-				DataTransform trans = (DataTransform) contData;
-				SWGObject obj = getObjectById(controller.getObjectId());
+			if (packet instanceof DataTransform) {
+				DataTransform trans = (DataTransform) packet;
+				SWGObject obj = getObjectById(trans.getObjectId());
 				moveObject(obj, trans);
 			}
 		}

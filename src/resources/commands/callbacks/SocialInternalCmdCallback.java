@@ -2,7 +2,6 @@ package resources.commands.callbacks;
 
 import java.util.List;
 
-import network.packets.swg.zone.object_controller.ObjectController;
 import network.packets.swg.zone.object_controller.PlayerEmote;
 import resources.commands.ICmdCallback;
 import resources.objects.SWGObject;
@@ -19,15 +18,16 @@ public class SocialInternalCmdCallback implements ICmdCallback {
 		if (!cmd[0].equals("0"))
 			target = objManager.getObjectById(Long.parseLong(cmd[0]));
 		
-		PlayerEmote emote = new PlayerEmote(player.getCreatureObject().getObjectId(), ((target == null) ? 0 : target.getObjectId()), Short.valueOf(cmd[1]));
-		player.sendPacket(new ObjectController(PlayerEmote.CRC, player.getCreatureObject().getObjectId(), emote));
+		long objectId = player.getCreatureObject().getObjectId();
+		PlayerEmote emote = new PlayerEmote(objectId, objectId, ((target == null) ? 0 : target.getObjectId()), Short.valueOf(cmd[1]));
+		player.sendPacket(emote);
 		
 		List<Player> observers = player.getCreatureObject().getObservers();
 		for (Player observer : observers) {
 			if (observer.getCreatureObject() == null)
 				continue;
 			
-			observer.sendPacket(new ObjectController(PlayerEmote.CRC, observer.getCreatureObject().getObjectId(), emote));
+			observer.sendPacket(emote);
 		}
 	}
 }

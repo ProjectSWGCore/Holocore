@@ -29,7 +29,6 @@ import network.packets.swg.zone.chat.ChatPersistentMessageToServer;
 import network.packets.swg.zone.chat.ChatRequestPersistentMessage;
 import network.packets.swg.zone.chat.ChatSystemMessage;
 import network.packets.swg.zone.chat.ChatSystemMessage.SystemChatType;
-import network.packets.swg.zone.object_controller.ObjectController;
 import network.packets.swg.zone.object_controller.SpatialChat;
 import resources.Terrain;
 import resources.control.Intent;
@@ -174,15 +173,15 @@ public class ChatService extends Service {
 		SWGObject actor = sender.getCreatureObject();
 		
 		// Send to self
-		SpatialChat message = new SpatialChat(actor.getObjectId(), 0, i.getMessage(), i.getChatType(), i.getMoodId());
-		sender.sendPacket(new ObjectController(SpatialChat.CRC, actor.getObjectId(), message));
+		SpatialChat message = new SpatialChat(actor.getObjectId(), actor.getObjectId(), 0, i.getMessage(), (short) i.getChatType(), (short) i.getMoodId());
+		sender.sendPacket(message);
 		
 		// Notify observers of the chat message
 		for (Player observer : actor.getObservers()) {
 			if (observer.getCreatureObject() == null)
 				continue;
-			long id = observer.getCreatureObject().getObjectId();
-			observer.sendPacket(new ObjectController(SpatialChat.CRC, id, message));
+			message.setObjectId(observer.getCreatureObject().getObjectId());
+			observer.sendPacket(message);
 		}
 	}
 	
