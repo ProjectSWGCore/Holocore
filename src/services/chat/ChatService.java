@@ -335,11 +335,11 @@ public class ChatService extends Service {
 		
 		switch (requestType) {
 			case FULL_MESSAGE:
-				packet = new ChatPersistentMessageToClient((byte) 0, mail.getSender(), galaxy, mail.getId(), mail.getSubject(), mail.getMessage(), mail.getTimestamp(), mail.getStatus()); 
+				packet = new ChatPersistentMessageToClient(false, mail.getSender(), galaxy, mail.getId(), mail.getSubject(), mail.getMessage(), mail.getTimestamp(), mail.getStatus()); 
 				break;
 			case HEADER_ONLY:
 			default: 
-				packet = new ChatPersistentMessageToClient((byte) 1, mail.getSender(), galaxy, mail.getId(), mail.getSubject(), "", mail.getTimestamp(), mail.getStatus());
+				packet = new ChatPersistentMessageToClient(true, mail.getSender(), galaxy, mail.getId(), mail.getSubject(), "", mail.getTimestamp(), mail.getStatus());
 				break;
 		}
 		
