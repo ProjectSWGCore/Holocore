@@ -68,9 +68,9 @@ public class ZoneService extends Service {
 	private PreparedStatement getCharacter;
 	
 	public ZoneService() {
-		nameGenerator = new SWGNameGenerator();
 		clientFac = new ClientFactory();
 		nameFilter = new NameFilter("namegen/bad_word_list.txt", "namegen/reserved_words.txt");
+		nameGenerator = new SWGNameGenerator(nameFilter);
 	}
 	
 	@Override
