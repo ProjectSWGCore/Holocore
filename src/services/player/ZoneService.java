@@ -169,7 +169,7 @@ public class ZoneService extends Service {
 	}
 	
 	private void handleCharCreation(ObjectManager objManager, Player player, ClientCreateCharacter create) {
-		System.out.println("ZoneService: Create Character: " + create.getName() + "  User: " + player.getUsername() + "  IP: " + create.getAddress() + ":" + create.getPort());
+		System.out.println("[" + player.getUsername() + "] Create Character: " + create.getName() + ". IP: " + create.getAddress() + ":" + create.getPort());
 		long characterId = createCharacter(objManager, player, create);
 		
 		ErrorMessage err = getNameValidity(create.getName(), player.getAccessLevel() != AccessLevel.PLAYER);
