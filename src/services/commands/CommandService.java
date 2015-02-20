@@ -121,5 +121,6 @@ public class CommandService extends Service {
 		registerCallback("server", new ServerCmdCallback());
 		registerCallback("getAttributesBatch", new AttributesCmdCallback());
 		registerCallback("socialInternal", new SocialInternalCmdCallback());
+		registerCallback("sitServer", new SitOnObjectCmdCallback());
 	}
 }
