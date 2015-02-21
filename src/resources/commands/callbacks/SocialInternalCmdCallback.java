@@ -26,8 +26,7 @@ public class SocialInternalCmdCallback implements ICmdCallback {
 		for (Player observer : observers) {
 			if (observer.getCreatureObject() == null)
 				continue;
-			
-			observer.sendPacket(emote);
+			observer.sendPacket(new PlayerEmote(observer.getCreatureObject().getObjectId(), emote));
 		}
 	}
 }

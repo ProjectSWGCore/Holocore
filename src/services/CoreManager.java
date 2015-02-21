@@ -155,11 +155,21 @@ public class CoreManager extends Manager {
 	
 	private void outputSWG(SWGPacket p) {
 		if (p instanceof Baseline)
-			packetOutput.println("Baseline " + ((Baseline)p).getType() + " " + ((Baseline)p).getNum());
+			outputBaseline((Baseline) p);
 		else if (p instanceof ObjectController)
-			packetOutput.println("ObjectController 0x" + Integer.toHexString(((ObjectController)p).getControllerCrc()));
+			outputObjectController((ObjectController) p);
 		else
 			packetOutput.println(p.getClass().getSimpleName());
+	}
+	
+	private void outputBaseline(Baseline b) {
+		packetOutput.println("Baseline [" + b.getId() + "] " + b.getType() + " " + b.getNum());
+	}
+	
+	private void outputObjectController(ObjectController cont) {
+		int crc = cont.getControllerCrc();
+		long id = cont.getObjectId();
+		packetOutput.println("ObjectController [" + id + "] 0x" + Integer.toHexString(crc));
 	}
 	
 	/**
