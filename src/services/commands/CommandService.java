@@ -55,7 +55,7 @@ public class CommandService extends Service {
 		}
 		// TODO: Call Command intent to allow other services/managers to perform a command callback
 	}
-
+	
 	private void handleCommandRequest(Player player, ObjectManager objManager, CommandQueueEnqueue request) {
 		if (!commands.containsKey(request.getCommandCrc()))
 			return;
@@ -122,5 +122,6 @@ public class CommandService extends Service {
 		registerCallback("getAttributesBatch", new AttributesCmdCallback());
 		registerCallback("socialInternal", new SocialInternalCmdCallback());
 		registerCallback("sitServer", new SitOnObjectCmdCallback());
+		registerCallback("stand", new StandCmdCallback());
 	}
 }

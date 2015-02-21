@@ -32,7 +32,7 @@ import services.galaxy.GalacticManager;
 public class CoreManager extends Manager {
 	
 	private static final int galaxyId = 1;
-	private static final boolean debugOutput = false;
+	private static final boolean debugOutput = true;
 	private static PrintStream packetOutput;
 	
 	static {
