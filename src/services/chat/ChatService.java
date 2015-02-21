@@ -180,8 +180,7 @@ public class ChatService extends Service {
 		for (Player observer : actor.getObservers()) {
 			if (observer.getCreatureObject() == null)
 				continue;
-			message.setObjectId(observer.getCreatureObject().getObjectId());
-			observer.sendPacket(message);
+			observer.sendPacket(new SpatialChat(observer.getCreatureObject().getObjectId(), message));
 		}
 	}
 	
