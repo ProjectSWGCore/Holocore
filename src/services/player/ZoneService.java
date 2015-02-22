@@ -197,7 +197,7 @@ public class ZoneService extends Service {
 			try {
 				createCharacter.setLong(1, characterId);
 				createCharacter.setString(2, name);
-				createCharacter.setString(3, ((CreatureObject) player.getCreatureObject()).getRace().getFilename());
+				createCharacter.setString(3, player.getCreatureObject().getRace().getFilename());
 				createCharacter.setInt(4, player.getUserId());
 				createCharacter.setInt(5, player.getGalaxyId());
 				return createCharacter.executeUpdate() == 1;

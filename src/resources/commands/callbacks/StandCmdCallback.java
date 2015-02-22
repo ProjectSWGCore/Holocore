@@ -12,7 +12,7 @@ public class StandCmdCallback implements ICmdCallback {
 	
 	@Override
 	public void execute(ObjectManager objManager, Player player, SWGObject target, String args) {
-		CreatureObject creature = (CreatureObject) player.getCreatureObject(); 
+		CreatureObject creature = player.getCreatureObject(); 
 		creature.setPosture(Posture.UPRIGHT);
 		creature.sendObservers(new PostureUpdate(creature.getObjectId(), Posture.UPRIGHT));
 	}
