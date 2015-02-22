@@ -21,7 +21,9 @@ import network.packets.swg.zone.insertion.CmdStartScene;
 import network.packets.swg.zone.insertion.SelectCharacter;
 import network.packets.swg.zone.object_controller.DataTransform;
 import network.packets.swg.zone.object_controller.ObjectController;
+import network.packets.swg.zone.object_controller.PostureUpdate;
 import resources.Location;
+import resources.Posture;
 import resources.Race;
 import resources.Terrain;
 import resources.client_info.ClientFactory;
@@ -233,6 +235,10 @@ public class ObjectManager extends Manager {
 		updateAwarenessForObject(obj);
 		addToQuadTree(obj);
 		
+		if (obj instanceof CreatureObject && transform.getSpeed() > 1E-3) {
+			((CreatureObject) obj).setPosture(Posture.UPRIGHT);
+			((CreatureObject) obj).sendObservers(new PostureUpdate(obj.getObjectId(), Posture.UPRIGHT));
+		}
 		obj.sendDataTransforms(transform);
 	}
 	

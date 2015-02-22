@@ -201,7 +201,7 @@ public class CreatureObject extends TangibleObject {
 	
 	public void setPosture(Posture posture) {
 		this.posture = posture;
-		sendDelta(3, 14, posture.getId());
+		sendDelta(3, 13, posture.getId());
 	}
 	
 	public void setRace(Race race) {
