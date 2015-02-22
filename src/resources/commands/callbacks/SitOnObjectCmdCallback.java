@@ -15,7 +15,7 @@ public class SitOnObjectCmdCallback implements ICmdCallback {
 	
 	@Override
 	public void execute(ObjectManager objManager, Player player,SWGObject target, String args) {
-		CreatureObject creature = (CreatureObject) player.getCreatureObject();
+		CreatureObject creature = player.getCreatureObject();
 		
 		if (creature.getPosture() == Posture.DEAD || creature.getPosture() == Posture.INCAPACITATED)
 			return;
@@ -28,7 +28,7 @@ public class SitOnObjectCmdCallback implements ICmdCallback {
 			float x = Float.valueOf(cmd[0]);
 			float y = Float.valueOf(cmd[1]);
 			float z = Float.valueOf(cmd[2]);
-			long cellid = Long.valueOf(cmd[3]);
+			long cellid = Long.parseLong(cmd[3]);
 			
 			sot = new SitOnObject(objectID, cellid, x, y, z);
 			creature.setStatesBitmask(32768);

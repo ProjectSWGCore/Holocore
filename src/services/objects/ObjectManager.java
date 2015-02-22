@@ -294,11 +294,11 @@ public class ObjectManager extends Manager {
 			return;
 		player.setPlayerState(PlayerState.ZONING_IN);
 		verifyPlayerObjectsSet(player, characterId);
-		long objId = player.getCreatureObject().getObjectId();
-		Race race = ((CreatureObject) player.getCreatureObject()).getRace();
-		Location l = player.getCreatureObject().getLocation();
+		CreatureObject creature = player.getCreatureObject();
+		long objId = creature.getObjectId();
+		Race race = creature.getRace();
+		Location l = creature.getLocation();
 		long time = (long)(ProjectSWG.getCoreTime()/1E3);
-		CreatureObject creature = (CreatureObject) player.getCreatureObject();
 		sendPacket(player, new HeartBeatMessage());
 		sendPacket(player, new ChatServerStatus(true));
 		sendPacket(player, new VoiceChatStatus());
@@ -321,7 +321,11 @@ public class ObjectManager extends Manager {
 			System.err.println("ObjectManager: Failed to start zone - CreatureObject could not be fetched from database [Character: " + characterId + "  User: " + player.getUsername() + "]");
 			return;
 		}
-		player.setCreatureObject(creature);
+		if (!(creature instanceof CreatureObject)) {
+			System.err.println("ObjectManager: Failed to start zone - Object is not a CreatureObject for ID " + characterId);
+			return;
+		}
+		player.setCreatureObject((CreatureObject) creature);
 		creature.setOwner(player);
 		
 		if (player.getPlayerObject() == null) {

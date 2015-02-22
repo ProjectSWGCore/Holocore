@@ -16,7 +16,6 @@ import resources.common.CRC;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.SWGObject;
-import resources.objects.creature.CreatureObject;
 import resources.player.AccessLevel;
 import resources.player.Player;
 import resources.utilities.Scripts;
@@ -42,14 +41,14 @@ public class CommandService extends Service {
 	@Override
 	public void onIntentReceived(Intent i) {
 		if (i instanceof GalacticPacketIntent) {
-			Packet p = ((GalacticPacketIntent) i).getPacket();
-			long netId = ((GalacticPacketIntent) i).getNetworkId();
-			Player player = ((GalacticPacketIntent) i).getPlayerManager().getPlayerFromNetworkId(netId);
+			GalacticPacketIntent gpi = (GalacticPacketIntent) i;
+			Packet p = gpi.getPacket();
+			long netId = gpi.getNetworkId();
+			Player player = gpi.getPlayerManager().getPlayerFromNetworkId(netId);
 			if (player != null) {
 				if (p instanceof CommandQueueEnqueue) {
 					CommandQueueEnqueue controller = (CommandQueueEnqueue) p;
-					if (controller instanceof CommandQueueEnqueue)
-						handleCommandRequest(player, ((GalacticPacketIntent) i).getObjectManager(), (CommandQueueEnqueue) controller);
+					handleCommandRequest(player, gpi.getObjectManager(), controller);
 				}
 			}
 		}
@@ -67,8 +66,7 @@ public class CommandService extends Service {
 	}
 	
 	private void executeCommand(ObjectManager objManager, Player player, Command command, SWGObject target, String args) {
-		CreatureObject playerCreo = (CreatureObject) player.getCreatureObject();
-		if (playerCreo == null)
+		if (player.getCreatureObject() == null)
 			return;
 		
 		if (command.getGodLevel() > 0 && player.getAccessLevel() == AccessLevel.PLAYER)

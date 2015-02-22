@@ -4,6 +4,7 @@ import intents.GalacticIntent;
 import intents.LoginEventIntent;
 import intents.LoginEventIntent.LoginEvent;
 
+import java.nio.charset.Charset;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
