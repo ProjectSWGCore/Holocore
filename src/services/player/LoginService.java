@@ -4,7 +4,6 @@ import intents.GalacticIntent;
 import intents.LoginEventIntent;
 import intents.LoginEventIntent.LoginEvent;
 
-import java.nio.charset.Charset;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -28,6 +27,7 @@ import network.packets.swg.login.LoginClientId;
 import network.packets.swg.login.LoginClientToken;
 import network.packets.swg.login.LoginClusterStatus;
 import network.packets.swg.login.LoginEnumCluster;
+import network.packets.swg.login.LoginIncorrectClientId;
 import network.packets.swg.login.ServerId;
 import network.packets.swg.login.ServerString;
 import network.packets.swg.login.StationIdHasJediSlot;
@@ -43,6 +43,7 @@ import resources.player.Player;
 import resources.player.PlayerState;
 import resources.server_info.RelationalDatabase;
 import resources.services.Config;
+import services.EngineManager;
 
 public class LoginService extends Service {
 	
@@ -82,6 +83,13 @@ public class LoginService extends Service {
 			handleLogin(player, (LoginClientId) p);
 		if (p instanceof DeleteCharacterRequest)
 			handleCharDeletion(intent, player, (DeleteCharacterRequest) p);
+	}
+	
+	private String getServerString() {
+		Config c = getConfig(ConfigFile.PRIMARY);
+		String name = c.getString("LOGIN-SERVER-NAME", "LoginServer");
+		int id = c.getInt("LOGIN-SERVER-ID", 1);
+		return name + ":" + id;
 	}
 	
 	private void sendServerInfo(Player player) {
@@ -179,7 +187,8 @@ public class LoginService extends Service {
 			
 		}
 		message += "\n\nMake sure to login to forums first!";
-		sendPacket(player.getNetworkId(), new ErrorMessage(type, message, false));
+		sendPacket(player, new LoginIncorrectClientId(getServerString(), EngineManager.SERVER_VERSION));
+		sendPacket(player, new ErrorMessage(type, message, false));
 		System.err.println("[" + id.getUsername() + "] Invalid user/pass combo! IP: " + id.getAddress() + ":" + id.getPort());
 		player.setPlayerState(PlayerState.DISCONNECTED);
 		new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_FAIL_INVALID_USER_PASS).broadcast();
