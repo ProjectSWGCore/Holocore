@@ -109,13 +109,18 @@ public class PlayerManager extends Manager {
 	}
 	
 	public Player getPlayerByCreatureFirstName(String name) {
+		if (name == null || name.isEmpty())
+			return null;
+		name = name.trim().toLowerCase(Locale.ENGLISH);
 		synchronized (players) {
 			for (Player p : players.values()) {
 				if (p.getCreatureObject() != null) {
 					String cName = p.getCharacterName().toLowerCase(Locale.ENGLISH);
-					if (cName.startsWith(name) && (cName.length() == name.length() || cName.charAt(name.length()) == ' ')) {
+					if (cName.equals(name))
 						return p;
-					}
+					int spaceIndex = cName.indexOf(' ');
+					if (spaceIndex != -1 && cName.substring(0, spaceIndex).equals(name))
+						return p;
 				}
 			}
 		}
