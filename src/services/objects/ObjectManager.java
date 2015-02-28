@@ -1,6 +1,7 @@
 package services.objects;
 
 import intents.GalacticPacketIntent;
+import intents.ObjectTeleportIntent;
 import intents.PlayerEventIntent;
 import intents.swgobject_events.SWGObjectEventIntent;
 
@@ -65,6 +66,7 @@ public class ObjectManager extends Manager {
 		registerForIntent(SWGObjectEventIntent.TYPE);
 		registerForIntent(GalacticPacketIntent.TYPE);
 		registerForIntent(PlayerEventIntent.TYPE);
+		registerForIntent(ObjectTeleportIntent.TYPE);
 		loadQuadTree();
 		loadObjects();
 		clientFac = new ClientFactory();
@@ -129,9 +131,27 @@ public class ObjectManager extends Manager {
 				obj.setOwner(null);
 				obj.clearAware();
 			}
+		}else if(i instanceof ObjectTeleportIntent){
+			processObjectTeleportIntent((ObjectTeleportIntent) i);
 		}
 	}
 	
+	private void processObjectTeleportIntent(ObjectTeleportIntent oti) {
+		SWGObject object = oti.getObject();
+			
+		removeFromQuadTree(object);
+		object.setLocation(oti.getNewLocation());
+
+		
+		if(object instanceof CreatureObject && object.getOwner() != null){
+			sendPacket(object.getOwner(), new CmdStartScene(false, object.getObjectId(), ((CreatureObject)object).getRace(), object.getLocation(), (long)(ProjectSWG.getCoreTime()/1E3)));
+			((CreatureObject)object).createObject(object.getOwner());
+		}
+		updateAwarenessForObject(object);
+		addToQuadTree(object);
+				
+	}
+
 	private void processGalacticPacketIntent(GalacticPacketIntent gpi) {
 		Packet packet = gpi.getPacket();
 		if (packet instanceof SelectCharacter) {
@@ -340,5 +360,5 @@ public class ObjectManager extends Manager {
 			return maxObjectId++;
 		}
 	}
-	
+
 }

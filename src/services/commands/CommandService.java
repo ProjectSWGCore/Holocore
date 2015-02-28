@@ -121,5 +121,6 @@ public class CommandService extends Service {
 		registerCallback("socialInternal", new SocialInternalCmdCallback());
 		registerCallback("sitServer", new SitOnObjectCmdCallback());
 		registerCallback("stand", new StandCmdCallback());
+		registerCallback("teleport", new AdminTeleportCallback());
 	}
 }
