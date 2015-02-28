@@ -4,6 +4,7 @@ import intents.GalacticPacketIntent;
 import intents.PlayerEventIntent;
 import intents.swgobject_events.SWGObjectEventIntent;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -26,13 +27,10 @@ import resources.Location;
 import resources.Posture;
 import resources.Race;
 import resources.Terrain;
-import resources.client_info.ClientFactory;
-import resources.client_info.visitors.ObjectData;
-import resources.client_info.visitors.SlotArrangementData;
-import resources.client_info.visitors.SlotDescriptorData;
 import resources.control.Intent;
 import resources.control.Manager;
 import resources.objects.SWGObject;
+import resources.objects.buildouts.BuildoutLoader;
 import resources.objects.creature.CreatureObject;
 import resources.objects.quadtree.QuadTree;
 import resources.objects.waypoint.WaypointObject;
@@ -48,13 +46,13 @@ public class ObjectManager extends Manager {
 	
 	private static final double AWARE_RANGE = 200;
 	
-	private ClientFactory clientFac;
-	
-	private ObjectDatabase<SWGObject> objects;
-	private Map <Terrain, QuadTree <SWGObject>> quadTree;
+	private final Map <Long, List <SWGObject>> buildoutObjects;
+	private final ObjectDatabase<SWGObject> objects;
+	private final Map <Terrain, QuadTree <SWGObject>> quadTree;
 	private long maxObjectId;
 	
 	public ObjectManager() {
+		buildoutObjects = new HashMap<Long, List<SWGObject>>();
 		objects = new CachedObjectDatabase<SWGObject>("odb/objects.db");
 		quadTree = new HashMap<Terrain, QuadTree<SWGObject>>();
 		maxObjectId = 1;
@@ -67,7 +65,7 @@ public class ObjectManager extends Manager {
 		registerForIntent(PlayerEventIntent.TYPE);
 		loadQuadTree();
 		loadObjects();
-		clientFac = new ClientFactory();
+		loadBuildouts();
 		return super.initialize();
 	}
 	
@@ -92,6 +90,40 @@ public class ObjectManager extends Manager {
 		});
 		double loadTime = (System.nanoTime() - startLoad) / 1E6;
 		System.out.printf("ObjectManager: Finished loading %d objects. Time: %fms%n", objects.size(), loadTime);
+	}
+	
+	private void loadBuildouts() {
+		boolean enableBuildouts = false;
+		if (enableBuildouts) {
+			long startLoad = System.nanoTime();
+			System.out.println("ObjectManager: Loading buildouts...");
+			List <SWGObject> buildouts = null;
+//			buildouts = BuildoutLoader.loadAllBuildouts();
+			buildouts = BuildoutLoader.loadBuildoutsForTerrain(Terrain.CORELLIA);
+			for (SWGObject obj : buildouts) {
+				loadBuildout(obj);
+			}
+			double loadTime = (System.nanoTime() - startLoad) / 1E6;
+			System.out.printf("ObjectManager: Finished loading buildouts. Time: %fms%n", loadTime);
+		} else {
+			System.out.println("ObjectManager: Buildouts not loaded. Reason: Disabled!");
+		}
+	}
+	
+	private void loadBuildout(SWGObject obj) {
+		loadObject(obj);
+		List <SWGObject> idCollisions = buildoutObjects.get(obj.getObjectId());
+		if (idCollisions == null)
+			buildoutObjects.put(obj.getObjectId(), idCollisions = new ArrayList<SWGObject>());
+		boolean duplicate = false;
+		for (SWGObject dup : idCollisions) {
+			if (dup.getLocation().equals(obj.getLocation()) && dup.getTemplate().equals(obj.getTemplate())) {
+				duplicate = true;
+				break;
+			}
+		}
+		if (!duplicate)
+			idCollisions.add(obj);
 	}
 	
 	private void loadObject(SWGObject obj) {
@@ -188,8 +220,6 @@ public class ObjectManager extends Manager {
 				System.err.println("ObjectManager: Unable to create object with template " + template);
 				return null;
 			}
-			addObjectAttributes(obj, template);
-			obj.setTemplate(template);
 			obj.setLocation(l);
 			updateAwarenessForObject(obj);
 			addToQuadTree(obj);
@@ -246,46 +276,23 @@ public class ObjectManager extends Manager {
 		Location location = obj.getLocation();
 		if (location == null || location.getTerrain() == null)
 			return;
-		List <Player> updatedAware = new LinkedList<Player>();
+		List <SWGObject> objectAware = new LinkedList<SWGObject>();
 		double x = location.getX();
 		double y = location.getZ();
 		QuadTree<SWGObject> tree = quadTree.get(location.getTerrain());
 		synchronized (tree) {
 			List <SWGObject> range = tree.getWithinRange(x, y, AWARE_RANGE);
 			for (SWGObject inRange : range) {
-				if (inRange.getOwner() != null && inRange.getObjectId() != obj.getObjectId()) {
-					updatedAware.add(inRange.getOwner());
+				if (inRange.getObjectId() != obj.getObjectId()) {
+					if (inRange instanceof CreatureObject) {
+						if (inRange.getOwner() != null)
+							objectAware.add(inRange);
+					} else
+						objectAware.add(inRange);
 				}
 			}
 		}
-		obj.updateAwareness(updatedAware);
-	}
-	
-	private void addObjectAttributes(SWGObject obj, String template) {
-		ObjectData attributes = (ObjectData) clientFac.getInfoFromFile(ClientFactory.formatToSharedFile(template));
-		
-		obj.setStf((String) attributes.getAttribute(ObjectData.OBJ_STF));
-		obj.setDetailStf((String) attributes.getAttribute(ObjectData.DETAIL_STF));
-		obj.setVolume((Integer) attributes.getAttribute(ObjectData.VOLUME_LIMIT));
-		
-		addSlotsToObject(obj, attributes);
-	}
-	
-	private void addSlotsToObject(SWGObject obj, ObjectData attributes) {
-		if (attributes.getAttribute(ObjectData.SLOT_DESCRIPTOR) != null) {
-			// These are the slots that the object *HAS*
-			SlotDescriptorData descriptor = (SlotDescriptorData) clientFac.getInfoFromFile((String) attributes.getAttribute(ObjectData.SLOT_DESCRIPTOR));
-			
-			for (String slotName : descriptor.getSlots()) {
-				obj.addObjectSlot(slotName, null);
-			}
-		}
-		
-		if (attributes.getAttribute(ObjectData.ARRANGEMENT_FILE) != null) {
-			// This is what slots the object *USES*
-			SlotArrangementData arrangementData = (SlotArrangementData) clientFac.getInfoFromFile((String) attributes.getAttribute(ObjectData.ARRANGEMENT_FILE));
-			obj.setArrangment(arrangementData.getArrangement());
-		}
+		obj.updateObjectAwareness(objectAware);
 	}
 	
 	private void zoneInCharacter(PlayerManager playerManager, String galaxy, long netId, long characterId) {
