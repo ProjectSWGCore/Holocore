@@ -8,12 +8,13 @@ import resources.objects.player.PlayerObject;
 import resources.objects.waypoint.WaypointObject;
 import resources.objects.waypoint.WaypointObject.WaypointColor;
 import resources.player.Player;
+import services.galaxy.GalacticManager;
 import services.objects.ObjectManager;
 
 public class WaypointCmdCallback implements ICmdCallback {
 
 	@Override
-	public void execute(ObjectManager objManager, Player player, SWGObject target, String args) {
+	public void execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
 		PlayerObject ghost = (PlayerObject) player.getPlayerObject();
 		if (ghost == null)
 			return;
@@ -61,7 +62,7 @@ public class WaypointCmdCallback implements ICmdCallback {
 				break;
 		}
 
-		WaypointObject waypoint = createWaypoint(objManager, terrain, color, name, x, y, player.getCreatureObject().getLocation());
+		WaypointObject waypoint = createWaypoint(galacticManager.getObjectManager(), terrain, color, name, x, y, player.getCreatureObject().getLocation());
 		ghost.addWaypoint(waypoint);
 	}
 

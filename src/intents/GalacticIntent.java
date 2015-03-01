@@ -2,13 +2,13 @@ package intents;
 
 import resources.Galaxy;
 import resources.control.Intent;
+import services.galaxy.GalacticManager;
 import services.objects.ObjectManager;
 import services.player.PlayerManager;
 
 public abstract class GalacticIntent extends Intent {
 	
-	private ObjectManager objectManager;
-	private PlayerManager playerManager;
+	private GalacticManager galacticManager;
 	private Galaxy galaxy;
 	
 	protected GalacticIntent(String type) {
@@ -17,17 +17,12 @@ public abstract class GalacticIntent extends Intent {
 	
 	protected GalacticIntent(GalacticIntent i) {
 		super(i.getType());
-		setObjectManager(i.getObjectManager());
-		setPlayerManager(i.getPlayerManager());
+		setGalacticManager(i.getGalacticManager());
 		setGalaxy(i.getGalaxy());
 	}
 	
-	public void setObjectManager(ObjectManager objectManager) {
-		this.objectManager = objectManager;
-	}
-	
-	public void setPlayerManager(PlayerManager playerManager) {
-		this.playerManager = playerManager;
+	public void setGalacticManager(GalacticManager galacticManager) {
+		this.galacticManager = galacticManager;
 	}
 	
 	public void setGalaxy(Galaxy galaxy) {
@@ -35,11 +30,15 @@ public abstract class GalacticIntent extends Intent {
 	}
 	
 	public ObjectManager getObjectManager() {
-		return objectManager;
+		return galacticManager.getObjectManager();
 	}
 	
 	public PlayerManager getPlayerManager() {
-		return playerManager;
+		return galacticManager.getPlayerManager();
+	}
+	
+	public GalacticManager getGalacticManager() {
+		return galacticManager;
 	}
 	
 	public Galaxy getGalaxy() {

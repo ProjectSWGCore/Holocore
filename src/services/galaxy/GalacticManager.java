@@ -69,9 +69,16 @@ public class GalacticManager extends Manager {
 		}
 	}
 	
+	public ObjectManager getObjectManager() {
+		return objectManager;
+	}
+	
+	public PlayerManager getPlayerManager() {
+		return playerManager;
+	}
+	
 	private void prepareGalacticIntent(GalacticIntent i) {
-		i.setObjectManager(objectManager);
-		i.setPlayerManager(playerManager);
+		i.setGalacticManager(this);
 		i.setGalaxy(galaxy);
 	}
 	

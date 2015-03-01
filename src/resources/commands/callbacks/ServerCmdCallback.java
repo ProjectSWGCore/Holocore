@@ -15,12 +15,12 @@ import resources.sui.SuiListBox;
 import resources.sui.SuiListBox.ListBoxType;
 import resources.sui.SuiMessageBox;
 import resources.sui.SuiMessageBox.MessageBoxType;
-import services.objects.ObjectManager;
+import services.galaxy.GalacticManager;
 
 public class ServerCmdCallback implements ICmdCallback {
 
 	@Override
-	public void execute(ObjectManager objManager, Player player, SWGObject target, String args) {
+	public void execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
 		SuiListBox listBox = new SuiListBox(player, ListBoxType.OK_CANCEL, "Server Management", "Select the management function you wish to perform from the list.");
 		
 		listBox.addListItem("Kick Player", 0);

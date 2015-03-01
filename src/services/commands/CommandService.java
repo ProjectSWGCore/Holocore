@@ -19,7 +19,7 @@ import resources.objects.SWGObject;
 import resources.player.AccessLevel;
 import resources.player.Player;
 import resources.utilities.Scripts;
-import services.objects.ObjectManager;
+import services.galaxy.GalacticManager;
 
 public class CommandService extends Service {
 
@@ -48,24 +48,24 @@ public class CommandService extends Service {
 			if (player != null) {
 				if (p instanceof CommandQueueEnqueue) {
 					CommandQueueEnqueue controller = (CommandQueueEnqueue) p;
-					handleCommandRequest(player, gpi.getObjectManager(), controller);
+					handleCommandRequest(player, gpi.getGalacticManager(), controller);
 				}
 			}
 		}
 		// TODO: Call Command intent to allow other services/managers to perform a command callback
 	}
 	
-	private void handleCommandRequest(Player player, ObjectManager objManager, CommandQueueEnqueue request) {
+	private void handleCommandRequest(Player player, GalacticManager galacticManager, CommandQueueEnqueue request) {
 		if (!commands.containsKey(request.getCommandCrc()))
 			return;
 //		System.out.println(commands.get(request.getCrc()).toString());
 		SWGObject target = null;
-		if (request.getTargetId() != 0) { target = objManager.getObjectById(request.getTargetId()); }
+		if (request.getTargetId() != 0) { target = galacticManager.getObjectManager().getObjectById(request.getTargetId()); }
 		
-		executeCommand(objManager, player, commands.get(request.getCommandCrc()), target, request.getArguments());
+		executeCommand(galacticManager, player, commands.get(request.getCommandCrc()), target, request.getArguments());
 	}
 	
-	private void executeCommand(ObjectManager objManager, Player player, Command command, SWGObject target, String args) {
+	private void executeCommand(GalacticManager galacticManager, Player player, Command command, SWGObject target, String args) {
 		if (player.getCreatureObject() == null)
 			return;
 		
@@ -81,9 +81,9 @@ public class CommandService extends Service {
 		// TODO: Handle for different targetType
 
 		if (command.hasJavaCallback())
-			command.getJavaCallback().execute(objManager, player, target, args);
+			command.getJavaCallback().execute(galacticManager, player, target, args);
 		else
-			Scripts.execute("commands/generic/" + command.getScriptCallback(), "execute", objManager, player, target, args);
+			Scripts.execute("commands/generic/" + command.getScriptCallback(), "execute", galacticManager, player, target, args);
 	}
 	
 	private void loadBaseCommands() {

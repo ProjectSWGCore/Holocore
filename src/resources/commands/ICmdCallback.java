@@ -2,8 +2,8 @@ package resources.commands;
 
 import resources.objects.SWGObject;
 import resources.player.Player;
-import services.objects.ObjectManager;
+import services.galaxy.GalacticManager;
 
 public interface ICmdCallback {
-	public void execute(ObjectManager objManager, Player player, SWGObject target, String args);
+	public void execute(GalacticManager galacticManager, Player player, SWGObject target, String args);
 }
