@@ -14,6 +14,8 @@ public class StandCmdCallback implements ICmdCallback {
 	public void execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
 		CreatureObject creature = player.getCreatureObject(); 
 		creature.setPosture(Posture.UPRIGHT);
+		creature.setMovementScale(1);
+		creature.setTurnScale(1);
 		creature.sendObservers(new PostureUpdate(creature.getObjectId(), Posture.UPRIGHT));
 	}
 	
