@@ -122,5 +122,7 @@ public class CommandService extends Service {
 		registerCallback("sitServer", new SitOnObjectCmdCallback());
 		registerCallback("stand", new StandCmdCallback());
 		registerCallback("teleport", new AdminTeleportCallback());
+		registerCallback("prone", new ProneCmdCallback());
+		registerCallback("kneel", new KneelCmdCallback());
 	}
 }

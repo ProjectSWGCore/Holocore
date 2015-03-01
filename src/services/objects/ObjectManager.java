@@ -286,8 +286,14 @@ public class ObjectManager extends Manager {
 		addToQuadTree(obj);
 		
 		if (obj instanceof CreatureObject && transform.getSpeed() > 1E-3) {
-			((CreatureObject) obj).setPosture(Posture.UPRIGHT);
-			((CreatureObject) obj).sendObservers(new PostureUpdate(obj.getObjectId(), Posture.UPRIGHT));
+			if(((CreatureObject) obj).getPosture() == Posture.PRONE){
+				((CreatureObject) obj).setPosture(Posture.PRONE);
+				((CreatureObject) obj).sendObservers(new PostureUpdate(obj.getObjectId(), Posture.PRONE));
+				System.out.println("test");
+			}else{
+				((CreatureObject) obj).setPosture(Posture.UPRIGHT);
+				((CreatureObject) obj).sendObservers(new PostureUpdate(obj.getObjectId(), Posture.UPRIGHT));
+			}
 		}
 		obj.sendDataTransforms(transform);
 	}
