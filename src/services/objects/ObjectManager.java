@@ -289,12 +289,10 @@ public class ObjectManager extends Manager {
 		if (obj instanceof CreatureObject && transform.getSpeed() > 1E-3) {
 			if(((CreatureObject) obj).getPosture() == Posture.PRONE){
 				((CreatureObject) obj).setPosture(Posture.PRONE);
-				((CreatureObject) obj).sendObservers(new PostureUpdate(obj.getObjectId(), Posture.PRONE));
-				System.out.println("test");
 			}else{
 				((CreatureObject) obj).setPosture(Posture.UPRIGHT);
-				((CreatureObject) obj).sendObservers(new PostureUpdate(obj.getObjectId(), Posture.UPRIGHT));
 			}
+			((CreatureObject) obj).sendObservers(new PostureUpdate(obj.getObjectId(), ((CreatureObject) obj).getPosture()));
 		}
 		obj.sendDataTransforms(transform);
 	}
