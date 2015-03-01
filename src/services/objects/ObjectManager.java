@@ -178,6 +178,7 @@ public class ObjectManager extends Manager {
 		if(object instanceof CreatureObject && object.getOwner() != null){
 			sendPacket(object.getOwner(), new CmdStartScene(false, object.getObjectId(), ((CreatureObject)object).getRace(), object.getLocation(), (long)(ProjectSWG.getCoreTime()/1E3)));
 			((CreatureObject)object).createObject(object.getOwner());
+			((CreatureObject)object).clearAware();
 		}
 		updateAwarenessForObject(object);
 		addToQuadTree(object);
