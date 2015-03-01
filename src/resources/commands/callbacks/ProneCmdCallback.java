@@ -13,9 +13,9 @@ public class ProneCmdCallback implements ICmdCallback {
 	@Override
 	public void execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
 		CreatureObject creature = player.getCreatureObject(); 
-		creature.setPosture(Posture.SNEAKING);
+		creature.setPosture(Posture.PRONE);
 		creature.setMovementScale(0.50);
-		creature.sendObservers(new PostureUpdate(creature.getObjectId(), Posture.SNEAKING));
+		creature.sendObservers(new PostureUpdate(creature.getObjectId(), Posture.PRONE));
 		
 	}
 
