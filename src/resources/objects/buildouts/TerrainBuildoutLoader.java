@@ -1,9 +1,12 @@
 package resources.objects.buildouts;
 
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import resources.Location;
 import resources.Terrain;
@@ -22,6 +25,7 @@ class TerrainBuildoutLoader {
 	private final CrcStringTableData crcTable;
 	private final Terrain terrain;
 	private final Hashtable <Long, SWGObject> objectTable;
+	private final Map <Long, List <CellObject>> buildingCells;
 	private final List <SWGObject> objects;
 	private final List <Orphan> parentless;
 	private final Location areaLocation;
@@ -31,6 +35,7 @@ class TerrainBuildoutLoader {
 		this.crcTable = crcTable;
 		this.terrain = terrain;
 		this.objectTable = new Hashtable<Long, SWGObject>(12*1024);
+		this.buildingCells = new HashMap<Long, List <CellObject>>();
 		this.objects = new LinkedList<SWGObject>();
 		this.parentless = new LinkedList<Orphan>();
 		this.areaLocation = new Location(0, 0, 0, terrain);
@@ -46,16 +51,34 @@ class TerrainBuildoutLoader {
 	}
 	
 	private void loadAreas() {
+		objectTable.clear();
 		String file = BASE_PATH+"areas_"+terrain.getName()+".iff";
 		DatatableData areaTable = (DatatableData) clientFactory.getInfoFromFile(file);
 		for (int row = 0; row < areaTable.getRowCount(); row++) {
-			if (!((String) areaTable.getCell(row, 0)).startsWith(terrain.getName()))
+			String areaName = (String) areaTable.getCell(row, 0);
+			if (!areaName.startsWith(terrain.getName()))
 				continue;
 			areaLocation.setX((Float) areaTable.getCell(row, 1));
 			areaLocation.setZ((Float) areaTable.getCell(row, 2));
-			loadArea((String) areaTable.getCell(row, 0));
+			loadArea(areaName);
 		}
 		updateParentless();
+		finalizeCells();
+		objectTable.clear();
+	}
+	
+	private void finalizeCells() {
+		for (Entry <Long, List <CellObject>> entry : buildingCells.entrySet()) {
+			SWGObject building = objectTable.get(entry.getKey());
+			if (building == null)
+				continue;
+			List <CellObject> cells = entry.getValue();
+			for (CellObject cell : cells) {
+				building.addChild(cell);
+			}
+			cells.clear();
+		}
+		buildingCells.clear();
 	}
 	
 	private void loadArea(String areaName) {
@@ -77,37 +100,57 @@ class TerrainBuildoutLoader {
 	private void loadColumnsLarge(DatatableData area) {
 		int rows = area.getRowCount();
 		for (int row = 0; row < rows; row++) {
-			long objectId = (Integer) area.getCell(row, 0);
-			String template = crcTable.getTemplateString((Integer) area.getCell(row, 3));
-			long container = ((Integer) area.getCell(row, 1)).longValue();
-			loadRow(area, row, objectId, template, container, 4);
+			Object [] columns = area.getRow(row);
+			long objectId = (Integer) columns[0];
+			String template = crcTable.getTemplateString((Integer) columns[3]);
+			int container = (Integer) columns[1];
+			loadRow(columns, objectId, template, container, 4);
 		}
 	}
 	
 	private void loadColumnsSmall(DatatableData area) {
 		int rows = area.getRowCount();
 		for (int row = 0; row < rows; row++) {
-			int crc = (Integer) area.getCell(row, 0);
+			Object [] columns = area.getRow(row);
+			int crc = (Integer) columns[0];
 			long objectId = ((long) crc) << 32 + 0xFFFF86F9L;
 			String template = crcTable.getTemplateString(crc);
-			loadRow(area, row, objectId, template, 0, 1);
+			loadRow(columns, objectId, template, 0, 1);
 		}
 	}
 	
-	private void loadRow(DatatableData area, int row, long objectId, String template, long container, int cellOffset) {
+	private void loadRow(Object [] columns, long objectId, String template, long container, int cellOffset) {
 		SWGObject obj = ObjectCreator.createObjectFromTemplate(objectId, template);
 		if (obj == null) {
 			System.err.println("Could not load object with template " + template);
 			return;
 		}
-		obj.setLocation(readLocation(area, row, cellOffset+1));
-		if (obj instanceof CellObject)
-			((CellObject) obj).setNumber((Integer) area.getCell(row, cellOffset));
-		matchParent(obj, container);
+		obj.setLocation(readLocation(columns, cellOffset+1));
+		objectTable.put(obj.getObjectId(), obj);
+		if (obj instanceof CellObject) {
+			((CellObject) obj).setNumber((Integer) columns[cellOffset]);
+			loadCell((CellObject) obj, container);
+		} else
+			matchParent(obj, container);
+	}
+	
+	private void loadCell(CellObject cell, long container) {
+		List <CellObject> cells = buildingCells.get(container);
+		if (cells == null) {
+			cells = new LinkedList<CellObject>();
+			buildingCells.put(container, cells);
+			cells.add(cell);
+			return;
+		}
+		int index = 0;
+		Iterator <CellObject> it = cells.iterator();
+		while (it.hasNext() && it.next().getNumber() < cell.getNumber()) {
+			index++;
+		}
+		cells.add(index, cell);
 	}
 	
 	private void matchParent(SWGObject obj, long containerId) {
-		objectTable.put(obj.getObjectId(), obj);
 		if (containerId == 0) {
 			obj.setLocation(obj.getLocation().translate(areaLocation));
 			objects.add(obj);
@@ -134,21 +177,13 @@ class TerrainBuildoutLoader {
 		}
 	}
 	
-	private Location readLocation(DatatableData area, int row, int startCol) {
-		Location l = new Location();
-		l.setTerrain(terrain);
-		l.setX(readFloat(area, row, startCol+0));
-		l.setY(readFloat(area, row, startCol+1));
-		l.setZ(readFloat(area, row, startCol+2));
-		l.setOrientationW(readFloat(area, row, startCol+3));
-		l.setOrientationX(readFloat(area, row, startCol+4));
-		l.setOrientationY(readFloat(area, row, startCol+5));
-		l.setOrientationZ(readFloat(area, row, startCol+6));
+	private Location readLocation(Object [] columns, int start) {
+		Location l = new Location((Float) columns[start], (Float) columns[start+1], (Float) columns[start+2], terrain);
+		l.setOrientationW((Float) columns[start+3]);
+		l.setOrientationX((Float) columns[start+4]);
+		l.setOrientationY((Float) columns[start+5]);
+		l.setOrientationZ((Float) columns[start+6]);
 		return l;
-	}
-	
-	private double readFloat(DatatableData area, int row, int col) {
-		return (Float) area.getCell(row, col);
 	}
 	
 	private class Orphan {
