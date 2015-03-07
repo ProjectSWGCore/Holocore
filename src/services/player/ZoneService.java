@@ -348,6 +348,6 @@ public class ZoneService extends Service {
 	}
 	
 	private Location getStartLocation(String start) {
-		return TerrainZoneInsertion.getInsertionForTerrain(Terrain.CORELLIA);
+		return TerrainZoneInsertion.getInsertionForTerrain(Terrain.NABOO);
 	}
 }
