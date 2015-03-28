@@ -40,14 +40,7 @@ public class SitOnObjectCmdCallback implements ICmdCallback {
 		creature.setMovementScale(0);
 		creature.setTurnScale(0);
 		player.sendPacket(sot);
-		
-		List <Player> observers = player.getCreatureObject().getObservers();
-		for (Player observer : observers) {
-			if (observer.getCreatureObject() == null)
-				continue;
-			
-			observer.sendPacket(new SitOnObject(observer.getCreatureObject().getObjectId(), sot));
-		}
+		creature.sendObservers(new SitOnObject(creature.getObjectId(), sot));
 
 	}
 }

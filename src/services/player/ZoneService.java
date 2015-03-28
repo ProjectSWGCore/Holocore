@@ -66,6 +66,7 @@ public class ZoneService extends Service {
 	
 	private PreparedStatement createCharacter;
 	private PreparedStatement getCharacter;
+	private PreparedStatement getLikeCharacterName;
 	
 	public ZoneService() {
 		clientFac = new ClientFactory();
@@ -77,7 +78,8 @@ public class ZoneService extends Service {
 	public boolean initialize() {
 		String createCharacterSql = "INSERT INTO characters (id, name, race, userId, galaxyId) VALUES (?, ?, ?, ?, ?)";
 		createCharacter = getLocalDatabase().prepareStatement(createCharacterSql);
-		getCharacter = getLocalDatabase().prepareStatement("SELECT * FROM characters WHERE name = ?");
+		getCharacter = getLocalDatabase().prepareStatement("SELECT * FROM characters WHERE name == ?");
+		getLikeCharacterName = getLocalDatabase().prepareStatement("SELECT name FROM characters WHERE name ilike ?"); //NOTE: ilike is not SQL standard. It is an extension for postgres only.
 		nameGenerator.loadAllRules();
 		loadProfTemplates();
 		if (!nameFilter.load())
@@ -208,7 +210,7 @@ public class ZoneService extends Service {
 		}
 	}
 	
-	private ErrorMessage getNameValidity(String name, boolean admin) {
+	private ErrorMessage getNameValidity(String name, boolean admin) {//FIXME: This seems to be called twice in character creation...
 		String modified = nameFilter.cleanName(name);
 		if (nameFilter.isEmpty(modified)) // Empty name
 			return ErrorMessage.NAME_DECLINED_EMPTY;
@@ -220,7 +222,7 @@ public class ZoneService extends Service {
 			return ErrorMessage.NAME_DECLINED_FICTIONALLY_INAPPROPRIATE;
 		if (nameFilter.isReserved(modified) && !admin)
 			return ErrorMessage.NAME_DECLINED_RESERVED;
-		if (characterExistsForName(modified)) // User already exists
+		if (characterExistsForName(modified)) // User already exists.
 			return ErrorMessage.NAME_DECLINED_IN_USE;
 		if (!modified.equals(name)) // If we needed to remove double spaces, trim the ends, etc
 			return ErrorMessage.NAME_APPROVED_MODIFIED;
@@ -231,9 +233,17 @@ public class ZoneService extends Service {
 		synchronized (getCharacter) {
 			ResultSet set = null;
 			try {
-				getCharacter.setString(1, name);
-				set = getCharacter.executeQuery();
-				return set.next();
+				String nameSplitStr[] = name.split(" ");
+				String charExistsPrepStmtStr = nameSplitStr[0] + "%"; //Only the first name should be unique.
+				getLikeCharacterName.setString(1, charExistsPrepStmtStr);
+				set = getLikeCharacterName.executeQuery();
+				while (set.next()){
+					String dbName = set.getString("name");
+					if(nameSplitStr[0].equalsIgnoreCase(dbName.split(" ")[0])){
+						return true;
+					}
+				}
+				return false;
 			} catch (SQLException e) {
 				e.printStackTrace();
 				return false;
