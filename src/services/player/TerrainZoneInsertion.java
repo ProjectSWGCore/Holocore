@@ -30,6 +30,11 @@ public class TerrainZoneInsertion {
 		}
 	}
 	
+	public static final Location getInsertionForArea(Terrain terrain, double x, double y, double z) {
+		return generateRandomLocation(terrain, x, y, z, 5);
+	}
+	
+	
 	private static final Location generateRandomLocation(Terrain terrain, double x, double y, double z, double delta) {
 		Location location = new Location();
 		location.setTerrain(terrain);
