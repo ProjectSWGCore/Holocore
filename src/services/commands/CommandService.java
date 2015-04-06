@@ -69,8 +69,13 @@ public class CommandService extends Service {
 		if (player.getCreatureObject() == null)
 			return;
 		
-		if ((command.getGodLevel() > 0 || command.getCharacterAbility().toLowerCase().equals("admin"))&& player.getAccessLevel() == AccessLevel.PLAYER)//HACK @Glen characterAbility check should be handled in the "has ability" TODO below. Not sure if abilities are implemented yet.
-			return;
+		if (command.getGodLevel() > 0 || command.getCharacterAbility().toLowerCase().equals("admin")){//HACK @Glen characterAbility check should be handled in the "has ability" TODO below. Not sure if abilities are implemented yet.
+			if(player.getAccessLevel() == AccessLevel.PLAYER){
+				System.out.printf("[%s] failed to use admin command \"%s\" with access level %s\n", player.getCharacterName(), command.getName(), player.getAccessLevel().toString());
+				return;
+			}
+			System.out.printf("[%s] successfully used admin command \"%s\" with access level %s\n", player.getCharacterName(), command.getName(), player.getAccessLevel().toString());
+		}
 		
 		// TODO: Check if the player has the ability
 		
