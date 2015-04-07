@@ -46,7 +46,7 @@ public class SitOnObjectCmdCallback implements ICmdCallback {
 			if (observer.getCreatureObject() == null)
 				continue;
 			
-			observer.sendPacket(new SitOnObject(observer.getCreatureObject().getObjectId(), sot));
+			observer.sendPacket(new SitOnObject(creature.getObjectId(), sot));
 		}
 
 	}
