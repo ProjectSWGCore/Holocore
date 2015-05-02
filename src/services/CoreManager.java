@@ -20,12 +20,12 @@ import intents.InboundPacketIntent;
 import intents.OutboundPacketIntent;
 import intents.ServerManagementIntent;
 import intents.ServerStatusIntent;
-import intents.ServerStatusIntent.ServerStatus;
 import resources.Galaxy;
 import resources.Galaxy.GalaxyStatus;
 import resources.config.ConfigFile;
 import resources.control.Intent;
 import resources.control.Manager;
+import resources.control.ServerStatus;
 import resources.services.Config;
 import services.galaxy.GalacticManager;
 

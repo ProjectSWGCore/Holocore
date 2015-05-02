@@ -1,7 +1,5 @@
 package resources.commands.callbacks;
 
-import java.util.List;
-
 import network.packets.swg.zone.object_controller.SitOnObject;
 import resources.Location;
 import resources.Posture;

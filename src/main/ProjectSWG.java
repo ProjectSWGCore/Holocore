@@ -1,8 +1,8 @@
 package main;
 
 import intents.ServerStatusIntent;
-import intents.ServerStatusIntent.ServerStatus;
 import resources.Galaxy.GalaxyStatus;
+import resources.control.ServerStatus;
 import services.CoreManager;
 
 public class ProjectSWG {
