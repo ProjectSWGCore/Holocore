@@ -358,7 +358,7 @@ public class ZoneService extends Service {
 	}
 	
 	private Location getStartLocation(String start) {
-		return TerrainZoneInsertion.getInsertionForTerrain(Terrain.KASHYYYK_HUNTING);
+		return TerrainZoneInsertion.getInsertionForTerrain(Terrain.DATHOMIR);
 //		return TerrainZoneInsertion.getInsertionForArea(Terrain.CORELLIA, -5436, 24, -6211);
 	}
 }
