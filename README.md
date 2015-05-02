@@ -1,3 +1,5 @@
+![holocore.png](https://bitbucket.org/repo/norXdj/images/3473411954-holocore.png)
+
 Copyright (c) 2015 /// Project SWG /// www.projectswg.com
 
 ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on
