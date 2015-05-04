@@ -1,6 +1,6 @@
 ### **Branch** ###
 
-**Dev:** Upload your Pull Requests here so it can be tested
+**Development:** Upload your Pull Requests here so it can be tested
 
 **Master:** Tested and approved commits will be moved to this branch
 
