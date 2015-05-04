@@ -28,5 +28,7 @@ along with Holocore.  If not, see <http://www.gnu.org/licenses/>.
 ### **Branch** ###
 
 **Dev:** Upload your Pull Requests here so it can be tested
+
 **Master:** Tested and approved commits will be moved to this branch
+
 **Release:** This is the live version of latest code run on Test Center
