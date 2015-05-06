@@ -59,6 +59,7 @@ import resources.control.Intent;
 import resources.control.Manager;
 import resources.objects.SWGObject;
 import resources.objects.buildouts.BuildoutLoader;
+import resources.objects.creature.CreatureMood;
 import resources.objects.creature.CreatureObject;
 import resources.objects.quadtree.QuadTree;
 import resources.objects.waypoint.WaypointObject;
@@ -354,7 +355,7 @@ public class ObjectManager extends Manager {
 		player.setPlayerState(PlayerState.ZONING_IN);
 		verifyPlayerObjectsSet(player, characterId);
 		CreatureObject creature = player.getCreatureObject();
-		creature.setMoodId((byte) 0);
+		creature.setMoodId(CreatureMood.NONE.getMood());
 		long objId = creature.getObjectId();
 		Race race = creature.getRace();
 		Location l = creature.getLocation();
