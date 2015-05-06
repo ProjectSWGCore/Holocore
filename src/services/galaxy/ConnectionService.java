@@ -134,8 +134,12 @@ public class ConnectionService extends Service {
 				GalacticPacketIntent gpi = (GalacticPacketIntent) i;
 				Player p = gpi.getPlayerManager().getPlayerFromNetworkId(gpi.getNetworkId());
 				if (p != null) {
-					logOut(p);
-					disconnect(p, DisconnectReason.OTHER_SIDE_TERMINATED);
+					if (p.getPlayerState() != PlayerState.DISCONNECTED) {
+						logOut(p);
+						disconnect(p, DisconnectReason.TIMEOUT);
+					} else {
+						disconnect(p, DisconnectReason.OTHER_SIDE_TERMINATED);
+					}
 				}
 			}
 		}
