@@ -34,9 +34,7 @@ import java.util.ListIterator;
 public class SortedLinkedList<E extends Comparable<E>> extends LinkedList<E> {
 	
 	private static final long serialVersionUID = -6776628467181994889L;
-	private static final UnsupportedOperationException OPERATIONEXCEPTION =
-			new UnsupportedOperationException("The sorted nature of the list prohibits this action.");
-	
+			
 	@Override
 	public boolean add(E e) {
 		ListIterator<E> iter = super.listIterator();
@@ -54,7 +52,7 @@ public class SortedLinkedList<E extends Comparable<E>> extends LinkedList<E> {
 	
 	@Override
 	public void add(int index, E element) {
-		throw OPERATIONEXCEPTION;
+		throw new UnsupportedOperationException("The sorted nature of the list prohibits this action.");
 	}
 	
 	@Override
@@ -68,12 +66,12 @@ public class SortedLinkedList<E extends Comparable<E>> extends LinkedList<E> {
 	
 	@Override
 	public boolean addAll(int index, Collection<? extends E> c) {
-		throw OPERATIONEXCEPTION;
+		throw new UnsupportedOperationException("The sorted nature of the list prohibits this action.");
 	}
 	
 	@Override
 	public E set(int index, E element) {
-		throw OPERATIONEXCEPTION;
+		throw new UnsupportedOperationException("The sorted nature of the list prohibits this action.");
 	}
 	
 }

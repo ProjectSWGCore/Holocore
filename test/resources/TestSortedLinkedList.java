@@ -6,7 +6,7 @@ import java.util.Iterator;
 
 import org.junit.*;
 
-public class SortedLinkedListTest {
+public class TestSortedLinkedList {
 
 	private static SortedLinkedList<Character> list;
 	private static final char TESTCHAR1 = 'a';
