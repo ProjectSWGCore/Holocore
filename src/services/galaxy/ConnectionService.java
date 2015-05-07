@@ -79,8 +79,10 @@ public class ConnectionService extends Service {
 			public void run() {
 				Player p = disappearPlayers.poll();
 				synchronized (zonedInPlayers) {
-					if (p != null && zonedInPlayers.contains(p))
+					if (p != null && zonedInPlayers.contains(p)) {
 						disappear(p);
+						p.getPlayerObject().clearFlagBitmask(PlayerFlags.LD);	// Remove the LD flag here
+					}
 				}
 			}
 		};
@@ -162,8 +164,8 @@ public class ConnectionService extends Service {
 	private void logOut(Player p) {
 		if (p.getPlayerState() != PlayerState.LOGGED_OUT)
 			System.out.println("[" + p.getUsername() +"] Logged out " + p.getCharacterName());
-		p.setPlayerState(PlayerState.LOGGED_OUT);
 		p.getPlayerObject().setFlagBitmask(PlayerFlags.LD);
+		p.setPlayerState(PlayerState.LOGGED_OUT);
 		disappearPlayers.add(p);
 		updateService.schedule(disappearRunnable, (long) DISAPPEAR_THRESHOLD, TimeUnit.MILLISECONDS);
 	}
