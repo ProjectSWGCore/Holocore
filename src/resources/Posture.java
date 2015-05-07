@@ -27,37 +27,51 @@
 ***********************************************************************************/
 package resources;
 
+import java.util.Hashtable;
+import java.util.Map;
+
 public enum Posture {
-	INVALID,						// 0xFFFFFFFFFFFFFFFF
-	UPRIGHT,					// 0x00
-	CROUCHED,				// 0x01
-	PRONE,						// 0x02
-	SNEAKING,				// 0x03
-	BLOCKING,				// 0x04
-	CLIMBING,					// 0x05
-	FLYING,						// 0x06
-	LYING_DOWN,			// 0x07
-	SITTING,						// 0x08
-	SKILL_ANIMATING,	// 0x09
-	DRIVING_VEHICLE,	// 0x0A
-	RIDING_CREATURE,	// 0x0B
-	KNOCKED_DOWN,	// 0x0C
-	INCAPACITATED,		// 0x0D
-	DEAD;							// 0x0E
+	UPRIGHT			(0x00),
+	CROUCHED		(0x01),
+	PRONE			(0x02),
+	SNEAKING		(0x03),
+	BLOCKING		(0x04),
+	CLIMBING		(0x05),
+	FLYING			(0x06),
+	LYING_DOWN		(0x07),
+	SITTING			(0x08),
+	SKILL_ANIMATING	(0x09),
+	DRIVING_VEHICLE	(0x0A),
+	RIDING_CREATURE	(0x0B),
+	KNOCKED_DOWN	(0x0C),
+	INCAPACITATED	(0x0D),
+	DEAD			(0x0E),
+	INVALID			(0x0E);
 	
-	private static final byte OFFSET = 1;
+	private static final Map <Byte, Posture> POSTURE_MAP = new Hashtable<Byte, Posture>(15);
+	private byte id;
 	
-	/**
-	 * Is the exact same as calling Enum.ordinal(), subtracting 1 and casting the result to a byte.
-	 * @return the ID for this posture
-	 */
-	public byte getId() { return (byte) (ordinal() - OFFSET); }
+	static {
+		for (Posture p : values()) {
+			if (p != INVALID)
+				POSTURE_MAP.put(p.getId(), p);
+		}
+	}
 	
-	/**
-	 * @param id for the Posture
-	 * @return the Posture enum that has this id
-	 * @throws ArrayIndexOutOfBoundsException if this ID doesn't point to a valid posture.
-	 */
-	public static final Posture getFromId(byte id) { return values()[id + OFFSET]; }
+	Posture(int id) {
+		this.id = (byte)id;
+	}
+	
+	public byte getId() { return id; }
+	
+	public static final Posture getFromId(byte id) {
+		Posture p = null;
+		synchronized (POSTURE_MAP) {
+			p = POSTURE_MAP.get(id);
+		}
+		if (p == null)
+			return INVALID;
+		return p;
+	}
 	
 }
