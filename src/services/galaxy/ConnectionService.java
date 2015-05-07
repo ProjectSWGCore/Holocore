@@ -79,10 +79,8 @@ public class ConnectionService extends Service {
 			public void run() {
 				Player p = disappearPlayers.poll();
 				synchronized (zonedInPlayers) {
-					if (p != null && zonedInPlayers.contains(p)) {
+					if (p != null && zonedInPlayers.contains(p))
 						disappear(p);
-						p.getPlayerObject().clearFlagBitmask(PlayerFlags.LD);	// Remove the LD flag here
-					}
 				}
 			}
 		};
@@ -171,6 +169,7 @@ public class ConnectionService extends Service {
 	}
 	
 	private void disappear(Player p) {
+		p.getPlayerObject().clearFlagBitmask(PlayerFlags.LD);
 		p.setPlayerState(PlayerState.DISCONNECTED);
 		System.out.println("[" + p.getUsername() +"] " + p.getCharacterName() + " disappeared");
 		new PlayerEventIntent(p, PlayerEvent.PE_DISAPPEAR).broadcast();
