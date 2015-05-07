@@ -169,7 +169,6 @@ public class ConnectionService extends Service {
 	}
 	
 	private void disappear(Player p) {
-		p.getPlayerObject().clearFlagBitmask(PlayerFlags.LD);
 		p.setPlayerState(PlayerState.DISCONNECTED);
 		System.out.println("[" + p.getUsername() +"] " + p.getCharacterName() + " disappeared");
 		new PlayerEventIntent(p, PlayerEvent.PE_DISAPPEAR).broadcast();
