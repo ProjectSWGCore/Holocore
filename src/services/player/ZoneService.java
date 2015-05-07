@@ -97,7 +97,7 @@ public class ZoneService extends Service {
 	
 	public ZoneService() {
 		clientFac = new ClientFactory();
-		nameFilter = new NameFilter("namegen/bad_word_list.txt", "namegen/reserved_words.txt");
+		nameFilter = new NameFilter("namegen/bad_word_list.txt", "namegen/reserved_words.txt", "namegen/fiction_reserved.txt");
 		nameGenerator = new SWGNameGenerator(nameFilter);
 	}
 	
@@ -214,6 +214,10 @@ public class ZoneService extends Service {
 				reason = NameFailureReason.NAME_IN_USE;
 			else if (err == ErrorMessage.NAME_DECLINED_EMPTY)
 				reason = NameFailureReason.NAME_DECLINED_EMPTY;
+			else if (err == ErrorMessage.NAME_DECLINED_FICTIONALLY_INAPPROPRIATE)
+				reason = NameFailureReason.NAME_FICTIONALLY_INAPPRORIATE;
+			else if (err == ErrorMessage.NAME_DECLINED_RESERVED)
+				reason = NameFailureReason.NAME_DEV_RESERVED;
 			System.err.println("ZoneService: Unable to create character [Name: " + create.getName() + "  User: " + player.getUsername() + "] and put into database! Reason: " + err);
 			sendPacket(player, new CreateCharacterFailure(reason));
 		}
@@ -246,11 +250,13 @@ public class ZoneService extends Service {
 		if (nameFilter.isProfanity(modified)) // Contains profanity
 			return ErrorMessage.NAME_DECLINED_PROFANE;
 		if (nameFilter.isFictionallyInappropriate(modified))
-			return ErrorMessage.NAME_DECLINED_FICTIONALLY_INAPPROPRIATE;
+			return ErrorMessage.NAME_DECLINED_SYNTAX;
 		if (nameFilter.isReserved(modified) && !admin)
 			return ErrorMessage.NAME_DECLINED_RESERVED;
 		if (characterExistsForName(modified)) // User already exists.
 			return ErrorMessage.NAME_DECLINED_IN_USE;
+		if (nameFilter.isFictionallyReserved(modified))
+			return ErrorMessage.NAME_DECLINED_FICTIONALLY_RESERVED;
 		if (!modified.equals(name)) // If we needed to remove double spaces, trim the ends, etc
 			return ErrorMessage.NAME_APPROVED_MODIFIED;
 		return ErrorMessage.NAME_APPROVED;
