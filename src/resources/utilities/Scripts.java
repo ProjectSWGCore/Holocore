@@ -39,7 +39,7 @@ public final class Scripts {
 		PythonInterpreter interp;
 		
 		if (!scriptExists(script))
-			throw new IllegalArgumentException("Script " + SCRIPTS_PATH + script + " does not exist.");
+			return;		// Ziggy: For now, this method gives no indication as to whether the script that was called actually was called or not.
 		
 		interp = new PythonInterpreter();
 		
