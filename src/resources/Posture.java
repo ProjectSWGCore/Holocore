@@ -56,6 +56,6 @@ public enum Posture {
 	 * @return the Posture enum that has this id
 	 * @throws ArrayIndexOutOfBoundsException if this ID doesn't point to a valid posture.
 	 */
-	public static final Posture getFromId(byte id) { return values()[id]; }
+	public static final Posture getFromId(byte id) { return values()[id + 1]; }
 	
 }
