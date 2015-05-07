@@ -34,18 +34,13 @@ import java.util.ListIterator;
 public class SortedLinkedList<E extends Comparable<E>> extends LinkedList<E> {
 	
 	private static final long serialVersionUID = -6776628467181994889L;
-	
-	public SortedLinkedList() {
-		
-	}
-	
+			
 	@Override
 	public boolean add(E e) {
-		Comparable<E> element = (Comparable<E>) e;
-		ListIterator<E> iter = listIterator();
+		ListIterator<E> iter = super.listIterator();
+		
 		while (iter.hasNext()) {
-			E item = iter.next();
-			if (element.compareTo(item) <= 0) {
+			if (e.compareTo(iter.next()) <= 0) {
 				iter.previous();
 				iter.add(e);
 				return true;
@@ -65,6 +60,7 @@ public class SortedLinkedList<E extends Comparable<E>> extends LinkedList<E> {
 		for (E item : c) {
 			add(item);
 		}
+		
 		return true;
 	}
 	
