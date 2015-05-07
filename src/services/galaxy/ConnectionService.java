@@ -45,6 +45,7 @@ import resources.control.Intent;
 import resources.control.Service;
 import resources.player.Player;
 import resources.player.PlayerEvent;
+import resources.player.PlayerFlags;
 import resources.player.PlayerState;
 
 public class ConnectionService extends Service {
@@ -162,6 +163,7 @@ public class ConnectionService extends Service {
 		if (p.getPlayerState() != PlayerState.LOGGED_OUT)
 			System.out.println("[" + p.getUsername() +"] Logged out " + p.getCharacterName());
 		p.setPlayerState(PlayerState.LOGGED_OUT);
+		p.getCreatureObject().getPlayerObject().toggleFlag(PlayerFlags.LD);
 		disappearPlayers.add(p);
 		updateService.schedule(disappearRunnable, (long) DISAPPEAR_THRESHOLD, TimeUnit.MILLISECONDS);
 	}
