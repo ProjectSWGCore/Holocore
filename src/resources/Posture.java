@@ -45,17 +45,19 @@ public enum Posture {
 	INCAPACITATED,		// 0x0D
 	DEAD;							// 0x0E
 	
+	private static final byte OFFSET = 1;
+	
 	/**
 	 * Is the exact same as calling Enum.ordinal(), subtracting 1 and casting the result to a byte.
 	 * @return the ID for this posture
 	 */
-	public byte getId() { return (byte) (ordinal() - 1); }
+	public byte getId() { return (byte) (ordinal() - OFFSET); }
 	
 	/**
 	 * @param id for the Posture
 	 * @return the Posture enum that has this id
 	 * @throws ArrayIndexOutOfBoundsException if this ID doesn't point to a valid posture.
 	 */
-	public static final Posture getFromId(byte id) { return values()[id + 1]; }
+	public static final Posture getFromId(byte id) { return values()[id + OFFSET]; }
 	
 }
