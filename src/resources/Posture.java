@@ -27,8 +27,8 @@
 ***********************************************************************************/
 package resources;
 
+import java.util.Hashtable;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 public enum Posture {
 	UPRIGHT			(0x00),
@@ -48,12 +48,14 @@ public enum Posture {
 	DEAD			(0x0E),
 	INVALID			(0x0E);
 	
-	private static final Map <Byte, Posture> POSTURE_MAP = new ConcurrentHashMap<Byte, Posture>();
+	private static final Map <Byte, Posture> POSTURE_MAP = new Hashtable<Byte, Posture>(15);
 	private byte id;
 	
 	static {
-		for (Posture p : values())
-			POSTURE_MAP.put(p.getId(), p);
+		for (Posture p : values()) {
+			if (p != INVALID)
+				POSTURE_MAP.put(p.getId(), p);
+		}
 	}
 	
 	Posture(int id) {
@@ -63,7 +65,10 @@ public enum Posture {
 	public byte getId() { return id; }
 	
 	public static final Posture getFromId(byte id) {
-		Posture p = POSTURE_MAP.get(id);
+		Posture p = null;
+		synchronized (POSTURE_MAP) {
+			p = POSTURE_MAP.get(id);
+		}
 		if (p == null)
 			return INVALID;
 		return p;
