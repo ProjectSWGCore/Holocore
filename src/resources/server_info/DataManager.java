@@ -79,7 +79,7 @@ public class DataManager {
 		String db = c.getString("LOCAL-DB", "nge");
 		String user = c.getString("LOCAL-USER", "nge");
 		String pass = c.getString("LOCAL-PASS", "nge");
-		localDatabase = new PostgresqlDatabase("localhost", db, user, pass);
+		localDatabase = new PostgresqlDatabase("192.168.2.200", db, user, pass);
 	}
 	
 	/**
