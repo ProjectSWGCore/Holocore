@@ -69,10 +69,14 @@ public class CreateCharacterFailure extends SWGPacket {
 				return "name_declined_in_use";
 			case NAME_RETRY:
 				return "name_declined_retry";
+			case NAME_FICTIONALLY_INAPPRORIATE:
+				return "name_declined_syntax";
 			case NAME_SYNTAX:
 				return "name_declined_syntax";
 			case NAME_TOO_FAST:
 				return "name_declined_too_fast";
+			case NAME_DEV_RESERVED:
+				return "name_declined_developer";
 		}
 		return "name_declined_retry";
 	}
@@ -82,6 +86,8 @@ public class CreateCharacterFailure extends SWGPacket {
 		NAME_TOO_FAST,
 		NAME_RETRY,
 		NAME_SYNTAX,
-		NAME_IN_USE
+		NAME_IN_USE,
+		NAME_FICTIONALLY_INAPPRORIATE,
+		NAME_DEV_RESERVED;
 	}
 }
