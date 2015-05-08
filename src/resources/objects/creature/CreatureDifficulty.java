@@ -30,7 +30,7 @@ package resources.objects.creature;
 public enum CreatureDifficulty {
 	NORMAL	(0x00),
 	ELITE	(0x01),
-	BOSS	(0x01);
+	BOSS	(0x02);
 	
 	private int difficulty;
 	
