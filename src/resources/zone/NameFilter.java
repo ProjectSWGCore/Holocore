@@ -41,24 +41,29 @@ public class NameFilter {
 	private static final int [] MAX_ALLOWED = new int[] {1 , 1, 1};
 	private final List <String> profaneWords;
 	private final List <String> reservedWords;
+	private final List <String> fictionNames;
 	private final File profaneFile;
 	private final File reservedFile;
+	private final File fictionFile;
 	
-	public NameFilter(String badWordsPath, String reservedPath) {
-		this(new File(badWordsPath), new File(reservedPath));
+	public NameFilter(String badWordsPath, String reservedPath, String fictionPath) {
+		this(new File(badWordsPath), new File(reservedPath), new File(fictionPath));
 	}
 	
-	public NameFilter(File badWordsFile, File reservedFile) {
+	public NameFilter(File badWordsFile, File reservedFile, File fictionFile) {
 		this.profaneFile = badWordsFile;
 		this.reservedFile = reservedFile;
+		this.fictionFile = fictionFile;
 		this.profaneWords = new ArrayList<String>();
 		this.reservedWords = new ArrayList<String>();
+		this.fictionNames = new ArrayList<String>();
 	}
 	
 	public boolean load() {
 		boolean success = true;
 		success = load(profaneWords, profaneFile) && success;
 		success = load(reservedWords, reservedFile) && success;
+		success = load(fictionNames, fictionFile) && success;
 		return success;
 	}
 	
@@ -114,7 +119,9 @@ public class NameFilter {
 	public boolean isReserved(String name) {
 		return contains(reservedWords, name);
 	}
-	
+	public boolean isFictionallyReserved(String name) {
+		return contains(fictionNames, name);
+	}
 	public boolean isFictionallyInappropriate(String name) {
 		boolean space = true;
 		for (int i = 0; i < name.length(); i++) {
