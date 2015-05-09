@@ -166,10 +166,11 @@ public class ConnectionService extends Service {
 		int deltaTime = (int) ((System.currentTimeMillis()) - startTime);
 		int newTotalTime = currentTime + (int) TimeUnit.MILLISECONDS.toSeconds(deltaTime);
 		
+		playerObject.setPlayTime(newTotalTime);
+		
 		if (p.getPlayerState() != PlayerState.LOGGED_OUT)
 			System.out.println("[" + p.getUsername() +"] Logged out " + p.getCharacterName());
 
-		playerObject.setPlayTime(newTotalTime);
 		p.setPlayerState(PlayerState.LOGGED_OUT);
 		disappearPlayers.add(p);
 		updateService.schedule(disappearRunnable, (long) DISAPPEAR_THRESHOLD, TimeUnit.MILLISECONDS);
