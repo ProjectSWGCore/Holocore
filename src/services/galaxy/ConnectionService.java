@@ -170,7 +170,6 @@ public class ConnectionService extends Service {
 		
 		if (p.getPlayerState() != PlayerState.LOGGED_OUT)
 			System.out.println("[" + p.getUsername() +"] Logged out " + p.getCharacterName());
-
 		p.setPlayerState(PlayerState.LOGGED_OUT);
 		disappearPlayers.add(p);
 		updateService.schedule(disappearRunnable, (long) DISAPPEAR_THRESHOLD, TimeUnit.MILLISECONDS);
