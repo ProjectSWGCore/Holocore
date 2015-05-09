@@ -354,9 +354,9 @@ public class ObjectManager extends Manager {
 			return;
 		player.setPlayerState(PlayerState.ZONING_IN);
 		verifyPlayerObjectsSet(player, characterId);
+		player.getPlayerObject().setStartPlayTime((int) System.currentTimeMillis());
 		CreatureObject creature = player.getCreatureObject();
 		creature.setMoodId(CreatureMood.NONE.getMood());
-		player.getPlayerObject().setStartPlayTime((int) System.currentTimeMillis());
 		long objId = creature.getObjectId();
 		Race race = creature.getRace();
 		Location l = creature.getLocation();
