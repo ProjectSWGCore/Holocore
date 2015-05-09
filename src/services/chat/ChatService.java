@@ -285,6 +285,7 @@ public class ChatService extends Service {
 		if (mail.getReceiverId() != player.getCreatureObject().getObjectId())
 			return;
 		
+		mail.setStatus(Mail.READ);
 		sendPersistentMessage(player, mail, MailFlagType.FULL_MESSAGE, galaxy);
 	}
 	
