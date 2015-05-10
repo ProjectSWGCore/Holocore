@@ -51,8 +51,8 @@ public class SitOnObjectCmdCallback implements ICmdCallback {
 			String [] cmd = args.split(",", 4);
 			
 			float x = Float.valueOf(cmd[0]);
-			float y = Float.valueOf(cmd[1]);
-			float z = Float.valueOf(cmd[2]);
+			float z = Float.valueOf(cmd[1]);
+			float y = Float.valueOf(cmd[2]);
 			long cellid = Long.parseLong(cmd[3]);
 			
 			sot = new SitOnObject(objectID, cellid, x, y, z);
