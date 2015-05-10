@@ -43,8 +43,10 @@ import intents.GalacticPacketIntent;
 import intents.PlayerEventIntent;
 import resources.control.Intent;
 import resources.control.Service;
+import resources.objects.player.PlayerObject;
 import resources.player.Player;
 import resources.player.PlayerEvent;
+import resources.player.PlayerFlags;
 import resources.player.PlayerState;
 
 public class ConnectionService extends Service {
@@ -159,8 +161,17 @@ public class ConnectionService extends Service {
 	}
 	
 	private void logOut(Player p) {
+		PlayerObject playerObject = p.getPlayerObject();
+		int currentTime = playerObject.getPlayTime();
+		int startTime = playerObject.getStartPlayTime();
+		int deltaTime = (int) ((System.currentTimeMillis()) - startTime);
+		int newTotalTime = currentTime + (int) TimeUnit.MILLISECONDS.toSeconds(deltaTime);
+		
+		playerObject.setPlayTime(newTotalTime);
+		
 		if (p.getPlayerState() != PlayerState.LOGGED_OUT)
 			System.out.println("[" + p.getUsername() +"] Logged out " + p.getCharacterName());
+		p.getPlayerObject().setFlagBitmask(PlayerFlags.LD);
 		p.setPlayerState(PlayerState.LOGGED_OUT);
 		disappearPlayers.add(p);
 		updateService.schedule(disappearRunnable, (long) DISAPPEAR_THRESHOLD, TimeUnit.MILLISECONDS);

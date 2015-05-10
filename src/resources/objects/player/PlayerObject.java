@@ -92,7 +92,7 @@ public class PlayerObject extends IntangibleObject {
 	private long 				petId				= 0;
 	private SWGList<String> 	petAbilities		= new SWGList<>(BaselineType.PLAY, 9, 21);
 	private SWGList<String> 	activePetAbilities	= new SWGList<>(BaselineType.PLAY, 9, 22);
-	
+	private int startPlayTime;
 	
 	public PlayerObject(long objectId) {
 		super(objectId);
@@ -338,12 +338,12 @@ public class PlayerObject extends IntangibleObject {
 
 	public void setFlagBitmask(int flagBitmask) {
 		flagsList.set(0, flagsList.get(0) | flagBitmask);
-		sendDelta(9, 5, flagsList);
+		sendDelta(3, 5, flagsList);
 	}
 	
 	public void clearFlagBitmask(int flagBitmask) {
 		flagsList.set(0, flagsList.get(0) & ~flagBitmask);
-		sendDelta(9, 5, flagsList);
+		sendDelta(3, 5, flagsList);
 	}
 	
 	public void toggleFlag(int flag) {
@@ -538,5 +538,13 @@ public class PlayerObject extends IntangibleObject {
 	
 	public void sendDelta(int type, int update, Object value, StringType strType) {
 		sendDelta(BaselineType.PLAY, type, update, value, strType);
+	}
+
+	public int getStartPlayTime() {
+		return startPlayTime;
+	}
+
+	public void setStartPlayTime(int startPlayTime) {
+		this.startPlayTime = startPlayTime;
 	}
 }
