@@ -92,8 +92,6 @@ public class PlayerObject extends IntangibleObject {
 	private long 				petId				= 0;
 	private SWGList<String> 	petAbilities		= new SWGList<>(BaselineType.PLAY, 9, 21);
 	private SWGList<String> 	activePetAbilities	= new SWGList<>(BaselineType.PLAY, 9, 22);
-	
-	// Ziggy: Non-PLAY0x variable
 	private int startPlayTime;
 	
 	public PlayerObject(long objectId) {
