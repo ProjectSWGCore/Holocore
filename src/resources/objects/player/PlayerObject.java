@@ -338,12 +338,12 @@ public class PlayerObject extends IntangibleObject {
 
 	public void setFlagBitmask(int flagBitmask) {
 		flagsList.set(0, flagsList.get(0) | flagBitmask);
-		sendDelta(9, 5, flagsList);
+		sendDelta(3, 5, flagsList);
 	}
 	
 	public void clearFlagBitmask(int flagBitmask) {
 		flagsList.set(0, flagsList.get(0) & ~flagBitmask);
-		sendDelta(9, 5, flagsList);
+		sendDelta(3, 5, flagsList);
 	}
 	
 	public void toggleFlag(int flag) {
