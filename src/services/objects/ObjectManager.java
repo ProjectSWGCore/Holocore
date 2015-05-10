@@ -65,6 +65,7 @@ import resources.objects.quadtree.QuadTree;
 import resources.objects.waypoint.WaypointObject;
 import resources.player.Player;
 import resources.player.PlayerEvent;
+import resources.player.PlayerFlags;
 import resources.player.PlayerState;
 import resources.server_info.CachedObjectDatabase;
 import resources.server_info.ObjectDatabase;
@@ -355,7 +356,10 @@ public class ObjectManager extends Manager {
 		player.setPlayerState(PlayerState.ZONING_IN);
 		verifyPlayerObjectsSet(player, characterId);
 		CreatureObject creature = player.getCreatureObject();
+		
 		creature.setMoodId(CreatureMood.NONE.getMood());
+		player.getPlayerObject().clearFlagBitmask(PlayerFlags.LD);	// Ziggy: Clear the LD flag in case it wasn't already.
+		
 		long objId = creature.getObjectId();
 		Race race = creature.getRace();
 		Location l = creature.getLocation();
