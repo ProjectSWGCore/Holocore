@@ -350,8 +350,11 @@ public class ZoneService extends Service {
 		creatureObj.setName(create.getName());
 		creatureObj.setPvpType(20);
 		creatureObj.getSkills().add("species_" + creatureObj.getRace().getSpecies());
-		creatureObj.equipItem(inventory);
-		creatureObj.equipItem(datapad);
+		creatureObj.setSlot("inventory", inventory);
+		creatureObj.setSlot("datapad", datapad);
+		
+		creatureObj.addEquipment(inventory);
+		creatureObj.addEquipment(datapad);
 	}
 	
 	private void setPlayerObjectValues(PlayerObject playerObj, ClientCreateCharacter create) {
