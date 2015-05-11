@@ -336,8 +336,10 @@ public class ZoneService extends Service {
 		if (hair.isEmpty())
 			return;
 		TangibleObject hairObj = createTangible(objManager, ClientFactory.formatToSharedFile(hair));
+		
 		hairObj.setAppearanceData(customization);
-		creatureObj.equipItem(hairObj);
+		creatureObj.setSlot("hair", hairObj);
+		creatureObj.addEquipment(hairObj);
 	}
 	
 	private void setCreatureObjectValues(ObjectManager objManager, CreatureObject creatureObj, ClientCreateCharacter create) {
