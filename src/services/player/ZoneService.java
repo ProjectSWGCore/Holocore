@@ -336,6 +336,7 @@ public class ZoneService extends Service {
 		if (hair.isEmpty())
 			return;
 		TangibleObject hairObj = createTangible(objManager, ClientFactory.formatToSharedFile(hair));
+		
 		hairObj.setAppearanceData(customization);
 		creatureObj.setSlot("hair", hairObj);
 		creatureObj.addEquipment(hairObj);
@@ -372,10 +373,9 @@ public class ZoneService extends Service {
 		if (player.getSlottedObject("inventory") == null)
 			return;
 		
-		for (String template : profTemplates.get(profession).getItems(ClientFactory.formatToSharedFile(race))) {
-			TangibleObject clothing = createTangible(objManager, template);
-			player.addChild(clothing);
-		}
+		for (String template : profTemplates.get(profession).getItems(ClientFactory.formatToSharedFile(race)))
+			player.equipItem(createTangible(objManager, template));
+
 	}
 	
 	private void loadProfTemplates() {
