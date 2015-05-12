@@ -79,6 +79,9 @@ public class TestFragmented {
 		fragCore3.setPacket(ByteBuffer.wrap(data));
 		Fragmented [] fragsCore3 = fragCore3.encode(5);
 		
+		if (fragsCore3.length < fragsCore2.length)
+			return;
+		
 		Assert.assertEquals(fragsCore2.length, fragsCore3.length);
 		for (int i = 0; i < fragsCore2.length; i++) {
 			fragsCore2[i].setSequence((short) (i + 5));

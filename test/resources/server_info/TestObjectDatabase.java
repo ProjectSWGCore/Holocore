@@ -29,6 +29,7 @@ package resources.server_info;
 
 import java.io.File;
 
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,14 +40,20 @@ import resources.server_info.ObjectDatabase.Traverser;
 @RunWith(JUnit4.class)
 public class TestObjectDatabase {
 	
-	private void cleanup(String filename) {
-		File f = new File(filename);
-		f.delete();
+	private static final File file = new File("test_odb.db");
+	
+	private void cleanup() {
+		file.delete();
+	}
+	
+	@AfterClass
+	public static void cleanAfter() {
+		file.delete();
 	}
 	
 	@Test
 	public void testPutGet() {
-		cleanup("test_odb.db");
+		cleanup();
 		UncachedObjectDatabase<Integer> odb = new UncachedObjectDatabase<Integer>("test_odb.db");
 		odb.put(500, 1024);
 		Assert.assertEquals(1024, odb.get(500).intValue());
@@ -56,7 +63,7 @@ public class TestObjectDatabase {
 	
 	@Test
 	public void testClearCache() {
-		cleanup("test_odb.db");
+		cleanup();
 		UncachedObjectDatabase<Integer> odb = new UncachedObjectDatabase<Integer>("test_odb.db");
 		odb.put(500, 1024);
 		Assert.assertEquals(1024, odb.get(500).intValue());
@@ -66,7 +73,7 @@ public class TestObjectDatabase {
 	
 	@Test
 	public void testSaveLoad() {
-		cleanup("test_odb.db");
+		cleanup();
 		UncachedObjectDatabase<Integer> odb = new UncachedObjectDatabase<Integer>("test_odb.db");
 		odb.put(500, 1024);
 		Assert.assertEquals(1024, odb.get(500).intValue());
@@ -77,7 +84,7 @@ public class TestObjectDatabase {
 	
 	@Test
 	public void testSaveClearCache() {
-		cleanup("test_odb.db");
+		cleanup();
 		UncachedObjectDatabase<Integer> odb = new UncachedObjectDatabase<Integer>("test_odb.db");
 		odb.put(500, 1024);
 		Assert.assertEquals(1024, odb.get(500).intValue());
@@ -89,7 +96,7 @@ public class TestObjectDatabase {
 	
 	@Test
 	public void testCache() {
-		cleanup("test_odb.db");
+		cleanup();
 		UncachedObjectDatabase<Integer> odb = new UncachedObjectDatabase<Integer>("test_odb.db");
 		odb.put(500, 1024);
 		Assert.assertEquals(1024, odb.get(500).intValue());
@@ -105,7 +112,7 @@ public class TestObjectDatabase {
 	
 	@Test
 	public void testTraverser() {
-		cleanup("test_odb.db");
+		cleanup();
 		UncachedObjectDatabase<Integer> odb = new UncachedObjectDatabase<Integer>("test_odb.db");
 		odb.put(1024, 301);
 		odb.put(2048, 301);
