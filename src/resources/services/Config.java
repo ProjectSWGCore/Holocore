@@ -124,6 +124,22 @@ public class Config {
 	}
 	
 	/**
+	 * Gets the parameter with the specified key. If no such parameter exists,
+	 * or if the value isn't a boolean then it returns the default
+	 * @param key the key to get the value for
+	 * @param def the default value
+	 * @return the value represented by the key, or the default value
+	 */
+	public boolean getBoolean(String key, boolean def) {
+		String val = getString(key, def?"true":"false");
+		if (val.equalsIgnoreCase("true") || val.equals("1"))
+			return true;
+		if (val.equalsIgnoreCase("false") || val.equals("0"))
+			return false;
+		return def;
+	}
+	
+	/**
 	 * Sets the property value for the specified key
 	 * @param key the key of the value to set
 	 * @param value the value to set
@@ -140,6 +156,15 @@ public class Config {
 	 */
 	public void setProperty(String key, int value) {
 		setProperty(key, Integer.toString(value));
+	}
+	
+	/**
+	 * Sets the property value for the specified key
+	 * @param key the key of the value to set
+	 * @param value the value to set
+	 */
+	public void setProperty(String key, boolean value) {
+		setProperty(key, value ? "true" : "false");
 	}
 	
 	/**
