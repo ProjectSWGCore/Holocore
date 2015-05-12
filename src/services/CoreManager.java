@@ -59,23 +59,14 @@ import services.galaxy.GalacticManager;
 public class CoreManager extends Manager {
 	
 	private static final int galaxyId = 1;
-	private static final boolean debugOutput = true;
-	private static PrintStream packetOutput;
-	
-	static {
-		try {
-			packetOutput = new PrintStream(new FileOutputStream("packets.txt", false), true, "UTF-8");
-		} catch (FileNotFoundException | UnsupportedEncodingException e) {
-			e.printStackTrace();
-			packetOutput = System.out;
-		}
-	}
 	
 	private EngineManager engineManager;
 	private GalacticManager galacticManager;
+	private PrintStream packetOutput;
 	private Galaxy galaxy;
 	private long startTime;
 	private boolean shutdownRequested;
+	private boolean packetDebug;
 	
 	public CoreManager() {
 		shutdownRequested = false;
@@ -107,12 +98,14 @@ public class CoreManager extends Manager {
 		registerForIntent(InboundPacketIntent.TYPE);
 		registerForIntent(OutboundPacketIntent.TYPE);
 		registerForIntent(ServerManagementIntent.TYPE);
+		packetDebug = getConfig(ConfigFile.PRIMARY).getBoolean("PACKET-DEBUG", false);
+		initializePacketOutput();
 		return galaxy != null && super.initialize();
 	}
 	
 	@Override
 	public void onIntentReceived(Intent i) {
-		if (debugOutput) {
+		if (packetDebug) {
 			if (i instanceof InboundPacketIntent) {
 				InboundPacketIntent in = (InboundPacketIntent) i;
 				packetOutput.println("IN  " + in.getNetworkId() + ":" + in.getServerType());
@@ -125,6 +118,15 @@ public class CoreManager extends Manager {
 		}
 		if (i instanceof ServerManagementIntent)
 			handleServerManagementIntent((ServerManagementIntent) i);
+	}
+	
+	private void initializePacketOutput() {
+		try {
+			packetOutput = new PrintStream(new FileOutputStream("packets.txt", false), true, "UTF-8");
+		} catch (FileNotFoundException | UnsupportedEncodingException e) {
+			e.printStackTrace();
+			packetOutput = System.out;
+		}
 	}
 	
 	private void handleServerManagementIntent(ServerManagementIntent i) {
