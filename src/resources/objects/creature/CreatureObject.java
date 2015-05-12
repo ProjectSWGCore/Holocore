@@ -27,6 +27,8 @@
 ***********************************************************************************/
 package resources.objects.creature;
 
+import java.util.List;
+
 import network.packets.swg.zone.SceneEndBaselines;
 import network.packets.swg.zone.UpdatePostureMessage;
 import network.packets.swg.zone.UpdatePvpStatusMessage;
@@ -107,6 +109,23 @@ public class CreatureObject extends TangibleObject {
 		initMaxAttributes();
 		initCurrentAttributes();
 		initBaseAttributes();
+	}
+	
+	/**
+	 * It is only recommended that this method be used when you have
+	 * an item and you won't know which slots it will occupy until you've
+	 * looped through the arrangement list that resides within SWGObject.
+	 * 
+	 * If you know the slot which your object is supposed to occupy, it's
+	 * recommended that you instead use setSlot(), effectively skipping
+	 * the process of looping.
+	 * 
+	 * @param item to equip
+	 */
+	public void equipItem(TangibleObject item) {
+		for(List<String> slotNameList : item.getArrangement())
+			for(String slotName : slotNameList)
+				super.setSlot(slotName, item);
 	}
 	
 	public void addEquipment(SWGObject obj) {
