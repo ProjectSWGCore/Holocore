@@ -27,6 +27,8 @@
 ***********************************************************************************/
 package intents;
 
+import java.util.concurrent.TimeUnit;
+
 import resources.control.Intent;
 import resources.control.ServerStatus;
 
@@ -36,6 +38,7 @@ public class ServerStatusIntent extends Intent {
 	
 	private ServerStatus status;
 	private long time;
+	private TimeUnit timeUnit;
 	
 	public ServerStatusIntent() {
 		super(TYPE);
@@ -47,9 +50,10 @@ public class ServerStatusIntent extends Intent {
 		setStatus(status);
 	}
 	
-	public ServerStatusIntent(ServerStatus status, long time) {
+	public ServerStatusIntent(ServerStatus status, long time, TimeUnit timeUnit) {
 		this(status);
 		setTime(time);
+		this.timeUnit = timeUnit;
 	}
 	
 	public void setTime(long time) {
@@ -66,6 +70,10 @@ public class ServerStatusIntent extends Intent {
 	
 	public ServerStatus getStatus() {
 		return status;
+	}
+
+	public TimeUnit getTimeUnit() {
+		return timeUnit;
 	}
 	
 }
