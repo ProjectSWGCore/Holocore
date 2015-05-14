@@ -194,24 +194,7 @@ public class TestQuadTree {
 	
 	private void test(List <Point2D> points, QuadTree <Point2D> tree, double x, double y, double range) {
 		int expected = getExpectedWithinRange(points, x, y, range);
-//		System.out.println("-----------");
 		int actual = tree.getWithinRange(x, y, range).size();
-//		System.out.println("-----------");
-//		if (expected != actual) {
-//			List <Point2D> actualPoints = tree.getWithinRange(x, y, range);
-//			List <Point2D> pCopy = new ArrayList<Point2D>();
-//			for (Point2D p : points) {
-//				if (Math.sqrt(Math.pow(p.x-x, 2) + Math.pow(p.y-y, 2)) <= range) {
-//					pCopy.add(p);
-//				}
-//			}
-//			System.out.println(expected + ", " + pCopy.size() + ", " + actualPoints.size());
-//			pCopy.removeAll(actualPoints);
-//			System.out.println(pCopy.size());
-//			System.out.println(Arrays.toString(pCopy.toArray()));
-//			for (Point2D p : pCopy)
-//				System.out.println(p + " Dist: " + Math.sqrt(Math.pow(p.x-x,2)+Math.pow(p.y-y,2)));
-//		}
 		Assert.assertEquals("Failed at (" + x + ", " + y + ")", expected, actual);
 	}
 	
@@ -219,7 +202,6 @@ public class TestQuadTree {
 		int count = 0;
 		for (Point2D p : points) {
 			if (Math.sqrt(Math.pow(p.x-x, 2) + Math.pow(p.y-y, 2)) <= range) {
-//				System.out.printf("Matched at (%.2f, %.2f) Dist %.3f%n", p.x, p.y, Math.sqrt(Math.pow(p.x-x,2) + Math.pow(p.y-y,2)));
 				count++;
 			}
 		}
