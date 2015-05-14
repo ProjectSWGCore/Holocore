@@ -31,6 +31,8 @@ import intents.ServerManagementIntent;
 import intents.ServerManagementIntent.ServerManagementEvent;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicReference;
 
 import resources.commands.ICmdCallback;
 import resources.objects.SWGObject;
@@ -115,7 +117,7 @@ public class ServerCmdCallback implements ICmdCallback {
 			SuiMessageBox window = new SuiMessageBox(actor, MessageBoxType.YES_NO, "Shutdown Server", "Are you sure you wish to begin the shutdown sequence?");
 			window.addOkButtonCallback(0, new ISuiCallback() {
 				public void handleEvent(Player player, SWGObject actor, int eventType, List<String> returnParams) {
-					new ServerManagementIntent(15, ServerManagementEvent.SHUTDOWN).broadcast();
+					new ServerManagementIntent(15, TimeUnit.MINUTES, ServerManagementEvent.SHUTDOWN).broadcast();
 				}
 			});
 			
@@ -123,19 +125,38 @@ public class ServerCmdCallback implements ICmdCallback {
 		}
 		
 		private void handleCustomShutdownServer(Player actor) {
-			SuiInputBox window = new SuiInputBox(actor, InputBoxType.OK_CANCEL, "Shutdown Server", "Enter the time until the server shuts down. The shutdown sequence "
+			final SuiListBox unitWindow = new SuiListBox(actor, ListBoxType.OK_CANCEL, "Shutdown Server", "Select the time unit that the time will be specified in. ");
+			final SuiInputBox timeWindow = new SuiInputBox(actor, InputBoxType.OK_CANCEL, "Shutdown Server", "Enter the time until the server shuts down. The shutdown sequence "
 					+ "will begin upon hitting OK.");
-			window.allowStringCharacters(false);
-
-			window.addInputTextCallback(0, new ISuiCallback() {
+			final AtomicReference<TimeUnit> timeUnitReference = new AtomicReference<>();
+			final TimeUnit[] unitValues = TimeUnit.values();
+			
+			timeWindow.allowStringCharacters(false);
+			
+			// Ziggy: Add all the TimeUnit values as options
+			for(byte i = 0; i < unitValues.length; i++)
+				unitWindow.addListItem(unitValues[i].toString(), i);
+			
+			unitWindow.addItemSelectionCallback(0, new ISuiCallback() {
 				public void handleEvent(Player player, SWGObject actor, int eventType, List<String> returnParams) {
-					long countdown = Long.parseLong(returnParams.get(0));
-					new ServerManagementIntent(countdown, ServerManagementEvent.SHUTDOWN).broadcast();
+					try {
+						timeUnitReference.set(unitValues[SuiListBox.getSelectedIndex(returnParams)]);
+						timeWindow.display();		// Ziggy: Display the next window
+					} catch (ArrayIndexOutOfBoundsException e) {
+						// Ziggy: This wasn't a valid selection - do nothing
+						// Should only be possible if they're using some sort of hack to alter the SUI window
+					}
 				}
-				
 			});
 			
-			window.display();
+			timeWindow.addInputTextCallback(0, new ISuiCallback() {
+				public void handleEvent(Player player, SWGObject actor, int eventType, List<String> returnParams) {
+					long countdown = Long.parseLong(returnParams.get(0));
+					new ServerManagementIntent(countdown, timeUnitReference.get(), ServerManagementEvent.SHUTDOWN).broadcast();
+				}
+			});
+			
+			unitWindow.display();
 		}
 	}
 }

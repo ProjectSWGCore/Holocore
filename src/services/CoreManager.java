@@ -131,24 +131,28 @@ public class CoreManager extends Manager {
 	
 	private void handleServerManagementIntent(ServerManagementIntent i) {
 		switch(i.getEvent()) {
-			case SHUTDOWN: initiateShutdownSequence(i.getTime());  break;
+			case SHUTDOWN: initiateShutdownSequence(i);  break;
 			default: break;
 		}
 	}
 
-	private void initiateShutdownSequence(long time) {
+	private void initiateShutdownSequence(ServerManagementIntent i) {
 		System.out.println("Beginning server shutdown sequence...");
+		long time = i.getTime();
+		TimeUnit timeUnit = i.getTimeUnit();
 		
-		if (time > 0) {
-			Executors.newSingleThreadScheduledExecutor().schedule(new Runnable() {
-				public void run() {
-					shutdownRequested = true;
-				}
-			}, time, TimeUnit.MINUTES);
-		} else {
-			shutdownRequested = true;
-		}
-		new ServerStatusIntent(ServerStatus.SHUTDOWN_REQUESTED, time).broadcast();
+		Executors.newSingleThreadScheduledExecutor().schedule(
+				new Runnable() {
+					@Override
+					public void run() {
+						shutdownRequested = true;
+					}
+					// Ziggy: Give the broadcast method extra time to complete.
+					// If we don't, the final broadcast won't be displayed.
+				},
+				TimeUnit.NANOSECONDS.convert(time, timeUnit) + TimeUnit.NANOSECONDS.convert(1, TimeUnit.SECONDS), TimeUnit.NANOSECONDS);
+
+		new ServerStatusIntent(ServerStatus.SHUTDOWN_REQUESTED, time, i.getTimeUnit()).broadcast();
 	}
 	
 	public GalaxyStatus getGalaxyStatus() {

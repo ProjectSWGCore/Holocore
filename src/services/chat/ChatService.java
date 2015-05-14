@@ -32,8 +32,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
 import intents.GalacticPacketIntent;
 import intents.NotifyPlayersPacketIntent;
@@ -124,7 +126,7 @@ public class ChatService extends Service {
 			case ServerStatusIntent.TYPE:
 				if (i instanceof ServerStatusIntent)
 					if (((ServerStatusIntent)i).getStatus() == ServerStatus.SHUTDOWN_REQUESTED)
-						sendShutdownBroadcasts(((ServerStatusIntent) i).getTime());
+						sendShutdownBroadcasts((ServerStatusIntent) i);
 				break;
 		}
 	}
@@ -309,29 +311,45 @@ public class ChatService extends Service {
 		player.sendPacket(new ChatSystemMessage(SystemChatType.SCREEN_AND_CHAT, pckg));
 	}
 	
-	private void sendShutdownBroadcasts(final long time) {
+	private void sendShutdownBroadcasts(ServerStatusIntent i) {
+		final TimeUnit timeUnit = i.getTimeUnit();
+		final long time = i.getTime();
+		final TimeUnit broadcastUnit = TimeUnit.NANOSECONDS;
+		final long timeNanoSeconds = broadcastUnit.convert(time, timeUnit);
+		final AtomicLong intervalCount = new AtomicLong((long) Math.ceil(Math.sqrt(Math.sqrt(timeNanoSeconds)) / 200));
+		final ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
 		final AtomicInteger runCount = new AtomicInteger();
-		final long interval = (int) (time / 3);
+		final AtomicLong timeRemaining = new AtomicLong(time);
+		final long timeBetweenBroadcasts;
+		final String finalShutdownMessage = "The server will now be shutting down.";
 		
-		Executors.newSingleThreadScheduledExecutor().scheduleAtFixedRate(new Runnable() {
-			public void run() {
-				switch(runCount.getAndIncrement()) {
-				case 0:
-					broadcastGalaxyMessage(String.format("The server will be shutting down in %d minutes.", time), null);
-					break;
-				case 1:
-					broadcastGalaxyMessage(String.format("The server will be shutting down in %d minutes.", time - interval), null);
-					break;
-				case 2:
-					broadcastGalaxyMessage(String.format("The server will be shutting down in %d minutes.", time - (interval*2)), null);
-					break;
-				case 3:
-					broadcastGalaxyMessage("The server will now be shutting down.", null);
-					throw new RuntimeException("Reached max runCount"); // no "clean" ways to cancel the runnable I can think of
+		if(intervalCount.get() > timeNanoSeconds)
+			intervalCount.set(time);
+		
+		if(time > 0) {
+			timeBetweenBroadcasts  = timeNanoSeconds / intervalCount.get();
+			
+			executor.scheduleAtFixedRate(new Runnable() {
+				@Override
+				public void run() {
+					String message;
+					long timeRemainingVal = timeRemaining.get();
+					
+					if(runCount.getAndIncrement() == intervalCount.get()) {
+						message = finalShutdownMessage;
+						executor.shutdown();
+					} else {
+						String unitName = timeUnit.name().toLowerCase(Locale.ENGLISH);
+						message = String.format("The server will be shutting down in %d %s", timeRemainingVal, unitName.substring(0, unitName.length() - 1));
+						message += (timeRemainingVal == 1 ? "" : "s") + ".";
+						timeRemaining.set(timeRemainingVal - timeUnit.convert(timeBetweenBroadcasts, broadcastUnit));
+					}
+					
+					broadcastGalaxyMessage(message, null);
 				}
-			}
-		}, 0, interval, TimeUnit.MINUTES);
-		
+			}, 0, timeBetweenBroadcasts, broadcastUnit);
+		} else
+			broadcastGalaxyMessage(finalShutdownMessage, null);
 	}
 	
 	private void sendPersistentMessageHeaders(Player player, String galaxy) {
