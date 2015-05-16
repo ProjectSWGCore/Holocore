@@ -18,6 +18,7 @@ import utilities.ThreadUtilities;
 
 public class ShutdownService extends Service {
 	
+	private static final String SHUTDOWN_PERIODIC = "The server will be shutting down in %d %s.";
 	private static final String SHUTDOWN_MESSAGE = "The server will now be shutting down.";
 	private static final TimeUnit BROADCAST_UNIT = TimeUnit.NANOSECONDS;
 	
@@ -82,8 +83,10 @@ public class ShutdownService extends Service {
 					message = SHUTDOWN_MESSAGE;
 				} else {
 					String unitName = timeUnit.name().toLowerCase(Locale.ENGLISH);
-					message = String.format("The server will be shutting down in %d %s", timeRemainingVal, unitName.substring(0, unitName.length() - 1));
-					message += (timeRemainingVal == 1 ? "" : "s") + ".";
+					String units = unitName.substring(0, unitName.length()-1);
+					if (timeRemainingVal > 1)
+						units += "s";
+					message = String.format(SHUTDOWN_PERIODIC, timeRemainingVal, units);
 					timeRemaining.set(timeRemainingVal - timeUnit.convert(timeBetweenBroadcasts, BROADCAST_UNIT));
 				}
 				broadcast(message);
