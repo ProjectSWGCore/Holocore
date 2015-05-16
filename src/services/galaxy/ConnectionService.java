@@ -48,6 +48,7 @@ import resources.player.Player;
 import resources.player.PlayerEvent;
 import resources.player.PlayerFlags;
 import resources.player.PlayerState;
+import utilities.ThreadUtilities;
 
 public class ConnectionService extends Service {
 	
@@ -61,7 +62,7 @@ public class ConnectionService extends Service {
 	private final List <Player> zonedInPlayers;
 	
 	public ConnectionService() {
-		updateService = Executors.newSingleThreadScheduledExecutor();
+		updateService = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("conn-update-service"));
 		zonedInPlayers = new LinkedList<Player>();
 		disappearPlayers = new LinkedList<Player>();
 		updateRunnable = new Runnable() {

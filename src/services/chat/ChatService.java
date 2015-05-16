@@ -31,11 +31,6 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicLong;
 
 import intents.GalacticPacketIntent;
 import intents.NotifyPlayersPacketIntent;
@@ -60,7 +55,6 @@ import network.packets.swg.zone.chat.ChatSystemMessage.SystemChatType;
 import network.packets.swg.zone.object_controller.SpatialChat;
 import resources.Terrain;
 import resources.control.Intent;
-import resources.control.ServerStatus;
 import resources.control.Service;
 import resources.encodables.OutOfBand;
 import resources.encodables.ProsePackage;
@@ -122,11 +116,6 @@ public class ChatService extends Service {
 			case ChatBroadcastIntent.TYPE:
 				if (i instanceof ChatBroadcastIntent)
 					handleChatBroadcast((ChatBroadcastIntent) i);
-				break;
-			case ServerStatusIntent.TYPE:
-				if (i instanceof ServerStatusIntent)
-					if (((ServerStatusIntent)i).getStatus() == ServerStatus.SHUTDOWN_REQUESTED)
-						sendShutdownBroadcasts((ServerStatusIntent) i);
 				break;
 		}
 	}
@@ -309,47 +298,6 @@ public class ChatService extends Service {
 	private void broadcastPersonalMessage(ProsePackage prose, Player player) {
 		OutOfBand pckg = new OutOfBand(prose);
 		player.sendPacket(new ChatSystemMessage(SystemChatType.SCREEN_AND_CHAT, pckg));
-	}
-	
-	private void sendShutdownBroadcasts(ServerStatusIntent i) {
-		final TimeUnit timeUnit = i.getTimeUnit();
-		final long time = i.getTime();
-		final TimeUnit broadcastUnit = TimeUnit.NANOSECONDS;
-		final long timeNanoSeconds = broadcastUnit.convert(time, timeUnit);
-		final AtomicLong intervalCount = new AtomicLong((long) Math.ceil(Math.sqrt(Math.sqrt(timeNanoSeconds)) / 200));
-		final ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-		final AtomicInteger runCount = new AtomicInteger();
-		final AtomicLong timeRemaining = new AtomicLong(time);
-		final long timeBetweenBroadcasts;
-		final String finalShutdownMessage = "The server will now be shutting down.";
-		
-		if(intervalCount.get() > timeNanoSeconds)
-			intervalCount.set(time);
-		
-		if(time > 0) {
-			timeBetweenBroadcasts  = timeNanoSeconds / intervalCount.get();
-			
-			executor.scheduleAtFixedRate(new Runnable() {
-				@Override
-				public void run() {
-					String message;
-					long timeRemainingVal = timeRemaining.get();
-					
-					if(runCount.getAndIncrement() == intervalCount.get()) {
-						message = finalShutdownMessage;
-						executor.shutdown();
-					} else {
-						String unitName = timeUnit.name().toLowerCase(Locale.ENGLISH);
-						message = String.format("The server will be shutting down in %d %s", timeRemainingVal, unitName.substring(0, unitName.length() - 1));
-						message += (timeRemainingVal == 1 ? "" : "s") + ".";
-						timeRemaining.set(timeRemainingVal - timeUnit.convert(timeBetweenBroadcasts, broadcastUnit));
-					}
-					
-					broadcastGalaxyMessage(message, null);
-				}
-			}, 0, timeBetweenBroadcasts, broadcastUnit);
-		} else
-			broadcastGalaxyMessage(finalShutdownMessage, null);
 	}
 	
 	private void sendPersistentMessageHeaders(Player player, String galaxy) {
