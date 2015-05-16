@@ -70,7 +70,6 @@ import resources.player.Player;
 import resources.player.PlayerState;
 import resources.server_info.RelationalDatabase;
 import resources.services.Config;
-import services.EngineManager;
 
 public class LoginService extends Service {
 	
@@ -214,7 +213,7 @@ public class LoginService extends Service {
 			
 		}
 		message += "\n\nMake sure to login to forums first!";
-		sendPacket(player, new LoginIncorrectClientId(getServerString(), EngineManager.SERVER_VERSION));
+		sendPacket(player, new LoginIncorrectClientId(getServerString(), "3.14159265"));
 		sendPacket(player, new ErrorMessage(type, message, false));
 		System.err.println("[" + id.getUsername() + "] Invalid user/pass combo! IP: " + id.getAddress() + ":" + id.getPort());
 		player.setPlayerState(PlayerState.DISCONNECTED);
