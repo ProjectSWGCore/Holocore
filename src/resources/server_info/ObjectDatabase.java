@@ -32,8 +32,9 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
+
+import utilities.ThreadUtilities;
 
 public abstract class ObjectDatabase<V extends Serializable> {
 	
@@ -41,7 +42,6 @@ public abstract class ObjectDatabase<V extends Serializable> {
 	private final long autosaveInterval;
 	private final ScheduledExecutorService autosaveService;
 	private final Runnable autosaveRunnable;
-	private ScheduledFuture<?> autosaveScheduled;
 	
 	public ObjectDatabase(String filename) {
 		this(filename, TimeUnit.MINUTES.toMillis(5));
@@ -57,7 +57,7 @@ public abstract class ObjectDatabase<V extends Serializable> {
 		if (autosaveInterval < 60000)
 			autosaveInterval = 60000;
 		this.autosaveInterval = autosaveInterval;
-		this.autosaveService = Executors.newSingleThreadScheduledExecutor();
+		this.autosaveService = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("odb-autosave-"+file.getName()));
 		this.autosaveRunnable = new Runnable() {
 			public void run() {
 				autosavePeriodic();
@@ -74,7 +74,7 @@ public abstract class ObjectDatabase<V extends Serializable> {
 	
 	private void setupAutosave() {
 		synchronized (autosaveService) {
-			autosaveScheduled = autosaveService.scheduleAtFixedRate(autosaveRunnable, autosaveInterval, autosaveInterval, TimeUnit.MILLISECONDS);
+			autosaveService.scheduleAtFixedRate(autosaveRunnable, autosaveInterval, autosaveInterval, TimeUnit.MILLISECONDS);
 		}
 	}
 	
@@ -99,28 +99,9 @@ public abstract class ObjectDatabase<V extends Serializable> {
 		}
 	}
 	
-	public final boolean restartAutosave() {
-		synchronized (autosaveService) {
-			if (autosaveScheduled != null)
-				return false;
-			setupAutosave();
-			return true;
-		}
-	}
-	
-	public final boolean stopAutosave() {
-		synchronized (autosaveService) {
-			if (autosaveScheduled == null)
-				return false;
-			boolean success = autosaveScheduled.cancel(true);
-			autosaveScheduled = null;
-			return success;
-		}
-	}
-	
 	public void close() {
 		save();
-		stopAutosave();
+		autosaveService.shutdownNow();
 	}
 	
 	public final File getFile() {
