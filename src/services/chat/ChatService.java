@@ -95,6 +95,12 @@ public class ChatService extends Service {
 		return super.initialize();
 	}
 	
+	@Override
+	public boolean terminate() {
+		mails.close();
+		return super.terminate();
+	}
+	
 	public void onIntentReceived(Intent i) {
 		switch (i.getType()) {
 			case GalacticPacketIntent.TYPE:

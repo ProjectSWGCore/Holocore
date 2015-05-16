@@ -178,7 +178,7 @@ public class ObjectManager extends Manager {
 				obj.setOwner(null);
 			}
 		});
-		objects.save();
+		objects.close();
 		return super.terminate();
 	}
 	
