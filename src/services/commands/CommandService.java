@@ -157,5 +157,6 @@ public class CommandService extends Service {
 		registerCallback("prone", new ProneCmdCallback());
 		registerCallback("kneel", new KneelCmdCallback());
 		registerCallback("toggleAwayFromKeyBoard", new AfkCmdCallback());
+		registerCallback("jumpServer", new JumpCmdCallback());
 	}
 }

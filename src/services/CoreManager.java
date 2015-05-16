@@ -35,6 +35,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import network.packets.Packet;
@@ -60,6 +61,7 @@ public class CoreManager extends Manager {
 	
 	private static final int galaxyId = 1;
 	
+	private final ScheduledExecutorService shutdownService;
 	private EngineManager engineManager;
 	private GalacticManager galacticManager;
 	private PrintStream packetOutput;
@@ -69,6 +71,7 @@ public class CoreManager extends Manager {
 	private boolean packetDebug;
 	
 	public CoreManager() {
+		shutdownService = Executors.newSingleThreadScheduledExecutor();
 		shutdownRequested = false;
 		galaxy = getGalaxy();
 		if (galaxy != null) {
@@ -104,6 +107,12 @@ public class CoreManager extends Manager {
 	}
 	
 	@Override
+	public boolean terminate() {
+		shutdownService.shutdownNow();
+		return super.terminate();
+	}
+	
+	@Override
 	public void onIntentReceived(Intent i) {
 		if (packetDebug) {
 			if (i instanceof InboundPacketIntent) {
@@ -135,13 +144,13 @@ public class CoreManager extends Manager {
 			default: break;
 		}
 	}
-
+	
 	private void initiateShutdownSequence(ServerManagementIntent i) {
 		System.out.println("Beginning server shutdown sequence...");
 		long time = i.getTime();
 		TimeUnit timeUnit = i.getTimeUnit();
 		
-		Executors.newSingleThreadScheduledExecutor().schedule(
+		shutdownService.schedule(
 				new Runnable() {
 					@Override
 					public void run() {

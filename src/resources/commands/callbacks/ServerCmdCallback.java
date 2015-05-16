@@ -139,13 +139,11 @@ public class ServerCmdCallback implements ICmdCallback {
 			
 			unitWindow.addItemSelectionCallback(0, new ISuiCallback() {
 				public void handleEvent(Player player, SWGObject actor, int eventType, List<String> returnParams) {
-					try {
-						timeUnitReference.set(unitValues[SuiListBox.getSelectedIndex(returnParams)]);
-						timeWindow.display();		// Ziggy: Display the next window
-					} catch (ArrayIndexOutOfBoundsException e) {
-						// Ziggy: This wasn't a valid selection - do nothing
-						// Should only be possible if they're using some sort of hack to alter the SUI window
-					}
+					int index = SuiListBox.getSelectedIndex(returnParams);
+					if (index < 0 || index >= unitValues.length)
+						return;
+					timeUnitReference.set(unitValues[index]);
+					timeWindow.display();		// Ziggy: Display the next window
 				}
 			});
 			

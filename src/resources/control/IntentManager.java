@@ -38,6 +38,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.TimeUnit;
 
+import utilities.ThreadUtilities;
+
 
 /**
  * Don't you dare make this public.
@@ -65,7 +67,7 @@ class IntentManager {
 	
 	public void initialize() {
 		if (!initialized) {
-			broadcastThreads = Executors.newCachedThreadPool();
+			broadcastThreads = Executors.newCachedThreadPool(ThreadUtilities.newThreadFactory("intent-processor-%d"));
 			intentRegistrations = new HashMap<String, List<IntentReceiver>>();
 			intentQueue = new ConcurrentLinkedQueue<Intent>();
 			initialized = true;

@@ -37,14 +37,15 @@ import services.network.NetworkManager;
 
 public class EngineManager extends Manager {
 	
-	public static final String SERVER_VERSION = "0.6";
-	
+	private ShutdownService shutdownService;
 	private NetworkManager networkManager;
 	
 	public EngineManager(Galaxy galaxy) {
 		networkManager = new NetworkManager(galaxy);
+		shutdownService = new ShutdownService();
 		
 		addChildService(networkManager);
+		addChildService(shutdownService);
 	}
 	
 	@Override
