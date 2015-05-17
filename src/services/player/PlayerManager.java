@@ -81,48 +81,14 @@ public class PlayerManager extends Manager {
 	
 	@Override
 	public void onIntentReceived(Intent i) {
-		if (i instanceof InboundPacketIntent) {
-			long networkId = ((InboundPacketIntent) i).getNetworkId();
-			Player player = players.get(networkId);
-			if (player != null)
-				player.updateLastPacketTimestamp();
-		} else if (i instanceof GalacticPacketIntent) {
-			GalacticPacketIntent gpi = (GalacticPacketIntent) i;
-			Packet packet = gpi.getPacket();
-			ServerType type = gpi.getServerType();
-			long networkId = gpi.getNetworkId();
-			Player player = null;
-			if (type == ServerType.ZONE && packet instanceof ClientIdMsg)
-				player = transitionLoginToZone(networkId, gpi.getGalaxy().getId(), (ClientIdMsg) packet);
-			else
-				player = players.get(networkId);
-			if (player != null && type == ServerType.ZONE && packet instanceof SelectCharacter)
-				removeDuplicatePlayers(player, ((SelectCharacter)packet).getCharacterId());
-			if (type == ServerType.LOGIN && player == null) {
-				player = new Player(this, networkId);
-				players.put(networkId, player);
-			}
-			if (player != null) {
-				if (type == ServerType.LOGIN)
-					loginService.handlePacket(gpi, player, packet);
-				else if (type == ServerType.ZONE)
-					zoneService.handlePacket(gpi, player, networkId, packet);
-			}
-		} else if (i instanceof PlayerEventIntent) {
-			if (((PlayerEventIntent)i).getEvent() == PlayerEvent.PE_DISAPPEAR) {
-				PlayerEventIntent pei = (PlayerEventIntent) i;
-				Player p = pei.getPlayer();
-				if (p.getPlayerState() == PlayerState.DISCONNECTED) {
-					players.remove(p.getNetworkId());
-				}
-			}
-		} else if (i instanceof NotifyPlayersPacketIntent) {
-			NotifyPlayersPacketIntent intent = (NotifyPlayersPacketIntent) i;
-			if (intent.getTerrain() != null) 
-				notifyPlayersAtPlanet(intent.getTerrain(), intent.getPacket());
-			else
-				notifyPlayers(intent.getPacket());
-		}
+		if (i instanceof InboundPacketIntent)
+			onInboundPacketIntent((InboundPacketIntent) i);
+		else if (i instanceof GalacticPacketIntent)
+			onGalacticPacketIntent((GalacticPacketIntent) i);
+		else if (i instanceof PlayerEventIntent)
+			onPlayerEventIntent((PlayerEventIntent) i);
+		else if (i instanceof NotifyPlayersPacketIntent)
+			onNotifyPlayersPacketIntent((NotifyPlayersPacketIntent) i);
 	}
 	
 	public Player getPlayerByCreatureName(String name) {
@@ -168,6 +134,28 @@ public class PlayerManager extends Manager {
 		return id;
 	}
 	
+	public void notifyPlayers(Packet... packets) {
+		synchronized(players) {
+			for (Player p : players.values()) {
+				if (p != null && p.getCreatureObject() != null)
+					p.sendPacket(packets);
+			}
+		}
+	}
+	
+	public void notifyPlayersAtPlanet(Terrain terrain, Packet... packets) {
+		synchronized(players) {
+			for (Player p : players.values()) {
+				if (p != null && p.getCreatureObject() != null && p.getCreatureObject().getLocation().getTerrain() == terrain)
+					p.sendPacket(packets);
+			}
+		}
+	}
+	
+	public Player getPlayerFromNetworkId(long networkId) {
+		return players.get(networkId);
+	}
+	
 	private void removeDuplicatePlayers(Player player, long charId) {
 		synchronized (players) {
 			Iterator <Player> it = players.values().iterator();
@@ -203,26 +191,50 @@ public class PlayerManager extends Manager {
 		return null;
 	}
 	
-	public void notifyPlayers(Packet... packets) {
-		synchronized(players) {
-			for (Player p : players.values()) {
-				if (p != null && p.getCreatureObject() != null)
-					p.sendPacket(packets);
+	private void onPlayerEventIntent(PlayerEventIntent pei) {
+		if (pei.getEvent() == PlayerEvent.PE_DISAPPEAR) {
+			Player p = pei.getPlayer();
+			if (p.getPlayerState() == PlayerState.DISCONNECTED) {
+				players.remove(p.getNetworkId());
 			}
 		}
 	}
 	
-	public void notifyPlayersAtPlanet(Terrain terrain, Packet... packets) {
-		synchronized(players) {
-			for (Player p : players.values()) {
-				if (p != null && p.getCreatureObject() != null && p.getCreatureObject().getLocation().getTerrain() == terrain)
-					p.sendPacket(packets);
-			}
+	private void onInboundPacketIntent(InboundPacketIntent ipi) {
+		long networkId = ipi.getNetworkId();
+		Player player = players.get(networkId);
+		if (player != null)
+			player.updateLastPacketTimestamp();
+	}
+	
+	private void onGalacticPacketIntent(GalacticPacketIntent gpi) {
+		Packet packet = gpi.getPacket();
+		ServerType type = gpi.getServerType();
+		long networkId = gpi.getNetworkId();
+		Player player = null;
+		if (type == ServerType.ZONE && packet instanceof ClientIdMsg)
+			player = transitionLoginToZone(networkId, gpi.getGalaxy().getId(), (ClientIdMsg) packet);
+		else
+			player = players.get(networkId);
+		if (player != null && type == ServerType.ZONE && packet instanceof SelectCharacter)
+			removeDuplicatePlayers(player, ((SelectCharacter)packet).getCharacterId());
+		if (type == ServerType.LOGIN && player == null) {
+			player = new Player(this, networkId);
+			players.put(networkId, player);
+		}
+		if (player != null) {
+			if (type == ServerType.LOGIN)
+				loginService.handlePacket(gpi, player, packet);
+			else if (type == ServerType.ZONE)
+				zoneService.handlePacket(gpi, player, networkId, packet);
 		}
 	}
 	
-	public Player getPlayerFromNetworkId(long networkId) {
-		return players.get(networkId);
+	private void onNotifyPlayersPacketIntent(NotifyPlayersPacketIntent nppi) {
+		if (nppi.getTerrain() != null) 
+			notifyPlayersAtPlanet(nppi.getTerrain(), nppi.getPacket());
+		else
+			notifyPlayers(nppi.getPacket());
 	}
 	
 }
