@@ -25,38 +25,49 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package intents;
+package intents.network;
 
-import network.packets.Packet;
+import network.packets.soe.Disconnect.DisconnectReason;
 import resources.control.Intent;
 
-public class OutboundPacketIntent extends Intent {
+
+public class CloseConnectionIntent extends Intent {
 	
-	public static final String TYPE = "OutboundPacketIntent";
+	public static final String TYPE = "CloseConnectionIntent";
 	
-	private Packet packet;
+	private int connId;
 	private long networkId;
+	private DisconnectReason reason;
 	
-	public OutboundPacketIntent(Packet p, long networkId) {
+	public CloseConnectionIntent(int connId, long networkId, DisconnectReason reason) {
 		super(TYPE);
-		setPacket(p);
+		setConnectionId(connId);
 		setNetworkId(networkId);
+		setReason(reason);
 	}
 	
-	public void setPacket(Packet p) {
-		this.packet = p;
+	public void setConnectionId(int connId) {
+		this.connId = connId;
 	}
 	
 	public void setNetworkId(long networkId) {
 		this.networkId = networkId;
 	}
 	
-	public Packet getPacket() {
-		return packet;
+	public void setReason(DisconnectReason reason) {
+		this.reason = reason;
+	}
+	
+	public int getConnectionId() {
+		return connId;
 	}
 	
 	public long getNetworkId() {
 		return networkId;
+	}
+	
+	public DisconnectReason getReason() {
+		return reason;
 	}
 	
 }

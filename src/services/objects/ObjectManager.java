@@ -27,10 +27,9 @@
 ***********************************************************************************/
 package services.objects;
 
-import intents.GalacticPacketIntent;
 import intents.ObjectTeleportIntent;
 import intents.PlayerEventIntent;
-import intents.swgobject_events.SWGObjectEventIntent;
+import intents.network.GalacticPacketIntent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -90,7 +89,6 @@ public class ObjectManager extends Manager {
 	
 	@Override
 	public boolean initialize() {
-		registerForIntent(SWGObjectEventIntent.TYPE);
 		registerForIntent(GalacticPacketIntent.TYPE);
 		registerForIntent(PlayerEventIntent.TYPE);
 		registerForIntent(ObjectTeleportIntent.TYPE);

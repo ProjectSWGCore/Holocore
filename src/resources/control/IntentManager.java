@@ -27,7 +27,7 @@
 ***********************************************************************************/
 package resources.control;
 
-import intents.ServerStatusIntent;
+import intents.server.ServerStatusIntent;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -25,34 +25,26 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package intents;
+package intents.network;
 
-import network.packets.Packet;
+import resources.control.Intent;
 import resources.network.ServerType;
+import resources.network.UDPServer.UDPPacket;
 
-public class GalacticPacketIntent extends GalacticIntent {
+public class InboundUdpPacketIntent extends Intent {
 	
-	public static final String TYPE = "GalacticPacketIntent";
+	public static final String TYPE = "InboundUdpPacketIntent";
 	
-	private Packet packet;
+	private UDPPacket packet;
 	private ServerType type;
-	private long networkId;
 	
-	public GalacticPacketIntent(InboundPacketIntent i) {
-		super(TYPE);
-		setPacket(i.getPacket());
-		setServerType(i.getServerType());
-		setNetworkId(i.getNetworkId());
-	}
-	
-	public GalacticPacketIntent(ServerType type, Packet p, long networkId) {
+	public InboundUdpPacketIntent(ServerType type, UDPPacket p) {
 		super(TYPE);
 		setPacket(p);
 		setServerType(type);
-		setNetworkId(networkId);
 	}
-
-	public void setPacket(Packet p) {
+	
+	public void setPacket(UDPPacket p) {
 		this.packet = p;
 	}
 	
@@ -60,20 +52,12 @@ public class GalacticPacketIntent extends GalacticIntent {
 		this.type = type;
 	}
 	
-	public void setNetworkId(long networkId) {
-		this.networkId = networkId;
-	}
-	
-	public Packet getPacket() {
+	public UDPPacket getPacket() {
 		return packet;
 	}
 	
 	public ServerType getServerType() {
 		return type;
-	}
-	
-	public long getNetworkId() {
-		return networkId;
 	}
 	
 }

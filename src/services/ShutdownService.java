@@ -27,9 +27,9 @@
 ***********************************************************************************/
 package services;
 
-import intents.ServerStatusIntent;
 import intents.chat.ChatBroadcastIntent;
 import intents.chat.ChatBroadcastIntent.BroadcastType;
+import intents.server.ServerStatusIntent;
 
 import java.util.Locale;
 import java.util.concurrent.Executors;

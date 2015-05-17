@@ -27,10 +27,10 @@
 ***********************************************************************************/
 package services.network;
 
-import intents.CloseConnectionIntent;
-import intents.InboundPacketIntent;
-import intents.InboundUdpPacketIntent;
-import intents.OutboundPacketIntent;
+import intents.network.CloseConnectionIntent;
+import intents.network.InboundPacketIntent;
+import intents.network.InboundUdpPacketIntent;
+import intents.network.OutboundPacketIntent;
 
 import java.net.InetAddress;
 import java.nio.ByteBuffer;

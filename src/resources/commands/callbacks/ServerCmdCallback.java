@@ -27,8 +27,8 @@
 ***********************************************************************************/
 package resources.commands.callbacks;
 
-import intents.ServerManagementIntent;
-import intents.ServerManagementIntent.ServerManagementEvent;
+import intents.server.ServerManagementIntent;
+import intents.server.ServerManagementIntent.ServerManagementEvent;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;

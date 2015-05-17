@@ -25,26 +25,38 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package intents.swgobject_events;
+package intents.network;
 
-import resources.Location;
-import resources.objects.SWGObject;
+import network.packets.Packet;
+import resources.control.Intent;
 
-public class SWGObjectMovedIntent extends SWGObjectEventIntent {
+public class OutboundPacketIntent extends Intent {
 	
-	private Location oldLocation;
+	public static final String TYPE = "OutboundPacketIntent";
 	
-	public SWGObjectMovedIntent(SWGObject object, Location oldLocation) {
-		super(object, SWGObjectEventIntent.Event.SOE_UPDATE_LOCATION);
-		this.oldLocation = oldLocation;
+	private Packet packet;
+	private long networkId;
+	
+	public OutboundPacketIntent(Packet p, long networkId) {
+		super(TYPE);
+		setPacket(p);
+		setNetworkId(networkId);
 	}
 	
-	public Location getOldLocation() {
-		return oldLocation;
+	public void setPacket(Packet p) {
+		this.packet = p;
 	}
 	
-	public Location getNewLocation() {
-		return getObject().getLocation();
+	public void setNetworkId(long networkId) {
+		this.networkId = networkId;
+	}
+	
+	public Packet getPacket() {
+		return packet;
+	}
+	
+	public long getNetworkId() {
+		return networkId;
 	}
 	
 }

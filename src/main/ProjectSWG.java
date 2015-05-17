@@ -27,7 +27,7 @@
 ***********************************************************************************/
 package main;
 
-import intents.ServerStatusIntent;
+import intents.server.ServerStatusIntent;
 import resources.Galaxy.GalaxyStatus;
 import resources.control.IntentManager;
 import resources.control.ServerStatus;

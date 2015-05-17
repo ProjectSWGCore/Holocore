@@ -32,13 +32,13 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
-import intents.GalacticPacketIntent;
 import intents.NotifyPlayersPacketIntent;
 import intents.PlayerEventIntent;
-import intents.ServerStatusIntent;
 import intents.chat.ChatBroadcastIntent;
 import intents.chat.PersistentMessageIntent;
 import intents.chat.SpatialChatIntent;
+import intents.network.GalacticPacketIntent;
+import intents.server.ServerStatusIntent;
 import network.packets.Packet;
 import network.packets.swg.SWGPacket;
 import network.packets.swg.zone.ChatRequestRoomList;

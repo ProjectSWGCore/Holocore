@@ -25,39 +25,47 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package intents;
+package intents.server;
+
+import java.util.concurrent.TimeUnit;
 
 import resources.control.Intent;
-import resources.network.ServerType;
-import resources.network.UDPServer.UDPPacket;
+import resources.player.Player;
 
-public class OutboundUdpPacketIntent extends Intent {
+public class ServerManagementIntent extends Intent {
+	public static final String TYPE = "PlayerEventIntent";
 	
-	public static final String TYPE = "OutboundUdpPacketIntent";
+	private Player player;
+	private String target;
+	private ServerManagementEvent event;
+	private long time;
+	private TimeUnit timeUnit;
 	
-	private UDPPacket packet;
-	private ServerType type;
-	
-	public OutboundUdpPacketIntent(ServerType type, UDPPacket p) {
+	public ServerManagementIntent(Player p, String target, ServerManagementEvent event) {
 		super(TYPE);
-		setPacket(p);
-		setServerType(type);
+		this.player = p;
+		this.target = target;
+		this.event = event;
 	}
 	
-	public void setPacket(UDPPacket p) {
-		this.packet = p;
+	public ServerManagementIntent(long time, TimeUnit timeUnit, ServerManagementEvent event) {
+		this(null, null, event);
+		this.time = time;
+		this.timeUnit = timeUnit;
 	}
 	
-	public void setServerType(ServerType type) {
-		this.type = type;
-	}
+	public long getTime() { return time; }
+	public TimeUnit getTimeUnit() { return timeUnit; }
+	public Player getPlayer() { return player; }
+	public String getTarget() { return target; }
+	public ServerManagementEvent getEvent() { return event; }
 	
-	public UDPPacket getPacket() {
-		return packet;
+	public enum ServerManagementEvent {
+		LOCK,
+		UNLOCK,
+		SHUTDOWN,
+		KICK,
+		BAN,
+		UNBAN
 	}
-	
-	public ServerType getServerType() {
-		return type;
-	}
-	
 }

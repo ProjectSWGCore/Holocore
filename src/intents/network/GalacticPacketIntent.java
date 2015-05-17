@@ -25,47 +25,56 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package intents;
+package intents.network;
 
-import java.util.concurrent.TimeUnit;
+import intents.GalacticIntent;
+import network.packets.Packet;
+import resources.network.ServerType;
 
-import resources.control.Intent;
-import resources.player.Player;
-
-public class ServerManagementIntent extends Intent {
-	public static final String TYPE = "PlayerEventIntent";
+public class GalacticPacketIntent extends GalacticIntent {
 	
-	private Player player;
-	private String target;
-	private ServerManagementEvent event;
-	private long time;
-	private TimeUnit timeUnit;
+	public static final String TYPE = "GalacticPacketIntent";
 	
-	public ServerManagementIntent(Player p, String target, ServerManagementEvent event) {
+	private Packet packet;
+	private ServerType type;
+	private long networkId;
+	
+	public GalacticPacketIntent(InboundPacketIntent i) {
 		super(TYPE);
-		this.player = p;
-		this.target = target;
-		this.event = event;
+		setPacket(i.getPacket());
+		setServerType(i.getServerType());
+		setNetworkId(i.getNetworkId());
 	}
 	
-	public ServerManagementIntent(long time, TimeUnit timeUnit, ServerManagementEvent event) {
-		this(null, null, event);
-		this.time = time;
-		this.timeUnit = timeUnit;
+	public GalacticPacketIntent(ServerType type, Packet p, long networkId) {
+		super(TYPE);
+		setPacket(p);
+		setServerType(type);
+		setNetworkId(networkId);
+	}
+
+	public void setPacket(Packet p) {
+		this.packet = p;
 	}
 	
-	public long getTime() { return time; }
-	public TimeUnit getTimeUnit() { return timeUnit; }
-	public Player getPlayer() { return player; }
-	public String getTarget() { return target; }
-	public ServerManagementEvent getEvent() { return event; }
-	
-	public enum ServerManagementEvent {
-		LOCK,
-		UNLOCK,
-		SHUTDOWN,
-		KICK,
-		BAN,
-		UNBAN
+	public void setServerType(ServerType type) {
+		this.type = type;
 	}
+	
+	public void setNetworkId(long networkId) {
+		this.networkId = networkId;
+	}
+	
+	public Packet getPacket() {
+		return packet;
+	}
+	
+	public ServerType getServerType() {
+		return type;
+	}
+	
+	public long getNetworkId() {
+		return networkId;
+	}
+	
 }

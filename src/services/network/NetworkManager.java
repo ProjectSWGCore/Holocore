@@ -27,7 +27,7 @@
 ***********************************************************************************/
 package services.network;
 
-import intents.OutboundUdpPacketIntent;
+import intents.network.OutboundUdpPacketIntent;
 import resources.Galaxy;
 import resources.control.Intent;
 import resources.control.Manager;

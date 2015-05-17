@@ -25,7 +25,7 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package intents;
+package intents.network;
 
 import network.packets.Packet;
 import resources.control.Intent;

@@ -27,13 +27,14 @@
 ***********************************************************************************/
 package services.commands;
 
+import intents.network.GalacticPacketIntent;
+
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import network.packets.Packet;
 import network.packets.swg.zone.object_controller.CommandQueueEnqueue;
-import intents.GalacticPacketIntent;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
 import resources.commands.Command;

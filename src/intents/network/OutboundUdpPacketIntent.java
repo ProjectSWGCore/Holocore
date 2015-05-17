@@ -25,49 +25,39 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package intents;
+package intents.network;
 
-import network.packets.soe.Disconnect.DisconnectReason;
 import resources.control.Intent;
+import resources.network.ServerType;
+import resources.network.UDPServer.UDPPacket;
 
-
-public class CloseConnectionIntent extends Intent {
+public class OutboundUdpPacketIntent extends Intent {
 	
-	public static final String TYPE = "CloseConnectionIntent";
+	public static final String TYPE = "OutboundUdpPacketIntent";
 	
-	private int connId;
-	private long networkId;
-	private DisconnectReason reason;
+	private UDPPacket packet;
+	private ServerType type;
 	
-	public CloseConnectionIntent(int connId, long networkId, DisconnectReason reason) {
+	public OutboundUdpPacketIntent(ServerType type, UDPPacket p) {
 		super(TYPE);
-		setConnectionId(connId);
-		setNetworkId(networkId);
-		setReason(reason);
+		setPacket(p);
+		setServerType(type);
 	}
 	
-	public void setConnectionId(int connId) {
-		this.connId = connId;
+	public void setPacket(UDPPacket p) {
+		this.packet = p;
 	}
 	
-	public void setNetworkId(long networkId) {
-		this.networkId = networkId;
+	public void setServerType(ServerType type) {
+		this.type = type;
 	}
 	
-	public void setReason(DisconnectReason reason) {
-		this.reason = reason;
+	public UDPPacket getPacket() {
+		return packet;
 	}
 	
-	public int getConnectionId() {
-		return connId;
-	}
-	
-	public long getNetworkId() {
-		return networkId;
-	}
-	
-	public DisconnectReason getReason() {
-		return reason;
+	public ServerType getServerType() {
+		return type;
 	}
 	
 }
