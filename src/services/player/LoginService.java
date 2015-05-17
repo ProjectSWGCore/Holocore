@@ -270,10 +270,12 @@ public class LoginService extends Service {
 			return false;
 		if (set.getBoolean("banned"))
 			return false;
-		if (set.getString("password").equals(password))
-			return true;
-		password = MD5.digest(MD5.digest(set.getString("password_salt")) + MD5.digest(password));
-		return set.getString("password").equals(password);
+		String psqlPass = set.getString("password");
+		String psqlSalt = set.getString("password_salt");
+		if (psqlPass.length() != 32 && psqlSalt.length() == 0)
+			return psqlPass.equals(password);
+		password = MD5.digest(MD5.digest(psqlSalt) + MD5.digest(password));
+		return psqlPass.equals(password);
 	}
 	
 	private ResultSet getUser(String username) throws SQLException {
