@@ -107,6 +107,12 @@ public class CoreManager extends Manager {
 	}
 	
 	@Override
+	public boolean stop() {
+		galaxy.setStatus(GalaxyStatus.LOCKED);
+		return super.stop();
+	}
+	
+	@Override
 	public boolean terminate() {
 		shutdownService.shutdownNow();
 		return super.terminate();

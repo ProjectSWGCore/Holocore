@@ -63,13 +63,21 @@ public class Service implements IntentReceiver {
 	}
 	
 	/**
+	 * Stops the service. If the service returns false on this method then the
+	 * service failed to stop and may not have fully locked down.
+	 * @return TRUE if stopping was successful, FALSe otherwise
+	 */
+	public boolean stop() {
+		return true;
+	}
+	
+	/**
 	 * Terminates this service. If the service returns false on this method
 	 * then the service failed to shut down and resources may not have been
 	 * cleaned up.
 	 * @return TRUE if termination was successful, FALSE otherwise
 	 */
 	public boolean terminate() {
-		IntentManager.getInstance().terminate();
 		return ServerManager.getInstance().terminate();
 	}
 	

@@ -76,8 +76,11 @@ public class NetworkClientManager extends Manager {
 	}
 	
 	@Override
-	public boolean terminate() {
-		return super.terminate();
+	public boolean stop() {
+		for (NetworkClient client : networkClients.values()) {
+			client.sendPacket(new Disconnect(client.getConnectionId(), DisconnectReason.APPLICATION));
+		}
+		return super.stop();
 	}
 	
 	public void onIntentReceived(Intent i) {

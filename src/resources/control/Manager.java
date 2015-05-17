@@ -99,6 +99,29 @@ public class Manager extends Service {
 	}
 	
 	/**
+	 * Stops this manager. If the manager returns false on this method then
+	 * the manger failed to stop and may not have fully locked down. This will
+	 * start all children automatically.
+	 * @return TRUE if stopping was successful, FALSE otherwise
+	 */
+	@Override
+	public boolean stop() {
+		boolean success = super.stop(), cSuccess = true;
+		synchronized (children) {
+			for (Service child : children) {
+				if (!success)
+					break;
+				cSuccess = child.stop();
+				if (!cSuccess) {
+					System.err.println(child.getClass().getSimpleName() + " failed to stop!");
+					success = false;
+				}
+			}
+		}
+		return success;
+	}
+	
+	/**
 	 * Terminates this manager. If the manager returns false on this method
 	 * then the manager failed to shut down and resources may not have been
 	 * cleaned up. This will terminate all children automatically.

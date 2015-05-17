@@ -33,5 +33,6 @@ public enum ServerStatus {
 	OPEN,
 	LOCKED,
 	SHUTDOWN_REQUESTED,
+	STOPPING,
 	TERMINATING;
 }
