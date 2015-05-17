@@ -34,7 +34,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 
 import main.ProjectSWG;
@@ -85,17 +88,20 @@ import services.objects.ObjectManager;
 import utilities.namegen.SWGNameGenerator;
 
 public class ZoneService extends Service {
-	
-	private SWGNameGenerator nameGenerator;
-	private Map <String, ProfTemplateData> profTemplates;
-	private ClientFactory clientFac;
-	private NameFilter nameFilter;
+
+	private final Map <String, Player> lockedNames;
+	private final Map <String, ProfTemplateData> profTemplates;
+	private final ClientFactory clientFac;
+	private final NameFilter nameFilter;
+	private final SWGNameGenerator nameGenerator;
 	
 	private PreparedStatement createCharacter;
 	private PreparedStatement getCharacter;
 	private PreparedStatement getLikeCharacterName;
 	
 	public ZoneService() {
+		lockedNames = new HashMap<String, Player>();
+		profTemplates = new ConcurrentHashMap<String, ProfTemplateData>();
 		clientFac = new ClientFactory();
 		nameFilter = new NameFilter("namegen/bad_word_list.txt", "namegen/reserved_words.txt", "namegen/fiction_reserved.txt");
 		nameGenerator = new SWGNameGenerator(nameFilter);
@@ -174,7 +180,7 @@ public class ZoneService extends Service {
 		player.sendPacket(p);
 		System.out.println("[" + player.getUsername() +"] " + player.getCharacterName() + " zoned in");
 	}
-
+	
 	private void handleClientIdMsg(Player player, ClientIdMsg clientId) {
 		System.out.println("[" + player.getUsername() + "] Connected to the zone server. IP: " + clientId.getAddress() + ":" + clientId.getPort());
 		sendPacket(player.getNetworkId(), new HeartBeatMessage());
@@ -194,6 +200,11 @@ public class ZoneService extends Service {
 		ErrorMessage err = getNameValidity(name, player.getAccessLevel() != AccessLevel.PLAYER);
 		if (err == ErrorMessage.NAME_APPROVED_MODIFIED)
 			name = nameFilter.cleanName(name);
+		if (err == ErrorMessage.NAME_APPROVED || err == ErrorMessage.NAME_APPROVED_MODIFIED) {
+			if (!lockName(name, player)) {
+				err = ErrorMessage.NAME_DECLINED_IN_USE;
+			}
+		}
 		sendPacket(player.getNetworkId(), new ClientVerifyAndLockNameResponse(name, err));
 	}
 	
@@ -379,8 +390,6 @@ public class ZoneService extends Service {
 	}
 	
 	private void loadProfTemplates() {
-		profTemplates = new ConcurrentHashMap<String, ProfTemplateData>();
-		
 		profTemplates.put("crafting_artisan", (ProfTemplateData) clientFac.getInfoFromFile("creation/profession_defaults_combat_brawler.iff"));
 		profTemplates.put("combat_brawler", (ProfTemplateData) clientFac.getInfoFromFile("creation/profession_defaults_combat_brawler.iff"));
 		profTemplates.put("social_entertainer", (ProfTemplateData) clientFac.getInfoFromFile("creation/profession_defaults_social_entertainer.iff"));
@@ -388,6 +397,43 @@ public class ZoneService extends Service {
 		profTemplates.put("science_medic", (ProfTemplateData) clientFac.getInfoFromFile("creation/profession_defaults_science_medic.iff"));
 		profTemplates.put("outdoors_scout", (ProfTemplateData) clientFac.getInfoFromFile("creation/profession_defaults_outdoors_scout.iff"));
 		profTemplates.put("jedi", (ProfTemplateData) clientFac.getInfoFromFile("creation/profession_defaults_jedi.iff"));
+	}
+	
+	private boolean lockName(String name, Player player) {
+		String firstName = name.split(" ", 2)[0].toLowerCase(Locale.ENGLISH);
+		if (isLocked(firstName))
+			return false;
+		synchronized (lockedNames) {
+			unlockName(player);
+			lockedNames.put(firstName, player);
+		}
+		return true;
+	}
+	
+	private void unlockName(Player player) {
+		synchronized (lockedNames) {
+			String fName = null;
+			for (Entry <String, Player> e : lockedNames.entrySet()) {
+				Player locked = e.getValue();
+				if (locked != null && locked.equals(player)) {
+					fName = e.getKey();
+					break;
+				}
+			}
+			if (fName != null)
+				lockedNames.remove(fName);
+		}
+	}
+	
+	private boolean isLocked(String firstName) {
+		Player player = null;
+		synchronized (lockedNames) {
+			player = lockedNames.get(firstName);
+		}
+		if (player == null)
+			return false;
+		PlayerState state = player.getPlayerState();
+		return state != PlayerState.DISCONNECTED && state != PlayerState.LOGGED_OUT;
 	}
 	
 	private Location getStartLocation(String start) {
