@@ -131,7 +131,6 @@ public class NetworkClientManager extends Manager {
 	}
 	
 	private void disconnectSession(long networkId, InetAddress addr, int port, DisconnectReason reason) {
-		System.out.println("Client Disconnected (" + addr + ":" + port + ") Reason: " + reason);
 		removeClient(networkId, addr, port);
 	}
 	
