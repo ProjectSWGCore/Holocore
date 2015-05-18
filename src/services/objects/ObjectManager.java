@@ -33,7 +33,6 @@ import intents.network.GalacticPacketIntent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -60,8 +59,6 @@ import resources.objects.SWGObject;
 import resources.objects.buildouts.BuildoutLoader;
 import resources.objects.creature.CreatureMood;
 import resources.objects.creature.CreatureObject;
-import resources.objects.quadtree.QuadTree;
-import resources.objects.waypoint.WaypointObject;
 import resources.player.Player;
 import resources.player.PlayerEvent;
 import resources.player.PlayerFlags;
@@ -73,17 +70,19 @@ import services.player.PlayerManager;
 
 public class ObjectManager extends Manager {
 	
-	private static final double AWARE_RANGE = 200;
-	
 	private final Map <Long, List <SWGObject>> buildoutObjects;
 	private final ObjectDatabase<SWGObject> objects;
-	private final Map <Terrain, QuadTree <SWGObject>> quadTree;
+	private final ObjectAwareness objectAwareness;
 	private long maxObjectId;
 	
 	public ObjectManager() {
+		this("odb/objects.db");
+	}
+	
+	public ObjectManager(String odbFile) {
 		buildoutObjects = new HashMap<Long, List<SWGObject>>();
-		objects = new CachedObjectDatabase<SWGObject>("odb/objects.db");
-		quadTree = new HashMap<Terrain, QuadTree<SWGObject>>();
+		objects = new CachedObjectDatabase<SWGObject>(odbFile);
+		objectAwareness = new ObjectAwareness();
 		maxObjectId = 1;
 	}
 	
@@ -92,16 +91,10 @@ public class ObjectManager extends Manager {
 		registerForIntent(GalacticPacketIntent.TYPE);
 		registerForIntent(PlayerEventIntent.TYPE);
 		registerForIntent(ObjectTeleportIntent.TYPE);
-		loadQuadTree();
+		objectAwareness.initialize();
 		loadObjects();
 		loadBuildouts();
 		return super.initialize();
-	}
-	
-	private void loadQuadTree() {
-		for (Terrain t : Terrain.values()) {
-			quadTree.put(t, new QuadTree<SWGObject>(-8192, -8192, 8192, 8192));
-		}
 	}
 	
 	private void loadObjects() {
@@ -157,15 +150,7 @@ public class ObjectManager extends Manager {
 	
 	private void loadObject(SWGObject obj) {
 		obj.setOwner(null);
-		Location l = obj.getLocation();
-		if (l.getTerrain() != null) {
-			QuadTree <SWGObject> tree = quadTree.get(l.getTerrain());
-			if (tree != null) {
-				tree.put(l.getX(), l.getZ(), obj);
-			} else {
-				System.err.println("ObjectManager: Unable to load QuadTree for object " + obj.getObjectId() + " and terrain: " + l.getTerrain());
-			}
-		}
+		objectAwareness.add(obj);
 	}
 	
 	@Override
@@ -197,19 +182,13 @@ public class ObjectManager extends Manager {
 	
 	private void processObjectTeleportIntent(ObjectTeleportIntent oti) {
 		SWGObject object = oti.getObject();
-			
-		removeFromQuadTree(object);
-		object.setLocation(oti.getNewLocation());
-
+		objectAwareness.move(object, oti.getNewLocation());
 		
-		if(object instanceof CreatureObject && object.getOwner() != null){
+		if (object instanceof CreatureObject && object.getOwner() != null){
 			sendPacket(object.getOwner(), new CmdStartScene(false, object.getObjectId(), ((CreatureObject)object).getRace(), object.getLocation(), (long)(ProjectSWG.getCoreTime()/1E3)));
 			((CreatureObject)object).createObject(object.getOwner());
 			((CreatureObject)object).clearAware();
 		}
-		updateAwarenessForObject(object);
-		addToQuadTree(object);
-				
 	}
 
 	private void processGalacticPacketIntent(GalacticPacketIntent gpi) {
@@ -239,13 +218,7 @@ public class ObjectManager extends Manager {
 			SWGObject obj = objects.remove(objId);
 			if (obj == null)
 				return null;
-			Location loc = obj.getLocation();
-			if (loc != null && loc.getTerrain() != null) {
-				QuadTree <SWGObject> tree = quadTree.get(loc.getTerrain());
-				synchronized (tree) {
-					tree.remove(loc.getX(), loc.getZ(), obj);
-				}
-			}
+			objectAwareness.remove(obj);
 			for (SWGObject child : obj.getChildren())
 				if (child != null)
 					deleteObject(child.getObjectId());
@@ -269,49 +242,18 @@ public class ObjectManager extends Manager {
 				return null;
 			}
 			obj.setLocation(l);
-			updateAwarenessForObject(obj);
-			addToQuadTree(obj);
+			objectAwareness.add(obj);
 			objects.put(objectId, obj);
 			return obj;
-		}
-	}
-	
-	private void addToQuadTree(SWGObject obj) {
-		if (obj == null || obj instanceof WaypointObject)
-			return;
-		Location loc = obj.getLocation();
-		if (loc == null || loc.getTerrain() == null)
-			return;
-		QuadTree <SWGObject> tree = quadTree.get(loc.getTerrain());
-		synchronized (tree) {
-			tree.put(loc.getX(), loc.getZ(), obj);
-		}
-	}
-	
-	private void removeFromQuadTree(SWGObject obj) {
-		if (obj == null)
-			return;
-		Location loc = obj.getLocation();
-		if (loc == null || loc.getTerrain() == null)
-			return;
-		double x = loc.getX();
-		double y = loc.getZ();
-		QuadTree <SWGObject> tree = quadTree.get(loc.getTerrain());
-		synchronized (tree) {
-			tree.remove(x, y, obj);
 		}
 	}
 	
 	private void moveObject(SWGObject obj, DataTransform transform) {
 		if (transform == null)
 			return;
-		removeFromQuadTree(obj);
 		Location newLocation = transform.getLocation();
 		newLocation.setTerrain(obj.getLocation().getTerrain());
-		obj.setLocation(newLocation);
-		
-		updateAwarenessForObject(obj);
-		addToQuadTree(obj);
+		objectAwareness.move(obj, newLocation);
 		
 		if (obj instanceof CreatureObject && transform.getSpeed() > 1E-3) {
 			if(((CreatureObject) obj).getPosture() == Posture.PRONE){
@@ -322,29 +264,6 @@ public class ObjectManager extends Manager {
 			((CreatureObject) obj).sendObservers(new PostureUpdate(obj.getObjectId(), ((CreatureObject) obj).getPosture()));
 		}
 		obj.sendDataTransforms(transform);
-	}
-	
-	private void updateAwarenessForObject(SWGObject obj) {
-		Location location = obj.getLocation();
-		if (location == null || location.getTerrain() == null)
-			return;
-		List <SWGObject> objectAware = new LinkedList<SWGObject>();
-		double x = location.getX();
-		double y = location.getZ();
-		QuadTree<SWGObject> tree = quadTree.get(location.getTerrain());
-		synchronized (tree) {
-			List <SWGObject> range = tree.getWithinRange(x, y, AWARE_RANGE);
-			for (SWGObject inRange : range) {
-				if (inRange.getObjectId() != obj.getObjectId()) {
-					if (inRange instanceof CreatureObject) {
-						if (inRange.getOwner() != null)
-							objectAware.add(inRange);
-					} else
-						objectAware.add(inRange);
-				}
-			}
-		}
-		obj.updateObjectAwareness(objectAware);
 	}
 	
 	private void zoneInCharacter(PlayerManager playerManager, String galaxy, long netId, long characterId) {
@@ -372,7 +291,7 @@ public class ObjectManager extends Manager {
 		sendPacket(player, new UpdatePvpStatusMessage(creature.getPvpType(), creature.getPvpFactionId(), creature.getObjectId()));
 		creature.createObject(player);
 		creature.clearAware();
-		updateAwarenessForObject(creature);
+		objectAwareness.update(creature);
 		System.out.println("[" + player.getUsername() + "] " + player.getCharacterName() + " is zoning in");
 		new PlayerEventIntent(player, galaxy, PlayerEvent.PE_ZONE_IN).broadcast();
 	}
