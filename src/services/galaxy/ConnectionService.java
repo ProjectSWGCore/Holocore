@@ -40,6 +40,7 @@ import network.packets.soe.Disconnect.DisconnectReason;
 import network.packets.swg.zone.HeartBeatMessage;
 import intents.PlayerEventIntent;
 import intents.network.CloseConnectionIntent;
+import intents.network.ForceDisconnectIntent;
 import intents.network.GalacticPacketIntent;
 import resources.control.Intent;
 import resources.control.Service;
@@ -92,6 +93,7 @@ public class ConnectionService extends Service {
 	public boolean initialize() {
 		registerForIntent(PlayerEventIntent.TYPE);
 		registerForIntent(GalacticPacketIntent.TYPE);
+		registerForIntent(ForceDisconnectIntent.TYPE);
 		return super.initialize();
 	}
 	
@@ -115,37 +117,57 @@ public class ConnectionService extends Service {
 	
 	@Override
 	public void onIntentReceived(Intent i) {
-		if (i instanceof PlayerEventIntent) {
-			if (((PlayerEventIntent)i).getEvent() == PlayerEvent.PE_ZONE_IN) {
-				Player p = ((PlayerEventIntent)i).getPlayer();
+		if (i instanceof PlayerEventIntent)
+			onPlayerEventIntent((PlayerEventIntent) i);
+		else if (i instanceof GalacticPacketIntent)
+			onGalacticPacketIntent((GalacticPacketIntent) i);
+		else if (i instanceof ForceDisconnectIntent)
+			onForceDisconnectIntent((ForceDisconnectIntent) i);
+	}
+	
+	private void onPlayerEventIntent(PlayerEventIntent pei) {
+		switch (pei.getEvent()) {
+			case PE_ZONE_IN: {
+				Player p = pei.getPlayer();
 				synchronized (zonedInPlayers) {
 					removeOld(p);
 					zonedInPlayers.add(p);
 				}
-			} else if (((PlayerEventIntent)i).getEvent() == PlayerEvent.PE_DISAPPEAR) {
-				synchronized (zonedInPlayers) {
-					zonedInPlayers.remove(((PlayerEventIntent)i).getPlayer());
-				}
+				break;
 			}
-		} else if (i instanceof GalacticPacketIntent) {
-			if (((GalacticPacketIntent)i).getPacket() instanceof HeartBeatMessage) {
-				GalacticPacketIntent gpi = (GalacticPacketIntent) i;
-				Player p = gpi.getPlayerManager().getPlayerFromNetworkId(gpi.getNetworkId());
-				if (p != null)
-					p.sendPacket(gpi.getPacket());
-			} else if (((GalacticPacketIntent)i).getPacket() instanceof Disconnect) {
-				GalacticPacketIntent gpi = (GalacticPacketIntent) i;
-				Player p = gpi.getPlayerManager().getPlayerFromNetworkId(gpi.getNetworkId());
-				if (p != null) {
-					if (p.getPlayerState() != PlayerState.DISCONNECTED) {
-						logOut(p);
-						disconnect(p, DisconnectReason.TIMEOUT);
-					} else {
-						disconnect(p, DisconnectReason.OTHER_SIDE_TERMINATED);
-					}
+			case PE_DISAPPEAR:
+				synchronized (zonedInPlayers) {
+					zonedInPlayers.remove(pei.getPlayer());
+				}
+				break;
+			default:
+				break;
+		}
+	}
+	
+	private void onGalacticPacketIntent(GalacticPacketIntent gpi) {
+		if (gpi.getPacket() instanceof HeartBeatMessage) {
+			Player p = gpi.getPlayerManager().getPlayerFromNetworkId(gpi.getNetworkId());
+			if (p != null)
+				p.sendPacket(gpi.getPacket());
+		} else if (gpi.getPacket() instanceof Disconnect) {
+			Player p = gpi.getPlayerManager().getPlayerFromNetworkId(gpi.getNetworkId());
+			if (p != null) {
+				if (p.getPlayerState() != PlayerState.DISCONNECTED) {
+					logOut(p);
+					disconnect(p, DisconnectReason.TIMEOUT);
+				} else {
+					disconnect(p, DisconnectReason.OTHER_SIDE_TERMINATED);
 				}
 			}
 		}
+	}
+	
+	private void onForceDisconnectIntent(ForceDisconnectIntent fdi) {
+		logOut(fdi.getPlayer(), !fdi.getDisappearImmediately());
+		disconnect(fdi.getPlayer(), fdi.getDisconnectReason());
+		if (fdi.getDisappearImmediately())
+			disappear(fdi.getPlayer());
 	}
 	
 	private void removeOld(Player nPlayer) {
@@ -162,14 +184,20 @@ public class ConnectionService extends Service {
 	}
 	
 	private void logOut(Player p) {
+		logOut(p, true);
+	}
+	
+	private void logOut(Player p, boolean addToDisappear) {
 		updatePlayTime(p);
 		if (p.getPlayerState() != PlayerState.LOGGED_OUT)
 			System.out.println("[" + p.getUsername() +"] Logged out " + p.getCharacterName());
 		if (p.getPlayerObject() != null)
 			p.getPlayerObject().setFlagBitmask(PlayerFlags.LD);
 		p.setPlayerState(PlayerState.LOGGED_OUT);
-		disappearPlayers.add(p);
-		updateService.schedule(disappearRunnable, (long) DISAPPEAR_THRESHOLD, TimeUnit.MILLISECONDS);
+		if (addToDisappear) {
+			disappearPlayers.add(p);
+			updateService.schedule(disappearRunnable, (long) DISAPPEAR_THRESHOLD, TimeUnit.MILLISECONDS);
+		}
 	}
 	
 	private void disappear(Player p) {

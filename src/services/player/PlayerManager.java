@@ -35,10 +35,12 @@ import java.util.Locale;
 import java.util.Map;
 
 import network.packets.Packet;
+import network.packets.soe.Disconnect.DisconnectReason;
 import network.packets.swg.login.ClientIdMsg;
 import network.packets.swg.zone.insertion.SelectCharacter;
 import intents.NotifyPlayersPacketIntent;
 import intents.PlayerEventIntent;
+import intents.network.ForceDisconnectIntent;
 import intents.network.GalacticPacketIntent;
 import intents.network.InboundPacketIntent;
 import resources.Terrain;
@@ -153,7 +155,9 @@ public class PlayerManager extends Manager {
 	}
 	
 	public Player getPlayerFromNetworkId(long networkId) {
-		return players.get(networkId);
+		synchronized (players) {
+			return players.get(networkId);
+		}
 	}
 	
 	private void removeDuplicatePlayers(Player player, long charId) {
@@ -161,8 +165,10 @@ public class PlayerManager extends Manager {
 			Iterator <Player> it = players.values().iterator();
 			while (it.hasNext()) {
 				Player p = it.next();
-				if (p != player && p.getCreatureObject() != null && p.getCreatureObject().getObjectId() == charId)
+				if (p != player && p.getCreatureObject() != null && p.getCreatureObject().getObjectId() == charId) {
+					new ForceDisconnectIntent(p, DisconnectReason.NEW_CONNECTION_ATTEMPT, true).broadcast();
 					it.remove();
+				}
 			}
 		}
 	}
@@ -192,17 +198,18 @@ public class PlayerManager extends Manager {
 	}
 	
 	private void onPlayerEventIntent(PlayerEventIntent pei) {
-		if (pei.getEvent() == PlayerEvent.PE_DISAPPEAR) {
-			Player p = pei.getPlayer();
-			if (p.getPlayerState() == PlayerState.DISCONNECTED) {
-				players.remove(p.getNetworkId());
+		synchronized (players) {
+			if (pei.getEvent() == PlayerEvent.PE_DISAPPEAR) {
+				Player p = pei.getPlayer();
+				if (p.getPlayerState() == PlayerState.DISCONNECTED) {
+					players.remove(p.getNetworkId());
+				}
 			}
 		}
 	}
 	
 	private void onInboundPacketIntent(InboundPacketIntent ipi) {
-		long networkId = ipi.getNetworkId();
-		Player player = players.get(networkId);
+		Player player = getPlayerFromNetworkId(ipi.getNetworkId());
 		if (player != null)
 			player.updateLastPacketTimestamp();
 	}
@@ -215,12 +222,14 @@ public class PlayerManager extends Manager {
 		if (type == ServerType.ZONE && packet instanceof ClientIdMsg)
 			player = transitionLoginToZone(networkId, gpi.getGalaxy().getId(), (ClientIdMsg) packet);
 		else
-			player = players.get(networkId);
+			player = getPlayerFromNetworkId(networkId);
 		if (player != null && type == ServerType.ZONE && packet instanceof SelectCharacter)
 			removeDuplicatePlayers(player, ((SelectCharacter)packet).getCharacterId());
 		if (type == ServerType.LOGIN && player == null) {
 			player = new Player(this, networkId);
-			players.put(networkId, player);
+			synchronized (players) {
+				players.put(networkId, player);
+			}
 		}
 		if (player != null) {
 			if (type == ServerType.LOGIN)
