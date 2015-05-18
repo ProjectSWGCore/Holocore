@@ -46,7 +46,7 @@ public class StandCmdCallback implements ICmdCallback {
 		creature.setMovementScale(1);
 		if(creature.getTurnScale() != 1)
 			creature.setTurnScale(1);
-		creature.sendObservers(new PostureUpdate(creature.getObjectId(), Posture.UPRIGHT));
+		creature.sendObserversAndSelf(new PostureUpdate(creature.getObjectId(), Posture.UPRIGHT));
 	}
 	
 }

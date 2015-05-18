@@ -27,8 +27,6 @@
 ***********************************************************************************/
 package resources.commands.callbacks;
 
-import java.util.List;
-
 import network.packets.swg.zone.object_controller.PlayerEmote;
 import resources.commands.ICmdCallback;
 import resources.objects.SWGObject;
@@ -49,11 +47,9 @@ public class SocialInternalCmdCallback implements ICmdCallback {
 		PlayerEmote emote = new PlayerEmote(objectId, objectId, ((target == null) ? 0 : target.getObjectId()), Short.valueOf(cmd[1]));
 		player.sendPacket(emote);
 		
-		List<Player> observers = player.getCreatureObject().getObservers();
-		for (Player observer : observers) {
-			if (observer.getCreatureObject() == null)
-				continue;
-			observer.sendPacket(new PlayerEmote(observer.getCreatureObject().getObjectId(), emote));
+		for (SWGObject aware : player.getCreatureObject().getObjectsAware()) {
+			if (aware.getOwner() != null)
+				aware.getOwner().sendPacket(new PlayerEmote(aware.getObjectId(), emote));
 		}
 	}
 }

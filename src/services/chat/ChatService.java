@@ -201,10 +201,9 @@ public class ChatService extends Service {
 		sender.sendPacket(message);
 		
 		// Notify observers of the chat message
-		for (Player observer : actor.getObservers()) {
-			if (observer.getCreatureObject() == null)
-				continue;
-			observer.sendPacket(new SpatialChat(observer.getCreatureObject().getObjectId(), message));
+		for (SWGObject aware : actor.getObjectsAware()) {
+			if (aware.getOwner() != null)
+				aware.getOwner().sendPacket(new SpatialChat(aware.getObjectId(), message));
 		}
 	}
 	
@@ -290,10 +289,7 @@ public class ChatService extends Service {
 		ChatSystemMessage packet = new ChatSystemMessage(SystemChatType.SCREEN_AND_CHAT.ordinal(), message);
 		broadcaster.sendPacket(packet);
 		
-		List<Player> observers = broadcaster.getCreatureObject().getObservers();
-		for (Player player : observers) {
-			player.sendPacket(packet);
-		}
+		broadcaster.getCreatureObject().sendObservers(packet);
 	}
 	
 	private void broadcastGalaxyMessage(String message, Terrain terrain) {

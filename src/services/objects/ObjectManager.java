@@ -261,7 +261,7 @@ public class ObjectManager extends Manager {
 			}else{
 				((CreatureObject) obj).setPosture(Posture.UPRIGHT);
 			}
-			((CreatureObject) obj).sendObservers(new PostureUpdate(obj.getObjectId(), ((CreatureObject) obj).getPosture()));
+			((CreatureObject) obj).sendObserversAndSelf(new PostureUpdate(obj.getObjectId(), ((CreatureObject) obj).getPosture()));
 		}
 		obj.sendDataTransforms(transform);
 	}

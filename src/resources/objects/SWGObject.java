@@ -31,6 +31,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -65,7 +66,6 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 	private final Map <String, SWGObject> slots; // Can only be occupied one time, containers are slots who have children
 	private final Map <String, String> attributes;
 	private final Map <String, Object> templateAttributes;
-	private transient List <Player> observers;
 	private transient List <SWGObject> objectsAware;
 	private List <List <String>> arrangement;
 	
@@ -89,7 +89,6 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 		this.objectId = objectId;
 		this.location = new Location();
 		this.children = new Vector<SWGObject>();
-		this.observers = new Vector<Player>();
 		this.objectsAware = new Vector<SWGObject>();
 		this.slots = new HashMap<String, SWGObject>(); // Concurrent maps wont allow for null keys/values, which is what the empty slots are set to :/
 		this.attributes = new LinkedHashMap<String, String>();
@@ -98,7 +97,6 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 	
 	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
 		ois.defaultReadObject();
-		observers = new LinkedList<Player>();
 		objectsAware = new LinkedList<SWGObject>();
 	}
 	
@@ -349,14 +347,6 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 	}
 	
 	public void clearAware() {
-//		Player [] players;
-//		synchronized (playersAware) {
-//			players = playersAware.toArray(new Player[playersAware.size()]);
-//		}
-//		for (Player p : players) {
-//			((SWGObject) p.getCreatureObject()).awarenessOutOfRange(getOwner());
-//			awarenessOutOfRange(p);
-//		}
 		SWGObject [] objects;
 		synchronized (objectsAware) {
 			objects = objectsAware.toArray(new SWGObject[objectsAware.size()]);
@@ -367,21 +357,29 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 		}
 	}
 	
-	public List <Player> getObservers() {
-		return new ArrayList<Player>(observers);
+	public List <SWGObject> getObjectsAware() {
+		synchronized (objectsAware) {
+			return Collections.unmodifiableList(objectsAware);
+		}
 	}
 	
-	public void sendObservers(Packet... packets) {
+	public void sendObserversAndSelf(Packet ... packets) {
 		sendSelf(packets);
-		synchronized (observers) {
-			for (Player observer : observers) {
-				if (observer != null && observer.getPlayerState() == PlayerState.ZONED_IN)
-					observer.sendPacket(packets);
+		sendObservers(packets);
+	}
+	
+	public void sendObservers(Packet ... packets) {
+		synchronized (objectsAware) {
+			for (SWGObject obj : objectsAware) {
+				Player p = obj.getOwner();
+				if (p == null || p.getPlayerState() != PlayerState.ZONED_IN)
+					continue;
+				p.sendPacket(packets);
 			}
 		}
 	}
 	
-	public void sendSelf(Packet... packets) {
+	public void sendSelf(Packet ... packets) {
 		if (owner != null)
 			owner.sendPacket(packets);
 	}
@@ -401,7 +399,6 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 		synchronized (objectsAware) {
 			if (objectsAware.remove(o)) {
 				if (o.getOwner() != null) {
-					observers.remove(o.getOwner());
 					destroyObject(o.getOwner());
 				}
 				if (getOwner() != null)
@@ -415,7 +412,6 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 			if (!objectsAware.contains(o)) {
 				objectsAware.add(o);
 				if (o.getOwner() != null) {
-					observers.add(o.getOwner());
 					createObject(o.getOwner());
 				}
 				if (getOwner() != null)
@@ -439,7 +435,7 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 		transform.setUpdateCounter(transformCounter++);
 		transform.setDirection((byte) direction);
 		transform.setSpeed(speed);
-		sendObservers(transform);
+		sendObserversAndSelf(transform);
 	}
 	
 	protected void createChildrenObjects(Player target) {
