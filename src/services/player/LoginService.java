@@ -138,7 +138,8 @@ public class LoginService extends Service {
 			System.err.println("Player cannot login when " + player.getPlayerState());
 			return;
 		}
-		if (!id.getVersion().equals(REQUIRED_VERSION)) {
+		final boolean doClientCheck = getConfig(ConfigFile.PRIMARY).getBoolean("LOGIN-VERSION-CHECKS", true);
+		if (!id.getVersion().equals(REQUIRED_VERSION) && doClientCheck) {
 			onLoginClientVersionError(player, id);
 			return;
 		}
