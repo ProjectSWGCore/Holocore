@@ -370,6 +370,7 @@ public class ZoneService extends Service {
 	private void setCreatureObjectValues(ObjectManager objManager, CreatureObject creatureObj, ClientCreateCharacter create) {
 		TangibleObject inventory	= createTangible(objManager, "object/tangible/inventory/shared_character_inventory.iff");
 		TangibleObject datapad		= createTangible(objManager, "object/tangible/datapad/shared_character_datapad.iff");
+		TangibleObject apprncInventory = createTangible(objManager, "object/tangible/inventory/shared_appearance_inventory.iff");
 		
 		creatureObj.setRace(Race.getRaceByFile(create.getRace()));
 		creatureObj.setAppearanceData(create.getCharCustomization());
@@ -379,9 +380,11 @@ public class ZoneService extends Service {
 		creatureObj.getSkills().add("species_" + creatureObj.getRace().getSpecies());
 		creatureObj.setSlot("inventory", inventory);
 		creatureObj.setSlot("datapad", datapad);
+		creatureObj.setSlot("appearance_inventory", apprncInventory);
 		
 		creatureObj.addEquipment(inventory);
 		creatureObj.addEquipment(datapad);
+		creatureObj.addEquipment(apprncInventory);
 	}
 	
 	private void setPlayerObjectValues(PlayerObject playerObj, ClientCreateCharacter create) {
