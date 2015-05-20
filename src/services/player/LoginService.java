@@ -139,6 +139,10 @@ public class LoginService extends Service {
 			return;
 		}
 		final boolean doClientCheck = getConfig(ConfigFile.PRIMARY).getBoolean("LOGIN-VERSION-CHECKS", true);
+		if (doClientCheck)
+			System.out.println("LoginService: Running login checks for '" + id.getUsername() + "'");
+		else
+			System.out.println("LoginService: Skipping login checks for '" + id.getUsername() + "'");
 		if (!id.getVersion().equals(REQUIRED_VERSION) && doClientCheck) {
 			onLoginClientVersionError(player, id);
 			return;
