@@ -33,6 +33,7 @@ import network.packets.swg.zone.SceneEndBaselines;
 import network.packets.swg.zone.UpdatePostureMessage;
 import network.packets.swg.zone.UpdatePvpStatusMessage;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
+import resources.HologramColour;
 import resources.Posture;
 import resources.Race;
 import resources.collections.SWGList;
@@ -89,7 +90,8 @@ public class CreatureObject extends TangibleObject {
 	private long 	ownerId					= 0;
 	private int 	battleFatigue			= 0;
 	private long 	statesBitmask			= 0;
-
+	private HologramColour hologramColour = HologramColour.DEFAULT;
+	
 	private SWGList<Integer>	baseAttributes	= new SWGList<Integer>(BaselineType.CREO, 1, 2);
 	private SWGList<String>		skills			= new SWGList<String>(BaselineType.CREO, 1, 3, false, StringType.ASCII);
 	private SWGList<Integer>	hamEncumbList	= new SWGList<Integer>(BaselineType.CREO, 4, 2, true);
@@ -502,6 +504,11 @@ public class CreatureObject extends TangibleObject {
 		this.performing = performing;
 		sendDelta(6, 27, performing);
 	}
+	
+	public void setHologramColour(HologramColour hologramColour) {
+		this.hologramColour = hologramColour;
+		sendDelta(6, 29, hologramColour.getValue());
+	}
 
 	public boolean isShownOnRadar() {
 		return shownOnRadar;
@@ -719,7 +726,7 @@ public class CreatureObject extends TangibleObject {
 		bb.addObject(buffs); // 26
 		bb.addBoolean(performing); // 27
 		bb.addByte(difficulty.getDifficulty()); // 28
-		bb.addInt(-1); // Hologram Color -- 29
+		bb.addInt(hologramColour.getValue()); // Hologram Color -- 29
 		bb.addBoolean(shownOnRadar); // 30
 		bb.addBoolean(beast); // 31
 		bb.addByte(0); // Unknown -- 32
