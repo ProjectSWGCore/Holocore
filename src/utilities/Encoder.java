@@ -57,6 +57,8 @@ public class Encoder {
 				return encodeShort((Short) object);
 			} else if (object instanceof Byte) { 
 				return encodeByte((Byte) object);
+			} else if (object instanceof Boolean) {
+				return encodeBoolean((boolean) object);
 			} else if (object instanceof Float || object instanceof Double) {
 				return encodeFloat(object);
 			} else if (object instanceof String){
@@ -80,6 +82,10 @@ public class Encoder {
 
 	private static byte[] encodeByte(Byte object) {
 		return new byte[]{(object.byteValue())};
+	}
+	
+	private static byte[] encodeBoolean(boolean object) {
+		return encodeByte((byte) (object ? 1 : 0));
 	}
 
 	public static byte[] encodeShort(Short object) {
