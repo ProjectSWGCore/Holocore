@@ -125,9 +125,27 @@ public class CreatureObject extends TangibleObject {
 	 * @param item to equip
 	 */
 	public void equipItem(TangibleObject item) {
+		equipItemToContainer(item, this);
+	}
+	
+	public void equipAppearanceItem(TangibleObject item) {
+		equipItemToContainer(item, super.getSlottedObject("appearance_inventory"));
+	}
+	
+	public void unequipAppearanceItem(TangibleObject item) {
+		unequipItemFromContainer(item, super.getSlottedObject("appearance_inventory"));
+	}
+	
+	private void equipItemToContainer(TangibleObject item, SWGObject container) {
 		for(List<String> slotNameList : item.getArrangement())
 			for(String slotName : slotNameList)
-				super.setSlot(slotName, item);
+				container.setSlot(slotName, item);
+	}
+	
+	private void unequipItemFromContainer(TangibleObject item, SWGObject container) {
+		for(List<String> slotNameList : item.getArrangement())
+			for(String slotName : slotNameList)
+				container.setSlot(slotName, null);
 	}
 	
 	public void addEquipment(SWGObject obj) {
