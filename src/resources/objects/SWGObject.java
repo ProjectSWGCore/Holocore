@@ -118,6 +118,8 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 			child.containmentType = 4;
 		else
 			child.containmentType = containmentType.intValue();
+		
+		sendObserversAndSelf(new UpdateContainmentMessage(child.objectId, objectId, containmentType));
 		// TODO: Set containmentType based on if object is in a slot (4) or a container (-1)
 	}
 	
@@ -167,6 +169,7 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 		for (String availSlot : occupiedAvailSlots) {
 			obj.setParent(this);
 			addObjectSlot(availSlot, obj);
+			sendObserversAndSelf(new UpdateContainmentMessage(obj.objectId, objectId, containmentType));
 		}
 		
 		return true;
