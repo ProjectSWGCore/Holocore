@@ -251,7 +251,13 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 	}
 	
 	public Player getOwner() {
-		return owner;
+		if (owner != null)
+			return owner;
+		
+		if (getParent() != null)
+			return getParent().getOwner();	// Ziggy: Player owner is found recursively
+		
+		return null;
 	}
 	
 	public SWGObject getParent() {
@@ -376,10 +382,17 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 					continue;
 				p.sendPacket(packets);
 			}
+			
+			SWGObject parent = getParent();
+			
+			if(parent != null)
+				parent.sendObservers(packets);
+			
 		}
 	}
 	
 	public void sendSelf(Packet ... packets) {
+		Player owner = getOwner();
 		if (owner != null)
 			owner.sendPacket(packets);
 	}
