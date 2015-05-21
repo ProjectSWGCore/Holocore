@@ -100,7 +100,9 @@ public enum PacketType {
 	DELTA										(0x12862153, DeltasMessage.class),
 	SERVER_TIME_MESSAGE							(0x2EBC3BD9, ServerTimeMessage.class),
 	SET_WAYPOINT_COLOR							(0x90C59FDE, SetWaypointColor.class),
-		
+	SHOW_BACKPACK									(ShowBackpack.CRC, ShowBackpack.class),
+	SHOW_HELMET											(ShowHelmet.CRC, ShowHelmet.class),
+	
 		// Chat
 		CHAT_FRIENDS_LIST_UPDATE				(0x6CD2FCD8, ChatFriendsListUpdate.class),
 		CHAT_IGNORE_LIST						(0xF8C275B0, ChatIgnoreList.class),

@@ -62,6 +62,8 @@ import network.packets.swg.zone.GalaxyLoopTimesRequest;
 import network.packets.swg.zone.GalaxyLoopTimesResponse;
 import network.packets.swg.zone.HeartBeatMessage;
 import network.packets.swg.zone.SetWaypointColor;
+import network.packets.swg.zone.ShowBackpack;
+import network.packets.swg.zone.ShowHelmet;
 import network.packets.swg.zone.spatial.GetMapLocationsMessage;
 import network.packets.swg.zone.spatial.GetMapLocationsResponseMessage;
 import resources.Galaxy;
@@ -139,6 +141,18 @@ public class ZoneService extends Service {
 			handleSetWaypointColor(player, (SetWaypointColor) p);
 		if (p instanceof GetMapLocationsMessage)
 			handleMapLocationsResponse(player, (GetMapLocationsMessage) p);
+		if(p instanceof ShowBackpack)
+			handleShowBackpack(player, (ShowBackpack) p);
+		if(p instanceof ShowHelmet)
+			handleShowHelmet(player, (ShowHelmet) p);
+	}
+	
+	private void handleShowBackpack(Player player, ShowBackpack p) {
+		player.getPlayerObject().setShowBackpack(p.showingBackpack());
+	}
+	
+	private void handleShowHelmet(Player player, ShowHelmet p) {
+		player.getPlayerObject().setShowHelmet(p.showingHelmet());
 	}
 	
 	private void handleMapLocationsResponse(Player player, GetMapLocationsMessage p) {
@@ -356,6 +370,7 @@ public class ZoneService extends Service {
 	private void setCreatureObjectValues(ObjectManager objManager, CreatureObject creatureObj, ClientCreateCharacter create) {
 		TangibleObject inventory	= createTangible(objManager, "object/tangible/inventory/shared_character_inventory.iff");
 		TangibleObject datapad		= createTangible(objManager, "object/tangible/datapad/shared_character_datapad.iff");
+		TangibleObject apprncInventory = createTangible(objManager, "object/tangible/inventory/shared_appearance_inventory.iff");
 		
 		creatureObj.setRace(Race.getRaceByFile(create.getRace()));
 		creatureObj.setAppearanceData(create.getCharCustomization());
@@ -365,9 +380,11 @@ public class ZoneService extends Service {
 		creatureObj.getSkills().add("species_" + creatureObj.getRace().getSpecies());
 		creatureObj.setSlot("inventory", inventory);
 		creatureObj.setSlot("datapad", datapad);
+		creatureObj.setSlot("appearance_inventory", apprncInventory);
 		
 		creatureObj.addEquipment(inventory);
 		creatureObj.addEquipment(datapad);
+		creatureObj.addEquipment(apprncInventory);
 	}
 	
 	private void setPlayerObjectValues(PlayerObject playerObj, ClientCreateCharacter create) {

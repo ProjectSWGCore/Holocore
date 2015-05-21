@@ -194,7 +194,7 @@ public class PlayerObject extends IntangibleObject {
 
 	public void setShowHelmet(boolean showHelmet) {
 		this.showHelmet = showHelmet;
-		sendDelta(3, 18, showHelmet);
+		sendDelta(3, 19, showHelmet);
 	}
 
 	public boolean isShowBackpack() {
@@ -203,7 +203,7 @@ public class PlayerObject extends IntangibleObject {
 
 	public void setShowBackpack(boolean showBackpack) {
 		this.showBackpack = showBackpack;
-		sendDelta(3, 19, showBackpack);
+		sendDelta(3, 18, showBackpack);
 	}
 
 	public String getProfession() {
@@ -445,8 +445,8 @@ public class PlayerObject extends IntangibleObject {
 		bb.addInt(lifetimePvpKills); // 15
 		bb.addObject(collections); // 16
 		bb.addObject(guildRanks); // 17
-		bb.addBoolean(showHelmet); // 18
-		bb.addBoolean(showBackpack); // 19
+		bb.addBoolean(showBackpack); // 18
+		bb.addBoolean(showHelmet); // 19
 		
 		bb.incrementOperandCount(15);
 	}
