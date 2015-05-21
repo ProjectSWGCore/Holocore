@@ -53,6 +53,7 @@ import resources.Location;
 import resources.Posture;
 import resources.Race;
 import resources.Terrain;
+import resources.config.ConfigFile;
 import resources.control.Intent;
 import resources.control.Manager;
 import resources.objects.SWGObject;
@@ -66,6 +67,7 @@ import resources.player.PlayerState;
 import resources.server_info.CachedObjectDatabase;
 import resources.server_info.ObjectDatabase;
 import resources.server_info.ObjectDatabase.Traverser;
+import resources.services.Config;
 import services.player.PlayerManager;
 
 public class ObjectManager extends Manager {
@@ -76,12 +78,8 @@ public class ObjectManager extends Manager {
 	private long maxObjectId;
 	
 	public ObjectManager() {
-		this("odb/objects.db");
-	}
-	
-	public ObjectManager(String odbFile) {
 		buildoutObjects = new HashMap<Long, List<SWGObject>>();
-		objects = new CachedObjectDatabase<SWGObject>(odbFile);
+		objects = new CachedObjectDatabase<SWGObject>("odb/objects.db");
 		objectAwareness = new ObjectAwareness();
 		maxObjectId = 1;
 	}
@@ -115,13 +113,19 @@ public class ObjectManager extends Manager {
 	}
 	
 	private void loadBuildouts() {
-		boolean enableBuildouts = false;
-		if (enableBuildouts) {
+		Config c = getConfig(ConfigFile.PRIMARY);
+		if (c.getBoolean("LOAD-BUILDOUTS", false)) {
 			long startLoad = System.nanoTime();
 			System.out.println("ObjectManager: Loading buildouts...");
 			List <SWGObject> buildouts = null;
-//			buildouts = BuildoutLoader.loadAllBuildouts();
-			buildouts = BuildoutLoader.loadBuildoutsForTerrain(Terrain.CORELLIA);
+			String terrain = c.getString("LOAD-BUILDOUTS-FOR", "");
+			if (Terrain.doesTerrainExistForName(terrain))
+				buildouts = BuildoutLoader.loadBuildoutsForTerrain(Terrain.getTerrainFromName(terrain));
+			else {
+				if (!terrain.isEmpty())
+					System.err.println("ObjectManager: Unknown terrain '" + terrain + "'");
+				buildouts = BuildoutLoader.loadAllBuildouts();
+			}
 			for (SWGObject obj : buildouts) {
 				loadBuildout(obj);
 			}
