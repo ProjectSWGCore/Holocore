@@ -118,7 +118,6 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 			child.containmentType = 4;
 		else
 			child.containmentType = containmentType;
-			
 		// TODO: Set containmentType based on if object is in a slot (4) or a container (-1)
 		sendObserversAndSelf(new UpdateContainmentMessage(child.objectId, objectId, containmentType));
 	}
