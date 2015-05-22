@@ -98,6 +98,7 @@ public class ObjectManager extends Manager {
 	
 	private void loadObjects() {
 		long startLoad = System.nanoTime();
+		log("ObjectManager", "Loading objects from ObjectDatabase...");
 		System.out.println("ObjectManager: Loading objects from ObjectDatabase...");
 		objects.load();
 		objects.traverse(new Traverser<SWGObject>() {
@@ -110,6 +111,7 @@ public class ObjectManager extends Manager {
 			}
 		});
 		double loadTime = (System.nanoTime() - startLoad) / 1E6;
+		log("ObjectManager", "Finished loading %d objects. Time: %fms", objects.size(), loadTime);
 		System.out.printf("ObjectManager: Finished loading %d objects. Time: %fms%n", objects.size(), loadTime);
 	}
 	
@@ -133,6 +135,7 @@ public class ObjectManager extends Manager {
 			double loadTime = (System.nanoTime() - startLoad) / 1E6;
 			System.out.printf("ObjectManager: Finished loading buildouts. Time: %fms%n", loadTime);
 		} else {
+			log("ObjectManager", "Did not load buildouts. Reason: Disabled.");
 			System.out.println("ObjectManager: Buildouts not loaded. Reason: Disabled!");
 		}
 	}

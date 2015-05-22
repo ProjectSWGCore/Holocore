@@ -42,6 +42,7 @@ public class DataManager {
 	
 	private Map <ConfigFile, Config> config;
 	private RelationalDatabase localDatabase;
+	private Logger logger;
 	private boolean initialized;
 	
 	private DataManager() {
@@ -51,6 +52,7 @@ public class DataManager {
 	private synchronized void initialize() {
 		initializeConfig();
 		initializeDatabases();
+		initializeLogger();
 		initialized = localDatabase.isOnline() && localDatabase.isTable("users");
 	}
 	
@@ -73,6 +75,15 @@ public class DataManager {
 	private synchronized void initializeDatabases() {
 		Config c = getConfig(ConfigFile.PRIMARY);
 		initializeLocalDatabase(c);
+	}
+	
+	private synchronized void initializeLogger() {
+		logger = new Logger("log.txt");
+		try {
+			logger.open();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private synchronized void initializeLocalDatabase(Config c) {
@@ -102,6 +113,14 @@ public class DataManager {
 	 */
 	public synchronized final RelationalDatabase getLocalDatabase() {
 		return localDatabase;
+	}
+	
+	public synchronized final void log(String str) {
+		try {
+			logger.write(str);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public synchronized final boolean isInitialized() {
