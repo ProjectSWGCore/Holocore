@@ -27,9 +27,6 @@
 ***********************************************************************************/
 package resources.control;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-
 import network.OutboundPacketService;
 import network.packets.Packet;
 import resources.config.ConfigFile;
@@ -45,7 +42,6 @@ import resources.services.Config;
 public class Service implements IntentReceiver {
 	
 	private static final OutboundPacketService outboundPacketService = new OutboundPacketService();
-	private static final DateFormat LOG_FORMAT = new SimpleDateFormat("dd-mm-yy HH:mm:ss.SSS");
 	
 	/**
 	 * Initializes this service. If the service returns false on this method
@@ -162,21 +158,6 @@ public class Service implements IntentReceiver {
 	 */
 	public synchronized final RelationalDatabase getLocalDatabase() {
 		return DataManager.getInstance().getLocalDatabase();
-	}
-	
-	/**
-	 * Logs the string to the server log file, formatted to display the time,
-	 * tag and message.
-	 * @param tag the tag to use for the log
-	 * @param str the format string for the log
-	 * @param args the string format arguments, if specified
-	 */
-	public synchronized final void log(String tag, String str, Object ... args) {
-		if (getConfig(ConfigFile.PRIMARY).getBoolean("DEBUG-SERVICES", true)) {
-			String logStr = String.format(str, args);
-			String log = String.format("%s [%s]: %s", LOG_FORMAT.format(System.currentTimeMillis()), tag, logStr);
-			DataManager.getInstance().log(log);
-		}
 	}
 	
 }

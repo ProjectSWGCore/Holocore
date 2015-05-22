@@ -66,6 +66,7 @@ import resources.player.PlayerEvent;
 import resources.player.PlayerFlags;
 import resources.player.PlayerState;
 import resources.server_info.CachedObjectDatabase;
+import resources.server_info.Log;
 import resources.server_info.ObjectDatabase;
 import resources.server_info.ObjectDatabase.Traverser;
 import resources.services.Config;
@@ -98,7 +99,7 @@ public class ObjectManager extends Manager {
 	
 	private void loadObjects() {
 		long startLoad = System.nanoTime();
-		log("ObjectManager", "Loading objects from ObjectDatabase...");
+		Log.i("ObjectManager", "Loading objects from ObjectDatabase...");
 		System.out.println("ObjectManager: Loading objects from ObjectDatabase...");
 		objects.load();
 		objects.traverse(new Traverser<SWGObject>() {
@@ -111,7 +112,7 @@ public class ObjectManager extends Manager {
 			}
 		});
 		double loadTime = (System.nanoTime() - startLoad) / 1E6;
-		log("ObjectManager", "Finished loading %d objects. Time: %fms", objects.size(), loadTime);
+		Log.i("ObjectManager", "Finished loading %d objects. Time: %fms", objects.size(), loadTime);
 		System.out.printf("ObjectManager: Finished loading %d objects. Time: %fms%n", objects.size(), loadTime);
 	}
 	
@@ -135,7 +136,7 @@ public class ObjectManager extends Manager {
 			double loadTime = (System.nanoTime() - startLoad) / 1E6;
 			System.out.printf("ObjectManager: Finished loading buildouts. Time: %fms%n", loadTime);
 		} else {
-			log("ObjectManager", "Did not load buildouts. Reason: Disabled.");
+			Log.w("ObjectManager", "Did not load buildouts. Reason: Disabled.");
 			System.out.println("ObjectManager: Buildouts not loaded. Reason: Disabled!");
 		}
 	}
@@ -233,6 +234,7 @@ public class ObjectManager extends Manager {
 			for (SWGObject slot : obj.getSlots().values())
 				if (slot != null)
 					deleteObject(slot.getObjectId());
+			Log.i("ObjectManager", "Deleted object %d [%s]", obj.getObjectId(), obj.getTemplate());
 			return obj;
 		}
 	}
@@ -286,6 +288,7 @@ public class ObjectManager extends Manager {
 			obj.setLocation(l);
 			objectAwareness.add(obj);
 			objects.put(objectId, obj);
+			Log.i("ObjectManager", "Created object %d [%s]", obj.getObjectId(), obj.getTemplate());
 			return obj;
 		}
 	}
@@ -335,6 +338,7 @@ public class ObjectManager extends Manager {
 		creature.clearAware();
 		objectAwareness.update(creature);
 		System.out.println("[" + player.getUsername() + "] " + player.getCharacterName() + " is zoning in");
+		Log.i("ObjectManager", "Zoning in %s with character %s", player.getUsername(), player.getCharacterName());
 		new PlayerEventIntent(player, galaxy, PlayerEvent.PE_ZONE_IN).broadcast();
 	}
 	
@@ -344,6 +348,7 @@ public class ObjectManager extends Manager {
 		SWGObject creature = objects.get(characterId);
 		if (creature == null) {
 			System.err.println("ObjectManager: Failed to start zone - CreatureObject could not be fetched from database [Character: " + characterId + "  User: " + player.getUsername() + "]");
+			
 			return;
 		}
 		if (!(creature instanceof CreatureObject)) {

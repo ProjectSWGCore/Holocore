@@ -84,6 +84,7 @@ import resources.player.AccessLevel;
 import resources.player.Player;
 import resources.player.PlayerEvent;
 import resources.player.PlayerState;
+import resources.server_info.Log;
 import resources.services.Config;
 import resources.zone.NameFilter;
 import services.objects.ObjectManager;
@@ -193,10 +194,12 @@ public class ZoneService extends Service {
 		player.setPlayerState(PlayerState.ZONED_IN);
 		player.sendPacket(p);
 		System.out.println("[" + player.getUsername() +"] " + player.getCharacterName() + " zoned in");
+		Log.i("ZoneService", "%s with character %s zoned in from %s:%d", player.getUsername(), player.getCharacterName(), p.getAddress(), p.getPort());
 	}
 	
 	private void handleClientIdMsg(Player player, ClientIdMsg clientId) {
 		System.out.println("[" + player.getUsername() + "] Connected to the zone server. IP: " + clientId.getAddress() + ":" + clientId.getPort());
+		Log.i("ZoneService", "%s connected to the zone server from %s:%d", player.getUsername(), clientId.getAddress(), clientId.getPort());
 		sendPacket(player.getNetworkId(), new HeartBeatMessage());
 		sendPacket(player.getNetworkId(), new AccountFeatureBits());
 		sendPacket(player.getNetworkId(), new ClientPermissionsMessage());
@@ -223,29 +226,38 @@ public class ZoneService extends Service {
 	}
 	
 	private void handleCharCreation(ObjectManager objManager, Player player, ClientCreateCharacter create) {
-		System.out.println("[" + player.getUsername() + "] Create Character: " + create.getName() + ". IP: " + create.getAddress() + ":" + create.getPort());
-		long characterId = createCharacter(objManager, player, create);
-		
 		ErrorMessage err = getNameValidity(create.getName(), player.getAccessLevel() != AccessLevel.PLAYER);
-		if (err == ErrorMessage.NAME_APPROVED && createCharacterInDb(characterId, create.getName(), player)) {
-			sendPacket(player, new CreateCharacterSuccess(characterId));
-			new PlayerEventIntent(player, PlayerEvent.PE_CREATE_CHARACTER).broadcast();
-		} else {
-			NameFailureReason reason = NameFailureReason.NAME_SYNTAX;
-			if (err == ErrorMessage.NAME_APPROVED) { // Then it must have been a database error
-				err = ErrorMessage.NAME_DECLINED_INTERNAL_ERROR;
-				reason = NameFailureReason.NAME_RETRY;
-			} else if (err == ErrorMessage.NAME_DECLINED_IN_USE)
-				reason = NameFailureReason.NAME_IN_USE;
-			else if (err == ErrorMessage.NAME_DECLINED_EMPTY)
-				reason = NameFailureReason.NAME_DECLINED_EMPTY;
-			else if (err == ErrorMessage.NAME_DECLINED_FICTIONALLY_INAPPROPRIATE)
-				reason = NameFailureReason.NAME_FICTIONALLY_INAPPRORIATE;
-			else if (err == ErrorMessage.NAME_DECLINED_RESERVED)
-				reason = NameFailureReason.NAME_DEV_RESERVED;
-			System.err.println("ZoneService: Unable to create character [Name: " + create.getName() + "  User: " + player.getUsername() + "] and put into database! Reason: " + err);
-			sendPacket(player, new CreateCharacterFailure(reason));
+		if (err == ErrorMessage.NAME_APPROVED) {
+			long characterId = createCharacter(objManager, player, create);
+			if (createCharacterInDb(characterId, create.getName(), player)) {
+				System.out.println("[" + player.getUsername() + "] Create Character: " + create.getName() + ". IP: " + create.getAddress() + ":" + create.getPort());
+				Log.i("ZoneService", "%s created character %s from %s:%d", player.getUsername(), create.getName(), create.getAddress(), create.getPort());
+				sendPacket(player, new CreateCharacterSuccess(characterId));
+				new PlayerEventIntent(player, PlayerEvent.PE_CREATE_CHARACTER).broadcast();
+				return;
+			}
+			Log.e("ZoneService", "Failed to create character %s for user %s with server error from %s:%d", create.getName(), player.getUsername(), create.getAddress(), create.getPort());
+			objManager.deleteObject(characterId);
 		}
+		sendCharCreationFailure(player, create, err);
+	}
+	
+	private void sendCharCreationFailure(Player player, ClientCreateCharacter create, ErrorMessage err) {
+		NameFailureReason reason = NameFailureReason.NAME_SYNTAX;
+		if (err == ErrorMessage.NAME_APPROVED) { // Then it must have been a database error
+			err = ErrorMessage.NAME_DECLINED_INTERNAL_ERROR;
+			reason = NameFailureReason.NAME_RETRY;
+		} else if (err == ErrorMessage.NAME_DECLINED_IN_USE)
+			reason = NameFailureReason.NAME_IN_USE;
+		else if (err == ErrorMessage.NAME_DECLINED_EMPTY)
+			reason = NameFailureReason.NAME_DECLINED_EMPTY;
+		else if (err == ErrorMessage.NAME_DECLINED_FICTIONALLY_INAPPROPRIATE)
+			reason = NameFailureReason.NAME_FICTIONALLY_INAPPRORIATE;
+		else if (err == ErrorMessage.NAME_DECLINED_RESERVED)
+			reason = NameFailureReason.NAME_DEV_RESERVED;
+		System.err.println("ZoneService: Unable to create character [Name: " + create.getName() + "  User: " + player.getUsername() + "] and put into database! Reason: " + err);
+		Log.e("ZoneService", "Failed to create character %s for user %s with error %s and reason %s from %s:%d", create.getName(), player.getUsername(), err, reason, create.getAddress(), create.getPort());
+		sendPacket(player, new CreateCharacterFailure(reason));
 	}
 	
 	private boolean createCharacterInDb(long characterId, String name, Player player) {
@@ -423,6 +435,7 @@ public class ZoneService extends Service {
 		synchronized (lockedNames) {
 			unlockName(player);
 			lockedNames.put(firstName, player);
+			Log.i("ZoneService", "Locked name %s for user %s", firstName, player.getUsername());
 		}
 		return true;
 	}
@@ -437,8 +450,10 @@ public class ZoneService extends Service {
 					break;
 				}
 			}
-			if (fName != null)
-				lockedNames.remove(fName);
+			if (fName != null) {
+				if (lockedNames.remove(fName) != null)
+					Log.i("ZoneService", "Unlocked name %s for user %s", fName, player.getUsername());
+			}
 		}
 	}
 	

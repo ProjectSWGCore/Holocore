@@ -49,6 +49,7 @@ import resources.player.Player;
 import resources.player.PlayerEvent;
 import resources.player.PlayerFlags;
 import resources.player.PlayerState;
+import resources.server_info.Log;
 import utilities.ThreadUtilities;
 
 public class ConnectionService extends Service {
@@ -188,6 +189,7 @@ public class ConnectionService extends Service {
 	}
 	
 	private void logOut(Player p, boolean addToDisappear) {
+		Log.i("ConnectionService", "Logged out %s with character %s", p.getUsername(), p.getCharacterName());
 		updatePlayTime(p);
 		if (p.getPlayerState() != PlayerState.LOGGED_OUT)
 			System.out.println("[" + p.getUsername() +"] Logged out " + p.getCharacterName());
@@ -201,12 +203,14 @@ public class ConnectionService extends Service {
 	}
 	
 	private void disappear(Player p) {
+		Log.i("ConnectionService", "Disappeared %s with character %s", p.getUsername(), p.getCharacterName());
 		p.setPlayerState(PlayerState.DISCONNECTED);
 		System.out.println("[" + p.getUsername() +"] " + p.getCharacterName() + " disappeared");
 		new PlayerEventIntent(p, PlayerEvent.PE_DISAPPEAR).broadcast();
 	}
 	
 	private void disconnect(Player player, DisconnectReason reason) {
+		Log.i("ConnectionService", "Disconnected %s with character %s", player.getUsername(), player.getCharacterName());
 		new CloseConnectionIntent(player.getConnectionId(), player.getNetworkId(), reason).broadcast();
 	}
 	

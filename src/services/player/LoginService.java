@@ -68,6 +68,7 @@ import resources.objects.creature.CreatureObject;
 import resources.player.AccessLevel;
 import resources.player.Player;
 import resources.player.PlayerState;
+import resources.server_info.Log;
 import resources.server_info.RelationalDatabase;
 import resources.services.Config;
 
@@ -128,8 +129,10 @@ public class LoginService extends Service {
 	
 	private void handleCharDeletion(GalacticIntent intent, Player player, DeleteCharacterRequest request) {
 		SWGObject obj = intent.getObjectManager().destroyObject(request.getPlayerId());
-		if (obj != null && obj instanceof CreatureObject)
+		if (obj != null && obj instanceof CreatureObject) {
+			Log.i("LoginService", "Deleted character %s for user %s", ((CreatureObject)obj).getName(), player.getUsername());
 			System.out.println("[" + player.getUsername() + "] Delete Character: " + ((CreatureObject)obj).getName() + ". IP: " + request.getAddress() + ":" + request.getPort());
+		}
 		sendPacket(player, new DeleteCharacterResponse(deleteCharacter(request.getPlayerId())));
 	}
 	
@@ -140,9 +143,9 @@ public class LoginService extends Service {
 		}
 		final boolean doClientCheck = getConfig(ConfigFile.PRIMARY).getBoolean("LOGIN-VERSION-CHECKS", true);
 		if (doClientCheck)
-			System.out.println("LoginService: Running login checks for '" + id.getUsername() + "'");
+			Log.d("LoginService", "Running login checks for %s", id.getUsername());
 		else
-			System.out.println("LoginService: Skipping login checks for '" + id.getUsername() + "'");
+			Log.d("LoginService", "Skipping login checks for %s", id.getUsername());
 		if (!id.getVersion().equals(REQUIRED_VERSION) && doClientCheck) {
 			onLoginClientVersionError(player, id);
 			return;
@@ -165,12 +168,13 @@ public class LoginService extends Service {
 				onInvalidUserPass(player, id);
 		} catch (SQLException e) {
 			e.printStackTrace();
-			onLoginServerError(player);
+			onLoginServerError(player, id);
 		}
 	}
 	
 	private void onLoginClientVersionError(Player player, LoginClientId id) {
 		System.err.println("LoginService: " + id.getUsername() + " cannot login due to invalid version code: " + id.getVersion());
+		Log.i("LoginService", "%s cannot login due to invalid version code: %s, expected %s from %s:%d", player.getUsername(), id.getVersion(), REQUIRED_VERSION, id.getAddress(), id.getPort());
 		String type = "Login Failed!";
 		String message = "Invalid Client Version Code: " + id.getVersion();
 		sendPacket(player.getNetworkId(), new ErrorMessage(type, message, false));
@@ -195,6 +199,7 @@ public class LoginService extends Service {
 		}
 		sendLoginSuccessPacket(player);
 		System.out.println("[" + player.getUsername() + "] Connected to the login server. IP: " + id.getAddress() + ":" + id.getPort());
+		Log.i("LoginService", "%s connected to the login server from %s:%d", player.getUsername(), id.getAddress(), id.getPort());
 		new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_SUCCESS).broadcast();
 	}
 	
@@ -203,6 +208,7 @@ public class LoginService extends Service {
 		String message = "Sorry, you're banned!";
 		sendPacket(player.getNetworkId(), new ErrorMessage(type, message, false));
 		System.err.println("[" + id.getUsername() + "] Can't login - Banned! IP: " + id.getAddress() + ":" + id.getPort());
+		Log.i("LoginService", "%s cannot login due to a ban, from %s:%d", id.getAddress(), id.getPort());
 		player.setPlayerState(PlayerState.DISCONNECTED);
 		new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_FAIL_BANNED).broadcast();
 	}
@@ -221,15 +227,17 @@ public class LoginService extends Service {
 		sendPacket(player, new LoginIncorrectClientId(getServerString(), "3.14159265"));
 		sendPacket(player, new ErrorMessage(type, message, false));
 		System.err.println("[" + id.getUsername() + "] Invalid user/pass combo! IP: " + id.getAddress() + ":" + id.getPort());
+		Log.i("LoginService", "%s cannot login due to invalid user/pass from %s:%d", id.getUsername(), id.getAddress(), id.getPort());
 		player.setPlayerState(PlayerState.DISCONNECTED);
 		new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_FAIL_INVALID_USER_PASS).broadcast();
 	}
 	
-	private void onLoginServerError(Player player) {
+	private void onLoginServerError(Player player, LoginClientId id) {
 		String type = "Login Failed!";
 		String message = "Server Error.";
 		sendPacket(player.getNetworkId(), new ErrorMessage(type, message, false));
 		player.setPlayerState(PlayerState.DISCONNECTED);
+		Log.e("LoginService", "%s cannot login due to server error, from %s:%d", id.getUsername(), id.getAddress(), id.getPort());
 		new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_FAIL_SERVER_ERROR).broadcast();
 	}
 	

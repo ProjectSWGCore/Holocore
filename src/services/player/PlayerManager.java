@@ -50,6 +50,7 @@ import resources.network.ServerType;
 import resources.player.Player;
 import resources.player.PlayerEvent;
 import resources.player.PlayerState;
+import resources.server_info.Log;
 
 public class PlayerManager extends Manager {
 	
@@ -190,6 +191,7 @@ public class PlayerManager extends Manager {
 					p.setNetworkId(networkId);
 					p.setGalaxyId(galaxyId);
 					players.put(networkId, p);
+					Log.i("PlayerManager", "Transitioned %s from login to zone", p.getUsername());
 					return p;
 				}
 			}
