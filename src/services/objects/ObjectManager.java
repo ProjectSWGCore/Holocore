@@ -40,6 +40,7 @@ import main.ProjectSWG;
 import network.packets.Packet;
 import network.packets.swg.zone.HeartBeatMessage;
 import network.packets.swg.zone.ParametersMessage;
+import network.packets.swg.zone.SceneDestroyObject;
 import network.packets.swg.zone.UpdatePvpStatusMessage;
 import network.packets.swg.zone.chat.ChatOnConnectAvatar;
 import network.packets.swg.zone.chat.VoiceChatStatus;
@@ -228,7 +229,41 @@ public class ObjectManager extends Manager {
 			return obj;
 		}
 	}
-	
+
+	public SWGObject destroyObject(long objectId) {
+		SWGObject object = objects.get(objectId);
+
+		return (object != null ? destroyObject(object) : null);
+	}
+
+	public SWGObject destroyObject(SWGObject object) {
+
+		long objId = object.getObjectId();
+
+		List<SWGObject> children = object.getChildren();
+		synchronized (children) {
+			for (SWGObject child : children) {
+				destroyObject(child.getObjectId());
+			}
+		}
+
+		// Remove object from the parent
+		SWGObject parent = object.getParent();
+		if (parent != null) {
+			if (parent instanceof CreatureObject) {
+				((CreatureObject) parent).removeEquipment(object);
+			}
+			parent.removeChild(object);
+		}
+
+		object.sendObservers(new SceneDestroyObject(objId));
+
+		// Finally, remove from the awareness tree
+		deleteObject(object.getObjectId());
+
+		return object;
+	}
+
 	public SWGObject createObject(String template) {
 		return createObject(template, null);
 	}
