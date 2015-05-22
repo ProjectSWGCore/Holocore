@@ -42,7 +42,7 @@ public class SceneDestroyObject extends SWGPacket {
 	}
 	
 	public SceneDestroyObject(long objId) {
-		
+		this.objId = objId;
 	}
 	
 	public SceneDestroyObject(ByteBuffer data) {

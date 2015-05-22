@@ -60,7 +60,7 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private final List <SWGObject> children;
+	private final List <SWGObject> children; // TODO Move this into slot-type system as only containers can have multiple children in 1 slot
 	private final Location location;
 	private final long objectId;
 	private final Map <String, SWGObject> slots; // Can only be occupied one time, containers are slots who have children
@@ -111,13 +111,13 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 	
 	private void updateContainment(SWGObject child) {
 		if (child.parent != null)
-			child.parent.removeChild(child);
+			child.parent.removeChild(child); // Is this necessary?
 		child.parent = this;
 		Integer containmentType = (Integer)child.getTemplateAttribute("containerType");
 		if (containmentType == null)
 			child.containmentType = 4;
 		else
-			child.containmentType = containmentType.intValue();
+			child.containmentType = containmentType;
 		// TODO: Set containmentType based on if object is in a slot (4) or a container (-1)
 	}
 	
@@ -143,7 +143,9 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 	public boolean hasSlot(String slot) {
 		return slots.containsKey(slot);
 	}
-	
+
+	// TODO Refactor slots to just be used in addChild and removeChild as the proper slots can be set by using arrangement descriptors
+
 	public boolean setSlot(String slot, SWGObject obj) {
 		if (!slots.containsKey(slot)) {
 			System.err.println("Could not set " + obj.getTemplate() + " to " + getTemplate() + " as it doesn't contain slot " + slot + "!");
@@ -160,7 +162,7 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 		}
 		
 		if (occupiedAvailSlots.size() != arrangement.size()) {
-			System.err.println("Doesn't have all the slots.");
+			System.err.println("Needed slots are not available for " + obj);
 			return false;
 		}
 		
@@ -171,8 +173,8 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 		
 		return true;
 	}
-	
-	public void clearSlot(String slot) {
+
+	private void clearSlot(String slot) {
 		if (!slots.containsKey(slot)) {
 			System.err.println("Could not clear " + slot + " as it doesn't contain that slot!");
 			return;
@@ -188,6 +190,11 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 		synchronized (children) {
 			children.remove(object);
 		}
+
+		for (String slot : object.getArrangement().get(0)) {
+			clearSlot(slot);
+		}
+
 		object.parent = null;
 	}
 	
@@ -305,8 +312,8 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 	public List<List<String>> getArrangement() {
 		return arrangement;
 	}
-	
-	public void setArrangment(List<List<String>> arrangement) {
+
+	public void setArrangement(List<List<String>> arrangement) {
 		this.arrangement = arrangement;
 	}
 	
@@ -341,11 +348,7 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 			createChildrenObjects(target);
 		target.sendPacket(new SceneEndBaselines(getObjectId()));
 	}
-	
-	protected void destroyObject(Player target) {
-		sendSceneDestroyObject(target);
-	}
-	
+
 	public void clearAware() {
 		SWGObject [] objects;
 		synchronized (objectsAware) {
@@ -399,7 +402,7 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 		synchronized (objectsAware) {
 			if (objectsAware.remove(o)) {
 				if (o.getOwner() != null) {
-					destroyObject(o.getOwner());
+					sendSceneDestroyObject(o.getOwner());
 				}
 				if (getOwner() != null)
 					o.awarenessOutOfRange(this);
