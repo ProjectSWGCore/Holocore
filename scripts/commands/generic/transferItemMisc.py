@@ -1,10 +1,19 @@
 import sys
 
-def execute(objManager, player, target, args):
+def execute(galacticManager, player, target, args):
 	actor = player.getCreatureObject()
+	argsSplit = args.split(" ")
+	objManager = galacticManager.getObjectManager();
+	containerId = long(args[1])
+	containerObject = objManager.getObjectById(containerId)	# Ziggy: The target container
+	inventory = actor.getSlottedObject("inventory")
 	
-	if target.getParent().equals(actor):	# Ziggy: We're already wearing this item
-		actor.getSlottedObject("inventory").addChild(target)
-	else:									# Ziggy: We're NOT wearing this item already
+	if target.getParent().equals(actor) or not containerObject.equals(inventory):	# Ziggy: We're already wearing this item, transfer it to the container
+		containerObject.addChild(target)
+	elif containerObject.equals(inventory):		# We're transfering this item to our inventory but we don't want to equip it						
+		containerObject.addChild(target)
+	else:								# Ziggy: This is an item in our inventory that we want to equip
 		actor.equipItem(target)
+		
 	return
+	
