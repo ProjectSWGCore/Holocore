@@ -127,7 +127,14 @@ public class CreatureObject extends TangibleObject {
 			for(String slotName : slotNameList)
 				super.setSlot(slotName, item);
 	}
-	
+
+	public void removeEquipment(SWGObject obj) {
+		synchronized (equipmentList) {
+			if (equipmentList.remove(obj))
+				equipmentList.sendDeltaMessage(this);
+		}
+	}
+
 	public void addEquipment(SWGObject obj) {
 		synchronized(equipmentList) {
 			if (obj instanceof WeaponObject)

@@ -86,7 +86,8 @@ public class CommandService extends Service {
 	private void handleCommandRequest(Player player, GalacticManager galacticManager, CommandQueueEnqueue request) {
 		if (!commands.containsKey(request.getCommandCrc()))
 			return;
-//		System.out.println(commands.get(request.getCrc()).toString());
+//		System.out.println(commands.get(request.getCommandCrc()).toString());
+
 		SWGObject target = null;
 		if (request.getTargetId() != 0) { target = galacticManager.getObjectManager().getObjectById(request.getTargetId()); }
 		
@@ -159,5 +160,6 @@ public class CommandService extends Service {
 		registerCallback("kneel", new KneelCmdCallback());
 		registerCallback("toggleAwayFromKeyBoard", new AfkCmdCallback());
 		registerCallback("jumpServer", new JumpCmdCallback());
+		registerCallback("serverDestroyObject", new ServerDestroyObjectCmdCallback());
 	}
 }
