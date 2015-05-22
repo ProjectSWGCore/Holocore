@@ -39,7 +39,7 @@ public class RequestWaypointCmdCallback implements ICmdCallback {
 	@Override
 	public void execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
 		// Args: (^-,=+_)color_1(,+-=_^)=1 planet x 0.0 z
-		PlayerObject ghost = (PlayerObject) player.getPlayerObject();
+		PlayerObject ghost = player.getPlayerObject();
 		if (ghost == null)
 			return;
 		

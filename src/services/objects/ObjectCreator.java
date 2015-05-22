@@ -118,7 +118,7 @@ public final class ObjectCreator {
 		if (attributes.getAttribute(ObjectData.ARRANGEMENT_FILE) != null) {
 			// This is what slots the object *USES*
 			SlotArrangementData arrangementData = (SlotArrangementData) clientFac.getInfoFromFile((String) attributes.getAttribute(ObjectData.ARRANGEMENT_FILE));
-			obj.setArrangment(arrangementData.getArrangement());
+			obj.setArrangement(arrangementData.getArrangement());
 		}
 	}
 	
