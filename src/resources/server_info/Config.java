@@ -28,26 +28,13 @@
 package resources.server_info;
 
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Properties;
 
 /**
  * Reads and stores configuration data from a file
  */
 public class Config {
 	
-	private final Properties configData;
-	private File file;
-	
-	/**
-	 * Creates an empty config that isn't associated with a file
-	 */
-	public Config() {
-		this.file = null;
-		this.configData = new Properties();
-	}
+	private final ConfigData configData;
 	
 	/**
 	 * Initilizes the Config and loads the data in the file
@@ -64,9 +51,9 @@ public class Config {
 	public Config(File file) {
 		if (!file.exists() || !file.isFile())
 			throw new IllegalArgumentException("Filepath does not point to a valid file!");
-		this.file = file;
-		this.configData = new Properties();
+		configData = new ConfigData(file);
 		load();
+		save();
 	}
 	
 	/**
@@ -90,7 +77,7 @@ public class Config {
 			setProperty(key, def);
 			return def;
 		}
-		return configData.getProperty(key);
+		return configData.get(key);
 	}
 	
 	/**
@@ -145,7 +132,7 @@ public class Config {
 	 * @param value the value to set
 	 */
 	public void setProperty(String key, String value) {
-		configData.setProperty(key, value);
+		configData.put(key, value);
 		save();
 	}
 	
@@ -181,28 +168,7 @@ public class Config {
 	 * @return TRUE if the data was successfully loaded, FALSE otherwise
 	 */
 	public boolean load() {
-		if (file == null)
-			return false;
-		FileReader reader = null;
-		try {
-			reader = new FileReader(file);
-			synchronized (reader) {
-				configData.clear();
-				configData.load(reader);
-				reader.close();
-				return true;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (reader != null)
-					reader.close();
-			} catch (IOException e) {
-				return false;
-			}
-		}
-		return false;
+		return configData.load();
 	}
 	
 	/**
@@ -210,27 +176,7 @@ public class Config {
 	 * @return TRUE if the data was successfully saved, FALSE otherwise
 	 */
 	public boolean save() {
-		if (file == null)
-			return false;
-		FileWriter writer = null;
-		try {
-			writer = new FileWriter(file);
-			synchronized (writer) {
-				configData.store(writer, null);
-				writer.close();
-				return true;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (writer != null)
-					writer.close();
-			} catch (IOException e) {
-				return false;
-			}
-		}
-		return false;
+		return configData.save();
 	}
 	
 }

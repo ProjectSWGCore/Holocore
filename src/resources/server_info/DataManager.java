@@ -93,7 +93,7 @@ public class DataManager {
 	public synchronized final Config getConfig(ConfigFile file) {
 		Config c = config.get(file);
 		if (c == null)
-			return new Config();
+			return new Config(file.getFilename());
 		return c;
 	}
 	
