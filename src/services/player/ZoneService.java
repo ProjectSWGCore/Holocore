@@ -107,6 +107,7 @@ public class ZoneService extends Service {
 	private final ClientFactory clientFac;
 	private final NameFilter nameFilter;
 	private final SWGNameGenerator nameGenerator;
+	private final CharacterCreationRestriction creationRestriction;
 	
 	private PreparedStatement createCharacter;
 	private PreparedStatement getCharacter;
@@ -118,6 +119,7 @@ public class ZoneService extends Service {
 		clientFac = new ClientFactory();
 		nameFilter = new NameFilter("namegen/bad_word_list.txt", "namegen/reserved_words.txt", "namegen/fiction_reserved.txt");
 		nameGenerator = new SWGNameGenerator(nameFilter);
+		creationRestriction = new CharacterCreationRestriction(2);
 	}
 	
 	@Override
@@ -281,9 +283,12 @@ public class ZoneService extends Service {
 	
 	private void handleCharCreation(ObjectManager objManager, Player player, ClientCreateCharacter create) {
 		ErrorMessage err = getNameValidity(create.getName(), player.getAccessLevel() != AccessLevel.PLAYER);
+		if (!creationRestriction.isAbleToCreate(player))
+			err = ErrorMessage.NAME_DECLINED_TOO_FAST;
 		if (err == ErrorMessage.NAME_APPROVED) {
 			long characterId = createCharacter(objManager, player, create);
 			if (createCharacterInDb(characterId, create.getName(), player)) {
+				creationRestriction.createdCharacter(player);
 				System.out.println("[" + player.getUsername() + "] Create Character: " + create.getName() + ". IP: " + create.getAddress() + ":" + create.getPort());
 				Log.i("ZoneService", "%s created character %s from %s:%d", player.getUsername(), create.getName(), create.getAddress(), create.getPort());
 				sendPacket(player, new CreateCharacterSuccess(characterId));
@@ -298,17 +303,21 @@ public class ZoneService extends Service {
 	
 	private void sendCharCreationFailure(Player player, ClientCreateCharacter create, ErrorMessage err) {
 		NameFailureReason reason = NameFailureReason.NAME_SYNTAX;
-		if (err == ErrorMessage.NAME_APPROVED) { // Then it must have been a database error
-			err = ErrorMessage.NAME_DECLINED_INTERNAL_ERROR;
-			reason = NameFailureReason.NAME_RETRY;
-		} else if (err == ErrorMessage.NAME_DECLINED_IN_USE)
-			reason = NameFailureReason.NAME_IN_USE;
-		else if (err == ErrorMessage.NAME_DECLINED_EMPTY)
-			reason = NameFailureReason.NAME_DECLINED_EMPTY;
-		else if (err == ErrorMessage.NAME_DECLINED_FICTIONALLY_INAPPROPRIATE)
-			reason = NameFailureReason.NAME_FICTIONALLY_INAPPRORIATE;
-		else if (err == ErrorMessage.NAME_DECLINED_RESERVED)
-			reason = NameFailureReason.NAME_DEV_RESERVED;
+		switch (err) {
+			case NAME_APPROVED:
+				err = ErrorMessage.NAME_DECLINED_INTERNAL_ERROR;
+				reason = NameFailureReason.NAME_RETRY;
+				break;
+			case NAME_DECLINED_FICTIONALLY_INAPPROPRIATE:
+				reason = NameFailureReason.NAME_FICTIONALLY_INAPPRORIATE;
+				break;
+			case NAME_DECLINED_IN_USE:   reason = NameFailureReason.NAME_IN_USE; break;
+			case NAME_DECLINED_EMPTY:    reason = NameFailureReason.NAME_DECLINED_EMPTY; break;
+			case NAME_DECLINED_RESERVED: reason = NameFailureReason.NAME_DEV_RESERVED; break;
+			case NAME_DECLINED_TOO_FAST: reason = NameFailureReason.NAME_TOO_FAST; break;
+			default:
+				break;
+		}
 		System.err.println("ZoneService: Unable to create character [Name: " + create.getName() + "  User: " + player.getUsername() + "] and put into database! Reason: " + err);
 		Log.e("ZoneService", "Failed to create character %s for user %s with error %s and reason %s from %s:%d", create.getName(), player.getUsername(), err, reason, create.getAddress(), create.getPort());
 		sendPacket(player, new CreateCharacterFailure(reason));
