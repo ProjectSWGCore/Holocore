@@ -343,7 +343,7 @@ public class CreatureObject extends TangibleObject {
 	
 	public void setHeight(double height) {
 		this.height = height;
-		sendDelta(3, 17, height);
+		sendDelta(3, 16, height);
 	}
 	
 	public void setPerformanceListenTarget(long performanceListenTarget) {
