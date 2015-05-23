@@ -59,7 +59,7 @@ import services.galaxy.GalacticManager;
 
 public class CoreManager extends Manager {
 	
-	private static final int galaxyId = 2;
+	private static final int galaxyId = 1;
 	
 	private final ScheduledExecutorService shutdownService;
 	private EngineManager engineManager;
