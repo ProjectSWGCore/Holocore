@@ -47,6 +47,16 @@ public class SetWaypointColor extends SWGPacket {
 		objId = getLong(data);
 		color = getAscii(data);
 	}
+	
+	@Override
+	public ByteBuffer encode() {
+		ByteBuffer data = ByteBuffer.allocate(16 + color.length());
+		addShort(data, 3);
+		addInt(data, CRC);
+		addLong(data, objId);
+		addAscii(data, color);
+		return data;
+	}
 
 	public long getObjId() {
 		return objId;

@@ -6,7 +6,7 @@ import network.packets.swg.SWGPacket;
 
 public class ShowHelmet extends SWGPacket {
 
-	public static final int CRC = -571479011;
+	public static final int CRC = 0xDDEFEC1D;
 	
 	private long objectId;
 	private boolean showHelmet;
@@ -17,7 +17,17 @@ public class ShowHelmet extends SWGPacket {
 			return;
 		
 		objectId = getLong(data);
-		showHelmet = getByte(data) == 1;
+		showHelmet = getBoolean(data);
+	}
+	
+	@Override
+	public ByteBuffer encode() {
+		ByteBuffer data = ByteBuffer.allocate(15);
+		addShort(data, 3);
+		addInt(data, CRC);
+		addLong(data, objectId);
+		addBoolean(data, showHelmet);
+		return data;
 	}
 	
 	public boolean showingHelmet() {

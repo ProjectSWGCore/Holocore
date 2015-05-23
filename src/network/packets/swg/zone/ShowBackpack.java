@@ -6,7 +6,7 @@ import network.packets.swg.SWGPacket;
 
 public class ShowBackpack extends SWGPacket {
 
-	public static final int CRC = -2010876549;
+	public static final int CRC = 0x8824757B;
 	
 	private long objectId;
 	private boolean showBackpack;
@@ -17,7 +17,17 @@ public class ShowBackpack extends SWGPacket {
 			return;
 		
 		objectId = getLong(data);
-		showBackpack = getByte(data) == 1;
+		showBackpack = getBoolean(data);
+	}
+	
+	@Override
+	public ByteBuffer encode() {
+		ByteBuffer data = ByteBuffer.allocate(15);
+		addShort(data, 3);
+		addInt(data, CRC);
+		addLong(data, objectId);
+		addBoolean(data, showBackpack);
+		return data;
 	}
 	
 	public boolean showingBackpack() {
