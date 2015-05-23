@@ -212,7 +212,7 @@ public class ConnectionService extends Service {
 	}
 	
 	private void disconnect(Player player, DisconnectReason reason) {
-		Log.i("ConnectionService", "Disconnected %s with character %s", player.getUsername(), player.getCharacterName());
+		Log.i("ConnectionService", "Disconnected %s with character %s and reason: %s", player.getUsername(), player.getCharacterName(), reason);
 		new CloseConnectionIntent(player.getConnectionId(), player.getNetworkId(), reason).broadcast();
 	}
 	
