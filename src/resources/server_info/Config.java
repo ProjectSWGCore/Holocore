@@ -25,7 +25,7 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package resources.services;
+package resources.server_info;
 
 import java.io.File;
 import java.io.FileReader;

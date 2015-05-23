@@ -68,9 +68,9 @@ import resources.objects.creature.CreatureObject;
 import resources.player.AccessLevel;
 import resources.player.Player;
 import resources.player.PlayerState;
+import resources.server_info.Config;
 import resources.server_info.Log;
 import resources.server_info.RelationalDatabase;
-import resources.services.Config;
 
 public class LoginService extends Service {
 	

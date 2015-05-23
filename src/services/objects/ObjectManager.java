@@ -56,10 +56,10 @@ import resources.objects.buildouts.BuildoutLoader;
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
 import resources.server_info.CachedObjectDatabase;
+import resources.server_info.Config;
 import resources.server_info.Log;
 import resources.server_info.ObjectDatabase;
 import resources.server_info.ObjectDatabase.Traverser;
-import resources.services.Config;
 import services.player.PlayerManager;
 
 public class ObjectManager extends Manager {

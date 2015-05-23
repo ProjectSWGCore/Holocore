@@ -33,7 +33,6 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import resources.config.ConfigFile;
-import resources.services.Config;
 
 public class DataManager {
 	

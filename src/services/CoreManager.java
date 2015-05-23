@@ -54,7 +54,7 @@ import resources.config.ConfigFile;
 import resources.control.Intent;
 import resources.control.Manager;
 import resources.control.ServerStatus;
-import resources.services.Config;
+import resources.server_info.Config;
 import services.galaxy.GalacticManager;
 
 public class CoreManager extends Manager {
