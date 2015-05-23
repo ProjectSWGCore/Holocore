@@ -751,7 +751,7 @@ public class CreatureObject extends TangibleObject {
 		bb.addObject(buffs); // 26
 		bb.addBoolean(performing); // 27
 		bb.addByte(difficulty.getDifficulty()); // 28
-		bb.addInt(hologramColour.getValue()); // Hologram Color -- 29
+		bb.addInt((hologramColour == null) ? -1 : hologramColour.getValue()); // Hologram Color -- 29
 		bb.addBoolean(shownOnRadar); // 30
 		bb.addBoolean(beast); // 31
 		bb.addByte(0); // Unknown -- 32
