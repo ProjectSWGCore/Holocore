@@ -31,11 +31,16 @@ import java.nio.ByteBuffer;
 
 public class JumpUpdate extends ObjectController {
 	
-	public static final int CONTROLLERCRC = 0x04BF;
-	
+	public static final int CRC = 0x04BF;
 	
 	public JumpUpdate(long objectId) {
-		super(objectId, CONTROLLERCRC);
+		super(objectId, CRC);
+	}
+	
+	@Override
+	public void decode(ByteBuffer data) {
+		decodeHeader(data);
+		
 	}
 	
 	@Override
@@ -44,11 +49,6 @@ public class JumpUpdate extends ObjectController {
 		encodeHeader(data);
 		
 		return data;
-	}
-
-	@Override
-	public void decode(ByteBuffer data) {
-		// Ziggy: Unused, this is a Server -> Client packet only.
 	}
 	
 }
