@@ -168,14 +168,21 @@ public class ZoneService extends Service {
 	}
 	
 	private void zoneInPlayer(Player player, CreatureObject creature, String galaxy) {
+		PlayerObject playerObj = creature.getPlayerObject();
 		player.setPlayerState(PlayerState.ZONING_IN);
 		player.setCreatureObject(creature);
 		creature.setOwner(player);
-		creature.getPlayerObject().setOwner(player);
-		player.getPlayerObject().setStartPlayTime((int) System.currentTimeMillis());
-		creature.setMoodId(CreatureMood.NONE.getMood());
-		player.getPlayerObject().clearFlagBitmask(PlayerFlags.LD);	// Ziggy: Clear the LD flag in case it wasn't already.
+		playerObj.setOwner(player);
 		
+		sendZonePackets(player, creature);
+		initPlayerBeforeZoneIn(player, creature, playerObj);
+		creature.createObject(player);
+		System.out.printf("[%s] %s is zoning in%n", player.getUsername(), player.getCharacterName());
+		Log.i("ObjectManager", "Zoning in %s with character %s", player.getUsername(), player.getCharacterName());
+		new PlayerEventIntent(player, galaxy, PlayerEvent.PE_ZONE_IN).broadcast();
+	}
+	
+	private void sendZonePackets(Player player, CreatureObject creature) {
 		long objId = creature.getObjectId();
 		Race race = creature.getRace();
 		Location l = creature.getLocation();
@@ -187,10 +194,12 @@ public class ZoneService extends Service {
 		sendPacket(player, new ChatOnConnectAvatar());
 		sendPacket(player, new CmdStartScene(false, objId, race, l, time));
 		sendPacket(player, new UpdatePvpStatusMessage(creature.getPvpType(), creature.getPvpFactionId(), creature.getObjectId()));
-		creature.createObject(player);
-		System.out.println("[" + player.getUsername() + "] " + player.getCharacterName() + " is zoning in");
-		Log.i("ObjectManager", "Zoning in %s with character %s", player.getUsername(), player.getCharacterName());
-		new PlayerEventIntent(player, galaxy, PlayerEvent.PE_ZONE_IN).broadcast();
+	}
+	
+	private void initPlayerBeforeZoneIn(Player player, CreatureObject creatureObj, PlayerObject playerObj) {
+		playerObj.setStartPlayTime((int) System.currentTimeMillis());
+		creatureObj.setMoodId(CreatureMood.NONE.getMood());
+		playerObj.clearFlagBitmask(PlayerFlags.LD);	// Ziggy: Clear the LD flag in case it wasn't already.
 	}
 	
 	private void handleShowBackpack(Player player, ShowBackpack p) {
