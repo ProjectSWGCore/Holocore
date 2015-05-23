@@ -29,6 +29,7 @@ package services.player;
 
 import intents.GalacticIntent;
 import intents.PlayerEventIntent;
+import intents.ZoneInIntent;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -61,9 +62,15 @@ import network.packets.swg.zone.CmdSceneReady;
 import network.packets.swg.zone.GalaxyLoopTimesRequest;
 import network.packets.swg.zone.GalaxyLoopTimesResponse;
 import network.packets.swg.zone.HeartBeatMessage;
+import network.packets.swg.zone.ParametersMessage;
 import network.packets.swg.zone.SetWaypointColor;
 import network.packets.swg.zone.ShowBackpack;
 import network.packets.swg.zone.ShowHelmet;
+import network.packets.swg.zone.UpdatePvpStatusMessage;
+import network.packets.swg.zone.chat.ChatOnConnectAvatar;
+import network.packets.swg.zone.chat.VoiceChatStatus;
+import network.packets.swg.zone.insertion.ChatServerStatus;
+import network.packets.swg.zone.insertion.CmdStartScene;
 import network.packets.swg.zone.spatial.GetMapLocationsMessage;
 import network.packets.swg.zone.spatial.GetMapLocationsResponseMessage;
 import resources.Galaxy;
@@ -73,8 +80,10 @@ import resources.Terrain;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.ProfTemplateData;
 import resources.config.ConfigFile;
+import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.SWGObject;
+import resources.objects.creature.CreatureMood;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
 import resources.objects.tangible.TangibleObject;
@@ -83,6 +92,7 @@ import resources.objects.waypoint.WaypointObject.WaypointColor;
 import resources.player.AccessLevel;
 import resources.player.Player;
 import resources.player.PlayerEvent;
+import resources.player.PlayerFlags;
 import resources.player.PlayerState;
 import resources.server_info.Log;
 import resources.services.Config;
@@ -120,7 +130,16 @@ public class ZoneService extends Service {
 		loadProfTemplates();
 		if (!nameFilter.load())
 			System.err.println("Failed to load name filter!");
+		registerForIntent(ZoneInIntent.TYPE);
 		return super.initialize();
+	}
+	
+	@Override
+	public void onIntentReceived(Intent i) {
+		if (i instanceof ZoneInIntent) {
+			ZoneInIntent zii = (ZoneInIntent) i;
+			zoneInPlayer(zii.getPlayer(), zii.getCreature(), zii.getGalaxy());
+		}
 	}
 	
 	public void handlePacket(GalacticIntent intent, Player player, long networkId, Packet p) {
@@ -146,6 +165,32 @@ public class ZoneService extends Service {
 			handleShowBackpack(player, (ShowBackpack) p);
 		if(p instanceof ShowHelmet)
 			handleShowHelmet(player, (ShowHelmet) p);
+	}
+	
+	private void zoneInPlayer(Player player, CreatureObject creature, String galaxy) {
+		player.setPlayerState(PlayerState.ZONING_IN);
+		player.setCreatureObject(creature);
+		creature.setOwner(player);
+		creature.getPlayerObject().setOwner(player);
+		player.getPlayerObject().setStartPlayTime((int) System.currentTimeMillis());
+		creature.setMoodId(CreatureMood.NONE.getMood());
+		player.getPlayerObject().clearFlagBitmask(PlayerFlags.LD);	// Ziggy: Clear the LD flag in case it wasn't already.
+		
+		long objId = creature.getObjectId();
+		Race race = creature.getRace();
+		Location l = creature.getLocation();
+		long time = (long)(ProjectSWG.getCoreTime()/1E3);
+		sendPacket(player, new HeartBeatMessage());
+		sendPacket(player, new ChatServerStatus(true));
+		sendPacket(player, new VoiceChatStatus());
+		sendPacket(player, new ParametersMessage());
+		sendPacket(player, new ChatOnConnectAvatar());
+		sendPacket(player, new CmdStartScene(false, objId, race, l, time));
+		sendPacket(player, new UpdatePvpStatusMessage(creature.getPvpType(), creature.getPvpFactionId(), creature.getObjectId()));
+		creature.createObject(player);
+		System.out.println("[" + player.getUsername() + "] " + player.getCharacterName() + " is zoning in");
+		Log.i("ObjectManager", "Zoning in %s with character %s", player.getUsername(), player.getCharacterName());
+		new PlayerEventIntent(player, galaxy, PlayerEvent.PE_ZONE_IN).broadcast();
 	}
 	
 	private void handleShowBackpack(Player player, ShowBackpack p) {
