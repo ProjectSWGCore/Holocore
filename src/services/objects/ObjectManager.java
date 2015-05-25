@@ -31,10 +31,7 @@ import intents.ObjectTeleportIntent;
 import intents.PlayerEventIntent;
 import intents.network.GalacticPacketIntent;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import main.ProjectSWG;
 import network.packets.Packet;
@@ -228,12 +225,18 @@ public class ObjectManager extends Manager {
 			if (obj == null)
 				return null;
 			objectAwareness.remove(obj);
-			for (SWGObject child : obj.getChildren())
-				if (child != null)
-					deleteObject(child.getObjectId());
-			for (SWGObject slot : obj.getSlots().values())
-				if (slot != null)
-					deleteObject(slot.getObjectId());
+
+/*			for (Slot slot : obj.getSlots()) {
+				if (slot != null) {
+					if (slot instanceof Container) {
+						for (SWGObject child : ((Container) slot).getContainedObjects()) {
+							deleteObject(child.getObjectId());
+						}
+					}
+					if (slot.getObject() != null)
+						deleteObject(slot.getObject().getObjectId());
+				}
+			}*/
 			Log.i("ObjectManager", "Deleted object %d [%s]", obj.getObjectId(), obj.getTemplate());
 			return obj;
 		}
@@ -249,12 +252,20 @@ public class ObjectManager extends Manager {
 
 		long objId = object.getObjectId();
 
-		List<SWGObject> children = object.getChildren();
-		synchronized (children) {
-			for (SWGObject child : children) {
-				destroyObject(child.getObjectId());
+/*		Collection<Slot> slots = object.getSlots();
+		synchronized (slots) {
+			for (Slot slot : slots) {
+				if (slot != null) {
+					if (slot instanceof Container) {
+						for (SWGObject child : ((Container) slot).getContainedObjects()) {
+							deleteObject(child.getObjectId());
+						}
+					}
+					if (slot.getObject() != null)
+						deleteObject(slot.getObject().getObjectId());
+				}
 			}
-		}
+		}*/
 
 		// Remove object from the parent
 		SWGObject parent = object.getParent();
@@ -262,7 +273,7 @@ public class ObjectManager extends Manager {
 			if (parent instanceof CreatureObject) {
 				((CreatureObject) parent).removeEquipment(object);
 			}
-			parent.removeChild(object);
+			//parent.removeChild(object);
 		}
 
 		object.sendObservers(new SceneDestroyObject(objId));

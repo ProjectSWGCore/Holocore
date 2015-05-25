@@ -30,14 +30,8 @@ package resources.objects;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
-import java.util.Vector;
 
 import network.packets.Packet;
 import network.packets.swg.zone.SceneCreateObjectByCrc;
@@ -54,21 +48,23 @@ import resources.network.BaselineBuilder;
 import resources.network.DeltaBuilder;
 import resources.player.Player;
 import resources.player.PlayerState;
+import resources.server_info.Log;
 import utilities.Encoder.StringType;
 
 public class SWGObject implements Serializable, Comparable<SWGObject> {
 	
 	private static final long serialVersionUID = 1L;
-	
-	private final List <SWGObject> children; // TODO Move this into slot-type system as only containers can have multiple children in 1 slot
+
 	private final Location location;
 	private final long objectId;
-	private final Map <String, SWGObject> slots; // Can only be occupied one time, containers are slots who have children
+	private final HashMap <String, SWGObject> slots; // HashMap used for null value support
+	private final Map<Long, SWGObject> containedObjects;
 	private final Map <String, String> attributes;
 	private final Map <String, Object> templateAttributes;
 	private transient List <SWGObject> objectsAware;
 	private List <List <String>> arrangement;
-	
+	private List<String> descriptor; // TODO Remove this as slots can be used?
+
 	private Player	owner		= null;
 	private SWGObject	parent	= null;
 	private Stf 	stf			= new Stf("", "");
@@ -76,9 +72,12 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 	private String	template	= "";
 	private int		crc			= 0;
 	private String	objectName	= "";
-	private int		volume		= 0; // applies to containers only
+	private int		volume		= 0;
 	private float	complexity	= 1;
-	private int		containmentType = 4;
+	private int     containerType = 0;
+
+	private int     slotArrangement = -1;
+
 	private int		transformCounter = 0;
 	
 	public SWGObject() {
@@ -88,9 +87,9 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 	public SWGObject(long objectId) {
 		this.objectId = objectId;
 		this.location = new Location();
-		this.children = new Vector<SWGObject>();
 		this.objectsAware = new Vector<SWGObject>();
-		this.slots = new HashMap<String, SWGObject>(); // Concurrent maps wont allow for null keys/values, which is what the empty slots are set to :/
+		this.slots = new HashMap<>();
+		this.containedObjects = Collections.synchronizedMap(new HashMap<Long, SWGObject>());
 		this.attributes = new LinkedHashMap<String, String>();
 		this.templateAttributes = new HashMap<String, Object>();
 	}
@@ -99,115 +98,101 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 		ois.defaultReadObject();
 		objectsAware = new LinkedList<SWGObject>();
 	}
-	
-	// TODO: Use a "transfer" method for switching objects between parents, this will also check volume limits
-	public void addChild(SWGObject object) {
-		synchronized (children) {
-			if (!children.contains(object))
-				children.add(object);
+
+	/**
+	 * Adds the specified object to this object and places it in the appropriate slot if needed
+	 * @param object
+	 */
+	public void addObject(SWGObject object) {
+		// If the arrangement is -1, then this object will be a contained object
+		int arrangementId = getArrangementId(object);
+		if (arrangementId == -1) {
+			containedObjects.put(object.getObjectId(), object);
+			object.parent = this;
+			return;
 		}
-		updateContainment(object);
+		// Not a child object, so time to check the slots!
+
+		// Check to make sure this object is able to go into a slot in the parent
+		List<String> requiredSlots = object.getArrangement().get(0);
+		// Note that some objects don't have a descriptor, meaning it has no slots
+		if (descriptor != null && !descriptor.containsAll(requiredSlots))
+			return;
+
+		// Add object to the slot
+		for (String requiredSlot : requiredSlots) {
+			slots.put(requiredSlot, object);
+		}
+
+		object.parent = this;
+		object.slotArrangement = arrangementId;
 	}
-	
-	private void updateContainment(SWGObject child) {
-		if (child.parent != null)
-			child.parent.removeChild(child); // Is this necessary?
-		child.parent = this;
-		Integer containmentType = (Integer)child.getTemplateAttribute("containerType");
-		if (containmentType == null)
-			child.containmentType = 4;
-		else
-			child.containmentType = containmentType;
-		// TODO: Set containmentType based on if object is in a slot (4) or a container (-1)
-		sendObserversAndSelf(new UpdateContainmentMessage(child.objectId, objectId, containmentType));
+
+	/**
+	 * Moves the current object to the target object
+	 * @param requester Object that is requesting to move the object, used for permission checking
+	 * @param target Where this object should be moved to
+	 */
+	public void moveToContainer(SWGObject requester, SWGObject target) {
+		Log.d("Slots", "Attempting to move %s to %s", this, target);
+
+
+		// TODO Update the observers in the new object
+
+		// TODO Return an enum for a container error?
 	}
-	
+
+	// TODO: Use a "transfer" method for switching objects between parents, this will also check volume limits
+
 	public void addAttribute(String attribute, String value) {
 		attributes.put(attribute, value);
 	}
-	
-	public void addObjectSlot(String name, SWGObject object) {
-		synchronized (slots) {
-			slots.put(name, object);
-		}
-	}
-	
-	public SWGObject getSlottedObject(String slot) {
-		if (!slots.containsKey(slot)) {
-			System.err.println(getTemplate() + " doesn't contain slot " + slot + "!");
+
+	/**
+	 * Gets the object that occupies the specified slot
+	 * @param slotName
+	 * @return The {@link SWGObject} occupying the slot. Returns null if there is nothing in the slot or it doesn't exist.
+	 * <p>If the slot doesn't exist, then an error is printed as well.</p>
+	 */
+	public SWGObject getSlottedObject(String slotName) {
+		if (hasSlot(slotName))
+			return slots.get(slotName);
+		else {
+			System.err.println(this + " does not contain " + slotName);
 			return null;
 		}
-		
-		return slots.get(slot);
-	}
-	
-	public boolean hasSlot(String slot) {
-		return slots.containsKey(slot);
 	}
 
-	// TODO Refactor slots to just be used in addChild and removeChild as the proper slots can be set by using arrangement descriptors
-
-	public boolean setSlot(String slot, SWGObject obj) {
-		if (!slots.containsKey(slot)) {
-			System.err.println("Could not set " + obj.getTemplate() + " to " + getTemplate() + " as it doesn't contain slot " + slot + "!");
-			return false;
-		}
-		
-		List<String> occupiedAvailSlots = new ArrayList<String>();
-		List<String> arrangement = obj.getArrangement().get(0); // We only care about the main list here, not the children lists
-		for (String occupies : arrangement) {
-			if (hasSlot(occupies))
-				occupiedAvailSlots.add(slot);
-			else
-				break;
-		}
-		
-		if (occupiedAvailSlots.size() != arrangement.size()) {
-			System.err.println("Needed slots are not available for " + obj);
-			return false;
-		}
-		
-		for (String availSlot : occupiedAvailSlots) {
-			obj.setParent(this);
-			addObjectSlot(availSlot, obj);
-			sendObserversAndSelf(new UpdateContainmentMessage(obj.objectId, objectId, containmentType));
-		}
-		
-		return true;
+	/**
+	 * Gets the object in the container with the specified objectId
+	 * @param objectId of the {@link SWGObject} to retrieve
+	 * @return {@link SWGObject} with the specified objectId
+	 */
+	public SWGObject getContainedObject(long objectId) {
+		return containedObjects.get(objectId);
 	}
 
-	private void clearSlot(String slot) {
-		if (!slots.containsKey(slot)) {
-			System.err.println("Could not clear " + slot + " as it doesn't contain that slot!");
-			return;
-		}
-		
-		synchronized(slots) {
-			slots.put(slot, null);
-		}
+	/**
+	 * Gets a list of all the objects in the current container. This should only be used for viewing the objects
+	 * in the current container.
+	 * @return An unmodifiable {@link Collection} of {@link SWGObject}'s in the container
+	 */
+	public Collection<SWGObject> getContainedObjects() {
+		return Collections.unmodifiableCollection(containedObjects.values());
 	}
-	
-	// TODO: Use a "transfer" method for switching objects between parents, this will also check volume limits
-	public void removeChild(SWGObject object) {
-		synchronized (children) {
-			children.remove(object);
-		}
 
-		for (String slot : object.getArrangement().get(0)) {
-			clearSlot(slot);
-		}
+	public boolean hasSlot(String slotName) {
+		return slots.containsKey(slotName);
+	}
 
-		object.parent = null;
+	public List<String> getAvailableSlots() {
+		return Collections.unmodifiableList(descriptor);
 	}
-	
-	public Map <String, SWGObject> getSlots() {
-		return new HashMap<String, SWGObject>(slots);
+
+	public Map<String, SWGObject> getSlots() {
+		return slots;
 	}
-	
-	public List <SWGObject> getChildren() {
-		return new ArrayList<SWGObject>(children);
-	}
-	
+
 	public void setOwner(Player player) {
 		this.owner = player;
 	}
@@ -262,7 +247,8 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 	public Player getOwner() {
 		if (owner != null)
 			return owner;
-		
+
+		// TODO getOwner() should also search for the "master" container that has a PlayerObject
 		if (getParent() != null)
 			return getParent().getOwner();	// Ziggy: Player owner is found recursively
 		
@@ -312,7 +298,7 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 	public Object getTemplateAttribute(String key) {
 		return templateAttributes.get(key);
 	}
-	
+
 	public void setTemplateAttribute(String key, Object value) {
 		templateAttributes.put(key, value);
 	}
@@ -332,15 +318,70 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 	public Map<String, String> getAttributes() {
 		return attributes;
 	}
-	
+
+	public int getContainerType() {
+		return containerType;
+	}
+
+	public void setContainerType(int containerType) {
+		this.containerType = containerType;
+	}
+
+	public int getSlotArrangement() {
+		return slotArrangement;
+	}
+
+	public void setSlotArrangement(int slotArrangement) {
+		this.slotArrangement = slotArrangement;
+	}
+
+	public int getMaxContainerSize() {
+		return Integer.valueOf(templateAttributes.get("containerVolumeLimit").toString());
+	}
+
+	/**
+	 * Gets the arrangementId for the {@link SWGObject} for the current instance
+	 * @param object
+	 * @return Arrangement ID for the object
+	 */
+	public int getArrangementId(SWGObject object) {
+		if (object.getArrangement() == null)
+			return -1;
+
+		int arrangementId = 4;
+		int filledId = -1;
+
+		for (List<String> arrangementList : object.getArrangement()) {
+			boolean passesCompletely = true;
+			boolean isValid = true;
+			for (String slot : arrangementList) {
+				if (!hasSlot(slot)) {
+					isValid = false;
+					break;
+				}
+				if (slots.get(slot) != null) {
+					passesCompletely = false;
+				}
+			}
+			if (isValid && passesCompletely)
+				return arrangementId;
+			else if (isValid)
+				filledId = arrangementId;
+
+			arrangementId++;
+		}
+		return (filledId != -1) ? arrangementId : 4;
+	}
+
 	protected final void sendSceneCreateObject(Player target) {
 		SceneCreateObjectByCrc create = new SceneCreateObjectByCrc();
 		create.setObjectId(objectId);
 		create.setLocation(location);
 		create.setObjectCrc(crc);
 		target.sendPacket(create);
+		// TODO: Move this to createChildrenObjects?
 		if (parent != null)
-			target.sendPacket(new UpdateContainmentMessage(objectId, parent.getObjectId(), containmentType));
+			target.sendPacket(new UpdateContainmentMessage(objectId, parent.getObjectId(), slotArrangement));
 
 	}
 	
@@ -352,8 +393,7 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 	
 	protected void createObject(Player target) {
 		sendSceneCreateObject(target);
-		//if (target.getCreatureObject().getOwner() == getOwner()) //TODO: Update for view permissions
-			createChildrenObjects(target);
+		createChildrenObjects(target);
 		target.sendPacket(new SceneEndBaselines(getObjectId()));
 	}
 
@@ -457,15 +497,18 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 	}
 	
 	protected void createChildrenObjects(Player target) {
-		for (SWGObject child : children) {
-			child.createObject(target);
+		// TODO Permission check for the target
+		
+		// First create the objects in the slots
+		for (SWGObject slotObject : slots.values()) {
+			if (slotObject != null)
+				slotObject.createObject(target);
 		}
-		// TODO: We will need permission checks here in the future which will create the object based on another players permissions to view that slot.
-		for (SWGObject slotEntry : slots.values()) {
-			if (slotEntry == null)
-				continue;
-			
-			slotEntry.createObject(target);
+		
+		// Now create the contained objects
+		for (SWGObject containedObject : containedObjects.values()) {
+			if (containedObject != null)
+				containedObject.createObject(target);
 		}
 	}
 	
