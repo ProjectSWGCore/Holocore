@@ -39,6 +39,7 @@ import resources.objects.intangible.IntangibleObject;
 import resources.objects.waypoint.WaypointObject;
 import resources.player.AccessLevel;
 import resources.player.Player;
+import resources.player.PlayerFlags;
 import utilities.MathUtils;
 import utilities.Encoder.StringType;
 
@@ -335,20 +336,23 @@ public class PlayerObject extends IntangibleObject {
 		this.profWheelPosition = profWheelPosition;
 		sendDelta(8, 8, profWheelPosition);
 	}
-
-	public void setFlagBitmask(int flagBitmask) {
-		flagsList.set(0, flagsList.get(0) | flagBitmask);
+	
+	public void setFlagBitmask(PlayerFlags ... flags) {
+		for (PlayerFlags flag : flags)
+			flagsList.set(0, flagsList.get(0) | flag.getFlag());
 		sendDelta(3, 5, flagsList);
 	}
 	
-	public void clearFlagBitmask(int flagBitmask) {
-		flagsList.set(0, flagsList.get(0) & ~flagBitmask);
+	public void clearFlagBitmask(PlayerFlags ... flags) {
+		for (PlayerFlags flag : flags)
+			flagsList.set(0, flagsList.get(0) & ~flag.getFlag());
 		sendDelta(3, 5, flagsList);
 	}
 	
-	public void toggleFlag(int flag) {
-		if ((flagsList.get(0) & flag) == flag) clearFlagBitmask(flag);
-		else setFlagBitmask(flag);
+	public void toggleFlag(PlayerFlags ... flags) {
+		for (PlayerFlags flag : flags)
+			flagsList.set(0, flagsList.get(0) ^ flag.getFlag());
+		sendDelta(3, 5, flagsList);
 	}
 	
 	private int getProfessionIcon() {
