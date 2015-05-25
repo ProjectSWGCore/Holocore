@@ -28,10 +28,20 @@
 package resources.player;
 
 public class PlayerFlags {
+	/** Marks as Looking for a Group */
 	public static final int LFG = 0x01;
+	/** Marks as Helper */
 	public static final int HELPER = 0x02;
+	/** Marks as Roleplayer */
 	public static final int ROLEPLAYER = 0x04;
+	/** Away from Keyboard */
 	public static final int AFK = 0x80;
+	/** Logged Out */
 	public static final int LD = 0x0100;
+	/** Display the Faction Rank */
 	public static final int FACTIONRANK = 0x0200;
+	/** Marks as Out of Character */
+	public static final int OOC = 0x0800;
+	/** Marks as Looking for Work */
+	public static final int LFW = 0x2000;
 }

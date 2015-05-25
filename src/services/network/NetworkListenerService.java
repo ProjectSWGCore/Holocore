@@ -40,7 +40,7 @@ import resources.network.ServerType;
 import resources.network.UDPServer;
 import resources.network.UDPServer.UDPCallback;
 import resources.network.UDPServer.UDPPacket;
-import resources.services.Config;
+import resources.server_info.Config;
 
 public class NetworkListenerService extends Service {
 	

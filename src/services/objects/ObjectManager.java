@@ -29,19 +29,14 @@ package services.objects;
 
 import intents.ObjectTeleportIntent;
 import intents.PlayerEventIntent;
+import intents.ZoneInIntent;
 import intents.network.GalacticPacketIntent;
 
 import java.util.*;
 
 import main.ProjectSWG;
 import network.packets.Packet;
-import network.packets.swg.zone.HeartBeatMessage;
-import network.packets.swg.zone.ParametersMessage;
 import network.packets.swg.zone.SceneDestroyObject;
-import network.packets.swg.zone.UpdatePvpStatusMessage;
-import network.packets.swg.zone.chat.ChatOnConnectAvatar;
-import network.packets.swg.zone.chat.VoiceChatStatus;
-import network.packets.swg.zone.insertion.ChatServerStatus;
 import network.packets.swg.zone.insertion.CmdStartScene;
 import network.packets.swg.zone.insertion.SelectCharacter;
 import network.packets.swg.zone.object_controller.DataTransform;
@@ -49,24 +44,19 @@ import network.packets.swg.zone.object_controller.ObjectController;
 import network.packets.swg.zone.object_controller.PostureUpdate;
 import resources.Location;
 import resources.Posture;
-import resources.Race;
 import resources.Terrain;
 import resources.config.ConfigFile;
 import resources.control.Intent;
 import resources.control.Manager;
 import resources.objects.SWGObject;
 import resources.objects.buildouts.BuildoutLoader;
-import resources.objects.creature.CreatureMood;
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
-import resources.player.PlayerEvent;
-import resources.player.PlayerFlags;
-import resources.player.PlayerState;
 import resources.server_info.CachedObjectDatabase;
+import resources.server_info.Config;
 import resources.server_info.Log;
 import resources.server_info.ObjectDatabase;
 import resources.server_info.ObjectDatabase.Traverser;
-import resources.services.Config;
 import services.player.PlayerManager;
 
 public class ObjectManager extends Manager {
@@ -176,10 +166,17 @@ public class ObjectManager extends Manager {
 		if (i instanceof GalacticPacketIntent) {
 			processGalacticPacketIntent((GalacticPacketIntent) i);
 		} else if (i instanceof PlayerEventIntent) {
-			if (((PlayerEventIntent)i).getEvent() == PlayerEvent.PE_DISAPPEAR) {
-				SWGObject obj = ((PlayerEventIntent)i).getPlayer().getCreatureObject();
-				obj.setOwner(null);
-				obj.clearAware();
+			Player p = ((PlayerEventIntent)i).getPlayer();
+			switch (((PlayerEventIntent)i).getEvent()) {
+				case PE_DISAPPEAR:
+					p.getCreatureObject().clearAware();
+					break;
+				case PE_ZONE_IN:
+					p.getCreatureObject().clearAware();
+					objectAwareness.update(p.getCreatureObject());
+					break;
+				default:
+					break;
 			}
 		}else if(i instanceof ObjectTeleportIntent){
 			processObjectTeleportIntent((ObjectTeleportIntent) i);
@@ -326,54 +323,23 @@ public class ObjectManager extends Manager {
 		Player player = playerManager.getPlayerFromNetworkId(netId);
 		if (player == null)
 			return;
-		player.setPlayerState(PlayerState.ZONING_IN);
-		verifyPlayerObjectsSet(player, characterId);
-		player.getPlayerObject().setStartPlayTime((int) System.currentTimeMillis());
-		CreatureObject creature = player.getCreatureObject();
-		
-		creature.setMoodId(CreatureMood.NONE.getMood());
-		player.getPlayerObject().clearFlagBitmask(PlayerFlags.LD);	// Ziggy: Clear the LD flag in case it wasn't already.
-		
-		long objId = creature.getObjectId();
-		Race race = creature.getRace();
-		Location l = creature.getLocation();
-		long time = (long)(ProjectSWG.getCoreTime()/1E3);
-		sendPacket(player, new HeartBeatMessage());
-		sendPacket(player, new ChatServerStatus(true));
-		sendPacket(player, new VoiceChatStatus());
-		sendPacket(player, new ParametersMessage());
-		sendPacket(player, new ChatOnConnectAvatar());
-		sendPacket(player, new CmdStartScene(false, objId, race, l, time));
-		sendPacket(player, new UpdatePvpStatusMessage(creature.getPvpType(), creature.getPvpFactionId(), creature.getObjectId()));
-		creature.createObject(player);
-		creature.clearAware();
-		objectAwareness.update(creature);
-		System.out.println("[" + player.getUsername() + "] " + player.getCharacterName() + " is zoning in");
-		Log.i("ObjectManager", "Zoning in %s with character %s", player.getUsername(), player.getCharacterName());
-		new PlayerEventIntent(player, galaxy, PlayerEvent.PE_ZONE_IN).broadcast();
-	}
-	
-	private void verifyPlayerObjectsSet(Player player, long characterId) {
-		if (player.getCreatureObject() != null && player.getPlayerObject() != null)
-			return;
-		SWGObject creature = objects.get(characterId);
-		if (creature == null) {
+		SWGObject creatureObj = objects.get(characterId);
+		if (creatureObj == null) {
 			System.err.println("ObjectManager: Failed to start zone - CreatureObject could not be fetched from database [Character: " + characterId + "  User: " + player.getUsername() + "]");
-			
+			Log.e("ObjectManager", "Failed to start zone - CreatureObject could not be fetched from database [Character: %d  User: %s]", characterId, player.getUsername());
 			return;
 		}
-		if (!(creature instanceof CreatureObject)) {
+		if (!(creatureObj instanceof CreatureObject)) {
 			System.err.println("ObjectManager: Failed to start zone - Object is not a CreatureObject for ID " + characterId);
+			Log.e("ObjectManager", "Failed to start zone - Object is not a CreatureObject [Character: %d  User: %s]", characterId, player.getUsername());
 			return;
 		}
-		player.setCreatureObject((CreatureObject) creature);
-		creature.setOwner(player);
-		
-		if (player.getPlayerObject() == null) {
-			System.err.println("FATAL: " + player.getUsername() + "'s CreatureObject has a null ghost!");
+		if (((CreatureObject) creatureObj).getPlayerObject() == null) {
+			System.err.println("ObjectManager: Failed to start zone - " + player.getUsername() + "'s CreatureObject has a null ghost!");
+			Log.e("ObjectManager", "Failed to start zone - CreatureObject doesn't have a ghost [Character: %d  User: %s", characterId, player.getUsername());
+			return;
 		}
-		
-		player.getPlayerObject().setOwner(player);
+		new ZoneInIntent(player, (CreatureObject) creatureObj, galaxy).broadcast();
 	}
 	
 	private long getNextObjectId() {

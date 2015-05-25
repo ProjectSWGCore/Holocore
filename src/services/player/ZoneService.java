@@ -29,6 +29,7 @@ package services.player;
 
 import intents.GalacticIntent;
 import intents.PlayerEventIntent;
+import intents.ZoneInIntent;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -61,9 +62,15 @@ import network.packets.swg.zone.CmdSceneReady;
 import network.packets.swg.zone.GalaxyLoopTimesRequest;
 import network.packets.swg.zone.GalaxyLoopTimesResponse;
 import network.packets.swg.zone.HeartBeatMessage;
+import network.packets.swg.zone.ParametersMessage;
 import network.packets.swg.zone.SetWaypointColor;
 import network.packets.swg.zone.ShowBackpack;
 import network.packets.swg.zone.ShowHelmet;
+import network.packets.swg.zone.UpdatePvpStatusMessage;
+import network.packets.swg.zone.chat.ChatOnConnectAvatar;
+import network.packets.swg.zone.chat.VoiceChatStatus;
+import network.packets.swg.zone.insertion.ChatServerStatus;
+import network.packets.swg.zone.insertion.CmdStartScene;
 import network.packets.swg.zone.spatial.GetMapLocationsMessage;
 import network.packets.swg.zone.spatial.GetMapLocationsResponseMessage;
 import resources.Galaxy;
@@ -73,8 +80,10 @@ import resources.Terrain;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.ProfTemplateData;
 import resources.config.ConfigFile;
+import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.SWGObject;
+import resources.objects.creature.CreatureMood;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
 import resources.objects.tangible.TangibleObject;
@@ -83,9 +92,10 @@ import resources.objects.waypoint.WaypointObject.WaypointColor;
 import resources.player.AccessLevel;
 import resources.player.Player;
 import resources.player.PlayerEvent;
+import resources.player.PlayerFlags;
 import resources.player.PlayerState;
+import resources.server_info.Config;
 import resources.server_info.Log;
-import resources.services.Config;
 import resources.zone.NameFilter;
 import services.objects.ObjectManager;
 import utilities.namegen.SWGNameGenerator;
@@ -97,6 +107,7 @@ public class ZoneService extends Service {
 	private final ClientFactory clientFac;
 	private final NameFilter nameFilter;
 	private final SWGNameGenerator nameGenerator;
+	private final CharacterCreationRestriction creationRestriction;
 	
 	private PreparedStatement createCharacter;
 	private PreparedStatement getCharacter;
@@ -108,6 +119,7 @@ public class ZoneService extends Service {
 		clientFac = new ClientFactory();
 		nameFilter = new NameFilter("namegen/bad_word_list.txt", "namegen/reserved_words.txt", "namegen/fiction_reserved.txt");
 		nameGenerator = new SWGNameGenerator(nameFilter);
+		creationRestriction = new CharacterCreationRestriction(2);
 	}
 	
 	@Override
@@ -120,7 +132,16 @@ public class ZoneService extends Service {
 		loadProfTemplates();
 		if (!nameFilter.load())
 			System.err.println("Failed to load name filter!");
+		registerForIntent(ZoneInIntent.TYPE);
 		return super.initialize();
+	}
+	
+	@Override
+	public void onIntentReceived(Intent i) {
+		if (i instanceof ZoneInIntent) {
+			ZoneInIntent zii = (ZoneInIntent) i;
+			zoneInPlayer(zii.getPlayer(), zii.getCreature(), zii.getGalaxy());
+		}
 	}
 	
 	public void handlePacket(GalacticIntent intent, Player player, long networkId, Packet p) {
@@ -146,6 +167,41 @@ public class ZoneService extends Service {
 			handleShowBackpack(player, (ShowBackpack) p);
 		if(p instanceof ShowHelmet)
 			handleShowHelmet(player, (ShowHelmet) p);
+	}
+	
+	private void zoneInPlayer(Player player, CreatureObject creature, String galaxy) {
+		PlayerObject playerObj = creature.getPlayerObject();
+		player.setPlayerState(PlayerState.ZONING_IN);
+		player.setCreatureObject(creature);
+		creature.setOwner(player);
+		playerObj.setOwner(player);
+		
+		sendZonePackets(player, creature);
+		initPlayerBeforeZoneIn(player, creature, playerObj);
+		creature.createObject(player);
+		System.out.printf("[%s] %s is zoning in%n", player.getUsername(), player.getCharacterName());
+		Log.i("ObjectManager", "Zoning in %s with character %s", player.getUsername(), player.getCharacterName());
+		new PlayerEventIntent(player, galaxy, PlayerEvent.PE_ZONE_IN).broadcast();
+	}
+	
+	private void sendZonePackets(Player player, CreatureObject creature) {
+		long objId = creature.getObjectId();
+		Race race = creature.getRace();
+		Location l = creature.getLocation();
+		long time = (long)(ProjectSWG.getCoreTime()/1E3);
+		sendPacket(player, new HeartBeatMessage());
+		sendPacket(player, new ChatServerStatus(true));
+		sendPacket(player, new VoiceChatStatus());
+		sendPacket(player, new ParametersMessage());
+		sendPacket(player, new ChatOnConnectAvatar());
+		sendPacket(player, new CmdStartScene(false, objId, race, l, time));
+		sendPacket(player, new UpdatePvpStatusMessage(creature.getPvpType(), creature.getPvpFactionId(), creature.getObjectId()));
+	}
+	
+	private void initPlayerBeforeZoneIn(Player player, CreatureObject creatureObj, PlayerObject playerObj) {
+		playerObj.setStartPlayTime((int) System.currentTimeMillis());
+		creatureObj.setMoodId(CreatureMood.NONE.getMood());
+		playerObj.clearFlagBitmask(PlayerFlags.LD);	// Ziggy: Clear the LD flag in case it wasn't already.
 	}
 	
 	private void handleShowBackpack(Player player, ShowBackpack p) {
@@ -227,9 +283,12 @@ public class ZoneService extends Service {
 	
 	private void handleCharCreation(ObjectManager objManager, Player player, ClientCreateCharacter create) {
 		ErrorMessage err = getNameValidity(create.getName(), player.getAccessLevel() != AccessLevel.PLAYER);
+		if (!creationRestriction.isAbleToCreate(player))
+			err = ErrorMessage.NAME_DECLINED_TOO_FAST;
 		if (err == ErrorMessage.NAME_APPROVED) {
 			long characterId = createCharacter(objManager, player, create);
 			if (createCharacterInDb(characterId, create.getName(), player)) {
+				creationRestriction.createdCharacter(player);
 				System.out.println("[" + player.getUsername() + "] Create Character: " + create.getName() + ". IP: " + create.getAddress() + ":" + create.getPort());
 				Log.i("ZoneService", "%s created character %s from %s:%d", player.getUsername(), create.getName(), create.getAddress(), create.getPort());
 				sendPacket(player, new CreateCharacterSuccess(characterId));
@@ -244,17 +303,21 @@ public class ZoneService extends Service {
 	
 	private void sendCharCreationFailure(Player player, ClientCreateCharacter create, ErrorMessage err) {
 		NameFailureReason reason = NameFailureReason.NAME_SYNTAX;
-		if (err == ErrorMessage.NAME_APPROVED) { // Then it must have been a database error
-			err = ErrorMessage.NAME_DECLINED_INTERNAL_ERROR;
-			reason = NameFailureReason.NAME_RETRY;
-		} else if (err == ErrorMessage.NAME_DECLINED_IN_USE)
-			reason = NameFailureReason.NAME_IN_USE;
-		else if (err == ErrorMessage.NAME_DECLINED_EMPTY)
-			reason = NameFailureReason.NAME_DECLINED_EMPTY;
-		else if (err == ErrorMessage.NAME_DECLINED_FICTIONALLY_INAPPROPRIATE)
-			reason = NameFailureReason.NAME_FICTIONALLY_INAPPRORIATE;
-		else if (err == ErrorMessage.NAME_DECLINED_RESERVED)
-			reason = NameFailureReason.NAME_DEV_RESERVED;
+		switch (err) {
+			case NAME_APPROVED:
+				err = ErrorMessage.NAME_DECLINED_INTERNAL_ERROR;
+				reason = NameFailureReason.NAME_RETRY;
+				break;
+			case NAME_DECLINED_FICTIONALLY_INAPPROPRIATE:
+				reason = NameFailureReason.NAME_FICTIONALLY_INAPPRORIATE;
+				break;
+			case NAME_DECLINED_IN_USE:   reason = NameFailureReason.NAME_IN_USE; break;
+			case NAME_DECLINED_EMPTY:    reason = NameFailureReason.NAME_DECLINED_EMPTY; break;
+			case NAME_DECLINED_RESERVED: reason = NameFailureReason.NAME_DEV_RESERVED; break;
+			case NAME_DECLINED_TOO_FAST: reason = NameFailureReason.NAME_TOO_FAST; break;
+			default:
+				break;
+		}
 		System.err.println("ZoneService: Unable to create character [Name: " + create.getName() + "  User: " + player.getUsername() + "] and put into database! Reason: " + err);
 		Log.e("ZoneService", "Failed to create character %s for user %s with error %s and reason %s from %s:%d", create.getName(), player.getUsername(), err, reason, create.getAddress(), create.getPort());
 		sendPacket(player, new CreateCharacterFailure(reason));

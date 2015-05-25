@@ -204,13 +204,15 @@ public class ConnectionService extends Service {
 	
 	private void disappear(Player p) {
 		Log.i("ConnectionService", "Disappeared %s with character %s", p.getUsername(), p.getCharacterName());
+		if (p.getPlayerObject() != null)
+			p.getPlayerObject().clearFlagBitmask(PlayerFlags.LD);
 		p.setPlayerState(PlayerState.DISCONNECTED);
 		System.out.println("[" + p.getUsername() +"] " + p.getCharacterName() + " disappeared");
 		new PlayerEventIntent(p, PlayerEvent.PE_DISAPPEAR).broadcast();
 	}
 	
 	private void disconnect(Player player, DisconnectReason reason) {
-		Log.i("ConnectionService", "Disconnected %s with character %s", player.getUsername(), player.getCharacterName());
+		Log.i("ConnectionService", "Disconnected %s with character %s and reason: %s", player.getUsername(), player.getCharacterName(), reason);
 		new CloseConnectionIntent(player.getConnectionId(), player.getNetworkId(), reason).broadcast();
 	}
 	
