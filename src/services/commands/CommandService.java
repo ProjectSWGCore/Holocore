@@ -131,13 +131,14 @@ public class CommandService extends Service {
 			DatatableData baseCommands = (DatatableData) clientFac.getInfoFromFile("datatables/command/" + commandTables[t] + ".iff");
 			
 			for (int row = 0; row < baseCommands.getRowCount(); row++) {
-				Command command = new Command((String) baseCommands.getCell(row, 0));
+				Object [] cmdRow = baseCommands.getRow(row);
+				Command command = new Command((String) cmdRow[0]);
 				command.setCrc(CRC.getCrc(command.getName().toLowerCase(Locale.ENGLISH)));
 				// Use cppHook if the scriptHook is empty
-				String callback = (String) baseCommands.getCell(row, 2);
-				command.setScriptCallback((callback.isEmpty() ? baseCommands.getCell(row, 4) : callback) + ".py");
-				command.setDefaultTime((float) baseCommands.getCell(row, 6));
-				command.setCharacterAbility((String) baseCommands.getCell(row, 7));
+				String callback = (String) cmdRow[2];
+				command.setScriptCallback((callback.isEmpty() ? cmdRow[4] : callback) + ".py");
+				command.setDefaultTime((float) cmdRow[6]);
+				command.setCharacterAbility((String) cmdRow[7]);
 				
 				commands.put(command.getCrc(), command);
 				commandCrcLookup.put(command.getName(), command.getCrc());
