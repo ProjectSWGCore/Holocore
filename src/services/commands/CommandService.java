@@ -46,6 +46,7 @@ import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.player.AccessLevel;
 import resources.player.Player;
+import resources.server_info.Log;
 import resources.utilities.Scripts;
 import services.galaxy.GalacticManager;
 
@@ -84,8 +85,10 @@ public class CommandService extends Service {
 	}
 	
 	private void handleCommandRequest(Player player, GalacticManager galacticManager, CommandQueueEnqueue request) {
-		if (!commands.containsKey(request.getCommandCrc()))
+		if (!commands.containsKey(request.getCommandCrc())) {
+			Log.e("CommandService", "Invalid command crc: %x", request.getCommandCrc());
 			return;
+		}
 //		System.out.println(commands.get(request.getCommandCrc()).toString());
 
 		SWGObject target = null;
@@ -95,8 +98,10 @@ public class CommandService extends Service {
 	}
 	
 	private void executeCommand(GalacticManager galacticManager, Player player, Command command, SWGObject target, String args) {
-		if (player.getCreatureObject() == null)
+		if (player.getCreatureObject() == null) {
+			Log.e("CommandService", "No creature object associated with the player '%s'!", player.getUsername());
 			return;
+		}
 		
 		if (command.getGodLevel() > 0 || command.getCharacterAbility().toLowerCase().equals("admin")){//HACK @Glen characterAbility check should be handled in the "has ability" TODO below. Not sure if abilities are implemented yet.
 			if(player.getAccessLevel() == AccessLevel.PLAYER){
@@ -163,4 +168,5 @@ public class CommandService extends Service {
 		registerCallback("jumpServer", new JumpCmdCallback());
 		registerCallback("serverDestroyObject", new ServerDestroyObjectCmdCallback());
 	}
+	
 }
