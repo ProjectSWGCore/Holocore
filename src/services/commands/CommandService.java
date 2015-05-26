@@ -131,13 +131,10 @@ public class CommandService extends Service {
 		final ClientFactory factory = new ClientFactory();
 		final String [] commandTables = new String [] {"command_table", "client_command_table", "command_table_ground"};
 		
-		long start = System.nanoTime();
 		clearCommands();
 		for (String table : commandTables) {
 			loadBaseCommands(factory, table);
 		}
-		long end = System.nanoTime();
-		System.out.println((end-start)/1E6);
 	}
 	
 	private void loadBaseCommands(ClientFactory factory, String table) {
