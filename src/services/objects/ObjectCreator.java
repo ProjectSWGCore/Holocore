@@ -121,7 +121,6 @@ public final class ObjectCreator {
 	}
 
 	private static void createObjectSlots(SWGObject object) {
-		System.out.println(object.getTemplate());
 		if (object.getTemplateAttribute(ObjectData.SLOT_DESCRIPTOR) != null) {
 			// These are the slots that the object *HAS*
 			SlotDescriptorData descriptor = (SlotDescriptorData) clientFac.getInfoFromFile((String) object.getTemplateAttribute(ObjectData.SLOT_DESCRIPTOR));

@@ -136,7 +136,14 @@ public class CreatureObject extends TangibleObject {
 			appearanceList.sendDeltaMessage(this);
 		}
 	}
-	
+
+	public void removeAppearanceItem(SWGObject obj) {
+		synchronized (appearanceList) {
+			if (appearanceList.remove(obj))
+				appearanceList.sendDeltaMessage(this);
+		}
+	}
+
 	public SWGList<Equipment> getEquipmentList() {
 		return equipmentList;
 	}

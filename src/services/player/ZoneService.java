@@ -477,12 +477,11 @@ public class ZoneService extends Service {
 		if (player.getSlottedObject("inventory") == null)
 			return;
 
-		TangibleObject inventory = (TangibleObject) player.getSlottedObject("inventory");
-
 		for (String template : profTemplates.get(profession).getItems(ClientFactory.formatToSharedFile(race))) {
 			TangibleObject item = createTangible(objManager, template);
-
-			item.moveToContainer(player, inventory);
+			// Move the new item to the player's clothing slots and add to equipment list
+			item.moveToContainer(player, player);
+			player.addEquipment(item);
 		}
 
 	}

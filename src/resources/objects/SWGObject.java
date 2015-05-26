@@ -114,7 +114,7 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 		// Not a child object, so time to check the slots!
 
 		// Check to make sure this object is able to go into a slot in the parent
-		List<String> requiredSlots = object.getArrangement().get(0);
+		List<String> requiredSlots = object.getArrangement().get(arrangementId - 4);
 		// Note that some objects don't have a descriptor, meaning it has no slots
 		if (descriptor != null && !descriptor.containsAll(requiredSlots))
 			return;
@@ -129,20 +129,70 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 	}
 
 	/**
-	 * Moves the current object to the target object
-	 * @param requester Object that is requesting to move the object, used for permission checking
-	 * @param target Where this object should be moved to
+	 * Removes the specified object from this current object.
+	 * @param object Object to remove
 	 */
-	public void moveToContainer(SWGObject requester, SWGObject target) {
-		Log.d("Slots", "Attempting to move %s to %s", this, target);
+	public void removeObject(SWGObject object) {
+		// This object is a container object, so remove it from the container
+		if (object.getSlotArrangement() == -1) {
+			containedObjects.remove(object.objectId);
+			object.parent = null;
+			return;
+		}
 
+		for (String slot : (slotArrangement == -1 ?
+				object.getArrangement().get(0) : object.getArrangement().get(slotArrangement - 4))) {
+			slots.put(slot, null);
+		}
 
-		// TODO Update the observers in the new object
-
-		// TODO Return an enum for a container error?
+		object.parent = null;
+		object.slotArrangement = -1;
 	}
 
-	// TODO: Use a "transfer" method for switching objects between parents, this will also check volume limits
+	/**
+	 * Moves the current object to the target object
+	 * @param requester Object that is requesting to move the object, used for permission checking
+	 * @param container Where this object should be moved to
+	 */
+	public void moveToContainer(SWGObject requester, SWGObject container) {
+		// Before doing anything, get a list of the observers so we can send create/destroy/update messages
+		List<SWGObject> oldObservers = getObjectsAware();
+
+		// Remove this object from the old parent if one exists
+		if (parent != null) {
+			parent.removeObject(this);
+		}
+
+		container.addObject(this);
+
+		List<SWGObject> newObservers = new ArrayList<>(container.getObjectsAware());
+
+		List<SWGObject> same = new ArrayList<>(oldObservers);
+		same.retainAll(newObservers);
+
+		List<SWGObject> added = new ArrayList<>(newObservers);
+		added.removeAll(oldObservers);
+
+		List<SWGObject> removed = new ArrayList<>(oldObservers);
+		removed.removeAll(newObservers);
+
+		for (SWGObject swgObject : same) {
+			swgObject.sendSelf(new UpdateContainmentMessage(objectId, parent.getObjectId(), slotArrangement));
+		}
+
+		for (SWGObject swgObject : added) {
+			if (swgObject.getOwner() != null) {
+				createObject(swgObject.getOwner());
+			}
+		}
+
+		for (SWGObject swgObject : removed) {
+			if (swgObject.getOwner() != null) {
+				sendSceneDestroyObject(swgObject.getOwner());
+			}
+		}
+
+	}
 
 	public void addAttribute(String attribute, String value) {
 		attributes.put(attribute, value);
@@ -410,15 +460,30 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 	
 	public List <SWGObject> getObjectsAware() {
 		synchronized (objectsAware) {
-			return Collections.unmodifiableList(objectsAware);
+			return Collections.unmodifiableList(getChildrenAwareness());
 		}
 	}
-	
+
+	private List<SWGObject> getChildrenAwareness() {
+		List<SWGObject> awareness = new ArrayList<>(objectsAware);
+
+		if (getParent() != null && !(awareness.contains(getParent())))
+			awareness.addAll(getParent().getObjectsAware());
+
+		if (getOwner() != null && getOwner().getCreatureObject() != null
+				&& !(awareness.contains(getOwner().getCreatureObject())))
+			awareness.add(getOwner().getCreatureObject());
+
+		// TODO Permission checking
+
+		return awareness;
+	}
+
 	public void sendObserversAndSelf(Packet ... packets) {
 		sendSelf(packets);
 		sendObservers(packets);
 	}
-	
+
 	public void sendObservers(Packet ... packets) {
 		synchronized (objectsAware) {
 			for (SWGObject obj : objectsAware) {
@@ -427,12 +492,22 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 					continue;
 				p.sendPacket(packets);
 			}
-			
+
+			List<SWGObject> childrenAwareness = getChildrenAwareness();
+			childrenAwareness.removeAll(objectsAware);
+			childrenAwareness.remove(this); // Remove self since only observers being notified
+
+			for (SWGObject childObserver : childrenAwareness) {
+				Player p = childObserver.getOwner();
+				if (p == null || p.getPlayerState() != PlayerState.ZONED_IN)
+					continue;
+				p.sendPacket(packets);
+			}
+
 			SWGObject parent = getParent();
 			
 			if(parent != null)
 				parent.sendObservers(packets);
-			
 		}
 	}
 	

@@ -2,18 +2,21 @@ import sys
 
 def execute(galacticManager, player, target, args):
 	actor = player.getCreatureObject()
-	argsSplit = args.split(" ")
-	objManager = galacticManager.getObjectManager();
-	containerId = long(args[1])
-	containerObject = objManager.getObjectById(containerId)	# Ziggy: The target container
+	if actor is None or target is None:
+		return
+
 	inventory = actor.getSlottedObject("inventory")
-	
-	if target.getParent().equals(actor) or not containerObject.equals(inventory):	# Ziggy: We're already wearing this item, transfer it to the container
-		containerObject.addChild(target)
-	elif containerObject.equals(inventory):		# We're transfering this item to our inventory but we don't want to equip it						
-		containerObject.addChild(target)
-	else:								# Ziggy: This is an item in our inventory that we want to equip
-		actor.equipItem(target)
-		
+
+	if inventory is None:
+		return
+
+	if target.getParent() == actor:
+		actor.removeEquipment(target)
+		target.moveToContainer(actor, inventory)
+		return
+	else:
+		target.moveToContainer(actor, actor)
+		# actor.addEquipment(target) # This seems to crash the client, look to
+		return
+
 	return
-	
