@@ -27,11 +27,12 @@
 ***********************************************************************************/
 package services.commands;
 
+import intents.chat.ChatCommandIntent;
 import intents.network.GalacticPacketIntent;
 
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import network.packets.Packet;
 import network.packets.swg.zone.object_controller.CommandQueueEnqueue;
@@ -51,22 +52,23 @@ import resources.utilities.Scripts;
 import services.galaxy.GalacticManager;
 
 public class CommandService extends Service {
-
-	private Map<Integer, Command> commands; // NOTE: CRC's are all lowercased for commands!
-	private Map<String, Integer> commandCrcLookup;
 	
-	public CommandService() { }
+	private Map <Integer, Command>	commands;			// NOTE: CRC's are all lowercased for commands!
+	private Map <String, Integer>	commandCrcLookup;
+	
+	public CommandService() {
+		commands = new HashMap<Integer, Command>();
+		commandCrcLookup = new HashMap<String, Integer>();
+	}
 	
 	@Override
 	public boolean initialize() {
-		commands = new ConcurrentHashMap<Integer, Command>();
-		commandCrcLookup = new ConcurrentHashMap<String, Integer>();
 		registerForIntent(GalacticPacketIntent.TYPE);
 		loadBaseCommands();
 		registerCallbacks();
 		return super.initialize();
 	}
-
+	
 	@Override
 	public void onIntentReceived(Intent i) {
 		if (i instanceof GalacticPacketIntent) {
@@ -81,20 +83,23 @@ public class CommandService extends Service {
 				}
 			}
 		}
-		// TODO: Call Command intent to allow other services/managers to perform a command callback
 	}
 	
 	private void handleCommandRequest(Player player, GalacticManager galacticManager, CommandQueueEnqueue request) {
-		if (!commands.containsKey(request.getCommandCrc())) {
+		if (!commandExists(request.getCommandCrc())) {
 			Log.e("CommandService", "Invalid command crc: %x", request.getCommandCrc());
 			return;
 		}
-//		System.out.println(commands.get(request.getCommandCrc()).toString());
-
-		SWGObject target = null;
-		if (request.getTargetId() != 0) { target = galacticManager.getObjectManager().getObjectById(request.getTargetId()); }
 		
-		executeCommand(galacticManager, player, commands.get(request.getCommandCrc()), target, request.getArguments());
+		Command command = getCommand(request.getCommandCrc());
+		String [] arguments = request.getArguments().split(" ");
+		SWGObject target = null;
+		if (request.getTargetId() != 0) {
+			target = galacticManager.getObjectManager().getObjectById(request.getTargetId());
+		}
+		
+		executeCommand(galacticManager, player, command, target, request.getArguments());
+		new ChatCommandIntent(request.getTargetId(), request.getCommandCrc(), arguments).broadcast();
 	}
 	
 	private void executeCommand(GalacticManager galacticManager, Player player, Command command, SWGObject target, String args) {
@@ -103,8 +108,8 @@ public class CommandService extends Service {
 			return;
 		}
 		
-		if (command.getGodLevel() > 0 || command.getCharacterAbility().toLowerCase().equals("admin")){//HACK @Glen characterAbility check should be handled in the "has ability" TODO below. Not sure if abilities are implemented yet.
-			if(player.getAccessLevel() == AccessLevel.PLAYER){
+		if (command.getGodLevel() > 0 || command.getCharacterAbility().toLowerCase().equals("admin")) {//HACK @Glen characterAbility check should be handled in the "has ability" TODO below. Not sure if abilities are implemented yet.
+			if (player.getAccessLevel() == AccessLevel.PLAYER) {
 				System.out.printf("[%s] failed to use admin command \"%s\" with access level %s with parameters \"%s\"\n", player.getCharacterName(), command.getName(), player.getAccessLevel().toString(), args);
 				return;
 			}
@@ -112,13 +117,10 @@ public class CommandService extends Service {
 		}
 		
 		// TODO: Check if the player has the ability
-		
 		// TODO: Cool-down checks
-		
 		// TODO: Handle for different target
-		
 		// TODO: Handle for different targetType
-
+		
 		if (command.hasJavaCallback())
 			command.getJavaCallback().execute(galacticManager, player, target, args);
 		else
@@ -126,32 +128,40 @@ public class CommandService extends Service {
 	}
 	
 	private void loadBaseCommands() {
-		ClientFactory clientFac = new ClientFactory();
+		final ClientFactory factory = new ClientFactory();
+		final String [] commandTables = new String [] {"command_table", "client_command_table", "command_table_ground"};
 		
-		String[] commandTables = new String[] {
-				"command_table", "client_command_table", "command_table_ground"
-		};
+		long start = System.nanoTime();
+		clearCommands();
+		for (String table : commandTables) {
+			loadBaseCommands(factory, table);
+		}
+		long end = System.nanoTime();
+		System.out.println((end-start)/1E6);
+	}
+	
+	private void loadBaseCommands(ClientFactory factory, String table) {
+		DatatableData baseCommands = (DatatableData) factory.getInfoFromFile("datatables/command/"+table+".iff");
 		
-		for (int t = 0; t < commandTables.length; t++) {
-			DatatableData baseCommands = (DatatableData) clientFac.getInfoFromFile("datatables/command/" + commandTables[t] + ".iff");
+		for (int row = 0; row < baseCommands.getRowCount(); row++) {
+			Object [] cmdRow = baseCommands.getRow(row);
+			String callback = (String) cmdRow[2];
+			if (callback.isEmpty())
+				callback = (String) cmdRow[4];
 			
-			for (int row = 0; row < baseCommands.getRowCount(); row++) {
-				Object [] cmdRow = baseCommands.getRow(row);
-				Command command = new Command((String) cmdRow[0]);
-				command.setCrc(CRC.getCrc(command.getName().toLowerCase(Locale.ENGLISH)));
-				// Use cppHook if the scriptHook is empty
-				String callback = (String) cmdRow[2];
-				command.setScriptCallback((callback.isEmpty() ? cmdRow[4] : callback) + ".py");
-				command.setDefaultTime((float) cmdRow[6]);
-				command.setCharacterAbility((String) cmdRow[7]);
-				
-				commands.put(command.getCrc(), command);
-				commandCrcLookup.put(command.getName(), command.getCrc());
-			}
+			Command command = new Command((String) cmdRow[0]);
+			command.setCrc(CRC.getCrc(command.getName().toLowerCase(Locale.ENGLISH)));
+			command.setScriptCallback(callback + ".py");
+			command.setDefaultTime((float) cmdRow[6]);
+			command.setCharacterAbility((String) cmdRow[7]);
+			
+			addCommand(command);
 		}
 	}
 	
-	private void registerCallback(String command, ICmdCallback callback) { commands.get(commandCrcLookup.get(command)).setJavaCallback(callback); }
+	private void registerCallback(String command, ICmdCallback callback) {
+		getCommand(command).setJavaCallback(callback);
+	}
 	
 	private void registerCallbacks() {
 		registerCallback("waypoint", new WaypointCmdCallback());
@@ -167,6 +177,42 @@ public class CommandService extends Service {
 		registerCallback("toggleAwayFromKeyBoard", new AfkCmdCallback());
 		registerCallback("jumpServer", new JumpCmdCallback());
 		registerCallback("serverDestroyObject", new ServerDestroyObjectCmdCallback());
+	}
+	
+	private void clearCommands() {
+		synchronized (commands) {
+			commands.clear();
+		}
+		synchronized (commandCrcLookup) {
+			commandCrcLookup.clear();
+		}
+	}
+	
+	private Command getCommand(String name) {
+		synchronized (commandCrcLookup) {
+			return getCommand(commandCrcLookup.get(name));
+		}
+	}
+	
+	private Command getCommand(int crc) {
+		synchronized (commands) {
+			return commands.get(crc);
+		}
+	}
+	
+	private boolean commandExists(int crc) {
+		synchronized (commands) {
+			return commands.containsKey(crc);
+		}
+	}
+	
+	private void addCommand(Command command) {
+		synchronized (commands) {
+			commands.put(command.getCrc(), command);
+		}
+		synchronized (commandCrcLookup) {
+			commandCrcLookup.put(command.getName(), command.getCrc());
+		}
 	}
 	
 }
