@@ -48,6 +48,7 @@ import resources.objects.staticobject.StaticObject;
 import resources.objects.tangible.TangibleObject;
 import resources.objects.waypoint.WaypointObject;
 import resources.objects.weapon.WeaponObject;
+import resources.server_info.Log;
 
 public final class ObjectCreator {
 	
@@ -61,8 +62,9 @@ public final class ObjectCreator {
 		SWGObject obj = createObjectFromType(objectId, getFirstTemplatePart(template.substring(7, template.length()-7-4)));
 		if (obj == null)
 			return null;
-		addObjectAttributes(obj, template);
 		obj.setTemplate(template);
+
+		handlePostCreation(obj);
 		return obj;
 	}
 	
@@ -85,10 +87,15 @@ public final class ObjectCreator {
 		}
 		return null;
 	}
-	
+
+	private static void handlePostCreation(SWGObject object) {
+		addObjectAttributes(object, object.getTemplate());
+		createObjectSlots(object);
+	}
+
 	private static void addObjectAttributes(SWGObject obj, String template) {
 		ObjectData attributes = (ObjectData) clientFac.getInfoFromFile(ClientFactory.formatToSharedFile(template));
-		
+
 		String stf = (String) attributes.getAttribute(ObjectData.OBJ_STF);
 		String detailStf = (String) attributes.getAttribute(ObjectData.DETAIL_STF);
 		Integer volumeLimit = (Integer) attributes.getAttribute(ObjectData.VOLUME_LIMIT);
@@ -100,28 +107,39 @@ public final class ObjectCreator {
 			obj.setVolume(volumeLimit);
 		for (Entry<String, Object> e : attributes.getAttributes().entrySet()) {
 			obj.setTemplateAttribute(e.getKey(), e.getValue());
+
+			setObjectAttribute(e.getKey(), e.getValue().toString(), obj);
 		}
-		
-		addSlotsToObject(obj, attributes);
 	}
-	
-	private static void addSlotsToObject(SWGObject obj, ObjectData attributes) {
-		if (attributes.getAttribute(ObjectData.SLOT_DESCRIPTOR) != null) {
+
+	private static void setObjectAttribute(String key, String value, SWGObject object) {
+		switch(key) {
+			case "volume": object.setVolume(Integer.valueOf(value)); break;
+			case "containerType": object.setContainerType(Integer.valueOf(value)); break;
+			default: break;
+		}
+	}
+
+	private static void createObjectSlots(SWGObject object) {
+		if (object.getTemplateAttribute(ObjectData.SLOT_DESCRIPTOR) != null) {
 			// These are the slots that the object *HAS*
-			SlotDescriptorData descriptor = (SlotDescriptorData) clientFac.getInfoFromFile((String) attributes.getAttribute(ObjectData.SLOT_DESCRIPTOR));
-			
+			SlotDescriptorData descriptor = (SlotDescriptorData) clientFac.getInfoFromFile((String) object.getTemplateAttribute(ObjectData.SLOT_DESCRIPTOR));
+
 			for (String slotName : descriptor.getSlots()) {
-				obj.addObjectSlot(slotName, null);
+				object.getSlots().put(slotName, null);
 			}
 		}
 		
-		if (attributes.getAttribute(ObjectData.ARRANGEMENT_FILE) != null) {
-			// This is what slots the object *USES*
-			SlotArrangementData arrangementData = (SlotArrangementData) clientFac.getInfoFromFile((String) attributes.getAttribute(ObjectData.ARRANGEMENT_FILE));
-			obj.setArrangement(arrangementData.getArrangement());
+		if (object.getTemplateAttribute(ObjectData.ARRANGEMENT_FILE) != null) {
+			// This is what slots the created object is able to go into/use
+			SlotArrangementData arrangementData = (SlotArrangementData) clientFac.getInfoFromFile((String) object.getTemplateAttribute(ObjectData.ARRANGEMENT_FILE));
+			object.setArrangement(arrangementData.getArrangement());
 		}
 	}
-	
+
+	/*
+		Misc helper methods
+	 */
 	private static String getFirstTemplatePart(String template) {
 		int ind = template.indexOf('/');
 		if (ind == -1)

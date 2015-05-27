@@ -95,13 +95,14 @@ class TerrainBuildoutLoader {
 	}
 	
 	private void finalizeCells() {
+		// TODO This will need to be re-looked at since the slot update
 		for (Entry <Long, List <CellObject>> entry : buildingCells.entrySet()) {
 			SWGObject building = objectTable.get(entry.getKey());
 			if (building == null)
 				continue;
 			List <CellObject> cells = entry.getValue();
 			for (CellObject cell : cells) {
-				building.addChild(cell);
+				building.addObject(cell);
 			}
 			cells.clear();
 		}
@@ -178,6 +179,7 @@ class TerrainBuildoutLoader {
 	}
 	
 	private void matchParent(SWGObject obj, long containerId) {
+		// TODO This will need to be relooked at since the slot update
 		if (containerId == 0) {
 			obj.setLocation(obj.getLocation().translate(areaLocation));
 			objects.add(obj);
@@ -187,18 +189,19 @@ class TerrainBuildoutLoader {
 		if (container == null) {
 			parentless.add(new Orphan(obj, containerId));
 		} else {
-			container.addChild(obj);
+			container.addObject(obj);
 			objects.add(obj);
 		}
 	}
 	
 	private void updateParentless() {
+		// TODO This will need to be relooked at since the slot update
 		Iterator <Orphan> orphanIt = parentless.iterator();
 		while (orphanIt.hasNext()) {
 			Orphan orphan = orphanIt.next();
 			SWGObject container = objectTable.get(orphan.getContainer());
 			if (container != null) {
-				container.addChild(orphan.getObject());
+				container.addObject(orphan.getObject());
 				orphanIt.remove();
 			}
 		}

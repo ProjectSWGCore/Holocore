@@ -112,41 +112,6 @@ public class CreatureObject extends TangibleObject {
 		initCurrentAttributes();
 		initBaseAttributes();
 	}
-	
-	/**
-	 * It is only recommended that this method be used when you have
-	 * an item and you won't know which slots it will occupy until you've
-	 * looped through the arrangement list that resides within SWGObject.
-	 * 
-	 * If you know the slot which your object is supposed to occupy, it's
-	 * recommended that you instead use setSlot(), effectively skipping
-	 * the process of looping.
-	 * 
-	 * @param item to equip
-	 */
-	public void equipItem(TangibleObject item) {
-		equipItemToContainer(item, this);
-	}
-	
-	public void equipAppearanceItem(TangibleObject item) {
-		equipItemToContainer(item, super.getSlottedObject("appearance_inventory"));
-	}
-	
-	public void unequipAppearanceItem(TangibleObject item) {
-		unequipItemFromContainer(item, super.getSlottedObject("appearance_inventory"));
-	}
-	
-	private void equipItemToContainer(TangibleObject item, SWGObject container) {
-		for(List<String> slotNameList : item.getArrangement())
-			for(String slotName : slotNameList)
-				container.setSlot(slotName, item);
-	}
-	
-	private void unequipItemFromContainer(TangibleObject item, SWGObject container) {
-		for(List<String> slotNameList : item.getArrangement())
-			for(String slotName : slotNameList)
-				container.setSlot(slotName, null);
-	}
 
 	public void removeEquipment(SWGObject obj) {
 		synchronized (equipmentList) {
@@ -171,7 +136,14 @@ public class CreatureObject extends TangibleObject {
 			appearanceList.sendDeltaMessage(this);
 		}
 	}
-	
+
+	public void removeAppearanceItem(SWGObject obj) {
+		synchronized (appearanceList) {
+			if (appearanceList.remove(obj))
+				appearanceList.sendDeltaMessage(this);
+		}
+	}
+
 	public SWGList<Equipment> getEquipmentList() {
 		return equipmentList;
 	}
