@@ -178,7 +178,6 @@ public class ConnectionService extends Service {
 				Player old = zonedIterator.next();
 				if (old.equals(nPlayer)) {
 					zonedIterator.remove();
-					disconnect(old, DisconnectReason.NEW_CONNECTION_ATTEMPT);
 				}
 			}
 		}

@@ -48,7 +48,6 @@ import resources.objects.staticobject.StaticObject;
 import resources.objects.tangible.TangibleObject;
 import resources.objects.waypoint.WaypointObject;
 import resources.objects.weapon.WeaponObject;
-import resources.server_info.Log;
 
 public final class ObjectCreator {
 	

@@ -27,8 +27,6 @@
 ***********************************************************************************/
 package resources.objects.creature;
 
-import java.util.List;
-
 import network.packets.swg.zone.SceneEndBaselines;
 import network.packets.swg.zone.UpdatePostureMessage;
 import network.packets.swg.zone.UpdatePvpStatusMessage;
