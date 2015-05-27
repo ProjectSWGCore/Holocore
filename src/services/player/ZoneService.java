@@ -404,7 +404,7 @@ public class ZoneService extends Service {
 		
 		creatureObj.setVolume(0x000F4240);
 		creatureObj.setOwner(player);
-		creatureObj.setSlot("ghost", playerObj);
+		creatureObj.addObject(playerObj); // ghost slot
 		playerObj.setAdminTag(player.getAccessLevel());
 		playerObj.setOwner(player);
 		player.setCreatureObject(creatureObj);
@@ -438,7 +438,7 @@ public class ZoneService extends Service {
 		TangibleObject hairObj = createTangible(objManager, ClientFactory.formatToSharedFile(hair));
 		
 		hairObj.setAppearanceData(customization);
-		creatureObj.setSlot("hair", hairObj);
+		creatureObj.addObject(hairObj); // slot = hair
 		creatureObj.addEquipment(hairObj);
 	}
 	
@@ -453,9 +453,10 @@ public class ZoneService extends Service {
 		creatureObj.setName(create.getName());
 		creatureObj.setPvpType(20);
 		creatureObj.getSkills().add("species_" + creatureObj.getRace().getSpecies());
-		creatureObj.setSlot("inventory", inventory);
-		creatureObj.setSlot("datapad", datapad);
-		creatureObj.setSlot("appearance_inventory", apprncInventory);
+
+		creatureObj.addObject(inventory); // slot = inventory
+		creatureObj.addObject(datapad); // slot = datapad
+		creatureObj.addObject(apprncInventory); // slot = appearance_inventory
 		
 		creatureObj.addEquipment(inventory);
 		creatureObj.addEquipment(datapad);
@@ -475,9 +476,13 @@ public class ZoneService extends Service {
 	private void createStarterClothing(ObjectManager objManager, CreatureObject player, String race, String profession) {
 		if (player.getSlottedObject("inventory") == null)
 			return;
-		
-		for (String template : profTemplates.get(profession).getItems(ClientFactory.formatToSharedFile(race)))
-			player.equipItem(createTangible(objManager, template));
+
+		for (String template : profTemplates.get(profession).getItems(ClientFactory.formatToSharedFile(race))) {
+			TangibleObject item = createTangible(objManager, template);
+			// Move the new item to the player's clothing slots and add to equipment list
+			item.moveToContainer(player, player);
+			player.addEquipment(item);
+		}
 
 	}
 	
