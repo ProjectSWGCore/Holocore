@@ -25,28 +25,71 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package resources.commands.callbacks;
+package resources.objects.creature;
 
-import network.packets.swg.zone.object_controller.PostureUpdate;
-import resources.Posture;
-import resources.commands.ICmdCallback;
-import resources.objects.SWGObject;
-import resources.objects.creature.CreatureObject;
-import resources.objects.creature.CreatureState;
-import resources.player.Player;
-import services.galaxy.GalacticManager;
+import java.util.EnumSet;
 
-public class StandCmdCallback implements ICmdCallback {
+public enum CreatureState {
+	INVALID						(0),
+	COVER						(1<<0),
+	COMBAT						(1<<1),
+	PEACE						(1<<2),
+	AIMING						(1<<3),
+	ALERT						(1<<4),
+	BERSERK						(1<<5),
+	FEIGN_DEATH					(1<<6),
+	COMBAT_ATTITUDE_EVASIVE		(1<<7),
+	COMBAT_ATTITUDE_NORMAL		(1<<8),
+	COMBAT_ATTITUDE_AGGRESSIVE	(1<<9),
+	TUMBLING					(1<<10),
+	RALLIED						(1<<11),
+	STUNNED						(1<<12),
+	BLINDED						(1<<13),
+	DIZZY						(1<<14),
+	INTIMIDATED					(1<<15),
+	IMMOBILIZED					(1<<16),
+	FROZEN						(1<<17),
+	SWIMMING					(1<<18),
+	SITTING_ON_CHAIR			(1<<19),
+	CRAFTING					(1<<20),
+	GLOWING_JEDI				(1<<21),
+	MASK_SCENT					(1<<22),
+	POISONED					(1<<23),
+	BLEEDING					(1<<24),
+	DISEASED					(1<<25),
+	ON_FIRE						(1<<26),
+	RIDING_MOUNT				(1<<27),
+	MOUNTED_CREATURE			(1<<28),
+	PILOTING_SHIP				(1<<29),
+	SHIP_OPERATIONS				(1<<30),
+	SHIP_GUNNER					(1<<31),
+	SHIP_INTERIOR				(1<<32),
+	PILOTING_POB_SHIP			(1<<33),
+	PERFORMING_DEATH_BLOW		(1<<34),
+	DISGUISED					(1<<35),
+	ELECTRIC_BURNED				(1<<36),
+	COLD_BURNED					(1<<37),
+	ACID_BURNED					(1<<38),
+	ENERGY_BURNED				(1<<39),
+	KINETIC_BURNED				(1<<40);
 	
-	@Override
-	public void execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
-		CreatureObject creature = player.getCreatureObject();
-		
-		creature.clearStatesBitmask(CreatureState.SITTING_ON_CHAIR);
-		creature.setPosture(Posture.UPRIGHT);
-		creature.setMovementScale(1);
-		creature.setTurnScale(1);
-		creature.sendObserversAndSelf(new PostureUpdate(creature.getObjectId(), Posture.UPRIGHT));
+	private int bitmask;
+	
+	CreatureState(int bitmask) {
+		this.bitmask = bitmask;
+	}
+	
+	public int getBitmask() {
+		return bitmask;
+	}
+	
+	public static EnumSet <CreatureState> getFlags(int bits) {
+		EnumSet <CreatureState> states = EnumSet.noneOf(CreatureState.class);
+		for (CreatureState state : values()) {
+			if ((state.getBitmask() & bits) != 0)
+				states.add(state);
+		}
+		return states;
 	}
 	
 }

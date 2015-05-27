@@ -478,10 +478,27 @@ public class CreatureObject extends TangibleObject {
 		return statesBitmask;
 	}
 
-	public void setStatesBitmask(long statesBitmask) {
-		this.statesBitmask = statesBitmask;
+	public void setStatesBitmask(CreatureState ... states) {
+		for (CreatureState state : states)
+			statesBitmask |= state.getBitmask();
 		sendDelta(3, 18, statesBitmask);
-		
+	}
+
+	public void toggleStatesBitmask(CreatureState ... states) {
+		for (CreatureState state : states)
+			statesBitmask ^= state.getBitmask();
+		sendDelta(3, 18, statesBitmask);
+	}
+
+	public void clearStatesBitmask(CreatureState ... states) {
+		for (CreatureState state : states)
+			statesBitmask &= ~state.getBitmask();
+		sendDelta(3, 18, statesBitmask);
+	}
+
+	public void clearAllStatesBitmask() {
+		statesBitmask = 0;
+		sendDelta(3, 18, statesBitmask);
 	}
 
 	public boolean isVisible() {
