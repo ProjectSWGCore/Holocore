@@ -48,7 +48,6 @@ import resources.network.BaselineBuilder;
 import resources.network.DeltaBuilder;
 import resources.player.Player;
 import resources.player.PlayerState;
-import resources.server_info.Log;
 import utilities.Encoder.StringType;
 
 public class SWGObject implements Serializable, Comparable<SWGObject> {
