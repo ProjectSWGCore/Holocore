@@ -222,18 +222,6 @@ public class ObjectManager extends Manager {
 			if (obj == null)
 				return null;
 			objectAwareness.remove(obj);
-
-/*			for (Slot slot : obj.getSlots()) {
-				if (slot != null) {
-					if (slot instanceof Container) {
-						for (SWGObject child : ((Container) slot).getContainedObjects()) {
-							deleteObject(child.getObjectId());
-						}
-					}
-					if (slot.getObject() != null)
-						deleteObject(slot.getObject().getObjectId());
-				}
-			}*/
 			Log.i("ObjectManager", "Deleted object %d [%s]", obj.getObjectId(), obj.getTemplate());
 			return obj;
 		}
@@ -249,20 +237,15 @@ public class ObjectManager extends Manager {
 
 		long objId = object.getObjectId();
 
-/*		Collection<Slot> slots = object.getSlots();
-		synchronized (slots) {
-			for (Slot slot : slots) {
-				if (slot != null) {
-					if (slot instanceof Container) {
-						for (SWGObject child : ((Container) slot).getContainedObjects()) {
-							deleteObject(child.getObjectId());
-						}
-					}
-					if (slot.getObject() != null)
-						deleteObject(slot.getObject().getObjectId());
-				}
-			}
-		}*/
+		for (SWGObject slottedObj : object.getSlots().values()) {
+			if (slottedObj != null)
+				destroyObject(slottedObj);
+		}
+
+		for (SWGObject containedObj : object.getContainedObjects()) {
+			if (containedObj != null)
+				destroyObject(containedObj);
+		}
 
 		// Remove object from the parent
 		SWGObject parent = object.getParent();
@@ -270,7 +253,7 @@ public class ObjectManager extends Manager {
 			if (parent instanceof CreatureObject) {
 				((CreatureObject) parent).removeEquipment(object);
 			}
-			//parent.removeChild(object);
+			parent.removeObject(object);
 		}
 
 		object.sendObservers(new SceneDestroyObject(objId));
