@@ -63,7 +63,6 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 	private final Map <String, Object> templateAttributes;
 	private transient List <SWGObject> objectsAware;
 	private List <List <String>> arrangement;
-	private List<String> descriptor; // TODO Remove this as slots can be used?
 
 	private Player	owner		= null;
 	private SWGObject	parent	= null;
@@ -116,8 +115,6 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 		// Check to make sure this object is able to go into a slot in the parent
 		List<String> requiredSlots = object.getArrangement().get(arrangementId - 4);
 		// Note that some objects don't have a descriptor, meaning it has no slots
-		if (descriptor != null && !descriptor.containsAll(requiredSlots))
-			return false;
 
 		// Add object to the slot
 		for (String requiredSlot : requiredSlots) {
@@ -167,22 +164,18 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 				return ContainerResult.CONTAINER_FULL;
 		} else {
 			List<String> requiredSlots = getArrangement().get(arrangementId - 4);
-			if (!container.getAvailableSlots().containsAll(requiredSlots))
-				return ContainerResult.SLOT_NO_EXIST;
-			else {
-				// Check to see if any of the required slots are occupied
-				int emptySlots = 0;
-				for (Map.Entry<String, SWGObject> entry : container.getSlots().entrySet()) {
-					if (emptySlots == requiredSlots.size())
-						break;
+			// Check to see if any of the required slots are occupied
+			int emptySlots = 0;
+			for (Map.Entry<String, SWGObject> entry : container.getSlots().entrySet()) {
+				if (emptySlots == requiredSlots.size())
+					break;
 
-					if (requiredSlots.contains(entry.getKey()) && entry.getValue() == null)
-						emptySlots++;
-				}
-
-				if (emptySlots != requiredSlots.size())
-					return ContainerResult.SLOT_OCCUPIED;
+				if (requiredSlots.contains(entry.getKey()) && entry.getValue() == null)
+					emptySlots++;
 			}
+
+			if (emptySlots != requiredSlots.size())
+				return ContainerResult.SLOT_OCCUPIED;
 		}
 
 		// Get a pre-parent-removal list of the observers so we can send create/destroy/update messages
@@ -240,10 +233,6 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 
 	public boolean hasSlot(String slotName) {
 		return slots.containsKey(slotName);
-	}
-
-	public List<String> getAvailableSlots() {
-		return Collections.unmodifiableList(descriptor);
 	}
 
 	public Map<String, SWGObject> getSlots() {
