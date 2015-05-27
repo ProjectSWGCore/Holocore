@@ -436,8 +436,9 @@ public class ZoneService extends Service {
 		if (hair.isEmpty())
 			return;
 		TangibleObject hairObj = createTangible(objManager, ClientFactory.formatToSharedFile(hair));
-		
+		hairObj.getContainerPermissions().addDefaultWorldPermissions();
 		hairObj.setAppearanceData(customization);
+
 		creatureObj.addObject(hairObj); // slot = hair
 		creatureObj.addEquipment(hairObj);
 	}
@@ -461,12 +462,16 @@ public class ZoneService extends Service {
 		creatureObj.addEquipment(inventory);
 		creatureObj.addEquipment(datapad);
 		creatureObj.addEquipment(apprncInventory);
+
+		creatureObj.getContainerPermissions().addDefaultWorldPermissions();
 	}
 	
 	private void setPlayerObjectValues(PlayerObject playerObj, ClientCreateCharacter create) {
 		playerObj.setProfession(create.getProfession());
 		Calendar date = Calendar.getInstance();
 		playerObj.setBornDate(date.get(Calendar.YEAR), date.get(Calendar.MONTH) + 1, date.get(Calendar.DAY_OF_MONTH));
+
+		playerObj.getContainerPermissions().addDefaultWorldPermissions();
 	}
 	
 	private void handleGalaxyLoopTimesRequest(Player player, GalaxyLoopTimesRequest req) {
