@@ -42,9 +42,11 @@ public final class ContainerPermissions implements Serializable {
 	public ContainerPermissions(long owner) {
 		this.permissionGroups = new HashMap<>();
 		this.owner = owner;
-
-		permissionGroups.put("owner", Permission.valueOf(Permission.values()));
-		permissionGroups.put("admin", Permission.valueOf(Permission.values()));
+		
+		synchronized (permissionGroups) {
+			permissionGroups.put("owner", Permission.valueOf(Permission.values()));
+			permissionGroups.put("admin", Permission.valueOf(Permission.values()));
+		}
 	}
 
 	public boolean hasPermissions(String group, Permission... permissions) {
@@ -68,10 +70,13 @@ public final class ContainerPermissions implements Serializable {
 			groupPermissions.add(permission);
 		}
 
-		permissionGroups.put(group, Permission.valueOf(groupPermissions));
+		synchronized (permissionGroups) {
+			permissionGroups.put(group, Permission.valueOf(groupPermissions));
+		}
 	}
 
 	public void removePermissions(String group, Permission... permissions) {
+
 		if (!hasPermissionGroup(group))
 			return;
 
@@ -81,16 +86,22 @@ public final class ContainerPermissions implements Serializable {
 			groupPermissions.add(permission);
 		}
 
-		permissionGroups.put(group, Permission.valueOf(groupPermissions));
+		synchronized (permissionGroups) {
+			permissionGroups.put(group, Permission.valueOf(groupPermissions));
+		}
 	}
 
 	public void addDefaultWorldPermissions() {
-		permissionGroups.put("world", Permission.valueOf(Permission.ENTER_BUILDING, Permission.OPEN));
+		synchronized (permissionGroups) {
+			permissionGroups.put("world", Permission.valueOf(Permission.ENTER_BUILDING, Permission.OPEN));
+		}
 	}
 
 	public void clearPermissions(String group) {
-		if (permissionGroups.containsKey(group))
-			permissionGroups.put(group, 0);
+		synchronized (permissionGroups) {
+			if (permissionGroups.containsKey(group))
+				permissionGroups.put(group, 0);
+		}
 	}
 
 	public boolean hasPermissionGroup(String group) {
@@ -98,7 +109,9 @@ public final class ContainerPermissions implements Serializable {
 	}
 
 	public Set<String> getPermissionGroups() {
-		return permissionGroups.keySet();
+		synchronized(permissionGroups) {
+			return permissionGroups.keySet();
+		}
 	}
 
 	public void setOwner(long owner) {
