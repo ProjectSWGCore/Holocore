@@ -1,10 +1,10 @@
 ### **Branch** ###
 
-**Development:** Upload your Pull Requests here so it can be tested
+**Quality Assurance:** Upload your Pull Requests here so it can be tested
+
+**Development:** This is the main working space
 
 **Master:** Tested and approved commits will be moved to this branch (Test Center)
-
-**Release:** This is the live version of latest code run on Live Server (Tydirium)
 
 --------------------------------------------------------------------------------
 
