@@ -111,19 +111,17 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 		int arrangementId = getArrangementId(object);
 		if (arrangementId == -1) {
 			containedObjects.put(object.getObjectId(), object);
-			object.parent = this;
-			object.containerPermissions.setOwner(objectId);
-			return true;
-		}
-		// Not a child object, so time to check the slots!
+		} else {
+			// Not a child object, so time to check the slots!
 
-		// Check to make sure this object is able to go into a slot in the parent
-		List<String> requiredSlots = object.getArrangement().get(arrangementId - 4);
-		// Note that some objects don't have a descriptor, meaning it has no slots
+			// Check to make sure this object is able to go into a slot in the parent
+			List<String> requiredSlots = object.getArrangement().get(arrangementId - 4);
+			// Note that some objects don't have a descriptor, meaning it has no slots
 
-		// Add object to the slot
-		for (String requiredSlot : requiredSlots) {
-			slots.put(requiredSlot, object);
+			// Add object to the slot
+			for (String requiredSlot : requiredSlots) {
+				slots.put(requiredSlot, object);
+			}
 		}
 
 		object.parent = this;
@@ -140,13 +138,11 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 		// This object is a container object, so remove it from the container
 		if (object.getSlotArrangement() == -1) {
 			containedObjects.remove(object.objectId);
-			object.parent = null;
-			return;
-		}
-
-		for (String slot : (slotArrangement == -1 ?
-				object.getArrangement().get(0) : object.getArrangement().get(slotArrangement - 4))) {
-			slots.put(slot, null);
+		} else {
+			for (String slot : (slotArrangement == -1 ?
+					object.getArrangement().get(0) : object.getArrangement().get(slotArrangement - 4))) {
+				slots.put(slot, null);
+			}
 		}
 
 		object.parent = null;
@@ -530,11 +526,11 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 			childrenAwareness.remove(this); // Remove self since only observers being notified
 
 			for (SWGObject childObserver : childrenAwareness) {
-				if (childObserver == null)
+				if (childObserver == null || childObserver == this)
 					continue;
 
 				Player p = childObserver.getOwner();
-				if (p == null || p.getPlayerState() != PlayerState.ZONED_IN)
+				if (p == null || getOwner() == p || p.getPlayerState() != PlayerState.ZONED_IN)
 					continue;
 				p.sendPacket(packets);
 
