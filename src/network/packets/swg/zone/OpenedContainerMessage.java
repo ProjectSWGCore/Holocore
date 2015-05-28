@@ -42,7 +42,7 @@ public class OpenedContainerMessage extends SWGPacket {
 	}
 	
 	public OpenedContainerMessage(long containerId) {
-		this.containerId = 0;
+		this.containerId = containerId;
 	}
 	
 	public OpenedContainerMessage(ByteBuffer data) {

@@ -27,12 +27,11 @@
 ***********************************************************************************/
 package resources.objects.creature;
 
-import java.util.List;
-
 import network.packets.swg.zone.SceneEndBaselines;
 import network.packets.swg.zone.UpdatePostureMessage;
 import network.packets.swg.zone.UpdatePvpStatusMessage;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
+import resources.HologramColour;
 import resources.Posture;
 import resources.Race;
 import resources.collections.SWGList;
@@ -89,7 +88,8 @@ public class CreatureObject extends TangibleObject {
 	private long 	ownerId					= 0;
 	private int 	battleFatigue			= 0;
 	private long 	statesBitmask			= 0;
-
+	private HologramColour hologramColour = HologramColour.DEFAULT;
+	
 	private SWGList<Integer>	baseAttributes	= new SWGList<Integer>(BaselineType.CREO, 1, 2);
 	private SWGList<String>		skills			= new SWGList<String>(BaselineType.CREO, 1, 3, false, StringType.ASCII);
 	private SWGList<Integer>	hamEncumbList	= new SWGList<Integer>(BaselineType.CREO, 4, 2, true);
@@ -110,24 +110,14 @@ public class CreatureObject extends TangibleObject {
 		initCurrentAttributes();
 		initBaseAttributes();
 	}
-	
-	/**
-	 * It is only recommended that this method be used when you have
-	 * an item and you won't know which slots it will occupy until you've
-	 * looped through the arrangement list that resides within SWGObject.
-	 * 
-	 * If you know the slot which your object is supposed to occupy, it's
-	 * recommended that you instead use setSlot(), effectively skipping
-	 * the process of looping.
-	 * 
-	 * @param item to equip
-	 */
-	public void equipItem(TangibleObject item) {
-		for(List<String> slotNameList : item.getArrangement())
-			for(String slotName : slotNameList)
-				super.setSlot(slotName, item);
+
+	public void removeEquipment(SWGObject obj) {
+		synchronized (equipmentList) {
+			if (equipmentList.remove(obj))
+				equipmentList.sendDeltaMessage(this);
+		}
 	}
-	
+
 	public void addEquipment(SWGObject obj) {
 		synchronized(equipmentList) {
 			if (obj instanceof WeaponObject)
@@ -144,7 +134,14 @@ public class CreatureObject extends TangibleObject {
 			appearanceList.sendDeltaMessage(this);
 		}
 	}
-	
+
+	public void removeAppearanceItem(SWGObject obj) {
+		synchronized (appearanceList) {
+			if (appearanceList.remove(obj))
+				appearanceList.sendDeltaMessage(this);
+		}
+	}
+
 	public SWGList<Equipment> getEquipmentList() {
 		return equipmentList;
 	}
@@ -316,7 +313,7 @@ public class CreatureObject extends TangibleObject {
 	
 	public void setHeight(double height) {
 		this.height = height;
-		sendDelta(3, 17, height);
+		sendDelta(3, 16, height);
 	}
 	
 	public void setPerformanceListenTarget(long performanceListenTarget) {
@@ -479,10 +476,27 @@ public class CreatureObject extends TangibleObject {
 		return statesBitmask;
 	}
 
-	public void setStatesBitmask(long statesBitmask) {
-		this.statesBitmask = statesBitmask;
+	public void setStatesBitmask(CreatureState ... states) {
+		for (CreatureState state : states)
+			statesBitmask |= state.getBitmask();
 		sendDelta(3, 18, statesBitmask);
-		
+	}
+
+	public void toggleStatesBitmask(CreatureState ... states) {
+		for (CreatureState state : states)
+			statesBitmask ^= state.getBitmask();
+		sendDelta(3, 18, statesBitmask);
+	}
+
+	public void clearStatesBitmask(CreatureState ... states) {
+		for (CreatureState state : states)
+			statesBitmask &= ~state.getBitmask();
+		sendDelta(3, 18, statesBitmask);
+	}
+
+	public void clearAllStatesBitmask() {
+		statesBitmask = 0;
+		sendDelta(3, 18, statesBitmask);
 	}
 
 	public boolean isVisible() {
@@ -501,6 +515,11 @@ public class CreatureObject extends TangibleObject {
 	public void setPerforming(boolean performing) {
 		this.performing = performing;
 		sendDelta(6, 27, performing);
+	}
+	
+	public void setHologramColour(HologramColour hologramColour) {
+		this.hologramColour = hologramColour;
+		sendDelta(6, 29, hologramColour.getValue());
 	}
 
 	public boolean isShownOnRadar() {
@@ -719,7 +738,7 @@ public class CreatureObject extends TangibleObject {
 		bb.addObject(buffs); // 26
 		bb.addBoolean(performing); // 27
 		bb.addByte(difficulty.getDifficulty()); // 28
-		bb.addInt(-1); // Hologram Color -- 29
+		bb.addInt((hologramColour == null) ? -1 : hologramColour.getValue()); // Hologram Color -- 29
 		bb.addBoolean(shownOnRadar); // 30
 		bb.addBoolean(beast); // 31
 		bb.addByte(0); // Unknown -- 32

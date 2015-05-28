@@ -27,7 +27,7 @@
 ***********************************************************************************/
 package network;
 
-import intents.InboundPacketIntent;
+import intents.network.InboundPacketIntent;
 
 import java.net.InetAddress;
 import java.util.List;

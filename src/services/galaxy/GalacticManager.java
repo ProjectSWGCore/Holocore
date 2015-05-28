@@ -28,8 +28,8 @@
 package services.galaxy;
 
 import intents.GalacticIntent;
-import intents.GalacticPacketIntent;
-import intents.InboundPacketIntent;
+import intents.network.GalacticPacketIntent;
+import intents.network.InboundPacketIntent;
 import resources.Galaxy;
 import resources.control.Intent;
 import resources.control.Manager;

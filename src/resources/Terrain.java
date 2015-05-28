@@ -27,6 +27,7 @@
 ***********************************************************************************/
 package resources;
 
+import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
@@ -153,7 +154,7 @@ public enum Terrain {
 	}
 	
 	public static final int getCrcFromName(String name) {
-		Integer crc = NAME_TO_CRC.get(name);
+		Integer crc = NAME_TO_CRC.get(name.toLowerCase(Locale.ENGLISH));
 		if (crc == null)
 			return 0;
 		return crc;
@@ -173,10 +174,14 @@ public enum Terrain {
 	 * Note: Defaults to TATOOINE
 	 */
 	public static final Terrain getTerrainFromName(String name) {
-		Terrain p = NAME_TO_TERRAIN.get(name);
+		Terrain p = NAME_TO_TERRAIN.get(name.toLowerCase(Locale.ENGLISH));
 		if (p == null)
 			return TATOOINE;
 		return p;
+	}
+	
+	public static final boolean doesTerrainExistForName(String name) {
+		return NAME_TO_TERRAIN.containsKey(name.toLowerCase(Locale.ENGLISH));
 	}
 	
 }

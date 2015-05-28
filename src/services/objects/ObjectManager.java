@@ -27,25 +27,16 @@
 ***********************************************************************************/
 package services.objects;
 
-import intents.GalacticPacketIntent;
 import intents.ObjectTeleportIntent;
 import intents.PlayerEventIntent;
-import intents.swgobject_events.SWGObjectEventIntent;
+import intents.ZoneInIntent;
+import intents.network.GalacticPacketIntent;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import main.ProjectSWG;
 import network.packets.Packet;
-import network.packets.swg.zone.HeartBeatMessage;
-import network.packets.swg.zone.ParametersMessage;
-import network.packets.swg.zone.UpdatePvpStatusMessage;
-import network.packets.swg.zone.chat.ChatOnConnectAvatar;
-import network.packets.swg.zone.chat.VoiceChatStatus;
-import network.packets.swg.zone.insertion.ChatServerStatus;
+import network.packets.swg.zone.SceneDestroyObject;
 import network.packets.swg.zone.insertion.CmdStartScene;
 import network.packets.swg.zone.insertion.SelectCharacter;
 import network.packets.swg.zone.object_controller.DataTransform;
@@ -53,61 +44,49 @@ import network.packets.swg.zone.object_controller.ObjectController;
 import network.packets.swg.zone.object_controller.PostureUpdate;
 import resources.Location;
 import resources.Posture;
-import resources.Race;
 import resources.Terrain;
+import resources.config.ConfigFile;
 import resources.control.Intent;
 import resources.control.Manager;
 import resources.objects.SWGObject;
 import resources.objects.buildouts.BuildoutLoader;
-import resources.objects.creature.CreatureMood;
 import resources.objects.creature.CreatureObject;
-import resources.objects.quadtree.QuadTree;
-import resources.objects.waypoint.WaypointObject;
 import resources.player.Player;
-import resources.player.PlayerEvent;
-import resources.player.PlayerFlags;
-import resources.player.PlayerState;
 import resources.server_info.CachedObjectDatabase;
+import resources.server_info.Config;
+import resources.server_info.Log;
 import resources.server_info.ObjectDatabase;
 import resources.server_info.ObjectDatabase.Traverser;
 import services.player.PlayerManager;
 
 public class ObjectManager extends Manager {
 	
-	private static final double AWARE_RANGE = 200;
-	
 	private final Map <Long, List <SWGObject>> buildoutObjects;
 	private final ObjectDatabase<SWGObject> objects;
-	private final Map <Terrain, QuadTree <SWGObject>> quadTree;
+	private final ObjectAwareness objectAwareness;
 	private long maxObjectId;
 	
 	public ObjectManager() {
 		buildoutObjects = new HashMap<Long, List<SWGObject>>();
 		objects = new CachedObjectDatabase<SWGObject>("odb/objects.db");
-		quadTree = new HashMap<Terrain, QuadTree<SWGObject>>();
+		objectAwareness = new ObjectAwareness();
 		maxObjectId = 1;
 	}
 	
 	@Override
 	public boolean initialize() {
-		registerForIntent(SWGObjectEventIntent.TYPE);
 		registerForIntent(GalacticPacketIntent.TYPE);
 		registerForIntent(PlayerEventIntent.TYPE);
 		registerForIntent(ObjectTeleportIntent.TYPE);
-		loadQuadTree();
+		objectAwareness.initialize();
 		loadObjects();
 		loadBuildouts();
 		return super.initialize();
 	}
 	
-	private void loadQuadTree() {
-		for (Terrain t : Terrain.values()) {
-			quadTree.put(t, new QuadTree<SWGObject>(-8192, -8192, 8192, 8192));
-		}
-	}
-	
 	private void loadObjects() {
 		long startLoad = System.nanoTime();
+		Log.i("ObjectManager", "Loading objects from ObjectDatabase...");
 		System.out.println("ObjectManager: Loading objects from ObjectDatabase...");
 		objects.load();
 		objects.traverse(new Traverser<SWGObject>() {
@@ -120,23 +99,31 @@ public class ObjectManager extends Manager {
 			}
 		});
 		double loadTime = (System.nanoTime() - startLoad) / 1E6;
+		Log.i("ObjectManager", "Finished loading %d objects. Time: %fms", objects.size(), loadTime);
 		System.out.printf("ObjectManager: Finished loading %d objects. Time: %fms%n", objects.size(), loadTime);
 	}
 	
 	private void loadBuildouts() {
-		boolean enableBuildouts = false;
-		if (enableBuildouts) {
+		Config c = getConfig(ConfigFile.PRIMARY);
+		if (c.getBoolean("LOAD-BUILDOUTS", false)) {
 			long startLoad = System.nanoTime();
 			System.out.println("ObjectManager: Loading buildouts...");
 			List <SWGObject> buildouts = null;
-//			buildouts = BuildoutLoader.loadAllBuildouts();
-			buildouts = BuildoutLoader.loadBuildoutsForTerrain(Terrain.CORELLIA);
+			String terrain = c.getString("LOAD-BUILDOUTS-FOR", "");
+			if (Terrain.doesTerrainExistForName(terrain))
+				buildouts = BuildoutLoader.loadBuildoutsForTerrain(Terrain.getTerrainFromName(terrain));
+			else {
+				if (!terrain.isEmpty())
+					System.err.println("ObjectManager: Unknown terrain '" + terrain + "'");
+				buildouts = BuildoutLoader.loadAllBuildouts();
+			}
 			for (SWGObject obj : buildouts) {
 				loadBuildout(obj);
 			}
 			double loadTime = (System.nanoTime() - startLoad) / 1E6;
 			System.out.printf("ObjectManager: Finished loading buildouts. Time: %fms%n", loadTime);
 		} else {
+			Log.w("ObjectManager", "Did not load buildouts. Reason: Disabled.");
 			System.out.println("ObjectManager: Buildouts not loaded. Reason: Disabled!");
 		}
 	}
@@ -159,15 +146,7 @@ public class ObjectManager extends Manager {
 	
 	private void loadObject(SWGObject obj) {
 		obj.setOwner(null);
-		Location l = obj.getLocation();
-		if (l.getTerrain() != null) {
-			QuadTree <SWGObject> tree = quadTree.get(l.getTerrain());
-			if (tree != null) {
-				tree.put(l.getX(), l.getZ(), obj);
-			} else {
-				System.err.println("ObjectManager: Unable to load QuadTree for object " + obj.getObjectId() + " and terrain: " + l.getTerrain());
-			}
-		}
+		objectAwareness.add(obj);
 	}
 	
 	@Override
@@ -178,7 +157,7 @@ public class ObjectManager extends Manager {
 				obj.setOwner(null);
 			}
 		});
-		objects.save();
+		objects.close();
 		return super.terminate();
 	}
 	
@@ -187,10 +166,17 @@ public class ObjectManager extends Manager {
 		if (i instanceof GalacticPacketIntent) {
 			processGalacticPacketIntent((GalacticPacketIntent) i);
 		} else if (i instanceof PlayerEventIntent) {
-			if (((PlayerEventIntent)i).getEvent() == PlayerEvent.PE_DISAPPEAR) {
-				SWGObject obj = ((PlayerEventIntent)i).getPlayer().getCreatureObject();
-				obj.setOwner(null);
-				obj.clearAware();
+			Player p = ((PlayerEventIntent)i).getPlayer();
+			switch (((PlayerEventIntent)i).getEvent()) {
+				case PE_DISAPPEAR:
+					p.getCreatureObject().clearAware();
+					break;
+				case PE_ZONE_IN:
+					p.getCreatureObject().clearAware();
+					objectAwareness.update(p.getCreatureObject());
+					break;
+				default:
+					break;
 			}
 		}else if(i instanceof ObjectTeleportIntent){
 			processObjectTeleportIntent((ObjectTeleportIntent) i);
@@ -199,19 +185,13 @@ public class ObjectManager extends Manager {
 	
 	private void processObjectTeleportIntent(ObjectTeleportIntent oti) {
 		SWGObject object = oti.getObject();
-			
-		removeFromQuadTree(object);
-		object.setLocation(oti.getNewLocation());
-
+		objectAwareness.move(object, oti.getNewLocation());
 		
-		if(object instanceof CreatureObject && object.getOwner() != null){
+		if (object instanceof CreatureObject && object.getOwner() != null){
 			sendPacket(object.getOwner(), new CmdStartScene(false, object.getObjectId(), ((CreatureObject)object).getRace(), object.getLocation(), (long)(ProjectSWG.getCoreTime()/1E3)));
 			((CreatureObject)object).createObject(object.getOwner());
 			((CreatureObject)object).clearAware();
 		}
-		updateAwarenessForObject(object);
-		addToQuadTree(object);
-				
 	}
 
 	private void processGalacticPacketIntent(GalacticPacketIntent gpi) {
@@ -241,23 +221,51 @@ public class ObjectManager extends Manager {
 			SWGObject obj = objects.remove(objId);
 			if (obj == null)
 				return null;
-			Location loc = obj.getLocation();
-			if (loc != null && loc.getTerrain() != null) {
-				QuadTree <SWGObject> tree = quadTree.get(loc.getTerrain());
-				synchronized (tree) {
-					tree.remove(loc.getX(), loc.getZ(), obj);
-				}
-			}
-			for (SWGObject child : obj.getChildren())
-				if (child != null)
-					deleteObject(child.getObjectId());
-			for (SWGObject slot : obj.getSlots().values())
-				if (slot != null)
-					deleteObject(slot.getObjectId());
+			objectAwareness.remove(obj);
+			Log.i("ObjectManager", "Deleted object %d [%s]", obj.getObjectId(), obj.getTemplate());
 			return obj;
 		}
 	}
-	
+
+	public SWGObject destroyObject(long objectId) {
+		SWGObject object = objects.get(objectId);
+
+		return (object != null ? destroyObject(object) : null);
+	}
+
+	public SWGObject destroyObject(SWGObject object) {
+
+		long objId = object.getObjectId();
+
+		for (SWGObject slottedObj : object.getSlots().values()) {
+			if (slottedObj != null)
+				destroyObject(slottedObj);
+		}
+
+		for (SWGObject containedObj : object.getContainedObjects()) {
+			if (containedObj != null)
+				destroyObject(containedObj);
+		}
+
+		// Remove object from the parent
+		SWGObject parent = object.getParent();
+		if (parent != null) {
+			if (parent instanceof CreatureObject) {
+				((CreatureObject) parent).removeEquipment(object);
+			}
+			object.sendObserversAndSelf(new SceneDestroyObject(objId));
+
+			parent.removeObject(object);
+		} else {
+			object.sendObservers(new SceneDestroyObject(objId));
+		}
+
+		// Finally, remove from the awareness tree
+		deleteObject(object.getObjectId());
+
+		return object;
+	}
+
 	public SWGObject createObject(String template) {
 		return createObject(template, null);
 	}
@@ -271,49 +279,19 @@ public class ObjectManager extends Manager {
 				return null;
 			}
 			obj.setLocation(l);
-			updateAwarenessForObject(obj);
-			addToQuadTree(obj);
+			objectAwareness.add(obj);
 			objects.put(objectId, obj);
+			Log.i("ObjectManager", "Created object %d [%s]", obj.getObjectId(), obj.getTemplate());
 			return obj;
-		}
-	}
-	
-	private void addToQuadTree(SWGObject obj) {
-		if (obj == null || obj instanceof WaypointObject)
-			return;
-		Location loc = obj.getLocation();
-		if (loc == null || loc.getTerrain() == null)
-			return;
-		QuadTree <SWGObject> tree = quadTree.get(loc.getTerrain());
-		synchronized (tree) {
-			tree.put(loc.getX(), loc.getZ(), obj);
-		}
-	}
-	
-	private void removeFromQuadTree(SWGObject obj) {
-		if (obj == null)
-			return;
-		Location loc = obj.getLocation();
-		if (loc == null || loc.getTerrain() == null)
-			return;
-		double x = loc.getX();
-		double y = loc.getZ();
-		QuadTree <SWGObject> tree = quadTree.get(loc.getTerrain());
-		synchronized (tree) {
-			tree.remove(x, y, obj);
 		}
 	}
 	
 	private void moveObject(SWGObject obj, DataTransform transform) {
 		if (transform == null)
 			return;
-		removeFromQuadTree(obj);
 		Location newLocation = transform.getLocation();
 		newLocation.setTerrain(obj.getLocation().getTerrain());
-		obj.setLocation(newLocation);
-		
-		updateAwarenessForObject(obj);
-		addToQuadTree(obj);
+		objectAwareness.move(obj, newLocation);
 		
 		if (obj instanceof CreatureObject && transform.getSpeed() > 1E-3) {
 			if(((CreatureObject) obj).getPosture() == Posture.PRONE){
@@ -321,84 +299,32 @@ public class ObjectManager extends Manager {
 			}else{
 				((CreatureObject) obj).setPosture(Posture.UPRIGHT);
 			}
-			((CreatureObject) obj).sendObservers(new PostureUpdate(obj.getObjectId(), ((CreatureObject) obj).getPosture()));
+			((CreatureObject) obj).sendObserversAndSelf(new PostureUpdate(obj.getObjectId(), ((CreatureObject) obj).getPosture()));
 		}
 		obj.sendDataTransforms(transform);
-	}
-	
-	private void updateAwarenessForObject(SWGObject obj) {
-		Location location = obj.getLocation();
-		if (location == null || location.getTerrain() == null)
-			return;
-		List <SWGObject> objectAware = new LinkedList<SWGObject>();
-		double x = location.getX();
-		double y = location.getZ();
-		QuadTree<SWGObject> tree = quadTree.get(location.getTerrain());
-		synchronized (tree) {
-			List <SWGObject> range = tree.getWithinRange(x, y, AWARE_RANGE);
-			for (SWGObject inRange : range) {
-				if (inRange.getObjectId() != obj.getObjectId()) {
-					if (inRange instanceof CreatureObject) {
-						if (inRange.getOwner() != null)
-							objectAware.add(inRange);
-					} else
-						objectAware.add(inRange);
-				}
-			}
-		}
-		obj.updateObjectAwareness(objectAware);
 	}
 	
 	private void zoneInCharacter(PlayerManager playerManager, String galaxy, long netId, long characterId) {
 		Player player = playerManager.getPlayerFromNetworkId(netId);
 		if (player == null)
 			return;
-		player.setPlayerState(PlayerState.ZONING_IN);
-		verifyPlayerObjectsSet(player, characterId);
-		player.getPlayerObject().setStartPlayTime((int) System.currentTimeMillis());
-		CreatureObject creature = player.getCreatureObject();
-		
-		creature.setMoodId(CreatureMood.NONE.getMood());
-		player.getPlayerObject().clearFlagBitmask(PlayerFlags.LD);	// Ziggy: Clear the LD flag in case it wasn't already.
-		
-		long objId = creature.getObjectId();
-		Race race = creature.getRace();
-		Location l = creature.getLocation();
-		long time = (long)(ProjectSWG.getCoreTime()/1E3);
-		sendPacket(player, new HeartBeatMessage());
-		sendPacket(player, new ChatServerStatus(true));
-		sendPacket(player, new VoiceChatStatus());
-		sendPacket(player, new ParametersMessage());
-		sendPacket(player, new ChatOnConnectAvatar());
-		sendPacket(player, new CmdStartScene(false, objId, race, l, time));
-		sendPacket(player, new UpdatePvpStatusMessage(creature.getPvpType(), creature.getPvpFactionId(), creature.getObjectId()));
-		creature.createObject(player);
-		creature.clearAware();
-		updateAwarenessForObject(creature);
-		System.out.println("[" + player.getUsername() + "] " + player.getCharacterName() + " is zoning in");
-		new PlayerEventIntent(player, galaxy, PlayerEvent.PE_ZONE_IN).broadcast();
-	}
-	
-	private void verifyPlayerObjectsSet(Player player, long characterId) {
-		if (player.getCreatureObject() != null && player.getPlayerObject() != null)
-			return;
-		SWGObject creature = objects.get(characterId);
-		if (creature == null) {
+		SWGObject creatureObj = objects.get(characterId);
+		if (creatureObj == null) {
 			System.err.println("ObjectManager: Failed to start zone - CreatureObject could not be fetched from database [Character: " + characterId + "  User: " + player.getUsername() + "]");
+			Log.e("ObjectManager", "Failed to start zone - CreatureObject could not be fetched from database [Character: %d  User: %s]", characterId, player.getUsername());
 			return;
 		}
-		if (!(creature instanceof CreatureObject)) {
+		if (!(creatureObj instanceof CreatureObject)) {
 			System.err.println("ObjectManager: Failed to start zone - Object is not a CreatureObject for ID " + characterId);
+			Log.e("ObjectManager", "Failed to start zone - Object is not a CreatureObject [Character: %d  User: %s]", characterId, player.getUsername());
 			return;
 		}
-		player.setCreatureObject((CreatureObject) creature);
-		creature.setOwner(player);
-		
-		if (player.getPlayerObject() == null) {
-			System.err.println("FATAL: " + player.getUsername() + "'s CreatureObject has a null ghost!");
+		if (((CreatureObject) creatureObj).getPlayerObject() == null) {
+			System.err.println("ObjectManager: Failed to start zone - " + player.getUsername() + "'s CreatureObject has a null ghost!");
+			Log.e("ObjectManager", "Failed to start zone - CreatureObject doesn't have a ghost [Character: %d  User: %s", characterId, player.getUsername());
+			return;
 		}
-		
-		player.getPlayerObject().setOwner(player);
+		new ZoneInIntent(player, (CreatureObject) creatureObj, galaxy).broadcast();
 	}
 	
 	private long getNextObjectId() {

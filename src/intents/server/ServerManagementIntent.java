@@ -25,7 +25,9 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package intents;
+package intents.server;
+
+import java.util.concurrent.TimeUnit;
 
 import resources.control.Intent;
 import resources.player.Player;
@@ -37,6 +39,7 @@ public class ServerManagementIntent extends Intent {
 	private String target;
 	private ServerManagementEvent event;
 	private long time;
+	private TimeUnit timeUnit;
 	
 	public ServerManagementIntent(Player p, String target, ServerManagementEvent event) {
 		super(TYPE);
@@ -45,12 +48,14 @@ public class ServerManagementIntent extends Intent {
 		this.event = event;
 	}
 	
-	public ServerManagementIntent(long time, ServerManagementEvent event) {
+	public ServerManagementIntent(long time, TimeUnit timeUnit, ServerManagementEvent event) {
 		this(null, null, event);
 		this.time = time;
+		this.timeUnit = timeUnit;
 	}
 	
 	public long getTime() { return time; }
+	public TimeUnit getTimeUnit() { return timeUnit; }
 	public Player getPlayer() { return player; }
 	public String getTarget() { return target; }
 	public ServerManagementEvent getEvent() { return event; }

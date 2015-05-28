@@ -64,8 +64,8 @@ public class DeltaBuilder {
 	public void send() {
 		DeltasMessage message = getBuiltMessage();
 		switch(num) {
-		case 3: object.sendObservers(message); break;
-		case 6: object.sendObservers(message); break;
+		case 3: object.sendObserversAndSelf(message); break;
+		case 6: object.sendObserversAndSelf(message); break;
 		default: object.sendSelf(message); break;
 		}
 	}

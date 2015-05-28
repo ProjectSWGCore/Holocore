@@ -27,11 +27,43 @@
 ***********************************************************************************/
 package resources.player;
 
-public class PlayerFlags {
-	public static final int LFG = 0x01;
-	public static final int HELPER = 0x02;
-	public static final int ROLEPLAYER = 0x04;
-	public static final int AFK = 0x80;
-	public static final int LD = 0x0100;
-	public static final int FACTIONRANK = 0x0200;
+import java.util.EnumSet;
+
+public enum PlayerFlags {
+	/** Marks as Looking for a Group */
+	LFG			(0x0001),
+	/** Marks as Helper */
+	HELPER		(0x0002),
+	/** Marks as Roleplayer */
+	ROLEPLAYER	(0x0004),
+	/** Away from Keyboard */
+	AFK			(0x0080),
+	/** Logged Out */
+	LD			(0x0100),
+	/** Display the Faction Rank */
+	FACTIONRANK	(0x0200),
+	/** Marks as Out of Character */
+	OOC			(0x0800),
+	/** Marks as Looking for Work */
+	LFW			(0x2000);
+	
+	private int flag;
+	
+	PlayerFlags(int flag) {
+		this.flag = flag;
+	}
+	
+	public int getFlag() {
+		return flag;
+	}
+	
+	public static EnumSet <PlayerFlags> getFlags(int bits) {
+		EnumSet <PlayerFlags> flags = EnumSet.noneOf(PlayerFlags.class);
+		for (PlayerFlags flag : values()) {
+			if ((flag.getFlag() & bits) != 0)
+				flags.add(flag);
+		}
+		return flags;
+	}
+	
 }

@@ -25,49 +25,44 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package intents;
+package network.packets.swg.zone;
 
-import network.packets.Packet;
-import resources.control.Intent;
-import resources.network.ServerType;
+import java.nio.ByteBuffer;
 
-public class InboundPacketIntent extends Intent {
+import network.packets.swg.SWGPacket;
+
+public class ShowHelmet extends SWGPacket {
+
+	public static final int CRC = 0xDDEFEC1D;
 	
-	public static final String TYPE = "InboundPacketIntent";
+	private long objectId;
+	private boolean showHelmet;
 	
-	private Packet packet;
-	private ServerType type;
-	private long networkId;
-	
-	public InboundPacketIntent(ServerType type, Packet p, long networkId) {
-		super(TYPE);
-		setPacket(p);
-		setServerType(type);
-		setNetworkId(networkId);
+	@Override
+	public void decode(ByteBuffer data) {
+		if (!super.decode(data, CRC))
+			return;
+		
+		objectId = getLong(data);
+		showHelmet = getBoolean(data);
 	}
 	
-	public void setPacket(Packet p) {
-		this.packet = p;
+	@Override
+	public ByteBuffer encode() {
+		ByteBuffer data = ByteBuffer.allocate(15);
+		addShort(data, 3);
+		addInt(data, CRC);
+		addLong(data, objectId);
+		addBoolean(data, showHelmet);
+		return data;
 	}
 	
-	public void setServerType(ServerType type) {
-		this.type = type;
+	public boolean showingHelmet() {
+		return showHelmet;
 	}
 	
-	public void setNetworkId(long networkId) {
-		this.networkId = networkId;
-	}
-	
-	public Packet getPacket() {
-		return packet;
-	}
-	
-	public ServerType getServerType() {
-		return type;
-	}
-	
-	public long getNetworkId() {
-		return networkId;
+	public long getObjectId() {
+		return objectId;
 	}
 	
 }

@@ -35,6 +35,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import network.packets.Packet;
@@ -43,23 +44,24 @@ import network.packets.soe.MultiPacket;
 import network.packets.swg.SWGPacket;
 import network.packets.swg.zone.baselines.Baseline;
 import network.packets.swg.zone.object_controller.ObjectController;
-import intents.InboundPacketIntent;
-import intents.OutboundPacketIntent;
-import intents.ServerManagementIntent;
-import intents.ServerStatusIntent;
+import intents.network.InboundPacketIntent;
+import intents.network.OutboundPacketIntent;
+import intents.server.ServerManagementIntent;
+import intents.server.ServerStatusIntent;
 import resources.Galaxy;
 import resources.Galaxy.GalaxyStatus;
 import resources.config.ConfigFile;
 import resources.control.Intent;
 import resources.control.Manager;
 import resources.control.ServerStatus;
-import resources.services.Config;
+import resources.server_info.Config;
 import services.galaxy.GalacticManager;
 
 public class CoreManager extends Manager {
 	
 	private static final int galaxyId = 1;
 	
+	private final ScheduledExecutorService shutdownService;
 	private EngineManager engineManager;
 	private GalacticManager galacticManager;
 	private PrintStream packetOutput;
@@ -69,6 +71,7 @@ public class CoreManager extends Manager {
 	private boolean packetDebug;
 	
 	public CoreManager() {
+		shutdownService = Executors.newSingleThreadScheduledExecutor();
 		shutdownRequested = false;
 		galaxy = getGalaxy();
 		if (galaxy != null) {
@@ -104,6 +107,18 @@ public class CoreManager extends Manager {
 	}
 	
 	@Override
+	public boolean stop() {
+		galaxy.setStatus(GalaxyStatus.LOCKED);
+		return super.stop();
+	}
+	
+	@Override
+	public boolean terminate() {
+		shutdownService.shutdownNow();
+		return super.terminate();
+	}
+	
+	@Override
 	public void onIntentReceived(Intent i) {
 		if (packetDebug) {
 			if (i instanceof InboundPacketIntent) {
@@ -131,24 +146,28 @@ public class CoreManager extends Manager {
 	
 	private void handleServerManagementIntent(ServerManagementIntent i) {
 		switch(i.getEvent()) {
-			case SHUTDOWN: initiateShutdownSequence(i.getTime());  break;
+			case SHUTDOWN: initiateShutdownSequence(i);  break;
 			default: break;
 		}
 	}
-
-	private void initiateShutdownSequence(long time) {
+	
+	private void initiateShutdownSequence(ServerManagementIntent i) {
 		System.out.println("Beginning server shutdown sequence...");
+		long time = i.getTime();
+		TimeUnit timeUnit = i.getTimeUnit();
 		
-		if (time > 0) {
-			Executors.newSingleThreadScheduledExecutor().schedule(new Runnable() {
-				public void run() {
-					shutdownRequested = true;
-				}
-			}, time, TimeUnit.MINUTES);
-		} else {
-			shutdownRequested = true;
-		}
-		new ServerStatusIntent(ServerStatus.SHUTDOWN_REQUESTED, time).broadcast();
+		shutdownService.schedule(
+				new Runnable() {
+					@Override
+					public void run() {
+						shutdownRequested = true;
+					}
+					// Ziggy: Give the broadcast method extra time to complete.
+					// If we don't, the final broadcast won't be displayed.
+				},
+				TimeUnit.NANOSECONDS.convert(time, timeUnit) + TimeUnit.NANOSECONDS.convert(1, TimeUnit.SECONDS), TimeUnit.NANOSECONDS);
+
+		new ServerStatusIntent(ServerStatus.SHUTDOWN_REQUESTED, time, i.getTimeUnit()).broadcast();
 	}
 	
 	public GalaxyStatus getGalaxyStatus() {

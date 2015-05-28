@@ -39,8 +39,12 @@ public class CommandQueueEnqueue extends ObjectController {
 	private long targetId = 0;
 	private String arguments = "";
 	
-	public CommandQueueEnqueue(long objectId) {
+	public CommandQueueEnqueue(long objectId, int counter, int crc, long targetId, String arguments) {
 		super(objectId, CRC);
+		this.counter = counter;
+		this.crc = crc;
+		this.targetId = targetId;
+		this.arguments = arguments;
 	}
 	
 	public CommandQueueEnqueue(ByteBuffer data) {

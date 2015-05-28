@@ -1,10 +1,10 @@
 ### **Branch** ###
 
-**Development:** Upload your Pull Requests here so it can be tested
+**Quality Assurance:** Upload your Pull Requests here so it can be tested
+
+**Development:** This is the main working space
 
 **Master:** Tested and approved commits will be moved to this branch (Test Center)
-
-**Release:** This is the live version of latest code run on Live Server (Tydirium)
 
 --------------------------------------------------------------------------------
 
@@ -32,3 +32,24 @@ GNU Affero General Public License for more details.
 
 You should have received a copy of the GNU Affero General Public License
 along with Holocore.  If not, see <http://www.gnu.org/licenses/>.
+
+### Running Holocore ###
+In order to successfully build and run Holocore, you must:
+
+1. Have a valid Star Wars Galaxies installation that is updated from the final patch.
+2. Setup a postgresql server, preferably on localhost, with a database and user named nge with read/write permissions.
+    * Note: You will need to restore the database that you created using nge.backup in order to create the proper tables.
+3. Extract the following contents of the sku's to a new clientdata folder in the holocore directory:
+    * abstract
+    * appearance
+    * creation
+    * customization 
+    * datatables 
+    * footprint
+    * interiorlayout
+    * misc
+    * object
+    * quest
+    * snapshot
+    * string
+    * terrain

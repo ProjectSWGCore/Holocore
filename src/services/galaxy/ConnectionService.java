@@ -38,9 +38,10 @@ import java.util.concurrent.TimeUnit;
 import network.packets.soe.Disconnect;
 import network.packets.soe.Disconnect.DisconnectReason;
 import network.packets.swg.zone.HeartBeatMessage;
-import intents.CloseConnectionIntent;
-import intents.GalacticPacketIntent;
 import intents.PlayerEventIntent;
+import intents.network.CloseConnectionIntent;
+import intents.network.ForceDisconnectIntent;
+import intents.network.GalacticPacketIntent;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.player.PlayerObject;
@@ -48,6 +49,8 @@ import resources.player.Player;
 import resources.player.PlayerEvent;
 import resources.player.PlayerFlags;
 import resources.player.PlayerState;
+import resources.server_info.Log;
+import utilities.ThreadUtilities;
 
 public class ConnectionService extends Service {
 	
@@ -61,7 +64,7 @@ public class ConnectionService extends Service {
 	private final List <Player> zonedInPlayers;
 	
 	public ConnectionService() {
-		updateService = Executors.newSingleThreadScheduledExecutor();
+		updateService = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("conn-update-service"));
 		zonedInPlayers = new LinkedList<Player>();
 		disappearPlayers = new LinkedList<Player>();
 		updateRunnable = new Runnable() {
@@ -91,6 +94,7 @@ public class ConnectionService extends Service {
 	public boolean initialize() {
 		registerForIntent(PlayerEventIntent.TYPE);
 		registerForIntent(GalacticPacketIntent.TYPE);
+		registerForIntent(ForceDisconnectIntent.TYPE);
 		return super.initialize();
 	}
 	
@@ -114,37 +118,57 @@ public class ConnectionService extends Service {
 	
 	@Override
 	public void onIntentReceived(Intent i) {
-		if (i instanceof PlayerEventIntent) {
-			if (((PlayerEventIntent)i).getEvent() == PlayerEvent.PE_ZONE_IN) {
-				Player p = ((PlayerEventIntent)i).getPlayer();
+		if (i instanceof PlayerEventIntent)
+			onPlayerEventIntent((PlayerEventIntent) i);
+		else if (i instanceof GalacticPacketIntent)
+			onGalacticPacketIntent((GalacticPacketIntent) i);
+		else if (i instanceof ForceDisconnectIntent)
+			onForceDisconnectIntent((ForceDisconnectIntent) i);
+	}
+	
+	private void onPlayerEventIntent(PlayerEventIntent pei) {
+		switch (pei.getEvent()) {
+			case PE_ZONE_IN: {
+				Player p = pei.getPlayer();
 				synchronized (zonedInPlayers) {
 					removeOld(p);
 					zonedInPlayers.add(p);
 				}
-			} else if (((PlayerEventIntent)i).getEvent() == PlayerEvent.PE_DISAPPEAR) {
-				synchronized (zonedInPlayers) {
-					zonedInPlayers.remove(((PlayerEventIntent)i).getPlayer());
-				}
+				break;
 			}
-		} else if (i instanceof GalacticPacketIntent) {
-			if (((GalacticPacketIntent)i).getPacket() instanceof HeartBeatMessage) {
-				GalacticPacketIntent gpi = (GalacticPacketIntent) i;
-				Player p = gpi.getPlayerManager().getPlayerFromNetworkId(gpi.getNetworkId());
-				if (p != null)
-					p.sendPacket(gpi.getPacket());
-			} else if (((GalacticPacketIntent)i).getPacket() instanceof Disconnect) {
-				GalacticPacketIntent gpi = (GalacticPacketIntent) i;
-				Player p = gpi.getPlayerManager().getPlayerFromNetworkId(gpi.getNetworkId());
-				if (p != null) {
-					if (p.getPlayerState() != PlayerState.DISCONNECTED) {
-						logOut(p);
-						disconnect(p, DisconnectReason.TIMEOUT);
-					} else {
-						disconnect(p, DisconnectReason.OTHER_SIDE_TERMINATED);
-					}
+			case PE_DISAPPEAR:
+				synchronized (zonedInPlayers) {
+					zonedInPlayers.remove(pei.getPlayer());
+				}
+				break;
+			default:
+				break;
+		}
+	}
+	
+	private void onGalacticPacketIntent(GalacticPacketIntent gpi) {
+		if (gpi.getPacket() instanceof HeartBeatMessage) {
+			Player p = gpi.getPlayerManager().getPlayerFromNetworkId(gpi.getNetworkId());
+			if (p != null)
+				p.sendPacket(gpi.getPacket());
+		} else if (gpi.getPacket() instanceof Disconnect) {
+			Player p = gpi.getPlayerManager().getPlayerFromNetworkId(gpi.getNetworkId());
+			if (p != null) {
+				if (p.getPlayerState() != PlayerState.DISCONNECTED) {
+					logOut(p);
+					disconnect(p, DisconnectReason.TIMEOUT);
+				} else {
+					disconnect(p, DisconnectReason.OTHER_SIDE_TERMINATED);
 				}
 			}
 		}
+	}
+	
+	private void onForceDisconnectIntent(ForceDisconnectIntent fdi) {
+		logOut(fdi.getPlayer(), !fdi.getDisappearImmediately());
+		disconnect(fdi.getPlayer(), fdi.getDisconnectReason());
+		if (fdi.getDisappearImmediately())
+			disappear(fdi.getPlayer());
 	}
 	
 	private void removeOld(Player nPlayer) {
@@ -154,37 +178,53 @@ public class ConnectionService extends Service {
 				Player old = zonedIterator.next();
 				if (old.equals(nPlayer)) {
 					zonedIterator.remove();
-					disconnect(old, DisconnectReason.NEW_CONNECTION_ATTEMPT);
 				}
 			}
 		}
 	}
 	
 	private void logOut(Player p) {
-		PlayerObject playerObject = p.getPlayerObject();
-		int currentTime = playerObject.getPlayTime();
-		int startTime = playerObject.getStartPlayTime();
-		int deltaTime = (int) ((System.currentTimeMillis()) - startTime);
-		int newTotalTime = currentTime + (int) TimeUnit.MILLISECONDS.toSeconds(deltaTime);
-		
-		playerObject.setPlayTime(newTotalTime);
-		
+		logOut(p, true);
+	}
+	
+	private void logOut(Player p, boolean addToDisappear) {
+		Log.i("ConnectionService", "Logged out %s with character %s", p.getUsername(), p.getCharacterName());
+		updatePlayTime(p);
 		if (p.getPlayerState() != PlayerState.LOGGED_OUT)
 			System.out.println("[" + p.getUsername() +"] Logged out " + p.getCharacterName());
-		p.getPlayerObject().setFlagBitmask(PlayerFlags.LD);
+		if (p.getPlayerObject() != null)
+			p.getPlayerObject().setFlagBitmask(PlayerFlags.LD);
 		p.setPlayerState(PlayerState.LOGGED_OUT);
-		disappearPlayers.add(p);
-		updateService.schedule(disappearRunnable, (long) DISAPPEAR_THRESHOLD, TimeUnit.MILLISECONDS);
+		if (addToDisappear) {
+			disappearPlayers.add(p);
+			updateService.schedule(disappearRunnable, (long) DISAPPEAR_THRESHOLD, TimeUnit.MILLISECONDS);
+		}
 	}
 	
 	private void disappear(Player p) {
+		Log.i("ConnectionService", "Disappeared %s with character %s", p.getUsername(), p.getCharacterName());
+		if (p.getPlayerObject() != null)
+			p.getPlayerObject().clearFlagBitmask(PlayerFlags.LD);
 		p.setPlayerState(PlayerState.DISCONNECTED);
 		System.out.println("[" + p.getUsername() +"] " + p.getCharacterName() + " disappeared");
 		new PlayerEventIntent(p, PlayerEvent.PE_DISAPPEAR).broadcast();
 	}
 	
 	private void disconnect(Player player, DisconnectReason reason) {
+		Log.i("ConnectionService", "Disconnected %s with character %s and reason: %s", player.getUsername(), player.getCharacterName(), reason);
 		new CloseConnectionIntent(player.getConnectionId(), player.getNetworkId(), reason).broadcast();
+	}
+	
+	private void updatePlayTime(Player p) {
+		PlayerObject playerObject = p.getPlayerObject();
+		if (playerObject == null)
+			return;
+		
+		int currentTime = playerObject.getPlayTime();
+		int startTime = playerObject.getStartPlayTime();
+		int deltaTime = (int) ((System.currentTimeMillis()) - startTime);
+		int newTotalTime = currentTime + (int) TimeUnit.MILLISECONDS.toSeconds(deltaTime);
+		playerObject.setPlayTime(newTotalTime);
 	}
 	
 }

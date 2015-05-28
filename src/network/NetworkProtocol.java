@@ -27,7 +27,7 @@
 ***********************************************************************************/
 package network;
 
-import intents.OutboundUdpPacketIntent;
+import intents.network.OutboundUdpPacketIntent;
 
 import java.net.InetAddress;
 import java.util.LinkedList;

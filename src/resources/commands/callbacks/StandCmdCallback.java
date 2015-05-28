@@ -32,6 +32,7 @@ import resources.Posture;
 import resources.commands.ICmdCallback;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
+import resources.objects.creature.CreatureState;
 import resources.player.Player;
 import services.galaxy.GalacticManager;
 
@@ -39,14 +40,13 @@ public class StandCmdCallback implements ICmdCallback {
 	
 	@Override
 	public void execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
-		CreatureObject creature = player.getCreatureObject(); 
+		CreatureObject creature = player.getCreatureObject();
 		
-		
+		creature.clearStatesBitmask(CreatureState.SITTING_ON_CHAIR);
 		creature.setPosture(Posture.UPRIGHT);
 		creature.setMovementScale(1);
-		if(creature.getTurnScale() != 1)
-			creature.setTurnScale(1);
-		creature.sendObservers(new PostureUpdate(creature.getObjectId(), Posture.UPRIGHT));
+		creature.setTurnScale(1);
+		creature.sendObserversAndSelf(new PostureUpdate(creature.getObjectId(), Posture.UPRIGHT));
 	}
 	
 }

@@ -25,38 +25,16 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package intents;
+package intents.network;
 
-import network.packets.Packet;
 import resources.control.Intent;
 
-public class OutboundPacketIntent extends Intent {
+public class PingIntent extends Intent {
 	
-	public static final String TYPE = "OutboundPacketIntent";
+	public static final String TYPE = "PingIntent";
 	
-	private Packet packet;
-	private long networkId;
-	
-	public OutboundPacketIntent(Packet p, long networkId) {
+	public PingIntent() {
 		super(TYPE);
-		setPacket(p);
-		setNetworkId(networkId);
-	}
-	
-	public void setPacket(Packet p) {
-		this.packet = p;
-	}
-	
-	public void setNetworkId(long networkId) {
-		this.networkId = networkId;
-	}
-	
-	public Packet getPacket() {
-		return packet;
-	}
-	
-	public long getNetworkId() {
-		return networkId;
 	}
 	
 }

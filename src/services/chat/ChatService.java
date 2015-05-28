@@ -31,17 +31,14 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
 
-import intents.GalacticPacketIntent;
 import intents.NotifyPlayersPacketIntent;
 import intents.PlayerEventIntent;
-import intents.ServerStatusIntent;
 import intents.chat.ChatBroadcastIntent;
 import intents.chat.PersistentMessageIntent;
 import intents.chat.SpatialChatIntent;
+import intents.network.GalacticPacketIntent;
+import intents.server.ServerStatusIntent;
 import network.packets.Packet;
 import network.packets.swg.SWGPacket;
 import network.packets.swg.zone.ChatRequestRoomList;
@@ -58,7 +55,6 @@ import network.packets.swg.zone.chat.ChatSystemMessage.SystemChatType;
 import network.packets.swg.zone.object_controller.SpatialChat;
 import resources.Terrain;
 import resources.control.Intent;
-import resources.control.ServerStatus;
 import resources.control.Service;
 import resources.encodables.OutOfBand;
 import resources.encodables.ProsePackage;
@@ -99,6 +95,12 @@ public class ChatService extends Service {
 		return super.initialize();
 	}
 	
+	@Override
+	public boolean terminate() {
+		mails.close();
+		return super.terminate();
+	}
+	
 	public void onIntentReceived(Intent i) {
 		switch (i.getType()) {
 			case GalacticPacketIntent.TYPE:
@@ -120,11 +122,6 @@ public class ChatService extends Service {
 			case ChatBroadcastIntent.TYPE:
 				if (i instanceof ChatBroadcastIntent)
 					handleChatBroadcast((ChatBroadcastIntent) i);
-				break;
-			case ServerStatusIntent.TYPE:
-				if (i instanceof ServerStatusIntent)
-					if (((ServerStatusIntent)i).getStatus() == ServerStatus.SHUTDOWN_REQUESTED)
-						sendShutdownBroadcasts(((ServerStatusIntent) i).getTime());
 				break;
 		}
 	}
@@ -204,10 +201,9 @@ public class ChatService extends Service {
 		sender.sendPacket(message);
 		
 		// Notify observers of the chat message
-		for (Player observer : actor.getObservers()) {
-			if (observer.getCreatureObject() == null)
-				continue;
-			observer.sendPacket(new SpatialChat(observer.getCreatureObject().getObjectId(), message));
+		for (SWGObject aware : actor.getObjectsAware()) {
+			if (aware.getOwner() != null)
+				aware.getOwner().sendPacket(new SpatialChat(aware.getObjectId(), message));
 		}
 	}
 	
@@ -293,10 +289,7 @@ public class ChatService extends Service {
 		ChatSystemMessage packet = new ChatSystemMessage(SystemChatType.SCREEN_AND_CHAT.ordinal(), message);
 		broadcaster.sendPacket(packet);
 		
-		List<Player> observers = broadcaster.getCreatureObject().getObservers();
-		for (Player player : observers) {
-			player.sendPacket(packet);
-		}
+		broadcaster.getCreatureObject().sendObservers(packet);
 	}
 	
 	private void broadcastGalaxyMessage(String message, Terrain terrain) {
@@ -307,31 +300,6 @@ public class ChatService extends Service {
 	private void broadcastPersonalMessage(ProsePackage prose, Player player) {
 		OutOfBand pckg = new OutOfBand(prose);
 		player.sendPacket(new ChatSystemMessage(SystemChatType.SCREEN_AND_CHAT, pckg));
-	}
-	
-	private void sendShutdownBroadcasts(final long time) {
-		final AtomicInteger runCount = new AtomicInteger();
-		final long interval = (int) (time / 3);
-		
-		Executors.newSingleThreadScheduledExecutor().scheduleAtFixedRate(new Runnable() {
-			public void run() {
-				switch(runCount.getAndIncrement()) {
-				case 0:
-					broadcastGalaxyMessage(String.format("The server will be shutting down in %d minutes.", time), null);
-					break;
-				case 1:
-					broadcastGalaxyMessage(String.format("The server will be shutting down in %d minutes.", time - interval), null);
-					break;
-				case 2:
-					broadcastGalaxyMessage(String.format("The server will be shutting down in %d minutes.", time - (interval*2)), null);
-					break;
-				case 3:
-					broadcastGalaxyMessage("The server will now be shutting down.", null);
-					throw new RuntimeException("Reached max runCount"); // no "clean" ways to cancel the runnable I can think of
-				}
-			}
-		}, 0, interval, TimeUnit.MINUTES);
-		
 	}
 	
 	private void sendPersistentMessageHeaders(Player player, String galaxy) {

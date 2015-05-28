@@ -27,8 +27,9 @@
 ***********************************************************************************/
 package main;
 
-import intents.ServerStatusIntent;
+import intents.server.ServerStatusIntent;
 import resources.Galaxy.GalaxyStatus;
+import resources.control.IntentManager;
 import resources.control.ServerStatus;
 import services.CoreManager;
 
@@ -55,6 +56,7 @@ public class ProjectSWG {
 			e.printStackTrace();
 			System.err.println("ProjectSWG: Shutting down - unknown error.");
 		}
+		server.stop();
 		server.terminate();
 		System.out.println("ProjectSWG: Server shut down.");
 	}
@@ -78,6 +80,7 @@ public class ProjectSWG {
 			initialize();
 			start();
 			loop();
+			stop();
 			terminate();
 			if (!shutdownRequested && !manager.isShutdownRequested()) {
 				manager = new CoreManager();
@@ -123,10 +126,29 @@ public class ProjectSWG {
 		}
 	}
 	
+	private void stop() {
+		if (manager == null || status == ServerStatus.OFFLINE)
+			return;
+		System.out.println("ProjectSWG: Stopping...");
+		setStatus(ServerStatus.STOPPING);
+		if (!manager.stop())
+			System.err.println("Failed to stop.");
+		long intentWait = System.nanoTime();
+		while (IntentManager.getIntentsQueued() > 0 && System.nanoTime()-intentWait < 3E9) {
+			try {
+				Thread.sleep(10);
+			} catch (InterruptedException e) {
+				System.err.println("ProjectSWG: Failed to stop! Interrupted with " + IntentManager.getIntentsQueued() + " intents remaining");
+				break;
+			}
+		}
+		System.out.println("ProjectSWG: Stopped. Time: " + manager.getCoreTime() + "ms");
+	}
+	
 	private void terminate() {
 		if (manager == null || status == ServerStatus.OFFLINE)
 			return;
-		System.out.println("ProjectSWG: Shutting down server...");
+		System.out.println("ProjectSWG: Terminating...");
 		setStatus(ServerStatus.TERMINATING);
 		if (!manager.terminate())
 			throw new CoreException("Failed to terminate.");

@@ -25,39 +25,44 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package intents;
+package network.packets.swg.zone;
 
-import resources.control.Intent;
-import resources.network.ServerType;
-import resources.network.UDPServer.UDPPacket;
+import java.nio.ByteBuffer;
 
-public class InboundUdpPacketIntent extends Intent {
+import network.packets.swg.SWGPacket;
+
+public class ShowBackpack extends SWGPacket {
+
+	public static final int CRC = 0x8824757B;
 	
-	public static final String TYPE = "InboundUdpPacketIntent";
+	private long objectId;
+	private boolean showBackpack;
 	
-	private UDPPacket packet;
-	private ServerType type;
-	
-	public InboundUdpPacketIntent(ServerType type, UDPPacket p) {
-		super(TYPE);
-		setPacket(p);
-		setServerType(type);
+	@Override
+	public void decode(ByteBuffer data) {
+		if (!super.decode(data, CRC))
+			return;
+		
+		objectId = getLong(data);
+		showBackpack = getBoolean(data);
 	}
 	
-	public void setPacket(UDPPacket p) {
-		this.packet = p;
+	@Override
+	public ByteBuffer encode() {
+		ByteBuffer data = ByteBuffer.allocate(15);
+		addShort(data, 3);
+		addInt(data, CRC);
+		addLong(data, objectId);
+		addBoolean(data, showBackpack);
+		return data;
 	}
 	
-	public void setServerType(ServerType type) {
-		this.type = type;
+	public boolean showingBackpack() {
+		return showBackpack;
 	}
 	
-	public UDPPacket getPacket() {
-		return packet;
-	}
-	
-	public ServerType getServerType() {
-		return type;
+	public long getObjectId() {
+		return objectId;
 	}
 	
 }

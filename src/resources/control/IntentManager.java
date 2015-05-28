@@ -27,6 +27,8 @@
 ***********************************************************************************/
 package resources.control;
 
+import intents.server.ServerStatusIntent;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -36,13 +38,11 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
-import java.util.concurrent.TimeUnit;
+
+import utilities.ThreadUtilities;
 
 
-/**
- * Don't you dare make this public.
- */
-class IntentManager {
+public class IntentManager {
 	
 	private static final IntentManager instance = new IntentManager();
 	private final Runnable broadcastRunnable;
@@ -52,20 +52,22 @@ class IntentManager {
 	private boolean initialized = false;
 	private boolean terminated = false;
 	
-	public IntentManager() {
+	private IntentManager() {
 		initialize();
 		broadcastRunnable = new Runnable() {
 			public void run() {
 				Intent i = intentQueue.poll();
 				if (i != null)
 					broadcast(i);
+				if (i instanceof ServerStatusIntent)
+					onServerStatusIntent((ServerStatusIntent) i);
 			}
 		};
 	}
 	
-	public void initialize() {
+	protected void initialize() {
 		if (!initialized) {
-			broadcastThreads = Executors.newCachedThreadPool();
+			broadcastThreads = Executors.newCachedThreadPool(ThreadUtilities.newThreadFactory("intent-processor-%d"));
 			intentRegistrations = new HashMap<String, List<IntentReceiver>>();
 			intentQueue = new ConcurrentLinkedQueue<Intent>();
 			initialized = true;
@@ -73,20 +75,21 @@ class IntentManager {
 		}
 	}
 	
-	public void terminate() {
+	private void terminate() {
 		if (!terminated) {
-			broadcastThreads.shutdownNow();
-			try {
-				broadcastThreads.awaitTermination(5, TimeUnit.SECONDS);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+			broadcastThreads.shutdown();
 			initialized = false;
 			terminated = true;
 		}
 	}
 	
-	public void broadcastIntent(Intent i) {
+	private void onServerStatusIntent(ServerStatusIntent i) {
+		if (i.getStatus() == ServerStatus.TERMINATING) {
+			terminate();
+		}
+	}
+	
+	protected void broadcastIntent(Intent i) {
 		if (i == null)
 			throw new NullPointerException("Intent cannot be null!");
 		intentQueue.add(i);
@@ -94,7 +97,7 @@ class IntentManager {
 		catch (RejectedExecutionException e) { } // This error is thrown when the server is being shut down
 	}
 	
-	public void registerForIntent(String intentType, IntentReceiver r) {
+	protected void registerForIntent(String intentType, IntentReceiver r) {
 		if (r == null)
 			throw new NullPointerException("Cannot register a null value for an intent");
 		synchronized (intentRegistrations) {
@@ -109,7 +112,7 @@ class IntentManager {
 		}
 	}
 	
-	public void unregisterForIntent(String intentType, IntentReceiver r) {
+	protected void unregisterForIntent(String intentType, IntentReceiver r) {
 		if (r == null)
 			return;
 		synchronized (intentRegistrations) {
@@ -150,7 +153,11 @@ class IntentManager {
 		}
 	}
 	
-	public static IntentManager getInstance() {
+	public static int getIntentsQueued() {
+		return getInstance().intentQueue.size();
+	}
+	
+	protected static IntentManager getInstance() {
 		return instance;
 	}
 	
