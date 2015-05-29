@@ -33,6 +33,7 @@ import resources.Posture;
 import resources.commands.ICmdCallback;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
+import resources.objects.creature.CreatureState;
 import resources.player.Player;
 import services.galaxy.GalacticManager;
 
@@ -56,7 +57,7 @@ public class SitOnObjectCmdCallback implements ICmdCallback {
 			long cellid = Long.parseLong(cmd[3]);
 			
 			sot = new SitOnObject(objectID, cellid, x, y, z);
-			creature.setStatesBitmask(32768);
+			creature.setStatesBitmask(CreatureState.SITTING_ON_CHAIR);
 		} else {
 			Location loc = creature.getLocation();
 			sot = new SitOnObject(objectID, 0, (float) loc.getX(), (float) loc.getY(), (float) loc.getZ());
@@ -64,6 +65,6 @@ public class SitOnObjectCmdCallback implements ICmdCallback {
 		creature.setPosture(Posture.SITTING);
 		creature.setMovementScale(0);
 		creature.setTurnScale(0);
-		creature.sendObservers(new SitOnObject(creature.getObjectId(), sot));
+		creature.sendObserversAndSelf(new SitOnObject(creature.getObjectId(), sot));
 	}
 }

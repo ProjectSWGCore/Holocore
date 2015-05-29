@@ -27,7 +27,7 @@
 ***********************************************************************************/
 package resources.control;
 
-import intents.ServerStatusIntent;
+import intents.server.ServerStatusIntent;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;

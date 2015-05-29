@@ -25,42 +25,49 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package intents.swgobject_events;
+package intents.network;
 
+import network.packets.Packet;
 import resources.control.Intent;
-import resources.objects.SWGObject;
+import resources.network.ServerType;
 
-public class SWGObjectEventIntent extends Intent {
+public class InboundPacketIntent extends Intent {
 	
-	public static final String TYPE = "SWGObjectEventType";
+	public static final String TYPE = "InboundPacketIntent";
 	
-	private SWGObject obj;
-	private Event event;
+	private Packet packet;
+	private ServerType type;
+	private long networkId;
 	
-	public SWGObjectEventIntent(SWGObject obj, Event e) {
+	public InboundPacketIntent(ServerType type, Packet p, long networkId) {
 		super(TYPE);
-		setObject(obj);
-		setEvent(e);
+		setPacket(p);
+		setServerType(type);
+		setNetworkId(networkId);
 	}
 	
-	public void setObject(SWGObject obj) {
-		this.obj = obj;
+	public void setPacket(Packet p) {
+		this.packet = p;
 	}
 	
-	public void setEvent(Event e) {
-		this.event = e;
+	public void setServerType(ServerType type) {
+		this.type = type;
 	}
 	
-	public SWGObject getObject() {
-		return obj;
+	public void setNetworkId(long networkId) {
+		this.networkId = networkId;
 	}
 	
-	public Event getEvent() {
-		return event;
+	public Packet getPacket() {
+		return packet;
 	}
 	
-	public enum Event {
-		SOE_UPDATE_LOCATION
+	public ServerType getServerType() {
+		return type;
+	}
+	
+	public long getNetworkId() {
+		return networkId;
 	}
 	
 }

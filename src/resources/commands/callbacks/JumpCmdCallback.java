@@ -25,47 +25,21 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package intents;
+package resources.commands.callbacks;
 
-import resources.control.Intent;
-import resources.control.ServerStatus;
+import network.packets.swg.zone.object_controller.JumpUpdate;
+import resources.commands.ICmdCallback;
+import resources.objects.SWGObject;
+import resources.objects.creature.CreatureObject;
+import resources.player.Player;
+import services.galaxy.GalacticManager;
 
-public class ServerStatusIntent extends Intent {
-	
-	public static final String TYPE = "ServerStatusIntent";
-	
-	private ServerStatus status;
-	private long time;
-	
-	public ServerStatusIntent() {
-		super(TYPE);
-		setStatus(null);
-	}
-	
-	public ServerStatusIntent(ServerStatus status) {
-		super(TYPE);
-		setStatus(status);
-	}
-	
-	public ServerStatusIntent(ServerStatus status, long time) {
-		this(status);
-		setTime(time);
-	}
-	
-	public void setTime(long time) {
-		this.time = time;
+public class JumpCmdCallback implements ICmdCallback {
+
+	@Override
+	public void execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
+		CreatureObject creature = player.getCreatureObject();
+		creature.sendObserversAndSelf(new JumpUpdate(creature.getObjectId()));
 	}
 
-	public long getTime() {
-		return time;
-	}
-	
-	public void setStatus(ServerStatus status) {
-		this.status = status;
-	}
-	
-	public ServerStatus getStatus() {
-		return status;
-	}
-	
 }

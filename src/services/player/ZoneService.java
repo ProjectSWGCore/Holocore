@@ -29,12 +29,16 @@ package services.player;
 
 import intents.GalacticIntent;
 import intents.PlayerEventIntent;
+import intents.ZoneInIntent;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 
 import main.ProjectSWG;
@@ -58,7 +62,15 @@ import network.packets.swg.zone.CmdSceneReady;
 import network.packets.swg.zone.GalaxyLoopTimesRequest;
 import network.packets.swg.zone.GalaxyLoopTimesResponse;
 import network.packets.swg.zone.HeartBeatMessage;
+import network.packets.swg.zone.ParametersMessage;
 import network.packets.swg.zone.SetWaypointColor;
+import network.packets.swg.zone.ShowBackpack;
+import network.packets.swg.zone.ShowHelmet;
+import network.packets.swg.zone.UpdatePvpStatusMessage;
+import network.packets.swg.zone.chat.ChatOnConnectAvatar;
+import network.packets.swg.zone.chat.VoiceChatStatus;
+import network.packets.swg.zone.insertion.ChatServerStatus;
+import network.packets.swg.zone.insertion.CmdStartScene;
 import network.packets.swg.zone.spatial.GetMapLocationsMessage;
 import network.packets.swg.zone.spatial.GetMapLocationsResponseMessage;
 import resources.Galaxy;
@@ -68,8 +80,10 @@ import resources.Terrain;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.ProfTemplateData;
 import resources.config.ConfigFile;
+import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.SWGObject;
+import resources.objects.creature.CreatureMood;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
 import resources.objects.tangible.TangibleObject;
@@ -78,27 +92,34 @@ import resources.objects.waypoint.WaypointObject.WaypointColor;
 import resources.player.AccessLevel;
 import resources.player.Player;
 import resources.player.PlayerEvent;
+import resources.player.PlayerFlags;
 import resources.player.PlayerState;
-import resources.services.Config;
+import resources.server_info.Config;
+import resources.server_info.Log;
 import resources.zone.NameFilter;
 import services.objects.ObjectManager;
 import utilities.namegen.SWGNameGenerator;
 
 public class ZoneService extends Service {
-	
-	private SWGNameGenerator nameGenerator;
-	private Map <String, ProfTemplateData> profTemplates;
-	private ClientFactory clientFac;
-	private NameFilter nameFilter;
+
+	private final Map <String, Player> lockedNames;
+	private final Map <String, ProfTemplateData> profTemplates;
+	private final ClientFactory clientFac;
+	private final NameFilter nameFilter;
+	private final SWGNameGenerator nameGenerator;
+	private final CharacterCreationRestriction creationRestriction;
 	
 	private PreparedStatement createCharacter;
 	private PreparedStatement getCharacter;
 	private PreparedStatement getLikeCharacterName;
 	
 	public ZoneService() {
+		lockedNames = new HashMap<String, Player>();
+		profTemplates = new ConcurrentHashMap<String, ProfTemplateData>();
 		clientFac = new ClientFactory();
 		nameFilter = new NameFilter("namegen/bad_word_list.txt", "namegen/reserved_words.txt", "namegen/fiction_reserved.txt");
 		nameGenerator = new SWGNameGenerator(nameFilter);
+		creationRestriction = new CharacterCreationRestriction(2);
 	}
 	
 	@Override
@@ -111,7 +132,16 @@ public class ZoneService extends Service {
 		loadProfTemplates();
 		if (!nameFilter.load())
 			System.err.println("Failed to load name filter!");
+		registerForIntent(ZoneInIntent.TYPE);
 		return super.initialize();
+	}
+	
+	@Override
+	public void onIntentReceived(Intent i) {
+		if (i instanceof ZoneInIntent) {
+			ZoneInIntent zii = (ZoneInIntent) i;
+			zoneInPlayer(zii.getPlayer(), zii.getCreature(), zii.getGalaxy());
+		}
 	}
 	
 	public void handlePacket(GalacticIntent intent, Player player, long networkId, Packet p) {
@@ -133,6 +163,53 @@ public class ZoneService extends Service {
 			handleSetWaypointColor(player, (SetWaypointColor) p);
 		if (p instanceof GetMapLocationsMessage)
 			handleMapLocationsResponse(player, (GetMapLocationsMessage) p);
+		if(p instanceof ShowBackpack)
+			handleShowBackpack(player, (ShowBackpack) p);
+		if(p instanceof ShowHelmet)
+			handleShowHelmet(player, (ShowHelmet) p);
+	}
+	
+	private void zoneInPlayer(Player player, CreatureObject creature, String galaxy) {
+		PlayerObject playerObj = creature.getPlayerObject();
+		player.setPlayerState(PlayerState.ZONING_IN);
+		player.setCreatureObject(creature);
+		creature.setOwner(player);
+		playerObj.setOwner(player);
+		
+		sendZonePackets(player, creature);
+		initPlayerBeforeZoneIn(player, creature, playerObj);
+		creature.createObject(player);
+		System.out.printf("[%s] %s is zoning in%n", player.getUsername(), player.getCharacterName());
+		Log.i("ObjectManager", "Zoning in %s with character %s", player.getUsername(), player.getCharacterName());
+		new PlayerEventIntent(player, galaxy, PlayerEvent.PE_ZONE_IN).broadcast();
+	}
+	
+	private void sendZonePackets(Player player, CreatureObject creature) {
+		long objId = creature.getObjectId();
+		Race race = creature.getRace();
+		Location l = creature.getLocation();
+		long time = (long)(ProjectSWG.getCoreTime()/1E3);
+		sendPacket(player, new HeartBeatMessage());
+		sendPacket(player, new ChatServerStatus(true));
+		sendPacket(player, new VoiceChatStatus());
+		sendPacket(player, new ParametersMessage());
+		sendPacket(player, new ChatOnConnectAvatar());
+		sendPacket(player, new CmdStartScene(false, objId, race, l, time));
+		sendPacket(player, new UpdatePvpStatusMessage(creature.getPvpType(), creature.getPvpFactionId(), creature.getObjectId()));
+	}
+	
+	private void initPlayerBeforeZoneIn(Player player, CreatureObject creatureObj, PlayerObject playerObj) {
+		playerObj.setStartPlayTime((int) System.currentTimeMillis());
+		creatureObj.setMoodId(CreatureMood.NONE.getMood());
+		playerObj.clearFlagBitmask(PlayerFlags.LD);	// Ziggy: Clear the LD flag in case it wasn't already.
+	}
+	
+	private void handleShowBackpack(Player player, ShowBackpack p) {
+		player.getPlayerObject().setShowBackpack(p.showingBackpack());
+	}
+	
+	private void handleShowHelmet(Player player, ShowHelmet p) {
+		player.getPlayerObject().setShowHelmet(p.showingHelmet());
 	}
 	
 	private void handleMapLocationsResponse(Player player, GetMapLocationsMessage p) {
@@ -173,10 +250,12 @@ public class ZoneService extends Service {
 		player.setPlayerState(PlayerState.ZONED_IN);
 		player.sendPacket(p);
 		System.out.println("[" + player.getUsername() +"] " + player.getCharacterName() + " zoned in");
+		Log.i("ZoneService", "%s with character %s zoned in from %s:%d", player.getUsername(), player.getCharacterName(), p.getAddress(), p.getPort());
 	}
-
+	
 	private void handleClientIdMsg(Player player, ClientIdMsg clientId) {
 		System.out.println("[" + player.getUsername() + "] Connected to the zone server. IP: " + clientId.getAddress() + ":" + clientId.getPort());
+		Log.i("ZoneService", "%s connected to the zone server from %s:%d", player.getUsername(), clientId.getAddress(), clientId.getPort());
 		sendPacket(player.getNetworkId(), new HeartBeatMessage());
 		sendPacket(player.getNetworkId(), new AccountFeatureBits());
 		sendPacket(player.getNetworkId(), new ClientPermissionsMessage());
@@ -194,33 +273,54 @@ public class ZoneService extends Service {
 		ErrorMessage err = getNameValidity(name, player.getAccessLevel() != AccessLevel.PLAYER);
 		if (err == ErrorMessage.NAME_APPROVED_MODIFIED)
 			name = nameFilter.cleanName(name);
+		if (err == ErrorMessage.NAME_APPROVED || err == ErrorMessage.NAME_APPROVED_MODIFIED) {
+			if (!lockName(name, player)) {
+				err = ErrorMessage.NAME_DECLINED_IN_USE;
+			}
+		}
 		sendPacket(player.getNetworkId(), new ClientVerifyAndLockNameResponse(name, err));
 	}
 	
 	private void handleCharCreation(ObjectManager objManager, Player player, ClientCreateCharacter create) {
-		System.out.println("[" + player.getUsername() + "] Create Character: " + create.getName() + ". IP: " + create.getAddress() + ":" + create.getPort());
-		long characterId = createCharacter(objManager, player, create);
-		
 		ErrorMessage err = getNameValidity(create.getName(), player.getAccessLevel() != AccessLevel.PLAYER);
-		if (err == ErrorMessage.NAME_APPROVED && createCharacterInDb(characterId, create.getName(), player)) {
-			sendPacket(player, new CreateCharacterSuccess(characterId));
-			new PlayerEventIntent(player, PlayerEvent.PE_CREATE_CHARACTER).broadcast();
-		} else {
-			NameFailureReason reason = NameFailureReason.NAME_SYNTAX;
-			if (err == ErrorMessage.NAME_APPROVED) { // Then it must have been a database error
+		if (!creationRestriction.isAbleToCreate(player))
+			err = ErrorMessage.NAME_DECLINED_TOO_FAST;
+		if (err == ErrorMessage.NAME_APPROVED) {
+			long characterId = createCharacter(objManager, player, create);
+			if (createCharacterInDb(characterId, create.getName(), player)) {
+				creationRestriction.createdCharacter(player);
+				System.out.println("[" + player.getUsername() + "] Create Character: " + create.getName() + ". IP: " + create.getAddress() + ":" + create.getPort());
+				Log.i("ZoneService", "%s created character %s from %s:%d", player.getUsername(), create.getName(), create.getAddress(), create.getPort());
+				sendPacket(player, new CreateCharacterSuccess(characterId));
+				new PlayerEventIntent(player, PlayerEvent.PE_CREATE_CHARACTER).broadcast();
+				return;
+			}
+			Log.e("ZoneService", "Failed to create character %s for user %s with server error from %s:%d", create.getName(), player.getUsername(), create.getAddress(), create.getPort());
+			objManager.deleteObject(characterId);
+		}
+		sendCharCreationFailure(player, create, err);
+	}
+	
+	private void sendCharCreationFailure(Player player, ClientCreateCharacter create, ErrorMessage err) {
+		NameFailureReason reason = NameFailureReason.NAME_SYNTAX;
+		switch (err) {
+			case NAME_APPROVED:
 				err = ErrorMessage.NAME_DECLINED_INTERNAL_ERROR;
 				reason = NameFailureReason.NAME_RETRY;
-			} else if (err == ErrorMessage.NAME_DECLINED_IN_USE)
-				reason = NameFailureReason.NAME_IN_USE;
-			else if (err == ErrorMessage.NAME_DECLINED_EMPTY)
-				reason = NameFailureReason.NAME_DECLINED_EMPTY;
-			else if (err == ErrorMessage.NAME_DECLINED_FICTIONALLY_INAPPROPRIATE)
+				break;
+			case NAME_DECLINED_FICTIONALLY_INAPPROPRIATE:
 				reason = NameFailureReason.NAME_FICTIONALLY_INAPPRORIATE;
-			else if (err == ErrorMessage.NAME_DECLINED_RESERVED)
-				reason = NameFailureReason.NAME_DEV_RESERVED;
-			System.err.println("ZoneService: Unable to create character [Name: " + create.getName() + "  User: " + player.getUsername() + "] and put into database! Reason: " + err);
-			sendPacket(player, new CreateCharacterFailure(reason));
+				break;
+			case NAME_DECLINED_IN_USE:   reason = NameFailureReason.NAME_IN_USE; break;
+			case NAME_DECLINED_EMPTY:    reason = NameFailureReason.NAME_DECLINED_EMPTY; break;
+			case NAME_DECLINED_RESERVED: reason = NameFailureReason.NAME_DEV_RESERVED; break;
+			case NAME_DECLINED_TOO_FAST: reason = NameFailureReason.NAME_TOO_FAST; break;
+			default:
+				break;
 		}
+		System.err.println("ZoneService: Unable to create character [Name: " + create.getName() + "  User: " + player.getUsername() + "] and put into database! Reason: " + err);
+		Log.e("ZoneService", "Failed to create character %s for user %s with error %s and reason %s from %s:%d", create.getName(), player.getUsername(), err, reason, create.getAddress(), create.getPort());
+		sendPacket(player, new CreateCharacterFailure(reason));
 	}
 	
 	private boolean createCharacterInDb(long characterId, String name, Player player) {
@@ -304,7 +404,7 @@ public class ZoneService extends Service {
 		
 		creatureObj.setVolume(0x000F4240);
 		creatureObj.setOwner(player);
-		creatureObj.setSlot("ghost", playerObj);
+		creatureObj.addObject(playerObj); // ghost slot
 		playerObj.setAdminTag(player.getAccessLevel());
 		playerObj.setOwner(player);
 		player.setCreatureObject(creatureObj);
@@ -336,15 +436,17 @@ public class ZoneService extends Service {
 		if (hair.isEmpty())
 			return;
 		TangibleObject hairObj = createTangible(objManager, ClientFactory.formatToSharedFile(hair));
-		
+		hairObj.getContainerPermissions().addDefaultWorldPermissions();
 		hairObj.setAppearanceData(customization);
-		creatureObj.setSlot("hair", hairObj);
+
+		creatureObj.addObject(hairObj); // slot = hair
 		creatureObj.addEquipment(hairObj);
 	}
 	
 	private void setCreatureObjectValues(ObjectManager objManager, CreatureObject creatureObj, ClientCreateCharacter create) {
 		TangibleObject inventory	= createTangible(objManager, "object/tangible/inventory/shared_character_inventory.iff");
 		TangibleObject datapad		= createTangible(objManager, "object/tangible/datapad/shared_character_datapad.iff");
+		TangibleObject apprncInventory = createTangible(objManager, "object/tangible/inventory/shared_appearance_inventory.iff");
 		
 		creatureObj.setRace(Race.getRaceByFile(create.getRace()));
 		creatureObj.setAppearanceData(create.getCharCustomization());
@@ -352,17 +454,24 @@ public class ZoneService extends Service {
 		creatureObj.setName(create.getName());
 		creatureObj.setPvpType(20);
 		creatureObj.getSkills().add("species_" + creatureObj.getRace().getSpecies());
-		creatureObj.setSlot("inventory", inventory);
-		creatureObj.setSlot("datapad", datapad);
+
+		creatureObj.addObject(inventory); // slot = inventory
+		creatureObj.addObject(datapad); // slot = datapad
+		creatureObj.addObject(apprncInventory); // slot = appearance_inventory
 		
 		creatureObj.addEquipment(inventory);
 		creatureObj.addEquipment(datapad);
+		creatureObj.addEquipment(apprncInventory);
+
+		creatureObj.getContainerPermissions().addDefaultWorldPermissions();
 	}
 	
 	private void setPlayerObjectValues(PlayerObject playerObj, ClientCreateCharacter create) {
 		playerObj.setProfession(create.getProfession());
 		Calendar date = Calendar.getInstance();
 		playerObj.setBornDate(date.get(Calendar.YEAR), date.get(Calendar.MONTH) + 1, date.get(Calendar.DAY_OF_MONTH));
+
+		playerObj.getContainerPermissions().addDefaultWorldPermissions();
 	}
 	
 	private void handleGalaxyLoopTimesRequest(Player player, GalaxyLoopTimesRequest req) {
@@ -372,15 +481,17 @@ public class ZoneService extends Service {
 	private void createStarterClothing(ObjectManager objManager, CreatureObject player, String race, String profession) {
 		if (player.getSlottedObject("inventory") == null)
 			return;
-		
-		for (String template : profTemplates.get(profession).getItems(ClientFactory.formatToSharedFile(race)))
-			player.equipItem(createTangible(objManager, template));
+
+		for (String template : profTemplates.get(profession).getItems(ClientFactory.formatToSharedFile(race))) {
+			TangibleObject item = createTangible(objManager, template);
+			// Move the new item to the player's clothing slots and add to equipment list
+			item.moveToContainer(player, player);
+			player.addEquipment(item);
+		}
 
 	}
 	
 	private void loadProfTemplates() {
-		profTemplates = new ConcurrentHashMap<String, ProfTemplateData>();
-		
 		profTemplates.put("crafting_artisan", (ProfTemplateData) clientFac.getInfoFromFile("creation/profession_defaults_combat_brawler.iff"));
 		profTemplates.put("combat_brawler", (ProfTemplateData) clientFac.getInfoFromFile("creation/profession_defaults_combat_brawler.iff"));
 		profTemplates.put("social_entertainer", (ProfTemplateData) clientFac.getInfoFromFile("creation/profession_defaults_social_entertainer.iff"));
@@ -388,6 +499,46 @@ public class ZoneService extends Service {
 		profTemplates.put("science_medic", (ProfTemplateData) clientFac.getInfoFromFile("creation/profession_defaults_science_medic.iff"));
 		profTemplates.put("outdoors_scout", (ProfTemplateData) clientFac.getInfoFromFile("creation/profession_defaults_outdoors_scout.iff"));
 		profTemplates.put("jedi", (ProfTemplateData) clientFac.getInfoFromFile("creation/profession_defaults_jedi.iff"));
+	}
+	
+	private boolean lockName(String name, Player player) {
+		String firstName = name.split(" ", 2)[0].toLowerCase(Locale.ENGLISH);
+		if (isLocked(firstName))
+			return false;
+		synchronized (lockedNames) {
+			unlockName(player);
+			lockedNames.put(firstName, player);
+			Log.i("ZoneService", "Locked name %s for user %s", firstName, player.getUsername());
+		}
+		return true;
+	}
+	
+	private void unlockName(Player player) {
+		synchronized (lockedNames) {
+			String fName = null;
+			for (Entry <String, Player> e : lockedNames.entrySet()) {
+				Player locked = e.getValue();
+				if (locked != null && locked.equals(player)) {
+					fName = e.getKey();
+					break;
+				}
+			}
+			if (fName != null) {
+				if (lockedNames.remove(fName) != null)
+					Log.i("ZoneService", "Unlocked name %s for user %s", fName, player.getUsername());
+			}
+		}
+	}
+	
+	private boolean isLocked(String firstName) {
+		Player player = null;
+		synchronized (lockedNames) {
+			player = lockedNames.get(firstName);
+		}
+		if (player == null)
+			return false;
+		PlayerState state = player.getPlayerState();
+		return state != PlayerState.DISCONNECTED && state != PlayerState.LOGGED_OUT;
 	}
 	
 	private Location getStartLocation(String start) {

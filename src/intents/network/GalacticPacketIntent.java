@@ -25,26 +25,56 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package intents.swgobject_events;
+package intents.network;
 
-import resources.Location;
-import resources.objects.SWGObject;
+import intents.GalacticIntent;
+import network.packets.Packet;
+import resources.network.ServerType;
 
-public class SWGObjectMovedIntent extends SWGObjectEventIntent {
+public class GalacticPacketIntent extends GalacticIntent {
 	
-	private Location oldLocation;
+	public static final String TYPE = "GalacticPacketIntent";
 	
-	public SWGObjectMovedIntent(SWGObject object, Location oldLocation) {
-		super(object, SWGObjectEventIntent.Event.SOE_UPDATE_LOCATION);
-		this.oldLocation = oldLocation;
+	private Packet packet;
+	private ServerType type;
+	private long networkId;
+	
+	public GalacticPacketIntent(InboundPacketIntent i) {
+		super(TYPE);
+		setPacket(i.getPacket());
+		setServerType(i.getServerType());
+		setNetworkId(i.getNetworkId());
 	}
 	
-	public Location getOldLocation() {
-		return oldLocation;
+	public GalacticPacketIntent(ServerType type, Packet p, long networkId) {
+		super(TYPE);
+		setPacket(p);
+		setServerType(type);
+		setNetworkId(networkId);
+	}
+
+	public void setPacket(Packet p) {
+		this.packet = p;
 	}
 	
-	public Location getNewLocation() {
-		return getObject().getLocation();
+	public void setServerType(ServerType type) {
+		this.type = type;
+	}
+	
+	public void setNetworkId(long networkId) {
+		this.networkId = networkId;
+	}
+	
+	public Packet getPacket() {
+		return packet;
+	}
+	
+	public ServerType getServerType() {
+		return type;
+	}
+	
+	public long getNetworkId() {
+		return networkId;
 	}
 	
 }

@@ -25,20 +25,20 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package intents;
+package intents.network;
 
 import resources.control.Intent;
 import resources.network.ServerType;
 import resources.network.UDPServer.UDPPacket;
 
-public class OutboundUdpPacketIntent extends Intent {
+public class InboundUdpPacketIntent extends Intent {
 	
-	public static final String TYPE = "OutboundUdpPacketIntent";
+	public static final String TYPE = "InboundUdpPacketIntent";
 	
 	private UDPPacket packet;
 	private ServerType type;
 	
-	public OutboundUdpPacketIntent(ServerType type, UDPPacket p) {
+	public InboundUdpPacketIntent(ServerType type, UDPPacket p) {
 		super(TYPE);
 		setPacket(p);
 		setServerType(type);

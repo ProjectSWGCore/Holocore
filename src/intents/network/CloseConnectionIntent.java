@@ -25,55 +25,49 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package intents;
+package intents.network;
 
-import network.packets.Packet;
-import resources.network.ServerType;
+import network.packets.soe.Disconnect.DisconnectReason;
+import resources.control.Intent;
 
-public class GalacticPacketIntent extends GalacticIntent {
+
+public class CloseConnectionIntent extends Intent {
 	
-	public static final String TYPE = "GalacticPacketIntent";
+	public static final String TYPE = "CloseConnectionIntent";
 	
-	private Packet packet;
-	private ServerType type;
+	private int connId;
 	private long networkId;
+	private DisconnectReason reason;
 	
-	public GalacticPacketIntent(InboundPacketIntent i) {
+	public CloseConnectionIntent(int connId, long networkId, DisconnectReason reason) {
 		super(TYPE);
-		setPacket(i.getPacket());
-		setServerType(i.getServerType());
-		setNetworkId(i.getNetworkId());
-	}
-	
-	public GalacticPacketIntent(ServerType type, Packet p, long networkId) {
-		super(TYPE);
-		setPacket(p);
-		setServerType(type);
+		setConnectionId(connId);
 		setNetworkId(networkId);
-	}
-
-	public void setPacket(Packet p) {
-		this.packet = p;
+		setReason(reason);
 	}
 	
-	public void setServerType(ServerType type) {
-		this.type = type;
+	public void setConnectionId(int connId) {
+		this.connId = connId;
 	}
 	
 	public void setNetworkId(long networkId) {
 		this.networkId = networkId;
 	}
 	
-	public Packet getPacket() {
-		return packet;
+	public void setReason(DisconnectReason reason) {
+		this.reason = reason;
 	}
 	
-	public ServerType getServerType() {
-		return type;
+	public int getConnectionId() {
+		return connId;
 	}
 	
 	public long getNetworkId() {
 		return networkId;
+	}
+	
+	public DisconnectReason getReason() {
+		return reason;
 	}
 	
 }

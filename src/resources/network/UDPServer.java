@@ -63,12 +63,12 @@ public class UDPServer {
 	public UDPServer(InetAddress bindAddr, int port, int packetSize) throws SocketException {
 		this.callback = null;
 		this.packetSize = packetSize;
-		this.port = port;
 		inbound = new LinkedBlockingQueue<UDPPacket>();
 		if (port > 0)
 			socket = new DatagramSocket(port, bindAddr);
 		else
 			socket = new DatagramSocket();
+		this.port = socket.getLocalPort();
 		updater = new UDPUpdater();
 		updater.start();
 	}

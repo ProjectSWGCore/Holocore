@@ -27,8 +27,8 @@
 ***********************************************************************************/
 package network;
 
-import intents.CloseConnectionIntent;
-import intents.OutboundPacketIntent;
+import intents.network.CloseConnectionIntent;
+import intents.network.OutboundPacketIntent;
 
 import java.util.HashMap;
 import java.util.LinkedList;

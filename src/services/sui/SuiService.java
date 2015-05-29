@@ -41,7 +41,7 @@ import network.packets.swg.zone.object_controller.ObjectMenuRequest;
 import network.packets.swg.zone.object_controller.ObjectMenuResponse;
 import network.packets.swg.zone.server_ui.SuiCreatePageMessage;
 import network.packets.swg.zone.server_ui.SuiEventNotification;
-import intents.GalacticPacketIntent;
+import intents.network.GalacticPacketIntent;
 import intents.sui.SuiWindowIntent;
 import intents.sui.SuiWindowIntent.SuiWindowEvent;
 import resources.control.Intent;

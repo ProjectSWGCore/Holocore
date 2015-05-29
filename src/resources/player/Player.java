@@ -185,8 +185,14 @@ public class Player implements Serializable, Comparable<Player> {
 	
 	@Override
 	public boolean equals(Object o) {
+		if (o == null)
+			return false;
 		if (!(o instanceof Player))
 			return false;
+		if (creatureObject == null)
+			return this == o;
+		if (((Player)o).getCreatureObject() == null)
+			return this == o;
 		return creatureObject.equals(((Player)o).getCreatureObject());
 	}
 	

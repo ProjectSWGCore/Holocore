@@ -39,8 +39,8 @@ import resources.config.ConfigFile;
 import resources.network.UDPServer;
 import resources.network.UDPServer.UDPCallback;
 import resources.network.UDPServer.UDPPacket;
+import resources.server_info.Config;
 import resources.server_info.DataManager;
-import resources.services.Config;
 
 final class ServerPublicInterface {
 	

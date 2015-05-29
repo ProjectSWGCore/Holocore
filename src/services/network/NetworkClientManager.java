@@ -27,10 +27,10 @@
 ***********************************************************************************/
 package services.network;
 
-import intents.CloseConnectionIntent;
-import intents.InboundPacketIntent;
-import intents.InboundUdpPacketIntent;
-import intents.OutboundPacketIntent;
+import intents.network.CloseConnectionIntent;
+import intents.network.InboundPacketIntent;
+import intents.network.InboundUdpPacketIntent;
+import intents.network.OutboundPacketIntent;
 
 import java.net.InetAddress;
 import java.nio.ByteBuffer;
@@ -76,8 +76,11 @@ public class NetworkClientManager extends Manager {
 	}
 	
 	@Override
-	public boolean terminate() {
-		return super.terminate();
+	public boolean stop() {
+		for (NetworkClient client : networkClients.values()) {
+			client.sendPacket(new Disconnect(client.getConnectionId(), DisconnectReason.APPLICATION));
+		}
+		return super.stop();
 	}
 	
 	public void onIntentReceived(Intent i) {
@@ -128,7 +131,6 @@ public class NetworkClientManager extends Manager {
 	}
 	
 	private void disconnectSession(long networkId, InetAddress addr, int port, DisconnectReason reason) {
-		System.out.println("Client Disconnected (" + addr + ":" + port + ") Reason: " + reason);
 		removeClient(networkId, addr, port);
 	}
 	

@@ -47,7 +47,7 @@ public abstract class ObjectController extends SWGPacket {
 	public ObjectController(long objectId, int controllerCrc) {
 		this.objectId = objectId;
 		this.controllerCrc = controllerCrc;
-		this.update = 11;
+		this.update = 0x1B;
 	}
 	
 	protected final void decodeHeader(ByteBuffer data) {
@@ -62,7 +62,7 @@ public abstract class ObjectController extends SWGPacket {
 	}
 	
 	protected final void encodeHeader(ByteBuffer data) {
-		addShort(data, 2);
+		addShort(data, 5);
 		addInt(  data, CRC);
 		addInt  (data, update);
 		addInt(  data, controllerCrc);

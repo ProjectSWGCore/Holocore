@@ -25,49 +25,55 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package intents;
+package intents.server;
 
-import network.packets.soe.Disconnect.DisconnectReason;
+import java.util.concurrent.TimeUnit;
+
 import resources.control.Intent;
+import resources.control.ServerStatus;
 
-
-public class CloseConnectionIntent extends Intent {
+public class ServerStatusIntent extends Intent {
 	
-	public static final String TYPE = "CloseConnectionIntent";
+	public static final String TYPE = "ServerStatusIntent";
 	
-	private int connId;
-	private long networkId;
-	private DisconnectReason reason;
+	private ServerStatus status;
+	private long time;
+	private TimeUnit timeUnit;
 	
-	public CloseConnectionIntent(int connId, long networkId, DisconnectReason reason) {
+	public ServerStatusIntent() {
 		super(TYPE);
-		setConnectionId(connId);
-		setNetworkId(networkId);
-		setReason(reason);
+		setStatus(null);
 	}
 	
-	public void setConnectionId(int connId) {
-		this.connId = connId;
+	public ServerStatusIntent(ServerStatus status) {
+		super(TYPE);
+		setStatus(status);
 	}
 	
-	public void setNetworkId(long networkId) {
-		this.networkId = networkId;
+	public ServerStatusIntent(ServerStatus status, long time, TimeUnit timeUnit) {
+		this(status);
+		setTime(time);
+		this.timeUnit = timeUnit;
 	}
 	
-	public void setReason(DisconnectReason reason) {
-		this.reason = reason;
+	public void setTime(long time) {
+		this.time = time;
+	}
+
+	public long getTime() {
+		return time;
 	}
 	
-	public int getConnectionId() {
-		return connId;
+	public void setStatus(ServerStatus status) {
+		this.status = status;
 	}
 	
-	public long getNetworkId() {
-		return networkId;
+	public ServerStatus getStatus() {
+		return status;
 	}
-	
-	public DisconnectReason getReason() {
-		return reason;
+
+	public TimeUnit getTimeUnit() {
+		return timeUnit;
 	}
 	
 }
