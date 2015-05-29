@@ -72,13 +72,13 @@ public class NetworkListenerService extends Service {
 	
 	@Override
 	public boolean initialize() {
-		Config primary = getConfig(ConfigFile.PRIMARY);
-		int packetSize = primary.getInt("MAX-PACKET-SIZE", 496);
-		InetAddress loginBind = getBindAddr(primary, "LOGIN-BIND-ADDR", "BIND-ADDR");
-		InetAddress zoneBind = getBindAddr(primary, "ZONE-BIND-ADDR", "BIND-ADDR");
-		InetAddress pingBind = getBindAddr(primary, "PING-BIND-ADDR", "BIND-ADDR");
+		Config network = getConfig(ConfigFile.NETWORK);
+		int packetSize = network.getInt("MAX-PACKET-SIZE", 496);
+		InetAddress loginBind = getBindAddr(network, "LOGIN-BIND-ADDR", "BIND-ADDR");
+		InetAddress zoneBind = getBindAddr(network, "ZONE-BIND-ADDR", "BIND-ADDR");
+		InetAddress pingBind = getBindAddr(network, "PING-BIND-ADDR", "BIND-ADDR");
 		boolean init = true;
-		init = login.initialize(loginBind, primary.getInt("LOGIN-PORT", 44453), packetSize) && init;
+		init = login.initialize(loginBind, network.getInt("LOGIN-PORT", 44453), packetSize) && init;
 		init = zone.initialize(zoneBind, galaxy.getZonePort(), packetSize) && init;
 		init = ping.initialize(pingBind, galaxy.getPingPort(), packetSize) && init;
 		return super.initialize() && isOperational() && init;

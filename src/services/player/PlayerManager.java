@@ -35,6 +35,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import network.packets.Packet;
+import network.packets.soe.SessionRequest;
 import network.packets.soe.Disconnect.DisconnectReason;
 import network.packets.swg.login.ClientIdMsg;
 import network.packets.swg.zone.insertion.SelectCharacter;
@@ -238,7 +239,8 @@ public class PlayerManager extends Manager {
 				loginService.handlePacket(gpi, player, packet);
 			else if (type == ServerType.ZONE)
 				zoneService.handlePacket(gpi, player, networkId, packet);
-		}
+		} else if (type == ServerType.ZONE && packet instanceof SessionRequest)
+			zoneService.handlePacket(gpi, player, networkId, packet);
 	}
 	
 	private void onNotifyPlayersPacketIntent(NotifyPlayersPacketIntent nppi) {
