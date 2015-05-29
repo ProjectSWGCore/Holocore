@@ -253,10 +253,12 @@ public class ObjectManager extends Manager {
 			if (parent instanceof CreatureObject) {
 				((CreatureObject) parent).removeEquipment(object);
 			}
-			parent.removeObject(object);
-		}
+			object.sendObserversAndSelf(new SceneDestroyObject(objId));
 
-		object.sendObservers(new SceneDestroyObject(objId));
+			parent.removeObject(object);
+		} else {
+			object.sendObservers(new SceneDestroyObject(objId));
+		}
 
 		// Finally, remove from the awareness tree
 		deleteObject(object.getObjectId());

@@ -122,7 +122,7 @@ public class NetworkClientManager extends Manager {
 		outPacket.setCrcLength(2);
 		outPacket.setEncryptionFlag((short) 1);
 		outPacket.setXorLength((byte) 4);
-		outPacket.setUdpSize(getConfig(ConfigFile.PRIMARY).getInt("MAX-PACKET-SIZE", 496));
+		outPacket.setUdpSize(getConfig(ConfigFile.NETWORK).getInt("MAX-PACKET-SIZE", 496));
 		sendPacket(client.getNetworkId(), outPacket);
 	}
 	

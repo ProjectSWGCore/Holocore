@@ -50,6 +50,7 @@ import resources.network.BaselineBuilder;
 import resources.network.DeltaBuilder;
 import resources.player.Player;
 import resources.player.PlayerState;
+import resources.server_info.Log;
 import utilities.Encoder.StringType;
 
 public class SWGObject implements Serializable, Comparable<SWGObject> {
@@ -110,19 +111,17 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 		int arrangementId = getArrangementId(object);
 		if (arrangementId == -1) {
 			containedObjects.put(object.getObjectId(), object);
-			object.parent = this;
-			object.containerPermissions.setOwner(objectId);
-			return true;
-		}
-		// Not a child object, so time to check the slots!
+		} else {
+			// Not a child object, so time to check the slots!
 
-		// Check to make sure this object is able to go into a slot in the parent
-		List<String> requiredSlots = object.getArrangement().get(arrangementId - 4);
-		// Note that some objects don't have a descriptor, meaning it has no slots
+			// Check to make sure this object is able to go into a slot in the parent
+			List<String> requiredSlots = object.getArrangement().get(arrangementId - 4);
+			// Note that some objects don't have a descriptor, meaning it has no slots
 
-		// Add object to the slot
-		for (String requiredSlot : requiredSlots) {
-			slots.put(requiredSlot, object);
+			// Add object to the slot
+			for (String requiredSlot : requiredSlots) {
+				slots.put(requiredSlot, object);
+			}
 		}
 
 		object.parent = this;
@@ -139,13 +138,11 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 		// This object is a container object, so remove it from the container
 		if (object.getSlotArrangement() == -1) {
 			containedObjects.remove(object.objectId);
-			object.parent = null;
-			return;
-		}
-
-		for (String slot : (slotArrangement == -1 ?
-				object.getArrangement().get(0) : object.getArrangement().get(slotArrangement - 4))) {
-			slots.put(slot, null);
+		} else {
+			for (String slot : (slotArrangement == -1 ?
+					object.getArrangement().get(0) : object.getArrangement().get(slotArrangement - 4))) {
+				slots.put(slot, null);
+			}
 		}
 
 		object.parent = null;
@@ -175,7 +172,7 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 		// TODO Slot occupation check, old version was not working properly, always returning SLOT_OCCUPIED
 
 		// Get a pre-parent-removal list of the observers so we can send create/destroy/update messages
-		List<SWGObject> oldObservers = getObjectsAware();
+		List<SWGObject> oldObservers = getChildrenAwareness();
 
 		// Remove this object from the old parent if one exists
 		if (parent != null) {
@@ -185,7 +182,7 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 		container.addObject(this);
 
 		// Observer notification
-		sendUpdatedContainment(oldObservers, new ArrayList<>(container.getObjectsAware()));
+		sendUpdatedContainment(oldObservers, new ArrayList<>(container.getChildrenAwareness()));
 
 		return ContainerResult.SUCCESS;
 	}
@@ -472,6 +469,7 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 	}
 	
 	protected void createObject(Player target) {
+		Log.i("ContainerPermissions", "Sending baselines for %s with owner %s to %s", this, this.getOwner(), target);
 		sendSceneCreateObject(target);
 		createChildrenObjects(target);
 		target.sendPacket(new SceneEndBaselines(getObjectId()));
@@ -487,14 +485,14 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 			awarenessOutOfRange(o);
 		}
 	}
-	
+
 	public List <SWGObject> getObjectsAware() {
 		synchronized (objectsAware) {
-			return Collections.unmodifiableList(getChildrenAwareness());
+			return Collections.unmodifiableList(objectsAware);
 		}
 	}
 
-	private List<SWGObject> getChildrenAwareness() {
+	public List<SWGObject> getChildrenAwareness() {
 		List<SWGObject> awareness = new ArrayList<>(objectsAware);
 
 		if (getParent() != null && !(awareness.contains(getParent())))
@@ -519,6 +517,8 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 				if (p == null || p.getPlayerState() != PlayerState.ZONED_IN)
 					continue;
 				p.sendPacket(packets);
+
+				//System.out.println("Sent " + packets + " for " + this + " to objAware " + obj);
 			}
 
 			List<SWGObject> childrenAwareness = getChildrenAwareness();
@@ -526,19 +526,23 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 			childrenAwareness.remove(this); // Remove self since only observers being notified
 
 			for (SWGObject childObserver : childrenAwareness) {
-				if (childObserver == null)
+				if (childObserver == null || childObserver == this)
 					continue;
 
 				Player p = childObserver.getOwner();
-				if (p == null || p.getPlayerState() != PlayerState.ZONED_IN)
+				if (p == null || getOwner() == p || p.getPlayerState() != PlayerState.ZONED_IN)
 					continue;
 				p.sendPacket(packets);
+
+				//System.out.println("Sent " + packets + " of " + this + " to child " + childObserver);
 			}
 
 			SWGObject parent = getParent();
 			
-			if(parent != null)
+			if(parent != null) {
 				parent.sendObservers(packets);
+				//System.out.println("Sent " + packets + " to observers of " + this);
+			}
 		}
 	}
 	
