@@ -96,7 +96,7 @@ public class LoginService extends Service {
 		getGalaxies = local.prepareStatement("SELECT * FROM galaxies");
 		getCharacters = local.prepareStatement("SELECT * FROM characters WHERE userid = ?");
 		deleteCharacter = local.prepareStatement("DELETE FROM CHARACTERS WHERE id = ?");
-		autoLogin = (getConfig(ConfigFile.PRIMARY).getInt("AUTO-LOGIN", 0) == 1 ? true : false);
+		autoLogin = (getConfig(ConfigFile.NETWORK).getInt("AUTO-LOGIN", 0) == 1 ? true : false);
 		return super.initialize();
 	}
 	
@@ -113,14 +113,14 @@ public class LoginService extends Service {
 	}
 	
 	private String getServerString() {
-		Config c = getConfig(ConfigFile.PRIMARY);
+		Config c = getConfig(ConfigFile.NETWORK);
 		String name = c.getString("LOGIN-SERVER-NAME", "LoginServer");
 		int id = c.getInt("LOGIN-SERVER-ID", 1);
 		return name + ":" + id;
 	}
 	
 	private void sendServerInfo(Player player) {
-		Config c = getConfig(ConfigFile.PRIMARY);
+		Config c = getConfig(ConfigFile.NETWORK);
 		String name = c.getString("LOGIN-SERVER-NAME", "LoginServer");
 		int id = c.getInt("LOGIN-SERVER-ID", 1);
 		sendPacket(player.getNetworkId(), new ServerString(name + ":" + id));
@@ -141,7 +141,7 @@ public class LoginService extends Service {
 			System.err.println("Player cannot login when " + player.getPlayerState());
 			return;
 		}
-		final boolean doClientCheck = getConfig(ConfigFile.PRIMARY).getBoolean("LOGIN-VERSION-CHECKS", true);
+		final boolean doClientCheck = getConfig(ConfigFile.NETWORK).getBoolean("LOGIN-VERSION-CHECKS", true);
 		if (doClientCheck)
 			Log.d("LoginService", "Running login checks for %s", id.getUsername());
 		else
@@ -185,7 +185,7 @@ public class LoginService extends Service {
 	private void onSuccessfulLogin(ResultSet user, Player player, LoginClientId id) throws SQLException {
 		player.setUsername(id.getUsername());
 		player.setUserId(user.getInt("id"));
-		int tokenLength = getConfig(ConfigFile.PRIMARY).getInt("SESSION-TOKEN-LENGTH", 24);
+		int tokenLength = getConfig(ConfigFile.NETWORK).getInt("SESSION-TOKEN-LENGTH", 24);
 		byte [] sessionToken = new byte[tokenLength];
 		random.nextBytes(sessionToken);
 		player.setSessionToken(sessionToken);

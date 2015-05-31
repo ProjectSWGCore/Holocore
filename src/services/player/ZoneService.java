@@ -239,7 +239,7 @@ public class ZoneService extends Service {
 	}
 
 	private void sendServerInfo(Galaxy galaxy, long networkId) {
-		Config c = getConfig(ConfigFile.PRIMARY);
+		Config c = getConfig(ConfigFile.NETWORK);
 		String name = c.getString("ZONE-SERVER-NAME", galaxy.getName());
 		int id = c.getInt("ZONE-SERVER-ID", galaxy.getId());
 		sendPacket(networkId, new ServerString(name + ":" + id));

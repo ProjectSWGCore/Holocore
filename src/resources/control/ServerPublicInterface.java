@@ -154,7 +154,7 @@ final class ServerPublicInterface {
 	}
 	
 	private InetAddress getBindAddr() {
-		Config c = DataManager.getInstance().getConfig(ConfigFile.PRIMARY);
+		Config c = DataManager.getInstance().getConfig(ConfigFile.NETWORK);
 		try {
 			if (c.containsKey("BIND-ADDR"))
 				return InetAddress.getByName(c.getString("BIND-ADDR", "127.0.0.1"));

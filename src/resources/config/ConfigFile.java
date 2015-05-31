@@ -28,7 +28,12 @@
 package resources.config;
 
 public enum ConfigFile {
-	PRIMARY	("nge.cfg");
+	/** Meant for general purpose configuration or debugging */
+	PRIMARY	("cfg/nge.cfg"),
+	/** Meant for networking-related configuration. Includes Login and Zone configuration */
+	NETWORK	("cfg/network.cfg"),
+	/** Meant for specific in-game features that may be better disabled or tweaked */
+	FEATURES("cfg/features.cfg");
 	
 	private String filename;
 	
