@@ -3,7 +3,7 @@ import sys
 #Args: name
 def execute(objManager, player, target, args):
 	ghost = player.getPlayerObject()
-	if ghost is None:
+	if ghost is None or target is None:
 		return
 	
 	waypoint = ghost.getWaypoint(target.getObjectId())
