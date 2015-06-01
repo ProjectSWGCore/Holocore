@@ -51,6 +51,7 @@ import resources.control.Manager;
 import resources.objects.SWGObject;
 import resources.objects.buildouts.BuildoutLoader;
 import resources.objects.creature.CreatureObject;
+import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
 import resources.server_info.CachedObjectDatabase;
 import resources.server_info.Config;
@@ -108,13 +109,16 @@ public class ObjectManager extends Manager {
 		if (c.getBoolean("LOAD-BUILDOUTS", false)) {
 			long startLoad = System.nanoTime();
 			System.out.println("ObjectManager: Loading buildouts...");
+			Log.i("ObjectManager", "Loading buildouts...");
 			List <SWGObject> buildouts = null;
 			String terrain = c.getString("LOAD-BUILDOUTS-FOR", "");
 			if (Terrain.doesTerrainExistForName(terrain))
 				buildouts = BuildoutLoader.loadBuildoutsForTerrain(Terrain.getTerrainFromName(terrain));
 			else {
-				if (!terrain.isEmpty())
+				if (!terrain.isEmpty()) {
 					System.err.println("ObjectManager: Unknown terrain '" + terrain + "'");
+					Log.e("ObjectManager", "Unknown terrain: %s", terrain);
+				}
 				buildouts = BuildoutLoader.loadAllBuildouts();
 			}
 			for (SWGObject obj : buildouts) {
@@ -122,6 +126,7 @@ public class ObjectManager extends Manager {
 			}
 			double loadTime = (System.nanoTime() - startLoad) / 1E6;
 			System.out.printf("ObjectManager: Finished loading buildouts. Time: %fms%n", loadTime);
+			Log.i("ObjectManager", "Finished loading buildouts. Time: %fms", loadTime);
 		} else {
 			Log.w("ObjectManager", "Did not load buildouts. Reason: Disabled.");
 			System.out.println("ObjectManager: Buildouts not loaded. Reason: Disabled!");
@@ -132,7 +137,7 @@ public class ObjectManager extends Manager {
 		loadObject(obj);
 		List <SWGObject> idCollisions = buildoutObjects.get(obj.getObjectId());
 		if (idCollisions == null)
-			buildoutObjects.put(obj.getObjectId(), idCollisions = new ArrayList<SWGObject>());
+			buildoutObjects.put(obj.getObjectId(), idCollisions = new LinkedList<SWGObject>());
 		boolean duplicate = false;
 		for (SWGObject dup : idCollisions) {
 			if (dup.getLocation().equals(obj.getLocation()) && dup.getTemplate().equals(obj.getTemplate())) {
@@ -140,8 +145,12 @@ public class ObjectManager extends Manager {
 				break;
 			}
 		}
-		if (!duplicate)
+		if (!duplicate) {
 			idCollisions.add(obj);
+			if (obj instanceof TangibleObject) {
+				objectAwareness.add(obj);
+			}
+		}
 	}
 	
 	private void loadObject(SWGObject obj) {
