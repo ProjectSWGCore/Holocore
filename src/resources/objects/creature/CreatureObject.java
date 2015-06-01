@@ -27,7 +27,6 @@
 ***********************************************************************************/
 package resources.objects.creature;
 
-import network.packets.swg.zone.SceneEndBaselines;
 import network.packets.swg.zone.UpdatePostureMessage;
 import network.packets.swg.zone.UpdatePvpStatusMessage;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
@@ -105,7 +104,7 @@ public class CreatureObject extends TangibleObject {
 
 
 	public CreatureObject(long objectId) {
-		super(objectId);
+		super(objectId, BaselineType.CREO);
 		initMaxAttributes();
 		initCurrentAttributes();
 		initBaseAttributes();
@@ -623,9 +622,7 @@ public class CreatureObject extends TangibleObject {
 		return (super.hashCode() * 7 + posture.getId()) * 13 + race.toString().hashCode();
 	}
 	
-	public void createObject(Player target) {
-		sendSceneCreateObject(target);
-		
+	public void sendBaselines(Player target) {
 		BaselineBuilder bb = null;
 		
 		if (getOwner() == target) {
@@ -657,10 +654,6 @@ public class CreatureObject extends TangibleObject {
 			createBaseline9(target, bb);
 			bb.sendTo(target);
 		}
-		
-		
-		createChildrenObjects(target);
-		target.sendPacket(new SceneEndBaselines(getObjectId()));
 	}
 	
 	protected void createChildrenObjects(Player target) {

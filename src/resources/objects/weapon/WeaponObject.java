@@ -42,7 +42,7 @@ public class WeaponObject extends TangibleObject implements Encodable{
 	private int type = WeaponType.UNARMED;
 	
 	public WeaponObject(long objectId) {
-		super(objectId);
+		super(objectId, BaselineType.WEAO);
 		setComplexity(0);
 	}
 	
@@ -86,9 +86,7 @@ public class WeaponObject extends TangibleObject implements Encodable{
 		return super.hashCode() * 7 + type;
 	}
 	
-	protected void createObject(Player target) {
-		super.sendSceneCreateObject(target);
-		
+	protected void sendBaselines(Player target) {
 		BaselineBuilder bb = new BaselineBuilder(this, BaselineType.WEAO, 3);
 		createBaseline3(target, bb);
 		bb.sendTo(target);

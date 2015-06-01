@@ -27,7 +27,6 @@
 ***********************************************************************************/
 package resources.objects.player;
 
-import network.packets.swg.zone.SceneEndBaselines;
 import network.packets.swg.zone.UpdatePostureMessage;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.collections.SWGList;
@@ -96,7 +95,7 @@ public class PlayerObject extends IntangibleObject {
 	private int startPlayTime;
 	
 	public PlayerObject(long objectId) {
-		super(objectId);
+		super(objectId, BaselineType.PLAY);
 		setVolume(0);
 		initFlags();
 	}
@@ -400,31 +399,6 @@ public class PlayerObject extends IntangibleObject {
 	@Override
 	public int hashCode() {
 		return super.hashCode();
-	}
-	
-	protected void createObject(Player target) {
-		super.sendSceneCreateObject(target);
-		
-		BaselineBuilder bb = new BaselineBuilder(this, BaselineType.PLAY, 3);
-		createBaseline3(target, bb);
-		bb.sendTo(target);
-		
-		bb = new BaselineBuilder(this, BaselineType.PLAY, 6);
-		createBaseline6(target, bb);
-		bb.sendTo(target);
-		
-		if (getOwner() == target) {
-			bb = new BaselineBuilder(this, BaselineType.PLAY, 8);
-			createBaseline8(target, bb);
-			bb.sendTo(target);
-			
-			bb = new BaselineBuilder(this, BaselineType.PLAY, 9);
-			createBaseline9(target, bb);
-			bb.sendTo(target);
-		}
-		
-		createChildrenObjects(target);
-		target.sendPacket(new SceneEndBaselines(getObjectId()));
 	}
 	
 	public void createChildrenObjects(Player target) {
