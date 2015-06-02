@@ -118,7 +118,9 @@ public class ClientFactory {
 		try {
 			File f = new File("./clientdata/" + file);
 			if (!f.exists()) {
-				System.out.println("./clientdata/"+ file + " not found!");
+				f = new File("./serverdata/" + file);
+				if (!f.exists())
+					System.out.println(file + " not found!");
 				return null;
 			}
 			
