@@ -58,16 +58,20 @@ import resources.server_info.Config;
 import resources.server_info.Log;
 import resources.server_info.ObjectDatabase;
 import resources.server_info.ObjectDatabase.Traverser;
+import services.map.MapService;
 import services.player.PlayerManager;
 
 public class ObjectManager extends Manager {
-	
+
+	private final MapService mapService;
+
 	private final Map <Long, List <SWGObject>> buildoutObjects;
 	private final ObjectDatabase<SWGObject> objects;
 	private final ObjectAwareness objectAwareness;
 	private long maxObjectId;
 	
 	public ObjectManager() {
+		mapService = new MapService();
 		buildoutObjects = new HashMap<Long, List<SWGObject>>();
 		objects = new CachedObjectDatabase<SWGObject>("odb/objects.db");
 		objectAwareness = new ObjectAwareness();
@@ -76,6 +80,7 @@ public class ObjectManager extends Manager {
 	
 	@Override
 	public boolean initialize() {
+		addChildService(mapService);
 		registerForIntent(GalacticPacketIntent.TYPE);
 		registerForIntent(PlayerEventIntent.TYPE);
 		registerForIntent(ObjectTeleportIntent.TYPE);
@@ -151,6 +156,8 @@ public class ObjectManager extends Manager {
 				objectAwareness.add(obj);
 			}
 		}
+
+		mapService.addMapLocation(obj, MapService.MapType.STATIC);
 	}
 	
 	private void loadObject(SWGObject obj) {
