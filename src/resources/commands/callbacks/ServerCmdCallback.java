@@ -44,12 +44,17 @@ import resources.sui.SuiListBox;
 import resources.sui.SuiListBox.ListBoxType;
 import resources.sui.SuiMessageBox;
 import resources.sui.SuiMessageBox.MessageBoxType;
+import resources.utilities.Scripts;
 import services.galaxy.GalacticManager;
 
 public class ServerCmdCallback implements ICmdCallback {
 
 	@Override
 	public void execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
+		if (args.equals("debug") || args.startsWith("debug ")) {
+			debug(galacticManager, player, target, args);
+			return;
+		}
 		SuiListBox listBox = new SuiListBox(player, ListBoxType.OK_CANCEL, "Server Management", "Select the management function you wish to perform from the list.");
 		
 		listBox.addListItem("Kick Player", 0);
@@ -60,6 +65,10 @@ public class ServerCmdCallback implements ICmdCallback {
 		
 		listBox.addItemSelectionCallback(0, new ServerSuiCallback());
 		listBox.display();
+	}
+	
+	private void debug(GalacticManager galacticManager, Player player, SWGObject target, String args) {
+		Scripts.execute("commands/generic/debug.py", "execute", galacticManager, player, target, args);
 	}
 	
 	private static class ServerSuiCallback implements ISuiCallback {
