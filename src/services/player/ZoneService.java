@@ -137,6 +137,12 @@ public class ZoneService extends Service {
 	}
 	
 	@Override
+	public boolean start() {
+		creationRestriction.setCreationsPerPeriod(getConfig(ConfigFile.PRIMARY).getInt("GALAXY-MAX-CHARACTERS", 2));
+		return super.start();
+	}
+	
+	@Override
 	public void onIntentReceived(Intent i) {
 		if (i instanceof ZoneInIntent) {
 			ZoneInIntent zii = (ZoneInIntent) i;
