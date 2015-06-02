@@ -119,9 +119,10 @@ public class ClientFactory {
 			File f = new File("./clientdata/" + file);
 			if (!f.exists()) {
 				f = new File("./serverdata/" + file);
-				if (!f.exists())
+				if (!f.exists()) {
 					System.out.println(file + " not found!");
-				return null;
+					return null;
+				}
 			}
 			
 			stream = new FileInputStream(f);
