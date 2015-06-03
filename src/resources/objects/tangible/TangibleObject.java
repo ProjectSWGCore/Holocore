@@ -27,7 +27,6 @@
 ***********************************************************************************/
 package resources.objects.tangible;
 
-import network.packets.swg.zone.SceneEndBaselines;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.network.BaselineBuilder;
 import resources.objects.SWGObject;
@@ -50,7 +49,11 @@ public class TangibleObject extends SWGObject {
 	private byte []	objectEffects	= new byte[0];
 	
 	public TangibleObject(long objectId) {
-		super(objectId);
+		super(objectId, BaselineType.TANO);
+	}
+	
+	public TangibleObject(long objectId, BaselineType objectType) {
+		super(objectId, objectType);
 	}
 	
 	public byte [] getAppearanceData() {
@@ -149,35 +152,6 @@ public class TangibleObject extends SWGObject {
 	@Override
 	public int hashCode() {
 		return super.hashCode();
-	}
-	
-	protected void createObject(Player target) {
-		super.sendSceneCreateObject(target);
-		
-		BaselineBuilder bb = new BaselineBuilder(this, BaselineType.TANO, 3);
-		createBaseline3(target, bb);
-		bb.sendTo(target);
-		
-		bb = new BaselineBuilder(this, BaselineType.TANO, 6);
-		createBaseline6(target, bb);
-		bb.sendTo(target);
-		
-		if (getOwner() == target) {
-			bb = new BaselineBuilder(this, BaselineType.TANO, 8);
-			createBaseline8(target, bb);
-			bb.sendTo(target);
-			
-			bb = new BaselineBuilder(this, BaselineType.TANO, 9);
-			createBaseline9(target, bb);
-			bb.sendTo(target);
-		}
-		
-		createChildrenObjects(target);
-		target.sendPacket(new SceneEndBaselines(getObjectId()));
-	}
-	
-	protected void createChildrenObjects(Player target) {
-		super.createChildrenObjects(target);
 	}
 	
 	public void createBaseline3(Player target, BaselineBuilder bb) {

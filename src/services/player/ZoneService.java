@@ -137,6 +137,12 @@ public class ZoneService extends Service {
 	}
 	
 	@Override
+	public boolean start() {
+		creationRestriction.setCreationsPerPeriod(getConfig(ConfigFile.PRIMARY).getInt("GALAXY-MAX-CHARACTERS", 2));
+		return super.start();
+	}
+	
+	@Override
 	public void onIntentReceived(Intent i) {
 		if (i instanceof ZoneInIntent) {
 			ZoneInIntent zii = (ZoneInIntent) i;
@@ -161,8 +167,6 @@ public class ZoneService extends Service {
 			handleCmdSceneReady(player, (CmdSceneReady) p);
 		if (p instanceof SetWaypointColor)
 			handleSetWaypointColor(player, (SetWaypointColor) p);
-		if (p instanceof GetMapLocationsMessage)
-			handleMapLocationsResponse(player, (GetMapLocationsMessage) p);
 		if(p instanceof ShowBackpack)
 			handleShowBackpack(player, (ShowBackpack) p);
 		if(p instanceof ShowHelmet)
@@ -210,11 +214,6 @@ public class ZoneService extends Service {
 	
 	private void handleShowHelmet(Player player, ShowHelmet p) {
 		player.getPlayerObject().setShowHelmet(p.showingHelmet());
-	}
-	
-	private void handleMapLocationsResponse(Player player, GetMapLocationsMessage p) {
-		// TODO Implement actual handling in GU2, this is to avoid constant map location requests from the client
-		player.sendPacket(new GetMapLocationsResponseMessage(p.getPlanet()));
 	}
 
 	private void handleSetWaypointColor(Player player, SetWaypointColor p) {

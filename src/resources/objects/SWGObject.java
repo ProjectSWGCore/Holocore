@@ -31,7 +31,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.*;
-import java.util.List;
 
 import network.packets.Packet;
 import network.packets.swg.zone.SceneCreateObjectByCrc;
@@ -53,7 +52,7 @@ import resources.player.PlayerState;
 import resources.server_info.Log;
 import utilities.Encoder.StringType;
 
-public class SWGObject implements Serializable, Comparable<SWGObject> {
+public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	
 	private static final long serialVersionUID = 1L;
 
@@ -64,6 +63,7 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 	private final Map <String, String> attributes;
 	private final Map <String, Object> templateAttributes;
 	private final ContainerPermissions containerPermissions;
+	private final BaselineType objectType;
 	private transient List <SWGObject> objectsAware;
 	private List <List <String>> arrangement;
 
@@ -83,10 +83,10 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 	private int		transformCounter = 0;
 	
 	public SWGObject() {
-		this(0);
+		this(0, null);
 	}
 	
-	public SWGObject(long objectId) {
+	public SWGObject(long objectId, BaselineType objectType) {
 		this.objectId = objectId;
 		this.location = new Location();
 		this.objectsAware = new Vector<SWGObject>();
@@ -95,6 +95,7 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 		this.attributes = new LinkedHashMap<String, String>();
 		this.templateAttributes = new HashMap<String, Object>();
 		this.containerPermissions = new ContainerPermissions(objectId);
+		this.objectType = objectType;
 	}
 	
 	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
@@ -468,13 +469,13 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 		target.sendPacket(destroy);
 	}
 	
-	protected void createObject(Player target) {
-		Log.i("ContainerPermissions", "Sending baselines for %s with owner %s to %s", this, this.getOwner(), target);
+	public void createObject(Player target) {
 		sendSceneCreateObject(target);
+		sendBaselines(target);
 		createChildrenObjects(target);
 		target.sendPacket(new SceneEndBaselines(getObjectId()));
 	}
-
+	
 	public void clearAware() {
 		SWGObject [] objects;
 		synchronized (objectsAware) {
@@ -550,6 +551,28 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 		Player owner = getOwner();
 		if (owner != null)
 			owner.sendPacket(packets);
+	}
+	
+	protected void sendBaselines(Player target) {
+		if (objectType == null)
+			return;
+		BaselineBuilder bb = new BaselineBuilder(this, objectType, 3);
+		createBaseline3(target, bb);
+		bb.sendTo(target);
+		
+		bb = new BaselineBuilder(this, objectType, 6);
+		createBaseline6(target, bb);
+		bb.sendTo(target);
+		
+		if (getOwner() == target) {
+			bb = new BaselineBuilder(this, objectType, 8);
+			createBaseline8(target, bb);
+			bb.sendTo(target);
+			
+			bb = new BaselineBuilder(this, objectType, 9);
+			createBaseline9(target, bb);
+			bb.sendTo(target);
+		}
 	}
 
 	private void sendUpdatedContainment(List<SWGObject> oldObservers, List<SWGObject> newObservers) {
@@ -635,7 +658,7 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 	
 	protected void createChildrenObjects(Player target) {
 		if (!hasPermission(target.getCreatureObject(), ContainerPermissions.Permission.OPEN)) {
-			// System.out.println(target.getCreatureObject() + " doesn't have permission to view " + this + " -- skipping packet sending");
+			Log.w("SWGObject", target.getCreatureObject() + " doesn't have permission to view " + this + " -- skipping packet sending");
 			return;
 		}
 
@@ -650,7 +673,8 @@ public class SWGObject implements Serializable, Comparable<SWGObject> {
 		// Now create the contained objects
 		for (SWGObject containedObject : containedObjects.values()) {
 			if (containedObject != null) {
-				// System.out.println("Sending containedObj " + containedObject + " to " + target);
+				//Log.d("SWGObject", "Sending containedObj " + containedObject + " to " + target);
+				Log.d("SWGObject", "Sending to location " + containedObject.getLocation());
 				containedObject.createObject(target);
 			}
 		}

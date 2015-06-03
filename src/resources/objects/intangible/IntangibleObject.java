@@ -27,7 +27,6 @@
 ***********************************************************************************/
 package resources.objects.intangible;
 
-import network.packets.swg.zone.SceneEndBaselines;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.network.BaselineBuilder;
 import resources.objects.SWGObject;
@@ -40,7 +39,11 @@ public class IntangibleObject extends SWGObject {
 	private int	count	= 0;
 	
 	public IntangibleObject(long objectId) {
-		super(objectId);
+		super(objectId, BaselineType.ITNO);
+	}
+	
+	public IntangibleObject(long objectId, BaselineType objectType) {
+		super(objectId, objectType);
 	}
 	
 	public int getCount() {
@@ -72,9 +75,7 @@ public class IntangibleObject extends SWGObject {
 		return super.hashCode();
 	}
 	
-	protected void createObject(Player target) {
-		super.sendSceneCreateObject(target);
-		
+	protected void sendBaselines(Player target) {
 		BaselineBuilder bb = new BaselineBuilder(this, BaselineType.ITNO, 3);
 		createBaseline3(target, bb);
 		bb.sendTo(target);
@@ -83,9 +84,6 @@ public class IntangibleObject extends SWGObject {
 		bb = new BaselineBuilder(this, BaselineType.ITNO, 6);
 		createBaseline6(target, bb);
 		bb.sendTo(target);
-		
-		createChildrenObjects(target);
-		target.sendPacket(new SceneEndBaselines(getObjectId()));
 	}
 	
 }

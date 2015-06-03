@@ -30,6 +30,7 @@ package resources.objects.waypoint;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
+import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.common.CRC;
 import resources.network.BaselineBuilder.Encodable;
 import resources.objects.intangible.IntangibleObject;
@@ -46,7 +47,7 @@ public class WaypointObject extends IntangibleObject implements Encodable {
 	private boolean active = true;
 	
 	public WaypointObject(long objectId) {
-		super(objectId);
+		super(objectId, BaselineType.WAYP);
 	}
 
 	
@@ -87,7 +88,7 @@ public class WaypointObject extends IntangibleObject implements Encodable {
 		this.active = active;
 	}
 
-	protected void createObject(Player target) {
+	public void createObject(Player target) {
 		// NOTE: Client is never sent a WAYP baseline in NGE, WaypointObject's just go inside the Waypoint List in PLAY.
 	}
 

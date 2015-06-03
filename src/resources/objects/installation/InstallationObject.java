@@ -27,6 +27,7 @@
 ***********************************************************************************/
 package resources.objects.installation;
 
+import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.objects.tangible.TangibleObject;
 
 public class InstallationObject extends TangibleObject {
@@ -38,7 +39,7 @@ public class InstallationObject extends TangibleObject {
 	private double	powerRate	= 0;
 	
 	public InstallationObject(long objectId) {
-		super(objectId);
+		super(objectId, BaselineType.INSO);
 	}
 	
 	public boolean isActivated() {

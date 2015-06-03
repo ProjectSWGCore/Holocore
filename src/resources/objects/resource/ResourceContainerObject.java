@@ -27,6 +27,7 @@
 ***********************************************************************************/
 package resources.objects.resource;
 
+import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.objects.tangible.TangibleObject;
 
 public class ResourceContainerObject extends TangibleObject {
@@ -41,7 +42,7 @@ public class ResourceContainerObject extends TangibleObject {
 	private String	displayName		= "";
 	
 	public ResourceContainerObject(long objectId) {
-		super(objectId);
+		super(objectId, BaselineType.RCNO);
 	}
 	
 	public long getResourceType() {

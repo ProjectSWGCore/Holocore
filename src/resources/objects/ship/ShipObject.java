@@ -27,6 +27,7 @@
 ***********************************************************************************/
 package resources.objects.ship;
 
+import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.objects.tangible.TangibleObject;
 
 public class ShipObject extends TangibleObject {
@@ -34,7 +35,7 @@ public class ShipObject extends TangibleObject {
 	private static final long serialVersionUID = 1L;
 	
 	public ShipObject(long objectId) {
-		super(objectId);
+		super(objectId, BaselineType.SHIP);
 	}
 	
 }

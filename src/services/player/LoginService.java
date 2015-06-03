@@ -94,8 +94,8 @@ public class LoginService extends Service {
 		getUser = local.prepareStatement("SELECT * FROM users WHERE username = ?");
 		getUserInsensitive = local.prepareStatement("SELECT * FROM users WHERE username ilike ?");
 		getGalaxies = local.prepareStatement("SELECT * FROM galaxies");
-		getCharacters = local.prepareStatement("SELECT * FROM characters WHERE userid = ?");
-		deleteCharacter = local.prepareStatement("DELETE FROM CHARACTERS WHERE id = ?");
+		getCharacters = local.prepareStatement("SELECT * FROM characters WHERE userid = ? AND galaxyid = ?");
+		deleteCharacter = local.prepareStatement("DELETE FROM characters WHERE id = ?");
 		autoLogin = (getConfig(ConfigFile.NETWORK).getInt("AUTO-LOGIN", 0) == 1 ? true : false);
 		return super.initialize();
 	}
@@ -335,6 +335,7 @@ public class LoginService extends Service {
 	
 	private SWGCharacter [] getCharacters(int userId) throws SQLException {
 		getCharacters.setInt(1, userId);
+		getCharacters.setInt(2, ProjectSWG.getGalaxyId());
 		ResultSet set = getCharacters.executeQuery();
 		List <SWGCharacter> characters = new ArrayList<SWGCharacter>();
 		try {

@@ -28,32 +28,114 @@
 package network.packets.swg.zone.spatial;
 
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.util.ArrayList;
+import java.util.List;
 
 import network.packets.swg.SWGPacket;
+import services.map.MapLocation;
+import utilities.ByteUtilities;
 
 public class GetMapLocationsResponseMessage extends SWGPacket {
 	public static final int CRC = 0x9F80464C;
 	private String planet;
+	private List<MapLocation> updatedStaticLocations;
+	private List<MapLocation> updatedDynamicLocations;
+	private List<MapLocation> updatedPersistLocations;
+	private int staticLocVersion;
+	private int dynamicLocVersion;
+	private int persistentLocVersion;
 
-	public GetMapLocationsResponseMessage(String planet) {
+	public GetMapLocationsResponseMessage(String planet,
+	                                      List<MapLocation> staticLocs, List<MapLocation> dynamicLocs, List<MapLocation> persistLocs,
+	                                      int staticLocVersion, int dynamicLocVersion, int persistLocVersion) {
 		this.planet = planet;
+		this.updatedStaticLocations = staticLocs;
+		this.updatedDynamicLocations = dynamicLocs;
+		this.updatedPersistLocations = persistLocs;
+		this.staticLocVersion = staticLocVersion;
+		this.dynamicLocVersion = dynamicLocVersion;
+		this.persistentLocVersion = persistLocVersion;
 	}
-	
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(32 + planet.length());
 
+	public ByteBuffer encode() {
+		int size = planet.length() + 34;
+
+		// Encode the map locations to byte arrays and retrieve sizes for buffer allocation
+		List<byte[]> encodedStatic = null;
+		List<byte[]> encodedDynamic = null;
+		List<byte[]> encodedPersist = null;
+
+		if (updatedStaticLocations != null) {
+			encodedStatic = new ArrayList<>();
+			for (MapLocation location : updatedStaticLocations) {
+				byte[] data = location.encode();
+				encodedStatic.add(data);
+				size += data.length;
+			}
+		}
+
+		if (updatedDynamicLocations != null) {
+			encodedDynamic = new ArrayList<>();
+			for (MapLocation location : updatedDynamicLocations) {
+				byte[] data = location.encode();
+				encodedDynamic.add(data);
+				size += data.length;
+			}
+		}
+
+		if (updatedPersistLocations != null) {
+			encodedPersist = new ArrayList<>();
+			for (MapLocation location : updatedPersistLocations) {
+				byte[] data = location.encode();
+				encodedPersist.add(data);
+				size += data.length;
+			}
+		}
+
+		// Create the packet
+		ByteBuffer data = ByteBuffer.allocate(size).order(ByteOrder.LITTLE_ENDIAN);
 		addShort(data, 8);
 		addInt(data, CRC);
+
 		addAscii(data, planet);
-		addInt(data, 0); // map locations size
-		
-		// Unknowns
-		addInt(data, 0);
-		addInt(data, 0);
-		addInt(data, 0x480);
-		addInt(data, 0x48D);
-		addInt(data, 1);
+
+		if (encodedStatic != null) {
+			addInt(data, encodedStatic.size());
+			for (byte[] bytes : encodedStatic) {
+				data.put(bytes);
+			}
+		} else {
+			addInt(data, 0);
+		}
+
+		if(encodedDynamic != null) {
+			addInt(data, encodedDynamic.size());
+			for (byte[] bytes : encodedDynamic) {
+				data.put(bytes);
+			}
+		} else {
+			addInt(data, 0);
+		}
+
+		if (encodedPersist != null) {
+			addInt(data, encodedPersist.size());
+			for (byte[] bytes : encodedPersist) {
+				data.put(bytes);
+			}
+		} else {
+			addInt(data, 0);
+		}
+
+		addInt(data, staticLocVersion);
+		addInt(data, dynamicLocVersion);
+		addInt(data, persistentLocVersion);
 		return data;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "[GetMapLocationsResponseMessage] " +
+				"staticVersion=" + staticLocVersion + "dynamicVersion=" + dynamicLocVersion + "persistVersion=" + persistentLocVersion;
+	}
 }

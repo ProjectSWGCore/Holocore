@@ -83,13 +83,15 @@ public class CharacterCreationRestriction {
 				if (lastCreations.size() < creationsPerPeriod)
 					return true;
 				if (creationsPerPeriod == 0)
-					return false;
+					return true;
 				Log.d("CharacterCreationRestriction", "Last: %d  Within: %b", lastCreations.getLast(), isWithinPeriod(lastCreations.getLast().longValue()));
 				return !isWithinPeriod(lastCreations.getLast().longValue());
 			}
 		}
 		
 		public boolean createdCharacter() {
+			if (creationsPerPeriod == 0)
+				return true;
 			synchronized (lastCreations) {
 				final boolean hitMax = lastCreations.size() >= creationsPerPeriod;
 				final boolean hackSuccess = hitMax && isWithinPeriod(lastCreations.getLast());
