@@ -27,6 +27,7 @@
 ***********************************************************************************/
 package resources.commands.callbacks;
 
+import network.packets.swg.zone.chat.ChatSystemMessage;
 import resources.Location;
 import resources.Terrain;
 import resources.commands.ICmdCallback;
@@ -50,7 +51,8 @@ public class WaypointCmdCallback implements ICmdCallback {
 		if (cmdArgs.length > 6)
 			cmdArgs = args.split(" ", 6);
 		
-		printCmdArgs(cmdArgs);
+		// Z61: Causes a too much output 
+		// printCmdArgs(cmdArgs);
 
 		WaypointColor color = null;
 		Terrain terrain = null;
@@ -88,9 +90,12 @@ public class WaypointCmdCallback implements ICmdCallback {
 			default: 
 				break;
 		}
-
-		WaypointObject waypoint = createWaypoint(galacticManager.getObjectManager(), terrain, color, name, x, y, player.getCreatureObject().getLocation());
-		ghost.addWaypoint(waypoint);
+		if (ghost.getWaypoints().size() < 250) {
+			WaypointObject waypoint = createWaypoint(galacticManager.getObjectManager(), terrain, color, name, x, y, player.getCreatureObject().getLocation());
+			ghost.addWaypoint(waypoint);
+		} else
+			ghost.sendSelf(new ChatSystemMessage(ChatSystemMessage.SystemChatType.SCREEN_AND_CHAT, "@base_player:too_many_waypoints"));
+		
 	}
 
 	private WaypointObject createWaypoint(ObjectManager objManager, Terrain terrain, WaypointColor color, String name, float x, float y, Location loc) {
