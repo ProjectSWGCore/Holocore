@@ -34,7 +34,6 @@ import java.util.List;
 
 import network.packets.swg.SWGPacket;
 import services.map.MapLocation;
-import utilities.ByteUtilities;
 
 public class GetMapLocationsResponseMessage extends SWGPacket {
 	public static final int CRC = 0x9F80464C;

@@ -28,13 +28,15 @@
 package services.map;
 
 import resources.network.BaselineBuilder;
-import utilities.ByteUtilities;
 import utilities.Encoder;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
 public class MapLocation implements BaselineBuilder.Encodable{
+	
+	private static final long serialVersionUID = 1L;
+	
 	private long id;
 	private String name;
 	private float x;
