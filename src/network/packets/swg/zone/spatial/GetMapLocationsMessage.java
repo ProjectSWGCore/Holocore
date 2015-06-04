@@ -35,38 +35,20 @@ public class GetMapLocationsMessage extends SWGPacket {
 	public static final int CRC = 0x1A7AB839;
 	
 	private String planet;
-	private float x;
-	private float y;
-	private boolean category;
-	private boolean subcategory;
-	private boolean icon;
-	
+	private int versionStatic;
+	private int versionDynamic;
+	private int versionPersist;
+
 	public GetMapLocationsMessage() {
-		this("", 0, 0, false, false, false);
 	}
-	
-	public GetMapLocationsMessage(String planet, float x, float y, boolean category, boolean subcategory, boolean icon) {
-		this.planet = planet;
-		this.x = x;
-		this.y = y;
-		this.category = category;
-		this.subcategory = subcategory;
-		this.icon = icon;
-	}
-	
-	public GetMapLocationsMessage(ByteBuffer data) {
-		decode(data);
-	}
-	
+
 	public void decode(ByteBuffer data) {
 		if (!super.decode(data, CRC))
 			return;
 		planet = getAscii(data);
-		x = getFloat(data);
-		y = getFloat(data);
-		category = getByte(data) != 0;
-		subcategory = getByte(data) != 0;
-		icon = getByte(data) != 0;
+		versionStatic = getInt(data);
+		versionDynamic = getInt(data);
+		versionPersist = getInt(data);
 	}
 	
 	public ByteBuffer encode() {
@@ -74,14 +56,30 @@ public class GetMapLocationsMessage extends SWGPacket {
 		addShort(data, 28);
 		addInt  (data, CRC);
 		addAscii(data, planet);
-		addFloat(data, x);
-		addFloat(data, y);
-		addByte (data, category ? 1 : 0);
-		addByte (data, subcategory ? 1 : 0);
-		addByte (data, icon ? 1 : 0);
+		addInt(data, versionStatic);
+		addInt(data, versionDynamic);
+		addInt(data, versionPersist);
 		return data;
 	}
 	
 	public String getPlanet() { return planet; }
+
+	public int getVersionDynamic() {
+		return versionDynamic;
+	}
+
+	public int getVersionStatic() {
+		return versionStatic;
+	}
+
+	public int getVersionPersist() {
+		return versionPersist;
+	}
+
+	@Override
+	public String toString() {
+		return String.format("[GetMapLocationsMessage] planet=%s static=%d dynamic=%d persist=%d",
+				planet, versionStatic, versionDynamic, versionPersist);
+	}
 }
 

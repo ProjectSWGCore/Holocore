@@ -27,7 +27,10 @@
 ***********************************************************************************/
 package resources.objects.resource;
 
+import network.packets.swg.zone.baselines.Baseline.BaselineType;
+import resources.network.BaselineBuilder;
 import resources.objects.tangible.TangibleObject;
+import resources.player.Player;
 
 public class ResourceContainerObject extends TangibleObject {
 	
@@ -41,7 +44,7 @@ public class ResourceContainerObject extends TangibleObject {
 	private String	displayName		= "";
 	
 	public ResourceContainerObject(long objectId) {
-		super(objectId);
+		super(objectId, BaselineType.RCNO);
 	}
 	
 	public long getResourceType() {
@@ -90,6 +93,42 @@ public class ResourceContainerObject extends TangibleObject {
 	
 	public void setDisplayName(String displayName) {
 		this.displayName = displayName;
+	}
+	
+	@Override
+	public void createBaseline3(Player target, BaselineBuilder bb) {
+		super.createBaseline3(target, bb);
+		// lol I understand none of these variables
+		bb.addInt(quantity);
+		bb.addInt(0);
+		bb.addInt(0);
+		bb.addInt(0);
+		bb.addInt(0);
+		bb.addShort(0);
+		bb.addInt(0);
+		bb.addInt(0);
+		bb.addInt(100); // Max Condition
+		bb.addByte(1);
+		bb.addInt(0);
+		bb.addLong(resourceType);
+		
+		bb.incrementOperandCount(12);
+	}
+	
+	@Override
+	public void createBaseline6(Player target, BaselineBuilder bb) {
+		super.createBaseline6(target, bb);
+		// lol I understand none of these variables
+		bb.addLong(0);
+		bb.addLong(0);
+		bb.addLong(0);
+		bb.addLong(0);
+		bb.addInt(0);
+		bb.addByte(0);
+		bb.addInt(maxQuantity);
+		bb.addAscii(getTemplate());
+		bb.addUnicode("inorganic_minerals_small"); // container name
+		bb.addLong(0);
 	}
 	
 }

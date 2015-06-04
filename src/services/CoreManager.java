@@ -267,4 +267,8 @@ public class CoreManager extends Manager {
 		return null;
 	}
 	
+	public static final int getGalaxyId() {
+		return galaxyId;
+	}
+	
 }

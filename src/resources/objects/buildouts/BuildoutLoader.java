@@ -29,12 +29,14 @@ package resources.objects.buildouts;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 
 import resources.Terrain;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.CrcStringTableData;
 import resources.client_info.visitors.DatatableData;
 import resources.objects.SWGObject;
+import resources.server_info.Log;
 
 public class BuildoutLoader {
 	
@@ -49,9 +51,17 @@ public class BuildoutLoader {
 	}
 	
 	public static List <SWGObject> loadBuildoutsForTerrain(Terrain terrain) {
-		TerrainBuildoutLoader loader = new TerrainBuildoutLoader(clientFactory, crcTable, terrain);
-		loader.load();
-		return loader.getObjects();
+		DatatableData table = (DatatableData) clientFactory.getInfoFromFile("datatables/buildout/buildout_scenes.iff");
+		for (int row = 0; row < table.getRowCount(); row++) {
+			if (table.getCell(row, 0).equals(terrain.name().toLowerCase(Locale.ENGLISH))) {
+				TerrainBuildoutLoader loader = new TerrainBuildoutLoader(clientFactory, crcTable, terrain);
+				loader.load(row);
+				return loader.getObjects();
+			}
+		}
+		System.err.println("Could not find buildouts for terrain: " + terrain);
+		Log.e("BuildoutLoader", "Could not find buildouts for terrain: %s", terrain);
+		return new LinkedList<>();
 	}
 	
 	private static List <Terrain> getTerrainsToLoad() {

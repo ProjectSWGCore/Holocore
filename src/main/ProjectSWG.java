@@ -69,6 +69,16 @@ public class ProjectSWG {
 		return (long) server.manager.getCoreTime();
 	}
 	
+	/**
+	 * Returns the server's galaxy ID. This may be
+	 * deprecated in the future if multiple servers are run
+	 * at once.
+	 * @return the server's galaxy ID
+	 */
+	public static final int getGalaxyId() {
+		return CoreManager.getGalaxyId();
+	}
+	
 	private ProjectSWG() {
 		mainThread = Thread.currentThread();
 		shutdownRequested = false;

@@ -70,10 +70,13 @@ public class ConnectionService extends Service {
 		updateRunnable = new Runnable() {
 			public void run() {
 				synchronized (zonedInPlayers) {
-					for (Player p : zonedInPlayers) {
+					Iterator<Player> i = zonedInPlayers.iterator();
+					while (i.hasNext()) {
+						Player p = i.next();
 						if (p.getTimeSinceLastPacket() > LD_THRESHOLD) {
 							logOut(p);
 							disconnect(p, DisconnectReason.TIMEOUT);
+							i.remove();
 						}
 					}
 				}

@@ -27,6 +27,7 @@
 ***********************************************************************************/
 package resources.objects.building;
 
+import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.objects.tangible.TangibleObject;
 
 public class BuildingObject extends TangibleObject {
@@ -34,7 +35,7 @@ public class BuildingObject extends TangibleObject {
 	private static final long serialVersionUID = 1L;
 	
 	public BuildingObject(long objectId) {
-		super(objectId);
+		super(objectId, BaselineType.BUIO);
 	}
 	
 }

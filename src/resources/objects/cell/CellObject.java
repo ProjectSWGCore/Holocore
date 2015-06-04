@@ -27,7 +27,11 @@
 ***********************************************************************************/
 package resources.objects.cell;
 
+import network.packets.swg.zone.baselines.Baseline.BaselineType;
+import network.packets.swg.zone.building.UpdateCellPermissionMessage;
+import resources.network.BaselineBuilder;
 import resources.objects.SWGObject;
+import resources.player.Player;
 
 public class CellObject extends SWGObject {
 	
@@ -38,7 +42,7 @@ public class CellObject extends SWGObject {
 	private String	label		= "";
 	
 	public CellObject(long objectId) {
-		super(objectId);
+		super(objectId, BaselineType.SCLT);
 	}
 	
 	public boolean isPublic() {
@@ -63,6 +67,31 @@ public class CellObject extends SWGObject {
 	
 	public void setLabel(String label) {
 		this.label = label;
+	}
+	
+	protected void sendBaselines(Player target) {
+		BaselineBuilder bb = new BaselineBuilder(this, BaselineType.SCLT, 3);
+		createBaseline3(target, bb);
+		bb.sendTo(target);
+		
+		bb = new BaselineBuilder(this, BaselineType.SCLT, 6);
+		createBaseline6(target, bb);
+		bb.sendTo(target);
+		target.sendPacket(new UpdateCellPermissionMessage((byte) 1, getObjectId()));
+	}
+	
+	public void createBaseline3(Player target, BaselineBuilder bb) {
+		super.createBaseline3(target, bb);
+		bb.addByte(1);
+		bb.addInt(number);
+		bb.incrementOperandCount(2);
+	}
+	
+	public void createBaseline6(Player target, BaselineBuilder bb) {
+		super.createBaseline6(target, bb);
+		bb.addLong(0);
+		bb.addLong(0);
+		bb.incrementOperandCount(2);
 	}
 	
 }
