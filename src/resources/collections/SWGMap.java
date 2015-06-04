@@ -152,7 +152,7 @@ public class SWGMap<K, V> extends AbstractMap<K, V> implements Encodable {
 	public byte[] encode() {
 		int size = map.size();
 
-		if (size == 0 || dataSize == 0) {
+		if (size == 0) {
 			return new byte[8];
 		}
 		
@@ -160,7 +160,15 @@ public class SWGMap<K, V> extends AbstractMap<K, V> implements Encodable {
 
 		buffer.putInt(size);
 		buffer.putInt(updateCount);
-		
+
+		if (data.size() != size) {
+			// Data got out of sync with the map, so lets clean that up!
+			data.clear();
+			for (Entry<K, V> entry : map.entrySet()) {
+				addData(entry.getKey(), entry.getValue(), (byte) 0);
+			}
+		}
+
 		for (byte[] bytes : data.values()) {
 			buffer.put((byte) 0);
 			buffer.put(bytes);
