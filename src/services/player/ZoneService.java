@@ -71,8 +71,6 @@ import network.packets.swg.zone.chat.ChatOnConnectAvatar;
 import network.packets.swg.zone.chat.VoiceChatStatus;
 import network.packets.swg.zone.insertion.ChatServerStatus;
 import network.packets.swg.zone.insertion.CmdStartScene;
-import network.packets.swg.zone.spatial.GetMapLocationsMessage;
-import network.packets.swg.zone.spatial.GetMapLocationsResponseMessage;
 import resources.Galaxy;
 import resources.Location;
 import resources.Race;
