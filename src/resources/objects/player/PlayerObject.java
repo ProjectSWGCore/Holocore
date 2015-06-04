@@ -112,6 +112,11 @@ public class PlayerObject extends IntangibleObject {
 			return waypoints.get(objId);
 		}
 	}
+	public SWGMap<Long, WaypointObject> getWaypoints() {
+		synchronized(waypoints) {
+			return waypoints;
+		}
+	}
 	
 	public void updateWaypoint(WaypointObject obj) {
 		synchronized(waypoints) {
