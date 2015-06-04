@@ -50,9 +50,6 @@ public class WaypointCmdCallback implements ICmdCallback {
 		String[] cmdArgs = args.split(" ");
 		if (cmdArgs.length > 6)
 			cmdArgs = args.split(" ", 6);
-		
-		// Z61: Causes a too much output 
-		// printCmdArgs(cmdArgs);
 
 		WaypointColor color = null;
 		Terrain terrain = null;
