@@ -186,6 +186,7 @@ public class ObjectManager extends Manager {
 			switch (((PlayerEventIntent)i).getEvent()) {
 				case PE_DISAPPEAR:
 					p.getCreatureObject().clearAware();
+					objectAwareness.remove(p.getCreatureObject());
 					break;
 				case PE_ZONE_IN:
 					p.getCreatureObject().clearAware();
@@ -340,6 +341,7 @@ public class ObjectManager extends Manager {
 			Log.e("ObjectManager", "Failed to start zone - CreatureObject doesn't have a ghost [Character: %d  User: %s", characterId, player.getUsername());
 			return;
 		}
+		objectAwareness.add(creatureObj);
 		new ZoneInIntent(player, (CreatureObject) creatureObj, galaxy).broadcast();
 	}
 	
