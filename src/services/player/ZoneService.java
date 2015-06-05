@@ -31,6 +31,8 @@ import intents.GalacticIntent;
 import intents.PlayerEventIntent;
 import intents.ZoneInIntent;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -40,6 +42,11 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
+
+import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.lib.Constants;
+import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.revwalk.RevCommit;
 
 import main.ProjectSWG;
 import network.packets.Packet;
@@ -68,6 +75,7 @@ import network.packets.swg.zone.ShowBackpack;
 import network.packets.swg.zone.ShowHelmet;
 import network.packets.swg.zone.UpdatePvpStatusMessage;
 import network.packets.swg.zone.chat.ChatOnConnectAvatar;
+import network.packets.swg.zone.chat.ChatSystemMessage;
 import network.packets.swg.zone.chat.VoiceChatStatus;
 import network.packets.swg.zone.insertion.ChatServerStatus;
 import network.packets.swg.zone.insertion.CmdStartScene;
@@ -182,7 +190,42 @@ public class ZoneService extends Service {
 		creature.createObject(player);
 		System.out.printf("[%s] %s is zoning in%n", player.getUsername(), player.getCharacterName());
 		Log.i("ObjectManager", "Zoning in %s with character %s", player.getUsername(), player.getCharacterName());
+		sendCommitHistory(player);
 		new PlayerEventIntent(player, galaxy, PlayerEvent.PE_ZONE_IN).broadcast();
+	}
+	
+	private void sendCommitHistory(Player player) {
+		File repoDir = new File("./" + Constants.DOT_GIT); // Ziggy: Get the git directory
+		Git git = null;
+		Repository repo = null;
+		int commitCount = 3;
+		
+		try {
+			git = Git.open(repoDir);
+			repo = git.getRepository();
+			
+			try {
+				String header = "The " + commitCount + " most recent commits in branch '" + repo.getBranch() + "':";
+				String message = null;
+				
+				player.sendPacket(new ChatSystemMessage(ChatSystemMessage.SystemChatType.CHAT, header));
+				
+				for(RevCommit commit : git.log().setMaxCount(commitCount).call()) {
+					message = commit.getName().substring(0, 7) + " " + commit.getShortMessage();
+					player.sendPacket(new ChatSystemMessage(ChatSystemMessage.SystemChatType.CHAT, message));
+				}
+				
+			} catch (Throwable t) {
+				t.printStackTrace();
+			}
+			
+		} catch (IOException e) {
+			// Ziggy: An exception is thrown if bash isn't installed
+			// It works fine anyways.
+			// https://www.eclipse.org/forums/index.php/t/1031740/
+		}
+		
+
 	}
 	
 	private void sendZonePackets(Player player, CreatureObject creature) {
