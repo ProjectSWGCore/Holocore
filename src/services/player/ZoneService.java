@@ -205,15 +205,15 @@ public class ZoneService extends Service {
 			repo = git.getRepository();
 			
 			try {
-				String header = "The " + commitCount + " most recent commits in branch '" + repo.getBranch() + "':";
-				String message = null;
-				
-				player.sendPacket(new ChatSystemMessage(ChatSystemMessage.SystemChatType.CHAT, header));
+				String message = "The " + commitCount + " most recent commits in branch '" + repo.getBranch() + "':";
+				message += "\n";
 				
 				for(RevCommit commit : git.log().setMaxCount(commitCount).call()) {
-					message = commit.getName().substring(0, 7) + " " + commit.getShortMessage();
-					player.sendPacket(new ChatSystemMessage(ChatSystemMessage.SystemChatType.CHAT, message));
+					message += commit.getName().substring(0, 7) + " " + commit.getShortMessage();
+					message += "\n";
 				}
+				
+				player.sendPacket(new ChatSystemMessage(ChatSystemMessage.SystemChatType.CHAT, message));
 				
 			} catch (Throwable t) {
 				t.printStackTrace();
