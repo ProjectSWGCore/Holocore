@@ -27,7 +27,6 @@
 ***********************************************************************************/
 package resources.commands.callbacks;
 
-import network.packets.swg.zone.chat.ChatSystemMessage;
 import resources.Location;
 import resources.Terrain;
 import resources.commands.ICmdCallback;
@@ -87,11 +86,8 @@ public class WaypointCmdCallback implements ICmdCallback {
 			default: 
 				break;
 		}
-		if (ghost.getWaypoints().size() < 250) {
 			WaypointObject waypoint = createWaypoint(galacticManager.getObjectManager(), terrain, color, name, x, y, player.getCreatureObject().getLocation());
 			ghost.addWaypoint(waypoint);
-		} else
-			ghost.sendSelf(new ChatSystemMessage(ChatSystemMessage.SystemChatType.SCREEN_AND_CHAT, "@base_player:too_many_waypoints"));
 		
 	}
 
