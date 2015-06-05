@@ -134,7 +134,6 @@ public class ConnectionService extends Service {
 			case PE_ZONE_IN: {
 				Player p = pei.getPlayer();
 				synchronized (zonedInPlayers) {
-					removeOld(p);
 					zonedInPlayers.add(p);
 				}
 				break;
@@ -174,12 +173,12 @@ public class ConnectionService extends Service {
 			disappear(fdi.getPlayer());
 	}
 	
-	private void removeOld(Player nPlayer) {
+	private void removeFromList(Player player) {
 		synchronized (zonedInPlayers) {
 			Iterator <Player> zonedIterator = zonedInPlayers.iterator();
 			while (zonedIterator.hasNext()) {
 				Player old = zonedIterator.next();
-				if (old.equals(nPlayer)) {
+				if (old.equals(player)) {
 					zonedIterator.remove();
 				}
 			}
@@ -191,6 +190,7 @@ public class ConnectionService extends Service {
 	}
 	
 	private void logOut(Player p, boolean addToDisappear) {
+		removeFromList(p);
 		Log.i("ConnectionService", "Logged out %s with character %s", p.getUsername(), p.getCharacterName());
 		updatePlayTime(p);
 		if (p.getPlayerState() != PlayerState.LOGGED_OUT)
