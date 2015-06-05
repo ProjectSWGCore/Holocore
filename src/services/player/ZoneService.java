@@ -118,6 +118,7 @@ public class ZoneService extends Service {
 	private PreparedStatement createCharacter;
 	private PreparedStatement getCharacter;
 	private PreparedStatement getLikeCharacterName;
+	private String commitHistory;
 	
 	public ZoneService() {
 		lockedNames = new HashMap<String, Player>();
@@ -126,6 +127,7 @@ public class ZoneService extends Service {
 		nameFilter = new NameFilter("namegen/bad_word_list.txt", "namegen/reserved_words.txt", "namegen/fiction_reserved.txt");
 		nameGenerator = new SWGNameGenerator(nameFilter);
 		creationRestriction = new CharacterCreationRestriction(2);
+		commitHistory = "";
 	}
 	
 	@Override
@@ -136,6 +138,7 @@ public class ZoneService extends Service {
 		getLikeCharacterName = getLocalDatabase().prepareStatement("SELECT name FROM characters WHERE name ilike ?"); //NOTE: ilike is not SQL standard. It is an extension for postgres only.
 		nameGenerator.loadAllRules();
 		loadProfTemplates();
+		loadCommitHistory();
 		if (!nameFilter.load())
 			System.err.println("Failed to load name filter!");
 		registerForIntent(ZoneInIntent.TYPE);
@@ -194,26 +197,26 @@ public class ZoneService extends Service {
 		new PlayerEventIntent(player, galaxy, PlayerEvent.PE_ZONE_IN).broadcast();
 	}
 	
-	private void sendCommitHistory(Player player) {
+	private void loadCommitHistory() {
 		File repoDir = new File("./" + Constants.DOT_GIT); // Ziggy: Get the git directory
 		Git git = null;
 		Repository repo = null;
 		int commitCount = 3;
+		int iterations = 0;
 		
 		try {
 			git = Git.open(repoDir);
 			repo = git.getRepository();
 			
 			try {
-				String message = "The " + commitCount + " most recent commits in branch '" + repo.getBranch() + "':";
-				message += "\n";
+				commitHistory = "The " + commitCount + " most recent commits in branch '" + repo.getBranch() + "':\n";
 				
 				for(RevCommit commit : git.log().setMaxCount(commitCount).call()) {
-					message += commit.getName().substring(0, 7) + " " + commit.getShortMessage();
-					message += "\n";
+					commitHistory += commit.getName().substring(0, 7) + " " + commit.getShortMessage();
+					
+					if(commitCount > iterations++)
+						commitHistory += "\n";
 				}
-				
-				player.sendPacket(new ChatSystemMessage(ChatSystemMessage.SystemChatType.CHAT, message));
 				
 			} catch (Throwable t) {
 				t.printStackTrace();
@@ -226,6 +229,10 @@ public class ZoneService extends Service {
 		}
 		
 
+	}
+	
+	private void sendCommitHistory(Player player) {
+		player.sendPacket(new ChatSystemMessage(ChatSystemMessage.SystemChatType.CHAT, commitHistory));
 	}
 	
 	private void sendZonePackets(Player player, CreatureObject creature) {
