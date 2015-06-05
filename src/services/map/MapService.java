@@ -159,7 +159,6 @@ public class MapService extends Service {
 		}
 	}
 
-
 	public void addMapLocation(SWGObject object, MapType type) {
 		if (!mappingTemplates.containsKey(object.getTemplate()))
 			return;
@@ -191,7 +190,7 @@ public class MapService extends Service {
 		}
 	}
 
-	private void addStaticMapLocation(String planet, MapLocation location) {
+	public void addStaticMapLocation(String planet, MapLocation location) {
 		if (staticMapLocations.containsKey(planet)) {
 			location.setId(staticMapLocations.get(planet).size() + 1);
 			staticMapLocations.get(planet).add(location);
@@ -202,7 +201,7 @@ public class MapService extends Service {
 		}
 	}
 
-	private void addDynamicMapLocation(String planet, MapLocation location) {
+	public void addDynamicMapLocation(String planet, MapLocation location) {
 		if (dynamicMapLocations.containsKey(planet)) {
 			location.setId(dynamicMapLocations.get(planet).size() + 1);
 			dynamicMapLocations.get(planet).add(location);
@@ -213,7 +212,7 @@ public class MapService extends Service {
 		}
 	}
 
-	private void addPersistentMapLocation(String planet, MapLocation location) {
+	public void addPersistentMapLocation(String planet, MapLocation location) {
 		if (persistentMapLocations.containsKey(planet)) {
 			location.setId(persistentMapLocations.get(planet).size() + 1);
 			persistentMapLocations.get(planet).add(location);
