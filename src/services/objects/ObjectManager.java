@@ -238,7 +238,7 @@ public class ObjectManager extends Manager {
 			SWGObject obj = objects.remove(objId);
 			if (obj == null)
 				return null;
-			obj.clearAware();
+			//obj.clearAware(); // This caused problems with logging in and back out not being able to see anyone at all
 			objectAwareness.remove(obj);
 			Log.i("ObjectManager", "Deleted object %d [%s]", obj.getObjectId(), obj.getTemplate());
 			return obj;
