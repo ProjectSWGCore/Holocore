@@ -176,7 +176,6 @@ public class ZoneService extends Service {
 		player.setPlayerState(PlayerState.ZONING_IN);
 		player.setCreatureObject(creature);
 		creature.setOwner(player);
-		playerObj.setOwner(player);
 		
 		sendZonePackets(player, creature);
 		initPlayerBeforeZoneIn(player, creature, playerObj);

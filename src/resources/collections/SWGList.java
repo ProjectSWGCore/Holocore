@@ -157,10 +157,18 @@ public class SWGList<E> extends AbstractList<E> implements Encodable {
 	public byte[] encode() {
 		int size = list.size();
 
-		if (size == 0 || dataSize == 0) {
+		if (size == 0) {
 			return new byte[8];
 		}
-		
+
+		if (size != data.size()) {
+			// Data got out of sync with the list, so lets clean that up!
+			data.clear();
+			for (int i = 0; i < size; i++) {
+				addData(i, list.get(i), (byte) 0);
+			}
+		}
+
 		ByteBuffer buffer = ByteBuffer.allocate(4 + (noUpdates ? 0 : 4) + dataSize).order(ByteOrder.LITTLE_ENDIAN);
 
 		buffer.putInt(size);
