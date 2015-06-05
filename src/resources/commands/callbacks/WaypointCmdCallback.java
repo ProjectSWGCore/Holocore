@@ -27,7 +27,6 @@
 ***********************************************************************************/
 package resources.commands.callbacks;
 
-import network.packets.swg.zone.chat.ChatSystemMessage;
 import resources.Location;
 import resources.Terrain;
 import resources.commands.ICmdCallback;
