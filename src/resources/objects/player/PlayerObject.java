@@ -29,6 +29,7 @@ package resources.objects.player;
 
 import network.packets.swg.zone.UpdatePostureMessage;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
+import network.packets.swg.zone.chat.ChatSystemMessage;
 import resources.collections.SWGList;
 import resources.collections.SWGMap;
 import resources.network.BaselineBuilder;
@@ -102,8 +103,13 @@ public class PlayerObject extends IntangibleObject {
 	
 	public void addWaypoint(WaypointObject waypoint) {
 		synchronized(waypoints) {
+			if (waypoints.size() < 250) {
 			waypoints.put(waypoint.getObjectId(), waypoint);
 			waypoints.sendDeltaMessage(this);
+			}
+			else {
+				sendSelf(new ChatSystemMessage(ChatSystemMessage.SystemChatType.SCREEN_AND_CHAT, "@base_player:too_many_waypoints"));
+			}
 		}
 	}
 	
