@@ -128,17 +128,16 @@ public class CommandService extends Service {
 	}
 	
 	private void loadBaseCommands() {
-		final ClientFactory factory = new ClientFactory();
 		final String [] commandTables = new String [] {"command_table", "client_command_table", "command_table_ground"};
 		
 		clearCommands();
 		for (String table : commandTables) {
-			loadBaseCommands(factory, table);
+			loadBaseCommands(table);
 		}
 	}
 	
-	private void loadBaseCommands(ClientFactory factory, String table) {
-		DatatableData baseCommands = (DatatableData) factory.getInfoFromFile("datatables/command/"+table+".iff");
+	private void loadBaseCommands(String table) {
+		DatatableData baseCommands = (DatatableData) ClientFactory.getInfoFromFile("datatables/command/"+table+".iff");
 		
 		for (int row = 0; row < baseCommands.getRowCount(); row++) {
 			Object [] cmdRow = baseCommands.getRow(row);

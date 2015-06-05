@@ -665,7 +665,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		// First create the objects in the slots
 		for (SWGObject slotObject : slots.values()) {
 			if (slotObject != null) {
-				// System.out.println("Sending slotObj " + slotObject + " to " + target);
+				//Log.d("Sending slotObj " + slotObject + " to " + target);
 				slotObject.createObject(target);
 			}
 		}
@@ -674,7 +674,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		for (SWGObject containedObject : containedObjects.values()) {
 			if (containedObject != null) {
 				//Log.d("SWGObject", "Sending containedObj " + containedObject + " to " + target);
-				Log.d("SWGObject", "Sending to location " + containedObject.getLocation());
+				//Log.d("SWGObject", "Sending to location " + containedObject.getLocation());
 				containedObject.createObject(target);
 			}
 		}
