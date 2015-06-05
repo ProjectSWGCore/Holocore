@@ -209,7 +209,7 @@ public class ZoneService extends Service {
 				message += "\n";
 				
 				for(RevCommit commit : git.log().setMaxCount(commitCount).call()) {
-					message += commit.getName().substring(0, 7) + " " + commit.getShortMessage();
+					message += commit.abbreviate(7) + " " + commit.getShortMessage();
 					message += "\n";
 				}
 				
