@@ -42,7 +42,7 @@ public class WaypointCmdCallback implements ICmdCallback {
 
 	@Override
 	public void execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
-		PlayerObject ghost = (PlayerObject) player.getPlayerObject();
+		PlayerObject ghost = player.getPlayerObject();
 		if (ghost == null)
 			return;
 		
