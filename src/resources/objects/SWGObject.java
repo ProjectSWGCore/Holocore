@@ -579,6 +579,8 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	}
 
 	private void sendUpdatedContainment(List<SWGObject> oldObservers, List<SWGObject> newObservers) {
+		if (parent == null)
+			return;
 		List<SWGObject> same = new ArrayList<>(oldObservers);
 		same.retainAll(newObservers);
 

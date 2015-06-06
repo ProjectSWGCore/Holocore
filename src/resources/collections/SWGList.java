@@ -169,7 +169,7 @@ public class SWGList<E> extends AbstractList<E> implements Encodable {
 
 		if (size != data.size()) {
 			// Data got out of sync with the list, so lets clean that up!
-			data.clear();
+			clearAllData();
 			for (int i = 0; i < size; i++) {
 				addObjectData(i, list.get(i), (byte) 0);
 			}
@@ -206,7 +206,13 @@ public class SWGList<E> extends AbstractList<E> implements Encodable {
 		deltas.clear();
 		deltaSize = 0;
 	}
-	
+
+	private void clearAllData() {
+		data.clear();
+		dataSize = 0;
+		clearDeltaQueue();
+	}
+
 	public void setUpdateCount(int count) {
 		this.updateCount = count;
 	}
