@@ -281,4 +281,9 @@ public class SWGList<E> extends AbstractList<E> implements Encodable {
 	public BaselineType getBaseline() { return baseline; }
 	public int getViewType() { return view; }
 	public int getUpdateType() { return updateType; }
+
+	@Override
+	public String toString() {
+		return "SWGList[" + baseline + "0" + view + ":" + updateType + "]";
+	}
 }

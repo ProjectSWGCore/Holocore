@@ -1,8 +1,6 @@
 import sys
 
 def execute(galacticManager, player, target, args):
-	return
-
 	actor = player.getCreatureObject()
 	if actor is None or target is None:
 		return
@@ -13,11 +11,11 @@ def execute(galacticManager, player, target, args):
 		return
 
 	if target.getParent() == actor:
-		target.moveToContainer(actor, inventory)
+		result = target.moveToContainer(actor, inventory)
 		actor.removeEquipment(target)
 		return
 	else:
-		target.moveToContainer(actor, actor)
+		result = target.moveToContainer(actor, actor)
 		actor.addEquipment(target)
 		return
 

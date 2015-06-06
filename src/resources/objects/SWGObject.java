@@ -579,9 +579,6 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	}
 
 	private void sendUpdatedContainment(List<SWGObject> oldObservers, List<SWGObject> newObservers) {
-		if (parent == null)
-			return;
-
 		List<SWGObject> same = new ArrayList<>(oldObservers);
 		same.retainAll(newObservers);
 
@@ -592,9 +589,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		removed.removeAll(newObservers);
 
 		for (SWGObject swgObject : same) {
-			if (swgObject.getOwner() != null) {
-				swgObject.sendSelf(new UpdateContainmentMessage(objectId, parent.getObjectId(), slotArrangement));
-			}
+			swgObject.sendSelf(new UpdateContainmentMessage(objectId, parent.getObjectId(), slotArrangement));
 		}
 
 		for (SWGObject swgObject : added) {
@@ -669,7 +664,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 			return;
 
 		if (!hasPermission(target.getCreatureObject(), ContainerPermissions.Permission.OPEN)) {
-			Log.w("SWGObject", target.getCreatureObject() + " doesn't have permission to view " + this + " -- skipping packet sending");
+			Log.i("SWGObject", target.getCreatureObject() + " doesn't have permission to view " + this + " -- skipping packet sending");
 			return;
 		}
 
@@ -690,7 +685,6 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 				//Log.i("ChildrenObjects", "Sending containedObj " + containedObject + " to " + target);
 				//Log.d("SWGObject", "Sending to location " + containedObject.getLocation());
 				containedObject.createObject(target);
-				sentObjects.add(containedObject);
 			}
 		}
 	}
