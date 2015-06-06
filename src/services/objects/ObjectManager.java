@@ -238,6 +238,7 @@ public class ObjectManager extends Manager {
 			SWGObject obj = objects.remove(objId);
 			if (obj == null)
 				return null;
+			obj.clearAware();
 			objectAwareness.remove(obj);
 			Log.i("ObjectManager", "Deleted object %d [%s]", obj.getObjectId(), obj.getTemplate());
 			return obj;

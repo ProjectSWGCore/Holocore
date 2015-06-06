@@ -165,7 +165,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		int arrangementId = container.getArrangementId(this);
 		if (arrangementId == -1) {
 			// Item is going to go into the container, so check to see if it'll fit
-			if (container.getMaxContainerSize() >= container.getContainedObjects().size()) {
+			if (container.getMaxContainerSize() <= container.getContainedObjects().size()) {
 				return ContainerResult.CONTAINER_FULL;
 			}
 		}
@@ -180,7 +180,8 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 			parent.removeObject(this);
 		}
 
-		container.addObject(this);
+		if (!container.addObject(this))
+			System.err.println("Failed adding " + this + " to " + container);
 
 		// Observer notification
 		sendUpdatedContainment(oldObservers, new ArrayList<>(container.getChildrenAwareness()));
@@ -424,7 +425,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	 * @return Arrangement ID for the object
 	 */
 	public int getArrangementId(SWGObject object) {
-		if (object.getArrangement() == null)
+		if (slots.size() == 0 || object.getArrangement() == null)
 			return -1;
 
 		int arrangementId = 4;
@@ -437,8 +438,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 				if (!hasSlot(slot)) {
 					isValid = false;
 					break;
-				}
-				if (slots.get(slot) != null) {
+				}  else if (slots.get(slot) != null) {
 					passesCompletely = false;
 				}
 			}
@@ -449,7 +449,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 
 			arrangementId++;
 		}
-		return (filledId != -1) ? arrangementId : 4;
+		return (filledId != -1) ? filledId : -1;
 	}
 
 	protected final void sendSceneCreateObject(Player target) {

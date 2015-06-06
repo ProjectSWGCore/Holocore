@@ -45,13 +45,13 @@ public class RequestWaypointCmdCallback implements ICmdCallback {
 			return;
 
 		String[] cmd = args.split(" ", 6);
-		WaypointObject.WaypointColor color = null;
+		WaypointObject.WaypointColor color = WaypointObject.WaypointColor.BLUE;
 
-		if (cmd[0].contains("color_")) {
+/*		if (cmd[0].contains("color_")) {
 			// Command is in color planet x y z name format
 			String colorId = cmd[0].substring(14, cmd[0].length() - 10);
 			color = WaypointObject.WaypointColor.values()[Integer.valueOf(colorId) - 1];
-		}
+		}*/
 
 		double x = (color != null ? Double.valueOf(cmd[2]) : Double.valueOf(cmd[1]));
 		double y = (color != null ? Double.valueOf(cmd[3]) : Double.valueOf(cmd[2]));
