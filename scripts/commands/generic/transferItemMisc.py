@@ -1,6 +1,8 @@
 import sys
 
 def execute(galacticManager, player, target, args):
+	return
+
 	actor = player.getCreatureObject()
 	if actor is None or target is None:
 		return

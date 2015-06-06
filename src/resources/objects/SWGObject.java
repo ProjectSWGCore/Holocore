@@ -176,7 +176,9 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		List<SWGObject> oldObservers = getChildrenAwareness();
 
 		// Remove this object from the old parent if one exists
+		SWGObject oldParent = null;
 		if (parent != null) {
+			oldParent = parent;
 			parent.removeObject(this);
 		}
 
@@ -186,6 +188,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		// Observer notification
 		sendUpdatedContainment(oldObservers, new ArrayList<>(container.getChildrenAwareness()));
 
+		Log.i("Container", "Moved %s from %s to %s", this, oldParent, container);
 		return ContainerResult.SUCCESS;
 	}
 
@@ -662,29 +665,62 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	}
 	
 	protected void createChildrenObjects(Player target) {
+		if (slots.size() == 0 && containedObjects.size() == 0)
+			return;
+
 		if (!hasPermission(target.getCreatureObject(), ContainerPermissions.Permission.OPEN)) {
 			Log.w("SWGObject", target.getCreatureObject() + " doesn't have permission to view " + this + " -- skipping packet sending");
 			return;
 		}
 
+		List<SWGObject> sentObjects = new ArrayList<>();
+
 		// First create the objects in the slots
 		for (SWGObject slotObject : slots.values()) {
-			if (slotObject != null) {
-				//Log.d("Sending slotObj " + slotObject + " to " + target);
+			if (slotObject != null && !sentObjects.contains(slotObject)) {
+				//Log.i("ChildrenObjects", "Sending slotObj " + slotObject + " to " + target);
 				slotObject.createObject(target);
+				sentObjects.add(slotObject);
 			}
 		}
 		
 		// Now create the contained objects
 		for (SWGObject containedObject : containedObjects.values()) {
-			if (containedObject != null) {
-				//Log.d("SWGObject", "Sending containedObj " + containedObject + " to " + target);
+			if (containedObject != null && sentObjects.contains(containedObject)) {
+				//Log.i("ChildrenObjects", "Sending containedObj " + containedObject + " to " + target);
 				//Log.d("SWGObject", "Sending to location " + containedObject.getLocation());
 				containedObject.createObject(target);
+				sentObjects.add(containedObject);
 			}
 		}
 	}
-	
+
+	private void debug_printSlotInfo(int tabs) {
+		String s = "";
+		for (int i = 0; i < tabs; i++) {
+			s += "\t";
+		}
+		System.out.println(s + "=== debug_printSlotInfo ===: " + this);
+		if (slots.size() == 0 && containedObjects.size() == 0) {
+			System.out.println(s + "NO CHILDREN");
+			return;
+		}
+
+		if (slots.size() > 0) System.out.println(s + "= Slots =");
+		for (Map.Entry<String, SWGObject> entry : slots.entrySet()) {
+			System.out.println(s + "Slot: " + entry.getKey() + " Value: " + entry.getValue() + (entry.getValue() != null ? " arrangement: " + entry.getValue().slotArrangement : ""));
+			if (entry.getValue() != null) entry.getValue().debug_printSlotInfo(tabs + 1);
+		}
+
+		if (containedObjects.size() > 0) System.out.println(s + "= ContainerObjects =");
+		for (SWGObject object : containedObjects.values()) {
+			System.out.println(s + "ContainedObject: " + object + " arrangementId: " + object.slotArrangement);
+			object.debug_printSlotInfo(tabs + 1);
+		}
+
+
+	}
+
 	@Override
 	public String toString() {
 		return "SWGObject[ID=" + objectId + " NAME=" + objectName + " TEMPLATE=" + template + "]";
