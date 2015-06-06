@@ -576,6 +576,9 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	}
 
 	private void sendUpdatedContainment(List<SWGObject> oldObservers, List<SWGObject> newObservers) {
+		if (parent == null)
+			return;
+
 		List<SWGObject> same = new ArrayList<>(oldObservers);
 		same.retainAll(newObservers);
 
@@ -586,7 +589,9 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		removed.removeAll(newObservers);
 
 		for (SWGObject swgObject : same) {
-			swgObject.sendSelf(new UpdateContainmentMessage(objectId, parent.getObjectId(), slotArrangement));
+			if (swgObject.getOwner() != null) {
+				swgObject.sendSelf(new UpdateContainmentMessage(objectId, parent.getObjectId(), slotArrangement));
+			}
 		}
 
 		for (SWGObject swgObject : added) {
