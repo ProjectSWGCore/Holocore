@@ -112,8 +112,13 @@ public class CreatureObject extends TangibleObject {
 
 	public void removeEquipment(SWGObject obj) {
 		synchronized (equipmentList) {
-			if (equipmentList.remove(obj))
-				equipmentList.sendDeltaMessage(this);
+			for (Equipment equipment : equipmentList) {
+				if (equipment.getObjectId() == obj.getObjectId()) {
+					equipmentList.remove(equipment);
+					equipmentList.sendDeltaMessage(this);
+					break;
+				}
+			}
 		}
 	}
 
@@ -136,8 +141,12 @@ public class CreatureObject extends TangibleObject {
 
 	public void removeAppearanceItem(SWGObject obj) {
 		synchronized (appearanceList) {
-			if (appearanceList.remove(obj))
-				appearanceList.sendDeltaMessage(this);
+			for (Equipment equipment : appearanceList) {
+				if (equipment.getObjectId() == obj.getObjectId()) {
+					appearanceList.remove(equipment);
+					appearanceList.sendDeltaMessage(this);
+				}
+			}
 		}
 	}
 
