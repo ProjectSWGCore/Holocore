@@ -87,6 +87,8 @@ class TerrainBuildoutLoader {
 		for (int row = 0; row < areaTable.getRowCount(); row++) {
 			buildoutRow.load(areaTable.getRow(row), crcTable);
 			SWGObject object = createObject(buildoutRow);
+			object.setBuildout(true);
+			object.setLoadRange(buildoutRow.getRadius());
 			addObject(object, buildoutRow.getContainerId());
 			setCellInformation(object, buildoutRow.getCellIndex());
 			updatePermissions(object);
