@@ -77,6 +77,8 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	private int		volume		= 0;
 	private float	complexity	= 1;
 	private int     containerType = 0;
+	private boolean	isBuildout	= false;
+	private double	loadRange	= 0;
 
 	private int     slotArrangement = -1;
 
@@ -418,6 +420,22 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 
 	public int getMaxContainerSize() {
 		return Integer.valueOf(templateAttributes.get("containerVolumeLimit").toString());
+	}
+	
+	public void setBuildout(boolean buildout) {
+		this.isBuildout = buildout;
+	}
+	
+	public boolean isBuildout() {
+		return isBuildout;
+	}
+	
+	public double getLoadRange() {
+		return loadRange;
+	}
+	
+	public void setLoadRange(double range) {
+		this.loadRange = range;
 	}
 
 	public ContainerPermissions getContainerPermissions() { return containerPermissions; }
