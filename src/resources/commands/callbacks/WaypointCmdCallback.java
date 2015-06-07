@@ -92,8 +92,8 @@ public class WaypointCmdCallback implements ICmdCallback {
 	}
 
 	private WaypointObject createWaypoint(ObjectManager objManager, Terrain terrain, WaypointColor color, String name, float x, float y, Location loc) {
-		WaypointObject waypoint = (WaypointObject) objManager.createObject("object/waypoint/shared_waypoint.iff", loc);
-		
+		WaypointObject waypoint = (WaypointObject) objManager.createObject("object/waypoint/shared_waypoint.iff", false);
+
 		if (color != null)
 			waypoint.setColor(color);
 		
