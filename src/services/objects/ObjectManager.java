@@ -288,7 +288,15 @@ public class ObjectManager extends Manager {
 		return createObject(template, null);
 	}
 	
+	public SWGObject createObject(String template, boolean addToAwareness) {
+		return createObject(template, null, addToAwareness);
+	}
+	
 	public SWGObject createObject(String template, Location l) {
+		return createObject(template, l, true);
+	}
+	
+	public SWGObject createObject(String template, Location l, boolean addToAwareness) {
 		synchronized (objects) {
 			long objectId = getNextObjectId();
 			SWGObject obj = ObjectCreator.createObjectFromTemplate(objectId, template);
@@ -297,7 +305,9 @@ public class ObjectManager extends Manager {
 				return null;
 			}
 			obj.setLocation(l);
-			objectAwareness.add(obj);
+			if (addToAwareness) {
+				objectAwareness.add(obj);
+			}
 			objects.put(objectId, obj);
 			Log.i("ObjectManager", "Created object %d [%s]", obj.getObjectId(), obj.getTemplate());
 			return obj;
