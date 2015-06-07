@@ -28,7 +28,7 @@ public class ObjectAwareness {
 	
 	private void loadQuadTree() {
 		for (Terrain t : Terrain.values()) {
-			quadTree.put(t, new QuadTree<SWGObject>(-8192, -8192, 8192, 8192));
+			quadTree.put(t, new QuadTree<SWGObject>(16, -8192, -8192, 8192, 8192));
 		}
 	}
 	

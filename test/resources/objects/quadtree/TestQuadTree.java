@@ -40,7 +40,7 @@ public class TestQuadTree {
 	
 	@Test
 	public void testInsertGet() {
-		QuadTree<Double> tree = new QuadTree<Double>(0, 0, 10, 10);
+		QuadTree<Double> tree = new QuadTree<Double>(2, 0, 0, 10, 10);
 		tree.put(5, 5, 5.0);
 		Assert.assertEquals(5, (double)tree.getIgnoreCollisions(5, 5), 1E-10);
 		tree.put(0, 0, 10.0);
@@ -67,7 +67,7 @@ public class TestQuadTree {
 	
 	@Test
 	public void testDuplicatesBug() {
-		QuadTree<Double> tree = new QuadTree<Double>(0, 0, 10, 10);
+		QuadTree<Double> tree = new QuadTree<Double>(2, 0, 0, 10, 10);
 		Double d = new Double(5.0);
 		tree.put(5.0, 5.0, d);
 		Assert.assertEquals(1, tree.getWithinRange(5.0, 5.0, 10).size());
@@ -97,12 +97,13 @@ public class TestQuadTree {
 	@Test
 	public void testWithinArea() {
 		List <Point2D> points = new ArrayList<Point2D>();
-		QuadTree <Point2D> tree = new QuadTree<Point2D>(0, 0, 10, 10);
+		QuadTree <Point2D> tree = new QuadTree<Point2D>(4, 0, 0, 10, 10);
+		Point2D p;
 		for (double x = 0; x < 10; x += 0.15) {
 			for (double y = 0; y < 10; y += 0.15) {
 				x = ((int)(x*100))/100.0;
 				y = ((int)(y*100))/100.0;
-				Point2D p = new Point2D(x, y);
+				p = new Point2D(x, y);
 				points.add(p);
 				tree.put(x, y, p);
 			}
@@ -114,6 +115,25 @@ public class TestQuadTree {
 				test(points, tree, x, y, .5);
 				x *= 100;
 				y *= 100;
+			}
+		}
+	}
+	
+	@Test
+	public void testQuadLarge() {
+		List <Point2D> points = new ArrayList<Point2D>();
+		QuadTree <Point2D> tree = new QuadTree<Point2D>(16, -8192, -8192, 8192, 8192);
+		Point2D p;
+		for (int x = -2000; x < 2000; x += 25) {
+			for (int y = -2000; y < 2000; y += 25) {
+				p = new Point2D(x, y);
+				points.add(p);
+				tree.put(x, y, p);
+			}
+		}
+		for (int x = -2000; x < 2000; x += 50) {
+			for (int y = -2000; y < 2000; y += 50) {
+				test(points, tree, x, y, 200);
 			}
 		}
 	}
@@ -170,7 +190,7 @@ public class TestQuadTree {
 			Assert.assertEquals("Failed at ("+x+", 10)", Math.sqrt((10-maxY)*(10-maxY)+Math.pow(x-nearest,2))<=range, inter);
 		}
 	}
-	
+		
 	private boolean intersects(double minX, double minY, double maxX, double maxY, double x, double y, double range) {
 		if (x < minX) {
 			if (y < minY)
@@ -189,23 +209,28 @@ public class TestQuadTree {
 	}
 	
 	private double distance(double x1, double y1, double x2, double y2) {
-		return Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
+		return Math.sqrt(square(x1-x2) + square(y1-y2));
 	}
 	
-	private void test(List <Point2D> points, QuadTree <Point2D> tree, double x, double y, double range) {
+	private int test(List <Point2D> points, QuadTree <Point2D> tree, double x, double y, double range) {
 		int expected = getExpectedWithinRange(points, x, y, range);
 		int actual = tree.getWithinRange(x, y, range).size();
 		Assert.assertEquals("Failed at (" + x + ", " + y + ")", expected, actual);
+		return actual;
 	}
 	
 	private int getExpectedWithinRange(List <Point2D> points, double x, double y, double range) {
 		int count = 0;
 		for (Point2D p : points) {
-			if (Math.sqrt(Math.pow(p.x-x, 2) + Math.pow(p.y-y, 2)) <= range) {
+			if (square(p.x-x) + square(p.y-y) <= square(range)) {
 				count++;
 			}
 		}
 		return count;
+	}
+	
+	private double square(double x) {
+		return x * x;
 	}
 	
 	private class Point2D {
