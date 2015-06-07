@@ -32,12 +32,14 @@ import java.util.List;
 
 public class QuadTree<V> {
 	
-	private static final double DEFAULT_RANGE = 1E-5;
+	private static final double	DEFAULT_RANGE	= 1E-5;
 	
-	private QuadNode headNode;
-	private double minX, minY, maxX, maxY;
+	private final QuadNode	headNode;
+	private final double	minX, minY, maxX, maxY;
+	private final int		quadTreeSize;
 	
-	public QuadTree(double minX, double minY, double maxX, double maxY) {
+	public QuadTree(int size, double minX, double minY, double maxX, double maxY) {
+		this.quadTreeSize = size;
 		this.minX = minX;
 		this.minY = minY;
 		this.maxX = maxX;
@@ -53,12 +55,12 @@ public class QuadTree<V> {
 		headNode.insert(x, y, value);
 	}
 	
-	public List <V> get(double x, double y) {
+	public List<V> get(double x, double y) {
 		return getWithinRange(x, y, DEFAULT_RANGE);
 	}
 	
-	public List <V> getWithinRange(double x, double y, double range) {
-		List <V> list = new ArrayList<V>();
+	public List<V> getWithinRange(double x, double y, double range) {
+		List<V> list = new ArrayList<V>();
 		if (Double.isNaN(x) || Double.isNaN(y))
 			return list;
 		if (x < minX || y < minY || x > maxX || y > maxY)
@@ -92,11 +94,9 @@ public class QuadTree<V> {
 	}
 	
 	private class QuadNode {
-		private QuadNode topLeft = null; // min, min
-		private QuadNode topRight = null; // max, min
-		private QuadNode bottomRight = null; // max, max
-		private QuadNode bottomLeft = null; // min, max
-		private double minX, minY, maxX, maxY, centerX, centerY;
+		private final QuadSubNodes<QuadNode> subnodes;
+		private final double minX, minY, maxX, maxY, centerX, centerY;
+		private final double cellWidth, cellHeight;
 		private Node obj = null;
 		private int size = 0;
 		
@@ -105,13 +105,16 @@ public class QuadTree<V> {
 			this.minY = minY;
 			this.maxX = maxX;
 			this.maxY = maxY;
-			this.centerX = (minX+maxX) / 2;
-			this.centerY = (minY+maxY) / 2;
+			this.centerX = (minX + maxX) / 2;
+			this.centerY = (minY + maxY) / 2;
 			this.obj = null;
+			this.subnodes = new QuadSubNodes<>(quadTreeSize, minX, minY, maxX, maxY);
+			this.cellWidth = (maxX - minX) / quadTreeSize;
+			this.cellHeight = (maxY - minY) / quadTreeSize;
 		}
 		
 		public void insert(double x, double y, V value) {
-			if (Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2) <= DEFAULT_RANGE || size == 0) {
+			if (size == 0 || square(x - centerX) + square(y - centerY) <= DEFAULT_RANGE) {
 				insertNode(x, y, value);
 			} else {
 				if (size == 1 && obj != null) {
@@ -124,8 +127,12 @@ public class QuadTree<V> {
 			size++;
 		}
 		
+		private double square(double x) {
+			return x * x;
+		}
+		
 		public boolean remove(double x, double y, V instance) {
-			if (obj != null && Math.sqrt(Math.pow(obj.x-x,2) + Math.pow(obj.y-y,2)) <= DEFAULT_RANGE) {
+			if (obj != null && square(obj.x - x) + square(obj.y - y) <= DEFAULT_RANGE) {
 				if (obj.size() == 1 && (obj.value == instance || obj.value.equals(instance))) {
 					size -= 1;
 					obj = null;
@@ -133,14 +140,14 @@ public class QuadTree<V> {
 				} else
 					return obj.removeInstance(instance);
 			}
-			QuadNode quad = getQuadrant(x, y);
+			QuadNode quad = subnodes.get(x, y);
 			if (quad != null)
 				return quad.remove(x, y, instance);
 			return false;
 		}
 		
 		public int remove(double x, double y, int maxRemove) {
-			if (obj != null && Math.sqrt(Math.pow(obj.x-x,2) + Math.pow(obj.y-y,2)) <= DEFAULT_RANGE)
+			if (obj != null && square(obj.x - x) + square(obj.y - y) <= DEFAULT_RANGE)
 				return removeAll(maxRemove);
 			int rem = removeRecurse(x, y, maxRemove);
 			size -= rem;
@@ -148,7 +155,7 @@ public class QuadTree<V> {
 		}
 		
 		private int removeRecurse(double x, double y, int maxRemove) {
-			QuadNode quad = getQuadrant(x, y);
+			QuadNode quad = subnodes.get(x, y);
 			if (quad != null)
 				return quad.remove(x, y, maxRemove);
 			return 0;
@@ -166,49 +173,21 @@ public class QuadTree<V> {
 			return maxRemove;
 		}
 		
-		private QuadNode getQuadrant(double x, double y) {
-			if (x < centerX) {
-				if (y < centerY) {
-					if (topLeft != null)
-						return topLeft;
-				} else {
-					if (bottomLeft != null)
-						return bottomLeft;
-				}
-			} else {
-				if (y < centerY) {
-					if (topRight != null)
-						return topRight;
-				} else {
-					if (bottomRight != null)
-						return bottomRight;
-				}
-			}
-			return null;
-		}
-		
 		private QuadNode expand(double x, double y) {
-			if (x <= centerX) {
-				if (y <= centerY) { // top-left
-					if (topLeft == null)
-						topLeft = new QuadNode(minX, minY, centerX, centerY);
-					return topLeft;
-				} else { // bottom-left
-					if (bottomLeft == null)
-						bottomLeft = new QuadNode(minX, centerY, centerX, maxY);
-					return bottomLeft;
-				}
-			} else {
-				if (y <= centerY) { // top-right
-					if (topRight == null)
-						topRight = new QuadNode(centerX, minY, maxX, centerY);
-					return topRight;
-				} else { // bottom-right
-					if (bottomRight == null)
-						bottomRight = new QuadNode(centerX, centerY, maxX, maxY);
-					return bottomRight;
-				}
+			int indX = getIndex(x, minX, cellWidth);
+			int indY = getIndex(y, minY, cellHeight);
+			if (indX >= subnodes.length())
+				indX--;
+			if (indY >= subnodes.length())
+				indY--;
+			QuadNode node = subnodes.getSubnode(indX, indY);
+			if (node == null) {
+				double mnX = minX + indX * cellWidth;
+				double mnY = minY + indY * cellHeight;
+				node = new QuadNode(mnX, mnY, mnX + cellWidth, mnY + cellHeight);
+				subnodes.setSubnode(indX, indY, node);
 			}
+			return node;
 		}
 		
 		private void insertNode(double x, double y, V v) {
@@ -218,75 +197,45 @@ public class QuadTree<V> {
 				obj.insert(v);
 		}
 		
-		public void getWithinRange(List <V> list, double x, double y, double range) {
-			if (obj != null && Math.sqrt(Math.pow(obj.x-x,2) + Math.pow(obj.y-y,2)) <= range) {
+		public void getWithinRange(List<V> list, double x, double y, double range) {
+			if (obj != null && square(obj.x - x) + square(obj.y - y) <= square(range)) {
 				obj.addAll(list);
+				if (size == obj.size())
+					return;
 			}
-			if (topLeft != null && topLeft.intersects(x, y, range))
-				topLeft.getWithinRange(list, x, y, range);
-			if (topRight != null && topRight.intersects(x, y, range))
-				topRight.getWithinRange(list, x, y, range);
-			if (bottomRight != null && bottomRight.intersects(x, y, range))
-				bottomRight.getWithinRange(list, x, y, range);
-			if (bottomLeft != null && bottomLeft.intersects(x, y, range))
-				bottomLeft.getWithinRange(list, x, y, range);
+			int mnX = (x - range <= minX) ? 0 : getIndex(x - range, minX, cellWidth);
+			int mnY = (y - range <= minY) ? 0 : getIndex(y - range, minY, cellHeight);
+			int mxX = (x + range >= maxX) ? subnodes.length() - 1 : getIndex(x + range, minX, cellWidth);
+			int mxY = (y + range >= maxY) ? subnodes.length() - 1 : getIndex(y + range, minY, cellHeight);
+			for (int xInd = mnX; xInd <= mxX; xInd++) {
+				for (int yInd = mnY-1; yInd <= mxY; yInd++) {
+					if (yInd < 0)
+						continue;
+					QuadNode node = subnodes.getSubnode(xInd, yInd);
+					if (node != null)
+						node.getWithinRange(list, x, y, range);
+				}
+			}
 		}
 		
 		public V getIgnoreCollisions(double x, double y) {
 			if (obj != null)
 				return obj.value;
-			if (x < centerX) {
-				if (y < centerY) {
-					if (topLeft == null)
-						return null;
-					return topLeft.getIgnoreCollisions(x, y);
-				} else {
-					if (bottomLeft == null)
-						return null;
-					return bottomLeft.getIgnoreCollisions(x, y);
-				}
-			} else {
-				if (y < centerY) {
-					if (topRight == null)
-						return null;
-					return topRight.getIgnoreCollisions(x, y);
-				} else {
-					if (bottomRight == null)
-						return null;
-					return bottomRight.getIgnoreCollisions(x, y);
-				}
-			}
+			QuadNode node = subnodes.get(x, y);
+			if (node == null)
+				return null;
+			return node.getIgnoreCollisions(x, y);
 		}
 		
-		private boolean intersects(double x, double y, double range) {
-			if (x < minX) {
-				if (y < minY)
-					return distance(x, y, minX, minY) <= range;
-				else if (y > maxY)
-					return distance(x, y, minX, maxY) <= range;
-				return x >= minX-range;
-			} else if (x > maxX) {
-				if (y < minY)
-					return distance(x, y, maxX, minY) <= range;
-				else if (y > maxY)
-					return distance(x, y, maxX, maxY) <= range;
-				return x <= maxX+range;
-			}
-			return y >= minY-range && y <= maxY+range;
-		}
-		
-		private double distance(double x1, double y1, double x2, double y2) {
-			return Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
-		}
 	}
 	
 	private class Node {
 		
-		private double x, y;
-		private V value;
-		private Node next;
+		private double	x, y;
+		private V		value;
+		private Node	next;
 		
-		public Node (double x, double y, V value, Node next) {
+		public Node(double x, double y, V value, Node next) {
 			this.x = x;
 			this.y = y;
 			this.value = value;
@@ -300,7 +249,7 @@ public class QuadTree<V> {
 				next.insert(value);
 		}
 		
-		public int addAll(List <V> list) {
+		public int addAll(List<V> list) {
 			list.add(value);
 			if (next != null)
 				return 1 + next.addAll(list);
@@ -312,7 +261,7 @@ public class QuadTree<V> {
 				return this;
 			if (next == null)
 				return null;
-			return next.get(i-1);
+			return next.get(i - 1);
 		}
 		
 		public int size() {
@@ -333,6 +282,85 @@ public class QuadTree<V> {
 			return next.removeInstance(instance);
 		}
 		
+	}
+	
+	private static class QuadSubNodes<T> implements Iterable<T> {
+		private final T [][] subnodes;
+		private final double minX, minY;
+		private final double cellWidth, cellHeight;
+		
+		@SuppressWarnings("unchecked")
+		public QuadSubNodes(int size, double minX, double minY, double maxX, double maxY) {
+			this.minX = minX;
+			this.minY = minY;
+			this.cellWidth = (maxX - minX) / size;
+			this.cellHeight = (maxY - minY) / size;
+			this.subnodes = (T [][]) new Object[size][size];
+		}
+		
+		public T get(double x, double y) {
+			int indX = getIndex(x, minX, cellWidth);
+			int indY = getIndex(y, minY, cellHeight);
+			if (indX >= subnodes.length)
+				indX--;
+			if (indY >= subnodes.length)
+				indY--;
+			return subnodes[indX][indY];
+		}
+		
+		public T getSubnode(int x, int y) {
+			return subnodes[x][y];
+		}
+		
+		public void setSubnode(int x, int y, T node) {
+			subnodes[x][y] = node;
+		}
+		
+		public int length() {
+			return subnodes.length;
+		}
+		
+		@Override
+		public Iterator iterator() {
+			return new Iterator();
+		}
+		
+		public class Iterator implements java.util.Iterator<T> {
+			
+			private int	x = 0;
+			private int	y = 0;
+			
+			@Override
+			public boolean hasNext() {
+				return x < subnodes.length && y < subnodes.length;
+			}
+			
+			@Override
+			public T next() {
+				T node = subnodes[x][y];
+				if (y + 1 < subnodes.length)
+					y++;
+				else {
+					x++;
+					y = 0;
+				}
+				return node;
+			}
+			
+			@Override
+			public void remove() {
+				if (y == 0) {
+					subnodes[x - 1][subnodes.length - 1] = null;
+				} else {
+					subnodes[x][y - 1] = null;
+				}
+			}
+			
+		}
+	}
+	
+	private static int getIndex(double pos, double min, double width) {
+		return (int) ((pos - min) / width);
 	}
 	
 }
