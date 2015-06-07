@@ -27,6 +27,7 @@
 ***********************************************************************************/
 package resources.commands.callbacks;
 
+import resources.Terrain;
 import resources.commands.ICmdCallback;
 import resources.objects.SWGObject;
 import resources.objects.player.PlayerObject;
@@ -52,16 +53,18 @@ public class RequestWaypointCmdCallback implements ICmdCallback {
 			String colorId = cmd[0].substring(14, cmd[0].length() - 10);
 			color = WaypointObject.WaypointColor.values()[Integer.valueOf(colorId) - 1];
 		}*/
+		Terrain terrain = (color != null ? Terrain.getTerrainFromName(cmd[1]) : Terrain.getTerrainFromName(cmd[0]));
 
 		double x = (color != null ? Double.valueOf(cmd[2]) : Double.valueOf(cmd[1]));
 		double y = (color != null ? Double.valueOf(cmd[3]) : Double.valueOf(cmd[2]));
 		double z = (color != null ? Double.valueOf(cmd[4]) : Double.valueOf(cmd[3]));
 
-		String name = (cmd.length == 6 ? cmd[5] : "New Waypoint");
+		String name = (cmd.length == 6 ? cmd[5] : "@planet_n:" + terrain.getName());
 
-		WaypointObject waypoint = (WaypointObject) galacticManager.getObjectManager().createObject("object/waypoint/shared_waypoint.iff", player.getCreatureObject().getLocation());
+		WaypointObject waypoint = (WaypointObject) galacticManager.getObjectManager().createObject("object/waypoint/shared_waypoint.iff", false);
+		waypoint.getLocation().setTerrain(terrain);
 		waypoint.setLocation(x, y, z);
-		waypoint.setName(name);
+		waypoint.setName(name.isEmpty() ? "@planet_n:" + terrain.getName() : name);
 		if (color != null)
 			waypoint.setColor(color);
 		ghost.addWaypoint(waypoint);

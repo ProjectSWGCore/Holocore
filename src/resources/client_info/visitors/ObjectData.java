@@ -43,6 +43,7 @@ public class ObjectData extends ClientData {
 	
 	public static final String APPEARANCE_FILE = "appearanceFilename";
 	public static final String ARRANGEMENT_FILE = "arrangementDescriptorFilename";
+	public static final String CONTAINER_TYPE = "containerType";
 	public static final String VOLUME_LIMIT = "containerVolumeLimit";
 	public static final String DETAIL_STF = "detailedDescription";
 	public static final String OBJ_STF = "objectName";

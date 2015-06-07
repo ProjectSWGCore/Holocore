@@ -82,7 +82,7 @@ public class CellObject extends SWGObject {
 	
 	public void createBaseline3(Player target, BaselineBuilder bb) {
 		super.createBaseline3(target, bb);
-		bb.addByte(1);
+		bb.addByte(1); // isPublic
 		bb.addInt(number);
 		bb.incrementOperandCount(2);
 	}

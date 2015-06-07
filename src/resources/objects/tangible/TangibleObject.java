@@ -47,6 +47,7 @@ public class TangibleObject extends SWGObject {
 	private int		pvpFactionId	= 0;
 	private boolean	visibleGmOnly	= false;
 	private byte []	objectEffects	= new byte[0];
+	private int     optionsBitmask  = 128;
 	
 	public TangibleObject(long objectId) {
 		super(objectId, BaselineType.TANO);
@@ -143,7 +144,11 @@ public class TangibleObject extends SWGObject {
 	public void setObjectEffects(byte [] objectEffects) {
 		this.objectEffects = objectEffects;
 	}
-	
+
+	public void setOptionsBitmask(int optionsBitmask) {
+		this.optionsBitmask = optionsBitmask;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		return super.equals(o);
@@ -161,11 +166,11 @@ public class TangibleObject extends SWGObject {
 		bb.addArray(appearanceData);
 		bb.addInt(0); // Component customization (Set, Integer)
 			bb.addInt(0); //updates
-		bb.addInt(128); // Options Bitmask (128 = Attackable)
-		bb.addInt(0); // Incap Timer for players, Use count for objects
+		bb.addInt(optionsBitmask); // Options Bitmask (128 = Attackable) // TODO: Fix this for buildings
+		bb.addInt(0); // Generic Counter -- use count and incap timer
 		bb.addInt(condition);
-		bb.addInt(100); // Random number that should be high enough - maxCondition
-		bb.addBoolean(false); // isStatic
+		bb.addInt(100); // maxHitPoints
+		bb.addBoolean(true); // isVisible
 		
 		bb.incrementOperandCount(9);
 	}
@@ -175,14 +180,13 @@ public class TangibleObject extends SWGObject {
 		bb.addBoolean(false); // Combat flag
 		bb.addInt(0); // Defenders List (Set, Long)
 			bb.addInt(0);
-		bb.addInt(0); // Unknown List (List, Long)
+		bb.addInt(0); // Map color
+		bb.addInt(0); // Access List
 			bb.addInt(0);
-		bb.addInt(0); // Unknown List (List, Integer)
+		bb.addInt(0); // Guild Access Set
 			bb.addInt(0);
-		bb.addInt(0); // Unknown, possibly a list/map or something
+		bb.addInt(0); // Effects Map
 			bb.addInt(0);
-		
-		bb.addInt(0);
 		
 		bb.incrementOperandCount(6);
 	}

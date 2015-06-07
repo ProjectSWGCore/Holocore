@@ -93,15 +93,6 @@ public final class ObjectCreator {
 	private static void addObjectAttributes(SWGObject obj, String template) {
 		ObjectData attributes = (ObjectData) ClientFactory.getInfoFromFile(ClientFactory.formatToSharedFile(template));
 
-		String stf = (String) attributes.getAttribute(ObjectData.OBJ_STF);
-		String detailStf = (String) attributes.getAttribute(ObjectData.DETAIL_STF);
-		Integer volumeLimit = (Integer) attributes.getAttribute(ObjectData.VOLUME_LIMIT);
-		
-		obj.setStf(stf);
-		if (detailStf != null)
-			obj.setDetailStf(detailStf);
-		if (volumeLimit != null)
-			obj.setVolume(volumeLimit);
 		for (Entry<String, Object> e : attributes.getAttributes().entrySet()) {
 			obj.setTemplateAttribute(e.getKey(), e.getValue());
 
@@ -111,8 +102,10 @@ public final class ObjectCreator {
 
 	private static void setObjectAttribute(String key, String value, SWGObject object) {
 		switch(key) {
-			case "volume": object.setVolume(Integer.valueOf(value)); break;
-			case "containerType": object.setContainerType(Integer.valueOf(value)); break;
+			case ObjectData.OBJ_STF: object.setStf(value); break;
+			case ObjectData.DETAIL_STF: object.setDetailStf(value); break;
+			case ObjectData.VOLUME_LIMIT: object.setVolume(Integer.valueOf(value)); break;
+			case ObjectData.CONTAINER_TYPE: object.setContainerType(Integer.valueOf(value)); break;
 			default: break;
 		}
 	}
