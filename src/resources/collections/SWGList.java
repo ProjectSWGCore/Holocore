@@ -30,16 +30,13 @@ package resources.collections;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.AbstractList;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
-import network.packets.swg.zone.deltas.DeltasMessage;
 import resources.network.BaselineBuilder.Encodable;
 import resources.network.DeltaBuilder;
 import resources.objects.SWGObject;
@@ -65,7 +62,7 @@ public class SWGList<E> extends AbstractList<E> implements Encodable {
 	private transient int updateCount;
 	private int dataSize;
 	
-	private boolean indexed = false;
+	private boolean indexed = true;
 	private boolean noUpdates = false;
 	private StringType strType = StringType.UNSPECIFIED;
 	
@@ -108,7 +105,7 @@ public class SWGList<E> extends AbstractList<E> implements Encodable {
 		boolean added = list.add(e);
 		
 		if (added) {
-			addData(list.lastIndexOf(e), e);
+			addObjectData(list.lastIndexOf(e), e);
 		}
 		
 		return added;
@@ -119,23 +116,32 @@ public class SWGList<E> extends AbstractList<E> implements Encodable {
 		updateCount++;
 		list.add(index, e);
 		
-		addData(index, e);
+		addObjectData(index, e);
 	}
 
 	@Override
 	public E set(int index, E element) {
+		// Sends a "change" delta
 		updateCount++;
 		E previous = list.set(index, element);
-		if (previous != null)
+		if (previous != null) {
 			removeDataSize(index);
-		addData(index, element, (byte) 2);
+			removeData(index);
+		}
+		addObjectData(index, element, (byte) 2);
 		return previous;
 	}
 	
 	@Override
 	public E remove(int index) {
-		// TODO: Remove elements in list
-		throw new UnsupportedOperationException();
+		// Method is also called for remove(E element), just replaced by the index
+		updateCount++;
+		E element = list.remove(index);
+
+		if (element != null)
+			removeObjectData(index, element, (byte) 0);
+
+		return element;
 	}
 
 	@Override
@@ -163,9 +169,9 @@ public class SWGList<E> extends AbstractList<E> implements Encodable {
 
 		if (size != data.size()) {
 			// Data got out of sync with the list, so lets clean that up!
-			data.clear();
+			clearAllData();
 			for (int i = 0; i < size; i++) {
-				addData(i, list.get(i), (byte) 0);
+				addObjectData(i, list.get(i), (byte) 0);
 			}
 		}
 
@@ -182,7 +188,7 @@ public class SWGList<E> extends AbstractList<E> implements Encodable {
 	}
 	
 	public void sendDeltaMessage(SWGObject target) {
-		if (!(deltas.size() > 0))
+		if (deltas.size() == 0)
 			return;
 
 		if (target.getOwner() == null || target.getOwner().getPlayerState() != PlayerState.ZONED_IN) {
@@ -192,13 +198,21 @@ public class SWGList<E> extends AbstractList<E> implements Encodable {
 		
 		DeltaBuilder builder = new DeltaBuilder(target, baseline, view, updateType, (noUpdates ? encode() : getDeltaData()));
 		builder.send();
+		// Clear the queue since the delta has been sent to observers through the builder
+		clearDeltaQueue();
 	}
 	
 	public void clearDeltaQueue() {
 		deltas.clear();
 		deltaSize = 0;
 	}
-	
+
+	private void clearAllData() {
+		data.clear();
+		dataSize = 0;
+		clearDeltaQueue();
+	}
+
 	public void setUpdateCount(int count) {
 		this.updateCount = count;
 	}
@@ -225,7 +239,7 @@ public class SWGList<E> extends AbstractList<E> implements Encodable {
 		}
 	}
 	
-	private void addData(int index, Object obj, byte update) {
+	private void addObjectData(int index, Object obj, byte update) {
 		byte[] encodedData = Encoder.encode(obj, strType);
 		
 		data.put(index, encodedData);
@@ -244,21 +258,38 @@ public class SWGList<E> extends AbstractList<E> implements Encodable {
 		}
 	}
 	
-	private void addData(int index, Object obj) {
-		addData(index, obj, (byte) 1);
+	private void addObjectData(int index, Object obj) {
+		addObjectData(index, obj, (byte) 1);
 	}
-	
-	// Removes obj size of data and removes it from the data map
-	private void removeData(Object obj) {
-		dataSize -= data.remove(indexOf(obj)).length;
+
+	private void removeObjectData(int index, Object object, byte update) {
+		if (data.get(index) != null) {
+			dataSize -= data.remove(index).length;
+		}
+
+		if (indexed && !noUpdates) {
+			// Only the index is sent for removing data
+			ByteBuffer buffer = ByteBuffer.allocate(2).order(ByteOrder.LITTLE_ENDIAN);
+			buffer.putShort((short) index);
+			createDeltaData(buffer.array(), update);
+		}
 	}
-	
+
 	// Removes obj size of data without removing it from the data map
 	private void removeDataSize(int index) {
 		dataSize -= data.get(index).length;
 	}
-	
+
+	private void removeData(int index) {
+		data.remove(index);
+	}
+
 	public BaselineType getBaseline() { return baseline; }
 	public int getViewType() { return view; }
 	public int getUpdateType() { return updateType; }
+
+	@Override
+	public String toString() {
+		return "SWGList[" + baseline + "0" + view + ":" + updateType + "]";
+	}
 }

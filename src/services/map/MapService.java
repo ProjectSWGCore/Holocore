@@ -69,9 +69,8 @@ public class MapService extends Service {
 		dynamicMapLocations = new ConcurrentHashMap<>();
 		persistentMapLocations = new ConcurrentHashMap<>();
 
-		ClientFactory clientFactory = new ClientFactory();
-		loadMapCategories(clientFactory);
-		loadMappingTemplates(clientFactory);
+		loadMapCategories();
+		loadMappingTemplates();
 	}
 
 	@Override
@@ -129,8 +128,8 @@ public class MapService extends Service {
 		player.sendPacket(responseMessage);
 	}
 
-	private void loadMapCategories(ClientFactory clientFactory) {
-		DatatableData table = (DatatableData) clientFactory.getInfoFromFile("datatables/player/planet_map_cat.iff");
+	private void loadMapCategories() {
+		DatatableData table = (DatatableData) ClientFactory.getInfoFromFile("datatables/player/planet_map_cat.iff");
 		for (int row = 0; row < table.getRowCount(); row++) {
 			MapCategory category = new MapCategory();
 			category.setName(table.getCell(row, 0).toString());
@@ -144,8 +143,8 @@ public class MapService extends Service {
 		}
 	}
 
-	private void loadMappingTemplates(ClientFactory clientFactory) {
-		DatatableData table = (DatatableData) clientFactory.getInfoFromFile("map_locations.iff");
+	private void loadMappingTemplates() {
+		DatatableData table = (DatatableData) ClientFactory.getInfoFromFile("map_locations.iff");
 		for (int row = 0; row < table.getRowCount(); row++) {
 			MappingTemplate template = new MappingTemplate();
 			template.setTemplate(ClientFactory.formatToSharedFile(table.getCell(row, 0).toString()));
@@ -158,7 +157,6 @@ public class MapService extends Service {
 			mappingTemplates.put(template.getTemplate(), template);
 		}
 	}
-
 
 	public void addMapLocation(SWGObject object, MapType type) {
 		if (!mappingTemplates.containsKey(object.getTemplate()))
@@ -191,7 +189,7 @@ public class MapService extends Service {
 		}
 	}
 
-	private void addStaticMapLocation(String planet, MapLocation location) {
+	public void addStaticMapLocation(String planet, MapLocation location) {
 		if (staticMapLocations.containsKey(planet)) {
 			location.setId(staticMapLocations.get(planet).size() + 1);
 			staticMapLocations.get(planet).add(location);
@@ -202,7 +200,7 @@ public class MapService extends Service {
 		}
 	}
 
-	private void addDynamicMapLocation(String planet, MapLocation location) {
+	public void addDynamicMapLocation(String planet, MapLocation location) {
 		if (dynamicMapLocations.containsKey(planet)) {
 			location.setId(dynamicMapLocations.get(planet).size() + 1);
 			dynamicMapLocations.get(planet).add(location);
@@ -213,7 +211,7 @@ public class MapService extends Service {
 		}
 	}
 
-	private void addPersistentMapLocation(String planet, MapLocation location) {
+	public void addPersistentMapLocation(String planet, MapLocation location) {
 		if (persistentMapLocations.containsKey(planet)) {
 			location.setId(persistentMapLocations.get(planet).size() + 1);
 			persistentMapLocations.get(planet).add(location);

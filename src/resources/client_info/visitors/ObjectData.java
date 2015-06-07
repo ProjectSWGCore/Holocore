@@ -39,7 +39,6 @@ import utilities.ByteUtilities;
 public class ObjectData extends ClientData {
 
 	private Map<String, Object> attributes = new HashMap<String, Object>();
-	private ClientFactory factory;
 	private List<String> parsedFiles = new ArrayList<String>();
 	
 	public static final String APPEARANCE_FILE = "appearanceFilename";
@@ -50,9 +49,7 @@ public class ObjectData extends ClientData {
 	public static final String PORTAL_LAYOUT = "portalLayoutFilename";
 	public static final String SLOT_DESCRIPTOR = "slotDescriptorFilename";
 
-	public ObjectData(ClientFactory factory) {
-		this.factory = factory;
-	}
+	public ObjectData() {}
 	
 	@Override
 	public void handleData(String node, ByteBuffer data, int size) {
@@ -64,7 +61,7 @@ public class ObjectData extends ClientData {
 			if (parsedFiles.contains(file)) // some DERVXXX were repeated and we do not want to replace any attributes unless they're overriden by a more specific obj
 				break;
 			
-			ClientData attrData = factory.getInfoFromFile(file);
+			ClientData attrData = ClientFactory.getInfoFromFile(file);
 			if (attrData == null || !(attrData instanceof ObjectData)) {
 				System.out.println("Could not load attribute data from file " + file + "!");
 				return; // break out of whole method as we should only continue if we have all the extended attributes

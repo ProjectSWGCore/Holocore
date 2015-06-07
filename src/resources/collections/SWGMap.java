@@ -163,7 +163,7 @@ public class SWGMap<K, V> extends AbstractMap<K, V> implements Encodable {
 
 		if (data.size() != size) {
 			// Data got out of sync with the map, so lets clean that up!
-			data.clear();
+			clearAllData();
 			for (Entry<K, V> entry : map.entrySet()) {
 				addData(entry.getKey(), entry.getValue(), (byte) 0);
 			}
@@ -188,7 +188,7 @@ public class SWGMap<K, V> extends AbstractMap<K, V> implements Encodable {
 		
 		DeltaBuilder builder = new DeltaBuilder(target, baseline, view, updateType, getDeltaData());
 		builder.send();
-		
+		// Clear the queue since the delta has been sent to observers through the builder
 		clearDeltaQueue();
 	}
 	
@@ -222,7 +222,14 @@ public class SWGMap<K, V> extends AbstractMap<K, V> implements Encodable {
 			deltas.put(key, combindedUpdate);
 		}
 	}
-	
+
+	private void clearAllData() {
+		dataSize = 0;
+		data.clear();
+
+		clearDeltaQueue();
+	}
+
 	private void addData(Object key, Object value, byte update) {
 		byte[] encodedKey = Encoder.encode(key, strType);
 		byte[] encodedValue = Encoder.encode(value, strType);

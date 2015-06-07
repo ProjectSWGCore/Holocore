@@ -38,14 +38,32 @@ public class RequestWaypointCmdCallback implements ICmdCallback {
 
 	@Override
 	public void execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
+		// First parameter can be name of the planet or an int for the color
 		// Args: (^-,=+_)color_1(,+-=_^)=1 planet x 0.0 z
 		PlayerObject ghost = player.getPlayerObject();
 		if (ghost == null)
 			return;
-		
-		String[] cmd = args.split(" ", 5);
+
+		String[] cmd = args.split(" ", 6);
+		WaypointObject.WaypointColor color = WaypointObject.WaypointColor.BLUE;
+
+/*		if (cmd[0].contains("color_")) {
+			// Command is in color planet x y z name format
+			String colorId = cmd[0].substring(14, cmd[0].length() - 10);
+			color = WaypointObject.WaypointColor.values()[Integer.valueOf(colorId) - 1];
+		}*/
+
+		double x = (color != null ? Double.valueOf(cmd[2]) : Double.valueOf(cmd[1]));
+		double y = (color != null ? Double.valueOf(cmd[3]) : Double.valueOf(cmd[2]));
+		double z = (color != null ? Double.valueOf(cmd[4]) : Double.valueOf(cmd[3]));
+
+		String name = (cmd.length == 6 ? cmd[5] : "New Waypoint");
+
 		WaypointObject waypoint = (WaypointObject) galacticManager.getObjectManager().createObject("object/waypoint/shared_waypoint.iff", player.getCreatureObject().getLocation());
-		waypoint.setLocation(Double.valueOf(cmd[2]), 0, Double.valueOf(cmd[4]));
+		waypoint.setLocation(x, y, z);
+		waypoint.setName(name);
+		if (color != null)
+			waypoint.setColor(color);
 		ghost.addWaypoint(waypoint);
 	}
 }
