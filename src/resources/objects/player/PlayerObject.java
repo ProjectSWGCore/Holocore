@@ -471,11 +471,11 @@ public class PlayerObject extends IntangibleObject {
 		bb.addObject(waypoints); // 1
 		bb.addInt(100); // Current Force Power -- 2
 		bb.addInt(100); // Max Force Power -- 3
-		bb.addInt(0); // Current FS Quest List (List) -- 4
+		bb.addInt(0); // Completed Quests (List) -- 4
 			bb.addInt(0);
-		bb.addInt(0); // Completed FS Quest List (List) -- 5
+		bb.addInt(0); // Active Quests (List) -- 5
 			bb.addInt(0);
-		bb.addInt(activeQuest); // 6
+		bb.addInt(activeQuest); // Current Quest -- 6
 		bb.addObject(quests); // 7
 		bb.addAscii(profWheelPosition); // 8
 		
@@ -501,7 +501,7 @@ public class PlayerObject extends IntangibleObject {
 		bb.addInt(100); // Max Drink -- 13
 		bb.addInt(0); // Current Consumable -- 14
 		bb.addInt(100); // Max Consumable -- 15
-		bb.addInt(0); // Waypoints - Is there a difference between this one and baseline 8? -- 16
+		bb.addInt(0); // Group Waypoints -- 16
 			bb.addInt(0);
 		bb.addObject(defenders); // 17
 		bb.addInt(killMeter); // 18

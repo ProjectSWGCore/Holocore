@@ -101,11 +101,11 @@ public class WeaponObject extends TangibleObject implements Encodable{
 		
 		bb.addFloat(attackSpeed);
 		bb.addInt(0); // accuracy (pre-nge)
-		bb.addInt(0); // unknown
+		bb.addInt(0); // minRange
 		bb.addFloat(maxRange);
-		bb.addInt(1); // unknown (set to 1 for default weapon)
-		bb.addInt(0); // weapon particle effect?
-		bb.addInt(0); // weapon particle effect color?
+		bb.addInt(1); // damageType
+		bb.addInt(0); // elementalType
+		bb.addInt(0); // elementalValue
 		
 		bb.incrementOperandCount(7);
 	}

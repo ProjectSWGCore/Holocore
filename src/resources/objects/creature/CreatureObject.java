@@ -697,7 +697,7 @@ public class CreatureObject extends TangibleObject {
 		super.createBaseline4(target, bb); // 0 variables
 		bb.addFloat((float) accelScale); // 0
 		bb.addFloat((float) accelPercent); // 1
-		bb.addObject(hamEncumbList); // 2
+		bb.addObject(hamEncumbList); // Rename to bonusAttributes? 2
 		bb.addObject(skillMods); // 3
 		bb.addFloat((float) movementScale); // 4
 		bb.addFloat((float) movementPercent); // 5
@@ -708,7 +708,7 @@ public class CreatureObject extends TangibleObject {
 		bb.addFloat((float) turnScale); // 10
 		bb.addFloat((float) walkSpeed); // 11
 		bb.addFloat((float) waterModPercent); // 12
-		bb.addObject(missionCriticalObjs); // 13
+		bb.addObject(missionCriticalObjs); // Group Missions? 13
 		bb.addObject(abilities); // 14
 		bb.addInt(totalLevelXp); // 15
 		
@@ -743,9 +743,9 @@ public class CreatureObject extends TangibleObject {
 		bb.addInt((hologramColour == null) ? -1 : hologramColour.getValue()); // Hologram Color -- 29
 		bb.addBoolean(shownOnRadar); // 30
 		bb.addBoolean(beast); // 31
-		bb.addByte(0); // Unknown -- 32
+		bb.addByte(0); // forceShowHam? -- 32
 		bb.addObject(appearanceList); // 33
-		bb.addLong(0); // unknown -- 34
+		bb.addLong(0); // decoy? -- 34
 		
 		bb.incrementOperandCount(27);
 	}

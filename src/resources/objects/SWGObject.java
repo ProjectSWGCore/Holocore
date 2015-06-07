@@ -690,33 +690,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 			}
 		}
 	}
-
-	private void debug_printSlotInfo(int tabs) {
-		String s = "";
-		for (int i = 0; i < tabs; i++) {
-			s += "\t";
-		}
-		System.out.println(s + "=== debug_printSlotInfo ===: " + this);
-		if (slots.size() == 0 && containedObjects.size() == 0) {
-			System.out.println(s + "NO CHILDREN");
-			return;
-		}
-
-		if (slots.size() > 0) System.out.println(s + "= Slots =");
-		for (Map.Entry<String, SWGObject> entry : slots.entrySet()) {
-			System.out.println(s + "Slot: " + entry.getKey() + " Value: " + entry.getValue() + (entry.getValue() != null ? " arrangement: " + entry.getValue().slotArrangement : ""));
-			if (entry.getValue() != null) entry.getValue().debug_printSlotInfo(tabs + 1);
-		}
-
-		if (containedObjects.size() > 0) System.out.println(s + "= ContainerObjects =");
-		for (SWGObject object : containedObjects.values()) {
-			System.out.println(s + "ContainedObject: " + object + " arrangementId: " + object.slotArrangement);
-			object.debug_printSlotInfo(tabs + 1);
-		}
-
-
-	}
-
+	
 	@Override
 	public String toString() {
 		return "SWGObject[ID=" + objectId + " NAME=" + objectName + " TEMPLATE=" + template + "]";
