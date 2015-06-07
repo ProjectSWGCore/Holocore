@@ -47,6 +47,7 @@ public class TangibleObject extends SWGObject {
 	private int		pvpFactionId	= 0;
 	private boolean	visibleGmOnly	= false;
 	private byte []	objectEffects	= new byte[0];
+	private int     optionsBitmask  = 128;
 	
 	public TangibleObject(long objectId) {
 		super(objectId, BaselineType.TANO);
@@ -143,7 +144,11 @@ public class TangibleObject extends SWGObject {
 	public void setObjectEffects(byte [] objectEffects) {
 		this.objectEffects = objectEffects;
 	}
-	
+
+	public void setOptionsBitmask(int optionsBitmask) {
+		this.optionsBitmask = optionsBitmask;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		return super.equals(o);
@@ -161,11 +166,11 @@ public class TangibleObject extends SWGObject {
 		bb.addArray(appearanceData);
 		bb.addInt(0); // Component customization (Set, Integer)
 			bb.addInt(0); //updates
-		bb.addInt(128); // Options Bitmask (128 = Attackable) // TODO: Fix this for buildings
+		bb.addInt(optionsBitmask); // Options Bitmask (128 = Attackable) // TODO: Fix this for buildings
 		bb.addInt(0); // Generic Counter -- use count and incap timer
 		bb.addInt(condition);
 		bb.addInt(100); // maxHitPoints
-		bb.addBoolean(false); // isStatic
+		bb.addBoolean(true); // isVisible
 		
 		bb.incrementOperandCount(9);
 	}
