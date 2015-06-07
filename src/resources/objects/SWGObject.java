@@ -683,7 +683,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		
 		// Now create the contained objects
 		for (SWGObject containedObject : containedObjects.values()) {
-			if (containedObject != null && sentObjects.contains(containedObject)) {
+			if (containedObject != null && !sentObjects.contains(containedObject)) {
 				//Log.i("ChildrenObjects", "Sending containedObj " + containedObject + " to " + target);
 				//Log.d("SWGObject", "Sending to location " + containedObject.getLocation());
 				containedObject.createObject(target);
