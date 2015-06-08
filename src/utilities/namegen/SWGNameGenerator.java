@@ -124,7 +124,7 @@ public class SWGNameGenerator {
 			return "";
 		
 		String name = null;
-		while (name == null || !nameFilter.isValid(name)) {
+		while (name == null || (nameFilter != null && !nameFilter.isValid(name))) {
 			name = getNameByRule(ruleMap.get(race));
 			// Some reason a name can be empty, I think it has to do with the removeExcessDuplications check.
 			if (name.isEmpty())
