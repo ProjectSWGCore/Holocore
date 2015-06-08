@@ -49,7 +49,7 @@ public class MappingTemplate {
 	}
 
 	public String getName() {
-		return name;
+		return (name.isEmpty() ? getStfName() : name);
 	}
 
 	public void setName(String name) {
@@ -86,5 +86,9 @@ public class MappingTemplate {
 
 	public void setFlag(int flag) {
 		this.flag = flag;
+	}
+
+	public String getStfName() {
+		return "@map_loc_cat_n:" + (getSubcategory().isEmpty() ? getCategory() : getSubcategory());
 	}
 }
