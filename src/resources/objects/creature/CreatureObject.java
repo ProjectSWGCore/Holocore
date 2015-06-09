@@ -39,6 +39,7 @@ import resources.encodables.player.Equipment;
 import resources.network.BaselineBuilder;
 import resources.objects.SWGObject;
 import resources.objects.player.PlayerObject;
+import resources.objects.tangible.OptionFlag;
 import resources.objects.tangible.TangibleObject;
 import resources.objects.weapon.WeaponObject;
 import resources.player.Player;
@@ -90,10 +91,10 @@ public class CreatureObject extends TangibleObject {
 	private HologramColour hologramColour = HologramColour.DEFAULT;
 	
 	private SWGList<Integer>	baseAttributes	= new SWGList<Integer>(BaselineType.CREO, 1, 2);
-	private SWGList<String>		skills			= new SWGList<String>(BaselineType.CREO, 1, 3, false, StringType.ASCII);
-	private SWGList<Integer>	hamEncumbList	= new SWGList<Integer>(BaselineType.CREO, 4, 2, true);
-	private SWGList<Integer>	attributes		= new SWGList<Integer>(BaselineType.CREO, 6, 21, true);
-	private SWGList<Integer>	maxAttributes	= new SWGList<Integer>(BaselineType.CREO, 6, 22, true);
+	private SWGList<String>		skills			= new SWGList<String>(BaselineType.CREO, 1, 3, StringType.ASCII); // SWGSet
+	private SWGList<Integer>	hamEncumbList	= new SWGList<Integer>(BaselineType.CREO, 4, 2);
+	private SWGList<Integer>	attributes		= new SWGList<Integer>(BaselineType.CREO, 6, 21);
+	private SWGList<Integer>	maxAttributes	= new SWGList<Integer>(BaselineType.CREO, 6, 22);
 	private SWGList<Equipment>	equipmentList 	= new SWGList<Equipment>(BaselineType.CREO, 6, 23);
 	private SWGList<Equipment>	appearanceList 	= new SWGList<Equipment>(BaselineType.CREO, 6, 33);
 	
@@ -108,6 +109,7 @@ public class CreatureObject extends TangibleObject {
 		initMaxAttributes();
 		initCurrentAttributes();
 		initBaseAttributes();
+		setOptionFlags(OptionFlag.HAM_BAR);
 	}
 
 	public void removeEquipment(SWGObject obj) {
