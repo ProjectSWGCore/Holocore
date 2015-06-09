@@ -39,6 +39,7 @@ import resources.encodables.player.Equipment;
 import resources.network.BaselineBuilder;
 import resources.objects.SWGObject;
 import resources.objects.player.PlayerObject;
+import resources.objects.tangible.OptionFlag;
 import resources.objects.tangible.TangibleObject;
 import resources.objects.weapon.WeaponObject;
 import resources.player.Player;
@@ -108,6 +109,7 @@ public class CreatureObject extends TangibleObject {
 		initMaxAttributes();
 		initCurrentAttributes();
 		initBaseAttributes();
+		setOptionFlags(OptionFlag.HAM_BAR);
 	}
 
 	public void removeEquipment(SWGObject obj) {
