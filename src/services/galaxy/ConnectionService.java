@@ -30,7 +30,6 @@ package services.galaxy;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -44,6 +43,7 @@ import intents.network.ForceDisconnectIntent;
 import intents.network.GalacticPacketIntent;
 import resources.control.Intent;
 import resources.control.Service;
+import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
 import resources.player.Player;
 import resources.player.PlayerEvent;
@@ -60,13 +60,13 @@ public class ConnectionService extends Service {
 	private final ScheduledExecutorService updateService;
 	private final Runnable updateRunnable;
 	private final Runnable disappearRunnable;
-	private final Queue <Player> disappearPlayers;
+	private final LinkedList <DisappearPlayer> disappearPlayers;
 	private final List <Player> zonedInPlayers;
 	
 	public ConnectionService() {
 		updateService = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("conn-update-service"));
 		zonedInPlayers = new LinkedList<Player>();
-		disappearPlayers = new LinkedList<Player>();
+		disappearPlayers = new LinkedList<DisappearPlayer>();
 		updateRunnable = new Runnable() {
 			public void run() {
 				synchronized (zonedInPlayers) {
@@ -74,9 +74,9 @@ public class ConnectionService extends Service {
 					while (i.hasNext()) {
 						Player p = i.next();
 						if (p.getTimeSinceLastPacket() > LD_THRESHOLD) {
+							i.remove();
 							logOut(p);
 							disconnect(p, DisconnectReason.TIMEOUT);
-							i.remove();
 						}
 					}
 				}
@@ -84,10 +84,16 @@ public class ConnectionService extends Service {
 		};
 		disappearRunnable = new Runnable() {
 			public void run() {
-				Player p = disappearPlayers.poll();
-				synchronized (zonedInPlayers) {
-					if (p != null && zonedInPlayers.contains(p))
-						disappear(p);
+				DisappearPlayer p = null;
+				synchronized (disappearPlayers) {
+					p = disappearPlayers.poll();
+				}
+				if (p == null)
+					return;
+				if ((System.nanoTime()-p.getTime())/1E6 >= DISAPPEAR_THRESHOLD) {
+					disappear(p.getPlayer());
+				} else {
+					disappearPlayers.addFirst(p);
 				}
 			}
 		};
@@ -138,11 +144,6 @@ public class ConnectionService extends Service {
 				}
 				break;
 			}
-			case PE_DISAPPEAR:
-				synchronized (zonedInPlayers) {
-					zonedInPlayers.remove(pei.getPlayer());
-				}
-				break;
 			default:
 				break;
 		}
@@ -178,8 +179,20 @@ public class ConnectionService extends Service {
 			Iterator <Player> zonedIterator = zonedInPlayers.iterator();
 			while (zonedIterator.hasNext()) {
 				Player old = zonedIterator.next();
-				if (old.equals(player)) {
+				CreatureObject oldObj = old.getCreatureObject();
+				if (oldObj == null || player.equals(old) || player == old) {
 					zonedIterator.remove();
+				}
+			}
+		}
+		synchronized (disappearPlayers) {
+			Iterator <DisappearPlayer> disappearIterator = disappearPlayers.iterator();
+			while (disappearIterator.hasNext()) {
+				DisappearPlayer old = disappearIterator.next();
+				Player oldPlayer = old.getPlayer();
+				CreatureObject oldObj = old.getPlayer().getCreatureObject();
+				if (oldObj == null || player.equals(old) || player == oldPlayer) {
+					disappearIterator.remove();
 				}
 			}
 		}
@@ -199,12 +212,15 @@ public class ConnectionService extends Service {
 			p.getPlayerObject().setFlagBitmask(PlayerFlags.LD);
 		p.setPlayerState(PlayerState.LOGGED_OUT);
 		if (addToDisappear) {
-			disappearPlayers.add(p);
+			synchronized (disappearPlayers) {
+				disappearPlayers.add(new DisappearPlayer(System.nanoTime(), p));
+			}
 			updateService.schedule(disappearRunnable, (long) DISAPPEAR_THRESHOLD, TimeUnit.MILLISECONDS);
 		}
 	}
 	
 	private void disappear(Player p) {
+		removeFromList(p);
 		Log.i("ConnectionService", "Disappeared %s with character %s", p.getUsername(), p.getCharacterName());
 		if (p.getPlayerObject() != null)
 			p.getPlayerObject().clearFlagBitmask(PlayerFlags.LD);
@@ -229,6 +245,19 @@ public class ConnectionService extends Service {
 		int deltaTime = (int) ((System.currentTimeMillis()) - startTime);
 		int newTotalTime = currentTime + (int) TimeUnit.MILLISECONDS.toSeconds(deltaTime);
 		playerObject.setPlayTime(newTotalTime);
+	}
+	
+	private static class DisappearPlayer {
+		private final long time;
+		private final Player player;
+		
+		public DisappearPlayer(long time, Player player) {
+			this.time = time;
+			this.player = player;
+		}
+		
+		public long getTime() { return time; }
+		public Player getPlayer() { return player; }
 	}
 	
 }
