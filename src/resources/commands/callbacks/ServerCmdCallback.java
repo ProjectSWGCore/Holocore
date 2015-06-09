@@ -44,7 +44,7 @@ import resources.sui.SuiListBox;
 import resources.sui.SuiListBox.ListBoxType;
 import resources.sui.SuiMessageBox;
 import resources.sui.SuiMessageBox.MessageBoxType;
-import resources.utilities.Scripts;
+import utilities.Scripts;
 import services.galaxy.GalacticManager;
 
 public class ServerCmdCallback implements ICmdCallback {

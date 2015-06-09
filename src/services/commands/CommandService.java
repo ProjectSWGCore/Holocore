@@ -48,7 +48,7 @@ import resources.objects.SWGObject;
 import resources.player.AccessLevel;
 import resources.player.Player;
 import resources.server_info.Log;
-import resources.utilities.Scripts;
+import utilities.Scripts;
 import services.galaxy.GalacticManager;
 
 public class CommandService extends Service {
@@ -74,8 +74,7 @@ public class CommandService extends Service {
 		if (i instanceof GalacticPacketIntent) {
 			GalacticPacketIntent gpi = (GalacticPacketIntent) i;
 			Packet p = gpi.getPacket();
-			long netId = gpi.getNetworkId();
-			Player player = gpi.getPlayerManager().getPlayerFromNetworkId(netId);
+			Player player = gpi.getPlayerManager().getPlayerFromNetworkId(gpi.getNetworkId());
 			if (player != null) {
 				if (p instanceof CommandQueueEnqueue) {
 					CommandQueueEnqueue controller = (CommandQueueEnqueue) p;

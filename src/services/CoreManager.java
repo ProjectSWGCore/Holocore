@@ -56,6 +56,7 @@ import resources.control.Manager;
 import resources.control.ServerStatus;
 import resources.server_info.Config;
 import services.galaxy.GalacticManager;
+import utilities.Scripts;
 
 public class CoreManager extends Manager {
 	
@@ -103,12 +104,14 @@ public class CoreManager extends Manager {
 		registerForIntent(ServerManagementIntent.TYPE);
 		packetDebug = getConfig(ConfigFile.PRIMARY).getBoolean("PACKET-DEBUG", false);
 		initializePacketOutput();
+		Scripts.initialize(getConfig(ConfigFile.PRIMARY));
 		return galaxy != null && super.initialize();
 	}
 	
 	@Override
 	public boolean stop() {
 		galaxy.setStatus(GalaxyStatus.LOCKED);
+		Scripts.cleanup();
 		return super.stop();
 	}
 	
