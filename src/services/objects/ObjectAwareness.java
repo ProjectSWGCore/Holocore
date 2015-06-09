@@ -94,7 +94,7 @@ public class ObjectAwareness {
 		double distSquared = distanceSquared(objLoc, inRangeLoc);
 		if (inRange.getLoadRange() != 0 && distSquared > square(inRange.getLoadRange()))
 			return false;
-		if (inRange.getLoadRange() == 0 && distSquared > 200)
+		if (inRange.getLoadRange() == 0 && distSquared > square(200))
 			return false;
 		return true;
 	}
