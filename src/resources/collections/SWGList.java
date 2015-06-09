@@ -88,10 +88,9 @@ public class SWGList<E> extends AbstractList<E> implements Encodable {
 
 	/**
 	 * Creates a new {@link SWGList} with the given StringType to encode in. Note that this constructor must be used if the elements within the list is a String.
-	 * @param baseline
-	 * @param view
-	 * @param updateType
-	 * @param strType
+	 * @param baseline {@link BaselineType} for this list, should be the same as the parent class this list resides in
+	 * @param view The baseline number this list resides in
+	 * @param strType The {@link StringType} of the string, required only if the element in the list is a String as it's used for encoding either Unicode or ASCII characters
 	 */
 	public SWGList(BaselineType baseline, int view, int updateType, StringType strType) {
 		this (baseline, view, updateType);
@@ -100,11 +99,11 @@ public class SWGList<E> extends AbstractList<E> implements Encodable {
 
 	/**
 	 * Creates a ew {@link SWGList} with delta sending either enabled or disabled
-	 * @param baseline
-	 * @param view
-	 * @param updateType
-	 * @param strType
-	 * @param noUpdates
+	 * @param baseline {@link BaselineType} for this list, should be the same as the parent class this list resides in
+	 * @param view The baseline number this list resides in
+	 * @param updateType The update variable used for sending a delta, it's the operand count that this list resides at within the baseline
+	 * @param strType The {@link StringType} of the string, required only if the element in the list is a String as it's used for encoding either Unicode or ASCII characters
+	 * @param noUpdates Determines if a delta should be sent when modifying the list (add/remove/set)
 	 */
 	public SWGList(BaselineType baseline, int view, int updateType, StringType strType, boolean noUpdates) {
 		this (baseline, view, updateType, strType);
@@ -113,7 +112,8 @@ public class SWGList<E> extends AbstractList<E> implements Encodable {
 
 	/**
 	 * Appends the specified element to the end of this list if it doesn't already exist. Once added, the updateCount is incremented by one
-	 * and data for the object is encoded. A add delta is then sent using {@link DeltaBuilder} if noUpdates = false (false by default)
+	 * and data for the object is encoded.
+	 * <br><br>An <i>add delta</i> is then sent using {@link DeltaBuilder} if noUpdates = false (false by default)
 	 * @param e element to be appended to this list
 	 * @return true if the element was added
 	 */
@@ -133,7 +133,7 @@ public class SWGList<E> extends AbstractList<E> implements Encodable {
 	/**
 	 * Inserts the specified element at the specified position in this list. Shifts the element currently
 	 * at that position (if any) and any subsequent elements to the right (adds one to their indices).
-	 * A add delta is then sent using {@link DeltaBuilder} if noUpdates = false (false by default)
+	 * <br><br>An <i>add delta</i> is then sent using {@link DeltaBuilder} if noUpdates = false (false by default)
 	 * @param index index at which the specified element is to be inserted
 	 * @param e element to be inserted
 	 */
@@ -147,11 +147,11 @@ public class SWGList<E> extends AbstractList<E> implements Encodable {
 
 	/**
 	 * Replaces the element at the specified position in this list with the specified element.
-	 * A change delta is then sent using {@link DeltaBuilder} if noUpdates = false (false by default). Since this
+	 * <br><br>A <i>change delta</i> is then sent using {@link DeltaBuilder} if noUpdates = false (false by default). Since this
 	 * sends a change delta, it should only be used for replacing an element, not for adding one.
 	 * @param index index of the element to replace
 	 * @param element
-	 * @return
+	 * @return The element that was replaced
 	 */
 	@Override
 	public E set(int index, E element) {
@@ -167,6 +167,12 @@ public class SWGList<E> extends AbstractList<E> implements Encodable {
 	}
 
 
+	/**
+	 * Removes the element at the specified position in this list. Shifts any subsequent elements to the left
+	 * (subtracts one from their indices). Returns the element that was removed from the list.
+	 * @param index
+	 * @return
+	 */
 	@Override
 	public E remove(int index) {
 		// Method is also called for remove(E element), just replaced by the index
@@ -193,7 +199,12 @@ public class SWGList<E> extends AbstractList<E> implements Encodable {
 	public int size() {
 		return list.size();
 	}
-	
+
+	/**
+	 * Creates an array of bytes based off of the elements within this list. Elements that are not of a standard type
+	 * handled by {@link Encoder} should implement the {@link Encodable} interface.
+	 * @return
+	 */
 	@Override
 	public byte[] encode() {
 		int size = list.size();
