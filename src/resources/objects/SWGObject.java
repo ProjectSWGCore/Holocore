@@ -776,6 +776,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	}
 	
 	public final void sendDelta(BaselineType baseline, int type, int update, Object value) {
+		Player owner = getOwner();
 		if (owner == null || (owner.getPlayerState() != PlayerState.ZONED_IN))
 			return;
 
@@ -784,6 +785,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	}
 	
 	public final void sendDelta(BaselineType baseline, int type, int update, Object value, StringType strType) {
+		Player owner = getOwner();
 		if (owner == null || (owner.getPlayerState() != PlayerState.ZONED_IN))
 			return;
 		
