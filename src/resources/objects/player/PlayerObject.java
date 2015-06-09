@@ -49,8 +49,8 @@ public class PlayerObject extends IntangibleObject {
 	
 	private String	biography		= "";
 	// PLAY 03
-	private SWGList<Integer> 	flagsList			= new SWGList<>(BaselineType.PLAY, 3, 5, false, StringType.UNSPECIFIED, true);
-	private SWGList<Integer> 	profileFlags		= new SWGList<>(BaselineType.PLAY, 3, 6, false, StringType.UNSPECIFIED, true);
+	private SWGList<Integer> 	flagsList			= new SWGList<>(BaselineType.PLAY, 3, 5, StringType.UNSPECIFIED, true);
+	private SWGList<Integer> 	profileFlags		= new SWGList<>(BaselineType.PLAY, 3, 6, StringType.UNSPECIFIED, true);
 	private String 				title				= "";
 	private int 				bornDate			= 0;
 	private int 				playTime			= 0;
