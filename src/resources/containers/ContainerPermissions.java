@@ -67,8 +67,8 @@ public abstract class ContainerPermissions implements Serializable {
 
 	public boolean hasPermissions(List<String> requesterGroups, Permission ... permission) {
 		for (String group : requesterGroups) {
-			if (hasPermissions(group, permission));
-			return true;
+			if (hasPermissions(group, permission))
+				return true;
 		}
 		return false;
 	}
