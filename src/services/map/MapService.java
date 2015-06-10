@@ -28,6 +28,7 @@
 package services.map;
 
 import com.sun.corba.se.spi.activation.Server;
+import com.sun.deploy.util.SessionState;
 import intents.network.GalacticPacketIntent;
 import network.packets.Packet;
 import network.packets.swg.SWGPacket;
@@ -131,7 +132,7 @@ public class MapService extends Service {
 	}
 
 	private void loadMapCategories() {
-		DatatableData table = ServerFactory.getDatatable("datatables/player/planet_map_cat.iff");
+		DatatableData table = (DatatableData) ClientFactory.getInfoFromFile("datatables/player/planet_map_cat.iff");
 		for (int row = 0; row < table.getRowCount(); row++) {
 			MapCategory category = new MapCategory();
 			category.setName(table.getCell(row, 0).toString());

@@ -39,6 +39,8 @@ import resources.client_info.visitors.SlotDefinitionData;
 import resources.client_info.visitors.SlotDescriptorData;
 
 public class ClientFactory extends DataFactory {
+	private static ClientFactory instance;
+
 	private Map <String, ClientData> dataMap = new HashMap<>();
 	private Map <String, String> typeMap = new HashMap<>();
 	
@@ -167,6 +169,12 @@ public class ClientFactory extends DataFactory {
 
 	@Override
 	protected String getFolder() {
-		return "./DataObject/";
+		return "./clientdata/";
+	}
+
+	private static ClientFactory getInstance() {
+		if (instance == null)
+			instance = new ClientFactory();
+		return instance;
 	}
 }

@@ -39,11 +39,6 @@ import java.nio.ByteOrder;
  * Created by Waverunner on 6/9/2015
  */
 public abstract class DataFactory {
-	private static DataFactory instance;
-
-	public DataFactory() {
-		instance = this;
-	}
 
 	private ClientData getFileType(ByteBuffer bb) {
 		bb.position(8); // Skip the first FORM and data size
@@ -60,7 +55,7 @@ public abstract class DataFactory {
 		try {
 			File f = new File(getFolder() + file);
 			if (!f.exists()) {
-				System.out.println(file + " not found!");
+				System.out.println(getFolder() + file + " not found!");
 				return null;
 			}
 
@@ -140,8 +135,4 @@ public abstract class DataFactory {
 
 	protected abstract ClientData createDataObject(String type);
 	protected abstract String getFolder();
-
-	protected static DataFactory getInstance() {
-		return instance;
-	}
 }

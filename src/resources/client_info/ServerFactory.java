@@ -34,6 +34,7 @@ import resources.client_info.visitors.DatatableData;
  * Created by Waverunner on 6/9/2015
  */
 public final class ServerFactory extends DataFactory {
+	private static ServerFactory instance;
 
 	public static DatatableData getDatatable(String file) {
 		ClientData data = getInstance().readFile(file);
@@ -49,5 +50,11 @@ public final class ServerFactory extends DataFactory {
 	@Override
 	protected String getFolder() {
 		return "./serverdata/";
+	}
+
+	private static ServerFactory getInstance() {
+		if (instance == null)
+			instance = new ServerFactory();
+		return instance;
 	}
 }
