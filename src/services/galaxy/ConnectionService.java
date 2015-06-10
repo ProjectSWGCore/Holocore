@@ -231,7 +231,6 @@ public class ConnectionService extends Service {
 		switch(reason) {
 			case NEW_CONNECTION_ATTEMPT: // The player is attempting to re-zone
 				removeFromDisappear(p);
-				p.setPlayerState(PlayerState.DISCONNECTED);
 				break;
 			default:
 				removeFromLists(p);
