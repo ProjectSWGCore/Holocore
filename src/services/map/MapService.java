@@ -27,12 +27,14 @@
 
 package services.map;
 
+import com.sun.corba.se.spi.activation.Server;
 import intents.network.GalacticPacketIntent;
 import network.packets.Packet;
 import network.packets.swg.SWGPacket;
 import network.packets.swg.zone.spatial.GetMapLocationsMessage;
 import network.packets.swg.zone.spatial.GetMapLocationsResponseMessage;
 import resources.client_info.ClientFactory;
+import resources.client_info.ServerFactory;
 import resources.client_info.visitors.DatatableData;
 import resources.control.Intent;
 import resources.control.Service;
@@ -129,7 +131,7 @@ public class MapService extends Service {
 	}
 
 	private void loadMapCategories() {
-		DatatableData table = (DatatableData) ClientFactory.getInfoFromFile("datatables/player/planet_map_cat.iff");
+		DatatableData table = ServerFactory.getDatatable("datatables/player/planet_map_cat.iff");
 		for (int row = 0; row < table.getRowCount(); row++) {
 			MapCategory category = new MapCategory();
 			category.setName(table.getCell(row, 0).toString());
@@ -144,7 +146,7 @@ public class MapService extends Service {
 	}
 
 	private void loadMappingTemplates() {
-		DatatableData table = (DatatableData) ClientFactory.getInfoFromFile("map_locations.iff");
+		DatatableData table = ServerFactory.getDatatable("map_locations.iff");
 		for (int row = 0; row < table.getRowCount(); row++) {
 			MappingTemplate template = new MappingTemplate();
 			template.setTemplate(ClientFactory.formatToSharedFile(table.getCell(row, 0).toString()));

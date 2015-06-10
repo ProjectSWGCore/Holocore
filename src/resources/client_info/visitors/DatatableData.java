@@ -29,6 +29,7 @@ package resources.client_info.visitors;
 
 import java.nio.ByteBuffer;
 
+import resources.client_info.ClientData;
 import utilities.ByteUtilities;
 
 public class DatatableData extends ClientData {
@@ -39,7 +40,7 @@ public class DatatableData extends ClientData {
 	//private Map<String, Integer> enums;
 	
 	@Override
-	public void handleData(String node, ByteBuffer data, int size) {
+	public void parse(String node, ByteBuffer data, int size) {
 
 		switch(node) {
 		

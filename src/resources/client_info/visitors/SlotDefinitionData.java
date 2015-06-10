@@ -30,6 +30,7 @@ package resources.client_info.visitors;
 import java.nio.ByteBuffer;
 import java.util.HashMap;
 
+import resources.client_info.ClientData;
 import utilities.ByteUtilities;
 
 public class SlotDefinitionData extends ClientData {
@@ -47,7 +48,7 @@ public class SlotDefinitionData extends ClientData {
 	}
 	
 	@Override
-	public void handleData(String node, ByteBuffer data, int size) {
+	public void parse(String node, ByteBuffer data, int size) {
 		while (data.hasRemaining()) { 
 			SlotDefinition def = new SlotDefinition();
 
