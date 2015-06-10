@@ -27,29 +27,31 @@
 
 package resources.containers;
 
-import java.io.Serializable;
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import resources.objects.SWGObject;
 
-public final class ContainerPermissions implements Serializable {
+import java.io.Serializable;
+import java.util.*;
+
+/**
+ * Structure for creating permission sets that will allow the object to be viewed/modified/added/removed by a requested
+ * object depending on the implemented abstract methods.
+ * @author Waverunner
+ */
+public abstract class ContainerPermissions implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private Map<String, Integer> permissionGroups;
-	private long owner;
+	public static WorldPermissions      WORLD       = new WorldPermissions();
+	public static InventoryPermissions  INVENTORY   = new InventoryPermissions();
 
-	public ContainerPermissions(long owner) {
+	private Map<String, Integer> permissionGroups;
+	private List<String> joinedGroups;
+
+	public ContainerPermissions() {
 		this.permissionGroups = new HashMap<>();
-		this.owner = owner;
-		
-		synchronized (permissionGroups) {
-			permissionGroups.put("owner", Permission.valueOf(Permission.values()));
-			permissionGroups.put("admin", Permission.valueOf(Permission.values()));
-		}
+		this.joinedGroups = new ArrayList<>();
 	}
 
-	public boolean hasPermissions(String group, Permission... permissions) {
+	protected boolean hasPermissions(String group, Permission... permissions) {
 		if (!hasPermissionGroup(group))
 			return false;
 
@@ -63,7 +65,20 @@ public final class ContainerPermissions implements Serializable {
 		return true;
 	}
 
+	public boolean hasPermissions(List<String> requesterGroups, Permission ... permission) {
+		for (String group : requesterGroups) {
+			if (hasPermissions(group, permission));
+			return true;
+		}
+		return false;
+	}
+
 	public void addPermissions(String group, Permission... permissions) {
+		if (!hasPermissionGroup(group)) {
+			permissionGroups.put(group, Permission.valueOf(permissions));
+			return;
+		}
+
 		EnumSet<Permission> groupPermissions = Permission.getFlags(permissionGroups.get(group));
 
 		for (Permission permission : permissions) {
@@ -91,12 +106,6 @@ public final class ContainerPermissions implements Serializable {
 		}
 	}
 
-	public void addDefaultWorldPermissions() {
-		synchronized (permissionGroups) {
-			permissionGroups.put("world", Permission.valueOf(Permission.ENTER_BUILDING, Permission.OPEN));
-		}
-	}
-
 	public void clearPermissions(String group) {
 		synchronized (permissionGroups) {
 			if (permissionGroups.containsKey(group))
@@ -114,20 +123,26 @@ public final class ContainerPermissions implements Serializable {
 		}
 	}
 
-	public void setOwner(long owner) {
-		this.owner = owner;
+	public List<String> getJoinedGroups() {
+		return joinedGroups;
 	}
 
-	public long getOwner() {
-		return owner;
+	public void addDefaultWorldPermissions() {
+		addPermissions("world", Permission.VIEW, Permission.ENTER);
 	}
+
+	public abstract boolean canView(SWGObject viewer, SWGObject container);
+	public abstract boolean canEnter(SWGObject requester, SWGObject container);
+	public abstract boolean canRemove(SWGObject requester, SWGObject container);
+	public abstract boolean canMove(SWGObject requester, SWGObject container);
+	public abstract boolean canAdd(SWGObject requester, SWGObject container);
 
 	public enum Permission {
-		OPEN(1),
+		VIEW(1),
 		REMOVE(1<<1),
 		ADD(1<<2),
 		MOVE(1<<3),
-		ENTER_BUILDING(1<<4);
+		ENTER(1<<4);
 
 		int bitmask;
 

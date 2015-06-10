@@ -44,6 +44,7 @@ import resources.Location;
 import resources.common.CRC;
 import resources.containers.ContainerPermissions;
 import resources.containers.ContainerResult;
+import resources.containers.DefaultPermissions;
 import resources.encodables.Stf;
 import resources.network.BaselineBuilder;
 import resources.network.DeltaBuilder;
@@ -62,8 +63,8 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	private final Map<Long, SWGObject> containedObjects;
 	private final Map <String, String> attributes;
 	private final Map <String, Object> templateAttributes;
-	private final ContainerPermissions containerPermissions;
 	private final BaselineType objectType;
+	private ContainerPermissions containerPermissions;
 	private transient List <SWGObject> objectsAware;
 	private List <List <String>> arrangement;
 
@@ -96,7 +97,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		this.containedObjects = Collections.synchronizedMap(new HashMap<Long, SWGObject>());
 		this.attributes = new LinkedHashMap<String, String>();
 		this.templateAttributes = new HashMap<String, Object>();
-		this.containerPermissions = new ContainerPermissions(objectId);
+		this.containerPermissions = new DefaultPermissions();
 		this.objectType = objectType;
 	}
 	
@@ -129,7 +130,6 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 
 		object.parent = this;
 		object.slotArrangement = arrangementId;
-		object.containerPermissions.setOwner(objectId);
 		return true;
 	}
 
@@ -150,11 +150,10 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 
 		object.parent = null;
 		object.slotArrangement = -1;
-		object.containerPermissions.setOwner(-1);
 	}
 
 	/**
-	 * Moves the current object to the target object
+	 * Moves this object to the passed container if the requester has the MOVE permission for the container
 	 * @param requester Object that is requesting to move the object, used for permission checking
 	 * @param container Where this object should be moved to
 	 * @return {@link ContainerResult}
@@ -194,42 +193,102 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		return ContainerResult.SUCCESS;
 	}
 
-	public boolean hasOwnerPermissions(SWGObject object) {
-		return (object.getObjectId() == containerPermissions.getOwner());
+	/**
+	 * Attempts to move this object to the defined container without checking for permissions
+	 * @param container
+	 * @return {@link ContainerResult}
+	 */
+	public ContainerResult moveToContainer(SWGObject container) {
+		return moveToContainer(null, container);
 	}
 
+	/**
+	 * Checks if the passed object has all of the passed permissions
+	 * @param object Requester to view this container
+	 * @param permissions Permissions to check for
+	 * @return
+	 */
 	public boolean hasPermission(SWGObject object, ContainerPermissions.Permission... permissions) {
-		if (object == this || hasOwnerPermissions(object))
+		if (object == null || object == this || object.getOwner() == getOwner())
 			return true;
-
-		if (!containerPermissions.hasPermissions(String.valueOf(object.getObjectId()), permissions)) {
-			// Doesn't have any owner permissions or specific permissions, check to see if this object has an
-			// acceptable permission group with the specified permissions available.
-			for (String permissionGroup : object.containerPermissions.getPermissionGroups()) {
-				if (containerPermissions.hasPermissions(permissionGroup, permissions)) {
-					//System.out.println(object + " can view " + this);
-					return true;
-				}
+		for (ContainerPermissions.Permission permission : permissions) {
+			switch(permission) {
+				case VIEW:
+					if (!containerPermissions.canView(object, this))
+						return false;
+					break;
+				case MOVE:
+					if (!containerPermissions.canMove(object, this))
+						return false;
+					break;
+				case REMOVE:
+					if (!containerPermissions.canRemove(object, this))
+						return false;
+					break;
+				case ADD:
+					if (!containerPermissions.canAdd(object, this))
+						return false;
+					break;
+				case ENTER:
+					if (!containerPermissions.canEnter(object, this))
+						return false;
+					break;
 			}
-			return false;
 		}
-		else return true;
+		return true;
 	}
 
+	/**
+	 * Creates a new permission group for this object with the given permissions for that group
+	 * @param group Name of the permission group
+	 * @param permissions Permissions for the group
+	 */
 	public void addPermissions(String group, ContainerPermissions.Permission... permissions) {
 		containerPermissions.addPermissions(group, permissions);
 	}
 
+	/**
+	 * Removes the stated permissions from the group.
+	 * @param group Name of the permission group
+	 * @param permissions Permissions to remove
+	 */
 	public void removePermissions(String group, ContainerPermissions.Permission... permissions) {
 		containerPermissions.removePermissions(group, permissions);
 	}
 
+	/**
+	 * Creates a new permission group specific to the permission requester that has the defined permissions. The name of the
+	 * new group for this object will be the objectId of this object plus the objectId of the requester.
+	 * <br>This is the same as calling addPermissions(String.valueOf(permissionRequester.getObjectId() + getObjectId()), permissions)
+	 * with the added benefit of adding the group to the permissionRequester's joined container groups
+	 * @param permissionRequester The object that should be given unique permissions to this object
+	 * @param permissions Permissions that the permissionRequester will have for this object
+	 */
 	public void addPermissions(SWGObject permissionRequester, ContainerPermissions.Permission... permissions) {
-		addPermissions(String.valueOf(permissionRequester.getObjectId()), permissions);
+		addPermissions(String.valueOf(permissionRequester.getObjectId() + getObjectId()), permissions);
+		permissionRequester.joinPermissionGroup(String.valueOf(getObjectId() + permissionRequester.getObjectId()));
 	}
 
-	public void removePermissions(SWGObject permissionRequester, ContainerPermissions.Permission... permissions) {
-		removePermissions(String.valueOf(permissionRequester.getObjectId()), permissions);
+	/**
+	 * Removes all the unique permissions for the permissionRequester from this object.
+	 * @param permissionRequester The object that should no longer have unique permissions to this object
+	 */
+	public void removePermissions(SWGObject permissionRequester) {
+		String group = String.valueOf(permissionRequester.getObjectId() + getObjectId());
+		removePermissions(group);
+		permissionRequester.containerPermissions.getJoinedGroups().remove(group);
+	}
+
+	/**
+	 * Assigns this object to a permission group
+	 * @param group
+	 */
+	public void joinPermissionGroup(String group) {
+		containerPermissions.getJoinedGroups().add(group);
+	}
+
+	public void setContainerPermissions(ContainerPermissions permissions) {
+		this.containerPermissions = permissions;
 	}
 
 	public void addAttribute(String attribute, String value) {
@@ -491,6 +550,11 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	}
 	
 	public void createObject(Player target) {
+		if (!hasPermission(target.getCreatureObject(), ContainerPermissions.Permission.VIEW)) {
+			// Log.i("SWGObject", target.getCreatureObject() + " doesn't have permission to view " + this + " -- skipping packet sending");
+			return;
+		}
+
 		sendSceneCreateObject(target);
 		sendBaselines(target);
 		createChildrenObjects(target);
@@ -682,11 +746,6 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	protected void createChildrenObjects(Player target) {
 		if (slots.size() == 0 && containedObjects.size() == 0)
 			return;
-
-		if (!hasPermission(target.getCreatureObject(), ContainerPermissions.Permission.OPEN)) {
-			Log.i("SWGObject", target.getCreatureObject() + " doesn't have permission to view " + this + " -- skipping packet sending");
-			return;
-		}
 
 		List<SWGObject> sentObjects = new ArrayList<>();
 

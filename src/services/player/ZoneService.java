@@ -86,6 +86,7 @@ import resources.Terrain;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.ProfTemplateData;
 import resources.config.ConfigFile;
+import resources.containers.ContainerPermissions;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.SWGObject;
@@ -480,7 +481,6 @@ public class ZoneService extends Service {
 		if (hair.isEmpty())
 			return;
 		TangibleObject hairObj = createTangible(objManager, ClientFactory.formatToSharedFile(hair));
-		hairObj.getContainerPermissions().addDefaultWorldPermissions();
 		hairObj.setAppearanceData(customization);
 
 		creatureObj.addObject(hairObj); // slot = hair
@@ -489,8 +489,11 @@ public class ZoneService extends Service {
 	
 	private void setCreatureObjectValues(ObjectManager objManager, CreatureObject creatureObj, ClientCreateCharacter create) {
 		TangibleObject inventory	= createTangible(objManager, "object/tangible/inventory/shared_character_inventory.iff");
+		inventory.setContainerPermissions(ContainerPermissions.INVENTORY);
 		TangibleObject datapad		= createTangible(objManager, "object/tangible/datapad/shared_character_datapad.iff");
+		datapad.setContainerPermissions(ContainerPermissions.INVENTORY);
 		TangibleObject apprncInventory = createTangible(objManager, "object/tangible/inventory/shared_appearance_inventory.iff");
+		apprncInventory.setContainerPermissions(ContainerPermissions.INVENTORY);
 		
 		creatureObj.setRace(Race.getRaceByFile(create.getRace()));
 		creatureObj.setAppearanceData(create.getCharCustomization());
@@ -507,15 +510,13 @@ public class ZoneService extends Service {
 		creatureObj.addEquipment(datapad);
 		creatureObj.addEquipment(apprncInventory);
 
-		creatureObj.getContainerPermissions().addDefaultWorldPermissions();
+		creatureObj.joinPermissionGroup("world");
 	}
 	
 	private void setPlayerObjectValues(PlayerObject playerObj, ClientCreateCharacter create) {
 		playerObj.setProfession(create.getProfession());
 		Calendar date = Calendar.getInstance();
 		playerObj.setBornDate(date.get(Calendar.YEAR), date.get(Calendar.MONTH) + 1, date.get(Calendar.DAY_OF_MONTH));
-
-		playerObj.getContainerPermissions().addDefaultWorldPermissions();
 	}
 	
 	private void handleGalaxyLoopTimesRequest(Player player, GalaxyLoopTimesRequest req) {
