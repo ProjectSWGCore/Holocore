@@ -260,9 +260,11 @@ public class ObjectManager extends Manager {
 				destroyObject(slottedObj);
 		}
 
-		for (SWGObject containedObj : object.getContainedObjects()) {
-			if (containedObj != null)
-				destroyObject(containedObj);
+		Iterator<SWGObject> containerIterator = object.getContainedObjects().iterator();
+		while(containerIterator.hasNext()) {
+			SWGObject containedObject = containerIterator.next();
+			if (containedObject != null)
+				destroyObject(containedObject);
 		}
 
 		// Remove object from the parent
