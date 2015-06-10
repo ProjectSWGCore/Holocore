@@ -91,7 +91,7 @@ public class ConnectionService extends Service {
 				if (p == null)
 					return;
 				if ((System.nanoTime()-p.getTime())/1E6 >= DISAPPEAR_THRESHOLD) {
-					disappear(p.getPlayer());
+					disappear(p.getPlayer(), DisconnectReason.TIMEOUT);
 				} else {
 					disappearPlayers.addFirst(p);
 				}
@@ -171,10 +171,10 @@ public class ConnectionService extends Service {
 		logOut(fdi.getPlayer(), !fdi.getDisappearImmediately());
 		disconnect(fdi.getPlayer(), fdi.getDisconnectReason());
 		if (fdi.getDisappearImmediately())
-			disappear(fdi.getPlayer());
+			disappear(fdi.getPlayer(), fdi.getDisconnectReason());
 	}
 	
-	private void removeFromList(Player player) {
+	private void removeFromLists(Player player) {
 		synchronized (zonedInPlayers) {
 			Iterator <Player> zonedIterator = zonedInPlayers.iterator();
 			while (zonedIterator.hasNext()) {
@@ -185,6 +185,10 @@ public class ConnectionService extends Service {
 				}
 			}
 		}
+		removeFromDisappear(player);
+	}
+
+	private void removeFromDisappear(Player player) {
 		synchronized (disappearPlayers) {
 			Iterator <DisappearPlayer> disappearIterator = disappearPlayers.iterator();
 			while (disappearIterator.hasNext()) {
@@ -203,7 +207,7 @@ public class ConnectionService extends Service {
 	}
 	
 	private void logOut(Player p, boolean addToDisappear) {
-		removeFromList(p);
+		removeFromLists(p);
 		Log.i("ConnectionService", "Logged out %s with character %s", p.getUsername(), p.getCharacterName());
 		updatePlayTime(p);
 		if (p.getPlayerState() != PlayerState.LOGGED_OUT)
@@ -219,13 +223,22 @@ public class ConnectionService extends Service {
 		}
 	}
 	
-	private void disappear(Player p) {
-		removeFromList(p);
+	private void disappear(Player p, DisconnectReason reason) {
 		Log.i("ConnectionService", "Disappeared %s with character %s", p.getUsername(), p.getCharacterName());
 		if (p.getPlayerObject() != null)
 			p.getPlayerObject().clearFlagBitmask(PlayerFlags.LD);
+
+		switch(reason) {
+			case NEW_CONNECTION_ATTEMPT: // The player is attempting to re-zone
+				removeFromDisappear(p);
+				p.setPlayerState(PlayerState.DISCONNECTED);
+				break;
+			default:
+				removeFromLists(p);
+				p.getCreatureObject().setOwner(null);
+				break;
+		}
 		p.setPlayerState(PlayerState.DISCONNECTED);
-		p.getCreatureObject().setOwner(null);
 		System.out.println("[" + p.getUsername() +"] " + p.getCharacterName() + " disappeared");
 		new PlayerEventIntent(p, PlayerEvent.PE_DISAPPEAR).broadcast();
 	}
