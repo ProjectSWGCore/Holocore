@@ -451,7 +451,6 @@ public class ZoneService extends Service {
 		creatureObj.setOwner(player);
 		creatureObj.addObject(playerObj); // ghost slot
 		playerObj.setAdminTag(player.getAccessLevel());
-		playerObj.setOwner(player);
 		player.setCreatureObject(creatureObj);
 		return creatureObj.getObjectId();
 	}

@@ -31,21 +31,21 @@ import java.util.EnumSet;
 
 public enum PlayerFlags {
 	/** Marks as Looking for a Group */
-	LFG			(0x0001),
+	LFG			(0),
 	/** Marks as Helper */
-	HELPER		(0x0002),
+	HELPER		(1),
 	/** Marks as Roleplayer */
-	ROLEPLAYER	(0x0004),
+	ROLEPLAYER	(2),
 	/** Away from Keyboard */
-	AFK			(0x0080),
+	AFK			(7),
 	/** Logged Out */
-	LD			(0x0100),
+	LD			(8),
 	/** Display the Faction Rank */
-	FACTIONRANK	(0x0200),
+	FACTIONRANK	(9),
 	/** Marks as Out of Character */
-	OOC			(0x0800),
+	OOC			(11),
 	/** Marks as Looking for Work */
-	LFW			(0x2000);
+	LFW			(13);
 	
 	private int flag;
 	
@@ -56,14 +56,4 @@ public enum PlayerFlags {
 	public int getFlag() {
 		return flag;
 	}
-	
-	public static EnumSet <PlayerFlags> getFlags(int bits) {
-		EnumSet <PlayerFlags> flags = EnumSet.noneOf(PlayerFlags.class);
-		for (PlayerFlags flag : values()) {
-			if ((flag.getFlag() & bits) != 0)
-				flags.add(flag);
-		}
-		return flags;
-	}
-	
 }

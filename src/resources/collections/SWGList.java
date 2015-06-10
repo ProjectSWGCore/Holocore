@@ -60,7 +60,6 @@ public class SWGList<E> extends AbstractList<E> implements Encodable {
 	private transient int updateCount;
 	private int dataSize;
 
-	private boolean noUpdates = false;
 	private StringType strType = StringType.UNSPECIFIED;
 	
 	/*
@@ -96,19 +95,6 @@ public class SWGList<E> extends AbstractList<E> implements Encodable {
 	public SWGList(BaselineType baseline, int view, int updateType, StringType strType) {
 		this (baseline, view, updateType);
 		this.strType = strType;
-	}
-
-	/**
-	 * Creates a ew {@link SWGList} with delta sending either enabled or disabled
-	 * @param baseline
-	 * @param view
-	 * @param updateType
-	 * @param strType
-	 * @param noUpdates
-	 */
-	public SWGList(BaselineType baseline, int view, int updateType, StringType strType, boolean noUpdates) {
-		this (baseline, view, updateType, strType);
-		this.noUpdates = noUpdates;
 	}
 
 	/**
@@ -208,13 +194,14 @@ public class SWGList<E> extends AbstractList<E> implements Encodable {
 			for (int i = 0; i < size; i++) {
 				addObjectData(i, list.get(i), (byte) 0);
 			}
+			clearDeltaQueue();
 		}
 
-		ByteBuffer buffer = ByteBuffer.allocate(4 + (noUpdates ? 0 : 4) + dataSize).order(ByteOrder.LITTLE_ENDIAN);
+		ByteBuffer buffer = ByteBuffer.allocate(8 + dataSize).order(ByteOrder.LITTLE_ENDIAN);
 
 		buffer.putInt(size);
-		if (!noUpdates) buffer.putInt(updateCount);
-		
+		buffer.putInt(updateCount);
+
 		for (byte[] bytes : data.values()) {
 			buffer.put(bytes);
 		}
@@ -231,7 +218,7 @@ public class SWGList<E> extends AbstractList<E> implements Encodable {
 			return;
 		}
 		
-		DeltaBuilder builder = new DeltaBuilder(target, baseline, view, updateType, (noUpdates ? encode() : getDeltaData()));
+		DeltaBuilder builder = new DeltaBuilder(target, baseline, view, updateType, getDeltaData());
 		builder.send();
 		// Clear the queue since the delta has been sent to observers through the builder
 		clearDeltaQueue();
@@ -281,9 +268,6 @@ public class SWGList<E> extends AbstractList<E> implements Encodable {
 		
 		dataSize += encodedData.length;
 
-		if (noUpdates)
-			return;
-
 		ByteBuffer buffer = ByteBuffer.allocate(encodedData.length + 2).order(ByteOrder.LITTLE_ENDIAN);
 		buffer.putShort((short) index);
 		buffer.put(encodedData);
@@ -300,9 +284,6 @@ public class SWGList<E> extends AbstractList<E> implements Encodable {
 		if (data.get(index) != null) {
 			dataSize -= data.remove(index).length;
 		}
-
-		if (noUpdates)
-			return;
 
 		// Only the index is sent for removing data
 		ByteBuffer buffer = ByteBuffer.allocate(2).order(ByteOrder.LITTLE_ENDIAN);

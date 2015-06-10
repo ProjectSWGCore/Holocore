@@ -167,6 +167,7 @@ public class SWGMap<K, V> extends AbstractMap<K, V> implements Encodable {
 			for (Entry<K, V> entry : map.entrySet()) {
 				addData(entry.getKey(), entry.getValue(), (byte) 0);
 			}
+			clearDeltaQueue();
 		}
 
 		for (byte[] bytes : data.values()) {
@@ -211,15 +212,15 @@ public class SWGMap<K, V> extends AbstractMap<K, V> implements Encodable {
 	
 	private void createDeltaData(Object key, byte[] delta, byte update) {
 		synchronized(deltas) {
-			byte[] combindedUpdate = new byte[delta.length + 1];
-			combindedUpdate[0] = update;
-			System.arraycopy(delta, 0, combindedUpdate, 1, delta.length);
+			byte[] combinedUpdate = new byte[delta.length + 1];
+			combinedUpdate[0] = update;
+			System.arraycopy(delta, 0, combinedUpdate, 1, delta.length);
 
 			if (deltas.containsKey(key)) {
 				deltaSize -= deltas.remove(key).length;
 			}
 			deltaSize += delta.length + 1;
-			deltas.put(key, combindedUpdate);
+			deltas.put(key, combinedUpdate);
 		}
 	}
 
