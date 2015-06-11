@@ -37,12 +37,7 @@ import utilities.Encoder.StringType;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import java.util.AbstractList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.*;
 
 /**
  * Supports a list of elements which automatically sends data as a delta when changed for baselines.
@@ -67,10 +62,11 @@ public class SWGList<E> extends AbstractList<E> implements Encodable {
 	 * also allow all the data to be pre-compiled for the list, so it can have a positive impact on large SWGList's. This means that only 1 ByteBuffer is being created,
 	 * and that is to just take the data from this map and put it all together!
 	 */
-	private Map<Integer, byte[]> data = new ConcurrentHashMap<>();
-	private List<E> list = new CopyOnWriteArrayList<>(); // thread-safe list
+	private final List<byte[]> data = new ArrayList<>();
+
+	private final List<E> list = new ArrayList<>(); // thread-safe list
 	
-	private LinkedList<byte[]> deltas = new LinkedList<>();
+	private final LinkedList<byte[]> deltas = new LinkedList<>();
 	private int deltaSize;
 
 	/**
@@ -105,15 +101,8 @@ public class SWGList<E> extends AbstractList<E> implements Encodable {
 	 */
 	@Override
 	public boolean add(E e) {
-		updateCount++;
-		
-		boolean added = list.add(e);
-		
-		if (added) {
-			addObjectData(list.lastIndexOf(e), e);
-		}
-		
-		return added;
+		add(list.size(), e);
+		return list.contains(e);
 	}
 
 	/**
@@ -125,10 +114,11 @@ public class SWGList<E> extends AbstractList<E> implements Encodable {
 	 */
 	@Override
 	public void add(int index, E e) {
-		updateCount++;
-		list.add(index, e);
-		
-		addObjectData(index, e);
+		synchronized (list) {
+			updateCount++;
+			list.add(index, e);
+			addObjectData(index, e, (byte) 1);
+		}
 	}
 
 	/**
@@ -142,25 +132,40 @@ public class SWGList<E> extends AbstractList<E> implements Encodable {
 	@Override
 	public E set(int index, E element) {
 		// Sends a "change" delta
-		updateCount++;
-		E previous = list.set(index, element);
-		if (previous != null) {
-			removeDataSize(index);
-			removeData(index);
+		E previous;
+		synchronized (list) {
+			previous = list.set(index, element);
+			if (previous != null) {
+				updateCount++;
+				removeDataSize(index);
+				removeData(index);
+			}
+			addObjectData(index, element, (byte) 2);
 		}
-		addObjectData(index, element, (byte) 2);
 		return previous;
 	}
 
+	@Override
+	public boolean remove(Object o) {
+		int index = list.indexOf(o);
+		if (index != -1) {
+			remove(index);
+			return true;
+		}
+		return false;
+	}
 
 	@Override
 	public E remove(int index) {
-		// Method is also called for remove(E element), just replaced by the index
-		updateCount++;
-		E element = list.remove(index);
+		E element;
 
-		if (element != null)
-			removeObjectData(index, element, (byte) 0);
+		synchronized (list) {
+			element = list.remove(index);
+			if (element != null) {
+				updateCount++;
+				removeObjectData(index, (byte) 0);
+			}
+		}
 
 		return element;
 	}
@@ -188,24 +193,15 @@ public class SWGList<E> extends AbstractList<E> implements Encodable {
 			return new byte[8];
 		}
 
-		if (size != data.size()) {
-			// Data got out of sync with the list, so lets clean that up!
-			clearAllData();
-			for (int i = 0; i < size; i++) {
-				addObjectData(i, list.get(i), (byte) 0);
-			}
-			clearDeltaQueue();
-		}
-
 		ByteBuffer buffer = ByteBuffer.allocate(8 + dataSize).order(ByteOrder.LITTLE_ENDIAN);
 
 		buffer.putInt(size);
 		buffer.putInt(updateCount);
 
-		for (byte[] bytes : data.values()) {
+		for (byte[] bytes : data) {
 			buffer.put(bytes);
 		}
-		
+
 		return buffer.array();
 	}
 	
@@ -227,16 +223,6 @@ public class SWGList<E> extends AbstractList<E> implements Encodable {
 	public void clearDeltaQueue() {
 		deltas.clear();
 		deltaSize = 0;
-	}
-
-	private void clearAllData() {
-		data.clear();
-		dataSize = 0;
-		clearDeltaQueue();
-	}
-
-	public void setUpdateCount(int count) {
-		this.updateCount = count;
 	}
 	
 	private byte[] getDeltaData() {
@@ -261,12 +247,17 @@ public class SWGList<E> extends AbstractList<E> implements Encodable {
 		}
 	}
 	
-	private void addObjectData(int index, Object obj, byte update) {
+	private void addObjectData(int index, E obj, byte update) {
 		byte[] encodedData = Encoder.encode(obj, strType);
-		
-		data.put(index, encodedData);
-		
+		if (encodedData == null) {
+			System.err.println(toString() + " FATAL: Tried to encode an object that could not be encoded properly. Object: " + obj);
+			return;
+		}
+
 		dataSize += encodedData.length;
+		synchronized (data) {
+			data.add(encodedData);
+		}
 
 		ByteBuffer buffer = ByteBuffer.allocate(encodedData.length + 2).order(ByteOrder.LITTLE_ENDIAN);
 		buffer.putShort((short) index);
@@ -275,13 +266,13 @@ public class SWGList<E> extends AbstractList<E> implements Encodable {
 		byte[] indexedBytes = buffer.array();
 		createDeltaData(indexedBytes, update);
 	}
-	
-	private void addObjectData(int index, Object obj) {
-		addObjectData(index, obj, (byte) 1);
-	}
 
-	private void removeObjectData(int index, Object object, byte update) {
-		if (data.get(index) != null) {
+	private void removeObjectData(int index, byte update) {
+		if (data.get(index) == null) {
+			return;
+		}
+
+		synchronized (data) {
 			dataSize -= data.remove(index).length;
 		}
 
@@ -297,12 +288,12 @@ public class SWGList<E> extends AbstractList<E> implements Encodable {
 	}
 
 	private void removeData(int index) {
-		data.remove(index);
+		synchronized (data) {
+			data.remove(index);
+		}
 	}
 
 	public BaselineType getBaseline() { return baseline; }
-	public int getViewType() { return view; }
-	public int getUpdateType() { return updateType; }
 
 	@Override
 	public String toString() {
