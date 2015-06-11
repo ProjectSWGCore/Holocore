@@ -126,7 +126,7 @@ public class SWGList<E> extends AbstractList<E> implements Encodable {
 	 * <br><br>A <i>change delta</i> is then sent using {@link DeltaBuilder} if noUpdates = false (false by default). Since this
 	 * sends a change delta, it should only be used for replacing an element, not for adding one.
 	 * @param index index of the element to replace
-	 * @param element
+	 * @param element element to be stored at the specified position
 	 * @return The element that was replaced
 	 */
 	@Override
@@ -147,7 +147,8 @@ public class SWGList<E> extends AbstractList<E> implements Encodable {
 
 	@Override
 	public boolean remove(Object o) {
-		int index = list.indexOf(o);
+		//noinspection SuspiciousMethodCalls
+		int index = list.indexOf(o); // No idea why this produces a suspicious method call..
 		if (index != -1) {
 			remove(index);
 			return true;
@@ -158,8 +159,8 @@ public class SWGList<E> extends AbstractList<E> implements Encodable {
 	/**
 	 * Removes the element at the specified position in this list. Shifts any subsequent elements to the left
 	 * (subtracts one from their indices). Returns the element that was removed from the list.
-	 * @param index
-	 * @return
+	 * @param index the index of the element to be removed
+	 * @return the element previously at the specified position
 	 */
 	@Override
 	public E remove(int index) {
@@ -194,7 +195,7 @@ public class SWGList<E> extends AbstractList<E> implements Encodable {
 	/**
 	 * Creates an array of bytes based off of the elements within this list. Elements that are not of a standard type
 	 * handled by {@link Encoder} should implement the {@link Encodable} interface.
-	 * @return
+	 * @return Array of bytes with the size, update count, and encoded elements
 	 */
 	@Override
 	public byte[] encode() {
