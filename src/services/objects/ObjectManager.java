@@ -336,8 +336,10 @@ public class ObjectManager extends Manager {
 	
 	private void zoneInCharacter(PlayerManager playerManager, String galaxy, long netId, long characterId) {
 		Player player = playerManager.getPlayerFromNetworkId(netId);
-		if (player == null)
+		if (player == null) {
+			Log.e("ObjectManager", "Unable to zone in null player '%ld'", netId);
 			return;
+		}
 		SWGObject creatureObj = objects.get(characterId);
 		if (creatureObj == null) {
 			System.err.println("ObjectManager: Failed to start zone - CreatureObject could not be fetched from database [Character: " + characterId + "  User: " + player.getUsername() + "]");
