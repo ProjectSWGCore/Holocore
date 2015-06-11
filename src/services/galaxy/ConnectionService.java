@@ -137,7 +137,7 @@ public class ConnectionService extends Service {
 	
 	private void onPlayerEventIntent(PlayerEventIntent pei) {
 		switch (pei.getEvent()) {
-			case PE_ZONE_IN: {
+			case PE_FIRST_ZONE: {
 				Player p = pei.getPlayer();
 				synchronized (zonedInPlayers) {
 					zonedInPlayers.add(p);

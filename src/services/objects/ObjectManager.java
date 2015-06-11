@@ -53,6 +53,7 @@ import resources.objects.buildouts.BuildoutLoader;
 import resources.objects.creature.CreatureObject;
 import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
+import resources.player.PlayerEvent;
 import resources.server_info.CachedObjectDatabase;
 import resources.server_info.Config;
 import resources.server_info.Log;
@@ -206,8 +207,8 @@ public class ObjectManager extends Manager {
 		
 		if (object instanceof CreatureObject && object.getOwner() != null){
 			sendPacket(object.getOwner(), new CmdStartScene(false, object.getObjectId(), ((CreatureObject)object).getRace(), object.getLocation(), (long)(ProjectSWG.getCoreTime()/1E3)));
-			((CreatureObject)object).createObject(object.getOwner());
-			((CreatureObject)object).clearAware();
+			object.createObject(object.getOwner());
+			new PlayerEventIntent(object.getOwner(), PlayerEvent.PE_ZONE_IN).broadcast();
 		}
 	}
 
