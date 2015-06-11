@@ -1,8 +1,6 @@
 package network.packets.swg.zone;
 
 import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-
 import resources.WeatherType;
 import network.packets.swg.SWGPacket;
 
@@ -21,7 +19,7 @@ public class ServerWeatherMessage extends SWGPacket {
 			return;
 		WeatherType type = WeatherType.CLEAR;
 		
-		switch(data.getInt()) {
+		switch(getInt(data)) {
 			case 0:
 				type = WeatherType.CLEAR;
 				break;
@@ -41,21 +39,22 @@ public class ServerWeatherMessage extends SWGPacket {
 		
 		this.type = type;
 		
-		cloudVectorX = data.getFloat();
-		cloudVectorZ = data.getFloat();
-		cloudVectorY = data.getFloat();
+		cloudVectorX = getFloat(data);
+		cloudVectorZ = getFloat(data);
+		cloudVectorY = getFloat(data);
 	}
 	
 	@Override
 	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(22).order(ByteOrder.LITTLE_ENDIAN);
+		ByteBuffer data = ByteBuffer.allocate(22);
 		
-		data.putShort((short) 3);
-		data.putInt(CRC);
-		data.putInt(type.getValue());
-		data.putFloat(cloudVectorX);
-		data.putFloat(cloudVectorZ);
-		data.putFloat(cloudVectorY);
+		addShort(data, 3);
+		addInt(data, CRC);
+		addInt(data, type.getValue());
+		
+		addFloat(data, cloudVectorX);
+		addFloat(data, cloudVectorZ);
+		addFloat(data, cloudVectorY);
 		
 		return data;
 	}

@@ -28,7 +28,6 @@
 package services.galaxy;
 
 import resources.control.Manager;
-import resources.control.Service;
 import services.chat.ChatService;
 import services.commands.CommandService;
 import services.player.WeatherService;
