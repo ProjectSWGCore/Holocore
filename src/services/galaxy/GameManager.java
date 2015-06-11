@@ -28,8 +28,10 @@
 package services.galaxy;
 
 import resources.control.Manager;
+import resources.control.Service;
 import services.chat.ChatService;
 import services.commands.CommandService;
+import services.player.WeatherService;
 import services.sui.SuiService;
 
 public class GameManager extends Manager {
@@ -38,16 +40,19 @@ public class GameManager extends Manager {
 	private CommandService commandService;
 	private ConnectionService connectionService;
 	private SuiService suiService;
+	private WeatherService weatherService;
 	
 	public GameManager() {
 		chatService = new ChatService();
 		commandService = new CommandService();
 		connectionService = new ConnectionService();
 		suiService = new SuiService();
+		weatherService = new WeatherService();
 		
 		addChildService(chatService);
 		addChildService(commandService);
 		addChildService(connectionService);
 		addChildService(suiService);
+		addChildService(weatherService);
 	}
 }
