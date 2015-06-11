@@ -35,7 +35,9 @@ import resources.objects.SWGObject;
  * @author Waverunner
  */
 public class DefaultPermissions extends ContainerPermissions {
-
+	
+	private static final long serialVersionUID = 200L;
+	
 	@Override
 	public boolean canView(SWGObject requester, SWGObject container) {
 		return true;

@@ -27,8 +27,6 @@
 ***********************************************************************************/
 package resources.player;
 
-import java.util.EnumSet;
-
 public enum PlayerFlags {
 	/** Marks as Looking for a Group */
 	LFG			(0),

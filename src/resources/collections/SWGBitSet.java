@@ -42,6 +42,9 @@ import java.util.BitSet;
  * @author Waverunner
  */
 public class SWGBitSet extends BitSet implements BaselineBuilder.Encodable {
+	
+	private static final long serialVersionUID = 200L;
+	
 	private final Baseline.BaselineType baseline;
 	private int view;
 	private int updateType;

@@ -29,8 +29,6 @@ package resources.containers;
 
 import resources.objects.SWGObject;
 
-import java.util.List;
-
 /**
  * This is essentially a universal "all-in-one" permission set for managing permission groups for world objects. This
  * class makes use of permission groups. Every player joins the world permission group upon creation. When a specific
@@ -49,6 +47,9 @@ import java.util.List;
  * @author Waverunner
  */
 public class WorldPermissions extends DefaultPermissions {
+	
+	private static final long serialVersionUID = 200L;
+	
 	@Override
 	public boolean canView(SWGObject viewer, SWGObject container) {
 		if (super.canView(viewer, container))

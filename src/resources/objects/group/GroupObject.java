@@ -32,7 +32,9 @@ import resources.objects.SWGObject;
 import resources.player.Player;
 
 public class GroupObject extends SWGObject {
-
+	
+	private static final long serialVersionUID = 200L;
+	
 	@Override
 	public void createBaseline6(Player target, BaselineBuilder bb) {
 		super.createBaseline6(target, bb); // BASE06 -- 2 variables

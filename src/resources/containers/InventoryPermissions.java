@@ -35,6 +35,9 @@ import resources.objects.SWGObject;
  * @author Waverunner
  */
 public class InventoryPermissions extends DefaultPermissions {
+	
+	private static final long serialVersionUID = 200L;
+	
 	@Override
 	public boolean canView(SWGObject requester, SWGObject container) {
 		return requester.getOwner() == container.getOwner();
