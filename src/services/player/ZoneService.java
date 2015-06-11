@@ -29,7 +29,7 @@ package services.player;
 
 import intents.GalacticIntent;
 import intents.PlayerEventIntent;
-import intents.ZoneInIntent;
+import intents.RequestZoneInIntent;
 
 import java.io.File;
 import java.io.IOException;
@@ -140,7 +140,7 @@ public class ZoneService extends Service {
 		loadCommitHistory();
 		if (!nameFilter.load())
 			System.err.println("Failed to load name filter!");
-		registerForIntent(ZoneInIntent.TYPE);
+		registerForIntent(RequestZoneInIntent.TYPE);
 		return super.initialize();
 	}
 	
@@ -152,8 +152,8 @@ public class ZoneService extends Service {
 	
 	@Override
 	public void onIntentReceived(Intent i) {
-		if (i instanceof ZoneInIntent) {
-			ZoneInIntent zii = (ZoneInIntent) i;
+		if (i instanceof RequestZoneInIntent) {
+			RequestZoneInIntent zii = (RequestZoneInIntent) i;
 			zoneInPlayer(zii.getPlayer(), zii.getCreature(), zii.getGalaxy());
 		}
 	}

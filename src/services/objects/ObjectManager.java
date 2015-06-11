@@ -29,7 +29,7 @@ package services.objects;
 
 import intents.ObjectTeleportIntent;
 import intents.PlayerEventIntent;
-import intents.ZoneInIntent;
+import intents.RequestZoneInIntent;
 import intents.network.GalacticPacketIntent;
 
 import java.util.*;
@@ -357,7 +357,7 @@ public class ObjectManager extends Manager {
 			return;
 		}
 		objectAwareness.add(creatureObj);
-		new ZoneInIntent(player, (CreatureObject) creatureObj, galaxy).broadcast();
+		new RequestZoneInIntent(player, (CreatureObject) creatureObj, galaxy).broadcast();
 	}
 	
 	private long getNextObjectId() {
