@@ -30,7 +30,6 @@ package services.galaxy;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -44,6 +43,7 @@ import intents.network.ForceDisconnectIntent;
 import intents.network.GalacticPacketIntent;
 import resources.control.Intent;
 import resources.control.Service;
+import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
 import resources.player.Player;
 import resources.player.PlayerEvent;
@@ -60,13 +60,13 @@ public class ConnectionService extends Service {
 	private final ScheduledExecutorService updateService;
 	private final Runnable updateRunnable;
 	private final Runnable disappearRunnable;
-	private final Queue <Player> disappearPlayers;
+	private final LinkedList <DisappearPlayer> disappearPlayers;
 	private final List <Player> zonedInPlayers;
 	
 	public ConnectionService() {
 		updateService = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("conn-update-service"));
 		zonedInPlayers = new LinkedList<Player>();
-		disappearPlayers = new LinkedList<Player>();
+		disappearPlayers = new LinkedList<DisappearPlayer>();
 		updateRunnable = new Runnable() {
 			public void run() {
 				synchronized (zonedInPlayers) {
@@ -74,9 +74,9 @@ public class ConnectionService extends Service {
 					while (i.hasNext()) {
 						Player p = i.next();
 						if (p.getTimeSinceLastPacket() > LD_THRESHOLD) {
+							i.remove();
 							logOut(p);
 							disconnect(p, DisconnectReason.TIMEOUT);
-							i.remove();
 						}
 					}
 				}
@@ -84,10 +84,16 @@ public class ConnectionService extends Service {
 		};
 		disappearRunnable = new Runnable() {
 			public void run() {
-				Player p = disappearPlayers.poll();
-				synchronized (zonedInPlayers) {
-					if (p != null && zonedInPlayers.contains(p))
-						disappear(p);
+				DisappearPlayer p = null;
+				synchronized (disappearPlayers) {
+					p = disappearPlayers.poll();
+				}
+				if (p == null)
+					return;
+				if ((System.nanoTime()-p.getTime())/1E6 >= DISAPPEAR_THRESHOLD) {
+					disappear(p.getPlayer(), DisconnectReason.TIMEOUT);
+				} else {
+					disappearPlayers.addFirst(p);
 				}
 			}
 		};
@@ -131,19 +137,13 @@ public class ConnectionService extends Service {
 	
 	private void onPlayerEventIntent(PlayerEventIntent pei) {
 		switch (pei.getEvent()) {
-			case PE_ZONE_IN: {
+			case PE_FIRST_ZONE: {
 				Player p = pei.getPlayer();
 				synchronized (zonedInPlayers) {
-					removeOld(p);
 					zonedInPlayers.add(p);
 				}
 				break;
 			}
-			case PE_DISAPPEAR:
-				synchronized (zonedInPlayers) {
-					zonedInPlayers.remove(pei.getPlayer());
-				}
-				break;
 			default:
 				break;
 		}
@@ -171,16 +171,32 @@ public class ConnectionService extends Service {
 		logOut(fdi.getPlayer(), !fdi.getDisappearImmediately());
 		disconnect(fdi.getPlayer(), fdi.getDisconnectReason());
 		if (fdi.getDisappearImmediately())
-			disappear(fdi.getPlayer());
+			disappear(fdi.getPlayer(), fdi.getDisconnectReason());
 	}
 	
-	private void removeOld(Player nPlayer) {
+	private void removeFromLists(Player player) {
 		synchronized (zonedInPlayers) {
 			Iterator <Player> zonedIterator = zonedInPlayers.iterator();
 			while (zonedIterator.hasNext()) {
 				Player old = zonedIterator.next();
-				if (old.equals(nPlayer)) {
+				CreatureObject oldObj = old.getCreatureObject();
+				if (oldObj == null || player.equals(old) || player == old) {
 					zonedIterator.remove();
+				}
+			}
+		}
+		removeFromDisappear(player);
+	}
+
+	private void removeFromDisappear(Player player) {
+		synchronized (disappearPlayers) {
+			Iterator <DisappearPlayer> disappearIterator = disappearPlayers.iterator();
+			while (disappearIterator.hasNext()) {
+				DisappearPlayer old = disappearIterator.next();
+				Player oldPlayer = old.getPlayer();
+				CreatureObject oldObj = old.getPlayer().getCreatureObject();
+				if (oldObj == null || player.equals(old) || player == oldPlayer) {
+					disappearIterator.remove();
 				}
 			}
 		}
@@ -191,6 +207,7 @@ public class ConnectionService extends Service {
 	}
 	
 	private void logOut(Player p, boolean addToDisappear) {
+		removeFromLists(p);
 		Log.i("ConnectionService", "Logged out %s with character %s", p.getUsername(), p.getCharacterName());
 		updatePlayTime(p);
 		if (p.getPlayerState() != PlayerState.LOGGED_OUT)
@@ -199,18 +216,28 @@ public class ConnectionService extends Service {
 			p.getPlayerObject().setFlagBitmask(PlayerFlags.LD);
 		p.setPlayerState(PlayerState.LOGGED_OUT);
 		if (addToDisappear) {
-			disappearPlayers.add(p);
+			synchronized (disappearPlayers) {
+				disappearPlayers.add(new DisappearPlayer(System.nanoTime(), p));
+			}
 			updateService.schedule(disappearRunnable, (long) DISAPPEAR_THRESHOLD, TimeUnit.MILLISECONDS);
 		}
 	}
 	
-	private void disappear(Player p) {
+	private void disappear(Player p, DisconnectReason reason) {
 		Log.i("ConnectionService", "Disappeared %s with character %s", p.getUsername(), p.getCharacterName());
 		if (p.getPlayerObject() != null)
 			p.getPlayerObject().clearFlagBitmask(PlayerFlags.LD);
+
+		switch(reason) {
+			case NEW_CONNECTION_ATTEMPT: // The player is attempting to re-zone
+				removeFromDisappear(p);
+				break;
+			default:
+				removeFromLists(p);
+				p.getCreatureObject().setOwner(null);
+				break;
+		}
 		p.setPlayerState(PlayerState.DISCONNECTED);
-		p.getPlayerObject().setOwner(null);
-		p.getCreatureObject().setOwner(null);
 		System.out.println("[" + p.getUsername() +"] " + p.getCharacterName() + " disappeared");
 		new PlayerEventIntent(p, PlayerEvent.PE_DISAPPEAR).broadcast();
 	}
@@ -230,6 +257,19 @@ public class ConnectionService extends Service {
 		int deltaTime = (int) ((System.currentTimeMillis()) - startTime);
 		int newTotalTime = currentTime + (int) TimeUnit.MILLISECONDS.toSeconds(deltaTime);
 		playerObject.setPlayTime(newTotalTime);
+	}
+	
+	private static class DisappearPlayer {
+		private final long time;
+		private final Player player;
+		
+		public DisappearPlayer(long time, Player player) {
+			this.time = time;
+			this.player = player;
+		}
+		
+		public long getTime() { return time; }
+		public Player getPlayer() { return player; }
 	}
 	
 }

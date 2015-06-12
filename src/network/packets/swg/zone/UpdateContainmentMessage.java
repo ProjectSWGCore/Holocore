@@ -58,8 +58,7 @@ public class UpdateContainmentMessage extends SWGPacket {
 	}
 	
 	public ByteBuffer encode() {
-		int length = 26;
-		ByteBuffer data = ByteBuffer.allocate(length);
+		ByteBuffer data = ByteBuffer.allocate(26);
 		addShort(data, 4);
 		addInt(  data, CRC);
 		addLong( data, objectId);

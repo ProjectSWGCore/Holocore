@@ -29,8 +29,10 @@ package services.player;
 
 import intents.GalacticIntent;
 import intents.PlayerEventIntent;
-import intents.ZoneInIntent;
+import intents.RequestZoneInIntent;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -40,6 +42,11 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
+
+import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.lib.Constants;
+import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.revwalk.RevCommit;
 
 import main.ProjectSWG;
 import network.packets.Packet;
@@ -68,6 +75,7 @@ import network.packets.swg.zone.ShowBackpack;
 import network.packets.swg.zone.ShowHelmet;
 import network.packets.swg.zone.UpdatePvpStatusMessage;
 import network.packets.swg.zone.chat.ChatOnConnectAvatar;
+import network.packets.swg.zone.chat.ChatSystemMessage;
 import network.packets.swg.zone.chat.VoiceChatStatus;
 import network.packets.swg.zone.insertion.ChatServerStatus;
 import network.packets.swg.zone.insertion.CmdStartScene;
@@ -78,6 +86,7 @@ import resources.Terrain;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.ProfTemplateData;
 import resources.config.ConfigFile;
+import resources.containers.ContainerPermissions;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.SWGObject;
@@ -102,7 +111,6 @@ public class ZoneService extends Service {
 
 	private final Map <String, Player> lockedNames;
 	private final Map <String, ProfTemplateData> profTemplates;
-	private final ClientFactory clientFac;
 	private final NameFilter nameFilter;
 	private final SWGNameGenerator nameGenerator;
 	private final CharacterCreationRestriction creationRestriction;
@@ -110,14 +118,15 @@ public class ZoneService extends Service {
 	private PreparedStatement createCharacter;
 	private PreparedStatement getCharacter;
 	private PreparedStatement getLikeCharacterName;
+	private String commitHistory;
 	
 	public ZoneService() {
 		lockedNames = new HashMap<String, Player>();
 		profTemplates = new ConcurrentHashMap<String, ProfTemplateData>();
-		clientFac = new ClientFactory();
 		nameFilter = new NameFilter("namegen/bad_word_list.txt", "namegen/reserved_words.txt", "namegen/fiction_reserved.txt");
 		nameGenerator = new SWGNameGenerator(nameFilter);
 		creationRestriction = new CharacterCreationRestriction(2);
+		commitHistory = "";
 	}
 	
 	@Override
@@ -128,9 +137,10 @@ public class ZoneService extends Service {
 		getLikeCharacterName = getLocalDatabase().prepareStatement("SELECT name FROM characters WHERE name ilike ?"); //NOTE: ilike is not SQL standard. It is an extension for postgres only.
 		nameGenerator.loadAllRules();
 		loadProfTemplates();
+		loadCommitHistory();
 		if (!nameFilter.load())
 			System.err.println("Failed to load name filter!");
-		registerForIntent(ZoneInIntent.TYPE);
+		registerForIntent(RequestZoneInIntent.TYPE);
 		return super.initialize();
 	}
 	
@@ -142,8 +152,8 @@ public class ZoneService extends Service {
 	
 	@Override
 	public void onIntentReceived(Intent i) {
-		if (i instanceof ZoneInIntent) {
-			ZoneInIntent zii = (ZoneInIntent) i;
+		if (i instanceof RequestZoneInIntent) {
+			RequestZoneInIntent zii = (RequestZoneInIntent) i;
 			zoneInPlayer(zii.getPlayer(), zii.getCreature(), zii.getGalaxy());
 		}
 	}
@@ -176,14 +186,54 @@ public class ZoneService extends Service {
 		player.setPlayerState(PlayerState.ZONING_IN);
 		player.setCreatureObject(creature);
 		creature.setOwner(player);
-		playerObj.setOwner(player);
 		
 		sendZonePackets(player, creature);
 		initPlayerBeforeZoneIn(player, creature, playerObj);
 		creature.createObject(player);
 		System.out.printf("[%s] %s is zoning in%n", player.getUsername(), player.getCharacterName());
 		Log.i("ObjectManager", "Zoning in %s with character %s", player.getUsername(), player.getCharacterName());
-		new PlayerEventIntent(player, galaxy, PlayerEvent.PE_ZONE_IN).broadcast();
+		sendCommitHistory(player);
+		PlayerEventIntent firstZone = new PlayerEventIntent(player, galaxy, PlayerEvent.PE_FIRST_ZONE);
+		PlayerEventIntent primary = new PlayerEventIntent(player, galaxy, PlayerEvent.PE_ZONE_IN);
+		primary.broadcastWithIntent(firstZone);
+	}
+	
+	private void loadCommitHistory() {
+		File repoDir = new File("./" + Constants.DOT_GIT); // Ziggy: Get the git directory
+		Git git = null;
+		Repository repo = null;
+		int commitCount = 3;
+		int iterations = 0;
+		
+		try {
+			git = Git.open(repoDir);
+			repo = git.getRepository();
+			
+			try {
+				commitHistory = "The " + commitCount + " most recent commits in branch '" + repo.getBranch() + "':\n";
+				
+				for(RevCommit commit : git.log().setMaxCount(commitCount).call()) {
+					commitHistory += commit.getName().substring(0, 7) + " " + commit.getShortMessage();
+					
+					if(commitCount > iterations++)
+						commitHistory += "\n";
+				}
+				
+			} catch (Throwable t) {
+				t.printStackTrace();
+			}
+			
+		} catch (IOException e) {
+			// Ziggy: An exception is thrown if bash isn't installed
+			// It works fine anyways.
+			// https://www.eclipse.org/forums/index.php/t/1031740/
+		}
+		
+
+	}
+	
+	private void sendCommitHistory(Player player) {
+		player.sendPacket(new ChatSystemMessage(ChatSystemMessage.SystemChatType.CHAT, commitHistory));
 	}
 	
 	private void sendZonePackets(Player player, CreatureObject creature) {
@@ -403,7 +453,6 @@ public class ZoneService extends Service {
 		creatureObj.setOwner(player);
 		creatureObj.addObject(playerObj); // ghost slot
 		playerObj.setAdminTag(player.getAccessLevel());
-		playerObj.setOwner(player);
 		player.setCreatureObject(creatureObj);
 		return creatureObj.getObjectId();
 	}
@@ -433,7 +482,6 @@ public class ZoneService extends Service {
 		if (hair.isEmpty())
 			return;
 		TangibleObject hairObj = createTangible(objManager, ClientFactory.formatToSharedFile(hair));
-		hairObj.getContainerPermissions().addDefaultWorldPermissions();
 		hairObj.setAppearanceData(customization);
 
 		creatureObj.addObject(hairObj); // slot = hair
@@ -442,8 +490,11 @@ public class ZoneService extends Service {
 	
 	private void setCreatureObjectValues(ObjectManager objManager, CreatureObject creatureObj, ClientCreateCharacter create) {
 		TangibleObject inventory	= createTangible(objManager, "object/tangible/inventory/shared_character_inventory.iff");
+		inventory.setContainerPermissions(ContainerPermissions.INVENTORY);
 		TangibleObject datapad		= createTangible(objManager, "object/tangible/datapad/shared_character_datapad.iff");
+		datapad.setContainerPermissions(ContainerPermissions.INVENTORY);
 		TangibleObject apprncInventory = createTangible(objManager, "object/tangible/inventory/shared_appearance_inventory.iff");
+		apprncInventory.setContainerPermissions(ContainerPermissions.INVENTORY);
 		
 		creatureObj.setRace(Race.getRaceByFile(create.getRace()));
 		creatureObj.setAppearanceData(create.getCharCustomization());
@@ -460,15 +511,13 @@ public class ZoneService extends Service {
 		creatureObj.addEquipment(datapad);
 		creatureObj.addEquipment(apprncInventory);
 
-		creatureObj.getContainerPermissions().addDefaultWorldPermissions();
+		creatureObj.joinPermissionGroup("world");
 	}
 	
 	private void setPlayerObjectValues(PlayerObject playerObj, ClientCreateCharacter create) {
 		playerObj.setProfession(create.getProfession());
 		Calendar date = Calendar.getInstance();
 		playerObj.setBornDate(date.get(Calendar.YEAR), date.get(Calendar.MONTH) + 1, date.get(Calendar.DAY_OF_MONTH));
-
-		playerObj.getContainerPermissions().addDefaultWorldPermissions();
 	}
 	
 	private void handleGalaxyLoopTimesRequest(Player player, GalaxyLoopTimesRequest req) {
@@ -489,13 +538,13 @@ public class ZoneService extends Service {
 	}
 	
 	private void loadProfTemplates() {
-		profTemplates.put("crafting_artisan", (ProfTemplateData) clientFac.getInfoFromFile("creation/profession_defaults_combat_brawler.iff"));
-		profTemplates.put("combat_brawler", (ProfTemplateData) clientFac.getInfoFromFile("creation/profession_defaults_combat_brawler.iff"));
-		profTemplates.put("social_entertainer", (ProfTemplateData) clientFac.getInfoFromFile("creation/profession_defaults_social_entertainer.iff"));
-		profTemplates.put("combat_marksman", (ProfTemplateData) clientFac.getInfoFromFile("creation/profession_defaults_combat_marksman.iff"));
-		profTemplates.put("science_medic", (ProfTemplateData) clientFac.getInfoFromFile("creation/profession_defaults_science_medic.iff"));
-		profTemplates.put("outdoors_scout", (ProfTemplateData) clientFac.getInfoFromFile("creation/profession_defaults_outdoors_scout.iff"));
-		profTemplates.put("jedi", (ProfTemplateData) clientFac.getInfoFromFile("creation/profession_defaults_jedi.iff"));
+		profTemplates.put("crafting_artisan", (ProfTemplateData) ClientFactory.getInfoFromFile("creation/profession_defaults_combat_brawler.iff"));
+		profTemplates.put("combat_brawler", (ProfTemplateData) ClientFactory.getInfoFromFile("creation/profession_defaults_combat_brawler.iff"));
+		profTemplates.put("social_entertainer", (ProfTemplateData) ClientFactory.getInfoFromFile("creation/profession_defaults_social_entertainer.iff"));
+		profTemplates.put("combat_marksman", (ProfTemplateData) ClientFactory.getInfoFromFile("creation/profession_defaults_combat_marksman.iff"));
+		profTemplates.put("science_medic", (ProfTemplateData) ClientFactory.getInfoFromFile("creation/profession_defaults_science_medic.iff"));
+		profTemplates.put("outdoors_scout", (ProfTemplateData) ClientFactory.getInfoFromFile("creation/profession_defaults_outdoors_scout.iff"));
+		profTemplates.put("jedi", (ProfTemplateData) ClientFactory.getInfoFromFile("creation/profession_defaults_jedi.iff"));
 	}
 	
 	private boolean lockName(String name, Player player) {

@@ -42,15 +42,13 @@ public class WaypointCmdCallback implements ICmdCallback {
 
 	@Override
 	public void execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
-		PlayerObject ghost = (PlayerObject) player.getPlayerObject();
+		PlayerObject ghost = player.getPlayerObject();
 		if (ghost == null)
 			return;
 		
 		String[] cmdArgs = args.split(" ");
 		if (cmdArgs.length > 6)
 			cmdArgs = args.split(" ", 6);
-		
-		printCmdArgs(cmdArgs);
 
 		WaypointColor color = null;
 		Terrain terrain = null;
@@ -88,37 +86,21 @@ public class WaypointCmdCallback implements ICmdCallback {
 			default: 
 				break;
 		}
-
-		WaypointObject waypoint = createWaypoint(galacticManager.getObjectManager(), terrain, color, name, x, y, player.getCreatureObject().getLocation());
-		ghost.addWaypoint(waypoint);
+			WaypointObject waypoint = createWaypoint(galacticManager.getObjectManager(), terrain, color, name, x, y, player.getCreatureObject().getLocation());
+			ghost.addWaypoint(waypoint);
+		
 	}
 
 	private WaypointObject createWaypoint(ObjectManager objManager, Terrain terrain, WaypointColor color, String name, float x, float y, Location loc) {
-		WaypointObject waypoint = (WaypointObject) objManager.createObject("object/waypoint/shared_waypoint.iff", loc);
-		
+		WaypointObject waypoint = (WaypointObject) objManager.createObject("object/waypoint/shared_waypoint.iff", false);
+
+		waypoint.setLocation(new Location((x != -1 ? x : loc.getX()), 0, (y != -1 ? y : loc.getZ()), (terrain != null ? terrain : loc.getTerrain())));
 		if (color != null)
 			waypoint.setColor(color);
-		
-		if (terrain != null)
-			waypoint.getLocation().setTerrain(terrain);
-		
-		if (x != -1)
-			waypoint.getLocation().setX(new Float(x).doubleValue());
-		if (y != -1)
-			waypoint.getLocation().setZ(new Float(y).doubleValue());
-		
-		waypoint.getLocation().setY(0);
+
 		waypoint.setName(name == null ? "New Waypoint" : name);
 		
 		return waypoint;
-	}
-	
-	private void printCmdArgs(String[] args) {
-		System.out.println("CmdArgs: ");
-		for (String str : args) {
-			System.out.print(str + ":");
-		}
-		System.out.println("");
 	}
 	
 	private float floatValue(String str) {

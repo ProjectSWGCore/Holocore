@@ -50,9 +50,7 @@ import resources.objects.waypoint.WaypointObject;
 import resources.objects.weapon.WeaponObject;
 
 public final class ObjectCreator {
-	
-	private static final ClientFactory clientFac = new ClientFactory();
-	
+
 	public static final SWGObject createObjectFromTemplate(long objectId, String template) {
 		if (!template.startsWith("object/"))
 			return null;
@@ -93,17 +91,8 @@ public final class ObjectCreator {
 	}
 
 	private static void addObjectAttributes(SWGObject obj, String template) {
-		ObjectData attributes = (ObjectData) clientFac.getInfoFromFile(ClientFactory.formatToSharedFile(template));
+		ObjectData attributes = (ObjectData) ClientFactory.getInfoFromFile(ClientFactory.formatToSharedFile(template));
 
-		String stf = (String) attributes.getAttribute(ObjectData.OBJ_STF);
-		String detailStf = (String) attributes.getAttribute(ObjectData.DETAIL_STF);
-		Integer volumeLimit = (Integer) attributes.getAttribute(ObjectData.VOLUME_LIMIT);
-		
-		obj.setStf(stf);
-		if (detailStf != null)
-			obj.setDetailStf(detailStf);
-		if (volumeLimit != null)
-			obj.setVolume(volumeLimit);
 		for (Entry<String, Object> e : attributes.getAttributes().entrySet()) {
 			obj.setTemplateAttribute(e.getKey(), e.getValue());
 
@@ -113,8 +102,10 @@ public final class ObjectCreator {
 
 	private static void setObjectAttribute(String key, String value, SWGObject object) {
 		switch(key) {
-			case "volume": object.setVolume(Integer.valueOf(value)); break;
-			case "containerType": object.setContainerType(Integer.valueOf(value)); break;
+			case ObjectData.OBJ_STF: object.setStf(value); break;
+			case ObjectData.DETAIL_STF: object.setDetailStf(value); break;
+			case ObjectData.VOLUME_LIMIT: object.setVolume(Integer.valueOf(value)); break;
+			case ObjectData.CONTAINER_TYPE: object.setContainerType(Integer.valueOf(value)); break;
 			default: break;
 		}
 	}
@@ -122,7 +113,7 @@ public final class ObjectCreator {
 	private static void createObjectSlots(SWGObject object) {
 		if (object.getTemplateAttribute(ObjectData.SLOT_DESCRIPTOR) != null) {
 			// These are the slots that the object *HAS*
-			SlotDescriptorData descriptor = (SlotDescriptorData) clientFac.getInfoFromFile((String) object.getTemplateAttribute(ObjectData.SLOT_DESCRIPTOR));
+			SlotDescriptorData descriptor = (SlotDescriptorData) ClientFactory.getInfoFromFile((String) object.getTemplateAttribute(ObjectData.SLOT_DESCRIPTOR));
 
 			for (String slotName : descriptor.getSlots()) {
 				object.getSlots().put(slotName, null);
@@ -131,7 +122,7 @@ public final class ObjectCreator {
 		
 		if (object.getTemplateAttribute(ObjectData.ARRANGEMENT_FILE) != null) {
 			// This is what slots the created object is able to go into/use
-			SlotArrangementData arrangementData = (SlotArrangementData) clientFac.getInfoFromFile((String) object.getTemplateAttribute(ObjectData.ARRANGEMENT_FILE));
+			SlotArrangementData arrangementData = (SlotArrangementData) ClientFactory.getInfoFromFile((String) object.getTemplateAttribute(ObjectData.ARRANGEMENT_FILE));
 			object.setArrangement(arrangementData.getArrangement());
 		}
 	}

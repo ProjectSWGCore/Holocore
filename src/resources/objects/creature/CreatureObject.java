@@ -30,6 +30,7 @@ package resources.objects.creature;
 import network.packets.swg.zone.UpdatePostureMessage;
 import network.packets.swg.zone.UpdatePvpStatusMessage;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
+import network.packets.swg.zone.object_controller.PostureUpdate;
 import resources.HologramColour;
 import resources.Posture;
 import resources.Race;
@@ -39,6 +40,7 @@ import resources.encodables.player.Equipment;
 import resources.network.BaselineBuilder;
 import resources.objects.SWGObject;
 import resources.objects.player.PlayerObject;
+import resources.objects.tangible.OptionFlag;
 import resources.objects.tangible.TangibleObject;
 import resources.objects.weapon.WeaponObject;
 import resources.player.Player;
@@ -90,10 +92,10 @@ public class CreatureObject extends TangibleObject {
 	private HologramColour hologramColour = HologramColour.DEFAULT;
 	
 	private SWGList<Integer>	baseAttributes	= new SWGList<Integer>(BaselineType.CREO, 1, 2);
-	private SWGList<String>		skills			= new SWGList<String>(BaselineType.CREO, 1, 3, false, StringType.ASCII);
-	private SWGList<Integer>	hamEncumbList	= new SWGList<Integer>(BaselineType.CREO, 4, 2, true);
-	private SWGList<Integer>	attributes		= new SWGList<Integer>(BaselineType.CREO, 6, 21, true);
-	private SWGList<Integer>	maxAttributes	= new SWGList<Integer>(BaselineType.CREO, 6, 22, true);
+	private SWGList<String>		skills			= new SWGList<String>(BaselineType.CREO, 1, 3, StringType.ASCII); // SWGSet
+	private SWGList<Integer>	hamEncumbList	= new SWGList<Integer>(BaselineType.CREO, 4, 2);
+	private SWGList<Integer>	attributes		= new SWGList<Integer>(BaselineType.CREO, 6, 21);
+	private SWGList<Integer>	maxAttributes	= new SWGList<Integer>(BaselineType.CREO, 6, 22);
 	private SWGList<Equipment>	equipmentList 	= new SWGList<Equipment>(BaselineType.CREO, 6, 23);
 	private SWGList<Equipment>	appearanceList 	= new SWGList<Equipment>(BaselineType.CREO, 6, 33);
 	
@@ -108,12 +110,18 @@ public class CreatureObject extends TangibleObject {
 		initMaxAttributes();
 		initCurrentAttributes();
 		initBaseAttributes();
+		setOptionFlags(OptionFlag.HAM_BAR);
 	}
 
 	public void removeEquipment(SWGObject obj) {
 		synchronized (equipmentList) {
-			if (equipmentList.remove(obj))
-				equipmentList.sendDeltaMessage(this);
+			for (Equipment equipment : equipmentList) {
+				if (equipment.getObjectId() == obj.getObjectId()) {
+					equipmentList.remove(equipment);
+					equipmentList.sendDeltaMessage(this);
+					break;
+				}
+			}
 		}
 	}
 
@@ -136,8 +144,12 @@ public class CreatureObject extends TangibleObject {
 
 	public void removeAppearanceItem(SWGObject obj) {
 		synchronized (appearanceList) {
-			if (appearanceList.remove(obj))
-				appearanceList.sendDeltaMessage(this);
+			for (Equipment equipment : appearanceList) {
+				if (equipment.getObjectId() == obj.getObjectId()) {
+					appearanceList.remove(equipment);
+					appearanceList.sendDeltaMessage(this);
+				}
+			}
 		}
 	}
 
@@ -244,6 +256,7 @@ public class CreatureObject extends TangibleObject {
 	public void setPosture(Posture posture) {
 		this.posture = posture;
 		sendDelta(3, 13, posture.getId());
+		sendObserversAndSelf(new PostureUpdate(getObjectId(), posture));
 	}
 	
 	public void setRace(Race race) {
@@ -262,12 +275,12 @@ public class CreatureObject extends TangibleObject {
 	
 	public void setMovementScale(double movementScale) {
 		this.movementScale = movementScale;
-		sendDelta(4, 4, movementScale);
+		sendDelta(4, 5, movementScale);
 	}
 	
 	public void setMovementPercent(double movementPercent) {
 		this.movementPercent = movementPercent;
-		sendDelta(4, 5, movementPercent);
+		sendDelta(4, 4, movementPercent);
 	}
 	
 	public void setWalkSpeed(double walkSpeed) {
@@ -282,12 +295,12 @@ public class CreatureObject extends TangibleObject {
 	
 	public void setAccelScale(double accelScale) {
 		this.accelScale = accelScale;
-		sendDelta(4, 0, accelScale);
+		sendDelta(4, 1, accelScale);
 	}
 	
 	public void setAccelPercent(double accelPercent) {
 		this.accelPercent = accelPercent;
-		sendDelta(4, 1, accelPercent);
+		sendDelta(4, 0, accelPercent);
 	}
 	
 	public void setTurnScale(double turnScale) {
@@ -655,11 +668,16 @@ public class CreatureObject extends TangibleObject {
 			bb.sendTo(target);
 		}
 	}
-	
-	protected void createChildrenObjects(Player target) {
+
+	@Override
+	public void createObject(Player target) {
+		super.createObject(target);
+
 		target.sendPacket(new UpdatePostureMessage(posture.getId(), getObjectId()));
-		if (target != getOwner()) target.sendPacket(new UpdatePvpStatusMessage(UpdatePvpStatusMessage.PLAYER, 0, getObjectId())); // TODO: Change this when adding non-players
-		super.createChildrenObjects(target);
+
+		if (getOwner() != null && target != getOwner()) {
+			target.sendPacket(new UpdatePvpStatusMessage(UpdatePvpStatusMessage.PLAYER, 0, getObjectId()));
+		}
 	}
 	
 	public void createBaseline1(Player target, BaselineBuilder bb) {
@@ -686,12 +704,12 @@ public class CreatureObject extends TangibleObject {
 	
 	public void createBaseline4(Player target, BaselineBuilder bb) {
 		super.createBaseline4(target, bb); // 0 variables
-		bb.addFloat((float) accelScale); // 0
-		bb.addFloat((float) accelPercent); // 1
-		bb.addObject(hamEncumbList); // 2
+		bb.addFloat((float) accelPercent); // 0
+		bb.addFloat((float) accelScale); // 1
+		bb.addObject(hamEncumbList); // Rename to bonusAttributes? 2
 		bb.addObject(skillMods); // 3
-		bb.addFloat((float) movementScale); // 4
-		bb.addFloat((float) movementPercent); // 5
+		bb.addFloat((float) movementPercent); // 4
+		bb.addFloat((float) movementScale); // 5
 		bb.addLong(performanceListenTarget); // 6
 		bb.addFloat((float) runSpeed); // 7
 		bb.addFloat((float) slopeModAngle); // 8
@@ -699,7 +717,7 @@ public class CreatureObject extends TangibleObject {
 		bb.addFloat((float) turnScale); // 10
 		bb.addFloat((float) walkSpeed); // 11
 		bb.addFloat((float) waterModPercent); // 12
-		bb.addObject(missionCriticalObjs); // 13
+		bb.addObject(missionCriticalObjs); // Group Missions? 13
 		bb.addObject(abilities); // 14
 		bb.addInt(totalLevelXp); // 15
 		
@@ -734,9 +752,9 @@ public class CreatureObject extends TangibleObject {
 		bb.addInt((hologramColour == null) ? -1 : hologramColour.getValue()); // Hologram Color -- 29
 		bb.addBoolean(shownOnRadar); // 30
 		bb.addBoolean(beast); // 31
-		bb.addByte(0); // Unknown -- 32
+		bb.addByte(0); // forceShowHam? -- 32
 		bb.addObject(appearanceList); // 33
-		bb.addLong(0); // unknown -- 34
+		bb.addLong(0); // decoy? -- 34
 		
 		bb.incrementOperandCount(27);
 	}

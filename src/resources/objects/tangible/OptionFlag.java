@@ -25,70 +25,58 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>
  ******************************************************************************/
 
-package services.map;
+package resources.objects.tangible;
 
-/**
- * Created by Waverunner on 6/1/2015
- */
-public class MappingTemplate {
-	private String template;
-	private String name;
-	private String category;
-	private String subcategory;
-	private int type;
-	private int flag;
+import java.util.EnumSet;
 
-	public MappingTemplate() {}
+public enum OptionFlag {
+	ON_OFF(0x00000001),
+	VENDOR(0x00000002),
+	INSURED(0x00000004),
+	CONVERSABLE(0x00000008),
+	HIBERNATING(0x00000010),
+	MAGIC_ITEM(0x00000020),
+	AGGRESSIVE(0x00000040),
+	HAM_BAR(0x00000080),
+	INVULNERABLE(0x00000100),
+	DISABLED(0x00000200),
+	UNINSURABLE(0x00000400),
+	INTERESTING(0x00000800),
+	MOUNT(0x00001000),
+	CRAFTED(0x00002000),
+	WINGS_OPENED(0x00004000),
+	SPACE_INTERESTING(0x00008000),
+	DOCKING(0x00010000),    // JTL?
+	DESTROYING(0x00020000), // JTL?
+	COMMABLE(0x00040000),
+	DOCKABLE(0x00080000),
+	EJECT(0x00100000),
+	INSPECTABLE(0x00200000),
+	TRANSFERABLE(0x00400000),
+	SHOW_FLIGHT_TUTORIAL(0x00800000),
+	SPACE_COMBAT_MUSIC(0x01000000),
+	ENCOUNTER_LOCKED(0x02000000),
+	SPAWNED_CREATURE(0x04000000),
+	HOLIDAY_INTERESTING(0x08000000),
+	LOCKED(0x10000000);
 
-	public String getTemplate() {
-		return template;
-	}
+	int flag;
 
-	public void setTemplate(String template) {
-		this.template = template;
-	}
-
-	public String getName() {
-		return (name.isEmpty() ? getStfName() : name);
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getCategory() {
-		return category;
-	}
-
-	public void setCategory(String category) {
-		this.category = category;
-	}
-
-	public String getSubcategory() {
-		return subcategory;
-	}
-
-	public void setSubcategory(String subcategory) {
-		this.subcategory = subcategory;
-	}
-
-	public int getType() {
-		return type;
-	}
-
-	public void setType(int type) {
-		this.type = type;
+	OptionFlag(int flag) {
+		this.flag = flag;
 	}
 
 	public int getFlag() {
 		return flag;
 	}
 
-	public void setFlag(int flag) {
-		this.flag = flag;
-	}
+	public static EnumSet<OptionFlag> toEnumSet(int flags) {
+		EnumSet<OptionFlag> enumSet = EnumSet.noneOf(OptionFlag.class);
+		for (OptionFlag optionFlag : OptionFlag.values()) {
+			if ((flags & optionFlag.getFlag()) == optionFlag.getFlag())
+				enumSet.add(optionFlag);
+		}
 
-	public String getStfName() {
-		return "@map_loc_cat_n:" + (getSubcategory().isEmpty() ? getCategory() : getSubcategory());
+		return enumSet;
 	}
 }

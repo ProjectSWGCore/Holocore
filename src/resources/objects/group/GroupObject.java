@@ -25,70 +25,34 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>
  ******************************************************************************/
 
-package services.map;
+package resources.objects.group;
 
-/**
- * Created by Waverunner on 6/1/2015
- */
-public class MappingTemplate {
-	private String template;
-	private String name;
-	private String category;
-	private String subcategory;
-	private int type;
-	private int flag;
+import resources.network.BaselineBuilder;
+import resources.objects.SWGObject;
+import resources.player.Player;
 
-	public MappingTemplate() {}
-
-	public String getTemplate() {
-		return template;
-	}
-
-	public void setTemplate(String template) {
-		this.template = template;
-	}
-
-	public String getName() {
-		return (name.isEmpty() ? getStfName() : name);
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getCategory() {
-		return category;
-	}
-
-	public void setCategory(String category) {
-		this.category = category;
-	}
-
-	public String getSubcategory() {
-		return subcategory;
-	}
-
-	public void setSubcategory(String subcategory) {
-		this.subcategory = subcategory;
-	}
-
-	public int getType() {
-		return type;
-	}
-
-	public void setType(int type) {
-		this.type = type;
-	}
-
-	public int getFlag() {
-		return flag;
-	}
-
-	public void setFlag(int flag) {
-		this.flag = flag;
-	}
-
-	public String getStfName() {
-		return "@map_loc_cat_n:" + (getSubcategory().isEmpty() ? getCategory() : getSubcategory());
+public class GroupObject extends SWGObject {
+	
+	private static final long serialVersionUID = 200L;
+	
+	@Override
+	public void createBaseline6(Player target, BaselineBuilder bb) {
+		super.createBaseline6(target, bb); // BASE06 -- 2 variables
+		bb.addInt(0); // groupMembers // 2
+			bb.addInt(0); // updateCount
+		bb.addInt(0); // formationmembers // 3
+			bb.addInt(0); // updateCount
+		bb.addAscii(""); // groupName // 4
+		bb.addShort(0); // groupLevel // 5
+		bb.addInt(0); // formationNameCrc // 6
+		bb.addLong(0); // lootMaster // 7
+		bb.addInt(0); // lootRule // 8
+		bb.addInt(0); // PickupPointTimer startTime // 9
+			bb.addInt(0); // endTime
+		bb.addAscii(""); // PickupPoint planetName // 10
+			bb.addFloat(0); // x
+			bb.addFloat(0); // y
+			bb.addFloat(0); // z
+		bb.incrementOperandCount(9);
 	}
 }

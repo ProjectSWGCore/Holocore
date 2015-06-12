@@ -152,7 +152,7 @@ public class SWGMap<K, V> extends AbstractMap<K, V> implements Encodable {
 	public byte[] encode() {
 		int size = map.size();
 
-		if (size == 0 || dataSize == 0) {
+		if (size == 0) {
 			return new byte[8];
 		}
 		
@@ -160,7 +160,16 @@ public class SWGMap<K, V> extends AbstractMap<K, V> implements Encodable {
 
 		buffer.putInt(size);
 		buffer.putInt(updateCount);
-		
+
+		if (data.size() != size) {
+			// Data got out of sync with the map, so lets clean that up!
+			clearAllData();
+			for (Entry<K, V> entry : map.entrySet()) {
+				addData(entry.getKey(), entry.getValue(), (byte) 0);
+			}
+			clearDeltaQueue();
+		}
+
 		for (byte[] bytes : data.values()) {
 			buffer.put((byte) 0);
 			buffer.put(bytes);
@@ -180,7 +189,7 @@ public class SWGMap<K, V> extends AbstractMap<K, V> implements Encodable {
 		
 		DeltaBuilder builder = new DeltaBuilder(target, baseline, view, updateType, getDeltaData());
 		builder.send();
-		
+		// Clear the queue since the delta has been sent to observers through the builder
 		clearDeltaQueue();
 	}
 	
@@ -203,18 +212,25 @@ public class SWGMap<K, V> extends AbstractMap<K, V> implements Encodable {
 	
 	private void createDeltaData(Object key, byte[] delta, byte update) {
 		synchronized(deltas) {
-			byte[] combindedUpdate = new byte[delta.length + 1];
-			combindedUpdate[0] = update;
-			System.arraycopy(delta, 0, combindedUpdate, 1, delta.length);
+			byte[] combinedUpdate = new byte[delta.length + 1];
+			combinedUpdate[0] = update;
+			System.arraycopy(delta, 0, combinedUpdate, 1, delta.length);
 
 			if (deltas.containsKey(key)) {
 				deltaSize -= deltas.remove(key).length;
 			}
 			deltaSize += delta.length + 1;
-			deltas.put(key, combindedUpdate);
+			deltas.put(key, combinedUpdate);
 		}
 	}
-	
+
+	private void clearAllData() {
+		dataSize = 0;
+		data.clear();
+
+		clearDeltaQueue();
+	}
+
 	private void addData(Object key, Object value, byte update) {
 		byte[] encodedKey = Encoder.encode(key, strType);
 		byte[] encodedValue = Encoder.encode(value, strType);

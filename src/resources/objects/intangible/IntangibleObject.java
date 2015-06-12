@@ -74,16 +74,4 @@ public class IntangibleObject extends SWGObject {
 	public int hashCode() {
 		return super.hashCode();
 	}
-	
-	protected void sendBaselines(Player target) {
-		BaselineBuilder bb = new BaselineBuilder(this, BaselineType.ITNO, 3);
-		createBaseline3(target, bb);
-		bb.sendTo(target);
-		
-		// Probably won't need to send this as it only contains server id. Game will not crash if you exclude this baseline (PLAY6 is only one who sends this atm)
-		bb = new BaselineBuilder(this, BaselineType.ITNO, 6);
-		createBaseline6(target, bb);
-		bb.sendTo(target);
-	}
-	
 }

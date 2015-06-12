@@ -46,7 +46,8 @@ import resources.client_info.visitors.SlotDescriptorData;
 import utilities.ByteUtilities;
 
 public class ClientFactory {
-	
+	private static ClientFactory instance;
+
 	private Map <String, ClientData> dataMap = new HashMap<String, ClientData>();
 	private Map <String, String> typeMap = new HashMap<String, String>();
 	
@@ -81,11 +82,17 @@ public class ClientFactory {
 	 * A null instance of {@link ClientData} means that parsing for the type of file is not done, or a file was entered that doesn't exist on the
 	 * file system.
 	 */
-	public synchronized ClientData getInfoFromFile(String file, boolean saveInfo) {
-		ClientData data = dataMap.get(file);
+	public synchronized static ClientData getInfoFromFile(String file, boolean saveInfo) {
+		ClientFactory factory = ClientFactory.instance;
+		if (factory == null) {
+			ClientFactory.instance = new ClientFactory();
+			factory = ClientFactory.instance;
+		}
+
+		ClientData data = factory.dataMap.get(file);
 		
 		if (data == null) {
-			data = readFile(file);
+			data = factory.readFile(file);
 			if (data == null) {
 				return null;
 			}
@@ -100,7 +107,7 @@ public class ClientFactory {
 		return data;
 	}
 	
-	public synchronized ClientData getInfoFromFile(String file) {
+	public synchronized static ClientData getInfoFromFile(String file) {
 		return getInfoFromFile(file, true);
 	}
 	
@@ -184,7 +191,7 @@ public class ClientFactory {
 		switch (c) {
 			case "CrcStringTableData": return new CrcStringTableData();
 			case "DatatableData": return new DatatableData();
-			case "ObjectData": return new ObjectData(this);
+			case "ObjectData": return new ObjectData();
 			case "ProfTemplateData": return new ProfTemplateData();
 			case "SlotDescriptorData": return new SlotDescriptorData();
 			case "SlotDefinitionData": return new SlotDefinitionData();

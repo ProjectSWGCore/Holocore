@@ -48,7 +48,7 @@ import resources.objects.SWGObject;
 import resources.player.AccessLevel;
 import resources.player.Player;
 import resources.server_info.Log;
-import resources.utilities.Scripts;
+import utilities.Scripts;
 import services.galaxy.GalacticManager;
 
 public class CommandService extends Service {
@@ -74,8 +74,7 @@ public class CommandService extends Service {
 		if (i instanceof GalacticPacketIntent) {
 			GalacticPacketIntent gpi = (GalacticPacketIntent) i;
 			Packet p = gpi.getPacket();
-			long netId = gpi.getNetworkId();
-			Player player = gpi.getPlayerManager().getPlayerFromNetworkId(netId);
+			Player player = gpi.getPlayerManager().getPlayerFromNetworkId(gpi.getNetworkId());
 			if (player != null) {
 				if (p instanceof CommandQueueEnqueue) {
 					CommandQueueEnqueue controller = (CommandQueueEnqueue) p;
@@ -128,17 +127,16 @@ public class CommandService extends Service {
 	}
 	
 	private void loadBaseCommands() {
-		final ClientFactory factory = new ClientFactory();
 		final String [] commandTables = new String [] {"command_table", "client_command_table", "command_table_ground"};
 		
 		clearCommands();
 		for (String table : commandTables) {
-			loadBaseCommands(factory, table);
+			loadBaseCommands(table);
 		}
 	}
 	
-	private void loadBaseCommands(ClientFactory factory, String table) {
-		DatatableData baseCommands = (DatatableData) factory.getInfoFromFile("datatables/command/"+table+".iff");
+	private void loadBaseCommands(String table) {
+		DatatableData baseCommands = (DatatableData) ClientFactory.getInfoFromFile("datatables/command/"+table+".iff");
 		
 		for (int row = 0; row < baseCommands.getRowCount(); row++) {
 			Object [] cmdRow = baseCommands.getRow(row);
@@ -171,7 +169,6 @@ public class CommandService extends Service {
 		registerCallback("teleport", new AdminTeleportCallback());
 		registerCallback("prone", new ProneCmdCallback());
 		registerCallback("kneel", new KneelCmdCallback());
-		registerCallback("toggleAwayFromKeyBoard", new AfkCmdCallback());
 		registerCallback("jumpServer", new JumpCmdCallback());
 		registerCallback("serverDestroyObject", new ServerDestroyObjectCmdCallback());
 	}

@@ -37,6 +37,7 @@ import resources.Terrain;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.CrcStringTableData;
 import resources.client_info.visitors.DatatableData;
+import resources.containers.ContainerPermissions;
 import resources.objects.SWGObject;
 import resources.objects.cell.CellObject;
 import resources.server_info.Log;
@@ -45,15 +46,13 @@ import services.objects.ObjectCreator;
 class TerrainBuildoutLoader {
 	
 	private static final String BASE_PATH = "datatables/buildout/";
-	
-	private final ClientFactory clientFactory;
+
 	private final CrcStringTableData crcTable;
 	private final Terrain terrain;
 	private final Map <Long, SWGObject> objectTable;
 	private final List <SWGObject> objects;
 	
-	public TerrainBuildoutLoader(ClientFactory clientFactory, CrcStringTableData crcTable, Terrain terrain) {
-		this.clientFactory = clientFactory;
+	public TerrainBuildoutLoader(CrcStringTableData crcTable, Terrain terrain) {
 		this.crcTable = crcTable;
 		this.terrain = terrain;
 		this.objectTable = new Hashtable<Long, SWGObject>(12*1024);
@@ -72,7 +71,7 @@ class TerrainBuildoutLoader {
 	private void loadAreas(int sceneNumber) {
 		objects.clear();
 		String file = BASE_PATH+"areas_"+terrain.getName()+".iff";
-		DatatableData areaTable = (DatatableData) clientFactory.getInfoFromFile(file);
+		DatatableData areaTable = (DatatableData) ClientFactory.getInfoFromFile(file);
 		for (int row = 0; row < areaTable.getRowCount(); row++) {
 			BuildoutArea area = new BuildoutArea();
 			area.load(areaTable.getRow(row), sceneNumber, row);
@@ -84,11 +83,13 @@ class TerrainBuildoutLoader {
 	
 	private void loadArea(BuildoutArea area) {
 		String file = BASE_PATH+terrain.getName()+"/"+area.getName().replace("server", "client")+".iff";
-		DatatableData areaTable = (DatatableData) clientFactory.getInfoFromFile(file);
+		DatatableData areaTable = (DatatableData) ClientFactory.getInfoFromFile(file);
 		BuildoutRow buildoutRow = new BuildoutRow(area);
 		for (int row = 0; row < areaTable.getRowCount(); row++) {
 			buildoutRow.load(areaTable.getRow(row), crcTable);
 			SWGObject object = createObject(buildoutRow);
+			object.setBuildout(true);
+			object.setLoadRange(buildoutRow.getRadius());
 			addObject(object, buildoutRow.getContainerId());
 			setCellInformation(object, buildoutRow.getCellIndex());
 			updatePermissions(object);
@@ -126,7 +127,7 @@ class TerrainBuildoutLoader {
 	}
 	
 	private void updatePermissions(SWGObject object) {
-		object.getContainerPermissions().addDefaultWorldPermissions();
+		object.setContainerPermissions(ContainerPermissions.WORLD);
 	}
 	
 }
