@@ -728,10 +728,10 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	public void sendDataTransforms(DataTransform dTransform) {
 		Location loc = dTransform.getLocation();
 		float speed = dTransform.getSpeed();
-		sendDataTransforms(loc, (byte) dTransform.getMovementAngle(), speed, dTransform.getLookAtYaw(), dTransform.isUseLookYaw());
+		sendDataTransforms(loc, (byte) dTransform.getMovementAngle(), speed);
 	}
 
-	public void sendDataTransforms(Location loc, int direction, float speed, float lookAtYaw, boolean useLookYaw) {
+	public void sendDataTransforms(Location loc, int direction, float speed) {
 		// TODO: Check for a parent, if one exists then send a UpdateTransformWithParentMessage as the object is in a container (such as a building)
 		UpdateTransformsMessage transform = new UpdateTransformsMessage();
 		transform.setObjectId(getObjectId()); // (short) (xPosition * 4 + 0.5)
