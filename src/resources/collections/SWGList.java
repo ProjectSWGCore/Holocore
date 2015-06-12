@@ -27,34 +27,24 @@
 ***********************************************************************************/
 package resources.collections;
 
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.util.AbstractList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.CopyOnWriteArrayList;
-
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
-import network.packets.swg.zone.deltas.DeltasMessage;
 import resources.network.BaselineBuilder.Encodable;
 import resources.network.DeltaBuilder;
 import resources.objects.SWGObject;
 import resources.player.PlayerState;
-import utilities.ByteUtilities;
 import utilities.Encoder;
 import utilities.Encoder.StringType;
 
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.util.*;
+
 /**
- * Supports a list of elements which automatically sends data as a delta when changed.
+ * Supports a list of elements which automatically sends data as a delta when changed for baselines.
  * @author Waverunner
  *
  * @param <E> Element that implements {@link Encodable} in order for data to be sent, or a basic type.
  */
-@SuppressWarnings("unused")
 public class SWGList<E> extends AbstractList<E> implements Encodable {
 	private static final long serialVersionUID = 1L;
 
@@ -64,9 +54,7 @@ public class SWGList<E> extends AbstractList<E> implements Encodable {
 	private int updateType;	
 	private transient int updateCount;
 	private int dataSize;
-	
-	private boolean indexed = false;
-	private boolean noUpdates = false;
+
 	private StringType strType = StringType.UNSPECIFIED;
 	
 	/*
@@ -74,68 +62,119 @@ public class SWGList<E> extends AbstractList<E> implements Encodable {
 	 * also allow all the data to be pre-compiled for the list, so it can have a positive impact on large SWGList's. This means that only 1 ByteBuffer is being created,
 	 * and that is to just take the data from this map and put it all together!
 	 */
-	private Map<Integer, byte[]> data = new ConcurrentHashMap<>();
-	private List<E> list = new CopyOnWriteArrayList<E>(); // thread-safe list
+	private final List<byte[]> data = new ArrayList<>();
+
+	private final List<E> list = new ArrayList<>(); // thread-safe list
 	
-	private LinkedList<byte[]> deltas = new LinkedList<>();
+	private final LinkedList<byte[]> deltas = new LinkedList<>();
 	private int deltaSize;
-	
+
+	/**
+	 * Creates a new {@link SWGList} for the defined baseline with the given view and update. Note that this is an extension of {@link AbstractList} and makes use of {@link java.util.ArrayList}
+	 * @param baseline {@link BaselineType} for this list, should be the same as the parent class this list resides in
+	 * @param view The baseline number this list resides in
+	 * @param updateType The update variable used for sending a delta, it's the operand count that this list resides at within the baseline
+	 */
 	public SWGList(BaselineType baseline, int view, int updateType) {
 		this.baseline = baseline;
 		this.view = view;
 		this.updateType = updateType;
 	}
-	
-	public SWGList(BaselineType baseline, int view, int updateType, boolean indexed) {
-		this(baseline, view, updateType);
-		this.indexed = indexed;
-	}
-	
-	public SWGList(BaselineType baseline, int view, int updateType, boolean indexed, StringType strType) {
-		this (baseline, view, updateType, indexed);
+
+	/**
+	 * Creates a new {@link SWGList} with the given StringType to encode in. Note that this constructor must be used if the elements within the list is a String.
+	 * @param baseline {@link BaselineType} for this list, should be the same as the parent class this list resides in
+	 * @param view The baseline number this list resides in
+	 * @param strType The {@link StringType} of the string, required only if the element in the list is a String as it's used for encoding either Unicode or ASCII characters
+	 */
+	public SWGList(BaselineType baseline, int view, int updateType, StringType strType) {
+		this (baseline, view, updateType);
 		this.strType = strType;
 	}
-	
-	public SWGList(BaselineType baseline, int view, int updateType, boolean indexed, StringType strType, boolean noUpdates) {
-		this (baseline, view, updateType, indexed, strType);
-		this.noUpdates = noUpdates;
-	}
-	
+
+	/**
+	 * Appends the specified element to the end of this list if it doesn't already exist. Once added, the updateCount is incremented by one
+	 * and data for the object is encoded.
+	 * <br><br>An <i>add delta</i> is then sent using {@link DeltaBuilder} if noUpdates = false (false by default)
+	 * @param e element to be appended to this list
+	 * @return true if the element was added
+	 */
 	@Override
 	public boolean add(E e) {
-		updateCount++;
-		
-		boolean added = list.add(e);
-		
-		if (added) {
-			addData(list.lastIndexOf(e), e);
-		}
-		
-		return added;
+		add(list.size(), e);
+		return list.contains(e);
 	}
 
+	/**
+	 * Inserts the specified element at the specified position in this list. Shifts the element currently
+	 * at that position (if any) and any subsequent elements to the right (adds one to their indices).
+	 * <br><br>An <i>add delta</i> is then sent using {@link DeltaBuilder} if noUpdates = false (false by default)
+	 * @param index index at which the specified element is to be inserted
+	 * @param e element to be inserted
+	 */
 	@Override
 	public void add(int index, E e) {
-		updateCount++;
-		list.add(index, e);
-		
-		addData(index, e);
+		synchronized (list) {
+			updateCount++;
+			list.add(index, e);
+			addObjectData(index, e, (byte) 1);
+		}
+	}
+
+	/**
+	 * Replaces the element at the specified position in this list with the specified element.
+	 * <br><br>A <i>change delta</i> is then sent using {@link DeltaBuilder} if noUpdates = false (false by default). Since this
+	 * sends a change delta, it should only be used for replacing an element, not for adding one.
+	 * @param index index of the element to replace
+	 * @param element element to be stored at the specified position
+	 * @return The element that was replaced
+	 */
+	@Override
+	public E set(int index, E element) {
+		// Sends a "change" delta
+		E previous;
+		synchronized (list) {
+			previous = list.set(index, element);
+			if (previous != null) {
+				updateCount++;
+				removeDataSize(index);
+				removeData(index);
+			}
+			addObjectData(index, element, (byte) 2);
+		}
+		return previous;
 	}
 
 	@Override
-	public E set(int index, E element) {
-		updateCount++;
-		E previous = list.set(index, element);
-		if (previous != null)
-			removeDataSize(index);
-		addData(index, element, (byte) 2);
-		return previous;
+	public boolean remove(Object o) {
+		//noinspection SuspiciousMethodCalls
+		int index = list.indexOf(o); // No idea why this produces a suspicious method call..
+		if (index != -1) {
+			remove(index);
+			return true;
+		}
+		return false;
 	}
-	
+
+	/**
+	 * Removes the element at the specified position in this list. Shifts any subsequent elements to the left
+	 * (subtracts one from their indices). Returns the element that was removed from the list.
+	 * @param index the index of the element to be removed
+	 * @return the element previously at the specified position
+	 */
 	@Override
 	public E remove(int index) {
-		// TODO: Remove elements in list
-		throw new UnsupportedOperationException();
+		E element;
+
+		synchronized (list) {
+			element = list.remove(index);
+			if (element != null) {
+				updateCount++;
+				removeObjectData(index, (byte) 0);
+			}
+		}
+
+		return element;
 	}
 
 	@Override
@@ -152,7 +191,12 @@ public class SWGList<E> extends AbstractList<E> implements Encodable {
 	public int size() {
 		return list.size();
 	}
-	
+
+	/**
+	 * Creates an array of bytes based off of the elements within this list. Elements that are not of a standard type
+	 * handled by {@link Encoder} should implement the {@link Encodable} interface.
+	 * @return Array of bytes with the size, update count, and encoded elements
+	 */
 	@Override
 	public byte[] encode() {
 		int size = list.size();
@@ -161,28 +205,20 @@ public class SWGList<E> extends AbstractList<E> implements Encodable {
 			return new byte[8];
 		}
 
-		if (size != data.size()) {
-			// Data got out of sync with the list, so lets clean that up!
-			data.clear();
-			for (int i = 0; i < size; i++) {
-				addData(i, list.get(i), (byte) 0);
-			}
-		}
-
-		ByteBuffer buffer = ByteBuffer.allocate(4 + (noUpdates ? 0 : 4) + dataSize).order(ByteOrder.LITTLE_ENDIAN);
+		ByteBuffer buffer = ByteBuffer.allocate(8 + dataSize).order(ByteOrder.LITTLE_ENDIAN);
 
 		buffer.putInt(size);
-		if (!noUpdates) buffer.putInt(updateCount);
-		
-		for (byte[] bytes : data.values()) {
+		buffer.putInt(updateCount);
+
+		for (byte[] bytes : data) {
 			buffer.put(bytes);
 		}
-		
+
 		return buffer.array();
 	}
 	
 	public void sendDeltaMessage(SWGObject target) {
-		if (!(deltas.size() > 0))
+		if (deltas.size() == 0)
 			return;
 
 		if (target.getOwner() == null || target.getOwner().getPlayerState() != PlayerState.ZONED_IN) {
@@ -190,17 +226,15 @@ public class SWGList<E> extends AbstractList<E> implements Encodable {
 			return;
 		}
 		
-		DeltaBuilder builder = new DeltaBuilder(target, baseline, view, updateType, (noUpdates ? encode() : getDeltaData()));
+		DeltaBuilder builder = new DeltaBuilder(target, baseline, view, updateType, getDeltaData());
 		builder.send();
+		// Clear the queue since the delta has been sent to observers through the builder
+		clearDeltaQueue();
 	}
 	
 	public void clearDeltaQueue() {
 		deltas.clear();
 		deltaSize = 0;
-	}
-	
-	public void setUpdateCount(int count) {
-		this.updateCount = count;
 	}
 	
 	private byte[] getDeltaData() {
@@ -217,48 +251,64 @@ public class SWGList<E> extends AbstractList<E> implements Encodable {
 	
 	private void createDeltaData(byte[] delta, byte update) {
 		synchronized(deltas) {
-			byte[] combindedUpdate = new byte[delta.length + 1];
-			combindedUpdate[0] = update;
-			System.arraycopy(delta, 0, combindedUpdate, 1, delta.length);
+			byte[] combinedUpdate = new byte[delta.length + 1];
+			combinedUpdate[0] = update;
+			System.arraycopy(delta, 0, combinedUpdate, 1, delta.length);
 			deltaSize += delta.length + 1;
-			deltas.add(combindedUpdate);
+			deltas.add(combinedUpdate);
 		}
 	}
 	
-	private void addData(int index, Object obj, byte update) {
+	private void addObjectData(int index, E obj, byte update) {
 		byte[] encodedData = Encoder.encode(obj, strType);
-		
-		data.put(index, encodedData);
-		
-		dataSize += encodedData.length;
-		
-		if (indexed && !noUpdates) {
-			ByteBuffer buffer = ByteBuffer.allocate(encodedData.length + 2).order(ByteOrder.LITTLE_ENDIAN);
-			buffer.putShort((short) index);
-			buffer.put(encodedData);
-			
-			byte[] indexedBytes = buffer.array();
-			createDeltaData(indexedBytes, update);
-		} else if (!noUpdates) {
-			createDeltaData(encodedData, update);
+		if (encodedData == null) {
+			System.err.println(toString() + " FATAL: Tried to encode an object that could not be encoded properly. Object: " + obj);
+			return;
 		}
+
+		dataSize += encodedData.length;
+		synchronized (data) {
+			data.add(encodedData);
+		}
+
+		ByteBuffer buffer = ByteBuffer.allocate(encodedData.length + 2).order(ByteOrder.LITTLE_ENDIAN);
+		buffer.putShort((short) index);
+		buffer.put(encodedData);
+
+		byte[] indexedBytes = buffer.array();
+		createDeltaData(indexedBytes, update);
 	}
-	
-	private void addData(int index, Object obj) {
-		addData(index, obj, (byte) 1);
+
+	private void removeObjectData(int index, byte update) {
+		if (data.get(index) == null) {
+			return;
+		}
+
+		synchronized (data) {
+			dataSize -= data.remove(index).length;
+		}
+
+		// Only the index is sent for removing data
+		ByteBuffer buffer = ByteBuffer.allocate(2).order(ByteOrder.LITTLE_ENDIAN);
+		buffer.putShort((short) index);
+		createDeltaData(buffer.array(), update);
 	}
-	
-	// Removes obj size of data and removes it from the data map
-	private void removeData(Object obj) {
-		dataSize -= data.remove(indexOf(obj)).length;
-	}
-	
+
 	// Removes obj size of data without removing it from the data map
 	private void removeDataSize(int index) {
 		dataSize -= data.get(index).length;
 	}
-	
+
+	private void removeData(int index) {
+		synchronized (data) {
+			data.remove(index);
+		}
+	}
+
 	public BaselineType getBaseline() { return baseline; }
-	public int getViewType() { return view; }
-	public int getUpdateType() { return updateType; }
+
+	@Override
+	public String toString() {
+		return "SWGList[" + baseline + "0" + view + ":" + updateType + "]";
+	}
 }

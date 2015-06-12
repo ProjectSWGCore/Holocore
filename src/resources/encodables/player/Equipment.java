@@ -32,6 +32,7 @@ import java.nio.ByteOrder;
 
 import resources.common.CRC;
 import resources.network.BaselineBuilder.Encodable;
+import resources.objects.SWGObject;
 import resources.objects.weapon.WeaponObject;
 
 public class Equipment implements Encodable {
@@ -41,16 +42,15 @@ public class Equipment implements Encodable {
 	private byte[] 			customizationString;
 	private int 			arrangementId = 4;
 	private long 			objectId;
-	private int				templateCRC;
+	private String          template;
 	
 	public Equipment(long objectId, String template) {
 		this.objectId = objectId;
-		this.templateCRC = CRC.getCrc(template);
+		this.template = template;
 	}
 	
 	public Equipment(WeaponObject weapon) {
-		this.objectId = weapon.getObjectId();
-		this.templateCRC = weapon.getCrc();
+		this(weapon.getObjectId(), weapon.getTemplate());
 		this.weapon = weapon;
 	}
 	
@@ -72,7 +72,7 @@ public class Equipment implements Encodable {
 		
 		buffer.putInt(arrangementId);
 		buffer.putLong(objectId);
-		buffer.putInt(templateCRC);
+		buffer.putInt(CRC.getCrc(template));
 		
 		if (weapon != null) {
 			buffer.put((byte) 0x01);
@@ -93,6 +93,19 @@ public class Equipment implements Encodable {
 	public long getObjectId() { return objectId; }
 	public void setObjectId(long objectId) { this.objectId = objectId; }
 
-	public int getTemplateCRC() { return templateCRC; }
-	public void setTemplateCRC(int templateCRC) { this.templateCRC = templateCRC; }
+	public String getTemplate() { return template; }
+	public void setTemplate(String template) { this.template = template; }
+
+	@Override
+	public String toString() {
+		return "Equipment: " + template;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (!(o instanceof SWGObject))
+			return super.equals(o);
+
+		return ((SWGObject) o).getObjectId() == objectId;
+	}
 }

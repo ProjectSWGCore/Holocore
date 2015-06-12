@@ -25,70 +25,41 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>
  ******************************************************************************/
 
-package services.map;
+package resources.containers;
+
+import resources.objects.SWGObject;
 
 /**
- * Created by Waverunner on 6/1/2015
+ * Default set of permissions that allows anyone to view or enter the container. These permissions are used
+ * for every new object.
+ * @author Waverunner
  */
-public class MappingTemplate {
-	private String template;
-	private String name;
-	private String category;
-	private String subcategory;
-	private int type;
-	private int flag;
-
-	public MappingTemplate() {}
-
-	public String getTemplate() {
-		return template;
+public class DefaultPermissions extends ContainerPermissions {
+	
+	private static final long serialVersionUID = 200L;
+	
+	@Override
+	public boolean canView(SWGObject requester, SWGObject container) {
+		return true;
 	}
 
-	public void setTemplate(String template) {
-		this.template = template;
+	@Override
+	public boolean canEnter(SWGObject requester, SWGObject container) {
+		return true;
 	}
 
-	public String getName() {
-		return (name.isEmpty() ? getStfName() : name);
+	@Override
+	public boolean canRemove(SWGObject requester, SWGObject container) {
+		return requester.getOwner() == container.getOwner();
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	@Override
+	public boolean canMove(SWGObject requester, SWGObject container) {
+		return requester.getOwner() == container.getOwner();
 	}
 
-	public String getCategory() {
-		return category;
-	}
-
-	public void setCategory(String category) {
-		this.category = category;
-	}
-
-	public String getSubcategory() {
-		return subcategory;
-	}
-
-	public void setSubcategory(String subcategory) {
-		this.subcategory = subcategory;
-	}
-
-	public int getType() {
-		return type;
-	}
-
-	public void setType(int type) {
-		this.type = type;
-	}
-
-	public int getFlag() {
-		return flag;
-	}
-
-	public void setFlag(int flag) {
-		this.flag = flag;
-	}
-
-	public String getStfName() {
-		return "@map_loc_cat_n:" + (getSubcategory().isEmpty() ? getCategory() : getSubcategory());
+	@Override
+	public boolean canAdd(SWGObject requester, SWGObject container) {
+		return requester.getOwner() == container.getOwner();
 	}
 }

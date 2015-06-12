@@ -30,6 +30,7 @@ package resources.objects.player;
 import network.packets.swg.zone.UpdatePostureMessage;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import network.packets.swg.zone.chat.ChatSystemMessage;
+import resources.collections.SWGBitSet;
 import resources.collections.SWGList;
 import resources.collections.SWGMap;
 import resources.network.BaselineBuilder;
@@ -49,8 +50,8 @@ public class PlayerObject extends IntangibleObject {
 	
 	private String	biography		= "";
 	// PLAY 03
-	private SWGList<Integer> 	flagsList			= new SWGList<>(BaselineType.PLAY, 3, 5, false, StringType.UNSPECIFIED, true);
-	private SWGList<Integer> 	profileFlags		= new SWGList<>(BaselineType.PLAY, 3, 6, false, StringType.UNSPECIFIED, true);
+	private SWGBitSet 	        flagsList			= new SWGBitSet(BaselineType.PLAY, 3, 5);
+	private SWGBitSet 	        profileFlags		= new SWGBitSet(BaselineType.PLAY, 3, 6);
 	private String 				title				= "";
 	private int 				bornDate			= 0;
 	private int 				playTime			= 0;
@@ -98,7 +99,6 @@ public class PlayerObject extends IntangibleObject {
 	public PlayerObject(long objectId) {
 		super(objectId, BaselineType.PLAY);
 		setVolume(0);
-		initFlags();
 	}
 	
 	public void addWaypoint(WaypointObject waypoint) {
@@ -123,7 +123,7 @@ public class PlayerObject extends IntangibleObject {
 			return waypoints;
 		}
 	}
-	
+
 	public void updateWaypoint(WaypointObject obj) {
 		synchronized(waypoints) {
 			waypoints.update(obj.getObjectId(), this);
@@ -349,20 +349,20 @@ public class PlayerObject extends IntangibleObject {
 	
 	public void setFlagBitmask(PlayerFlags ... flags) {
 		for (PlayerFlags flag : flags)
-			flagsList.set(0, flagsList.get(0) | flag.getFlag());
-		sendDelta(3, 5, flagsList);
+			flagsList.set(flag.getFlag());
+		flagsList.sendDeltaMessage(this);
 	}
 	
 	public void clearFlagBitmask(PlayerFlags ... flags) {
 		for (PlayerFlags flag : flags)
-			flagsList.set(0, flagsList.get(0) & ~flag.getFlag());
-		sendDelta(3, 5, flagsList);
+			flagsList.clear(flag.getFlag());
+		flagsList.sendDeltaMessage(this);
 	}
 	
 	public void toggleFlag(PlayerFlags ... flags) {
 		for (PlayerFlags flag : flags)
-			flagsList.set(0, flagsList.get(0) ^ flag.getFlag());
-		sendDelta(3, 5, flagsList);
+			flagsList.flip(flag.getFlag());
+		flagsList.sendDeltaMessage(this);
 	}
 	
 	private int getProfessionIcon() {
@@ -391,17 +391,7 @@ public class PlayerObject extends IntangibleObject {
 				return 0;
 		}
 	}
-	
-	private void initFlags() {
-		for (int i = 0; i < 4; i++) {
-			profileFlags.add(0);
-			flagsList.add(0);
-		}
 
-		profileFlags.setUpdateCount(0);
-		flagsList.setUpdateCount(0);
-	}
-	
 	@Override
 	public boolean equals(Object o) {
 		return super.equals(o);
@@ -471,11 +461,11 @@ public class PlayerObject extends IntangibleObject {
 		bb.addObject(waypoints); // 1
 		bb.addInt(100); // Current Force Power -- 2
 		bb.addInt(100); // Max Force Power -- 3
-		bb.addInt(0); // Current FS Quest List (List) -- 4
+		bb.addInt(0); // Completed Quests (List) -- 4
 			bb.addInt(0);
-		bb.addInt(0); // Completed FS Quest List (List) -- 5
+		bb.addInt(0); // Active Quests (List) -- 5
 			bb.addInt(0);
-		bb.addInt(activeQuest); // 6
+		bb.addInt(activeQuest); // Current Quest -- 6
 		bb.addObject(quests); // 7
 		bb.addAscii(profWheelPosition); // 8
 		
@@ -501,7 +491,7 @@ public class PlayerObject extends IntangibleObject {
 		bb.addInt(100); // Max Drink -- 13
 		bb.addInt(0); // Current Consumable -- 14
 		bb.addInt(100); // Max Consumable -- 15
-		bb.addInt(0); // Waypoints - Is there a difference between this one and baseline 8? -- 16
+		bb.addInt(0); // Group Waypoints -- 16
 			bb.addInt(0);
 		bb.addObject(defenders); // 17
 		bb.addInt(killMeter); // 18

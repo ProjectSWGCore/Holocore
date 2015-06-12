@@ -11,12 +11,12 @@ def execute(galacticManager, player, target, args):
 		return
 
 	if target.getParent() == actor:
+		result = target.moveToContainer(actor, inventory)
 		actor.removeEquipment(target)
-		target.moveToContainer(actor, inventory)
 		return
 	else:
-		target.moveToContainer(actor, actor)
-		# actor.addEquipment(target) # This seems to crash the client, look to
+		result = target.moveToContainer(actor, actor)
+		actor.addEquipment(target)
 		return
 
 	return

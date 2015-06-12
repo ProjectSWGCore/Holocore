@@ -78,7 +78,7 @@ public class DeltasMessage extends SWGPacket {
 		addByte(data, num);
 		addInt(data, deltaData.length + 4);
 		addShort(data, 1); // TODO: How many updates there is (1 always for now until a queue system is built
-		addShort(data, update); // TODO: This should be part of the data, for now we'll keep it here until the queue system is in
+		addShort(data, update);
 		data.put(deltaData);
 		return data;
 	}

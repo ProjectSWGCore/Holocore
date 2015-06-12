@@ -102,6 +102,7 @@ public enum PacketType {
 	SET_WAYPOINT_COLOR							(0x90C59FDE, SetWaypointColor.class),
 	SHOW_BACKPACK									(ShowBackpack.CRC, ShowBackpack.class),
 	SHOW_HELMET											(ShowHelmet.CRC, ShowHelmet.class),
+	SERVER_WEATHER_MESSAGE				(ServerWeatherMessage.CRC, ServerWeatherMessage.class),
 	
 		// Chat
 		CHAT_FRIENDS_LIST_UPDATE				(0x6CD2FCD8, ChatFriendsListUpdate.class),

@@ -40,7 +40,10 @@ public class CellObject extends SWGObject {
 	private boolean	isPublic	= true;
 	private int		number		= 0;
 	private String	label		= "";
-	
+
+	private float label_x       = 0f;
+	private float label_z       = 0f;
+
 	public CellObject(long objectId) {
 		super(objectId, BaselineType.SCLT);
 	}
@@ -68,7 +71,12 @@ public class CellObject extends SWGObject {
 	public void setLabel(String label) {
 		this.label = label;
 	}
-	
+
+	public void setLabelMapPosition(float x, float z) {
+		this.label_x = x;
+		this.label_z = z;
+	}
+
 	protected void sendBaselines(Player target) {
 		BaselineBuilder bb = new BaselineBuilder(this, BaselineType.SCLT, 3);
 		createBaseline3(target, bb);
@@ -82,16 +90,17 @@ public class CellObject extends SWGObject {
 	
 	public void createBaseline3(Player target, BaselineBuilder bb) {
 		super.createBaseline3(target, bb);
-		bb.addByte(1);
+		bb.addBoolean(isPublic);
 		bb.addInt(number);
 		bb.incrementOperandCount(2);
 	}
 	
 	public void createBaseline6(Player target, BaselineBuilder bb) {
 		super.createBaseline6(target, bb);
-		bb.addLong(0);
-		bb.addLong(0);
+		bb.addUnicode(label);
+		bb.addFloat(label_x);
+		bb.addFloat((float) 0);
+		bb.addFloat(label_z);
 		bb.incrementOperandCount(2);
 	}
-	
 }

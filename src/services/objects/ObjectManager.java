@@ -29,7 +29,7 @@ package services.objects;
 
 import intents.ObjectTeleportIntent;
 import intents.PlayerEventIntent;
-import intents.ZoneInIntent;
+import intents.RequestZoneInIntent;
 import intents.network.GalacticPacketIntent;
 
 import java.util.*;
@@ -53,6 +53,7 @@ import resources.objects.buildouts.BuildoutLoader;
 import resources.objects.creature.CreatureObject;
 import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
+import resources.player.PlayerEvent;
 import resources.server_info.CachedObjectDatabase;
 import resources.server_info.Config;
 import resources.server_info.Log;
@@ -206,8 +207,8 @@ public class ObjectManager extends Manager {
 		
 		if (object instanceof CreatureObject && object.getOwner() != null){
 			sendPacket(object.getOwner(), new CmdStartScene(false, object.getObjectId(), ((CreatureObject)object).getRace(), object.getLocation(), (long)(ProjectSWG.getCoreTime()/1E3)));
-			((CreatureObject)object).createObject(object.getOwner());
-			((CreatureObject)object).clearAware();
+			object.createObject(object.getOwner());
+			new PlayerEventIntent(object.getOwner(), PlayerEvent.PE_ZONE_IN).broadcast();
 		}
 	}
 
@@ -260,9 +261,11 @@ public class ObjectManager extends Manager {
 				destroyObject(slottedObj);
 		}
 
-		for (SWGObject containedObj : object.getContainedObjects()) {
-			if (containedObj != null)
-				destroyObject(containedObj);
+		Iterator<SWGObject> containerIterator = object.getContainedObjects().iterator();
+		while(containerIterator.hasNext()) {
+			SWGObject containedObject = containerIterator.next();
+			if (containedObject != null)
+				destroyObject(containedObject);
 		}
 
 		// Remove object from the parent
@@ -288,7 +291,15 @@ public class ObjectManager extends Manager {
 		return createObject(template, null);
 	}
 	
+	public SWGObject createObject(String template, boolean addToAwareness) {
+		return createObject(template, null, addToAwareness);
+	}
+	
 	public SWGObject createObject(String template, Location l) {
+		return createObject(template, l, true);
+	}
+	
+	public SWGObject createObject(String template, Location l, boolean addToAwareness) {
 		synchronized (objects) {
 			long objectId = getNextObjectId();
 			SWGObject obj = ObjectCreator.createObjectFromTemplate(objectId, template);
@@ -297,7 +308,9 @@ public class ObjectManager extends Manager {
 				return null;
 			}
 			obj.setLocation(l);
-			objectAwareness.add(obj);
+			if (addToAwareness) {
+				objectAwareness.add(obj);
+			}
 			objects.put(objectId, obj);
 			Log.i("ObjectManager", "Created object %d [%s]", obj.getObjectId(), obj.getTemplate());
 			return obj;
@@ -310,22 +323,18 @@ public class ObjectManager extends Manager {
 		Location newLocation = transform.getLocation();
 		newLocation.setTerrain(obj.getLocation().getTerrain());
 		objectAwareness.move(obj, newLocation);
-		
-		if (obj instanceof CreatureObject && transform.getSpeed() > 1E-3) {
-			if(((CreatureObject) obj).getPosture() == Posture.PRONE){
-				((CreatureObject) obj).setPosture(Posture.PRONE);
-			}else{
-				((CreatureObject) obj).setPosture(Posture.UPRIGHT);
-			}
-			((CreatureObject) obj).sendObserversAndSelf(new PostureUpdate(obj.getObjectId(), ((CreatureObject) obj).getPosture()));
-		}
 		obj.sendDataTransforms(transform);
+
+		// TODO: State checks before sending a data transform message to ensure the move is valid/change speed depending
+		// on the active state (mainly for CreatureObject, override sendDataTransforms in the class?)
 	}
 	
 	private void zoneInCharacter(PlayerManager playerManager, String galaxy, long netId, long characterId) {
 		Player player = playerManager.getPlayerFromNetworkId(netId);
-		if (player == null)
+		if (player == null) {
+			Log.e("ObjectManager", "Unable to zone in null player '%ld'", netId);
 			return;
+		}
 		SWGObject creatureObj = objects.get(characterId);
 		if (creatureObj == null) {
 			System.err.println("ObjectManager: Failed to start zone - CreatureObject could not be fetched from database [Character: " + characterId + "  User: " + player.getUsername() + "]");
@@ -343,7 +352,7 @@ public class ObjectManager extends Manager {
 			return;
 		}
 		objectAwareness.add(creatureObj);
-		new ZoneInIntent(player, (CreatureObject) creatureObj, galaxy).broadcast();
+		new RequestZoneInIntent(player, (CreatureObject) creatureObj, galaxy).broadcast();
 	}
 	
 	private long getNextObjectId() {

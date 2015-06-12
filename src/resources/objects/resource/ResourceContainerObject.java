@@ -98,37 +98,19 @@ public class ResourceContainerObject extends TangibleObject {
 	@Override
 	public void createBaseline3(Player target, BaselineBuilder bb) {
 		super.createBaseline3(target, bb);
-		// lol I understand none of these variables
 		bb.addInt(quantity);
-		bb.addInt(0);
-		bb.addInt(0);
-		bb.addInt(0);
-		bb.addInt(0);
-		bb.addShort(0);
-		bb.addInt(0);
-		bb.addInt(0);
-		bb.addInt(100); // Max Condition
-		bb.addByte(1);
-		bb.addInt(0);
 		bb.addLong(resourceType);
-		
-		bb.incrementOperandCount(12);
+		bb.incrementOperandCount(2);
 	}
 	
 	@Override
 	public void createBaseline6(Player target, BaselineBuilder bb) {
 		super.createBaseline6(target, bb);
-		// lol I understand none of these variables
-		bb.addLong(0);
-		bb.addLong(0);
-		bb.addLong(0);
-		bb.addLong(0);
-		bb.addInt(0);
-		bb.addByte(0);
 		bb.addInt(maxQuantity);
-		bb.addAscii(getTemplate());
-		bb.addUnicode("inorganic_minerals_small"); // container name
-		bb.addLong(0);
+		bb.addAscii(parentName);
+		bb.addUnicode(resourceName);
+		bb.addLong(0); // Resource Id
+		bb.incrementOperandCount(4);
 	}
 	
 }
