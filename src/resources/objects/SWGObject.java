@@ -728,20 +728,22 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	public void sendDataTransforms(DataTransform dTransform) {
 		Location loc = dTransform.getLocation();
 		float speed = dTransform.getSpeed();
-		sendDataTransforms(loc, (byte) dTransform.getMovementAngle(), speed);
+		sendDataTransforms(loc, dTransform.getMovementAngle(), speed, dTransform.getLookAtYaw(), dTransform.isUseLookAtYaw());
 	}
 
-	public void sendDataTransforms(Location loc, int direction, float speed) {
+	public void sendDataTransforms(Location loc, byte direction, float speed, float lookAtYaw, boolean useLookAtYaw) {
 		// TODO: Check for a parent, if one exists then send a UpdateTransformWithParentMessage as the object is in a container (such as a building)
 		UpdateTransformsMessage transform = new UpdateTransformsMessage();
 		transform.setObjectId(getObjectId()); // (short) (xPosition * 4 + 0.5)
-		transform.setX((short) (loc.getX() * 4 + 0.5));
-		transform.setY((short) (loc.getY() * 4 + 0.5));
-		transform.setZ((short) (loc.getZ() * 4 + 0.5));
+		transform.setX((short) (loc.getX() * 4));
+		transform.setY((short) (loc.getY() * 4));
+		transform.setZ((short) (loc.getZ() * 4));
 		transform.setUpdateCounter(transformCounter++);
-		transform.setDirection((byte) direction);
+		transform.setDirection(direction);
 		transform.setSpeed(speed);
-		sendObservers(transform);
+		transform.setLookAtYaw((byte) (lookAtYaw * 16));
+		transform.setUseLookAtYaw(useLookAtYaw);
+		sendObserversAndSelf(transform);
 	}
 	
 	protected void createChildrenObjects(Player target) {
