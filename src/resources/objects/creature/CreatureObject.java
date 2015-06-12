@@ -30,6 +30,7 @@ package resources.objects.creature;
 import network.packets.swg.zone.UpdatePostureMessage;
 import network.packets.swg.zone.UpdatePvpStatusMessage;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
+import network.packets.swg.zone.object_controller.PostureUpdate;
 import resources.HologramColour;
 import resources.Posture;
 import resources.Race;
