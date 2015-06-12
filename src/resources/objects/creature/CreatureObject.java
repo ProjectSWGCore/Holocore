@@ -255,6 +255,7 @@ public class CreatureObject extends TangibleObject {
 	public void setPosture(Posture posture) {
 		this.posture = posture;
 		sendDelta(3, 13, posture.getId());
+		sendObserversAndSelf(new PostureUpdate(getObjectId(), posture));
 	}
 	
 	public void setRace(Race race) {
@@ -273,12 +274,12 @@ public class CreatureObject extends TangibleObject {
 	
 	public void setMovementScale(double movementScale) {
 		this.movementScale = movementScale;
-		sendDelta(4, 4, movementScale);
+		sendDelta(4, 5, movementScale);
 	}
 	
 	public void setMovementPercent(double movementPercent) {
 		this.movementPercent = movementPercent;
-		sendDelta(4, 5, movementPercent);
+		sendDelta(4, 4, movementPercent);
 	}
 	
 	public void setWalkSpeed(double walkSpeed) {
@@ -293,12 +294,12 @@ public class CreatureObject extends TangibleObject {
 	
 	public void setAccelScale(double accelScale) {
 		this.accelScale = accelScale;
-		sendDelta(4, 0, accelScale);
+		sendDelta(4, 1, accelScale);
 	}
 	
 	public void setAccelPercent(double accelPercent) {
 		this.accelPercent = accelPercent;
-		sendDelta(4, 1, accelPercent);
+		sendDelta(4, 0, accelPercent);
 	}
 	
 	public void setTurnScale(double turnScale) {
@@ -666,11 +667,16 @@ public class CreatureObject extends TangibleObject {
 			bb.sendTo(target);
 		}
 	}
-	
-	protected void createChildrenObjects(Player target) {
+
+	@Override
+	public void createObject(Player target) {
+		super.createObject(target);
+
 		target.sendPacket(new UpdatePostureMessage(posture.getId(), getObjectId()));
-		if (target != getOwner()) target.sendPacket(new UpdatePvpStatusMessage(UpdatePvpStatusMessage.PLAYER, 0, getObjectId())); // TODO: Change this when adding non-players
-		super.createChildrenObjects(target);
+
+		if (getOwner() != null && target != getOwner()) {
+			target.sendPacket(new UpdatePvpStatusMessage(UpdatePvpStatusMessage.PLAYER, 0, getObjectId()));
+		}
 	}
 	
 	public void createBaseline1(Player target, BaselineBuilder bb) {
@@ -697,12 +703,12 @@ public class CreatureObject extends TangibleObject {
 	
 	public void createBaseline4(Player target, BaselineBuilder bb) {
 		super.createBaseline4(target, bb); // 0 variables
-		bb.addFloat((float) accelScale); // 0
-		bb.addFloat((float) accelPercent); // 1
+		bb.addFloat((float) accelPercent); // 0
+		bb.addFloat((float) accelScale); // 1
 		bb.addObject(hamEncumbList); // Rename to bonusAttributes? 2
 		bb.addObject(skillMods); // 3
-		bb.addFloat((float) movementScale); // 4
-		bb.addFloat((float) movementPercent); // 5
+		bb.addFloat((float) movementPercent); // 4
+		bb.addFloat((float) movementScale); // 5
 		bb.addLong(performanceListenTarget); // 6
 		bb.addFloat((float) runSpeed); // 7
 		bb.addFloat((float) slopeModAngle); // 8

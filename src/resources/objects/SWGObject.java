@@ -83,7 +83,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 
 	private int     slotArrangement = -1;
 
-	private int		transformCounter = 0;
+	private transient int transformCounter = 0;
 	
 	public SWGObject() {
 		this(0, null);
@@ -724,14 +724,15 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 			}
 		}
 	}
-	
+
 	public void sendDataTransforms(DataTransform dTransform) {
 		Location loc = dTransform.getLocation();
 		float speed = dTransform.getSpeed();
-		sendDataTransforms(loc, (byte) dTransform.getMovementAngle(), speed);
+		sendDataTransforms(loc, (byte) dTransform.getMovementAngle(), speed, dTransform.getLookAtYaw(), dTransform.isUseLookYaw());
 	}
-	
-	public void sendDataTransforms(Location loc, int direction, float speed) {
+
+	public void sendDataTransforms(Location loc, int direction, float speed, float lookAtYaw, boolean useLookYaw) {
+		// TODO: Check for a parent, if one exists then send a UpdateTransformWithParentMessage as the object is in a container (such as a building)
 		UpdateTransformsMessage transform = new UpdateTransformsMessage();
 		transform.setObjectId(getObjectId()); // (short) (xPosition * 4 + 0.5)
 		transform.setX((short) (loc.getX() * 4 + 0.5));
@@ -740,7 +741,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		transform.setUpdateCounter(transformCounter++);
 		transform.setDirection((byte) direction);
 		transform.setSpeed(speed);
-		sendObserversAndSelf(transform);
+		sendObservers(transform);
 	}
 	
 	protected void createChildrenObjects(Player target) {

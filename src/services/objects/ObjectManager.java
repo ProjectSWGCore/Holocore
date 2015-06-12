@@ -323,16 +323,10 @@ public class ObjectManager extends Manager {
 		Location newLocation = transform.getLocation();
 		newLocation.setTerrain(obj.getLocation().getTerrain());
 		objectAwareness.move(obj, newLocation);
-		
-		if (obj instanceof CreatureObject && transform.getSpeed() > 1E-3) {
-			if(((CreatureObject) obj).getPosture() == Posture.PRONE){
-				((CreatureObject) obj).setPosture(Posture.PRONE);
-			}else{
-				((CreatureObject) obj).setPosture(Posture.UPRIGHT);
-			}
-			((CreatureObject) obj).sendObserversAndSelf(new PostureUpdate(obj.getObjectId(), ((CreatureObject) obj).getPosture()));
-		}
 		obj.sendDataTransforms(transform);
+
+		// TODO: State checks before sending a data transform message to ensure the move is valid/change speed depending
+		// on the active state (mainly for CreatureObject, override sendDataTransforms in the class?)
 	}
 	
 	private void zoneInCharacter(PlayerManager playerManager, String galaxy, long netId, long characterId) {
