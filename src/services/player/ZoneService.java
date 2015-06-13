@@ -549,7 +549,7 @@ public class ZoneService extends Service {
 	
 	private boolean lockName(String name, Player player) {
 		String firstName = name.split(" ", 2)[0].toLowerCase(Locale.ENGLISH);
-		if (isLocked(firstName))
+		if (isLocked(player, firstName))
 			return false;
 		synchronized (lockedNames) {
 			unlockName(player);
@@ -576,12 +576,12 @@ public class ZoneService extends Service {
 		}
 	}
 	
-	private boolean isLocked(String firstName) {
+	private boolean isLocked(Player assignedTo, String firstName) {
 		Player player = null;
 		synchronized (lockedNames) {
 			player = lockedNames.get(firstName);
 		}
-		if (player == null)
+		if (player == null || assignedTo == player)
 			return false;
 		PlayerState state = player.getPlayerState();
 		return state != PlayerState.DISCONNECTED && state != PlayerState.LOGGED_OUT;
