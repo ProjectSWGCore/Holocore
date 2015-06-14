@@ -50,6 +50,7 @@ public class WorldSnapshotData extends ClientData {
 				for (int i = 0; i < n; i++) {
 					String template = ByteUtilities.nextString(data);
 					objectTemplateNames.put(i, template);
+					data.get(); // Null Terminated
 				}
 				break;
 			case "0000DATA":
@@ -69,6 +70,7 @@ public class WorldSnapshotData extends ClientData {
 				chunk.setLocation(location);
 				chunk.setRadius(data.getFloat());
 				chunk.setPortalLayoutCrc(data.getInt());
+				chunks.add(chunk);
 				break;
 		}
 	}
