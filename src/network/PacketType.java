@@ -92,6 +92,7 @@ public enum PacketType {
 	OBJECT_CONTROLLER							(0x80ce5e46, ObjectController.class),
 	BASELINE									(0x68a75f0c, Baseline.class),
 	DATA_TRANSFORM								(0x00000071, DataTransform.class),
+	DATA_TRANSFORM_PARENT                       (0x000000F1, DataTransformWithParent.class),
 	CONNECT_PLAYER_MESSAGE						(0x2e365218, ConnectPlayerMessage.class),
 	CONNECT_PLAYER_RESPONSE_MESSAGE				(0x6137556F, ConnectPlayerResponseMessage.class),
 	GALAXY_LOOP_TIMES_REQUEST					(0x7d842d68, GalaxyLoopTimesRequest.class),
@@ -100,9 +101,9 @@ public enum PacketType {
 	DELTA										(0x12862153, DeltasMessage.class),
 	SERVER_TIME_MESSAGE							(0x2EBC3BD9, ServerTimeMessage.class),
 	SET_WAYPOINT_COLOR							(0x90C59FDE, SetWaypointColor.class),
-	SHOW_BACKPACK									(ShowBackpack.CRC, ShowBackpack.class),
-	SHOW_HELMET											(ShowHelmet.CRC, ShowHelmet.class),
-	SERVER_WEATHER_MESSAGE				(ServerWeatherMessage.CRC, ServerWeatherMessage.class),
+	SHOW_BACKPACK								(ShowBackpack.CRC, ShowBackpack.class),
+	SHOW_HELMET									(ShowHelmet.CRC, ShowHelmet.class),
+	SERVER_WEATHER_MESSAGE			            (ServerWeatherMessage.CRC, ServerWeatherMessage.class),
 	
 		// Chat
 		CHAT_FRIENDS_LIST_UPDATE				(0x6CD2FCD8, ChatFriendsListUpdate.class),
@@ -140,6 +141,7 @@ public enum PacketType {
 		// Spatial
 		UPDATE_POSTURE_MESSAGE					(0x0bde6b41, UpdatePostureMessage.class),
 		UPDATE_TRANSFORMS_MESSAGE				(0x1B24F808, UpdateTransformsMessage.class),
+		UPDATE_TRANSFORM_WITH_PARENT_MESSAGE    (0xC867AB5A, UpdateTransformWithParentMessage.class),
 		SPATIAL_CHAT							(0x000000f4, SpatialChat.class),
 		NEW_TICKET_ACTIVITY_RESPONSE_MESSAGE	(0x6EA42D80, NewTicketActivityResponseMessage.class),
 		ATTRIBUTE_LIST_MESSAGE					(0xF3F12F2A, AttributeListMessage.class),

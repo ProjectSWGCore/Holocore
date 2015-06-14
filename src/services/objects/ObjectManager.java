@@ -40,6 +40,7 @@ import network.packets.swg.zone.SceneDestroyObject;
 import network.packets.swg.zone.insertion.CmdStartScene;
 import network.packets.swg.zone.insertion.SelectCharacter;
 import network.packets.swg.zone.object_controller.DataTransform;
+import network.packets.swg.zone.object_controller.DataTransformWithParent;
 import network.packets.swg.zone.object_controller.ObjectController;
 import network.packets.swg.zone.object_controller.PostureUpdate;
 import resources.Location;
@@ -224,6 +225,11 @@ public class ObjectManager extends Manager {
 				DataTransform trans = (DataTransform) packet;
 				SWGObject obj = getObjectById(trans.getObjectId());
 				moveObject(obj, trans);
+			} else if (packet instanceof DataTransformWithParent) {
+				// TODO: Change this when World Snapshot loading is to update player's position in awareness
+				DataTransformWithParent transformWithParent = (DataTransformWithParent) packet;
+				SWGObject object = getObjectById(transformWithParent.getObjectId());
+				object.sendParentDataTransforms(transformWithParent);
 			}
 		}
 	}

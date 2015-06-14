@@ -37,9 +37,11 @@ import network.packets.swg.zone.SceneCreateObjectByCrc;
 import network.packets.swg.zone.SceneDestroyObject;
 import network.packets.swg.zone.SceneEndBaselines;
 import network.packets.swg.zone.UpdateContainmentMessage;
+import network.packets.swg.zone.UpdateTransformWithParentMessage;
 import network.packets.swg.zone.UpdateTransformsMessage;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import network.packets.swg.zone.object_controller.DataTransform;
+import network.packets.swg.zone.object_controller.DataTransformWithParent;
 import resources.Location;
 import resources.common.CRC;
 import resources.containers.ContainerPermissions;
@@ -82,8 +84,6 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	private double	loadRange	= 0;
 
 	private int     slotArrangement = -1;
-
-	private transient int transformCounter = 0;
 	
 	public SWGObject() {
 		this(0, null);
@@ -728,19 +728,33 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	public void sendDataTransforms(DataTransform dTransform) {
 		Location loc = dTransform.getLocation();
 		float speed = dTransform.getSpeed();
-		sendDataTransforms(loc, dTransform.getMovementAngle(), speed, dTransform.getLookAtYaw(), dTransform.isUseLookAtYaw());
+/*		Even with these speed calculations, observer clients still have stuttering for movements, live only sent UTM's to observers or bouncing back the player
+		that is moving. The only work around to this seems to be to send a UTM to the client to force multiple DTM's to be sent back to the server for fluid movements.
+		if (x != loc.getX() && y != loc.getY() && z != loc.getZ())
+			speed = (float) loc.getSpeed(x, 0, z, MathUtils.calculateDeltaTime(lastMovementTimestamp, dTransform.getTimestamp()));*/
+		sendDataTransforms(loc, dTransform.getMovementAngle(), speed, dTransform.getLookAtYaw(), dTransform.isUseLookAtYaw(), dTransform.getUpdateCounter());
 	}
 
-	public void sendDataTransforms(Location loc, byte direction, float speed, float lookAtYaw, boolean useLookAtYaw) {
-		// TODO: Check for a parent, if one exists then send a UpdateTransformWithParentMessage as the object is in a container (such as a building)
+	public void sendParentDataTransforms(DataTransformWithParent ptm) {
+		UpdateTransformWithParentMessage transform = new UpdateTransformWithParentMessage(ptm.getCellId(), getObjectId());
+		transform.setLocation(ptm.getLocation());
+		transform.setUpdateCounter(ptm.getCounter() + 1);
+		transform.setDirection(ptm.getMovementAngle());
+		transform.setSpeed((byte) ptm.getSpeed());
+		transform.setLookDirection((byte) (ptm.getLookAtYaw() * 16));
+		transform.setUseLookDirection(ptm.isUseLookAtYaw());
+		sendObserversAndSelf(transform);
+	}
+
+	public void sendDataTransforms(Location loc, byte direction, double speed, float lookAtYaw, boolean useLookAtYaw, int updates) {
 		UpdateTransformsMessage transform = new UpdateTransformsMessage();
 		transform.setObjectId(getObjectId()); // (short) (xPosition * 4 + 0.5)
 		transform.setX((short) (loc.getX() * 4));
 		transform.setY((short) (loc.getY() * 4));
 		transform.setZ((short) (loc.getZ() * 4));
-		transform.setUpdateCounter(transformCounter++);
+		transform.setUpdateCounter(updates + 1);
 		transform.setDirection(direction);
-		transform.setSpeed(speed);
+		transform.setSpeed((byte) speed);
 		transform.setLookAtYaw((byte) (lookAtYaw * 16));
 		transform.setUseLookAtYaw(useLookAtYaw);
 		sendObserversAndSelf(transform);

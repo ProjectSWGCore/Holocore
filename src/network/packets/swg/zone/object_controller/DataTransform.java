@@ -35,7 +35,8 @@ import resources.Location;
 public class DataTransform extends ObjectController {
 	
 	public static final int CRC = 0x0071;
-	
+
+	private int timestamp;
 	private int updateCounter = 0;
 	private Location l;
 	private float speed = 0;
@@ -57,7 +58,7 @@ public class DataTransform extends ObjectController {
 	
 	public void decode(ByteBuffer data) {
 		decodeHeader(data);
-		getInt(data);
+		timestamp = getInt(data);
 		updateCounter = getInt(data);
 		l.setOrientationX(getFloat(data));
 		l.setOrientationY(getFloat(data));
@@ -102,6 +103,10 @@ public class DataTransform extends ObjectController {
 
 	public void setLookAtYaw(float lookAtYaw) {
 		this.lookAtYaw = lookAtYaw;
+	}
+
+	public int getTimestamp() {
+		return timestamp;
 	}
 
 	public byte getMovementAngle() {
