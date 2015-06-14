@@ -175,7 +175,7 @@ public class PlayerManager extends Manager {
 		}
 	}
 	
-	private Player transitionLoginToZone(final long networkId, final int galaxyId, ClientIdMsg clientId) {
+	private Player transitionLoginToZone(long networkId, int galaxyId, String galaxyName, ClientIdMsg clientId) {
 		final byte [] nToken = clientId.getSessionToken();
 		synchronized (players) {
 			for (Player p : players.values()) {
@@ -191,6 +191,7 @@ public class PlayerManager extends Manager {
 					players.remove(p.getNetworkId());
 					p.setNetworkId(networkId);
 					p.setGalaxyId(galaxyId);
+					p.setGalaxyName(galaxyName);
 					players.put(networkId, p);
 					Log.i("PlayerManager", "Transitioned %s from login to zone", p.getUsername());
 					return p;
@@ -222,9 +223,11 @@ public class PlayerManager extends Manager {
 		ServerType type = gpi.getServerType();
 		long networkId = gpi.getNetworkId();
 		Player player = null;
-		if (type == ServerType.ZONE && packet instanceof ClientIdMsg)
-			player = transitionLoginToZone(networkId, gpi.getGalaxy().getId(), (ClientIdMsg) packet);
-		else
+		if (type == ServerType.ZONE && packet instanceof ClientIdMsg) {
+			String galaxyName = gpi.getGalaxy().getName();
+			int galaxyId = gpi.getGalaxy().getId();
+			player = transitionLoginToZone(networkId, galaxyId, galaxyName, (ClientIdMsg) packet);
+		} else
 			player = getPlayerFromNetworkId(networkId);
 		if (player != null && type == ServerType.ZONE && packet instanceof SelectCharacter)
 			removeDuplicatePlayers(player, ((SelectCharacter)packet).getCharacterId());

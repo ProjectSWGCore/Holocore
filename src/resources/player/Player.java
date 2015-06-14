@@ -50,7 +50,8 @@ public class Player implements Serializable, Comparable<Player> {
 	private int connectionId		= 0;
 	private AccessLevel accessLevel	= AccessLevel.PLAYER;
 	
-	public int galaxyId				= 0;
+	private int galaxyId				= 0;
+	private String galaxyName		= "";
 	private CreatureObject creatureObject= null;
 	private long lastInboundMessage	= 0;
 	
@@ -99,6 +100,10 @@ public class Player implements Serializable, Comparable<Player> {
 		this.galaxyId = galaxyId;
 	}
 	
+	public void setGalaxyName(String galaxyName) {
+		this.galaxyName = galaxyName;
+	}
+	
 	public void setCreatureObject(CreatureObject obj) {
 		this.creatureObject = obj;
 	}
@@ -143,6 +148,10 @@ public class Player implements Serializable, Comparable<Player> {
 	
 	public int getGalaxyId() {
 		return galaxyId;
+	}
+	
+	public String getGalaxyName() {
+		return galaxyName;
 	}
 	
 	public CreatureObject getCreatureObject() {

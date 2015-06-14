@@ -829,7 +829,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	}
 	
 	public void createBaseline6(Player target, BaselineBuilder bb) {
-		bb.addInt(target.galaxyId); // 0
+		bb.addInt(target.getGalaxyId()); // 0
 		bb.addObject(detailStf); // 1
 		
 		bb.incrementOperandCount(2);
