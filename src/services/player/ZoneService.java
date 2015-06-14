@@ -195,7 +195,7 @@ public class ZoneService extends Service {
 		sendCommitHistory(player);
 		PlayerEventIntent firstZone = new PlayerEventIntent(player, galaxy, PlayerEvent.PE_FIRST_ZONE);
 		PlayerEventIntent primary = new PlayerEventIntent(player, galaxy, PlayerEvent.PE_ZONE_IN);
-		primary.broadcastWithIntent(firstZone);
+		firstZone.broadcastWithIntent(primary);
 	}
 	
 	private void loadCommitHistory() {
