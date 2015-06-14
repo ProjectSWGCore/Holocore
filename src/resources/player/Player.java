@@ -34,6 +34,7 @@ import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
+import services.player.PlayerManager;
 
 public class Player implements Serializable, Comparable<Player> {
 	
@@ -63,11 +64,15 @@ public class Player implements Serializable, Comparable<Player> {
 		this.playerManager = playerManager;
 		setNetworkId(networkId);
 	}
-	
+
+	public PlayerManager getPlayerManager() {
+		return (PlayerManager) playerManager;
+	}
+
 	public void setPlayerManager(Service playerManager) {
 		this.playerManager = playerManager;
 	}
-	
+
 	public void setNetworkId(long networkId) {
 		this.networkId = networkId;
 	}

@@ -220,6 +220,7 @@ public class ConnectionService extends Service {
 				disappearPlayers.add(new DisappearPlayer(System.nanoTime(), p));
 			}
 			updateService.schedule(disappearRunnable, (long) DISAPPEAR_THRESHOLD, TimeUnit.MILLISECONDS);
+			new PlayerEventIntent(p, p.getGalaxyName(), PlayerEvent.PE_LOGGED_OUT).broadcast();
 		}
 	}
 	

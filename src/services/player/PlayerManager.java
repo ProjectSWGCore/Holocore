@@ -155,7 +155,17 @@ public class PlayerManager extends Manager {
 			}
 		}
 	}
-	
+
+	public void notifyPlayersWithCondition(NotifyPlayersPacketIntent.ConditionalNotify conditional, Packet... packets) {
+		synchronized (players) {
+			for (Player player : players.values()) {
+				if (conditional.meetsCondition(player)) {
+					player.sendPacket(packets);
+				}
+			}
+		}
+	}
+
 	public Player getPlayerFromNetworkId(long networkId) {
 		synchronized (players) {
 			return players.get(networkId);
@@ -247,10 +257,12 @@ public class PlayerManager extends Manager {
 	}
 	
 	private void onNotifyPlayersPacketIntent(NotifyPlayersPacketIntent nppi) {
-		if (nppi.getTerrain() != null) 
+		if (nppi.getCondition() != null) {
+			notifyPlayersWithCondition(nppi.getCondition(), nppi.getPacket());
+		} else if (nppi.getTerrain() != null) {
 			notifyPlayersAtPlanet(nppi.getTerrain(), nppi.getPacket());
-		else
+		} else {
 			notifyPlayers(nppi.getPacket());
+		}
 	}
-	
 }

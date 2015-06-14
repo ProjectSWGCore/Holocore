@@ -39,14 +39,14 @@ public class ChatFriendsListUpdate extends SWGPacket {
 	private String friendName;
 	private boolean online;
 	
-	public ChatFriendsListUpdate() {
-		
+	public ChatFriendsListUpdate() {}
+
+	public ChatFriendsListUpdate(String galaxy, String friendName, boolean online) {
+		this.galaxy = galaxy;
+		this.friendName = friendName;
+		this.online = online;
 	}
-	
-	public ChatFriendsListUpdate(String command) {
-		
-	}
-	
+
 	public ChatFriendsListUpdate(ByteBuffer data) {
 		decode(data);
 	}
@@ -61,7 +61,8 @@ public class ChatFriendsListUpdate extends SWGPacket {
 	}
 	
 	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(6);
+		int stringLength = 9 + galaxy.length() + friendName.length();
+		ByteBuffer data = ByteBuffer.allocate(stringLength + 7);
 		addShort  (data, 3);
 		addInt    (data, CRC);
 		addAscii  (data, "SWG");
@@ -71,4 +72,7 @@ public class ChatFriendsListUpdate extends SWGPacket {
 		return data;
 	}
 
+	public String getFriendName() {
+		return friendName;
+	}
 }
