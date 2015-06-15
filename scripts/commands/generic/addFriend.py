@@ -18,7 +18,7 @@ def execute(galacticManager, player, target, args):
 		#ChatBroadcastIntent(player, ProsePackage("@cmnty:friend_duplicate", "TT", name)).broadcast() # Need to fix OOB packet crash
 		return
 
-	if galacticManager.getPlayerManager().getPlayerByCreatureFirstName(name) is None:
+	if galacticManager.getPlayerManager().playerExists(name) is False:
 		#ChatBroadcastIntent(player, ProsePackage("@cmnty:friend_not_found", "TT", name)).broadcast() # Need to fix OOB packet crash
 		return
 

@@ -409,7 +409,7 @@ public class ZoneService extends Service {
 		return ErrorMessage.NAME_APPROVED;
 	}
 	
-	private boolean characterExistsForName(String name) {
+	public boolean characterExistsForName(String name) {
 		synchronized (getCharacter) {
 			ResultSet set = null;
 			try {

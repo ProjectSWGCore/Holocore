@@ -94,7 +94,11 @@ public class PlayerManager extends Manager {
 		else if (i instanceof NotifyPlayersPacketIntent)
 			onNotifyPlayersPacketIntent((NotifyPlayersPacketIntent) i);
 	}
-	
+
+	public boolean playerExists(String name) {
+		return zoneService.characterExistsForName(name);
+	}
+
 	public Player getPlayerByCreatureName(String name) {
 		synchronized (players) {
 			for (Player p : players.values()) {

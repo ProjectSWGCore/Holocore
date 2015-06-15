@@ -411,7 +411,6 @@ public class ChatService extends Service {
 				packet = new ChatPersistentMessageToClient(false, mail.getSender(), galaxy, mail.getId(), mail.getSubject(), mail.getMessage(), mail.getTimestamp(), mail.getStatus()); 
 				break;
 			case HEADER_ONLY:
-			default: 
 				packet = new ChatPersistentMessageToClient(true, mail.getSender(), galaxy, mail.getId(), mail.getSubject(), "", mail.getTimestamp(), mail.getStatus());
 				break;
 		}
