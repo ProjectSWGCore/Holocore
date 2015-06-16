@@ -31,7 +31,6 @@ import network.packets.swg.SWGPacket;
 import resources.Location;
 
 import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 
 /**
  * @author Waverunner

@@ -180,6 +180,8 @@ public class ChatService extends Service {
 			case PE_LOGGED_OUT:
 				updateChatAvatarStatus(intent.getPlayer(), intent.getGalaxy(), false);
 				break;
+			default:
+				break;
 		}
 	}
 
