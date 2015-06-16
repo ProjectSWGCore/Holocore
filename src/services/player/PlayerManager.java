@@ -36,14 +36,13 @@ import java.util.Map;
 
 import network.packets.Packet;
 import network.packets.soe.SessionRequest;
-import network.packets.soe.Disconnect.DisconnectReason;
 import network.packets.swg.login.ClientIdMsg;
 import network.packets.swg.zone.insertion.SelectCharacter;
 import intents.NotifyPlayersPacketIntent;
 import intents.PlayerEventIntent;
-import intents.network.ForceDisconnectIntent;
 import intents.network.GalacticPacketIntent;
 import intents.network.InboundPacketIntent;
+import intents.player.ZonePlayerSwapIntent;
 import resources.Terrain;
 import resources.control.Intent;
 import resources.control.Manager;
@@ -182,7 +181,7 @@ public class PlayerManager extends Manager {
 			while (it.hasNext()) {
 				Player p = it.next();
 				if (p != player && p.getCreatureObject() != null && p.getCreatureObject().getObjectId() == charId) {
-					new ForceDisconnectIntent(p, DisconnectReason.NEW_CONNECTION_ATTEMPT, true).broadcast();
+					new ZonePlayerSwapIntent(p, player, p.getCreatureObject()).broadcast();
 					it.remove();
 				}
 			}
