@@ -51,7 +51,7 @@ public class Scripts {
 		if (!exists(script))
 			return null;
 
-		instance.interpreter.execfile(script);
+		instance.interpreter.execfile(SCRIPTS + script);
 		return instance.interpreter.get(method).__call__(Py.javas2pys(args));
 	}
 
