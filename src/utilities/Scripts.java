@@ -61,7 +61,7 @@ public class Scripts {
 
 	public static void initialize(Config config) {
 		PySystemState systemState = instance.interpreter.getSystemState();
-		systemState.setCurrentWorkingDir(systemState.getCurrentWorkingDir() + "/scripts");
+		systemState.setCurrentWorkingDir(systemState.getCurrentWorkingDir() + "/");
 		Scripts.initScripts(systemState);
 	}
 
