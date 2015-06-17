@@ -56,11 +56,11 @@ public class PlayerManager extends Manager {
 	
 	private final Map <Long, Player> players;
 	private final LoginService loginService;
-	private final ZoneService zoneService;
+	private final ZoneManager zoneService;
 	
 	public PlayerManager() {
 		loginService = new LoginService();
-		zoneService = new ZoneService();
+		zoneService = new ZoneManager();
 		
 		players = new HashMap<Long, Player>();
 		
