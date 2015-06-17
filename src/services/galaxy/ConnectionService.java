@@ -185,7 +185,10 @@ public class ConnectionService extends Service {
 		removeFromLists(before);
 		updatePlayTime(before);
 		creature.getPlayerObject().clearFlagBitmask(PlayerFlags.LD);
+		Log.i("ConnectionService", "Logged out %s with character %s", before.getUsername(), before.getCharacterName());
 		new PlayerEventIntent(before, before.getGalaxyName(), PlayerEvent.PE_LOGGED_OUT).broadcast();
+		Log.i("ConnectionService", "Disconnected %s with character %s and reason: %s", before.getUsername(), before.getCharacterName(), DisconnectReason.NEW_CONNECTION_ATTEMPT);
+		new CloseConnectionIntent(before.getConnectionId(), before.getNetworkId(), DisconnectReason.NEW_CONNECTION_ATTEMPT).broadcast();
 		before.setPlayerState(PlayerState.DISCONNECTED);
 		before.setCreatureObject(null);
 		creature.setOwner(after);
