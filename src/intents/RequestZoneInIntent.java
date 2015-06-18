@@ -4,7 +4,7 @@ import resources.control.Intent;
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
 
-public class ZoneInIntent extends Intent {
+public class RequestZoneInIntent extends Intent {
 	
 	public static final String TYPE = "ZoneInIntent";
 	
@@ -12,7 +12,7 @@ public class ZoneInIntent extends Intent {
 	private CreatureObject creature;
 	private String galaxy;
 	
-	public ZoneInIntent(Player player, CreatureObject creature, String galaxy) {
+	public RequestZoneInIntent(Player player, CreatureObject creature, String galaxy) {
 		super(TYPE);
 		setPlayer(player);
 		setCreature(creature);

@@ -85,6 +85,7 @@ public abstract class ObjectController extends SWGPacket {
 		int crc = data.getInt(10);
 		switch (crc) {
 			case 0x00000071: return new DataTransform(data);
+			case 0x000000F1: return new DataTransformWithParent(data);
 			case 0x00000116: return new CommandQueueEnqueue(data);
 			case 0x00000117: return new CommandQueueDequeue(data);
 			case 0x0000012E: return new PlayerEmote(data);

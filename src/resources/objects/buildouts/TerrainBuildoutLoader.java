@@ -37,6 +37,7 @@ import resources.Terrain;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.CrcStringTableData;
 import resources.client_info.visitors.DatatableData;
+import resources.containers.ContainerPermissions;
 import resources.objects.SWGObject;
 import resources.objects.cell.CellObject;
 import resources.server_info.Log;
@@ -126,7 +127,7 @@ class TerrainBuildoutLoader {
 	}
 	
 	private void updatePermissions(SWGObject object) {
-		object.getContainerPermissions().addDefaultWorldPermissions();
+		object.setContainerPermissions(ContainerPermissions.WORLD);
 	}
 	
 }

@@ -76,7 +76,7 @@ public class MapService extends Service {
 	@Override
 	public boolean initialize() {
 		registerForIntent(GalacticPacketIntent.TYPE);
-		debug_addMapLocations();
+		loadStaticCityPoints();
 		return super.initialize();
 	}
 
@@ -144,7 +144,7 @@ public class MapService extends Service {
 	}
 
 	private void loadMappingTemplates() {
-		DatatableData table = (DatatableData) ClientFactory.getInfoFromFile("map_locations.iff");
+		DatatableData table = (DatatableData) ClientFactory.getInfoFromFile("map/map_locations.iff");
 		for (int row = 0; row < table.getRowCount(); row++) {
 			MappingTemplate template = new MappingTemplate();
 			template.setTemplate(ClientFactory.formatToSharedFile(table.getCell(row, 0).toString()));
@@ -155,6 +155,24 @@ public class MapService extends Service {
 			template.setFlag(Integer.valueOf(table.getCell(row, 5).toString()));
 
 			mappingTemplates.put(template.getTemplate(), template);
+		}
+	}
+
+	private void loadStaticCityPoints() {
+		DatatableData table = (DatatableData) ClientFactory.getInfoFromFile("map/static_city_points.iff");
+
+		byte city = (byte) mapCategories.get("city").getIndex();
+		for (int row = 0; row < table.getRowCount(); row++) {
+			ArrayList<MapLocation> locations = staticMapLocations.get(table.getCell(row, 0));
+			if (locations == null) {
+				locations = new ArrayList<>();
+				staticMapLocations.put((String) table.getCell(row, 0), locations);
+			}
+
+			String name = (String) table.getCell(row, 1);
+			float x = (float) table.getCell(row, 2);
+			float z = (float) table.getCell(row, 3);
+			locations.add(new MapLocation(locations.size() + 1, name, x, z, city, (byte) 0, false));
 		}
 	}
 
@@ -220,24 +238,6 @@ public class MapService extends Service {
 			persistentMapLocations.put(planet, new ArrayList<MapLocation>());
 			persistentMapLocations.get(planet).add(location);
 		}
-	}
-
-	private void debug_addMapLocations() {
-		// TODO: Remove this when world snapshot loading is implemented, as the map locations will be added automatically
-		// -- by using the capitol.iff template building
-		ArrayList<MapLocation> tatooineLocs = staticMapLocations.get("tatooine");
-		if (tatooineLocs == null)
-			tatooineLocs = new ArrayList<>();
-
-		byte city = (byte) mapCategories.get("city").getIndex();
-		tatooineLocs.add(new MapLocation(tatooineLocs.size() + 1, "Mos Eisley", 3528, -4804, city, (byte) 0, false));
-		tatooineLocs.add(new MapLocation(tatooineLocs.size() + 1, "Bestine", -1290, -3590, city, (byte) 0, false));
-		tatooineLocs.add(new MapLocation(tatooineLocs.size() + 1, "Mos Espa", -2902, 2130, city, (byte) 0, false));
-		tatooineLocs.add(new MapLocation(tatooineLocs.size() + 1, "Mos Entha", 1291, 3138, city, (byte) 0, false));
-		tatooineLocs.add(new MapLocation(tatooineLocs.size() + 1, "Wayfar", -5124, -6530, city, (byte) 0, false));
-		tatooineLocs.add(new MapLocation(tatooineLocs.size() + 1, "Anchorhead", 40, -5348, city, (byte) 0, false));
-
-		staticMapLocations.put("tatooine", tatooineLocs);
 	}
 
 	public enum MapType {

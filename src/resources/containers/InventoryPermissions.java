@@ -25,34 +25,26 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>
  ******************************************************************************/
 
-package resources.objects.group;
+package resources.containers;
 
-import resources.network.BaselineBuilder;
 import resources.objects.SWGObject;
-import resources.player.Player;
 
-public class GroupObject extends SWGObject {
+/**
+ * This set of permissions will allow only the owner to view the container.
+ *
+ * @author Waverunner
+ */
+public class InventoryPermissions extends DefaultPermissions {
 	
 	private static final long serialVersionUID = 200L;
 	
 	@Override
-	public void createBaseline6(Player target, BaselineBuilder bb) {
-		super.createBaseline6(target, bb); // BASE06 -- 2 variables
-		bb.addInt(0); // groupMembers // 2
-			bb.addInt(0); // updateCount
-		bb.addInt(0); // formationmembers // 3
-			bb.addInt(0); // updateCount
-		bb.addAscii(""); // groupName // 4
-		bb.addShort(0); // groupLevel // 5
-		bb.addInt(0); // formationNameCrc // 6
-		bb.addLong(0); // lootMaster // 7
-		bb.addInt(0); // lootRule // 8
-		bb.addInt(0); // PickupPointTimer startTime // 9
-			bb.addInt(0); // endTime
-		bb.addAscii(""); // PickupPoint planetName // 10
-			bb.addFloat(0); // x
-			bb.addFloat(0); // y
-			bb.addFloat(0); // z
-		bb.incrementOperandCount(9);
+	public boolean canView(SWGObject requester, SWGObject container) {
+		return requester.getOwner() == container.getOwner();
+	}
+
+	@Override
+	public boolean canEnter(SWGObject requester, SWGObject container) {
+		return requester.getOwner() == container.getOwner();
 	}
 }

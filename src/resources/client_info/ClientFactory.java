@@ -43,6 +43,7 @@ import resources.client_info.visitors.ProfTemplateData;
 import resources.client_info.visitors.SlotArrangementData;
 import resources.client_info.visitors.SlotDefinitionData;
 import resources.client_info.visitors.SlotDescriptorData;
+import resources.client_info.visitors.WorldSnapshotData;
 import utilities.ByteUtilities;
 
 public class ClientFactory {
@@ -196,6 +197,7 @@ public class ClientFactory {
 			case "SlotDescriptorData": return new SlotDescriptorData();
 			case "SlotDefinitionData": return new SlotDefinitionData();
 			case "SlotArrangementData": return new SlotArrangementData();
+			case "WorldSnapshotData": return new WorldSnapshotData();
 			
 			default: return null;
 		}
@@ -254,6 +256,7 @@ public class ClientFactory {
 		typeMap.put("DTIIFORM", "DatatableData");
 		typeMap.put("PRFIFORM", "ProfTemplateData");
 		typeMap.put("SLTDFORM", "SlotDescriptorData");
+		typeMap.put("WSNPFORM", "WorldSnapshotData");
 		
 		// Objects
 		typeMap.put("SBMKFORM", "ObjectData"); // object/battlefield_marker

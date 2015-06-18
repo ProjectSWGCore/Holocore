@@ -30,6 +30,7 @@ package resources.objects.player;
 import network.packets.swg.zone.UpdatePostureMessage;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import network.packets.swg.zone.chat.ChatSystemMessage;
+import resources.collections.SWGBitSet;
 import resources.collections.SWGList;
 import resources.collections.SWGMap;
 import resources.network.BaselineBuilder;
@@ -43,14 +44,16 @@ import resources.player.PlayerFlags;
 import utilities.MathUtils;
 import utilities.Encoder.StringType;
 
+import java.util.List;
+
 public class PlayerObject extends IntangibleObject {
 	
 	private static final long serialVersionUID = 1L;
 	
 	private String	biography		= "";
 	// PLAY 03
-	private SWGList<Integer> 	flagsList			= new SWGList<>(BaselineType.PLAY, 3, 5, StringType.UNSPECIFIED, true);
-	private SWGList<Integer> 	profileFlags		= new SWGList<>(BaselineType.PLAY, 3, 6, StringType.UNSPECIFIED, true);
+	private SWGBitSet 	        flagsList			= new SWGBitSet(BaselineType.PLAY, 3, 5);
+	private SWGBitSet 	        profileFlags		= new SWGBitSet(BaselineType.PLAY, 3, 6);
 	private String 				title				= "";
 	private int 				bornDate			= 0;
 	private int 				playTime			= 0;
@@ -85,8 +88,8 @@ public class PlayerObject extends IntangibleObject {
 	private long 				nearbyCraftStation	= 0;
 	private SWGList<String> 	draftSchemList		= new SWGList<>(BaselineType.PLAY, 9, 3);
 	private int 				experimentPoints	= 0;
-	private SWGList<String> 	friendsList			= new SWGList<>(BaselineType.PLAY, 9, 7);
-	private SWGList<String> 	ignoreList			= new SWGList<>(BaselineType.PLAY, 9, 8);
+	private SWGList<String> 	friendsList			= new SWGList<>(BaselineType.PLAY, 9, 7, StringType.ASCII);
+	private SWGList<String> 	ignoreList			= new SWGList<>(BaselineType.PLAY, 9, 8, StringType.ASCII);
 	private int 				languageId			= 0;
 	private SWGList<Long> 		defenders			= new SWGList<>(BaselineType.PLAY, 9, 17); // TODO: Change to set
 	private int 				killMeter			= 0;
@@ -98,7 +101,6 @@ public class PlayerObject extends IntangibleObject {
 	public PlayerObject(long objectId) {
 		super(objectId, BaselineType.PLAY);
 		setVolume(0);
-		initFlags();
 	}
 	
 	public void addWaypoint(WaypointObject waypoint) {
@@ -123,7 +125,7 @@ public class PlayerObject extends IntangibleObject {
 			return waypoints;
 		}
 	}
-	
+
 	public void updateWaypoint(WaypointObject obj) {
 		synchronized(waypoints) {
 			waypoints.update(obj.getObjectId(), this);
@@ -338,6 +340,24 @@ public class PlayerObject extends IntangibleObject {
 		sendDelta(8, 6, activeQuest);
 	}
 
+	public void removeFriend(String friend) {
+		synchronized (friendsList) {
+			friendsList.remove(friend);
+		}
+		friendsList.sendDeltaMessage(this);
+	}
+
+	public void addFriend(String friend) {
+		synchronized (friendsList) {
+			friendsList.add(friend);
+		}
+		friendsList.sendDeltaMessage(this);
+	}
+
+	public List<String> getFriendsList() {
+		return this.friendsList;
+	}
+
 	public String getProfWheelPosition() {
 		return profWheelPosition;
 	}
@@ -349,20 +369,20 @@ public class PlayerObject extends IntangibleObject {
 	
 	public void setFlagBitmask(PlayerFlags ... flags) {
 		for (PlayerFlags flag : flags)
-			flagsList.set(0, flagsList.get(0) | flag.getFlag());
-		sendDelta(3, 5, flagsList);
+			flagsList.set(flag.getFlag());
+		flagsList.sendDeltaMessage(this);
 	}
 	
 	public void clearFlagBitmask(PlayerFlags ... flags) {
 		for (PlayerFlags flag : flags)
-			flagsList.set(0, flagsList.get(0) & ~flag.getFlag());
-		sendDelta(3, 5, flagsList);
+			flagsList.clear(flag.getFlag());
+		flagsList.sendDeltaMessage(this);
 	}
 	
 	public void toggleFlag(PlayerFlags ... flags) {
 		for (PlayerFlags flag : flags)
-			flagsList.set(0, flagsList.get(0) ^ flag.getFlag());
-		sendDelta(3, 5, flagsList);
+			flagsList.flip(flag.getFlag());
+		flagsList.sendDeltaMessage(this);
 	}
 	
 	private int getProfessionIcon() {
@@ -391,17 +411,7 @@ public class PlayerObject extends IntangibleObject {
 				return 0;
 		}
 	}
-	
-	private void initFlags() {
-		for (int i = 0; i < 4; i++) {
-			profileFlags.add(0);
-			flagsList.add(0);
-		}
 
-		profileFlags.setUpdateCount(0);
-		flagsList.setUpdateCount(0);
-	}
-	
 	@Override
 	public boolean equals(Object o) {
 		return super.equals(o);

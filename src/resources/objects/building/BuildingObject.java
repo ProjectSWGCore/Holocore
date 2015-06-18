@@ -36,7 +36,6 @@ public class BuildingObject extends TangibleObject {
 	
 	public BuildingObject(long objectId) {
 		super(objectId, BaselineType.BUIO);
-		setOptionsBitmask(256);
 	}
 	
 }

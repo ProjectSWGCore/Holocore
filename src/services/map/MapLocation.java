@@ -132,4 +132,9 @@ public class MapLocation implements BaselineBuilder.Encodable{
 		data = bb.array();
 		return data;
 	}
+
+	@Override
+	public String toString() {
+		return name + " x: " + x + "y: " + y;
+	}
 }
