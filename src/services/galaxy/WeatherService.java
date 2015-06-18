@@ -1,4 +1,4 @@
-package services.player;
+package services.galaxy;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,7 +28,7 @@ public final class WeatherService extends Service {
 	private final Random random;
 	
 	public WeatherService() {
-		cycleDuration = 900;	// Ziggy: 15 minutes, 900 seconds
+		cycleDuration = 600;	// Ziggy: 10 minutes, 600 seconds
 		terrains = Terrain.values();
 		executor = Executors.newScheduledThreadPool(terrains.length);
 		weatherForTerrain = new HashMap<>();
@@ -44,6 +44,7 @@ public final class WeatherService extends Service {
 			executor.scheduleAtFixedRate(
 					new WeatherChanger(t), 0, 
 					cycleDuration, TimeUnit.SECONDS);
+			
 		}
 		
 		registerForIntent(PlayerEventIntent.TYPE);
@@ -90,14 +91,21 @@ public final class WeatherService extends Service {
 		
 		swm.setType(type);
 		swm.setCloudVectorX(random.nextFloat());	// randomised
-		swm.setCloudVectorZ(0);	// Ziggy: Always 0, clouds don't move up/down
-		swm.setCloudVectorY(random.nextFloat());	// randomised
+		swm.setCloudVectorZ(random.nextFloat());	// randomised	
+		swm.setCloudVectorY(0);	// Ziggy: Always 0, clouds don't move up/down
 		
 		return swm;
 	}
 	
 	private WeatherType randomWeather() {
-		return weatherTypes[random.nextInt(weatherTypes.length)];
+		WeatherType weather = WeatherType.CLEAR;
+		float roll = random.nextFloat();
+		
+		for(WeatherType candidate : weatherTypes)
+			if(roll <= candidate.getChance())
+				weather = candidate;
+		
+		return weather;
 	}
 	
 	private class WeatherChanger implements Runnable {
