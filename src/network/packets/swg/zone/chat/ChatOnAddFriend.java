@@ -35,7 +35,7 @@ import java.nio.ByteBuffer;
  * @author Waverunner
  */
 public class ChatOnAddFriend extends SWGPacket {
-	private static final int CRC = 0x2B2A0D94;
+	public static final int CRC = 0x2B2A0D94;
 
 	public ChatOnAddFriend() {}
 

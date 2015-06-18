@@ -53,8 +53,8 @@ public class WaypointCmdCallback implements ICmdCallback {
 		WaypointColor color = null;
 		Terrain terrain = null;
 		String name = null;
-		float x = -1;
-		float y = -1;
+		float x = Float.MAX_VALUE;
+		float y = Float.MAX_VALUE;
 		
 		switch(cmdArgs.length) {
 			case 2: // x y
@@ -94,7 +94,7 @@ public class WaypointCmdCallback implements ICmdCallback {
 	private WaypointObject createWaypoint(ObjectManager objManager, Terrain terrain, WaypointColor color, String name, float x, float y, Location loc) {
 		WaypointObject waypoint = (WaypointObject) objManager.createObject("object/waypoint/shared_waypoint.iff", false);
 
-		waypoint.setLocation(new Location((x != -1 ? x : loc.getX()), 0, (y != -1 ? y : loc.getZ()), (terrain != null ? terrain : loc.getTerrain())));
+		waypoint.setLocation(new Location((x != Float.MAX_VALUE ? x : loc.getX()), 0, (y != Float.MAX_VALUE ? y : loc.getZ()), (terrain != null ? terrain : loc.getTerrain())));
 		if (color != null)
 			waypoint.setColor(color);
 
