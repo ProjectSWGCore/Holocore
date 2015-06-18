@@ -24,15 +24,12 @@ public class ServerWeatherMessage extends SWGPacket {
 				type = WeatherType.CLEAR;
 				break;
 			case 1:
-				type = WeatherType.CLOUDY;
-				break;
-			case 2:
 				type = WeatherType.LIGHT;
 				break;
-			case 3:
+			case 2:
 				type = WeatherType.MEDIUM;
 				break;
-			case 4:
+			case 3:
 				type = WeatherType.HEAVY;
 				break;
 		}
