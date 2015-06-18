@@ -30,6 +30,7 @@ package resources.client_info;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.HashMap;
@@ -122,7 +123,7 @@ public class ClientFactory {
 	
 	// readFile only called if dataMap doesn't contain the file as a key or it's value is null
 	private ClientData readFile(String file) {
-		FileInputStream stream = null;
+		InputStream stream = null;
 		try {
 			File f = new File("./clientdata/" + file);
 			if (!f.exists()) {
@@ -158,7 +159,7 @@ public class ClientFactory {
 		return null;
 	}
 	
-	private ByteBuffer readIntoBuffer(FileInputStream stream) throws IOException {
+	private ByteBuffer readIntoBuffer(InputStream stream) throws IOException {
 		ByteBuffer bb = ByteBuffer.allocate(stream.available()).order(ByteOrder.LITTLE_ENDIAN);
 		stream.read(bb.array());
 		return bb;

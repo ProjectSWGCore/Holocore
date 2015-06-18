@@ -42,15 +42,14 @@ import network.packets.swg.zone.insertion.SelectCharacter;
 import network.packets.swg.zone.object_controller.DataTransform;
 import network.packets.swg.zone.object_controller.DataTransformWithParent;
 import network.packets.swg.zone.object_controller.ObjectController;
-import network.packets.swg.zone.object_controller.PostureUpdate;
 import resources.Location;
-import resources.Posture;
 import resources.Terrain;
 import resources.config.ConfigFile;
 import resources.control.Intent;
 import resources.control.Manager;
 import resources.objects.SWGObject;
 import resources.objects.buildouts.BuildoutLoader;
+import resources.objects.buildouts.SnapshotLoader;
 import resources.objects.creature.CreatureObject;
 import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
@@ -67,14 +66,12 @@ public class ObjectManager extends Manager {
 
 	private final MapService mapService;
 
-	private final Map <Long, List <SWGObject>> buildoutObjects;
 	private final ObjectDatabase<SWGObject> objects;
 	private final ObjectAwareness objectAwareness;
 	private long maxObjectId;
 	
 	public ObjectManager() {
 		mapService = new MapService();
-		buildoutObjects = new HashMap<Long, List<SWGObject>>();
 		objects = new CachedObjectDatabase<SWGObject>("odb/objects.db");
 		objectAwareness = new ObjectAwareness();
 		maxObjectId = 1;
@@ -89,6 +86,7 @@ public class ObjectManager extends Manager {
 		objectAwareness.initialize();
 		loadObjects();
 		loadBuildouts();
+		loadSnapshots();
 		return super.initialize();
 	}
 	
@@ -132,7 +130,7 @@ public class ObjectManager extends Manager {
 				loadBuildout(obj);
 			}
 			double loadTime = (System.nanoTime() - startLoad) / 1E6;
-			System.out.printf("ObjectManager: Finished loading buildouts. Time: %fms%n", loadTime);
+			System.out.printf("ObjectManager: Finished loading %d buildouts. Time: %fms%n", buildouts.size(), loadTime);
 			Log.i("ObjectManager", "Finished loading buildouts. Time: %fms", loadTime);
 		} else {
 			Log.w("ObjectManager", "Did not load buildouts. Reason: Disabled.");
@@ -140,25 +138,46 @@ public class ObjectManager extends Manager {
 		}
 	}
 	
+	private void loadSnapshots() {
+		Config c = getConfig(ConfigFile.PRIMARY);
+		if (c.getBoolean("LOAD-SNAPSHOTS", false)) {
+			long startLoad = System.nanoTime();
+			System.out.println("ObjectManager: Loading snapshots...");
+			Log.i("ObjectManager", "Loading snapshots...");
+			List <SWGObject> snapshots = null;
+			String terrain = c.getString("LOAD-SNAPSHOTS-FOR", "");
+			if (Terrain.doesTerrainExistForName(terrain))
+				snapshots = SnapshotLoader.loadSnapshotsForTerrain(Terrain.getTerrainFromName(terrain));
+			else {
+				if (!terrain.isEmpty()) {
+					System.err.println("ObjectManager: Unknown terrain '" + terrain + "'");
+					Log.e("ObjectManager", "Unknown terrain: %s", terrain);
+				}
+				snapshots = SnapshotLoader.loadAllSnapshots();
+			}
+			for (SWGObject obj : snapshots) {
+				loadSnapshot(obj);
+			}
+			double loadTime = (System.nanoTime() - startLoad) / 1E6;
+			System.out.printf("ObjectManager: Finished loading %d snapshots. Time: %fms%n", snapshots.size(), loadTime);
+			Log.i("ObjectManager", "Finished loading snapshots. Time: %fms", loadTime);
+		} else {
+			Log.w("ObjectManager", "Did not load snapshots. Reason: Disabled.");
+			System.out.println("ObjectManager: Snapshots not loaded. Reason: Disabled!");
+		}
+	}
+	
 	private void loadBuildout(SWGObject obj) {
-		loadObject(obj);
-		List <SWGObject> idCollisions = buildoutObjects.get(obj.getObjectId());
-		if (idCollisions == null)
-			buildoutObjects.put(obj.getObjectId(), idCollisions = new LinkedList<SWGObject>());
-		boolean duplicate = false;
-		for (SWGObject dup : idCollisions) {
-			if (dup.getLocation().equals(obj.getLocation()) && dup.getTemplate().equals(obj.getTemplate())) {
-				duplicate = true;
-				break;
-			}
+		if (obj instanceof TangibleObject) {
+			objectAwareness.add(obj);
 		}
-		if (!duplicate) {
-			idCollisions.add(obj);
-			if (obj instanceof TangibleObject) {
-				objectAwareness.add(obj);
-			}
+		mapService.addMapLocation(obj, MapService.MapType.STATIC);
+	}
+	
+	private void loadSnapshot(SWGObject obj) {
+		if (obj instanceof TangibleObject) {
+			objectAwareness.add(obj);
 		}
-
 		mapService.addMapLocation(obj, MapService.MapType.STATIC);
 	}
 	
