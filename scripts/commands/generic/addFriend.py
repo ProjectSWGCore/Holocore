@@ -15,15 +15,15 @@ def execute(galacticManager, player, target, args):
 	# TODO: Check ignore list for name -- return message @cmnty:friend_fail_is_ignored TT name if ignored
 
 	if ghost.getFriendsList().contains(name):
-		#ChatBroadcastIntent(player, ProsePackage("@cmnty:friend_duplicate", "TT", name)).broadcast() # Need to fix OOB packet crash
+		ChatBroadcastIntent(player, ProsePackage("@cmnty:friend_duplicate", "TT", name)).broadcast()
 		return
 
 	if galacticManager.getPlayerManager().playerExists(name) is False:
-		#ChatBroadcastIntent(player, ProsePackage("@cmnty:friend_not_found", "TT", name)).broadcast() # Need to fix OOB packet crash
+		ChatBroadcastIntent(player, ProsePackage("@cmnty:friend_duplicate", "TT", name)).broadcast()
 		return
 
 	ghost.addFriend(name)
-	#ChatBroadcastIntent(player, ProsePackage("@cmnty:friend_added", "TT", name)).broadcast() # Need to fix OOB packet crash
+	ChatBroadcastIntent(player, ProsePackage("@cmnty:friend_added", "TT", name)).broadcast()
 
 	ChatAvatarRequestIntent(player, name, TARGET_STATUS).broadcast()
 	return

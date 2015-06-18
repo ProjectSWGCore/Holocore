@@ -38,9 +38,11 @@ public class OutOfBand implements Encodable {
 	private static final long serialVersionUID = 1L;
 
 	private ProsePackage prose;
-	
+	private Type type;
+
 	public OutOfBand(ProsePackage prose) {
 		this.prose = prose;
+		this.type = Type.PROSE_PACKAGE;
 	}
 	
 	public static OutOfBand ProsePackage(Object ... objects) {
@@ -54,12 +56,26 @@ public class OutOfBand implements Encodable {
 	@Override
 	public byte[] encode() {
 		byte[] encodedProse = prose.encode();
-		
-		ByteBuffer bb = ByteBuffer.allocate(4 + encodedProse.length).order(ByteOrder.LITTLE_ENDIAN);
-		bb.putInt(encodedProse.length / 2);
+
+		ByteBuffer bb = ByteBuffer.allocate(11 + encodedProse.length).order(ByteOrder.LITTLE_ENDIAN);
+
+		bb.putInt((7 + encodedProse.length) / 2);
+		bb.putShort((short) 0); // ?? -- seen as 0 and 1
+		bb.put((byte) type.ordinal());
+		bb.putInt(-1); // ??
 		bb.put(encodedProse);
-		
+
 		return bb.array();
 	}
 
+	public enum Type {
+		OBJECT,
+		PROSE_PACKAGE,
+		UNKNOWN,
+		AUCTION_TOKEN,
+		WAYPOINT,
+		STRING_ID,
+		STRING,
+		UNKNOWN_2
+	}
 }

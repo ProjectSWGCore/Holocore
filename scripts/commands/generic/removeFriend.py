@@ -12,9 +12,9 @@ def execute(galacticManager, player, target, args):
 	name.lower()
 
 	if ghost.getFriendsList().contains(name) is False:
-		#ChatBroadcastIntent(player, ProsePackage("@cmnty:friend_not_found", "TT", name)).broadcast()
+		ChatBroadcastIntent(player, ProsePackage("@cmnty:friend_not_found", "TT", name)).broadcast()
 		return
 
 	ghost.removeFriend(name)
-	#ChatBroadcastIntent(player, ProsePackage("@cmnty:friend_removed", "TT", name)).broadcast()
+	ChatBroadcastIntent(player, ProsePackage("@cmnty:friend_removed", "TT", name)).broadcast()
 	return
