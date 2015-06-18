@@ -34,6 +34,7 @@ import intents.chat.ChatBroadcastIntent;
 import intents.chat.PersistentMessageIntent;
 import intents.chat.SpatialChatIntent;
 import intents.network.GalacticPacketIntent;
+import intents.player.ZonePlayerSwapIntent;
 import intents.server.ServerStatusIntent;
 import network.packets.Packet;
 import network.packets.swg.SWGPacket;
@@ -42,6 +43,8 @@ import network.packets.swg.zone.chat.ChatDeletePersistentMessage;
 import network.packets.swg.zone.chat.ChatFriendsListUpdate;
 import network.packets.swg.zone.chat.ChatInstantMessageToCharacter;
 import network.packets.swg.zone.chat.ChatInstantMessageToClient;
+import network.packets.swg.zone.chat.ChatOnAddFriend;
+import network.packets.swg.zone.chat.ChatOnChangeFriendStatus;
 import network.packets.swg.zone.chat.ChatOnSendInstantMessage;
 import network.packets.swg.zone.chat.ChatOnSendPersistentMessage;
 import network.packets.swg.zone.chat.ChatPersistentMessageToClient;
@@ -89,6 +92,7 @@ public class ChatService extends Service {
 		registerForIntent(ChatBroadcastIntent.TYPE);
 		registerForIntent(ServerStatusIntent.TYPE);
 		registerForIntent(ChatAvatarRequestIntent.TYPE);
+		registerForIntent(ZonePlayerSwapIntent.TYPE);
 		mails.load();
 		mails.traverse(new Traverser<Mail>() {
 			@Override
@@ -197,7 +201,7 @@ public class ChatService extends Service {
 				broadcastGalaxyMessage(i.getMessage());
 				break;
 			case PERSONAL:
-				broadcastPersonalMessage(i.getProse(), i.getBroadcaster());
+				broadcastPersonalMessage(i.getProse(), i.getBroadcaster(), i.getMessage());
 				break;
 		}
 	}
@@ -211,7 +215,27 @@ public class ChatService extends Service {
 				break;
 			case IGNORE_ADD_TARGET:
 				break;
+			case FRIEND_ADD_TARGET:
+				handleAddFriend(i.getPlayer(), i.getTarget());
+				break;
 		}
+	}
+
+	private void handleAddFriend(Player player, String target) {
+		PlayerObject ghost = player.getPlayerObject();
+		if (ghost == null)
+			return;
+
+		ChatOnChangeFriendStatus friendStatus = new ChatOnChangeFriendStatus(
+				player.getCreatureObject().getObjectId(), player.getGalaxyName(), target, false);
+
+		player.sendPacket(new ChatOnAddFriend(), friendStatus);
+
+		ghost.addFriend(target);
+
+		new ChatBroadcastIntent(player, new ProsePackage("@cmnty:friend_added", "TT", target)).broadcast();
+
+		sendTargetAvatarStatus(player, target);
 	}
 
 	private void handleChatRoomListRequest(Player player, ChatRequestRoomList request) {
@@ -378,9 +402,11 @@ public class ChatService extends Service {
 		new NotifyPlayersPacketIntent(packet).broadcast();
 	}
 	
-	private void broadcastPersonalMessage(ProsePackage prose, Player player) {
-		OutOfBand pckg = new OutOfBand(prose);
-		player.sendPacket(new ChatSystemMessage(SystemChatType.SCREEN_AND_CHAT, pckg));
+	private void broadcastPersonalMessage(ProsePackage prose, Player player, String message) {
+		if (prose != null)
+			player.sendPacket(new ChatSystemMessage(SystemChatType.SCREEN_AND_CHAT, new OutOfBand(prose)));
+		else
+			player.sendPacket(new ChatSystemMessage(SystemChatType.SCREEN_AND_CHAT, message));
 	}
 	
 	private void sendPersistentMessageHeaders(Player player, String galaxy) {

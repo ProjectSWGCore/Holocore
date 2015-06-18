@@ -25,45 +25,26 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>
  ******************************************************************************/
 
-package intents.chat;
+package network.packets.swg.zone.chat;
 
-import resources.control.Intent;
-import resources.player.Player;
+import network.packets.swg.SWGPacket;
+
+import java.nio.ByteBuffer;
 
 /**
  * @author Waverunner
  */
-public class ChatAvatarRequestIntent extends Intent{
-	public static final String TYPE = "ChatAvatarRequestIntent";
+public class ChatOnAddFriend extends SWGPacket {
+	private static final int CRC = 0x2B2A0D94;
 
-	private Player player;
-	private String target;
-	private RequestType requestType;
+	public ChatOnAddFriend() {}
 
-	public ChatAvatarRequestIntent(Player player, String target, RequestType requestType) {
-		super(TYPE);
-		this.player = player;
-		this.target = target;
-		this.requestType = requestType;
-	}
-
-	public Player getPlayer() {
-		return player;
-	}
-
-	public String getTarget() {
-		return target;
-	}
-
-	public RequestType getRequestType() {
-		return requestType;
-	}
-
-	public enum RequestType {
-		TARGET_STATUS,
-		FRIEND_ADD_TARGET,
-		FRIEND_REMOVE_TARGET,
-		IGNORE_ADD_TARGET,
-		IGNORE_REMOVE_TARGET
+	@Override
+	public ByteBuffer encode() {
+		ByteBuffer bb = ByteBuffer.allocate(14);
+		addShort(bb, 3);
+		addInt(bb, CRC);
+		addLong(bb, 0);
+		return bb;
 	}
 }

@@ -1,8 +1,7 @@
 from intents.chat import ChatAvatarRequestIntent
 from intents.chat import ChatBroadcastIntent
 from resources.encodables import ProsePackage
-from intents.chat.ChatAvatarRequestIntent.RequestType import TARGET_STATUS
-import sys
+from intents.chat.ChatAvatarRequestIntent.RequestType import FRIEND_ADD_TARGET
 
 def execute(galacticManager, player, target, args):
 	ghost = player.getPlayerObject()
@@ -19,11 +18,8 @@ def execute(galacticManager, player, target, args):
 		return
 
 	if galacticManager.getPlayerManager().playerExists(name) is False:
-		ChatBroadcastIntent(player, ProsePackage("@cmnty:friend_duplicate", "TT", name)).broadcast()
+		ChatBroadcastIntent(player, ProsePackage("@cmnty:friend_not_found", "TT", name)).broadcast()
 		return
 
-	ghost.addFriend(name)
-	ChatBroadcastIntent(player, ProsePackage("@cmnty:friend_added", "TT", name)).broadcast()
-
-	ChatAvatarRequestIntent(player, name, TARGET_STATUS).broadcast()
+	ChatAvatarRequestIntent(player, name, FRIEND_ADD_TARGET).broadcast()
 	return
