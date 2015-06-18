@@ -37,13 +37,16 @@ import network.packets.swg.zone.SceneCreateObjectByCrc;
 import network.packets.swg.zone.SceneDestroyObject;
 import network.packets.swg.zone.SceneEndBaselines;
 import network.packets.swg.zone.UpdateContainmentMessage;
+import network.packets.swg.zone.UpdateTransformWithParentMessage;
 import network.packets.swg.zone.UpdateTransformsMessage;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import network.packets.swg.zone.object_controller.DataTransform;
+import network.packets.swg.zone.object_controller.DataTransformWithParent;
 import resources.Location;
 import resources.common.CRC;
 import resources.containers.ContainerPermissions;
 import resources.containers.ContainerResult;
+import resources.containers.DefaultPermissions;
 import resources.encodables.Stf;
 import resources.network.BaselineBuilder;
 import resources.network.DeltaBuilder;
@@ -62,8 +65,8 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	private final Map<Long, SWGObject> containedObjects;
 	private final Map <String, String> attributes;
 	private final Map <String, Object> templateAttributes;
-	private final ContainerPermissions containerPermissions;
 	private final BaselineType objectType;
+	private ContainerPermissions containerPermissions;
 	private transient List <SWGObject> objectsAware;
 	private List <List <String>> arrangement;
 
@@ -81,8 +84,6 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	private double	loadRange	= 0;
 
 	private int     slotArrangement = -1;
-
-	private int		transformCounter = 0;
 	
 	public SWGObject() {
 		this(0, null);
@@ -96,7 +97,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		this.containedObjects = Collections.synchronizedMap(new HashMap<Long, SWGObject>());
 		this.attributes = new LinkedHashMap<String, String>();
 		this.templateAttributes = new HashMap<String, Object>();
-		this.containerPermissions = new ContainerPermissions(objectId);
+		this.containerPermissions = new DefaultPermissions();
 		this.objectType = objectType;
 	}
 	
@@ -129,7 +130,6 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 
 		object.parent = this;
 		object.slotArrangement = arrangementId;
-		object.containerPermissions.setOwner(objectId);
 		return true;
 	}
 
@@ -150,11 +150,10 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 
 		object.parent = null;
 		object.slotArrangement = -1;
-		object.containerPermissions.setOwner(-1);
 	}
 
 	/**
-	 * Moves the current object to the target object
+	 * Moves this object to the passed container if the requester has the MOVE permission for the container
 	 * @param requester Object that is requesting to move the object, used for permission checking
 	 * @param container Where this object should be moved to
 	 * @return {@link ContainerResult}
@@ -194,42 +193,102 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		return ContainerResult.SUCCESS;
 	}
 
-	public boolean hasOwnerPermissions(SWGObject object) {
-		return (object.getObjectId() == containerPermissions.getOwner());
+	/**
+	 * Attempts to move this object to the defined container without checking for permissions
+	 * @param container
+	 * @return {@link ContainerResult}
+	 */
+	public ContainerResult moveToContainer(SWGObject container) {
+		return moveToContainer(null, container);
 	}
 
+	/**
+	 * Checks if the passed object has all of the passed permissions
+	 * @param object Requester to view this container
+	 * @param permissions Permissions to check for
+	 * @return
+	 */
 	public boolean hasPermission(SWGObject object, ContainerPermissions.Permission... permissions) {
-		if (object == this || hasOwnerPermissions(object))
+		if (object == null || object == this || object.getOwner() == getOwner())
 			return true;
-
-		if (!containerPermissions.hasPermissions(String.valueOf(object.getObjectId()), permissions)) {
-			// Doesn't have any owner permissions or specific permissions, check to see if this object has an
-			// acceptable permission group with the specified permissions available.
-			for (String permissionGroup : object.containerPermissions.getPermissionGroups()) {
-				if (containerPermissions.hasPermissions(permissionGroup, permissions)) {
-					//System.out.println(object + " can view " + this);
-					return true;
-				}
+		for (ContainerPermissions.Permission permission : permissions) {
+			switch(permission) {
+				case VIEW:
+					if (!containerPermissions.canView(object, this))
+						return false;
+					break;
+				case MOVE:
+					if (!containerPermissions.canMove(object, this))
+						return false;
+					break;
+				case REMOVE:
+					if (!containerPermissions.canRemove(object, this))
+						return false;
+					break;
+				case ADD:
+					if (!containerPermissions.canAdd(object, this))
+						return false;
+					break;
+				case ENTER:
+					if (!containerPermissions.canEnter(object, this))
+						return false;
+					break;
 			}
-			return false;
 		}
-		else return true;
+		return true;
 	}
 
+	/**
+	 * Creates a new permission group for this object with the given permissions for that group
+	 * @param group Name of the permission group
+	 * @param permissions Permissions for the group
+	 */
 	public void addPermissions(String group, ContainerPermissions.Permission... permissions) {
 		containerPermissions.addPermissions(group, permissions);
 	}
 
+	/**
+	 * Removes the stated permissions from the group.
+	 * @param group Name of the permission group
+	 * @param permissions Permissions to remove
+	 */
 	public void removePermissions(String group, ContainerPermissions.Permission... permissions) {
 		containerPermissions.removePermissions(group, permissions);
 	}
 
+	/**
+	 * Creates a new permission group specific to the permission requester that has the defined permissions. The name of the
+	 * new group for this object will be the objectId of this object plus the objectId of the requester.
+	 * <br>This is the same as calling addPermissions(String.valueOf(permissionRequester.getObjectId() + getObjectId()), permissions)
+	 * with the added benefit of adding the group to the permissionRequester's joined container groups
+	 * @param permissionRequester The object that should be given unique permissions to this object
+	 * @param permissions Permissions that the permissionRequester will have for this object
+	 */
 	public void addPermissions(SWGObject permissionRequester, ContainerPermissions.Permission... permissions) {
-		addPermissions(String.valueOf(permissionRequester.getObjectId()), permissions);
+		addPermissions(String.valueOf(permissionRequester.getObjectId() + getObjectId()), permissions);
+		permissionRequester.joinPermissionGroup(String.valueOf(getObjectId() + permissionRequester.getObjectId()));
 	}
 
-	public void removePermissions(SWGObject permissionRequester, ContainerPermissions.Permission... permissions) {
-		removePermissions(String.valueOf(permissionRequester.getObjectId()), permissions);
+	/**
+	 * Removes all the unique permissions for the permissionRequester from this object.
+	 * @param permissionRequester The object that should no longer have unique permissions to this object
+	 */
+	public void removePermissions(SWGObject permissionRequester) {
+		String group = String.valueOf(permissionRequester.getObjectId() + getObjectId());
+		removePermissions(group);
+		permissionRequester.containerPermissions.getJoinedGroups().remove(group);
+	}
+
+	/**
+	 * Assigns this object to a permission group
+	 * @param group
+	 */
+	public void joinPermissionGroup(String group) {
+		containerPermissions.getJoinedGroups().add(group);
+	}
+
+	public void setContainerPermissions(ContainerPermissions permissions) {
+		this.containerPermissions = permissions;
 	}
 
 	public void addAttribute(String attribute, String value) {
@@ -491,6 +550,11 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	}
 	
 	public void createObject(Player target) {
+		if (!hasPermission(target.getCreatureObject(), ContainerPermissions.Permission.VIEW)) {
+			// Log.i("SWGObject", target.getCreatureObject() + " doesn't have permission to view " + this + " -- skipping packet sending");
+			return;
+		}
+
 		sendSceneCreateObject(target);
 		sendBaselines(target);
 		createChildrenObjects(target);
@@ -660,33 +724,45 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 			}
 		}
 	}
-	
+
 	public void sendDataTransforms(DataTransform dTransform) {
 		Location loc = dTransform.getLocation();
 		float speed = dTransform.getSpeed();
-		sendDataTransforms(loc, (byte) dTransform.getMovementAngle(), speed);
+/*		Even with these speed calculations, observer clients still have stuttering for movements, live only sent UTM's to observers or bouncing back the player
+		that is moving. The only work around to this seems to be to send a UTM to the client to force multiple DTM's to be sent back to the server for fluid movements.
+		if (x != loc.getX() && y != loc.getY() && z != loc.getZ())
+			speed = (float) loc.getSpeed(x, 0, z, MathUtils.calculateDeltaTime(lastMovementTimestamp, dTransform.getTimestamp()));*/
+		sendDataTransforms(loc, dTransform.getMovementAngle(), speed, dTransform.getLookAtYaw(), dTransform.isUseLookAtYaw(), dTransform.getUpdateCounter());
 	}
-	
-	public void sendDataTransforms(Location loc, int direction, float speed) {
+
+	public void sendParentDataTransforms(DataTransformWithParent ptm) {
+		UpdateTransformWithParentMessage transform = new UpdateTransformWithParentMessage(ptm.getCellId(), getObjectId());
+		transform.setLocation(ptm.getLocation());
+		transform.setUpdateCounter(ptm.getCounter() + 1);
+		transform.setDirection(ptm.getMovementAngle());
+		transform.setSpeed((byte) ptm.getSpeed());
+		transform.setLookDirection((byte) (ptm.getLookAtYaw() * 16));
+		transform.setUseLookDirection(ptm.isUseLookAtYaw());
+		sendObserversAndSelf(transform);
+	}
+
+	public void sendDataTransforms(Location loc, byte direction, double speed, float lookAtYaw, boolean useLookAtYaw, int updates) {
 		UpdateTransformsMessage transform = new UpdateTransformsMessage();
 		transform.setObjectId(getObjectId()); // (short) (xPosition * 4 + 0.5)
-		transform.setX((short) (loc.getX() * 4 + 0.5));
-		transform.setY((short) (loc.getY() * 4 + 0.5));
-		transform.setZ((short) (loc.getZ() * 4 + 0.5));
-		transform.setUpdateCounter(transformCounter++);
-		transform.setDirection((byte) direction);
-		transform.setSpeed(speed);
+		transform.setX((short) (loc.getX() * 4));
+		transform.setY((short) (loc.getY() * 4));
+		transform.setZ((short) (loc.getZ() * 4));
+		transform.setUpdateCounter(updates + 1);
+		transform.setDirection(direction);
+		transform.setSpeed((byte) speed);
+		transform.setLookAtYaw((byte) (lookAtYaw * 16));
+		transform.setUseLookAtYaw(useLookAtYaw);
 		sendObserversAndSelf(transform);
 	}
 	
 	protected void createChildrenObjects(Player target) {
 		if (slots.size() == 0 && containedObjects.size() == 0)
 			return;
-
-		if (!hasPermission(target.getCreatureObject(), ContainerPermissions.Permission.OPEN)) {
-			Log.i("SWGObject", target.getCreatureObject() + " doesn't have permission to view " + this + " -- skipping packet sending");
-			return;
-		}
 
 		List<SWGObject> sentObjects = new ArrayList<>();
 
@@ -753,7 +829,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	}
 	
 	public void createBaseline6(Player target, BaselineBuilder bb) {
-		bb.addInt(target.galaxyId); // 0
+		bb.addInt(target.getGalaxyId()); // 0
 		bb.addObject(detailStf); // 1
 		
 		bb.incrementOperandCount(2);

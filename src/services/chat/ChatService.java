@@ -27,13 +27,9 @@
 ***********************************************************************************/
 package services.chat;
 
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Locale;
-
 import intents.NotifyPlayersPacketIntent;
 import intents.PlayerEventIntent;
+import intents.chat.ChatAvatarRequestIntent;
 import intents.chat.ChatBroadcastIntent;
 import intents.chat.PersistentMessageIntent;
 import intents.chat.SpatialChatIntent;
@@ -43,6 +39,7 @@ import network.packets.Packet;
 import network.packets.swg.SWGPacket;
 import network.packets.swg.zone.ChatRequestRoomList;
 import network.packets.swg.zone.chat.ChatDeletePersistentMessage;
+import network.packets.swg.zone.chat.ChatFriendsListUpdate;
 import network.packets.swg.zone.chat.ChatInstantMessageToCharacter;
 import network.packets.swg.zone.chat.ChatInstantMessageToClient;
 import network.packets.swg.zone.chat.ChatOnSendInstantMessage;
@@ -60,11 +57,18 @@ import resources.encodables.OutOfBand;
 import resources.encodables.ProsePackage;
 import resources.encodables.player.Mail;
 import resources.objects.SWGObject;
+import resources.objects.player.PlayerObject;
 import resources.player.Player;
+import resources.player.PlayerState;
 import resources.server_info.CachedObjectDatabase;
 import resources.server_info.ObjectDatabase;
 import resources.server_info.ObjectDatabase.Traverser;
 import services.player.PlayerManager;
+
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Locale;
 
 public class ChatService extends Service {
 	
@@ -84,6 +88,7 @@ public class ChatService extends Service {
 		registerForIntent(PlayerEventIntent.TYPE);
 		registerForIntent(ChatBroadcastIntent.TYPE);
 		registerForIntent(ServerStatusIntent.TYPE);
+		registerForIntent(ChatAvatarRequestIntent.TYPE);
 		mails.load();
 		mails.traverse(new Traverser<Mail>() {
 			@Override
@@ -123,9 +128,13 @@ public class ChatService extends Service {
 				if (i instanceof ChatBroadcastIntent)
 					handleChatBroadcast((ChatBroadcastIntent) i);
 				break;
+			case ChatAvatarRequestIntent.TYPE:
+				if (i instanceof ChatAvatarRequestIntent)
+					handleChatAvatarStatusRequestIntent((ChatAvatarRequestIntent) i);
+				break;
 		}
 	}
-	
+
 	private void processPacket(GalacticPacketIntent intent) {
 		Player player = intent.getPlayerManager().getPlayerFromNetworkId(intent.getNetworkId());
 		if (player == null)
@@ -164,34 +173,51 @@ public class ChatService extends Service {
 	
 	private void handlePlayerEventIntent(PlayerEventIntent intent) {
 		switch (intent.getEvent()) {
-			case PE_ZONE_IN:
+			case PE_FIRST_ZONE:
 				sendPersistentMessageHeaders(intent.getPlayer(), intent.getGalaxy());
+				updateChatAvatarStatus(intent.getPlayer(), intent.getGalaxy(), true);
 				break;
-			default: break;
+			case PE_LOGGED_OUT:
+				updateChatAvatarStatus(intent.getPlayer(), intent.getGalaxy(), false);
+				break;
+			default:
+				break;
 		}
 	}
-	
+
 	private void handleChatBroadcast(ChatBroadcastIntent i) {
 		switch(i.getBroadcastType()) {
 			case AREA:
 				broadcastAreaMessage(i.getMessage(), i.getBroadcaster());
 				break;
 			case PLANET:
-				broadcastGalaxyMessage(i.getMessage(), i.getTerrain()); // TODO: Planet specific system messages
+				broadcastPlanetMessage(i.getMessage(), i.getTerrain());
 				break;
 			case GALAXY:
-				broadcastGalaxyMessage(i.getMessage(), i.getTerrain());
+				broadcastGalaxyMessage(i.getMessage());
 				break;
 			case PERSONAL:
 				broadcastPersonalMessage(i.getProse(), i.getBroadcaster());
 				break;
 		}
 	}
-	
-	private void handleChatRoomListRequest(Player player, ChatRequestRoomList request) {
-		
+
+	private void handleChatAvatarStatusRequestIntent(ChatAvatarRequestIntent i) {
+		switch (i.getRequestType()) {
+			case TARGET_STATUS:
+				sendTargetAvatarStatus(i.getPlayer(), i.getTarget());
+				break;
+			case IGNORE_REMOVE_TARGET:
+				break;
+			case IGNORE_ADD_TARGET:
+				break;
+		}
 	}
-	
+
+	private void handleChatRoomListRequest(Player player, ChatRequestRoomList request) {
+
+	}
+
 	private void handleSpatialChat(SpatialChatIntent i) {
 		Player sender = i.getPlayer();
 		SWGObject actor = sender.getCreatureObject();
@@ -217,12 +243,12 @@ public class ChatService extends Service {
 		Player receiver = playerMgr.getPlayerByCreatureFirstName(strReceiver);
 		
 		int errorCode = 0; // 0 = No issue, 4 = "strReceiver is not online"
-		if (receiver == null)
+		if (receiver == null || receiver.getPlayerState() != PlayerState.ZONED_IN)
 			errorCode = 4;
 		
 		sender.sendPacket(new ChatOnSendInstantMessage(errorCode, request.getSequence()));
 		
-		if (receiver == null)
+		if (errorCode == 4)
 			return;
 		
 		receiver.sendPacket(new ChatInstantMessageToClient(request.getGalaxy(), strSender, request.getMessage()));
@@ -284,17 +310,72 @@ public class ChatService extends Service {
 		mail.setStatus(Mail.READ);
 		sendPersistentMessage(player, mail, MailFlagType.FULL_MESSAGE, galaxy);
 	}
-	
+
+	private void updateChatAvatarStatus(Player player, String galaxy, boolean online) {
+		PlayerManager playerManager = player.getPlayerManager();
+		String firstName = player.getCharacterName().toLowerCase();
+		if (firstName.contains(" "))
+			firstName = firstName.substring(0, firstName.indexOf(' '));
+
+		if (online) {
+			PlayerObject playerObject = player.getPlayerObject();
+			if (playerObject == null || playerObject.getFriendsList().size() <= 0)
+				return;
+
+			for (String friend : playerObject.getFriendsList()) {
+				sendTargetAvatarStatus(player, friend);
+			}
+		}
+
+		final ChatFriendsListUpdate update = new ChatFriendsListUpdate(galaxy, firstName, online);
+		playerManager.notifyPlayersWithCondition(new NotifyPlayersPacketIntent.ConditionalNotify() {
+			@Override
+			public boolean meetsCondition(Player player) {
+				if (player.getPlayerState() != PlayerState.ZONED_IN)
+					return false;
+
+				PlayerObject playerObject = player.getPlayerObject();
+				if (playerObject == null || playerObject.getFriendsList().size() <= 0)
+					return false;
+
+				List<String> friends = playerObject.getFriendsList();
+				if (friends.contains(update.getFriendName()))
+					return true;
+				return false;
+			}
+		}, update);
+	}
+
+	private void sendTargetAvatarStatus(Player player, String target) {
+		PlayerObject object = player.getPlayerObject();
+		if (object == null)
+			return;
+
+		Player targetPlayer = player.getPlayerManager().getPlayerByCreatureFirstName(target);
+
+		boolean online = true;
+		if (targetPlayer == null || targetPlayer.getPlayerState() != PlayerState.ZONED_IN)
+			online = false;
+
+		ChatFriendsListUpdate update = new ChatFriendsListUpdate(player.getGalaxyName(), target, online);
+		player.sendPacket(update);
+	}
+
 	private void broadcastAreaMessage(String message, Player broadcaster) {
 		ChatSystemMessage packet = new ChatSystemMessage(SystemChatType.SCREEN_AND_CHAT.ordinal(), message);
 		broadcaster.sendPacket(packet);
 		
 		broadcaster.getCreatureObject().sendObservers(packet);
 	}
-	
-	private void broadcastGalaxyMessage(String message, Terrain terrain) {
+
+	private void broadcastPlanetMessage(String message, Terrain terrain) {
 		ChatSystemMessage packet = new ChatSystemMessage(SystemChatType.SCREEN_AND_CHAT.ordinal(), message);
-		new NotifyPlayersPacketIntent(packet, terrain).broadcast();
+		new NotifyPlayersPacketIntent(packet, terrain, null).broadcast();
+	}
+
+	private void broadcastGalaxyMessage(String message) {
+		ChatSystemMessage packet = new ChatSystemMessage(SystemChatType.SCREEN_AND_CHAT.ordinal(), message);
+		new NotifyPlayersPacketIntent(packet).broadcast();
 	}
 	
 	private void broadcastPersonalMessage(ProsePackage prose, Player player) {
@@ -332,7 +413,6 @@ public class ChatService extends Service {
 				packet = new ChatPersistentMessageToClient(false, mail.getSender(), galaxy, mail.getId(), mail.getSubject(), mail.getMessage(), mail.getTimestamp(), mail.getStatus()); 
 				break;
 			case HEADER_ONLY:
-			default: 
 				packet = new ChatPersistentMessageToClient(true, mail.getSender(), galaxy, mail.getId(), mail.getSubject(), "", mail.getTimestamp(), mail.getStatus());
 				break;
 		}

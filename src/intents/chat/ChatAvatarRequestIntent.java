@@ -25,34 +25,43 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>
  ******************************************************************************/
 
-package resources.objects.group;
+package intents.chat;
 
-import resources.network.BaselineBuilder;
-import resources.objects.SWGObject;
+import resources.control.Intent;
 import resources.player.Player;
 
-public class GroupObject extends SWGObject {
-	
-	private static final long serialVersionUID = 200L;
-	
-	@Override
-	public void createBaseline6(Player target, BaselineBuilder bb) {
-		super.createBaseline6(target, bb); // BASE06 -- 2 variables
-		bb.addInt(0); // groupMembers // 2
-			bb.addInt(0); // updateCount
-		bb.addInt(0); // formationmembers // 3
-			bb.addInt(0); // updateCount
-		bb.addAscii(""); // groupName // 4
-		bb.addShort(0); // groupLevel // 5
-		bb.addInt(0); // formationNameCrc // 6
-		bb.addLong(0); // lootMaster // 7
-		bb.addInt(0); // lootRule // 8
-		bb.addInt(0); // PickupPointTimer startTime // 9
-			bb.addInt(0); // endTime
-		bb.addAscii(""); // PickupPoint planetName // 10
-			bb.addFloat(0); // x
-			bb.addFloat(0); // y
-			bb.addFloat(0); // z
-		bb.incrementOperandCount(9);
+/**
+ * @author Waverunner
+ */
+public class ChatAvatarRequestIntent extends Intent{
+	public static final String TYPE = "ChatAvatarRequestIntent";
+
+	private Player player;
+	private String target;
+	private RequestType requestType;
+
+	public ChatAvatarRequestIntent(Player player, String target, RequestType requestType) {
+		super(TYPE);
+		this.player = player;
+		this.target = target;
+		this.requestType = requestType;
+	}
+
+	public Player getPlayer() {
+		return player;
+	}
+
+	public String getTarget() {
+		return target;
+	}
+
+	public RequestType getRequestType() {
+		return requestType;
+	}
+
+	public enum RequestType {
+		TARGET_STATUS,
+		IGNORE_ADD_TARGET,
+		IGNORE_REMOVE_TARGET
 	}
 }

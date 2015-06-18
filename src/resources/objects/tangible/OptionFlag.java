@@ -25,34 +25,58 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>
  ******************************************************************************/
 
-package resources.objects.group;
+package resources.objects.tangible;
 
-import resources.network.BaselineBuilder;
-import resources.objects.SWGObject;
-import resources.player.Player;
+import java.util.EnumSet;
 
-public class GroupObject extends SWGObject {
-	
-	private static final long serialVersionUID = 200L;
-	
-	@Override
-	public void createBaseline6(Player target, BaselineBuilder bb) {
-		super.createBaseline6(target, bb); // BASE06 -- 2 variables
-		bb.addInt(0); // groupMembers // 2
-			bb.addInt(0); // updateCount
-		bb.addInt(0); // formationmembers // 3
-			bb.addInt(0); // updateCount
-		bb.addAscii(""); // groupName // 4
-		bb.addShort(0); // groupLevel // 5
-		bb.addInt(0); // formationNameCrc // 6
-		bb.addLong(0); // lootMaster // 7
-		bb.addInt(0); // lootRule // 8
-		bb.addInt(0); // PickupPointTimer startTime // 9
-			bb.addInt(0); // endTime
-		bb.addAscii(""); // PickupPoint planetName // 10
-			bb.addFloat(0); // x
-			bb.addFloat(0); // y
-			bb.addFloat(0); // z
-		bb.incrementOperandCount(9);
+public enum OptionFlag {
+	ON_OFF(0x00000001),
+	VENDOR(0x00000002),
+	INSURED(0x00000004),
+	CONVERSABLE(0x00000008),
+	HIBERNATING(0x00000010),
+	MAGIC_ITEM(0x00000020),
+	AGGRESSIVE(0x00000040),
+	HAM_BAR(0x00000080),
+	INVULNERABLE(0x00000100),
+	DISABLED(0x00000200),
+	UNINSURABLE(0x00000400),
+	INTERESTING(0x00000800),
+	MOUNT(0x00001000),
+	CRAFTED(0x00002000),
+	WINGS_OPENED(0x00004000),
+	SPACE_INTERESTING(0x00008000),
+	DOCKING(0x00010000),    // JTL?
+	DESTROYING(0x00020000), // JTL?
+	COMMABLE(0x00040000),
+	DOCKABLE(0x00080000),
+	EJECT(0x00100000),
+	INSPECTABLE(0x00200000),
+	TRANSFERABLE(0x00400000),
+	SHOW_FLIGHT_TUTORIAL(0x00800000),
+	SPACE_COMBAT_MUSIC(0x01000000),
+	ENCOUNTER_LOCKED(0x02000000),
+	SPAWNED_CREATURE(0x04000000),
+	HOLIDAY_INTERESTING(0x08000000),
+	LOCKED(0x10000000);
+
+	int flag;
+
+	OptionFlag(int flag) {
+		this.flag = flag;
+	}
+
+	public int getFlag() {
+		return flag;
+	}
+
+	public static EnumSet<OptionFlag> toEnumSet(int flags) {
+		EnumSet<OptionFlag> enumSet = EnumSet.noneOf(OptionFlag.class);
+		for (OptionFlag optionFlag : OptionFlag.values()) {
+			if ((flags & optionFlag.getFlag()) == optionFlag.getFlag())
+				enumSet.add(optionFlag);
+		}
+
+		return enumSet;
 	}
 }

@@ -33,11 +33,8 @@ import org.junit.Test;
 import utilities.Encoder;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by Waverunner on 6/7/2015

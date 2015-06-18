@@ -36,14 +36,13 @@ import java.util.Map;
 
 import network.packets.Packet;
 import network.packets.soe.SessionRequest;
-import network.packets.soe.Disconnect.DisconnectReason;
 import network.packets.swg.login.ClientIdMsg;
 import network.packets.swg.zone.insertion.SelectCharacter;
 import intents.NotifyPlayersPacketIntent;
 import intents.PlayerEventIntent;
-import intents.network.ForceDisconnectIntent;
 import intents.network.GalacticPacketIntent;
 import intents.network.InboundPacketIntent;
+import intents.player.ZonePlayerSwapIntent;
 import resources.Terrain;
 import resources.control.Intent;
 import resources.control.Manager;
@@ -57,11 +56,11 @@ public class PlayerManager extends Manager {
 	
 	private final Map <Long, Player> players;
 	private final LoginService loginService;
-	private final ZoneService zoneService;
+	private final ZoneManager zoneService;
 	
 	public PlayerManager() {
 		loginService = new LoginService();
-		zoneService = new ZoneService();
+		zoneService = new ZoneManager();
 		
 		players = new HashMap<Long, Player>();
 		
@@ -94,7 +93,11 @@ public class PlayerManager extends Manager {
 		else if (i instanceof NotifyPlayersPacketIntent)
 			onNotifyPlayersPacketIntent((NotifyPlayersPacketIntent) i);
 	}
-	
+
+	public boolean playerExists(String name) {
+		return zoneService.characterExistsForName(name);
+	}
+
 	public Player getPlayerByCreatureName(String name) {
 		synchronized (players) {
 			for (Player p : players.values()) {
@@ -155,7 +158,17 @@ public class PlayerManager extends Manager {
 			}
 		}
 	}
-	
+
+	public void notifyPlayersWithCondition(NotifyPlayersPacketIntent.ConditionalNotify conditional, Packet... packets) {
+		synchronized (players) {
+			for (Player player : players.values()) {
+				if (conditional.meetsCondition(player)) {
+					player.sendPacket(packets);
+				}
+			}
+		}
+	}
+
 	public Player getPlayerFromNetworkId(long networkId) {
 		synchronized (players) {
 			return players.get(networkId);
@@ -168,14 +181,14 @@ public class PlayerManager extends Manager {
 			while (it.hasNext()) {
 				Player p = it.next();
 				if (p != player && p.getCreatureObject() != null && p.getCreatureObject().getObjectId() == charId) {
-					new ForceDisconnectIntent(p, DisconnectReason.NEW_CONNECTION_ATTEMPT, true).broadcast();
+					new ZonePlayerSwapIntent(p, player, p.getCreatureObject()).broadcast();
 					it.remove();
 				}
 			}
 		}
 	}
 	
-	private Player transitionLoginToZone(final long networkId, final int galaxyId, ClientIdMsg clientId) {
+	private Player transitionLoginToZone(long networkId, int galaxyId, String galaxyName, ClientIdMsg clientId) {
 		final byte [] nToken = clientId.getSessionToken();
 		synchronized (players) {
 			for (Player p : players.values()) {
@@ -191,6 +204,7 @@ public class PlayerManager extends Manager {
 					players.remove(p.getNetworkId());
 					p.setNetworkId(networkId);
 					p.setGalaxyId(galaxyId);
+					p.setGalaxyName(galaxyName);
 					players.put(networkId, p);
 					Log.i("PlayerManager", "Transitioned %s from login to zone", p.getUsername());
 					return p;
@@ -222,9 +236,11 @@ public class PlayerManager extends Manager {
 		ServerType type = gpi.getServerType();
 		long networkId = gpi.getNetworkId();
 		Player player = null;
-		if (type == ServerType.ZONE && packet instanceof ClientIdMsg)
-			player = transitionLoginToZone(networkId, gpi.getGalaxy().getId(), (ClientIdMsg) packet);
-		else
+		if (type == ServerType.ZONE && packet instanceof ClientIdMsg) {
+			String galaxyName = gpi.getGalaxy().getName();
+			int galaxyId = gpi.getGalaxy().getId();
+			player = transitionLoginToZone(networkId, galaxyId, galaxyName, (ClientIdMsg) packet);
+		} else
 			player = getPlayerFromNetworkId(networkId);
 		if (player != null && type == ServerType.ZONE && packet instanceof SelectCharacter)
 			removeDuplicatePlayers(player, ((SelectCharacter)packet).getCharacterId());
@@ -244,10 +260,12 @@ public class PlayerManager extends Manager {
 	}
 	
 	private void onNotifyPlayersPacketIntent(NotifyPlayersPacketIntent nppi) {
-		if (nppi.getTerrain() != null) 
+		if (nppi.getCondition() != null) {
+			notifyPlayersWithCondition(nppi.getCondition(), nppi.getPacket());
+		} else if (nppi.getTerrain() != null) {
 			notifyPlayersAtPlanet(nppi.getTerrain(), nppi.getPacket());
-		else
+		} else {
 			notifyPlayers(nppi.getPacket());
+		}
 	}
-	
 }

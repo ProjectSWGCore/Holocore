@@ -103,14 +103,6 @@ public class WaypointCmdCallback implements ICmdCallback {
 		return waypoint;
 	}
 	
-	private void printCmdArgs(String[] args) {
-		System.out.println("CmdArgs: ");
-		for (String str : args) {
-			System.out.print(str + ":");
-		}
-		System.out.println("");
-	}
-	
 	private float floatValue(String str) {
 		try {
 			return Float.parseFloat(str);

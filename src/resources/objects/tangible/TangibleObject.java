@@ -47,10 +47,11 @@ public class TangibleObject extends SWGObject {
 	private int		pvpFactionId	= 0;
 	private boolean	visibleGmOnly	= false;
 	private byte []	objectEffects	= new byte[0];
-	private int     optionsBitmask  = 128;
+	private int     optionFlags     = 0;
 	
 	public TangibleObject(long objectId) {
 		super(objectId, BaselineType.TANO);
+		addOptionFlags(OptionFlag.INVULNERABLE);
 	}
 	
 	public TangibleObject(long objectId, BaselineType objectType) {
@@ -145,8 +146,44 @@ public class TangibleObject extends SWGObject {
 		this.objectEffects = objectEffects;
 	}
 
-	public void setOptionsBitmask(int optionsBitmask) {
-		this.optionsBitmask = optionsBitmask;
+	public void setOptionFlags(int optionsBitmask) {
+		this.optionFlags = optionsBitmask;
+	}
+
+	public void setOptionFlags(OptionFlag ... options) {
+		optionFlags = 0;
+		addOptionFlags(options);
+	}
+
+	public void addOptionFlags(OptionFlag ... options) {
+		for (OptionFlag flag : options) {
+			optionFlags |= flag.getFlag();
+		}
+		sendDelta(3, 8, optionFlags);
+	}
+
+	public void toggleOptionFlags(OptionFlag ... options) {
+		for (OptionFlag option : options) {
+			optionFlags ^= option.getFlag();
+		}
+		sendDelta(3, 8, optionFlags);
+	}
+
+	public void removeOptionFlags(OptionFlag ... options) {
+		for (OptionFlag option : options) {
+			optionFlags &= ~option.getFlag();
+		}
+		sendDelta(3, 8, optionFlags);
+	}
+
+	public boolean hasOptionFlags(OptionFlag ... options) {
+		int passCount = 0;
+		for (OptionFlag option : options) {
+			if ((optionFlags & option.getFlag()) == option.getFlag())
+				passCount++;
+		}
+
+		return passCount == options.length;
 	}
 
 	@Override
@@ -161,16 +198,16 @@ public class TangibleObject extends SWGObject {
 	
 	public void createBaseline3(Player target, BaselineBuilder bb) {
 		super.createBaseline3(target, bb); // 4 variables - BASE3 (4)
-		bb.addInt(0); // Faction
-		bb.addInt(0); // Faction Status
-		bb.addArray(appearanceData);
-		bb.addInt(0); // Component customization (Set, Integer)
+		bb.addInt(0); // Faction - 4
+		bb.addInt(0); // Faction Status - 5
+		bb.addArray(appearanceData); // - 6
+		bb.addInt(0); // Component customization (Set, Integer) - 7
 			bb.addInt(0); //updates
-		bb.addInt(optionsBitmask); // Options Bitmask (128 = Attackable) // TODO: Fix this for buildings
-		bb.addInt(0); // Generic Counter -- use count and incap timer
-		bb.addInt(condition);
-		bb.addInt(100); // maxHitPoints
-		bb.addBoolean(true); // isVisible
+		bb.addInt(optionFlags); // 8
+		bb.addInt(0); // Generic Counter -- use count and incap timer - 9
+		bb.addInt(condition); // 10
+		bb.addInt(100); // maxHitPoints - 11
+		bb.addBoolean(true); // isVisible - 12
 		
 		bb.incrementOperandCount(9);
 	}
