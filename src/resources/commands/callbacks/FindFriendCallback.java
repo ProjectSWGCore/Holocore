@@ -1,0 +1,95 @@
+/*******************************************************************************
+ * Copyright (c) 2015 /// Project SWG /// www.projectswg.com
+ *
+ * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on
+ * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies.
+ * Our goal is to create an emulator which will provide a server for players to
+ * continue playing a game similar to the one they used to play. We are basing
+ * it on the final publish of the game prior to end-game events.
+ *
+ * This file is part of Holocore.
+ *
+ * --------------------------------------------------------------------------------
+ *
+ * Holocore is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * Holocore is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Holocore.  If not, see <http://www.gnu.org/licenses/>
+ ******************************************************************************/
+
+package resources.commands.callbacks;
+
+import intents.chat.ChatBroadcastIntent;
+import resources.Location;
+import resources.commands.ICmdCallback;
+import resources.encodables.ProsePackage;
+import resources.objects.SWGObject;
+import resources.objects.player.PlayerObject;
+import resources.objects.waypoint.WaypointObject;
+import resources.player.Player;
+import resources.player.PlayerState;
+import services.galaxy.GalacticManager;
+
+import java.util.Map;
+
+/**
+ * @author Waverunner
+ */
+public class FindFriendCallback implements ICmdCallback {
+	@Override
+	public void execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
+		PlayerObject ghost = player.getPlayerObject();
+
+		if (ghost == null || args.isEmpty())
+			return;
+
+		String friendName = args.split(" ")[0].toLowerCase();
+
+		if (!ghost.getFriendsList().contains(friendName)) {
+			new ChatBroadcastIntent(player, "@ui_cmnty:friend_location_failed_noname").broadcast();
+			return;
+		}
+
+		Player friend = galacticManager.getPlayerManager().getPlayerByCreatureFirstName(friendName);
+		if (friend == null || friend.getPlayerState() != PlayerState.ZONED_IN) {
+			new ChatBroadcastIntent(player, new ProsePackage("@ui_cmnty:friend_location_failed", "TU", friendName)).broadcast();
+			return;
+		}
+
+		PlayerObject friendGhost = friend.getPlayerObject();
+		if (friendGhost == null || !friendGhost.getFriendsList().contains(player.getCharacterName().split(" ")[0].toLowerCase())) {
+			new ChatBroadcastIntent(player, new ProsePackage("@ui_cmnty:friend_location_failed", "TU", friendName)).broadcast();
+			return;
+		}
+
+		Location location = friend.getCreatureObject().getLocation();
+
+		WaypointObject waypoint = null;
+		for (Map.Entry<Long, WaypointObject> entry : ghost.getWaypoints().entrySet()) {
+			WaypointObject waypointEntry = entry.getValue();
+			if (waypointEntry == null || !waypointEntry.getName().equals(friendName))
+				continue;
+
+			waypoint = waypointEntry;
+			break;
+		}
+
+		if (waypoint == null) {
+			waypoint = (WaypointObject) galacticManager.getObjectManager().createObject("object/waypoint/shared_waypoint.iff", location, false);
+			ghost.addWaypoint(waypoint);
+		} else {
+			waypoint.setLocation(location);
+			ghost.updateWaypoint(waypoint);
+		}
+
+		new ChatBroadcastIntent(player, new ProsePackage("@ui_cmnty:friend_location", "TU", friendName)).broadcast();
+	}
+}

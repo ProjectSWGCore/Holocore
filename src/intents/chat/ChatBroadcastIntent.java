@@ -53,11 +53,12 @@ public class ChatBroadcastIntent extends Intent {
 		this(null, receiver, null, BroadcastType.PERSONAL);
 		this.prose = prose;
 	}
-	
 	public ChatBroadcastIntent(String message, BroadcastType type) {
 		this(message, null, null, type);
 	}
-
+	public ChatBroadcastIntent(Player receiver, String message) {
+		this(message, receiver, null, BroadcastType.PERSONAL);
+	}
 	public ChatBroadcastIntent(String message) {
 		this(message, null, null, BroadcastType.GALAXY);
 	}
