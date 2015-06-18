@@ -46,7 +46,6 @@ public class TerrainSnapshotLoader {
 			setCellInformation(object, chunk.getCellIndex());
 			updatePermissions(object);
 		}
-		System.out.println("TerrainSnapshotLoader: " + path);
 	}
 	
 	private SWGObject createObject(Map <Integer, String> templateMap, Chunk row) {
@@ -64,7 +63,7 @@ public class TerrainSnapshotLoader {
 			if (container != null)
 				container.addObject(object);
 			else {
-				Log.e("TerrainBuildoutLoader", "Failed to load object: " + object.getTemplate());
+				Log.e("TerrainSnapshotLoader", "Failed to load object: " + object.getTemplate());
 			}
 		} else {
 			objects.add(object);
