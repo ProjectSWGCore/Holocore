@@ -179,7 +179,7 @@ public class ChatService extends Service {
 	
 	private void handlePlayerEventIntent(PlayerEventIntent intent) {
 		switch (intent.getEvent()) {
-			case PE_FIRST_ZONE:
+			case PE_ZONE_IN:
 				sendPersistentMessageHeaders(intent.getPlayer(), intent.getGalaxy());
 				updateChatAvatarStatus(intent.getPlayer(), intent.getGalaxy(), true);
 				break;
