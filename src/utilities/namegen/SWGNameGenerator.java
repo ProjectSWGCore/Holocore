@@ -27,6 +27,9 @@
 ***********************************************************************************/
 package utilities.namegen;
 
+import resources.Race;
+import resources.zone.NameFilter;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -34,9 +37,6 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import resources.Race;
-import resources.zone.NameFilter;
 
 public class SWGNameGenerator {
 
@@ -158,29 +158,35 @@ public class SWGNameGenerator {
 	}
 	
 	private String getNameByRule(RaceNameRule rule) {
-		String name = "";
+		StringBuffer buffer = new StringBuffer("");
 		String instructions = getRandomInstruction(rule);
 		int l = instructions.length();
 
 		for (int i = 0; i < l; i++) { 
 			char x = instructions.charAt(0); 
 			
-			switch (x) { 
-			case 'v': name += removeExcessDuplications(rule.getVowels(), name, getRandomElementFrom(rule.getVowels())); 
-				break; 
-			case 'c': name += removeExcessDuplications(rule.getStartConsonants(), name, getRandomElementFrom(rule.getStartConsonants())); 
-				break; 
-			case 'd': name += removeExcessDuplications(rule.getEndConsonants(), name, getRandomElementFrom(rule.getEndConsonants())); 
-				break;
-			case '/': name += "'";
-				break;
+			switch (x) {
+				case 'v':
+					buffer.append(removeExcessDuplications(rule.getVowels(), buffer.toString(), getRandomElementFrom(rule.getVowels())));
+					break;
+				case 'c':
+					buffer.append(removeExcessDuplications(rule.getStartConsonants(), buffer.toString(), getRandomElementFrom(rule.getStartConsonants())));
+					break;
+				case 'd':
+					buffer.append(removeExcessDuplications(rule.getEndConsonants(), buffer.toString(), getRandomElementFrom(rule.getEndConsonants())));
+					break;
+				case '/':
+					buffer.append("'");
+					break;
+				default:
+					break;
 			}
 			
 			instructions = instructions.substring(1); 
 		}
-		if (name.isEmpty())
+		if (buffer.length() == 0)
 			return getNameByRule(rule);
-		return name; 
+		return buffer.toString();
 	} 
 	
 	private String getRandomInstruction(RaceNameRule rule) {
@@ -251,6 +257,7 @@ public class SWGNameGenerator {
 				case "Instructions": 
 					rule.addInstruction(line);
 					break;
+					default: break;
 				}
 			}
 		}

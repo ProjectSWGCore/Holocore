@@ -478,7 +478,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	}
 
 	public int getMaxContainerSize() {
-		return Integer.valueOf(templateAttributes.get("containerVolumeLimit").toString());
+		return Integer.parseInt(templateAttributes.get("containerVolumeLimit").toString());
 	}
 	
 	public void setBuildout(boolean buildout) {

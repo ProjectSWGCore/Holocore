@@ -34,8 +34,8 @@ import java.nio.charset.Charset;
 
 
 public class Packet {
-	public static Charset ascii   = Charset.forName("UTF-8");
-	public static Charset unicode = Charset.forName("UTF-16LE");
+	public static final Charset ascii   = Charset.forName("UTF-8");
+	public static final Charset unicode = Charset.forName("UTF-16LE");
 	private InetAddress       address;
 	private ByteBuffer        data;
 	private int               port = 0;
