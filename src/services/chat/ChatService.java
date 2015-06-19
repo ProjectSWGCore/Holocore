@@ -179,11 +179,14 @@ public class ChatService extends Service {
 	
 	private void handlePlayerEventIntent(PlayerEventIntent intent) {
 		switch (intent.getEvent()) {
-			case PE_ZONE_IN:
-				sendPersistentMessageHeaders(intent.getPlayer(), intent.getGalaxy());
-				updateChatAvatarStatus(intent.getPlayer(), intent.getGalaxy(), true);
+			case PE_FIRST_ZONE:
+				Player player = intent.getPlayer();
+				sendPersistentMessageHeaders(player, intent.getGalaxy());
+				updateChatAvatarStatus(player, intent.getGalaxy(), true);
 				break;
 			case PE_LOGGED_OUT:
+				if (intent.getPlayer() == null || intent.getPlayer().getCreatureObject() == null)
+					return;
 				updateChatAvatarStatus(intent.getPlayer(), intent.getGalaxy(), false);
 				break;
 			default:
@@ -392,11 +395,10 @@ public class ChatService extends Service {
 
 		if (online) {
 			PlayerObject playerObject = player.getPlayerObject();
-			if (playerObject == null || playerObject.getFriendsList().size() <= 0)
-				return;
-
-			for (String friend : playerObject.getFriendsList()) {
-				sendTargetAvatarStatus(player, friend);
+			if (playerObject != null && playerObject.getFriendsList().size() <= 0) {
+				for (String friend : playerObject.getFriendsList()) {
+					sendTargetAvatarStatus(player, friend);
+				}
 			}
 		}
 
