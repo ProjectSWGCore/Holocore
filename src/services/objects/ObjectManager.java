@@ -59,6 +59,7 @@ import resources.server_info.Config;
 import resources.server_info.Log;
 import resources.server_info.ObjectDatabase;
 import resources.server_info.ObjectDatabase.Traverser;
+import resources.server_info.UncachedObjectDatabase;
 import services.map.MapService;
 import services.player.PlayerManager;
 
@@ -66,14 +67,16 @@ public class ObjectManager extends Manager {
 
 	private final MapService mapService;
 
-	private final ObjectDatabase<SWGObject> objects;
+	private final ObjectDatabase<SWGObject> database;
 	private final ObjectAwareness objectAwareness;
+	private final Map <Long, SWGObject> objectMap;
 	private long maxObjectId;
 	
 	public ObjectManager() {
 		mapService = new MapService();
-		objects = new CachedObjectDatabase<SWGObject>("odb/objects.db");
+		database = new UncachedObjectDatabase<SWGObject>("odb/objects.db");
 		objectAwareness = new ObjectAwareness();
+		objectMap = new HashMap<>();
 		maxObjectId = 1;
 	}
 	
@@ -94,8 +97,7 @@ public class ObjectManager extends Manager {
 		long startLoad = System.nanoTime();
 		Log.i("ObjectManager", "Loading objects from ObjectDatabase...");
 		System.out.println("ObjectManager: Loading objects from ObjectDatabase...");
-		objects.load();
-		objects.traverse(new Traverser<SWGObject>() {
+		database.traverse(new Traverser<SWGObject>() {
 			@Override
 			public void process(SWGObject obj) {
 				loadObject(obj);
@@ -105,8 +107,8 @@ public class ObjectManager extends Manager {
 			}
 		});
 		double loadTime = (System.nanoTime() - startLoad) / 1E6;
-		Log.i("ObjectManager", "Finished loading %d objects. Time: %fms", objects.size(), loadTime);
-		System.out.printf("ObjectManager: Finished loading %d objects. Time: %fms%n", objects.size(), loadTime);
+		Log.i("ObjectManager", "Finished loading %d objects. Time: %fms", database.size(), loadTime);
+		System.out.printf("ObjectManager: Finished loading %d objects. Time: %fms%n", database.size(), loadTime);
 	}
 	
 	private void loadBuildouts() {
@@ -171,6 +173,7 @@ public class ObjectManager extends Manager {
 		if (obj instanceof TangibleObject) {
 			objectAwareness.add(obj);
 		}
+		objectMap.put(obj.getObjectId(), obj);
 		mapService.addMapLocation(obj, MapService.MapType.STATIC);
 	}
 	
@@ -178,23 +181,25 @@ public class ObjectManager extends Manager {
 		if (obj instanceof TangibleObject) {
 			objectAwareness.add(obj);
 		}
+		objectMap.put(obj.getObjectId(), obj);
 		mapService.addMapLocation(obj, MapService.MapType.STATIC);
 	}
 	
 	private void loadObject(SWGObject obj) {
 		obj.setOwner(null);
 		objectAwareness.add(obj);
+		objectMap.put(obj.getObjectId(), obj);
 	}
 	
 	@Override
 	public boolean terminate() {
-		objects.traverse(new Traverser<SWGObject>() {
+		database.traverse(new Traverser<SWGObject>() {
 			@Override
 			public void process(SWGObject obj) {
 				obj.setOwner(null);
 			}
 		});
-		objects.close();
+		database.close();
 		return super.terminate();
 	}
 	
@@ -254,14 +259,15 @@ public class ObjectManager extends Manager {
 	}
 	
 	public SWGObject getObjectById(long objectId) {
-		synchronized (objects) {
-			return objects.get(objectId);
+		synchronized (objectMap) {
+			return objectMap.get(objectId);
 		}
 	}
 	
 	public SWGObject deleteObject(long objId) {
-		synchronized (objects) {
-			SWGObject obj = objects.remove(objId);
+		synchronized (objectMap) {
+			SWGObject obj = objectMap.remove(objId);
+			database.remove(objId);
 			if (obj == null)
 				return null;
 			obj.clearAware();
@@ -272,7 +278,7 @@ public class ObjectManager extends Manager {
 	}
 
 	public SWGObject destroyObject(long objectId) {
-		SWGObject object = objects.get(objectId);
+		SWGObject object = objectMap.get(objectId);
 
 		return (object != null ? destroyObject(object) : null);
 	}
@@ -325,7 +331,7 @@ public class ObjectManager extends Manager {
 	}
 	
 	public SWGObject createObject(String template, Location l, boolean addToAwareness) {
-		synchronized (objects) {
+		synchronized (objectMap) {
 			long objectId = getNextObjectId();
 			SWGObject obj = ObjectCreator.createObjectFromTemplate(objectId, template);
 			if (obj == null) {
@@ -336,7 +342,8 @@ public class ObjectManager extends Manager {
 			if (addToAwareness) {
 				objectAwareness.add(obj);
 			}
-			objects.put(objectId, obj);
+			objectMap.put(objectId, obj);
+			database.put(objectId, obj);
 			Log.i("ObjectManager", "Created object %d [%s]", obj.getObjectId(), obj.getTemplate());
 			return obj;
 		}
@@ -360,7 +367,7 @@ public class ObjectManager extends Manager {
 			Log.e("ObjectManager", "Unable to zone in null player '%ld'", netId);
 			return;
 		}
-		SWGObject creatureObj = objects.get(characterId);
+		SWGObject creatureObj = objectMap.get(characterId);
 		if (creatureObj == null) {
 			System.err.println("ObjectManager: Failed to start zone - CreatureObject could not be fetched from database [Character: " + characterId + "  User: " + player.getUsername() + "]");
 			Log.e("ObjectManager", "Failed to start zone - CreatureObject could not be fetched from database [Character: %d  User: %s]", characterId, player.getUsername());
@@ -381,7 +388,7 @@ public class ObjectManager extends Manager {
 	}
 	
 	private long getNextObjectId() {
-		synchronized (objects) {
+		synchronized (objectMap) {
 			return maxObjectId++;
 		}
 	}
