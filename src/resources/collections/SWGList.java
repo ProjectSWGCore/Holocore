@@ -231,7 +231,24 @@ public class SWGList<E> extends AbstractList<E> implements Encodable {
 		// Clear the queue since the delta has been sent to observers through the builder
 		clearDeltaQueue();
 	}
-	
+
+	public void sendRefreshedListData(SWGObject target) {
+		clearDeltaQueue();
+		updateCount = 0;
+
+		ByteBuffer bb = ByteBuffer.allocate(11 + dataSize).order(ByteOrder.LITTLE_ENDIAN);
+		bb.putInt(data.size() + 1);
+		bb.putInt(updateCount += data.size() + 1);
+		bb.put((byte) 3);
+		bb.putShort((short) data.size());
+		for (byte[] bytes : data) {
+			bb.put(bytes);
+		}
+
+		DeltaBuilder builder = new DeltaBuilder(target, baseline, view, updateType, bb.array());
+		builder.send();
+	}
+
 	public void clearDeltaQueue() {
 		deltas.clear();
 		deltaSize = 0;
@@ -271,6 +288,10 @@ public class SWGList<E> extends AbstractList<E> implements Encodable {
 			data.add(encodedData);
 		}
 
+		createIndexedDelta(encodedData, index, update);
+	}
+
+	private void createIndexedDelta(byte[] encodedData, int index, byte update) {
 		ByteBuffer buffer = ByteBuffer.allocate(encodedData.length + 2).order(ByteOrder.LITTLE_ENDIAN);
 		buffer.putShort((short) index);
 		buffer.put(encodedData);

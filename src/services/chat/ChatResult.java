@@ -25,46 +25,24 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>
  ******************************************************************************/
 
-package intents.chat;
-
-import resources.control.Intent;
-import resources.player.Player;
+package services.chat;
 
 /**
  * @author Waverunner
  */
-public class ChatAvatarRequestIntent extends Intent{
-	public static final String TYPE = "ChatAvatarRequestIntent";
+public enum ChatResult {
+	NONE(-1),
+	SUCCESS(0),
+	TARGET_AVATAR_DOESNT_EXIST(4),
+	IGNORED(23);
 
-	private Player player;
-	private String target;
-	private RequestType requestType;
 
-	public ChatAvatarRequestIntent(Player player, String target, RequestType requestType) {
-		super(TYPE);
-		this.player = player;
-		this.target = target;
-		this.requestType = requestType;
+	private final int code;
+	ChatResult(int code) {
+		this.code = code;
 	}
 
-	public Player getPlayer() {
-		return player;
-	}
-
-	public String getTarget() {
-		return target;
-	}
-
-	public RequestType getRequestType() {
-		return requestType;
-	}
-
-	public enum RequestType {
-		FRIEND_LIST,
-		TARGET_STATUS,
-		FRIEND_ADD_TARGET,
-		FRIEND_REMOVE_TARGET,
-		IGNORE_ADD_TARGET,
-		IGNORE_REMOVE_TARGET
+	public int getCode() {
+		return code;
 	}
 }

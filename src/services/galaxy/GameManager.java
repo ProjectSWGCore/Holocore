@@ -30,7 +30,6 @@ package services.galaxy;
 import resources.control.Manager;
 import services.chat.ChatService;
 import services.commands.CommandService;
-import services.player.WeatherService;
 import services.sui.SuiService;
 
 public class GameManager extends Manager {

@@ -34,8 +34,8 @@ import java.nio.charset.Charset;
 
 
 public class Packet {
-	public static Charset ascii   = Charset.forName("UTF-8");
-	public static Charset unicode = Charset.forName("UTF-16LE");
+	public static final Charset ascii   = Charset.forName("UTF-8");
+	public static final Charset unicode = Charset.forName("UTF-16LE");
 	private InetAddress       address;
 	private ByteBuffer        data;
 	private int               port = 0;
@@ -125,9 +125,9 @@ public class Packet {
 		addShort(bb, b.length);
 		bb.put(b);
 	}
-	
+
 	public static boolean getBoolean(ByteBuffer bb) {
-		return getByte(bb) == 1 ? true : false;
+		return getByte(bb) == 1;
 	}
 	
 	public static String getAscii(ByteBuffer bb) {
@@ -149,7 +149,7 @@ public class Packet {
 		bb.get(str);
 		return new String(str, unicode);
 	}
-	
+
 	public static byte getByte(ByteBuffer bb) {
 		return bb.get();
 	}

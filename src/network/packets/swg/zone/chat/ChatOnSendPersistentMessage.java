@@ -28,27 +28,29 @@
 package network.packets.swg.zone.chat;
 
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 
 import network.packets.swg.SWGPacket;
+import services.chat.ChatResult;
 
 public class ChatOnSendPersistentMessage extends SWGPacket {
 	public static final int CRC = 0x94E7A7AE;
 	
-	private int errorCode;
+	private ChatResult result;
 	private int count;
 	
-	public ChatOnSendPersistentMessage(int errorCode, int count) {
-		this.errorCode = errorCode;
+	public ChatOnSendPersistentMessage(ChatResult result, int count) {
+		this.result = result;
 		this.count = count;
 	}
 
 	@Override
 	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(20);
+		ByteBuffer data = ByteBuffer.allocate(14);
 		addShort(data, 3);
-		addInt(data, errorCode);
+		addInt(data, CRC);
+		addInt(data, result.getCode());
 		addInt(data, count);
 		return data;
 	}
-	
 }

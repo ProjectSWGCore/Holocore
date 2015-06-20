@@ -25,46 +25,49 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>
  ******************************************************************************/
 
-package intents.chat;
+package network.packets.swg.zone.chat;
 
-import resources.control.Intent;
-import resources.player.Player;
+import network.packets.swg.SWGPacket;
+
+import java.nio.ByteBuffer;
+import java.util.List;
 
 /**
  * @author Waverunner
  */
-public class ChatAvatarRequestIntent extends Intent{
-	public static final String TYPE = "ChatAvatarRequestIntent";
+public class ChatOnGetFriendsList extends SWGPacket {
+	public static final int CRC = 0xE97AB594;
 
-	private Player player;
-	private String target;
-	private RequestType requestType;
+	private List<String> friends;
+	private String galaxy;
+	private long objectId;
 
-	public ChatAvatarRequestIntent(Player player, String target, RequestType requestType) {
-		super(TYPE);
-		this.player = player;
-		this.target = target;
-		this.requestType = requestType;
+	public ChatOnGetFriendsList(long objectId, String galaxy, List<String> friends) {
+		this.objectId = objectId;
+		this.galaxy = galaxy;
+		this.friends = friends;
 	}
 
-	public Player getPlayer() {
-		return player;
-	}
+	@Override
+	public ByteBuffer encode() {
+		int additional = galaxy.length() + 9;
+		int length = 0;
+		for (String friend : friends) {
+			length += friend.length() + additional;
+		}
 
-	public String getTarget() {
-		return target;
-	}
+		ByteBuffer bb = ByteBuffer.allocate(18 + length);
+		addShort(bb, 3);
+		addInt(bb, CRC);
+		addLong(bb, objectId);
 
-	public RequestType getRequestType() {
-		return requestType;
-	}
+		addInt(bb, friends.size());
+		for (String friend : friends) {
+			addAscii(bb, "SWG");
+			addAscii(bb, galaxy);
+			addAscii(bb, friend);
+		}
 
-	public enum RequestType {
-		FRIEND_LIST,
-		TARGET_STATUS,
-		FRIEND_ADD_TARGET,
-		FRIEND_REMOVE_TARGET,
-		IGNORE_ADD_TARGET,
-		IGNORE_REMOVE_TARGET
+		return bb;
 	}
 }

@@ -29,53 +29,121 @@ package resources.encodables;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 import resources.network.BaselineBuilder.Encodable;
+import resources.objects.waypoint.WaypointObject;
 
-public class OutOfBand implements Encodable {
-	// Multiple ProsePackages, need to find an example of it in a packet. Also note that OutOfBand's did not have just ProsePackages.
-	
+public class OutOfBandPackage implements Encodable {
 	private static final long serialVersionUID = 1L;
 
-	private ProsePackage prose;
-	private Type type;
+	private List<OutOfBandData> packages;
+	private transient List<byte[]> data;
+	private transient int dataSize;
 
-	public OutOfBand(ProsePackage prose) {
-		this.prose = prose;
-		this.type = Type.PROSE_PACKAGE;
+	public OutOfBandPackage() {
+		packages = new ArrayList<>(5);
 	}
-	
-	public static OutOfBand ProsePackage(Object ... objects) {
-		return new OutOfBand(new ProsePackage(objects));
+
+	public OutOfBandPackage(OutOfBandData outOfBandData) {
+		this();
+		packages.add(outOfBandData);
 	}
-	
-	public static OutOfBand ProsePackage(Object stf, String key, Object prose) {
-		return new OutOfBand(new ProsePackage(stf, key, prose));
+
+	public static OutOfBandPackage createWithProse(Object stf, String key, Object prose) {
+		return new OutOfBandPackage(new ProsePackage(stf, key, prose));
 	}
-	
+
 	@Override
 	public byte[] encode() {
-		byte[] encodedProse = prose.encode();
+		if (packages.size() == 0)
+			return new byte[4];
 
-		ByteBuffer bb = ByteBuffer.allocate(11 + encodedProse.length).order(ByteOrder.LITTLE_ENDIAN);
+		if (data == null) {
+			data = new LinkedList<>();
 
-		bb.putInt((7 + encodedProse.length) / 2);
-		bb.putShort((short) 0); // ?? -- seen as 0 and 1
-		bb.put((byte) type.ordinal());
-		bb.putInt(-1); // ??
-		bb.put(encodedProse);
+			for (OutOfBandData outOfBandData : packages) {
+				byte[] bytes = outOfBandData.encodeOutOfBandData();
+				dataSize += bytes.length;
+				data.add(bytes);
+			}
+		}
+
+		ByteBuffer bb = ByteBuffer.allocate(4 + dataSize).order(ByteOrder.LITTLE_ENDIAN);
+
+		bb.putInt(dataSize / 2);
+
+		for (byte[] bytes : data) {
+			bb.put(bytes);
+		}
 
 		return bb.array();
 	}
 
+	public void decode(ByteBuffer data) {
+		int size = data.getInt() * 2;
+
+		for (int read = 0; read < size; read+= 3) {
+			boolean addedByte = data.getShort() > 0; // ?? Seen as 1
+
+			Type type = Type.valueOf(data.get());
+			switch(type) {
+				case PROSE_PACKAGE:
+					ProsePackage prose = new ProsePackage();
+					read += prose.decodeOutOfBandData(data);
+					packages.add(prose);
+					break;
+				case WAYPOINT:
+					WaypointObject waypoint = new WaypointObject(-1);
+					read += waypoint.decodeOutOfBandData(data);
+					packages.add(waypoint);
+					break;
+				default:
+					System.err.println("Tried to decode an unsupported OutOfBandData Type: " + type);
+					break;
+			}
+
+			if (addedByte) {
+				data.get();
+				read+= 1;
+			}
+		}
+	}
+
 	public enum Type {
-		OBJECT,
-		PROSE_PACKAGE,
-		UNKNOWN,
-		AUCTION_TOKEN,
-		WAYPOINT,
-		STRING_ID,
-		STRING,
-		UNKNOWN_2
+		NONE(-1),
+		OBJECT(0),
+		PROSE_PACKAGE(1),
+		UNKNOWN(2),
+		AUCTION_TOKEN(3),
+		WAYPOINT(4),
+		STRING_ID(5),
+		STRING(6),
+		UNKNOWN_2(7);
+
+		byte type;
+
+		Type(int type) {
+			this.type = (byte) type;
+		}
+
+		public byte getType() {
+			return type;
+		}
+
+		public static Type valueOf(byte typeByte) {
+			for (Type type : Type.values()) {
+				if (type.getType() == typeByte)
+					return type;
+			}
+			return Type.NONE;
+		}
+	}
+
+	public interface OutOfBandData extends Encodable {
+		byte[] encodeOutOfBandData();
+		int decodeOutOfBandData(ByteBuffer data);
 	}
 }

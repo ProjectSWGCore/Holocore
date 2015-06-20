@@ -493,7 +493,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		if (volume == null)
 			return 0;
 		try {
-			return Integer.valueOf(volume.toString());
+			return Integer.parseInt(volume.toString());
 		} catch (NumberFormatException e) {
 			return 0;
 		}

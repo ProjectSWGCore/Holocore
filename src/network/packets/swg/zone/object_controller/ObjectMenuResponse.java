@@ -56,7 +56,7 @@ public class ObjectMenuResponse extends ObjectController {
 	
 	public ObjectMenuResponse(ByteBuffer data) {
 		super(CRC);
-		options = new ArrayList<RadialOption>();
+		options = new ArrayList<>();
 		decode(data);
 	}
 	
@@ -72,6 +72,7 @@ public class ObjectMenuResponse extends ObjectController {
 			option.setId(getShort(data));
 			option.setOptionType(getByte(data));
 			option.setText(getUnicode(data));
+			options.add(option);
 		}
 		counter = getByte(data);
 	}
