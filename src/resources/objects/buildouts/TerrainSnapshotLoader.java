@@ -41,6 +41,7 @@ public class TerrainSnapshotLoader {
 		Map <Integer, String> templates = data.getObjectTemplateNames();
 		for (Chunk chunk : data.getChunks()) {
 			SWGObject object = createObject(templates, chunk);
+			object.setBuildout(true);
 			object.setLoadRange(chunk.getRadius());
 			addObject(object, chunk.getContainerId());
 			setCellInformation(object, chunk.getCellIndex());
