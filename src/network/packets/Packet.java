@@ -123,7 +123,7 @@ public class Packet {
 	
 	public static void addArray(ByteBuffer bb, byte [] b) {
 		addShort(bb, b.length);
-		bb.order(ByteOrder.LITTLE_ENDIAN).put(b);
+		bb.put(b);
 	}
 
 	public static boolean getBoolean(ByteBuffer bb) {

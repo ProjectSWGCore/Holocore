@@ -146,29 +146,20 @@ public class WaypointCmdCallback implements ICmdCallback {
 		if (!Float.isNaN(z))
 			location.setZ(z);
 
-		boolean differentPlanetMessage = false;
 		if (terrain != null) {
 			if (terrain != location.getTerrain()) {
 				location.setTerrain(terrain);
-				differentPlanetMessage = true;
 			}
 		}
 
 		if (name == null)
 			name = "Waypoint";
 
+		if (Float.isNaN(x) || Float.isNaN(z))
+			return;
+
 		WaypointObject waypoint = createWaypoint(galacticManager.getObjectManager(), color, name, location);
 		ghost.addWaypoint(waypoint);
-
-		if (differentPlanetMessage) {
-			new ChatBroadcastIntent(player, "Waypoint: New waypoint \""+ name + "\" created for location "
-					+ terrain.getName() + " (" + String.format("%.0f", location.getX()) + ", "
-					+ String.format("%.0f", location.getY()) + ", "+ String.format("%.0f", location.getZ()) + ")").broadcast();
-		} else {
-			new ChatBroadcastIntent(player, "Waypoint: New waypoint \""+ name + "\" created for location ("
-					+ String.format("%.0f", location.getX()) + ", "+ String.format("%.0f", location.getY())
-					+ ", "+ String.format("%.0f", location.getZ()) + ")").broadcast();
-		}
 	}
 
 	private WaypointObject createWaypoint(ObjectManager objManager, WaypointColor color, String name, Location location) {

@@ -193,9 +193,7 @@ public class ProsePackage implements OutOfBandPackage.OutOfBandData {
 		byte[] targetData = target.encode();
 		byte[] otherData = other.encode();
 
-		int size = 14 + stringData.length + actorData.length + targetData.length + otherData.length;
-
-		ByteBuffer bb = ByteBuffer.allocate(size).order(ByteOrder.LITTLE_ENDIAN);
+		ByteBuffer bb = ByteBuffer.allocate(16 + stringData.length + actorData.length + targetData.length + otherData.length).order(ByteOrder.LITTLE_ENDIAN);
 		bb.putShort((short) 0); // ??
 		bb.put(OutOfBandPackage.Type.PROSE_PACKAGE.getType());
 		bb.putInt(-1); // ??
