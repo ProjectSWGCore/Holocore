@@ -227,7 +227,7 @@ public class ChatService extends Service {
 		sender.sendPacket(message);
 		
 		// Notify observers of the chat message
-		for (SWGObject aware : actor.getObjectsAware()) {
+		for (SWGObject aware : actor.getObservers()) {
 			if (aware.getOwner() != null)
 				aware.getOwner().sendPacket(new SpatialChat(aware.getObjectId(), message));
 		}

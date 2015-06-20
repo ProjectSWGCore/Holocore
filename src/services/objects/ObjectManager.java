@@ -27,13 +27,15 @@
 ***********************************************************************************/
 package services.objects;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
 import intents.ObjectTeleportIntent;
 import intents.PlayerEventIntent;
 import intents.RequestZoneInIntent;
 import intents.network.GalacticPacketIntent;
-
-import java.util.*;
-
 import main.ProjectSWG;
 import network.packets.Packet;
 import network.packets.swg.zone.SceneDestroyObject;
@@ -50,6 +52,7 @@ import resources.control.Manager;
 import resources.objects.SWGObject;
 import resources.objects.buildouts.BuildoutLoader;
 import resources.objects.buildouts.SnapshotLoader;
+import resources.objects.cell.CellObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
@@ -59,7 +62,6 @@ import resources.server_info.Config;
 import resources.server_info.Log;
 import resources.server_info.ObjectDatabase;
 import resources.server_info.ObjectDatabase.Traverser;
-import resources.server_info.UncachedObjectDatabase;
 import services.map.MapService;
 import services.player.PlayerManager;
 
@@ -74,7 +76,7 @@ public class ObjectManager extends Manager {
 	
 	public ObjectManager() {
 		mapService = new MapService();
-		database = new UncachedObjectDatabase<SWGObject>("odb/objects.db");
+		database = new CachedObjectDatabase<SWGObject>("odb/objects.db");
 		objectAwareness = new ObjectAwareness();
 		objectMap = new HashMap<>();
 		maxObjectId = 1;
@@ -87,9 +89,9 @@ public class ObjectManager extends Manager {
 		registerForIntent(PlayerEventIntent.TYPE);
 		registerForIntent(ObjectTeleportIntent.TYPE);
 		objectAwareness.initialize();
-		loadObjects();
 		loadBuildouts();
 		loadSnapshots();
+		loadObjects();
 		return super.initialize();
 	}
 	
@@ -97,6 +99,7 @@ public class ObjectManager extends Manager {
 		long startLoad = System.nanoTime();
 		Log.i("ObjectManager", "Loading objects from ObjectDatabase...");
 		System.out.println("ObjectManager: Loading objects from ObjectDatabase...");
+		database.load();
 		database.traverse(new Traverser<SWGObject>() {
 			@Override
 			public void process(SWGObject obj) {
@@ -170,25 +173,47 @@ public class ObjectManager extends Manager {
 	}
 	
 	private void loadBuildout(SWGObject obj) {
-		if (obj instanceof TangibleObject) {
+		if (obj instanceof TangibleObject || obj instanceof CellObject) {
 			objectAwareness.add(obj);
 		}
 		objectMap.put(obj.getObjectId(), obj);
+		addChildrenObjects(obj);
 		mapService.addMapLocation(obj, MapService.MapType.STATIC);
 	}
 	
 	private void loadSnapshot(SWGObject obj) {
-		if (obj instanceof TangibleObject) {
+		if (obj instanceof TangibleObject || obj instanceof CellObject) {
 			objectAwareness.add(obj);
 		}
 		objectMap.put(obj.getObjectId(), obj);
+		addChildrenObjects(obj);
 		mapService.addMapLocation(obj, MapService.MapType.STATIC);
 	}
 	
 	private void loadObject(SWGObject obj) {
 		obj.setOwner(null);
-		objectAwareness.add(obj);
+		if (!(obj instanceof CreatureObject) || ((CreatureObject) obj).getPlayerObject() == null)
+			objectAwareness.add(obj);
 		objectMap.put(obj.getObjectId(), obj);
+		if (obj.getParent() != null && obj.getParent().isBuildout()) {
+			long id = obj.getParent().getObjectId();
+			obj.getParent().removeObject(obj);
+			SWGObject parent = objectMap.get(id);
+			if (parent != null)
+				parent.addObject(obj);
+			else {
+				System.err.println("Parent for " + obj + " is null! ParentID: " + id);
+				Log.e("ObjectManager", "Parent for %s is null! ParentID: %d", obj, id);
+			}
+		}
+		addChildrenObjects(obj);
+	}
+	
+	private void addChildrenObjects(SWGObject obj) {
+		for (SWGObject child : obj.getContainedObjects()) {
+			objectMap.put(child.getObjectId(), child);
+			addChildrenObjects(child);
+		}
 	}
 	
 	@Override
@@ -250,10 +275,9 @@ public class ObjectManager extends Manager {
 				SWGObject obj = getObjectById(trans.getObjectId());
 				moveObject(obj, trans);
 			} else if (packet instanceof DataTransformWithParent) {
-				// TODO: Change this when World Snapshot loading is to update player's position in awareness
 				DataTransformWithParent transformWithParent = (DataTransformWithParent) packet;
 				SWGObject object = getObjectById(transformWithParent.getObjectId());
-				object.sendParentDataTransforms(transformWithParent);
+				moveObject(object, transformWithParent);
 			}
 		}
 	}
@@ -361,6 +385,14 @@ public class ObjectManager extends Manager {
 		// on the active state (mainly for CreatureObject, override sendDataTransforms in the class?)
 	}
 	
+	private void moveObject(SWGObject obj, DataTransformWithParent transformWithParent) {
+		Location newLocation = transformWithParent.getLocation();
+		newLocation.setTerrain(obj.getLocation().getTerrain());
+		SWGObject parent = objectMap.get(transformWithParent.getCellId());
+		objectAwareness.move(obj, parent, newLocation);
+		obj.sendParentDataTransforms(transformWithParent);
+	}
+	
 	private void zoneInCharacter(PlayerManager playerManager, String galaxy, long netId, long characterId) {
 		Player player = playerManager.getPlayerFromNetworkId(netId);
 		if (player == null) {
@@ -383,7 +415,12 @@ public class ObjectManager extends Manager {
 			Log.e("ObjectManager", "Failed to start zone - CreatureObject doesn't have a ghost [Character: %d  User: %s", characterId, player.getUsername());
 			return;
 		}
-		objectAwareness.add(creatureObj);
+		if (creatureObj.getParent() != null)
+			objectAwareness.update(creatureObj);
+		else {
+			objectAwareness.remove(creatureObj);
+			objectAwareness.add(creatureObj);
+		}
 		new RequestZoneInIntent(player, (CreatureObject) creatureObj, galaxy).broadcast();
 	}
 	
