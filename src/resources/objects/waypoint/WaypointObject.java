@@ -178,5 +178,18 @@ public class WaypointObject extends IntangibleObject implements OutOfBandPackage
 			}
 			return WaypointColor.BLUE;
 		}
+
+		public static WaypointColor fromString(String string) {
+			switch(string) {
+				case "blue": return WaypointColor.BLUE;
+				case "green": return WaypointColor.GREEN;
+				case "orange": return WaypointColor.ORANGE;
+				case "yellow": return WaypointColor.YELLOW;
+				case "purple": return WaypointColor.PURPLE;
+				case "white": return WaypointColor.WHITE;
+				case "multicolor": return WaypointColor.MULTICOLOR;
+				default: return WaypointColor.BLUE;
+			}
+		}
 	}
 }
