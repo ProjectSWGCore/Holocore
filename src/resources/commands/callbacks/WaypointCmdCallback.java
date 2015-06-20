@@ -63,9 +63,14 @@ public class WaypointCmdCallback implements ICmdCallback {
 					if (Terrain.getTerrainFromName(cmdArgs[0]) != null) {
 						// Terrain's name could also be part of the waypoint name, check to see if next few args are coords
 						try {
-							x = Float.parseFloat(cmdArgs[1]);
-							if (cmdArgs.length >= 3) // Just to be sure.. Maybe someone wanted some numbers in the name.
-								z = Float.parseFloat(cmdArgs[2]);
+							if (cmdArgs.length > 2) {
+								x = Float.parseFloat(cmdArgs[1]);
+								if (cmdArgs.length >= 3) {
+									z = Float.parseFloat(cmdArgs[2]); // Just to be sure.. Maybe someone wanted some numbers in the name.
+									if (cmdArgs.length != 6)
+										cmdArgs = args.split(" ", 6);
+								}
+							}
 						} catch (NumberFormatException e) {
 							// This is just a named waypoint.
 							cmdArgs = new String[]{args};
@@ -81,7 +86,8 @@ public class WaypointCmdCallback implements ICmdCallback {
 						z = Float.parseFloat(cmdArgs[3]);
 						// Ensure 100% this is a 6 argument command as the first param MUST be the planet name
 						if (Terrain.getTerrainFromName(cmdArgs[0]) != null)
-							cmdArgs = args.split(" ", 6);
+							if (cmdArgs.length != 6)
+								cmdArgs = args.split(" ", 6);
 						else cmdArgs = args.split(" ", 4);
 					} catch (NumberFormatException e) {
 						// This is intended for a name, should be 4 params
@@ -135,7 +141,9 @@ public class WaypointCmdCallback implements ICmdCallback {
 				color = WaypointColor.fromString(cmdArgs[4]);
 				name = cmdArgs[5];
 				break;
-			default: break;
+			default:
+				// Not a valid format for /waypoint command
+				return;
 		}
 
 		Location location = new Location(player.getCreatureObject().getLocation());
@@ -146,26 +154,36 @@ public class WaypointCmdCallback implements ICmdCallback {
 		if (!Float.isNaN(z))
 			location.setZ(z);
 
+		boolean differentPlanetMessage = false;
 		if (terrain != null) {
 			if (terrain != location.getTerrain()) {
 				location.setTerrain(terrain);
+				differentPlanetMessage = true;
 			}
 		}
 
 		if (name == null)
 			name = "Waypoint";
 
-		if (Float.isNaN(x) || Float.isNaN(z))
-			return;
-
 		WaypointObject waypoint = createWaypoint(galacticManager.getObjectManager(), color, name, location);
 		ghost.addWaypoint(waypoint);
+
+		if (differentPlanetMessage) {
+			new ChatBroadcastIntent(player, "Waypoint: New waypoint \""+ name + "\" created for location "
+					+ terrain.getName() + " (" + String.format("%.0f", location.getX()) + ", "
+					+ String.format("%.0f", location.getY()) + ", "+ String.format("%.0f", location.getZ()) + ")").broadcast();
+		} else {
+			new ChatBroadcastIntent(player, "Waypoint: New waypoint \""+ name + "\" created for location ("
+					+ String.format("%.0f", location.getX()) + ", "+ String.format("%.0f", location.getY())
+					+ ", "+ String.format("%.0f", location.getZ()) + ")").broadcast();
+		}
 	}
 
 	private WaypointObject createWaypoint(ObjectManager objManager, WaypointColor color, String name, Location location) {
 		WaypointObject waypoint = (WaypointObject) objManager.createObject("object/waypoint/shared_waypoint.iff", location, false);
 		waypoint.setColor(color);
 		waypoint.setName(name);
+		// TODO: Check if the location collides with a building, and if it does then set the proper cellId
 		return waypoint;
 	}
 	

@@ -45,7 +45,7 @@ public class WaypointObject extends IntangibleObject implements OutOfBandPackage
 
 	private static final long serialVersionUID = 1L;
 	
-	private int cellNumber;
+	private long cellId;
 	private String name = "New Waypoint";
 	private WaypointColor color = WaypointColor.BLUE;
 	private boolean active = true;
@@ -54,42 +54,36 @@ public class WaypointObject extends IntangibleObject implements OutOfBandPackage
 		super(objectId, BaselineType.WAYP);
 	}
 
-	
-	public int getCellNumber() {
-		return cellNumber;
-	}
-
-
-	public void setCellNumber(int cellNumber) {
-		this.cellNumber = cellNumber;
-	}
-
 	public String getName() {
 		return name;
 	}
-
 
 	public void setName(String name) {
 		this.name = name;
 	}
 
-
 	public WaypointColor getColor() {
 		return color;
 	}
-
 
 	public void setColor(WaypointColor color) {
 		this.color = color;
 	}
 
-
 	public boolean isActive() {
 		return active;
 	}
-	
+
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+
+	public long getCellId() {
+		return cellId;
+	}
+
+	public void setCellId(long cellId) {
+		this.cellId = cellId;
 	}
 
 	public void createObject(Player target) {
@@ -100,11 +94,11 @@ public class WaypointObject extends IntangibleObject implements OutOfBandPackage
 	public byte[] encode() {
 		Location loc = getLocation();
 		ByteBuffer bb = ByteBuffer.allocate(42 + name.length() * 2).order(ByteOrder.LITTLE_ENDIAN);
-		bb.putInt(cellNumber);
+		bb.putInt(0);
 		bb.putFloat((float) loc.getX());
 		bb.putFloat((float) loc.getY());
 		bb.putFloat((float) loc.getZ());
-		bb.putLong(0);
+		bb.putLong(cellId);
 		bb.putInt(CRC.getCrc(loc.getTerrain().getName()));
 		bb.put(Encoder.encodeUnicode(name));
 		bb.putLong(getObjectId());
@@ -130,7 +124,7 @@ public class WaypointObject extends IntangibleObject implements OutOfBandPackage
 		data.getInt(); // -3
 		data.getInt();
 		setLocation(data.getFloat(), data.getFloat(), data.getFloat());
-		data.getLong();
+		cellId = data.getLong();
 		getLocation().setTerrain(Terrain.getTerrainFromCrc(data.getInt()));
 		name = Packet.getUnicode(data);
 		data.getLong();
@@ -145,14 +139,14 @@ public class WaypointObject extends IntangibleObject implements OutOfBandPackage
 			return false;
 		if (o instanceof WaypointObject) {
 			WaypointObject wp = (WaypointObject) o;
-			return wp.name.equals(name) && wp.cellNumber == cellNumber && wp.color == color && wp.active == active;
+			return wp.name.equals(name) && wp.cellId == cellId && wp.color == color && wp.active == active;
 		}
 		return false;
 	}
 	
 	@Override
 	public int hashCode() {
-		return ((super.hashCode() * 7 + name.hashCode()) * 13 + color.getValue()) * 17 + cellNumber;
+		return ((super.hashCode() * 7 + name.hashCode()) * 13 + color.getValue()) * 17 + (int) cellId;
 	}
 
 	@Override

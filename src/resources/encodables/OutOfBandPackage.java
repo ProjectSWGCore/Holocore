@@ -83,7 +83,7 @@ public class OutOfBandPackage implements Encodable {
 	}
 
 	public void decode(ByteBuffer data) {
-		int size = data.getInt();
+		int size = data.getInt() * 2;
 
 		for (int read = 0; read < size; read+= 3) {
 			boolean addedByte = data.getShort() > 0; // ?? Seen as 1
