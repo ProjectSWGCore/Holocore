@@ -92,6 +92,8 @@ public class WaypointCmdCallback implements ICmdCallback {
 			}
 		}
 
+		// Was there an error message saying the format was wrong?
+		
 		switch(cmdArgs.length) {
 			case 1: // name
 				name = cmdArgs[0];
@@ -99,17 +101,24 @@ public class WaypointCmdCallback implements ICmdCallback {
 			case 2: // x y
 				x = floatValue(cmdArgs[0]);
 				if (Float.isNaN(x))
-					break; // TODO: fail message
+					break;
+				z = floatValue(cmdArgs[1]);
+				break;
+			case 3: // x y z
+				x = floatValue(cmdArgs[0]);
+				if (Float.isNaN(x))
+					break;
+				//y = floatValue(cmdArgs[2]);
 				z = floatValue(cmdArgs[1]);
 				break;
 			case 4: // x y z name
 				x = floatValue(cmdArgs[0]);
 				if (Float.isNaN(x))
-					break; // TODO: fail message
+					break;
 				//y = floatValue(cmdArgs[1]);
 				z = floatValue(cmdArgs[2]);
 				if (Float.isNaN(z))
-					break; // TODO: Fail message
+					break;
 				name = cmdArgs[3];
 				break;
 			case 6: // planet x y z color name
