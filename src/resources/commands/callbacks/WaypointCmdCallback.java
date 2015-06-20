@@ -108,8 +108,8 @@ public class WaypointCmdCallback implements ICmdCallback {
 				x = floatValue(cmdArgs[0]);
 				if (Float.isNaN(x))
 					break;
-				//y = floatValue(cmdArgs[2]);
-				z = floatValue(cmdArgs[1]);
+				//y = floatValue(cmdArgs[1]);
+				z = floatValue(cmdArgs[2]);
 				break;
 			case 4: // x y z name
 				x = floatValue(cmdArgs[0]);
