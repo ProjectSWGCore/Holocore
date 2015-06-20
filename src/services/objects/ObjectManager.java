@@ -120,19 +120,23 @@ public class ObjectManager extends Manager {
 			long startLoad = System.nanoTime();
 			System.out.println("ObjectManager: Loading buildouts...");
 			Log.i("ObjectManager", "Loading buildouts...");
-			List <SWGObject> buildouts = null;
 			String terrain = c.getString("LOAD-BUILDOUTS-FOR", "");
+			BuildoutLoader loader = new BuildoutLoader();
 			if (Terrain.doesTerrainExistForName(terrain))
-				buildouts = BuildoutLoader.loadBuildoutsForTerrain(Terrain.getTerrainFromName(terrain));
+				loader.loadBuildoutsForTerrain(Terrain.getTerrainFromName(terrain));
 			else {
 				if (!terrain.isEmpty()) {
 					System.err.println("ObjectManager: Unknown terrain '" + terrain + "'");
 					Log.e("ObjectManager", "Unknown terrain: %s", terrain);
 				}
-				buildouts = BuildoutLoader.loadAllBuildouts();
+				loader.loadAllBuildouts();
 			}
+			List <SWGObject> buildouts = loader.getObjects();
 			for (SWGObject obj : buildouts) {
 				loadBuildout(obj);
+			}
+			for (SWGObject obj : loader.getObjectTable().values()) {
+				objectMap.put(obj.getObjectId(), obj);
 			}
 			double loadTime = (System.nanoTime() - startLoad) / 1E6;
 			System.out.printf("ObjectManager: Finished loading %d buildouts. Time: %fms%n", buildouts.size(), loadTime);
@@ -149,19 +153,23 @@ public class ObjectManager extends Manager {
 			long startLoad = System.nanoTime();
 			System.out.println("ObjectManager: Loading snapshots...");
 			Log.i("ObjectManager", "Loading snapshots...");
-			List <SWGObject> snapshots = null;
 			String terrain = c.getString("LOAD-SNAPSHOTS-FOR", "");
+			SnapshotLoader loader = new SnapshotLoader();
 			if (Terrain.doesTerrainExistForName(terrain))
-				snapshots = SnapshotLoader.loadSnapshotsForTerrain(Terrain.getTerrainFromName(terrain));
+				loader.loadSnapshotsForTerrain(Terrain.getTerrainFromName(terrain));
 			else {
 				if (!terrain.isEmpty()) {
 					System.err.println("ObjectManager: Unknown terrain '" + terrain + "'");
 					Log.e("ObjectManager", "Unknown terrain: %s", terrain);
 				}
-				snapshots = SnapshotLoader.loadAllSnapshots();
+				loader.loadAllSnapshots();
 			}
+			List <SWGObject> snapshots = loader.getObjects();
 			for (SWGObject obj : snapshots) {
 				loadSnapshot(obj);
+			}
+			for (SWGObject obj : loader.getObjectTable().values()) {
+				objectMap.put(obj.getObjectId(), obj);
 			}
 			double loadTime = (System.nanoTime() - startLoad) / 1E6;
 			System.out.printf("ObjectManager: Finished loading %d snapshots. Time: %fms%n", snapshots.size(), loadTime);
@@ -176,8 +184,6 @@ public class ObjectManager extends Manager {
 		if (obj instanceof TangibleObject || obj instanceof CellObject) {
 			objectAwareness.add(obj);
 		}
-		objectMap.put(obj.getObjectId(), obj);
-		addChildrenObjects(obj);
 		mapService.addMapLocation(obj, MapService.MapType.STATIC);
 	}
 	
@@ -185,8 +191,6 @@ public class ObjectManager extends Manager {
 		if (obj instanceof TangibleObject || obj instanceof CellObject) {
 			objectAwareness.add(obj);
 		}
-		objectMap.put(obj.getObjectId(), obj);
-		addChildrenObjects(obj);
 		mapService.addMapLocation(obj, MapService.MapType.STATIC);
 	}
 	

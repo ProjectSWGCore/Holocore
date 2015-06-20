@@ -29,6 +29,10 @@ public class TerrainSnapshotLoader {
 		this.objectTable = new Hashtable<Long, SWGObject>(12*1024);
 		this.objects = new LinkedList<>();
 	}
+
+	public Map <Long, SWGObject> getObjectTable() {
+		return objectTable;
+	}
 	
 	public List <SWGObject> getObjects() {
 		return objects;

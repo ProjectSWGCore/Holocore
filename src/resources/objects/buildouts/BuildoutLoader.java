@@ -27,9 +27,11 @@
 ***********************************************************************************/
 package resources.objects.buildouts;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import resources.Terrain;
 import resources.client_info.ClientFactory;
@@ -39,27 +41,43 @@ import resources.objects.SWGObject;
 import resources.server_info.Log;
 
 public class BuildoutLoader {
+	
 	private static final CrcStringTableData crcTable = (CrcStringTableData) ClientFactory.getInfoFromFile("misc/object_template_crc_string_table.iff");
 	
-	public static List <SWGObject> loadAllBuildouts() {
-		List <SWGObject> objects = new LinkedList<SWGObject>();
-		for (Terrain t : getTerrainsToLoad())
-			objects.addAll(loadBuildoutsForTerrain(t));
-		return objects;
+	private Map <Long, SWGObject> objectTable;
+	private List <SWGObject> objects;
+	
+	public BuildoutLoader() {
+		objectTable = new HashMap<>();
+		objects = new LinkedList<>();
 	}
 	
-	public static List <SWGObject> loadBuildoutsForTerrain(Terrain terrain) {
+	public void loadAllBuildouts() {
+		for (Terrain t : getTerrainsToLoad())
+			loadBuildoutsForTerrain(t);
+	}
+	
+	public void loadBuildoutsForTerrain(Terrain terrain) {
 		DatatableData table = (DatatableData) ClientFactory.getInfoFromFile("datatables/buildout/buildout_scenes.iff");
 		for (int row = 0; row < table.getRowCount(); row++) {
 			if (table.getCell(row, 0).equals(terrain.name().toLowerCase(Locale.ENGLISH))) {
 				TerrainBuildoutLoader loader = new TerrainBuildoutLoader(crcTable, terrain);
 				loader.load(row);
-				return loader.getObjects();
+				objects.addAll(loader.getObjects());
+				objectTable.putAll(loader.getObjectTable());
+				return;
 			}
 		}
 		System.err.println("Could not find buildouts for terrain: " + terrain);
 		Log.e("BuildoutLoader", "Could not find buildouts for terrain: %s", terrain);
-		return new LinkedList<>();
+	}
+	
+	public Map <Long, SWGObject> getObjectTable() {
+		return objectTable;
+	}
+	
+	public List <SWGObject> getObjects() {
+		return objects;
 	}
 	
 	private static List <Terrain> getTerrainsToLoad() {
