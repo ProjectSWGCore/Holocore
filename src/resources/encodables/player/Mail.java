@@ -27,7 +27,12 @@
 ***********************************************************************************/
 package resources.encodables.player;
 
+import resources.encodables.OutOfBandPackage;
 import resources.network.BaselineBuilder.Encodable;
+import utilities.Encoder;
+
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 
 public class Mail implements Encodable {
 	private static final long serialVersionUID = 1L;
@@ -37,9 +42,9 @@ public class Mail implements Encodable {
 	private long receiverId;
 	private String subject;
 	private String message;
+	private OutOfBandPackage outOfBandPackage;
 	private byte status;
 	private int timestamp;
-	// TODO: Waypoint attachments
 	
 	public static final byte NEW = 0x4E;
 	public static final byte READ = 0x52;
@@ -51,12 +56,6 @@ public class Mail implements Encodable {
 		this.message = message;
 		this.receiverId = receiverId;
 		this.status = NEW;
-	}
-	
-	@Override
-	public byte [] encode() {
-		// TODO Auto-generated method stub
-		return new byte[0];
 	}
 
 	public int getId() {
@@ -97,5 +96,27 @@ public class Mail implements Encodable {
 
 	public void setTimestamp(int timestamp) {
 		this.timestamp = timestamp;
+	}
+
+	public void setOutOfBandPackage(OutOfBandPackage outOfBandPackage) {
+		this.outOfBandPackage = outOfBandPackage;
+	}
+
+	@Override
+	public byte[] encode() {
+		byte[] oob = outOfBandPackage.encode();
+		ByteBuffer bb = ByteBuffer.allocate(8 + (message.length() * 2) + (subject.length() * 2) + oob.length).order(ByteOrder.LITTLE_ENDIAN);
+		bb.put(Encoder.encodeUnicode(message));
+		bb.put(Encoder.encodeUnicode(subject));
+		bb.put(oob);
+		return bb.array();
+	}
+
+	public byte[] encodeHeader() {
+		ByteBuffer bb = ByteBuffer.allocate(12 + subject.length() * 2).order(ByteOrder.LITTLE_ENDIAN);
+		bb.putInt(0);
+		bb.put(Encoder.encodeUnicode(subject));
+		bb.putInt(0);
+		return bb.array();
 	}
 }

@@ -34,10 +34,10 @@ import java.nio.charset.Charset;
 
 import resources.network.BaselineBuilder.Encodable;
 
-public class ProsePackage implements Encodable {
+public class ProsePackage implements OutOfBandPackage.OutOfBandData {
 	private static final long serialVersionUID = 1L;
 
-	private Stf base;
+	private Stf base = new Stf("", "");
 
 	private Prose actor = new Prose();
 	private Prose target = new Prose();
@@ -49,6 +49,8 @@ public class ProsePackage implements Encodable {
 	private float df;
 
 	private boolean grammarFlag = false;
+
+	public ProsePackage() {}
 
 	/**
 	 * Creates a new ProsePackage that contains only 1 parameter for the specified STF object
@@ -191,10 +193,12 @@ public class ProsePackage implements Encodable {
 		byte[] targetData = target.encode();
 		byte[] otherData = other.encode();
 
-		int size = 9 + stringData.length + actorData.length + targetData.length + otherData.length;
+		int size = 14 + stringData.length + actorData.length + targetData.length + otherData.length;
 
 		ByteBuffer bb = ByteBuffer.allocate(size).order(ByteOrder.LITTLE_ENDIAN);
-
+		bb.putShort((short) 0); // ??
+		bb.put(OutOfBandPackage.Type.PROSE_PACKAGE.getType());
+		bb.putInt(-1); // ??
 		bb.put(stringData);
 		bb.put(actorData);
 		bb.put(targetData);
@@ -206,6 +210,17 @@ public class ProsePackage implements Encodable {
 		
 		bb.put((byte) (grammarFlag ? 1 : 0)); // Grammar flag
 		return bb.array();
+	}
+
+
+	@Override
+	public byte[] encodeOutOfBandData() {
+		return encode();
+	}
+
+	@Override
+	public int decodeOutOfBandData(ByteBuffer data) {
+		return 0;
 	}
 
 	@Override

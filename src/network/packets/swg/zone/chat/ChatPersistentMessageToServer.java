@@ -28,14 +28,16 @@
 package network.packets.swg.zone.chat;
 
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 
 import network.packets.swg.SWGPacket;
+import resources.encodables.OutOfBandPackage;
 
 public class ChatPersistentMessageToServer extends SWGPacket {
 	public static final int CRC = 0x25A29FA6;
 	
 	private String message;
-	private String outOfBand;
+	private OutOfBandPackage outOfBandPackage;
 	private int counter;
 	private String subject;
 	private String galaxy;
@@ -43,9 +45,8 @@ public class ChatPersistentMessageToServer extends SWGPacket {
 	
 	public ChatPersistentMessageToServer() {
 		message = "";
-		outOfBand = "";
+		outOfBandPackage = new OutOfBandPackage();
 		subject = "";
-		
 		galaxy = "";
 		recipient = "";
 	}
@@ -55,10 +56,9 @@ public class ChatPersistentMessageToServer extends SWGPacket {
 		if (!super.decode(data, CRC))
 			return;
 		message = getUnicode(data);
-		outOfBand = getUnicode(data);
+		outOfBandPackage.decode(data);
 		counter = getInt(data);
 		subject = getUnicode(data);
-		
 		getAscii(data); // "SWG"
 		galaxy = getAscii(data);
 		recipient = getAscii(data);
@@ -66,10 +66,11 @@ public class ChatPersistentMessageToServer extends SWGPacket {
 	
 	@Override
 	public ByteBuffer encode() {
-		int dataLength = 31 + message.length()*2+outOfBand.length()*2+subject.length()*2+galaxy.length()+recipient.length();
+		byte[] oob = outOfBandPackage.encode();
+		int dataLength = 31 + message.length()*2+oob.length+subject.length()*2+galaxy.length()+recipient.length();
 		ByteBuffer data = ByteBuffer.allocate(dataLength);
 		addUnicode(data, message);
-		addUnicode(data, outOfBand);
+		data.order(ByteOrder.LITTLE_ENDIAN).put(oob);
 		addInt(data, counter);
 		addUnicode(data, subject);
 		addAscii(data, "SWG");
@@ -82,8 +83,8 @@ public class ChatPersistentMessageToServer extends SWGPacket {
 		return message;
 	}
 	
-	public String getOutOfBand() {
-		return outOfBand;
+	public OutOfBandPackage getOutOfBandPackage() {
+		return outOfBandPackage;
 	}
 	
 	public int getCounter() {
@@ -106,8 +107,8 @@ public class ChatPersistentMessageToServer extends SWGPacket {
 		this.message = message;
 	}
 	
-	public void setOutOfBand(String outOfBand) {
-		this.outOfBand = outOfBand;
+	public void setOutOfBandPackage(OutOfBandPackage outOfBandPackage) {
+		this.outOfBandPackage = outOfBandPackage;
 	}
 	
 	public void setCounter(int counter) {

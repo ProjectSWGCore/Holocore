@@ -123,8 +123,8 @@ public enum Terrain {
 	
 	Terrain(String file) {
 		this.file = file;
-		this.crc = CRC.getCrc(file);
 		this.name = file.substring(8, file.length() - 4);
+		this.crc = CRC.getCrc(name);
 	}
 	
 	public String getFile() { return file; }

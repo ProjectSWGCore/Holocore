@@ -29,7 +29,7 @@ package network.packets.swg.zone.chat;
 
 import java.nio.ByteBuffer;
 
-import resources.encodables.OutOfBand;
+import resources.encodables.OutOfBandPackage;
 import network.packets.swg.SWGPacket;
 
 public class ChatSystemMessage extends SWGPacket {
@@ -37,7 +37,7 @@ public class ChatSystemMessage extends SWGPacket {
 	public static final int CRC = 0x6D2A6413;
 	private int type = 0;
 	private String message = "";
-	private OutOfBand oob;
+	private OutOfBandPackage oob;
 	
 	public ChatSystemMessage() {
 		
@@ -48,7 +48,7 @@ public class ChatSystemMessage extends SWGPacket {
 		this.message = message;
 	}
 	
-	public ChatSystemMessage(int type, OutOfBand oob) {
+	public ChatSystemMessage(int type, OutOfBandPackage oob) {
 		this.type = type;
 		this.oob = oob;
 	}
@@ -57,7 +57,7 @@ public class ChatSystemMessage extends SWGPacket {
 		this(type.ordinal(), message);
 	}
 	
-	public ChatSystemMessage(SystemChatType type, OutOfBand oob) {
+	public ChatSystemMessage(SystemChatType type, OutOfBandPackage oob) {
 		this(type.ordinal(), oob);
 	}
 	

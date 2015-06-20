@@ -30,14 +30,18 @@ package resources.objects.waypoint;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
+import network.packets.Packet;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
+import resources.Location;
+import resources.Terrain;
 import resources.common.CRC;
+import resources.encodables.OutOfBandPackage;
 import resources.network.BaselineBuilder.Encodable;
 import resources.objects.intangible.IntangibleObject;
 import resources.player.Player;
 import utilities.Encoder;
 
-public class WaypointObject extends IntangibleObject implements Encodable {
+public class WaypointObject extends IntangibleObject implements OutOfBandPackage.OutOfBandData {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -94,20 +98,47 @@ public class WaypointObject extends IntangibleObject implements Encodable {
 
 	@Override
 	public byte[] encode() {
+		Location loc = getLocation();
 		ByteBuffer bb = ByteBuffer.allocate(42 + name.length() * 2).order(ByteOrder.LITTLE_ENDIAN);
 		bb.putInt(cellNumber);
-		bb.putFloat((float) getLocation().getX());
-		bb.putFloat((float) 0);
-		bb.putFloat((float) getLocation().getZ());
-		bb.putLong(0); // Network id, used for clusters
-		bb.putInt(CRC.getCrc(getLocation().getTerrain().getName()));
+		bb.putFloat((float) loc.getX());
+		bb.putFloat((float) loc.getY());
+		bb.putFloat((float) loc.getZ());
+		bb.putLong(0);
+		bb.putInt(CRC.getCrc(loc.getTerrain().getName()));
 		bb.put(Encoder.encodeUnicode(name));
 		bb.putLong(getObjectId());
 		bb.put((byte) color.getValue());
 		bb.put((byte) (active ? 1 : 0));
 		return bb.array();
 	}
-	
+
+	@Override
+	public byte[] encodeOutOfBandData() {
+		byte[] encoded = encode();
+		ByteBuffer bb = ByteBuffer.allocate(encoded.length + 8).order(ByteOrder.LITTLE_ENDIAN);
+		bb.putShort((short) 1); // ??
+		bb.put(OutOfBandPackage.Type.WAYPOINT.getType());
+		bb.putInt(-3); // ??
+		bb.put(encoded);
+		bb.put((byte) 0);
+		return bb.array();
+	}
+
+	@Override
+	public int decodeOutOfBandData(ByteBuffer data) {
+		data.getInt(); // -3
+		data.getInt();
+		setLocation(data.getFloat(), data.getFloat(), data.getFloat());
+		data.getLong();
+		getLocation().setTerrain(Terrain.getTerrainFromCrc(data.getInt()));
+		name = Packet.getUnicode(data);
+		data.getLong();
+		color = WaypointColor.valueOf(data.get());
+		active = Packet.getBoolean(data);
+		return 46 + name.length() * 2;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (!super.equals(o))
@@ -123,16 +154,29 @@ public class WaypointObject extends IntangibleObject implements Encodable {
 	public int hashCode() {
 		return ((super.hashCode() * 7 + name.hashCode()) * 13 + color.getValue()) * 17 + cellNumber;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "[WaypointObject] " + getLocation() + " Name: " + name + " Color: " + color + " Active: " + active;
+	}
+
 	public enum WaypointColor{
 		BLUE(1), GREEN(2), ORANGE(3), YELLOW(4), PURPLE(5), WHITE(6), MULTICOLOR(7);
 		
 		private int i;
 		
-		private WaypointColor(int i) {
+		WaypointColor(int i) {
 			this.i = i;
 		}
 		
 		public int getValue() { return i; }
+
+		public static WaypointColor valueOf(int colorId) {
+			for (WaypointColor color : WaypointColor.values()) {
+				if (color.getValue() == colorId)
+					return color;
+			}
+			return WaypointColor.BLUE;
+		}
 	}
 }

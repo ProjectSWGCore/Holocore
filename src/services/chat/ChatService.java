@@ -58,7 +58,7 @@ import resources.Terrain;
 import resources.collections.SWGList;
 import resources.control.Intent;
 import resources.control.Service;
-import resources.encodables.OutOfBand;
+import resources.encodables.OutOfBandPackage;
 import resources.encodables.ProsePackage;
 import resources.encodables.player.Mail;
 import resources.objects.SWGObject;
@@ -338,17 +338,20 @@ public class ChatService extends Service {
 		
 		Player recipient = playerMgr.getPlayerByCreatureFirstName(recipientStr);
 		long recId = (recipient == null ? playerMgr.getCharacterIdByName(request.getRecipient()) : recipient.getCreatureObject().getObjectId());
-		int errorCode = 0;
+		ChatResult result = ChatResult.SUCCESS;
 		
 		if (recId == 0)
-			errorCode = 4;
-		
-		sender.sendPacket(new ChatOnSendPersistentMessage(errorCode, request.getCounter()));
-		
+			result = ChatResult.TARGET_AVATAR_DOESNT_EXIST;
+
+		sender.sendPacket(new ChatOnSendPersistentMessage(result, request.getCounter()));
+
+		if (result != ChatResult.SUCCESS)
+			return;
+
 		Mail mail = new Mail(sender.getCharacterName(), request.getSubject(), request.getMessage(), recId);
 		mail.setId(maxMailId++);
 		mail.setTimestamp((int) (new Date().getTime() / 1000));
-		
+		mail.setOutOfBandPackage(request.getOutOfBandPackage());
 		mails.put(mail.getId(), mail);
 		
 		if (recipient != null)
@@ -453,7 +456,7 @@ public class ChatService extends Service {
 	
 	private void broadcastPersonalMessage(ProsePackage prose, Player player, String message) {
 		if (prose != null)
-			player.sendPacket(new ChatSystemMessage(SystemChatType.SCREEN_AND_CHAT, new OutOfBand(prose)));
+			player.sendPacket(new ChatSystemMessage(SystemChatType.SCREEN_AND_CHAT, new OutOfBandPackage(prose)));
 		else
 			player.sendPacket(new ChatSystemMessage(SystemChatType.SCREEN_AND_CHAT, message));
 	}
@@ -485,10 +488,10 @@ public class ChatService extends Service {
 		
 		switch (requestType) {
 			case FULL_MESSAGE:
-				packet = new ChatPersistentMessageToClient(false, mail.getSender(), galaxy, mail.getId(), mail.getSubject(), mail.getMessage(), mail.getTimestamp(), mail.getStatus()); 
+				packet = new ChatPersistentMessageToClient(mail, galaxy, false);
 				break;
 			case HEADER_ONLY:
-				packet = new ChatPersistentMessageToClient(true, mail.getSender(), galaxy, mail.getId(), mail.getSubject(), "", mail.getTimestamp(), mail.getStatus());
+				packet = new ChatPersistentMessageToClient(mail, galaxy, true);
 				break;
 		}
 		

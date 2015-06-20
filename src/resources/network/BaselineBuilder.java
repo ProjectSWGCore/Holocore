@@ -163,7 +163,7 @@ public class BaselineBuilder {
 	}
 	
 	public interface Encodable extends Serializable {
-		public byte [] encode();
+		byte [] encode();
 	}
 	
 }

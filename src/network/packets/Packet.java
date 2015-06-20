@@ -123,11 +123,11 @@ public class Packet {
 	
 	public static void addArray(ByteBuffer bb, byte [] b) {
 		addShort(bb, b.length);
-		bb.put(b);
+		bb.order(ByteOrder.LITTLE_ENDIAN).put(b);
 	}
-	
+
 	public static boolean getBoolean(ByteBuffer bb) {
-		return getByte(bb) == 1 ? true : false;
+		return getByte(bb) == 1;
 	}
 	
 	public static String getAscii(ByteBuffer bb) {
@@ -149,7 +149,7 @@ public class Packet {
 		bb.get(str);
 		return new String(str, unicode);
 	}
-	
+
 	public static byte getByte(ByteBuffer bb) {
 		return bb.get();
 	}
