@@ -91,6 +91,7 @@ public class ObjectManager extends Manager {
 		objectAwareness.initialize();
 		loadBuildouts();
 		loadSnapshots();
+		maxObjectId = 1000000000; // Gets over all the buildouts/snapshots
 		loadObjects();
 		return super.initialize();
 	}
@@ -135,6 +136,7 @@ public class ObjectManager extends Manager {
 			for (SWGObject obj : buildouts) {
 				loadBuildout(obj);
 			}
+			objectMap.putAll(loader.getObjectTable());
 			double loadTime = (System.nanoTime() - startLoad) / 1E6;
 			System.out.printf("ObjectManager: Finished loading %d buildouts. Time: %fms%n", buildouts.size(), loadTime);
 			Log.i("ObjectManager", "Finished loading buildouts. Time: %fms", loadTime);
@@ -165,6 +167,7 @@ public class ObjectManager extends Manager {
 			for (SWGObject obj : snapshots) {
 				loadSnapshot(obj);
 			}
+			objectMap.putAll(loader.getObjectTable());
 			double loadTime = (System.nanoTime() - startLoad) / 1E6;
 			System.out.printf("ObjectManager: Finished loading %d snapshots. Time: %fms%n", snapshots.size(), loadTime);
 			Log.i("ObjectManager", "Finished loading snapshots. Time: %fms", loadTime);
@@ -178,8 +181,9 @@ public class ObjectManager extends Manager {
 		if (obj instanceof TangibleObject || obj instanceof CellObject) {
 			objectAwareness.add(obj);
 		}
-		objectMap.put(obj.getObjectId(), obj);
-		addChildrenObjects(obj);
+		if (obj.getObjectId() >= maxObjectId) {
+			maxObjectId = obj.getObjectId() + 1;
+		}
 		mapService.addMapLocation(obj, MapService.MapType.STATIC);
 	}
 	
@@ -187,8 +191,9 @@ public class ObjectManager extends Manager {
 		if (obj instanceof TangibleObject || obj instanceof CellObject) {
 			objectAwareness.add(obj);
 		}
-		objectMap.put(obj.getObjectId(), obj);
-		addChildrenObjects(obj);
+		if (obj.getObjectId() >= maxObjectId) {
+			maxObjectId = obj.getObjectId() + 1;
+		}
 		mapService.addMapLocation(obj, MapService.MapType.STATIC);
 	}
 	
