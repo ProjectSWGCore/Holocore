@@ -25,7 +25,7 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package network.packets.swg.zone;
+package network.packets.swg.zone.chat;
 
 import java.nio.ByteBuffer;
 
@@ -35,13 +35,10 @@ public class ChatRequestRoomList extends SWGPacket {
 	
 	public static final int CRC = 0x4C3D2CFA;
 	
-	public ChatRequestRoomList() {
-		
-	}
+	public ChatRequestRoomList() {}
 	
 	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
-			return;
+		super.decode(data, CRC);
 	}
 	
 	public ByteBuffer encode() {

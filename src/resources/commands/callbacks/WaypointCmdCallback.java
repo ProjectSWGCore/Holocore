@@ -162,7 +162,7 @@ public class WaypointCmdCallback implements ICmdCallback {
 			}
 		}
 
-		if (name == null)
+		if (name == null || name.isEmpty())
 			name = "Waypoint";
 
 		WaypointObject waypoint = createWaypoint(galacticManager.getObjectManager(), color, name, location);

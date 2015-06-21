@@ -48,8 +48,7 @@ public class ChatOnConnectAvatar extends SWGPacket {
 	}
 	
 	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
-			return;
+		super.decode(data, CRC);
 	}
 	
 	public ByteBuffer encode() {

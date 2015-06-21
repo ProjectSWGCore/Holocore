@@ -35,21 +35,14 @@ public class ChatOnReceiveRoomInvitation extends SWGPacket {
 	
 	public static final int CRC = 0xC17EB06D;
 	
-	public ChatOnReceiveRoomInvitation() {
-		
-	}
-	
-	public ChatOnReceiveRoomInvitation(String command) {
-		
-	}
-	
+	public ChatOnReceiveRoomInvitation() {}
+
 	public ChatOnReceiveRoomInvitation(ByteBuffer data) {
 		decode(data);
 	}
 	
 	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
-			return;
+		super.decode(data, CRC);
 	}
 	
 	public ByteBuffer encode() {

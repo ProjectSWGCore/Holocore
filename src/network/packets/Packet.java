@@ -27,10 +27,13 @@
 ***********************************************************************************/
 package network.packets;
 
+import resources.network.BaselineBuilder;
+
 import java.net.InetAddress;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.charset.Charset;
+import java.util.List;
 
 
 public class Packet {
@@ -72,7 +75,14 @@ public class Packet {
 	public int getOpcode() {
 		return opcode;
 	}
-	
+
+	public static void addList(ByteBuffer bb, List<? extends BaselineBuilder.Encodable> list) {
+		addInt(bb, list.size());
+		for (BaselineBuilder.Encodable encodable : list) {
+			addData(bb, encodable.encode());
+		}
+	}
+
 	public static void addBoolean(ByteBuffer bb, boolean b) {
 		bb.put(b ? (byte)1 : (byte)0);
 	}
@@ -120,7 +130,11 @@ public class Packet {
 	public static void addByte(ByteBuffer bb, int b) {
 		bb.put((byte)b);
 	}
-	
+
+	public static void addData(ByteBuffer bb, byte[] data) {
+		bb.put(data);
+	}
+
 	public static void addArray(ByteBuffer bb, byte [] b) {
 		addShort(bb, b.length);
 		bb.put(b);

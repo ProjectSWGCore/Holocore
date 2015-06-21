@@ -25,24 +25,52 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>
  ******************************************************************************/
 
-package services.chat;
+package network.packets.swg.zone.chat;
+
+import network.packets.swg.SWGPacket;
+
+import java.nio.ByteBuffer;
 
 /**
  * @author Waverunner
  */
-public enum ChatResult {
-	NONE(-1),
-	SUCCESS(0),
-	TARGET_AVATAR_DOESNT_EXIST(4),
-	IGNORED(23);
+public class ChatEnterRoomById extends SWGPacket {
+	public static final int CRC = resources.common.CRC.getCrc("ChatEnterRoomById");
 
+	private int sequence;
+	private int roomId;
+	private String roomPath;
 
-	private final int code;
-	ChatResult(int code) {
-		this.code = code;
+	@Override
+	public void decode(ByteBuffer data) {
+		if (!super.decode(data, CRC))
+			return;
+
+		sequence = getInt(data);
+		roomId = getInt(data);
+		roomPath = getAscii(data);
+		System.out.println("ChatEnterRoomById: " + roomId + roomPath);
 	}
 
-	public int getCode() {
-		return code;
+	@Override
+	public ByteBuffer encode() {
+		ByteBuffer bb = ByteBuffer.allocate(10 + roomPath.length());
+		addShort(bb, 4);
+		addInt(bb, sequence);
+		addInt(bb, roomId);
+		addAscii(bb, roomPath);
+		return bb;
+	}
+
+	public int getSequence() {
+		return sequence;
+	}
+
+	public int getRoomId() {
+		return roomId;
+	}
+
+	public String getRoomPath() {
+		return roomPath;
 	}
 }

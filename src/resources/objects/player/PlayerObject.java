@@ -44,13 +44,16 @@ import resources.player.PlayerFlags;
 import utilities.MathUtils;
 import utilities.Encoder.StringType;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class PlayerObject extends IntangibleObject {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private String	biography		= "";
+	private String				biography			= "";
+	private List<Integer> 		joinedChannels		= new LinkedList<>();
+
 	// PLAY 03
 	private SWGBitSet 	        flagsList			= new SWGBitSet(BaselineType.PLAY, 3, 5);
 	private SWGBitSet 	        profileFlags		= new SWGBitSet(BaselineType.PLAY, 3, 6);
@@ -384,7 +387,11 @@ public class PlayerObject extends IntangibleObject {
 			flagsList.flip(flag.getFlag());
 		flagsList.sendDeltaMessage(this);
 	}
-	
+
+	public List<Integer> getJoinedChannels() {
+		return joinedChannels;
+	}
+
 	private int getProfessionIcon() {
 		switch (profession) {
 			case "entertainer_1a":

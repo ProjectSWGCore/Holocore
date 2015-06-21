@@ -30,76 +30,52 @@ package network.packets.swg.zone.chat;
 import java.nio.ByteBuffer;
 
 import network.packets.swg.SWGPacket;
+import resources.chat.ChatAvatar;
+import resources.chat.ChatResult;
 
 public class ChatOnEnteredRoom extends SWGPacket {
 	
 	public static final int CRC = 0xE69BDC0A;
-	
-	private String galaxy;
-	private String character;
-	private ChannelStatus status;
+
+	private ChatAvatar avatar;
+	private int result;
 	private int chatRoomId;
-	
-	public ChatOnEnteredRoom() {
-		this("", "", ChannelStatus.SUCCESS, 0);
-	}
-	
-	public ChatOnEnteredRoom(String galaxy, String character, ChannelStatus status, int chatRoomId) {
-		this.galaxy = galaxy;
-		this.character = character;
-		this.status = status;
+	private int sequence;
+
+	public ChatOnEnteredRoom(ChatAvatar avatar, int chatRoomId, int sequence) {
+		this.avatar = avatar;
 		this.chatRoomId = chatRoomId;
+		this.sequence = sequence;
 	}
 	
 	public ChatOnEnteredRoom(ByteBuffer data) {
 		decode(data);
 	}
-	
+
 	public void decode(ByteBuffer data) {
 		if (!super.decode(data, CRC))
 			return;
-		getAscii(data);
-		galaxy = getAscii(data);
-		character = getAscii(data);
-		status = ChannelStatus.fromInteger(getInt(data));
+		avatar = new ChatAvatar();
+		avatar.decode(data);
+		result = getInt(data);
 		chatRoomId = getInt(data);
-		getInt(data);
+		sequence = getInt(data);
 	}
 	
 	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(27 + galaxy.length() + character.length());
+		byte[] avatarData = avatar.encode();
+		ByteBuffer data = ByteBuffer.allocate(avatarData.length + 18);
 		addShort(data, 5);
 		addInt  (data, CRC);
-		addAscii(data, "SWG");
-		addAscii(data, galaxy);
-		addAscii(data, character);
-		addInt  (data, status.getBitmask());
+		data.put(avatarData);
+		addInt(data, result);
 		addInt  (data, chatRoomId);
-		addInt  (data, 0);
+		addInt  (data, sequence);
 		return data;
 	}
-	
-	public enum ChannelStatus {
-		SUCCESS(0), // "You have joined the channel."
-		NOT_INVITED(0x10), // "You cannot join '%TU (room name)' because you are not invted to the room."
-		UNKNOWN(0x20); // "Chatroom '%TU (room name)' join failed for an unknown reason."
-		
-		private int bitmask;
-		
-		ChannelStatus(int bitmask) {
-			this.bitmask = bitmask;
-		}
-		public int getBitmask() {
-			return bitmask;
-		}
-		public static final ChannelStatus fromInteger(int i) {
-			if (i == 0)
-				return SUCCESS;
-			if (i == 0x10)
-				return NOT_INVITED;
-			return UNKNOWN;
-		}
-	};	
-	
+
+	public void setResult(int result) {
+		this.result = result;
+	}
 }
 
