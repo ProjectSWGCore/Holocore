@@ -175,6 +175,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 
 		// Get a pre-parent-removal list of the observers so we can send create/destroy/update messages
 		Set<SWGObject> oldObservers = getObservers();
+		oldObservers.add(this);
 
 		// Remove this object from the old parent if one exists
 		SWGObject oldParent = null;
@@ -187,7 +188,9 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 			System.err.println("Failed adding " + this + " to " + container);
 
 		// Observer notification
-		sendUpdatedContainment(oldObservers, container.getObservers());
+		Set<SWGObject> containerObservers = container.getObservers();
+		containerObservers.add(this);
+		sendUpdatedContainment(oldObservers, containerObservers);
 
 		Log.i("Container", "Moved %s from %s to %s", this, oldParent, container);
 		return ContainerResult.SUCCESS;
