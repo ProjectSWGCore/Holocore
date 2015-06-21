@@ -64,6 +64,10 @@ class TerrainBuildoutLoader {
 		loadAreas(sceneNumber);
 	}
 	
+	public Map <Long, SWGObject> getObjectTable() {
+		return objectTable;
+	}
+	
 	public List <SWGObject> getObjects() {
 		return objects;
 	}

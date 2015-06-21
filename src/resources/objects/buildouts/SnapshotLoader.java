@@ -1,8 +1,10 @@
 package resources.objects.buildouts;
 
 import java.util.EnumSet;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import resources.Terrain;
@@ -17,19 +19,33 @@ public class SnapshotLoader {
 			Terrain.TATOOINE,	Terrain.YAVIN4
 	);
 	
-	public static List <SWGObject> loadAllSnapshots() {
-		List <SWGObject> objects = new LinkedList<>();
-		for (Terrain t : TERRAINS) {
-			List <SWGObject> terrain = loadSnapshotsForTerrain(t);
-			objects.addAll(terrain);
-		}
-		return objects;
+	private Map <Long, SWGObject> objectTable;
+	private List <SWGObject> objects;
+	
+	public SnapshotLoader() {
+		objectTable = new HashMap<>();
+		objects = new LinkedList<>();
 	}
 	
-	public static List <SWGObject> loadSnapshotsForTerrain(Terrain t) {
+	public void loadAllSnapshots() {
+		for (Terrain t : TERRAINS) {
+			loadSnapshotsForTerrain(t);
+		}
+	}
+	
+	public void loadSnapshotsForTerrain(Terrain t) {
 		TerrainSnapshotLoader loader = new TerrainSnapshotLoader(t);
 		loader.load();
-		return loader.getObjects();
+		objects.addAll(loader.getObjects());
+		objectTable.putAll(loader.getObjectTable());
+	}
+	
+	public Map<Long, SWGObject> getObjectTable() {
+		return objectTable;
+	}
+	
+	public List <SWGObject> getObjects() {
+		return objects;
 	}
 	
 }

@@ -67,7 +67,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	private final Map <String, Object> templateAttributes;
 	private final BaselineType objectType;
 	private ContainerPermissions containerPermissions;
-	private transient List <SWGObject> objectsAware;
+	private transient Set <SWGObject> objectsAware;
 	private List <List <String>> arrangement;
 
 	private Player	owner		= null;
@@ -92,7 +92,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	public SWGObject(long objectId, BaselineType objectType) {
 		this.objectId = objectId;
 		this.location = new Location();
-		this.objectsAware = new Vector<SWGObject>();
+		this.objectsAware = new HashSet<SWGObject>();
 		this.slots = new HashMap<>();
 		this.containedObjects = Collections.synchronizedMap(new HashMap<Long, SWGObject>());
 		this.attributes = new LinkedHashMap<String, String>();
@@ -103,7 +103,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	
 	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
 		ois.defaultReadObject();
-		objectsAware = new LinkedList<SWGObject>();
+		objectsAware = new HashSet<SWGObject>();
 	}
 
 	/**
@@ -174,7 +174,8 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		// TODO Slot occupation check, old version was not working properly, always returning SLOT_OCCUPIED
 
 		// Get a pre-parent-removal list of the observers so we can send create/destroy/update messages
-		List<SWGObject> oldObservers = getChildrenAwareness();
+		Set<SWGObject> oldObservers = getObservers();
+		oldObservers.add(this);
 
 		// Remove this object from the old parent if one exists
 		SWGObject oldParent = null;
@@ -187,7 +188,9 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 			System.err.println("Failed adding " + this + " to " + container);
 
 		// Observer notification
-		sendUpdatedContainment(oldObservers, new ArrayList<>(container.getChildrenAwareness()));
+		Set<SWGObject> containerObservers = container.getObservers();
+		containerObservers.add(this);
+		sendUpdatedContainment(oldObservers, containerObservers);
 
 		Log.i("Container", "Moved %s from %s to %s", this, oldParent, container);
 		return ContainerResult.SUCCESS;
@@ -425,6 +428,17 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		return location;
 	}
 	
+	public Location getWorldLocation() {
+		Location loc = new Location(location);
+		SWGObject parent = getParent();
+		while (parent != null) {
+			Location l = parent.location;
+			loc.translatePosition(l.getX(), l.getY(), l.getZ()); // Have to access privately to avoid copies
+			parent = parent.getParent();
+		}
+		return loc;
+	}
+	
 	public String getName() {
 		return objectName;
 	}
@@ -478,7 +492,14 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	}
 
 	public int getMaxContainerSize() {
-		return Integer.parseInt(templateAttributes.get("containerVolumeLimit").toString());
+		Object volume = templateAttributes.get("containerVolumeLimit");
+		if (volume == null)
+			return 0;
+		try {
+			return Integer.parseInt(volume.toString());
+		} catch (NumberFormatException e) {
+			return 0;
+		}
 	}
 	
 	public void setBuildout(boolean buildout) {
@@ -572,63 +593,55 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		}
 	}
 
-	public List <SWGObject> getObjectsAware() {
+	public Set <SWGObject> getObjectsAware() {
 		synchronized (objectsAware) {
-			return Collections.unmodifiableList(objectsAware);
+			return Collections.unmodifiableSet(objectsAware);
 		}
 	}
-
-	public List<SWGObject> getChildrenAwareness() {
-		List<SWGObject> awareness = new ArrayList<>(objectsAware);
-
-		if (getParent() != null && !(awareness.contains(getParent())))
-			awareness.addAll(getParent().getObjectsAware());
-
-		if (getOwner() != null && getOwner().getCreatureObject() != null
-				&& !(awareness.contains(getOwner().getCreatureObject())))
-			awareness.add(getOwner().getCreatureObject());
-
-		return awareness;
+	
+	public Set<SWGObject> getObservers() {
+		return getObservers(this);
+	}
+	
+	private Set<SWGObject> getObservers(SWGObject childObject) {
+		if (getParent() == null) {
+			Set<SWGObject> observers = new HashSet<>();
+			synchronized (objectsAware) {
+				for (SWGObject obj : objectsAware) {
+					Player p = obj.getOwner();
+					if (p != null && !p.equals(childObject.getOwner()))
+						observers.add(obj);
+					else
+						childObject.getChildrenObservers(observers, obj);
+				}
+			}
+			childObject.getChildrenObservers(observers, this);
+			return observers;
+		} else {
+			return getParent().getObservers(childObject); // Search for top level parent
+		}
+	}
+	
+	private void getChildrenObservers(Set<SWGObject> observers, SWGObject obj) {
+		for (SWGObject child : obj.getContainedObjects()) {
+			Player p = child.getOwner();
+			if (p != null && !p.equals(getOwner())) {
+				observers.add(child);
+			} else {
+				getChildrenObservers(observers, child);
+			}
+		}
 	}
 
 	public void sendObserversAndSelf(Packet ... packets) {
 		sendSelf(packets);
 		sendObservers(packets);
 	}
-
+	
 	public void sendObservers(Packet ... packets) {
-		synchronized (objectsAware) {
-			for (SWGObject obj : objectsAware) {
-				Player p = obj.getOwner();
-				if (p == null || p.getPlayerState() != PlayerState.ZONED_IN)
-					continue;
-				p.sendPacket(packets);
-
-				//System.out.println("Sent " + packets + " for " + this + " to objAware " + obj);
-			}
-
-			List<SWGObject> childrenAwareness = getChildrenAwareness();
-			childrenAwareness.removeAll(objectsAware);
-			childrenAwareness.remove(this); // Remove self since only observers being notified
-
-			for (SWGObject childObserver : childrenAwareness) {
-				if (childObserver == null || childObserver == this)
-					continue;
-
-				Player p = childObserver.getOwner();
-				if (p == null || getOwner() == p || p.getPlayerState() != PlayerState.ZONED_IN)
-					continue;
-				p.sendPacket(packets);
-
-				//System.out.println("Sent " + packets + " of " + this + " to child " + childObserver);
-			}
-
-			SWGObject parent = getParent();
-			
-			if(parent != null) {
-				parent.sendObservers(packets);
-				//System.out.println("Sent " + packets + " to observers of " + this);
-			}
+		Set<SWGObject> observers = getObservers();
+		for (SWGObject observer : observers) {
+			observer.getOwner().sendPacket(packets);
 		}
 	}
 	
@@ -660,16 +673,16 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		}
 	}
 
-	private void sendUpdatedContainment(List<SWGObject> oldObservers, List<SWGObject> newObservers) {
+	private void sendUpdatedContainment(Set<SWGObject> oldObservers, Set<SWGObject> newObservers) {
 		if (parent == null)
 			return;
-		List<SWGObject> same = new ArrayList<>(oldObservers);
+		Set<SWGObject> same = new HashSet<>(oldObservers);
 		same.retainAll(newObservers);
 
-		List<SWGObject> added = new ArrayList<>(newObservers);
+		Set<SWGObject> added = new HashSet<>(newObservers);
 		added.removeAll(oldObservers);
 
-		List<SWGObject> removed = new ArrayList<>(oldObservers);
+		Set<SWGObject> removed = new HashSet<>(oldObservers);
 		removed.removeAll(newObservers);
 
 		for (SWGObject swgObject : same) {
@@ -688,40 +701,59 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 			}
 		}
 	}
-
+	
 	public void updateObjectAwareness(List <SWGObject> withinRange) {
 		synchronized (objectsAware) {
-			List <SWGObject> outOfRange = new ArrayList<SWGObject>(objectsAware);
+			Set <SWGObject> outOfRange = new HashSet<>(objectsAware);
 			outOfRange.removeAll(withinRange);
-			for (SWGObject o : outOfRange)
+			for (SWGObject o : outOfRange) {
 				awarenessOutOfRange(o);
-			for (SWGObject o : withinRange)
+				o.awarenessOutOfRange(this);
+			}
+			for (SWGObject o : withinRange) {
 				awarenessInRange(o);
+				o.awarenessInRange(this);
+			}
 		}
 	}
 	
 	private void awarenessOutOfRange(SWGObject o) {
 		synchronized (objectsAware) {
 			if (objectsAware.remove(o)) {
-				if (o.getOwner() != null) {
+				Player owner = o.getOwner();
+				if (owner != null)
 					sendSceneDestroyObject(o.getOwner());
-				}
-				if (getOwner() != null)
-					o.awarenessOutOfRange(this);
+				else
+					destroyObjectObservers(o);
 			}
 		}
 	}
 	
 	private void awarenessInRange(SWGObject o) {
 		synchronized (objectsAware) {
-			if (!objectsAware.contains(o)) {
-				objectsAware.add(o);
-				if (o.getOwner() != null) {
+			if (objectsAware.add(o)) {
+				Player owner = o.getOwner();
+				if (owner != null)
 					createObject(o.getOwner());
-				}
-				if (getOwner() != null)
-					o.awarenessInRange(this);
+				else
+					createObjectObservers(o);
 			}
+		}
+	}
+	
+	private void createObjectObservers(SWGObject obj) {
+		Set<SWGObject> observers = new HashSet<>();
+		getChildrenObservers(observers, obj);
+		for (SWGObject observer : observers) {
+			createObject(observer.getOwner());
+		}
+	}
+	
+	private void destroyObjectObservers(SWGObject obj) {
+		Set<SWGObject> observers = new HashSet<>();
+		getChildrenObservers(observers, obj);
+		for (SWGObject observer : observers) {
+			sendSceneDestroyObject(observer.getOwner());
 		}
 	}
 

@@ -29,6 +29,10 @@ public class TerrainSnapshotLoader {
 		this.objectTable = new Hashtable<Long, SWGObject>(12*1024);
 		this.objects = new LinkedList<>();
 	}
+
+	public Map <Long, SWGObject> getObjectTable() {
+		return objectTable;
+	}
 	
 	public List <SWGObject> getObjects() {
 		return objects;
@@ -41,12 +45,12 @@ public class TerrainSnapshotLoader {
 		Map <Integer, String> templates = data.getObjectTemplateNames();
 		for (Chunk chunk : data.getChunks()) {
 			SWGObject object = createObject(templates, chunk);
+			object.setBuildout(true);
 			object.setLoadRange(chunk.getRadius());
 			addObject(object, chunk.getContainerId());
 			setCellInformation(object, chunk.getCellIndex());
 			updatePermissions(object);
 		}
-		System.out.println("TerrainSnapshotLoader: " + path);
 	}
 	
 	private SWGObject createObject(Map <Integer, String> templateMap, Chunk row) {
@@ -64,7 +68,7 @@ public class TerrainSnapshotLoader {
 			if (container != null)
 				container.addObject(object);
 			else {
-				Log.e("TerrainBuildoutLoader", "Failed to load object: " + object.getTemplate());
+				Log.e("TerrainSnapshotLoader", "Failed to load object: " + object.getTemplate());
 			}
 		} else {
 			objects.add(object);

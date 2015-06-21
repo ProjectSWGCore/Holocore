@@ -5,10 +5,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import network.packets.swg.zone.UpdateContainmentMessage;
 import resources.Location;
 import resources.Terrain;
 import resources.objects.SWGObject;
-import resources.objects.creature.CreatureObject;
 import resources.objects.quadtree.QuadTree;
 
 public class ObjectAwareness {
@@ -32,6 +32,10 @@ public class ObjectAwareness {
 		}
 	}
 	
+	/**
+	 * Adds the specified object to the awareness quadtree
+	 * @param object the object to add
+	 */
 	public void add(SWGObject object) {
 		update(object);
 		Location l = object.getLocation();
@@ -43,6 +47,10 @@ public class ObjectAwareness {
 		}
 	}
 	
+	/**
+	 * Removes the specified object from the awareness quadtree
+	 * @param object the object to remove
+	 */
 	public void remove(SWGObject object) {
 		Location l = object.getLocation();
 		if (invalidLocation(l))
@@ -53,16 +61,54 @@ public class ObjectAwareness {
 		}
 	}
 	
+	/**
+	 * This function is used for moving objects within the world, which
+	 * includes moving from a cell to the world.
+	 * @param object the object to move
+	 * @param nLocation the new location
+	 */
 	public void move(SWGObject object, Location nLocation) {
-		remove(object);
+		if (object.getParent() != null) {
+			object.getParent().removeObject(object); // Moving from cell to world
+			object.sendObserversAndSelf(new UpdateContainmentMessage(object.getObjectId(), 0, object.getSlotArrangement()));
+		} else {
+			remove(object); // World to World
+		}
 		object.setLocation(nLocation);
 		add(object);
 	}
 	
+	/**
+	 * This function is used for moving objects to or within containers,
+	 * probably a cell. This handles the logic for removing the object from the
+	 * previous cell and adding it to the new one, if necessary.
+	 * @param object the object to move
+	 * @param nParent the new parent the object will be in
+	 * @param nLocation the new location relative to the parent
+	 */
+	public void move(SWGObject object, SWGObject nParent, Location nLocation) {
+		SWGObject parent = object.getParent();
+		if (parent != null && nParent != parent) {
+			parent.removeObject(object); // Moving from cell to cell, for instance
+		} else if (parent == null) {
+			remove(object); // Moving from world to cell
+		}
+		if (object.getParent() == null) { // Should have been updated in removeObject()
+			nParent.addObject(object); // If necessary, add to new cell
+			object.sendObserversAndSelf(new UpdateContainmentMessage(object.getObjectId(), nParent.getObjectId(), object.getSlotArrangement()));
+		}
+		object.setLocation(nLocation);
+	}
+	
+	/**
+	 * Updates the specified object after it has been moved, or to verify that
+	 * the awareness is up to date
+	 * @param obj the object to update
+	 */
 	public void update(SWGObject obj) {
 		if (obj.isBuildout())
 			return;
-		Location l = obj.getLocation();
+		Location l = obj.getWorldLocation();
 		if (invalidLocation(l))
 			return;
 		List <SWGObject> objectAware = new LinkedList<SWGObject>();
@@ -88,9 +134,7 @@ public class ObjectAwareness {
 	private boolean isValidInRange(SWGObject obj, SWGObject inRange, Location objLoc) {
 		if (inRange.getObjectId() == obj.getObjectId())
 			return false;
-		if (inRange instanceof CreatureObject && inRange.getOwner() == null)
-			return false;
-		Location inRangeLoc = inRange.getLocation();
+		Location inRangeLoc = inRange.getWorldLocation();
 		double distSquared = distanceSquared(objLoc, inRangeLoc);
 		if (inRange.getLoadRange() != 0 && distSquared > square(inRange.getLoadRange()))
 			return false;

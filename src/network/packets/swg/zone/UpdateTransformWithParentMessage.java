@@ -117,8 +117,8 @@ public class UpdateTransformWithParentMessage extends SWGPacket {
 	}
 
 	public void setLocation(Location location) {
-		this.x = (short) (location.getX() * 8);
-		this.y = (short) (location.getY() * 8);
-		this.z = (short) (location.getZ() * 8);
+		this.x = (short) (location.getX() * 8 + 0.5);
+		this.y = (short) (location.getY() * 8 + 0.5);
+		this.z = (short) (location.getZ() * 8 + 0.5);
 	}
 }
