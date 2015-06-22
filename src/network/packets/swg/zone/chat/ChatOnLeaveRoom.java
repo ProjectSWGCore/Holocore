@@ -33,17 +33,16 @@ import network.packets.swg.SWGPacket;
 import resources.chat.ChatAvatar;
 
 public class ChatOnLeaveRoom extends SWGPacket {
-	
-	public static final int CRC = 0x60B5098B;
+	public static final int CRC = resources.common.CRC.getCrc("ChatOnLeaveRoom");
 	
 	private ChatAvatar avatar;
 	private int result;
 	private int chatRoomId;
 	private int sequence;
 
-	public ChatOnLeaveRoom(ChatAvatar avatar, int errorCode, int chatRoomId, int sequence) {
+	public ChatOnLeaveRoom(ChatAvatar avatar, int result, int chatRoomId, int sequence) {
 		this.avatar = avatar;
-		this.result = errorCode;
+		this.result = result;
 		this.chatRoomId = chatRoomId;
 		this.sequence = sequence;
 	}
@@ -64,9 +63,9 @@ public class ChatOnLeaveRoom extends SWGPacket {
 	
 	public ByteBuffer encode() {
 		ByteBuffer data = ByteBuffer.allocate(18 + avatar.encode().length);
-		addShort(data, 2);
+		addShort(data, 5);
 		addInt(  data, CRC);
-		data.put(avatar.encode());
+		addEncodable(data, avatar);
 		addInt(data, result);
 		addInt  (data, chatRoomId);
 		addInt  (data, sequence);

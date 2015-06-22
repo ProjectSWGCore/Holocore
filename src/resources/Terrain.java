@@ -102,10 +102,10 @@ public enum Terrain {
 	WATERTABLETEST			("terrain/watertabletest.trn"),
 	YAVIN4					("terrain/yavin4.trn");
 	
-	private static final Map <Integer, String> CRC_TO_NAME = new ConcurrentHashMap<Integer, String>();
-	private static final Map <String, Integer> NAME_TO_CRC = new ConcurrentHashMap<String, Integer>();
-	private static final Map <String, Terrain> NAME_TO_TERRAIN = new ConcurrentHashMap<String, Terrain>();
-	private static final Map <Integer, Terrain> CRC_TO_TERRAIN = new ConcurrentHashMap<Integer, Terrain>();
+	private static final Map <Integer, String> CRC_TO_NAME = new ConcurrentHashMap<>();
+	private static final Map <String, Integer> NAME_TO_CRC = new ConcurrentHashMap<>();
+	private static final Map <String, Terrain> NAME_TO_TERRAIN = new ConcurrentHashMap<>();
+	private static final Map <Integer, Terrain> CRC_TO_TERRAIN = new ConcurrentHashMap<>();
 	
 	private String file;
 	private String name;
@@ -129,6 +129,7 @@ public enum Terrain {
 	
 	public String getFile() { return file; }
 	public String getName() { return name; }
+	public String getNameCapitalized() { return Character.toUpperCase(name.charAt(0)) + name.substring(1); }
 	public int getCrc() { return crc; }
 	
 	public Location getStartLocation() {
@@ -146,14 +147,14 @@ public enum Terrain {
 		return l;
 	}
 	
-	public static final String getNameFromCrc(int crc) {
+	public static String getNameFromCrc(int crc) {
 		String name = CRC_TO_NAME.get(crc);
 		if (name == null)
 			return "";
 		return name;
 	}
 	
-	public static final int getCrcFromName(String name) {
+	public static int getCrcFromName(String name) {
 		Integer crc = NAME_TO_CRC.get(name.toLowerCase(Locale.ENGLISH));
 		if (crc == null)
 			return 0;
@@ -163,7 +164,7 @@ public enum Terrain {
 	/**
 	 * Note: Defaults to TATOOINE
 	 */
-	public static final Terrain getTerrainFromCrc(int crc) {
+	public static Terrain getTerrainFromCrc(int crc) {
 		Terrain p = CRC_TO_TERRAIN.get(crc);
 		if (p == null)
 			return TATOOINE;
@@ -173,14 +174,14 @@ public enum Terrain {
 	/**
 	 * Note: Defaults to TATOOINE
 	 */
-	public static final Terrain getTerrainFromName(String name) {
+	public static Terrain getTerrainFromName(String name) {
 		Terrain p = NAME_TO_TERRAIN.get(name.toLowerCase(Locale.ENGLISH));
 		if (p == null)
 			return TATOOINE;
 		return p;
 	}
 	
-	public static final boolean doesTerrainExistForName(String name) {
+	public static boolean doesTerrainExistForName(String name) {
 		return NAME_TO_TERRAIN.containsKey(name.toLowerCase(Locale.ENGLISH));
 	}
 	

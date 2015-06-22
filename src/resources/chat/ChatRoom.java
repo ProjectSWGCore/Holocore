@@ -28,6 +28,7 @@
 package resources.chat;
 
 import network.packets.Packet;
+import network.packets.swg.SWGPacket;
 import network.packets.swg.zone.chat.ChatRoomMessage;
 import resources.encodables.OutOfBandPackage;
 import resources.network.BaselineBuilder;
@@ -177,13 +178,16 @@ public class ChatRoom implements Serializable, BaselineBuilder.Encodable, Baseli
 
 	public void sendMessage(ChatAvatar sender, String message, OutOfBandPackage oob, PlayerManager playerManager) {
 		ChatRoomMessage chatRoomMessage = new ChatRoomMessage(sender, getId(), message, oob);
+		sendPacketToMembers(playerManager, chatRoomMessage);
+	}
 
-		for (ChatAvatar avatar : members) {
-			Player player = playerManager.getPlayerFromNetworkId(avatar.getNetworkId());
+	public void sendPacketToMembers(PlayerManager manager, SWGPacket... packets) {
+		for (ChatAvatar member : members) {
+			Player player = manager.getPlayerFromNetworkId(member.getNetworkId());
 			if (player == null)
-				return;
+				continue;
 
-			player.sendPacket(chatRoomMessage);
+			player.sendPacket(packets);
 		}
 	}
 

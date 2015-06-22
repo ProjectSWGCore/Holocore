@@ -47,7 +47,14 @@ public class ChatOnEnteredRoom extends SWGPacket {
 		this.chatRoomId = chatRoomId;
 		this.sequence = sequence;
 	}
-	
+
+	public ChatOnEnteredRoom(ChatAvatar avatar, int result, int chatRoomId, int sequence) {
+		this.avatar = avatar;
+		this.result = result;
+		this.chatRoomId = chatRoomId;
+		this.sequence = sequence;
+	}
+
 	public ChatOnEnteredRoom(ByteBuffer data) {
 		decode(data);
 	}

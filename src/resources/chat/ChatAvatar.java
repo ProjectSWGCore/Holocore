@@ -115,7 +115,9 @@ public class ChatAvatar implements BaselineBuilder.Encodable, BaselineBuilder.De
 
 	@Override
 	public void decode(ByteBuffer data) {
-
+		game = Packet.getAscii(data);
+		galaxy = Packet.getAscii(data);
+		name = Packet.getAscii(data);
 	}
 
 	@Override
@@ -131,12 +133,17 @@ public class ChatAvatar implements BaselineBuilder.Encodable, BaselineBuilder.De
 		if (getClass() != o.getClass())
 			return false;
 
-		return ((ChatAvatar) o).getNetworkId() == networkId;
+		// NetworkId will be 0 if decoded from a packet
+		if (networkId != 0) return ((ChatAvatar) o).getNetworkId() == networkId;
+		else return ((ChatAvatar) o).getName().equals(getName());
 	}
 
 	@Override
 	public int hashCode() {
-		return (int) (networkId ^ (networkId >>> 32));
+		// NetworkId will be 0 if decoded from a packet
+		int result = (networkId != 0 ? (int) (networkId ^ (networkId >>> 32)) : 0);
+		result = 31 * result + name.hashCode();
+		return result;
 	}
 
 	public static ChatAvatar getFromPlayer(Player player) {

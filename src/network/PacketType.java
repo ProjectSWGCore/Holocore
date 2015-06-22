@@ -127,6 +127,7 @@ public enum PacketType {
 		CHAT_ROOM_LIST							(ChatRoomList.CRC, ChatRoomList.class),
 		CHAT_ROOM_MESSAGE						(ChatRoomMessage.CRC, ChatRoomMessage.class),
 		CHAT_SEND_TO_ROOM						(ChatSendToRoom.CRC, ChatSendToRoom.class),
+		CHAT_REMOVE_AVATAR_FROM_ROOM			(ChatRemoveAvatarFromRoom.CRC, ChatRemoveAvatarFromRoom.class),
 		CHAT_SERVER_STATUS						(0x7102B15F, ChatServerStatus.class),
 		CHAT_SYSTEM_MESSAGE						(0x6D2A6413, ChatSystemMessage.class),
 		CON_GENERIC_MESSAGE						(0x08C5FC76, ConGenericMessage.class),
@@ -174,7 +175,7 @@ public enum PacketType {
 
 	UNKNOWN (0xFFFFFFFF, SWGPacket.class);
 
-	private static final Map <Integer, PacketType> packetMap = new HashMap<Integer, PacketType>();
+	private static final Map <Integer, PacketType> packetMap = new HashMap<>();
 
 	static {
 		for (PacketType type : values()) {
@@ -194,14 +195,14 @@ public enum PacketType {
 		return crc;
 	}
 
-	public static final PacketType fromCrc(int crc) {
+	public static PacketType fromCrc(int crc) {
 		PacketType type = packetMap.get(crc);
 		if (type == null)
 			return UNKNOWN;
 		return type;
 	}
 
-	public static final SWGPacket getForCrc(int crc) {
+	public static SWGPacket getForCrc(int crc) {
 		PacketType type = packetMap.get(crc);
 		if (type == null)
 			return null;

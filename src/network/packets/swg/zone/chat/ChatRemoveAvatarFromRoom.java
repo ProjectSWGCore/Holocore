@@ -28,44 +28,45 @@
 package network.packets.swg.zone.chat;
 
 import network.packets.swg.SWGPacket;
+import resources.chat.ChatAvatar;
 
 import java.nio.ByteBuffer;
 
 /**
  * @author Waverunner
  */
-public class ChatEnterRoomById extends SWGPacket {
-	public static final int CRC = resources.common.CRC.getCrc("ChatEnterRoomById");
+public class ChatRemoveAvatarFromRoom extends SWGPacket {
+	public static final int CRC = resources.common.CRC.getCrc("ChatRemoveAvatarFromRoom");
 
-	private int sequence;
-	private int roomId;
-	private String roomPath;
+	private ChatAvatar avatar;
+	private String path;
 
 	@Override
 	public void decode(ByteBuffer data) {
 		if (!super.decode(data, CRC))
 			return;
 
-		sequence = getInt(data);
-		roomId = getInt(data);
-		roomPath = getAscii(data);
+		avatar = new ChatAvatar();
+		avatar.decode(data);
+		path = getAscii(data);
 	}
 
 	@Override
 	public ByteBuffer encode() {
-		ByteBuffer bb = ByteBuffer.allocate(10 + roomPath.length());
-		addShort(bb, 4);
-		addInt(bb, sequence);
-		addInt(bb, roomId);
-		addAscii(bb, roomPath);
+		ByteBuffer bb = ByteBuffer.allocate(6 + path.length() + avatar.encode().length);
+		addShort(bb, 3);
+		addInt(bb, CRC);
+		addEncodable(bb, avatar);
+		addAscii(bb, path);
 		return bb;
 	}
 
-	public int getSequence() {
-		return sequence;
+	public ChatAvatar getAvatar() {
+		return avatar;
 	}
 
-	public int getRoomId() {
-		return roomId;
+	public String getPath() {
+		return path;
 	}
+
 }

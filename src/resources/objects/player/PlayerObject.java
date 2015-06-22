@@ -44,7 +44,7 @@ import resources.player.PlayerFlags;
 import utilities.MathUtils;
 import utilities.Encoder.StringType;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PlayerObject extends IntangibleObject {
@@ -52,7 +52,7 @@ public class PlayerObject extends IntangibleObject {
 	private static final long serialVersionUID = 1L;
 	
 	private String				biography			= "";
-	private List<Integer> 		joinedChannels		= new LinkedList<>();
+	private List<String> 		joinedChannels		= new ArrayList<>();
 
 	// PLAY 03
 	private SWGBitSet 	        flagsList			= new SWGBitSet(BaselineType.PLAY, 3, 5);
@@ -388,7 +388,7 @@ public class PlayerObject extends IntangibleObject {
 		flagsList.sendDeltaMessage(this);
 	}
 
-	public List<Integer> getJoinedChannels() {
+	public List<String> getJoinedChannels() {
 		return joinedChannels;
 	}
 

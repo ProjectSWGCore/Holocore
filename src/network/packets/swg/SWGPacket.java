@@ -33,6 +33,7 @@ import resources.Location;
 import network.PacketType;
 import network.packets.Packet;
 import resources.encodables.OutOfBandPackage;
+import resources.network.BaselineBuilder;
 
 
 public class SWGPacket extends Packet {
@@ -81,9 +82,7 @@ public class SWGPacket extends Packet {
 		super.decode(data);
 		data.position(2);
 		setSWGOpcode(getInt(data));
-		if (getSWGOpcode() != crc)
-			return false;
-		return true;
+		return getSWGOpcode() == crc;
 	}
 	
 	public void decode(ByteBuffer data) {
@@ -107,5 +106,9 @@ public class SWGPacket extends Packet {
 		OutOfBandPackage outOfBandPackage = new OutOfBandPackage();
 		outOfBandPackage.decode(data);
 		return outOfBandPackage;
+	}
+
+	public static void addEncodable(ByteBuffer data, BaselineBuilder.Encodable encodable) {
+		data.put(encodable.encode());
 	}
 }

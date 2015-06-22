@@ -39,26 +39,7 @@ import intents.player.ZonePlayerSwapIntent;
 import intents.server.ServerStatusIntent;
 import network.packets.Packet;
 import network.packets.swg.SWGPacket;
-import network.packets.swg.zone.chat.ChatDeletePersistentMessage;
-import network.packets.swg.zone.chat.ChatEnterRoomById;
-import network.packets.swg.zone.chat.ChatFriendsListUpdate;
-import network.packets.swg.zone.chat.ChatInstantMessageToCharacter;
-import network.packets.swg.zone.chat.ChatInstantMessageToClient;
-import network.packets.swg.zone.chat.ChatOnAddFriend;
-import network.packets.swg.zone.chat.ChatOnChangeFriendStatus;
-import network.packets.swg.zone.chat.ChatOnEnteredRoom;
-import network.packets.swg.zone.chat.ChatOnGetFriendsList;
-import network.packets.swg.zone.chat.ChatOnSendInstantMessage;
-import network.packets.swg.zone.chat.ChatOnSendPersistentMessage;
-import network.packets.swg.zone.chat.ChatOnSendRoomMessage;
-import network.packets.swg.zone.chat.ChatPersistentMessageToClient;
-import network.packets.swg.zone.chat.ChatPersistentMessageToServer;
-import network.packets.swg.zone.chat.ChatQueryRoom;
-import network.packets.swg.zone.chat.ChatQueryRoomResults;
-import network.packets.swg.zone.chat.ChatRequestPersistentMessage;
-import network.packets.swg.zone.chat.ChatRequestRoomList;
-import network.packets.swg.zone.chat.ChatSendToRoom;
-import network.packets.swg.zone.chat.ChatSystemMessage;
+import network.packets.swg.zone.chat.*;
 import network.packets.swg.zone.chat.ChatSystemMessage.SystemChatType;
 import network.packets.swg.zone.insertion.ChatRoomList;
 import network.packets.swg.zone.object_controller.SpatialChat;
@@ -83,6 +64,8 @@ import resources.server_info.ObjectDatabase;
 import resources.server_info.ObjectDatabase.Traverser;
 import services.player.PlayerManager;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -94,10 +77,10 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ChatService extends Service {
 
 	// Array of only the valid terrains in relation to zones able to use planetary-based chat
-	private static final Terrain[] terrains = new Terrain[] {
+	private static final List<Terrain> terrains = Arrays.asList(
 			Terrain.CORELLIA, Terrain.DANTOOINE, Terrain.DATHOMIR, Terrain.ENDOR, Terrain.KASHYYYK, Terrain.LOK,
 			Terrain.MUSTAFAR, Terrain.NABOO, Terrain.RORI, Terrain.TATOOINE, Terrain.TALUS, Terrain.YAVIN4
-	};
+	);
 	private ObjectDatabase<Mail> mails;
 	private int maxMailId;
 	private int maxChatRoomId;
@@ -203,6 +186,10 @@ public class ChatService extends Service {
 					enterChatChannel(player, enterRoomById.getRoomId(), enterRoomById.getSequence());
 				}
 				break;
+			case CHAT_REMOVE_AVATAR_FROM_ROOM:
+				if (p instanceof ChatRemoveAvatarFromRoom)
+					leaveChatChannel(player, ((ChatRemoveAvatarFromRoom) p).getPath());
+				break;
 			case CHAT_SEND_TO_ROOM:
 				if (p instanceof ChatSendToRoom)
 					handleChatSendToRoom(player, (ChatSendToRoom) p);
@@ -233,25 +220,25 @@ public class ChatService extends Service {
 	}
 
 	private void handlePlayerEventIntent(PlayerEventIntent intent) {
+		Player player = intent.getPlayer();
+		if (player == null)
+			return;
+
 		switch (intent.getEvent()) {
 			case PE_ZONE_IN:
-				// TODO: Add players to proper planet chat room
+				switchPlanetaryChatChannels(player);
 				break;
 			case PE_FIRST_ZONE:
-				Player player = intent.getPlayer();
 				sendPersistentMessageHeaders(player, intent.getGalaxy());
 				updateChatAvatarStatus(player, intent.getGalaxy(), true);
 				enterJoinedChatChannels(player);
-				enterChatChannel(intent.getPlayer(), "SWG.Localhost.Tatooine.Planet");
-				enterChatChannel(intent.getPlayer(), "SWG.Localhost.Tatooine.system");
 				break;
 			case PE_LOGGED_OUT:
-				if (intent.getPlayer() == null || intent.getPlayer().getCreatureObject() == null)
+				if (player.getCreatureObject() == null)
 					return;
-				updateChatAvatarStatus(intent.getPlayer(), intent.getGalaxy(), false);
+				updateChatAvatarStatus(player, intent.getGalaxy(), false);
 				break;
-			default:
-				break;
+			default: break;
 		}
 	}
 
@@ -331,8 +318,16 @@ public class ChatService extends Service {
 	}
 
 	private void handleChatRoomListRequest(Player player) {
-		// TODO: Filter out private rooms
-		ChatRoomList response = new ChatRoomList(roomMap.values());
+		ChatAvatar avatar = ChatAvatar.getFromPlayer(player);
+
+		List<ChatRoom> rooms = new ArrayList<>();
+		for (ChatRoom chatRoom : roomMap.values()) {
+			if (!chatRoom.isPublic() && !chatRoom.getInvited().contains(avatar) && !chatRoom.getOwner().equals(avatar))
+				continue;
+			rooms.add(chatRoom);
+		}
+
+		ChatRoomList response = new ChatRoomList(rooms);
 		player.sendPacket(response);
 	}
 
@@ -343,16 +338,42 @@ public class ChatService extends Service {
 	}
 
 	private void enterJoinedChatChannels(Player player) {
-		if (player == null || player.getPlayerState() != PlayerState.ZONED_IN)
-			return;
-
 		PlayerObject ghost = player.getPlayerObject();
 		if (ghost == null)
 			return;
 
-		for (Integer id : ghost.getJoinedChannels()) {
-			enterChatChannel(player, id);
+		for (String s : ghost.getJoinedChannels()) {
+			enterChatChannel(player, s);
 		}
+	}
+
+	private void switchPlanetaryChatChannels(Player player) {
+		PlayerObject ghost = player.getPlayerObject();
+		if (ghost == null)
+			return;
+
+		// Leave old zone-only chat channels
+		String planetEndPath = ".Planet";
+		for (String channel : ghost.getJoinedChannels()) {
+			if (channel.endsWith(planetEndPath)) {
+				leaveChatChannel(player, channel);
+			} else {
+				// Better way of doing this?
+				String[] split = channel.split("\\.");
+				if (split.length == 3 && split[2].equals("system"))
+					leaveChatChannel(player, channel);
+			}
+		}
+
+		Terrain terrain = player.getCreatureObject().getLocation().getTerrain();
+
+		// Enter the new zone-only chat channels
+		if (!terrains.contains(terrain))
+			return;
+
+		String planetPath = "SWG." + player.getGalaxyName() + "." + terrain.getNameCapitalized() + ".";
+		enterChatChannel(player, planetPath + "Planet");
+		enterChatChannel(player, planetPath + "system");
 	}
 
 	/**
@@ -377,10 +398,9 @@ public class ChatService extends Service {
 		// TODO: Check if player is appropriate faction for the room (Rebel and imperial chat rooms)
 
 		// Server-based list so we can join chat channels automatically
-		/* // TODO: Disabled until planet chat is automatically entered/removed from the list
-		List<Integer> joinedChannels = ghost.getJoinedChannels();
-		if (!joinedChannels.contains(room.getId()))
-			joinedChannels.add(room.getId());*/
+		List<String> joinedChannels = ghost.getJoinedChannels();
+		if (!joinedChannels.contains(room.getPath()))
+			joinedChannels.add(room.getPath());
 
 		room.getMembers().add(avatar);
 
@@ -389,25 +409,12 @@ public class ChatService extends Service {
 		ChatRoomList roomList = new ChatRoomList(room);
 		player.sendPacket(roomList);
 
-		// Notify players of success
-		ChatOnEnteredRoom onEnteredRoom = new ChatOnEnteredRoom(avatar, room.getId(), sequence);
-		onEnteredRoom.setResult(result.getCode()); // ChatResult.SUCCESS at this point
-		player.sendPacket(onEnteredRoom);
+		// Notify players of success, it's ChatResult.SUCCESS at this point
+		player.sendPacket(new ChatOnEnteredRoom(avatar, result.getCode(), room.getId(), sequence));
 
 		PlayerManager manager = player.getPlayerManager();
 		// Notify everyone that a player entered the room
-		for (ChatAvatar chatAvatar : room.getMembers()) {
-			if (chatAvatar.equals(avatar))
-				continue;
-
-			Player member = manager.getPlayerFromNetworkId(chatAvatar.getNetworkId());
-			if (member == null || member.getPlayerState() != PlayerState.ZONED_IN)
-				continue;
-			// TODO: Should sequence be set to 0 for other members?
-			member.sendPacket(onEnteredRoom);
-		}
-
-		System.out.println(avatar + " has entered room " + room);
+		room.sendPacketToMembers(manager, new ChatOnEnteredRoom(avatar, result.getCode(), room.getId(), 0));
 	}
 
 	public void enterChatChannel(Player player, int id, int sequence) {
@@ -419,10 +426,6 @@ public class ChatService extends Service {
 		enterChatChannel(player, room, sequence);
 	}
 
-	public void enterChatChannel(Player player, int id) {
-		enterChatChannel(player, id, 0);
-	}
-
 	public void enterChatChannel(Player player, String path) {
 		for (ChatRoom room : roomMap.values()) {
 			if (room.getPath().equals(path)) {
@@ -430,9 +433,30 @@ public class ChatService extends Service {
 				return;
 			}
 		}
-		System.out.println("Couldn't find room with path " + path);
+		System.err.println("Tried to join a room with a path that does not exist: " + path);
 	}
 
+	public void leaveChatChannel(Player player, ChatRoom room, int sequence) {
+		ChatAvatar avatar = ChatAvatar.getFromPlayer(player);
+
+		PlayerObject ghost = player.getPlayerObject();
+		if (ghost == null)
+			return; // ChatOnLeaveRoom doesn't do anything other than for a ChatResult.SUCCESS, so no need to send a fail
+
+		if (!room.getMembers().remove(avatar) && !ghost.getJoinedChannels().remove(room.getPath()))
+			return;
+
+		player.sendPacket(new ChatOnLeaveRoom(avatar, ChatResult.SUCCESS.getCode(), room.getId(), sequence));
+
+		room.sendPacketToMembers(player.getPlayerManager(), new ChatOnLeaveRoom(avatar, ChatResult.SUCCESS.getCode(), room.getId(), 0));
+	}
+
+	public void leaveChatChannel(Player player, String path) {
+		for (ChatRoom chatRoom : roomMap.values()) {
+			if (chatRoom.getPath().equals(path))
+				leaveChatChannel(player, chatRoom, 0);
+		}
+	}
 	/**
 	 * Creates a new, non-persistent, chat room with the specified address path.
 	 * @param creator Room creator who will also become the owner of this room
@@ -475,7 +499,7 @@ public class ChatService extends Service {
 
 	private void createSystemChannels(String galaxy) {
 		ChatAvatar systemAvatar = ChatAvatar.getSystemAvatar(galaxy);
-
+		// TODO: Move these to a Server Data File?
 		String basePath = "SWG." + galaxy + ".";
 		createRoom(systemAvatar, true, basePath + "Galaxy", "public chat for the whole galaxy, cannot create rooms here");
 		createRoom(systemAvatar, true, basePath + "system", "system messages for this galaxy");
@@ -502,7 +526,7 @@ public class ChatService extends Service {
 
 	private void createPlanetChannels(ChatAvatar systemAvatar, String basePath) {
 		for (Terrain terrain : terrains) {
-			String path = basePath + Character.toUpperCase(terrain.getName().charAt(0)) + terrain.getName().substring(1) + ".";
+			String path = basePath + terrain.getNameCapitalized() + ".";
 			createRoom(systemAvatar, true, path + "Planet", "public chat for this planet, cannot create rooms here");
 			createRoom(systemAvatar, true, path + "system", "system messages for this planet, cannot create rooms here");
 			createRoom(systemAvatar, true, path + "Chat", "public chat for this planet, can create rooms here");
@@ -526,8 +550,8 @@ public class ChatService extends Service {
 	}
 
 	public void initializeGalaxyChannels(Galaxy galaxy) {
-		ChatAvatar systemAvatar = new ChatAvatar(-1, "System", galaxy.getName());
 		createSystemChannels(galaxy.getName());
+		// TODO: Load up persistent channels
 		/** Channel Notes
 		 * Group channels: created by System
 		 * 	- SWG.serverName.group.GroupObjectId.GroupChat 	title = GroupId
