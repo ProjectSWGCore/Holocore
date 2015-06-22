@@ -402,8 +402,6 @@ public class ChatService extends Service {
 		if (!joinedChannels.contains(room.getPath()))
 			joinedChannels.add(room.getPath());
 
-		room.getMembers().add(avatar);
-
 		// Re-send the player the room list with just this room as it could have been private/hidden
 		// This also "refreshes" the client, not sending this will cause a Chat channel unavailable message.
 		ChatRoomList roomList = new ChatRoomList(room);
@@ -415,6 +413,8 @@ public class ChatService extends Service {
 		PlayerManager manager = player.getPlayerManager();
 		// Notify everyone that a player entered the room
 		room.sendPacketToMembers(manager, new ChatOnEnteredRoom(avatar, result.getCode(), room.getId(), 0));
+
+		room.getMembers().add(avatar);
 	}
 
 	public void enterChatChannel(Player player, int id, int sequence) {
