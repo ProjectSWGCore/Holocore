@@ -47,7 +47,7 @@ import resources.common.CRC;
 import resources.containers.ContainerPermissions;
 import resources.containers.ContainerResult;
 import resources.containers.DefaultPermissions;
-import resources.encodables.Stf;
+import resources.encodables.StringId;
 import resources.network.BaselineBuilder;
 import resources.network.DeltaBuilder;
 import resources.player.Player;
@@ -72,8 +72,8 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 
 	private Player	owner		= null;
 	private SWGObject	parent	= null;
-	private Stf 	stf			= new Stf("", "");
-	private Stf 	detailStf	= new Stf("", "");
+	private StringId stringId = new StringId("", "");
+	private StringId detailStringId = new StringId("", "");
 	private String	template	= "";
 	private int		crc			= 0;
 	private String	objectName	= "";
@@ -108,7 +108,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 
 	/**
 	 * Adds the specified object to this object and places it in the appropriate slot if needed
-	 * @param object
+	 * @param object Object to add to this container, which will either be put into the appropriate slot(s) or become a contained object
 	 */
 	public boolean addObject(SWGObject object) {
 		// If the arrangement is -1, then this object will be a contained object
@@ -358,19 +358,19 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	}
 	
 	public void setStf(String stfFile, String stfKey) {
-		this.stf = new Stf(stfFile, stfKey);
+		this.stringId = new StringId(stfFile, stfKey);
 	}
 	
-	public void setStf(String stf) {
-		this.stf = new Stf(stf);
+	public void setStringId(String stringId) {
+		this.stringId = new StringId(stringId);
 	}
 	
 	public void setDetailStf(String stfFile, String stfKey) {
-		this.detailStf = new Stf(stfFile, stfKey);
+		this.detailStringId = new StringId(stfFile, stfKey);
 	}
 	
-	public void setDetailStf(String stf) {
-		this.detailStf = new Stf(stf);
+	public void setDetailStringId(String stf) {
+		this.detailStringId = new StringId(stf);
 	}
 	
 	public void setTemplate(String template) {
@@ -404,12 +404,12 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		return parent;
 	}
 	
-	public Stf getStf() {
-		return stf;
+	public StringId getStringId() {
+		return stringId;
 	}
 	
-	public Stf getDetailStf() {
-		return detailStf;
+	public StringId getDetailStringId() {
+		return detailStringId;
 	}
 	
 	public String getTemplate() {
@@ -849,7 +849,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	
 	public void createBaseline3(Player target, BaselineBuilder bb) {
 		bb.addFloat(complexity); // 0
-		bb.addObject(stf); // 1
+		bb.addObject(stringId); // 1
 		bb.addUnicode(objectName); // custom name -- 2
 		bb.addInt(volume); // 3
 
@@ -862,7 +862,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	
 	public void createBaseline6(Player target, BaselineBuilder bb) {
 		bb.addInt(target.getGalaxyId()); // 0
-		bb.addObject(detailStf); // 1
+		bb.addObject(detailStringId); // 1
 		
 		bb.incrementOperandCount(2);
 	}

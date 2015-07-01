@@ -28,20 +28,17 @@
 package resources.objects.waypoint;
 
 import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 
 import network.packets.Packet;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.Location;
 import resources.Terrain;
-import resources.common.CRC;
+import resources.encodables.OutOfBandData;
 import resources.encodables.OutOfBandPackage;
-import resources.network.BaselineBuilder.Encodable;
 import resources.objects.intangible.IntangibleObject;
 import resources.player.Player;
-import utilities.Encoder;
 
-public class WaypointObject extends IntangibleObject implements OutOfBandPackage.OutOfBandData {
+public class WaypointObject extends IntangibleObject implements OutOfBandData {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -93,44 +90,42 @@ public class WaypointObject extends IntangibleObject implements OutOfBandPackage
 	@Override
 	public byte[] encode() {
 		Location loc = getLocation();
-		ByteBuffer bb = ByteBuffer.allocate(42 + name.length() * 2).order(ByteOrder.LITTLE_ENDIAN);
-		bb.putInt(0);
-		bb.putFloat((float) loc.getX());
-		bb.putFloat((float) loc.getY());
-		bb.putFloat((float) loc.getZ());
-		bb.putLong(cellId);
-		bb.putInt(CRC.getCrc(loc.getTerrain().getName()));
-		bb.put(Encoder.encodeUnicode(name));
-		bb.putLong(getObjectId());
-		bb.put((byte) color.getValue());
-		bb.put((byte) (active ? 1 : 0));
-		return bb.array();
-	}
-
-	@Override
-	public byte[] encodeOutOfBandData() {
-		byte[] encoded = encode();
-		ByteBuffer bb = ByteBuffer.allocate(encoded.length + 8).order(ByteOrder.LITTLE_ENDIAN);
-		bb.putShort((short) 1); // ??
-		bb.put(OutOfBandPackage.Type.WAYPOINT.getType());
-		bb.putInt(-3); // ??
-		bb.put(encoded);
-		bb.put((byte) 0);
+		ByteBuffer bb = ByteBuffer.allocate(42 + name.length() * 2);
+		Packet.addInt(bb, 0);
+		Packet.addFloat(bb, (float) loc.getX());
+		Packet.addFloat(bb, (float) loc.getY());
+		Packet.addFloat(bb, (float) loc.getZ());
+		Packet.addLong(bb, cellId);
+		Packet.addCrc(bb, loc.getTerrain().getName());
+		Packet.addUnicode(bb, name);
+		Packet.addLong(bb, getObjectId());
+		Packet.addByte(bb, color.getValue());
+		Packet.addBoolean(bb, active);
 		return bb.array();
 	}
 
 	@Override
 	public int decodeOutOfBandData(ByteBuffer data) {
-		data.getInt(); // -3
 		data.getInt();
 		setLocation(data.getFloat(), data.getFloat(), data.getFloat());
-		cellId = data.getLong();
+		cellId 		= data.getLong();
 		getLocation().setTerrain(Terrain.getTerrainFromCrc(data.getInt()));
-		name = Packet.getUnicode(data);
-		data.getLong();
-		color = WaypointColor.valueOf(data.get());
-		active = Packet.getBoolean(data);
-		return 46 + name.length() * 2;
+		System.out.println(getLocation());
+		name 		= Packet.getUnicode(data);
+		Packet.getLong(data); // objectId
+		color		= WaypointColor.valueOf(data.get());
+		active 		= Packet.getBoolean(data);
+		return 42 + name.length() * 2;
+	}
+
+	@Override
+	public OutOfBandPackage.Type getOobType() {
+		return OutOfBandPackage.Type.WAYPOINT;
+	}
+
+	@Override
+	public int getOobPosition() {
+		return -3;
 	}
 
 	@Override
@@ -151,7 +146,9 @@ public class WaypointObject extends IntangibleObject implements OutOfBandPackage
 
 	@Override
 	public String toString() {
-		return "[WaypointObject] " + getLocation() + " Name: " + name + " Color: " + color + " Active: " + active;
+		return "WaypointObject[" +
+				"cellId=" + cellId + ", name='" + name + '\'' + ", color=" + color + ", active=" + active +
+				", location=" + getLocation() + "]";
 	}
 
 	public enum WaypointColor{

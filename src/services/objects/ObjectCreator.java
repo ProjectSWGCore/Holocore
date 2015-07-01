@@ -51,7 +51,7 @@ import resources.objects.weapon.WeaponObject;
 
 public final class ObjectCreator {
 
-	public static final SWGObject createObjectFromTemplate(long objectId, String template) {
+	public static SWGObject createObjectFromTemplate(long objectId, String template) {
 		if (!template.startsWith("object/"))
 			return null;
 		if (!template.endsWith(".iff"))
@@ -102,8 +102,8 @@ public final class ObjectCreator {
 
 	private static void setObjectAttribute(String key, String value, SWGObject object) {
 		switch(key) {
-			case ObjectData.OBJ_STF: object.setStf(value); break;
-			case ObjectData.DETAIL_STF: object.setDetailStf(value); break;
+			case ObjectData.OBJ_STF: object.setStringId(value); break;
+			case ObjectData.DETAIL_STF: object.setDetailStringId(value); break;
 			case ObjectData.VOLUME_LIMIT: object.setVolume(Integer.valueOf(value)); break;
 			case ObjectData.CONTAINER_TYPE: object.setContainerType(Integer.valueOf(value)); break;
 			default: break;

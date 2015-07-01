@@ -27,6 +27,7 @@
 ***********************************************************************************/
 package network.packets;
 
+import resources.common.CRC;
 import resources.network.BaselineBuilder;
 
 import java.net.InetAddress;
@@ -84,7 +85,7 @@ public class Packet {
 	}
 
 	public static void addBoolean(ByteBuffer bb, boolean b) {
-		bb.put(b ? (byte)1 : (byte)0);
+		bb.put(b ? (byte) 1 : (byte) 0);
 	}
 	
 	public static void addAscii(ByteBuffer bb, String s) {
@@ -112,7 +113,7 @@ public class Packet {
 	}
 	
 	public static void addShort(ByteBuffer bb, int i) {
-		bb.order(ByteOrder.LITTLE_ENDIAN).putShort((short)i);
+		bb.order(ByteOrder.LITTLE_ENDIAN).putShort((short) i);
 	}
 	
 	public static void addNetLong(ByteBuffer bb, long l) {
@@ -124,11 +125,11 @@ public class Packet {
 	}
 	
 	public static void addNetShort(ByteBuffer bb, int i) {
-		bb.order(ByteOrder.BIG_ENDIAN).putShort((short)i);
+		bb.order(ByteOrder.BIG_ENDIAN).putShort((short) i);
 	}
 	
 	public static void addByte(ByteBuffer bb, int b) {
-		bb.put((byte)b);
+		bb.put((byte) b);
 	}
 
 	public static void addData(ByteBuffer bb, byte[] data) {
@@ -138,6 +139,10 @@ public class Packet {
 	public static void addArray(ByteBuffer bb, byte [] b) {
 		addShort(bb, b.length);
 		bb.put(b);
+	}
+
+	public static void addCrc(ByteBuffer bb, String crcString) {
+		addInt(bb, CRC.getCrc(crcString));
 	}
 
 	public static boolean getBoolean(ByteBuffer bb) {

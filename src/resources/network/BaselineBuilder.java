@@ -164,8 +164,10 @@ public class BaselineBuilder {
 	
 	public interface Encodable extends Serializable {
 		byte [] encode();
+		// TODO: int decode(ByteBuffer data);
 	}
 
+	// TODO: move into Encodable
 	public interface Decodable {
 		void decode(ByteBuffer data);
 	}
