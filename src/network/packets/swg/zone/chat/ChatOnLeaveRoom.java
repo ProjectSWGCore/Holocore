@@ -30,27 +30,21 @@ package network.packets.swg.zone.chat;
 import java.nio.ByteBuffer;
 
 import network.packets.swg.SWGPacket;
+import resources.chat.ChatAvatar;
 
 public class ChatOnLeaveRoom extends SWGPacket {
+	public static final int CRC = resources.common.CRC.getCrc("ChatOnLeaveRoom");
 	
-	public static final int CRC = 0x60B5098B;
-	
-	private String galaxyName;
-	private String characterName;
-	private int errorCode;
+	private ChatAvatar avatar;
+	private int result;
 	private int chatRoomId;
-	private int requestId;
-	
-	public ChatOnLeaveRoom() {
-		this("", "", 0, 0, 0);
-	}
-	
-	public ChatOnLeaveRoom(String galaxy, String character, int errorCode, int chatRoomId, int requestId) {
-		this.galaxyName = galaxy;
-		this.characterName = character;
-		this.errorCode = errorCode;
+	private int sequence;
+
+	public ChatOnLeaveRoom(ChatAvatar avatar, int result, int chatRoomId, int sequence) {
+		this.avatar = avatar;
+		this.result = result;
 		this.chatRoomId = chatRoomId;
-		this.requestId = requestId;
+		this.sequence = sequence;
 	}
 	
 	public ChatOnLeaveRoom(ByteBuffer data) {
@@ -60,24 +54,21 @@ public class ChatOnLeaveRoom extends SWGPacket {
 	public void decode(ByteBuffer data) {
 		if (!super.decode(data, CRC))
 			return;
-		getAscii(data);
-		galaxyName = getAscii(data);
-		characterName = getAscii(data);
-		errorCode = getInt(data);
+		avatar = new ChatAvatar();
+		avatar.decode(data);
+		result = getInt(data);
 		chatRoomId = getInt(data);
-		requestId = getInt(data);
+		sequence = getInt(data);
 	}
 	
 	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(27+galaxyName.length()+characterName.length());
-		addShort(data, 2);
+		ByteBuffer data = ByteBuffer.allocate(18 + avatar.encode().length);
+		addShort(data, 5);
 		addInt(  data, CRC);
-		addAscii(data, "SWG");
-		addAscii(data, galaxyName);
-		addAscii(data, characterName);
-		addInt  (data, errorCode);
+		addEncodable(data, avatar);
+		addInt(data, result);
 		addInt  (data, chatRoomId);
-		addInt  (data, requestId);
+		addInt  (data, sequence);
 		return data;
 	}
 	

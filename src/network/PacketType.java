@@ -46,12 +46,12 @@ import network.packets.swg.zone.server_ui.*;
 import network.packets.swg.zone.spatial.*;
 
 public enum PacketType {
-	
+
 	// Both
 	SERVER_UNIX_EPOCH_TIME						(0x24b73893, ServerUnixEpochTime.class),
 	SERVER_ID									(0x58c07f21, ServerId.class),
 	SERVER_STRING								(0x0e20d7e9, ServerString.class),
-	
+
 	// Login
 	CLIENT_ID_MSG								(0xd5899226, ClientIdMsg.class),
 	ERROR_MESSAGE								(0xb5abf91a, ErrorMessage.class),
@@ -59,7 +59,7 @@ public enum PacketType {
 	CLIENT_PERMISSIONS_MESSAGE					(0xe00730e5, ClientPermissionsMessage.class),
 	REQUEST_EXTENDED_CLUSTERS					(0x8e33ed05, RequestExtendedClusters.class),
 	OFFLINE_SERVERS_MESSAGE     				(0xF41A5265, OfflineServersMessage.class),
-		
+
 		// Post-Login
 		LOGIN_CLIENT_ID							(0x41131F96, LoginClientId.class),
 		LOGIN_INCORRECT_CLIENT_ID				(0x20E7E510, LoginIncorrectClientId.class),
@@ -69,7 +69,7 @@ public enum PacketType {
 		ENUMERATE_CHARACTER_ID					(0x65ea4574, EnumerateCharacterId.class),
 		STATION_ID_HAS_JEDI_SLOT				(0xcc9fccf8, StationIdHasJediSlot.class),
 		CHARACTER_CREATION_DISABLED				(0xf4a15265, CharacterCreationDisabled.class),
-		
+
 		// Character Creation
 		CLIENT_CREATE_CHARACTER					(0xb97f3074, ClientCreateCharacter.class),
 		CREATE_CHARACTER_SUCCESS				(0x1db575cc, CreateCharacterSuccess.class),
@@ -78,11 +78,11 @@ public enum PacketType {
 		APPROVE_NAME_RESPONSE					(0x9b2c6ba7, ClientVerifyAndLockNameResponse.class),
 		RANDOM_NAME_REQUEST						(0xd6d1b6d1, RandomNameRequest.class),
 		RANDOM_NAME_RESPONSE					(0xe85fb868, RandomNameResponse.class),
-		
+
 		// Character Deletion
 		DELETE_CHARACTER_RESPONSE				(0x8268989b, DeleteCharacterResponse.class),
 		DELETE_CHARACTER_REQUEST				(0xe87ad031, DeleteCharacterRequest.class),
-	
+
 	// Zone
 	COMMAND_QUEUE_ENQUEUE						(0x00000116, CommandQueueEnqueue.class),
 	SELECT_CHARACTER							(0xb5098d76, SelectCharacter.class),
@@ -92,6 +92,7 @@ public enum PacketType {
 	OBJECT_CONTROLLER							(0x80ce5e46, ObjectController.class),
 	BASELINE									(0x68a75f0c, Baseline.class),
 	DATA_TRANSFORM								(0x00000071, DataTransform.class),
+	DATA_TRANSFORM_PARENT                       (0x000000F1, DataTransformWithParent.class),
 	CONNECT_PLAYER_MESSAGE						(0x2e365218, ConnectPlayerMessage.class),
 	CONNECT_PLAYER_RESPONSE_MESSAGE				(0x6137556F, ConnectPlayerResponseMessage.class),
 	GALAXY_LOOP_TIMES_REQUEST					(0x7d842d68, GalaxyLoopTimesRequest.class),
@@ -100,10 +101,10 @@ public enum PacketType {
 	DELTA										(0x12862153, DeltasMessage.class),
 	SERVER_TIME_MESSAGE							(0x2EBC3BD9, ServerTimeMessage.class),
 	SET_WAYPOINT_COLOR							(0x90C59FDE, SetWaypointColor.class),
-	SHOW_BACKPACK									(ShowBackpack.CRC, ShowBackpack.class),
-	SHOW_HELMET											(ShowHelmet.CRC, ShowHelmet.class),
-	SERVER_WEATHER_MESSAGE				(ServerWeatherMessage.CRC, ServerWeatherMessage.class),
-	
+	SHOW_BACKPACK								(ShowBackpack.CRC, ShowBackpack.class),
+	SHOW_HELMET									(ShowHelmet.CRC, ShowHelmet.class),
+	SERVER_WEATHER_MESSAGE						(ServerWeatherMessage.CRC, ServerWeatherMessage.class),
+
 		// Chat
 		CHAT_FRIENDS_LIST_UPDATE				(0x6CD2FCD8, ChatFriendsListUpdate.class),
 		CHAT_IGNORE_LIST						(0xF8C275B0, ChatIgnoreList.class),
@@ -120,42 +121,47 @@ public enum PacketType {
 		CHAT_PERSISTENT_MESSAGE_TO_SERVER		(0x25A29FA6, ChatPersistentMessageToServer.class),
 		CHAT_DELETE_PERSISTENT_MESSAGE			(0x8F251641, ChatDeletePersistentMessage.class),
 		CHAT_REQUEST_PERSISTENT_MESSAGE			(0x07E3559F, ChatRequestPersistentMessage.class),
-		CHAT_REQUEST_ROOM_LIST					(0x4C3d2CfA, ChatRequestRoomList.class),
-		CHAT_ROOM_LIST							(0x70DEB197, ChatRoomList.class),
-		CHAT_ROOM_MESSAGE						(0xCD4CE444, ChatRoomMessage.class),
+		CHAT_REQUEST_ROOM_LIST					(ChatRequestRoomList.CRC, ChatRequestRoomList.class),
+		CHAT_ENTER_ROOM_BY_ID					(ChatEnterRoomById.CRC, ChatEnterRoomById.class),
+		CHAT_QUERY_ROOM							(ChatQueryRoom.CRC, ChatQueryRoom.class),
+		CHAT_ROOM_LIST							(ChatRoomList.CRC, ChatRoomList.class),
+		CHAT_ROOM_MESSAGE						(ChatRoomMessage.CRC, ChatRoomMessage.class),
+		CHAT_SEND_TO_ROOM						(ChatSendToRoom.CRC, ChatSendToRoom.class),
+		CHAT_REMOVE_AVATAR_FROM_ROOM			(ChatRemoveAvatarFromRoom.CRC, ChatRemoveAvatarFromRoom.class),
 		CHAT_SERVER_STATUS						(0x7102B15F, ChatServerStatus.class),
 		CHAT_SYSTEM_MESSAGE						(0x6D2A6413, ChatSystemMessage.class),
 		CON_GENERIC_MESSAGE						(0x08C5FC76, ConGenericMessage.class),
 		VOICE_CHAT_STATUS						(0x9E601905, VoiceChatStatus.class),
-		
+
 		// Scene
 		SCENE_END_BASELINES						(0x2C436037, SceneEndBaselines.class),
 		SCENE_CREATE_OBJECT_BY_CRC				(0xFE89DDEA, SceneCreateObjectByCrc.class),
-		SCENE_DESTROY_OBJECT					(0x4D45D504, SceneDestroyObject.class), 
+		SCENE_DESTROY_OBJECT					(0x4D45D504, SceneDestroyObject.class),
 		UPDATE_CONTAINMENT_MESSAGE				(0x56CBDE9E, UpdateContainmentMessage.class),
 		UPDATE_CELL_PERMISSIONS_MESSAGE			(0xF612499C, UpdateCellPermissionMessage.class),
 		GET_MAP_LOCATIONS_MESSAGE				(0x1A7AB839, GetMapLocationsMessage.class),
 		GET_MAP_LOCATIONS_RESPONSE_MESSAGE		(0x9F80464C, GetMapLocationsResponseMessage.class),
-		
+
 		// Spatial
 		UPDATE_POSTURE_MESSAGE					(0x0bde6b41, UpdatePostureMessage.class),
 		UPDATE_TRANSFORMS_MESSAGE				(0x1B24F808, UpdateTransformsMessage.class),
+		UPDATE_TRANSFORM_WITH_PARENT_MESSAGE    (0xC867AB5A, UpdateTransformWithParentMessage.class),
 		SPATIAL_CHAT							(0x000000f4, SpatialChat.class),
 		NEW_TICKET_ACTIVITY_RESPONSE_MESSAGE	(0x6EA42D80, NewTicketActivityResponseMessage.class),
 		ATTRIBUTE_LIST_MESSAGE					(0xF3F12F2A, AttributeListMessage.class),
 		STOP_CLIENT_EFFECT_OBJECT_BY_LABEL		(0xAD6F6B26, StopClientEffectObjectByLabelMessage.class),
 		OPENED_CONTAINER_MESSAGE				(0x2E11E4AB, OpenedContainerMessage.class),
-		
+
 		// Combat
 		UPDATE_PVP_STATUS_MESSAGE				(0x08a1c126, UpdatePvpStatusMessage.class),
 		GRANT_COMMAND_MESSAGE       			(0xE67E3875, GrantCommandMessage.class),
-		
+
 		// Server UI
 		OBJECT_MENU_REQUEST						(0x00000146, ObjectMenuRequest.class),
 		OBJECT_MENU_RESPONSE					(0x00000147, ObjectMenuResponse.class),
 		SUI_CREATE_PAGE_MESSAGE					(0xD44B7259, SuiCreatePageMessage.class),
 		SUI_EVENT_NOTIFICATION					(0x092D3564, SuiEventNotification.class),
-		
+
 		// Auction
 		IS_VENDOR_OWNER_RESPONSE_MESSAGE		(0xCE04173E, IsVendorOwnerResponseMessage.class),
 		AUCTION_QUERY_HEADERS_MESSAGE			(0x679E0D00, AuctionQueryHeadersMessage.class),
@@ -166,37 +172,37 @@ public enum PacketType {
 		AUCTION_QUERY_HEADERS_RESPONSE_MESSAGE	(0xFA500E52, AuctionQueryHeadersResponseMessage.class),
 		RETRIEVE_AUCTION_ITEM_MESSAGE			(0x12B0D449, RetrieveAuctionItemMessage.class),
 		RETRIEVE_AUCTION_ITEM_RESPONSE_MESSAGE	(0x9499EF8C, RetrieveAuctionItemResponseMessage.class),
-	
+
 	UNKNOWN (0xFFFFFFFF, SWGPacket.class);
-	
-	private static final Map <Integer, PacketType> packetMap = new HashMap<Integer, PacketType>();
-	
+
+	private static final Map <Integer, PacketType> packetMap = new HashMap<>();
+
 	static {
 		for (PacketType type : values()) {
 			packetMap.put(type.crc, type);
 		}
 	}
-	
+
 	private int crc;
 	private Class <? extends SWGPacket> c;
-	
+
 	PacketType(int crc, Class <? extends SWGPacket> c) {
 		this.crc = crc;
 		this.c = c;
 	}
-	
+
 	public int getCrc() {
 		return crc;
 	}
-	
-	public static final PacketType fromCrc(int crc) {
+
+	public static PacketType fromCrc(int crc) {
 		PacketType type = packetMap.get(crc);
 		if (type == null)
 			return UNKNOWN;
 		return type;
 	}
-	
-	public static final SWGPacket getForCrc(int crc) {
+
+	public static SWGPacket getForCrc(int crc) {
 		PacketType type = packetMap.get(crc);
 		if (type == null)
 			return null;
@@ -208,5 +214,5 @@ public enum PacketType {
 		}
 		return null;
 	}
-	
+
 }

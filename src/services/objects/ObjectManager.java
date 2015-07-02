@@ -27,29 +27,32 @@
 ***********************************************************************************/
 package services.objects;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
 import intents.ObjectTeleportIntent;
 import intents.PlayerEventIntent;
 import intents.RequestZoneInIntent;
 import intents.network.GalacticPacketIntent;
-
-import java.util.*;
-
 import main.ProjectSWG;
 import network.packets.Packet;
 import network.packets.swg.zone.SceneDestroyObject;
 import network.packets.swg.zone.insertion.CmdStartScene;
 import network.packets.swg.zone.insertion.SelectCharacter;
 import network.packets.swg.zone.object_controller.DataTransform;
+import network.packets.swg.zone.object_controller.DataTransformWithParent;
 import network.packets.swg.zone.object_controller.ObjectController;
-import network.packets.swg.zone.object_controller.PostureUpdate;
 import resources.Location;
-import resources.Posture;
 import resources.Terrain;
 import resources.config.ConfigFile;
 import resources.control.Intent;
 import resources.control.Manager;
 import resources.objects.SWGObject;
 import resources.objects.buildouts.BuildoutLoader;
+import resources.objects.buildouts.SnapshotLoader;
+import resources.objects.cell.CellObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
@@ -66,16 +69,16 @@ public class ObjectManager extends Manager {
 
 	private final MapService mapService;
 
-	private final Map <Long, List <SWGObject>> buildoutObjects;
-	private final ObjectDatabase<SWGObject> objects;
+	private final ObjectDatabase<SWGObject> database;
 	private final ObjectAwareness objectAwareness;
+	private final Map <Long, SWGObject> objectMap;
 	private long maxObjectId;
 	
 	public ObjectManager() {
 		mapService = new MapService();
-		buildoutObjects = new HashMap<Long, List<SWGObject>>();
-		objects = new CachedObjectDatabase<SWGObject>("odb/objects.db");
+		database = new CachedObjectDatabase<SWGObject>("odb/objects.db");
 		objectAwareness = new ObjectAwareness();
+		objectMap = new HashMap<>();
 		maxObjectId = 1;
 	}
 	
@@ -86,8 +89,10 @@ public class ObjectManager extends Manager {
 		registerForIntent(PlayerEventIntent.TYPE);
 		registerForIntent(ObjectTeleportIntent.TYPE);
 		objectAwareness.initialize();
-		loadObjects();
 		loadBuildouts();
+		loadSnapshots();
+		maxObjectId = 1000000000; // Gets over all the buildouts/snapshots
+		loadObjects();
 		return super.initialize();
 	}
 	
@@ -95,8 +100,8 @@ public class ObjectManager extends Manager {
 		long startLoad = System.nanoTime();
 		Log.i("ObjectManager", "Loading objects from ObjectDatabase...");
 		System.out.println("ObjectManager: Loading objects from ObjectDatabase...");
-		objects.load();
-		objects.traverse(new Traverser<SWGObject>() {
+		database.load();
+		database.traverse(new Traverser<SWGObject>() {
 			@Override
 			public void process(SWGObject obj) {
 				loadObject(obj);
@@ -106,8 +111,8 @@ public class ObjectManager extends Manager {
 			}
 		});
 		double loadTime = (System.nanoTime() - startLoad) / 1E6;
-		Log.i("ObjectManager", "Finished loading %d objects. Time: %fms", objects.size(), loadTime);
-		System.out.printf("ObjectManager: Finished loading %d objects. Time: %fms%n", objects.size(), loadTime);
+		Log.i("ObjectManager", "Finished loading %d objects. Time: %fms", database.size(), loadTime);
+		System.out.printf("ObjectManager: Finished loading %d objects. Time: %fms%n", database.size(), loadTime);
 	}
 	
 	private void loadBuildouts() {
@@ -116,22 +121,24 @@ public class ObjectManager extends Manager {
 			long startLoad = System.nanoTime();
 			System.out.println("ObjectManager: Loading buildouts...");
 			Log.i("ObjectManager", "Loading buildouts...");
-			List <SWGObject> buildouts = null;
 			String terrain = c.getString("LOAD-BUILDOUTS-FOR", "");
+			BuildoutLoader loader = new BuildoutLoader();
 			if (Terrain.doesTerrainExistForName(terrain))
-				buildouts = BuildoutLoader.loadBuildoutsForTerrain(Terrain.getTerrainFromName(terrain));
+				loader.loadBuildoutsForTerrain(Terrain.getTerrainFromName(terrain));
 			else {
 				if (!terrain.isEmpty()) {
 					System.err.println("ObjectManager: Unknown terrain '" + terrain + "'");
 					Log.e("ObjectManager", "Unknown terrain: %s", terrain);
 				}
-				buildouts = BuildoutLoader.loadAllBuildouts();
+				loader.loadAllBuildouts();
 			}
+			List <SWGObject> buildouts = loader.getObjects();
 			for (SWGObject obj : buildouts) {
 				loadBuildout(obj);
 			}
+			objectMap.putAll(loader.getObjectTable());
 			double loadTime = (System.nanoTime() - startLoad) / 1E6;
-			System.out.printf("ObjectManager: Finished loading buildouts. Time: %fms%n", loadTime);
+			System.out.printf("ObjectManager: Finished loading %d buildouts. Time: %fms%n", buildouts.size(), loadTime);
 			Log.i("ObjectManager", "Finished loading buildouts. Time: %fms", loadTime);
 		} else {
 			Log.w("ObjectManager", "Did not load buildouts. Reason: Disabled.");
@@ -139,42 +146,92 @@ public class ObjectManager extends Manager {
 		}
 	}
 	
+	private void loadSnapshots() {
+		Config c = getConfig(ConfigFile.PRIMARY);
+		if (c.getBoolean("LOAD-SNAPSHOTS", false)) {
+			long startLoad = System.nanoTime();
+			System.out.println("ObjectManager: Loading snapshots...");
+			Log.i("ObjectManager", "Loading snapshots...");
+			String terrain = c.getString("LOAD-SNAPSHOTS-FOR", "");
+			SnapshotLoader loader = new SnapshotLoader();
+			if (Terrain.doesTerrainExistForName(terrain))
+				loader.loadSnapshotsForTerrain(Terrain.getTerrainFromName(terrain));
+			else {
+				if (!terrain.isEmpty()) {
+					System.err.println("ObjectManager: Unknown terrain '" + terrain + "'");
+					Log.e("ObjectManager", "Unknown terrain: %s", terrain);
+				}
+				loader.loadAllSnapshots();
+			}
+			List <SWGObject> snapshots = loader.getObjects();
+			for (SWGObject obj : snapshots) {
+				loadSnapshot(obj);
+			}
+			objectMap.putAll(loader.getObjectTable());
+			double loadTime = (System.nanoTime() - startLoad) / 1E6;
+			System.out.printf("ObjectManager: Finished loading %d snapshots. Time: %fms%n", snapshots.size(), loadTime);
+			Log.i("ObjectManager", "Finished loading snapshots. Time: %fms", loadTime);
+		} else {
+			Log.w("ObjectManager", "Did not load snapshots. Reason: Disabled.");
+			System.out.println("ObjectManager: Snapshots not loaded. Reason: Disabled!");
+		}
+	}
+	
 	private void loadBuildout(SWGObject obj) {
-		loadObject(obj);
-		List <SWGObject> idCollisions = buildoutObjects.get(obj.getObjectId());
-		if (idCollisions == null)
-			buildoutObjects.put(obj.getObjectId(), idCollisions = new LinkedList<SWGObject>());
-		boolean duplicate = false;
-		for (SWGObject dup : idCollisions) {
-			if (dup.getLocation().equals(obj.getLocation()) && dup.getTemplate().equals(obj.getTemplate())) {
-				duplicate = true;
-				break;
-			}
+		if (obj instanceof TangibleObject || obj instanceof CellObject) {
+			objectAwareness.add(obj);
 		}
-		if (!duplicate) {
-			idCollisions.add(obj);
-			if (obj instanceof TangibleObject) {
-				objectAwareness.add(obj);
-			}
+		if (obj.getObjectId() >= maxObjectId) {
+			maxObjectId = obj.getObjectId() + 1;
 		}
-
+		mapService.addMapLocation(obj, MapService.MapType.STATIC);
+	}
+	
+	private void loadSnapshot(SWGObject obj) {
+		if (obj instanceof TangibleObject || obj instanceof CellObject) {
+			objectAwareness.add(obj);
+		}
+		if (obj.getObjectId() >= maxObjectId) {
+			maxObjectId = obj.getObjectId() + 1;
+		}
 		mapService.addMapLocation(obj, MapService.MapType.STATIC);
 	}
 	
 	private void loadObject(SWGObject obj) {
 		obj.setOwner(null);
-		objectAwareness.add(obj);
+		if (!(obj instanceof CreatureObject) || ((CreatureObject) obj).getPlayerObject() == null)
+			objectAwareness.add(obj);
+		objectMap.put(obj.getObjectId(), obj);
+		if (obj.getParent() != null && obj.getParent().isBuildout()) {
+			long id = obj.getParent().getObjectId();
+			obj.getParent().removeObject(obj);
+			SWGObject parent = objectMap.get(id);
+			if (parent != null)
+				parent.addObject(obj);
+			else {
+				System.err.println("Parent for " + obj + " is null! ParentID: " + id);
+				Log.e("ObjectManager", "Parent for %s is null! ParentID: %d", obj, id);
+			}
+		}
+		addChildrenObjects(obj);
+	}
+	
+	private void addChildrenObjects(SWGObject obj) {
+		for (SWGObject child : obj.getContainedObjects()) {
+			objectMap.put(child.getObjectId(), child);
+			addChildrenObjects(child);
+		}
 	}
 	
 	@Override
 	public boolean terminate() {
-		objects.traverse(new Traverser<SWGObject>() {
+		database.traverse(new Traverser<SWGObject>() {
 			@Override
 			public void process(SWGObject obj) {
 				obj.setOwner(null);
 			}
 		});
-		objects.close();
+		database.close();
 		return super.terminate();
 	}
 	
@@ -224,19 +281,24 @@ public class ObjectManager extends Manager {
 				DataTransform trans = (DataTransform) packet;
 				SWGObject obj = getObjectById(trans.getObjectId());
 				moveObject(obj, trans);
+			} else if (packet instanceof DataTransformWithParent) {
+				DataTransformWithParent transformWithParent = (DataTransformWithParent) packet;
+				SWGObject object = getObjectById(transformWithParent.getObjectId());
+				moveObject(object, transformWithParent);
 			}
 		}
 	}
 	
 	public SWGObject getObjectById(long objectId) {
-		synchronized (objects) {
-			return objects.get(objectId);
+		synchronized (objectMap) {
+			return objectMap.get(objectId);
 		}
 	}
 	
 	public SWGObject deleteObject(long objId) {
-		synchronized (objects) {
-			SWGObject obj = objects.remove(objId);
+		synchronized (objectMap) {
+			SWGObject obj = objectMap.remove(objId);
+			database.remove(objId);
 			if (obj == null)
 				return null;
 			obj.clearAware();
@@ -247,7 +309,7 @@ public class ObjectManager extends Manager {
 	}
 
 	public SWGObject destroyObject(long objectId) {
-		SWGObject object = objects.get(objectId);
+		SWGObject object = objectMap.get(objectId);
 
 		return (object != null ? destroyObject(object) : null);
 	}
@@ -300,7 +362,7 @@ public class ObjectManager extends Manager {
 	}
 	
 	public SWGObject createObject(String template, Location l, boolean addToAwareness) {
-		synchronized (objects) {
+		synchronized (objectMap) {
 			long objectId = getNextObjectId();
 			SWGObject obj = ObjectCreator.createObjectFromTemplate(objectId, template);
 			if (obj == null) {
@@ -311,7 +373,8 @@ public class ObjectManager extends Manager {
 			if (addToAwareness) {
 				objectAwareness.add(obj);
 			}
-			objects.put(objectId, obj);
+			objectMap.put(objectId, obj);
+			database.put(objectId, obj);
 			Log.i("ObjectManager", "Created object %d [%s]", obj.getObjectId(), obj.getTemplate());
 			return obj;
 		}
@@ -329,13 +392,26 @@ public class ObjectManager extends Manager {
 		// on the active state (mainly for CreatureObject, override sendDataTransforms in the class?)
 	}
 	
+	private void moveObject(SWGObject obj, DataTransformWithParent transformWithParent) {
+		Location newLocation = transformWithParent.getLocation();
+		newLocation.setTerrain(obj.getLocation().getTerrain());
+		SWGObject parent = objectMap.get(transformWithParent.getCellId());
+		if (parent == null) {
+			System.err.println("ObjectManager: Could not find parent for transform! Cell: " + transformWithParent.getCellId());
+			Log.e("ObjectManager", "Could not find parent for transform! Cell: %d  Object: %s", transformWithParent.getCellId(), obj);
+			return;
+		}
+		objectAwareness.move(obj, parent, newLocation);
+		obj.sendParentDataTransforms(transformWithParent);
+	}
+	
 	private void zoneInCharacter(PlayerManager playerManager, String galaxy, long netId, long characterId) {
 		Player player = playerManager.getPlayerFromNetworkId(netId);
 		if (player == null) {
 			Log.e("ObjectManager", "Unable to zone in null player '%ld'", netId);
 			return;
 		}
-		SWGObject creatureObj = objects.get(characterId);
+		SWGObject creatureObj = objectMap.get(characterId);
 		if (creatureObj == null) {
 			System.err.println("ObjectManager: Failed to start zone - CreatureObject could not be fetched from database [Character: " + characterId + "  User: " + player.getUsername() + "]");
 			Log.e("ObjectManager", "Failed to start zone - CreatureObject could not be fetched from database [Character: %d  User: %s]", characterId, player.getUsername());
@@ -351,12 +427,17 @@ public class ObjectManager extends Manager {
 			Log.e("ObjectManager", "Failed to start zone - CreatureObject doesn't have a ghost [Character: %d  User: %s", characterId, player.getUsername());
 			return;
 		}
-		objectAwareness.add(creatureObj);
+		if (creatureObj.getParent() != null)
+			objectAwareness.update(creatureObj);
+		else {
+			objectAwareness.remove(creatureObj);
+			objectAwareness.add(creatureObj);
+		}
 		new RequestZoneInIntent(player, (CreatureObject) creatureObj, galaxy).broadcast();
 	}
 	
 	private long getNextObjectId() {
-		synchronized (objects) {
+		synchronized (objectMap) {
 			return maxObjectId++;
 		}
 	}

@@ -133,7 +133,7 @@ public class WeaponObject extends TangibleObject implements Encodable{
 		byte[] data3 = bb.buildAsBaselinePacket();
 
 		bb = new BaselineBuilder(this, BaselineType.WEAO, 6);
-		createBaseline6(null, bb);
+		createBaseline6(null, bb); // TODO: This needs to have a target otherwise null pointer will be thrown, new encode function in encodable?
 		byte[] data6 = bb.buildAsBaselinePacket();
 		
 		byte[] ret = new byte[data3.length + data6.length];

@@ -51,7 +51,7 @@ public class Scripts {
 		if (!exists(script))
 			return null;
 
-		instance.interpreter.execfile(script);
+		instance.interpreter.execfile(SCRIPTS + script);
 		return instance.interpreter.get(method).__call__(Py.javas2pys(args));
 	}
 
@@ -61,7 +61,7 @@ public class Scripts {
 
 	public static void initialize(Config config) {
 		PySystemState systemState = instance.interpreter.getSystemState();
-		systemState.setCurrentWorkingDir(systemState.getCurrentWorkingDir() + "/scripts");
+		systemState.setCurrentWorkingDir(systemState.getCurrentWorkingDir() + "/");
 		Scripts.initScripts(systemState);
 	}
 

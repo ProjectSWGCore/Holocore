@@ -25,30 +25,75 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package network.packets.swg.zone;
+package resources.encodables;
 
 import java.nio.ByteBuffer;
 
-import network.packets.swg.SWGPacket;
+import network.packets.Packet;
+import resources.network.BaselineBuilder.Encodable;
 
-public class ChatRequestRoomList extends SWGPacket {
+public class StringId implements Encodable, OutOfBandData {
+	private static final long serialVersionUID = 1L;
 	
-	public static final int CRC = 0x4C3D2CFA;
-	
-	public ChatRequestRoomList() {
-		
+	private String key = "";
+	private String file = "";
+
+	public StringId() {}
+
+	public StringId(String file, String key) {
+		this.file = file;
+		this.key = key;
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public StringId(String stf) {
+		if (!stf.contains(":")) {
+			System.err.println("Stf: Invalid stf format! Expected a semi-colon for " + stf);
 			return;
+		}
+		
+		if (stf.startsWith("@")) stf = stf.replaceFirst("@", "");
+		
+		String[] split = stf.split(":");
+		file = split[0];
+		
+		if (split.length == 2)
+			key = split[1];
 	}
 	
-	public ByteBuffer encode() {
-		int length = 6;
-		ByteBuffer data = ByteBuffer.allocate(length);
-		addShort(data, 1);
-		addInt(  data, CRC);
-		return data;
+	@Override
+	public byte[] encode() {
+		ByteBuffer buffer = ByteBuffer.allocate(8 + key.length() + file.length());
+
+		Packet.addAscii(buffer, file);
+		Packet.addInt(buffer, 0);
+		Packet.addAscii(buffer, key);
+		
+		return buffer.array();
+	}
+
+	@Override
+	public int decodeOutOfBandData(ByteBuffer data) {
+		return 0;
+	}
+
+	@Override
+	public OutOfBandPackage.Type getOobType() {
+		return OutOfBandPackage.Type.STRING_ID;
+	}
+
+	@Override
+	public int getOobPosition() {
+		return -1;
+	}
+
+	public String getKey() { return key; }
+	public void setKey(String key) { this.key = key; }
+
+	public String getFile() { return file; }
+	public void setFile(String file) { this.file = file; }
+
+	@Override
+	public String toString() {
+		return "@" + file + ":" + key;
 	}
 }

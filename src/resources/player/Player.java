@@ -34,6 +34,7 @@ import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
+import services.player.PlayerManager;
 
 public class Player implements Serializable, Comparable<Player> {
 	
@@ -50,7 +51,8 @@ public class Player implements Serializable, Comparable<Player> {
 	private int connectionId		= 0;
 	private AccessLevel accessLevel	= AccessLevel.PLAYER;
 	
-	public int galaxyId				= 0;
+	private int galaxyId				= 0;
+	private String galaxyName		= "";
 	private CreatureObject creatureObject= null;
 	private long lastInboundMessage	= 0;
 	
@@ -62,11 +64,15 @@ public class Player implements Serializable, Comparable<Player> {
 		this.playerManager = playerManager;
 		setNetworkId(networkId);
 	}
-	
+
+	public PlayerManager getPlayerManager() {
+		return (PlayerManager) playerManager;
+	}
+
 	public void setPlayerManager(Service playerManager) {
 		this.playerManager = playerManager;
 	}
-	
+
 	public void setNetworkId(long networkId) {
 		this.networkId = networkId;
 	}
@@ -97,6 +103,10 @@ public class Player implements Serializable, Comparable<Player> {
 	
 	public void setGalaxyId(int galaxyId) {
 		this.galaxyId = galaxyId;
+	}
+	
+	public void setGalaxyName(String galaxyName) {
+		this.galaxyName = galaxyName;
 	}
 	
 	public void setCreatureObject(CreatureObject obj) {
@@ -143,6 +153,10 @@ public class Player implements Serializable, Comparable<Player> {
 	
 	public int getGalaxyId() {
 		return galaxyId;
+	}
+	
+	public String getGalaxyName() {
+		return galaxyName;
 	}
 	
 	public CreatureObject getCreatureObject() {

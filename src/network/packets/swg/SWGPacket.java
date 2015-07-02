@@ -32,6 +32,8 @@ import java.nio.ByteBuffer;
 import resources.Location;
 import network.PacketType;
 import network.packets.Packet;
+import resources.encodables.OutOfBandPackage;
+import resources.network.BaselineBuilder;
 
 
 public class SWGPacket extends Packet {
@@ -61,7 +63,7 @@ public class SWGPacket extends Packet {
 		l.setZ(getFloat(data));
 		return l;
 	}
-	
+
 	public void setSWGOpcode(int opcode) {
 		this.opcode = opcode;
 		this.type = PacketType.fromCrc(opcode);
@@ -80,9 +82,7 @@ public class SWGPacket extends Packet {
 		super.decode(data);
 		data.position(2);
 		setSWGOpcode(getInt(data));
-		if (getSWGOpcode() != crc)
-			return false;
-		return true;
+		return getSWGOpcode() == crc;
 	}
 	
 	public void decode(ByteBuffer data) {
@@ -100,5 +100,15 @@ public class SWGPacket extends Packet {
 	
 	public ByteBuffer getData() {
 		return data;
+	}
+
+	public static OutOfBandPackage getOutOfBand(ByteBuffer data) {
+		OutOfBandPackage outOfBandPackage = new OutOfBandPackage();
+		outOfBandPackage.decode(data);
+		return outOfBandPackage;
+	}
+
+	public static void addEncodable(ByteBuffer data, BaselineBuilder.Encodable encodable) {
+		data.put(encodable.encode());
 	}
 }

@@ -41,7 +41,9 @@ public class UpdateTransformsMessage extends SWGPacket {
 	private int updateCounter;
 	private byte direction;
 	private float speed;
-	
+	private byte lookAtYaw;
+	private boolean useLookAtYaw;
+
 	public UpdateTransformsMessage() {
 		this.objId = 0;
 		this.posX = 0;
@@ -80,9 +82,9 @@ public class UpdateTransformsMessage extends SWGPacket {
 		addShort(data, posZ);
 		addInt  (data, updateCounter);
 		addByte (data, (byte) speed);
-		addByte (data, (byte) direction);
-		addByte (data, (byte) 1); // lookAtYaw
-		addByte (data, (byte) 0); // useLookAtYaw
+		addByte (data, direction);
+		addByte (data, lookAtYaw); // lookAtYaw
+		addBoolean (data, useLookAtYaw); // useLookAtYaw
 		return data;
 	}
 	
@@ -101,5 +103,20 @@ public class UpdateTransformsMessage extends SWGPacket {
 	public int getUpdateCounter() { return updateCounter; }
 	public byte getDirection() { return direction; }
 	public float getSpeed() { return speed; }
-	
+
+	public boolean isUseLookAtYaw() {
+		return useLookAtYaw;
+	}
+
+	public void setUseLookAtYaw(boolean useLookAtYaw) {
+		this.useLookAtYaw = useLookAtYaw;
+	}
+
+	public byte getLookAtYaw() {
+		return lookAtYaw;
+	}
+
+	public void setLookAtYaw(byte lookAtYaw) {
+		this.lookAtYaw = lookAtYaw;
+	}
 }

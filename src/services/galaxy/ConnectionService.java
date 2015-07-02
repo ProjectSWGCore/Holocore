@@ -41,6 +41,7 @@ import intents.PlayerEventIntent;
 import intents.network.CloseConnectionIntent;
 import intents.network.ForceDisconnectIntent;
 import intents.network.GalacticPacketIntent;
+import intents.player.ZonePlayerSwapIntent;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.creature.CreatureObject;
@@ -104,6 +105,7 @@ public class ConnectionService extends Service {
 		registerForIntent(PlayerEventIntent.TYPE);
 		registerForIntent(GalacticPacketIntent.TYPE);
 		registerForIntent(ForceDisconnectIntent.TYPE);
+		registerForIntent(ZonePlayerSwapIntent.TYPE);
 		return super.initialize();
 	}
 	
@@ -133,6 +135,8 @@ public class ConnectionService extends Service {
 			onGalacticPacketIntent((GalacticPacketIntent) i);
 		else if (i instanceof ForceDisconnectIntent)
 			onForceDisconnectIntent((ForceDisconnectIntent) i);
+		else if (i instanceof ZonePlayerSwapIntent)
+			onZonePlayerSwapIntent((ZonePlayerSwapIntent) i);
 	}
 	
 	private void onPlayerEventIntent(PlayerEventIntent pei) {
@@ -172,6 +176,22 @@ public class ConnectionService extends Service {
 		disconnect(fdi.getPlayer(), fdi.getDisconnectReason());
 		if (fdi.getDisappearImmediately())
 			disappear(fdi.getPlayer(), fdi.getDisconnectReason());
+	}
+	
+	private void onZonePlayerSwapIntent(ZonePlayerSwapIntent zpsi) {
+		Player before = zpsi.getBeforePlayer();
+		Player after = zpsi.getAfterPlayer();
+		CreatureObject creature = zpsi.getCreature();
+		removeFromLists(before);
+		updatePlayTime(before);
+		creature.getPlayerObject().clearFlagBitmask(PlayerFlags.LD);
+		Log.i("ConnectionService", "Logged out %s with character %s", before.getUsername(), before.getCharacterName());
+		new PlayerEventIntent(before, before.getGalaxyName(), PlayerEvent.PE_LOGGED_OUT).broadcast();
+		Log.i("ConnectionService", "Disconnected %s with character %s and reason: %s", before.getUsername(), before.getCharacterName(), DisconnectReason.NEW_CONNECTION_ATTEMPT);
+		new CloseConnectionIntent(before.getConnectionId(), before.getNetworkId(), DisconnectReason.NEW_CONNECTION_ATTEMPT).broadcast();
+		before.setPlayerState(PlayerState.DISCONNECTED);
+		before.setCreatureObject(null);
+		creature.setOwner(after);
 	}
 	
 	private void removeFromLists(Player player) {
@@ -215,6 +235,7 @@ public class ConnectionService extends Service {
 		if (p.getPlayerObject() != null)
 			p.getPlayerObject().setFlagBitmask(PlayerFlags.LD);
 		p.setPlayerState(PlayerState.LOGGED_OUT);
+		new PlayerEventIntent(p, p.getGalaxyName(), PlayerEvent.PE_LOGGED_OUT).broadcast();
 		if (addToDisappear) {
 			synchronized (disappearPlayers) {
 				disappearPlayers.add(new DisappearPlayer(System.nanoTime(), p));

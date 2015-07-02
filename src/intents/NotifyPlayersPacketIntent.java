@@ -30,6 +30,7 @@ package intents;
 import network.packets.Packet;
 import resources.Terrain;
 import resources.control.Intent;
+import resources.player.Player;
 
 public class NotifyPlayersPacketIntent extends Intent {
 
@@ -37,16 +38,28 @@ public class NotifyPlayersPacketIntent extends Intent {
 	
 	private Packet packet;
 	private Terrain terrain;
+	private ConditionalNotify condition;
 	
-	public NotifyPlayersPacketIntent(Packet packet, Terrain terrain) {
+	public NotifyPlayersPacketIntent(Packet packet, Terrain terrain, ConditionalNotify condition) {
 		super(TYPE);
 		this.packet = packet;
 		this.terrain = terrain;
+		this.condition = condition;
 	}
+
+	public NotifyPlayersPacketIntent(Packet packet, Terrain terrain) {
+		this(packet, terrain, null);
+	}
+
 	public NotifyPlayersPacketIntent(Packet p) {
-		this(p, null);
+		this(p, null, null);
 	}
 
 	public Packet getPacket() { return packet; }
 	public Terrain getTerrain() { return terrain; }
+	public ConditionalNotify getCondition() { return condition; }
+
+	public interface ConditionalNotify {
+		boolean meetsCondition(Player player);
+	}
 }

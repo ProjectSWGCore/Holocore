@@ -28,20 +28,21 @@
 package resources.objects.waypoint;
 
 import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 
+import network.packets.Packet;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
-import resources.common.CRC;
-import resources.network.BaselineBuilder.Encodable;
+import resources.Location;
+import resources.Terrain;
+import resources.encodables.OutOfBandData;
+import resources.encodables.OutOfBandPackage;
 import resources.objects.intangible.IntangibleObject;
 import resources.player.Player;
-import utilities.Encoder;
 
-public class WaypointObject extends IntangibleObject implements Encodable {
+public class WaypointObject extends IntangibleObject implements OutOfBandData {
 
 	private static final long serialVersionUID = 1L;
 	
-	private int cellNumber;
+	private long cellId;
 	private String name = "New Waypoint";
 	private WaypointColor color = WaypointColor.BLUE;
 	private boolean active = true;
@@ -50,42 +51,36 @@ public class WaypointObject extends IntangibleObject implements Encodable {
 		super(objectId, BaselineType.WAYP);
 	}
 
-	
-	public int getCellNumber() {
-		return cellNumber;
-	}
-
-
-	public void setCellNumber(int cellNumber) {
-		this.cellNumber = cellNumber;
-	}
-
 	public String getName() {
 		return name;
 	}
-
 
 	public void setName(String name) {
 		this.name = name;
 	}
 
-
 	public WaypointColor getColor() {
 		return color;
 	}
-
 
 	public void setColor(WaypointColor color) {
 		this.color = color;
 	}
 
-
 	public boolean isActive() {
 		return active;
 	}
-	
+
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+
+	public long getCellId() {
+		return cellId;
+	}
+
+	public void setCellId(long cellId) {
+		this.cellId = cellId;
 	}
 
 	public void createObject(Player target) {
@@ -94,45 +89,98 @@ public class WaypointObject extends IntangibleObject implements Encodable {
 
 	@Override
 	public byte[] encode() {
-		ByteBuffer bb = ByteBuffer.allocate(42 + name.length() * 2).order(ByteOrder.LITTLE_ENDIAN);
-		bb.putInt(cellNumber);
-		bb.putFloat((float) getLocation().getX());
-		bb.putFloat((float) 0);
-		bb.putFloat((float) getLocation().getZ());
-		bb.putLong(0); // Network id, used for clusters
-		bb.putInt(CRC.getCrc(getLocation().getTerrain().getName()));
-		bb.put(Encoder.encodeUnicode(name));
-		bb.putLong(getObjectId());
-		bb.put((byte) color.getValue());
-		bb.put((byte) (active ? 1 : 0));
+		Location loc = getLocation();
+		ByteBuffer bb = ByteBuffer.allocate(42 + name.length() * 2);
+		Packet.addInt(bb, 0);
+		Packet.addFloat(bb, (float) loc.getX());
+		Packet.addFloat(bb, (float) loc.getY());
+		Packet.addFloat(bb, (float) loc.getZ());
+		Packet.addLong(bb, cellId);
+		Packet.addCrc(bb, loc.getTerrain().getName());
+		Packet.addUnicode(bb, name);
+		Packet.addLong(bb, getObjectId());
+		Packet.addByte(bb, color.getValue());
+		Packet.addBoolean(bb, active);
 		return bb.array();
 	}
-	
+
+	@Override
+	public int decodeOutOfBandData(ByteBuffer data) {
+		data.getInt();
+		setLocation(data.getFloat(), data.getFloat(), data.getFloat());
+		cellId 		= data.getLong();
+		getLocation().setTerrain(Terrain.getTerrainFromCrc(data.getInt()));
+		System.out.println(getLocation());
+		name 		= Packet.getUnicode(data);
+		Packet.getLong(data); // objectId
+		color		= WaypointColor.valueOf(data.get());
+		active 		= Packet.getBoolean(data);
+		return 42 + name.length() * 2;
+	}
+
+	@Override
+	public OutOfBandPackage.Type getOobType() {
+		return OutOfBandPackage.Type.WAYPOINT;
+	}
+
+	@Override
+	public int getOobPosition() {
+		return -3;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (!super.equals(o))
 			return false;
 		if (o instanceof WaypointObject) {
 			WaypointObject wp = (WaypointObject) o;
-			return wp.name.equals(name) && wp.cellNumber == cellNumber && wp.color == color && wp.active == active;
+			return wp.name.equals(name) && wp.cellId == cellId && wp.color == color && wp.active == active;
 		}
 		return false;
 	}
 	
 	@Override
 	public int hashCode() {
-		return ((super.hashCode() * 7 + name.hashCode()) * 13 + color.getValue()) * 17 + cellNumber;
+		return ((super.hashCode() * 7 + name.hashCode()) * 13 + color.getValue()) * 17 + (int) cellId;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "WaypointObject[" +
+				"cellId=" + cellId + ", name='" + name + '\'' + ", color=" + color + ", active=" + active +
+				", location=" + getLocation() + "]";
+	}
+
 	public enum WaypointColor{
 		BLUE(1), GREEN(2), ORANGE(3), YELLOW(4), PURPLE(5), WHITE(6), MULTICOLOR(7);
 		
 		private int i;
 		
-		private WaypointColor(int i) {
+		WaypointColor(int i) {
 			this.i = i;
 		}
 		
 		public int getValue() { return i; }
+
+		public static WaypointColor valueOf(int colorId) {
+			for (WaypointColor color : WaypointColor.values()) {
+				if (color.getValue() == colorId)
+					return color;
+			}
+			return WaypointColor.BLUE;
+		}
+
+		public static WaypointColor fromString(String string) {
+			switch(string) {
+				case "blue": return WaypointColor.BLUE;
+				case "green": return WaypointColor.GREEN;
+				case "orange": return WaypointColor.ORANGE;
+				case "yellow": return WaypointColor.YELLOW;
+				case "purple": return WaypointColor.PURPLE;
+				case "white": return WaypointColor.WHITE;
+				case "multicolor": return WaypointColor.MULTICOLOR;
+				default: return WaypointColor.BLUE;
+			}
+		}
 	}
 }

@@ -40,8 +40,8 @@ import java.util.*;
 public abstract class ContainerPermissions implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	public static WorldPermissions      WORLD       = new WorldPermissions();
-	public static InventoryPermissions  INVENTORY   = new InventoryPermissions();
+	public static final WorldPermissions      WORLD       = new WorldPermissions();
+	public static final InventoryPermissions  INVENTORY   = new InventoryPermissions();
 
 	private Map<String, Integer> permissionGroups;
 	private List<String> joinedGroups;
@@ -160,7 +160,8 @@ public abstract class ContainerPermissions implements Serializable {
 		}
 
 		public static int valueOf(EnumSet<Permission> bitmaskSet) {
-			return valueOf(bitmaskSet);
+			Permission[] permissions = bitmaskSet.toArray(new Permission[0]);
+			return valueOf(permissions);
 		}
 
 		public static int valueOf(Permission... permissions) {

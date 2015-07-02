@@ -35,11 +35,14 @@ import resources.Location;
 public class DataTransform extends ObjectController {
 	
 	public static final int CRC = 0x0071;
-	
+
+	private int timestamp;
 	private int updateCounter = 0;
 	private Location l;
 	private float speed = 0;
-	
+	private float lookAtYaw = 0;
+	private boolean useLookAtYaw;
+
 	public DataTransform(long objectId, int counter, Location l, float speed) {
 		super(objectId, CRC);
 		if (l == null)
@@ -55,7 +58,7 @@ public class DataTransform extends ObjectController {
 	
 	public void decode(ByteBuffer data) {
 		decodeHeader(data);
-		getInt(data);
+		timestamp = getInt(data);
 		updateCounter = getInt(data);
 		l.setOrientationX(getFloat(data));
 		l.setOrientationY(getFloat(data));
@@ -65,6 +68,8 @@ public class DataTransform extends ObjectController {
 		l.setY(getFloat(data));
 		l.setZ(getFloat(data));
 		speed = getFloat(data);
+		lookAtYaw = getFloat(data);
+		useLookAtYaw = getBoolean(data);
 	}
 	
 	public ByteBuffer encode() {
@@ -83,8 +88,28 @@ public class DataTransform extends ObjectController {
 	public int getUpdateCounter() { return updateCounter; }
 	public Location getLocation() { return l; }
 	public float getSpeed() { return speed; }
-	
-	public double getMovementAngle() {
+
+	public boolean isUseLookAtYaw() {
+		return useLookAtYaw;
+	}
+
+	public void setUseLookAtYaw(boolean useLookAtYaw) {
+		this.useLookAtYaw = useLookAtYaw;
+	}
+
+	public float getLookAtYaw() {
+		return lookAtYaw;
+	}
+
+	public void setLookAtYaw(float lookAtYaw) {
+		this.lookAtYaw = lookAtYaw;
+	}
+
+	public int getTimestamp() {
+		return timestamp;
+	}
+
+	public byte getMovementAngle() {
 		byte movementAngle = (byte) 0.0f;
 		double wOrient = l.getOrientationW();
 		double yOrient = l.getOrientationY();

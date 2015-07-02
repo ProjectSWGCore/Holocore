@@ -34,26 +34,24 @@ import java.nio.charset.Charset;
 
 import resources.network.BaselineBuilder.Encodable;
 
-public class ProsePackage implements Encodable {
+public class ProsePackage implements OutOfBandData {
 	private static final long serialVersionUID = 1L;
-	private Stf base;
-	// Text You
-	private long tuObjId = 0; 
-	private Stf tuStf = new Stf("", "");
-	private String tuString;
-	// Text Target
-	private long ttObjId;
-	private Stf ttStf = new Stf("", "");
-	private String ttString;
-	// Text Object
-	private long toObjId;
-	private Stf toStf = new Stf("", "");
-	private String toString;
+
+	private StringId base = new StringId("", "");
+
+	private Prose actor = new Prose();
+	private Prose target = new Prose();
+	private Prose other = new Prose();
+
 	// Decimal Integer
 	private int di;
 	// Decimal Float
 	private float df;
-	
+
+	private boolean grammarFlag = false;
+
+	public ProsePackage() {}
+
 	/**
 	 * Creates a new ProsePackage that contains only 1 parameter for the specified STF object
 	 * <br><br>
@@ -116,50 +114,65 @@ public class ProsePackage implements Encodable {
 			else { System.err.println("DF can only be a Float!"); }
 			break;
 			
-		default: return;
+		default: break;
 		
 		}
 	}
 	
 	public void setSTF(Object prose) {
-		if (prose instanceof Stf) { base = (Stf) prose; }
+		if (prose instanceof StringId) { base = (StringId) prose; }
 		else if (prose instanceof String) {
-			if (((String) prose).startsWith("@")) { base = new Stf((String) prose); }
+			if (((String) prose).startsWith("@")) { base = new StringId((String) prose); }
 			else { System.err.println("The base STF cannot be a custom string!"); }
 		} else { System.err.println("The base STF must be either a Stf or a String! Received class: " + prose.getClass().getName()); }
 	}
 	
 	public void setTU(Object prose) {
-		if (prose instanceof Stf) { tuStf = (Stf) prose; } 
+		if (prose instanceof StringId)
+			actor.setStringId((StringId) prose);
 		else if (prose instanceof String) {
-			if (((String) prose).startsWith("@")) { tuStf = new Stf((String) prose); } 
-			else { tuString = (String) prose; }
-		} 
-		else if (prose instanceof Long) { tuObjId = (Long) prose; }
-		else if (prose instanceof BigInteger) { tuObjId = ((BigInteger) prose).longValue(); }
-		else { System.err.println("Target proses can only be Strings or Longs! Received class: " + prose.getClass().getName()); }
+			if (((String) prose).startsWith("@"))
+				actor.setStringId(new StringId((String) prose));
+			else actor.setText((String) prose);
+		}
+		else if (prose instanceof Long)
+			actor.setObjectId((Long) prose);
+		else if (prose instanceof BigInteger)
+			actor.setObjectId(((BigInteger) prose).longValue());
+		else
+			System.err.println("Proses can only be Strings or Longs! Received class: " + prose.getClass().getName());
 	}
 	
 	public void setTT(Object prose) {
-		if (prose instanceof Stf) { ttStf = (Stf) prose; } 
+		if (prose instanceof StringId)
+			target.setStringId((StringId) prose);
 		else if (prose instanceof String) {
-			if (((String) prose).startsWith("@")) { ttStf = new Stf((String) prose); } 
-			else { ttString = (String) prose; }
-		} 
-		else if (prose instanceof Long) { ttObjId = (Long) prose; }
-		else if (prose instanceof BigInteger) { ttObjId = ((BigInteger) prose).longValue(); }
-		else { System.err.println("Target proses can only be Strings or Longs! Received class: " + prose.getClass().getName()); }
+			if (((String) prose).startsWith("@"))
+				target.setStringId(new StringId((String) prose));
+			else target.setText((String) prose);
+		}
+		else if (prose instanceof Long)
+			target.setObjectId((Long) prose);
+		else if (prose instanceof BigInteger)
+			target.setObjectId(((BigInteger) prose).longValue());
+		else
+			System.err.println("Proses can only be Strings or Longs! Received class: " + prose.getClass().getName());
 	}
 	
 	public void setTO(Object prose) {
-		if (prose instanceof Stf) { toStf = (Stf) prose; } 
+		if (prose instanceof StringId)
+			other.setStringId((StringId) prose);
 		else if (prose instanceof String) {
-			if (((String) prose).startsWith("@")) { toStf = new Stf((String) prose); } 
-			else { toString = (String) prose; }
-		} 
-		else if (prose instanceof Long) { toObjId = (Long) prose; }
-		else if (prose instanceof BigInteger) { toObjId = ((BigInteger) prose).longValue(); }
-		else { System.err.println("Target proses can only be Strings or Longs! Received class: " + prose.getClass().getName()); }
+			if (((String) prose).startsWith("@"))
+				other.setStringId(new StringId((String) prose));
+			else other.setText((String) prose);
+		}
+		else if (prose instanceof Long)
+			other.setObjectId((Long) prose);
+		else if (prose instanceof BigInteger)
+			other.setObjectId(((BigInteger) prose).longValue());
+		else
+			System.err.println("Proses can only be Strings or Longs! Received class: " + prose.getClass().getName());
 	}
 	
 	public void setDI(Integer prose) {
@@ -169,54 +182,103 @@ public class ProsePackage implements Encodable {
 	public void setDF(Float prose) {
 		df = prose;
 	}
-	
+
+	public void setGrammarFlag(boolean useGrammar) {
+		grammarFlag = useGrammar;
+	}
+
 	@Override
 	public byte[] encode() {
 		if (base == null) // There must be a base stf always
 			return null;
 		
-		byte[] encodedBase = base.encode();
-		byte[] encodedTu = tuStf.encode();
-		byte[] encodedTt = ttStf.encode();
-		byte[] encodedTo = toStf.encode();
-		
-		int size = 40 + encodedBase.length + encodedTu.length + encodedTt.length + encodedTo.length;
-		
-		if (tuString != null) size+= tuString.length()*2;
-		else size+= 4;
-		
-		if (ttString != null) size+= ttString.length()*2;
-		else size+= 4;
-		
-		if (toString != null) size+= toString.length()*2;
-		else size+= 4;
-		
-		ByteBuffer bb = ByteBuffer.allocate(size).order(ByteOrder.LITTLE_ENDIAN);
-		
-		bb.putShort((short) 0); // unknown boolean - seen as 0 for bank deposits and 1 for dances
-		bb.put((byte) 1);
-		bb.putInt(-1);
-		bb.put(encodedBase);
-		// Text You
-		bb.putLong(tuObjId);
-		bb.put(encodedTu);
-		if (tuString == null) bb.putInt(0);
-		else bb.put(tuString.getBytes(Charset.forName("UTF-16LE")));
-		// Text Target
-		bb.putLong(ttObjId);
-		bb.put(encodedTt);
-		if (ttString == null) bb.putInt(0);
-		else bb.put(ttString.getBytes(Charset.forName("UTF-16LE")));
-		// Text Object
-		bb.putLong(toObjId);
-		bb.put(encodedTo);
-		if (toString == null) bb.putInt(0);
-		else bb.put(toString.getBytes(Charset.forName("UTF-16LE")));
+		byte[] stringData = base.encode();
+		byte[] actorData = actor.encode();
+		byte[] targetData = target.encode();
+		byte[] otherData = other.encode();
+
+		ByteBuffer bb = ByteBuffer.allocate(16 + stringData.length + actorData.length + targetData.length + otherData.length).order(ByteOrder.LITTLE_ENDIAN);
+		bb.putShort((short) 0); // ??
+		bb.put(OutOfBandPackage.Type.PROSE_PACKAGE.getType());
+		bb.putInt(-1); // ??
+		bb.put(stringData);
+		bb.put(actorData);
+		bb.put(targetData);
+		bb.put(otherData);
+
 		// Decimals
 		bb.putInt(di);
 		bb.putFloat(df);
 		
-		bb.put((byte) 0); // Display flag?
+		bb.put((byte) (grammarFlag ? 1 : 0)); // Grammar flag
 		return bb.array();
+	}
+
+	@Override
+	public int decodeOutOfBandData(ByteBuffer data) {
+		return 0;
+	}
+
+	@Override
+	public OutOfBandPackage.Type getOobType() {
+		return OutOfBandPackage.Type.PROSE_PACKAGE;
+	}
+
+	@Override
+	public int getOobPosition() {
+		return -1;
+	}
+
+	@Override
+	public String toString() {
+		return "ProsePackage[base=" + base + ", grammarFlag=" + grammarFlag +
+				", actor=" + actor + ", target=" + target + ", other=" + other +
+				", di=" + di + ", df=" + df +
+				"]";
+	}
+
+	private class Prose implements Encodable {
+
+		private long objectId;
+		private StringId stringId;
+		private String text;
+
+		public Prose() {
+			stringId = new StringId("", "");
+		}
+
+		public void setObjectId(long objectId) {
+			this.objectId = objectId;
+		}
+
+		public void setStringId(StringId stringId) {
+			this.stringId = stringId;
+		}
+
+		public void setText(String text) {
+			this.text = text;
+		}
+
+		@Override
+		public byte[] encode() {
+			byte[] stfData = stringId.encode();
+			ByteBuffer bb = ByteBuffer.allocate(12 + stfData.length + (text != null ? (4 + (text.length() * 2)) : 0)).order(ByteOrder.LITTLE_ENDIAN);
+
+			bb.putLong(objectId);
+			bb.put(stfData);
+			if (text != null && !text.isEmpty()) {
+				bb.putInt(text.length());
+				bb.put(text.getBytes(Charset.forName("UTF-16LE")));
+			} else {
+				bb.putInt(0);
+			}
+
+			return bb.array();
+		}
+
+		@Override
+		public String toString() {
+			return "Prose[objectId=" + objectId + ", stringId=" + stringId + ", text='" + text + "']";
+		}
 	}
 }

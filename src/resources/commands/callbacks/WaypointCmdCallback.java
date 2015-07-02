@@ -27,6 +27,7 @@
 ***********************************************************************************/
 package resources.commands.callbacks;
 
+import intents.chat.ChatBroadcastIntent;
 import resources.Location;
 import resources.Terrain;
 import resources.commands.ICmdCallback;
@@ -45,61 +46,144 @@ public class WaypointCmdCallback implements ICmdCallback {
 		PlayerObject ghost = player.getPlayerObject();
 		if (ghost == null)
 			return;
-		
-		String[] cmdArgs = args.split(" ");
-		if (cmdArgs.length > 6)
-			cmdArgs = args.split(" ", 6);
 
-		WaypointColor color = null;
+		String[] cmdArgs = args.split(" ");
+
+		WaypointColor color = WaypointColor.BLUE;
 		Terrain terrain = null;
 		String name = null;
-		float x = -1;
-		float y = -1;
+		float x = Float.NaN;
+		float z = Float.NaN;
+
+		// Validate parameters, format for proper command arguments as it's split at whitespace
+		for (int i = 0; i < cmdArgs.length; i++) {
+			switch(i) {
+				// This could be either for just a named waypoint at current spot (1 param) or a planet arg (6 param)
+				case 0:
+					if (Terrain.getTerrainFromName(cmdArgs[0]) != null) {
+						// Terrain's name could also be part of the waypoint name, check to see if next few args are coords
+						try {
+							if (cmdArgs.length > 2) {
+								x = Float.parseFloat(cmdArgs[1]);
+								if (cmdArgs.length >= 3) {
+									z = Float.parseFloat(cmdArgs[2]); // Just to be sure.. Maybe someone wanted some numbers in the name.
+									if (cmdArgs.length != 6)
+										cmdArgs = args.split(" ", 6);
+								}
+							}
+						} catch (NumberFormatException e) {
+							// This is just a named waypoint.
+							cmdArgs = new String[]{args};
+						}
+					} else {
+						// This is just a named waypoint.
+						cmdArgs = new String[]{args};
+					}
+					break;
+				// This could be either for a name (3 param) or a z coordinate (6 param)
+				case 3:
+					try {
+						z = Float.parseFloat(cmdArgs[3]);
+						// Ensure 100% this is a 6 argument command as the first param MUST be the planet name
+						if (Terrain.getTerrainFromName(cmdArgs[0]) != null)
+							if (cmdArgs.length != 6)
+								cmdArgs = args.split(" ", 6);
+						else cmdArgs = args.split(" ", 4);
+					} catch (NumberFormatException e) {
+						// This is intended for a name, should be 4 params
+						cmdArgs = args.split(" ", 4);
+					}
+					break;
+				default: break;
+			}
+		}
+
+		// Was there an error message saying the format was wrong?
 		
 		switch(cmdArgs.length) {
+			case 1: // name
+				name = cmdArgs[0];
+				break;
 			case 2: // x y
 				x = floatValue(cmdArgs[0]);
-				if (x == -1)
-					return;
-				y = floatValue(cmdArgs[1]);
+				if (Float.isNaN(x))
+					break;
+				z = floatValue(cmdArgs[1]);
 				break;
-			case 4: // x z y name
+			case 3: // x y z
 				x = floatValue(cmdArgs[0]);
-				if (x == -1)
-					return;
-				//z = floatValue(cmdArgs[1]);
-				y = floatValue(cmdArgs[2]);
+				if (Float.isNaN(x))
+					break;
+				//y = floatValue(cmdArgs[1]);
+				z = floatValue(cmdArgs[2]);
+				break;
+			case 4: // x y z name
+				x = floatValue(cmdArgs[0]);
+				if (Float.isNaN(x))
+					break;
+				//y = floatValue(cmdArgs[1]);
+				z = floatValue(cmdArgs[2]);
+				if (Float.isNaN(z))
+					break;
 				name = cmdArgs[3];
 				break;
-			case 6: // planet x z y color name
+			case 6: // planet x y z color name
 				terrain = Terrain.getTerrainFromName(cmdArgs[0]);
 				if (terrain == null)
-					return;
+					break;
 				x = floatValue(cmdArgs[1]);
-				if (x == -1)
-					return;
-				//z = floatValue(cmdArgs[2]);
-				y = floatValue(cmdArgs[3]);
-				color = colorValue(cmdArgs[4]);
+				if (Float.isNaN(x))
+					break;
+				//y = floatValue(cmdArgs[2]);
+				z = floatValue(cmdArgs[3]);
+				if (Float.isNaN(z))
+					break;
+				color = WaypointColor.fromString(cmdArgs[4]);
 				name = cmdArgs[5];
 				break;
-			default: 
-				break;
+			default:
+				// Not a valid format for /waypoint command
+				return;
 		}
-			WaypointObject waypoint = createWaypoint(galacticManager.getObjectManager(), terrain, color, name, x, y, player.getCreatureObject().getLocation());
-			ghost.addWaypoint(waypoint);
-		
+
+		Location location = new Location(player.getCreatureObject().getLocation());
+
+		if (!Float.isNaN(x))
+			location.setX(x);
+
+		if (!Float.isNaN(z))
+			location.setZ(z);
+
+		boolean differentPlanetMessage = false;
+		if (terrain != null) {
+			if (terrain != location.getTerrain()) {
+				location.setTerrain(terrain);
+				differentPlanetMessage = true;
+			}
+		}
+
+		if (name == null || name.isEmpty())
+			name = "Waypoint";
+
+		WaypointObject waypoint = createWaypoint(galacticManager.getObjectManager(), color, name, location);
+		ghost.addWaypoint(waypoint);
+
+		if (differentPlanetMessage) {
+			new ChatBroadcastIntent(player, "Waypoint: New waypoint \""+ name + "\" created for location "
+					+ terrain.getName() + " (" + String.format("%.0f", location.getX()) + ", "
+					+ String.format("%.0f", location.getY()) + ", "+ String.format("%.0f", location.getZ()) + ")").broadcast();
+		} else {
+			new ChatBroadcastIntent(player, "Waypoint: New waypoint \""+ name + "\" created for location ("
+					+ String.format("%.0f", location.getX()) + ", "+ String.format("%.0f", location.getY())
+					+ ", "+ String.format("%.0f", location.getZ()) + ")").broadcast();
+		}
 	}
 
-	private WaypointObject createWaypoint(ObjectManager objManager, Terrain terrain, WaypointColor color, String name, float x, float y, Location loc) {
-		WaypointObject waypoint = (WaypointObject) objManager.createObject("object/waypoint/shared_waypoint.iff", false);
-
-		waypoint.setLocation(new Location((x != -1 ? x : loc.getX()), 0, (y != -1 ? y : loc.getZ()), (terrain != null ? terrain : loc.getTerrain())));
-		if (color != null)
-			waypoint.setColor(color);
-
-		waypoint.setName(name == null ? "New Waypoint" : name);
-		
+	private WaypointObject createWaypoint(ObjectManager objManager, WaypointColor color, String name, Location location) {
+		WaypointObject waypoint = (WaypointObject) objManager.createObject("object/waypoint/shared_waypoint.iff", location, false);
+		waypoint.setColor(color);
+		waypoint.setName(name);
+		// TODO: Check if the location collides with a building, and if it does then set the proper cellId
 		return waypoint;
 	}
 	
@@ -107,19 +191,7 @@ public class WaypointCmdCallback implements ICmdCallback {
 		try {
 			return Float.parseFloat(str);
 		} catch (NumberFormatException | NullPointerException e) {
-			return (float) -1;
-		}
-	}
-	
-	private WaypointColor colorValue(String str) {
-		switch (str) {
-			case "blue": return WaypointColor.BLUE;
-			case "green": return WaypointColor.GREEN;
-			case "yellow": return WaypointColor.YELLOW;
-			case "white": return WaypointColor.WHITE;
-			case "orange": return WaypointColor.ORANGE;
-			case "purple": return WaypointColor.PURPLE;
-			default: return WaypointColor.BLUE;
+			return Float.NaN;
 		}
 	}
 }

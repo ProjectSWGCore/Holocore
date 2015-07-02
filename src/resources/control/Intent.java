@@ -107,8 +107,8 @@ public abstract class Intent {
 			return;
 		}
 		synchronized (i) {
-			if (!i.isComplete()) {
-				i.setAsParallel(this);
+			if (!isComplete()) {
+				setAsParallel(i);
 			}
 			broadcast();
 		}

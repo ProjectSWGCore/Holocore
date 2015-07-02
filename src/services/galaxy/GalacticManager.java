@@ -33,6 +33,7 @@ import intents.network.InboundPacketIntent;
 import resources.Galaxy;
 import resources.control.Intent;
 import resources.control.Manager;
+import services.chat.ChatService;
 import services.objects.ObjectManager;
 import services.player.PlayerManager;
 
@@ -43,6 +44,7 @@ public class GalacticManager extends Manager {
 	private ObjectManager objectManager;
 	private PlayerManager playerManager;
 	private GameManager gameManager;
+	private ChatService chatService;
 	private Intent prevPacketIntent;
 	private Galaxy galaxy;
 	
@@ -51,16 +53,19 @@ public class GalacticManager extends Manager {
 		objectManager = new ObjectManager();
 		playerManager = new PlayerManager();
 		gameManager = new GameManager();
+		chatService = new ChatService();
 		prevPacketIntent = null;
 		
 		addChildService(objectManager);
 		addChildService(playerManager);
 		addChildService(gameManager);
+		addChildService(chatService);
 	}
 	
 	@Override
 	public boolean initialize() {
 		registerForIntent(InboundPacketIntent.TYPE);
+		chatService.initializeGalaxyChannels(galaxy);
 		return super.initialize();
 	}
 	

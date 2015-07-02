@@ -1,38 +1,8 @@
-/***********************************************************************************
-* Copyright (c) 2015 /// Project SWG /// www.projectswg.com                        *
-*                                                                                  *
-* ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on           *
-* July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies.  *
-* Our goal is to create an emulator which will provide a server for players to     *
-* continue playing a game similar to the one they used to play. We are basing      *
-* it on the final publish of the game prior to end-game events.                    *
-*                                                                                  *
-* This file is part of Holocore.                                                   *
-*                                                                                  *
-* -------------------------------------------------------------------------------- *
-*                                                                                  *
-* Holocore is free software: you can redistribute it and/or modify                 *
-* it under the terms of the GNU Affero General Public License as                   *
-* published by the Free Software Foundation, either version 3 of the               *
-* License, or (at your option) any later version.                                  *
-*                                                                                  *
-* Holocore is distributed in the hope that it will be useful,                      *
-* but WITHOUT ANY WARRANTY; without even the implied warranty of                   *
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                    *
-* GNU Affero General Public License for more details.                              *
-*                                                                                  *
-* You should have received a copy of the GNU Affero General Public License         *
-* along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
-*                                                                                  *
-***********************************************************************************/
 package services.player;
 
 import intents.GalacticIntent;
 import intents.PlayerEventIntent;
-import intents.RequestZoneInIntent;
 
-import java.io.File;
-import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -43,43 +13,16 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.eclipse.jgit.api.Git;
-import org.eclipse.jgit.lib.Constants;
-import org.eclipse.jgit.lib.Repository;
-import org.eclipse.jgit.revwalk.RevCommit;
-
-import main.ProjectSWG;
 import network.packets.Packet;
-import network.packets.soe.SessionRequest;
-import network.packets.swg.login.AccountFeatureBits;
-import network.packets.swg.login.ClientIdMsg;
-import network.packets.swg.login.ClientPermissionsMessage;
-import network.packets.swg.login.ServerId;
-import network.packets.swg.login.ServerString;
+import network.packets.swg.login.creation.ClientCreateCharacter;
 import network.packets.swg.login.creation.ClientVerifyAndLockNameRequest;
 import network.packets.swg.login.creation.ClientVerifyAndLockNameResponse;
-import network.packets.swg.login.creation.ClientCreateCharacter;
-import network.packets.swg.login.creation.ClientVerifyAndLockNameResponse.ErrorMessage;
 import network.packets.swg.login.creation.CreateCharacterFailure;
-import network.packets.swg.login.creation.CreateCharacterFailure.NameFailureReason;
 import network.packets.swg.login.creation.CreateCharacterSuccess;
 import network.packets.swg.login.creation.RandomNameRequest;
 import network.packets.swg.login.creation.RandomNameResponse;
-import network.packets.swg.zone.CmdSceneReady;
-import network.packets.swg.zone.GalaxyLoopTimesRequest;
-import network.packets.swg.zone.GalaxyLoopTimesResponse;
-import network.packets.swg.zone.HeartBeatMessage;
-import network.packets.swg.zone.ParametersMessage;
-import network.packets.swg.zone.SetWaypointColor;
-import network.packets.swg.zone.ShowBackpack;
-import network.packets.swg.zone.ShowHelmet;
-import network.packets.swg.zone.UpdatePvpStatusMessage;
-import network.packets.swg.zone.chat.ChatOnConnectAvatar;
-import network.packets.swg.zone.chat.ChatSystemMessage;
-import network.packets.swg.zone.chat.VoiceChatStatus;
-import network.packets.swg.zone.insertion.ChatServerStatus;
-import network.packets.swg.zone.insertion.CmdStartScene;
-import resources.Galaxy;
+import network.packets.swg.login.creation.ClientVerifyAndLockNameResponse.ErrorMessage;
+import network.packets.swg.login.creation.CreateCharacterFailure.NameFailureReason;
 import resources.Location;
 import resources.Race;
 import resources.Terrain;
@@ -87,27 +30,21 @@ import resources.client_info.ClientFactory;
 import resources.client_info.visitors.ProfTemplateData;
 import resources.config.ConfigFile;
 import resources.containers.ContainerPermissions;
-import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.SWGObject;
-import resources.objects.creature.CreatureMood;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
 import resources.objects.tangible.TangibleObject;
-import resources.objects.waypoint.WaypointObject;
-import resources.objects.waypoint.WaypointObject.WaypointColor;
 import resources.player.AccessLevel;
 import resources.player.Player;
 import resources.player.PlayerEvent;
-import resources.player.PlayerFlags;
 import resources.player.PlayerState;
-import resources.server_info.Config;
 import resources.server_info.Log;
 import resources.zone.NameFilter;
 import services.objects.ObjectManager;
 import utilities.namegen.SWGNameGenerator;
 
-public class ZoneService extends Service {
+public class CharacterCreationService extends Service {
 
 	private final Map <String, Player> lockedNames;
 	private final Map <String, ProfTemplateData> profTemplates;
@@ -118,15 +55,13 @@ public class ZoneService extends Service {
 	private PreparedStatement createCharacter;
 	private PreparedStatement getCharacter;
 	private PreparedStatement getLikeCharacterName;
-	private String commitHistory;
 	
-	public ZoneService() {
+	public CharacterCreationService() {
 		lockedNames = new HashMap<String, Player>();
 		profTemplates = new ConcurrentHashMap<String, ProfTemplateData>();
 		nameFilter = new NameFilter("namegen/bad_word_list.txt", "namegen/reserved_words.txt", "namegen/fiction_reserved.txt");
 		nameGenerator = new SWGNameGenerator(nameFilter);
 		creationRestriction = new CharacterCreationRestriction(2);
-		commitHistory = "";
 	}
 	
 	@Override
@@ -137,10 +72,8 @@ public class ZoneService extends Service {
 		getLikeCharacterName = getLocalDatabase().prepareStatement("SELECT name FROM characters WHERE name ilike ?"); //NOTE: ilike is not SQL standard. It is an extension for postgres only.
 		nameGenerator.loadAllRules();
 		loadProfTemplates();
-		loadCommitHistory();
 		if (!nameFilter.load())
 			System.err.println("Failed to load name filter!");
-		registerForIntent(RequestZoneInIntent.TYPE);
 		return super.initialize();
 	}
 	
@@ -150,162 +83,42 @@ public class ZoneService extends Service {
 		return super.start();
 	}
 	
-	@Override
-	public void onIntentReceived(Intent i) {
-		if (i instanceof RequestZoneInIntent) {
-			RequestZoneInIntent zii = (RequestZoneInIntent) i;
-			zoneInPlayer(zii.getPlayer(), zii.getCreature(), zii.getGalaxy());
-		}
-	}
-	
 	public void handlePacket(GalacticIntent intent, Player player, long networkId, Packet p) {
-		if (p instanceof SessionRequest)
-			sendServerInfo(intent.getGalaxy(), networkId);
-		if (p instanceof ClientIdMsg)
-			handleClientIdMsg(player, (ClientIdMsg) p);
 		if (p instanceof RandomNameRequest)
 			handleRandomNameRequest(player, (RandomNameRequest) p);
 		if (p instanceof ClientVerifyAndLockNameRequest)
 			handleApproveNameRequest(intent.getPlayerManager(), player, (ClientVerifyAndLockNameRequest) p);
 		if (p instanceof ClientCreateCharacter)
 			handleCharCreation(intent.getObjectManager(), player, (ClientCreateCharacter) p);
-		if (p instanceof GalaxyLoopTimesRequest)
-			handleGalaxyLoopTimesRequest(player, (GalaxyLoopTimesRequest) p);
-		if (p instanceof CmdSceneReady)
-			handleCmdSceneReady(player, (CmdSceneReady) p);
-		if (p instanceof SetWaypointColor)
-			handleSetWaypointColor(player, (SetWaypointColor) p);
-		if(p instanceof ShowBackpack)
-			handleShowBackpack(player, (ShowBackpack) p);
-		if(p instanceof ShowHelmet)
-			handleShowHelmet(player, (ShowHelmet) p);
 	}
 	
-	private void zoneInPlayer(Player player, CreatureObject creature, String galaxy) {
-		PlayerObject playerObj = creature.getPlayerObject();
-		player.setPlayerState(PlayerState.ZONING_IN);
-		player.setCreatureObject(creature);
-		creature.setOwner(player);
-		
-		sendZonePackets(player, creature);
-		initPlayerBeforeZoneIn(player, creature, playerObj);
-		creature.createObject(player);
-		System.out.printf("[%s] %s is zoning in%n", player.getUsername(), player.getCharacterName());
-		Log.i("ObjectManager", "Zoning in %s with character %s", player.getUsername(), player.getCharacterName());
-		sendCommitHistory(player);
-		PlayerEventIntent firstZone = new PlayerEventIntent(player, galaxy, PlayerEvent.PE_FIRST_ZONE);
-		PlayerEventIntent primary = new PlayerEventIntent(player, galaxy, PlayerEvent.PE_ZONE_IN);
-		primary.broadcastWithIntent(firstZone);
-	}
-	
-	private void loadCommitHistory() {
-		File repoDir = new File("./" + Constants.DOT_GIT); // Ziggy: Get the git directory
-		Git git = null;
-		Repository repo = null;
-		int commitCount = 3;
-		int iterations = 0;
-		
-		try {
-			git = Git.open(repoDir);
-			repo = git.getRepository();
-			
+	public boolean characterExistsForName(String name) {
+		synchronized (getCharacter) {
+			ResultSet set = null;
 			try {
-				commitHistory = "The " + commitCount + " most recent commits in branch '" + repo.getBranch() + "':\n";
-				
-				for(RevCommit commit : git.log().setMaxCount(commitCount).call()) {
-					commitHistory += commit.getName().substring(0, 7) + " " + commit.getShortMessage();
-					
-					if(commitCount > iterations++)
-						commitHistory += "\n";
+				String nameSplitStr[] = name.split(" ");
+				String charExistsPrepStmtStr = nameSplitStr[0] + "%"; //Only the first name should be unique.
+				getLikeCharacterName.setString(1, charExistsPrepStmtStr);
+				set = getLikeCharacterName.executeQuery();
+				while (set.next()){
+					String dbName = set.getString("name");
+					if(nameSplitStr[0].equalsIgnoreCase(dbName.split(" ")[0])){
+						return true;
+					}
 				}
-				
-			} catch (Throwable t) {
-				t.printStackTrace();
+				return false;
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return false;
+			} finally {
+				try {
+					if (set != null)
+						set.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
-			
-		} catch (IOException e) {
-			// Ziggy: An exception is thrown if bash isn't installed
-			// It works fine anyways.
-			// https://www.eclipse.org/forums/index.php/t/1031740/
 		}
-		
-
-	}
-	
-	private void sendCommitHistory(Player player) {
-		player.sendPacket(new ChatSystemMessage(ChatSystemMessage.SystemChatType.CHAT, commitHistory));
-	}
-	
-	private void sendZonePackets(Player player, CreatureObject creature) {
-		long objId = creature.getObjectId();
-		Race race = creature.getRace();
-		Location l = creature.getLocation();
-		long time = (long)(ProjectSWG.getCoreTime()/1E3);
-		sendPacket(player, new HeartBeatMessage());
-		sendPacket(player, new ChatServerStatus(true));
-		sendPacket(player, new VoiceChatStatus());
-		sendPacket(player, new ParametersMessage());
-		sendPacket(player, new ChatOnConnectAvatar());
-		sendPacket(player, new CmdStartScene(false, objId, race, l, time));
-		sendPacket(player, new UpdatePvpStatusMessage(creature.getPvpType(), creature.getPvpFactionId(), creature.getObjectId()));
-	}
-	
-	private void initPlayerBeforeZoneIn(Player player, CreatureObject creatureObj, PlayerObject playerObj) {
-		playerObj.setStartPlayTime((int) System.currentTimeMillis());
-		creatureObj.setMoodId(CreatureMood.NONE.getMood());
-		playerObj.clearFlagBitmask(PlayerFlags.LD);	// Ziggy: Clear the LD flag in case it wasn't already.
-	}
-	
-	private void handleShowBackpack(Player player, ShowBackpack p) {
-		player.getPlayerObject().setShowBackpack(p.showingBackpack());
-	}
-	
-	private void handleShowHelmet(Player player, ShowHelmet p) {
-		player.getPlayerObject().setShowHelmet(p.showingHelmet());
-	}
-
-	private void handleSetWaypointColor(Player player, SetWaypointColor p) {
-		// TODO Should move this to a different service, maybe make a service for other packets similar to this (ie misc.)
-		PlayerObject ghost = (PlayerObject) player.getPlayerObject();
-		
-		WaypointObject waypoint = ghost.getWaypoint(p.getObjId());
-		if (waypoint == null)
-			return;
-		
-		switch(p.getColor()) {
-			case "blue": waypoint.setColor(WaypointColor.BLUE); break;
-			case "green": waypoint.setColor(WaypointColor.GREEN); break;
-			case "orange": waypoint.setColor(WaypointColor.ORANGE); break;
-			case "yellow": waypoint.setColor(WaypointColor.YELLOW); break;
-			case "purple": waypoint.setColor(WaypointColor.PURPLE); break;
-			case "white": waypoint.setColor(WaypointColor.WHITE); break;
-			default: System.err.println("Don't know color " + p.getColor());
-		}
-		
-		ghost.updateWaypoint(waypoint);
-	}
-
-	private void sendServerInfo(Galaxy galaxy, long networkId) {
-		Config c = getConfig(ConfigFile.NETWORK);
-		String name = c.getString("ZONE-SERVER-NAME", galaxy.getName());
-		int id = c.getInt("ZONE-SERVER-ID", galaxy.getId());
-		sendPacket(networkId, new ServerString(name + ":" + id));
-		sendPacket(networkId, new ServerId(id));
-	}
-	
-	private void handleCmdSceneReady(Player player, CmdSceneReady p) {
-		player.setPlayerState(PlayerState.ZONED_IN);
-		player.sendPacket(p);
-		System.out.println("[" + player.getUsername() +"] " + player.getCharacterName() + " zoned in");
-		Log.i("ZoneService", "%s with character %s zoned in from %s:%d", player.getUsername(), player.getCharacterName(), p.getAddress(), p.getPort());
-	}
-	
-	private void handleClientIdMsg(Player player, ClientIdMsg clientId) {
-		System.out.println("[" + player.getUsername() + "] Connected to the zone server. IP: " + clientId.getAddress() + ":" + clientId.getPort());
-		Log.i("ZoneService", "%s connected to the zone server from %s:%d", player.getUsername(), clientId.getAddress(), clientId.getPort());
-		sendPacket(player.getNetworkId(), new HeartBeatMessage());
-		sendPacket(player.getNetworkId(), new AccountFeatureBits());
-		sendPacket(player.getNetworkId(), new ClientPermissionsMessage());
 	}
 	
 	private void handleRandomNameRequest(Player player, RandomNameRequest request) {
@@ -409,35 +222,7 @@ public class ZoneService extends Service {
 		return ErrorMessage.NAME_APPROVED;
 	}
 	
-	private boolean characterExistsForName(String name) {
-		synchronized (getCharacter) {
-			ResultSet set = null;
-			try {
-				String nameSplitStr[] = name.split(" ");
-				String charExistsPrepStmtStr = nameSplitStr[0] + "%"; //Only the first name should be unique.
-				getLikeCharacterName.setString(1, charExistsPrepStmtStr);
-				set = getLikeCharacterName.executeQuery();
-				while (set.next()){
-					String dbName = set.getString("name");
-					if(nameSplitStr[0].equalsIgnoreCase(dbName.split(" ")[0])){
-						return true;
-					}
-				}
-				return false;
-			} catch (SQLException e) {
-				e.printStackTrace();
-				return false;
-			} finally {
-				try {
-					if (set != null)
-						set.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	}
-	
+
 	private long createCharacter(ObjectManager objManager, Player player, ClientCreateCharacter create) {
 		Location		start		= getStartLocation(create.getStart());
 		Race			race		= Race.getRaceByFile(create.getRace());
@@ -520,10 +305,7 @@ public class ZoneService extends Service {
 		playerObj.setBornDate(date.get(Calendar.YEAR), date.get(Calendar.MONTH) + 1, date.get(Calendar.DAY_OF_MONTH));
 	}
 	
-	private void handleGalaxyLoopTimesRequest(Player player, GalaxyLoopTimesRequest req) {
-		sendPacket(player, new GalaxyLoopTimesResponse(ProjectSWG.getCoreTime()/1000));
-	}
-	
+
 	private void createStarterClothing(ObjectManager objManager, CreatureObject player, String race, String profession) {
 		if (player.getSlottedObject("inventory") == null)
 			return;
@@ -538,7 +320,7 @@ public class ZoneService extends Service {
 	}
 	
 	private void loadProfTemplates() {
-		profTemplates.put("crafting_artisan", (ProfTemplateData) ClientFactory.getInfoFromFile("creation/profession_defaults_combat_brawler.iff"));
+		profTemplates.put("crafting_artisan", (ProfTemplateData) ClientFactory.getInfoFromFile("creation/profession_defaults_crafting_artisan.iff"));
 		profTemplates.put("combat_brawler", (ProfTemplateData) ClientFactory.getInfoFromFile("creation/profession_defaults_combat_brawler.iff"));
 		profTemplates.put("social_entertainer", (ProfTemplateData) ClientFactory.getInfoFromFile("creation/profession_defaults_social_entertainer.iff"));
 		profTemplates.put("combat_marksman", (ProfTemplateData) ClientFactory.getInfoFromFile("creation/profession_defaults_combat_marksman.iff"));
@@ -549,7 +331,7 @@ public class ZoneService extends Service {
 	
 	private boolean lockName(String name, Player player) {
 		String firstName = name.split(" ", 2)[0].toLowerCase(Locale.ENGLISH);
-		if (isLocked(firstName))
+		if (isLocked(player, firstName))
 			return false;
 		synchronized (lockedNames) {
 			unlockName(player);
@@ -576,12 +358,12 @@ public class ZoneService extends Service {
 		}
 	}
 	
-	private boolean isLocked(String firstName) {
+	private boolean isLocked(Player assignedTo, String firstName) {
 		Player player = null;
 		synchronized (lockedNames) {
 			player = lockedNames.get(firstName);
 		}
-		if (player == null)
+		if (player == null || assignedTo == player)
 			return false;
 		PlayerState state = player.getPlayerState();
 		return state != PlayerState.DISCONNECTED && state != PlayerState.LOGGED_OUT;
@@ -591,4 +373,5 @@ public class ZoneService extends Service {
 		return TerrainZoneInsertion.getInsertionForTerrain(Terrain.TATOOINE);
 //		return TerrainZoneInsertion.getInsertionForArea(Terrain.CORELLIA, -5436, 24, -6211);
 	}
+	
 }

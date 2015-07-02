@@ -27,15 +27,19 @@
 ***********************************************************************************/
 package network.packets;
 
+import resources.common.CRC;
+import resources.network.BaselineBuilder;
+
 import java.net.InetAddress;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.charset.Charset;
+import java.util.List;
 
 
 public class Packet {
-	public static Charset ascii   = Charset.forName("UTF-8");
-	public static Charset unicode = Charset.forName("UTF-16LE");
+	public static final Charset ascii   = Charset.forName("UTF-8");
+	public static final Charset unicode = Charset.forName("UTF-16LE");
 	private InetAddress       address;
 	private ByteBuffer        data;
 	private int               port = 0;
@@ -72,9 +76,16 @@ public class Packet {
 	public int getOpcode() {
 		return opcode;
 	}
-	
+
+	public static void addList(ByteBuffer bb, List<? extends BaselineBuilder.Encodable> list) {
+		addInt(bb, list.size());
+		for (BaselineBuilder.Encodable encodable : list) {
+			addData(bb, encodable.encode());
+		}
+	}
+
 	public static void addBoolean(ByteBuffer bb, boolean b) {
-		bb.put(b ? (byte)1 : (byte)0);
+		bb.put(b ? (byte) 1 : (byte) 0);
 	}
 	
 	public static void addAscii(ByteBuffer bb, String s) {
@@ -102,7 +113,7 @@ public class Packet {
 	}
 	
 	public static void addShort(ByteBuffer bb, int i) {
-		bb.order(ByteOrder.LITTLE_ENDIAN).putShort((short)i);
+		bb.order(ByteOrder.LITTLE_ENDIAN).putShort((short) i);
 	}
 	
 	public static void addNetLong(ByteBuffer bb, long l) {
@@ -114,20 +125,28 @@ public class Packet {
 	}
 	
 	public static void addNetShort(ByteBuffer bb, int i) {
-		bb.order(ByteOrder.BIG_ENDIAN).putShort((short)i);
+		bb.order(ByteOrder.BIG_ENDIAN).putShort((short) i);
 	}
 	
 	public static void addByte(ByteBuffer bb, int b) {
-		bb.put((byte)b);
+		bb.put((byte) b);
 	}
-	
+
+	public static void addData(ByteBuffer bb, byte[] data) {
+		bb.put(data);
+	}
+
 	public static void addArray(ByteBuffer bb, byte [] b) {
 		addShort(bb, b.length);
 		bb.put(b);
 	}
-	
+
+	public static void addCrc(ByteBuffer bb, String crcString) {
+		addInt(bb, CRC.getCrc(crcString));
+	}
+
 	public static boolean getBoolean(ByteBuffer bb) {
-		return getByte(bb) == 1 ? true : false;
+		return getByte(bb) == 1;
 	}
 	
 	public static String getAscii(ByteBuffer bb) {
@@ -149,7 +168,7 @@ public class Packet {
 		bb.get(str);
 		return new String(str, unicode);
 	}
-	
+
 	public static byte getByte(ByteBuffer bb) {
 		return bb.get();
 	}
