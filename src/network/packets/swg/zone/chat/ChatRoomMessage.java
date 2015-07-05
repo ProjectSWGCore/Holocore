@@ -27,11 +27,11 @@
 ***********************************************************************************/
 package network.packets.swg.zone.chat;
 
-import java.nio.ByteBuffer;
-
 import network.packets.swg.SWGPacket;
 import resources.chat.ChatAvatar;
 import resources.encodables.OutOfBandPackage;
+
+import java.nio.ByteBuffer;
 
 public class ChatRoomMessage extends SWGPacket {
 	public static final int CRC = resources.common.CRC.getCrc("ChatRoomMessage");
@@ -51,10 +51,10 @@ public class ChatRoomMessage extends SWGPacket {
 	public void decode(ByteBuffer data) {
 		if (!super.decode(data, CRC))
 			return;
-		avatar.decode(data);
-		roomId = getInt(data);
-		message = getUnicode(data);
-		outOfBandPackage.decode(data);
+		avatar				= getEncodable(data, ChatAvatar.class);
+		roomId 				= getInt(data);
+		message 			= getUnicode(data);
+		outOfBandPackage	= getEncodable(data, OutOfBandPackage.class);
 	}
 	
 	public ByteBuffer encode() {

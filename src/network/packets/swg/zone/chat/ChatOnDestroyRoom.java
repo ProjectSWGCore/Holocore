@@ -27,10 +27,10 @@
 ***********************************************************************************/
 package network.packets.swg.zone.chat;
 
-import java.nio.ByteBuffer;
-
 import network.packets.swg.SWGPacket;
 import resources.chat.ChatAvatar;
+
+import java.nio.ByteBuffer;
 
 public class ChatOnDestroyRoom extends SWGPacket {
 	
@@ -55,11 +55,10 @@ public class ChatOnDestroyRoom extends SWGPacket {
 	public void decode(ByteBuffer data) {
 		if (!super.decode(data, CRC))
 			return;
-		owner = new ChatAvatar();
-		owner.decode(data);
-		result = getInt(data);
-		roomId = getInt(data);
-		sequence = getInt(data);
+		owner 		= getEncodable(data, ChatAvatar.class);
+		result 		= getInt(data);
+		roomId 		= getInt(data);
+		sequence 	= getInt(data);
 	}
 	
 	public ByteBuffer encode() {

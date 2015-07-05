@@ -27,14 +27,13 @@
 
 package services.map;
 
-import resources.network.BaselineBuilder;
-import utilities.Encoder;
+import network.packets.Packet;
+import resources.encodables.Encodable;
 
+import java.io.Serializable;
 import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 
-public class MapLocation implements BaselineBuilder.Encodable{
-	
+public class MapLocation implements Encodable, Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private long id;
@@ -121,16 +120,28 @@ public class MapLocation implements BaselineBuilder.Encodable{
 		if (data != null)
 			return data;
 
-		ByteBuffer bb = ByteBuffer.allocate((name.length() * 2) + 23).order(ByteOrder.LITTLE_ENDIAN);
-		bb.putLong(id);
-		bb.put(Encoder.encodeUnicode(name));
-		bb.putFloat(x);
-		bb.putFloat(y);
-		bb.put(category);
-		bb.put(subcategory);
-		bb.put((byte) (isActive ? 1 : 0));
+		ByteBuffer bb = ByteBuffer.allocate((name.length() * 2) + 23);
+		Packet.addLong(bb, id);
+		Packet.addUnicode(bb, name);
+		Packet.addFloat(bb, x);
+		Packet.addFloat(bb, y);
+		Packet.addByte(bb, category);
+		Packet.addByte(bb, subcategory);
+		Packet.addBoolean(bb, isActive);
+
 		data = bb.array();
 		return data;
+	}
+
+	@Override
+	public void decode(ByteBuffer data) {
+		id			= Packet.getLong(data);
+		name		= Packet.getUnicode(data);
+		x			= Packet.getFloat(data);
+		y			= Packet.getFloat(data);
+		category	= Packet.getByte(data);
+		subcategory	= Packet.getByte(data);
+		isActive	= Packet.getBoolean(data);
 	}
 
 	@Override

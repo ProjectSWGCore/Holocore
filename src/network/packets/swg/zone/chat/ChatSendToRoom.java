@@ -48,10 +48,10 @@ public class ChatSendToRoom extends SWGPacket {
 		if (!super.decode(data, CRC))
 			return;
 
-		message = getUnicode(data);
-		outOfBandPackage = getOutOfBand(data);
-		roomId = getInt(data);
-		sequence = getInt(data);
+		message 			= getUnicode(data);
+		outOfBandPackage 	= getEncodable(data, OutOfBandPackage.class);
+		roomId 				= getInt(data);
+		sequence 			= getInt(data);
 	}
 
 	@Override

@@ -30,21 +30,20 @@ package resources.chat;
 import network.packets.Packet;
 import network.packets.swg.SWGPacket;
 import network.packets.swg.zone.chat.ChatRoomMessage;
+import resources.encodables.Encodable;
 import resources.encodables.OutOfBandPackage;
-import resources.network.BaselineBuilder;
 import resources.player.Player;
 import services.player.PlayerManager;
 
 import java.io.Serializable;
 import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author Waverunner
  */
-public class ChatRoom implements Serializable, BaselineBuilder.Encodable, BaselineBuilder.Decodable {
+public class ChatRoom implements Encodable, Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private int id;
@@ -67,6 +66,8 @@ public class ChatRoom implements Serializable, BaselineBuilder.Encodable, Baseli
 	private transient byte[] data;
 
 	public ChatRoom() {
+		owner = new ChatAvatar();
+		creator = new ChatAvatar();
 		moderators = new ArrayList<>();
 		invited = new ArrayList<>();
 		members = new ArrayList<>();
@@ -192,7 +193,17 @@ public class ChatRoom implements Serializable, BaselineBuilder.Encodable, Baseli
 	}
 
 	@Override
-	public void decode(ByteBuffer data) {}
+	public void decode(ByteBuffer data) {
+		id			= Packet.getInt(data);
+		type		= Packet.getInt(data);
+		muted		= Packet.getBoolean(data);
+		path		= Packet.getAscii(data);
+		owner		= Packet.getEncodable(data, ChatAvatar.class);
+		creator		= Packet.getEncodable(data, ChatAvatar.class);
+		title		= Packet.getUnicode(data);
+		moderators	= Packet.getList(data, ChatAvatar.class);
+		invited		= Packet.getList(data, ChatAvatar.class);
+	}
 
 	@Override
 	public byte[] encode() {
@@ -209,22 +220,16 @@ public class ChatRoom implements Serializable, BaselineBuilder.Encodable, Baseli
 		}
 		avatarIdSize += owner.encode().length + creator.encode().length;
 
-		ByteBuffer bb = ByteBuffer.allocate(23 + path.length() + (title.length() * 2) + avatarIdSize).order(ByteOrder.LITTLE_ENDIAN);
-		bb.putInt(id);
-		bb.putInt(type);
-		bb.put(muted ? (byte) 1 : (byte) 0);
+		ByteBuffer bb = ByteBuffer.allocate(23 + path.length() + (title.length() * 2) + avatarIdSize);
+		Packet.addInt(bb, id);
+		Packet.addInt(bb, type);
+		Packet.addBoolean(bb, muted);
 		Packet.addAscii(bb, path);
-		bb.put(owner.encode());
-		bb.put(creator.encode());
+		Packet.addEncodable(bb, owner);
+		Packet.addEncodable(bb, creator);
 		Packet.addUnicode(bb, title);
-		bb.putInt(moderators.size());
-		for (ChatAvatar moderator : moderators) {
-			bb.put(moderator.encode());
-		}
-		bb.putInt(invited.size());
-		for (ChatAvatar invitee : invited) {
-			bb.put(invitee.encode());
-		}
+		Packet.addList(bb, moderators);
+		Packet.addList(bb, invited);
 
 		data = bb.array();
 		modified = false;
@@ -234,10 +239,7 @@ public class ChatRoom implements Serializable, BaselineBuilder.Encodable, Baseli
 
 	@Override
 	public String toString() {
-		return "ChatRoom{" +
-				"id=" + id +
-				", path='" + path + '\'' +
-				", title='" + title + '\'' +
-				'}';
+		return "ChatRoom[id=" + id + ", type=" + type + ", path='" + path + "', title='" + title + '\'' +
+				", owner=" + owner + ", isPublic=" + isPublic + "]";
 	}
 }

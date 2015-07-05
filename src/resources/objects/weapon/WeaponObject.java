@@ -28,12 +28,14 @@
 package resources.objects.weapon;
 
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
+import resources.encodables.Encodable;
 import resources.network.BaselineBuilder;
-import resources.network.BaselineBuilder.Encodable;
 import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
 
-public class WeaponObject extends TangibleObject implements Encodable{
+import java.nio.ByteBuffer;
+
+public class WeaponObject extends TangibleObject implements Encodable {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -128,6 +130,7 @@ public class WeaponObject extends TangibleObject implements Encodable{
 	
 	@Override
 	public byte[] encode() {
+		// TODO: Refactor, causes crashes
 		BaselineBuilder bb = new BaselineBuilder(this, BaselineType.WEAO, 3);
 		createBaseline3(null, bb);
 		byte[] data3 = bb.buildAsBaselinePacket();
@@ -142,5 +145,10 @@ public class WeaponObject extends TangibleObject implements Encodable{
 		
 		return ret;
 	}
-	
+
+	@Override
+	public void decode(ByteBuffer data) {
+		// TODO: Implement decode method in WeaponObject
+	}
+
 }

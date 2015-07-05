@@ -27,14 +27,16 @@
 ***********************************************************************************/
 package resources.encodables.player;
 
+import network.packets.Packet;
+import resources.encodables.Encodable;
 import resources.encodables.OutOfBandPackage;
-import resources.network.BaselineBuilder.Encodable;
 import utilities.Encoder;
 
+import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
-public class Mail implements Encodable {
+public class Mail implements Encodable, Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private int id;
@@ -105,11 +107,20 @@ public class Mail implements Encodable {
 	@Override
 	public byte[] encode() {
 		byte[] oob = outOfBandPackage.encode();
-		ByteBuffer bb = ByteBuffer.allocate(8 + (message.length() * 2) + (subject.length() * 2) + oob.length).order(ByteOrder.LITTLE_ENDIAN);
-		bb.put(Encoder.encodeUnicode(message));
-		bb.put(Encoder.encodeUnicode(subject));
-		bb.put(oob);
+
+		ByteBuffer bb = ByteBuffer.allocate(8 + (message.length() * 2) + (subject.length() * 2) + oob.length);
+		Packet.addUnicode(bb, message);
+		Packet.addUnicode(bb, subject);
+		Packet.addArray(bb, oob);
+
 		return bb.array();
+	}
+
+	@Override
+	public void decode(ByteBuffer data) {
+		message 			= Packet.getUnicode(data);
+		subject				= Packet.getUnicode(data);
+		outOfBandPackage	= Packet.getEncodable(data, OutOfBandPackage.class);
 	}
 
 	public byte[] encodeHeader() {

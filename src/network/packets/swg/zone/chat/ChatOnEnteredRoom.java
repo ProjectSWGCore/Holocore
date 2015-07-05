@@ -27,11 +27,10 @@
 ***********************************************************************************/
 package network.packets.swg.zone.chat;
 
-import java.nio.ByteBuffer;
-
 import network.packets.swg.SWGPacket;
 import resources.chat.ChatAvatar;
-import resources.chat.ChatResult;
+
+import java.nio.ByteBuffer;
 
 public class ChatOnEnteredRoom extends SWGPacket {
 	
@@ -62,19 +61,17 @@ public class ChatOnEnteredRoom extends SWGPacket {
 	public void decode(ByteBuffer data) {
 		if (!super.decode(data, CRC))
 			return;
-		avatar = new ChatAvatar();
-		avatar.decode(data);
-		result = getInt(data);
-		chatRoomId = getInt(data);
-		sequence = getInt(data);
+		avatar 		= getEncodable(data, ChatAvatar.class);
+		result 		= getInt(data);
+		chatRoomId 	= getInt(data);
+		sequence 	= getInt(data);
 	}
 	
 	public ByteBuffer encode() {
-		byte[] avatarData = avatar.encode();
-		ByteBuffer data = ByteBuffer.allocate(avatarData.length + 18);
+		ByteBuffer data = ByteBuffer.allocate(avatar.getSize() + 18);
 		addShort(data, 5);
 		addInt  (data, CRC);
-		data.put(avatarData);
+		addEncodable(data, avatar);
 		addInt(data, result);
 		addInt  (data, chatRoomId);
 		addInt  (data, sequence);

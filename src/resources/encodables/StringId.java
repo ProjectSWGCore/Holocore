@@ -27,12 +27,12 @@
 ***********************************************************************************/
 package resources.encodables;
 
+import network.packets.Packet;
+
+import java.io.Serializable;
 import java.nio.ByteBuffer;
 
-import network.packets.Packet;
-import resources.network.BaselineBuilder.Encodable;
-
-public class StringId implements Encodable, OutOfBandData {
+public class StringId implements OutOfBandData, Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private String key = "";
@@ -72,8 +72,10 @@ public class StringId implements Encodable, OutOfBandData {
 	}
 
 	@Override
-	public int decodeOutOfBandData(ByteBuffer data) {
-		return 0;
+	public void decode(ByteBuffer data) {
+		file 	= Packet.getAscii(data);
+		Packet.getInt(data);
+		key 	= Packet.getAscii(data);
 	}
 
 	@Override
