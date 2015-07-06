@@ -36,7 +36,7 @@ import java.nio.ByteBuffer;
  * @author Waverunner
  */
 public class UpdateTransformWithParentMessage extends SWGPacket {
-	public static final int CRC = 0xC867AB5A;
+	public static final int CRC = getCrc("UpdateTransformWithParentMessage");
 
 	private long cellId;
 	private long objectId;
@@ -66,12 +66,23 @@ public class UpdateTransformWithParentMessage extends SWGPacket {
 	}
 
 	@Override
-	public void decode(java.nio.ByteBuffer data) {
-
+	public void decode(ByteBuffer data) {
+		if (!super.decode(data, CRC))
+			return;
+		cellId			= getLong(data);
+		objectId		= getLong(data);
+		x				= getShort(data);
+		y				= getShort(data);
+		z				= getShort(data);
+		updateCounter	= getInt(data);
+		speed			= getByte(data);
+		direction		= getByte(data);
+		lookDirection	= getByte(data);
+		useLookDirection= getBoolean(data);
 	}
 
 	@Override
-	public java.nio.ByteBuffer encode() {
+	public ByteBuffer encode() {
 		ByteBuffer bb = ByteBuffer.allocate(36);
 		addShort(bb, 11);
 		addInt(bb, CRC);

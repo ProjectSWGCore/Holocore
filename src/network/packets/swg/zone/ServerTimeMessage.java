@@ -27,13 +27,12 @@
 ***********************************************************************************/
 package network.packets.swg.zone;
 
-import java.nio.ByteBuffer;
-
 import network.packets.swg.SWGPacket;
 
+import java.nio.ByteBuffer;
+
 public class ServerTimeMessage extends SWGPacket {
-	
-	public static final int CRC = 0x2EBC3BD9;
+	public static final int CRC = getCrc("ServerTimeMessage");
 	
 	private long time = 0;
 	

@@ -27,44 +27,96 @@
 ***********************************************************************************/
 package network.packets.swg.zone;
 
-import java.nio.ByteBuffer;
-
 import network.packets.swg.SWGPacket;
 
-public class OpenedContainerMessage extends SWGPacket {
-	
-	public static final int CRC = 0x2E11E4AB;
-	
-	private long containerId;
-	
-	public OpenedContainerMessage() {
-		this(0);
+import java.nio.ByteBuffer;
+
+public class UpdateTransformMessage extends SWGPacket {
+	public static final int CRC = getCrc("UpdateTransformMessage");
+
+	private long objId;
+	private short posX;
+	private short posY;
+	private short posZ;
+	private int updateCounter;
+	private byte direction;
+	private float speed;
+	private byte lookAtYaw;
+	private boolean useLookAtYaw;
+
+	public UpdateTransformMessage() {
+		this.objId = 0;
+		this.posX = 0;
+		this.posY = 0;
+		this.posZ = 0;
+		this.updateCounter = 0;
+		this.direction = 0;
+		this.speed = 0;
 	}
 	
-	public OpenedContainerMessage(long containerId) {
-		this.containerId = containerId;
-	}
-	
-	public OpenedContainerMessage(ByteBuffer data) {
+	public UpdateTransformMessage(ByteBuffer data) {
 		decode(data);
 	}
 	
 	public void decode(ByteBuffer data) {
 		if (!super.decode(data, CRC))
 			return;
-		getInt(data); // 0?
-		containerId = getLong(data);
-		getShort(data); // 0?
+		objId = getLong(data);
+		posX = getShort(data);
+		posY = getShort(data);
+		posZ = getShort(data);
+		updateCounter = getInt(data);
+		speed = getByte(data);
+		direction = getByte(data);
+		lookAtYaw = getByte(data);
+		useLookAtYaw = getBoolean(data);
 	}
 	
 	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(20);
-		addShort(data, 2);
-		addInt  (data, CRC);
-		addInt  (data, 0);
-		addLong (data, containerId);
-		addShort(data, 0);
+		ByteBuffer data = ByteBuffer.allocate(28);
+		addShort(data, 10);
+		addInt(  data, CRC);
+		addLong( data, objId);
+		addShort(data, posX);
+		addShort(data, posY);
+		addShort(data, posZ);
+		addInt  (data, updateCounter);
+		addByte (data, (byte) speed);
+		addByte (data, direction);
+		addByte (data, lookAtYaw); // lookAtYaw
+		addBoolean (data, useLookAtYaw); // useLookAtYaw
 		return data;
 	}
+	
+	public void setObjectId(long objId) { this.objId = objId; }
+	public void setX(short x) { this.posX = x; }
+	public void setY(short y) { this.posY = y; }
+	public void setZ(short z) { this.posZ = z; }
+	public void setUpdateCounter(int count) { this.updateCounter = count; }
+	public void setDirection(byte d) { this.direction = d; }
+	public void setSpeed(float speed) { this.speed = speed; }
+	
+	public long getObjectId() { return objId; }
+	public short getX() { return posX; }
+	public short getY() { return posY; }
+	public short getZ() { return posZ; }
+	public int getUpdateCounter() { return updateCounter; }
+	public byte getDirection() { return direction; }
+	public float getSpeed() { return speed; }
 
+	public boolean isUseLookAtYaw() {
+		return useLookAtYaw;
+	}
+
+	public void setUseLookAtYaw(boolean useLookAtYaw) {
+		this.useLookAtYaw = useLookAtYaw;
+	}
+
+	public byte getLookAtYaw() {
+		return lookAtYaw;
+	}
+
+	public void setLookAtYaw(byte lookAtYaw) {
+		this.lookAtYaw = lookAtYaw;
+	}
 }

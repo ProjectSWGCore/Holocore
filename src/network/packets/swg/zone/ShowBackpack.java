@@ -27,13 +27,12 @@
 ***********************************************************************************/
 package network.packets.swg.zone;
 
-import java.nio.ByteBuffer;
-
 import network.packets.swg.SWGPacket;
 
-public class ShowBackpack extends SWGPacket {
+import java.nio.ByteBuffer;
 
-	public static final int CRC = 0x8824757B;
+public class ShowBackpack extends SWGPacket {
+	public static final int CRC = getCrc("ShowBackpack");
 	
 	private long objectId;
 	private boolean showBackpack;

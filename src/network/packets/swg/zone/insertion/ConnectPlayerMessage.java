@@ -27,14 +27,15 @@
 ***********************************************************************************/
 package network.packets.swg.zone.insertion;
 
-import java.nio.ByteBuffer;
-
 import network.packets.swg.SWGPacket;
 
+import java.nio.ByteBuffer;
+
 public class ConnectPlayerMessage extends SWGPacket {
-	
-	public static final int CRC = 0x2E365218;
-	
+	public static final int CRC = getCrc("ConnectPlayerMessage");
+
+	private int stationId = 0;
+
 	public ConnectPlayerMessage() {
 		
 	}
@@ -42,6 +43,7 @@ public class ConnectPlayerMessage extends SWGPacket {
 	public void decode(ByteBuffer data) {
 		if (!super.decode(data, CRC))
 			return;
+		stationId = getInt(data);
 	}
 	
 	public ByteBuffer encode() {
@@ -49,7 +51,7 @@ public class ConnectPlayerMessage extends SWGPacket {
 		ByteBuffer data = ByteBuffer.allocate(length);
 		addShort(data, 2);
 		addInt(  data, CRC);
-		addInt(  data, 0);
+		addInt(  data, stationId); // stationId that's sent when using auto-login
 		return data;
 	}
 }

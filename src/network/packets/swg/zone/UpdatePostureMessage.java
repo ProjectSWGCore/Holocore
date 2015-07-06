@@ -27,14 +27,14 @@
 ***********************************************************************************/
 package network.packets.swg.zone;
 
-import java.nio.ByteBuffer;
-
 import network.packets.swg.SWGPacket;
 import resources.Posture;
 
+import java.nio.ByteBuffer;
+
 public class UpdatePostureMessage extends SWGPacket {
-	
-	public static final int CRC = 0x00BDE6B41;
+	public static final int CRC = getCrc("UpdatePostureMessage");
+
 	private int posture = 0;
 	private long objId = 0;
 	

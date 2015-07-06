@@ -35,7 +35,7 @@ import java.util.Arrays;
 import java.util.Collection;
 
 public class ChatRoomList extends SWGPacket {
-	public static final int CRC = resources.common.CRC.getCrc("ChatRoomList");
+	public static final int CRC = getCrc("ChatRoomList");
 
 	private Collection<ChatRoom> rooms;
 

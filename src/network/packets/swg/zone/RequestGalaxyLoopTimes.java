@@ -27,29 +27,26 @@
 ***********************************************************************************/
 package network.packets.swg.zone;
 
-import java.nio.ByteBuffer;
-
 import network.packets.swg.SWGPacket;
 
-public class HeartBeatMessage extends SWGPacket {
+import java.nio.ByteBuffer;
+
+public class RequestGalaxyLoopTimes extends SWGPacket {
+	public static final int CRC = getCrc("RequestGalaxyLoopTimes");
 	
-	public static final int CRC = 0xA16CF9AF;
-	
-	public HeartBeatMessage() {
+	public RequestGalaxyLoopTimes() {
 		
 	}
 	
 	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
-			return;
+		super.decode(data, CRC);
 	}
 	
 	public ByteBuffer encode() {
-		int length = 10;
+		int length = 6;
 		ByteBuffer data = ByteBuffer.allocate(length);
 		addShort(data, 1);
 		addInt(  data, CRC);
-		addInt(  data, 0);
 		return data;
 	}
 }

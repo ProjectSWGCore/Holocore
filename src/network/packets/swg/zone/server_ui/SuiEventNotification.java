@@ -27,15 +27,14 @@
 ***********************************************************************************/
 package network.packets.swg.zone.server_ui;
 
+import network.packets.swg.SWGPacket;
+
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
-import network.packets.swg.SWGPacket;
-
 public class SuiEventNotification extends SWGPacket {
-	
-	public static final int CRC = 0x092D3564;
+	public static final int CRC = getCrc("SuiEventNotification");
 	
 	private int windowId;
 	private int eventId;

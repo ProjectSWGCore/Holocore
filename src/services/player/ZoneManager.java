@@ -30,15 +30,6 @@ package services.player;
 import intents.GalacticIntent;
 import intents.PlayerEventIntent;
 import intents.RequestZoneInIntent;
-
-import java.io.File;
-import java.io.IOException;
-import org.eclipse.jgit.api.Git;
-import org.eclipse.jgit.api.errors.GitAPIException;
-import org.eclipse.jgit.lib.Constants;
-import org.eclipse.jgit.lib.Repository;
-import org.eclipse.jgit.revwalk.RevCommit;
-
 import main.ProjectSWG;
 import network.packets.Packet;
 import network.packets.soe.SessionRequest;
@@ -48,10 +39,10 @@ import network.packets.swg.login.ClientPermissionsMessage;
 import network.packets.swg.login.ServerId;
 import network.packets.swg.login.ServerString;
 import network.packets.swg.zone.CmdSceneReady;
-import network.packets.swg.zone.GalaxyLoopTimesRequest;
 import network.packets.swg.zone.GalaxyLoopTimesResponse;
-import network.packets.swg.zone.HeartBeatMessage;
+import network.packets.swg.zone.HeartBeat;
 import network.packets.swg.zone.ParametersMessage;
+import network.packets.swg.zone.RequestGalaxyLoopTimes;
 import network.packets.swg.zone.SetWaypointColor;
 import network.packets.swg.zone.ShowBackpack;
 import network.packets.swg.zone.ShowHelmet;
@@ -61,6 +52,11 @@ import network.packets.swg.zone.chat.ChatSystemMessage;
 import network.packets.swg.zone.chat.VoiceChatStatus;
 import network.packets.swg.zone.insertion.ChatServerStatus;
 import network.packets.swg.zone.insertion.CmdStartScene;
+import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.api.errors.GitAPIException;
+import org.eclipse.jgit.lib.Constants;
+import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.revwalk.RevCommit;
 import resources.Galaxy;
 import resources.Location;
 import resources.Race;
@@ -78,6 +74,9 @@ import resources.player.PlayerFlags;
 import resources.player.PlayerState;
 import resources.server_info.Config;
 import resources.server_info.Log;
+
+import java.io.File;
+import java.io.IOException;
 
 public class ZoneManager extends Manager {
 	
@@ -113,8 +112,8 @@ public class ZoneManager extends Manager {
 			sendServerInfo(intent.getGalaxy(), networkId);
 		if (p instanceof ClientIdMsg)
 			handleClientIdMsg(player, (ClientIdMsg) p);
-		if (p instanceof GalaxyLoopTimesRequest)
-			handleGalaxyLoopTimesRequest(player, (GalaxyLoopTimesRequest) p);
+		if (p instanceof RequestGalaxyLoopTimes)
+			handleGalaxyLoopTimesRequest(player, (RequestGalaxyLoopTimes) p);
 		if (p instanceof CmdSceneReady)
 			handleCmdSceneReady(player, (CmdSceneReady) p);
 		if (p instanceof SetWaypointColor)
@@ -184,7 +183,7 @@ public class ZoneManager extends Manager {
 		Race race = creature.getRace();
 		Location l = creature.getLocation();
 		long time = (long)(ProjectSWG.getCoreTime()/1E3);
-		sendPacket(player, new HeartBeatMessage());
+		sendPacket(player, new HeartBeat());
 		sendPacket(player, new ChatServerStatus(true));
 		sendPacket(player, new VoiceChatStatus());
 		sendPacket(player, new ParametersMessage());
@@ -246,12 +245,12 @@ public class ZoneManager extends Manager {
 	private void handleClientIdMsg(Player player, ClientIdMsg clientId) {
 		System.out.println("[" + player.getUsername() + "] Connected to the zone server. IP: " + clientId.getAddress() + ":" + clientId.getPort());
 		Log.i("ZoneService", "%s connected to the zone server from %s:%d", player.getUsername(), clientId.getAddress(), clientId.getPort());
-		sendPacket(player.getNetworkId(), new HeartBeatMessage());
+		sendPacket(player.getNetworkId(), new HeartBeat());
 		sendPacket(player.getNetworkId(), new AccountFeatureBits());
 		sendPacket(player.getNetworkId(), new ClientPermissionsMessage());
 	}
 	
-	private void handleGalaxyLoopTimesRequest(Player player, GalaxyLoopTimesRequest req) {
+	private void handleGalaxyLoopTimesRequest(Player player, RequestGalaxyLoopTimes req) {
 		sendPacket(player, new GalaxyLoopTimesResponse(ProjectSWG.getCoreTime()/1000));
 	}
 	

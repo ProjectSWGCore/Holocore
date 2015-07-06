@@ -27,12 +27,12 @@
 ***********************************************************************************/
 package network.packets.swg.zone.spatial;
 
-import java.nio.ByteBuffer;
 import network.packets.swg.SWGPacket;
 
+import java.nio.ByteBuffer;
+
 public class GetMapLocationsMessage extends SWGPacket {
-	
-	public static final int CRC = 0x1A7AB839;
+	public static final int CRC = getCrc("GetMapLocationsMessage");
 	
 	private String planet;
 	private int versionStatic;

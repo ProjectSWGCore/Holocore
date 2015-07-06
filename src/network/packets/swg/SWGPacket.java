@@ -30,6 +30,7 @@ package network.packets.swg;
 import network.PacketType;
 import network.packets.Packet;
 import resources.Location;
+import resources.common.CRC;
 
 import java.nio.ByteBuffer;
 
@@ -98,5 +99,9 @@ public class SWGPacket extends Packet {
 	
 	public ByteBuffer getData() {
 		return data;
+	}
+
+	public static int getCrc(String string) {
+		return CRC.getCrc(string);
 	}
 }

@@ -80,6 +80,11 @@ public class Packet {
 	}
 
 	public static void addList(ByteBuffer bb, Collection<? extends Encodable> list) {
+		if (list == null) {
+			addInt(bb, 0);
+			return;
+		}
+
 		addInt(bb, list.size());
 		for (Encodable encodable : list) {
 			addData(bb, encodable.encode());
@@ -237,7 +242,7 @@ public class Packet {
 		int size = getInt(bb);
 
 		if (size <= 0)
-			return null;
+			return new ArrayList<>();
 
 		try {
 			for (int i = 0; i < size; i++) {

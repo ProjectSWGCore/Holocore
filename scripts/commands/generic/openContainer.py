@@ -1,7 +1,6 @@
-import sys
-from network.packets.swg.zone import OpenedContainerMessage
+from network.packets.swg.zone import ClientOpenContainerMessage
 
 def execute(objManager, player, target, args):	
-	player.sendPacket(OpenedContainerMessage(target.getObjectId()))
+	player.sendPacket(ClientOpenContainerMessage(target.getObjectId()))
 	return
 	

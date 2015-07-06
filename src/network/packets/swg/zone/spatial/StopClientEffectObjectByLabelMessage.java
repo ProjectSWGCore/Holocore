@@ -27,13 +27,12 @@
 ***********************************************************************************/
 package network.packets.swg.zone.spatial;
 
-import java.nio.ByteBuffer;
-
 import network.packets.swg.SWGPacket;
 
+import java.nio.ByteBuffer;
+
 public class StopClientEffectObjectByLabelMessage extends SWGPacket {
-	
-	public static final int CRC = 0xAD6F6B26;
+	public static final int CRC = getCrc("StopClientEffectObjectByLabelMessage");
 	
 	private long objectId;
 	private String effect;

@@ -27,16 +27,15 @@
 ***********************************************************************************/
 package network.packets.swg.zone.insertion;
 
-import java.nio.ByteBuffer;
-
+import network.packets.swg.SWGPacket;
 import resources.Location;
 import resources.Race;
 import resources.Terrain;
-import network.packets.swg.SWGPacket;
+
+import java.nio.ByteBuffer;
 
 public class CmdStartScene extends SWGPacket {
-	
-	public static final int CRC = 0x3AE6DFAE;
+	public static final int CRC = getCrc("CmdStartScene");
 	
 	private boolean ignoreLayoutFiles;
 	private long charId;
@@ -69,7 +68,7 @@ public class CmdStartScene extends SWGPacket {
 		l.setX(getFloat(data));
 		l.setY(getFloat(data));
 		l.setZ(getFloat(data));
-		getFloat(data);
+		getFloat(data); // yaw
 		race = Race.getRaceByFile(getAscii(data));
 		galacticTime = getLong(data);
 		getInt(data); // 0x8EB5EA4E

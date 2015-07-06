@@ -27,96 +27,25 @@
 ***********************************************************************************/
 package network.packets.swg.zone;
 
-import java.nio.ByteBuffer;
-
 import network.packets.swg.SWGPacket;
 
-public class UpdateTransformsMessage extends SWGPacket {
-	
-	public static final int CRC = 0x1B24F808;
-	private long objId;
-	private short posX;
-	private short posY;
-	private short posZ;
-	private int updateCounter;
-	private byte direction;
-	private float speed;
-	private byte lookAtYaw;
-	private boolean useLookAtYaw;
+import java.nio.ByteBuffer;
 
-	public UpdateTransformsMessage() {
-		this.objId = 0;
-		this.posX = 0;
-		this.posY = 0;
-		this.posZ = 0;
-		this.updateCounter = 0;
-		this.direction = 0;
-		this.speed = 0;
-	}
+public class HeartBeat extends SWGPacket {
+	public static final int CRC = getCrc("HeartBeat");
 	
-	public UpdateTransformsMessage(ByteBuffer data) {
-		decode(data);
+	public HeartBeat() {
+		
 	}
 	
 	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
-			return;
-		objId = getLong(data);
-		posX = getShort(data);
-		posY = getShort(data);
-		posZ = getShort(data);
-		updateCounter = getInt(data);
-		speed = getByte(data);
-		direction = getByte(data);
-		getByte(data);
-		getByte(data);
+		super.decode(data, CRC);
 	}
 	
 	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(28);
-		addShort(data, 10);
+		ByteBuffer data = ByteBuffer.allocate(6);
+		addShort(data, 1);
 		addInt(  data, CRC);
-		addLong( data, objId);
-		addShort(data, posX);
-		addShort(data, posY);
-		addShort(data, posZ);
-		addInt  (data, updateCounter);
-		addByte (data, (byte) speed);
-		addByte (data, direction);
-		addByte (data, lookAtYaw); // lookAtYaw
-		addBoolean (data, useLookAtYaw); // useLookAtYaw
 		return data;
-	}
-	
-	public void setObjectId(long objId) { this.objId = objId; }
-	public void setX(short x) { this.posX = x; }
-	public void setY(short y) { this.posY = y; }
-	public void setZ(short z) { this.posZ = z; }
-	public void setUpdateCounter(int count) { this.updateCounter = count; }
-	public void setDirection(byte d) { this.direction = d; }
-	public void setSpeed(float speed) { this.speed = speed; }
-	
-	public long getObjectId() { return objId; }
-	public short getX() { return posX; }
-	public short getY() { return posY; }
-	public short getZ() { return posZ; }
-	public int getUpdateCounter() { return updateCounter; }
-	public byte getDirection() { return direction; }
-	public float getSpeed() { return speed; }
-
-	public boolean isUseLookAtYaw() {
-		return useLookAtYaw;
-	}
-
-	public void setUseLookAtYaw(boolean useLookAtYaw) {
-		this.useLookAtYaw = useLookAtYaw;
-	}
-
-	public byte getLookAtYaw() {
-		return lookAtYaw;
-	}
-
-	public void setLookAtYaw(byte lookAtYaw) {
-		this.lookAtYaw = lookAtYaw;
 	}
 }

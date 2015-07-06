@@ -27,28 +27,43 @@
 ***********************************************************************************/
 package network.packets.swg.zone;
 
-import java.nio.ByteBuffer;
-
 import network.packets.swg.SWGPacket;
 
-public class GalaxyLoopTimesRequest extends SWGPacket {
+import java.nio.ByteBuffer;
+
+public class ClientOpenContainerMessage extends SWGPacket {
+	public static final int CRC = getCrc("ClientOpenContainerMessage");
 	
-	public static final int CRC = 0x7D842D68;
+	private long containerId;
+	private String slot;
+
+	public ClientOpenContainerMessage() {
+		this(0);
+	}
 	
-	public GalaxyLoopTimesRequest() {
-		
+	public ClientOpenContainerMessage(long containerId) {
+		this.containerId = containerId;
+	}
+	
+	public ClientOpenContainerMessage(ByteBuffer data) {
+		decode(data);
 	}
 	
 	public void decode(ByteBuffer data) {
 		if (!super.decode(data, CRC))
 			return;
+		containerId = getLong(data);
+		slot		= getAscii(data);
 	}
 	
 	public ByteBuffer encode() {
-		int length = 6;
-		ByteBuffer data = ByteBuffer.allocate(length);
-		addShort(data, 1);
-		addInt(  data, CRC);
+		ByteBuffer data = ByteBuffer.allocate(20 + slot.length());
+		addShort(data, 2);
+		addInt  (data, CRC);
+		addInt  (data, 0);
+		addLong (data, containerId);
+		addAscii(data, slot);
 		return data;
 	}
+
 }

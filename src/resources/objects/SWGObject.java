@@ -27,18 +27,13 @@
 ***********************************************************************************/
 package resources.objects;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.Serializable;
-import java.util.*;
-
 import network.packets.Packet;
 import network.packets.swg.zone.SceneCreateObjectByCrc;
 import network.packets.swg.zone.SceneDestroyObject;
 import network.packets.swg.zone.SceneEndBaselines;
 import network.packets.swg.zone.UpdateContainmentMessage;
+import network.packets.swg.zone.UpdateTransformMessage;
 import network.packets.swg.zone.UpdateTransformWithParentMessage;
-import network.packets.swg.zone.UpdateTransformsMessage;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import network.packets.swg.zone.object_controller.DataTransform;
 import network.packets.swg.zone.object_controller.DataTransformWithParent;
@@ -54,6 +49,19 @@ import resources.player.Player;
 import resources.player.PlayerState;
 import resources.server_info.Log;
 import utilities.Encoder.StringType;
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	
@@ -779,7 +787,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	}
 
 	public void sendDataTransforms(Location loc, byte direction, double speed, float lookAtYaw, boolean useLookAtYaw, int updates) {
-		UpdateTransformsMessage transform = new UpdateTransformsMessage();
+		UpdateTransformMessage transform = new UpdateTransformMessage();
 		transform.setObjectId(getObjectId()); // (short) (xPosition * 4 + 0.5)
 		transform.setX((short) (loc.getX() * 4));
 		transform.setY((short) (loc.getY() * 4));

@@ -27,14 +27,15 @@
 ***********************************************************************************/
 package network.packets.swg.zone;
 
-import java.nio.ByteBuffer;
-
 import network.packets.swg.SWGPacket;
 
+import java.nio.ByteBuffer;
+
 public class ParametersMessage extends SWGPacket {
-	
-	public static final int CRC = 0x487652DA;
-	
+	public static final int CRC = getCrc("ParametersMessage");
+
+	private int weatherInterval = 900;
+
 	public ParametersMessage() {
 		
 	}
@@ -42,15 +43,14 @@ public class ParametersMessage extends SWGPacket {
 	public void decode(ByteBuffer data) {
 		if (!super.decode(data, CRC))
 			return;
-		getInt(data);
+		weatherInterval = getInt(data);
 	}
 	
 	public ByteBuffer encode() {
-		int length = 14;
-		ByteBuffer data = ByteBuffer.allocate(length);
+		ByteBuffer data = ByteBuffer.allocate(10);
 		addShort(data, 2);
 		addInt(  data, CRC);
-		addInt(  data, 900);
+		addInt(  data, weatherInterval);
 		return data;
 	}
 }

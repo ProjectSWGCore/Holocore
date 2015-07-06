@@ -27,15 +27,14 @@
 ***********************************************************************************/
 package network.packets.swg.zone.server_ui;
 
+import network.packets.swg.SWGPacket;
+
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
-import network.packets.swg.SWGPacket;
-
 public class SuiCreatePageMessage extends SWGPacket {
-	
-	public static final int CRC = 0xD44B7259;
+	public static final int CRC = getCrc("SuiCreatePageMessage");
 	
 	private int windowId;
 	private String scriptName;
@@ -44,7 +43,7 @@ public class SuiCreatePageMessage extends SWGPacket {
 	private float maxDistance;
 	
 	public SuiCreatePageMessage() {
-		this(0, "", new ArrayList<SuiWindowComponent>(), 0, 0);
+		this(0, "", new ArrayList<>(), 0, 0);
 	}
 	
 	public SuiCreatePageMessage(int windowId, String scriptName, List <SuiWindowComponent> components, long objectId, float maxDistance) {

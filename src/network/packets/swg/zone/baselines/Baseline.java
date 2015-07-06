@@ -27,13 +27,13 @@
 ***********************************************************************************/
 package network.packets.swg.zone.baselines;
 
-import java.nio.ByteBuffer;
-
 import network.packets.swg.SWGPacket;
 
+import java.nio.ByteBuffer;
+
 public class Baseline extends SWGPacket {
-	
-	public static final int CRC = 0x68A75F0C;
+	public static final int CRC = getCrc("BaselinesMessage");
+
 	private BaselineType type;
 	private int num;
 	private short opCount;
@@ -75,7 +75,6 @@ public class Baseline extends SWGPacket {
 		addInt(  data, baseData.length + 2);
 		addShort( data, (opCount == 0 ? 5 : opCount));
 		data.put(baseData);
-		// TODO: It seems that baselines are being called to encode 3 times, might be possible they're also being sent 3 times as well...
 		return data;
 	}
 	
