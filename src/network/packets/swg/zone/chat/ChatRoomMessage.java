@@ -61,12 +61,12 @@ public class ChatRoomMessage extends SWGPacket {
 		byte[] oob = outOfBandPackage.encode();
 		int length = 14 + avatar.encode().length + oob.length + message.length() * 2;
 		ByteBuffer data = ByteBuffer.allocate(length);
-		addShort(  data, 5);
-		addInt(    data, CRC);
-		data.put(avatar.encode());
-		addInt(    data, roomId);
+		addShort(data, 5);
+		addInt(data, CRC);
+		addEncodable(data, avatar);
+		addInt(data, roomId);
 		addUnicode(data, message);
-		data.put(outOfBandPackage.encode());
+		addArray(data, oob);
 		return data;
 	}
 }

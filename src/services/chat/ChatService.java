@@ -176,15 +176,18 @@ public class ChatService extends Service {
 	
 	private void processSwgPacket(PlayerManager pm, Player player, String galaxyName, SWGPacket p) {
 		switch (p.getPacketType()) {
+			/* Chat Rooms */
 			case CHAT_QUERY_ROOM:
 				if (p instanceof ChatQueryRoom)
 					handleChatQueryRoom(player, (ChatQueryRoom) p);
 				break;
 			case CHAT_ENTER_ROOM_BY_ID:
-				if (p instanceof ChatEnterRoomById) {
-					ChatEnterRoomById enterRoomById = (ChatEnterRoomById) p;
-					enterChatChannel(player, enterRoomById.getRoomId(), enterRoomById.getSequence());
-				}
+				if (!(p instanceof ChatEnterRoomById))
+					return;
+			{
+				ChatEnterRoomById enterRoomById = (ChatEnterRoomById) p;
+				enterChatChannel(player, enterRoomById.getRoomId(), enterRoomById.getSequence());
+			}
 				break;
 			case CHAT_REMOVE_AVATAR_FROM_ROOM:
 				if (p instanceof ChatRemoveAvatarFromRoom)
@@ -198,10 +201,11 @@ public class ChatService extends Service {
 				if (p instanceof ChatRequestRoomList)
 					handleChatRoomListRequest(player);
 				break;
-			case CHAT_INSTANT_MESSAGE_TO_CHARACTER:
-				if (p instanceof ChatInstantMessageToCharacter)
-					handleInstantMessage(pm, player, (ChatInstantMessageToCharacter) p);
+			case CHAT_CREATE_ROOM:
+				if (p instanceof ChatCreateRoom)
+					handleChatCreateRoom(player, (ChatCreateRoom) p);
 				break;
+			/* Mails */
 			case CHAT_PERSISTENT_MESSAGE_TO_SERVER:
 				if (p instanceof ChatPersistentMessageToServer)
 					handleSendPersistentMessage(pm, player, galaxyName, (ChatPersistentMessageToServer) p);
@@ -213,6 +217,11 @@ public class ChatService extends Service {
 			case CHAT_DELETE_PERSISTENT_MESSAGE:
 				if (p instanceof ChatDeletePersistentMessage)
 					deletePersistentMessage(((ChatDeletePersistentMessage) p).getMailId());
+				break;
+			/* Misc */
+			case CHAT_INSTANT_MESSAGE_TO_CHARACTER:
+				if (p instanceof ChatInstantMessageToCharacter)
+					handleInstantMessage(pm, player, (ChatInstantMessageToCharacter) p);
 				break;
 			default:
 				break;
@@ -281,6 +290,23 @@ public class ChatService extends Service {
 	}
 
 	/* Chat Rooms */
+
+	private void handleChatCreateRoom(Player player, ChatCreateRoom p) {
+		String path = p.getRoomName();
+		String title = p.getRoomTitle();
+		ChatRoom room = getRoom(path);
+
+		ChatResult result = ChatResult.SUCCESS;
+		if (room != null)
+			result = ChatResult.ROOM_ALREADY_EXISTS;
+
+		if (result == ChatResult.SUCCESS) {
+			room = createRoom(ChatAvatar.getFromPlayer(player), p.isPublic(), path, title);
+			room.setMuted(p.isModerated());
+		}
+
+		player.sendPacket(new ChatOnCreateRoom(result.getCode(), room, p.getSequence()));
+	}
 
 	private void handleChatSendToRoom(Player player, ChatSendToRoom p) {
 		ChatResult result = ChatResult.SUCCESS;
@@ -398,9 +424,7 @@ public class ChatService extends Service {
 		// TODO: Check if player is appropriate faction for the room (Rebel and imperial chat rooms)
 
 		// Server-based list so we can join chat channels automatically
-		List<String> joinedChannels = ghost.getJoinedChannels();
-		if (!joinedChannels.contains(room.getPath()))
-			joinedChannels.add(room.getPath());
+		ghost.addJoinedChannel(room.getPath());
 
 		// Re-send the player the room list with just this room as it could have been private/hidden
 		// This also "refreshes" the client, not sending this will cause a Chat channel unavailable message.
@@ -443,7 +467,7 @@ public class ChatService extends Service {
 		if (ghost == null)
 			return; // ChatOnLeaveRoom doesn't do anything other than for a ChatResult.SUCCESS, so no need to send a fail
 
-		if (!room.getMembers().remove(avatar) && !ghost.getJoinedChannels().remove(room.getPath()))
+		if (!room.getMembers().remove(avatar) && !ghost.removeJoinedChannel(room.getPath()))
 			return;
 
 		player.sendPacket(new ChatOnLeaveRoom(avatar, ChatResult.SUCCESS.getCode(), room.getId(), sequence));

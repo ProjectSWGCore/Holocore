@@ -45,6 +45,7 @@ import utilities.MathUtils;
 import utilities.Encoder.StringType;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class PlayerObject extends IntangibleObject {
@@ -389,7 +390,19 @@ public class PlayerObject extends IntangibleObject {
 	}
 
 	public List<String> getJoinedChannels() {
-		return joinedChannels;
+		return Collections.unmodifiableList(joinedChannels);
+	}
+
+	public boolean addJoinedChannel(String path) {
+		synchronized (joinedChannels) {
+			return !joinedChannels.contains(path) && joinedChannels.add(path);
+		}
+	}
+
+	public boolean removeJoinedChannel(String path) {
+		synchronized (joinedChannels) {
+			return joinedChannels.remove(path);
+		}
 	}
 
 	private int getProfessionIcon() {

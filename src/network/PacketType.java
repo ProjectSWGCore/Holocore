@@ -106,6 +106,8 @@ public enum PacketType {
 	SERVER_WEATHER_MESSAGE						(ServerWeatherMessage.CRC, 			ServerWeatherMessage.class),
 
 		// Chat
+		CHAT_CREATE_ROOM						(ChatCreateRoom.CRC,				ChatCreateRoom.class),
+		CHAT_ON_CREATE_ROOM						(ChatOnCreateRoom.CRC,				ChatOnCreateRoom.class),
 		CHAT_FRIENDS_LIST_UPDATE				(ChatFriendsListUpdate.CRC, 		ChatFriendsListUpdate.class),
 		CHAT_IGNORE_LIST						(ChatIgnoreList.CRC, 				ChatIgnoreList.class),
 		CHAT_INSTANT_MESSAGE_TO_CLIENT			(ChatInstantMessageToClient.CRC, 	ChatInstantMessageToClient.class),
