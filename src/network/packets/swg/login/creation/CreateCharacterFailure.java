@@ -33,8 +33,8 @@ import network.packets.swg.SWGPacket;
 
 
 public class CreateCharacterFailure extends SWGPacket {
-	
-	public static final int CRC = 0xDF333C6E;
+	public static final int CRC = getCrc("ClientCreateCharacterFailed");
+
 	private NameFailureReason reason;
 	
 	public CreateCharacterFailure() {

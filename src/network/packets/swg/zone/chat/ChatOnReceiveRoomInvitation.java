@@ -32,8 +32,7 @@ import java.nio.ByteBuffer;
 import network.packets.swg.SWGPacket;
 
 public class ChatOnReceiveRoomInvitation extends SWGPacket {
-	
-	public static final int CRC = 0xC17EB06D;
+	public static final int CRC = getCrc("ChatOnReceiveRoomInvitation");
 	
 	public ChatOnReceiveRoomInvitation() {}
 

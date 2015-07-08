@@ -33,8 +33,7 @@ import resources.chat.ChatAvatar;
 import java.nio.ByteBuffer;
 
 public class ChatOnDestroyRoom extends SWGPacket {
-	
-	public static final int CRC = 0xE8EC5877;
+	public static final int CRC = getCrc("ChatOnDestroyRoom");
 
 	private ChatAvatar owner;
 	private int result;

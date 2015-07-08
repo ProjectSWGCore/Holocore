@@ -35,7 +35,7 @@ import java.nio.ByteBuffer;
  * @author Waverunner
  */
 public class ChatQueryRoom extends SWGPacket {
-	public static final int CRC = resources.common.CRC.getCrc("ChatQueryRoom");
+	public static final int CRC = getCrc("ChatQueryRoom");
 
 	private int sequence;
 	private String roomPath;

@@ -33,8 +33,7 @@ import network.packets.swg.SWGPacket;
 
 
 public class LoginClientId extends SWGPacket {
-	
-	public static final int CRC = 0x41131F96;
+	public static final int CRC = getCrc("LoginClientId");
 	
 	private String username;
 	private String password;

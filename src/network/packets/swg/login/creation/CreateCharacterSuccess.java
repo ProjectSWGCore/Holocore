@@ -33,8 +33,8 @@ import network.packets.swg.SWGPacket;
 
 
 public class CreateCharacterSuccess extends SWGPacket {
-	
-	public static final int CRC = 0x1DB575CC;
+	public static final int CRC = getCrc("ClientCreateCharacterSuccess");
+
 	private long id = 0;
 	
 	public CreateCharacterSuccess() {

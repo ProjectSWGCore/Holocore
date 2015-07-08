@@ -36,7 +36,7 @@ import java.nio.ByteBuffer;
  * @author Waverunner
  */
 public class ChatSendToRoom extends SWGPacket {
-	public static final int CRC = resources.common.CRC.getCrc("ChatSendToRoom");
+	public static final int CRC = getCrc("ChatSendToRoom");
 
 	private String message;
 	private OutOfBandPackage outOfBandPackage;

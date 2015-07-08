@@ -36,7 +36,7 @@ import java.nio.ByteBuffer;
  * @author Waverunner
  */
 public class ChatRemoveAvatarFromRoom extends SWGPacket {
-	public static final int CRC = resources.common.CRC.getCrc("ChatRemoveAvatarFromRoom");
+	public static final int CRC = getCrc("ChatRemoveAvatarFromRoom");
 
 	private ChatAvatar avatar;
 	private String path;

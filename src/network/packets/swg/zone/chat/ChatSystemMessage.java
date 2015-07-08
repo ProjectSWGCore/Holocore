@@ -33,8 +33,8 @@ import resources.encodables.OutOfBandPackage;
 import network.packets.swg.SWGPacket;
 
 public class ChatSystemMessage extends SWGPacket {
-	
-	public static final int CRC = 0x6D2A6413;
+	public static final int CRC = getCrc("ChatSystemMessage");
+
 	private int type = 0;
 	private String message = "";
 	private OutOfBandPackage oob;
@@ -85,7 +85,7 @@ public class ChatSystemMessage extends SWGPacket {
 			addUnicode(data, "");
 		} else {
 			addInt(data, 0);
-			data.put(oobData);
+			addArray(data, oobData);
 		}
 		
 		return data;

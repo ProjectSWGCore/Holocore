@@ -33,8 +33,7 @@ import resources.chat.ChatAvatar;
 import java.nio.ByteBuffer;
 
 public class ChatOnEnteredRoom extends SWGPacket {
-	
-	public static final int CRC = 0xE69BDC0A;
+	public static final int CRC = getCrc("ChatOnEnteredRoom");
 
 	private ChatAvatar avatar;
 	private int result;

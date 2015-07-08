@@ -34,7 +34,7 @@ import resources.encodables.OutOfBandPackage;
 import java.nio.ByteBuffer;
 
 public class ChatRoomMessage extends SWGPacket {
-	public static final int CRC = resources.common.CRC.getCrc("ChatRoomMessage");
+	public static final int CRC = getCrc("ChatRoomMessage");
 
 	private ChatAvatar avatar;
 	private int roomId = 0;

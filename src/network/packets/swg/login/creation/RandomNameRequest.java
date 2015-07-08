@@ -33,8 +33,8 @@ import network.packets.swg.SWGPacket;
 
 
 public class RandomNameRequest extends SWGPacket {
-	
-	public static final int CRC = 0xD6D1B6D1;
+	public static final int CRC = getCrc("ClientRandomNameRequest");
+
 	private String raceCrc = "object/creature/player/human_male.iff";
 	
 	public RandomNameRequest() {

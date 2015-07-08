@@ -33,8 +33,8 @@ import java.nio.ByteBuffer;
 
 
 public class ClientCreateCharacter extends SWGPacket {
-	
-	public static final int CRC = 0xB97F3074;
+	public static final int CRC = getCrc("ClientCreateCharacter");
+
 	private byte [] charCustomization	= new byte[0];
 	private String name					= "";
 	private String race					= "";

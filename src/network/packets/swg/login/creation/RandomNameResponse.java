@@ -33,8 +33,7 @@ import network.packets.swg.SWGPacket;
 
 
 public class RandomNameResponse extends SWGPacket {
-	
-	public static final int CRC = 0xE85FB868;
+	public static final int CRC = getCrc("ClientRandomNameResponse");
 	
 	private String race;
 	private String randomName;

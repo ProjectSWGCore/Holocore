@@ -33,7 +33,7 @@ import resources.encodables.OutOfBandPackage;
 import java.nio.ByteBuffer;
 
 public class ChatPersistentMessageToServer extends SWGPacket {
-	public static final int CRC = 0x25A29FA6;
+	public static final int CRC = getCrc("ChatPersistentMessageToServer");
 	
 	private String message;
 	private OutOfBandPackage outOfBandPackage;

@@ -32,7 +32,7 @@ import java.nio.ByteBuffer;
 import network.packets.swg.SWGPacket;
 
 public class ChatOnSendRoomMessage extends SWGPacket {
-	public static final int CRC = resources.common.CRC.getCrc("ChatOnSendRoomMessage");
+	public static final int CRC = getCrc("ChatOnSendRoomMessage");
 
 	private int result = 0;
 	private int sequence = 0;

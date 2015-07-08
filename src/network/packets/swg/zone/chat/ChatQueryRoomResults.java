@@ -39,7 +39,7 @@ import java.util.List;
  * @author Waverunner
  */
 public class ChatQueryRoomResults extends SWGPacket {
-	public static final int CRC = resources.common.CRC.getCrc("ChatQueryRoomResults");
+	public static final int CRC = getCrc("ChatQueryRoomResults");
 
 	private ChatRoom room;
 	private int sequence;
