@@ -31,6 +31,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -149,7 +150,61 @@ public class PlayerManager extends Manager {
 			}
 		}
 	}
-	
+
+	public void notifyPlayers(NotifyPlayersPacketIntent.ConditionalNotify conditional, Packet... packets) {
+		if (conditional == null) {
+			notifyPlayers(packets);
+			return;
+		}
+
+		synchronized (players) {
+			for (Player player : players.values()) {
+				if (conditional.meetsCondition(player)) {
+					player.sendPacket(packets);
+				}
+			}
+		}
+	}
+
+	public void notifyPlayers(List<Long> networkIds, NotifyPlayersPacketIntent.ConditionalNotify conditionalNotify, Packet... packets) {
+		if (conditionalNotify == null) {
+			notifyPlayers(networkIds, packets);
+			return;
+		}
+
+		synchronized (players) {
+			networkIds.forEach(id -> {
+				Player p = players.get(id);
+				if (p != null && p.getCreatureObject() != null && conditionalNotify.meetsCondition(p))
+					p.sendPacket(packets);
+			});
+		}
+	}
+
+	public void notifyPlayers(List<Long> networkIds, Packet... packets) {
+		synchronized (players) {
+			networkIds.forEach(id -> {
+				Player p = players.get(id);
+				if (p != null && p.getCreatureObject() != null)
+					p.sendPacket(packets);
+			});
+		}
+	}
+
+	public void notifyPlayersAtPlanet(NotifyPlayersPacketIntent.ConditionalNotify conditional, Terrain terrain, Packet... packets) {
+		if (conditional == null) {
+			notifyPlayersAtPlanet(terrain, packets);
+			return;
+		}
+
+		synchronized(players) {
+			for (Player p : players.values()) {
+				if (p != null && p.getCreatureObject() != null && p.getCreatureObject().getLocation().getTerrain() == terrain && conditional.meetsCondition(p))
+					p.sendPacket(packets);
+			}
+		}
+	}
+
 	public void notifyPlayersAtPlanet(Terrain terrain, Packet... packets) {
 		synchronized(players) {
 			for (Player p : players.values()) {
@@ -159,13 +214,28 @@ public class PlayerManager extends Manager {
 		}
 	}
 
-	public void notifyPlayersWithCondition(NotifyPlayersPacketIntent.ConditionalNotify conditional, Packet... packets) {
-		synchronized (players) {
-			for (Player player : players.values()) {
-				if (conditional.meetsCondition(player)) {
-					player.sendPacket(packets);
-				}
-			}
+	public void notifyPlayersAtPlanet(List<Long> networkIds, NotifyPlayersPacketIntent.ConditionalNotify conditional, Terrain terrain, Packet... packets) {
+		if(conditional == null) {
+			notifyPlayersAtPlanet(networkIds, terrain, packets);
+			return;
+		}
+
+		synchronized(players) {
+			networkIds.forEach(id -> {
+				Player p = players.get(id);
+				if (p != null && p.getCreatureObject() != null && p.getCreatureObject().getLocation().getTerrain() == terrain && conditional.meetsCondition(p))
+					p.sendPacket(packets);
+			});
+		}
+	}
+
+	public void notifyPlayersAtPlanet(List<Long> networkIds, Terrain terrain, Packet... packets) {
+		synchronized(players) {
+			networkIds.forEach(id -> {
+				Player p = players.get(id);
+				if (p != null && p.getCreatureObject() != null && p.getCreatureObject().getLocation().getTerrain() == terrain)
+					p.sendPacket(packets);
+			});
 		}
 	}
 
@@ -260,12 +330,12 @@ public class PlayerManager extends Manager {
 	}
 	
 	private void onNotifyPlayersPacketIntent(NotifyPlayersPacketIntent nppi) {
-		if (nppi.getCondition() != null) {
-			notifyPlayersWithCondition(nppi.getCondition(), nppi.getPacket());
-		} else if (nppi.getTerrain() != null) {
-			notifyPlayersAtPlanet(nppi.getTerrain(), nppi.getPacket());
+		if (nppi.getNetworkIds() != null) {
+			if (nppi.getTerrain() != null) notifyPlayersAtPlanet(nppi.getNetworkIds(), nppi.getCondition(), nppi.getTerrain(), nppi.getPacket());
+			else notifyPlayers(nppi.getNetworkIds(), nppi.getCondition(), nppi.getPacket());
 		} else {
-			notifyPlayers(nppi.getPacket());
+			if (nppi.getTerrain() != null) notifyPlayersAtPlanet(nppi.getCondition(), nppi.getTerrain(), nppi.getPacket());
+			else notifyPlayers(nppi.getCondition(), nppi.getPacket());
 		}
 	}
 }
