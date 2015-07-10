@@ -418,19 +418,16 @@ public class ChatManager extends Manager {
 		}
 
 		final ChatFriendsListUpdate update = new ChatFriendsListUpdate(galaxy, firstName, online);
-		playerManager.notifyPlayersWithCondition(new NotifyPlayersPacketIntent.ConditionalNotify() {
-			@Override
-			public boolean meetsCondition(Player player) {
-				if (player.getPlayerState() != PlayerState.ZONED_IN)
-					return false;
+		playerManager.notifyPlayers(playerNotified -> {
+			if (playerNotified.getPlayerState() != PlayerState.ZONED_IN)
+				return false;
 
-				PlayerObject playerObject = player.getPlayerObject();
-				if (playerObject == null || playerObject.getFriendsList().size() <= 0)
-					return false;
+			PlayerObject playerObject = playerNotified.getPlayerObject();
+			if (playerObject == null || playerObject.getFriendsList().size() <= 0)
+				return false;
 
-				List<String> friends = playerObject.getFriendsList();
-				return friends.contains(update.getFriendName());
-			}
+			List<String> friends = playerObject.getFriendsList();
+			return friends.contains(update.getFriendName());
 		}, update);
 	}
 
