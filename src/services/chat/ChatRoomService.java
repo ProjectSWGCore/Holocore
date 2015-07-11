@@ -34,6 +34,7 @@ import network.packets.swg.SWGPacket;
 import network.packets.swg.zone.chat.ChatCreateRoom;
 import network.packets.swg.zone.chat.ChatEnterRoomById;
 import network.packets.swg.zone.chat.ChatOnCreateRoom;
+import network.packets.swg.zone.chat.ChatOnDestroyRoom;
 import network.packets.swg.zone.chat.ChatOnEnteredRoom;
 import network.packets.swg.zone.chat.ChatOnLeaveRoom;
 import network.packets.swg.zone.chat.ChatOnSendRoomMessage;
@@ -130,12 +131,12 @@ public class ChatRoomService extends Service {
 				if (p instanceof ChatSendToRoom) handleChatSendToRoom(player, (ChatSendToRoom) p);
 				break;
 			case CHAT_REQUEST_ROOM_LIST:
-				if (p instanceof ChatRequestRoomList)
-					handleChatRoomListRequest(player);
+				if (p instanceof ChatRequestRoomList) handleChatRoomListRequest(player);
 				break;
 			case CHAT_CREATE_ROOM:
 				if (p instanceof ChatCreateRoom) handleChatCreateRoom(player, (ChatCreateRoom) p);
 				break;
+			default: break;
 		}
 	}
 
@@ -310,7 +311,14 @@ public class ChatRoomService extends Service {
 				return;
 			}
 		}
-		System.err.println("Tried to join a room with a path that does not exist: " + path);
+		// Channel was not found, attempt to remove it from this players list of channels if it exists.
+		// This can happen if a channel was deleted while the player was offline
+		PlayerObject ghost = player.getPlayerObject();
+		if (ghost == null) {
+			System.err.println("Tried to join a room with a path that does not exist: " + path);
+			return;
+		}
+		ghost.removeJoinedChannel(path);
 	}
 
 	public void leaveChatChannel(Player player, ChatRoom room, int sequence) {
@@ -375,10 +383,7 @@ public class ChatRoomService extends Service {
 	}
 
 	public boolean destroyRoom(ChatRoom room) {
-		// Remove existing, online, members from the room
-		// Remove room from map and database
-		// Remove roompath from joinedChannels list if player tried to join an invalid room
-		return false;
+		return room != null && roomMap.remove(room.getId()) != null;
 	}
 
 	public void createSystemChannels(String galaxy) {
@@ -392,7 +397,7 @@ public class ChatRoomService extends Service {
 		 */
 
 		ChatAvatar systemAvatar = ChatAvatar.getSystemAvatar(galaxy);
-		// TODO: Move to server datatable file (SDF): Room (s) | Title (s) | Private (b)
+		// TODO: Move to server datatable file (SDF): Room (s) | Title (s)
 		String basePath = "SWG." + galaxy + ".";
 		createRoom(systemAvatar, true, basePath + "Galaxy", "public chat for the whole galaxy, cannot create rooms here");
 		createRoom(systemAvatar, true, basePath + "system", "system messages for this galaxy");
@@ -414,7 +419,18 @@ public class ChatRoomService extends Service {
 		createRoom(systemAvatar, true, basePath + "Trader", "Trader chat for this galaxy");
 		createRoom(systemAvatar, true, basePath + "BeastMastery", "Beast Mastery chat for this galaxy");
 		createRoom(systemAvatar, true, basePath + "Auction", "Auction chat for this galaxy");
+		createRoom(systemAvatar, true, basePath + "GuildLeader", "Guild leader chat for this galaxy");
+		createRoom(systemAvatar, true, basePath + "Mayor", "Mayor chat for this galaxy");
+		createRoom(systemAvatar, true, basePath + "Trader", "Trader chat for this galaxy");
 		createPlanetChannels(systemAvatar, basePath);
+
+		/*
+		Battlefield Room path examples:
+		SWG.Bria.corellia.battlefield
+		SWG.Bria.corellia.battlefield.corellia_mountain_fortress.allFactions
+		SWG.Bria.corellia.battlefield.corellia_pvp.allFactions / Imperial / Rebel
+		SWG.Bria.corellia.battlefield.corellia_rebel_riverside_fort.allFactions
+		 */
 	}
 
 	private void createPlanetChannels(ChatAvatar systemAvatar, String basePath) {

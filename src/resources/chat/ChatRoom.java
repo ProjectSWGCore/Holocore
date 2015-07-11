@@ -55,7 +55,6 @@ public class ChatRoom implements Encodable, Serializable {
 	private List<ChatAvatar> moderators;
 	private List<ChatAvatar> invited;
 	private boolean muted; // No one but moderators can talk
-	private boolean isPublic;
 	private List<ChatAvatar> banned;
 	// Members are only actually apart of a room when they're "in the room", so we don't need to save this info
 	// as each player will automatically re-join the room based on their joined channels list
@@ -143,11 +142,11 @@ public class ChatRoom implements Encodable, Serializable {
 	}
 
 	public boolean isPublic() {
-		return isPublic;
+		return type == 0;
 	}
 
 	public void setIsPublic(boolean isPublic) {
-		this.isPublic = isPublic;
+		this.type = (isPublic ? 0 : 1);
 	}
 
 	public List<ChatAvatar> getBanned() {
@@ -161,7 +160,7 @@ public class ChatRoom implements Encodable, Serializable {
 		if (members.contains(avatar))
 			return ChatResult.ROOM_ALREADY_JOINED;
 
-		if (isPublic || invited.contains(avatar))
+		if (isPublic() || invited.contains(avatar))
 			return ChatResult.SUCCESS;
 
 		return ChatResult.ROOM_AVATAR_NOT_INVITED;
@@ -240,6 +239,6 @@ public class ChatRoom implements Encodable, Serializable {
 	@Override
 	public String toString() {
 		return "ChatRoom[id=" + id + ", type=" + type + ", path='" + path + "', title='" + title + '\'' +
-				", owner=" + owner + ", isPublic=" + isPublic + "]";
+				", creator=" + creator + ", muted=" + muted + ", isPublic=" + isPublic() + "]";
 	}
 }

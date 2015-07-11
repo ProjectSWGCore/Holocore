@@ -173,8 +173,7 @@ public class ChatManager extends Manager {
 				if (p instanceof ChatInstantMessageToCharacter)
 					handleInstantMessage(pm, player, (ChatInstantMessageToCharacter) p);
 				break;
-			default:
-				break;
+			default: break;
 		}
 	}
 
@@ -195,7 +194,7 @@ public class ChatManager extends Manager {
 				break;
 			case PE_LOGGED_OUT:
 				if (player.getCreatureObject() == null)
-					return;
+					break;
 				updateChatAvatarStatus(player, intent.getGalaxy(), false);
 				break;
 			default: break;
@@ -402,6 +401,8 @@ public class ChatManager extends Manager {
 		sendPersistentMessage(player, mail, MailFlagType.FULL_MESSAGE, galaxy);
 	}
 
+	/* Friends */
+
 	private void updateChatAvatarStatus(Player player, String galaxy, boolean online) {
 		PlayerManager playerManager = player.getPlayerManager();
 		String firstName = player.getCharacterName().toLowerCase();
@@ -477,12 +478,9 @@ public class ChatManager extends Manager {
 		final List <Mail> playersMail = new LinkedList<>();
 		final long receiverId = player.getCreatureObject().getObjectId();
 		
-		mails.traverse(new Traverser<Mail>() {
-			@Override
-			public void process(Mail element) {
-				if (element.getReceiverId() == receiverId)
-					playersMail.add(element);
-			}
+		mails.traverse(element -> {
+			if (element.getReceiverId() == receiverId)
+				playersMail.add(element);
 		});
 		
 		for (Mail mail : playersMail)

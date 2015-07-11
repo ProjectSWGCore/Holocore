@@ -39,6 +39,8 @@ public class ChatRoomList extends SWGPacket {
 
 	private Collection<ChatRoom> rooms;
 
+	public ChatRoomList() {}
+
 	public ChatRoomList(ChatRoom ... rooms) {
 		this.rooms = Arrays.asList(rooms);
 	}
@@ -63,5 +65,14 @@ public class ChatRoomList extends SWGPacket {
 		addInt(  data, CRC);
 		addList(data, rooms);
 		return data;
+	}
+
+	public Collection<ChatRoom> getRooms() {
+		return rooms;
+	}
+
+	@Override
+	public String toString() {
+		return "ChatRoomList[roomSize=" + rooms.size() + "]";
 	}
 }
