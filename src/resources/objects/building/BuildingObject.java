@@ -28,9 +28,16 @@
 package resources.objects.building;
 
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
+import resources.client_info.ClientFactory;
+import resources.client_info.visitors.ObjectData;
+import resources.client_info.visitors.PortalLayoutData;
 import resources.objects.SWGObject;
 import resources.objects.cell.CellObject;
 import resources.objects.tangible.TangibleObject;
+
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 
 public class BuildingObject extends TangibleObject {
 	
@@ -50,5 +57,33 @@ public class BuildingObject extends TangibleObject {
 		}
 		return null;
 	}
-	
+
+	public List<CellObject> getCells() {
+		List<CellObject> cells = new LinkedList<>();
+		for (SWGObject object : getContainedObjects()) {
+			if (object instanceof CellObject)
+				cells.add((CellObject) object);
+		}
+		return Collections.unmodifiableList(cells);
+	}
+
+	@Override
+	public boolean addObject(SWGObject object) {
+		boolean added = super.addObject(object);
+		if (!added || !(object instanceof CellObject))
+			return added;
+
+		String portalFile = String.valueOf(getTemplateAttribute(ObjectData.PORTAL_LAYOUT));
+		if (portalFile == null || portalFile.isEmpty())
+			return true;
+
+		PortalLayoutData portalLayoutData = (PortalLayoutData) ClientFactory.getInfoFromFile(portalFile);
+		populateCellData((CellObject) object, portalLayoutData.getCells().get(getCells().size()));
+		return true;
+	}
+
+	private void populateCellData(CellObject cellObject, PortalLayoutData.Cell cellData) {
+		cellObject.setCellName(cellData.name);
+		System.out.println("CellObject " + cellObject + " has name " + cellData.name);
+	}
 }
