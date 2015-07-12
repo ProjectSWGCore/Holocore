@@ -44,7 +44,7 @@ public class ProfTemplateData extends ClientData {
 		
 		public Template(String template) {
 			this.template = template;
-			this.items = new ArrayList<String>();
+			this.items = new ArrayList<>();
 		}
 
 		public List<String> getItems() {
