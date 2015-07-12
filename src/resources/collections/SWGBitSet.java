@@ -32,7 +32,6 @@ import resources.encodables.Encodable;
 import resources.network.DeltaBuilder;
 import resources.objects.SWGObject;
 import resources.player.PlayerState;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.Serializable;
 import java.nio.ByteBuffer;
