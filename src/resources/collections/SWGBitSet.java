@@ -80,7 +80,7 @@ public class SWGBitSet extends BitSet implements Encodable, Serializable {
 	@Override
 	public void decode(ByteBuffer data) {
 		// TODO: Decode method for SWGBitSet
-		throw new NotImplementedException();
+		throw new UnsupportedOperationException("Unable to decode bitset!");
 	}
 
 	public void sendDeltaMessage(SWGObject target) {
