@@ -75,6 +75,17 @@ public class Location implements Serializable {
 	public void setOrientationY(double oY) { this.oY = oY; }
 	public void setOrientationZ(double oZ) { this.oZ = oZ; }
 	public void setOrientationW(double oW) { this.oW = oW; }
+	public void setPosition(double x, double y, double z) {
+		setX(x);
+		setY(y);
+		setZ(z);
+	}
+	public void setOrientation(double oX, double oY, double oZ, double oW) {
+		setOrientationX(oX);
+		setOrientationY(oY);
+		setOrientationZ(oZ);
+		setOrientationW(oW);
+	}
 	
 	public Terrain getTerrain() { return terrain; }
 	public double getX() { return x; }
@@ -98,6 +109,13 @@ public class Location implements Serializable {
 		this.z += z;
 	}
 	
+	public void translateOrientation(double oX, double oY, double oZ, double oW) {
+		this.oX += oX;
+		this.oY += oY;
+		this.oZ += oZ;
+		this.oW += oW;
+	}
+	
 	public Location translate(double x, double y, double z) {
 		Location loc = new Location(this);
 		loc.translatePosition(x, y, z);
@@ -105,7 +123,75 @@ public class Location implements Serializable {
 	}
 	
 	public Location translate(Location l) {
-		return translate(l.getX(), l.getY(), l.getZ());
+		Location ret = new Location(this);
+		double k0 = l.oW * l.oW - 0.5f;
+		double k1;
+		double rx, ry, rz;
+		
+		// k1 = Q.V
+		k1 = x * l.oX;
+		k1 += y * l.oY;
+		k1 += z * l.oZ;
+		
+		// (qq-1/2)V+(Q.V)Q
+		rx = x * k0 + l.oX * k1;
+		ry = y * k0 + l.oY * k1;
+		rz = z * k0 + l.oZ * k1;
+		
+		// (Q.V)Q+(qq-1/2)V+q(QxV)
+		rx += l.oW * (l.oY * z - l.oZ * y);
+		ry += l.oW * (z * x - l.oX * z);
+		rz += l.oW * (l.oX * y - l.oY * x);
+		
+		//  2((Q.V)Q+(qq-1/2)V+q(QxV))
+		rx += rx;
+		ry += ry;
+		rz += rz;
+		ret.setPosition(rx, ry, rz);
+		ret.translatePosition(l.x, l.y, l.z);
+		ret.setOrientationW(l.oW*oW - l.oX*oX - l.oY*oY - l.oZ*oZ);
+		ret.setOrientationX(l.oW*oX + l.oX*oW + l.oY*oZ - l.oZ*oY);
+		ret.setOrientationY(l.oW*oY + l.oY*oW + l.oZ*oX - l.oX*oZ);
+		ret.setOrientationZ(l.oW*oZ + l.oZ*oW + l.oX*oY - l.oY*oX);
+		return ret;
+	}
+	
+	/**
+	 * Sets the orientation to be facing the specified heading
+	 * @param heading the heading to face, in degrees
+	 */
+	public void setHeading(double heading) {
+		setOrientation(0, 0, 0, 1);
+		rotateHeading(heading);
+	}
+	
+	/**
+	 * Rotates the orientation by the specified angle along the Y-axis
+	 * @param angle the angle to rotate by in degrees
+	 */
+	public void rotateHeading(double angle) {
+		rotate(angle, 0, 1, 0);
+	}
+	
+	/**
+	 * Rotates the orientation by the specified angle along the specified axises
+	 * @param angle the angle to rotate by in degrees
+	 * @param axisX the amount of rotation about the x-axis
+	 * @param axisY the amount of rotation about the x-axis
+	 * @param axisZ the amount of rotation about the x-axis
+	 */
+	public void rotate(double angle, double axisX, double axisY, double axisZ) {
+		double sin = Math.sin(Math.toRadians(angle) / 2);
+		oW = Math.cos(Math.toRadians(angle) / 2);
+		oX = sin * axisX;
+		oY = sin * axisY;
+		oZ = sin * axisZ;
+		// Normalize
+		double mag = Math.sqrt(oW*oW + oX*oX + oY*oY + oZ*oZ);
+		oW /= mag;
+		oX /= mag;
+		oY /= mag;
+		oZ /= mag;
 	}
 	
 	public boolean mergeWith(Location l) {
@@ -138,19 +224,19 @@ public class Location implements Serializable {
 	
 	private boolean mergeOrientation(Location l) {
 		boolean changed = false;
-		if (Double.isNaN(oX) || oX != l.getOrientationX()) {
+		if (!Double.isNaN(l.getOrientationX()) && (Double.isNaN(oX) || oX != l.getOrientationX())) {
 			oX = l.getOrientationX();
 			changed = true;
 		}
-		if (Double.isNaN(oY) || oY != l.getOrientationY()) {
+		if (!Double.isNaN(l.getOrientationY()) && (Double.isNaN(oY) || oY != l.getOrientationY())) {
 			oY = l.getOrientationY();
 			changed = true;
 		}
-		if (Double.isNaN(oZ) || oZ != l.getOrientationZ()) {
+		if (!Double.isNaN(l.getOrientationZ()) && (Double.isNaN(oZ) || oZ != l.getOrientationZ())) {
 			oZ = l.getOrientationZ();
 			changed = true;
 		}
-		if (Double.isNaN(oW) || oW != l.getOrientationW()) {
+		if (!Double.isNaN(l.getOrientationW()) && (Double.isNaN(oW) || oW != l.getOrientationW())) {
 			oW = l.getOrientationW();
 			changed = true;
 		}
