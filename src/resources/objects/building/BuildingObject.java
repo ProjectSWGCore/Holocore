@@ -28,6 +28,8 @@
 package resources.objects.building;
 
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
+import resources.objects.SWGObject;
+import resources.objects.cell.CellObject;
 import resources.objects.tangible.TangibleObject;
 
 public class BuildingObject extends TangibleObject {
@@ -36,6 +38,17 @@ public class BuildingObject extends TangibleObject {
 	
 	public BuildingObject(long objectId) {
 		super(objectId, BaselineType.BUIO);
+	}
+	
+	public CellObject getCellByName(String cellName) {
+		for (SWGObject cont : getContainedObjects()) {
+			if (cont instanceof CellObject) {
+				if (((CellObject) cont).getCelName().equals(cellName)) {
+					return (CellObject) cont;
+				}
+			}
+		}
+		return null;
 	}
 	
 }
