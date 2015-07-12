@@ -32,7 +32,6 @@ import resources.encodables.Encodable;
 import resources.network.DeltaBuilder;
 import resources.objects.SWGObject;
 import resources.player.PlayerState;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.Serializable;
 import java.nio.ByteBuffer;
@@ -80,7 +79,7 @@ public class SWGBitSet extends BitSet implements Encodable, Serializable {
 	@Override
 	public void decode(ByteBuffer data) {
 		// TODO: Decode method for SWGBitSet
-		throw new NotImplementedException();
+		throw new UnsupportedOperationException("Unable to decode bitset!");
 	}
 
 	public void sendDeltaMessage(SWGObject target) {
