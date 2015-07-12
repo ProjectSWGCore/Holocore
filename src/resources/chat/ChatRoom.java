@@ -163,7 +163,7 @@ public class ChatRoom implements Encodable, Serializable {
 		if (isPublic() || invited.contains(avatar))
 			return ChatResult.SUCCESS;
 
-		return ChatResult.ROOM_AVATAR_NOT_INVITED;
+		return ChatResult.ROOM_AVATAR_NO_PERMISSION;
 	}
 
 	public ChatResult canSendMessage(ChatAvatar avatar) {
