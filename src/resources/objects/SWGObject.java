@@ -433,7 +433,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	}
 	
 	public Location getLocation() {
-		return location;
+		return new Location(location);
 	}
 	
 	public Location getWorldLocation() {
@@ -441,7 +441,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		SWGObject parent = getParent();
 		while (parent != null) {
 			Location l = parent.location;
-			loc.translatePosition(l.getX(), l.getY(), l.getZ()); // Have to access privately to avoid copies
+			loc.translateLocation(l); // Have to access privately to avoid copies
 			parent = parent.getParent();
 		}
 		return loc;
@@ -818,8 +818,6 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		// Now create the contained objects
 		for (SWGObject containedObject : containedObjects.values()) {
 			if (containedObject != null && !sentObjects.contains(containedObject)) {
-				//Log.i("ChildrenObjects", "Sending containedObj " + containedObject + " to " + target);
-				//Log.d("SWGObject", "Sending to location " + containedObject.getLocation());
 				containedObject.createObject(target);
 			}
 		}
