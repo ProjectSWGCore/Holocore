@@ -43,7 +43,7 @@ public class BuildingObject extends TangibleObject {
 	public CellObject getCellByName(String cellName) {
 		for (SWGObject cont : getContainedObjects()) {
 			if (cont instanceof CellObject) {
-				if (((CellObject) cont).getCelName().equals(cellName)) {
+				if (((CellObject) cont).getCellName().equals(cellName)) {
 					return (CellObject) cont;
 				}
 			}
