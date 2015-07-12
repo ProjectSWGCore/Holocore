@@ -41,10 +41,12 @@ import java.util.Map.Entry;
 public class CachedObjectDatabase<V extends Serializable> extends ObjectDatabase<V> {
 	
 	private final Map <Long, V> objects;
+	private boolean loaded;
 	
 	public CachedObjectDatabase(String filename) {
 		super(filename);
 		objects = new HashMap<Long, V>();
+		loaded = false;
 	}
 	
 	public synchronized V put(String key, V value) {
@@ -94,6 +96,10 @@ public class CachedObjectDatabase<V extends Serializable> extends ObjectDatabase
 	}
 	
 	public synchronized boolean save() {
+		if (!loaded) {
+			System.err.println("Not saving '" + getFile() + "', file not loaded yet!");
+			return false;
+		}
 		ObjectOutputStream oos = null;
 		try {
 			oos = new ObjectOutputStream(new FileOutputStream(getFile()));
@@ -141,6 +147,7 @@ public class CachedObjectDatabase<V extends Serializable> extends ObjectDatabase
 					objects.put(key, val);
 				}
 			}
+			loaded = true;
 		} catch (EOFException e) {
 			
 		} catch (IOException | ClassNotFoundException | ClassCastException e) {
