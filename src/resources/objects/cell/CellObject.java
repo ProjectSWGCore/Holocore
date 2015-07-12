@@ -61,7 +61,7 @@ public class CellObject extends SWGObject {
 		return label;
 	}
 	
-	public String getCelName() {
+	public String getCellName() {
 		return name;
 	}
 	
