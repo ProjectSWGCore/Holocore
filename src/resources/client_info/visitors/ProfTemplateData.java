@@ -31,6 +31,7 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
+import resources.client_info.ClientData;
 import utilities.ByteUtilities;
 
 public class ProfTemplateData extends ClientData {
@@ -57,7 +58,7 @@ public class ProfTemplateData extends ClientData {
 	}
 	
 	@Override
-	public void handleData(String node, ByteBuffer data, int size) {
+	public void parse(String node, ByteBuffer data, int size) {
 		switch(node) {
 		
 		case "PTMPNAME":

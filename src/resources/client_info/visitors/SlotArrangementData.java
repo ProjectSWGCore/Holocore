@@ -31,6 +31,7 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
+import resources.client_info.ClientData;
 import utilities.ByteUtilities;
 
 public class SlotArrangementData extends ClientData {
@@ -38,7 +39,7 @@ public class SlotArrangementData extends ClientData {
 	private List <List <String>> occupiedSlots = new ArrayList<List<String>>();
 	
 	@Override
-	public void handleData(String node, ByteBuffer data, int size) {
+	public void parse(String node, ByteBuffer data, int size) {
 		
 		ArrayList<String> slots = new ArrayList<String>();
 		

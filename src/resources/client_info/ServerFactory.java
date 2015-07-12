@@ -25,62 +25,36 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>
  ******************************************************************************/
 
-package resources.client_info.visitors;
+package resources.client_info;
 
-import resources.client_info.ClientData;
-import utilities.ByteUtilities;
+import resources.client_info.visitors.DatatableData;
 
-import java.nio.ByteBuffer;
-import java.nio.charset.Charset;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
- * @author Waverunner
+ * Created by Waverunner on 6/9/2015
  */
-public class PortalLayoutData extends ClientData {
+public final class ServerFactory extends DataFactory {
+	private static ServerFactory instance;
 
-	private int cellCount;
-	private int portalCount;
-	private List<Cell> cells = new LinkedList<>();
+	public static DatatableData getDatatable(String file) {
+		ClientData data = getInstance().readFile(file);
+		// Safe type conversion as ServerFactory can only create DatatableData ClientData objects
+		return (data != null ? (DatatableData) data : null);
+	}
 
 	@Override
-	public void parse(String node, ByteBuffer data, int size) {
-		System.out.println("Node: " + node);
-		switch (node) {
-			case "0003DATA":
-				portalCount = data.getInt(); // number of portals
-				cellCount = data.getInt(); // number of cells
-				break;
-/*			case "0005DATA": {
-
-				Cell cell = new Cell();
-				data.getInt(); // number of portals cell has
-
-				cell.canSeeParentCell = data.get();
-				cell.name = data.getString(Charset.forName("US-ASCII").newDecoder().de);
-				cell.appearance = ByteUtilities.nextString(data);
-				System.out.println("Name: " + cell.name + " App.: " + cell.appearance);
-				cell.hasFloor = data.get();
-				cell.floor = (cell.hasFloor == 1 ? ByteUtilities.nextString(data) : "");
-				cells.add(cell);
-
-				break;
-			}*/
-		}
+	protected ClientData createDataObject(String type) {
+		return (type.equals("DTIIFORM") ? new DatatableData() : null);
 	}
 
-	public List<Cell> getCells() {
-		return cells;
+	@Override
+	protected String getFolder() {
+		return "./serverdata/";
 	}
 
-
-	public static class Cell {
-
-		public byte canSeeParentCell;
-		public String name;
-		public String appearance;
-		public byte hasFloor;
-		public String floor;
+	private static ServerFactory getInstance() {
+		if (instance == null)
+			instance = new ServerFactory();
+		return instance;
 	}
 }

@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import resources.client_info.ClientData;
 import utilities.ByteUtilities;
 
 public class CrcStringTableData extends ClientData {
@@ -43,7 +44,7 @@ public class CrcStringTableData extends ClientData {
 	private int count;
 	
 	@Override
-	public void handleData(String node, ByteBuffer data, int size) {
+	public void parse(String node, ByteBuffer data, int size) {
 		switch (node) {
 		
 		case "0000DATA":

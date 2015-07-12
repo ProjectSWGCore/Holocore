@@ -27,31 +27,24 @@
 ***********************************************************************************/
 package resources.client_info;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 import java.util.HashMap;
 import java.util.Map;
 
-import resources.client_info.visitors.ClientData;
 import resources.client_info.visitors.CrcStringTableData;
 import resources.client_info.visitors.DatatableData;
 import resources.client_info.visitors.ObjectData;
+import resources.client_info.visitors.PortalLayoutData;
 import resources.client_info.visitors.ProfTemplateData;
 import resources.client_info.visitors.SlotArrangementData;
 import resources.client_info.visitors.SlotDefinitionData;
 import resources.client_info.visitors.SlotDescriptorData;
 import resources.client_info.visitors.WorldSnapshotData;
-import utilities.ByteUtilities;
 
-public class ClientFactory {
+public class ClientFactory extends DataFactory {
 	private static ClientFactory instance;
 
-	private Map <String, ClientData> dataMap = new HashMap<String, ClientData>();
-	private Map <String, String> typeMap = new HashMap<String, String>();
+	private Map <String, ClientData> dataMap = new HashMap<>();
+	private Map <String, String> typeMap = new HashMap<>();
 	
 	/**
 	 * Creates a new instance of ClientFactory.
@@ -60,7 +53,7 @@ public class ClientFactory {
 	 * In order to add parsing for an IFF type which is not yet parsed:
 	 * <OL>
 	 * <LI>Create a new class which extends {@link ClientData}.
-	 * <LI>Perform the parsing of each node within the handleData method using switch-case statements for different node names.
+	 * <LI>Perform the parsing of each node within the parse method using switch-case statements for different node names.
 	 * <LI>Add a new entry to the typeMap through populateTypeMap() method by adding in the name of the folder/node you're parsing 
 	 * as the Key and the name of the class that was just created as the Value.
 	 * <LI>Add in a case statement in the createDataObject method returning a new instance of the class, the case being the Value 
@@ -76,21 +69,15 @@ public class ClientFactory {
 	 * stores the variables and is the returned type. Retrieving info from this file puts a reference of the returned 
 	 * {@link ClientData} into a {@link HashMap}. Future calls for this file will try and obtain this reference if it's not null to prevent
 	 * the file from being parsed multiple times.
-	 * @param file The SWG file you wish to get information from which resides in the ./clientdata/ folder. 
+	 * @param file The SWG file you wish to get information from which resides in the ./DataObject/ folder. 
 	 * Example: creation/profession_defaults_combat_brawler.iff
-	 * @param saveInfo This will save the information into the map for future calls to get information from this file.
 	 * @return Specific visitor type of {@link ClientData} relating to the chosen file. For example, loading the file
 	 * creation/profession_defaults_combat_brawler.iff would return an instance of {@link ProfTemplateData} extended from {@link ClientData}.
 	 * A null instance of {@link ClientData} means that parsing for the type of file is not done, or a file was entered that doesn't exist on the
 	 * file system.
 	 */
-	public synchronized static ClientData getInfoFromFile(String file, boolean saveInfo) {
-		ClientFactory factory = ClientFactory.instance;
-		if (factory == null) {
-			ClientFactory.instance = new ClientFactory();
-			factory = ClientFactory.instance;
-		}
-
+	public synchronized static ClientData getInfoFromFile(String file) {
+		ClientFactory factory = ClientFactory.getInstance();
 		ClientData data = factory.dataMap.get(file);
 		
 		if (data == null) {
@@ -98,8 +85,9 @@ public class ClientFactory {
 			if (data == null) {
 				return null;
 			}
-			
-			/*weak = new WeakReference<ClientData>(strong);
+			// I believe that this was commented out because it made the references go away while still being used.
+			// Look into this again further and see what is going wrong.
+			/*weak = new WeakReference<DataObject>(strong);
 			
 			if (weak.get() != null) {
 				dataMap.put(file, weak);
@@ -108,11 +96,7 @@ public class ClientFactory {
 		
 		return data;
 	}
-	
-	public synchronized static ClientData getInfoFromFile(String file) {
-		return getInfoFromFile(file, true);
-	}
-	
+
 	public synchronized static String formatToSharedFile(String original) {
 		if (original.contains("shared_"))
 			return original;
@@ -120,70 +104,13 @@ public class ClientFactory {
 		int index = original.lastIndexOf("/");
 		return original.substring(0, index) + "/shared_" + original.substring(index+1);
 	}
-	
-	// readFile only called if dataMap doesn't contain the file as a key or it's value is null
-	private ClientData readFile(String file) {
-		InputStream stream = null;
-		try {
-			File f = new File("./clientdata/" + file);
-			if (!f.exists()) {
-				f = new File("./serverdata/" + file);
-				if (!f.exists()) {
-					System.out.println(file + " not found!");
-					return null;
-				}
-			}
-			
-			stream = new FileInputStream(f);
-			ByteBuffer bb = readIntoBuffer(stream);
-			
-			ClientData visitor = getFileType(bb);
-			if (visitor == null) { // Visitor value will be null if parsing for a certain client file type doesn't exist yet.
-				return null;
-			}
-			
-			bb.position(8); // Skip first FORM, some forms only have a node and not a parent form
-			parseData(bb, visitor);
-			return visitor;
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stream != null) {
-				try {
-					stream.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		return null;
-	}
-	
-	private ByteBuffer readIntoBuffer(InputStream stream) throws IOException {
-		ByteBuffer bb = ByteBuffer.allocate(stream.available()).order(ByteOrder.LITTLE_ENDIAN);
-		stream.read(bb.array());
-		return bb;
-	}
-	
-	private ClientData getFileType(ByteBuffer bb) {
-		bb.position(8); // Skip the first FORM and data size
-		String type = ByteUtilities.nextString(bb); // Get the specific form for this IFF so we know what visitor to use
 
-		ClientData data = createDataObject(type);
-
-		if (data == null) {
-			System.err.println("Handling for " + type + " not implemented!");
-			return null;
-		}
-		
-		return data;
-	}
-	
-	// Any time a new ClientData is coded for parsing a file, it will need to be added in populateTypeMap() along with a new return 
+	// Any time a new DataObject is coded for parsing a file, it will need to be added in populateTypeMap() along with a new return 
 	// of that instance so the file can be parsed. The type is the name of the folder/node which is then used to get the value associated
 	// with it in the typeMap (value being the name of the Class preferably). If populateTypeMap() does not contain that node, then null is returned
 	// and getFileType method will print out what the type is along with a "not implemented!" message.
-	private ClientData createDataObject(String type) {
+	@Override
+	protected ClientData createDataObject(String type) {
 		String c = typeMap.get(type);
 		if (c == null) {
 			System.err.println("Don't know what class to use for " + type);
@@ -199,58 +126,13 @@ public class ClientFactory {
 			case "SlotDefinitionData": return new SlotDefinitionData();
 			case "SlotArrangementData": return new SlotArrangementData();
 			case "WorldSnapshotData": return new WorldSnapshotData();
-			
+			case "PortalLayoutData": return new PortalLayoutData();
 			default: return null;
 		}
 	}
-	
-	private void parseData(ByteBuffer bb, ClientData visitor) throws Exception {
-		String name = null;
-		while (bb.hasRemaining()) {
-			name = ByteUtilities.nextString(bb);
-			if (name.contains("FORM")) {
-				parseFolder(name, bb, visitor);
-			} else {
-				parseNode(name, bb, visitor);
-			}
-		}
-		
-	}
-	
-	private void parseNode(String name, ByteBuffer bb, ClientData visitor) throws Exception {
-		int size = Integer.reverseBytes(bb.getInt()); // Size of this node/folder
-		
-		if (size == 0)
-			return;
-		
-		// Create a new buffer for parsing data specific to this node (excluding name bytes)
-		visitor.handleData(name, getData(bb, size), size);
-		
-	}
-	
-	private void parseFolder(String name, ByteBuffer bb, ClientData visitor) throws Exception {
-		ByteBuffer data = getData(bb, Integer.reverseBytes(bb.getInt()));
-		
-		// Notify visitor of the Folder? May be needed at some point.
-		
-		parseData(data, visitor);
-	}
 
-	// Cut down a ByteBuffer from the current position so we are only working with a certain amount of bytes. Useful when we 
-	// call the ClientData.handleData method.
-	private ByteBuffer getData(ByteBuffer source, int size) {
-		ByteBuffer data = ByteBuffer.allocate(size).order(ByteOrder.LITTLE_ENDIAN);
-		int offset = source.position();
-		data.put(source.array(), offset, size);
-		source.position(offset+size);
-		data.flip();
-		
-		return data;
-	}
-	
-	// The typeMap is used for determining what ClientData class
+	// The typeMap is used for determining what DataObject class
 	private void populateTypeMap() {
-
 		typeMap.put("ARGDFORM", "SlotArrangementData");
 		typeMap.put("0006DATA", "SlotDefinitionData");
 		typeMap.put("CSTBFORM", "CrcStringTableData");
@@ -258,7 +140,7 @@ public class ClientFactory {
 		typeMap.put("PRFIFORM", "ProfTemplateData");
 		typeMap.put("SLTDFORM", "SlotDescriptorData");
 		typeMap.put("WSNPFORM", "WorldSnapshotData");
-		
+		typeMap.put("PRTOFORM", "PortalLayoutData");
 		// Objects
 		typeMap.put("SBMKFORM", "ObjectData"); // object/battlefield_marker
 		typeMap.put("SBOTFORM", "ObjectData"); // object/building
@@ -287,7 +169,16 @@ public class ClientFactory {
 		typeMap.put("SWAYFORM", "ObjectData"); // object/waypoint
 		typeMap.put("SWOTFORM", "ObjectData"); // object/weapon
 		//
-
 	}
 
+	@Override
+	protected String getFolder() {
+		return "./clientdata/";
+	}
+
+	private static ClientFactory getInstance() {
+		if (instance == null)
+			instance = new ClientFactory();
+		return instance;
+	}
 }

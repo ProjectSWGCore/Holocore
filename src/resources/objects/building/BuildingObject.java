@@ -77,8 +77,8 @@ public class BuildingObject extends TangibleObject {
 		if (portalFile == null || portalFile.isEmpty())
 			return true;
 
-		PortalLayoutData portalLayoutData = (PortalLayoutData) ClientFactory.getInfoFromFile(portalFile);
-		populateCellData((CellObject) object, portalLayoutData.getCells().get(getCells().size()));
+		//PortalLayoutData portalLayoutData = (PortalLayoutData) ClientFactory.getInfoFromFile(portalFile);
+		//populateCellData((CellObject) object, portalLayoutData.getCells().get(getCells().size()));
 		return true;
 	}
 

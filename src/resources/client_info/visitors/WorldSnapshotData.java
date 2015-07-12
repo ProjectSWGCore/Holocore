@@ -28,6 +28,7 @@
 package resources.client_info.visitors;
 
 import resources.Location;
+import resources.client_info.ClientData;
 import utilities.ByteUtilities;
 
 import java.nio.ByteBuffer;
@@ -41,7 +42,7 @@ public class WorldSnapshotData extends ClientData {
 	private List<Chunk> chunks = new LinkedList<>();
 
 	@Override
-	public void handleData(String node, ByteBuffer data, int size) {
+	public void parse(String node, ByteBuffer data, int size) {
 		switch (node) {
 			case "OTNL":
 				// Object Template Name Table

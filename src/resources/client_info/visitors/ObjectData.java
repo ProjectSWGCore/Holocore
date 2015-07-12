@@ -34,6 +34,7 @@ import java.util.List;
 import java.util.Map;
 
 import resources.client_info.ClientFactory;
+import resources.client_info.ClientData;
 import utilities.ByteUtilities;
 
 public class ObjectData extends ClientData {
@@ -53,7 +54,7 @@ public class ObjectData extends ClientData {
 	public ObjectData() {}
 	
 	@Override
-	public void handleData(String node, ByteBuffer data, int size) {
+	public void parse(String node, ByteBuffer data, int size) {
 		switch(node) {
 		
 		case "DERVXXXX": // Extended attributes
