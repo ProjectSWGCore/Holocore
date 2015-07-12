@@ -73,11 +73,14 @@ public class DataTransform extends ObjectController {
 	}
 	
 	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + 36);
+		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + 45);
 		encodeHeader(data);
+		addInt(data, timestamp);
 		addInt(data, updateCounter);
 		addLocation(data, l);
 		addFloat(data, speed);
+		addFloat(data, lookAtYaw);
+		addBoolean(data, useLookAtYaw);
 		return data;
 	}
 	

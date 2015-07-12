@@ -43,6 +43,34 @@ public class DataTransformWithParent extends ObjectController {
 	public ByteBuffer encode() {
 		return null;
 	}
+	
+	public void setCounter(int counter) {
+		this.counter = counter;
+	}
+
+	public void setTimestamp(int timestamp) {
+		this.timestamp = timestamp;
+	}
+
+	public void setCellId(long cellId) {
+		this.cellId = cellId;
+	}
+
+	public void setLocation(Location l) {
+		this.l = l;
+	}
+
+	public void setSpeed(float speed) {
+		this.speed = speed;
+	}
+
+	public void setLookAtYaw(float lookAtYaw) {
+		this.lookAtYaw = lookAtYaw;
+	}
+
+	public void setUseLookAtYaw(boolean useLookAtYaw) {
+		this.useLookAtYaw = useLookAtYaw;
+	}
 
 	public int getCounter() {
 		return counter;
