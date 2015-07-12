@@ -27,11 +27,13 @@
 
 package services.chat;
 
+import intents.NotifyPlayersPacketIntent;
 import intents.chat.ChatRoomUpdateIntent;
 import intents.network.GalacticPacketIntent;
 import network.packets.Packet;
 import network.packets.swg.SWGPacket;
 import network.packets.swg.zone.chat.ChatCreateRoom;
+import network.packets.swg.zone.chat.ChatDestroyRoom;
 import network.packets.swg.zone.chat.ChatEnterRoomById;
 import network.packets.swg.zone.chat.ChatOnCreateRoom;
 import network.packets.swg.zone.chat.ChatOnDestroyRoom;
@@ -57,6 +59,7 @@ import services.player.PlayerManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -136,6 +139,9 @@ public class ChatRoomService extends Service {
 			case CHAT_CREATE_ROOM:
 				if (p instanceof ChatCreateRoom) handleChatCreateRoom(player, (ChatCreateRoom) p);
 				break;
+			case CHAT_DESTROY_ROOM:
+				if (p instanceof ChatDestroyRoom) handleChatDestroyRoom(player, (ChatDestroyRoom) p);
+				break;
 			default: break;
 		}
 	}
@@ -143,11 +149,26 @@ public class ChatRoomService extends Service {
 	private void processChatRoomUpdateIntent(ChatRoomUpdateIntent i) {
 		switch(i.getUpdateType()) {
 			case CREATE: createRoom(i.getAvatar(), i.isPublic(), i.getPath(), i.getTitle()); break;
+			case DESTROY: notifyDestroyRoom(i.getAvatar(), i.getPath(), 0); break;
 			default: break;
 		}
 	}
 
 	/* Chat Rooms */
+
+	private void handleChatDestroyRoom(Player player, ChatDestroyRoom p) {
+		ChatRoom room = roomMap.get(p.getRoomId());
+		ChatAvatar avatar = ChatAvatar.getFromPlayer(player);
+
+		if ((room == null || !room.getCreator().equals(avatar) || !room.getOwner().equals(avatar))) {
+			player.sendPacket(new ChatOnDestroyRoom(ChatAvatar.getFromPlayer(player), ChatResult.ROOM_AVATAR_NO_PERMISSION.getCode(), p.getRoomId(), p.getSequence()));
+			return;
+		}
+
+		if (!notifyDestroyRoom(avatar, room.getPath(), p.getSequence())) {
+			player.sendPacket(new ChatOnDestroyRoom(ChatAvatar.getFromPlayer(player), ChatResult.NONE.getCode(), p.getRoomId(), p.getSequence()));
+		}
+	}
 
 	private void handleChatCreateRoom(Player player, ChatCreateRoom p) {
 		String path = p.getRoomName();
@@ -282,8 +303,8 @@ public class ChatRoomService extends Service {
 
 		// Re-send the player the room list with just this room as it could have been private/hidden
 		// This also "refreshes" the client, not sending this will cause a Chat channel unavailable message.
-		ChatRoomList roomList = new ChatRoomList(room);
-		player.sendPacket(roomList);
+		if (!room.isPublic())
+			player.sendPacket(new ChatRoomList(room));
 
 		// Notify players of success, it's ChatResult.SUCCESS at this point
 		player.sendPacket(new ChatOnEnteredRoom(avatar, result.getCode(), room.getId(), sequence));
@@ -380,6 +401,32 @@ public class ChatRoomService extends Service {
 
 		roomMap.put(id, room);
 		return room;
+	}
+
+	public boolean notifyDestroyRoom(ChatAvatar destroyer, String roomPath, int sequence) {
+		ChatRoom room = getRoom(roomPath);
+		if (roomPath == null)
+			return false;
+
+		if (!destroyRoom(room))
+			return false;
+
+		// Send the ChatOnDestroyRoom packet to every else in the room besides the person destroying the packet
+		List<Long> networkIds = new ArrayList<>();
+		room.getMembers().forEach(member -> {
+			if (!destroyer.equals(member))
+				networkIds.add(member.getNetworkId());
+		});
+
+		new NotifyPlayersPacketIntent(new ChatOnDestroyRoom(destroyer, ChatResult.SUCCESS.getCode(), room.getId(), 0),
+				networkIds).broadcast();
+
+		if (!destroyer.equals(ChatAvatar.getSystemAvatar(destroyer.getGalaxy()))) {
+			new NotifyPlayersPacketIntent(new ChatOnDestroyRoom(destroyer, ChatResult.SUCCESS.getCode(), room.getId(), sequence),
+					Collections.singletonList(destroyer.getNetworkId())).broadcast();
+		}
+
+		return true;
 	}
 
 	public boolean destroyRoom(ChatRoom room) {

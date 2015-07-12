@@ -25,42 +25,51 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>
  ******************************************************************************/
 
-package resources.chat;
+package network.packets.swg.zone.chat;
+
+import network.packets.swg.SWGPacket;
+
+import java.nio.ByteBuffer;
 
 /**
  * @author Waverunner
  */
-public enum ChatResult {
-	NONE(-1), // The client will just display an "unknown error code" if this is used.
-	SUCCESS(0),
-	TARGET_AVATAR_DOESNT_EXIST(4),
-	ROOM_INVALID_ID(5),
-	ROOM_INVALID_NAME(6),
-	ROOM_NOT_MODERATOR(9),
-	ROOM_AVATAR_BANNED(12),
-	ROOM_AVATAR_NO_PERMISSION(16),
-	IGNORED(23),
-	ROOM_ALREADY_EXISTS(24),
-	ROOM_ALREADY_JOINED(36),
-	CHAT_SERVER_UNAVAILABLE(1000000),
-	ROOM_DIFFERENT_FACTION(1000001),
-	ROOM_NOT_GCW_DEFENDER_FACTION(1000005);
+public class ChatDestroyRoom extends SWGPacket {
+	public static final int CRC = getCrc("ChatDestroyRoom");
 
+	private int roomId;
+	private int sequence;
 
-	private final int code;
-	ChatResult(int code) {
-		this.code = code;
+	public ChatDestroyRoom() {}
+
+	@Override
+	public void decode(ByteBuffer data) {
+		if (!super.decode(data, CRC))
+			return;
+		roomId		= getInt(data);
+		sequence	= getInt(data);
 	}
 
-	public int getCode() {
-		return code;
+	@Override
+	public ByteBuffer encode() {
+		ByteBuffer bb = ByteBuffer.allocate(14);
+		addShort(bb, 3);
+		addInt(bb, CRC);
+		addInt(bb, roomId);
+		addInt(bb, sequence);
+		return bb;
 	}
 
-	public static ChatResult fromInteger(int code) {
-		for (ChatResult result : ChatResult.values()) {
-			if (code == result.getCode())
-				return result;
-		}
-		return NONE;
+	public int getRoomId() {
+		return roomId;
+	}
+
+	public int getSequence() {
+		return sequence;
+	}
+
+	@Override
+	public String toString() {
+		return "ChatDestroyRoom[roomId=" + roomId + ", sequence=" + sequence + "]";
 	}
 }

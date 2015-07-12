@@ -107,6 +107,7 @@ public enum PacketType {
 
 		// Chat
 		CHAT_CREATE_ROOM						(ChatCreateRoom.CRC,				ChatCreateRoom.class),
+		CHAT_DESTROY_ROOM						(ChatDestroyRoom.CRC,				ChatDestroyRoom.class),
 		CHAT_ON_CREATE_ROOM						(ChatOnCreateRoom.CRC,				ChatOnCreateRoom.class),
 		CHAT_FRIENDS_LIST_UPDATE				(ChatFriendsListUpdate.CRC, 		ChatFriendsListUpdate.class),
 		CHAT_IGNORE_LIST						(ChatIgnoreList.CRC, 				ChatIgnoreList.class),

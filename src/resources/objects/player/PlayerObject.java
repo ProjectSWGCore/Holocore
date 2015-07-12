@@ -395,13 +395,19 @@ public class PlayerObject extends IntangibleObject {
 
 	public boolean addJoinedChannel(String path) {
 		synchronized (joinedChannels) {
-			return !joinedChannels.contains(path) && joinedChannels.add(path);
+			return true;
+			// TODO: Refactor
+			/*System.out.println("add joined channel: " + path);
+			return !joinedChannels.contains(path) && joinedChannels.add(path);*/
 		}
 	}
 
 	public boolean removeJoinedChannel(String path) {
 		synchronized (joinedChannels) {
-			return joinedChannels.remove(path);
+			return true;
+			// TODO: Refactor
+			/*System.out.println("remove joined channel: " + path);
+			return joinedChannels.remove(path);*/
 		}
 	}
 
