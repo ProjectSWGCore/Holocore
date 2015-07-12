@@ -32,8 +32,7 @@ import java.nio.ByteBuffer;
 import network.packets.swg.SWGPacket;
 
 public class ChatOnConnectAvatar extends SWGPacket {
-	
-	public static final int CRC = 0xD72FE9BE;
+	public static final int CRC = getCrc("ChatOnConnectAvatar");
 	
 	public ChatOnConnectAvatar() {
 		
@@ -48,8 +47,7 @@ public class ChatOnConnectAvatar extends SWGPacket {
 	}
 	
 	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
-			return;
+		super.decode(data, CRC);
 	}
 	
 	public ByteBuffer encode() {

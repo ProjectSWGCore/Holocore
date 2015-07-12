@@ -35,27 +35,27 @@ public class ByteUtilities {
 	private static final ByteBuffer buffer = ByteBuffer.allocate(Long.SIZE);
 	private static final char [] HEX = {'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
 	
-	public static final String getHexString(byte [] bytes) {
+	public static String getHexString(byte [] bytes) {
 		StringBuffer ret = new StringBuffer(bytes.length*2+(bytes.length>0?bytes.length-1:0));
 		for (byte b : bytes) {
-			ret.append(getHexString(b) + ' ');
+			ret.append(getHexString(b)).append(' ');
 		}
 		return new String(ret);
 	}
 	
-	public static final String getHexString(Byte [] bytes) {
+	public static String getHexString(Byte [] bytes) {
 		StringBuffer ret = new StringBuffer(bytes.length*2+(bytes.length>0?bytes.length-1:0));
 		for (byte b : bytes) {
-			ret.append(getHexString(b) + ' ');
+			ret.append(getHexString(b)).append(' ');
 		}
 		return new String(ret);
 	}
 	
-	public static final String getHexString(byte b) {
+	public static String getHexString(byte b) {
 		return String.valueOf(HEX[(b&0xFF) >>> 4]) + HEX[b & 0x0F];
 	}
 	
-	public static final byte [] longToBytes(long l) {
+	public static byte [] longToBytes(long l) {
 		byte [] b = new byte[Long.SIZE];
 		synchronized (buffer) {
 			buffer.putLong(0, l);
@@ -64,11 +64,11 @@ public class ByteUtilities {
 		return b;
 	}
 	
-	public static final long bytesToLong(byte [] a) {
+	public static long bytesToLong(byte [] a) {
 		return bytesToLong(a, 0);
 	}
 	
-	public static final long bytesToLong(byte [] a, int offset) {
+	public static long bytesToLong(byte [] a, int offset) {
 		long l = 0;
 		synchronized (buffer) {
 			for (int i = 0; i < Long.SIZE; i++) {

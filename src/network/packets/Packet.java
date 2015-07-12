@@ -27,10 +27,16 @@
 ***********************************************************************************/
 package network.packets;
 
+import resources.common.CRC;
+import resources.encodables.Encodable;
+
 import java.net.InetAddress;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 
 public class Packet {
@@ -72,14 +78,26 @@ public class Packet {
 	public int getOpcode() {
 		return opcode;
 	}
-	
+
+	public static void addList(ByteBuffer bb, Collection<? extends Encodable> list) {
+		if (list == null) {
+			addInt(bb, 0);
+			return;
+		}
+
+		addInt(bb, list.size());
+		for (Encodable encodable : list) {
+			addData(bb, encodable.encode());
+		}
+	}
+
 	public static void addBoolean(ByteBuffer bb, boolean b) {
-		bb.put(b ? (byte)1 : (byte)0);
+		bb.put(b ? (byte) 1 : (byte) 0);
 	}
 	
 	public static void addAscii(ByteBuffer bb, String s) {
 		bb.order(ByteOrder.LITTLE_ENDIAN);
-		bb.putShort((short)s.length());
+		bb.putShort((short) s.length());
 		bb.put(s.getBytes(ascii));
 	}
 	
@@ -102,7 +120,7 @@ public class Packet {
 	}
 	
 	public static void addShort(ByteBuffer bb, int i) {
-		bb.order(ByteOrder.LITTLE_ENDIAN).putShort((short)i);
+		bb.order(ByteOrder.LITTLE_ENDIAN).putShort((short) i);
 	}
 	
 	public static void addNetLong(ByteBuffer bb, long l) {
@@ -114,16 +132,32 @@ public class Packet {
 	}
 	
 	public static void addNetShort(ByteBuffer bb, int i) {
-		bb.order(ByteOrder.BIG_ENDIAN).putShort((short)i);
+		bb.order(ByteOrder.BIG_ENDIAN).putShort((short) i);
 	}
 	
 	public static void addByte(ByteBuffer bb, int b) {
-		bb.put((byte)b);
+		bb.put((byte) b);
 	}
-	
-	public static void addArray(ByteBuffer bb, byte [] b) {
+
+	public static void addData(ByteBuffer bb, byte[] data) {
+		bb.put(data);
+	}
+
+	public static void addArray(ByteBuffer bb, byte[] b) {
+		bb.put(b);
+	}
+
+	public static void addArrayList(ByteBuffer bb, byte[] b) {
 		addShort(bb, b.length);
 		bb.put(b);
+	}
+
+	public static void addEncodable(ByteBuffer data, Encodable encodable) {
+		data.put(encodable.encode());
+	}
+
+	public static void addCrc(ByteBuffer bb, String crcString) {
+		addInt(bb, CRC.getCrc(crcString));
 	}
 
 	public static boolean getBoolean(ByteBuffer bb) {
@@ -193,7 +227,50 @@ public class Packet {
 		bb.get(data);
 		return data;
 	}
-	
+
+	/**
+	 * Decodes the ByteBuffer stream into the passed List using the given listType instance for creating elements
+	 * for the list from the buffer.
+	 * @param bb ByteBuffer
+	 * @param type Top-most class for the elements that are to be added to the list
+	 * @param <T> Class type that implements {@link Encodable}
+	 * @return Amount of bytes that are read
+	 */
+	public static <T extends Encodable> List<T> getList(ByteBuffer bb, Class<T> type) {
+		List<T> list = new ArrayList<>();
+
+		int size = getInt(bb);
+
+		if (size <= 0)
+			return new ArrayList<>();
+
+		try {
+			for (int i = 0; i < size; i++) {
+				T instance = type.newInstance();
+				instance.decode(bb);
+				list.add(instance);
+			}
+		} catch (InstantiationException | IllegalAccessException e) {
+			e.printStackTrace();
+		}
+
+		if (size != list.size())
+			System.err.println("Expected list size " + size + " but only have " + list.size() + " elements in the list");
+		return list;
+	}
+
+	public static <T extends Encodable> T getEncodable(ByteBuffer bb, Class<T> type) {
+		T instance = null;
+		try {
+			instance = type.newInstance();
+			instance.decode(bb);
+		} catch (InstantiationException | IllegalAccessException e) {
+			e.printStackTrace();
+		}
+
+		return instance;
+	}
+
 	public void decode(ByteBuffer data) {
 		data.position(0);
 		this.data = data;

@@ -33,8 +33,7 @@ import network.packets.swg.SWGPacket;
 
 
 public class ClientPermissionsMessage extends SWGPacket {
-	
-	public static final int CRC = 0xE00730E5;
+	public static final int CRC = getCrc("ClientPermissionsMessage");
 	
 	private boolean canLogin;
 	private boolean canCreateRegularCharacter;

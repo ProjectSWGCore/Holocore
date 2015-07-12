@@ -27,14 +27,13 @@
 ***********************************************************************************/
 package network.packets.swg.zone.chat;
 
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-
 import network.packets.swg.SWGPacket;
 import resources.encodables.OutOfBandPackage;
 
+import java.nio.ByteBuffer;
+
 public class ChatPersistentMessageToServer extends SWGPacket {
-	public static final int CRC = 0x25A29FA6;
+	public static final int CRC = getCrc("ChatPersistentMessageToServer");
 	
 	private String message;
 	private OutOfBandPackage outOfBandPackage;
@@ -55,13 +54,13 @@ public class ChatPersistentMessageToServer extends SWGPacket {
 	public void decode(ByteBuffer data) {
 		if (!super.decode(data, CRC))
 			return;
-		message = getUnicode(data);
-		outOfBandPackage.decode(data);
-		counter = getInt(data);
-		subject = getUnicode(data);
+		message 			= getUnicode(data);
+		outOfBandPackage 	= getEncodable(data, OutOfBandPackage.class);
+		counter 			= getInt(data);
+		subject 			= getUnicode(data);
 		getAscii(data); // "SWG"
-		galaxy = getAscii(data);
-		recipient = getAscii(data);
+		galaxy 				= getAscii(data);
+		recipient 			= getAscii(data);
 	}
 	
 	@Override
@@ -70,7 +69,7 @@ public class ChatPersistentMessageToServer extends SWGPacket {
 		int dataLength = 31 + message.length()*2+oob.length+subject.length()*2+galaxy.length()+recipient.length();
 		ByteBuffer data = ByteBuffer.allocate(dataLength);
 		addUnicode(data, message);
-		data.put(oob);
+		addArray(data, oob);
 		addInt(data, counter);
 		addUnicode(data, subject);
 		addAscii(data, "SWG");

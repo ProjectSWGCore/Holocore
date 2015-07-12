@@ -27,6 +27,15 @@
 ***********************************************************************************/
 package resources.collections;
 
+import network.packets.swg.zone.baselines.Baseline.BaselineType;
+import resources.encodables.Encodable;
+import resources.network.DeltaBuilder;
+import resources.objects.SWGObject;
+import resources.player.PlayerState;
+import utilities.Encoder;
+import utilities.Encoder.StringType;
+
+import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.AbstractMap;
@@ -35,15 +44,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-import network.packets.swg.zone.baselines.Baseline.BaselineType;
-import resources.network.DeltaBuilder;
-import resources.network.BaselineBuilder.Encodable;
-import resources.objects.SWGObject;
-import resources.player.PlayerState;
-import utilities.Encoder;
-import utilities.Encoder.StringType;
-
-public class SWGMap<K, V> extends AbstractMap<K, V> implements Encodable {
+public class SWGMap<K, V> extends AbstractMap<K, V> implements Encodable, Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private BaselineType baseline;
@@ -177,7 +178,24 @@ public class SWGMap<K, V> extends AbstractMap<K, V> implements Encodable {
 
 		return buffer.array();
 	}
-	
+
+	@Override
+	public void decode(ByteBuffer data) {
+
+		//throw new NotImplementedException();
+/*		Not sure how to do decoding for an SWGMap because of generics, won't know what specific type to decode as
+		One possible workaround is to refactor decode to create new object instead of directly initializing the variables
+
+		int size 	= Packet.getInt(data);
+		updateCount	= Packet.getInt(data);
+
+		for (int i = 0; i < size; i++) {
+
+		}
+
+		return 0;*/
+	}
+
 	public void sendDeltaMessage(SWGObject target) {
 		if (!(deltas.size() > 0))
 			return;

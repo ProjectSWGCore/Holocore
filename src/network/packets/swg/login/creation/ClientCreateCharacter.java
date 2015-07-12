@@ -27,14 +27,14 @@
 ***********************************************************************************/
 package network.packets.swg.login.creation;
 
-import java.nio.ByteBuffer;
-
 import network.packets.swg.SWGPacket;
+
+import java.nio.ByteBuffer;
 
 
 public class ClientCreateCharacter extends SWGPacket {
-	
-	public static final int CRC = 0xB97F3074;
+	public static final int CRC = getCrc("ClientCreateCharacter");
+
 	private byte [] charCustomization	= new byte[0];
 	private String name					= "";
 	private String race					= "";
@@ -81,12 +81,12 @@ public class ClientCreateCharacter extends SWGPacket {
 		ByteBuffer data = ByteBuffer.allocate(36+extraSize);
 		addShort  (data, 2);
 		addInt    (data, CRC);
-		addArray  (data, charCustomization);
+		addArrayList(data, charCustomization);
 		addUnicode(data, name);
 		addAscii  (data, race);
 		addAscii  (data, start);
 		addAscii  (data, hair);
-		addArray  (data, hairCustomization);
+		addArrayList(data, hairCustomization);
 		addAscii  (data, clothes);
 		addBoolean(data, jedi);
 		addFloat  (data, height);

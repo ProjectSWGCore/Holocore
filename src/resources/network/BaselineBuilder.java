@@ -27,16 +27,16 @@
 ***********************************************************************************/
 package resources.network;
 
-import java.io.Serializable;
+import network.packets.swg.zone.baselines.Baseline;
+import network.packets.swg.zone.baselines.Baseline.BaselineType;
+import resources.encodables.Encodable;
+import resources.objects.SWGObject;
+import resources.player.Player;
+
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.charset.Charset;
 import java.util.LinkedList;
-
-import network.packets.swg.zone.baselines.Baseline;
-import network.packets.swg.zone.baselines.Baseline.BaselineType;
-import resources.objects.SWGObject;
-import resources.player.Player;
 
 public class BaselineBuilder {
 	
@@ -161,9 +161,4 @@ public class BaselineBuilder {
 	public int incrementOperandCount(int operands) {
 		return opCount+=operands;
 	}
-	
-	public interface Encodable extends Serializable {
-		byte [] encode();
-	}
-	
 }

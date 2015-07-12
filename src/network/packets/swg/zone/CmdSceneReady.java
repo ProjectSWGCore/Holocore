@@ -27,13 +27,12 @@
 ***********************************************************************************/
 package network.packets.swg.zone;
 
-import java.nio.ByteBuffer;
-
 import network.packets.swg.SWGPacket;
 
+import java.nio.ByteBuffer;
+
 public class CmdSceneReady extends SWGPacket {
-	
-	public static final int CRC = 0x43FD1C22;
+	public static final int CRC = getCrc("CmdSceneReady");
 	
 	public CmdSceneReady() {
 		

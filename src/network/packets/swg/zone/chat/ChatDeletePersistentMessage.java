@@ -27,12 +27,12 @@
 ***********************************************************************************/
 package network.packets.swg.zone.chat;
 
-import java.nio.ByteBuffer;
-
 import network.packets.swg.SWGPacket;
 
+import java.nio.ByteBuffer;
+
 public class ChatDeletePersistentMessage extends SWGPacket {
-	public static final int CRC = 0x8F251641;
+	public static final int CRC = getCrc("ChatDeletePersistentMessage");
 	
 	private int mailId;
 	
@@ -42,6 +42,15 @@ public class ChatDeletePersistentMessage extends SWGPacket {
 			return;
 		
 		mailId = getInt(data);
+	}
+
+	@Override
+	public ByteBuffer encode() {
+		ByteBuffer bb = ByteBuffer.allocate(10);
+		addShort(bb, 2);
+		addInt(bb, CRC);
+		addInt(bb, mailId);
+		return bb;
 	}
 
 	public int getMailId() { return mailId; }

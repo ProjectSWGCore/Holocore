@@ -1,12 +1,12 @@
 package network.packets.swg.zone;
 
-import java.nio.ByteBuffer;
-import resources.WeatherType;
 import network.packets.swg.SWGPacket;
+import resources.WeatherType;
+
+import java.nio.ByteBuffer;
 
 public class ServerWeatherMessage extends SWGPacket {
-
-	public static final int CRC = 0x486356EA;
+	public static final int CRC = getCrc("ServerWeatherMessage");
 	
 	private WeatherType type;
 	private float cloudVectorX;

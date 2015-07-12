@@ -27,21 +27,19 @@
 ***********************************************************************************/
 package network.packets.swg.zone;
 
-import java.nio.ByteBuffer;
-
 import network.packets.swg.SWGPacket;
 
-public class ChatRequestRoomList extends SWGPacket {
+import java.nio.ByteBuffer;
+
+public class RequestGalaxyLoopTimes extends SWGPacket {
+	public static final int CRC = getCrc("RequestGalaxyLoopTimes");
 	
-	public static final int CRC = 0x4C3D2CFA;
-	
-	public ChatRequestRoomList() {
+	public RequestGalaxyLoopTimes() {
 		
 	}
 	
 	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
-			return;
+		super.decode(data, CRC);
 	}
 	
 	public ByteBuffer encode() {

@@ -31,6 +31,7 @@ import intents.NotifyPlayersPacketIntent;
 import intents.PlayerEventIntent;
 import intents.chat.ChatAvatarRequestIntent;
 import intents.chat.ChatBroadcastIntent;
+import intents.chat.ChatRoomUpdateIntent;
 import intents.chat.PersistentMessageIntent;
 import intents.chat.SpatialChatIntent;
 import intents.network.GalacticPacketIntent;
@@ -38,31 +39,25 @@ import intents.player.ZonePlayerSwapIntent;
 import intents.server.ServerStatusIntent;
 import network.packets.Packet;
 import network.packets.swg.SWGPacket;
-import network.packets.swg.zone.ChatRequestRoomList;
-import network.packets.swg.zone.chat.ChatDeletePersistentMessage;
-import network.packets.swg.zone.chat.ChatFriendsListUpdate;
-import network.packets.swg.zone.chat.ChatInstantMessageToCharacter;
-import network.packets.swg.zone.chat.ChatInstantMessageToClient;
-import network.packets.swg.zone.chat.ChatOnAddFriend;
-import network.packets.swg.zone.chat.ChatOnChangeFriendStatus;
-import network.packets.swg.zone.chat.ChatOnGetFriendsList;
-import network.packets.swg.zone.chat.ChatOnSendInstantMessage;
-import network.packets.swg.zone.chat.ChatOnSendPersistentMessage;
-import network.packets.swg.zone.chat.ChatPersistentMessageToClient;
-import network.packets.swg.zone.chat.ChatPersistentMessageToServer;
-import network.packets.swg.zone.chat.ChatRequestPersistentMessage;
-import network.packets.swg.zone.chat.ChatSystemMessage;
+import network.packets.swg.zone.chat.*;
 import network.packets.swg.zone.chat.ChatSystemMessage.SystemChatType;
+import network.packets.swg.zone.insertion.ChatRoomList;
 import network.packets.swg.zone.object_controller.SpatialChat;
+import resources.Galaxy;
 import resources.Terrain;
+import resources.chat.ChatAvatar;
+import resources.chat.ChatResult;
+import resources.chat.ChatRoom;
 import resources.collections.SWGList;
 import resources.control.Intent;
+import resources.control.Manager;
 import resources.control.Service;
 import resources.encodables.OutOfBandPackage;
 import resources.encodables.ProsePackage;
 import resources.encodables.player.Mail;
 import resources.objects.SWGObject;
 import resources.objects.player.PlayerObject;
+import resources.player.AccessLevel;
 import resources.player.Player;
 import resources.player.PlayerState;
 import resources.server_info.CachedObjectDatabase;
@@ -70,19 +65,28 @@ import resources.server_info.ObjectDatabase;
 import resources.server_info.ObjectDatabase.Traverser;
 import services.player.PlayerManager;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
-public class ChatService extends Service {
-	
+public class ChatManager extends Manager {
+
 	private ObjectDatabase<Mail> mails;
 	private int maxMailId;
-	
-	public ChatService() {
+	private ChatRoomService roomService;
+
+	public ChatManager() {
+		roomService = new ChatRoomService();
 		mails = new CachedObjectDatabase<>("odb/mails.db");
 		maxMailId = 1;
+
+		addChildService(roomService);
 	}
 	
 	@Override
@@ -95,13 +99,11 @@ public class ChatService extends Service {
 		registerForIntent(ServerStatusIntent.TYPE);
 		registerForIntent(ChatAvatarRequestIntent.TYPE);
 		registerForIntent(ZonePlayerSwapIntent.TYPE);
+
 		mails.load();
-		mails.traverse(new Traverser<Mail>() {
-			@Override
-			public void process(Mail mail) {
-				if (mail.getId() >= maxMailId)
-					maxMailId = mail.getId() + 1;
-			}
+		mails.traverse(mail -> {
+			if (mail.getId() >= maxMailId)
+				maxMailId = mail.getId() + 1;
 		});
 		return super.initialize();
 	}
@@ -145,6 +147,7 @@ public class ChatService extends Service {
 		Player player = intent.getPlayerManager().getPlayerFromNetworkId(intent.getNetworkId());
 		if (player == null)
 			return;
+
 		Packet p = intent.getPacket();
 		if (p instanceof SWGPacket)
 			processSwgPacket(intent.getPlayerManager(), player, intent.getGalaxy().getName(), (SWGPacket) p);
@@ -152,14 +155,7 @@ public class ChatService extends Service {
 	
 	private void processSwgPacket(PlayerManager pm, Player player, String galaxyName, SWGPacket p) {
 		switch (p.getPacketType()) {
-			case CHAT_REQUEST_ROOM_LIST:
-				if (p instanceof ChatRequestRoomList)
-					handleChatRoomListRequest(player, (ChatRequestRoomList) p);
-				break;
-			case CHAT_INSTANT_MESSAGE_TO_CHARACTER:
-				if (p instanceof ChatInstantMessageToCharacter)
-					handleInstantMessage(pm, player, (ChatInstantMessageToCharacter) p);
-				break;
+			/* Mails */
 			case CHAT_PERSISTENT_MESSAGE_TO_SERVER:
 				if (p instanceof ChatPersistentMessageToServer)
 					handleSendPersistentMessage(pm, player, galaxyName, (ChatPersistentMessageToServer) p);
@@ -172,25 +168,36 @@ public class ChatService extends Service {
 				if (p instanceof ChatDeletePersistentMessage)
 					deletePersistentMessage(((ChatDeletePersistentMessage) p).getMailId());
 				break;
-			default:
+			/* Misc */
+			case CHAT_INSTANT_MESSAGE_TO_CHARACTER:
+				if (p instanceof ChatInstantMessageToCharacter)
+					handleInstantMessage(pm, player, (ChatInstantMessageToCharacter) p);
 				break;
+			default: break;
 		}
 	}
-	
+
 	private void handlePlayerEventIntent(PlayerEventIntent intent) {
+		Player player = intent.getPlayer();
+		if (player == null)
+			return;
+
 		switch (intent.getEvent()) {
+			case PE_ZONE_IN:
+				roomService.enterPlanetaryChatChannels(player);
+				break;
 			case PE_FIRST_ZONE:
-				Player player = intent.getPlayer();
 				sendPersistentMessageHeaders(player, intent.getGalaxy());
 				updateChatAvatarStatus(player, intent.getGalaxy(), true);
+				if (player.getPlayerObject() != null)
+					roomService.enterChatChannels(player, player.getPlayerObject().getJoinedChannels());
 				break;
 			case PE_LOGGED_OUT:
-				if (intent.getPlayer() == null || intent.getPlayer().getCreatureObject() == null)
-					return;
-				updateChatAvatarStatus(intent.getPlayer(), intent.getGalaxy(), false);
+				if (player.getCreatureObject() == null)
+					break;
+				updateChatAvatarStatus(player, intent.getGalaxy(), false);
 				break;
-			default:
-				break;
+			default: break;
 		}
 	}
 
@@ -231,6 +238,12 @@ public class ChatService extends Service {
 				break;
 		}
 	}
+
+	public void initializeGalaxyChannels(Galaxy galaxy) {
+		roomService.createSystemChannels(galaxy.getName());
+	}
+
+	/* Friends List */
 
 	private void handleRequestFriendList(Player player) {
 		PlayerObject ghost = player.getPlayerObject();
@@ -290,10 +303,6 @@ public class ChatService extends Service {
 		new ChatBroadcastIntent(player, new ProsePackage("@cmnty:friend_added", "TT", target)).broadcast();
 	}
 
-	private void handleChatRoomListRequest(Player player, ChatRequestRoomList request) {
-
-	}
-
 	private void handleSpatialChat(SpatialChatIntent i) {
 		Player sender = i.getPlayer();
 		SWGObject actor = sender.getCreatureObject();
@@ -329,7 +338,9 @@ public class ChatService extends Service {
 		
 		receiver.sendPacket(new ChatInstantMessageToClient(request.getGalaxy(), strSender, request.getMessage()));
 	}
-	
+
+	/* Mails */
+
 	private void handleSendPersistentMessage(PlayerManager playerMgr, Player sender, String galaxy, ChatPersistentMessageToServer request) {
 		String recipientStr = request.getRecipient().toLowerCase(Locale.ENGLISH);
 		
@@ -390,6 +401,8 @@ public class ChatService extends Service {
 		sendPersistentMessage(player, mail, MailFlagType.FULL_MESSAGE, galaxy);
 	}
 
+	/* Friends */
+
 	private void updateChatAvatarStatus(Player player, String galaxy, boolean online) {
 		PlayerManager playerManager = player.getPlayerManager();
 		String firstName = player.getCharacterName().toLowerCase();
@@ -406,19 +419,16 @@ public class ChatService extends Service {
 		}
 
 		final ChatFriendsListUpdate update = new ChatFriendsListUpdate(galaxy, firstName, online);
-		playerManager.notifyPlayersWithCondition(new NotifyPlayersPacketIntent.ConditionalNotify() {
-			@Override
-			public boolean meetsCondition(Player player) {
-				if (player.getPlayerState() != PlayerState.ZONED_IN)
-					return false;
+		playerManager.notifyPlayers(playerNotified -> {
+			if (playerNotified.getPlayerState() != PlayerState.ZONED_IN)
+				return false;
 
-				PlayerObject playerObject = player.getPlayerObject();
-				if (playerObject == null || playerObject.getFriendsList().size() <= 0)
-					return false;
+			PlayerObject playerObject = playerNotified.getPlayerObject();
+			if (playerObject == null || playerObject.getFriendsList().size() <= 0)
+				return false;
 
-				List<String> friends = playerObject.getFriendsList();
-				return friends.contains(update.getFriendName());
-			}
+			List<String> friends = playerObject.getFriendsList();
+			return friends.contains(update.getFriendName());
 		}, update);
 	}
 
@@ -468,12 +478,9 @@ public class ChatService extends Service {
 		final List <Mail> playersMail = new LinkedList<>();
 		final long receiverId = player.getCreatureObject().getObjectId();
 		
-		mails.traverse(new Traverser<Mail>() {
-			@Override
-			public void process(Mail element) {
-				if (element.getReceiverId() == receiverId)
-					playersMail.add(element);
-			}
+		mails.traverse(element -> {
+			if (element.getReceiverId() == receiverId)
+				playersMail.add(element);
 		});
 		
 		for (Mail mail : playersMail)
@@ -501,7 +508,7 @@ public class ChatService extends Service {
 	private void deletePersistentMessage(int mailId) {
 		mails.remove(mailId);
 	}
-	
+
 	private enum MailFlagType {
 		FULL_MESSAGE,
 		HEADER_ONLY

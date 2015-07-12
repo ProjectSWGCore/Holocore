@@ -25,61 +25,45 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package resources.encodables;
+package network.packets.swg.zone;
+
+import network.packets.swg.SWGPacket;
 
 import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.charset.Charset;
 
-import resources.network.BaselineBuilder.Encodable;
+public class ClientOpenContainerMessage extends SWGPacket {
+	public static final int CRC = getCrc("ClientOpenContainerMessage");
+	
+	private long containerId;
+	private String slot;
 
-public class Stf implements Encodable {
-	private static final long serialVersionUID = 1L;
-	
-	private String key = "";
-	private String file = "";
-	
-	public Stf(String file, String key) {
-		this.file = file;
-		this.key = key;
+	public ClientOpenContainerMessage() {
+		this(0);
 	}
 	
-	public Stf(String stf) {
-		if (!stf.contains(":")) {
-			System.err.println("Stf: Invalid stf format! Expected a semi-colon for " + stf);
+	public ClientOpenContainerMessage(long containerId) {
+		this.containerId = containerId;
+	}
+	
+	public ClientOpenContainerMessage(ByteBuffer data) {
+		decode(data);
+	}
+	
+	public void decode(ByteBuffer data) {
+		if (!super.decode(data, CRC))
 			return;
-		}
-		
-		if (stf.startsWith("@")) stf = stf.replaceFirst("@", "");
-		
-		String[] split = stf.split(":");
-		file = split[0];
-		
-		if (split.length == 2)
-			key = split[1];
+		containerId = getLong(data);
+		slot		= getAscii(data);
 	}
 	
-	@Override
-	public byte[] encode() {
-		ByteBuffer buffer = ByteBuffer.allocate(8 + key.length() + file.length()).order(ByteOrder.LITTLE_ENDIAN);
-		
-		buffer.putShort((short) file.length());
-		buffer.put(file.getBytes(Charset.forName("UTF-8")));
-		buffer.putInt(0);
-		buffer.putShort((short) key.length());
-		buffer.put(key.getBytes(Charset.forName("UTF-8")));
-		
-		return buffer.array();
+	public ByteBuffer encode() {
+		ByteBuffer data = ByteBuffer.allocate(20 + slot.length());
+		addShort(data, 2);
+		addInt  (data, CRC);
+		addInt  (data, 0);
+		addLong (data, containerId);
+		addAscii(data, slot);
+		return data;
 	}
 
-	public String getKey() { return key; }
-	public void setKey(String key) { this.key = key; }
-
-	public String getFile() { return file; }
-	public void setFile(String file) { this.file = file; }
-
-	@Override
-	public String toString() {
-		return "@" + file + ":" + key;
-	}
 }

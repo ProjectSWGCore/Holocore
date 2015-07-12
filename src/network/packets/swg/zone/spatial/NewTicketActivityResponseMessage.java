@@ -27,13 +27,12 @@
 ***********************************************************************************/
 package network.packets.swg.zone.spatial;
 
-import java.nio.ByteBuffer;
-
 import network.packets.swg.SWGPacket;
 
+import java.nio.ByteBuffer;
+
 public class NewTicketActivityResponseMessage extends SWGPacket {
-	
-	public static final int CRC = 0x6EA42D80;
+	public static final int CRC = getCrc("NewTicketActivityResponseMessage");
 	
 	public NewTicketActivityResponseMessage() {
 		

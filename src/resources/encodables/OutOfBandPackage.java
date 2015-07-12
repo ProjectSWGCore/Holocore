@@ -27,16 +27,17 @@
 ***********************************************************************************/
 package resources.encodables;
 
+import network.packets.Packet;
+import resources.objects.waypoint.WaypointObject;
+
+import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import resources.network.BaselineBuilder.Encodable;
-import resources.objects.waypoint.WaypointObject;
-
-public class OutOfBandPackage implements Encodable {
+public class OutOfBandPackage implements Encodable, Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private List<OutOfBandData> packages;
@@ -52,8 +53,8 @@ public class OutOfBandPackage implements Encodable {
 		packages.add(outOfBandData);
 	}
 
-	public static OutOfBandPackage createWithProse(Object stf, String key, Object prose) {
-		return new OutOfBandPackage(new ProsePackage(stf, key, prose));
+	public List<OutOfBandData> getPackages() {
+		return packages;
 	}
 
 	@Override
@@ -65,7 +66,7 @@ public class OutOfBandPackage implements Encodable {
 			data = new LinkedList<>();
 
 			for (OutOfBandData outOfBandData : packages) {
-				byte[] bytes = outOfBandData.encodeOutOfBandData();
+				byte[] bytes = packOutOfBandData(outOfBandData);
 				dataSize += bytes.length;
 				data.add(bytes);
 			}
@@ -75,45 +76,80 @@ public class OutOfBandPackage implements Encodable {
 
 		bb.putInt(dataSize / 2);
 
-		for (byte[] bytes : data) {
-			bb.put(bytes);
+		data.forEach(bb::put);
+
+		return bb.array();
+	}
+
+	@Override
+	public void decode(ByteBuffer data) {
+		int size = data.getInt() * 2;
+
+		int padding;
+		int start;
+
+		for (int read = 0; read < size; read++) {
+			start = data.position();
+			padding = data.getShort();
+			unpackOutOfBandData(data, Type.valueOf(data.get()));
+			data.position(data.position() + padding);
+			read += data.position() - start;
+		}
+	}
+
+	private void unpackOutOfBandData(ByteBuffer data, Type type) {
+		// Position doesn't seem to be reflective of it's spot in the package list, not sure if this can be automated
+		// as the client will send -3 for multiple waypoints in a mail, so could be static for each OutOfBandData
+		// If that's the case, then we can move the position variable to the Type enum instead of a method return statement
+/*		int position =*/ data.getInt();
+		switch(type) {
+			case PROSE_PACKAGE:
+				ProsePackage prose = Packet.getEncodable(data, ProsePackage.class);
+				packages.add(prose);
+				break;
+			case WAYPOINT:
+				WaypointObject waypoint = new WaypointObject(-1);
+				waypoint.decode(data);
+				packages.add(waypoint);
+				break;
+			case STRING_ID:
+				StringId stringId = Packet.getEncodable(data, StringId.class);
+				packages.add(stringId);
+				break;
+			default:
+				System.err.println("Tried to decode an unsupported OutOfBandData Type: " + type);
+				break;
+		}
+	}
+
+	private byte[] packOutOfBandData(OutOfBandData data) {
+		byte[] base = data.encode();
+
+		// Type and position is included in the padding size
+		int paddingSize = (base.length + 5) % 2;
+
+		ByteBuffer bb = ByteBuffer.allocate(7 + paddingSize + base.length);
+
+		Packet.addShort(bb, paddingSize); // Number of bytes for decoding to skip over when reading
+		Packet.addByte(bb, data.getOobType().getType());
+		Packet.addInt(bb, data.getOobPosition());
+
+		bb.put(base);
+
+		for (int i = 0; i < paddingSize; i++) {
+			Packet.addByte(bb, 0);
 		}
 
 		return bb.array();
 	}
 
-	public void decode(ByteBuffer data) {
-		int size = data.getInt() * 2;
-
-		for (int read = 0; read < size; read+= 3) {
-			boolean addedByte = data.getShort() > 0; // ?? Seen as 1
-
-			Type type = Type.valueOf(data.get());
-			switch(type) {
-				case PROSE_PACKAGE:
-					ProsePackage prose = new ProsePackage();
-					read += prose.decodeOutOfBandData(data);
-					packages.add(prose);
-					break;
-				case WAYPOINT:
-					WaypointObject waypoint = new WaypointObject(-1);
-					read += waypoint.decodeOutOfBandData(data);
-					packages.add(waypoint);
-					break;
-				default:
-					System.err.println("Tried to decode an unsupported OutOfBandData Type: " + type);
-					break;
-			}
-
-			if (addedByte) {
-				data.get();
-				read+= 1;
-			}
-		}
+	@Override
+	public String toString() {
+		return "OutOfBandPackage[packages=" + packages + "]";
 	}
 
 	public enum Type {
-		NONE(-1),
+		UNDEFINED(Byte.MIN_VALUE),
 		OBJECT(0),
 		PROSE_PACKAGE(1),
 		UNKNOWN(2),
@@ -138,12 +174,7 @@ public class OutOfBandPackage implements Encodable {
 				if (type.getType() == typeByte)
 					return type;
 			}
-			return Type.NONE;
+			return Type.UNDEFINED;
 		}
-	}
-
-	public interface OutOfBandData extends Encodable {
-		byte[] encodeOutOfBandData();
-		int decodeOutOfBandData(ByteBuffer data);
 	}
 }

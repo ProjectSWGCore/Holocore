@@ -28,11 +28,13 @@
 package resources.collections;
 
 import network.packets.swg.zone.baselines.Baseline;
-import resources.network.BaselineBuilder;
+import resources.encodables.Encodable;
 import resources.network.DeltaBuilder;
 import resources.objects.SWGObject;
 import resources.player.PlayerState;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.BitSet;
@@ -41,14 +43,12 @@ import java.util.BitSet;
 /**
  * @author Waverunner
  */
-public class SWGBitSet extends BitSet implements BaselineBuilder.Encodable {
-	
+public class SWGBitSet extends BitSet implements Encodable, Serializable {
 	private static final long serialVersionUID = 200L;
 	
 	private final Baseline.BaselineType baseline;
 	private int view;
 	private int updateType;
-
 
 	/**
 	 * Creates a new {@link SWGBitSet} for the defined baseline with the given view and update.
@@ -70,11 +70,17 @@ public class SWGBitSet extends BitSet implements BaselineBuilder.Encodable {
 		ByteBuffer buffer = ByteBuffer.allocate(4 + (list.length * 4)).order(ByteOrder.LITTLE_ENDIAN);
 
 		buffer.putInt(list.length);
-		for (int i = 0; i < list.length; i++) {
-			buffer.putInt(list[i]);
+		for (int bits : list) {
+			buffer.putInt(bits);
 		}
 
 		return buffer.array();
+	}
+
+	@Override
+	public void decode(ByteBuffer data) {
+		// TODO: Decode method for SWGBitSet
+		throw new NotImplementedException();
 	}
 
 	public void sendDeltaMessage(SWGObject target) {
@@ -87,6 +93,7 @@ public class SWGBitSet extends BitSet implements BaselineBuilder.Encodable {
 	}
 
 	public int[] toList() {
+		// TODO: This is working somehow, but position is wrong...
 		int[] integers = new int[4];
 		int count = 0;
 		int position = 0; // Position within the bit set

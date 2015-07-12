@@ -27,22 +27,21 @@
 ***********************************************************************************/
 package network.packets.swg.zone.spatial;
 
+import network.packets.swg.SWGPacket;
+
 import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import network.packets.swg.SWGPacket;
-
 public class AttributeListMessage extends SWGPacket {
-	
-	public static final int CRC = 0xF3F12F2A;
+	public static final int CRC = getCrc("AttributeListMessage");
 	
 	private long objectId;
 	private Map <String, String> attributes;
 	
 	public AttributeListMessage() {
-		this(0, new HashMap<String, String>());
+		this(0, new HashMap<>());
 	}
 	
 	public AttributeListMessage(long objectId, Map <String, String> attributes) {

@@ -33,8 +33,8 @@ import network.packets.swg.SWGPacket;
 
 
 public class ClientIdMsg extends SWGPacket {
-	
-	public static final int CRC = 0xD5899226;
+	public static final int CRC = getCrc("ClientIdMsg");
+
 	private int gameBitsToClear;
 	private byte [] sessionToken;
 	private String version;

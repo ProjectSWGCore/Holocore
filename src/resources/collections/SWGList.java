@@ -27,17 +27,22 @@
 ***********************************************************************************/
 package resources.collections;
 
+import network.packets.Packet;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
-import resources.network.BaselineBuilder.Encodable;
+import resources.encodables.Encodable;
 import resources.network.DeltaBuilder;
 import resources.objects.SWGObject;
 import resources.player.PlayerState;
 import utilities.Encoder;
 import utilities.Encoder.StringType;
 
+import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import java.util.*;
+import java.util.AbstractList;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Supports a list of elements which automatically sends data as a delta when changed for baselines.
@@ -45,7 +50,7 @@ import java.util.*;
  *
  * @param <E> Element that implements {@link Encodable} in order for data to be sent, or a basic type.
  */
-public class SWGList<E> extends AbstractList<E> implements Encodable {
+public class SWGList<E> extends AbstractList<E> implements Encodable, Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private BaselineType baseline;
@@ -210,13 +215,45 @@ public class SWGList<E> extends AbstractList<E> implements Encodable {
 		buffer.putInt(size);
 		buffer.putInt(updateCount);
 
-		for (byte[] bytes : data) {
-			buffer.put(bytes);
-		}
+		data.forEach(buffer::put);
 
 		return buffer.array();
 	}
-	
+
+	@Override
+	public void decode(ByteBuffer data) {
+/*		Not sure how to do decoding for an SWGList because of generics, won't know what specific type to decode as
+		One possible workaround is to refactor decode to create new object instead of directly initializing the variables
+		During compile time, a List<Type> is just a List due to type erasure.
+		*/
+		try {
+			throw new Exception("This is not a supported operation. Use decode(ByteBuffer data, Class<T> elementType) instead");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void decode(ByteBuffer data, Class<E> elementType) {
+		// TODO: Decode other instance types besides encodable for SWGList
+		int size 	= Packet.getInt(data);
+		updateCount = Packet.getInt(data);
+
+		try {
+			for (int i = 0; i < size; i++) {
+				E instance = elementType.newInstance();
+				if (instance instanceof Encodable)
+					((Encodable) instance).decode(data);
+				else {
+					System.out.println("No decode support for the type " + elementType.getName());
+					break;
+				}
+				list.add(instance);
+			}
+		} catch (InstantiationException | IllegalAccessException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public void sendDeltaMessage(SWGObject target) {
 		if (deltas.size() == 0)
 			return;

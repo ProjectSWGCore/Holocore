@@ -53,12 +53,12 @@ import services.galaxy.GalacticManager;
 
 public class CommandService extends Service {
 	
-	private Map <Integer, Command>	commands;			// NOTE: CRC's are all lowercased for commands!
-	private Map <String, Integer>	commandCrcLookup;
+	private final Map <Integer, Command>	commands;			// NOTE: CRC's are all lowercased for commands!
+	private final Map <String, Integer>		commandCrcLookup;
 	
 	public CommandService() {
-		commands = new HashMap<Integer, Command>();
-		commandCrcLookup = new HashMap<String, Integer>();
+		commands = new HashMap<>();
+		commandCrcLookup = new HashMap<>();
 	}
 	
 	@Override

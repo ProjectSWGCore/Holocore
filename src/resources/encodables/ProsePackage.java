@@ -27,17 +27,18 @@
 ***********************************************************************************/
 package resources.encodables;
 
+import network.packets.Packet;
+
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.charset.Charset;
 
-import resources.network.BaselineBuilder.Encodable;
-
-public class ProsePackage implements OutOfBandPackage.OutOfBandData {
+public class ProsePackage implements OutOfBandData, Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private Stf base = new Stf("", "");
+	private StringId base = new StringId("", "");
 
 	private Prose actor = new Prose();
 	private Prose target = new Prose();
@@ -114,25 +115,25 @@ public class ProsePackage implements OutOfBandPackage.OutOfBandData {
 			else { System.err.println("DF can only be a Float!"); }
 			break;
 			
-		default: return;
+		default: break;
 		
 		}
 	}
 	
 	public void setSTF(Object prose) {
-		if (prose instanceof Stf) { base = (Stf) prose; }
+		if (prose instanceof StringId) { base = (StringId) prose; }
 		else if (prose instanceof String) {
-			if (((String) prose).startsWith("@")) { base = new Stf((String) prose); }
+			if (((String) prose).startsWith("@")) { base = new StringId((String) prose); }
 			else { System.err.println("The base STF cannot be a custom string!"); }
 		} else { System.err.println("The base STF must be either a Stf or a String! Received class: " + prose.getClass().getName()); }
 	}
 	
 	public void setTU(Object prose) {
-		if (prose instanceof Stf)
-			actor.setStf((Stf) prose);
+		if (prose instanceof StringId)
+			actor.setStringId((StringId) prose);
 		else if (prose instanceof String) {
 			if (((String) prose).startsWith("@"))
-				actor.setStf(new Stf((String) prose));
+				actor.setStringId(new StringId((String) prose));
 			else actor.setText((String) prose);
 		}
 		else if (prose instanceof Long)
@@ -144,11 +145,11 @@ public class ProsePackage implements OutOfBandPackage.OutOfBandData {
 	}
 	
 	public void setTT(Object prose) {
-		if (prose instanceof Stf)
-			target.setStf((Stf) prose);
+		if (prose instanceof StringId)
+			target.setStringId((StringId) prose);
 		else if (prose instanceof String) {
 			if (((String) prose).startsWith("@"))
-				target.setStf(new Stf((String) prose));
+				target.setStringId(new StringId((String) prose));
 			else target.setText((String) prose);
 		}
 		else if (prose instanceof Long)
@@ -160,11 +161,11 @@ public class ProsePackage implements OutOfBandPackage.OutOfBandData {
 	}
 	
 	public void setTO(Object prose) {
-		if (prose instanceof Stf)
-			other.setStf((Stf) prose);
+		if (prose instanceof StringId)
+			other.setStringId((StringId) prose);
 		else if (prose instanceof String) {
 			if (((String) prose).startsWith("@"))
-				other.setStf(new Stf((String) prose));
+				other.setStringId(new StringId((String) prose));
 			else other.setText((String) prose);
 		}
 		else if (prose instanceof Long)
@@ -182,7 +183,11 @@ public class ProsePackage implements OutOfBandPackage.OutOfBandData {
 	public void setDF(Float prose) {
 		df = prose;
 	}
-	
+
+	public void setGrammarFlag(boolean useGrammar) {
+		grammarFlag = useGrammar;
+	}
+
 	@Override
 	public byte[] encode() {
 		if (base == null) // There must be a base stf always
@@ -193,56 +198,63 @@ public class ProsePackage implements OutOfBandPackage.OutOfBandData {
 		byte[] targetData = target.encode();
 		byte[] otherData = other.encode();
 
-		ByteBuffer bb = ByteBuffer.allocate(16 + stringData.length + actorData.length + targetData.length + otherData.length).order(ByteOrder.LITTLE_ENDIAN);
-		bb.putShort((short) 0); // ??
-		bb.put(OutOfBandPackage.Type.PROSE_PACKAGE.getType());
-		bb.putInt(-1); // ??
-		bb.put(stringData);
-		bb.put(actorData);
-		bb.put(targetData);
-		bb.put(otherData);
+		ByteBuffer bb = ByteBuffer.allocate(9 + stringData.length + actorData.length + targetData.length + otherData.length);
+		Packet.addArray(bb, stringData);
+		Packet.addArray(bb, actorData);
+		Packet.addArray(bb, targetData);
+		Packet.addArray(bb, otherData);
+		Packet.addInt(bb, di);
+		Packet.addFloat(bb, df);
+		Packet.addBoolean(bb, grammarFlag);
 
-		// Decimals
-		bb.putInt(di);
-		bb.putFloat(df);
-		
-		bb.put((byte) (grammarFlag ? 1 : 0)); // Grammar flag
 		return bb.array();
 	}
 
-
 	@Override
-	public byte[] encodeOutOfBandData() {
-		return encode();
+	public void decode(ByteBuffer data) {
+		base		= Packet.getEncodable(data, StringId.class);
+		actor		= Packet.getEncodable(data, Prose.class);
+		target		= Packet.getEncodable(data, Prose.class);
+		other		= Packet.getEncodable(data, Prose.class);
+		di			= Packet.getInt(data);
+		df			= Packet.getInt(data);
+		grammarFlag	= Packet.getBoolean(data);
 	}
 
 	@Override
-	public int decodeOutOfBandData(ByteBuffer data) {
-		return 0;
+	public OutOfBandPackage.Type getOobType() {
+		return OutOfBandPackage.Type.PROSE_PACKAGE;
+	}
+
+	@Override
+	public int getOobPosition() {
+		return -1;
 	}
 
 	@Override
 	public String toString() {
-		return "[ProsePackage] " + base.toString() + " Actor=" + actor.toString()
-				+ " Target=" + target.toString() + " Other=" + other.toString();
+		return "ProsePackage[base=" + base + ", grammarFlag=" + grammarFlag +
+				", actor=" + actor + ", target=" + target + ", other=" + other +
+				", di=" + di + ", df=" + df +
+				"]";
 	}
 
 	private class Prose implements Encodable {
 
 		private long objectId;
-		private Stf stf;
+		private StringId stringId;
 		private String text;
 
 		public Prose() {
-			stf = new Stf("", "");
+			stringId = new StringId("", "");
 		}
 
 		public void setObjectId(long objectId) {
 			this.objectId = objectId;
 		}
 
-		public void setStf(Stf stf) {
-			this.stf = stf;
+		public void setStringId(StringId stringId) {
+			this.stringId = stringId;
 		}
 
 		public void setText(String text) {
@@ -251,7 +263,7 @@ public class ProsePackage implements OutOfBandPackage.OutOfBandData {
 
 		@Override
 		public byte[] encode() {
-			byte[] stfData = stf.encode();
+			byte[] stfData = stringId.encode();
 			ByteBuffer bb = ByteBuffer.allocate(12 + stfData.length + (text != null ? (4 + (text.length() * 2)) : 0)).order(ByteOrder.LITTLE_ENDIAN);
 
 			bb.putLong(objectId);
@@ -267,8 +279,15 @@ public class ProsePackage implements OutOfBandPackage.OutOfBandData {
 		}
 
 		@Override
+		public void decode(ByteBuffer data) {
+			objectId 	= Packet.getLong(data);
+			stringId	= Packet.getEncodable(data, StringId.class);
+			text		= Packet.getUnicode(data);
+		}
+
+		@Override
 		public String toString() {
-			return stf.toString() + " " + objectId + " -- " + text;
+			return "Prose[objectId=" + objectId + ", stringId=" + stringId + ", text='" + text + "']";
 		}
 	}
 }

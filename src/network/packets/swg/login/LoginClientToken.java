@@ -33,8 +33,8 @@ import network.packets.swg.SWGPacket;
 
 
 public class LoginClientToken extends SWGPacket {
-	
-	public static final int CRC = 0xAAB296C6;
+	public static final int CRC = getCrc("LoginClientToken");
+
 	private byte [] sessionKey;
 	private int userId;
 	private String username;

@@ -32,8 +32,7 @@ import java.nio.ByteBuffer;
 import network.packets.swg.SWGPacket;
 
 public class ChatOnSendInstantMessage extends SWGPacket {
-	
-	public static final int CRC = 0x88DBB381;
+	public static final int CRC = getCrc("ChatOnSendInstantMessage");
 	
 	private int result;
 	private int sequence;

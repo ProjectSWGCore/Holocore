@@ -27,11 +27,11 @@
 ***********************************************************************************/
 package utilities;
 
+import resources.encodables.Encodable;
+
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.charset.Charset;
-
-import resources.network.BaselineBuilder.Encodable;
 
 public class Encoder {
 

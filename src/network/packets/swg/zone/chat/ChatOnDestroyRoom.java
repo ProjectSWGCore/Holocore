@@ -27,30 +27,24 @@
 ***********************************************************************************/
 package network.packets.swg.zone.chat;
 
+import network.packets.swg.SWGPacket;
+import resources.chat.ChatAvatar;
+
 import java.nio.ByteBuffer;
 
-import network.packets.swg.SWGPacket;
-
 public class ChatOnDestroyRoom extends SWGPacket {
-	
-	public static final int CRC = 0xE8EC5877;
-	
-	private String galaxy;
-	private String owner;
-	private boolean success;
+	public static final int CRC = getCrc("ChatOnDestroyRoom");
+
+	private ChatAvatar owner;
+	private int result;
 	private int roomId;
-	private int requestId;
-	
-	public ChatOnDestroyRoom() {
-		this("", "", true, 0, 0);
-	}
-	
-	public ChatOnDestroyRoom(String galaxy, String owner, boolean success, int roomId, int requestId) {
-		this.galaxy = galaxy;
+	private int sequence;
+
+	public ChatOnDestroyRoom(ChatAvatar owner, int result, int roomId, int sequence) {
 		this.owner = owner;
-		this.success = success;
+		this.result = result;
 		this.roomId = roomId;
-		this.requestId = requestId;
+		this.sequence = sequence;
 	}
 	
 	public ChatOnDestroyRoom(ByteBuffer data) {
@@ -60,24 +54,20 @@ public class ChatOnDestroyRoom extends SWGPacket {
 	public void decode(ByteBuffer data) {
 		if (!super.decode(data, CRC))
 			return;
-		getAscii(data); // SWG
-		galaxy = getAscii(data);
-		owner = getAscii(data);
-		success = getInt(data) == 0;
-		roomId = getInt(data);
-		requestId = getInt(data);
+		owner 		= getEncodable(data, ChatAvatar.class);
+		result 		= getInt(data);
+		roomId 		= getInt(data);
+		sequence 	= getInt(data);
 	}
 	
 	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(27 + galaxy.length() + owner.length());
+		ByteBuffer data = ByteBuffer.allocate(18 + owner.encode().length);
 		addShort(data, 5);
 		addInt  (data, CRC);
-		addAscii(data, "SWG");
-		addAscii(data, galaxy);
-		addAscii(data, owner);
-		addInt  (data, success ? 0 : 1);
+		data.put(owner.encode());
+		addInt  (data, result);
 		addInt  (data, roomId);
-		addInt  (data, requestId);
+		addInt  (data, sequence);
 		return data;
 	}
 

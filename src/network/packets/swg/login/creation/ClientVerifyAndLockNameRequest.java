@@ -33,8 +33,8 @@ import network.packets.swg.SWGPacket;
 
 
 public class ClientVerifyAndLockNameRequest extends SWGPacket {
-	
-	public static final int CRC = 0x9EB04B9F;
+	public static final int CRC = getCrc("ClientVerifyAndLockNameRequest");
+
 	private String race = "";
 	private String name = "";
 	

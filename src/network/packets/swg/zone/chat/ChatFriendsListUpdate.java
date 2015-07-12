@@ -27,13 +27,12 @@
 ***********************************************************************************/
 package network.packets.swg.zone.chat;
 
-import java.nio.ByteBuffer;
-
 import network.packets.swg.SWGPacket;
 
+import java.nio.ByteBuffer;
+
 public class ChatFriendsListUpdate extends SWGPacket {
-	
-	public static final int CRC = 0x6CD2FCD8;
+	public static final int CRC = getCrc("ChatFriendsListUpdate");
 	
 	private String galaxy;
 	private String friendName;
@@ -54,6 +53,7 @@ public class ChatFriendsListUpdate extends SWGPacket {
 	public void decode(ByteBuffer data) {
 		if (!super.decode(data, CRC))
 			return;
+		// TODO: Use ChatAvatar
 		getAscii(data); // SWG
 		galaxy = getAscii(data);
 		friendName = getAscii(data);

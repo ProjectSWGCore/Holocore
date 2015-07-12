@@ -32,8 +32,7 @@ import java.nio.ByteBuffer;
 import network.packets.swg.SWGPacket;
 
 public class ChatInstantMessageToCharacter extends SWGPacket {
-	
-	public static final int CRC = 0x84BB21F7;
+	public static final int CRC = getCrc("ChatInstantMessageToCharacter");
 	
 	private String galaxy;
 	private String character;

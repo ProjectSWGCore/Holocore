@@ -28,13 +28,12 @@
 package network.packets.swg.zone.chat;
 
 import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 
 import network.packets.swg.SWGPacket;
-import services.chat.ChatResult;
+import resources.chat.ChatResult;
 
 public class ChatOnSendPersistentMessage extends SWGPacket {
-	public static final int CRC = 0x94E7A7AE;
+	public static final int CRC = getCrc("ChatOnSendPersistentMessage");
 	
 	private ChatResult result;
 	private int count;

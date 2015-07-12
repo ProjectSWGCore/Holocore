@@ -33,8 +33,8 @@ import network.packets.swg.SWGPacket;
 
 
 public class DeleteCharacterRequest extends SWGPacket {
-	
-	public static final int CRC = 0xE87AD031;
+	public static final int CRC = getCrc("DeleteCharacterMessage");
+
 	private int serverId = 0;
 	private long playerId = 0;
 	
