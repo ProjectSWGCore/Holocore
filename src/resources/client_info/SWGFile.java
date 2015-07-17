@@ -72,7 +72,7 @@ public class SWGFile {
 
 		master = new IffNode("", true);
 		currentForm = master;
-		master.readBuffer(bb);
+		master.populateFromBuffer(bb);
 		type = master.getTag();
 		fileName = file.getAbsolutePath();
 	}

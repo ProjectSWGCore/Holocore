@@ -27,11 +27,11 @@
 ***********************************************************************************/
 package resources.client_info.visitors;
 
-import java.nio.ByteBuffer;
 import java.util.HashMap;
 
 import resources.client_info.ClientData;
-import utilities.ByteUtilities;
+import resources.client_info.IffNode;
+import resources.client_info.SWGFile;
 
 public class SlotDefinitionData extends ClientData {
 
@@ -47,33 +47,32 @@ public class SlotDefinitionData extends ClientData {
 		public int unk1;
 	}
 
-	public void handleChunkData(String form, String node, ByteBuffer data) {
-		while (data.hasRemaining()) { 
+	@Override
+	public void readIff(SWGFile iff) {
+
+		IffNode data = iff.enterChunk("DATA");
+		data.readChunk((chunk) -> {
 			SlotDefinition def = new SlotDefinition();
 
-			def.name = ByteUtilities.nextString(data);
-			def.isGlobal = (data.get() == (byte) 1);
-			def.isModdable = (data.get() == (byte) 1);
-			def.isExclusive = (data.get() == (byte) 1);
-			def.hasHardpoint = (data.get() == (byte) 1);
+			def.name = chunk.readString();
+			def.isGlobal = chunk.readBoolean();
+			def.isModdable = chunk.readBoolean();
+			def.isExclusive = chunk.readBoolean();
+			def.hasHardpoint = chunk.readBoolean();
 
 			if (def.hasHardpoint) {
-				data.mark();
-				if (data.get() != (byte) 0) {
-					data.reset();
-					def.hardpointName = ByteUtilities.nextString(data);
-					data.get();
+				if (chunk.readByte() != 0) {
+					chunk.skip(-1);
+					def.hardpointName = chunk.readString();
 				}
 			} else {
-				data.get();
+				chunk.readByte();
 			}
 
-			def.unk1 = data.getInt(); // This seems to be a couple more booleans together, not sure what they would represent.
+			def.unk1 = chunk.readInt(); // This seems to be a couple more booleans together, not sure what they would represent.
 
 			definitions.put(def.name, def);
-
-			//System.out.println("Added slot definition: " + def.name + (def.hardpointName != null ? " - Hardpoint name: " + def.hardpointName : ""));
-		}
+		});
 	}
 
 	public SlotDefinition getDefinition(String name) {

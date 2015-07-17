@@ -32,6 +32,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import resources.client_info.ClientData;
+import resources.client_info.IffNode;
+import resources.client_info.SWGFile;
 import utilities.ByteUtilities;
 
 public class ProfTemplateData extends ClientData {
@@ -57,19 +59,35 @@ public class ProfTemplateData extends ClientData {
 		}
 	}
 
-	public void handleChunkData(String form, String node, ByteBuffer data) {
-		switch(node) {
-		
-		case "NAME":
-			templates.add(new Template(ByteUtilities.nextString(data)));
-			break;
-			
-		case "ITEM":
-			int index = templates.size() - 1;
-			data.getInt(); // empty int it seems for all items
-			templates.get(index).getItems().add(ByteUtilities.nextString(data));
-			break;
-			
+	@Override
+	public void readIff(SWGFile iff) {
+		iff.enterNextForm(); // Version
+
+		IffNode form;
+		while((form = iff.enterNextForm()) != null) {
+			if (!form.getTag().equals("PTMP")) {
+				iff.exitForm();
+				continue;
+			}
+
+			IffNode chunk;
+			while((chunk = iff.enterNextChunk()) != null) {
+				String tag = chunk.getTag();
+				switch(tag) {
+					case "NAME":
+						templates.add(new Template(chunk.readString()));
+						break;
+
+					case "ITEM":
+						int index = templates.size() - 1;
+						chunk.readInt(); // empty int it seems for all items
+						templates.get(index).getItems().add(chunk.readString());
+						break;
+
+					default: break;
+				}
+			}
+			iff.exitForm();
 		}
 	}
 

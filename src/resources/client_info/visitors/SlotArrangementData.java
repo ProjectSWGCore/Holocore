@@ -32,16 +32,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 import resources.client_info.ClientData;
+import resources.client_info.IffNode;
+import resources.client_info.SWGFile;
 import utilities.ByteUtilities;
 
 public class SlotArrangementData extends ClientData {
 
 	private List <List <String>> occupiedSlots = new ArrayList<>();
 
-	public void handleChunkData(String form, String chunk, ByteBuffer data) {
-		
+	@Override
+	public void readIff(SWGFile iff) {
+		iff.enterNextForm(); // Version
+
 		ArrayList<String> slots = new ArrayList<>();
-		
+		IffNode chunk;
+		while((chunk = iff.enterNextChunk()) != null) {
+			slots.add(chunk.readString());
+		}
+
+		occupiedSlots.add(slots);
+	}
+
+	public void handleChunkData(String form, String chunk, ByteBuffer data) {
+
+		ArrayList<String> slots = new ArrayList<>();
+
 		while(data.hasRemaining()) {
 			slots.add(ByteUtilities.nextString(data));
 			data.get();
@@ -49,7 +64,7 @@ public class SlotArrangementData extends ClientData {
 
 		occupiedSlots.add(slots);
 	}
-	
+
 	public List <List<String>> getArrangement() {
 		return occupiedSlots;
 	}

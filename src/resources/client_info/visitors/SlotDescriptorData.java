@@ -32,21 +32,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 import resources.client_info.ClientData;
+import resources.client_info.IffNode;
+import resources.client_info.SWGFile;
 import utilities.ByteUtilities;
 
 public class SlotDescriptorData extends ClientData {
 
 	private List<String> slots = new ArrayList<>();
 
-	public void handleChunkData(String form, String node, ByteBuffer data) {
-		if (!form.equals("0000") && !node.equals("DATA"))
-			return;
-		
-		while (data.hasRemaining()) {
-			slots.add(ByteUtilities.nextString(data));
-			data.get();
+	@Override
+	public void readIff(SWGFile iff) {
+		iff.enterNextForm(); // version
+
+		IffNode chunk = iff.enterChunk("DATA");
+
+		String slot;
+		while((slot = chunk.readString()) != null && !slot.isEmpty()) {
+			slots.add(slot);
 		}
-		
+
 	}
 
 	public List<String> getSlots() {

@@ -112,8 +112,16 @@ public class IffNode {
 	public String readString() {
 		initBuffer();
 		String string = ByteUtilities.nextString(bb);
-		bb.get();
+		if (!string.isEmpty())
+			bb.get();
 		return string;
+	}
+
+	public void readChunk(ChunkReader reader) {
+		initBuffer();
+		while(bb.hasRemaining()) {
+			reader.handleReadChunk(this);
+		}
 	}
 
 	public byte[] getBytes() {
@@ -174,7 +182,7 @@ public class IffNode {
 		return parent;
 	}
 
-	public int readBuffer(ByteBuffer bb) {
+	public int populateFromBuffer(ByteBuffer bb) {
 		String nodeTag = getTag(bb);
 		if (!nodeTag.equals("FORM")) {
 			tag = nodeTag;
@@ -212,7 +220,7 @@ public class IffNode {
 			IffNode child = new IffNode();
 			child.parent = this;
 
-			read += child.readBuffer(bb);
+			read += child.populateFromBuffer(bb);
 			addChild(child);
 		}
 		return 4 + size;
