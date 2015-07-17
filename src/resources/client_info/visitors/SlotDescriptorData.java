@@ -36,11 +36,10 @@ import utilities.ByteUtilities;
 
 public class SlotDescriptorData extends ClientData {
 
-	private List<String> slots = new ArrayList<String>();
-	
-	@Override
-	public void parse(String node, ByteBuffer data, int size) {
-		if (!node.equals("0000DATA"))
+	private List<String> slots = new ArrayList<>();
+
+	public void handleChunkData(String form, String node, ByteBuffer data) {
+		if (!form.equals("0000") && !node.equals("DATA"))
 			return;
 		
 		while (data.hasRemaining()) {

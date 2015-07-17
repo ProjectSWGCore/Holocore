@@ -27,11 +27,10 @@
 
 package resources.client_info;
 
-import java.nio.ByteBuffer;
-
 /**
  * Created by Waverunner on 6/9/2015
  */
 public abstract class ClientData {
-	public abstract void parse(String node, ByteBuffer data, int size);
+	public void readIff(SWGFile iff) {}
+	public void writeIff(SWGFile iff) {}
 }

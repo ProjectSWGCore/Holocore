@@ -46,9 +46,8 @@ public class SlotDefinitionData extends ClientData {
 		public String hardpointName;
 		public int unk1;
 	}
-	
-	@Override
-	public void parse(String node, ByteBuffer data, int size) {
+
+	public void handleChunkData(String form, String node, ByteBuffer data) {
 		while (data.hasRemaining()) { 
 			SlotDefinition def = new SlotDefinition();
 

@@ -44,7 +44,10 @@ public final class ServerFactory extends DataFactory {
 
 	@Override
 	protected ClientData createDataObject(String type) {
-		return (type.equals("DTIIFORM") ? new DatatableData() : null);
+		switch(type) {
+			case "DTII": return new DatatableData();
+			default: return null;
+		}
 	}
 
 	@Override

@@ -28,10 +28,8 @@
 package resources.client_info.visitors;
 
 import resources.client_info.ClientData;
-import utilities.ByteUtilities;
-
-import java.nio.ByteBuffer;
-import java.nio.charset.Charset;
+import resources.client_info.IffNode;
+import resources.client_info.SWGFile;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -40,47 +38,94 @@ import java.util.List;
  */
 public class PortalLayoutData extends ClientData {
 
-	private int cellCount;
-	private int portalCount;
+//	private int cellCount;
+//	private int portalCount;
 	private List<Cell> cells = new LinkedList<>();
 
 	@Override
-	public void parse(String node, ByteBuffer data, int size) {
-		System.out.println("Node: " + node);
-		switch (node) {
-			case "0003DATA":
-				portalCount = data.getInt(); // number of portals
-				cellCount = data.getInt(); // number of cells
-				break;
-/*			case "0005DATA": {
-
-				Cell cell = new Cell();
-				data.getInt(); // number of portals cell has
-
-				cell.canSeeParentCell = data.get();
-				cell.name = data.getString(Charset.forName("US-ASCII").newDecoder().de);
-				cell.appearance = ByteUtilities.nextString(data);
-				System.out.println("Name: " + cell.name + " App.: " + cell.appearance);
-				cell.hasFloor = data.get();
-				cell.floor = (cell.hasFloor == 1 ? ByteUtilities.nextString(data) : "");
-				cells.add(cell);
-
-				break;
-			}*/
+	public void readIff(SWGFile iff) {
+		IffNode versionForm = iff.enterNextForm();
+		if (versionForm == null) {
+			System.err.println("Expected version for a POB IFF");
+			return;
 		}
+
+		int version = versionForm.getVersionFromTag();
+		switch(version) {
+			case 3: readVersion3(iff); break;
+			case 4: readVersion3(iff); break; // Seems to be identical
+			default: System.err.println("Do not know how to handle POB version type " + version + " in file " + iff.getFileName());
+		}
+	}
+
+	private void readVersion3(SWGFile iff) {
+/*		IffNode dataChunk = iff.enterChunk("DATA");
+		cellCount = dataChunk.readInt(); // Seems to be off for quite a few IFFs as displayed in IFF editors
+		portalCount = dataChunk.readInt();*/
+
+		iff.enterForm("CELS");
+
+		while(iff.enterForm("CELL") != null) {
+			cells.add(new Cell(iff));
+			iff.exitForm();
+		}
+
+		iff.exitForm(); // Exit CELS form
 	}
 
 	public List<Cell> getCells() {
 		return cells;
 	}
 
+	public static class Cell extends ClientData {
+/*		private int cellPortals;
+		private boolean canSeeParentCell;
+		private boolean hasFloor;
+		private String appearance;
+		private String floor;*/
+		private String name;
 
-	public static class Cell {
+		public Cell(SWGFile iff) {
+			readIff(iff);
+		}
 
-		public byte canSeeParentCell;
-		public String name;
-		public String appearance;
-		public byte hasFloor;
-		public String floor;
+		@Override
+		public void readIff(SWGFile iff) {
+			IffNode versionForm = iff.enterNextForm();
+			if (versionForm == null) {
+				System.err.println("Expected version for CELL in IFF " + iff.getFileName());
+				return;
+			}
+
+			int version = versionForm.getVersionFromTag();
+			switch(version) {
+				case 3: readVersion3(iff); break;
+				case 5: readVersion5(iff); break;
+				default: System.err.println("Don't know how to handle version " + version + " CELL " + iff.getFileName());
+			}
+
+			iff.exitForm();
+		}
+
+		private void readVersion3(SWGFile iff) {
+/*			IffNode dataChunk = iff.enterChunk("DATA");
+			cellPortals = dataChunk.readInt();
+			canSeeParentCell = dataChunk.readBoolean();*/
+		}
+
+		private void readVersion5(SWGFile iff) {
+			IffNode dataChunk = iff.enterChunk("DATA");
+/*			cellPortals =*/ dataChunk.readInt();
+/*			canSeeParentCell =*/ dataChunk.readBoolean();
+			name = dataChunk.readString();
+/*			appearance =*/ dataChunk.readString();
+/*			hasFloor =*/ dataChunk.readBoolean();
+/*			if (hasFloor)
+				floor = dataChunk.readString();*/
+		}
+
+		public String getName() {
+			return name;
+		}
 	}
 }

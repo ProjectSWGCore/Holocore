@@ -27,6 +27,7 @@
 ***********************************************************************************/
 package resources.client_info;
 
+import java.lang.ref.SoftReference;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,7 +44,7 @@ import resources.client_info.visitors.WorldSnapshotData;
 public class ClientFactory extends DataFactory {
 	private static ClientFactory instance;
 
-	private Map <String, ClientData> dataMap = new HashMap<>();
+	private Map <String, SoftReference<ClientData>> dataMap = new HashMap<>();
 	private Map <String, String> typeMap = new HashMap<>();
 	
 	/**
@@ -68,8 +69,42 @@ public class ClientFactory extends DataFactory {
 	 * Retrieves information from a client file used by SWG. Parsing of the file is done internally using {@link ClientData} which also
 	 * stores the variables and is the returned type. Retrieving info from this file puts a reference of the returned 
 	 * {@link ClientData} into a {@link HashMap}. Future calls for this file will try and obtain this reference if it's not null to prevent
-	 * the file from being parsed multiple times.
-	 * @param file The SWG file you wish to get information from which resides in the ./DataObject/ folder. 
+	 * the file from being parsed multiple times if the save variable is true.
+	 * @param file The SWG file you wish to get information from which resides in the ./clientdata/ folder.
+	 * Example: creation/profession_defaults_combat_brawler.iff
+	 * @return Specific visitor type of {@link ClientData} relating to the chosen file. For example, loading the file
+	 * creation/profession_defaults_combat_brawler.iff would return an instance of {@link ProfTemplateData} extended from {@link ClientData}.
+	 * A null instance of {@link ClientData} means that parsing for the type of file is not done, or a file was entered that doesn't exist on the
+	 * file system.
+	 * @param save Future calls for this file will try and obtain this reference if it's not null to prevent the file from being parsed multiple times
+	 */
+	public synchronized static ClientData getInfoFromFile(String file, boolean save) {
+		ClientFactory factory = ClientFactory.getInstance();
+		SoftReference<ClientData> reference = factory.dataMap.get(file);
+		
+		if (reference == null) {
+			ClientData data = factory.readFile(file);
+			if (data == null) {
+				return null;
+			}
+
+			// Soft used over Weak because Weak cleared as soon as the reference was not longer needed, Soft will be cleared when memory is needed by the JVM.
+			if (save) {
+				reference = new SoftReference<>(data);
+				if (reference.get() != null)
+					factory.dataMap.put(file, reference);
+			} else {
+				return data;
+			}
+		}
+		
+		return reference.get();
+	}
+
+	/**
+	 * Retrieves information from a client file used by SWG. Parsing of the file is done internally using {@link ClientData} which also
+	 * stores the variables and is the returned type.
+	 * @param file The SWG file you wish to get information from which resides in the ./clientdata/ folder.
 	 * Example: creation/profession_defaults_combat_brawler.iff
 	 * @return Specific visitor type of {@link ClientData} relating to the chosen file. For example, loading the file
 	 * creation/profession_defaults_combat_brawler.iff would return an instance of {@link ProfTemplateData} extended from {@link ClientData}.
@@ -77,24 +112,7 @@ public class ClientFactory extends DataFactory {
 	 * file system.
 	 */
 	public synchronized static ClientData getInfoFromFile(String file) {
-		ClientFactory factory = ClientFactory.getInstance();
-		ClientData data = factory.dataMap.get(file);
-		
-		if (data == null) {
-			data = factory.readFile(file);
-			if (data == null) {
-				return null;
-			}
-			// I believe that this was commented out because it made the references go away while still being used.
-			// Look into this again further and see what is going wrong.
-			/*weak = new WeakReference<DataObject>(strong);
-			
-			if (weak.get() != null) {
-				dataMap.put(file, weak);
-			}*/
-		}
-		
-		return data;
+		return getInfoFromFile(file, false);
 	}
 
 	public synchronized static String formatToSharedFile(String original) {
@@ -133,41 +151,41 @@ public class ClientFactory extends DataFactory {
 
 	// The typeMap is used for determining what DataObject class
 	private void populateTypeMap() {
-		typeMap.put("ARGDFORM", "SlotArrangementData");
-		typeMap.put("0006DATA", "SlotDefinitionData");
-		typeMap.put("CSTBFORM", "CrcStringTableData");
-		typeMap.put("DTIIFORM", "DatatableData");
-		typeMap.put("PRFIFORM", "ProfTemplateData");
-		typeMap.put("SLTDFORM", "SlotDescriptorData");
-		typeMap.put("WSNPFORM", "WorldSnapshotData");
-		typeMap.put("PRTOFORM", "PortalLayoutData");
+		typeMap.put("ARGD", "SlotArrangementData");
+		typeMap.put("0006", "SlotDefinitionData");
+		typeMap.put("CSTB", "CrcStringTableData");
+		typeMap.put("DTII", "DatatableData");
+		typeMap.put("PRFI", "ProfTemplateData");
+		typeMap.put("SLTD", "SlotDescriptorData");
+		typeMap.put("WSNP", "WorldSnapshotData");
+		typeMap.put("PRTO", "PortalLayoutData");
 		// Objects
-		typeMap.put("SBMKFORM", "ObjectData"); // object/battlefield_marker
-		typeMap.put("SBOTFORM", "ObjectData"); // object/building
-		typeMap.put("CCLTFORM", "ObjectData"); // object/cell
-		typeMap.put("SCNCFORM", "ObjectData"); // object/construction_contract
-		typeMap.put("SCOUFORM", "ObjectData"); // object/counting
-		typeMap.put("SCOTFORM", "ObjectData"); // object/creature && object/mobile
-		typeMap.put("SDSCFORM", "ObjectData"); // object/draft_schematic
-		typeMap.put("SFOTFORM", "ObjectData"); // object/factory
-		typeMap.put("SGRPFORM", "ObjectData"); // object/group
-		typeMap.put("SGLDFORM", "ObjectData"); // object/guild
-		typeMap.put("SIOTFORM", "ObjectData"); // object/installation
-		typeMap.put("SITNFORM", "ObjectData"); // object/intangible
-		typeMap.put("SJEDFORM", "ObjectData"); // object/jedi_manager
-		typeMap.put("SMSCFORM", "ObjectData"); // object/manufacture_schematic
-		typeMap.put("SMSOFORM", "ObjectData"); // object/mission
-		typeMap.put("SHOTFORM", "ObjectData"); // object/object
-		typeMap.put("STOTFORM", "ObjectData"); // object/path_waypoint && object/tangible
-		typeMap.put("SPLYFORM", "ObjectData"); // object/player
-		typeMap.put("SPQOFORM", "ObjectData"); // object/player_quest
-		typeMap.put("RCCTFORM", "ObjectData"); // object/resource_container
-		typeMap.put("SSHPFORM", "ObjectData"); // object/ship
-		typeMap.put("STATFORM", "ObjectData"); // object/soundobject && object/static
-		typeMap.put("STOKFORM", "ObjectData"); // object/token
-		typeMap.put("SUNIFORM", "ObjectData"); // object/universe
-		typeMap.put("SWAYFORM", "ObjectData"); // object/waypoint
-		typeMap.put("SWOTFORM", "ObjectData"); // object/weapon
+		typeMap.put("SBMK", "ObjectData"); // object/battlefield_marker
+		typeMap.put("SBOT", "ObjectData"); // object/building
+		typeMap.put("CCLT", "ObjectData"); // object/cell
+		typeMap.put("SCNC", "ObjectData"); // object/construction_contract
+		typeMap.put("SCOU", "ObjectData"); // object/counting
+		typeMap.put("SCOT", "ObjectData"); // object/creature && object/mobile
+		typeMap.put("SDSC", "ObjectData"); // object/draft_schematic
+		typeMap.put("SFOT", "ObjectData"); // object/factory
+		typeMap.put("SGRP", "ObjectData"); // object/group
+		typeMap.put("SGLD", "ObjectData"); // object/guild
+		typeMap.put("SIOT", "ObjectData"); // object/installation
+		typeMap.put("SITN", "ObjectData"); // object/intangible
+		typeMap.put("SJED", "ObjectData"); // object/jedi_manager
+		typeMap.put("SMSC", "ObjectData"); // object/manufacture_schematic
+		typeMap.put("SMSO", "ObjectData"); // object/mission
+		typeMap.put("SHOT", "ObjectData"); // object/object
+		typeMap.put("STOT", "ObjectData"); // object/path_waypoint && object/tangible
+		typeMap.put("SPLY", "ObjectData"); // object/player
+		typeMap.put("SPQO", "ObjectData"); // object/player_quest
+		typeMap.put("RCCT", "ObjectData"); // object/resource_container
+		typeMap.put("SSHP", "ObjectData"); // object/ship
+		typeMap.put("STAT", "ObjectData"); // object/soundobject && object/static
+		typeMap.put("STOK", "ObjectData"); // object/token
+		typeMap.put("SUNI", "ObjectData"); // object/universe
+		typeMap.put("SWAY", "ObjectData"); // object/waypoint
+		typeMap.put("SWOT", "ObjectData"); // object/weapon
 		//
 	}
 

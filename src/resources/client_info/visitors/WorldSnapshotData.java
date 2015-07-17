@@ -29,9 +29,9 @@ package resources.client_info.visitors;
 
 import resources.Location;
 import resources.client_info.ClientData;
-import utilities.ByteUtilities;
+import resources.client_info.IffNode;
+import resources.client_info.SWGFile;
 
-import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -39,40 +39,38 @@ import java.util.Map;
 
 public class WorldSnapshotData extends ClientData {
 	private Map<Integer, String> objectTemplateNames = new HashMap<>();
-	private List<Chunk> chunks = new LinkedList<>();
+	private List<Node> nodes = new LinkedList<>();
 
 	@Override
-	public void parse(String node, ByteBuffer data, int size) {
-		switch (node) {
-			case "OTNL":
-				// Object Template Name Table
-				int n = data.getInt();
+	public void readIff(SWGFile iff) {
+		IffNode versionForm = iff.enterNextForm();
+		if (versionForm == null) {
+			System.err.println("Expected a version form for " + iff.getFileName());
+			return;
+		}
 
-				for (int i = 0; i < n; i++) {
-					String template = ByteUtilities.nextString(data);
-					objectTemplateNames.put(i, template);
-					data.get(); // Null Terminated
-				}
-				break;
-			case "0000DATA":
-				Chunk chunk = new Chunk();
-				chunk.setId(data.getInt());
-				chunk.setContainerId(data.getInt());
-				chunk.setObjectTemplateNameIndex(data.getInt());
-				chunk.setCellIndex(data.getInt());
-				Location location = new Location();
-				location.setOrientationW(data.getFloat());
-				location.setOrientationX(data.getFloat());
-				location.setOrientationY(data.getFloat());
-				location.setOrientationZ(data.getFloat());
-				location.setX(data.getFloat());
-				location.setY(data.getFloat());
-				location.setZ(data.getFloat());
-				chunk.setLocation(location);
-				chunk.setRadius(data.getFloat());
-				chunk.setPortalLayoutCrc(data.getInt());
-				chunks.add(chunk);
-				break;
+		int version = versionForm.getVersionFromTag();
+		switch (version) {
+			case 1: readVersion1(iff); break;
+			default: System.err.println("Don't know how to handle version " + version + " in IFF " + iff.getFileName());
+		}
+	}
+
+	private void readVersion1(SWGFile iff) {
+		iff.enterForm("NODS");
+
+		while(iff.enterNextForm() != null) {
+			nodes.add(new Node(iff));
+			iff.exitForm();
+		}
+
+		iff.exitForm(); // Exit NODS form
+
+		IffNode chunk = iff.enterChunk("OTNL");
+		int size = chunk.readInt();
+
+		for (int i = 0; i < size; i++) {
+			objectTemplateNames.put(i, chunk.readString());
 		}
 	}
 
@@ -80,11 +78,11 @@ public class WorldSnapshotData extends ClientData {
 		return objectTemplateNames;
 	}
 
-	public List<Chunk> getChunks() {
-		return chunks;
+	public List<Node> getNodes() {
+		return nodes;
 	}
 
-	public static class Chunk {
+	public class Node extends ClientData {
 		private int id;
 		private int containerId;
 		private int objectTemplateNameIndex;
@@ -92,6 +90,55 @@ public class WorldSnapshotData extends ClientData {
 		private Location location;
 		private float radius;
 		private int portalLayoutCrc;
+
+		private List<Node> children = new LinkedList<>();
+
+		public Node(SWGFile iff) {
+			readIff(iff);
+		}
+
+		@Override
+		public void readIff(SWGFile iff) {
+			IffNode versionForm = iff.enterNextForm();
+			if (versionForm == null) {
+				System.err.println("Expected version form for WorldSnapshot IFF " + iff.getFileName());
+				return;
+			}
+
+			int version = versionForm.getVersionFromTag();
+			switch(version) {
+				case 0: readVersion0(iff); break;
+				default: System.err.println("Unknown version " + version + " in Node for " + iff.getFileName());
+			}
+
+			iff.exitForm();
+		}
+
+		private void readVersion0(SWGFile iff) {
+			IffNode chunk = iff.enterChunk("DATA");
+			id = chunk.readInt();
+			containerId = chunk.readInt();
+			objectTemplateNameIndex = chunk.readInt();
+			cellIndex = chunk.readInt();
+
+			location = new Location();
+			location.setOrientationW(chunk.readFloat());
+			location.setOrientationX(chunk.readFloat());
+			location.setOrientationY(chunk.readFloat());
+			location.setOrientationZ(chunk.readFloat());
+			location.setX(chunk.readFloat());
+			location.setY(chunk.readFloat());
+			location.setZ(chunk.readFloat());
+
+			radius = chunk.readFloat();
+			portalLayoutCrc = chunk.readUInt();
+
+			while(iff.enterNextForm() != null) {
+				Node node = new Node(iff);
+				children.add(node);
+				iff.exitForm();
+			}
+		}
 
 		public int getId() {
 			return id;
@@ -147,6 +194,15 @@ public class WorldSnapshotData extends ClientData {
 
 		public void setPortalLayoutCrc(int portalLayoutCrc) {
 			this.portalLayoutCrc = portalLayoutCrc;
+		}
+
+		public List<Node> getChildren() {
+			return children;
+		}
+
+		@Override
+		public boolean equals(Object o) {
+			return o instanceof Node && id == ((Node) o).getId();
 		}
 	}
 }

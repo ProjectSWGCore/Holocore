@@ -36,7 +36,7 @@ import utilities.ByteUtilities;
 
 public class ProfTemplateData extends ClientData {
 	
-	private List<Template> templates = new ArrayList<Template>();
+	private List<Template> templates = new ArrayList<>();
 	
 	private class Template {
 		
@@ -56,12 +56,11 @@ public class ProfTemplateData extends ClientData {
 			return template;
 		}
 	}
-	
-	@Override
-	public void parse(String node, ByteBuffer data, int size) {
+
+	public void handleChunkData(String form, String node, ByteBuffer data) {
 		switch(node) {
 		
-		case "PTMPNAME":
+		case "NAME":
 			templates.add(new Template(ByteUtilities.nextString(data)));
 			break;
 			

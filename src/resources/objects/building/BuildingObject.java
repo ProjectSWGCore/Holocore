@@ -50,7 +50,7 @@ public class BuildingObject extends TangibleObject {
 	public CellObject getCellByName(String cellName) {
 		for (SWGObject cont : getContainedObjects()) {
 			if (cont instanceof CellObject) {
-				if (((CellObject) cont).getCelName().equals(cellName)) {
+				if (((CellObject) cont).getCellName().equals(cellName)) {
 					return (CellObject) cont;
 				}
 			}
@@ -77,13 +77,16 @@ public class BuildingObject extends TangibleObject {
 		if (portalFile == null || portalFile.isEmpty())
 			return true;
 
-		//PortalLayoutData portalLayoutData = (PortalLayoutData) ClientFactory.getInfoFromFile(portalFile);
-		//populateCellData((CellObject) object, portalLayoutData.getCells().get(getCells().size()));
+		PortalLayoutData portalLayoutData = (PortalLayoutData) ClientFactory.getInfoFromFile(portalFile, true);
+		if (portalLayoutData == null || portalLayoutData.getCells() == null || portalLayoutData.getCells().size() == 0)
+			return true;
+
+		populateCellData((CellObject) object, portalLayoutData.getCells().get(getCells().size() - 1));
 		return true;
 	}
 
 	private void populateCellData(CellObject cellObject, PortalLayoutData.Cell cellData) {
-		cellObject.setCellName(cellData.name);
-		System.out.println("CellObject " + cellObject + " has name " + cellData.name);
+		cellObject.setCellName(cellData.getName());
+//		System.out.println(cellObject + " cell name " + cellObject.getCelName());
 	}
 }

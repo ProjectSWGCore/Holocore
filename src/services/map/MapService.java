@@ -162,11 +162,11 @@ public class MapService extends Service {
 	}
 
 	private void loadStaticCityPoints() {
-		DatatableData table = (DatatableData) ClientFactory.getInfoFromFile("map/static_city_points.iff");
+		DatatableData table = ServerFactory.getDatatable("map/static_city_points.iff");
 
 		byte city = (byte) mapCategories.get("city").getIndex();
 		for (int row = 0; row < table.getRowCount(); row++) {
-			ArrayList<MapLocation> locations = staticMapLocations.get(table.getCell(row, 0));
+			ArrayList<MapLocation> locations = staticMapLocations.get(table.getCell(row, 0).toString());
 			if (locations == null) {
 				locations = new ArrayList<>();
 				staticMapLocations.put((String) table.getCell(row, 0), locations);
@@ -216,7 +216,7 @@ public class MapService extends Service {
 			staticMapLocations.get(planet).add(location);
 		} else {
 			location.setId(1);
-			staticMapLocations.put(planet, new ArrayList<MapLocation>());
+			staticMapLocations.put(planet, new ArrayList<>());
 			staticMapLocations.get(planet).add(location);
 		}
 	}
@@ -227,7 +227,7 @@ public class MapService extends Service {
 			dynamicMapLocations.get(planet).add(location);
 		} else {
 			location.setId(1);
-			dynamicMapLocations.put(planet, new ArrayList<MapLocation>());
+			dynamicMapLocations.put(planet, new ArrayList<>());
 			dynamicMapLocations.get(planet).add(location);
 		}
 	}
@@ -238,7 +238,7 @@ public class MapService extends Service {
 			persistentMapLocations.get(planet).add(location);
 		} else {
 			location.setId(1);
-			persistentMapLocations.put(planet, new ArrayList<MapLocation>());
+			persistentMapLocations.put(planet, new ArrayList<>());
 			persistentMapLocations.get(planet).add(location);
 		}
 	}

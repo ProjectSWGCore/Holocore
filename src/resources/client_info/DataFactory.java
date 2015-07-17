@@ -31,6 +31,7 @@ import utilities.ByteUtilities;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -40,97 +41,27 @@ import java.nio.ByteOrder;
  */
 public abstract class DataFactory {
 
-	private ClientData getFileType(ByteBuffer bb) {
-		bb.position(8); // Skip the first FORM and data size
-		String type = ByteUtilities.nextString(bb); // Get the specific form for this IFF so we know what visitor to use
-
-		ClientData data = createDataObject(type);
-
-		return data;
-	}
-
 	// readFile only called if dataMap doesn't contain the file as a key or it's value is null
 	protected ClientData readFile(String file) {
-		FileInputStream stream = null;
+		if (file == null || file.isEmpty()) {
+			System.err.println("File cannot be null or empty!");
+			return null;
+		}
+
+		SWGFile swgFile = new SWGFile();
+
 		try {
-			File f = new File(getFolder() + file);
-			if (!f.exists()) {
-				System.out.println(getFolder() + file + " not found!");
-				return null;
-			}
-
-			stream = new FileInputStream(f);
-			ByteBuffer bb = readIntoBuffer(stream);
-
-			ClientData visitor = getFileType(bb);
-			if (visitor == null)
-				return null;
-
-			bb.position(8); // Skip first FORM, some forms only have a node and not a parent form
-			parseData(bb, visitor);
-			return visitor;
-		} catch (Exception e) {
+			swgFile.read(new File(getFolder() + file));
+		} catch (IOException e) {
 			e.printStackTrace();
-		} finally {
-			if (stream != null) {
-				try {
-					stream.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		return null;
-	}
-
-	private void parseData(ByteBuffer bb, ClientData visitor) throws Exception {
-		String name;
-		while (bb.hasRemaining()) {
-			name = ByteUtilities.nextString(bb);
-			if (name.contains("FORM")) {
-				parseFolder(bb, visitor);
-			} else {
-				parseNode(name, bb, visitor);
-			}
 		}
 
-	}
+		ClientData clientData = createDataObject(swgFile.getType());
+		if (clientData == null)
+			return null;
 
-	private void parseNode(String name, ByteBuffer bb, ClientData visitor) throws Exception {
-		int size = Integer.reverseBytes(bb.getInt()); // Size of this node/folder
-
-		if (size == 0)
-			return;
-
-		// Create a new buffer for parsing data specific to this node (excluding name bytes)
-		visitor.parse(name, getData(bb, size), size);
-
-	}
-
-	private void parseFolder(ByteBuffer bb, ClientData visitor) throws Exception {
-		ByteBuffer data = getData(bb, Integer.reverseBytes(bb.getInt()));
-
-		// Notify visitor of the Folder? May be needed at some point.
-
-		parseData(data, visitor);
-	}
-
-	private ByteBuffer readIntoBuffer(FileInputStream stream) throws IOException {
-		ByteBuffer bb = ByteBuffer.allocate(stream.available()).order(ByteOrder.LITTLE_ENDIAN);
-		stream.read(bb.array());
-		return bb;
-	}
-
-	// Cut down a ByteBuffer from the current position so we are only working with a certain amount of bytes. Useful when we
-	// call the ClientData.parse method.
-	private ByteBuffer getData(ByteBuffer source, int size) {
-		ByteBuffer data = ByteBuffer.allocate(size).order(ByteOrder.LITTLE_ENDIAN);
-		int offset = source.position();
-		data.put(source.array(), offset, size);
-		source.position(offset+size);
-		data.flip();
-
-		return data;
+		clientData.readIff(swgFile);
+		return clientData;
 	}
 
 	protected abstract ClientData createDataObject(String type);

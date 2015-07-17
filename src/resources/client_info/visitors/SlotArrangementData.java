@@ -36,12 +36,11 @@ import utilities.ByteUtilities;
 
 public class SlotArrangementData extends ClientData {
 
-	private List <List <String>> occupiedSlots = new ArrayList<List<String>>();
-	
-	@Override
-	public void parse(String node, ByteBuffer data, int size) {
+	private List <List <String>> occupiedSlots = new ArrayList<>();
+
+	public void handleChunkData(String form, String chunk, ByteBuffer data) {
 		
-		ArrayList<String> slots = new ArrayList<String>();
+		ArrayList<String> slots = new ArrayList<>();
 		
 		while(data.hasRemaining()) {
 			slots.add(ByteUtilities.nextString(data));
