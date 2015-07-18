@@ -27,8 +27,6 @@
 
 package services.map;
 
-import com.sun.corba.se.spi.activation.Server;
-import com.sun.deploy.util.SessionState;
 import intents.network.GalacticPacketIntent;
 import network.packets.Packet;
 import network.packets.swg.SWGPacket;
