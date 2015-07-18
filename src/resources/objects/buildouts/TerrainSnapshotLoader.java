@@ -9,7 +9,7 @@ import resources.Location;
 import resources.Terrain;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.WorldSnapshotData;
-import resources.client_info.visitors.WorldSnapshotData.Chunk;
+import resources.client_info.visitors.WorldSnapshotData.Node;
 import resources.containers.ContainerPermissions;
 import resources.objects.SWGObject;
 import resources.objects.cell.CellObject;
@@ -43,17 +43,25 @@ public class TerrainSnapshotLoader {
 		String path = BASE_PATH + terrain.getName() + ".ws";
 		WorldSnapshotData data = (WorldSnapshotData) ClientFactory.getInfoFromFile(path);
 		Map <Integer, String> templates = data.getObjectTemplateNames();
-		for (Chunk chunk : data.getChunks()) {
-			SWGObject object = createObject(templates, chunk);
-			object.setBuildout(true);
-			object.setLoadRange(chunk.getRadius());
-			addObject(object, chunk.getContainerId());
-			setCellInformation(object, chunk.getCellIndex());
-			updatePermissions(object);
+		for (Node node : data.getNodes()) {
+			createFromNode(templates, node);
 		}
 	}
-	
-	private SWGObject createObject(Map <Integer, String> templateMap, Chunk row) {
+
+	private void createFromNode(Map<Integer, String> templates, Node node) {
+		SWGObject object = createObject(templates, node);
+		object.setBuildout(true);
+		object.setLoadRange(node.getRadius());
+		addObject(object, node.getContainerId());
+		setCellInformation(object, node.getCellIndex());
+		updatePermissions(object);
+
+		for (Node child : node.getChildren()) {
+			createFromNode(templates, child);
+		}
+	}
+
+	private SWGObject createObject(Map <Integer, String> templateMap, Node row) {
 		SWGObject object = ObjectCreator.createObjectFromTemplate(row.getId(), templateMap.get(row.getObjectTemplateNameIndex()));
 		Location l = row.getLocation();
 		l.setTerrain(terrain);

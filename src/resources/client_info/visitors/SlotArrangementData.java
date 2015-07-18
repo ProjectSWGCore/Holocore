@@ -31,17 +31,32 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
+import resources.client_info.ClientData;
+import resources.client_info.IffNode;
+import resources.client_info.SWGFile;
 import utilities.ByteUtilities;
 
 public class SlotArrangementData extends ClientData {
 
-	private List <List <String>> occupiedSlots = new ArrayList<List<String>>();
-	
+	private List <List <String>> occupiedSlots = new ArrayList<>();
+
 	@Override
-	public void handleData(String node, ByteBuffer data, int size) {
-		
-		ArrayList<String> slots = new ArrayList<String>();
-		
+	public void readIff(SWGFile iff) {
+		iff.enterNextForm(); // Version
+
+		ArrayList<String> slots = new ArrayList<>();
+		IffNode chunk;
+		while((chunk = iff.enterNextChunk()) != null) {
+			slots.add(chunk.readString());
+		}
+
+		occupiedSlots.add(slots);
+	}
+
+	public void handleChunkData(String form, String chunk, ByteBuffer data) {
+
+		ArrayList<String> slots = new ArrayList<>();
+
 		while(data.hasRemaining()) {
 			slots.add(ByteUtilities.nextString(data));
 			data.get();
@@ -49,7 +64,7 @@ public class SlotArrangementData extends ClientData {
 
 		occupiedSlots.add(slots);
 	}
-	
+
 	public List <List<String>> getArrangement() {
 		return occupiedSlots;
 	}

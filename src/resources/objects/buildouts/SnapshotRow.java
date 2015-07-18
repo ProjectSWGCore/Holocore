@@ -1,12 +1,12 @@
 package resources.objects.buildouts;
 
-import resources.client_info.visitors.WorldSnapshotData.Chunk;
+import resources.client_info.visitors.WorldSnapshotData.Node;
 
 public class SnapshotRow {
 	
 	
 	
-	public void load(Chunk chunk) {
+	public void load(Node node) {
 		
 	}
 	

@@ -312,6 +312,8 @@ public class CharacterCreationService extends Service {
 
 		for (String template : profTemplates.get(profession).getItems(ClientFactory.formatToSharedFile(race))) {
 			TangibleObject item = createTangible(objManager, template);
+			if (item == null)
+				return;
 			// Move the new item to the player's clothing slots and add to equipment list
 			item.moveToContainer(player, player);
 			player.addEquipment(item);

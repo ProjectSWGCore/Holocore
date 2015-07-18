@@ -32,6 +32,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import resources.client_info.ClientData;
+import resources.client_info.IffNode;
+import resources.client_info.SWGFile;
 import utilities.ByteUtilities;
 
 public class CrcStringTableData extends ClientData {
@@ -41,37 +44,40 @@ public class CrcStringTableData extends ClientData {
 	private ArrayList<String> stringList = new ArrayList<>();
 	private Map <Integer, String> crcMap = new HashMap<>();
 	private int count;
-	
+
 	@Override
-	public void handleData(String node, ByteBuffer data, int size) {
-		switch (node) {
-		
-		case "0000DATA":
-			count = data.getInt();
-			break;
-			
-		case "CRCT":
-			for(int i=0; i < count; ++i) {
-				crcList.add(data.getInt());
+	public void readIff(SWGFile iff) {
+		iff.enterNextForm(); // Version
+
+		IffNode chunk;
+		while ((chunk = iff.enterNextChunk()) != null) {
+			switch(chunk.getTag()) {
+				case "DATA":
+					count = chunk.readInt();
+					break;
+
+				case "CRCT":
+					for(int i=0; i < count; ++i) {
+						crcList.add(chunk.readUInt());
+					}
+					break;
+
+				case "STRT":
+					for(int i=0; i < count; ++i) {
+						startList.add(chunk.readInt());
+					}
+					break;
+
+				case "STNG":
+					for(int i=0; i < count; ++i) {
+						String str = chunk.readString();
+						crcMap.put(crcList.get(i), str);
+						stringList.add(str);
+					}
+					break;
+				default: break;
 			}
-			break;
-			
-		case "STRT":
-			for(int i=0; i < count; ++i) {
-				startList.add(data.getInt());
-			}
-			break;
-			
-		case "STNG":
-			for(int i=0; i < count; ++i) {
-				data.position(startList.get(i));
-				String str = ByteUtilities.nextString(data);
-				crcMap.put(crcList.get(i), str);
-				stringList.add(str);
-			}
-			break;
 		}
-		
 	}
 
 	public boolean isValidCrc(int crc) {

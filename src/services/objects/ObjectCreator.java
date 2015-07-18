@@ -91,7 +91,10 @@ public final class ObjectCreator {
 	}
 
 	private static void addObjectAttributes(SWGObject obj, String template) {
-		ObjectData attributes = (ObjectData) ClientFactory.getInfoFromFile(ClientFactory.formatToSharedFile(template));
+		ObjectData attributes = (ObjectData) ClientFactory.getInfoFromFile(ClientFactory.formatToSharedFile(template), true);
+
+		if (attributes == null)
+			return;
 
 		for (Entry<String, Object> e : attributes.getAttributes().entrySet()) {
 			obj.setTemplateAttribute(e.getKey(), e.getValue());
@@ -113,7 +116,9 @@ public final class ObjectCreator {
 	private static void createObjectSlots(SWGObject object) {
 		if (object.getTemplateAttribute(ObjectData.SLOT_DESCRIPTOR) != null) {
 			// These are the slots that the object *HAS*
-			SlotDescriptorData descriptor = (SlotDescriptorData) ClientFactory.getInfoFromFile((String) object.getTemplateAttribute(ObjectData.SLOT_DESCRIPTOR));
+			SlotDescriptorData descriptor = (SlotDescriptorData) ClientFactory.getInfoFromFile((String) object.getTemplateAttribute(ObjectData.SLOT_DESCRIPTOR), true);
+			if (descriptor == null)
+				return;
 
 			for (String slotName : descriptor.getSlots()) {
 				object.getSlots().put(slotName, null);
@@ -122,7 +127,10 @@ public final class ObjectCreator {
 		
 		if (object.getTemplateAttribute(ObjectData.ARRANGEMENT_FILE) != null) {
 			// This is what slots the created object is able to go into/use
-			SlotArrangementData arrangementData = (SlotArrangementData) ClientFactory.getInfoFromFile((String) object.getTemplateAttribute(ObjectData.ARRANGEMENT_FILE));
+			SlotArrangementData arrangementData = (SlotArrangementData) ClientFactory.getInfoFromFile((String) object.getTemplateAttribute(ObjectData.ARRANGEMENT_FILE), true);
+			if (arrangementData == null)
+				return;
+
 			object.setArrangement(arrangementData.getArrangement());
 		}
 	}
