@@ -423,7 +423,7 @@ public class ObjectManager extends Manager {
 	private void zoneInCharacter(PlayerManager playerManager, String galaxy, long netId, long characterId) {
 		Player player = playerManager.getPlayerFromNetworkId(netId);
 		if (player == null) {
-			Log.e("ObjectManager", "Unable to zone in null player '%ld'", netId);
+			Log.e("ObjectManager", "Unable to zone in null player '%d'", netId);
 			return;
 		}
 		SWGObject creatureObj = objectMap.get(characterId);
