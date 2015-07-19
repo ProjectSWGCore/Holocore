@@ -27,6 +27,7 @@
 ***********************************************************************************/
 package services.objects;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -50,9 +51,9 @@ import resources.config.ConfigFile;
 import resources.control.Intent;
 import resources.control.Manager;
 import resources.objects.SWGObject;
+import resources.objects.building.BuildingObject;
 import resources.objects.buildouts.BuildoutLoader;
 import resources.objects.buildouts.SnapshotLoader;
-import resources.objects.cell.CellObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
@@ -64,10 +65,12 @@ import resources.server_info.ObjectDatabase;
 import resources.server_info.ObjectDatabase.Traverser;
 import services.map.MapService;
 import services.player.PlayerManager;
+import services.spawn.StaticService;
 
 public class ObjectManager extends Manager {
 
 	private final MapService mapService;
+	private final StaticService staticService;
 
 	private final ObjectDatabase<SWGObject> database;
 	private final ObjectAwareness objectAwareness;
@@ -76,15 +79,18 @@ public class ObjectManager extends Manager {
 	
 	public ObjectManager() {
 		mapService = new MapService();
+		staticService = new StaticService(this);
 		database = new CachedObjectDatabase<SWGObject>("odb/objects.db");
 		objectAwareness = new ObjectAwareness();
 		objectMap = new HashMap<>();
 		maxObjectId = 1;
+
+		addChildService(mapService);
+		addChildService(staticService);
 	}
 	
 	@Override
 	public boolean initialize() {
-		addChildService(mapService);
 		registerForIntent(GalacticPacketIntent.TYPE);
 		registerForIntent(PlayerEventIntent.TYPE);
 		registerForIntent(ObjectTeleportIntent.TYPE);
@@ -110,6 +116,9 @@ public class ObjectManager extends Manager {
 				}
 			}
 		});
+		for (SWGObject obj : new ArrayList<>(objectMap.values())) {
+			staticService.createSupportingObjects(obj);
+		}
 		double loadTime = (System.nanoTime() - startLoad) / 1E6;
 		Log.i("ObjectManager", "Finished loading %d objects. Time: %fms", database.size(), loadTime);
 		System.out.printf("ObjectManager: Finished loading %d objects. Time: %fms%n", database.size(), loadTime);
@@ -178,7 +187,7 @@ public class ObjectManager extends Manager {
 	}
 	
 	private void loadBuildout(SWGObject obj) {
-		if (obj instanceof TangibleObject || obj instanceof CellObject) {
+		if (obj instanceof TangibleObject || obj instanceof BuildingObject) {
 			objectAwareness.add(obj);
 		}
 		if (obj.getObjectId() >= maxObjectId) {
@@ -188,7 +197,7 @@ public class ObjectManager extends Manager {
 	}
 	
 	private void loadSnapshot(SWGObject obj) {
-		if (obj instanceof TangibleObject || obj instanceof CellObject) {
+		if (obj instanceof TangibleObject || obj instanceof BuildingObject) {
 			objectAwareness.add(obj);
 		}
 		if (obj.getObjectId() >= maxObjectId) {
@@ -253,7 +262,7 @@ public class ObjectManager extends Manager {
 				default:
 					break;
 			}
-		}else if(i instanceof ObjectTeleportIntent){
+		} else if (i instanceof ObjectTeleportIntent) {
 			processObjectTeleportIntent((ObjectTeleportIntent) i);
 		}
 	}
@@ -362,6 +371,10 @@ public class ObjectManager extends Manager {
 	}
 	
 	public SWGObject createObject(String template, Location l, boolean addToAwareness) {
+		return createObject(template, l, addToAwareness, true);
+	}
+	
+	public SWGObject createObject(String template, Location l, boolean addToAwareness, boolean addToDatabase) {
 		synchronized (objectMap) {
 			long objectId = getNextObjectId();
 			SWGObject obj = ObjectCreator.createObjectFromTemplate(objectId, template);
@@ -374,7 +387,9 @@ public class ObjectManager extends Manager {
 				objectAwareness.add(obj);
 			}
 			objectMap.put(objectId, obj);
-			database.put(objectId, obj);
+			if (addToDatabase) {
+				database.put(objectId, obj);
+			}
 			Log.i("ObjectManager", "Created object %d [%s]", obj.getObjectId(), obj.getTemplate());
 			return obj;
 		}

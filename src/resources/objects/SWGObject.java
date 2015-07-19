@@ -38,6 +38,7 @@ import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import network.packets.swg.zone.object_controller.DataTransform;
 import network.packets.swg.zone.object_controller.DataTransformWithParent;
 import resources.Location;
+import resources.Terrain;
 import resources.common.CRC;
 import resources.containers.ContainerPermissions;
 import resources.containers.ContainerResult;
@@ -445,6 +446,22 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 			parent = parent.getParent();
 		}
 		return loc;
+	}
+	
+	public double getX() {
+		return location.getX();
+	}
+	
+	public double getY() {
+		return location.getY();
+	}
+	
+	public double getZ() {
+		return location.getZ();
+	}
+	
+	public Terrain getTerrain() {
+		return location.getTerrain();
 	}
 	
 	public String getName() {
