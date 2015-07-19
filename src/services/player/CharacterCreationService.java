@@ -211,6 +211,8 @@ public class CharacterCreationService extends Service {
 			return ErrorMessage.NAME_DECLINED_PROFANE;
 		if (nameFilter.isFictionallyInappropriate(modified))
 			return ErrorMessage.NAME_DECLINED_SYNTAX;
+		if (modified.length() > 20)
+			return ErrorMessage.NAME_DECLINED_SYNTAX;
 		if (nameFilter.isReserved(modified) && !admin)
 			return ErrorMessage.NAME_DECLINED_RESERVED;
 		if (characterExistsForName(modified)) // User already exists.
