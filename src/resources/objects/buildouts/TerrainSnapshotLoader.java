@@ -47,20 +47,20 @@ public class TerrainSnapshotLoader {
 			createFromNode(templates, node);
 		}
 	}
-
+	
 	private void createFromNode(Map<Integer, String> templates, Node node) {
 		SWGObject object = createObject(templates, node);
 		object.setBuildout(true);
 		object.setLoadRange(node.getRadius());
-		addObject(object, node.getContainerId());
 		setCellInformation(object, node.getCellIndex());
+		addObject(object, node.getContainerId());
 		updatePermissions(object);
 
 		for (Node child : node.getChildren()) {
 			createFromNode(templates, child);
 		}
 	}
-
+	
 	private SWGObject createObject(Map <Integer, String> templateMap, Node row) {
 		SWGObject object = ObjectCreator.createObjectFromTemplate(row.getId(), templateMap.get(row.getObjectTemplateNameIndex()));
 		Location l = row.getLocation();

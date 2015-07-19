@@ -747,7 +747,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 			if (objectsAware.remove(o)) {
 				Player owner = o.getOwner();
 				if (owner != null)
-					sendSceneDestroyObject(o.getOwner());
+					sendSceneDestroyObject(owner);
 				else
 					destroyObjectObservers(o);
 			}
@@ -759,7 +759,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 			if (objectsAware.add(o)) {
 				Player owner = o.getOwner();
 				if (owner != null)
-					createObject(o.getOwner());
+					createObject(owner);
 				else
 					createObjectObservers(o);
 			}

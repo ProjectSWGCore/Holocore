@@ -30,6 +30,8 @@ public class StaticService extends Service {
 	public void createSupportingObjects(SWGObject object) {
 		switch (object.getTemplate()) {
 			case "object/building/tatooine/shared_bank_tatooine.iff":
+			case "object/building/naboo/shared_bank_naboo.iff":
+			case "object/building/corellia/shared_bank_corellia.iff":
 				createBankSetup(object);
 				break;
 			case "object/building/tatooine/shared_starport_tatooine.iff":
@@ -83,7 +85,7 @@ public class StaticService extends Service {
 	private SWGObject createObject(String iff, SWGObject parent, double x, double y, double z, double heading) {
 		Location loc = new Location(x, y, z, parent.getTerrain());
 		loc.setHeading(heading);
-		SWGObject obj = objectManager.createObject(iff, loc, true, false);
+		SWGObject obj = objectManager.createObject(iff, loc, false, false);
 		parent.addObject(obj);
 		return obj;
 	}

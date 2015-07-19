@@ -81,7 +81,7 @@ public class BuildingObject extends TangibleObject {
 		if (portalLayoutData == null || portalLayoutData.getCells() == null || portalLayoutData.getCells().size() == 0)
 			return true;
 
-		populateCellData((CellObject) object, portalLayoutData.getCells().get(getCells().size() - 1));
+		populateCellData((CellObject) object, portalLayoutData.getCells().get(((CellObject) object).getNumber()));
 		return true;
 	}
 
