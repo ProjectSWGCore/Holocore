@@ -30,6 +30,7 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -45,6 +46,7 @@ public class IffNode {
 	private List<IffNode> children;
 	private byte[] chunkData;
 	private ByteBuffer bb;
+	private Iterator<IffNode> childrenItr;
 
 	public IffNode() {
 	}
@@ -149,7 +151,8 @@ public class IffNode {
 	}
 
 	public IffNode getNextUnreadChunk() {
-		for (IffNode child : children) {
+		while(childrenItr.hasNext()) {
+			IffNode child = childrenItr.next();
 			if (!child.isForm && !child.hasBeenRead())
 				return child;
 		}
@@ -157,7 +160,8 @@ public class IffNode {
 	}
 
 	public IffNode getNextUnreadForm() {
-		for (IffNode child : children) {
+		while(childrenItr.hasNext()) {
+			IffNode child = childrenItr.next();
 			if (child.isForm && !child.hasBeenRead())
 				return child;
 		}
@@ -223,6 +227,9 @@ public class IffNode {
 			read += child.populateFromBuffer(bb);
 			addChild(child);
 		}
+		if (children != null)
+			childrenItr = children.listIterator();
+
 		return 4 + size;
 	}
 

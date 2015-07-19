@@ -27,14 +27,12 @@
 ***********************************************************************************/
 package resources.client_info.visitors;
 
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
 import resources.client_info.ClientData;
 import resources.client_info.IffNode;
 import resources.client_info.SWGFile;
-import utilities.ByteUtilities;
 
 public class SlotDescriptorData extends ClientData {
 

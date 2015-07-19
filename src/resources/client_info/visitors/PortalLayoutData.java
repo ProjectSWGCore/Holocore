@@ -38,8 +38,6 @@ import java.util.List;
  */
 public class PortalLayoutData extends ClientData {
 
-//	private int cellCount;
-//	private int portalCount;
 	private List<Cell> cells = new LinkedList<>();
 
 	@Override
@@ -59,10 +57,6 @@ public class PortalLayoutData extends ClientData {
 	}
 
 	private void readVersion3(SWGFile iff) {
-/*		IffNode dataChunk = iff.enterChunk("DATA");
-		cellCount = dataChunk.readInt(); // Seems to be off for quite a few IFFs as displayed in IFF editors
-		portalCount = dataChunk.readInt();*/
-
 		iff.enterForm("CELS");
 
 		while(iff.enterForm("CELL") != null) {
@@ -78,11 +72,6 @@ public class PortalLayoutData extends ClientData {
 	}
 
 	public static class Cell extends ClientData {
-/*		private int cellPortals;
-		private boolean canSeeParentCell;
-		private boolean hasFloor;
-		private String appearance;
-		private String floor;*/
 		private String name;
 
 		public Cell(SWGFile iff) {
@@ -99,7 +88,7 @@ public class PortalLayoutData extends ClientData {
 
 			int version = versionForm.getVersionFromTag();
 			switch(version) {
-				case 3: readVersion3(iff); break;
+				case 3: break;
 				case 5: readVersion5(iff); break;
 				default: System.err.println("Don't know how to handle version " + version + " CELL " + iff.getFileName());
 			}
@@ -107,21 +96,11 @@ public class PortalLayoutData extends ClientData {
 			iff.exitForm();
 		}
 
-		private void readVersion3(SWGFile iff) {
-/*			IffNode dataChunk = iff.enterChunk("DATA");
-			cellPortals = dataChunk.readInt();
-			canSeeParentCell = dataChunk.readBoolean();*/
-		}
-
 		private void readVersion5(SWGFile iff) {
 			IffNode dataChunk = iff.enterChunk("DATA");
-/*			cellPortals =*/ dataChunk.readInt();
-/*			canSeeParentCell =*/ dataChunk.readBoolean();
+			dataChunk.readInt(); // cellPortals
+			dataChunk.readBoolean(); // canSeeParentCell
 			name = dataChunk.readString();
-/*			appearance =*/ dataChunk.readString();
-/*			hasFloor =*/ dataChunk.readBoolean();
-/*			if (hasFloor)
-				floor = dataChunk.readString();*/
 		}
 
 		public String getName() {

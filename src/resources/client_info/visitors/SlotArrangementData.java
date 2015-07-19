@@ -27,14 +27,12 @@
 ***********************************************************************************/
 package resources.client_info.visitors;
 
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
 import resources.client_info.ClientData;
 import resources.client_info.IffNode;
 import resources.client_info.SWGFile;
-import utilities.ByteUtilities;
 
 public class SlotArrangementData extends ClientData {
 
@@ -44,22 +42,10 @@ public class SlotArrangementData extends ClientData {
 	public void readIff(SWGFile iff) {
 		iff.enterNextForm(); // Version
 
-		ArrayList<String> slots = new ArrayList<>();
+		List<String> slots = new ArrayList<>();
 		IffNode chunk;
 		while((chunk = iff.enterNextChunk()) != null) {
 			slots.add(chunk.readString());
-		}
-
-		occupiedSlots.add(slots);
-	}
-
-	public void handleChunkData(String form, String chunk, ByteBuffer data) {
-
-		ArrayList<String> slots = new ArrayList<>();
-
-		while(data.hasRemaining()) {
-			slots.add(ByteUtilities.nextString(data));
-			data.get();
 		}
 
 		occupiedSlots.add(slots);
