@@ -39,8 +39,8 @@ import resources.client_info.SWGFile;
 
 public class ObjectData extends ClientData {
 
-	private Map<String, Object> attributes = new HashMap<>();
-	private List<String> parsedFiles = new ArrayList<>();
+	private final Map<String, Object> attributes = new HashMap<>();
+	private final List<String> parsedFiles = new ArrayList<>();
 	
 	public static final String APPEARANCE_FILE = "appearanceFilename";
 	public static final String ARRANGEMENT_FILE = "arrangementDescriptorFilename";
@@ -128,11 +128,13 @@ public class ObjectData extends ClientData {
 		if (chunk.readByte() == 0)
 			return;
 
+		chunk.readByte();
+
 		String stfFile = chunk.readString();
 		if (stfFile.isEmpty())
 			return;
 		
-		chunk.readShort(); // 0x00, 0x01 (Shows up as well even if stfFile prior data.get() is 0)
+		chunk.readByte(); // 0x00, 0x01 (Shows up as well even if stfFile prior data.get() is 0)
 		
 		String stfName = chunk.readString();
 

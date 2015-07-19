@@ -28,6 +28,7 @@
 package resources.client_info.visitors;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import resources.client_info.ClientData;
 import resources.client_info.IffNode;
@@ -35,7 +36,7 @@ import resources.client_info.SWGFile;
 
 public class SlotDefinitionData extends ClientData {
 
-	private HashMap<String, SlotDefinition> definitions = new HashMap<>();
+	private Map<String, SlotDefinition> definitions = new HashMap<>();
 
 	public class SlotDefinition {
 		public String name;

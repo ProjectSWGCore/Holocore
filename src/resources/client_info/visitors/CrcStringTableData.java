@@ -30,6 +30,7 @@ package resources.client_info.visitors;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import resources.client_info.ClientData;
@@ -39,9 +40,9 @@ import utilities.ByteUtilities;
 
 public class CrcStringTableData extends ClientData {
 	
-	private ArrayList<Integer> crcList = new ArrayList<>();
-	private ArrayList<Integer> startList = new ArrayList<>();
-	private ArrayList<String> stringList = new ArrayList<>();
+	private List<Integer> crcList = new ArrayList<>();
+	private List<Integer> startList = new ArrayList<>();
+	private List<String> stringList = new ArrayList<>();
 	private Map <Integer, String> crcMap = new HashMap<>();
 	private int count;
 
@@ -81,11 +82,7 @@ public class CrcStringTableData extends ClientData {
 	}
 
 	public boolean isValidCrc(int crc) {
-		
-		if(!crcList.contains(crc))
-			return false;
-		return true;
-		
+		return crcList.contains(crc);
 	}
 	
 	public String getTemplateString(int crc) {

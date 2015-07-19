@@ -75,6 +75,8 @@ public class SWGFile {
 		master.populateFromBuffer(bb);
 		type = master.getTag();
 		fileName = file.getAbsolutePath();
+
+		inputStream.close();
 	}
 
 	public IffNode addForm(String tag) {
