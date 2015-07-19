@@ -336,7 +336,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	 * @return An unmodifiable {@link Collection} of {@link SWGObject}'s in the container
 	 */
 	public Collection<SWGObject> getContainedObjects() {
-		return Collections.unmodifiableCollection(containedObjects.values());
+		return new ArrayList<>(containedObjects.values());
 	}
 
 	public boolean hasSlot(String slotName) {
