@@ -59,7 +59,7 @@ public class StaticService extends Service {
 		createObject(BANK_TERMINAL_IFF, bankLoc, 0, 0.52, 4.3, 0);
 		createObject(BANK_TERMINAL_IFF, bankLoc, 0, 0.52, -4.3, 180);
 		createObject(BANK_TERMINAL_IFF, bankLoc, 4.3, 0.52, 0, 90);
-		createObject(TICKET_TERMINAL_IFF, bankLoc, -4.3, 0.52, 0, -90);
+		createObject(BANK_TERMINAL_IFF, bankLoc, -4.3, 0.52, 0, -90);
 	}
 	
 	private void createGeneralStarportSetup(BuildingObject starport) {
