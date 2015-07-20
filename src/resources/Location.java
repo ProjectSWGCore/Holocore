@@ -116,6 +116,20 @@ public class Location implements Serializable {
 		this.oW += oW;
 	}
 	
+	public void translateLocation(Location l) {
+		double k0 = l.oW * l.oW - 0.5f;
+		double k1 = x * l.oX + y * l.oY + z * l.oZ;
+		double rx = l.x + 2 * (x * k0 + l.oX * k1 + l.oW * (l.oY * z - l.oZ * y));
+		double ry = l.y + 2 * (y * k0 + l.oY * k1 + l.oW * (z * x - l.oX * z));
+		double rz = l.z + 2 * (z * k0 + l.oZ * k1 + l.oW * (l.oX * y - l.oY * x));
+		double row = l.oW*oW - l.oX*oX - l.oY*oY - l.oZ*oZ;
+		double rox = l.oW*oX + l.oX*oW + l.oY*oZ - l.oZ*oY;
+		double roy = l.oW*oY + l.oY*oW + l.oZ*oX - l.oX*oZ;
+		double roz = l.oW*oZ + l.oZ*oW + l.oX*oY - l.oY*oX;
+		setPosition(rx, ry, rz);
+		setOrientation(rox, roy, roz, row);
+	}
+	
 	public Location translate(double x, double y, double z) {
 		Location loc = new Location(this);
 		loc.translatePosition(x, y, z);
@@ -124,35 +138,7 @@ public class Location implements Serializable {
 	
 	public Location translate(Location l) {
 		Location ret = new Location(this);
-		double k0 = l.oW * l.oW - 0.5f;
-		double k1;
-		double rx, ry, rz;
-		
-		// k1 = Q.V
-		k1 = x * l.oX;
-		k1 += y * l.oY;
-		k1 += z * l.oZ;
-		
-		// (qq-1/2)V+(Q.V)Q
-		rx = x * k0 + l.oX * k1;
-		ry = y * k0 + l.oY * k1;
-		rz = z * k0 + l.oZ * k1;
-		
-		// (Q.V)Q+(qq-1/2)V+q(QxV)
-		rx += l.oW * (l.oY * z - l.oZ * y);
-		ry += l.oW * (z * x - l.oX * z);
-		rz += l.oW * (l.oX * y - l.oY * x);
-		
-		//  2((Q.V)Q+(qq-1/2)V+q(QxV))
-		rx += rx;
-		ry += ry;
-		rz += rz;
-		ret.setPosition(rx, ry, rz);
-		ret.translatePosition(l.x, l.y, l.z);
-		ret.setOrientationW(l.oW*oW - l.oX*oX - l.oY*oY - l.oZ*oZ);
-		ret.setOrientationX(l.oW*oX + l.oX*oW + l.oY*oZ - l.oZ*oY);
-		ret.setOrientationY(l.oW*oY + l.oY*oW + l.oZ*oX - l.oX*oZ);
-		ret.setOrientationZ(l.oW*oZ + l.oZ*oW + l.oX*oY - l.oY*oX);
+		ret.translateLocation(l);
 		return ret;
 	}
 	

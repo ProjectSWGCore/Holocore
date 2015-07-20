@@ -30,6 +30,7 @@ package resources.server_info;
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -109,7 +110,7 @@ public class UncachedObjectDatabase<V extends Serializable> extends ObjectDataba
 	
 	public synchronized boolean save() {
 		if (!loaded) {
-			System.err.println("Not saving '" + getFile() + "', file not loaded yet!");
+			Log.e("UncachedObjectDatabase", "Not saving '" + getFile() + "', file not loaded yet!");
 			return false;
 		}
 		DataOutputStream dos = null;
@@ -119,7 +120,7 @@ public class UncachedObjectDatabase<V extends Serializable> extends ObjectDataba
 			loadCachedAndSave(dos, loadUncachedAndSave(dos, 0));
 			moveFile(file+".tmp", file.getAbsolutePath());
 		} catch (IOException e) {
-			System.err.println("UncachedObjectDatabase: Error while saving file. IOException: " + e.getMessage());
+			Log.e("UncachedObjectDatabase", "Error while saving file. IOException: " + e.getMessage());
 			e.printStackTrace();
 			return false;
 		} finally {
@@ -328,6 +329,8 @@ public class UncachedObjectDatabase<V extends Serializable> extends ObjectDataba
 				index = loadObject(dis, index);
 			}
 			dis.close();
+			loaded = true;
+		} catch (EOFException e) {
 			loaded = true;
 		} catch (IOException e) {
 			return false;

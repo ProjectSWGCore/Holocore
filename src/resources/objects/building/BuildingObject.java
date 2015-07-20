@@ -77,13 +77,16 @@ public class BuildingObject extends TangibleObject {
 		if (portalFile == null || portalFile.isEmpty())
 			return true;
 
-		PortalLayoutData portalLayoutData = (PortalLayoutData) ClientFactory.getInfoFromFile(portalFile);
-		populateCellData((CellObject) object, portalLayoutData.getCells().get(getCells().size()));
+		PortalLayoutData portalLayoutData = (PortalLayoutData) ClientFactory.getInfoFromFile(portalFile, true);
+		if (portalLayoutData == null || portalLayoutData.getCells() == null || portalLayoutData.getCells().size() == 0)
+			return true;
+
+		populateCellData((CellObject) object, portalLayoutData.getCells().get(((CellObject) object).getNumber()));
 		return true;
 	}
 
 	private void populateCellData(CellObject cellObject, PortalLayoutData.Cell cellData) {
-		cellObject.setCellName(cellData.name);
-		System.out.println("CellObject " + cellObject + " has name " + cellData.name);
+		cellObject.setCellName(cellData.getName());
+//		System.out.println(cellObject + " cell name " + cellObject.getCelName());
 	}
 }

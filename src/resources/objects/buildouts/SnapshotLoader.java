@@ -19,8 +19,8 @@ public class SnapshotLoader {
 			Terrain.TATOOINE,	Terrain.YAVIN4
 	);
 	
-	private Map <Long, SWGObject> objectTable;
-	private List <SWGObject> objects;
+	private final Map <Long, SWGObject> objectTable;
+	private final List <SWGObject> objects;
 	
 	public SnapshotLoader() {
 		objectTable = new HashMap<>();

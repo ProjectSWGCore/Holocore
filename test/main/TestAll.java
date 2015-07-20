@@ -7,17 +7,13 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import resources.TestSortedLinkedList;
-import resources.objects.quadtree.TestQuadTree;
-import resources.server_info.TestObjectDatabase;
+import resources.TestResources;
 
 @RunWith(Suite.class)
 @SuiteClasses({
 	TestEncryption.class,
 	TestFragmented.class,
-	TestQuadTree.class,
-	TestObjectDatabase.class,
-	TestSortedLinkedList.class
+	TestResources.class
 })
 public class TestAll {
 	

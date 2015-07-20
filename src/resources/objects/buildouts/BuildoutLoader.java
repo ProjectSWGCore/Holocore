@@ -44,8 +44,8 @@ public class BuildoutLoader {
 	
 	private static final CrcStringTableData crcTable = (CrcStringTableData) ClientFactory.getInfoFromFile("misc/object_template_crc_string_table.iff");
 	
-	private Map <Long, SWGObject> objectTable;
-	private List <SWGObject> objects;
+	private final Map <Long, SWGObject> objectTable;
+	private final List <SWGObject> objects;
 	
 	public BuildoutLoader() {
 		objectTable = new HashMap<>();

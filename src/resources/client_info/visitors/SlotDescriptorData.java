@@ -27,26 +27,28 @@
 ***********************************************************************************/
 package resources.client_info.visitors;
 
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
-import utilities.ByteUtilities;
+import resources.client_info.ClientData;
+import resources.client_info.IffNode;
+import resources.client_info.SWGFile;
 
 public class SlotDescriptorData extends ClientData {
 
-	private List<String> slots = new ArrayList<String>();
-	
+	private List<String> slots = new ArrayList<>();
+
 	@Override
-	public void handleData(String node, ByteBuffer data, int size) {
-		if (!node.equals("0000DATA"))
-			return;
-		
-		while (data.hasRemaining()) {
-			slots.add(ByteUtilities.nextString(data));
-			data.get();
+	public void readIff(SWGFile iff) {
+		iff.enterNextForm(); // version
+
+		IffNode chunk = iff.enterChunk("DATA");
+
+		String slot;
+		while((slot = chunk.readString()) != null && !slot.isEmpty()) {
+			slots.add(slot);
 		}
-		
+
 	}
 
 	public List<String> getSlots() {

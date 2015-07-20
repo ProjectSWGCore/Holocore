@@ -38,6 +38,7 @@ import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import network.packets.swg.zone.object_controller.DataTransform;
 import network.packets.swg.zone.object_controller.DataTransformWithParent;
 import resources.Location;
+import resources.Terrain;
 import resources.common.CRC;
 import resources.containers.ContainerPermissions;
 import resources.containers.ContainerResult;
@@ -336,7 +337,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	 * @return An unmodifiable {@link Collection} of {@link SWGObject}'s in the container
 	 */
 	public Collection<SWGObject> getContainedObjects() {
-		return Collections.unmodifiableCollection(containedObjects.values());
+		return new ArrayList<>(containedObjects.values());
 	}
 
 	public boolean hasSlot(String slotName) {
@@ -433,7 +434,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	}
 	
 	public Location getLocation() {
-		return location;
+		return new Location(location);
 	}
 	
 	public Location getWorldLocation() {
@@ -441,10 +442,26 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		SWGObject parent = getParent();
 		while (parent != null) {
 			Location l = parent.location;
-			loc.translatePosition(l.getX(), l.getY(), l.getZ()); // Have to access privately to avoid copies
+			loc.translateLocation(l); // Have to access privately to avoid copies
 			parent = parent.getParent();
 		}
 		return loc;
+	}
+	
+	public double getX() {
+		return location.getX();
+	}
+	
+	public double getY() {
+		return location.getY();
+	}
+	
+	public double getZ() {
+		return location.getZ();
+	}
+	
+	public Terrain getTerrain() {
+		return location.getTerrain();
 	}
 	
 	public String getName() {
@@ -730,7 +747,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 			if (objectsAware.remove(o)) {
 				Player owner = o.getOwner();
 				if (owner != null)
-					sendSceneDestroyObject(o.getOwner());
+					sendSceneDestroyObject(owner);
 				else
 					destroyObjectObservers(o);
 			}
@@ -742,7 +759,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 			if (objectsAware.add(o)) {
 				Player owner = o.getOwner();
 				if (owner != null)
-					createObject(o.getOwner());
+					createObject(owner);
 				else
 					createObjectObservers(o);
 			}
@@ -818,8 +835,6 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		// Now create the contained objects
 		for (SWGObject containedObject : containedObjects.values()) {
 			if (containedObject != null && !sentObjects.contains(containedObject)) {
-				//Log.i("ChildrenObjects", "Sending containedObj " + containedObject + " to " + target);
-				//Log.d("SWGObject", "Sending to location " + containedObject.getLocation());
 				containedObject.createObject(target);
 			}
 		}
