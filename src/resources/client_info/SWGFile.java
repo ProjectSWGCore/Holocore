@@ -45,6 +45,11 @@ public class SWGFile {
 
 	public SWGFile() {}
 
+	public SWGFile(String fileName, String type) {
+		this(type);
+		this.fileName = fileName;
+	}
+
 	public SWGFile(String type) {
 		this.type = type;
 		this.master = new IffNode(type, true);
