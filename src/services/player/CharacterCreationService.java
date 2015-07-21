@@ -124,7 +124,14 @@ public class CharacterCreationService extends Service {
 	private void handleRandomNameRequest(Player player, RandomNameRequest request) {
 		RandomNameResponse response = new RandomNameResponse(request.getRace(), "");
 		String race = Race.getRaceByFile(request.getRace()).getSpecies();
-		response.setRandomName(nameGenerator.generateRandomName(race));
+		String randomName = null;
+		while (randomName == null) {
+			randomName = nameGenerator.generateRandomName(race);
+			if (getNameValidity(randomName, player.getAccessLevel() != AccessLevel.PLAYER) != ErrorMessage.NAME_APPROVED) {
+				randomName = null;
+			}
+		}
+		response.setRandomName(randomName);
 		sendPacket(player.getNetworkId(), response);
 	}
 	

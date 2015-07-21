@@ -56,4 +56,5 @@ public class RandomNameRequest extends SWGPacket {
 	}
 	
 	public String getRace() { return raceCrc; }
+	public void setRace(String race) { this.raceCrc = race; }
 }
