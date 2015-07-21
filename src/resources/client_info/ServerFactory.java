@@ -29,6 +29,17 @@ package resources.client_info;
 
 import resources.client_info.visitors.DatatableData;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.FileVisitResult;
+import java.nio.file.FileVisitor;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 
 /**
  * Created by Waverunner on 6/9/2015
@@ -40,6 +51,138 @@ public final class ServerFactory extends DataFactory {
 		ClientData data = getInstance().readFile(file);
 		// Safe type conversion as ServerFactory can only create DatatableData ClientData objects
 		return (data != null ? (DatatableData) data : null);
+	}
+
+	public void updateServerIffs() throws IOException {
+		File root = new File(getFolder());
+
+		Files.walkFileTree(root.toPath(), new FileVisitor<Path>() {
+			@Override
+			public FileVisitResult preVisitDirectory(Path path, BasicFileAttributes basicFileAttributes) throws IOException {
+				return FileVisitResult.CONTINUE;
+			}
+
+			@Override
+			public FileVisitResult visitFile(Path path, BasicFileAttributes basicFileAttributes) throws IOException {
+				if (path.toString().endsWith("sdf")) {
+					String name = path.toString();
+					name = name.substring(0, name.length() - 4) + ".iff";
+
+					File iff = new File(name);
+
+					if (!iff.exists()) {
+						convertSif(path, name);
+						System.out.println("Created Server Datatable: " + name);
+					} else {
+						File sif = path.toFile();
+						if (sif.lastModified() > iff.lastModified()) {
+							convertSif(path, name);
+							System.out.println("Updated Server Datatable: " + name);
+						}
+					}
+				}
+				return FileVisitResult.CONTINUE;
+			}
+
+			@Override
+			public FileVisitResult visitFileFailed(Path path, IOException e) throws IOException {
+				return FileVisitResult.CONTINUE;
+			}
+
+			@Override
+			public FileVisitResult postVisitDirectory(Path path, IOException e) throws IOException {
+				return FileVisitResult.CONTINUE;
+			}
+		});
+	}
+
+	private void convertSif(Path sif, String newPath) {
+		SWGFile swgFile = new SWGFile(newPath, "DTII");
+
+		DatatableData data = (DatatableData) createDataObject(swgFile);
+
+		String[] columnTypes = null;
+		String[] columnNames = null;
+		Object[][] table = null;
+
+		List<String> defaultValues = new ArrayList<>();
+		try {
+			int lineNum = -1;
+
+			List<String> rows = Files.readAllLines(sif);
+			Iterator<String> itr = rows.iterator();
+			while (itr.hasNext()) {
+				String row = itr.next();
+				if (row == null || row.isEmpty() || row.startsWith("#") || row.startsWith("//")) {
+					itr.remove();
+					continue;
+				}
+
+				// Don't break out of the loop, make sure we remove all the commented/null/empty rows
+				if (!(lineNum <= 1))
+					continue;
+
+				lineNum++;
+				if (lineNum == 0) {
+					columnNames = row.split("\t");
+				} else if (lineNum == 1) {
+					columnTypes = row.split("\t");
+					for (int i = 0; i < columnTypes.length; i++) {
+						String columnType = columnTypes[i];
+						if (columnType.contains("[")) {
+							String[] split = columnType.split("\\[");
+							columnTypes[i] = split[0].toLowerCase();
+							defaultValues.add(split[1].replace("]", ""));
+						} else {
+							columnTypes[i] = columnType.toLowerCase();
+							defaultValues.add("");
+						}
+					}
+				}
+				itr.remove();
+			}
+
+			if (columnNames == null || columnTypes == null) {
+				System.err.println("Failed to convert sif " + sif.getFileName());
+				return;
+			}
+
+			table = new Object[rows.size()][columnTypes.length];
+
+			for (int i = 0; i < rows.size(); i++) {
+				createDatatableRow(i, rows.get(i), columnTypes, table, defaultValues);
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		data.setColumnNames(columnNames);
+		data.setColumnTypes(columnTypes);
+		data.setTable(table);
+
+		writeFile(swgFile, data);
+	}
+
+	private void createDatatableRow(int rowNum, String line, String[] columnTypes, Object[][] table, List<String> defValues) {
+		String[] values = line.split("\t", -1);
+
+		for (int t = 0; t < columnTypes.length; t++) {
+			String type = columnTypes[t];
+			String val = values[t];
+
+			if (val.isEmpty() && !defValues.get(t).isEmpty())
+				val = defValues.get(t);
+
+			switch(type) {
+				case "b": table[rowNum][t] = Boolean.valueOf(val); break;
+				case "h":
+				case "i": table[rowNum][t] = Integer.valueOf(val); break;
+				case "f": table[rowNum][t] = Float.valueOf(val); break;
+				case "s": table[rowNum][t] = val; break;
+				default: System.err.println("Don't know how to parse type " + type); break;
+			}
+		}
 	}
 
 	@Override
@@ -55,7 +198,7 @@ public final class ServerFactory extends DataFactory {
 		return "./serverdata/";
 	}
 
-	private static ServerFactory getInstance() {
+	public static ServerFactory getInstance() {
 		if (instance == null)
 			instance = new ServerFactory();
 		return instance;

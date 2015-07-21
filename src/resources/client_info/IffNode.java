@@ -67,9 +67,17 @@ public class IffNode {
 		return bb.get();
 	}
 
+	public void writeByte(byte val) {
+		bb.order(ByteOrder.LITTLE_ENDIAN).put(val);
+	}
+
 	public short readShort() {
 		initBuffer();
 		return bb.order(ByteOrder.LITTLE_ENDIAN).getShort();
+	}
+
+	public void writeShort(short val) {
+		bb.order(ByteOrder.LITTLE_ENDIAN).putShort(val);
 	}
 
 	public int readInt() {
@@ -77,14 +85,26 @@ public class IffNode {
 		return bb.order(ByteOrder.LITTLE_ENDIAN).getInt();
 	}
 
+	public void writeInt(int val) {
+		bb.order(ByteOrder.LITTLE_ENDIAN).putInt(val);
+	}
+
 	public float readFloat() {
 		initBuffer();
 		return bb.getFloat();
 	}
 
+	public void writeFloat(float val) {
+		bb.putFloat(val);
+	}
+
 	public long readLong() {
 		initBuffer();
 		return bb.order(ByteOrder.LITTLE_ENDIAN).getLong();
+	}
+
+	public void writeLong(long val) {
+		bb.order(ByteOrder.LITTLE_ENDIAN).putLong(val);
 	}
 
 	public int readUInt() {
@@ -117,6 +137,11 @@ public class IffNode {
 		if (!string.isEmpty())
 			bb.get();
 		return string;
+	}
+
+	public void writeString(String s) {
+		bb.put(s.getBytes(Charset.forName("US-ASCII")));
+		writeByte((byte) 0);
 	}
 
 	public void readChunk(ChunkReader reader) {
@@ -196,6 +221,14 @@ public class IffNode {
 
 	private void initBuffer() {
 		if (bb == null) bb = ByteBuffer.wrap(getChunkData());
+	}
+
+	public void initWriteBuffer(int size) {
+		bb = ByteBuffer.allocate(size);
+	}
+
+	public void updateChunk() {
+		chunkData = bb.array();
 	}
 
 	private byte[] createForm() {

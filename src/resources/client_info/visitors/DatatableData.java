@@ -62,6 +62,79 @@ public class DatatableData extends ClientData {
 		}
 	}
 
+	@Override
+	public void writeIff(SWGFile iff) {
+		iff.addForm("0001");
+		writeColumns(iff.addChunk("COLS"));
+		writeTypes(iff.addChunk("TYPE"));
+		writeRows(iff.addChunk("ROWS"));
+	}
+
+	private void writeColumns(IffNode chunk) {
+		int size = getTableStringSize(columnNames);
+
+		chunk.initWriteBuffer(size + 4);
+
+		chunk.writeInt(columnNames.length);
+		for (String columnName : columnNames) {
+			chunk.writeString(columnName);
+		}
+
+		chunk.updateChunk();
+	}
+
+	private void writeTypes(IffNode chunk) {
+		int size = getTableStringSize(columnTypes);
+
+		chunk.initWriteBuffer(size);
+
+		for (String columnType : columnTypes) {
+			chunk.writeString(columnType);
+		}
+
+		chunk.updateChunk();
+	}
+
+	private void writeRows(IffNode chunk) {
+		int size = 0;
+		int rows = table.length;
+
+		for (int i = 0; i < columnTypes.length; i++) {
+			String type = columnTypes[i];
+			switch(type) {
+				case "b":
+				case "f":
+				case "h":
+				case "i": size += 4 * rows; break;
+				case "s": {
+					for (int r = 0; r < rows; r++) {
+						size += ((String) table[r][i]).length() + 1;
+					}
+					break;
+				}
+				default: System.err.println("Cannot write row type " + type);
+			}
+		}
+		chunk.initWriteBuffer(size + 4);
+
+		chunk.writeInt(rows);
+
+		for (int r = 0; r < rows; r++) {
+			for (int t = 0; t < columnTypes.length; t++) {
+				String type = columnTypes[t];
+				switch(type) {
+					case "b":
+					case "h":
+					case "i": chunk.writeInt((Integer) table[r][t]); break;
+					case "f": chunk.writeFloat((Float) table[r][t]); break;
+					case "s": chunk.writeString((String) table[r][t]); break;
+					default: System.err.println("Cannot write datatable to type " + type);
+				}
+			}
+		}
+		chunk.updateChunk();
+	}
+
 	private void parseTypes(IffNode chunk) {
 		columnTypes = new String[columnNames.length];
 
@@ -190,4 +263,23 @@ public class DatatableData extends ClientData {
 		return columnTypes[column];
 	}
 
+	public void setColumnNames(String[] columnNames) {
+		this.columnNames = columnNames;
+	}
+
+	public void setColumnTypes(String[] columnTypes) {
+		this.columnTypes = columnTypes;
+	}
+
+	public void setTable(Object[][] table) {
+		this.table = table;
+	}
+
+	private int getTableStringSize(String[] table) {
+		int size = 0;
+		for (String s : table) {
+			size += s.length() + 1;
+		}
+		return size;
+	}
 }

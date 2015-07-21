@@ -2,5 +2,6 @@
 /clientdata
 /.settings
 /odb
+/serverdata/**/*.iff
 packets.txt
 log.txt
