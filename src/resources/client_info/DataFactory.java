@@ -27,21 +27,14 @@
 
 package resources.client_info;
 
-import utilities.ByteUtilities;
-
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 
 /**
  * Created by Waverunner on 6/9/2015
  */
 public abstract class DataFactory {
 
-	// readFile only called if dataMap doesn't contain the file as a key or it's value is null
 	protected ClientData readFile(String file) {
 		if (file == null || file.isEmpty()) {
 			System.err.println("File cannot be null or empty!");
@@ -64,6 +57,27 @@ public abstract class DataFactory {
 		return clientData;
 	}
 
+	protected File writeFile(SWGFile swgFile, ClientData data) {
+		if (swgFile == null || data == null) {
+			System.err.println("File or data objects cannot be null or empty!");
+			return null;
+		}
+
+		File save = new File(swgFile.getFileName());
+		data.writeIff(swgFile);
+		try {
+			swgFile.save(save);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return save;
+	}
+
 	protected abstract ClientData createDataObject(String type);
+	protected ClientData createDataObject(SWGFile swgFile) {
+		return createDataObject(swgFile.getType());
+	}
+
 	protected abstract String getFolder();
 }
