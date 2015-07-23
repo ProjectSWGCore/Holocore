@@ -16,7 +16,8 @@ import resources.services.TestConfig;
 	TestWeatherType.class,
 	TestQuadTree.class,
 	TestObjectDatabase.class,
-	TestConfig.class
+	TestConfig.class,
+	TestQuaternion.class
 })
 public class TestResources {
 	

@@ -211,18 +211,26 @@ public class ObjectManager extends Manager {
 		if (!(obj instanceof CreatureObject) || ((CreatureObject) obj).getPlayerObject() == null)
 			objectAwareness.add(obj);
 		objectMap.put(obj.getObjectId(), obj);
-		if (obj.getParent() != null && obj.getParent().isBuildout()) {
-			long id = obj.getParent().getObjectId();
-			obj.getParent().removeObject(obj);
-			SWGObject parent = objectMap.get(id);
-			if (parent != null)
-				parent.addObject(obj);
-			else {
-				System.err.println("Parent for " + obj + " is null! ParentID: " + id);
-				Log.e("ObjectManager", "Parent for %s is null! ParentID: %d", obj, id);
+		updateBuildoutParent(obj);
+		addChildrenObjects(obj);
+	}
+	
+	private void updateBuildoutParent(SWGObject obj) {
+		if (obj.getParent() != null) {
+			if (obj.getParent().isBuildout()) {
+				long id = obj.getParent().getObjectId();
+				obj.getParent().removeObject(obj);
+				SWGObject parent = objectMap.get(id);
+				if (parent != null)
+					parent.addObject(obj);
+				else {
+					System.err.println("Parent for " + obj + " is null! ParentID: " + id);
+					Log.e("ObjectManager", "Parent for %s is null! ParentID: %d", obj, id);
+				}
+			} else {
+				updateBuildoutParent(obj.getParent());
 			}
 		}
-		addChildrenObjects(obj);
 	}
 	
 	private void addChildrenObjects(SWGObject obj) {
