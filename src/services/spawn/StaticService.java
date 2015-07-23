@@ -1,7 +1,6 @@
 package services.spawn;
 
 import resources.Location;
-import resources.Terrain;
 import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.building.BuildingObject;
@@ -93,7 +92,7 @@ public class StaticService extends Service {
 	private SWGObject createObject(String iff, Location parentLoc, double x, double y, double z, double heading) {
 		Location loc = new Location(x, y, z, parentLoc.getTerrain());
 		loc.setHeading(heading);
-		loc = loc.translate(parentLoc);
+		loc.translateLocation(parentLoc);
 		return objectManager.createObject(iff, loc, true, false);
 	}
 	
