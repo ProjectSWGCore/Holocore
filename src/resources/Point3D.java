@@ -57,11 +57,9 @@ public class Point3D implements Serializable {
 		double oY = rot.getY();
 		double oZ = rot.getZ();
 		double oW = rot.getW();
-		double k0 = oW * oW - 0.5;
-		double k1 = getX() * oX + getY() * oY + getZ() * oZ;
-		double nX = x + 2 * (getX() * k0 + oX * k1 + oW * (oY * getZ() - oZ * getY()));
-		double nY = y + 2 * (getY() * k0 + oY * k1 + oW * (getZ() * getX() - oX * getZ()));
-		double nZ = z + 2 * (getZ() * k0 + oZ * k1 + oW * (oX * getY() - oY * getX()));
+		double nX = x + oW*oW*getX() + 2*oY*oW*getZ() - 2*oZ*oW*getY() + oX*oX*getX() + 2*oY*oX*getY() + 2*oZ*oX*getZ() - oZ*oZ*getX() - oY*oY*getX();
+		double nY = y + 2*oX*oY*getX() + oY*oY*getY() + 2*oZ*oY*getZ() + 2*oW*oZ*getX() - oZ*oZ*getY() + oW*oW*getY() - 2*oX*oW*getZ() - oX*oX*getY();
+		double nZ = z + 2*oX*oZ*getX() + 2*oY*oZ*getY() + oZ*oZ*getZ() - 2*oW*oY*getX() - oY*oY*getZ() + 2*oW*oX*getY() - oX*oX*getZ() + oW*oW*getZ();
 		set(nX, nY, nZ);
 	}
 	

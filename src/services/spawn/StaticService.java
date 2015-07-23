@@ -76,9 +76,9 @@ public class StaticService extends Service {
 	
 	private void createShuttleport(BuildingObject shuttleport) {
 		Location shuttleportLoc = shuttleport.getWorldLocation();
-		createObject(TICKET_TERMINAL_IFF, shuttleportLoc, 13.3, 0.6, 9.4, 270);
-		createObject(PLAYER_SHUTTLE_IFF, shuttleportLoc, 0, 1.6, -5, 180);
-		createObject(TICKET_COLLECTOR_IFF, shuttleportLoc, 13.3, 0.6, -9.4, 270);
+		createObject(TICKET_TERMINAL_IFF, shuttleportLoc, 13.3, -0.6, 9.4, 270);
+		createObject(PLAYER_SHUTTLE_IFF, shuttleportLoc, 0, -0.6, -5, 180);
+		createObject(TICKET_COLLECTOR_IFF, shuttleportLoc, 13.3, -0.6, -9.4, 270);
 	}
 	
 	private SWGObject createObject(String iff, SWGObject parent, double x, double y, double z, double heading) {
