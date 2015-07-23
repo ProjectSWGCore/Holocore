@@ -70,14 +70,14 @@ public class StaticService extends Service {
 		createObject(TICKET_TERMINAL_IFF, foyer4, 2.52, 0.64, 50.02, 0);
 		createObject(TICKET_TERMINAL_IFF, foyer4, -3.23, 0.64, 50.05, 0);
 		createObject(TICKET_TERMINAL_IFF, foyer4, -12.71, 0.64, 52.04, 35);
-		createObject(PLAYER_TRANSPORT_IFF, starportLoc, 1.72, 0.6, -5.06, 180);
-		createObject(TICKET_COLLECTOR_IFF, starportLoc, -7.92, 0.6, 4.75, 90);
+		createObject(PLAYER_TRANSPORT_IFF, starportLoc, 1.72, 0, -5.06, 180);
+		createObject(TICKET_COLLECTOR_IFF, starportLoc, -7.92, 0, 4.75, 90);
 	}
 	
 	private void createShuttleport(BuildingObject shuttleport) {
 		Location shuttleportLoc = shuttleport.getWorldLocation();
 		createObject(TICKET_TERMINAL_IFF, shuttleportLoc, 13.3, -0.6, 9.4, 270);
-		createObject(PLAYER_SHUTTLE_IFF, shuttleportLoc, 0, -0.6, -5, 180);
+		createObject(PLAYER_SHUTTLE_IFF, shuttleportLoc, 0, -1.6, -5, 180);
 		createObject(TICKET_COLLECTOR_IFF, shuttleportLoc, 13.3, -0.6, -9.4, 270);
 	}
 	
