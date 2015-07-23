@@ -48,7 +48,7 @@ public class Location implements Serializable {
 	}
 	
 	public Location(double x, double y, double z, Terrain terrain) {
-		this.orientation = new Quaternion(Double.NaN, Double.NaN, Double.NaN, Double.NaN);
+		this.orientation = new Quaternion(0, 0, 0, 1);
 		this.point = new Point3D(x, y, z);
 		this.terrain = terrain;
 	}
