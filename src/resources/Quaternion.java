@@ -1,8 +1,12 @@
 package resources;
 
-import java.io.Serializable;
+import network.packets.Packet;
+import resources.encodables.Encodable;
 
-public class Quaternion implements Serializable {
+import java.io.Serializable;
+import java.nio.ByteBuffer;
+
+public class Quaternion implements Encodable, Serializable {
 	
 	private static final long	serialVersionUID	= 1L;
 	
@@ -98,15 +102,32 @@ public class Quaternion implements Serializable {
 	}
 	
 	public void normalize() {
-		double mag = Math.sqrt(x*x + y*y + z*z + w*w);
+		double mag = Math.sqrt(x * x + y * y + z * z + w * w);
 		x /= mag;
 		y /= mag;
 		z /= mag;
 		w /= mag;
 	}
-	
+
+	@Override
+	public byte[] encode() {
+		ByteBuffer bb = ByteBuffer.allocate(16);
+		Packet.addFloat(bb, (float) x);
+		Packet.addFloat(bb, (float) y);
+		Packet.addFloat(bb, (float) z);
+		Packet.addFloat(bb, (float) w);
+		return bb.array();
+	}
+
+	@Override
+	public void decode(ByteBuffer data) {
+		x = Packet.getFloat(data);
+		y = Packet.getFloat(data);
+		z = Packet.getFloat(data);
+		w = Packet.getFloat(data);
+	}
+
 	public String toString() {
 		return String.format("Quaternion[%.3f, %.3f, %.3f, %.3f]", x, y, z, w);
 	}
-	
 }

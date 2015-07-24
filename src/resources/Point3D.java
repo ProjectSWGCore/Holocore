@@ -1,8 +1,12 @@
 package resources;
 
-import java.io.Serializable;
+import network.packets.Packet;
+import resources.encodables.Encodable;
 
-public class Point3D implements Serializable {
+import java.io.Serializable;
+import java.nio.ByteBuffer;
+
+public class Point3D implements Encodable, Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -62,9 +66,25 @@ public class Point3D implements Serializable {
 		double nZ = z + 2*oX*oZ*getX() + 2*oY*oZ*getY() + oZ*oZ*getZ() - 2*oW*oY*getX() - oY*oY*getZ() + 2*oW*oX*getY() - oX*oX*getZ() + oW*oW*getZ();
 		set(nX, nY, nZ);
 	}
-	
+
+
+	@Override
+	public byte[] encode() {
+		ByteBuffer bb = ByteBuffer.allocate(12);
+		Packet.addFloat(bb, (float) x);
+		Packet.addFloat(bb, (float) y);
+		Packet.addFloat(bb, (float) z);
+		return bb.array();
+	}
+
+	@Override
+	public void decode(ByteBuffer data) {
+		x = Packet.getFloat(data);
+		y = Packet.getFloat(data);
+		z = Packet.getFloat(data);
+	}
+
 	public String toString() {
 		return String.format("Point3D[%.2f, %.2f, %.2f]", x, y, z);
 	}
-	
 }

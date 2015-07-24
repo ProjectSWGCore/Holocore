@@ -40,28 +40,6 @@ public class SWGPacket extends Packet {
 	private ByteBuffer data = null;
 	private int opcode = 0;
 	private PacketType type = PacketType.UNKNOWN;
-	
-	protected void addLocation(ByteBuffer data, Location l) {
-		addFloat(data, (float) (Double.isNaN(l.getOrientationX()) ? 0 : l.getOrientationX()));
-		addFloat(data, (float) (Double.isNaN(l.getOrientationY()) ? 0 : l.getOrientationY()));
-		addFloat(data, (float) (Double.isNaN(l.getOrientationZ()) ? 0 : l.getOrientationZ()));
-		addFloat(data, (float) (Double.isNaN(l.getOrientationW()) ? 1 : l.getOrientationW()));
-		addFloat(data, (float) (Double.isNaN(l.getX()) ? 0 : l.getX()));
-		addFloat(data, (float) (Double.isNaN(l.getY()) ? 0 : l.getY()));
-		addFloat(data, (float) (Double.isNaN(l.getZ()) ? 0 : l.getZ()));
-	}
-	
-	protected Location getLocation(ByteBuffer data) {
-		Location l = new Location();
-		l.setOrientationX(getFloat(data));
-		l.setOrientationY(getFloat(data));
-		l.setOrientationZ(getFloat(data));
-		l.setOrientationW(getFloat(data));
-		l.setX(getFloat(data));
-		l.setY(getFloat(data));
-		l.setZ(getFloat(data));
-		return l;
-	}
 
 	public void setSWGOpcode(int opcode) {
 		this.opcode = opcode;
