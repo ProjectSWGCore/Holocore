@@ -70,6 +70,7 @@ public class SWGFile {
 		ByteBuffer bb = ByteBuffer.allocate((int) channel.size());
 		if (channel.read(bb) != size) {
 			System.err.println("Failed to properly read the bytes in file " + file.getAbsolutePath() + "!");
+			inputStream.close();
 			return;
 		}
 		// Reading will add bytes to the buffer, so we need to flip it before reading the buffer to IffNode's

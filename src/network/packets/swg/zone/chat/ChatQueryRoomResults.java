@@ -30,8 +30,6 @@ package network.packets.swg.zone.chat;
 import network.packets.swg.SWGPacket;
 import resources.chat.ChatAvatar;
 import resources.chat.ChatRoom;
-import resources.network.BaselineBuilder;
-
 import java.nio.ByteBuffer;
 import java.util.List;
 
