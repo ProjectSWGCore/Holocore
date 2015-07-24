@@ -53,18 +53,17 @@ public class SceneCreateObjectByCrc extends SWGPacket {
 		if (!super.decode(data, CRC))
 			return;
 		objId = getLong(data);
-		l = getLocation();
+		l = getEncodable(data, Location.class);
 		objCrc = getInt(data);
 		getByte(data); // Unknown Byte
 	}
 	
 	public ByteBuffer encode() {
-		int length = 47;
-		ByteBuffer data = ByteBuffer.allocate(length);
+		ByteBuffer data = ByteBuffer.allocate(47);
 		addShort(data, 5);
 		addInt(  data, CRC);
 		addLong( data, objId);
-		addLocation(data, l);
+		addEncodable(data, l);
 		addInt(  data, objCrc);
 		addByte( data, 0); // Unknown Byte
 		return data;

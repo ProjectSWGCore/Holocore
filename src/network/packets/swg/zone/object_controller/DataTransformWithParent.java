@@ -60,7 +60,7 @@ public class DataTransformWithParent extends ObjectController {
 		timestamp = getInt(data); // Timestamp
 		counter = getInt(data);
 		cellId = getLong(data);
-		l = getLocation(data);
+		l = getEncodable(data, Location.class);
 		speed = getFloat(data);
 		lookAtYaw = getFloat(data);
 		useLookAtYaw = getBoolean(data);
