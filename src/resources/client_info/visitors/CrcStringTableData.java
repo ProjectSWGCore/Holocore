@@ -27,7 +27,6 @@
 ***********************************************************************************/
 package resources.client_info.visitors;
 
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -36,7 +35,6 @@ import java.util.Map;
 import resources.client_info.ClientData;
 import resources.client_info.IffNode;
 import resources.client_info.SWGFile;
-import utilities.ByteUtilities;
 
 public class CrcStringTableData extends ClientData {
 	
