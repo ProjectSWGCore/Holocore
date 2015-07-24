@@ -98,6 +98,7 @@ public class ObjectAwareness {
 			object.sendObserversAndSelf(new UpdateContainmentMessage(object.getObjectId(), nParent.getObjectId(), object.getSlotArrangement()));
 		}
 		object.setLocation(nLocation);
+		update(object);
 	}
 	
 	/**
