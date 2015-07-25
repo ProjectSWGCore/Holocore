@@ -9,5 +9,6 @@
 	<classpathentry kind="lib" path="lib/slf4j-1.7.12/slf4j-api-1.7.12.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j-1.7.12/slf4j-simple-1.7.12.jar"/>
 	<classpathentry kind="lib" path="lib/jgit-4.0.0.201506020755-rc3.jar"/>
+	<classpathentry kind="lib" path="lib/sqlite-jdbc-3.8.10.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
