@@ -1,0 +1,23 @@
+iff	iff_type
+TEXT PRIMARY KEY	INTEGER
+object/building/tatooine/shared_starport_tatooine.iff	1
+object/building/tatooine/shared_shuttleport_tatooine.iff	2
+object/building/naboo/shared_starport_naboo.iff	1
+object/building/naboo/shared_hangar_naboo_theed.iff	5
+object/building/corellia/shared_starport_corellia.iff	1
+object/building/naboo/shared_shuttleport_naboo.iff	2
+object/building/corellia/shared_shuttleport_corellia.iff	2
+object/building/military/shared_outpost_starport.iff	4
+object/building/player/city/shared_shuttleport_tatooine.iff	3
+object/building/player/city/shared_shuttleport_naboo.iff	3
+object/building/player/city/shared_shuttleport_corellia.iff	3
+object/building/kashyyyk/shared_mun_kachirho_starport.iff	4
+object/building/mustafar/structures/shared_must_new_mining_facility.iff	6
+object/building/naboo/shared_rori_restuss_starport.iff	4
+object/building/naboo/shared_rori_restuss_shuttleport.iff	2
+object/tangible/gcw/static_base/shared_invisible_beacon.iff	4
+object/tangible/camp/shared_camp_shuttle_beacon.iff	4
+object/building/dathomir/shared_dathomir_quarantine_zone_starport.iff	4
+object/building/tatooine/shared_bank_tatooine.iff	7
+object/building/naboo/shared_bank_naboo.iff	7
+object/building/corellia/shared_bank_corellia.iff	7
