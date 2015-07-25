@@ -26,6 +26,7 @@ package resources.client_info;
 
 import utilities.ByteUtilities;
 
+import java.nio.BufferUnderflowException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.charset.Charset;
@@ -278,7 +279,12 @@ public class IffNode {
 		isForm = false;
 		int chunkSize = bb.getInt();
 		chunkData = new byte[chunkSize];
-		bb.get(chunkData);
+		try {
+			bb.get(chunkData);
+		} catch (BufferUnderflowException e) {
+			System.err.println("Couldn't get all the chunk data for size " + chunkSize + " in chunk " + getTag());
+			e.printStackTrace();
+		}
 
 		return 4 + chunkData.length;
 	}
