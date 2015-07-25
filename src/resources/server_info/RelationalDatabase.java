@@ -41,11 +41,64 @@ public abstract class RelationalDatabase {
 	private Connection connection;
 	private boolean online;
 	
-	public RelationalDatabase(String type, String host, String db, String user, String pass, String params) {
+	protected RelationalDatabase(String jdbcClass, String url) {
 		try {
+			Class.forName(jdbcClass);
+			initialize(url);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			online = false;
+		}
+	}
+	
+	protected RelationalDatabase(String jdbcClass, String url, String user, String pass) {
+		try {
+			Class.forName(jdbcClass);
+			initialize(url, user, pass);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			online = false;
+		}
+	}
+	
+	public RelationalDatabase(String jdbcClass, String url, String user, String pass, String params) {
+		try {
+			Class.forName(jdbcClass);
+			if (params != null && params.length() > 0)
+				url += "?" + params;
+			initialize(url, user, pass);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			online = false;
+		}
+	}
+	
+	public RelationalDatabase(String jdbcClass, String type, String host, String db, String user, String pass, String params) {
+		try {
+			Class.forName(jdbcClass);
 			String url = "jdbc:" + type + "://" + host + "/" + db;
 			if (params != null && params.length() > 0)
 				url += "?" + params;
+			initialize(url, user, pass);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			online = false;
+		}
+	}
+	
+	private void initialize(String url) {
+		try {
+			connection = DriverManager.getConnection(url);
+			metaData = connection.getMetaData();
+			online = true;
+		} catch (SQLException e) {
+			System.err.println("Failed to initialize relational database! " + e.getClass().getSimpleName() + " - " + e.getMessage());
+			online = false;
+		}
+	}
+	
+	private void initialize(String url, String user, String pass) {
+		try {
 			connection = DriverManager.getConnection(url, user, pass);
 			metaData = connection.getMetaData();
 			online = true;
@@ -76,8 +129,10 @@ public abstract class RelationalDatabase {
 	}
 	
 	public PreparedStatement prepareStatement(String sql) {
-		if (connection == null)
+		if (connection == null) {
+			System.err.println("Cannot prepare statement! Connection is null");
 			return null;
+		}
 		try {
 			return connection.prepareStatement(sql);
 		} catch (SQLException e) {

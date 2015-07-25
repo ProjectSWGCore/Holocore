@@ -634,7 +634,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 			synchronized (objectsAware) {
 				for (SWGObject obj : objectsAware) {
 					Player p = obj.getOwner();
-					if (isValidPlayer(p))
+					if (childObject.isValidPlayer(p))
 						observers.add(obj);
 					else
 						childObject.getChildrenObservers(observers, obj);
