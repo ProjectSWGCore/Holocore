@@ -66,7 +66,7 @@ public class RelationalServerData extends RelationalDatabase {
 		long sdbModified = sdb.lastModified();
 		long imported = getLastImported(table);
 		if (sdbModified > imported) {
-			updateQuery("DROP TABLE " + table);
+			updateQuery("DROP TABLE IF EXISTS " + table);
 			importFromSdb(table, sdb);
 			updateLastImported(table, System.currentTimeMillis());
 		}

@@ -41,7 +41,7 @@ import services.objects.ObjectManager;
 
 public class StaticService extends Service {
 	
-	private static final String GET_SUPPORTING_SQL = "SELECT spawn.* FROM static_spawns spawn, static_types types WHERE types.iff = ? AND spawn.iff_type = types.iff_type";
+	private static final String GET_SUPPORTING_SQL = "SELECT spawns.* FROM spawns, types WHERE types.iff = ? AND spawns.iff_type = types.iff_type";
 	
 	private final Object databaseMutex;
 	private final ObjectManager objectManager;
@@ -54,8 +54,8 @@ public class StaticService extends Service {
 		
 		spawnDatabase = new RelationalServerData("serverdata/static/spawns.db");
 		try {
-			spawnDatabase.linkTableWithSdb("static_spawns", "serverdata/static/spawns.sdb");
-			spawnDatabase.linkTableWithSdb("static_types", "serverdata/static/types.sdb");
+			spawnDatabase.linkTableWithSdb("spawns", "serverdata/static/spawns.sdb");
+			spawnDatabase.linkTableWithSdb("types", "serverdata/static/types.sdb");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			throw new main.ProjectSWG.CoreException("Unable to load sdb files for StaticService");
