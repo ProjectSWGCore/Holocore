@@ -263,6 +263,12 @@ public class DatatableData extends ClientData {
 		return columnTypes[column];
 	}
 
+	public void handleRows(DatatableRowHandler handler) {
+		for (int r = 0; r < getRowCount(); r++) {
+			handler.handleRow(r);
+		}
+	}
+
 	public void setColumnNames(String[] columnNames) {
 		this.columnNames = columnNames;
 	}
@@ -281,5 +287,9 @@ public class DatatableData extends ClientData {
 			size += s.length() + 1;
 		}
 		return size;
+	}
+
+	public interface DatatableRowHandler {
+		void handleRow(int row);
 	}
 }

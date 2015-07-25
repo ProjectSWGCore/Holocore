@@ -50,6 +50,8 @@ import resources.Terrain;
 import resources.chat.ChatAvatar;
 import resources.chat.ChatResult;
 import resources.chat.ChatRoom;
+import resources.client_info.ServerFactory;
+import resources.client_info.visitors.DatatableData;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.player.PlayerObject;
@@ -69,11 +71,6 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author Waverunner
  */
 public class ChatRoomService extends Service {
-	// Array of only the valid terrains in relation to zones able to use planetary-based chat
-	private static final List<Terrain> terrains = Arrays.asList(
-			Terrain.CORELLIA, Terrain.DANTOOINE, Terrain.DATHOMIR, Terrain.ENDOR, Terrain.KASHYYYK, Terrain.LOK,
-			Terrain.MUSTAFAR, Terrain.NABOO, Terrain.RORI, Terrain.TATOOINE, Terrain.TALUS, Terrain.YAVIN4
-	);
 	private int maxChatRoomId;
 	private Map<Integer, ChatRoom> roomMap;
 	// Map to keep track of each player's recent message for a room to prevent duplicates from client
@@ -269,10 +266,10 @@ public class ChatRoomService extends Service {
 		Terrain terrain = player.getCreatureObject().getLocation().getTerrain();
 
 		// Enter the new zone-only chat channels
-		if (!terrains.contains(terrain))
+		String planetPath = "SWG." + player.getGalaxyName() + "." + terrain.getNameCapitalized() + ".";
+		if (getRoom(planetPath + "Planet") == null)
 			return;
 
-		String planetPath = "SWG." + player.getGalaxyName() + "." + terrain.getNameCapitalized() + ".";
 		enterChatChannel(player, planetPath + "Planet");
 		enterChatChannel(player, planetPath + "system");
 	}
@@ -444,31 +441,11 @@ public class ChatRoomService extends Service {
 		 */
 
 		ChatAvatar systemAvatar = ChatAvatar.getSystemAvatar(galaxy);
-		// TODO: Move to server datatable file (SDF): Room (s) | Title (s)
 		String basePath = "SWG." + galaxy + ".";
-		createRoom(systemAvatar, true, basePath + "Galaxy", "public chat for the whole galaxy, cannot create rooms here");
-		createRoom(systemAvatar, true, basePath + "system", "system messages for this galaxy");
-		createRoom(systemAvatar, true, basePath + "Chat",   "public chat for this galaxy, can create rooms here");
-		createRoom(systemAvatar, true, basePath + "Imperial", "Imperial chat for this galaxy");
-		createRoom(systemAvatar, true, basePath + "ImperialWarRoom", "Imperial war room chat for this galaxy");
-		createRoom(systemAvatar, true, basePath + "Rebel",   "Rebel chat for this galaxy");
-		createRoom(systemAvatar, true, basePath + "RebelWarRoom", "Rebel war room chat for this galaxy");
-		createRoom(systemAvatar, true, basePath + "BountyHunter", "Bounty Hunter chat for this galaxy");
-		createRoom(systemAvatar, true, basePath + "Commando", "Commando chat for this galaxy");
-		createRoom(systemAvatar, true, basePath + "Entertainer", "Entertainer chat for this galaxy");
-		createRoom(systemAvatar, true, basePath + "ForceSensitive", "Force Sensitive chat for this galaxy");
-		createRoom(systemAvatar, true, basePath + "Medic", "Medic chat for this galaxy");
-		createRoom(systemAvatar, true, basePath + "Officer", "Officer chat for this galaxy");
-		createRoom(systemAvatar, true, basePath + "Pilot", "Pilot chat for this galaxy");
-		createRoom(systemAvatar, true, basePath + "Politician", "Politician chat for this galaxy");
-		createRoom(systemAvatar, true, basePath + "Smuggler", "Smuggler chat for this galaxy");
-		createRoom(systemAvatar, true, basePath + "Spy", "Spy chat for this galaxy");
-		createRoom(systemAvatar, true, basePath + "Trader", "Trader chat for this galaxy");
-		createRoom(systemAvatar, true, basePath + "BeastMastery", "Beast Mastery chat for this galaxy");
-		createRoom(systemAvatar, true, basePath + "Auction", "Auction chat for this galaxy");
-		createRoom(systemAvatar, true, basePath + "GuildLeader", "Guild leader chat for this galaxy");
-		createRoom(systemAvatar, true, basePath + "Mayor", "Mayor chat for this galaxy");
-		createRoom(systemAvatar, true, basePath + "Trader", "Trader chat for this galaxy");
+
+		DatatableData rooms = ServerFactory.getDatatable("chat/default_rooms.iff");
+		rooms.handleRows((r) -> createRoom(systemAvatar, true, basePath + rooms.getCell(r, 0), (String) rooms.getCell(r, 1)));
+
 		createPlanetChannels(systemAvatar, basePath);
 
 		/*
@@ -481,13 +458,13 @@ public class ChatRoomService extends Service {
 	}
 
 	private void createPlanetChannels(ChatAvatar systemAvatar, String basePath) {
-		// TODO: Move planets to a server datatable file (SDF): Planet (s)
-		for (Terrain terrain : terrains) {
-			String path = basePath + terrain.getNameCapitalized() + ".";
+		DatatableData planets = ServerFactory.getDatatable("chat/planets.iff");
+		planets.handleRows((r) -> {
+			String path = basePath + planets.getCell(r, 0) + ".";
 			createRoom(systemAvatar, true, path + "Planet", "public chat for this planet, cannot create rooms here");
 			createRoom(systemAvatar, true, path + "system", "system messages for this planet, cannot create rooms here");
 			createRoom(systemAvatar, true, path + "Chat", "public chat for this planet, can create rooms here");
-		}
+		});
 	}
 
 	private boolean incrementMessageCounter(long networkId, int roomId, int messageId) {
