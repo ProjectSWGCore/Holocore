@@ -147,7 +147,7 @@ public class ObjectManager extends Manager {
 		System.out.println("ObjectManager: Loading buildouts...");
 		Log.i("ObjectManager", "Loading buildouts...");
 		BuildoutLoader loader = new BuildoutLoader();
-		if (terrain == null)
+		if (terrain != null)
 			loader.loadBuildoutsForTerrain(terrain);
 		else
 			loader.loadAllBuildouts();
