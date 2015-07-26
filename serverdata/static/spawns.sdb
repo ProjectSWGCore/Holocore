@@ -1,44 +1,44 @@
 iff_type	child_iff	cell	x	y	z	heading
-INTEGER	TEXT NOT NULL	TEXT NOT NULL	REAL	REAL	REAL	REAL
-1	object/tangible/terminal/shared_terminal_bank.iff		0	0.52	4.3	0
-1	object/tangible/terminal/shared_terminal_bank.iff		0	0.52	-4.3	180
-1	object/tangible/terminal/shared_terminal_bank.iff		4.3	0.52	0	90
-1	object/tangible/terminal/shared_terminal_bank.iff		-4.3	0.52	0	-90
-2	object/tangible/terminal/shared_terminal_travel.iff	foyer4	11.255	0.64	51.64	-35
-2	object/tangible/terminal/shared_terminal_travel.iff	foyer4	2.52	0.64	50.02	0
-2	object/tangible/terminal/shared_terminal_travel.iff	foyer4	-3.23	0.64	50.05	0
-2	object/tangible/terminal/shared_terminal_travel.iff	foyer4	-12.71	0.64	52.04	35
-2	object/creature/npc/theme_park/shared_player_transport.iff		1.72	0	-5.06	180
-2	object/tangible/travel/ticket_collector/shared_ticket_collector.iff		10	0	-10	90
-3	object/tangible/terminal/shared_terminal_travel.iff	r1	-3.12	0	-17.57	-90
-3	object/creature/npc/theme_park/shared_player_transport.iff		0	7	0	-90
-3	object/tangible/travel/ticket_collector/shared_ticket_collector.iff		-3	0	-10	315
-4	object/tangible/terminal/shared_terminal_travel.iff	r1	-3.12	0	-17.57	-90
-4	object/creature/npc/theme_park/shared_player_transport.iff		0	7	0	-90
-4	object/tangible/travel/ticket_collector/shared_ticket_collector.iff		-3	-0.2	-10	315
-4	object/tangible/terminal/shared_terminal_space.iff	r1	-7.6	0	-19.5	0
-5	object/tangible/terminal/shared_terminal_travel.iff	r1	-3.12	0	-17.57	-90
-5	object/creature/npc/theme_park/shared_player_transport.iff		0	7	0	-90
-5	object/tangible/travel/ticket_collector/shared_ticket_collector.iff		-3	0	-10	315
-6	object/tangible/terminal/shared_terminal_travel.iff		-60	30.7	-130	180
-6	object/tangible/travel/ticket_collector/shared_ticket_collector.iff		-45	30.7	-152	0
-6	object/creature/npc/theme_park/shared_player_transport.iff		-55	30	-160	90
-7	object/tangible/terminal/shared_terminal_travel.iff	hall1	-16.5	0.75	-68	180
-7	object/tangible/terminal/shared_terminal_travel.iff	hall1	-27	0.75	-68	180
-7	object/tangible/terminal/shared_terminal_travel.iff	hall2	16.5	0.75	-68	180
-7	object/tangible/terminal/shared_terminal_travel.iff	hall2	27	0.75	-68	180
-7	object/creature/npc/theme_park/shared_player_transport_theed_hangar.iff	hangar	-0.51	7.94	21	0
-7	object/tangible/travel/ticket_collector/shared_ticket_collector.iff	hangar	-9.5	8	35	180
-8	object/tangible/terminal/shared_terminal_travel.iff	r1	-3.12	0	-17.57	-90
-8	object/creature/npc/theme_park/shared_player_transport.iff		0	7	0	-90
-8	object/tangible/travel/ticket_collector/shared_ticket_collector.iff		-3	0	-10	315
-8	object/tangible/terminal/shared_terminal_space.iff	r1	-7.6	0	-19.5	0
-9	object/tangible/terminal/shared_terminal_travel.iff		-13.3	0.6	-7.4	270
-9	object/creature/npc/theme_park/shared_player_shuttle.iff		0	0	3	180
-9	object/tangible/travel/ticket_collector/shared_ticket_collector.iff		-13.3	0.6	9.4	270
-10	object/tangible/terminal/shared_terminal_travel.iff		-11.3	0.6	-7.4	270
-10	object/creature/npc/theme_park/shared_player_shuttle.iff		0	0	3	180
-10	object/tangible/travel/ticket_collector/shared_ticket_collector.iff		-13.3	0.6	9.4	270
-11	object/tangible/terminal/shared_terminal_travel.iff		-11.3	0.6	-9.4	270
-11	object/creature/npc/theme_park/shared_player_shuttle.iff		0	0	0	180
-11	object/tangible/travel/ticket_collector/shared_ticket_collector.iff		-13.3	0.6	7.4	270
+TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	REAL	REAL	REAL	REAL
+bank	object/tangible/terminal/shared_terminal_bank.iff		0	0.52	4.3	0
+bank	object/tangible/terminal/shared_terminal_bank.iff		0	0.52	-4.3	180
+bank	object/tangible/terminal/shared_terminal_bank.iff		4.3	0.52	0	90
+bank	object/tangible/terminal/shared_terminal_bank.iff		-4.3	0.52	0	-90
+starport	object/tangible/terminal/shared_terminal_travel.iff	foyer4	11.255	0.64	51.64	-35
+starport	object/tangible/terminal/shared_terminal_travel.iff	foyer4	2.52	0.64	50.02	0
+starport	object/tangible/terminal/shared_terminal_travel.iff	foyer4	-3.23	0.64	50.05	0
+starport	object/tangible/terminal/shared_terminal_travel.iff	foyer4	-12.71	0.64	52.04	35
+starport	object/creature/npc/theme_park/shared_player_transport.iff		1.72	0	-5.06	180
+starport	object/tangible/travel/ticket_collector/shared_ticket_collector.iff		10	0	-10	90
+starport_outpost	object/tangible/terminal/shared_terminal_travel.iff	r1	-3.12	0	-17.57	-90
+starport_outpost	object/creature/npc/theme_park/shared_player_transport.iff		0	7	0	-90
+starport_outpost	object/tangible/travel/ticket_collector/shared_ticket_collector.iff		-3	0	-10	315
+starport_dathomir	object/tangible/terminal/shared_terminal_travel.iff	r1	-3.12	0	-17.57	-90
+starport_dathomir	object/creature/npc/theme_park/shared_player_transport.iff		0	7	0	-90
+starport_dathomir	object/tangible/travel/ticket_collector/shared_ticket_collector.iff		-3	-0.2	-10	315
+starport_dathomir	object/tangible/terminal/shared_terminal_space.iff	r1	-7.6	0	-19.5	0
+starport_kachirho	object/tangible/terminal/shared_terminal_travel.iff	r1	-3.12	0	-17.57	-90
+starport_kachirho	object/creature/npc/theme_park/shared_player_transport.iff		0	7	0	-90
+starport_kachirho	object/tangible/travel/ticket_collector/shared_ticket_collector.iff		-3	0	-10	315
+starport_mustafar	object/tangible/terminal/shared_terminal_travel.iff		-60	30.7	-130	180
+starport_mustafar	object/tangible/travel/ticket_collector/shared_ticket_collector.iff		-45	30.7	-152	0
+starport_mustafar	object/creature/npc/theme_park/shared_player_transport.iff		-55	30	-160	90
+starport_theed	object/tangible/terminal/shared_terminal_travel.iff	hall1	-16.5	0.75	-68	180
+starport_theed	object/tangible/terminal/shared_terminal_travel.iff	hall1	-27	0.75	-68	180
+starport_theed	object/tangible/terminal/shared_terminal_travel.iff	hall2	16.5	0.75	-68	180
+starport_theed	object/tangible/terminal/shared_terminal_travel.iff	hall2	27	0.75	-68	180
+starport_theed	object/creature/npc/theme_park/shared_player_transport_theed_hangar.iff	hangar	-0.51	7.94	21	0
+starport_theed	object/tangible/travel/ticket_collector/shared_ticket_collector.iff	hangar	-9.5	8	35	180
+starport_rori	object/tangible/terminal/shared_terminal_travel.iff	r1	-3.12	0	-17.57	-90
+starport_rori	object/creature/npc/theme_park/shared_player_transport.iff		0	7	0	-90
+starport_rori	object/tangible/travel/ticket_collector/shared_ticket_collector.iff		-3	0	-10	315
+starport_rori	object/tangible/terminal/shared_terminal_space.iff	r1	-7.6	0	-19.5	0
+shuttleport	object/tangible/terminal/shared_terminal_travel.iff		-13.3	0.6	-7.4	270
+shuttleport	object/creature/npc/theme_park/shared_player_shuttle.iff		0	0	3	180
+shuttleport	object/tangible/travel/ticket_collector/shared_ticket_collector.iff		-13.3	0.6	9.4	270
+shuttleport_player	object/tangible/terminal/shared_terminal_travel.iff		-11.3	0.6	-7.4	270
+shuttleport_player	object/creature/npc/theme_park/shared_player_shuttle.iff		0	0	3	180
+shuttleport_player	object/tangible/travel/ticket_collector/shared_ticket_collector.iff		-13.3	0.6	9.4	270
+shuttleport_rori	object/tangible/terminal/shared_terminal_travel.iff		-11.3	0.6	-9.4	270
+shuttleport_rori	object/creature/npc/theme_park/shared_player_shuttle.iff		0	0	0	180
+shuttleport_rori	object/tangible/travel/ticket_collector/shared_ticket_collector.iff		-13.3	0.6	7.4	270
