@@ -31,7 +31,6 @@ import intents.NotifyPlayersPacketIntent;
 import intents.PlayerEventIntent;
 import intents.chat.ChatAvatarRequestIntent;
 import intents.chat.ChatBroadcastIntent;
-import intents.chat.ChatRoomUpdateIntent;
 import intents.chat.PersistentMessageIntent;
 import intents.chat.SpatialChatIntent;
 import intents.network.GalacticPacketIntent;
@@ -41,39 +40,28 @@ import network.packets.Packet;
 import network.packets.swg.SWGPacket;
 import network.packets.swg.zone.chat.*;
 import network.packets.swg.zone.chat.ChatSystemMessage.SystemChatType;
-import network.packets.swg.zone.insertion.ChatRoomList;
 import network.packets.swg.zone.object_controller.SpatialChat;
 import resources.Galaxy;
 import resources.Terrain;
-import resources.chat.ChatAvatar;
 import resources.chat.ChatResult;
-import resources.chat.ChatRoom;
 import resources.collections.SWGList;
 import resources.control.Intent;
 import resources.control.Manager;
-import resources.control.Service;
 import resources.encodables.OutOfBandPackage;
 import resources.encodables.ProsePackage;
 import resources.encodables.player.Mail;
 import resources.objects.SWGObject;
 import resources.objects.player.PlayerObject;
-import resources.player.AccessLevel;
 import resources.player.Player;
 import resources.player.PlayerState;
 import resources.server_info.CachedObjectDatabase;
 import resources.server_info.ObjectDatabase;
-import resources.server_info.ObjectDatabase.Traverser;
 import services.player.PlayerManager;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class ChatManager extends Manager {
 

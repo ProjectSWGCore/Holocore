@@ -27,10 +27,15 @@
 ***********************************************************************************/
 package resources;
 
+import network.packets.Packet;
+import resources.encodables.Encodable;
+
 import java.io.Serializable;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 
 
-public class Location implements Serializable {
+public class Location implements Encodable, Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -48,7 +53,7 @@ public class Location implements Serializable {
 	}
 	
 	public Location(double x, double y, double z, Terrain terrain) {
-		this.orientation = new Quaternion(Double.NaN, Double.NaN, Double.NaN, Double.NaN);
+		this.orientation = new Quaternion(0, 0, 0, 1);
 		this.point = new Point3D(x, y, z);
 		this.terrain = terrain;
 	}
@@ -238,7 +243,26 @@ public class Location implements Serializable {
 			return false;
 		return x == y;
 	}
-	
+
+	@Override
+	public byte[] encode() {
+		ByteBuffer bb = ByteBuffer.allocate(28).order(ByteOrder.LITTLE_ENDIAN);
+		Packet.addFloat(bb, (float) (Double.isNaN(orientation.getX()) ? 0 : orientation.getX()));
+		Packet.addFloat(bb, (float) (Double.isNaN(orientation.getY()) ? 0 : orientation.getY()));
+		Packet.addFloat(bb, (float) (Double.isNaN(orientation.getZ()) ? 0 : orientation.getZ()));
+		Packet.addFloat(bb, (float) (Double.isNaN(orientation.getW()) ? 1 : orientation.getW()));
+		Packet.addFloat(bb, (float) (Double.isNaN(point.getX()) ? 0 : point.getX()));
+		Packet.addFloat(bb, (float) (Double.isNaN(point.getY()) ? 0 : point.getY()));
+		Packet.addFloat(bb, (float) (Double.isNaN(point.getZ()) ? 0 : point.getZ()));
+		return bb.array();
+	}
+
+	@Override
+	public void decode(ByteBuffer data) {
+		orientation.decode(data);
+		point.decode(data);
+	}
+
 	public String toString() {
 		return String.format("Location[TRN=%s, %s %s]", terrain, point, orientation);
 	}

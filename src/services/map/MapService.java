@@ -69,14 +69,13 @@ public class MapService extends Service {
 		staticMapLocations = new ConcurrentHashMap<>();
 		dynamicMapLocations = new ConcurrentHashMap<>();
 		persistentMapLocations = new ConcurrentHashMap<>();
-
-		loadMapCategories();
-		loadMappingTemplates();
 	}
 
 	@Override
 	public boolean initialize() {
 		registerForIntent(GalacticPacketIntent.TYPE);
+		loadMapCategories();
+		loadMappingTemplates();
 		loadStaticCityPoints();
 		return super.initialize();
 	}

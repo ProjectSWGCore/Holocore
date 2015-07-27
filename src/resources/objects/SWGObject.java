@@ -634,7 +634,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 			synchronized (objectsAware) {
 				for (SWGObject obj : objectsAware) {
 					Player p = obj.getOwner();
-					if (p != null && !p.equals(childObject.getOwner()))
+					if (childObject.isValidPlayer(p))
 						observers.add(obj);
 					else
 						childObject.getChildrenObservers(observers, obj);
@@ -650,12 +650,31 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	private void getChildrenObservers(Set<SWGObject> observers, SWGObject obj) {
 		for (SWGObject child : obj.getContainedObjects()) {
 			Player p = child.getOwner();
-			if (p != null && !p.equals(getOwner())) {
+			if (isValidPlayer(p)) {
 				observers.add(child);
 			} else {
 				getChildrenObservers(observers, child);
 			}
 		}
+	}
+	
+	private boolean isValidPlayer(Player player) {
+		if (player == null || player == getOwner())
+			return false;
+		if (getOwner() == null)
+			return false;
+		if (player.equals(getOwner()))
+			return false;
+		if (player.getCreatureObject() == null)
+			return false;
+		if (player.getCreatureObject().getPlayerObject() == null)
+			return false;
+		SWGObject creature = getOwner().getCreatureObject();
+		if (creature == null)
+			return false;
+		if (player.getCreatureObject().equals(creature))
+			return false;
+		return true;
 	}
 
 	public void sendObserversAndSelf(Packet ... packets) {

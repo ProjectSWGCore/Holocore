@@ -203,11 +203,14 @@ public class Player implements Serializable, Comparable<Player> {
 			return false;
 		if (!(o instanceof Player))
 			return false;
+		if (this == o)
+			return true;
 		if (creatureObject == null)
-			return this == o;
-		if (((Player)o).getCreatureObject() == null)
-			return this == o;
-		return creatureObject.equals(((Player)o).getCreatureObject());
+			return false;
+		CreatureObject oCreature = ((Player) o).getCreatureObject();
+		if (oCreature == null)
+			return false;
+		return creatureObject.equals(oCreature);
 	}
 	
 	@Override

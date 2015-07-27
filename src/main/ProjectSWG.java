@@ -85,7 +85,10 @@ public class ProjectSWG {
 	}
 	
 	private void run() {
+		long start = System.nanoTime();
 		manager = new CoreManager();
+		long end = System.nanoTime();
+		System.out.println("ProjectSWG: Created new manager in " + (end-start)/1E6 + "ms");
 		while (!shutdownRequested && !manager.isShutdownRequested()) {
 			initialize();
 			start();
@@ -93,7 +96,10 @@ public class ProjectSWG {
 			stop();
 			terminate();
 			if (!shutdownRequested && !manager.isShutdownRequested()) {
+				start = System.nanoTime();
 				manager = new CoreManager();
+				end = System.nanoTime();
+				System.out.println("ProjectSWG: Created new manager in " + (end-start)/1E6 + "ms");
 			}
 		}
 	}
@@ -166,7 +172,7 @@ public class ProjectSWG {
 		System.out.println("ProjectSWG: Terminated. Time: " + manager.getCoreTime() + "ms");
 	}
 	
-	private static class CoreException extends RuntimeException {
+	public static class CoreException extends RuntimeException {
 		
 		private static final long serialVersionUID = 455306876887818064L;
 		

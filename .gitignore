@@ -3,5 +3,6 @@
 /.settings
 /odb
 /serverdata/**/*.iff
+/serverdata/**/*.db
 packets.txt
 log.txt

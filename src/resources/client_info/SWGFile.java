@@ -70,18 +70,47 @@ public class SWGFile {
 		ByteBuffer bb = ByteBuffer.allocate((int) channel.size());
 		if (channel.read(bb) != size) {
 			System.err.println("Failed to properly read the bytes in file " + file.getAbsolutePath() + "!");
+			inputStream.close();
 			return;
+		} else {
+			inputStream.close();
 		}
+
 		// Reading will add bytes to the buffer, so we need to flip it before reading the buffer to IffNode's
 		bb.flip();
 
 		master = new IffNode("", true);
 		currentForm = master;
-		master.populateFromBuffer(bb);
+
+		if (!isValidIff(bb, size)) {
+			System.err.println("Tried to open a file not in a valid Interchangeable File Format: " + file.getAbsolutePath());
+			return;
+		}
+
+		if (size != master.populateFromBuffer(bb)) {
+			System.err.println("Size mismatch between population result and channel size: " + file.getAbsolutePath());
+			return;
+		}
+
 		type = master.getTag();
 		fileName = file.getAbsolutePath();
+	}
 
-		inputStream.close();
+	private boolean isValidIff(ByteBuffer buffer, int size) {
+		buffer.mark();
+
+		byte[] tag = new byte[4];
+		buffer.get(tag);
+		String root = new String(tag);
+		if (!root.equals("FORM"))
+			return false;
+
+		int formSize = buffer.getInt();
+		if (size != (formSize) + 8)
+			return false;
+
+		buffer.reset();
+		return true;
 	}
 
 	public IffNode addForm(String tag) {

@@ -28,6 +28,7 @@
 package resources.client_info;
 
 import resources.client_info.visitors.DatatableData;
+import resources.server_info.Log;
 
 import java.io.File;
 import java.io.IOException;
@@ -73,11 +74,13 @@ public final class ServerFactory extends DataFactory {
 					if (!iff.exists()) {
 						convertSif(path, name);
 						System.out.println("Created Server Datatable: " + name);
+						Log.i("ServerFactory", "Created Server Datatable: %s", name);
 					} else {
 						File sif = path.toFile();
 						if (sif.lastModified() > iff.lastModified()) {
 							convertSif(path, name);
 							System.out.println("Updated Server Datatable: " + name);
+							Log.i("ServerFactory", "Updated Server Datatable: %s", name);
 						}
 					}
 				}
