@@ -25,37 +25,41 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package resources.config;
+package intents.server;
 
-import java.util.HashMap;
-import java.util.Map;
+import resources.config.ConfigFile;
+import resources.control.Intent;
 
-public enum ConfigFile {
-	/** Meant for general purpose configuration or debugging */
-	PRIMARY	("cfg/nge.cfg"),
-	/** Meant for networking-related configuration. Includes Login and Zone configuration */
-	NETWORK	("cfg/network.cfg"),
-	/** Meant for specific in-game features that may be better disabled or tweaked */
-	FEATURES("cfg/features.cfg");
+public final class ConfigChangedIntent extends Intent {
+
+	public static final String TYPE = "ConfigChangedIntent";
+	private final ConfigFile changedConfig;
+	private final String key, oldValue, newValue;
 	
-	private static final Map<String, ConfigFile> NAMEMAP = new HashMap<>();
-	private String filename;
-	
-	static {
-		for(ConfigFile cfgFile : values())
-			NAMEMAP.put(cfgFile.filename, cfgFile);
-	}
-	
-	ConfigFile(String filename) {
-		this.filename = filename;
+	public ConfigChangedIntent(ConfigFile changedConfig,
+			String key, String oldValue, String newValue) {
+		super(TYPE);
 		
+		this.changedConfig = changedConfig;
+		this.key = key;
+		this.oldValue = oldValue;
+		this.newValue = newValue;
 	}
 	
-	public String getFilename() {
-		return filename;
+	public ConfigFile getChangedConfig() {
+		return changedConfig;
 	}
 	
-	public static ConfigFile configFileForName(String name) {
-		return NAMEMAP.get(name);
+	public String getKey() {
+		return key;
 	}
+	
+	public String getOldValue() {
+		return oldValue;
+	}
+	
+	public String getNewValue() {
+		return newValue;
+	}
+	
 }
