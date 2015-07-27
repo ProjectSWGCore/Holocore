@@ -35,6 +35,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeMap;
@@ -62,8 +63,16 @@ class ConfigData {
 		return data.put(key, value);
 	}
 	
-	public boolean load() {
+	/**
+	 * @return null on an I/O failure, an empty {@code Map} on the first load and
+	 * a populated {@code Map} when called afterwards
+	 */
+	public Map<String, String> load() {
+		Map<String, String> delta = new HashMap<>();
 		BufferedReader reader = null;
+		
+		delta.putAll(data);	// Copy the current data
+		
 		try {
 			reader = new BufferedReader(new FileReader(file));
 			String line = reader.readLine();
@@ -71,19 +80,23 @@ class ConfigData {
 				loadLine(line);
 				line = reader.readLine();
 			}
-			return true;
 		} catch (IOException e) {
 			e.printStackTrace();
-			return false;
+			return null;
 		} finally {
 			if (reader != null) {
 				try {
 					reader.close();
 				} catch (IOException e) {
-					
+					return null;
 				}
 			}
 		}
+		
+		for(Entry<String, String> entry : data.entrySet())
+			delta.remove(entry.getKey(), entry.getValue());
+		
+		return delta;
 	}
 	
 	public boolean save() {
