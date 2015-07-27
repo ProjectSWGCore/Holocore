@@ -97,7 +97,7 @@ public class IntentManager {
 		catch (RejectedExecutionException e) { } // This error is thrown when the server is being shut down
 	}
 	
-	protected void registerForIntent(String intentType, IntentReceiver r) {
+	public void registerForIntent(String intentType, IntentReceiver r) {
 		if (r == null)
 			throw new NullPointerException("Cannot register a null value for an intent");
 		synchronized (intentRegistrations) {
@@ -157,7 +157,7 @@ public class IntentManager {
 		return getInstance().intentQueue.size();
 	}
 	
-	protected static IntentManager getInstance() {
+	public static IntentManager getInstance() {
 		return instance;
 	}
 	
