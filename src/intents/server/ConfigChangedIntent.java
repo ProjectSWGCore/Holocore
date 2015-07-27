@@ -25,7 +25,6 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-
 package intents.server;
 
 import resources.config.ConfigFile;
@@ -34,21 +33,21 @@ import resources.control.Intent;
 public final class ConfigChangedIntent extends Intent {
 
 	public static final String TYPE = "ConfigChangedIntent";
-	private final ConfigFile changedFile;
+	private final ConfigFile changedConfig;
 	private final String key, oldValue, newValue;
 	
-	public ConfigChangedIntent(ConfigFile changedFile,
+	public ConfigChangedIntent(ConfigFile changedConfig,
 			String key, String oldValue, String newValue) {
 		super(TYPE);
 		
-		this.changedFile = changedFile;
+		this.changedConfig = changedConfig;
 		this.key = key;
 		this.oldValue = oldValue;
 		this.newValue = newValue;
 	}
 	
-	public ConfigFile getChangedFile() {
-		return changedFile;
+	public ConfigFile getChangedConfig() {
+		return changedConfig;
 	}
 	
 	public String getKey() {
