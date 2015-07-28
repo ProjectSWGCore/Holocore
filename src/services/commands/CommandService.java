@@ -123,7 +123,7 @@ public class CommandService extends Service {
 		if (command.hasJavaCallback())
 			command.getJavaCallback().execute(galacticManager, player, target, args);
 		else
-			Scripts.execute("commands/generic/" + command.getScriptCallback(), "execute", galacticManager, player, target, args);
+			Scripts.invoke("commands/generic/" + command.getScriptCallback(), "execute", galacticManager, player, target, args);
 	}
 	
 	private void loadBaseCommands() {
@@ -146,7 +146,7 @@ public class CommandService extends Service {
 			
 			Command command = new Command((String) cmdRow[0]);
 			command.setCrc(CRC.getCrc(command.getName().toLowerCase(Locale.ENGLISH)));
-			command.setScriptCallback(callback + ".py");
+			command.setScriptCallback(callback);
 			command.setDefaultTime((float) cmdRow[6]);
 			command.setCharacterAbility((String) cmdRow[7]);
 			

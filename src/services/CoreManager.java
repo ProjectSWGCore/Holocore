@@ -56,7 +56,6 @@ import resources.control.Manager;
 import resources.control.ServerStatus;
 import resources.server_info.Config;
 import services.galaxy.GalacticManager;
-import utilities.Scripts;
 
 public class CoreManager extends Manager {
 	
@@ -111,7 +110,6 @@ public class CoreManager extends Manager {
 	@Override
 	public boolean stop() {
 		galaxy.setStatus(GalaxyStatus.LOCKED);
-		Scripts.cleanup();
 		return super.stop();
 	}
 	
@@ -155,7 +153,6 @@ public class CoreManager extends Manager {
 		}
 		System.out.println("CoreManager: Initializing scripts...");
 		long start = System.nanoTime();
-		Scripts.initialize(getConfig(ConfigFile.PRIMARY));
 		long end = System.nanoTime();
 		System.out.println("CoreManager: Initialized scripts. Took " + (end-start)/1E6 + "ms");
 	}
