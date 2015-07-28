@@ -35,9 +35,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.python.core.PyObject;
-
 import resources.player.Player;
 import network.packets.swg.zone.server_ui.SuiCreatePageMessage.SuiWindowComponent;
 
@@ -49,7 +46,7 @@ public class SuiWindow {
 	private long rangeObjId;
 	private float maxDistance = 0;
 	private List<SuiWindowComponent> components = new ArrayList<SuiWindowComponent>();
-	private Map<Integer, PyObject> scriptCallbacks;
+	private Map<Integer, String> scriptCallbacks;
 	private Map<Integer, ISuiCallback> javaCallbacks;
 	
 	public SuiWindow(String script, Player owner) {
@@ -139,12 +136,12 @@ public class SuiWindow {
 		javaCallbacks.put(eventId, callback);
 	}
 	
-	public final void addCallback(int eventId, String source, Trigger trigger, List<String> returnParams, PyObject callback) {
+	public final void addCallback(int eventId, String source, Trigger trigger, List<String> returnParams, String callbackScript) {
 		addCallbackComponent(source, trigger, returnParams);
 		
 		if (scriptCallbacks == null)
-			scriptCallbacks = new HashMap<Integer, PyObject>();
-		scriptCallbacks.put(eventId, callback);
+			scriptCallbacks = new HashMap<Integer, String>();
+		scriptCallbacks.put(eventId, callbackScript);
 	}
 
 	private SuiWindowComponent createComponent(byte type) {
@@ -173,7 +170,7 @@ public class SuiWindow {
 	public final void setMaxDistance(float maxDistance) { this.maxDistance = maxDistance; }
 	public final List<SuiWindowComponent> getComponents() { return components; }
 	public final ISuiCallback getJavaCallback(int eventType) { return ((javaCallbacks == null) ? null : javaCallbacks.get(eventType)); }
-	public final PyObject getScriptCallback(int eventType) { return ((scriptCallbacks == null) ? null : scriptCallbacks.get(eventType)); }
+	public final String getScriptCallback(int eventType) { return ((scriptCallbacks == null) ? null : scriptCallbacks.get(eventType)); }
 	
 	public enum Trigger {
 		UPDATE	((byte) 4),
