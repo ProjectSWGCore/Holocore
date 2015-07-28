@@ -29,7 +29,6 @@ package network.packets.swg;
 
 import network.PacketType;
 import network.packets.Packet;
-import resources.Location;
 import resources.common.CRC;
 
 import java.nio.ByteBuffer;

@@ -27,6 +27,7 @@
 ***********************************************************************************/
 package services.spawn;
 
+import java.io.FileNotFoundException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -40,7 +41,7 @@ import services.objects.ObjectManager;
 
 public class StaticService extends Service {
 	
-	private static final String GET_SUPPORTING_SQL = "SELECT spawn.* FROM static_spawns spawn, static_types types WHERE types.iff = ? AND spawn.iff_type = types.iff_type";
+	private static final String GET_SUPPORTING_SQL = "SELECT spawns.* FROM spawns, types WHERE types.iff = ? AND spawns.iff_type = types.iff_type";
 	
 	private final Object databaseMutex;
 	private final ObjectManager objectManager;
@@ -51,7 +52,14 @@ public class StaticService extends Service {
 		this.databaseMutex = new Object();
 		this.objectManager = objectManager;
 		
-		spawnDatabase = new RelationalServerData("serverdata/static_spawns.db");
+		spawnDatabase = new RelationalServerData("serverdata/static/spawns.db");
+		try {
+			spawnDatabase.linkTableWithSdb("spawns", "serverdata/static/spawns.sdb");
+			spawnDatabase.linkTableWithSdb("types", "serverdata/static/types.sdb");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			throw new main.ProjectSWG.CoreException("Unable to load sdb files for StaticService");
+		}
 		getSupportingStatement = spawnDatabase.prepareStatement(GET_SUPPORTING_SQL);
 	}
 	

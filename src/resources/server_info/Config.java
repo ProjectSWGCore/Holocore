@@ -28,6 +28,7 @@
 package resources.server_info;
 
 import java.io.File;
+import java.util.Map;
 
 /**
  * Reads and stores configuration data from a file
@@ -167,7 +168,7 @@ public class Config {
 	 * Reloads the config data from the file
 	 * @return TRUE if the data was successfully loaded, FALSE otherwise
 	 */
-	public boolean load() {
+	public Map<String, String> load() {
 		return configData.load();
 	}
 	

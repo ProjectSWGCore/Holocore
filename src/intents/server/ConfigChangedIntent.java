@@ -25,79 +25,41 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package network.packets.swg.login;
+package intents.server;
 
-import java.nio.ByteBuffer;
-import java.util.List;
-import java.util.Vector;
+import resources.config.ConfigFile;
+import resources.control.Intent;
 
-import network.packets.swg.SWGPacket;
-import resources.Galaxy;
+public final class ConfigChangedIntent extends Intent {
 
-
-public class LoginClusterStatus extends SWGPacket {
+	public static final String TYPE = "ConfigChangedIntent";
+	private final ConfigFile changedConfig;
+	private final String key, oldValue, newValue;
 	
-	public static final int CRC = getCrc("LoginClusterStatus");
-	
-	private Vector <Galaxy> galaxies;
-	
-	public LoginClusterStatus() {
-		galaxies = new Vector<Galaxy>();
+	public ConfigChangedIntent(ConfigFile changedConfig,
+			String key, String oldValue, String newValue) {
+		super(TYPE);
+		
+		this.changedConfig = changedConfig;
+		this.key = key;
+		this.oldValue = oldValue;
+		this.newValue = newValue;
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
-			return;
-		int serverCount = getInt(data);
-		for (int i = 0; i < serverCount; i++) {
-			Galaxy g = new Galaxy();
-			g.setId(getInt(data));
-			g.setAddress(getAscii(data));
-			g.setZonePort(getShort(data));
-			g.setPingPort(getShort(data));
-			g.setPopulation(getInt(data));
-			g.setPopulationStatus(getInt(data));
-			g.setMaxCharacters(getInt(data));
-			g.setTimeZone(getInt(data));
-			g.setStatus(getInt(data));
-			g.setRecommended(getBoolean(data));
-			g.setOnlinePlayerLimit(getInt(data));
-			g.setOnlineFreeTrialLimit(getInt(data));
-			galaxies.add(g);
-		}
+	public ConfigFile getChangedConfig() {
+		return changedConfig;
 	}
 	
-	public ByteBuffer encode() {
-		int length = 10;
-		for (Galaxy g : galaxies)
-			length += 35 + g.getAddress().length() + 8;
-		ByteBuffer data = ByteBuffer.allocate(length);
-		addShort(data, 2);
-		addInt(  data, CRC);
-		addInt(  data, galaxies.size());
-		for (Galaxy g : galaxies) {
-			 addInt(    data, g.getId());
-			 addAscii(  data, g.getAddress());
-			 addShort(  data, g.getZonePort());
-			 addShort(  data, g.getPingPort());
-			 addInt(    data, g.getPopulation());
-			 addInt(    data, g.getPopulationStatus());
-			 addInt(    data, g.getMaxCharacters());
-			 addInt(    data, g.getTimeZone());
-			 addInt(    data, g.getStatus().getStatus());
-			 addBoolean(data, g.isRecommended());
-			 addInt(    data, g.getOnlinePlayerLimit());
-			 addInt(    data, g.getOnlineFreeTrialLimit());
-		}
-		return data;
+	public String getKey() {
+		return key;
 	}
 	
-	public void addGalaxy(Galaxy g) {
-		galaxies.add(g);
+	public String getOldValue() {
+		return oldValue;
 	}
 	
-	public List <Galaxy> getGalaxies() {
-		return galaxies;
+	public String getNewValue() {
+		return newValue;
 	}
 	
 }
