@@ -76,6 +76,14 @@ public class LoginService extends Service {
 	
 	private static final String REQUIRED_VERSION = "20111130-15:46";
 	
+	// Population status values. Values are in percent.
+	private static final double VERYLIGHT = 10;
+	private static final double LIGHT = 20;
+	private static final double MEDIUM = 30;
+	private static final double HEAVY = 40;
+	private static final double VERYHEAVY = 50;
+	private static final double EXTREMELYHEAVY = 100;
+	
 	private Random random;
 	private PreparedStatement getUser;
 	private PreparedStatement getUserInsensitive;
@@ -374,26 +382,20 @@ public class LoginService extends Service {
 		}
 	}
 	
-	private int populationStatus(double consumed) {
-		double veryLight = 10; // 10%
-		double light = 20; // 20%
-		double medium = 30; // 30%
-		double heavy = 40; // 40%
-		double veryHeavy = 50; // 50%
-		double extremelyHeavy = 100; // 100%
-		int popStatus;
+	private int populationStatus(final double consumed) {
+		final int popStatus;
 		
-		if(consumed < veryLight)
+		if(consumed < VERYLIGHT)
 			popStatus = 0;
-		else if(consumed < light)
+		else if(consumed < LIGHT)
 			popStatus = 1;
-		else if(consumed < medium)
+		else if(consumed < MEDIUM)
 			popStatus = 2;
-		else if(consumed < heavy)
+		else if(consumed < HEAVY)
 			popStatus = 3;
-		else if(consumed < veryHeavy)
+		else if(consumed < VERYHEAVY)
 			popStatus = 4;
-		else if(consumed < extremelyHeavy)
+		else if(consumed < EXTREMELYHEAVY)
 			popStatus = 5;
 		else
 			popStatus = 6;
