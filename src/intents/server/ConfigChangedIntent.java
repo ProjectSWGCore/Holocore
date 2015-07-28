@@ -25,45 +25,41 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package utilities;
+package intents.server;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import resources.config.ConfigFile;
+import resources.control.Intent;
 
-import javax.script.Invocable;
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
+public final class ConfigChangedIntent extends Intent {
 
-public class Scripts {
-
-	private static final String SCRIPTS = "scripts/";
-	private static final String EXTENSION = ".js";
-	private static final ScriptEngine ENGINE = new ScriptEngineManager().getEngineByName("nashorn");
-	private static final Invocable INVOCABLE = (Invocable) ENGINE;
+	public static final String TYPE = "ConfigChangedIntent";
+	private final ConfigFile changedConfig;
+	private final String key, oldValue, newValue;
 	
-	// Prevents instantiation.
-	private Scripts() {}
+	public ConfigChangedIntent(ConfigFile changedConfig,
+			String key, String oldValue, String newValue) {
+		super(TYPE);
+		
+		this.changedConfig = changedConfig;
+		this.key = key;
+		this.oldValue = oldValue;
+		this.newValue = newValue;
+	}
 	
-	/**
-	 * @param script name of the script, relative to the scripts folder.
-	 * @param function name of the specific function within the script.
-	 * @param args to pass to the function.
-	 * @return whatever the function returns. If the function doesn't have a return statement, this method returns {@code null}.
-	 * If an exception occurs, {@code null} is returned.
-	 */
-	@SuppressWarnings("unchecked")
-	public static <T> T invoke(String script, String function, Object... args) {
-		try {
-			ENGINE.eval(new FileReader(SCRIPTS + script + EXTENSION));
-			return (T) INVOCABLE.invokeFunction(function, args);
-		} catch (FileNotFoundException e) {
-			// No need to print anything, this is a common error.
-			// Returning null is all that's necessary
-			return null;
-		} catch (Throwable t) {
-			t.printStackTrace();
-			return null;
-		}
+	public ConfigFile getChangedConfig() {
+		return changedConfig;
+	}
+	
+	public String getKey() {
+		return key;
+	}
+	
+	public String getOldValue() {
+		return oldValue;
+	}
+	
+	public String getNewValue() {
+		return newValue;
 	}
 	
 }
