@@ -103,7 +103,6 @@ public class CoreManager extends Manager {
 		registerForIntent(ServerManagementIntent.TYPE);
 		packetDebug = getConfig(ConfigFile.PRIMARY).getBoolean("PACKET-DEBUG", false);
 		initializePacketOutput();
-		initializeScripts();
 		return galaxy != null && super.initialize();
 	}
 	
@@ -143,18 +142,6 @@ public class CoreManager extends Manager {
 			e.printStackTrace();
 			packetOutput = System.out;
 		}
-	}
-	
-	private void initializeScripts() {
-		Config c = getConfig(ConfigFile.PRIMARY);
-		if (!c.getBoolean("LOAD-SCRIPTS", true)) {
-			System.out.println("CoreManager: Not preloading scripts. Reason: disabled");
-			return;
-		}
-		System.out.println("CoreManager: Initializing scripts...");
-		long start = System.nanoTime();
-		long end = System.nanoTime();
-		System.out.println("CoreManager: Initialized scripts. Took " + (end-start)/1E6 + "ms");
 	}
 	
 	private void handleServerManagementIntent(ServerManagementIntent i) {
