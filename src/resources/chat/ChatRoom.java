@@ -163,6 +163,9 @@ public class ChatRoom implements Encodable, Serializable {
 		if (isPublic() || invited.contains(avatar))
 			return ChatResult.SUCCESS;
 
+		if (avatar.equals(owner))
+			return ChatResult.SUCCESS;
+
 		return ChatResult.ROOM_AVATAR_NO_PERMISSION;
 	}
 
@@ -174,6 +177,10 @@ public class ChatRoom implements Encodable, Serializable {
 			return ChatResult.ROOM_NOT_MODERATOR;
 
 		return ChatResult.SUCCESS;
+	}
+
+	public boolean isModerator(ChatAvatar avatar) {
+		return avatar.equals(owner) || moderators.contains(avatar);
 	}
 
 	public void sendMessage(ChatAvatar sender, String message, OutOfBandPackage oob, PlayerManager playerManager) {
