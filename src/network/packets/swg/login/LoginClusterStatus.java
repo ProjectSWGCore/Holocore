@@ -81,7 +81,7 @@ public class LoginClusterStatus extends SWGPacket {
 			 addShort(  data, g.getZonePort());
 			 addShort(  data, g.getPingPort());
 			 addInt(    data, g.getPopulation());
-			 addInt(    data, getPopulationStatus(g.getPopulation()));
+			 addInt(    data, g.getPopulationStatus());
 			 addInt(    data, g.getMaxCharacters());
 			 addInt(    data, g.getTimeZone());
 			 addInt(    data, g.getStatus().getStatus());
