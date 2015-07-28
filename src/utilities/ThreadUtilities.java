@@ -29,12 +29,32 @@ package utilities;
 
 import java.util.concurrent.ThreadFactory;
 
-import org.python.google.common.util.concurrent.ThreadFactoryBuilder;
-
 public class ThreadUtilities {
 	
 	public static ThreadFactory newThreadFactory(String pattern) {
-		return new ThreadFactoryBuilder().setNameFormat(pattern).build();
+		return new CustomThreadFactory(pattern);
+	}
+	
+	private static class CustomThreadFactory implements ThreadFactory {
+		
+		private final String pattern;
+		private int counter;
+		
+		public CustomThreadFactory(String pattern) {
+			this.pattern = pattern;
+			this.counter = 0;
+		}
+		
+		@Override
+		public Thread newThread(Runnable r) {
+			String name;
+			if (pattern.contains("%d"))
+				name = String.format(pattern, counter++);
+			else
+				name = pattern;
+			return new Thread(r, name);
+		}
+		
 	}
 	
 }
