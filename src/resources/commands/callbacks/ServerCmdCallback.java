@@ -68,7 +68,7 @@ public class ServerCmdCallback implements ICmdCallback {
 	}
 	
 	private void debug(GalacticManager galacticManager, Player player, SWGObject target, String args) {
-		Scripts.execute("commands/generic/debug.py", "execute", galacticManager, player, target, args);
+		Scripts.invoke("commands/generic/debug", "execute", galacticManager, player, target, args);
 	}
 	
 	private static class ServerSuiCallback implements ISuiCallback {
