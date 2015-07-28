@@ -306,21 +306,29 @@ public class LoginService extends Service {
 		Config c = getConfig(ConfigFile.PRIMARY);
 		ResultSet set = getGalaxies.executeQuery();
 		List <Galaxy> galaxies = new ArrayList<Galaxy>();
+		int maxPopulation = c.getInt("GALAXY-MAX-ONLINE", 3000);
+		double consumed;
+		int population;
+		
 		try {
 			while (set.next()) {
 				Galaxy g = new Galaxy();
+				population = set.getInt("population");
+				consumed = ((double) population / maxPopulation) * 100;
+				
 				g.setId(set.getInt("id"));
 				g.setName(set.getString("name"));
 				g.setAddress(set.getString("address"));
-				g.setPopulation(set.getInt("population"));
+				g.setPopulation(population);
 				g.setTimeZone(set.getInt("timezone"));
 				g.setZonePort(set.getInt("zone_port"));
 				g.setPingPort(set.getInt("ping_port"));
 				g.setStatus(set.getInt("status"));
 				g.setMaxCharacters(c.getInt("GALAXY-MAX-CHARACTERS", 2));
-				g.setOnlinePlayerLimit(c.getInt("GALAXY-MAX-ONLINE", 3000));
-				g.setOnlineFreeTrialLimit(c.getInt("GALAXY-MAX-ONLINE", 3000));
+				g.setOnlinePlayerLimit(maxPopulation);
+				g.setOnlineFreeTrialLimit(maxPopulation);
 				g.setRecommended(true);
+				g.setPopulationStatus(populationStatus(consumed));
 				// If locked, restricted, or full
 				if (p.getAccessLevel() == AccessLevel.ADMIN && g.getStatus() != GalaxyStatus.UP)
 					g.setStatus(GalaxyStatus.UP);
@@ -364,6 +372,33 @@ public class LoginService extends Service {
 			}
 			return false;
 		}
+	}
+	
+	private int populationStatus(double consumed) {
+		double veryLight = 10; // 10%
+		double light = 20; // 20%
+		double medium = 30; // 30%
+		double heavy = 40; // 40%
+		double veryHeavy = 50; // 50%
+		double extremelyHeavy = 100; // 100%
+		int popStatus;
+		
+		if(consumed < veryLight)
+			popStatus = 0;
+		else if(consumed < light)
+			popStatus = 1;
+		else if(consumed < medium)
+			popStatus = 2;
+		else if(consumed < heavy)
+			popStatus = 3;
+		else if(consumed < veryHeavy)
+			popStatus = 4;
+		else if(consumed < extremelyHeavy)
+			popStatus = 5;
+		else
+			popStatus = 6;
+		
+		return popStatus;
 	}
 	
 }

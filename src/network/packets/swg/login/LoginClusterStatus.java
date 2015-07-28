@@ -37,7 +37,7 @@ import resources.Galaxy;
 
 public class LoginClusterStatus extends SWGPacket {
 	
-	public static final int CRC = 0x3436AEB6;
+	public static final int CRC = getCrc("LoginClusterStatus");
 	
 	private Vector <Galaxy> galaxies;
 	
@@ -98,22 +98,6 @@ public class LoginClusterStatus extends SWGPacket {
 	
 	public List <Galaxy> getGalaxies() {
 		return galaxies;
-	}
-	
-	private int getPopulationStatus(int pop) {
-		if (pop < 300)
-			return 0; // Very Light
-		if (pop < 600)
-			return 1; // Light
-		if (pop < 900)
-			return 2; // Medium
-		if (pop < 1200)
-			return 3; // Heavy
-		if (pop < 1500)
-			return 4; // Very Heavy
-		if (pop < 3000)
-			return 5; // Extremely Heavy
-		return 6; // Full
 	}
 	
 }
