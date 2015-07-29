@@ -135,6 +135,9 @@ public enum PacketType {
 		CHAT_SYSTEM_MESSAGE						(ChatSystemMessage.CRC, 			ChatSystemMessage.class),
 		CHAT_INVITE_AVATAR_TO_ROOM				(ChatInviteAvatarToRoom.CRC,		ChatInviteAvatarToRoom.class),
 		CHAT_UNINVITE_FROM_ROOM					(ChatUninviteFromRoom.CRC,			ChatUninviteFromRoom.class),
+		CHAT_KICK_AVATAR_FROM_ROOM				(ChatKickAvatarFromRoom.CRC,		ChatKickAvatarFromRoom.class),
+		CHAT_BAN_AVATAR_FROM_ROOM				(ChatBanAvatarFromRoom.CRC,			ChatBanAvatarFromRoom.class),
+		CHAT_UNBAN_AVATAR_FROM_ROOM				(ChatUnbanAvatarFromRoom.CRC,		ChatUnbanAvatarFromRoom.class),
 		CON_GENERIC_MESSAGE						(ConGenericMessage.CRC, 			ConGenericMessage.class),
 		VOICE_CHAT_STATUS						(VoiceChatStatus.CRC, 				VoiceChatStatus.class),
 

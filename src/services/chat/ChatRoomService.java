@@ -32,23 +32,29 @@ import intents.chat.ChatRoomUpdateIntent;
 import intents.network.GalacticPacketIntent;
 import network.packets.Packet;
 import network.packets.swg.SWGPacket;
+import network.packets.swg.zone.chat.ChatBanAvatarFromRoom;
 import network.packets.swg.zone.chat.ChatCreateRoom;
 import network.packets.swg.zone.chat.ChatDestroyRoom;
 import network.packets.swg.zone.chat.ChatEnterRoomById;
 import network.packets.swg.zone.chat.ChatInviteAvatarToRoom;
+import network.packets.swg.zone.chat.ChatKickAvatarFromRoom;
+import network.packets.swg.zone.chat.ChatOnBanAvatarFromRoom;
 import network.packets.swg.zone.chat.ChatOnCreateRoom;
 import network.packets.swg.zone.chat.ChatOnDestroyRoom;
 import network.packets.swg.zone.chat.ChatOnEnteredRoom;
 import network.packets.swg.zone.chat.ChatOnInviteToRoom;
+import network.packets.swg.zone.chat.ChatOnKickAvatarFromRoom;
 import network.packets.swg.zone.chat.ChatOnLeaveRoom;
 import network.packets.swg.zone.chat.ChatOnReceiveRoomInvitation;
 import network.packets.swg.zone.chat.ChatOnSendRoomMessage;
+import network.packets.swg.zone.chat.ChatOnUnbanAvatarFromRoom;
 import network.packets.swg.zone.chat.ChatOnUninviteFromRoom;
 import network.packets.swg.zone.chat.ChatQueryRoom;
 import network.packets.swg.zone.chat.ChatQueryRoomResults;
 import network.packets.swg.zone.chat.ChatRemoveAvatarFromRoom;
 import network.packets.swg.zone.chat.ChatRequestRoomList;
 import network.packets.swg.zone.chat.ChatSendToRoom;
+import network.packets.swg.zone.chat.ChatUnbanAvatarFromRoom;
 import network.packets.swg.zone.chat.ChatUninviteFromRoom;
 import network.packets.swg.zone.insertion.ChatRoomList;
 import resources.Terrain;
@@ -128,8 +134,7 @@ public class ChatRoomService extends Service {
 				enterChatChannel(player, enterRoomById.getRoomId(), enterRoomById.getSequence());
 				break; }
 			case CHAT_REMOVE_AVATAR_FROM_ROOM:
-				if (p instanceof ChatRemoveAvatarFromRoom)
-					leaveChatChannel(player, ((ChatRemoveAvatarFromRoom) p).getPath());
+				if (p instanceof ChatRemoveAvatarFromRoom) leaveChatChannel(player, ((ChatRemoveAvatarFromRoom) p).getPath());
 				break;
 			case CHAT_SEND_TO_ROOM:
 				if (p instanceof ChatSendToRoom) handleChatSendToRoom(player, (ChatSendToRoom) p);
@@ -149,6 +154,14 @@ public class ChatRoomService extends Service {
 			case CHAT_UNINVITE_FROM_ROOM:
 				if (p instanceof ChatUninviteFromRoom) handleChatUninviteFromRoom(player, (ChatUninviteFromRoom) p);
 				break;
+			case CHAT_KICK_AVATAR_FROM_ROOM:
+				if (p instanceof ChatKickAvatarFromRoom) handleChatKickAvatarFromRoom(player, (ChatKickAvatarFromRoom) p);
+				break;
+			case CHAT_BAN_AVATAR_FROM_ROOM:
+				if (p instanceof ChatBanAvatarFromRoom) handleChatBanAvatarFromRoom(player, (ChatBanAvatarFromRoom) p);
+				break;
+			case CHAT_UNBAN_AVATAR_FROM_ROOM:
+				if (p instanceof ChatUnbanAvatarFromRoom) handleChatUnbanAvatarFromRoom(player, (ChatUnbanAvatarFromRoom) p);
 			default: break;
 		}
 	}
@@ -163,6 +176,107 @@ public class ChatRoomService extends Service {
 
 	/* Chat Rooms */
 
+	private void handleChatUnbanAvatarFromRoom(Player player, ChatUnbanAvatarFromRoom p) {
+		String path = p.getRoom();
+		ChatAvatar target = p.getAvatar();
+		int sequence = p.getSequence();
+
+		ChatRoom room = getRoom(path);
+		ChatAvatar sender = ChatAvatar.getFromPlayer(player);
+
+		if (room == null) {
+			player.sendPacket(new ChatOnUnbanAvatarFromRoom(path, sender, target, ChatResult.ROOM_INVALID_NAME.getCode(), sequence));
+			return;
+		}
+
+		if (!room.isModerator(sender)) {
+			player.sendPacket(new ChatOnUnbanAvatarFromRoom(path, sender, target, ChatResult.ROOM_AVATAR_NO_PERMISSION.getCode(), sequence));
+			return;
+		}
+
+		if (!room.getBanned().remove(target)) {
+			player.sendPacket(new ChatOnUnbanAvatarFromRoom(path, sender, target, ChatResult.ROOM_AVATAR_BANNED.getCode(), sequence));
+			return;
+		}
+
+		room.sendPacketToMembers(player.getPlayerManager(), new ChatOnUnbanAvatarFromRoom(path, sender, target, ChatResult.SUCCESS.getCode(), sequence));
+	}
+
+	private void handleChatBanAvatarFromRoom(Player player, ChatBanAvatarFromRoom p) {
+		String path = p.getRoom();
+		ChatAvatar target = p.getAvatar();
+		int sequence = p.getSequence();
+
+		ChatRoom room = getRoom(path);
+		ChatAvatar sender = ChatAvatar.getFromPlayer(player);
+
+		if (room == null) {
+			player.sendPacket(new ChatOnBanAvatarFromRoom(path, sender, target, ChatResult.ROOM_INVALID_NAME.getCode(), sequence));
+			return;
+		}
+
+		if (!room.isModerator(sender)) {
+			player.sendPacket(new ChatOnBanAvatarFromRoom(path, sender, target, ChatResult.ROOM_AVATAR_NO_PERMISSION.getCode(), sequence));
+			return;
+		}
+
+		if (room.isBanned(target)) {
+			player.sendPacket(new ChatOnBanAvatarFromRoom(path, sender, target, ChatResult.ROOM_AVATAR_BANNED.getCode(), sequence));
+			return;
+		}
+
+		if (!room.isMember(target)) {
+			player.sendPacket(new ChatOnBanAvatarFromRoom(path, sender, target, ChatResult.TARGET_AVATAR_DOESNT_EXIST.getCode(), sequence));
+			return;
+		}
+
+		if (room.isModerator(target))
+			room.getModerators().remove(target);
+
+		if (room.getInvited().contains(target))
+			room.getInvited().remove(target);
+
+		room.getBanned().add(target);
+
+		room.sendPacketToMembers(player.getPlayerManager(), new ChatOnBanAvatarFromRoom(path, sender, target, ChatResult.SUCCESS.getCode(), sequence));
+	}
+
+	private void handleChatKickAvatarFromRoom(Player player, ChatKickAvatarFromRoom p) {
+		String path = p.getRoom();
+		ChatAvatar target = p.getAvatar();
+
+		ChatRoom room = getRoom(path);
+		ChatAvatar sender = ChatAvatar.getFromPlayer(player);
+
+		if (room == null) {
+			player.sendPacket(new ChatOnKickAvatarFromRoom(target, sender, ChatResult.ROOM_INVALID_NAME.getCode(), path));
+			return;
+		}
+
+		if (!room.isModerator(sender)) {
+			player.sendPacket(new ChatOnKickAvatarFromRoom(target, sender, ChatResult.ROOM_AVATAR_NO_PERMISSION.getCode(), path));
+			return;
+		}
+
+		if (!room.isMember(target)) {
+			player.sendPacket(new ChatOnKickAvatarFromRoom(target, sender, ChatResult.TARGET_AVATAR_DOESNT_EXIST.getCode(), path));
+			return;
+		}
+
+		Player targetPlayer = player.getPlayerManager().getPlayerByCreatureFirstName(target.getName());
+		if (targetPlayer == null) {
+			player.sendPacket(new ChatOnKickAvatarFromRoom(target, sender, ChatResult.TARGET_AVATAR_DOESNT_EXIST.getCode(), path));
+			return;
+		}
+
+		if (room.isMember(target)) {
+			player.sendPacket(new ChatOnKickAvatarFromRoom(target, sender, ChatResult.NONE.getCode(), path));
+			return;
+		}
+
+		room.sendPacketToMembers(player.getPlayerManager(), new ChatOnKickAvatarFromRoom(target, sender, ChatResult.SUCCESS.getCode(), path));
+	}
+
 	private void handleChatUninviteFromRoom(Player player, ChatUninviteFromRoom p) {
 		String path = p.getRoom();
 		ChatRoom room = getRoom(path);
@@ -175,18 +289,18 @@ public class ChatRoomService extends Service {
 			return;
 		}
 
+		if (room.isPublic()) {
+			player.sendPacket(new ChatOnUninviteFromRoom(path, sender, invitee, ChatResult.NONE.getCode(), p.getSequence()));
+			return;
+		}
+
 		if (!room.isModerator(sender)) {
 			player.sendPacket(new ChatOnUninviteFromRoom(path, sender, invitee, ChatResult.ROOM_AVATAR_NO_PERMISSION.getCode(), p.getSequence()));
 			return;
 		}
 
-		if (!room.getInvited().contains(invitee)) {
-			player.sendPacket(new ChatOnUninviteFromRoom(path, sender, invitee, ChatResult.ROOM_PRIVATE.getCode(), p.getSequence()));
-			return;
-		}
-
 		if (!room.getInvited().remove(invitee)) {
-			player.sendPacket(new ChatOnUninviteFromRoom(path, sender, invitee, ChatResult.NONE.getCode(), p.getSequence()));
+			player.sendPacket(new ChatOnUninviteFromRoom(path, sender, invitee, ChatResult.ROOM_PRIVATE.getCode(), p.getSequence()));
 			return;
 		}
 
@@ -200,6 +314,11 @@ public class ChatRoomService extends Service {
 		ChatAvatar sender = ChatAvatar.getFromPlayer(player);
 		if (room == null) {
 			player.sendPacket(new ChatOnInviteToRoom(path, sender, p.getAvatar(), ChatResult.ROOM_INVALID_NAME.getCode()));
+			return;
+		}
+
+		if (room.isPublic()) {
+			player.sendPacket(new ChatOnInviteToRoom(path, sender, p.getAvatar(), ChatResult.NONE.getCode()));
 			return;
 		}
 

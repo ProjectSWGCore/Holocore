@@ -183,6 +183,14 @@ public class ChatRoom implements Encodable, Serializable {
 		return avatar.equals(owner) || moderators.contains(avatar);
 	}
 
+	public boolean isMember(ChatAvatar avatar) {
+		return members.contains(avatar);
+	}
+
+	public boolean isBanned(ChatAvatar avatar) {
+		return banned.contains(avatar);
+	}
+
 	public void sendMessage(ChatAvatar sender, String message, OutOfBandPackage oob, PlayerManager playerManager) {
 		ChatRoomMessage chatRoomMessage = new ChatRoomMessage(sender, getId(), message, oob);
 		sendPacketToMembers(playerManager, chatRoomMessage);
