@@ -328,7 +328,7 @@ public class LoginService extends Service {
 				g.setName(set.getString("name"));
 				g.setAddress(set.getString("address"));
 				g.setPopulation(population);
-				g.setTimeZone(set.getInt("timezone"));
+				g.setTimeZone(set.getInt("timezone") * 3960);
 				g.setZonePort(set.getInt("zone_port"));
 				g.setPingPort(set.getInt("ping_port"));
 				g.setStatus(set.getInt("status"));
