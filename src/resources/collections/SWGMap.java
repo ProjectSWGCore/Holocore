@@ -251,8 +251,15 @@ public class SWGMap<K, V> extends AbstractMap<K, V> implements Encodable, Serial
 
 	private void addData(Object key, Object value, byte update) {
 		byte[] encodedKey = Encoder.encode(key, strType);
-		byte[] encodedValue = Encoder.encode(value, strType);
-		byte[] encodedData = new byte[encodedKey.length + encodedValue.length];
+		byte[] encodedValue;
+		byte[] encodedData;
+		
+		if(value instanceof String)
+			encodedValue = Encoder.encode(value, strType);
+		else
+			encodedValue = Encoder.encode(value);
+		
+		encodedData = new byte[encodedKey.length + encodedValue.length];
 		
 		System.arraycopy(encodedKey, 0, encodedData, 0, encodedKey.length);
 		System.arraycopy(encodedValue, 0, encodedData, encodedKey.length, encodedValue.length);
