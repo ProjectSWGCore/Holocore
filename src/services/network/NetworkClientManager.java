@@ -250,6 +250,7 @@ public class NetworkClientManager extends Manager {
 						}
 					}
 				}
+				client.resetNetwork();
 			}
 		}
 		return false;

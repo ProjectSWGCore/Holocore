@@ -36,6 +36,7 @@ import java.util.List;
 import resources.control.Intent;
 import resources.network.ServerType;
 import resources.network.UDPServer.UDPPacket;
+import resources.server_info.Log;
 import network.InboundNetworkHandler.InboundEventCallback;
 import network.packets.Packet;
 import network.packets.soe.Acknowledge;
@@ -105,7 +106,7 @@ public class NetworkProtocol implements InboundEventCallback {
 	
 	private void process(List <Packet> packets, Packet packet) {
 		if (packet == null)
-			return;
+			throw new NullPointerException("Inbound packet cannot be null!");
 		packets.add(packet);
 		if (packet instanceof Acknowledge)
 			outbound.onAcknowledge(((Acknowledge) packet).getSequence());
@@ -117,15 +118,17 @@ public class NetworkProtocol implements InboundEventCallback {
 	}
 	
 	public void sendPacket(Packet packet) {
-		if (address == null)
+		if (address == null) {
+			Log.w("NetworkProtocol", "Address is null! Cannot send packet");
 			return;
+		}
 		outbound.assemble(packet);
 		flushAssembled();
 	}
 	
 	private void send(byte [] data) {
 		if (data == null)
-			return;
+			throw new NullPointerException("Outbound data cannot be null!");
 		UDPPacket packet = new UDPPacket(address, port, data);
 		OutboundUdpPacketIntent intent = new OutboundUdpPacketIntent(serverType, packet);
 		synchronized (prevOutboundIntentMutex) {
