@@ -51,6 +51,7 @@ public abstract class Intent {
 		this.complete = true;
 		if (sequential != null)
 			sequential.broadcast();
+		sequential = null;
 	}
 	
 	/**
@@ -124,6 +125,7 @@ public abstract class Intent {
 		IntentManager.getInstance().broadcastIntent(this);
 		if (parallel != null)
 			parallel.broadcast();
+		parallel = null;
 	}
 	
 	@Override
