@@ -39,11 +39,21 @@ public class Encryption {
 	}
 	
 	public static byte [] encode(byte [] input, int crc) {
-		return assembleMessage(input, crc);
+		try {
+			return assembleMessage(input, crc);
+		} catch (Throwable t) {
+			t.printStackTrace();
+			return new byte[0];
+		}
 	}
 	
 	public static byte [] decode(byte [] input, int crc) {
-		return disassemble(input, crc);
+		try {
+			return disassemble(input, crc);
+		} catch (Throwable t) {
+			t.printStackTrace();
+			return new byte[0];
+		}
 	}
 	
 	private static byte [] disassemble(byte [] data, int crcSeed) {
