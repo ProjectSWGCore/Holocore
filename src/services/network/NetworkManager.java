@@ -27,12 +27,8 @@
 ***********************************************************************************/
 package services.network;
 
-import intents.network.OutboundUdpPacketIntent;
 import resources.Galaxy;
-import resources.control.Intent;
 import resources.control.Manager;
-import resources.network.ServerType;
-import resources.network.UDPServer.UDPPacket;
 
 public class NetworkManager extends Manager {
 	
@@ -41,25 +37,11 @@ public class NetworkManager extends Manager {
 	
 	public NetworkManager(Galaxy galaxy) {
 		netListenerService = new NetworkListenerService(galaxy);
-		netClientManager = new NetworkClientManager();
+		netClientManager = new NetworkClientManager(netListenerService);
+		netListenerService.setPacketReceiver(netClientManager);
 		
 		addChildService(netClientManager);
 		addChildService(netListenerService);
-	}
-	
-	@Override
-	public boolean initialize() {
-		registerForIntent(OutboundUdpPacketIntent.TYPE);
-		return super.initialize();
-	}
-	
-	@Override
-	public void onIntentReceived(Intent i) {
-		if (i instanceof OutboundUdpPacketIntent) {
-			UDPPacket packet = ((OutboundUdpPacketIntent) i).getPacket();
-			ServerType type = ((OutboundUdpPacketIntent) i).getServerType();
-			netListenerService.send(type, packet.getAddress(), packet.getPort(), packet.getData());
-		}
 	}
 	
 }

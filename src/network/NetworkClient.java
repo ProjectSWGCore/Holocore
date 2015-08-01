@@ -47,10 +47,10 @@ public class NetworkClient {
 	private int port;
 	private int connId;
 	
-	public NetworkClient(ServerType type, InetAddress addr, int port, long networkId) {
+	public NetworkClient(ServerType type, InetAddress addr, int port, long networkId, PacketSender packetSender) {
 		this.serverType = type;
 		this.networkId = networkId;
-		protocol = new NetworkProtocol(type, addr, port);
+		protocol = new NetworkProtocol(type, addr, port, packetSender);
 		prevPacketIntent = null;
 		connId = 0;
 		updateNetworkInfo(addr, port);
