@@ -258,12 +258,13 @@ public class CharacterCreationService extends Service {
 		return ErrorMessage.NAME_APPROVED;
 	}
 	
-
 	private long createCharacter(ObjectManager objManager, Player player, ClientCreateCharacter create) {
 		Location		start		= getStartLocation(create.getStart());
 		Race			race		= Race.getRaceByFile(create.getRace());
 		CreatureObject	creatureObj	= createCreature(objManager, race.getFilename(), start);
 		PlayerObject	playerObj	= createPlayer(objManager, "object/player/shared_player.iff");
+		SWGObject		bankObj		= objManager.createObject("object/tangible/bank/shared_character_bank.iff", false);
+		SWGObject		missionObj	= objManager.createObject("object/tangible/mission_bag/shared_mission_bag.iff", false);
 		
 		setCreatureObjectValues(objManager, creatureObj, create);
 		setPlayerObjectValues(playerObj, create);
@@ -273,6 +274,8 @@ public class CharacterCreationService extends Service {
 		creatureObj.setVolume(0x000F4240);
 		creatureObj.setOwner(player);
 		creatureObj.addObject(playerObj); // ghost slot
+		creatureObj.addObject(bankObj);
+		creatureObj.addObject(missionObj);
 		playerObj.setAdminTag(player.getAccessLevel());
 		player.setCreatureObject(creatureObj);
 		return creatureObj.getObjectId();

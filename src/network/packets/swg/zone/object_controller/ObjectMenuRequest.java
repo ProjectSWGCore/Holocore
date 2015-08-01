@@ -73,17 +73,17 @@ public class ObjectMenuRequest extends ObjectController {
 	}
 	
 	public ByteBuffer encode() {
-		int optSize = 0;
+		int optSize = 21;
 		for (RadialOption option : options)
 			optSize += 7 + option.getText().length()*2;
-		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + 21 + optSize);
+		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + optSize);
 		encodeHeader(data);
 		addLong(data, targetId);
 		addLong(data, requesterId);
 		addInt(data, options.size());
-		int optNum = 0;
+		int optNum = 1;
 		for (RadialOption option : options) {
-			addByte(data, ++optNum); // option number
+			addByte(data, optNum++); // option number
 			addByte(data, option.getParentId());
 			addShort(data, option.getId());
 			addByte(data, option.getOptionType());

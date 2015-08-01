@@ -204,6 +204,12 @@ public class ObjectManager extends Manager {
 		obj.setOwner(null);
 		if (!(obj instanceof CreatureObject) || ((CreatureObject) obj).getPlayerObject() == null)
 			objectAwareness.add(obj);
+		if (obj instanceof CreatureObject && ((CreatureObject) obj).getPlayerObject() != null) {
+			if (!obj.hasSlot("bank"))
+				obj.addObject(createObject("object/tangible/bank/shared_character_bank.iff", false));
+			if (!obj.hasSlot("mission_bag"))
+				obj.addObject(createObject("object/tangible/mission_bag/shared_mission_bag.iff", false));
+		}
 		objectMap.put(obj.getObjectId(), obj);
 		updateBuildoutParent(obj);
 		addChildrenObjects(obj);

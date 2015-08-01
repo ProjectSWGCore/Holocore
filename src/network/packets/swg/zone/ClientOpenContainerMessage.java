@@ -52,6 +52,7 @@ public class ClientOpenContainerMessage extends SWGPacket {
 	public void decode(ByteBuffer data) {
 		if (!super.decode(data, CRC))
 			return;
+		getInt(data);
 		containerId = getLong(data);
 		slot		= getAscii(data);
 	}
