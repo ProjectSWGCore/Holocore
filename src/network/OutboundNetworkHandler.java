@@ -32,7 +32,6 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 import resources.SortedLinkedList;
-import resources.server_info.Log;
 import network.encryption.Encryption;
 import network.packets.Packet;
 import network.packets.soe.DataChannelA;
@@ -83,7 +82,6 @@ public class OutboundNetworkHandler {
 				else
 					break;
 			}
-			Log.d("OutboundNetworkHandler", "Ack: %d  Remaining: %d", sequence, sequenced.size());
 		}
 	}
 	
@@ -97,7 +95,6 @@ public class OutboundNetworkHandler {
 				else
 					break;
 			}
-			Log.d("OutboundNetworkHandler", "Out Of Order: %d", sequence);
 		}
 	}
 	
