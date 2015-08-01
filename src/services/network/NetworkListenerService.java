@@ -27,14 +27,13 @@
 ***********************************************************************************/
 package services.network;
 
-import intents.network.InboundUdpPacketIntent;
-
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+import network.PacketReceiver;
+import network.PacketSender;
 import resources.Galaxy;
 import resources.config.ConfigFile;
-import resources.control.Intent;
 import resources.control.Service;
 import resources.network.ServerType;
 import resources.network.UDPServer;
@@ -42,7 +41,7 @@ import resources.network.UDPServer.UDPCallback;
 import resources.network.UDPServer.UDPPacket;
 import resources.server_info.Config;
 
-public class NetworkListenerService extends Service {
+public class NetworkListenerService extends Service implements PacketSender {
 	
 	private Server login;
 	private Server zone;
@@ -54,6 +53,12 @@ public class NetworkListenerService extends Service {
 		login = new Server(ServerType.LOGIN);
 		zone = new Server(ServerType.ZONE);
 		ping = new Server(ServerType.PING);
+	}
+	
+	public void setPacketReceiver(PacketReceiver packetReceiver) {
+		login.setPacketReceiver(packetReceiver);
+		zone.setPacketReceiver(packetReceiver);
+		ping.setPacketReceiver(packetReceiver);
 	}
 	
 	private InetAddress getBindAddr(Config c, String firstTry, String secondTry) {
@@ -113,6 +118,11 @@ public class NetworkListenerService extends Service {
 		return true;
 	}
 	
+	@Override
+	public void sendPacket(ServerType type, UDPPacket packet) {
+		send(type, packet.getAddress(), packet.getPort(), packet.getData());
+	}
+	
 	public void send(ServerType type, InetAddress addr, int port, byte [] data) {
 		switch (type) {
 			case LOGIN:
@@ -128,14 +138,17 @@ public class NetworkListenerService extends Service {
 	}
 	
 	private class Server implements UDPCallback {
-		
+
 		private final ServerType type;
+		private PacketReceiver packetReceiver;
 		private UDPServer server;
-		private Intent prevIntent;
 		
 		public Server(ServerType type) {
 			this.type = type;
-			this.prevIntent = null;
+		}
+		
+		public void setPacketReceiver(PacketReceiver packetReceiver) {
+			this.packetReceiver = packetReceiver;
 		}
 		
 		public boolean initialize(InetAddress bindAddr, int port, int maxPacket) {
@@ -178,11 +191,8 @@ public class NetworkListenerService extends Service {
 		public void onReceivedPacket(UDPPacket packet) {
 			if (type == ServerType.PING)
 				send(packet.getAddress(), packet.getPort(), packet.getData());
-			else {
-				InboundUdpPacketIntent i = new InboundUdpPacketIntent(type, packet);
-				i.broadcastAfterIntent(prevIntent);
-				prevIntent = i;
-			}
+			else
+				packetReceiver.receivePacket(type, packet);
 		}
 	}
 	

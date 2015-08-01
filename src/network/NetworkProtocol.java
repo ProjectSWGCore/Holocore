@@ -27,13 +27,10 @@
 ***********************************************************************************/
 package network;
 
-import intents.network.OutboundUdpPacketIntent;
-
 import java.net.InetAddress;
 import java.util.LinkedList;
 import java.util.List;
 
-import resources.control.Intent;
 import resources.network.ServerType;
 import resources.network.UDPServer.UDPPacket;
 import resources.server_info.Log;
@@ -46,21 +43,20 @@ import network.packets.soe.ServerNetworkStatusUpdate;
 
 public class NetworkProtocol implements InboundEventCallback {
 	
-	private final Object prevOutboundIntentMutex = new Object();
 	private final InboundNetworkHandler inbound;
 	private final OutboundNetworkHandler outbound;
 	private final ServerType serverType;
+	private final PacketSender packetSender;
 	
-	private Intent prevOutboundIntent;
 	private InetAddress address;
 	private int port;
 	private int crc;
 	
-	public NetworkProtocol(ServerType type, InetAddress address, int port) {
+	public NetworkProtocol(ServerType type, InetAddress address, int port, PacketSender packetSender) {
 		this.inbound = new InboundNetworkHandler(this);
 		this.outbound = new OutboundNetworkHandler();
 		this.serverType = type;
-		prevOutboundIntent = null;
+		this.packetSender = packetSender;
 		crc = 0;
 		updateNetworkInfo(address, port);
 	}
@@ -93,7 +89,6 @@ public class NetworkProtocol implements InboundEventCallback {
 	public void resetNetwork() {
 		inbound.reset();
 		outbound.reset();
-		prevOutboundIntent = null;
 	}
 	
 	public List <Packet> process(byte [] data) {
@@ -129,12 +124,7 @@ public class NetworkProtocol implements InboundEventCallback {
 	private void send(byte [] data) {
 		if (data == null)
 			throw new NullPointerException("Outbound data cannot be null!");
-		UDPPacket packet = new UDPPacket(address, port, data);
-		OutboundUdpPacketIntent intent = new OutboundUdpPacketIntent(serverType, packet);
-		synchronized (prevOutboundIntentMutex) {
-			intent.broadcastAfterIntent(prevOutboundIntent);
-			prevOutboundIntent = intent;
-		}
+		packetSender.sendPacket(serverType, new UDPPacket(address, port, data));
 	}
 	
 	private void processClientNetworkUpdate(ClientNetworkStatusUpdate update) {
