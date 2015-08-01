@@ -74,7 +74,7 @@ public class OutboundNetworkHandler {
 	
 	public synchronized void onAcknowledge(short sequence) {
 		synchronized (sequenced) {
-			Iterator <SequencedPacket> it = sequenced.iterator();
+			Iterator <SequencedPacket> it = sequenced.listIterator();
 			while (it.hasNext()) {
 				SequencedPacket sp = it.next();
 				if (sp.getSequence() <= sequence)
@@ -87,7 +87,7 @@ public class OutboundNetworkHandler {
 	
 	public synchronized void onOutOfOrder(short sequence) {
 		synchronized (sequenced) {
-			Iterator <SequencedPacket> it = sequenced.iterator();
+			Iterator <SequencedPacket> it = sequenced.listIterator();
 			while (it.hasNext()) {
 				SequencedPacket sp = it.next();
 				if (sp.getSequence() <= sequence)
