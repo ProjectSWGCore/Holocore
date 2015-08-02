@@ -136,8 +136,6 @@ public class ZoneManager extends Manager {
 		
 		sendZonePackets(player, creature);
 		initPlayerBeforeZoneIn(player, creature, playerObj);
-		if (creature.getParent() == null)
-			creature.createObject(player);
 		System.out.printf("[%s] %s is zoning in%n", player.getUsername(), player.getCharacterName());
 		Log.i("ObjectManager", "Zoning in %s with character %s", player.getUsername(), player.getCharacterName());
 		sendCommitHistory(player);

@@ -260,6 +260,8 @@ public class ObjectManager extends Manager {
 				case PE_ZONE_IN:
 					p.getCreatureObject().clearAware();
 					objectAwareness.update(p.getCreatureObject());
+					if (p.getCreatureObject().getParent() == null)
+						p.getCreatureObject().createObject(p);
 					break;
 				default:
 					break;
