@@ -102,8 +102,12 @@ public class Encryption {
 			Deflater compressor = new Deflater();
 			compressor.setInput(data, 2, data.length - 2);
 			compressor.finish();
-			int length = compressor.deflate(result);
-			compressor.end();
+			int length = 0;
+			try {
+				length = compressor.deflate(result);
+			} finally {
+				compressor.end();
+			}
 			if (length < data.length) {
 				ByteBuffer bb = ByteBuffer.allocate(length+3);
 				bb.put(data[0]).put(data[1]);
@@ -143,11 +147,12 @@ public class Encryption {
 		
 		try {
 			int length = decompressor.inflate(result);
-			decompressor.end();
 			return length;
 		} catch (DataFormatException e) {
 			System.err.println("Failed to decompress packet. "+e.getClass().getSimpleName()+" Message: " + e.getMessage());
 			return -1;
+		} finally {
+			decompressor.end();
 		}
 	}
 	
