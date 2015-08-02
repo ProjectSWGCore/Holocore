@@ -25,43 +25,54 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>
  ******************************************************************************/
 
-package resources.chat;
+package network.packets.swg.zone.chat;
+
+import network.packets.swg.SWGPacket;
+import resources.chat.ChatAvatar;
+
+import java.nio.ByteBuffer;
 
 /**
  * @author Waverunner
  */
-public enum ChatResult {
-	NONE(-1), // The client will just display an "unknown error code" if this is used.
-	SUCCESS(0),
-	TARGET_AVATAR_DOESNT_EXIST(4),
-	ROOM_INVALID_ID(5),
-	ROOM_INVALID_NAME(6),
-	CUSTOM_FAILURE(9),
-	ROOM_AVATAR_BANNED(12),
-	ROOM_PRIVATE(13),
-	ROOM_AVATAR_NO_PERMISSION(16),
-	IGNORED(23),
-	ROOM_ALREADY_EXISTS(24),
-	ROOM_ALREADY_JOINED(36),
-	CHAT_SERVER_UNAVAILABLE(1000000),
-	ROOM_DIFFERENT_FACTION(1000001),
-	ROOM_NOT_GCW_DEFENDER_FACTION(1000005);
+public class ChatOnBanAvatarFromRoom extends SWGPacket {
+	public static final int CRC = getCrc("ChatOnBanAvatarFromRoom");
 
+	private String room;
+	private ChatAvatar moderator;
+	private ChatAvatar target;
+	private int result;
+	private int sequence;
 
-	private final int code;
-	ChatResult(int code) {
-		this.code = code;
+	public ChatOnBanAvatarFromRoom(String room, ChatAvatar moderator, ChatAvatar target, int result, int sequence) {
+		this.room = room;
+		this.moderator = moderator;
+		this.target = target;
+		this.result = result;
+		this.sequence = sequence;
 	}
 
-	public int getCode() {
-		return code;
+	@Override
+	public void decode(ByteBuffer data) {
+		if (!super.decode(data, CRC))
+			return;
+		room		= getAscii(data);
+		moderator	= getEncodable(data, ChatAvatar.class);
+		target		= getEncodable(data, ChatAvatar.class);
+		result		= getInt(data);
+		sequence	= getInt(data);
 	}
 
-	public static ChatResult fromInteger(int code) {
-		for (ChatResult result : ChatResult.values()) {
-			if (code == result.getCode())
-				return result;
-		}
-		return NONE;
+	@Override
+	public ByteBuffer encode() {
+		ByteBuffer bb = ByteBuffer.allocate(16 + moderator.encode().length + target.encode().length + room.length());
+		addShort(bb, 6);
+		addInt(bb, CRC);
+		addAscii(bb, room);
+		addEncodable(bb, moderator);
+		addEncodable(bb, target);
+		addInt(bb, result);
+		addInt(bb, sequence);
+		return bb;
 	}
 }

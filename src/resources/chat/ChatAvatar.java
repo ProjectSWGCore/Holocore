@@ -119,7 +119,7 @@ public class ChatAvatar implements Encodable, Serializable {
 	public void decode(ByteBuffer data) {
 		game 	= Packet.getAscii(data);
 		galaxy 	= Packet.getAscii(data);
-		name 	= Packet.getAscii(data);
+		name 	= Packet.getAscii(data).toLowerCase();
 	}
 
 	@Override

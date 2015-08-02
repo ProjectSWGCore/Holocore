@@ -64,6 +64,7 @@ public class InboundNetworkHandler {
 	
 	public synchronized void reset() {
 		fragStream.reset();
+		inboundQueue.clear();
 		recvSequence = -1;
 		crc = 0;
 	}

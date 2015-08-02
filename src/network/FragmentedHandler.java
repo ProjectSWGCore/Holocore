@@ -28,17 +28,18 @@
 package network;
 
 import java.nio.ByteOrder;
+import java.util.ArrayList;
+import java.util.List;
 
 import network.packets.soe.Fragmented;
-import resources.SortedLinkedList;
 
 public class FragmentedHandler {
 	
-	private SortedLinkedList<Fragmented> fragPackets;
+	private List<Fragmented> fragPackets;
 	private int fragSize;
 	
 	public FragmentedHandler() {
-		fragPackets = new SortedLinkedList<Fragmented>();
+		fragPackets = new ArrayList<Fragmented>();
 		fragSize = 0;
 	}
 	
@@ -52,8 +53,8 @@ public class FragmentedHandler {
 			if (insertIfNew(f) && getBufferedSize() == fragSize) {
 				byte [] data = new byte[fragSize];
 				int offset = 0;
-				while (fragPackets.size() > 0 && offset < fragSize) {
-					offset = spliceFragmentedIntoBuffer(fragPackets.removeFirst(), data, offset);
+				for (Fragmented frag : fragPackets) {
+					offset = spliceFragmentedIntoBuffer(frag, data, offset);
 				}
 				updateMetadata();
 				return data;
@@ -85,14 +86,14 @@ public class FragmentedHandler {
 			if (fragPackets.isEmpty())
 				fragSize = 0;
 			else
-				fragSize = fragPackets.getFirst().encode().order(ByteOrder.BIG_ENDIAN).getInt(4);
+				fragSize = fragPackets.get(0).encode().order(ByteOrder.BIG_ENDIAN).getInt(4);
 		}
 	}
 	
 	private int getBufferedSize() {
 		int curSize = 0;
 		int i = 0;
-		short prevSeq = (short) (fragPackets.getFirst().getSequence()-1);
+		short prevSeq = (short) (fragPackets.get(0).getSequence()-1);
 		for (Fragmented frag : fragPackets) {
 			// Update previous sequence and verify all in-order
 			if (prevSeq+1 != frag.getSequence())

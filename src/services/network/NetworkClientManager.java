@@ -29,18 +29,23 @@ package services.network;
 
 import intents.network.CloseConnectionIntent;
 import intents.network.InboundPacketIntent;
-import intents.network.InboundUdpPacketIntent;
 import intents.network.OutboundPacketIntent;
 
 import java.net.InetAddress;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Random;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import network.NetworkClient;
+import network.PacketReceiver;
+import network.PacketSender;
 import network.packets.Packet;
 import network.packets.soe.Disconnect;
 import network.packets.soe.SessionRequest;
@@ -52,23 +57,39 @@ import resources.control.Manager;
 import resources.network.ServerType;
 import resources.network.UDPServer.UDPPacket;
 
-public class NetworkClientManager extends Manager {
+public class NetworkClientManager extends Manager implements PacketReceiver {
 	
 	private final Map <InetAddress, List <NetworkClient>> clients;
 	private final Map <Long, NetworkClient> networkClients;
+	private final Queue<ReceivedPacket> receivedPackets;
+	private final ExecutorService packetProcessor;
 	private final Random crcGenerator;
+	private final PacketSender packetSender;
+	private final Runnable processPacketRunnable;
 	private long networkId;
 	
-	public NetworkClientManager() {
+	public NetworkClientManager(PacketSender packetSender) {
+		this.packetSender = packetSender;
 		clients = new HashMap<InetAddress, List<NetworkClient>>();
 		networkClients = new HashMap<Long, NetworkClient>();
+		receivedPackets = new LinkedList<>();
+		packetProcessor = Executors.newCachedThreadPool();
 		crcGenerator = new Random();
+		processPacketRunnable = new Runnable() {
+			public void run() {
+				synchronized (receivedPackets) {
+					ReceivedPacket recv = receivedPackets.poll();
+					if (recv == null)
+						return;
+					handlePacket(recv.getType(), recv.getPacket());
+				}
+			}
+		};
 		networkId = 0;
 	}
 	
 	@Override
 	public boolean initialize() {
-		registerForIntent(InboundUdpPacketIntent.TYPE);
 		registerForIntent(InboundPacketIntent.TYPE);
 		registerForIntent(OutboundPacketIntent.TYPE);
 		registerForIntent(CloseConnectionIntent.TYPE);
@@ -83,14 +104,17 @@ public class NetworkClientManager extends Manager {
 		return super.stop();
 	}
 	
+	@Override
+	public void receivePacket(ServerType type, UDPPacket packet) {
+		synchronized (receivedPackets) {
+			receivedPackets.add(new ReceivedPacket(type, packet));
+		}
+		packetProcessor.submit(processPacketRunnable);
+	}
+	
+	@Override
 	public void onIntentReceived(Intent i) {
-		if (i instanceof InboundUdpPacketIntent) {
-			InboundUdpPacketIntent inbound = (InboundUdpPacketIntent) i;
-			UDPPacket p = inbound.getPacket();
-			if (p != null) {
-				handlePacket(inbound.getServerType(), p);
-			}
-		} else if (i instanceof OutboundPacketIntent) {
+		if (i instanceof OutboundPacketIntent) {
 			Packet p = ((OutboundPacketIntent)i).getPacket();
 			if (p != null)
 				handleOutboundPacket(((OutboundPacketIntent) i).getNetworkId(), p);
@@ -204,7 +228,7 @@ public class NetworkClientManager extends Manager {
 	
 	private NetworkClient createClient(ServerType type, InetAddress addr, int port) {
 		synchronized (clients) {
-			NetworkClient client = new NetworkClient(type, addr, port, networkId++);
+			NetworkClient client = new NetworkClient(type, addr, port, networkId++, packetSender);
 			List <NetworkClient> ipList = clients.get(addr);
 			if (ipList == null) {
 				ipList = new ArrayList<NetworkClient>();
@@ -250,6 +274,7 @@ public class NetworkClientManager extends Manager {
 						}
 					}
 				}
+				client.resetNetwork();
 			}
 		}
 		return false;
@@ -271,6 +296,24 @@ public class NetworkClientManager extends Manager {
 			}
 		}
 		return false;
+	}
+	
+	private static class ReceivedPacket {
+		private final ServerType type;
+		private final UDPPacket packet;
+		
+		public ReceivedPacket(ServerType type, UDPPacket packet) {
+			this.type = type;
+			this.packet = packet;
+		}
+		
+		public ServerType getType() {
+			return type;
+		}
+		
+		public UDPPacket getPacket() {
+			return packet;
+		}
 	}
 	
 }
