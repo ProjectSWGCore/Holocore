@@ -46,7 +46,6 @@ import network.packets.swg.zone.RequestGalaxyLoopTimes;
 import network.packets.swg.zone.SetWaypointColor;
 import network.packets.swg.zone.ShowBackpack;
 import network.packets.swg.zone.ShowHelmet;
-import network.packets.swg.zone.UpdatePvpStatusMessage;
 import network.packets.swg.zone.chat.ChatOnConnectAvatar;
 import network.packets.swg.zone.chat.ChatSystemMessage;
 import network.packets.swg.zone.chat.VoiceChatStatus;
