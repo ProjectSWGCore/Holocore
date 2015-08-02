@@ -56,6 +56,8 @@ public class OutboundNetworkHandler {
 	}
 	
 	public synchronized void reset() {
+		sequenced.clear();
+		assembleQueue.clear();
 		sendSequence = 0;
 		crc = 0;
 	}
