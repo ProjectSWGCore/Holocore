@@ -40,7 +40,7 @@ public class Encoder {
 	}
 	
 	public static byte[] encode(Object object, StringType strType) {
-		if (strType != StringType.UNSPECIFIED) {
+		if (strType != StringType.UNSPECIFIED && object instanceof String) {
 			switch (strType) {
 			case ASCII: return encodeAscii((String) object);
 			case UNICODE: return encodeUnicode((String) object);
