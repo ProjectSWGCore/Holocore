@@ -32,6 +32,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 import resources.SortedLinkedList;
+import resources.server_info.Log;
 import network.encryption.Encryption;
 import network.packets.Packet;
 import network.packets.soe.DataChannelA;
@@ -74,7 +75,7 @@ public class OutboundNetworkHandler {
 	
 	public synchronized void onAcknowledge(short sequence) {
 		synchronized (sequenced) {
-			Iterator <SequencedPacket> it = sequenced.iterator();
+			Iterator <SequencedPacket> it = sequenced.listIterator();
 			while (it.hasNext()) {
 				SequencedPacket sp = it.next();
 				if (sp.getSequence() <= sequence)
@@ -82,12 +83,13 @@ public class OutboundNetworkHandler {
 				else
 					break;
 			}
+			Log.d("OutboundNetworkHandler", "Ack: %d  Remaining: %d", sequence, sequenced.size());
 		}
 	}
 	
 	public synchronized void onOutOfOrder(short sequence) {
 		synchronized (sequenced) {
-			Iterator <SequencedPacket> it = sequenced.iterator();
+			Iterator <SequencedPacket> it = sequenced.listIterator();
 			while (it.hasNext()) {
 				SequencedPacket sp = it.next();
 				if (sp.getSequence() <= sequence)
@@ -95,6 +97,7 @@ public class OutboundNetworkHandler {
 				else
 					break;
 			}
+			Log.d("OutboundNetworkHandler", "Out Of Order: %d", sequence);
 		}
 	}
 	

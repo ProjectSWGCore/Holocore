@@ -30,6 +30,7 @@ package resources.server_info;
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -45,13 +46,15 @@ import java.util.Map.Entry;
 
 public class UncachedObjectDatabase<V extends Serializable> extends ObjectDatabase<V> {
 	
-	private Map<Long, Long> objectIndex;
-	private Map<Long, V> objects;
+	private final Map<Long, Long> objectIndex;
+	private final Map<Long, V> objects;
+	private boolean loaded;
 	
 	public UncachedObjectDatabase(String filename) {
 		super(filename);
 		objectIndex = new HashMap<Long, Long>();
 		objects = new HashMap<Long, V>();
+		loaded = false;
 		loadPointers();
 	}
 	
@@ -106,6 +109,10 @@ public class UncachedObjectDatabase<V extends Serializable> extends ObjectDataba
 	}
 	
 	public synchronized boolean save() {
+		if (!loaded) {
+			Log.e("UncachedObjectDatabase", "Not saving '" + getFile() + "', file not loaded yet!");
+			return false;
+		}
 		DataOutputStream dos = null;
 		try {
 			File file = getFile();
@@ -113,7 +120,7 @@ public class UncachedObjectDatabase<V extends Serializable> extends ObjectDataba
 			loadCachedAndSave(dos, loadUncachedAndSave(dos, 0));
 			moveFile(file+".tmp", file.getAbsolutePath());
 		} catch (IOException e) {
-			System.err.println("UncachedObjectDatabase: Error while saving file. IOException: " + e.getMessage());
+			Log.e("UncachedObjectDatabase", "Error while saving file. IOException: " + e.getMessage());
 			e.printStackTrace();
 			return false;
 		} finally {
@@ -322,6 +329,9 @@ public class UncachedObjectDatabase<V extends Serializable> extends ObjectDataba
 				index = loadObject(dis, index);
 			}
 			dis.close();
+			loaded = true;
+		} catch (EOFException e) {
+			loaded = true;
 		} catch (IOException e) {
 			return false;
 		} finally {

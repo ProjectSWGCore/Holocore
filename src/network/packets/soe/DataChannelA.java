@@ -80,18 +80,18 @@ public class DataChannelA extends Packet implements Comparable<DataChannelA> {
 					data.position(data.position()-1);
 					return;
 				}
-				byte [] pData = new byte[length];
-				data.get(pData);
+				ByteBuffer pData = ByteBuffer.allocate(length);
+				data.get(pData.array());
 				SWGPacket packet = new SWGPacket();
-				packet.decode(ByteBuffer.wrap(pData));
+				packet.decode(pData);
 				content.add(packet);
 			}
 		} else {
 			data.position(data.position()-2);
-			byte [] pData = new byte[data.remaining()];
-			data.get(pData);
+			ByteBuffer pData = ByteBuffer.allocate(data.remaining());
+			data.get(pData.array());
 			SWGPacket packet = new SWGPacket();
-			packet.decode(ByteBuffer.wrap(pData));
+			packet.decode(pData);
 			content.add(packet);
 		}
 	}

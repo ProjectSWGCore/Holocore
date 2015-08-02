@@ -27,12 +27,12 @@
 ***********************************************************************************/
 package network.packets.swg.zone;
 
-import java.nio.ByteBuffer;
-
 import network.packets.swg.SWGPacket;
 
+import java.nio.ByteBuffer;
+
 public class SetWaypointColor extends SWGPacket {
-	public static final int CRC = 0x90C59FDE;
+	public static final int CRC = getCrc("SetWaypointColor");
 	
 	private long objId;
 	private String color;

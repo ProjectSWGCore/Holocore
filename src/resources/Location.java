@@ -27,85 +27,117 @@
 ***********************************************************************************/
 package resources;
 
+import network.packets.Packet;
+import resources.encodables.Encodable;
+
 import java.io.Serializable;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 
 
-public class Location implements Serializable {
+public class Location implements Encodable, Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private Terrain terrain = null;
-	
-	private double x = Double.NaN;
-	private double y = Double.NaN;
-	private double z = Double.NaN;
-	
-	private double oX = Double.NaN;
-	private double oY = Double.NaN;
-	private double oZ = Double.NaN;
-	private double oW = Double.NaN;
+	private final Point3D point;
+	private final Quaternion orientation;
+	private Terrain terrain;
 	
 	public Location() {
-		
+		this(Double.NaN, Double.NaN, Double.NaN, null);
+	}
+	
+	public Location(Location l) { 
+		this(l.getX(), l.getY(), l.getZ(), l.terrain);
+		orientation.set(l.orientation);
 	}
 	
 	public Location(double x, double y, double z, Terrain terrain) {
+		this.orientation = new Quaternion(0, 0, 0, 1);
+		this.point = new Point3D(x, y, z);
 		this.terrain = terrain;
-		this.x = x;
-		this.y = y;
-		this.z = z;
-	}
-	
-	public Location(Location l) {
-		this.terrain = l.terrain;
-		this.x = l.x;
-		this.y = l.y;
-		this.z = l.z;
-		this.oX = l.oX;
-		this.oY = l.oY;
-		this.oZ = l.oZ;
-		this.oW = l.oW;
 	}
 	
 	public void setTerrain(Terrain terrain) { this.terrain = terrain; }
-	public void setX(double x) { this.x = x; }
-	public void setY(double y) { this.y = y; }
-	public void setZ(double z) { this.z = z; }
-	public void setOrientationX(double oX) { this.oX = oX; }
-	public void setOrientationY(double oY) { this.oY = oY; }
-	public void setOrientationZ(double oZ) { this.oZ = oZ; }
-	public void setOrientationW(double oW) { this.oW = oW; }
+	public void setX(double x) { point.setX(x); }
+	public void setY(double y) { point.setY(y); }
+	public void setZ(double z) { point.setZ(z); }
+	public void setOrientationX(double oX) { orientation.setX(oX); }
+	public void setOrientationY(double oY) { orientation.setY(oY); }
+	public void setOrientationZ(double oZ) { orientation.setZ(oZ); }
+	public void setOrientationW(double oW) { orientation.setW(oW); }
+	public void setPosition(double x, double y, double z) {
+		setX(x);
+		setY(y);
+		setZ(z);
+	}
+	public void setOrientation(double oX, double oY, double oZ, double oW) {
+		setOrientationX(oX);
+		setOrientationY(oY);
+		setOrientationZ(oZ);
+		setOrientationW(oW);
+	}
 	
 	public Terrain getTerrain() { return terrain; }
-	public double getX() { return x; }
-	public double getY() { return y; }
-	public double getZ() { return z; }
-	public double getOrientationX() { return oX; }
-	public double getOrientationY() { return oY; }
-	public double getOrientationZ() { return oZ; }
-	public double getOrientationW() { return oW; }
+	public double getX() { return point.getX(); }
+	public double getY() { return point.getY(); }
+	public double getZ() { return point.getZ(); }
+	public Point3D getPosition() { return new Point3D(point); }
+	public double getOrientationX() { return orientation.getX(); }
+	public double getOrientationY() { return orientation.getY(); }
+	public double getOrientationZ() { return orientation.getZ(); }
+	public double getOrientationW() { return orientation.getW(); }
+	public Quaternion getOrientation() { return new Quaternion(orientation); }
 	
 	public boolean isWithinDistance(Location l, double x, double y, double z) {
-		double xD = Math.abs(this.x - l.getX());
-		double yD = Math.abs(this.y - l.getY());
-		double zD = Math.abs(this.z - l.getZ());
+		double xD = Math.abs(getX() - l.getX());
+		double yD = Math.abs(getY() - l.getY());
+		double zD = Math.abs(getZ() - l.getZ());
 		return xD <= x && yD <= y && zD <= z;
 	}
 	
 	public void translatePosition(double x, double y, double z) {
-		this.x += x;
-		this.y += y;
-		this.z += z;
+		setX(getX() + x);
+		setY(getY() + y);
+		setZ(getZ() + z);
 	}
 	
-	public Location translate(double x, double y, double z) {
-		Location loc = new Location(this);
-		loc.translatePosition(x, y, z);
-		return loc;
+	public void translateLocation(Location l) {
+        point.rotateAround(l.getX(), l.getY(), l.getZ(), l.orientation);
+		orientation.rotateByQuaternion(l.orientation);
 	}
 	
 	public Location translate(Location l) {
-		return translate(l.getX(), l.getY(), l.getZ());
+		Location ret = new Location(this);
+		ret.translateLocation(l);
+		return ret;
+	}
+	
+	/**
+	 * Sets the orientation to be facing the specified heading
+	 * @param heading the heading to face, in degrees
+	 */
+	public void setHeading(double heading) {
+		orientation.setHeading(heading);
+	}
+	
+	/**
+	 * Rotates the orientation by the specified angle along the Y-axis
+	 * @param angle the angle to rotate by in degrees
+	 */
+	public void rotateHeading(double angle) {
+		orientation.rotateHeading(angle);
+	}
+	
+	/**
+	 * Rotates the orientation by the specified angle along the specified axises
+	 * @param angle the angle to rotate by in degrees
+	 * @param axisX the amount of rotation about the x-axis
+	 * @param axisY the amount of rotation about the x-axis
+	 * @param axisZ the amount of rotation about the x-axis
+	 */
+	public void rotate(double angle, double axisX, double axisY, double axisZ) {
+		orientation.rotateDegrees(angle, axisX, axisY, axisZ);
 	}
 	
 	public boolean mergeWith(Location l) {
@@ -121,93 +153,82 @@ public class Location implements Serializable {
 	
 	public boolean mergeLocation(double lX, double lY, double lZ) {
 		boolean changed = false;
-		if (Double.isNaN(x) || x != lX) {
-			x = lX;
+		if (Double.isNaN(getX()) || getX() != lX) {
+			setX(lX);
 			changed = true;
 		}
-		if (Double.isNaN(y) || y != lY) {
-			y = lY;
+		if (Double.isNaN(getY()) || getY() != lY) {
+			setY(lY);
 			changed = true;
 		}
-		if (Double.isNaN(z) || z != lZ) {
-			z = lZ;
+		if (Double.isNaN(getZ()) || getZ() != lZ) {
+			setZ(lZ);
 			changed = true;
 		}
 		return changed;
 	}
 	
 	private boolean mergeOrientation(Location l) {
+		double oX = getOrientationX();
+		double oY = getOrientationY();
+		double oZ = getOrientationZ();
+		double oW = getOrientationW();
 		boolean changed = false;
-		if (Double.isNaN(oX) || oX != l.getOrientationX()) {
+		if (!Double.isNaN(l.getOrientationX()) && (Double.isNaN(oX) || oX != l.getOrientationX())) {
 			oX = l.getOrientationX();
 			changed = true;
 		}
-		if (Double.isNaN(oY) || oY != l.getOrientationY()) {
+		if (!Double.isNaN(l.getOrientationY()) && (Double.isNaN(oY) || oY != l.getOrientationY())) {
 			oY = l.getOrientationY();
 			changed = true;
 		}
-		if (Double.isNaN(oZ) || oZ != l.getOrientationZ()) {
+		if (!Double.isNaN(l.getOrientationZ()) && (Double.isNaN(oZ) || oZ != l.getOrientationZ())) {
 			oZ = l.getOrientationZ();
 			changed = true;
 		}
-		if (Double.isNaN(oW) || oW != l.getOrientationW()) {
+		if (!Double.isNaN(l.getOrientationW()) && (Double.isNaN(oW) || oW != l.getOrientationW())) {
 			oW = l.getOrientationW();
 			changed = true;
 		}
+		orientation.set(oX, oY, oZ, oW);
 		return changed;
 	}
 	
 	public double getSpeed(Location l, double deltaTime) {
-		double dist = Math.sqrt(square(x-l.x) + square(y-l.y) + square(z-l.z));
+		double dist = Math.sqrt(square(getX()-l.getX()) + square(getY()-l.getY()) + square(getZ()-l.getZ()));
 		return dist / deltaTime;
 	}
 	
 	public double getYaw() {
-		double w = oW;
-		double y = oY;
-		double angle = 0;
-		
-		if (w * w + y * y > 0) {
-			if (w > 0 && y < 0)
-				w *= -1;
-			angle = 2 * Math.acos(w);
-		} else {
-			angle = 0;
-		}
-		
-		return angle;
+		return orientation.getYaw();
 	}
 	
 	private double square(double x) {
 		return x*x;
 	}
 	
-	public boolean isNaN() {
-		return Double.isNaN(x) && Double.isNaN(y) && Double.isNaN(z) && Double.isNaN(oX) && Double.isNaN(oY) && Double.isNaN(oZ) && Double.isNaN(oW);
-	}
-	
 	public boolean equals(Location l) {
 		if (terrain != l.terrain)
 			return false;
-		if (!isEqual(l.x, x))
+		if (!isEqual(l.getX(), getX()))
 			return false;
-		if (!isEqual(l.y, y))
+		if (!isEqual(l.getY(), getY()))
 			return false;
-		if (!isEqual(l.z, z))
+		if (!isEqual(l.getZ(), getZ()))
 			return false;
-		if (!isEqual(l.oX, oX))
+		if (!isEqual(l.getOrientationX(), getOrientationX()))
 			return false;
-		if (!isEqual(l.oY, oY))
+		if (!isEqual(l.getOrientationY(), getOrientationY()))
 			return false;
-		if (!isEqual(l.oZ, oZ))
+		if (!isEqual(l.getOrientationZ(), getOrientationZ()))
 			return false;
-		if (!isEqual(l.oW, oW))
+		if (!isEqual(l.getOrientationW(), getOrientationW()))
 			return false;
 		return true;
 	}
 	
 	public int hashCode() {
-		return hash(x)*13 + hash(y)*17 + hash(z)*19 + hash(oX)*23 + hash(oY)*29 + hash(oZ)*31 + hash(oW)*37;
+		return hash(getX())*13 + hash(getY())*17 + hash(getZ())*19 + hash(getOrientationX())*23 + hash(getOrientationY())*29 + hash(getOrientationZ())*31 + hash(getOrientationW())*37;
 	}
 	
 	private int hash(double x) {
@@ -222,8 +243,27 @@ public class Location implements Serializable {
 			return false;
 		return x == y;
 	}
-	
+
+	@Override
+	public byte[] encode() {
+		ByteBuffer bb = ByteBuffer.allocate(28).order(ByteOrder.LITTLE_ENDIAN);
+		Packet.addFloat(bb, (float) (Double.isNaN(orientation.getX()) ? 0 : orientation.getX()));
+		Packet.addFloat(bb, (float) (Double.isNaN(orientation.getY()) ? 0 : orientation.getY()));
+		Packet.addFloat(bb, (float) (Double.isNaN(orientation.getZ()) ? 0 : orientation.getZ()));
+		Packet.addFloat(bb, (float) (Double.isNaN(orientation.getW()) ? 1 : orientation.getW()));
+		Packet.addFloat(bb, (float) (Double.isNaN(point.getX()) ? 0 : point.getX()));
+		Packet.addFloat(bb, (float) (Double.isNaN(point.getY()) ? 0 : point.getY()));
+		Packet.addFloat(bb, (float) (Double.isNaN(point.getZ()) ? 0 : point.getZ()));
+		return bb.array();
+	}
+
+	@Override
+	public void decode(ByteBuffer data) {
+		orientation.decode(data);
+		point.decode(data);
+	}
+
 	public String toString() {
-		return "Location[TRN=" + terrain + ", POS=(" + x + ", " + y + ", " + z + ") ORTN=(" + oX + ", " + oY + ", " + oZ + ", " + oW + ")]";
+		return String.format("Location[TRN=%s, %s %s]", terrain, point, orientation);
 	}
 }

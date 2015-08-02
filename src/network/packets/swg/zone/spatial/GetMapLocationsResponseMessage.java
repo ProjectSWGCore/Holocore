@@ -27,16 +27,16 @@
 ***********************************************************************************/
 package network.packets.swg.zone.spatial;
 
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.util.ArrayList;
-import java.util.List;
-
 import network.packets.swg.SWGPacket;
 import services.map.MapLocation;
 
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.util.List;
+
 public class GetMapLocationsResponseMessage extends SWGPacket {
-	public static final int CRC = 0x9F80464C;
+	public static final int CRC = getCrc("GetMapLocationsResponseMessage");
+
 	private String planet;
 	private List<MapLocation> updatedStaticLocations;
 	private List<MapLocation> updatedDynamicLocations;
@@ -57,37 +57,41 @@ public class GetMapLocationsResponseMessage extends SWGPacket {
 		this.persistentLocVersion = persistLocVersion;
 	}
 
+	@Override
+	public void decode(ByteBuffer data) {
+		if (!super.decode(data, CRC))
+			return;
+		planet					= getAscii(data);
+		updatedStaticLocations = getList(data, MapLocation.class);
+		updatedDynamicLocations = getList(data, MapLocation.class);
+		updatedPersistLocations = getList(data, MapLocation.class);
+		staticLocVersion		= getInt(data);
+		dynamicLocVersion		= getInt(data);
+		persistentLocVersion	= getInt(data);
+	}
+
+	@Override
 	public ByteBuffer encode() {
 		int size = planet.length() + 34;
 
-		// Encode the map locations to byte arrays and retrieve sizes for buffer allocation
-		List<byte[]> encodedStatic = null;
-		List<byte[]> encodedDynamic = null;
-		List<byte[]> encodedPersist = null;
-
+		// Get size of data
 		if (updatedStaticLocations != null) {
-			encodedStatic = new ArrayList<>();
 			for (MapLocation location : updatedStaticLocations) {
 				byte[] data = location.encode();
-				encodedStatic.add(data);
 				size += data.length;
 			}
 		}
 
 		if (updatedDynamicLocations != null) {
-			encodedDynamic = new ArrayList<>();
 			for (MapLocation location : updatedDynamicLocations) {
 				byte[] data = location.encode();
-				encodedDynamic.add(data);
 				size += data.length;
 			}
 		}
 
 		if (updatedPersistLocations != null) {
-			encodedPersist = new ArrayList<>();
 			for (MapLocation location : updatedPersistLocations) {
 				byte[] data = location.encode();
-				encodedPersist.add(data);
 				size += data.length;
 			}
 		}
@@ -99,32 +103,9 @@ public class GetMapLocationsResponseMessage extends SWGPacket {
 
 		addAscii(data, planet);
 
-		if (encodedStatic != null) {
-			addInt(data, encodedStatic.size());
-			for (byte[] bytes : encodedStatic) {
-				data.put(bytes);
-			}
-		} else {
-			addInt(data, 0);
-		}
-
-		if(encodedDynamic != null) {
-			addInt(data, encodedDynamic.size());
-			for (byte[] bytes : encodedDynamic) {
-				data.put(bytes);
-			}
-		} else {
-			addInt(data, 0);
-		}
-
-		if (encodedPersist != null) {
-			addInt(data, encodedPersist.size());
-			for (byte[] bytes : encodedPersist) {
-				data.put(bytes);
-			}
-		} else {
-			addInt(data, 0);
-		}
+		addList(data, updatedStaticLocations);
+		addList(data, updatedDynamicLocations);
+		addList(data, updatedPersistLocations);
 
 		addInt(data, staticLocVersion);
 		addInt(data, dynamicLocVersion);

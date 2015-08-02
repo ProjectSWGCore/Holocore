@@ -31,9 +31,6 @@ import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.python.core.Py;
-import org.python.core.PyObject;
-
 import network.packets.Packet;
 import network.packets.swg.SWGPacket;
 import network.packets.swg.zone.object_controller.ObjectController;
@@ -50,6 +47,7 @@ import resources.player.Player;
 import resources.sui.ISuiCallback;
 import resources.sui.SuiWindow;
 import services.player.PlayerManager;
+import utilities.Scripts;
 
 public class SuiService extends Service {
 
@@ -132,8 +130,8 @@ public class SuiService extends Service {
 			ISuiCallback callback = window.getJavaCallback(eventId);
 			callback.handleEvent(player, player.getCreatureObject(), eventId, r.getDataStrings());
 		} else if (window.getScriptCallback(eventId) != null) {
-			PyObject callback = window.getScriptCallback(eventId);
-			callback.__call__(Py.java2py(player), Py.java2py(player.getCreatureObject()), Py.java2py(eventId), Py.java2py(r.getDataStrings()));
+			String callbackScript = window.getScriptCallback(eventId);
+			Scripts.invoke(callbackScript, "callback", player, player.getCreatureObject(), eventId, r.getDataStrings());
 		}
 	}
 	

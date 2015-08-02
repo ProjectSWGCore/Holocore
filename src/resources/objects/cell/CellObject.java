@@ -40,6 +40,7 @@ public class CellObject extends SWGObject {
 	private boolean	isPublic	= true;
 	private int		number		= 0;
 	private String	label		= "";
+	private String	name		= "";
 
 	private float label_x       = 0f;
 	private float label_z       = 0f;
@@ -60,6 +61,10 @@ public class CellObject extends SWGObject {
 		return label;
 	}
 	
+	public String getCellName() {
+		return name;
+	}
+	
 	public void setPublic(boolean isPublic) {
 		this.isPublic = isPublic;
 	}
@@ -70,6 +75,10 @@ public class CellObject extends SWGObject {
 	
 	public void setLabel(String label) {
 		this.label = label;
+	}
+	
+	public void setCellName(String name) {
+		this.name = name;
 	}
 
 	public void setLabelMapPosition(float x, float z) {

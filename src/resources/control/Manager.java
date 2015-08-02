@@ -35,7 +35,7 @@ import java.util.List;
  * A Manager is a class that will manage services, and generally controls the
  * program as a whole
  */
-public class Manager extends Service {
+public abstract class Manager extends Service {
 	
 	private static final ServerManager serverManager = ServerManager.getInstance();
 	private List <Service> children;

@@ -33,8 +33,8 @@ import network.packets.swg.SWGPacket;
 
 
 public class DeleteCharacterResponse extends SWGPacket {
-	
-	public static final int CRC = 0x8268989B;
+	public static final int CRC = getCrc("DeleteCharacterReplyMessage");
+
 	private boolean deleted = true;
 	
 	public DeleteCharacterResponse() {

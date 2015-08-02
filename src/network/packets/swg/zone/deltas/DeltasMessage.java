@@ -27,14 +27,13 @@
 ***********************************************************************************/
 package network.packets.swg.zone.deltas;
 
-import java.nio.ByteBuffer;
-
 import network.packets.swg.SWGPacket;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 
+import java.nio.ByteBuffer;
+
 public class DeltasMessage extends SWGPacket {
-	
-	public static final int CRC = 0x12862153;
+	public static final int CRC = getCrc("DeltasMessage");
 	
 	private long objId;
 	private BaselineType type;

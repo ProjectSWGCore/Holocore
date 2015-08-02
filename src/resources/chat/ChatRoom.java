@@ -30,21 +30,20 @@ package resources.chat;
 import network.packets.Packet;
 import network.packets.swg.SWGPacket;
 import network.packets.swg.zone.chat.ChatRoomMessage;
+import resources.encodables.Encodable;
 import resources.encodables.OutOfBandPackage;
-import resources.network.BaselineBuilder;
 import resources.player.Player;
 import services.player.PlayerManager;
 
 import java.io.Serializable;
 import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author Waverunner
  */
-public class ChatRoom implements Serializable, BaselineBuilder.Encodable, BaselineBuilder.Decodable {
+public class ChatRoom implements Encodable, Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private int id;
@@ -55,8 +54,7 @@ public class ChatRoom implements Serializable, BaselineBuilder.Encodable, Baseli
 	private String title;
 	private List<ChatAvatar> moderators;
 	private List<ChatAvatar> invited;
-	private boolean muted; // No one but moderators can talk
-	private boolean isPublic;
+	private boolean moderated; // No one but moderators can talk
 	private List<ChatAvatar> banned;
 	// Members are only actually apart of a room when they're "in the room", so we don't need to save this info
 	// as each player will automatically re-join the room based on their joined channels list
@@ -67,6 +65,8 @@ public class ChatRoom implements Serializable, BaselineBuilder.Encodable, Baseli
 	private transient byte[] data;
 
 	public ChatRoom() {
+		owner = new ChatAvatar();
+		creator = new ChatAvatar();
 		moderators = new ArrayList<>();
 		invited = new ArrayList<>();
 		members = new ArrayList<>();
@@ -129,12 +129,12 @@ public class ChatRoom implements Serializable, BaselineBuilder.Encodable, Baseli
 		return invited;
 	}
 
-	public boolean isMuted() {
-		return muted;
+	public boolean isModerated() {
+		return moderated;
 	}
 
-	public void setMuted(boolean muted) {
-		this.muted = muted;
+	public void setModerated(boolean moderated) {
+		this.moderated = moderated;
 	}
 
 	public List<ChatAvatar> getMembers() {
@@ -142,11 +142,11 @@ public class ChatRoom implements Serializable, BaselineBuilder.Encodable, Baseli
 	}
 
 	public boolean isPublic() {
-		return isPublic;
+		return type == 0;
 	}
 
 	public void setIsPublic(boolean isPublic) {
-		this.isPublic = isPublic;
+		this.type = (isPublic ? 0 : 1);
 	}
 
 	public List<ChatAvatar> getBanned() {
@@ -160,20 +160,35 @@ public class ChatRoom implements Serializable, BaselineBuilder.Encodable, Baseli
 		if (members.contains(avatar))
 			return ChatResult.ROOM_ALREADY_JOINED;
 
-		if (isPublic || invited.contains(avatar))
+		if (isPublic() || invited.contains(avatar))
 			return ChatResult.SUCCESS;
 
-		return ChatResult.ROOM_AVATAR_NOT_INVITED;
+		if (avatar.equals(owner))
+			return ChatResult.SUCCESS;
+
+		return ChatResult.ROOM_AVATAR_NO_PERMISSION;
 	}
 
 	public ChatResult canSendMessage(ChatAvatar avatar) {
 		if (banned.contains(avatar))
 			return ChatResult.ROOM_AVATAR_BANNED;
 
-		if (muted && !moderators.contains(avatar))
-			return ChatResult.ROOM_NOT_MODERATOR;
+		if (moderated && !moderators.contains(avatar))
+			return ChatResult.CUSTOM_FAILURE;
 
 		return ChatResult.SUCCESS;
+	}
+
+	public boolean isModerator(ChatAvatar avatar) {
+		return avatar.equals(owner) || moderators.contains(avatar);
+	}
+
+	public boolean isMember(ChatAvatar avatar) {
+		return members.contains(avatar);
+	}
+
+	public boolean isBanned(ChatAvatar avatar) {
+		return banned.contains(avatar);
 	}
 
 	public void sendMessage(ChatAvatar sender, String message, OutOfBandPackage oob, PlayerManager playerManager) {
@@ -192,7 +207,17 @@ public class ChatRoom implements Serializable, BaselineBuilder.Encodable, Baseli
 	}
 
 	@Override
-	public void decode(ByteBuffer data) {}
+	public void decode(ByteBuffer data) {
+		id			= Packet.getInt(data);
+		type		= Packet.getInt(data);
+		moderated 	= Packet.getBoolean(data);
+		path		= Packet.getAscii(data);
+		owner		= Packet.getEncodable(data, ChatAvatar.class);
+		creator		= Packet.getEncodable(data, ChatAvatar.class);
+		title		= Packet.getUnicode(data);
+		moderators	= Packet.getList(data, ChatAvatar.class);
+		invited		= Packet.getList(data, ChatAvatar.class);
+	}
 
 	@Override
 	public byte[] encode() {
@@ -209,22 +234,16 @@ public class ChatRoom implements Serializable, BaselineBuilder.Encodable, Baseli
 		}
 		avatarIdSize += owner.encode().length + creator.encode().length;
 
-		ByteBuffer bb = ByteBuffer.allocate(23 + path.length() + (title.length() * 2) + avatarIdSize).order(ByteOrder.LITTLE_ENDIAN);
-		bb.putInt(id);
-		bb.putInt(type);
-		bb.put(muted ? (byte) 1 : (byte) 0);
+		ByteBuffer bb = ByteBuffer.allocate(23 + path.length() + (title.length() * 2) + avatarIdSize);
+		Packet.addInt(bb, id);
+		Packet.addInt(bb, type);
+		Packet.addBoolean(bb, moderated);
 		Packet.addAscii(bb, path);
-		bb.put(owner.encode());
-		bb.put(creator.encode());
+		Packet.addEncodable(bb, owner);
+		Packet.addEncodable(bb, creator);
 		Packet.addUnicode(bb, title);
-		bb.putInt(moderators.size());
-		for (ChatAvatar moderator : moderators) {
-			bb.put(moderator.encode());
-		}
-		bb.putInt(invited.size());
-		for (ChatAvatar invitee : invited) {
-			bb.put(invitee.encode());
-		}
+		Packet.addList(bb, moderators);
+		Packet.addList(bb, invited);
 
 		data = bb.array();
 		modified = false;
@@ -234,10 +253,7 @@ public class ChatRoom implements Serializable, BaselineBuilder.Encodable, Baseli
 
 	@Override
 	public String toString() {
-		return "ChatRoom{" +
-				"id=" + id +
-				", path='" + path + '\'' +
-				", title='" + title + '\'' +
-				'}';
+		return "ChatRoom[id=" + id + ", type=" + type + ", path='" + path + "', title='" + title + '\'' +
+				", creator=" + creator + ", moderated=" + moderated + ", isPublic=" + isPublic() + "]";
 	}
 }

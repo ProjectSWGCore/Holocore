@@ -34,8 +34,7 @@ import network.packets.swg.SWGPacket;
 
 
 public class EnumerateCharacterId extends SWGPacket {
-	
-	public static final int CRC = 0x65EA4574;
+	public static final int CRC = getCrc("EnumerateCharacterId");
 	
 	private SWGCharacter [] characters;
 	

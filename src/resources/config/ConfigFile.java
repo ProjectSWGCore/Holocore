@@ -27,6 +27,9 @@
 ***********************************************************************************/
 package resources.config;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public enum ConfigFile {
 	/** Meant for general purpose configuration or debugging */
 	PRIMARY	("cfg/nge.cfg"),
@@ -35,13 +38,24 @@ public enum ConfigFile {
 	/** Meant for specific in-game features that may be better disabled or tweaked */
 	FEATURES("cfg/features.cfg");
 	
+	private static final Map<String, ConfigFile> NAMEMAP = new HashMap<>();
 	private String filename;
+	
+	static {
+		for(ConfigFile cfgFile : values())
+			NAMEMAP.put(cfgFile.filename, cfgFile);
+	}
 	
 	ConfigFile(String filename) {
 		this.filename = filename;
+		
 	}
 	
 	public String getFilename() {
 		return filename;
+	}
+	
+	public static ConfigFile configFileForName(String name) {
+		return NAMEMAP.get(name);
 	}
 }

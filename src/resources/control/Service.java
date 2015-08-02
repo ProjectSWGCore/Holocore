@@ -39,7 +39,7 @@ import resources.server_info.RelationalDatabase;
 /**
  * A Service is a class that does a specific job for the application
  */
-public class Service implements IntentReceiver {
+public abstract class Service implements IntentReceiver {
 	
 	private static final OutboundPacketService outboundPacketService = new OutboundPacketService();
 	

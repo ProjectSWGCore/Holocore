@@ -33,7 +33,7 @@ import network.packets.swg.SWGPacket;
 import resources.chat.ChatResult;
 
 public class ChatOnSendPersistentMessage extends SWGPacket {
-	public static final int CRC = 0x94E7A7AE;
+	public static final int CRC = getCrc("ChatOnSendPersistentMessage");
 	
 	private ChatResult result;
 	private int count;

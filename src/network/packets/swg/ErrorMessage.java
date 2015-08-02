@@ -31,7 +31,8 @@ import java.nio.ByteBuffer;
 
 
 public class ErrorMessage extends SWGPacket {
-	public static final int CRC = 0xB5ABF91A;
+	public static final int CRC = getCrc("ErrorMessage");
+
 	private String type;
 	private String message;
 	private boolean fatal;

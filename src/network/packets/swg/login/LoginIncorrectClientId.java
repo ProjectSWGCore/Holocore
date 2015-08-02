@@ -32,8 +32,7 @@ import java.nio.ByteBuffer;
 import network.packets.swg.SWGPacket;
 
 public class LoginIncorrectClientId extends SWGPacket {
-	
-	public static final int CRC = 0x20E7E510;
+	public static final int CRC = getCrc("LoginIncorrectClientId");
 	
 	private String serverId;
 	private String serverAppVersion;

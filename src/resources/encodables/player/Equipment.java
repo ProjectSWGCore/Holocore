@@ -27,15 +27,17 @@
 ***********************************************************************************/
 package resources.encodables.player;
 
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-
+import network.packets.Packet;
 import resources.common.CRC;
-import resources.network.BaselineBuilder.Encodable;
+import resources.encodables.Encodable;
 import resources.objects.SWGObject;
 import resources.objects.weapon.WeaponObject;
 
-public class Equipment implements Encodable {
+import java.io.Serializable;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+
+public class Equipment implements Encodable, Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private WeaponObject 	weapon;
@@ -56,32 +58,44 @@ public class Equipment implements Encodable {
 	
 	@Override
 	public byte[] encode() {
+		// TODO: This is not working for weapons (crashes w/ a weapon), needs to be refactored
 		ByteBuffer buffer;
-		byte[] weaponData = null;
+		//byte[] weaponData = null;
 		
-		if (weapon != null) {
+/*		if (weapon != null) {
 			weaponData = weapon.encode();
 			
 			buffer = ByteBuffer.allocate(19 + weaponData.length).order(ByteOrder.LITTLE_ENDIAN);
-		} else {
+		} else {*/
 			buffer = ByteBuffer.allocate(19).order(ByteOrder.LITTLE_ENDIAN);
-		}
+/*		}*/
 
-		if (customizationString == null) buffer.putShort((short) 0);
+		if (customizationString == null) buffer.putShort((short) 0); // TODO: Create encodable class for customization string
 		else buffer.put(customizationString);
 		
 		buffer.putInt(arrangementId);
 		buffer.putLong(objectId);
 		buffer.putInt(CRC.getCrc(template));
 		
-		if (weapon != null) {
+/*		if (weapon != null) {
 			buffer.put((byte) 0x01);
 			buffer.put(weaponData);
-		} else {
+		} else {*/
 			buffer.put((byte) 0x00);
-		}
+/*		}*/
 		
 		return buffer.array();
+	}
+
+	@Override
+	public void decode(ByteBuffer data) {
+		customizationString	= Packet.getArray(data); // TODO: Create encodable class for customization string
+		arrangementId		= Packet.getInt(data);
+		objectId			= Packet.getLong(data);
+/*		template			=*/Packet.getInt(data);
+
+		// TODO: Re-do when weapon encode for Equipment is fixed
+/*		boolean weapon		=*/Packet.getBoolean(data);
 	}
 
 	public byte[] getCustomizationString() {return customizationString;}

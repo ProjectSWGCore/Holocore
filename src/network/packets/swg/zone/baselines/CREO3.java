@@ -86,7 +86,7 @@ public class CREO3 extends Baseline {
 		addUnicode(data, cName); // Custom Name
 		addInt(    data, 0x000F4240); // Unknown
 		addLong(   data, 0); // Unknown
-		addArray(  data, customization); // Object Customization Data
+		addArrayList(data, customization); // Object Customization Data
 		addInt(    data, 1); // Unknown
 		addInt(    data, 0); // Unknown
 		addInt(    data, 0); // Unknown

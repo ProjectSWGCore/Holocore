@@ -34,7 +34,7 @@ import java.util.List;
 import network.packets.swg.SWGPacket;
 
 public class OfflineServersMessage extends SWGPacket {
-	
+
 	public static final int CRC = 0xF41A5265;
 	
 	private List <String> offlineServers;

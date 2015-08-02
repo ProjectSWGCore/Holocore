@@ -27,13 +27,13 @@
 ***********************************************************************************/
 package network.packets.swg.zone.insertion;
 
-import java.nio.ByteBuffer;
-
 import network.packets.swg.SWGPacket;
 
+import java.nio.ByteBuffer;
+
 public class ChatServerStatus extends SWGPacket {
-	
-	public static final int CRC = 0x7102B15F;
+	public static final int CRC = getCrc("ChatServerStatus");
+
 	private boolean online = false;
 	
 	public ChatServerStatus() {

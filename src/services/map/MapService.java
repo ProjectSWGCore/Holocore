@@ -33,6 +33,7 @@ import network.packets.swg.SWGPacket;
 import network.packets.swg.zone.spatial.GetMapLocationsMessage;
 import network.packets.swg.zone.spatial.GetMapLocationsResponseMessage;
 import resources.client_info.ClientFactory;
+import resources.client_info.ServerFactory;
 import resources.client_info.visitors.DatatableData;
 import resources.control.Intent;
 import resources.control.Service;
@@ -68,14 +69,13 @@ public class MapService extends Service {
 		staticMapLocations = new ConcurrentHashMap<>();
 		dynamicMapLocations = new ConcurrentHashMap<>();
 		persistentMapLocations = new ConcurrentHashMap<>();
-
-		loadMapCategories();
-		loadMappingTemplates();
 	}
 
 	@Override
 	public boolean initialize() {
 		registerForIntent(GalacticPacketIntent.TYPE);
+		loadMapCategories();
+		loadMappingTemplates();
 		loadStaticCityPoints();
 		return super.initialize();
 	}
@@ -144,7 +144,7 @@ public class MapService extends Service {
 	}
 
 	private void loadMappingTemplates() {
-		DatatableData table = (DatatableData) ClientFactory.getInfoFromFile("map/map_locations.iff");
+		DatatableData table = ServerFactory.getDatatable("map/map_locations.iff");
 		for (int row = 0; row < table.getRowCount(); row++) {
 			MappingTemplate template = new MappingTemplate();
 			template.setTemplate(ClientFactory.formatToSharedFile(table.getCell(row, 0).toString()));
@@ -159,11 +159,11 @@ public class MapService extends Service {
 	}
 
 	private void loadStaticCityPoints() {
-		DatatableData table = (DatatableData) ClientFactory.getInfoFromFile("map/static_city_points.iff");
+		DatatableData table = ServerFactory.getDatatable("map/static_city_points.iff");
 
 		byte city = (byte) mapCategories.get("city").getIndex();
 		for (int row = 0; row < table.getRowCount(); row++) {
-			ArrayList<MapLocation> locations = staticMapLocations.get(table.getCell(row, 0));
+			ArrayList<MapLocation> locations = staticMapLocations.get(table.getCell(row, 0).toString());
 			if (locations == null) {
 				locations = new ArrayList<>();
 				staticMapLocations.put((String) table.getCell(row, 0), locations);
@@ -213,7 +213,7 @@ public class MapService extends Service {
 			staticMapLocations.get(planet).add(location);
 		} else {
 			location.setId(1);
-			staticMapLocations.put(planet, new ArrayList<MapLocation>());
+			staticMapLocations.put(planet, new ArrayList<>());
 			staticMapLocations.get(planet).add(location);
 		}
 	}
@@ -224,7 +224,7 @@ public class MapService extends Service {
 			dynamicMapLocations.get(planet).add(location);
 		} else {
 			location.setId(1);
-			dynamicMapLocations.put(planet, new ArrayList<MapLocation>());
+			dynamicMapLocations.put(planet, new ArrayList<>());
 			dynamicMapLocations.get(planet).add(location);
 		}
 	}
@@ -235,7 +235,7 @@ public class MapService extends Service {
 			persistentMapLocations.get(planet).add(location);
 		} else {
 			location.setId(1);
-			persistentMapLocations.put(planet, new ArrayList<MapLocation>());
+			persistentMapLocations.put(planet, new ArrayList<>());
 			persistentMapLocations.get(planet).add(location);
 		}
 	}

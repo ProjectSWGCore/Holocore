@@ -27,13 +27,12 @@
 ***********************************************************************************/
 package network.packets.swg.zone;
 
-import java.nio.ByteBuffer;
-
 import network.packets.swg.SWGPacket;
 
+import java.nio.ByteBuffer;
+
 public class ConnectPlayerResponseMessage extends SWGPacket {
-	
-	public static final int CRC = 0x6137556F;
+	public static final int CRC = getCrc("ConnectPlayerResponseMessage");
 	
 	public ConnectPlayerResponseMessage() {
 		

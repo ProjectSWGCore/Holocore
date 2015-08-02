@@ -28,8 +28,10 @@
 package services;
 
 import java.io.File;
+import java.io.IOException;
 
 import resources.Galaxy;
+import resources.client_info.ServerFactory;
 import resources.config.ConfigFile;
 import resources.control.Manager;
 import resources.server_info.Config;
@@ -46,6 +48,8 @@ public class EngineManager extends Manager {
 		
 		addChildService(networkManager);
 		addChildService(shutdownService);
+
+		initializeServerFactory();
 	}
 	
 	@Override
@@ -56,7 +60,7 @@ public class EngineManager extends Manager {
 			wipeCharacterDatabase();
 		if (config.getInt("WIPE-ODB-FILES", 0) == 1)
 			wipeOdbFiles();
-		
+
 		return super.initialize();
 	}
 	
@@ -73,5 +77,13 @@ public class EngineManager extends Manager {
 			}
 		}
 	}
-	
+
+
+	private void initializeServerFactory() {
+		try {
+			ServerFactory.getInstance().updateServerIffs();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

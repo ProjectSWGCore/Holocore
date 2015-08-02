@@ -27,22 +27,18 @@
 ***********************************************************************************/
 package resources.objects;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.Serializable;
-import java.util.*;
-
 import network.packets.Packet;
 import network.packets.swg.zone.SceneCreateObjectByCrc;
 import network.packets.swg.zone.SceneDestroyObject;
 import network.packets.swg.zone.SceneEndBaselines;
 import network.packets.swg.zone.UpdateContainmentMessage;
+import network.packets.swg.zone.UpdateTransformMessage;
 import network.packets.swg.zone.UpdateTransformWithParentMessage;
-import network.packets.swg.zone.UpdateTransformsMessage;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import network.packets.swg.zone.object_controller.DataTransform;
 import network.packets.swg.zone.object_controller.DataTransformWithParent;
 import resources.Location;
+import resources.Terrain;
 import resources.common.CRC;
 import resources.containers.ContainerPermissions;
 import resources.containers.ContainerResult;
@@ -54,6 +50,19 @@ import resources.player.Player;
 import resources.player.PlayerState;
 import resources.server_info.Log;
 import utilities.Encoder.StringType;
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	
@@ -328,7 +337,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	 * @return An unmodifiable {@link Collection} of {@link SWGObject}'s in the container
 	 */
 	public Collection<SWGObject> getContainedObjects() {
-		return Collections.unmodifiableCollection(containedObjects.values());
+		return new ArrayList<>(containedObjects.values());
 	}
 
 	public boolean hasSlot(String slotName) {
@@ -425,7 +434,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	}
 	
 	public Location getLocation() {
-		return location;
+		return new Location(location);
 	}
 	
 	public Location getWorldLocation() {
@@ -433,10 +442,26 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		SWGObject parent = getParent();
 		while (parent != null) {
 			Location l = parent.location;
-			loc.translatePosition(l.getX(), l.getY(), l.getZ()); // Have to access privately to avoid copies
+			loc.translateLocation(l); // Have to access privately to avoid copies
 			parent = parent.getParent();
 		}
 		return loc;
+	}
+	
+	public double getX() {
+		return location.getX();
+	}
+	
+	public double getY() {
+		return location.getY();
+	}
+	
+	public double getZ() {
+		return location.getZ();
+	}
+	
+	public Terrain getTerrain() {
+		return location.getTerrain();
 	}
 	
 	public String getName() {
@@ -609,7 +634,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 			synchronized (objectsAware) {
 				for (SWGObject obj : objectsAware) {
 					Player p = obj.getOwner();
-					if (p != null && !p.equals(childObject.getOwner()))
+					if (childObject.isValidPlayer(p))
 						observers.add(obj);
 					else
 						childObject.getChildrenObservers(observers, obj);
@@ -625,12 +650,31 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	private void getChildrenObservers(Set<SWGObject> observers, SWGObject obj) {
 		for (SWGObject child : obj.getContainedObjects()) {
 			Player p = child.getOwner();
-			if (p != null && !p.equals(getOwner())) {
+			if (isValidPlayer(p)) {
 				observers.add(child);
 			} else {
 				getChildrenObservers(observers, child);
 			}
 		}
+	}
+	
+	private boolean isValidPlayer(Player player) {
+		if (player == null || player == getOwner())
+			return false;
+		if (getOwner() == null)
+			return false;
+		if (player.equals(getOwner()))
+			return false;
+		if (player.getCreatureObject() == null)
+			return false;
+		if (player.getCreatureObject().getPlayerObject() == null)
+			return false;
+		SWGObject creature = getOwner().getCreatureObject();
+		if (creature == null)
+			return false;
+		if (player.getCreatureObject().equals(creature))
+			return false;
+		return true;
 	}
 
 	public void sendObserversAndSelf(Packet ... packets) {
@@ -722,7 +766,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 			if (objectsAware.remove(o)) {
 				Player owner = o.getOwner();
 				if (owner != null)
-					sendSceneDestroyObject(o.getOwner());
+					sendSceneDestroyObject(owner);
 				else
 					destroyObjectObservers(o);
 			}
@@ -734,7 +778,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 			if (objectsAware.add(o)) {
 				Player owner = o.getOwner();
 				if (owner != null)
-					createObject(o.getOwner());
+					createObject(owner);
 				else
 					createObjectObservers(o);
 			}
@@ -779,7 +823,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	}
 
 	public void sendDataTransforms(Location loc, byte direction, double speed, float lookAtYaw, boolean useLookAtYaw, int updates) {
-		UpdateTransformsMessage transform = new UpdateTransformsMessage();
+		UpdateTransformMessage transform = new UpdateTransformMessage();
 		transform.setObjectId(getObjectId()); // (short) (xPosition * 4 + 0.5)
 		transform.setX((short) (loc.getX() * 4));
 		transform.setY((short) (loc.getY() * 4));
@@ -810,8 +854,6 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		// Now create the contained objects
 		for (SWGObject containedObject : containedObjects.values()) {
 			if (containedObject != null && !sentObjects.contains(containedObject)) {
-				//Log.i("ChildrenObjects", "Sending containedObj " + containedObject + " to " + target);
-				//Log.d("SWGObject", "Sending to location " + containedObject.getLocation());
 				containedObject.createObject(target);
 			}
 		}

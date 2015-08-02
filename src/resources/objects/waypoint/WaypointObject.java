@@ -27,8 +27,6 @@
 ***********************************************************************************/
 package resources.objects.waypoint;
 
-import java.nio.ByteBuffer;
-
 import network.packets.Packet;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.Location;
@@ -37,6 +35,8 @@ import resources.encodables.OutOfBandData;
 import resources.encodables.OutOfBandPackage;
 import resources.objects.intangible.IntangibleObject;
 import resources.player.Player;
+
+import java.nio.ByteBuffer;
 
 public class WaypointObject extends IntangibleObject implements OutOfBandData {
 
@@ -105,17 +105,15 @@ public class WaypointObject extends IntangibleObject implements OutOfBandData {
 	}
 
 	@Override
-	public int decodeOutOfBandData(ByteBuffer data) {
+	public void decode(ByteBuffer data) {
 		data.getInt();
 		setLocation(data.getFloat(), data.getFloat(), data.getFloat());
-		cellId 		= data.getLong();
+		cellId 		= Packet.getLong(data);
 		getLocation().setTerrain(Terrain.getTerrainFromCrc(data.getInt()));
-		System.out.println(getLocation());
 		name 		= Packet.getUnicode(data);
 		Packet.getLong(data); // objectId
 		color		= WaypointColor.valueOf(data.get());
 		active 		= Packet.getBoolean(data);
-		return 42 + name.length() * 2;
 	}
 
 	@Override

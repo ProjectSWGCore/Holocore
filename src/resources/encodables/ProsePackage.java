@@ -27,14 +27,15 @@
 ***********************************************************************************/
 package resources.encodables;
 
+import network.packets.Packet;
+
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.charset.Charset;
 
-import resources.network.BaselineBuilder.Encodable;
-
-public class ProsePackage implements OutOfBandData {
+public class ProsePackage implements OutOfBandData, Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private StringId base = new StringId("", "");
@@ -197,26 +198,27 @@ public class ProsePackage implements OutOfBandData {
 		byte[] targetData = target.encode();
 		byte[] otherData = other.encode();
 
-		ByteBuffer bb = ByteBuffer.allocate(16 + stringData.length + actorData.length + targetData.length + otherData.length).order(ByteOrder.LITTLE_ENDIAN);
-		bb.putShort((short) 0); // ??
-		bb.put(OutOfBandPackage.Type.PROSE_PACKAGE.getType());
-		bb.putInt(-1); // ??
-		bb.put(stringData);
-		bb.put(actorData);
-		bb.put(targetData);
-		bb.put(otherData);
+		ByteBuffer bb = ByteBuffer.allocate(9 + stringData.length + actorData.length + targetData.length + otherData.length);
+		Packet.addArray(bb, stringData);
+		Packet.addArray(bb, actorData);
+		Packet.addArray(bb, targetData);
+		Packet.addArray(bb, otherData);
+		Packet.addInt(bb, di);
+		Packet.addFloat(bb, df);
+		Packet.addBoolean(bb, grammarFlag);
 
-		// Decimals
-		bb.putInt(di);
-		bb.putFloat(df);
-		
-		bb.put((byte) (grammarFlag ? 1 : 0)); // Grammar flag
 		return bb.array();
 	}
 
 	@Override
-	public int decodeOutOfBandData(ByteBuffer data) {
-		return 0;
+	public void decode(ByteBuffer data) {
+		base		= Packet.getEncodable(data, StringId.class);
+		actor		= Packet.getEncodable(data, Prose.class);
+		target		= Packet.getEncodable(data, Prose.class);
+		other		= Packet.getEncodable(data, Prose.class);
+		di			= Packet.getInt(data);
+		df			= Packet.getInt(data);
+		grammarFlag	= Packet.getBoolean(data);
 	}
 
 	@Override
@@ -274,6 +276,13 @@ public class ProsePackage implements OutOfBandData {
 			}
 
 			return bb.array();
+		}
+
+		@Override
+		public void decode(ByteBuffer data) {
+			objectId 	= Packet.getLong(data);
+			stringId	= Packet.getEncodable(data, StringId.class);
+			text		= Packet.getUnicode(data);
 		}
 
 		@Override

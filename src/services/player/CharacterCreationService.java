@@ -1,3 +1,30 @@
+/***********************************************************************************
+* Copyright (c) 2015 /// Project SWG /// www.projectswg.com                        *
+*                                                                                  *
+* ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on           *
+* July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies.  *
+* Our goal is to create an emulator which will provide a server for players to     *
+* continue playing a game similar to the one they used to play. We are basing      *
+* it on the final publish of the game prior to end-game events.                    *
+*                                                                                  *
+* This file is part of Holocore.                                                   *
+*                                                                                  *
+* -------------------------------------------------------------------------------- *
+*                                                                                  *
+* Holocore is free software: you can redistribute it and/or modify                 *
+* it under the terms of the GNU Affero General Public License as                   *
+* published by the Free Software Foundation, either version 3 of the               *
+* License, or (at your option) any later version.                                  *
+*                                                                                  *
+* Holocore is distributed in the hope that it will be useful,                      *
+* but WITHOUT ANY WARRANTY; without even the implied warranty of                   *
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                    *
+* GNU Affero General Public License for more details.                              *
+*                                                                                  *
+* You should have received a copy of the GNU Affero General Public License         *
+* along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
+*                                                                                  *
+***********************************************************************************/
 package services.player;
 
 import intents.GalacticIntent;
@@ -124,7 +151,14 @@ public class CharacterCreationService extends Service {
 	private void handleRandomNameRequest(Player player, RandomNameRequest request) {
 		RandomNameResponse response = new RandomNameResponse(request.getRace(), "");
 		String race = Race.getRaceByFile(request.getRace()).getSpecies();
-		response.setRandomName(nameGenerator.generateRandomName(race));
+		String randomName = null;
+		while (randomName == null) {
+			randomName = nameGenerator.generateRandomName(race);
+			if (getNameValidity(randomName, player.getAccessLevel() != AccessLevel.PLAYER) != ErrorMessage.NAME_APPROVED) {
+				randomName = null;
+			}
+		}
+		response.setRandomName(randomName);
 		sendPacket(player.getNetworkId(), response);
 	}
 	
@@ -210,6 +244,8 @@ public class CharacterCreationService extends Service {
 		if (nameFilter.isProfanity(modified)) // Contains profanity
 			return ErrorMessage.NAME_DECLINED_PROFANE;
 		if (nameFilter.isFictionallyInappropriate(modified))
+			return ErrorMessage.NAME_DECLINED_SYNTAX;
+		if (modified.length() > 20)
 			return ErrorMessage.NAME_DECLINED_SYNTAX;
 		if (nameFilter.isReserved(modified) && !admin)
 			return ErrorMessage.NAME_DECLINED_RESERVED;
@@ -312,6 +348,8 @@ public class CharacterCreationService extends Service {
 
 		for (String template : profTemplates.get(profession).getItems(ClientFactory.formatToSharedFile(race))) {
 			TangibleObject item = createTangible(objManager, template);
+			if (item == null)
+				return;
 			// Move the new item to the player's clothing slots and add to equipment list
 			item.moveToContainer(player, player);
 			player.addEquipment(item);

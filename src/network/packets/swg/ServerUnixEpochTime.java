@@ -31,8 +31,8 @@ import java.nio.ByteBuffer;
 
 
 public class ServerUnixEpochTime extends SWGPacket {
-	
-	public static final int CRC = 0x24B73893;
+	public static final int CRC = getCrc("ServerUnixEpochTime");
+
 	private int time = 0;
 	
 	public ServerUnixEpochTime() {

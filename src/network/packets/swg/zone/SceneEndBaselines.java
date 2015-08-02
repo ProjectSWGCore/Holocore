@@ -27,13 +27,13 @@
 ***********************************************************************************/
 package network.packets.swg.zone;
 
-import java.nio.ByteBuffer;
-
 import network.packets.swg.SWGPacket;
 
+import java.nio.ByteBuffer;
+
 public class SceneEndBaselines extends SWGPacket {
-	
-	public static final int CRC = 0x2C436037;
+	public static final int CRC = getCrc("SceneEndBaselines");
+
 	private long objId = 0;
 	
 	public SceneEndBaselines() {

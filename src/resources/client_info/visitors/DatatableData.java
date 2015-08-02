@@ -27,9 +27,9 @@
 ***********************************************************************************/
 package resources.client_info.visitors;
 
-import java.nio.ByteBuffer;
-
-import utilities.ByteUtilities;
+import resources.client_info.ClientData;
+import resources.client_info.IffNode;
+import resources.client_info.SWGFile;
 
 public class DatatableData extends ClientData {
 	
@@ -39,33 +39,107 @@ public class DatatableData extends ClientData {
 	//private Map<String, Integer> enums;
 	
 	@Override
-	public void handleData(String node, ByteBuffer data, int size) {
+	public void readIff(SWGFile iff) {
+		iff.enterNextForm(); // version form
 
-		switch(node) {
-		
-		case "0001COLS":
-			columnNames = new String[data.getInt()];
-			
-			for (int i = 0; i < columnNames.length; i++) {
-				columnNames[i] = ByteUtilities.nextString(data);
-				data.get(); // empty separator byte
+		IffNode chunk;
+		while((chunk = iff.enterNextChunk()) != null) {
+			switch(chunk.getTag()) {
+				case "COLS":
+					columnNames = new String[chunk.readInt()];
+					for (int i = 0; i < columnNames.length; i++) {
+						columnNames[i] = chunk.readString();
+					}
+					break;
+				case "TYPE":
+					parseTypes(chunk);
+					break;
+				case "ROWS":
+					parseRows(chunk);
+					break;
+				default: break;
 			}
-			break;
-			
-		case "TYPE":
-			parseTypes(data);
-			break;
-			
-		case "ROWS":
-			parseRows(data);
 		}
 	}
 
-	private void parseTypes(ByteBuffer data) {
+	@Override
+	public void writeIff(SWGFile iff) {
+		iff.addForm("0001");
+		writeColumns(iff.addChunk("COLS"));
+		writeTypes(iff.addChunk("TYPE"));
+		writeRows(iff.addChunk("ROWS"));
+	}
+
+	private void writeColumns(IffNode chunk) {
+		int size = getTableStringSize(columnNames);
+
+		chunk.initWriteBuffer(size + 4);
+
+		chunk.writeInt(columnNames.length);
+		for (String columnName : columnNames) {
+			chunk.writeString(columnName);
+		}
+
+		chunk.updateChunk();
+	}
+
+	private void writeTypes(IffNode chunk) {
+		int size = getTableStringSize(columnTypes);
+
+		chunk.initWriteBuffer(size);
+
+		for (String columnType : columnTypes) {
+			chunk.writeString(columnType);
+		}
+
+		chunk.updateChunk();
+	}
+
+	private void writeRows(IffNode chunk) {
+		int size = 0;
+		int rows = table.length;
+
+		for (int i = 0; i < columnTypes.length; i++) {
+			String type = columnTypes[i];
+			switch(type) {
+				case "b":
+				case "f":
+				case "h":
+				case "i": size += 4 * rows; break;
+				case "s": {
+					for (int r = 0; r < rows; r++) {
+						size += ((String) table[r][i]).length() + 1;
+					}
+					break;
+				}
+				default: System.err.println("Cannot write row type " + type);
+			}
+		}
+		chunk.initWriteBuffer(size + 4);
+
+		chunk.writeInt(rows);
+
+		for (int r = 0; r < rows; r++) {
+			for (int t = 0; t < columnTypes.length; t++) {
+				String type = columnTypes[t];
+				switch(type) {
+					case "b":
+					case "h":
+					case "i": chunk.writeInt((Integer) table[r][t]); break;
+					case "f": chunk.writeFloat((Float) table[r][t]); break;
+					case "s": chunk.writeString((String) table[r][t]); break;
+					default: System.err.println("Cannot write datatable to type " + type);
+				}
+			}
+		}
+		chunk.updateChunk();
+	}
+
+	private void parseTypes(IffNode chunk) {
 		columnTypes = new String[columnNames.length];
 
 		for (int t = 0; t < columnTypes.length; t++) {
-			String type = ByteUtilities.nextString(data);
+			String type = chunk.readString();
 			
 			if (type.contains("["))
 				type = type.split("\\[")[0];
@@ -74,8 +148,6 @@ public class DatatableData extends ClientData {
 				type = type.split("\\(")[0];
 			
 			columnTypes[t] = type;
-			data.get(); // empty separator byte
-			
 /* TODO: Need to come up with a better way of doing enums. Example of what this type looks like:
 * e(RIFLE=0,CARBINE=1,PISTOL=2,HEAVY=3,1HAND_MELEE=4,2HAND_MELEE=5,UNARMED=6,POLEARM=7,THROWN=8,1HAND_LIGHTSABER=9,2HAND_LIGHTSABER=10,POLEARM_LIGHTSABER=11)
 			if (type.startsWith("e(")) {
@@ -84,12 +156,11 @@ public class DatatableData extends ClientData {
 				enumEntries = type.replace("e(", "").replace(")", "");
 			}
 */
-
 		}
 	}
 	
-	private void parseRows(ByteBuffer data) {
-		int rows = data.getInt();
+	private void parseRows(IffNode chunk) {
+		int rows = chunk.readInt();
 		table = new Object[rows][columnTypes.length];
 		
 		for (int r = 0; r < rows; r++) {
@@ -100,30 +171,29 @@ public class DatatableData extends ClientData {
 				switch(type) {
 				
 				case "b": // Boolean
-					table[r][t] = (data.getInt() == 1);
+					table[r][t] = (chunk.readInt() == 1);
 					break;
 					
 				case "e": // Enumerator
-					table[r][t] = data.getInt();
+					table[r][t] = chunk.readInt();
 					break;
 					
 				case "f": // Float
-					table[r][t] = data.getFloat();
+					table[r][t] = chunk.readFloat();
 					break;
 				
 				case "h": // CRC
-					table[r][t] = data.getInt();
+					table[r][t] = chunk.readUInt();
 					break;
 					
 				case "i": // Integer
-					table[r][t] = data.getInt();
+					table[r][t] = chunk.readInt();
 					break;
 				
 				case "s": // String
-					if (data.get() != 0) {
-						data.position(data.position() - 1);
-						table[r][t] = ByteUtilities.nextString(data);
-						data.get();
+					if (chunk.readByte() != 0) {
+						chunk.skip(-1);
+						table[r][t] = chunk.readString();
 					} else {
 						table[r][t] = "";
 					}
@@ -132,7 +202,7 @@ public class DatatableData extends ClientData {
 					
 				case "v":
 					// TODO: Datatable Enums
-					data.getInt();
+					chunk.readInt();
 					break;
 				default:
 					System.err.println("FATAL: Don't know how to decode type " + type + " in row " + r + " column " + t);
@@ -143,9 +213,7 @@ public class DatatableData extends ClientData {
 	}
 	
 	public int getRowCount() {
-		if(table == null)
-			return 0;
-		return table.length;
+		return table == null ? 0 : table.length;
 	}
 	
 	public int getColumnCount() {
@@ -195,4 +263,33 @@ public class DatatableData extends ClientData {
 		return columnTypes[column];
 	}
 
+	public void handleRows(DatatableRowHandler handler) {
+		for (int r = 0; r < getRowCount(); r++) {
+			handler.handleRow(r);
+		}
+	}
+
+	public void setColumnNames(String[] columnNames) {
+		this.columnNames = columnNames;
+	}
+
+	public void setColumnTypes(String[] columnTypes) {
+		this.columnTypes = columnTypes;
+	}
+
+	public void setTable(Object[][] table) {
+		this.table = table;
+	}
+
+	private int getTableStringSize(String[] table) {
+		int size = 0;
+		for (String s : table) {
+			size += s.length() + 1;
+		}
+		return size;
+	}
+
+	public interface DatatableRowHandler {
+		void handleRow(int row);
+	}
 }

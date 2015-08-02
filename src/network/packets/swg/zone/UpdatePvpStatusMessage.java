@@ -27,13 +27,12 @@
 ***********************************************************************************/
 package network.packets.swg.zone;
 
-import java.nio.ByteBuffer;
-
 import network.packets.swg.SWGPacket;
 
+import java.nio.ByteBuffer;
+
 public class UpdatePvpStatusMessage extends SWGPacket {
-	
-	public static final int CRC = 0x08A1C126;
+	public static final int CRC = getCrc("UpdatePvpStatusMessage");
 	
 	public static final int ATTACKABLE = 1;
 	public static final int AGGRESSIVE = 2;

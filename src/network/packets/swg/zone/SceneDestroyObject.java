@@ -27,13 +27,12 @@
 ***********************************************************************************/
 package network.packets.swg.zone;
 
-import java.nio.ByteBuffer;
-
 import network.packets.swg.SWGPacket;
 
+import java.nio.ByteBuffer;
+
 public class SceneDestroyObject extends SWGPacket {
-	
-	public static final int CRC = 0x4D45D504;
+	public static final int CRC = getCrc("SceneDestroyObject");
 	
 	private long objId;
 	

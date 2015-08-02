@@ -27,13 +27,12 @@
 ***********************************************************************************/
 package network.packets.swg.zone.building;
 
-import java.nio.ByteBuffer;
-
 import network.packets.swg.SWGPacket;
 
+import java.nio.ByteBuffer;
+
 public class UpdateCellPermissionMessage extends SWGPacket {
-	
-	public static final int CRC = 0xF612499C;
+	public static final int CRC = getCrc("UpdateCellPermissionMessage");
 	
 	private byte permissionFlag;
 	private long cellId;

@@ -27,21 +27,14 @@
 ***********************************************************************************/
 package services.galaxy;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
-import network.packets.soe.Disconnect;
-import network.packets.soe.Disconnect.DisconnectReason;
-import network.packets.swg.zone.HeartBeatMessage;
 import intents.PlayerEventIntent;
 import intents.network.CloseConnectionIntent;
 import intents.network.ForceDisconnectIntent;
 import intents.network.GalacticPacketIntent;
 import intents.player.ZonePlayerSwapIntent;
+import network.packets.soe.Disconnect;
+import network.packets.soe.Disconnect.DisconnectReason;
+import network.packets.swg.zone.HeartBeat;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.creature.CreatureObject;
@@ -52,6 +45,13 @@ import resources.player.PlayerFlags;
 import resources.player.PlayerState;
 import resources.server_info.Log;
 import utilities.ThreadUtilities;
+
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class ConnectionService extends Service {
 	
@@ -154,7 +154,7 @@ public class ConnectionService extends Service {
 	}
 	
 	private void onGalacticPacketIntent(GalacticPacketIntent gpi) {
-		if (gpi.getPacket() instanceof HeartBeatMessage) {
+		if (gpi.getPacket() instanceof HeartBeat) {
 			Player p = gpi.getPlayerManager().getPlayerFromNetworkId(gpi.getNetworkId());
 			if (p != null)
 				p.sendPacket(gpi.getPacket());

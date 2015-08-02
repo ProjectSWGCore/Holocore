@@ -27,15 +27,10 @@
 
 package resources.encodables;
 
-import resources.network.BaselineBuilder;
-
-import java.nio.ByteBuffer;
-
 /**
  * @author Waverunner
  */
-public interface OutOfBandData extends BaselineBuilder.Encodable{
-	int decodeOutOfBandData(ByteBuffer data); // TODO: Remove with Encodable refactor
+public interface OutOfBandData extends Encodable{
 	OutOfBandPackage.Type getOobType();
 	int getOobPosition();
 }

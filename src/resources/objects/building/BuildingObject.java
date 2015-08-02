@@ -28,7 +28,16 @@
 package resources.objects.building;
 
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
+import resources.client_info.ClientFactory;
+import resources.client_info.visitors.ObjectData;
+import resources.client_info.visitors.PortalLayoutData;
+import resources.objects.SWGObject;
+import resources.objects.cell.CellObject;
 import resources.objects.tangible.TangibleObject;
+
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 
 public class BuildingObject extends TangibleObject {
 	
@@ -38,4 +47,46 @@ public class BuildingObject extends TangibleObject {
 		super(objectId, BaselineType.BUIO);
 	}
 	
+	public CellObject getCellByName(String cellName) {
+		for (SWGObject cont : getContainedObjects()) {
+			if (cont instanceof CellObject) {
+				if (((CellObject) cont).getCellName().equals(cellName)) {
+					return (CellObject) cont;
+				}
+			}
+		}
+		return null;
+	}
+
+	public List<CellObject> getCells() {
+		List<CellObject> cells = new LinkedList<>();
+		for (SWGObject object : getContainedObjects()) {
+			if (object instanceof CellObject)
+				cells.add((CellObject) object);
+		}
+		return Collections.unmodifiableList(cells);
+	}
+
+	@Override
+	public boolean addObject(SWGObject object) {
+		boolean added = super.addObject(object);
+		if (!added || !(object instanceof CellObject))
+			return added;
+
+		String portalFile = String.valueOf(getTemplateAttribute(ObjectData.PORTAL_LAYOUT));
+		if (portalFile == null || portalFile.isEmpty())
+			return true;
+
+		PortalLayoutData portalLayoutData = (PortalLayoutData) ClientFactory.getInfoFromFile(portalFile, true);
+		if (portalLayoutData == null || portalLayoutData.getCells() == null || portalLayoutData.getCells().size() == 0)
+			return true;
+
+		populateCellData((CellObject) object, portalLayoutData.getCells().get(((CellObject) object).getNumber()));
+		return true;
+	}
+
+	private void populateCellData(CellObject cellObject, PortalLayoutData.Cell cellData) {
+		cellObject.setCellName(cellData.getName());
+//		System.out.println(cellObject + " cell name " + cellObject.getCelName());
+	}
 }

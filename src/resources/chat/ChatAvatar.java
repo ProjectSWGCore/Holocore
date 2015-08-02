@@ -28,16 +28,18 @@
 package resources.chat;
 
 import network.packets.Packet;
-import resources.network.BaselineBuilder;
-import resources.objects.creature.CreatureObject;
+import resources.encodables.Encodable;
 import resources.player.Player;
 
+import java.io.Serializable;
 import java.nio.ByteBuffer;
 
 /**
  * @author Waverunner
  */
-public class ChatAvatar implements BaselineBuilder.Encodable, BaselineBuilder.Decodable {
+public class ChatAvatar implements Encodable, Serializable {
+	private static final long serialVersionUID = 1L;
+
 	private long networkId;
 	private String name;
 	private String game = "SWG";
@@ -115,14 +117,15 @@ public class ChatAvatar implements BaselineBuilder.Encodable, BaselineBuilder.De
 
 	@Override
 	public void decode(ByteBuffer data) {
-		game = Packet.getAscii(data);
-		galaxy = Packet.getAscii(data);
-		name = Packet.getAscii(data);
+		game 	= Packet.getAscii(data);
+		galaxy 	= Packet.getAscii(data);
+		name 	= Packet.getAscii(data).toLowerCase();
 	}
 
 	@Override
 	public String toString() {
-		return "ChatAvatar:" + getNetworkId() + "[" + getGame() + "." + getGalaxy() + "." + getName() + "]";
+		return "ChatAvatar[networkId=" + networkId +
+				", name='" + name + '\'' + ", game='" + game + '\'' + ", galaxy='" + galaxy + "']";
 	}
 
 	@Override

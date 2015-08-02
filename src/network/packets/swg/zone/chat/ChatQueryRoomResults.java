@@ -30,8 +30,6 @@ package network.packets.swg.zone.chat;
 import network.packets.swg.SWGPacket;
 import resources.chat.ChatAvatar;
 import resources.chat.ChatRoom;
-import resources.network.BaselineBuilder;
-
 import java.nio.ByteBuffer;
 import java.util.List;
 
@@ -39,7 +37,7 @@ import java.util.List;
  * @author Waverunner
  */
 public class ChatQueryRoomResults extends SWGPacket {
-	public static final int CRC = resources.common.CRC.getCrc("ChatQueryRoomResults");
+	public static final int CRC = getCrc("ChatQueryRoomResults");
 
 	private ChatRoom room;
 	private int sequence;

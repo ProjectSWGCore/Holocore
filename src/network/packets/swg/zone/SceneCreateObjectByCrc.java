@@ -27,14 +27,14 @@
 ***********************************************************************************/
 package network.packets.swg.zone;
 
-import java.nio.ByteBuffer;
-
 import network.packets.swg.SWGPacket;
 import resources.Location;
 
+import java.nio.ByteBuffer;
+
 public class SceneCreateObjectByCrc extends SWGPacket {
-	
-	public static final int CRC = 0xFE89DDEA;
+	public static final int CRC = getCrc("SceneCreateObjectByCrc");
+
 	private long objId = 0;
 	private Location l = new Location();
 	private int objCrc = 0;
@@ -53,18 +53,17 @@ public class SceneCreateObjectByCrc extends SWGPacket {
 		if (!super.decode(data, CRC))
 			return;
 		objId = getLong(data);
-		l = getLocation();
+		l = getEncodable(data, Location.class);
 		objCrc = getInt(data);
 		getByte(data); // Unknown Byte
 	}
 	
 	public ByteBuffer encode() {
-		int length = 47;
-		ByteBuffer data = ByteBuffer.allocate(length);
+		ByteBuffer data = ByteBuffer.allocate(47);
 		addShort(data, 5);
 		addInt(  data, CRC);
 		addLong( data, objId);
-		addLocation(data, l);
+		addEncodable(data, l);
 		addInt(  data, objCrc);
 		addByte( data, 0); // Unknown Byte
 		return data;

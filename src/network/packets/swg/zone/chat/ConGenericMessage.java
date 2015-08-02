@@ -32,8 +32,7 @@ import java.nio.ByteBuffer;
 import network.packets.swg.SWGPacket;
 
 public class ConGenericMessage extends SWGPacket {
-	
-	public static final int CRC = 0x08C5FC76;
+	public static final int CRC = getCrc("ConGenericMessage");
 	
 	private String message;
 	

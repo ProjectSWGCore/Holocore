@@ -33,8 +33,7 @@ import network.packets.swg.SWGPacket;
 
 
 public class ClientVerifyAndLockNameResponse extends SWGPacket {
-	
-	public static final int CRC = 0x9B2C6BA7;
+	public static final int CRC = getCrc("ClientVerifyAndLockNameResponse");
 	
 	private String name = "";
 	private ErrorMessage error = ErrorMessage.NAME_APPROVED;

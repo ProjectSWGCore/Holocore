@@ -28,7 +28,6 @@
 package services.galaxy;
 
 import resources.control.Manager;
-import services.chat.ChatService;
 import services.commands.CommandService;
 import services.sui.SuiService;
 

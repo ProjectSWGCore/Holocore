@@ -36,7 +36,7 @@ import java.nio.ByteBuffer;
  * @author Waverunner
  */
 public class ChatSendToRoom extends SWGPacket {
-	public static final int CRC = resources.common.CRC.getCrc("ChatSendToRoom");
+	public static final int CRC = getCrc("ChatSendToRoom");
 
 	private String message;
 	private OutOfBandPackage outOfBandPackage;
@@ -48,10 +48,10 @@ public class ChatSendToRoom extends SWGPacket {
 		if (!super.decode(data, CRC))
 			return;
 
-		message = getUnicode(data);
-		outOfBandPackage = getOutOfBand(data);
-		roomId = getInt(data);
-		sequence = getInt(data);
+		message 			= getUnicode(data);
+		outOfBandPackage 	= getEncodable(data, OutOfBandPackage.class);
+		roomId 				= getInt(data);
+		sequence 			= getInt(data);
 	}
 
 	@Override

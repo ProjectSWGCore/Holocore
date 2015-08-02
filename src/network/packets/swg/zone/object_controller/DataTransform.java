@@ -60,24 +60,21 @@ public class DataTransform extends ObjectController {
 		decodeHeader(data);
 		timestamp = getInt(data);
 		updateCounter = getInt(data);
-		l.setOrientationX(getFloat(data));
-		l.setOrientationY(getFloat(data));
-		l.setOrientationZ(getFloat(data));
-		l.setOrientationW(getFloat(data));
-		l.setX(getFloat(data));
-		l.setY(getFloat(data));
-		l.setZ(getFloat(data));
+		l = getEncodable(data, Location.class);
 		speed = getFloat(data);
 		lookAtYaw = getFloat(data);
 		useLookAtYaw = getBoolean(data);
 	}
 	
 	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + 36);
+		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + 45);
 		encodeHeader(data);
+		addInt(data, timestamp);
 		addInt(data, updateCounter);
-		addLocation(data, l);
+		addEncodable(data, l);
 		addFloat(data, speed);
+		addFloat(data, lookAtYaw);
+		addBoolean(data, useLookAtYaw);
 		return data;
 	}
 	

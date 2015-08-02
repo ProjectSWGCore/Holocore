@@ -41,10 +41,12 @@ import java.util.Map.Entry;
 public class CachedObjectDatabase<V extends Serializable> extends ObjectDatabase<V> {
 	
 	private final Map <Long, V> objects;
+	private boolean loaded;
 	
 	public CachedObjectDatabase(String filename) {
 		super(filename);
 		objects = new HashMap<Long, V>();
+		loaded = false;
 	}
 	
 	public synchronized V put(String key, V value) {
@@ -94,6 +96,10 @@ public class CachedObjectDatabase<V extends Serializable> extends ObjectDatabase
 	}
 	
 	public synchronized boolean save() {
+		if (!loaded) {
+			Log.e("CachedObjectDatabase", "Not saving '" + getFile() + "', file not loaded yet!");
+			return false;
+		}
 		ObjectOutputStream oos = null;
 		try {
 			oos = new ObjectOutputStream(new FileOutputStream(getFile()));
@@ -105,7 +111,7 @@ public class CachedObjectDatabase<V extends Serializable> extends ObjectDatabase
 			}
 			oos.close();
 		} catch (IOException e) {
-			System.err.println("CachedObjectDatabase: Error while saving file. IOException: " + e.getMessage());
+			Log.e("CachedObjectDatabase", "Error while saving file. IOException: " + e.getMessage());
 			e.printStackTrace();
 			return false;
 		} finally {
@@ -113,7 +119,7 @@ public class CachedObjectDatabase<V extends Serializable> extends ObjectDatabase
 				try {
 					oos.close();
 				} catch (Exception e) {
-					System.err.println("CachedObjectDatabase: Failed to close stream while saving! " + e.getMessage());
+					Log.e("CachedObjectDatabase", "Failed to close stream while saving! " + e.getMessage());
 					e.printStackTrace();
 				}
 			}
@@ -124,6 +130,7 @@ public class CachedObjectDatabase<V extends Serializable> extends ObjectDatabase
 	public synchronized void clearCache() {
 		synchronized (objects) {
 			objects.clear();
+			loaded = false;
 		}
 	}
 	
@@ -141,8 +148,9 @@ public class CachedObjectDatabase<V extends Serializable> extends ObjectDatabase
 					objects.put(key, val);
 				}
 			}
+			loaded = true;
 		} catch (EOFException e) {
-			
+			loaded = true;
 		} catch (IOException | ClassNotFoundException | ClassCastException e) {
 			System.err.println("CachedObjectDatabase: Unable to load with error: " + e.getClass().getSimpleName() + " - " + e.getMessage());
 			return false;

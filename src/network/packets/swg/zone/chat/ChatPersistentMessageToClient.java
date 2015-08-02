@@ -34,8 +34,7 @@ import resources.encodables.player.Mail;
 import network.packets.swg.SWGPacket;
 
 public class ChatPersistentMessageToClient extends SWGPacket {
-	
-	public static final int CRC = 0x08485E17;
+	public static final int CRC = getCrc("ChatPersistentMessageToClient");
 	
 	private Mail mail;
 	private String galaxy;

@@ -27,13 +27,13 @@
 ***********************************************************************************/
 package network.packets.swg.zone;
 
-import java.nio.ByteBuffer;
-
 import network.packets.swg.SWGPacket;
 
+import java.nio.ByteBuffer;
+
 public class GalaxyLoopTimesResponse extends SWGPacket {
-	
-	public static final int CRC = 0x4E428088;
+	public static final int CRC = getCrc("GalaxyLoopTimesResponse");
+
 	private long time = 0;
 	
 	public GalaxyLoopTimesResponse() {

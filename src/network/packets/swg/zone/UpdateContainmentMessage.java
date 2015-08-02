@@ -27,13 +27,12 @@
 ***********************************************************************************/
 package network.packets.swg.zone;
 
-import java.nio.ByteBuffer;
-
 import network.packets.swg.SWGPacket;
 
+import java.nio.ByteBuffer;
+
 public class UpdateContainmentMessage extends SWGPacket {
-	
-	public static final int CRC = 0x56CBDE9E;
+	public static final int CRC = getCrc("UpdateContainmentMessage");
 	
 	private long containerId = 0;
 	private long objectId = 0;

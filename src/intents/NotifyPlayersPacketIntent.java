@@ -32,19 +32,35 @@ import resources.Terrain;
 import resources.control.Intent;
 import resources.player.Player;
 
+import java.util.List;
+
 public class NotifyPlayersPacketIntent extends Intent {
 
 	public static final String TYPE = "GalaxyWidePacketIntent";
 	
 	private Packet packet;
 	private Terrain terrain;
+	private List<Long> networkIds;
 	private ConditionalNotify condition;
-	
-	public NotifyPlayersPacketIntent(Packet packet, Terrain terrain, ConditionalNotify condition) {
+
+	public NotifyPlayersPacketIntent(Packet packet, Terrain terrain, ConditionalNotify condition, List<Long> networkIds) {
 		super(TYPE);
 		this.packet = packet;
 		this.terrain = terrain;
 		this.condition = condition;
+		this.networkIds = networkIds;
+	}
+
+	public NotifyPlayersPacketIntent(Packet packet, Terrain terrain, ConditionalNotify condition) {
+		this(packet, terrain, condition, null);
+	}
+
+	public NotifyPlayersPacketIntent(Packet packet, ConditionalNotify condition, List<Long> networkIds) {
+		this(packet, null, condition, networkIds);
+	}
+
+	public NotifyPlayersPacketIntent(Packet packet, List<Long> networkIds) {
+		this(packet, null, null, networkIds);
 	}
 
 	public NotifyPlayersPacketIntent(Packet packet, Terrain terrain) {
@@ -52,12 +68,13 @@ public class NotifyPlayersPacketIntent extends Intent {
 	}
 
 	public NotifyPlayersPacketIntent(Packet p) {
-		this(p, null, null);
+		this(p, null, null, null);
 	}
 
 	public Packet getPacket() { return packet; }
 	public Terrain getTerrain() { return terrain; }
 	public ConditionalNotify getCondition() { return condition; }
+	public List<Long> getNetworkIds() { return networkIds; }
 
 	public interface ConditionalNotify {
 		boolean meetsCondition(Player player);

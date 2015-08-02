@@ -32,16 +32,28 @@ import java.nio.ByteBuffer;
 import network.packets.swg.SWGPacket;
 
 public class ChatRequestPersistentMessage extends SWGPacket {
-	public static final int CRC = 0x07E3559F;
-	
+	public static final int CRC = getCrc("ChatRequestPersistentMessage");
+
+	private int sequence;
 	private int mailId;
 	
 	@Override
 	public void decode(ByteBuffer data) {
 		if (!super.decode(data, CRC))
 			return;
-		getInt(data);
-		mailId = getInt(data);
+		sequence 	= getInt(data);
+		mailId 		= getInt(data);
+	}
+
+	@Override
+	public ByteBuffer encode() {
+		ByteBuffer bb = ByteBuffer.allocate(14);
+		addShort(bb, 3);
+		addInt(bb, CRC);
+		addInt(bb, sequence);
+		addInt(bb, mailId);
+
+		return bb;
 	}
 
 	public int getMailId() { return this.mailId; }
