@@ -189,7 +189,6 @@ public class ZoneManager extends Manager {
 		sendPacket(player, new ParametersMessage());
 		sendPacket(player, new ChatOnConnectAvatar());
 		sendPacket(player, new CmdStartScene(false, objId, race, l, time));
-		sendPacket(player, new UpdatePvpStatusMessage(creature.getPvpType(), creature.getPvpFactionId(), creature.getObjectId()));
 		flushPackets();
 	}
 	
