@@ -103,6 +103,7 @@ public class Encryption {
 			compressor.setInput(data, 2, data.length - 2);
 			compressor.finish();
 			int length = compressor.deflate(result);
+			compressor.end();
 			if (length < data.length) {
 				ByteBuffer bb = ByteBuffer.allocate(length+3);
 				bb.put(data[0]).put(data[1]);
