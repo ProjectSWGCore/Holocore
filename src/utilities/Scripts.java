@@ -41,6 +41,10 @@ public class Scripts {
 	private static final ScriptEngine ENGINE = new ScriptEngineManager().getEngineByName("nashorn");
 	private static final Invocable INVOCABLE = (Invocable) ENGINE;
 	
+	static {
+		ENGINE.put("intentFactory", new IntentFactory());
+	}
+	
 	// Prevents instantiation.
 	private Scripts() {}
 	
