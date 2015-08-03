@@ -32,12 +32,16 @@ import network.packets.swg.SWGPacket;
 import network.packets.swg.zone.chat.ChatRoomMessage;
 import resources.encodables.Encodable;
 import resources.encodables.OutOfBandPackage;
+import resources.objects.SWGObject;
 import resources.player.Player;
 import services.player.PlayerManager;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -72,7 +76,12 @@ public class ChatRoom implements Encodable, Serializable {
 		members = new ArrayList<>();
 		banned = new ArrayList<>();
 	}
-
+	
+	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
+		members = new ArrayList<>();
+		ois.defaultReadObject();
+	}
+	
 	public int getId() {
 		return id;
 	}
