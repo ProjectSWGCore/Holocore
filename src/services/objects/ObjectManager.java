@@ -202,7 +202,8 @@ public class ObjectManager extends Manager {
 	
 	private void loadObject(SWGObject obj) {
 		obj.setOwner(null);
-		if (!(obj instanceof CreatureObject) || ((CreatureObject) obj).getPlayerObject() == null)
+		// if player is not a player
+		if (!(obj instanceof CreatureObject && ((CreatureObject) obj).hasSlot("ghost")))
 			objectAwareness.add(obj);
 		objectMap.put(obj.getObjectId(), obj);
 		updateBuildoutParent(obj);
@@ -256,6 +257,8 @@ public class ObjectManager extends Manager {
 				case PE_DISAPPEAR:
 					p.getCreatureObject().clearAware();
 					objectAwareness.remove(p.getCreatureObject());
+					for (SWGObject obj : p.getCreatureObject().getObservers())
+						p.getCreatureObject().destroyObject(obj.getOwner());
 					break;
 				case PE_ZONE_IN:
 					p.getCreatureObject().clearAware();
