@@ -61,6 +61,7 @@ import network.packets.swg.zone.chat.ChatSendToRoom;
 import network.packets.swg.zone.chat.ChatUnbanAvatarFromRoom;
 import network.packets.swg.zone.chat.ChatUninviteFromRoom;
 import network.packets.swg.zone.insertion.ChatRoomList;
+import resources.Galaxy;
 import resources.Terrain;
 import resources.chat.ChatAvatar;
 import resources.chat.ChatResult;
@@ -87,24 +88,19 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author Waverunner
  */
 public class ChatRoomService extends Service {
-	private int maxChatRoomId;
-	private Map<Integer, ChatRoom> roomMap;
 	// Map to keep track of each player's recent message for a room to prevent duplicates from client
-	private Map<Long, Map<Integer, Integer>> messages;
-	private ObjectDatabase<ChatRoom> database;
+	private final Map<Long, Map<Integer, Integer>> messages;
+	private final ObjectDatabase<ChatRoom> database;
+	private final Map<Integer, ChatRoom> roomMap;
+	private final Galaxy galaxy;
+	private int maxChatRoomId;
 
-	public ChatRoomService() {
+	public ChatRoomService(Galaxy g) {
+		galaxy		= g;
 		database	= new CachedObjectDatabase<>("odb/chat_rooms.db");
 		roomMap 	= new ConcurrentHashMap<>();
 		messages	= new ConcurrentHashMap<>();
 		maxChatRoomId = 1;
-
-		database.load();
-		database.traverse((room) -> {
-			if (room.getId() >= maxChatRoomId)
-				maxChatRoomId++;
-			roomMap.put(room.getId(), room);
-		});
 	}
 
 	@Override
@@ -112,6 +108,14 @@ public class ChatRoomService extends Service {
 		registerForIntent(ChatRoomUpdateIntent.TYPE);
 		registerForIntent(GalacticPacketIntent.TYPE);
 
+		database.load();
+		database.traverse((room) -> {
+			if (room.getId() >= maxChatRoomId)
+				maxChatRoomId++;
+			roomMap.put(room.getId(), room);
+		});
+
+		createSystemChannels(galaxy.getName());
 		return super.initialize();
 	}
 
