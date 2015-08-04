@@ -71,6 +71,7 @@ public class ObjectManager extends Manager {
 
 	private final MapService mapService;
 	private final StaticService staticService;
+	private final RadialService radialService;
 
 	private final ObjectDatabase<SWGObject> database;
 	private final ObjectAwareness objectAwareness;
@@ -80,6 +81,7 @@ public class ObjectManager extends Manager {
 	public ObjectManager() {
 		mapService = new MapService();
 		staticService = new StaticService(this);
+		radialService = new RadialService();
 		database = new CachedObjectDatabase<SWGObject>("odb/objects.db");
 		objectAwareness = new ObjectAwareness();
 		objectMap = new HashMap<>();
@@ -87,6 +89,7 @@ public class ObjectManager extends Manager {
 
 		addChildService(mapService);
 		addChildService(staticService);
+		addChildService(radialService);
 	}
 	
 	@Override

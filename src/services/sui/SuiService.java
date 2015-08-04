@@ -33,9 +33,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import network.packets.Packet;
 import network.packets.swg.SWGPacket;
-import network.packets.swg.zone.object_controller.ObjectController;
-import network.packets.swg.zone.object_controller.ObjectMenuRequest;
-import network.packets.swg.zone.object_controller.ObjectMenuResponse;
 import network.packets.swg.zone.server_ui.SuiCreatePageMessage;
 import network.packets.swg.zone.server_ui.SuiEventNotification;
 import intents.network.GalacticPacketIntent;
@@ -93,23 +90,9 @@ public class SuiService extends Service {
 				if (p instanceof SuiEventNotification)
 					handleSuiEventNotification(player, (SuiEventNotification) p);
 				break;
-			case OBJECT_CONTROLLER:
-				if (p instanceof ObjectController)
-					handleObjectController(player, (ObjectController) p);
-				break;
 			default:
 				break;
 		}
-	}
-	
-	private void handleObjectController(Player player, ObjectController objController) {
-		if (objController instanceof ObjectMenuRequest)
-			handleRadialMenuRequest(player, (ObjectMenuRequest) objController);
-	}
-	
-	private void handleRadialMenuRequest(Player player, ObjectMenuRequest request) {
-		// TODO: Modify when object scripts are in to accept a createRadial definition for radials
-		player.sendPacket(new ObjectMenuResponse(player.getCreatureObject().getObjectId(), request.getTargetId(), request.getRequesterId(), request.getOptions(), request.getCounter()));
 	}
 	
 	private void handleSuiWindowIntent(SuiWindowIntent i) {

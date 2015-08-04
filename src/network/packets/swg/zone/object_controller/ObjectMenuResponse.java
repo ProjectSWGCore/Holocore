@@ -38,7 +38,7 @@ public class ObjectMenuResponse extends ObjectController {
 	public static final int CRC = 0x0147;
 	
 	private long targetId;
-	private long requesterId;
+	private long requestorId;
 	private List <RadialOption> options;
 	private int counter;
 	
@@ -46,12 +46,16 @@ public class ObjectMenuResponse extends ObjectController {
 		super(objectId, CRC);
 	}
 	
-	public ObjectMenuResponse(long objectId, long targetId, long requesterId, List<RadialOption> options, int counter) {
+	public ObjectMenuResponse(long objectId, long targetId, long requestorId, List<RadialOption> options, int counter) {
 		super(objectId, CRC);
 		this.targetId = targetId;
-		this.requesterId = requesterId;
+		this.requestorId = requestorId;
 		this.options = options;
 		this.counter = counter;
+		setTargetId(targetId);
+		setRequestorId(requestorId);
+		setRadialOptions(options);
+		setCounter(counter);
 	}
 	
 	public ObjectMenuResponse(ByteBuffer data) {
@@ -63,7 +67,7 @@ public class ObjectMenuResponse extends ObjectController {
 	public void decode(ByteBuffer data) {
 		decodeHeader(data);
 		targetId = getLong(data);
-		requesterId = getLong(data);
+		requestorId = getLong(data);
 		int optionCount = getInt(data);
 		for (int i = 0; i < optionCount; i++) {
 			RadialOption option = new RadialOption();
@@ -88,7 +92,7 @@ public class ObjectMenuResponse extends ObjectController {
 		encodeHeader(data);
 		
 		addLong(data, targetId);
-		addLong(data, requesterId);
+		addLong(data, requestorId);
 
 		addInt(data, options.size());
 		for (int i = 0; i < options.size(); i++) {
@@ -104,4 +108,37 @@ public class ObjectMenuResponse extends ObjectController {
 		addByte(data, counter);
 		return data;
 	}
+
+	public void setTargetId(long targetId) {
+		this.targetId = targetId;
+	}
+	
+	public void setRequestorId(long requestorId) {
+		this.requestorId = requestorId;
+	}
+	
+	public void setRadialOptions(List<RadialOption> options) {
+		this.options = options;
+	}
+	
+	public void setCounter(int counter) {
+		this.counter = counter;
+	}
+	
+	public long getTargetId() {
+		return targetId;
+	}
+	
+	public long getRequestorId() {
+		return requestorId;
+	}
+	
+	public List<RadialOption> getOptions() {
+		return options;
+	}
+	
+	public int getCounter() {
+		return counter;
+	}
+	
 }
