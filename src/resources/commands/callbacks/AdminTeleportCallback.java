@@ -45,7 +45,7 @@ public class AdminTeleportCallback implements ICmdCallback {
 			System.err.println("For teleporting another player, command has to be: /teleport <charname> <planetname> <x> <y> <z>");
 			return;
 		}
-		double x = Double.NaN, y = Double.NaN, z = Double.NaN;
+		double x, y, z;
 		int cmdOffset = 0;
 		if (cmd.length > 4)
 			cmdOffset = 1; 

@@ -54,17 +54,26 @@ public class ProsePackage implements OutOfBandData, Serializable {
 	public ProsePackage() {}
 
 	/**
-	 * Creates a new ProsePackage that contains only 1 parameter for the specified STF object
+	 * Creates a new ProsePackage that only specifies a StringId
+	 * @param table Base stf table for this ProsePackage
+	 * @param key The key for the provided table to use
+	 */
+	public ProsePackage(String table, String key) {
+		setStringId(new StringId(table, key));
+	}
+
+	/**
+	 * Creates a new ProsePackage that contains only 1 parameter for the specified StringId object
 	 * <br><br>
 	 * Example: <br> 
 	 * &nbsp&nbsp&nbsp&nbsp ProsePackage("@base_player:prose_deposit_success", "DI", 500)
-	 * @param stf The base stf for this ProsePackage
-	 * @param key The key in the message, can either be TU, TT, TO, or DI.
+	 * @param stringId The base stringId for this ProsePackage
+	 * @param proseKey The key in the message, can either be TU, TT, TO, or DI.
 	 * @param prose Value to set for this key, instance depends on the key.
 	 */
-	public ProsePackage(Object stf, String key, Object prose) {
-		setSTF(stf);
-		setProse(key, prose);
+	public ProsePackage(StringId stringId, String proseKey, Object prose) {
+		setStringId(stringId);
+		setProse(proseKey, prose);
 	}
 	
 	/**
@@ -72,7 +81,7 @@ public class ProsePackage implements OutOfBandData, Serializable {
 	 * you should use the ProsePackage(key, prose) constructor instead.
 	 * <br><br>
 	 * Example: <br>
-	 * &nbsp&nbsp&nbsp&nbsp ProsePackage("STF", new Stf("base_player", "prose_deposit_success"), "DI", 500)
+	 * &nbsp&nbsp&nbsp&nbsp ProsePackage("StringId", new StringId("base_player", "prose_deposit_success"), "DI", 500)
 	 * @param objects Key followed by the value. Can either be STF, TU, TT, TO, or DI.
 	 */
 	public ProsePackage(Object ... objects) {
@@ -91,8 +100,8 @@ public class ProsePackage implements OutOfBandData, Serializable {
 	private void setProse(String key, Object prose) {
 		switch (key) {
 		
-		case "STF":
-			setSTF(prose);
+		case "StringId":
+			setStringId(prose);
 			break;
 		case "TU":
 			setTU(prose);
@@ -120,7 +129,7 @@ public class ProsePackage implements OutOfBandData, Serializable {
 		}
 	}
 	
-	public void setSTF(Object prose) {
+	public void setStringId(Object prose) {
 		if (prose instanceof StringId) { base = (StringId) prose; }
 		else if (prose instanceof String) {
 			if (((String) prose).startsWith("@")) { base = new StringId((String) prose); }

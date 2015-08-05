@@ -1,3 +1,3 @@
-var execute = function(objManager, player, target, args) {
+var execute = function(galManager, player, target, args) {
 	print("Hello");
-}
+};
