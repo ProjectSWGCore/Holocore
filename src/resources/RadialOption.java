@@ -29,16 +29,16 @@ package resources;
 
 public class RadialOption {
 	
-	private short id;
-	private byte parentId;
-	private byte optionType; // 1 unless the option text isn't listed in the radial item list (datatable). - ANHWiki
+	private int id;
+	private int parentId;
+	private int optionType; // 1 unless the option text isn't listed in the radial item list (datatable). - ANHWiki
 	private String text;
 	
 	public RadialOption() {
 		
 	}
 	
-	public RadialOption(String text, short id, byte parentId, byte optionType) {
+	public RadialOption(String text, int id, int parentId, int optionType) {
 		this.text = text;
 		this.id = id;
 		this.parentId = parentId;
@@ -50,9 +50,9 @@ public class RadialOption {
 	public void setOptionType(byte optionType) { this.optionType = optionType; }
 	public void setText(String text) { this.text = text; }
 	
-	public byte getParentId() { return parentId; }
-	public short getId() { return id; }
-	public byte getOptionType() { return optionType; }
+	public int getParentId() { return parentId; }
+	public int getId() { return id; }
+	public int getOptionType() { return optionType; }
 	public String getText() { return text; }
 	
 	@Override

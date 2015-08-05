@@ -29,24 +29,28 @@ package services.galaxy;
 
 import resources.control.Manager;
 import services.commands.CommandService;
+import services.galaxy.terminals.TerminalManager;
 import services.sui.SuiService;
 
 public class GameManager extends Manager {
 
-	private CommandService commandService;
-	private ConnectionService connectionService;
-	private SuiService suiService;
-	private WeatherService weatherService;
+	private final CommandService commandService;
+	private final ConnectionService connectionService;
+	private final SuiService suiService;
+	private final WeatherService weatherService;
+	private final TerminalManager terminalManager;
 	
 	public GameManager() {
 		commandService = new CommandService();
 		connectionService = new ConnectionService();
 		suiService = new SuiService();
 		weatherService = new WeatherService();
+		terminalManager = new TerminalManager();
 
 		addChildService(commandService);
 		addChildService(connectionService);
 		addChildService(suiService);
 		addChildService(weatherService);
+		addChildService(terminalManager);
 	}
 }

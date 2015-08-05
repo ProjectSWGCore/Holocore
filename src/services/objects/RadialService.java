@@ -58,6 +58,7 @@ public class RadialService extends Service {
 		if (target == null) {
 			System.err.println(requestor + " requested a null target! ID: " + request.getTargetId());
 			Log.w("RadialService", "%s requested a null target! ID: %d", requestor, request.getTargetId());
+			return;
 		}
 		if (!(requestor instanceof CreatureObject)) {
 			System.err.println("Requestor of target: " + target + " is not a creature object!");
@@ -91,6 +92,9 @@ public class RadialService extends Service {
 		menuResponse.setRadialOptions(options);
 		menuResponse.setCounter(counter);
 		player.sendPacket(menuResponse);
+		Log.d("RadialService", "Options: " + options.size());
+		for (RadialOption option : options)
+			Log.d("RadialService", "    Option: %s %d %d %d", option.getText(), option.getParentId(), option.getId(), option.getOptionType());
 	}
 	
 }

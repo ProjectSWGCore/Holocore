@@ -87,6 +87,8 @@ public class ObjectMenuResponse extends ObjectController {
 			optionsDataSize += 9;
 			if (o.getText() != null || !o.getText().isEmpty())
 				optionsDataSize += o.getText().length()*2;
+			else
+				optionsDataSize += 4;
 		}
 		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + optionsDataSize + 21);
 		encodeHeader(data);
@@ -103,7 +105,8 @@ public class ObjectMenuResponse extends ObjectController {
 			addByte(data, option.getOptionType());
 			if (option.getText() != null || !option.getText().isEmpty())
 				addUnicode(data, option.getText());
-			else data.putInt(0);
+			else
+				data.putInt(0);
 		}
 		addByte(data, counter);
 		return data;
