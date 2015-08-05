@@ -30,6 +30,9 @@ public class RadialService extends Service {
 	@Override
 	public boolean initialize() {
 		registerForIntent(GalacticPacketIntent.TYPE);
+		registerForIntent(RadialResponseIntent.TYPE);
+		registerForIntent(RadialRegisterIntent.TYPE);
+		registerForIntent(RadialUnregisterIntent.TYPE);
 		return super.initialize();
 	}
 	
