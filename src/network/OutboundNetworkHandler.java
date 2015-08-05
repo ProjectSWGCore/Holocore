@@ -56,6 +56,8 @@ public class OutboundNetworkHandler {
 	}
 	
 	public synchronized void reset() {
+		sequenced.clear();
+		assembleQueue.clear();
 		sendSequence = 0;
 		crc = 0;
 	}
@@ -91,7 +93,7 @@ public class OutboundNetworkHandler {
 			while (it.hasNext()) {
 				SequencedPacket sp = it.next();
 				if (sp.getSequence() <= sequence)
-					pushAssembledEncrypted(sp.getPacket());
+					pushAssembledUnencrypted(sp.getPacket()); // Pre-encrypted before putting into list
 				else
 					break;
 			}
@@ -110,11 +112,12 @@ public class OutboundNetworkHandler {
 		}
 	}
 	
-	private void pushAssembledEncrypted(byte [] data) {
+	private byte [] pushAssembledEncrypted(byte [] data) {
 		data = Encryption.encode(data, crc);
 		synchronized (assembleQueue) {
 			assembleQueue.add(data);
 		}
+		return data;
 	}
 	
 	private void pushAssembledUnencrypted(byte [] data) {
@@ -164,8 +167,8 @@ public class OutboundNetworkHandler {
 			int lastSeq = updateSequencesMulti((short)(sendSequence+count), m);
 			for (Fragmented f : Fragmented.encode(m.encode(), sendSequence)) {
 				byte [] encoded = f.encode().array();
-				pushSequencedPacket(f.getSequence(), encoded);
-				pushAssembledEncrypted(encoded);
+				byte [] encrypted = pushAssembledEncrypted(encoded);
+				pushSequencedPacket(f.getSequence(), encrypted);
 			}
 			sendSequence = (short) (lastSeq + 1);
 			return count;
@@ -183,16 +186,16 @@ public class OutboundNetworkHandler {
 			int lastSeq = updateSequenceData((short)(sendSequence+count), d);
 			for (Fragmented f : Fragmented.encode(d.encode(), sendSequence)) {
 				byte [] encoded = f.encode().array();
-				pushSequencedPacket(f.getSequence(), encoded);
-				pushAssembledEncrypted(encoded);
+				byte [] encrypted = pushAssembledEncrypted(encoded);
+				pushSequencedPacket(f.getSequence(), encrypted);
 			}
 			sendSequence = (short) lastSeq;
 			return count;
 		} else {
 			d.setSequence(sendSequence++);
 			byte [] encoded = d.encode().array();
-			pushSequencedPacket(d.getSequence(), encoded);
-			pushAssembledEncrypted(encoded);
+			byte [] encrypted = pushAssembledEncrypted(encoded);
+			pushSequencedPacket(d.getSequence(), encrypted);
 			return 1;
 		}
 	}

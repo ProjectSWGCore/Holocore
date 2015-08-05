@@ -31,12 +31,9 @@ import intents.server.ServerStatusIntent;
 import resources.Galaxy.GalaxyStatus;
 import resources.control.IntentManager;
 import resources.control.ServerStatus;
-import resources.server_info.Log;
 import services.CoreManager;
 
 public class ProjectSWG {
-	
-	private static final String [] ENDINGS = {"B", "KB", "MB", "GB"};
 	
 	private static ProjectSWG server;
 	private final Thread mainThread;
@@ -135,7 +132,6 @@ public class ProjectSWG {
 	
 	private void loop() {
 		setStatus((manager.getGalaxyStatus() == GalaxyStatus.UP) ? ServerStatus.OPEN : ServerStatus.LOCKED);
-		long iter = 0;
 		while (!shutdownRequested && !manager.isShutdownRequested() && manager.isOperational()) {
 			manager.flushPackets(); // Sends any packets that weren't sent
 			try {
@@ -143,23 +139,7 @@ public class ProjectSWG {
 			} catch (InterruptedException e) {
 				throw new CoreException("Main Thread Interrupted.");
 			}
-			iter++;
-			if (iter % 20 == 0) {
-				final Runtime r = Runtime.getRuntime();
-				Log.i("ProjectSWG", "Memory Consumption: %s", getMemory((r.totalMemory()-r.freeMemory())));
-			}
 		}
-	}
-	
-	private String getMemory(long bytes) {
-		double val = bytes;
-		int iters = 0;
-		while (val >= 1024) {
-			val /= 1024;
-			iters++;
-		}
-		val = ((int) (val * 1E5)) / 1E5;
-		return val + ENDINGS[iters];
 	}
 	
 	private void stop() {

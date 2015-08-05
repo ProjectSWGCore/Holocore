@@ -172,6 +172,8 @@ public class CommandService extends Service {
 		registerCallback("jumpServer", new JumpCmdCallback());
 		registerCallback("serverDestroyObject", new ServerDestroyObjectCmdCallback());
 		registerCallback("findFriend", new FindFriendCallback());
+		registerCallback("setPlayerAppearance", new PlayerAppearanceCallback());
+		registerCallback("revertPlayerAppearance", new RevertAppearanceCallback());
 	}
 	
 	private void clearCommands() {

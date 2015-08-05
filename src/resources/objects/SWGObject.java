@@ -46,6 +46,7 @@ import resources.containers.DefaultPermissions;
 import resources.encodables.StringId;
 import resources.network.BaselineBuilder;
 import resources.network.DeltaBuilder;
+import resources.objects.creature.CreatureObject;
 import resources.player.Player;
 import resources.player.PlayerState;
 import resources.server_info.Log;
@@ -578,7 +579,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		return (filledId != -1) ? filledId : -1;
 	}
 
-	protected final void sendSceneCreateObject(Player target) {
+	private final void sendSceneCreateObject(Player target) {
 		SceneCreateObjectByCrc create = new SceneCreateObjectByCrc();
 		create.setObjectId(objectId);
 		create.setLocation(location);
@@ -589,7 +590,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 
 	}
 	
-	protected final void sendSceneDestroyObject(Player target) {
+	private final void sendSceneDestroyObject(Player target) {
 		SceneDestroyObject destroy = new SceneDestroyObject();
 		destroy.setObjectId(objectId);
 		target.sendPacket(destroy);
@@ -605,6 +606,10 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		sendBaselines(target);
 		createChildrenObjects(target);
 		target.sendPacket(new SceneEndBaselines(getObjectId()));
+	}
+	
+	public void destroyObject(Player target) {
+		sendSceneDestroyObject(target);
 	}
 	
 	public void clearAware() {
@@ -741,7 +746,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 
 		for (SWGObject swgObject : removed) {
 			if (swgObject.getOwner() != null) {
-				sendSceneDestroyObject(swgObject.getOwner());
+				destroyObject(swgObject.getOwner());
 			}
 		}
 	}
@@ -766,7 +771,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 			if (objectsAware.remove(o)) {
 				Player owner = o.getOwner();
 				if (owner != null)
-					sendSceneDestroyObject(owner);
+					destroyObject(owner);
 				else
 					destroyObjectObservers(o);
 			}
@@ -797,7 +802,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		Set<SWGObject> observers = new HashSet<>();
 		getChildrenObservers(observers, obj);
 		for (SWGObject observer : observers) {
-			sendSceneDestroyObject(observer.getOwner());
+			destroyObject(observer.getOwner());
 		}
 	}
 
@@ -854,6 +859,8 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		// Now create the contained objects
 		for (SWGObject containedObject : containedObjects.values()) {
 			if (containedObject != null && !sentObjects.contains(containedObject)) {
+				if (containedObject instanceof CreatureObject && containedObject.hasSlot("ghost") && containedObject.getOwner() == null)
+					continue; // If it's a player, but that's logged out
 				containedObject.createObject(target);
 			}
 		}

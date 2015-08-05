@@ -65,12 +65,12 @@ import java.util.Locale;
 
 public class ChatManager extends Manager {
 
-	private ObjectDatabase<Mail> mails;
+	private final ObjectDatabase<Mail> mails;
+	private final ChatRoomService roomService;
 	private int maxMailId;
-	private ChatRoomService roomService;
 
-	public ChatManager() {
-		roomService = new ChatRoomService();
+	public ChatManager(Galaxy g) {
+		roomService = new ChatRoomService(g);
 		mails = new CachedObjectDatabase<>("odb/mails.db");
 		maxMailId = 1;
 
@@ -225,10 +225,6 @@ public class ChatManager extends Manager {
 				handleRequestFriendList(i.getPlayer());
 				break;
 		}
-	}
-
-	public void initializeGalaxyChannels(Galaxy galaxy) {
-		roomService.createSystemChannels(galaxy.getName());
 	}
 
 	/* Friends List */

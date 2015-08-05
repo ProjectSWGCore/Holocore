@@ -32,12 +32,16 @@ import network.packets.swg.SWGPacket;
 import network.packets.swg.zone.chat.ChatRoomMessage;
 import resources.encodables.Encodable;
 import resources.encodables.OutOfBandPackage;
+import resources.objects.SWGObject;
 import resources.player.Player;
 import services.player.PlayerManager;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -54,7 +58,7 @@ public class ChatRoom implements Encodable, Serializable {
 	private String title;
 	private List<ChatAvatar> moderators;
 	private List<ChatAvatar> invited;
-	private boolean muted; // No one but moderators can talk
+	private boolean moderated; // No one but moderators can talk
 	private List<ChatAvatar> banned;
 	// Members are only actually apart of a room when they're "in the room", so we don't need to save this info
 	// as each player will automatically re-join the room based on their joined channels list
@@ -72,7 +76,12 @@ public class ChatRoom implements Encodable, Serializable {
 		members = new ArrayList<>();
 		banned = new ArrayList<>();
 	}
-
+	
+	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
+		members = new ArrayList<>();
+		ois.defaultReadObject();
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -129,12 +138,12 @@ public class ChatRoom implements Encodable, Serializable {
 		return invited;
 	}
 
-	public boolean isMuted() {
-		return muted;
+	public boolean isModerated() {
+		return moderated;
 	}
 
-	public void setMuted(boolean muted) {
-		this.muted = muted;
+	public void setModerated(boolean moderated) {
+		this.moderated = moderated;
 	}
 
 	public List<ChatAvatar> getMembers() {
@@ -173,8 +182,8 @@ public class ChatRoom implements Encodable, Serializable {
 		if (banned.contains(avatar))
 			return ChatResult.ROOM_AVATAR_BANNED;
 
-		if (muted && !moderators.contains(avatar))
-			return ChatResult.ROOM_NOT_MODERATOR;
+		if (moderated && !moderators.contains(avatar))
+			return ChatResult.CUSTOM_FAILURE;
 
 		return ChatResult.SUCCESS;
 	}
@@ -210,7 +219,7 @@ public class ChatRoom implements Encodable, Serializable {
 	public void decode(ByteBuffer data) {
 		id			= Packet.getInt(data);
 		type		= Packet.getInt(data);
-		muted		= Packet.getBoolean(data);
+		moderated 	= Packet.getBoolean(data);
 		path		= Packet.getAscii(data);
 		owner		= Packet.getEncodable(data, ChatAvatar.class);
 		creator		= Packet.getEncodable(data, ChatAvatar.class);
@@ -237,7 +246,7 @@ public class ChatRoom implements Encodable, Serializable {
 		ByteBuffer bb = ByteBuffer.allocate(23 + path.length() + (title.length() * 2) + avatarIdSize);
 		Packet.addInt(bb, id);
 		Packet.addInt(bb, type);
-		Packet.addBoolean(bb, muted);
+		Packet.addBoolean(bb, moderated);
 		Packet.addAscii(bb, path);
 		Packet.addEncodable(bb, owner);
 		Packet.addEncodable(bb, creator);
@@ -254,6 +263,6 @@ public class ChatRoom implements Encodable, Serializable {
 	@Override
 	public String toString() {
 		return "ChatRoom[id=" + id + ", type=" + type + ", path='" + path + "', title='" + title + '\'' +
-				", creator=" + creator + ", muted=" + muted + ", isPublic=" + isPublic() + "]";
+				", creator=" + creator + ", moderated=" + moderated + ", isPublic=" + isPublic() + "]";
 	}
 }

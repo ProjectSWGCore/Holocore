@@ -265,12 +265,12 @@ public class CreatureObject extends TangibleObject {
 	
 	public void setCashBalance(int cashBalance) {
 		this.cashBalance = cashBalance;
-		sendDelta(1, 0, cashBalance);
+		sendDelta(1, 1, cashBalance);
 	}
 
 	public void setBankBalance(int bankBalance) {
 		this.bankBalance = bankBalance;
-		sendDelta(1, 1, bankBalance);
+		sendDelta(1, 0, bankBalance);
 	}
 	
 	public void setMovementScale(double movementScale) {
@@ -682,8 +682,8 @@ public class CreatureObject extends TangibleObject {
 	
 	public void createBaseline1(Player target, BaselineBuilder bb) {
 		super.createBaseline1(target, bb); // 0 variables
-		bb.addInt(cashBalance); // 0
-		bb.addInt(bankBalance); // 1
+		bb.addInt(bankBalance); // 0
+		bb.addInt(cashBalance); // 1
 		bb.addObject(baseAttributes); // Attributes player has without any gear on -- 2
 		bb.addObject(skills); // 3
 		
