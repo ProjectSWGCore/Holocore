@@ -1,12 +1,19 @@
 package services.objects;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import resources.RadialOption;
 import resources.control.Intent;
 import resources.control.Service;
 import network.packets.swg.zone.object_controller.ObjectMenuRequest;
 import network.packets.swg.zone.object_controller.ObjectMenuResponse;
 import intents.network.GalacticPacketIntent;
+import intents.radial.RadialRegisterIntent;
 import intents.radial.RadialRequestIntent;
 import intents.radial.RadialResponseIntent;
+import intents.radial.RadialUnregisterIntent;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
@@ -14,8 +21,10 @@ import resources.server_info.Log;
 
 public class RadialService extends Service {
 	
+	private final Set<String> templatesRegistered;
+	
 	public RadialService() {
-		
+		templatesRegistered = new HashSet<>();
 	}
 	
 	@Override
@@ -33,6 +42,10 @@ public class RadialService extends Service {
 			}
 		} else if (i instanceof RadialResponseIntent) {
 			onResponse((RadialResponseIntent) i);
+		} else if (i instanceof RadialRegisterIntent) {
+			templatesRegistered.addAll(((RadialRegisterIntent) i).getTemplates());
+		} else if (i instanceof RadialUnregisterIntent) {
+			templatesRegistered.removeAll(((RadialUnregisterIntent) i).getTemplates());
 		}
 	}
 	
@@ -54,18 +67,26 @@ public class RadialService extends Service {
 			Log.w("RadialService", "Requestor of target: %s does not have an owner! %s", target, requestor);
 			return;
 		}
-		new RadialRequestIntent(player, target, request).broadcast();
-		// TODO: Remove the following line. This is a temporary solution to provide Use and Examine radials.
-		new RadialResponseIntent(player, target, request.getOptions(), request.getCounter()).broadcast();
+		if (templatesRegistered.contains(target.getTemplate())) {
+			Log.d("RadialService", "Broadcasting. Service registered for object radial: " + target.getTemplate());
+			new RadialRequestIntent(player, target, request).broadcast();
+		} else {
+			Log.w("RadialService", "No service registered for object radial: " + target.getTemplate());
+			sendResponse(player, target, request.getOptions(), request.getCounter());
+		}
 	}
 	
 	private void onResponse(RadialResponseIntent response) {
 		Player player = response.getPlayer();
+		sendResponse(player, response.getTarget(), response.getOptions(), response.getCounter());
+	}
+	
+	private void sendResponse(Player player, SWGObject target, List<RadialOption> options, int counter) {
 		ObjectMenuResponse menuResponse = new ObjectMenuResponse(player.getCreatureObject().getObjectId());
-		menuResponse.setTargetId(response.getTarget().getObjectId());
+		menuResponse.setTargetId(target.getObjectId());
 		menuResponse.setRequestorId(player.getCreatureObject().getObjectId());
-		menuResponse.setRadialOptions(response.getOptions());
-		menuResponse.setCounter(response.getCounter());
+		menuResponse.setRadialOptions(options);
+		menuResponse.setCounter(counter);
 		player.sendPacket(menuResponse);
 	}
 	
