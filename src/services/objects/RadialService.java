@@ -94,7 +94,7 @@ public class RadialService extends Service {
 		player.sendPacket(menuResponse);
 		Log.d("RadialService", "Options: " + options.size());
 		for (RadialOption option : options)
-			Log.d("RadialService", "    Option: ", option);
+			Log.d("RadialService", "    Option: %s", option);
 	}
 	
 }
