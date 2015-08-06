@@ -25,7 +25,7 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package resources;
+package resources.radial;
 
 public class RadialOption {
 	
@@ -38,11 +38,15 @@ public class RadialOption {
 		
 	}
 	
-	public RadialOption(String text, int id, int parentId, int optionType) {
-		this.text = text;
-		this.id = id;
+	public RadialOption(int parentId, RadialItem id) {
+		this(parentId, id.getId(), id.getOptionType(), id.getText());
+	}
+	
+	public RadialOption(int parentId, int id, int optionType, String text) {
 		this.parentId = parentId;
+		this.id = id;
 		this.optionType = optionType;
+		this.text = text;
 	}
 	
 	public void setParentId(byte parentId) { this.parentId = parentId; }

@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import resources.RadialOption;
 import resources.control.Intent;
 import resources.control.Service;
 import network.packets.swg.zone.object_controller.ObjectMenuRequest;
@@ -13,10 +12,10 @@ import intents.network.GalacticPacketIntent;
 import intents.radial.RadialRegisterIntent;
 import intents.radial.RadialRequestIntent;
 import intents.radial.RadialResponseIntent;
-import intents.radial.RadialUnregisterIntent;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
+import resources.radial.RadialOption;
 import resources.server_info.Log;
 
 public class RadialService extends Service {
@@ -32,7 +31,6 @@ public class RadialService extends Service {
 		registerForIntent(GalacticPacketIntent.TYPE);
 		registerForIntent(RadialResponseIntent.TYPE);
 		registerForIntent(RadialRegisterIntent.TYPE);
-		registerForIntent(RadialUnregisterIntent.TYPE);
 		return super.initialize();
 	}
 	
@@ -46,9 +44,11 @@ public class RadialService extends Service {
 		} else if (i instanceof RadialResponseIntent) {
 			onResponse((RadialResponseIntent) i);
 		} else if (i instanceof RadialRegisterIntent) {
-			templatesRegistered.addAll(((RadialRegisterIntent) i).getTemplates());
-		} else if (i instanceof RadialUnregisterIntent) {
-			templatesRegistered.removeAll(((RadialUnregisterIntent) i).getTemplates());
+			if (((RadialRegisterIntent) i).isRegister()) {
+				templatesRegistered.addAll(((RadialRegisterIntent) i).getTemplates());
+			} else {
+				templatesRegistered.removeAll(((RadialRegisterIntent) i).getTemplates());
+			}
 		}
 	}
 	
@@ -94,7 +94,7 @@ public class RadialService extends Service {
 		player.sendPacket(menuResponse);
 		Log.d("RadialService", "Options: " + options.size());
 		for (RadialOption option : options)
-			Log.d("RadialService", "    Option: %s %d %d %d", option.getText(), option.getParentId(), option.getId(), option.getOptionType());
+			Log.d("RadialService", "    Option: ", option);
 	}
 	
 }

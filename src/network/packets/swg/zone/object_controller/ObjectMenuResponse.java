@@ -31,7 +31,7 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
-import resources.RadialOption;
+import resources.radial.RadialOption;
 
 public class ObjectMenuResponse extends ObjectController {
 	
