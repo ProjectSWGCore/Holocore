@@ -1,4 +1,4 @@
-var execute = function(objManager, player, target, args) {
+var execute = function(galManager, player, target, args) {
 	var ChatAvatarRequestIntent = Java.type("intents.chat.ChatAvatarRequestIntent");
 	var RequestType = Java.type("intents.chat.ChatAvatarRequestIntent.RequestType");
 	var ProsePackage = Java.type("resources.encodables.ProsePackage");
@@ -22,4 +22,4 @@ var execute = function(objManager, player, target, args) {
 	}
 	
 	new ChatAvatarRequestIntent(player, name, RequestType.FRIEND_REMOVE_TARGET).broadcast();
-}
+};

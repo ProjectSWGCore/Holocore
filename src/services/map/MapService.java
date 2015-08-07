@@ -69,13 +69,15 @@ public class MapService extends Service {
 		staticMapLocations = new ConcurrentHashMap<>();
 		dynamicMapLocations = new ConcurrentHashMap<>();
 		persistentMapLocations = new ConcurrentHashMap<>();
+		// Needs to be done here as ObjectManager is initialized before MapService otherwise there won't be any map locations
+		// for objects loaded from the databases, snapshots, buildouts.
+		loadMapCategories();
+		loadMappingTemplates();
 	}
 
 	@Override
 	public boolean initialize() {
 		registerForIntent(GalacticPacketIntent.TYPE);
-		loadMapCategories();
-		loadMappingTemplates();
 		loadStaticCityPoints();
 		return super.initialize();
 	}

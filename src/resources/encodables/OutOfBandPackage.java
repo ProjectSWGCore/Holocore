@@ -34,6 +34,7 @@ import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -48,9 +49,9 @@ public class OutOfBandPackage implements Encodable, Serializable {
 		packages = new ArrayList<>(5);
 	}
 
-	public OutOfBandPackage(OutOfBandData outOfBandData) {
+	public OutOfBandPackage(OutOfBandData... outOfBandData) {
 		this();
-		packages.add(outOfBandData);
+		Collections.addAll(packages, outOfBandData);
 	}
 
 	public List<OutOfBandData> getPackages() {
