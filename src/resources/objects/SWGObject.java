@@ -751,8 +751,9 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		}
 	}
 	
-	public void updateObjectAwareness(List <SWGObject> withinRange) {
+	public void updateObjectAwareness(Set <SWGObject> withinRange) {
 		synchronized (objectsAware) {
+			withinRange.addAll(getObservers());
 			Set <SWGObject> outOfRange = new HashSet<>(objectsAware);
 			outOfRange.removeAll(withinRange);
 			for (SWGObject o : outOfRange) {
