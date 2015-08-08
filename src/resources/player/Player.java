@@ -215,6 +215,8 @@ public class Player implements Serializable, Comparable<Player> {
 	
 	@Override
 	public int hashCode() {
+		if (creatureObject == null)
+			return getUserId();
 		return Long.valueOf(creatureObject.getObjectId()).hashCode() ^ getUserId();
 	}
 	
