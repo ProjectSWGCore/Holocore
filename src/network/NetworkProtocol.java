@@ -94,8 +94,9 @@ public class NetworkProtocol implements InboundEventCallback {
 	public List <Packet> process(byte [] data) {
 		inbound.onReceive(data);
 		List <Packet> packets = new LinkedList<Packet>();
-		while (inbound.hasInbound())
+		while (inbound.hasInbound()) {
 			process(packets, inbound.pollInbound());
+		}
 		return packets;
 	}
 	
@@ -103,10 +104,10 @@ public class NetworkProtocol implements InboundEventCallback {
 		if (packet == null)
 			throw new NullPointerException("Inbound packet cannot be null!");
 		packets.add(packet);
-		if (packet instanceof Acknowledge)
-			outbound.onAcknowledge(((Acknowledge) packet).getSequence());
-		else if (packet instanceof OutOfOrder)
+		if (packet instanceof OutOfOrder)
 			outbound.onOutOfOrder(((OutOfOrder) packet).getSequence());
+		else if (packet instanceof Acknowledge)
+			outbound.onAcknowledge(((Acknowledge) packet).getSequence());
 		else if (packet instanceof ClientNetworkStatusUpdate)
 			processClientNetworkUpdate((ClientNetworkStatusUpdate) packet);
 		flushAssembled();
