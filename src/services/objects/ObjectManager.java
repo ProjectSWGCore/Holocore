@@ -408,7 +408,7 @@ public class ObjectManager extends Manager {
 		if (transform == null)
 			return;
 		Location newLocation = transform.getLocation();
-		newLocation.setTerrain(obj.getLocation().getTerrain());
+		newLocation.setTerrain(obj.getTerrain());
 		objectAwareness.move(obj, newLocation);
 		obj.sendDataTransforms(transform);
 
@@ -418,7 +418,7 @@ public class ObjectManager extends Manager {
 	
 	private void moveObject(SWGObject obj, DataTransformWithParent transformWithParent) {
 		Location newLocation = transformWithParent.getLocation();
-		newLocation.setTerrain(obj.getLocation().getTerrain());
+		newLocation.setTerrain(obj.getTerrain());
 		SWGObject parent = objectMap.get(transformWithParent.getCellId());
 		if (parent == null) {
 			System.err.println("ObjectManager: Could not find parent for transform! Cell: " + transformWithParent.getCellId());
