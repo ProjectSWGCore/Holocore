@@ -46,6 +46,7 @@ import resources.player.PlayerState;
 import resources.server_info.Log;
 import utilities.ThreadUtilities;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -61,13 +62,13 @@ public class ConnectionService extends Service {
 	private final ScheduledExecutorService updateService;
 	private final Runnable updateRunnable;
 	private final Runnable disappearRunnable;
-	private final LinkedHashSet <DisappearPlayer> disappearPlayers;
+	private final Set <DisappearPlayer> disappearPlayers;
 	private final Set <Player> zonedInPlayers;
 	
 	public ConnectionService() {
 		updateService = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("conn-update-service"));
 		zonedInPlayers = new LinkedHashSet<Player>();
-		disappearPlayers = new LinkedHashSet<DisappearPlayer>();
+		disappearPlayers = new HashSet<DisappearPlayer>();
 		updateRunnable = new Runnable() {
 			public void run() {
 				synchronized (zonedInPlayers) {
@@ -89,10 +90,10 @@ public class ConnectionService extends Service {
 					Iterator<DisappearPlayer> iter = disappearPlayers.iterator();
 					while (iter.hasNext()) {
 						DisappearPlayer p = iter.next();
-						if ((System.nanoTime()-p.getTime())/1E6 >= DISAPPEAR_THRESHOLD)
+						if ((System.nanoTime()-p.getTime())/1E6 >= DISAPPEAR_THRESHOLD) {
 							disappear(p.getPlayer(), DisconnectReason.TIMEOUT);
-						else
 							iter.remove();
+						}
 					}
 				}
 			}
