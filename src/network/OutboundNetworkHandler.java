@@ -30,6 +30,7 @@ package network;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.concurrent.TimeUnit;
 
 import resources.SortedLinkedList;
 import network.encryption.Encryption;
@@ -42,6 +43,8 @@ import network.packets.soe.SessionResponse;
 import network.packets.swg.SWGPacket;
 
 public class OutboundNetworkHandler {
+	
+	private static final long RESEND_TIMEOUT = TimeUnit.MILLISECONDS.toMillis(3000);
 	
 	private final Queue <byte []> assembleQueue;
 	private final SortedLinkedList <SequencedPacket> sequenced;
@@ -104,6 +107,7 @@ public class OutboundNetworkHandler {
 				} else if (!sp.isSent() || sp.getSequence() == sequence) {
 					pushAssembledUnencrypted(sp.getPacket()); // Pre-encrypted before putting into list
 					sp.setSent(true);
+					sp.updateSent();
 				}
 			}
 		}
@@ -118,6 +122,18 @@ public class OutboundNetworkHandler {
 	public synchronized byte [] pollAssembled() {
 		synchronized (assembleQueue) {
 			return assembleQueue.poll();
+		}
+	}
+	
+	public synchronized void resendOldUnacknowledged() {
+		synchronized (sequenced) {
+			for (SequencedPacket packet : sequenced) {
+				if (packet.hasBeen(RESEND_TIMEOUT)) {
+					pushAssembledUnencrypted(packet.getPacket()); // Pre-encrypted before putting into list
+					packet.setSent(true);
+					packet.updateSent();
+				}
+			}
 		}
 	}
 	
@@ -229,11 +245,13 @@ public class OutboundNetworkHandler {
 	private static class SequencedPacket implements Comparable <SequencedPacket> {
 		private final short sequence;
 		private final byte [] packet;
+		private long sentTime;
 		private boolean sent;
 		
 		public SequencedPacket(short sequence, byte [] packet) {
 			this.sequence = sequence;
 			this.packet = packet;
+			this.sentTime = System.nanoTime();
 			sent = false;
 		}
 		
@@ -251,6 +269,18 @@ public class OutboundNetworkHandler {
 		
 		public void setSent(boolean sent) {
 			this.sent = sent;
+		}
+		
+		public boolean hasBeen(double milliseconds) {
+			return hasBeen() >= milliseconds;
+		}
+		
+		public double hasBeen() {
+			return (System.nanoTime() - sentTime) / 1E6;
+		}
+		
+		public void updateSent() {
+			sentTime = System.nanoTime();
 		}
 		
 		@Override

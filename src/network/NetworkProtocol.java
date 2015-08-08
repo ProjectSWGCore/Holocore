@@ -91,6 +91,11 @@ public class NetworkProtocol implements InboundEventCallback {
 		outbound.reset();
 	}
 	
+	public void resendOldUnacknowledged() {
+		outbound.resendOldUnacknowledged();
+		flushAssembled();
+	}
+	
 	public List <Packet> process(byte [] data) {
 		inbound.onReceive(data);
 		List <Packet> packets = new LinkedList<Packet>();
