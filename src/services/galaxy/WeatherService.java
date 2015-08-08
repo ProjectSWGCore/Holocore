@@ -92,7 +92,7 @@ public final class WeatherService extends Service {
 	
 	private final void handleZoneIn(PlayerEventIntent pei) {
 		Player p = pei.getPlayer();
-		Terrain t = p.getCreatureObject().getLocation().getTerrain();
+		Terrain t = p.getCreatureObject().getTerrain();
 		
 		p.sendPacket(constructWeatherPacket(t));
 	}

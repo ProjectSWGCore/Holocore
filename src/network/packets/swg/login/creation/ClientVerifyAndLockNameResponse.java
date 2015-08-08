@@ -51,6 +51,8 @@ public class ClientVerifyAndLockNameResponse extends SWGPacket {
 		if (!super.decode(data, CRC))
 			return;
 		name = getUnicode(data);
+		getAscii(data); // ui
+		getInt(data);
 		error = ErrorMessage.valueOf(getAscii(data).toUpperCase());
 	}
 	

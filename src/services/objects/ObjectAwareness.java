@@ -28,9 +28,11 @@
 package services.objects;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import network.packets.swg.zone.UpdateContainmentMessage;
 import resources.Location;
@@ -139,7 +141,7 @@ public class ObjectAwareness {
 		Location l = obj.getWorldLocation();
 		if (invalidLocation(l))
 			return;
-		List <SWGObject> objectAware = new LinkedList<SWGObject>();
+		Set <SWGObject> objectAware = new HashSet<SWGObject>();
 		QuadTree <SWGObject> tree = getTree(l);
 		synchronized (tree) {
 			List <SWGObject> range = tree.getWithinRange(l.getX(), l.getZ(), AWARE_RANGE);

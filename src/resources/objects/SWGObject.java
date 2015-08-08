@@ -634,10 +634,14 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	}
 	
 	private Set<SWGObject> getObservers(SWGObject childObject) {
+		return getObserversFromSet(objectsAware, childObject);
+	}
+	
+	private Set<SWGObject> getObserversFromSet(Set<SWGObject> aware, SWGObject childObject) {
 		if (getParent() == null) {
 			Set<SWGObject> observers = new HashSet<>();
-			synchronized (objectsAware) {
-				for (SWGObject obj : objectsAware) {
+			synchronized (aware) {
+				for (SWGObject obj : aware) {
 					Player p = obj.getOwner();
 					if (childObject.isValidPlayer(p))
 						observers.add(obj);
@@ -648,7 +652,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 			childObject.getChildrenObservers(observers, this);
 			return observers;
 		} else {
-			return getParent().getObservers(childObject); // Search for top level parent
+			return getParent().getObserversFromSet(aware, childObject); // Search for top level parent
 		}
 	}
 	
@@ -751,15 +755,21 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		}
 	}
 	
-	public void updateObjectAwareness(List <SWGObject> withinRange) {
+	public void updateObjectAwareness(Set <SWGObject> withinRange) {
 		synchronized (objectsAware) {
+			Set<SWGObject> observers = getObserversFromSet(withinRange, this);
 			Set <SWGObject> outOfRange = new HashSet<>(objectsAware);
 			outOfRange.removeAll(withinRange);
+			outOfRange.removeAll(observers);
 			for (SWGObject o : outOfRange) {
 				awarenessOutOfRange(o);
 				o.awarenessOutOfRange(this);
 			}
 			for (SWGObject o : withinRange) {
+				awarenessInRange(o);
+				o.awarenessInRange(this);
+			}
+			for (SWGObject o : observers) {
 				awarenessInRange(o);
 				o.awarenessInRange(this);
 			}

@@ -547,7 +547,7 @@ public class ChatRoomService extends Service {
 			}
 		}
 
-		Terrain terrain = player.getCreatureObject().getLocation().getTerrain();
+		Terrain terrain = player.getCreatureObject().getTerrain();
 
 		// Enter the new zone-only chat channels
 		String planetPath = "SWG." + player.getGalaxyName() + "." + terrain.getName() + ".";
