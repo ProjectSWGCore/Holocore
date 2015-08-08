@@ -35,7 +35,7 @@ public class Command {
 	// defaultPriority
 	private String scriptCallback;
 	// fail
-	private Class javaCallback;
+	private Class<? extends ICmdCallback> javaCallback;
 	// fail
 	private float defaultTime;
 	private String characterAbility;
@@ -74,7 +74,7 @@ public class Command {
 	public void setName(String name) { this.name = name; }
 	public String getScriptCallback() { return scriptCallback; }
 	public void setScriptCallback(String scriptCallback) { this.scriptCallback = scriptCallback; }
-	public Class getJavaCallback() { return javaCallback; }
+	public Class<? extends ICmdCallback> getJavaCallback() { return javaCallback; }
 	public <T extends ICmdCallback> void setJavaCallback(Class<T> javaCallback) { this.javaCallback = javaCallback; }
 	public boolean hasJavaCallback() { return javaCallback != null; }
 	public float getDefaultTime() { return defaultTime; }
