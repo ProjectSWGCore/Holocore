@@ -47,8 +47,8 @@ import resources.server_info.Log;
 import utilities.ThreadUtilities;
 
 import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -61,13 +61,13 @@ public class ConnectionService extends Service {
 	private final ScheduledExecutorService updateService;
 	private final Runnable updateRunnable;
 	private final Runnable disappearRunnable;
-	private final LinkedList <DisappearPlayer> disappearPlayers;
-	private final List <Player> zonedInPlayers;
+	private final LinkedHashSet <DisappearPlayer> disappearPlayers;
+	private final Set <Player> zonedInPlayers;
 	
 	public ConnectionService() {
 		updateService = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("conn-update-service"));
-		zonedInPlayers = new LinkedList<Player>();
-		disappearPlayers = new LinkedList<DisappearPlayer>();
+		zonedInPlayers = new LinkedHashSet<Player>();
+		disappearPlayers = new LinkedHashSet<DisappearPlayer>();
 		updateRunnable = new Runnable() {
 			public void run() {
 				synchronized (zonedInPlayers) {
@@ -85,16 +85,15 @@ public class ConnectionService extends Service {
 		};
 		disappearRunnable = new Runnable() {
 			public void run() {
-				DisappearPlayer p = null;
 				synchronized (disappearPlayers) {
-					p = disappearPlayers.poll();
-				}
-				if (p == null)
-					return;
-				if ((System.nanoTime()-p.getTime())/1E6 >= DISAPPEAR_THRESHOLD) {
-					disappear(p.getPlayer(), DisconnectReason.TIMEOUT);
-				} else {
-					disappearPlayers.addFirst(p);
+					Iterator<DisappearPlayer> iter = disappearPlayers.iterator();
+					while (iter.hasNext()) {
+						DisappearPlayer p = iter.next();
+						if ((System.nanoTime()-p.getTime())/1E6 >= DISAPPEAR_THRESHOLD)
+							disappear(p.getPlayer(), DisconnectReason.TIMEOUT);
+						else
+							iter.remove();
+					}
 				}
 			}
 		};
@@ -196,14 +195,7 @@ public class ConnectionService extends Service {
 	
 	private void removeFromLists(Player player) {
 		synchronized (zonedInPlayers) {
-			Iterator <Player> zonedIterator = zonedInPlayers.iterator();
-			while (zonedIterator.hasNext()) {
-				Player old = zonedIterator.next();
-				CreatureObject oldObj = old.getCreatureObject();
-				if (oldObj == null || player.equals(old) || player == old) {
-					zonedIterator.remove();
-				}
-			}
+			zonedInPlayers.remove(player);
 		}
 		removeFromDisappear(player);
 	}
@@ -291,6 +283,20 @@ public class ConnectionService extends Service {
 		
 		public long getTime() { return time; }
 		public Player getPlayer() { return player; }
+		
+		@Override
+		public boolean equals(Object o) {
+			if (o == null)
+				return false;
+			if (!(o instanceof DisappearPlayer))
+				return false;
+			return ((DisappearPlayer) o).getPlayer().equals(player);
+		}
+		
+		@Override
+		public int hashCode() {
+			return player.hashCode();
+		}
 	}
 	
 }
