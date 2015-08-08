@@ -765,8 +765,11 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 				awarenessOutOfRange(o);
 				o.awarenessOutOfRange(this);
 			}
-			withinRange.addAll(observers);
 			for (SWGObject o : withinRange) {
+				awarenessInRange(o);
+				o.awarenessInRange(this);
+			}
+			for (SWGObject o : observers) {
 				awarenessInRange(o);
 				o.awarenessInRange(this);
 			}
