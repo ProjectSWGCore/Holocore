@@ -46,14 +46,18 @@ var handleSelection = function(player, target, selection) {
 		}
 		case RadialItem.BANK_WITHDRAW_ALL: {
 			creature = player.getCreatureObject();
-			creature.setCashBalance(creature.getCashBalance() + creature.getBankBalance());
+			amount = creature.getBankBalance();
+			creature.setCashBalance(creature.getCashBalance() + amount);
 			creature.setBankBalance(0);
+			intentFactory.sendSystemMessage(player, "You successfully withdraw " + amount + " credits from your account.");
 			break;
 		}
 		case RadialItem.BANK_DEPOSIT_ALL: {
 			creature = player.getCreatureObject();
-			creature.setBankBalance(creature.getCashBalance() + creature.getBankBalance());
+			amount = creature.getCashBalance();
+			creature.setBankBalance(amount + creature.getBankBalance());
 			creature.setCashBalance(0);
+			intentFactory.sendSystemMessage(player, "You successfully deposit " + amount + " credits to your account.");
 			break;
 		}
 	}
@@ -63,6 +67,7 @@ var callback = function(player, creature, eventId, dataStrings) {
 		case 0:
 			creature.setCashBalance(Number(dataStrings[0]));
 			creature.setBankBalance(Number(dataStrings[1]));
+			intentFactory.sendSystemMessage(player, '@base_player:bank_success')
 			break;
 	}
 };
