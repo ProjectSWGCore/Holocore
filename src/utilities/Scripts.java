@@ -47,6 +47,7 @@ public class Scripts {
 		try {
 			ENGINE.eval("var RadialOption = Java.type('resources.radial.RadialOption')");
 			ENGINE.eval("var RadialItem = Java.type('resources.radial.RadialItem')");
+			ENGINE.eval("var Log = Java.type('resources.server_info.Log')");
 		} catch (ScriptException e) {
 			e.printStackTrace();
 		}

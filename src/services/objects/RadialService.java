@@ -6,17 +6,22 @@ import java.util.Set;
 
 import resources.control.Intent;
 import resources.control.Service;
+import network.packets.swg.zone.ObjectMenuSelect;
+import network.packets.swg.zone.object_controller.CommandQueueEnqueue;
 import network.packets.swg.zone.object_controller.ObjectMenuRequest;
 import network.packets.swg.zone.object_controller.ObjectMenuResponse;
 import intents.network.GalacticPacketIntent;
 import intents.radial.RadialRegisterIntent;
 import intents.radial.RadialRequestIntent;
 import intents.radial.RadialResponseIntent;
+import intents.radial.RadialSelectionIntent;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
+import resources.radial.RadialItem;
 import resources.radial.RadialOption;
 import resources.server_info.Log;
+import services.galaxy.GalacticManager;
 
 public class RadialService extends Service {
 	
@@ -40,6 +45,8 @@ public class RadialService extends Service {
 			GalacticPacketIntent gpi = (GalacticPacketIntent) i;
 			if (gpi.getPacket() instanceof ObjectMenuRequest) {
 				onRequest(gpi.getObjectManager(), (ObjectMenuRequest) gpi.getPacket());
+			} else if (gpi.getPacket() instanceof ObjectMenuSelect) {
+				onSelection(gpi.getGalacticManager(), gpi.getNetworkId(), (ObjectMenuSelect) gpi.getPacket());
 			}
 		} else if (i instanceof RadialResponseIntent) {
 			onResponse((RadialResponseIntent) i);
@@ -83,6 +90,26 @@ public class RadialService extends Service {
 	private void onResponse(RadialResponseIntent response) {
 		Player player = response.getPlayer();
 		sendResponse(player, response.getTarget(), response.getOptions(), response.getCounter());
+	}
+	
+	private void onSelection(GalacticManager galacticManager, long networkId, ObjectMenuSelect select) {
+		Player player = galacticManager.getPlayerManager().getPlayerFromNetworkId(networkId);
+		SWGObject target = galacticManager.getObjectManager().getObjectById(select.getObjectId());
+		if (target == null) {
+			Log.e("RadialService", "Selection target [%d] does not exist!", select.getObjectId());
+			return;
+		}
+		if (player == null) {
+			Log.e("RadialService", "Selection requestor does not exist! Target: [%d] %s", target.getObjectId(), target.getTemplate());
+			return;
+		}
+		RadialItem selection = RadialItem.getFromId(select.getSelection());
+		if (selection == null) {
+			Log.e("RadialService", "RadialItem does not exist with selection id: %d", select.getSelection());
+			return;
+		}
+		Log.d("RadialService", "%s selected %s for target %s", player, selection, target);
+		new RadialSelectionIntent(player, target, selection).broadcast();
 	}
 	
 	private void sendResponse(Player player, SWGObject target, List<RadialOption> options, int counter) {

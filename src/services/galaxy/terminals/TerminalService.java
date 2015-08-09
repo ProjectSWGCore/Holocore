@@ -3,6 +3,7 @@ package services.galaxy.terminals;
 import intents.radial.RadialRegisterIntent;
 import intents.radial.RadialRequestIntent;
 import intents.radial.RadialResponseIntent;
+import intents.radial.RadialSelectionIntent;
 
 import java.io.FileNotFoundException;
 import java.sql.PreparedStatement;
@@ -41,10 +42,11 @@ public class TerminalService extends Service {
 		getAllTemplatesStatement = iffDatabase.prepareStatement(GET_ALL_TEMPLATES_SQL);
 		getScriptForIffStatement = iffDatabase.prepareStatement(GET_SCRIPT_FOR_IFF_SQL);
 	}
-
+	
 	@Override
 	public boolean initialize() {
 		registerForIntent(RadialRequestIntent.TYPE);
+		registerForIntent(RadialSelectionIntent.TYPE);
 		synchronized (getAllTemplatesStatement) {
 			// Cool and fancy Java thing to auto-cleanup resources
 			try (ResultSet set = getAllTemplatesStatement.executeQuery()) {
@@ -73,17 +75,26 @@ public class TerminalService extends Service {
 	
 	@Override
 	public void onIntentReceived(Intent i) {
-		if (i instanceof RadialRequestIntent) {
-			RadialRequestIntent rri = (RadialRequestIntent) i;
-			String script = lookupScript(rri.getTarget().getTemplate());
-			if (script == null)
-				return;
-			List<RadialOption> options = Radials.getRadialOptions(script);
-			if (options == null) {
-				Log.e("TerminalService", "Radial script '%s' had an error in executing.", script);
-				return;
-			}
-			new RadialResponseIntent(rri.getPlayer(), rri.getTarget(), options, rri.getRequest().getCounter()).broadcast();
+		switch (i.getType()) {
+			case RadialRequestIntent.TYPE:
+				if (i instanceof RadialRequestIntent) {
+					RadialRequestIntent rri = (RadialRequestIntent) i;
+					String script = lookupScript(rri.getTarget().getTemplate());
+					if (script == null)
+						return;
+					List<RadialOption> options = Radials.getRadialOptions(script, rri.getPlayer(), rri.getTarget());
+					new RadialResponseIntent(rri.getPlayer(), rri.getTarget(), options, rri.getRequest().getCounter()).broadcast();
+				}
+				break;
+			case RadialSelectionIntent.TYPE:
+				if (i instanceof RadialSelectionIntent) {
+					RadialSelectionIntent rsi = (RadialSelectionIntent) i;
+					String script = lookupScript(rsi.getTarget().getTemplate());
+					if (script == null)
+						return;
+					Radials.handleSelection(script, rsi.getPlayer(), rsi.getTarget(), rsi.getSelection());
+				}
+				break;
 		}
 	}
 	
@@ -95,6 +106,8 @@ public class TerminalService extends Service {
 				set = getScriptForIffStatement.executeQuery();
 				if (set.next())
 					return set.getString("script");
+				else
+					Log.e("RadialService", "Cannot find script for template: " + iff);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} finally {
