@@ -85,7 +85,7 @@ public class ObjectMenuResponse extends ObjectController {
 		int optionsDataSize = 0;
 		for (RadialOption o : options) {
 			optionsDataSize += 9;
-			if (o.getText() != null || !o.getText().isEmpty())
+			if (o.getText() != null && !o.getText().isEmpty())
 				optionsDataSize += o.getText().length()*2;
 			else
 				optionsDataSize += 4;

@@ -33,6 +33,7 @@ import java.io.FileReader;
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 
 public class Scripts {
 
@@ -43,6 +44,12 @@ public class Scripts {
 	
 	static {
 		ENGINE.put("intentFactory", new IntentFactory());
+		try {
+			ENGINE.eval("var RadialOption = Java.type('resources.radial.RadialOption')");
+			ENGINE.eval("var RadialItem = Java.type('resources.radial.RadialItem')");
+		} catch (ScriptException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	// Prevents instantiation.
