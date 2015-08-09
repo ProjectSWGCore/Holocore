@@ -58,7 +58,6 @@ import resources.control.Intent;
 import resources.control.Manager;
 import resources.network.ServerType;
 import resources.network.UDPServer.UDPPacket;
-import resources.server_info.Log;
 import utilities.ThreadUtilities;
 
 public class NetworkClientManager extends Manager implements PacketReceiver {
