@@ -118,6 +118,8 @@ public enum RadialItem {
 	SERVER_MENU2					(0x006F, ""),
 	BANK_TRANSFER					(0x0070, "@sui:bank_credits"),
 	BANK_ITEMS						(0x0071, "@sui:bank_items"),
+	BANK_WITHDRAW_ALL				(0x0072, "@sui:bank_withdrawall"),
+	BANK_DEPOSIT_ALL				(0x0073, "@sui:bank_depositall"),
 	SERVER_PET_MOUNT				(0x011F, ""),
 	SERVER_VEHICLE_ENTER_EXIT		(0x0124, "");
 	

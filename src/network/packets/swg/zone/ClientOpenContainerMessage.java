@@ -38,11 +38,12 @@ public class ClientOpenContainerMessage extends SWGPacket {
 	private String slot;
 
 	public ClientOpenContainerMessage() {
-		this(0);
+		this(0, "");
 	}
 	
-	public ClientOpenContainerMessage(long containerId) {
+	public ClientOpenContainerMessage(long containerId, String slot) {
 		this.containerId = containerId;
+		this.slot = slot;
 	}
 	
 	public ClientOpenContainerMessage(ByteBuffer data) {
@@ -52,7 +53,6 @@ public class ClientOpenContainerMessage extends SWGPacket {
 	public void decode(ByteBuffer data) {
 		if (!super.decode(data, CRC))
 			return;
-		getInt(data);
 		containerId = getLong(data);
 		slot		= getAscii(data);
 	}
@@ -61,7 +61,6 @@ public class ClientOpenContainerMessage extends SWGPacket {
 		ByteBuffer data = ByteBuffer.allocate(20 + slot.length());
 		addShort(data, 2);
 		addInt  (data, CRC);
-		addInt  (data, 0);
 		addLong (data, containerId);
 		addAscii(data, slot);
 		return data;

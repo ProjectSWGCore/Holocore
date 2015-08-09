@@ -7,7 +7,6 @@ import java.util.Set;
 import resources.control.Intent;
 import resources.control.Service;
 import network.packets.swg.zone.ObjectMenuSelect;
-import network.packets.swg.zone.object_controller.CommandQueueEnqueue;
 import network.packets.swg.zone.object_controller.ObjectMenuRequest;
 import network.packets.swg.zone.object_controller.ObjectMenuResponse;
 import intents.network.GalacticPacketIntent;
@@ -79,10 +78,8 @@ public class RadialService extends Service {
 			return;
 		}
 		if (templatesRegistered.contains(target.getTemplate())) {
-			Log.d("RadialService", "Broadcasting. Service registered for object radial: " + target.getTemplate());
 			new RadialRequestIntent(player, target, request).broadcast();
 		} else {
-			Log.w("RadialService", "No service registered for object radial: " + target.getTemplate());
 			sendResponse(player, target, request.getOptions(), request.getCounter());
 		}
 	}
@@ -108,7 +105,6 @@ public class RadialService extends Service {
 			Log.e("RadialService", "RadialItem does not exist with selection id: %d", select.getSelection());
 			return;
 		}
-		Log.d("RadialService", "%s selected %s for target %s", player, selection, target);
 		new RadialSelectionIntent(player, target, selection).broadcast();
 	}
 	
@@ -119,9 +115,6 @@ public class RadialService extends Service {
 		menuResponse.setRadialOptions(options);
 		menuResponse.setCounter(counter);
 		player.sendPacket(menuResponse);
-		Log.d("RadialService", "Options: " + options.size());
-		for (RadialOption option : options)
-			Log.d("RadialService", "    Option: %s", option);
 	}
 	
 }

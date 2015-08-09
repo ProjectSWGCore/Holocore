@@ -55,7 +55,7 @@ public final class IntentFactory {
 	 * @param target Player receiving the message.
 	 * @param message System message to send.
 	 */
-	private void sendSystemMessage(Player target, String message) {
+	public void sendSystemMessage(Player target, String message) {
 		broadcast(message, target, BroadcastType.PERSONAL);
 	}
 
@@ -65,7 +65,7 @@ public final class IntentFactory {
 	 * @param table Table for the StringId
 	 * @param key Key to use within the StringId
 	 */
-	private void sendSystemMessage(Player target, String table, String key) {
+	public void sendSystemMessage(Player target, String table, String key) {
 		new ChatBroadcastIntent(target, new ProsePackage(table, key)).broadcast();
 	}
 
@@ -84,7 +84,7 @@ public final class IntentFactory {
 	 *                set the %DI to the value of 500 for the StringId.
 	 *                Note that the prose key must always come first and the value for that key must always come second.
 	 */
-	private void sendSystemMessage(Player target, String table, String key, Object... objects) {
+	public void sendSystemMessage(Player target, String table, String key, Object... objects) {
 		new ChatBroadcastIntent(target, new ProsePackage("StringId", new StringId(table, key), objects)).broadcast();
 	}
 
