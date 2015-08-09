@@ -49,7 +49,8 @@ var handleSelection = function(player, target, selection) {
 			amount = creature.getBankBalance();
 			creature.setCashBalance(creature.getCashBalance() + amount);
 			creature.setBankBalance(0);
-			intentFactory.sendSystemMessage(player, "You successfully withdraw " + amount + " credits from your account.");
+			if (amount > 0)
+				intentFactory.sendSystemMessage(player, "You successfully withdraw " + amount + " credits from your account.");
 			break;
 		}
 		case RadialItem.BANK_DEPOSIT_ALL: {
@@ -57,7 +58,8 @@ var handleSelection = function(player, target, selection) {
 			amount = creature.getCashBalance();
 			creature.setBankBalance(amount + creature.getBankBalance());
 			creature.setCashBalance(0);
-			intentFactory.sendSystemMessage(player, "You successfully deposit " + amount + " credits to your account.");
+			if (amount > 0)
+				intentFactory.sendSystemMessage(player, "You successfully deposit " + amount + " credits to your account.");
 			break;
 		}
 	}
