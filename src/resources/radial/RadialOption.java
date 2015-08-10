@@ -27,41 +27,34 @@
 ***********************************************************************************/
 package resources.radial;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class RadialOption {
 	
-	private int id;
-	private int parentId;
-	private int optionType; // 1 unless the option text isn't listed in the radial item list (datatable). - ANHWiki
-	private String text;
+	private RadialItem item;
+	private List<RadialOption> children;
 	
 	public RadialOption() {
-		
+		this.children = new ArrayList<>();
 	}
 	
-	public RadialOption(int parentId, RadialItem id) {
-		this(parentId, id.getId(), id.getOptionType(), id.getText());
+	public RadialOption(RadialItem item) {
+		this.item = item;
+		this.children = new ArrayList<>();
 	}
 	
-	public RadialOption(int parentId, int id, int optionType, String text) {
-		this.parentId = parentId;
-		this.id = id;
-		this.optionType = optionType;
-		this.text = text;
-	}
+	public void setItem(RadialItem item) { this.item = item; }
+	public void addChild(RadialOption option) { this.children.add(option); }
 	
-	public void setParentId(byte parentId) { this.parentId = parentId; }
-	public void setId(short id) { this.id = id; }
-	public void setOptionType(byte optionType) { this.optionType = optionType; }
-	public void setText(String text) { this.text = text; }
-	
-	public int getParentId() { return parentId; }
-	public int getId() { return id; }
-	public int getOptionType() { return optionType; }
-	public String getText() { return text; }
+	public int getId() { return item.getId(); }
+	public int getOptionType() { return item.getOptionType(); }
+	public String getText() { return item.getText(); }
+	public List<RadialOption> getChildren() { return children; }
 	
 	@Override
 	public String toString() { 
-		return String.format("ID=%d Parent=%d Option=%d Text=%s", id, parentId, optionType, text); 
+		return String.format("ID=%d Option=%d Text=%s", getId(), getOptionType(), getText()); 
 	}
 	
 }

@@ -59,7 +59,7 @@ public class RadialService extends Service {
 	}
 	
 	private void onRequest(ObjectManager objectManager, ObjectMenuRequest request) {
-		SWGObject requestor = objectManager.getObjectById(request.getRequesterId());
+		SWGObject requestor = objectManager.getObjectById(request.getRequestorId());
 		SWGObject target = objectManager.getObjectById(request.getTargetId());
 		if (target == null) {
 			System.err.println(requestor + " requested a null target! ID: " + request.getTargetId());

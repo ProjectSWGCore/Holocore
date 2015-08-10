@@ -28,29 +28,30 @@
 package network.packets.swg.zone.object_controller;
 
 import java.nio.ByteBuffer;
-import java.util.ArrayList;
 import java.util.List;
 
 import resources.radial.RadialOption;
+import resources.radial.RadialOptionList;
 
 public class ObjectMenuResponse extends ObjectController {
 	
 	public static final int CRC = 0x0147;
 	
+	private RadialOptionList options;
 	private long targetId;
 	private long requestorId;
-	private List <RadialOption> options;
 	private int counter;
 	
 	public ObjectMenuResponse(long objectId) {
 		super(objectId, CRC);
+		this.options = new RadialOptionList();
 	}
 	
 	public ObjectMenuResponse(long objectId, long targetId, long requestorId, List<RadialOption> options, int counter) {
 		super(objectId, CRC);
 		this.targetId = targetId;
 		this.requestorId = requestorId;
-		this.options = options;
+		this.options = new RadialOptionList(options);
 		this.counter = counter;
 		setTargetId(targetId);
 		setRequestorId(requestorId);
@@ -60,7 +61,7 @@ public class ObjectMenuResponse extends ObjectController {
 	
 	public ObjectMenuResponse(ByteBuffer data) {
 		super(CRC);
-		options = new ArrayList<>();
+		this.options = new RadialOptionList();
 		decode(data);
 	}
 	
@@ -68,46 +69,16 @@ public class ObjectMenuResponse extends ObjectController {
 		decodeHeader(data);
 		targetId = getLong(data);
 		requestorId = getLong(data);
-		int optionCount = getInt(data);
-		for (int i = 0; i < optionCount; i++) {
-			RadialOption option = new RadialOption();
-			getByte(data); // option number
-			option.setParentId(getByte(data));
-			option.setId(getShort(data));
-			option.setOptionType(getByte(data));
-			option.setText(getUnicode(data));
-			options.add(option);
-		}
+		options = getEncodable(data, RadialOptionList.class);
 		counter = getByte(data);
 	}
 	
 	public ByteBuffer encode() {
-		int optionsDataSize = 0;
-		for (RadialOption o : options) {
-			optionsDataSize += 9;
-			if (o.getText() != null && !o.getText().isEmpty())
-				optionsDataSize += o.getText().length()*2;
-			else
-				optionsDataSize += 4;
-		}
-		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + optionsDataSize + 21);
+		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + options.getSize() + 17);
 		encodeHeader(data);
-		
 		addLong(data, targetId);
 		addLong(data, requestorId);
-
-		addInt(data, options.size());
-		for (int i = 0; i < options.size(); i++) {
-			RadialOption option = options.get(i);
-			addByte(data, i + 1);
-			addByte(data, option.getParentId());
-			addShort(data, option.getId());
-			addByte(data, option.getOptionType());
-			if (option.getText() != null || !option.getText().isEmpty())
-				addUnicode(data, option.getText());
-			else
-				data.putInt(0);
-		}
+		addEncodable(data, options);
 		addByte(data, counter);
 		return data;
 	}
@@ -121,7 +92,7 @@ public class ObjectMenuResponse extends ObjectController {
 	}
 	
 	public void setRadialOptions(List<RadialOption> options) {
-		this.options = options;
+		this.options.setOptions(options);
 	}
 	
 	public void setCounter(int counter) {
@@ -137,7 +108,7 @@ public class ObjectMenuResponse extends ObjectController {
 	}
 	
 	public List<RadialOption> getOptions() {
-		return options;
+		return options.getOptions();
 	}
 	
 	public int getCounter() {

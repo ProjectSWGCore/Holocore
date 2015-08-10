@@ -28,79 +28,56 @@
 package network.packets.swg.zone.object_controller;
 
 import java.nio.ByteBuffer;
-import java.util.ArrayList;
 import java.util.List;
-
 import resources.radial.RadialOption;
+import resources.radial.RadialOptionList;
 
 public class ObjectMenuRequest extends ObjectController {
 	
 	public static final int CRC = 0x0146;
 	
 	private long targetId;
-	private long requesterId;
-	private List <RadialOption> options;
+	private long requestorId;
+	private RadialOptionList options;
 	private byte counter;
 	
 	public ObjectMenuRequest(long objectId) {
 		super(objectId, CRC);
-		options = new ArrayList<RadialOption>();
+		options = new RadialOptionList();
 	}
 	
 	public ObjectMenuRequest(ByteBuffer data) {
 		super(CRC);
-		options = new ArrayList<RadialOption>();
+		options = new RadialOptionList();
 		decode(data);
 	}
 	
 	public void decode(ByteBuffer data) {
 		decodeHeader(data);
-		
 		targetId = getLong(data);
-		requesterId = getLong(data);
-		
-		int optionsCount = getInt(data);
-		for (int i = 0; i < optionsCount; i++) {
-			RadialOption option = new RadialOption();
-			getByte(data); // option number
-			option.setParentId(getByte(data));
-			option.setId(getShort(data));
-			option.setOptionType(getByte(data));
-			option.setText(getUnicode(data));
-			options.add(option);
-		}
+		requestorId = getLong(data);
+		options = getEncodable(data, RadialOptionList.class);
 		counter = getByte(data);
 	}
 	
 	public ByteBuffer encode() {
-		int optSize = 21;
-		for (RadialOption option : options)
-			optSize += 7 + option.getText().length()*2;
-		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + optSize);
+		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + options.getSize() + 17);
 		encodeHeader(data);
 		addLong(data, targetId);
-		addLong(data, requesterId);
-		addInt(data, options.size());
-		int optNum = 1;
-		for (RadialOption option : options) {
-			addByte(data, optNum++); // option number
-			addByte(data, option.getParentId());
-			addShort(data, option.getId());
-			addByte(data, option.getOptionType());
-			addUnicode(data, option.getText());
-		}
+		addLong(data, requestorId);
+		addEncodable(data, options);
 		addByte(data, counter);
 		return data;
 	}
 	
 	public long getTargetId() { return targetId; }
-	public long getRequesterId() { return requesterId; }
+	public long getRequestorId() { return requestorId; }
 	public int getCounter() { return counter; }
-	public List <RadialOption> getOptions() { return options; }
+	public List <RadialOption> getOptions() { return options.getOptions(); }
 	
 	public void setTargetId(long targetId) { this.targetId = targetId; }
-	public void setRequesterId(long requesterId) { this.requesterId = requesterId; }
+	public void setRequestorId(long requesterId) { this.requestorId = requesterId; }
 	public void setCounter(byte counter) { this.counter = counter; }
-	public void addOption(RadialOption opt) { options.add(opt); }
+	public void addOption(RadialOption opt) { options.addOption(opt); }
 	
 }

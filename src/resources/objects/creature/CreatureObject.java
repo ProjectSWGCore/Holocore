@@ -71,6 +71,7 @@ public class CreatureObject extends TangibleObject {
 	private CreatureDifficulty	difficulty	= CreatureDifficulty.NORMAL;
 	private int		cashBalance				= 0;
 	private int		bankBalance				= 0;
+	private long	reserveBalance			= 0; // Galactic Reserve - capped at 3 billion
 	private String	moodAnimation			= "neutral";
 	private String	animation				= "";
 	private long	equippedWeaponId		= 0;
@@ -172,6 +173,10 @@ public class CreatureObject extends TangibleObject {
 	public int getBankBalance() {
 		return bankBalance;
 	}
+	
+	public long getReserveBalance() {
+		return reserveBalance;
+	}
 
 	public Posture getPosture() {
 		return posture;
@@ -263,14 +268,58 @@ public class CreatureObject extends TangibleObject {
 		this.race = race;
 	}
 	
-	public void setCashBalance(int cashBalance) {
-		this.cashBalance = cashBalance;
-		sendDelta(1, 1, cashBalance);
+	public void setCashBalance(long cashBalance) {
+		if (cashBalance < 0)
+			cashBalance = 0;
+		if (cashBalance > 2E9) { // 2 billion cap
+			long leftover = cashBalance - (long)2E9;
+			cashBalance = (long) 2E9;
+			long bank = bankBalance + leftover;
+			long reserve = reserveBalance;
+			leftover = bank - (long) 2E9;
+			if (leftover > 0) {
+				bank = (long)2E9;
+				reserve += leftover;
+			}
+			this.cashBalance = (int) cashBalance;
+			sendDelta(1, 1, cashBalance);
+			setBankBalance(bank);
+			setReserveBalance(reserve);
+		} else {
+			this.cashBalance = (int) cashBalance;
+			sendDelta(1, 1, (int) cashBalance);
+		}
 	}
 
-	public void setBankBalance(int bankBalance) {
-		this.bankBalance = bankBalance;
-		sendDelta(1, 0, bankBalance);
+	public void setBankBalance(long bankBalance) {
+		if (bankBalance < 0)
+			bankBalance = 0;
+		if (bankBalance > 2E9) { // 2 billion cap
+			long leftover = bankBalance - (long)2E9;
+			bankBalance = (long) 2E9;
+			long cash = cashBalance + leftover;
+			long reserve = reserveBalance;
+			leftover = cash - (long) 2E9;
+			if (leftover > 0) {
+				cash = (long)2E9;
+				reserve += leftover;
+			}
+			this.bankBalance = (int) bankBalance;
+			sendDelta(1, 0, bankBalance);
+			setCashBalance(cash);
+			setReserveBalance(reserve);
+		} else {
+			this.bankBalance = (int) bankBalance;
+			sendDelta(1, 0, (int) bankBalance);
+		}
+	}
+	
+	public void setReserveBalance(long reserveBalance) {
+		if (reserveBalance < 0)
+			reserveBalance = 0;
+		else if (reserveBalance > 3E9)
+			reserveBalance = (long) 3E9; // 3 billion cap
+		this.reserveBalance = reserveBalance;
 	}
 	
 	public void setMovementScale(double movementScale) {
