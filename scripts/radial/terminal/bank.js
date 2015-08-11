@@ -1,22 +1,23 @@
 var getOptions = function(options, player, target) {
+	// Standard
 	use = new RadialOption(RadialItem.ITEM_USE);
-	use.addChild(new RadialOption(RadialItem.BANK_TRANSFER));
-	use.addChild(new RadialOption(RadialItem.BANK_ITEMS));
 	options.add(use);
 	options.add(new RadialOption(RadialItem.EXAMINE));
 	creature = player.getCreatureObject();
+	// Bank-specific withdraw/deposit
+	use.addChild(new RadialOption(RadialItem.BANK_TRANSFER));
+	use.addChild(new RadialOption(RadialItem.BANK_ITEMS));
 	if (creature.getBankBalance() > 0)
 		use.addChild(new RadialOption(RadialItem.BANK_WITHDRAW_ALL));
 	if (creature.getCashBalance() > 0)
 		use.addChild(new RadialOption(RadialItem.BANK_DEPOSIT_ALL));
-	if (creature.getBankBalance() >= 1E9 || creature.getCashBalance() >= 1E9 || creature.getReserveBalance() > 0) {
-		reserve = new RadialOption(RadialItem.BANK_RESERVE);
-		if (creature.getBankBalance() >= 1E9 || creature.getCashBalance() >= 1E9)
-			reserve.addChild(new RadialOption(RadialItem.BANK_RESERVE_DEPOSIT));
-		if (creature.getReserveBalance() > 0)
-			reserve.addChild(new RadialOption(RadialItem.BANK_RESERVE_WITHDRAW));
-		options.add(reserve);
-	}
+	// Galactic Reserve
+	reserve = new RadialOption(RadialItem.BANK_RESERVE);
+	if (creature.getBankBalance() >= 1E9 || creature.getCashBalance() >= 1E9)
+		reserve.addChild(new RadialOption(RadialItem.BANK_RESERVE_DEPOSIT));
+	if (creature.getReserveBalance() > 0)
+		reserve.addChild(new RadialOption(RadialItem.BANK_RESERVE_WITHDRAW));
+	options.add(reserve);
 };
 var handleSelection = function(player, target, selection) {
 	switch (selection) {
