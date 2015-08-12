@@ -69,7 +69,7 @@ public class ChatPersistentMessageToServer extends SWGPacket {
 		int dataLength = 31 + message.length()*2+oob.length+subject.length()*2+galaxy.length()+recipient.length();
 		ByteBuffer data = ByteBuffer.allocate(dataLength);
 		addUnicode(data, message);
-		addArray(data, oob);
+		addData(data, oob);
 		addInt(data, counter);
 		addUnicode(data, subject);
 		addAscii(data, "SWG");

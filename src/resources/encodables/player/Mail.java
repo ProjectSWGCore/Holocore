@@ -111,7 +111,7 @@ public class Mail implements Encodable, Serializable {
 		ByteBuffer bb = ByteBuffer.allocate(8 + (message.length() * 2) + (subject.length() * 2) + oob.length);
 		Packet.addUnicode(bb, message);
 		Packet.addUnicode(bb, subject);
-		Packet.addArray(bb, oob);
+		Packet.addData(bb, oob);
 
 		return bb.array();
 	}

@@ -51,7 +51,7 @@ public class SuiService extends Service {
 	private Map<Integer, SuiWindow> windows;
 	
 	public SuiService() {
-		windows = new ConcurrentHashMap<Integer, SuiWindow>();
+		windows = new ConcurrentHashMap<>();
 	}
 	
 	@Override
@@ -118,14 +118,14 @@ public class SuiService extends Service {
 		}
 	}
 	
-	private void displayWindow(Player player, SuiWindow wnd) {
+	private void displayWindow(Player player, SuiWindow window) {
 		int id = createWindowId(new Random());
-		wnd.setId(id);
+		window.setId(id);
 		
-		SuiCreatePageMessage packet = new SuiCreatePageMessage(id, wnd.getScript(), wnd.getComponents(), player.getCreatureObject().getObjectId(), wnd.getMaxDistance());
+		SuiCreatePageMessage packet = new SuiCreatePageMessage(window);
 		player.sendPacket(packet);
 		
-		windows.put(id, wnd);
+		windows.put(id, window);
 	}
 	
 	private int createWindowId(Random ran) {
