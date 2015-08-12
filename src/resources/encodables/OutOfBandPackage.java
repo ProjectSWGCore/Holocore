@@ -135,7 +135,6 @@ public class OutOfBandPackage implements Encodable, Serializable {
 		Packet.addByte(bb, data.getOobType().getType());
 		Packet.addInt(bb, data.getOobPosition());
 		Packet.addData(bb, base);
-		bb.put(base);
 
 		for (int i = 0; i < paddingSize; i++) {
 			Packet.addByte(bb, 0);
