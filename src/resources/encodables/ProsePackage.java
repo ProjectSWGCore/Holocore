@@ -86,10 +86,7 @@ public class ProsePackage implements OutOfBandData, Serializable {
 	 */
 	public ProsePackage(Object ... objects) {
 		int length = objects.length;
-		for (int i = 0; i < length; i++) {
-			if (i == length-1)
-				return;
-			
+		for (int i = 0; i < length-1; i++) {
 			if (!(objects[i] instanceof String)) // Make sure that it's a key, chance of it being a customString though
 				continue;
 			
@@ -113,6 +110,7 @@ public class ProsePackage implements OutOfBandData, Serializable {
 			setTO(prose);
 			break;
 		case "DI":
+			System.out.println(prose.getClass().getSimpleName());
 			if (prose instanceof Integer)
 				setDI((Integer) prose);
 			else { System.err.println("DI can only be a Integer!"); }

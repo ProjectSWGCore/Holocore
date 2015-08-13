@@ -46,6 +46,7 @@ public class RadialOption {
 	
 	public void setItem(RadialItem item) { this.item = item; }
 	public void addChild(RadialOption option) { this.children.add(option); }
+	public void addChild(RadialItem item) { addChild(new RadialOption(item)); }
 	
 	public int getId() { return item.getId(); }
 	public int getOptionType() { return item.getOptionType(); }

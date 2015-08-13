@@ -50,6 +50,8 @@ public class CreatureObject extends TangibleObject {
 	
 	private static final long serialVersionUID = 1L;
 	
+	private transient long lastReserveOperation	= 0;
+	
 	private Posture	posture					= Posture.UPRIGHT;
 	private Race	race					= Race.HUMAN; 
 	private double	movementScale			= 1;
@@ -320,6 +322,14 @@ public class CreatureObject extends TangibleObject {
 		else if (reserveBalance > 3E9)
 			reserveBalance = (long) 3E9; // 3 billion cap
 		this.reserveBalance = reserveBalance;
+	}
+	
+	public boolean canPerformGalacticReserveTransaction() {
+		return (System.nanoTime() - lastReserveOperation) / 1E9 >= 15*60;
+	}
+	
+	public void updateLastGalacticReserveTime() {
+		lastReserveOperation = System.nanoTime();
 	}
 	
 	public void setMovementScale(double movementScale) {
