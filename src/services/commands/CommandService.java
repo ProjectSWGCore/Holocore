@@ -30,9 +30,7 @@ package services.commands;
 import intents.chat.ChatCommandIntent;
 import intents.network.GalacticPacketIntent;
 
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 
 import network.packets.Packet;
 import network.packets.swg.zone.object_controller.CommandQueueEnqueue;
@@ -53,12 +51,14 @@ import services.galaxy.GalacticManager;
 
 public class CommandService extends Service {
 	
-	private final Map <Integer, Command>	commands;			// NOTE: CRC's are all lowercased for commands!
-	private final Map <String, Integer>		commandCrcLookup;
+	private final Map <Integer, Command>			commands;			// NOTE: CRC's are all lowercased for commands!
+	private final Map <String, Integer>				commandCrcLookup;
+	private final Map <String, List<Command>>		commandByScript;
 	
 	public CommandService() {
 		commands = new HashMap<>();
 		commandCrcLookup = new HashMap<>();
+		commandByScript = new HashMap<>();
 	}
 	
 	@Override
@@ -128,7 +128,7 @@ public class CommandService extends Service {
 			}
 		}
 		else
-			Scripts.invoke("commands/generic/" + command.getScriptCallback(), "execute", galacticManager, player, target, args);
+			Scripts.invoke("commands/generic/" + command.getDefaultScriptCallback(), "execute", galacticManager, player, target, args);
 	}
 	
 	private void loadBaseCommands() {
@@ -145,13 +145,14 @@ public class CommandService extends Service {
 		
 		for (int row = 0; row < baseCommands.getRowCount(); row++) {
 			Object [] cmdRow = baseCommands.getRow(row);
-			String callback = (String) cmdRow[2];
-			if (callback.isEmpty())
-				callback = (String) cmdRow[4];
+//			String callback = (String) cmdRow[2];
+//			if (callback.isEmpty())
+//				callback = (String) cmdRow[4];
 			
 			Command command = new Command((String) cmdRow[0]);
 			command.setCrc(CRC.getCrc(command.getName().toLowerCase(Locale.ENGLISH)));
-			command.setScriptCallback(callback);
+			command.setScriptHook((String) cmdRow[2]);
+			command.setCppHook((String)cmdRow[4]);
 			command.setDefaultTime((float) cmdRow[6]);
 			command.setCharacterAbility((String) cmdRow[7]);
 			
@@ -159,32 +160,55 @@ public class CommandService extends Service {
 		}
 	}
 	
-	private <T extends ICmdCallback> void registerCallback(String command, Class<T> callback) {
+	private <T extends ICmdCallback> Command registerCallback(String command, Class<T> callback) {
+		try {//TODO: Could probably get rid of this and just call registerCallbacl(Command, Class) after getting the command
+			if (callback.getConstructor() == null)
+				throw new IllegalArgumentException("Incorrectly registered callback class. Class must extend ICmdCallback and have an empty constructor: " + callback.getName());
+		} catch (NoSuchMethodException e) {
+			e.printStackTrace();
+		}
+		Command comand = getCommand(command);
+		comand.setJavaCallback(callback);
+		return comand;
+	}
+
+	private <T extends ICmdCallback> void registerCallback(Command command, Class<T> callback) {
 		try {
 			if (callback.getConstructor() == null)
 				throw new IllegalArgumentException("Incorrectly registered callback class. Class must extend ICmdCallback and have an empty constructor: " + callback.getName());
 		} catch (NoSuchMethodException e) {
 			e.printStackTrace();
 		}
-		getCommand(command).setJavaCallback(callback);
+		command.setJavaCallback(callback);
 	}
 	
 	private void registerCallbacks() {
-		registerCallback("waypoint", WaypointCmdCallback.class);
-		registerCallback("requestWaypointAtPosition", RequestWaypointCmdCallback.class);
-		registerCallback("server", ServerCmdCallback.class);
-		registerCallback("getAttributesBatch", AttributesCmdCallback.class);
-		registerCallback("socialInternal", SocialInternalCmdCallback.class);
-		registerCallback("sitServer", SitOnObjectCmdCallback.class);
-		registerCallback("stand", StandCmdCallback.class);
-		registerCallback("teleport", AdminTeleportCallback.class);
-		registerCallback("prone", ProneCmdCallback.class);
-		registerCallback("kneel", KneelCmdCallback.class);
-		registerCallback("jumpServer", JumpCmdCallback.class);
-		registerCallback("serverDestroyObject", ServerDestroyObjectCmdCallback.class);
-		registerCallback("findFriend", FindFriendCallback.class);
-		registerCallback("setPlayerAppearance", PlayerAppearanceCallback.class);
-		registerCallback("revertPlayerAppearance", RevertAppearanceCallback.class);
+		List<Command> registeredCommands = new LinkedList<>();
+
+		registeredCommands.add(registerCallback("waypoint", WaypointCmdCallback.class));
+		registeredCommands.add(registerCallback("requestWaypointAtPosition", RequestWaypointCmdCallback.class));
+		registeredCommands.add(registerCallback("server", ServerCmdCallback.class));
+		registeredCommands.add(registerCallback("getAttributesBatch", AttributesCmdCallback.class));
+		registeredCommands.add(registerCallback("socialInternal", SocialInternalCmdCallback.class));
+		registeredCommands.add(registerCallback("sitServer", SitOnObjectCmdCallback.class));
+		registeredCommands.add(registerCallback("stand", StandCmdCallback.class));
+		registeredCommands.add(registerCallback("teleport", AdminTeleportCallback.class));
+		registeredCommands.add(registerCallback("prone", ProneCmdCallback.class));
+		registeredCommands.add(registerCallback("kneel", KneelCmdCallback.class));
+		registeredCommands.add(registerCallback("jumpServer", JumpCmdCallback.class));
+		registeredCommands.add(registerCallback("serverDestroyObject", ServerDestroyObjectCmdCallback.class));
+		registeredCommands.add(registerCallback("findFriend", FindFriendCallback.class));
+		registeredCommands.add(registerCallback("setPlayerAppearance", PlayerAppearanceCallback.class));
+		registeredCommands.add(registerCallback("revertPlayerAppearance", RevertAppearanceCallback.class));
+
+		for(Command command : registeredCommands){
+			List<Command> scriptCcommands = getCommandsByScript(command.getDefaultScriptCallback());
+			for(Command unregistered : scriptCcommands){
+				if(unregistered != command){
+					registerCallback(unregistered, command.getJavaCallback());
+				}
+			}
+		}
 	}
 	
 	private void clearCommands() {
@@ -199,6 +223,13 @@ public class CommandService extends Service {
 	private Command getCommand(String name) {
 		synchronized (commandCrcLookup) {
 			return getCommand(commandCrcLookup.get(name));
+		}
+	}
+
+	private List<Command> getCommandsByScript(String script)
+	{
+		synchronized (commandByScript){
+			return commandByScript.get(script);
 		}
 	}
 	
@@ -220,6 +251,16 @@ public class CommandService extends Service {
 		}
 		synchronized (commandCrcLookup) {
 			commandCrcLookup.put(command.getName(), command.getCrc());
+		}
+		synchronized (commandByScript){
+			String script = command.getDefaultScriptCallback();
+			List<Command> commands = commandByScript.get(script);
+
+			if(commands == null){
+				commandByScript.put(script, new LinkedList<Command>());
+			}else{
+				commands.add(command);
+			}
 		}
 	}
 	
