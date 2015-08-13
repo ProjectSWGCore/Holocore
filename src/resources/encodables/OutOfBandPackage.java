@@ -134,8 +134,7 @@ public class OutOfBandPackage implements Encodable, Serializable {
 		Packet.addShort(bb, paddingSize); // Number of bytes for decoding to skip over when reading
 		Packet.addByte(bb, data.getOobType().getType());
 		Packet.addInt(bb, data.getOobPosition());
-
-		bb.put(base);
+		Packet.addData(bb, base);
 
 		for (int i = 0; i < paddingSize; i++) {
 			Packet.addByte(bb, 0);

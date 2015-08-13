@@ -206,10 +206,10 @@ public class ProsePackage implements OutOfBandData, Serializable {
 		byte[] otherData = other.encode();
 
 		ByteBuffer bb = ByteBuffer.allocate(9 + stringData.length + actorData.length + targetData.length + otherData.length);
-		Packet.addArray(bb, stringData);
-		Packet.addArray(bb, actorData);
-		Packet.addArray(bb, targetData);
-		Packet.addArray(bb, otherData);
+		Packet.addData(bb, stringData);
+		Packet.addData(bb, actorData);
+		Packet.addData(bb, targetData);
+		Packet.addData(bb, otherData);
 		Packet.addInt(bb, di);
 		Packet.addFloat(bb, df);
 		Packet.addBoolean(bb, grammarFlag);

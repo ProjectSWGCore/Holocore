@@ -30,22 +30,25 @@ package resources.sui;
 import intents.sui.SuiWindowIntent;
 import intents.sui.SuiWindowIntent.SuiWindowEvent;
 
+import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import resources.player.Player;
-import network.packets.swg.zone.server_ui.SuiCreatePageMessage.SuiWindowComponent;
 
-public class SuiWindow {
+import network.packets.Packet;
+import resources.encodables.Encodable;
+import resources.player.Player;
+
+public class SuiWindow implements Encodable {
 
 	private int id;
 	private String script;
 	private Player owner;
 	private long rangeObjId;
 	private float maxDistance = 0;
-	private List<SuiWindowComponent> components = new ArrayList<SuiWindowComponent>();
+	private List<SuiComponent> components = new ArrayList<>();
 	private Map<Integer, String> scriptCallbacks;
 	private Map<Integer, ISuiCallback> javaCallbacks;
 	
@@ -55,14 +58,14 @@ public class SuiWindow {
 	}
 
 	public final void clearDataSource(String dataSource) {
-		SuiWindowComponent component = createComponent((byte) 1);
+		SuiComponent component = createComponent((byte) 1);
 		
 		component.getNarrowParams().add(dataSource);
 		components.add(component);
 	}
 	
 	public final void addChildWidget(String property, String value) {
-		SuiWindowComponent component = createComponent((byte) 2);
+		SuiComponent component = createComponent((byte) 2);
 		
 		addNarrowParams(component, property);
 		
@@ -71,7 +74,7 @@ public class SuiWindow {
 	}
 	
 	public final void setProperty(String property, String value) {
-		SuiWindowComponent component = createComponent((byte) 3);
+		SuiComponent component = createComponent((byte) 3);
 		
 		addNarrowParams(component, property);
 		
@@ -80,7 +83,7 @@ public class SuiWindow {
 	}
 	
 	public final void addDataItem(String name, String value) {
-		SuiWindowComponent component = createComponent((byte) 4);
+		SuiComponent component = createComponent((byte) 4);
 		
 		addNarrowParams(component, name);
 		
@@ -88,8 +91,8 @@ public class SuiWindow {
 		components.add(component);
 	}
 	
-	private final void addCallbackComponent(String source, Trigger trigger, List<String> returnParams) {
-		SuiWindowComponent component = createComponent((byte) 5);
+	private void addCallbackComponent(String source, Trigger trigger, List<String> returnParams) {
+		SuiComponent component = createComponent((byte) 5);
 		
 		component.getNarrowParams().add(source);
 		component.getNarrowParams().add(new String(new byte[] {trigger.getByte()}, Charset.forName("UTF-8")));
@@ -103,7 +106,7 @@ public class SuiWindow {
 	}
 	
 	public final void addDataSource(String name, String value) {
-		SuiWindowComponent component = createComponent((byte) 6);
+		SuiComponent component = createComponent((byte) 6);
 		
 		addNarrowParams(component, name);
 		
@@ -112,7 +115,7 @@ public class SuiWindow {
 	}
 	
 	public final void clearDataSourceContainer(String dataSource) {
-		SuiWindowComponent component = createComponent((byte) 7);
+		SuiComponent component = createComponent((byte) 7);
 		
 		addNarrowParams(component, dataSource);
 		
@@ -120,7 +123,7 @@ public class SuiWindow {
 	}
 	
 	public final void addTableDataSource(String dataSource, String value) {
-		SuiWindowComponent component = createComponent((byte) 8);
+		SuiComponent component = createComponent((byte) 8);
 		
 		addNarrowParams(component, dataSource);
 		
@@ -132,7 +135,7 @@ public class SuiWindow {
 		addCallbackComponent(source, trigger, returnParams);
 		
 		if (javaCallbacks == null)
-			javaCallbacks = new HashMap<Integer, ISuiCallback>();
+			javaCallbacks = new HashMap<>();
 		javaCallbacks.put(eventId, callback);
 	}
 	
@@ -140,18 +143,18 @@ public class SuiWindow {
 		addCallbackComponent(source, trigger, returnParams);
 		
 		if (scriptCallbacks == null)
-			scriptCallbacks = new HashMap<Integer, String>();
+			scriptCallbacks = new HashMap<>();
 		scriptCallbacks.put(eventId, callbackScript);
 	}
 
-	private SuiWindowComponent createComponent(byte type) {
-		SuiWindowComponent component = new SuiWindowComponent();
-		component.setType(type);
+	private SuiComponent createComponent(byte type) {
+		SuiComponent component = new SuiComponent();
+		component.setType(SuiComponent.Type.valueOf(type));
 		
 		return component;
 	}
 	
-	private void addNarrowParams(SuiWindowComponent component, String property) {
+	private void addNarrowParams(SuiComponent component, String property) {
 		for (String s : property.split(":")) {
 			component.getNarrowParams().add(s);
 		}
@@ -168,10 +171,44 @@ public class SuiWindow {
 	public final Player getOwner() { return owner; }
 	public final float getMaxDistance() { return maxDistance; }
 	public final void setMaxDistance(float maxDistance) { this.maxDistance = maxDistance; }
-	public final List<SuiWindowComponent> getComponents() { return components; }
+	public final List<SuiComponent> getComponents() { return components; }
 	public final ISuiCallback getJavaCallback(int eventType) { return ((javaCallbacks == null) ? null : javaCallbacks.get(eventType)); }
 	public final String getScriptCallback(int eventType) { return ((scriptCallbacks == null) ? null : scriptCallbacks.get(eventType)); }
-	
+
+	@Override
+	public byte[] encode() {
+
+		int listSize = 0;
+		List<byte[]> componentData = new ArrayList<>();
+		for (SuiComponent component : components) {
+			byte[] data = component.encode();
+			componentData.add(data);
+			listSize += data.length;
+		}
+
+		ByteBuffer data = ByteBuffer.allocate(34 + script.length() + listSize);
+		Packet.addInt(data, id);
+		Packet.addAscii(data, script);
+		Packet.addList(data, componentData);
+		Packet.addLong(data, rangeObjId);
+		Packet.addFloat(data, maxDistance);
+		Packet.addLong(data, 0); // Window Location?
+		Packet.addInt(data, 0);
+
+		return data.array();
+	}
+
+	@Override
+	public void decode(ByteBuffer data) {
+		id			= Packet.getInt(data);
+		script		= Packet.getAscii(data);
+		components	= Packet.getList(data, SuiComponent.class);
+		rangeObjId	= Packet.getLong(data);
+		maxDistance	= Packet.getFloat(data);
+		// unk long
+		// unk int
+	}
+
 	public enum Trigger {
 		UPDATE	((byte) 4),
 		OK		((byte) 9),
