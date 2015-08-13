@@ -199,7 +199,7 @@ public class PlayerManager extends Manager {
 
 		synchronized(players) {
 			for (Player p : players.values()) {
-				if (p != null && p.getCreatureObject() != null && p.getCreatureObject().getLocation().getTerrain() == terrain && conditional.meetsCondition(p))
+				if (p != null && p.getCreatureObject() != null && p.getCreatureObject().getTerrain() == terrain && conditional.meetsCondition(p))
 					p.sendPacket(packets);
 			}
 		}
@@ -208,7 +208,7 @@ public class PlayerManager extends Manager {
 	public void notifyPlayersAtPlanet(Terrain terrain, Packet... packets) {
 		synchronized(players) {
 			for (Player p : players.values()) {
-				if (p != null && p.getCreatureObject() != null && p.getCreatureObject().getLocation().getTerrain() == terrain)
+				if (p != null && p.getCreatureObject() != null && p.getCreatureObject().getTerrain() == terrain)
 					p.sendPacket(packets);
 			}
 		}
@@ -223,7 +223,7 @@ public class PlayerManager extends Manager {
 		synchronized(players) {
 			networkIds.forEach(id -> {
 				Player p = players.get(id);
-				if (p != null && p.getCreatureObject() != null && p.getCreatureObject().getLocation().getTerrain() == terrain && conditional.meetsCondition(p))
+				if (p != null && p.getCreatureObject() != null && p.getCreatureObject().getTerrain() == terrain && conditional.meetsCondition(p))
 					p.sendPacket(packets);
 			});
 		}
@@ -233,7 +233,7 @@ public class PlayerManager extends Manager {
 		synchronized(players) {
 			networkIds.forEach(id -> {
 				Player p = players.get(id);
-				if (p != null && p.getCreatureObject() != null && p.getCreatureObject().getLocation().getTerrain() == terrain)
+				if (p != null && p.getCreatureObject() != null && p.getCreatureObject().getTerrain() == terrain)
 					p.sendPacket(packets);
 			});
 		}

@@ -69,13 +69,15 @@ public class MapService extends Service {
 		staticMapLocations = new ConcurrentHashMap<>();
 		dynamicMapLocations = new ConcurrentHashMap<>();
 		persistentMapLocations = new ConcurrentHashMap<>();
+		// Needs to be done here as ObjectManager is initialized before MapService otherwise there won't be any map locations
+		// for objects loaded from the databases, snapshots, buildouts.
+		loadMapCategories();
+		loadMappingTemplates();
 	}
 
 	@Override
 	public boolean initialize() {
 		registerForIntent(GalacticPacketIntent.TYPE);
-		loadMapCategories();
-		loadMappingTemplates();
 		loadStaticCityPoints();
 		return super.initialize();
 	}
@@ -189,10 +191,10 @@ public class MapService extends Service {
 			mapLocation.setSubcategory((byte) mapCategories.get(mappingTemplate.getSubcategory()).getIndex());
 		else
 			mapLocation.setSubcategory((byte) 0);
-		mapLocation.setX((float) object.getLocation().getX());
-		mapLocation.setY((float) object.getLocation().getZ());
+		mapLocation.setX((float) object.getX());
+		mapLocation.setY((float) object.getZ());
 
-		String planet = object.getLocation().getTerrain().getName();
+		String planet = object.getTerrain().getName();
 
 		switch (type) {
 			case STATIC:

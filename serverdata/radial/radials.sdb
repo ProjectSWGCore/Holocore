@@ -1,0 +1,6 @@
+iff	script
+TEXT PRIMARY KEY NOT NULL	TEXT NOT NULL
+object/tangible/terminal/shared_terminal_bank.iff	terminal/bank
+object/tangible/terminal/shared_terminal_bazaar.iff	terminal/bazaar
+object/tangible/terminal/shared_terminal_travel.iff	terminal/travel
+object/tangible/travel/ticket_collector/shared_ticket_collector.iff	terminal/ticket_collector

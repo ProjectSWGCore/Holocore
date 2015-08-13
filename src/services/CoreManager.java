@@ -56,6 +56,7 @@ import resources.control.Manager;
 import resources.control.ServerStatus;
 import resources.server_info.Config;
 import services.galaxy.GalacticManager;
+import utilities.ThreadUtilities;
 
 public class CoreManager extends Manager {
 	
@@ -71,7 +72,7 @@ public class CoreManager extends Manager {
 	private boolean packetDebug;
 	
 	public CoreManager() {
-		shutdownService = Executors.newSingleThreadScheduledExecutor();
+		shutdownService = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("core-shutdown-service"));
 		shutdownRequested = false;
 		galaxy = getGalaxy();
 		if (galaxy != null) {

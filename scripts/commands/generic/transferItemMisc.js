@@ -1,4 +1,4 @@
-var execute = function(objManager, player, target, args) {
+var execute = function(galManager, player, target, args) {
 	var actor = player.getCreatureObject();
 	var inventory;
 	
@@ -13,10 +13,10 @@ var execute = function(objManager, player, target, args) {
 	}
 	
 	if(target.getParent() == actor) {
-		result = target.moveToContainer(actor, inventory)
+		result = target.moveToContainer(actor, inventory);
 		actor.removeEquipment(target)
 	} else {
-		result = target.moveToContainer(actor, actor)
+		result = target.moveToContainer(actor, actor);
 		actor.addEquipment(target)
 	}
-}
+};

@@ -27,6 +27,7 @@
 ***********************************************************************************/
 package resources.commands.callbacks;
 
+import resources.Location;
 import resources.Terrain;
 import resources.commands.ICmdCallback;
 import resources.objects.SWGObject;
@@ -62,8 +63,7 @@ public class RequestWaypointCmdCallback implements ICmdCallback {
 		String name = (cmd.length == 6 ? cmd[5] : "@planet_n:" + terrain.getName());
 
 		WaypointObject waypoint = (WaypointObject) galacticManager.getObjectManager().createObject("object/waypoint/shared_waypoint.iff", false);
-		waypoint.getLocation().setTerrain(terrain);
-		waypoint.setLocation(x, y, z);
+		waypoint.setLocation(new Location(x, y, z, terrain));
 		waypoint.setName(name.isEmpty() ? "@planet_n:" + terrain.getName() : name);
 		if (color != null)
 			waypoint.setColor(color);

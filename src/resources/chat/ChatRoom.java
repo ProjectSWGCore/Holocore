@@ -35,6 +35,8 @@ import resources.encodables.OutOfBandPackage;
 import resources.player.Player;
 import services.player.PlayerManager;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
@@ -72,7 +74,12 @@ public class ChatRoom implements Encodable, Serializable {
 		members = new ArrayList<>();
 		banned = new ArrayList<>();
 	}
-
+	
+	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
+		members = new ArrayList<>();
+		ois.defaultReadObject();
+	}
+	
 	public int getId() {
 		return id;
 	}

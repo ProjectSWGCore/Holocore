@@ -66,7 +66,7 @@ public class ChatRoomMessage extends SWGPacket {
 		addEncodable(data, avatar);
 		addInt(data, roomId);
 		addUnicode(data, message);
-		addArray(data, oob);
+		addData(data, oob);
 		return data;
 	}
 }

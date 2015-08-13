@@ -35,9 +35,15 @@ import java.net.InetAddress;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Random;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import network.NetworkClient;
 import network.PacketReceiver;
@@ -52,20 +58,44 @@ import resources.control.Intent;
 import resources.control.Manager;
 import resources.network.ServerType;
 import resources.network.UDPServer.UDPPacket;
+import utilities.ThreadUtilities;
 
 public class NetworkClientManager extends Manager implements PacketReceiver {
 	
 	private final Map <InetAddress, List <NetworkClient>> clients;
 	private final Map <Long, NetworkClient> networkClients;
+	private final Queue<ReceivedPacket> receivedPackets;
+	private final ScheduledExecutorService packetResender;
+	private final ExecutorService packetProcessor;
 	private final Random crcGenerator;
 	private final PacketSender packetSender;
+	private final Runnable processPacketRunnable;
+	private final Runnable packetResendRunnable;
 	private long networkId;
 	
 	public NetworkClientManager(PacketSender packetSender) {
 		this.packetSender = packetSender;
 		clients = new HashMap<InetAddress, List<NetworkClient>>();
 		networkClients = new HashMap<Long, NetworkClient>();
+		receivedPackets = new LinkedList<>();
+		packetResender = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("packet-resender"));
+		packetProcessor = Executors.newCachedThreadPool(ThreadUtilities.newThreadFactory("packet-processor-%d"));
 		crcGenerator = new Random();
+		processPacketRunnable = new Runnable() {
+			public void run() {
+				synchronized (receivedPackets) {
+					ReceivedPacket recv = receivedPackets.poll();
+					if (recv == null)
+						return;
+					handlePacket(recv.getType(), recv.getPacket());
+				}
+			}
+		};
+		packetResendRunnable = new Runnable() {
+			public void run() {
+				resendOldUnacknowledged();
+			}
+		};
 		networkId = 0;
 	}
 	
@@ -74,6 +104,7 @@ public class NetworkClientManager extends Manager implements PacketReceiver {
 		registerForIntent(InboundPacketIntent.TYPE);
 		registerForIntent(OutboundPacketIntent.TYPE);
 		registerForIntent(CloseConnectionIntent.TYPE);
+		packetResender.scheduleAtFixedRate(packetResendRunnable, 0, 200, TimeUnit.MILLISECONDS);
 		return super.initialize();
 	}
 	
@@ -86,10 +117,27 @@ public class NetworkClientManager extends Manager implements PacketReceiver {
 	}
 	
 	@Override
-	public void receivePacket(ServerType type, UDPPacket packet) {
-		handlePacket(type, packet);
+	public boolean terminate() {
+		packetProcessor.shutdownNow();
+		packetResender.shutdownNow();
+		boolean success = true;
+		try {
+			success = packetProcessor.awaitTermination(5, TimeUnit.SECONDS);
+			success = packetResender.awaitTermination(5, TimeUnit.SECONDS) && success;
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return super.terminate() && success;
 	}
-
+	
+	@Override
+	public void receivePacket(ServerType type, UDPPacket packet) {
+		synchronized (receivedPackets) {
+			receivedPackets.add(new ReceivedPacket(type, packet));
+		}
+		packetProcessor.submit(processPacketRunnable);
+	}
+	
 	@Override
 	public void onIntentReceived(Intent i) {
 		if (i instanceof OutboundPacketIntent) {
@@ -142,6 +190,15 @@ public class NetworkClientManager extends Manager implements PacketReceiver {
 			crc = crcGenerator.nextInt();
 		} while (crc == 0);
 		return crc;
+	}
+	
+	private void resendOldUnacknowledged() {
+		synchronized (clients) {
+			for (NetworkClient client : networkClients.values()) {
+				client.resendOldUnacknowledged();
+				flushPackets();
+			}
+		}
 	}
 	
 	private void handleOutboundPacket(long networkId, Packet p) {
@@ -274,6 +331,24 @@ public class NetworkClientManager extends Manager implements PacketReceiver {
 			}
 		}
 		return false;
+	}
+	
+	private static class ReceivedPacket {
+		private final ServerType type;
+		private final UDPPacket packet;
+		
+		public ReceivedPacket(ServerType type, UDPPacket packet) {
+			this.type = type;
+			this.packet = packet;
+		}
+		
+		public ServerType getType() {
+			return type;
+		}
+		
+		public UDPPacket getPacket() {
+			return packet;
+		}
 	}
 	
 }

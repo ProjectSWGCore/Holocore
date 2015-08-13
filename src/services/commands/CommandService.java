@@ -120,8 +120,13 @@ public class CommandService extends Service {
 		// TODO: Handle for different target
 		// TODO: Handle for different targetType
 		
-		if (command.hasJavaCallback())
-			command.getJavaCallback().execute(galacticManager, player, target, args);
+		if (command.hasJavaCallback()) {
+			try {
+				((ICmdCallback) command.getJavaCallback().newInstance()).execute(galacticManager, player, target, args);
+			} catch (InstantiationException | IllegalAccessException e) {
+				e.printStackTrace();
+			}
+		}
 		else
 			Scripts.invoke("commands/generic/" + command.getScriptCallback(), "execute", galacticManager, player, target, args);
 	}
@@ -154,24 +159,32 @@ public class CommandService extends Service {
 		}
 	}
 	
-	private void registerCallback(String command, ICmdCallback callback) {
+	private <T extends ICmdCallback> void registerCallback(String command, Class<T> callback) {
+		try {
+			if (callback.getConstructor() == null)
+				throw new IllegalArgumentException("Incorrectly registered callback class. Class must extend ICmdCallback and have an empty constructor: " + callback.getName());
+		} catch (NoSuchMethodException e) {
+			e.printStackTrace();
+		}
 		getCommand(command).setJavaCallback(callback);
 	}
 	
 	private void registerCallbacks() {
-		registerCallback("waypoint", new WaypointCmdCallback());
-		registerCallback("requestWaypointAtPosition", new RequestWaypointCmdCallback());
-		registerCallback("server", new ServerCmdCallback());
-		registerCallback("getAttributesBatch", new AttributesCmdCallback());
-		registerCallback("socialInternal", new SocialInternalCmdCallback());
-		registerCallback("sitServer", new SitOnObjectCmdCallback());
-		registerCallback("stand", new StandCmdCallback());
-		registerCallback("teleport", new AdminTeleportCallback());
-		registerCallback("prone", new ProneCmdCallback());
-		registerCallback("kneel", new KneelCmdCallback());
-		registerCallback("jumpServer", new JumpCmdCallback());
-		registerCallback("serverDestroyObject", new ServerDestroyObjectCmdCallback());
-		registerCallback("findFriend", new FindFriendCallback());
+		registerCallback("waypoint", WaypointCmdCallback.class);
+		registerCallback("requestWaypointAtPosition", RequestWaypointCmdCallback.class);
+		registerCallback("server", ServerCmdCallback.class);
+		registerCallback("getAttributesBatch", AttributesCmdCallback.class);
+		registerCallback("socialInternal", SocialInternalCmdCallback.class);
+		registerCallback("sitServer", SitOnObjectCmdCallback.class);
+		registerCallback("stand", StandCmdCallback.class);
+		registerCallback("teleport", AdminTeleportCallback.class);
+		registerCallback("prone", ProneCmdCallback.class);
+		registerCallback("kneel", KneelCmdCallback.class);
+		registerCallback("jumpServer", JumpCmdCallback.class);
+		registerCallback("serverDestroyObject", ServerDestroyObjectCmdCallback.class);
+		registerCallback("findFriend", FindFriendCallback.class);
+		registerCallback("setPlayerAppearance", PlayerAppearanceCallback.class);
+		registerCallback("revertPlayerAppearance", RevertAppearanceCallback.class);
 	}
 	
 	private void clearCommands() {

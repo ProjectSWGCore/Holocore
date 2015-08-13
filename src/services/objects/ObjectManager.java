@@ -71,6 +71,7 @@ public class ObjectManager extends Manager {
 
 	private final MapService mapService;
 	private final StaticService staticService;
+	private final RadialService radialService;
 
 	private final ObjectDatabase<SWGObject> database;
 	private final ObjectAwareness objectAwareness;
@@ -80,6 +81,7 @@ public class ObjectManager extends Manager {
 	public ObjectManager() {
 		mapService = new MapService();
 		staticService = new StaticService(this);
+		radialService = new RadialService();
 		database = new CachedObjectDatabase<SWGObject>("odb/objects.db");
 		objectAwareness = new ObjectAwareness();
 		objectMap = new HashMap<>();
@@ -87,6 +89,7 @@ public class ObjectManager extends Manager {
 
 		addChildService(mapService);
 		addChildService(staticService);
+		addChildService(radialService);
 	}
 	
 	@Override
@@ -202,8 +205,15 @@ public class ObjectManager extends Manager {
 	
 	private void loadObject(SWGObject obj) {
 		obj.setOwner(null);
-		if (!(obj instanceof CreatureObject) || ((CreatureObject) obj).getPlayerObject() == null)
+		// if player is not a player
+		if (!(obj instanceof CreatureObject && ((CreatureObject) obj).hasSlot("ghost")))
 			objectAwareness.add(obj);
+		if (obj instanceof CreatureObject && ((CreatureObject) obj).getPlayerObject() != null) {
+			if (!obj.hasSlot("bank"))
+				obj.addObject(createObject("object/tangible/bank/shared_character_bank.iff", false));
+			if (!obj.hasSlot("mission_bag"))
+				obj.addObject(createObject("object/tangible/mission_bag/shared_mission_bag.iff", false));
+		}
 		objectMap.put(obj.getObjectId(), obj);
 		updateBuildoutParent(obj);
 		addChildrenObjects(obj);
@@ -256,6 +266,12 @@ public class ObjectManager extends Manager {
 				case PE_DISAPPEAR:
 					p.getCreatureObject().clearAware();
 					objectAwareness.remove(p.getCreatureObject());
+					for (SWGObject obj : p.getCreatureObject().getObservers())
+						p.getCreatureObject().destroyObject(obj.getOwner());
+					break;
+				case PE_FIRST_ZONE:
+					if (p.getCreatureObject().getParent() == null)
+						p.getCreatureObject().createObject(p);
 					break;
 				case PE_ZONE_IN:
 					p.getCreatureObject().clearAware();
@@ -401,7 +417,7 @@ public class ObjectManager extends Manager {
 		if (transform == null)
 			return;
 		Location newLocation = transform.getLocation();
-		newLocation.setTerrain(obj.getLocation().getTerrain());
+		newLocation.setTerrain(obj.getTerrain());
 		objectAwareness.move(obj, newLocation);
 		obj.sendDataTransforms(transform);
 
@@ -411,7 +427,7 @@ public class ObjectManager extends Manager {
 	
 	private void moveObject(SWGObject obj, DataTransformWithParent transformWithParent) {
 		Location newLocation = transformWithParent.getLocation();
-		newLocation.setTerrain(obj.getLocation().getTerrain());
+		newLocation.setTerrain(obj.getTerrain());
 		SWGObject parent = objectMap.get(transformWithParent.getCellId());
 		if (parent == null) {
 			System.err.println("ObjectManager: Could not find parent for transform! Cell: " + transformWithParent.getCellId());

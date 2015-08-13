@@ -25,32 +25,36 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package resources;
+package resources.radial;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RadialOption {
-	private short id;
-	private byte parentId;
-	private byte optionType; // 1 unless the option text isn't listed in the radial item list (datatable). - ANHWiki
-	private String text;
 	
-	public RadialOption() { }
-	public RadialOption(String text, short id, byte parentId, byte optionType) {
-		this.text = text;
-		this.id = id;
-		this.parentId = parentId;
-		this.optionType = (text == null || text.isEmpty()) ? (byte) 1 : optionType;
+	private RadialItem item;
+	private List<RadialOption> children;
+	
+	public RadialOption() {
+		this.children = new ArrayList<>();
 	}
 	
-	public short getId() { return id; }
-	public void setId(short id) { this.id = id; }
-	public byte getParentId() { return parentId; }
-	public void setParentId(byte parentId) { this.parentId = parentId; }
-	public void setOptionType(byte optionType) { this.optionType = optionType; }
-	public void setText(String text) { this.text = text; }
-	public byte getOptionType() { return optionType; }
-	public String getText() { return text; }
+	public RadialOption(RadialItem item) {
+		this.item = item;
+		this.children = new ArrayList<>();
+	}
+	
+	public void setItem(RadialItem item) { this.item = item; }
+	public void addChild(RadialOption option) { this.children.add(option); }
+	
+	public int getId() { return item.getId(); }
+	public int getOptionType() { return item.getOptionType(); }
+	public String getText() { return item.getText(); }
+	public List<RadialOption> getChildren() { return children; }
+	
 	@Override
 	public String toString() { 
-		return String.valueOf(id) + ": parentId- " + String.valueOf(parentId) + " optionType:" + String.valueOf(optionType) + " text-" + text; 
+		return String.format("ID=%d Option=%d Text=%s", getId(), getOptionType(), getText()); 
 	}
+	
 }

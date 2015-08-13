@@ -39,11 +39,21 @@ public class Encryption {
 	}
 	
 	public static byte [] encode(byte [] input, int crc) {
-		return assembleMessage(input, crc);
+		try {
+			return assembleMessage(input, crc);
+		} catch (Throwable t) {
+			t.printStackTrace();
+			return new byte[0];
+		}
 	}
 	
 	public static byte [] decode(byte [] input, int crc) {
-		return disassemble(input, crc);
+		try {
+			return disassemble(input, crc);
+		} catch (Throwable t) {
+			t.printStackTrace();
+			return new byte[0];
+		}
 	}
 	
 	private static byte [] disassemble(byte [] data, int crcSeed) {
@@ -92,7 +102,12 @@ public class Encryption {
 			Deflater compressor = new Deflater();
 			compressor.setInput(data, 2, data.length - 2);
 			compressor.finish();
-			int length = compressor.deflate(result);
+			int length = 0;
+			try {
+				length = compressor.deflate(result);
+			} finally {
+				compressor.end();
+			}
 			if (length < data.length) {
 				ByteBuffer bb = ByteBuffer.allocate(length+3);
 				bb.put(data[0]).put(data[1]);
@@ -132,11 +147,12 @@ public class Encryption {
 		
 		try {
 			int length = decompressor.inflate(result);
-			decompressor.end();
 			return length;
 		} catch (DataFormatException e) {
 			System.err.println("Failed to decompress packet. "+e.getClass().getSimpleName()+" Message: " + e.getMessage());
 			return -1;
+		} finally {
+			decompressor.end();
 		}
 	}
 	

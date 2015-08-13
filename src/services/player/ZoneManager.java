@@ -46,7 +46,6 @@ import network.packets.swg.zone.RequestGalaxyLoopTimes;
 import network.packets.swg.zone.SetWaypointColor;
 import network.packets.swg.zone.ShowBackpack;
 import network.packets.swg.zone.ShowHelmet;
-import network.packets.swg.zone.UpdatePvpStatusMessage;
 import network.packets.swg.zone.chat.ChatOnConnectAvatar;
 import network.packets.swg.zone.chat.ChatSystemMessage;
 import network.packets.swg.zone.chat.VoiceChatStatus;
@@ -136,14 +135,11 @@ public class ZoneManager extends Manager {
 		
 		sendZonePackets(player, creature);
 		initPlayerBeforeZoneIn(player, creature, playerObj);
-		if (creature.getParent() == null)
-			creature.createObject(player);
 		System.out.printf("[%s] %s is zoning in%n", player.getUsername(), player.getCharacterName());
 		Log.i("ObjectManager", "Zoning in %s with character %s", player.getUsername(), player.getCharacterName());
+		new PlayerEventIntent(player, galaxy, PlayerEvent.PE_FIRST_ZONE).broadcast();
+		new PlayerEventIntent(player, galaxy, PlayerEvent.PE_ZONE_IN).broadcast();
 		sendCommitHistory(player);
-		PlayerEventIntent firstZone = new PlayerEventIntent(player, galaxy, PlayerEvent.PE_FIRST_ZONE);
-		PlayerEventIntent primary = new PlayerEventIntent(player, galaxy, PlayerEvent.PE_ZONE_IN);
-		firstZone.broadcastWithIntent(primary);
 	}
 	
 	private void loadCommitHistory() {
@@ -189,7 +185,6 @@ public class ZoneManager extends Manager {
 		sendPacket(player, new ParametersMessage());
 		sendPacket(player, new ChatOnConnectAvatar());
 		sendPacket(player, new CmdStartScene(false, objId, race, l, time));
-		sendPacket(player, new UpdatePvpStatusMessage(creature.getPvpType(), creature.getPvpFactionId(), creature.getObjectId()));
 		flushPackets();
 	}
 	

@@ -44,6 +44,7 @@ import resources.control.Intent;
 import resources.control.Service;
 import resources.player.Player;
 import resources.player.PlayerEvent;
+import utilities.ThreadUtilities;
 
 public final class WeatherService extends Service {
 	
@@ -57,7 +58,7 @@ public final class WeatherService extends Service {
 	public WeatherService() {
 		cycleDuration = 600;	// Ziggy: 10 minutes, 600 seconds
 		terrains = Terrain.values();
-		executor = Executors.newScheduledThreadPool(terrains.length);
+		executor = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("weather-service"));
 		weatherForTerrain = new HashMap<>();
 		weatherTypes = WeatherType.values();
 		random = new Random();
@@ -92,7 +93,7 @@ public final class WeatherService extends Service {
 	
 	private final void handleZoneIn(PlayerEventIntent pei) {
 		Player p = pei.getPlayer();
-		Terrain t = p.getCreatureObject().getLocation().getTerrain();
+		Terrain t = p.getCreatureObject().getTerrain();
 		
 		p.sendPacket(constructWeatherPacket(t));
 	}
