@@ -145,10 +145,7 @@ public class CommandService extends Service {
 		
 		for (int row = 0; row < baseCommands.getRowCount(); row++) {
 			Object [] cmdRow = baseCommands.getRow(row);
-//			String callback = (String) cmdRow[2];
-//			if (callback.isEmpty())
-//				callback = (String) cmdRow[4];
-			
+
 			Command command = new Command((String) cmdRow[0]);
 			command.setCrc(CRC.getCrc(command.getName().toLowerCase(Locale.ENGLISH)));
 			command.setScriptHook((String) cmdRow[2]);
@@ -161,14 +158,8 @@ public class CommandService extends Service {
 	}
 	
 	private <T extends ICmdCallback> Command registerCallback(String command, Class<T> callback) {
-		try {//TODO: Could probably get rid of this and just call registerCallbacl(Command, Class) after getting the command
-			if (callback.getConstructor() == null)
-				throw new IllegalArgumentException("Incorrectly registered callback class. Class must extend ICmdCallback and have an empty constructor: " + callback.getName());
-		} catch (NoSuchMethodException e) {
-			e.printStackTrace();
-		}
 		Command comand = getCommand(command);
-		comand.setJavaCallback(callback);
+		registerCallback(comand, callback);
 		return comand;
 	}
 
@@ -257,10 +248,10 @@ public class CommandService extends Service {
 			List<Command> commands = commandByScript.get(script);
 
 			if(commands == null){
-				commandByScript.put(script, new LinkedList<Command>());
-			}else{
-				commands.add(command);
+				commands = new LinkedList<Command>();
+				commandByScript.put(script, commands);
 			}
+			commands.add(command);
 		}
 	}
 	

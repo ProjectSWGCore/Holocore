@@ -114,7 +114,7 @@ public class Command {
 	public boolean isAutoAddToToolbar() { return autoAddToToolbar; }
 	public void setAutoAddToToolbar(boolean autoAddToToolbar) { this.autoAddToToolbar = autoAddToToolbar; }
 
-	public String getDefaultScriptCallback(){ return scriptHook == null ? cppHook : scriptHook;	}
+	public String getDefaultScriptCallback(){ return (scriptHook == null || scriptHook.isEmpty()) ? cppHook : scriptHook; }
 	
 	@Override
 	public String toString() {
