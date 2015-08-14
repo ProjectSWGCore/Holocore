@@ -30,7 +30,11 @@ package services.commands;
 import intents.chat.ChatCommandIntent;
 import intents.network.GalacticPacketIntent;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+import java.util.List;
+import java.util.LinkedList;
 
 import network.packets.Packet;
 import network.packets.swg.zone.object_controller.CommandQueueEnqueue;
