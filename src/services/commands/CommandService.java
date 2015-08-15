@@ -30,9 +30,6 @@ package services.commands;
 import intents.chat.ChatCommandIntent;
 import intents.network.GalacticPacketIntent;
 
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
 
 import network.packets.Packet;
 import network.packets.swg.zone.object_controller.CommandQueueEnqueue;
@@ -51,14 +48,23 @@ import resources.server_info.Log;
 import utilities.Scripts;
 import services.galaxy.GalacticManager;
 
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+
+
 public class CommandService extends Service {
 	
-	private final Map <Integer, Command>	commands;			// NOTE: CRC's are all lowercased for commands!
-	private final Map <String, Integer>		commandCrcLookup;
+	private final Map <Integer, Command>			commands;			// NOTE: CRC's are all lowercased for commands!
+	private final Map <String, Integer>				commandCrcLookup;
+	private final Map <String, List<Command>>		commandByScript;
 	
 	public CommandService() {
 		commands = new HashMap<>();
 		commandCrcLookup = new HashMap<>();
+		commandByScript = new HashMap<>();
 	}
 	
 	@Override
@@ -128,7 +134,7 @@ public class CommandService extends Service {
 			}
 		}
 		else
-			Scripts.invoke("commands/generic/" + command.getScriptCallback(), "execute", galacticManager, player, target, args);
+			Scripts.invoke("commands/generic/" + command.getDefaultScriptCallback(), "execute", galacticManager, player, target, args);
 	}
 	
 	private void loadBaseCommands() {
@@ -145,13 +151,11 @@ public class CommandService extends Service {
 		
 		for (int row = 0; row < baseCommands.getRowCount(); row++) {
 			Object [] cmdRow = baseCommands.getRow(row);
-			String callback = (String) cmdRow[2];
-			if (callback.isEmpty())
-				callback = (String) cmdRow[4];
-			
+
 			Command command = new Command((String) cmdRow[0]);
 			command.setCrc(CRC.getCrc(command.getName().toLowerCase(Locale.ENGLISH)));
-			command.setScriptCallback(callback);
+			command.setScriptHook((String) cmdRow[2]);
+			command.setCppHook((String)cmdRow[4]);
 			command.setDefaultTime((float) cmdRow[6]);
 			command.setCharacterAbility((String) cmdRow[7]);
 			
@@ -159,17 +163,32 @@ public class CommandService extends Service {
 		}
 	}
 	
-	private <T extends ICmdCallback> void registerCallback(String command, Class<T> callback) {
+	private <T extends ICmdCallback> Command registerCallback(String command, Class<T> callback) {
+		Command comand = getCommand(command);
+		registerCallback(comand, callback);
+		return comand;
+	}
+
+	private <T extends ICmdCallback> void registerCallback(Command command, Class<T> callback) {
 		try {
 			if (callback.getConstructor() == null)
 				throw new IllegalArgumentException("Incorrectly registered callback class. Class must extend ICmdCallback and have an empty constructor: " + callback.getName());
 		} catch (NoSuchMethodException e) {
 			e.printStackTrace();
 		}
-		getCommand(command).setJavaCallback(callback);
+		command.setJavaCallback(callback);
+
+		List<Command> scriptCommands = getCommandsByScript(command.getDefaultScriptCallback());
+		for(Command unregistered : scriptCommands){
+			if(unregistered != command && !unregistered.hasJavaCallback()){
+				registerCallback(unregistered, command.getJavaCallback());
+			}
+		}
+
 	}
 	
 	private void registerCallbacks() {
+
 		registerCallback("waypoint", WaypointCmdCallback.class);
 		registerCallback("requestWaypointAtPosition", RequestWaypointCmdCallback.class);
 		registerCallback("server", ServerCmdCallback.class);
@@ -201,6 +220,12 @@ public class CommandService extends Service {
 			return getCommand(commandCrcLookup.get(name));
 		}
 	}
+
+	private List<Command> getCommandsByScript(String script) {
+		synchronized (commandByScript){
+			return commandByScript.get(script);
+		}
+	}
 	
 	private Command getCommand(int crc) {
 		synchronized (commands) {
@@ -220,6 +245,16 @@ public class CommandService extends Service {
 		}
 		synchronized (commandCrcLookup) {
 			commandCrcLookup.put(command.getName(), command.getCrc());
+		}
+		synchronized (commandByScript){
+			String script = command.getDefaultScriptCallback();
+			List<Command> commands = commandByScript.get(script);
+
+			if(commands == null){
+				commands = new LinkedList<Command>();
+				commandByScript.put(script, commands);
+			}
+			commands.add(command);
 		}
 	}
 	
