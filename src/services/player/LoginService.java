@@ -339,7 +339,7 @@ public class LoginService extends Service {
 				g.setRecommended(true);
 				g.setPopulationStatus(populationStatus(consumed));
 				// If locked, restricted, or full
-				if (p.getAccessLevel() == AccessLevel.QA && g.getStatus() != GalaxyStatus.UP)
+				if (p.getAccessLevel().getValue() >= AccessLevel.CSR.getValue() && g.getStatus() != GalaxyStatus.UP)
 					g.setStatus(GalaxyStatus.UP);
 				galaxies.add(g);
 			}
