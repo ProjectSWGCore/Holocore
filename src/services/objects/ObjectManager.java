@@ -63,13 +63,13 @@ import resources.server_info.Config;
 import resources.server_info.Log;
 import resources.server_info.ObjectDatabase;
 import resources.server_info.ObjectDatabase.Traverser;
-import services.map.MapService;
+import services.map.MapManager;
 import services.player.PlayerManager;
 import services.spawn.StaticService;
 
 public class ObjectManager extends Manager {
 
-	private final MapService mapService;
+	private final MapManager mapService;
 	private final StaticService staticService;
 	private final RadialService radialService;
 
@@ -79,7 +79,7 @@ public class ObjectManager extends Manager {
 	private long maxObjectId;
 	
 	public ObjectManager() {
-		mapService = new MapService();
+		mapService = new MapManager();
 		staticService = new StaticService(this);
 		radialService = new RadialService();
 		database = new CachedObjectDatabase<SWGObject>("odb/objects.db");
@@ -190,7 +190,7 @@ public class ObjectManager extends Manager {
 		if (obj.getObjectId() >= maxObjectId) {
 			maxObjectId = obj.getObjectId() + 1;
 		}
-		mapService.addMapLocation(obj, MapService.MapType.STATIC);
+		mapService.addMapLocation(obj, MapManager.MapType.STATIC);
 	}
 	
 	private void loadSnapshot(SWGObject obj) {
@@ -200,7 +200,7 @@ public class ObjectManager extends Manager {
 		if (obj.getObjectId() >= maxObjectId) {
 			maxObjectId = obj.getObjectId() + 1;
 		}
-		mapService.addMapLocation(obj, MapService.MapType.STATIC);
+		mapService.addMapLocation(obj, MapManager.MapType.STATIC);
 	}
 	
 	private void loadObject(SWGObject obj) {

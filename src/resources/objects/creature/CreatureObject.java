@@ -92,6 +92,7 @@ public class CreatureObject extends TangibleObject {
 	private long 	ownerId					= 0;
 	private int 	battleFatigue			= 0;
 	private long 	statesBitmask			= 0;
+	private String	currentCity				= "";
 	private HologramColour hologramColour = HologramColour.DEFAULT;
 	
 	private SWGList<Integer>	baseAttributes	= new SWGList<Integer>(BaselineType.CREO, 1, 2);
@@ -256,6 +257,10 @@ public class CreatureObject extends TangibleObject {
 		return difficulty;
 	}
 	
+	public String getCurrentCity() {
+		return currentCity;
+	}
+	
 	public PlayerObject getPlayerObject() {
 		return (PlayerObject) (hasSlot("ghost") ? getSlottedObject("ghost") : null);
 	}
@@ -415,6 +420,10 @@ public class CreatureObject extends TangibleObject {
 	public void setDifficulty(CreatureDifficulty difficulty) {
 		this.difficulty = difficulty;
 		sendDelta(6, 26, difficulty.getDifficulty());
+	}
+	
+	public void setCurrentCity(String currentCity) {
+		this.currentCity = currentCity;
 	}
 	
 	public String getMoodAnimation() {
