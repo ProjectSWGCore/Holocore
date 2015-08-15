@@ -27,9 +27,52 @@
 ***********************************************************************************/
 package resources.player;
 
+/**
+ * I believe that the godLevel value in the iffs corresponds to the access level of the command.
+ * This might not be correct, since there are at least 69 commands with godLevel 0 that require the "admin" ability,
+ * however, the godLevels seem to follow this hierarchy relatively decently.
+ *
+ * The way the admin system is currently set up is that each level has access to all levels beneath it.
+ *
+ * For example: WARDENSs have access to all PLAYER commands, CSRs have access to all WARDEN commands and PLAYER commands,
+ * QAs have access to all CSR commands ... etc.
+ *
+ * With that in mind, if we restrict the ability to have the "admin" ability to those with WARDEN+ then the godLevel 0
+ * commands with the "admin" ability would effectively just become WARDEN commands.
+ *
+ * We can change the names/swap the values of these as needed. This is just a rough estimate on my part.
+ */
 public enum AccessLevel {
-	PLAYER,
-	QA,
-	ADMIN,
-	DEV
+    PLAYER(0),
+    WARDEN(5),
+	CSR(10),
+    QA(15),
+    DEV(50);
+
+	private final int value;
+
+	private AccessLevel(int value){
+		this.value = value;
+	}
+
+	public int getValue(){
+		return value;
+	}
+
+	public static AccessLevel getFromValue(int value){
+		switch(value){
+			case 0:
+				return PLAYER;
+			case 5:
+				return WARDEN;
+			case 10:
+				return CSR;
+			case 15:
+				return QA;
+			case 50:
+				return DEV;
+			default:
+				return PLAYER;
+		}
+	}
 }
