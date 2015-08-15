@@ -4,7 +4,10 @@ var getOptions = function(options, player, target) {
 	var creature = player.getCreatureObject();
 	options.add(use);
 	options.add(new RadialOption(RadialItem.EXAMINE));
-	options.add(reserve);
+	if (creature.getCurrentCity().equals("@corellia_region_names:coronet") ||
+		creature.getCurrentCity().equals("@naboo_region_names:theed") || 
+		creature.getCurrentCity().equals("@tatooine_region_names:mos_eisley"))
+		options.add(reserve);
 	// Bank Transfer/Safety Deposit
 	use.addChild(RadialItem.BANK_TRANSFER);
 	use.addChild(RadialItem.BANK_ITEMS);
