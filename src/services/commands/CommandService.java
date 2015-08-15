@@ -30,11 +30,7 @@ package services.commands;
 import intents.chat.ChatCommandIntent;
 import intents.network.GalacticPacketIntent;
 
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-import java.util.List;
-import java.util.LinkedList;
+import java.util.*;
 
 import network.packets.Packet;
 import network.packets.swg.zone.object_controller.CommandQueueEnqueue;
@@ -175,35 +171,33 @@ public class CommandService extends Service {
 			e.printStackTrace();
 		}
 		command.setJavaCallback(callback);
+
+		List<Command> scriptCcommands = getCommandsByScript(command.getDefaultScriptCallback());
+		for(Command unregistered : scriptCcommands){
+			if(unregistered != command && !unregistered.hasJavaCallback()){
+				registerCallback(unregistered, command.getJavaCallback());
+			}
+		}
+
 	}
 	
 	private void registerCallbacks() {
-		List<Command> registeredCommands = new LinkedList<>();
 
-		registeredCommands.add(registerCallback("waypoint", WaypointCmdCallback.class));
-		registeredCommands.add(registerCallback("requestWaypointAtPosition", RequestWaypointCmdCallback.class));
-		registeredCommands.add(registerCallback("server", ServerCmdCallback.class));
-		registeredCommands.add(registerCallback("getAttributesBatch", AttributesCmdCallback.class));
-		registeredCommands.add(registerCallback("socialInternal", SocialInternalCmdCallback.class));
-		registeredCommands.add(registerCallback("sitServer", SitOnObjectCmdCallback.class));
-		registeredCommands.add(registerCallback("stand", StandCmdCallback.class));
-		registeredCommands.add(registerCallback("teleport", AdminTeleportCallback.class));
-		registeredCommands.add(registerCallback("prone", ProneCmdCallback.class));
-		registeredCommands.add(registerCallback("kneel", KneelCmdCallback.class));
-		registeredCommands.add(registerCallback("jumpServer", JumpCmdCallback.class));
-		registeredCommands.add(registerCallback("serverDestroyObject", ServerDestroyObjectCmdCallback.class));
-		registeredCommands.add(registerCallback("findFriend", FindFriendCallback.class));
-		registeredCommands.add(registerCallback("setPlayerAppearance", PlayerAppearanceCallback.class));
-		registeredCommands.add(registerCallback("revertPlayerAppearance", RevertAppearanceCallback.class));
-
-		for(Command command : registeredCommands){
-			List<Command> scriptCcommands = getCommandsByScript(command.getDefaultScriptCallback());
-			for(Command unregistered : scriptCcommands){
-				if(unregistered != command){
-					registerCallback(unregistered, command.getJavaCallback());
-				}
-			}
-		}
+		registerCallback("waypoint", WaypointCmdCallback.class);
+		registerCallback("requestWaypointAtPosition", RequestWaypointCmdCallback.class);
+		registerCallback("server", ServerCmdCallback.class);
+		registerCallback("getAttributesBatch", AttributesCmdCallback.class);
+		registerCallback("socialInternal", SocialInternalCmdCallback.class);
+		registerCallback("sitServer", SitOnObjectCmdCallback.class);
+		registerCallback("stand", StandCmdCallback.class);
+		registerCallback("teleport", AdminTeleportCallback.class);
+		registerCallback("prone", ProneCmdCallback.class);
+		registerCallback("kneel", KneelCmdCallback.class);
+		registerCallback("jumpServer", JumpCmdCallback.class);
+		registerCallback("serverDestroyObject", ServerDestroyObjectCmdCallback.class);
+		registerCallback("findFriend", FindFriendCallback.class);
+		registerCallback("setPlayerAppearance", PlayerAppearanceCallback.class);
+		registerCallback("revertPlayerAppearance", RevertAppearanceCallback.class);
 	}
 	
 	private void clearCommands() {
