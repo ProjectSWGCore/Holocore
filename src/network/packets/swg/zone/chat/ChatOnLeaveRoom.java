@@ -39,7 +39,11 @@ public class ChatOnLeaveRoom extends SWGPacket {
 	private int result;
 	private int chatRoomId;
 	private int sequence;
-
+	
+	public ChatOnLeaveRoom() {
+		
+	}
+	
 	public ChatOnLeaveRoom(ChatAvatar avatar, int result, int chatRoomId, int sequence) {
 		this.avatar = avatar;
 		this.result = result;
