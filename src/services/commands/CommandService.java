@@ -30,7 +30,6 @@ package services.commands;
 import intents.chat.ChatCommandIntent;
 import intents.network.GalacticPacketIntent;
 
-import java.util.*;
 
 import network.packets.Packet;
 import network.packets.swg.zone.object_controller.CommandQueueEnqueue;
@@ -48,6 +47,13 @@ import resources.player.Player;
 import resources.server_info.Log;
 import utilities.Scripts;
 import services.galaxy.GalacticManager;
+
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+
 
 public class CommandService extends Service {
 	
