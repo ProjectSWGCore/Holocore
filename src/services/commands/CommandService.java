@@ -178,8 +178,8 @@ public class CommandService extends Service {
 		}
 		command.setJavaCallback(callback);
 
-		List<Command> scriptCcommands = getCommandsByScript(command.getDefaultScriptCallback());
-		for(Command unregistered : scriptCcommands){
+		List<Command> scriptCommands = getCommandsByScript(command.getDefaultScriptCallback());
+		for(Command unregistered : scriptCommands){
 			if(unregistered != command && !unregistered.hasJavaCallback()){
 				registerCallback(unregistered, command.getJavaCallback());
 			}
@@ -221,8 +221,7 @@ public class CommandService extends Service {
 		}
 	}
 
-	private List<Command> getCommandsByScript(String script)
-	{
+	private List<Command> getCommandsByScript(String script) {
 		synchronized (commandByScript){
 			return commandByScript.get(script);
 		}
