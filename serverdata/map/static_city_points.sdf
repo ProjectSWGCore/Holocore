@@ -1,10 +1,10 @@
 planet	city	x	z
 s	s	f	f
-tatooine	Mos Eisley	3528	-4804
 tatooine	Bestine	-1290	-3590
 tatooine	Mos Espa	-2902	2130
 tatooine	Mos Entha	1291	3138
 tatooine	Wayfar	-5124	-6530
+tatooine	Mos Eisley	3528	-4804
 tatooine	Anchorhead	40	-5348
 tatooine	Mos Taike	3813	2354
 corellia	Coronet	-178	-4504
@@ -31,7 +31,7 @@ dantooine	Mining Outpost	-640	2486
 dantooine	Pirate Outpost	1588	-6399
 dantooine	Imperial Outpost	-4224	-2400
 dathomir	Trade Outpost	599	3071
-dathomir	Quarentine Zone	-6358	930
+dathomir	Quarentine Zone	-5780	-6550
 dathomir	Science Outpost	-85	-1600
 lok	Nym's Stronghold	440	5029
 lok	Imperial Outpost	-1920	-3084
