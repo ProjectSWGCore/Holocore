@@ -36,7 +36,7 @@ import resources.client_info.ClientFactory;
 import resources.client_info.ServerFactory;
 import resources.client_info.visitors.DatatableData;
 import resources.control.Intent;
-import resources.control.Service;
+import resources.control.Manager;
 import resources.objects.SWGObject;
 import resources.player.Player;
 
@@ -47,7 +47,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class MapService extends Service {
+public class MapManager extends Manager {
+	
 	private final Map<String, MapCategory> mapCategories;
 	private final Map<String, MappingTemplate> mappingTemplates;
 
@@ -60,9 +61,11 @@ public class MapService extends Service {
 	private final AtomicInteger staticMapVersion = new AtomicInteger(1);
 	private final AtomicInteger dynamicMapVersion = new AtomicInteger(1);
 	private final AtomicInteger persistMapVersion = new AtomicInteger(1);
+	
+	private final CityService cityService;
 
-
-	public MapService() {
+	public MapManager() {
+		cityService = new CityService();
 		mapCategories = new HashMap<>();
 		mappingTemplates = new HashMap<>();
 
@@ -73,6 +76,8 @@ public class MapService extends Service {
 		// for objects loaded from the databases, snapshots, buildouts.
 		loadMapCategories();
 		loadMappingTemplates();
+		
+		addChildService(cityService);
 	}
 
 	@Override

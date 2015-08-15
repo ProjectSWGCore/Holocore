@@ -60,16 +60,6 @@ public final class IntentFactory {
 	}
 
 	/**
-	 * Sends a system message to the target as a ProsePackage.
-	 * @param target Player receiving the message.
-	 * @param table Table for the StringId
-	 * @param key Key to use within the StringId
-	 */
-	public void sendSystemMessage(Player target, String table, String key) {
-		new ChatBroadcastIntent(target, new ProsePackage(table, key)).broadcast();
-	}
-
-	/**
 	 * Sends a system message to the target as a ProsePackage which allows prose keys to be used.
 	 * <br><br>
 	 * Example: <br>
@@ -78,14 +68,18 @@ public final class IntentFactory {
 	 * Using this method is the same as: <br>
 	 * &nbsp <i>new ChatBroadcastIntent(target, new ProsePackage("StringId", new StringId(table, key), objects)).broadcast();</i>
 	 * @param target Player receiving the system message.
-	 * @param table Table for the StringId.
-	 * @param key Key to use within the StringId.
+	 * @param stf The string stf table to use for this system message. It should be formatted as such: <br><br>
+	 * <code> example_key where @example refers to the stf example.stf in string/en folder and example_key is the key to use for the stf.</cZzz>
 	 * @param objects Collection of prose keys followed by with the value for the prose key.<br>As an example, <i>("DI", 500)</i> would
 	 *                set the %DI to the value of 500 for the StringId.
 	 *                Note that the prose key must always come first and the value for that key must always come second.
 	 */
-	public void sendSystemMessage(Player target, String table, String key, Object... objects) {
-		new ChatBroadcastIntent(target, new ProsePackage("StringId", new StringId(table, key), objects)).broadcast();
+	public void sendSystemMessage(Player target, String stf, Object ... objects) {
+		Object [] prose = new Object[objects.length + 2];
+		prose[0] = "StringId";
+		prose[1] = new StringId(stf);
+		System.arraycopy(objects, 0, prose, 2, objects.length);
+		new ChatBroadcastIntent(target, new ProsePackage(prose)).broadcast();
 	}
 
 	/**
