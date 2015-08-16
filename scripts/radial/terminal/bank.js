@@ -1,22 +1,26 @@
 var getOptions = function(options, player, target) {
-	use = new RadialOption(RadialItem.ITEM_USE);
-	use.addChild(new RadialOption(RadialItem.BANK_TRANSFER));
-	use.addChild(new RadialOption(RadialItem.BANK_ITEMS));
+	var use = new RadialOption(RadialItem.ITEM_USE);
+	var reserve = new RadialOption(RadialItem.BANK_RESERVE);
+	var creature = player.getCreatureObject();
 	options.add(use);
 	options.add(new RadialOption(RadialItem.EXAMINE));
-	creature = player.getCreatureObject();
-	if (creature.getBankBalance() > 0)
-		use.addChild(new RadialOption(RadialItem.BANK_WITHDRAW_ALL));
-	if (creature.getCashBalance() > 0)
-		use.addChild(new RadialOption(RadialItem.BANK_DEPOSIT_ALL));
-	if (creature.getBankBalance() >= 1E9 || creature.getCashBalance() >= 1E9 || creature.getReserveBalance() > 0) {
-		reserve = new RadialOption(RadialItem.BANK_RESERVE);
-		if (creature.getBankBalance() >= 1E9 || creature.getCashBalance() >= 1E9)
-			reserve.addChild(new RadialOption(RadialItem.BANK_RESERVE_DEPOSIT));
-		if (creature.getReserveBalance() > 0)
-			reserve.addChild(new RadialOption(RadialItem.BANK_RESERVE_WITHDRAW));
+	if (creature.getCurrentCity().equals("@corellia_region_names:coronet") ||
+		creature.getCurrentCity().equals("@naboo_region_names:theed") || 
+		creature.getCurrentCity().equals("@tatooine_region_names:mos_eisley"))
 		options.add(reserve);
-	}
+	// Bank Transfer/Safety Deposit
+	use.addChild(RadialItem.BANK_TRANSFER);
+	use.addChild(RadialItem.BANK_ITEMS);
+	// Withdraw/Deposit
+	if (creature.getBankBalance() > 0)
+		use.addChild(RadialItem.BANK_WITHDRAW_ALL);
+	if (creature.getCashBalance() > 0)
+		use.addChild(RadialItem.BANK_DEPOSIT_ALL);
+	// Galactic Reserve
+	if (creature.getBankBalance() >= 1E9 || creature.getCashBalance() >= 1E9)
+		reserve.addChild(RadialItem.BANK_RESERVE_DEPOSIT);
+	if (creature.getReserveBalance() > 0)
+		reserve.addChild(RadialItem.BANK_RESERVE_WITHDRAW);
 };
 var handleSelection = function(player, target, selection) {
 	switch (selection) {
@@ -50,7 +54,7 @@ var handleSelection = function(player, target, selection) {
 			creature.setCashBalance(creature.getCashBalance() + amount);
 			creature.setBankBalance(0);
 			if (amount > 0)
-				intentFactory.sendSystemMessage(player, "You successfully withdraw " + amount + " credits from your account.");
+				intentFactory.sendSystemMessage(player, "@base_player:prose_withdraw_success", "DI", new java.lang.Integer(amount));
 			else
 				intentFactory.sendSystemMessage(player, '@error_message:bank_withdraw');
 			break;
@@ -61,13 +65,17 @@ var handleSelection = function(player, target, selection) {
 			creature.setBankBalance(amount + creature.getBankBalance());
 			creature.setCashBalance(0);
 			if (amount > 0)
-				intentFactory.sendSystemMessage(player, "You successfully deposit " + amount + " credits to your account.");
+				intentFactory.sendSystemMessage(player, "@base_player:prose_deposit_success", "DI", new java.lang.Integer(amount));
 			else
 				intentFactory.sendSystemMessage(player, '@error_message:bank_deposit');
 			break;
 		}
 		case RadialItem.BANK_RESERVE_DEPOSIT: {
 			creature = player.getCreatureObject();
+			if (!creature.canPerformGalacticReserveTransaction()) {
+				intentFactory.sendSystemMessage(player, "You have to wait to perform another Galactic Reserve transaction");
+				break;
+			}
 			amount = creature.getBankBalance();
 			if (amount > 1E9)
 				amount = 1E9;
@@ -77,10 +85,15 @@ var handleSelection = function(player, target, selection) {
 			}
 			creature.setBankBalance(creature.getBankBalance() - amount);
 			creature.setReserveBalance(creature.getReserveBalance() + amount);
+			creature.updateLastGalacticReserveTime();
 			break;
 		}
 		case RadialItem.BANK_RESERVE_WITHDRAW: {
 			creature = player.getCreatureObject();
+			if (!creature.canPerformGalacticReserveTransaction()) {
+				intentFactory.sendSystemMessage(player, "You have to wait to perform another Galactic Reserve transaction");
+				break;
+			}
 			amount = creature.getReserveBalance();
 			if (amount > 1E9)
 				amount = 1E9;
@@ -90,6 +103,7 @@ var handleSelection = function(player, target, selection) {
 			}
 			creature.setBankBalance(creature.getBankBalance() + amount);
 			creature.setReserveBalance(creature.getReserveBalance() - amount);
+			creature.updateLastGalacticReserveTime();
 			break;
 		}
 	}

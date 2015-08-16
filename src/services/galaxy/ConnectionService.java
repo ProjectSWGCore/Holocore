@@ -184,7 +184,8 @@ public class ConnectionService extends Service {
 		CreatureObject creature = zpsi.getCreature();
 		removeFromLists(before);
 		updatePlayTime(before);
-		creature.getPlayerObject().clearFlagBitmask(PlayerFlags.LD);
+		if (creature.getPlayerObject() != null)
+			creature.getPlayerObject().clearFlagBitmask(PlayerFlags.LD);
 		Log.i("ConnectionService", "Logged out %s with character %s", before.getUsername(), before.getCharacterName());
 		new PlayerEventIntent(before, before.getGalaxyName(), PlayerEvent.PE_LOGGED_OUT).broadcast();
 		Log.i("ConnectionService", "Disconnected %s with character %s and reason: %s", before.getUsername(), before.getCharacterName(), DisconnectReason.NEW_CONNECTION_ATTEMPT);

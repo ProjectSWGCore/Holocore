@@ -50,6 +50,8 @@ public class CreatureObject extends TangibleObject {
 	
 	private static final long serialVersionUID = 1L;
 	
+	private transient long lastReserveOperation	= 0;
+	
 	private Posture	posture					= Posture.UPRIGHT;
 	private Race	race					= Race.HUMAN; 
 	private double	movementScale			= 1;
@@ -90,6 +92,7 @@ public class CreatureObject extends TangibleObject {
 	private long 	ownerId					= 0;
 	private int 	battleFatigue			= 0;
 	private long 	statesBitmask			= 0;
+	private String	currentCity				= "";
 	private HologramColour hologramColour = HologramColour.DEFAULT;
 	
 	private SWGList<Integer>	baseAttributes	= new SWGList<Integer>(BaselineType.CREO, 1, 2);
@@ -254,6 +257,10 @@ public class CreatureObject extends TangibleObject {
 		return difficulty;
 	}
 	
+	public String getCurrentCity() {
+		return currentCity;
+	}
+	
 	public PlayerObject getPlayerObject() {
 		return (PlayerObject) (hasSlot("ghost") ? getSlottedObject("ghost") : null);
 	}
@@ -320,6 +327,14 @@ public class CreatureObject extends TangibleObject {
 		else if (reserveBalance > 3E9)
 			reserveBalance = (long) 3E9; // 3 billion cap
 		this.reserveBalance = reserveBalance;
+	}
+	
+	public boolean canPerformGalacticReserveTransaction() {
+		return (System.nanoTime() - lastReserveOperation) / 1E9 >= 15*60;
+	}
+	
+	public void updateLastGalacticReserveTime() {
+		lastReserveOperation = System.nanoTime();
 	}
 	
 	public void setMovementScale(double movementScale) {
@@ -405,6 +420,10 @@ public class CreatureObject extends TangibleObject {
 	public void setDifficulty(CreatureDifficulty difficulty) {
 		this.difficulty = difficulty;
 		sendDelta(6, 26, difficulty.getDifficulty());
+	}
+	
+	public void setCurrentCity(String currentCity) {
+		this.currentCity = currentCity;
 	}
 	
 	public String getMoodAnimation() {
