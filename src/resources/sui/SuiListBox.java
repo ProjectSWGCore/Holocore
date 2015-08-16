@@ -33,7 +33,7 @@ import java.util.Map;
 
 import resources.player.Player;
 
-public class SuiListBox extends SuiBaseWindow {
+public class SuiListBox extends SuiWindow {
 	private List <SuiListBoxItem> list;
 	
 	public SuiListBox(Player owner, SuiButtons buttons, String title, String prompt) {

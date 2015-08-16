@@ -13,7 +13,7 @@ import resources.player.Player;
 import intents.chat.ChatBroadcastIntent;
 import intents.chat.ChatBroadcastIntent.BroadcastType;
 import intents.chat.PersistentMessageIntent;
-import resources.sui.SuiWindow;
+import resources.sui.SuiBaseWindow;
 
 /**
  * @author Mads
@@ -122,11 +122,11 @@ public final class IntentFactory {
 	}
 
 	/**
-	 * Displays the provided {@link SuiWindow} to the player.
-	 * @param player Player to be shown the {@link SuiWindow}.
-	 * @param suiWindow {@link SuiWindow} to be shown
+	 * Displays the provided {@link SuiBaseWindow} to the player.
+	 * @param player Player to be shown the {@link SuiBaseWindow}.
+	 * @param suiWindow {@link SuiBaseWindow} to be shown
 	 */
-	public void showSuiWindow(Player player, SuiWindow suiWindow) {
+	public void showSuiWindow(Player player, SuiBaseWindow suiWindow) {
 		new SuiWindowIntent(player, suiWindow, SuiWindowIntent.SuiWindowEvent.NEW).broadcast();
 	}
 }

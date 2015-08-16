@@ -32,7 +32,7 @@ import java.util.List;
 
 import resources.player.Player;
 
-public class SuiTableWindow extends SuiBaseWindow {
+public class SuiTableWindow extends SuiWindow {
 
 	private List<SuiTableColumn> table;
 	

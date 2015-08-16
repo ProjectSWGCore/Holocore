@@ -29,7 +29,7 @@ package resources.sui;
 
 import resources.player.Player;
 
-public class SuiMessageBox extends SuiBaseWindow {
+public class SuiMessageBox extends SuiWindow {
 
 	public SuiMessageBox(Player owner, SuiButtons buttons, String title, String prompt) {
 		super("Script.messageBox", owner, buttons, title, prompt);

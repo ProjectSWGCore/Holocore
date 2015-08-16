@@ -91,7 +91,7 @@ public class SuiComponent implements Encodable {
 
 		int size = narrowParams.size();
 		if (size < 3) {
-			Log.i("SuiComponent", "Tried to get subscribed properties when there are none for target %s", getTarget());
+			Log.w("SuiComponent", "Tried to get subscribed properties when there are none for target %s", getTarget());
 		} else {
 			List<String> subscribedProperties = new ArrayList<>();
 
@@ -111,7 +111,7 @@ public class SuiComponent implements Encodable {
 
 		int size = narrowParams.size();
 		if (size < 3) {
-			Log.i("SuiComponent", "Tried to get subscribed callback when there is none for target %s", getTarget());
+			Log.w("SuiComponent", "Tried to get subscribed callback when there is none for target %s", getTarget());
 		} else {
 
 			return narrowParams.get(2);
@@ -125,11 +125,11 @@ public class SuiComponent implements Encodable {
 
 		int size = narrowParams.size();
 		if (size < 3) {
-			Log.i("SuiComponent", "Tried to get subscribed event type when there is none for target %s", getTarget());
+			Log.w("SuiComponent", "Tried to get subscribed event type when there is none for target %s", getTarget());
 		} else {
 			byte[] bytes = narrowParams.get(1).getBytes();
 			if (bytes.length > 1) {
-				Log.i("SuiComponent", "Tried to get event tyep but narrowparams string byte array length is more than 1");
+				Log.w("SuiComponent", "Tried to get eventType but narrowparams string byte array length is more than 1");
 				return -1;
 			}
 

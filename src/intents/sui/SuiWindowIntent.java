@@ -29,23 +29,23 @@ package intents.sui;
 
 import resources.control.Intent;
 import resources.player.Player;
-import resources.sui.SuiWindow;
+import resources.sui.SuiBaseWindow;
 
 public class SuiWindowIntent extends Intent {
 	public static final String TYPE = "SuiWindowIntent";
 	
-	private SuiWindow window;
+	private SuiBaseWindow window;
 	private Player player;
 	private SuiWindowEvent event;
 	
-	public SuiWindowIntent(Player player, SuiWindow window, SuiWindowEvent event) {
+	public SuiWindowIntent(Player player, SuiBaseWindow window, SuiWindowEvent event) {
 		super(TYPE);
 		this.player = player;
 		this.window = window;
 		this.event = event;
 	}
 
-	public SuiWindow getWindow() { return this.window; }
+	public SuiBaseWindow getWindow() { return this.window; }
 	public Player getPlayer() { return this.player; }
 	public SuiWindowEvent getEvent() { return event; }
 	

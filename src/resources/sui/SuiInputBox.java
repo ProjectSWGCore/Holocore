@@ -31,7 +31,7 @@ import resources.player.Player;
 
 import java.util.Map;
 
-public class SuiInputBox extends SuiBaseWindow {
+public class SuiInputBox extends SuiWindow {
 
 	public SuiInputBox(Player owner, SuiButtons buttons, String title, String prompt) {
 		super("Script.inputBox", owner, buttons, title, prompt);

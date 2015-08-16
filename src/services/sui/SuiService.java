@@ -41,7 +41,7 @@ import resources.server_info.Log;
 import resources.sui.ISuiCallback;
 import resources.sui.SuiComponent;
 import resources.sui.SuiEvent;
-import resources.sui.SuiWindow;
+import resources.sui.SuiBaseWindow;
 import utilities.Scripts;
 
 import java.util.ArrayList;
@@ -52,7 +52,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class SuiService extends Service {
 
-	private final Map<Long, List<SuiWindow>> windows;
+	private final Map<Long, List<SuiBaseWindow>> windows;
 
 	public SuiService() {
 		windows = new ConcurrentHashMap<>();
@@ -105,23 +105,23 @@ public class SuiService extends Service {
 	}
 	
 	private void handleSuiEventNotification(Player player, SuiEventNotification p) {
-		List<SuiWindow> activeWindows = windows.get(player.getNetworkId());
+		List<SuiBaseWindow> activeWindows = windows.get(player.getNetworkId());
 		if (activeWindows == null || activeWindows.size() <= 0) {
-			Log.i("SuiService:SuiEventNotification", "There are no active windows for %s!", player);
+			Log.w("SuiService:SuiEventNotification", "There are no active windows for %s!", player);
 			return;
 		}
 
-		SuiWindow window = getWindowById(activeWindows, p.getWindowId());
+		SuiBaseWindow window = getWindowById(activeWindows, p.getWindowId());
 		
 		if (window == null) {
-			Log.i("SuiService:SuiEventNotification", "Received window ID %i that is not assigned to the player %s", p.getWindowId(), player);
+			Log.w("SuiService:SuiEventNotification", "Received window ID %i that is not assigned to the player %s", p.getWindowId(), player);
 			return;
 		}
 
 		SuiComponent component = window.getSubscriptionByIndex(p.getEventIndex());
 
 		if (component == null) {
-			Log.i("SuiService:SuiEventNotification", "SuiWindow %s retrieved null subscription from supplied event index %i", window, p.getEventIndex());
+			Log.w("SuiService:SuiEventNotification", "SuiWindow %s retrieved null subscription from supplied event index %i", window, p.getEventIndex());
 			return;
 		}
 
@@ -144,7 +144,6 @@ public class SuiService extends Service {
 			parameters.put(suiSubscribedProperties.get(i), eventNotificationProperties.get(i));
 		}
 
-		parameters.forEach((k, v) -> System.out.println("Key: " + k + " | Value: " + v));
 		if (window.hasCallbackFunction(callback)) {
 			String script = window.getCallbackScript(callback);
 			Scripts.invoke(script, callback, player, player.getCreatureObject(), event, parameters);
@@ -158,7 +157,7 @@ public class SuiService extends Service {
 			activeWindows.remove(window);
 	}
 	
-	private void displayWindow(Player player, SuiWindow window) {
+	private void displayWindow(Player player, SuiBaseWindow window) {
 		int id = createWindowId();
 		window.setId(id);
 
@@ -166,7 +165,7 @@ public class SuiService extends Service {
 		player.sendPacket(packet);
 
 		long networkId = player.getNetworkId();
-		List<SuiWindow> activeWindows = windows.get(networkId);
+		List<SuiBaseWindow> activeWindows = windows.get(networkId);
 		if (activeWindows == null) {
 			activeWindows = new ArrayList<>();
 			windows.put(networkId, activeWindows);
@@ -174,8 +173,8 @@ public class SuiService extends Service {
 		activeWindows.add(window);
 	}
 
-	private SuiWindow getWindowById(List<SuiWindow> windows, int id) {
-		for (SuiWindow window : windows) {
+	private SuiBaseWindow getWindowById(List<SuiBaseWindow> windows, int id) {
+		for (SuiBaseWindow window : windows) {
 			if (window.getId() == id)
 				return window;
 		}

@@ -32,6 +32,7 @@ import intents.server.ServerManagementIntent.ServerManagementEvent;
 import resources.commands.ICmdCallback;
 import resources.objects.SWGObject;
 import resources.player.Player;
+import resources.server_info.Log;
 import resources.sui.ISuiCallback;
 import resources.sui.SuiButtons;
 import resources.sui.SuiEvent;
@@ -80,7 +81,7 @@ public class ServerCmdCallback implements ICmdCallback {
 				case 2: handleUnbanPlayer(player); break;
 				case 3: handleShutdownServer(player); break;
 				case 4: handleCustomShutdownServer(player); break;
-				default: System.out.println("Nothing for selection " + selection); break;
+				default: Log.i("ServerCmdCallback", "There is no handle function for selected list item %d", selection); break;
 			}
 		}
 		
@@ -137,7 +138,7 @@ public class ServerCmdCallback implements ICmdCallback {
 				if (index < 0 || index >= unitValues.length)
 					return;
 				timeUnitReference.set(unitValues[index]);
-				timeWindow.display();		// Ziggy: Display the next window
+				timeWindow.display();        // Ziggy: Display the next window
 			});
 			
 			timeWindow.addOkButtonCallback("handleCustomShutdownCountdown", (player, actor1, event, parameters) -> {
