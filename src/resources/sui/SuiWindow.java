@@ -29,151 +29,298 @@ package resources.sui;
 
 import intents.sui.SuiWindowIntent;
 import intents.sui.SuiWindowIntent.SuiWindowEvent;
+import network.packets.Packet;
+import resources.encodables.Encodable;
+import resources.player.Player;
+import resources.server_info.Log;
 
 import java.nio.ByteBuffer;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import network.packets.Packet;
-import resources.encodables.Encodable;
-import resources.player.Player;
-
 public class SuiWindow implements Encodable {
 
 	private int id;
-	private String script;
+	private String suiScript;
 	private Player owner;
 	private long rangeObjId;
 	private float maxDistance = 0;
 	private List<SuiComponent> components = new ArrayList<>();
-	private Map<Integer, String> scriptCallbacks;
-	private Map<Integer, ISuiCallback> javaCallbacks;
-	
-	public SuiWindow(String script, Player owner) {
-		this.script = script;
+	private Map<String, ISuiCallback> callbacks;
+	private Map<String, String> scriptCallbacks;
+	private boolean hasSubscriptionComponent = false;
+
+	public SuiWindow() {
+	}
+
+	public SuiWindow(String suiScript, Player owner) {
+		this.suiScript = suiScript;
 		this.owner = owner;
 	}
 
 	public final void clearDataSource(String dataSource) {
-		SuiComponent component = createComponent((byte) 1);
-		
-		component.getNarrowParams().add(dataSource);
+		SuiComponent component = new SuiComponent(SuiComponent.Type.CLEAR_DATA_SOURCE, dataSource);
 		components.add(component);
-	}
-	
-	public final void addChildWidget(String property, String value) {
-		SuiComponent component = createComponent((byte) 2);
-		
-		addNarrowParams(component, property);
-		
-		component.getWideParams().add(value);
-		components.add(component);
-	}
-	
-	public final void setProperty(String property, String value) {
-		SuiComponent component = createComponent((byte) 3);
-		
-		addNarrowParams(component, property);
-		
-		component.getWideParams().add(value);
-		components.add(component);
-	}
-	
-	public final void addDataItem(String name, String value) {
-		SuiComponent component = createComponent((byte) 4);
-		
-		addNarrowParams(component, name);
-		
-		component.getWideParams().add(value);
-		components.add(component);
-	}
-	
-	private void addCallbackComponent(String source, Trigger trigger, List<String> returnParams) {
-		SuiComponent component = createComponent((byte) 5);
-		
-		component.getNarrowParams().add(source);
-		component.getNarrowParams().add(new String(new byte[] {trigger.getByte()}, Charset.forName("UTF-8")));
-		component.getNarrowParams().add("handleSUI");
-		
-		for (String returnParam : returnParams) {
-			addNarrowParams(component, returnParam);
-		}
-		
-		components.add(component);
-	}
-	
-	public final void addDataSource(String name, String value) {
-		SuiComponent component = createComponent((byte) 6);
-		
-		addNarrowParams(component, name);
-		
-		component.getWideParams().add(value);
-		components.add(component);
-	}
-	
-	public final void clearDataSourceContainer(String dataSource) {
-		SuiComponent component = createComponent((byte) 7);
-		
-		addNarrowParams(component, dataSource);
-		
-		components.add(component);
-	}
-	
-	public final void addTableDataSource(String dataSource, String value) {
-		SuiComponent component = createComponent((byte) 8);
-		
-		addNarrowParams(component, dataSource);
-		
-		component.getWideParams().add(value);
-		components.add(component);
-	}
-	
-	public final void addCallback(int eventId, String source, Trigger trigger, List<String> returnParams, ISuiCallback callback) {
-		addCallbackComponent(source, trigger, returnParams);
-		
-		if (javaCallbacks == null)
-			javaCallbacks = new HashMap<>();
-		javaCallbacks.put(eventId, callback);
-	}
-	
-	public final void addCallback(int eventId, String source, Trigger trigger, List<String> returnParams, String callbackScript) {
-		addCallbackComponent(source, trigger, returnParams);
-		
-		if (scriptCallbacks == null)
-			scriptCallbacks = new HashMap<>();
-		scriptCallbacks.put(eventId, callbackScript);
 	}
 
-	private SuiComponent createComponent(byte type) {
-		SuiComponent component = new SuiComponent();
-		component.setType(SuiComponent.Type.valueOf(type));
-		
-		return component;
+	public final void addChildWidget(String type, String childWidget, String parentWidget) {
+		SuiComponent component = new SuiComponent(SuiComponent.Type.ADD_CHILD_WIDGET, parentWidget);
+
+		component.addNarrowParam(type);
+		component.addNarrowParam(childWidget);
+
+		components.add(component);
 	}
-	
-	private void addNarrowParams(SuiComponent component, String property) {
-		for (String s : property.split(":")) {
-			component.getNarrowParams().add(s);
+
+	public final void setProperty(String widget, String property, String value) {
+		SuiComponent component = new SuiComponent(SuiComponent.Type.SET_PROPERTY, widget);
+
+		component.addNarrowParam(property);
+		component.addWideParam(value);
+
+		components.add(component);
+	}
+
+	public final void addDataItem(String dataSource, String name, String value) {
+		SuiComponent component = new SuiComponent(SuiComponent.Type.ADD_DATA_ITEM, dataSource);
+
+		component.addNarrowParam(name);
+		component.addWideParam(value);
+
+		components.add(component);
+	}
+
+	private void subscribeToEvent(int event, String widgetSource, String callback) {
+		SuiComponent component = getSubscriptionForEvent(event, widgetSource);
+		if (component != null) {
+			Log.i("SuiWindow", "Added event callback %d to %s when the event is already subscribed to, replacing callback to %s", event, widgetSource, callback);
+			component.getNarrowParams().set(2, callback);
+		} else {
+			component = new SuiComponent(SuiComponent.Type.SUBSCRIBE_TO_EVENT, widgetSource);
+			component.addNarrowParam(getWrappedEventString(event));
+			component.addNarrowParam(callback);
+
+			components.add(component);
 		}
+		if (!hasSubscriptionComponent())
+			hasSubscriptionComponent = true;
 	}
-	
-	public final void display() { new SuiWindowIntent(owner, this, SuiWindowEvent.NEW).broadcast(); }
-	public final void display(Player player) { new SuiWindowIntent(player, this, SuiWindowEvent.NEW).broadcast();}
-	
-	public final long getRangeObjId() { return rangeObjId; }
-	public final void setRangeObjId(long rangeObjId) { this.rangeObjId = rangeObjId; }
-	public final int getId() { return id; }
-	public final void setId(int id) { this.id = id; }
-	public final String getScript() { return script; }
-	public final Player getOwner() { return owner; }
-	public final float getMaxDistance() { return maxDistance; }
-	public final void setMaxDistance(float maxDistance) { this.maxDistance = maxDistance; }
-	public final List<SuiComponent> getComponents() { return components; }
-	public final ISuiCallback getJavaCallback(int eventType) { return ((javaCallbacks == null) ? null : javaCallbacks.get(eventType)); }
-	public final String getScriptCallback(int eventType) { return ((scriptCallbacks == null) ? null : scriptCallbacks.get(eventType)); }
+
+	private void subscribeToPropertyEvent(int event, String widgetSource, String propertyWidget, String propertyName) {
+		SuiComponent component = getSubscriptionForEvent(event, widgetSource);
+		if (component != null) {
+			// This component already has the trigger and source param, just need to add the widget and property
+			// for client to return the value to the server
+			component.addNarrowParam(propertyWidget);
+			component.addNarrowParam(propertyName);
+		} else {
+			component = new SuiComponent(SuiComponent.Type.SUBSCRIBE_TO_EVENT, widgetSource);
+			component.addNarrowParam(getWrappedEventString(event));
+			component.addNarrowParam("");
+			component.addNarrowParam(propertyWidget);
+			component.addNarrowParam(propertyName);
+			components.add(component);
+		}
+		if (!hasSubscriptionComponent())
+			hasSubscriptionComponent = true;
+	}
+
+	private void addDataSourceContainer(String dataSourceContainer, String name, String value) {
+		SuiComponent component = new SuiComponent(SuiComponent.Type.ADD_DATA_SOURCE_CONTAINER, dataSourceContainer);
+
+		component.addNarrowParam(name);
+		component.addWideParam(value);
+
+		components.add(component);
+	}
+
+	public final void clearDataSourceContainer(String dataSourceContainer) {
+		SuiComponent component = new SuiComponent(SuiComponent.Type.CLEAR_DATA_SOURCE_CONTAINER, dataSourceContainer);
+		components.add(component);
+	}
+
+	public final void addDataSource(String dataSource, String name, String value) {
+		SuiComponent component = new SuiComponent(SuiComponent.Type.ADD_DATA_SOURCE, dataSource);
+
+		component.addNarrowParam(name);
+		component.addWideParam(value);
+
+		components.add(component);
+	}
+
+	public final void addReturnableProperty(SuiEvent event, String source, String widget, String property) {
+		subscribeToPropertyEvent(event.getValue(), source, widget, property);
+	}
+
+	public final void addReturnableProperty(SuiEvent event, String widget, String property) {
+		addReturnableProperty(event, "", widget, property);
+	}
+
+	public final void addReturnableProperty(String widget, String property) {
+		subscribeToPropertyEvent(SuiEvent.OK_PRESSED.getValue(), "", widget, property);
+		subscribeToPropertyEvent(SuiEvent.CANCEL_PRESSED.getValue(), "", widget, property);
+	}
+
+	public final void addCallback(SuiEvent event, String source, String name, ISuiCallback callback) {
+		subscribeToEvent(event.getValue(), source, name);
+		addJavaCallback(name, callback);
+	}
+
+	public final void addCallback(SuiEvent event, String name, ISuiCallback callback) {
+		addCallback(event, "", name, callback);
+	}
+
+	public final void addCallback(SuiEvent event, String source, String script, String function) {
+		subscribeToEvent(event.getValue(), source, function);
+		addScriptCallback(function, script);
+	}
+
+	public final void addCallback(SuiEvent event, String script, String function) {
+		addCallback(event, "", script, function);
+	}
+
+	public final void addCallback(String source, String script, String function) {
+		subscribeToEvent(SuiEvent.OK_PRESSED.getValue(), source, function);
+		subscribeToEvent(SuiEvent.CANCEL_PRESSED.getValue(), source, function);
+		addScriptCallback(function, script);
+	}
+
+	public final void addCallback(String script, String function) {
+		addCallback("", script, function);
+	}
+
+	public final void addCallback(String source, String name, ISuiCallback callback) {
+		subscribeToEvent(SuiEvent.OK_PRESSED.getValue(), source, name);
+		subscribeToEvent(SuiEvent.CANCEL_PRESSED.getValue(), source, name);
+		addJavaCallback(name, callback);
+	}
+
+	public final void addCallback(String name, ISuiCallback callback) {
+		addCallback("", name, callback);
+	}
+
+	public final SuiComponent getSubscriptionForEvent(int event, String widget) {
+		for (SuiComponent component : components) {
+			if (component.getType() != SuiComponent.Type.SUBSCRIBE_TO_EVENT)
+				continue;
+
+			List<String> narrowParams = component.getNarrowParams();
+			int eventType = component.getSubscribedToEventType();
+
+			if (eventType == event && component.getTarget().equals(widget))
+				return component;
+		}
+		return null;
+	}
+
+	public final SuiComponent getSubscriptionByIndex(int index) {
+		int count = 0;
+		for (SuiComponent component : components) {
+			if (component.getType() == SuiComponent.Type.SUBSCRIBE_TO_EVENT) {
+				if (index == count) return component;
+				else count++;
+			}
+		}
+		return null;
+	}
+
+	public final void display() {
+		onDisplayRequest();
+		new SuiWindowIntent(owner, this, SuiWindowEvent.NEW).broadcast();
+	}
+
+	public final void display(Player player) {
+		onDisplayRequest();
+		new SuiWindowIntent(player, this, SuiWindowEvent.NEW).broadcast();
+	}
+
+	public final long getRangeObjId() {
+		return rangeObjId;
+	}
+
+	public final void setRangeObjId(long rangeObjId) {
+		this.rangeObjId = rangeObjId;
+	}
+
+	public final int getId() {
+		return id;
+	}
+
+	public final void setId(int id) {
+		this.id = id;
+	}
+
+	public final String getSuiScript() {
+		return suiScript;
+	}
+
+	public final Player getOwner() {
+		return owner;
+	}
+
+	public final float getMaxDistance() {
+		return maxDistance;
+	}
+
+	public final void setMaxDistance(float maxDistance) {
+		this.maxDistance = maxDistance;
+	}
+
+	public final List<SuiComponent> getComponents() {
+		return components;
+	}
+
+	public final ISuiCallback getJavaCallback(String name) {
+		return callbacks != null ? callbacks.get(name) : null;
+	}
+
+	public final String getCallbackScript(String function) {
+		return scriptCallbacks != null ? scriptCallbacks.get(function) : null;
+	}
+
+	public final boolean hasCallbackFunction(String function) {
+		return scriptCallbacks != null && scriptCallbacks.containsKey(function);
+	}
+
+	public final boolean hasJavaCallback(String name) {
+		return callbacks != null && callbacks.containsKey(name);
+	}
+
+	public final boolean hasSubscriptionComponent() {
+		return hasSubscriptionComponent;
+	}
+
+	// Add a simple ok/cancel button subscriptions if no callbacks is assigned so the server is sent a SuiEventNotification when client destroys the page.
+	// Doing it this way will ensures the server removes the stored SuiWindow from memory.
+	private void prepare() {
+		if (hasSubscriptionComponent())
+			return;
+
+		subscribeToEvent(SuiEvent.OK_PRESSED.getValue(), "", "handleSUI");
+		subscribeToEvent(SuiEvent.CANCEL_PRESSED.getValue(), "", "handleSUI");
+	}
+
+	protected void onDisplayRequest() {
+		prepare();
+	}
+
+	private void addJavaCallback(String name, ISuiCallback callback) {
+		if (callbacks == null) callbacks = new HashMap<>();
+
+		callbacks.put(name, callback);
+	}
+
+	private void addScriptCallback(String function, String script) {
+		if (scriptCallbacks == null) scriptCallbacks = new HashMap<>();
+
+		scriptCallbacks.put(function, script);
+	}
+
+	private String getWrappedEventString(int event) {
+		return new String(new byte[]{(byte) event});
+	}
 
 	@Override
 	public byte[] encode() {
@@ -186,9 +333,9 @@ public class SuiWindow implements Encodable {
 			listSize += data.length;
 		}
 
-		ByteBuffer data = ByteBuffer.allocate(34 + script.length() + listSize);
+		ByteBuffer data = ByteBuffer.allocate(34 + suiScript.length() + listSize);
 		Packet.addInt(data, id);
-		Packet.addAscii(data, script);
+		Packet.addAscii(data, suiScript);
 		Packet.addList(data, componentData);
 		Packet.addLong(data, rangeObjId);
 		Packet.addFloat(data, maxDistance);
@@ -200,28 +347,12 @@ public class SuiWindow implements Encodable {
 
 	@Override
 	public void decode(ByteBuffer data) {
-		id			= Packet.getInt(data);
-		script		= Packet.getAscii(data);
-		components	= Packet.getList(data, SuiComponent.class);
-		rangeObjId	= Packet.getLong(data);
-		maxDistance	= Packet.getFloat(data);
+		id = Packet.getInt(data);
+		suiScript = Packet.getAscii(data);
+		components = Packet.getList(data, SuiComponent.class);
+		rangeObjId = Packet.getLong(data);
+		maxDistance = Packet.getFloat(data);
 		// unk long
 		// unk int
-	}
-
-	public enum Trigger {
-		UPDATE	((byte) 4),
-		OK		((byte) 9),
-		CANCEL	((byte) 10);
-		
-		private byte b;
-		
-		Trigger(byte b) {
-			this.b = b;
-		}
-		
-		public byte getByte() {
-			return b;
-		}
 	}
 }

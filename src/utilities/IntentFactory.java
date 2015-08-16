@@ -1,6 +1,7 @@
 package utilities;
 
 import intents.sui.SuiWindowIntent;
+import network.packets.swg.zone.chat.ChatSystemMessage;
 import resources.Terrain;
 import resources.encodables.OutOfBandPackage;
 import resources.encodables.ProsePackage;
@@ -86,6 +87,15 @@ public final class IntentFactory {
 	 */
 	public void sendSystemMessage(Player target, String table, String key, Object... objects) {
 		new ChatBroadcastIntent(target, new ProsePackage("StringId", new StringId(table, key), objects)).broadcast();
+	}
+
+	/**
+	 * Sends a message to just the console chat for the target.
+	 * @param target Player to receive the message
+	 * @param message Message to display in the players chat console.
+	 */
+	public void sendConsoleMessage(Player target, String message) {
+		target.sendPacket(new ChatSystemMessage(ChatSystemMessage.SystemChatType.CHAT, message));
 	}
 
 	/**

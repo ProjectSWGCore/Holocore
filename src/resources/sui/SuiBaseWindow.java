@@ -30,26 +30,118 @@ package resources.sui;
 import resources.player.Player;
 
 public class SuiBaseWindow extends SuiWindow {
-	private String windowType;
-	
-	public SuiBaseWindow(String script, Player owner, String title, String prompt) {
+
+	public SuiBaseWindow(String script, Player owner, SuiButtons buttons, String title, String prompt) {
 		super(script, owner);
-		windowType = script.replace("Script.", "");
 		setTitle(title);
 		setPrompt(prompt);
+		setButtons(buttons);
 	}
 
-	public void setSize(int x, int z) {
-		setProperty(windowType + ":Size", String.valueOf(x) + "," + String.valueOf(z));
+	public SuiBaseWindow(String script, Player owner, SuiButtons buttons, String title, String prompt, String callbackScript, String function) {
+		this(script, owner, buttons, title, prompt);
+
+		addOkButtonCallback(callbackScript, function);
+		addCancelButtonCallback(callbackScript, function);
 	}
-	
+
+	public SuiBaseWindow(String script, Player owner, SuiButtons buttons, String title, String prompt, String callback, ISuiCallback suiCallback) {
+		this(script, owner, buttons, title, prompt);
+
+		addOkButtonCallback(callback, suiCallback);
+		addCancelButtonCallback(callback, suiCallback);
+	}
+
+	public SuiBaseWindow(String script, Player owner, String title, String prompt) {
+		this(script, owner, SuiButtons.DEFAULT, title, prompt);
+	}
+
 	public void setTitle(String title) {
 		if (title != null)
-			setProperty("bg.caption.lblTitle:Text", title);
+			setPropertyText("bg.caption.lblTitle", title);
 	}
 	
 	public void setPrompt(String prompt) {
 		if (prompt != null)
-			setProperty("Prompt.lblPrompt:Text", prompt);
+			setPropertyText("Prompt.lblPrompt", prompt);
+	}
+
+	public void setPropertyText(String widget, String value) {
+		setProperty(widget, "Text", value);
+	}
+
+	public void setAutosave(boolean autosave) {
+		setProperty("this", "autosave", String.valueOf(autosave));
+	}
+
+	public void setLocation(int x, int y) {
+		setProperty("this", "Location", String.valueOf(x) + "," + String.valueOf(y));
+	}
+
+	public void setSize(int width, int height) {
+		setProperty("this", "Size", String.valueOf(width) + "," + String.valueOf(height));
+	}
+
+	protected void setOkButtonText() {
+		setOkButtonText("@ok");
+	}
+
+	protected void setOkButtonText(String text) {
+		setProperty("btnOk", "Text", text);
+	}
+
+	protected void setCancelButtonText() {
+		setCancelButtonText("@cancel");
+	}
+
+	protected void setCancelButtonText(String text) {
+		setProperty("btnCancel", "Text", text);
+	}
+
+	protected void setShowOtherButton(boolean display, String text) {
+		setProperty("btnOther", "Visible", String.valueOf(display));
+		if (display) {
+			setProperty("btnOther", "Text", text);
+			addOtherButtonReturnable();
+		}
+	}
+
+	protected void setShowCancelButton(boolean display) {
+		String value = String.valueOf(display);
+		setProperty("btnCancel", "Enabled", value);
+		setProperty("btnCancel", "Visible", value);
+	}
+
+	public void addOkButtonCallback(String callback, ISuiCallback suiCallback) {
+		addCallback(SuiEvent.OK_PRESSED, callback, suiCallback);
+	}
+
+	public void addOkButtonCallback(String script, String function) {
+		addCallback(SuiEvent.OK_PRESSED, script, function);
+	}
+
+	public void addCancelButtonCallback(String callback, ISuiCallback suiCallback) {
+		addCallback(SuiEvent.CANCEL_PRESSED, callback, suiCallback);
+	}
+
+	public void addCancelButtonCallback(String script, String function) {
+		addCallback(SuiEvent.CANCEL_PRESSED, script, function);
+	}
+
+	public void addOtherButtonReturnable() {
+		addReturnableProperty(SuiEvent.OK_PRESSED, "this", "otherPressed");
+	}
+
+	protected void setButtons(SuiButtons buttons) {
+		switch(buttons) {
+			case OK_CANCEL:
+				setOkButtonText();
+				setCancelButtonText();
+				break;
+			case OK:
+			default:
+				setOkButtonText();
+				break;
+		}
 	}
 }

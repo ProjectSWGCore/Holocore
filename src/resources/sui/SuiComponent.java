@@ -29,6 +29,7 @@ package resources.sui;
 
 import network.packets.Packet;
 import resources.encodables.Encodable;
+import resources.server_info.Log;
 import utilities.Encoder;
 
 import java.nio.ByteBuffer;
@@ -40,39 +41,101 @@ import java.util.List;
  */
 public class SuiComponent implements Encodable {
 
-	public SuiComponent() {}
+	private Type type;
+	private List <String> wideParams;
+	private List<String> narrowParams;
 
-	public SuiComponent(Type type) {
-		this.type = type;
+	public SuiComponent() {
+		type = Type.NONE;
+		wideParams = new ArrayList<>();
+		narrowParams = new ArrayList<>();
 	}
 
-	private Type type;
-	private List <String> wideParams = new ArrayList<>();
-	private List<String> narrowParams = new ArrayList<>();
+	public SuiComponent(Type type, String widget) {
+		this.type = type;
+		this.wideParams 	= new ArrayList<>(3);
+		this.narrowParams	= new ArrayList<>(3);
+
+		narrowParams.add(widget);
+	}
 
 	public Type getType() {
 		return type;
 	}
-	public void setType(Type type) {
-		this.type = type;
-	}
 	public List <String> getNarrowParams() {
 		return narrowParams;
-	}
-	public void setNarrowParams(List <String> narrowParams) {
-		this.narrowParams = narrowParams;
 	}
 	public List <String> getWideParams() {
 		return wideParams;
 	}
-	public void setWideParams(List <String> wideParams) {
-		this.wideParams = wideParams;
+
+	/**
+	 * Retrieve the base widget that this component targets
+	 * @return Base widget this component targets
+	 */
+	public String getTarget() {
+		return narrowParams.get(0);
 	}
+
 	public void addNarrowParam(String param) {
 		narrowParams.add(param);
 	}
+
 	public void addWideParam(String param) {
 		wideParams.add(param);
+	}
+
+	public List<String> getSubscribedProperties() {
+		if (type != Type.SUBSCRIBE_TO_EVENT)
+			return null;
+
+		int size = narrowParams.size();
+		if (size < 3) {
+			Log.i("SuiComponent", "Tried to get subscribed properties when there are none for target %s", getTarget());
+		} else {
+			List<String> subscribedProperties = new ArrayList<>();
+
+			for (int i = 3; i < size;) {
+				String property = narrowParams.get(i++) + "." + narrowParams.get(i++);
+				subscribedProperties.add(property);
+			}
+
+			return subscribedProperties;
+		}
+		return null;
+	}
+
+	public String getSubscribeToEventCallback() {
+		if (type != Type.SUBSCRIBE_TO_EVENT)
+			return null;
+
+		int size = narrowParams.size();
+		if (size < 3) {
+			Log.i("SuiComponent", "Tried to get subscribed callback when there is none for target %s", getTarget());
+		} else {
+
+			return narrowParams.get(2);
+		}
+		return null;
+	}
+
+	public int getSubscribedToEventType() {
+		if (type != Type.SUBSCRIBE_TO_EVENT)
+			return -1;
+
+		int size = narrowParams.size();
+		if (size < 3) {
+			Log.i("SuiComponent", "Tried to get subscribed event type when there is none for target %s", getTarget());
+		} else {
+			byte[] bytes = narrowParams.get(1).getBytes();
+			if (bytes.length > 1) {
+				Log.i("SuiComponent", "Tried to get event tyep but narrowparams string byte array length is more than 1");
+				return -1;
+			}
+
+			return (int) bytes[0];
+		}
+		return -1;
 	}
 
 	@Override

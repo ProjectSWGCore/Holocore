@@ -29,89 +29,130 @@ package resources.sui;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import resources.player.Player;
 
 public class SuiListBox extends SuiBaseWindow {
 	private List <SuiListBoxItem> list;
 	
-	public SuiListBox(Player owner, ListBoxType type, String title, String prompt) {
-		super("Script.listBox", owner, title, prompt);
-		list = new ArrayList<SuiListBoxItem>();
-		switch(type) {
-		case OK:
-			setProperty("btnOk:visible", "True");
-			setProperty("btnOk:Text", "@ok");
-			setProperty("btnCancel:visible", "False");
-			break;
-		case OK_CANCEL:
-			setProperty("btnOk:visible", "True");
-			setProperty("btnCancel:visible", "True");
-			setProperty("btnOk:Text", "@ok");
-			setProperty("btnCancel:Text", "@cancel");
-			break;
-		default: break;
-		}
+	public SuiListBox(Player owner, SuiButtons buttons, String title, String prompt) {
+		super("Script.listBox", owner, buttons, title, prompt);
 		clearDataSource("List.dataList");
+
+		list = new ArrayList<>();
 	}
 
 	public SuiListBox(Player owner, String title, String prompt) {
-		this(owner, ListBoxType.OK_CANCEL, title, prompt);
+		this(owner, SuiButtons.OK_CANCEL, title, prompt);
 	}
-	
-	public void addListItem(String name, long id) {
-		SuiListBoxItem item = new SuiListBoxItem(name, id);
+
+	public static int getSelectedRow(Map<String, String> parameters) {
+		String selectedIndex = parameters.get("List.lstList.SelectedRow");
+		if (selectedIndex != null) return Integer.parseInt(selectedIndex);
+		return -1;
+	}
+
+	@Override
+	protected void setButtons(SuiButtons buttons) {
+		switch(buttons) {
+			case OK_CANCEL:
+				setOkButtonText("@ok");
+				setCancelButtonText("@cancel");
+				break;
+			case YES_NO:
+				setOkButtonText("@yes");
+				setCancelButtonText("@no");
+				break;
+			case OK_REFRESH:
+				setOkButtonText("@ok");
+				setCancelButtonText("@refresh");
+				break;
+			case OK_CANCEL_REFRESH:
+				setOkButtonText("@ok");
+				setCancelButtonText("@cancel");
+				setShowOtherButton(true, "@refresh");
+				break;
+			case OK_CANCEL_ALL:
+				setOkButtonText("@ok");
+				setCancelButtonText("@cancel");
+				setShowOtherButton(true, "@all");
+				break;
+			case REFRESH:
+				setOkButtonText("@refresh");
+				setShowCancelButton(false);
+				break;
+			case REFRESH_CANCEL:
+				setOkButtonText("@refresh");
+				setCancelButtonText("@cancel");
+				break;
+			case REMOVE_CANCEL:
+				setOkButtonText("@remove");
+				setCancelButtonText("@cancel");
+				break;
+			case MOVEUP_MOVEDOWN_DONE:
+				setOkButtonText("@moveup");
+				setCancelButtonText("@done");
+				setShowOtherButton(true, "@movedown");
+				break;
+			case BET_MAX_BET_ONE_SPIN:
+				setOkButtonText("@ok");
+				setCancelButtonText("@spin");
+				setShowOtherButton(true, "@bet_one");
+				break;
+			case OK:
+			case DEFAULT:
+			default:
+				setOkButtonText("@ok");
+				setShowCancelButton(false);
+				break;
+		}
+	}
+
+	@Override
+	protected void onDisplayRequest() {
+		addReturnableProperty("List.lstList", "SelectedRow");
+		addReturnableProperty("bg.caption.lblTitle", "Text");
+	}
+
+	public void addListItem(String name, long id, Object object) {
+		SuiListBoxItem item = new SuiListBoxItem(name, id, object);
 
 		int index = list.size();
-		
-		addDataItem("List.dataList:Name", String.valueOf(index));
-		setProperty("List.dataList." + index + ":Text", name);
-		
+		String sIndex = String.valueOf(index);
+		addDataItem("List.dataList", "Name", sIndex);
+		setProperty("List.dataList." + sIndex, "Text", name);
+
 		list.add(item);
 	}
 
 	public void addListItem(String name) {
-		addListItem(name, 0);
+		addListItem(name, -1, null);
 	}
-	
-	public void addItemSelectionCallback(int eventId, ISuiCallback callback) {
-		List<String> returnList = new ArrayList<String>();
-		returnList.add("List.lstList:SelectedRow");
-		addCallback(eventId, "", Trigger.OK, returnList, callback);
-	}
-	
-	public long getListItemId(int index) {
-		SuiListBoxItem item = list.get(index);
-		
-		if (item == null) return 0;
-		else return item.getId();
+
+	public void addListItem(String name, Object object) {
+		addListItem(name, -1, object);
 	}
 	
 	public SuiListBoxItem getListItem(int index) {
-		SuiListBoxItem item = list.get(index);
-		return item;
+		return list.get(index);
 	}
-	
-	public static int getSelectedIndex(List<String> returnParams) { return Integer.parseInt(returnParams.get(0)); }
-	
+
 	public List<SuiListBoxItem> getList() { return list; }
 
-	public enum ListBoxType {
-		OK,
-		OK_CANCEL,
-		DEFAULT;
-	}
-	
 	public static class SuiListBoxItem {
+		private Object object;
 		private String name;
 		private long id;
 		
-		public SuiListBoxItem(String name, long id) {
+		public SuiListBoxItem(String name, long id, Object object) {
 			this.name = name;
 			this.id = id;
+			this.object = object;
 		}
 		
 		public String getName() { return this.name; }
 		public long getId() { return this.id; }
+		public Object getObject() { return this.object; }
 	}
 }

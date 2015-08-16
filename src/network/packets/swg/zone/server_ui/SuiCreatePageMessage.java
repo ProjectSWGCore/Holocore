@@ -63,4 +63,8 @@ public class SuiCreatePageMessage extends SWGPacket {
 		addData(data, windowData);
 		return data;
 	}
+
+	public SuiWindow getWindow() {
+		return window;
+	}
 }

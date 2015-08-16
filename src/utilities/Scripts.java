@@ -48,6 +48,9 @@ public class Scripts {
 			ENGINE.eval("var RadialOption = Java.type('resources.radial.RadialOption')");
 			ENGINE.eval("var RadialItem = Java.type('resources.radial.RadialItem')");
 			ENGINE.eval("var Log = Java.type('resources.server_info.Log')");
+			ENGINE.eval("var SuiWindow = Java.type('resources.sui.SuiBaseWindow')");
+			ENGINE.eval("var SuiButtons = Java.type('resources.sui.SuiButtons')");
+			ENGINE.eval("var SuiEvent = Java.type('resources.sui.SuiEvent')");
 		} catch (ScriptException e) {
 			e.printStackTrace();
 		}

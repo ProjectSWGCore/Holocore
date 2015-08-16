@@ -36,21 +36,69 @@ public class SuiTableWindow extends SuiBaseWindow {
 
 	private List<SuiTableColumn> table;
 	
-	public SuiTableWindow(Player owner, String title, String prompt) {
-		super("Script.tablePage", owner, title, prompt);
-		table = new ArrayList<SuiTableColumn>();
+	public SuiTableWindow(Player owner, SuiButtons buttons, String title, String prompt, boolean exportBtn) {
+		super("Script.tablePage", owner, buttons, title, prompt);
+		table = new ArrayList<>();
 		
-		if (prompt == null)
-			setProperty("comp.Prompt:Visible", "false");
+		if (prompt == null || prompt.isEmpty())
+			setProperty("comp.Prompt", "Visible", "false");
+
+		setShowExportButton(false);
+
+		clearDataSource("comp.TablePage.dataTable");
+
+	}
+
+	@Override
+	protected void setButtons(SuiButtons buttons) {
+		switch(buttons) {
+			case OK_CANCEL:
+				setOkButtonText();
+				setCancelButtonText();
+				break;
+			case OK_CANCEL_ALL:
+				setOkButtonText();
+				setCancelButtonText();
+				setShowOtherButton(true, "@all");
+				break;
+			case OK_REFRESH:
+				setOkButtonText();
+				setCancelButtonText("@refresh");
+				break;
+			case OK_REFRESH_CANCEL:
+				setOkButtonText();
+				setCancelButtonText();
+				setShowOtherButton(true, "@refresh");
+				break;
+			case YES_NO:
+				setOkButtonText("@yes");
+				setCancelButtonText("@no");
+				break;
+			case REFRESH:
+				setOkButtonText("@refresh");
+				setShowCancelButton(false);
+				break;
+			case REFRESH_CANCEL:
+				setOkButtonText("@refresh");
+				setCancelButtonText();
+				break;
+			case OK:
+			default:
+				setShowCancelButton(false);
+				setOkButtonText();
+				break;
+		}
 	}
 
 	public void addColumn(String columnName, String type) {
 		int index = table.size();
 		
 		SuiTableColumn column = new SuiTableColumn();
-        addTableDataSource("comp.TablePage.dataTable:Name", String.valueOf(index));
-        setProperty("comp.TablePage.dataTable." + index + ":Label", columnName);
-        setProperty("comp.TablePage.dataTable." + index + ":Type", type);
+		String sIndex = String.valueOf(index);
+
+        addDataSource("comp.TablePage.dataTable", "Name", sIndex);
+        setProperty("comp.TablePage.dataTable." + sIndex, "Label", columnName);
+        setProperty("comp.TablePage.dataTable." + sIndex, "Type", type);
         
         table.add(column);
 	}
@@ -66,20 +114,16 @@ public class SuiTableWindow extends SuiBaseWindow {
 		SuiTableCell cell = new SuiTableCell(cellName, cellObjId);
 		column.getCells().add(cell);
 		
-		addDataItem("comp.TablePage.dataTable." + columnIndex + ":Name", "data" + cellIndex);
-		setProperty("comp.TablePage.dataTable." + columnIndex + ".data" + cellIndex + ":Value", cellName);
+		addDataItem("comp.TablePage.dataTable." + columnIndex, "Name", "data" + cellIndex);
+		setProperty("comp.TablePage.dataTable." + columnIndex + ".data" + cellIndex, "Value", cellName);
 	}
 	
 	public void addCell(String cellName, int columnIndex) {
 		addCell(cellName, 0, columnIndex);
 	}
-	
-	public void showExportButton(boolean show) {
-		setProperty("btnExport:Visible", String.valueOf(show));
-	}
-	
+
 	public void setScrollExtent(int x, int z) {
-		setProperty("comp.TablePage.header:ScrollExtent", String.valueOf(x) + "," + String.valueOf(z));
+		setProperty("comp.TablePage.header", "ScrollExtent", String.valueOf(x) + "," + String.valueOf(z));
 	}
 	
 	public long getCellId(int column, int row) {
@@ -95,7 +139,11 @@ public class SuiTableWindow extends SuiBaseWindow {
 		if (cell == null) return null;
 		else return cell.getValue();
 	}
-	
+
+	private void setShowExportButton(boolean show) {
+		setProperty("btnExport", "Visible", String.valueOf(show));
+	}
+
 	private static class SuiTableColumn {
 		
 		private List<SuiTableCell> cells;
@@ -105,7 +153,7 @@ public class SuiTableWindow extends SuiBaseWindow {
 		}
 		
 		public SuiTableColumn() {
-			this(new ArrayList<SuiTableCell>());
+			this(new ArrayList<>());
 		}
 		
 		public List<SuiTableCell> getCells() { return this.cells; }

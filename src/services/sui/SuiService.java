@@ -27,29 +27,33 @@
 ***********************************************************************************/
 package services.sui;
 
-import java.util.Map;
-import java.util.Random;
-import java.util.concurrent.ConcurrentHashMap;
-
+import intents.network.GalacticPacketIntent;
+import intents.sui.SuiWindowIntent;
+import intents.sui.SuiWindowIntent.SuiWindowEvent;
 import network.packets.Packet;
 import network.packets.swg.SWGPacket;
 import network.packets.swg.zone.server_ui.SuiCreatePageMessage;
 import network.packets.swg.zone.server_ui.SuiEventNotification;
-import intents.network.GalacticPacketIntent;
-import intents.sui.SuiWindowIntent;
-import intents.sui.SuiWindowIntent.SuiWindowEvent;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.player.Player;
+import resources.server_info.Log;
 import resources.sui.ISuiCallback;
+import resources.sui.SuiComponent;
+import resources.sui.SuiEvent;
 import resources.sui.SuiWindow;
-import services.player.PlayerManager;
 import utilities.Scripts;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class SuiService extends Service {
 
-	private Map<Integer, SuiWindow> windows;
-	
+	private final Map<Long, List<SuiWindow>> windows;
+
 	public SuiService() {
 		windows = new ConcurrentHashMap<>();
 	}
@@ -81,10 +85,10 @@ public class SuiService extends Service {
 			return;
 		Packet p = intent.getPacket();
 		if (p instanceof SWGPacket)
-			processSwgPacket(intent.getPlayerManager(), player, intent.getGalaxy().getName(), (SWGPacket) p);
+			processSwgPacket(player, (SWGPacket) p);
 	}
 	
-	private void processSwgPacket(PlayerManager pm, Player player, String galaxyName, SWGPacket p) {
+	private void processSwgPacket(Player player, SWGPacket p) {
 		switch(p.getPacketType()) {
 			case SUI_EVENT_NOTIFICATION:
 				if (p instanceof SuiEventNotification)
@@ -100,38 +104,85 @@ public class SuiService extends Service {
 			displayWindow(i.getPlayer(), i.getWindow());
 	}
 	
-	private void handleSuiEventNotification(Player player, SuiEventNotification r) {
-		SuiWindow window = windows.get(r.getWindowId());
-		
-		if (window == null) {
-			System.err.println("Null window id " + r.getWindowId());
+	private void handleSuiEventNotification(Player player, SuiEventNotification p) {
+		List<SuiWindow> activeWindows = windows.get(player.getNetworkId());
+		if (activeWindows == null || activeWindows.size() <= 0) {
+			Log.i("SuiService:SuiEventNotification", "There are no active windows for %s!", player);
 			return;
 		}
+
+		SuiWindow window = getWindowById(activeWindows, p.getWindowId());
 		
-		int eventId = r.getEventId();
-		if (window.getJavaCallback(eventId) != null) {
-			ISuiCallback callback = window.getJavaCallback(eventId);
-			callback.handleEvent(player, player.getCreatureObject(), eventId, r.getDataStrings());
-		} else if (window.getScriptCallback(eventId) != null) {
-			String callbackScript = window.getScriptCallback(eventId);
-			Scripts.invoke(callbackScript, "callback", player, player.getCreatureObject(), eventId, r.getDataStrings());
+		if (window == null) {
+			Log.i("SuiService:SuiEventNotification", "Received window ID %i that is not assigned to the player %s", p.getWindowId(), player);
+			return;
 		}
+
+		SuiComponent component = window.getSubscriptionByIndex(p.getEventIndex());
+
+		if (component == null) {
+			Log.i("SuiService:SuiEventNotification", "SuiWindow %s retrieved null subscription from supplied event index %i", window, p.getEventIndex());
+			return;
+		}
+
+		List<String> suiSubscribedProperties = component.getSubscribedProperties();
+
+		if (suiSubscribedProperties == null)
+			return;
+
+		List<String> eventNotificationProperties = p.getSubscribedToProperties();
+		int eventPropertySize = eventNotificationProperties.size();
+
+		if (suiSubscribedProperties.size() < eventPropertySize)
+			return;
+
+		String callback = component.getSubscribeToEventCallback();
+		SuiEvent event = SuiEvent.valueOf(component.getSubscribedToEventType());
+
+		Map<String, String> parameters = new HashMap<>();
+		for (int i = 0; i < eventPropertySize; i++) {
+			parameters.put(suiSubscribedProperties.get(i), eventNotificationProperties.get(i));
+		}
+
+		parameters.forEach((k, v) -> System.out.println("Key: " + k + " | Value: " + v));
+		if (window.hasCallbackFunction(callback)) {
+			String script = window.getCallbackScript(callback);
+			Scripts.invoke(script, callback, player, player.getCreatureObject(), event, parameters);
+		} else if (window.hasJavaCallback(callback)) {
+			ISuiCallback suiCallback = window.getJavaCallback(callback);
+			suiCallback.handleEvent(player, player.getCreatureObject(), event, parameters);
+		}
+
+		// Both of these events "closes" the sui window for the client, so we have no need for the server to continue tracking the window.
+		if (event == SuiEvent.OK_PRESSED || event == SuiEvent.CANCEL_PRESSED)
+			activeWindows.remove(window);
 	}
 	
 	private void displayWindow(Player player, SuiWindow window) {
-		int id = createWindowId(new Random());
+		int id = createWindowId();
 		window.setId(id);
-		
+
 		SuiCreatePageMessage packet = new SuiCreatePageMessage(window);
 		player.sendPacket(packet);
-		
-		windows.put(id, window);
+
+		long networkId = player.getNetworkId();
+		List<SuiWindow> activeWindows = windows.get(networkId);
+		if (activeWindows == null) {
+			activeWindows = new ArrayList<>();
+			windows.put(networkId, activeWindows);
+		}
+		activeWindows.add(window);
 	}
-	
-	private int createWindowId(Random ran) {
-		int id = ran.nextInt();
-		if (windows.containsKey(id))
-			return createWindowId(ran);
-		else return id;
+
+	private SuiWindow getWindowById(List<SuiWindow> windows, int id) {
+		for (SuiWindow window : windows) {
+			if (window.getId() == id)
+				return window;
+		}
+		return null;
+	}
+
+	public static int createWindowId() {
+		return (int) (System.currentTimeMillis() % Integer.MAX_VALUE);
 	}
 }

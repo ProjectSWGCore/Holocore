@@ -23,27 +23,18 @@ var handleSelection = function(player, target, selection) {
 		case RadialItem.ITEM_USE:
 		case RadialItem.BANK_TRANSFER: {
 			creature = player.getCreatureObject();
-			SuiWindow = Java.type("resources.sui.SuiWindow");
-			Trigger = Java.type("resources.sui.SuiWindow.Trigger");
-			window = new SuiWindow("Script.transfer", player);
-			window.setProperty('transaction.txtInputFrom:Text', 'From');
-			window.setProperty('transaction.txtInputFrom:Text', 'From');
-			window.setProperty('bg.caption.lblTitle:Text', '@base_player:bank_title');
-			window.setProperty('Prompt.lblPrompt:Text', '@base_player:bank_prompt');
-			window.setProperty('transaction.txtInputTo:Text', 'To');
-			window.setProperty('transaction.lblFrom:Text', 'Cash');
-			window.setProperty('transaction.lblTo:Text', 'Bank');
-			window.setProperty('transaction.lblStartingFrom:Text', creature.getCashBalance());
-			window.setProperty('transaction.lblStartingTo:Text', creature.getBankBalance());
-			window.setProperty('transaction.txtInputFrom:Text', creature.getCashBalance());
-			window.setProperty('transaction.txtInputTo:Text', creature.getBankBalance());
-			window.setProperty('transaction:ConversionRatioFrom', '1');
-			window.setProperty('transaction:ConversionRatioTo', '1');
-			returnParams = new java.util.ArrayList();
-			returnParams.add('transaction.txtInputFrom:Text');
-			returnParams.add('transaction.txtInputTo:Text');
-			window.addCallback(0, '', Trigger.OK, returnParams, "radial/terminal/bank");
-			window.addCallback(1, '', Trigger.CANCEL, returnParams, "radial/terminal/bank");
+			window = new SuiWindow("Script.transfer", player, SuiButtons.OK_CANCEL, '@base_player:bank_title', '@base_player:bank_prompt');
+			window.setPropertyText('transaction.lblFrom', 'Cash');
+			window.setPropertyText('transaction.lblTo', 'Bank');
+			window.setPropertyText('transaction.lblStartingFrom', creature.getCashBalance());
+			window.setPropertyText('transaction.lblStartingTo', creature.getBankBalance());
+			window.setPropertyText('transaction.txtInputFrom', creature.getCashBalance());
+			window.setPropertyText('transaction.txtInputTo', creature.getBankBalance());
+			window.setProperty('transaction', 'ConversionRatioFrom', '1');
+			window.setProperty('transaction', 'ConversionRatioTo', '1');
+			window.addReturnableProperty('transaction.txtInputFrom', 'Text');
+			window.addReturnableProperty('transaction.txtInputTo', 'Text');
+			window.addCallback("radial/terminal/bank", "handleBankTransfer");
 			window.display();
 			break;
 		}
@@ -81,7 +72,7 @@ var handleSelection = function(player, target, selection) {
 			if (amount > 1E9)
 				amount = 1E9;
 			if (creature.getReserveBalance() + amount > 3E9 || amount == 0) {
-				intentFactory.sendSystemMessage(player, '@error_message:bank_deposit')
+				intentFactory.sendSystemMessage(player, '@error_message:bank_deposit');
 				break;
 			}
 			creature.setBankBalance(creature.getBankBalance() - amount);
@@ -94,7 +85,7 @@ var handleSelection = function(player, target, selection) {
 			if (amount > 1E9)
 				amount = 1E9;
 			if (creature.getBankBalance() + amount > 2E9 || amount == 0) {
-				intentFactory.sendSystemMessage(player, '@error_message:bank_withdraw')
+				intentFactory.sendSystemMessage(player, '@error_message:bank_withdraw');
 				break;
 			}
 			creature.setBankBalance(creature.getBankBalance() + amount);
@@ -103,12 +94,12 @@ var handleSelection = function(player, target, selection) {
 		}
 	}
 };
-var callback = function(player, creature, eventId, dataStrings) {
-	switch (eventId) {
-		case 0:
-			creature.setCashBalance(Number(dataStrings[0]));
-			creature.setBankBalance(Number(dataStrings[1]));
-			intentFactory.sendSystemMessage(player, '@base_player:bank_success')
+var handleBankTransfer = function(player, creature, eventType, parameters) {
+	switch (eventType) {
+		case SuiEvent.OK_PRESSED:
+			creature.setCashBalance(Number(parameters.get('transaction.txtInputFrom.Text')));
+			creature.setBankBalance(Number(parameters.get('transaction.txtInputTo.Text')));
+			intentFactory.sendSystemMessage(player, '@base_player:bank_success');
 			break;
 	}
 };
