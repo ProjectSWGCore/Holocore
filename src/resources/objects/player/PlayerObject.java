@@ -250,10 +250,11 @@ public class PlayerObject extends IntangibleObject {
 	
 	public void setAdminTag(AccessLevel access) {
 		switch(access) {
-		case PLAYER: break;
-		case ADMIN: adminTag = 1; break;
-		case DEV: adminTag = 2; break;
-		case QA: adminTag = 4; break;
+			case PLAYER: break;
+			case CSR: adminTag = 1; break;
+			case DEV: adminTag = 2; break;
+			case WARDEN: adminTag = 3; break;
+			case QA: adminTag = 4; break;
 		}
 		sendDelta(6, 2, adminTag);
 	}
