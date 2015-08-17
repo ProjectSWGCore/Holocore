@@ -129,4 +129,22 @@ public final class IntentFactory {
 	public void showSuiWindow(Player player, SuiBaseWindow suiWindow) {
 		new SuiWindowIntent(player, suiWindow, SuiWindowIntent.SuiWindowEvent.NEW).broadcast();
 	}
+
+	/**
+	 * Closes a currently opened window on the client with the id of the SUI Window
+	 * @param player Player that has the window to be closed
+	 * @param suiWindow {@link SuiBaseWindow} to be closed
+	 */
+	public void closeSuiWindow(Player player, SuiBaseWindow suiWindow) {
+		new SuiWindowIntent(player, suiWindow, SuiWindowIntent.SuiWindowEvent.CLOSE).broadcast();
+	}
+
+	/**
+	 * Closes a currently opened window on the client with the id of the SUI Window
+	 * @param player Player that has the window to be closed
+	 * @param windowId Window id of the {@link SuiBaseWindow} to close
+	 */
+	public void closeSuiWindow(Player player, int windowId) {
+		new SuiWindowIntent(player, null, windowId, SuiWindowIntent.SuiWindowEvent.CLOSE).broadcast();
+	}
 }

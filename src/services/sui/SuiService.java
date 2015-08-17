@@ -34,6 +34,7 @@ import network.packets.Packet;
 import network.packets.swg.SWGPacket;
 import network.packets.swg.zone.server_ui.SuiCreatePageMessage;
 import network.packets.swg.zone.server_ui.SuiEventNotification;
+import network.packets.swg.zone.server_ui.SuiForceClosePage;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.player.Player;
@@ -100,8 +101,15 @@ public class SuiService extends Service {
 	}
 	
 	private void handleSuiWindowIntent(SuiWindowIntent i) {
-		if (i.getEvent() == SuiWindowEvent.NEW)
-			displayWindow(i.getPlayer(), i.getWindow());
+		switch(i.getEvent()) {
+			case NEW: displayWindow(i.getPlayer(), i.getWindow()); break;
+			case CLOSE: {
+				SuiBaseWindow window = i.getWindow();
+				if (window != null) closeWindow(i.getPlayer(), i.getWindow());
+				else closeWindow(i.getPlayer(), i.getWindowId());
+			} break;
+			default: break;
+		}
 	}
 	
 	private void handleSuiEventNotification(Player player, SuiEventNotification p) {
@@ -171,6 +179,35 @@ public class SuiService extends Service {
 			windows.put(networkId, activeWindows);
 		}
 		activeWindows.add(window);
+	}
+
+	private void closeWindow(Player player, SuiBaseWindow window) {
+		int id = window.getId();
+
+		List<SuiBaseWindow> activeWindows = windows.get(player.getNetworkId());
+
+		if (activeWindows == null) {
+			Log.w("SuiService:CloseWindow", "Tried to close window id %i for player %s but it doesn't exist in the active windows.", id, player);
+			return;
+		}
+
+		if (!activeWindows.remove(window)) {
+			Log.w("SuiService:CloseWindow", "Tried to close window id %i for player %s but it doesn't exist in the active windows.", id, player);
+			return;
+		}
+
+		player.sendPacket(new SuiForceClosePage(id));
+	}
+
+	private void closeWindow(Player player, int windowId) {
+		List<SuiBaseWindow> activeWindows = windows.get(player.getNetworkId());
+		SuiBaseWindow window = activeWindows.get(windowId);
+		if (window == null) {
+			Log.w("SuiService:CloseWindow", "Cannot close window with id %i as it doesn't exist in player %s active windows", windowId, player);
+			return;
+		}
+
+		closeWindow(player, window);
 	}
 
 	private SuiBaseWindow getWindowById(List<SuiBaseWindow> windows, int id) {
