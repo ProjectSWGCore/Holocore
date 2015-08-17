@@ -27,18 +27,16 @@
 ***********************************************************************************/
 package resources.sui;
 
-import resources.player.Player;
-
 import java.util.Map;
 
 public class SuiInputBox extends SuiWindow {
 
-	public SuiInputBox(Player owner, SuiButtons buttons, String title, String prompt) {
-		super("Script.inputBox", owner, buttons, title, prompt);
+	public SuiInputBox(SuiButtons buttons, String title, String prompt) {
+		super("Script.inputBox", buttons, title, prompt);
 	}
 
-	public SuiInputBox(Player owner, String title, String prompt) {
-		this(owner, SuiButtons.OK_CANCEL, title, prompt);
+	public SuiInputBox(String title, String prompt) {
+		this(SuiButtons.OK_CANCEL, title, prompt);
 	}
 
 	public static String getEnteredText(Map<String, String> parameters) {

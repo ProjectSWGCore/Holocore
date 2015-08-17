@@ -27,11 +27,8 @@
 ***********************************************************************************/
 package resources.sui;
 
-import intents.sui.SuiWindowIntent;
-import intents.sui.SuiWindowIntent.SuiWindowEvent;
 import network.packets.Packet;
 import resources.encodables.Encodable;
-import resources.player.Player;
 import resources.server_info.Log;
 
 import java.nio.ByteBuffer;
@@ -44,7 +41,6 @@ public class SuiBaseWindow implements Encodable {
 
 	private int id;
 	private String suiScript;
-	private Player owner;
 	private long rangeObjId;
 	private float maxDistance = 0;
 	private List<SuiComponent> components = new ArrayList<>();
@@ -55,9 +51,8 @@ public class SuiBaseWindow implements Encodable {
 	public SuiBaseWindow() {
 	}
 
-	public SuiBaseWindow(String suiScript, Player owner) {
+	public SuiBaseWindow(String suiScript) {
 		this.suiScript = suiScript;
-		this.owner = owner;
 	}
 
 	public final void clearDataSource(String dataSource) {
@@ -92,7 +87,7 @@ public class SuiBaseWindow implements Encodable {
 		components.add(component);
 	}
 
-	private void subscribeToEvent(int event, String widgetSource, String callback) {
+	protected void subscribeToEvent(int event, String widgetSource, String callback) {
 		SuiComponent component = getSubscriptionForEvent(event, widgetSource);
 		if (component != null) {
 			Log.i("SuiWindow", "Added event callback %d to %s when the event is already subscribed to, replacing callback to %s", event, widgetSource, callback);
@@ -108,7 +103,7 @@ public class SuiBaseWindow implements Encodable {
 			hasSubscriptionComponent = true;
 	}
 
-	private void subscribeToPropertyEvent(int event, String widgetSource, String propertyWidget, String propertyName) {
+	protected void subscribeToPropertyEvent(int event, String widgetSource, String propertyWidget, String propertyName) {
 		SuiComponent component = getSubscriptionForEvent(event, widgetSource);
 		if (component != null) {
 			// This component already has the trigger and source param, just need to add the widget and property
@@ -226,16 +221,6 @@ public class SuiBaseWindow implements Encodable {
 		return null;
 	}
 
-	public final void display() {
-		onDisplayRequest();
-		new SuiWindowIntent(owner, this, SuiWindowEvent.NEW).broadcast();
-	}
-
-	public final void display(Player player) {
-		onDisplayRequest();
-		new SuiWindowIntent(player, this, SuiWindowEvent.NEW).broadcast();
-	}
-
 	public final long getRangeObjId() {
 		return rangeObjId;
 	}
@@ -254,10 +239,6 @@ public class SuiBaseWindow implements Encodable {
 
 	public final String getSuiScript() {
 		return suiScript;
-	}
-
-	public final Player getOwner() {
-		return owner;
 	}
 
 	public final float getMaxDistance() {
@@ -290,20 +271,6 @@ public class SuiBaseWindow implements Encodable {
 
 	public final boolean hasSubscriptionComponent() {
 		return hasSubscriptionComponent;
-	}
-
-	// Add a simple ok/cancel button subscriptions if no callbacks is assigned so the server is sent a SuiEventNotification when client destroys the page.
-	// Doing it this way will ensures the server removes the stored SuiWindow from memory.
-	private void prepare() {
-		if (hasSubscriptionComponent())
-			return;
-
-		subscribeToEvent(SuiEvent.OK_PRESSED.getValue(), "", "handleSUI");
-		subscribeToEvent(SuiEvent.CANCEL_PRESSED.getValue(), "", "handleSUI");
-	}
-
-	protected void onDisplayRequest() {
-		prepare();
 	}
 
 	private void addJavaCallback(String name, ISuiCallback callback) {

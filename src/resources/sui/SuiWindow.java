@@ -27,33 +27,38 @@
 ***********************************************************************************/
 package resources.sui;
 
+import intents.sui.SuiWindowIntent;
 import resources.player.Player;
 
 public class SuiWindow extends SuiBaseWindow {
 
-	public SuiWindow(String script, Player owner, SuiButtons buttons, String title, String prompt) {
-		super(script, owner);
+	public SuiWindow(String script, SuiButtons buttons, String title, String prompt) {
+		super(script);
 		setTitle(title);
 		setPrompt(prompt);
 		setButtons(buttons);
 	}
 
-	public SuiWindow(String script, Player owner, SuiButtons buttons, String title, String prompt, String callbackScript, String function) {
-		this(script, owner, buttons, title, prompt);
+	public SuiWindow(String script, SuiButtons buttons, String title, String prompt, String callbackScript, String function) {
+		this(script, buttons, title, prompt);
 
 		addOkButtonCallback(callbackScript, function);
 		addCancelButtonCallback(callbackScript, function);
 	}
 
-	public SuiWindow(String script, Player owner, SuiButtons buttons, String title, String prompt, String callback, ISuiCallback suiCallback) {
-		this(script, owner, buttons, title, prompt);
+	public SuiWindow(String script, SuiButtons buttons, String title, String prompt, String callback, ISuiCallback suiCallback) {
+		this(script, buttons, title, prompt);
 
 		addOkButtonCallback(callback, suiCallback);
 		addCancelButtonCallback(callback, suiCallback);
 	}
 
-	public SuiWindow(String script, Player owner, String title, String prompt) {
-		this(script, owner, SuiButtons.DEFAULT, title, prompt);
+	public SuiWindow(String script, String title, String prompt) {
+		this(script, SuiButtons.DEFAULT, title, prompt);
+	}
+
+	public SuiWindow(String script) {
+		super(script);
 	}
 
 	public void setTitle(String title) {
@@ -128,8 +133,31 @@ public class SuiWindow extends SuiBaseWindow {
 		addCallback(SuiEvent.CANCEL_PRESSED, script, function);
 	}
 
-	public void addOtherButtonReturnable() {
+	protected void addOtherButtonReturnable() {
 		addReturnableProperty(SuiEvent.OK_PRESSED, "this", "otherPressed");
+	}
+
+	public final void display(Player player) {
+		onDisplayRequest();
+		new SuiWindowIntent(player, this, SuiWindowIntent.SuiWindowEvent.NEW).broadcast();
+	}
+
+	public final void close(Player player) {
+		new SuiWindowIntent(player, this, SuiWindowIntent.SuiWindowEvent.CLOSE).broadcast();
+	}
+
+	// Add a simple ok/cancel button subscriptions if no callbacks is assigned so the server is sent a SuiEventNotification when client destroys the page.
+	// Doing it this way will ensures the server removes the stored SuiWindow from memory.
+	private void prepare() {
+		if (hasSubscriptionComponent())
+			return;
+
+		subscribeToEvent(SuiEvent.OK_PRESSED.getValue(), "", "handleSUI");
+		subscribeToEvent(SuiEvent.CANCEL_PRESSED.getValue(), "", "handleSUI");
+	}
+
+	protected void onDisplayRequest() {
+		prepare();
 	}
 
 	protected void setButtons(SuiButtons buttons) {

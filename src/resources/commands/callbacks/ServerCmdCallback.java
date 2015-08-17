@@ -54,7 +54,7 @@ public class ServerCmdCallback implements ICmdCallback {
 			debug(galacticManager, player, target, args);
 			return;
 		}
-		SuiListBox listBox = new SuiListBox(player, SuiButtons.OK_CANCEL, "Server Management", "Select the management function you wish to perform from the list.");
+		SuiListBox listBox = new SuiListBox(SuiButtons.OK_CANCEL, "Server Management", "Select the management function you wish to perform from the list.");
 		
 		listBox.addListItem("Kick Player");
 		listBox.addListItem("Ban Player");
@@ -63,7 +63,7 @@ public class ServerCmdCallback implements ICmdCallback {
 		listBox.addListItem("Shutdown Server - Custom Time");
 
 		listBox.addOkButtonCallback("handleSelectedItem", new ServerSuiCallback());
-		listBox.display();
+		listBox.display(player);
 	}
 	
 	private void debug(GalacticManager galacticManager, Player player, SWGObject target, String args) {
@@ -86,43 +86,43 @@ public class ServerCmdCallback implements ICmdCallback {
 		}
 		
 		private void handleKickPlayer(Player actor) {
-			SuiInputBox window = new SuiInputBox(actor, SuiButtons.OK_CANCEL, "Kick Player", "Enter the name of the player that you wish to KICK from the server.");
+			SuiInputBox window = new SuiInputBox(SuiButtons.OK_CANCEL, "Kick Player", "Enter the name of the player that you wish to KICK from the server.");
 			window.addOkButtonCallback("handleKickPlayer", (player, actor1, event, parameters) -> {
 				String name = SuiInputBox.getEnteredText(parameters);
 				new ServerManagementIntent(player, name, ServerManagementEvent.KICK).broadcast();
 			});
-			window.display();
+			window.display(actor);
 		}
 		
 		private void handleBanPlayer(Player actor) {
-			SuiInputBox window = new SuiInputBox(actor, SuiButtons.OK_CANCEL, "Ban Player", "Enter the name of the player that you wish to BAN from the server.");
+			SuiInputBox window = new SuiInputBox(SuiButtons.OK_CANCEL, "Ban Player", "Enter the name of the player that you wish to BAN from the server.");
 			window.addOkButtonCallback("handleBanPlayer", (player, actor1, event, parameters) -> {
 				String name = SuiInputBox.getEnteredText(parameters);
 				new ServerManagementIntent(player, name, ServerManagementEvent.BAN).broadcast();
 			});
-			window.display();
+			window.display(actor);
 		}
 		
 		private void handleUnbanPlayer(Player actor) {
-			SuiInputBox window = new SuiInputBox(actor, SuiButtons.OK_CANCEL, "Unban Player", "Enter the name of the player that you wish to UNBAN from the server.");
+			SuiInputBox window = new SuiInputBox(SuiButtons.OK_CANCEL, "Unban Player", "Enter the name of the player that you wish to UNBAN from the server.");
 			window.addOkButtonCallback("handleUnbanPlayer", (player, actor1, event, parameters) -> {
 				String name = SuiInputBox.getEnteredText(parameters);
 				new ServerManagementIntent(player, name, ServerManagementEvent.UNBAN).broadcast();
 			});
-			window.display();
+			window.display(actor);
 		}
 		
 		private void handleShutdownServer(Player actor) {
-			SuiMessageBox window = new SuiMessageBox(actor, SuiButtons.YES_NO, "Shutdown Server", "Are you sure you wish to begin the shutdown sequence?");
+			SuiMessageBox window = new SuiMessageBox(SuiButtons.YES_NO, "Shutdown Server", "Are you sure you wish to begin the shutdown sequence?");
 			window.addOkButtonCallback("handleShutdownServer", (player, actor1, event, parameters) -> {
 				new ServerManagementIntent(15, TimeUnit.MINUTES, ServerManagementEvent.SHUTDOWN).broadcast();
 			});
-			window.display();
+			window.display(actor);
 		}
 		
 		private void handleCustomShutdownServer(Player actor) {
-			final SuiListBox unitWindow = new SuiListBox(actor, SuiButtons.OK_CANCEL, "Shutdown Server", "Select the time unit that the time will be specified in. ");
-			final SuiInputBox timeWindow = new SuiInputBox(actor, SuiButtons.OK_CANCEL, "Shutdown Server", "Enter the time until the server shuts down. The shutdown sequence "
+			final SuiListBox unitWindow = new SuiListBox(SuiButtons.OK_CANCEL, "Shutdown Server", "Select the time unit that the time will be specified in. ");
+			final SuiInputBox timeWindow = new SuiInputBox(SuiButtons.OK_CANCEL, "Shutdown Server", "Enter the time until the server shuts down. The shutdown sequence "
 					+ "will begin upon hitting OK.");
 			final AtomicReference<TimeUnit> timeUnitReference = new AtomicReference<>();
 			final TimeUnit[] unitValues = TimeUnit.values();
@@ -138,7 +138,7 @@ public class ServerCmdCallback implements ICmdCallback {
 				if (index < 0 || index >= unitValues.length)
 					return;
 				timeUnitReference.set(unitValues[index]);
-				timeWindow.display();        // Ziggy: Display the next window
+				timeWindow.display(actor);        // Ziggy: Display the next window
 			});
 			
 			timeWindow.addOkButtonCallback("handleCustomShutdownCountdown", (player, actor1, event, parameters) -> {
@@ -146,7 +146,7 @@ public class ServerCmdCallback implements ICmdCallback {
 				new ServerManagementIntent(countdown, timeUnitReference.get(), ServerManagementEvent.SHUTDOWN).broadcast();
 			});
 			
-			unitWindow.display();
+			unitWindow.display(actor);
 		}
 	}
 }

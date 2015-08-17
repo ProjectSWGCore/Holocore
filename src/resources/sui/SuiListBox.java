@@ -31,20 +31,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import resources.player.Player;
-
 public class SuiListBox extends SuiWindow {
 	private List <SuiListBoxItem> list;
 	
-	public SuiListBox(Player owner, SuiButtons buttons, String title, String prompt) {
-		super("Script.listBox", owner, buttons, title, prompt);
+	public SuiListBox(SuiButtons buttons, String title, String prompt) {
+		super("Script.listBox", buttons, title, prompt);
 		clearDataSource("List.dataList");
 
 		list = new ArrayList<>();
 	}
 
-	public SuiListBox(Player owner, String title, String prompt) {
-		this(owner, SuiButtons.OK_CANCEL, title, prompt);
+	public SuiListBox(String title, String prompt) {
+		this(SuiButtons.OK_CANCEL, title, prompt);
 	}
 
 	public static int getSelectedRow(Map<String, String> parameters) {

@@ -27,24 +27,22 @@
 ***********************************************************************************/
 package resources.sui;
 
-import resources.player.Player;
-
 public class SuiMessageBox extends SuiWindow {
 
-	public SuiMessageBox(Player owner, SuiButtons buttons, String title, String prompt) {
-		super("Script.messageBox", owner, buttons, title, prompt);
+	public SuiMessageBox(SuiButtons buttons, String title, String prompt) {
+		super("Script.messageBox", buttons, title, prompt);
 	}
 
-	public SuiMessageBox(Player owner, SuiButtons buttons, String title, String prompt, String callbackScript, String function) {
-		super("Script.messageBox", owner, buttons, title, prompt, callbackScript, function);
+	public SuiMessageBox(SuiButtons buttons, String title, String prompt, String callbackScript, String function) {
+		super("Script.messageBox", buttons, title, prompt, callbackScript, function);
 	}
 
-	public SuiMessageBox(Player owner, SuiButtons buttons, String title, String prompt, String callback, ISuiCallback suiCallback) {
-		super("Script.messageBox", owner, buttons, title, prompt, callback, suiCallback);
+	public SuiMessageBox(SuiButtons buttons, String title, String prompt, String callback, ISuiCallback suiCallback) {
+		super("Script.messageBox", buttons, title, prompt, callback, suiCallback);
 	}
 
-	public SuiMessageBox(Player owner, String title, String prompt) {
-		this(owner, SuiButtons.OK_CANCEL, title, prompt);
+	public SuiMessageBox(String title, String prompt) {
+		this(SuiButtons.OK_CANCEL, title, prompt);
 	}
 
 	@Override

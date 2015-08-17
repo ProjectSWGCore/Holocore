@@ -14,6 +14,7 @@ import intents.chat.ChatBroadcastIntent;
 import intents.chat.ChatBroadcastIntent.BroadcastType;
 import intents.chat.PersistentMessageIntent;
 import resources.sui.SuiBaseWindow;
+import resources.sui.SuiWindow;
 
 /**
  * @author Mads
@@ -122,27 +123,31 @@ public final class IntentFactory {
 	}
 
 	/**
-	 * Displays the provided {@link SuiBaseWindow} to the player.
-	 * @param player Player to be shown the {@link SuiBaseWindow}.
-	 * @param suiWindow {@link SuiBaseWindow} to be shown
+	 * Displays the provided {@link SuiWindow} to the player.
+	 * <br><br>
+	 * This is the same as calling suiWindow.display(player)
+	 * @param player Player to be shown the {@link SuiWindow}.
+	 * @param suiWindow {@link SuiWindow} to be shown
 	 */
-	public void showSuiWindow(Player player, SuiBaseWindow suiWindow) {
-		new SuiWindowIntent(player, suiWindow, SuiWindowIntent.SuiWindowEvent.NEW).broadcast();
+	public void showSuiWindow(Player player, SuiWindow suiWindow) {
+		suiWindow.display(player);
+	}
+
+	/**
+	 * Closes a currently opened window on the client with the id of the SUI Window.
+	 * <br><br>
+	 * This is the same as calling suiWindow.close(player);
+	 * @param player Player that has the window to be closed
+	 * @param suiWindow {@link SuiWindow} to be closed
+	 */
+	public void closeSuiWindow(Player player, SuiWindow suiWindow) {
+		suiWindow.close(player);
 	}
 
 	/**
 	 * Closes a currently opened window on the client with the id of the SUI Window
 	 * @param player Player that has the window to be closed
-	 * @param suiWindow {@link SuiBaseWindow} to be closed
-	 */
-	public void closeSuiWindow(Player player, SuiBaseWindow suiWindow) {
-		new SuiWindowIntent(player, suiWindow, SuiWindowIntent.SuiWindowEvent.CLOSE).broadcast();
-	}
-
-	/**
-	 * Closes a currently opened window on the client with the id of the SUI Window
-	 * @param player Player that has the window to be closed
-	 * @param windowId Window id of the {@link SuiBaseWindow} to close
+	 * @param windowId Window id of the {@link SuiWindow} to close
 	 */
 	public void closeSuiWindow(Player player, int windowId) {
 		new SuiWindowIntent(player, null, windowId, SuiWindowIntent.SuiWindowEvent.CLOSE).broadcast();

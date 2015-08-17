@@ -1,4 +1,4 @@
-var getOptions = function(options, player, target) {
+function getOptions(options, player, target) {
 	var use = new RadialOption(RadialItem.ITEM_USE);
 	var reserve = new RadialOption(RadialItem.BANK_RESERVE);
 	var creature = player.getCreatureObject();
@@ -21,13 +21,14 @@ var getOptions = function(options, player, target) {
 		reserve.addChild(RadialItem.BANK_RESERVE_DEPOSIT);
 	if (creature.getReserveBalance() > 0)
 		reserve.addChild(RadialItem.BANK_RESERVE_WITHDRAW);
-};
-var handleSelection = function(player, target, selection) {
+}
+
+function handleSelection(player, target, selection) {
 	switch (selection) {
 		case RadialItem.ITEM_USE:
 		case RadialItem.BANK_TRANSFER: {
 			creature = player.getCreatureObject();
-			window = new SuiWindow("Script.transfer", player, SuiButtons.OK_CANCEL, '@base_player:bank_title', '@base_player:bank_prompt');
+			window = new SuiWindow("Script.transfer", SuiButtons.OK_CANCEL, '@base_player:bank_title', '@base_player:bank_prompt');
 			window.setPropertyText('transaction.lblFrom', 'Cash');
 			window.setPropertyText('transaction.lblTo', 'Bank');
 			window.setPropertyText('transaction.lblStartingFrom', creature.getCashBalance());
@@ -39,7 +40,7 @@ var handleSelection = function(player, target, selection) {
 			window.addReturnableProperty('transaction.txtInputFrom', 'Text');
 			window.addReturnableProperty('transaction.txtInputTo', 'Text');
 			window.addCallback("radial/terminal/bank", "handleBankTransfer");
-			window.display();
+			window.display(player);
 			break;
 		}
 		case RadialItem.BANK_ITEMS: {
@@ -107,8 +108,9 @@ var handleSelection = function(player, target, selection) {
 			break;
 		}
 	}
-};
-var handleBankTransfer = function(player, creature, eventType, parameters) {
+}
+
+function handleBankTransfer(player, creature, eventType, parameters) {
 	switch (eventType) {
 		case SuiEvent.OK_PRESSED:
 			creature.setCashBalance(Number(parameters.get('transaction.txtInputFrom.Text')));
@@ -116,4 +118,4 @@ var handleBankTransfer = function(player, creature, eventType, parameters) {
 			intentFactory.sendSystemMessage(player, '@base_player:bank_success');
 			break;
 	}
-};
+}

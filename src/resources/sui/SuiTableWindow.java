@@ -30,14 +30,12 @@ package resources.sui;
 import java.util.ArrayList;
 import java.util.List;
 
-import resources.player.Player;
-
 public class SuiTableWindow extends SuiWindow {
 
 	private List<SuiTableColumn> table;
 	
-	public SuiTableWindow(Player owner, SuiButtons buttons, String title, String prompt, boolean exportBtn) {
-		super("Script.tablePage", owner, buttons, title, prompt);
+	public SuiTableWindow(SuiButtons buttons, String title, String prompt, boolean exportBtn) {
+		super("Script.tablePage", buttons, title, prompt);
 		table = new ArrayList<>();
 		
 		if (prompt == null || prompt.isEmpty())
