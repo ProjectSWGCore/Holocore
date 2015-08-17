@@ -442,13 +442,16 @@ public class ChatRoomService extends Service {
 		ChatAvatar avatar = ChatAvatar.getFromPlayer(player);
 
 		if ((room == null || !room.getCreator().equals(avatar) || !room.getOwner().equals(avatar))) {
-			player.sendPacket(new ChatOnDestroyRoom(ChatAvatar.getFromPlayer(player), ChatResult.ROOM_AVATAR_NO_PERMISSION.getCode(), p.getRoomId(), p.getSequence()));
+			player.sendPacket(new ChatOnDestroyRoom(avatar, ChatResult.ROOM_AVATAR_NO_PERMISSION.getCode(), p.getRoomId(), p.getSequence()));
 			return;
 		}
 
 		if (!notifyDestroyRoom(avatar, room.getPath(), p.getSequence())) {
-			player.sendPacket(new ChatOnDestroyRoom(ChatAvatar.getFromPlayer(player), ChatResult.NONE.getCode(), p.getRoomId(), p.getSequence()));
+			player.sendPacket(new ChatOnDestroyRoom(avatar, ChatResult.NONE.getCode(), p.getRoomId(), p.getSequence()));
+			return;
 		}
+
+		player.sendPacket(new ChatOnDestroyRoom(avatar, ChatResult.SUCCESS.getCode(), p.getRoomId(), p.getSequence()));
 	}
 
 	private void handleChatCreateRoom(Player player, ChatCreateRoom p) {
@@ -687,6 +690,7 @@ public class ChatRoomService extends Service {
 		room.setIsPublic(isPublic);
 		room.setPath(path);
 		room.setTitle(title);
+		room.addModerator(creator);
 
 		roomMap.put(id, room);
 
@@ -724,11 +728,6 @@ public class ChatRoomService extends Service {
 
 		new NotifyPlayersPacketIntent(new ChatOnDestroyRoom(destroyer, ChatResult.SUCCESS.getCode(), room.getId(), 0),
 				networkIds).broadcast();
-
-		if (!destroyer.equals(ChatAvatar.getSystemAvatar(destroyer.getGalaxy()))) {
-			new NotifyPlayersPacketIntent(new ChatOnDestroyRoom(destroyer, ChatResult.SUCCESS.getCode(), room.getId(), sequence),
-					Collections.singletonList(destroyer.getNetworkId())).broadcast();
-		}
 
 		return true;
 	}
