@@ -167,10 +167,7 @@ public class ChatRoom implements Encodable, Serializable {
 		if (members.contains(avatar))
 			return ChatResult.ROOM_ALREADY_JOINED;
 
-		if (isPublic() || invited.contains(avatar))
-			return ChatResult.SUCCESS;
-
-		if (avatar.equals(owner))
+		if (isPublic() || invited.contains(avatar) || moderators.contains(avatar))
 			return ChatResult.SUCCESS;
 
 		return ChatResult.ROOM_AVATAR_NO_PERMISSION;
@@ -196,6 +193,42 @@ public class ChatRoom implements Encodable, Serializable {
 
 	public boolean isBanned(ChatAvatar avatar) {
 		return banned.contains(avatar);
+	}
+
+	public boolean isInvited(ChatAvatar avatar) {
+		return invited.contains(avatar);
+	}
+
+	public boolean addMember(ChatAvatar avatar) {
+		return members.add(avatar);
+	}
+
+	public boolean removeMember(ChatAvatar avatar) {
+		return members.remove(avatar);
+	}
+
+	public boolean addModerator(ChatAvatar avatar) {
+		return moderators.add(avatar);
+	}
+
+	public boolean removeModerator(ChatAvatar avatar) {
+		return moderators.remove(avatar);
+	}
+
+	public boolean addInvited(ChatAvatar avatar) {
+		return invited.add(avatar);
+	}
+
+	public boolean removeInvited(ChatAvatar avatar) {
+		return invited.remove(avatar);
+	}
+
+	public boolean addBanned(ChatAvatar avatar) {
+		return banned.add(avatar);
+	}
+
+	public boolean removeBanned(ChatAvatar avatar) {
+		return banned.remove(avatar);
 	}
 
 	public void sendMessage(ChatAvatar sender, String message, OutOfBandPackage oob, PlayerManager playerManager) {

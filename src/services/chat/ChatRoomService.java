@@ -224,7 +224,7 @@ public class ChatRoomService extends Service {
 			return;
 		}
 
-		if (!room.getModerators().remove(target)) {
+		if (!room.removeModerator(target)) {
 			player.sendPacket(new ChatOnRemoveModeratorFromRoom(target, sender, ChatResult.TARGET_AVATAR_DOESNT_EXIST.getCode(), path, sequence));
 			return;
 		}
@@ -261,12 +261,12 @@ public class ChatRoomService extends Service {
 			return;
 		}
 
-		// Remove from ban list
-		if (room.getBanned().remove(target)) {
+		if (room.removeBanned(target)) {
+			// Remove player from the ban list for players that have joined the room, since this player is now a moderator
 			room.sendPacketToMembers(player.getPlayerManager(), new ChatOnUnbanAvatarFromRoom(path, sender, target, ChatResult.SUCCESS.getCode(), 0));
 		}
 
-		if (!room.getModerators().add(target)) {
+		if (!room.addModerator(target)) {
 			player.sendPacket(new ChatOnAddModeratorToRoom(target, sender, ChatResult.NONE.getCode(), path, sequence));
 			return;
 		}
@@ -292,7 +292,7 @@ public class ChatRoomService extends Service {
 			return;
 		}
 
-		if (!room.getBanned().remove(target)) {
+		if (!room.isBanned(target) || !room.removeBanned(target)) {
 			player.sendPacket(new ChatOnUnbanAvatarFromRoom(path, sender, target, ChatResult.ROOM_AVATAR_BANNED.getCode(), sequence));
 			return;
 		}
@@ -329,12 +329,12 @@ public class ChatRoomService extends Service {
 		}
 
 		if (room.isModerator(target))
-			room.getModerators().remove(target);
+			room.removeModerator(target);
 
-		if (room.getInvited().contains(target))
-			room.getInvited().remove(target);
+		if (room.isInvited(target))
+			room.removeInvited(target);
 
-		room.getBanned().add(target);
+		room.addBanned(target);
 
 		room.sendPacketToMembers(player.getPlayerManager(), new ChatOnBanAvatarFromRoom(path, sender, target, ChatResult.SUCCESS.getCode(), sequence));
 	}
@@ -392,7 +392,7 @@ public class ChatRoomService extends Service {
 			return;
 		}
 
-		if (!room.getInvited().remove(invitee)) {
+		if (!room.removeInvited(invitee)) {
 			player.sendPacket(new ChatOnUninviteFromRoom(path, sender, invitee, ChatResult.ROOM_PRIVATE.getCode(), p.getSequence()));
 			return;
 		}
@@ -429,7 +429,7 @@ public class ChatRoomService extends Service {
 
 		player.sendPacket(new ChatOnInviteToRoom(path, sender, invitee, ChatResult.SUCCESS.getCode()));
 
-		room.getInvited().add(invitee);
+		room.addInvited(invitee);
 
 		// Notify the invited client that the room exists if not already in the clients chat lists
 		invitedPlayer.sendPacket(new ChatRoomList(room));
@@ -508,7 +508,7 @@ public class ChatRoomService extends Service {
 
 		List<ChatRoom> rooms = new ArrayList<>();
 		for (ChatRoom chatRoom : roomMap.values()) {
-			if (!chatRoom.isPublic() && !chatRoom.getInvited().contains(avatar) && !chatRoom.getOwner().equals(avatar))
+			if (!chatRoom.isPublic() && !chatRoom.isInvited(avatar) && !chatRoom.getOwner().equals(avatar))
 				continue;
 			rooms.add(chatRoom);
 		}
@@ -594,7 +594,7 @@ public class ChatRoomService extends Service {
 		// Notify everyone that a player entered the room
 		room.sendPacketToMembers(manager, new ChatOnEnteredRoom(avatar, result.getCode(), room.getId(), 0));
 
-		room.getMembers().add(avatar);
+		room.addMember(avatar);
 	}
 
 	public void enterChatChannel(Player player, int id, int sequence) {
@@ -630,7 +630,7 @@ public class ChatRoomService extends Service {
 		if (ghost == null)
 			return; // ChatOnLeaveRoom doesn't do anything other than for a ChatResult.SUCCESS, so no need to send a fail
 
-		if (!room.getMembers().remove(avatar) && !ghost.removeJoinedChannel(room.getPath()))
+		if (!room.removeMember(avatar) && !ghost.removeJoinedChannel(room.getPath()))
 			return;
 
 		player.sendPacket(new ChatOnLeaveRoom(avatar, ChatResult.SUCCESS.getCode(), room.getId(), sequence));
