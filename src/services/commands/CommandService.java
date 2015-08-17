@@ -27,6 +27,7 @@
 ***********************************************************************************/
 package services.commands;
 
+import intents.chat.ChatBroadcastIntent;
 import intents.chat.ChatCommandIntent;
 import intents.network.GalacticPacketIntent;
 
@@ -41,6 +42,8 @@ import resources.commands.callbacks.*;
 import resources.common.CRC;
 import resources.control.Intent;
 import resources.control.Service;
+import resources.encodables.ProsePackage;
+import resources.encodables.StringId;
 import resources.objects.SWGObject;
 import resources.player.AccessLevel;
 import resources.player.Player;
@@ -112,15 +115,26 @@ public class CommandService extends Service {
 			Log.e("CommandService", "No creature object associated with the player '%s'!", player.getUsername());
 			return;
 		}
-		
-		if (command.getGodLevel() > 0 || command.getCharacterAbility().toLowerCase().equals("admin")) {//HACK @Glen characterAbility check should be handled in the "has ability" TODO below. Not sure if abilities are implemented yet.
-			if (player.getAccessLevel() == AccessLevel.PLAYER) {
-				System.out.printf("[%s] failed to use admin command \"%s\" with access level %s with parameters \"%s\"\n", player.getCharacterName(), command.getName(), player.getAccessLevel().toString(), args);
-				return;
-			}
-			System.out.printf("[%s] successfully used admin command \"%s\" with access level %s with parameters \"%s\"\n", player.getCharacterName(), command.getName(), player.getAccessLevel().toString(), args);
+
+		if(player.getAccessLevel().getValue() < command.getGodLevel()) {
+			String commandAccessLevel = AccessLevel.getFromValue(command.getGodLevel()).toString();
+			String playerAccessLevel = player.getAccessLevel().toString();
+			Log.i("CommandService", "[%s] attempted to use the command \"%s\", but did not have the minimum access level. Access Level Required: %s, Player Access Level: %s",
+					player.getCharacterName(), command.getName(), commandAccessLevel, playerAccessLevel);
+			String errorProseString1 = "use that command";
+			String errorProseString2 = commandAccessLevel.toString();
+			new ChatBroadcastIntent(player, new ProsePackage("StringId", new StringId("cmd_err", "state_must_have_prose"), "TO", errorProseString1, "TU", errorProseString2)).broadcast();
+			return;
 		}
-		
+
+		if(!command.getCharacterAbility().isEmpty() && !player.getCreatureObject().hasAbility(command.getCharacterAbility())){
+			Log.i("CommandService", "[%s] attempted to use the command \"%s\", but did not have the required ability. Ability Required: %s",
+					player.getCharacterName(), command.getName(), command.getCharacterAbility());
+			String errorProseString = String.format("use the %s command", command.getName());
+			new ChatBroadcastIntent(player, new ProsePackage("StringId", new StringId("cmd_err", "ability_prose"), "TO", errorProseString)).broadcast();
+			return;
+		}
+
 		// TODO: Check if the player has the ability
 		// TODO: Cool-down checks
 		// TODO: Handle for different target
@@ -148,7 +162,8 @@ public class CommandService extends Service {
 	
 	private void loadBaseCommands(String table) {
 		DatatableData baseCommands = (DatatableData) ClientFactory.getInfoFromFile("datatables/command/"+table+".iff");
-		
+
+		int godLevel = baseCommands.getColumnFromName("godLevel");
 		for (int row = 0; row < baseCommands.getRowCount(); row++) {
 			Object [] cmdRow = baseCommands.getRow(row);
 
@@ -158,7 +173,11 @@ public class CommandService extends Service {
 			command.setCppHook((String)cmdRow[4]);
 			command.setDefaultTime((float) cmdRow[6]);
 			command.setCharacterAbility((String) cmdRow[7]);
-			
+
+			if(godLevel >= 0){
+				command.setGodLevel((int) cmdRow[godLevel]);
+			}
+
 			addCommand(command);
 		}
 	}
