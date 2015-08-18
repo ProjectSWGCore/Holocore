@@ -46,6 +46,7 @@ import resources.containers.DefaultPermissions;
 import resources.encodables.StringId;
 import resources.network.BaselineBuilder;
 import resources.network.DeltaBuilder;
+import resources.objects.building.BuildingObject;
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
 import resources.player.PlayerState;
@@ -875,7 +876,15 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 			}
 		}
 	}
-	
+
+	public boolean isInBuilding() {
+		SWGObject parent = getParent();
+		if (parent == null)
+			return false;
+		parent = parent.getParent();
+		return parent != null && parent instanceof BuildingObject;
+	}
+
 	@Override
 	public String toString() {
 		return "SWGObject[ID=" + objectId + " NAME=" + objectName + " TEMPLATE=" + template + "]";

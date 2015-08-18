@@ -31,6 +31,8 @@ import resources.client_info.ClientData;
 import resources.client_info.IffNode;
 import resources.client_info.SWGFile;
 
+import java.util.Arrays;
+
 public class DatatableData extends ClientData {
 	
 	private String[] columnNames;
@@ -261,6 +263,10 @@ public class DatatableData extends ClientData {
 		if (column < 0 || column >= columnTypes.length)
 			return null;
 		return columnTypes[column];
+	}
+
+	public int getColumnFromName(String name){
+		return Arrays.asList(columnNames).indexOf(name);
 	}
 
 	public void handleRows(DatatableRowHandler handler) {

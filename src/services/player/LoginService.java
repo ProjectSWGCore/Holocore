@@ -201,9 +201,10 @@ public class LoginService extends Service {
 		player.setPlayerState(PlayerState.LOGGING_IN);
 		switch(user.getString("access_level")) {
 			case "player": player.setAccessLevel(AccessLevel.PLAYER); break;
-			case "admin": player.setAccessLevel(AccessLevel.ADMIN); break;
-			case "dev": player.setAccessLevel(AccessLevel.DEV); break;
+			case "warden": player.setAccessLevel(AccessLevel.WARDEN); break;
+			case "csr": player.setAccessLevel(AccessLevel.CSR); break;
 			case "qa": player.setAccessLevel(AccessLevel.QA); break;
+			case "dev": player.setAccessLevel(AccessLevel.DEV); break;
 			default: player.setAccessLevel(AccessLevel.PLAYER); break;
 		}
 		sendLoginSuccessPacket(player);
@@ -339,7 +340,7 @@ public class LoginService extends Service {
 				g.setRecommended(true);
 				g.setPopulationStatus(populationStatus(consumed));
 				// If locked, restricted, or full
-				if (p.getAccessLevel() == AccessLevel.ADMIN && g.getStatus() != GalaxyStatus.UP)
+				if (p.getAccessLevel().getValue() >= AccessLevel.CSR.getValue() && g.getStatus() != GalaxyStatus.UP)
 					g.setStatus(GalaxyStatus.UP);
 				galaxies.add(g);
 			}

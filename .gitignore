@@ -4,5 +4,6 @@
 /odb
 /serverdata/**/*.iff
 /serverdata/**/*.db
+/target
 packets.txt
 log.txt

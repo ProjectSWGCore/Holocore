@@ -28,18 +28,18 @@
 package network.packets.swg.zone.server_ui;
 
 import network.packets.swg.SWGPacket;
-import resources.sui.SuiWindow;
+import resources.sui.SuiBaseWindow;
 
 import java.nio.ByteBuffer;
 
 public class SuiCreatePageMessage extends SWGPacket {
 	public static final int CRC = getCrc("SuiCreatePageMessage");
 
-	private SuiWindow window;
+	private SuiBaseWindow window;
 	
 	public SuiCreatePageMessage() {}
 	
-	public SuiCreatePageMessage(SuiWindow window) {
+	public SuiCreatePageMessage(SuiBaseWindow window) {
 		this.window = window;
 	}
 	
@@ -50,7 +50,7 @@ public class SuiCreatePageMessage extends SWGPacket {
 	public void decode(ByteBuffer data) {
 		if (!super.decode(data, CRC))
 			return;
-		window	= getEncodable(data, SuiWindow.class);
+		window	= getEncodable(data, SuiBaseWindow.class);
 	}
 	
 	public ByteBuffer encode() {
@@ -60,5 +60,9 @@ public class SuiCreatePageMessage extends SWGPacket {
 		addInt(  data, CRC);
 		addData(data, windowData);
 		return data;
+	}
+
+	public SuiBaseWindow getWindow() {
+		return window;
 	}
 }

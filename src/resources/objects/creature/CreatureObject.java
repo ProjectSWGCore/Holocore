@@ -634,6 +634,12 @@ public class CreatureObject extends TangibleObject {
 	public int getBaseAction() {
 		return attributes.get(2);
 	}
+
+	public void addAbility(String abilityName){ abilities.put(abilityName, 1); }//TODO: Figure out what the integer value should be for each ability
+
+	public void removeAbility(String abilityName) { abilities.remove(abilityName); }
+
+	public boolean hasAbility(String abilityName) { return abilities.get(abilityName) != null; }
 	
 	public void setHealth(int health) {
 		synchronized(attributes) {
