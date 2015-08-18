@@ -128,6 +128,7 @@ public final class ServerFactory extends DataFactory {
 				lineNum++;
 				if (lineNum == 0) {
 					columnNames = row.split("\t");
+					itr.remove();
 				} else if (lineNum == 1) {
 					columnTypes = row.split("\t");
 					for (int i = 0; i < columnTypes.length; i++) {
@@ -141,6 +142,7 @@ public final class ServerFactory extends DataFactory {
 							defaultValues.add("");
 						}
 					}
+					itr.remove();
 				}
 			}
 
@@ -152,6 +154,7 @@ public final class ServerFactory extends DataFactory {
 			table = new Object[rows.size()][columnTypes.length];
 
 			for (int i = 0; i < rows.size(); i++) {
+				System.out.println(rows.get(i));
 				createDatatableRow(i, rows.get(i), columnTypes, table, defaultValues);
 			}
 
@@ -176,14 +179,20 @@ public final class ServerFactory extends DataFactory {
 			if (val.isEmpty() && !defValues.get(t).isEmpty())
 				val = defValues.get(t);
 
-			switch(type) {
-				case "b": table[rowNum][t] = Boolean.valueOf(val); break;
-				case "h":
-				case "i": table[rowNum][t] = Integer.valueOf(val); break;
-				case "f": table[rowNum][t] = Float.valueOf(val); break;
-				case "s": table[rowNum][t] = val; break;
-				default: System.err.println("Don't know how to parse type " + type); break;
+			try {
+				switch(type) {
+					case "b": table[rowNum][t] = Boolean.valueOf(val); break;
+					case "h":
+					case "i": table[rowNum][t] = Integer.valueOf(val); break;
+					case "f": table[rowNum][t] = Float.valueOf(val); break;
+					case "s": table[rowNum][t] = val; break;
+					default: System.err.println("Don't know how to parse type " + type); break;
+				}
+			} catch (NumberFormatException e) {
+				Log.e("ServerFactory:createDatableRow", "Cannot format string %s to a number", val);
+				e.printStackTrace();
 			}
+
 		}
 	}
 
