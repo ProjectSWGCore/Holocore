@@ -81,24 +81,24 @@ public class ClientFactory extends DataFactory {
 	public synchronized static ClientData getInfoFromFile(String file, boolean save) {
 		ClientFactory factory = ClientFactory.getInstance();
 		SoftReference<ClientData> reference = factory.dataMap.get(file);
+		ClientData data = null;
+		if (reference != null)
+			data = reference.get();
 		
-		if (reference == null) {
-			ClientData data = factory.readFile(file);
+		if (data == null) {
+			data = factory.readFile(file);
 			if (data == null) {
 				return null;
 			}
-
+			reference = new SoftReference<ClientData>(data);
+			
 			// Soft used over Weak because Weak cleared as soon as the reference was not longer needed, Soft will be cleared when memory is needed by the JVM.
 			if (save) {
-				reference = new SoftReference<>(data);
-				if (reference.get() != null)
-					factory.dataMap.put(file, reference);
-			} else {
-				return data;
+				factory.dataMap.put(file, reference);
 			}
 		}
 		
-		return reference.get();
+		return data;
 	}
 
 	/**
