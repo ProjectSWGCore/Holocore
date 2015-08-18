@@ -1,0 +1,31 @@
+description	planet	building	cell	x	y	z
+TEXT PRIMARY KEY	TEXT NOT NULL	INTEGER NOT NULL	INTEGER NOT NULL	INTEGER NOT NULL	INTEGER NOT NULL	INTEGER NOT NULL
+coronet	corellia			-177	28	-4725
+vreni_island	corellia			-5459	23	-6239
+mining_outpost	dantooine			-614	3	2527
+warren	dantooine			-560	1	-3808
+aurilia	dathomir			5304	78	-4135
+imperial_prison	dathomir			-6253	120	967
+dwb	endor	5996314	4	0,87	12	30,98
+kachirho	kashyyyyk_main			244	41	466
+imp_outpost	lok			-1759	12	-3085
+nym	lok			420	7	5267
+nym_sp	lok			424	5	5457
+deeja_peak	naboo			5170	346	-1489
+kaadara	naboo			5204	-192	6677
+keren	naboo			1525	25	2765
+moenia	naboo			4803	4	-4700
+theed	naboo			-4866	6	4154
+theed_palace	naboo			-5496	6	4369
+restuss	rori			5289	80	6131
+dearic	talus			336	6	-2930
+imp_outpost	talus			-2185	20	2287
+bestine	tatooine			-1284	12	-3591
+fort_tusken	tatooine			-3982	60	6313
+jabbas_inside	tatooine	1177465	22	-10,28	2	43,95
+jabbas_outside	tatooine			-5846	90	-6182
+mos_eisley	tatooine			3525	4	-4807
+mos_entha	tatooine			1290	7	3138
+mos_espa	tatooine			-2907	5	2130
+mos_taike	tatooine			3865	28	2353
+dark_enclave	yavin4	3435626	17	-0,32	-47,42	-74,92
