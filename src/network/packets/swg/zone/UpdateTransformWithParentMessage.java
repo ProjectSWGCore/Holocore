@@ -48,7 +48,11 @@ public class UpdateTransformWithParentMessage extends SWGPacket {
 	private byte direction;
 	private byte lookDirection;
 	private boolean useLookDirection;
-
+	
+	public UpdateTransformWithParentMessage() {
+		
+	}
+	
 	public UpdateTransformWithParentMessage(long cellId, long objectId) {
 		this.cellId = cellId;
 		this.objectId = objectId;

@@ -39,6 +39,10 @@ public class ChatOnDestroyRoom extends SWGPacket {
 	private int result;
 	private int roomId;
 	private int sequence;
+	
+	public ChatOnDestroyRoom() {
+		this(null, 0, 0, 0);
+	}
 
 	public ChatOnDestroyRoom(ChatAvatar owner, int result, int roomId, int sequence) {
 		this.owner = owner;
