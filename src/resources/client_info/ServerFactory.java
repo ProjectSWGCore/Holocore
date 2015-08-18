@@ -72,13 +72,13 @@ public final class ServerFactory extends DataFactory {
 					File iff = new File(name);
 
 					if (!iff.exists()) {
-						convertSif(path, name);
+						convertSdf(path, name);
 						System.out.println("Created Server Datatable: " + name);
 						Log.i("ServerFactory", "Created Server Datatable: %s", name);
 					} else {
 						File sif = path.toFile();
 						if (sif.lastModified() > iff.lastModified()) {
-							convertSif(path, name);
+							convertSdf(path, name);
 							System.out.println("Updated Server Datatable: " + name);
 							Log.i("ServerFactory", "Updated Server Datatable: %s", name);
 						}
@@ -99,7 +99,7 @@ public final class ServerFactory extends DataFactory {
 		});
 	}
 
-	private void convertSif(Path sif, String newPath) {
+	private void convertSdf(Path sif, String newPath) {
 		SWGFile swgFile = new SWGFile(newPath, "DTII");
 
 		DatatableData data = (DatatableData) createDataObject(swgFile);
@@ -142,11 +142,10 @@ public final class ServerFactory extends DataFactory {
 						}
 					}
 				}
-				itr.remove();
 			}
 
 			if (columnNames == null || columnTypes == null) {
-				System.err.println("Failed to convert sif " + sif.getFileName());
+				System.err.println("Failed to convert sdf " + sif.getFileName());
 				return;
 			}
 
