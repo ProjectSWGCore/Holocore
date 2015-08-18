@@ -72,13 +72,13 @@ public final class ServerFactory extends DataFactory {
 					File iff = new File(name);
 
 					if (!iff.exists()) {
-						convertSif(path, name);
+						convertSdf(path, name);
 						System.out.println("Created Server Datatable: " + name);
 						Log.i("ServerFactory", "Created Server Datatable: %s", name);
 					} else {
 						File sif = path.toFile();
 						if (sif.lastModified() > iff.lastModified()) {
-							convertSif(path, name);
+							convertSdf(path, name);
 							System.out.println("Updated Server Datatable: " + name);
 							Log.i("ServerFactory", "Updated Server Datatable: %s", name);
 						}
@@ -99,7 +99,7 @@ public final class ServerFactory extends DataFactory {
 		});
 	}
 
-	private void convertSif(Path sif, String newPath) {
+	private void convertSdf(Path sif, String newPath) {
 		SWGFile swgFile = new SWGFile(newPath, "DTII");
 
 		DatatableData data = (DatatableData) createDataObject(swgFile);
@@ -128,6 +128,7 @@ public final class ServerFactory extends DataFactory {
 				lineNum++;
 				if (lineNum == 0) {
 					columnNames = row.split("\t");
+					itr.remove();
 				} else if (lineNum == 1) {
 					columnTypes = row.split("\t");
 					for (int i = 0; i < columnTypes.length; i++) {
@@ -141,18 +142,19 @@ public final class ServerFactory extends DataFactory {
 							defaultValues.add("");
 						}
 					}
+					itr.remove();
 				}
-				itr.remove();
 			}
 
 			if (columnNames == null || columnTypes == null) {
-				System.err.println("Failed to convert sif " + sif.getFileName());
+				System.err.println("Failed to convert sdf " + sif.getFileName());
 				return;
 			}
 
 			table = new Object[rows.size()][columnTypes.length];
 
 			for (int i = 0; i < rows.size(); i++) {
+				System.out.println(rows.get(i));
 				createDatatableRow(i, rows.get(i), columnTypes, table, defaultValues);
 			}
 
@@ -177,14 +179,20 @@ public final class ServerFactory extends DataFactory {
 			if (val.isEmpty() && !defValues.get(t).isEmpty())
 				val = defValues.get(t);
 
-			switch(type) {
-				case "b": table[rowNum][t] = Boolean.valueOf(val); break;
-				case "h":
-				case "i": table[rowNum][t] = Integer.valueOf(val); break;
-				case "f": table[rowNum][t] = Float.valueOf(val); break;
-				case "s": table[rowNum][t] = val; break;
-				default: System.err.println("Don't know how to parse type " + type); break;
+			try {
+				switch(type) {
+					case "b": table[rowNum][t] = Boolean.valueOf(val); break;
+					case "h":
+					case "i": table[rowNum][t] = Integer.valueOf(val); break;
+					case "f": table[rowNum][t] = Float.valueOf(val); break;
+					case "s": table[rowNum][t] = val; break;
+					default: System.err.println("Don't know how to parse type " + type); break;
+				}
+			} catch (NumberFormatException e) {
+				Log.e("ServerFactory:createDatableRow", "Cannot format string %s to a number", val);
+				e.printStackTrace();
 			}
+
 		}
 	}
 
