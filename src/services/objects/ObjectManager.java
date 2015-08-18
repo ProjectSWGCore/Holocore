@@ -458,6 +458,11 @@ public class ObjectManager extends Manager {
 		if (((CreatureObject) creatureObj).getPlayerObject() == null) {
 			System.err.println("ObjectManager: Failed to start zone - " + player.getUsername() + "'s CreatureObject has a null ghost!");
 			Log.e("ObjectManager", "Failed to start zone - CreatureObject doesn't have a ghost [Character: %d  User: %s", characterId, player.getUsername());
+			Log.e("ObjectManager", "    Has Ghost: " + creatureObj.hasSlot("ghost"));
+			Log.e("ObjectManager", "    Creature+1: " + getObjectById(creatureObj.getObjectId()+1));
+			for (SWGObject contained : creatureObj.getContainedObjects()) {
+				Log.e("ObjectManager", "    Contained: " + contained);
+			}
 			return;
 		}
 		if (creatureObj.getParent() != null)
