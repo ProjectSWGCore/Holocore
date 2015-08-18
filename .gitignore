@@ -5,5 +5,7 @@
 /serverdata/**/*.iff
 /serverdata/**/*.db
 /target
+/cfg/*.cfg
+pom.xml
 packets.txt
 log.txt
