@@ -39,7 +39,11 @@ public class ChatPersistentMessageToClient extends SWGPacket {
 	private Mail mail;
 	private String galaxy;
 	private boolean header;
-
+	
+	public ChatPersistentMessageToClient() {
+		this(null, "", false);
+	}
+	
 	public ChatPersistentMessageToClient(Mail mail, String galaxy, boolean header) {
 		this.mail = mail;
 		this.galaxy = galaxy;

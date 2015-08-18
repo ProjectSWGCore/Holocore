@@ -31,7 +31,11 @@ import intents.sui.SuiWindowIntent;
 import resources.player.Player;
 
 public class SuiWindow extends SuiBaseWindow {
-
+	
+	public SuiWindow() {
+		
+	}
+	
 	public SuiWindow(String script, SuiButtons buttons, String title, String prompt) {
 		super(script);
 		setTitle(title);
