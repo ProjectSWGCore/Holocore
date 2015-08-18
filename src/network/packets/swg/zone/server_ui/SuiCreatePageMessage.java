@@ -31,8 +31,6 @@ import network.packets.swg.SWGPacket;
 import resources.sui.SuiWindow;
 
 import java.nio.ByteBuffer;
-import java.util.ArrayList;
-import java.util.List;
 
 public class SuiCreatePageMessage extends SWGPacket {
 	public static final int CRC = getCrc("SuiCreatePageMessage");

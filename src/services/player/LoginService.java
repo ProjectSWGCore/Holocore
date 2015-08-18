@@ -140,7 +140,8 @@ public class LoginService extends Service {
 		if (obj != null && obj instanceof CreatureObject) {
 			Log.i("LoginService", "Deleted character %s for user %s", ((CreatureObject)obj).getName(), player.getUsername());
 			System.out.println("[" + player.getUsername() + "] Delete Character: " + ((CreatureObject)obj).getName() + ". IP: " + request.getAddress() + ":" + request.getPort());
-		}
+		} else
+			Log.w("LoginService", "Could not delete character! Character: ID: " + request.getPlayerId() + " / " + obj);
 		sendPacket(player, new DeleteCharacterResponse(deleteCharacter(request.getPlayerId())));
 	}
 	
