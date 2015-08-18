@@ -154,7 +154,6 @@ public final class ServerFactory extends DataFactory {
 			table = new Object[rows.size()][columnTypes.length];
 
 			for (int i = 0; i < rows.size(); i++) {
-				System.out.println(rows.get(i));
 				createDatatableRow(i, rows.get(i), columnTypes, table, defaultValues);
 			}
 
