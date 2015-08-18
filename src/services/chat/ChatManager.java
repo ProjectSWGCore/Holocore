@@ -43,6 +43,7 @@ import network.packets.swg.zone.chat.ChatSystemMessage.SystemChatType;
 import network.packets.swg.zone.object_controller.SpatialChat;
 import resources.Galaxy;
 import resources.Terrain;
+import resources.chat.ChatAvatar;
 import resources.chat.ChatResult;
 import resources.collections.SWGList;
 import resources.control.Intent;
@@ -176,14 +177,14 @@ public class ChatManager extends Manager {
 				break;
 			case PE_FIRST_ZONE:
 				sendPersistentMessageHeaders(player, intent.getGalaxy());
-				updateChatAvatarStatus(player, intent.getGalaxy(), true);
+				updateChatAvatarStatus(player, true);
 				if (player.getPlayerObject() != null)
 					roomService.enterChatChannels(player, player.getPlayerObject().getJoinedChannels());
 				break;
 			case PE_LOGGED_OUT:
 				if (player.getCreatureObject() == null)
 					break;
-				updateChatAvatarStatus(player, intent.getGalaxy(), false);
+				updateChatAvatarStatus(player, false);
 				break;
 			default: break;
 		}
@@ -208,9 +209,11 @@ public class ChatManager extends Manager {
 
 	private void handleChatAvatarStatusRequestIntent(ChatAvatarRequestIntent i) {
 		switch (i.getRequestType()) {
-			case TARGET_STATUS:
-				sendTargetAvatarStatus(i.getPlayer(), i.getTarget());
+			case TARGET_STATUS: {
+				Player player = i.getPlayer();
+				sendTargetAvatarStatus(player, new ChatAvatar(0, i.getTarget(), player.getGalaxyName()));
 				break;
+			}
 			case IGNORE_REMOVE_TARGET:
 				break;
 			case IGNORE_ADD_TARGET:
@@ -235,7 +238,6 @@ public class ChatManager extends Manager {
 			return;
 
 		SWGList<String> friends = (SWGList<String>) ghost.getFriendsList();
-		player.sendPacket(new ChatOnGetFriendsList(player.getCreatureObject().getObjectId(), player.getGalaxyName(), friends));
 
 		friends.sendRefreshedListData(ghost);
 	}
@@ -245,14 +247,9 @@ public class ChatManager extends Manager {
 		if (ghost == null)
 			return;
 
-		ChatOnChangeFriendStatus friendStatus = new ChatOnChangeFriendStatus(
-				player.getCreatureObject().getObjectId(), player.getGalaxyName(), target, true);
-
-		player.sendPacket(friendStatus);
-
 		ghost.removeFriend(target);
 
-		new ChatBroadcastIntent(player, new ProsePackage("@cmnty:friend_removed", "TT", target)).broadcast();
+		new ChatBroadcastIntent(player, new ProsePackage("StringId", "@cmnty:friend_removed", "TT", target)).broadcast();
 	}
 
 	private void handleAddFriend(Player player, String target) {
@@ -264,27 +261,22 @@ public class ChatManager extends Manager {
 			return;
 
 		if (ghost.getFriendsList().contains(target)) {
-			new ChatBroadcastIntent(player, new ProsePackage("@cmnty:friend_duplicate", "TT", target)).broadcast();
+			new ChatBroadcastIntent(player, new ProsePackage("StringId", "@cmnty:friend_duplicate", "TT", target)).broadcast();
 			return;
 		}
 
 		if (!player.getPlayerManager().playerExists(target)) {
-			new ChatBroadcastIntent(player, new ProsePackage("@cmnty:friend_not_found", "TT", target)).broadcast();
+			new ChatBroadcastIntent(player, new ProsePackage("StringId", "@cmnty:friend_not_found", "TT", target)).broadcast();
 			return;
 		}
 
-		ChatOnChangeFriendStatus friendStatus = new ChatOnChangeFriendStatus(
-				player.getCreatureObject().getObjectId(), player.getGalaxyName(), target, false);
-
-		player.sendPacket(new ChatOnAddFriend(), friendStatus);
+		ghost.addFriend(target);
+		new ChatBroadcastIntent(player, new ProsePackage("StringId", "@cmnty:friend_added", "TT", target)).broadcast();
 
 		Player targetPlayer = player.getPlayerManager().getPlayerByCreatureFirstName(target);
+
 		if (targetPlayer != null && targetPlayer.getPlayerState() == PlayerState.ZONED_IN)
-			player.sendPacket(new ChatFriendsListUpdate(player.getGalaxyName(), target, true));
-
-		ghost.addFriend(target);
-
-		new ChatBroadcastIntent(player, new ProsePackage("@cmnty:friend_added", "TT", target)).broadcast();
+			player.sendPacket(new ChatFriendsListUpdate(new ChatAvatar(0, target, targetPlayer.getGalaxyName()), true));
 	}
 
 	private void handleSpatialChat(SpatialChatIntent i) {
@@ -387,48 +379,44 @@ public class ChatManager extends Manager {
 
 	/* Friends */
 
-	private void updateChatAvatarStatus(Player player, String galaxy, boolean online) {
+	private void updateChatAvatarStatus(Player player, boolean online) {
 		PlayerManager playerManager = player.getPlayerManager();
-		String firstName = player.getCharacterName().toLowerCase();
-		if (firstName.contains(" "))
-			firstName = firstName.substring(0, firstName.indexOf(' '));
+		ChatAvatar avatar = ChatAvatar.getFromPlayer(player);
+		String galaxy = player.getGalaxyName();
 
 		if (online) {
 			PlayerObject playerObject = player.getPlayerObject();
 			if (playerObject != null && playerObject.getFriendsList().size() <= 0) {
 				for (String friend : playerObject.getFriendsList()) {
-					sendTargetAvatarStatus(player, friend);
+					sendTargetAvatarStatus(player, new ChatAvatar(0, friend, galaxy));
 				}
 			}
 		}
 
-		final ChatFriendsListUpdate update = new ChatFriendsListUpdate(galaxy, firstName, online);
+		final ChatFriendsListUpdate update = new ChatFriendsListUpdate(avatar, online);
+
 		playerManager.notifyPlayers(playerNotified -> {
 			if (playerNotified.getPlayerState() != PlayerState.ZONED_IN)
 				return false;
 
 			PlayerObject playerObject = playerNotified.getPlayerObject();
-			if (playerObject == null || playerObject.getFriendsList().size() <= 0)
-				return false;
+			return playerObject != null && playerObject.getFriendsList().contains(update.getFriend().getName());
 
-			List<String> friends = playerObject.getFriendsList();
-			return friends.contains(update.getFriendName());
 		}, update);
 	}
 
-	private void sendTargetAvatarStatus(Player player, String target) {
+	private void sendTargetAvatarStatus(Player player, ChatAvatar target) {
 		PlayerObject object = player.getPlayerObject();
 		if (object == null)
 			return;
 
-		Player targetPlayer = player.getPlayerManager().getPlayerByCreatureFirstName(target);
+		Player targetPlayer = player.getPlayerManager().getPlayerByCreatureFirstName(target.getName());
 
 		boolean online = true;
 		if (targetPlayer == null || targetPlayer.getPlayerState() != PlayerState.ZONED_IN)
 			online = false;
 
-		ChatFriendsListUpdate update = new ChatFriendsListUpdate(player.getGalaxyName(), target, online);
-		player.sendPacket(update);
+		player.sendPacket(new ChatFriendsListUpdate(target, online));
 	}
 
 	private void broadcastAreaMessage(String message, Player broadcaster) {

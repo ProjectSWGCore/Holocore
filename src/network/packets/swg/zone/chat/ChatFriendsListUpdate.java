@@ -28,21 +28,20 @@
 package network.packets.swg.zone.chat;
 
 import network.packets.swg.SWGPacket;
+import resources.chat.ChatAvatar;
 
 import java.nio.ByteBuffer;
 
 public class ChatFriendsListUpdate extends SWGPacket {
 	public static final int CRC = getCrc("ChatFriendsListUpdate");
-	
-	private String galaxy;
-	private String friendName;
+
+	private ChatAvatar friend;
 	private boolean online;
 	
 	public ChatFriendsListUpdate() {}
 
-	public ChatFriendsListUpdate(String galaxy, String friendName, boolean online) {
-		this.galaxy = galaxy;
-		this.friendName = friendName;
+	public ChatFriendsListUpdate(ChatAvatar friend, boolean online) {
+		this.friend = friend;
 		this.online = online;
 	}
 
@@ -53,26 +52,20 @@ public class ChatFriendsListUpdate extends SWGPacket {
 	public void decode(ByteBuffer data) {
 		if (!super.decode(data, CRC))
 			return;
-		// TODO: Use ChatAvatar
-		getAscii(data); // SWG
-		galaxy = getAscii(data);
-		friendName = getAscii(data);
+		friend = getEncodable(data, ChatAvatar.class);
 		online = getBoolean(data);
 	}
 	
 	public ByteBuffer encode() {
-		int stringLength = 9 + galaxy.length() + friendName.length();
-		ByteBuffer data = ByteBuffer.allocate(stringLength + 7);
+		ByteBuffer data = ByteBuffer.allocate(7 + friend.encode().length);
 		addShort  (data, 3);
 		addInt    (data, CRC);
-		addAscii  (data, "SWG");
-		addAscii  (data, galaxy);
-		addAscii  (data, friendName);
+		addEncodable(data, friend);
 		addBoolean(data, online);
 		return data;
 	}
 
-	public String getFriendName() {
-		return friendName;
+	public ChatAvatar getFriend() {
+		return friend;
 	}
 }
