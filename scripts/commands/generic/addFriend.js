@@ -1,10 +1,9 @@
 var execute = function(galManager, player, target, args) {
 	var ChatAvatarRequestIntent = Java.type("intents.chat.ChatAvatarRequestIntent");
 	var RequestType = Java.type("intents.chat.ChatAvatarRequestIntent.RequestType");
-	var ghost = player.getPlayerObject();
 	var name;
 	
-	if(ghost == null || args == null) {
+	if(args == null) {
 		return;
 	}
 	

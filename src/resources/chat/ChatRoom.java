@@ -32,6 +32,7 @@ import network.packets.swg.SWGPacket;
 import network.packets.swg.zone.chat.ChatRoomMessage;
 import resources.encodables.Encodable;
 import resources.encodables.OutOfBandPackage;
+import resources.objects.player.PlayerObject;
 import resources.player.Player;
 import services.player.PlayerManager;
 
@@ -233,7 +234,22 @@ public class ChatRoom implements Encodable, Serializable {
 
 	public void sendMessage(ChatAvatar sender, String message, OutOfBandPackage oob, PlayerManager playerManager) {
 		ChatRoomMessage chatRoomMessage = new ChatRoomMessage(sender, getId(), message, oob);
-		sendPacketToMembers(playerManager, chatRoomMessage);
+
+		String senderName = sender.getName();
+		for (ChatAvatar member : members) {
+			Player player = playerManager.getPlayerFromNetworkId(member.getNetworkId());
+			if (player == null)
+				continue;
+
+			PlayerObject ghost = player.getPlayerObject();
+			if (ghost == null)
+				continue;
+
+			if (ghost.isIgnored(senderName))
+				continue;
+
+			player.sendPacket(chatRoomMessage);
+		}
 	}
 
 	public void sendPacketToMembers(PlayerManager manager, SWGPacket... packets) {
