@@ -46,7 +46,7 @@ import services.objects.ObjectCreator;
 class TerrainBuildoutLoader {
 	
 	private static final String BASE_PATH = "datatables/buildout/";
-
+	
 	private final CrcStringTableData crcTable;
 	private final Terrain terrain;
 	private final Map <Long, SWGObject> objectTable;

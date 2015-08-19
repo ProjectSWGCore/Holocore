@@ -113,7 +113,11 @@ public class BuildoutRow {
 	private void translateLocation() {
 		if (cellIndex != 0)
 			return;
-		location.translatePosition(buildoutArea.getX1(), 0, buildoutArea.getZ1());
+		if (buildoutArea.isUseOrigin()) {
+			location.translatePosition(buildoutArea.getOriginX(), 0, buildoutArea.getOriginZ());
+		} else {
+			location.translatePosition(buildoutArea.getX1(), 0, buildoutArea.getZ1());
+		}
 	}
 	
 	public Location getLocation() {
