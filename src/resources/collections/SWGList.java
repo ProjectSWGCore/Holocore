@@ -61,12 +61,8 @@ public class SWGList<E> extends AbstractList<E> implements Encodable, Serializab
 	private int dataSize;
 
 	private StringType strType = StringType.UNSPECIFIED;
-	
-	/*
-	 * Map which will contain all the byte data. A map is used here because it allows the encode method to not have to guess the ByteBuffer size. Doing it this way will
-	 * also allow all the data to be pre-compiled for the list, so it can have a positive impact on large SWGList's. This means that only 1 ByteBuffer is being created,
-	 * and that is to just take the data from this map and put it all together!
-	 */
+
+	// This list is a listing of all the data for the element list, this should always be in sync with list
 	private final List<byte[]> data = new ArrayList<>();
 
 	private final List<E> list = new ArrayList<>(); // thread-safe list
@@ -252,6 +248,7 @@ public class SWGList<E> extends AbstractList<E> implements Encodable, Serializab
 		} catch (InstantiationException | IllegalAccessException e) {
 			e.printStackTrace();
 		}
+		clearDeltaQueue();
 	}
 
 	public void sendDeltaMessage(SWGObject target) {
