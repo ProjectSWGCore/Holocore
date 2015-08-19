@@ -40,7 +40,8 @@ public class SuiInputBox extends SuiWindow {
 	}
 
 	public static String getEnteredText(Map<String, String> parameters) {
-		return parameters.get("txtInput.Text");
+		String input = parameters.get("txtInput.LocalText");
+		return input != null ? input : "";
 	}
 
 	public static String getSelectedComboText(Map<String, String> parameters) {
@@ -82,7 +83,7 @@ public class SuiInputBox extends SuiWindow {
 
 	@Override
 	protected void onDisplayRequest() {
-		addReturnableProperty("txtInput", "Text");
+		addReturnableProperty("txtInput", "LocalText");
 		addReturnableProperty("cmbInput", "SelectedText");
 		addReturnableProperty("txtInput", "MaxLength");
 	}

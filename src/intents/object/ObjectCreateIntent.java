@@ -34,7 +34,7 @@ import resources.objects.SWGObject;
  * Created by Waverunner on 8/19/2015
  */
 public class ObjectCreateIntent extends Intent {
-	private static final String TYPE = "ObjectCreateIntent";
+	public static final String TYPE = "ObjectCreateIntent";
 
 	private SWGObject object;
 	private boolean addToAwareness;
