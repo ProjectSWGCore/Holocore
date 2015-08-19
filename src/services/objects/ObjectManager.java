@@ -36,7 +36,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import intents.ObjectTeleportIntent;
+import intents.object.ObjectCreateIntent;
+import intents.object.ObjectIdRequestIntent;
+import intents.object.ObjectIdResponseIntent;
+import intents.object.ObjectTeleportIntent;
 import intents.PlayerEventIntent;
 import intents.RequestZoneInIntent;
 import intents.network.GalacticPacketIntent;
@@ -101,6 +104,7 @@ public class ObjectManager extends Manager {
 		registerForIntent(GalacticPacketIntent.TYPE);
 		registerForIntent(PlayerEventIntent.TYPE);
 		registerForIntent(ObjectTeleportIntent.TYPE);
+		registerForIntent(ObjectIdRequestIntent.TYPE);
 		objectAwareness.initialize();
 		loadClientObjects();
 		maxObjectId = 1000000000; // Gets over all the buildouts/snapshots
@@ -286,9 +290,32 @@ public class ObjectManager extends Manager {
 			}
 		} else if (i instanceof ObjectTeleportIntent) {
 			processObjectTeleportIntent((ObjectTeleportIntent) i);
+		} else if (i instanceof ObjectIdRequestIntent) {
+			processObjectIdRequestIntent((ObjectIdRequestIntent) i);
+		} else if (i instanceof ObjectCreateIntent) {
+			processObjectCreateIntent((ObjectCreateIntent) i);
 		}
 	}
-	
+
+	private void processObjectCreateIntent(ObjectCreateIntent intent) {
+		SWGObject object = intent.getObject();
+
+		if (intent.isAddToAwareness()) {
+			objectAwareness.add(object);
+		}
+
+		objectMap.put(object.getObjectId(), object);
+	}
+
+	private void processObjectIdRequestIntent(ObjectIdRequestIntent intent) {
+		List<Long> reservedIds = new ArrayList<>();
+		for (int i = 0; i < intent.getAmount(); i++) {
+			reservedIds.add(getNextObjectId());
+		}
+
+		new ObjectIdResponseIntent(intent.getIdentifier(), reservedIds).broadcast();
+	}
+
 	private void processObjectTeleportIntent(ObjectTeleportIntent oti) {
 		SWGObject object = oti.getObject();
 		objectAwareness.move(object, oti.getNewLocation());

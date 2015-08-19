@@ -25,7 +25,7 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package intents;
+package intents.object;
 
 import resources.Location;
 import resources.control.Intent;

@@ -27,7 +27,7 @@
 ***********************************************************************************/
 package resources.commands.callbacks;
 
-import intents.ObjectTeleportIntent;
+import intents.object.ObjectTeleportIntent;
 import resources.Location;
 import resources.Terrain;
 import resources.commands.ICmdCallback;

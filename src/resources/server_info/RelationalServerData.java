@@ -59,10 +59,10 @@ public class RelationalServerData extends RelationalDatabase {
 		insertTableMetadata = prepareStatement("INSERT INTO "+META_TABLE+" (table_name, last_imported) VALUES (?, ?)");
 	}
 	
-	public void linkTableWithSdb(String table, String sdbPath) throws FileNotFoundException {
+	public boolean linkTableWithSdb(String table, String sdbPath) {
 		File sdb = new File(sdbPath);
 		if (!sdb.isFile())
-			throw new FileNotFoundException("SDB does not exist at path " + sdb);
+			return false;
 		long sdbModified = sdb.lastModified();
 		long imported = getLastImported(table);
 		if (sdbModified > imported) {
@@ -70,6 +70,7 @@ public class RelationalServerData extends RelationalDatabase {
 			importFromSdb(table, sdb);
 			updateLastImported(table, System.currentTimeMillis());
 		}
+		return true;
 	}
 	
 	private long getLastImported(String table) {
