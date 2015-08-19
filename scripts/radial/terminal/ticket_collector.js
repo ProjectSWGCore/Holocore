@@ -1,6 +1,6 @@
 function getOptions(options) {
-	options.add(new RadialOption(0, RadialItem.ITEM_USE));
-	options.add(new RadialOption(0, RadialItem.EXAMINE));
+	options.add(new RadialOption(RadialItem.ITEM_USE));
+	options.add(new RadialOption(RadialItem.EXAMINE));
 }
 
 function handleSelection(player, target, selection) {

@@ -29,6 +29,7 @@ package utilities;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.Arrays;
 
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
@@ -76,6 +77,8 @@ public class Scripts {
 			// Returning null is all that's necessary
 			return null;
 		} catch (Throwable t) {
+			System.err.println("Error invoking script: " + script + "  with function: " + function);
+			System.err.println("    Args: " + Arrays.toString(args));
 			t.printStackTrace();
 			return null;
 		}

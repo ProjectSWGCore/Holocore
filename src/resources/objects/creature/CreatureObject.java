@@ -289,7 +289,7 @@ public class CreatureObject extends TangibleObject {
 				reserve += leftover;
 			}
 			this.cashBalance = (int) cashBalance;
-			sendDelta(1, 1, cashBalance);
+			sendDelta(1, 1, (int) cashBalance);
 			setBankBalance(bank);
 			setReserveBalance(reserve);
 		} else {
@@ -312,7 +312,7 @@ public class CreatureObject extends TangibleObject {
 				reserve += leftover;
 			}
 			this.bankBalance = (int) bankBalance;
-			sendDelta(1, 0, bankBalance);
+			sendDelta(1, 0, (int) bankBalance);
 			setCashBalance(cash);
 			setReserveBalance(reserve);
 		} else {
