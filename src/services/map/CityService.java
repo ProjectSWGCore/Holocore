@@ -27,12 +27,8 @@ public class CityService extends Service {
 	
 	public CityService() {
 		spawnDatabase = new RelationalServerData("serverdata/map/cities.db");
-		try {
-			spawnDatabase.linkTableWithSdb("cities", "serverdata/map/cities.sdb");
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+		if (!spawnDatabase.linkTableWithSdb("cities", "serverdata/map/cities.sdb"))
 			throw new main.ProjectSWG.CoreException("Unable to load sdb files for StaticService");
-		}
 		getAllCitiesStatement = spawnDatabase.prepareStatement(GET_ALL_CITIES_FROM_TERRAIN);
 	}
 	

@@ -33,12 +33,10 @@ public class TerminalService extends Service {
 	public TerminalService() {
 		templates = new HashSet<>();
 		iffDatabase = new RelationalServerData("serverdata/radial/radials.db");
-		try {
-			iffDatabase.linkTableWithSdb("iff_to_script", "serverdata/radial/radials.sdb");
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+
+		if (!iffDatabase.linkTableWithSdb("iff_to_script", "serverdata/radial/radials.sdb"))
 			throw new main.ProjectSWG.CoreException("Unable to load sdb files for StaticService");
-		}
+
 		getAllTemplatesStatement = iffDatabase.prepareStatement(GET_ALL_TEMPLATES_SQL);
 		getScriptForIffStatement = iffDatabase.prepareStatement(GET_SCRIPT_FOR_IFF_SQL);
 	}
