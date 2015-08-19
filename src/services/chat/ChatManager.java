@@ -214,10 +214,6 @@ public class ChatManager extends Manager {
 				sendTargetAvatarStatus(player, new ChatAvatar(0, i.getTarget(), player.getGalaxyName()));
 				break;
 			}
-			case IGNORE_REMOVE_TARGET:
-				break;
-			case IGNORE_ADD_TARGET:
-				break;
 			case FRIEND_ADD_TARGET:
 				handleAddFriend(i.getPlayer(), i.getTarget());
 				break;
@@ -226,6 +222,15 @@ public class ChatManager extends Manager {
 				break;
 			case FRIEND_LIST:
 				handleRequestFriendList(i.getPlayer());
+				break;
+			case IGNORE_REMOVE_TARGET:
+				handleRemoveIgnored(i.getPlayer(), i.getTarget());
+				break;
+			case IGNORE_ADD_TARGET:
+				handleAddIgnored(i.getPlayer(), i.getTarget());
+				break;
+			case IGNORE_LIST:
+				handleRequestIgnoreList(i.getPlayer());
 				break;
 		}
 	}
@@ -247,9 +252,14 @@ public class ChatManager extends Manager {
 		if (ghost == null)
 			return;
 
+		if (!ghost.getFriendsList().contains(target)) {
+			sendSystemMessage(player, "@cmnty:friend_not_found", target);
+			return;
+		}
+
 		ghost.removeFriend(target);
 
-		new ChatBroadcastIntent(player, new ProsePackage("StringId", "@cmnty:friend_removed", "TT", target)).broadcast();
+		sendSystemMessage(player, "@cmnty:friend_removed", target);
 	}
 
 	private void handleAddFriend(Player player, String target) {
@@ -260,23 +270,83 @@ public class ChatManager extends Manager {
 		if (ghost == null)
 			return;
 
+		if (ghost.isIgnored(target)) {
+			sendSystemMessage(player, "@cmnty:friend_fail_is_ignored", target);
+			return;
+		}
+
 		if (ghost.getFriendsList().contains(target)) {
-			new ChatBroadcastIntent(player, new ProsePackage("StringId", "@cmnty:friend_duplicate", "TT", target)).broadcast();
+			sendSystemMessage(player, "@cmnty:friend_duplicate", target);
 			return;
 		}
 
 		if (!player.getPlayerManager().playerExists(target)) {
-			new ChatBroadcastIntent(player, new ProsePackage("StringId", "@cmnty:friend_not_found", "TT", target)).broadcast();
+			sendSystemMessage(player, "@cmnty:friend_not_found", target);
 			return;
 		}
 
 		ghost.addFriend(target);
-		new ChatBroadcastIntent(player, new ProsePackage("StringId", "@cmnty:friend_added", "TT", target)).broadcast();
+		sendSystemMessage(player, "@cmnty:friend_added", target);
 
 		Player targetPlayer = player.getPlayerManager().getPlayerByCreatureFirstName(target);
 
 		if (targetPlayer != null && targetPlayer.getPlayerState() == PlayerState.ZONED_IN)
 			player.sendPacket(new ChatFriendsListUpdate(new ChatAvatar(0, target, targetPlayer.getGalaxyName()), true));
+	}
+
+	/* Ignore List */
+
+	private void handleAddIgnored(Player player, String target) {
+		if (target.equalsIgnoreCase(player.getCharacterName().split(" ")[0]))
+			return;
+
+		PlayerObject ghost = player.getPlayerObject();
+		if (ghost == null)
+			return;
+
+		if (ghost.isIgnored(target)) {
+			sendSystemMessage(player, "@cmnty:ignore_duplicate", target);
+			return;
+		}
+
+		if (!player.getPlayerManager().playerExists(target)) {
+			sendSystemMessage(player, "@cmnty:ignore_not_found", target);
+			return;
+		}
+
+		ghost.addIgnored(target);
+		sendSystemMessage(player, "@cmnty:ignore_added", target);
+	}
+
+	private void handleRemoveIgnored(Player player, String target) {
+		PlayerObject ghost = player.getPlayerObject();
+		if (ghost == null)
+			return;
+
+		if (!ghost.isIgnored(target)) {
+			sendSystemMessage(player, "@cmnty:ignore_not_found", target);
+			return;
+		}
+
+		ghost.removeIgnored(target);
+
+		sendSystemMessage(player, "@cmnty:ignore_removed", target);
+	}
+
+	private void handleRequestIgnoreList(Player player) {
+		PlayerObject ghost = player.getPlayerObject();
+		if (ghost == null)
+			return;
+
+		SWGList<String> ignored = (SWGList<String>) ghost.getIgnoreList();
+
+		ignored.sendRefreshedListData(ghost);
+	}
+
+	/* Misc */
+
+	private void sendSystemMessage(Player player, String stringId, String target) {
+		new ChatBroadcastIntent(player, new ProsePackage("StringId", stringId, "TT", target)).broadcast();
 	}
 
 	private void handleSpatialChat(SpatialChatIntent i) {
@@ -286,10 +356,17 @@ public class ChatManager extends Manager {
 		// Send to self
 		SpatialChat message = new SpatialChat(actor.getObjectId(), actor.getObjectId(), 0, i.getMessage(), (short) i.getChatType(), (short) i.getMoodId());
 		sender.sendPacket(message);
-		
+
+		String senderName = ChatAvatar.getFromPlayer(sender).getName();
+
 		// Notify observers of the chat message
 		for (SWGObject aware : actor.getObservers()) {
-			if (aware.getOwner() != null)
+			Player owner = aware.getOwner();
+			if (owner == null)
+				continue;
+
+			PlayerObject awareGhost = owner.getPlayerObject();
+			if (!awareGhost.isIgnored(senderName))
 				aware.getOwner().sendPacket(new SpatialChat(aware.getObjectId(), message));
 		}
 	}
@@ -306,10 +383,13 @@ public class ChatManager extends Manager {
 		int errorCode = 0; // 0 = No issue, 4 = "strReceiver is not online"
 		if (receiver == null || receiver.getPlayerState() != PlayerState.ZONED_IN)
 			errorCode = 4;
-		
+
+		if (errorCode != 4 && receiver.getPlayerObject() != null && receiver.getPlayerObject().isIgnored(strSender))
+			errorCode = ChatResult.IGNORED.getCode();
+
 		sender.sendPacket(new ChatOnSendInstantMessage(errorCode, request.getSequence()));
 		
-		if (errorCode == 4)
+		if (errorCode != 0)
 			return;
 		
 		receiver.sendPacket(new ChatInstantMessageToClient(request.getGalaxy(), strSender, request.getMessage()));
@@ -330,12 +410,15 @@ public class ChatManager extends Manager {
 		if (recId == 0)
 			result = ChatResult.TARGET_AVATAR_DOESNT_EXIST;
 
+		if (sender.getPlayerObject().isIgnored(recipientStr))
+			result = ChatResult.IGNORED;
+
 		sender.sendPacket(new ChatOnSendPersistentMessage(result, request.getCounter()));
 
 		if (result != ChatResult.SUCCESS)
 			return;
 
-		Mail mail = new Mail(sender.getCharacterName(), request.getSubject(), request.getMessage(), recId);
+		Mail mail = new Mail(sender.getCharacterName().split(" ")[0].toLowerCase(), request.getSubject(), request.getMessage(), recId);
 		mail.setId(maxMailId++);
 		mail.setTimestamp((int) (new Date().getTime() / 1000));
 		mail.setOutOfBandPackage(request.getOutOfBandPackage());
@@ -449,7 +532,7 @@ public class ChatManager extends Manager {
 		
 		final List <Mail> playersMail = new LinkedList<>();
 		final long receiverId = player.getCreatureObject().getObjectId();
-		
+
 		mails.traverse(element -> {
 			if (element.getReceiverId() == receiverId)
 				playersMail.add(element);
@@ -462,7 +545,13 @@ public class ChatManager extends Manager {
 	private void sendPersistentMessage(Player receiver, Mail mail, MailFlagType requestType, String galaxy) {
 		if (receiver == null || receiver.getCreatureObject() == null)
 			return;
-		
+
+		PlayerObject ghost = receiver.getPlayerObject();
+		if (ghost.isIgnored(mail.getSender())) {
+			mails.remove(mail.getId());
+			return;
+		}
+
 		ChatPersistentMessageToClient packet = null;
 		
 		switch (requestType) {
