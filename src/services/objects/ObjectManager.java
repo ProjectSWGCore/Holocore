@@ -32,6 +32,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import intents.ObjectTeleportIntent;
 import intents.PlayerEventIntent;
@@ -39,6 +42,7 @@ import intents.RequestZoneInIntent;
 import intents.network.GalacticPacketIntent;
 import main.ProjectSWG;
 import network.packets.Packet;
+import network.packets.swg.ErrorMessage;
 import network.packets.swg.zone.SceneDestroyObject;
 import network.packets.swg.zone.insertion.CmdStartScene;
 import network.packets.swg.zone.insertion.SelectCharacter;
@@ -448,21 +452,19 @@ public class ObjectManager extends Manager {
 		if (creatureObj == null) {
 			System.err.println("ObjectManager: Failed to start zone - CreatureObject could not be fetched from database [Character: " + characterId + "  User: " + player.getUsername() + "]");
 			Log.e("ObjectManager", "Failed to start zone - CreatureObject could not be fetched from database [Character: %d  User: %s]", characterId, player.getUsername());
+			sendClientFatal(player, "Failed to zone", "You were not found in the database\nTry relogging to fix this problem", 10, TimeUnit.SECONDS);
 			return;
 		}
 		if (!(creatureObj instanceof CreatureObject)) {
 			System.err.println("ObjectManager: Failed to start zone - Object is not a CreatureObject for ID " + characterId);
 			Log.e("ObjectManager", "Failed to start zone - Object is not a CreatureObject [Character: %d  User: %s]", characterId, player.getUsername());
+			sendClientFatal(player, "Failed to zone", "There has been an internal server error: Not a Creature.\nPlease delete your character and create a new one", 10, TimeUnit.SECONDS);
 			return;
 		}
 		if (((CreatureObject) creatureObj).getPlayerObject() == null) {
 			System.err.println("ObjectManager: Failed to start zone - " + player.getUsername() + "'s CreatureObject has a null ghost!");
 			Log.e("ObjectManager", "Failed to start zone - CreatureObject doesn't have a ghost [Character: %d  User: %s", characterId, player.getUsername());
-			Log.e("ObjectManager", "    Has Ghost: " + creatureObj.hasSlot("ghost"));
-			Log.e("ObjectManager", "    Creature+1: " + getObjectById(creatureObj.getObjectId()+1));
-			for (SWGObject contained : creatureObj.getContainedObjects()) {
-				Log.e("ObjectManager", "    Contained: " + contained);
-			}
+			sendClientFatal(player, "Failed to zone", "There has been an internal server error: Null Ghost.\nPlease delete your character and create a new one", 10, TimeUnit.SECONDS);
 			return;
 		}
 		if (creatureObj.getParent() != null)
@@ -472,6 +474,18 @@ public class ObjectManager extends Manager {
 			objectAwareness.add(creatureObj);
 		}
 		new RequestZoneInIntent(player, (CreatureObject) creatureObj, galaxy).broadcast();
+	}
+	
+	private void sendClientFatal(Player player, String title, String message, long timeToRead, TimeUnit time) {
+		player.sendPacket(new ErrorMessage(title, message, false));
+		ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
+		service.schedule(new Runnable() {
+			@Override
+			public void run() {
+				player.sendPacket(new ErrorMessage(title, message, true));
+				service.shutdownNow();
+			}
+		}, timeToRead, time);
 	}
 	
 	private long getNextObjectId() {
