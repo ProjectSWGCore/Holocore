@@ -148,6 +148,12 @@ public class ConnectionService extends Service {
 				}
 				break;
 			}
+			case PE_ZONE_IN:
+				clearPlayerFlag(pei.getPlayer(), pei.getEvent(), PlayerFlags.LD);
+				break;
+			case PE_LOGGED_OUT:
+				setPlayerFlag(pei.getPlayer(), pei.getEvent(), PlayerFlags.LD);
+				break;
 			default:
 				break;
 		}
@@ -184,14 +190,11 @@ public class ConnectionService extends Service {
 		CreatureObject creature = zpsi.getCreature();
 		removeFromLists(before);
 		updatePlayTime(before);
-		if (creature.getPlayerObject() != null)
-			creature.getPlayerObject().clearFlagBitmask(PlayerFlags.LD);
 		Log.i("ConnectionService", "Logged out %s with character %s", before.getUsername(), before.getCharacterName());
 		new PlayerEventIntent(before, before.getGalaxyName(), PlayerEvent.PE_LOGGED_OUT).broadcast();
 		Log.i("ConnectionService", "Disconnected %s with character %s and reason: %s", before.getUsername(), before.getCharacterName(), DisconnectReason.NEW_CONNECTION_ATTEMPT);
 		new CloseConnectionIntent(before.getConnectionId(), before.getNetworkId(), DisconnectReason.NEW_CONNECTION_ATTEMPT).broadcast();
 		before.setPlayerState(PlayerState.DISCONNECTED);
-		before.setCreatureObject(null);
 		creature.setOwner(after);
 	}
 	
@@ -216,18 +219,43 @@ public class ConnectionService extends Service {
 		}
 	}
 	
+	private void setPlayerFlag(Player p, PlayerEvent event, PlayerFlags flag) {
+		PlayerObject player = getPlayerObject(p, event);
+		if (player == null)
+			return;
+		player.setFlagBitmask(flag);
+	}
+	
+	private void clearPlayerFlag(Player p, PlayerEvent event, PlayerFlags flag) {
+		PlayerObject player = getPlayerObject(p, event);
+		if (player == null)
+			return;
+		player.clearFlagBitmask(flag);
+	}
+	
+	private PlayerObject getPlayerObject(Player p, PlayerEvent event) {
+		CreatureObject creature = p.getCreatureObject();
+		if (creature == null) {
+			Log.e("ConnectionService", "Unable to set player flags for user: %s  on event: %s - CreatureObject is null", p.getUsername(), event);
+			return null;
+		}
+		PlayerObject player = creature.getPlayerObject();
+		if (player == null) {
+			Log.e("ConnectionService", "Unable to set player flags for user: %s  on event: %s - PlayerObject is null", p.getUsername(), event);
+			return null;
+		}
+		return player;
+	}
+	
 	private void logOut(Player p) {
 		logOut(p, true);
 	}
 	
 	private void logOut(Player p, boolean addToDisappear) {
-		removeFromLists(p);
+		System.out.println("[" + p.getUsername() +"] Logged out " + p.getCharacterName());
 		Log.i("ConnectionService", "Logged out %s with character %s", p.getUsername(), p.getCharacterName());
+		removeFromLists(p);
 		updatePlayTime(p);
-		if (p.getPlayerState() != PlayerState.LOGGED_OUT)
-			System.out.println("[" + p.getUsername() +"] Logged out " + p.getCharacterName());
-		if (p.getPlayerObject() != null)
-			p.getPlayerObject().setFlagBitmask(PlayerFlags.LD);
 		p.setPlayerState(PlayerState.LOGGED_OUT);
 		new PlayerEventIntent(p, p.getGalaxyName(), PlayerEvent.PE_LOGGED_OUT).broadcast();
 		if (addToDisappear) {
@@ -239,21 +267,18 @@ public class ConnectionService extends Service {
 	}
 	
 	private void disappear(Player p, DisconnectReason reason) {
+		System.out.println("[" + p.getUsername() +"] " + p.getCharacterName() + " disappeared");
 		Log.i("ConnectionService", "Disappeared %s with character %s", p.getUsername(), p.getCharacterName());
-		if (p.getPlayerObject() != null)
-			p.getPlayerObject().clearFlagBitmask(PlayerFlags.LD);
-
+		
 		switch(reason) {
 			case NEW_CONNECTION_ATTEMPT: // The player is attempting to re-zone
 				removeFromDisappear(p);
 				break;
 			default:
 				removeFromLists(p);
-				p.getCreatureObject().setOwner(null);
 				break;
 		}
 		p.setPlayerState(PlayerState.DISCONNECTED);
-		System.out.println("[" + p.getUsername() +"] " + p.getCharacterName() + " disappeared");
 		new PlayerEventIntent(p, PlayerEvent.PE_DISAPPEAR).broadcast();
 	}
 	

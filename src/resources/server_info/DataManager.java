@@ -85,8 +85,8 @@ public class DataManager implements IntentReceiver {
 	private boolean createFilesAndDirectories(File file) {
 		if (file.exists())
 			return true;
-		String parentName = file.getParent();
 		try {
+			String parentName = file.getParent();
 			if (parentName != null && !parentName.isEmpty()) {
 				File parent = new File(file.getParent());
 				if (!parent.exists() && !parent.mkdirs())

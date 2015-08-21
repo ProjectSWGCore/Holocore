@@ -276,6 +276,8 @@ public class ObjectManager extends Manager {
 					objectAwareness.remove(p.getCreatureObject());
 					for (SWGObject obj : p.getCreatureObject().getObservers())
 						p.getCreatureObject().destroyObject(obj.getOwner());
+					p.getCreatureObject().setOwner(null);
+					p.setCreatureObject(null);
 					break;
 				case PE_FIRST_ZONE:
 					if (p.getCreatureObject().getParent() == null)
