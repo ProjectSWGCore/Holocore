@@ -223,6 +223,7 @@ public class CommandService extends Service {
 		registerCallback("findFriend", FindFriendCallback.class);
 		registerCallback("setPlayerAppearance", PlayerAppearanceCallback.class);
 		registerCallback("revertPlayerAppearance", RevertAppearanceCallback.class);
+		registerCallback("qatool", QaToolCmdCallback.class);
 	}
 	
 	private void clearCommands() {

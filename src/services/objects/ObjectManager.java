@@ -105,6 +105,7 @@ public class ObjectManager extends Manager {
 		registerForIntent(PlayerEventIntent.TYPE);
 		registerForIntent(ObjectTeleportIntent.TYPE);
 		registerForIntent(ObjectIdRequestIntent.TYPE);
+		registerForIntent(ObjectCreateIntent.TYPE);
 		objectAwareness.initialize();
 		loadClientObjects();
 		maxObjectId = 1000000000; // Gets over all the buildouts/snapshots
