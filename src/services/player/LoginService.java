@@ -30,6 +30,7 @@ package services.player;
 import intents.GalacticIntent;
 import intents.LoginEventIntent;
 import intents.LoginEventIntent.LoginEvent;
+import intents.player.DeleteCharacterIntent;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -62,6 +63,7 @@ import resources.Galaxy;
 import resources.Race;
 import resources.Galaxy.GalaxyStatus;
 import resources.config.ConfigFile;
+import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
@@ -98,6 +100,7 @@ public class LoginService extends Service {
 	
 	@Override
 	public boolean initialize() {
+		registerForIntent(DeleteCharacterIntent.TYPE);
 		RelationalDatabase local = getLocalDatabase();
 		getUser = local.prepareStatement("SELECT * FROM users WHERE username = ?");
 		getUserInsensitive = local.prepareStatement("SELECT * FROM users WHERE username ilike ?");
@@ -106,6 +109,13 @@ public class LoginService extends Service {
 		deleteCharacter = local.prepareStatement("DELETE FROM characters WHERE id = ?");
 		autoLogin = (getConfig(ConfigFile.NETWORK).getInt("AUTO-LOGIN", 0) == 1 ? true : false);
 		return super.initialize();
+	}
+	
+	@Override
+	public void onIntentReceived(Intent i) {
+		if (i instanceof DeleteCharacterIntent) {
+			deleteCharacter(((DeleteCharacterIntent) i).getCreature().getObjectId());
+		}
 	}
 	
 	public void handlePacket(GalacticIntent intent, Player player, Packet p) {

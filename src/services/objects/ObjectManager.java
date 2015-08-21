@@ -40,6 +40,7 @@ import intents.object.ObjectCreateIntent;
 import intents.object.ObjectIdRequestIntent;
 import intents.object.ObjectIdResponseIntent;
 import intents.object.ObjectTeleportIntent;
+import intents.player.DeleteCharacterIntent;
 import intents.PlayerEventIntent;
 import intents.RequestZoneInIntent;
 import intents.network.GalacticPacketIntent;
@@ -106,6 +107,7 @@ public class ObjectManager extends Manager {
 		registerForIntent(ObjectTeleportIntent.TYPE);
 		registerForIntent(ObjectIdRequestIntent.TYPE);
 		registerForIntent(ObjectCreateIntent.TYPE);
+		registerForIntent(DeleteCharacterIntent.TYPE);
 		objectAwareness.initialize();
 		loadClientObjects();
 		maxObjectId = 1000000000; // Gets over all the buildouts/snapshots
@@ -297,6 +299,8 @@ public class ObjectManager extends Manager {
 			processObjectIdRequestIntent((ObjectIdRequestIntent) i);
 		} else if (i instanceof ObjectCreateIntent) {
 			processObjectCreateIntent((ObjectCreateIntent) i);
+		} else if (i instanceof DeleteCharacterIntent) {
+			deleteObject(((DeleteCharacterIntent) i).getCreature().getObjectId());
 		}
 	}
 

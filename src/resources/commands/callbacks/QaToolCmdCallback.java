@@ -28,8 +28,11 @@
 package resources.commands.callbacks;
 
 import intents.chat.ChatBroadcastIntent;
+import intents.network.CloseConnectionIntent;
+import intents.player.DeleteCharacterIntent;
 import resources.commands.ICmdCallback;
 import resources.objects.SWGObject;
+import resources.objects.creature.CreatureObject;
 import resources.player.Player;
 import resources.server_info.Log;
 import resources.sui.ISuiCallback;
@@ -39,8 +42,11 @@ import resources.sui.SuiInputBox;
 import resources.sui.SuiListBox;
 import resources.sui.SuiMessageBox;
 import services.galaxy.GalacticManager;
+import services.objects.ObjectManager;
 
 import java.util.Map;
+
+import network.packets.soe.Disconnect.DisconnectReason;
 
 /**
  * Created by Waverunner on 8/19/2015
@@ -65,6 +71,9 @@ public class QaToolCmdCallback implements ICmdCallback {
 					else displayItemCreator(player);
 					break;
 				case "help": displayHelp(player); break;
+				case "force-delete":
+					forceDelete(galacticManager.getObjectManager(), player, target);
+					break;
 				default: displayMainWindow(player); break;
 			}
 		} else {
@@ -110,6 +119,25 @@ public class QaToolCmdCallback implements ICmdCallback {
 		inventory.addObject(object);
 		sendSystemMessage(player, "Object has been created and placed in your inventory");
 		Log.i("QA", "%s created item from template %s", player, template);
+	}
+	
+	private void forceDelete(final ObjectManager objManager, final Player player, final SWGObject target) {
+		SuiMessageBox inputBox = new SuiMessageBox(SuiButtons.OK_CANCEL, "Force Delete?", "Are you sure you want to delete this object?");
+		inputBox.addOkButtonCallback("handleDeleteObject", (caller, actor, event, parameters) -> {
+			if (target instanceof CreatureObject && ((CreatureObject) target).getPlayerObject() != null) {
+				Log.i("QA", "[%s] Requested deletion of character: %s", player.getUsername(), target.getName());
+				new DeleteCharacterIntent((CreatureObject) target).broadcast();
+				Player owner = target.getOwner();
+				if (owner != null)
+					new CloseConnectionIntent(owner.getConnectionId(), owner.getNetworkId(), DisconnectReason.APPLICATION).broadcast();
+				return;
+			}
+			Log.i("QA", "[%s] Requested deletion of object: %s", player.getUsername(), target);
+			if (target != null) {
+				objManager.deleteObject(target.getObjectId());
+			}
+		});
+		inputBox.display(player);
 	}
 
 	private void displayHelp(Player player) {
