@@ -26,9 +26,9 @@ object/building/naboo/shared_cloning_facility_naboo.iff	cloning_nab
 object/building/military/shared_outpost_cloning_facility.iff	cloning_outpost
 object/building/military/shared_outpost_cloning_facility_s02.iff	cloning_outpost_2
 object/building/military/shared_outpost_cloning_facility_s03.iff	cloning_outpost_3
-object/building/player/city/shared_cloning_corellia.iff	cloning_player
-object/building/player/city/shared_cloning_naboo.iff	cloning_player
-object/building/player/city/shared_cloning_tatooine.iff	cloning_player
+object/building/player/city/shared_cloning_corellia.iff	cloning_player_cor
+object/building/player/city/shared_cloning_naboo.iff	cloning_player_nab
+object/building/player/city/shared_cloning_tatooine.iff	cloning_player_tat
 object/building/tatooine/shared_cloning_facility_tatooine.iff	cloning_tat
 object/building/tatooine/shared_cloning_facility_tatooine_small.iff	cloning_tat_sml
 object/building/player/city/shared_garden_corellia_lrg_01.iff	decoration_player_lrg
