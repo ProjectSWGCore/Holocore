@@ -325,12 +325,13 @@ public class ObjectManager extends Manager {
 
 	private void processObjectTeleportIntent(ObjectTeleportIntent oti) {
 		SWGObject object = oti.getObject();
-		objectAwareness.move(object, oti.getNewLocation());
-		
 		if (object instanceof CreatureObject && object.getOwner() != null){
+			objectAwareness.move(object, oti.getNewLocation());
 			sendPacket(object.getOwner(), new CmdStartScene(false, object.getObjectId(), ((CreatureObject)object).getRace(), object.getLocation(), (long)(ProjectSWG.getCoreTime()/1E3)));
 			object.createObject(object.getOwner());
 			new PlayerEventIntent(object.getOwner(), PlayerEvent.PE_ZONE_IN).broadcast();
+		} else {
+			object.setLocation(oti.getNewLocation());
 		}
 	}
 

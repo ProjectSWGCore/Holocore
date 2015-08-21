@@ -29,7 +29,10 @@ package resources.commands.callbacks;
 
 import intents.chat.ChatBroadcastIntent;
 import intents.network.CloseConnectionIntent;
+import intents.object.ObjectTeleportIntent;
 import intents.player.DeleteCharacterIntent;
+import resources.Location;
+import resources.Terrain;
 import resources.commands.ICmdCallback;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
@@ -43,6 +46,8 @@ import resources.sui.SuiListBox;
 import resources.sui.SuiMessageBox;
 import services.galaxy.GalacticManager;
 import services.objects.ObjectManager;
+import services.player.PlayerManager;
+import services.player.TerrainZoneInsertion;
 
 import java.util.Map;
 
@@ -73,6 +78,9 @@ public class QaToolCmdCallback implements ICmdCallback {
 				case "help": displayHelp(player); break;
 				case "force-delete":
 					forceDelete(galacticManager.getObjectManager(), player, target);
+					break;
+				case "recover":
+					recoverPlayer(galacticManager.getObjectManager(), galacticManager.getPlayerManager(), player, args.substring(args.indexOf(' ')+1));
 					break;
 				default: displayMainWindow(player); break;
 			}
@@ -138,6 +146,55 @@ public class QaToolCmdCallback implements ICmdCallback {
 			}
 		});
 		inputBox.display(player);
+	}
+	
+	private void recoverPlayer(ObjectManager objManager, PlayerManager playerManager, Player player, String args) {
+		String name = args;
+		String [] nameParts = name.split(" ");
+		Terrain t = Terrain.TATOOINE;
+		if (nameParts.length >= 2) {
+			if (nameParts.length > 3) {
+				sendSystemMessage(player, "Invalid arguments! Expected <playername> [opt]<terrain>");
+				return;
+			}
+			Terrain possible = null;
+			if (nameParts.length == 3) {
+				possible = getTerrain(nameParts[2]);
+				if (possible != null)
+					name = nameParts[0] + " " + nameParts[1];
+			}
+			if (nameParts.length == 2 || possible == null) {
+				possible = getTerrain(nameParts[1]);
+				if (possible != null)
+					name = nameParts[0];
+			}
+			if (possible != null)
+				t = possible;
+		}
+		name = name.trim();
+		long id = playerManager.getCharacterIdByName(name);
+		if (id == 0) {
+			sendSystemMessage(player, "Could not find player by name: '" + name + "'");
+			sendSystemMessage(player, "Make sure it is the full name (case insensitive) and try again");
+			return;
+		}
+		SWGObject recoveree = objManager.getObjectById(id);
+		if (recoveree == null) {
+			sendSystemMessage(player, "Could not find player by name: " + name);
+			sendSystemMessage(player, "Internal Error. Recoveree is null! ID: " + id);
+			return;
+		}
+		Location l = TerrainZoneInsertion.getInsertionForTerrain(t);
+		new ObjectTeleportIntent(recoveree, l).broadcast();
+	}
+	
+	private Terrain getTerrain(String str) {
+		for (Terrain t : Terrain.values()) {
+			if (t.getName().equalsIgnoreCase(str)) {
+				return t;
+			}
+		}
+		return null;
 	}
 
 	private void displayHelp(Player player) {
