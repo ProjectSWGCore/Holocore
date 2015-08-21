@@ -32,13 +32,21 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
-import intents.ObjectTeleportIntent;
+import intents.object.ObjectCreateIntent;
+import intents.object.ObjectIdRequestIntent;
+import intents.object.ObjectIdResponseIntent;
+import intents.object.ObjectTeleportIntent;
+import intents.player.DeleteCharacterIntent;
 import intents.PlayerEventIntent;
 import intents.RequestZoneInIntent;
 import intents.network.GalacticPacketIntent;
 import main.ProjectSWG;
 import network.packets.Packet;
+import network.packets.swg.ErrorMessage;
 import network.packets.swg.zone.SceneDestroyObject;
 import network.packets.swg.zone.insertion.CmdStartScene;
 import network.packets.swg.zone.insertion.SelectCharacter;
@@ -63,14 +71,15 @@ import resources.server_info.Config;
 import resources.server_info.Log;
 import resources.server_info.ObjectDatabase;
 import resources.server_info.ObjectDatabase.Traverser;
-import services.map.MapService;
+import services.map.MapManager;
 import services.player.PlayerManager;
 import services.spawn.StaticService;
 
 public class ObjectManager extends Manager {
 
-	private final MapService mapService;
+	private final MapManager mapService;
 	private final StaticService staticService;
+	private final RadialService radialService;
 
 	private final ObjectDatabase<SWGObject> database;
 	private final ObjectAwareness objectAwareness;
@@ -78,8 +87,9 @@ public class ObjectManager extends Manager {
 	private long maxObjectId;
 	
 	public ObjectManager() {
-		mapService = new MapService();
+		mapService = new MapManager();
 		staticService = new StaticService(this);
+		radialService = new RadialService();
 		database = new CachedObjectDatabase<SWGObject>("odb/objects.db");
 		objectAwareness = new ObjectAwareness();
 		objectMap = new HashMap<>();
@@ -87,6 +97,7 @@ public class ObjectManager extends Manager {
 
 		addChildService(mapService);
 		addChildService(staticService);
+		addChildService(radialService);
 	}
 	
 	@Override
@@ -94,6 +105,9 @@ public class ObjectManager extends Manager {
 		registerForIntent(GalacticPacketIntent.TYPE);
 		registerForIntent(PlayerEventIntent.TYPE);
 		registerForIntent(ObjectTeleportIntent.TYPE);
+		registerForIntent(ObjectIdRequestIntent.TYPE);
+		registerForIntent(ObjectCreateIntent.TYPE);
+		registerForIntent(DeleteCharacterIntent.TYPE);
 		objectAwareness.initialize();
 		loadClientObjects();
 		maxObjectId = 1000000000; // Gets over all the buildouts/snapshots
@@ -187,7 +201,7 @@ public class ObjectManager extends Manager {
 		if (obj.getObjectId() >= maxObjectId) {
 			maxObjectId = obj.getObjectId() + 1;
 		}
-		mapService.addMapLocation(obj, MapService.MapType.STATIC);
+		mapService.addMapLocation(obj, MapManager.MapType.STATIC);
 	}
 	
 	private void loadSnapshot(SWGObject obj) {
@@ -197,13 +211,20 @@ public class ObjectManager extends Manager {
 		if (obj.getObjectId() >= maxObjectId) {
 			maxObjectId = obj.getObjectId() + 1;
 		}
-		mapService.addMapLocation(obj, MapService.MapType.STATIC);
+		mapService.addMapLocation(obj, MapManager.MapType.STATIC);
 	}
 	
 	private void loadObject(SWGObject obj) {
 		obj.setOwner(null);
-		if (!(obj instanceof CreatureObject) || ((CreatureObject) obj).getPlayerObject() == null)
+		// if player is not a player
+		if (!(obj instanceof CreatureObject && ((CreatureObject) obj).hasSlot("ghost")))
 			objectAwareness.add(obj);
+		if (obj instanceof CreatureObject && ((CreatureObject) obj).getPlayerObject() != null) {
+			if (!obj.hasSlot("bank"))
+				obj.addObject(createObject("object/tangible/bank/shared_character_bank.iff", false));
+			if (!obj.hasSlot("mission_bag"))
+				obj.addObject(createObject("object/tangible/mission_bag/shared_mission_bag.iff", false));
+		}
 		objectMap.put(obj.getObjectId(), obj);
 		updateBuildoutParent(obj);
 		addChildrenObjects(obj);
@@ -256,29 +277,61 @@ public class ObjectManager extends Manager {
 				case PE_DISAPPEAR:
 					p.getCreatureObject().clearAware();
 					objectAwareness.remove(p.getCreatureObject());
+					for (SWGObject obj : p.getCreatureObject().getObservers())
+						p.getCreatureObject().destroyObject(obj.getOwner());
+					p.getCreatureObject().setOwner(null);
+					p.setCreatureObject(null);
+					break;
+				case PE_FIRST_ZONE:
+					if (p.getCreatureObject().getParent() == null)
+						p.getCreatureObject().createObject(p);
 					break;
 				case PE_ZONE_IN:
 					p.getCreatureObject().clearAware();
 					objectAwareness.update(p.getCreatureObject());
-					if (p.getCreatureObject().getParent() == null)
-						p.getCreatureObject().createObject(p);
 					break;
 				default:
 					break;
 			}
 		} else if (i instanceof ObjectTeleportIntent) {
 			processObjectTeleportIntent((ObjectTeleportIntent) i);
+		} else if (i instanceof ObjectIdRequestIntent) {
+			processObjectIdRequestIntent((ObjectIdRequestIntent) i);
+		} else if (i instanceof ObjectCreateIntent) {
+			processObjectCreateIntent((ObjectCreateIntent) i);
+		} else if (i instanceof DeleteCharacterIntent) {
+			deleteObject(((DeleteCharacterIntent) i).getCreature().getObjectId());
 		}
 	}
-	
+
+	private void processObjectCreateIntent(ObjectCreateIntent intent) {
+		SWGObject object = intent.getObject();
+
+		if (intent.isAddToAwareness()) {
+			objectAwareness.add(object);
+		}
+
+		objectMap.put(object.getObjectId(), object);
+	}
+
+	private void processObjectIdRequestIntent(ObjectIdRequestIntent intent) {
+		List<Long> reservedIds = new ArrayList<>();
+		for (int i = 0; i < intent.getAmount(); i++) {
+			reservedIds.add(getNextObjectId());
+		}
+
+		new ObjectIdResponseIntent(intent.getIdentifier(), reservedIds).broadcast();
+	}
+
 	private void processObjectTeleportIntent(ObjectTeleportIntent oti) {
 		SWGObject object = oti.getObject();
-		objectAwareness.move(object, oti.getNewLocation());
-		
 		if (object instanceof CreatureObject && object.getOwner() != null){
+			objectAwareness.move(object, oti.getNewLocation());
 			sendPacket(object.getOwner(), new CmdStartScene(false, object.getObjectId(), ((CreatureObject)object).getRace(), object.getLocation(), (long)(ProjectSWG.getCoreTime()/1E3)));
 			object.createObject(object.getOwner());
 			new PlayerEventIntent(object.getOwner(), PlayerEvent.PE_ZONE_IN).broadcast();
+		} else {
+			object.setLocation(oti.getNewLocation());
 		}
 	}
 
@@ -403,7 +456,7 @@ public class ObjectManager extends Manager {
 		if (transform == null)
 			return;
 		Location newLocation = transform.getLocation();
-		newLocation.setTerrain(obj.getLocation().getTerrain());
+		newLocation.setTerrain(obj.getTerrain());
 		objectAwareness.move(obj, newLocation);
 		obj.sendDataTransforms(transform);
 
@@ -413,7 +466,7 @@ public class ObjectManager extends Manager {
 	
 	private void moveObject(SWGObject obj, DataTransformWithParent transformWithParent) {
 		Location newLocation = transformWithParent.getLocation();
-		newLocation.setTerrain(obj.getLocation().getTerrain());
+		newLocation.setTerrain(obj.getTerrain());
 		SWGObject parent = objectMap.get(transformWithParent.getCellId());
 		if (parent == null) {
 			System.err.println("ObjectManager: Could not find parent for transform! Cell: " + transformWithParent.getCellId());
@@ -434,16 +487,19 @@ public class ObjectManager extends Manager {
 		if (creatureObj == null) {
 			System.err.println("ObjectManager: Failed to start zone - CreatureObject could not be fetched from database [Character: " + characterId + "  User: " + player.getUsername() + "]");
 			Log.e("ObjectManager", "Failed to start zone - CreatureObject could not be fetched from database [Character: %d  User: %s]", characterId, player.getUsername());
+			sendClientFatal(player, "Failed to zone", "You were not found in the database\nTry relogging to fix this problem", 10, TimeUnit.SECONDS);
 			return;
 		}
 		if (!(creatureObj instanceof CreatureObject)) {
 			System.err.println("ObjectManager: Failed to start zone - Object is not a CreatureObject for ID " + characterId);
 			Log.e("ObjectManager", "Failed to start zone - Object is not a CreatureObject [Character: %d  User: %s]", characterId, player.getUsername());
+			sendClientFatal(player, "Failed to zone", "There has been an internal server error: Not a Creature.\nPlease delete your character and create a new one", 10, TimeUnit.SECONDS);
 			return;
 		}
 		if (((CreatureObject) creatureObj).getPlayerObject() == null) {
 			System.err.println("ObjectManager: Failed to start zone - " + player.getUsername() + "'s CreatureObject has a null ghost!");
 			Log.e("ObjectManager", "Failed to start zone - CreatureObject doesn't have a ghost [Character: %d  User: %s", characterId, player.getUsername());
+			sendClientFatal(player, "Failed to zone", "There has been an internal server error: Null Ghost.\nPlease delete your character and create a new one", 10, TimeUnit.SECONDS);
 			return;
 		}
 		if (creatureObj.getParent() != null)
@@ -453,6 +509,18 @@ public class ObjectManager extends Manager {
 			objectAwareness.add(creatureObj);
 		}
 		new RequestZoneInIntent(player, (CreatureObject) creatureObj, galaxy).broadcast();
+	}
+	
+	private void sendClientFatal(Player player, String title, String message, long timeToRead, TimeUnit time) {
+		player.sendPacket(new ErrorMessage(title, message, false));
+		ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
+		service.schedule(new Runnable() {
+			@Override
+			public void run() {
+				player.sendPacket(new ErrorMessage(title, message, true));
+				service.shutdownNow();
+			}
+		}, timeToRead, time);
 	}
 	
 	private long getNextObjectId() {

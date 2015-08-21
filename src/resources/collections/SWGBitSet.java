@@ -31,7 +31,6 @@ import network.packets.swg.zone.baselines.Baseline;
 import resources.encodables.Encodable;
 import resources.network.DeltaBuilder;
 import resources.objects.SWGObject;
-import resources.player.PlayerState;
 
 import java.io.Serializable;
 import java.nio.ByteBuffer;
@@ -83,7 +82,7 @@ public class SWGBitSet extends BitSet implements Encodable, Serializable {
 	}
 
 	public void sendDeltaMessage(SWGObject target) {
-		if (target.getOwner() == null || target.getOwner().getPlayerState() != PlayerState.ZONED_IN) {
+		if (target.getOwner() == null) {
 			return;
 		}
 

@@ -29,10 +29,12 @@ package utilities;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.Arrays;
 
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 
 public class Scripts {
 
@@ -40,6 +42,20 @@ public class Scripts {
 	private static final String EXTENSION = ".js";
 	private static final ScriptEngine ENGINE = new ScriptEngineManager().getEngineByName("nashorn");
 	private static final Invocable INVOCABLE = (Invocable) ENGINE;
+	
+	static {
+		ENGINE.put("intentFactory", new IntentFactory());
+		try {
+			ENGINE.eval("var RadialOption = Java.type('resources.radial.RadialOption')");
+			ENGINE.eval("var RadialItem = Java.type('resources.radial.RadialItem')");
+			ENGINE.eval("var Log = Java.type('resources.server_info.Log')");
+			ENGINE.eval("var SuiWindow = Java.type('resources.sui.SuiWindow')");
+			ENGINE.eval("var SuiButtons = Java.type('resources.sui.SuiButtons')");
+			ENGINE.eval("var SuiEvent = Java.type('resources.sui.SuiEvent')");
+		} catch (ScriptException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	// Prevents instantiation.
 	private Scripts() {}
@@ -61,6 +77,8 @@ public class Scripts {
 			// Returning null is all that's necessary
 			return null;
 		} catch (Throwable t) {
+			System.err.println("Error invoking script: " + script + "  with function: " + function);
+			System.err.println("    Args: " + Arrays.toString(args));
 			t.printStackTrace();
 			return null;
 		}

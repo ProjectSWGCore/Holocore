@@ -67,6 +67,10 @@ public class NetworkClient {
 		connId = 0;
 	}
 	
+	public void resendOldUnacknowledged() {
+		protocol.resendOldUnacknowledged();
+	}
+	
 	public void setCrc(int crc) {
 		protocol.setCrc(crc);
 	}

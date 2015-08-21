@@ -85,7 +85,7 @@ public class ChatSystemMessage extends SWGPacket {
 			addUnicode(data, "");
 		} else {
 			addInt(data, 0);
-			addArray(data, oobData);
+			addData(data, oobData);
 		}
 		
 		return data;

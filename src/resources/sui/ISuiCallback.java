@@ -27,11 +27,11 @@
 ***********************************************************************************/
 package resources.sui;
 
-import java.util.List;
+import java.util.Map;
 
 import resources.objects.SWGObject;
 import resources.player.Player;
 
 public interface ISuiCallback {
-	public void handleEvent(Player player, SWGObject actor, int eventType, List<String> returnParams);
+	void handleEvent(Player player, SWGObject actor, SuiEvent event, Map<String, String> parameters);
 }

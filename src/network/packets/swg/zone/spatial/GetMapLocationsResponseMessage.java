@@ -44,7 +44,11 @@ public class GetMapLocationsResponseMessage extends SWGPacket {
 	private int staticLocVersion;
 	private int dynamicLocVersion;
 	private int persistentLocVersion;
-
+	
+	public GetMapLocationsResponseMessage() {
+		
+	}
+	
 	public GetMapLocationsResponseMessage(String planet,
 	                                      List<MapLocation> staticLocs, List<MapLocation> dynamicLocs, List<MapLocation> persistLocs,
 	                                      int staticLocVersion, int dynamicLocVersion, int persistLocVersion) {

@@ -40,6 +40,10 @@ public abstract class ObjectController extends SWGPacket {
 	private int update = 0;
 	private long objectId = 0;
 	
+	public ObjectController() {
+		this(0, 0);
+	}
+	
 	public ObjectController(int controllerCrc) {
 		this(0, controllerCrc);
 	}

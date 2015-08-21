@@ -120,7 +120,7 @@ public class Encryption {
 	}
 	
 	private static byte [] decompress(byte [] data) {
-		if (data.length == 0)
+		if (data == null || data.length == 0)
 			return data;
 		else if (data[data.length - 1] == 0)
 			return ByteBuffer.allocate(data.length - 1).put(data, 0, data.length - 1).array();
@@ -142,6 +142,8 @@ public class Encryption {
 	}
 	
 	private static int inflate(int startingIndex, byte [] data, byte [] result) {
+		if (data == null || data.length - startingIndex < 0)
+			return -1;
 		Inflater decompressor = new Inflater();
 		decompressor.setInput(data, startingIndex, data.length - startingIndex);
 		

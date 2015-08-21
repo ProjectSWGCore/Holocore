@@ -61,6 +61,7 @@ import network.packets.swg.zone.chat.ChatSendToRoom;
 import network.packets.swg.zone.chat.ChatUnbanAvatarFromRoom;
 import network.packets.swg.zone.chat.ChatUninviteFromRoom;
 import network.packets.swg.zone.insertion.ChatRoomList;
+import resources.Galaxy;
 import resources.Terrain;
 import resources.chat.ChatAvatar;
 import resources.chat.ChatResult;
@@ -72,10 +73,11 @@ import resources.control.Service;
 import resources.objects.player.PlayerObject;
 import resources.player.AccessLevel;
 import resources.player.Player;
+import resources.server_info.CachedObjectDatabase;
+import resources.server_info.ObjectDatabase;
 import services.player.PlayerManager;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -85,12 +87,16 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author Waverunner
  */
 public class ChatRoomService extends Service {
-	private int maxChatRoomId;
-	private Map<Integer, ChatRoom> roomMap;
 	// Map to keep track of each player's recent message for a room to prevent duplicates from client
-	private Map<Long, Map<Integer, Integer>> messages;
+	private final Map<Long, Map<Integer, Integer>> messages;
+	private final ObjectDatabase<ChatRoom> database;
+	private final Map<Integer, ChatRoom> roomMap;
+	private final Galaxy galaxy;
+	private int maxChatRoomId;
 
-	public ChatRoomService() {
+	public ChatRoomService(Galaxy g) {
+		galaxy		= g;
+		database	= new CachedObjectDatabase<>("odb/chat_rooms.db");
 		roomMap 	= new ConcurrentHashMap<>();
 		messages	= new ConcurrentHashMap<>();
 		maxChatRoomId = 1;
@@ -98,10 +104,17 @@ public class ChatRoomService extends Service {
 
 	@Override
 	public boolean initialize() {
-		// TODO: Load up persistent channels
 		registerForIntent(ChatRoomUpdateIntent.TYPE);
 		registerForIntent(GalacticPacketIntent.TYPE);
 
+		database.load();
+		database.traverse((room) -> {
+			if (room.getId() >= maxChatRoomId)
+				maxChatRoomId++;
+			roomMap.put(room.getId(), room);
+		});
+
+		createSystemChannels(galaxy.getName());
 		return super.initialize();
 	}
 
@@ -210,7 +223,7 @@ public class ChatRoomService extends Service {
 			return;
 		}
 
-		if (!room.getModerators().remove(target)) {
+		if (!room.removeModerator(target)) {
 			player.sendPacket(new ChatOnRemoveModeratorFromRoom(target, sender, ChatResult.TARGET_AVATAR_DOESNT_EXIST.getCode(), path, sequence));
 			return;
 		}
@@ -247,12 +260,12 @@ public class ChatRoomService extends Service {
 			return;
 		}
 
-		// Remove from ban list
-		if (room.getBanned().remove(target)) {
+		if (room.removeBanned(target)) {
+			// Remove player from the ban list for players that have joined the room, since this player is now a moderator
 			room.sendPacketToMembers(player.getPlayerManager(), new ChatOnUnbanAvatarFromRoom(path, sender, target, ChatResult.SUCCESS.getCode(), 0));
 		}
 
-		if (!room.getModerators().add(target)) {
+		if (!room.addModerator(target)) {
 			player.sendPacket(new ChatOnAddModeratorToRoom(target, sender, ChatResult.NONE.getCode(), path, sequence));
 			return;
 		}
@@ -278,7 +291,7 @@ public class ChatRoomService extends Service {
 			return;
 		}
 
-		if (!room.getBanned().remove(target)) {
+		if (!room.isBanned(target) || !room.removeBanned(target)) {
 			player.sendPacket(new ChatOnUnbanAvatarFromRoom(path, sender, target, ChatResult.ROOM_AVATAR_BANNED.getCode(), sequence));
 			return;
 		}
@@ -315,12 +328,12 @@ public class ChatRoomService extends Service {
 		}
 
 		if (room.isModerator(target))
-			room.getModerators().remove(target);
+			room.removeModerator(target);
 
-		if (room.getInvited().contains(target))
-			room.getInvited().remove(target);
+		if (room.isInvited(target))
+			room.removeInvited(target);
 
-		room.getBanned().add(target);
+		room.addBanned(target);
 
 		room.sendPacketToMembers(player.getPlayerManager(), new ChatOnBanAvatarFromRoom(path, sender, target, ChatResult.SUCCESS.getCode(), sequence));
 	}
@@ -378,7 +391,7 @@ public class ChatRoomService extends Service {
 			return;
 		}
 
-		if (!room.getInvited().remove(invitee)) {
+		if (!room.removeInvited(invitee)) {
 			player.sendPacket(new ChatOnUninviteFromRoom(path, sender, invitee, ChatResult.ROOM_PRIVATE.getCode(), p.getSequence()));
 			return;
 		}
@@ -415,7 +428,7 @@ public class ChatRoomService extends Service {
 
 		player.sendPacket(new ChatOnInviteToRoom(path, sender, invitee, ChatResult.SUCCESS.getCode()));
 
-		room.getInvited().add(invitee);
+		room.addInvited(invitee);
 
 		// Notify the invited client that the room exists if not already in the clients chat lists
 		invitedPlayer.sendPacket(new ChatRoomList(room));
@@ -428,13 +441,16 @@ public class ChatRoomService extends Service {
 		ChatAvatar avatar = ChatAvatar.getFromPlayer(player);
 
 		if ((room == null || !room.getCreator().equals(avatar) || !room.getOwner().equals(avatar))) {
-			player.sendPacket(new ChatOnDestroyRoom(ChatAvatar.getFromPlayer(player), ChatResult.ROOM_AVATAR_NO_PERMISSION.getCode(), p.getRoomId(), p.getSequence()));
+			player.sendPacket(new ChatOnDestroyRoom(avatar, ChatResult.ROOM_AVATAR_NO_PERMISSION.getCode(), p.getRoomId(), p.getSequence()));
 			return;
 		}
 
 		if (!notifyDestroyRoom(avatar, room.getPath(), p.getSequence())) {
-			player.sendPacket(new ChatOnDestroyRoom(ChatAvatar.getFromPlayer(player), ChatResult.NONE.getCode(), p.getRoomId(), p.getSequence()));
+			player.sendPacket(new ChatOnDestroyRoom(avatar, ChatResult.NONE.getCode(), p.getRoomId(), p.getSequence()));
+			return;
 		}
+
+		player.sendPacket(new ChatOnDestroyRoom(avatar, ChatResult.SUCCESS.getCode(), p.getRoomId(), p.getSequence()));
 	}
 
 	private void handleChatCreateRoom(Player player, ChatCreateRoom p) {
@@ -447,7 +463,7 @@ public class ChatRoomService extends Service {
 			result = ChatResult.ROOM_ALREADY_EXISTS;
 
 		if (result == ChatResult.SUCCESS) {
-			room = createRoom(ChatAvatar.getFromPlayer(player), p.isPublic(), path, title);
+			room = createRoom(ChatAvatar.getFromPlayer(player), p.isPublic(), path, title, true);
 			room.setModerated(p.isModerated());
 		}
 
@@ -494,7 +510,7 @@ public class ChatRoomService extends Service {
 
 		List<ChatRoom> rooms = new ArrayList<>();
 		for (ChatRoom chatRoom : roomMap.values()) {
-			if (!chatRoom.isPublic() && !chatRoom.getInvited().contains(avatar) && !chatRoom.getOwner().equals(avatar))
+			if (!chatRoom.isPublic() && !chatRoom.isInvited(avatar) && !chatRoom.getOwner().equals(avatar))
 				continue;
 			rooms.add(chatRoom);
 		}
@@ -533,7 +549,7 @@ public class ChatRoomService extends Service {
 			}
 		}
 
-		Terrain terrain = player.getCreatureObject().getLocation().getTerrain();
+		Terrain terrain = player.getCreatureObject().getTerrain();
 
 		// Enter the new zone-only chat channels
 		String planetPath = "SWG." + player.getGalaxyName() + "." + terrain.getName() + ".";
@@ -580,7 +596,7 @@ public class ChatRoomService extends Service {
 		// Notify everyone that a player entered the room
 		room.sendPacketToMembers(manager, new ChatOnEnteredRoom(avatar, result.getCode(), room.getId(), 0));
 
-		room.getMembers().add(avatar);
+		room.addMember(avatar);
 	}
 
 	public void enterChatChannel(Player player, int id, int sequence) {
@@ -616,7 +632,7 @@ public class ChatRoomService extends Service {
 		if (ghost == null)
 			return; // ChatOnLeaveRoom doesn't do anything other than for a ChatResult.SUCCESS, so no need to send a fail
 
-		if (!room.getMembers().remove(avatar) && !ghost.removeJoinedChannel(room.getPath()))
+		if (!room.removeMember(avatar) && !ghost.removeJoinedChannel(room.getPath()))
 			return;
 
 		player.sendPacket(new ChatOnLeaveRoom(avatar, ChatResult.SUCCESS.getCode(), room.getId(), sequence));
@@ -626,19 +642,24 @@ public class ChatRoomService extends Service {
 
 	public void leaveChatChannel(Player player, String path) {
 		for (ChatRoom chatRoom : roomMap.values()) {
-			if (chatRoom.getPath().equals(path))
+			if (chatRoom.getPath().equals(path)) {
 				leaveChatChannel(player, chatRoom, 0);
+				break;
+			}
 		}
 	}
+
 	/**
-	 * Creates a new, non-persistent, chat room with the specified address path.
+	 * Creates a new chat room with the specified address path. If the path's parent channel doesn't exist, then a new
+	 * chat room is created with the same passed arguments.
 	 * @param creator Room creator who will also become the owner of this room
 	 * @param isPublic Determines if the room should be publicly displayed in the channel listing
 	 * @param path Address for the channel (Ex: SWG.serverName.Imperial)
 	 * @param title Descriptive name of the chat channel (Ex: Imperial chat for this galaxy)
+	 * @param persist If true then this channel will be saved in an {@link ObjectDatabase}
 	 * @return {@link ChatRoom}
 	 */
-	public ChatRoom createRoom(ChatAvatar creator, boolean isPublic, String path, String title) {
+	public ChatRoom createRoom(ChatAvatar creator, boolean isPublic, String path, String title, boolean persist) {
 		if (path.isEmpty() || path.endsWith("."))
 			return null;
 
@@ -646,12 +667,15 @@ public class ChatRoomService extends Service {
 		if (!path.startsWith(base) || path.equals(base))
 			return null;
 
+		if (getRoom(path) != null)
+			return getRoom(path);
+
 		// All paths should have parents, lets validate to make sure they exist first. Create them if they don't.
 		int lastIndex = path.lastIndexOf(".");
 		if (lastIndex != -1) {
 			String parentPath = path.substring(0, lastIndex);
 			if (getRoom(parentPath) == null) {
-				createRoom(creator, isPublic, parentPath, "");
+				createRoom(creator, isPublic, parentPath, "", persist);
 			}
 		}
 
@@ -665,9 +689,25 @@ public class ChatRoomService extends Service {
 		room.setIsPublic(isPublic);
 		room.setPath(path);
 		room.setTitle(title);
+		room.addModerator(creator);
 
 		roomMap.put(id, room);
+
+		if (persist)
+			database.put(id, room);
 		return room;
+	}
+
+	/**
+	 * Creates a new, non-persistent, chat room with the specified address path.
+	 * @param creator Room creator who will also become the owner of this room
+	 * @param isPublic Determines if the room should be publicly displayed in the channel listing
+	 * @param path Address for the channel (Ex: SWG.serverName.Imperial)
+	 * @param title Descriptive name of the chat channel (Ex: Imperial chat for this galaxy)
+	 * @return {@link ChatRoom}
+	 */
+	public ChatRoom createRoom(ChatAvatar creator, boolean isPublic, String path, String title) {
+		return createRoom(creator, isPublic, path, title, false);
 	}
 
 	public boolean notifyDestroyRoom(ChatAvatar destroyer, String roomPath, int sequence) {
@@ -687,11 +727,6 @@ public class ChatRoomService extends Service {
 
 		new NotifyPlayersPacketIntent(new ChatOnDestroyRoom(destroyer, ChatResult.SUCCESS.getCode(), room.getId(), 0),
 				networkIds).broadcast();
-
-		if (!destroyer.equals(ChatAvatar.getSystemAvatar(destroyer.getGalaxy()))) {
-			new NotifyPlayersPacketIntent(new ChatOnDestroyRoom(destroyer, ChatResult.SUCCESS.getCode(), room.getId(), sequence),
-					Collections.singletonList(destroyer.getNetworkId())).broadcast();
-		}
 
 		return true;
 	}
@@ -714,7 +749,7 @@ public class ChatRoomService extends Service {
 		String basePath = "SWG." + galaxy + ".";
 
 		DatatableData rooms = ServerFactory.getDatatable("chat/default_rooms.iff");
-		rooms.handleRows((r) -> createRoom(systemAvatar, true, basePath + rooms.getCell(r, 0), (String) rooms.getCell(r, 1)));
+		rooms.handleRows((r) -> createRoom(systemAvatar, true, basePath + rooms.getCell(r, 0), (String) rooms.getCell(r, 1), true));
 
 		createPlanetChannels(systemAvatar, basePath);
 
@@ -731,9 +766,9 @@ public class ChatRoomService extends Service {
 		DatatableData planets = ServerFactory.getDatatable("chat/planets.iff");
 		planets.handleRows((r) -> {
 			String path = basePath + planets.getCell(r, 0) + ".";
-			createRoom(systemAvatar, true, path + "Planet", "public chat for this planet, cannot create rooms here");
-			createRoom(systemAvatar, true, path + "system", "system messages for this planet, cannot create rooms here");
-			createRoom(systemAvatar, true, path + "Chat", "public chat for this planet, can create rooms here");
+			createRoom(systemAvatar, true, path + "Planet", "public chat for this planet, cannot create rooms here", true);
+			createRoom(systemAvatar, true, path + "system", "system messages for this planet, cannot create rooms here", true);
+			createRoom(systemAvatar, true, path + "Chat", "public chat for this planet, can create rooms here", true);
 		});
 	}
 

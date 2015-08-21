@@ -30,6 +30,7 @@ package services.player;
 import intents.GalacticIntent;
 import intents.LoginEventIntent;
 import intents.LoginEventIntent.LoginEvent;
+import intents.player.DeleteCharacterIntent;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -62,6 +63,7 @@ import resources.Galaxy;
 import resources.Race;
 import resources.Galaxy.GalaxyStatus;
 import resources.config.ConfigFile;
+import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
@@ -98,6 +100,7 @@ public class LoginService extends Service {
 	
 	@Override
 	public boolean initialize() {
+		registerForIntent(DeleteCharacterIntent.TYPE);
 		RelationalDatabase local = getLocalDatabase();
 		getUser = local.prepareStatement("SELECT * FROM users WHERE username = ?");
 		getUserInsensitive = local.prepareStatement("SELECT * FROM users WHERE username ilike ?");
@@ -106,6 +109,13 @@ public class LoginService extends Service {
 		deleteCharacter = local.prepareStatement("DELETE FROM characters WHERE id = ?");
 		autoLogin = (getConfig(ConfigFile.NETWORK).getInt("AUTO-LOGIN", 0) == 1 ? true : false);
 		return super.initialize();
+	}
+	
+	@Override
+	public void onIntentReceived(Intent i) {
+		if (i instanceof DeleteCharacterIntent) {
+			deleteCharacter(((DeleteCharacterIntent) i).getCreature().getObjectId());
+		}
 	}
 	
 	public void handlePacket(GalacticIntent intent, Player player, Packet p) {
@@ -140,7 +150,8 @@ public class LoginService extends Service {
 		if (obj != null && obj instanceof CreatureObject) {
 			Log.i("LoginService", "Deleted character %s for user %s", ((CreatureObject)obj).getName(), player.getUsername());
 			System.out.println("[" + player.getUsername() + "] Delete Character: " + ((CreatureObject)obj).getName() + ". IP: " + request.getAddress() + ":" + request.getPort());
-		}
+		} else
+			Log.w("LoginService", "Could not delete character! Character: ID: " + request.getPlayerId() + " / " + obj);
 		sendPacket(player, new DeleteCharacterResponse(deleteCharacter(request.getPlayerId())));
 	}
 	
@@ -200,9 +211,10 @@ public class LoginService extends Service {
 		player.setPlayerState(PlayerState.LOGGING_IN);
 		switch(user.getString("access_level")) {
 			case "player": player.setAccessLevel(AccessLevel.PLAYER); break;
-			case "admin": player.setAccessLevel(AccessLevel.ADMIN); break;
-			case "dev": player.setAccessLevel(AccessLevel.DEV); break;
+			case "warden": player.setAccessLevel(AccessLevel.WARDEN); break;
+			case "csr": player.setAccessLevel(AccessLevel.CSR); break;
 			case "qa": player.setAccessLevel(AccessLevel.QA); break;
+			case "dev": player.setAccessLevel(AccessLevel.DEV); break;
 			default: player.setAccessLevel(AccessLevel.PLAYER); break;
 		}
 		sendLoginSuccessPacket(player);
@@ -338,7 +350,7 @@ public class LoginService extends Service {
 				g.setRecommended(true);
 				g.setPopulationStatus(populationStatus(consumed));
 				// If locked, restricted, or full
-				if (p.getAccessLevel() == AccessLevel.ADMIN && g.getStatus() != GalaxyStatus.UP)
+				if (p.getAccessLevel().getValue() >= AccessLevel.CSR.getValue() && g.getStatus() != GalaxyStatus.UP)
 					g.setStatus(GalaxyStatus.UP);
 				galaxies.add(g);
 			}

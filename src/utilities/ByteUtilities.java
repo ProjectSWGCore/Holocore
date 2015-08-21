@@ -36,23 +36,16 @@ public class ByteUtilities {
 	private static final char [] HEX = {'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
 	
 	public static String getHexString(byte [] bytes) {
-		StringBuffer ret = new StringBuffer(bytes.length*2+(bytes.length>0?bytes.length-1:0));
-		for (byte b : bytes) {
-			ret.append(getHexString(b)).append(' ');
+		char [] data = new char[bytes.length*2+(bytes.length>0?bytes.length-1:0)];
+		byte b;
+		for (int i = 0; i < bytes.length; i++) {
+			b = bytes[i];
+			data[i*3+0] = HEX[(b&0xFF) >>> 4];
+			data[i*3+1] = HEX[b & 0x0F];
+			if (i*3+2 < data.length)
+				data[i*3+2] = ' ';
 		}
-		return new String(ret);
-	}
-	
-	public static String getHexString(Byte [] bytes) {
-		StringBuffer ret = new StringBuffer(bytes.length*2+(bytes.length>0?bytes.length-1:0));
-		for (byte b : bytes) {
-			ret.append(getHexString(b)).append(' ');
-		}
-		return new String(ret);
-	}
-	
-	public static String getHexString(byte b) {
-		return String.valueOf(HEX[(b&0xFF) >>> 4]) + HEX[b & 0x0F];
+		return new String(data);
 	}
 	
 	public static byte [] longToBytes(long l) {

@@ -40,7 +40,7 @@ import java.nio.ByteOrder;
 public class Equipment implements Encodable, Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	private WeaponObject 	weapon;
+//	private WeaponObject 	weapon;
 	private byte[] 			customizationString;
 	private int 			arrangementId = 4;
 	private long 			objectId;
@@ -53,7 +53,7 @@ public class Equipment implements Encodable, Serializable {
 	
 	public Equipment(WeaponObject weapon) {
 		this(weapon.getObjectId(), weapon.getTemplate());
-		this.weapon = weapon;
+//		this.weapon = weapon;
 	}
 	
 	@Override

@@ -46,6 +46,8 @@ import resources.containers.DefaultPermissions;
 import resources.encodables.StringId;
 import resources.network.BaselineBuilder;
 import resources.network.DeltaBuilder;
+import resources.objects.building.BuildingObject;
+import resources.objects.creature.CreatureObject;
 import resources.player.Player;
 import resources.player.PlayerState;
 import resources.server_info.Log;
@@ -578,7 +580,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		return (filledId != -1) ? filledId : -1;
 	}
 
-	protected final void sendSceneCreateObject(Player target) {
+	private final void sendSceneCreateObject(Player target) {
 		SceneCreateObjectByCrc create = new SceneCreateObjectByCrc();
 		create.setObjectId(objectId);
 		create.setLocation(location);
@@ -589,7 +591,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 
 	}
 	
-	protected final void sendSceneDestroyObject(Player target) {
+	private final void sendSceneDestroyObject(Player target) {
 		SceneDestroyObject destroy = new SceneDestroyObject();
 		destroy.setObjectId(objectId);
 		target.sendPacket(destroy);
@@ -607,11 +609,12 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		target.sendPacket(new SceneEndBaselines(getObjectId()));
 	}
 	
+	public void destroyObject(Player target) {
+		sendSceneDestroyObject(target);
+	}
+	
 	public void clearAware() {
-		SWGObject [] objects;
-		synchronized (objectsAware) {
-			objects = objectsAware.toArray(new SWGObject[objectsAware.size()]);
-		}
+		List<SWGObject> objects = new ArrayList<>(objectsAware);
 		for (SWGObject o : objects) {
 			o.awarenessOutOfRange(this);
 			awarenessOutOfRange(o);
@@ -629,21 +632,25 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	}
 	
 	private Set<SWGObject> getObservers(SWGObject childObject) {
+		return getObserversFromSet(objectsAware, childObject);
+	}
+	
+	private Set<SWGObject> getObserversFromSet(Set<SWGObject> aware, SWGObject childObject) {
+		Set<SWGObject> awareExtra = new HashSet<>(aware);
+		awareExtra.addAll(objectsAware);
 		if (getParent() == null) {
 			Set<SWGObject> observers = new HashSet<>();
-			synchronized (objectsAware) {
-				for (SWGObject obj : objectsAware) {
-					Player p = obj.getOwner();
-					if (childObject.isValidPlayer(p))
-						observers.add(obj);
-					else
-						childObject.getChildrenObservers(observers, obj);
-				}
+			for (SWGObject obj : awareExtra) {
+				Player p = obj.getOwner();
+				if (childObject.isValidPlayer(p))
+					observers.add(obj);
+				else
+					getChildrenObservers(observers, obj);
 			}
-			childObject.getChildrenObservers(observers, this);
+			getChildrenObservers(observers, this);
 			return observers;
 		} else {
-			return getParent().getObservers(childObject); // Search for top level parent
+			return getParent().getObserversFromSet(awareExtra, childObject); // Search for top level parent
 		}
 	}
 	
@@ -741,20 +748,26 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 
 		for (SWGObject swgObject : removed) {
 			if (swgObject.getOwner() != null) {
-				sendSceneDestroyObject(swgObject.getOwner());
+				destroyObject(swgObject.getOwner());
 			}
 		}
 	}
 	
-	public void updateObjectAwareness(List <SWGObject> withinRange) {
+	public void updateObjectAwareness(Set <SWGObject> withinRange) {
 		synchronized (objectsAware) {
+			Set<SWGObject> observers = getObserversFromSet(withinRange, this);
 			Set <SWGObject> outOfRange = new HashSet<>(objectsAware);
 			outOfRange.removeAll(withinRange);
+			outOfRange.removeAll(observers);
 			for (SWGObject o : outOfRange) {
 				awarenessOutOfRange(o);
 				o.awarenessOutOfRange(this);
 			}
 			for (SWGObject o : withinRange) {
+				awarenessInRange(o);
+				o.awarenessInRange(this);
+			}
+			for (SWGObject o : observers) {
 				awarenessInRange(o);
 				o.awarenessInRange(this);
 			}
@@ -766,7 +779,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 			if (objectsAware.remove(o)) {
 				Player owner = o.getOwner();
 				if (owner != null)
-					sendSceneDestroyObject(owner);
+					destroyObject(owner);
 				else
 					destroyObjectObservers(o);
 			}
@@ -797,7 +810,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		Set<SWGObject> observers = new HashSet<>();
 		getChildrenObservers(observers, obj);
 		for (SWGObject observer : observers) {
-			sendSceneDestroyObject(observer.getOwner());
+			destroyObject(observer.getOwner());
 		}
 	}
 
@@ -854,11 +867,21 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		// Now create the contained objects
 		for (SWGObject containedObject : containedObjects.values()) {
 			if (containedObject != null && !sentObjects.contains(containedObject)) {
+				if (containedObject instanceof CreatureObject && containedObject.hasSlot("ghost") && containedObject.getOwner() == null)
+					continue; // If it's a player, but that's logged out
 				containedObject.createObject(target);
 			}
 		}
 	}
-	
+
+	public boolean isInBuilding() {
+		SWGObject parent = getParent();
+		if (parent == null)
+			return false;
+		parent = parent.getParent();
+		return parent != null && parent instanceof BuildingObject;
+	}
+
 	@Override
 	public String toString() {
 		return "SWGObject[ID=" + objectId + " NAME=" + objectName + " TEMPLATE=" + template + "]";

@@ -32,9 +32,12 @@ import network.packets.swg.SWGPacket;
 import network.packets.swg.zone.chat.ChatRoomMessage;
 import resources.encodables.Encodable;
 import resources.encodables.OutOfBandPackage;
+import resources.objects.player.PlayerObject;
 import resources.player.Player;
 import services.player.PlayerManager;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
@@ -72,7 +75,12 @@ public class ChatRoom implements Encodable, Serializable {
 		members = new ArrayList<>();
 		banned = new ArrayList<>();
 	}
-
+	
+	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
+		members = new ArrayList<>();
+		ois.defaultReadObject();
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -160,10 +168,7 @@ public class ChatRoom implements Encodable, Serializable {
 		if (members.contains(avatar))
 			return ChatResult.ROOM_ALREADY_JOINED;
 
-		if (isPublic() || invited.contains(avatar))
-			return ChatResult.SUCCESS;
-
-		if (avatar.equals(owner))
+		if (isPublic() || invited.contains(avatar) || moderators.contains(avatar))
 			return ChatResult.SUCCESS;
 
 		return ChatResult.ROOM_AVATAR_NO_PERMISSION;
@@ -191,9 +196,60 @@ public class ChatRoom implements Encodable, Serializable {
 		return banned.contains(avatar);
 	}
 
+	public boolean isInvited(ChatAvatar avatar) {
+		return invited.contains(avatar);
+	}
+
+	public boolean addMember(ChatAvatar avatar) {
+		return members.add(avatar);
+	}
+
+	public boolean removeMember(ChatAvatar avatar) {
+		return members.remove(avatar);
+	}
+
+	public boolean addModerator(ChatAvatar avatar) {
+		return moderators.add(avatar);
+	}
+
+	public boolean removeModerator(ChatAvatar avatar) {
+		return moderators.remove(avatar);
+	}
+
+	public boolean addInvited(ChatAvatar avatar) {
+		return invited.add(avatar);
+	}
+
+	public boolean removeInvited(ChatAvatar avatar) {
+		return invited.remove(avatar);
+	}
+
+	public boolean addBanned(ChatAvatar avatar) {
+		return banned.add(avatar);
+	}
+
+	public boolean removeBanned(ChatAvatar avatar) {
+		return banned.remove(avatar);
+	}
+
 	public void sendMessage(ChatAvatar sender, String message, OutOfBandPackage oob, PlayerManager playerManager) {
 		ChatRoomMessage chatRoomMessage = new ChatRoomMessage(sender, getId(), message, oob);
-		sendPacketToMembers(playerManager, chatRoomMessage);
+
+		String senderName = sender.getName();
+		for (ChatAvatar member : members) {
+			Player player = playerManager.getPlayerFromNetworkId(member.getNetworkId());
+			if (player == null)
+				continue;
+
+			PlayerObject ghost = player.getPlayerObject();
+			if (ghost == null)
+				continue;
+
+			if (ghost.isIgnored(senderName))
+				continue;
+
+			player.sendPacket(chatRoomMessage);
+		}
 	}
 
 	public void sendPacketToMembers(PlayerManager manager, SWGPacket... packets) {

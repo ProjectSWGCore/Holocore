@@ -250,10 +250,11 @@ public class PlayerObject extends IntangibleObject {
 	
 	public void setAdminTag(AccessLevel access) {
 		switch(access) {
-		case PLAYER: break;
-		case ADMIN: adminTag = 1; break;
-		case DEV: adminTag = 2; break;
-		case QA: adminTag = 4; break;
+			case PLAYER: break;
+			case CSR: adminTag = 1; break;
+			case DEV: adminTag = 2; break;
+			case WARDEN: adminTag = 3; break;
+			case QA: adminTag = 4; break;
 		}
 		sendDelta(6, 2, adminTag);
 	}
@@ -359,7 +360,29 @@ public class PlayerObject extends IntangibleObject {
 	}
 
 	public List<String> getFriendsList() {
-		return this.friendsList;
+		return friendsList;
+	}
+
+	public void addIgnored(String ignored) {
+		synchronized (ignoreList) {
+			ignoreList.add(ignored);
+		}
+		ignoreList.sendDeltaMessage(this);
+	}
+
+	public void removeIgnored(String ignored) {
+		synchronized (ignoreList) {
+			ignoreList.remove(ignored);
+		}
+		ignoreList.sendDeltaMessage(this);
+	}
+
+	public boolean isIgnored(String target) {
+		return ignoreList.contains(target);
+	}
+
+	public List<String> getIgnoreList() {
+		return ignoreList;
 	}
 
 	public String getProfWheelPosition() {

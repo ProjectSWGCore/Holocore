@@ -29,6 +29,7 @@ package network.packets;
 
 import resources.common.CRC;
 import resources.encodables.Encodable;
+import utilities.Encoder;
 
 import java.net.InetAddress;
 import java.nio.ByteBuffer;
@@ -91,6 +92,26 @@ public class Packet {
 		}
 	}
 
+	public static void addList(ByteBuffer bb, List<byte[]> list) {
+		addInt(bb, list.size());
+		for (byte[] bytes : list) {
+			addData(bb, bytes);
+		}
+	}
+
+	public static void addList(ByteBuffer bb, List<String> list, Encoder.StringType type) {
+		addInt(bb, list.size());
+
+		switch(type) {
+			case ASCII: for (String s : list) { addAscii(bb, s); }
+				break;
+			case UNICODE: for (String s : list) { addUnicode(bb, s); }
+				break;
+			default: System.err.println("Cannot encode StringType " + type);
+				break;
+		}
+	}
+
 	public static void addBoolean(ByteBuffer bb, boolean b) {
 		bb.put(b ? (byte) 1 : (byte) 0);
 	}
@@ -141,10 +162,6 @@ public class Packet {
 
 	public static void addData(ByteBuffer bb, byte[] data) {
 		bb.put(data);
-	}
-
-	public static void addArray(ByteBuffer bb, byte[] b) {
-		bb.put(b);
 	}
 
 	public static void addArrayList(ByteBuffer bb, byte[] b) {
@@ -237,12 +254,16 @@ public class Packet {
 	 * @return Amount of bytes that are read
 	 */
 	public static <T extends Encodable> List<T> getList(ByteBuffer bb, Class<T> type) {
-		List<T> list = new ArrayList<>();
-
 		int size = getInt(bb);
 
-		if (size <= 0)
+		if (size < 0) {
+			System.err.println("Read list with size less than zero!");
+			return null;
+		} else if (size == 0) {
 			return new ArrayList<>();
+		}
+
+		List<T> list = new ArrayList<>();
 
 		try {
 			for (int i = 0; i < size; i++) {
@@ -269,6 +290,30 @@ public class Packet {
 		}
 
 		return instance;
+	}
+
+	public static List<String> getList(ByteBuffer bb, Encoder.StringType type) {
+		int size = getInt(bb);
+
+		if (size < 0) {
+			System.err.println("Read list with size less than zero!");
+			return null;
+		} else if (size == 0) {
+			return new ArrayList<>();
+		}
+
+		List<String> list = new ArrayList<>();
+
+		switch(type) {
+			case ASCII: for (int i = 0; i < size; i++) { list.add(getAscii(bb)); }
+				break;
+			case UNICODE: for (int i = 0; i < size; i++) { list.add(getUnicode(bb)); }
+				break;
+			default: System.err.println("Do not know how to read list of StringType " + type);
+				break;
+		}
+
+		return list;
 	}
 
 	public void decode(ByteBuffer data) {

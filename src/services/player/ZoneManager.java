@@ -137,10 +137,9 @@ public class ZoneManager extends Manager {
 		initPlayerBeforeZoneIn(player, creature, playerObj);
 		System.out.printf("[%s] %s is zoning in%n", player.getUsername(), player.getCharacterName());
 		Log.i("ObjectManager", "Zoning in %s with character %s", player.getUsername(), player.getCharacterName());
+		new PlayerEventIntent(player, galaxy, PlayerEvent.PE_FIRST_ZONE).broadcast();
+		new PlayerEventIntent(player, galaxy, PlayerEvent.PE_ZONE_IN).broadcast();
 		sendCommitHistory(player);
-		PlayerEventIntent firstZone = new PlayerEventIntent(player, galaxy, PlayerEvent.PE_FIRST_ZONE);
-		PlayerEventIntent primary = new PlayerEventIntent(player, galaxy, PlayerEvent.PE_ZONE_IN);
-		firstZone.broadcastWithIntent(primary);
 	}
 	
 	private void loadCommitHistory() {

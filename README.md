@@ -33,6 +33,31 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with Holocore.  If not, see <http://www.gnu.org/licenses/>.
 
+## Setting up the developer environment ##
+
+### Java 1.8 ###
+
+You need to have a Java compiler that supports [Java 1.8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html). Which
+you can download from Oracle.
+
+### Maven ###
+
+This project uses Maven as it's build tool of choice, and requires Maven 3.x. To install Maven, see your
+specific OS instructions from the [Maven installation](http://books.sonatype.com/mvnref-book/reference/installation.html) section
+from the Sonatype site.
+
+**The Maven build will generate two artifacts**
+
+- Standalone 'uber' jar that you can run the Holocore server out of.
+- Jar containing a sub-set of files as defined by 'asselby-tools.xml'
+
+**Using the standard Maven life-cycle, you have the following supported goals:**
+
+- clean   - Removes any .class and old jar files
+- compile - Just compiles the java code, does *not* update any artifacts
+- test    - Does all that 'compile' does, plus runs the unit tests
+- package - Does all that 'test' does but generates all of the artifacts
+
 ### Running Holocore ###
 In order to successfully build and run Holocore, you must:
 
@@ -43,8 +68,8 @@ In order to successfully build and run Holocore, you must:
     * abstract
     * appearance
     * creation
-    * customization 
-    * datatables 
+    * customization
+    * datatables
     * footprint
     * interiorlayout
     * misc
@@ -53,3 +78,4 @@ In order to successfully build and run Holocore, you must:
     * snapshot
     * string
     * terrain
+

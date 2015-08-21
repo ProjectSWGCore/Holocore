@@ -53,7 +53,7 @@ public class GalacticManager extends Manager {
 		objectManager = new ObjectManager();
 		playerManager = new PlayerManager();
 		gameManager = new GameManager();
-		chatManager = new ChatManager();
+		chatManager = new ChatManager(g);
 		prevPacketIntent = null;
 		
 		addChildService(objectManager);
@@ -65,7 +65,6 @@ public class GalacticManager extends Manager {
 	@Override
 	public boolean initialize() {
 		registerForIntent(InboundPacketIntent.TYPE);
-		chatManager.initializeGalaxyChannels(galaxy);
 		return super.initialize();
 	}
 	

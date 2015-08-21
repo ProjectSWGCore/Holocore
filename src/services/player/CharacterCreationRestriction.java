@@ -39,7 +39,7 @@ import resources.server_info.Log;
 
 public class CharacterCreationRestriction {
 	
-	private static final long TIME_INCREMENT = TimeUnit.DAYS.toMillis(1);
+	private static final long TIME_INCREMENT = TimeUnit.MINUTES.toMillis(15);
 	
 	private final Map <Integer, PlayerRestriction> restrictions;
 	private int creationsPerPeriod;

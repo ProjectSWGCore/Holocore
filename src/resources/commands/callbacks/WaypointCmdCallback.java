@@ -32,6 +32,7 @@ import resources.Location;
 import resources.Terrain;
 import resources.commands.ICmdCallback;
 import resources.objects.SWGObject;
+import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
 import resources.objects.waypoint.WaypointObject;
 import resources.objects.waypoint.WaypointObject.WaypointColor;
@@ -146,7 +147,8 @@ public class WaypointCmdCallback implements ICmdCallback {
 				return;
 		}
 
-		Location location = new Location(player.getCreatureObject().getLocation());
+		CreatureObject creature = player.getCreatureObject();
+		Location location = creature.getWorldLocation();
 
 		if (!Float.isNaN(x))
 			location.setX(x);
@@ -183,7 +185,6 @@ public class WaypointCmdCallback implements ICmdCallback {
 		WaypointObject waypoint = (WaypointObject) objManager.createObject("object/waypoint/shared_waypoint.iff", location, false);
 		waypoint.setColor(color);
 		waypoint.setName(name);
-		// TODO: Check if the location collides with a building, and if it does then set the proper cellId
 		return waypoint;
 	}
 	

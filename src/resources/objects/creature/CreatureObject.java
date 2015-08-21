@@ -50,6 +50,8 @@ public class CreatureObject extends TangibleObject {
 	
 	private static final long serialVersionUID = 1L;
 	
+	private transient long lastReserveOperation	= 0;
+	
 	private Posture	posture					= Posture.UPRIGHT;
 	private Race	race					= Race.HUMAN; 
 	private double	movementScale			= 1;
@@ -71,6 +73,7 @@ public class CreatureObject extends TangibleObject {
 	private CreatureDifficulty	difficulty	= CreatureDifficulty.NORMAL;
 	private int		cashBalance				= 0;
 	private int		bankBalance				= 0;
+	private long	reserveBalance			= 0; // Galactic Reserve - capped at 3 billion
 	private String	moodAnimation			= "neutral";
 	private String	animation				= "";
 	private long	equippedWeaponId		= 0;
@@ -89,6 +92,7 @@ public class CreatureObject extends TangibleObject {
 	private long 	ownerId					= 0;
 	private int 	battleFatigue			= 0;
 	private long 	statesBitmask			= 0;
+	private String	currentCity				= "";
 	private HologramColour hologramColour = HologramColour.DEFAULT;
 	
 	private SWGList<Integer>	baseAttributes	= new SWGList<Integer>(BaselineType.CREO, 1, 2);
@@ -172,6 +176,10 @@ public class CreatureObject extends TangibleObject {
 	public int getBankBalance() {
 		return bankBalance;
 	}
+	
+	public long getReserveBalance() {
+		return reserveBalance;
+	}
 
 	public Posture getPosture() {
 		return posture;
@@ -249,6 +257,10 @@ public class CreatureObject extends TangibleObject {
 		return difficulty;
 	}
 	
+	public String getCurrentCity() {
+		return currentCity;
+	}
+	
 	public PlayerObject getPlayerObject() {
 		return (PlayerObject) (hasSlot("ghost") ? getSlottedObject("ghost") : null);
 	}
@@ -263,14 +275,66 @@ public class CreatureObject extends TangibleObject {
 		this.race = race;
 	}
 	
-	public void setCashBalance(int cashBalance) {
-		this.cashBalance = cashBalance;
-		sendDelta(1, 0, cashBalance);
+	public void setCashBalance(long cashBalance) {
+		if (cashBalance < 0)
+			cashBalance = 0;
+		if (cashBalance > 2E9) { // 2 billion cap
+			long leftover = cashBalance - (long)2E9;
+			cashBalance = (long) 2E9;
+			long bank = bankBalance + leftover;
+			long reserve = reserveBalance;
+			leftover = bank - (long) 2E9;
+			if (leftover > 0) {
+				bank = (long)2E9;
+				reserve += leftover;
+			}
+			this.cashBalance = (int) cashBalance;
+			sendDelta(1, 1, (int) cashBalance);
+			setBankBalance(bank);
+			setReserveBalance(reserve);
+		} else {
+			this.cashBalance = (int) cashBalance;
+			sendDelta(1, 1, (int) cashBalance);
+		}
 	}
 
-	public void setBankBalance(int bankBalance) {
-		this.bankBalance = bankBalance;
-		sendDelta(1, 1, bankBalance);
+	public void setBankBalance(long bankBalance) {
+		if (bankBalance < 0)
+			bankBalance = 0;
+		if (bankBalance > 2E9) { // 2 billion cap
+			long leftover = bankBalance - (long)2E9;
+			bankBalance = (long) 2E9;
+			long cash = cashBalance + leftover;
+			long reserve = reserveBalance;
+			leftover = cash - (long) 2E9;
+			if (leftover > 0) {
+				cash = (long)2E9;
+				reserve += leftover;
+			}
+			this.bankBalance = (int) bankBalance;
+			sendDelta(1, 0, (int) bankBalance);
+			setCashBalance(cash);
+			setReserveBalance(reserve);
+		} else {
+			this.bankBalance = (int) bankBalance;
+			sendDelta(1, 0, (int) bankBalance);
+		}
+	}
+	
+	public void setReserveBalance(long reserveBalance) {
+		if (reserveBalance < 0)
+			reserveBalance = 0;
+		else if (reserveBalance > 3E9)
+			reserveBalance = (long) 3E9; // 3 billion cap
+		this.reserveBalance = reserveBalance;
+	}
+	
+	public boolean canPerformGalacticReserveTransaction() {
+		return (System.nanoTime() - lastReserveOperation) / 1E9 >= 15*60;
+	}
+	
+	public void updateLastGalacticReserveTime() {
+		lastReserveOperation = System.nanoTime();
 	}
 	
 	public void setMovementScale(double movementScale) {
@@ -356,6 +420,10 @@ public class CreatureObject extends TangibleObject {
 	public void setDifficulty(CreatureDifficulty difficulty) {
 		this.difficulty = difficulty;
 		sendDelta(6, 26, difficulty.getDifficulty());
+	}
+	
+	public void setCurrentCity(String currentCity) {
+		this.currentCity = currentCity;
 	}
 	
 	public String getMoodAnimation() {
@@ -566,6 +634,12 @@ public class CreatureObject extends TangibleObject {
 	public int getBaseAction() {
 		return attributes.get(2);
 	}
+
+	public void addAbility(String abilityName){ abilities.put(abilityName, 1); }//TODO: Figure out what the integer value should be for each ability
+
+	public void removeAbility(String abilityName) { abilities.remove(abilityName); }
+
+	public boolean hasAbility(String abilityName) { return abilities.get(abilityName) != null; }
 	
 	public void setHealth(int health) {
 		synchronized(attributes) {
@@ -682,8 +756,8 @@ public class CreatureObject extends TangibleObject {
 	
 	public void createBaseline1(Player target, BaselineBuilder bb) {
 		super.createBaseline1(target, bb); // 0 variables
-		bb.addInt(cashBalance); // 0
-		bb.addInt(bankBalance); // 1
+		bb.addInt(bankBalance); // 0
+		bb.addInt(cashBalance); // 1
 		bb.addObject(baseAttributes); // Attributes player has without any gear on -- 2
 		bb.addObject(skills); // 3
 		

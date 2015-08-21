@@ -107,13 +107,14 @@ public class WaypointObject extends IntangibleObject implements OutOfBandData {
 	@Override
 	public void decode(ByteBuffer data) {
 		data.getInt();
-		setLocation(data.getFloat(), data.getFloat(), data.getFloat());
+		Location loc = new Location(data.getFloat(), data.getFloat(), data.getFloat(), null);
 		cellId 		= Packet.getLong(data);
-		getLocation().setTerrain(Terrain.getTerrainFromCrc(data.getInt()));
+		loc.setTerrain(Terrain.getTerrainFromCrc(data.getInt()));
 		name 		= Packet.getUnicode(data);
 		Packet.getLong(data); // objectId
 		color		= WaypointColor.valueOf(data.get());
 		active 		= Packet.getBoolean(data);
+		setLocation(loc);
 	}
 
 	@Override

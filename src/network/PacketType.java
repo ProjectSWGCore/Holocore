@@ -169,6 +169,7 @@ public enum PacketType {
 		// Server UI
 		OBJECT_MENU_REQUEST						(0x00000146, 				ObjectMenuRequest.class),
 		OBJECT_MENU_RESPONSE					(0x00000147, 				ObjectMenuResponse.class),
+		OBJECT_MENU_SELECT						(ObjectMenuSelect.CRC,		ObjectMenuSelect.class),
 		SUI_CREATE_PAGE_MESSAGE					(SuiCreatePageMessage.CRC, 	SuiCreatePageMessage.class),
 		SUI_EVENT_NOTIFICATION					(SuiEventNotification.CRC, 	SuiEventNotification.class),
 
@@ -220,6 +221,7 @@ public enum PacketType {
 		try {
 			return c.newInstance();
 		} catch (Exception e) {
+			System.err.println("Packet: " + c.getName());
 			e.printStackTrace();
 		}
 		return null;

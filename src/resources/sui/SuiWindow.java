@@ -28,163 +28,152 @@
 package resources.sui;
 
 import intents.sui.SuiWindowIntent;
-import intents.sui.SuiWindowIntent.SuiWindowEvent;
-
-import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import resources.player.Player;
-import network.packets.swg.zone.server_ui.SuiCreatePageMessage.SuiWindowComponent;
 
-public class SuiWindow {
-
-	private int id;
-	private String script;
-	private Player owner;
-	private long rangeObjId;
-	private float maxDistance = 0;
-	private List<SuiWindowComponent> components = new ArrayList<SuiWindowComponent>();
-	private Map<Integer, String> scriptCallbacks;
-	private Map<Integer, ISuiCallback> javaCallbacks;
+public class SuiWindow extends SuiBaseWindow {
 	
-	public SuiWindow(String script, Player owner) {
-		this.script = script;
-		this.owner = owner;
+	public SuiWindow() {
+		
+	}
+	
+	public SuiWindow(String script, SuiButtons buttons, String title, String prompt) {
+		super(script);
+		setTitle(title);
+		setPrompt(prompt);
+		setButtons(buttons);
 	}
 
-	public final void clearDataSource(String dataSource) {
-		SuiWindowComponent component = createComponent((byte) 1);
-		
-		component.getNarrowParams().add(dataSource);
-		components.add(component);
-	}
-	
-	public final void addChildWidget(String property, String value) {
-		SuiWindowComponent component = createComponent((byte) 2);
-		
-		addNarrowParams(component, property);
-		
-		component.getWideParams().add(value);
-		components.add(component);
-	}
-	
-	public final void setProperty(String property, String value) {
-		SuiWindowComponent component = createComponent((byte) 3);
-		
-		addNarrowParams(component, property);
-		
-		component.getWideParams().add(value);
-		components.add(component);
-	}
-	
-	public final void addDataItem(String name, String value) {
-		SuiWindowComponent component = createComponent((byte) 4);
-		
-		addNarrowParams(component, name);
-		
-		component.getWideParams().add(value);
-		components.add(component);
-	}
-	
-	private final void addCallbackComponent(String source, Trigger trigger, List<String> returnParams) {
-		SuiWindowComponent component = createComponent((byte) 5);
-		
-		component.getNarrowParams().add(source);
-		component.getNarrowParams().add(new String(new byte[] {trigger.getByte()}, Charset.forName("UTF-8")));
-		component.getNarrowParams().add("handleSUI");
-		
-		for (String returnParam : returnParams) {
-			addNarrowParams(component, returnParam);
-		}
-		
-		components.add(component);
-	}
-	
-	public final void addDataSource(String name, String value) {
-		SuiWindowComponent component = createComponent((byte) 6);
-		
-		addNarrowParams(component, name);
-		
-		component.getWideParams().add(value);
-		components.add(component);
-	}
-	
-	public final void clearDataSourceContainer(String dataSource) {
-		SuiWindowComponent component = createComponent((byte) 7);
-		
-		addNarrowParams(component, dataSource);
-		
-		components.add(component);
-	}
-	
-	public final void addTableDataSource(String dataSource, String value) {
-		SuiWindowComponent component = createComponent((byte) 8);
-		
-		addNarrowParams(component, dataSource);
-		
-		component.getWideParams().add(value);
-		components.add(component);
-	}
-	
-	public final void addCallback(int eventId, String source, Trigger trigger, List<String> returnParams, ISuiCallback callback) {
-		addCallbackComponent(source, trigger, returnParams);
-		
-		if (javaCallbacks == null)
-			javaCallbacks = new HashMap<Integer, ISuiCallback>();
-		javaCallbacks.put(eventId, callback);
-	}
-	
-	public final void addCallback(int eventId, String source, Trigger trigger, List<String> returnParams, String callbackScript) {
-		addCallbackComponent(source, trigger, returnParams);
-		
-		if (scriptCallbacks == null)
-			scriptCallbacks = new HashMap<Integer, String>();
-		scriptCallbacks.put(eventId, callbackScript);
+	public SuiWindow(String script, SuiButtons buttons, String title, String prompt, String callbackScript, String function) {
+		this(script, buttons, title, prompt);
+
+		addOkButtonCallback(callbackScript, function);
+		addCancelButtonCallback(callbackScript, function);
 	}
 
-	private SuiWindowComponent createComponent(byte type) {
-		SuiWindowComponent component = new SuiWindowComponent();
-		component.setType(type);
-		
-		return component;
+	public SuiWindow(String script, SuiButtons buttons, String title, String prompt, String callback, ISuiCallback suiCallback) {
+		this(script, buttons, title, prompt);
+
+		addOkButtonCallback(callback, suiCallback);
+		addCancelButtonCallback(callback, suiCallback);
+	}
+
+	public SuiWindow(String script, String title, String prompt) {
+		this(script, SuiButtons.DEFAULT, title, prompt);
+	}
+
+	public SuiWindow(String script) {
+		super(script);
+	}
+
+	public void setTitle(String title) {
+		if (title != null)
+			setPropertyText("bg.caption.lblTitle", title);
 	}
 	
-	private void addNarrowParams(SuiWindowComponent component, String property) {
-		for (String s : property.split(":")) {
-			component.getNarrowParams().add(s);
+	public void setPrompt(String prompt) {
+		if (prompt != null)
+			setPropertyText("Prompt.lblPrompt", prompt);
+	}
+
+	public void setPropertyText(String widget, String value) {
+		setProperty(widget, "Text", value);
+	}
+
+	public void setAutosave(boolean autosave) {
+		setProperty("this", "autosave", String.valueOf(autosave));
+	}
+
+	public void setLocation(int x, int y) {
+		setProperty("this", "Location", String.valueOf(x) + "," + String.valueOf(y));
+	}
+
+	public void setSize(int width, int height) {
+		setProperty("this", "Size", String.valueOf(width) + "," + String.valueOf(height));
+	}
+
+	protected void setOkButtonText() {
+		setOkButtonText("@ok");
+	}
+
+	protected void setOkButtonText(String text) {
+		setProperty("btnOk", "Text", text);
+	}
+
+	protected void setCancelButtonText() {
+		setCancelButtonText("@cancel");
+	}
+
+	protected void setCancelButtonText(String text) {
+		setProperty("btnCancel", "Text", text);
+	}
+
+	protected void setShowOtherButton(boolean display, String text) {
+		setProperty("btnOther", "Visible", String.valueOf(display));
+		if (display) {
+			setProperty("btnOther", "Text", text);
+			addOtherButtonReturnable();
 		}
 	}
-	
-	public final void display() { new SuiWindowIntent(owner, this, SuiWindowEvent.NEW).broadcast(); }
-	public final void display(Player player) { new SuiWindowIntent(player, this, SuiWindowEvent.NEW).broadcast();}
-	
-	public final long getRangeObjId() { return rangeObjId; }
-	public final void setRangeObjId(long rangeObjId) { this.rangeObjId = rangeObjId; }
-	public final int getId() { return id; }
-	public final void setId(int id) { this.id = id; }
-	public final String getScript() { return script; }
-	public final Player getOwner() { return owner; }
-	public final float getMaxDistance() { return maxDistance; }
-	public final void setMaxDistance(float maxDistance) { this.maxDistance = maxDistance; }
-	public final List<SuiWindowComponent> getComponents() { return components; }
-	public final ISuiCallback getJavaCallback(int eventType) { return ((javaCallbacks == null) ? null : javaCallbacks.get(eventType)); }
-	public final String getScriptCallback(int eventType) { return ((scriptCallbacks == null) ? null : scriptCallbacks.get(eventType)); }
-	
-	public enum Trigger {
-		UPDATE	((byte) 4),
-		OK		((byte) 9),
-		CANCEL	((byte) 10);
-		
-		private byte b;
-		
-		Trigger(byte b) {
-			this.b = b;
-		}
-		
-		public byte getByte() {
-			return b;
+
+	protected void setShowCancelButton(boolean display) {
+		String value = String.valueOf(display);
+		setProperty("btnCancel", "Enabled", value);
+		setProperty("btnCancel", "Visible", value);
+	}
+
+	public void addOkButtonCallback(String callback, ISuiCallback suiCallback) {
+		addCallback(SuiEvent.OK_PRESSED, callback, suiCallback);
+	}
+
+	public void addOkButtonCallback(String script, String function) {
+		addCallback(SuiEvent.OK_PRESSED, script, function);
+	}
+
+	public void addCancelButtonCallback(String callback, ISuiCallback suiCallback) {
+		addCallback(SuiEvent.CANCEL_PRESSED, callback, suiCallback);
+	}
+
+	public void addCancelButtonCallback(String script, String function) {
+		addCallback(SuiEvent.CANCEL_PRESSED, script, function);
+	}
+
+	protected void addOtherButtonReturnable() {
+		addReturnableProperty(SuiEvent.OK_PRESSED, "this", "otherPressed");
+	}
+
+	public final void display(Player player) {
+		onDisplayRequest();
+		new SuiWindowIntent(player, this, SuiWindowIntent.SuiWindowEvent.NEW).broadcast();
+	}
+
+	public final void close(Player player) {
+		new SuiWindowIntent(player, this, SuiWindowIntent.SuiWindowEvent.CLOSE).broadcast();
+	}
+
+	// Add a simple ok/cancel button subscriptions if no callbacks is assigned so the server is sent a SuiEventNotification when client destroys the page.
+	// Doing it this way will ensures the server removes the stored SuiWindow from memory.
+	private void prepare() {
+		if (hasSubscriptionComponent())
+			return;
+
+		subscribeToEvent(SuiEvent.OK_PRESSED.getValue(), "", "handleSUI");
+		subscribeToEvent(SuiEvent.CANCEL_PRESSED.getValue(), "", "handleSUI");
+	}
+
+	protected void onDisplayRequest() {
+		prepare();
+	}
+
+	protected void setButtons(SuiButtons buttons) {
+		switch(buttons) {
+			case OK_CANCEL:
+				setOkButtonText();
+				setCancelButtonText();
+				break;
+			case OK:
+			default:
+				setOkButtonText();
+				break;
 		}
 	}
 }

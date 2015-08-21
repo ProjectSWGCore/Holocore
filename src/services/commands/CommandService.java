@@ -27,12 +27,10 @@
 ***********************************************************************************/
 package services.commands;
 
+import intents.chat.ChatBroadcastIntent;
 import intents.chat.ChatCommandIntent;
 import intents.network.GalacticPacketIntent;
 
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
 
 import network.packets.Packet;
 import network.packets.swg.zone.object_controller.CommandQueueEnqueue;
@@ -44,6 +42,8 @@ import resources.commands.callbacks.*;
 import resources.common.CRC;
 import resources.control.Intent;
 import resources.control.Service;
+import resources.encodables.ProsePackage;
+import resources.encodables.StringId;
 import resources.objects.SWGObject;
 import resources.player.AccessLevel;
 import resources.player.Player;
@@ -51,14 +51,23 @@ import resources.server_info.Log;
 import utilities.Scripts;
 import services.galaxy.GalacticManager;
 
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+
+
 public class CommandService extends Service {
 	
-	private final Map <Integer, Command>	commands;			// NOTE: CRC's are all lowercased for commands!
-	private final Map <String, Integer>		commandCrcLookup;
+	private final Map <Integer, Command>			commands;			// NOTE: CRC's are all lowercased for commands!
+	private final Map <String, Integer>				commandCrcLookup;
+	private final Map <String, List<Command>>		commandByScript;
 	
 	public CommandService() {
 		commands = new HashMap<>();
 		commandCrcLookup = new HashMap<>();
+		commandByScript = new HashMap<>();
 	}
 	
 	@Override
@@ -106,24 +115,40 @@ public class CommandService extends Service {
 			Log.e("CommandService", "No creature object associated with the player '%s'!", player.getUsername());
 			return;
 		}
-		
-		if (command.getGodLevel() > 0 || command.getCharacterAbility().toLowerCase().equals("admin")) {//HACK @Glen characterAbility check should be handled in the "has ability" TODO below. Not sure if abilities are implemented yet.
-			if (player.getAccessLevel() == AccessLevel.PLAYER) {
-				System.out.printf("[%s] failed to use admin command \"%s\" with access level %s with parameters \"%s\"\n", player.getCharacterName(), command.getName(), player.getAccessLevel().toString(), args);
-				return;
-			}
-			System.out.printf("[%s] successfully used admin command \"%s\" with access level %s with parameters \"%s\"\n", player.getCharacterName(), command.getName(), player.getAccessLevel().toString(), args);
+
+		if(player.getAccessLevel().getValue() < command.getGodLevel()) {
+			String commandAccessLevel = AccessLevel.getFromValue(command.getGodLevel()).toString();
+			String playerAccessLevel = player.getAccessLevel().toString();
+			Log.i("CommandService", "[%s] attempted to use the command \"%s\", but did not have the minimum access level. Access Level Required: %s, Player Access Level: %s",
+					player.getCharacterName(), command.getName(), commandAccessLevel, playerAccessLevel);
+			String errorProseString1 = "use that command";
+			String errorProseString2 = commandAccessLevel.toString();
+			new ChatBroadcastIntent(player, new ProsePackage("StringId", new StringId("cmd_err", "state_must_have_prose"), "TO", errorProseString1, "TU", errorProseString2)).broadcast();
+			return;
 		}
-		
+
+		if(!command.getCharacterAbility().isEmpty() && !player.getCreatureObject().hasAbility(command.getCharacterAbility())){
+			Log.i("CommandService", "[%s] attempted to use the command \"%s\", but did not have the required ability. Ability Required: %s",
+					player.getCharacterName(), command.getName(), command.getCharacterAbility());
+			String errorProseString = String.format("use the %s command", command.getName());
+			new ChatBroadcastIntent(player, new ProsePackage("StringId", new StringId("cmd_err", "ability_prose"), "TO", errorProseString)).broadcast();
+			return;
+		}
+
 		// TODO: Check if the player has the ability
 		// TODO: Cool-down checks
 		// TODO: Handle for different target
 		// TODO: Handle for different targetType
 		
-		if (command.hasJavaCallback())
-			command.getJavaCallback().execute(galacticManager, player, target, args);
+		if (command.hasJavaCallback()) {
+			try {
+				((ICmdCallback) command.getJavaCallback().newInstance()).execute(galacticManager, player, target, args);
+			} catch (InstantiationException | IllegalAccessException e) {
+				e.printStackTrace();
+			}
+		}
 		else
-			Scripts.invoke("commands/generic/" + command.getScriptCallback(), "execute", galacticManager, player, target, args);
+			Scripts.invoke("commands/generic/" + command.getDefaultScriptCallback(), "execute", galacticManager, player, target, args);
 	}
 	
 	private void loadBaseCommands() {
@@ -137,41 +162,68 @@ public class CommandService extends Service {
 	
 	private void loadBaseCommands(String table) {
 		DatatableData baseCommands = (DatatableData) ClientFactory.getInfoFromFile("datatables/command/"+table+".iff");
-		
+
+		int godLevel = baseCommands.getColumnFromName("godLevel");
 		for (int row = 0; row < baseCommands.getRowCount(); row++) {
 			Object [] cmdRow = baseCommands.getRow(row);
-			String callback = (String) cmdRow[2];
-			if (callback.isEmpty())
-				callback = (String) cmdRow[4];
-			
+
 			Command command = new Command((String) cmdRow[0]);
 			command.setCrc(CRC.getCrc(command.getName().toLowerCase(Locale.ENGLISH)));
-			command.setScriptCallback(callback);
+			command.setScriptHook((String) cmdRow[2]);
+			command.setCppHook((String)cmdRow[4]);
 			command.setDefaultTime((float) cmdRow[6]);
 			command.setCharacterAbility((String) cmdRow[7]);
-			
+
+			if(godLevel >= 0){
+				command.setGodLevel((int) cmdRow[godLevel]);
+			}
+
 			addCommand(command);
 		}
 	}
 	
-	private void registerCallback(String command, ICmdCallback callback) {
-		getCommand(command).setJavaCallback(callback);
+	private <T extends ICmdCallback> Command registerCallback(String command, Class<T> callback) {
+		Command comand = getCommand(command);
+		registerCallback(comand, callback);
+		return comand;
+	}
+
+	private <T extends ICmdCallback> void registerCallback(Command command, Class<T> callback) {
+		try {
+			if (callback.getConstructor() == null)
+				throw new IllegalArgumentException("Incorrectly registered callback class. Class must extend ICmdCallback and have an empty constructor: " + callback.getName());
+		} catch (NoSuchMethodException e) {
+			e.printStackTrace();
+		}
+		command.setJavaCallback(callback);
+
+		List<Command> scriptCommands = getCommandsByScript(command.getDefaultScriptCallback());
+		for(Command unregistered : scriptCommands){
+			if(unregistered != command && !unregistered.hasJavaCallback()){
+				registerCallback(unregistered, command.getJavaCallback());
+			}
+		}
+
 	}
 	
 	private void registerCallbacks() {
-		registerCallback("waypoint", new WaypointCmdCallback());
-		registerCallback("requestWaypointAtPosition", new RequestWaypointCmdCallback());
-		registerCallback("server", new ServerCmdCallback());
-		registerCallback("getAttributesBatch", new AttributesCmdCallback());
-		registerCallback("socialInternal", new SocialInternalCmdCallback());
-		registerCallback("sitServer", new SitOnObjectCmdCallback());
-		registerCallback("stand", new StandCmdCallback());
-		registerCallback("teleport", new AdminTeleportCallback());
-		registerCallback("prone", new ProneCmdCallback());
-		registerCallback("kneel", new KneelCmdCallback());
-		registerCallback("jumpServer", new JumpCmdCallback());
-		registerCallback("serverDestroyObject", new ServerDestroyObjectCmdCallback());
-		registerCallback("findFriend", new FindFriendCallback());
+
+		registerCallback("waypoint", WaypointCmdCallback.class);
+		registerCallback("requestWaypointAtPosition", RequestWaypointCmdCallback.class);
+		registerCallback("server", ServerCmdCallback.class);
+		registerCallback("getAttributesBatch", AttributesCmdCallback.class);
+		registerCallback("socialInternal", SocialInternalCmdCallback.class);
+		registerCallback("sitServer", SitOnObjectCmdCallback.class);
+		registerCallback("stand", StandCmdCallback.class);
+		registerCallback("teleport", AdminTeleportCallback.class);
+		registerCallback("prone", ProneCmdCallback.class);
+		registerCallback("kneel", KneelCmdCallback.class);
+		registerCallback("jumpServer", JumpCmdCallback.class);
+		registerCallback("serverDestroyObject", ServerDestroyObjectCmdCallback.class);
+		registerCallback("findFriend", FindFriendCallback.class);
+		registerCallback("setPlayerAppearance", PlayerAppearanceCallback.class);
+		registerCallback("revertPlayerAppearance", RevertAppearanceCallback.class);
+		registerCallback("qatool", QaToolCmdCallback.class);
 	}
 	
 	private void clearCommands() {
@@ -186,6 +238,12 @@ public class CommandService extends Service {
 	private Command getCommand(String name) {
 		synchronized (commandCrcLookup) {
 			return getCommand(commandCrcLookup.get(name));
+		}
+	}
+
+	private List<Command> getCommandsByScript(String script) {
+		synchronized (commandByScript){
+			return commandByScript.get(script);
 		}
 	}
 	
@@ -207,6 +265,16 @@ public class CommandService extends Service {
 		}
 		synchronized (commandCrcLookup) {
 			commandCrcLookup.put(command.getName(), command.getCrc());
+		}
+		synchronized (commandByScript){
+			String script = command.getDefaultScriptCallback();
+			List<Command> commands = commandByScript.get(script);
+
+			if(commands == null){
+				commands = new LinkedList<Command>();
+				commandByScript.put(script, commands);
+			}
+			commands.add(command);
 		}
 	}
 	
