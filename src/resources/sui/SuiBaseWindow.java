@@ -122,7 +122,7 @@ public class SuiBaseWindow implements Encodable {
 			hasSubscriptionComponent = true;
 	}
 
-	private void addDataSourceContainer(String dataSourceContainer, String name, String value) {
+	public final void addDataSourceContainer(String dataSourceContainer, String name, String value) {
 		SuiComponent component = new SuiComponent(SuiComponent.Type.ADD_DATA_SOURCE_CONTAINER, dataSourceContainer);
 
 		component.addNarrowParam(name);
@@ -201,7 +201,6 @@ public class SuiBaseWindow implements Encodable {
 			if (component.getType() != SuiComponent.Type.SUBSCRIBE_TO_EVENT)
 				continue;
 
-			List<String> narrowParams = component.getNarrowParams();
 			int eventType = component.getSubscribedToEventType();
 
 			if (eventType == event && component.getTarget().equals(widget))

@@ -29,7 +29,6 @@ package services.sui;
 
 import intents.network.GalacticPacketIntent;
 import intents.sui.SuiWindowIntent;
-import intents.sui.SuiWindowIntent.SuiWindowEvent;
 import network.packets.Packet;
 import network.packets.swg.SWGPacket;
 import network.packets.swg.zone.server_ui.SuiCreatePageMessage;

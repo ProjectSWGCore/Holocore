@@ -13,7 +13,6 @@ import resources.player.Player;
 import intents.chat.ChatBroadcastIntent;
 import intents.chat.ChatBroadcastIntent.BroadcastType;
 import intents.chat.PersistentMessageIntent;
-import resources.sui.SuiBaseWindow;
 import resources.sui.SuiWindow;
 
 /**

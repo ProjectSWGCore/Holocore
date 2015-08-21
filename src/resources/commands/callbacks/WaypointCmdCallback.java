@@ -32,8 +32,6 @@ import resources.Location;
 import resources.Terrain;
 import resources.commands.ICmdCallback;
 import resources.objects.SWGObject;
-import resources.objects.building.BuildingObject;
-import resources.objects.cell.CellObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
 import resources.objects.waypoint.WaypointObject;
