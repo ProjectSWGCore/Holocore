@@ -275,6 +275,8 @@ public class ObjectManager extends Manager {
 			Player p = ((PlayerEventIntent)i).getPlayer();
 			switch (((PlayerEventIntent)i).getEvent()) {
 				case PE_DISAPPEAR:
+					if (p.getCreatureObject() == null)
+						break;
 					p.getCreatureObject().clearAware();
 					objectAwareness.remove(p.getCreatureObject());
 					for (SWGObject obj : p.getCreatureObject().getObservers())
