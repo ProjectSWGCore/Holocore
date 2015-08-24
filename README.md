@@ -1,8 +1,6 @@
 ### **Branch** ###
 
-**Quality Assurance:** Upload your Pull Requests here so it can be tested
-
-**Development:** This is the main working space
+**Quality Assurance:** Upload your Pull Requests here so it can be tested. This is the main working space
 
 **Master:** Tested and approved commits will be moved to this branch (Test Center)
 
@@ -78,4 +76,3 @@ In order to successfully build and run Holocore, you must:
     * snapshot
     * string
     * terrain
-
