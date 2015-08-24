@@ -55,6 +55,7 @@ import resources.control.Intent;
 import resources.control.Manager;
 import resources.control.ServerStatus;
 import resources.server_info.Config;
+import services.admin.OnlineInterfaceService;
 import services.galaxy.GalacticManager;
 import utilities.ThreadUtilities;
 
@@ -63,6 +64,8 @@ public class CoreManager extends Manager {
 	private static final int galaxyId = 1;
 	
 	private final ScheduledExecutorService shutdownService;
+	
+	private OnlineInterfaceService onlineInterfaceService;
 	private EngineManager engineManager;
 	private GalacticManager galacticManager;
 	private PrintStream packetOutput;
@@ -76,9 +79,11 @@ public class CoreManager extends Manager {
 		shutdownRequested = false;
 		galaxy = getGalaxy();
 		if (galaxy != null) {
+			onlineInterfaceService = new OnlineInterfaceService();
 			engineManager = new EngineManager(galaxy);
 			galacticManager = new GalacticManager(galaxy);
-			
+
+			addChildService(onlineInterfaceService);
 			addChildService(engineManager);
 			addChildService(galacticManager);
 		}
