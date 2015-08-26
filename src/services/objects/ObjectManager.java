@@ -73,12 +73,14 @@ import resources.server_info.ObjectDatabase;
 import resources.server_info.ObjectDatabase.Traverser;
 import services.map.MapManager;
 import services.player.PlayerManager;
+import services.spawn.SpawnerService;
 import services.spawn.StaticService;
 
 public class ObjectManager extends Manager {
 
 	private final MapManager mapService;
 	private final StaticService staticService;
+	private final SpawnerService spawnEggService;
 	private final RadialService radialService;
 
 	private final ObjectDatabase<SWGObject> database;
@@ -89,6 +91,7 @@ public class ObjectManager extends Manager {
 	public ObjectManager() {
 		mapService = new MapManager();
 		staticService = new StaticService(this);
+		spawnEggService = new SpawnerService(this);
 		radialService = new RadialService();
 		database = new CachedObjectDatabase<SWGObject>("odb/objects.db");
 		objectAwareness = new ObjectAwareness();
@@ -98,6 +101,7 @@ public class ObjectManager extends Manager {
 		addChildService(mapService);
 		addChildService(staticService);
 		addChildService(radialService);
+		addChildService(spawnEggService);
 	}
 	
 	@Override
@@ -110,9 +114,17 @@ public class ObjectManager extends Manager {
 		registerForIntent(DeleteCharacterIntent.TYPE);
 		objectAwareness.initialize();
 		loadClientObjects();
+		loadSpawners();
 		maxObjectId = 1000000000; // Gets over all the buildouts/snapshots
 		loadObjects();
 		return super.initialize();
+	}
+	
+	private void loadSpawners() {
+		Config c = getConfig(ConfigFile.FEATURES);
+		if (c.getBoolean("SPAWNERS-ENABLED", true)) {
+			spawnEggService.loadEggs();
+		}
 	}
 	
 	private void loadObjects() {

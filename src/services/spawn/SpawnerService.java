@@ -17,12 +17,12 @@ import resources.spawn.SpawnType;
 import resources.spawn.Spawner;
 import services.objects.ObjectManager;
 
-public final class SpawnEggService extends Service {
+public final class SpawnerService extends Service {
 
 	private final ObjectManager objectManager;
 	private final Collection<Spawner> spawners;
 	
-	public SpawnEggService(ObjectManager objectManager) {
+	public SpawnerService(ObjectManager objectManager) {
 		this.objectManager = objectManager;
 		spawners = new ArrayList<>();
 	}
