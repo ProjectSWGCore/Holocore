@@ -114,17 +114,9 @@ public class ObjectManager extends Manager {
 		registerForIntent(DeleteCharacterIntent.TYPE);
 		objectAwareness.initialize();
 		loadClientObjects();
-		loadSpawners();
 		maxObjectId = 1000000000; // Gets over all the buildouts/snapshots
 		loadObjects();
 		return super.initialize();
-	}
-	
-	private void loadSpawners() {
-		Config c = getConfig(ConfigFile.FEATURES);
-		if (c.getBoolean("SPAWNERS-ENABLED", true)) {
-			spawnerService.loadEggs();
-		}
 	}
 	
 	private void loadObjects() {

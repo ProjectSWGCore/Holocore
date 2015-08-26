@@ -58,6 +58,9 @@ public final class SpawnerService extends Service {
 	public boolean initialize() {
 		registerForIntent(ConfigChangedIntent.TYPE);
 		
+		if (getConfig(ConfigFile.FEATURES).getBoolean("SPAWNERS-ENABLED", true))
+			loadEggs();
+		
 		return super.initialize();
 	}
 	
