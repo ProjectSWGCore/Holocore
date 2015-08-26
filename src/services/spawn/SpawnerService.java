@@ -88,7 +88,7 @@ public final class SpawnerService extends Service {
 		
 	}
 	
-	public void loadEggs() {
+	private void loadEggs() {
 		DatatableData eggs = ServerFactory.getDatatable("spawn/static.iff");
 				
 		eggs.handleRows(rowIndex -> {
