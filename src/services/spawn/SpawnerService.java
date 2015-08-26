@@ -92,18 +92,12 @@ public final class SpawnerService extends Service {
 		DatatableData eggs = ServerFactory.getDatatable("spawn/static.iff");
 				
 		eggs.handleRows(rowIndex -> {
-			final Location loc;
-			final int buildingId;
-			final SWGObject egg;
-			final SpawnType spawnType;
-			final boolean spawnInCell;
-			
 			if((Integer) eggs.getCell(rowIndex, 12) == 1) { // We only spawn active eggs
-				buildingId = (int) eggs.getCell(rowIndex, 3);
-				loc = new Location((float) eggs.getCell(rowIndex, 5), (float) eggs.getCell(rowIndex, 6), (float) eggs.getCell(rowIndex, 7), Terrain.valueOf((String) eggs.getCell(rowIndex, 1)));
-				spawnType = SpawnType.valueOf((String) eggs.getCell(rowIndex, 2));
-				spawnInCell = buildingId != -1;
-				egg = objectManager.createObject(spawnType.getObjectTemplate(), loc, !spawnInCell, false);
+				final int buildingId = (int) eggs.getCell(rowIndex, 3);
+				final Location loc = new Location((float) eggs.getCell(rowIndex, 5), (float) eggs.getCell(rowIndex, 6), (float) eggs.getCell(rowIndex, 7), Terrain.valueOf((String) eggs.getCell(rowIndex, 1)));
+				final SpawnType spawnType = SpawnType.valueOf((String) eggs.getCell(rowIndex, 2));
+				final boolean spawnInCell = buildingId != -1;
+				final SWGObject egg = objectManager.createObject(spawnType.getObjectTemplate(), loc, !spawnInCell, false);
 				
 				if(spawnInCell) // If it wants to be inside a building, make it so!
 					((BuildingObject) objectManager.getObjectById(buildingId)).getCellByName((String) eggs.getCell(rowIndex, 4)).addObject(egg);
