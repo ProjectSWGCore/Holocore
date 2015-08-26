@@ -80,7 +80,7 @@ public class ObjectManager extends Manager {
 
 	private final MapManager mapService;
 	private final StaticService staticService;
-	private final SpawnerService spawnEggService;
+	private final SpawnerService spawnerService;
 	private final RadialService radialService;
 
 	private final ObjectDatabase<SWGObject> database;
@@ -91,7 +91,7 @@ public class ObjectManager extends Manager {
 	public ObjectManager() {
 		mapService = new MapManager();
 		staticService = new StaticService(this);
-		spawnEggService = new SpawnerService(this);
+		spawnerService = new SpawnerService(this);
 		radialService = new RadialService();
 		database = new CachedObjectDatabase<SWGObject>("odb/objects.db");
 		objectAwareness = new ObjectAwareness();
@@ -101,7 +101,7 @@ public class ObjectManager extends Manager {
 		addChildService(mapService);
 		addChildService(staticService);
 		addChildService(radialService);
-		addChildService(spawnEggService);
+		addChildService(spawnerService);
 	}
 	
 	@Override
@@ -123,7 +123,7 @@ public class ObjectManager extends Manager {
 	private void loadSpawners() {
 		Config c = getConfig(ConfigFile.FEATURES);
 		if (c.getBoolean("SPAWNERS-ENABLED", true)) {
-			spawnEggService.loadEggs();
+			spawnerService.loadEggs();
 		}
 	}
 	
