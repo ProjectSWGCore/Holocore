@@ -50,7 +50,7 @@ public abstract class Service implements IntentReceiver {
 	 */
 	public boolean initialize() {
 		IntentManager.getInstance().initialize();
-		return DataManager.getInstance().isInitialized() && ServerManager.getInstance().initialize();
+		return DataManager.getInstance().isInitialized();
 	}
 	
 	/**
@@ -78,7 +78,7 @@ public abstract class Service implements IntentReceiver {
 	 * @return TRUE if termination was successful, FALSE otherwise
 	 */
 	public boolean terminate() {
-		return ServerManager.getInstance().terminate();
+		return true;
 	}
 	
 	/**
