@@ -2,6 +2,7 @@ package services.admin;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
@@ -13,7 +14,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -60,39 +63,66 @@ class WebserverHandler {
 		final int graphHeight = 300;
 		BufferedImage image = new BufferedImage(900, graphHeight + 25, BufferedImage.TYPE_3BYTE_BGR);
 		Graphics2D g = image.createGraphics();
-		int prevX = -1;
-		int prevY = -1;
 		Font font = g.getFont();
-		g.setFont(font.deriveFont(Math.min(image.getHeight()/10.0f, 25.0f)));
-		RenderingHints rh = new RenderingHints(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-		g.setRenderingHints(rh);
+		g.setFont(font.deriveFont(Font.TRUETYPE_FONT, Math.min(image.getHeight()/10.0f, 25.0f)));
+		Map <RenderingHints.Key, Object> hints = new HashMap<>();
+		hints.put(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		hints.put(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+		g.setRenderingHints(new RenderingHints(hints));
 		g.setColor(Color.WHITE);
-		g.drawRect(0, 0, image.getWidth()-1, graphHeight-1);
-		g.drawLine(0, image.getHeight()-1, image.getWidth(), image.getHeight()-1);
+		renderGraph(g, image.getWidth(), image.getHeight(), graphHeight);
+		FontMetrics fm = g.getFontMetrics();
+		String inUse = getMemoryInUse();
+		int width = fm.stringWidth(inUse);
+		int x = 5;
+		x += drawStr(g, image.getHeight(), x, "Proc:");
+		g.drawString(inUse, image.getWidth()-width - 5, image.getHeight() - 5);
+		x += drawDataSet(g, Color.RED, " M:", image.getWidth(), image.getHeight(), graphHeight, x, memoryUsage);
+		x += drawDataSet(g, Color.CYAN, " C:", image.getWidth(), image.getHeight(), graphHeight, x, data.getCpuUsage());
+		g.setColor(Color.WHITE);
+		x += drawStr(g, image.getHeight(), x, "  Sys:");
+		x += drawDataSet(g, Color.YELLOW, " M:", image.getWidth(), image.getHeight(), graphHeight, x, data.getSystemMemoryUsage());
+		x += drawDataSet(g, Color.GREEN, " C:", image.getWidth(), image.getHeight(), graphHeight, x, data.getSystemCpuUsage());
+		return image;
+	}
+	
+	private void renderGraph(Graphics2D g, int width, int height, int graphHeight) {
+		g.drawRect(0, 0, width-1, graphHeight-1);
+		g.drawLine(0, height-1, width, height-1);
 		for (int i = 1; i < 10; i++) {
 			g.drawLine(0, (int) ((i/10.0)*graphHeight), 10, (int) ((i/10.0)*graphHeight));
 		}
-		String inUse = getMemoryInUse();
-		int width = g.getFontMetrics().stringWidth(inUse);
-		g.drawString("Current: " + (int) (memoryUsage[memoryUsage.length-1] * 100) + "%", 5, image.getHeight() - 5);
-		g.drawString(inUse, image.getWidth()-width - 5, image.getHeight() - 5);
-		g.setColor(Color.RED);
+	}
+	
+	private int drawDataSet(Graphics2D g, Color c, String pre, int width, int height, int graphHeight, int x, double [] data) {
+		g.setColor(c);
+		drawLines(g, data, width, graphHeight-1);
+		return drawStr(g, height, x, String.format("%s%.2f%%", pre, (int) (data[data.length-1] * 10000) / 100.0));
+	}
+	
+	private int drawStr(Graphics2D g, int height, int x, String str) {
+		g.drawString(str, x, height - 5);
+		return g.getFontMetrics().stringWidth(str);
+	}
+	
+	private void drawLines(Graphics2D g, double [] data, int width, int height) {
 		int start = 0;
-		for (double d : memoryUsage) {
+		for (double d : data) {
 			if (d == 0)
 				start++;
 			else
 				break;
 		}
-		for (int i = start; i < memoryUsage.length; i++) {
-			int x = (int) ((double) i / memoryUsage.length * image.getWidth());
-			int y = (int) ((1-memoryUsage[i]) * graphHeight);
+		int prevX = -1;
+		int prevY = -1;
+		for (int i = start; i < data.length; i++) {
+			int x = (int) ((double) i / data.length * width);
+			int y = (int) ((1-data[i]) * height);
 			if (prevX != -1 && prevY != -1)
 				g.drawLine(prevX, prevY, x, y);
 			prevX = x;
 			prevY = y;
 		}
-		return image;
 	}
 	
 	private String getMemoryInUse() {

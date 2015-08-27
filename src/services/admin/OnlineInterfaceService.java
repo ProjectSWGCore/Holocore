@@ -131,9 +131,7 @@ public class OnlineInterfaceService extends Service implements HttpServerCallbac
 	}
 	
 	private void collectData() {
-		Runtime r = Runtime.getRuntime();
-		double memUsage = 1 - ((double) r.totalMemory() / r.maxMemory());
-		data.addMemoryUsageData(memUsage);
+		data.updateResourceUsage();
 	}
 	
 	private InetAddress getBindAddr(Config c, String firstTry, String secondTry) {
