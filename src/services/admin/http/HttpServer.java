@@ -183,12 +183,11 @@ public class HttpServer {
 		}
 		if (token == null)
 			token = generateSessionToken();
-		HttpSession session = null;
-		if (!sessions.containsKey(token)) {
+		HttpSession session = sessions.get(token);
+		if (session == null) {
 			session = new HttpSession(token);
 			sessions.put(token, session);
-		} else
-			session = sessions.get(token);
+		}
 		return session;
 	}
 	
@@ -219,10 +218,10 @@ public class HttpServer {
 	}
 	
 	private void onRequestReceived(HttpSocket socket, HttpRequest request) {
+		socket.setSession(getSessionForRequest(request));
 		if (callback == null)
 			return;
 		try {
-			socket.setSession(getSessionForRequest(request));
 			callback.onRequestReceived(socket, request);
 		} catch (Throwable t) {
 			t.printStackTrace();

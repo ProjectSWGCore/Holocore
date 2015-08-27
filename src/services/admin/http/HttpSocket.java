@@ -24,7 +24,6 @@ import java.util.Set;
 
 import javax.imageio.ImageIO;
 
-import resources.server_info.Log;
 import services.admin.http.HttpCookie.CookieFlag;
 
 public class HttpSocket implements Closeable {
@@ -157,9 +156,8 @@ public class HttpSocket implements Closeable {
 	}
 	
 	private void sendHeader(HttpStatusCode code, Map<String, String> params, Set<HttpCookie> cookies) throws IOException {
-		if (session == null)
-			throw new IllegalStateException("HttpSession is null!");
-		cookies.add(new HttpCookie("sessionToken", session.getToken(), CookieFlag.SECURE, CookieFlag.HTTP_ONLY));
+		if (session != null)
+			cookies.add(new HttpCookie("sessionToken", session.getToken(), CookieFlag.SECURE, CookieFlag.HTTP_ONLY));
 		write("HTTP/1.1 %d %s", code.getCode(), code.getName());
 		for (Entry<String, String> param : params.entrySet())
 			write(param.getKey() + ": " + param.getValue());

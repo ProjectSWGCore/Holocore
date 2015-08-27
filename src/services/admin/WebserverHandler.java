@@ -19,7 +19,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import resources.player.Player;
-import resources.server_info.Log;
 import services.admin.http.HttpImageType;
 import services.admin.http.HttpSocket;
 import services.admin.http.HttpSocket.HttpRequest;
@@ -27,7 +26,6 @@ import services.admin.http.HttpStatusCode;
 
 class WebserverHandler {
 	
-	private static final String TAG = "WebserverHandler";
 	private static final Charset ASCII = Charset.forName("ASCII");
 	
 	private final WebserverData data;
@@ -39,7 +37,6 @@ class WebserverHandler {
 	}
 	
 	public void handleRequest(HttpSocket socket, HttpRequest request) throws IOException {
-		Log.i(TAG, "Requested: " + request.getURI());
 		String file = request.getURI().toASCIIString();
 		if (file.contains("?"))
 			file = file.substring(0, file.indexOf('?'));
