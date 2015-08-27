@@ -13,15 +13,19 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.URI;
 import java.nio.charset.Charset;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.imageio.ImageIO;
 
 import resources.server_info.Log;
+import services.admin.http.HttpCookie.CookieFlag;
 
 public class HttpSocket implements Closeable {
 	
@@ -32,6 +36,7 @@ public class HttpSocket implements Closeable {
 	private final BufferedWriter writer;
 	private final OutputStream rawOutputStream;
 	private final boolean secure;
+	private HttpSession session;
 	
 	public HttpSocket(Socket socket, boolean secure) {
 		this.socket = socket;
@@ -39,6 +44,7 @@ public class HttpSocket implements Closeable {
 		this.writer = createBufferedWriter();
 		this.rawOutputStream = getOutputStream();
 		this.secure = secure;
+		this.session = null;
 	}
 	
 	/**
@@ -53,12 +59,18 @@ public class HttpSocket implements Closeable {
 			boolean hasData = line != null && !line.isEmpty();
 			String [] req = null;
 			Map<String, String> params = new HashMap<>();
+			Set<HttpCookie> cookies = new HashSet<>();
 			while (line != null && !line.isEmpty()) {
 				if (req == null)
 					req = line.split(" ", 3);
 				String [] parts = line.split(": ", 2);
-				if (parts.length == 2)
-					params.put(parts[0], parts[1]);
+				if (parts.length == 2) {
+					if (parts[0].equals("Cookie")) {
+						cookies.addAll(Arrays.asList(HttpCookie.decodeCookies(parts[1])));
+					} else {
+						params.put(parts[0], parts[1]);
+					}
+				}
 				hasData = !line.isEmpty();
 				line = readLine();
 			}
@@ -72,7 +84,7 @@ public class HttpSocket implements Closeable {
 					uri = URI.create(req[1]);
 				if (req.length >= 3)
 					version = req[2];
-				return new HttpRequest(type, uri, version, params);
+				return new HttpRequest(type, uri, version, params, cookies);
 			}
 			if (line == null)
 				break;
@@ -80,10 +92,14 @@ public class HttpSocket implements Closeable {
 		return null;
 	}
 	
+	public void setSession(HttpSession session) {
+		this.session = session;
+	}
+	
 	public void redirect(String url) throws IOException {
 		Map<String, String> params = new HashMap<>();
 		params.put("Location", url);
-		send(HttpStatusCode.MOVED_PERMANENTLY, params, "text/html", "");
+		send(HttpStatusCode.MOVED_PERMANENTLY, params, new HashSet<>(), "text/html", "");
 	}
 	
 	public void send(HttpStatusCode code) throws IOException {
@@ -95,7 +111,7 @@ public class HttpSocket implements Closeable {
 	}
 	
 	public void send(String contentType, byte [] response) throws IOException {
-		send(HttpStatusCode.OK, new HashMap<>(), contentType, response);
+		send(HttpStatusCode.OK, new HashMap<>(), new HashSet<>(), contentType, response);
 	}
 	
 	public void send(BufferedImage image, HttpImageType type) throws IOException {
@@ -114,36 +130,41 @@ public class HttpSocket implements Closeable {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream(image.getWidth() * image.getHeight() * 3);
 		if (!ImageIO.write(image, type.name().toLowerCase(Locale.US), baos))
 			throw new IllegalArgumentException("Cannot write image with type: " + type);
-		send(HttpStatusCode.OK, new HashMap<>(), contentType, baos.toByteArray());
+		send(HttpStatusCode.OK, new HashMap<>(), new HashSet<>(), contentType, baos.toByteArray());
 	}
 	
 	public void send(HttpStatusCode code, String response) throws IOException {
 		if (code == HttpStatusCode.OK && response.isEmpty())
 			code = HttpStatusCode.NO_CONTENT;
-		send(code, new HashMap<>(), "text/html", response);
+		send(code, new HashMap<>(), new HashSet<>(), "text/html", response);
 	}
 	
-	private void send(HttpStatusCode code, Map<String, String> params, String contentType, String response) throws IOException {
+	private void send(HttpStatusCode code, Map<String, String> params, Set<HttpCookie> cookies, String contentType, String response) throws IOException {
 		params.put("Content-Length", Integer.toString(response.length()));
 		params.put("Content-Type", contentType);
-		sendHeader(code, params);
+		sendHeader(code, params, cookies);
 		writer.write(response);
 		writer.flush();
 	}
 	
-	private void send(HttpStatusCode code, Map<String, String> params, String contentType, byte [] data) throws IOException {
+	private void send(HttpStatusCode code, Map<String, String> params, Set<HttpCookie> cookies, String contentType, byte [] data) throws IOException {
 		params.put("Content-Length", Integer.toString(data.length));
 		params.put("Content-Type", contentType);
-		sendHeader(code, params);
+		sendHeader(code, params, cookies);
 		writer.flush();
 		rawOutputStream.write(data);
 		rawOutputStream.flush();
 	}
 	
-	private void sendHeader(HttpStatusCode code, Map<String, String> params) throws IOException {
+	private void sendHeader(HttpStatusCode code, Map<String, String> params, Set<HttpCookie> cookies) throws IOException {
+		if (session == null)
+			throw new IllegalStateException("HttpSession is null!");
+		cookies.add(new HttpCookie("sessionToken", session.getToken(), CookieFlag.SECURE, CookieFlag.HTTP_ONLY));
 		write("HTTP/1.1 %d %s", code.getCode(), code.getName());
 		for (Entry<String, String> param : params.entrySet())
 			write(param.getKey() + ": " + param.getValue());
+		for (HttpCookie cookie : cookies)
+			write("Set-Cookie: " + cookie.encode());
 		writer.newLine();
 	}
 	
@@ -179,10 +200,9 @@ public class HttpSocket implements Closeable {
 	public int getPort() {
 		return socket.getPort();
 	}
-
+	
 	private void write(String str, Object ... args) throws IOException {
 		writer.write(String.format(str, args) + System.lineSeparator());
-		Log.d("HttpSocket", str, args);
 	}
 	
 	private BufferedReader createBufferedReader() {
@@ -217,12 +237,14 @@ public class HttpSocket implements Closeable {
 		private final URI uri;
 		private final String httpVersion;
 		private final Map<String, String> params;
+		private final Set<HttpCookie> cookies;
 		
-		private HttpRequest(String requestType, URI uri, String httpVersion, Map<String, String> params) {
+		private HttpRequest(String requestType, URI uri, String httpVersion, Map<String, String> params, Set<HttpCookie> cookies) {
 			this.type = requestType;
 			this.uri = uri;
 			this.httpVersion = httpVersion;
 			this.params = params;
+			this.cookies = cookies;
 		}
 		
 		/**
@@ -257,6 +279,14 @@ public class HttpSocket implements Closeable {
 		 */
 		public Map<String, String> getParams() {
 			return Collections.unmodifiableMap(params);
+		}
+		
+		/**
+		 * Gets all the cookies sent in the HTTP request
+		 * @return the cookies
+		 */
+		public Set<HttpCookie> getCookies() {
+			return Collections.unmodifiableSet(cookies);
 		}
 	}
 	

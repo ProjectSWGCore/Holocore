@@ -48,13 +48,14 @@ class WebserverData {
 	}
 	
 	public String getLog() throws IOException {
-		BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(new File("log.txt")), ASCII));
-		StringBuilder builder = new StringBuilder();
-		while (reader.ready()) {
-			builder.append(reader.readLine() + System.lineSeparator());
+		try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(new File("log.txt")), ASCII))) {
+			StringBuilder builder = new StringBuilder();
+			while (reader.ready()) {
+				builder.append(reader.readLine() + System.lineSeparator());
+			}
+			reader.close();
+			return builder.toString();
 		}
-		reader.close();
-		return builder.toString();
 	}
 	
 }

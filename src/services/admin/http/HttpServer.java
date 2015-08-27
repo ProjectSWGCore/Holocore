@@ -5,6 +5,9 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -20,6 +23,7 @@ public class HttpServer {
 	
 	private final InetAddress addr;
 	private final int port;
+	private final Map<String, HttpSession> sessions;
 	
 	private ExecutorService executor;
 	private ServerSocket serverSocket;
@@ -31,6 +35,7 @@ public class HttpServer {
 	protected HttpServer(InetAddress addr, int port, boolean secure) {
 		this.addr = addr;
 		this.port = port;
+		this.sessions = new HashMap<>();
 		this.currentConnections = new AtomicInteger(0);
 		this.callback = null;
 		this.maxConnections = 2;
@@ -168,6 +173,41 @@ public class HttpServer {
 		}
 	}
 	
+	private HttpSession getSessionForRequest(HttpRequest request) {
+		String token = null;
+		for (HttpCookie cookie : request.getCookies()) {
+			if (cookie.getKey() != null && cookie.getKey().equals("sessionToken")) {
+				if (sessions.containsKey(cookie.getValue()))
+					token = cookie.getValue();
+			}
+		}
+		if (token == null)
+			token = generateSessionToken();
+		HttpSession session = null;
+		if (!sessions.containsKey(token)) {
+			session = new HttpSession(token);
+			sessions.put(token, session);
+		} else
+			session = sessions.get(token);
+		return session;
+	}
+	
+	private String generateSessionToken() {
+		Random r = new Random();
+		StringBuilder builder = new StringBuilder(24);
+		int rand;
+		for (int i = 0; i < 24; i++) {
+			rand = r.nextInt(26*2+10);
+			if (rand < 26)
+				builder.append((char) ('A' + rand));
+			else if (rand < 52)
+				builder.append((char) ('a' + (rand-26)));
+			else
+				builder.append((char) ('0' + (rand-52)));
+		}
+		return builder.toString();
+	}
+	
 	private void onSocketCreated(HttpSocket socket) {
 		if (callback == null)
 			return;
@@ -182,6 +222,7 @@ public class HttpServer {
 		if (callback == null)
 			return;
 		try {
+			socket.setSession(getSessionForRequest(request));
 			callback.onRequestReceived(socket, request);
 		} catch (Throwable t) {
 			t.printStackTrace();
