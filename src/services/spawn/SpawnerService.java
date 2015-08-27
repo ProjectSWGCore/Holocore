@@ -96,7 +96,7 @@ public final class SpawnerService extends Service {
 				final int buildingId = (int) eggs.getCell(rowIndex, 3);
 				final Location loc = new Location((float) eggs.getCell(rowIndex, 5), (float) eggs.getCell(rowIndex, 6), (float) eggs.getCell(rowIndex, 7), Terrain.valueOf((String) eggs.getCell(rowIndex, 1)));
 				final SpawnType spawnType = SpawnType.valueOf((String) eggs.getCell(rowIndex, 2));
-				final boolean spawnInCell = buildingId != -1;
+				final boolean spawnInCell = buildingId != 0;
 				final SWGObject egg = objectManager.createObject(spawnType.getObjectTemplate(), loc, !spawnInCell, false);
 				
 				if(spawnInCell) // If it wants to be inside a building, make it so!
