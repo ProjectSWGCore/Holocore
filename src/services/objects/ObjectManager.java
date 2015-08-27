@@ -73,12 +73,14 @@ import resources.server_info.ObjectDatabase;
 import resources.server_info.ObjectDatabase.Traverser;
 import services.map.MapManager;
 import services.player.PlayerManager;
+import services.spawn.SpawnerService;
 import services.spawn.StaticService;
 
 public class ObjectManager extends Manager {
 
 	private final MapManager mapService;
 	private final StaticService staticService;
+	private final SpawnerService spawnerService;
 	private final RadialService radialService;
 
 	private final ObjectDatabase<SWGObject> database;
@@ -89,6 +91,7 @@ public class ObjectManager extends Manager {
 	public ObjectManager() {
 		mapService = new MapManager();
 		staticService = new StaticService(this);
+		spawnerService = new SpawnerService(this);
 		radialService = new RadialService();
 		database = new CachedObjectDatabase<SWGObject>("odb/objects.db");
 		objectAwareness = new ObjectAwareness();
@@ -98,6 +101,7 @@ public class ObjectManager extends Manager {
 		addChildService(mapService);
 		addChildService(staticService);
 		addChildService(radialService);
+		addChildService(spawnerService);
 	}
 	
 	@Override
