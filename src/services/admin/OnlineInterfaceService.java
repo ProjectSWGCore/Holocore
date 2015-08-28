@@ -32,7 +32,7 @@ import utilities.ThreadUtilities;
 public class OnlineInterfaceService extends Service implements HttpServerCallback {
 	
 	private static final String TAG = "OnlineInterfaceService";
-	private static final String GET_USER_SQL = "SELECT password, password_salt, banned FROM users WHERE username = ? AND password = ?";
+	private static final String GET_USER_SQL = "SELECT password, password_salt, banned FROM users WHERE username = ?";
 	
 	private final WebserverData data;
 	private final WebserverHandler handler;
@@ -173,7 +173,6 @@ public class OnlineInterfaceService extends Service implements HttpServerCallbac
 		synchronized (getUser) {
 			try {
 				getUser.setString(1, username);
-				getUser.setString(2, password);
 				session.setAuthenticated(false);
 				try (ResultSet cursor = getUser.executeQuery()) {
 					session.setAuthenticated(cursor.next() && isUserValid(cursor, password));
