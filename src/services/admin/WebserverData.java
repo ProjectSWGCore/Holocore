@@ -58,7 +58,7 @@ class WebserverData {
 	public double [] getCpuUsage() {
 		return Arrays.copyOf(cpuUsage, cpuUsage.length);
 	}
-
+	
 	public double [] getSystemMemoryUsage() {
 		return Arrays.copyOf(systemMemoryUsage, systemMemoryUsage.length);
 	}

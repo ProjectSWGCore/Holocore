@@ -22,7 +22,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import resources.player.Player;
+import resources.server_info.Log;
 import services.admin.http.HttpImageType;
+import services.admin.http.HttpSession;
 import services.admin.http.HttpSocket;
 import services.admin.http.HttpSocket.HttpRequest;
 import services.admin.http.HttpStatusCode;
@@ -43,12 +45,17 @@ class WebserverHandler {
 		String file = request.getURI().toASCIIString();
 		if (file.contains("?"))
 			file = file.substring(0, file.indexOf('?'));
+		if (file.contains("#"))
+			file = file.substring(0, file.indexOf('#'));
 		switch (file) {
 			case "/memory_usage.png":
-				socket.send(createMemoryUsage(), HttpImageType.PNG);
+				if (socket.getSession().isAuthenticated())
+					socket.send(createMemoryUsage(), HttpImageType.PNG);
+				else
+					socket.send(HttpStatusCode.NOT_FOUND, request.getURI() + " is not found!");
 				break;
 			default: {
-				byte [] response = parseFile(file);
+				byte [] response = parseFile(socket.getSession(), file);
 				if (response == null)
 					socket.send(HttpStatusCode.NOT_FOUND, request.getURI() + " is not found!");
 				else
@@ -82,7 +89,7 @@ class WebserverHandler {
 		g.setColor(Color.WHITE);
 		x += drawStr(g, image.getHeight(), x, "  Sys:");
 		x += drawDataSet(g, Color.YELLOW, " M:", image.getWidth(), image.getHeight(), graphHeight, x, data.getSystemMemoryUsage());
-		x += drawDataSet(g, Color.GREEN, " C:", image.getWidth(), image.getHeight(), graphHeight, x, data.getSystemCpuUsage());
+		drawDataSet(g, Color.GREEN, " C:", image.getWidth(), image.getHeight(), graphHeight, x, data.getSystemCpuUsage());
 		return image;
 	}
 	
@@ -152,12 +159,20 @@ class WebserverHandler {
 		}
 	}
 	
-	private byte [] parseFile(String filepath) throws IOException {
+	private byte [] parseFile(HttpSession session, String filepath) throws IOException {
 		File file = new File("res/webserver" + filepath);
 		if (file.isDirectory())
 			file = new File(file, "index.html");
 		String type = getFileType(filepath);
-		if (!verifyPath(file))
+		if (!verifyPath(file)) {
+			Log.e("WebserverHandler", "Cannot access %s - not a valid path", file);
+			return null;
+		}
+		if (file.toString().equals("res/webserver/index.html")) {
+			if (session.isAuthenticated()) {
+				file = new File("res/webserver/authenticated.html");
+			}
+		} else if (!session.isAuthenticated())
 			return null;
 		if (type.equalsIgnoreCase("text/html"))
 			return parseHtmlFile(file).getBytes(ASCII);

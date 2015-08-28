@@ -24,6 +24,7 @@ import java.util.Set;
 
 import javax.imageio.ImageIO;
 
+import resources.server_info.Log;
 import services.admin.http.HttpCookie.CookieFlag;
 
 public class HttpSocket implements Closeable {
@@ -59,6 +60,7 @@ public class HttpSocket implements Closeable {
 			String [] req = null;
 			Map<String, String> params = new HashMap<>();
 			Set<HttpCookie> cookies = new HashSet<>();
+			StringBuilder body = new StringBuilder("");
 			while (line != null && !line.isEmpty()) {
 				if (req == null)
 					req = line.split(" ", 3);
@@ -73,6 +75,19 @@ public class HttpSocket implements Closeable {
 				hasData = !line.isEmpty();
 				line = readLine();
 			}
+			if (params.containsKey("Content-Length")) {
+				Integer i = Integer.valueOf(params.get("Content-Length"));
+				if (i.intValue() > 0) {
+					String bodyStr = readBytes(i.intValue());
+					if (bodyStr == null)
+						Log.e("HttpSocket", "Failed to read data in %s request: %s - returned null", req.length==0?"null":req[0], req.length<2?"null":req[1]);
+					else {
+						if (bodyStr.length() != i.intValue())
+							Log.w("HttpSocket", "Failed to read all data in %s request: %s", req.length==0?"null":req[0], req.length<2?"null":req[1]);
+						body.append(bodyStr);
+					}
+				}
+			}
 			if (hasData) {
 				String type = null;
 				URI uri = null;
@@ -83,7 +98,7 @@ public class HttpSocket implements Closeable {
 					uri = URI.create(req[1]);
 				if (req.length >= 3)
 					version = req[2];
-				return new HttpRequest(type, uri, version, params, cookies);
+				return new HttpRequest(type, uri, version, params, cookies, body.toString());
 			}
 			if (line == null)
 				break;
@@ -93,6 +108,10 @@ public class HttpSocket implements Closeable {
 	
 	public void setSession(HttpSession session) {
 		this.session = session;
+	}
+	
+	public HttpSession getSession() {
+		return session;
 	}
 	
 	public void redirect(String url) throws IOException {
@@ -174,6 +193,21 @@ public class HttpSocket implements Closeable {
 		}
 	}
 	
+	private String readBytes(int length) {
+		try {
+			if (length == 0)
+				return "";
+			char [] data = new char[length];
+			int read = reader.read(data);
+			if (read == -1)
+				return null;
+			return new String(data, 0, read);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	@Override
 	public void close() throws IOException {
 		socket.close();
@@ -236,13 +270,15 @@ public class HttpSocket implements Closeable {
 		private final String httpVersion;
 		private final Map<String, String> params;
 		private final Set<HttpCookie> cookies;
+		private final String body;
 		
-		private HttpRequest(String requestType, URI uri, String httpVersion, Map<String, String> params, Set<HttpCookie> cookies) {
+		private HttpRequest(String requestType, URI uri, String httpVersion, Map<String, String> params, Set<HttpCookie> cookies, String body) {
 			this.type = requestType;
 			this.uri = uri;
 			this.httpVersion = httpVersion;
 			this.params = params;
 			this.cookies = cookies;
+			this.body = body;
 		}
 		
 		/**
@@ -285,6 +321,14 @@ public class HttpSocket implements Closeable {
 		 */
 		public Set<HttpCookie> getCookies() {
 			return Collections.unmodifiableSet(cookies);
+		}
+		
+		/**
+		 * Gets the request body
+		 * @return the request body
+		 */
+		public String getBody() {
+			return body;
 		}
 	}
 	
