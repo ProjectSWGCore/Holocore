@@ -17,14 +17,12 @@ import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import resources.Location;
 import resources.objects.SWGObject;
-import resources.objects.building.BuildingObject;
 import resources.objects.cell.CellObject;
 import resources.player.Player;
 import resources.server_info.Log;
