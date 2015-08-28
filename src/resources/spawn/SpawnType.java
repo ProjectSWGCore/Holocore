@@ -29,7 +29,7 @@ package resources.spawn;
 
 public enum SpawnType {
 
-	EGG("object/tangible/spawning/shared_spawn_egg.iff");
+	EGG("object/tangible/ground_spawning/shared_patrol_waypoint.iff");
 	
 	private String objectTemplate;
 	
