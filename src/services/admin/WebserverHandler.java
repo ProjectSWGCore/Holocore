@@ -17,10 +17,15 @@ import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import resources.Location;
+import resources.objects.SWGObject;
+import resources.objects.building.BuildingObject;
+import resources.objects.cell.CellObject;
 import resources.player.Player;
 import resources.server_info.Log;
 import services.admin.http.HttpImageType;
@@ -43,8 +48,17 @@ class WebserverHandler {
 	
 	public void handleRequest(HttpSocket socket, HttpRequest request) throws IOException {
 		String file = request.getURI().toASCIIString();
-		if (file.contains("?"))
+		Map<String, String> getVariables = new HashMap<>();
+		if (file.contains("?")) {
+			String vars = file.substring(file.indexOf('?')+1);
+			String [] variables = vars.split("&");
+			for (String var : variables) {
+				String [] parts = var.split("=", 2);
+				if (parts.length == 2)
+					getVariables.put(parts[0], parts[1]);
+			}
 			file = file.substring(0, file.indexOf('?'));
+		}
 		if (file.contains("#"))
 			file = file.substring(0, file.indexOf('#'));
 		switch (file) {
@@ -55,7 +69,7 @@ class WebserverHandler {
 					socket.send(HttpStatusCode.NOT_FOUND, request.getURI() + " is not found!");
 				break;
 			default: {
-				byte [] response = parseFile(socket.getSession(), file);
+				byte [] response = parseFile(socket.getSession(), file, getVariables);
 				if (response == null)
 					socket.send(HttpStatusCode.NOT_FOUND, request.getURI() + " is not found!");
 				else
@@ -159,7 +173,7 @@ class WebserverHandler {
 		}
 	}
 	
-	private byte [] parseFile(HttpSession session, String filepath) throws IOException {
+	private byte [] parseFile(HttpSession session, String filepath, Map<String, String> getVariables) throws IOException {
 		File file = new File("res/webserver" + filepath);
 		if (file.isDirectory())
 			file = new File(file, "index.html");
@@ -175,7 +189,7 @@ class WebserverHandler {
 		} else if (!session.isAuthenticated())
 			return null;
 		if (type.equalsIgnoreCase("text/html"))
-			return parseHtmlFile(file).getBytes(ASCII);
+			return parseHtmlFile(file, getVariables).getBytes(ASCII);
 		try (InputStream is = new FileInputStream(file)) {
 			ByteArrayOutputStream baos = new ByteArrayOutputStream(is.available());
 			byte [] buffer = new byte[Math.min(1024, is.available())];
@@ -198,7 +212,7 @@ class WebserverHandler {
 		return true;
 	}
 	
-	private String parseHtmlFile(File file) throws IOException {
+	private String parseHtmlFile(File file, Map<String, String> getVariables) throws IOException {
 		try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), ASCII))) {
 			String line = null;
 			StringBuilder builder = new StringBuilder();
@@ -210,7 +224,7 @@ class WebserverHandler {
 				while (matcher.find()) {
 					String var = matcher.group();
 					var = var.substring(2, var.length()-1);
-					line = line.replaceAll("\\$\\{"+var+"\\}", getVariable(var));
+					line = line.replaceAll("\\$\\{"+var+"\\}", getVariable(var, getVariables));
 					matcher.reset(line);
 				}
 				builder.append(line + System.lineSeparator());
@@ -219,29 +233,88 @@ class WebserverHandler {
 		}
 	}
 	
-	private String getVariable(String var) throws IOException {
+	private String getVariable(String var, Map<String, String> getVariables) throws IOException {
 		var = var.toLowerCase(Locale.US);
 		switch (var) {
 			case "log":
 				return data.getLog().replace("\n", "\n<br />");
 			case "online_players": {
-				Set<Player> players = data.getOnlinePlayers();
-				StringBuilder ret = new StringBuilder("Online Players: ["+players.size()+"]<br />");
-				ret.append("<table class=\"online_players_table\"><tr><th>Username</th><th>User ID</th><th>Character</th><th>Character ID</th></tr>");
-				for (Player p : players) {
-					ret.append("<tr>");
-					ret.append(String.format("<td class=\"online_player_cell\">%s</td>", p.getUsername()));
-					ret.append(String.format("<td class=\"online_player_cell\">%d</td>", p.getUserId()));
-					ret.append(String.format("<td class=\"online_player_cell\">%s</td>", p.getCharacterName()));
-					ret.append(String.format("<td class=\"online_player_cell\">%d</td>", p.getCreatureObject().getObjectId()));
-					ret.append("</tr>");
+				return getOnlinePlayerData();
+			}
+			case "character_info": {
+				if (!getVariables.containsKey("character_id"))
+					return "";
+				long i = Long.parseLong(getVariables.get("character_id"));
+				for (Player p : data.getOnlinePlayers()) {
+					if (p.getCreatureObject().getObjectId() == i) {
+						return getCreatureData(p.getCreatureObject());
+					}
 				}
-				ret.append("</table>");
-				return ret.toString();
+				return "No Creature Found!";
 			}
 			default:
 				return "";
 		}
+	}
+	
+	private String getOnlinePlayerData() {
+		Set<Player> players = data.getOnlinePlayers();
+		StringBuilder ret = new StringBuilder("Online Players: ["+players.size()+"]<br />");
+		ret.append("<table class=\"online_players_table\"><tr><th>Username</th><th>User ID</th><th>Character</th><th>Character ID</th></tr>");
+		for (Player p : players) {
+			ret.append("<tr>");
+			long id = p.getCreatureObject().getObjectId();
+			ret.append(String.format("<td class=\"online_player_cell\"><a href=\"?character_id=%d\">%s</a></td>", id, p.getUsername()));
+			ret.append(String.format("<td class=\"online_player_cell\"><a href=\"?character_id=%d\">%d</a></td>", id, p.getUserId()));
+			ret.append(String.format("<td class=\"online_player_cell\"><a href=\"?character_id=%d\">%s</a></td>", id, p.getCharacterName()));
+			ret.append(String.format("<td class=\"online_player_cell\"><a href=\"?character_id=%d\">%d</a></td>", id, p.getCreatureObject().getObjectId()));
+			ret.append("</tr>");
+		}
+		ret.append("</table>");
+		return ret.toString();
+	}
+	
+	private String getCreatureData(SWGObject creature) {
+		StringBuilder str = new StringBuilder("");
+		Location world = creature.getWorldLocation();
+		str.append(String.format("  Object ID: %s<br />", creature.getObjectId()));
+		str.append(String.format("       Name: %s<br />", creature.getName()));
+		str.append(String.format("<b>World:</b><br />"));
+		str.append(addLocationData(world));
+		if (creature.getParent() != null) {
+			Location cell = creature.getLocation();
+			str.append(String.format("<b>Local:</b><br />"));
+			str.append(addLocationData(cell));
+			SWGObject parent = creature.getParent();
+			if (parent != null) {
+				str.append(String.format("    <b>Parent:</b><br />"));
+				str.append(addParentData(parent, "    "));
+				parent = parent.getParent();
+				if (parent != null) {
+					str.append(String.format("        <b>Grandparent:</b><br />"));
+					str.append(addParentData(parent, "        "));
+				}
+			}
+		}
+		return str.toString().replace(" ", "&nbsp;").replace("<br&nbsp;/>", "<br />");
+	}
+	
+	private String addParentData(SWGObject obj, String indent) {
+		StringBuilder str = new StringBuilder("");
+		str.append(indent + String.format("  Object ID: %d<br />", obj.getObjectId()));
+		str.append(indent + String.format("   Template: %s<br />", obj.getTemplate()));
+		if (obj instanceof CellObject) {
+			str.append(indent + String.format(" Cell Index: %d<br />", ((CellObject) obj).getNumber()));
+			str.append(indent + String.format("  Cell Name: %s<br />", ((CellObject) obj).getCellName()));
+		}
+		return str.toString();
+	}
+	
+	private String addLocationData(Location l) {
+		StringBuilder str = new StringBuilder("");
+		str.append(String.format("   Location: %.2f, %.2f, %.2f [%s]<br />", l.getX(), l.getY(), l.getZ(), l.getTerrain()));
+		str.append(String.format("Orientation: %.2f, %.2f, %.2f, %.2f<br />", l.getOrientationX(), l.getOrientationY(), l.getOrientationZ(), l.getOrientationW()));
+		return str.toString();
 	}
 	
 }
