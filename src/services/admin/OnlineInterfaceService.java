@@ -173,11 +173,13 @@ public class OnlineInterfaceService extends Service implements HttpServerCallbac
 		synchronized (getUser) {
 			try {
 				getUser.setString(1, username);
+				boolean prevAuthenticated = session.isAuthenticated();
 				session.setAuthenticated(false);
 				try (ResultSet cursor = getUser.executeQuery()) {
 					session.setAuthenticated(cursor.next() && isUserValid(cursor, password));
 					if (session.isAuthenticated()) {
-						Log.i(TAG, "[%s] Successfully logged in to online interface", username);
+						if (!prevAuthenticated)
+							Log.i(TAG, "[%s] Successfully logged in to online interface", username);
 					} else {
 						Log.w(TAG, "[%s] Failed to login to online interface. Incorrect user/pass", username);
 						socket.redirect(new URL("https", httpsServer.getBindAddress().getHostName(), httpsServer.getBindPort(), "/").toString());

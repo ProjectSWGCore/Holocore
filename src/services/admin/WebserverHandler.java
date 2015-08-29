@@ -184,7 +184,7 @@ class WebserverHandler {
 			if (session.isAuthenticated()) {
 				file = new File("res/webserver/authenticated.html");
 			}
-		} else if (!session.isAuthenticated())
+		} else if (!session.isAuthenticated() && !type.equals("text/css") && !type.equals("text/js") && !type.startsWith("image"))
 			return null;
 		if (type.equalsIgnoreCase("text/html"))
 			return parseHtmlFile(file, getVariables).getBytes(ASCII);
