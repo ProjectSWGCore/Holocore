@@ -57,6 +57,17 @@ public class BuildingObject extends TangibleObject {
 		}
 		return null;
 	}
+	
+	public CellObject getCellByNumber(int cellNumber) {
+		for (SWGObject cont : getContainedObjects()) {
+			if (cont instanceof CellObject) {
+				if (((CellObject) cont).getNumber() == cellNumber) {
+					return (CellObject) cont;
+				}
+			}
+		}
+		return null;
+	}
 
 	public List<CellObject> getCells() {
 		List<CellObject> cells = new LinkedList<>();
