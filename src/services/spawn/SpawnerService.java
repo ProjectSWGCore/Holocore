@@ -59,7 +59,7 @@ public final class SpawnerService extends Service {
 		registerForIntent(ConfigChangedIntent.TYPE);
 		
 		if (getConfig(ConfigFile.FEATURES).getBoolean("SPAWNERS-ENABLED", true))
-			loadEggs();
+			loadSpawners();
 		
 		return super.initialize();
 	}
@@ -76,7 +76,7 @@ public final class SpawnerService extends Service {
 				
 				if(!newValue.equals(oldValue)) {
 					if(Boolean.valueOf(newValue) && spawners.isEmpty()) { // If nothing's been spawned, create it.
-						loadEggs();
+						loadSpawners();
 					} else { // If anything's been spawned, delete it.
 						for(Spawner spawner : spawners)
 							objectManager.destroyObject(spawner.getSpawnerObject());
@@ -88,7 +88,7 @@ public final class SpawnerService extends Service {
 		
 	}
 	
-	private void loadEggs() {
+	private void loadSpawners() {
 		DatatableData eggs = ServerFactory.getDatatable("spawn/static.iff");
 				
 		eggs.handleRows(rowIndex -> {
