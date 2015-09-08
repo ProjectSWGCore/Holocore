@@ -101,7 +101,7 @@ public final class SpawnerService extends Service {
 	private void loadSpawners() {
 		try {
 			ResultSet jointTable = spawnerDatabase.prepareStatement(
-					"SELECT static.active, static.x, static.y, static.z, static.spawner_type, static.cell_id, static.oX, static.oY, static.oZ, static.oW, buildings.object_id, buildings.terrain_name FROM static "
+					"SELECT static.*, buildings.object_id, buildings.terrain_name FROM static "
 					+ "INNER JOIN buildings ON static.building_id = buildings.building_id "
 					+ "GROUP BY buildings.building_id"
 					).executeQuery();
