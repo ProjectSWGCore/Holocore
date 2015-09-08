@@ -27,13 +27,13 @@
 ***********************************************************************************/
 package resources.spawn;
 
-public enum SpawnType {
+public enum SpawnerType {
 
 	EGG("object/tangible/spawning/shared_spawn_egg.iff");
 	
 	private String objectTemplate;
 	
-	SpawnType(String objectTemplate) {
+	SpawnerType(String objectTemplate) {
 		this.objectTemplate = objectTemplate;
 	}
 	
