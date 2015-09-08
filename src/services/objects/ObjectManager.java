@@ -73,12 +73,14 @@ import resources.server_info.ObjectDatabase;
 import resources.server_info.ObjectDatabase.Traverser;
 import services.map.MapManager;
 import services.player.PlayerManager;
+import services.spawn.SpawnerService;
 import services.spawn.StaticService;
 
 public class ObjectManager extends Manager {
 
 	private final MapManager mapService;
 	private final StaticService staticService;
+	private final SpawnerService spawnerService;
 	private final RadialService radialService;
 
 	private final ObjectDatabase<SWGObject> database;
@@ -89,6 +91,7 @@ public class ObjectManager extends Manager {
 	public ObjectManager() {
 		mapService = new MapManager();
 		staticService = new StaticService(this);
+		spawnerService = new SpawnerService(this);
 		radialService = new RadialService();
 		database = new CachedObjectDatabase<SWGObject>("odb/objects.db");
 		objectAwareness = new ObjectAwareness();
@@ -98,6 +101,7 @@ public class ObjectManager extends Manager {
 		addChildService(mapService);
 		addChildService(staticService);
 		addChildService(radialService);
+		addChildService(spawnerService);
 	}
 	
 	@Override
@@ -145,8 +149,8 @@ public class ObjectManager extends Manager {
 			if (Terrain.doesTerrainExistForName(terrainStr))
 				terrain = Terrain.getTerrainFromName(terrainStr);
 			else if (!terrainStr.isEmpty()) {
-				System.err.println("ObjectManager: Unknown terrain '" + terrain + "'");
-				Log.e("ObjectManager", "Unknown terrain: %s", terrain);
+				System.err.println("ObjectManager: Unknown terrain '" + terrainStr + "'");
+				Log.e("ObjectManager", "Unknown terrain: %s", terrainStr);
 			}
 			loadBuildouts(terrain);
 			loadSnapshots(terrain);
@@ -257,12 +261,7 @@ public class ObjectManager extends Manager {
 	
 	@Override
 	public boolean terminate() {
-		database.traverse(new Traverser<SWGObject>() {
-			@Override
-			public void process(SWGObject obj) {
-				obj.setOwner(null);
-			}
-		});
+		database.traverse((obj) -> obj.setOwner(null));
 		database.close();
 		return super.terminate();
 	}
@@ -275,6 +274,8 @@ public class ObjectManager extends Manager {
 			Player p = ((PlayerEventIntent)i).getPlayer();
 			switch (((PlayerEventIntent)i).getEvent()) {
 				case PE_DISAPPEAR:
+					if (p.getCreatureObject() == null)
+						break;
 					p.getCreatureObject().clearAware();
 					objectAwareness.remove(p.getCreatureObject());
 					for (SWGObject obj : p.getCreatureObject().getObservers())
