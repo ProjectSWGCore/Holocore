@@ -1,0 +1,91 @@
+<html>
+	<head>
+		<title>Game Server Diagnostics</title>
+		<style type="text/css">
+			body {
+				background-color: #FFFFFF;
+			}
+			.main_container {
+				width: 75%;
+				color: #000000;
+				margin: 0 auto;
+			}
+			.memory_container {
+				width: 50%;
+				max-width: 50%;
+				height: 300px;
+				float: left;
+				color: #000000;
+				display: inline-block;
+			}
+			.log_container {
+				width: 100%;
+				color: #000000;
+				font-family: 'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;
+				font-size: 13px;
+				overflow: visible;
+			}
+			.server_info {
+				width: 50%;
+				max-width: 50%;
+				height: 300px;
+				float: right;
+				display: inline-block;
+				font-family: 'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;
+				font-size: 13px;
+				overflow-x: hidden;
+				overflow-y: scroll;
+			}
+			.online_players_table {
+				width: 100%;
+			}
+			.online_player_cell {
+				border: 1px solid black;
+				padding-left: 3px;
+			}
+		</style>
+		<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+		<script>
+			getUrlParameter = function getUrlParameter(sParam) {
+				var sPageURL = decodeURIComponent(window.location.search.substring(1)), sURLVariables = sPageURL.split('&'), sParameterName, i;
+				for (i = 0; i < sURLVariables.length; i++) {
+					sParameterName = sURLVariables[i].split('=');
+					if (sParameterName[0] === sParam) {
+						return sParameterName[1] === undefined ? true : sParameterName[1];
+					}
+				}
+				return undefined;
+			};
+			function updateServerInfo() {
+//				d = new Date();
+//				$("#memory_usage").attr("src", "memory_usage.png?"+d.getTime());
+//				$("#server_info").attr("src", $("#server_info").attr("src"));
+				location.reload(true);
+			}
+			$(document).ready(function() {
+				var time = getUrlParameter("refresh");
+				if (time === undefined)
+					time = 3000;
+				setInterval(updateServerInfo, time);
+			});
+		</script>
+	</head>
+	<body>
+		<div class="main_container">
+			<div width="100%" height="300px">
+				<div class="memory_container">
+					Resource Usage:<br />
+					<image id="memory_usage" src="memory_usage.png" width="100%" />
+				</div>
+				<div class="server_info">
+					${ONLINE_PLAYERS}
+					<br />
+					${CHARACTER_INFO}
+				</div>
+			</div>
+			<div class="log_container">
+				${LOG}
+			</div>
+		</div>
+	</body>
+</html>

@@ -37,7 +37,6 @@ import java.util.List;
  */
 public abstract class Manager extends Service {
 	
-	private static final ServerManager serverManager = ServerManager.getInstance();
 	private List <Service> children;
 	
 	public Manager() {
@@ -52,19 +51,13 @@ public abstract class Manager extends Service {
 	 */
 	@Override
 	public boolean initialize() {
-		boolean success = super.initialize(), cSuccess = true;
-		long start = 0, end = 0;
+		boolean success = super.initialize();
 		synchronized (children) {
 			for (Service child : children) {
-				if (!success)
-					break;
-				start = System.nanoTime();
-				cSuccess = child.initialize();
-				end = System.nanoTime();
-				serverManager.setServiceInitTime(child, (end-start)/1E6, cSuccess);
-				if (!cSuccess) {
+				if (!child.initialize()) {
 					System.err.println(child.getClass().getSimpleName() + " failed to initialize!");
 					success = false;
+					break;
 				}
 			}
 		}
@@ -79,19 +72,13 @@ public abstract class Manager extends Service {
 	 */
 	@Override
 	public boolean start() {
-		boolean success = super.start(), cSuccess = true;
-		long start = 0, end = 0;
+		boolean success = super.start();
 		synchronized (children) {
 			for (Service child : children) {
-				if (!success)
-					break;
-				start = System.nanoTime();
-				cSuccess = child.start();
-				end = System.nanoTime();
-				serverManager.setServiceStartTime(child, (end-start)/1E6, cSuccess);
-				if (!cSuccess) {
+				if (!child.start()) {
 					System.err.println(child.getClass().getSimpleName() + " failed to start!");
 					success = false;
+					break;
 				}
 			}
 		}
@@ -129,15 +116,10 @@ public abstract class Manager extends Service {
 	 */
 	@Override
 	public boolean terminate() {
-		boolean success = super.terminate(), cSuccess = true;
-		long start = 0, end = 0;
+		boolean success = super.terminate();
 		synchronized (children) {
 			for (Service child : children) {
-				start = System.nanoTime();
-				cSuccess = child.terminate();
-				end = System.nanoTime();
-				serverManager.setServiceTerminateTime(child, (end-start)/1E6, cSuccess);
-				if (!cSuccess)
+				if (!child.terminate())
 					success = false;
 			}
 		}
@@ -174,7 +156,6 @@ public abstract class Manager extends Service {
 				if (s == child || s.equals(child))
 					return;
 			}
-			serverManager.addChild(this, s);
 			children.add(s);
 		}
 	}
@@ -187,7 +168,6 @@ public abstract class Manager extends Service {
 		if (s == null)
 			return;
 		synchronized (children) {
-			serverManager.removeChild(this, s);
 			children.remove(s);
 		}
 	}

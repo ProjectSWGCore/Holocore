@@ -149,8 +149,8 @@ public class ObjectManager extends Manager {
 			if (Terrain.doesTerrainExistForName(terrainStr))
 				terrain = Terrain.getTerrainFromName(terrainStr);
 			else if (!terrainStr.isEmpty()) {
-				System.err.println("ObjectManager: Unknown terrain '" + terrain + "'");
-				Log.e("ObjectManager", "Unknown terrain: %s", terrain);
+				System.err.println("ObjectManager: Unknown terrain '" + terrainStr + "'");
+				Log.e("ObjectManager", "Unknown terrain: %s", terrainStr);
 			}
 			loadBuildouts(terrain);
 			loadSnapshots(terrain);
@@ -261,12 +261,7 @@ public class ObjectManager extends Manager {
 	
 	@Override
 	public boolean terminate() {
-		database.traverse(new Traverser<SWGObject>() {
-			@Override
-			public void process(SWGObject obj) {
-				obj.setOwner(null);
-			}
-		});
+		database.traverse((obj) -> obj.setOwner(null));
 		database.close();
 		return super.terminate();
 	}
@@ -279,6 +274,8 @@ public class ObjectManager extends Manager {
 			Player p = ((PlayerEventIntent)i).getPlayer();
 			switch (((PlayerEventIntent)i).getEvent()) {
 				case PE_DISAPPEAR:
+					if (p.getCreatureObject() == null)
+						break;
 					p.getCreatureObject().clearAware();
 					objectAwareness.remove(p.getCreatureObject());
 					for (SWGObject obj : p.getCreatureObject().getObservers())

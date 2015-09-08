@@ -228,7 +228,7 @@ public class LoginService extends Service {
 		String message = "Sorry, you're banned!";
 		sendPacket(player.getNetworkId(), new ErrorMessage(type, message, false));
 		System.err.println("[" + id.getUsername() + "] Can't login - Banned! IP: " + id.getAddress() + ":" + id.getPort());
-		Log.i("LoginService", "%s cannot login due to a ban, from %s:%d", id.getAddress(), id.getPort());
+		Log.i("LoginService", "%s cannot login due to a ban, from %s:%d", player.getUsername(), id.getAddress(), id.getPort());
 		player.setPlayerState(PlayerState.DISCONNECTED);
 		new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_FAIL_BANNED).broadcast();
 	}
