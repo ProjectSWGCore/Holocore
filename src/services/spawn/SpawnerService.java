@@ -50,6 +50,9 @@ public final class SpawnerService extends Service {
 	private final ObjectManager objectManager;
 	private final Collection<Spawner> spawners;
 	private final RelationalServerData spawnerDatabase;
+	private static final String QUERY = "SELECT static.*, buildings.object_id, buildings.terrain_name FROM static "
+			+ "INNER JOIN buildings ON static.building_id = buildings.building_id "
+			+ "GROUP BY buildings.building_id";
 	
 	public SpawnerService(ObjectManager objectManager) {
 		this.objectManager = objectManager;
@@ -100,11 +103,7 @@ public final class SpawnerService extends Service {
 	
 	private void loadSpawners() {
 		try {
-			ResultSet jointTable = spawnerDatabase.prepareStatement(
-					"SELECT static.*, buildings.object_id, buildings.terrain_name FROM static "
-					+ "INNER JOIN buildings ON static.building_id = buildings.building_id "
-					+ "GROUP BY buildings.building_id"
-					).executeQuery();
+			ResultSet jointTable = spawnerDatabase.prepareStatement(QUERY).executeQuery();
 			while (jointTable.next()) {
 				if(jointTable.getBoolean("active")) {
 					Location loc = new Location(jointTable.getFloat("x"), jointTable.getFloat("y"), jointTable.getFloat("z"), Terrain.valueOf(jointTable.getString("terrain_name")));
