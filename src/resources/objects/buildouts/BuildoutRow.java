@@ -84,11 +84,11 @@ public class BuildoutRow {
 	}
 	
 	private void loadLarge(Object [] datatableRow, CrcStringTableData crcString) {
-		objectId = ((Number) datatableRow[0]).longValue();
-		containerId = ((Number) datatableRow[1]).longValue();
+		objectId = Integer.toUnsignedLong(((Number) datatableRow[0]).intValue());
+		containerId = Integer.toUnsignedLong(((Number) datatableRow[1]).intValue());
 		type = (Integer) datatableRow[2];
 		loadEndColumns(datatableRow, crcString, 3);
-		long indexShifted = ((long) buildoutArea.getIndex() + 1) << 48;
+		long indexShifted = Integer.toUnsignedLong(buildoutArea.getIndex() + 1) << 48;
 		if (objectId < 0)
 			objectId ^= indexShifted;
 		if (containerId < 0)
