@@ -27,31 +27,44 @@
 ***********************************************************************************/
 package services.spawn;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 
 import intents.server.ConfigChangedIntent;
 import resources.Location;
 import resources.Terrain;
-import resources.client_info.ServerFactory;
-import resources.client_info.visitors.DatatableData;
 import resources.config.ConfigFile;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.building.BuildingObject;
 import resources.objects.SWGObject;
-import resources.spawn.SpawnType;
+import resources.server_info.RelationalServerData;
+import resources.spawn.SpawnerType;
 import resources.spawn.Spawner;
 import services.objects.ObjectManager;
 
 public final class SpawnerService extends Service {
-
+	
+	private static final String GET_ALL_SPAWNERS_SQL =
+			"SELECT static.*, buildings.object_id, buildings.terrain_name FROM static "
+			+ "INNER JOIN buildings ON static.building_id = buildings.building_id "
+			+ "GROUP BY buildings.building_id";
+	
 	private final ObjectManager objectManager;
 	private final Collection<Spawner> spawners;
+	private final RelationalServerData spawnerDatabase;
 	
 	public SpawnerService(ObjectManager objectManager) {
 		this.objectManager = objectManager;
 		spawners = new ArrayList<>();
+		spawnerDatabase = new RelationalServerData("serverdata/spawn/static.db");
+		
+		if(!(spawnerDatabase.linkTableWithSdb("static", "serverdata/spawn/static.sdb") &&
+				spawnerDatabase.linkTableWithSdb("buildings", "serverdata/building/buildings.sdb"))) {
+			throw new main.ProjectSWG.CoreException("Unable to load sdb files for SpawnerService");
+		}
 	}
 	
 	@Override
@@ -59,7 +72,7 @@ public final class SpawnerService extends Service {
 		registerForIntent(ConfigChangedIntent.TYPE);
 		
 		if (getConfig(ConfigFile.FEATURES).getBoolean("SPAWNERS-ENABLED", false))
-			loadEggs();
+			loadSpawners();
 		
 		return super.initialize();
 	}
@@ -76,34 +89,48 @@ public final class SpawnerService extends Service {
 				
 				if(!newValue.equals(oldValue)) {
 					if(Boolean.valueOf(newValue) && spawners.isEmpty()) { // If nothing's been spawned, create it.
-						loadEggs();
+						loadSpawners();
 					} else { // If anything's been spawned, delete it.
-						for(Spawner spawner : spawners)
-							objectManager.destroyObject(spawner.getSpawnerObject());
-						
-						spawners.clear();
+						removeSpawners();
 					}
 				}
 			}
 		
 	}
 	
-	private void loadEggs() {
-		DatatableData eggs = ServerFactory.getDatatable("spawn/static.iff");
+	@Override
+	public boolean terminate() {
+		return super.terminate() && spawnerDatabase.close();
+	}
+	
+	private void loadSpawners() {
+		try(ResultSet jointTable = spawnerDatabase.prepareStatement(GET_ALL_SPAWNERS_SQL).executeQuery()) {
+			while (jointTable.next()) {
+				if(jointTable.getBoolean("active")) {
+					Location loc = new Location(jointTable.getFloat("x"), jointTable.getFloat("y"), jointTable.getFloat("z"), Terrain.valueOf(jointTable.getString("terrain_name")));
+					SpawnerType spawnerType = SpawnerType.valueOf(jointTable.getString("spawner_type"));
+					long objectId = jointTable.getLong("object_id");
+					long cellId = jointTable.getLong("cell_id");
+					final boolean spawnInCell = cellId > 0;
+					loc.setOrientation(jointTable.getFloat("oX"), jointTable.getFloat("oY"), jointTable.getFloat("oZ"), jointTable.getFloat("oW"));
+					
+					final SWGObject egg = objectManager.createObject(spawnerType.getObjectTemplate(), loc, !spawnInCell, false);
+					
+					if(spawnInCell)
+						((BuildingObject) objectManager.getObjectById(objectId)).getCellByNumber(jointTable.getInt("cell_id")).addObject(egg);
 				
-		eggs.handleRows(rowIndex -> {
-			if((Integer) eggs.getCell(rowIndex, 12) == 1) { // We only spawn active eggs
-				final int buildingId = (int) eggs.getCell(rowIndex, 3);
-				final Location loc = new Location((float) eggs.getCell(rowIndex, 5), (float) eggs.getCell(rowIndex, 6), (float) eggs.getCell(rowIndex, 7), Terrain.valueOf((String) eggs.getCell(rowIndex, 1)));
-				final SpawnType spawnType = SpawnType.valueOf((String) eggs.getCell(rowIndex, 2));
-				final boolean spawnInCell = buildingId != 0;
-				final SWGObject egg = objectManager.createObject(spawnType.getObjectTemplate(), loc, !spawnInCell, false);
-				
-				if(spawnInCell) // If it wants to be inside a building, make it so!
-					((BuildingObject) objectManager.getObjectById(buildingId)).getCellByName((String) eggs.getCell(rowIndex, 4)).addObject(egg);
-			
-				spawners.add(new Spawner(egg));
+					spawners.add(new Spawner(egg));
+				}
 			}
-		});
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void removeSpawners() {
+		for(Spawner spawner : spawners)
+			objectManager.destroyObject(spawner.getSpawnerObject());
+		
+		spawners.clear();
 	}
 }

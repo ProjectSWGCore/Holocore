@@ -1,0 +1,2 @@
+building_id	spawner_type	cell_id	x	y	z	oX	oY	oZ	oW	active
+TEXT REFERENCES buildings	TEXT NOT NULL	REAL	REAL	REAL	REAL	REAL	REAL	REAL	REAL	REAL
