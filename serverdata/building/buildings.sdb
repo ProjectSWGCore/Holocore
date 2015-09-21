@@ -1,0 +1,14 @@
+building_id	terrain_name	object_id	building_name	total_cells	x	y	z
+TEXT PRIMARY KEY	TEXT NOT NULL	REAL	TEXT NOT NULL	REAL	REAL	REAL	REAL
+cor_world	CORELLIA	0	World	0	0	0	0
+dan_world	DANTOOINE	0	World	0	0	0	0
+dat_world	DATHOMIR	0	World	0	0	0	0
+end_world	ENDOR	0	World	0	0	0	0
+kas_world	KASHYYYK	0	World	0	0	0	0
+lok_world	LOK	0	World	0	0	0	0
+nab_world	NABOO	0	World	0	0	0	0
+mus_world	MUSTAFAR	0	World	0	0	0	0
+ror_world	RORI	0	World	0	0	0	0
+tal_world	TALUS	0	World	0	0	0	0
+tat_world	TATOOINE	0	World	0	0	0	0
+yav_world	YAVIN4	0	World	0	0	0	0
