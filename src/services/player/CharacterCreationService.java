@@ -51,6 +51,7 @@ import network.packets.swg.login.creation.RandomNameResponse;
 import network.packets.swg.login.creation.ClientVerifyAndLockNameResponse.ErrorMessage;
 import network.packets.swg.login.creation.CreateCharacterFailure.NameFailureReason;
 import resources.Location;
+import resources.PvpFlag;
 import resources.Race;
 import resources.Terrain;
 import resources.client_info.ClientFactory;
@@ -324,7 +325,7 @@ public class CharacterCreationService extends Service {
 		creatureObj.setAppearanceData(create.getCharCustomization());
 		creatureObj.setHeight(create.getHeight());
 		creatureObj.setName(create.getName());
-		creatureObj.setPvpType(20);
+		creatureObj.setPvpFlags(PvpFlag.PLAYER, PvpFlag.OVERT);
 		creatureObj.getSkills().add("species_" + creatureObj.getRace().getSpecies());
 
 		creatureObj.addObject(inventory); // slot = inventory
