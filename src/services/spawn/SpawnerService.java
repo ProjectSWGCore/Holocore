@@ -47,10 +47,7 @@ import services.objects.ObjectManager;
 
 public final class SpawnerService extends Service {
 	
-	private static final String GET_ALL_SPAWNERS_SQL =
-			"SELECT static.*, buildings.object_id, buildings.terrain_name FROM static "
-			+ "INNER JOIN buildings ON static.building_id = buildings.building_id "
-			+ "GROUP BY buildings.building_id";
+	private static final String GET_ALL_SPAWNERS_SQL = "SELECT static.*, buildings.object_id, buildings.terrain_name FROM static, buildings WHERE buildings.building_id = static.building_id";
 	
 	private final ObjectManager objectManager;
 	private final Collection<Spawner> spawners;
