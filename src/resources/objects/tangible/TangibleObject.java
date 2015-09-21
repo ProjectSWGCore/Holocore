@@ -27,14 +27,19 @@
 ***********************************************************************************/
 package resources.objects.tangible;
 
+import intents.FactionIntent;
+import intents.FactionIntent.FactionIntentType;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
+import resources.PvpFaction;
+import resources.PvpFlag;
+import resources.PvpStatus;
 import resources.network.BaselineBuilder;
 import resources.objects.SWGObject;
 import resources.player.Player;
 
 public class TangibleObject extends SWGObject {
 	
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 	
 	private byte []	appearanceData	= new byte[0];
 	private int		damageTaken		= 0;
@@ -43,8 +48,8 @@ public class TangibleObject extends SWGObject {
 	private boolean	inCombat		= false;
 	private int		condition		= 0;
 	private int		pvpFlags		= 0;
-	private int		pvpType			= 0;
-	private int		pvpFactionId	= 0;
+	private PvpStatus pvpStatus = PvpStatus.COMBATANT;
+	private PvpFaction pvpFaction = PvpFaction.NEUTRAL;
 	private boolean	visibleGmOnly	= false;
 	private byte []	objectEffects	= new byte[0];
 	private int     optionFlags     = 0;
@@ -82,16 +87,46 @@ public class TangibleObject extends SWGObject {
 		return condition;
 	}
 	
+	public void setPvpFlags(PvpFlag... pvpFlags) {
+		for(PvpFlag pvpFlag : pvpFlags)
+			this.pvpFlags |= pvpFlag.getBitmask();
+		
+		new FactionIntent(this, FactionIntentType.FLAGUPDATE).broadcast();
+	}
+	
+	public void clearPvpFlags(PvpFlag... pvpFlags) {
+		for(PvpFlag pvpFlag : pvpFlags)
+			this.pvpFlags  &= ~pvpFlag.getBitmask();
+		
+		new FactionIntent(this, FactionIntentType.FLAGUPDATE).broadcast();
+	}
+	
+	public boolean hasPvpFlag(PvpFlag pvpFlag) {
+		return (pvpFlags & pvpFlag.getBitmask()) != 0;
+	}
+	
+	public PvpStatus getPvpStatus() {
+		return pvpStatus;
+	}
+
+	public void setPvpStatus(PvpStatus pvpStatus) {
+		this.pvpStatus = pvpStatus;
+		
+		sendDelta(3, 5, pvpStatus.getValue());
+	}
+	
+	public PvpFaction getPvpFaction() {
+		return pvpFaction;
+	}
+	
+	public void setPvpFaction(PvpFaction pvpFaction) {
+		this.pvpFaction = pvpFaction;
+		
+		sendDelta(3, 4, pvpFaction.getCrc());
+	}
+	
 	public int getPvpFlags() {
 		return pvpFlags;
-	}
-	
-	public int getPvpType() {
-		return pvpType;
-	}
-	
-	public int getPvpFactionId() {
-		return pvpFactionId;
 	}
 	
 	public boolean isVisibleGmOnly() {
@@ -124,18 +159,6 @@ public class TangibleObject extends SWGObject {
 	
 	public void setCondition(int condition) {
 		this.condition = condition;
-	}
-	
-	public void setPvpFlags(int pvpFlags) {
-		this.pvpFlags = pvpFlags;
-	}
-	
-	public void setPvpType(int pvpType) {
-		this.pvpType = pvpType;
-	}
-	
-	public void setPvpFactionId(int pvpFactionId) {
-		this.pvpFactionId = pvpFactionId;
 	}
 	
 	public void setVisibleGmOnly(boolean visibleGmOnly) {
@@ -198,8 +221,8 @@ public class TangibleObject extends SWGObject {
 	
 	public void createBaseline3(Player target, BaselineBuilder bb) {
 		super.createBaseline3(target, bb); // 4 variables - BASE3 (4)
-		bb.addInt(0); // Faction - 4
-		bb.addInt(0); // Faction Status - 5
+		bb.addInt(pvpFaction.getCrc()); // Faction - 4
+		bb.addInt(pvpStatus.getValue()); // Faction Status - 5
 		bb.addArray(appearanceData); // - 6
 		bb.addInt(0); // Component customization (Set, Integer) - 7
 			bb.addInt(0); //updates
@@ -243,4 +266,12 @@ public class TangibleObject extends SWGObject {
 		
 		bb.incrementOperandCount(2);
 	}
+	
+	@Override
+	protected void sendBaselines(Player target) {
+		super.sendBaselines(target);
+		
+		new FactionIntent(this, FactionIntentType.FLAGUPDATE).broadcast();
+	}
+
 }
