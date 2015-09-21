@@ -29,8 +29,34 @@ package resources.spawn;
 
 public enum SpawnerType {
 
-	EGG("object/tangible/ground_spawning/shared_patrol_waypoint.iff");
-	
+	AREA("object/tangible/ground_spawning/shared_area_spawner.iff"),
+	MINEFIELD("object/tangible/ground_spawning/shared_minefield_spawner.iff"),
+	PATROL("object/tangible/ground_spawning/shared_patrol_spawner.iff"),
+	RANDOM("object/tangible/ground_spawning/shared_random_spawner.iff"),
+	GCW_BANNER_INVASION("object/tangible/gcw/shared_flip_banner_invasion_spawner.iff"),
+	GCW_BANNER_ONPOLE("object/tangible/gcw/shared_flip_banner_onpole_spawner.iff"),
+	QUEST("object/tangible/spawning/shared_quest_spawner.iff"),
+	EGG("object/tangible/spawning/shared_spawn_egg.iff"),
+	GCW_CLONING("object/tangible/spawning/event/shared_gcw_cloning_sickness_droid_spawner.iff"),
+	GCW_CITY("object/tangible/gcw/shared_gcw_city_spawner.iff"),
+	MISSION_EASY("object/tangible/mission/shared_mission_informant_spawner_easy.iff"),
+	MISSION_MEDIUM("object/tangible/mission/shared_mission_informant_spawner_medium.iff"),
+	MISSION_HARD("object/tangible/mission/shared_mission_informant_spawner_hard.iff"),
+	ROHAK("object/tangible/quest/township/shared_rohak_figurine_spawner.iff"),
+	CITY_SIGN("object/tangible/spawning/shared_city_sign_spawner.iff"),
+	FS_NPC("object/tangible/spawning/shared_fs_village_npc_spawner.iff"),
+	REMOTE("object/tangible/spawning/shared_remote_theater_spawner.iff"),
+	GCW_IMPERIAL("object/tangible/spawning/event/shared_gcw_imperial_guard_spawner.iff"),
+	GCW_REBEL("object/tangible/spawning/event/shared_gcw_rebel_guard_spawner.iff"),
+	NYM_WEED("object/tangible/spawning/event/shared_nym_themepark_weed_spawner.iff"),
+	OUT_ALHA("object/tangible/spawning/event/shared_outbreak_alpha_survivor_spawner.iff"),
+	OUT_BETA("object/tangible/spawning/event/shared_outbreak_beta_survivor_spawner.iff"),
+	OUT_DELTA("object/tangible/spawning/event/shared_outbreak_delta_survivor_spawner.iff"),
+	OUT_SCIENTIST("object/tangible/spawning/event/shared_outbreak_dungeon_scientist_spawner.iff"),
+	OUT_GAMMA("object/tangible/spawning/event/shared_outbreak_gamma_survivor_spawner.iff"),
+	OUT_HIDDEN("object/tangible/spawning/event/shared_outbreak_hidden_content_spawner.iff"),
+	WOD_HERB("object/tangible/spawning/event/shared_wod_themepark_herb_spawner.iff");
+		
 	private String objectTemplate;
 	
 	SpawnerType(String objectTemplate) {
