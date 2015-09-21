@@ -22,7 +22,7 @@ var execute = function(galManager, player, target, args)
 		}
 		intent.broadcast();
 	} else if (creature.getPvpFaction() != PvpFaction.NEUTRAL) {
-		intent = FactionIntent(creature, FactionIntentType.STATUSUPDATE);
+		intent = new FactionIntent(creature, FactionIntentType.STATUSUPDATE);
 		intent.broadcast();
 	} else {
 		creature.getOwner().sendPacket(new ChatSystemMessage(SystemChatType.SCREEN_AND_CHAT, "@faction_recruiter:not_aligned"));
