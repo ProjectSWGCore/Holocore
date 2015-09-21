@@ -33,16 +33,6 @@ import java.nio.ByteBuffer;
 
 public class UpdatePvpStatusMessage extends SWGPacket {
 	public static final int CRC = getCrc("UpdatePvpStatusMessage");
-	
-	public static final int ATTACKABLE = 1;
-	public static final int AGGRESSIVE = 2;
-	public static final int OVERT = 4;
-	public static final int TEF = 8;
-	public static final int PLAYER = 16;
-	public static final int ENEMY = 32;
-	public static final int	GOING_OVERT = 64; // purple/blue blink
-	public static final int GOING_COVERT = 128; // green blink
-	public static final int DUEL = 256;
 
 	private int flag = 16;
 	private int playerFaction = 0;
