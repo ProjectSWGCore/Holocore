@@ -63,7 +63,6 @@ public class EnterTicketPurchaseModeMessage extends SWGPacket {
 		addAscii(data, planetName);
 		addAscii(data, nearestPointName);
 		addBoolean(data, instant);
-		System.out.println("encoded ticket mode");
 		return data;
 	}
 	
