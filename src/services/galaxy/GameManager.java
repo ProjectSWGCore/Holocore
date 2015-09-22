@@ -30,6 +30,7 @@ package services.galaxy;
 import resources.control.Manager;
 import services.commands.CommandService;
 import services.galaxy.terminals.TerminalService;
+import services.galaxy.terminals.TravelService;
 import services.sui.SuiService;
 
 public class GameManager extends Manager {
@@ -39,6 +40,7 @@ public class GameManager extends Manager {
 	private final SuiService suiService;
 	private final WeatherService weatherService;
 	private final TerminalService terminalManager;
+	private final TravelService travelService;
 	
 	public GameManager() {
 		commandService = new CommandService();
@@ -46,11 +48,13 @@ public class GameManager extends Manager {
 		suiService = new SuiService();
 		weatherService = new WeatherService();
 		terminalManager = new TerminalService();
+		travelService = new TravelService();
 
 		addChildService(commandService);
 		addChildService(connectionService);
 		addChildService(suiService);
 		addChildService(weatherService);
 		addChildService(terminalManager);
+		addChildService(travelService);
 	}
 }
