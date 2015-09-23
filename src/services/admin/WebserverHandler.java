@@ -188,6 +188,8 @@ class WebserverHandler {
 			return null;
 		if (type.equalsIgnoreCase("text/html"))
 			return parseHtmlFile(file, getVariables).getBytes(ASCII);
+		if (File.separatorChar != '/')
+			file = new File(file.getAbsolutePath().replace('/', File.separatorChar));
 		try (InputStream is = new FileInputStream(file)) {
 			ByteArrayOutputStream baos = new ByteArrayOutputStream(is.available());
 			byte [] buffer = new byte[Math.min(1024, is.available())];
