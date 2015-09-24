@@ -176,20 +176,20 @@ class WebserverHandler {
 		if (file.isDirectory())
 			file = new File(file, "index.html");
 		String type = getFileType(filepath);
-		if (!verifyPath(file)) {
-			Log.e("WebserverHandler", "Cannot access %s - not a valid path", file);
-			return null;
-		}
 		if (file.toString().equals("res/webserver/index.html")) {
 			if (session.isAuthenticated()) {
 				file = new File("res/webserver/authenticated.html");
 			}
 		} else if (!session.isAuthenticated() && !type.equals("text/css") && !type.equals("text/js") && !type.startsWith("image"))
 			return null;
-		if (type.equalsIgnoreCase("text/html"))
-			return parseHtmlFile(file, getVariables).getBytes(ASCII);
 		if (File.separatorChar != '/')
 			file = new File(file.getAbsolutePath().replace('/', File.separatorChar));
+		if (!verifyPath(file)) {
+			Log.e("WebserverHandler", "Cannot access %s - not a valid path", file);
+			return null;
+		}
+		if (type.equalsIgnoreCase("text/html"))
+			return parseHtmlFile(file, getVariables).getBytes(ASCII);
 		try (InputStream is = new FileInputStream(file)) {
 			ByteArrayOutputStream baos = new ByteArrayOutputStream(is.available());
 			byte [] buffer = new byte[Math.min(1024, is.available())];
@@ -205,7 +205,8 @@ class WebserverHandler {
 	
 	private boolean verifyPath(File file) {
 		File parent = new File("res/webserver");
-		if (!file.getAbsolutePath().startsWith(parent.getAbsolutePath()))
+		String requiredPrefix = parent.getAbsolutePath().replace('/', File.separatorChar);
+		if (!file.getAbsolutePath().startsWith(requiredPrefix))
 			return false;
 		if (!file.isFile())
 			return false;
