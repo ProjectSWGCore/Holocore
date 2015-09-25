@@ -263,7 +263,20 @@ public class Location implements Encodable, Serializable {
 		point.decode(data);
 	}
 
+	@Override
 	public String toString() {
 		return String.format("Location[TRN=%s, %s %s]", terrain, point, orientation);
+	}
+	
+	/**
+	 * @param destination to get the distance for
+	 * @return the distance between {@code this} and destination, which is ALWAYS positive.
+	 */
+	public double distanceTo(Location destination) {
+		double deltaX = destination.getX() - getX();
+		double deltaY = destination.getY() - getY();
+		double deltaZ = destination.getZ() - getZ();
+		
+		return Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2) + Math.pow(deltaZ, 2));
 	}
 }
