@@ -1,5 +1,4 @@
-var execute = function(galManager, player, target, args) 
-{
+var execute = function(galManager, player, target, args) {
 	var creature = player.getCreatureObject();
 	var PvpFaction = Java.type("resources.PvpFaction");
 	var FactionIntent = Java.type("intents.FactionIntent");
