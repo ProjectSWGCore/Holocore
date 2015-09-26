@@ -1,7 +1,6 @@
 package network.packets.swg.zone;
 
 import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 import java.util.Collection;
 
 import resources.TravelPoint;
@@ -23,9 +22,9 @@ public class PlanetTravelPointListResponse extends SWGPacket {
 	public ByteBuffer encode() {
 		ByteBuffer data = ByteBuffer.allocate(calculateSize());
 		
-		addShort(data, 6);
-		addInt(data, CRC);
-		addAscii(data, planetName);
+		addShort(data, 6); // Operand count
+		addInt(data, CRC); // CRC
+		addAscii(data, planetName);	// ASCII planet name
 		
 		addInt(data, travelPoints.size()); // List size
 		for(TravelPoint tp : travelPoints) // Point names
@@ -39,14 +38,13 @@ public class PlanetTravelPointListResponse extends SWGPacket {
 		}
 		
 		addInt(data, travelPoints.size()); // List size
-		for(TravelPoint tp : travelPoints) { // Prices
-			addInt(data, tp.getTicketPrice());
+		for(TravelPoint tp : travelPoints) { // additional costs
+			addInt(data, tp.getAdditionalCost());
 		}
 		
-		
 		addInt(data, travelPoints.size()); // List size
-		for(TravelPoint tp : travelPoints) { // ? TODO boolean reachable?
-			addBoolean(data, true);
+		for(TravelPoint tp : travelPoints) { // reachable
+			addBoolean(data, tp.isReachable());
 		}
 		
 		return data;

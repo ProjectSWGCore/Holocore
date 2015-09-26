@@ -1,15 +1,21 @@
 package resources;
 
-public class TravelPoint {
+import java.util.Map;
 
+public final class TravelPoint {
+	
 	private String name;
 	private Location location;
-	private int ticketPrice;
+	private final Map<String, Integer> planetFees;	// The price of travelling is mapped to each terrain.
+	private final int additionalCost; // Additional cost is calculated based on distance from source to destination.
+	private final boolean reachable;
 	
-	public TravelPoint(String name, Location location, int ticketPrice) {
+	public TravelPoint(String name, Location location, Map<String, Integer> planetFees, int additionalCost) {
 		this.name = name;
 		this.location = location;
-		this.ticketPrice = ticketPrice;
+		this.planetFees = planetFees;
+		this.additionalCost = additionalCost;
+		reachable = true;	// Not sure if this is ever false or which effect that has.
 	}
 	
 	public String getName() {
@@ -20,8 +26,19 @@ public class TravelPoint {
 		return location;
 	}
 	
-	public int getTicketPrice() {
-		return ticketPrice;
+	public int ticketPrice(String planetName) {
+		return planetFees.get(planetName);
 	}
 	
+	public int getAdditionalCost() {
+		return additionalCost;
+	}
+	
+	public int totalTicketPrice(String planetName) {
+		return ticketPrice(planetName) + getAdditionalCost();
+	}
+	
+	public boolean isReachable() {
+		return reachable;
+	}
 }
