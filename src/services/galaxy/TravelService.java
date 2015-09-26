@@ -7,7 +7,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import network.packets.Packet;
@@ -186,11 +185,11 @@ public final class TravelService extends Service {
 			SWGObject ticket = objectManager.createObject("object/tangible/travel/travel_ticket/base/shared_base_travel_ticket.iff", false);
 			
 			// Departure attributes
-			ticket.addAttribute("@obj_attr_n:travel_departure_planet", "@planet_n:" + purchaserWorldLocation.getTerrain().getName().toLowerCase(Locale.ENGLISH));
+			ticket.addAttribute("@obj_attr_n:travel_departure_planet", "@planet_n:" + purchaserWorldLocation.getTerrain().getName());
 			ticket.addAttribute("@obj_attr_n:travel_departure_point", nearestPoint.getName());
 			
 			// Arrival attributes
-			ticket.addAttribute("@obj_attr_n:travel_arrival_planet", "@planet_n:" + destinationPoint.getLocation().getTerrain().getName().toLowerCase(Locale.ENGLISH));
+			ticket.addAttribute("@obj_attr_n:travel_arrival_planet", "@planet_n:" + destinationPoint.getLocation().getTerrain().getName());
 			ticket.addAttribute("@obj_attr_n:travel_arrival_point", destinationPoint.getName());
 			
 			// Put the ticket in their inventory
@@ -201,11 +200,11 @@ public final class TravelService extends Service {
 				SWGObject returnTicket = objectManager.createObject("object/tangible/travel/travel_ticket/base/shared_base_travel_ticket.iff", false);
 				
 				// Departure attributes
-				returnTicket.addAttribute("@obj_attr_n:travel_departure_planet", "@planet_n:" + destinationPoint.getLocation().getTerrain().getName().toLowerCase(Locale.ENGLISH));
+				returnTicket.addAttribute("@obj_attr_n:travel_departure_planet", "@planet_n:" + destinationPoint.getLocation().getTerrain().getName());
 				returnTicket.addAttribute("@obj_attr_n:travel_departure_point", destinationPoint.getName());
 				
 				// Arrival attributes
-				returnTicket.addAttribute("@obj_attr_n:travel_arrival_planet", "@planet_n:" + purchaserWorldLocation.getTerrain().getName().toLowerCase(Locale.ENGLISH));
+				returnTicket.addAttribute("@obj_attr_n:travel_arrival_planet", "@planet_n:" + purchaserWorldLocation.getTerrain().getName());
 				returnTicket.addAttribute("@obj_attr_n:travel_arrival_point", nearestPoint.getName());
 				
 				// Put the ticket in their inventory
