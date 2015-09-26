@@ -89,12 +89,20 @@ public class BuildoutArea {
 		internal = (Boolean) datatableRow[22];
 		allowRadarTerrain = (Boolean) datatableRow[23];
 		eventRequired = (String) datatableRow[24];
+		reset();
 		calculate(sceneNumber, areaNumber);
+	}
+	
+	private void reset() {
+		currentBuilding = 0;
+		currentCell = 0;
+		buildingObjectId = 0;
+		objectIdBase = 0;
 	}
 	
 	private void calculate(int sceneNumber, int areaNumber) {
 		index = sceneNumber * 100 + areaNumber;
-		buildingObjectId = Integer.toUnsignedLong(-(index + 1)) * 30000;
+		buildingObjectId = -(index + 1) * 30000;
 		objectIdBase = buildingObjectId + 2000;
 	}
 	
@@ -112,6 +120,14 @@ public class BuildoutArea {
 	
 	public void setObjectIdBase(long objectIdBase) {
 		this.objectIdBase = objectIdBase;
+	}
+
+	public void incrementBuildingObjectId() {
+		buildingObjectId++;
+	}
+	
+	public void incrementObjectIdBase() {
+		objectIdBase++;
 	}
 	
 	public String getName() {
