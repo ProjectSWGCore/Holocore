@@ -40,7 +40,7 @@ public class GameManager extends Manager {
 	private final SuiService suiService;
 	private final WeatherService weatherService;
 	private final TerminalService terminalManager;
-	private FactionService factionService;
+	private final FactionService factionService;
 	
 	public GameManager() {
 		commandService = new CommandService();
