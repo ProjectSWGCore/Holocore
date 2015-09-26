@@ -19,15 +19,16 @@ import resources.objects.tangible.TangibleObject;
 
 public final class FactionService extends Service {
 
-	private final ScheduledExecutorService executor;
+	private ScheduledExecutorService executor;
 	
 	public FactionService() {
-		executor = Executors.newSingleThreadScheduledExecutor();
+		
 	}
 	
 	@Override
 	public boolean initialize() {
 		registerForIntent(FactionIntent.TYPE);
+		executor = Executors.newSingleThreadScheduledExecutor();
 		return super.initialize();
 	}
 	
@@ -62,7 +63,7 @@ public final class FactionService extends Service {
 		return super.terminate() && success;
 	}
 	
-	private void systemMessage(TangibleObject target, String message) {
+	private void sendSystemMessage(TangibleObject target, String message) {
 		target.getOwner().sendPacket(new ChatSystemMessage(SystemChatType.SCREEN_AND_CHAT, message));
 	}
 	
@@ -133,7 +134,7 @@ public final class FactionService extends Service {
 		final PvpStatus targetStatus;
 		
 		if(target.hasPvpFlag(PvpFlag.GOING_COVERT) || target.hasPvpFlag(PvpFlag.GOING_OVERT)) {
-			systemMessage(target, "@faction_recruiter:pvp_status_changing");
+			sendSystemMessage(target, "@faction_recruiter:pvp_status_changing");
 		} else {
 			if(currentStatus == PvpStatus.COMBATANT) {
 				pvpFlag = PvpFlag.GOING_OVERT;
@@ -144,7 +145,7 @@ public final class FactionService extends Service {
 			}
 			
 			target.setPvpFlags(pvpFlag);
-			systemMessage(target, getBeginMessage(currentStatus, targetStatus));
+			sendSystemMessage(target, getBeginMessage(currentStatus, targetStatus));
 			executor.schedule(new Runnable() {
 				@Override
 				public void run() {	
@@ -163,16 +164,11 @@ public final class FactionService extends Service {
 		for(SWGObject observer : object.getObservers()) {
 			if(observer instanceof TangibleObject) {
 				UpdatePvpStatusMessage objectPacket, targetPacket;
-				TangibleObject tano;
-				int objectBitmask;
-				int targetBitmask;
-				int pvpBitmask;
-				boolean enemies;
-				tano = (TangibleObject) observer;
-				pvpBitmask = 0;
-				targetBitmask = 0;
-				objectBitmask = object.getPvpFlags();
-				enemies = false;
+				TangibleObject tano = (TangibleObject) observer;
+				int objectBitmask = object.getPvpFlags();
+				int targetBitmask = 0;
+				int pvpBitmask = 0;
+				boolean enemies = false;
 				
 				// They CAN be enemies if they're not from the same faction and neither of them are neutral
 				if(object.getPvpFaction() != tano.getPvpFaction() && tano.getPvpFaction() != PvpFaction.NEUTRAL) {
