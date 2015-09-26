@@ -27,16 +27,10 @@
 ***********************************************************************************/
 package main;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-
 import intents.server.ServerStatusIntent;
 import resources.Galaxy.GalaxyStatus;
 import resources.control.IntentManager;
 import resources.control.ServerStatus;
-import resources.server_info.DataManager;
-import resources.server_info.Log;
-import resources.server_info.RelationalDatabase;
 import services.CoreManager;
 
 public class ProjectSWG {
@@ -46,7 +40,6 @@ public class ProjectSWG {
 	private CoreManager manager;
 	private boolean shutdownRequested;
 	private ServerStatus status;
-	
 	public static final void main(String [] args) {
 		server = new ProjectSWG();
 		Runtime.getRuntime().addShutdownHook(new Thread() {
@@ -134,15 +127,7 @@ public class ProjectSWG {
 		if (!manager.start())
 			throw new CoreException("Failed to start.");
 		System.out.println("ProjectSWG: Started. Time: " + manager.getCoreTime() + "ms");
-		RelationalDatabase db = DataManager.getInstance().getLocalDatabase();
-		PreparedStatement resetPopulation =  db.prepareStatement("UPDATE galaxies SET population = 0 WHERE id = ?");
-		try {
-			resetPopulation.setInt(1, ProjectSWG.getGalaxyId());
-			resetPopulation.executeUpdate();
-		} catch (SQLException e) {
-			Log.e("ProjectSWG", "SQLException occured when trying to reset population value.");
-			e.printStackTrace();
-		}
+		
 
 	}
 	

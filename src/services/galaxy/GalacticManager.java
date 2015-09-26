@@ -27,12 +27,19 @@
 ***********************************************************************************/
 package services.galaxy;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import main.ProjectSWG;
 import intents.GalacticIntent;
 import intents.network.GalacticPacketIntent;
 import intents.network.InboundPacketIntent;
 import resources.Galaxy;
 import resources.control.Intent;
 import resources.control.Manager;
+import resources.server_info.DataManager;
+import resources.server_info.Log;
+import resources.server_info.RelationalDatabase;
 import services.chat.ChatManager;
 import services.objects.ObjectManager;
 import services.player.PlayerManager;
@@ -40,6 +47,7 @@ import services.player.PlayerManager;
 public class GalacticManager extends Manager {
 	
 	private final Object prevPacketIntentMutex = new Object();
+	private final static String resetPopulationSQL = "UPDATE galaxies SET population = 0 WHERE id = ?";
 	
 	private ObjectManager objectManager;
 	private PlayerManager playerManager;
@@ -65,6 +73,7 @@ public class GalacticManager extends Manager {
 	@Override
 	public boolean initialize() {
 		registerForIntent(InboundPacketIntent.TYPE);
+		resetPopulationCount();
 		return super.initialize();
 	}
 	
@@ -111,6 +120,16 @@ public class GalacticManager extends Manager {
 	private void prepareGalacticIntent(GalacticIntent i) {
 		i.setGalacticManager(this);
 		i.setGalaxy(galaxy);
+	}
+	private void resetPopulationCount() {
+		RelationalDatabase db = DataManager.getInstance().getLocalDatabase();
+		try(PreparedStatement resetPopulation =  db.prepareStatement(GalacticManager.resetPopulationSQL)) {
+			resetPopulation.setInt(1, galaxy.getId());
+			resetPopulation.executeUpdate();
+		} catch (SQLException e) {
+			Log.e("ProjectSWG", "SQLException occured when trying to reset population value.");
+			e.printStackTrace();
+		}
 	}
 	
 }
