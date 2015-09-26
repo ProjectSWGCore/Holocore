@@ -103,15 +103,25 @@ public final class TravelService extends Service {
 		for(int i = 0; i < travelFeeTable.getRowCount(); i++) {
 			String planetName = planetNames[i];
 			
-			try(ResultSet travelPointTable = travelPointDatabase.prepareStatement(TRAVELPOINTSFORPLANET + "'" + planetName + "'").executeQuery()) {
-				planetFees = new HashMap<>();
+			
+			planetFees = new HashMap<>();
 				
-				for(int j = 0; j < travelFeeTable.getRowCount(); j++) {
-					planetFees.put((String) planetNames[j], (int) travelFeeTable.getCell(j, travelFeeTable.getColumnFromName(planetName)));
-					System.out.println("Going from " + planetName + " to " + planetNames[j] + " costs " + travelFeeTable.getCell(j, travelFeeTable.getColumnFromName(planetName)));
-				}
-				Terrain terrain = Terrain.getTerrainFromName(planetName);
+			for(int j = 0; j < travelFeeTable.getRowCount(); j++) {
+				int price = (int) travelFeeTable.getCell(j, travelFeeTable.getColumnFromName(planetName));
 				
+				if(price > 0)
+					planetFees.put((String) planetNames[j], price);
+			}
+				
+			Terrain terrain = Terrain.getTerrainFromName(planetName);
+			
+			String query = TRAVELPOINTSFORPLANET + "'" + planetName + "'";
+			
+			for(String availablePlanet : planetFees.keySet())
+				if(!availablePlanet.equals(planetName))
+					query += " OR planet='" + availablePlanet + "'";
+			
+			try(ResultSet travelPointTable = travelPointDatabase.prepareStatement(query).executeQuery()) {
 				while(travelPointTable.next()) {
 					Location loc = new Location(travelPointTable.getDouble("x"), travelPointTable.getDouble("y"), travelPointTable.getDouble("z"), terrain);
 					TravelPoint tp = new TravelPoint(travelPointTable.getString("name"), loc, planetFees, 0);
