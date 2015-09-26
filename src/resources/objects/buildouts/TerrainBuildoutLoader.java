@@ -94,6 +94,7 @@ class TerrainBuildoutLoader {
 			SWGObject object = createObject(buildoutRow);
 			object.setBuildout(true);
 			object.setLoadRange(buildoutRow.getRadius());
+			object.setAreaId(area.getIndex());
 			setCellInformation(object, buildoutRow.getCellIndex());
 			addObject(object, buildoutRow.getContainerId());
 			updatePermissions(object);
