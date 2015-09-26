@@ -52,16 +52,21 @@ public final class FactionService extends Service {
 	
 	@Override
 	public boolean terminate() {
-		executor.shutdown();
-		
-		return super.terminate();
+		executor.shutdownNow();
+		boolean success = false;
+		try {
+			success = executor.awaitTermination(5, TimeUnit.SECONDS);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return super.terminate() && success;
 	}
 	
 	private void systemMessage(TangibleObject target, String message) {
 		target.getOwner().sendPacket(new ChatSystemMessage(SystemChatType.SCREEN_AND_CHAT, message));
 	}
 	
-	private String beginMessage(PvpStatus currentStatus, PvpStatus targetStatus) {
+	private String getBeginMessage(PvpStatus currentStatus, PvpStatus targetStatus) {
 		String message = "@faction_recruiter:";
 		
 		if(currentStatus == PvpStatus.ONLEAVE && targetStatus == PvpStatus.COMBATANT)
@@ -74,7 +79,7 @@ public final class FactionService extends Service {
 		return message;
 	}
 	
-	private String completionMessage(PvpStatus currentStatus, PvpStatus targetStatus) {
+	private String getCompletionMessage(PvpStatus currentStatus, PvpStatus targetStatus) {
 		String message = "@faction_recruiter:";
 		
 		if((currentStatus == PvpStatus.ONLEAVE || currentStatus == PvpStatus.SPECIALFORCES) && targetStatus == PvpStatus.COMBATANT)
@@ -87,7 +92,7 @@ public final class FactionService extends Service {
 		return message;
 	}
 	
-	private long delay(PvpStatus currentStatus, PvpStatus targetStatus) {
+	private long getDelay(PvpStatus currentStatus, PvpStatus targetStatus) {
 		long delay = 0;
 		
 		if(currentStatus == PvpStatus.ONLEAVE && targetStatus == PvpStatus.COMBATANT)
@@ -139,30 +144,30 @@ public final class FactionService extends Service {
 			}
 			
 			target.setPvpFlags(pvpFlag);
-			systemMessage(target, beginMessage(currentStatus, targetStatus));
+			systemMessage(target, getBeginMessage(currentStatus, targetStatus));
 			executor.schedule(new Runnable() {
 				@Override
 				public void run() {	
 					target.setPvpStatus(targetStatus);
 					target.getOwner().sendPacket(new ChatSystemMessage(
 							SystemChatType.SCREEN_AND_CHAT,
-							completionMessage(currentStatus, targetStatus)));
+							getCompletionMessage(currentStatus, targetStatus)));
 					target.clearPvpFlags(pvpFlag);
 				}
-			}, delay(currentStatus, targetStatus), TimeUnit.SECONDS);
+			}, getDelay(currentStatus, targetStatus), TimeUnit.SECONDS);
 		}
 	}
 	
 	private void handleFlagChange(TangibleObject object) {
-		UpdatePvpStatusMessage objectPacket, targetPacket;
-		TangibleObject tano;
-		int objectBitmask;
-		int targetBitmask;
-		int pvpBitmask;
-		boolean enemies;
-		
+
 		for(SWGObject observer : object.getObservers()) {
 			if(observer instanceof TangibleObject) {
+				UpdatePvpStatusMessage objectPacket, targetPacket;
+				TangibleObject tano;
+				int objectBitmask;
+				int targetBitmask;
+				int pvpBitmask;
+				boolean enemies;
 				tano = (TangibleObject) observer;
 				pvpBitmask = 0;
 				targetBitmask = 0;
@@ -190,9 +195,6 @@ public final class FactionService extends Service {
 					tano.sendSelf(objectPacket);
 				
 				object.sendSelf(objectPacket, targetPacket);
-				
-				System.out.println("Target bitmask: " + targetBitmask);
-				System.out.println("Object bitmask: " + objectBitmask);
 			}
 		}
 	}
