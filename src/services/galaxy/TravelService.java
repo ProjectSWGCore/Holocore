@@ -209,7 +209,7 @@ public final class TravelService extends Service {
 				returnTicket.addAttribute("@obj_attr_n:travel_arrival_point", nearestPoint.getName());
 				
 				// Put the ticket in their inventory
-				purchaser.getSlottedObject("inventory").addObject(ticket);
+				purchaser.getSlottedObject("inventory").addObject(returnTicket);
 			}
 		}
 		
