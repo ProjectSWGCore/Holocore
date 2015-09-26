@@ -256,7 +256,7 @@ public final class TravelService extends Service {
 			for(SWGObject usableTicket : usableTickets) {
 				TravelPoint destinationPoint = destinationPoint(usableTicket);
 				
-				destinationSelection.addListItem(destinationPoint.toString(), destinationPoint);
+				destinationSelection.addListItem(destinationPoint.suiFormat(), destinationPoint);
 			}
 			
 			destinationSelection.addOkButtonCallback("handleSelectedItem", new DestinationSelectionSuiCallback(destinationSelection, usableTickets));
