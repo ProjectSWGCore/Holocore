@@ -40,6 +40,7 @@ public class ProjectSWG {
 	private CoreManager manager;
 	private boolean shutdownRequested;
 	private ServerStatus status;
+	
 	public static final void main(String [] args) {
 		server = new ProjectSWG();
 		Runtime.getRuntime().addShutdownHook(new Thread() {
@@ -127,8 +128,6 @@ public class ProjectSWG {
 		if (!manager.start())
 			throw new CoreException("Failed to start.");
 		System.out.println("ProjectSWG: Started. Time: " + manager.getCoreTime() + "ms");
-		
-
 	}
 	
 	private void loop() {
