@@ -1,5 +1,7 @@
 package resources;
 
+import java.util.EnumSet;
+
 public enum PvpFlag {
 	
 	ATTACKABLE(1<<0),
@@ -20,6 +22,14 @@ public enum PvpFlag {
 	
 	public int getBitmask() {
 		return bitmask;
+	}
+	public static EnumSet<PvpFlag> getFlags(int bits) {
+		EnumSet <PvpFlag> states = EnumSet.noneOf(PvpFlag.class);
+		for (PvpFlag state : values()) {
+			if ((state.getBitmask() & bits) != 0)
+				states.add(state);
+		}
+		return states;
 	}
 	
 }
