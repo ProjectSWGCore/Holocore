@@ -156,19 +156,19 @@ public final class TravelService extends Service {
 		Location purchaserWorldLocation = purchaser.getWorldLocation();
 		TravelPoint nearestPoint = nearestTravelPoint(purchaserWorldLocation);
 		TravelPoint destinationPoint = destinationPoint(purchaserWorldLocation.getTerrain(), i.getDestinationName());
-		SWGObject ticket;
-		int ticketPrice;
-		SuiMessageBox messageBox;
 		String suiMessage = "@travel:";
 		Player purchaserOwner = purchaser.getOwner();
-		int purchaserBankBalance;
+		boolean roundTrip = i.isRoundTrip();
 		
 		if(nearestPoint == null || destinationPoint == null)
 			return;
 		
-		purchaserBankBalance = purchaser.getBankBalance();
-		ticketPrice = nearestPoint.totalTicketPrice(i.getDestinationPlanet());
+		int purchaserBankBalance = purchaser.getBankBalance();
+		int ticketPrice = nearestPoint.totalTicketPrice(i.getDestinationPlanet());
 		
+		if(roundTrip)
+			ticketPrice += destinationPoint.totalTicketPrice(nearestPoint.getLocation().getTerrain().getName());
+			
 		if(ticketPrice > purchaserBankBalance) {
 			// Make the message in the SUI window reflect the fail
 			suiMessage += "short_funds";
@@ -183,7 +183,7 @@ public final class TravelService extends Service {
 			purchaser.setBankBalance(purchaserBankBalance - ticketPrice);
 			
 			// Create the ticket object
-			ticket = objectManager.createObject("object/tangible/travel/travel_ticket/base/shared_base_travel_ticket.iff", false);
+			SWGObject ticket = objectManager.createObject("object/tangible/travel/travel_ticket/base/shared_base_travel_ticket.iff", false);
 			
 			// Departure attributes
 			ticket.addAttribute("@obj_attr_n:travel_departure_planet", "@planet_n:" + purchaserWorldLocation.getTerrain().getName().toLowerCase(Locale.ENGLISH));
@@ -195,10 +195,26 @@ public final class TravelService extends Service {
 			
 			// Put the ticket in their inventory
 			purchaser.getSlottedObject("inventory").addObject(ticket);
+			
+			if(roundTrip) {
+				// Create the return ticket object
+				SWGObject returnTicket = objectManager.createObject("object/tangible/travel/travel_ticket/base/shared_base_travel_ticket.iff", false);
+				
+				// Departure attributes
+				returnTicket.addAttribute("@obj_attr_n:travel_departure_planet", "@planet_n:" + destinationPoint.getLocation().getTerrain().getName().toLowerCase(Locale.ENGLISH));
+				returnTicket.addAttribute("@obj_attr_n:travel_departure_point", destinationPoint.getName());
+				
+				// Arrival attributes
+				returnTicket.addAttribute("@obj_attr_n:travel_arrival_planet", "@planet_n:" + purchaserWorldLocation.getTerrain().getName().toLowerCase(Locale.ENGLISH));
+				returnTicket.addAttribute("@obj_attr_n:travel_arrival_point", nearestPoint.getName());
+				
+				// Put the ticket in their inventory
+				purchaser.getSlottedObject("inventory").addObject(ticket);
+			}
 		}
 		
 		// Create the SUI window
-		messageBox = new SuiMessageBox(SuiButtons.OK, "STAR WARS GALAXIES", suiMessage);
+		SuiMessageBox messageBox = new SuiMessageBox(SuiButtons.OK, "STAR WARS GALAXIES", suiMessage);
 		
 		// Display the window to the purchaser
 		messageBox.display(purchaserOwner);
