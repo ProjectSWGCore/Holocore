@@ -35,6 +35,7 @@ import services.objects.ObjectManager;
 public final class TravelService extends Service {
 	
 	private static final String DBTABLENAME = "travel";
+	private static final String TRAVELPOINTSFORPLANET = "SELECT name, x, y, z FROM " + DBTABLENAME + " WHERE planet=";
 	private static final byte PLANETNAMESCOLUMNINDEX = 0;
 	
 	private final ObjectManager objectManager;
@@ -95,7 +96,7 @@ public final class TravelService extends Service {
 		for(int i = 0; i < travelFeeTable.getRowCount(); i++) {
 			String planetName = planetNames[i];
 			
-			try(ResultSet travelPointTable = travelPointDatabase.prepareStatement(travelPointsForPlanetSql(planetName)).executeQuery()) {
+			try(ResultSet travelPointTable = travelPointDatabase.prepareStatement("'" + planetName + "'").executeQuery()) {
 				planetFees = new HashMap<>();
 				
 				for(int j = 0; j < travelFeeTable.getRowCount(); j++) {
@@ -124,10 +125,6 @@ public final class TravelService extends Service {
 		}
 		
 		return success;
-	}
-	
-	private String travelPointsForPlanetSql(String planetName) {
-		return "SELECT name, x, y, z FROM " + DBTABLENAME + " WHERE planet='" + planetName +"'";
 	}
 	
 	private void handlePointSelection(TravelPointSelectionIntent tpsi) {
@@ -172,6 +169,7 @@ public final class TravelService extends Service {
 			suiMessage += "ticket_purchase_complete";
 			
 			// Also send the purchaser a system message
+			// TODO is there a STF containing this?
 			new ChatBroadcastIntent(purchaserOwner, String.format("You succesfully make a payment of %d credits to the Galactic Travel Commission.", ticketPrice)).broadcast();
 			
 			purchaser.setBankBalance(purchaserBankBalance - ticketPrice);
