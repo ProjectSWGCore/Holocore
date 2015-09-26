@@ -1,6 +1,5 @@
 package utilities;
 
-import intents.sui.SuiWindowIntent;
 import network.packets.swg.zone.chat.ChatSystemMessage;
 import resources.Terrain;
 import resources.encodables.OutOfBandPackage;
@@ -13,7 +12,6 @@ import resources.player.Player;
 import intents.chat.ChatBroadcastIntent;
 import intents.chat.ChatBroadcastIntent.BroadcastType;
 import intents.chat.PersistentMessageIntent;
-import resources.sui.SuiWindow;
 
 /**
  * @author Mads
