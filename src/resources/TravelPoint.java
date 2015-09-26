@@ -1,5 +1,6 @@
 package resources;
 
+import java.util.Locale;
 import java.util.Map;
 
 public final class TravelPoint {
@@ -40,5 +41,10 @@ public final class TravelPoint {
 	
 	public boolean isReachable() {
 		return reachable;
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("@planet_n:%s -- %s", location.getTerrain().getName().toLowerCase(Locale.ENGLISH), name);
 	}
 }
