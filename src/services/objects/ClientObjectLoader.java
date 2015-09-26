@@ -9,7 +9,6 @@ import resources.Location;
 import resources.Terrain;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.CrcStringTableData;
-import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.cell.CellObject;
 import resources.server_info.Log;
@@ -32,13 +31,11 @@ public class ClientObjectLoader {
 	}
 	
 	public Map<Long, SWGObject> loadClientObjects(Terrain terrain) {
-		long startLoad = System.nanoTime();
 		System.out.println("ClientObjectLoader: Loading client objects...");
 		Log.i("ClientObjectLoader", "Loading client objects...");
 		Map<Long, SWGObject> objects = new Hashtable<>(4*1024);
 		if (!loadTables())
 			return objects;
-		long loaded = 0;
 		try (ResultSet set = clientSdb.prepareStatement(GET_CLIENT_OBJECTS_SQL).executeQuery()) {
 			set.setFetchSize(1500);
 			ColumnIndexes ind = new ColumnIndexes(set);
@@ -47,14 +44,10 @@ public class ClientObjectLoader {
 			while (set.next()) {
 				obj = createObject(set, objects, l, ind);
 				objects.put(obj.getObjectId(), obj);
-				loaded++;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		double loadTime = (System.nanoTime() - startLoad) / 1E6;
-		System.out.printf("ClientObjectLoader: Finished loading %d client objects. Time: %fms%n", loaded, loadTime);
-		Log.i("ClientObjectLoader", "Finished loading client objects. Time: %fms", loadTime);
 		return objects;
 	}
 	
@@ -64,6 +57,7 @@ public class ClientObjectLoader {
 		l.setPosition(set.getDouble(ind.xInd), set.getDouble(ind.yInd), set.getDouble(ind.zInd));
 		l.setOrientation(set.getDouble(ind.oxInd), set.getDouble(ind.oyInd), set.getDouble(ind.ozInd), set.getDouble(ind.owInd));
 		obj.setLocation(l);
+		obj.setBuildout(true);
 		obj.setLoadRange(set.getInt(ind.radiusInd));
 		int cell = set.getInt(ind.cellInd);
 		if (cell != 0 && obj instanceof CellObject)

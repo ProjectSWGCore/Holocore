@@ -140,6 +140,7 @@ public class ObjectManager extends Manager {
 	}
 	
 	private void loadClientObjects() {
+		long startLoad = System.nanoTime();
 		Config c = getConfig(ConfigFile.PRIMARY);
 		if (c.getBoolean("LOAD-OBJECTS", true)) {
 			String terrainStr = c.getString("LOAD-OBJECTS-FOR", "");
@@ -155,6 +156,9 @@ public class ObjectManager extends Manager {
 			objectMap.putAll(objects);
 			for (SWGObject obj : objects.values())
 				loadClientObject(obj);
+			double loadTime = (System.nanoTime() - startLoad) / 1E6;
+			System.out.printf("ClientObjectLoader: Finished loading %d client objects. Time: %fms%n", objects.size(), loadTime);
+			Log.i("ClientObjectLoader", "Finished loading client objects. Time: %fms", loadTime);
 		} else {
 			Log.w("ObjectManager", "Did not load client objects. Reason: Disabled.");
 			System.out.println("ObjectManager: Did not load client objects. Reason: Disabled!");
