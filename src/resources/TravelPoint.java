@@ -1,21 +1,23 @@
 package resources;
 
-import java.util.Map;
+import java.util.List;
+
+import services.galaxy.TravelService.TravelInfo;
 
 public final class TravelPoint {
 	
-	private String name;
-	private Location location;
-	private final Map<String, Integer> planetFees;	// The price of travelling is mapped to each terrain.
-	private final int additionalCost; // Additional cost is calculated based on distance from source to destination.
+	private final String name;
+	private final Location location;
+	private final List<TravelInfo> allowedRoutesForPoint;
+	private final int additionalCost; // Additional cost. Perhaps based on distance from source to destination?
 	private final boolean reachable;
 	
-	public TravelPoint(String name, Location location, Map<String, Integer> planetFees, int additionalCost) {
+	public TravelPoint(String name, Location location, List<TravelInfo> allowedRoutesForPoint, int additionalCost) {
 		this.name = name;
 		this.location = location;
-		this.planetFees = planetFees;
+		this.allowedRoutesForPoint = allowedRoutesForPoint;
 		this.additionalCost = additionalCost;
-		reachable = true;	// Not sure if this is ever false or which effect that has.
+		reachable = true;	// Not sure which effect this has on the client.
 	}
 	
 	public String getName() {
@@ -26,16 +28,25 @@ public final class TravelPoint {
 		return location;
 	}
 	
-	public int ticketPrice(String planetName) {
-		return planetFees.get(planetName);
+	public int ticketPrice(Terrain arrivalPlanet) {
+		int foundPrice = 0;
+		
+		for(TravelInfo travelInfo : allowedRoutesForPoint) {
+			if(travelInfo.getTerrain() == arrivalPlanet) {
+				foundPrice = travelInfo.getPrice();
+				break;
+			}
+		}
+		
+		return foundPrice;
 	}
 	
 	public int getAdditionalCost() {
 		return additionalCost;
 	}
 	
-	public int totalTicketPrice(String planetName) {
-		return ticketPrice(planetName) + getAdditionalCost();
+	public int totalTicketPrice(Terrain arrivalPlanet) {
+		return ticketPrice(arrivalPlanet) + getAdditionalCost();
 	}
 	
 	public boolean isReachable() {

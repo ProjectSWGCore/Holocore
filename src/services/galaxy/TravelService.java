@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import network.packets.Packet;
 import network.packets.swg.zone.EnterTicketPurchaseModeMessage;
@@ -27,6 +28,7 @@ import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
+import resources.server_info.Log;
 import resources.server_info.RelationalServerData;
 import resources.sui.ISuiCallback;
 import resources.sui.SuiButtons;
@@ -39,23 +41,41 @@ import services.objects.ObjectManager;
 public final class TravelService extends Service {
 	
 	private static final String DBTABLENAME = "travel";
-	private static final String TRAVELPOINTSFORPLANET = "SELECT name, x, y, z FROM " + DBTABLENAME + " WHERE planet=";
+	private static final String TRAVELPOINTSFORPLANET = "SELECT * FROM " + DBTABLENAME + " WHERE planet=";
 	private static final byte PLANETNAMESCOLUMNINDEX = 0;
 	private static final short TICKETUSERADIUS = 50;	// The distance a player needs to be within in order to use their ticket
 	
 	private final ObjectManager objectManager;
 	private final RelationalServerData travelPointDatabase;
-	private final Map<Terrain, Collection<TravelPoint>> travelPoints;
+	private Terrain[] travelPlanets;
+	private final Map<Terrain, List<TravelInfo>> allowedRoutes; // Describes which planets are linked.
+	private final DatatableData travelFeeTable;
+	
+	/*
+	 * This variable stores all the loaded TravelPoints for a given planet.
+	 * All TravelPoints on tatooine are mapped to {@code Terrain.TATOOINE}
+	 */
+	private final Map<Terrain, Collection<TravelPoint>> pointsOnPlanet;
+	
+	/*
+	 * This variable stores all the possible Travel Points a player can
+	 * travel to from a given terrain.
+	 */
+	private final Map<Terrain, Collection<TravelPoint>> availablePointsForPlanet;
 	
 	public TravelService(ObjectManager objectManager) {
 		this.objectManager = objectManager;
 		
 		travelPointDatabase = new RelationalServerData("serverdata/static/travel.db");
-		travelPoints = new HashMap<>();
 		
 		if(!travelPointDatabase.linkTableWithSdb(DBTABLENAME, "serverdata/static/travel.sdb")) {
 			throw new main.ProjectSWG.CoreException("Unable to load sdb files for TravelService");
 		}
+		
+		allowedRoutes = new HashMap<>();
+		travelFeeTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/travel/travel.iff");
+		pointsOnPlanet = new HashMap<>();
+		availablePointsForPlanet = new HashMap<>();
 	}
 	
 	@Override
@@ -65,7 +85,7 @@ public final class TravelService extends Service {
 		registerForIntent(TicketPurchaseIntent.TYPE);
 		registerForIntent(TicketUseIntent.TYPE);
 		
-		return super.initialize() && loadTravelPoints();
+		return super.initialize();
 	}
 	
 	@Override
@@ -83,6 +103,45 @@ public final class TravelService extends Service {
 		}
 	}
 	
+	@Override
+	public boolean start() {
+		loadTravelPlanetNames();
+		loadAllowedRoutesAndPrices();
+		loadTravelPoints();
+		loadAvailablePointsForPlanets();
+		
+		return super.start();
+	}
+	
+	private void loadTravelPlanetNames() {
+		travelPlanets = new Terrain[travelFeeTable.getRowCount()];
+		
+		travelFeeTable.handleRows(currentRow -> travelPlanets[currentRow] = Terrain.getTerrainFromName((String) travelFeeTable.getCell(currentRow, PLANETNAMESCOLUMNINDEX)));
+	}
+	
+	private void loadAllowedRoutesAndPrices() {
+		for(Terrain travelPlanet : travelPlanets) {
+			int columnIndex = travelFeeTable.getColumnFromName(travelPlanet.getName());
+			
+			for(int row = 0; row < travelPlanets.length; row++) {
+				int price = (int) travelFeeTable.getCell(row, columnIndex);
+				
+				Terrain candidate = Terrain.getTerrainFromName((String) travelFeeTable.getCell(row, PLANETNAMESCOLUMNINDEX));
+				
+				if(price > 0) {	// If price is above 0, the planets are linked
+					List<TravelInfo> travelInfoForPlanet = allowedRoutes.get(travelPlanet);
+					
+					if(travelInfoForPlanet == null) {	// If the list doesn't exist yet
+						travelInfoForPlanet = new ArrayList<>(); // Create it
+						allowedRoutes.put(travelPlanet, travelInfoForPlanet);
+					}
+					
+					travelInfoForPlanet.add(new TravelInfo(candidate, price));	// Add the candidate to the list, since price was > 0
+				}
+			}
+		}
+	}
+	
 	/**
 	 * Travel points are loaded from /serverdata/static/travel.sdb
 	 * A travel point represents a travel destination.
@@ -92,56 +151,50 @@ public final class TravelService extends Service {
 	private boolean loadTravelPoints() {
 		boolean success = true;
 		
-		DatatableData travelFeeTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/travel/travel.iff");
-		Map<String, Integer> planetFees;
-		
-		// Load the planet names
-		String[] planetNames = new String[travelFeeTable.getRowCount()];
-		
-		travelFeeTable.handleRows(currentRow -> planetNames[currentRow] = (String) travelFeeTable.getCell(currentRow, PLANETNAMESCOLUMNINDEX));
-		
-		for(int i = 0; i < travelFeeTable.getRowCount(); i++) {
-			String planetName = planetNames[i];
+		for(Terrain travelPlanet : allowedRoutes.keySet()) {
+			String planetName = travelPlanet.getName();
 			
-			
-			planetFees = new HashMap<>();
-				
-			for(int j = 0; j < travelFeeTable.getRowCount(); j++) {
-				int price = (int) travelFeeTable.getCell(j, travelFeeTable.getColumnFromName(planetName));
-				
-				if(price > 0)
-					planetFees.put((String) planetNames[j], price);
-			}
-				
-			Terrain terrain = Terrain.getTerrainFromName(planetName);
-			
-			String query = TRAVELPOINTSFORPLANET + "'" + planetName + "'";
-			
-			for(String availablePlanet : planetFees.keySet())
-				if(!availablePlanet.equals(planetName))
-					query += " OR planet='" + availablePlanet + "'";
-			
-			try(ResultSet travelPointTable = travelPointDatabase.prepareStatement(query).executeQuery()) {
-				while(travelPointTable.next()) {
-					Location loc = new Location(travelPointTable.getDouble("x"), travelPointTable.getDouble("y"), travelPointTable.getDouble("z"), terrain);
-					TravelPoint tp = new TravelPoint(travelPointTable.getString("name"), loc, planetFees, 0);
-					Collection<TravelPoint> travelPointsForPlanet = travelPoints.get(terrain);
+			try(ResultSet set = travelPointDatabase.prepareStatement(TRAVELPOINTSFORPLANET + "'" + planetName + "'").executeQuery()) {
+				while(set.next()) {
+					String pointName = set.getString("name");
+					double x = set.getDouble("x");
+					double y = set.getDouble("y");
+					double z = set.getDouble("z");
 					
-					if(travelPointsForPlanet == null) {
-						travelPointsForPlanet = new ArrayList<>();
-						
-						travelPoints.put(terrain, travelPointsForPlanet);
+					TravelPoint point = new TravelPoint(pointName, new Location(x, y, z, travelPlanet), allowedRoutes.get(travelPlanet), 0);
+					
+					Collection<TravelPoint> pointsOnCurrentPlanet = pointsOnPlanet.get(travelPlanet);
+					
+					if(pointsOnCurrentPlanet == null) {
+						pointsOnCurrentPlanet = new ArrayList<>();
+						pointsOnPlanet.put(travelPlanet, pointsOnCurrentPlanet);
 					}
 					
-					travelPointsForPlanet.add(tp);
+					pointsOnCurrentPlanet.add(point);
 				}
-			} catch(SQLException e) {
+			} catch (SQLException e) {
+				Log.e("TravelService", String.format("Failed to load a travel point for %s. %s", planetName, e.getLocalizedMessage()));
 				e.printStackTrace();
 				success = false;
 			}
 		}
 		
 		return success;
+	}
+	
+	private void loadAvailablePointsForPlanets() {
+		for(Entry<Terrain, List<TravelInfo>> entry : allowedRoutes.entrySet()) {
+			Terrain key = entry.getKey();
+			List<TravelInfo> value = entry.getValue();
+			Collection<TravelPoint> points = new ArrayList<>();
+			
+			availablePointsForPlanet.put(key, points);
+			
+			for(TravelInfo travelInfo : value)
+				points.addAll(pointsOnPlanet.get(travelInfo.getTerrain()));
+		}
+		
+		
 	}
 	
 	private void handlePointSelection(TravelPointSelectionIntent tpsi) {
@@ -155,8 +208,9 @@ public final class TravelService extends Service {
 		
 		if(p instanceof PlanetTravelPointListRequest ) {
 			PlanetTravelPointListRequest req = (PlanetTravelPointListRequest) p;
+			String planetName = req.getPlanetName();
 			
-			i.getPlayerManager().getPlayerFromNetworkId(i.getNetworkId()).sendPacket(new PlanetTravelPointListResponse(req.getPlanetName(), travelPoints.get(Terrain.getTerrainFromName(req.getPlanetName()))));
+			i.getPlayerManager().getPlayerFromNetworkId(i.getNetworkId()).sendPacket(new PlanetTravelPointListResponse(planetName, pointsOnPlanet.get(Terrain.getTerrainFromName(planetName))));
 		}
 	}
 	
@@ -164,7 +218,7 @@ public final class TravelService extends Service {
 		CreatureObject purchaser = i.getPurchaser();
 		Location purchaserWorldLocation = purchaser.getWorldLocation();
 		TravelPoint nearestPoint = nearestTravelPoint(purchaserWorldLocation);
-		TravelPoint destinationPoint = destinationPoint(purchaserWorldLocation.getTerrain(), i.getDestinationName());
+		TravelPoint destinationPoint = destinationPoint(Terrain.getTerrainFromName(i.getDestinationPlanet()), i.getDestinationName());
 		String suiMessage = "@travel:";
 		Player purchaserOwner = purchaser.getOwner();
 		boolean roundTrip = i.isRoundTrip();
@@ -173,10 +227,10 @@ public final class TravelService extends Service {
 			return;
 		
 		int purchaserBankBalance = purchaser.getBankBalance();
-		int ticketPrice = nearestPoint.totalTicketPrice(i.getDestinationPlanet());
+		int ticketPrice = nearestPoint.totalTicketPrice(destinationPoint.getLocation().getTerrain());
 		
 		if(roundTrip)
-			ticketPrice += destinationPoint.totalTicketPrice(nearestPoint.getLocation().getTerrain().getName());
+			ticketPrice += destinationPoint.totalTicketPrice(nearestPoint.getLocation().getTerrain());
 			
 		if(ticketPrice > purchaserBankBalance) {
 			// Make the message in the SUI window reflect the fail
@@ -191,34 +245,12 @@ public final class TravelService extends Service {
 			
 			purchaser.setBankBalance(purchaserBankBalance - ticketPrice);
 			
-			// Create the ticket object
-			SWGObject ticket = objectManager.createObject("object/tangible/travel/travel_ticket/base/shared_base_travel_ticket.iff", false);
-			
-			// Departure attributes
-			ticket.addAttribute("@obj_attr_n:travel_departure_planet", "@planet_n:" + purchaserWorldLocation.getTerrain().getName());
-			ticket.addAttribute("@obj_attr_n:travel_departure_point", nearestPoint.getName());
-			
-			// Arrival attributes
-			ticket.addAttribute("@obj_attr_n:travel_arrival_planet", "@planet_n:" + destinationPoint.getLocation().getTerrain().getName());
-			ticket.addAttribute("@obj_attr_n:travel_arrival_point", destinationPoint.getName());
-			
 			// Put the ticket in their inventory
-			purchaser.getSlottedObject("inventory").addObject(ticket);
+			purchaser.getSlottedObject("inventory").addObject(createTicket(nearestPoint, destinationPoint));
 			
 			if(roundTrip) {
-				// Create the return ticket object
-				SWGObject returnTicket = objectManager.createObject("object/tangible/travel/travel_ticket/base/shared_base_travel_ticket.iff", false);
-				
-				// Departure attributes
-				returnTicket.addAttribute("@obj_attr_n:travel_departure_planet", "@planet_n:" + destinationPoint.getLocation().getTerrain().getName());
-				returnTicket.addAttribute("@obj_attr_n:travel_departure_point", destinationPoint.getName());
-				
-				// Arrival attributes
-				returnTicket.addAttribute("@obj_attr_n:travel_arrival_planet", "@planet_n:" + purchaserWorldLocation.getTerrain().getName());
-				returnTicket.addAttribute("@obj_attr_n:travel_arrival_point", nearestPoint.getName());
-				
 				// Put the ticket in their inventory
-				purchaser.getSlottedObject("inventory").addObject(returnTicket);
+				purchaser.getSlottedObject("inventory").addObject(createTicket(destinationPoint, nearestPoint));
 			}
 		}
 		
@@ -227,6 +259,21 @@ public final class TravelService extends Service {
 		
 		// Display the window to the purchaser
 		messageBox.display(purchaserOwner);
+	}
+	
+	private SWGObject createTicket(TravelPoint departure, TravelPoint destination) {
+		// Create the ticket object
+		SWGObject ticket = objectManager.createObject("object/tangible/travel/travel_ticket/base/shared_base_travel_ticket.iff", false);
+		
+		// Departure attributes
+		ticket.addAttribute("@obj_attr_n:travel_departure_planet", "@planet_n:" + departure.getLocation().getTerrain().getName());
+		ticket.addAttribute("@obj_attr_n:travel_departure_point", departure.getName());
+		
+		// Arrival attributes
+		ticket.addAttribute("@obj_attr_n:travel_arrival_planet", "@planet_n:" + destination.getLocation().getTerrain().getName());
+		ticket.addAttribute("@obj_attr_n:travel_arrival_point", destination.getName());
+		
+		return ticket;
 	}
 	
 	private void handleTicketUse(TicketUseIntent i) {
@@ -321,7 +368,7 @@ public final class TravelService extends Service {
 	
 	private TravelPoint destinationPoint(Terrain terrain, String pointName) {
 		TravelPoint currentResult = null;
-		Iterator<TravelPoint> pointIterator = travelPoints.get(terrain).iterator();
+		Iterator<TravelPoint> pointIterator = pointsOnPlanet.get(terrain).iterator();
 		
 		while(pointIterator.hasNext()) {
 			TravelPoint candidate = pointIterator.next();
@@ -339,7 +386,7 @@ public final class TravelService extends Service {
 		TravelPoint currentResult = null;
 		double currentResultDistance = Double.MAX_VALUE;
 		double candidateDistance;
-		Collection<TravelPoint> pointsForPlanet = travelPoints.get(objectLocation.getTerrain());
+		Collection<TravelPoint> pointsForPlanet = pointsOnPlanet.get(objectLocation.getTerrain());
 		
 		for(TravelPoint candidate : pointsForPlanet) {
 			
@@ -354,6 +401,7 @@ public final class TravelService extends Service {
 				}
 			}
 		}
+		
 		return currentResult;
 	}
 
@@ -375,6 +423,41 @@ public final class TravelService extends Service {
 			TravelPoint selectedDestination = (TravelPoint) selectedItem.getObject();
 			
 			teleportAndDestroyTicket(selectedDestination, usableTickets.get(selection), player.getCreatureObject());
+		}
+	}
+	
+	public class TravelInfo {
+		private final Terrain terrain;
+		private final int price;
+		
+		private TravelInfo(Terrain terrain, int price) {
+			this.terrain = terrain;
+			this.price = price;
+		}
+		
+		public Terrain getTerrain() {
+			return terrain;
+		}
+		
+		public int getPrice() {
+			return price;
+		}
+		
+		@Override
+		public boolean equals(Object o) {
+			boolean sameClass = o instanceof TravelInfo;
+			boolean sameTerrain = false;
+			
+			if(sameClass) {
+				sameTerrain = ((TravelInfo) o).terrain == terrain;
+			}
+			
+			return sameClass && sameTerrain;
+		}
+		
+		@Override
+		public int hashCode() {
+			return terrain.hashCode();
 		}
 	}
 }
