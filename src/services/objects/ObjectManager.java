@@ -56,6 +56,7 @@ import network.packets.swg.zone.object_controller.ObjectController;
 import resources.Location;
 import resources.Terrain;
 import resources.config.ConfigFile;
+import resources.containers.ContainerPermissions;
 import resources.control.Intent;
 import resources.control.Manager;
 import resources.objects.SWGObject;
@@ -224,10 +225,23 @@ public class ObjectManager extends Manager {
 		if (!(obj instanceof CreatureObject && ((CreatureObject) obj).hasSlot("ghost")))
 			objectAwareness.add(obj);
 		if (obj instanceof CreatureObject && ((CreatureObject) obj).getPlayerObject() != null) {
-			if (!obj.hasSlot("bank"))
-				obj.addObject(createObject("object/tangible/bank/shared_character_bank.iff", false));
-			if (!obj.hasSlot("mission_bag"))
-				obj.addObject(createObject("object/tangible/mission_bag/shared_mission_bag.iff", false));
+			if (!obj.hasSlot("bank")) {
+				SWGObject missing = createObject("object/tangible/bank/shared_character_bank.iff", false);
+				
+				obj.addObject(missing);
+			}
+			
+			if (!obj.hasSlot("mission_bag")) {
+				SWGObject missing = createObject("object/tangible/mission_bag/shared_mission_bag.iff", false);
+				
+				obj.addObject(missing);
+			}
+				
+			if (!obj.hasSlot("appearance_inventory")) {
+				SWGObject missing = createObject("object/tangible/inventory/shared_appearance_inventory.iff", false);
+				
+				obj.addObject(missing);
+			}
 		}
 		objectMap.put(obj.getObjectId(), obj);
 		updateBuildoutParent(obj);
