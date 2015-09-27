@@ -228,18 +228,21 @@ public class ObjectManager extends Manager {
 			if (!obj.hasSlot("bank")) {
 				SWGObject missing = createObject("object/tangible/bank/shared_character_bank.iff", false);
 				
+				missing.setContainerPermissions(ContainerPermissions.INVENTORY);
 				obj.addObject(missing);
 			}
 			
 			if (!obj.hasSlot("mission_bag")) {
 				SWGObject missing = createObject("object/tangible/mission_bag/shared_mission_bag.iff", false);
 				
+				missing.setContainerPermissions(ContainerPermissions.INVENTORY);
 				obj.addObject(missing);
 			}
 				
 			if (!obj.hasSlot("appearance_inventory")) {
 				SWGObject missing = createObject("object/tangible/inventory/shared_appearance_inventory.iff", false);
 				
+				missing.setContainerPermissions(ContainerPermissions.INVENTORY);
 				obj.addObject(missing);
 			}
 		}
