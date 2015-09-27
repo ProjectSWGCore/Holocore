@@ -751,7 +751,7 @@ public class CreatureObject extends TangibleObject {
 		target.sendPacket(new UpdatePostureMessage(posture.getId(), getObjectId()));
 
 		if (getOwner() != null && target != getOwner()) {
-			target.sendPacket(new UpdatePvpStatusMessage(PvpFlag.PLAYER.getBitmask(), 0, getObjectId()));
+			target.sendPacket(new UpdatePvpStatusMessage(PvpFlag.PLAYER, 0, getObjectId()));
 		}
 	}
 	
