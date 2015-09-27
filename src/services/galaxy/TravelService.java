@@ -230,7 +230,7 @@ public final class TravelService extends Service {
 		int ticketPrice = nearestPoint.totalTicketPrice(destinationPoint.getLocation().getTerrain());
 		
 		if(roundTrip)
-			ticketPrice += destinationPoint.totalTicketPrice(nearestPoint.getLocation().getTerrain());
+			ticketPrice *= 2;
 			
 		if(ticketPrice > purchaserBankBalance) {
 			// Make the message in the SUI window reflect the fail
@@ -441,23 +441,6 @@ public final class TravelService extends Service {
 		
 		public int getPrice() {
 			return price;
-		}
-		
-		@Override
-		public boolean equals(Object o) {
-			boolean sameClass = o instanceof TravelInfo;
-			boolean sameTerrain = false;
-			
-			if(sameClass) {
-				sameTerrain = ((TravelInfo) o).terrain == terrain;
-			}
-			
-			return sameClass && sameTerrain;
-		}
-		
-		@Override
-		public int hashCode() {
-			return terrain.hashCode();
 		}
 	}
 }
