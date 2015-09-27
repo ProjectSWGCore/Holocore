@@ -1,14 +1,882 @@
-building_id	terrain_name	object_id	building_name	total_cells	x	y	z
-TEXT PRIMARY KEY	TEXT NOT NULL	REAL	TEXT NOT NULL	REAL	REAL	REAL	REAL
-cor_world	CORELLIA	0	World	0	0	0	0
-dan_world	DANTOOINE	0	World	0	0	0	0
-dat_world	DATHOMIR	0	World	0	0	0	0
-end_world	ENDOR	0	World	0	0	0	0
-kas_world	KASHYYYK	0	World	0	0	0	0
-lok_world	LOK	0	World	0	0	0	0
-nab_world	NABOO	0	World	0	0	0	0
-mus_world	MUSTAFAR	0	World	0	0	0	0
-ror_world	RORI	0	World	0	0	0	0
-tal_world	TALUS	0	World	0	0	0	0
-tat_world	TATOOINE	0	World	0	0	0	0
-yav_world	YAVIN4	0	World	0	0	0	0
+building_id	terrain_name	object_id	iff	building_name	total_cells	x	y	z
+TEXT PRIMARY KEY	TEXT NOT NULL	INTEGER NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER	REAL	REAL	REAL
+cor_afarathu_cave	CORELLIA	6035619	corellia_afarathu_cave.iff	Corellia - Afarathu Cave	11	-2523	28	2927
+cor_bela_asso_hall	CORELLIA	2365921	association_hall_civilian_corellia.iff	Corellia - Bela Vistal / Association Hall	17	6707	315	-5619
+cor_bela_cantina	CORELLIA	2625352	cantina_corellia.iff	Corellia - Bela Vistal / Cantina	15	6719	315	-5757
+cor_bela_cloning	CORELLIA	2365901	cloning_corellia.iff	Corellia - Bela Vistal / Cloning	6	6884	315	-5720
+cor_bela_combat_gh	CORELLIA	2365761	guild_combat_corellia_style_01.iff	Corellia - Bela Vistal / Combat GH	9	6872	315	-5784
+cor_bela_comm_gh	CORELLIA	2365939	guild_commerce_corellia_style_01.iff	Corellia - Bela Vistal / Commerce GH	9	6707	315	-5524
+cor_bela_hospital	CORELLIA	3375372	hospital_corellia_s02.iff	Corellia - Bela Vistal / Hospital	3	6713	330	-5942
+cor_bela_hotel	CORELLIA	2365803	hotel_corellia.iff	Corellia - Bela Vistal / Hotel	10	6938	330	-5588
+cor_bela_university	CORELLIA	2365793	guild_university_corellia_style_01.iff	Corellia - Bela Vistal / University	9	6858	330	-5426
+cor_bunker1	CORELLIA	-273030728612215282	naboo_theed_skaak_bunker_01.iff	Corellia - Bunker 1	10	6377	338	7357
+cor_bunker2	CORELLIA	-273030729141296770	naboo_theed_skaak_bunker_01.iff	Corellia - Corellia Bunker 2	10	7362	310	6925
+cor_chirq_council1	CORELLIA	-267964178919492731	corellia_chirq_elite_council_01.iff	Corellia - Chirq Elite Council 1	22	2458	35	5034
+cor_chirq_council1_tower1	CORELLIA	-267964178142424333	military_outpost_guard_house_imperial.iff	Corellia - Chirq Elite Council 1 / Tower 1	2	2443	34	5070
+cor_chirq_council1_tower2	CORELLIA	-267964179276987050	military_outpost_guard_house_imperial.iff	Corellia - Chirq Elite Council 1 / Tower 2	2	2476	36	5068
+cor_chirq_council2	CORELLIA	-267964179022417199	corellia_chirq_elite_council_02.iff	Corellia - Chirq Elite Council 2	49	4009	2	4832
+cor_chirq_jzoro1	CORELLIA	-267964178068047452	corellia_chirq_jzoro_bunker.iff	Corellia - Chirq Jzoro Bunker 1	10	2635	150	5647
+cor_chirq_jzoro2	CORELLIA	-260364354962171077	corellia_chirq_jzoro_bunker.iff	Corellia - Chirq Jzoro Bunker 2	10	-2713	44	2854
+cor_coronet_asso_hall1	CORELLIA	1855473	association_hall_civilian_corellia.iff	Corellia - Coronet / Association Hall 1	17	-276	28	-4720
+cor_coronet_asso_hall2	CORELLIA	3075609	association_hall_civilian_corellia.iff	Corellia - Coronet / Association Hall 2	17	-210	28	-4320
+cor_coronet_cantina	CORELLIA	3075426	cantina_corellia.iff	Corellia - Coronet / Cantina	15	-343	28	-4495
+cor_coronet_capitol	CORELLIA	1855460	capitol_corellia.iff	Corellia - Coronet / Capitol	11	-210	28	-4570
+cor_coronet_chronicle_vendor	CORELLIA	-261771729506220985	player_pgc_merchant_tent_s01.iff	Corellia - Coronet / Chronicle Vendor	1	-152	28	-4811
+cor_coronet_cloning	CORELLIA	1855491	cloning_corellia.iff	Corellia - Coronet / Cloning	6	-500	28	-4500
+cor_coronet_combat_gh	CORELLIA	1855499	guild_combat_corellia_style_01.iff	Corellia - Coronet  / Combat GH	9	-260	28	-4390
+cor_coronet_commerce_gh	CORELLIA	1855509	guild_commerce_corellia_style_01.iff	Corellia - Coronet / Commerce GH	9	-160	28	-4390
+cor_coronet_disappearance_qh	CORELLIA	-267964178404464767	player_house_generic_medium_style_01.iff	Corellia - Coronet / Disappearance Quest House	4	3964	288	6087
+cor_coronet_hospital	CORELLIA	1855529	hospital_corellia.iff	Corellia - Coronet / Hospital	14	-90	28	-4440
+cor_coronet_hotel	CORELLIA	1855544	hotel_corellia.iff	Corellia - Coronet / Hotel	10	-462	28	-4673
+cor_coronet_salon	CORELLIA	8215863	salon_corellia.iff	Corellia - Coronet / Salon	1	-367	28	-4697
+cor_coronet_starport	CORELLIA	1855671	starport_corellia.iff	Corellia - Coronet / Starport	16	-51	28	-4735
+cor_coronet_theater	CORELLIA	2365391	guild_theater_corellia_s01.iff	Corellia - Coronet / Theater	10	-209	28	-4148
+cor_coronet_tomi_jinsin	CORELLIA	1211545	bunker_corellia_tomi_jinsin.iff	Corellia - Coronet / Tomi Jinsin	9	-518	3	-5064
+cor_coronet_university	CORELLIA	1855519	guild_university_corellia_style_01.iff	Corellia - Coronet / University	9	40	28	-4440
+cor_deflarian_bunker	CORELLIA	-254171903971859809	bunker_deflarian.iff	Corellia - Deflarian Bunker	10	-6376	2	-2935
+cor_disappear_cave	CORELLIA	-268527129115696927	corellia_disappear_cave.iff	Corellia - Disappear Cave	11	3840	389	6511
+cor_doaba_asso_hall	CORELLIA	1935466	association_hall_civilian_corellia.iff	Corellia - Doaba Guerfel - Association Hall	17	3319	300	5364
+cor_doaba_cantina	CORELLIA	3375352	cantina_corellia.iff	Corellia - Doaba Guerfel - Cantina	15	3245	300	5327
+cor_doaba_cloning	CORELLIA	4345390	cloning_corellia.iff	Corellia - Doaba Guerfel - Cloning	6	3313	324	5739
+cor_doaba_combat_gh	CORELLIA	3075352	guild_combat_corellia_style_01.iff	Corellia - Doaba Guerfel - Combat GH	9	3200	300	5246
+cor_doaba_commerce_gh	CORELLIA	3055763	guild_commerce_corellia_style_01.iff	Corellia - Doaba Guerfel - Commerce GH	9	3160	290	5029
+cor_doaba_drall_patriots	CORELLIA	-267964179069373024	corellia_doaba_guerfel_drall_patriots.iff	Corellia - Doaba Guerfel - Drall Patriots	10	3350	349	4807
+cor_doaba_hospital	CORELLIA	4345352	hospital_corellia_s02.iff	Corellia - Doaba Guerfel - Hospital	3	3275	300	5410
+cor_doaba_hotel	CORELLIA	3075362	hotel_corellia.iff	Corellia - Doaba Guerfel - Hotel	10	3078	300	5205
+cor_doaba_merchant_tent	CORELLIA	-267964179404400028	merchant_tent_corellia_s01.iff	Corellia - Doaba Guerfel - Merchant Tent	1	3869	270	5620
+cor_doaba_pendretronics	CORELLIA	-267964179374078061	corellia_doaba_guerfel_pendretronics.iff	Corellia - Doaba Guerfel - Pendretronics	22	3229	290	5031
+cor_doaba_sb_cavern	CORELLIA	-267964178347969395	ac_sb_cavern.iff	Corellia - Doaba Guerfel - SB Cavern	11	3812	206	5482
+cor_doaba_starport	CORELLIA	9665352	starport_corellia.iff	Corellia - Doaba Guerfel - Starport	16	3377	308	5605
+cor_doaba_theater	CORELLIA	4395395	guild_theater_corellia_s01.iff	Corellia - Doaba Guerfel - Theater	10	3407	308	5465
+cor_doaba_trins_evnar	CORELLIA	-267964178147627793	corellia_trins_evnar_house.iff	Corellia - Doaba Guerfel - Trins Evnar House	4	3249	300	5464
+cor_doaba_university	CORELLIA	3075405	guild_university_corellia_style_01.iff	Corellia - Doaba Guerfel - University	9	3114	300	5285
+cor_drall_cave	CORELLIA	4275364	corellia_drall_cave.iff	Corellia - Drall Cave	11	1022	32	4181
+cor_droid_bunker	CORELLIA	-254734854929078302	bunker_droid_corellia.iff	Corellia - Droid Bunker	44	-6351	169	357
+cor_gcw_base_shed	CORELLIA	-269090079453790705	outpost_shed.iff	Corellia - GCW Base / Shed	6	4776	95	-5207
+cor_gcw_base_warehouse	CORELLIA	-269090078635378213	bunker_corellia_warehouse.iff	Corellia - GCW Base / Warehouse	9	4746	95	-5240
+cor_hidden_reb_base	CORELLIA	6335638	rebel_hideout_themepark.iff	Corellia - Reb Hideout	12	-6506	398	5990
+cor_imp_captured_starships	CORELLIA	-266838279168441737	bunker_imperial_captured_starships.iff	Corellia - Imp Captured Starships	17	3785	380	-4064
+cor_imp_captured_starships_tower1	CORELLIA	-266838278420031395	military_outpost_guard_house_imperial.iff	Corellia - Imp Captured Starships / Tower 1	2	3747	380	-4059
+cor_imp_captured_starships_tower2	CORELLIA	-266838279701081551	military_outpost_guard_house_imperial.iff	Corellia - Imp Captured Starships / Tower 2	2	3775	380	-4000
+cor_imp_warehouse	CORELLIA	-262616155413149988	bunker_imperial_warehouse.iff	Corellia - Imp Warehouse Bunker	22	-1868	7	-1246
+cor_imp_warehouse_bldg1	CORELLIA	-262616154953620266	mun_all_military_tower_impl_guard_s01.iff	Corellia - Imp Warehouse Bldg 1	1	-1889	7	-1257
+cor_imp_warehouse_bldg2	CORELLIA	-262616154954802219	mun_all_military_tower_impl_guard_s01.iff	Corellia - Imp Warehouse Bldg 2	1	-1850	7	-1221
+cor_itp_thrawn_bunker	CORELLIA	-265712378856778254	itp_thrawn_rebel_bunker.iff	Corellia - ITP - Thrawn Reb Bunker	18	139	48	4500
+cor_itp_thrawn_bunker_guardtower	CORELLIA	-265712378958027098	military_outpost_guard_house_rebel.iff	Corellia - ITP - Thrawn Reb Bunker / Guardtower	2	118	48	4525
+cor_korvella_cantina	CORELLIA	8105493	cantina_corellia.iff	Corellia - Kor Vella / Cantina	15	-3480	78	3087
+cor_korvella_cloning	CORELLIA	3005426	cloning_corellia.iff	Corellia - Kor Vella / Cloning	6	-3535	70	3202
+cor_korvella_combat_gh	CORELLIA	2955418	guild_combat_corellia_style_01.iff	Corellia - Kor Vella / Combat GH	9	-3411	74	3384
+cor_korvella_commerce_gh	CORELLIA	2955408	guild_commerce_corellia_style_01.iff	Corellia - Kor Vella / Commerce GH	9	-3425	78	3182
+cor_korvella_frosch_research_station	CORELLIA	-260364354601982577	ac_frosch_research_station.iff	Corellia - Kor Vella / Frosch Research Station	22	-3676	101	3418
+cor_korvella_hershel_sheridan	CORELLIA	-260364354198108646	corellia_hershel_sheridan_house.iff	Corellia - Hershel Sheridan House	6	-3071	31	3003
+cor_korvella_hospital	CORELLIA	3375390	hospital_corellia_s02.iff	Corellia - Kor Vella / Hospital	3	-3798	86	3136
+cor_korvella_hotel	CORELLIA	3005666	hotel_corellia.iff	Corellia - Kor Vella / Hotel	10	-3241	86	3097
+cor_korvella_imp_detach_hq	CORELLIA	1331932	military_imperial_detachment_hq.iff	Corellia - Kor Vella - Imp Detachment HQ	10	-2976	31	2908
+cor_korvella_imp_detach_hq_barracks	CORELLIA	1331943	military_base_shed_imperial_barracks_s01.iff	Corellia - Kor Vella / Imp Detachment HQ / Barracks	6	-2977	31	2923
+cor_korvella_imp_detach_hq_officer_shed	CORELLIA	1331950	military_base_shed_imperial_style_officer_s01.iff	Corellia - Kor Vella / Imp Detachment HQ / Officer Shed	6	-2977	31	2893
+cor_korvella_mayor	CORELLIA	-260364355564069626	mayor_kor_vella.iff	Corellia - Kor Vella / Mayor	4	-3612	86	3126
+cor_korvella_red_circle	CORELLIA	-260364353753440405	corellia_kor_vella_red_circle_bunker.iff	Corellia - Kor Vella - Red Circle Bunker	9	-2279	24	2739
+cor_korvella_ryll_smuggler	CORELLIA	-260364354039753752	corellia_kor_vella_ryll_smuggler_bunker.iff	Corellia - Kor Vella - Ryll Smuggler Bunker	34	-2251	16	3304
+cor_korvella_ryll_warehouse	CORELLIA	-260364354282922461	corellia_kor_vella_ryll_warehouse.iff	Corellia - Kor Vella / Ryll Warehouse	9	-3330	101	3391
+cor_korvella_small_hal_hole	CORELLIA	-260364354919518780	tatooine_small_hal_hole.iff	Corellia - Kor Vella / Small Hal Hole	10	-3366	86	3326
+cor_korvella_starport	CORELLIA	4255419	starport_corellia.iff	Corellia - Kor Vella / Starport	16	-3136	31	2894
+cor_korvella_university	CORELLIA	2955393	guild_university_corellia_style_01.iff	Corellia - Kor Vella / University	9	-3689	86	3065
+cor_korvella_vermin_bunker	CORELLIA	-260364354677357340	corellia_kor_vella_vermin_bunker.iff	Corellia - Kor Vella / Vermin Bunker	9	-3649	101	2858
+cor_meatlump_hideout_entrance	CORELLIA	-261771728654912139	meatlump_hideout_entrance.iff	Corellia - MTP / Hideout Entrance	10	-517	28	-4449
+cor_meatlump_hideout_main	CORELLIA	-261771729175824234	meatlump_hideout_main.iff	Corellia - MTP / Hideout Main	49	-517	-10	-4449
+cor_murmurs_lab	CORELLIA	-264023528359364985	bunker_corellia_murmurs_lab.iff	Corellia - Murmurs Lab	49	203	8	-7066
+cor_nedgarr_bandits	CORELLIA	-264305003131306013	bunker_corellia_nedgarr_bandits.iff	Corellia - Coronet / Nedgarr Bandits	10	346	33	-4414
+cor_nyax_bunker	CORELLIA	6035994	corellia_nyax_bunker.iff	Corellia - Nyax Bunker	10	1366	31	-340
+cor_reb_forward_outpost	CORELLIA	6036087	military_rebel_forward_outpost.iff	Corellia - Reb Forward Outpost	6	4112	24	-1252
+cor_reb_hideout_shed1	CORELLIA	8285394	military_base_shed_rebel_style_01.iff	Corellia - Reb Hideout / Shed 1	6	-6560	398	6006
+cor_reb_hideout_shed2	CORELLIA	8205773	military_base_shed_rebel_style_01.iff	Corellia - Reb Hideout / Shed 2	6	-6549	398	6032
+cor_reb_hideout_shed3	CORELLIA	8205780	military_base_shed_rebel_style_01.iff	Corellia - Reb Hideout / Shed 3	6	-6498	398	6050
+cor_reb_hideout_shed4	CORELLIA	8285408	military_base_shed_rebel_style_01.iff	Corellia - Reb Hideout / Shed 4	6	-6492	398	5958
+cor_reb_hideout_shed5	CORELLIA	8205787	military_base_shed_rebel_style_01.iff	Corellia - Reb Hideout / Shed 5	6	-6475	398	6041
+cor_reb_hideout_shed6	CORELLIA	8285401	military_base_shed_rebel_style_01.iff	Corellia - Reb Hideout / Shed 6	6	-6470	398	5979
+cor_rogue_corsec_base_bldg1	CORELLIA	1855736	mun_all_hospital_s02.iff	Corellia - Rogue Corsec Base / Building 1	3	5195	5	1619
+cor_rogue_corsec_base_bldg2	CORELLIA	1855744	mun_all_hospital_s02.iff	Corellia - Rogue Corsec Base / Building 2	3	5213	5	1548
+cor_rogue_corsec_base_bldg3	CORELLIA	1855740	mun_all_hospital_s02.iff	Corellia - Rogue Corsec Base / Building 3	3	5255	5	1577
+cor_rogue_corsec_base_bunker	CORELLIA	1855720	bunker_imperial_02.iff	Corellia - Rogue Corsec Base / Bunker	10	5238	5	1600
+cor_slavers_bunker	CORELLIA	-254171905065440741	bunker_corellian_slavers_01.iff	Corellia - Corellian Slavers Bunker	49	-6414	26	-2156
+cor_stronghold_1	CORELLIA	2715878	military_base_shed_imperial_style_officer_s01.iff	Corellia - Stronghold 1	6	4615	25	-5812
+cor_stronghold_2	CORELLIA	2715899	military_base_shed_imperial_style_officer_s01.iff	Corellia - Stronghold 2	6	4616	25	-5756
+cor_stronghold_3	CORELLIA	2715906	military_base_shed_imperial_barracks_s01.iff	Corellia - Stronghold 3	6	4687	25	-5731
+cor_stronghold_4	CORELLIA	2715913	military_base_shed_imperial_barracks_s01.iff	Corellia - Stronghold 4	6	4687	25	-5837
+cor_stronghold_5	CORELLIA	2715949	military_base_shed_imperial_barracks_s01.iff	Corellia - Stronghold 5	6	4698	25	-5742
+cor_stronghold_6	CORELLIA	2715956	military_base_shed_imperial_barracks_s01.iff	Corellia - Stronghold 6	6	4698	25	-5826
+cor_stronghold_7	CORELLIA	2716029	military_base_shed_imperial_barracks_s01.iff	Corellia - Stronghold 7	6	4709	25	-5815
+cor_stronghold_8	CORELLIA	2716036	military_base_shed_imperial_barracks_s01.iff	Corellia - Stronghold 8	6	4709	25	-5753
+cor_tyrena_asso_hall	CORELLIA	1935466	association_hall_civilian_corellia.iff	Corellia - Tyrena / Association Hall	17	-5502	21	-2820
+cor_tyrena_cantina	CORELLIA	2625352	cantina_corellia.iff	Corellia - Tyrena / Cantina	15	-5237	21	-2539
+cor_tyrena_cloning	CORELLIA	1935513	cloning_corellia.iff	Corellia - Tyrena / Cloning	6	-5691	21	-2698
+cor_tyrena_combat_gh	CORELLIA	1935436	guild_combat_corellia_style_01.iff	Corellia - Tyrena / Combat GH	9	-5463	21	-2742
+cor_tyrena_commerce_gh	CORELLIA	1935446	guild_commerce_corellia_style_01.iff	Corellia - Tyrena / Commerce GH	9	-5417	21	-2743
+cor_tyrena_drennic_b	CORELLIA	-257549605667708003	ac_drennic_listening_post_bldg_b.iff	Corellia - Tyrena / Drennic Post B	10	-5768	22	-1730
+cor_tyrena_drennic_c	CORELLIA	-257549605010322805	ac_drennic_listening_post_bldg_c.iff	Corellia - Tyrena / Drennic Post C	9	-5766	24	-1690
+cor_tyrena_hospital	CORELLIA	1935829	hospital_corellia.iff	Corellia - Tyrena / Hospital	14	-4978	21	-2480
+cor_tyrena_hotel1	CORELLIA	1935522	hotel_corellia.iff	Corellia - Tyrena / Hotel 1	10	-5517	21	-2569
+cor_tyrena_hotel2	CORELLIA	1935818	hotel_corellia.iff	Corellia - Tyrena / Hotel 2	10	-5148	21	-2518
+cor_tyrena_meatlump_cave	CORELLIA	-256705179877332822	corellia_tyrena_meatlumps_cave.iff	Corellia - Tyrena / Meatlump Cave	11	-5721	38	-2307
+cor_tyrena_small_house	CORELLIA	3375651	ply_corl_house_s_s02_fp1.iff	Corellia - Tyrena / Small House	3	-5178	21	-2287
+cor_tyrena_starport	CORELLIA	1935683	starport_corellia.iff	Corellia - Tyrena / Starport	16	-4975	21	-2230
+cor_tyrena_theater	CORELLIA	2365428	guild_theater_corellia_s01.iff	Corellia - Tyrena / Theater	10	-5587	21	-2628
+cor_tyrena_university	CORELLIA	1935456	guild_university_corellia_style_01.iff	Corellia - Tyrena / University	9	-5521	21	-2679
+cor_vreni_cantina	CORELLIA	3005694	cantina_corellia.iff	Corellia - Vreni Island / Cantina	15	-5212	4	-6414
+cor_vreni_hotel	CORELLIA	2775409	hotel_corellia.iff	Corellia - Vreni Island / Hotel	10	-5516	23	-6150
+cor_vreni_salon	CORELLIA	8465531	salon_corellia.iff	Corellia - Vreni Island / Salon	1	-5156	5	-6368
+cor_vreni_small_house	CORELLIA	7615442	ply_corl_house_s_s01_fp2.iff	Corellia - Vreni Island / Small House	4	-5313	4	-6401
+cor_warehouse_bunker	CORELLIA	-264305003131306071	bunker_corellia_warehouse.iff	Corellia - Coronet / Warehouse Bunker	9	129	28	-4630
+cor_weather_station	CORELLIA	-254171905381050643	naboo_deeja_peak_stonewall_labs.iff	Corellia - Weather Station	22	-7314	208	-3981
+cor_world	CORELLIA	0	empty	Corellia - World	0	0	0	0
+dan_abandoned_reb_base_main	DANTOOINE	6555558	military_abandoned_police_station_rebel.iff	Dantooine - Abandoned Reb Base / Main Building	12	-6827	46	5539
+dan_abandoned_reb_base_shed1	DANTOOINE	3035956	military_base_shed_rebel_abandoned_01.iff	Dantooine - Abandoned Reb Base / Shed 1	6	-7018	25	5378
+dan_abandoned_reb_base_shed10	DANTOOINE	8855664	military_base_shed_rebel_style_01.iff	Dantooine - Abandoned Reb Base / Shed 10	6	-6791	46	5559
+dan_abandoned_reb_base_shed11	DANTOOINE	3035991	military_base_shed_rebel_abandoned_01.iff	Dantooine - Abandoned Reb Base / Shed 11	6	-6678	30	5561
+dan_abandoned_reb_base_shed2	DANTOOINE	3035963	military_base_shed_rebel_abandoned_01.iff	Dantooine - Abandoned Reb Base / Shed 2	6	-7005	25	5391
+dan_abandoned_reb_base_shed3	DANTOOINE	3035935	military_base_shed_rebel_abandoned_01.iff	Dantooine - Abandoned Reb Base / Shed 3	6	-6999	25	5359
+dan_abandoned_reb_base_shed4	DANTOOINE	3035949	military_base_shed_rebel_abandoned_01.iff	Dantooine - Abandoned Reb Base / Shed 4	6	-6992	25	5404
+dan_abandoned_reb_base_shed5	DANTOOINE	3035928	military_base_shed_rebel_abandoned_01.iff	Dantooine - Abandoned Reb Base / Shed 5	6	-6986	25	5372
+dan_abandoned_reb_base_shed6	DANTOOINE	3035942	military_base_shed_rebel_abandoned_01.iff	Dantooine - Abandoned Reb Base / Shed 6	6	-6979	25	5417
+dan_abandoned_reb_base_shed7	DANTOOINE	3035921	military_base_shed_rebel_abandoned_01.iff	Dantooine - Abandoned Reb Base / Shed 7	6	-6960	25	5398
+dan_abandoned_reb_base_shed8	DANTOOINE	3035970	military_base_shed_rebel_abandoned_01.iff	Dantooine - Abandoned Reb Base / Shed 8	6	-6881	38	5495
+dan_abandoned_reb_base_shed9	DANTOOINE	3035977	military_base_shed_rebel_abandoned_01.iff	Dantooine - Abandoned Reb Base / Shed 9	6	-6791	46	5523
+dan_abandoned_reb_base_tower1	DANTOOINE	8265907	military_outpost_guard_house_rebel.iff	Dantooine - Abandoned Reb Base / Tower 1	2	-7042	25	5379
+dan_abandoned_reb_base_tower2	DANTOOINE	8265845	military_outpost_guard_house_rebel.iff	Dantooine - Abandoned Reb Base / Tower 2	2	-6997	25	5334
+dan_abandoned_reb_base_tower3	DANTOOINE	8265840	military_outpost_guard_house_rebel.iff	Dantooine - Abandoned Reb Base / Tower 3	2	-6979	25	5442
+dan_abandoned_reb_base_tower4	DANTOOINE	8265837	military_outpost_guard_house_rebel.iff	Dantooine - Abandoned Reb Base / Tower 4	2	-6934	25	5397
+dan_abandoned_reb_base_tower5	DANTOOINE	8265949	military_outpost_guard_house_rebel.iff	Dantooine - Abandoned Reb Base / Tower 5	2	-6636	30	5592
+dan_abandoned_reb_base_tower6	DANTOOINE	8265945	military_outpost_guard_house_rebel.iff	Dantooine - Abandoned Reb Base / Tower 6	2	-6636	30	5478
+dan_abandoned_reb_shed	DANTOOINE	-377739420014523348	military_base_shed_rebel_abandoned_01.iff	Dantooine - Abandoned Reb Shed	6	4065	11	-5125
+dan_force_crystal_hunter_cave	DANTOOINE	8535482	dantooine_force_crystal_hunter_sd_cave.iff	Dantooine - Force Crystal Hunter Cave	11	-6240	56	7405
+dan_imp_outpost_bank	DANTOOINE	1365889	military_base_shed_imperial_style_bank_s01.iff	Dantooine - Imp Outpost / Bank	6	-4261	3	-2408
+dan_imp_outpost_cantina	DANTOOINE	1365875	military_base_shed_imperial_style_cantina_s01.iff	Dantooine - Imp Outpost / Cantina	6	-4207	3	-2430
+dan_imp_outpost_cloning	DANTOOINE	4885423	small_imperial_cloning_facility_s02.iff	Dantooine - Imp Outpost / Cloning	6	-4243	3	-2430
+dan_imp_outpost_guard_house	DANTOOINE	3226154	military_outpost_guard_house_imperial.iff	Dantooine - Imp Outpost / Guard House	2	-4225	3	-2440
+dan_imp_outpost_hospital	DANTOOINE	1380122	military_base_shed_imperial_style_hospital_01.iff	Dantooine - Imp Outpost / Hospital	6	-4189	3	-2408
+dan_imp_outpost_starport	DANTOOINE	2955585	outpost_starport.iff	Dantooine - Imp Outpost / Starport	1	-4229	3	-2368
+dan_imp_outpost_tower1	DANTOOINE	2955471	mun_all_military_tower_impl_guard_s01.iff	Dantooine - Imp Outpost / Tower 1	1	-4270	3	-2433
+dan_imp_outpost_tower2	DANTOOINE	2955475	mun_all_military_tower_impl_guard_s01.iff	Dantooine - Imp Outpost / Tower 2	1	-4270	3	-2383
+dan_imp_outpost_tower3	DANTOOINE	2955448	mun_all_military_tower_impl_guard_s01.iff	Dantooine - Imp Outpost / Tower 3	1	-4180	3	-2383
+dan_imp_outpost_tower4	DANTOOINE	2955473	mun_all_military_tower_impl_guard_s01.iff	Dantooine - Imp Outpost / Tower 4	1	-4180	3	-2433
+dan_janta_cave	DANTOOINE	529322	dantooine_janta_cave.iff	Dantooine - Janta Cave	11	7106	74	-4093
+dan_kunga_cave	DANTOOINE	529373	dantooine_kunga_cave.iff	Dantooine - Kunga Cave	29	-139	26	-353
+dan_mining_outpost_cloning	DANTOOINE	1365992	outpost_cloning_facility_s03.iff	Dantooine - Mining Outpost / Cloning	6	-635	3	2445
+dan_mining_outpost_shed1	DANTOOINE	7105362	outpost_shed.iff	Dantooine - Mining Outpost / Shed 1	6	-606	3	2474
+dan_mining_outpost_shed2	DANTOOINE	1365985	outpost_shed_s03.iff	Dantooine - Mining Outpost / Shed 2	6	-594	3	2537
+dan_mining_outpost_starport	DANTOOINE	7105353	outpost_starport.iff	Dantooine - Mining Outpost / Starport	1	-636	3	2480
+dan_pirate_outpost_bldg1	DANTOOINE	1366010	outpost_shed_s04.iff	Dantooine - Pirate Outpost / Bldg 1	6	1550	4	-6358
+dan_pirate_outpost_bldg2	DANTOOINE	8565387	outpost_shed.iff	Dantooine - Pirate Outpost / Bldg 2	6	1566	4	-6358
+dan_pirate_outpost_bldg3	DANTOOINE	8565368	outpost_shed.iff	Dantooine - Pirate Outpost / Bldg 3	6	1594	4	-6428
+dan_pirate_outpost_bldg4	DANTOOINE	1366017	outpost_shed_s03.iff	Dantooine - Pirate Outpost / Bldg 4	6	1610	4	-6358
+dan_pirate_outpost_bldg5	DANTOOINE	8565430	outpost_shed.iff	Dantooine - Pirate Outpost / Bldg 5	6	1626	4	-6358
+dan_pirate_outpost_cantina	DANTOOINE	6205495	ply_corl_house_m_s01_fp1.iff	Dantooine - Pirate Outpost / Cantina	4	1589	4	-6360
+dan_pirate_outpost_cloning	DANTOOINE	1366003	outpost_cloning_facility_s03.iff	Dantooine - Pirate Outpost / Cloning	6	1576	4	-6428
+dan_pirate_outpost_guard_house	DANTOOINE	8465731	military_outpost_guard_house_imperial.iff	Dantooine - Pirate Outpost / Guard House	2	2502	7	-2054
+dan_pirate_outpost_starport	DANTOOINE	8565352	outpost_starport.iff	Dantooine - Pirate Outpost / Starport	1	1590	4	-6398
+dan_reb_detach_hq	DANTOOINE	-379146794216609614	military_rebel_detachment_hq.iff	Dantooine - Reb Detachment HQ	10	4037	2	5439
+dan_reb_detach_hq_shed	DANTOOINE	-379146794930029823	military_base_shed_rebel_style_01.iff	Dantooine - Reb Detachment HQ / Shed	6	4027	2	5423
+dan_rtp_generals_bunker	DANTOOINE	-369576644623243546	bunker_dantooine_generals_bunker.iff	Dantooine - RTP / Generals Bunker	49	-5638	16	1953
+dan_underground_bunker	DANTOOINE	-382524493934115204	corellia_kor_vella_ryll_smuggler_bunker.iff	Dantooine - Underground Bunker	34	7023	17	-3994
+dan_warren	DANTOOINE	8575671	bunker_warren_01.iff	Dantooine - Warren	87	-547	1	-3846
+dan_world	DANTOOINE	0	empty	Dantooine - World	0	0	0	0
+dant_mining_outpost_cantina	DANTOOINE	6205563	ply_corl_house_m_s01_fp1.iff	Dantooine - Mining Outpost / Cantina	4	-587	3	2489
+dat_aurilia_adv_gh	DATHOMIR	-408138718213473085	aurilia_adventure_guildhall.iff	Dathomir - Aurilia / Adventure GH	17	5204	79	-4165
+dat_aurilia_kakirks_collections	DATHOMIR	-408138717018489785	aurilia_pyramid_hut.iff	Dathomir - Aurilia / Kakirks Collections	1	5355	79	-4138
+dat_aurilia_prisoner_hut1	DATHOMIR	-408420193162760474	aurilia_prisoner_hut.iff	Dathomir - Aurilia / Prisoner Hut 1	1	5263	79	-4066
+dat_aurilia_prisoner_hut2	DATHOMIR	-408420191437242885	aurilia_prisoner_hut.iff	Dathomir - Aurilia / Prisoner Hut 2	1	5264	79	-4049
+dat_aurilia_prisoner_hut3	DATHOMIR	-408420191597595361	aurilia_prisoner_hut.iff	Dathomir - Aurilia / Prisoner Hut 3	1	5281	79	-4049
+dat_aurilia_pyramid_hut1	DATHOMIR	-408138717078131974	aurilia_pyramid_hut.iff	Dathomir - Aurilia / Pyramid Hut 1	1	5257	79	-4163
+dat_aurilia_pyramid_hut2	DATHOMIR	-408138717896580358	aurilia_pyramid_hut.iff	Dathomir - Aurilia / Pyramid Hut 2	1	5257	79	-4139
+dat_aurilia_pyramid_hut3	DATHOMIR	-408138717671253449	aurilia_pyramid_hut.iff	Dathomir - Aurilia / Pyramid Hut 3	1	5355	79	-4126
+dat_aurilia_pyramid_hut4	DATHOMIR	-408138717708992710	aurilia_pyramid_hut.iff	Dathomir - Aurilia / Pyramid Hut 4	1	5355	79	-4150
+dat_aurilia_starport	DATHOMIR	-408138717991724543	aurilia_pyramid_hut.iff	Dathomir - Aurilia / Starport	1	5439	79	-4192
+dat_aurilia_trinket_shop1	DATHOMIR	-408138717779366413	aurilia_pyramid_hut.iff	Dathomir - Aurilia / Trinket Shop 1	1	5257	79	-4151
+dat_aurilia_trinket_shop2	DATHOMIR	-408138717234221589	aurilia_pyramid_hut.iff	Dathomir - Aurilia / Trinket Shop 2	1	5355	79	-4162
+dat_aurilia_vansics_scrap	DATHOMIR	-408138716847488492	aurilia_pyramid_hut.iff	Dathomir - Aurilia / Vansics Scrap	1	5257	79	-4127
+dat_cave	DATHOMIR	4335462	cave_02_damprock_mirror.iff	Dathomir - Cave	11	-4226	34	-2062
+dat_imp_prison_cave	DATHOMIR	2635352	cave_tatooine_style_02.iff	Dathomir - Imp Prison / Cave	17	-6494	119	875
+dat_imp_prison_police_station	DATHOMIR	2665363	military_base_police_station_imperial_style_01.iff	Dathomir - Imp Prison / Police Station	12	-6364	120	927
+dat_imp_prison_prison1	DATHOMIR	5335799	military_base_shed_imperial_style_prison_01.iff	Dathomir - Imp Prison / Prison 1	6	-6354	128	735
+dat_imp_prison_prison2	DATHOMIR	5335806	military_base_shed_imperial_style_prison_01.iff	Dathomir - Imp Prison / Prison 2	6	-6354	128	751
+dat_imp_prison_prison3	DATHOMIR	5335813	military_base_shed_imperial_style_prison_01.iff	Dathomir - Imp Prison / Prison 3	6	-6354	128	767
+dat_imp_prison_prison4	DATHOMIR	5335778	military_base_shed_imperial_style_prison_01.iff	Dathomir - Imp Prison / Prison 4	6	-6330	128	768
+dat_imp_prison_prison5	DATHOMIR	5335785	military_base_shed_imperial_style_prison_01.iff	Dathomir - Imp Prison / Prison 5	6	-6330	128	752
+dat_imp_prison_prison6	DATHOMIR	5335792	military_base_shed_imperial_style_prison_01.iff	Dathomir - Imp Prison / Prison 6	6	-6330	128	736
+dat_imp_prison_prison7	DATHOMIR	5335764	military_base_shed_imperial_style_prison_01.iff	Dathomir - Imp Prison / Prison 7	6	-6309	128	768
+dat_imp_prison_prison8	DATHOMIR	5335771	military_base_shed_imperial_style_prison_01.iff	Dathomir - Imp Prison / Prison 8	6	-6309	128	752
+dat_imp_prison_shed1	DATHOMIR	3295418	military_base_shed_imperial_style_01.iff	Dathomir - Imp Prison / Shed 1	6	-6398	120	959
+dat_imp_prison_shed2	DATHOMIR	3295425	military_base_shed_imperial_style_01.iff	Dathomir - Imp Prison / Shed 2	6	-6398	120	943
+dat_imp_prison_shed3	DATHOMIR	2665661	military_base_shed_imperial_style_01.iff	Dathomir - Imp Prison / Shed 3	6	-6383	120	959
+dat_imp_prison_shed4	DATHOMIR	2665668	military_base_shed_imperial_style_01.iff	Dathomir - Imp Prison / Shed 4	6	-6368	120	959
+dat_imp_prison_shed5	DATHOMIR	2665675	military_base_shed_imperial_style_01.iff	Dathomir - Imp Prison / Shed 5	6	-6352	120	959
+dat_imp_weapons_research_facility	DATHOMIR	-397724143535268219	bunker_imperial_weapons_research_facility_01.iff	Dathomir - Imp Weapons Research Facility	22	-5936	5	1807
+dat_kwi_temple	DATHOMIR	-408983141677901100	wod_kwi_temple.iff	Dathomir - Kwi Temple	2	5230	125	220
+dat_ns_cave	DATHOMIR	3695701	dathomir_nsister_cave.iff	Dathomir - NS Cave	11	-1175	117	6245
+dat_ns_forced_labor_camp_slave_mine	DATHOMIR	8575574	nightsister_slave_mine_sd_cave.iff	Dathomir - NS Forced Labor Camp / Slave mine	11	2528	109	-1589
+dat_ns_rancor_cave	DATHOMIR	4115618	dathomir_nsister_rancor_cave.iff	Dathomir - NS Rancor Cave	11	-4009	115	-12
+dat_ns_stronghold	DATHOMIR	189372	night_sister_stronghold.iff	Dathomir - NS Stronghold	12	-4086	131	-136
+dat_qa_starport	DATHOMIR	-396598243658050761	dathomir_quarantine_zone_starport.iff	Dathomir - Quarantine Zone Entrance / Starport	1	-5715	511	-6474
+dat_qz_blackwing_admin_bldg	DATHOMIR	-394346443999148571	imperial_blackwing_facility_administrative_building.iff	Dathomir - Quarantine Zone / Blackwing Admin Bldg	12	-7382	570	-7459
+dat_qz_blackwing_facility	DATHOMIR	-394346443066416681	imperial_blackwing_facility.iff	Dathomir - Quarantine Zone / Blackwing Facility	65	-7382	570	-7382
+dat_qz_cantina	DATHOMIR	-396598243895130861	dathomir_quarantine_zone_cantina.iff	Dathomir - Quarantine Zone Entrance / Cantina	4	-5696	511	-6511
+dat_qz_cloning	DATHOMIR	-396598243363240768	outpost_cloning_facility.iff	Dathomir - Quarantine Zone Entrance / Cloning	6	-5752	511	-6479
+dat_qz_guard_tower	DATHOMIR	-394346443667454145	military_base_shed_imperial_style_01.iff	Dathomir - Quarantine Zone / Military Guard Tower	6	-7408	570	-7320
+dat_qz_hospital	DATHOMIR	-394346443381205659	military_base_shed_imperial_style_hospital_01.iff	Dathomir - Quarantine Zone / Hospital	6	-7389	570	-7320
+dat_qz_prison	DATHOMIR	-394346443190076682	military_base_shed_imperial_style_prison_01.iff	Dathomir - Quarantine Zone / Prison	6	-7326	570	-7347
+dat_qz_starport_disabled	DATHOMIR	-394346442992485949	outpost_starport_nonworking.iff	Dathomir - Quarantine Zone / Starport (disabled)	1	-7435	570	-7388
+dat_rancor_cave2	DATHOMIR	-404479542479435785	rancor_cave_2.iff	Dathomir - Rancor Cave 2	11	1789	65	2015
+dat_science_outpost_cantina	DATHOMIR	2835549	ply_corl_house_s_s02_fp1.iff	Dathomir - Science Outpost / Cantina	3	-53	18	-1620
+dat_science_outpost_cloning	DATHOMIR	1392854	outpost_cloning_facility_s02.iff	Dathomir - Science Outpost / Cloning	6	-63	18	-1632
+dat_science_outpost_med_center	DATHOMIR	2835569	ply_corl_house_m_s01_fp1.iff	Dathomir - Science Outpost / Med Center	4	-115	18	-1574
+dat_science_outpost_shed	DATHOMIR	1725383	outpost_shed_s05.iff	Dathomir - Science Outpost / Shed	6	-87	18	-1638
+dat_science_outpost_starport	DATHOMIR	2835560	outpost_starport.iff	Dathomir - Science Outpost / Starport	1	-76	18	-1586
+dat_smc_stronghold	DATHOMIR	2665878	mtn_clan_stronghold.iff	Dathomir - SMC Stronghold	11	164	430	4489
+dat_trade_outpost_cantina	DATHOMIR	6955366	ply_corl_house_m_s01_fp1.iff	Dathomir - Trade Outpost / Cantina	4	603	6	3036
+dat_trade_outpost_cloning	DATHOMIR	1392889	outpost_cloning_facility_s03.iff	Dathomir - Trade Outpost / Cloning	6	628	6	3054
+dat_trade_outpost_shed1	DATHOMIR	1392896	outpost_shed_s03.iff	Dathomir - Trade Outpost / Shed 1	6	568	6	3061
+dat_trade_outpost_shed2	DATHOMIR	6955398	outpost_shed.iff	Dathomir - Trade Outpost / Shed 2	6	577	6	3041
+dat_trade_outpost_starport	DATHOMIR	6915358	outpost_starport.iff	Dathomir - Trade Outpost / Starport	1	592	6	3087
+dat_world	DATHOMIR	0	empty	Dathomir - World	0	0	0	0
+du1_corvette_1	DUNGEON1	4335861	space_dungeon_corellian_corvette.iff	Dungeon1 - Corellian Corvette 1	66	600	0	600
+du1_corvette_10	DUNGEON1	1945896	space_dungeon_corellian_corvette.iff	Dungeon1 - Corellian Corvette 10	66	1900	0	1000
+du1_corvette_11	DUNGEON1	1945762	space_dungeon_corellian_corvette.iff	Dungeon1 - Corellian Corvette 11	66	2050	0	600
+du1_corvette_12	DUNGEON1	1945829	space_dungeon_corellian_corvette.iff	Dungeon1 - Corellian Corvette 12	66	2050	0	1000
+du1_corvette_13	DUNGEON1	1945963	space_dungeon_corellian_corvette.iff	Dungeon1 - Corellian Corvette 13	66	2550	0	600
+du1_corvette_14	DUNGEON1	1946164	space_dungeon_corellian_corvette.iff	Dungeon1 - Corellian Corvette 14	66	2550	0	1000
+du1_corvette_15	DUNGEON1	1946030	space_dungeon_corellian_corvette.iff	Dungeon1 - Corellian Corvette 15	66	2700	0	600
+du1_corvette_16	DUNGEON1	1946097	space_dungeon_corellian_corvette.iff	Dungeon1 - Corellian Corvette 16	66	2700	0	1000
+du1_corvette_2	DUNGEON1	4336062	space_dungeon_corellian_corvette.iff	Dungeon1 - Corellian Corvette 2	66	600	0	1000
+du1_corvette_3	DUNGEON1	4335928	space_dungeon_corellian_corvette.iff	Dungeon1 - Corellian Corvette 3	66	750	0	600
+du1_corvette_4	DUNGEON1	4335995	space_dungeon_corellian_corvette.iff	Dungeon1 - Corellian Corvette 4	66	750	0	1000
+du1_corvette_5	DUNGEON1	1945628	space_dungeon_corellian_corvette.iff	Dungeon1 - Corellian Corvette 5	66	1250	0	1000
+du1_corvette_6	DUNGEON1	4336129	space_dungeon_corellian_corvette.iff	Dungeon1 - Corellian Corvette 6	66	1250	0	600
+du1_corvette_7	DUNGEON1	1945494	space_dungeon_corellian_corvette.iff	Dungeon1 - Corellian Corvette 7	66	1400	0	600
+du1_corvette_8	DUNGEON1	1945561	space_dungeon_corellian_corvette.iff	Dungeon1 - Corellian Corvette 8	66	1400	0	1000
+du1_corvette_9	DUNGEON1	1945695	space_dungeon_corellian_corvette.iff	Dungeon1 - Corellian Corvette 9	66	1900	0	600
+du1_imp_corvette_1	DUNGEON1	4336196	space_dungeon_corellian_corvette_imperial.iff	Dungeon1 - Imp Corellian Corvette 1	66	600	0	1900
+du1_imp_corvette_10	DUNGEON1	1946633	space_dungeon_corellian_corvette_imperial.iff	Dungeon1 - Imp Corellian Corvette 10	66	1900	0	2300
+du1_imp_corvette_11	DUNGEON1	1946499	space_dungeon_corellian_corvette_imperial.iff	Dungeon1 - Imp Corellian Corvette 11	66	2050	0	1900
+du1_imp_corvette_12	DUNGEON1	1946566	space_dungeon_corellian_corvette_imperial.iff	Dungeon1 - Imp Corellian Corvette 12	66	2050	0	2300
+du1_imp_corvette_13	DUNGEON1	1946700	space_dungeon_corellian_corvette_imperial.iff	Dungeon1 - Imp Corellian Corvette 13	66	2550	0	1900
+du1_imp_corvette_14	DUNGEON1	1946901	space_dungeon_corellian_corvette_imperial.iff	Dungeon1 - Imp Corellian Corvette 14	66	2550	0	2300
+du1_imp_corvette_15	DUNGEON1	1946767	space_dungeon_corellian_corvette_imperial.iff	Dungeon1 - Imp Corellian Corvette 15	66	2700	0	1900
+du1_imp_corvette_16	DUNGEON1	1946834	space_dungeon_corellian_corvette_imperial.iff	Dungeon1 - Imp Corellian Corvette 16	66	2700	0	2300
+du1_imp_corvette_2	DUNGEON1	4336397	space_dungeon_corellian_corvette_imperial.iff	Dungeon1 - Imp Corellian Corvette 2	66	600	0	2300
+du1_imp_corvette_3	DUNGEON1	4336263	space_dungeon_corellian_corvette_imperial.iff	Dungeon1 - Imp Corellian Corvette 3	66	750	0	1900
+du1_imp_corvette_4	DUNGEON1	4336330	space_dungeon_corellian_corvette_imperial.iff	Dungeon1 - Imp Corellian Corvette 4	66	750	0	2300
+du1_imp_corvette_5	DUNGEON1	1946365	space_dungeon_corellian_corvette_imperial.iff	Dungeon1 - Imp Corellian Corvette 5	66	1250	0	2300
+du1_imp_corvette_6	DUNGEON1	4336464	space_dungeon_corellian_corvette_imperial.iff	Dungeon1 - Imp Corellian Corvette 6	66	1250	0	1900
+du1_imp_corvette_7	DUNGEON1	1946231	space_dungeon_corellian_corvette_imperial.iff	Dungeon1 - Imp Corellian Corvette 7	66	1400	0	1900
+du1_imp_corvette_8	DUNGEON1	1946298	space_dungeon_corellian_corvette_imperial.iff	Dungeon1 - Imp Corellian Corvette 8	66	1400	0	2300
+du1_imp_corvette_9	DUNGEON1	1946432	space_dungeon_corellian_corvette_imperial.iff	Dungeon1 - Imp Corellian Corvette 9	66	1900	0	1900
+du1_reb_corvette_1	DUNGEON1	4336531	space_dungeon_corellian_corvette_rebel.iff	Dungeon1 - Reb Corellian Corvette 1	66	600	0	3200
+du1_reb_corvette_10	DUNGEON1	1947370	space_dungeon_corellian_corvette_rebel.iff	Dungeon1 - Reb Corellian Corvette 10	66	1900	0	3600
+du1_reb_corvette_11	DUNGEON1	1947236	space_dungeon_corellian_corvette_rebel.iff	Dungeon1 - Reb Corellian Corvette 11	66	2050	0	3200
+du1_reb_corvette_12	DUNGEON1	1947303	space_dungeon_corellian_corvette_rebel.iff	Dungeon1 - Reb Corellian Corvette 12	66	2050	0	3600
+du1_reb_corvette_13	DUNGEON1	1947437	space_dungeon_corellian_corvette_rebel.iff	Dungeon1 - Reb Corellian Corvette 13	66	2550	0	3200
+du1_reb_corvette_14	DUNGEON1	1947638	space_dungeon_corellian_corvette_rebel.iff	Dungeon1 - Reb Corellian Corvette 14	66	2550	0	3600
+du1_reb_corvette_15	DUNGEON1	1947504	space_dungeon_corellian_corvette_rebel.iff	Dungeon1 - Reb Corellian Corvette 15	66	2700	0	3200
+du1_reb_corvette_16	DUNGEON1	1947571	space_dungeon_corellian_corvette_rebel.iff	Dungeon1 - Reb Corellian Corvette 16	66	2700	0	3600
+du1_reb_corvette_2	DUNGEON1	4336732	space_dungeon_corellian_corvette_rebel.iff	Dungeon1 - Reb Corellian Corvette 2	66	600	0	3600
+du1_reb_corvette_3	DUNGEON1	4336598	space_dungeon_corellian_corvette_rebel.iff	Dungeon1 - Reb Corellian Corvette 3	66	750	0	3200
+du1_reb_corvette_4	DUNGEON1	4336665	space_dungeon_corellian_corvette_rebel.iff	Dungeon1 - Reb Corellian Corvette 4	66	750	0	3600
+du1_reb_corvette_5	DUNGEON1	1947102	space_dungeon_corellian_corvette_rebel.iff	Dungeon1 - Reb Corellian Corvette 5	66	1250	0	3600
+du1_reb_corvette_6	DUNGEON1	4336799	space_dungeon_corellian_corvette_rebel.iff	Dungeon1 - Reb Corellian Corvette 6	66	1250	0	3200
+du1_reb_corvette_7	DUNGEON1	1946968	space_dungeon_corellian_corvette_rebel.iff	Dungeon1 - Reb Corellian Corvette 7	66	1400	0	3200
+du1_reb_corvette_8	DUNGEON1	1947035	space_dungeon_corellian_corvette_rebel.iff	Dungeon1 - Reb Corellian Corvette 8	66	1400	0	3600
+du1_reb_corvette_9	DUNGEON1	1947169	space_dungeon_corellian_corvette_rebel.iff	Dungeon1 - Reb Corellian Corvette 9	66	1900	0	3200
+du1_world	DUNGEON1	0	empty	Dungeon1 - World	0	0	0	0
+end_bf_bunker_bunker	ENDOR	-424464266445617086	gcw_battlefield_base.iff	Endor - BF Bunker Assault / Bunker	10	-7065	379	7076
+end_bf_bunker_imp	ENDOR	-424464265497775194	military_imperial_field_hospital.iff	Endor - BF Bunker Assault / Imp	9	-7099	305	7281
+end_bf_bunker_reb	ENDOR	-424464265736787370	military_rebel_field_hospital.iff	Endor - BF Bunker Assault / Reb	9	-7083	330	6859
+end_bf_data_imp	ENDOR	-422493940937091268	military_imperial_field_hospital.iff	Endor - BF Data Runner / Imp	9	-6439	15	-6643
+end_bf_data_reb	ENDOR	-422493940599543108	military_rebel_field_hospital.iff	Endor - BF Data Runner / Reb	9	-6553	7	-7361
+end_dwb	ENDOR	5996314	bunker_allum_mine.iff	Endor - DWB	65	-4662	12	4326
+end_itp_merc_bunker	ENDOR	-436004740165838874	itp_emperor_merc_bunker.iff	Endor - ITP / Merc Bunker	49	3650	301	7478
+end_jina_cave	ENDOR	6015488	endor_jinda_cave.iff	Endor - Jinda Cave	29	-1713	29	53
+end_korga_cave	ENDOR	733359	endor_korga_cave.iff	Endor - Korga Cave	11	2244	38	3553
+end_marauder_orphans_cave	ENDOR	733396	endor_marauder_orphans_cave.iff	Endor - Marauder Orphans Cave	11	-6926	20	689
+end_mummer_bunker	ENDOR	-426716066483093325	corellia_chirq_elite_council_01.iff	Endor - Mummer Bunker	22	-5212	294	6971
+end_outpost_guard_house1	ENDOR	8445558	military_outpost_guard_house_rebel.iff	Endor - Outpost - Guard House1	2	4016	0	2971
+end_outpost_guard_house2	ENDOR	-432064089477882723	military_outpost_guard_house_imperial.iff	Endor - Outpost / Guard House2	2	613	8	-4620
+end_outpost_guard_house3	ENDOR	-432064089382593115	military_outpost_guard_house_imperial.iff	Endor - Outpost / Guard House3	2	629	7	-4590
+end_outpost_guard_house4	ENDOR	-432064089419511621	military_outpost_guard_house_imperial.iff	Endor - Outpost / Guard House4	2	696	9	-4670
+end_outpost_guard_house5	ENDOR	-432064090554933046	military_outpost_guard_house_imperial.iff	Endor - Outpost / Guard House5	2	713	10	-4640
+end_research_outpost_cantina	ENDOR	9925364	ply_corl_house_m_s01_fp1.iff	Endor - Research Outpost / Cantina	4	3223	24	-3442
+end_research_outpost_cloning	ENDOR	3605954	outpost_cloning_facility_s02.iff	Endor - Research Outpost / Cloning	6	3200	24	-3442
+end_research_outpost_med_center	ENDOR	1414867	pirate_outpost.iff	Endor - Research Outpost / Med Center	6	3245	24	-3442
+end_research_outpost_shed1	ENDOR	3605968	outpost_shed_s04.iff	Endor - Research Outpost / Shed 1	6	3188	24	-3504
+end_research_outpost_shed2	ENDOR	9875413	outpost_shed.iff	Endor - Research Outpost / Shed 2	6	3256	24	-3504
+end_research_outpost_starport	ENDOR	9875353	outpost_starport.iff	Endor - Research Outpost / Starport	1	3222	24	-3482
+end_smuggler_outpost_cantina	ENDOR	6645602	ply_corl_house_s_s01_fp1.iff	Endor - Smuggler Outpost / Cantina	4	-866	80	1558
+end_smuggler_outpost_cloning	ENDOR	6705354	outpost_cloning_facility.iff	Endor - Smuggler Outpost / Cloning	6	-913	80	1618
+end_smuggler_outpost_house	ENDOR	-430656714822080980	player_house_generic_small_style_02.iff	Endor - Smuggler Outpost / House	3	-999	95	1721
+end_smuggler_outpost_med_center	ENDOR	1414856	pirate_outpost.iff	Endor - Smuggler Outpost / Med Center	6	-850	80	1609
+end_smuggler_outpost_starport	ENDOR	6705352	outpost_starport.iff	Endor - Smuggler Outpost / Starport	1	-978	73	1554
+end_tao_ni_security_compound	ENDOR	-436004740850026373	naboo_deeja_peak_stonewall_labs.iff	Endor - Tao-Ni Security Compound	22	2614	199	6663
+end_world	ENDOR	0	empty	Endor - World	0	0	0	0
+kas_dead_f_shadowwave_caverns	KASHYYYK_DEAD_FOREST	-281474976740656	ep3_forest_webweaver.iff	Kashyyyk - Dead Forest / ShadowWeave Caverns	11	212	10	326
+kas_dead_f_world	KASHYYYK_DEAD_FOREST	0	empty	Kashyyyk Dead Forest / World	0	0	0	0
+kas_hunting_chiss_hut1	KASHYYYK_HUNTING	-28428972650806242	poi_kash_chiss_hut.iff	Kashyyyk - Hunting grounds / Chiss Hut 1	1	-1239	10	-104
+kas_hunting_chiss_hut10	KASHYYYK_HUNTING	-28428972650806254	poi_kash_chiss_hut.iff	Kashyyyk - Hunting grounds / Chiss Hut 10	1	-1088	4	75
+kas_hunting_chiss_hut11	KASHYYYK_HUNTING	-28428972650806236	poi_kash_chiss_hut.iff	Kashyyyk - Hunting grounds / Chiss Hut 11	1	-1077	7	-80
+kas_hunting_chiss_hut12	KASHYYYK_HUNTING	-28428972650806234	poi_kash_rodian_hut.iff	Kashyyyk - Hunting grounds / Chiss Hut 12	1	285	48	494
+kas_hunting_chiss_hut2	KASHYYYK_HUNTING	-28428972650806244	poi_kash_chiss_hut.iff	Kashyyyk - Hunting grounds / Chiss Hut 2	1	-1238	13	-125
+kas_hunting_chiss_hut3	KASHYYYK_HUNTING	-28428972650806250	poi_kash_chiss_hut.iff	Kashyyyk - Hunting grounds / Chiss Hut 3	1	-1235	6	-4
+kas_hunting_chiss_hut4	KASHYYYK_HUNTING	-28428972650806248	poi_kash_chiss_hut.iff	Kashyyyk - Hunting grounds / Chiss Hut 4	1	-1228	6	-26
+kas_hunting_chiss_hut5	KASHYYYK_HUNTING	-28428972650806252	poi_kash_chiss_hut.iff	Kashyyyk - Hunting grounds / Chiss Hut 5	1	-1214	6	88
+kas_hunting_chiss_hut6	KASHYYYK_HUNTING	-28428972650806240	poi_kash_chiss_hut.iff	Kashyyyk - Hunting grounds / Chiss Hut 6	1	-1188	13	-111
+kas_hunting_chiss_hut7	KASHYYYK_HUNTING	-28428972650806238	poi_kash_chiss_hut.iff	Kashyyyk - Hunting grounds / Chiss Hut 7	1	-1185	13	-147
+kas_hunting_chiss_hut8	KASHYYYK_HUNTING	-28428972650806246	poi_kash_chiss_hut.iff	Kashyyyk - Hunting grounds / Chiss Hut 8	1	-1143	6	-52
+kas_hunting_chiss_hut9	KASHYYYK_HUNTING	-28428972650806256	poi_kash_chiss_hut.iff	Kashyyyk - Hunting grounds / Chiss Hut 9	1	-1122	5	86
+kas_hunting_world	KASHYYYK_HUNTING	0	empty	Kashyyyk - Hunting grounds / World	0	0	0	0
+kas_main_kachirho_guard_house	KASHYYYK_MAIN	-56576470324871856	military_outpost_guard_house_imperial.iff	Kashyyyk - Kachirho / Guard House	2	-665	19	-108
+kas_main_kachirho_imp_bunker	KASHYYYK_MAIN	-56576470324871847	bunker_imperial_kashyyyk_01.iff	Kashyyyk - Kachirho / Imp Bunker	10	-678	19	-110
+kas_main_kachirho_starport	KASHYYYK_MAIN	-56576470324871849	mun_kachirho_starport.iff	Kashyyyk - Kachirho / Starport	1	-670	19	-148
+kas_main_world	KASHYYYK_MAIN	0	empty	Kashyyyk - World	0	0	0	0
+lok_blood_razor_transport_outpost	LOK	568747	pirate_outpost.iff	Lok - Blood Razor Transport / Outpost	6	3647	1	2166
+lok_blood_razor_transport_shed	LOK	568775	outpost_shed_s04.iff	Lok - Blood Razor Transport / Shed	6	3611	1	2183
+lok_blood_razor_transport_warehouse	LOK	568754	pirate_warehouse.iff	Lok - Blood Razor Transport / Warehouse	6	3663	1	2186
+lok_evil_droid_eng_cave	LOK	568956	lok_evil_droid_engineer_cave.iff	Lok - Evil Droid Eng Cave	29	3302	129	-4890
+lok_imp_outpost_barracks1	LOK	8615452	military_base_shed_imperial_barracks_s01.iff	Lok - Imp Outpost / Barracks 1	6	-2009	12	-3045
+lok_imp_outpost_barracks2	LOK	8615431	military_base_shed_imperial_barracks_s01.iff	Lok - Imp Outpost / Barracks 2	6	-1827	12	-3107
+lok_imp_outpost_cloning	LOK	8615438	small_imperial_cloning_facility.iff	Lok - Imp Outpost / Cloning	6	-1844	12	-3028
+lok_imp_outpost_guard_house1	LOK	2745954	military_outpost_guard_house_imperial.iff	Lok - Imp Outpost / Guard House 1	2	-2026	12	-3044
+lok_imp_outpost_guard_house2	LOK	2745970	military_outpost_guard_house_imperial.iff	Lok - Imp Outpost / Guard House 2	2	-2026	12	-3084
+lok_imp_outpost_guard_house3	LOK	2746035	military_outpost_guard_house_imperial.iff	Lok - Imp Outpost / Guard House 3	2	-1810	12	-3107
+lok_imp_outpost_guard_house4	LOK	2746038	military_outpost_guard_house_imperial.iff	Lok - Imp Outpost / Guard House 4	2	-1810	12	-3067
+lok_imp_outpost_guard_tower1	LOK	2745961	mun_all_military_tower_impl_guard_s01.iff	Lok - Imp Outpost / Guard Tower 1	1	-1948	12	-2972
+lok_imp_outpost_guard_tower2	LOK	2746001	mun_all_military_tower_impl_guard_s01.iff	Lok - Imp Outpost / Guard Tower 2	1	-1931	12	-2972
+lok_imp_outpost_guard_tower3	LOK	2746056	mun_all_military_tower_impl_guard_s01.iff	Lok - Imp Outpost / Guard Tower 3	1	-1923	12	-3191
+lok_imp_outpost_guard_tower4	LOK	2746053	mun_all_military_tower_impl_guard_s01.iff	Lok - Imp Outpost / Guard Tower 4	1	-1907	12	-3191
+lok_imp_outpost_main_bldg	LOK	8615418	military_base_police_station_imperial_lok_otto.iff	Lok - Imp Outpost / Main Building	12	-1871	12	-3085
+lok_imp_outpost_officer_shed	LOK	8615445	military_base_shed_imperial_style_officer_s01.iff	Lok - Imp Outpost / Officer Shed	6	-1920	12	-2984
+lok_imp_outpost_shed	LOK	2746309	military_base_shed_imperial_style_01.iff	Lok - Imp Outpost / Shed	6	-1902	12	-3173
+lok_imperial_gas_mine	LOK	5645584	mining_cave_01.iff	Lok - Imperial Gas Mine	11	6476	73	3895
+lok_ntp_mercenary_bunker	LOK	5126270	lok_nymstheme_mercenary_bunker.iff	Lok - NTP / Mercenary Bunker	22	916	13	-4185
+lok_ntp_pirate_cave	LOK	5126308	lok_nymstheme_pirate_cave.iff	Lok - NTP / Pirate Cave	29	-2996	17	-668
+lok_nym_cantina	LOK	8145375	cantina_tatooine.iff	Lok - Nym / Cantina	15	500	12	5065
+lok_nym_cloning	LOK	2745615	cloning_facility_tatooine_small.iff	Lok - Nym / Cloning	10	212	17	5147
+lok_nym_hospital	LOK	2745864	hospital_tatooine.iff	Lok - Nym / Hospital	14	584	12	5130
+lok_nym_hotel	LOK	8145352	hotel_tatooine_style_01.iff	Lok - Nym / Hotel	10	420	12	5107
+lok_nym_slicer_institute	LOK	-489766459590227638	tatooine_slicer_institute.iff	Lok - Nym / Slicer Institute	12	120	12	4893
+lok_nym_starport	LOK	4705364	outpost_starport.iff	Lok - Nym / Starport	1	459	9	5494
+lok_nym_stronghold	LOK	6595508	nym_stronghold.iff	Lok - Nym / Stronghold	11	475	12	4790
+lok_prolog_bunker	LOK	-487796135652092032	prolog_bunker_dungeon.iff	Lok - Prolog Bunker	9	-419	92	7654
+lok_reb_base_hospital	LOK	-482729586888819169	military_rebel_field_hospital.iff	Lok - Reb Base / Hospital	9	-6097	62	5950
+lok_reb_base_outpost	LOK	-482729585582547239	military_rebel_forward_outpost.iff	Lok - Reb Base / Outpost	6	-6069	62	5946
+lok_world	LOK	0	empty	Lok - World	0	0	0	0
+mus_crashed_republic_ship_cockpit	MUSTAFAR	-506936433055891607	must_crashed_republic_ship.iff	Mustafar - Crashed Republic Ship / Cockpit	2	1956	99	3009
+mus_mensix	MUSTAFAR	-507780858040143424	must_new_mining_facility.iff	Mustafar - Mensix Mining Facility	30	-1245	199	5639
+mus_world	MUSTAFAR	0	empty	Mustafar - World	0	0	0	0
+nab_amidala_hotel	NABOO	1865359	hotel_naboo_theed.iff	Naboo - Amidalas Beach / Hotel	10	-5527	-150	-34
+nab_black_sun_outpost	NABOO	-285697101969323686	bunker_blacksun_outpost_01.iff	Naboo - BlackSun Outpost	49	-4740	-196	4846
+nab_borvo_bunker	NABOO	-285415627973332372	naboo_theed_borvo_bunker.iff	Naboo - Borvo Bunker	9	-4184	45	3893
+nab_borvos_vault	NABOO	-295830200522899510	borvos_vault.iff	Naboo - Borvos Vault	49	4319	5	-4798
+nab_boss_nass_dungeon	NABOO	-289074801081843714	boss_nass_dungeon.iff	Naboo - Boss Nass Dungeon	9	-1890	5	-5590
+nab_crystal_cave	NABOO	-291889551893786565	cave_02.iff	Naboo - Crystal Cave	11	1944	304	-1552
+nab_darkwalker_bunker	NABOO	-286823001605529540	naboo_sacred_place_darkwalker_bunker.iff	Naboo - Darkwalker Bunker	10	-2206	13	-5178
+nab_darkwalker_cave	NABOO	-285697103311980886	naboo_theed_darkwalker_cave.iff	Naboo - Darkwalker Cave	29	-4265	-183	4352
+nab_deeja_association_hall	NABOO	1741484	association_hall_civilian_naboo.iff	Naboo - Deeja Peak / Association Hall	17	4911	360	-1373
+nab_deeja_capitol	NABOO	1945387	capitol_naboo_theed.iff	Naboo - Deeja Peak / Capitol	11	4647	330	-1406
+nab_deeja_darkwalker_cave	NABOO	-296393151134702237	naboo_deeja_darkwalker_cave.iff	Naboo - Deeja Peak / Darkwalker Cave	11	5033	276	-2061
+nab_deeja_hotel	NABOO	1419009	hotel_naboo_theed.iff	Naboo - Deeja Peak / Hotel	10	5145	350	-1431
+nab_deeja_house1	NABOO	1714781	housing_naboo_style_1.iff	Naboo - Deeja Peak / House 1	7	4874	360	-1364
+nab_deeja_house2	NABOO	1685119	housing_naboo_style_1.iff	Naboo - Deeja Peak / House 2	7	5124	350	-1547
+nab_deeja_mummer_cave	NABOO	-294141351876756066	naboo_deeja_mummer_cave.iff	Naboo - Deeja Peak / Mummer Cave	11	4050	421	-1718
+nab_deeja_skaak_cave	NABOO	-296674625788608721	naboo_deeja_skaak_cave.iff	Naboo - Deeja Peak / Skaak Cave	11	4558	100	-960
+nab_deeja_stonewall_labs	NABOO	-296674626034364525	naboo_deeja_peak_stonewall_labs.iff	Naboo - Deeja Peak / Stonewall Labs	22	5812	229	-1981
+nab_deeja_university	NABOO	1685231	guild_university_naboo_style_01.iff	Naboo - Deeja Peak / University	9	4731	330	-1275
+nab_drennic_bunker	NABOO	-292171026579885505	naboo_ac_drennic_bunker.iff	Naboo - Drennic Bunker	10	357	13	2037
+nab_emperors_retreat	NABOO	1418871	emperors_retreat.iff	Naboo - Emperors Retreat	23	2421	292	-3941
+nab_emperors_retreat_tower1	NABOO	1726361	mun_all_military_tower_impl_guard_s01.iff	Naboo - Emperors Retreat / Tower 1	1	1710	385	-3671
+nab_emperors_retreat_tower2	NABOO	1726359	mun_all_military_tower_impl_guard_s01.iff	Naboo - Emperors Retreat / Tower 2	1	1905	395	-4024
+nab_emperors_retreat_tower3	NABOO	1726355	mun_all_military_tower_impl_guard_s01.iff	Naboo - Emperors Retreat / Tower 3	1	2121	294	-4186
+nab_emperors_retreat_tower4	NABOO	1726357	mun_all_military_tower_impl_guard_s01.iff	Naboo - Emperors Retreat / Tower 4	1	2174	362	-3693
+nab_emperors_retreat_tower5	NABOO	1726363	mun_all_military_tower_impl_guard_s01.iff	Naboo - Emperors Retreat / Tower 5	1	2342	392	-3556
+nab_emperors_retreat_tower6	NABOO	1726353	mun_all_military_tower_impl_guard_s01.iff	Naboo - Emperors Retreat / Tower 6	1	2369	325	-4100
+nab_emperors_retreat_tower7	NABOO	1722452	mun_all_military_tower_impl_guard_s01.iff	Naboo - Emperors Retreat / Tower 7	1	2541	296	-3884
+nab_emperors_retreat_tower8	NABOO	1726365	mun_all_military_tower_impl_guard_s01.iff	Naboo - Emperors Retreat / Tower 8	1	2556	352	-3647
+nab_gcw_base	NABOO	-291889552794976255	naboo_gcw_bunker_01.iff	Naboo - GCW Base	49	1004	298	-1471
+nab_gcw_base_shed	NABOO	-291889551823046334	outpost_shed.iff	Naboo - GCW Base / Shed	6	987	298	-1509
+nab_guard_house	NABOO	7825775	military_outpost_guard_house_imperial.iff	Naboo - Guard House	2	972	260	-1346
+nab_house	NABOO	-298363475801225419	trapped_family_house.iff	Naboo - House	7	6358	4	-6970
+nab_insane_creature_bunker	NABOO	-287385951554433134	bunker_insane_creature.iff	Naboo - Insane Creature / Bunker	9	-2525	154	-1002
+nab_insane_creature_house	NABOO	-287385952181949841	trapped_family_house.iff	Naboo - Insane Creature / House	7	-2570	134	-892
+nab_kadaara_association_hall	NABOO	56919	association_hall_civilian_naboo.iff	Naboo - Kadaara / Association Hall	17	5196	-192	6737
+nab_kadaara_barracks	NABOO	1260047	military_base_shed_imperial_barracks_s01.iff	Naboo - Kadaara / Barracks	6	5386	-197	6443
+nab_kadaara_cantina	NABOO	61	cantina_naboo.iff	Naboo - Kadaara / Cantina	15	4980	-192	6710
+nab_kadaara_cloning	NABOO	1741512	cloning_facility_naboo.iff	Naboo - Kadaara / Cloning	6	5332	-192	6552
+nab_kadaara_combat_gh	NABOO	1741453	guild_combat_naboo_style_01.iff	Naboo - Kadaara / Combat GH	9	5100	-192	6776
+nab_kadaara_commerce_gh	NABOO	1741502	guild_commerce_naboo_style_01.iff	Naboo - Kadaara / Commerce GH	9	5168	-192	6701
+nab_kadaara_detachment_hq	NABOO	1259938	military_imperial_detachment_hq.iff	Naboo - Kadaara / Detatchment HQ	10	5369	-197	6420
+nab_kadaara_hospital	NABOO	1741437	hospital_naboo.iff	Naboo - Kadaara / Hospital	14	5101	-192	6639
+nab_kadaara_hotel	NABOO	1741473	hotel_naboo_theed.iff	Naboo - Kadaara / Hotel	10	5211	-192	6812
+nab_kadaara_house	NABOO	1741358	housing_naboo_style_1.iff	Naboo - Kadaara / House	7	5034	-189	6741
+nab_kadaara_officer_shed	NABOO	1260054	military_base_shed_imperial_style_officer_s01.iff	Naboo - Kadaara / Offier Shed	6	5346	-197	6437
+nab_kadaara_old_war_bunker	NABOO	-297800525359874056	naboo_old_war_bunker.iff	Naboo - Kadaara / Old War Bunker	9	5562	-208	6930
+nab_kadaara_skaak_tipper_bunker	NABOO	-300333800150269954	naboo_kadaara_skaak_tipper_bunker.iff	Naboo - Kadaara / Skaak Tipper Bunker	22	6706	-209	7202
+nab_kadaara_skaak_tipper_bunker_outpost	NABOO	-300333800150270051	pirate_outpost.iff	Naboo - Kadaara / Skaak Tipper Bunker / Outpost	6	6681	-209	7195
+nab_kadaara_skaak_tipper_bunker_warehouse	NABOO	-300333800150270060	pirate_warehouse.iff	Naboo - Kadaara / Skaak Tipper Bunker / Warehouse	6	6672	-209	7174
+nab_kadaara_starport	NABOO	1741535	starport_naboo.iff	Naboo - Kadaara / Starport	16	5295	-192	6664
+nab_kadaara_theater	NABOO	4105610	guild_theater_naboo_s01.iff	Naboo - Kadaara / Theater	10	5325	-192	6765
+nab_kadaara_university	NABOO	1741463	guild_university_naboo_style_01.iff	Naboo - Kadaara / University	9	5130	-192	6805
+nab_keren_association_hall	NABOO	8845416	association_hall_civilian_naboo.iff	Naboo - Keren / Association Hall	17	1678	12	2707
+nab_keren_cantina	NABOO	2	cantina_naboo.iff	Naboo - Keren / Cantina	15	2098	30	2526
+nab_keren_cloning	NABOO	1650611	cloning_facility_naboo.iff	Naboo - Keren / Cloning	6	1949	12	2760
+nab_keren_combat_gh	NABOO	1650526	guild_combat_naboo_style_01.iff	Naboo - Keren / Combat GH	9	1836	12	2614
+nab_keren_commerce_gh	NABOO	1396866	guild_commerce_naboo_style_01.iff	Naboo - Keren / Commerce GH	9	1738	12	2614
+nab_keren_hospital	NABOO	1661364	hospital_naboo.iff	Naboo - Keren / Hospital	14	1953	12	2620
+nab_keren_hotel	NABOO	1393860	hotel_naboo_theed.iff	Naboo - Keren Hotel	10	1787	12	2673
+nab_keren_house1	NABOO	2125454	housing_naboo_style_1.iff	Naboo - Keren / House 1	7	1383	13	2669
+nab_keren_house2	NABOO	1685071	housing_naboo_style_1.iff	Naboo - Keren / House 2	7	1604	25	2503
+nab_keren_house3	NABOO	1396879	housing_naboo_style_1.iff	Naboo - Keren / House 3	7	1673	25	2759
+nab_keren_house4	NABOO	1661379	housing_naboo_style_1.iff	Naboo - Keren / House 4	7	1831	12	2774
+nab_keren_house5	NABOO	1650509	housing_naboo_style_1.iff	Naboo - Keren / House 5	7	1876	12	2470
+nab_keren_house6	NABOO	1495993	trandoshan_slave_naboo_house.iff	Naboo - Keren / House 6	14	2018	12	2360
+nab_keren_starport	NABOO	2125378	starport_naboo.iff	Naboo - Keren / Starport	16	1352	13	2768
+nab_keren_theater	NABOO	4045375	guild_theater_naboo_s01.iff	Naboo - Keren / Theater	10	1687	12	2540
+nab_keren_university	NABOO	1650536	guild_university_naboo_style_01.iff	Naboo - Keren / University	9	1787	12	2565
+nab_mauler_bunker	NABOO	-286823002884357022	naboo_sacred_place_mauler_bunker.iff	Naboo - Mauler Bunker	9	-2383	6	-5506
+nab_mauler_stronghold	NABOO	-294422825639346178	mauler_stronghold.iff	Naboo - Mauler Stronghold	34	2838	95	1084
+nab_mauler_stronghold_house	NABOO	1696443	ply_nboo_house_s_s02_fp1.iff	Naboo - Mauler Stronghold / House	4	2912	101	1106
+nab_moenia_cantina	NABOO	108	cantina_naboo.iff	Naboo - Moenia / Cantina	15	4873	4	-4622
+nab_moenia_cloning	NABOO	1717558	cloning_facility_naboo.iff	Naboo - Moenia / Cloning	6	5026	4	-4932
+nab_moenia_combat_gh	NABOO	1717526	guild_combat_naboo_style_01.iff	Naboo - Moenia / Combat GH	9	4722	4	-4984
+nab_moenia_commerce_gh	NABOO	1717538	guild_commerce_naboo_style_01.iff	Naboo - Moenia / Commerce GH	9	4918	4	-4790
+nab_moenia_hospital	NABOO	1717500	hospital_naboo.iff	Naboo - Moenia / Hospital	14	4918	4	-4929
+nab_moenia_hotel	NABOO	1717465	hotel_naboo_theed.iff	Naboo - Moenia / Hotel	10	4656	4	-4894
+nab_moenia_house	NABOO	1719359	housing_naboo_style_1.iff	Naboo - Moenia / House	7	4854	4	-4830
+nab_moenia_salon	NABOO	8575780	salon_naboo.iff	Naboo - Moenia / Salon	1	4787	5	-4731
+nab_moenia_starport	NABOO	4215406	starport_naboo.iff	Naboo - Moenia / Starport	16	4728	4	-4650
+nab_moenia_theater	NABOO	2725352	guild_theater_naboo_s01.iff	Naboo - Moenia / Theater	10	4929	360	-1473
+nab_moenia_university	NABOO	1717548	guild_university_naboo_style_01.iff	Naboo - Moenia / University	9	4805	4	-5000
+nab_mummer_bunker	NABOO	-285415627153769591	naboo_theed_mummer_bunker.iff	Naboo - Mummer Bunker	22	-4526	9	3633
+nab_mystril_safehouse	NABOO	-285415628435115831	ac_mystril_safehouse_01_memorial.iff	Naboo - Mystril Safehouse	7	-5427	13	3574
+nab_narglatch_cave	NABOO	5285763	naboo_narglatch_cave.iff	Naboo - Narglatch Cave	11	5841	41	-4635
+nab_nikto_cavern	NABOO	-287385953061742032	ac_nikto_cavern.iff	Naboo - Nikto Cavern	11	-3994	65	-655
+nab_pirate_bunker	NABOO	5535563	naboo_pirate_bunker.iff	Naboo - Pirate Bunker	10	-1482	278	-1729
+nab_rtp_guard_tower1	NABOO	-286823003178989996	mun_all_military_tower_impl_guard_s01.iff	Naboo - RTP / Guard Tower 1	1	-3678	6	-5305
+nab_rtp_guard_tower2	NABOO	-286823001749503028	mun_all_military_tower_impl_guard_s01.iff	Naboo - RTP / Guard Tower 2	1	-3660	6	-5305
+nab_rtp_imp_small_spy	NABOO	-286823002928448593	bunker_imperial_small_spy.iff	Naboo - RTP / Imp Small Spy	10	-3669	6	-5313
+nab_skaak_bunker	NABOO	-289074802915616913	naboo_sacred_place_skaak_bunker.iff	Naboo - Skaak Bunker	10	-1642	6	-5372
+nab_theed_association_hall1	NABOO	56919	association_hall_civilian_naboo.iff	Naboo - Theed / Association Hall 1	17	-5792	6	4420
+nab_theed_association_hall2	NABOO	79371	association_hall_civilian_naboo.iff	Naboo - Theed / Association Hall 2	17	-5434	6	4266
+nab_theed_association_hall3	NABOO	79372	association_hall_civilian_naboo.iff	Naboo - Theed / Association Hall 3	17	-5380	6	4199
+nab_theed_association_hall4	NABOO	79411	association_hall_civilian_naboo.iff	Naboo - Theed / Association Hall 4	17	-5373	6	4406
+nab_theed_cantina	NABOO	88	cantina_naboo.iff	Naboo - Theed / Cantina	15	-5190	6	4258
+nab_theed_chronicle_vendor	NABOO	-285697102102308582	player_pgc_merchant_tent_s01.iff	Naboo - Theed / Chronicle Vendor	1	-4803	6	4134
+nab_theed_cloning1	NABOO	474323	cloning_facility_naboo.iff	Naboo - Theed / Cloning 1	6	-5887	6	4302
+nab_theed_cloning2	NABOO	1697350	cloning_facility_naboo.iff	Naboo - Theed / Cloning 2	6	-4875	6	4030
+nab_theed_combat_gh	NABOO	1692066	guild_combat_naboo_style_01.iff	Naboo - Theed / Combat Guild	9	-5457	6	4103
+nab_theed_commerce_gh	NABOO	7555639	guild_commerce_naboo_style_01.iff	Naboo - Theed / Commerce GH	9	-5370	6	4122
+nab_theed_hangar	NABOO	1692099	hangar_naboo_theed.iff	Naboo - Theed / Hangar	5	-4795	6	4239
+nab_theed_hospital	NABOO	1697358	hospital_naboo.iff	Naboo - Theed / Hospital	14	-5018	6	4162
+nab_theed_hotel1	NABOO	1677390	hotel_naboo_theed.iff	Naboo - Theed / Hotel 1	10	-5708	6	4232
+nab_theed_hotel2	NABOO	1697373	hotel_naboo_theed.iff	Naboo - Theed / Hotel 2	10	-5064	6	4102
+nab_theed_meatlump_house	NABOO	-285415627385613037	ply_nboo_house_s_s02_fp1.iff	Naboo - Theed / Meatlump House	4	-5249	6	3663
+nab_theed_palace	NABOO	1688849	palace_naboo_theed.iff	Naboo - Theed / Palace	35	-5496	6	4586
+nab_theed_salon	NABOO	189544	salon_naboo.iff	Naboo - Theed / Salon	1	-5124	6	4257
+nab_theed_theater	NABOO	5475479	guild_theater_naboo_s01.iff	Naboo - Theed / Theater	10	-5792	6	4181
+nab_theed_trando_slave_house1	NABOO	-286541526962548185	trandoshan_slave_naboo_house.iff	Naboo - Trando Slave House 1	14	-2719	6	-7256
+nab_theed_university	NABOO	1692086	guild_university_naboo_style_01.iff	Naboo - Theed / University	9	-5452	6	3997
+nab_veermok_cave	NABOO	4295393	naboo_veermok_cave.iff	Naboo - Veermok Cave	11	5703	290	-1558
+nab_weapon_development_facility	NABOO	8555470	bunker_imperial_weapons_research_facility_01.iff	Naboo - Weapon Development Facility	22	-6506	40	-3327
+nab_world	NABOO	0	empty	Naboo - World	0	0	0	0
+ror_bark_mite_cave	RORI	5095989	rori_bark_mite_cave.iff	Rori - Bark Mite Cave	11	3580	98	5440
+ror_bat_cave	RORI	5407162	rori_bat_cave.iff	Rori - Bat Cave	11	849	100	-4880
+ror_cobral_bunker	RORI	6055628	rori_cobral_bunker.iff	Rori - Cobral Bunker	10	5446	87	5016
+ror_garyn_bunker	RORI	5555840	rori_garyn_bunker.iff	Rori - Garyn Bunker	9	-6038	118	-1820
+ror_guard_house_reb	RORI	7555646	military_outpost_guard_house_rebel.iff	Rori - Guard House Reb	2	-5328	76	5017
+ror_gungan_swamp_town_tent1	RORI	8135587	merchant_tent_naboo_s01.iff	Rori - Gungan Swamp Town / Tent 1	1	-2093	76	3257
+ror_gungan_swamp_town_tent2	RORI	8135585	merchant_tent_naboo_s01.iff	Rori - Gungan Swamp Town / Tent 2	1	-2086	76	3264
+ror_gungan_swamp_town_tent3	RORI	8135583	merchant_tent_naboo_s01.iff	Rori - Gungan Swamp Town / Tent 3	1	-2070	76	3288
+ror_hyperdrive_research_facility	RORI	479815	rori_hyperdrive_research_facility.iff	Rori - Hyperdrive Research Facility	22	-1134	77	4519
+ror_hyperdrive_research_facility_guard_tower1	RORI	479850	mun_all_military_tower_impl_guard_s01.iff	Rori - Hyperdrive Research Facility / Guard Tower1	1	-1154	77	4507
+ror_hyperdrive_research_facility_guard_tower2	RORI	479843	mun_all_military_tower_impl_guard_s01.iff	Rori - Hyperdrive Research Facility / Guard Tower2	1	-1146	77	4553
+ror_hyperdrive_research_facility_guard_tower3	RORI	479845	mun_all_military_tower_impl_guard_s01.iff	Rori - Hyperdrive Research Facility / Guard Tower3	1	-1120	77	4553
+ror_hyperdrive_research_facility_guard_tower4	RORI	479848	mun_all_military_tower_impl_guard_s01.iff	Rori - Hyperdrive Research Facility / Guard Tower4	1	-1118	77	4507
+ror_imp_encampment_barracks1	RORI	3475363	military_base_shed_imperial_barracks_s01.iff	Rori - Imp Encampment / Barracks 1	6	-5555	76	-5708
+ror_imp_encampment_barracks2	RORI	2935492	military_base_shed_imperial_barracks_s01.iff	Rori - Imp Encampment / Barracks 2	6	-5543	76	-5614
+ror_imp_encampment_guard_tower1	RORI	2935420	military_outpost_guard_house_imperial.iff	Rori - Imp Encampment / Guard Tower 1	2	-5614	76	-5628
+ror_imp_encampment_guard_tower2	RORI	2935423	military_outpost_guard_house_imperial.iff	Rori - Imp Encampment / Guard Tower 2	2	-5614	76	-5698
+ror_imp_encampment_officer_shed	RORI	3475370	military_base_shed_imperial_style_officer_s01.iff	Rori - Imp Encampment / Officer Shed	6	-5578	76	-5708
+ror_imp_encampment_police_station	RORI	2935404	military_base_police_station_imperial_style_01.iff	Rori - Imp Encampment / Police Station	12	-5565	76	-5660
+ror_imp_weapons_research_facility	RORI	-327073923583386409	bunker_imperial_weapons_research_facility_01.iff	Rori - Imp Weapons Research Facility	22	6151	77	-1981
+ror_itp_vader_dark_jedi_bunker1	RORI	-313000175067612721	itp_vader_dark_jedi_bunker.iff	Rori - ITP / Vader Dark Jedi Bunker 1	10	-5492	76	-2524
+ror_itp_vader_dark_jedi_bunker2	RORI	-313281649956350910	itp_vader_dark_jedi_bunker.iff	Rori - ITP / Vader Dark Jedi Bunker 2	10	-5449	76	-1763
+ror_kobola_cave	RORI	479722	rori_kobola_cave.iff	Rori - Kobola Cave	11	7367	98	135
+ror_large_naboo_house1	RORI	1234179	trandoshan_slave_naboo_house.iff	Rori - Large Naboo House 1	14	952	134	7242
+ror_large_naboo_house2	RORI	-326510974599452056	trapped_family_house.iff	Rori - Large Naboo House 2	7	7056	90	-5284
+ror_narmle_assocation_hall	RORI	4635516	association_hall_civilian_naboo.iff	Rori - Narmle / Association Hall	17	-5192	80	-2481
+ror_narmle_chirq_bunker	RORI	-313000174720607590	corellia_chirq_jzoro_bunker.iff	Rori - Narmle / Chirq Bunker	10	-5709	77	-2134
+ror_narmle_cloning	RORI	4635541	cloning_facility_naboo.iff	Rori - Narmle / Cloning	6	-5025	80	-2483
+ror_narmle_combat_gh	RORI	4615366	guild_combat_naboo_style_01.iff	Rori - Narmle - Combat GH	9	-5200	80	-2430
+ror_narmle_commerce_gh	RORI	4615376	guild_commerce_naboo_style_01.iff	Rori - Narmle - Commerce GH	9	-5200	80	-2338
+ror_narmle_hospital	RORI	4635418	hospital_naboo.iff	Rori - Narmle / Hospital	14	-5126	80	-2212
+ror_narmle_hotel1	RORI	4635589	hotel_naboo_theed.iff	Rori - Narmle / Hotel 1	10	-5286	80	-2301
+ror_narmle_hotel2	RORI	4635487	hotel_naboo_theed.iff	Rori - Narmle / Hotel 2	10	-5130	80	-2371
+ror_narmle_starport	RORI	4635433	starport_naboo.iff	Rori - Narmle / Starport	16	-5372	80	-2161
+ror_narmle_theater	RORI	4635395	guild_theater_naboo_s01.iff	Rori - Narmle / Theater	10	-5029	80	-2336
+ror_narmle_university	RORI	4635406	guild_university_naboo_style_01.iff	Rori - Narmle / University	9	-5011	80	-2418
+ror_narmle_vaigon_bunker	RORI	-313000174968183522	tatooine_vaigon_shinn_bunker.iff	Rori - Narmle / Vaigon Bunker	10	-4990	76	-2560
+ror_narmle_warehouse_bunker	RORI	-313000176025430568	bunker_corellia_warehouse.iff	Rori - Narmle / Warehouse Bunker	9	-5396	80	-2081
+ror_nyax_bunker	RORI	-312437225821630562	corellia_nyax_bunker.iff	Rori - Nyax Bunker	10	-4636	181	-7534
+ror_reb_outpost_cloning	RORI	4505605	outpost_cloning_facility.iff	Rori - Rebel Outpost / Cloning	6	3648	96	-6452
+ror_reb_outpost_guard_house1	RORI	4505991	military_outpost_guard_house_rebel.iff	Rori - Rebel Outpost / Guard House 1	2	3630	96	-6437
+ror_reb_outpost_guard_house2	RORI	4505602	military_outpost_guard_house_rebel.iff	Rori - Rebel Outpost / Guard House 2	2	3646	96	-6489
+ror_reb_outpost_guard_house3	RORI	4505599	military_outpost_guard_house_rebel.iff	Rori - Rebel Outpost / Guard House 3	2	3682	96	-6486
+ror_reb_outpost_medium_house	RORI	4505633	ply_corl_house_m_s01_fp1.iff	Rori - Rebel Outpost / Medium House	4	3694	96	-6457
+ror_reb_outpost_shed1	RORI	4505663	outpost_shed_s04.iff	Rori - Rebel Outpost / Shed 1	6	3648	96	-6467
+ror_reb_outpost_shed2	RORI	4505967	military_base_shed_rebel_style_01.iff	Rori - Rebel Outpost / Shed 2	6	3715	96	-6439
+ror_reb_outpost_small_house	RORI	4505788	ply_corl_house_s_s01_fp2.iff	Rori - Rebel Outpost / Small House	4	3697	96	-6488
+ror_reb_outpost_starport	RORI	4505529	outpost_starport.iff	Rori - Reb Outpost Starport	1	3672	96	-6421
+ror_reb_shed1	RORI	7555632	military_base_shed_rebel_style_01.iff	Rori - Reb Shed 1	6	-5385	76	5070
+ror_reb_shed2	RORI	1692076	military_base_shed_rebel_style_01.iff	Rori - Reb Shed 2	6	-5370	76	5082
+ror_restuss_cantina	RORI	-325948025153170542	military_base_shed_imperial_style_cantina_s01.iff	Rori - Restuss / Cantina	6	5284	80	6236
+ror_restuss_cloning	RORI	-325948024486224078	outpost_cloning_facility.iff	Rori - Restuss / Cloning	6	5233	80	6176
+ror_restuss_hospital	RORI	-325948023616959140	military_base_shed_imperial_style_hospital_01.iff	Rori - Restuss / Hospital	6	5328	80	6204
+ror_restuss_imp_cantina	RORI	-325666549581832940	restuss_faction_cantina.iff	Rori - Restuss / Imp Cantina	4	5983	81	5581
+ror_restuss_reb_cantina	RORI	-325666548143677776	restuss_faction_cantina.iff	Rori - Restuss / Reb Cantina	4	4828	80	5874
+ror_restuss_starport	RORI	-325948023746782135	rori_restuss_starport.iff	Rori - Restuss / Starport	1	5281	80	6171
+ror_small_naboo_house	RORI	9715726	ply_nboo_house_s_s01_fp1.iff	Rori - Small Naboo House	3	5192	76	1024
+ror_syren4_boss_bunker1	RORI	1233864	bunker_syren4_boss.iff	Rori - Syren 4 Boss Bunker 1	49	-6306	118	4572
+ror_syren4_boss_bunker2	RORI	1234019	bunker_syren4_boss.iff	Rori - Syren 4 Boss Bunker 2	49	-6758	121	-6811
+ror_torton_cave	RORI	5095968	rori_torton_cave.iff	Rori - Torton Cave	11	-1860	93	-4552
+ror_underground_bunker1	RORI	-320037048981255775	corellia_kor_vella_ryll_smuggler_bunker.iff	Rori - Underground Bunker 1	34	196	90	-986
+ror_underground_bunker2	RORI	-318066723804821588	corellia_chirq_elite_council_02.iff	Rori - Underground Bunker 2	49	-152	77	1906
+ror_world	RORI	0	empty	Rori - World	0	0	0	0
+tal_aakuan_cave	TALUS	4255651	talus_aakuan_cave.iff	Talus - Aakuan Cave	11	5910	47	4665
+tal_aqualish_cave	TALUS	4255435	talus_aqualish_cave.iff	Talus - Aqualish Cave	11	-4379	38	-1425
+tal_binayre_bunker	TALUS	6075870	talus_binyare_bunker.iff	Talus - Binayre Bunker	10	5584	102	-4080
+tal_brood10_cave	TALUS	-354376997596667785	brood_10_cave.iff	Talus - Brood 10 Cave	11	5521	554	7097
+tal_brood2_cave	TALUS	-356910271488786448	brood_2_cave.iff	Talus - Brood 2 Cave	11	6841	598	7443
+tal_brood5_cave	TALUS	-356910271936062813	brood_5_cave.iff	Talus - Brood 5 Cave	29	6431	640	7365
+tal_chunker_bunker	TALUS	7955551	bunker_talus_chunker_bunker.iff	Talus - Chunker Bunker	10	1374	29	1485
+tal_coa_aclo_office	TALUS	-348184546627752500	talus_coa_aclo_office.iff	Talus - COA Aclo Office	12	1287	35	-3159
+tal_dearic_association_hall	TALUS	3175424	association_hall_civilian_corellia.iff	Talus - Dearic / Association Hall	17	620	6	-2940
+tal_dearic_cantina	TALUS	3175388	cantina_corellia.iff	Talus - Dearic / Cantina	15	440	6	-2930
+tal_dearic_capitol	TALUS	6255464	capitol_corellia.iff	Talus - Dearic / Capitol	11	686	6	-3175
+tal_dearic_cloning	TALUS	3175404	cloning_corellia.iff	Talus - Dearic / Cloning	6	254	6	-3050
+tal_dearic_combat_gh	TALUS	3175368	guild_combat_corellia_style_01.iff	Talus - Dearic / Combat GH	9	540	6	-2900
+tal_dearic_commerce_gh	TALUS	3175378	guild_commerce_corellia_style_01.iff	Talus - Dearic / Commerce GH	9	470	6	-3060
+tal_dearic_hospital	TALUS	3305352	hospital_corellia_s02.iff	Talus - Dearic / Hospital	3	316	6	-3056
+tal_dearic_hotel	TALUS	3175588	hotel_corellia.iff	Talus - Dearic / Hotel	10	660	6	-3000
+tal_dearic_imp_office	TALUS	-348184547491839756	dearic_imperial_office.iff	Talus - Dearic / Imp Office	9	516	6	-2788
+tal_dearic_reb_office	TALUS	-348184547963176249	dearic_rebel_office.iff	Talus - Dearic / Reb Office	4	272	6	-3136
+tal_dearic_starport	TALUS	3175352	starport_corellia.iff	Talus - Dearic / Starport	16	245	6	-2931
+tal_dearic_theater	TALUS	3175564	guild_theater_corellia_s01.iff	Talus - Dearic / Theater	10	540	6	-3150
+tal_dearic_trins_evnar_house	TALUS	-348184546989282593	corellia_trins_evnar_house.iff	Talus - Dearic / Trins Evnar House	4	870	6	-3160
+tal_dearic_university	TALUS	3175554	guild_university_corellia_style_01.iff	Talus - Dearic / University	9	610	6	-3060
+tal_detainment_center	TALUS	9686208	bunker_imperial_detainment_center_01.iff	Talus - Detainment Center	17	4989	450	-6038
+tal_gcw_base_bunker	TALUS	-341429148666734639	corellia_gcw_bunker.iff	Talus - GCW Base / Bunker	10	-4958	66	-3124
+tal_gcw_base_guard_house	TALUS	-341429147271511804	military_outpost_guard_house_imperial.iff	Talus - GCW Base / Guard House	2	-4909	66	-3125
+tal_gcw_base_shed	TALUS	-341429148257866393	outpost_shed.iff	Talus - GCW Base / Shed	6	-4938	66	-3107
+tal_genetech_syndicate	TALUS	-345932748223717754	bunker_genetech_syndicate_01.iff	Talus - Genetech Syndicate	49	-24	41	-3540
+tal_giant_decay_mite_cave	TALUS	5625536	talus_giant_decay_mite_cave.iff	Talus - Giant Decay Mite Cave	11	-5553	37	-4752
+tal_giant_fynock_cave	TALUS	5625515	talus_giant_fynock_cave.iff	Talus - Giant Fynock Cave	11	1599	38	-867
+tal_hegemony_base	TALUS	-341429146947766770	laminasteel_augmented_group_base.iff	Talus - Nightstrike Hegemony Base	49	-4641	18	-3234
+tal_hegemony_base_guard_house	TALUS	-341429147005777151	military_outpost_guard_house_imperial.iff	Talus - Nightstrike Hegemony Base / Guard House	2	-4608	18	-3248
+tal_imp_outpost_bank	TALUS	4965416	military_base_shed_imperial_style_bank_s01.iff	Talus - Imp Outpost / Bank	6	-2176	20	2353
+tal_imp_outpost_barracks1	TALUS	5555402	military_base_shed_imperial_barracks_s01.iff	Talus - Imp Outpost / Barracks 1	6	-2163	20	2294
+tal_imp_outpost_barracks2	TALUS	5555521	military_base_shed_imperial_barracks_s01.iff	Talus - Imp Outpost / Barracks 2	6	-2163	20	2311
+tal_imp_outpost_cantina	TALUS	4965439	military_base_shed_imperial_style_cantina_s01.iff	Talus - Imp Outpost / Cantina	6	-2163	20	2277
+tal_imp_outpost_cloning	TALUS	4965409	small_imperial_cloning_facility_s02.iff	Talus - Imp Outpost / Cloning	6	-2191	20	2352
+tal_imp_outpost_guard_house1	TALUS	4965379	military_outpost_guard_house_imperial.iff	Talus - Imp Outpost / Guard House 1	2	-2286	20	2302
+tal_imp_outpost_guard_house2	TALUS	4965382	military_outpost_guard_house_imperial.iff	Talus - Imp Outpost / Guard House 2	2	-2233	20	2390
+tal_imp_outpost_guard_house3	TALUS	4965385	military_outpost_guard_house_imperial.iff	Talus - Imp Outpost / Guard House 3	2	-2233	20	2213
+tal_imp_outpost_guard_house4	TALUS	4965376	military_outpost_guard_house_imperial.iff	Talus - Imp Outpost / Guard House 4	2	-2133	20	2391
+tal_imp_outpost_guard_house5	TALUS	4965388	military_outpost_guard_house_imperial.iff	Talus - Imp Outpost / Guard House 5	2	-2132	20	2214
+tal_imp_outpost_guard_house6	TALUS	4965373	military_outpost_guard_house_imperial.iff	Talus - Imp Outpost / Guard House 6	2	-2078	20	2302
+tal_imp_outpost_guard_tower1	TALUS	4965399	mun_all_military_tower_impl_guard_s01.iff	Talus - Imp Outpost / Guard Tower 1	1	-2272	20	2261
+tal_imp_outpost_guard_tower2	TALUS	4965401	mun_all_military_tower_impl_guard_s01.iff	Talus - Imp Outpost / Guard Tower 2	1	-2264	20	2246
+tal_imp_outpost_guard_tower3	TALUS	4965403	mun_all_military_tower_impl_guard_s01.iff	Talus - Imp Outpost / Guard Tower 3	1	-2231	20	2330
+tal_imp_outpost_guard_tower4	TALUS	5555720	mun_all_military_tower_impl_guard_s01.iff	Talus - Imp Outpost / Guard Tower 4	1	-2192	20	2397
+tal_imp_outpost_guard_tower5	TALUS	4965405	mun_all_military_tower_impl_guard_s01.iff	Talus - Imp Outpost / Guard Tower 5	1	-2183	20	2248
+tal_imp_outpost_guard_tower6	TALUS	4965393	mun_all_military_tower_impl_guard_s01.iff	Talus - Imp Outpost / Guard Tower 6	1	-2175	20	2397
+tal_imp_outpost_guard_tower7	TALUS	4965407	mun_all_military_tower_impl_guard_s01.iff	Talus - Imp Outpost / Guard Tower 7	1	-2134	20	2330
+tal_imp_outpost_guard_tower8	TALUS	4965395	mun_all_military_tower_impl_guard_s01.iff	Talus - Imp Outpost / Guard Tower 8	1	-2102	20	2246
+tal_imp_outpost_guard_tower9	TALUS	4965397	mun_all_military_tower_impl_guard_s01.iff	Talus - Imp Outpost / Guard Tower 9	1	-2092	20	2261
+tal_imp_outpost_hospital	TALUS	1392907	military_base_shed_imperial_style_hospital_01.iff	Talus - Imp Outpost / Hospital	6	-2163	20	2328
+tal_imp_outpost_officer_shed	TALUS	4965430	military_base_shed_imperial_style_officer_s01.iff	Talus - Imp Outpost / Officer Shed	6	-2183	20	2264
+tal_imp_outpost_starport	TALUS	4965638	outpost_starport.iff	Talus - Imp Outpost / Starport	1	-2212	20	2302
+tal_imp_vs_reb_barracks1	TALUS	-344525372070935249	military_base_shed_imperial_barracks_s01.iff	Talus - Imp vs. Reb / Barracks 1	6	-2400	38	3766
+tal_imp_vs_reb_barracks2	TALUS	-344525371885044562	military_base_shed_imperial_barracks_s01.iff	Talus - Imp vs. Reb / Barracks 2	6	-2389	38	3747
+tal_imp_vs_reb_base	TALUS	-344525373619918907	military_base_command_post.iff	Talus - Imp vs. Reb / Base	12	-2433	38	3716
+tal_imp_vs_reb_guard_house1	TALUS	-344525371747106880	military_outpost_guard_house_imperial.iff	Talus - Imp vs. Reb / Guard house 1	2	-2485	38	3729
+tal_imp_vs_reb_guard_house2	TALUS	-344525373216536696	military_outpost_guard_house_imperial.iff	Talus - Imp vs. Reb / Guard house 2	2	-2448	38	3661
+tal_imp_weapons_research_facility1	TALUS	-341992097280602981	bunker_imperial_weapons_research_facility_01.iff	Talus - Imp Weapons Research Facility 1	22	-5198	20	282
+tal_imp_weapons_research_facility2	TALUS	-350999297841215114	bunker_imperial_weapons_research_facility_01.iff	Talus - Imp Weapons Research Facility 2	22	3971	41	-1996
+tal_kahmurra_bunker	TALUS	4795356	talus_kahmurra_bunker.iff	Talus - Kahmurra Bunker	9	-4821	16	-4751
+tal_nashal_association_hall	TALUS	4265429	association_hall_civilian_corellia.iff	Talus - Nashal - Association Hall	17	4322	2	5095
+tal_nashal_cantina	TALUS	4265372	cantina_corellia.iff	Talus - Nashal / Cantina	15	4285	2	5318
+tal_nashal_cloning	TALUS	4265612	cloning_corellia.iff	Talus - Nashal / Cloning	6	4551	2	5148
+tal_nashal_combat_gh	TALUS	4265398	guild_combat_corellia_style_01.iff	Talus - Nashal / Combat GH	9	4300	10	5385
+tal_nashal_commerce_gh	TALUS	4265388	guild_commerce_corellia_style_01.iff	Talus - Nashal / Commerce GH	9	4505	2	5225
+tal_nashal_hospital	TALUS	4265475	hospital_corellia_s02.iff	Talus - Nashal / Hospital	3	4504	2	5166
+tal_nashal_hotel	TALUS	4265418	hotel_corellia.iff	Talus - Nashal / Hotel	10	4329	2	5164
+tal_nashal_selonian_smugglers_cave	TALUS	-354095522359239613	cave_selonian_smugglers_01.iff	Talus - Nashal / Selonian Smugglers Cave	11	4945	77	5181
+tal_nashal_starport	TALUS	4265355	starport_corellia.iff	Talus - Nashal / Starport	16	4480	2	5365
+tal_nashal_university	TALUS	4265408	guild_university_corellia_style_01.iff	Talus - Nashal / University	9	4282	2	5116
+tal_outpost_shed	TALUS	9645411	outpost_shed.iff	Talus - Outpost / Shed	6	2378	126	-4981
+tal_reb_tactical_center	TALUS	-343680947085754058	military_rebel_tactical_center.iff	Talus - Reb Tactical Center	10	-3469	22	-3254
+tal_small_base_landing_pad	TALUS	-354095522380759890	landing_pad_smuggler_01.iff	Talus - Small Base / Landing Pad	1	4276	50	4691
+tal_small_base_shed1	TALUS	-354095521005114152	outpost_shed_s05.iff	Talus - Small Base / Shed 1	6	4259	49	4748
+tal_small_base_shed2	TALUS	-354095521241607282	outpost_shed_s04.iff	Talus - Small Base / Shed 2	6	4283	49	4778
+tal_small_house1	TALUS	2735653	ply_corl_house_s_s02_fp1.iff	Talus - Small House 1	3	4166	6	1019
+tal_small_house2	TALUS	2735648	ply_corl_house_s_s01_fp2.iff	Talus - Small House 2	4	4188	6	1032
+tal_small_house3	TALUS	2735643	ply_corl_house_s_s01_fp1.iff	Talus - Small House 3	4	4231	6	969
+tal_small_house4	TALUS	2735671	ply_corl_house_s_s01_fp2.iff	Talus - Small House 4	4	4272	6	1062
+tal_small_house5	TALUS	2735638	ply_corl_house_m_s01_fp1.iff	Talus - Small House 5	4	4322	6	990
+tal_small_house6	TALUS	-349028972057973622	player_house_corellia_small_style_01.iff	Talus - Small House 6	4	1714	27	1607
+tal_traitor_erran	TALUS	9815424	talus_traitor_erran.iff	Talus - Traitor Erran	9	2147	122	-5632
+tal_underground_bunker	TALUS	-347340123017389224	corellia_kor_vella_red_circle_bunker.iff	Talus - Underground Bunker	9	-1831	34	6647
+tal_world	TALUS	0	empty	Talus - World	0	0	0	0
+tat_anchorhead_cloning	TATOOINE	1400845	cloning_facility_tatooine_small.iff	Tatooine - Anchorhead / Cloning	10	63	52	-5358
+tat_anchorhead_medium_house	TATOOINE	1213343	housing_tatt_style01_med.iff	Tatooine - Anchorhead / Medium House	12	132	52	-5356
+tat_ben_kenobis_house	TATOOINE	3565385	player_house_tatooine_small_style_01.iff	Tatooine - Ben Kenobis House	3	-4489	35	-2262
+tat_bestine_association_hall	TATOOINE	1028590	association_hall_civilian_tatooine.iff	Tatooine - Bestine / Association Hall	17	-1119	12	-3526
+tat_bestine_cantina	TATOOINE	1028644	cantina_tatooine.iff	Tatooine - Bestine / Cantina	15	-1404	12	-3669
+tat_bestine_capitol	TATOOINE	926472	capitol_tatooine.iff	Tatooine - Bestine / Capitol	11	-1160	12	-3591
+tat_bestine_cloning	TATOOINE	3565794	cloning_facility_tatooine.iff	Tatooine - Bestine / Cloning	6	-1423	10	-3802
+tat_bestine_combat_gh	TATOOINE	1028544	guild_combat_tatooine_style_01.iff	Tatooine - Bestine / Combat GH	9	-1249	12	-3593
+tat_bestine_commerce_gh	TATOOINE	1028554	guild_commerce_tatooine_style_01.iff	Tatooine - Bestine / Commerce GH	9	-1176	12	-3502
+tat_bestine_hospital	TATOOINE	4005381	hospital_tatooine_s02.iff	Tatooine - Bestine / Hospital	3	-1318	12	-3490
+tat_bestine_hotel	TATOOINE	1223845	hotel_tatooine_style_01.iff	Tatooine - Bestine / Hotel	10	-1198	12	-3671
+tat_bestine_imp_hill_base	TATOOINE	1279918	military_base_shed_imperial_style_01.iff	Tatooine - Bestine / Imp Hill Base	6	-1134	98	-3911
+tat_bestine_large_house	TATOOINE	1028167	housing_tatt_style01_large.iff	Tatooine - Bestine / Large House	21	-1104	12	-3671
+tat_bestine_medium_house1	TATOOINE	1028489	housing_tatt_style01_med.iff	Tatooine - Bestine / Medium House 1	12	-999	10	-3536
+tat_bestine_medium_house2	TATOOINE	1528395	housing_tatt_style01_med.iff	Tatooine - Bestine / Medium House 2	12	-1075	12	-3628
+tat_bestine_salon	TATOOINE	7265850	salon_tatooine.iff	Tatooine - Bestine / Salon	1	-1442	12	-3700
+tat_bestine_small_house1	TATOOINE	1027887	housing_tatt_style01_small.iff	Tatooine - Bestine / Small House 1	10	-1373	26	-3869
+tat_bestine_small_house10	TATOOINE	1028466	housing_tatt_style01_small.iff	Tatooine - Bestine / Small House 10	10	-971	10	-3556
+tat_bestine_small_house11	TATOOINE	1028400	housing_tatt_style01_small.iff	Tatooine - Bestine / Small House 11	10	-968	10	-3523
+tat_bestine_small_house12	TATOOINE	1028444	housing_tatt_style01_small.iff	Tatooine - Bestine / Small House 12	10	-964	10	-3540
+tat_bestine_small_house13	TATOOINE	1028309	housing_tatt_style01_small.iff	Tatooine - Bestine / Small House 13	10	-1009	10	-3509
+tat_bestine_small_house14	TATOOINE	1278968	housing_tatt_style01_small.iff	Tatooine - Bestine / Small House 14	10	-1368	26	-3882
+tat_bestine_small_house15	TATOOINE	1278991	housing_tatt_style01_small.iff	Tatooine - Bestine / Small House 15	10	-1359	26	-3897
+tat_bestine_small_house16	TATOOINE	1028477	housing_tatt_style01_small.iff	Tatooine - Bestine / Small House 16	10	-1001	10	-3562
+tat_bestine_small_house17	TATOOINE	1028378	housing_tatt_style01_small.iff	Tatooine - Bestine / Small House 17	10	-1015	10	-3559
+tat_bestine_small_house2	TATOOINE	1028287	housing_tatt_style01_small.iff	Tatooine - Bestine / Small House 2	10	-1038	10	-3520
+tat_bestine_small_house3	TATOOINE	1028320	housing_tatt_style01_small.iff	Tatooine - Bestine / Small House 3	10	-1024	10	-3512
+tat_bestine_small_house4	TATOOINE	1027931	housing_tatt_style01_small.iff	Tatooine - Bestine / Small House 4	10	-1353	26	-3862
+tat_bestine_small_house5	TATOOINE	1278956	housing_tatt_style01_small.iff	Tatooine - Bestine / Small House 5	10	-1348	26	-3876
+tat_bestine_small_house6	TATOOINE	1278979	housing_tatt_style01_small.iff	Tatooine - Bestine / Small House 6	10	-1339	26	-3890
+tat_bestine_small_house7	TATOOINE	1028411	housing_tatt_style01_small.iff	Tatooine - Bestine / Small House 7	10	-995	10	-3508
+tat_bestine_small_house8	TATOOINE	1028455	housing_tatt_style01_small.iff	Tatooine - Bestine / Small House 8	10	-986	10	-3563
+tat_bestine_small_house9	TATOOINE	1028422	housing_tatt_style01_small.iff	Tatooine - Bestine / Small House 9	10	-980	10	-3512
+tat_bestine_starport	TATOOINE	1026824	starport_tatooine.iff	Tatooine - Bestine / Starport	16	-1376	12	-3576
+tat_bestine_university	TATOOINE	1028574	guild_university_tatooine_style_01.iff	Tatooine - Bestine / University	9	-1254	12	-3514
+tat_cave_08	TATOOINE	-227431781454413292	cave_08_flatland_s03_damprock.iff	Tatooine - Cave 08	29	-6982	181	7037
+tat_commando11_bunker	TATOOINE	-236438980976597211	bunker_tatooine_commando_11.iff	Tatooine - Commando 11 Bunker	9	1487	79	2793
+tat_darklighter_estate	TATOOINE	1514964	poi_darklighter_estate.iff	Tatooine - Darklighter Estate	21	-698	8	-6752
+tat_darklighter_estate_small_house1	TATOOINE	1955364	housing_tatt_style01_small.iff	Tatooine - Darklighter Estate / Small House 1	10	-688	10	-6831
+tat_darklighter_estate_small_house2	TATOOINE	1955375	housing_tatt_style01_small.iff	Tatooine - Darklighter Estate / Small House 2	10	-683	10	-6857
+tat_darklighter_estate_small_house3	TATOOINE	1955353	housing_tatt_style01_small.iff	Tatooine - Darklighter Estate / Small House 3	10	-642	13	-6863
+tat_dera_tusken_cave	TATOOINE	-232779807729120981	tatooine_dera_tusken_cave.iff	Tatooine - Dera Tusken Cave	11	-1003	40	-6343
+tat_fort_tusken	TATOOINE	1189173	fort_tusken.iff	Tatooine - Fort Tusken	23	-3967	22	6240
+tat_hoverdale_cave	TATOOINE	-232216855962350717	tatooine_azure_cabal_hoverdale_cave.iff	Tatooine - Hoverdale Cave	29	-3067	142	4499
+tat_hutt_cave	TATOOINE	4235584	tatooine_hutt_cave.iff	Tatooine - Hutt Cave	11	5181	52	603
+tat_imp_oasis_med_house1	TATOOINE	6016529	housing_tatt_style03_med.iff	Tatooine - Imp Oasis / Medium House 1	12	-5310	6	2722
+tat_imp_oasis_med_house2	TATOOINE	6016497	housing_tatt_style02_med.iff	Tatooine - Imp Oasis / Medium House 2	12	-5270	8	2690
+tat_imp_oasis_shed	TATOOINE	1289932	military_base_shed_imperial_style_01.iff	Tatooine - Imp Oasis / Shed	6	-5307	8	2653
+tat_jabbas_palace	TATOOINE	1177465	palace_tatooine_jabba.iff	Tatooine - Jabbas Palace	38	-5985	90	-6301
+tat_jabbas_palace_shed	TATOOINE	8445742	outpost_shed.iff	Tatooine - Jabbas Palace Shed	6	-6157	90	-6380
+tat_legacy_darklighter_cave	TATOOINE	-232779805739712531	cave_tatooine_legacy_darklighter.iff	Tatooine - Legacy Darklighter Cave	17	-237	81	-6944
+tat_legacy_swoop_gang_bunker	TATOOINE	-237564880343793783	bunker_legacy_swoop_gang.iff	Tatooine - Legacy Swoop Gang Bunker	34	3728	16	-4198
+tat_moseisley_cantina	TATOOINE	1082874	cantina_tatooine.iff	Tatooine - Mos Eisley / Cantina	15	3432	5	-4818
+tat_moseisley_cloning1	TATOOINE	1105879	cloning_facility_tatooine.iff	Tatooine - Mos Eisley / Cloning 1	6	3242	5	-4621
+tat_moseisley_cloning2	TATOOINE	1106500	cloning_facility_tatooine.iff	Tatooine - Mos Eisley / Cloning 2	6	3442	5	-5021
+tat_moseisley_combat_gh	TATOOINE	1189630	guild_combat_tatooine_style_01.iff	Tatooine - Mos Eisley / Combat GH	9	3466	5	-4675
+tat_moseisley_commerce_gh	TATOOINE	1279956	guild_commerce_tatooine_style_01.iff	Tatooine - Mos Eisley / Commerce GH	9	3440	5	-4715
+tat_moseisley_generic_house	TATOOINE	-237564880826745912	player_house_generic_small_window_style_03.iff	Tatooine - Mos Eisley / Generic House	1	3331	5	-5001
+tat_moseisley_guard_house1	TATOOINE	3665817	military_outpost_guard_house_imperial.iff	Tatooine - Mos Eisley / Guard House 1	2	3494	5	-5062
+tat_moseisley_guard_house2	TATOOINE	1095619	military_outpost_guard_house_imperial.iff	Tatooine - Mos Eisley / Guard House 2	2	3867	180	-4545
+tat_moseisley_guard_house3	TATOOINE	1095499	military_outpost_guard_house_imperial.iff	Tatooine - Mos Eisley / Guard House 3	2	3900	180	-4532
+tat_moseisley_hospital	TATOOINE	9655494	hospital_tatooine_s02.iff	Tatooine - Mos Eisley / Hospital	3	3529	5	-4753
+tat_moseisley_large_house1	TATOOINE	1187997	housing_tatt_style01_large.iff	Tatooine - Mos Eisley / Large House 1	21	3239	5	-4896
+tat_moseisley_large_house2	TATOOINE	1187869	housing_tatt_style01_large.iff	Tatooine - Mos Eisley / Large House 2	21	3340	5	-4932
+tat_moseisley_legacy_cult_cave	TATOOINE	-237564880343793969	cave_tatooine_legacy_cult.iff	Tatooine - Mos Eisley / Legacy Cult Cave	20	3457	70	-4167
+tat_moseisley_lucky_despot	TATOOINE	1076941	lucky_despot.iff	Tatooine - Mos Eisley / Lucky Despot	32	3383	5	-4595
+tat_moseisley_medium_house1	TATOOINE	1188045	housing_tatt_style01_med.iff	Tatooine - Mos Eisley / Medium House 1	12	3227	5	-4846
+tat_moseisley_medium_house2	TATOOINE	1188032	housing_tatt_style01_med.iff	Tatooine - Mos Eisley / Medium House 2	12	3245	5	-4824
+tat_moseisley_medium_house3	TATOOINE	1187917	housing_tatt_style01_med.iff	Tatooine - Mos Eisley / Medium House 3	12	3290	5	-4944
+tat_moseisley_medium_house4	TATOOINE	1187984	housing_tatt_style01_med.iff	Tatooine - Mos Eisley / Medium House 4	12	3306	5	-4872
+tat_moseisley_medium_house5	TATOOINE	1187891	housing_tatt_style01_med.iff	Tatooine - Mos Eisley / Medium House 5	12	3338	5	-4882
+tat_moseisley_medium_house6	TATOOINE	1281533	housing_tatt_style01_med.iff	Tatooine - Mos Eisley / Medium House 6	12	3385	5	-4837
+tat_moseisley_medium_house7	TATOOINE	1280129	housing_tatt_style01_med.iff	Tatooine - Mos Eisley / Medium House 7	12	3500	5	-4743
+tat_moseisley_salon	TATOOINE	7106005	salon_tatooine.iff	Tatooine - Mos Eisley / Salon	1	4005	5	-4763
+tat_moseisley_shed	TATOOINE	1095504	military_base_shed_imperial_style_01.iff	Tatooine - Mos Eisley / Shed	6	3870	180	-4515
+tat_moseisley_small_house1	TATOOINE	1189418	housing_tatt_style01_small.iff	Tatooine - Mos Eisley / Small House 1	10	3298	5	-4541
+tat_moseisley_small_house2	TATOOINE	1270138	housing_tatt_style01_small.iff	Tatooine - Mos Eisley / Small House 2	10	3309	5	-4520
+tat_moseisley_small_house3	TATOOINE	1189385	housing_tatt_style01_small.iff	Tatooine - Mos Eisley / Small House 3	10	3323	5	-4553
+tat_moseisley_small_house4	TATOOINE	1270160	housing_tatt_style01_small.iff	Tatooine - Mos Eisley / Small House 4	10	3334	5	-4533
+tat_moseisley_small_house5	TATOOINE	1106534	housing_tatt_style01_small.iff	Tatooine - Mos Eisley / Small House 5	10	3397	5	-5027
+tat_moseisley_starport	TATOOINE	1106368	starport_tatooine.iff	Tatooine - Mos Eisley / Starport	16	3619	5	-4801
+tat_moseisley_theater	TATOOINE	1105845	guild_theater_tatooine_style_01.iff	Tatooine - Mos Eisley / Theater	10	3291	5	-4759
+tat_moseisley_tusken_tent1	TATOOINE	7106078	merchant_tent_tato_s01.iff	Tatooine - Mos Eisley / Tusken Tent 1	1	3984	5	-4811
+tat_moseisley_tusken_tent2	TATOOINE	7106007	merchant_tent_tato_s01.iff	Tatooine - Mos Eisley / Tusken Tent 2	1	4010	5	-4769
+tat_moseisley_tusken_tent3	TATOOINE	7106117	merchant_tent_tato_s01.iff	Tatooine - Mos Eisley / Tusken Tent 3	1	4015	5	-4822
+tat_moseisley_tusken_tent4	TATOOINE	7105950	merchant_tent_tato_s01.iff	Tatooine - Mos Eisley / Tusken Tent 4	1	4039	5	-4788
+tat_moseisley_tusken_tent5	TATOOINE	7105866	merchant_tent_tato_s01.iff	Tatooine - Mos Eisley / Tusken Tent 5	1	4054	5	-4817
+tat_moseisley_tusken_tent6	TATOOINE	7106042	merchant_tent_tato_s01.iff	Tatooine - Mos Eisley / Tusken Tent 6	1	4062	5	-4750
+tat_moseisley_university	TATOOINE	1189571	guild_university_tatooine_style_01.iff	Tatooine - Mos Eisley / University	9	3340	5	-4704
+tat_mosentha_cloning	TATOOINE	1233038	cloning_facility_tatooine.iff	Tatooine - Mos Entha / Cloning	6	1306	7	3456
+tat_mosentha_combat_gh	TATOOINE	1153557	guild_combat_tatooine_style_01.iff	Tatooine - Mos Entha / Combat GH	9	1377	7	3030
+tat_mosentha_commerce_gh	TATOOINE	1153485	guild_commerce_tatooine_style_01.iff	Tatooine - Mos Entha / Commerce GH	9	1561	7	3065
+tat_mosentha_hospital	TATOOINE	1153580	hospital_tatooine.iff	Tatooine - Mos Entha / Hospital	14	1321	7	3291
+tat_mosentha_hotel	TATOOINE	1233971	hotel_tatooine_style_01.iff	Tatooine - Mos Entha / Hotel	10	1537	7	3374
+tat_mosentha_large_house1	TATOOINE	1153998	housing_tatt_style01_large.iff	Tatooine - Mos Entha / Large House 1	21	1391	11	3124
+tat_mosentha_large_house2	TATOOINE	1144098	housing_tatt_style01_large.iff	Tatooine - Mos Entha / Large House 2	21	1590	11	3225
+tat_mosentha_luckey_despot	TATOOINE	1153495	lucky_despot.iff	Tatooine - Mos Entha / Lucky Despot	32	1704	7	3022
+tat_mosentha_medium_house1	TATOOINE	1153933	housing_tatt_style01_med.iff	Tatooine - Mos Entha / Medium House 1	12	1356	11	3216
+tat_mosentha_medium_house10	TATOOINE	1153623	housing_tatt_style01_med.iff	Tatooine - Mos Entha / Medium House 10	12	1600	7	2953
+tat_mosentha_medium_house11	TATOOINE	1157651	housing_tatt_style01_med.iff	Tatooine - Mos Entha / Medium House 11	12	1250	4	3231
+tat_mosentha_medium_house12	TATOOINE	1157664	housing_tatt_style01_med.iff	Tatooine - Mos Entha / Medium House 12	12	1212	4	3289
+tat_mosentha_medium_house2	TATOOINE	1154207	housing_tatt_style01_med.iff	Tatooine - Mos Entha / Medium House 2	12	1357	11	3187
+tat_mosentha_medium_house3	TATOOINE	1153959	housing_tatt_style01_med.iff	Tatooine - Mos Entha / Medium House 3	12	1358	11	3156
+tat_mosentha_medium_house4	TATOOINE	1153985	housing_tatt_style01_med.iff	Tatooine - Mos Entha / Medium House 4	12	1419	11	3189
+tat_mosentha_medium_house5	TATOOINE	1154020	housing_tatt_style01_med.iff	Tatooine - Mos Entha / Medium House 5	12	1419	11	3217
+tat_mosentha_medium_house6	TATOOINE	1153972	housing_tatt_style01_med.iff	Tatooine - Mos Entha / Medium House 6	12	1420	11	3159
+tat_mosentha_medium_house7	TATOOINE	2595358	housing_tatt_style01_med.iff	Tatooine - Mos Entha / Medium House 7	12	1487	7	3195
+tat_mosentha_medium_house8	TATOOINE	1144133	housing_tatt_style01_med.iff	Tatooine - Mos Entha / Medium House 8	12	1567	11	3180
+tat_mosentha_medium_house9	TATOOINE	1144120	housing_tatt_style01_med.iff	Tatooine - Mos Entha / Medium House 9	12	1570	11	3271
+tat_mosentha_small_house1	TATOOINE	1157716	housing_tatt_style01_small.iff	Tatooine - Mos Entha / Small House 1	10	1197	4	3265
+tat_mosentha_small_house10	TATOOINE	1156905	housing_tatt_style01_small.iff	Tatooine - Mos Entha / Small House 10	10	1467	7	2982
+tat_mosentha_small_house11	TATOOINE	1156995	housing_tatt_style01_small.iff	Tatooine - Mos Entha / Small House 11	10	1485	7	3034
+tat_mosentha_small_house12	TATOOINE	1156883	housing_tatt_style01_small.iff	Tatooine - Mos Entha / Small House 12	10	1486	7	2992
+tat_mosentha_small_house13	TATOOINE	1157006	housing_tatt_style01_small.iff	Tatooine - Mos Entha / Small House 13	10	1507	7	3046
+tat_mosentha_small_house14	TATOOINE	1156929	housing_tatt_style01_small.iff	Tatooine - Mos Entha / Small House 14	10	1509	7	3007
+tat_mosentha_small_house15	TATOOINE	1156940	housing_tatt_style01_small.iff	Tatooine - Mos Entha / Small House 15	10	1509	7	2986
+tat_mosentha_small_house16	TATOOINE	1156973	housing_tatt_style01_small.iff	Tatooine - Mos Entha / Small House 16	10	1509	7	3026
+tat_mosentha_small_house17	TATOOINE	1213898	housing_tatt_style01_small.iff	Tatooine - Mos Entha / Small House 17	10	1610	11	3293
+tat_mosentha_small_house18	TATOOINE	1213884	housing_tatt_style01_small.iff	Tatooine - Mos Entha / Small House 18	10	1617	11	3267
+tat_mosentha_small_house2	TATOOINE	1157727	housing_tatt_style01_small.iff	Tatooine - Mos Entha / Small House 2	10	1198	4	3250
+tat_mosentha_small_house3	TATOOINE	1157640	housing_tatt_style01_small.iff	Tatooine - Mos Entha / Small House 3	10	1210	4	3232
+tat_mosentha_small_house4	TATOOINE	1157629	housing_tatt_style01_small.iff	Tatooine - Mos Entha / Small House 4	10	1226	4	3233
+tat_mosentha_small_house5	TATOOINE	1157685	housing_tatt_style01_small.iff	Tatooine - Mos Entha / Small House 5	10	1235	4	3286
+tat_mosentha_small_house6	TATOOINE	1157696	housing_tatt_style01_small.iff	Tatooine - Mos Entha / Small House 6	10	1251	4	3286
+tat_mosentha_small_house7	TATOOINE	1156894	housing_tatt_style01_small.iff	Tatooine - Mos Entha / Small House 7	10	1465	7	3002
+tat_mosentha_small_house8	TATOOINE	1156951	housing_tatt_style01_small.iff	Tatooine - Mos Entha / Small House 8	10	1466	7	3023
+tat_mosentha_small_house9	TATOOINE	1156984	housing_tatt_style01_small.iff	Tatooine - Mos Entha / Small House 9	10	1466	7	3045
+tat_mosentha_starport	TATOOINE	4005516	starport_tatooine.iff	Tatooine - Mos Entha / Starport	16	1238	7	3062
+tat_mosentha_theater	TATOOINE	1153595	guild_theater_tatooine_style_01.iff	Tatooine - Mos Entha / Theater	10	1425	7	3294
+tat_mosentha_university	TATOOINE	1154176	guild_university_tatooine_style_01.iff	Tatooine - Mos Entha / University	9	1303	7	3380
+tat_mosespa_barracks	TATOOINE	1250080	military_base_shed_imperial_barracks_s01.iff	Tatooine - Mos Espa / Barracks	6	-2560	6	2119
+tat_mosespa_cantina	TATOOINE	1256055	cantina_tatooine.iff	Tatooine - Mos Espa / Cantina	15	-3001	5	2172
+tat_mosespa_cloning	TATOOINE	1254761	cloning_facility_tatooine.iff	Tatooine - Mos Espa / Cloning	6	-3099	5	2290
+tat_mosespa_combat_gh	TATOOINE	1255985	guild_combat_tatooine_style_01.iff	Tatooine - Mos Espa / Combat GH	9	-3015	5	2423
+tat_mosespa_commerce_gh	TATOOINE	1256003	guild_commerce_tatooine_style_01.iff	Tatooine - Mos Espa / Commerce GH	9	-2841	5	1986
+tat_mosespa_hotel	TATOOINE	1261013	hotel_tatooine_style_01.iff	Tatooine - Mos Espa / Hotel	10	-3085	5	2213
+tat_mosespa_imp_detachment_hq	TATOOINE	1250066	military_imperial_detachment_hq.iff	Tatooine - Mos Espa / Imp Detachment HQ	10	-2563	6	2098
+tat_mosespa_large_house	TATOOINE	1261452	housing_tatt_style01_large.iff	Tatooine - Mos Espa / Large House	21	-3009	5	1961
+tat_mosespa_laserflit_bunker	TATOOINE	-231653906673105277	tatooine_laserflit_bunker.iff	Tatooine - Mos Espa / Laserflit Bunker	10	-2732	5	2309
+tat_mosespa_med_center	TATOOINE	4005422	hospital_tatooine_s02.iff	Tatooine - Mos Espa / Med Center	3	-3144	5	2106
+tat_mosespa_medium_house1	TATOOINE	1261567	housing_tatt_style01_med.iff	Tatooine - Mos Espa / Medium House 1	12	-2990	5	2006
+tat_mosespa_medium_house2	TATOOINE	1261580	housing_tatt_style01_med.iff	Tatooine - Mos Espa / Medium House 2	12	-2969	5	1932
+tat_mosespa_medium_house3	TATOOINE	3065449	housing_tatt_style01_med.iff	Tatooine - Mos Espa / Medium House 3	12	-2888	5	2280
+tat_mosespa_officer_shed	TATOOINE	1250087	military_base_shed_imperial_style_officer_s01.iff	Tatooine - Mos Espa / Officer Shed	6	-2575	6	2140
+tat_mosespa_small_house1	TATOOINE	1311472	housing_tatt_style01_small.iff	Tatooine - Mos Espa / Small House 1	10	-2998	5	1914
+tat_mosespa_small_house10	TATOOINE	1259988	housing_tatt_style01_small.iff	Tatooine - Mos Espa / Small House 10	10	-2842	5	2385
+tat_mosespa_small_house2	TATOOINE	1255906	housing_tatt_style01_small.iff	Tatooine - Mos Espa / Small House 2	10	-2908	5	2558
+tat_mosespa_small_house3	TATOOINE	1255919	housing_tatt_style01_small.iff	Tatooine - Mos Espa / Small House 3	10	-2904	5	2517
+tat_mosespa_small_house4	TATOOINE	1255930	housing_tatt_style01_small.iff	Tatooine - Mos Espa / Small House 4	10	-2895	5	2570
+tat_mosespa_small_house5	TATOOINE	1255884	housing_tatt_style01_small.iff	Tatooine - Mos Espa / Small House 5	10	-2884	5	2485
+tat_mosespa_small_house6	TATOOINE	1255941	housing_tatt_style01_small.iff	Tatooine - Mos Espa / Small House 6	10	-2880	5	2512
+tat_mosespa_small_house7	TATOOINE	1259966	housing_tatt_style01_small.iff	Tatooine - Mos Espa / Small House 7	10	-2876	5	2379
+tat_mosespa_small_house8	TATOOINE	1255895	housing_tatt_style01_small.iff	Tatooine - Mos Espa / Small House 8	10	-2863	5	2483
+tat_mosespa_small_house9	TATOOINE	1259977	housing_tatt_style01_small.iff	Tatooine - Mos Espa / Small House 9	10	-2858	5	2380
+tat_mosespa_starport	TATOOINE	1261651	starport_tatooine.iff	Tatooine - Mos Espa / Starport	16	-2829	5	2080
+tat_mosespa_university	TATOOINE	1256014	guild_university_tatooine_style_01.iff	Tatooine - Mos Espa / University	9	-3058	5	2061
+tat_mosespa_watto	TATOOINE	1255995	junkshop_watto.iff	Tatooine - Mos Espa / Watto	3	-2896	5	2425
+tat_mostaike_cale_herron_house	TATOOINE	-238972256192934875	cale_herron_house_tatooine_mos_taike.iff	Tatooine - Mos Taike / Cale Herron House	10	3839	5	2223
+tat_mostaike_cloning	TATOOINE	1400856	cloning_facility_tatooine_small.iff	Tatooine - Mos Taike / Cloning	10	3897	33	2351
+tat_mostaike_medium_house	TATOOINE	1154120	housing_tatt_style01_med.iff	Tatooine - Mos Taike / Medium House	12	3781	12	2391
+tat_pirate_outpost	TATOOINE	-233342755693134373	pirate_outpost.iff	Tatooine - Pirate Outpost	6	-1764	31	-3346
+tat_ranchers_house	TATOOINE	4005938	ranchers_house_tatooine.iff	Tatooine - Ranchers House	8	4974	180	-4696
+tat_romo_vax_bunker	TATOOINE	-227713257244161584	tatooine_romo_vax_bunker.iff	Tatooine - Romo Vax Bunker	10	-5056	44	-6976
+tat_sand_splitters_cave	TATOOINE	-225742933305868191	tatooine_sand_splitters_cave.iff	Tatooine - Sand Splitters Cave	11	-6754	48	-5606
+tat_sennex_camp	TATOOINE	-229120631042474017	sennex_camp.iff	Tatooine - Sennex Camp	34	-4924	10	1251
+tat_sennex_cave	TATOOINE	5995564	tatooine_beetle_cave.iff	Tatooine - Sennex Cave	11	6544	115	-1294
+tat_sennex_slave_bunker	TATOOINE	-235313081201681839	tatooine_valarian_strategic_bunker.iff	Tatooine - Sennex Slave Bunker	22	56	84	-5257
+tat_shed	TATOOINE	-233342755693134365	outpost_shed.iff	Tatooine -  Shed	6	-1785	31	-3338
+tat_small_house1	TATOOINE	1106560	housing_tatt_style02_small.iff	Tatooine - Small House 1	10	-5337	40	-4422
+tat_small_house2	TATOOINE	1106549	housing_tatt_style02_small.iff	Tatooine - Small House 2	10	-5327	40	-4472
+tat_small_house3	TATOOINE	1106573	housing_tatt_style02_small.iff	Tatooine - Small House 3	10	-5290	40	-4457
+tat_squill_cave	TATOOINE	7125559	tatooine_squill_cave.iff	Tatooine - Squill Cave	29	39	156	-113
+tat_tosche_station	TATOOINE	1514805	poi_tosche_station.iff	Tatooine - Tosche Station	12	-165	65	-5298
+tat_tusken_bunker1	TATOOINE	4235596	tatooine_tusken_bunker.iff	Tatooine - Tusken Bunker 1	10	-1474	41	-175
+tat_tusken_bunker2	TATOOINE	-240098155146063574	tatooine_tusken_bunker.iff	Tatooine - Tusken Bunker 2	10	5684	180	-5745
+tat_vaigon_shinn_hideout	TATOOINE	-237564882020792444	tatooine_vaigon_shinn_bunker.iff	Tatooine - Vaigon Shinn Hideout	10	3420	8	-5475
+tat_valarian_bunker	TATOOINE	-225742933415027318	tatooine_small_valarian_bunker.iff	Tatooine - Valarian Bunker	10	-6257	35	-5942
+tat_valarian_hackers_bunker	TATOOINE	-227713256216451886	tatooine_valarian_hackers_bunker.iff	Tatooine - Valarian Hackers Bunker	9	-5384	65	-6896
+tat_valarian_pod_racer_bunker	TATOOINE	-232779807056874838	tatooine_valarian_podracer_bunker.iff	Tatooine - Valarian Pod Racer Bunker	10	-705	11	-6294
+tat_valarian_strategic_bunker	TATOOINE	-230809481559117333	tatooine_valarian_strategic_bunker.iff	Tatooine - Valarian Strategic Command Bunker	22	-3966	7	-4014
+tat_wayfar_cantina	TATOOINE	1134557	cantina_tatooine.iff	Tatooine - Wayfar / Cantina	15	-5172	75	-6572
+tat_wayfar_cloning	TATOOINE	1495845	cloning_facility_tatooine_small.iff	Tatooine - Wayfar / Cloning	10	-5074	75	-6628
+tat_wayfar_guild_hall	TATOOINE	1134531	housing_tatt_style01_large.iff	Tatooine - Wayfar / Guild Hall	21	-5126	75	-6519
+tat_wayfar_med_house	TATOOINE	1499417	housing_tatt_style01_med.iff	Tatooine - Wayfar / Medium House	12	-5121	75	-6624
+tat_wayfar_small_house1	TATOOINE	1134518	housing_tatt_style01_small.iff	Tatooine - Wayfar / Small House 1	10	-5095	75	-6492
+tat_wayfar_small_house2	TATOOINE	1134492	housing_tatt_style01_small.iff	Tatooine - Wayfar / Small House 2	10	-5090	75	-6628
+tat_wayfar_small_house3	TATOOINE	1165379	housing_tatt_style01_small.iff	Tatooine - Wayfar / Small House 3	10	-5059	75	-6581
+tat_wayfar_small_house4	TATOOINE	1134573	housing_tatt_style01_small.iff	Tatooine - Wayfar / Small House 4	10	-5226	75	-6472
+tat_world	TATOOINE	0	empty	Tatooine - World	0	0	0	0
+yav_blue_leaf_temple	YAVIN4	468317	temple_blueleaf.iff	Yavin 4 - Blue Leaf Temple	2	-830	86	-2056
+yav_dark_enclave	YAVIN4	3435626	dark_enclave.iff	Yavin 4 - Dark Enclave	27	5070	79	310
+yav_exar_kun_temple	YAVIN4	3465379	temple_exar_kun.iff	Yavin 4 - Exar Kun Temple	15	5057	74	5538
+yav_geonosian_cave	YAVIN4	1627780	bunker_mad_bio.iff	Yavin 4 - Geonosian Cave	44	-6449	82	-401
+yav_guard_house_reb	YAVIN4	8225394	military_outpost_guard_house_rebel.iff	Yavin 4 - Military Outpost Guard House Reb	2	-7572	21	-1082
+yav_imp_guard_tower1	YAVIN4	8375464	mun_all_military_tower_impl_guard_s01.iff	Yavin 4 - Imp Guard Tower 1	1	1590	51	-3516
+yav_imp_guard_tower2	YAVIN4	8375462	mun_all_military_tower_impl_guard_s01.iff	Yavin 4 - Imp Guard Tower 2	1	1614	51	-3539
+yav_imp_outpost_barracks	YAVIN4	8735494	military_base_shed_imperial_barracks_s01.iff	Yavin 4 - Imperial Outpost / Barracks	6	4065	37	-6201
+yav_imp_outpost_cantina	YAVIN4	8735515	military_base_shed_imperial_style_cantina_s01.iff	Yavin 4 - Imperial Outpost / Cantina	6	3998	37	-6201
+yav_imp_outpost_guard_tower1	YAVIN4	3465417	mun_all_military_tower_impl_guard_s01.iff	Yavin 4 - Imperial Outpost / Guard Tower 1	1	3990	37	-6219
+yav_imp_outpost_guard_tower2	YAVIN4	3465419	mun_all_military_tower_impl_guard_s01.iff	Yavin 4 - Imperial Outpost / Guard Tower 2	1	3990	37	-6247
+yav_imp_outpost_guard_tower3	YAVIN4	3465423	mun_all_military_tower_impl_guard_s01.iff	Yavin 4 - Imperial Outpost / Guard Tower 3	1	4009	37	-6192
+yav_imp_outpost_guard_tower4	YAVIN4	3465397	mun_all_military_tower_impl_guard_s01.iff	Yavin 4 - Imperial Outpost / Guard Tower 4	1	4017	37	-6274
+yav_imp_outpost_guard_tower5	YAVIN4	3465395	mun_all_military_tower_impl_guard_s01.iff	Yavin 4 - Imperial Outpost / Guard Tower 5	1	4045	37	-6274
+yav_imp_outpost_guard_tower6	YAVIN4	3465421	mun_all_military_tower_impl_guard_s01.iff	Yavin 4 - Imperial Outpost / Guard Tower 6	1	4053	37	-6192
+yav_imp_outpost_guard_tower7	YAVIN4	3465413	mun_all_military_tower_impl_guard_s01.iff	Yavin 4 - Imperial Outpost / Guard Tower 7	1	4072	37	-6247
+yav_imp_outpost_guard_tower8	YAVIN4	3465415	mun_all_military_tower_impl_guard_s01.iff	Yavin 4 - Imperial Outpost / Guard Tower 8	1	4072	37	-6219
+yav_imp_outpost_starport	YAVIN4	1512719	outpost_starport.iff	Yavin 4 - Imperial Outpost / Starport	1	4033	37	-6234
+yav_itp_thrawn_thieves_bunker	YAVIN4	-465841087350382201	itp_thrawn_thieves_bunker.iff	Yavin 4 - ITP / Thrawn Thieves Bunker	10	5244	66	422
+yav_itp_vader_reb_bunker	YAVIN4	-452330288749781093	itp_vader_rebel_bunker.iff	Yavin 4 - ITP / Vader Reb Bunker	18	-6226	53	5357
+yav_itp_vader_reb_bunker_outpost	YAVIN4	-452330289308642628	military_rebel_forward_outpost.iff	Yavin 4 - ITP / Vader Reb Bunker Outpost	6	-6244	54	5335
+yav_jedi_enclave	YAVIN4	8525417	light_enclave.iff	Yavin 4 - Jedi Enclave	27	-5514	88	4912
+yav_jungle_warfar_imp_base	YAVIN4	-455145039391228731	gcw_battlefield_base.iff	Yavin 4 - BF Jungle Warfare / Imp Base	10	-2741	19	-6827
+yav_jungle_warfar_imp_hospital	YAVIN4	-455145037693973896	military_imperial_field_hospital.iff	Yavin 4 - BF Jungle Warfare / Imp Hospital	9	-2826	18	-6681
+yav_jungle_warfar_imp_tac_center1	YAVIN4	-455145038048824865	military_imperial_tactical_center.iff	Yavin 4 - BF Jungle Warfare / Imp Tac Center 1	10	-2644	18	-7045
+yav_jungle_warfar_imp_tac_center2	YAVIN4	-455145038528745090	military_imperial_tactical_center.iff	Yavin 4 - BF Jungle Warfare / Imp Tac Center 2	10	-2486	18	-6850
+yav_jungle_warfar_reb_tac_center1	YAVIN4	-455145037959063672	military_rebel_tactical_center.iff	Yavin 4 - BF Jungle Warfare / Reb Tac Center 1	10	-2514	18	-7150
+yav_jungle_warfar_reb_tac_center2	YAVIN4	-455145037767947490	military_rebel_tactical_center.iff	Yavin 4 - BF Jungle Warfare / Reb Tac Center 2	10	-2356	18	-6955
+yav_jungle_warfare_reb_base	YAVIN4	-455145037914799541	gcw_battlefield_base.iff	Yavin 4 - BF Jungle Warfare / Reb Base	10	-2247	19	-7200
+yav_jungle_warfare_reb_hospital	YAVIN4	-455145039052952407	military_rebel_field_hospital.iff	Yavin 4 - BF Jungle Warfare / Reb Hospital	9	-2175	18	-7318
+yav_labor_outpost_guard_house	YAVIN4	3035387	military_outpost_guard_house_imperial.iff	Yavin 4 - Labor Outpost / Guard House	2	-6882	73	-5760
+yav_labor_outpost_medium_house	YAVIN4	3035375	ply_corl_house_m_s01_fp1.iff	Yavin 4 - Labor Outpost / Medium House	4	-6885	73	-5666
+yav_labor_outpost_pirate	YAVIN4	3035390	pirate_outpost.iff	Yavin 4 - Labor Outpost / Pirate	6	-6942	73	-5765
+yav_labor_outpost_shed	YAVIN4	3035397	outpost_shed.iff	Yavin 4 - Labor Outpost / Shed	6	-6925	73	-5765
+yav_labor_outpost_small_house	YAVIN4	3035371	ply_corl_house_s_s02_fp1.iff	Yavin 4 - Labor Outpost / Small House	3	-6970	73	-5658
+yav_labour_outpost_cloning	YAVIN4	3035593	outpost_cloning_facility.iff	Yavin 4 - Labor Outpost Cloning	6	-6980	73	-5762
+yav_labour_outpost_starport	YAVIN4	3035484	outpost_starport.iff	Yavin 4 - Labor Outpost / Starport	1	-6939	73	-5706
+yav_massassi_base	YAVIN4	-461056012634303325	gcw_battlefield_base.iff	Yavin 4 - BF Massassi / Base	10	1015	66	426
+yav_massassi_imp_field_hospital1	YAVIN4	-461056011857864532	military_imperial_field_hospital.iff	Yavin 4 - BF Massassi / Imp Field Hospital 1	9	1015	68	812
+yav_massassi_imp_tac_center1	YAVIN4	-461056012246216950	military_imperial_tactical_center.iff	Yavin 4 - BF Massassi / Imp Tac Center 1	10	873	62	640
+yav_massassi_imp_tac_center2	YAVIN4	-461056013328749413	military_imperial_tactical_center.iff	Yavin 4 - BF Massassi / Imp Tac Center 2	10	1156	66	640
+yav_massassi_reb_field_hospital1	YAVIN4	-461056012444652811	military_rebel_field_hospital.iff	Yavin 4 - BF Massassi / Reb Field Hospital 1	9	1015	84	37
+yav_massassi_reb_field_hospital2	YAVIN4	-461056012844617410	military_rebel_field_hospital.iff	Yavin 4 - BF Massassi / Reb Field Hospital 2	9	1015	84	37
+yav_massassi_reb_tac_center1	YAVIN4	-461056012471951482	military_rebel_tactical_center.iff	Yavin 4 - BF Massassi / Reb Tac Center 1	10	873	66	210
+yav_massassi_reb_tac_center2	YAVIN4	-461056013178250050	military_rebel_tactical_center.iff	Yavin 4 - BF Massassi / Reb Tac Center 2	10	1156	82	210
+yav_massassi_temple	YAVIN4	3465352	temple_massassi.iff	Yavin 4 - Massassi Temple	10	-3038	70	-2960
+yav_mining_outpost_cloning	YAVIN4	7925453	outpost_cloning_facility_s02.iff	Yavin 4 - Mining Outpost / Cloning	6	-353	35	4840
+yav_mining_outpost_medium_house	YAVIN4	7925448	ply_corl_house_m_s01_fp1.iff	Yavin 4 - Mining Outpost / Medium House	4	-348	35	4869
+yav_mining_outpost_shed	YAVIN4	1713368	outpost_shed_s05.iff	Yavin 4 - Mining Outpost / Shed	6	-337	35	4840
+yav_mining_outpost_small_house	YAVIN4	7925474	ply_corl_house_s_s01_fp1.iff	Yavin 4 - Mining Outpost / Small House	4	-270	35	4840
+yav_mining_outpost_starport	YAVIN4	7795548	outpost_starport.iff	Yavin 4 - Mining Outpost / Starport	1	-288	35	4879
+yav_outpost_shed	YAVIN4	8845499	outpost_shed.iff	Yavin 4 - Outpost Shed	6	-4304	65	5583
+yav_prison	YAVIN4	8845447	military_base_shed_imperial_style_prison_01.iff	Yavin 4 - Prison	6	4143	37	1619
+yav_shed_reb	YAVIN4	8375365	military_base_shed_rebel_style_01.iff	Yavin 4 - Military Base Reb Shed	6	-7453	5	7036
+yav_shed1	YAVIN4	8845440	military_base_shed_imperial_style_cantina_s01.iff	Yavin 4 - Shed 1	6	4124	37	1628
+yav_shed2	YAVIN4	7146270	military_base_shed_imperial_style_01.iff	Yavin 4 - Shed 2	6	5812	142	3057
+yav_woolamander_temple	YAVIN4	3705352	temple_woolamander.iff	Yavin 4 - Woolamander Temple	10	549	81	-622
+yav_world	YAVIN4	0	empty	Yavin 4 - World	0	0	0	0
