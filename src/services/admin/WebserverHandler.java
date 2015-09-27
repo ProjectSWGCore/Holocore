@@ -35,6 +35,10 @@ import services.admin.http.HttpStatusCode;
 class WebserverHandler {
 	
 	private static final Charset ASCII = Charset.forName("ASCII");
+
+	private static final String REQUIRED_PREFIX = new File("res/webserver").getAbsolutePath().replace('/', File.separatorChar);
+	private static final String INDEX_PATH = "res/webserver/index.html".replace('/', File.separatorChar);
+	private static final String AUTHENTICATED_PATH = "res/webserver/index.html".replace('/', File.separatorChar);
 	
 	private final WebserverData data;
 	private final Pattern variablePattern;
@@ -172,22 +176,10 @@ class WebserverHandler {
 	}
 	
 	private byte [] parseFile(HttpSession session, String filepath, Map<String, String> getVariables) throws IOException {
-		File file = new File("res/webserver" + filepath);
-		if (file.isDirectory())
-			file = new File(file, "index.html");
 		String type = getFileType(filepath);
-		if (file.toString().equals("res/webserver/index.html")) {
-			if (session.isAuthenticated()) {
-				file = new File("res/webserver/authenticated.html");
-			}
-		} else if (!session.isAuthenticated() && !type.equals("text/css") && !type.equals("text/js") && !type.startsWith("image"))
+		File file = verifyAndModifyFile(session, filepath, type);
+		if (file == null)
 			return null;
-		if (File.separatorChar != '/')
-			file = new File(file.getAbsolutePath().replace('/', File.separatorChar));
-		if (!verifyPath(file)) {
-			Log.e("WebserverHandler", "Cannot access %s - not a valid path", file);
-			return null;
-		}
 		if (type.equalsIgnoreCase("text/html"))
 			return parseHtmlFile(file, getVariables).getBytes(ASCII);
 		try (InputStream is = new FileInputStream(file)) {
@@ -203,10 +195,28 @@ class WebserverHandler {
 		}
 	}
 	
+	private File verifyAndModifyFile(HttpSession session, String filepath, String type) {
+		File file = new File("res/webserver" + filepath);
+		if (File.separatorChar != '/')
+			file = new File(file.getAbsolutePath().replace('/', File.separatorChar));
+		if (file.isDirectory())
+			file = new File(file, "index.html");
+		System.out.println(file + " == " + INDEX_PATH + "  = " + file.toString().equals(INDEX_PATH) + "[" + session.isAuthenticated() + "]");
+		if (file.toString().equals(INDEX_PATH)) {
+			if (session.isAuthenticated()) {
+				file = new File(AUTHENTICATED_PATH);
+			}
+		} else if (!session.isAuthenticated() && !type.equals("text/css") && !type.equals("text/js") && !type.startsWith("image"))
+			return null;
+		if (!verifyPath(file)) {
+			Log.e("WebserverHandler", "Cannot access %s - not a valid path", file);
+			return null;
+		}
+		return file;
+	}
+	
 	private boolean verifyPath(File file) {
-		File parent = new File("res/webserver");
-		String requiredPrefix = parent.getAbsolutePath().replace('/', File.separatorChar);
-		if (!file.getAbsolutePath().startsWith(requiredPrefix))
+		if (!file.getAbsolutePath().startsWith(REQUIRED_PREFIX))
 			return false;
 		if (!file.isFile())
 			return false;

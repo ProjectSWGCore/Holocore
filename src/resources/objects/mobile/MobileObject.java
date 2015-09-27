@@ -27,9 +27,9 @@
 ***********************************************************************************/
 package resources.objects.mobile;
 
-import resources.objects.tangible.TangibleObject;
+import resources.objects.creature.CreatureObject;
 
-public class MobileObject extends TangibleObject {
+public class MobileObject extends CreatureObject {
 	
 	private static final long serialVersionUID = 1L;
 	

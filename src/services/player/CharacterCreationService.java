@@ -320,6 +320,8 @@ public class CharacterCreationService extends Service {
 		datapad.setContainerPermissions(ContainerPermissions.INVENTORY);
 		TangibleObject apprncInventory = createTangible(objManager, "object/tangible/inventory/shared_appearance_inventory.iff");
 		apprncInventory.setContainerPermissions(ContainerPermissions.INVENTORY);
+		TangibleObject safetyDeposit = createTangible(objManager, "object/tangible/bank/shared_character_bank.iff");
+		safetyDeposit.setContainerPermissions(ContainerPermissions.INVENTORY);
 		
 		creatureObj.setRace(Race.getRaceByFile(create.getRace()));
 		creatureObj.setAppearanceData(create.getCharCustomization());
@@ -331,6 +333,7 @@ public class CharacterCreationService extends Service {
 		creatureObj.addObject(inventory); // slot = inventory
 		creatureObj.addObject(datapad); // slot = datapad
 		creatureObj.addObject(apprncInventory); // slot = appearance_inventory
+		creatureObj.addObject(safetyDeposit); // slot = bank
 		
 		creatureObj.addEquipment(inventory);
 		creatureObj.addEquipment(datapad);
