@@ -1,5 +1,6 @@
 package services.faction;
 
+import java.util.EnumSet;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -174,18 +175,19 @@ public final class FactionService extends Service {
 				if(object.getPvpFaction() != tano.getPvpFaction() && tano.getPvpFaction() != PvpFaction.NEUTRAL) {
 					System.out.println(object.getName() + " and " + tano.getName() + " CAN be enemies.");
 					if(object.getPvpStatus() == PvpStatus.SPECIALFORCES && tano.getPvpStatus() == PvpStatus.SPECIALFORCES) {
-						System.out.println("They're enemies."); // TODO debug print, remove
 						pvpBitmask |= PvpFlag.AGGRESSIVE.getBitmask() | PvpFlag.ATTACKABLE.getBitmask();
 						enemies = true;
 					}
 				}
 				
 				objectBitmask |= pvpBitmask;
-				objectPacket = new UpdatePvpStatusMessage(objectBitmask, object.getPvpFaction().getCrc(), object.getObjectId());
+				EnumSet<PvpFlag> objectFlags = PvpFlag.getFlags(objectBitmask);
+				objectPacket = new UpdatePvpStatusMessage(objectFlags.iterator().next(), object.getPvpFaction().getCrc(), object.getObjectId());
 				
 				targetBitmask = tano.getPvpFlags();
 				targetBitmask |= pvpBitmask;
-				targetPacket = new UpdatePvpStatusMessage(targetBitmask, tano.getPvpFaction().getCrc(), tano.getObjectId());
+				EnumSet<PvpFlag> targetFlags = PvpFlag.getFlags(targetBitmask);
+				targetPacket = new UpdatePvpStatusMessage(targetFlags.iterator().next(), tano.getPvpFaction().getCrc(), tano.getObjectId());
 				
 				if(!enemies || enemies && !object.hasPvpFlag(PvpFlag.GOING_OVERT) || enemies && object.hasPvpFlag(PvpFlag.GOING_COVERT) )
 					tano.sendSelf(objectPacket);
