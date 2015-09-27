@@ -30,11 +30,14 @@ package network.packets.swg.zone;
 import network.packets.swg.SWGPacket;
 
 import java.nio.ByteBuffer;
+import java.util.EnumSet;
+
+import resources.PvpFlag;
 
 public class UpdatePvpStatusMessage extends SWGPacket {
 	public static final int CRC = getCrc("UpdatePvpStatusMessage");
 
-	private int flag = 16;
+	private PvpFlag flag = PvpFlag.OVERT;
 	private int playerFaction = 0;
 	private long objId = 0;
 	
@@ -42,7 +45,7 @@ public class UpdatePvpStatusMessage extends SWGPacket {
 		
 	}
 	
-	public UpdatePvpStatusMessage(int playerType, int flag, long objId) {
+	public UpdatePvpStatusMessage(PvpFlag playerType, int flag, long objId) {
 		this.flag = playerType;
 		this.playerFaction = flag;
 		this.objId = objId;
@@ -51,7 +54,8 @@ public class UpdatePvpStatusMessage extends SWGPacket {
 	public void decode(ByteBuffer data) {
 		if (!super.decode(data, CRC))
 			return;
-		flag = getInt(data);
+		EnumSet<PvpFlag> flags = PvpFlag.getFlags(getInt(data));
+		flag = flags.iterator().next();
 		playerFaction = getInt(data);
 		objId = getLong(data);
 	}
@@ -61,7 +65,7 @@ public class UpdatePvpStatusMessage extends SWGPacket {
 		ByteBuffer data = ByteBuffer.allocate(length);
 		addShort(data, 4);
 		addInt(  data, CRC);
-		addInt(  data, flag);
+		addInt(  data, flag.getBitmask());
 		addInt(  data, playerFaction);
 		addLong( data, objId);
 		return data;
@@ -69,6 +73,6 @@ public class UpdatePvpStatusMessage extends SWGPacket {
 	
 	public long getObjectId() { return objId; }
 	public int getPlayerFaction() { return playerFaction; }
-	public int getPlayerType() { return flag; }
+	public PvpFlag getPlayerType() { return flag; }
 	
 }
