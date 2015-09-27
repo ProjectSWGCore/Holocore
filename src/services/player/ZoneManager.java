@@ -30,6 +30,7 @@ package services.player;
 import intents.GalacticIntent;
 import intents.PlayerEventIntent;
 import intents.RequestZoneInIntent;
+import intents.chat.ChatBroadcastIntent;
 import main.ProjectSWG;
 import network.packets.Packet;
 import network.packets.soe.SessionRequest;
@@ -140,6 +141,7 @@ public class ZoneManager extends Manager {
 		new PlayerEventIntent(player, galaxy, PlayerEvent.PE_FIRST_ZONE).broadcast();
 		new PlayerEventIntent(player, galaxy, PlayerEvent.PE_ZONE_IN).broadcast();
 		sendCommitHistory(player);
+		sendMessageOfTheDay(player);
 	}
 	
 	private void loadCommitHistory() {
@@ -172,6 +174,13 @@ public class ZoneManager extends Manager {
 	
 	private void sendCommitHistory(Player player) {
 		player.sendPacket(new ChatSystemMessage(ChatSystemMessage.SystemChatType.CHAT, commitHistory));
+	}
+	
+	private void sendMessageOfTheDay(Player player) {
+		String message = getConfig(ConfigFile.FEATURES).getString("ZONE-MESSAGE", "");
+		
+		if(!message.equals(""))	// If the message isn't nothing
+			new ChatBroadcastIntent(player, message).broadcast();	// Send it
 	}
 	
 	private void sendZonePackets(Player player, CreatureObject creature) {
