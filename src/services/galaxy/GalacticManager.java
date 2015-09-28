@@ -30,7 +30,6 @@ package services.galaxy;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import main.ProjectSWG;
 import intents.GalacticIntent;
 import intents.network.GalacticPacketIntent;
 import intents.network.InboundPacketIntent;

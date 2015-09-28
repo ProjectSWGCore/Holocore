@@ -33,7 +33,6 @@ import intents.network.ForceDisconnectIntent;
 import intents.network.GalacticPacketIntent;
 import intents.player.ZonePlayerSwapIntent;
 
-import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.HashSet;
