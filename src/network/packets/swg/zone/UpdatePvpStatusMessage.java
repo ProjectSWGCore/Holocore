@@ -58,13 +58,9 @@ public class UpdatePvpStatusMessage extends SWGPacket {
 		PvpFlag tempFlag = flags.iterator().next();
 		
 		if (tempFlag!= null)
-		{
 			flag = flags.iterator().next();
-		}
 		else
-		{
 			flag = PvpFlag.PLAYER;
-		}
 		playerFaction = getInt(data);
 		objId = getLong(data);
 	}
