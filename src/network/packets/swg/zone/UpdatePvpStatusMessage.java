@@ -37,7 +37,7 @@ import resources.PvpFlag;
 public class UpdatePvpStatusMessage extends SWGPacket {
 	public static final int CRC = getCrc("UpdatePvpStatusMessage");
 
-	private PvpFlag flag = PvpFlag.OVERT;
+	private PvpFlag flag = PvpFlag.PLAYER;
 	private int playerFaction = 0;
 	private long objId = 0;
 	
@@ -55,7 +55,16 @@ public class UpdatePvpStatusMessage extends SWGPacket {
 		if (!super.decode(data, CRC))
 			return;
 		EnumSet<PvpFlag> flags = PvpFlag.getFlags(getInt(data));
-		flag = flags.iterator().next();
+		PvpFlag tempFlag = flags.iterator().next();
+		
+		if (tempFlag!= null)
+		{
+			flag = flags.iterator().next();
+		}
+		else
+		{
+			flag = PvpFlag.PLAYER;
+		}
 		playerFaction = getInt(data);
 		objId = getLong(data);
 	}
