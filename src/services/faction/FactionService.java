@@ -182,13 +182,27 @@ public final class FactionService extends Service {
 				
 				objectBitmask |= pvpBitmask;
 				EnumSet<PvpFlag> objectFlags = PvpFlag.getFlags(objectBitmask);
-				objectPacket = new UpdatePvpStatusMessage(objectFlags.iterator().next(), object.getPvpFaction().getCrc(), object.getObjectId());
-				
+				PvpFlag objectTempFlag = objectFlags.iterator().next();
+				if (objectTempFlag != null)
+				{
+					objectPacket = new UpdatePvpStatusMessage(objectTempFlag, object.getPvpFaction().getCrc(), object.getObjectId());
+				}
+				else
+				{
+					objectPacket = new UpdatePvpStatusMessage(PvpFlag.PLAYER, object.getPvpFaction().getCrc(), object.getObjectId());
+				}
 				targetBitmask = tano.getPvpFlags();
 				targetBitmask |= pvpBitmask;
 				EnumSet<PvpFlag> targetFlags = PvpFlag.getFlags(targetBitmask);
-				targetPacket = new UpdatePvpStatusMessage(targetFlags.iterator().next(), tano.getPvpFaction().getCrc(), tano.getObjectId());
-				
+				PvpFlag targetTempFlag = targetFlags.iterator().next();
+				if (targetTempFlag != null)
+				{
+					targetPacket = new UpdatePvpStatusMessage(targetTempFlag, tano.getPvpFaction().getCrc(), tano.getObjectId());
+				}
+				else
+				{
+					targetPacket = new UpdatePvpStatusMessage(PvpFlag.PLAYER, object.getPvpFaction().getCrc(), object.getObjectId());
+				}
 				if(!enemies || enemies && !object.hasPvpFlag(PvpFlag.GOING_OVERT) || enemies && object.hasPvpFlag(PvpFlag.GOING_COVERT) )
 					tano.sendSelf(objectPacket);
 				
