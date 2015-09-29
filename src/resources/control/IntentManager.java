@@ -54,16 +54,14 @@ public class IntentManager {
 		intentRegistrations = new HashMap<String, List<IntentReceiver>>();
 		intentQueue = new IntentQueue();
 		initialize();
-		broadcastRunnable = new Runnable() {
-			public void run() {
-				Intent i;
-				synchronized (intentQueue) {
-					i = intentQueue.poll();
-				}
-				if (i != null)
-					broadcast(i);
-				Log.d("IntentManager", "Completed - %d  [%s]", intentQueue.size(), i);
+		broadcastRunnable = () -> {
+			Intent i;
+			synchronized (intentQueue) {
+				i = intentQueue.poll();
 			}
+			if (i != null)
+				broadcast(i);
+			Log.i("IntentManager", "Completed.");
 		};
 	}
 	

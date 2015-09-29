@@ -118,23 +118,6 @@ public class ObjectManager extends Manager {
 		return super.initialize();
 	}
 	
-	@Override
-	public boolean start() {
-		Log.i("ObjectManager", "Starting object manager...");
-		synchronized (objectMap) {
-			int i = 0;
-			for (SWGObject obj : objectMap.values()) {
-				if (obj.isBuildout()) {
-					new ObjectCreatedIntent(obj).broadcast();
-					Log.d("ObjectManager", "%d / %d", i, objectMap.size());
-				}
-				i++;
-			}
-		}
-		Log.i("ObjectManager", "Started object manager.");
-		return super.start();
-	}
-	
 	private void loadObjects() {
 		long startLoad = System.nanoTime();
 		Log.i("ObjectManager", "Loading objects from ObjectDatabase...");
