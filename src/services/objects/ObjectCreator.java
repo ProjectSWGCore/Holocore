@@ -39,7 +39,6 @@ import resources.objects.cell.CellObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.installation.InstallationObject;
 import resources.objects.intangible.IntangibleObject;
-import resources.objects.mobile.MobileObject;
 import resources.objects.player.PlayerObject;
 import resources.objects.resource.ResourceContainerObject;
 import resources.objects.ship.ShipObject;

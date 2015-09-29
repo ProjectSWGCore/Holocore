@@ -289,6 +289,10 @@ public class CharacterCreationService extends Service {
 		return null;
 	}
 	
+	private CreatureObject createCreature(ObjectManager objManager, String template, Location location, String buildingId, String cell) {
+		return null;
+	}
+	
 	private PlayerObject createPlayer(ObjectManager objManager, String template) {
 		SWGObject obj = objManager.createObject(template);
 		if (obj instanceof PlayerObject)

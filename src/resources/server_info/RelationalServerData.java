@@ -58,8 +58,8 @@ public class RelationalServerData extends RelationalDatabase {
 		insertTableMetadata = prepareStatement("INSERT INTO "+META_TABLE+" (table_name, last_imported) VALUES (?, ?)");
 	}
 	
-	public boolean linkTableWithSdb(String table, String sdbPath) {
-		File sdb = new File(sdbPath);
+	public boolean linkTableWithSdb(String table, String filepath) {
+		File sdb = new File(filepath);
 		if (!sdb.isFile())
 			return false;
 		long sdbModified = sdb.lastModified();
