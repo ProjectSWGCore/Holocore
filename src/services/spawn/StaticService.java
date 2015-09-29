@@ -27,14 +27,18 @@
 ***********************************************************************************/
 package services.spawn;
 
+import intents.object.ObjectCreatedIntent;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import resources.Location;
+import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.building.BuildingObject;
+import resources.server_info.Log;
 import resources.server_info.RelationalServerData;
 import services.objects.ObjectManager;
 
@@ -60,24 +64,43 @@ public class StaticService extends Service {
 		getSupportingStatement = spawnDatabase.prepareStatement(GET_SUPPORTING_SQL);
 	}
 	
-	public void createSupportingObjects(SWGObject object) {
+	@Override
+	public boolean initialize() {
+		registerForIntent(ObjectCreatedIntent.TYPE);
+		return super.initialize();
+	}
+	
+	@Override
+	public void onIntentReceived(Intent i) {
+		switch (i.getType()) {
+			case ObjectCreatedIntent.TYPE:
+				if (i instanceof ObjectCreatedIntent)
+					createSupportingObjects(((ObjectCreatedIntent) i).getObject());
+				break;
+		}
+	}
+	
+	private void createSupportingObjects(SWGObject object) {
 		synchronized (databaseMutex) {
 			try {
 				getSupportingStatement.setString(1, object.getTemplate());
-				ResultSet set = getSupportingStatement.executeQuery();
-				Location world = object.getWorldLocation();
-				while (set.next()) {
-					String iff = set.getString("child_iff");
-					String cell = set.getString("cell");
-					double x = set.getDouble("x");
-					double y = set.getDouble("y");
-					double z = set.getDouble("z");
-					double heading = set.getDouble("heading");
-					if (cell.isEmpty()) {
-						createObject(iff, world, x, y, z, heading);
-					} else {
-						BuildingObject buio = (BuildingObject) object;
-						createObject(iff, buio.getCellByName(cell), x, y, z, heading);
+				try (ResultSet set = getSupportingStatement.executeQuery()) {
+					Location world = object.getWorldLocation();
+					while (set.next()) {
+						String iff = set.getString("child_iff");
+						String cell = set.getString("cell");
+						double x = set.getDouble("x");
+						double y = set.getDouble("y");
+						double z = set.getDouble("z");
+						double heading = set.getDouble("heading");
+						if (cell.isEmpty()) {
+							createObject(iff, world, x, y, z, heading);
+						} else if (object instanceof BuildingObject) {
+							BuildingObject buio = (BuildingObject) object;
+							createObject(iff, buio.getCellByName(cell), x, y, z, heading);
+						} else {
+							Log.e("StaticService", "Parent object with cell specified is not a BuildingObject!");
+						}
 					}
 				}
 			} catch (SQLException e) {

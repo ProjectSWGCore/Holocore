@@ -37,6 +37,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import intents.object.ObjectCreateIntent;
+import intents.object.ObjectCreatedIntent;
 import intents.object.ObjectIdRequestIntent;
 import intents.object.ObjectIdResponseIntent;
 import intents.object.ObjectTeleportIntent;
@@ -113,9 +114,25 @@ public class ObjectManager extends Manager {
 		registerForIntent(DeleteCharacterIntent.TYPE);
 		objectAwareness.initialize();
 		loadClientObjects();
-		maxObjectId = 1000000000; // Gets over all the buildouts/snapshots
 		loadObjects();
 		return super.initialize();
+	}
+	
+	@Override
+	public boolean start() {
+		Log.i("ObjectManager", "Starting object manager...");
+		synchronized (objectMap) {
+			int i = 0;
+			for (SWGObject obj : objectMap.values()) {
+				if (obj.isBuildout()) {
+					new ObjectCreatedIntent(obj).broadcast();
+					Log.d("ObjectManager", "%d / %d", i, objectMap.size());
+				}
+				i++;
+			}
+		}
+		Log.i("ObjectManager", "Started object manager.");
+		return super.start();
 	}
 	
 	private void loadObjects() {
@@ -132,9 +149,6 @@ public class ObjectManager extends Manager {
 				}
 			}
 		});
-		for (SWGObject obj : new ArrayList<>(objectMap.values())) {
-			staticService.createSupportingObjects(obj);
-		}
 		double loadTime = (System.nanoTime() - startLoad) / 1E6;
 		Log.i("ObjectManager", "Finished loading %d objects. Time: %fms", database.size(), loadTime);
 		System.out.printf("ObjectManager: Finished loading %d objects. Time: %fms%n", database.size(), loadTime);
@@ -159,7 +173,7 @@ public class ObjectManager extends Manager {
 				loadClientObject(obj);
 			double loadTime = (System.nanoTime() - startLoad) / 1E6;
 			System.out.printf("ClientObjectLoader: Finished loading %d client objects. Time: %fms%n", objects.size(), loadTime);
-			Log.i("ClientObjectLoader", "Finished loading client objects. Time: %fms", loadTime);
+			Log.i("ClientObjectLoader", "Finished loading %d client objects. Time: %fms", objects.size(), loadTime);
 		} else {
 			Log.w("ObjectManager", "Did not load client objects. Reason: Disabled.");
 			System.out.println("ObjectManager: Did not load client objects. Reason: Disabled!");
@@ -167,13 +181,16 @@ public class ObjectManager extends Manager {
 	}
 	
 	private void loadClientObject(SWGObject obj) {
-		if (obj instanceof TangibleObject || obj instanceof BuildingObject) {
-			objectAwareness.add(obj);
+		if (obj.getParent() == null) {
+			if (obj instanceof TangibleObject || obj instanceof BuildingObject) {
+				objectAwareness.add(obj);
+			}
 		}
-		if (obj.getObjectId() >= maxObjectId) {
-			maxObjectId = obj.getObjectId() + 1;
+		synchronized (objectMap) {
+			if (obj.getObjectId() >= maxObjectId) {
+				maxObjectId = obj.getObjectId() + 1;
+			}
 		}
-		mapService.addMapLocation(obj, MapManager.MapType.STATIC);
 	}
 	
 	private void loadObject(SWGObject obj) {
@@ -423,6 +440,7 @@ public class ObjectManager extends Manager {
 				database.put(objectId, obj);
 			}
 			Log.i("ObjectManager", "Created object %d [%s]", obj.getObjectId(), obj.getTemplate());
+			new ObjectCreatedIntent(obj).broadcast();
 			return obj;
 		}
 	}

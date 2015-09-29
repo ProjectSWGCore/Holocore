@@ -90,10 +90,22 @@ public class Location implements Encodable, Serializable {
 	public Quaternion getOrientation() { return new Quaternion(orientation); }
 	
 	public boolean isWithinDistance(Location l, double x, double y, double z) {
+		if (getTerrain() != l.getTerrain())
+			return false;
 		double xD = Math.abs(getX() - l.getX());
 		double yD = Math.abs(getY() - l.getY());
 		double zD = Math.abs(getZ() - l.getZ());
 		return xD <= x && yD <= y && zD <= z;
+	}
+	
+	public boolean isWithinDistance(Location l, double radius) {
+		return isWithinDistance(l.getTerrain(), l.getX(), l.getY(), l.getZ(), radius);
+	}
+	
+	public boolean isWithinDistance(Terrain t, double x, double y, double z, double radius) {
+		if (getTerrain() != t)
+			return false;
+		return square(square(getX()-x) + square(getY()-y) + square(getZ()-z)) <= square(radius);
 	}
 	
 	public void translatePosition(double x, double y, double z) {

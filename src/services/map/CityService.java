@@ -7,6 +7,7 @@ import java.util.Locale;
 
 import intents.PlayerEventIntent;
 import intents.network.GalacticPacketIntent;
+import network.packets.Packet;
 import network.packets.swg.zone.object_controller.DataTransform;
 import resources.Location;
 import resources.control.Intent;
@@ -42,7 +43,8 @@ public class CityService extends Service {
 	public void onIntentReceived(Intent i) {
 		if (i instanceof GalacticPacketIntent) {
 			GalacticPacketIntent gpi = (GalacticPacketIntent) i;
-			if (gpi.getPacket() instanceof DataTransform) {
+			Packet p = gpi.getPacket();
+			if (p instanceof DataTransform) {
 				Player player = gpi.getPlayerManager().getPlayerFromNetworkId(gpi.getNetworkId());
 				if (player == null) {
 					Log.e("CityService", "Player is null in GalacticPacketIntent:DataTransform!");
@@ -53,7 +55,7 @@ public class CityService extends Service {
 					Log.e("CityService", "Creature is null in GalacticPacketIntent:DataTransform!");
 					return;
 				}
-				DataTransform transform = (DataTransform) gpi.getPacket();
+				DataTransform transform = (DataTransform) p;
 				Location loc = transform.getLocation();
 				performLocationUpdate(creature, loc);
 			}
