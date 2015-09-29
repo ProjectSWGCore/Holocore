@@ -246,11 +246,11 @@ public final class TravelService extends Service {
 			purchaser.setBankBalance(purchaserBankBalance - ticketPrice);
 			
 			// Put the ticket in their inventory
-			purchaser.getSlottedObject("inventory").addObject(createTicket(nearestPoint, destinationPoint));
+			grantTicket(nearestPoint, destinationPoint, purchaser);
 			
 			if(roundTrip) {
 				// Put the ticket in their inventory
-				purchaser.getSlottedObject("inventory").addObject(createTicket(destinationPoint, nearestPoint));
+				grantTicket(destinationPoint, nearestPoint, purchaser);
 			}
 		}
 		
@@ -261,7 +261,7 @@ public final class TravelService extends Service {
 		messageBox.display(purchaserOwner);
 	}
 	
-	private SWGObject createTicket(TravelPoint departure, TravelPoint destination) {
+	private void grantTicket(TravelPoint departure, TravelPoint destination, SWGObject receiver) {
 		// Create the ticket object
 		SWGObject ticket = objectManager.createObject("object/tangible/travel/travel_ticket/base/shared_base_travel_ticket.iff", false);
 		
@@ -273,7 +273,7 @@ public final class TravelService extends Service {
 		ticket.addAttribute("@obj_attr_n:travel_arrival_planet", "@planet_n:" + destination.getLocation().getTerrain().getName());
 		ticket.addAttribute("@obj_attr_n:travel_arrival_point", destination.getName());
 		
-		return ticket;
+		receiver.getSlottedObject("inventory").addObject(ticket);
 	}
 	
 	private void handleTicketUse(TicketUseIntent i) {
