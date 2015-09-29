@@ -17,6 +17,7 @@ import resources.player.Player;
 import resources.player.PlayerEvent;
 import resources.server_info.Log;
 import resources.server_info.RelationalServerData;
+import resources.server_info.RelationalServerFactory;
 
 public class CityService extends Service {
 	
@@ -26,8 +27,8 @@ public class CityService extends Service {
 	private final PreparedStatement getAllCitiesStatement;
 	
 	public CityService() {
-		spawnDatabase = new RelationalServerData("serverdata/map/cities.db");
-		if (!spawnDatabase.linkTableWithSdb("cities", "serverdata/map/cities.sdb"))
+		spawnDatabase = RelationalServerFactory.getServerData("map/cities.db", "cities");
+		if (spawnDatabase == null)
 			throw new main.ProjectSWG.CoreException("Unable to load sdb files for StaticService");
 		getAllCitiesStatement = spawnDatabase.prepareStatement(GET_ALL_CITIES_FROM_TERRAIN);
 	}
