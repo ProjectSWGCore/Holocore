@@ -32,6 +32,18 @@ import intents.network.CloseConnectionIntent;
 import intents.network.ForceDisconnectIntent;
 import intents.network.GalacticPacketIntent;
 import intents.player.ZonePlayerSwapIntent;
+
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
+import main.ProjectSWG;
 import network.packets.soe.Disconnect;
 import network.packets.soe.Disconnect.DisconnectReason;
 import network.packets.swg.zone.HeartBeat;
@@ -44,20 +56,15 @@ import resources.player.PlayerEvent;
 import resources.player.PlayerFlags;
 import resources.player.PlayerState;
 import resources.server_info.Log;
+import resources.server_info.RelationalDatabase;
 import utilities.ThreadUtilities;
-
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 public class ConnectionService extends Service {
 	
 	private static final double LD_THRESHOLD = TimeUnit.MINUTES.toMillis(3); // Time since last packet
 	private static final double DISAPPEAR_THRESHOLD = TimeUnit.MINUTES.toMillis(2); // Time after the LD
+	private static final String incrementPopulation = "UPDATE galaxies SET population = population + 1 WHERE id = ?";
+	private static final String decrementPopulation = "UPDATE galaxies SET population = population - 1 WHERE id = ?";
 	
 	private final ScheduledExecutorService updateService;
 	private final Runnable updateRunnable;
@@ -140,9 +147,17 @@ public class ConnectionService extends Service {
 	}
 	
 	private void onPlayerEventIntent(PlayerEventIntent pei) {
+		RelationalDatabase db = this.getLocalDatabase();
 		switch (pei.getEvent()) {
 			case PE_FIRST_ZONE: {
-				Player p = pei.getPlayer();
+				Player p = pei.getPlayer();		
+				try(PreparedStatement updateStatement = db.prepareStatement(ConnectionService.incrementPopulation)) {
+					updateStatement.setInt(1, ProjectSWG.getGalaxyId());
+					updateStatement.executeUpdate();
+				} catch (SQLException e) {
+					Log.e("ConnectionService", "SQLException occured when trying to increase population value.");
+					e.printStackTrace();
+				}
 				synchronized (zonedInPlayers) {
 					zonedInPlayers.add(p);
 				}
@@ -152,6 +167,13 @@ public class ConnectionService extends Service {
 				clearPlayerFlag(pei.getPlayer(), pei.getEvent(), PlayerFlags.LD);
 				break;
 			case PE_LOGGED_OUT:
+				try (PreparedStatement updateStatement = db.prepareStatement(ConnectionService.decrementPopulation)) {
+					updateStatement.setInt(1, ProjectSWG.getGalaxyId());
+					updateStatement.executeUpdate();
+				} catch (SQLException e) {
+					Log.e("ConnectionService", "SQLException occured when trying to decrease population value.");
+					e.printStackTrace();
+				}
 				setPlayerFlag(pei.getPlayer(), pei.getEvent(), PlayerFlags.LD);
 				break;
 			default:
