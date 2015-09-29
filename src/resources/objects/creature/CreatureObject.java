@@ -33,6 +33,7 @@ import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import network.packets.swg.zone.object_controller.PostureUpdate;
 import resources.HologramColour;
 import resources.Posture;
+import resources.PvpFlag;
 import resources.Race;
 import resources.collections.SWGList;
 import resources.collections.SWGMap;
@@ -750,7 +751,7 @@ public class CreatureObject extends TangibleObject {
 		target.sendPacket(new UpdatePostureMessage(posture.getId(), getObjectId()));
 
 		if (getOwner() != null && target != getOwner()) {
-			target.sendPacket(new UpdatePvpStatusMessage(UpdatePvpStatusMessage.PLAYER, 0, getObjectId()));
+			target.sendPacket(new UpdatePvpStatusMessage(PvpFlag.PLAYER, 0, getObjectId()));
 		}
 	}
 	
