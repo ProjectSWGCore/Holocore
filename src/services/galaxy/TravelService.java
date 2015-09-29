@@ -392,8 +392,9 @@ public final class TravelService extends Service {
 			
 			if(currentResult == null) { // Will occur upon the first iteration.
 				currentResult = candidate; // The first candidate will always be the first possible result.
+				currentResultDistance = distanceFromPoint(currentResult, objectLocation);
 			} else {
-				candidateDistance = candidate.getLocation().distanceTo(objectLocation);
+				candidateDistance = distanceFromPoint(candidate, objectLocation);
 				
 				if(candidateDistance < currentResultDistance) {
 					currentResult = candidate;
@@ -405,6 +406,10 @@ public final class TravelService extends Service {
 		return currentResult;
 	}
 
+	private double distanceFromPoint(TravelPoint point, Location objectLocation) {
+		return point.getLocation().distanceTo(objectLocation);
+	}
+	
 	private class DestinationSelectionSuiCallback implements ISuiCallback {
 
 		private final SuiListBox destinationSelection;
