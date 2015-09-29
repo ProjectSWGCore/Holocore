@@ -41,6 +41,7 @@ import resources.control.Service;
 import resources.objects.building.BuildingObject;
 import resources.objects.SWGObject;
 import resources.server_info.RelationalServerData;
+import resources.server_info.RelationalServerFactory;
 import resources.spawn.SpawnerType;
 import resources.spawn.Spawner;
 import services.objects.ObjectManager;
@@ -56,12 +57,9 @@ public final class SpawnerService extends Service {
 	public SpawnerService(ObjectManager objectManager) {
 		this.objectManager = objectManager;
 		spawners = new ArrayList<>();
-		spawnerDatabase = new RelationalServerData("serverdata/spawn/static.db");
-		
-		if(!(spawnerDatabase.linkTableWithSdb("static", "serverdata/spawn/static.sdb") &&
-				spawnerDatabase.linkTableWithSdb("buildings", "serverdata/building/buildings.sdb"))) {
+		spawnerDatabase = RelationalServerFactory.getServerData("spawn/static.db", "static", "building/buildings");
+		if (spawnerDatabase == null)
 			throw new main.ProjectSWG.CoreException("Unable to load sdb files for SpawnerService");
-		}
 	}
 	
 	@Override

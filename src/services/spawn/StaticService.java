@@ -36,6 +36,7 @@ import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.building.BuildingObject;
 import resources.server_info.RelationalServerData;
+import resources.server_info.RelationalServerFactory;
 import services.objects.ObjectManager;
 
 public class StaticService extends Service {
@@ -51,12 +52,10 @@ public class StaticService extends Service {
 		this.databaseMutex = new Object();
 		this.objectManager = objectManager;
 		
-		spawnDatabase = new RelationalServerData("serverdata/static/spawns.db");
-
-		if (!spawnDatabase.linkTableWithSdb("spawns", "serverdata/static/spawns.sdb") ||
-				!spawnDatabase.linkTableWithSdb("types", "serverdata/static/types.sdb")) {
+		spawnDatabase = RelationalServerFactory.getServerData("static/spawns.db", "spawns", "types");
+		if (spawnDatabase == null)
 			throw new main.ProjectSWG.CoreException("Unable to load sdb files for StaticService");
-		}
+		
 		getSupportingStatement = spawnDatabase.prepareStatement(GET_SUPPORTING_SQL);
 	}
 	

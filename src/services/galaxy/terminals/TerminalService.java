@@ -18,11 +18,12 @@ import resources.radial.RadialOption;
 import resources.radial.Radials;
 import resources.server_info.Log;
 import resources.server_info.RelationalServerData;
+import resources.server_info.RelationalServerFactory;
 
 public class TerminalService extends Service {
 	
-	private static final String GET_ALL_TEMPLATES_SQL = "SELECT iff FROM iff_to_script";
-	private static final String GET_SCRIPT_FOR_IFF_SQL = "SELECT script FROM iff_to_script WHERE iff = ?";
+	private static final String GET_ALL_TEMPLATES_SQL = "SELECT iff FROM radials";
+	private static final String GET_SCRIPT_FOR_IFF_SQL = "SELECT script FROM radials WHERE iff = ?";
 	
 	private final Set<String> templates;
 	private final RelationalServerData iffDatabase;
@@ -31,9 +32,8 @@ public class TerminalService extends Service {
 	
 	public TerminalService() {
 		templates = new HashSet<>();
-		iffDatabase = new RelationalServerData("serverdata/radial/radials.db");
-
-		if (!iffDatabase.linkTableWithSdb("iff_to_script", "serverdata/radial/radials.sdb"))
+		iffDatabase = RelationalServerFactory.getServerData("radial/radials.db", "radials");
+		if (iffDatabase == null)
 			throw new main.ProjectSWG.CoreException("Unable to load sdb files for StaticService");
 
 		getAllTemplatesStatement = iffDatabase.prepareStatement(GET_ALL_TEMPLATES_SQL);
