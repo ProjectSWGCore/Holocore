@@ -623,7 +623,10 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	}
 	
 	public void clearAware() {
-		List<SWGObject> objects = new ArrayList<>(objectsAware);
+		List<SWGObject> objects;
+		synchronized (objectsAware) {
+			objects = new ArrayList<>(objectsAware);
+		}
 		for (SWGObject o : objects) {
 			o.awarenessOutOfRange(this);
 			awarenessOutOfRange(o);
@@ -645,8 +648,13 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	}
 	
 	private Set<SWGObject> getObserversFromSet(Set<SWGObject> aware, SWGObject childObject) {
-		Set<SWGObject> awareExtra = new HashSet<>(aware);
-		awareExtra.addAll(objectsAware);
+		Set<SWGObject> awareExtra;
+		synchronized (aware) {
+			synchronized (objectsAware) {
+				awareExtra = new HashSet<>(aware);
+				awareExtra.addAll(objectsAware);
+			}
+		}
 		if (getParent() == null) {
 			Set<SWGObject> observers = new HashSet<>();
 			for (SWGObject obj : awareExtra) {
