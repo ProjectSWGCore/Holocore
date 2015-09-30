@@ -56,8 +56,8 @@ public enum SpawnerType {
 	OUT_GAMMA("object/tangible/spawning/event/shared_outbreak_gamma_survivor_spawner.iff"),
 	OUT_HIDDEN("object/tangible/spawning/event/shared_outbreak_hidden_content_spawner.iff"),
 	WOD_HERB("object/tangible/spawning/event/shared_wod_themepark_herb_spawner.iff"),
-	UNCHECKED("object/tangible/npe/shared_npe_gamma_shuttle.iff"),
-	CHECKED("object/tangible/storyteller/prop/shared_pr_droid_lottery.iff");
+	UNCHECKED("object/mobile/shared_bossk.iff"),
+	CHECKED("object/mobile/shared_boba_fett.iff");
 		
 	private String objectTemplate;
 	
