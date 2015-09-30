@@ -20,7 +20,6 @@ import intents.object.ObjectCreatedIntent;
 import intents.object.ObjectTeleportIntent;
 import intents.travel.*;
 import resources.Location;
-import resources.Posture;
 import resources.Terrain;
 import resources.TravelPoint;
 import resources.client_info.ClientFactory;
@@ -29,7 +28,6 @@ import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
-import resources.objects.tangible.OptionFlag;
 import resources.player.Player;
 import resources.server_info.Log;
 import resources.server_info.RelationalServerData;
@@ -46,7 +44,7 @@ public final class TravelService extends Service {
 	private static final String DBTABLENAME = "travel";
 	private static final String TRAVELPOINTSFORPLANET = "SELECT * FROM " + DBTABLENAME + " WHERE planet=";
 	private static final byte PLANETNAMESCOLUMNINDEX = 0;
-	private static final short TICKETUSERADIUS = 50;	// The distance a player needs to be within in order to use their ticket
+	private static final short TICKETUSERADIUS = 25;	// The distance a player needs to be within in order to use their ticket
 	
 	private final ObjectManager objectManager;
 	private final RelationalServerData travelPointDatabase;
