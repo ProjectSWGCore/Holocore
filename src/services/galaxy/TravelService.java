@@ -16,6 +16,7 @@ import network.packets.swg.zone.PlanetTravelPointListRequest;
 import network.packets.swg.zone.PlanetTravelPointListResponse;
 import intents.chat.ChatBroadcastIntent;
 import intents.network.GalacticPacketIntent;
+import intents.object.ObjectCreatedIntent;
 import intents.object.ObjectTeleportIntent;
 import intents.travel.*;
 import resources.Location;
@@ -84,6 +85,7 @@ public final class TravelService extends Service {
 		registerForIntent(GalacticPacketIntent.TYPE);
 		registerForIntent(TicketPurchaseIntent.TYPE);
 		registerForIntent(TicketUseIntent.TYPE);
+		registerForIntent(ObjectCreatedIntent.TYPE);
 		
 		return super.initialize();
 	}
@@ -100,6 +102,7 @@ public final class TravelService extends Service {
 			case GalacticPacketIntent.TYPE:			handleTravelPointRequest((GalacticPacketIntent) i); break;
 			case TicketPurchaseIntent.TYPE:			handleTicketPurchase((TicketPurchaseIntent) i); break;
 			case TicketUseIntent.TYPE:				handleTicketUse((TicketUseIntent) i); break;
+			case ObjectCreatedIntent.TYPE:			handleObjectCreation((ObjectCreatedIntent) i); break;
 		}
 	}
 	
@@ -333,6 +336,10 @@ public final class TravelService extends Service {
 				new ChatBroadcastIntent(player, "@travel:wrong_shuttle").broadcast();
 			}
 		}
+	}
+	
+	private void handleObjectCreation(ObjectCreatedIntent i) {
+		// TODO connect shuttles to a TravelPoint
 	}
 	
 	private void teleportAndDestroyTicket(TravelPoint destination, SWGObject ticket, CreatureObject traveler) {
