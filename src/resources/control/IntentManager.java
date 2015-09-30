@@ -36,7 +36,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
 
-import resources.server_info.Log;
 import utilities.ThreadUtilities;
 
 
@@ -61,7 +60,6 @@ public class IntentManager {
 			}
 			if (i != null)
 				broadcast(i);
-			Log.i("IntentManager", "Completed.");
 		};
 	}
 	

@@ -27,6 +27,9 @@
 ***********************************************************************************/
 package resources.objects.tangible;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+
 import intents.FactionIntent;
 import intents.FactionIntent.FactionIntentType;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
@@ -61,6 +64,12 @@ public class TangibleObject extends SWGObject {
 	
 	public TangibleObject(long objectId, BaselineType objectType) {
 		super(objectId, objectType);
+	}
+	
+	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
+		pvpStatus = PvpStatus.COMBATANT;
+		pvpFaction = PvpFaction.NEUTRAL;
+		ois.defaultReadObject();
 	}
 	
 	public byte [] getAppearanceData() {
