@@ -20,6 +20,7 @@ import intents.object.ObjectCreatedIntent;
 import intents.object.ObjectTeleportIntent;
 import intents.travel.*;
 import resources.Location;
+import resources.Posture;
 import resources.Terrain;
 import resources.TravelPoint;
 import resources.client_info.ClientFactory;
@@ -28,6 +29,7 @@ import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
+import resources.objects.tangible.OptionFlag;
 import resources.player.Player;
 import resources.server_info.Log;
 import resources.server_info.RelationalServerData;
@@ -77,16 +79,16 @@ public final class TravelService extends Service {
 		travelFeeTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/travel/travel.iff");
 		pointsOnPlanet = new HashMap<>();
 		availablePointsForPlanet = new HashMap<>();
-	}
-	
-	@Override
-	public boolean initialize() {
+		
 		registerForIntent(TravelPointSelectionIntent.TYPE);
 		registerForIntent(GalacticPacketIntent.TYPE);
 		registerForIntent(TicketPurchaseIntent.TYPE);
 		registerForIntent(TicketUseIntent.TYPE);
 		registerForIntent(ObjectCreatedIntent.TYPE);
-		
+	}
+	
+	@Override
+	public boolean initialize() {
 		return super.initialize();
 	}
 	
@@ -318,7 +320,7 @@ public final class TravelService extends Service {
 		CreatureObject traveler = i.getPlayer().getCreatureObject();
 		Location worldLoc = traveler.getWorldLocation();
 		TravelPoint nearestPoint = nearestTravelPoint(worldLoc);
-		double distanceToNearestPoint = worldLoc.distanceTo(nearestPoint.getLocation());
+		double distanceToNearestPoint = worldLoc.distanceTo(nearestPoint.getShuttle().getLocation());
 		SWGObject ticket = i.getTicket();
 		Player player = i.getPlayer();
 		
@@ -339,7 +341,17 @@ public final class TravelService extends Service {
 	}
 	
 	private void handleObjectCreation(ObjectCreatedIntent i) {
-		// TODO connect shuttles to a TravelPoint
+		SWGObject object = i.getObject();
+		String template = object.getTemplate();
+		
+		if(template.contains("shared_player_shuttle") || template.contains("shared_player_transport")) {
+			CreatureObject shuttle = (CreatureObject) object;
+			Location shuttleLocation = shuttle.getLocation();
+			TravelPoint pointForShuttle = nearestTravelPoint(shuttleLocation);
+			
+			// Assign the shuttle to the nearest travel point
+			pointForShuttle.setShuttle(shuttle);
+		}
 	}
 	
 	private void teleportAndDestroyTicket(TravelPoint destination, SWGObject ticket, CreatureObject traveler) {
@@ -396,7 +408,6 @@ public final class TravelService extends Service {
 		Collection<TravelPoint> pointsForPlanet = pointsOnPlanet.get(objectLocation.getTerrain());
 		
 		for(TravelPoint candidate : pointsForPlanet) {
-			
 			if(currentResult == null) { // Will occur upon the first iteration.
 				currentResult = candidate; // The first candidate will always be the first possible result.
 				currentResultDistance = distanceFromPoint(currentResult, objectLocation);
