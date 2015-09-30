@@ -28,7 +28,7 @@
 package resources.client_info.visitors;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
@@ -41,7 +41,7 @@ public class CrcStringTableData extends ClientData {
 	private List<Integer> crcList = new ArrayList<>();
 	private List<Integer> startList = new ArrayList<>();
 	private List<String> stringList = new ArrayList<>();
-	private Map <Integer, String> crcMap = new HashMap<>();
+	private Map <Integer, String> crcMap = new Hashtable<>(4*1024);
 	private int count;
 
 	@Override

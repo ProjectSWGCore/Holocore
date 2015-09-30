@@ -64,31 +64,31 @@ public class BuildoutRow {
 		loadEndColumns(datatableRow, crcString, 0);
 		if (portalLayoutCrc != 0) { // is building
 			objectId = buildoutArea.getBuildingObjectId();
-			buildoutArea.setBuildingObjectId(buildoutArea.getBuildingObjectId() + 1);
+			buildoutArea.incrementBuildingObjectId();
 			buildoutArea.setCurrentBuilding(objectId);
 			containerId = 0;
 		} else if (sharedTemplateCrc == cellCrc) {
 			objectId = buildoutArea.getBuildingObjectId();
-			buildoutArea.setBuildingObjectId(buildoutArea.getBuildingObjectId() + 1);
+			buildoutArea.incrementBuildingObjectId();
 			buildoutArea.setCurrentCell(objectId);
 			containerId = buildoutArea.getCurrentBuilding();
 		} else if (cellIndex > 0) { // is in cell
 			objectId = buildoutArea.getObjectIdBase();
-			buildoutArea.setObjectIdBase(buildoutArea.getObjectIdBase() + 1);
+			buildoutArea.incrementObjectIdBase();
 			containerId = buildoutArea.getCurrentCell();
 		} else { // is somewhere else
 			objectId = buildoutArea.getObjectIdBase();
-			buildoutArea.setObjectIdBase(buildoutArea.getObjectIdBase() + 1);
+			buildoutArea.incrementObjectIdBase();
 			containerId = 0;
 		}
 	}
 	
 	private void loadLarge(Object [] datatableRow, CrcStringTableData crcString) {
-		objectId = Integer.toUnsignedLong(((Number) datatableRow[0]).intValue());
-		containerId = Integer.toUnsignedLong(((Number) datatableRow[1]).intValue());
+		objectId = ((Number) datatableRow[0]).longValue();
+		containerId = ((Number) datatableRow[1]).longValue();
 		type = (Integer) datatableRow[2];
 		loadEndColumns(datatableRow, crcString, 3);
-		long indexShifted = Integer.toUnsignedLong(buildoutArea.getIndex() + 1) << 48;
+		final long indexShifted = (buildoutArea.getIndex() + 1L) << 48;
 		if (objectId < 0)
 			objectId ^= indexShifted;
 		if (containerId < 0)

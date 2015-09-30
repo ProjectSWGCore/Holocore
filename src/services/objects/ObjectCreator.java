@@ -39,7 +39,6 @@ import resources.objects.cell.CellObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.installation.InstallationObject;
 import resources.objects.intangible.IntangibleObject;
-import resources.objects.mobile.MobileObject;
 import resources.objects.player.PlayerObject;
 import resources.objects.resource.ResourceContainerObject;
 import resources.objects.ship.ShipObject;
@@ -67,6 +66,7 @@ public final class ObjectCreator {
 	
 	private static SWGObject createObjectFromType(long objectId, String type) {
 		switch (type) {
+			case "mobile":
 			case "creature":			return new CreatureObject(objectId);
 			case "player":				return new PlayerObject(objectId);
 			case "tangible":			return new TangibleObject(objectId);
@@ -80,7 +80,6 @@ public final class ObjectCreator {
 			case "installation":		return new InstallationObject(objectId);
 			case "ship":				return new ShipObject(objectId);
 			case "soundobject":			return new SoundObject(objectId);
-			case "mobile":				return new MobileObject(objectId);
 		}
 		return null;
 	}

@@ -93,6 +93,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	private int     containerType = 0;
 	private boolean	isBuildout	= false;
 	private double	loadRange	= 0;
+	private int		areaId		= -1;
 
 	private int     slotArrangement = -1;
 	
@@ -401,6 +402,10 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		this.complexity = complexity;
 	}
 	
+	public void setAreaId(int areaId) {
+		this.areaId = areaId;
+	}
+	
 	public Player getOwner() {
 		if (owner != null)
 			return owner;
@@ -476,6 +481,10 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	
 	public float getComplexity() {
 		return complexity;
+	}
+	
+	public int getAreaId() {
+		return areaId;
 	}
 	
 	public Object getTemplateAttribute(String key) {
@@ -614,7 +623,10 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	}
 	
 	public void clearAware() {
-		List<SWGObject> objects = new ArrayList<>(objectsAware);
+		List<SWGObject> objects;
+		synchronized (objectsAware) {
+			objects = new ArrayList<>(objectsAware);
+		}
 		for (SWGObject o : objects) {
 			o.awarenessOutOfRange(this);
 			awarenessOutOfRange(o);
@@ -636,8 +648,13 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	}
 	
 	private Set<SWGObject> getObserversFromSet(Set<SWGObject> aware, SWGObject childObject) {
-		Set<SWGObject> awareExtra = new HashSet<>(aware);
-		awareExtra.addAll(objectsAware);
+		Set<SWGObject> awareExtra;
+		synchronized (aware) {
+			synchronized (objectsAware) {
+				awareExtra = new HashSet<>(aware);
+				awareExtra.addAll(objectsAware);
+			}
+		}
 		if (getParent() == null) {
 			Set<SWGObject> observers = new HashSet<>();
 			for (SWGObject obj : awareExtra) {

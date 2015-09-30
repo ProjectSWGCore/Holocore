@@ -78,6 +78,7 @@ public abstract class Service implements IntentReceiver {
 	 * @return TRUE if termination was successful, FALSE otherwise
 	 */
 	public boolean terminate() {
+		IntentManager.getInstance().terminate();
 		return true;
 	}
 	

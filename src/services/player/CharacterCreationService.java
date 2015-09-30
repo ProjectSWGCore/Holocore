@@ -51,6 +51,7 @@ import network.packets.swg.login.creation.RandomNameResponse;
 import network.packets.swg.login.creation.ClientVerifyAndLockNameResponse.ErrorMessage;
 import network.packets.swg.login.creation.CreateCharacterFailure.NameFailureReason;
 import resources.Location;
+import resources.PvpFlag;
 import resources.Race;
 import resources.Terrain;
 import resources.client_info.ClientFactory;
@@ -288,6 +289,10 @@ public class CharacterCreationService extends Service {
 		return null;
 	}
 	
+	private CreatureObject createCreature(ObjectManager objManager, String template, Location location, String buildingId, String cell) {
+		return null;
+	}
+	
 	private PlayerObject createPlayer(ObjectManager objManager, String template) {
 		SWGObject obj = objManager.createObject(template);
 		if (obj instanceof PlayerObject)
@@ -319,17 +324,20 @@ public class CharacterCreationService extends Service {
 		datapad.setContainerPermissions(ContainerPermissions.INVENTORY);
 		TangibleObject apprncInventory = createTangible(objManager, "object/tangible/inventory/shared_appearance_inventory.iff");
 		apprncInventory.setContainerPermissions(ContainerPermissions.INVENTORY);
+		TangibleObject safetyDeposit = createTangible(objManager, "object/tangible/bank/shared_character_bank.iff");
+		safetyDeposit.setContainerPermissions(ContainerPermissions.INVENTORY);
 		
 		creatureObj.setRace(Race.getRaceByFile(create.getRace()));
 		creatureObj.setAppearanceData(create.getCharCustomization());
 		creatureObj.setHeight(create.getHeight());
 		creatureObj.setName(create.getName());
-		creatureObj.setPvpType(20);
+		creatureObj.setPvpFlags(PvpFlag.PLAYER, PvpFlag.OVERT);
 		creatureObj.getSkills().add("species_" + creatureObj.getRace().getSpecies());
 
 		creatureObj.addObject(inventory); // slot = inventory
 		creatureObj.addObject(datapad); // slot = datapad
 		creatureObj.addObject(apprncInventory); // slot = appearance_inventory
+		creatureObj.addObject(safetyDeposit); // slot = bank
 		
 		creatureObj.addEquipment(inventory);
 		creatureObj.addEquipment(datapad);
