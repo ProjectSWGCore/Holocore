@@ -2,6 +2,7 @@ package resources;
 
 import java.util.List;
 
+import resources.objects.creature.CreatureObject;
 import services.galaxy.TravelService.TravelInfo;
 
 public final class TravelPoint {
@@ -11,6 +12,7 @@ public final class TravelPoint {
 	private final List<TravelInfo> allowedRoutesForPoint;
 	private final int additionalCost; // Additional cost. Perhaps based on distance from source to destination?
 	private final boolean reachable;
+	private CreatureObject shuttle;
 	
 	public TravelPoint(String name, Location location, List<TravelInfo> allowedRoutesForPoint, int additionalCost) {
 		this.name = name;
@@ -51,6 +53,14 @@ public final class TravelPoint {
 	
 	public boolean isReachable() {
 		return reachable;
+	}
+	
+	public CreatureObject getShuttle() {
+		return shuttle;
+	}
+
+	public void setShuttle(CreatureObject shuttle) {
+		this.shuttle = shuttle;
 	}
 	
 	public String suiFormat() {
