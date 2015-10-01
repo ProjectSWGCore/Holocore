@@ -197,16 +197,19 @@ public class CharacterCreationService extends Service {
 			err = ErrorMessage.NAME_DECLINED_TOO_FAST;
 		if (err == ErrorMessage.NAME_APPROVED) {
 			long characterId = createCharacter(objManager, player, create);
-			if (createCharacterInDb(characterId, create.getName(), player)) {
+			if (characterId == -1) {
+				err = ErrorMessage.NAME_DECLINED_INTERNAL_ERROR;
+			} else if (createCharacterInDb(characterId, create.getName(), player)) {
 				creationRestriction.createdCharacter(player);
 				System.out.println("[" + player.getUsername() + "] Create Character: " + create.getName() + ". IP: " + create.getAddress() + ":" + create.getPort());
 				Log.i("ZoneService", "%s created character %s from %s:%d", player.getUsername(), create.getName(), create.getAddress(), create.getPort());
 				sendPacket(player, new CreateCharacterSuccess(characterId));
 				new PlayerEventIntent(player, PlayerEvent.PE_CREATE_CHARACTER).broadcast();
 				return;
+			} else {
+				Log.e("ZoneService", "Failed to create character %s for user %s with server error from %s:%d", create.getName(), player.getUsername(), create.getAddress(), create.getPort());
+				objManager.deleteObject(characterId);
 			}
-			Log.e("ZoneService", "Failed to create character %s for user %s with server error from %s:%d", create.getName(), player.getUsername(), create.getAddress(), create.getPort());
-			objManager.deleteObject(characterId);
 		}
 		sendCharCreationFailure(player, create, err);
 	}
@@ -292,7 +295,9 @@ public class CharacterCreationService extends Service {
 	
 	private long createCharacter(ObjectManager objManager, Player player, ClientCreateCharacter create) {
 		Race			race		= Race.getRaceByFile(create.getRace());
-		CreatureObject	creatureObj	= createCreature(objManager, race.getFilename(), "tat_starport");
+		CreatureObject	creatureObj	= createCreature(objManager, race.getFilename(), getConfig(ConfigFile.PRIMARY).getString("PRIMARY-SPAWN-LOCATION", "tat_moseisley"));
+		if (creatureObj == null)
+			return -1;
 		PlayerObject	playerObj	= createPlayer(objManager, "object/player/shared_player.iff");
 		SWGObject		bankObj		= objManager.createObject("object/tangible/bank/shared_character_bank.iff", false);
 		SWGObject		missionObj	= objManager.createObject("object/tangible/mission_bag/shared_mission_bag.iff", false);
@@ -314,26 +319,35 @@ public class CharacterCreationService extends Service {
 	
 	private CreatureObject createCreature(ObjectManager objManager, String template, String spawnLocation) {
 		SpawnInformation info = insertion.generateSpawnLocation(spawnLocation);
-		if (info.building) {
-			SWGObject parent = objManager.getObjectById(info.buildingId);
-			if (parent == null || !(parent instanceof BuildingObject)) {
-				Log.e("CharcterCreationService", "Invalid parent! Either null or not a building: " + parent);
-				return null;
-			}
-			CellObject cell = ((BuildingObject) parent).getCellByName(info.cell);
-			if (cell == null) {
-				Log.e("CharacterCreationService", "Invalid cell! Cell does not exist: " + info.cell);
-				return null; // TODO: Add more debug info
-			}
-			SWGObject obj = objManager.createObject(template, info.location);
-			cell.addObject(obj);
-			if (obj instanceof CreatureObject)
-				return (CreatureObject) obj;
-		} else {
+		if (info == null) {
+			Log.e("CharacterCreationService", "Failed to get spawn information for location: " + spawnLocation);
+			return null;
+		}
+		if (info.building)
+			return createCreatureBuilding(objManager, template, info);
+		else {
 			SWGObject obj = objManager.createObject(template, info.location);
 			if (obj instanceof CreatureObject)
 				return (CreatureObject) obj;
 		}
+		return null;
+	}
+	
+	private CreatureObject createCreatureBuilding(ObjectManager objManager, String template, SpawnInformation info) {
+		SWGObject parent = objManager.getObjectById(info.buildingId);
+		if (parent == null || !(parent instanceof BuildingObject)) {
+			Log.e("CharacterCreationService", "Invalid parent! Either null or not a building: %s  BUID: %d", parent, info.buildingId);
+			return null;
+		}
+		CellObject cell = ((BuildingObject) parent).getCellByName(info.cell);
+		if (cell == null) {
+			Log.e("CharacterCreationService", "Invalid cell! Cell does not exist: %s  B-Template: %s  BUID: %d", info.cell, parent.getTemplate(), info.buildingId);
+			return null;
+		}
+		SWGObject obj = objManager.createObject(template, info.location);
+		cell.addObject(obj);
+		if (obj instanceof CreatureObject)
+			return (CreatureObject) obj;
 		return null;
 	}
 	
