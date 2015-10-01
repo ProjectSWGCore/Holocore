@@ -55,12 +55,11 @@ public class UpdatePvpStatusMessage extends SWGPacket {
 		if (!super.decode(data, CRC))
 			return;
 		EnumSet<PvpFlag> flags = PvpFlag.getFlags(getInt(data));
-		PvpFlag tempFlag = flags.iterator().next();
-		
-		if (tempFlag!= null)
+		if (!flags.isEmpty())
 			flag = flags.iterator().next();
 		else
 			flag = PvpFlag.PLAYER;
+		
 		playerFaction = getInt(data);
 		objId = getLong(data);
 	}
