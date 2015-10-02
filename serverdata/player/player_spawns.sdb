@@ -1,0 +1,13 @@
+id	terrain	building_id	cell	x	y	z	radius
+TEXT PRIMARY KEY	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	REAL NOT NULL	REAL NOT NULL	REAL NOT NULL	REAL NOT NULL
+tat_moseisley	tatooine			3525	4	-4807	5
+tat_starport	tatooine	tat_moseisley_starport	foyer4	0	0	64	5
+nab_theed	naboo			-5496	6	4369	5
+cor_coronet	corellia			-145	28	-4720	5
+lok_nym	lok			420	7	5267	5
+dat_aurillia	dathomir			5304	78	-4135	5
+tal_dearic	talus			336	6	-2930	5
+ror_restuss	rori			5289	80	6131	5
+dan_miningoutpost	dantooine			-614	3	2527	5
+kas_kashirho	kashyyyk_hunting			244	41	466	5
+tansarii	adventure1			0	0	0	5

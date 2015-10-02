@@ -27,40 +27,47 @@
 ***********************************************************************************/
 package services.player;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import resources.Location;
 import resources.Terrain;
+import resources.server_info.RelationalServerData;
+import resources.server_info.RelationalServerFactory;
 
 public class TerrainZoneInsertion {
 	
-	public static final Location getInsertionForTerrain(Terrain terrain) {
-		switch (terrain) {
-			case TATOOINE:
-				return generateRandomLocation(terrain, 3525, 4, -4807, 5);
-			case NABOO:
-				return generateRandomLocation(terrain, -5496, 6, 4369, 5);
-			case CORELLIA:
-				return generateRandomLocation(terrain, -145, 28, -4720, 5);
-			case LOK:
-				return generateRandomLocation(terrain, 420, 7, 5267, 5);
-			case DATHOMIR:
-				return generateRandomLocation(terrain, 5304, 78, -4135, 5);
-			case TALUS:
-				return generateRandomLocation(terrain, 336, 6, -2930, 5);
-			case RORI:
-				return generateRandomLocation(terrain, 5289, 80, 6131, 5);
-			case DANTOOINE:
-				return generateRandomLocation(terrain, -614, 3, 2527, 5);
-			case KASHYYYK_HUNTING:
-				return generateRandomLocation(terrain, 244, 41, 466, 5);
-			default:
-				return null;
+	private static final String GET_SPAWN_LOCATION_SQL = "SELECT player_spawns.*, buildings.object_id FROM player_spawns, buildings "
+			+ "WHERE (player_spawns.id = ?) AND (player_spawns.building_id = '' OR buildings.building_id = player_spawns.building_id)";
+	
+	private final RelationalServerData insertions;
+	private final PreparedStatement getSpawnLocation;
+	
+	public TerrainZoneInsertion() {
+		insertions = RelationalServerFactory.getServerData("player/player_spawns.db", "building/buildings", "player_spawns");
+		if (insertions == null)
+			throw new main.ProjectSWG.CoreException("Failed to load SDBs for TerrainZoneInsertion");
+		getSpawnLocation = insertions.prepareStatement(GET_SPAWN_LOCATION_SQL);
+	}
+	
+	public SpawnInformation generateSpawnLocation(String id) {
+		synchronized (getSpawnLocation) {
+			try {
+				getSpawnLocation.setString(1, id);
+				try (ResultSet set = getSpawnLocation.executeQuery()) {
+					if (!set.next())
+						return null;
+					String building = set.getString("building_id");
+					Location l = generateRandomLocation(Terrain.getTerrainFromName(set.getString("terrain")), set.getDouble("x"), set.getDouble("y"), set.getDouble("z"), set.getDouble("radius"));
+					return new SpawnInformation(!building.isEmpty(), l, set.getLong("object_id"), set.getString("cell"));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
+		return null;
 	}
-	
-	public static final Location getInsertionForArea(Terrain terrain, double x, double y, double z) {
-		return generateRandomLocation(terrain, x, y, z, 5);
-	}
-	
 	
 	private static final Location generateRandomLocation(Terrain terrain, double x, double y, double z, double delta) {
 		Location location = new Location();
@@ -73,6 +80,20 @@ public class TerrainZoneInsertion {
 		location.setOrientationZ(0);
 		location.setOrientationW(1);
 		return location;
+	}
+	
+	public static class SpawnInformation {
+		public final boolean building;
+		public final Location location;
+		public final long buildingId;
+		public final String cell;
+		
+		public SpawnInformation(boolean building, Location location, long buildingId, String cell) {
+			this.building = building;
+			this.location = location;
+			this.buildingId = buildingId;
+			this.cell = cell;
+		}
 	}
 	
 }
