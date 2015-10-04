@@ -190,14 +190,18 @@ public class CharacterCreationService extends Service {
 	
 	private void handleCharCreation(ObjectManager objManager, Player player, ClientCreateCharacter create) {
 		ErrorMessage err = getNameValidity(create.getName(), player.getAccessLevel() != AccessLevel.PLAYER);
+		boolean success = false;
 		int max = getConfig(ConfigFile.PRIMARY).getInt("GALAXY-MAX-CHARACTERS", 0);
 		if (max != 0 && getCharacterCount(player.getUserId()) >= max)
 			err = ErrorMessage.SERVER_CHARACTER_CREATION_MAX_CHARS;
 		else if (!creationRestriction.isAbleToCreate(player))
 			err = ErrorMessage.NAME_DECLINED_TOO_FAST;
-		else if (err == ErrorMessage.NAME_APPROVED)
+		else if (err == ErrorMessage.NAME_APPROVED) {
 			err = completeCharCreation(objManager, player, create);
-		sendCharCreationFailure(player, create, err);
+			success = (err == ErrorMessage.NAME_APPROVED);
+		}
+		if (!success)
+			sendCharCreationFailure(player, create, err);
 	}
 	
 	private ErrorMessage completeCharCreation(ObjectManager objManager, Player player, ClientCreateCharacter create) {

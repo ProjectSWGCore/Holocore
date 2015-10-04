@@ -244,6 +244,22 @@ public class Packet {
 		bb.get(data);
 		return data;
 	}
+	
+	public static int [] getIntArray(ByteBuffer bb) {
+		bb.order(ByteOrder.LITTLE_ENDIAN);
+		int [] ints = new int[bb.getInt()];
+		for (int i = 0; i < ints.length; i++)
+			ints[i] = bb.getInt();
+		return ints;
+	}
+	
+	public static int [] getIntArray(ByteBuffer bb, int size) {
+		bb.order(ByteOrder.LITTLE_ENDIAN);
+		int [] ints = new int[size];
+		for (int i = 0; i < ints.length; i++)
+			ints[i] = bb.getInt();
+		return ints;
+	}
 
 	/**
 	 * Decodes the ByteBuffer stream into the passed List using the given listType instance for creating elements
