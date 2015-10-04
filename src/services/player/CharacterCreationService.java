@@ -195,23 +195,27 @@ public class CharacterCreationService extends Service {
 			err = ErrorMessage.SERVER_CHARACTER_CREATION_MAX_CHARS;
 		else if (!creationRestriction.isAbleToCreate(player))
 			err = ErrorMessage.NAME_DECLINED_TOO_FAST;
-		if (err == ErrorMessage.NAME_APPROVED) {
-			long characterId = createCharacter(objManager, player, create);
-			if (characterId == -1) {
-				err = ErrorMessage.NAME_DECLINED_INTERNAL_ERROR;
-			} else if (createCharacterInDb(characterId, create.getName(), player)) {
-				creationRestriction.createdCharacter(player);
-				System.out.println("[" + player.getUsername() + "] Create Character: " + create.getName() + ". IP: " + create.getAddress() + ":" + create.getPort());
-				Log.i("ZoneService", "%s created character %s from %s:%d", player.getUsername(), create.getName(), create.getAddress(), create.getPort());
-				sendPacket(player, new CreateCharacterSuccess(characterId));
-				new PlayerEventIntent(player, PlayerEvent.PE_CREATE_CHARACTER).broadcast();
-				return;
-			} else {
-				Log.e("ZoneService", "Failed to create character %s for user %s with server error from %s:%d", create.getName(), player.getUsername(), create.getAddress(), create.getPort());
-				objManager.deleteObject(characterId);
-			}
-		}
+		else if (err == ErrorMessage.NAME_APPROVED)
+			err = completeCharCreation(objManager, player, create);
 		sendCharCreationFailure(player, create, err);
+	}
+	
+	private ErrorMessage completeCharCreation(ObjectManager objManager, Player player, ClientCreateCharacter create) {
+		long characterId = createCharacter(objManager, player, create);
+		if (characterId == -1) {
+			return ErrorMessage.NAME_DECLINED_INTERNAL_ERROR;
+		} else if (createCharacterInDb(characterId, create.getName(), player)) {
+			creationRestriction.createdCharacter(player);
+			System.out.println("[" + player.getUsername() + "] Create Character: " + create.getName() + ". IP: " + create.getAddress() + ":" + create.getPort());
+			Log.i("ZoneService", "%s created character %s from %s:%d", player.getUsername(), create.getName(), create.getAddress(), create.getPort());
+			sendPacket(player, new CreateCharacterSuccess(characterId));
+			new PlayerEventIntent(player, PlayerEvent.PE_CREATE_CHARACTER).broadcast();
+			return ErrorMessage.NAME_APPROVED;
+		} else {
+			Log.e("ZoneService", "Failed to create character %s for user %s with server error from %s:%d", create.getName(), player.getUsername(), create.getAddress(), create.getPort());
+			objManager.deleteObject(characterId);
+			return ErrorMessage.NAME_DECLINED_INTERNAL_ERROR;
+		}
 	}
 	
 	private void sendCharCreationFailure(Player player, ClientCreateCharacter create, ErrorMessage err) {

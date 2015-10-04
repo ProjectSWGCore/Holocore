@@ -76,6 +76,54 @@ public class RelationalServerData extends RelationalDatabase {
 		return true;
 	}
 	
+	/**
+	 * Selects from the specified table with the supplied where clause, given
+	 * the supplied parameters
+	 * @param tables the tables to query, separated by commas
+	 * @param columns the columns to select, null to select all
+	 * @param where the where clause
+	 * @param params the parameters to put into the ?s in the where clause
+	 * @return the result set
+	 * @throws SQLException upon error
+	 */
+	public ResultSet selectFromTable(String tables, String [] columns, String where, Object ... params) throws SQLException {
+		String columnStr = "*";
+		if (columns == null && tables.contains(",")) {
+			StringBuilder bldr = new StringBuilder("");
+			for (String table : tables.split(",")) {
+				bldr.append(table.trim());
+				bldr.append(".*, ");
+			}
+			columnStr = bldr.substring(0, columnStr.length()-2);
+		} else if (columns != null) {
+			StringBuilder bldr = new StringBuilder("");
+			for (String column : columns) {
+				bldr.append(column);
+				bldr.append(", ");
+			}
+			columnStr = bldr.substring(0, bldr.length()-2);
+		}
+		final String sql = "SELECT " + columnStr + " FROM " + tables + " WHERE " + where;
+		PreparedStatement statement = prepareStatement(sql);
+		if (statement == null)
+			return null;
+		if (params != null) {
+			for (int i = 0; i < params.length; i++) {
+				if (params[i] instanceof Integer || params[i] instanceof Long)
+					statement.setLong(i+1, ((Number) params[i]).longValue());
+				else if (params[i] instanceof Float || params[i] instanceof Double)
+					statement.setDouble(i+1, ((Number) params[i]).doubleValue());
+				else if (params[i] instanceof String)
+					statement.setString(i+1, (String) params[i]);
+				else if (params[i] != null)
+					throw new IllegalArgumentException("Unknown object type: " + params[i].getClass().getSimpleName());
+				else
+					throw new NullPointerException("Parameters cannot have null elements!");
+			}
+		}
+		return statement.executeQuery();
+	}
+	
 	private long getLastImported(String table) {
 		synchronized (getTableMetadata) {
 			ResultSet set = null;

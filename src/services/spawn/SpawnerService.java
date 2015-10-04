@@ -95,7 +95,8 @@ public final class SpawnerService extends Service {
 	
 	@Override
 	public boolean terminate() {
-		return super.terminate() && spawnerDatabase.close();
+		spawnerDatabase.close();
+		return super.terminate();
 	}
 	
 	private void loadSpawners() {

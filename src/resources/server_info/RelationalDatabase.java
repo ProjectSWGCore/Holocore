@@ -27,6 +27,7 @@
 ***********************************************************************************/
 package resources.server_info;
 
+import java.io.Closeable;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
@@ -35,7 +36,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public abstract class RelationalDatabase {
+public abstract class RelationalDatabase implements Closeable {
 	
 	private DatabaseMetaData metaData;
 	private Connection connection;
@@ -108,13 +109,12 @@ public abstract class RelationalDatabase {
 		}
 	}
 	
-	public boolean close() {
+	public void close() {
 		try {
 			connection.close();
 			online = false;
-			return true;
 		} catch (SQLException e) {
-			return false;
+			e.printStackTrace();
 		}
 	}
 	
