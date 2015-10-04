@@ -8,11 +8,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 import network.packets.Packet;
 import network.packets.swg.zone.EnterTicketPurchaseModeMessage;
@@ -32,6 +29,8 @@ import resources.client_info.visitors.DatatableData;
 import resources.config.ConfigFile;
 import resources.control.Intent;
 import resources.control.Service;
+import resources.encodables.ProsePackage;
+import resources.encodables.StringId;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
@@ -66,9 +65,9 @@ public final class TravelService extends Service {
 	
 	// Fields relating to shuttle take-off and landing
 	private Posture currentShuttlePosture;
-	private final ScheduledExecutorService executor;
-	private final long timeUntilLand;
-	private long timeRemaining;
+	private final ExecutorService executor;
+	private final int timeUntilLand;
+	private int timeRemaining;
 	private final long landDelay;
 	private boolean shuttleLanded;
 	private final long timeGrounded;
@@ -86,9 +85,11 @@ public final class TravelService extends Service {
 		travelFeeTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/travel/travel.iff");
 		pointsOnPlanet = new HashMap<>();
 		
-		executor = Executors.newScheduledThreadPool(2);
+		executor = Executors.newSingleThreadExecutor();
 		timeUntilLand = getConfig(ConfigFile.FEATURES).getInt("SHUTTLE-AWAY-TIME", 60);
-		shuttleLanded = true;	// Shuttles start off having landed.
+		timeRemaining = timeUntilLand;
+		shuttleLanded = true;	// Shuttles start off being grounded
+		currentShuttlePosture = Posture.UPRIGHT;
 		landDelay = 10000;	// debugging
 		timeGrounded = 120000;
 		
@@ -105,7 +106,7 @@ public final class TravelService extends Service {
 	
 	@Override
 	public boolean start() {
-		executor.scheduleAtFixedRate(new ShuttleBehaviour(), 0, 1, TimeUnit.SECONDS);
+		executor.execute(new ShuttleBehaviour());
 		
 		return super.start();
 	}
@@ -119,7 +120,9 @@ public final class TravelService extends Service {
 	
 	@Override
 	public boolean terminate() {
-		return super.terminate() && travelPointDatabase.close();
+		travelPointDatabase.close();
+		
+		return super.terminate();
 	}
 	
 	@Override
@@ -312,12 +315,17 @@ public final class TravelService extends Service {
 				handleTicketUseSui(i);
 			else
 				handleTicketUseClick(i);
-		} else {
-			// Shuttle isn't available
-			new ChatBroadcastIntent(i.getPlayer(), "@travel:shuttle_not_available").broadcast();
-		}
-		
+		} else { // The shuttle isn't available
+			if(isShuttleBoarding()) {	// Unavailable but about to board
+				new ChatBroadcastIntent(i.getPlayer(), "@travel/travel:shuttle_begin_boarding").broadcast();
+			} else {	// Unavailable but not about to board, because...
+				if(isShuttleDeparting())	// ... it's departing
+					new ChatBroadcastIntent(i.getPlayer(), "@travel:shuttle_not_available").broadcast();
+				else	// ... or it's done departing and is completely away
+					new ChatBroadcastIntent(i.getPlayer(), new ProsePackage(new StringId("travel/travel", "shuttle_board_delay"), "DI", timeRemaining)).broadcast();
+			}
 
+		}
 	}
 	
 	private void handleTicketUseSui(TicketUseIntent i) {
@@ -479,6 +487,14 @@ public final class TravelService extends Service {
 		return currentShuttlePosture == Posture.UPRIGHT && shuttleLanded;
 	}
 	
+	private boolean isShuttleBoarding() {
+		return currentShuttlePosture == Posture.UPRIGHT && !shuttleLanded;
+	}
+	
+	private boolean isShuttleDeparting() {
+		return currentShuttlePosture == Posture.PRONE && !shuttleLanded && timeRemaining == timeUntilLand;
+	}
+	
 	private class DestinationSelectionSuiCallback implements ISuiCallback {
 
 		private final SuiListBox destinationSelection;
@@ -502,29 +518,30 @@ public final class TravelService extends Service {
 	private class ShuttleBehaviour implements Runnable {
 		@Override
 		public void run() {
-			try {
-				// GROUNDED
-				System.out.println("GROUNDED");
-				Thread.sleep(timeGrounded);
-				
-				// LEAVE
-				updateShuttlePostures(Posture.PRONE);
-				shuttleLanded = false;
-				Thread.sleep(landDelay);
-				
-				// Make the shuttle stay away for some time.
-				for(long timeElapsed = 0; timeUntilLand >= timeElapsed; timeRemaining--, timeElapsed++) {
-					Thread.sleep(1000);	// Sleep for a second
+			while(true) {
+				try {
+					// GROUNDED
+					Thread.sleep(timeGrounded);
+					
+					// LEAVE
+					updateShuttlePostures(Posture.PRONE);
+					shuttleLanded = false;
+					Thread.sleep(landDelay);
+					
+					// Make the shuttle stay away for some time.
+					for(long timeElapsed = 0; timeUntilLand > timeElapsed; timeRemaining--, timeElapsed++) {
+						Thread.sleep(1000);	// Sleep for a second
+					}
+					
+					timeRemaining = timeUntilLand;	// Reset the timer
+					
+					// LANDING
+					updateShuttlePostures(Posture.UPRIGHT);
+					Thread.sleep(landDelay);
+					shuttleLanded = true;
+				} catch (InterruptedException e) {
+					e.printStackTrace();
 				}
-				
-				timeRemaining = timeUntilLand;	// Reset the timer
-				
-				// LANDING
-				updateShuttlePostures(Posture.UPRIGHT);
-				Thread.sleep(landDelay);
-				shuttleLanded = true;
-			} catch (InterruptedException e) {
-				e.printStackTrace();
 			}
 		}
 	}
