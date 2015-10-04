@@ -251,46 +251,58 @@ public final class TravelService extends Service {
 		Location purchaserWorldLocation = purchaser.getWorldLocation();
 		TravelPoint nearestPoint = nearestTravelPoint(purchaserWorldLocation);
 		TravelPoint destinationPoint = destinationPoint(Terrain.getTerrainFromName(i.getDestinationPlanet()), i.getDestinationName());
-		String suiMessage = "@travel:";
 		Player purchaserOwner = purchaser.getOwner();
 		boolean roundTrip = i.isRoundTrip();
 		
 		if(nearestPoint == null || destinationPoint == null)
 			return;
 		
-		int purchaserBankBalance = purchaser.getBankBalance();
 		int ticketPrice = nearestPoint.totalTicketPrice(destinationPoint.getLocation().getTerrain());
+		int newBankBalance = purchaser.getBankBalance();
+		int newCashBalance = purchaser.getCashBalance();
 		
 		if(roundTrip)
 			ticketPrice *= 2;
+		
+		int difference = newBankBalance - ticketPrice;
+		
+		if(difference < 0) {	// If they don't have enough credits in their bank
+			newBankBalance = 0;	// They now have no more credits in their bank
+			newCashBalance += difference;	// We subtract the remaining credits from their cash balance.
 			
-		if(ticketPrice > purchaserBankBalance) {
-			// Make the message in the SUI window reflect the fail
-			suiMessage += "short_funds";
-		} else {
-			// Make the message in the SUI window reflect the success
-			suiMessage += "ticket_purchase_complete";
-			
-			// Also send the purchaser a system message
-			// TODO is there a STF containing this?
-			new ChatBroadcastIntent(purchaserOwner, String.format("You succesfully make a payment of %d credits to the Galactic Travel Commission.", ticketPrice)).broadcast();
-			
-			purchaser.setBankBalance(purchaserBankBalance - ticketPrice);
-			
-			// Put the ticket in their inventory
-			grantTicket(nearestPoint, destinationPoint, purchaser);
-			
-			if(roundTrip) {
-				// Put the ticket in their inventory
-				grantTicket(destinationPoint, nearestPoint, purchaser);
+			if(newCashBalance < 0) {	// If they don't have enough bank and cash funds combined, they receive no ticket!
+				// Make the message in the SUI window reflect the fail
+				showMessageBox(purchaserOwner, "short_funds");
+				return;
 			}
 		}
 		
+		// Make the message in the SUI window reflect the success
+		showMessageBox(purchaserOwner, "ticket_purchase_complete");
+		
+		// Also send the purchaser a system message
+		// TODO is there a STF containing this?
+		new ChatBroadcastIntent(purchaserOwner, String.format("You succesfully make a payment of %d credits to the Galactic Travel Commission.", ticketPrice)).broadcast();
+		
+		purchaser.setCashBalance(newCashBalance);
+		purchaser.setBankBalance(newBankBalance);
+		
+		// Put the ticket in their inventory
+		grantTicket(nearestPoint, destinationPoint, purchaser);
+		
+		if(roundTrip) {
+			// Put the ticket in their inventory
+			grantTicket(destinationPoint, nearestPoint, purchaser);
+		}
+
+	}
+	
+	private void showMessageBox(Player receiver, String message) {
 		// Create the SUI window
-		SuiMessageBox messageBox = new SuiMessageBox(SuiButtons.OK, "STAR WARS GALAXIES", suiMessage);
+		SuiMessageBox messageBox = new SuiMessageBox(SuiButtons.OK, "STAR WARS GALAXIES", "@travel:" + message);
 		
 		// Display the window to the purchaser
-		messageBox.display(purchaserOwner);
+		messageBox.display(receiver);
 	}
 	
 	private void grantTicket(TravelPoint departure, TravelPoint destination, SWGObject receiver) {
