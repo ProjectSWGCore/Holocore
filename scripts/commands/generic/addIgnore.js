@@ -1,4 +1,4 @@
-function execute(galacticManager, player, target, args) {
+function executeCommand(galacticManager, player, target, args) {
     var ChatAvatarRequestIntent = Java.type("intents.chat.ChatAvatarRequestIntent");
     var RequestType = Java.type("intents.chat.ChatAvatarRequestIntent.RequestType");
     var name;

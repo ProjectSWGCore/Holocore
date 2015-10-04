@@ -9,4 +9,4 @@ function handleSelection(player, target, selection) {
 			Log.d("ticket_collector.js", "Ticket Collector Selection: ITEM_USE");
 			break;
 	}
-};
+}
