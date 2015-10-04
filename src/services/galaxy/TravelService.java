@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -86,6 +88,7 @@ public final class TravelService extends Service {
 		
 		executor = Executors.newScheduledThreadPool(2);
 		timeUntilLand = getConfig(ConfigFile.FEATURES).getInt("SHUTTLE-AWAY-TIME", 60);
+		shuttleLanded = true;	// Shuttles start off having landed.
 		landDelay = 10000;	// debugging
 		timeGrounded = 120000;
 		
@@ -303,10 +306,18 @@ public final class TravelService extends Service {
 	}
 	
 	private void handleTicketUse(TicketUseIntent i) {
-		if(i.getTicket() == null)
-			handleTicketUseSui(i);
-		else
-			handleTicketUseClick(i);
+		if(isShuttleAvailable()) {
+			// The shuttle is available at this time
+			if(i.getTicket() == null)
+				handleTicketUseSui(i);
+			else
+				handleTicketUseClick(i);
+		} else {
+			// Shuttle isn't available
+			new ChatBroadcastIntent(i.getPlayer(), "@travel:shuttle_not_available").broadcast();
+		}
+		
+
 	}
 	
 	private void handleTicketUseSui(TicketUseIntent i) {
@@ -493,6 +504,7 @@ public final class TravelService extends Service {
 		public void run() {
 			try {
 				// GROUNDED
+				System.out.println("GROUNDED");
 				Thread.sleep(timeGrounded);
 				
 				// LEAVE
@@ -501,7 +513,10 @@ public final class TravelService extends Service {
 				Thread.sleep(landDelay);
 				
 				// Make the shuttle stay away for some time.
-				Thread.sleep(timeUntilLand * 1000);
+				for(long timeElapsed = 0; timeUntilLand >= timeElapsed; timeRemaining--, timeElapsed++) {
+					Thread.sleep(1000);	// Sleep for a second
+				}
+				
 				timeRemaining = timeUntilLand;	// Reset the timer
 				
 				// LANDING
