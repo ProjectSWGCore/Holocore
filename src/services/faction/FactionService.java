@@ -17,6 +17,7 @@ import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.tangible.TangibleObject;
+import resources.player.Player;
 
 public final class FactionService extends Service {
 
@@ -161,48 +162,35 @@ public final class FactionService extends Service {
 	}
 	
 	private void handleFlagChange(TangibleObject object) {
-
-		for(SWGObject observer : object.getObservers()) {
-			if(observer instanceof TangibleObject) {
-				UpdatePvpStatusMessage objectPacket, targetPacket;
-				TangibleObject tano = (TangibleObject) observer;
-				int objectBitmask = object.getPvpFlags();
-				int targetBitmask = 0;
-				int pvpBitmask = 0;
-				boolean enemies = false;
-				
-				// They CAN be enemies if they're not from the same faction and neither of them are neutral
-				if(object.getPvpFaction() != tano.getPvpFaction() && tano.getPvpFaction() != PvpFaction.NEUTRAL) {
-					System.out.println(object.getName() + " and " + tano.getName() + " CAN be enemies.");
-					if(object.getPvpStatus() == PvpStatus.SPECIALFORCES && tano.getPvpStatus() == PvpStatus.SPECIALFORCES) {
-						pvpBitmask |= PvpFlag.AGGRESSIVE.getBitmask() | PvpFlag.ATTACKABLE.getBitmask();
-						enemies = true;
-					}
+		Player objOwner = object.getOwner();
+		for (SWGObject o : object.getObservers()) {
+			if (!(o instanceof TangibleObject))
+				continue;
+			TangibleObject observer = (TangibleObject) o;
+			Player obsOwner = observer.getOwner();
+			int pvpBitmask = 0;
+			
+			// They CAN be enemies if they're not from the same faction and neither of them are neutral
+			if (object.getPvpFaction() != observer.getPvpFaction() && observer.getPvpFaction() != PvpFaction.NEUTRAL) {
+				if (object.getPvpStatus() == PvpStatus.SPECIALFORCES && observer.getPvpStatus() == PvpStatus.SPECIALFORCES) {
+					pvpBitmask |= PvpFlag.AGGRESSIVE.getBitmask() | PvpFlag.ATTACKABLE.getBitmask();
 				}
-				
-				objectBitmask |= pvpBitmask;
-				EnumSet<PvpFlag> objectFlags = PvpFlag.getFlags(objectBitmask);
-				PvpFlag objectTempFlag = objectFlags.iterator().next();
-				if (objectTempFlag != null) {
-					objectPacket = new UpdatePvpStatusMessage(objectTempFlag, object.getPvpFaction().getCrc(), object.getObjectId());
-				} else {
-					objectPacket = new UpdatePvpStatusMessage(PvpFlag.PLAYER, object.getPvpFaction().getCrc(), object.getObjectId());
-				}
-				targetBitmask = tano.getPvpFlags();
-				targetBitmask |= pvpBitmask;
-				EnumSet<PvpFlag> targetFlags = PvpFlag.getFlags(targetBitmask);
-				PvpFlag targetTempFlag = targetFlags.iterator().next();
-				if (targetTempFlag != null) {
-					targetPacket = new UpdatePvpStatusMessage(targetTempFlag, tano.getPvpFaction().getCrc(), tano.getObjectId());
-				} else {
-					targetPacket = new UpdatePvpStatusMessage(PvpFlag.PLAYER, object.getPvpFaction().getCrc(), object.getObjectId());
-				}
-				if(!enemies || enemies && !object.hasPvpFlag(PvpFlag.GOING_OVERT) || enemies && object.hasPvpFlag(PvpFlag.GOING_COVERT) )
-					tano.sendSelf(objectPacket);
-				
-				object.sendSelf(objectPacket, targetPacket);
 			}
+			UpdatePvpStatusMessage objectPacket = createPvpStatusMessage(object, observer, object.getPvpFlags() | pvpBitmask);
+			UpdatePvpStatusMessage targetPacket = createPvpStatusMessage(object, observer, observer.getPvpFlags() | pvpBitmask);
+			if (objOwner != null)
+				objOwner.sendPacket(objectPacket, targetPacket);
+			if (obsOwner != null)
+				obsOwner.sendPacket(objectPacket);
 		}
+	}
+	
+	private UpdatePvpStatusMessage createPvpStatusMessage(TangibleObject object, TangibleObject observer, int flags) {
+		EnumSet<PvpFlag> objectFlags = PvpFlag.getFlags(flags);
+		PvpFlag flag = PvpFlag.PLAYER;
+		if (!objectFlags.isEmpty())
+			flag = objectFlags.iterator().next();
+		return new UpdatePvpStatusMessage(flag, object.getPvpFaction().getCrc(), object.getObjectId());
 	}
 	
 }
