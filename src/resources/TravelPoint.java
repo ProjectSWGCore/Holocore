@@ -13,12 +13,14 @@ public final class TravelPoint {
 	private final int additionalCost; // Additional cost. Perhaps based on distance from source to destination?
 	private final boolean reachable;
 	private CreatureObject shuttle;
+	private final boolean starport;
 	
-	public TravelPoint(String name, Location location, List<TravelInfo> allowedRoutesForPoint, int additionalCost) {
+	public TravelPoint(String name, Location location, List<TravelInfo> allowedRoutesForPoint, int additionalCost, boolean starport) {
 		this.name = name;
 		this.location = location;
 		this.allowedRoutesForPoint = allowedRoutesForPoint;
 		this.additionalCost = additionalCost;
+		this.starport = starport;
 		reachable = true;	// Not sure which effect this has on the client.
 	}
 	
@@ -49,6 +51,10 @@ public final class TravelPoint {
 	
 	public int totalTicketPrice(Terrain arrivalPlanet) {
 		return ticketPrice(arrivalPlanet) + getAdditionalCost();
+	}
+	
+	public boolean isStarport() {
+		return starport;
 	}
 	
 	public boolean isReachable() {

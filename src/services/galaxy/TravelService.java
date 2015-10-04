@@ -8,7 +8,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import network.packets.Packet;
 import network.packets.swg.zone.EnterTicketPurchaseModeMessage;
@@ -20,10 +22,12 @@ import intents.object.ObjectCreatedIntent;
 import intents.object.ObjectTeleportIntent;
 import intents.travel.*;
 import resources.Location;
+import resources.Posture;
 import resources.Terrain;
 import resources.TravelPoint;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
+import resources.config.ConfigFile;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.SWGObject;
@@ -49,20 +53,23 @@ public final class TravelService extends Service {
 	private final ObjectManager objectManager;
 	private final RelationalServerData travelPointDatabase;
 	private Terrain[] travelPlanets;
-	private final Map<Terrain, List<TravelInfo>> allowedRoutes; // Describes which planets are linked.
+	private final Map<Terrain, List<TravelInfo>> allowedRoutes; // Describes which planets are linked and base prices.
 	private final DatatableData travelFeeTable;
 	
-	/*
+	/**
 	 * This variable stores all the loaded TravelPoints for a given planet.
 	 * All TravelPoints on tatooine are mapped to {@code Terrain.TATOOINE}
 	 */
 	private final Map<Terrain, Collection<TravelPoint>> pointsOnPlanet;
 	
-	/*
-	 * This variable stores all the possible Travel Points a player can
-	 * travel to from a given terrain.
-	 */
-	private final Map<Terrain, Collection<TravelPoint>> availablePointsForPlanet;
+	// Fields relating to shuttle take-off and landing
+	private Posture currentShuttlePosture;
+	private final ScheduledExecutorService executor;
+	private final long timeUntilLand;
+	private long timeRemaining;
+	private final long landDelay;
+	private boolean shuttleLanded;
+	private final long timeGrounded;
 	
 	public TravelService(ObjectManager objectManager) {
 		this.objectManager = objectManager;
@@ -76,7 +83,15 @@ public final class TravelService extends Service {
 		allowedRoutes = new HashMap<>();
 		travelFeeTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/travel/travel.iff");
 		pointsOnPlanet = new HashMap<>();
-		availablePointsForPlanet = new HashMap<>();
+		
+		executor = Executors.newScheduledThreadPool(2);
+		timeUntilLand = getConfig(ConfigFile.FEATURES).getInt("SHUTTLE-AWAY-TIME", 60);
+		landDelay = 10000;	// debugging
+		timeGrounded = 120000;
+		
+		loadTravelPlanetNames();
+		loadAllowedRoutesAndPrices();
+		loadTravelPoints();
 		
 		registerForIntent(TravelPointSelectionIntent.TYPE);
 		registerForIntent(GalacticPacketIntent.TYPE);
@@ -86,8 +101,17 @@ public final class TravelService extends Service {
 	}
 	
 	@Override
-	public boolean initialize() {
-		return super.initialize();
+	public boolean start() {
+		executor.scheduleAtFixedRate(new ShuttleBehaviour(), 0, 1, TimeUnit.SECONDS);
+		
+		return super.start();
+	}
+	
+	@Override
+	public boolean stop() {
+		executor.shutdown();
+		
+		return super.stop();
 	}
 	
 	@Override
@@ -104,16 +128,6 @@ public final class TravelService extends Service {
 			case TicketUseIntent.TYPE:				handleTicketUse((TicketUseIntent) i); break;
 			case ObjectCreatedIntent.TYPE:			handleObjectCreation((ObjectCreatedIntent) i); break;
 		}
-	}
-	
-	@Override
-	public boolean start() {
-		loadTravelPlanetNames();
-		loadAllowedRoutesAndPrices();
-		loadTravelPoints();
-		loadAvailablePointsForPlanets();
-		
-		return super.start();
 	}
 	
 	private void loadTravelPlanetNames() {
@@ -163,8 +177,9 @@ public final class TravelService extends Service {
 					double x = set.getDouble("x");
 					double y = set.getDouble("y");
 					double z = set.getDouble("z");
+					String type = set.getString("type");
 					
-					TravelPoint point = new TravelPoint(pointName, new Location(x, y, z, travelPlanet), allowedRoutes.get(travelPlanet), 0);
+					TravelPoint point = new TravelPoint(pointName, new Location(x, y, z, travelPlanet), allowedRoutes.get(travelPlanet), 0, type.equals("starport"));
 					
 					Collection<TravelPoint> pointsOnCurrentPlanet = pointsOnPlanet.get(travelPlanet);
 					
@@ -185,19 +200,26 @@ public final class TravelService extends Service {
 		return success;
 	}
 	
-	private void loadAvailablePointsForPlanets() {
-		for(Entry<Terrain, List<TravelInfo>> entry : allowedRoutes.entrySet()) {
-			Terrain key = entry.getKey();
-			List<TravelInfo> value = entry.getValue();
-			Collection<TravelPoint> points = new ArrayList<>();
-			
-			availablePointsForPlanet.put(key, points);
-			
-			for(TravelInfo travelInfo : value)
-				points.addAll(pointsOnPlanet.get(travelInfo.getTerrain()));
+	private Collection<TravelPoint> pointsForPlanet(Location location, String planetName) {
+		Collection<TravelPoint> points = new ArrayList<>();
+		Terrain objectTerrain = location.getTerrain();
+		Terrain destinationTerrain = Terrain.getTerrainFromName(planetName);
+		
+		Collection<TravelPoint> candidatePoints = pointsOnPlanet.get(destinationTerrain);
+		
+		for(TravelPoint candidatePoint : candidatePoints) {
+			if(objectTerrain == destinationTerrain) {
+				// If the destination planet is the same as our current
+				points.addAll(candidatePoints);
+				return points;	// Then return all the points on this planet
+			} else {
+				 if(candidatePoint.isStarport()) {	// If the terrains aren't the same, we only want to add the starports.
+					 points.add(candidatePoint);
+				 }
+			}
 		}
 		
-		
+		return points;
 	}
 	
 	private void handlePointSelection(TravelPointSelectionIntent tpsi) {
@@ -212,8 +234,9 @@ public final class TravelService extends Service {
 		if(p instanceof PlanetTravelPointListRequest ) {
 			PlanetTravelPointListRequest req = (PlanetTravelPointListRequest) p;
 			String planetName = req.getPlanetName();
+			Player player = i.getPlayerManager().getPlayerFromNetworkId(i.getNetworkId());
 			
-			i.getPlayerManager().getPlayerFromNetworkId(i.getNetworkId()).sendPacket(new PlanetTravelPointListResponse(planetName, pointsOnPlanet.get(Terrain.getTerrainFromName(planetName))));
+			player.sendPacket(new PlanetTravelPointListResponse(planetName, pointsForPlanet(player.getCreatureObject().getWorldLocation(), planetName)));
 		}
 	}
 	
@@ -426,6 +449,25 @@ public final class TravelService extends Service {
 		return point.getLocation().distanceTo(objectLocation);
 	}
 	
+	private void updateShuttlePostures(Posture posture) {
+		for(Collection<TravelPoint> travelPoints : pointsOnPlanet.values()) {
+			for(TravelPoint tp : travelPoints) {
+				CreatureObject shuttle = tp.getShuttle();
+				
+				if(shuttle == null)	// This TravelPoint has no associated shuttle
+					continue;	// Continue with the next TravelPoint
+				
+				shuttle.setPosture(posture);
+			}
+		}
+		
+		currentShuttlePosture = posture;
+	}
+	
+	private boolean isShuttleAvailable() {
+		return currentShuttlePosture == Posture.UPRIGHT && shuttleLanded;
+	}
+	
 	private class DestinationSelectionSuiCallback implements ISuiCallback {
 
 		private final SuiListBox destinationSelection;
@@ -437,13 +479,38 @@ public final class TravelService extends Service {
 		}
 		
 		@Override
-		public void handleEvent(Player player, SWGObject actor, SuiEvent event,
-				Map<String, String> parameters) {
+		public void handleEvent(Player player, SWGObject actor, SuiEvent event, Map<String, String> parameters) {
 			int selection = SuiListBox.getSelectedRow(parameters);
 			SuiListBoxItem selectedItem = destinationSelection.getListItem(selection);
 			TravelPoint selectedDestination = (TravelPoint) selectedItem.getObject();
 			
 			teleportAndDestroyTicket(selectedDestination, usableTickets.get(selection), player.getCreatureObject());
+		}
+	}
+	
+	private class ShuttleBehaviour implements Runnable {
+		@Override
+		public void run() {
+			try {
+				// GROUNDED
+				Thread.sleep(timeGrounded);
+				
+				// LEAVE
+				updateShuttlePostures(Posture.PRONE);
+				shuttleLanded = false;
+				Thread.sleep(landDelay);
+				
+				// Make the shuttle stay away for some time.
+				Thread.sleep(timeUntilLand * 1000);
+				timeRemaining = timeUntilLand;	// Reset the timer
+				
+				// LANDING
+				updateShuttlePostures(Posture.UPRIGHT);
+				Thread.sleep(landDelay);
+				shuttleLanded = true;
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
