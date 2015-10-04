@@ -34,7 +34,6 @@ import utilities.Encoder;
 import java.net.InetAddress;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import java.nio.IntBuffer;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -247,17 +246,18 @@ public class Packet {
 	}
 	
 	public static int [] getIntArray(ByteBuffer bb) {
-		IntBuffer ib = bb.asIntBuffer();
-		int size = ib.get();
-		int [] ints = new int[size];
-		ib.get(ints);
+		bb.order(ByteOrder.LITTLE_ENDIAN);
+		int [] ints = new int[bb.getInt()];
+		for (int i = 0; i < ints.length; i++)
+			ints[i] = bb.getInt();
 		return ints;
 	}
 	
 	public static int [] getIntArray(ByteBuffer bb, int size) {
-		IntBuffer ib = bb.asIntBuffer();
+		bb.order(ByteOrder.LITTLE_ENDIAN);
 		int [] ints = new int[size];
-		ib.get(ints);
+		for (int i = 0; i < ints.length; i++)
+			ints[i] = bb.getInt();
 		return ints;
 	}
 
