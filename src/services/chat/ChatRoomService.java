@@ -28,6 +28,7 @@
 package services.chat;
 
 import intents.NotifyPlayersPacketIntent;
+import intents.PlayerEventIntent;
 import intents.chat.ChatRoomUpdateIntent;
 import intents.network.GalacticPacketIntent;
 import network.packets.Packet;
@@ -106,6 +107,7 @@ public class ChatRoomService extends Service {
 	public boolean initialize() {
 		registerForIntent(ChatRoomUpdateIntent.TYPE);
 		registerForIntent(GalacticPacketIntent.TYPE);
+		registerForIntent(PlayerEventIntent.TYPE);
 
 		database.load();
 		database.traverse((room) -> {
@@ -126,6 +128,10 @@ public class ChatRoomService extends Service {
 				break;
 			case GalacticPacketIntent.TYPE:
 				processPacket((GalacticPacketIntent) i);
+				break;
+			case PlayerEventIntent.TYPE:
+				if (i instanceof PlayerEventIntent)
+					handlePlayerEventIntent((PlayerEventIntent) i);
 				break;
 		}
 	}
@@ -187,6 +193,24 @@ public class ChatRoomService extends Service {
 				if (p instanceof ChatRemoveModeratorFromRoom) handleChatRemoveModeratorFromRoom(player, (ChatRemoveModeratorFromRoom) p);
 				break;
 			default: break;
+		}
+	}
+	
+	private void handlePlayerEventIntent(PlayerEventIntent intent) {
+		Player player = intent.getPlayer();
+		if (player == null)
+			return;
+
+		switch (intent.getEvent()) {
+			case PE_ZONE_IN:
+				enterPlanetaryChatChannels(player);
+				break;
+			case PE_FIRST_ZONE:
+				if (player.getPlayerObject() != null)
+					enterChatChannels(player, player.getPlayerObject().getJoinedChannels());
+				break;
+			default:
+				break;
 		}
 	}
 
