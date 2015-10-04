@@ -77,6 +77,8 @@ public class CreateCharacterFailure extends SWGPacket {
 				return "name_declined_too_fast";
 			case NAME_DEV_RESERVED:
 				return "name_declined_developer";
+			case TOO_MANY_CHARACTERS:
+				return "server_character_creation_max_chars";
 		}
 		return "name_declined_retry";
 	}
@@ -88,6 +90,7 @@ public class CreateCharacterFailure extends SWGPacket {
 		NAME_SYNTAX,
 		NAME_IN_USE,
 		NAME_FICTIONALLY_INAPPRORIATE,
-		NAME_DEV_RESERVED;
+		NAME_DEV_RESERVED,
+		TOO_MANY_CHARACTERS;
 	}
 }

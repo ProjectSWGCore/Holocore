@@ -72,13 +72,14 @@ import resources.server_info.Log;
 import resources.server_info.ObjectDatabase;
 import resources.server_info.ObjectDatabase.Traverser;
 import services.map.MapManager;
+import services.map.MapManager.MapType;
 import services.player.PlayerManager;
 import services.spawn.SpawnerService;
 import services.spawn.StaticService;
 
 public class ObjectManager extends Manager {
 	
-	private final MapManager mapService;
+	private final MapManager mapManager;
 	private final StaticService staticService;
 	private final SpawnerService spawnerService;
 	private final RadialService radialService;
@@ -89,7 +90,7 @@ public class ObjectManager extends Manager {
 	private long maxObjectId;
 	
 	public ObjectManager() {
-		mapService = new MapManager();
+		mapManager = new MapManager();
 		staticService = new StaticService(this);
 		spawnerService = new SpawnerService(this);
 		radialService = new RadialService();
@@ -98,7 +99,7 @@ public class ObjectManager extends Manager {
 		objectMap = new Hashtable<>(16*1024);
 		maxObjectId = 1;
 
-		addChildService(mapService);
+		addChildService(mapManager);
 		addChildService(staticService);
 		addChildService(radialService);
 		addChildService(spawnerService);
@@ -174,6 +175,8 @@ public class ObjectManager extends Manager {
 				maxObjectId = obj.getObjectId() + 1;
 			}
 		}
+		staticService.createSupportingObjects(obj);
+		mapManager.addMapLocation(obj, MapType.STATIC);
 	}
 	
 	private void loadObject(SWGObject obj) {
@@ -300,10 +303,16 @@ public class ObjectManager extends Manager {
 
 	private void processObjectTeleportIntent(ObjectTeleportIntent oti) {
 		SWGObject object = oti.getObject();
-		if (object instanceof CreatureObject && object.getOwner() != null){
-			objectAwareness.move(object, oti.getNewLocation());
-			sendPacket(object.getOwner(), new CmdStartScene(false, object.getObjectId(), ((CreatureObject)object).getRace(), object.getLocation(), (long)(ProjectSWG.getCoreTime()/1E3)));
-			object.createObject(object.getOwner());
+		if (object instanceof CreatureObject && object.getOwner() != null) {
+			Packet startScene = new CmdStartScene(false, object.getObjectId(), ((CreatureObject)object).getRace(), oti.getNewLocation(), (long)(ProjectSWG.getCoreTime()/1E3));
+			if (oti.getParent() != null) {
+				objectAwareness.move(object, oti.getParent(), oti.getNewLocation());
+				sendPacket(object.getOwner(), startScene);
+			} else {
+				objectAwareness.move(object, oti.getNewLocation());
+				sendPacket(object.getOwner(), startScene);
+				object.createObject(object.getOwner());
+			}
 			new PlayerEventIntent(object.getOwner(), PlayerEvent.PE_ZONE_IN).broadcast();
 		} else {
 			object.setLocation(oti.getNewLocation());
