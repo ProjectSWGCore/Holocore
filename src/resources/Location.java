@@ -289,6 +289,6 @@ public class Location implements Encodable, Serializable {
 		double deltaY = destination.getY() - getY();
 		double deltaZ = destination.getZ() - getZ();
 		
-		return Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2) + Math.pow(deltaZ, 2));
+		return Math.sqrt(square(deltaX) + square(deltaY) + square(deltaZ));
 	}
 }
