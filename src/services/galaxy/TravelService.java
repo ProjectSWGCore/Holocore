@@ -54,7 +54,7 @@ public final class TravelService extends Service {
 	private final ObjectManager objectManager;
 	private final RelationalServerData travelPointDatabase;
 	private Terrain[] travelPlanets;
-	private final Map<Terrain, List<Integer>> allowedRoutes; // Describes which planets are linked and base prices.
+	private final Map<Terrain, Map<Terrain, Integer>> allowedRoutes; // Describes which planets are linked and base prices.
 	private final DatatableData travelFeeTable;
 	
 	/**
@@ -145,21 +145,17 @@ public final class TravelService extends Service {
 	private void loadAllowedRoutesAndPrices() {
 		for(Terrain travelPlanet : travelPlanets) {
 			int columnIndex = travelFeeTable.getColumnFromName(travelPlanet.getName());
+			Map<Terrain, Integer> prices = new HashMap<>();
 			
 			for(int row = 0; row < travelPlanets.length; row++) {
 				int price = (int) travelFeeTable.getCell(row, columnIndex);
 				
 				if(price > 0) {	// If price is above 0, the planets are linked
-					List<Integer> travelInfoForPlanet = allowedRoutes.get(travelPlanet);
-					
-					if(travelInfoForPlanet == null) {	// If the list doesn't exist yet
-						travelInfoForPlanet = new ArrayList<>(); // Create it
-						allowedRoutes.put(travelPlanet, travelInfoForPlanet);
-					}
-					
-					travelInfoForPlanet.add(price);	// Add the candidate to the list, since price was > 0
+					prices.put(travelPlanets[row], price);
 				}
 			}
+			
+			allowedRoutes.put(travelPlanet, prices);
 		}
 	}
 	
@@ -215,7 +211,7 @@ public final class TravelService extends Service {
 			if(objectTerrain == destinationTerrain) {
 				// If the destination planet is the same as our current
 				points.addAll(candidatePoints);
-				return points;	// Then return all the points on this planet
+				break;	// Then return all the points on this planet
 			} else {
 				 if(candidatePoint.isStarport()) {	// If the terrains aren't the same, we only want to add the starports.
 					 points.add(candidatePoint);
@@ -244,13 +240,11 @@ public final class TravelService extends Service {
 		}
 	}
 	
-	private int totalTicketPrice(TravelPoint departurePoint, Terrain arrivalPlanet) {
+	private int getTotalTicketPrice(TravelPoint departurePoint, Terrain arrivalPlanet) {
 		int totalPrice = 0;
 		Terrain departurePlanet = departurePoint.getLocation().getTerrain();
-		List<Terrain> departurePlanets = new ArrayList<>(allowedRoutes.keySet());
-		List<Integer> departurePrices = allowedRoutes.get(departurePlanet);
 		
-		totalPrice += departurePrices.get(departurePlanets.indexOf(departurePlanet));
+		totalPrice += allowedRoutes.get(departurePlanet).get(arrivalPlanet);
 		totalPrice += departurePoint.getAdditionalCost();
 		
 		return totalPrice;
@@ -267,7 +261,7 @@ public final class TravelService extends Service {
 		if(nearestPoint == null || destinationPoint == null)
 			return;
 		
-		int ticketPrice = totalTicketPrice(nearestPoint, destinationPoint.getLocation().getTerrain());
+		int ticketPrice = getTotalTicketPrice(nearestPoint, destinationPoint.getLocation().getTerrain());
 		int newBankBalance = purchaser.getBankBalance();
 		int newCashBalance = purchaser.getCashBalance();
 		

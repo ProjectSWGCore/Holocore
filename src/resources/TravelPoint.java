@@ -30,6 +30,7 @@ public final class TravelPoint {
 	public int getAdditionalCost() {
 		return additionalCost;
 	}
+	
 	public boolean isStarport() {
 		return starport;
 	}
