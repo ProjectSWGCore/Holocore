@@ -30,7 +30,6 @@ public final class TravelPoint {
 	public int getAdditionalCost() {
 		return additionalCost;
 	}
-	
 	public boolean isStarport() {
 		return starport;
 	}
@@ -47,7 +46,7 @@ public final class TravelPoint {
 		this.shuttle = shuttle;
 	}
 	
-	public String suiFormat() {
+	public String getSuiFormat() {
 		return String.format("@planet_n:%s -- %s", location.getTerrain().getName(), name);
 	}
 }
