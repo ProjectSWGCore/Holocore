@@ -281,7 +281,7 @@ public final class TravelService extends Service {
 		showMessageBox(purchaserOwner, "ticket_purchase_complete");
 		
 		// Also send the purchaser a system message
-		// TODO is there a STF containing this?
+		// There's no StringId for this message.
 		new ChatBroadcastIntent(purchaserOwner, String.format("You succesfully make a payment of %d credits to the Galactic Travel Commission.", ticketPrice)).broadcast();
 		
 		purchaser.setCashBalance(newCashBalance);
