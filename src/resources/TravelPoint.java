@@ -49,7 +49,7 @@ public final class TravelPoint {
 		return additionalCost;
 	}
 	
-	public int totalTicketPrice(Terrain arrivalPlanet) {
+	public int getTotalTicketPrice(Terrain arrivalPlanet) {
 		return ticketPrice(arrivalPlanet) + getAdditionalCost();
 	}
 	

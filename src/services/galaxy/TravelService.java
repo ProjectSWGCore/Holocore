@@ -257,7 +257,7 @@ public final class TravelService extends Service {
 		if(nearestPoint == null || destinationPoint == null)
 			return;
 		
-		int ticketPrice = nearestPoint.totalTicketPrice(destinationPoint.getLocation().getTerrain());
+		int ticketPrice = nearestPoint.getTotalTicketPrice(destinationPoint.getLocation().getTerrain());
 		int newBankBalance = purchaser.getBankBalance();
 		int newCashBalance = purchaser.getCashBalance();
 		
