@@ -2,8 +2,13 @@ package network.packets.swg.zone;
 
 import java.nio.ByteBuffer;
 import java.util.Collection;
+import java.util.List;
 
+import resources.Location;
+import resources.Point3D;
+import resources.Terrain;
 import resources.TravelPoint;
+import utilities.Encoder.StringType;
 import network.packets.swg.SWGPacket;
 
 public class PlanetTravelPointListResponse extends SWGPacket {
@@ -50,7 +55,32 @@ public class PlanetTravelPointListResponse extends SWGPacket {
 		return data;
 	}
 	
-	// TODO implement decode()
+	@Override
+	public void decode(ByteBuffer data) {
+		if (!super.decode(data, CRC))
+			return;
+		planetName = getAscii(data);
+		List<String> pointNames = getList(data, StringType.ASCII);
+		List<Point3D> points = getList(data, Point3D.class);
+		int[] additionalCosts = getIntArray(data);
+		boolean[] pointsReachable = getBooleanArray(data);
+		
+		for(int i = 0; i < pointNames.size(); i++) {
+			String pointName = pointNames.get(i);
+			Point3D point = points.get(i);
+			int additionalCost = additionalCosts[i];
+			boolean reachable = pointsReachable[i];
+			
+			TravelPoint tp = new TravelPoint(pointName, new Location(point.getX(), point.getY(), point.getZ(), Terrain.getTerrainFromName(planetName)), additionalCost, isStarport(pointName), reachable);
+			travelPoints.add(tp);
+		}
+	}
+	
+	private boolean isStarport(String pointName) {
+		boolean result = pointName.endsWith(" Starport") || pointName.endsWith(" Spaceport");
+		
+		return result || (pointName.split(" ").length == 2 && !result);
+	}
 	
 	private int calculateSize() {
 		int size =
