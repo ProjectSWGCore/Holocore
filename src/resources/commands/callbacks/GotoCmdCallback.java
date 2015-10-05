@@ -30,17 +30,24 @@ public class GotoCmdCallback implements ICmdCallback  {
 		if (parts.length == 0 || parts[0].trim().isEmpty())
 			return;
 		String loc = parts[0].trim();
-		String err = teleportToGotoLocation(galacticManager.getObjectManager(), teleportee, loc);
+		int cell = 1;
+		try {
+			if (parts.length >= 2)
+				cell = Integer.parseInt(parts[1]);
+		} catch (NumberFormatException e) {
+			
+		}
+		String err = teleportToGotoLocation(galacticManager.getObjectManager(), teleportee, loc, cell);
 		new ChatBroadcastIntent(player, err).broadcast();
 	}
 	
-	private String teleportToGotoLocation(ObjectManager objManager, SWGObject obj, String loc) {
+	private String teleportToGotoLocation(ObjectManager objManager, SWGObject obj, String loc, int cell) {
 		try (RelationalServerData data = RelationalServerFactory.getServerData("building/building.db", "buildings")) {
 			try (ResultSet set = data.selectFromTable("buildings", null, "building_id = ?", loc)) {
 				if (!set.next())
 					return "No such location found: " + loc;
 				Terrain t = Terrain.getTerrainFromName(set.getString("terrain_name"));
-				return teleportToGoto(objManager, obj, set.getLong("object_id"), new Location(0, 0, 0, t));
+				return teleportToGoto(objManager, obj, set.getLong("object_id"), cell, new Location(0, 0, 0, t));
 			} catch (SQLException e) {
 				e.printStackTrace();
 				return "Exception thrown. Failed to teleport: ["+e.getErrorCode()+"] " + e.getMessage();
@@ -48,14 +55,14 @@ public class GotoCmdCallback implements ICmdCallback  {
 		}
 	}
 	
-	private String teleportToGoto(ObjectManager objManager, SWGObject obj, long buildingId, Location l) {
+	private String teleportToGoto(ObjectManager objManager, SWGObject obj, long buildingId, int cellNumber, Location l) {
 		SWGObject parent = objManager.getObjectById(buildingId);
 		if (parent == null || !(parent instanceof BuildingObject)) {
 			String err = String.format("Invalid parent! Either null or not a building: %s  BUID: %d", parent, buildingId);
 			Log.e("CharacterCreationService", err);
 			return err;
 		}
-		CellObject cell = ((BuildingObject) parent).getCellByNumber(1);
+		CellObject cell = ((BuildingObject) parent).getCellByNumber(cellNumber);
 		if (cell == null) {
 			String err = String.format("Building does not have any cells! B-Template: %s  BUID: %d", parent.getTemplate(), buildingId);
 			Log.e("CharacterCreationService", err);
