@@ -46,10 +46,10 @@ import services.objects.ObjectManager;
 
 public final class TravelService extends Service {
 	
-	private static final String DBTABLENAME = "travel";
-	private static final String TRAVELPOINTSFORPLANET = "SELECT * FROM " + DBTABLENAME + " WHERE planet=";
-	private static final byte PLANETNAMESCOLUMNINDEX = 0;
-	private static final short TICKETUSERADIUS = 25;	// The distance a player needs to be within in order to use their ticket
+	private static final String DB_TABLE_NAME = "travel";
+	private static final String TRAVEL_POINTS_FOR_PLANET = "SELECT * FROM " + DB_TABLE_NAME + " WHERE planet=";
+	private static final byte PLANET_NAMES_COLUMN_INDEX = 0;
+	private static final short TICKET_USE_RADIUS = 25;	// The distance a player needs to be within in order to use their ticket
 	
 	private final ObjectManager objectManager;
 	private final RelationalServerData travelPointDatabase;
@@ -77,7 +77,7 @@ public final class TravelService extends Service {
 		
 		travelPointDatabase = new RelationalServerData("serverdata/static/travel.db");
 		
-		if(!travelPointDatabase.linkTableWithSdb(DBTABLENAME, "serverdata/static/travel.sdb")) {
+		if(!travelPointDatabase.linkTableWithSdb(DB_TABLE_NAME, "serverdata/static/travel.sdb")) {
 			throw new main.ProjectSWG.CoreException("Unable to load sdb files for TravelService");
 		}
 		
@@ -139,7 +139,7 @@ public final class TravelService extends Service {
 	private void loadTravelPlanetNames() {
 		travelPlanets = new Terrain[travelFeeTable.getRowCount()];
 		
-		travelFeeTable.handleRows(currentRow -> travelPlanets[currentRow] = Terrain.getTerrainFromName((String) travelFeeTable.getCell(currentRow, PLANETNAMESCOLUMNINDEX)));
+		travelFeeTable.handleRows(currentRow -> travelPlanets[currentRow] = Terrain.getTerrainFromName((String) travelFeeTable.getCell(currentRow, PLANET_NAMES_COLUMN_INDEX)));
 	}
 	
 	private void loadAllowedRoutesAndPrices() {
@@ -149,7 +149,7 @@ public final class TravelService extends Service {
 			for(int row = 0; row < travelPlanets.length; row++) {
 				int price = (int) travelFeeTable.getCell(row, columnIndex);
 				
-				Terrain candidate = Terrain.getTerrainFromName((String) travelFeeTable.getCell(row, PLANETNAMESCOLUMNINDEX));
+				Terrain candidate = Terrain.getTerrainFromName((String) travelFeeTable.getCell(row, PLANET_NAMES_COLUMN_INDEX));
 				
 				if(price > 0) {	// If price is above 0, the planets are linked
 					List<TravelInfo> travelInfoForPlanet = allowedRoutes.get(travelPlanet);
@@ -177,7 +177,7 @@ public final class TravelService extends Service {
 		for(Terrain travelPlanet : allowedRoutes.keySet()) {
 			String planetName = travelPlanet.getName();
 			
-			try(ResultSet set = travelPointDatabase.prepareStatement(TRAVELPOINTSFORPLANET + "'" + planetName + "'").executeQuery()) {
+			try(ResultSet set = travelPointDatabase.prepareStatement(TRAVEL_POINTS_FOR_PLANET + "'" + planetName + "'").executeQuery()) {
 				while(set.next()) {
 					String pointName = set.getString("name");
 					double x = set.getDouble("x");
@@ -378,7 +378,7 @@ public final class TravelService extends Service {
 		
 		if(objectHasTicketAttributes(ticket)) {
 			if(ticketCanBeUsedAtNearestPoint(ticket)) {
-				if(distanceToNearestPoint <= TICKETUSERADIUS) {
+				if(distanceToNearestPoint <= TICKET_USE_RADIUS) {
 					// They can use their ticket if they're within range.
 					teleportAndDestroyTicket(destinationPoint(ticket), ticket, traveler);
 				} else {
