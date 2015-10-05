@@ -69,7 +69,7 @@ public final class TravelPoint {
 		this.shuttle = shuttle;
 	}
 	
-	public String suiFormat() {
+	public String getSuiFormat() {
 		return String.format("@planet_n:%s -- %s", location.getTerrain().getName(), name);
 	}
 }
