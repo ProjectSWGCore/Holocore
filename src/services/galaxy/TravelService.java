@@ -54,7 +54,7 @@ public final class TravelService extends Service {
 	private final ObjectManager objectManager;
 	private final RelationalServerData travelPointDatabase;
 	private Terrain[] travelPlanets;
-	private final Map<Terrain, List<TravelInfo>> allowedRoutes; // Describes which planets are linked and base prices.
+	private final Map<Terrain, List<Integer>> allowedRoutes; // Describes which planets are linked and base prices.
 	private final DatatableData travelFeeTable;
 	
 	/**
@@ -149,17 +149,15 @@ public final class TravelService extends Service {
 			for(int row = 0; row < travelPlanets.length; row++) {
 				int price = (int) travelFeeTable.getCell(row, columnIndex);
 				
-				Terrain candidate = Terrain.getTerrainFromName((String) travelFeeTable.getCell(row, PLANETNAMESCOLUMNINDEX));
-				
 				if(price > 0) {	// If price is above 0, the planets are linked
-					List<TravelInfo> travelInfoForPlanet = allowedRoutes.get(travelPlanet);
+					List<Integer> travelInfoForPlanet = allowedRoutes.get(travelPlanet);
 					
 					if(travelInfoForPlanet == null) {	// If the list doesn't exist yet
 						travelInfoForPlanet = new ArrayList<>(); // Create it
 						allowedRoutes.put(travelPlanet, travelInfoForPlanet);
 					}
 					
-					travelInfoForPlanet.add(new TravelInfo(candidate, price));	// Add the candidate to the list, since price was > 0
+					travelInfoForPlanet.add(price);	// Add the candidate to the list, since price was > 0
 				}
 			}
 		}
@@ -185,7 +183,7 @@ public final class TravelService extends Service {
 					double z = set.getDouble("z");
 					String type = set.getString("type");
 					
-					TravelPoint point = new TravelPoint(pointName, new Location(x, y, z, travelPlanet), allowedRoutes.get(travelPlanet), 0, type.equals("starport"));
+					TravelPoint point = new TravelPoint(pointName, new Location(x, y, z, travelPlanet), 0, type.equals("starport"), true);
 					
 					Collection<TravelPoint> pointsOnCurrentPlanet = pointsOnPlanet.get(travelPlanet);
 					
@@ -246,6 +244,18 @@ public final class TravelService extends Service {
 		}
 	}
 	
+	private int totalTicketPrice(TravelPoint departurePoint, Terrain arrivalPlanet) {
+		int totalPrice = 0;
+		Terrain departurePlanet = departurePoint.getLocation().getTerrain();
+		List<Terrain> departurePlanets = new ArrayList<>(allowedRoutes.keySet());
+		List<Integer> departurePrices = allowedRoutes.get(departurePlanet);
+		
+		totalPrice += departurePrices.get(departurePlanets.indexOf(departurePlanet));
+		totalPrice += departurePoint.getAdditionalCost();
+		
+		return totalPrice;
+	}
+	
 	private void handleTicketPurchase(TicketPurchaseIntent i) {
 		CreatureObject purchaser = i.getPurchaser();
 		Location purchaserWorldLocation = purchaser.getWorldLocation();
@@ -257,7 +267,7 @@ public final class TravelService extends Service {
 		if(nearestPoint == null || destinationPoint == null)
 			return;
 		
-		int ticketPrice = nearestPoint.totalTicketPrice(destinationPoint.getLocation().getTerrain());
+		int ticketPrice = totalTicketPrice(nearestPoint, destinationPoint.getLocation().getTerrain());
 		int newBankBalance = purchaser.getBankBalance();
 		int newCashBalance = purchaser.getCashBalance();
 		
@@ -555,24 +565,6 @@ public final class TravelService extends Service {
 					e.printStackTrace();
 				}
 			}
-		}
-	}
-	
-	public class TravelInfo {
-		private final Terrain terrain;
-		private final int price;
-		
-		private TravelInfo(Terrain terrain, int price) {
-			this.terrain = terrain;
-			this.price = price;
-		}
-		
-		public Terrain getTerrain() {
-			return terrain;
-		}
-		
-		public int getPrice() {
-			return price;
 		}
 	}
 }
