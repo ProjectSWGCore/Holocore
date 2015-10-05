@@ -37,6 +37,7 @@ import resources.objects.SWGObject;
 import resources.objects.building.BuildingObject;
 import resources.objects.cell.CellObject;
 import resources.objects.creature.CreatureObject;
+import resources.objects.group.GroupObject;
 import resources.objects.installation.InstallationObject;
 import resources.objects.intangible.IntangibleObject;
 import resources.objects.player.PlayerObject;
@@ -80,6 +81,7 @@ public final class ObjectCreator {
 			case "installation":		return new InstallationObject(objectId);
 			case "ship":				return new ShipObject(objectId);
 			case "soundobject":			return new SoundObject(objectId);
+			case "group":				return new GroupObject(objectId);
 		}
 		return null;
 	}

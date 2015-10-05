@@ -75,7 +75,7 @@ public final class IntentFactory {
 	 *                set the %DI to the value of 500 for the StringId.
 	 *                Note that the prose key must always come first and the value for that key must always come second.
 	 */
-	public void sendSystemMessage(Player target, String stf, Object ... objects) {
+	public static void sendSystemMessage(Player target, String stf, Object ... objects) {
 		Object [] prose = new Object[objects.length + 2];
 		prose[0] = "StringId";
 		prose[1] = new StringId(stf);

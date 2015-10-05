@@ -791,7 +791,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		}
 	}
 	
-	private void awarenessOutOfRange(SWGObject o) {
+	public void awarenessOutOfRange(SWGObject o) {
 		synchronized (objectsAware) {
 			if (objectsAware.remove(o)) {
 				Player owner = o.getOwner();
@@ -803,7 +803,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		}
 	}
 	
-	private void awarenessInRange(SWGObject o) {
+	public void awarenessInRange(SWGObject o) {
 		synchronized (objectsAware) {
 			if (objectsAware.add(o)) {
 				Player owner = o.getOwner();
@@ -814,7 +814,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 			}
 		}
 	}
-	
+
 	private void createObjectObservers(SWGObject obj) {
 		Set<SWGObject> observers = new HashSet<>();
 		getChildrenObservers(observers, obj);
