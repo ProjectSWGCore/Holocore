@@ -14,7 +14,7 @@ import resources.client_info.ClientFactory;
 import resources.client_info.visitors.CrcStringTableData;
 import resources.client_info.visitors.DatatableData;
 import resources.objects.SWGObject;
-import resources.objects.buildouts.BuildoutArea;
+import resources.objects.buildouts.SwgBuildoutArea;
 import resources.objects.buildouts.BuildoutLoader;
 import resources.objects.buildouts.SnapshotLoader;
 import resources.objects.cell.CellObject;
@@ -114,7 +114,7 @@ public class BuildoutGenerator {
 		String file = "datatables/buildout/areas_"+t.getName()+".iff";
 		DatatableData areaTable = (DatatableData) ClientFactory.getInfoFromFile(file);
 		for (int row = 0; row < areaTable.getRowCount(); row++) {
-			BuildoutArea area = new BuildoutArea();
+			SwgBuildoutArea area = new SwgBuildoutArea();
 			area.load(areaTable.getRow(row), sceneRow, row);
 			areas.add(new GenBuildoutArea(area, t, area.getX1(), area.getZ1(), area.getX2(), area.getZ2(), sceneRow*100+row, adjust));
 		}
@@ -166,7 +166,7 @@ public class BuildoutGenerator {
 	}
 	
 	private static class GenBuildoutArea implements Comparable<GenBuildoutArea> {
-		public final BuildoutArea area;
+		public final SwgBuildoutArea area;
 		public final Terrain terrain;
 		public final int x1;
 		public final int z1;
@@ -175,7 +175,7 @@ public class BuildoutGenerator {
 		public final int id;
 		public final boolean adjust;
 		
-		public GenBuildoutArea(BuildoutArea area, Terrain terrain, double x1, double z1, double x2, double z2, int id, boolean adjust) {
+		public GenBuildoutArea(SwgBuildoutArea area, Terrain terrain, double x1, double z1, double x2, double z2, int id, boolean adjust) {
 			this.area = area;
 			this.terrain = terrain;
 			this.x1 = (int) x1;

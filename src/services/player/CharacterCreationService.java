@@ -307,8 +307,6 @@ public class CharacterCreationService extends Service {
 		if (creatureObj == null)
 			return -1;
 		PlayerObject	playerObj	= createPlayer(objManager, "object/player/shared_player.iff");
-		SWGObject		bankObj		= objManager.createObject("object/tangible/bank/shared_character_bank.iff", false);
-		SWGObject		missionObj	= objManager.createObject("object/tangible/mission_bag/shared_mission_bag.iff", false);
 		
 		setCreatureObjectValues(objManager, creatureObj, create);
 		setPlayerObjectValues(playerObj, create);
@@ -318,8 +316,6 @@ public class CharacterCreationService extends Service {
 		creatureObj.setVolume(0x000F4240);
 		creatureObj.setOwner(player);
 		creatureObj.addObject(playerObj); // ghost slot
-		creatureObj.addObject(bankObj);
-		creatureObj.addObject(missionObj);
 		playerObj.setAdminTag(player.getAccessLevel());
 		player.setCreatureObject(creatureObj);
 		return creatureObj.getObjectId();
@@ -373,6 +369,12 @@ public class CharacterCreationService extends Service {
 		return null;
 	}
 	
+	private SWGObject createInventoryObject(ObjectManager objManager, CreatureObject creatureObj, String template) {
+		SWGObject obj = objManager.createObject(creatureObj, template);
+		obj.setContainerPermissions(ContainerPermissions.INVENTORY);
+		return obj;
+	}
+	
 	private void createHair(ObjectManager objManager, CreatureObject creatureObj, String hair, byte [] customization) {
 		if (hair.isEmpty())
 			return;
@@ -384,15 +386,6 @@ public class CharacterCreationService extends Service {
 	}
 	
 	private void setCreatureObjectValues(ObjectManager objManager, CreatureObject creatureObj, ClientCreateCharacter create) {
-		TangibleObject inventory	= createTangible(objManager, "object/tangible/inventory/shared_character_inventory.iff");
-		inventory.setContainerPermissions(ContainerPermissions.INVENTORY);
-		TangibleObject datapad		= createTangible(objManager, "object/tangible/datapad/shared_character_datapad.iff");
-		datapad.setContainerPermissions(ContainerPermissions.INVENTORY);
-		TangibleObject apprncInventory = createTangible(objManager, "object/tangible/inventory/shared_appearance_inventory.iff");
-		apprncInventory.setContainerPermissions(ContainerPermissions.INVENTORY);
-		TangibleObject safetyDeposit = createTangible(objManager, "object/tangible/bank/shared_character_bank.iff");
-		safetyDeposit.setContainerPermissions(ContainerPermissions.INVENTORY);
-		
 		creatureObj.setRace(Race.getRaceByFile(create.getRace()));
 		creatureObj.setAppearanceData(create.getCharCustomization());
 		creatureObj.setHeight(create.getHeight());
@@ -400,15 +393,12 @@ public class CharacterCreationService extends Service {
 		creatureObj.setPvpFlags(PvpFlag.PLAYER, PvpFlag.OVERT);
 		creatureObj.getSkills().add("species_" + creatureObj.getRace().getSpecies());
 
-		creatureObj.addObject(inventory); // slot = inventory
-		creatureObj.addObject(datapad); // slot = datapad
-		creatureObj.addObject(apprncInventory); // slot = appearance_inventory
-		creatureObj.addObject(safetyDeposit); // slot = bank
+		creatureObj.addEquipment(createInventoryObject(objManager, creatureObj, "object/tangible/inventory/shared_character_inventory.iff"));
+		creatureObj.addEquipment(createInventoryObject(objManager, creatureObj, "object/tangible/datapad/shared_character_datapad.iff"));
+		creatureObj.addEquipment(createInventoryObject(objManager, creatureObj, "object/tangible/inventory/shared_appearance_inventory.iff"));
+		createInventoryObject(objManager, creatureObj, "object/tangible/bank/shared_character_bank.iff");
+		createInventoryObject(objManager, creatureObj, "object/tangible/mission_bag/shared_mission_bag.iff");
 		
-		creatureObj.addEquipment(inventory);
-		creatureObj.addEquipment(datapad);
-		creatureObj.addEquipment(apprncInventory);
-
 		creatureObj.joinPermissionGroup("world");
 	}
 	
