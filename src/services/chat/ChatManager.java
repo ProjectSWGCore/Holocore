@@ -452,6 +452,8 @@ public class ChatManager extends Manager {
 	}
 	
 	private void logChat(long sendId, String sendName, long recvId, String recvName, String type, String range, String room, String subject, String message) {
+		if (message == null)
+			return;
 		try {
 			long time = System.currentTimeMillis();
 			chatLogs.insert("chat_log", null, time, sendId, sendName, recvId, recvName, type, range, room, subject, message);
