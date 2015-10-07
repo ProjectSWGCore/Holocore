@@ -71,8 +71,7 @@ public class PlanetTravelPointListResponse extends SWGPacket {
 			int additionalCost = additionalCosts[i];
 			boolean reachable = pointsReachable[i];
 			
-			TravelPoint tp = new TravelPoint(pointName, new Location(point.getX(), point.getY(), point.getZ(), Terrain.getTerrainFromName(planetName)), additionalCost, isStarport(pointName), reachable);
-			travelPoints.add(tp);
+			travelPoints.add(new TravelPoint(pointName, new Location(point.getX(), point.getY(), point.getZ(), Terrain.getTerrainFromName(planetName)), additionalCost, isStarport(pointName), reachable));
 		}
 	}
 	
