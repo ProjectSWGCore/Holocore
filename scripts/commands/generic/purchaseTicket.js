@@ -1,4 +1,4 @@
-var execute = function(galManager, player, target, args) {
+function executeCommand = function(galacticManager, player, target, args) {
 	var TicketPurchaseIntent = Java.type("intents.travel.TicketPurchaseIntent");
 	params = args.split(" ");
 	
@@ -7,4 +7,4 @@ var execute = function(galManager, player, target, args) {
 	roundTrip = params[4].equals("1");
 	
 	new TicketPurchaseIntent(player.getCreatureObject(), destinationPlanet, destinationName, roundTrip).broadcast();
-};
+}
