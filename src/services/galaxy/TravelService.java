@@ -92,7 +92,7 @@ public final class TravelService extends Service {
 	
 	// Fields relating to shuttle take-off and landing
 	private Posture currentShuttlePosture;
-	private final ExecutorService executor;
+	private ExecutorService executor;
 	private final int timeUntilLand;
 	private int timeRemaining;
 	private final long landDelay;
@@ -112,7 +112,6 @@ public final class TravelService extends Service {
 		travelFeeTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/travel/travel.iff");
 		pointsOnPlanet = new HashMap<>();
 		
-		executor = Executors.newSingleThreadExecutor();
 		timeUntilLand = getConfig(ConfigFile.FEATURES).getInt("SHUTTLE-AWAY-TIME", 60);
 		timeRemaining = timeUntilLand;
 		shuttleLanded = true;	// Shuttles start off being grounded
@@ -129,6 +128,13 @@ public final class TravelService extends Service {
 		registerForIntent(TicketPurchaseIntent.TYPE);
 		registerForIntent(TicketUseIntent.TYPE);
 		registerForIntent(ObjectCreatedIntent.TYPE);
+	}
+	
+	@Override
+	public boolean initialize() {
+		executor = Executors.newSingleThreadExecutor();
+		
+		return super.initialize();
 	}
 	
 	@Override
