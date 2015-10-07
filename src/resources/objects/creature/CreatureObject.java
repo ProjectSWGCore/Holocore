@@ -726,10 +726,6 @@ public class CreatureObject extends TangibleObject {
 		return items;
 	}
 	
-	public int getItemsByTemplateCount(String slotName, String template) {
-		return getItemsByTemplate(slotName, template).size();
-	}
-	
 	@Override
 	public boolean equals(Object obj) {
 		return super.equals(obj);
