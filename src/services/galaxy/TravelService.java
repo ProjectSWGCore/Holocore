@@ -296,7 +296,7 @@ public final class TravelService extends Service {
 		CreatureObject purchaser = i.getPurchaser();
 		Location purchaserWorldLocation = purchaser.getWorldLocation();
 		TravelPoint nearestPoint = nearestTravelPoint(purchaserWorldLocation);
-		TravelPoint destinationPoint = destinationPoint(Terrain.getTerrainFromName(i.getDestinationPlanet()), i.getDestinationName());
+		TravelPoint destinationPoint = getDestinationPoint(Terrain.getTerrainFromName(i.getDestinationPlanet()), i.getDestinationName());
 		Player purchaserOwner = purchaser.getOwner();
 		boolean roundTrip = i.isRoundTrip();
 		
@@ -405,7 +405,7 @@ public final class TravelService extends Service {
 			destinationSelection = new SuiListBox(SuiButtons.OK_CANCEL, "@travel:select_destination", "@travel:select_destination");
 			
 			for(SWGObject usableTicket : usableTickets) {
-				TravelPoint destinationPoint = destinationPoint(usableTicket);
+				TravelPoint destinationPoint = getDestinationPoint(usableTicket);
 				
 				destinationSelection.addListItem(destinationPoint.getSuiFormat(), destinationPoint);
 			}
@@ -427,7 +427,7 @@ public final class TravelService extends Service {
 			if(isTicketUsable(ticket)) {
 				if(distanceToNearestPoint <= TICKET_USE_RADIUS) {
 					// They can use their ticket if they're within range.
-					teleportAndDestroyTicket(destinationPoint(ticket), ticket, traveler);
+					teleportAndDestroyTicket(getDestinationPoint(ticket), ticket, traveler);
 				} else {
 					// They're out of range - let them know.
 					new ChatBroadcastIntent(player, "@travel:boarding_too_far").broadcast();
@@ -480,11 +480,11 @@ public final class TravelService extends Service {
 		return departureTerrain == currentTerrain && departurePoint.equals(nearest.getName());
 	}
 	
-	private TravelPoint destinationPoint(SWGObject ticket) {
-		return destinationPoint(Terrain.getTerrainFromName(ticket.getAttribute("@obj_attr_n:travel_arrival_planet").split(":")[1]), ticket.getAttribute("@obj_attr_n:travel_arrival_point"));
+	private TravelPoint getDestinationPoint(SWGObject ticket) {
+		return getDestinationPoint(Terrain.getTerrainFromName(ticket.getAttribute("@obj_attr_n:travel_arrival_planet").split(":")[1]), ticket.getAttribute("@obj_attr_n:travel_arrival_point"));
 	}
 	
-	private TravelPoint destinationPoint(Terrain terrain, String pointName) {
+	private TravelPoint getDestinationPoint(Terrain terrain, String pointName) {
 		TravelPoint currentResult = null;
 		Iterator<TravelPoint> pointIterator = pointsOnPlanet.get(terrain).iterator();
 		
