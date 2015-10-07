@@ -242,7 +242,7 @@ public final class TravelService extends Service {
 		return success;
 	}
 	
-	private Collection<TravelPoint> pointsForPlanet(Location location, String planetName) {
+	private Collection<TravelPoint> getPointsForPlanet(Location location, String planetName) {
 		Collection<TravelPoint> points = new ArrayList<>();
 		Terrain objectTerrain = location.getTerrain();
 		Terrain destinationTerrain = Terrain.getTerrainFromName(planetName);
@@ -278,7 +278,7 @@ public final class TravelService extends Service {
 			String planetName = req.getPlanetName();
 			Player player = i.getPlayerManager().getPlayerFromNetworkId(i.getNetworkId());
 			
-			player.sendPacket(new PlanetTravelPointListResponse(planetName, pointsForPlanet(player.getCreatureObject().getWorldLocation(), planetName)));
+			player.sendPacket(new PlanetTravelPointListResponse(planetName, getPointsForPlanet(player.getCreatureObject().getWorldLocation(), planetName)));
 		}
 	}
 	
