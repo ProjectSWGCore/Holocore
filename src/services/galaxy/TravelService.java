@@ -509,9 +509,9 @@ public final class TravelService extends Service {
 		for(TravelPoint candidate : pointsForPlanet) {
 			if(currentResult == null) { // Will occur upon the first iteration.
 				currentResult = candidate; // The first candidate will always be the first possible result.
-				currentResultDistance = distanceFromPoint(currentResult, objectLocation);
+				currentResultDistance = getDistanceFromPoint(currentResult, objectLocation);
 			} else {
-				candidateDistance = distanceFromPoint(candidate, objectLocation);
+				candidateDistance = getDistanceFromPoint(candidate, objectLocation);
 				
 				if(candidateDistance < currentResultDistance) {
 					currentResult = candidate;
@@ -523,7 +523,7 @@ public final class TravelService extends Service {
 		return currentResult;
 	}
 
-	private double distanceFromPoint(TravelPoint point, Location objectLocation) {
+	private double getDistanceFromPoint(TravelPoint point, Location objectLocation) {
 		return point.getLocation().distanceTo(objectLocation);
 	}
 	
