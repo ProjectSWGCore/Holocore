@@ -285,10 +285,6 @@ public class Location implements Encodable, Serializable {
 	 * @return the distance between {@code this} and destination, which is ALWAYS positive.
 	 */
 	public double distanceTo(Location destination) {
-		double deltaX = destination.getX() - getX();
-		double deltaY = destination.getY() - getY();
-		double deltaZ = destination.getZ() - getZ();
-		
-		return Math.sqrt(square(deltaX) + square(deltaY) + square(deltaZ));
+		return Math.sqrt(square(destination.getX() - getX()) + square(destination.getY() - getY()) + square(destination.getZ() - getZ()));
 	}
 }
