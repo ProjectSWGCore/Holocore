@@ -370,7 +370,7 @@ public final class TravelService extends Service {
 		
 		for(SWGObject ticket : tickets)
 			if(isTicket(ticket))
-				if(ticketCanBeUsedAtNearestPoint(ticket))
+				if(isTicketUsable(ticket))
 					usableTickets.add(ticket);
 		
 		if(usableTickets.isEmpty())	// They don't have a valid ticket. 
@@ -398,7 +398,7 @@ public final class TravelService extends Service {
 		Player player = i.getPlayer();
 		
 		if(isTicket(ticket)) {
-			if(ticketCanBeUsedAtNearestPoint(ticket)) {
+			if(isTicketUsable(ticket)) {
 				if(distanceToNearestPoint <= TICKET_USE_RADIUS) {
 					// They can use their ticket if they're within range.
 					teleportAndDestroyTicket(destinationPoint(ticket), ticket, traveler);
@@ -442,7 +442,7 @@ public final class TravelService extends Service {
 		return departurePlanet != null && departureDestination != null && arrivalPlanet != null && arrivalPoint != null;
 	}
 	
-	private boolean ticketCanBeUsedAtNearestPoint(SWGObject ticket) {
+	private boolean isTicketUsable(SWGObject ticket) {
 		CreatureObject ticketOwner = ticket.getOwner().getCreatureObject();
 		Location worldLoc = ticketOwner.getWorldLocation();
 		TravelPoint nearest = nearestTravelPoint(worldLoc);
