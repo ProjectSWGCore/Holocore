@@ -1,4 +1,4 @@
-var execute = function(galManager, player, target, args) {
+function executeCommand(galacticManager, player, target, args) {
 	var creature = player.getCreatureObject();
 	var AccessLevel = Java.type("resources.player.AccessLevel");
 	
@@ -13,4 +13,4 @@ var execute = function(galManager, player, target, args) {
 	}
 	
 	creature.setMovementScale(args);
-};
+}

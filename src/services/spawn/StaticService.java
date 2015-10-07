@@ -79,7 +79,7 @@ public class StaticService extends Service {
 		}
 	}
 	
-	private void createSupportingObjects(SWGObject object) {
+	public void createSupportingObjects(SWGObject object) {
 		synchronized (databaseMutex) {
 			try {
 				getSupportingStatement.setString(1, object.getTemplate());
@@ -111,16 +111,14 @@ public class StaticService extends Service {
 	private SWGObject createObject(String iff, SWGObject parent, double x, double y, double z, double heading) {
 		Location loc = new Location(x, y, z, parent.getTerrain());
 		loc.setHeading(heading);
-		SWGObject obj = objectManager.createObject(iff, loc, false, false);
-		parent.addObject(obj);
-		return obj;
+		return objectManager.createObject(parent, iff, loc, false);
 	}
 	
 	private SWGObject createObject(String iff, Location parentLoc, double x, double y, double z, double heading) {
 		Location loc = new Location(x, y, z, parentLoc.getTerrain());
 		loc.setHeading(heading);
 		loc.translateLocation(parentLoc);
-		return objectManager.createObject(iff, loc, true, false);
+		return objectManager.createObject(iff, loc, false);
 	}
 	
 }

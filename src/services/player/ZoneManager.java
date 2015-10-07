@@ -179,7 +179,7 @@ public class ZoneManager extends Manager {
 	private void sendMessageOfTheDay(Player player) {
 		String message = getConfig(ConfigFile.FEATURES).getString("FIRST-ZONE-MESSAGE", "");
 		
-		if(!message.equals(""))	// If the message isn't nothing
+		if(!message.isEmpty())	// If the message isn't nothing
 			new ChatBroadcastIntent(player, message).broadcast();	// Send it
 	}
 	

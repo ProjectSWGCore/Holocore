@@ -29,13 +29,19 @@ package resources.server_info;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RelationalServerData extends RelationalDatabase {
+	
+	private static final Charset ASCII = Charset.forName("ASCII");
 	
 	private static final String META_TABLE = "__server_table_metadata__";
 	private final PreparedStatement getTableMetadata;
@@ -70,6 +76,109 @@ public class RelationalServerData extends RelationalDatabase {
 			updateLastImported(table, System.currentTimeMillis());
 		}
 		return true;
+	}
+	
+	/**
+	 * Inserts a record with the specified information into the database
+	 * @param table the table to insert into
+	 * @param columns the columns to insert into
+	 * @param params the parameters to insert
+	 * @return TRUE on success, FALSE on failure
+	 * @throws SQLException upon error
+	 */
+	public boolean insert(String table, String [] columns, Object ... params) throws SQLException {
+		StringBuilder columnStr = new StringBuilder("");
+		StringBuilder valuesStr = new StringBuilder("");
+		if (columns == null)
+			columns = getColumnsForTable(table);
+		for (int i = 0; i < columns.length; i++) {
+			columnStr.append(columns[i]);
+			valuesStr.append('?');
+			if (i+1 < columns.length) {
+				columnStr.append(',');
+				valuesStr.append(',');
+			}
+		}
+		final String sql = String.format("INSERT INTO %s (%s) VALUES (%s)", table, columnStr, valuesStr);
+		PreparedStatement statement = prepareStatement(sql);
+		if (statement == null || params.length < getSqlParameterCount(sql))
+			return false;
+		assignParameters(statement, params);
+		return statement.executeUpdate() > 0;
+	}
+	
+	/**
+	 * Selects from the specified table with the supplied where clause, given
+	 * the supplied parameters
+	 * @param tables the tables to query, separated by commas
+	 * @param columns the columns to select, null to select all
+	 * @param where the where clause
+	 * @param params the parameters to put into the ?s in the where clause
+	 * @return the result set
+	 * @throws SQLException upon error
+	 */
+	public ResultSet selectFromTable(String tables, String [] columns, String where, Object ... params) throws SQLException {
+		final String sql = createSelectQuery(tables, columns, where, params);
+		PreparedStatement statement = prepareStatement(sql);
+		if (statement == null || params.length < getSqlParameterCount(sql))
+			return null;
+		assignParameters(statement, params);
+		return statement.executeQuery();
+	}
+	
+	private void assignParameters(PreparedStatement statement, Object ... params) throws SQLException {
+		for (int i = 0; i < params.length; i++) {
+			if (params[i] instanceof Integer || params[i] instanceof Long)
+				statement.setLong(i+1, ((Number) params[i]).longValue());
+			else if (params[i] instanceof Float || params[i] instanceof Double)
+				statement.setDouble(i+1, ((Number) params[i]).doubleValue());
+			else if (params[i] instanceof String)
+				statement.setString(i+1, (String) params[i]);
+			else if (params[i] != null)
+				throw new IllegalArgumentException("Unknown object type: " + params[i].getClass().getSimpleName());
+			else
+				throw new NullPointerException("Parameters cannot have null elements!");
+		}
+	}
+	
+	private int getSqlParameterCount(String sql) {
+		int ret = 0;
+		for (int i = 0; i < sql.length(); i++) {
+			if (sql.charAt(i) == '?')
+				ret++;
+		}
+		return ret;
+	}
+	
+	private String createSelectQuery(String tables, String [] columns, String where, Object ... params) {
+		String columnStr = "*";
+		if (columns == null && tables.contains(",")) {
+			StringBuilder bldr = new StringBuilder("");
+			for (String table : tables.split(",")) {
+				bldr.append(table.trim());
+				bldr.append(".*, ");
+			}
+			columnStr = bldr.substring(0, columnStr.length()-2);
+		} else if (columns != null) {
+			StringBuilder bldr = new StringBuilder("");
+			for (String column : columns) {
+				bldr.append(column);
+				bldr.append(", ");
+			}
+			columnStr = bldr.substring(0, bldr.length()-2);
+		}
+		return "SELECT " + columnStr + " FROM " + tables + " WHERE " + where;
+	}
+	
+	private String [] getColumnsForTable(String table) throws SQLException {
+		List<String> columns = new ArrayList<>();
+		try (ResultSet set = executeQuery("PRAGMA table_info('"+table+"')")) {
+			int colInd = set.findColumn("name");
+			while (set.next()) {
+				columns.add(set.getString(colInd));
+			}
+		}
+		return columns.toArray(new String[columns.size()]);
 	}
 	
 	private long getLastImported(String table) {
@@ -136,7 +245,7 @@ public class RelationalServerData extends RelationalDatabase {
 	}
 	
 	private void processSdb(String table, File file) throws IOException, SQLException {
-		BufferedReader reader = new BufferedReader(new FileReader(file));
+		BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), ASCII));
 		String line = null;
 		String [] columnNames = null;
 		String [] columnTypes = null;
@@ -163,25 +272,27 @@ public class RelationalServerData extends RelationalDatabase {
 	private void createTable(String table, String [] names, String [] types) {
 		if (names.length != types.length)
 			throw new IllegalArgumentException("Names length and Types length mismatch");
-		String sql = "CREATE TABLE "+table+" (";
+		StringBuilder sql = new StringBuilder("CREATE TABLE "+table+" (");
 		for (int i = 0; i < names.length; i++) {
 			if (i > 0)
-				sql += ", ";
-			sql += names[i] + " " + types[i];
+				sql.append(", ");
+			sql.append(names[i]);
+			sql.append(' ');
+			sql.append(types[i]);
 		}
-		sql += ")";
-		updateQuery(sql);
+		sql.append(')');
+		updateQuery(sql.toString());
 	}
 	
 	private String createPreparedStatement(String table, int valueSize) {
-		String sql = "INSERT INTO " + table + " VALUES (";
+		StringBuilder sql = new StringBuilder("INSERT INTO " + table + " VALUES (");
 		for (int i = 0; i < valueSize; i++) {
 			if (i > 0)
-				sql += ", ";
-			sql += "?";
+				sql.append(", ");
+			sql.append('?');
 		}
-		sql += ")";
-		return sql;
+		sql.append(')');
+		return sql.toString();
 	}
 	
 	private void generateInsert(PreparedStatement insert, String [] types, String [] data) throws SQLException {
@@ -191,9 +302,9 @@ public class RelationalServerData extends RelationalDatabase {
 			if (types[i].startsWith("TEXT"))
 				insert.setString(i+1, data[i]);
 			else if (types[i].startsWith("REAL"))
-				insert.setDouble(i+1, Double.valueOf(data[i]));
+				insert.setDouble(i+1, Double.parseDouble(data[i]));
 			else if (types[i].startsWith("INTEGER"))
-				insert.setLong(i+1, Long.valueOf(data[i]));
+				insert.setLong(i+1, Long.parseLong(data[i]));
 			else
 				throw new SQLException("Data type unsupported by sdb/sqlite! Type: " + types[i]);
 		}

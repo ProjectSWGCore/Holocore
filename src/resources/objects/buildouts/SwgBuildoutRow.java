@@ -31,11 +31,11 @@ import resources.Location;
 import resources.client_info.visitors.CrcStringTableData;
 import resources.common.CRC;
 
-public class BuildoutRow {
+public class SwgBuildoutRow {
 	
 	private static final int	cellCrc		= CRC.getCrc("object/cell/shared_cell.iff");
 	
-	private final BuildoutArea	buildoutArea;
+	private final SwgBuildoutArea	buildoutArea;
 	private final Location		location	= new Location();
 	private long				objectId;
 	private long				containerId;
@@ -46,7 +46,7 @@ public class BuildoutRow {
 	private int					portalLayoutCrc;
 	private String				template;
 	
-	public BuildoutRow(BuildoutArea buildoutArea) {
+	public SwgBuildoutRow(SwgBuildoutArea buildoutArea) {
 		this.buildoutArea = buildoutArea;
 	}
 	

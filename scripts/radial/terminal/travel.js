@@ -9,4 +9,4 @@ function handleSelection(player, target, selection) {
 			Log.d("travel.js", "Travel Selection: ITEM_USE");
 			break;
 	}
-};
+}
