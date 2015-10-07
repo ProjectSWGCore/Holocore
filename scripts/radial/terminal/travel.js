@@ -11,4 +11,4 @@ function handleSelection(player, target, selection) {
 			new TravelPointSelectionIntent(player.getCreatureObject(), false).broadcast();
 			break;
 	}
-};
+}
