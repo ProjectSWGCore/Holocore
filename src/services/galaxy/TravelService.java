@@ -396,9 +396,8 @@ public final class TravelService extends Service {
 		List<SWGObject> usableTickets = new ArrayList<>();
 		
 		for(SWGObject ticket : tickets)
-			if(isTicket(ticket))
-				if(isTicketUsable(ticket))
-					usableTickets.add(ticket);
+			if(isTicket(ticket) && isTicketUsable(ticket))
+				usableTickets.add(ticket);
 		
 		if(usableTickets.isEmpty())	// They don't have a valid ticket. 
 			new ChatBroadcastIntent(player, "@travel:no_ticket_for_shuttle").broadcast();
