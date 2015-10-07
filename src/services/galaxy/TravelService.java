@@ -144,14 +144,29 @@ public final class TravelService extends Service {
 	
 	private void loadAllowedRoutesAndPrices() {
 		for(Terrain travelPlanet : travelPlanets) {
-			int columnIndex = travelFeeTable.getColumnFromName(travelPlanet.getName());
+			int rowIndex = travelFeeTable.getColumnFromName(travelPlanet.getName()) - 1;
 			Map<Terrain, Integer> prices = new HashMap<>();
 			
-			for(int row = 0; row < travelPlanets.length; row++) {
-				int price = (int) travelFeeTable.getCell(row, columnIndex);
+			for(int columnIndex = 1; columnIndex < travelPlanets.length; columnIndex++) {
+				int price = (int) travelFeeTable.getCell(rowIndex, columnIndex);
 				
 				if(price > 0) {	// If price is above 0, the planets are linked
-					prices.put(travelPlanets[row], price);
+					Terrain arrivalPlanet = travelPlanets[columnIndex - 1];
+					Map<Terrain, Integer> reverseRoute = allowedRoutes.get(arrivalPlanet);
+					
+					if(reverseRoute != null) {
+						Integer reverseRoutePriceObj = reverseRoute.get(travelPlanet);
+						
+						if(reverseRoutePriceObj != null) {
+							int reverseRoutePrice = reverseRoutePriceObj.intValue();
+							
+							if(reverseRoutePrice > price) {
+								price = reverseRoutePrice;
+							}
+						}
+					}
+						
+					prices.put(arrivalPlanet, price);
 				}
 			}
 			
