@@ -294,6 +294,8 @@ public final class TravelService extends Service {
 				showMessageBox(purchaserOwner, "short_funds");
 				return;
 			}
+		} else {
+			newBankBalance = difference;
 		}
 		
 		// Make the message in the SUI window reflect the success
