@@ -369,7 +369,7 @@ public final class TravelService extends Service {
 		List<SWGObject> usableTickets = new ArrayList<>();
 		
 		for(SWGObject ticket : tickets)
-			if(objectHasTicketAttributes(ticket))
+			if(isTicket(ticket))
 				if(ticketCanBeUsedAtNearestPoint(ticket))
 					usableTickets.add(ticket);
 		
@@ -397,7 +397,7 @@ public final class TravelService extends Service {
 		SWGObject ticket = i.getTicket();
 		Player player = i.getPlayer();
 		
-		if(objectHasTicketAttributes(ticket)) {
+		if(isTicket(ticket)) {
 			if(ticketCanBeUsedAtNearestPoint(ticket)) {
 				if(distanceToNearestPoint <= TICKET_USE_RADIUS) {
 					// They can use their ticket if they're within range.
@@ -433,7 +433,7 @@ public final class TravelService extends Service {
 		new ObjectTeleportIntent(traveler, destination.getLocation()).broadcast();
 	}
 	
-	private boolean objectHasTicketAttributes(SWGObject object) {
+	private boolean isTicket(SWGObject object) {
 		String departurePlanet = object.getAttribute("@obj_attr_n:travel_departure_planet");
 		String departureDestination = object.getAttribute("@obj_attr_n:travel_departure_point");
 		String arrivalPlanet = object.getAttribute("@obj_attr_n:travel_arrival_planet");
