@@ -1,4 +1,4 @@
-var execute = function(galManager, player, target, args) {
+function executeCommand(galManager, player, target, args) {
 	var actor = player.getCreatureObject();
 	var inventory;
 	var oldContainer = target.getParent();
