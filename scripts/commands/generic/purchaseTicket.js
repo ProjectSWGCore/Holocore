@@ -1,4 +1,4 @@
-function executeCommand = function(galacticManager, player, target, args) {
+function executeCommand(galacticManager, player, target, args) {
 	var TicketPurchaseIntent = Java.type("intents.travel.TicketPurchaseIntent");
 	params = args.split(" ");
 	
