@@ -1,8 +1,8 @@
-var execute = function(galManager, player, target, args) {
+function executeCommand(galacticManager, player, target, args) {
 	var actor = player.getCreatureObject();
 	var inventory;
 	var oldContainer = target.getParent();
-	var newContainer = galManager.getObjectManager().getObjectById(args.split(" ")[1]);
+	var newContainer = galacticManager.getObjectManager().getObjectById(args.split(" ")[1]);
 
 	if(actor == null || target == null) {
 		return;
