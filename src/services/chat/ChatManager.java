@@ -54,18 +54,23 @@ import resources.objects.SWGObject;
 import resources.objects.player.PlayerObject;
 import resources.player.Player;
 import resources.player.PlayerState;
+import resources.server_info.RelationalServerData;
+import resources.server_info.RelationalServerFactory;
 import services.player.PlayerManager;
 
+import java.sql.SQLException;
 import java.util.Locale;
 
 public class ChatManager extends Manager {
 
 	private final ChatRoomService roomService;
 	private final ChatMailService mailService;
+	private final RelationalServerData chatLogs;
 
 	public ChatManager(Galaxy g) {
 		roomService = new ChatRoomService(g);
 		mailService = new ChatMailService();
+		chatLogs = RelationalServerFactory.getServerDatabase("chat/chat_log.db");
 
 		addChildService(roomService);
 		addChildService(mailService);
@@ -149,15 +154,19 @@ public class ChatManager extends Manager {
 		switch(i.getBroadcastType()) {
 			case AREA:
 				broadcastAreaMessage(i.getMessage(), i.getBroadcaster());
+				logChat(i.getBroadcaster(), ChatType.SYSTEM, ChatRange.LOCAL, i.getMessage());
 				break;
 			case PLANET:
 				broadcastPlanetMessage(i.getMessage(), i.getTerrain());
+				logChat(i.getBroadcaster(), ChatType.SYSTEM, ChatRange.TERRAIN, i.getMessage());
 				break;
 			case GALAXY:
 				broadcastGalaxyMessage(i.getMessage());
+				logChat(i.getBroadcaster(), ChatType.SYSTEM, ChatRange.GALAXY, i.getMessage());
 				break;
 			case PERSONAL:
 				broadcastPersonalMessage(i.getProse(), i.getBroadcaster(), i.getMessage());
+				logChat(i.getBroadcaster(), ChatType.SYSTEM, ChatRange.PERSONAL, i.getMessage());
 				break;
 		}
 	}
@@ -311,6 +320,7 @@ public class ChatManager extends Manager {
 		// Send to self
 		SpatialChat message = new SpatialChat(actor.getObjectId(), actor.getObjectId(), 0, i.getMessage(), (short) i.getChatType(), (short) i.getMoodId());
 		sender.sendPacket(message);
+		logChat(sender, ChatType.SPATIAL, ChatRange.LOCAL, i.getMessage());
 
 		String senderName = ChatAvatar.getFromPlayer(sender).getName();
 
@@ -348,6 +358,7 @@ public class ChatManager extends Manager {
 			return;
 		
 		receiver.sendPacket(new ChatInstantMessageToClient(request.getGalaxy(), strSender, request.getMessage()));
+		logChat(sender, receiver, ChatType.TELL, request.getMessage());
 	}
 
 	/* Friends */
@@ -414,6 +425,57 @@ public class ChatManager extends Manager {
 			player.sendPacket(new ChatSystemMessage(SystemChatType.SCREEN_AND_CHAT, new OutOfBandPackage(prose)));
 		else
 			player.sendPacket(new ChatSystemMessage(SystemChatType.SCREEN_AND_CHAT, message));
+	}
+	
+	private void logChat(Player broadcaster, ChatType type, ChatRange range, String message) {
+		long sendId = 0;
+		String sendName = "";
+		if (broadcaster != null) {
+			sendId = broadcaster.getCreatureObject().getObjectId();
+			sendName = broadcaster.getCharacterName();
+		}
+		logChat(sendId, sendName, 0, "", type.name(), range.name(), "", "", message);
+	}
+	
+	private void logChat(Player sender, Player receiver, ChatType type, String message) {
+		long sendId = 0, recvId = 0;
+		String sendName = "", recvName = "";
+		if (sender != null) {
+			sendId = sender.getCreatureObject().getObjectId();
+			sendName = sender.getCharacterName();
+		}
+		if (receiver != null) {
+			recvId = receiver.getCreatureObject().getObjectId();
+			recvName = receiver.getCharacterName();
+		}
+		logChat(sendId, sendName, recvId, recvName, type.name(), ChatRange.PERSONAL.name(), "", "", message);
+	}
+	
+	private void logChat(long sendId, String sendName, long recvId, String recvName, String type, String range, String room, String subject, String message) {
+		if (message == null)
+			return;
+		try {
+			long time = System.currentTimeMillis();
+			chatLogs.insert("chat_log", null, time, sendId, sendName, recvId, recvName, type, range, room, subject, message);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static enum ChatType {
+		MAIL,
+		TELL,
+		SYSTEM,
+		SPATIAL,
+		CHAT
+	}
+	
+	public static enum ChatRange {
+		PERSONAL,
+		ROOM,
+		LOCAL,
+		TERRAIN,
+		GALAXY
 	}
 	
 }

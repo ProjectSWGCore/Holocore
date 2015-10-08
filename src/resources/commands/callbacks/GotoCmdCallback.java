@@ -30,17 +30,24 @@ public class GotoCmdCallback implements ICmdCallback  {
 		if (parts.length == 0 || parts[0].trim().isEmpty())
 			return;
 		String loc = parts[0].trim();
-		String err = teleportToGotoLocation(galacticManager.getObjectManager(), teleportee, loc);
+		int cell = 1;
+		try {
+			if (parts.length >= 2)
+				cell = Integer.parseInt(parts[1]);
+		} catch (NumberFormatException e) {
+			
+		}
+		String err = teleportToGotoLocation(galacticManager.getObjectManager(), teleportee, loc, cell);
 		new ChatBroadcastIntent(player, err).broadcast();
 	}
 	
-	private String teleportToGotoLocation(ObjectManager objManager, SWGObject obj, String loc) {
-		final String whereClause = "(player_spawns.id = ?) AND (player_spawns.building_id = '' OR buildings.building_id = player_spawns.building_id)";
-		try (RelationalServerData data = RelationalServerFactory.getServerData("player/player_spawns.db", "building/buildings", "player_spawns")) {
-			try (ResultSet set = data.selectFromTable("player_spawns, buildings", new String[]{"player_spawns.*", "buildings.object_id"}, whereClause, loc)) {
+	private String teleportToGotoLocation(ObjectManager objManager, SWGObject obj, String loc, int cell) {
+		try (RelationalServerData data = RelationalServerFactory.getServerData("building/building.db", "buildings")) {
+			try (ResultSet set = data.selectFromTable("buildings", null, "building_id = ?", loc)) {
 				if (!set.next())
 					return "No such location found: " + loc;
-				return teleportToGoto(objManager, obj, loc, set);
+				Terrain t = Terrain.getTerrainFromName(set.getString("terrain_name"));
+				return teleportToGoto(objManager, obj, set.getLong("object_id"), cell, new Location(0, 0, 0, t));
 			} catch (SQLException e) {
 				e.printStackTrace();
 				return "Exception thrown. Failed to teleport: ["+e.getErrorCode()+"] " + e.getMessage();
@@ -48,32 +55,21 @@ public class GotoCmdCallback implements ICmdCallback  {
 		}
 	}
 	
-	private String teleportToGoto(ObjectManager objManager, SWGObject obj, String loc, ResultSet set) throws SQLException {
-		String building = set.getString("building_id");
-		Terrain t = Terrain.getTerrainFromName(set.getString("terrain"));
-		Location l = new Location(set.getDouble("x"), set.getDouble("y"), set.getDouble("z"), t);
-		if (building.isEmpty())
-			new ObjectTeleportIntent(obj, l).broadcast();
-		else
-			return teleportToGotoBuilding(objManager, obj, set.getLong("object_id"), set.getString("cell"), l);
-		return "Sucessfully teleported "+obj.getName()+" to " + loc;
-	}
-	
-	private String teleportToGotoBuilding(ObjectManager objManager, SWGObject obj, long buildingId, String cellName, Location l) {
+	private String teleportToGoto(ObjectManager objManager, SWGObject obj, long buildingId, int cellNumber, Location l) {
 		SWGObject parent = objManager.getObjectById(buildingId);
 		if (parent == null || !(parent instanceof BuildingObject)) {
 			String err = String.format("Invalid parent! Either null or not a building: %s  BUID: %d", parent, buildingId);
 			Log.e("CharacterCreationService", err);
 			return err;
 		}
-		CellObject cell = ((BuildingObject) parent).getCellByName(cellName);
+		CellObject cell = ((BuildingObject) parent).getCellByNumber(cellNumber);
 		if (cell == null) {
-			String err = String.format("Invalid cell! Cell does not exist: %s  B-Template: %s  BUID: %d", cellName, parent.getTemplate(), buildingId);
+			String err = String.format("Building does not have any cells! B-Template: %s  BUID: %d", parent.getTemplate(), buildingId);
 			Log.e("CharacterCreationService", err);
 			return err;
 		}
 		new ObjectTeleportIntent(obj, cell, l).broadcast();
-		return "Successfully teleported "+obj.getName()+" to "+buildingId+"/"+cellName;
+		return "Successfully teleported "+obj.getName()+" to "+buildingId;
 	}
 	
 }

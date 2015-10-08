@@ -3,6 +3,8 @@ package services.chat;
 import intents.PlayerEventIntent;
 import intents.chat.PersistentMessageIntent;
 import intents.network.GalacticPacketIntent;
+
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -19,19 +21,26 @@ import resources.chat.ChatResult;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.encodables.player.Mail;
+import resources.objects.SWGObject;
 import resources.objects.player.PlayerObject;
 import resources.player.Player;
 import resources.server_info.CachedObjectDatabase;
 import resources.server_info.ObjectDatabase;
+import resources.server_info.RelationalServerData;
+import resources.server_info.RelationalServerFactory;
+import services.chat.ChatManager.ChatRange;
+import services.chat.ChatManager.ChatType;
 import services.player.PlayerManager;
 
 public class ChatMailService extends Service {
 
 	private final ObjectDatabase<Mail> mails;
+	private final RelationalServerData chatLogs;
 	private int maxMailId;
 	
 	public ChatMailService() {
 		mails = new CachedObjectDatabase<>("odb/mails.db");
+		chatLogs = RelationalServerFactory.getServerDatabase("chat/chat_log.db");
 		maxMailId = 1;
 	}
 	
@@ -140,8 +149,12 @@ public class ChatMailService extends Service {
 		mail.setOutOfBandPackage(request.getOutOfBandPackage());
 		mails.put(mail.getId(), mail);
 		
-		if (recipient != null)
+		if (recipient != null) {
 			sendPersistentMessage(recipient, mail, MailFlagType.HEADER_ONLY, galaxy);
+			SWGObject sendObj = sender.getCreatureObject();
+			SWGObject recvObj = recipient.getCreatureObject();
+			logChat(sendObj.getObjectId(), sendObj.getName(), recvObj.getObjectId(), recvObj.getName(), mail.getSubject(), mail.getMessage());
+		}
 	}
 	
 	private void handlePersistentMessageIntent(PersistentMessageIntent intent) {
@@ -218,6 +231,15 @@ public class ChatMailService extends Service {
 	
 	private void deletePersistentMessage(int mailId) {
 		mails.remove(mailId);
+	}
+	
+	private void logChat(long sendId, String sendName, long recvId, String recvName, String subject, String message) {
+		try {
+			long time = System.currentTimeMillis();
+			chatLogs.insert("chat_log", null, time, sendId, sendName, recvId, recvName, ChatType.MAIL.name(), ChatRange.PERSONAL.name(), "", subject, message);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private enum MailFlagType {

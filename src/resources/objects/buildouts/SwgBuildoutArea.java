@@ -27,7 +27,7 @@
 ***********************************************************************************/
 package resources.objects.buildouts;
 
-public class BuildoutArea {
+public class SwgBuildoutArea {
 	
 	// Datatable Information
 	private String	name;

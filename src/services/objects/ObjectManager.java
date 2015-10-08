@@ -42,6 +42,7 @@ import intents.object.ObjectIdRequestIntent;
 import intents.object.ObjectIdResponseIntent;
 import intents.object.ObjectTeleportIntent;
 import intents.player.DeleteCharacterIntent;
+import intents.player.PlayerTransformedIntent;
 import intents.PlayerEventIntent;
 import intents.RequestZoneInIntent;
 import intents.network.GalacticPacketIntent;
@@ -79,30 +80,35 @@ import services.spawn.StaticService;
 
 public class ObjectManager extends Manager {
 	
+	private final ObjectAwareness objectAwareness;
 	private final MapManager mapManager;
 	private final StaticService staticService;
 	private final SpawnerService spawnerService;
 	private final RadialService radialService;
+	private final BuildoutAreaService buildoutAreaService;
 
 	private final ObjectDatabase<SWGObject> database;
-	private final ObjectAwareness objectAwareness;
 	private final Map <Long, SWGObject> objectMap;
 	private long maxObjectId;
 	
 	public ObjectManager() {
+		objectAwareness = new ObjectAwareness();
 		mapManager = new MapManager();
 		staticService = new StaticService(this);
 		spawnerService = new SpawnerService(this);
 		radialService = new RadialService();
+		buildoutAreaService = new BuildoutAreaService();
+		
 		database = new CachedObjectDatabase<SWGObject>("odb/objects.db");
-		objectAwareness = new ObjectAwareness();
 		objectMap = new Hashtable<>(16*1024);
 		maxObjectId = 1;
 
+		addChildService(objectAwareness);
 		addChildService(mapManager);
 		addChildService(staticService);
 		addChildService(radialService);
 		addChildService(spawnerService);
+		addChildService(buildoutAreaService);
 	}
 	
 	@Override
@@ -113,10 +119,10 @@ public class ObjectManager extends Manager {
 		registerForIntent(ObjectIdRequestIntent.TYPE);
 		registerForIntent(ObjectCreateIntent.TYPE);
 		registerForIntent(DeleteCharacterIntent.TYPE);
-		objectAwareness.initialize();
+		boolean init = super.initialize();
 		loadClientObjects();
 		loadObjects();
-		return super.initialize();
+		return init;
 	}
 	
 	private void loadObjects() {
@@ -186,24 +192,18 @@ public class ObjectManager extends Manager {
 			objectAwareness.add(obj);
 		if (obj instanceof CreatureObject && ((CreatureObject) obj).getPlayerObject() != null) {
 			if (!obj.hasSlot("bank")) {
-				SWGObject missing = createObject("object/tangible/bank/shared_character_bank.iff", false);
-				
+				SWGObject missing = createObject(obj, "object/tangible/bank/shared_character_bank.iff", false);
 				missing.setContainerPermissions(ContainerPermissions.INVENTORY);
-				obj.addObject(missing);
 			}
 			
 			if (!obj.hasSlot("mission_bag")) {
-				SWGObject missing = createObject("object/tangible/mission_bag/shared_mission_bag.iff", false);
-				
+				SWGObject missing = createObject(obj, "object/tangible/mission_bag/shared_mission_bag.iff", false);
 				missing.setContainerPermissions(ContainerPermissions.INVENTORY);
-				obj.addObject(missing);
 			}
 				
 			if (!obj.hasSlot("appearance_inventory")) {
-				SWGObject missing = createObject("object/tangible/inventory/shared_appearance_inventory.iff", false);
-				
+				SWGObject missing = createObject(obj, "object/tangible/inventory/shared_appearance_inventory.iff", false);
 				missing.setContainerPermissions(ContainerPermissions.INVENTORY);
-				obj.addObject(missing);
 			}
 		}
 		objectMap.put(obj.getObjectId(), obj);
@@ -254,7 +254,6 @@ public class ObjectManager extends Manager {
 					if (p.getCreatureObject() == null)
 						break;
 					p.getCreatureObject().clearAware();
-					objectAwareness.remove(p.getCreatureObject());
 					for (SWGObject obj : p.getCreatureObject().getObservers())
 						p.getCreatureObject().destroyObject(obj.getOwner());
 					p.getCreatureObject().setOwner(null);
@@ -266,7 +265,6 @@ public class ObjectManager extends Manager {
 					break;
 				case PE_ZONE_IN:
 					p.getCreatureObject().clearAware();
-					objectAwareness.update(p.getCreatureObject());
 					break;
 				default:
 					break;
@@ -284,11 +282,6 @@ public class ObjectManager extends Manager {
 
 	private void processObjectCreateIntent(ObjectCreateIntent intent) {
 		SWGObject object = intent.getObject();
-
-		if (intent.isAddToAwareness()) {
-			objectAwareness.add(object);
-		}
-
 		objectMap.put(object.getObjectId(), object);
 	}
 
@@ -398,24 +391,32 @@ public class ObjectManager extends Manager {
 
 		return object;
 	}
-
+	
 	public SWGObject createObject(String template) {
 		return createObject(template, null);
 	}
 	
-	public SWGObject createObject(String template, boolean addToAwareness) {
-		return createObject(template, null, addToAwareness);
+	public SWGObject createObject(SWGObject parent, String template) {
+		return createObject(parent, template, null);
 	}
 	
 	public SWGObject createObject(String template, Location l) {
 		return createObject(template, l, true);
 	}
 	
-	public SWGObject createObject(String template, Location l, boolean addToAwareness) {
-		return createObject(template, l, addToAwareness, true);
+	public SWGObject createObject(SWGObject parent, String template, boolean addToDatabase) {
+		return createObject(parent, template, null, addToDatabase);
 	}
 	
-	public SWGObject createObject(String template, Location l, boolean addToAwareness, boolean addToDatabase) {
+	public SWGObject createObject(SWGObject parent, String template, Location l) {
+		return createObject(parent, template, l, true);
+	}
+	
+	public SWGObject createObject(String template, Location l, boolean addToDatabase) {
+		return createObject(null, template, l, addToDatabase);
+	}
+	
+	public SWGObject createObject(SWGObject parent, String template, Location l, boolean addToDatabase) {
 		synchronized (objectMap) {
 			long objectId = getNextObjectId();
 			SWGObject obj = ObjectCreator.createObjectFromTemplate(objectId, template);
@@ -424,10 +425,10 @@ public class ObjectManager extends Manager {
 				return null;
 			}
 			obj.setLocation(l);
-			if (addToAwareness) {
-				objectAwareness.add(obj);
-			}
 			objectMap.put(objectId, obj);
+			if (parent != null) {
+				parent.addObject(obj);
+			}
 			if (addToDatabase) {
 				database.put(objectId, obj);
 			}
@@ -442,6 +443,8 @@ public class ObjectManager extends Manager {
 			return;
 		Location newLocation = transform.getLocation();
 		newLocation.setTerrain(obj.getTerrain());
+		if (obj instanceof CreatureObject)
+			new PlayerTransformedIntent((CreatureObject) obj, obj.getParent(), null, obj.getLocation(), newLocation).broadcast();
 		objectAwareness.move(obj, newLocation);
 		obj.sendDataTransforms(transform);
 
@@ -458,6 +461,8 @@ public class ObjectManager extends Manager {
 			Log.e("ObjectManager", "Could not find parent for transform! Cell: %d  Object: %s", transformWithParent.getCellId(), obj);
 			return;
 		}
+		if (obj instanceof CreatureObject)
+			new PlayerTransformedIntent((CreatureObject) obj, obj.getParent(), parent, obj.getLocation(), newLocation).broadcast();
 		objectAwareness.move(obj, parent, newLocation);
 		obj.sendParentDataTransforms(transformWithParent);
 	}
@@ -487,11 +492,13 @@ public class ObjectManager extends Manager {
 			sendClientFatal(player, "Failed to zone", "There has been an internal server error: Null Ghost.\nPlease delete your character and create a new one", 10, TimeUnit.SECONDS);
 			return;
 		}
-		if (creatureObj.getParent() != null)
+		if (creatureObj.getParent() != null) {
 			objectAwareness.update(creatureObj);
-		else {
+			Log.d("ObjectManager", "Zoning in to %s/%s - %s", creatureObj.getParent(), creatureObj.getTerrain(), creatureObj.getLocation().getPosition());
+		}else {
 			objectAwareness.remove(creatureObj);
 			objectAwareness.add(creatureObj);
+			Log.d("ObjectManager", "Zoning in to %s - %s", creatureObj.getTerrain(), creatureObj.getLocation().getPosition());
 		}
 		new RequestZoneInIntent(player, (CreatureObject) creatureObj, galaxy).broadcast();
 	}

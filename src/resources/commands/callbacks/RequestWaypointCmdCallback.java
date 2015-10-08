@@ -62,7 +62,7 @@ public class RequestWaypointCmdCallback implements ICmdCallback {
 
 		String name = (cmd.length == 6 ? cmd[5] : "@planet_n:" + terrain.getName());
 
-		WaypointObject waypoint = (WaypointObject) galacticManager.getObjectManager().createObject("object/waypoint/shared_waypoint.iff", false);
+		WaypointObject waypoint = (WaypointObject) galacticManager.getObjectManager().createObject("object/waypoint/shared_waypoint.iff");
 		waypoint.setLocation(new Location(x, y, z, terrain));
 		waypoint.setName(name.isEmpty() ? "@planet_n:" + terrain.getName() : name);
 		if (color != null)

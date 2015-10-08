@@ -122,8 +122,7 @@ public class CommandService extends Service {
 			Log.i("CommandService", "[%s] attempted to use the command \"%s\", but did not have the minimum access level. Access Level Required: %s, Player Access Level: %s",
 					player.getCharacterName(), command.getName(), commandAccessLevel, playerAccessLevel);
 			String errorProseString1 = "use that command";
-			String errorProseString2 = commandAccessLevel.toString();
-			new ChatBroadcastIntent(player, new ProsePackage("StringId", new StringId("cmd_err", "state_must_have_prose"), "TO", errorProseString1, "TU", errorProseString2)).broadcast();
+			new ChatBroadcastIntent(player, new ProsePackage("StringId", new StringId("cmd_err", "state_must_have_prose"), "TO", errorProseString1, "TU", commandAccessLevel)).broadcast();
 			return;
 		}
 
@@ -142,13 +141,13 @@ public class CommandService extends Service {
 		
 		if (command.hasJavaCallback()) {
 			try {
-				((ICmdCallback) command.getJavaCallback().newInstance()).execute(galacticManager, player, target, args);
+				command.getJavaCallback().newInstance().execute(galacticManager, player, target, args);
 			} catch (InstantiationException | IllegalAccessException e) {
 				e.printStackTrace();
 			}
 		}
 		else
-			Scripts.invoke("commands/generic/" + command.getDefaultScriptCallback(), "execute", galacticManager, player, target, args);
+			Scripts.invoke("commands/generic/" + command.getDefaultScriptCallback(), "executeCommand", galacticManager, player, target, args);
 	}
 	
 	private void loadBaseCommands() {
@@ -272,7 +271,7 @@ public class CommandService extends Service {
 			List<Command> commands = commandByScript.get(script);
 
 			if(commands == null){
-				commands = new LinkedList<Command>();
+				commands = new LinkedList<>();
 				commandByScript.put(script, commands);
 			}
 			commands.add(command);

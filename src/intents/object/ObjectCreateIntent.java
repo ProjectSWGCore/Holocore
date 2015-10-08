@@ -34,26 +34,18 @@ import resources.objects.SWGObject;
  * Created by Waverunner on 8/19/2015
  */
 public class ObjectCreateIntent extends Intent {
+	
 	public static final String TYPE = "ObjectCreateIntent";
 
 	private SWGObject object;
-	private boolean addToAwareness;
-
-	public ObjectCreateIntent(SWGObject object, boolean addToAwareness) {
-		super(TYPE);
-		this.object = object;
-		this.addToAwareness = addToAwareness;
-	}
 
 	public ObjectCreateIntent(SWGObject object) {
-		this(object, false);
+		super(TYPE);
+		this.object = object;
 	}
-
+	
 	public SWGObject getObject() {
 		return object;
 	}
-
-	public boolean isAddToAwareness() {
-		return addToAwareness;
-	}
+	
 }
