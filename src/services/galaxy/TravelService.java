@@ -169,24 +169,25 @@ public final class TravelService extends Service {
 			for(int columnIndex = 1; columnIndex < travelPlanets.length; columnIndex++) {
 				int price = (int) travelFeeTable.getCell(rowIndex, columnIndex);
 				
-				if(price > 0) {	// If price is above 0, the planets are linked
-					Terrain arrivalPlanet = travelPlanets[columnIndex - 1];
-					Map<Terrain, Integer> reverseRoute = allowedRoutes.get(arrivalPlanet);
+				if(price <= 0)	// If price is below or equal to 0 then this is an invalid route and isn't an option.
+					continue;
+				
+				Terrain arrivalPlanet = travelPlanets[columnIndex - 1];
+				Map<Terrain, Integer> reverseRoute = allowedRoutes.get(arrivalPlanet);
+				
+				if(reverseRoute != null) {
+					Integer reverseRoutePriceObj = reverseRoute.get(travelPlanet);
 					
-					if(reverseRoute != null) {
-						Integer reverseRoutePriceObj = reverseRoute.get(travelPlanet);
+					if(reverseRoutePriceObj != null) {
+						int reverseRoutePrice = reverseRoutePriceObj.intValue();
 						
-						if(reverseRoutePriceObj != null) {
-							int reverseRoutePrice = reverseRoutePriceObj.intValue();
-							
-							if(reverseRoutePrice > price) {
-								price = reverseRoutePrice;
-							}
+						if(reverseRoutePrice > price) {
+							price = reverseRoutePrice;
 						}
 					}
-						
-					prices.put(arrivalPlanet, price);
 				}
+					
+				prices.put(arrivalPlanet, price);
 			}
 			
 			allowedRoutes.put(travelPlanet, prices);
