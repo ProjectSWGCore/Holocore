@@ -63,6 +63,7 @@ import resources.objects.creature.CreatureObject;
 import resources.player.Player;
 import resources.server_info.Log;
 import resources.server_info.RelationalServerData;
+import resources.server_info.RelationalServerFactory;
 import resources.sui.ISuiCallback;
 import resources.sui.SuiButtons;
 import resources.sui.SuiEvent;
@@ -74,12 +75,10 @@ import services.objects.ObjectManager;
 public final class TravelService extends Service {
 	
 	private static final String DB_TABLE_NAME = "travel";
-	private static final String TRAVEL_POINTS_FOR_PLANET = "SELECT * FROM " + DB_TABLE_NAME + " WHERE planet=";
 	private static final byte PLANET_NAMES_COLUMN_INDEX = 0;
 	private static final short TICKET_USE_RADIUS = 25;	// The distance a player needs to be within in order to use their ticket
 	
 	private final ObjectManager objectManager;
-	private final RelationalServerData travelPointDatabase;
 	private Terrain[] travelPlanets;
 	private final Map<Terrain, Map<Terrain, Integer>> allowedRoutes; // Describes which planets are linked and base prices.
 	private final DatatableData travelFeeTable;
@@ -101,12 +100,6 @@ public final class TravelService extends Service {
 	
 	public TravelService(ObjectManager objectManager) {
 		this.objectManager = objectManager;
-		
-		travelPointDatabase = new RelationalServerData("serverdata/static/travel.db");
-		
-		if(!travelPointDatabase.linkTableWithSdb(DB_TABLE_NAME, "serverdata/static/travel.sdb")) {
-			throw new main.ProjectSWG.CoreException("Unable to load sdb files for TravelService");
-		}
 		
 		allowedRoutes = new HashMap<>();
 		travelFeeTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/travel/travel.iff");
@@ -149,13 +142,6 @@ public final class TravelService extends Service {
 		executor.shutdown();
 		
 		return super.stop();
-	}
-	
-	@Override
-	public boolean terminate() {
-		travelPointDatabase.close();
-		
-		return super.terminate();
 	}
 	
 	@Override
@@ -219,29 +205,31 @@ public final class TravelService extends Service {
 		for(Terrain travelPlanet : allowedRoutes.keySet()) {
 			String planetName = travelPlanet.getName();
 			
-			try(ResultSet set = travelPointDatabase.prepareStatement(TRAVEL_POINTS_FOR_PLANET + "'" + planetName + "'").executeQuery()) {
-				while(set.next()) {
-					String pointName = set.getString("name");
-					double x = set.getDouble("x");
-					double y = set.getDouble("y");
-					double z = set.getDouble("z");
-					String type = set.getString("type");
-					
-					TravelPoint point = new TravelPoint(pointName, new Location(x, y, z, travelPlanet), 0, type.equals("starport"), true);
-					
-					Collection<TravelPoint> pointsOnCurrentPlanet = pointsOnPlanet.get(travelPlanet);
-					
-					if(pointsOnCurrentPlanet == null) {
-						pointsOnCurrentPlanet = new ArrayList<>();
-						pointsOnPlanet.put(travelPlanet, pointsOnCurrentPlanet);
+			try(RelationalServerData data = RelationalServerFactory.getServerData("static/travel.db", DB_TABLE_NAME)) {
+				try(ResultSet set = data.selectFromTable(DB_TABLE_NAME, null, "planet = ?", planetName)) {
+					while(set.next()) {
+						String pointName = set.getString("name");
+						double x = set.getDouble("x");
+						double y = set.getDouble("y");
+						double z = set.getDouble("z");
+						String type = set.getString("type");
+						
+						TravelPoint point = new TravelPoint(pointName, new Location(x, y, z, travelPlanet), 0, type.equals("starport"), true);
+						
+						Collection<TravelPoint> pointsOnCurrentPlanet = pointsOnPlanet.get(travelPlanet);
+						
+						if(pointsOnCurrentPlanet == null) {
+							pointsOnCurrentPlanet = new ArrayList<>();
+							pointsOnPlanet.put(travelPlanet, pointsOnCurrentPlanet);
+						}
+						
+						pointsOnCurrentPlanet.add(point);
 					}
-					
-					pointsOnCurrentPlanet.add(point);
+				} catch (SQLException e) {
+					Log.e("TravelService", String.format("Failed to load a travel point for %s. %s", planetName, e.getLocalizedMessage()));
+					e.printStackTrace();
+					success = false;
 				}
-			} catch (SQLException e) {
-				Log.e("TravelService", String.format("Failed to load a travel point for %s. %s", planetName, e.getLocalizedMessage()));
-				e.printStackTrace();
-				success = false;
 			}
 		}
 		
