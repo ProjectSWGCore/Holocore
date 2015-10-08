@@ -276,12 +276,15 @@ public final class TravelService extends Service {
 		}
 	}
 	
-	private int getTotalTicketPrice(TravelPoint departurePoint, Terrain arrivalPlanet) {
+	private int getTotalTicketPrice(TravelPoint departurePoint, Terrain arrivalPlanet, boolean roundTrip) {
 		int totalPrice = 0;
 		Terrain departurePlanet = departurePoint.getLocation().getTerrain();
 		
 		totalPrice += allowedRoutes.get(departurePlanet).get(arrivalPlanet);
 		totalPrice += departurePoint.getAdditionalCost();
+		
+		if(roundTrip)
+			totalPrice *= 2;
 		
 		return totalPrice;
 	}
@@ -297,13 +300,9 @@ public final class TravelService extends Service {
 		if(nearestPoint == null || destinationPoint == null)
 			return;
 		
-		int ticketPrice = getTotalTicketPrice(nearestPoint, destinationPoint.getLocation().getTerrain());
+		int ticketPrice = getTotalTicketPrice(nearestPoint, destinationPoint.getLocation().getTerrain(), roundTrip);
 		int newBankBalance = purchaser.getBankBalance();
 		int newCashBalance = purchaser.getCashBalance();
-		
-		if(roundTrip)
-			ticketPrice *= 2;
-		
 		int difference = newBankBalance - ticketPrice;
 		
 		if(difference < 0) {	// If they don't have enough credits in their bank
@@ -319,6 +318,12 @@ public final class TravelService extends Service {
 			newBankBalance = difference;
 		}
 		
+		grantTickets(purchaser, nearestPoint, destinationPoint, roundTrip);
+		handlePurchaseFinish(purchaserOwner, purchaser, ticketPrice, newCashBalance, newBankBalance);
+
+	}
+	
+	private void handlePurchaseFinish(Player purchaserOwner, CreatureObject purchaser, int ticketPrice, long newCashBalance, long newBankBalance) {
 		// Make the message in the SUI window reflect the success
 		showMessageBox(purchaserOwner, "ticket_purchase_complete");
 		
@@ -328,15 +333,16 @@ public final class TravelService extends Service {
 		
 		purchaser.setCashBalance(newCashBalance);
 		purchaser.setBankBalance(newBankBalance);
-		
+	}
+	
+	private void grantTickets(CreatureObject purchaser, TravelPoint departurePoint, TravelPoint arrivalPoint, boolean roundTrip) {
 		// Put the ticket in their inventory
-		grantTicket(nearestPoint, destinationPoint, purchaser);
+		grantTicket(departurePoint, arrivalPoint, purchaser);
 		
 		if(roundTrip) {
 			// Put the ticket in their inventory
-			grantTicket(destinationPoint, nearestPoint, purchaser);
+			grantTicket(arrivalPoint, departurePoint, purchaser);
 		}
-
 	}
 	
 	private void showMessageBox(Player receiver, String message) {
