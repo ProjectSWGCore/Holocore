@@ -48,17 +48,15 @@ public class Equipment implements Encodable, Serializable {
 	private int 			arrangementId = 4;
 	private long 			objectId;
 	private String          template;
-	private Player			weaponOwner;
 	
 	public Equipment(long objectId, String template) {
 		this.objectId = objectId;
 		this.template = template;
 	}
 	
-	public Equipment(WeaponObject weapon, Player weaponOwner) {
+	public Equipment(WeaponObject weapon) {
 		this(weapon.getObjectId(), weapon.getTemplate());
 		this.weapon = weapon;
-		this.weaponOwner = weaponOwner;
 	}
 	
 	@Override
@@ -116,11 +114,12 @@ public class Equipment implements Encodable, Serializable {
 
 	private byte[] getWeaponData() {
 		BaselineBuilder bb = new BaselineBuilder(weapon, BaselineType.WEAO, 3);
-		weapon.createBaseline3(weaponOwner, bb);
+		Player target = weapon.getOwner();
+		weapon.createBaseline3(target, bb);
 		byte[] data3 = bb.buildAsBaselinePacket();
 
 		bb = new BaselineBuilder(weapon, BaselineType.WEAO, 6);
-		weapon.createBaseline6(weaponOwner, bb);
+		weapon.createBaseline6(target, bb);
 		byte[] data6 = bb.buildAsBaselinePacket();
 		
 		byte[] ret = new byte[data3.length + data6.length];

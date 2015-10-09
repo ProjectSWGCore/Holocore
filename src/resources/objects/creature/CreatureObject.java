@@ -133,7 +133,7 @@ public class CreatureObject extends TangibleObject {
 	public void addEquipment(SWGObject obj) {
 		synchronized(equipmentList) {
 			if (obj instanceof WeaponObject)
-				equipmentList.add(new Equipment((WeaponObject) obj, getOwner()));
+				equipmentList.add(new Equipment((WeaponObject) obj));
 			else
 				equipmentList.add(new Equipment(obj.getObjectId(), obj.getTemplate()));
 			equipmentList.sendDeltaMessage(this);
