@@ -28,10 +28,13 @@
 package resources.encodables.player;
 
 import network.packets.Packet;
+import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.common.CRC;
 import resources.encodables.Encodable;
+import resources.network.BaselineBuilder;
 import resources.objects.SWGObject;
 import resources.objects.weapon.WeaponObject;
+import resources.player.Player;
 
 import java.io.Serializable;
 import java.nio.ByteBuffer;
@@ -40,35 +43,36 @@ import java.nio.ByteOrder;
 public class Equipment implements Encodable, Serializable {
 	private static final long serialVersionUID = 1L;
 	
-//	private WeaponObject 	weapon;
+	private WeaponObject 	weapon;
 	private byte[] 			customizationString;
 	private int 			arrangementId = 4;
 	private long 			objectId;
 	private String          template;
+	private Player			weaponOwner;
 	
 	public Equipment(long objectId, String template) {
 		this.objectId = objectId;
 		this.template = template;
 	}
 	
-	public Equipment(WeaponObject weapon) {
+	public Equipment(WeaponObject weapon, Player weaponOwner) {
 		this(weapon.getObjectId(), weapon.getTemplate());
-//		this.weapon = weapon;
+		this.weapon = weapon;
+		this.weaponOwner = weaponOwner;
 	}
 	
 	@Override
 	public byte[] encode() {
-		// TODO: This is not working for weapons (crashes w/ a weapon), needs to be refactored
 		ByteBuffer buffer;
-		//byte[] weaponData = null;
+		byte[] weaponData = null;
 		
-/*		if (weapon != null) {
-			weaponData = weapon.encode();
+		if (weapon != null) {
+			weaponData = weaponData();
 			
 			buffer = ByteBuffer.allocate(19 + weaponData.length).order(ByteOrder.LITTLE_ENDIAN);
-		} else {*/
+		} else {
 			buffer = ByteBuffer.allocate(19).order(ByteOrder.LITTLE_ENDIAN);
-/*		}*/
+		}
 
 		if (customizationString == null) buffer.putShort((short) 0); // TODO: Create encodable class for customization string
 		else buffer.put(customizationString);
@@ -77,12 +81,12 @@ public class Equipment implements Encodable, Serializable {
 		buffer.putLong(objectId);
 		buffer.putInt(CRC.getCrc(template));
 		
-/*		if (weapon != null) {
+		if (weapon != null) {
 			buffer.put((byte) 0x01);
 			buffer.put(weaponData);
-		} else {*/
+		} else {
 			buffer.put((byte) 0x00);
-/*		}*/
+		}
 		
 		return buffer.array();
 	}
@@ -110,6 +114,22 @@ public class Equipment implements Encodable, Serializable {
 	public String getTemplate() { return template; }
 	public void setTemplate(String template) { this.template = template; }
 
+	private byte[] weaponData() {
+		BaselineBuilder bb = new BaselineBuilder(weapon, BaselineType.WEAO, 3);
+		weapon.createBaseline3(weaponOwner, bb);
+		byte[] data3 = bb.buildAsBaselinePacket();
+
+		bb = new BaselineBuilder(weapon, BaselineType.WEAO, 6);
+		weapon.createBaseline6(weaponOwner, bb);
+		byte[] data6 = bb.buildAsBaselinePacket();
+		
+		byte[] ret = new byte[data3.length + data6.length];
+		System.arraycopy(data3, 0, ret, 0, data3.length);
+		System.arraycopy(data6, 0, ret, data3.length, data6.length);
+		
+		return ret;
+	}
+	
 	@Override
 	public String toString() {
 		return "Equipment: " + template;
