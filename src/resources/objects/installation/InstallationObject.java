@@ -29,6 +29,7 @@ package resources.objects.installation;
 
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.objects.tangible.TangibleObject;
+import resources.player.Player;
 
 public class InstallationObject extends TangibleObject {
 	
@@ -64,6 +65,11 @@ public class InstallationObject extends TangibleObject {
 	
 	public void setPowerRate(double powerRate) {
 		this.powerRate = powerRate;
+	}
+	
+	@Override
+	protected void sendBaselines(Player target) {
+		
 	}
 	
 }
