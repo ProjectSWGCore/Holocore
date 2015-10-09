@@ -34,6 +34,7 @@ import resources.encodables.Encodable;
 import resources.network.BaselineBuilder;
 import resources.objects.SWGObject;
 import resources.objects.weapon.WeaponObject;
+import resources.player.Player;
 
 import java.io.Serializable;
 import java.nio.ByteBuffer;
@@ -113,11 +114,12 @@ public class Equipment implements Encodable, Serializable {
 
 	private byte[] getWeaponData() {
 		BaselineBuilder bb = new BaselineBuilder(weapon, BaselineType.WEAO, 3);
-		weapon.createBaseline3(weapon.getOwner(), bb);
+		Player target = weapon.getOwner();
+		weapon.createBaseline3(target, bb);
 		byte[] data3 = bb.buildAsBaselinePacket();
 
 		bb = new BaselineBuilder(weapon, BaselineType.WEAO, 6);
-		weapon.createBaseline6(weapon.getOwner(), bb);
+		weapon.createBaseline6(target, bb);
 		byte[] data6 = bb.buildAsBaselinePacket();
 		
 		byte[] ret = new byte[data3.length + data6.length];
