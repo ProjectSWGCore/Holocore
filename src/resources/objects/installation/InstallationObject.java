@@ -28,6 +28,7 @@
 package resources.objects.installation;
 
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
+import resources.network.BaselineBuilder;
 import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
 
@@ -36,8 +37,8 @@ public class InstallationObject extends TangibleObject {
 	private static final long serialVersionUID = 1L;
 	
 	private boolean activated	= false;
-	private double	power		= 0;
-	private double	powerRate	= 0;
+	private float	power		= 0;
+	private float	powerRate	= 0;
 	
 	public InstallationObject(long objectId) {
 		super(objectId, BaselineType.INSO);
@@ -47,7 +48,7 @@ public class InstallationObject extends TangibleObject {
 		return activated;
 	}
 	
-	public double getPower() {
+	public float getPower() {
 		return power;
 	}
 	
@@ -59,17 +60,22 @@ public class InstallationObject extends TangibleObject {
 		this.activated = activated;
 	}
 	
-	public void setPower(double power) {
+	public void setPower(float power) {
 		this.power = power;
 	}
 	
-	public void setPowerRate(double powerRate) {
+	public void setPowerRate(float powerRate) {
 		this.powerRate = powerRate;
 	}
 	
-	@Override
-	protected void sendBaselines(Player target) {
+	public void createBaseline3(Player target, BaselineBuilder bb) {
+		super.createBaseline3(target, bb);
 		
+		bb.addBoolean(activated);
+		bb.addFloat(power);
+		bb.addFloat(powerRate);
+		
+		bb.incrementOperandCount(3);
 	}
 	
 }
