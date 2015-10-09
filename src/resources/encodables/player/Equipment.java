@@ -67,7 +67,7 @@ public class Equipment implements Encodable, Serializable {
 		byte[] weaponData = null;
 		
 		if (weapon != null) {
-			weaponData = weaponData();
+			weaponData = getWeaponData();
 			
 			buffer = ByteBuffer.allocate(19 + weaponData.length).order(ByteOrder.LITTLE_ENDIAN);
 		} else {
@@ -114,7 +114,7 @@ public class Equipment implements Encodable, Serializable {
 	public String getTemplate() { return template; }
 	public void setTemplate(String template) { this.template = template; }
 
-	private byte[] weaponData() {
+	private byte[] getWeaponData() {
 		BaselineBuilder bb = new BaselineBuilder(weapon, BaselineType.WEAO, 3);
 		weapon.createBaseline3(weaponOwner, bb);
 		byte[] data3 = bb.buildAsBaselinePacket();
