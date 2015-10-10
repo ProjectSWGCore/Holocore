@@ -146,6 +146,7 @@ public class ObjectManager extends Manager {
 					maxObjectId = obj.getObjectId() + 1;
 				}
 			}
+			objectMap.put(obj.getObjectId(), obj);
 			new ObjectCreatedIntent(obj).broadcast();
 		}
 		double loadTime = (System.nanoTime() - start) / 1E6;
