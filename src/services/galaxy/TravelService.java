@@ -109,7 +109,7 @@ public final class TravelService extends Service {
 		timeRemaining = timeUntilLand;
 		shuttleLanded = true;	// Shuttles start off being grounded
 		currentShuttlePosture = Posture.UPRIGHT;
-		landDelay = 10000;	// debugging
+		landDelay = 17000;
 		timeGrounded = 120000;
 		
 		loadTravelPlanetNames();
