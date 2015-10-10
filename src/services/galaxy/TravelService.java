@@ -487,11 +487,8 @@ public final class TravelService extends Service {
 	
 	private TravelPoint getDestinationPoint(Terrain terrain, String pointName) {
 		TravelPoint currentResult = null;
-		Iterator<TravelPoint> pointIterator = pointsOnPlanet.get(terrain).iterator();
 		
-		while(pointIterator.hasNext()) {
-			TravelPoint candidate = pointIterator.next();
-			
+		for(TravelPoint candidate : pointsOnPlanet.get(terrain)) {
 			if(candidate.getName().equals(pointName)) {
 				currentResult = candidate;
 				break;
