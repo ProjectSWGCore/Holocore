@@ -674,9 +674,9 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 				if (childObject.isValidPlayer(p))
 					observers.add(obj);
 				else
-					getChildrenObservers(observers, obj);
+					childObject.getChildrenObservers(observers, obj);
 			}
-			getChildrenObservers(observers, this);
+			childObject.getChildrenObservers(observers, this);
 			return observers;
 		} else {
 			return getParent().getObserversFromSet(awareExtra, childObject); // Search for top level parent
@@ -705,7 +705,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		if (player.equals(owner))
 			return false;
 		if (owner == null)
-			return false;
+			return true;
 		SWGObject creature = owner.getCreatureObject();
 		if (creature == null)
 			return false;
