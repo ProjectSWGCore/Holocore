@@ -72,7 +72,7 @@ public class BuildoutGenerator {
 		for (SWGObject snap : snapshots) {
 			GenBuildoutArea area = getAreaForObject(snap);
 			if (area != null)
-				snap.setAreaId(area.id);
+				snap.setBuildoutAreaId(area.id);
 		}
 		objects.addAll(snapshots);
 		long buildoutId = 1;
@@ -139,7 +139,7 @@ public class BuildoutGenerator {
 		Quaternion q = l.getOrientation();
 		double radius = object.getLoadRange();
 		int cellIndex = (object instanceof CellObject) ? ((CellObject) object).getNumber() : 0;
-		gen.writeLine(id, buildoutId, object.getAreaId(), crc, container, l.getX(), l.getY(), l.getZ(), q.getX(), q.getY(), q.getZ(), q.getW(), radius, cellIndex);
+		gen.writeLine(id, buildoutId, object.getBuildoutAreaId(), crc, container, l.getX(), l.getY(), l.getZ(), q.getX(), q.getY(), q.getZ(), q.getW(), radius, cellIndex);
 	}
 	
 	private GenBuildoutArea getAreaForObject(SWGObject obj) {
@@ -168,6 +168,7 @@ public class BuildoutGenerator {
 	private static class GenBuildoutArea implements Comparable<GenBuildoutArea> {
 		public final SwgBuildoutArea area;
 		public final Terrain terrain;
+		public final int index;
 		public final int x1;
 		public final int z1;
 		public final int x2;
@@ -178,6 +179,7 @@ public class BuildoutGenerator {
 		public GenBuildoutArea(SwgBuildoutArea area, Terrain terrain, double x1, double z1, double x2, double z2, int id, boolean adjust) {
 			this.area = area;
 			this.terrain = terrain;
+			this.index = area.getIndex();
 			this.x1 = (int) x1;
 			this.z1 = (int) z1;
 			this.x2 = (int) x2;
@@ -187,7 +189,7 @@ public class BuildoutGenerator {
 		}
 		
 		public int compareTo(GenBuildoutArea area) {
-			int comp = terrain.getName().compareTo(area.terrain.getName());
+			int comp = Integer.compare(index, area.index);
 			if (comp != 0)
 				return comp;
 			comp = Integer.compare(x1, area.x1);

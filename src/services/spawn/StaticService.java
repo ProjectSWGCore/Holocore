@@ -79,7 +79,7 @@ public class StaticService extends Service {
 		}
 	}
 	
-	public void createSupportingObjects(SWGObject object) {
+	private void createSupportingObjects(SWGObject object) {
 		synchronized (databaseMutex) {
 			try {
 				getSupportingStatement.setString(1, object.getTemplate());

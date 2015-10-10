@@ -43,8 +43,10 @@ import resources.Terrain;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.SWGObject;
+import resources.objects.building.BuildingObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.quadtree.QuadTree;
+import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
 
 public class ObjectAwareness extends Service {
@@ -114,14 +116,20 @@ public class ObjectAwareness extends Service {
 	
 	private void handleObjectCreateIntent(ObjectCreateIntent oci) {
 		SWGObject obj = oci.getObject();
-		if (obj.getParent() == null)
-			add(obj);
+		if (obj.getParent() == null) {
+			if (obj instanceof TangibleObject || obj instanceof BuildingObject) {
+				add(obj);
+			}
+		}
 	}
 	
 	private void handleObjectCreatedIntent(ObjectCreatedIntent oci) {
 		SWGObject obj = oci.getObject();
-		if (obj.getParent() == null)
-			add(obj);
+		if (obj.getParent() == null) {
+			if (obj instanceof TangibleObject || obj instanceof BuildingObject) {
+				add(obj);
+			}
+		}
 	}
 	
 	private void loadQuadTree() {

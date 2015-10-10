@@ -56,24 +56,18 @@ import network.packets.swg.zone.object_controller.DataTransform;
 import network.packets.swg.zone.object_controller.DataTransformWithParent;
 import network.packets.swg.zone.object_controller.ObjectController;
 import resources.Location;
-import resources.Terrain;
-import resources.config.ConfigFile;
 import resources.containers.ContainerPermissions;
 import resources.control.Intent;
 import resources.control.Manager;
 import resources.objects.SWGObject;
-import resources.objects.building.BuildingObject;
 import resources.objects.creature.CreatureObject;
-import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
 import resources.player.PlayerEvent;
 import resources.server_info.CachedObjectDatabase;
-import resources.server_info.Config;
 import resources.server_info.Log;
 import resources.server_info.ObjectDatabase;
 import resources.server_info.ObjectDatabase.Traverser;
 import services.map.MapManager;
-import services.map.MapManager.MapType;
 import services.player.PlayerManager;
 import services.spawn.SpawnerService;
 import services.spawn.StaticService;
@@ -85,7 +79,7 @@ public class ObjectManager extends Manager {
 	private final StaticService staticService;
 	private final SpawnerService spawnerService;
 	private final RadialService radialService;
-	private final BuildoutAreaService buildoutAreaService;
+	private final ClientBuildoutService clientBuildoutService;
 
 	private final ObjectDatabase<SWGObject> database;
 	private final Map <Long, SWGObject> objectMap;
@@ -97,7 +91,7 @@ public class ObjectManager extends Manager {
 		staticService = new StaticService(this);
 		spawnerService = new SpawnerService(this);
 		radialService = new RadialService();
-		buildoutAreaService = new BuildoutAreaService();
+		clientBuildoutService = new ClientBuildoutService();
 		
 		database = new CachedObjectDatabase<SWGObject>("odb/objects.db");
 		objectMap = new Hashtable<>(16*1024);
@@ -108,7 +102,7 @@ public class ObjectManager extends Manager {
 		addChildService(staticService);
 		addChildService(radialService);
 		addChildService(spawnerService);
-		addChildService(buildoutAreaService);
+		addChildService(clientBuildoutService);
 	}
 	
 	@Override
@@ -145,44 +139,18 @@ public class ObjectManager extends Manager {
 	}
 	
 	private void loadClientObjects() {
-		long startLoad = System.nanoTime();
-		Config c = getConfig(ConfigFile.PRIMARY);
-		if (c.getBoolean("LOAD-OBJECTS", true)) {
-			String terrainStr = c.getString("LOAD-OBJECTS-FOR", "");
-			Terrain terrain = null;
-			if (Terrain.doesTerrainExistForName(terrainStr))
-				terrain = Terrain.getTerrainFromName(terrainStr);
-			else if (!terrainStr.isEmpty()) {
-				System.err.println("ObjectManager: Unknown terrain '" + terrainStr + "'");
-				Log.e("ObjectManager", "Unknown terrain: %s", terrainStr);
+		long start = System.nanoTime();
+		for (SWGObject obj : clientBuildoutService.loadClientObjects().values()) {
+			synchronized (objectMap) {
+				if (obj.getObjectId() >= maxObjectId) {
+					maxObjectId = obj.getObjectId() + 1;
+				}
 			}
-			ClientObjectLoader loader = new ClientObjectLoader();
-			Map<Long, SWGObject> objects = loader.loadClientObjects(terrain);
-			objectMap.putAll(objects);
-			for (SWGObject obj : objects.values())
-				loadClientObject(obj);
-			double loadTime = (System.nanoTime() - startLoad) / 1E6;
-			System.out.printf("ClientObjectLoader: Finished loading %d client objects. Time: %fms%n", objects.size(), loadTime);
-			Log.i("ClientObjectLoader", "Finished loading %d client objects. Time: %fms", objects.size(), loadTime);
-		} else {
-			Log.w("ObjectManager", "Did not load client objects. Reason: Disabled.");
-			System.out.println("ObjectManager: Did not load client objects. Reason: Disabled!");
+			new ObjectCreatedIntent(obj).broadcast();
 		}
-	}
-	
-	private void loadClientObject(SWGObject obj) {
-		if (obj.getParent() == null) {
-			if (obj instanceof TangibleObject || obj instanceof BuildingObject) {
-				objectAwareness.add(obj);
-			}
-		}
-		synchronized (objectMap) {
-			if (obj.getObjectId() >= maxObjectId) {
-				maxObjectId = obj.getObjectId() + 1;
-			}
-		}
-		staticService.createSupportingObjects(obj);
-		mapManager.addMapLocation(obj, MapType.STATIC);
+		double loadTime = (System.nanoTime() - start) / 1E6;
+		System.out.printf("ClientObjectLoader: Finished loading client objects. Time: %fms%n", loadTime);
+		Log.i("ClientObjectLoader", "Finished loading client objects. Time: %fms", loadTime);
 	}
 	
 	private void loadObject(SWGObject obj) {

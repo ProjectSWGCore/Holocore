@@ -39,6 +39,7 @@ import network.packets.swg.zone.object_controller.DataTransform;
 import network.packets.swg.zone.object_controller.DataTransformWithParent;
 import resources.Location;
 import resources.Terrain;
+import resources.buildout.BuildoutArea;
 import resources.common.CRC;
 import resources.containers.ContainerPermissions;
 import resources.containers.ContainerResult;
@@ -79,6 +80,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	private final BaselineType objectType;
 	private ContainerPermissions containerPermissions;
 	private transient Set <SWGObject> objectsAware;
+	private transient BuildoutArea buildoutArea;
 	private List <List <String>> arrangement;
 
 	private Player	owner		= null;
@@ -114,8 +116,10 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	}
 	
 	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
+		areaId = -1;
 		ois.defaultReadObject();
 		objectsAware = new HashSet<SWGObject>();
+		buildoutArea = null;
 	}
 
 	/**
@@ -402,8 +406,16 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		this.complexity = complexity;
 	}
 	
-	public void setAreaId(int areaId) {
+	public void setBuildoutArea(BuildoutArea buildoutArea) {
+		this.buildoutArea = buildoutArea;
+	}
+	
+	public void setBuildoutAreaId(int areaId) {
 		this.areaId = areaId;
+	}
+	
+	public void setArrangement(List<List<String>> arrangement) {
+		this.arrangement = arrangement;
 	}
 	
 	public Player getOwner() {
@@ -483,7 +495,11 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		return complexity;
 	}
 	
-	public int getAreaId() {
+	public BuildoutArea getBuildoutArea() {
+		return buildoutArea;
+	}
+	
+	public int getBuildoutAreaId() {
 		return areaId;
 	}
 	
@@ -499,10 +515,6 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		return arrangement;
 	}
 
-	public void setArrangement(List<List<String>> arrangement) {
-		this.arrangement = arrangement;
-	}
-	
 	public String getAttribute(String attribute) {
 		return attributes.get(attribute);
 	}
@@ -683,17 +695,18 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	}
 	
 	private boolean isValidPlayer(Player player) {
-		if (player == null || player == getOwner())
-			return false;
-		if (getOwner() == null)
-			return false;
-		if (player.equals(getOwner()))
+		Player owner = getOwner();
+		if (player == null || player == owner)
 			return false;
 		if (player.getCreatureObject() == null)
 			return false;
 		if (player.getCreatureObject().getPlayerObject() == null)
 			return false;
-		SWGObject creature = getOwner().getCreatureObject();
+		if (player.equals(owner))
+			return false;
+		if (owner == null)
+			return false;
+		SWGObject creature = owner.getCreatureObject();
 		if (creature == null)
 			return false;
 		if (player.getCreatureObject().equals(creature))

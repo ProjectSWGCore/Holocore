@@ -79,8 +79,6 @@ class TerrainBuildoutLoader {
 		for (int row = 0; row < areaTable.getRowCount(); row++) {
 			SwgBuildoutArea area = new SwgBuildoutArea();
 			area.load(areaTable.getRow(row), sceneNumber, row);
-			if (!area.getName().startsWith(terrain.getName()))
-				continue;
 			loadArea(area);
 		}
 	}
@@ -94,7 +92,7 @@ class TerrainBuildoutLoader {
 			SWGObject object = createObject(buildoutRow);
 			object.setBuildout(true);
 			object.setLoadRange(buildoutRow.getRadius());
-			object.setAreaId(area.getIndex());
+			object.setBuildoutAreaId(area.getIndex());
 			setCellInformation(object, buildoutRow.getCellIndex());
 			addObject(object, buildoutRow.getContainerId());
 			updatePermissions(object);

@@ -78,8 +78,8 @@ public class TerrainSnapshotLoader {
 	private void createFromNode(Map<Integer, String> templates, Node node) {
 		SWGObject object = createObject(templates, node);
 		object.setBuildout(true);
+		object.setBuildoutAreaId(-1);
 		object.setLoadRange(node.getRadius());
-		object.setAreaId(-1);
 		setCellInformation(object, node.getCellIndex());
 		addObject(object, node.getContainerId());
 		updatePermissions(object);
