@@ -259,8 +259,14 @@ public class RelationalServerData extends RelationalDatabase {
 					columnTypes = parts;
 					createTable(table, columnNames, columnTypes);
 					insert = prepareStatement(createPreparedStatement(table, columnNames.length));
-				} else
-					generateInsert(insert, columnTypes, parts);
+				} else {
+					try {
+						generateInsert(insert, columnTypes, parts);
+					} catch (NumberFormatException e) {
+						System.out.println("Failed At Line: " + line);
+						throw e;
+					}
+				}
 			}
 			if (insert != null)
 				insert.executeBatch();
