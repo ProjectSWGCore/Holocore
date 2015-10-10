@@ -56,21 +56,23 @@ import resources.player.PlayerEvent;
 import resources.player.PlayerFlags;
 import resources.player.PlayerState;
 import resources.server_info.Log;
-import resources.server_info.RelationalDatabase;
 import utilities.ThreadUtilities;
 
 public class ConnectionService extends Service {
 	
 	private static final double LD_THRESHOLD = TimeUnit.MINUTES.toMillis(3); // Time since last packet
 	private static final double DISAPPEAR_THRESHOLD = TimeUnit.MINUTES.toMillis(2); // Time after the LD
-	private static final String incrementPopulation = "UPDATE galaxies SET population = population + 1 WHERE id = ?";
-	private static final String decrementPopulation = "UPDATE galaxies SET population = population - 1 WHERE id = ?";
+	private static final String INCREMENT_POPULATION_SQL = "UPDATE galaxies SET population = population + 1 WHERE id = ?";
+	private static final String DECREMENT_POPULATION_SQL = "UPDATE galaxies SET population = population - 1 WHERE id = ?";
 	
 	private final ScheduledExecutorService updateService;
 	private final Runnable updateRunnable;
 	private final Runnable disappearRunnable;
 	private final Set <DisappearPlayer> disappearPlayers;
 	private final Set <Player> zonedInPlayers;
+	
+	private PreparedStatement incrementPopulation;
+	private PreparedStatement decrementPopulation;
 	
 	public ConnectionService() {
 		updateService = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("conn-update-service"));
@@ -113,6 +115,9 @@ public class ConnectionService extends Service {
 		registerForIntent(GalacticPacketIntent.TYPE);
 		registerForIntent(ForceDisconnectIntent.TYPE);
 		registerForIntent(ZonePlayerSwapIntent.TYPE);
+		
+		incrementPopulation = getLocalDatabase().prepareStatement(INCREMENT_POPULATION_SQL);
+		decrementPopulation = getLocalDatabase().prepareStatement(DECREMENT_POPULATION_SQL);
 		return super.initialize();
 	}
 	
@@ -147,13 +152,14 @@ public class ConnectionService extends Service {
 	}
 	
 	private void onPlayerEventIntent(PlayerEventIntent pei) {
-		RelationalDatabase db = this.getLocalDatabase();
 		switch (pei.getEvent()) {
 			case PE_FIRST_ZONE: {
-				Player p = pei.getPlayer();		
-				try(PreparedStatement updateStatement = db.prepareStatement(ConnectionService.incrementPopulation)) {
-					updateStatement.setInt(1, ProjectSWG.getGalaxyId());
-					updateStatement.executeUpdate();
+				Player p = pei.getPlayer();
+				try {
+					synchronized (incrementPopulation) {
+						incrementPopulation.setInt(1, ProjectSWG.getGalaxyId());
+						incrementPopulation.executeUpdate();
+					}
 				} catch (SQLException e) {
 					Log.e("ConnectionService", "SQLException occured when trying to increase population value.");
 					e.printStackTrace();
@@ -167,9 +173,11 @@ public class ConnectionService extends Service {
 				clearPlayerFlag(pei.getPlayer(), pei.getEvent(), PlayerFlags.LD);
 				break;
 			case PE_LOGGED_OUT:
-				try (PreparedStatement updateStatement = db.prepareStatement(ConnectionService.decrementPopulation)) {
-					updateStatement.setInt(1, ProjectSWG.getGalaxyId());
-					updateStatement.executeUpdate();
+				try {
+					synchronized (decrementPopulation) {
+						decrementPopulation.setInt(1, ProjectSWG.getGalaxyId());
+						decrementPopulation.executeUpdate();
+					}
 				} catch (SQLException e) {
 					Log.e("ConnectionService", "SQLException occured when trying to decrease population value.");
 					e.printStackTrace();
@@ -234,7 +242,7 @@ public class ConnectionService extends Service {
 				DisappearPlayer old = disappearIterator.next();
 				Player oldPlayer = old.getPlayer();
 				CreatureObject oldObj = old.getPlayer().getCreatureObject();
-				if (oldObj == null || player.equals(old) || player == oldPlayer) {
+				if (oldObj == null || player.equals(oldPlayer) || player == oldPlayer) {
 					disappearIterator.remove();
 				}
 			}
