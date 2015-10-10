@@ -56,6 +56,7 @@ import network.packets.swg.zone.object_controller.DataTransform;
 import network.packets.swg.zone.object_controller.DataTransformWithParent;
 import network.packets.swg.zone.object_controller.ObjectController;
 import resources.Location;
+import resources.buildout.BuildoutArea;
 import resources.containers.ContainerPermissions;
 import resources.control.Intent;
 import resources.control.Manager;
@@ -412,9 +413,14 @@ public class ObjectManager extends Manager {
 			return;
 		Location newLocation = transform.getLocation();
 		newLocation.setTerrain(obj.getTerrain());
+		BuildoutArea area = obj.getBuildoutArea();
+		if (area != null && area.isAdjustCoordinates())
+			newLocation.translatePosition(area.getX1(), 0, area.getZ1());
 		if (obj instanceof CreatureObject)
 			new PlayerTransformedIntent((CreatureObject) obj, obj.getParent(), null, obj.getLocation(), newLocation).broadcast();
 		objectAwareness.move(obj, newLocation);
+		if (area != null && area.isAdjustCoordinates())
+			newLocation.translatePosition(-area.getX1(), 0, -area.getZ1());
 		obj.sendDataTransforms(transform);
 
 		// TODO: State checks before sending a data transform message to ensure the move is valid/change speed depending
