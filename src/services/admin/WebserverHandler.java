@@ -37,8 +37,8 @@ class WebserverHandler {
 	private static final Charset ASCII = Charset.forName("ASCII");
 
 	private static final String REQUIRED_PREFIX = new File("res/webserver").getAbsolutePath().replace('/', File.separatorChar);
-	private static final String INDEX_PATH = "res/webserver/index.html".replace('/', File.separatorChar);
-	private static final String AUTHENTICATED_PATH = "res/webserver/index.html".replace('/', File.separatorChar);
+	private static final String INDEX_PATH = new File("res/webserver/index.html".replace('/', File.separatorChar)).getAbsolutePath();
+	private static final String AUTHENTICATED_PATH = new File("res/webserver/authenticated.html".replace('/', File.separatorChar)).getAbsolutePath();
 	
 	private final WebserverData data;
 	private final Pattern variablePattern;
@@ -201,8 +201,7 @@ class WebserverHandler {
 			file = new File(file.getAbsolutePath().replace('/', File.separatorChar));
 		if (file.isDirectory())
 			file = new File(file, "index.html");
-		System.out.println(file + " == " + INDEX_PATH + "  = " + file.toString().equals(INDEX_PATH) + "[" + session.isAuthenticated() + "]");
-		if (file.toString().equals(INDEX_PATH)) {
+		if (file.getAbsolutePath().equals(INDEX_PATH)) {
 			if (session.isAuthenticated()) {
 				file = new File(AUTHENTICATED_PATH);
 			}

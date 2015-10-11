@@ -35,6 +35,7 @@ import resources.client_info.ServerFactory;
 import resources.config.ConfigFile;
 import resources.control.Manager;
 import resources.server_info.Config;
+import resources.server_info.Log;
 import services.network.NetworkManager;
 
 public class EngineManager extends Manager {
@@ -71,9 +72,15 @@ public class EngineManager extends Manager {
 	private void wipeOdbFiles() {
 		File directory = new File("./odb");
 		
-		for (File f : directory.listFiles()) {
+		File [] files = directory.listFiles();
+		if (files == null)
+			return;
+		for (File f : files) {
 			if (!f.isDirectory() && (f.getName().endsWith(".db") || f.getName().endsWith(".db.tmp"))) {
-				f.delete();
+				if (!f.delete()) {
+					System.err.println("EngineManager: Failed to delete ODB: " + f);
+					Log.e("EngineManager", "Failed to delete ODB: %s", f);
+				}
 			}
 		}
 	}

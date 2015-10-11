@@ -74,6 +74,8 @@ public final class SpawnerService extends Service {
 	
 	@Override
 	public void onIntentReceived(Intent i) {
+		if (!(i instanceof ConfigChangedIntent))
+			return;
 		ConfigChangedIntent cgi = (ConfigChangedIntent) i;
 		String newValue, oldValue;
 		
@@ -95,25 +97,28 @@ public final class SpawnerService extends Service {
 	
 	@Override
 	public boolean terminate() {
-		return super.terminate() && spawnerDatabase.close();
+		spawnerDatabase.close();
+		return super.terminate();
 	}
 	
 	private void loadSpawners() {
-		try(ResultSet jointTable = spawnerDatabase.prepareStatement(GET_ALL_SPAWNERS_SQL).executeQuery()) {
+		try (ResultSet jointTable = spawnerDatabase.prepareStatement(GET_ALL_SPAWNERS_SQL).executeQuery()) {
 			while (jointTable.next()) {
-				if(jointTable.getBoolean("active")) {
+				if (jointTable.getBoolean("active")) {
 					Location loc = new Location(jointTable.getFloat("x"), jointTable.getFloat("y"), jointTable.getFloat("z"), Terrain.valueOf(jointTable.getString("terrain_name")));
 					SpawnerType spawnerType = SpawnerType.valueOf(jointTable.getString("spawner_type"));
 					long objectId = jointTable.getLong("object_id");
-					long cellId = jointTable.getLong("cell_id");
-					final boolean spawnInCell = cellId > 0;
+					int cellId = jointTable.getInt("cell_id");
 					loc.setOrientation(jointTable.getFloat("oX"), jointTable.getFloat("oY"), jointTable.getFloat("oZ"), jointTable.getFloat("oW"));
 					
-					final SWGObject egg = objectManager.createObject(spawnerType.getObjectTemplate(), loc, !spawnInCell, false);
+					SWGObject parent = null;
+					if (cellId > 0) {
+						parent = objectManager.getObjectById(objectId);
+						if (parent instanceof BuildingObject)
+							parent = ((BuildingObject) parent).getCellByNumber(cellId);
+					}
+					SWGObject egg = objectManager.createObject(parent, spawnerType.getObjectTemplate(), loc, false);
 					
-					if(spawnInCell)
-						((BuildingObject) objectManager.getObjectById(objectId)).getCellByNumber(jointTable.getInt("cell_id")).addObject(egg);
-				
 					spawners.add(new Spawner(egg));
 				}
 			}

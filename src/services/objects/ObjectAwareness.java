@@ -27,6 +27,10 @@
 ***********************************************************************************/
 package services.objects;
 
+import intents.PlayerEventIntent;
+import intents.object.ObjectCreateIntent;
+import intents.object.ObjectCreatedIntent;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -36,10 +40,16 @@ import java.util.Set;
 import network.packets.swg.zone.UpdateContainmentMessage;
 import resources.Location;
 import resources.Terrain;
+import resources.control.Intent;
+import resources.control.Service;
 import resources.objects.SWGObject;
+import resources.objects.building.BuildingObject;
+import resources.objects.creature.CreatureObject;
 import resources.objects.quadtree.QuadTree;
+import resources.objects.tangible.TangibleObject;
+import resources.player.Player;
 
-public class ObjectAwareness {
+public class ObjectAwareness extends Service {
 	
 	private static final double AWARE_RANGE = 1024;
 	
@@ -49,9 +59,77 @@ public class ObjectAwareness {
 		quadTree = new HashMap<Terrain, QuadTree<SWGObject>>();
 	}
 	
+	@Override
 	public boolean initialize() {
+		registerForIntent(PlayerEventIntent.TYPE);
+		registerForIntent(ObjectCreateIntent.TYPE);
+		registerForIntent(ObjectCreatedIntent.TYPE);
 		loadQuadTree();
 		return true;
+	}
+	
+	@Override
+	public void onIntentReceived(Intent i) {
+		switch (i.getType()) {
+			case PlayerEventIntent.TYPE:
+				if (i instanceof PlayerEventIntent)
+					handlePlayerEventIntent((PlayerEventIntent) i);
+				break;
+			case ObjectCreateIntent.TYPE:
+				if (i instanceof ObjectCreateIntent)
+					handleObjectCreateIntent((ObjectCreateIntent) i);
+				break;
+			case ObjectCreatedIntent.TYPE:
+				if (i instanceof ObjectCreatedIntent)
+					handleObjectCreatedIntent((ObjectCreatedIntent) i);
+			default:
+				break;
+		}
+	}
+	
+	private void handlePlayerEventIntent(PlayerEventIntent pei) {
+		Player p = pei.getPlayer();
+		CreatureObject creature = p.getCreatureObject();
+		if (creature == null)
+			return;
+		switch (pei.getEvent()) {
+			case PE_DISAPPEAR:
+				creature.clearAware();
+				remove(creature);
+				for (SWGObject obj : creature.getObservers())
+					creature.destroyObject(obj.getOwner());
+				creature.setOwner(null);
+				p.setCreatureObject(null);
+				break;
+			case PE_FIRST_ZONE:
+				if (creature.getParent() == null)
+					creature.createObject(p);
+				break;
+			case PE_ZONE_IN:
+				creature.clearAware();
+				update(creature);
+				break;
+			default:
+				break;
+		}
+	}
+	
+	private void handleObjectCreateIntent(ObjectCreateIntent oci) {
+		SWGObject obj = oci.getObject();
+		if (obj.getParent() == null) {
+			if (obj instanceof TangibleObject || obj instanceof BuildingObject) {
+				add(obj);
+			}
+		}
+	}
+	
+	private void handleObjectCreatedIntent(ObjectCreatedIntent oci) {
+		SWGObject obj = oci.getObject();
+		if (obj.getParent() == null) {
+			if (obj instanceof TangibleObject || obj instanceof BuildingObject) {
+				add(obj);
+			}
+		}
 	}
 	
 	private void loadQuadTree() {

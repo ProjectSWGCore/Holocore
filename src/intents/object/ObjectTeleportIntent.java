@@ -32,23 +32,41 @@ import resources.control.Intent;
 import resources.objects.SWGObject;
 
 public class ObjectTeleportIntent extends Intent {
+	
 	public static final String TYPE = "ObjectTeleportIntent";
 	
 	private SWGObject object;
+	private SWGObject parent;
 	private Location newLocation;
 	
 	public ObjectTeleportIntent(SWGObject object, Location newLocation) {
 		super(TYPE);
 		this.object = object;
+		this.parent = null;
 		this.newLocation = newLocation;
 	}
-
+	
+	public ObjectTeleportIntent(SWGObject object, SWGObject parent, Location newLocation) {
+		super(TYPE);
+		this.object = object;
+		this.parent = parent;
+		this.newLocation = newLocation;
+	}
+	
 	public SWGObject getObject() {
 		return object;
 	}
 
 	public void setObject(SWGObject object) {
 		this.object = object;
+	}
+	
+	public SWGObject getParent() {
+		return parent;
+	}
+	
+	public void setParent(SWGObject parent) {
+		this.parent = parent;
 	}
 
 	public Location getNewLocation() {

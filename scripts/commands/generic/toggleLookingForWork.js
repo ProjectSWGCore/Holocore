@@ -1,4 +1,4 @@
-var execute = function(galManager, player, target, args) {
+function executeCommand(galacticManager, player, target, args) {
 	var PlayerFlags = Java.type("resources.player.PlayerFlags");
 	player.getPlayerObject().toggleFlag(PlayerFlags.LFW);
-};
+}

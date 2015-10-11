@@ -1,5 +1,3 @@
-var execute = function(galManager, player, target, args) {
-	var ChatBroadcastIntent = Java.type("intents.chat.ChatBroadcastIntent");
-	var BroadcastType = Java.type("intents.chat.ChatBroadcastIntent.BroadcastType");
-	new ChatBroadcastIntent(args, player, player.getCreatureObject().getLocation().getTerrain(), BroadcastType.GALAXY).broadcast();
-};
+function executeCommand(galacticManager, player, target, args) {
+	intentFactory.broadcastGalaxy(args, player);
+}

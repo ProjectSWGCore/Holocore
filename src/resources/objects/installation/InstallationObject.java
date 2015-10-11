@@ -28,7 +28,9 @@
 package resources.objects.installation;
 
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
+import resources.network.BaselineBuilder;
 import resources.objects.tangible.TangibleObject;
+import resources.player.Player;
 
 public class InstallationObject extends TangibleObject {
 	
@@ -64,6 +66,35 @@ public class InstallationObject extends TangibleObject {
 	
 	public void setPowerRate(double powerRate) {
 		this.powerRate = powerRate;
+	}
+	
+	public void createBaseline3(Player target, BaselineBuilder bb) {
+		super.createBaseline3(target, bb);
+		
+		bb.addBoolean(activated);
+		bb.addFloat((float) power);
+		bb.addFloat((float) powerRate);
+		
+		bb.incrementOperandCount(3);
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (!(o instanceof InstallationObject))
+			return super.equals(o);
+		InstallationObject inso = (InstallationObject) o;
+		if (!super.equals(o))
+			return false;
+		return activated == inso.activated && Double.compare(power, inso.power) == 0 && Double.compare(powerRate, inso.powerRate) == 0;
+	}
+	
+	@Override
+	public int hashCode() {
+		int hash = super.hashCode();
+		hash = (hash << 1) | (activated?1:0);
+		hash ^= Double.hashCode(power);
+		hash ^= Double.hashCode(powerRate);
+		return hash;
 	}
 	
 }

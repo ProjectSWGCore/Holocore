@@ -1,4 +1,4 @@
-var execute = function(galManager, player, target, args) {
+function executeCommand(galacticManager, player, target, args) {
     //TODO: Move to java callback
     if(player.getAccessLevel() == (Java.type('resources.player.AccessLevel')).PLAYER){
         intentFactory.sendSystemMessage(player, "Players cannot use this command :(");

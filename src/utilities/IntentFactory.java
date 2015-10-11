@@ -37,9 +37,10 @@ public final class IntentFactory {
 	/**
 	 * Sends a system message to the entire galaxy.
 	 * @param message System message to broadcast.
+	 * @param source The source of this system message.
 	 */
-	public void broadcastGalaxy(String message) {
-		broadcast(message, null, BroadcastType.GALAXY);
+	public void broadcastGalaxy(String message, Player source) {
+		broadcast(message, source, BroadcastType.GALAXY);
 	}
 
 	/**

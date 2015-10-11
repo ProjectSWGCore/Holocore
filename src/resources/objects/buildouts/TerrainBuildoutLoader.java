@@ -77,31 +77,29 @@ class TerrainBuildoutLoader {
 		String file = BASE_PATH+"areas_"+terrain.getName()+".iff";
 		DatatableData areaTable = (DatatableData) ClientFactory.getInfoFromFile(file);
 		for (int row = 0; row < areaTable.getRowCount(); row++) {
-			BuildoutArea area = new BuildoutArea();
+			SwgBuildoutArea area = new SwgBuildoutArea();
 			area.load(areaTable.getRow(row), sceneNumber, row);
-			if (!area.getName().startsWith(terrain.getName()))
-				continue;
 			loadArea(area);
 		}
 	}
 	
-	private void loadArea(BuildoutArea area) {
+	private void loadArea(SwgBuildoutArea area) {
 		String file = BASE_PATH+terrain.getName()+"/"+area.getName().replace("server", "client")+".iff";
 		DatatableData areaTable = (DatatableData) ClientFactory.getInfoFromFile(file);
-		BuildoutRow buildoutRow = new BuildoutRow(area);
+		SwgBuildoutRow buildoutRow = new SwgBuildoutRow(area);
 		for (int row = 0; row < areaTable.getRowCount(); row++) {
 			buildoutRow.load(areaTable.getRow(row), crcTable);
 			SWGObject object = createObject(buildoutRow);
 			object.setBuildout(true);
 			object.setLoadRange(buildoutRow.getRadius());
-			object.setAreaId(area.getIndex());
+			object.setBuildoutAreaId(area.getIndex());
 			setCellInformation(object, buildoutRow.getCellIndex());
 			addObject(object, buildoutRow.getContainerId());
 			updatePermissions(object);
 		}
 	}
 	
-	private SWGObject createObject(BuildoutRow row) {
+	private SWGObject createObject(SwgBuildoutRow row) {
 		SWGObject object = ObjectCreator.createObjectFromTemplate(row.getObjectId(), row.getTemplate());
 		Location l = row.getLocation();
 		l.setTerrain(terrain);

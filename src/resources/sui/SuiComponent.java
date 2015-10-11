@@ -33,6 +33,7 @@ import resources.server_info.Log;
 import utilities.Encoder;
 
 import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -127,7 +128,7 @@ public class SuiComponent implements Encodable {
 		if (size < 3) {
 			Log.w("SuiComponent", "Tried to get subscribed event type when there is none for target %s", getTarget());
 		} else {
-			byte[] bytes = narrowParams.get(1).getBytes();
+			byte[] bytes = narrowParams.get(1).getBytes(StandardCharsets.UTF_8);
 			if (bytes.length > 1) {
 				Log.w("SuiComponent", "Tried to get eventType but narrowparams string byte array length is more than 1");
 				return -1;

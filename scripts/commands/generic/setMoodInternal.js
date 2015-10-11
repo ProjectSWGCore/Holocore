@@ -1,7 +1,7 @@
-var execute = function(galManager, player, target, args) {
+function executeCommand(galacticManager, player, target, args) {
 	if(args.contains(" ")) {
 		return;
 	}
 	
 	player.getCreatureObject().setMoodId(args);
-};
+}

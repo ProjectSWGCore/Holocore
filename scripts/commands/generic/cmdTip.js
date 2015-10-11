@@ -1,4 +1,4 @@
-var execute = function(galManager, player, target, args) {
+function executeCommand(galacticManager, player, target, args) {
 	if (player.getAccessLevel() == (Java.type('resources.player.AccessLevel')).PLAYER) {
 		intentFactory.sendSystemMessage(player, "Unable to access /tip command - currently reserved for admins");
 		return;
@@ -15,4 +15,4 @@ var execute = function(galManager, player, target, args) {
 		creature.setCashBalance(creature.getCashBalance() + Number(argSplit[1]));
 	else
 		intentFactory.sendSystemMessage(player, "Unknown Destination: " + argSplit[0]);
-};
+}

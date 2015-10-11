@@ -1,4 +1,4 @@
-var execute = function(galManager, player, target, args) {
+function executeCommand(galacticManager, player, target, args) {
 	args = args.trim();
 	split = args.split(" ");
 	if (split.length == 0 || split[0].isEmpty()) {
@@ -46,4 +46,4 @@ var execute = function(galManager, player, target, args) {
 			intentFactory.sendSystemMessage(player, "Get in a container bro");
 		}
 	}
-};
+}

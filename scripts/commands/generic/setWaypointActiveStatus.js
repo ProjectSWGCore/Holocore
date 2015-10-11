@@ -1,4 +1,4 @@
-var execute = function(galManager, player, target, args) {
+function executeCommand(galacticManager, player, target, args) {
 	var ghost = player.getPlayerObject();
 	var waypoint;
 	
@@ -19,4 +19,4 @@ var execute = function(galManager, player, target, args) {
 	}
 	
 	ghost.updateWaypoint(waypoint);
-};
+}

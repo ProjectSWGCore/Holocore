@@ -28,6 +28,7 @@
 package services.chat;
 
 import intents.NotifyPlayersPacketIntent;
+import intents.PlayerEventIntent;
 import intents.chat.ChatRoomUpdateIntent;
 import intents.network.GalacticPacketIntent;
 import network.packets.Packet;
@@ -75,8 +76,13 @@ import resources.player.AccessLevel;
 import resources.player.Player;
 import resources.server_info.CachedObjectDatabase;
 import resources.server_info.ObjectDatabase;
+import resources.server_info.RelationalServerData;
+import resources.server_info.RelationalServerFactory;
+import services.chat.ChatManager.ChatRange;
+import services.chat.ChatManager.ChatType;
 import services.player.PlayerManager;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -91,6 +97,7 @@ public class ChatRoomService extends Service {
 	private final Map<Long, Map<Integer, Integer>> messages;
 	private final ObjectDatabase<ChatRoom> database;
 	private final Map<Integer, ChatRoom> roomMap;
+	private final RelationalServerData chatLogs;
 	private final Galaxy galaxy;
 	private int maxChatRoomId;
 
@@ -99,6 +106,7 @@ public class ChatRoomService extends Service {
 		database	= new CachedObjectDatabase<>("odb/chat_rooms.db");
 		roomMap 	= new ConcurrentHashMap<>();
 		messages	= new ConcurrentHashMap<>();
+		chatLogs	= RelationalServerFactory.getServerDatabase("chat/chat_log.db");
 		maxChatRoomId = 1;
 	}
 
@@ -106,6 +114,7 @@ public class ChatRoomService extends Service {
 	public boolean initialize() {
 		registerForIntent(ChatRoomUpdateIntent.TYPE);
 		registerForIntent(GalacticPacketIntent.TYPE);
+		registerForIntent(PlayerEventIntent.TYPE);
 
 		database.load();
 		database.traverse((room) -> {
@@ -126,6 +135,10 @@ public class ChatRoomService extends Service {
 				break;
 			case GalacticPacketIntent.TYPE:
 				processPacket((GalacticPacketIntent) i);
+				break;
+			case PlayerEventIntent.TYPE:
+				if (i instanceof PlayerEventIntent)
+					handlePlayerEventIntent((PlayerEventIntent) i);
 				break;
 		}
 	}
@@ -187,6 +200,24 @@ public class ChatRoomService extends Service {
 				if (p instanceof ChatRemoveModeratorFromRoom) handleChatRemoveModeratorFromRoom(player, (ChatRemoveModeratorFromRoom) p);
 				break;
 			default: break;
+		}
+	}
+	
+	private void handlePlayerEventIntent(PlayerEventIntent intent) {
+		Player player = intent.getPlayer();
+		if (player == null)
+			return;
+
+		switch (intent.getEvent()) {
+			case PE_ZONE_IN:
+				enterPlanetaryChatChannels(player);
+				break;
+			case PE_FIRST_ZONE:
+				if (player.getPlayerObject() != null)
+					enterChatChannels(player, player.getPlayerObject().getJoinedChannels());
+				break;
+			default:
+				break;
 		}
 	}
 
@@ -493,8 +524,10 @@ public class ChatRoomService extends Service {
 
 		player.sendPacket(new ChatOnSendRoomMessage(result.getCode(), p.getSequence()));
 
-		if (result == ChatResult.SUCCESS)
+		if (result == ChatResult.SUCCESS) {
 			room.sendMessage(avatar, p.getMessage(), p.getOutOfBandPackage(), player.getPlayerManager());
+			logChat(player.getCreatureObject().getObjectId(), player.getCharacterName(), room.getId()+"/"+room.getPath(), p.getMessage());
+		}
 	}
 
 	private void handleChatQueryRoom(Player player, ChatQueryRoom p) {
@@ -798,6 +831,15 @@ public class ChatRoomService extends Service {
 
 	public ChatRoom getRoom(int roomId) {
 		return roomMap.get(roomId);
+	}
+	
+	private void logChat(long sendId, String sendName, String room, String message) {
+		try {
+			long time = System.currentTimeMillis();
+			chatLogs.insert("chat_log", null, time, sendId, sendName, 0, "", ChatType.CHAT.name(), ChatRange.ROOM.name(), room, "", message);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

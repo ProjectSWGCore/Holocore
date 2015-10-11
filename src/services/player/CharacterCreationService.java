@@ -190,28 +190,36 @@ public class CharacterCreationService extends Service {
 	
 	private void handleCharCreation(ObjectManager objManager, Player player, ClientCreateCharacter create) {
 		ErrorMessage err = getNameValidity(create.getName(), player.getAccessLevel() != AccessLevel.PLAYER);
+		boolean success = false;
 		int max = getConfig(ConfigFile.PRIMARY).getInt("GALAXY-MAX-CHARACTERS", 0);
 		if (max != 0 && getCharacterCount(player.getUserId()) >= max)
 			err = ErrorMessage.SERVER_CHARACTER_CREATION_MAX_CHARS;
 		else if (!creationRestriction.isAbleToCreate(player))
 			err = ErrorMessage.NAME_DECLINED_TOO_FAST;
-		if (err == ErrorMessage.NAME_APPROVED) {
-			long characterId = createCharacter(objManager, player, create);
-			if (characterId == -1) {
-				err = ErrorMessage.NAME_DECLINED_INTERNAL_ERROR;
-			} else if (createCharacterInDb(characterId, create.getName(), player)) {
-				creationRestriction.createdCharacter(player);
-				System.out.println("[" + player.getUsername() + "] Create Character: " + create.getName() + ". IP: " + create.getAddress() + ":" + create.getPort());
-				Log.i("ZoneService", "%s created character %s from %s:%d", player.getUsername(), create.getName(), create.getAddress(), create.getPort());
-				sendPacket(player, new CreateCharacterSuccess(characterId));
-				new PlayerEventIntent(player, PlayerEvent.PE_CREATE_CHARACTER).broadcast();
-				return;
-			} else {
-				Log.e("ZoneService", "Failed to create character %s for user %s with server error from %s:%d", create.getName(), player.getUsername(), create.getAddress(), create.getPort());
-				objManager.deleteObject(characterId);
-			}
+		else if (err == ErrorMessage.NAME_APPROVED) {
+			err = completeCharCreation(objManager, player, create);
+			success = (err == ErrorMessage.NAME_APPROVED);
 		}
-		sendCharCreationFailure(player, create, err);
+		if (!success)
+			sendCharCreationFailure(player, create, err);
+	}
+	
+	private ErrorMessage completeCharCreation(ObjectManager objManager, Player player, ClientCreateCharacter create) {
+		long characterId = createCharacter(objManager, player, create);
+		if (characterId == -1) {
+			return ErrorMessage.NAME_DECLINED_INTERNAL_ERROR;
+		} else if (createCharacterInDb(characterId, create.getName(), player)) {
+			creationRestriction.createdCharacter(player);
+			System.out.println("[" + player.getUsername() + "] Create Character: " + create.getName() + ". IP: " + create.getAddress() + ":" + create.getPort());
+			Log.i("ZoneService", "%s created character %s from %s:%d", player.getUsername(), create.getName(), create.getAddress(), create.getPort());
+			sendPacket(player, new CreateCharacterSuccess(characterId));
+			new PlayerEventIntent(player, PlayerEvent.PE_CREATE_CHARACTER).broadcast();
+			return ErrorMessage.NAME_APPROVED;
+		} else {
+			Log.e("ZoneService", "Failed to create character %s for user %s with server error from %s:%d", create.getName(), player.getUsername(), create.getAddress(), create.getPort());
+			objManager.deleteObject(characterId);
+			return ErrorMessage.NAME_DECLINED_INTERNAL_ERROR;
+		}
 	}
 	
 	private void sendCharCreationFailure(Player player, ClientCreateCharacter create, ErrorMessage err) {
@@ -299,8 +307,6 @@ public class CharacterCreationService extends Service {
 		if (creatureObj == null)
 			return -1;
 		PlayerObject	playerObj	= createPlayer(objManager, "object/player/shared_player.iff");
-		SWGObject		bankObj		= objManager.createObject("object/tangible/bank/shared_character_bank.iff", false);
-		SWGObject		missionObj	= objManager.createObject("object/tangible/mission_bag/shared_mission_bag.iff", false);
 		
 		setCreatureObjectValues(objManager, creatureObj, create);
 		setPlayerObjectValues(playerObj, create);
@@ -310,8 +316,6 @@ public class CharacterCreationService extends Service {
 		creatureObj.setVolume(0x000F4240);
 		creatureObj.setOwner(player);
 		creatureObj.addObject(playerObj); // ghost slot
-		creatureObj.addObject(bankObj);
-		creatureObj.addObject(missionObj);
 		playerObj.setAdminTag(player.getAccessLevel());
 		player.setCreatureObject(creatureObj);
 		return creatureObj.getObjectId();
@@ -365,6 +369,12 @@ public class CharacterCreationService extends Service {
 		return null;
 	}
 	
+	private SWGObject createInventoryObject(ObjectManager objManager, CreatureObject creatureObj, String template) {
+		SWGObject obj = objManager.createObject(creatureObj, template);
+		obj.setContainerPermissions(ContainerPermissions.INVENTORY);
+		return obj;
+	}
+	
 	private void createHair(ObjectManager objManager, CreatureObject creatureObj, String hair, byte [] customization) {
 		if (hair.isEmpty())
 			return;
@@ -376,15 +386,6 @@ public class CharacterCreationService extends Service {
 	}
 	
 	private void setCreatureObjectValues(ObjectManager objManager, CreatureObject creatureObj, ClientCreateCharacter create) {
-		TangibleObject inventory	= createTangible(objManager, "object/tangible/inventory/shared_character_inventory.iff");
-		inventory.setContainerPermissions(ContainerPermissions.INVENTORY);
-		TangibleObject datapad		= createTangible(objManager, "object/tangible/datapad/shared_character_datapad.iff");
-		datapad.setContainerPermissions(ContainerPermissions.INVENTORY);
-		TangibleObject apprncInventory = createTangible(objManager, "object/tangible/inventory/shared_appearance_inventory.iff");
-		apprncInventory.setContainerPermissions(ContainerPermissions.INVENTORY);
-		TangibleObject safetyDeposit = createTangible(objManager, "object/tangible/bank/shared_character_bank.iff");
-		safetyDeposit.setContainerPermissions(ContainerPermissions.INVENTORY);
-		
 		creatureObj.setRace(Race.getRaceByFile(create.getRace()));
 		creatureObj.setAppearanceData(create.getCharCustomization());
 		creatureObj.setHeight(create.getHeight());
@@ -392,15 +393,12 @@ public class CharacterCreationService extends Service {
 		creatureObj.setPvpFlags(PvpFlag.PLAYER, PvpFlag.OVERT);
 		creatureObj.getSkills().add("species_" + creatureObj.getRace().getSpecies());
 
-		creatureObj.addObject(inventory); // slot = inventory
-		creatureObj.addObject(datapad); // slot = datapad
-		creatureObj.addObject(apprncInventory); // slot = appearance_inventory
-		creatureObj.addObject(safetyDeposit); // slot = bank
+		creatureObj.addEquipment(createInventoryObject(objManager, creatureObj, "object/tangible/inventory/shared_character_inventory.iff"));
+		creatureObj.addEquipment(createInventoryObject(objManager, creatureObj, "object/tangible/datapad/shared_character_datapad.iff"));
+		creatureObj.addEquipment(createInventoryObject(objManager, creatureObj, "object/tangible/inventory/shared_appearance_inventory.iff"));
+		createInventoryObject(objManager, creatureObj, "object/tangible/bank/shared_character_bank.iff");
+		createInventoryObject(objManager, creatureObj, "object/tangible/mission_bag/shared_mission_bag.iff");
 		
-		creatureObj.addEquipment(inventory);
-		creatureObj.addEquipment(datapad);
-		creatureObj.addEquipment(apprncInventory);
-
 		creatureObj.joinPermissionGroup("world");
 	}
 	
