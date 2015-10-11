@@ -140,7 +140,6 @@ public class ObjectManager extends Manager {
 	}
 	
 	private void loadClientObjects() {
-		long start = System.nanoTime();
 		for (SWGObject obj : clientBuildoutService.loadClientObjects().values()) {
 			synchronized (objectMap) {
 				if (obj.getObjectId() >= maxObjectId) {
@@ -150,9 +149,6 @@ public class ObjectManager extends Manager {
 			objectMap.put(obj.getObjectId(), obj);
 			new ObjectCreatedIntent(obj).broadcast();
 		}
-		double loadTime = (System.nanoTime() - start) / 1E6;
-		System.out.printf("ClientObjectLoader: Finished loading client objects. Time: %fms%n", loadTime);
-		Log.i("ClientObjectLoader", "Finished loading client objects. Time: %fms", loadTime);
 	}
 	
 	private void loadObject(SWGObject obj) {
