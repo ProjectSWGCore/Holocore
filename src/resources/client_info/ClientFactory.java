@@ -42,7 +42,8 @@ import resources.client_info.visitors.SlotDescriptorData;
 import resources.client_info.visitors.WorldSnapshotData;
 
 public class ClientFactory extends DataFactory {
-	private static ClientFactory instance;
+	
+	private static final ClientFactory INSTANCE = new ClientFactory();
 
 	private Map <String, SoftReference<ClientData>> dataMap = new HashMap<>();
 	private Map <String, String> typeMap = new HashMap<>();
@@ -119,7 +120,7 @@ public class ClientFactory extends DataFactory {
 		if (original.contains("shared_"))
 			return original;
 		
-		int index = original.lastIndexOf("/");
+		int index = original.lastIndexOf('/');
 		return original.substring(0, index) + "/shared_" + original.substring(index+1);
 	}
 
@@ -195,8 +196,6 @@ public class ClientFactory extends DataFactory {
 	}
 
 	private static ClientFactory getInstance() {
-		if (instance == null)
-			instance = new ClientFactory();
-		return instance;
+		return INSTANCE;
 	}
 }

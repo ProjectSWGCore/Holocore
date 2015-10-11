@@ -179,7 +179,10 @@ public class BuildoutGenerator {
 		public GenBuildoutArea(SwgBuildoutArea area, Terrain terrain, double x1, double z1, double x2, double z2, int id, boolean adjust) {
 			this.area = area;
 			this.terrain = terrain;
-			this.index = area.getIndex();
+			if (area != null)
+				this.index = area.getIndex();
+			else
+				this.index = -1;
 			this.x1 = (int) x1;
 			this.z1 = (int) z1;
 			this.x2 = (int) x2;

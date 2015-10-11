@@ -37,8 +37,8 @@ public class InstallationObject extends TangibleObject {
 	private static final long serialVersionUID = 1L;
 	
 	private boolean activated	= false;
-	private float	power		= 0;
-	private float	powerRate	= 0;
+	private double	power		= 0;
+	private double	powerRate	= 0;
 	
 	public InstallationObject(long objectId) {
 		super(objectId, BaselineType.INSO);
@@ -48,7 +48,7 @@ public class InstallationObject extends TangibleObject {
 		return activated;
 	}
 	
-	public float getPower() {
+	public double getPower() {
 		return power;
 	}
 	
@@ -60,11 +60,11 @@ public class InstallationObject extends TangibleObject {
 		this.activated = activated;
 	}
 	
-	public void setPower(float power) {
+	public void setPower(double power) {
 		this.power = power;
 	}
 	
-	public void setPowerRate(float powerRate) {
+	public void setPowerRate(double powerRate) {
 		this.powerRate = powerRate;
 	}
 	
@@ -72,10 +72,29 @@ public class InstallationObject extends TangibleObject {
 		super.createBaseline3(target, bb);
 		
 		bb.addBoolean(activated);
-		bb.addFloat(power);
-		bb.addFloat(powerRate);
+		bb.addFloat((float) power);
+		bb.addFloat((float) powerRate);
 		
 		bb.incrementOperandCount(3);
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (!(o instanceof InstallationObject))
+			return super.equals(o);
+		InstallationObject inso = (InstallationObject) o;
+		if (!super.equals(o))
+			return false;
+		return activated == inso.activated && Double.compare(power, inso.power) == 0 && Double.compare(powerRate, inso.powerRate) == 0;
+	}
+	
+	@Override
+	public int hashCode() {
+		int hash = super.hashCode();
+		hash = (hash << 1) | (activated?1:0);
+		hash ^= Double.hashCode(power);
+		hash ^= Double.hashCode(powerRate);
+		return hash;
 	}
 	
 }

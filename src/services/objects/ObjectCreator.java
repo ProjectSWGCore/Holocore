@@ -106,8 +106,8 @@ public final class ObjectCreator {
 		switch(key) {
 			case ObjectData.OBJ_STF: object.setStringId(value); break;
 			case ObjectData.DETAIL_STF: object.setDetailStringId(value); break;
-			case ObjectData.VOLUME_LIMIT: object.setVolume(Integer.valueOf(value)); break;
-			case ObjectData.CONTAINER_TYPE: object.setContainerType(Integer.valueOf(value)); break;
+			case ObjectData.VOLUME_LIMIT: object.setVolume(Integer.parseInt(value)); break;
+			case ObjectData.CONTAINER_TYPE: object.setContainerType(Integer.parseInt(value)); break;
 			default: break;
 		}
 	}

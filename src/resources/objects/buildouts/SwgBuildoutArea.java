@@ -102,7 +102,7 @@ public class SwgBuildoutArea {
 	
 	private void calculate(int sceneNumber, int areaNumber) {
 		index = sceneNumber * 100 + areaNumber;
-		buildingObjectId = -(index + 1) * 30000;
+		buildingObjectId = -(index + 1) * 30000L;
 		objectIdBase = buildingObjectId + 2000;
 	}
 	

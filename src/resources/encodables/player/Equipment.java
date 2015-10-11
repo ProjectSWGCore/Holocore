@@ -141,4 +141,9 @@ public class Equipment implements Encodable, Serializable {
 
 		return ((SWGObject) o).getObjectId() == objectId;
 	}
+	
+	@Override
+	public int hashCode() {
+		return Long.hashCode(objectId);
+	}
 }

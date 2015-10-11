@@ -30,9 +30,12 @@ package resources.server_info;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
@@ -74,7 +77,7 @@ class ConfigData {
 		delta.putAll(data);	// Copy the current data
 		
 		try {
-			reader = new BufferedReader(new FileReader(file));
+			reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8));
 			String line = reader.readLine();
 			while (line != null) {
 				loadLine(line);
@@ -102,7 +105,7 @@ class ConfigData {
 	public boolean save() {
 		BufferedWriter writer = null;
 		try {
-			writer = new BufferedWriter(new FileWriter(file));
+			writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8));
 			writer.write("# "+FORMAT.format(System.currentTimeMillis()));
 			writer.newLine();
 			for (Entry <String, String> e : data.entrySet()) {

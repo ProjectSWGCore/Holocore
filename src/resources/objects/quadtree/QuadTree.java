@@ -29,6 +29,7 @@ package resources.objects.quadtree;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class QuadTree<V> {
 	
@@ -337,6 +338,8 @@ public class QuadTree<V> {
 			
 			@Override
 			public T next() {
+				if (!hasNext())
+					throw new NoSuchElementException("Reached the end of the iterator!");
 				T node = subnodes[x][y];
 				if (y + 1 < subnodes.length)
 					y++;

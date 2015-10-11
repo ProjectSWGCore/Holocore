@@ -64,9 +64,9 @@ public class BuildoutArea implements Comparable<BuildoutArea> {
 		BuildoutArea area = (BuildoutArea) o;
 		if (!terrain.equals(area.terrain))
 			return false;
-		if (x1 != area.x1)
+		if (Double.compare(x1, area.x1) != 0)
 			return false;
-		if (z1 != area.z1)
+		if (Double.compare(z1, area.z1) != 0)
 			return false;
 		return true;
 	}
