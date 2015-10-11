@@ -46,11 +46,9 @@ import intents.player.PlayerTransformedIntent;
 import intents.PlayerEventIntent;
 import intents.RequestZoneInIntent;
 import intents.network.GalacticPacketIntent;
-import main.ProjectSWG;
 import network.packets.Packet;
 import network.packets.swg.ErrorMessage;
 import network.packets.swg.zone.SceneDestroyObject;
-import network.packets.swg.zone.insertion.CmdStartScene;
 import network.packets.swg.zone.insertion.SelectCharacter;
 import network.packets.swg.zone.object_controller.DataTransform;
 import network.packets.swg.zone.object_controller.DataTransformWithParent;
@@ -63,7 +61,6 @@ import resources.control.Manager;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
-import resources.player.PlayerEvent;
 import resources.server_info.CachedObjectDatabase;
 import resources.server_info.Log;
 import resources.server_info.ObjectDatabase;
@@ -235,8 +232,6 @@ public class ObjectManager extends Manager {
 				default:
 					break;
 			}
-		} else if (i instanceof ObjectTeleportIntent) {
-			processObjectTeleportIntent((ObjectTeleportIntent) i);
 		} else if (i instanceof ObjectIdRequestIntent) {
 			processObjectIdRequestIntent((ObjectIdRequestIntent) i);
 		} else if (i instanceof ObjectCreateIntent) {
@@ -258,24 +253,6 @@ public class ObjectManager extends Manager {
 		}
 
 		new ObjectIdResponseIntent(intent.getIdentifier(), reservedIds).broadcast();
-	}
-
-	private void processObjectTeleportIntent(ObjectTeleportIntent oti) {
-		SWGObject object = oti.getObject();
-		if (object instanceof CreatureObject && object.getOwner() != null) {
-			Packet startScene = new CmdStartScene(false, object.getObjectId(), ((CreatureObject)object).getRace(), oti.getNewLocation(), (long)(ProjectSWG.getCoreTime()/1E3));
-			if (oti.getParent() != null) {
-				objectAwareness.move(object, oti.getParent(), oti.getNewLocation());
-				sendPacket(object.getOwner(), startScene);
-			} else {
-				objectAwareness.move(object, oti.getNewLocation());
-				sendPacket(object.getOwner(), startScene);
-				object.createObject(object.getOwner());
-			}
-			new PlayerEventIntent(object.getOwner(), PlayerEvent.PE_ZONE_IN).broadcast();
-		} else {
-			object.setLocation(oti.getNewLocation());
-		}
 	}
 
 	private void processGalacticPacketIntent(GalacticPacketIntent gpi) {

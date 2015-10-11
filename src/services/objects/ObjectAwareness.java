@@ -30,6 +30,7 @@ package services.objects;
 import intents.PlayerEventIntent;
 import intents.object.ObjectCreateIntent;
 import intents.object.ObjectCreatedIntent;
+import intents.object.ObjectTeleportIntent;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -37,8 +38,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import main.ProjectSWG;
 import network.packets.swg.zone.UpdateContainmentMessage;
+import network.packets.swg.zone.insertion.CmdStartScene;
 import resources.Location;
+import resources.Race;
 import resources.Terrain;
 import resources.control.Intent;
 import resources.control.Service;
@@ -48,10 +52,12 @@ import resources.objects.creature.CreatureObject;
 import resources.objects.quadtree.QuadTree;
 import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
+import resources.player.PlayerEvent;
 
 public class ObjectAwareness extends Service {
 	
 	private static final double AWARE_RANGE = 1024;
+	private static final int DEFAULT_LOAD_RANGE = (int) square(200); // Squared for speed
 	
 	private final Map <Terrain, QuadTree <SWGObject>> quadTree;
 	
@@ -64,6 +70,7 @@ public class ObjectAwareness extends Service {
 		registerForIntent(PlayerEventIntent.TYPE);
 		registerForIntent(ObjectCreateIntent.TYPE);
 		registerForIntent(ObjectCreatedIntent.TYPE);
+		registerForIntent(ObjectTeleportIntent.TYPE);
 		loadQuadTree();
 		return true;
 	}
@@ -82,6 +89,10 @@ public class ObjectAwareness extends Service {
 			case ObjectCreatedIntent.TYPE:
 				if (i instanceof ObjectCreatedIntent)
 					handleObjectCreatedIntent((ObjectCreatedIntent) i);
+			case ObjectTeleportIntent.TYPE:
+				if (i instanceof ObjectTeleportIntent)
+					processObjectTeleportIntent((ObjectTeleportIntent) i);
+				break;
 			default:
 				break;
 		}
@@ -130,6 +141,29 @@ public class ObjectAwareness extends Service {
 				add(obj);
 			}
 		}
+	}
+	
+	private void processObjectTeleportIntent(ObjectTeleportIntent oti) {
+		SWGObject object = oti.getObject();
+		Player owner = object.getOwner();
+		boolean creature = object instanceof CreatureObject && owner != null;
+		if (oti.getParent() != null) {
+			move(object, oti.getParent(), oti.getNewLocation());
+			if (creature)
+				startScene((CreatureObject) object, oti.getNewLocation());
+		} else {
+			move(object, oti.getNewLocation());
+			if (creature)
+				startScene((CreatureObject) object, oti.getNewLocation());
+			object.createObject(owner);
+		}
+	}
+	
+	private void startScene(CreatureObject object, Location newLocation) {
+		long time = (long)(ProjectSWG.getCoreTime()/1E3);
+		Race race = ((CreatureObject)object).getRace();
+		sendPacket(object.getOwner(), new CmdStartScene(false, object.getObjectId(), race, newLocation, time));
+		new PlayerEventIntent(object.getOwner(), PlayerEvent.PE_ZONE_IN).broadcast();
 	}
 	
 	private void loadQuadTree() {
@@ -241,20 +275,16 @@ public class ObjectAwareness extends Service {
 	private boolean isValidInRange(SWGObject obj, SWGObject inRange, Location objLoc) {
 		if (inRange.getObjectId() == obj.getObjectId())
 			return false;
-		Location inRangeLoc = inRange.getWorldLocation();
-		double distSquared = distanceSquared(objLoc, inRangeLoc);
-		if (inRange.getLoadRange() != 0 && distSquared > square(inRange.getLoadRange()))
-			return false;
-		if (inRange.getLoadRange() == 0 && distSquared > square(200))
-			return false;
-		return true;
+		int distSquared = distanceSquared(objLoc, inRange.getWorldLocation());
+		int loadSquared = (int) (square(inRange.getLoadRange()) + 0.5);
+		return (loadSquared != 0 || distSquared <= DEFAULT_LOAD_RANGE) && (loadSquared == 0 || distSquared <= loadSquared);
 	}
 	
-	private double distanceSquared(Location l1, Location l2) {
-		return square(l1.getX()-l2.getX()) + square(l1.getY()-l2.getY()) + square(l1.getZ()-l2.getZ());
+	private int distanceSquared(Location l1, Location l2) {
+		return (int) (square(l1.getX()-l2.getX()) + square(l1.getY()-l2.getY()) + square(l1.getZ()-l2.getZ()) + 0.5);
 	}
 	
-	private double square(double x) {
+	private static double square(double x) {
 		return x * x;
 	}
 	
