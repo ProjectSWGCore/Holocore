@@ -236,10 +236,8 @@ public class RelationalServerData extends RelationalDatabase {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} catch (NumberFormatException e) {
-			System.err.println("Invalid record in sdb. Aborting read of " + sdb + "!");
 		} catch (IllegalArgumentException e) {
-			System.err.println("Invalid file format. Aborting read of " + sdb + "!");
+			System.err.println("Invalid file format. Aborting read of " + sdb + "! Message: " + e.getMessage());
 		}
 		return false;
 	}
@@ -251,6 +249,7 @@ public class RelationalServerData extends RelationalDatabase {
 		String [] columnTypes = null;
 		PreparedStatement insert = null;
 		try {
+			int lineNum = 1;
 			while ((line = reader.readLine()) != null) {
 				String [] parts = line.split("\t");
 				if (columnNames == null)
@@ -259,14 +258,9 @@ public class RelationalServerData extends RelationalDatabase {
 					columnTypes = parts;
 					createTable(table, columnNames, columnTypes);
 					insert = prepareStatement(createPreparedStatement(table, columnNames.length));
-				} else {
-					try {
-						generateInsert(insert, columnTypes, parts);
-					} catch (NumberFormatException e) {
-						System.out.println("Failed At Line: " + line);
-						throw e;
-					}
-				}
+				} else
+					generateInsert(insert, columnTypes, parts, lineNum);
+				lineNum++;
 			}
 			if (insert != null)
 				insert.executeBatch();
@@ -301,20 +295,26 @@ public class RelationalServerData extends RelationalDatabase {
 		return sql.toString();
 	}
 	
-	private void generateInsert(PreparedStatement insert, String [] types, String [] data) throws SQLException {
-		if (types.length != data.length)
-			throw new IllegalArgumentException("Types length and Data length mismatch");
-		for (int i = 0; i < data.length; i++) {
-			if (types[i].startsWith("TEXT"))
-				insert.setString(i+1, data[i]);
-			else if (types[i].startsWith("REAL"))
-				insert.setDouble(i+1, Double.parseDouble(data[i]));
-			else if (types[i].startsWith("INTEGER"))
-				insert.setLong(i+1, Long.parseLong(data[i]));
-			else
-				throw new SQLException("Data type unsupported by sdb/sqlite! Type: " + types[i]);
+	private void generateInsert(PreparedStatement insert, String [] types, String [] data, int line) throws SQLException {
+		if (types.length != data.length) {
+			System.err.println("Could not load record: Types length and data length mismatch. Line: " + line);
+			return;
 		}
-		insert.addBatch();
+		try {
+			for (int i = 0; i < data.length; i++) {
+				if (types[i].startsWith("TEXT"))
+					insert.setString(i+1, data[i]);
+				else if (types[i].startsWith("REAL"))
+					insert.setDouble(i+1, Double.parseDouble(data[i]));
+				else if (types[i].startsWith("INTEGER"))
+					insert.setLong(i+1, Long.parseLong(data[i]));
+				else
+					throw new SQLException("Data type unsupported by sdb/sqlite! Type: " + types[i]);
+			}
+			insert.addBatch();
+		} catch (NumberFormatException e) {
+			System.err.println("Could not load record: Record has invalid data. Line: " + line);
+		}
 	}
 	
 }
