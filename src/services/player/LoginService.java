@@ -88,7 +88,6 @@ public class LoginService extends Service {
 	
 	private Random random;
 	private PreparedStatement getUser;
-	private PreparedStatement getUserInsensitive;
 	private PreparedStatement getGalaxies;
 	private PreparedStatement getCharacters;
 	private PreparedStatement deleteCharacter;
@@ -102,8 +101,7 @@ public class LoginService extends Service {
 	public boolean initialize() {
 		registerForIntent(DeleteCharacterIntent.TYPE);
 		RelationalDatabase local = getLocalDatabase();
-		getUser = local.prepareStatement("SELECT * FROM users WHERE username = ?");
-		getUserInsensitive = local.prepareStatement("SELECT * FROM users WHERE username ilike ?");
+		getUser = local.prepareStatement("SELECT * FROM users WHERE LOWER(username) = LOWER(?)");
 		getGalaxies = local.prepareStatement("SELECT * FROM galaxies");
 		getCharacters = local.prepareStatement("SELECT * FROM characters WHERE userid = ? AND galaxyid = ?");
 		deleteCharacter = local.prepareStatement("DELETE FROM characters WHERE id = ?");
@@ -202,7 +200,7 @@ public class LoginService extends Service {
 	}
 	
 	private void onSuccessfulLogin(ResultSet user, Player player, LoginClientId id) throws SQLException {
-		player.setUsername(id.getUsername());
+		player.setUsername(user.getString("username"));
 		player.setUserId(user.getInt("id"));
 		int tokenLength = getConfig(ConfigFile.NETWORK).getInt("SESSION-TOKEN-LENGTH", 24);
 		byte [] sessionToken = new byte[tokenLength];
@@ -236,14 +234,6 @@ public class LoginService extends Service {
 	private void onInvalidUserPass(Player player, LoginClientId id) {
 		String type = "Login Failed!";
 		String message = "Invalid username or password.";
-		try {
-			String similar = getSimilarUsername(id.getUsername());
-			if (similar != null && !similar.equals(id.getUsername()))
-				message += "\n\nDid you mean: '" + similar + "'?";
-		} catch (SQLException e) {
-			
-		}
-		message += "\n\nMake sure to login to forums first!";
 		sendPacket(player, new LoginIncorrectClientId(getServerString(), "3.14159265"));
 		sendPacket(player, new ErrorMessage(type, message, false));
 		System.err.println("[" + id.getUsername() + "] Invalid user/pass combo! IP: " + id.getAddress() + ":" + id.getPort());
@@ -259,22 +249,6 @@ public class LoginService extends Service {
 		player.setPlayerState(PlayerState.DISCONNECTED);
 		Log.e("LoginService", "%s cannot login due to server error, from %s:%d", id.getUsername(), id.getAddress(), id.getPort());
 		new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_FAIL_SERVER_ERROR).broadcast();
-	}
-	
-	private String getSimilarUsername(String user) throws SQLException {
-		ResultSet set = null;
-		try {
-			getUserInsensitive.setString(1, user);
-			set = getUserInsensitive.executeQuery();
-			String similar = null;
-			if (set.next())
-				similar = set.getString("username");
-			set.close();
-			return similar;
-		} finally {
-			if (set != null)
-				set.close();
-		}
 	}
 	
 	private void sendLoginSuccessPacket(Player p) throws SQLException {
