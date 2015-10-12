@@ -271,7 +271,7 @@ public class RelationalServerData extends RelationalDatabase {
 	
 	private void createTable(String table, String [] names, String [] types) {
 		if (names.length != types.length)
-			throw new IllegalArgumentException("Names length and Types length mismatch");
+			throw new IllegalArgumentException("Names length and types length mismatch");
 		StringBuilder sql = new StringBuilder("CREATE TABLE "+table+" (");
 		for (int i = 0; i < names.length; i++) {
 			if (i > 0)
