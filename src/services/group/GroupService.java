@@ -28,18 +28,25 @@
 package services.group;
 
 import intents.GroupEventIntent;
+import intents.NotifyPlayersPacketIntent;
 import intents.PlayerEventIntent;
+import intents.chat.ChatRoomUpdateIntent;
 import intents.object.ObjectCreateIntent;
 import intents.object.ObjectIdRequestIntent;
 import intents.object.ObjectIdResponseIntent;
 import network.packets.swg.zone.chat.ChatSystemMessage;
+import resources.chat.ChatAvatar;
 import resources.control.Intent;
 import resources.control.Service;
+import resources.encodables.OutOfBandPackage;
+import resources.encodables.ProsePackage;
+import resources.encodables.StringId;
 import resources.objects.creature.CreatureObject;
 import resources.objects.group.GroupObject;
 import resources.player.Player;
 import resources.server_info.Log;
 import services.objects.ObjectCreator;
+import services.player.PlayerManager;
 import utilities.IntentFactory;
 
 import java.util.ArrayList;
@@ -52,8 +59,8 @@ import java.util.Map;
  */
 public class GroupService extends Service {
 
-	private List<Long> reservedIds = new ArrayList<>();
-	private Map<Long, GroupObject> groups = new HashMap<>();
+	private final List<Long> reservedIds = new ArrayList<>();
+	private final Map<Long, GroupObject> groups = new HashMap<>();
 
 	@Override
 	public boolean initialize() {
@@ -97,7 +104,59 @@ public class GroupService extends Service {
 				handleGroupJoin(intent.getPlayer());
 				break;
 			case GROUP_DISBAND:
+				handleGroupDisband(intent.getPlayer(), intent.getTarget());
 				break;
+		}
+	}
+
+	private void handleGroupDisband(Player player, CreatureObject target) {
+		CreatureObject creo = player.getCreatureObject();
+
+		if (creo == null)
+			return;
+
+		GroupObject group = getGroup(creo.getGroupId());
+		if (group == null)
+			return;
+
+		if (group.getLeader() != creo.getObjectId()) {
+			sendSystemMessage(player, "must_be_leader");
+			return;
+		}
+
+		if (target == null) {
+			// Disband Group
+
+			String galaxy = player.getGalaxyName();
+			new ChatRoomUpdateIntent(getGroupChatPath(group.getObjectId(), galaxy), String.valueOf(group.getObjectId()), null,
+					ChatAvatar.getSystemAvatar(galaxy), null, ChatRoomUpdateIntent.UpdateType.DESTROY).broadcast();
+
+			Map<String, Long> members = group.getGroupMembers();
+			PlayerManager playerManager = player.getPlayerManager();
+
+			sendGroupSystemMessage(group, "disbanded");
+			for (String name : members.keySet()) {
+				Player memPlayer = playerManager.getPlayerByCreatureName(name);
+				if (memPlayer == null)
+					continue;
+
+				CreatureObject memCreo = memPlayer.getCreatureObject();
+				if (memCreo == null)
+					continue;
+
+				group.removeMember(memCreo);
+			}
+
+			// TODO: Send object destroy intent for object manager
+		} else {
+			// Disband player
+
+			group.removeMember(target);
+
+			sendGroupSystemMessage(group, "other_left_prose", "TU", target.getObjectId());
+			sendSystemMessage(target.getOwner(), "removed");
+
+			// TODO: Leave group chat room
 		}
 	}
 
@@ -113,7 +172,6 @@ public class GroupService extends Service {
 		long targetId = target.getObjectId();
 
 		if (groupId != 0) {
-			// TODO: Group leader check
 			GroupObject group = getGroup(groupId);
 
 			if (group.getLeader() != inviterId) {
@@ -132,12 +190,11 @@ public class GroupService extends Service {
 				else
 					sendSystemMessage(player, "considering_your_group");
 			}
-
 		} else {
 			sendSystemMessage(targetOwner, "invite_target", "TT", inviterId);
 			sendSystemMessage(player, "invite_leader", "TT", targetId);
 
-			target.updateGroupInviteData(player, groupId, player.getCharacterName());
+			target.updateGroupInviteData(player, -1, player.getCharacterName());
 		}
 	}
 
@@ -167,23 +224,24 @@ public class GroupService extends Service {
 		// Group doesn't exist yet
 		if (group == null) {
 
-			group = createGroup(invitation.getSender().getCreatureObject().getObjectId());
+			group = createGroup(sender);
 
 			if (group == null) {
-				Log.e("GroupService", "Failed to create group");
+				Log.e("GroupService", "Failed to create group from sender %s for %s", sender, player);
 				creo.updateGroupInviteData(null, 0, "");
 				return;
 			}
 
-			group.addMember(invitation.getSender().getCreatureObject());
-			group.awarenessInRange(invitation.getSender().getCreatureObject());
+			group.addMember(sender.getCreatureObject());
 
-			sendSystemMessage(invitation.getSender(), "formed_self");
+			sendSystemMessage(sender, "formed_self", "TT", sender.getCreatureObject().getObjectId());
+
+			// TODO: Join group chat room
 		} else {
 			// Group already exists
 
 			if (group.getLeader() != sender.getCreatureObject().getObjectId()) {
-				sendSystemMessage(player, "join_inviter_not_leader");
+				sendSystemMessage(player, "join_inviter_not_leader", sender.getCreatureObject().getObjectId());
 				creo.updateGroupInviteData(null, 0, "");
 				return;
 			}
@@ -194,34 +252,70 @@ public class GroupService extends Service {
 				return;
 			}
 		}
-
+		sendGroupSystemMessage(group, "other_joined_prose", "TU", creo.getObjectId());
 		group.addMember(creo);
 		sendSystemMessage(player, "joined_self");
 		creo.updateGroupInviteData(null, 0, "");
+		// TODO: Join group chat room
 	}
 
-	private GroupObject createGroup(long leader) {
+	private GroupObject createGroup(Player player) {
 		GroupObject group = (GroupObject) ObjectCreator.createObjectFromTemplate(getNextObjectId(), "object/group/shared_group_object.iff");
 		if (group == null)
 			return null;
 
-		group.setLeader(leader);
-		group.setLootMaster(leader);
+		group.setLeader(player.getCreatureObject());
 
 		groups.put(group.getObjectId(), group);
 
 		new ObjectCreateIntent(group, false).broadcast();
 
+		String galaxy = player.getGalaxyName();
+		new ChatRoomUpdateIntent(getGroupChatPath(group.getObjectId(), galaxy), String.valueOf(group.getObjectId()), null,
+				ChatAvatar.getSystemAvatar(galaxy), null, ChatRoomUpdateIntent.UpdateType.CREATE).broadcast();
+
 		return group;
 	}
 
 	private long getNextObjectId() {
-		if (reservedIds.size() <= 5)
-			new ObjectIdRequestIntent("GroupService", 50).broadcast();
+		synchronized (reservedIds) {
+			if (reservedIds.size() <= 5)
+				new ObjectIdRequestIntent("GroupService", 50).broadcast();
 
-		return reservedIds.remove(0);
+			return reservedIds.remove(0);
+		}
 	}
 
+	private void sendGroupSystemMessage(GroupObject group, String id) {
+		Map<String, Long> members = group.getGroupMembers();
+
+		List<Long> ids = new ArrayList<>(members.values());
+
+		new NotifyPlayersPacketIntent(new ChatSystemMessage(ChatSystemMessage.SystemChatType.SCREEN_AND_CHAT, "@group:" + id), ids).broadcast();
+	}
+
+	private void sendGroupSystemMessage(GroupObject group, String id, Object ... objects) {
+		Map<String, Long> members = group.getGroupMembers();
+
+		List<Long> ids = new ArrayList<>(members.values());
+
+		if (objects.length % 2 != 0)
+			Log.e("ProsePackage", "Sent a ProsePackage chat message with an uneven number of object arguments for StringId %s", "@group:" + id);
+		Object [] prose = new Object[objects.length + 2];
+		prose[0] = "StringId";
+		prose[1] = new StringId("@group:" + id);
+		System.arraycopy(objects, 0, prose, 2, objects.length);
+
+		new NotifyPlayersPacketIntent(
+				new ChatSystemMessage(ChatSystemMessage.SystemChatType.SCREEN_AND_CHAT,
+						new OutOfBandPackage(new ProsePackage(prose))), ids).broadcast();
+	}
+
+	private String getGroupChatPath(long groupId, String galaxy) {
+		// SWG.serverName.group.GroupObjectId.GroupChat || title = groupid
+		String groupIdString = String.valueOf(groupId);
+		return "SWG." + galaxy + ".group." + groupIdString + ".GroupChat";
+	}
 	private GroupObject getGroup(long groupId) {
 		return groups.get(groupId);
 	}
@@ -231,7 +325,6 @@ public class GroupService extends Service {
 	}
 
 	private void sendSystemMessage(Player target, String id, Object ... objects) {
-		target.sendPacket(new ChatSystemMessage(ChatSystemMessage.SystemChatType.SCREEN_AND_CHAT, "DEBUG: " + id));
 		IntentFactory.sendSystemMessage(target, "@group:" + id, objects);
 	}
 }
