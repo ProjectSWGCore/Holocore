@@ -100,7 +100,6 @@ public class CommandService extends Service {
 		}
 		
 		Command command = getCommand(request.getCommandCrc());
-		System.out.println(command + "\t\t\tscriptHook: " + command.getScriptHook() + "\t\t:cppHook " + command.getDefaultScriptCallback());
 		String [] arguments = request.getArguments().split(" ");
 		SWGObject target = null;
 		if (request.getTargetId() != 0) {
