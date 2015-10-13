@@ -27,7 +27,6 @@
 
 package resources.objects.group;
 
-import intents.NotifyPlayersPacketIntent;
 import network.packets.Packet;
 import network.packets.swg.zone.baselines.Baseline;
 import resources.collections.SWGList;
@@ -40,10 +39,7 @@ import utilities.Encoder;
 
 import java.io.Serializable;
 import java.nio.ByteBuffer;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class GroupObject extends SWGObject { // Extends INTO or TANO?
@@ -166,6 +162,8 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 	}
 
 	private static class PickupPointTimer implements Serializable, Encodable {
+		private static final long serialVersionUID = 1L;
+
 		public int start;
 		public int end;
 
@@ -186,6 +184,8 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 	}
 
 	private static class GroupMember implements Serializable, Encodable {
+		private static final long serialVersionUID = 1L;
+
 		private long id;
 		private String name;
 

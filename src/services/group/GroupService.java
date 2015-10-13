@@ -124,33 +124,11 @@ public class GroupService extends Service {
 			return;
 		}
 
+		// Disband Group
 		if (target == null) {
-			// Disband Group
-
-			String galaxy = player.getGalaxyName();
-			new ChatRoomUpdateIntent(getGroupChatPath(group.getObjectId(), galaxy), String.valueOf(group.getObjectId()), null,
-					ChatAvatar.getSystemAvatar(galaxy), null, ChatRoomUpdateIntent.UpdateType.DESTROY).broadcast();
-
-			Map<String, Long> members = group.getGroupMembers();
-			PlayerManager playerManager = player.getPlayerManager();
-
-			sendGroupSystemMessage(group, "disbanded");
-			for (String name : members.keySet()) {
-				Player memPlayer = playerManager.getPlayerByCreatureName(name);
-				if (memPlayer == null)
-					continue;
-
-				CreatureObject memCreo = memPlayer.getCreatureObject();
-				if (memCreo == null)
-					continue;
-
-				group.removeMember(memCreo);
-			}
-
-			// TODO: Send object destroy intent for object manager
+			destroyGroup(group, player);
 		} else {
-			// Disband player
-
+			// Kick player
 			group.removeMember(target);
 
 			sendGroupSystemMessage(group, "other_left_prose", "TU", target.getObjectId());
@@ -259,6 +237,31 @@ public class GroupService extends Service {
 		// TODO: Join group chat room
 	}
 
+	private void destroyGroup(GroupObject group, Player player) {
+		String galaxy = player.getGalaxyName();
+		new ChatRoomUpdateIntent(getGroupChatPath(group.getObjectId(), galaxy), String.valueOf(group.getObjectId()), null,
+				ChatAvatar.getSystemAvatar(galaxy), null, ChatRoomUpdateIntent.UpdateType.DESTROY).broadcast();
+
+		Map<String, Long> members = group.getGroupMembers();
+		PlayerManager playerManager = player.getPlayerManager();
+
+		sendGroupSystemMessage(group, "disbanded");
+
+		for (String name : members.keySet()) {
+			Player memPlayer = playerManager.getPlayerByCreatureName(name);
+			if (memPlayer == null)
+				continue;
+
+			CreatureObject memCreo = memPlayer.getCreatureObject();
+			if (memCreo == null)
+				continue;
+
+			group.removeMember(memCreo);
+		}
+
+		// TODO: Object destroy intent
+	}
+
 	private GroupObject createGroup(Player player) {
 		GroupObject group = (GroupObject) ObjectCreator.createObjectFromTemplate(getNextObjectId(), "object/group/shared_group_object.iff");
 		if (group == null)
@@ -268,7 +271,7 @@ public class GroupService extends Service {
 
 		groups.put(group.getObjectId(), group);
 
-		new ObjectCreateIntent(group, false).broadcast();
+		new ObjectCreateIntent(group).broadcast();
 
 		String galaxy = player.getGalaxyName();
 		new ChatRoomUpdateIntent(getGroupChatPath(group.getObjectId(), galaxy), String.valueOf(group.getObjectId()), null,
