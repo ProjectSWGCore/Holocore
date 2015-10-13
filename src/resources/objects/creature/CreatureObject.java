@@ -45,6 +45,7 @@ import resources.objects.tangible.OptionFlag;
 import resources.objects.tangible.TangibleObject;
 import resources.objects.weapon.WeaponObject;
 import resources.player.Player;
+import services.group.GroupInviterData;
 import utilities.Encoder.StringType;
 
 public class CreatureObject extends TangibleObject {
@@ -89,6 +90,7 @@ public class CreatureObject extends TangibleObject {
 	private boolean shownOnRadar			= true;
 	private boolean beast					= false;
 	private long 	groupId					= 0;
+	private GroupInviterData inviterData	= new GroupInviterData(0, null, "", 0);
 	private byte 	factionRank				= 0;
 	private long 	ownerId					= 0;
 	private int 	battleFatigue			= 0;
@@ -521,6 +523,19 @@ public class CreatureObject extends TangibleObject {
 		return groupId;
 	}
 
+	public void updateGroupInviteData(Player sender, long groupId, String name) {
+		inviterData.setName(name);
+		inviterData.setSender(sender);
+		inviterData.setId(groupId);
+		inviterData.incrementCounter();
+
+		sendDelta(6, 14, inviterData);
+	}
+
+	public GroupInviterData getInviterData() {
+		return inviterData;
+	}
+
 	public void setGroupId(long groupId) {
 		this.groupId = groupId;
 		sendDelta(6, 13, groupId);
@@ -807,9 +822,7 @@ public class CreatureObject extends TangibleObject {
 		bb.addAscii(moodAnimation); // 11
 		bb.addLong(equippedWeaponId); // 12
 		bb.addLong(groupId); // 13
-		bb.addLong(0); // Group Inviter ID -- 14
-			bb.addAscii(""); // Group Inviter Name
-			bb.addLong(0); // Invite counter
+		bb.addObject(inviterData); // TODO: Check structure -- 14
 		bb.addInt(guildId); // 15
 		bb.addLong(lookAtTargetId); // 16
 		bb.addLong(intendedTargetId); // 17

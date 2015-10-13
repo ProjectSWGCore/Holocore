@@ -13,6 +13,7 @@ import resources.player.Player;
 import intents.chat.ChatBroadcastIntent;
 import intents.chat.ChatBroadcastIntent.BroadcastType;
 import intents.chat.PersistentMessageIntent;
+import resources.server_info.Log;
 import resources.sui.SuiWindow;
 
 /**
@@ -76,7 +77,9 @@ public final class IntentFactory {
 	 *                set the %DI to the value of 500 for the StringId.
 	 *                Note that the prose key must always come first and the value for that key must always come second.
 	 */
-	public void sendSystemMessage(Player target, String stf, Object ... objects) {
+	public static void sendSystemMessage(Player target, String stf, Object ... objects) {
+		if (objects.length % 2 != 0)
+			Log.e("ProsePackage", "Sent a ProsePackage chat message with an uneven number of object arguments for StringId %s", stf);
 		Object [] prose = new Object[objects.length + 2];
 		prose[0] = "StringId";
 		prose[1] = new StringId(stf);
