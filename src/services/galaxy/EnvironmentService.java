@@ -35,6 +35,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import network.packets.swg.SWGPacket;
+import network.packets.swg.zone.ServerTimeMessage;
 import network.packets.swg.zone.ServerWeatherMessage;
 import intents.NotifyPlayersPacketIntent;
 import intents.PlayerEventIntent;
@@ -46,19 +47,19 @@ import resources.player.Player;
 import resources.player.PlayerEvent;
 import utilities.ThreadUtilities;
 
-public final class WeatherService extends Service {
+public final class EnvironmentService extends Service {
 	
 	private final long cycleDuration;
 	private final Terrain[] terrains;
-	private final ScheduledExecutorService executor;
 	private final WeatherType[] weatherTypes;
 	private final Map<Terrain, WeatherType> weatherForTerrain;
 	private final Random random;
+
+	private ScheduledExecutorService executor;
 	
-	public WeatherService() {
+	public EnvironmentService() {
 		cycleDuration = 600;	// Ziggy: 10 minutes, 600 seconds
 		terrains = Terrain.values();
-		executor = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("weather-service"));
 		weatherForTerrain = new HashMap<>();
 		weatherTypes = WeatherType.values();
 		random = new Random();
@@ -66,18 +67,21 @@ public final class WeatherService extends Service {
 	
 	@Override
 	public boolean initialize() {
-		for(Terrain t : terrains) {
+		executor = Executors.newScheduledThreadPool(2, ThreadUtilities.newThreadFactory("environment-service"));
+		for (Terrain t : terrains) {
 			weatherForTerrain.put(t, randomWeather());
-			
-			executor.scheduleAtFixedRate(
-					new WeatherChanger(t), 0, 
-					cycleDuration, TimeUnit.SECONDS);
-			
+			executor.scheduleAtFixedRate(new WeatherChanger(t), 0, cycleDuration, TimeUnit.SECONDS);
 		}
+		executor.scheduleAtFixedRate(() -> { updateTime(); }, 0, 5, TimeUnit.SECONDS);
 		
 		registerForIntent(PlayerEventIntent.TYPE);
 		
 		return super.initialize();
+	}
+	
+	@Override
+	public boolean start() {
+		return super.start();
 	}
 	
 	@Override
@@ -91,14 +95,19 @@ public final class WeatherService extends Service {
 				}
 	}
 	
-	private final void handleZoneIn(PlayerEventIntent pei) {
+	private void handleZoneIn(PlayerEventIntent pei) {
 		Player p = pei.getPlayer();
 		Terrain t = p.getCreatureObject().getTerrain();
 		
 		p.sendPacket(constructWeatherPacket(t));
 	}
 	
-	private final void setWeather(Terrain terrain, WeatherType type) {
+	private void updateTime() {
+		ServerTimeMessage stm = new ServerTimeMessage((long) (System.currentTimeMillis() / 1E3));
+		new NotifyPlayersPacketIntent(stm, null, (player) -> { return true; /* ALL THE ABOVE! */}, null).broadcast();
+	}
+	
+	private void setWeather(Terrain terrain, WeatherType type) {
 		SWGPacket swm;
 		
 		// Ziggy: Prevent packets containing the same weather from being sent

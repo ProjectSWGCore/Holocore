@@ -38,7 +38,7 @@ public class GameManager extends Manager {
 	private final CommandService commandService;
 	private final ConnectionService connectionService;
 	private final SuiService suiService;
-	private final WeatherService weatherService;
+	private final EnvironmentService weatherService;
 	private final TerminalService terminalManager;
 	private final FactionService factionService;
 	
@@ -46,7 +46,7 @@ public class GameManager extends Manager {
 		commandService = new CommandService();
 		connectionService = new ConnectionService();
 		suiService = new SuiService();
-		weatherService = new WeatherService();
+		weatherService = new EnvironmentService();
 		terminalManager = new TerminalService();
 		factionService = new FactionService();
 
