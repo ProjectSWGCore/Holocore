@@ -180,9 +180,9 @@ public class LoginService extends Service {
 				else if (user.getBoolean("banned"))
 					onLoginBanned(player, id);
 				else
-					onInvalidUserPass(player, id);
+					onInvalidUserPass(player, id, user);
 			} else
-				onInvalidUserPass(player, id);
+				onInvalidUserPass(player, id, null);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			onLoginServerError(player, id);
@@ -231,9 +231,9 @@ public class LoginService extends Service {
 		new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_FAIL_BANNED).broadcast();
 	}
 	
-	private void onInvalidUserPass(Player player, LoginClientId id) {
+	private void onInvalidUserPass(Player player, LoginClientId id, ResultSet set) throws SQLException {
 		String type = "Login Failed!";
-		String message = "Invalid username or password.";
+		String message = getUserPassError(set, id.getUsername(), id.getPassword());
 		sendPacket(player, new LoginIncorrectClientId(getServerString(), "3.14159265"));
 		sendPacket(player, new ErrorMessage(type, message, false));
 		System.err.println("[" + id.getUsername() + "] Invalid user/pass combo! IP: " + id.getAddress() + ":" + id.getPort());
@@ -288,6 +288,24 @@ public class LoginService extends Service {
 	private ResultSet getUser(String username) throws SQLException {
 		getUser.setString(1, username);
 		return getUser.executeQuery();
+	}
+	
+	private String getUserPassError(ResultSet set, String username, String password) throws SQLException {
+		if (set == null)
+			return "No username found";
+		if (password.isEmpty())
+			return "No password specified!";
+		String psqlPass = set.getString("password");
+		String psqlSalt = set.getString("password_salt");
+		if (psqlPass.length() != 32 && psqlSalt.length() == 0) {
+			if (psqlPass.equals(password))
+				return "Server Error.\n\nPassword appears to be correct. [Plaintext]";
+			return "Invalid password";
+		}
+		password = MD5.digest(MD5.digest(psqlSalt) + MD5.digest(password));
+		if (psqlPass.equals(password))
+			return "Server Error.\n\nPassword appears to be correct. [Hashed]";
+		return "Invalid password";
 	}
 	
 	public ResultSet getCharacter(String character) throws SQLException {
