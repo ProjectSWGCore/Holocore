@@ -27,6 +27,9 @@
 ***********************************************************************************/
 package resources.objects.creature;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+
 import network.packets.swg.zone.UpdatePostureMessage;
 import network.packets.swg.zone.UpdatePvpStatusMessage;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
@@ -52,6 +55,7 @@ public class CreatureObject extends TangibleObject {
 	
 	private static final long serialVersionUID = 1L;
 	
+	private transient GroupInviterData inviterData = new GroupInviterData(0, null, "", 0);
 	private transient long lastReserveOperation	= 0;
 	
 	private Posture	posture					= Posture.UPRIGHT;
@@ -90,7 +94,6 @@ public class CreatureObject extends TangibleObject {
 	private boolean shownOnRadar			= true;
 	private boolean beast					= false;
 	private long 	groupId					= 0;
-	private GroupInviterData inviterData	= new GroupInviterData(0, null, "", 0);
 	private byte 	factionRank				= 0;
 	private long 	ownerId					= 0;
 	private int 	battleFatigue			= 0;
@@ -118,6 +121,11 @@ public class CreatureObject extends TangibleObject {
 		initCurrentAttributes();
 		initBaseAttributes();
 		setOptionFlags(OptionFlag.HAM_BAR);
+	}
+
+	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
+		ois.defaultReadObject();
+		inviterData = new GroupInviterData(0, null, "", 0);
 	}
 
 	public void removeEquipment(SWGObject obj) {

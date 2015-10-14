@@ -37,6 +37,8 @@ import resources.objects.creature.CreatureObject;
 import resources.player.Player;
 import utilities.Encoder;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.util.HashMap;
@@ -55,6 +57,12 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 
 	public GroupObject(long objectId) {
 		super(objectId, Baseline.BaselineType.GRUP);
+		pickupPointTimer = new PickupPointTimer();
+	}
+
+	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
+		ois.defaultReadObject();
+		pickupPointTimer = new PickupPointTimer();
 	}
 
 	@Override
@@ -176,10 +184,6 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 		public void decode(ByteBuffer data) {
 			start = Packet.getInt(data);
 			end = Packet.getInt(data);
-		}
-
-		public int decrement() {
-			return --end;
 		}
 	}
 
