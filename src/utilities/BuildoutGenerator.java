@@ -28,6 +28,7 @@ public class BuildoutGenerator {
 	private static final String strType = "TEXT NOT NULL";
 	
 	private final List<GenBuildoutArea> areas;
+	private final List<GenBuildoutArea> fallbackAreas;
 	
 	public static void main(String [] args) throws IOException {
 		BuildoutGenerator gen = new BuildoutGenerator();
@@ -36,6 +37,12 @@ public class BuildoutGenerator {
 	
 	public BuildoutGenerator() {
 		areas = new ArrayList<>();
+		fallbackAreas = new ArrayList<>(Terrain.values().length);
+		int areaId = -1;
+		for (Terrain t : Terrain.values()) {
+			fallbackAreas.add(new GenBuildoutArea(null, t, -8196, -8196, 8196, 8196, areaId, false));
+			areaId--;
+		}
 	}
 	
 	public void createBuildoutSdb(File areaFile, File objectFile) throws IOException {
@@ -73,6 +80,8 @@ public class BuildoutGenerator {
 			GenBuildoutArea area = getAreaForObject(snap);
 			if (area != null)
 				snap.setBuildoutAreaId(area.id);
+			else
+				System.err.println("No area for: " + snap.getObjectId() + " / " + snap.getTerrain());
 		}
 		objects.addAll(snapshots);
 		long buildoutId = 1;
@@ -100,6 +109,10 @@ public class BuildoutGenerator {
 			getArea(t, sceneRow, (Boolean) table.getCell(sceneRow, 1));
 		}
 		Collections.sort(areas);
+		for (int i = fallbackAreas.size()-1; i >= 0; i--) {
+			GenBuildoutArea fallback = fallbackAreas.get(i);
+			gen.writeLine(fallback.id, fallback.terrain.getName(), fallback.terrain.getName() + "_global", "", -8196, -8196, 8196, 8196, "0");
+		}
 		for (int i = 0; i < areas.size(); i++) {
 			GenBuildoutArea area = areas.get(i);
 			writeArea(gen, area, null);
@@ -160,8 +173,13 @@ public class BuildoutGenerator {
 				return -1;
 			return Integer.compare(area1.getSorting(), area2.getSorting());
 		});
-		if (ind < 0)
+		if (ind < 0) {
+			for (GenBuildoutArea fallback : fallbackAreas) {
+				if (fallback.terrain == obj.getTerrain())
+					return fallback;
+			}
 			return null;
+		}
 		return areas.get(ind);
 	}
 	
