@@ -43,7 +43,6 @@ import intents.object.ObjectIdResponseIntent;
 import intents.object.ObjectTeleportIntent;
 import intents.player.DeleteCharacterIntent;
 import intents.player.PlayerTransformedIntent;
-import intents.PlayerEventIntent;
 import intents.RequestZoneInIntent;
 import intents.network.GalacticPacketIntent;
 import network.packets.Packet;
@@ -106,7 +105,6 @@ public class ObjectManager extends Manager {
 	@Override
 	public boolean initialize() {
 		registerForIntent(GalacticPacketIntent.TYPE);
-		registerForIntent(PlayerEventIntent.TYPE);
 		registerForIntent(ObjectTeleportIntent.TYPE);
 		registerForIntent(ObjectIdRequestIntent.TYPE);
 		registerForIntent(ObjectCreateIntent.TYPE);
@@ -210,28 +208,6 @@ public class ObjectManager extends Manager {
 	public void onIntentReceived(Intent i) {
 		if (i instanceof GalacticPacketIntent) {
 			processGalacticPacketIntent((GalacticPacketIntent) i);
-		} else if (i instanceof PlayerEventIntent) {
-			Player p = ((PlayerEventIntent)i).getPlayer();
-			switch (((PlayerEventIntent)i).getEvent()) {
-				case PE_DISAPPEAR:
-					if (p.getCreatureObject() == null)
-						break;
-					p.getCreatureObject().clearAware();
-					for (SWGObject obj : p.getCreatureObject().getObservers())
-						p.getCreatureObject().destroyObject(obj.getOwner());
-					p.getCreatureObject().setOwner(null);
-					p.setCreatureObject(null);
-					break;
-				case PE_FIRST_ZONE:
-					if (p.getCreatureObject().getParent() == null)
-						p.getCreatureObject().createObject(p);
-					break;
-				case PE_ZONE_IN:
-					p.getCreatureObject().clearAware();
-					break;
-				default:
-					break;
-			}
 		} else if (i instanceof ObjectIdRequestIntent) {
 			processObjectIdRequestIntent((ObjectIdRequestIntent) i);
 		} else if (i instanceof ObjectCreateIntent) {

@@ -160,9 +160,9 @@ public class ObjectAwareness extends Service {
 	}
 	
 	private void startScene(CreatureObject object, Location newLocation) {
-		long time = (long)(ProjectSWG.getCoreTime()/1E3);
+		long time = (long) (ProjectSWG.getCoreTime() / 1E3);
 		Race race = ((CreatureObject)object).getRace();
-		sendPacket(object.getOwner(), new CmdStartScene(false, object.getObjectId(), race, newLocation, time));
+		sendPacket(object.getOwner(), new CmdStartScene(false, object.getObjectId(), race, newLocation, time, (int)(System.currentTimeMillis()/1E3)));
 		new PlayerEventIntent(object.getOwner(), PlayerEvent.PE_ZONE_IN).broadcast();
 	}
 	
