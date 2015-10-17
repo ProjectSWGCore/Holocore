@@ -57,7 +57,7 @@ public class AttributeListMessage extends SWGPacket {
 		if (!super.decode(data, CRC))
 			return;
 		objectId = getLong(data);
-		getShort(data);
+		getAscii(data); // static item name
 		int count = getInt(data);
 		for (int i = 0; i < count; i++) {
 			String name = getAscii(data);
