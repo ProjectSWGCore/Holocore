@@ -8,6 +8,7 @@ import intents.radial.RadialSelectionIntent;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -79,7 +80,8 @@ public class TerminalService extends Service {
 					String script = lookupScript(rri.getTarget().getTemplate());
 					if (script == null)
 						return;
-					List<RadialOption> options = Radials.getRadialOptions(script, rri.getPlayer(), rri.getTarget());
+					List<RadialOption> options = new ArrayList<RadialOption>(rri.getRequest().getOptions());
+					options.addAll(Radials.getRadialOptions(script, rri.getPlayer(), rri.getTarget()));
 					new RadialResponseIntent(rri.getPlayer(), rri.getTarget(), options, rri.getRequest().getCounter()).broadcast();
 				}
 				break;
