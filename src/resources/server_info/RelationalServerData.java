@@ -251,7 +251,7 @@ public class RelationalServerData extends RelationalDatabase {
 		try {
 			int lineNum = 1;
 			while ((line = reader.readLine()) != null) {
-				String [] parts = line.split("\t");
+				String [] parts = line.split("\t", -1);
 				if (columnNames == null)
 					columnNames = parts;
 				else if (columnTypes == null) {

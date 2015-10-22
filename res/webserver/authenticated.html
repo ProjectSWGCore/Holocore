@@ -1,91 +1,68 @@
-<html>
-	<head>
-		<title>Game Server Diagnostics</title>
-		<style type="text/css">
-			body {
-				background-color: #FFFFFF;
-			}
-			.main_container {
-				width: 75%;
-				color: #000000;
-				margin: 0 auto;
-			}
-			.memory_container {
-				width: 50%;
-				max-width: 50%;
-				height: 300px;
-				float: left;
-				color: #000000;
-				display: inline-block;
-			}
-			.log_container {
-				width: 100%;
-				color: #000000;
-				font-family: 'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;
-				font-size: 13px;
-				overflow: visible;
-			}
-			.server_info {
-				width: 50%;
-				max-width: 50%;
-				height: 300px;
-				float: right;
-				display: inline-block;
-				font-family: 'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;
-				font-size: 13px;
-				overflow-x: hidden;
-				overflow-y: scroll;
-			}
-			.online_players_table {
-				width: 100%;
-			}
-			.online_player_cell {
-				border: 1px solid black;
-				padding-left: 3px;
-			}
-		</style>
-		<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-		<script>
-			getUrlParameter = function getUrlParameter(sParam) {
-				var sPageURL = decodeURIComponent(window.location.search.substring(1)), sURLVariables = sPageURL.split('&'), sParameterName, i;
-				for (i = 0; i < sURLVariables.length; i++) {
-					sParameterName = sURLVariables[i].split('=');
-					if (sParameterName[0] === sParam) {
-						return sParameterName[1] === undefined ? true : sParameterName[1];
-					}
-				}
-				return undefined;
-			};
-			function updateServerInfo() {
-//				d = new Date();
-//				$("#memory_usage").attr("src", "memory_usage.png?"+d.getTime());
-//				$("#server_info").attr("src", $("#server_info").attr("src"));
-				location.reload(true);
-			}
-			$(document).ready(function() {
-				var time = getUrlParameter("refresh");
-				if (time === undefined)
-					time = 3000;
-				setInterval(updateServerInfo, time);
-			});
-		</script>
-	</head>
-	<body>
-		<div class="main_container">
-			<div width="100%" height="300px">
-				<div class="memory_container">
-					Resource Usage:<br />
-					<image id="memory_usage" src="memory_usage.png" width="100%" />
-				</div>
-				<div class="server_info">
-					${ONLINE_PLAYERS}
-					<br />
-					${CHARACTER_INFO}
-				</div>
-			</div>
-			<div class="log_container">
-				${LOG}
-			</div>
-		</div>
-	</body>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>ProjectSWG Server Management Interface</title>
+        <link href="css/style.css" rel="stylesheet" type="text/css" />
+        <link href="css/auth.css" rel="stylesheet" type="text/css" />
+        <link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script type="text/javascript">
+            
+    $(document).ready(
+        function () {
+            setInterval(function () {
+                var newDate = new Date();
+                var datetime = newDate.getTime();
+                $('#resource_img').html('<img src="memory_usage.png?currenttime?' + datetime + '" style="width:624px;height:225px;" alt="memory_usage" />');
+                $('#online_players_count').load('playercount.html');
+		$('#online_players').load('online.html');
+                $('#character_info').load('charinfo.html');
+              	$('#log_container').load('log.html');
+        },3000);
+   
+ });
+        </script>
+    </head>
+    <body>
+    <div class="header"><div class="logo_small"></div></div>
+        <div class="wrapper">
+        
+            <div class="content_wrapper">
+                
+                <div class="stats_wrapper">
+                    <div id="memory_container" class="memory_container">
+                        <div class="resoure_label">
+                            Resource Usage
+                        </div>
+                        <div id="resource_img" class="resource_img">
+                            <img src="memory_usage.png" style="width:624px;height:225px;" alt="memory_usage" />
+                        </div>
+                    </div>
+                    <div class="dist">&nbsp;</div>
+                    <div class="server_info">
+                        <div id="online_players_count" class="online_players_count">
+                            ${ONLINE_PLAYER_COUNT}
+                        </div>                        
+                        <div id="online_players" class="online_players">
+                            ${ONLINE_PLAYERS}
+                        </div>
+                        <div class="character_info">
+                            ${CHARACTER_INFO}
+                        </div>
+                    </div>
+                </div>
+                <div style="clear:both;"></div>
+                <div class="main_log">
+                    <div class="log_label">Server Log</div>
+                    <div style="clear:both;"></div>
+                    <div id="log_container" class="log_container">
+                        ${LOG}                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
 </html>
