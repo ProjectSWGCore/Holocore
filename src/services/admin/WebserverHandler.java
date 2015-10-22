@@ -270,8 +270,7 @@ class WebserverHandler {
 	
 	private String getOnlinePlayerCount() {
 		Set<Player> players = data.getOnlinePlayers();
-		StringBuilder ret = new StringBuilder("Online Players: ["+players.size()+"]<br />");
-		return ret.toString();
+		return ("Online Players: ["+players.size()+"]<br />");
 	}
 	
 	private String getOnlinePlayerData() {
