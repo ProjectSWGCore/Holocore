@@ -270,7 +270,7 @@ class WebserverHandler {
 	
 	private String getOnlinePlayerCount() {
 		Set<Player> players = data.getOnlinePlayers();
-		return ("Online Players: ["+players.size()+"]<br />");
+		return ("Online Players: ["+players.size()+"]");
 	}
 	
 	private String getOnlinePlayerData() {
