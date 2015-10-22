@@ -248,6 +248,9 @@ class WebserverHandler {
 		switch (var) {
 			case "log":
 				return data.getLog().replace("\n", "\n<br />");
+			case "online_player_count": {
+				return getOnlinePlayerCount();
+			}			
 			case "online_players": {
 				return getOnlinePlayerData();
 			}
@@ -266,11 +269,14 @@ class WebserverHandler {
 				return "";
 		}
 	}
-	
-	private String getOnlinePlayerData() {
+	private String getOnlinePlayerCount(){
 		Set<Player> players = data.getOnlinePlayers();
 		StringBuilder ret = new StringBuilder("Online Players: ["+players.size()+"]<br />");
-		ret.append("<table class=\"online_players_table\"><tr><th>Username</th><th>User ID</th><th>Character</th><th>Character ID</th></tr>");
+		return ret.toString();
+	}
+	private String getOnlinePlayerData() {
+		Set<Player> players = data.getOnlinePlayers();
+		StringBuilder ret = new StringBuilder("<table class=\"online_players_table\"><tr><th>Username</th><th>User ID</th><th>Character</th><th>Character ID</th></tr>");
 		for (Player p : players) {
 			ret.append("<tr>");
 			long id = p.getCreatureObject().getObjectId();
