@@ -500,8 +500,9 @@ public class TravelService extends Service {
 			Location shuttleLocation = object.getLocation();
 			TravelPoint pointForShuttle = nearestTravelPoint(shuttleLocation);
 			
-			// Assign the shuttle to the nearest travel point
-			pointForShuttle.setShuttle(object);
+			if(pointForShuttle != null)
+				// Assign the shuttle to the nearest travel point
+				pointForShuttle.setShuttle(object);
 		}
 	}
 	
@@ -554,6 +555,9 @@ public class TravelService extends Service {
 		double currentResultDistance = Double.MAX_VALUE;
 		double candidateDistance;
 		Collection<TravelPoint> pointsForPlanet = pointsOnPlanet.get(objectLocation.getTerrain());
+		
+		if(pointsForPlanet == null)
+			return null;
 		
 		for(TravelPoint candidate : pointsForPlanet) {
 			if(currentResult == null) { // Will occur upon the first iteration.
