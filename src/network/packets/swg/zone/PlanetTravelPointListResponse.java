@@ -46,7 +46,6 @@ public class PlanetTravelPointListResponse extends SWGPacket {
 		
 		addInt(data, additionalCosts.size()); // List size
 		for(int additionalCost : additionalCosts) { // additional costs
-			System.out.println(additionalCost <= 0 ? additionalCost + 50 : additionalCost);
 			addInt(data, additionalCost <= 0 ? additionalCost + 50 : additionalCost / 2);
 		}
 		
