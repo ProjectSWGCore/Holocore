@@ -683,17 +683,18 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	}
 	
 	private boolean isValidPlayer(Player player) {
-		if (player == null || player == getOwner())
-			return false;
-		if (getOwner() == null)
-			return false;
-		if (player.equals(getOwner()))
+		Player owner = getOwner();
+		if (player == null || player == owner)
 			return false;
 		if (player.getCreatureObject() == null)
 			return false;
 		if (player.getCreatureObject().getPlayerObject() == null)
 			return false;
-		SWGObject creature = getOwner().getCreatureObject();
+		if (player.equals(owner))
+			return false;
+		if (owner == null)
+			return false;
+		SWGObject creature = owner.getCreatureObject();
 		if (creature == null)
 			return false;
 		if (player.getCreatureObject().equals(creature))
