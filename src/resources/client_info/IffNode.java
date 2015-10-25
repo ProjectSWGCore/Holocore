@@ -30,6 +30,7 @@ import java.nio.BufferUnderflowException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -50,16 +51,16 @@ public class IffNode {
 	private Iterator<IffNode> childrenItr;
 
 	public IffNode() {
+		children = new LinkedList<>();
 	}
 
 	public IffNode(String tag, boolean isForm) {
+		this();
 		this.tag = tag;
 		this.isForm = isForm;
 	}
 
 	public void addChild(IffNode child) {
-		if (children == null)
-			children = new LinkedList<>();
 		children.add(child);
 	}
 
@@ -261,8 +262,7 @@ public class IffNode {
 			read += child.populateFromBuffer(bb);
 			addChild(child);
 		}
-		if (children != null)
-			childrenItr = children.listIterator();
+		childrenItr = children.listIterator();
 
 		return 4 + size;
 	}
@@ -292,7 +292,7 @@ public class IffNode {
 	private String getTag(ByteBuffer bb) {
 		byte[] tagBytes = new byte[4];
 		bb.get(tagBytes);
-		return new String(tagBytes);
+		return new String(tagBytes, StandardCharsets.UTF_8);
 	}
 
 	@Override

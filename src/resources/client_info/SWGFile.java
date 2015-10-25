@@ -33,11 +33,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Created by Waverunner on 6/4/2015
  */
 public class SWGFile {
+
 	private String type;
 	private IffNode master;
 	private IffNode currentForm;
@@ -57,9 +59,9 @@ public class SWGFile {
 	}
 
 	public void save(File file) throws IOException {
-		FileOutputStream outputStream = new FileOutputStream(file, false);
-		outputStream.write(getData());
-		outputStream.close();
+		try (FileOutputStream outputStream = new FileOutputStream(file, false)) {
+			outputStream.write(getData());
+		}
 	}
 
 	public void read(File file) throws IOException {
@@ -101,7 +103,7 @@ public class SWGFile {
 
 		byte[] tag = new byte[4];
 		buffer.get(tag);
-		String root = new String(tag);
+		String root = new String(tag, StandardCharsets.UTF_8);
 		if (!root.equals("FORM"))
 			return false;
 

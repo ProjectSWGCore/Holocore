@@ -204,5 +204,10 @@ public class WorldSnapshotData extends ClientData {
 		public boolean equals(Object o) {
 			return o instanceof Node && id == ((Node) o).getId();
 		}
+		
+		@Override
+		public int hashCode() {
+			return id;
+		}
 	}
 }

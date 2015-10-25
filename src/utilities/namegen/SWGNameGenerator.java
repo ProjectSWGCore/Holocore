@@ -34,8 +34,10 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class SWGNameGenerator {
@@ -213,7 +215,7 @@ public class SWGNameGenerator {
 	}
 	
 	private RaceNameRule createRaceRule(FileInputStream stream) {
-		BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
+		BufferedReader reader = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8));
 		RaceNameRule rule = new RaceNameRule();
 		
 		boolean success = false;
@@ -290,14 +292,14 @@ public class SWGNameGenerator {
 		
 		switch (key) {
 		case "SurnameChance":
-			rule.setSurnameChance(Integer.valueOf(value));
+			rule.setSurnameChance(Integer.parseInt(value));
 			break;
 		default: return;
 		}
 	}
 	
 	private String firstCharUppercase(String name) { 
-		return Character.toString(name.charAt(0)).toUpperCase() + name.substring(1); 
+		return Character.toString(name.charAt(0)).toUpperCase(Locale.US) + name.substring(1);
 	} 
 	
 	private String removeExcessDuplications(List<String> list, String orig, String n) {

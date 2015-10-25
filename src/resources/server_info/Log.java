@@ -29,8 +29,10 @@ package resources.server_info;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
@@ -50,7 +52,7 @@ public class Log {
 	
 	private synchronized void open() throws IOException {
 		if (!open)
-			writer = new BufferedWriter(new FileWriter(file));
+			writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8));
 		open = true;
 	}
 	
@@ -93,7 +95,10 @@ public class Log {
 	 * @param args the string format arguments, if specified
 	 */
 	public static final void log(LogLevel level, String tag, String str, Object ... args) {
-		String date = LOG_FORMAT.format(System.currentTimeMillis());
+		String date;
+		synchronized (LOG_FORMAT) {
+			date = LOG_FORMAT.format(System.currentTimeMillis());
+		}
 		String logStr = String.format(str, args);
 		String log = String.format("%s %c/[%s]: %s", date, level.getChar(), tag, logStr);
 		synchronized (LOG) {

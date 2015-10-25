@@ -88,7 +88,6 @@ public class LoginService extends Service {
 	
 	private Random random;
 	private PreparedStatement getUser;
-	private PreparedStatement getUserInsensitive;
 	private PreparedStatement getGalaxies;
 	private PreparedStatement getCharacters;
 	private PreparedStatement deleteCharacter;
@@ -102,8 +101,7 @@ public class LoginService extends Service {
 	public boolean initialize() {
 		registerForIntent(DeleteCharacterIntent.TYPE);
 		RelationalDatabase local = getLocalDatabase();
-		getUser = local.prepareStatement("SELECT * FROM users WHERE username = ?");
-		getUserInsensitive = local.prepareStatement("SELECT * FROM users WHERE username ilike ?");
+		getUser = local.prepareStatement("SELECT * FROM users WHERE LOWER(username) = LOWER(?)");
 		getGalaxies = local.prepareStatement("SELECT * FROM galaxies");
 		getCharacters = local.prepareStatement("SELECT * FROM characters WHERE userid = ? AND galaxyid = ?");
 		deleteCharacter = local.prepareStatement("DELETE FROM characters WHERE id = ?");
@@ -182,9 +180,9 @@ public class LoginService extends Service {
 				else if (user.getBoolean("banned"))
 					onLoginBanned(player, id);
 				else
-					onInvalidUserPass(player, id);
+					onInvalidUserPass(player, id, user);
 			} else
-				onInvalidUserPass(player, id);
+				onInvalidUserPass(player, id, null);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			onLoginServerError(player, id);
@@ -202,7 +200,7 @@ public class LoginService extends Service {
 	}
 	
 	private void onSuccessfulLogin(ResultSet user, Player player, LoginClientId id) throws SQLException {
-		player.setUsername(id.getUsername());
+		player.setUsername(user.getString("username"));
 		player.setUserId(user.getInt("id"));
 		int tokenLength = getConfig(ConfigFile.NETWORK).getInt("SESSION-TOKEN-LENGTH", 24);
 		byte [] sessionToken = new byte[tokenLength];
@@ -233,17 +231,9 @@ public class LoginService extends Service {
 		new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_FAIL_BANNED).broadcast();
 	}
 	
-	private void onInvalidUserPass(Player player, LoginClientId id) {
+	private void onInvalidUserPass(Player player, LoginClientId id, ResultSet set) throws SQLException {
 		String type = "Login Failed!";
-		String message = "Invalid username or password.";
-		try {
-			String similar = getSimilarUsername(id.getUsername());
-			if (similar != null && !similar.equals(id.getUsername()))
-				message += "\n\nDid you mean: '" + similar + "'?";
-		} catch (SQLException e) {
-			
-		}
-		message += "\n\nMake sure to login to forums first!";
+		String message = getUserPassError(set, id.getUsername(), id.getPassword());
 		sendPacket(player, new LoginIncorrectClientId(getServerString(), "3.14159265"));
 		sendPacket(player, new ErrorMessage(type, message, false));
 		System.err.println("[" + id.getUsername() + "] Invalid user/pass combo! IP: " + id.getAddress() + ":" + id.getPort());
@@ -259,22 +249,6 @@ public class LoginService extends Service {
 		player.setPlayerState(PlayerState.DISCONNECTED);
 		Log.e("LoginService", "%s cannot login due to server error, from %s:%d", id.getUsername(), id.getAddress(), id.getPort());
 		new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_FAIL_SERVER_ERROR).broadcast();
-	}
-	
-	private String getSimilarUsername(String user) throws SQLException {
-		ResultSet set = null;
-		try {
-			getUserInsensitive.setString(1, user);
-			set = getUserInsensitive.executeQuery();
-			String similar = null;
-			if (set.next())
-				similar = set.getString("username");
-			set.close();
-			return similar;
-		} finally {
-			if (set != null)
-				set.close();
-		}
 	}
 	
 	private void sendLoginSuccessPacket(Player p) throws SQLException {
@@ -314,6 +288,24 @@ public class LoginService extends Service {
 	private ResultSet getUser(String username) throws SQLException {
 		getUser.setString(1, username);
 		return getUser.executeQuery();
+	}
+	
+	private String getUserPassError(ResultSet set, String username, String password) throws SQLException {
+		if (set == null)
+			return "No username found";
+		if (password.isEmpty())
+			return "No password specified!";
+		String psqlPass = set.getString("password");
+		String psqlSalt = set.getString("password_salt");
+		if (psqlPass.length() != 32 && psqlSalt.length() == 0) {
+			if (psqlPass.equals(password))
+				return "Server Error.\n\nPassword appears to be correct. [Plaintext]";
+			return "Invalid password";
+		}
+		password = MD5.digest(MD5.digest(psqlSalt) + MD5.digest(password));
+		if (psqlPass.equals(password))
+			return "Server Error.\n\nPassword appears to be correct. [Hashed]";
+		return "Invalid password";
 	}
 	
 	public ResultSet getCharacter(String character) throws SQLException {

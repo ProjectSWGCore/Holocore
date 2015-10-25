@@ -37,6 +37,7 @@ import resources.objects.SWGObject;
 import resources.objects.building.BuildingObject;
 import resources.objects.cell.CellObject;
 import resources.objects.creature.CreatureObject;
+import resources.objects.group.GroupObject;
 import resources.objects.installation.InstallationObject;
 import resources.objects.intangible.IntangibleObject;
 import resources.objects.player.PlayerObject;
@@ -80,6 +81,7 @@ public final class ObjectCreator {
 			case "installation":		return new InstallationObject(objectId);
 			case "ship":				return new ShipObject(objectId);
 			case "soundobject":			return new SoundObject(objectId);
+			case "group":				return new GroupObject(objectId);
 		}
 		return null;
 	}
@@ -106,8 +108,8 @@ public final class ObjectCreator {
 		switch(key) {
 			case ObjectData.OBJ_STF: object.setStringId(value); break;
 			case ObjectData.DETAIL_STF: object.setDetailStringId(value); break;
-			case ObjectData.VOLUME_LIMIT: object.setVolume(Integer.valueOf(value)); break;
-			case ObjectData.CONTAINER_TYPE: object.setContainerType(Integer.valueOf(value)); break;
+			case ObjectData.VOLUME_LIMIT: object.setVolume(Integer.parseInt(value)); break;
+			case ObjectData.CONTAINER_TYPE: object.setContainerType(Integer.parseInt(value)); break;
 			default: break;
 		}
 	}

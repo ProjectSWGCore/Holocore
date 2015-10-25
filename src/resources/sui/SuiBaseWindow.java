@@ -32,6 +32,7 @@ import resources.encodables.Encodable;
 import resources.server_info.Log;
 
 import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -285,7 +286,7 @@ public class SuiBaseWindow implements Encodable {
 	}
 
 	private String getWrappedEventString(int event) {
-		return new String(new byte[]{(byte) event});
+		return new String(new byte[]{(byte) event}, StandardCharsets.UTF_8);
 	}
 
 	@Override

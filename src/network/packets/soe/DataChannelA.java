@@ -160,6 +160,18 @@ public class DataChannelA extends Packet implements Comparable<DataChannelA> {
 			return 0;
 		return 1;
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (!(o instanceof DataChannelA))
+			return false;
+		return ((DataChannelA) o).sequence == sequence;
+	}
+	
+	@Override
+	public int hashCode() {
+		return sequence;
+	}
 
 	public void setSequence(short sequence) { this.sequence = sequence; }
 	

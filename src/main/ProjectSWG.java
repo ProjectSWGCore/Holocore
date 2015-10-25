@@ -79,6 +79,15 @@ public class ProjectSWG {
 		return CoreManager.getGalaxyId();
 	}
 	
+	/**
+	 * Returns the server's galactic time. This is the official time sent to
+	 * the client and should be used for any official client-time purposes.
+	 * @return the server's galactic time
+	 */
+	public static final long getGalacticTime() {
+		return (long) (System.currentTimeMillis()/1E3 - 1309996800L); // Date is 07/07/2011 GMT
+	}
+	
 	private ProjectSWG() {
 		mainThread = Thread.currentThread();
 		shutdownRequested = false;

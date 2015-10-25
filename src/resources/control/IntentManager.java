@@ -27,11 +27,11 @@
 ***********************************************************************************/
 package resources.control;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
@@ -41,7 +41,8 @@ import utilities.ThreadUtilities;
 
 public class IntentManager {
 	
-	private static final IntentManager instance = new IntentManager();
+	private static final IntentManager INSTANCE = new IntentManager();
+	
 	private final Runnable broadcastRunnable;
 	private final Map <String, List<IntentReceiver>> intentRegistrations;
 	private final Queue <Intent> intentQueue;
@@ -65,7 +66,8 @@ public class IntentManager {
 	
 	protected void initialize() {
 		if (!initialized) {
-			broadcastThreads = Executors.newCachedThreadPool(ThreadUtilities.newThreadFactory("intent-processor-%d"));
+			final int broadcastThreadCount = Runtime.getRuntime().availableProcessors() * 10;
+			broadcastThreads = Executors.newFixedThreadPool(broadcastThreadCount, ThreadUtilities.newThreadFactory("intent-processor-%d"));
 			initialized = true;
 			terminated = false;
 		}
@@ -95,7 +97,7 @@ public class IntentManager {
 		synchronized (intentRegistrations) {
 			List <IntentReceiver> intents = intentRegistrations.get(intentType);
 			if (intents == null) {
-				intents = new ArrayList<IntentReceiver>();
+				intents = new CopyOnWriteArrayList<>();
 				intentRegistrations.put(intentType, intents);
 			}
 			synchronized (intents) {
@@ -128,10 +130,8 @@ public class IntentManager {
 		}
 		if (receivers == null)
 			return;
-		synchronized (receivers) {
-			for (IntentReceiver r : receivers) {
-				broadcast(r, i);
-			}
+		for (IntentReceiver r : receivers) {
+			broadcast(r, i);
 		}
 		i.markAsComplete();
 	}
@@ -152,7 +152,7 @@ public class IntentManager {
 	}
 	
 	public static IntentManager getInstance() {
-		return instance;
+		return INSTANCE;
 	}
 	
 }
