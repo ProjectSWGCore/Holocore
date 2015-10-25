@@ -27,21 +27,19 @@
 ***********************************************************************************/
 package resources;
 
-import resources.objects.creature.CreatureObject;
+import resources.objects.SWGObject;
 
 public final class TravelPoint {
 	
 	private final String name;
 	private final Location location;
-	private final int additionalCost; // Additional cost. Perhaps based on distance from source to destination?
 	private final boolean reachable;
-	private CreatureObject shuttle;
+	private SWGObject shuttle;
 	private final boolean starport;
 	
-	public TravelPoint(String name, Location location, int additionalCost, boolean starport, boolean reachable) {
+	public TravelPoint(String name, Location location, boolean starport, boolean reachable) {
 		this.name = name;
 		this.location = location;
-		this.additionalCost = additionalCost;
 		this.starport = starport;
 		this.reachable = reachable;	// Not sure which effect this has on the client.
 	}
@@ -54,10 +52,6 @@ public final class TravelPoint {
 		return location;
 	}
 
-	public int getAdditionalCost() {
-		return additionalCost;
-	}
-	
 	public boolean isStarport() {
 		return starport;
 	}
@@ -66,11 +60,11 @@ public final class TravelPoint {
 		return reachable;
 	}
 	
-	public CreatureObject getShuttle() {
+	public SWGObject getShuttle() {
 		return shuttle;
 	}
 
-	public void setShuttle(CreatureObject shuttle) {
+	public void setShuttle(SWGObject shuttle) {
 		this.shuttle = shuttle;
 	}
 	

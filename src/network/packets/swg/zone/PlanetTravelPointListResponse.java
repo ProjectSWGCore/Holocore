@@ -17,10 +17,12 @@ public class PlanetTravelPointListResponse extends SWGPacket {
 	
 	private Collection<TravelPoint> travelPoints;
 	private String planetName;
+	private Collection<Integer> additionalCosts;
 	
-	public PlanetTravelPointListResponse(String planetName, Collection<TravelPoint> travelPoints) {
+	public PlanetTravelPointListResponse(String planetName, Collection<TravelPoint> travelPoints, Collection<Integer> additionalCosts) {
 		this.planetName = planetName;
 		this.travelPoints = travelPoints;
+		this.additionalCosts = additionalCosts;
 	}
 	
 	@Override
@@ -42,9 +44,9 @@ public class PlanetTravelPointListResponse extends SWGPacket {
 			addFloat(data, (float) tp.getLocation().getZ());
 		}
 		
-		addInt(data, travelPoints.size()); // List size
-		for(TravelPoint tp : travelPoints) { // additional costs
-			addInt(data, tp.getAdditionalCost());
+		addInt(data, additionalCosts.size()); // List size
+		for(int additionalCost : additionalCosts) { // additional costs
+			addInt(data, additionalCost <= 0 ? additionalCost + 50 : additionalCost);
 		}
 		
 		addInt(data, travelPoints.size()); // List size
@@ -65,13 +67,15 @@ public class PlanetTravelPointListResponse extends SWGPacket {
 		int[] additionalCosts = getIntArray(data);
 		boolean[] pointsReachable = getBooleanArray(data);
 		
+		for(int additionalCost : additionalCosts)
+			this.additionalCosts.add(additionalCost * 2);
+		
 		for(int i = 0; i < pointNames.size(); i++) {
 			String pointName = pointNames.get(i);
 			Point3D point = points.get(i);
-			int additionalCost = additionalCosts[i];
 			boolean reachable = pointsReachable[i];
 			
-			travelPoints.add(new TravelPoint(pointName, new Location(point.getX(), point.getY(), point.getZ(), Terrain.getTerrainFromName(planetName)), additionalCost, isStarport(pointName), reachable));
+			travelPoints.add(new TravelPoint(pointName, new Location(point.getX(), point.getY(), point.getZ(), Terrain.getTerrainFromName(planetName)), isStarport(pointName), reachable));
 		}
 	}
 	

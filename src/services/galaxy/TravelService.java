@@ -32,7 +32,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -42,6 +41,7 @@ import network.packets.Packet;
 import network.packets.swg.zone.EnterTicketPurchaseModeMessage;
 import network.packets.swg.zone.PlanetTravelPointListRequest;
 import network.packets.swg.zone.PlanetTravelPointListResponse;
+import network.packets.swg.zone.object_controller.PostureUpdate;
 import intents.chat.ChatBroadcastIntent;
 import intents.network.GalacticPacketIntent;
 import intents.object.ObjectCreatedIntent;
@@ -72,7 +72,7 @@ import resources.sui.SuiListBox.SuiListBoxItem;
 import resources.sui.SuiMessageBox;
 import services.objects.ObjectManager;
 
-public final class TravelService extends Service {
+public class TravelService extends Service {
 	
 	private static final String DB_TABLE_NAME = "travel";
 	private static final byte PLANET_NAMES_COLUMN_INDEX = 0;
@@ -89,6 +89,8 @@ public final class TravelService extends Service {
 	 */
 	private final Map<Terrain, Collection<TravelPoint>> pointsOnPlanet;
 	
+	private final double ticketPriceFactor;
+	
 	// Fields relating to shuttle take-off and landing
 	private Posture currentShuttlePosture;
 	private ExecutorService executor;
@@ -104,6 +106,7 @@ public final class TravelService extends Service {
 		allowedRoutes = new HashMap<>();
 		travelFeeTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/travel/travel.iff");
 		pointsOnPlanet = new HashMap<>();
+		ticketPriceFactor = getConfig(ConfigFile.FEATURES).getDouble("TICKET-PRICE-FACTOR", 1);
 		
 		timeUntilLand = getConfig(ConfigFile.FEATURES).getInt("SHUTTLE-AWAY-TIME", 60);
 		timeRemaining = timeUntilLand;
@@ -186,7 +189,7 @@ public final class TravelService extends Service {
 						}
 					}
 				}
-					
+				
 				prices.put(arrivalPlanet, price);
 			}
 			
@@ -215,7 +218,7 @@ public final class TravelService extends Service {
 						double z = set.getDouble("z");
 						String type = set.getString("type");
 						
-						TravelPoint point = new TravelPoint(pointName, new Location(x, y, z, travelPlanet), 0, type.equals("starport"), true);
+						TravelPoint point = new TravelPoint(pointName, new Location(x, y, z, travelPlanet), type.equals("starport"), true);
 						
 						Collection<TravelPoint> pointsOnCurrentPlanet = pointsOnPlanet.get(travelPlanet);
 						
@@ -237,6 +240,44 @@ public final class TravelService extends Service {
 		return success;
 	}
 	
+	private Collection<Integer> getAdditionalCosts(Location objectLocation, Collection<TravelPoint> points) {
+		Collection<Integer> additionalCosts = new ArrayList<>();
+		TravelPoint nearest = nearestTravelPoint(objectLocation);
+		
+		for(TravelPoint point : points) {
+			additionalCosts.add(getAdditionalCost(nearest.getLocation(), point.getLocation()));
+		}
+		
+		return additionalCosts;
+	}
+	
+	private int getAdditionalCost(Location departureLocation, Location destinationLocation) {
+		int additionalCost;
+		
+		// Any factor below or equal to 0 makes the ticket free.
+		if(ticketPriceFactor <= 0) {
+			Map<Terrain, Integer> priceMap = allowedRoutes.get(departureLocation.getTerrain());
+			
+			if(priceMap == null)
+				priceMap = allowedRoutes.get(destinationLocation.getTerrain());
+			
+			Integer basePrice = priceMap.get(destinationLocation.getTerrain());
+			
+			if(basePrice == null)
+				basePrice = priceMap.get(departureLocation.getTerrain());
+			
+			 basePrice *= -1;
+			 
+			 additionalCost = basePrice.intValue();
+		} else {
+			// TODO implement algorithm for the extra ticket cost.
+			// TODO research the above
+			additionalCost = 0;
+		}
+		
+		return additionalCost;
+	}
+	
 	private Collection<TravelPoint> getPointsForPlanet(Location location, String planetName) {
 		Collection<TravelPoint> points = new ArrayList<>();
 		Terrain objectTerrain = location.getTerrain();
@@ -249,10 +290,8 @@ public final class TravelService extends Service {
 				// If the destination planet is the same as our current
 				points.addAll(candidatePoints);
 				break;	// Then return all the points on this planet
-			} else {
-				 if(candidatePoint.isStarport()) {	// If the terrains aren't the same, we only want to add the starports.
-					 points.add(candidatePoint);
-				 }
+			} else if(candidatePoint.isStarport()) {	// If the terrains aren't the same, we only want to add the starports.
+				points.add(candidatePoint);
 			}
 		}
 		
@@ -272,20 +311,33 @@ public final class TravelService extends Service {
 			PlanetTravelPointListRequest req = (PlanetTravelPointListRequest) p;
 			String planetName = req.getPlanetName();
 			Player player = i.getPlayerManager().getPlayerFromNetworkId(i.getNetworkId());
+			Location objectLocation = player.getCreatureObject().getWorldLocation();
+			Collection<TravelPoint> pointsForPlanet = getPointsForPlanet(objectLocation, planetName);
 			
-			player.sendPacket(new PlanetTravelPointListResponse(planetName, getPointsForPlanet(player.getCreatureObject().getWorldLocation(), planetName)));
+			player.sendPacket(new PlanetTravelPointListResponse(planetName, pointsForPlanet, getAdditionalCosts(objectLocation, pointsForPlanet)));
 		}
 	}
 	
-	private int getTotalTicketPrice(TravelPoint departurePoint, Terrain arrivalPlanet, boolean roundTrip) {
+	private int getTicketBasePrice(Terrain departurePlanet, Terrain arrivalPlanet) {
+		return allowedRoutes.get(departurePlanet).get(arrivalPlanet);
+	}
+	
+	private int getTotalTicketPrice(TravelPoint departurePoint, TravelPoint arrivalPoint, boolean roundTrip) {
 		int totalPrice = 0;
-		Terrain departurePlanet = departurePoint.getLocation().getTerrain();
+		Location arrivalLocation = arrivalPoint.getLocation();
+		Location departureLocation = departurePoint.getLocation();
+		Terrain arrivalPlanet = arrivalLocation.getTerrain();
+		Terrain departurePlanet = departureLocation.getTerrain();
 		
-		totalPrice += allowedRoutes.get(departurePlanet).get(arrivalPlanet);
-		totalPrice += departurePoint.getAdditionalCost();
+		totalPrice += getTicketBasePrice(departurePlanet, arrivalPlanet);	// The base price
+		totalPrice += Math.max(getAdditionalCost(departureLocation, arrivalLocation), 0);	// The extra amount to pay.
 		
 		if(roundTrip)
 			totalPrice *= 2;
+		
+		// A factor smaller or equal to 0 makes the ticket free.
+		if(ticketPriceFactor <= 0)
+			totalPrice = 0;
 		
 		return totalPrice;
 	}
@@ -301,7 +353,7 @@ public final class TravelService extends Service {
 		if(nearestPoint == null || destinationPoint == null)
 			return;
 		
-		int ticketPrice = getTotalTicketPrice(nearestPoint, destinationPoint.getLocation().getTerrain(), roundTrip);
+		int ticketPrice = getTotalTicketPrice(nearestPoint, destinationPoint, roundTrip);
 		int newBankBalance = purchaser.getBankBalance();
 		int newCashBalance = purchaser.getCashBalance();
 		int difference = newBankBalance - ticketPrice;
@@ -445,12 +497,11 @@ public final class TravelService extends Service {
 		String template = object.getTemplate();
 		
 		if(template.contains("shared_player_shuttle") || template.contains("shared_player_transport")) {
-			CreatureObject shuttle = (CreatureObject) object;
-			Location shuttleLocation = shuttle.getLocation();
+			Location shuttleLocation = object.getLocation();
 			TravelPoint pointForShuttle = nearestTravelPoint(shuttleLocation);
 			
 			// Assign the shuttle to the nearest travel point
-			pointForShuttle.setShuttle(shuttle);
+			pointForShuttle.setShuttle(object);
 		}
 	}
 	
@@ -528,12 +579,12 @@ public final class TravelService extends Service {
 	private void updateShuttlePostures(Posture posture) {
 		for(Collection<TravelPoint> travelPoints : pointsOnPlanet.values()) {
 			for(TravelPoint tp : travelPoints) {
-				CreatureObject shuttle = tp.getShuttle();
+				SWGObject shuttle = tp.getShuttle();
 				
 				if(shuttle == null)	// This TravelPoint has no associated shuttle
 					continue;	// Continue with the next TravelPoint
 				
-				shuttle.setPosture(posture);
+				shuttle.sendObservers(new PostureUpdate(shuttle.getObjectId(), posture));
 			}
 		}
 		
