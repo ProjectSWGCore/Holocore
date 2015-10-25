@@ -272,7 +272,7 @@ public class TravelService extends Service {
 		} else {
 			// TODO implement algorithm for the extra ticket cost.
 			// TODO research the above
-			additionalCost = 0;
+			additionalCost = 10;	// For now, it's just 10 credits all the time.
 		}
 		
 		return additionalCost;
