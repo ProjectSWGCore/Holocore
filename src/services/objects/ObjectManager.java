@@ -43,37 +43,28 @@ import intents.object.ObjectIdResponseIntent;
 import intents.object.ObjectTeleportIntent;
 import intents.player.DeleteCharacterIntent;
 import intents.player.PlayerTransformedIntent;
-import intents.PlayerEventIntent;
 import intents.RequestZoneInIntent;
 import intents.network.GalacticPacketIntent;
-import main.ProjectSWG;
 import network.packets.Packet;
 import network.packets.swg.ErrorMessage;
 import network.packets.swg.zone.SceneDestroyObject;
-import network.packets.swg.zone.insertion.CmdStartScene;
 import network.packets.swg.zone.insertion.SelectCharacter;
 import network.packets.swg.zone.object_controller.DataTransform;
 import network.packets.swg.zone.object_controller.DataTransformWithParent;
 import network.packets.swg.zone.object_controller.ObjectController;
 import resources.Location;
-import resources.Terrain;
-import resources.config.ConfigFile;
+import resources.buildout.BuildoutArea;
 import resources.containers.ContainerPermissions;
 import resources.control.Intent;
 import resources.control.Manager;
 import resources.objects.SWGObject;
-import resources.objects.building.BuildingObject;
 import resources.objects.creature.CreatureObject;
-import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
-import resources.player.PlayerEvent;
 import resources.server_info.CachedObjectDatabase;
-import resources.server_info.Config;
 import resources.server_info.Log;
 import resources.server_info.ObjectDatabase;
 import resources.server_info.ObjectDatabase.Traverser;
 import services.map.MapManager;
-import services.map.MapManager.MapType;
 import services.player.PlayerManager;
 import services.spawn.SpawnerService;
 import services.spawn.StaticService;
@@ -85,7 +76,7 @@ public class ObjectManager extends Manager {
 	private final StaticService staticService;
 	private final SpawnerService spawnerService;
 	private final RadialService radialService;
-	private final BuildoutAreaService buildoutAreaService;
+	private final ClientBuildoutService clientBuildoutService;
 
 	private final ObjectDatabase<SWGObject> database;
 	private final Map <Long, SWGObject> objectMap;
@@ -97,7 +88,7 @@ public class ObjectManager extends Manager {
 		staticService = new StaticService(this);
 		spawnerService = new SpawnerService(this);
 		radialService = new RadialService();
-		buildoutAreaService = new BuildoutAreaService();
+		clientBuildoutService = new ClientBuildoutService();
 		
 		database = new CachedObjectDatabase<SWGObject>("odb/objects.db");
 		objectMap = new Hashtable<>(16*1024);
@@ -108,13 +99,12 @@ public class ObjectManager extends Manager {
 		addChildService(staticService);
 		addChildService(radialService);
 		addChildService(spawnerService);
-		addChildService(buildoutAreaService);
+		addChildService(clientBuildoutService);
 	}
 	
 	@Override
 	public boolean initialize() {
 		registerForIntent(GalacticPacketIntent.TYPE);
-		registerForIntent(PlayerEventIntent.TYPE);
 		registerForIntent(ObjectTeleportIntent.TYPE);
 		registerForIntent(ObjectIdRequestIntent.TYPE);
 		registerForIntent(ObjectCreateIntent.TYPE);
@@ -145,44 +135,15 @@ public class ObjectManager extends Manager {
 	}
 	
 	private void loadClientObjects() {
-		long startLoad = System.nanoTime();
-		Config c = getConfig(ConfigFile.PRIMARY);
-		if (c.getBoolean("LOAD-OBJECTS", true)) {
-			String terrainStr = c.getString("LOAD-OBJECTS-FOR", "");
-			Terrain terrain = null;
-			if (Terrain.doesTerrainExistForName(terrainStr))
-				terrain = Terrain.getTerrainFromName(terrainStr);
-			else if (!terrainStr.isEmpty()) {
-				System.err.println("ObjectManager: Unknown terrain '" + terrainStr + "'");
-				Log.e("ObjectManager", "Unknown terrain: %s", terrainStr);
+		for (SWGObject obj : clientBuildoutService.loadClientObjects().values()) {
+			synchronized (objectMap) {
+				if (obj.getObjectId() >= maxObjectId) {
+					maxObjectId = obj.getObjectId() + 1;
+				}
 			}
-			ClientObjectLoader loader = new ClientObjectLoader();
-			Map<Long, SWGObject> objects = loader.loadClientObjects(terrain);
-			objectMap.putAll(objects);
-			for (SWGObject obj : objects.values())
-				loadClientObject(obj);
-			double loadTime = (System.nanoTime() - startLoad) / 1E6;
-			System.out.printf("ClientObjectLoader: Finished loading %d client objects. Time: %fms%n", objects.size(), loadTime);
-			Log.i("ClientObjectLoader", "Finished loading %d client objects. Time: %fms", objects.size(), loadTime);
-		} else {
-			Log.w("ObjectManager", "Did not load client objects. Reason: Disabled.");
-			System.out.println("ObjectManager: Did not load client objects. Reason: Disabled!");
+			objectMap.put(obj.getObjectId(), obj);
+			new ObjectCreatedIntent(obj).broadcast();
 		}
-	}
-	
-	private void loadClientObject(SWGObject obj) {
-		if (obj.getParent() == null) {
-			if (obj instanceof TangibleObject || obj instanceof BuildingObject) {
-				objectAwareness.add(obj);
-			}
-		}
-		synchronized (objectMap) {
-			if (obj.getObjectId() >= maxObjectId) {
-				maxObjectId = obj.getObjectId() + 1;
-			}
-		}
-		staticService.createSupportingObjects(obj);
-		mapManager.addMapLocation(obj, MapType.STATIC);
 	}
 	
 	private void loadObject(SWGObject obj) {
@@ -247,30 +208,6 @@ public class ObjectManager extends Manager {
 	public void onIntentReceived(Intent i) {
 		if (i instanceof GalacticPacketIntent) {
 			processGalacticPacketIntent((GalacticPacketIntent) i);
-		} else if (i instanceof PlayerEventIntent) {
-			Player p = ((PlayerEventIntent)i).getPlayer();
-			switch (((PlayerEventIntent)i).getEvent()) {
-				case PE_DISAPPEAR:
-					if (p.getCreatureObject() == null)
-						break;
-					p.getCreatureObject().clearAware();
-					for (SWGObject obj : p.getCreatureObject().getObservers())
-						p.getCreatureObject().destroyObject(obj.getOwner());
-					p.getCreatureObject().setOwner(null);
-					p.setCreatureObject(null);
-					break;
-				case PE_FIRST_ZONE:
-					if (p.getCreatureObject().getParent() == null)
-						p.getCreatureObject().createObject(p);
-					break;
-				case PE_ZONE_IN:
-					p.getCreatureObject().clearAware();
-					break;
-				default:
-					break;
-			}
-		} else if (i instanceof ObjectTeleportIntent) {
-			processObjectTeleportIntent((ObjectTeleportIntent) i);
 		} else if (i instanceof ObjectIdRequestIntent) {
 			processObjectIdRequestIntent((ObjectIdRequestIntent) i);
 		} else if (i instanceof ObjectCreateIntent) {
@@ -292,24 +229,6 @@ public class ObjectManager extends Manager {
 		}
 
 		new ObjectIdResponseIntent(intent.getIdentifier(), reservedIds).broadcast();
-	}
-
-	private void processObjectTeleportIntent(ObjectTeleportIntent oti) {
-		SWGObject object = oti.getObject();
-		if (object instanceof CreatureObject && object.getOwner() != null) {
-			Packet startScene = new CmdStartScene(false, object.getObjectId(), ((CreatureObject)object).getRace(), oti.getNewLocation(), (long)(ProjectSWG.getCoreTime()/1E3));
-			if (oti.getParent() != null) {
-				objectAwareness.move(object, oti.getParent(), oti.getNewLocation());
-				sendPacket(object.getOwner(), startScene);
-			} else {
-				objectAwareness.move(object, oti.getNewLocation());
-				sendPacket(object.getOwner(), startScene);
-				object.createObject(object.getOwner());
-			}
-			new PlayerEventIntent(object.getOwner(), PlayerEvent.PE_ZONE_IN).broadcast();
-		} else {
-			object.setLocation(oti.getNewLocation());
-		}
 	}
 
 	private void processGalacticPacketIntent(GalacticPacketIntent gpi) {
@@ -443,9 +362,14 @@ public class ObjectManager extends Manager {
 			return;
 		Location newLocation = transform.getLocation();
 		newLocation.setTerrain(obj.getTerrain());
+		BuildoutArea area = obj.getBuildoutArea();
+		if (area != null && area.isAdjustCoordinates())
+			newLocation.translatePosition(area.getX1(), 0, area.getZ1());
 		if (obj instanceof CreatureObject)
 			new PlayerTransformedIntent((CreatureObject) obj, obj.getParent(), null, obj.getLocation(), newLocation).broadcast();
 		objectAwareness.move(obj, newLocation);
+		if (area != null && area.isAdjustCoordinates())
+			newLocation.translatePosition(-area.getX1(), 0, -area.getZ1());
 		obj.sendDataTransforms(transform);
 
 		// TODO: State checks before sending a data transform message to ensure the move is valid/change speed depending

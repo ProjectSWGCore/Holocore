@@ -32,7 +32,7 @@ import utilities.ThreadUtilities;
 public class OnlineInterfaceService extends Service implements HttpServerCallback {
 	
 	private static final String TAG = "OnlineInterfaceService";
-	private static final String GET_USER_SQL = "SELECT password, password_salt, banned FROM users WHERE username = ?";
+	private static final String GET_USER_SQL = "SELECT password, password_salt, banned FROM users WHERE LOWER(username) = LOWER(?)";
 	
 	private final WebserverData data;
 	private final WebserverHandler handler;
@@ -81,6 +81,7 @@ public class OnlineInterfaceService extends Service implements HttpServerCallbac
 			httpServer.start();
 			httpsServer.start();
 			executor.scheduleAtFixedRate(dataCollectionRunnable, 0, 1, TimeUnit.SECONDS);
+			System.out.println("OnlineInterfaceService: Web server is now online.");
 		}
 		return super.start();
 	}

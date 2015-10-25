@@ -151,7 +151,8 @@ public class CommandService extends Service {
 	}
 	
 	private void loadBaseCommands() {
-		final String [] commandTables = new String [] {"command_table", "client_command_table", "command_table_ground"};
+		// First = Higher Priority, Last = Lower Priority ---- Some tables contain duplicates, ORDER MATTERS!
+		final String [] commandTables = new String [] {"command_table", "command_table_ground", "client_command_table", };
 		
 		clearCommands();
 		for (String table : commandTables) {
@@ -259,7 +260,10 @@ public class CommandService extends Service {
 		}
 	}
 	
-	private void addCommand(Command command) {
+	private boolean addCommand(Command command) {
+		if (commands.containsKey(command.getCrc()))
+			return false;
+
 		synchronized (commands) {
 			commands.put(command.getCrc(), command);
 		}
@@ -276,6 +280,6 @@ public class CommandService extends Service {
 			}
 			commands.add(command);
 		}
+		return true;
 	}
-	
 }

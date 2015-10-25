@@ -96,6 +96,8 @@ public class TerminalService extends Service {
 	}
 	
 	private String lookupScript(String iff) {
+		if (!templates.contains(iff))
+			return null;
 		synchronized (getScriptForIffStatement) {
 			ResultSet set = null;
 			try {
@@ -104,7 +106,7 @@ public class TerminalService extends Service {
 				if (set.next())
 					return set.getString("script");
 				else
-					Log.e("RadialService", "Cannot find script for template: " + iff);
+					Log.e("TerminalService", "Cannot find script for template: " + iff);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} finally {

@@ -246,7 +246,9 @@ public class ProsePackage implements OutOfBandData, Serializable {
 				"]";
 	}
 
-	private class Prose implements Encodable {
+	private static class Prose implements Encodable, Serializable {
+
+		private static final long	serialVersionUID	= 1L;
 
 		private long objectId;
 		private StringId stringId;

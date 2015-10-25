@@ -30,6 +30,7 @@ package network.packets.swg.zone.baselines;
 import network.packets.swg.SWGPacket;
 
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 
 public class Baseline extends SWGPacket {
 	public static final int CRC = getCrc("BaselinesMessage");
@@ -63,6 +64,8 @@ public class Baseline extends SWGPacket {
 		num = getByte(data);
 		baseData = new byte[getInt(data)];
 		data.get(baseData);
+		if (baseData.length >= 2)
+			opCount = ByteBuffer.wrap(baseData).order(ByteOrder.LITTLE_ENDIAN).getShort(0);
 	}
 	
 	public ByteBuffer encode() {

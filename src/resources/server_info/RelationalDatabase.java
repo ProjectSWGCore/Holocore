@@ -158,8 +158,9 @@ public abstract class RelationalDatabase implements Closeable {
 		if (connection == null)
 			return 0;
 		try {
-			Statement s = connection.createStatement();
-			return s.executeUpdate(query);
+			try (Statement s = connection.createStatement()) {
+				return s.executeUpdate(query);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return 0;

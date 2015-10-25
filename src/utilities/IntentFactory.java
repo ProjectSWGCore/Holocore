@@ -12,6 +12,7 @@ import resources.player.Player;
 import intents.chat.ChatBroadcastIntent;
 import intents.chat.ChatBroadcastIntent.BroadcastType;
 import intents.chat.PersistentMessageIntent;
+import resources.server_info.Log;
 
 /**
  * @author Mads
@@ -35,9 +36,10 @@ public final class IntentFactory {
 	/**
 	 * Sends a system message to the entire galaxy.
 	 * @param message System message to broadcast.
+	 * @param source The source of this system message.
 	 */
-	public void broadcastGalaxy(String message) {
-		broadcast(message, null, BroadcastType.GALAXY);
+	public void broadcastGalaxy(String message, Player source) {
+		broadcast(message, source, BroadcastType.GALAXY);
 	}
 
 	/**
@@ -73,7 +75,9 @@ public final class IntentFactory {
 	 *                set the %DI to the value of 500 for the StringId.
 	 *                Note that the prose key must always come first and the value for that key must always come second.
 	 */
-	public void sendSystemMessage(Player target, String stf, Object ... objects) {
+	public static void sendSystemMessage(Player target, String stf, Object ... objects) {
+		if (objects.length % 2 != 0)
+			Log.e("ProsePackage", "Sent a ProsePackage chat message with an uneven number of object arguments for StringId %s", stf);
 		Object [] prose = new Object[objects.length + 2];
 		prose[0] = "StringId";
 		prose[1] = new StringId(stf);

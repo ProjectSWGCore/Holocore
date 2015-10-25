@@ -29,6 +29,8 @@ package resources.objects.creature;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 
 import network.packets.swg.zone.UpdatePostureMessage;
 import network.packets.swg.zone.UpdatePvpStatusMessage;
@@ -48,12 +50,14 @@ import resources.objects.tangible.OptionFlag;
 import resources.objects.tangible.TangibleObject;
 import resources.objects.weapon.WeaponObject;
 import resources.player.Player;
+import services.group.GroupInviterData;
 import utilities.Encoder.StringType;
 
 public class CreatureObject extends TangibleObject {
 	
 	private static final long serialVersionUID = 1L;
 	
+	private transient GroupInviterData inviterData = new GroupInviterData(0, null, "", 0);
 	private transient long lastReserveOperation	= 0;
 	
 	private Posture	posture					= Posture.UPRIGHT;
@@ -119,6 +123,11 @@ public class CreatureObject extends TangibleObject {
 		initCurrentAttributes();
 		initBaseAttributes();
 		setOptionFlags(OptionFlag.HAM_BAR);
+	}
+
+	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
+		ois.defaultReadObject();
+		inviterData = new GroupInviterData(0, null, "", 0);
 	}
 
 	public void removeEquipment(SWGObject obj) {
@@ -524,6 +533,19 @@ public class CreatureObject extends TangibleObject {
 		return groupId;
 	}
 
+	public void updateGroupInviteData(Player sender, long groupId, String name) {
+		inviterData.setName(name);
+		inviterData.setSender(sender);
+		inviterData.setId(groupId);
+		inviterData.incrementCounter();
+
+		sendDelta(6, 14, inviterData);
+	}
+
+	public GroupInviterData getInviterData() {
+		return inviterData;
+	}
+
 	public void setGroupId(long groupId) {
 		this.groupId = groupId;
 		sendDelta(6, 13, groupId);
@@ -833,9 +855,7 @@ public class CreatureObject extends TangibleObject {
 		bb.addAscii(moodAnimation); // 11
 		bb.addLong(equippedWeaponId); // 12
 		bb.addLong(groupId); // 13
-		bb.addLong(0); // Group Inviter ID -- 14
-			bb.addAscii(""); // Group Inviter Name
-			bb.addLong(0); // Invite counter
+		bb.addObject(inviterData); // TODO: Check structure -- 14
 		bb.addInt(guildId); // 15
 		bb.addLong(lookAtTargetId); // 16
 		bb.addLong(intendedTargetId); // 17

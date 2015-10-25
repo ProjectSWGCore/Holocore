@@ -219,6 +219,12 @@ public class Location implements Encodable, Serializable {
 		return x*x;
 	}
 	
+	public boolean equals(Object o) {
+		if (!(o instanceof Location))
+			return false;
+		return equals((Location) o);
+	}
+	
 	public boolean equals(Location l) {
 		if (terrain != l.terrain)
 			return false;

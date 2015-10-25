@@ -27,6 +27,8 @@
 ***********************************************************************************/
 package resources.common;
 
+import java.nio.charset.StandardCharsets;
+
 public class CRC {
 	
 	private static final int CRC_TABLE[] = {
@@ -131,7 +133,7 @@ public class CRC {
 	};
 
 	public static int getCrc(String input) {
-		byte [] bytes = input.getBytes();
+		byte [] bytes = input.getBytes(StandardCharsets.UTF_8);
 		int crc = 0xffffffff;
 		
 		for (int i = 0; i < bytes.length; ++i) {
@@ -141,7 +143,7 @@ public class CRC {
 	}
 	
 	public static int memcrc(String input) {
-		byte [] bytes = input.getBytes();
+		byte [] bytes = input.getBytes(StandardCharsets.UTF_8);
 		
 		int crc = 0xffffffff;
 		for (int i = 0; i < bytes.length; ++i) {

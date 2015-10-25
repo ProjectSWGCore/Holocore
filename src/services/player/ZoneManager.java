@@ -187,13 +187,12 @@ public class ZoneManager extends Manager {
 		long objId = creature.getObjectId();
 		Race race = creature.getRace();
 		Location l = creature.getLocation();
-		long time = (long)(ProjectSWG.getCoreTime()/1E3);
 		sendPacket(player, new HeartBeat());
 		sendPacket(player, new ChatServerStatus(true));
 		sendPacket(player, new VoiceChatStatus());
 		sendPacket(player, new ParametersMessage());
 		sendPacket(player, new ChatOnConnectAvatar());
-		sendPacket(player, new CmdStartScene(false, objId, race, l, time));
+		sendPacket(player, new CmdStartScene(false, objId, race, l, ProjectSWG.getGalacticTime(), (int)(System.currentTimeMillis()/1E3)));
 		flushPackets();
 	}
 	

@@ -31,6 +31,7 @@ import resources.control.Manager;
 import services.commands.CommandService;
 import services.faction.FactionService;
 import services.galaxy.terminals.TerminalService;
+import services.group.GroupService;
 import services.sui.SuiService;
 
 public class GameManager extends Manager {
@@ -38,17 +39,19 @@ public class GameManager extends Manager {
 	private final CommandService commandService;
 	private final ConnectionService connectionService;
 	private final SuiService suiService;
-	private final WeatherService weatherService;
+	private final EnvironmentService weatherService;
 	private final TerminalService terminalManager;
 	private final FactionService factionService;
-	
+	private final GroupService groupService;
+
 	public GameManager() {
 		commandService = new CommandService();
 		connectionService = new ConnectionService();
 		suiService = new SuiService();
-		weatherService = new WeatherService();
+		weatherService = new EnvironmentService();
 		terminalManager = new TerminalService();
 		factionService = new FactionService();
+		groupService = new GroupService();
 
 		addChildService(commandService);
 		addChildService(connectionService);
@@ -56,5 +59,6 @@ public class GameManager extends Manager {
 		addChildService(weatherService);
 		addChildService(terminalManager);
 		addChildService(factionService);
+		addChildService(groupService);
 	}
 }

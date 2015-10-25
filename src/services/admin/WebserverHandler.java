@@ -37,8 +37,8 @@ class WebserverHandler {
 	private static final Charset ASCII = Charset.forName("ASCII");
 
 	private static final String REQUIRED_PREFIX = new File("res/webserver").getAbsolutePath().replace('/', File.separatorChar);
-	private static final String INDEX_PATH = "res/webserver/index.html".replace('/', File.separatorChar);
-	private static final String AUTHENTICATED_PATH = "res/webserver/index.html".replace('/', File.separatorChar);
+	private static final String INDEX_PATH = new File("res/webserver/index.html".replace('/', File.separatorChar)).getAbsolutePath();
+	private static final String AUTHENTICATED_PATH = new File("res/webserver/authenticated.html".replace('/', File.separatorChar)).getAbsolutePath();
 	
 	private final WebserverData data;
 	private final Pattern variablePattern;
@@ -201,8 +201,7 @@ class WebserverHandler {
 			file = new File(file.getAbsolutePath().replace('/', File.separatorChar));
 		if (file.isDirectory())
 			file = new File(file, "index.html");
-		System.out.println(file + " == " + INDEX_PATH + "  = " + file.toString().equals(INDEX_PATH) + "[" + session.isAuthenticated() + "]");
-		if (file.toString().equals(INDEX_PATH)) {
+		if (file.getAbsolutePath().equals(INDEX_PATH)) {
 			if (session.isAuthenticated()) {
 				file = new File(AUTHENTICATED_PATH);
 			}
@@ -249,9 +248,10 @@ class WebserverHandler {
 		switch (var) {
 			case "log":
 				return data.getLog().replace("\n", "\n<br />");
-			case "online_players": {
+			case "online_player_count": 
+				return getOnlinePlayerCount();						
+			case "online_players": 
 				return getOnlinePlayerData();
-			}
 			case "character_info": {
 				if (!getVariables.containsKey("character_id"))
 					return "";
@@ -268,10 +268,14 @@ class WebserverHandler {
 		}
 	}
 	
+	private String getOnlinePlayerCount() {
+		Set<Player> players = data.getOnlinePlayers();
+		return "Online Players: [" + players.size() + "]";
+	}
+	
 	private String getOnlinePlayerData() {
 		Set<Player> players = data.getOnlinePlayers();
-		StringBuilder ret = new StringBuilder("Online Players: ["+players.size()+"]<br />");
-		ret.append("<table class=\"online_players_table\"><tr><th>Username</th><th>User ID</th><th>Character</th><th>Character ID</th></tr>");
+		StringBuilder ret = new StringBuilder("<table class=\"online_players_table\"><tr><th>Username</th><th>User ID</th><th>Character</th><th>Character ID</th></tr>");
 		for (Player p : players) {
 			ret.append("<tr>");
 			long id = p.getCreatureObject().getObjectId();

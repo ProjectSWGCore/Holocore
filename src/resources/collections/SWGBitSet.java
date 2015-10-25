@@ -32,16 +32,17 @@ import resources.encodables.Encodable;
 import resources.network.DeltaBuilder;
 import resources.objects.SWGObject;
 
-import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.util.Arrays;
 import java.util.BitSet;
 
 
 /**
  * @author Waverunner
  */
-public class SWGBitSet extends BitSet implements Encodable, Serializable {
+public class SWGBitSet extends BitSet implements Encodable {
+	
 	private static final long serialVersionUID = 200L;
 	
 	private final Baseline.BaselineType baseline;
@@ -79,6 +80,18 @@ public class SWGBitSet extends BitSet implements Encodable, Serializable {
 	public void decode(ByteBuffer data) {
 		// TODO: Decode method for SWGBitSet
 		throw new UnsupportedOperationException("Unable to decode bitset!");
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (!(o instanceof SWGBitSet))
+			return super.equals(o);
+		return Arrays.equals(toList(), ((SWGBitSet)o).toList());
+	}
+	
+	@Override
+	public int hashCode() {
+		return Arrays.hashCode(toList());
 	}
 
 	public void sendDeltaMessage(SWGObject target) {
