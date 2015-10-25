@@ -28,6 +28,7 @@ public class BuildoutGenerator {
 	private static final String strType = "TEXT NOT NULL";
 	
 	private final List<GenBuildoutArea> areas;
+	private final List<GenBuildoutArea> fallbackAreas;
 	
 	public static void main(String [] args) throws IOException {
 		BuildoutGenerator gen = new BuildoutGenerator();
@@ -36,6 +37,12 @@ public class BuildoutGenerator {
 	
 	public BuildoutGenerator() {
 		areas = new ArrayList<>();
+		fallbackAreas = new ArrayList<>(Terrain.values().length);
+		int areaId = -1;
+		for (Terrain t : Terrain.values()) {
+			fallbackAreas.add(new GenBuildoutArea(null, t, -8196, -8196, 8196, 8196, areaId, false));
+			areaId--;
+		}
 	}
 	
 	public void createBuildoutSdb(File areaFile, File objectFile) throws IOException {
@@ -72,7 +79,9 @@ public class BuildoutGenerator {
 		for (SWGObject snap : snapshots) {
 			GenBuildoutArea area = getAreaForObject(snap);
 			if (area != null)
-				snap.setAreaId(area.id);
+				snap.setBuildoutAreaId(area.id);
+			else
+				System.err.println("No area for: " + snap.getObjectId() + " / " + snap.getTerrain());
 		}
 		objects.addAll(snapshots);
 		long buildoutId = 1;
@@ -100,6 +109,10 @@ public class BuildoutGenerator {
 			getArea(t, sceneRow, (Boolean) table.getCell(sceneRow, 1));
 		}
 		Collections.sort(areas);
+		for (int i = fallbackAreas.size()-1; i >= 0; i--) {
+			GenBuildoutArea fallback = fallbackAreas.get(i);
+			gen.writeLine(fallback.id, fallback.terrain.getName(), fallback.terrain.getName() + "_global", "", -8196, -8196, 8196, 8196, "0");
+		}
 		for (int i = 0; i < areas.size(); i++) {
 			GenBuildoutArea area = areas.get(i);
 			writeArea(gen, area, null);
@@ -139,7 +152,7 @@ public class BuildoutGenerator {
 		Quaternion q = l.getOrientation();
 		double radius = object.getLoadRange();
 		int cellIndex = (object instanceof CellObject) ? ((CellObject) object).getNumber() : 0;
-		gen.writeLine(id, buildoutId, object.getAreaId(), crc, container, l.getX(), l.getY(), l.getZ(), q.getX(), q.getY(), q.getZ(), q.getW(), radius, cellIndex);
+		gen.writeLine(id, buildoutId, object.getBuildoutAreaId(), crc, container, l.getX(), l.getY(), l.getZ(), q.getX(), q.getY(), q.getZ(), q.getW(), radius, cellIndex);
 	}
 	
 	private GenBuildoutArea getAreaForObject(SWGObject obj) {
@@ -160,14 +173,20 @@ public class BuildoutGenerator {
 				return -1;
 			return Integer.compare(area1.getSorting(), area2.getSorting());
 		});
-		if (ind < 0)
+		if (ind < 0) {
+			for (GenBuildoutArea fallback : fallbackAreas) {
+				if (fallback.terrain == obj.getTerrain())
+					return fallback;
+			}
 			return null;
+		}
 		return areas.get(ind);
 	}
 	
 	private static class GenBuildoutArea implements Comparable<GenBuildoutArea> {
 		public final SwgBuildoutArea area;
 		public final Terrain terrain;
+		public final int index;
 		public final int x1;
 		public final int z1;
 		public final int x2;
@@ -178,6 +197,10 @@ public class BuildoutGenerator {
 		public GenBuildoutArea(SwgBuildoutArea area, Terrain terrain, double x1, double z1, double x2, double z2, int id, boolean adjust) {
 			this.area = area;
 			this.terrain = terrain;
+			if (area != null)
+				this.index = area.getIndex();
+			else
+				this.index = -1;
 			this.x1 = (int) x1;
 			this.z1 = (int) z1;
 			this.x2 = (int) x2;
@@ -187,7 +210,7 @@ public class BuildoutGenerator {
 		}
 		
 		public int compareTo(GenBuildoutArea area) {
-			int comp = terrain.getName().compareTo(area.terrain.getName());
+			int comp = Integer.compare(index, area.index);
 			if (comp != 0)
 				return comp;
 			comp = Integer.compare(x1, area.x1);

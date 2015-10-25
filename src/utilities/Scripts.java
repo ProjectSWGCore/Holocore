@@ -27,8 +27,10 @@
 ***********************************************************************************/
 package utilities;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 import javax.script.Invocable;
@@ -70,7 +72,7 @@ public class Scripts {
 	@SuppressWarnings("unchecked")
 	public static <T> T invoke(String script, String function, Object... args) {
 		try {
-			ENGINE.eval(new FileReader(SCRIPTS + script + EXTENSION));
+			ENGINE.eval(new InputStreamReader(new FileInputStream(SCRIPTS + script + EXTENSION), StandardCharsets.UTF_8));
 			return (T) INVOCABLE.invokeFunction(function, args);
 		} catch (FileNotFoundException e) {
 			// No need to print anything, this is a common error.

@@ -163,6 +163,12 @@ public class Packet {
 	public static void addData(ByteBuffer bb, byte[] data) {
 		bb.put(data);
 	}
+	
+	public static void addArray(ByteBuffer bb, byte[] data) {
+		bb.order(ByteOrder.LITTLE_ENDIAN);
+		addShort(bb, data.length);
+		addData(bb, data);
+	}
 
 	public static void addArrayList(ByteBuffer bb, byte[] b) {
 		addShort(bb, b.length);

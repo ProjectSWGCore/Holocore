@@ -31,8 +31,11 @@ import network.packets.Packet;
 import resources.encodables.Encodable;
 import resources.player.Player;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.nio.ByteBuffer;
+import java.util.Locale;
 
 /**
  * @author Waverunner
@@ -52,6 +55,8 @@ public class ChatAvatar implements Encodable, Serializable {
 
 	public ChatAvatar() {
 		modified = true;
+		data = null;
+		size = 0;
 	}
 
 	public ChatAvatar(long networkId, String name, String galaxy) {
@@ -59,6 +64,13 @@ public class ChatAvatar implements Encodable, Serializable {
 		this.networkId = networkId;
 		this.name = name;
 		this.galaxy = galaxy;
+	}
+	
+	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
+		ois.defaultReadObject();
+		modified = true;
+		data = null;
+		size = 0;
 	}
 
 	public String getName() {
@@ -119,7 +131,7 @@ public class ChatAvatar implements Encodable, Serializable {
 	public void decode(ByteBuffer data) {
 		game 	= Packet.getAscii(data);
 		galaxy 	= Packet.getAscii(data);
-		name 	= Packet.getAscii(data).toLowerCase();
+		name 	= Packet.getAscii(data).toLowerCase(Locale.US);
 	}
 
 	@Override
@@ -150,7 +162,7 @@ public class ChatAvatar implements Encodable, Serializable {
 	}
 
 	public static ChatAvatar getFromPlayer(Player player) {
-		return new ChatAvatar(player.getNetworkId(), player.getCharacterName().split(" ")[0].toLowerCase(), player.getGalaxyName());
+		return new ChatAvatar(player.getNetworkId(), player.getCharacterName().split(" ")[0].toLowerCase(Locale.US), player.getGalaxyName());
 	}
 
 	public static ChatAvatar getSystemAvatar(String galaxy) {
