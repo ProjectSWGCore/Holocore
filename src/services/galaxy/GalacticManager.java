@@ -52,6 +52,7 @@ public class GalacticManager extends Manager {
 	private PlayerManager playerManager;
 	private GameManager gameManager;
 	private ChatManager chatManager;
+	private final TravelService travelService;
 	private Intent prevPacketIntent;
 	private Galaxy galaxy;
 	
@@ -61,12 +62,14 @@ public class GalacticManager extends Manager {
 		playerManager = new PlayerManager();
 		gameManager = new GameManager();
 		chatManager = new ChatManager(g);
+		travelService = new TravelService(objectManager);
 		prevPacketIntent = null;
 		
 		addChildService(objectManager);
 		addChildService(playerManager);
 		addChildService(gameManager);
 		addChildService(chatManager);
+		addChildService(travelService);
 	}
 	
 	@Override
