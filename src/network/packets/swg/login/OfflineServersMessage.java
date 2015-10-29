@@ -67,6 +67,7 @@ public class OfflineServersMessage extends SWGPacket {
 		ByteBuffer data = ByteBuffer.allocate(10 + strLength);
 		addShort(data, 2);
 		addInt(  data, CRC);
+		addInt(data, offlineServers.size());
 		for (String str : offlineServers)
 			addAscii(data, str);
 		return data;
