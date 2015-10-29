@@ -110,7 +110,6 @@ public class ProsePackage implements OutOfBandData, Serializable {
 			setTO(prose);
 			break;
 		case "DI":
-			System.out.println(prose.getClass().getSimpleName());
 			if (prose instanceof Integer)
 				setDI((Integer) prose);
 			else { System.err.println("DI can only be a Integer!"); }
