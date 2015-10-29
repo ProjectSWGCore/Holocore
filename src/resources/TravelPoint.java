@@ -27,14 +27,14 @@
 ***********************************************************************************/
 package resources;
 
-import resources.objects.SWGObject;
+import resources.objects.creature.CreatureObject;
 
 public final class TravelPoint {
 	
 	private final String name;
 	private final Location location;
 	private final boolean reachable;
-	private SWGObject shuttle;
+	private CreatureObject shuttle;
 	private final boolean starport;
 	
 	public TravelPoint(String name, Location location, boolean starport, boolean reachable) {
@@ -60,11 +60,11 @@ public final class TravelPoint {
 		return reachable;
 	}
 	
-	public SWGObject getShuttle() {
+	public CreatureObject getShuttle() {
 		return shuttle;
 	}
 
-	public void setShuttle(SWGObject shuttle) {
+	public void setShuttle(CreatureObject shuttle) {
 		this.shuttle = shuttle;
 	}
 	
