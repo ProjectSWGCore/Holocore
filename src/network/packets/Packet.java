@@ -163,6 +163,12 @@ public class Packet {
 	public static void addData(ByteBuffer bb, byte[] data) {
 		bb.put(data);
 	}
+	
+	public static void addArray(ByteBuffer bb, byte[] data) {
+		bb.order(ByteOrder.LITTLE_ENDIAN);
+		addShort(bb, data.length);
+		addData(bb, data);
+	}
 
 	public static void addArrayList(ByteBuffer bb, byte[] b) {
 		addShort(bb, b.length);
@@ -260,7 +266,15 @@ public class Packet {
 			ints[i] = bb.getInt();
 		return ints;
 	}
-
+	
+	public static boolean[] getBooleanArray(ByteBuffer bb) {
+		bb.order(ByteOrder.LITTLE_ENDIAN);
+		boolean[] booleans = new boolean[bb.getInt()];
+		for(int i = 0; i < booleans.length; i++)
+			booleans[i] = getBoolean(bb);
+		return booleans;
+	}
+	
 	/**
 	 * Decodes the ByteBuffer stream into the passed List using the given listType instance for creating elements
 	 * for the list from the buffer.

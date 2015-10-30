@@ -25,91 +25,46 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package resources.objects.cell;
+package network.packets.swg.zone;
 
-import network.packets.swg.zone.baselines.Baseline.BaselineType;
-import network.packets.swg.zone.building.UpdateCellPermissionMessage;
-import resources.network.BaselineBuilder;
-import resources.objects.SWGObject;
-import resources.player.Player;
+import network.packets.swg.SWGPacket;
 
-public class CellObject extends SWGObject {
-	
-	private static final long serialVersionUID = 1L;
-	
-	private boolean	isPublic	= true;
-	private int		number		= 0;
-	private String	label		= "";
-	private String	name		= "";
+import java.nio.ByteBuffer;
 
-	private double labelX       = 0;
-	private double labelZ       = 0;
-
-	public CellObject(long objectId) {
-		super(objectId, BaselineType.SCLT);
-	}
+public class EnterTicketPurchaseModeMessage extends SWGPacket {
+	public static final int CRC = getCrc("EnterTicketPurchaseModeMessage");
 	
-	public boolean isPublic() {
-		return isPublic;
-	}
+	private String planetName;
+	private String nearestPointName;
+	private boolean instant;
 	
-	public int getNumber() {
-		return number;
-	}
-	
-	public String getLabel() {
-		return label;
-	}
-	
-	public String getCellName() {
-		return name;
-	}
-	
-	public void setPublic(boolean isPublic) {
-		this.isPublic = isPublic;
-	}
-	
-	public void setNumber(int number) {
-		this.number = number;
-	}
-	
-	public void setLabel(String label) {
-		this.label = label;
-	}
-	
-	public void setCellName(String name) {
-		this.name = name;
-	}
-
-	public void setLabelMapPosition(float x, float z) {
-		this.labelX = x;
-		this.labelZ = z;
-	}
-
-	protected void sendBaselines(Player target) {
-		BaselineBuilder bb = new BaselineBuilder(this, BaselineType.SCLT, 3);
-		createBaseline3(target, bb);
-		bb.sendTo(target);
+	public EnterTicketPurchaseModeMessage() {
 		
-		bb = new BaselineBuilder(this, BaselineType.SCLT, 6);
-		createBaseline6(target, bb);
-		bb.sendTo(target);
-		target.sendPacket(new UpdateCellPermissionMessage((byte) 1, getObjectId()));
 	}
 	
-	public void createBaseline3(Player target, BaselineBuilder bb) {
-		super.createBaseline3(target, bb);
-		bb.addBoolean(isPublic);
-		bb.addInt(number);
-		bb.incrementOperandCount(2);
+	public EnterTicketPurchaseModeMessage(String planetName, String nearestPointName, boolean instant) {
+		this.planetName = planetName;
+		this.nearestPointName = nearestPointName;
+		this.instant = instant;
 	}
 	
-	public void createBaseline6(Player target, BaselineBuilder bb) {
-		super.createBaseline6(target, bb);
-		bb.addUnicode(label);
-		bb.addFloat((float) labelX);
-		bb.addFloat((float) 0);
-		bb.addFloat((float) labelZ);
-		bb.incrementOperandCount(2);
+	public void decode(ByteBuffer data) {
+		if (!super.decode(data, CRC))
+			return;
+		planetName = getAscii(data);
+		nearestPointName = getAscii(data);
+		instant = getBoolean(data);
 	}
+	
+	public ByteBuffer encode() {
+		ByteBuffer data = ByteBuffer.allocate(11 + planetName.length() + nearestPointName.length());	// 2x ascii length shorts, 1x opcount short, 1x boolean, int CRC = 11
+		addShort(data, 3);	// Operand count of 3
+		addInt(data, CRC);
+		addAscii(data, planetName);
+		addAscii(data, nearestPointName);
+		addBoolean(data, instant);
+		return data;
+	}
+	
+
 }

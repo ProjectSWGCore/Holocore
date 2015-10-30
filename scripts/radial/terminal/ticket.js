@@ -6,11 +6,9 @@ function getOptions(options) {
 function handleSelection(player, target, selection) {
 	switch (selection) {
 		case RadialItem.ITEM_USE:
-			Log.d("ticket_collector.js", "Ticket Collector Selection: ITEM_USE");
+			Log.d("ticket.js", "Travel Selection: ITEM_USE");
 			var TicketUseIntent = Java.type("intents.travel.TicketUseIntent");
-			
-			new TicketUseIntent(player).broadcast();
-			
+			new TicketUseIntent(player, target).broadcast();
 			break;
 	}
 }

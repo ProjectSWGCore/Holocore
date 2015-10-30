@@ -25,91 +25,42 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package resources.objects.cell;
+package intents.travel;
 
-import network.packets.swg.zone.baselines.Baseline.BaselineType;
-import network.packets.swg.zone.building.UpdateCellPermissionMessage;
-import resources.network.BaselineBuilder;
-import resources.objects.SWGObject;
-import resources.player.Player;
+import resources.control.Intent;
+import resources.objects.creature.CreatureObject;
 
-public class CellObject extends SWGObject {
-	
-	private static final long serialVersionUID = 1L;
-	
-	private boolean	isPublic	= true;
-	private int		number		= 0;
-	private String	label		= "";
-	private String	name		= "";
+public final class TicketPurchaseIntent extends Intent {
 
-	private double labelX       = 0;
-	private double labelZ       = 0;
-
-	public CellObject(long objectId) {
-		super(objectId, BaselineType.SCLT);
+	public static final String TYPE = "TicketPurchaseIntent";
+	
+	private final CreatureObject purchaser;
+	private final boolean roundTrip;
+	private final String destinationName;
+	private final String destinationPlanet;
+	
+	public TicketPurchaseIntent(CreatureObject purchaser, String destinationPlanet, String destinationName, boolean roundTrip) {
+		super(TYPE);
+		this.purchaser = purchaser;
+		this.destinationPlanet = destinationPlanet;
+		this.destinationName = destinationName;
+		this.roundTrip = roundTrip;
 	}
 	
-	public boolean isPublic() {
-		return isPublic;
+	public CreatureObject getPurchaser() {
+		return purchaser;
 	}
 	
-	public int getNumber() {
-		return number;
+	public boolean isRoundTrip() {
+		return roundTrip;
 	}
 	
-	public String getLabel() {
-		return label;
+	public String getDestinationPlanet() {
+		return destinationPlanet;
 	}
 	
-	public String getCellName() {
-		return name;
+	public String getDestinationName() {
+		return destinationName;
 	}
 	
-	public void setPublic(boolean isPublic) {
-		this.isPublic = isPublic;
-	}
-	
-	public void setNumber(int number) {
-		this.number = number;
-	}
-	
-	public void setLabel(String label) {
-		this.label = label;
-	}
-	
-	public void setCellName(String name) {
-		this.name = name;
-	}
-
-	public void setLabelMapPosition(float x, float z) {
-		this.labelX = x;
-		this.labelZ = z;
-	}
-
-	protected void sendBaselines(Player target) {
-		BaselineBuilder bb = new BaselineBuilder(this, BaselineType.SCLT, 3);
-		createBaseline3(target, bb);
-		bb.sendTo(target);
-		
-		bb = new BaselineBuilder(this, BaselineType.SCLT, 6);
-		createBaseline6(target, bb);
-		bb.sendTo(target);
-		target.sendPacket(new UpdateCellPermissionMessage((byte) 1, getObjectId()));
-	}
-	
-	public void createBaseline3(Player target, BaselineBuilder bb) {
-		super.createBaseline3(target, bb);
-		bb.addBoolean(isPublic);
-		bb.addInt(number);
-		bb.incrementOperandCount(2);
-	}
-	
-	public void createBaseline6(Player target, BaselineBuilder bb) {
-		super.createBaseline6(target, bb);
-		bb.addUnicode(label);
-		bb.addFloat((float) labelX);
-		bb.addFloat((float) 0);
-		bb.addFloat((float) labelZ);
-		bb.incrementOperandCount(2);
-	}
 }

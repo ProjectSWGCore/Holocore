@@ -81,6 +81,7 @@ public class OnlineInterfaceService extends Service implements HttpServerCallbac
 			httpServer.start();
 			httpsServer.start();
 			executor.scheduleAtFixedRate(dataCollectionRunnable, 0, 1, TimeUnit.SECONDS);
+			System.out.println("OnlineInterfaceService: Web server is now online.");
 		}
 		return super.start();
 	}

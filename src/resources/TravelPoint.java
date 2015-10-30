@@ -25,91 +25,50 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package resources.objects.cell;
+package resources;
 
-import network.packets.swg.zone.baselines.Baseline.BaselineType;
-import network.packets.swg.zone.building.UpdateCellPermissionMessage;
-import resources.network.BaselineBuilder;
-import resources.objects.SWGObject;
-import resources.player.Player;
+import resources.objects.creature.CreatureObject;
 
-public class CellObject extends SWGObject {
+public final class TravelPoint {
 	
-	private static final long serialVersionUID = 1L;
+	private final String name;
+	private final Location location;
+	private final boolean reachable;
+	private CreatureObject shuttle;
+	private final boolean starport;
 	
-	private boolean	isPublic	= true;
-	private int		number		= 0;
-	private String	label		= "";
-	private String	name		= "";
-
-	private double labelX       = 0;
-	private double labelZ       = 0;
-
-	public CellObject(long objectId) {
-		super(objectId, BaselineType.SCLT);
+	public TravelPoint(String name, Location location, boolean starport, boolean reachable) {
+		this.name = name;
+		this.location = location;
+		this.starport = starport;
+		this.reachable = reachable;	// Not sure which effect this has on the client.
 	}
 	
-	public boolean isPublic() {
-		return isPublic;
-	}
-	
-	public int getNumber() {
-		return number;
-	}
-	
-	public String getLabel() {
-		return label;
-	}
-	
-	public String getCellName() {
+	public String getName() {
 		return name;
 	}
 	
-	public void setPublic(boolean isPublic) {
-		this.isPublic = isPublic;
-	}
-	
-	public void setNumber(int number) {
-		this.number = number;
-	}
-	
-	public void setLabel(String label) {
-		this.label = label;
-	}
-	
-	public void setCellName(String name) {
-		this.name = name;
+	public Location getLocation() {
+		return location;
 	}
 
-	public void setLabelMapPosition(float x, float z) {
-		this.labelX = x;
-		this.labelZ = z;
+	public boolean isStarport() {
+		return starport;
+	}
+	
+	public boolean isReachable() {
+		return reachable;
+	}
+	
+	public CreatureObject getShuttle() {
+		return shuttle;
 	}
 
-	protected void sendBaselines(Player target) {
-		BaselineBuilder bb = new BaselineBuilder(this, BaselineType.SCLT, 3);
-		createBaseline3(target, bb);
-		bb.sendTo(target);
-		
-		bb = new BaselineBuilder(this, BaselineType.SCLT, 6);
-		createBaseline6(target, bb);
-		bb.sendTo(target);
-		target.sendPacket(new UpdateCellPermissionMessage((byte) 1, getObjectId()));
+	public void setShuttle(CreatureObject shuttle) {
+		this.shuttle = shuttle;
 	}
 	
-	public void createBaseline3(Player target, BaselineBuilder bb) {
-		super.createBaseline3(target, bb);
-		bb.addBoolean(isPublic);
-		bb.addInt(number);
-		bb.incrementOperandCount(2);
-	}
-	
-	public void createBaseline6(Player target, BaselineBuilder bb) {
-		super.createBaseline6(target, bb);
-		bb.addUnicode(label);
-		bb.addFloat((float) labelX);
-		bb.addFloat((float) 0);
-		bb.addFloat((float) labelZ);
-		bb.incrementOperandCount(2);
+	public String getSuiFormat() {
+		return String.format("@planet_n:%s -- %s", location.getTerrain().getName(), name);
 	}
 }
