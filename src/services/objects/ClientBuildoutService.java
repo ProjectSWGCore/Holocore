@@ -199,32 +199,20 @@ public class ClientBuildoutService extends Service {
 	
 	private BuildoutArea getAreaForObject(SWGObject obj) {
 		Location l = obj.getWorldLocation();
-		return binarySearch(l.getTerrain(), l.getX(), l.getZ());
+		return binarySearch(l.getTerrain(), l.getX(), l.getZ(), 0, areas.size());
 	}
 	
-	private BuildoutArea binarySearch(Terrain t, double x, double z) {
-		int low = 0;
-		int high = areas.size();
-		int comp = 0;
-		while ((comp = binarySearch(low, high, t, x, z)) != 0 && low != high) {
-			int mid = mid(low, high);
-			if (comp == 0)
-				return areas.get(mid);
-			if (comp < 0) {
-				low = mid;
-			} else {
-				high = mid;
-			}
-		}
-		BuildoutArea area = areas.get(mid(low, high));
-		if (compare(area, t, x, z) == 0)
-			return area;
-		else
+	private BuildoutArea binarySearch(Terrain t, double x, double z, int low, int high) {
+		int mid = mid(low, high);
+		BuildoutArea midArea = areas.get(mid);
+		int comp = compare(midArea, t, x, z);
+		if (comp == 0)
+			return midArea;
+		if (low == mid)
 			return null;
-	}
-	
-	private int binarySearch(int low, int high, Terrain t, double x, double z) {
-		return compare(areas.get(mid(low, high)), t, x, z);
+		if (comp < 0)
+			return binarySearch(t, x, z, low, mid);
+		return binarySearch(t, x, z, mid, high);
 	}
 	
 	private int compare(BuildoutArea cur, Terrain t, double x, double z) {
