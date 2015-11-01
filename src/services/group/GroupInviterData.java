@@ -44,8 +44,12 @@ public class GroupInviterData implements Encodable, Serializable {
 	private Player sender;
 	private String name;
 	private long counter;
-
-	public GroupInviterData(long id, Player sender, String name, int counter) {
+	
+	public GroupInviterData() {
+		this(0, null, null, 0);
+	}
+	
+	public GroupInviterData(long id, Player sender, String name, long counter) {
 		this.id = id;
 		this.sender = sender;
 		this.name = name;
@@ -67,7 +71,7 @@ public class GroupInviterData implements Encodable, Serializable {
 	public void decode(ByteBuffer data) {
 		id = Packet.getLong(data);
 		name = Packet.getAscii(data);
-		counter = Packet.getInt(data);
+		counter = Packet.getLong(data);
 	}
 
 
