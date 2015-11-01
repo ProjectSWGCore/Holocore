@@ -37,6 +37,7 @@ import resources.objects.SWGObject;
 import resources.objects.building.BuildingObject;
 import resources.objects.cell.CellObject;
 import resources.objects.creature.CreatureObject;
+import resources.objects.factory.FactoryObject;
 import resources.objects.group.GroupObject;
 import resources.objects.installation.InstallationObject;
 import resources.objects.intangible.IntangibleObject;
@@ -67,23 +68,24 @@ public final class ObjectCreator {
 	
 	private static SWGObject createObjectFromType(long objectId, String type) {
 		switch (type) {
-			case "mobile":
-			case "creature":			return new CreatureObject(objectId);
-			case "player":				return new PlayerObject(objectId);
-			case "tangible":			return new TangibleObject(objectId);
-			case "intangible":			return new IntangibleObject(objectId);
-			case "waypoint":			return new WaypointObject(objectId);
-			case "weapon":				return new WeaponObject(objectId);
 			case "building":			return new BuildingObject(objectId);
 			case "cell":				return new CellObject(objectId);
-			case "static":				return new StaticObject(objectId);
-			case "resource_container":	return new ResourceContainerObject(objectId);
+			case "creature":			return new CreatureObject(objectId);
+			case "factory":				return new FactoryObject(objectId);
+			case "group":				return new GroupObject(objectId);
 			case "installation":		return new InstallationObject(objectId);
+			case "intangible":			return new IntangibleObject(objectId);
+			case "mobile":				return new CreatureObject(objectId);
+			case "player":				return new PlayerObject(objectId);
+			case "resource_container":	return new ResourceContainerObject(objectId);
 			case "ship":				return new ShipObject(objectId);
 			case "soundobject":			return new SoundObject(objectId);
-			case "group":				return new GroupObject(objectId);
+			case "static":				return new StaticObject(objectId);
+			case "tangible":			return new TangibleObject(objectId);
+			case "waypoint":			return new WaypointObject(objectId);
+			case "weapon":				return new WeaponObject(objectId);
+			default:					return null;
 		}
-		return null;
 	}
 
 	private static void handlePostCreation(SWGObject object) {
