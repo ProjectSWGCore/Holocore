@@ -42,18 +42,13 @@ import intents.object.ObjectIdRequestIntent;
 import intents.object.ObjectIdResponseIntent;
 import intents.object.ObjectTeleportIntent;
 import intents.player.DeleteCharacterIntent;
-import intents.player.PlayerTransformedIntent;
 import intents.RequestZoneInIntent;
 import intents.network.GalacticPacketIntent;
 import network.packets.Packet;
 import network.packets.swg.ErrorMessage;
 import network.packets.swg.zone.SceneDestroyObject;
 import network.packets.swg.zone.insertion.SelectCharacter;
-import network.packets.swg.zone.object_controller.DataTransform;
-import network.packets.swg.zone.object_controller.DataTransformWithParent;
-import network.packets.swg.zone.object_controller.ObjectController;
 import resources.Location;
-import resources.buildout.BuildoutArea;
 import resources.containers.ContainerPermissions;
 import resources.control.Intent;
 import resources.control.Manager;
@@ -109,10 +104,9 @@ public class ObjectManager extends Manager {
 		registerForIntent(ObjectIdRequestIntent.TYPE);
 		registerForIntent(ObjectCreateIntent.TYPE);
 		registerForIntent(DeleteCharacterIntent.TYPE);
-		boolean init = super.initialize();
 		loadClientObjects();
 		loadObjects();
-		return init;
+		return super.initialize();
 	}
 	
 	private void loadObjects() {
@@ -238,16 +232,6 @@ public class ObjectManager extends Manager {
 			String galaxy = gpi.getGalaxy().getName();
 			long characterId = ((SelectCharacter) packet).getCharacterId();
 			zoneInCharacter(pm, galaxy, gpi.getNetworkId(), characterId);
-		} else if (packet instanceof ObjectController) {
-			if (packet instanceof DataTransform) {
-				DataTransform trans = (DataTransform) packet;
-				SWGObject obj = getObjectById(trans.getObjectId());
-				moveObject(obj, trans);
-			} else if (packet instanceof DataTransformWithParent) {
-				DataTransformWithParent transformWithParent = (DataTransformWithParent) packet;
-				SWGObject object = getObjectById(transformWithParent.getObjectId());
-				moveObject(object, transformWithParent);
-			}
 		}
 	}
 	
@@ -355,40 +339,6 @@ public class ObjectManager extends Manager {
 			new ObjectCreatedIntent(obj).broadcast();
 			return obj;
 		}
-	}
-	
-	private void moveObject(SWGObject obj, DataTransform transform) {
-		if (transform == null)
-			return;
-		Location newLocation = transform.getLocation();
-		newLocation.setTerrain(obj.getTerrain());
-		BuildoutArea area = obj.getBuildoutArea();
-		if (area != null && area.isAdjustCoordinates())
-			newLocation.translatePosition(area.getX1(), 0, area.getZ1());
-		if (obj instanceof CreatureObject)
-			new PlayerTransformedIntent((CreatureObject) obj, obj.getParent(), null, obj.getLocation(), newLocation).broadcast();
-		objectAwareness.move(obj, newLocation);
-		if (area != null && area.isAdjustCoordinates())
-			newLocation.translatePosition(-area.getX1(), 0, -area.getZ1());
-		obj.sendDataTransforms(transform);
-
-		// TODO: State checks before sending a data transform message to ensure the move is valid/change speed depending
-		// on the active state (mainly for CreatureObject, override sendDataTransforms in the class?)
-	}
-	
-	private void moveObject(SWGObject obj, DataTransformWithParent transformWithParent) {
-		Location newLocation = transformWithParent.getLocation();
-		newLocation.setTerrain(obj.getTerrain());
-		SWGObject parent = objectMap.get(transformWithParent.getCellId());
-		if (parent == null) {
-			System.err.println("ObjectManager: Could not find parent for transform! Cell: " + transformWithParent.getCellId());
-			Log.e("ObjectManager", "Could not find parent for transform! Cell: %d  Object: %s", transformWithParent.getCellId(), obj);
-			return;
-		}
-		if (obj instanceof CreatureObject)
-			new PlayerTransformedIntent((CreatureObject) obj, obj.getParent(), parent, obj.getLocation(), newLocation).broadcast();
-		objectAwareness.move(obj, parent, newLocation);
-		obj.sendParentDataTransforms(transformWithParent);
 	}
 	
 	private void zoneInCharacter(PlayerManager playerManager, String galaxy, long netId, long characterId) {

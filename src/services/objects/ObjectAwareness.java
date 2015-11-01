@@ -28,9 +28,11 @@
 package services.objects;
 
 import intents.PlayerEventIntent;
+import intents.network.GalacticPacketIntent;
 import intents.object.ObjectCreateIntent;
 import intents.object.ObjectCreatedIntent;
 import intents.object.ObjectTeleportIntent;
+import intents.player.PlayerTransformedIntent;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -39,20 +41,24 @@ import java.util.Map;
 import java.util.Set;
 
 import main.ProjectSWG;
+import network.packets.Packet;
 import network.packets.swg.zone.UpdateContainmentMessage;
 import network.packets.swg.zone.insertion.CmdStartScene;
+import network.packets.swg.zone.object_controller.DataTransform;
+import network.packets.swg.zone.object_controller.DataTransformWithParent;
 import resources.Location;
 import resources.Race;
 import resources.Terrain;
+import resources.buildout.BuildoutArea;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.SWGObject;
-import resources.objects.building.BuildingObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.quadtree.QuadTree;
-import resources.objects.tangible.TangibleObject;
+import resources.objects.staticobject.StaticObject;
 import resources.player.Player;
 import resources.player.PlayerEvent;
+import resources.server_info.Log;
 
 public class ObjectAwareness extends Service {
 	
@@ -63,16 +69,12 @@ public class ObjectAwareness extends Service {
 	
 	public ObjectAwareness() {
 		quadTree = new HashMap<Terrain, QuadTree<SWGObject>>();
-	}
-	
-	@Override
-	public boolean initialize() {
 		registerForIntent(PlayerEventIntent.TYPE);
 		registerForIntent(ObjectCreateIntent.TYPE);
 		registerForIntent(ObjectCreatedIntent.TYPE);
 		registerForIntent(ObjectTeleportIntent.TYPE);
+		registerForIntent(GalacticPacketIntent.TYPE);
 		loadQuadTree();
-		return true;
 	}
 	
 	@Override
@@ -89,9 +91,14 @@ public class ObjectAwareness extends Service {
 			case ObjectCreatedIntent.TYPE:
 				if (i instanceof ObjectCreatedIntent)
 					handleObjectCreatedIntent((ObjectCreatedIntent) i);
+				break;
 			case ObjectTeleportIntent.TYPE:
 				if (i instanceof ObjectTeleportIntent)
 					processObjectTeleportIntent((ObjectTeleportIntent) i);
+				break;
+			case GalacticPacketIntent.TYPE:
+				if (i instanceof GalacticPacketIntent)
+					processGalacticPacketIntent((GalacticPacketIntent) i);
 				break;
 			default:
 				break;
@@ -127,20 +134,14 @@ public class ObjectAwareness extends Service {
 	
 	private void handleObjectCreateIntent(ObjectCreateIntent oci) {
 		SWGObject obj = oci.getObject();
-		if (obj.getParent() == null) {
-			if (obj instanceof TangibleObject || obj instanceof BuildingObject) {
-				add(obj);
-			}
-		}
+		if (isInAwareness(obj))
+			add(obj);
 	}
 	
 	private void handleObjectCreatedIntent(ObjectCreatedIntent oci) {
 		SWGObject obj = oci.getObject();
-		if (obj.getParent() == null) {
-			if (obj instanceof TangibleObject || obj instanceof BuildingObject) {
-				add(obj);
-			}
-		}
+		if (isInAwareness(obj))
+			add(obj);
 	}
 	
 	private void processObjectTeleportIntent(ObjectTeleportIntent oti) {
@@ -148,14 +149,28 @@ public class ObjectAwareness extends Service {
 		Player owner = object.getOwner();
 		boolean creature = object instanceof CreatureObject && owner != null;
 		if (oti.getParent() != null) {
-			move(object, oti.getParent(), oti.getNewLocation());
 			if (creature)
 				startScene((CreatureObject) object, oti.getNewLocation());
+			move(object, oti.getParent(), oti.getNewLocation());
 		} else {
-			move(object, oti.getNewLocation());
 			if (creature)
 				startScene((CreatureObject) object, oti.getNewLocation());
 			object.createObject(owner);
+			move(object, oti.getNewLocation());
+		}
+	}
+	
+	private void processGalacticPacketIntent(GalacticPacketIntent i) {
+		Packet packet = i.getPacket();
+		if (packet instanceof DataTransform) {
+			DataTransform trans = (DataTransform) packet;
+			SWGObject obj = i.getObjectManager().getObjectById(trans.getObjectId());
+			moveObject(obj, trans);
+		} else if (packet instanceof DataTransformWithParent) {
+			DataTransformWithParent transformWithParent = (DataTransformWithParent) packet;
+			SWGObject object = i.getObjectManager().getObjectById(transformWithParent.getObjectId());
+			SWGObject parent = i.getObjectManager().getObjectById(transformWithParent.getCellId());
+			moveObject(object, parent, transformWithParent);
 		}
 	}
 	
@@ -166,10 +181,44 @@ public class ObjectAwareness extends Service {
 		new PlayerEventIntent(object.getOwner(), PlayerEvent.PE_ZONE_IN).broadcast();
 	}
 	
+	private void moveObject(SWGObject obj, DataTransform transform) {
+		Location newLocation = transform.getLocation();
+		newLocation.setTerrain(obj.getTerrain());
+		BuildoutArea area = obj.getBuildoutArea();
+		if (area != null && area.isAdjustCoordinates())
+			newLocation.translatePosition(area.getX1(), 0, area.getZ1());
+		if (obj instanceof CreatureObject)
+			new PlayerTransformedIntent((CreatureObject) obj, obj.getParent(), null, obj.getLocation(), newLocation).broadcast();
+		move(obj, newLocation);
+		if (area != null && area.isAdjustCoordinates())
+			newLocation.translatePosition(-area.getX1(), 0, -area.getZ1());
+		obj.sendDataTransforms(transform);
+
+		// TODO: State checks before sending a data transform message to ensure the move is valid
+	}
+	
+	private void moveObject(SWGObject obj, SWGObject parent, DataTransformWithParent transformWithParent) {
+		Location newLocation = transformWithParent.getLocation();
+		newLocation.setTerrain(obj.getTerrain());
+		if (parent == null) {
+			System.err.println("ObjectManager: Could not find parent for transform! Cell: " + transformWithParent.getCellId());
+			Log.e("ObjectManager", "Could not find parent for transform! Cell: %d  Object: %s", transformWithParent.getCellId(), obj);
+			return;
+		}
+		if (obj instanceof CreatureObject)
+			new PlayerTransformedIntent((CreatureObject) obj, obj.getParent(), parent, obj.getLocation(), newLocation).broadcast();
+		move(obj, parent, newLocation);
+		obj.sendParentDataTransforms(transformWithParent);
+	}
+	
 	private void loadQuadTree() {
 		for (Terrain t : Terrain.values()) {
 			quadTree.put(t, new QuadTree<SWGObject>(16, -8192, -8192, 8192, 8192));
 		}
+	}
+	
+	private boolean isInAwareness(SWGObject object) {
+		return object.getParent() == null && !(object instanceof StaticObject);
 	}
 	
 	/**
