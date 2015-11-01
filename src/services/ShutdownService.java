@@ -59,12 +59,8 @@ public class ShutdownService extends Service {
 		runCount = new AtomicInteger();
 		timeRemaining = new AtomicLong();
 		shutdownExecutor = null;
-	}
-	
-	@Override
-	public boolean initialize() {
+		
 		registerForIntent(ServerStatusIntent.TYPE);
-		return super.initialize();
 	}
 	
 	@Override

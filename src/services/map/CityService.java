@@ -31,13 +31,9 @@ public class CityService extends Service {
 		if (spawnDatabase == null)
 			throw new main.ProjectSWG.CoreException("Unable to load sdb files for StaticService");
 		getAllCitiesStatement = spawnDatabase.prepareStatement(GET_ALL_CITIES_FROM_TERRAIN);
-	}
-	
-	@Override
-	public boolean initialize() {
+		
 		registerForIntent(GalacticPacketIntent.TYPE);
 		registerForIntent(PlayerEventIntent.TYPE);
-		return super.initialize();
 	}
 	
 	@Override

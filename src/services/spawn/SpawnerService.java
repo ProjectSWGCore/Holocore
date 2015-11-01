@@ -60,12 +60,12 @@ public final class SpawnerService extends Service {
 		spawnerDatabase = RelationalServerFactory.getServerData("spawn/static.db", "static", "building/buildings");
 		if (spawnerDatabase == null)
 			throw new main.ProjectSWG.CoreException("Unable to load sdb files for SpawnerService");
+		
+		registerForIntent(ConfigChangedIntent.TYPE);
 	}
 	
 	@Override
 	public boolean initialize() {
-		registerForIntent(ConfigChangedIntent.TYPE);
-		
 		if (getConfig(ConfigFile.FEATURES).getBoolean("SPAWNERS-ENABLED", false))
 			loadSpawners();
 		

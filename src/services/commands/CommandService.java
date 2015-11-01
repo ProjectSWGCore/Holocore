@@ -68,11 +68,12 @@ public class CommandService extends Service {
 		commands = new HashMap<>();
 		commandCrcLookup = new HashMap<>();
 		commandByScript = new HashMap<>();
+		
+		registerForIntent(GalacticPacketIntent.TYPE);
 	}
 	
 	@Override
 	public boolean initialize() {
-		registerForIntent(GalacticPacketIntent.TYPE);
 		loadBaseCommands();
 		registerCallbacks();
 		return super.initialize();

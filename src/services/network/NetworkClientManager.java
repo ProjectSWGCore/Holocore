@@ -97,13 +97,14 @@ public class NetworkClientManager extends Manager implements PacketReceiver {
 			}
 		};
 		networkId = 0;
+		
+		registerForIntent(InboundPacketIntent.TYPE);
+		registerForIntent(OutboundPacketIntent.TYPE);
+		registerForIntent(CloseConnectionIntent.TYPE);
 	}
 	
 	@Override
 	public boolean initialize() {
-		registerForIntent(InboundPacketIntent.TYPE);
-		registerForIntent(OutboundPacketIntent.TYPE);
-		registerForIntent(CloseConnectionIntent.TYPE);
 		packetResender.scheduleAtFixedRate(packetResendRunnable, 0, 200, TimeUnit.MILLISECONDS);
 		return super.initialize();
 	}

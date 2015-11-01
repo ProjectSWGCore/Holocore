@@ -70,11 +70,12 @@ public class GalacticManager extends Manager {
 		addChildService(gameManager);
 		addChildService(chatManager);
 		addChildService(travelService);
+		
+		registerForIntent(InboundPacketIntent.TYPE);
 	}
 	
 	@Override
 	public boolean initialize() {
-		registerForIntent(InboundPacketIntent.TYPE);
 		resetPopulationCount();
 		return super.initialize();
 	}

@@ -107,15 +107,15 @@ public class ConnectionService extends Service {
 				}
 			}
 		};
-	}
-	
-	@Override
-	public boolean initialize() {
+		
 		registerForIntent(PlayerEventIntent.TYPE);
 		registerForIntent(GalacticPacketIntent.TYPE);
 		registerForIntent(ForceDisconnectIntent.TYPE);
 		registerForIntent(ZonePlayerSwapIntent.TYPE);
-		
+	}
+	
+	@Override
+	public boolean initialize() {
 		incrementPopulation = getLocalDatabase().prepareStatement(INCREMENT_POPULATION_SQL);
 		decrementPopulation = getLocalDatabase().prepareStatement(DECREMENT_POPULATION_SQL);
 		return super.initialize();

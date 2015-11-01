@@ -89,12 +89,13 @@ public class ZoneManager extends Manager {
 		commitHistory = "";
 		
 		addChildService(characterCreationService);
+		
+		registerForIntent(RequestZoneInIntent.TYPE);
 	}
 	
 	@Override
 	public boolean initialize() {
 		loadCommitHistory();
-		registerForIntent(RequestZoneInIntent.TYPE);
 		return super.initialize();
 	}
 	

@@ -51,11 +51,12 @@ public class ClientBuildoutService extends Service {
 		areasById = new Hashtable<>(1000); // Number of buildout areas
 		
 		getClientObjects = clientSdb.prepareStatement(GET_CLIENT_OBJECTS_SQL);
+		
+		registerForIntent(PlayerTransformedIntent.TYPE);
 	}
 	
 	@Override
 	public boolean initialize() {
-		registerForIntent(PlayerTransformedIntent.TYPE);
 		List<String> events = getEvents();
 		loadAreas(events);
 		return super.initialize();

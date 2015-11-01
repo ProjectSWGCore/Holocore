@@ -96,11 +96,12 @@ public class LoginService extends Service {
 	
 	public LoginService() {
 		random = new Random();
+		
+		registerForIntent(DeleteCharacterIntent.TYPE);
 	}
 	
 	@Override
 	public boolean initialize() {
-		registerForIntent(DeleteCharacterIntent.TYPE);
 		RelationalDatabase local = getLocalDatabase();
 		getUser = local.prepareStatement("SELECT * FROM users WHERE LOWER(username) = LOWER(?)");
 		getGalaxies = local.prepareStatement("SELECT * FROM galaxies");

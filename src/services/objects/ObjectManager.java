@@ -95,15 +95,16 @@ public class ObjectManager extends Manager {
 		addChildService(radialService);
 		addChildService(spawnerService);
 		addChildService(clientBuildoutService);
-	}
-	
-	@Override
-	public boolean initialize() {
+		
 		registerForIntent(GalacticPacketIntent.TYPE);
 		registerForIntent(ObjectTeleportIntent.TYPE);
 		registerForIntent(ObjectIdRequestIntent.TYPE);
 		registerForIntent(ObjectCreateIntent.TYPE);
 		registerForIntent(DeleteCharacterIntent.TYPE);
+	}
+	
+	@Override
+	public boolean initialize() {
 		loadClientObjects();
 		loadObjects();
 		return super.initialize();
