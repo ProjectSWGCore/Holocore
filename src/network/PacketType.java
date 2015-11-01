@@ -184,6 +184,13 @@ public enum PacketType {
 		RETRIEVE_AUCTION_ITEM_MESSAGE			(RetrieveAuctionItemMessage.CRC, 			RetrieveAuctionItemMessage.class),
 		RETRIEVE_AUCTION_ITEM_RESPONSE_MESSAGE	(RetrieveAuctionItemResponseMessage.CRC, 	RetrieveAuctionItemResponseMessage.class),
 
+		
+		// Travel
+		ENTER_TICKET_PURCHASE_MODE_MESSAGE		(EnterTicketPurchaseModeMessage.CRC,		EnterTicketPurchaseModeMessage.class),
+		PLANET_TRAVEL_POINT_LIST_REQUEST		(PlanetTravelPointListRequest.CRC,			PlanetTravelPointListRequest.class),
+		PLANET_TRAVEL_POINT_LIST_RESPONSE		(PlanetTravelPointListResponse.CRC,			PlanetTravelPointListResponse.class),
+		
+		
 	UNKNOWN (0xFFFFFFFF, SWGPacket.class);
 
 	private static final Map <Integer, PacketType> packetMap = new HashMap<>();

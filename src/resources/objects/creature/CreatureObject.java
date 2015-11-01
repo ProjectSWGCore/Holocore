@@ -27,6 +27,8 @@
 ***********************************************************************************/
 package resources.objects.creature;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 
@@ -721,6 +723,29 @@ public class CreatureObject extends TangibleObject {
 		baseAttributes.add(4, 300); // ??
 		baseAttributes.add(5, 0);
 		baseAttributes.clearDeltaQueue();
+	}
+	
+	public Collection<SWGObject> getItemsByTemplate(String slotName, String template) {
+		Collection<SWGObject> items = new ArrayList<>(getContainedObjects()); // We also search the creature itself - not just the inventory.
+		SWGObject container = getSlottedObject(slotName);
+		Collection<SWGObject> candidateChildren;
+		
+		for(SWGObject candidate : container.getContainedObjects()) {
+			
+			if(candidate.getTemplate().equals(template)) {
+				items.add(candidate);
+			} else {
+				// check the children. This way we're also searching containers, such as backpacks.
+				candidateChildren = candidate.getContainedObjects();
+				
+				for(SWGObject candidateChild : candidateChildren) {
+					if(candidate.getTemplate().equals(template)) {
+						items.add(candidateChild);
+					}
+				}
+			}
+		}
+		return items;
 	}
 	
 	@Override
