@@ -67,7 +67,11 @@ public class CmdStartScene extends SWGPacket {
 			return;
 		ignoreLayoutFiles = getBoolean(data);
 		charId = getLong(data);
-		l.setTerrain(Terrain.getTerrainFromName(getAscii(data)));
+		String ter = getAscii(data);
+		l.setTerrain(null);
+		for (Terrain t : Terrain.values())
+			if (t.getFile().equals(ter))
+				l.setTerrain(t);
 		l.setX(getFloat(data));
 		l.setY(getFloat(data));
 		l.setZ(getFloat(data));

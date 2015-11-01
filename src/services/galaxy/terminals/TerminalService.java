@@ -38,12 +38,13 @@ public class TerminalService extends Service {
 
 		getAllTemplatesStatement = iffDatabase.prepareStatement(GET_ALL_TEMPLATES_SQL);
 		getScriptForIffStatement = iffDatabase.prepareStatement(GET_SCRIPT_FOR_IFF_SQL);
+		
+		registerForIntent(RadialRequestIntent.TYPE);
+		registerForIntent(RadialSelectionIntent.TYPE);
 	}
 	
 	@Override
 	public boolean initialize() {
-		registerForIntent(RadialRequestIntent.TYPE);
-		registerForIntent(RadialSelectionIntent.TYPE);
 		synchronized (getAllTemplatesStatement) {
 			// Cool and fancy Java thing to auto-cleanup resources
 			try (ResultSet set = getAllTemplatesStatement.executeQuery()) {

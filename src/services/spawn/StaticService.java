@@ -61,12 +61,8 @@ public class StaticService extends Service {
 			throw new main.ProjectSWG.CoreException("Unable to load sdb files for StaticService");
 		
 		getSupportingStatement = spawnDatabase.prepareStatement(GET_SUPPORTING_SQL);
-	}
-	
-	@Override
-	public boolean initialize() {
+		
 		registerForIntent(ObjectCreatedIntent.TYPE);
-		return super.initialize();
 	}
 	
 	@Override

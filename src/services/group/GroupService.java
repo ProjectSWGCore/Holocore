@@ -61,15 +61,13 @@ public class GroupService extends Service {
 
 	private final List<Long> reservedIds = new ArrayList<>();
 	private final Map<Long, GroupObject> groups = new HashMap<>();
-
-	@Override
-	public boolean initialize() {
+	
+	public GroupService() {
 		registerForIntent(GroupEventIntent.TYPE);
 		registerForIntent(PlayerEventIntent.TYPE);
 		registerForIntent(ObjectIdResponseIntent.TYPE);
-		return super.initialize();
 	}
-
+	
 	@Override
 	public boolean start() {
 		new ObjectIdRequestIntent("GroupService", 50).broadcast();

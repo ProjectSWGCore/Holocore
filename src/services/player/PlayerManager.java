@@ -67,15 +67,11 @@ public class PlayerManager extends Manager {
 		
 		addChildService(loginService);
 		addChildService(zoneService);
-	}
-	
-	@Override
-	public boolean initialize() {
+		
 		registerForIntent(InboundPacketIntent.TYPE);
 		registerForIntent(GalacticPacketIntent.TYPE);
 		registerForIntent(PlayerEventIntent.TYPE);
 		registerForIntent(NotifyPlayersPacketIntent.TYPE);
-		return super.initialize();
 	}
 	
 	@Override

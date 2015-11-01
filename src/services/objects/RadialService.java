@@ -28,14 +28,10 @@ public class RadialService extends Service {
 	
 	public RadialService() {
 		templatesRegistered = new HashSet<>();
-	}
-	
-	@Override
-	public boolean initialize() {
+		
 		registerForIntent(GalacticPacketIntent.TYPE);
 		registerForIntent(RadialResponseIntent.TYPE);
 		registerForIntent(RadialRegisterIntent.TYPE);
-		return super.initialize();
 	}
 	
 	@Override

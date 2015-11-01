@@ -56,6 +56,7 @@ import network.packets.swg.login.LoginClientToken;
 import network.packets.swg.login.LoginClusterStatus;
 import network.packets.swg.login.LoginEnumCluster;
 import network.packets.swg.login.LoginIncorrectClientId;
+import network.packets.swg.login.OfflineServersMessage;
 import network.packets.swg.login.ServerId;
 import network.packets.swg.login.ServerString;
 import network.packets.swg.login.StationIdHasJediSlot;
@@ -95,11 +96,12 @@ public class LoginService extends Service {
 	
 	public LoginService() {
 		random = new Random();
+		
+		registerForIntent(DeleteCharacterIntent.TYPE);
 	}
 	
 	@Override
 	public boolean initialize() {
-		registerForIntent(DeleteCharacterIntent.TYPE);
 		RelationalDatabase local = getLocalDatabase();
 		getUser = local.prepareStatement("SELECT * FROM users WHERE LOWER(username) = LOWER(?)");
 		getGalaxies = local.prepareStatement("SELECT * FROM galaxies");
@@ -265,6 +267,7 @@ public class LoginService extends Service {
 		sendPacket(p.getNetworkId(), new ServerUnixEpochTime((int) (ProjectSWG.getCoreTime() / 1000)));
 		sendPacket(p.getNetworkId(), token);
 		sendPacket(p.getNetworkId(), cluster);
+		sendPacket(p.getNetworkId(), new OfflineServersMessage());
 		sendPacket(p.getNetworkId(), new CharacterCreationDisabled());
 		sendPacket(p.getNetworkId(), clusterStatus);
 		sendPacket(p.getNetworkId(), new StationIdHasJediSlot(0));

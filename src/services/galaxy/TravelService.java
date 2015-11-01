@@ -41,7 +41,6 @@ import network.packets.Packet;
 import network.packets.swg.zone.EnterTicketPurchaseModeMessage;
 import network.packets.swg.zone.PlanetTravelPointListRequest;
 import network.packets.swg.zone.PlanetTravelPointListResponse;
-import network.packets.swg.zone.object_controller.PostureUpdate;
 import intents.chat.ChatBroadcastIntent;
 import intents.network.GalacticPacketIntent;
 import intents.object.ObjectCreatedIntent;

@@ -43,13 +43,16 @@ public abstract class Service implements IntentReceiver {
 	
 	private static final OutboundPacketService outboundPacketService = new OutboundPacketService();
 	
+	public Service() {
+		IntentManager.getInstance().initialize();
+	}
+	
 	/**
 	 * Initializes this service. If the service returns false on this method
 	 * then the initialization failed and may not work as intended.
 	 * @return TRUE if initialization was successful, FALSE otherwise
 	 */
 	public boolean initialize() {
-		IntentManager.getInstance().initialize();
 		return DataManager.getInstance().isInitialized();
 	}
 	
