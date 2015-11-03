@@ -32,7 +32,7 @@ import utilities.ThreadUtilities;
 public class OnlineInterfaceService extends Service implements HttpServerCallback {
 	
 	private static final String TAG = "OnlineInterfaceService";
-	private static final String GET_USER_SQL = "SELECT password, password_salt, banned FROM users WHERE LOWER(username) = LOWER(?)";
+	private static final String GET_USER_SQL = "SELECT password, banned FROM users WHERE LOWER(username) = LOWER(?)";
 	
 	private final WebserverData data;
 	private final WebserverHandler handler;
