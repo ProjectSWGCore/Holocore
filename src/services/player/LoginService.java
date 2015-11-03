@@ -299,13 +299,12 @@ public class LoginService extends Service {
 		if (password.isEmpty())
 			return "No password specified!";
 		String psqlPass = set.getString("password");
-		String psqlSalt = set.getString("password_salt");
-		if (psqlPass.length() != 32 && psqlSalt.length() == 0) {
+		if (psqlPass.length() != 60 && !psqlPass.startsWith("$2")) {
 			if (psqlPass.equals(password))
 				return "Server Error.\n\nPassword appears to be correct. [Plaintext]";
 			return "Invalid password";
 		}
-		password = MD5.digest(MD5.digest(psqlSalt) + MD5.digest(password));
+		password = BCrypt.hashpw(BCrypt.hashpw(password, psqlPass), psqlPass);
 		if (psqlPass.equals(password))
 			return "Server Error.\n\nPassword appears to be correct. [Hashed]";
 		return "Invalid password";
