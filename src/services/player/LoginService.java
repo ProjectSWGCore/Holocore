@@ -41,7 +41,6 @@ import java.util.Locale;
 import java.util.Random;
 
 import main.ProjectSWG;
-import network.encryption.MD5;
 import network.packets.Packet;
 import network.packets.soe.SessionRequest;
 import network.packets.swg.ErrorMessage;
