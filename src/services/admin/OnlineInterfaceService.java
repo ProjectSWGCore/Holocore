@@ -15,7 +15,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import network.encryption.MD5;
+import resources.common.BCrypt;
 import resources.config.ConfigFile;
 import resources.control.Intent;
 import resources.control.Service;
@@ -32,7 +32,7 @@ import utilities.ThreadUtilities;
 public class OnlineInterfaceService extends Service implements HttpServerCallback {
 	
 	private static final String TAG = "OnlineInterfaceService";
-	private static final String GET_USER_SQL = "SELECT password, password_salt, banned FROM users WHERE LOWER(username) = LOWER(?)";
+	private static final String GET_USER_SQL = "SELECT password, banned FROM users WHERE LOWER(username) = LOWER(?)";
 	
 	private final WebserverData data;
 	private final WebserverHandler handler;
@@ -200,10 +200,9 @@ public class OnlineInterfaceService extends Service implements HttpServerCallbac
 		if (set.getBoolean("banned"))
 			return false;
 		String psqlPass = set.getString("password");
-		String psqlSalt = set.getString("password_salt");
-		if (psqlPass.length() != 32 && psqlSalt.length() == 0)
+		if (psqlPass.length() != 60 && !psqlPass.startsWith("$2"))
 			return psqlPass.equals(password);
-		password = MD5.digest(MD5.digest(psqlSalt) + MD5.digest(password));
+		password = BCrypt.hashpw(BCrypt.hashpw(password, psqlPass), psqlPass);
 		return psqlPass.equals(password);
 	}
 	
