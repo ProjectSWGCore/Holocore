@@ -34,6 +34,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import main.ProjectSWG;
 import network.packets.swg.SWGPacket;
 import network.packets.swg.zone.ServerTimeMessage;
 import network.packets.swg.zone.ServerWeatherMessage;
@@ -63,6 +64,7 @@ public final class EnvironmentService extends Service {
 		weatherForTerrain = new HashMap<>();
 		weatherTypes = WeatherType.values();
 		random = new Random();
+		registerForIntent(PlayerEventIntent.TYPE);
 	}
 	
 	@Override
@@ -72,9 +74,7 @@ public final class EnvironmentService extends Service {
 			weatherForTerrain.put(t, randomWeather());
 			executor.scheduleAtFixedRate(new WeatherChanger(t), 0, cycleDuration, TimeUnit.SECONDS);
 		}
-		executor.scheduleAtFixedRate(() -> { updateTime(); }, 0, 5, TimeUnit.SECONDS);
-		
-		registerForIntent(PlayerEventIntent.TYPE);
+		executor.scheduleAtFixedRate(() -> { updateTime(); }, 0, 30, TimeUnit.SECONDS);
 		
 		return super.initialize();
 	}
@@ -103,8 +103,8 @@ public final class EnvironmentService extends Service {
 	}
 	
 	private void updateTime() {
-		ServerTimeMessage stm = new ServerTimeMessage((long) (System.currentTimeMillis() / 1E3));
-		new NotifyPlayersPacketIntent(stm, null, (player) -> { return true; /* ALL THE ABOVE! */}, null).broadcast();
+		ServerTimeMessage stm = new ServerTimeMessage(ProjectSWG.getGalacticTime());
+		new NotifyPlayersPacketIntent(stm).broadcast();
 	}
 	
 	private void setWeather(Terrain terrain, WeatherType type) {

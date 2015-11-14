@@ -28,6 +28,7 @@
 package resources.encodables.player;
 
 import network.packets.Packet;
+import network.packets.swg.zone.baselines.Baseline;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.common.CRC;
 import resources.encodables.Encodable;
@@ -48,6 +49,10 @@ public class Equipment implements Encodable, Serializable {
 	private int 			arrangementId = 4;
 	private long 			objectId;
 	private String          template;
+	
+	public Equipment() {
+		this(0, null);
+	}
 	
 	public Equipment(long objectId, String template) {
 		this.objectId = objectId;
@@ -94,10 +99,12 @@ public class Equipment implements Encodable, Serializable {
 		customizationString	= Packet.getArray(data); // TODO: Create encodable class for customization string
 		arrangementId		= Packet.getInt(data);
 		objectId			= Packet.getLong(data);
-/*		template			=*/Packet.getInt(data);
+		/*template			=*/Packet.getInt(data);
 
 		// TODO: Re-do when weapon encode for Equipment is fixed
-/*		boolean weapon		=*/Packet.getBoolean(data);
+		boolean weapon		= Packet.getBoolean(data);
+		if (weapon)
+			this.weapon = createWeaponFromData(data);
 	}
 
 	public byte[] getCustomizationString() {return customizationString;}
@@ -127,6 +134,21 @@ public class Equipment implements Encodable, Serializable {
 		System.arraycopy(data6, 0, ret, data3.length, data6.length);
 		
 		return ret;
+	}
+	
+	private WeaponObject createWeaponFromData(ByteBuffer data) {
+		ByteBuffer tmp = ByteBuffer.allocate(data.remaining());
+		int pos = data.position();
+		tmp.get(data.array(), pos, data.array().length - pos);
+		Baseline b3 = new Baseline();
+		b3.decode(tmp);
+		pos += tmp.position();
+		tmp.position(0);
+		tmp.get(data.array(), pos, data.array().length - pos);
+		Baseline b6 = new Baseline();
+		b6.decode(tmp);
+		data.position(tmp.position()+pos);
+		return null;
 	}
 	
 	@Override

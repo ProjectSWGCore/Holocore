@@ -44,6 +44,7 @@ import resources.encodables.StringId;
 import resources.objects.creature.CreatureObject;
 import resources.objects.group.GroupObject;
 import resources.player.Player;
+import resources.player.PlayerEvent;
 import resources.server_info.Log;
 import services.objects.ObjectCreator;
 import services.player.PlayerManager;
@@ -61,15 +62,13 @@ public class GroupService extends Service {
 
 	private final List<Long> reservedIds = new ArrayList<>();
 	private final Map<Long, GroupObject> groups = new HashMap<>();
-
-	@Override
-	public boolean initialize() {
+	
+	public GroupService() {
 		registerForIntent(GroupEventIntent.TYPE);
 		registerForIntent(PlayerEventIntent.TYPE);
 		registerForIntent(ObjectIdResponseIntent.TYPE);
-		return super.initialize();
 	}
-
+	
 	@Override
 	public boolean start() {
 		new ObjectIdRequestIntent("GroupService", 50).broadcast();
@@ -90,6 +89,12 @@ public class GroupService extends Service {
 				reservedIds.addAll(((ObjectIdResponseIntent)i).getReservedIds());
 				break;
 			case PlayerEventIntent.TYPE:
+				if (i instanceof PlayerEventIntent) {
+					PlayerEventIntent pei = (PlayerEventIntent) i;
+					if (pei.getEvent() == PlayerEvent.PE_FIRST_ZONE) {
+						pei.getPlayer().getCreatureObject().setGroupId(0);
+					}
+				}
 				break;
 			default: break;
 		}

@@ -108,14 +108,14 @@ public class ChatRoomService extends Service {
 		messages	= new ConcurrentHashMap<>();
 		chatLogs	= RelationalServerFactory.getServerDatabase("chat/chat_log.db");
 		maxChatRoomId = 1;
+		
+		registerForIntent(ChatRoomUpdateIntent.TYPE);
+		registerForIntent(GalacticPacketIntent.TYPE);
+		registerForIntent(PlayerEventIntent.TYPE);
 	}
 
 	@Override
 	public boolean initialize() {
-		registerForIntent(ChatRoomUpdateIntent.TYPE);
-		registerForIntent(GalacticPacketIntent.TYPE);
-		registerForIntent(PlayerEventIntent.TYPE);
-
 		database.load();
 		database.traverse((room) -> {
 			if (room.getId() >= maxChatRoomId)

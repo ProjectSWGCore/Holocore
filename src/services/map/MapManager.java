@@ -79,12 +79,13 @@ public class MapManager extends Manager {
 		loadMappingTemplates();
 		
 		addChildService(cityService);
+		
+		registerForIntent(GalacticPacketIntent.TYPE);
+		registerForIntent(ObjectCreatedIntent.TYPE);
 	}
 
 	@Override
 	public boolean initialize() {
-		registerForIntent(GalacticPacketIntent.TYPE);
-		registerForIntent(ObjectCreatedIntent.TYPE);
 		loadStaticCityPoints();
 		return super.initialize();
 	}

@@ -36,6 +36,8 @@ import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
+import resources.control.Service;
+
 public class Log {
 	
 	private static final DateFormat LOG_FORMAT = new SimpleDateFormat("dd-mm-yy HH:mm:ss.SSS");
@@ -115,7 +117,7 @@ public class Log {
 	 * severity as INFO, as well as the time, tag and message.
 	 * @param level the log level of this message between INFO and ASSERT
 	 * @param tag the tag to use for the log
-	 * @param str the format string for the log
+	 * @param message the format string for the log
 	 * @param args the string format arguments, if specified
 	 */
 	public static final void i(String tag, String message, Object ... args) {
@@ -124,10 +126,21 @@ public class Log {
 	
 	/**
 	 * Logs the string to the server log file, formatted to display the log
-	 * severity as DEBUG, as well as the time, tag and message.
+	 * severity as INFO, as well as the time, service name and message.
 	 * @param level the log level of this message between INFO and ASSERT
+	 * @param service the service outputting this log info
+	 * @param message the format string for the log
+	 * @param args the string format arguments, if specified
+	 */
+	public static final void i(Service service, String message, Object ... args) {
+		log(LogLevel.INFO, service.getClass().getSimpleName(), message, args);
+	}
+	
+	/**
+	 * Logs the string to the server log file, formatted to display the log
+	 * severity as DEBUG, as well as the time, tag and message.
 	 * @param tag the tag to use for the log
-	 * @param str the format string for the log
+	 * @param message the format string for the log
 	 * @param args the string format arguments, if specified
 	 */
 	public static final void d(String tag, String message, Object ... args) {
@@ -136,10 +149,20 @@ public class Log {
 	
 	/**
 	 * Logs the string to the server log file, formatted to display the log
+	 * severity as DEBUG, as well as the time, tag and message.
+	 * @param service the service outputting this log info
+	 * @param message the format string for the log
+	 * @param args the string format arguments, if specified
+	 */
+	public static final void d(Service service, String message, Object ... args) {
+		log(LogLevel.DEBUG, service.getClass().getSimpleName(), message, args);
+	}
+	
+	/**
+	 * Logs the string to the server log file, formatted to display the log
 	 * severity as WARN, as well as the time, tag and message.
-	 * @param level the log level of this message between INFO and ASSERT
 	 * @param tag the tag to use for the log
-	 * @param str the format string for the log
+	 * @param message the format string for the log
 	 * @param args the string format arguments, if specified
 	 */
 	public static final void w(String tag, String message, Object ... args) {
@@ -148,10 +171,20 @@ public class Log {
 	
 	/**
 	 * Logs the string to the server log file, formatted to display the log
+	 * severity as WARN, as well as the time, tag and message.
+	 * @param service the service outputting this log info
+	 * @param message the format string for the log
+	 * @param args the string format arguments, if specified
+	 */
+	public static final void w(Service service, String message, Object ... args) {
+		log(LogLevel.WARN, service.getClass().getSimpleName(), message, args);
+	}
+	
+	/**
+	 * Logs the string to the server log file, formatted to display the log
 	 * severity as ERROR, as well as the time, tag and message.
-	 * @param level the log level of this message between INFO and ASSERT
 	 * @param tag the tag to use for the log
-	 * @param str the format string for the log
+	 * @param message the format string for the log
 	 * @param args the string format arguments, if specified
 	 */
 	public static final void e(String tag, String message, Object ... args) {
@@ -160,14 +193,35 @@ public class Log {
 	
 	/**
 	 * Logs the string to the server log file, formatted to display the log
+	 * severity as ERROR, as well as the time, tag and message.
+	 * @param service the service outputting this log info
+	 * @param message the format string for the log
+	 * @param args the string format arguments, if specified
+	 */
+	public static final void e(Service service, String message, Object ... args) {
+		log(LogLevel.ERROR, service.getClass().getSimpleName(), message, args);
+	}
+	
+	/**
+	 * Logs the string to the server log file, formatted to display the log
 	 * severity as ASSERT, as well as the time, tag and message.
-	 * @param level the log level of this message between INFO and ASSERT
 	 * @param tag the tag to use for the log
-	 * @param str the format string for the log
+	 * @param message the format string for the log
 	 * @param args the string format arguments, if specified
 	 */
 	public static final void a(String tag, String message, Object ... args) {
 		log(LogLevel.ASSERT, tag, message, args);
+	}
+	
+	/**
+	 * Logs the string to the server log file, formatted to display the log
+	 * severity as ASSERT, as well as the time, tag and message.
+	 * @param service the service outputting this log info
+	 * @param str the format string for the log
+	 * @param args the string format arguments, if specified
+	 */
+	public static final void a(Service service, String message, Object ... args) {
+		log(LogLevel.ASSERT, service.getClass().getSimpleName(), message, args);
 	}
 	
 	public static enum LogLevel {

@@ -24,12 +24,11 @@ public final class FactionService extends Service {
 	private ScheduledExecutorService executor;
 	
 	public FactionService() {
-		
+		registerForIntent(FactionIntent.TYPE);
 	}
 	
 	@Override
 	public boolean initialize() {
-		registerForIntent(FactionIntent.TYPE);
 		executor = Executors.newSingleThreadScheduledExecutor();
 		return super.initialize();
 	}

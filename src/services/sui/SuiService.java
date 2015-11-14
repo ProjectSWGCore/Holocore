@@ -56,15 +56,11 @@ public class SuiService extends Service {
 
 	public SuiService() {
 		windows = new ConcurrentHashMap<>();
-	}
-	
-	@Override
-	public boolean initialize() {
+		
 		registerForIntent(GalacticPacketIntent.TYPE);
 		registerForIntent(SuiWindowIntent.TYPE);
-		return super.initialize();
 	}
-
+	
 	@Override
 	public void onIntentReceived(Intent i) {
 		switch (i.getType()) {

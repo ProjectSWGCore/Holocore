@@ -74,10 +74,7 @@ public class ChatManager extends Manager {
 
 		addChildService(roomService);
 		addChildService(mailService);
-	}
-	
-	@Override
-	public boolean initialize() {
+		
 		registerForIntent(GalacticPacketIntent.TYPE);
 		registerForIntent(SpatialChatIntent.TYPE);
 		registerForIntent(PersistentMessageIntent.TYPE);
@@ -86,7 +83,6 @@ public class ChatManager extends Manager {
 		registerForIntent(ServerStatusIntent.TYPE);
 		registerForIntent(ChatAvatarRequestIntent.TYPE);
 		registerForIntent(ZonePlayerSwapIntent.TYPE);
-		return super.initialize();
 	}
 	
 	public void onIntentReceived(Intent i) {

@@ -87,6 +87,9 @@ public class CoreManager extends Manager {
 			addChildService(engineManager);
 			addChildService(galacticManager);
 		}
+		registerForIntent(InboundPacketIntent.TYPE);
+		registerForIntent(OutboundPacketIntent.TYPE);
+		registerForIntent(ServerManagementIntent.TYPE);
 	}
 	
 	/**
@@ -104,9 +107,6 @@ public class CoreManager extends Manager {
 	@Override
 	public boolean initialize() {
 		startTime = System.nanoTime();
-		registerForIntent(InboundPacketIntent.TYPE);
-		registerForIntent(OutboundPacketIntent.TYPE);
-		registerForIntent(ServerManagementIntent.TYPE);
 		packetDebug = getConfig(ConfigFile.PRIMARY).getBoolean("PACKET-DEBUG", false);
 		initializePacketOutput();
 		return galaxy != null && super.initialize();

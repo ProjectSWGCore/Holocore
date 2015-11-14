@@ -42,13 +42,14 @@ public class ChatMailService extends Service {
 		mails = new CachedObjectDatabase<>("odb/mails.db");
 		chatLogs = RelationalServerFactory.getServerDatabase("chat/chat_log.db");
 		maxMailId = 1;
+		
+		registerForIntent(GalacticPacketIntent.TYPE);
+		registerForIntent(PersistentMessageIntent.TYPE);
+		registerForIntent(PlayerEventIntent.TYPE);
 	}
 	
 	@Override
 	public boolean initialize() {
-		registerForIntent(GalacticPacketIntent.TYPE);
-		registerForIntent(PersistentMessageIntent.TYPE);
-		registerForIntent(PlayerEventIntent.TYPE);
 		mails.load();
 		mails.traverse(mail -> {
 			if (mail.getId() >= maxMailId)

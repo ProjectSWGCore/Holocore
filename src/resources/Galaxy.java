@@ -76,6 +76,11 @@ public class Galaxy {
 	public void setOnlineFreeTrialLimit(int max) { this.onlineFreeTrialLimit = max; }
 	public void setRecommended(boolean r)        { this.recommended = r; }
 	
+	public String toString() {
+		return String.format("Galaxy[ID=%d Name=%s Address=%s Zone=%d Ping=%d Pop=%d PopStat=%d Status=%s Time=%d Max=%d Rec=%b]",
+				id, name, address, zonePort, pingPort, population, popStatus, status, timeZone, maxCharacters, recommended);
+	}
+	
 	public void setStatus(int status) {
 		for (GalaxyStatus gs : GalaxyStatus.values()) {
 			if (gs.getStatus() == status) {

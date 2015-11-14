@@ -41,7 +41,6 @@ import network.packets.Packet;
 import network.packets.swg.zone.EnterTicketPurchaseModeMessage;
 import network.packets.swg.zone.PlanetTravelPointListRequest;
 import network.packets.swg.zone.PlanetTravelPointListResponse;
-import network.packets.swg.zone.object_controller.PostureUpdate;
 import intents.chat.ChatBroadcastIntent;
 import intents.network.GalacticPacketIntent;
 import intents.object.ObjectCreatedIntent;
@@ -60,6 +59,7 @@ import resources.encodables.ProsePackage;
 import resources.encodables.StringId;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
+import resources.objects.tangible.OptionFlag;
 import resources.player.Player;
 import resources.server_info.Log;
 import resources.server_info.RelationalServerData;
@@ -496,13 +496,17 @@ public class TravelService extends Service {
 		SWGObject object = i.getObject();
 		String template = object.getTemplate();
 		
-		if(template.contains("shared_player_shuttle") || template.contains("shared_player_transport")) {
+		// There are non-functional shuttles, which are StaticObject. We run an instanceof check to make sure that we ignore those.
+		if((template.contains("shared_player_shuttle") || template.contains("shared_player_transport")) && object instanceof CreatureObject) {
 			Location shuttleLocation = object.getLocation();
 			TravelPoint pointForShuttle = nearestTravelPoint(shuttleLocation);
+			CreatureObject shuttle = (CreatureObject) object;
 			
-			if(pointForShuttle != null)
-				// Assign the shuttle to the nearest travel point
-				pointForShuttle.setShuttle(object);
+			// Assign the shuttle to the nearest travel point
+			pointForShuttle.setShuttle(shuttle);
+			
+			shuttle.setOptionFlags(OptionFlag.INVULNERABLE);
+			shuttle.setShownOnRadar(false);
 		}
 	}
 	
@@ -583,12 +587,12 @@ public class TravelService extends Service {
 	private void updateShuttlePostures(Posture posture) {
 		for(Collection<TravelPoint> travelPoints : pointsOnPlanet.values()) {
 			for(TravelPoint tp : travelPoints) {
-				SWGObject shuttle = tp.getShuttle();
+				CreatureObject shuttle = tp.getShuttle();
 				
 				if(shuttle == null)	// This TravelPoint has no associated shuttle
 					continue;	// Continue with the next TravelPoint
 				
-				shuttle.sendObservers(new PostureUpdate(shuttle.getObjectId(), posture));
+				shuttle.setPosture(posture);
 			}
 		}
 		
