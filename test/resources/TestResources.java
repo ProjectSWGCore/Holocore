@@ -39,7 +39,6 @@ import resources.services.TestConfig;
 @RunWith(Suite.class)
 @SuiteClasses({
 	SWGListTest.class,
-	TestSortedLinkedList.class,
 	TestWeatherType.class,
 	TestQuadTree.class,
 	TestObjectDatabase.class,

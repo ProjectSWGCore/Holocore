@@ -29,10 +29,10 @@ package network;
 
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.concurrent.TimeUnit;
 
-import resources.SortedLinkedList;
 import network.encryption.Encryption;
 import network.packets.Packet;
 import network.packets.soe.DataChannelA;
@@ -47,13 +47,13 @@ public class OutboundNetworkHandler {
 	private static final long RESEND_TIMEOUT = TimeUnit.MILLISECONDS.toMillis(3000);
 	
 	private final Queue <byte []> assembleQueue;
-	private final SortedLinkedList <SequencedPacket> sequenced;
+	private final Queue <SequencedPacket> sequenced;
 	private short sendSequence;
 	private int crc;
 	
 	public OutboundNetworkHandler() {
 		assembleQueue = new LinkedList<byte []>();
-		sequenced = new SortedLinkedList<SequencedPacket>();
+		sequenced = new PriorityQueue<SequencedPacket>();
 		sendSequence = 0;
 		crc = 0;
 	}
@@ -79,8 +79,8 @@ public class OutboundNetworkHandler {
 	
 	public synchronized void onAcknowledge(short sequence) {
 		synchronized (sequenced) {
-			Iterator <SequencedPacket> it = sequenced.listIterator();
-			while (it.hasNext()) {
+			Iterator <SequencedPacket> it = sequenced.iterator();
+			while(it.hasNext()) {
 				SequencedPacket sp = it.next();
 				if (sp.getSequence() <= sequence) {
 					it.remove();
@@ -96,7 +96,7 @@ public class OutboundNetworkHandler {
 	
 	public synchronized void onOutOfOrder(short sequence) {
 		synchronized (sequenced) {
-			Iterator <SequencedPacket> it = sequenced.listIterator();
+			Iterator <SequencedPacket> it = sequenced.iterator();
 			while (it.hasNext()) {
 				SequencedPacket sp = it.next();
 				if (sp.getSequence() > sequence) {
