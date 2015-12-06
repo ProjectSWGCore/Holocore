@@ -47,6 +47,7 @@ import utilities.Encoder.StringType;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class PlayerObject extends IntangibleObject {
 	
@@ -153,6 +154,10 @@ public class PlayerObject extends IntangibleObject {
 	}
 
 	public int getPlayTime() {
+		int startTime = getStartPlayTime();
+		int deltaTime = (int) ((System.currentTimeMillis()) - startTime);
+		setPlayTime((int) TimeUnit.MILLISECONDS.toSeconds(deltaTime));	// Set new time and send delta
+		
 		return playTime;
 	}
 

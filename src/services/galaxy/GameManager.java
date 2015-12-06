@@ -28,6 +28,7 @@
 package services.galaxy;
 
 import resources.control.Manager;
+import services.commands.BuffService;
 import services.commands.CommandService;
 import services.faction.FactionService;
 import services.galaxy.terminals.TerminalService;
@@ -42,6 +43,7 @@ public class GameManager extends Manager {
 	private final TerminalService terminalManager;
 	private final FactionService factionService;
 //	private final GroupService groupService;
+	private final BuffService buffService;
 
 	public GameManager() {
 		commandService = new CommandService();
@@ -51,7 +53,8 @@ public class GameManager extends Manager {
 		terminalManager = new TerminalService();
 		factionService = new FactionService();
 //		groupService = new GroupService();
-
+		buffService = new BuffService();
+		
 		addChildService(commandService);
 		addChildService(connectionService);
 		addChildService(suiService);
@@ -59,5 +62,6 @@ public class GameManager extends Manager {
 		addChildService(terminalManager);
 		addChildService(factionService);
 //		addChildService(groupService);
+		addChildService(buffService);
 	}
 }

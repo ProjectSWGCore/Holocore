@@ -36,6 +36,7 @@ import network.packets.swg.zone.UpdatePostureMessage;
 import network.packets.swg.zone.UpdatePvpStatusMessage;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import network.packets.swg.zone.object_controller.PostureUpdate;
+import resources.Buff;
 import resources.HologramColour;
 import resources.Posture;
 import resources.PvpFlag;
@@ -43,6 +44,7 @@ import resources.Race;
 import resources.SkillMod;
 import resources.collections.SWGList;
 import resources.collections.SWGMap;
+import resources.common.CRC;
 import resources.encodables.player.Equipment;
 import resources.network.BaselineBuilder;
 import resources.objects.SWGObject;
@@ -56,7 +58,7 @@ import utilities.Encoder.StringType;
 
 public class CreatureObject extends TangibleObject {
 	
-	private static final long serialVersionUID = 2L;
+	private static final long serialVersionUID = 3L;
 	
 	private transient GroupInviterData inviterData = new GroupInviterData(0, null, "", 0);
 	private transient long lastReserveOperation	= 0;
@@ -115,7 +117,7 @@ public class CreatureObject extends TangibleObject {
 	private SWGMap<String, SkillMod> 	skillMods			= new SWGMap<>(BaselineType.CREO, 4, 3, StringType.ASCII);
 	private SWGMap<Long, Long>		missionCriticalObjs	= new SWGMap<>(BaselineType.CREO, 4, 13);
 	private SWGMap<String, Integer>	abilities			= new SWGMap<>(BaselineType.CREO, 4, 14, StringType.ASCII);
-	private SWGMap<Integer, Long>	buffs				= new SWGMap<>(BaselineType.CREO, 6, 26); // TODO: Buff structure
+	private SWGMap<Integer, Buff>	buffs				= new SWGMap<>(BaselineType.CREO, 6, 26);
 
 
 	public CreatureObject(long objectId) {
@@ -626,6 +628,32 @@ public class CreatureObject extends TangibleObject {
 	public int getSkillModValue(String skillModName) {
 		SkillMod skillMod = skillMods.get(skillModName);
 		return skillMod != null ? skillMod.getValue() : 0;
+	}
+	
+	public void addBuff(String buffName, Buff buff) {
+		buffs.put(CRC.getCrc(buffName), buff);
+		buffs.sendDeltaMessage(this);
+	}
+	
+	public void removeBuff(String buffName) {
+		buffs.remove(CRC.getCrc(buffName));
+		buffs.sendDeltaMessage(this);
+	}
+	
+	public boolean hasBuff(String buffName) {
+		return buffs.containsKey(CRC.getCrc(buffName));
+	}
+	
+	public Buff getBuffByName(String buffName) {
+		return buffs.get(CRC.getCrc(buffName));
+	}
+	
+	public void adjustBuffStackCount(String buffName, int adjustment) {
+		int buffCrc = CRC.getCrc(buffName);
+		Buff buff = buffs.get(buffCrc);
+		buff.adjustStackCount(adjustment);	// Adjust the stack count
+		// TODO reset time remaining?
+		buffs.update(buffCrc, this);	// Send deltas for this key.
 	}
 	
 	public boolean isVisible() {
