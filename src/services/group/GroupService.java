@@ -89,12 +89,8 @@ public class GroupService extends Service {
 				reservedIds.addAll(((ObjectIdResponseIntent)i).getReservedIds());
 				break;
 			case PlayerEventIntent.TYPE:
-				if (i instanceof PlayerEventIntent) {
-					PlayerEventIntent pei = (PlayerEventIntent) i;
-					if (pei.getEvent() == PlayerEvent.PE_FIRST_ZONE) {
-						pei.getPlayer().getCreatureObject().setGroupId(0);
-					}
-				}
+				if (i instanceof PlayerEventIntent)
+					handlePlayerEventIntent((PlayerEventIntent) i);
 				break;
 			default: break;
 		}
@@ -112,6 +108,32 @@ public class GroupService extends Service {
 				handleGroupDisband(intent.getPlayer(), intent.getTarget());
 				break;
 		}
+	}
+
+	private void handlePlayerEventIntent(PlayerEventIntent intent) {
+		switch(intent.getEvent()) {
+			case PE_FIRST_ZONE:
+				handleMemberRezoned(intent.getPlayer());
+				break;
+			default: break;
+		}
+	}
+
+	private void handleMemberRezoned(Player player) {
+		CreatureObject creatureObject = player.getCreatureObject();
+		long groupId = creatureObject.getGroupId();
+
+		if (groupId == 0)
+			return;
+
+		GroupObject groupObject = getGroup(creatureObject.getGroupId());
+		if (groupObject == null) {
+			// Group was destroyed while logged out
+			creatureObject.setGroupId(0);
+			return;
+		}
+
+		groupObject.updateMember(creatureObject);
 	}
 
 	private void handleGroupDisband(Player player, CreatureObject target) {

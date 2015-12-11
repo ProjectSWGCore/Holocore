@@ -113,6 +113,12 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 		}
 	}
 
+	public void updateMember(CreatureObject object) {
+		if (groupMembers.contains(new GroupMember(object.getObjectId(), object.getName())))
+			awarenessInRange(object);
+		else awarenessOutOfRange(object);
+	}
+
 	public long getLeader() {
 		return leader;
 	}
