@@ -59,6 +59,7 @@ import resources.objects.staticobject.StaticObject;
 import resources.player.Player;
 import resources.player.PlayerEvent;
 import resources.server_info.Log;
+import utilities.DebugUtilities;
 
 public class ObjectAwareness extends Service {
 	
@@ -112,6 +113,7 @@ public class ObjectAwareness extends Service {
 			return;
 		switch (pei.getEvent()) {
 			case PE_DISAPPEAR:
+				DebugUtilities.printPlayerCharacterDebug(this, (CreatureObject) creature, "Disappearing");
 				creature.clearAware();
 				remove(creature);
 				for (SWGObject obj : creature.getObservers())
@@ -120,10 +122,12 @@ public class ObjectAwareness extends Service {
 				p.setCreatureObject(null);
 				break;
 			case PE_FIRST_ZONE:
+				DebugUtilities.printPlayerCharacterDebug(this, (CreatureObject) creature, "FirstZone");
 				if (creature.getParent() == null)
 					creature.createObject(p);
 				break;
 			case PE_ZONE_IN:
+				DebugUtilities.printPlayerCharacterDebug(this, (CreatureObject) creature, "Zone");
 				creature.clearAware();
 				update(creature);
 				break;
@@ -226,6 +230,8 @@ public class ObjectAwareness extends Service {
 	 * @param object the object to add
 	 */
 	public void add(SWGObject object) {
+		if (object instanceof CreatureObject && object.hasSlot("ghost"))
+			DebugUtilities.printPlayerCharacterDebug(this, (CreatureObject) object, "Adding");
 		update(object);
 		Location l = object.getLocation();
 		if (invalidLocation(l))
@@ -241,6 +247,8 @@ public class ObjectAwareness extends Service {
 	 * @param object the object to remove
 	 */
 	public void remove(SWGObject object) {
+		if (object instanceof CreatureObject && object.hasSlot("ghost"))
+			DebugUtilities.printPlayerCharacterDebug(this, (CreatureObject) object, "Removing");
 		Location l = object.getLocation();
 		if (invalidLocation(l))
 			return;

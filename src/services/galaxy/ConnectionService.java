@@ -56,6 +56,7 @@ import resources.player.PlayerEvent;
 import resources.player.PlayerFlags;
 import resources.player.PlayerState;
 import resources.server_info.Log;
+import utilities.DebugUtilities;
 import utilities.ThreadUtilities;
 
 public class ConnectionService extends Service {
@@ -100,6 +101,7 @@ public class ConnectionService extends Service {
 					while (iter.hasNext()) {
 						DisappearPlayer p = iter.next();
 						if ((System.nanoTime()-p.getTime())/1E6 >= DISAPPEAR_THRESHOLD) {
+							DebugUtilities.printPlayerCharacterDebug(ConnectionService.this, p.getPlayer(), "Disappearing");
 							disappear(p.getPlayer(), DisconnectReason.TIMEOUT);
 							iter.remove();
 						}
