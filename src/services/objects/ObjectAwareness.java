@@ -230,7 +230,7 @@ public class ObjectAwareness extends Service {
 	 * @param object the object to add
 	 */
 	public void add(SWGObject object) {
-		if (object instanceof CreatureObject && object.hasSlot("ghost"))
+		if (object instanceof CreatureObject)
 			DebugUtilities.printPlayerCharacterDebug(this, (CreatureObject) object, "Adding");
 		update(object);
 		Location l = object.getLocation();
@@ -247,7 +247,7 @@ public class ObjectAwareness extends Service {
 	 * @param object the object to remove
 	 */
 	public void remove(SWGObject object) {
-		if (object instanceof CreatureObject && object.hasSlot("ghost"))
+		if (object instanceof CreatureObject)
 			DebugUtilities.printPlayerCharacterDebug(this, (CreatureObject) object, "Removing");
 		Location l = object.getLocation();
 		if (invalidLocation(l))
