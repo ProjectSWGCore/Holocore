@@ -114,10 +114,10 @@ public class ObjectAwareness extends Service {
 		switch (pei.getEvent()) {
 			case PE_DISAPPEAR:
 				DebugUtilities.printPlayerCharacterDebug(this, (CreatureObject) creature, "Disappearing");
-				creature.clearAware();
 				remove(creature);
 				for (SWGObject obj : creature.getObservers())
 					creature.destroyObject(obj.getOwner());
+				creature.clearAware();
 				creature.setOwner(null);
 				p.setCreatureObject(null);
 				break;
@@ -331,6 +331,8 @@ public class ObjectAwareness extends Service {
 	
 	private boolean isValidInRange(SWGObject obj, SWGObject inRange, Location objLoc) {
 		if (inRange.getObjectId() == obj.getObjectId())
+			return false;
+		if (obj.hasSlot("ghost") && obj.getOwner() == null)
 			return false;
 		int distSquared = distanceSquared(objLoc, inRange.getWorldLocation());
 		int loadSquared = (int) (square(inRange.getLoadRange()) + 0.5);
