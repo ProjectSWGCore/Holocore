@@ -9,7 +9,7 @@ public class DebugUtilities {
 	
 	public static void printPlayerCharacterDebug(Service service, Player p, String identifyingText) {
 		CreatureObject c = p.getCreatureObject();
-		boolean hasGhost = c.getSlottedObject("ghost") != null;
+		boolean hasGhost = c.hasSlot("ghost");
 		Log.d(service, "[%s]  PLAY=%s/%d  CREO=%s/%d  hasGhost=%b", identifyingText, p.getUsername(), p.getUserId(), c.getName(), c.getObjectId(), hasGhost);
 	}
 	
@@ -21,7 +21,7 @@ public class DebugUtilities {
 			username = p.getUsername();
 			id = p.getUserId();
 		}
-		boolean hasGhost = c.getSlottedObject("ghost") != null;
+		boolean hasGhost = c.hasSlot("ghost");
 		Log.d(service, "[%s]  PLAY=%s/%d  CREO=%s/%d  hasGhost=%b", identifyingText, username, id, c.getName(), c.getObjectId(), hasGhost);
 	}
 	
