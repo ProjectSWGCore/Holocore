@@ -228,7 +228,7 @@ public enum PacketType {
 		try {
 			return c.newInstance();
 		} catch (Exception e) {
-			System.err.println("Packet: " + c.getName());
+			System.err.printf("Packet: [%08X] %s%n", crc, c.getName());
 			e.printStackTrace();
 		}
 		return null;

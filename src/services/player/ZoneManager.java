@@ -31,14 +31,12 @@ import intents.GalacticIntent;
 import intents.PlayerEventIntent;
 import intents.RequestZoneInIntent;
 import intents.chat.ChatBroadcastIntent;
+import intents.network.GalacticPacketIntent;
 import main.ProjectSWG;
 import network.packets.Packet;
-import network.packets.soe.SessionRequest;
 import network.packets.swg.login.AccountFeatureBits;
 import network.packets.swg.login.ClientIdMsg;
 import network.packets.swg.login.ClientPermissionsMessage;
-import network.packets.swg.login.ServerId;
-import network.packets.swg.login.ServerString;
 import network.packets.swg.zone.CmdSceneReady;
 import network.packets.swg.zone.GalaxyLoopTimesResponse;
 import network.packets.swg.zone.HeartBeat;
@@ -52,12 +50,13 @@ import network.packets.swg.zone.chat.ChatSystemMessage;
 import network.packets.swg.zone.chat.VoiceChatStatus;
 import network.packets.swg.zone.insertion.ChatServerStatus;
 import network.packets.swg.zone.insertion.CmdStartScene;
+
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
-import resources.Galaxy;
+
 import resources.Location;
 import resources.Race;
 import resources.config.ConfigFile;
@@ -72,7 +71,6 @@ import resources.player.Player;
 import resources.player.PlayerEvent;
 import resources.player.PlayerFlags;
 import resources.player.PlayerState;
-import resources.server_info.Config;
 import resources.server_info.Log;
 
 import java.io.File;
@@ -91,6 +89,7 @@ public class ZoneManager extends Manager {
 		addChildService(characterCreationService);
 		
 		registerForIntent(RequestZoneInIntent.TYPE);
+		registerForIntent(GalacticPacketIntent.TYPE);
 	}
 	
 	@Override
@@ -104,13 +103,14 @@ public class ZoneManager extends Manager {
 		if (i instanceof RequestZoneInIntent) {
 			RequestZoneInIntent zii = (RequestZoneInIntent) i;
 			zoneInPlayer(zii.getPlayer(), zii.getCreature(), zii.getGalaxy());
+		} else if (i instanceof GalacticPacketIntent) {
+			GalacticPacketIntent gpi = (GalacticPacketIntent) i;
+			handlePacket(gpi, gpi.getPlayerManager().getPlayerFromNetworkId(gpi.getNetworkId()), gpi.getNetworkId(), gpi.getPacket());
 		}
 	}
 	
 	public void handlePacket(GalacticIntent intent, Player player, long networkId, Packet p) {
 		characterCreationService.handlePacket(intent, player, networkId, p);
-		if (p instanceof SessionRequest)
-			sendServerInfo(intent.getGalaxy(), networkId);
 		if (p instanceof ClientIdMsg)
 			handleClientIdMsg(player, (ClientIdMsg) p);
 		if (p instanceof RequestGalaxyLoopTimes)
@@ -194,7 +194,6 @@ public class ZoneManager extends Manager {
 		sendPacket(player, new ParametersMessage());
 		sendPacket(player, new ChatOnConnectAvatar());
 		sendPacket(player, new CmdStartScene(false, objId, race, l, ProjectSWG.getGalacticTime(), (int)(System.currentTimeMillis()/1E3)));
-		flushPackets();
 	}
 	
 	private void initPlayerBeforeZoneIn(Player player, CreatureObject creatureObj, PlayerObject playerObj) {
@@ -230,14 +229,6 @@ public class ZoneManager extends Manager {
 		}
 		
 		ghost.updateWaypoint(waypoint);
-	}
-
-	private void sendServerInfo(Galaxy galaxy, long networkId) {
-		Config c = getConfig(ConfigFile.NETWORK);
-		String name = c.getString("ZONE-SERVER-NAME", galaxy.getName());
-		int id = c.getInt("ZONE-SERVER-ID", galaxy.getId());
-		sendPacket(networkId, new ServerString(name + ":" + id));
-		sendPacket(networkId, new ServerId(id));
 	}
 	
 	private void handleCmdSceneReady(Player player, CmdSceneReady p) {

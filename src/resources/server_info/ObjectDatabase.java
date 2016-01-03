@@ -40,7 +40,6 @@ public abstract class ObjectDatabase<V extends Serializable> {
 	
 	private final File file;
 	private final ScheduledExecutorService autosaveService;
-	private final Runnable autosaveRunnable;
 	
 	public ObjectDatabase(String filename) {
 		this(filename, TimeUnit.MINUTES.toMillis(5));
@@ -56,22 +55,13 @@ public abstract class ObjectDatabase<V extends Serializable> {
 		if (autosaveInterval < 60000)
 			autosaveInterval = 60000;
 		this.autosaveService = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("odb-autosave-"+file.getName()));
-		this.autosaveRunnable = new Runnable() {
-			public void run() {
-				autosavePeriodic();
-			}
-		};
 		// Setup
-		autosaveService.scheduleAtFixedRate(autosaveRunnable, autosaveInterval, autosaveInterval, TimeUnit.MILLISECONDS);
+		autosaveService.scheduleAtFixedRate(() -> save(), autosaveInterval, autosaveInterval, TimeUnit.MILLISECONDS);
 		try {
 			createFilesAndDirectories();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	private void autosavePeriodic() {
-		save();
 	}
 	
 	private void createFilesAndDirectories() throws IOException {

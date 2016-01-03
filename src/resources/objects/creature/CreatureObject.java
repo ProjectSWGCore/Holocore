@@ -57,8 +57,9 @@ public class CreatureObject extends TangibleObject {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private transient GroupInviterData inviterData = new GroupInviterData(0, null, "", 0);
-	private transient long lastReserveOperation	= 0;
+	private transient GroupInviterData inviterData	= new GroupInviterData(0, null, "", 0);
+	private transient long lastReserveOperation		= 0;
+	private transient long groupId					= 0;
 	
 	private Posture	posture					= Posture.UPRIGHT;
 	private Race	race					= Race.HUMAN; 
@@ -95,7 +96,6 @@ public class CreatureObject extends TangibleObject {
 	private boolean performing				= false;
 	private boolean shownOnRadar			= true;
 	private boolean beast					= false;
-	private long 	groupId					= 0;
 	private byte 	factionRank				= 0;
 	private long 	ownerId					= 0;
 	private int 	battleFatigue			= 0;
@@ -127,7 +127,10 @@ public class CreatureObject extends TangibleObject {
 
 	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
 		ois.defaultReadObject();
+		// Transient Variables
 		inviterData = new GroupInviterData(0, null, "", 0);
+		lastReserveOperation = 0;
+		groupId = 0;
 	}
 
 	public void removeEquipment(SWGObject obj) {

@@ -30,6 +30,7 @@ package services.player;
 import intents.GalacticIntent;
 import intents.LoginEventIntent;
 import intents.LoginEventIntent.LoginEvent;
+import intents.network.GalacticPacketIntent;
 import intents.player.DeleteCharacterIntent;
 
 import java.sql.PreparedStatement;
@@ -42,7 +43,6 @@ import java.util.Random;
 
 import main.ProjectSWG;
 import network.packets.Packet;
-import network.packets.soe.SessionRequest;
 import network.packets.swg.ErrorMessage;
 import network.packets.swg.ServerUnixEpochTime;
 import network.packets.swg.login.CharacterCreationDisabled;
@@ -56,8 +56,6 @@ import network.packets.swg.login.LoginClusterStatus;
 import network.packets.swg.login.LoginEnumCluster;
 import network.packets.swg.login.LoginIncorrectClientId;
 import network.packets.swg.login.OfflineServersMessage;
-import network.packets.swg.login.ServerId;
-import network.packets.swg.login.ServerString;
 import network.packets.swg.login.StationIdHasJediSlot;
 import resources.Galaxy;
 import resources.Race;
@@ -98,6 +96,7 @@ public class LoginService extends Service {
 		random = new Random();
 		
 		registerForIntent(DeleteCharacterIntent.TYPE);
+		registerForIntent(GalacticPacketIntent.TYPE);
 	}
 	
 	@Override
@@ -115,15 +114,13 @@ public class LoginService extends Service {
 	public void onIntentReceived(Intent i) {
 		if (i instanceof DeleteCharacterIntent) {
 			deleteCharacter(((DeleteCharacterIntent) i).getCreature().getObjectId());
+		} else if (i instanceof GalacticPacketIntent) {
+			GalacticPacketIntent gpi = (GalacticPacketIntent) i;
+			handlePacket(gpi, gpi.getPlayerManager().getPlayerFromNetworkId(gpi.getNetworkId()), gpi.getPacket());
 		}
 	}
 	
 	public void handlePacket(GalacticIntent intent, Player player, Packet p) {
-		if (p instanceof SessionRequest) {
-			player.setConnectionId(((SessionRequest)p).getConnectionID());
-			player.setPlayerState(PlayerState.DISCONNECTED);
-			sendServerInfo(player);
-		}
 		if (p instanceof LoginClientId)
 			handleLogin(player, (LoginClientId) p);
 		if (p instanceof DeleteCharacterRequest)
@@ -137,14 +134,6 @@ public class LoginService extends Service {
 		return name + ":" + id;
 	}
 	
-	private void sendServerInfo(Player player) {
-		Config c = getConfig(ConfigFile.NETWORK);
-		String name = c.getString("LOGIN-SERVER-NAME", "LoginServer");
-		int id = c.getInt("LOGIN-SERVER-ID", 1);
-		sendPacket(player.getNetworkId(), new ServerString(name + ":" + id));
-		sendPacket(player.getNetworkId(), new ServerId(id));
-	}
-	
 	private void handleCharDeletion(GalacticIntent intent, Player player, DeleteCharacterRequest request) {
 		SWGObject obj = intent.getObjectManager().destroyObject(request.getPlayerId());
 		if (obj != null && obj instanceof CreatureObject) {
@@ -156,7 +145,7 @@ public class LoginService extends Service {
 	}
 	
 	private void handleLogin(Player player, LoginClientId id) {
-		if (player.getPlayerState() != PlayerState.DISCONNECTED) {
+		if (player.getPlayerState() != PlayerState.CONNECTED) {
 			System.err.println("Player cannot login when " + player.getPlayerState());
 			return;
 		}
