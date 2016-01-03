@@ -60,7 +60,7 @@ import utilities.ThreadUtilities;
 
 public class ConnectionService extends Service {
 	
-	private static final double DISAPPEAR_THRESHOLD = TimeUnit.SECONDS.toMillis(30); // Time after the LD
+	private static final double DISAPPEAR_THRESHOLD = TimeUnit.MINUTES.toMillis(3); // Time after the LD
 	private static final String INCREMENT_POPULATION_SQL = "UPDATE galaxies SET population = population + 1 WHERE id = ?";
 	private static final String DECREMENT_POPULATION_SQL = "UPDATE galaxies SET population = population - 1 WHERE id = ?";
 	

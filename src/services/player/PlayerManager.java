@@ -282,7 +282,6 @@ public class PlayerManager extends Manager {
 			p = players.get(cci.getNetworkId());
 		}
 		if (p != null) {
-			System.out.println("Disconnecting: " + p);
 			p.setPlayerState(PlayerState.DISCONNECTED);
 			new PlayerEventIntent(p, PlayerEvent.PE_LOGGED_OUT).broadcast();
 		} else {
