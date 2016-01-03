@@ -44,6 +44,7 @@ import network.packets.swg.zone.object_controller.ObjectController;
 public class NetworkClient {
 	
 	private final Object prevPacketIntentMutex = new Object();
+	private final Object outboundMutex = new Object();
 	private final InetSocketAddress address;
 	private final long networkId;
 	private final PacketSender packetSender;
@@ -83,7 +84,9 @@ public class NetworkClient {
 		data.putShort((short) encoded.length);
 		data.putShort((short) decompressedLength);
 		data.put(encoded);
-		packetSender.sendPacket(address, data.array());
+		synchronized (outboundMutex) {
+			packetSender.sendPacket(address, data.array());
+		}
 	}
 	
 	public boolean process(byte [] data) {
