@@ -38,12 +38,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import network.packets.Packet;
-import network.packets.soe.DataChannelA;
-import network.packets.soe.MultiPacket;
-import network.packets.swg.SWGPacket;
-import network.packets.swg.zone.baselines.Baseline;
-import network.packets.swg.zone.object_controller.ObjectController;
 import intents.network.InboundPacketIntent;
 import intents.network.OutboundPacketIntent;
 import intents.server.ServerManagementIntent;
@@ -127,15 +121,7 @@ public class CoreManager extends Manager {
 	@Override
 	public void onIntentReceived(Intent i) {
 		if (packetDebug) {
-			if (i instanceof InboundPacketIntent) {
-				InboundPacketIntent in = (InboundPacketIntent) i;
-				packetOutput.println("IN  " + in.getNetworkId() + ":" + in.getServerType());
-				outputPacket(1, in.getPacket());
-			} else if (i instanceof OutboundPacketIntent) {
-				OutboundPacketIntent out = (OutboundPacketIntent) i;
-				packetOutput.println("OUT " + out.getNetworkId());
-				outputPacket(1, out.getPacket());
-			}
+			
 		}
 		if (i instanceof ServerManagementIntent)
 			handleServerManagementIntent((ServerManagementIntent) i);
@@ -178,52 +164,6 @@ public class CoreManager extends Manager {
 	
 	public GalaxyStatus getGalaxyStatus() {
 		return galaxy.getStatus();
-	}
-	
-	private void outputPacket(int indent, Packet packet) {
-		if (packet instanceof DataChannelA) {
-			for (SWGPacket p : ((DataChannelA) packet).getPackets()) {
-				for (int i = 0; i < indent; i++)
-					packetOutput.print("    ");
-				outputSWG(p);
-			}
-		} else if (packet instanceof MultiPacket) {
-			for (Packet p : ((MultiPacket) packet).getPackets()) {
-				for (int i = 0; i < indent; i++)
-					packetOutput.print("    ");
-				if (p instanceof SWGPacket)
-					outputSWG((SWGPacket) p);
-				if (p instanceof DataChannelA)
-					outputPacket(indent+1, p);
-			}
-		} else if (packet instanceof SWGPacket) {
-			for (int i = 0; i < indent; i++)
-				packetOutput.print("    ");
-			outputSWG((SWGPacket) packet);
-		} else {
-			for (int i = 0; i < indent; i++)
-				packetOutput.print("    ");
-			packetOutput.println(packet.getClass().getSimpleName());
-		}
-	}
-	
-	private void outputSWG(SWGPacket p) {
-		if (p instanceof Baseline)
-			outputBaseline((Baseline) p);
-		else if (p instanceof ObjectController)
-			outputObjectController((ObjectController) p);
-		else
-			packetOutput.println(p.getClass().getSimpleName());
-	}
-	
-	private void outputBaseline(Baseline b) {
-		packetOutput.println("Baseline [" + b.getId() + "] " + b.getType() + " " + b.getNum());
-	}
-	
-	private void outputObjectController(ObjectController cont) {
-		int crc = cont.getControllerCrc();
-		long id = cont.getObjectId();
-		packetOutput.println("ObjectController [" + id + "] 0x" + Integer.toHexString(crc));
 	}
 	
 	/**

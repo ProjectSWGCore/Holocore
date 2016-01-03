@@ -133,16 +133,7 @@ public abstract class Service implements IntentReceiver {
 	 * @param packets the packet(s) to send
 	 */
 	public void sendPacket(final long networkId, final Packet ... packets) {
-		outboundPacketService.sendPacket(networkId, packets);
-	}
-	
-	/**
-	 * Sends all packets that were stored in the buffer via sendPacket()
-	 * @return the number of packets sent (includes SWG packets inside
-	 * multi/data packets)
-	 */
-	public int flushPackets() {
-		return outboundPacketService.flushPackets();
+		outboundPacketService.send(networkId, packets);
 	}
 	
 	/**

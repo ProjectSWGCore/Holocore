@@ -142,7 +142,6 @@ public class ProjectSWG {
 	private void loop() {
 		setStatus((manager.getGalaxyStatus() == GalaxyStatus.UP) ? ServerStatus.OPEN : ServerStatus.LOCKED);
 		while (!shutdownRequested && !manager.isShutdownRequested() && manager.isOperational()) {
-			manager.flushPackets(); // Sends any packets that weren't sent
 			try {
 				Thread.sleep(50);
 			} catch (InterruptedException e) {

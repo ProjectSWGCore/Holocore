@@ -44,7 +44,6 @@ import resources.encodables.StringId;
 import resources.objects.creature.CreatureObject;
 import resources.objects.group.GroupObject;
 import resources.player.Player;
-import resources.player.PlayerEvent;
 import resources.server_info.Log;
 import services.objects.ObjectCreator;
 import services.player.PlayerManager;

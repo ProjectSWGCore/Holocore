@@ -28,115 +28,99 @@
 package services.network;
 
 import intents.network.CloseConnectionIntent;
-import intents.network.InboundPacketIntent;
+import intents.network.ConnectionClosedIntent;
+import intents.network.ConnectionOpenedIntent;
 import intents.network.OutboundPacketIntent;
 
+import java.io.IOException;
 import java.net.InetAddress;
-import java.nio.ByteBuffer;
-import java.util.ArrayList;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+import java.net.SocketAddress;
+import java.net.UnknownHostException;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 import java.util.Queue;
-import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicLong;
 
 import network.NetworkClient;
-import network.PacketReceiver;
 import network.PacketSender;
 import network.packets.Packet;
-import network.packets.soe.Disconnect;
-import network.packets.soe.SessionRequest;
-import network.packets.soe.SessionResponse;
-import network.packets.soe.Disconnect.DisconnectReason;
 import resources.config.ConfigFile;
 import resources.control.Intent;
 import resources.control.Manager;
-import resources.network.ServerType;
-import resources.network.UDPServer.UDPPacket;
+import resources.network.DisconnectReason;
+import resources.network.TCPServer;
+import resources.network.TCPServer.TCPCallback;
+import resources.server_info.Config;
+import resources.server_info.Log;
 import utilities.ThreadUtilities;
 
-public class NetworkClientManager extends Manager implements PacketReceiver {
+public class NetworkClientManager extends Manager implements TCPCallback, PacketSender {
 	
-	private final Map <InetAddress, List <NetworkClient>> clients;
-	private final Map <Long, NetworkClient> networkClients;
+	private final Map <InetSocketAddress, Long> sockets;
+	private final Map <Long, NetworkClient> clients;
 	private final Queue<ReceivedPacket> receivedPackets;
-	private final ScheduledExecutorService packetResender;
 	private final ExecutorService packetProcessor;
-	private final Random crcGenerator;
-	private final PacketSender packetSender;
 	private final Runnable processPacketRunnable;
-	private final Runnable packetResendRunnable;
-	private long networkId;
+	private final AtomicLong networkIdCounter;
+	private final TCPServer tcpServer;
 	
-	public NetworkClientManager(PacketSender packetSender) {
-		this.packetSender = packetSender;
-		clients = new HashMap<InetAddress, List<NetworkClient>>();
-		networkClients = new HashMap<Long, NetworkClient>();
+	public NetworkClientManager() {
+		sockets = new HashMap<InetSocketAddress, Long>();
+		clients = new Hashtable<Long, NetworkClient>();
 		receivedPackets = new LinkedList<>();
-		packetResender = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("packet-resender"));
-		packetProcessor = Executors.newCachedThreadPool(ThreadUtilities.newThreadFactory("packet-processor-%d"));
-		crcGenerator = new Random();
+		networkIdCounter = new AtomicLong(1);
+		packetProcessor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors(), ThreadUtilities.newThreadFactory("packet-processor-%d"));
 		processPacketRunnable = new Runnable() {
 			public void run() {
 				synchronized (receivedPackets) {
 					ReceivedPacket recv = receivedPackets.poll();
 					if (recv == null)
 						return;
-					handlePacket(recv.getType(), recv.getPacket());
+					handlePacket(recv);
 				}
 			}
 		};
-		packetResendRunnable = new Runnable() {
-			public void run() {
-				resendOldUnacknowledged();
-			}
-		};
-		networkId = 0;
+		tcpServer = new TCPServer(getBindAddr(), getBindPort(), getBufferSize());
 		
-		registerForIntent(InboundPacketIntent.TYPE);
 		registerForIntent(OutboundPacketIntent.TYPE);
 		registerForIntent(CloseConnectionIntent.TYPE);
 	}
 	
 	@Override
-	public boolean initialize() {
-		packetResender.scheduleAtFixedRate(packetResendRunnable, 0, 200, TimeUnit.MILLISECONDS);
-		return super.initialize();
+	public boolean start() {
+		try {
+			tcpServer.bind();
+			tcpServer.setCallback(this);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return super.start();
 	}
 	
 	@Override
 	public boolean stop() {
-		for (NetworkClient client : networkClients.values()) {
-			client.sendPacket(new Disconnect(client.getConnectionId(), DisconnectReason.APPLICATION));
-		}
+		tcpServer.close();
 		return super.stop();
 	}
 	
 	@Override
 	public boolean terminate() {
 		packetProcessor.shutdownNow();
-		packetResender.shutdownNow();
 		boolean success = true;
 		try {
 			success = packetProcessor.awaitTermination(5, TimeUnit.SECONDS);
-			success = packetResender.awaitTermination(5, TimeUnit.SECONDS) && success;
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		return super.terminate() && success;
-	}
-	
-	@Override
-	public void receivePacket(ServerType type, UDPPacket packet) {
-		synchronized (receivedPackets) {
-			receivedPackets.add(new ReceivedPacket(type, packet));
-		}
-		packetProcessor.submit(processPacketRunnable);
 	}
 	
 	@Override
@@ -145,210 +129,135 @@ public class NetworkClientManager extends Manager implements PacketReceiver {
 			Packet p = ((OutboundPacketIntent)i).getPacket();
 			if (p != null)
 				handleOutboundPacket(((OutboundPacketIntent) i).getNetworkId(), p);
-		} else if (i instanceof InboundPacketIntent) {
-			Packet p = ((InboundPacketIntent) i).getPacket();
-			if (p != null) {
-				if (p instanceof SessionRequest)
-					initializeSession((SessionRequest) p);
-				if (p instanceof Disconnect)
-					disconnectSession(((InboundPacketIntent) i).getNetworkId(), (Disconnect) p);
-			}
 		} else if (i instanceof CloseConnectionIntent) {
-			int connId = ((CloseConnectionIntent)i).getConnectionId();
 			long netId = ((CloseConnectionIntent)i).getNetworkId();
-			DisconnectReason reason = ((CloseConnectionIntent)i).getReason();
-			removeClient(netId);
-			sendPacket(netId, new Disconnect(connId, reason));
+			deleteSession(netId);
 		}
 	}
 	
-	private void initializeSession(SessionRequest req) {
-		NetworkClient client = getClient(req.getAddress(), req.getPort());
-		if (client == null) {
-			return;
+	@Override
+	public void onIncomingConnection(Socket s) {
+		SocketAddress addr = s.getRemoteSocketAddress();
+		if (addr instanceof InetSocketAddress)
+			createSession(networkIdCounter.incrementAndGet(), (InetSocketAddress) addr);
+		else
+			Log.e(this, "Incoming connection has socket address of instance: %s", addr.getClass().getSimpleName());
+	}
+	
+	@Override
+	public void onConnectionDisconnect(Socket s) {
+		SocketAddress addr = s.getRemoteSocketAddress();
+		if (addr instanceof InetSocketAddress)
+			onSessionDisconnect((InetSocketAddress) addr);
+		else
+			Log.e(this, "Connection Disconnected. Has socket address of instance: %s", addr.getClass().getSimpleName());
+	}
+	
+	@Override
+	public void onIncomingData(Socket s, byte [] data) {
+		synchronized (receivedPackets) {
+			SocketAddress addr = s.getRemoteSocketAddress();
+			if (addr instanceof InetSocketAddress)
+				receivedPackets.add(new ReceivedPacket((InetSocketAddress) addr, data));
+			else
+				Log.e(this, "Incoming data has socket address of instance: %s", addr.getClass().getSimpleName());
+			packetProcessor.submit(processPacketRunnable);
 		}
-		SessionResponse outPacket = new SessionResponse();
-		outPacket.setConnectionID(client.getConnectionId());
-		outPacket.setCrcSeed(client.getCrc());
-		outPacket.setCrcLength(2);
-		outPacket.setEncryptionFlag((short) 1);
-		outPacket.setXorLength((byte) 4);
-		outPacket.setUdpSize(getConfig(ConfigFile.NETWORK).getInt("MAX-PACKET-SIZE", 496));
-		sendPacket(client.getNetworkId(), outPacket);
 	}
 	
-	private void disconnectSession(long networkId, Disconnect d) {
-		disconnectSession(networkId, d.getAddress(), d.getPort(), d.getReason());
+	@Override
+	public void sendPacket(InetSocketAddress sock, byte[] data) {
+		tcpServer.send(sock, data);
 	}
 	
-	private void disconnectSession(long networkId, InetAddress addr, int port, DisconnectReason reason) {
-		removeClient(networkId, addr, port);
+	private InetAddress getBindAddr() {
+		Config c = getConfig(ConfigFile.NETWORK);
+		String ip = c.getString("BIND-ADDR", "::1");
+		try {
+			return InetAddress.getByName(ip);
+		} catch (UnknownHostException e) {
+			System.err.println("NetworkListenerService: Unknown host for IP: " + ip);
+		}
+		return null;
 	}
 	
-	private int generateCrc() {
-		int crc = 0;
-		do {
-			crc = crcGenerator.nextInt();
-		} while (crc == 0);
-		return crc;
+	private int getBindPort() {
+		return getConfig(ConfigFile.NETWORK).getInt("BIND-PORT", 44463);
 	}
 	
-	private void resendOldUnacknowledged() {
+	private int getBufferSize() {
+		return getConfig(ConfigFile.NETWORK).getInt("BUFFER-SIZE", 1024);
+	}
+	
+	private void createSession(long networkId, InetSocketAddress address) {
 		synchronized (clients) {
-			for (NetworkClient client : networkClients.values()) {
-				client.resendOldUnacknowledged();
-				flushPackets();
+			sockets.put(address, networkId);
+			clients.put(networkId, new NetworkClient(address, networkId, this));
+			new ConnectionOpenedIntent(networkId).broadcast();
+			System.out.println("Created Session: " + networkId + " / " + address);
+		}
+	}
+	
+	private void onSessionDisconnect(InetSocketAddress address) {
+		synchronized (clients) {
+			Long networkId = sockets.get(address);
+			if (networkId != null) {
+				deleteSession(networkId);
+				new ConnectionClosedIntent(networkId, DisconnectReason.OTHER_SIDE_TERMINATED).broadcast();
 			}
+		}
+	}
+	
+	private void deleteSession(long networkId) {
+		synchronized (clients) {
+			NetworkClient client = clients.get(networkId);
+			if (client == null)
+				return;
+			clients.remove(networkId);
+			sockets.remove(client.getAddress());
 		}
 	}
 	
 	private void handleOutboundPacket(long networkId, Packet p) {
 		synchronized (clients) {
-			NetworkClient client = networkClients.get(networkId);
+			NetworkClient client = clients.get(networkId);
 			if (client != null)
 				client.sendPacket(p);
+			else
+				Log.w(this, "NetworkClient does not exist for ID: %d", networkId);
 		}
 	}
 	
-	private void handlePacket(ServerType type, UDPPacket p) {
-		InetAddress addr = p.getAddress();
-		if (addr == null)
-			return;
-		if (p.getData().length == 14 && p.getData()[0] == 0 && p.getData()[1] == 1) {
-			handleSessionRequest(type, p);
-			return;
-		}
-		if (type == ServerType.LOGIN || type == ServerType.ZONE)
-			handlePacket(p.getAddress(), p.getPort(), type, p.getData());
-	}
-	
-	private void handlePacket(InetAddress addr, int port, ServerType type, byte [] data) {
+	private void handlePacket(ReceivedPacket packet) {
 		synchronized (clients) {
-			List <NetworkClient> ipList = clients.get(addr);
-			if (ipList != null) {
-				synchronized (ipList) {
-					for (NetworkClient c : ipList) {
-						if (c.processPacket(type, data)) {
-							c.updateNetworkInfo(addr, port);
-						}
-					}
-				}
+			Long netId = sockets.get(packet.getAddress());
+			if (netId == null) {
+				Log.w(this, "Unknown socket address! Address: %s", packet.getAddress());
+				return;
 			}
+			NetworkClient client = clients.get(netId);
+			if (client != null)
+				client.process(packet.getData());
+			else
+				Log.w(this, "Unknown connection! Network ID: %d  Address: %s", netId, packet.getAddress());
 		}
-	}
-	
-	private void handleSessionRequest(ServerType type, UDPPacket p) {
-		SessionRequest req = new SessionRequest(ByteBuffer.wrap(p.getData()));
-		req.setAddress(p.getAddress());
-		req.setPort(p.getPort());
-		NetworkClient client = createSession(type, req);
-		if (client != null)
-			client.processPacket(type, p.getData());
-	}
-	
-	private NetworkClient createSession(ServerType type, SessionRequest req) {
-		NetworkClient client = getClient(req.getAddress(), req.getPort());
-		if (client != null) {
-			if (client.getConnectionId() == req.getConnectionID()) {
-				client.resetNetwork();
-				client.updateNetworkInfo(req.getAddress(), req.getPort());
-				return client;
-			} else 
-				return null;
-		}
-		client = createClient(type, req.getAddress(), req.getPort());
-		client.setCrc(generateCrc());
-		client.setConnectionId(req.getConnectionID());
-		return client;
-	}
-	
-	private NetworkClient createClient(ServerType type, InetAddress addr, int port) {
-		synchronized (clients) {
-			NetworkClient client = new NetworkClient(type, addr, port, networkId++, packetSender);
-			List <NetworkClient> ipList = clients.get(addr);
-			if (ipList == null) {
-				ipList = new ArrayList<NetworkClient>();
-				clients.put(addr, ipList);
-			}
-			synchronized (ipList) {
-				ipList.add(client);
-			}
-			networkClients.put(client.getNetworkId(), client);
-			return client;
-		}
-	}
-	
-	private NetworkClient getClient(InetAddress addr, int port) {
-		synchronized (clients) {
-			List <NetworkClient> ipList = clients.get(addr);
-			if (ipList != null) {
-				synchronized (ipList) {
-					for (NetworkClient c : ipList) {
-						if (c.getPort() == port)
-							return c;
-					}
-				}
-			}
-		}
-		return null;
-	}
-	
-	private boolean removeClient(long networkId) {
-		synchronized (clients) {
-			NetworkClient client = networkClients.remove(networkId);
-			if (client != null) {
-				InetAddress addr = client.getAddress();
-				int port = client.getPort();
-				List <NetworkClient> ipList = clients.get(addr);
-				if (ipList != null) {
-					synchronized (ipList) {
-						for (NetworkClient c : ipList) {
-							if (c.getPort() == port) {
-								ipList.remove(c);
-								return true;
-							}
-						}
-					}
-				}
-				client.resetNetwork();
-			}
-		}
-		return false;
-	}
-	
-	private boolean removeClient(long networkId, InetAddress addr, int port) {
-		synchronized (clients) {
-			networkClients.remove(networkId);
-			List <NetworkClient> ipList = clients.get(addr);
-			if (ipList != null) {
-				synchronized (ipList) {
-					for (NetworkClient c : ipList) {
-						if (c.getPort() == port) {
-							ipList.remove(c);
-							return true;
-						}
-					}
-				}
-			}
-		}
-		return false;
 	}
 	
 	private static class ReceivedPacket {
-		private final ServerType type;
-		private final UDPPacket packet;
+		private final InetSocketAddress address;
+		private final byte [] data;
 		
-		public ReceivedPacket(ServerType type, UDPPacket packet) {
-			this.type = type;
-			this.packet = packet;
+		public ReceivedPacket(InetSocketAddress address, byte [] data) {
+			this.address = address;
+			this.data = data;
 		}
 		
-		public ServerType getType() {
-			return type;
+		public InetSocketAddress getAddress() {
+			return address;
 		}
 		
-		public UDPPacket getPacket() {
-			return packet;
+		public byte [] getData() {
+			return data;
 		}
 	}
 	

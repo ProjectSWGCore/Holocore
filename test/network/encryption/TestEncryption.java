@@ -29,8 +29,6 @@ package network.encryption;
 
 import java.util.Random;
 
-import network.packets.soe.Acknowledge;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -98,17 +96,5 @@ public class TestEncryption {
 //			Assert.assertArrayEquals(expected, encoded);
 //		}
 //	}
-	
-	@Test
-	public void testAcknowledge() {
-		Random r = new Random();
-		int crc = r.nextInt();
-		System.out.println(Integer.toHexString(crc));
-		Acknowledge a = new Acknowledge((short) 5);
-		byte [] data = a.encode().array();
-		byte [] encoded = Encryption.encode(data, crc);
-		byte [] decoded = Encryption.decode(encoded, crc);
-		Assert.assertArrayEquals(data, decoded);
-	}
 	
 }

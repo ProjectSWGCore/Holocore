@@ -29,70 +29,35 @@ package network;
 
 import intents.network.InboundPacketIntent;
 
-import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.util.ArrayList;
 import java.util.List;
 
 import resources.control.Intent;
-import resources.network.ServerType;
+import network.encryption.Compression;
 import network.packets.Packet;
+import network.packets.swg.SWGPacket;
+import network.packets.swg.zone.object_controller.ObjectController;
 
 public class NetworkClient {
 	
 	private final Object prevPacketIntentMutex = new Object();
+	private final InetSocketAddress address;
 	private final long networkId;
-	private final ServerType serverType;
-	private final NetworkProtocol protocol;
-	private InetAddress address;
+	private final PacketSender packetSender;
 	private Intent prevPacketIntent;
-	private int port;
-	private int connId;
 	
-	public NetworkClient(ServerType type, InetAddress addr, int port, long networkId, PacketSender packetSender) {
-		this.serverType = type;
+	public NetworkClient(InetSocketAddress address, long networkId, PacketSender packetSender) {
+		this.address = address;
 		this.networkId = networkId;
-		protocol = new NetworkProtocol(type, addr, port, packetSender);
+		this.packetSender = packetSender;
 		prevPacketIntent = null;
-		connId = 0;
-		updateNetworkInfo(addr, port);
 	}
 	
-	public void updateNetworkInfo(InetAddress addr, int port) {
-		protocol.updateNetworkInfo(addr, port);
-		this.address = addr;
-		this.port = port;
-	}
-	
-	public void resetNetwork() {
-		protocol.resetNetwork();
-		connId = 0;
-	}
-	
-	public void resendOldUnacknowledged() {
-		protocol.resendOldUnacknowledged();
-	}
-	
-	public void setCrc(int crc) {
-		protocol.setCrc(crc);
-	}
-	
-	public void setConnectionId(int id) {
-		connId = id;
-	}
-	
-	public InetAddress getAddress() {
+	public InetSocketAddress getAddress() {
 		return address;
-	}
-	
-	public int getPort() {
-		return port;
-	}
-	
-	public int getCrc() {
-		return protocol.getCrc();
-	}
-	
-	public int getConnectionId() {
-		return connId;
 	}
 	
 	public long getNetworkId() {
@@ -100,32 +65,91 @@ public class NetworkClient {
 	}
 	
 	public void sendPacket(Packet p) {
-		protocol.sendPacket(p);
+		byte [] encoded = p.encode().array();
+		int decompressedLength = encoded.length;
+		boolean compressed = encoded.length >= 16;
+		if (compressed) {
+			byte [] compressedData = Compression.compress(encoded);
+			if (compressedData.length >= encoded.length)
+				compressed = false;
+			else
+				encoded = compressedData;
+		}
+		ByteBuffer data = ByteBuffer.allocate(encoded.length + 5).order(ByteOrder.LITTLE_ENDIAN);
+		byte bitmask = 0;
+		bitmask |= (compressed?1:0) << 0; // Compressed
+		bitmask |= 1 << 1; // SWG
+		data.put(bitmask);
+		data.putShort((short) encoded.length);
+		data.putShort((short) decompressedLength);
+		data.put(encoded);
+		packetSender.sendPacket(address, data.array());
 	}
 	
-	public boolean processPacket(ServerType type, byte [] data) {
-		if (type != serverType || type == ServerType.UNKNOWN)
-			return false;
-		if (type == ServerType.PING)
-			return true;
-		List <Packet> packets = protocol.process(data);
+	public boolean process(byte [] data) {
+		List <Packet> packets = processPackets(ByteBuffer.wrap(data));
 		for (Packet p : packets) {
-			p.setAddress(address);
-			p.setPort(port);
+			p.setAddress(address.getAddress());
+			p.setPort(address.getPort());
 			synchronized (prevPacketIntentMutex) {
-				InboundPacketIntent i = new InboundPacketIntent(type, p, networkId);
-				if (prevPacketIntent == null)
-					i.broadcast();
-				else
-					i.broadcastAfterIntent(prevPacketIntent);
+				InboundPacketIntent i = new InboundPacketIntent(p, networkId);
+				i.broadcastAfterIntent(prevPacketIntent);
 				prevPacketIntent = i;
 			}
 		}
 		return packets.size() > 0;
 	}
 	
+	private List<Packet> processPackets(ByteBuffer data) {
+		List <Packet> packets = new ArrayList<>();
+		boolean added = true;
+		while (added && data.remaining() > 0) {
+			added = processPacket(packets, data);
+		}
+		return packets;
+	}
+	
+	private boolean processPacket(List<Packet> packets, ByteBuffer data) {
+		if (data.remaining() < 5) {
+			System.err.println("Not enough remaining data for header! Remaining: " + data.remaining());
+			return false;
+		}
+		data.order(ByteOrder.LITTLE_ENDIAN);
+		byte bitfield = data.get();
+		boolean compressed = (bitfield & (1<<0)) != 0;
+		boolean swg = (bitfield & (1<<1)) != 0;
+		int length = data.getShort();
+		int decompressedLength = data.getShort();
+		if (data.remaining() < length) {
+			System.err.println("Not enough remaining data! Remaining: " + data.remaining() + "  Length: " + length);
+			return false;
+		}
+		byte [] pData = new byte[length];
+		data.get(pData);
+		if (compressed) {
+			pData = Compression.decompress(pData, decompressedLength);
+			length = pData.length;
+		}
+		if (swg) {
+			if (length < 6) {
+				System.err.println("Length too small: " + length);
+				return false;
+			}
+			ByteBuffer pBuffer = ByteBuffer.wrap(pData).order(ByteOrder.LITTLE_ENDIAN);
+			int crc = pBuffer.getInt(2);
+			if (crc == 0x80CE5E46)
+				packets.add(ObjectController.decodeController(pBuffer));
+			else {
+				SWGPacket packet = PacketType.getForCrc(crc);
+				packet.decode(pBuffer);
+				packets.add(packet);
+			}
+		}
+		return true;
+	}
+	
 	public String toString() {
-		return "NetworkClient[ConnId=" + connId + " " + address + ":" + port + "]";
+		return "NetworkClient["+address+"]";
 	}
 	
 }

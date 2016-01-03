@@ -44,11 +44,10 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import main.ProjectSWG;
-import network.packets.soe.Disconnect;
-import network.packets.soe.Disconnect.DisconnectReason;
 import network.packets.swg.zone.HeartBeat;
 import resources.control.Intent;
 import resources.control.Service;
+import resources.network.DisconnectReason;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
 import resources.player.Player;
@@ -61,13 +60,11 @@ import utilities.ThreadUtilities;
 
 public class ConnectionService extends Service {
 	
-	private static final double LD_THRESHOLD = TimeUnit.MINUTES.toMillis(3); // Time since last packet
-	private static final double DISAPPEAR_THRESHOLD = TimeUnit.MINUTES.toMillis(2); // Time after the LD
+	private static final double DISAPPEAR_THRESHOLD = TimeUnit.SECONDS.toMillis(30); // Time after the LD
 	private static final String INCREMENT_POPULATION_SQL = "UPDATE galaxies SET population = population + 1 WHERE id = ?";
 	private static final String DECREMENT_POPULATION_SQL = "UPDATE galaxies SET population = population - 1 WHERE id = ?";
 	
 	private final ScheduledExecutorService updateService;
-	private final Runnable updateRunnable;
 	private final Runnable disappearRunnable;
 	private final Set <DisappearPlayer> disappearPlayers;
 	private final Set <Player> zonedInPlayers;
@@ -79,21 +76,6 @@ public class ConnectionService extends Service {
 		updateService = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("conn-update-service"));
 		zonedInPlayers = new LinkedHashSet<Player>();
 		disappearPlayers = new HashSet<DisappearPlayer>();
-		updateRunnable = new Runnable() {
-			public void run() {
-				synchronized (zonedInPlayers) {
-					Iterator<Player> i = zonedInPlayers.iterator();
-					while (i.hasNext()) {
-						Player p = i.next();
-						if (p.getTimeSinceLastPacket() > LD_THRESHOLD) {
-							i.remove();
-							logOut(p);
-							disconnect(p, DisconnectReason.TIMEOUT);
-						}
-					}
-				}
-			}
-		};
 		disappearRunnable = new Runnable() {
 			public void run() {
 				synchronized (disappearPlayers) {
@@ -102,7 +84,7 @@ public class ConnectionService extends Service {
 						DisappearPlayer p = iter.next();
 						if ((System.nanoTime()-p.getTime())/1E6 >= DISAPPEAR_THRESHOLD) {
 							DebugUtilities.printPlayerCharacterDebug(ConnectionService.this, p.getPlayer(), "Disappearing");
-							disappear(p.getPlayer(), DisconnectReason.TIMEOUT);
+							disappear(p.getPlayer(), false, DisconnectReason.APPLICATION);
 							iter.remove();
 						}
 					}
@@ -125,7 +107,6 @@ public class ConnectionService extends Service {
 	
 	@Override
 	public boolean start() {
-		updateService.scheduleAtFixedRate(updateRunnable, 10, 10, TimeUnit.SECONDS);
 		return super.start();
 	}
 	
@@ -196,16 +177,6 @@ public class ConnectionService extends Service {
 			Player p = gpi.getPlayerManager().getPlayerFromNetworkId(gpi.getNetworkId());
 			if (p != null)
 				p.sendPacket(gpi.getPacket());
-		} else if (gpi.getPacket() instanceof Disconnect) {
-			Player p = gpi.getPlayerManager().getPlayerFromNetworkId(gpi.getNetworkId());
-			if (p != null) {
-				if (p.getPlayerState() != PlayerState.DISCONNECTED) {
-					logOut(p);
-					disconnect(p, DisconnectReason.TIMEOUT);
-				} else {
-					disconnect(p, DisconnectReason.OTHER_SIDE_TERMINATED);
-				}
-			}
 		}
 	}
 	
@@ -213,7 +184,7 @@ public class ConnectionService extends Service {
 		logOut(fdi.getPlayer(), !fdi.getDisappearImmediately());
 		disconnect(fdi.getPlayer(), fdi.getDisconnectReason());
 		if (fdi.getDisappearImmediately())
-			disappear(fdi.getPlayer(), fdi.getDisconnectReason());
+			disappear(fdi.getPlayer(), fdi.getDisappearImmediately(), fdi.getDisconnectReason());
 	}
 	
 	private void onZonePlayerSwapIntent(ZonePlayerSwapIntent zpsi) {
@@ -225,7 +196,7 @@ public class ConnectionService extends Service {
 		Log.i("ConnectionService", "Logged out %s with character %s", before.getUsername(), before.getCharacterName());
 		new PlayerEventIntent(before, before.getGalaxyName(), PlayerEvent.PE_LOGGED_OUT).broadcast();
 		Log.i("ConnectionService", "Disconnected %s with character %s and reason: %s", before.getUsername(), before.getCharacterName(), DisconnectReason.NEW_CONNECTION_ATTEMPT);
-		new CloseConnectionIntent(before.getConnectionId(), before.getNetworkId(), DisconnectReason.NEW_CONNECTION_ATTEMPT).broadcast();
+		new CloseConnectionIntent(before.getNetworkId(), DisconnectReason.NEW_CONNECTION_ATTEMPT).broadcast();
 		before.setPlayerState(PlayerState.DISCONNECTED);
 		creature.setOwner(after);
 	}
@@ -279,10 +250,6 @@ public class ConnectionService extends Service {
 		return player;
 	}
 	
-	private void logOut(Player p) {
-		logOut(p, true);
-	}
-	
 	private void logOut(Player p, boolean addToDisappear) {
 		System.out.println("[" + p.getUsername() +"] Logged out " + p.getCharacterName());
 		Log.i("ConnectionService", "Logged out %s with character %s", p.getUsername(), p.getCharacterName());
@@ -298,25 +265,21 @@ public class ConnectionService extends Service {
 		}
 	}
 	
-	private void disappear(Player p, DisconnectReason reason) {
+	private void disappear(Player p, boolean newConnection, DisconnectReason reason) {
 		System.out.println("[" + p.getUsername() +"] " + p.getCharacterName() + " disappeared");
-		Log.i("ConnectionService", "Disappeared %s with character %s", p.getUsername(), p.getCharacterName());
+		Log.i("ConnectionService", "Disappeared %s with character %s with reason %s", p.getUsername(), p.getCharacterName(), reason);
 		
-		switch(reason) {
-			case NEW_CONNECTION_ATTEMPT: // The player is attempting to re-zone
-				removeFromDisappear(p);
-				break;
-			default:
-				removeFromLists(p);
-				break;
-		}
+		if (newConnection) // Attempting to re-zone
+			removeFromDisappear(p);
+		else
+			removeFromLists(p);
 		p.setPlayerState(PlayerState.DISCONNECTED);
 		new PlayerEventIntent(p, PlayerEvent.PE_DISAPPEAR).broadcast();
 	}
 	
 	private void disconnect(Player player, DisconnectReason reason) {
-		Log.i("ConnectionService", "Disconnected %s with character %s and reason: %s", player.getUsername(), player.getCharacterName(), reason);
-		new CloseConnectionIntent(player.getConnectionId(), player.getNetworkId(), reason).broadcast();
+		Log.i("ConnectionService", "Disconnected %s with character %s with reason %s", player.getUsername(), player.getCharacterName(), reason);
+		new CloseConnectionIntent(player.getNetworkId(), reason).broadcast();
 	}
 	
 	private void updatePlayTime(Player p) {

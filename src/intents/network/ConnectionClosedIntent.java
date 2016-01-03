@@ -25,40 +25,39 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package network.packets.soe;
+package intents.network;
 
-import java.nio.ByteBuffer;
+import resources.control.Intent;
+import resources.network.DisconnectReason;
 
-import network.packets.Packet;
 
-
-public class OutOfOrder extends Packet {
+public class ConnectionClosedIntent extends Intent {
 	
-	private short sequence;
+	public static final String TYPE = "ConnectionClosedIntent";
 	
-	public OutOfOrder() {
-		
+	private long networkId;
+	private DisconnectReason reason;
+	
+	public ConnectionClosedIntent(long networkId, DisconnectReason reason) {
+		super(TYPE);
+		setNetworkId(networkId);
+		setReason(reason);
 	}
 	
-	public OutOfOrder(short sequence) {
-		this.sequence = sequence;
+	public void setNetworkId(long networkId) {
+		this.networkId = networkId;
 	}
 	
-	public OutOfOrder(ByteBuffer data) {
-		decode(data);
+	public void setReason(DisconnectReason reason) {
+		this.reason = reason;
 	}
 	
-	public void decode(ByteBuffer data) {
-		data.position(2);
-		sequence = getNetShort(data);
+	public long getNetworkId() {
+		return networkId;
 	}
 	
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(4);
-		addNetShort(data, 0x11);
-		addNetShort(data, sequence);
-		return data;
+	public DisconnectReason getReason() {
+		return reason;
 	}
 	
-	public short getSequence() { return sequence; }
 }
