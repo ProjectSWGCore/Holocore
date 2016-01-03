@@ -166,6 +166,7 @@ public class ConnectionService extends Service {
 					e.printStackTrace();
 				}
 				setPlayerFlag(pei.getPlayer(), pei.getEvent(), PlayerFlags.LD);
+				logOut(pei.getPlayer(), true);
 				break;
 			default:
 				break;
@@ -255,8 +256,6 @@ public class ConnectionService extends Service {
 		Log.i("ConnectionService", "Logged out %s with character %s", p.getUsername(), p.getCharacterName());
 		removeFromLists(p);
 		updatePlayTime(p);
-		p.setPlayerState(PlayerState.LOGGED_OUT);
-		new PlayerEventIntent(p, p.getGalaxyName(), PlayerEvent.PE_LOGGED_OUT).broadcast();
 		if (addToDisappear) {
 			synchronized (disappearPlayers) {
 				disappearPlayers.add(new DisappearPlayer(System.nanoTime(), p));

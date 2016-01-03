@@ -194,7 +194,6 @@ public class NetworkClientManager extends Manager implements TCPCallback, Packet
 			sockets.put(address, networkId);
 			clients.put(networkId, new NetworkClient(address, networkId, this));
 			new ConnectionOpenedIntent(networkId).broadcast();
-			System.out.println("Created Session: " + networkId + " / " + address);
 		}
 	}
 	
@@ -204,6 +203,8 @@ public class NetworkClientManager extends Manager implements TCPCallback, Packet
 			if (networkId != null) {
 				deleteSession(networkId);
 				new ConnectionClosedIntent(networkId, DisconnectReason.OTHER_SIDE_TERMINATED).broadcast();
+			} else {
+				System.err.println("Network ID not found for " + address + "!");
 			}
 		}
 	}
@@ -211,8 +212,10 @@ public class NetworkClientManager extends Manager implements TCPCallback, Packet
 	private void deleteSession(long networkId) {
 		synchronized (clients) {
 			NetworkClient client = clients.get(networkId);
-			if (client == null)
+			if (client == null) {
+				System.err.println("No NetworkClient found for network id: " + networkId);
 				return;
+			}
 			clients.remove(networkId);
 			sockets.remove(client.getAddress());
 		}

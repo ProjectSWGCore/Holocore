@@ -471,7 +471,7 @@ public class CharacterCreationService extends Service {
 		if (player == null || assignedTo == player)
 			return false;
 		PlayerState state = player.getPlayerState();
-		return state != PlayerState.DISCONNECTED && state != PlayerState.LOGGED_OUT;
+		return state != PlayerState.DISCONNECTED;
 	}
 	
 }

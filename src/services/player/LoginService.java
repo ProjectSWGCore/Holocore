@@ -145,7 +145,7 @@ public class LoginService extends Service {
 	}
 	
 	private void handleLogin(Player player, LoginClientId id) {
-		if (player.getPlayerState() != PlayerState.DISCONNECTED) {
+		if (player.getPlayerState() != PlayerState.CONNECTED) {
 			System.err.println("Player cannot login when " + player.getPlayerState());
 			return;
 		}

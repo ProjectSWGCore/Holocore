@@ -37,6 +37,7 @@ import java.util.Map;
 import network.packets.Packet;
 import intents.NotifyPlayersPacketIntent;
 import intents.PlayerEventIntent;
+import intents.network.ConnectionClosedIntent;
 import intents.network.ConnectionOpenedIntent;
 import intents.network.GalacticPacketIntent;
 import intents.network.InboundPacketIntent;
@@ -67,6 +68,7 @@ public class PlayerManager extends Manager {
 		registerForIntent(PlayerEventIntent.TYPE);
 		registerForIntent(NotifyPlayersPacketIntent.TYPE);
 		registerForIntent(ConnectionOpenedIntent.TYPE);
+		registerForIntent(ConnectionClosedIntent.TYPE);
 	}
 	
 	@Override
@@ -84,6 +86,8 @@ public class PlayerManager extends Manager {
 			onNotifyPlayersPacketIntent((NotifyPlayersPacketIntent) i);
 		else if (i instanceof ConnectionOpenedIntent)
 			onConnectionOpenedIntent((ConnectionOpenedIntent) i);
+		else if (i instanceof ConnectionClosedIntent)
+			onConnectionClosedIntent((ConnectionClosedIntent) i);
 	}
 
 	public boolean playerExists(String name) {
@@ -264,8 +268,25 @@ public class PlayerManager extends Manager {
 	}
 	
 	private void onConnectionOpenedIntent(ConnectionOpenedIntent coi) {
+		Player p = new Player(this, coi.getNetworkId());
 		synchronized (players) {
-			players.put(coi.getNetworkId(), new Player(this, coi.getNetworkId()));
+			players.put(coi.getNetworkId(), p);
+		}
+		p.setPlayerState(PlayerState.CONNECTED);
+		new PlayerEventIntent(p, PlayerEvent.PE_CONNECTED).broadcast();
+	}
+	
+	private void onConnectionClosedIntent(ConnectionClosedIntent cci) {
+		Player p;
+		synchronized (players) {
+			p = players.get(cci.getNetworkId());
+		}
+		if (p != null) {
+			System.out.println("Disconnecting: " + p);
+			p.setPlayerState(PlayerState.DISCONNECTED);
+			new PlayerEventIntent(p, PlayerEvent.PE_LOGGED_OUT).broadcast();
+		} else {
+			System.err.println("No player found for ID: " + cci.getNetworkId());
 		}
 	}
 }
