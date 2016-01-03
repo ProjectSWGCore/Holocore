@@ -125,7 +125,9 @@ public class TCPServer {
 		SocketChannel sc = sockets.get(sock);
 		try {
 			if (sc != null && sc.isConnected()) {
-				sc.write(ByteBuffer.wrap(data));
+				ByteBuffer bb = ByteBuffer.wrap(data);
+				while (bb.hasRemaining())
+					sc.write(bb);
 				return true;
 			}
 		} catch (IOException e) {
