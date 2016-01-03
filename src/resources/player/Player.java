@@ -34,6 +34,7 @@ import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
+import services.CoreManager;
 import services.player.PlayerManager;
 
 public class Player implements Serializable, Comparable<Player> {
@@ -51,7 +52,7 @@ public class Player implements Serializable, Comparable<Player> {
 	private int connectionId		= 0;
 	private AccessLevel accessLevel	= AccessLevel.PLAYER;
 	
-	private int galaxyId				= 0;
+	private int galaxyId			= CoreManager.getGalaxyId();
 	private String galaxyName		= "";
 	private CreatureObject creatureObject= null;
 	private long lastInboundMessage	= 0;
