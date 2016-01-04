@@ -53,6 +53,10 @@ public class TCPServer {
 	private TCPCallback callback;
 	private TCPListener listener;
 	
+	public TCPServer(int port, int bufferSize) {
+		this(null, port, bufferSize);
+	}
+	
 	public TCPServer(InetAddress addr, int port, int bufferSize) {
 		this.sockets = new HashMap<>();
 		this.addr = addr;

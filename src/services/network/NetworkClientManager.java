@@ -87,7 +87,7 @@ public class NetworkClientManager extends Manager implements TCPCallback, Packet
 				}
 			}
 		};
-		tcpServer = new TCPServer(getBindAddr(), getBindPort(), getBufferSize());
+		tcpServer = new TCPServer(getBindPort(), getBufferSize());
 		
 		registerForIntent(OutboundPacketIntent.TYPE);
 		registerForIntent(CloseConnectionIntent.TYPE);
@@ -168,17 +168,6 @@ public class NetworkClientManager extends Manager implements TCPCallback, Packet
 	@Override
 	public void sendPacket(InetSocketAddress sock, byte[] data) {
 		tcpServer.send(sock, data);
-	}
-	
-	private InetAddress getBindAddr() {
-		Config c = getConfig(ConfigFile.NETWORK);
-		String ip = c.getString("BIND-ADDR", "::1");
-		try {
-			return InetAddress.getByName(ip);
-		} catch (UnknownHostException e) {
-			System.err.println("NetworkListenerService: Unknown host for IP: " + ip);
-		}
-		return null;
 	}
 	
 	private int getBindPort() {
