@@ -27,10 +27,6 @@
 ***********************************************************************************/
 package services;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintStream;
-import java.io.UnsupportedEncodingException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -62,11 +58,9 @@ public class CoreManager extends Manager {
 	private OnlineInterfaceService onlineInterfaceService;
 	private EngineManager engineManager;
 	private GalacticManager galacticManager;
-	private PrintStream packetOutput;
 	private Galaxy galaxy;
 	private long startTime;
 	private boolean shutdownRequested;
-	private boolean packetDebug;
 	
 	public CoreManager() {
 		shutdownService = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("core-shutdown-service"));
@@ -101,8 +95,6 @@ public class CoreManager extends Manager {
 	@Override
 	public boolean initialize() {
 		startTime = System.nanoTime();
-		packetDebug = getConfig(ConfigFile.PRIMARY).getBoolean("PACKET-DEBUG", false);
-		initializePacketOutput();
 		return galaxy != null && super.initialize();
 	}
 	
@@ -120,20 +112,8 @@ public class CoreManager extends Manager {
 	
 	@Override
 	public void onIntentReceived(Intent i) {
-		if (packetDebug) {
-			
-		}
 		if (i instanceof ServerManagementIntent)
 			handleServerManagementIntent((ServerManagementIntent) i);
-	}
-	
-	private void initializePacketOutput() {
-		try {
-			packetOutput = new PrintStream(new FileOutputStream("packets.txt", false), true, "UTF-8");
-		} catch (FileNotFoundException | UnsupportedEncodingException e) {
-			e.printStackTrace();
-			packetOutput = System.out;
-		}
 	}
 	
 	private void handleServerManagementIntent(ServerManagementIntent i) {
