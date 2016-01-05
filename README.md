@@ -58,7 +58,7 @@ from the Sonatype site.
 
 ### Forwarder ###
 
-Holocore uses TCP for network communications, whereas SWG was programmed for UDP.  This adds numerous efficiencies with long distance communications, but requires that a little more work is done on the client side.  If you are using the launcher, you do not have to worry about this.  If you are not using the launcher, then you need to start up Forwarder.jar first and setup login.cfg to point to "127.0.0.1" and port 44453.  Once you start the Forwarder, SWG will work automatically.  A more in-depth explanation and tutorial is available [here](https://bitbucket.org/projectswg/forwarder).
+Holocore uses TCP for network communications, whereas SWG was programmed for UDP.  This adds numerous efficiencies with long distance communications, but requires that a little more work is done on the client side.  If you are using the launcher, you do not have to worry about this.  If you are not using the launcher, follow the guide [here](https://bitbucket.org/projectswg/forwarder).
 
 ### Running Holocore ###
 In order to successfully build and run Holocore, you must:
