@@ -45,6 +45,8 @@ import resources.control.Intent;
 import resources.control.Manager;
 import resources.control.ServerStatus;
 import resources.server_info.Config;
+import resources.server_info.Log;
+import resources.server_info.Log.LogLevel;
 import services.admin.OnlineInterfaceService;
 import services.galaxy.GalacticManager;
 import utilities.ThreadUtilities;
@@ -63,6 +65,7 @@ public class CoreManager extends Manager {
 	private boolean shutdownRequested;
 	
 	public CoreManager() {
+		Log.setLogLevel(LogLevel.valueOf(getConfig(ConfigFile.PRIMARY).getString("LOG-LEVEL", LogLevel.DEBUG.name())));
 		shutdownService = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("core-shutdown-service"));
 		shutdownRequested = false;
 		galaxy = getGalaxy();
