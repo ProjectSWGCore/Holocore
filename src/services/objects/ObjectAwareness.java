@@ -152,6 +152,8 @@ public class ObjectAwareness extends Service {
 		SWGObject object = oti.getObject();
 		Player owner = object.getOwner();
 		boolean creature = object instanceof CreatureObject && owner != null;
+		Location old = object.getLocation();
+		object.setLocation(oti.getNewLocation());
 		if (oti.getParent() != null) {
 			if (creature)
 				startScene((CreatureObject) object, oti.getNewLocation());
@@ -160,8 +162,9 @@ public class ObjectAwareness extends Service {
 			if (creature)
 				startScene((CreatureObject) object, oti.getNewLocation());
 			object.createObject(owner);
-			move(object, oti.getNewLocation());
+			moveFromOld(object, old);
 		}
+		new PlayerEventIntent(object.getOwner(), PlayerEvent.PE_ZONE_IN).broadcast();
 	}
 	
 	private void processGalacticPacketIntent(GalacticPacketIntent i) {
@@ -182,7 +185,6 @@ public class ObjectAwareness extends Service {
 		long time = (long) (ProjectSWG.getCoreTime() / 1E3);
 		Race race = ((CreatureObject)object).getRace();
 		sendPacket(object.getOwner(), new CmdStartScene(false, object.getObjectId(), race, newLocation, time, (int)(System.currentTimeMillis()/1E3)));
-		new PlayerEventIntent(object.getOwner(), PlayerEvent.PE_ZONE_IN).broadcast();
 	}
 	
 	private void moveObject(SWGObject obj, DataTransform transform) {
@@ -247,15 +249,7 @@ public class ObjectAwareness extends Service {
 	 * @param object the object to remove
 	 */
 	public void remove(SWGObject object) {
-		if (object instanceof CreatureObject)
-			DebugUtilities.printPlayerCharacterDebug(this, (CreatureObject) object, "Removing");
-		Location l = object.getLocation();
-		if (invalidLocation(l))
-			return;
-		QuadTree <SWGObject> tree = getTree(l);
-		synchronized (tree) {
-			tree.remove(l.getX(), l.getZ(), object);
-		}
+		removeFromLocation(object, object.getLocation());
 	}
 	
 	/**
@@ -319,6 +313,27 @@ public class ObjectAwareness extends Service {
 			}
 		}
 		obj.updateObjectAwareness(objectAware);
+	}
+	
+	private void moveFromOld(SWGObject object, Location oldLocation) {
+		if (object.getParent() != null) {
+			object.getParent().removeObject(object); // Moving from cell to world
+			object.sendObserversAndSelf(new UpdateContainmentMessage(object.getObjectId(), 0, object.getSlotArrangement()));
+		} else {
+			removeFromLocation(object, oldLocation); // World to World
+		}
+		add(object);
+	}
+	
+	private void removeFromLocation(SWGObject object, Location l) {
+		if (object instanceof CreatureObject)
+			DebugUtilities.printPlayerCharacterDebug(this, (CreatureObject) object, "Removing");
+		if (invalidLocation(l))
+			return;
+		QuadTree <SWGObject> tree = getTree(l);
+		synchronized (tree) {
+			tree.remove(l.getX(), l.getZ(), object);
+		}
 	}
 	
 	private QuadTree <SWGObject> getTree(Location l) {
