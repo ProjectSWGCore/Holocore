@@ -137,7 +137,7 @@ public class NetworkClientManager extends Manager implements TCPCallback, Packet
 		SocketAddress addr = s.getRemoteSocketAddress();
 		if (addr instanceof InetSocketAddress)
 			createSession(networkIdCounter.incrementAndGet(), (InetSocketAddress) addr);
-		else
+		else if (addr != null)
 			Log.e(this, "Incoming connection has socket address of instance: %s", addr.getClass().getSimpleName());
 	}
 	
@@ -146,7 +146,7 @@ public class NetworkClientManager extends Manager implements TCPCallback, Packet
 		SocketAddress addr = s.getRemoteSocketAddress();
 		if (addr instanceof InetSocketAddress)
 			onSessionDisconnect((InetSocketAddress) addr);
-		else
+		else if (addr != null)
 			Log.e(this, "Connection Disconnected. Has socket address of instance: %s", addr.getClass().getSimpleName());
 	}
 	
@@ -156,7 +156,7 @@ public class NetworkClientManager extends Manager implements TCPCallback, Packet
 			SocketAddress addr = s.getRemoteSocketAddress();
 			if (addr instanceof InetSocketAddress)
 				receivedPackets.add(new ReceivedPacket((InetSocketAddress) addr, data));
-			else
+			else if (addr != null)
 				Log.e(this, "Incoming data has socket address of instance: %s", addr.getClass().getSimpleName());
 			packetProcessor.submit(processPacketRunnable);
 		}
