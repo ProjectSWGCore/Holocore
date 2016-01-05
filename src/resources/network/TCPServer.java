@@ -190,32 +190,48 @@ public class TCPServer {
 		
 		private Thread thread;
 		private boolean running;
+		private boolean changedSelector;
 		
 		public TCPListener() {
 			running = false;
 			thread = null;
+			changedSelector = false;
 		}
 		
 		public void start() {
 			running = true;
+			changedSelector = false;
 			thread = new Thread(this);
 			thread.start();
 		}
 		
 		public void stop() {
 			running = false;
+			changedSelector = false;
 			if (thread != null)
 				thread.interrupt();
 			thread = null;
 		}
 		
 		public void run() {
-			while (running) {
-				try (Selector selector = setupSelector()) {
-					if (selector.select() > 0)
-						processSelectionKeys(selector.selectedKeys());
-				} catch (IOException e) {
-					e.printStackTrace();
+			changedSelector = true;
+			Selector selector = null;
+			try {
+				while (running) {
+					try {
+						if (changedSelector) {
+							selector = setupSelector();
+							changedSelector = false;
+						}
+						if (selector.select() > 0)
+							processSelectionKeys(selector.selectedKeys());
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			} finally {
+				if (selector != null) {
+					try { selector.close(); } catch (IOException e) { }
 				}
 			}
 		}
@@ -236,6 +252,7 @@ public class TCPServer {
 			for (SelectionKey key : keys) {
 				if (key.isAcceptable()) {
 					accept();
+					changedSelector = true;
 				} else if (key.isReadable()) {
 					SelectableChannel selectable = key.channel();
 					if (selectable instanceof SocketChannel)
@@ -244,6 +261,7 @@ public class TCPServer {
 					SelectableChannel selectable = key.channel();
 					if (!selectable.isOpen() && selectable instanceof SocketChannel) {
 						disconnect((SocketChannel) selectable);
+						changedSelector = true;
 					}
 				}
 			}
