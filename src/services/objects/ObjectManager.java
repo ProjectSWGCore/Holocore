@@ -250,7 +250,7 @@ public class ObjectManager extends Manager {
 				return null;
 			obj.clearAware();
 			objectAwareness.remove(obj);
-			Log.i("ObjectManager", "Deleted object %d [%s]", obj.getObjectId(), obj.getTemplate());
+			Log.v("ObjectManager", "Deleted object %d [%s]", obj.getObjectId(), obj.getTemplate());
 			return obj;
 		}
 	}
@@ -336,7 +336,7 @@ public class ObjectManager extends Manager {
 			if (addToDatabase) {
 				database.put(objectId, obj);
 			}
-			Log.i("ObjectManager", "Created object %d [%s]", obj.getObjectId(), obj.getTemplate());
+			Log.v("ObjectManager", "Created object %d [%s]", obj.getObjectId(), obj.getTemplate());
 			new ObjectCreatedIntent(obj).broadcast();
 			return obj;
 		}
