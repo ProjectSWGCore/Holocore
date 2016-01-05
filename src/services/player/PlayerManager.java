@@ -279,7 +279,7 @@ public class PlayerManager extends Manager {
 	private void onConnectionClosedIntent(ConnectionClosedIntent cci) {
 		Player p;
 		synchronized (players) {
-			p = players.get(cci.getNetworkId());
+			p = players.remove(cci.getNetworkId());
 		}
 		if (p != null) {
 			p.setPlayerState(PlayerState.DISCONNECTED);
