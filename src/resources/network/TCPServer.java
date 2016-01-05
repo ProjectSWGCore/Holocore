@@ -42,6 +42,7 @@ import java.nio.channels.SocketChannel;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 
 public class TCPServer {
@@ -185,6 +186,11 @@ public class TCPServer {
 						processSelectionKeys(selector);
 					} catch (Exception e) {
 						e.printStackTrace();
+						try {
+							Thread.sleep(100);
+						} catch (InterruptedException e1) {
+							break;
+						}
 					}
 				}
 			} catch (IOException e) {
@@ -195,35 +201,29 @@ public class TCPServer {
 		private Selector setupSelector() throws IOException {
 			Selector selector = Selector.open();
 			channel.register(selector, SelectionKey.OP_ACCEPT);
-			synchronized (sockets) {
-				for (SocketChannel sc : sockets.values()) {
-					sc.configureBlocking(false);
-					sc.register(selector, SelectionKey.OP_READ | SelectionKey.OP_CONNECT);
-				}
-			}
 			return selector;
 		}
 		
 		private void processSelectionKeys(Selector selector) throws ClosedChannelException {
-			Iterator<SelectionKey> it = selector.selectedKeys().iterator();
+			Set<SelectionKey> keys = selector.selectedKeys();
+			Iterator<SelectionKey> it = keys.iterator();
 			while (it.hasNext()) {
 				SelectionKey key = it.next();
 				if (key.isAcceptable()) {
 					SocketChannel sc = accept();
 					if (sc != null)
-						sc.register(selector, SelectionKey.OP_READ | SelectionKey.OP_CONNECT);
+						sc.register(selector, SelectionKey.OP_READ);
 				} else if (key.isReadable()) {
 					SelectableChannel selectable = key.channel();
 					if (selectable instanceof SocketChannel)
 						read((SocketChannel) selectable);
 				} else if (key.isConnectable()) {
 					SelectableChannel selectable = key.channel();
-					if (!selectable.isOpen() && selectable instanceof SocketChannel) {
+					if (!selectable.isOpen() && selectable instanceof SocketChannel)
 						disconnect((SocketChannel) selectable);
-					}
 				}
-				it.remove();
 			}
+			keys.clear();
 		}
 		
 		private SocketChannel accept() {
