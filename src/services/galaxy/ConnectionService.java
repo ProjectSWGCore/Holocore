@@ -147,6 +147,7 @@ public class ConnectionService extends Service {
 					Log.e("ConnectionService", "SQLException occured when trying to increase population value.");
 					e.printStackTrace();
 				}
+				removeFromLists(p);
 				synchronized (zonedInPlayers) {
 					zonedInPlayers.add(p);
 				}
