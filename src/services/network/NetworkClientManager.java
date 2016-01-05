@@ -172,7 +172,7 @@ public class NetworkClientManager extends Manager implements TCPCallback, Packet
 	}
 	
 	private int getBufferSize() {
-		return getConfig(ConfigFile.NETWORK).getInt("BUFFER-SIZE", 1024);
+		return getConfig(ConfigFile.NETWORK).getInt("BUFFER-SIZE", 4096);
 	}
 	
 	private void createSession(long networkId, InetSocketAddress address) {
