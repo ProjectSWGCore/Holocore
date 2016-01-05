@@ -29,7 +29,6 @@ package services.network;
 
 import intents.network.CloseConnectionIntent;
 import intents.network.ConnectionClosedIntent;
-import intents.network.ConnectionOpenedIntent;
 import intents.network.OutboundPacketIntent;
 
 import java.io.IOException;
@@ -62,25 +61,30 @@ public class NetworkClientManager extends Manager implements TCPCallback, Packet
 	
 	private final Map <InetSocketAddress, Long> sockets;
 	private final Map <Long, NetworkClient> clients;
-	private final Queue<ReceivedPacket> receivedPackets;
-	private final ExecutorService packetProcessor;
-	private final Runnable processPacketRunnable;
+	private final Queue<NetworkClient> processQueue;
+	private final ExecutorService clientProcessor;
+	private final Runnable processBufferRunnable;
 	private final AtomicLong networkIdCounter;
 	private final TCPServer tcpServer;
 	
 	public NetworkClientManager() {
 		sockets = new HashMap<InetSocketAddress, Long>();
 		clients = new Hashtable<Long, NetworkClient>();
-		receivedPackets = new LinkedList<>();
+		processQueue = new LinkedList<>();
 		networkIdCounter = new AtomicLong(1);
-		packetProcessor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors(), ThreadUtilities.newThreadFactory("packet-processor-%d"));
-		processPacketRunnable = new Runnable() {
+		clientProcessor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors(), ThreadUtilities.newThreadFactory("packet-processor-%d"));
+		processBufferRunnable = new Runnable() {
 			public void run() {
-				synchronized (receivedPackets) {
-					ReceivedPacket recv = receivedPackets.poll();
-					if (recv == null)
-						return;
-					handlePacket(recv);
+				try {
+					NetworkClient client;
+					synchronized (processQueue) {
+						client = processQueue.poll();
+						if (client == null)
+							return;
+					}
+					client.process();
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
 			}
 		};
@@ -110,10 +114,10 @@ public class NetworkClientManager extends Manager implements TCPCallback, Packet
 	
 	@Override
 	public boolean terminate() {
-		packetProcessor.shutdownNow();
+		clientProcessor.shutdownNow();
 		boolean success = true;
 		try {
-			success = packetProcessor.awaitTermination(5, TimeUnit.SECONDS);
+			success = clientProcessor.awaitTermination(5, TimeUnit.SECONDS);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -152,14 +156,11 @@ public class NetworkClientManager extends Manager implements TCPCallback, Packet
 	
 	@Override
 	public void onIncomingData(Socket s, byte [] data) {
-		synchronized (receivedPackets) {
-			SocketAddress addr = s.getRemoteSocketAddress();
-			if (addr instanceof InetSocketAddress)
-				receivedPackets.add(new ReceivedPacket((InetSocketAddress) addr, data));
-			else if (addr != null)
-				Log.e(this, "Incoming data has socket address of instance: %s", addr.getClass().getSimpleName());
-			packetProcessor.submit(processPacketRunnable);
-		}
+		SocketAddress addr = s.getRemoteSocketAddress();
+		if (addr instanceof InetSocketAddress)
+			handleIncomingData((InetSocketAddress) addr, data);
+		else if (addr != null)
+			Log.e(this, "Incoming data has socket address of instance: %s", addr.getClass().getSimpleName());
 	}
 	
 	@Override
@@ -176,11 +177,12 @@ public class NetworkClientManager extends Manager implements TCPCallback, Packet
 	}
 	
 	private void createSession(long networkId, InetSocketAddress address) {
+		NetworkClient client = new NetworkClient(address, networkId, this);
 		synchronized (clients) {
 			sockets.put(address, networkId);
-			clients.put(networkId, new NetworkClient(address, networkId, this));
-			new ConnectionOpenedIntent(networkId).broadcast();
+			clients.put(networkId, client);
 		}
+		client.onConnected();
 	}
 	
 	private void onSessionDisconnect(InetSocketAddress address) {
@@ -217,36 +219,22 @@ public class NetworkClientManager extends Manager implements TCPCallback, Packet
 		}
 	}
 	
-	private void handlePacket(ReceivedPacket packet) {
+	private void handleIncomingData(InetSocketAddress addr, byte [] data) {
 		synchronized (clients) {
-			Long netId = sockets.get(packet.getAddress());
+			Long netId = sockets.get(addr);
 			if (netId == null) {
-				Log.w(this, "Unknown socket address! Address: %s", packet.getAddress());
+				Log.w(this, "Unknown socket address! Address: %s", addr);
 				return;
 			}
 			NetworkClient client = clients.get(netId);
-			if (client != null)
-				client.process(packet.getData());
-			else
-				Log.w(this, "Unknown connection! Network ID: %d  Address: %s", netId, packet.getAddress());
-		}
-	}
-	
-	private static class ReceivedPacket {
-		private final InetSocketAddress address;
-		private final byte [] data;
-		
-		public ReceivedPacket(InetSocketAddress address, byte [] data) {
-			this.address = address;
-			this.data = data;
-		}
-		
-		public InetSocketAddress getAddress() {
-			return address;
-		}
-		
-		public byte [] getData() {
-			return data;
+			if (client != null) {
+				client.addToBuffer(data);
+				synchronized (processQueue) {
+					processQueue.add(client);
+				}
+				clientProcessor.submit(processBufferRunnable);
+			} else
+				Log.w(this, "Unknown connection! Network ID: %d  Address: %s", netId, addr);
 		}
 	}
 	
