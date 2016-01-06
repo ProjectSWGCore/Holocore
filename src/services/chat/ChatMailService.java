@@ -4,6 +4,7 @@ import intents.PlayerEventIntent;
 import intents.chat.PersistentMessageIntent;
 import intents.network.GalacticPacketIntent;
 
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.LinkedList;
@@ -33,14 +34,16 @@ import services.chat.ChatManager.ChatType;
 import services.player.PlayerManager;
 
 public class ChatMailService extends Service {
-
+	
 	private final ObjectDatabase<Mail> mails;
 	private final RelationalServerData chatLogs;
+	private final PreparedStatement insertChatLog;
 	private int maxMailId;
 	
 	public ChatMailService() {
 		mails = new CachedObjectDatabase<>("odb/mails.db");
 		chatLogs = RelationalServerFactory.getServerDatabase("chat/chat_log.db");
+		insertChatLog = chatLogs.prepareStatement("INSERT INTO chat_log VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 		maxMailId = 1;
 		
 		registerForIntent(GalacticPacketIntent.TYPE);
@@ -236,8 +239,19 @@ public class ChatMailService extends Service {
 	
 	private void logChat(long sendId, String sendName, long recvId, String recvName, String subject, String message) {
 		try {
-			long time = System.currentTimeMillis();
-			chatLogs.insert("chat_log", null, time, sendId, sendName, recvId, recvName, ChatType.MAIL.name(), ChatRange.PERSONAL.name(), "", subject, message);
+			synchronized (insertChatLog) {
+				insertChatLog.setLong(1, System.currentTimeMillis());
+				insertChatLog.setLong(2, sendId);
+				insertChatLog.setString(3, sendName);
+				insertChatLog.setLong(4, recvId);
+				insertChatLog.setString(5, recvName);
+				insertChatLog.setString(6, ChatType.MAIL.name());
+				insertChatLog.setString(7, ChatRange.PERSONAL.name());
+				insertChatLog.setString(8, "");
+				insertChatLog.setString(9, subject);
+				insertChatLog.setString(10, message);
+				insertChatLog.executeUpdate();
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

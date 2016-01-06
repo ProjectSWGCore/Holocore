@@ -82,6 +82,7 @@ import services.chat.ChatManager.ChatRange;
 import services.chat.ChatManager.ChatType;
 import services.player.PlayerManager;
 
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -98,6 +99,7 @@ public class ChatRoomService extends Service {
 	private final ObjectDatabase<ChatRoom> database;
 	private final Map<Integer, ChatRoom> roomMap;
 	private final RelationalServerData chatLogs;
+	private final PreparedStatement insertChatLog;
 	private final Galaxy galaxy;
 	private int maxChatRoomId;
 
@@ -107,6 +109,7 @@ public class ChatRoomService extends Service {
 		roomMap 	= new ConcurrentHashMap<>();
 		messages	= new ConcurrentHashMap<>();
 		chatLogs	= RelationalServerFactory.getServerDatabase("chat/chat_log.db");
+		insertChatLog = chatLogs.prepareStatement("INSERT INTO chat_log VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 		maxChatRoomId = 1;
 		
 		registerForIntent(ChatRoomUpdateIntent.TYPE);
@@ -835,8 +838,19 @@ public class ChatRoomService extends Service {
 	
 	private void logChat(long sendId, String sendName, String room, String message) {
 		try {
-			long time = System.currentTimeMillis();
-			chatLogs.insert("chat_log", null, time, sendId, sendName, 0, "", ChatType.CHAT.name(), ChatRange.ROOM.name(), room, "", message);
+			synchronized (insertChatLog) {
+				insertChatLog.setLong(1, System.currentTimeMillis());
+				insertChatLog.setLong(2, sendId);
+				insertChatLog.setString(3, sendName);
+				insertChatLog.setLong(4, 0);
+				insertChatLog.setString(5, "");
+				insertChatLog.setString(6, ChatType.CHAT.name());
+				insertChatLog.setString(7, ChatRange.ROOM.name());
+				insertChatLog.setString(8, room);
+				insertChatLog.setString(9, "");
+				insertChatLog.setString(10, message);
+				insertChatLog.executeUpdate();
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

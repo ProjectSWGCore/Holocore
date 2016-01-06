@@ -58,6 +58,7 @@ import resources.server_info.RelationalServerData;
 import resources.server_info.RelationalServerFactory;
 import services.player.PlayerManager;
 
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Locale;
 
@@ -66,11 +67,13 @@ public class ChatManager extends Manager {
 	private final ChatRoomService roomService;
 	private final ChatMailService mailService;
 	private final RelationalServerData chatLogs;
+	private final PreparedStatement insertChatLog;
 
 	public ChatManager(Galaxy g) {
 		roomService = new ChatRoomService(g);
 		mailService = new ChatMailService();
 		chatLogs = RelationalServerFactory.getServerDatabase("chat/chat_log.db");
+		insertChatLog = chatLogs.prepareStatement("INSERT INTO chat_log VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
 		addChildService(roomService);
 		addChildService(mailService);
@@ -451,8 +454,19 @@ public class ChatManager extends Manager {
 		if (message == null)
 			return;
 		try {
-			long time = System.currentTimeMillis();
-			chatLogs.insert("chat_log", null, time, sendId, sendName, recvId, recvName, type, range, room, subject, message);
+			synchronized (insertChatLog) {
+				insertChatLog.setLong(1, System.currentTimeMillis());
+				insertChatLog.setLong(2, sendId);
+				insertChatLog.setString(3, sendName);
+				insertChatLog.setLong(4, recvId);
+				insertChatLog.setString(5, recvName);
+				insertChatLog.setString(6, type);
+				insertChatLog.setString(7, range);
+				insertChatLog.setString(8, room);
+				insertChatLog.setString(9, subject);
+				insertChatLog.setString(10, message);
+				insertChatLog.executeUpdate();
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
