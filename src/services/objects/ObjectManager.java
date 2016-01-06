@@ -367,14 +367,6 @@ public class ObjectManager extends Manager {
 			sendClientFatal(player, "Failed to zone", "There has been an internal server error: Null Ghost.\nPlease delete your character and create a new one", 10, TimeUnit.SECONDS);
 			return;
 		}
-		if (creatureObj.getParent() != null) {
-			objectAwareness.update(creatureObj);
-			Log.d("ObjectManager", "Zoning in to %s/%s - %s", creatureObj.getParent(), creatureObj.getTerrain(), creatureObj.getLocation().getPosition());
-		}else {
-			objectAwareness.remove(creatureObj);
-			objectAwareness.add(creatureObj);
-			Log.d("ObjectManager", "Zoning in to %s - %s", creatureObj.getTerrain(), creatureObj.getLocation().getPosition());
-		}
 		new RequestZoneInIntent(player, (CreatureObject) creatureObj, galaxy).broadcast();
 	}
 	

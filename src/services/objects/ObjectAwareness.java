@@ -156,7 +156,6 @@ public class ObjectAwareness extends Service {
 		} else {
 			if (creature)
 				startScene((CreatureObject) object, oti.getNewLocation());
-			object.createObject(owner);
 			moveFromOld(object, old);
 		}
 		new PlayerEventIntent(object.getOwner(), PlayerEvent.PE_ZONE_IN).broadcast();
