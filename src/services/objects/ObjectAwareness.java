@@ -120,11 +120,10 @@ public class ObjectAwareness extends Service {
 				p.setCreatureObject(null);
 				break;
 			case PE_FIRST_ZONE:
-				if (creature.getParent() == null)
-					creature.createObject(p);
 				break;
 			case PE_ZONE_IN:
 				creature.clearAware();
+				startScene(creature, creature.getLocation());
 				update(creature);
 				break;
 			default:
@@ -181,6 +180,14 @@ public class ObjectAwareness extends Service {
 		long time = (long) (ProjectSWG.getCoreTime() / 1E3);
 		Race race = ((CreatureObject)object).getRace();
 		sendPacket(object.getOwner(), new CmdStartScene(false, object.getObjectId(), race, newLocation, time, (int)(System.currentTimeMillis()/1E3)));
+		recursiveCreateObject(object, object.getOwner());
+	}
+	
+	private void recursiveCreateObject(SWGObject obj, Player p) {
+		SWGObject parent = obj.getParent();
+		if (parent != null)
+			recursiveCreateObject(parent, p);
+		obj.createObject(p);
 	}
 	
 	private void moveObject(SWGObject obj, DataTransform transform) {

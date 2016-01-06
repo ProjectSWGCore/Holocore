@@ -49,7 +49,6 @@ import network.packets.swg.zone.chat.ChatOnConnectAvatar;
 import network.packets.swg.zone.chat.ChatSystemMessage;
 import network.packets.swg.zone.chat.VoiceChatStatus;
 import network.packets.swg.zone.insertion.ChatServerStatus;
-import network.packets.swg.zone.insertion.CmdStartScene;
 
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
@@ -57,8 +56,6 @@ import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 
-import resources.Location;
-import resources.Race;
 import resources.config.ConfigFile;
 import resources.control.Intent;
 import resources.control.Manager;
@@ -185,15 +182,11 @@ public class ZoneManager extends Manager {
 	}
 	
 	private void sendZonePackets(Player player, CreatureObject creature) {
-		long objId = creature.getObjectId();
-		Race race = creature.getRace();
-		Location l = creature.getLocation();
 		sendPacket(player, new HeartBeat());
 		sendPacket(player, new ChatServerStatus(true));
 		sendPacket(player, new VoiceChatStatus());
 		sendPacket(player, new ParametersMessage());
 		sendPacket(player, new ChatOnConnectAvatar());
-		sendPacket(player, new CmdStartScene(false, objId, race, l, ProjectSWG.getGalacticTime(), (int)(System.currentTimeMillis()/1E3)));
 	}
 	
 	private void initPlayerBeforeZoneIn(Player player, CreatureObject creatureObj, PlayerObject playerObj) {
