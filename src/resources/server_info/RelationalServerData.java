@@ -100,11 +100,12 @@ public class RelationalServerData extends RelationalDatabase {
 			}
 		}
 		final String sql = String.format("INSERT INTO %s (%s) VALUES (%s)", table, columnStr, valuesStr);
-		PreparedStatement statement = prepareStatement(sql);
-		if (statement == null || params.length < getSqlParameterCount(sql))
-			return false;
-		assignParameters(statement, params);
-		return statement.executeUpdate() > 0;
+		try (PreparedStatement statement = prepareStatement(sql)) {
+			if (statement == null || params.length < getSqlParameterCount(sql))
+				return false;
+			assignParameters(statement, params);
+			return statement.executeUpdate() > 0;
+		}
 	}
 	
 	/**
