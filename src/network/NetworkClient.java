@@ -55,12 +55,14 @@ public class NetworkClient {
 	private final PacketSender packetSender;
 	private Intent prevPacketIntent;
 	private ByteBuffer buffer;
+	private long lastBufferSizeModification;
 	
 	public NetworkClient(InetSocketAddress address, long networkId, PacketSender packetSender) {
 		this.address = address;
 		this.networkId = networkId;
 		this.packetSender = packetSender;
 		this.buffer = ByteBuffer.allocate(DEFAULT_BUFFER);
+		lastBufferSizeModification = System.nanoTime();
 		prevPacketIntent = null;
 	}
 	
@@ -107,15 +109,18 @@ public class NetworkClient {
 		synchronized (bufferMutex) {
 			if (data.length > buffer.remaining()) { // Increase size
 				int nCapacity = buffer.capacity() * 2;
-				while (nCapacity < buffer.remaining()+data.length)
+				while (nCapacity < buffer.position()+data.length)
 					nCapacity *= 2;
 				ByteBuffer bb = ByteBuffer.allocate(nCapacity);
 				buffer.flip();
 				bb.put(buffer);
 				bb.put(data);
 				this.buffer = bb;
+				lastBufferSizeModification = System.nanoTime();
 			} else {
 				buffer.put(data);
+				if (buffer.position() < buffer.capacity()/4 && (System.nanoTime()-lastBufferSizeModification) >= 1E9)
+					shrinkBuffer();
 			}
 		}
 	}
@@ -137,6 +142,22 @@ public class NetworkClient {
 			}
 		}
 		return packets.size() > 0;
+	}
+	
+	private void shrinkBuffer() {
+		synchronized (bufferMutex) {
+			int nCapacity = DEFAULT_BUFFER;
+			while (nCapacity < buffer.position())
+				nCapacity *= 2;
+			if (nCapacity >= buffer.capacity())
+				return;
+			System.out.println("Shrinking buffer to " + nCapacity);
+			ByteBuffer bb = ByteBuffer.allocate(nCapacity).order(ByteOrder.LITTLE_ENDIAN);
+			buffer.flip();
+			bb.put(buffer);
+			buffer = bb;
+			lastBufferSizeModification = System.nanoTime();
+		}
 	}
 	
 	private List<Packet> processPackets() {
