@@ -40,7 +40,6 @@ import intents.PlayerEventIntent;
 import intents.network.ConnectionClosedIntent;
 import intents.network.ConnectionOpenedIntent;
 import intents.network.GalacticPacketIntent;
-import intents.network.InboundPacketIntent;
 import resources.Terrain;
 import resources.control.Intent;
 import resources.control.Manager;
@@ -63,7 +62,6 @@ public class PlayerManager extends Manager {
 		addChildService(loginService);
 		addChildService(zoneService);
 		
-		registerForIntent(InboundPacketIntent.TYPE);
 		registerForIntent(GalacticPacketIntent.TYPE);
 		registerForIntent(PlayerEventIntent.TYPE);
 		registerForIntent(NotifyPlayersPacketIntent.TYPE);
@@ -78,9 +76,7 @@ public class PlayerManager extends Manager {
 	
 	@Override
 	public void onIntentReceived(Intent i) {
-		if (i instanceof InboundPacketIntent)
-			onInboundPacketIntent((InboundPacketIntent) i);
-		else if (i instanceof PlayerEventIntent)
+		if (i instanceof PlayerEventIntent)
 			onPlayerEventIntent((PlayerEventIntent) i);
 		else if (i instanceof NotifyPlayersPacketIntent)
 			onNotifyPlayersPacketIntent((NotifyPlayersPacketIntent) i);
@@ -249,12 +245,6 @@ public class PlayerManager extends Manager {
 				}
 			}
 		}
-	}
-	
-	private void onInboundPacketIntent(InboundPacketIntent ipi) {
-		Player player = getPlayerFromNetworkId(ipi.getNetworkId());
-		if (player != null)
-			player.updateLastPacketTimestamp();
 	}
 	
 	private void onNotifyPlayersPacketIntent(NotifyPlayersPacketIntent nppi) {
