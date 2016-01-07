@@ -49,6 +49,7 @@ import network.packets.swg.zone.chat.ChatOnConnectAvatar;
 import network.packets.swg.zone.chat.ChatSystemMessage;
 import network.packets.swg.zone.chat.VoiceChatStatus;
 import network.packets.swg.zone.insertion.ChatServerStatus;
+import network.packets.swg.zone.insertion.CmdStartScene;
 
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
@@ -56,9 +57,12 @@ import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 
+import resources.Location;
+import resources.Race;
 import resources.config.ConfigFile;
 import resources.control.Intent;
 import resources.control.Manager;
+import resources.objects.SWGObject;
 import resources.objects.creature.CreatureMood;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
@@ -99,7 +103,7 @@ public class ZoneManager extends Manager {
 	public void onIntentReceived(Intent i) {
 		if (i instanceof RequestZoneInIntent) {
 			RequestZoneInIntent zii = (RequestZoneInIntent) i;
-			zoneInPlayer(zii.getPlayer(), zii.getCreature());
+			zoneInPlayer(zii.getPlayer(), zii.getCreature(), zii.isFirstZone());
 		} else if (i instanceof GalacticPacketIntent) {
 			GalacticPacketIntent gpi = (GalacticPacketIntent) i;
 			handlePacket(gpi, gpi.getPlayerManager().getPlayerFromNetworkId(gpi.getNetworkId()), gpi.getNetworkId(), gpi.getPacket());
@@ -126,20 +130,40 @@ public class ZoneManager extends Manager {
 		return characterCreationService.characterExistsForName(name);
 	}
 	
-	private void zoneInPlayer(Player player, CreatureObject creature) {
+	private void zoneInPlayer(Player player, CreatureObject creature, boolean firstZone) {
 		PlayerObject playerObj = creature.getPlayerObject();
 		player.setPlayerState(PlayerState.ZONING_IN);
 		player.setCreatureObject(creature);
 		creature.setOwner(player);
 		
-		sendZonePackets(player, creature);
+		if (firstZone)
+			sendZonePackets(player, creature);
+		startScene(creature, creature.getLocation());
+		if (firstZone)
+			playerObj.setStartPlayTime((int) System.currentTimeMillis());
 		initPlayerBeforeZoneIn(player, creature, playerObj);
 		System.out.printf("[%s] %s is zoning in%n", player.getUsername(), player.getCharacterName());
 		Log.i("ObjectManager", "Zoning in %s with character %s", player.getUsername(), player.getCharacterName());
-		new PlayerEventIntent(player, PlayerEvent.PE_FIRST_ZONE).broadcast();
+		if (firstZone) {
+			new PlayerEventIntent(player, PlayerEvent.PE_FIRST_ZONE).broadcast();
+			sendCommitHistory(player);
+			sendMessageOfTheDay(player);
+		}
 		new PlayerEventIntent(player, PlayerEvent.PE_ZONE_IN).broadcast();
-		sendCommitHistory(player);
-		sendMessageOfTheDay(player);
+	}
+	
+	private void startScene(CreatureObject object, Location newLocation) {
+		long time = (long) (ProjectSWG.getCoreTime() / 1E3);
+		Race race = ((CreatureObject)object).getRace();
+		sendPacket(object.getOwner(), new CmdStartScene(false, object.getObjectId(), race, newLocation, time, (int)(System.currentTimeMillis()/1E3)));
+		recursiveCreateObject(object, object.getOwner());
+	}
+	
+	private void recursiveCreateObject(SWGObject obj, Player p) {
+		SWGObject parent = obj.getParent();
+		if (parent != null)
+			recursiveCreateObject(parent, p);
+		obj.createObject(p);
 	}
 	
 	private void loadCommitHistory() {
@@ -190,7 +214,6 @@ public class ZoneManager extends Manager {
 	}
 	
 	private void initPlayerBeforeZoneIn(Player player, CreatureObject creatureObj, PlayerObject playerObj) {
-		playerObj.setStartPlayTime((int) System.currentTimeMillis());
 		creatureObj.setMoodId(CreatureMood.NONE.getMood());
 		playerObj.clearFlagBitmask(PlayerFlags.LD);	// Ziggy: Clear the LD flag in case it wasn't already.
 	}
