@@ -147,9 +147,9 @@ public class ObjectAwareness extends Service {
 		Location old = object.getLocation();
 		object.setLocation(oti.getNewLocation());
 		if (oti.getParent() != null) {
-			move(object, oti.getParent(), oti.getNewLocation());
+			move(object, oti.getParent(), oti.getNewLocation(), false);
 		} else {
-			moveFromOld(object, old);
+			moveFromOld(object, old, false);
 		}
 		if (object instanceof CreatureObject && ((CreatureObject) object).isLoggedInPlayer())
 			new RequestZoneInIntent(owner, (CreatureObject) object, false).broadcast();
@@ -187,7 +187,7 @@ public class ObjectAwareness extends Service {
 		if (area != null && area.isAdjustCoordinates())
 			newLocation.translatePosition(area.getX1(), 0, area.getZ1());
 		new PlayerTransformedIntent(obj, obj.getParent(), null, obj.getLocation(), newLocation).broadcast();
-		move(obj, newLocation);
+		move(obj, newLocation, true);
 		if (area != null && area.isAdjustCoordinates())
 			newLocation.translatePosition(-area.getX1(), 0, -area.getZ1());
 		obj.sendDataTransforms(transform);
@@ -203,7 +203,7 @@ public class ObjectAwareness extends Service {
 		}
 		if (obj instanceof CreatureObject)
 			new PlayerTransformedIntent((CreatureObject) obj, obj.getParent(), parent, obj.getLocation(), newLocation).broadcast();
-		move(obj, parent, newLocation);
+		move(obj, parent, newLocation, true);
 		obj.sendParentDataTransforms(transformWithParent);
 	}
 	
@@ -244,8 +244,9 @@ public class ObjectAwareness extends Service {
 	 * includes moving from a cell to the world.
 	 * @param object the object to move
 	 * @param nLocation the new location
+	 * @param update boolean on whether or not to update the object's awareness
 	 */
-	public void move(SWGObject object, Location nLocation) {
+	private void move(SWGObject object, Location nLocation, boolean update) {
 		if (object.getParent() != null) {
 			object.getParent().removeObject(object); // Moving from cell to world
 			object.sendObserversAndSelf(new UpdateContainmentMessage(object.getObjectId(), 0, object.getSlotArrangement()));
@@ -254,7 +255,8 @@ public class ObjectAwareness extends Service {
 		}
 		object.setLocation(nLocation);
 		add(object);
-		update(object);
+		if (update)
+			update(object);
 	}
 	
 	/**
@@ -264,8 +266,9 @@ public class ObjectAwareness extends Service {
 	 * @param object the object to move
 	 * @param nParent the new parent the object will be in
 	 * @param nLocation the new location relative to the parent
+	 * @param update boolean on whether or not to update the object's awareness
 	 */
-	public void move(SWGObject object, SWGObject nParent, Location nLocation) {
+	private void move(SWGObject object, SWGObject nParent, Location nLocation, boolean update) {
 		SWGObject parent = object.getParent();
 		if (parent != null && nParent != parent) {
 			parent.removeObject(object); // Moving from cell to cell, for instance
@@ -277,7 +280,8 @@ public class ObjectAwareness extends Service {
 			object.sendObserversAndSelf(new UpdateContainmentMessage(object.getObjectId(), nParent.getObjectId(), object.getSlotArrangement()));
 		}
 		object.setLocation(nLocation);
-		update(object);
+		if (update)
+			update(object);
 	}
 	
 	/**
@@ -285,7 +289,7 @@ public class ObjectAwareness extends Service {
 	 * the awareness is up to date
 	 * @param obj the object to update
 	 */
-	public void update(SWGObject obj) {
+	private void update(SWGObject obj) {
 		if (obj.isBuildout())
 			return;
 		Location l = obj.getWorldLocation();
@@ -303,7 +307,7 @@ public class ObjectAwareness extends Service {
 		obj.updateObjectAwareness(objectAware);
 	}
 	
-	private void moveFromOld(SWGObject object, Location oldLocation) {
+	private void moveFromOld(SWGObject object, Location oldLocation, boolean update) {
 		if (object.getParent() != null) {
 			object.getParent().removeObject(object); // Moving from cell to world
 			object.sendObserversAndSelf(new UpdateContainmentMessage(object.getObjectId(), 0, object.getSlotArrangement()));
@@ -311,7 +315,8 @@ public class ObjectAwareness extends Service {
 			removeFromLocation(object, oldLocation); // World to World
 		}
 		add(object);
-		update(object);
+		if (update)
+			update(object);
 	}
 	
 	private void removeFromLocation(SWGObject object, Location l) {
