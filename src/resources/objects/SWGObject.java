@@ -630,13 +630,17 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	}
 	
 	public void clearAware() {
+		clearAware(true);
+	}
+	
+	public void clearAware(boolean updateSelf) {
 		List<SWGObject> objects;
 		synchronized (objectsAware) {
 			objects = new ArrayList<>(objectsAware);
 		}
 		for (SWGObject o : objects) {
-			o.awarenessOutOfRange(this);
-			awarenessOutOfRange(o);
+			o.awarenessOutOfRange(this, updateSelf);
+			awarenessOutOfRange(o, true);
 		}
 	}
 
@@ -787,25 +791,25 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		outOfRange.removeAll(withinRange);
 		outOfRange.removeAll(observers);
 		for (SWGObject o : outOfRange) {
-			awarenessOutOfRange(o);
-			o.awarenessOutOfRange(this);
+			awarenessOutOfRange(o, true);
+			o.awarenessOutOfRange(this, true);
 		}
 		for (SWGObject o : withinRange) {
-			awarenessInRange(o);
-			o.awarenessInRange(this);
+			awarenessInRange(o, true);
+			o.awarenessInRange(this, true);
 		}
 		for (SWGObject o : observers) {
-			awarenessInRange(o);
-			o.awarenessInRange(this);
+			awarenessInRange(o, true);
+			o.awarenessInRange(this, true);
 		}
 	}
 	
-	protected void awarenessOutOfRange(SWGObject o) {
+	protected void awarenessOutOfRange(SWGObject o, boolean sendDestroy) {
 		boolean success = false;
 		synchronized (objectsAware) {
 			success = objectsAware.remove(o);
 		}
-		if (success) {
+		if (success && sendDestroy) {
 			Player owner = o.getOwner();
 			if (owner != null)
 				destroyObject(owner);
@@ -814,12 +818,12 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		}
 	}
 	
-	protected void awarenessInRange(SWGObject o) {
+	protected void awarenessInRange(SWGObject o, boolean sendCreate) {
 		boolean success = false;
 		synchronized (objectsAware) {
 			success = objectsAware.add(o);
 		}
-		if (success) {
+		if (success && sendCreate) {
 			Player owner = o.getOwner();
 			if (owner != null)
 				createObject(owner);
