@@ -210,56 +210,49 @@ public class TCPServer {
 			while (it.hasNext()) {
 				SelectionKey key = it.next();
 				if (key.isAcceptable()) {
-					SocketChannel sc = accept();
-					if (sc != null)
-						sc.register(selector, SelectionKey.OP_READ);
+					accept(selector);
 				} else if (key.isReadable()) {
 					SelectableChannel selectable = key.channel();
 					if (selectable instanceof SocketChannel)
-						read((SocketChannel) selectable);
-				} else if (key.isConnectable()) {
-					SelectableChannel selectable = key.channel();
-					if (!selectable.isOpen() && selectable instanceof SocketChannel)
-						disconnect((SocketChannel) selectable);
+						read(key, (SocketChannel) selectable);
 				}
+				it.remove();
 			}
-			keys.clear();
 		}
 		
-		private SocketChannel accept() {
-			SocketChannel sc = null;
+		private void accept(Selector selector) {
 			try {
-				sc = channel.accept();
+				SocketChannel sc = channel.accept();
 				if (sc == null)
-					return sc;
+					return;
 				sc.configureBlocking(false);
+				sc.register(selector, SelectionKey.OP_READ);
 				sockets.put(sc.getRemoteAddress(), sc);
 				if (callback != null)
 					callback.onIncomingConnection(sc.socket());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			return sc;
 		}
 		
-		private void read(SocketChannel s) {
+		private void read(SelectionKey key, SocketChannel s) {
 			try {
 				buffer.position(0);
 				buffer.limit(bufferSize);
 				int n = s.read(buffer);
 				buffer.flip();
-				if (n == -1) {
+				if (n < 0) {
+					key.cancel();
 					disconnect(s);
-					return;
+				} else if (n > 0) {
+					ByteBuffer smaller = ByteBuffer.allocate(n);
+					smaller.put(buffer);
+					if (callback != null)
+						callback.onIncomingData(s.socket(), smaller.array());
 				}
-				if (n == 0)
-					return;
-				ByteBuffer smaller = ByteBuffer.allocate(n);
-				smaller.put(buffer);
-				if (callback != null)
-					callback.onIncomingData(s.socket(), smaller.array());
 			} catch (IOException e) {
 				e.printStackTrace();
+				key.cancel();
 				disconnect(s);
 			}
 		}

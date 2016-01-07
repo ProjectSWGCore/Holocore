@@ -73,9 +73,8 @@ public class NetworkClient {
 	
 	public void onConnected() {
 		synchronized (prevPacketIntentMutex) {
-			Intent i = new ConnectionOpenedIntent(networkId);
-			i.broadcastAfterIntent(prevPacketIntent);
-			prevPacketIntent = i;
+			prevPacketIntent = new ConnectionOpenedIntent(networkId);
+			prevPacketIntent.broadcast();
 		}
 	}
 	

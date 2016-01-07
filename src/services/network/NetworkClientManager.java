@@ -199,12 +199,11 @@ public class NetworkClientManager extends Manager implements TCPCallback, Packet
 	
 	private void deleteSession(long networkId) {
 		synchronized (clients) {
-			NetworkClient client = clients.get(networkId);
+			NetworkClient client = clients.remove(networkId);
 			if (client == null) {
 				System.err.println("No NetworkClient found for network id: " + networkId);
 				return;
 			}
-			clients.remove(networkId);
 			sockets.remove(client.getAddress());
 		}
 	}
