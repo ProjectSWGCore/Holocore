@@ -31,7 +31,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import intents.network.InboundPacketIntent;
 import intents.network.OutboundPacketIntent;
 import intents.server.ServerManagementIntent;
 import intents.server.ServerStatusIntent;
@@ -75,7 +74,6 @@ public class CoreManager extends Manager {
 		addChildService(engineManager);
 		addChildService(galacticManager);
 		
-		registerForIntent(InboundPacketIntent.TYPE);
 		registerForIntent(OutboundPacketIntent.TYPE);
 		registerForIntent(ServerManagementIntent.TYPE);
 	}
