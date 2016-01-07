@@ -27,7 +27,11 @@
 ***********************************************************************************/
 package services.galaxy;
 
-import intents.GalacticIntent;
+import java.util.Hashtable;
+import java.util.Map;
+
+import intents.network.ConnectionClosedIntent;
+import intents.network.ConnectionOpenedIntent;
 import intents.network.GalacticPacketIntent;
 import intents.network.InboundPacketIntent;
 import resources.control.Intent;
@@ -39,14 +43,12 @@ import services.player.PlayerManager;
 
 public class GalacticManager extends Manager {
 	
-	private final Object prevPacketIntentMutex = new Object();
-	
-	private ObjectManager objectManager;
-	private PlayerManager playerManager;
-	private GameManager gameManager;
-	private ChatManager chatManager;
+	private final ObjectManager objectManager;
+	private final PlayerManager playerManager;
+	private final GameManager gameManager;
+	private final ChatManager chatManager;
 	private final TravelService travelService;
-	private Intent prevPacketIntent;
+	private final Map<Long, Intent> prevIntentMap;
 	
 	public GalacticManager() {
 		objectManager = new ObjectManager();
@@ -54,7 +56,7 @@ public class GalacticManager extends Manager {
 		gameManager = new GameManager();
 		chatManager = new ChatManager();
 		travelService = new TravelService(objectManager);
-		prevPacketIntent = null;
+		prevIntentMap = new Hashtable<>();
 		
 		addChildService(objectManager);
 		addChildService(playerManager);
@@ -63,6 +65,8 @@ public class GalacticManager extends Manager {
 		addChildService(travelService);
 		
 		registerForIntent(InboundPacketIntent.TYPE);
+		registerForIntent(ConnectionOpenedIntent.TYPE);
+		registerForIntent(ConnectionClosedIntent.TYPE);
 	}
 	
 	@Override
@@ -74,32 +78,17 @@ public class GalacticManager extends Manager {
 	@Override
 	public void onIntentReceived(Intent i) {
 		if (i instanceof InboundPacketIntent) {
-			synchronized (prevPacketIntentMutex) {
-				GalacticPacketIntent g = new GalacticPacketIntent((InboundPacketIntent) i);
-				if (prevPacketIntent == null)
-					broadcastGalacticIntent(g);
-				else
-					broadcastGalacticIntentAfterIntent(g, i);
-				prevPacketIntent = g;
+			long networkId = ((InboundPacketIntent) i).getNetworkId();
+			GalacticPacketIntent g = new GalacticPacketIntent((InboundPacketIntent) i);
+			g.setGalacticManager(this);
+			synchronized (prevIntentMap) {
+				g.broadcastAfterIntent(prevIntentMap.get(networkId));
+				prevIntentMap.put(networkId, g);
 			}
-		}
-	}
-	
-	public void broadcastGalacticIntent(GalacticIntent i) {
-		synchronized (i) {
-			if (i.isBroadcasted())
-				return;
-			prepareGalacticIntent(i);
-			i.broadcast();
-		}
-	}
-	
-	public void broadcastGalacticIntentAfterIntent(GalacticIntent g, Intent i) {
-		synchronized (g) {
-			if (g.isBroadcasted())
-				return;
-			prepareGalacticIntent(g);
-			g.broadcastAfterIntent(i);
+		} else if (i instanceof ConnectionClosedIntent) {
+			synchronized (prevIntentMap) {
+				prevIntentMap.remove(((ConnectionClosedIntent) i).getNetworkId());
+			}
 		}
 	}
 	
@@ -109,10 +98,6 @@ public class GalacticManager extends Manager {
 	
 	public PlayerManager getPlayerManager() {
 		return playerManager;
-	}
-	
-	private void prepareGalacticIntent(GalacticIntent i) {
-		i.setGalacticManager(this);
 	}
 	
 	private void resetPopulationCount() {
