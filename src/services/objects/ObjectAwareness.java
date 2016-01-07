@@ -41,14 +41,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import main.ProjectSWG;
 import network.packets.Packet;
 import network.packets.swg.zone.UpdateContainmentMessage;
-import network.packets.swg.zone.insertion.CmdStartScene;
 import network.packets.swg.zone.object_controller.DataTransform;
 import network.packets.swg.zone.object_controller.DataTransformWithParent;
 import resources.Location;
-import resources.Race;
 import resources.Terrain;
 import resources.buildout.BuildoutArea;
 import resources.control.Intent;
@@ -58,7 +55,6 @@ import resources.objects.creature.CreatureObject;
 import resources.objects.quadtree.QuadTree;
 import resources.objects.staticobject.StaticObject;
 import resources.player.Player;
-import resources.player.PlayerEvent;
 import resources.server_info.Log;
 
 public class ObjectAwareness extends Service {
@@ -121,7 +117,6 @@ public class ObjectAwareness extends Service {
 				p.setCreatureObject(null);
 				break;
 			case PE_ZONE_IN:
-				startScene(creature, creature.getLocation());
 				update(creature);
 				break;
 			default:
@@ -130,21 +125,24 @@ public class ObjectAwareness extends Service {
 	}
 	
 	private void handleObjectCreateIntent(ObjectCreateIntent oci) {
-		SWGObject obj = oci.getObject();
-		if (isInAwareness(obj))
-			add(obj);
+		SWGObject object = oci.getObject();
+		if (isInAwareness(object)) {
+			add(object);
+			update(object);
+		}
 	}
 	
 	private void handleObjectCreatedIntent(ObjectCreatedIntent oci) {
-		SWGObject obj = oci.getObject();
-		if (isInAwareness(obj))
-			add(obj);
+		SWGObject object = oci.getObject();
+		if (isInAwareness(object)) {
+			add(object);
+			update(object);
+		}
 	}
 	
 	private void processObjectTeleportIntent(ObjectTeleportIntent oti) {
 		SWGObject object = oti.getObject();
 		Player owner = object.getOwner();
-		boolean creature = object instanceof CreatureObject && owner != null;
 		Location old = object.getLocation();
 		object.setLocation(oti.getNewLocation());
 		if (oti.getParent() != null) {
@@ -152,9 +150,8 @@ public class ObjectAwareness extends Service {
 		} else {
 			moveFromOld(object, old);
 		}
-		if (creature)
-			new RequestZoneInIntent(owner, (CreatureObject) object, true).broadcast();
-		new PlayerEventIntent(object.getOwner(), PlayerEvent.PE_ZONE_IN).broadcast();
+		if (object instanceof CreatureObject && ((CreatureObject) object).isLoggedInPlayer())
+			new RequestZoneInIntent(owner, (CreatureObject) object, false).broadcast();
 	}
 	
 	private void processGalacticPacketIntent(GalacticPacketIntent i) {
@@ -162,7 +159,8 @@ public class ObjectAwareness extends Service {
 		if (packet instanceof DataTransform) {
 			DataTransform trans = (DataTransform) packet;
 			SWGObject obj = i.getObjectManager().getObjectById(trans.getObjectId());
-			moveObject(obj, trans);
+			if (obj instanceof CreatureObject)
+				moveObject((CreatureObject) obj, trans);
 		} else if (packet instanceof DataTransformWithParent) {
 			DataTransformWithParent transformWithParent = (DataTransformWithParent) packet;
 			SWGObject object = i.getObjectManager().getObjectById(transformWithParent.getObjectId());
@@ -171,34 +169,27 @@ public class ObjectAwareness extends Service {
 		}
 	}
 	
-	private void startScene(CreatureObject object, Location newLocation) {
-		long time = (long) (ProjectSWG.getCoreTime() / 1E3);
-		Race race = ((CreatureObject)object).getRace();
-		sendPacket(object.getOwner(), new CmdStartScene(false, object.getObjectId(), race, newLocation, time, (int)(System.currentTimeMillis()/1E3)));
-		recursiveCreateObject(object, object.getOwner());
-	}
-	
-	private void recursiveCreateObject(SWGObject obj, Player p) {
-		SWGObject parent = obj.getParent();
-		if (parent != null)
-			recursiveCreateObject(parent, p);
-		obj.createObject(p);
-	}
-	
-	private void moveObject(SWGObject obj, DataTransform transform) {
+	private void moveObject(CreatureObject obj, DataTransform transform) {
 		Location newLocation = transform.getLocation();
 		newLocation.setTerrain(obj.getTerrain());
+		double time = ((CreatureObject) obj).getTimeSinceLastTransform() / 1000;
+		obj.updateLastTransformTime();
+		Location l = obj.getLocation();
+		double speed = Math.sqrt(square(l.getX()-newLocation.getX()) + square(l.getZ()-newLocation.getZ())) / time;
+		if (speed > obj.getMovementScale()*7.3) {
+			double angle = (newLocation.getX() == l.getX() ? 0 : Math.atan2(newLocation.getZ()-l.getZ(), newLocation.getX()-l.getX()));
+			newLocation.setX(l.getX()+obj.getMovementScale()*7.3*time*Math.cos(angle));
+			newLocation.setZ(l.getZ()+obj.getMovementScale()*7.3*time*Math.sin(angle));
+			transform.setSpeed((float) (obj.getMovementScale()*7.3));
+		}
 		BuildoutArea area = obj.getBuildoutArea();
 		if (area != null && area.isAdjustCoordinates())
 			newLocation.translatePosition(area.getX1(), 0, area.getZ1());
-		if (obj instanceof CreatureObject)
-			new PlayerTransformedIntent((CreatureObject) obj, obj.getParent(), null, obj.getLocation(), newLocation).broadcast();
+		new PlayerTransformedIntent(obj, obj.getParent(), null, obj.getLocation(), newLocation).broadcast();
 		move(obj, newLocation);
 		if (area != null && area.isAdjustCoordinates())
 			newLocation.translatePosition(-area.getX1(), 0, -area.getZ1());
 		obj.sendDataTransforms(transform);
-
-		// TODO: State checks before sending a data transform message to ensure the move is valid
 	}
 	
 	private void moveObject(SWGObject obj, SWGObject parent, DataTransformWithParent transformWithParent) {
@@ -230,7 +221,6 @@ public class ObjectAwareness extends Service {
 	 * @param object the object to add
 	 */
 	public void add(SWGObject object) {
-		update(object);
 		Location l = object.getLocation();
 		if (invalidLocation(l))
 			return;
@@ -263,6 +253,7 @@ public class ObjectAwareness extends Service {
 		}
 		object.setLocation(nLocation);
 		add(object);
+		update(object);
 	}
 	
 	/**
@@ -319,6 +310,7 @@ public class ObjectAwareness extends Service {
 			removeFromLocation(object, oldLocation); // World to World
 		}
 		add(object);
+		update(object);
 	}
 	
 	private void removeFromLocation(SWGObject object, Location l) {
