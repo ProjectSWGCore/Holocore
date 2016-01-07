@@ -151,7 +151,6 @@ public class NetworkClient {
 				nCapacity *= 2;
 			if (nCapacity >= buffer.capacity())
 				return;
-			System.out.println("Shrinking buffer to " + nCapacity);
 			ByteBuffer bb = ByteBuffer.allocate(nCapacity).order(ByteOrder.LITTLE_ENDIAN);
 			buffer.flip();
 			bb.put(buffer);
