@@ -230,9 +230,8 @@ public class ObjectManager extends Manager {
 		Packet packet = gpi.getPacket();
 		if (packet instanceof SelectCharacter) {
 			PlayerManager pm = gpi.getPlayerManager();
-			String galaxy = gpi.getGalaxy().getName();
 			long characterId = ((SelectCharacter) packet).getCharacterId();
-			zoneInCharacter(pm, galaxy, gpi.getNetworkId(), characterId);
+			zoneInCharacter(pm, gpi.getNetworkId(), characterId);
 		}
 	}
 	
@@ -342,7 +341,7 @@ public class ObjectManager extends Manager {
 		}
 	}
 	
-	private void zoneInCharacter(PlayerManager playerManager, String galaxy, long netId, long characterId) {
+	private void zoneInCharacter(PlayerManager playerManager, long netId, long characterId) {
 		Player player = playerManager.getPlayerFromNetworkId(netId);
 		if (player == null) {
 			Log.e("ObjectManager", "Unable to zone in null player '%d'", netId);
@@ -367,7 +366,7 @@ public class ObjectManager extends Manager {
 			sendClientFatal(player, "Failed to zone", "There has been an internal server error: Null Ghost.\nPlease delete your character and create a new one", 10, TimeUnit.SECONDS);
 			return;
 		}
-		new RequestZoneInIntent(player, (CreatureObject) creatureObj, galaxy).broadcast();
+		new RequestZoneInIntent(player, (CreatureObject) creatureObj, true).broadcast();
 	}
 	
 	private void sendClientFatal(Player player, String title, String message, long timeToRead, TimeUnit time) {

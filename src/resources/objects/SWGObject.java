@@ -52,6 +52,7 @@ import resources.objects.creature.CreatureObject;
 import resources.player.Player;
 import resources.player.PlayerState;
 import resources.server_info.Log;
+import services.CoreManager;
 import utilities.Encoder.StringType;
 
 import java.io.IOException;
@@ -956,7 +957,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	}
 	
 	public void createBaseline6(Player target, BaselineBuilder bb) {
-		bb.addInt(target.getGalaxyId()); // 0
+		bb.addInt(CoreManager.getGalaxyId()); // 0
 		bb.addObject(detailStringId); // 1
 		
 		bb.incrementOperandCount(2);

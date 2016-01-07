@@ -28,6 +28,7 @@
 package services.objects;
 
 import intents.PlayerEventIntent;
+import intents.RequestZoneInIntent;
 import intents.network.GalacticPacketIntent;
 import intents.object.ObjectCreateIntent;
 import intents.object.ObjectCreatedIntent;
@@ -119,10 +120,7 @@ public class ObjectAwareness extends Service {
 				creature.setOwner(null);
 				p.setCreatureObject(null);
 				break;
-			case PE_FIRST_ZONE:
-				break;
 			case PE_ZONE_IN:
-				creature.clearAware();
 				startScene(creature, creature.getLocation());
 				update(creature);
 				break;
@@ -150,14 +148,12 @@ public class ObjectAwareness extends Service {
 		Location old = object.getLocation();
 		object.setLocation(oti.getNewLocation());
 		if (oti.getParent() != null) {
-			if (creature)
-				startScene((CreatureObject) object, oti.getNewLocation());
 			move(object, oti.getParent(), oti.getNewLocation());
 		} else {
-			if (creature)
-				startScene((CreatureObject) object, oti.getNewLocation());
 			moveFromOld(object, old);
 		}
+		if (creature)
+			new RequestZoneInIntent(owner, (CreatureObject) object, true).broadcast();
 		new PlayerEventIntent(object.getOwner(), PlayerEvent.PE_ZONE_IN).broadcast();
 	}
 	

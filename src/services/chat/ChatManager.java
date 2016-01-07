@@ -41,7 +41,6 @@ import network.packets.swg.SWGPacket;
 import network.packets.swg.zone.chat.*;
 import network.packets.swg.zone.chat.ChatSystemMessage.SystemChatType;
 import network.packets.swg.zone.object_controller.SpatialChat;
-import resources.Galaxy;
 import resources.Terrain;
 import resources.chat.ChatAvatar;
 import resources.chat.ChatResult;
@@ -69,8 +68,8 @@ public class ChatManager extends Manager {
 	private final RelationalServerData chatLogs;
 	private final PreparedStatement insertChatLog;
 
-	public ChatManager(Galaxy g) {
-		roomService = new ChatRoomService(g);
+	public ChatManager() {
+		roomService = new ChatRoomService();
 		mailService = new ChatMailService();
 		chatLogs = RelationalServerFactory.getServerDatabase("chat/chat_log.db");
 		insertChatLog = chatLogs.prepareStatement("INSERT INTO chat_log VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");

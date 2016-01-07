@@ -33,8 +33,6 @@ import intents.network.ForceDisconnectIntent;
 import intents.network.GalacticPacketIntent;
 import intents.player.ZonePlayerSwapIntent;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
@@ -43,7 +41,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import main.ProjectSWG;
 import network.packets.swg.zone.HeartBeat;
 import resources.control.Intent;
 import resources.control.Service;
@@ -55,22 +52,18 @@ import resources.player.PlayerEvent;
 import resources.player.PlayerFlags;
 import resources.player.PlayerState;
 import resources.server_info.Log;
+import services.CoreManager;
 import utilities.DebugUtilities;
 import utilities.ThreadUtilities;
 
 public class ConnectionService extends Service {
 	
 	private static final double DISAPPEAR_THRESHOLD = TimeUnit.MINUTES.toMillis(3); // Time after the LD
-	private static final String INCREMENT_POPULATION_SQL = "UPDATE galaxies SET population = population + 1 WHERE id = ?";
-	private static final String DECREMENT_POPULATION_SQL = "UPDATE galaxies SET population = population - 1 WHERE id = ?";
 	
 	private final ScheduledExecutorService updateService;
 	private final Runnable disappearRunnable;
 	private final Set <DisappearPlayer> disappearPlayers;
 	private final Set <Player> zonedInPlayers;
-	
-	private PreparedStatement incrementPopulation;
-	private PreparedStatement decrementPopulation;
 	
 	public ConnectionService() {
 		updateService = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("conn-update-service"));
@@ -96,13 +89,6 @@ public class ConnectionService extends Service {
 		registerForIntent(GalacticPacketIntent.TYPE);
 		registerForIntent(ForceDisconnectIntent.TYPE);
 		registerForIntent(ZonePlayerSwapIntent.TYPE);
-	}
-	
-	@Override
-	public boolean initialize() {
-		incrementPopulation = getLocalDatabase().prepareStatement(INCREMENT_POPULATION_SQL);
-		decrementPopulation = getLocalDatabase().prepareStatement(DECREMENT_POPULATION_SQL);
-		return super.initialize();
 	}
 	
 	@Override
@@ -138,15 +124,7 @@ public class ConnectionService extends Service {
 		switch (pei.getEvent()) {
 			case PE_FIRST_ZONE: {
 				Player p = pei.getPlayer();
-				try {
-					synchronized (incrementPopulation) {
-						incrementPopulation.setInt(1, ProjectSWG.getGalaxyId());
-						incrementPopulation.executeUpdate();
-					}
-				} catch (SQLException e) {
-					Log.e("ConnectionService", "SQLException occured when trying to increase population value.");
-					e.printStackTrace();
-				}
+				CoreManager.getGalaxy().incrementPopulationCount();
 				removeFromLists(p);
 				synchronized (zonedInPlayers) {
 					zonedInPlayers.add(p);
@@ -157,15 +135,7 @@ public class ConnectionService extends Service {
 				clearPlayerFlag(pei.getPlayer(), pei.getEvent(), PlayerFlags.LD);
 				break;
 			case PE_LOGGED_OUT:
-				try {
-					synchronized (decrementPopulation) {
-						decrementPopulation.setInt(1, ProjectSWG.getGalaxyId());
-						decrementPopulation.executeUpdate();
-					}
-				} catch (SQLException e) {
-					Log.e("ConnectionService", "SQLException occured when trying to decrease population value.");
-					e.printStackTrace();
-				}
+				CoreManager.getGalaxy().decrementPopulationCount();
 				setPlayerFlag(pei.getPlayer(), pei.getEvent(), PlayerFlags.LD);
 				logOut(pei.getPlayer(), true);
 				break;
@@ -196,7 +166,7 @@ public class ConnectionService extends Service {
 		removeFromLists(before);
 		updatePlayTime(before);
 		Log.i("ConnectionService", "Logged out %s with character %s", before.getUsername(), before.getCharacterName());
-		new PlayerEventIntent(before, before.getGalaxyName(), PlayerEvent.PE_LOGGED_OUT).broadcast();
+		new PlayerEventIntent(before, PlayerEvent.PE_LOGGED_OUT).broadcast();
 		Log.i("ConnectionService", "Disconnected %s with character %s and reason: %s", before.getUsername(), before.getCharacterName(), DisconnectReason.NEW_CONNECTION_ATTEMPT);
 		new CloseConnectionIntent(before.getNetworkId(), DisconnectReason.NEW_CONNECTION_ATTEMPT).broadcast();
 		before.setPlayerState(PlayerState.DISCONNECTED);

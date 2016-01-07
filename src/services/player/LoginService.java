@@ -38,7 +38,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Random;
 
 import main.ProjectSWG;
@@ -59,7 +58,6 @@ import network.packets.swg.login.OfflineServersMessage;
 import network.packets.swg.login.StationIdHasJediSlot;
 import resources.Galaxy;
 import resources.Race;
-import resources.Galaxy.GalaxyStatus;
 import resources.common.BCrypt;
 import resources.config.ConfigFile;
 import resources.control.Intent;
@@ -72,22 +70,15 @@ import resources.player.PlayerState;
 import resources.server_info.Config;
 import resources.server_info.Log;
 import resources.server_info.RelationalDatabase;
+import services.CoreManager;
 
 public class LoginService extends Service {
 	
 	private static final String REQUIRED_VERSION = "20111130-15:46";
 	
-	// Population status values. Values are in percent.
-	private static final double VERYLIGHT = 10;
-	private static final double LIGHT = 20;
-	private static final double MEDIUM = 30;
-	private static final double HEAVY = 40;
-	private static final double VERYHEAVY = 50;
-	private static final double EXTREMELYHEAVY = 100;
-	
 	private Random random;
 	private PreparedStatement getUser;
-	private PreparedStatement getGalaxies;
+	private PreparedStatement getCharacter;
 	private PreparedStatement getCharacters;
 	private PreparedStatement deleteCharacter;
 	private boolean autoLogin;
@@ -103,10 +94,10 @@ public class LoginService extends Service {
 	public boolean initialize() {
 		RelationalDatabase local = getLocalDatabase();
 		getUser = local.prepareStatement("SELECT * FROM users WHERE LOWER(username) = LOWER(?)");
-		getGalaxies = local.prepareStatement("SELECT * FROM galaxies");
-		getCharacters = local.prepareStatement("SELECT * FROM characters WHERE userid = ? AND galaxyid = ?");
+		getCharacter = local.prepareStatement("SELECT * FROM characters WHERE LOWER(name) = LOWER(?)");
+		getCharacters = local.prepareStatement("SELECT * FROM characters WHERE userid = ?");
 		deleteCharacter = local.prepareStatement("DELETE FROM characters WHERE id = ?");
-		autoLogin = (getConfig(ConfigFile.NETWORK).getInt("AUTO-LOGIN", 0) == 1 ? true : false);
+		autoLogin = getConfig(ConfigFile.NETWORK).getInt("AUTO-LOGIN", 0) == 1;
 		return super.initialize();
 	}
 	
@@ -299,62 +290,29 @@ public class LoginService extends Service {
 	}
 	
 	public ResultSet getCharacter(String character) throws SQLException {
-		PreparedStatement statement = getLocalDatabase().prepareStatement("SELECT * FROM characters WHERE lower(name) = ?");
-		statement.setString(1, character.toLowerCase(Locale.ENGLISH));
-		return statement.executeQuery();
+		synchronized (getCharacter) {
+			getCharacter.setString(1, character);
+			return getCharacter.executeQuery();
+		}
 	}
 	
 	private List <Galaxy> getGalaxies(Player p) throws SQLException {
-		Config c = getConfig(ConfigFile.PRIMARY);
-		ResultSet set = getGalaxies.executeQuery();
-		List <Galaxy> galaxies = new ArrayList<Galaxy>();
-		int maxPopulation = c.getInt("GALAXY-MAX-ONLINE", 3000);
-		double consumed;
-		int population;
-		
-		try {
-			while (set.next()) {
-				Galaxy g = new Galaxy();
-				population = set.getInt("population");
-				consumed = ((double) population / maxPopulation) * 100;
-				
-				g.setId(set.getInt("id"));
-				g.setName(set.getString("name"));
-				g.setAddress(set.getString("address"));
-				g.setPopulation(population);
-				g.setTimeZone(set.getInt("timezone") * 3600);
-				g.setZonePort(set.getInt("zone_port"));
-				g.setPingPort(set.getInt("ping_port"));
-				g.setStatus(set.getInt("status"));
-				g.setMaxCharacters(c.getInt("GALAXY-MAX-CHARACTERS", 2));
-				g.setOnlinePlayerLimit(maxPopulation);
-				g.setOnlineFreeTrialLimit(maxPopulation);
-				g.setRecommended(true);
-				g.setPopulationStatus(populationStatus(consumed));
-				// If locked, restricted, or full
-				if (p.getAccessLevel().getValue() >= AccessLevel.CSR.getValue() && g.getStatus() != GalaxyStatus.UP)
-					g.setStatus(GalaxyStatus.UP);
-				galaxies.add(g);
-			}
-			set.close();
-			return galaxies;
-		} finally {
-			set.close();
-		}
+		List<Galaxy> galaxies = new ArrayList<>();
+		galaxies.add(CoreManager.getGalaxy());
+		return galaxies;
 	}
 	
 	private SWGCharacter [] getCharacters(int userId) throws SQLException {
 		getCharacters.setInt(1, userId);
-		getCharacters.setInt(2, ProjectSWG.getGalaxyId());
 		ResultSet set = getCharacters.executeQuery();
-		List <SWGCharacter> characters = new ArrayList<SWGCharacter>();
+		List <SWGCharacter> characters = new ArrayList<>();
 		try {
 			while (set.next()) {
 				SWGCharacter c = new SWGCharacter();
 				c.setId(set.getInt("id"));
 				c.setName(set.getString("name"));
+				c.setGalaxyId(CoreManager.getGalaxyId());
 				c.setRaceCrc(Race.getRaceByFile(set.getString("race")).getCrc());
-				c.setGalaxyId(set.getInt("galaxyid"));
 				c.setType(1); // 1 = Normal (2 = Jedi, 3 = Spectral)
 				characters.add(c);
 			}
@@ -374,27 +332,6 @@ public class LoginService extends Service {
 			}
 			return false;
 		}
-	}
-	
-	private int populationStatus(final double consumed) {
-		final int popStatus;
-		
-		if(consumed < VERYLIGHT)
-			popStatus = 0;
-		else if(consumed < LIGHT)
-			popStatus = 1;
-		else if(consumed < MEDIUM)
-			popStatus = 2;
-		else if(consumed < HEAVY)
-			popStatus = 3;
-		else if(consumed < VERYHEAVY)
-			popStatus = 4;
-		else if(consumed < EXTREMELYHEAVY)
-			popStatus = 5;
-		else
-			popStatus = 6;
-		
-		return popStatus;
 	}
 	
 }

@@ -99,7 +99,7 @@ public class ZoneManager extends Manager {
 	public void onIntentReceived(Intent i) {
 		if (i instanceof RequestZoneInIntent) {
 			RequestZoneInIntent zii = (RequestZoneInIntent) i;
-			zoneInPlayer(zii.getPlayer(), zii.getCreature(), zii.getGalaxy());
+			zoneInPlayer(zii.getPlayer(), zii.getCreature());
 		} else if (i instanceof GalacticPacketIntent) {
 			GalacticPacketIntent gpi = (GalacticPacketIntent) i;
 			handlePacket(gpi, gpi.getPlayerManager().getPlayerFromNetworkId(gpi.getNetworkId()), gpi.getNetworkId(), gpi.getPacket());
@@ -126,7 +126,7 @@ public class ZoneManager extends Manager {
 		return characterCreationService.characterExistsForName(name);
 	}
 	
-	private void zoneInPlayer(Player player, CreatureObject creature, String galaxy) {
+	private void zoneInPlayer(Player player, CreatureObject creature) {
 		PlayerObject playerObj = creature.getPlayerObject();
 		player.setPlayerState(PlayerState.ZONING_IN);
 		player.setCreatureObject(creature);
@@ -136,8 +136,8 @@ public class ZoneManager extends Manager {
 		initPlayerBeforeZoneIn(player, creature, playerObj);
 		System.out.printf("[%s] %s is zoning in%n", player.getUsername(), player.getCharacterName());
 		Log.i("ObjectManager", "Zoning in %s with character %s", player.getUsername(), player.getCharacterName());
-		new PlayerEventIntent(player, galaxy, PlayerEvent.PE_FIRST_ZONE).broadcast();
-		new PlayerEventIntent(player, galaxy, PlayerEvent.PE_ZONE_IN).broadcast();
+		new PlayerEventIntent(player, PlayerEvent.PE_FIRST_ZONE).broadcast();
+		new PlayerEventIntent(player, PlayerEvent.PE_ZONE_IN).broadcast();
 		sendCommitHistory(player);
 		sendMessageOfTheDay(player);
 	}

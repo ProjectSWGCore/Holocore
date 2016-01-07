@@ -27,14 +27,13 @@
 ***********************************************************************************/
 package services.network;
 
-import resources.Galaxy;
 import resources.control.Manager;
 
 public class NetworkManager extends Manager {
 	
 	private final NetworkClientManager netClientManager;
 	
-	public NetworkManager(Galaxy galaxy) {
+	public NetworkManager() {
 		netClientManager = new NetworkClientManager();
 		
 		addChildService(netClientManager);

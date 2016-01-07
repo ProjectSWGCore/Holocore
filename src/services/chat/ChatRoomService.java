@@ -62,7 +62,6 @@ import network.packets.swg.zone.chat.ChatSendToRoom;
 import network.packets.swg.zone.chat.ChatUnbanAvatarFromRoom;
 import network.packets.swg.zone.chat.ChatUninviteFromRoom;
 import network.packets.swg.zone.insertion.ChatRoomList;
-import resources.Galaxy;
 import resources.Terrain;
 import resources.chat.ChatAvatar;
 import resources.chat.ChatResult;
@@ -78,6 +77,7 @@ import resources.server_info.CachedObjectDatabase;
 import resources.server_info.ObjectDatabase;
 import resources.server_info.RelationalServerData;
 import resources.server_info.RelationalServerFactory;
+import services.CoreManager;
 import services.chat.ChatManager.ChatRange;
 import services.chat.ChatManager.ChatType;
 import services.player.PlayerManager;
@@ -100,11 +100,9 @@ public class ChatRoomService extends Service {
 	private final Map<Integer, ChatRoom> roomMap;
 	private final RelationalServerData chatLogs;
 	private final PreparedStatement insertChatLog;
-	private final Galaxy galaxy;
 	private int maxChatRoomId;
 
-	public ChatRoomService(Galaxy g) {
-		galaxy		= g;
+	public ChatRoomService() {
 		database	= new CachedObjectDatabase<>("odb/chat_rooms.db");
 		roomMap 	= new ConcurrentHashMap<>();
 		messages	= new ConcurrentHashMap<>();
@@ -126,7 +124,7 @@ public class ChatRoomService extends Service {
 			roomMap.put(room.getId(), room);
 		});
 
-		createSystemChannels(galaxy.getName());
+		createSystemChannels(CoreManager.getGalaxy().getName());
 		return super.initialize();
 	}
 
@@ -134,10 +132,12 @@ public class ChatRoomService extends Service {
 	public void onIntentReceived(Intent i) {
 		switch(i.getType()) {
 			case ChatRoomUpdateIntent.TYPE:
-				processChatRoomUpdateIntent((ChatRoomUpdateIntent) i);
+				if (i instanceof ChatRoomUpdateIntent)
+					processChatRoomUpdateIntent((ChatRoomUpdateIntent) i);
 				break;
 			case GalacticPacketIntent.TYPE:
-				processPacket((GalacticPacketIntent) i);
+				if (i instanceof GalacticPacketIntent)
+					processPacket((GalacticPacketIntent) i);
 				break;
 			case PlayerEventIntent.TYPE:
 				if (i instanceof PlayerEventIntent)
@@ -707,7 +707,7 @@ public class ChatRoomService extends Service {
 			return getRoom(path);
 
 		// All paths should have parents, lets validate to make sure they exist first. Create them if they don't.
-		int lastIndex = path.lastIndexOf(".");
+		int lastIndex = path.lastIndexOf('.');
 		if (lastIndex != -1) {
 			String parentPath = path.substring(0, lastIndex);
 			if (getRoom(parentPath) == null) {
