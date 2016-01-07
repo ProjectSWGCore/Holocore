@@ -319,15 +319,9 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	 * Gets the object that occupies the specified slot
 	 * @param slotName
 	 * @return The {@link SWGObject} occupying the slot. Returns null if there is nothing in the slot or it doesn't exist.
-	 * <p>If the slot doesn't exist, then an error is printed as well.</p>
 	 */
 	public SWGObject getSlottedObject(String slotName) {
-		if (hasSlot(slotName))
-			return slots.get(slotName);
-		else {
-			System.err.println(this + " does not contain " + slotName);
-			return null;
-		}
+		return slots.get(slotName);
 	}
 
 	/**
@@ -898,7 +892,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		// Now create the contained objects
 		for (SWGObject containedObject : containedObjects.values()) {
 			if (containedObject != null && !sentObjects.contains(containedObject)) {
-				if (containedObject instanceof CreatureObject && containedObject.hasSlot("ghost") && containedObject.getOwner() == null)
+				if (containedObject instanceof CreatureObject && ((CreatureObject) containedObject).isLoggedOutPlayer())
 					continue; // If it's a player, but that's logged out
 				containedObject.createObject(target);
 			}

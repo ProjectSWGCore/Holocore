@@ -143,8 +143,8 @@ public class ObjectManager extends Manager {
 	
 	private void loadObject(SWGObject obj) {
 		obj.setOwner(null);
-		// if player is not a player
-		if (!(obj instanceof CreatureObject && ((CreatureObject) obj).hasSlot("ghost")))
+		// if creature is not a player
+		if (!(obj instanceof CreatureObject && ((CreatureObject) obj).isLoggedOutPlayer()))
 			objectAwareness.add(obj);
 		if (obj instanceof CreatureObject && ((CreatureObject) obj).getPlayerObject() != null) {
 			if (!obj.hasSlot("bank")) {

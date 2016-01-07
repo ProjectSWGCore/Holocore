@@ -341,7 +341,7 @@ public class ObjectAwareness extends Service {
 	private boolean isValidInRange(SWGObject obj, SWGObject inRange, Location objLoc) {
 		if (inRange.getObjectId() == obj.getObjectId())
 			return false;
-		if (obj.hasSlot("ghost") && obj.getOwner() == null)
+		if (obj instanceof CreatureObject && ((CreatureObject) obj).isLoggedOutPlayer())
 			return false;
 		int distSquared = distanceSquared(objLoc, inRange.getWorldLocation());
 		int loadSquared = (int) (square(inRange.getLoadRange()) + 0.5);

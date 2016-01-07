@@ -278,7 +278,19 @@ public class CreatureObject extends TangibleObject {
 	}
 	
 	public PlayerObject getPlayerObject() {
-		return (PlayerObject) (hasSlot("ghost") ? getSlottedObject("ghost") : null);
+		return (PlayerObject) getSlottedObject("ghost");
+	}
+	
+	public boolean isPlayer() {
+		return getSlottedObject("ghost") != null;
+	}
+	
+	public boolean isLoggedInPlayer() {
+		return getOwner() != null && isPlayer();
+	}
+	
+	public boolean isLoggedOutPlayer() {
+		return getOwner() == null && isPlayer();
 	}
 	
 	public void setPosture(Posture posture) {
