@@ -185,6 +185,10 @@ public class Player implements Serializable, Comparable<Player> {
 	
 	@Override
 	public int compareTo(Player p) {
+		if (creatureObject == null)
+			return p.getCreatureObject() == null ? 0 : -1;
+		else if (p.getCreatureObject() == null)
+			return 1;
 		return creatureObject.compareTo(p.getCreatureObject());
 	}
 	
