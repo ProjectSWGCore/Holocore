@@ -41,6 +41,7 @@ import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -251,7 +252,11 @@ public class TCPServer {
 						callback.onIncomingData(s.socket(), smaller.array());
 				}
 			} catch (IOException e) {
-				e.printStackTrace();
+				if (e.getMessage().toLowerCase(Locale.US).contains("connection reset"))
+					System.err.println("Connection Reset");
+				else
+					e.printStackTrace();
+				System.err.flush();
 				key.cancel();
 				disconnect(s);
 			}
