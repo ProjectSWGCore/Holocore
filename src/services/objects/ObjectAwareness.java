@@ -176,7 +176,7 @@ public class ObjectAwareness extends Service {
 		newLocation.setTerrain(obj.getTerrain());
 		double time = ((CreatureObject) obj).getTimeSinceLastTransform() / 1000;
 		obj.updateLastTransformTime();
-		Location l = obj.getLocation();
+		Location l = obj.getWorldLocation();
 		double speed = Math.sqrt(square(l.getX()-newLocation.getX()) + square(l.getZ()-newLocation.getZ())) / time;
 		if (speed > obj.getMovementScale()*7.3) {
 			double angle = (newLocation.getX() == l.getX() ? 0 : Math.atan2(newLocation.getZ()-l.getZ(), newLocation.getX()-l.getX()));
