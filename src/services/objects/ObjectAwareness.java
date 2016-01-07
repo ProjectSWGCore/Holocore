@@ -166,7 +166,8 @@ public class ObjectAwareness extends Service {
 			DataTransformWithParent transformWithParent = (DataTransformWithParent) packet;
 			SWGObject object = i.getObjectManager().getObjectById(transformWithParent.getObjectId());
 			SWGObject parent = i.getObjectManager().getObjectById(transformWithParent.getCellId());
-			moveObject(object, parent, transformWithParent);
+			if (object instanceof CreatureObject)
+				moveObject((CreatureObject) object, parent, transformWithParent);
 		}
 	}
 	
@@ -193,7 +194,7 @@ public class ObjectAwareness extends Service {
 		obj.sendDataTransforms(transform);
 	}
 	
-	private void moveObject(SWGObject obj, SWGObject parent, DataTransformWithParent transformWithParent) {
+	private void moveObject(CreatureObject obj, SWGObject parent, DataTransformWithParent transformWithParent) {
 		Location newLocation = transformWithParent.getLocation();
 		newLocation.setTerrain(obj.getTerrain());
 		if (parent == null) {
@@ -201,8 +202,19 @@ public class ObjectAwareness extends Service {
 			Log.e("ObjectManager", "Could not find parent for transform! Cell: %d  Object: %s", transformWithParent.getCellId(), obj);
 			return;
 		}
-		if (obj instanceof CreatureObject)
-			new PlayerTransformedIntent((CreatureObject) obj, obj.getParent(), parent, obj.getLocation(), newLocation).broadcast();
+		double time = ((CreatureObject) obj).getTimeSinceLastTransform() / 1000;
+		obj.updateLastTransformTime();
+		Location l = obj.getWorldLocation();
+		Location nWorld = new Location(newLocation.getX(), 0, newLocation.getZ(), parent.getTerrain());
+		nWorld.translateLocation(parent.getWorldLocation());
+		double speed = Math.sqrt(square(l.getX()-nWorld.getX()) + square(l.getZ()-nWorld.getZ())) / time;
+		if (speed > obj.getMovementScale()*7.3) {
+			double angle = (nWorld.getX() == l.getX() ? 0 : Math.atan2(nWorld.getZ()-l.getZ(), nWorld.getX()-l.getX())) + Math.PI;
+			newLocation.setX(newLocation.getX()+obj.getMovementScale()*7.3*time*invertNormalizedValue(Math.cos(angle)));
+			newLocation.setZ(newLocation.getZ()+obj.getMovementScale()*7.3*time*invertNormalizedValue(Math.sin(angle)));
+			transformWithParent.setSpeed((float) (obj.getMovementScale()*7.3));
+		}
+		new PlayerTransformedIntent((CreatureObject) obj, obj.getParent(), parent, obj.getLocation(), newLocation).broadcast();
 		move(obj, parent, newLocation, true);
 		obj.sendParentDataTransforms(transformWithParent);
 	}
@@ -215,6 +227,12 @@ public class ObjectAwareness extends Service {
 	
 	private boolean isInAwareness(SWGObject object) {
 		return object.getParent() == null && !(object instanceof StaticObject);
+	}
+	
+	private double invertNormalizedValue(double x) {
+		if (x < 0)
+			return -1 - x;
+		return 1-x;
 	}
 	
 	/**
