@@ -117,6 +117,7 @@ public class ObjectAwareness extends Service {
 				p.setCreatureObject(null);
 				break;
 			case PE_ZONE_IN:
+				creature.clearAware();
 				update(creature);
 				break;
 			default:
