@@ -231,7 +231,7 @@ public class NetworkClientManager extends Manager implements TCPCallback, Packet
 				synchronized (processQueue) {
 					processQueue.add(client);
 				}
-				clientProcessor.submit(processBufferRunnable);
+				clientProcessor.execute(processBufferRunnable);
 			} else
 				Log.w(this, "Unknown connection! Network ID: %d  Address: %s", netId, addr);
 		}

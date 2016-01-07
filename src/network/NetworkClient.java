@@ -30,6 +30,7 @@ package network;
 import intents.network.ConnectionOpenedIntent;
 import intents.network.InboundPacketIntent;
 
+import java.io.EOFException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -141,21 +142,21 @@ public class NetworkClient {
 	private List<Packet> processPackets() {
 		List <Packet> packets = new LinkedList<>();
 		Packet p = null;
-		while (buffer.hasRemaining()) {
-			p = processPacket();
-			if (p != null)
-				packets.add(p);
-			else
-				break;
+		try {
+			while (buffer.hasRemaining()) {
+				p = processPacket();
+				if (p != null)
+					packets.add(p);
+			}
+		} catch (EOFException e) {
+			System.err.println(e.getMessage());
 		}
 		return packets;
 	}
 	
-	private Packet processPacket() {
-		if (buffer.remaining() < 5) {
-			System.err.println("Not enough remaining data for header! Remaining: " + buffer.remaining());
-			return null;
-		}
+	private Packet processPacket() throws EOFException {
+		if (buffer.remaining() < 5)
+			throw new EOFException("Not enough remaining data for header! Remaining: " + buffer.remaining());
 		buffer.order(ByteOrder.LITTLE_ENDIAN);
 		byte bitfield = buffer.get();
 		boolean compressed = (bitfield & (1<<0)) != 0;
@@ -164,8 +165,7 @@ public class NetworkClient {
 		int decompressedLength = buffer.getShort();
 		if (buffer.remaining() < length) {
 			buffer.position(buffer.position() - 5);
-			System.err.println("Not enough remaining data! Remaining: " + buffer.remaining() + "  Length: " + length);
-			return null;
+			throw new EOFException("Not enough remaining data! Remaining: " + buffer.remaining() + "  Length: " + length);
 		}
 		byte [] pData = new byte[length];
 		buffer.get(pData);
