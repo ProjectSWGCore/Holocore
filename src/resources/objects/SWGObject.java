@@ -651,16 +651,16 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	}
 	
 	private Set<SWGObject> getObservers(SWGObject childObject) {
-		return getObserversFromSet(objectsAware, childObject);
+		return getObserversFromSet(new HashSet<SWGObject>(), childObject);
 	}
 	
 	private Set<SWGObject> getObserversFromSet(Set<SWGObject> aware, SWGObject childObject) {
 		Set<SWGObject> awareExtra;
 		synchronized (aware) {
-			synchronized (objectsAware) {
-				awareExtra = new HashSet<>(aware);
-				awareExtra.addAll(objectsAware);
-			}
+			awareExtra = new HashSet<>(aware);
+		}
+		synchronized (objectsAware) {
+			awareExtra.addAll(objectsAware);
 		}
 		if (getParent() == null) {
 			Set<SWGObject> observers = new HashSet<>();
@@ -779,47 +779,52 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	}
 	
 	public void updateObjectAwareness(Set <SWGObject> withinRange) {
+		Set <SWGObject> outOfRange;
 		synchronized (objectsAware) {
-			Set<SWGObject> observers = getObserversFromSet(withinRange, this);
-			Set <SWGObject> outOfRange = new HashSet<>(objectsAware);
-			outOfRange.removeAll(withinRange);
-			outOfRange.removeAll(observers);
-			for (SWGObject o : outOfRange) {
-				awarenessOutOfRange(o);
-				o.awarenessOutOfRange(this);
-			}
-			for (SWGObject o : withinRange) {
-				awarenessInRange(o);
-				o.awarenessInRange(this);
-			}
-			for (SWGObject o : observers) {
-				awarenessInRange(o);
-				o.awarenessInRange(this);
-			}
+			outOfRange = new HashSet<>(objectsAware);
+		}
+		Set<SWGObject> observers = getObserversFromSet(withinRange, this);
+		outOfRange.removeAll(withinRange);
+		outOfRange.removeAll(observers);
+		for (SWGObject o : outOfRange) {
+			awarenessOutOfRange(o);
+			o.awarenessOutOfRange(this);
+		}
+		for (SWGObject o : withinRange) {
+			awarenessInRange(o);
+			o.awarenessInRange(this);
+		}
+		for (SWGObject o : observers) {
+			awarenessInRange(o);
+			o.awarenessInRange(this);
 		}
 	}
 	
 	protected void awarenessOutOfRange(SWGObject o) {
+		boolean success = false;
 		synchronized (objectsAware) {
-			if (objectsAware.remove(o)) {
-				Player owner = o.getOwner();
-				if (owner != null)
-					destroyObject(owner);
-				else
-					destroyObjectObservers(o);
-			}
+			success = objectsAware.remove(o);
+		}
+		if (success) {
+			Player owner = o.getOwner();
+			if (owner != null)
+				destroyObject(owner);
+			else
+				destroyObjectObservers(o);
 		}
 	}
 	
 	protected void awarenessInRange(SWGObject o) {
+		boolean success = false;
 		synchronized (objectsAware) {
-			if (objectsAware.add(o)) {
-				Player owner = o.getOwner();
-				if (owner != null)
-					createObject(owner);
-				else
-					createObjectObservers(o);
-			}
+			success = objectsAware.add(o);
+		}
+		if (success) {
+			Player owner = o.getOwner();
+			if (owner != null)
+				createObject(owner);
+			else
+				createObjectObservers(o);
 		}
 	}
 
