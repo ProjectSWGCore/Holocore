@@ -150,11 +150,26 @@ public class TravelService extends Service {
 	@Override
 	public void onIntentReceived(Intent i) {
 		switch(i.getType()) {
-			case TravelPointSelectionIntent.TYPE:	handlePointSelection((TravelPointSelectionIntent) i); break;
-			case GalacticPacketIntent.TYPE:			handleTravelPointRequest((GalacticPacketIntent) i); break;
-			case TicketPurchaseIntent.TYPE:			handleTicketPurchase((TicketPurchaseIntent) i); break;
-			case TicketUseIntent.TYPE:				handleTicketUse((TicketUseIntent) i); break;
-			case ObjectCreatedIntent.TYPE:			handleObjectCreation((ObjectCreatedIntent) i); break;
+			case TravelPointSelectionIntent.TYPE:
+				if (i instanceof TravelPointSelectionIntent)
+					handlePointSelection((TravelPointSelectionIntent) i);
+				break;
+			case GalacticPacketIntent.TYPE:
+				if (i instanceof GalacticPacketIntent)
+					handleTravelPointRequest((GalacticPacketIntent) i);
+				break;
+			case TicketPurchaseIntent.TYPE:
+				if (i instanceof TicketPurchaseIntent)
+					handleTicketPurchase((TicketPurchaseIntent) i);
+				break;
+			case TicketUseIntent.TYPE:
+				if (i instanceof TicketUseIntent)
+					handleTicketUse((TicketUseIntent) i);
+				break;
+			case ObjectCreatedIntent.TYPE:
+				if (i instanceof ObjectCreatedIntent)
+					handleObjectCreation((ObjectCreatedIntent) i);
+				break;
 		}
 	}
 	
