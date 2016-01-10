@@ -418,7 +418,7 @@ public class TravelService extends Service {
 		ticket.addAttribute("@obj_attr_n:travel_arrival_planet", "@planet_n:" + destination.getLocation().getTerrain().getName());
 		ticket.addAttribute("@obj_attr_n:travel_arrival_point", destination.getName());
 		
-		receiver.getSlottedObject("inventory").addObject(ticket);
+		ticket.moveToContainer(receiver.getSlottedObject("inventory"));
 	}
 	
 	private void handleTicketUse(TicketUseIntent i) {

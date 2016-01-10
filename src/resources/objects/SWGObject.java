@@ -192,7 +192,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 
 		// Get a pre-parent-removal list of the observers so we can send create/destroy/update messages
 		Set<SWGObject> oldObservers = getObservers();
-		oldObservers.add(this);
+		Player prevOwner = getOwner();
 
 		// Remove this object from the old parent if one exists
 		SWGObject oldParent = null;
@@ -205,8 +205,14 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 			System.err.println("Failed adding " + this + " to " + container);
 
 		// Observer notification
-		Set<SWGObject> containerObservers = container.getObservers();
-		containerObservers.add(this);
+		Player newOwner = getOwner();
+		Set<SWGObject> containerObservers = getObservers();
+		if (prevOwner != newOwner) {
+			if (prevOwner != null)
+				oldObservers.add(prevOwner.getCreatureObject());
+			if (newOwner != null)
+				containerObservers.add(newOwner.getCreatureObject());
+		}
 		sendUpdatedContainment(oldObservers, containerObservers);
 
 		Log.i("Container", "Moved %s from %s to %s", this, oldParent, container);
@@ -758,27 +764,23 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 			return;
 		Set<SWGObject> same = new HashSet<>(oldObservers);
 		same.retainAll(newObservers);
-
+		
 		Set<SWGObject> added = new HashSet<>(newObservers);
 		added.removeAll(oldObservers);
-
+		
 		Set<SWGObject> removed = new HashSet<>(oldObservers);
 		removed.removeAll(newObservers);
-
+		
 		for (SWGObject swgObject : same) {
-			swgObject.sendSelf(new UpdateContainmentMessage(objectId, parent.getObjectId(), slotArrangement));
+			swgObject.getOwner().sendPacket(new UpdateContainmentMessage(objectId, parent.getObjectId(), slotArrangement));
 		}
-
+		
 		for (SWGObject swgObject : added) {
-			if (swgObject.getOwner() != null) {
-				createObject(swgObject.getOwner());
-			}
+			createObject(swgObject.getOwner());
 		}
-
+		
 		for (SWGObject swgObject : removed) {
-			if (swgObject.getOwner() != null) {
-				destroyObject(swgObject.getOwner());
-			}
+			destroyObject(swgObject.getOwner());
 		}
 	}
 	
