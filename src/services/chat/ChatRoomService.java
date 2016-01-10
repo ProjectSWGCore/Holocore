@@ -127,6 +127,12 @@ public class ChatRoomService extends Service {
 		createSystemChannels(CoreManager.getGalaxy().getName());
 		return super.initialize();
 	}
+	
+	@Override
+	public boolean terminate() {
+		database.close();
+		return super.terminate();
+	}
 
 	@Override
 	public void onIntentReceived(Intent i) {

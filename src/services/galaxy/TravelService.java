@@ -142,7 +142,7 @@ public class TravelService extends Service {
 	
 	@Override
 	public boolean stop() {
-		executor.shutdown();
+		executor.shutdownNow();
 		
 		return super.stop();
 	}
@@ -671,7 +671,7 @@ public class TravelService extends Service {
 					Thread.sleep(landDelay);
 					shuttleLanded = true;
 				} catch (InterruptedException e) {
-					e.printStackTrace();
+					break;
 				}
 			}
 		}

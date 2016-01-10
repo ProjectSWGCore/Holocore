@@ -81,9 +81,14 @@ public abstract class ObjectDatabase<V extends Serializable> {
 		}
 	}
 	
-	public void close() {
-		save();
+	public final void close() {
 		autosaveService.shutdownNow();
+		try {
+			autosaveService.awaitTermination(1000, TimeUnit.MILLISECONDS);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		save();
 	}
 	
 	public final File getFile() {
