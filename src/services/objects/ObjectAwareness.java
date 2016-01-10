@@ -108,15 +108,13 @@ public class ObjectAwareness extends Service {
 		if (creature == null)
 			return;
 		switch (pei.getEvent()) {
-			case PE_LOGGED_OUT:
-				creature.setOwner(null);
-				p.setCreatureObject(null);
-				break;
 			case PE_DISAPPEAR:
 				remove(creature);
 				for (SWGObject obj : creature.getObservers())
 					creature.destroyObject(obj.getOwner());
 				creature.clearAware();
+				creature.setOwner(null);
+				p.setCreatureObject(null);
 				break;
 			case PE_ZONE_IN:
 				creature.clearAware(false);
