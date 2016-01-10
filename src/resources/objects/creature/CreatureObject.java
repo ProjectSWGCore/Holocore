@@ -101,6 +101,7 @@ public class CreatureObject extends TangibleObject {
 	private int 	battleFatigue			= 0;
 	private long 	statesBitmask			= 0;
 	private String	currentCity				= "";
+	private long	lastTransform			= 0;
 	private HologramColour hologramColour = HologramColour.DEFAULT;
 	
 	private SWGList<Integer>	baseAttributes	= new SWGList<Integer>(BaselineType.CREO, 1, 2);
@@ -277,8 +278,24 @@ public class CreatureObject extends TangibleObject {
 		return currentCity;
 	}
 	
+	public double getTimeSinceLastTransform() {
+		return (System.nanoTime()-lastTransform)/1E6;
+	}
+	
 	public PlayerObject getPlayerObject() {
-		return (PlayerObject) (hasSlot("ghost") ? getSlottedObject("ghost") : null);
+		return (PlayerObject) getSlottedObject("ghost");
+	}
+	
+	public boolean isPlayer() {
+		return getSlottedObject("ghost") != null;
+	}
+	
+	public boolean isLoggedInPlayer() {
+		return getOwner() != null && isPlayer();
+	}
+	
+	public boolean isLoggedOutPlayer() {
+		return getOwner() == null && isPlayer();
 	}
 	
 	public void setPosture(Posture posture) {
@@ -440,6 +457,10 @@ public class CreatureObject extends TangibleObject {
 	
 	public void setCurrentCity(String currentCity) {
 		this.currentCity = currentCity;
+	}
+	
+	public void updateLastTransformTime() {
+		lastTransform = System.nanoTime();
 	}
 	
 	public String getMoodAnimation() {

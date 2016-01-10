@@ -62,7 +62,6 @@ import network.packets.swg.zone.chat.ChatSendToRoom;
 import network.packets.swg.zone.chat.ChatUnbanAvatarFromRoom;
 import network.packets.swg.zone.chat.ChatUninviteFromRoom;
 import network.packets.swg.zone.insertion.ChatRoomList;
-import resources.Galaxy;
 import resources.Terrain;
 import resources.chat.ChatAvatar;
 import resources.chat.ChatResult;
@@ -78,10 +77,12 @@ import resources.server_info.CachedObjectDatabase;
 import resources.server_info.ObjectDatabase;
 import resources.server_info.RelationalServerData;
 import resources.server_info.RelationalServerFactory;
+import services.CoreManager;
 import services.chat.ChatManager.ChatRange;
 import services.chat.ChatManager.ChatType;
 import services.player.PlayerManager;
 
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -98,15 +99,15 @@ public class ChatRoomService extends Service {
 	private final ObjectDatabase<ChatRoom> database;
 	private final Map<Integer, ChatRoom> roomMap;
 	private final RelationalServerData chatLogs;
-	private final Galaxy galaxy;
+	private final PreparedStatement insertChatLog;
 	private int maxChatRoomId;
 
-	public ChatRoomService(Galaxy g) {
-		galaxy		= g;
+	public ChatRoomService() {
 		database	= new CachedObjectDatabase<>("odb/chat_rooms.db");
 		roomMap 	= new ConcurrentHashMap<>();
 		messages	= new ConcurrentHashMap<>();
 		chatLogs	= RelationalServerFactory.getServerDatabase("chat/chat_log.db");
+		insertChatLog = chatLogs.prepareStatement("INSERT INTO chat_log VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 		maxChatRoomId = 1;
 		
 		registerForIntent(ChatRoomUpdateIntent.TYPE);
@@ -123,7 +124,7 @@ public class ChatRoomService extends Service {
 			roomMap.put(room.getId(), room);
 		});
 
-		createSystemChannels(galaxy.getName());
+		createSystemChannels(CoreManager.getGalaxy().getName());
 		return super.initialize();
 	}
 
@@ -131,10 +132,12 @@ public class ChatRoomService extends Service {
 	public void onIntentReceived(Intent i) {
 		switch(i.getType()) {
 			case ChatRoomUpdateIntent.TYPE:
-				processChatRoomUpdateIntent((ChatRoomUpdateIntent) i);
+				if (i instanceof ChatRoomUpdateIntent)
+					processChatRoomUpdateIntent((ChatRoomUpdateIntent) i);
 				break;
 			case GalacticPacketIntent.TYPE:
-				processPacket((GalacticPacketIntent) i);
+				if (i instanceof GalacticPacketIntent)
+					processPacket((GalacticPacketIntent) i);
 				break;
 			case PlayerEventIntent.TYPE:
 				if (i instanceof PlayerEventIntent)
@@ -704,7 +707,7 @@ public class ChatRoomService extends Service {
 			return getRoom(path);
 
 		// All paths should have parents, lets validate to make sure they exist first. Create them if they don't.
-		int lastIndex = path.lastIndexOf(".");
+		int lastIndex = path.lastIndexOf('.');
 		if (lastIndex != -1) {
 			String parentPath = path.substring(0, lastIndex);
 			if (getRoom(parentPath) == null) {
@@ -835,8 +838,19 @@ public class ChatRoomService extends Service {
 	
 	private void logChat(long sendId, String sendName, String room, String message) {
 		try {
-			long time = System.currentTimeMillis();
-			chatLogs.insert("chat_log", null, time, sendId, sendName, 0, "", ChatType.CHAT.name(), ChatRange.ROOM.name(), room, "", message);
+			synchronized (insertChatLog) {
+				insertChatLog.setLong(1, System.currentTimeMillis());
+				insertChatLog.setLong(2, sendId);
+				insertChatLog.setString(3, sendName);
+				insertChatLog.setLong(4, 0);
+				insertChatLog.setString(5, "");
+				insertChatLog.setString(6, ChatType.CHAT.name());
+				insertChatLog.setString(7, ChatRange.ROOM.name());
+				insertChatLog.setString(8, room);
+				insertChatLog.setString(9, "");
+				insertChatLog.setString(10, message);
+				insertChatLog.executeUpdate();
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

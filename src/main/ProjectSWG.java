@@ -70,16 +70,6 @@ public class ProjectSWG {
 	}
 	
 	/**
-	 * Returns the server's galaxy ID. This may be
-	 * deprecated in the future if multiple servers are run
-	 * at once.
-	 * @return the server's galaxy ID
-	 */
-	public static final int getGalaxyId() {
-		return CoreManager.getGalaxyId();
-	}
-	
-	/**
 	 * Returns the server's galactic time. This is the official time sent to
 	 * the client and should be used for any official client-time purposes.
 	 * @return the server's galactic time

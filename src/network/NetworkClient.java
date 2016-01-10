@@ -27,12 +27,14 @@
 ***********************************************************************************/
 package network;
 
+import intents.network.ConnectionOpenedIntent;
 import intents.network.InboundPacketIntent;
 
+import java.io.EOFException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import resources.control.Intent;
@@ -43,17 +45,24 @@ import network.packets.swg.zone.object_controller.ObjectController;
 
 public class NetworkClient {
 	
+	private static final int DEFAULT_BUFFER = 128;
+	
 	private final Object prevPacketIntentMutex = new Object();
 	private final Object outboundMutex = new Object();
+	private final Object bufferMutex = new Object();
 	private final InetSocketAddress address;
 	private final long networkId;
 	private final PacketSender packetSender;
 	private Intent prevPacketIntent;
+	private ByteBuffer buffer;
+	private long lastBufferSizeModification;
 	
 	public NetworkClient(InetSocketAddress address, long networkId, PacketSender packetSender) {
 		this.address = address;
 		this.networkId = networkId;
 		this.packetSender = packetSender;
+		this.buffer = ByteBuffer.allocate(DEFAULT_BUFFER);
+		lastBufferSizeModification = System.nanoTime();
 		prevPacketIntent = null;
 	}
 	
@@ -63,6 +72,13 @@ public class NetworkClient {
 	
 	public long getNetworkId() {
 		return networkId;
+	}
+	
+	public void onConnected() {
+		synchronized (prevPacketIntentMutex) {
+			prevPacketIntent = new ConnectionOpenedIntent(networkId);
+			prevPacketIntent.broadcast();
+		}
 	}
 	
 	public void sendPacket(Packet p) {
@@ -89,12 +105,37 @@ public class NetworkClient {
 		}
 	}
 	
-	public boolean process(byte [] data) {
-		List <Packet> packets = processPackets(ByteBuffer.wrap(data));
-		for (Packet p : packets) {
-			p.setAddress(address.getAddress());
-			p.setPort(address.getPort());
-			synchronized (prevPacketIntentMutex) {
+	public void addToBuffer(byte [] data) {
+		synchronized (bufferMutex) {
+			if (data.length > buffer.remaining()) { // Increase size
+				int nCapacity = buffer.capacity() * 2;
+				while (nCapacity < buffer.position()+data.length)
+					nCapacity *= 2;
+				ByteBuffer bb = ByteBuffer.allocate(nCapacity);
+				buffer.flip();
+				bb.put(buffer);
+				bb.put(data);
+				this.buffer = bb;
+				lastBufferSizeModification = System.nanoTime();
+			} else {
+				buffer.put(data);
+				if (buffer.position() < buffer.capacity()/4 && (System.nanoTime()-lastBufferSizeModification) >= 1E9)
+					shrinkBuffer();
+			}
+		}
+	}
+	
+	public boolean process() {
+		List <Packet> packets;
+		synchronized (bufferMutex) {
+			buffer.flip();
+			packets = processPackets();
+			buffer.compact();
+		}
+		synchronized (prevPacketIntentMutex) {
+			for (Packet p : packets) {
+				p.setAddress(address.getAddress());
+				p.setPort(address.getPort());
 				InboundPacketIntent i = new InboundPacketIntent(p, networkId);
 				i.broadcastAfterIntent(prevPacketIntent);
 				prevPacketIntent = i;
@@ -103,52 +144,79 @@ public class NetworkClient {
 		return packets.size() > 0;
 	}
 	
-	private List<Packet> processPackets(ByteBuffer data) {
-		List <Packet> packets = new ArrayList<>();
-		boolean added = true;
-		while (added && data.remaining() > 0) {
-			added = processPacket(packets, data);
+	private void shrinkBuffer() {
+		synchronized (bufferMutex) {
+			int nCapacity = DEFAULT_BUFFER;
+			while (nCapacity < buffer.position())
+				nCapacity *= 2;
+			if (nCapacity >= buffer.capacity())
+				return;
+			ByteBuffer bb = ByteBuffer.allocate(nCapacity).order(ByteOrder.LITTLE_ENDIAN);
+			buffer.flip();
+			bb.put(buffer);
+			buffer = bb;
+			lastBufferSizeModification = System.nanoTime();
+		}
+	}
+	
+	private List<Packet> processPackets() {
+		List <Packet> packets = new LinkedList<>();
+		Packet p = null;
+		try {
+			while (buffer.hasRemaining()) {
+				p = processPacket();
+				if (p != null)
+					packets.add(p);
+			}
+		} catch (EOFException e) {
+			System.err.println(e.getMessage());
 		}
 		return packets;
 	}
 	
-	private boolean processPacket(List<Packet> packets, ByteBuffer data) {
-		if (data.remaining() < 5) {
-			System.err.println("Not enough remaining data for header! Remaining: " + data.remaining());
-			return false;
-		}
-		data.order(ByteOrder.LITTLE_ENDIAN);
-		byte bitfield = data.get();
+	private Packet processPacket() throws EOFException {
+		if (buffer.remaining() < 5)
+			throw new EOFException("Not enough remaining data for header! Remaining: " + buffer.remaining());
+		buffer.order(ByteOrder.LITTLE_ENDIAN);
+		byte bitfield = buffer.get();
 		boolean compressed = (bitfield & (1<<0)) != 0;
 		boolean swg = (bitfield & (1<<1)) != 0;
-		int length = data.getShort();
-		int decompressedLength = data.getShort();
-		if (data.remaining() < length) {
-			System.err.println("Not enough remaining data! Remaining: " + data.remaining() + "  Length: " + length);
-			return false;
+		int length = buffer.getShort();
+		int decompressedLength = buffer.getShort();
+		if (buffer.remaining() < length) {
+			buffer.position(buffer.position() - 5);
+			throw new EOFException("Not enough remaining data! Remaining: " + buffer.remaining() + "  Length: " + length);
 		}
 		byte [] pData = new byte[length];
-		data.get(pData);
+		buffer.get(pData);
 		if (compressed) {
 			pData = Compression.decompress(pData, decompressedLength);
-			length = pData.length;
 		}
-		if (swg) {
-			if (length < 6) {
-				System.err.println("Length too small: " + length);
-				return false;
-			}
-			ByteBuffer pBuffer = ByteBuffer.wrap(pData).order(ByteOrder.LITTLE_ENDIAN);
-			int crc = pBuffer.getInt(2);
-			if (crc == 0x80CE5E46)
-				packets.add(ObjectController.decodeController(pBuffer));
-			else {
-				SWGPacket packet = PacketType.getForCrc(crc);
-				packet.decode(pBuffer);
-				packets.add(packet);
-			}
+		if (swg)
+			return processSWG(pData);
+		else
+			return processProtocol(pData);
+	}
+	
+	private Packet processProtocol(byte [] data) {
+		return null;
+	}
+	
+	private SWGPacket processSWG(byte [] data) {
+		if (data.length < 6) {
+			System.err.println("Length too small: " + data.length);
+			return null;
 		}
-		return true;
+		ByteBuffer buffer = ByteBuffer.wrap(data).order(ByteOrder.LITTLE_ENDIAN);
+		int crc = buffer.getInt(2);
+		if (crc == 0x80CE5E46)
+			return ObjectController.decodeController(buffer);
+		else {
+			SWGPacket packet = PacketType.getForCrc(crc);
+			if (packet != null)
+				packet.decode(buffer);
+			return packet;
+		}
 	}
 	
 	public String toString() {

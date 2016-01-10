@@ -33,12 +33,15 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
 import java.nio.ByteBuffer;
+import java.nio.channels.ClosedChannelException;
 import java.nio.channels.SelectableChannel;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -52,6 +55,10 @@ public class TCPServer {
 	private ServerSocketChannel channel;
 	private TCPCallback callback;
 	private TCPListener listener;
+	
+	public TCPServer(int port, int bufferSize) {
+		this(null, port, bufferSize);
+	}
 	
 	public TCPServer(InetAddress addr, int port, int bufferSize) {
 		this.sockets = new HashMap<>();
@@ -141,41 +148,6 @@ public class TCPServer {
 		this.callback = callback;
 	}
 	
-	private void accept() {
-		try {
-			SocketChannel sc = channel.accept();
-			if (sc == null)
-				return;
-			sc.configureBlocking(false);
-			sockets.put(sc.getRemoteAddress(), sc);
-			if (callback != null)
-				callback.onIncomingConnection(sc.socket());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	private void read(SocketChannel s) {
-		ByteBuffer data = ByteBuffer.allocate(bufferSize);
-		try {
-			int n = s.read(data);
-			if (n == -1) {
-				disconnect(s);
-				return;
-			}
-			if (n == 0)
-				return;
-			data.flip();
-			ByteBuffer smaller = ByteBuffer.allocate(n);
-			smaller.put(data.array(), 0, n);
-			if (callback != null)
-				callback.onIncomingData(s.socket(), smaller.array());
-		} catch (IOException e) {
-			e.printStackTrace();
-			disconnect(s);
-		}
-	}
-	
 	public interface TCPCallback {
 		void onIncomingConnection(Socket s);
 		void onConnectionDisconnect(Socket s);
@@ -184,10 +156,12 @@ public class TCPServer {
 	
 	private class TCPListener implements Runnable {
 		
+		private final ByteBuffer buffer;
 		private Thread thread;
 		private boolean running;
 		
 		public TCPListener() {
+			buffer = ByteBuffer.allocateDirect(bufferSize);
 			running = false;
 			thread = null;
 		}
@@ -206,42 +180,85 @@ public class TCPServer {
 		}
 		
 		public void run() {
-			while (running) {
-				try (Selector selector = setupSelector()) {
-					if (selector.select() > 0)
-						processSelectionKeys(selector.selectedKeys());
-				} catch (IOException e) {
-					e.printStackTrace();
+			try (Selector selector = setupSelector()) {
+				while (running) {
+					try {
+						selector.select();
+						processSelectionKeys(selector);
+					} catch (Exception e) {
+						e.printStackTrace();
+						try {
+							Thread.sleep(100);
+						} catch (InterruptedException e1) {
+							break;
+						}
+					}
 				}
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
 		}
 		
 		private Selector setupSelector() throws IOException {
 			Selector selector = Selector.open();
 			channel.register(selector, SelectionKey.OP_ACCEPT);
-			synchronized (sockets) {
-				for (SocketChannel sc : sockets.values()) {
-					sc.configureBlocking(false);
-					sc.register(selector, SelectionKey.OP_READ | SelectionKey.OP_CONNECT);
-				}
-			}
 			return selector;
 		}
 		
-		private void processSelectionKeys(Set<SelectionKey> keys) {
-			for (SelectionKey key : keys) {
+		private void processSelectionKeys(Selector selector) throws ClosedChannelException {
+			Set<SelectionKey> keys = selector.selectedKeys();
+			Iterator<SelectionKey> it = keys.iterator();
+			while (it.hasNext()) {
+				SelectionKey key = it.next();
 				if (key.isAcceptable()) {
-					accept();
+					accept(selector);
 				} else if (key.isReadable()) {
 					SelectableChannel selectable = key.channel();
 					if (selectable instanceof SocketChannel)
-						read((SocketChannel) selectable);
-				} else if (key.isConnectable()) {
-					SelectableChannel selectable = key.channel();
-					if (!selectable.isOpen() && selectable instanceof SocketChannel) {
-						disconnect((SocketChannel) selectable);
-					}
+						read(key, (SocketChannel) selectable);
 				}
+				it.remove();
+			}
+		}
+		
+		private void accept(Selector selector) {
+			try {
+				SocketChannel sc = channel.accept();
+				if (sc == null)
+					return;
+				sc.configureBlocking(false);
+				sc.register(selector, SelectionKey.OP_READ);
+				sockets.put(sc.getRemoteAddress(), sc);
+				if (callback != null)
+					callback.onIncomingConnection(sc.socket());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		private void read(SelectionKey key, SocketChannel s) {
+			try {
+				buffer.position(0);
+				buffer.limit(bufferSize);
+				int n = s.read(buffer);
+				buffer.flip();
+				if (n < 0) {
+					key.cancel();
+					disconnect(s);
+				} else if (n > 0) {
+					ByteBuffer smaller = ByteBuffer.allocate(n);
+					smaller.put(buffer);
+					if (callback != null)
+						callback.onIncomingData(s.socket(), smaller.array());
+				}
+			} catch (IOException e) {
+				if (e.getMessage().toLowerCase(Locale.US).contains("connection reset"))
+					System.err.println("Connection Reset");
+				else
+					e.printStackTrace();
+				System.err.flush();
+				key.cancel();
+				disconnect(s);
 			}
 		}
 	}

@@ -27,18 +27,10 @@
 ***********************************************************************************/
 package services;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintStream;
-import java.io.UnsupportedEncodingException;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import intents.network.InboundPacketIntent;
 import intents.network.OutboundPacketIntent;
 import intents.server.ServerManagementIntent;
 import intents.server.ServerStatusIntent;
@@ -49,39 +41,39 @@ import resources.control.Intent;
 import resources.control.Manager;
 import resources.control.ServerStatus;
 import resources.server_info.Config;
+import resources.server_info.Log;
+import resources.server_info.Log.LogLevel;
 import services.admin.OnlineInterfaceService;
 import services.galaxy.GalacticManager;
 import utilities.ThreadUtilities;
 
 public class CoreManager extends Manager {
 	
-	private static final int galaxyId = 1;
+	private static final Galaxy GALAXY = new Galaxy();
+	private static final int GALAXY_ID = 1;
 	
 	private final ScheduledExecutorService shutdownService;
 	
 	private OnlineInterfaceService onlineInterfaceService;
 	private EngineManager engineManager;
 	private GalacticManager galacticManager;
-	private PrintStream packetOutput;
-	private Galaxy galaxy;
 	private long startTime;
 	private boolean shutdownRequested;
-	private boolean packetDebug;
 	
 	public CoreManager() {
+		Config c = getConfig(ConfigFile.PRIMARY);
+		Log.setLogLevel(LogLevel.valueOf(c.getString("LOG-LEVEL", LogLevel.DEBUG.name())));
+		setupGalaxy(c);
 		shutdownService = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("core-shutdown-service"));
 		shutdownRequested = false;
-		galaxy = getGalaxy();
-		if (galaxy != null) {
-			onlineInterfaceService = new OnlineInterfaceService();
-			engineManager = new EngineManager(galaxy);
-			galacticManager = new GalacticManager(galaxy);
-
-			addChildService(onlineInterfaceService);
-			addChildService(engineManager);
-			addChildService(galacticManager);
-		}
-		registerForIntent(InboundPacketIntent.TYPE);
+		onlineInterfaceService = new OnlineInterfaceService();
+		engineManager = new EngineManager();
+		galacticManager = new GalacticManager();
+		
+		addChildService(onlineInterfaceService);
+		addChildService(engineManager);
+		addChildService(galacticManager);
+		
 		registerForIntent(OutboundPacketIntent.TYPE);
 		registerForIntent(ServerManagementIntent.TYPE);
 	}
@@ -101,14 +93,19 @@ public class CoreManager extends Manager {
 	@Override
 	public boolean initialize() {
 		startTime = System.nanoTime();
-		packetDebug = getConfig(ConfigFile.PRIMARY).getBoolean("PACKET-DEBUG", false);
-		initializePacketOutput();
-		return galaxy != null && super.initialize();
+		GALAXY.setStatus(GalaxyStatus.LOADING);
+		return super.initialize();
+	}
+	
+	@Override
+	public boolean start() {
+		GALAXY.setStatus(GalaxyStatus.UP);
+		return super.start();
 	}
 	
 	@Override
 	public boolean stop() {
-		galaxy.setStatus(GalaxyStatus.LOCKED);
+		GALAXY.setStatus(GalaxyStatus.LOCKED);
 		return super.stop();
 	}
 	
@@ -120,20 +117,8 @@ public class CoreManager extends Manager {
 	
 	@Override
 	public void onIntentReceived(Intent i) {
-		if (packetDebug) {
-			
-		}
 		if (i instanceof ServerManagementIntent)
 			handleServerManagementIntent((ServerManagementIntent) i);
-	}
-	
-	private void initializePacketOutput() {
-		try {
-			packetOutput = new PrintStream(new FileOutputStream("packets.txt", false), true, "UTF-8");
-		} catch (FileNotFoundException | UnsupportedEncodingException e) {
-			e.printStackTrace();
-			packetOutput = System.out;
-		}
 	}
 	
 	private void handleServerManagementIntent(ServerManagementIntent i) {
@@ -163,7 +148,7 @@ public class CoreManager extends Manager {
 	}
 	
 	public GalaxyStatus getGalaxyStatus() {
-		return galaxy.getStatus();
+		return GALAXY.getStatus();
 	}
 	
 	/**
@@ -174,47 +159,27 @@ public class CoreManager extends Manager {
 		return (System.nanoTime()-startTime)/1E6;
 	}
 	
-	private Galaxy getGalaxy() {
-		PreparedStatement getGalaxy = getLocalDatabase().prepareStatement("SELECT * FROM galaxies WHERE id = ?");
-		Config c = getConfig(ConfigFile.PRIMARY);
-		ResultSet set = null;
-		try {
-			getGalaxy.setInt(1, galaxyId);
-			set = getGalaxy.executeQuery();
-			if (!set.next()) {
-				System.err.println("CoreManager: No such galaxy exists with ID " + galaxyId + "!");
-				return null;
-			}
-			Galaxy g = new Galaxy();
-			g.setId(set.getInt("id"));
-			g.setName(set.getString("name"));
-			g.setAddress(set.getString("address"));
-			g.setPopulation(set.getInt("population"));
-			g.setTimeZone(set.getInt("timezone"));
-			g.setZonePort(set.getInt("zone_port"));
-			g.setPingPort(set.getInt("ping_port"));
-			g.setStatus(set.getInt("status"));
-			g.setMaxCharacters(c.getInt("GALAXY-MAX-CHARACTERS", 2));
-			g.setOnlinePlayerLimit(c.getInt("GALAXY-MAX-ONLINE", 3000));
-			g.setOnlineFreeTrialLimit(c.getInt("GALAXY-MAX-ONLINE", 3000));
-			g.setRecommended(true);
-			return g;
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if (set != null) {
-				try {
-					set.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		return null;
+	public static Galaxy getGalaxy() {
+		return GALAXY;
 	}
 	
-	public static final int getGalaxyId() {
-		return galaxyId;
+	public static int getGalaxyId() {
+		return GALAXY_ID;
+	}
+	
+	private static void setupGalaxy(Config c) {
+		GALAXY.setId(GALAXY_ID);
+		GALAXY.setName(c.getString("GALAXY-NAME", "Holocore"));
+		GALAXY.setAddress("");
+		GALAXY.setPopulation(0);
+		GALAXY.setTimeZone(c.getInt("GALAXY-TIMEZONE", -6));
+		GALAXY.setZonePort(0);
+		GALAXY.setPingPort(0);
+		GALAXY.setStatus(GalaxyStatus.DOWN);
+		GALAXY.setMaxCharacters(c.getInt("GALAXY-MAX-CHARACTERS", 2));
+		GALAXY.setOnlinePlayerLimit(c.getInt("GALAXY-MAX-ONLINE", 3000));
+		GALAXY.setOnlineFreeTrialLimit(c.getInt("GALAXY-MAX-ONLINE", 3000));
+		GALAXY.setRecommended(true);
 	}
 	
 }
