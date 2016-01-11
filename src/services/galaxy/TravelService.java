@@ -36,6 +36,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import network.packets.Packet;
 import network.packets.swg.zone.EnterTicketPurchaseModeMessage;
@@ -71,6 +73,7 @@ import resources.sui.SuiListBox;
 import resources.sui.SuiListBox.SuiListBoxItem;
 import resources.sui.SuiMessageBox;
 import services.objects.ObjectManager;
+import utilities.ThreadUtilities;
 
 public class TravelService extends Service {
 	
@@ -89,16 +92,14 @@ public class TravelService extends Service {
 	 */
 	private final Map<Terrain, Collection<TravelPoint>> pointsOnPlanet;
 	
+	private final AtomicInteger groundTime;
+	private final AtomicInteger airTime;
 	private final double ticketPriceFactor;
 	
 	// Fields relating to shuttle take-off and landing
-	private Posture currentShuttlePosture;
 	private ExecutorService executor;
-	private final int timeUntilLand;
-	private int timeRemaining;
-	private final long landDelay;
-	private boolean shuttleLanded;
-	private final long timeGrounded;
+	private GalaxyTravel shuttleTravel;
+	private GalaxyTravel transportTravel;
 	
 	public TravelService(ObjectManager objectManager) {
 		this.objectManager = objectManager;
@@ -106,14 +107,10 @@ public class TravelService extends Service {
 		allowedRoutes = new HashMap<>();
 		travelFeeTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/travel/travel.iff");
 		pointsOnPlanet = new HashMap<>();
-		ticketPriceFactor = getConfig(ConfigFile.FEATURES).getDouble("TICKET-PRICE-FACTOR", 1);
 		
-		timeUntilLand = getConfig(ConfigFile.FEATURES).getInt("SHUTTLE-AWAY-TIME", 60);
-		timeRemaining = timeUntilLand;
-		shuttleLanded = true;	// Shuttles start off being grounded
-		currentShuttlePosture = Posture.UPRIGHT;
-		landDelay = 17000;
-		timeGrounded = 120000;
+		ticketPriceFactor = getConfig(ConfigFile.FEATURES).getDouble("TICKET-PRICE-FACTOR", 1);
+		groundTime = new AtomicInteger(getConfig(ConfigFile.FEATURES).getInt("SHUTTLE-GROUND-TIME", 120));
+		airTime = new AtomicInteger(getConfig(ConfigFile.FEATURES).getInt("SHUTTLE-AIR-TIME", 60));
 		
 		loadTravelPlanetNames();
 		loadAllowedRoutesAndPrices();
@@ -127,15 +124,12 @@ public class TravelService extends Service {
 	}
 	
 	@Override
-	public boolean initialize() {
-		executor = Executors.newSingleThreadExecutor();
-		
-		return super.initialize();
-	}
-	
-	@Override
 	public boolean start() {
-		executor.execute(new ShuttleBehaviour());
+		executor = Executors.newFixedThreadPool(2, ThreadUtilities.newThreadFactory("travel-shuttles-%d"));
+		shuttleTravel = new GalaxyTravel(true);
+		transportTravel = new GalaxyTravel(false);
+		executor.execute(shuttleTravel);
+		executor.execute(transportTravel);
 		
 		return super.start();
 	}
@@ -257,7 +251,7 @@ public class TravelService extends Service {
 	
 	private Collection<Integer> getAdditionalCosts(Location objectLocation, Collection<TravelPoint> points) {
 		Collection<Integer> additionalCosts = new ArrayList<>();
-		TravelPoint nearest = nearestTravelPoint(objectLocation);
+		TravelPoint nearest = getNearestTravelPoint(objectLocation);
 		
 		for(TravelPoint point : points) {
 			additionalCosts.add(getAdditionalCost(nearest.getLocation(), point.getLocation()));
@@ -316,7 +310,7 @@ public class TravelService extends Service {
 	private void handlePointSelection(TravelPointSelectionIntent tpsi) {
 		CreatureObject traveler = tpsi.getCreature();
 		
-		traveler.sendSelf(new EnterTicketPurchaseModeMessage(traveler.getTerrain().getName(), nearestTravelPoint(traveler.getWorldLocation()).getName(), tpsi.isInstant()));
+		traveler.sendSelf(new EnterTicketPurchaseModeMessage(traveler.getTerrain().getName(), getNearestTravelPoint(traveler.getWorldLocation()).getName(), tpsi.isInstant()));
 	}
 	
 	private void handleTravelPointRequest(GalacticPacketIntent i) {
@@ -360,7 +354,7 @@ public class TravelService extends Service {
 	private void handleTicketPurchase(TicketPurchaseIntent i) {
 		CreatureObject purchaser = i.getPurchaser();
 		Location purchaserWorldLocation = purchaser.getWorldLocation();
-		TravelPoint nearestPoint = nearestTravelPoint(purchaserWorldLocation);
+		TravelPoint nearestPoint = getNearestTravelPoint(purchaserWorldLocation);
 		TravelPoint destinationPoint = getDestinationPoint(Terrain.getTerrainFromName(i.getDestinationPlanet()), i.getDestinationName());
 		Player purchaserOwner = purchaser.getOwner();
 		boolean roundTrip = i.isRoundTrip();
@@ -437,20 +431,22 @@ public class TravelService extends Service {
 	}
 	
 	private void handleTicketUse(TicketUseIntent i) {
-		if(isShuttleAvailable()) {
+		TravelPoint point = getNearestTravelPoint(i.getPlayer().getCreatureObject().getWorldLocation());
+		boolean shuttle = !point.isStarport();
+		if (isShuttleAvailable(shuttle)) {
 			// The shuttle is available at this time
 			if(i.getTicket() == null)
 				handleTicketUseSui(i);
 			else
 				handleTicketUseClick(i);
 		} else { // The shuttle isn't available
-			if(isShuttleBoarding()) {	// Unavailable but about to board
+			if (isShuttleBoarding(shuttle)) {	// Unavailable but about to board
 				new ChatBroadcastIntent(i.getPlayer(), "@travel/travel:shuttle_begin_boarding").broadcast();
 			} else {	// Unavailable but not about to board, because...
-				if(isShuttleDeparting())	// ... it's departing
+				if (isShuttleDeparting(shuttle))	// ... it's departing
 					new ChatBroadcastIntent(i.getPlayer(), "@travel:shuttle_not_available").broadcast();
 				else	// ... or it's done departing and is completely away
-					new ChatBroadcastIntent(i.getPlayer(), new ProsePackage(new StringId("travel/travel", "shuttle_board_delay"), "DI", timeRemaining)).broadcast();
+					new ChatBroadcastIntent(i.getPlayer(), new ProsePackage(new StringId("travel/travel", "shuttle_board_delay"), "DI", getTimeRemaining(shuttle))).broadcast();
 			}
 
 		}
@@ -486,13 +482,13 @@ public class TravelService extends Service {
 	private void handleTicketUseClick(TicketUseIntent i) {
 		CreatureObject traveler = i.getPlayer().getCreatureObject();
 		Location worldLoc = traveler.getWorldLocation();
-		TravelPoint nearestPoint = nearestTravelPoint(worldLoc);
+		TravelPoint nearestPoint = getNearestTravelPoint(worldLoc);
 		double distanceToNearestPoint = worldLoc.distanceTo(nearestPoint.getShuttle().getLocation());
 		SWGObject ticket = i.getTicket();
 		Player player = i.getPlayer();
 		
-		if(isTicket(ticket)) {
-			if(isTicketUsable(ticket)) {
+		if (isTicket(ticket)) {
+			if (isTicketUsable(ticket)) {
 				if(distanceToNearestPoint <= TICKET_USE_RADIUS) {
 					// They can use their ticket if they're within range.
 					teleportAndDestroyTicket(getDestinationPoint(ticket), ticket, traveler);
@@ -514,13 +510,14 @@ public class TravelService extends Service {
 		// There are non-functional shuttles, which are StaticObject. We run an instanceof check to make sure that we ignore those.
 		if((template.contains("shared_player_shuttle") || template.contains("shared_player_transport")) && object instanceof CreatureObject) {
 			Location shuttleLocation = object.getLocation();
-			TravelPoint pointForShuttle = nearestTravelPoint(shuttleLocation);
+			TravelPoint pointForShuttle = getNearestTravelPoint(shuttleLocation);
 			CreatureObject shuttle = (CreatureObject) object;
 			
 			// Assign the shuttle to the nearest travel point
 			pointForShuttle.setShuttle(shuttle);
 			
 			shuttle.setOptionFlags(OptionFlag.INVULNERABLE);
+			shuttle.setPosture(Posture.UPRIGHT);
 			shuttle.setShownOnRadar(false);
 		}
 	}
@@ -543,7 +540,7 @@ public class TravelService extends Service {
 	private boolean isTicketUsable(SWGObject ticket) {
 		CreatureObject ticketOwner = ticket.getOwner().getCreatureObject();
 		Location worldLoc = ticketOwner.getWorldLocation();
-		TravelPoint nearest = nearestTravelPoint(worldLoc);
+		TravelPoint nearest = getNearestTravelPoint(worldLoc);
 		String departurePoint = ticket.getAttribute("@obj_attr_n:travel_departure_point");
 		String departurePlanet = ticket.getAttribute("@obj_attr_n:travel_departure_planet");
 		Terrain departureTerrain = Terrain.getTerrainFromName(departurePlanet.split(":")[1]);
@@ -569,7 +566,7 @@ public class TravelService extends Service {
 		return currentResult;
 	}
 	
-	private TravelPoint nearestTravelPoint(Location objectLocation) {
+	private TravelPoint getNearestTravelPoint(Location objectLocation) {
 		TravelPoint currentResult = null;
 		double currentResultDistance = Double.MAX_VALUE;
 		double candidateDistance;
@@ -599,31 +596,58 @@ public class TravelService extends Service {
 		return point.getLocation().distanceTo(objectLocation);
 	}
 	
-	private void updateShuttlePostures(Posture posture) {
-		for(Collection<TravelPoint> travelPoints : pointsOnPlanet.values()) {
-			for(TravelPoint tp : travelPoints) {
+	private void updateShuttlePostures(boolean shuttles, boolean landed) {
+		for (Collection<TravelPoint> travelPoints : pointsOnPlanet.values()) {
+			for (TravelPoint tp : travelPoints) {
 				CreatureObject shuttle = tp.getShuttle();
 				
 				if(shuttle == null)	// This TravelPoint has no associated shuttle
 					continue;	// Continue with the next TravelPoint
 				
-				shuttle.setPosture(posture);
+				if (shuttle.getTemplate().contains("shared_player_shuttle") && !shuttles)
+					continue;
+				if (shuttle.getTemplate().contains("shared_player_transport") && shuttles)
+					continue;
+				
+				shuttle.setPosture(landed ? Posture.UPRIGHT : Posture.PRONE);
 			}
 		}
-		
-		currentShuttlePosture = posture;
 	}
 	
-	private boolean isShuttleAvailable() {
-		return currentShuttlePosture == Posture.UPRIGHT && shuttleLanded;
+	private void landShuttles(boolean shuttle) {
+		updateShuttlePostures(shuttle, true);
 	}
 	
-	private boolean isShuttleBoarding() {
-		return currentShuttlePosture == Posture.UPRIGHT && !shuttleLanded;
+	private void launchShuttles(boolean shuttle) {
+		updateShuttlePostures(shuttle, false);
 	}
 	
-	private boolean isShuttleDeparting() {
-		return currentShuttlePosture == Posture.PRONE && !shuttleLanded && timeRemaining == timeUntilLand;
+	private boolean isShuttleAvailable(boolean shuttle) {
+		if (shuttle)
+			return shuttleTravel.isShuttleAvailable();
+		else
+			return transportTravel.isShuttleAvailable();
+	}
+	
+	private boolean isShuttleBoarding(boolean shuttle) {
+		if (shuttle)
+			return shuttleTravel.isShuttleBoarding();
+		else
+			return transportTravel.isShuttleBoarding();
+	}
+	
+	private boolean isShuttleDeparting(boolean shuttle) {
+		if (shuttle)
+			return shuttleTravel.isShuttleDeparting();
+		else
+			return transportTravel.isShuttleDeparting();
+	}
+	
+	private int getTimeRemaining(boolean shuttle) {
+		if (shuttle)
+			return shuttleTravel.getTimeRemaining();
+		else
+			return transportTravel.getTimeRemaining();
 	}
 	
 	private class DestinationSelectionSuiCallback implements ISuiCallback {
@@ -646,33 +670,71 @@ public class TravelService extends Service {
 		}
 	}
 	
-	private class ShuttleBehaviour implements Runnable {
+	private class GalaxyTravel implements Runnable {
+		
+		private final AtomicInteger timeRemaining;
+		private final AtomicBoolean shuttleLanded;
+		private final AtomicBoolean postureLanded;
+		private final boolean shuttle;
+		private final long landTime;
+		
+		public GalaxyTravel(boolean shuttle) {
+			this.shuttle = shuttle;
+			landTime = (shuttle ? 17000 : 21000) + 10000; // Adds time for delta to take effect
+			timeRemaining = new AtomicInteger(airTime.get());
+			shuttleLanded = new AtomicBoolean(true);
+			postureLanded = new AtomicBoolean(true);
+		}
+		
+		public int getTimeRemaining() {
+			return timeRemaining.get();
+		}
+		
+		public boolean isShuttleAvailable() {
+			return postureLanded.get() && shuttleLanded.get();
+		}
+		
+		public boolean isShuttleBoarding() {
+			return postureLanded.get() && !shuttleLanded.get();
+		}
+		
+		public boolean isShuttleDeparting() {
+			return !postureLanded.get() && !shuttleLanded.get();
+		}
+		
 		@Override
 		public void run() {
-			while(true) {
-				try {
-					// GROUNDED
-					Thread.sleep(timeGrounded);
-					
-					// LEAVE
-					updateShuttlePostures(Posture.PRONE);
-					shuttleLanded = false;
-					Thread.sleep(landDelay);
-					
-					// Make the shuttle stay away for some time.
-					for(long timeElapsed = 0; timeUntilLand > timeElapsed; timeRemaining--, timeElapsed++) {
-						Thread.sleep(1000);	// Sleep for a second
+			try {
+				Thread.sleep(50);
+				while (true) {
+					// LANDING
+					if (!postureLanded.get()) {
+						landShuttles(shuttle);
+						postureLanded.set(true);
+						Thread.sleep(landTime);
 					}
 					
-					timeRemaining = timeUntilLand;	// Reset the timer
+					// GROUNDED
+					shuttleLanded.set(true);
+					Thread.sleep(groundTime.get()); // 120000
+					shuttleLanded.set(false);
 					
-					// LANDING
-					updateShuttlePostures(Posture.UPRIGHT);
-					Thread.sleep(landDelay);
-					shuttleLanded = true;
-				} catch (InterruptedException e) {
-					break;
+					// LEAVE
+					if (postureLanded.get()) {
+						launchShuttles(shuttle);
+						postureLanded.set(false);
+						Thread.sleep(landTime);
+					}
+					
+					// AWAY
+					for (int timeElapsed = 0; timeElapsed < airTime.get(); timeElapsed++) {
+						Thread.sleep(1000);	// Sleep for a second
+						timeRemaining.decrementAndGet();
+					}
+					timeRemaining.set(airTime.get());	// Reset the timer
 				}
+			} catch (InterruptedException e) {
+				
 			}
 		}
 	}
