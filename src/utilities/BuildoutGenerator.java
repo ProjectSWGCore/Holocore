@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map.Entry;
 
 import resources.Location;
 import resources.Quaternion;
@@ -32,7 +33,9 @@ public class BuildoutGenerator {
 	
 	public static void main(String [] args) throws IOException {
 		BuildoutGenerator gen = new BuildoutGenerator();
-		gen.createBuildoutSdb(new File("areas.sdb"), new File("objects.sdb"));
+		File areas = new File("serverdata/buildout/areas.sdb");
+		File objects = new File("serverdata/buildout/objects.sdb");
+		gen.createBuildoutSdb(areas, objects);
 	}
 	
 	public BuildoutGenerator() {
@@ -51,6 +54,7 @@ public class BuildoutGenerator {
 	}
 	
 	private void createAreas(File areaFile) throws IOException {
+		System.out.println("Generating areas...");
 		SdbGenerator gen = new SdbGenerator(areaFile);
 		gen.open();
 		gen.setColumnNames("id", "terrain", "area_name", "event", "min_x", "min_z", "max_x", "max_z", "adjust_coordinates");
@@ -60,22 +64,49 @@ public class BuildoutGenerator {
 	}
 	
 	private void createObjects(File objectFile) throws IOException {
-		SdbGenerator gen = new SdbGenerator(objectFile);
-		gen.open();
-		gen.setColumnNames("id", "buildout_id", "area_id", "templateCrc", "containerId", "x", "y", "z", "orientation_x", "orientation_y", "orientation_z", "orientation_w", "radius", "cellIndex");
-		gen.setColumnTypes("INTEGER PRIMARY KEY", intType, intType, intType, intType, floatType, floatType, floatType, floatType, floatType, floatType, floatType, floatType, intType);
+		System.out.println("Generating objects...");
+		List<SWGObject> objects = new LinkedList<>();
+		System.out.println("    Creating buildouts...");
+		createBuildouts(objects);
+		System.out.println("    Creating snapshots...");
+		createSnapshots(objects);
+		System.out.println("    Generating file...");
+		generateObjectFile(objectFile, objects);
+	}
+	
+	private void createBuildouts(List <SWGObject> objects) {
 		BuildoutLoader loader = new BuildoutLoader();
 		loader.loadAllBuildouts();
-		List<SWGObject> objects = new ArrayList<>();
-		for (SWGObject obj : loader.getObjects()) {
-			addClientObject(objects, obj);
+		for (Entry<String, List<SWGObject>> areaObjects : loader.getObjects().entrySet()) {
+			GenBuildoutArea area = null;
+			for (GenBuildoutArea a : areas) {
+				if (a.area.getName().equals(areaObjects.getKey())) {
+					area = a;
+					break;
+				}
+			}
+			if (area == null) {
+				System.err.println("Unknown area! Name: " + areaObjects.getKey());
+				continue;
+			}
+			for (SWGObject obj : areaObjects.getValue()) {
+				obj.setBuildoutAreaId(area.id);
+				addClientObject(objects, obj);
+			}
 		}
+	}
+	
+	private void createSnapshots(List<SWGObject> objects) {
 		SnapshotLoader snapLoader = new SnapshotLoader();
 		snapLoader.loadAllSnapshots();
 		List<SWGObject> snapshots = new LinkedList<>();
 		for (SWGObject obj : snapLoader.getObjects()) {
 			addClientObject(snapshots, obj);
 		}
+		setSnapshotData(snapshots, objects);
+	}
+	
+	private void setSnapshotData(List<SWGObject> snapshots, List<SWGObject> objects) {
 		for (SWGObject snap : snapshots) {
 			GenBuildoutArea area = getAreaForObject(snap);
 			if (area != null)
@@ -84,10 +115,26 @@ public class BuildoutGenerator {
 				System.err.println("No area for: " + snap.getObjectId() + " / " + snap.getTerrain());
 		}
 		objects.addAll(snapshots);
-		long buildoutId = 1;
-		for (SWGObject obj : objects)
-			writeObject(gen, obj, buildoutId++);
-		gen.close();
+	}
+	
+	private void generateObjectFile(File objectFile, List<SWGObject> objects) throws IOException {
+		try (SdbGenerator gen = new SdbGenerator(objectFile)) {
+			gen.open();
+			gen.setColumnNames("id", "buildout_id", "area_id", "templateCrc", "containerId", "x", "y", "z", "orientation_x", "orientation_y", "orientation_z", "orientation_w", "radius", "cellIndex");
+			gen.setColumnTypes("INTEGER PRIMARY KEY", intType, intType, intType, intType, floatType, floatType, floatType, floatType, floatType, floatType, floatType, floatType, intType);
+			long buildoutId = 1;
+			int objNum = 0;
+			int percent = 0;
+			for (SWGObject obj : objects) {
+				writeObject(gen, obj, buildoutId++);
+				while (percent / 100.0 * objects.size() <= objNum) {
+					System.out.print(".");
+					percent++;
+				}
+				objNum++;
+			}
+			System.out.println();
+		}
 	}
 	
 	private void addClientObject(List<SWGObject> objects, SWGObject obj) {
@@ -113,6 +160,7 @@ public class BuildoutGenerator {
 			GenBuildoutArea fallback = fallbackAreas.get(i);
 			gen.writeLine(fallback.id, fallback.terrain.getName(), fallback.terrain.getName() + "_global", "", -8196, -8196, 8196, 8196, "0");
 		}
+		int percent = 0;
 		for (int i = 0; i < areas.size(); i++) {
 			GenBuildoutArea area = areas.get(i);
 			writeArea(gen, area, null);
@@ -120,7 +168,12 @@ public class BuildoutGenerator {
 				writeArea(gen, areas.get(j), area.area.getName());
 				i++;
 			}
+			while (percent / 100.0 * areas.size() <= i) {
+				System.out.print(".");
+				percent++;
+			}
 		}
+		System.out.println();
 	}
 	
 	private void getArea(Terrain t, int sceneRow, boolean adjust) throws IOException {
