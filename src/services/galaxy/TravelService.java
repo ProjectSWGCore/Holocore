@@ -287,19 +287,19 @@ public class TravelService extends Service {
 		return additionalCost;
 	}
 	
-	private Collection<TravelPoint> getPointsForPlanet(Location location, String planetName) {
+	private Collection<TravelPoint> getPointsForPlanet(Location location, String planetName, boolean starport) {
 		Collection<TravelPoint> points = new ArrayList<>();
 		Terrain objectTerrain = location.getTerrain();
 		Terrain destinationTerrain = Terrain.getTerrainFromName(planetName);
 		
 		Collection<TravelPoint> candidatePoints = pointsOnPlanet.get(destinationTerrain);
 		
-		for(TravelPoint candidatePoint : candidatePoints) {
-			if(objectTerrain == destinationTerrain) {
+		for (TravelPoint candidatePoint : candidatePoints) {
+			if (objectTerrain == destinationTerrain) {
 				// If the destination planet is the same as our current
 				points.addAll(candidatePoints);
 				break;	// Then return all the points on this planet
-			} else if(candidatePoint.isStarport()) {	// If the terrains aren't the same, we only want to add the starports.
+			} else if (candidatePoint.isStarport() && starport) {	// If the terrains aren't the same, we only want to add the starports.
 				points.add(candidatePoint);
 			}
 		}
@@ -316,12 +316,13 @@ public class TravelService extends Service {
 	private void handleTravelPointRequest(GalacticPacketIntent i) {
 		Packet p = i.getPacket();
 		
-		if(p instanceof PlanetTravelPointListRequest ) {
+		if (p instanceof PlanetTravelPointListRequest) {
 			PlanetTravelPointListRequest req = (PlanetTravelPointListRequest) p;
 			String planetName = req.getPlanetName();
 			Player player = i.getPlayerManager().getPlayerFromNetworkId(i.getNetworkId());
 			Location objectLocation = player.getCreatureObject().getWorldLocation();
-			Collection<TravelPoint> pointsForPlanet = getPointsForPlanet(objectLocation, planetName);
+			TravelPoint nearest = getNearestTravelPoint(objectLocation);
+			Collection<TravelPoint> pointsForPlanet = getPointsForPlanet(objectLocation, planetName, nearest.isStarport());
 			
 			player.sendPacket(new PlanetTravelPointListResponse(planetName, pointsForPlanet, getAdditionalCosts(objectLocation, pointsForPlanet)));
 		}
@@ -359,8 +360,11 @@ public class TravelService extends Service {
 		Player purchaserOwner = purchaser.getOwner();
 		boolean roundTrip = i.isRoundTrip();
 		
-		if(nearestPoint == null || destinationPoint == null)
+		if (nearestPoint == null || destinationPoint == null)
 			return;
+		if (getDistanceFromPoint(nearestPoint, purchaserWorldLocation) > TICKET_USE_RADIUS) {
+			return;
+		}
 		
 		int ticketPrice = getTotalTicketPrice(nearestPoint, destinationPoint, roundTrip);
 		int newBankBalance = purchaser.getBankBalance();
@@ -432,21 +436,21 @@ public class TravelService extends Service {
 	
 	private void handleTicketUse(TicketUseIntent i) {
 		TravelPoint point = getNearestTravelPoint(i.getPlayer().getCreatureObject().getWorldLocation());
-		boolean shuttle = !point.isStarport();
-		if (isShuttleAvailable(shuttle)) {
+		boolean starport = point.isStarport();
+		if (isShuttleAvailable(starport)) {
 			// The shuttle is available at this time
 			if(i.getTicket() == null)
 				handleTicketUseSui(i);
 			else
 				handleTicketUseClick(i);
 		} else { // The shuttle isn't available
-			if (isShuttleBoarding(shuttle)) {	// Unavailable but about to board
+			if (isShuttleBoarding(starport)) {	// Unavailable but about to board
 				new ChatBroadcastIntent(i.getPlayer(), "@travel/travel:shuttle_begin_boarding").broadcast();
 			} else {	// Unavailable but not about to board, because...
-				if (isShuttleDeparting(shuttle))	// ... it's departing
+				if (isShuttleDeparting(starport))	// ... it's departing
 					new ChatBroadcastIntent(i.getPlayer(), "@travel:shuttle_not_available").broadcast();
 				else	// ... or it's done departing and is completely away
-					new ChatBroadcastIntent(i.getPlayer(), new ProsePackage(new StringId("travel/travel", "shuttle_board_delay"), "DI", getTimeRemaining(shuttle))).broadcast();
+					new ChatBroadcastIntent(i.getPlayer(), new ProsePackage(new StringId("travel/travel", "shuttle_board_delay"), "DI", getTimeRemaining(starport))).broadcast();
 			}
 
 		}
@@ -489,7 +493,7 @@ public class TravelService extends Service {
 		
 		if (isTicket(ticket)) {
 			if (isTicketUsable(ticket)) {
-				if(distanceToNearestPoint <= TICKET_USE_RADIUS) {
+				if (distanceToNearestPoint <= TICKET_USE_RADIUS) {
 					// They can use their ticket if they're within range.
 					teleportAndDestroyTicket(getDestinationPoint(ticket), ticket, traveler);
 				} else {
@@ -572,11 +576,11 @@ public class TravelService extends Service {
 		double candidateDistance;
 		Collection<TravelPoint> pointsForPlanet = pointsOnPlanet.get(objectLocation.getTerrain());
 		
-		if(pointsForPlanet == null)
+		if (pointsForPlanet == null)
 			return null;
 		
-		for(TravelPoint candidate : pointsForPlanet) {
-			if(currentResult == null) { // Will occur upon the first iteration.
+		for (TravelPoint candidate : pointsForPlanet) {
+			if (currentResult == null) { // Will occur upon the first iteration.
 				currentResult = candidate; // The first candidate will always be the first possible result.
 				currentResultDistance = getDistanceFromPoint(currentResult, objectLocation);
 			} else {
@@ -596,7 +600,7 @@ public class TravelService extends Service {
 		return point.getLocation().distanceTo(objectLocation);
 	}
 	
-	private void updateShuttlePostures(boolean shuttles, boolean landed) {
+	private void updateShuttlePostures(boolean starport, boolean landed) {
 		for (Collection<TravelPoint> travelPoints : pointsOnPlanet.values()) {
 			for (TravelPoint tp : travelPoints) {
 				CreatureObject shuttle = tp.getShuttle();
@@ -604,9 +608,9 @@ public class TravelService extends Service {
 				if(shuttle == null)	// This TravelPoint has no associated shuttle
 					continue;	// Continue with the next TravelPoint
 				
-				if (shuttle.getTemplate().contains("shared_player_shuttle") && !shuttles)
+				if (shuttle.getTemplate().contains("shared_player_shuttle") && starport)
 					continue;
-				if (shuttle.getTemplate().contains("shared_player_transport") && shuttles)
+				if (shuttle.getTemplate().contains("shared_player_transport") && !starport)
 					continue;
 				
 				shuttle.setPosture(landed ? Posture.UPRIGHT : Posture.PRONE);
@@ -614,40 +618,40 @@ public class TravelService extends Service {
 		}
 	}
 	
-	private void landShuttles(boolean shuttle) {
-		updateShuttlePostures(shuttle, true);
+	private void landShuttles(boolean starport) {
+		updateShuttlePostures(starport, true);
 	}
 	
-	private void launchShuttles(boolean shuttle) {
-		updateShuttlePostures(shuttle, false);
+	private void launchShuttles(boolean starport) {
+		updateShuttlePostures(starport, false);
 	}
 	
-	private boolean isShuttleAvailable(boolean shuttle) {
-		if (shuttle)
-			return shuttleTravel.isShuttleAvailable();
-		else
+	private boolean isShuttleAvailable(boolean starport) {
+		if (starport)
 			return transportTravel.isShuttleAvailable();
+		else
+			return shuttleTravel.isShuttleAvailable();
 	}
 	
-	private boolean isShuttleBoarding(boolean shuttle) {
-		if (shuttle)
-			return shuttleTravel.isShuttleBoarding();
-		else
+	private boolean isShuttleBoarding(boolean starport) {
+		if (starport)
 			return transportTravel.isShuttleBoarding();
+		else
+			return shuttleTravel.isShuttleBoarding();
 	}
 	
-	private boolean isShuttleDeparting(boolean shuttle) {
-		if (shuttle)
-			return shuttleTravel.isShuttleDeparting();
-		else
+	private boolean isShuttleDeparting(boolean starport) {
+		if (starport)
 			return transportTravel.isShuttleDeparting();
+		else
+			return shuttleTravel.isShuttleDeparting();
 	}
 	
-	private int getTimeRemaining(boolean shuttle) {
-		if (shuttle)
-			return shuttleTravel.getTimeRemaining();
-		else
+	private int getTimeRemaining(boolean starport) {
+		if (starport)
 			return transportTravel.getTimeRemaining();
+		else
+			return shuttleTravel.getTimeRemaining();
 	}
 	
 	private class DestinationSelectionSuiCallback implements ISuiCallback {
@@ -675,12 +679,12 @@ public class TravelService extends Service {
 		private final AtomicInteger timeRemaining;
 		private final AtomicBoolean shuttleLanded;
 		private final AtomicBoolean postureLanded;
-		private final boolean shuttle;
+		private final boolean starport;
 		private final long landTime;
 		
-		public GalaxyTravel(boolean shuttle) {
-			this.shuttle = shuttle;
-			landTime = (shuttle ? 17000 : 21000) + 10000; // Adds time for delta to take effect
+		public GalaxyTravel(boolean starport) {
+			this.starport = starport;
+			landTime = (starport ? 21000 : 17000) + 10000; // Adds time for delta to take effect
 			timeRemaining = new AtomicInteger(airTime.get());
 			shuttleLanded = new AtomicBoolean(true);
 			postureLanded = new AtomicBoolean(true);
@@ -709,19 +713,19 @@ public class TravelService extends Service {
 				while (true) {
 					// LANDING
 					if (!postureLanded.get()) {
-						landShuttles(shuttle);
+						landShuttles(starport);
 						postureLanded.set(true);
 						Thread.sleep(landTime);
 					}
 					
 					// GROUNDED
 					shuttleLanded.set(true);
-					Thread.sleep(groundTime.get()); // 120000
+					Thread.sleep(groundTime.get() * 1000L);
 					shuttleLanded.set(false);
 					
 					// LEAVE
 					if (postureLanded.get()) {
-						launchShuttles(shuttle);
+						launchShuttles(starport);
 						postureLanded.set(false);
 						Thread.sleep(landTime);
 					}
