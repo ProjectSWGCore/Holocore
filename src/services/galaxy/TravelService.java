@@ -362,9 +362,6 @@ public class TravelService extends Service {
 		
 		if (nearestPoint == null || destinationPoint == null)
 			return;
-		if (getDistanceFromPoint(nearestPoint, purchaserWorldLocation) > TICKET_USE_RADIUS) {
-			return;
-		}
 		
 		int ticketPrice = getTotalTicketPrice(nearestPoint, destinationPoint, roundTrip);
 		int newBankBalance = purchaser.getBankBalance();
