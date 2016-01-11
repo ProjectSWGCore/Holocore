@@ -163,7 +163,8 @@ public class ZoneManager extends Manager {
 		SWGObject parent = obj.getParent();
 		if (parent != null)
 			recursiveCreateObject(parent, p);
-		obj.createObject(p);
+		else
+			obj.createObject(p);
 	}
 	
 	private void loadCommitHistory() {
