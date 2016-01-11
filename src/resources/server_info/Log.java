@@ -226,6 +226,26 @@ public class Log {
 	}
 	
 	/**
+	 * Logs the exception to the server log file, formatted to display the log
+	 * severity as WARN, as well as the time, and tag.
+	 * @param tag the tag to use for the log
+	 * @param exception the exception to print
+	 */
+	public static final void w(String tag, Exception exception) {
+		printException(LogLevel.WARN, tag, exception);
+	}
+	
+	/**
+	 * Logs the exception to the server log file, formatted to display the log
+	 * severity as WARN, as well as the time, and tag.
+	 * @param service the service outputting this log info
+	 * @param exception the exception to print
+	 */
+	public static final void w(Service service, Exception exception) {
+		printException(LogLevel.WARN, service.getClass().getSimpleName(), exception);
+	}
+	
+	/**
 	 * Logs the string to the server log file, formatted to display the log
 	 * severity as ERROR, as well as the time, tag and message.
 	 * @param tag the tag to use for the log
@@ -248,6 +268,26 @@ public class Log {
 	}
 	
 	/**
+	 * Logs the exception to the server log file, formatted to display the log
+	 * severity as ERROR, as well as the time, and tag.
+	 * @param tag the tag to use for the log
+	 * @param exception the exception to print
+	 */
+	public static final void e(String tag, Exception exception) {
+		printException(LogLevel.ERROR, tag, exception);
+	}
+	
+	/**
+	 * Logs the exception to the server log file, formatted to display the log
+	 * severity as ERROR, as well as the time, and tag.
+	 * @param service the service outputting this log info
+	 * @param exception the exception to print
+	 */
+	public static final void e(Service service, Exception exception) {
+		printException(LogLevel.ERROR, service.getClass().getSimpleName(), exception);
+	}
+	
+	/**
 	 * Logs the string to the server log file, formatted to display the log
 	 * severity as ASSERT, as well as the time, tag and message.
 	 * @param tag the tag to use for the log
@@ -267,6 +307,34 @@ public class Log {
 	 */
 	public static final void a(Service service, String message, Object ... args) {
 		log(LogLevel.ASSERT, service.getClass().getSimpleName(), message, args);
+	}
+	
+	/**
+	 * Logs the exception to the server log file, formatted to display the log
+	 * severity as ASSERT, as well as the time, and tag.
+	 * @param tag the tag to use for the log
+	 * @param exception the exception to print
+	 */
+	public static final void a(String tag, Exception exception) {
+		printException(LogLevel.ASSERT, tag, exception);
+	}
+	
+	/**
+	 * Logs the exception to the server log file, formatted to display the log
+	 * severity as ASSERT, as well as the time, and tag.
+	 * @param service the service outputting this log info
+	 * @param exception the exception to print
+	 */
+	public static final void a(Service service, Exception exception) {
+		printException(LogLevel.ASSERT, service.getClass().getSimpleName(), exception);
+	}
+	
+	private static final void printException(LogLevel level, String tag, Exception exception) {
+		log(level, tag, "Exception in thread\"%s\" %s: %s", Thread.currentThread().getName(), exception.getClass().getName(), exception.getMessage());
+		log(level, tag, "Caused by: %s: %s", exception.getClass(), exception.getMessage());
+		for (StackTraceElement e : exception.getStackTrace()) {
+			log(level, tag, "    " + e.toString());
+		}
 	}
 	
 	public static enum LogLevel {

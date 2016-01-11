@@ -31,6 +31,8 @@ import intents.server.ConfigChangedIntent;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -45,13 +47,14 @@ public class DataManager implements IntentReceiver {
 	private static DataManager instance = null;
 
 	private Map<ConfigFile, Config> config;
+	private List<ConfigWatcher> watchers;
 	private RelationalDatabase localDatabase;
 	private boolean initialized;
-	private ConfigWatcher cfgWatcher;
 
 	private DataManager() {
 		initialized = false;
 		IntentManager.getInstance().registerForIntent(ConfigChangedIntent.TYPE, this);
+		watchers = new ArrayList<>();
 	}
 
 	private synchronized void initialize() {
@@ -61,6 +64,11 @@ public class DataManager implements IntentReceiver {
 			Log.start();
 		initialized = localDatabase.isOnline()
 				&& localDatabase.isTable("users");
+	}
+	
+	private synchronized void shutdown() {
+		for (ConfigWatcher watcher : watchers)
+			watcher.stop();
 	}
 
 	private synchronized void initializeConfig() {
@@ -74,8 +82,9 @@ public class DataManager implements IntentReceiver {
 					config.put(file, new Config(f));
 				}
 
-				cfgWatcher = new ConfigWatcher(config);
-				cfgWatcher.start();
+				ConfigWatcher watcher = new ConfigWatcher(config);
+				watcher.start();
+				watchers.add(watcher);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -152,6 +161,15 @@ public class DataManager implements IntentReceiver {
 				instance.initialize();
 			}
 			return instance;
+		}
+	}
+	
+	public synchronized static final void terminate() {
+		synchronized (instanceLock) {
+			if (instance != null) {
+				instance.shutdown();
+				instance = null;
+			}
 		}
 	}
 

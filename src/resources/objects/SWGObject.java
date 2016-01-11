@@ -50,7 +50,6 @@ import resources.network.DeltaBuilder;
 import resources.objects.building.BuildingObject;
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
-import resources.player.PlayerState;
 import resources.server_info.Log;
 import services.CoreManager;
 import utilities.Encoder.StringType;
@@ -981,24 +980,12 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	}
 	
 	public void sendDelta(int type, int update, Object value) {
-
-	}
-	
-	public final void sendDelta(BaselineType baseline, int type, int update, Object value) {
-		Player owner = getOwner();
-		if (owner == null || (owner.getPlayerState() != PlayerState.ZONED_IN))
-			return;
-
-		DeltaBuilder builder = new DeltaBuilder(this, baseline, type, update, value);
+		DeltaBuilder builder = new DeltaBuilder(this, objectType, type, update, value);
 		builder.send();
 	}
 	
-	public final void sendDelta(BaselineType baseline, int type, int update, Object value, StringType strType) {
-		Player owner = getOwner();
-		if (owner == null || (owner.getPlayerState() != PlayerState.ZONED_IN))
-			return;
-		
-		DeltaBuilder builder = new DeltaBuilder(this, baseline, type, update, value, strType);
+	public final void sendDelta(int type, int update, Object value, StringType strType) {
+		DeltaBuilder builder = new DeltaBuilder(this, objectType, type, update, value, strType);
 		builder.send();
 	}
 	
