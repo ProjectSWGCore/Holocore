@@ -301,7 +301,8 @@ public class CreatureObject extends TangibleObject {
 	public void setPosture(Posture posture) {
 		this.posture = posture;
 		sendDelta(3, 13, posture.getId());
-		sendObserversAndSelf(new PostureUpdate(getObjectId(), posture));
+		if (isPlayer())
+			sendObserversAndSelf(new PostureUpdate(getObjectId(), posture));
 	}
 	
 	public void setRace(Race race) {
@@ -912,11 +913,4 @@ public class CreatureObject extends TangibleObject {
 		super.createBaseline9(target, bb);
 	}
 	
-	public void sendDelta(int type, int update, Object value) {
-		sendDelta(BaselineType.CREO, type, update, value);
-	}
-	
-	public void sendDelta(int type, int update, Object value, StringType strType) {
-		sendDelta(BaselineType.CREO, type, update, value, strType);
-	}
 }

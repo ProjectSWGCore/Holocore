@@ -580,14 +580,6 @@ public class PlayerObject extends IntangibleObject {
 		bb.incrementOperandCount(31);
 	}
 	
-	public void sendDelta(int type, int update, Object value) {
-		sendDelta(BaselineType.PLAY, type, update, value);
-	}
-	
-	public void sendDelta(int type, int update, Object value, StringType strType) {
-		sendDelta(BaselineType.PLAY, type, update, value, strType);
-	}
-
 	public int getStartPlayTime() {
 		return startPlayTime;
 	}
