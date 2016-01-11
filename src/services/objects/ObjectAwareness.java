@@ -33,6 +33,7 @@ import intents.network.GalacticPacketIntent;
 import intents.object.ObjectCreateIntent;
 import intents.object.ObjectCreatedIntent;
 import intents.object.ObjectTeleportIntent;
+import intents.object.UpdateObjectAwareness;
 import intents.player.PlayerTransformedIntent;
 
 import java.util.HashMap;
@@ -71,6 +72,7 @@ public class ObjectAwareness extends Service {
 		registerForIntent(ObjectCreatedIntent.TYPE);
 		registerForIntent(ObjectTeleportIntent.TYPE);
 		registerForIntent(GalacticPacketIntent.TYPE);
+		registerForIntent(UpdateObjectAwareness.TYPE);
 		loadQuadTree();
 	}
 	
@@ -97,6 +99,9 @@ public class ObjectAwareness extends Service {
 				if (i instanceof GalacticPacketIntent)
 					processGalacticPacketIntent((GalacticPacketIntent) i);
 				break;
+			case UpdateObjectAwareness.TYPE:
+				if (i instanceof UpdateObjectAwareness)
+					processUpdateObjectAwarenessIntent((UpdateObjectAwareness) i);
 			default:
 				break;
 		}
@@ -169,6 +174,26 @@ public class ObjectAwareness extends Service {
 			if (object instanceof CreatureObject)
 				moveObject((CreatureObject) object, parent, transformWithParent);
 		}
+	}
+	
+	private void processUpdateObjectAwarenessIntent(UpdateObjectAwareness i) {
+		SWGObject obj = i.getObject();
+		Location l = obj.getLocation();
+		QuadTree <SWGObject> tree = getTree(l);
+		List<SWGObject> objects;
+		synchronized (tree) {
+			objects = tree.get(l.getX(), l.getZ());
+		}
+		Log.d(this, "Updated awareness for %s", obj);
+		if (objects.contains(obj)) {
+			if (!i.isInAwareness()) {
+				remove(obj);
+				obj.clearAware(false);
+			}
+			return;
+		}
+		add(obj);
+		update(obj);
 	}
 	
 	private void moveObject(CreatureObject obj, DataTransform transform) {
@@ -315,12 +340,13 @@ public class ObjectAwareness extends Service {
 			return;
 		Set <SWGObject> objectAware = new HashSet<SWGObject>();
 		QuadTree <SWGObject> tree = getTree(l);
+		List <SWGObject> range;
 		synchronized (tree) {
-			List <SWGObject> range = tree.getWithinRange(l.getX(), l.getZ(), AWARE_RANGE);
-			for (SWGObject inRange : range) {
-				if (isValidInRange(obj, inRange, l))
-					objectAware.add(inRange);
-			}
+			range = tree.getWithinRange(l.getX(), l.getZ(), AWARE_RANGE);
+		}
+		for (SWGObject inRange : range) {
+			if (isValidInRange(obj, inRange, l))
+				objectAware.add(inRange);
 		}
 		obj.updateObjectAwareness(objectAware);
 	}
