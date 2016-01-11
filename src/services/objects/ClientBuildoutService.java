@@ -56,13 +56,6 @@ public class ClientBuildoutService extends Service {
 	}
 	
 	@Override
-	public boolean initialize() {
-		List<String> events = getEvents();
-		loadAreas(events);
-		return super.initialize();
-	}
-	
-	@Override
 	public void onIntentReceived(Intent i) {
 		switch (i.getType()) {
 			case PlayerTransformedIntent.TYPE:
@@ -75,6 +68,8 @@ public class ClientBuildoutService extends Service {
 	}
 	
 	public Map<Long, SWGObject> loadClientObjects() {
+		List<String> events = getEvents();
+		loadAreas(events);
 		Config c = getConfig(ConfigFile.PRIMARY);
 		if (c.getBoolean("LOAD-OBJECTS", true)) {
 			System.out.println("ClientBuildoutService: Loading client objects...");
@@ -101,7 +96,9 @@ public class ClientBuildoutService extends Service {
 			SWGObject obj;
 			Location l = new Location();
 			while (set.next()) {
-				area = areasById.get(ind.areaInd);
+				area = areasById.get(set.getInt(ind.areaInd));
+				if (!area.isLoaded())
+					continue;
 				obj = createObject(set, objects, l, area, ind);
 				objects.put(obj.getObjectId(), obj);
 			}
@@ -135,8 +132,15 @@ public class ClientBuildoutService extends Service {
 		if (cell != 0 && obj instanceof CellObject)
 			((CellObject) obj).setNumber(cell);
 		long container = set.getLong(ind.contInd);
-		if (container != 0)
-			objects.get(container).addObject(obj);
+		if (container != 0) {
+			SWGObject parent = objects.get(container);
+			if (parent != null)
+				parent.addObject(obj);
+			else {
+				System.err.println("Unable to create buildout: " + obj);
+				Log.e(this, "Unable to create buildout: %s with container: %d", obj, container);
+			}
+		}
 		return obj;
 	}
 	
@@ -150,19 +154,22 @@ public class ClientBuildoutService extends Service {
 				boolean loaded = false;
 				while (set.next()) {
 					BuildoutArea area = createArea(set, ind);
+					area.setLoaded(false);
+					areas.add(area);
+					areasById.put(area.getId(), area);
 					if (area.getEvent().isEmpty() && (primary == null || !area.getName().equals(primary.getName()))) {
 						if (!loaded && primary != null)
-							loadArea(primary);
+							area.setLoaded(true);
 						loaded = false;
 						primary = area; // Primary area, no event
 					}
 					if (events.contains(area.getEvent())) {
-						loadArea(area);
+						area.setLoaded(true);
 						loaded = true;
 					}
 				}
 				if (!loaded && primary != null)
-					loadArea(primary);
+					primary.setLoaded(true);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -177,11 +184,6 @@ public class ClientBuildoutService extends Service {
 			area = getAreaForObject(creature);
 			creature.setBuildoutArea(area);
 		}
-	}
-	
-	private void loadArea(BuildoutArea area) {
-		areas.add(area);
-		areasById.put(area.getId(), area);
 	}
 	
 	private BuildoutArea createArea(ResultSet set, AreaIndexes ind) throws SQLException {
