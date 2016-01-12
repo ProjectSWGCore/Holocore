@@ -50,8 +50,8 @@ import resources.network.DeltaBuilder;
 import resources.objects.building.BuildingObject;
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
-import resources.player.PlayerState;
 import resources.server_info.Log;
+import services.CoreManager;
 import utilities.Encoder.StringType;
 
 import java.io.IOException;
@@ -191,7 +191,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 
 		// Get a pre-parent-removal list of the observers so we can send create/destroy/update messages
 		Set<SWGObject> oldObservers = getObservers();
-		oldObservers.add(this);
+		Player prevOwner = getOwner();
 
 		// Remove this object from the old parent if one exists
 		SWGObject oldParent = null;
@@ -204,8 +204,14 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 			System.err.println("Failed adding " + this + " to " + container);
 
 		// Observer notification
-		Set<SWGObject> containerObservers = container.getObservers();
-		containerObservers.add(this);
+		Player newOwner = getOwner();
+		Set<SWGObject> containerObservers = getObservers();
+		if (prevOwner != newOwner) {
+			if (prevOwner != null)
+				oldObservers.add(prevOwner.getCreatureObject());
+			if (newOwner != null)
+				containerObservers.add(newOwner.getCreatureObject());
+		}
 		sendUpdatedContainment(oldObservers, containerObservers);
 
 		Log.i("Container", "Moved %s from %s to %s", this, oldParent, container);
@@ -318,15 +324,9 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	 * Gets the object that occupies the specified slot
 	 * @param slotName
 	 * @return The {@link SWGObject} occupying the slot. Returns null if there is nothing in the slot or it doesn't exist.
-	 * <p>If the slot doesn't exist, then an error is printed as well.</p>
 	 */
 	public SWGObject getSlottedObject(String slotName) {
-		if (hasSlot(slotName))
-			return slots.get(slotName);
-		else {
-			System.err.println(this + " does not contain " + slotName);
-			return null;
-		}
+		return slots.get(slotName);
 	}
 
 	/**
@@ -635,13 +635,17 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	}
 	
 	public void clearAware() {
+		clearAware(true);
+	}
+	
+	public void clearAware(boolean updateSelf) {
 		List<SWGObject> objects;
 		synchronized (objectsAware) {
 			objects = new ArrayList<>(objectsAware);
 		}
 		for (SWGObject o : objects) {
-			o.awarenessOutOfRange(this);
-			awarenessOutOfRange(o);
+			o.awarenessOutOfRange(this, updateSelf);
+			awarenessOutOfRange(o, true);
 		}
 	}
 
@@ -656,16 +660,16 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	}
 	
 	private Set<SWGObject> getObservers(SWGObject childObject) {
-		return getObserversFromSet(objectsAware, childObject);
+		return getObserversFromSet(new HashSet<SWGObject>(), childObject);
 	}
 	
 	private Set<SWGObject> getObserversFromSet(Set<SWGObject> aware, SWGObject childObject) {
 		Set<SWGObject> awareExtra;
 		synchronized (aware) {
-			synchronized (objectsAware) {
-				awareExtra = new HashSet<>(aware);
-				awareExtra.addAll(objectsAware);
-			}
+			awareExtra = new HashSet<>(aware);
+		}
+		synchronized (objectsAware) {
+			awareExtra.addAll(objectsAware);
 		}
 		if (getParent() == null) {
 			Set<SWGObject> observers = new HashSet<>();
@@ -759,72 +763,73 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 			return;
 		Set<SWGObject> same = new HashSet<>(oldObservers);
 		same.retainAll(newObservers);
-
+		
 		Set<SWGObject> added = new HashSet<>(newObservers);
 		added.removeAll(oldObservers);
-
+		
 		Set<SWGObject> removed = new HashSet<>(oldObservers);
 		removed.removeAll(newObservers);
-
+		
 		for (SWGObject swgObject : same) {
-			swgObject.sendSelf(new UpdateContainmentMessage(objectId, parent.getObjectId(), slotArrangement));
+			swgObject.getOwner().sendPacket(new UpdateContainmentMessage(objectId, parent.getObjectId(), slotArrangement));
 		}
-
+		
 		for (SWGObject swgObject : added) {
-			if (swgObject.getOwner() != null) {
-				createObject(swgObject.getOwner());
-			}
+			createObject(swgObject.getOwner());
 		}
-
+		
 		for (SWGObject swgObject : removed) {
-			if (swgObject.getOwner() != null) {
-				destroyObject(swgObject.getOwner());
-			}
+			destroyObject(swgObject.getOwner());
 		}
 	}
 	
 	public void updateObjectAwareness(Set <SWGObject> withinRange) {
+		Set <SWGObject> outOfRange;
 		synchronized (objectsAware) {
-			Set<SWGObject> observers = getObserversFromSet(withinRange, this);
-			Set <SWGObject> outOfRange = new HashSet<>(objectsAware);
-			outOfRange.removeAll(withinRange);
-			outOfRange.removeAll(observers);
-			for (SWGObject o : outOfRange) {
-				awarenessOutOfRange(o);
-				o.awarenessOutOfRange(this);
-			}
-			for (SWGObject o : withinRange) {
-				awarenessInRange(o);
-				o.awarenessInRange(this);
-			}
-			for (SWGObject o : observers) {
-				awarenessInRange(o);
-				o.awarenessInRange(this);
-			}
+			outOfRange = new HashSet<>(objectsAware);
+		}
+		Set<SWGObject> observers = getObserversFromSet(withinRange, this);
+		outOfRange.removeAll(withinRange);
+		outOfRange.removeAll(observers);
+		for (SWGObject o : outOfRange) {
+			awarenessOutOfRange(o, true);
+			o.awarenessOutOfRange(this, true);
+		}
+		for (SWGObject o : withinRange) {
+			awarenessInRange(o, true);
+			o.awarenessInRange(this, true);
+		}
+		for (SWGObject o : observers) {
+			awarenessInRange(o, true);
+			o.awarenessInRange(this, true);
 		}
 	}
 	
-	protected void awarenessOutOfRange(SWGObject o) {
+	protected void awarenessOutOfRange(SWGObject o, boolean sendDestroy) {
+		boolean success = false;
 		synchronized (objectsAware) {
-			if (objectsAware.remove(o)) {
-				Player owner = o.getOwner();
-				if (owner != null)
-					destroyObject(owner);
-				else
-					destroyObjectObservers(o);
-			}
+			success = objectsAware.remove(o);
+		}
+		if (success && sendDestroy) {
+			Player owner = o.getOwner();
+			if (owner != null)
+				destroyObject(owner);
+			else
+				destroyObjectObservers(o);
 		}
 	}
 	
-	protected void awarenessInRange(SWGObject o) {
+	protected void awarenessInRange(SWGObject o, boolean sendCreate) {
+		boolean success = false;
 		synchronized (objectsAware) {
-			if (objectsAware.add(o)) {
-				Player owner = o.getOwner();
-				if (owner != null)
-					createObject(owner);
-				else
-					createObjectObservers(o);
-			}
+			success = objectsAware.add(o);
+		}
+		if (success && sendCreate) {
+			Player owner = o.getOwner();
+			if (owner != null)
+				createObject(owner);
+			else
+				createObjectObservers(o);
 		}
 	}
 
@@ -897,7 +902,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		// Now create the contained objects
 		for (SWGObject containedObject : containedObjects.values()) {
 			if (containedObject != null && !sentObjects.contains(containedObject)) {
-				if (containedObject instanceof CreatureObject && containedObject.hasSlot("ghost") && containedObject.getOwner() == null)
+				if (containedObject instanceof CreatureObject && ((CreatureObject) containedObject).isLoggedOutPlayer())
 					continue; // If it's a player, but that's logged out
 				containedObject.createObject(target);
 			}
@@ -956,7 +961,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	}
 	
 	public void createBaseline6(Player target, BaselineBuilder bb) {
-		bb.addInt(target.getGalaxyId()); // 0
+		bb.addInt(CoreManager.getGalaxyId()); // 0
 		bb.addObject(detailStringId); // 1
 		
 		bb.incrementOperandCount(2);
@@ -975,24 +980,12 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	}
 	
 	public void sendDelta(int type, int update, Object value) {
-
-	}
-	
-	public final void sendDelta(BaselineType baseline, int type, int update, Object value) {
-		Player owner = getOwner();
-		if (owner == null || (owner.getPlayerState() != PlayerState.ZONED_IN))
-			return;
-
-		DeltaBuilder builder = new DeltaBuilder(this, baseline, type, update, value);
+		DeltaBuilder builder = new DeltaBuilder(this, objectType, type, update, value);
 		builder.send();
 	}
 	
-	public final void sendDelta(BaselineType baseline, int type, int update, Object value, StringType strType) {
-		Player owner = getOwner();
-		if (owner == null || (owner.getPlayerState() != PlayerState.ZONED_IN))
-			return;
-		
-		DeltaBuilder builder = new DeltaBuilder(this, baseline, type, update, value, strType);
+	public final void sendDelta(int type, int update, Object value, StringType strType) {
+		DeltaBuilder builder = new DeltaBuilder(this, objectType, type, update, value, strType);
 		builder.send();
 	}
 	

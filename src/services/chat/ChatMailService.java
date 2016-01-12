@@ -4,6 +4,7 @@ import intents.PlayerEventIntent;
 import intents.chat.PersistentMessageIntent;
 import intents.network.GalacticPacketIntent;
 
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.LinkedList;
@@ -28,19 +29,22 @@ import resources.server_info.CachedObjectDatabase;
 import resources.server_info.ObjectDatabase;
 import resources.server_info.RelationalServerData;
 import resources.server_info.RelationalServerFactory;
+import services.CoreManager;
 import services.chat.ChatManager.ChatRange;
 import services.chat.ChatManager.ChatType;
 import services.player.PlayerManager;
 
 public class ChatMailService extends Service {
-
+	
 	private final ObjectDatabase<Mail> mails;
 	private final RelationalServerData chatLogs;
+	private final PreparedStatement insertChatLog;
 	private int maxMailId;
 	
 	public ChatMailService() {
 		mails = new CachedObjectDatabase<>("odb/mails.db");
 		chatLogs = RelationalServerFactory.getServerDatabase("chat/chat_log.db");
+		insertChatLog = chatLogs.prepareStatement("INSERT INTO chat_log VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 		maxMailId = 1;
 		
 		registerForIntent(GalacticPacketIntent.TYPE);
@@ -89,7 +93,7 @@ public class ChatMailService extends Service {
 
 		switch (intent.getEvent()) {
 			case PE_FIRST_ZONE:
-				sendPersistentMessageHeaders(player, intent.getGalaxy());
+				sendPersistentMessageHeaders(player);
 				break;
 			default:
 				break;
@@ -104,7 +108,7 @@ public class ChatMailService extends Service {
 		if (!(p instanceof SWGPacket))
 			return;
 		SWGPacket swg = (SWGPacket) p;
-		String galaxyName = intent.getGalaxy().getName();
+		String galaxyName = CoreManager.getGalaxy().getName();
 		switch (swg.getPacketType()) {
 			/* Mails */
 			case CHAT_PERSISTENT_MESSAGE_TO_SERVER:
@@ -144,7 +148,7 @@ public class ChatMailService extends Service {
 		if (result != ChatResult.SUCCESS)
 			return;
 
-		Mail mail = new Mail(sender.getCharacterName().split(" ")[0].toLowerCase(), request.getSubject(), request.getMessage(), recId);
+		Mail mail = new Mail(sender.getCharacterName().split(" ")[0].toLowerCase(Locale.US), request.getSubject(), request.getMessage(), recId);
 		mail.setId(maxMailId++);
 		mail.setTimestamp((int) (new Date().getTime() / 1000));
 		mail.setOutOfBandPackage(request.getOutOfBandPackage());
@@ -190,7 +194,7 @@ public class ChatMailService extends Service {
 		sendPersistentMessage(player, mail, MailFlagType.FULL_MESSAGE, galaxy);
 	}
 	
-	private void sendPersistentMessageHeaders(Player player, String galaxy) {
+	private void sendPersistentMessageHeaders(Player player) {
 		if (player == null || player.getCreatureObject() == null)
 			return;
 		
@@ -202,6 +206,7 @@ public class ChatMailService extends Service {
 				playersMail.add(element);
 		});
 		
+		String galaxy = CoreManager.getGalaxy().getName();
 		for (Mail mail : playersMail)
 			sendPersistentMessage(player, mail, MailFlagType.HEADER_ONLY, galaxy);
 	}
@@ -236,8 +241,19 @@ public class ChatMailService extends Service {
 	
 	private void logChat(long sendId, String sendName, long recvId, String recvName, String subject, String message) {
 		try {
-			long time = System.currentTimeMillis();
-			chatLogs.insert("chat_log", null, time, sendId, sendName, recvId, recvName, ChatType.MAIL.name(), ChatRange.PERSONAL.name(), "", subject, message);
+			synchronized (insertChatLog) {
+				insertChatLog.setLong(1, System.currentTimeMillis());
+				insertChatLog.setLong(2, sendId);
+				insertChatLog.setString(3, sendName);
+				insertChatLog.setLong(4, recvId);
+				insertChatLog.setString(5, recvName);
+				insertChatLog.setString(6, ChatType.MAIL.name());
+				insertChatLog.setString(7, ChatRange.PERSONAL.name());
+				insertChatLog.setString(8, "");
+				insertChatLog.setString(9, subject);
+				insertChatLog.setString(10, message);
+				insertChatLog.executeUpdate();
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

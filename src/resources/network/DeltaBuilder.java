@@ -30,7 +30,9 @@ package resources.network;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import network.packets.swg.zone.deltas.DeltasMessage;
 import resources.objects.SWGObject;
+import resources.objects.creature.CreatureObject;
 import resources.player.Player;
+import resources.player.PlayerState;
 import utilities.Encoder;
 import utilities.Encoder.StringType;
 
@@ -63,10 +65,21 @@ public class DeltaBuilder {
 	
 	public void send() {
 		DeltasMessage message = getBuiltMessage();
+		boolean sendSelf = true;
+		if (object instanceof CreatureObject && ((CreatureObject) object).isLoggedInPlayer() && object.getOwner().getPlayerState() != PlayerState.ZONED_IN)
+			sendSelf = false;
 		switch(num) {
-		case 3: object.sendObserversAndSelf(message); break;
-		case 6: object.sendObserversAndSelf(message); break;
-		default: object.sendSelf(message); break;
+			case 3:
+			case 6:
+				if (sendSelf)
+					object.sendObserversAndSelf(message);
+				else
+					object.sendObservers(message);
+				break;
+			default:
+				if (sendSelf)
+					object.sendSelf(message);
+				break;
 		}
 	}
 

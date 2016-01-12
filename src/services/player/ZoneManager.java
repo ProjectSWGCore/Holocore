@@ -31,14 +31,12 @@ import intents.GalacticIntent;
 import intents.PlayerEventIntent;
 import intents.RequestZoneInIntent;
 import intents.chat.ChatBroadcastIntent;
+import intents.network.GalacticPacketIntent;
 import main.ProjectSWG;
 import network.packets.Packet;
-import network.packets.soe.SessionRequest;
 import network.packets.swg.login.AccountFeatureBits;
 import network.packets.swg.login.ClientIdMsg;
 import network.packets.swg.login.ClientPermissionsMessage;
-import network.packets.swg.login.ServerId;
-import network.packets.swg.login.ServerString;
 import network.packets.swg.zone.CmdSceneReady;
 import network.packets.swg.zone.GalaxyLoopTimesResponse;
 import network.packets.swg.zone.HeartBeat;
@@ -52,17 +50,19 @@ import network.packets.swg.zone.chat.ChatSystemMessage;
 import network.packets.swg.zone.chat.VoiceChatStatus;
 import network.packets.swg.zone.insertion.ChatServerStatus;
 import network.packets.swg.zone.insertion.CmdStartScene;
+
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
-import resources.Galaxy;
+
 import resources.Location;
 import resources.Race;
 import resources.config.ConfigFile;
 import resources.control.Intent;
 import resources.control.Manager;
+import resources.objects.SWGObject;
 import resources.objects.creature.CreatureMood;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
@@ -72,7 +72,6 @@ import resources.player.Player;
 import resources.player.PlayerEvent;
 import resources.player.PlayerFlags;
 import resources.player.PlayerState;
-import resources.server_info.Config;
 import resources.server_info.Log;
 
 import java.io.File;
@@ -91,6 +90,7 @@ public class ZoneManager extends Manager {
 		addChildService(characterCreationService);
 		
 		registerForIntent(RequestZoneInIntent.TYPE);
+		registerForIntent(GalacticPacketIntent.TYPE);
 	}
 	
 	@Override
@@ -103,14 +103,15 @@ public class ZoneManager extends Manager {
 	public void onIntentReceived(Intent i) {
 		if (i instanceof RequestZoneInIntent) {
 			RequestZoneInIntent zii = (RequestZoneInIntent) i;
-			zoneInPlayer(zii.getPlayer(), zii.getCreature(), zii.getGalaxy());
+			zoneInPlayer(zii.getPlayer(), zii.getCreature(), zii.isFirstZone());
+		} else if (i instanceof GalacticPacketIntent) {
+			GalacticPacketIntent gpi = (GalacticPacketIntent) i;
+			handlePacket(gpi, gpi.getPlayerManager().getPlayerFromNetworkId(gpi.getNetworkId()), gpi.getNetworkId(), gpi.getPacket());
 		}
 	}
 	
 	public void handlePacket(GalacticIntent intent, Player player, long networkId, Packet p) {
 		characterCreationService.handlePacket(intent, player, networkId, p);
-		if (p instanceof SessionRequest)
-			sendServerInfo(intent.getGalaxy(), networkId);
 		if (p instanceof ClientIdMsg)
 			handleClientIdMsg(player, (ClientIdMsg) p);
 		if (p instanceof RequestGalaxyLoopTimes)
@@ -129,20 +130,41 @@ public class ZoneManager extends Manager {
 		return characterCreationService.characterExistsForName(name);
 	}
 	
-	private void zoneInPlayer(Player player, CreatureObject creature, String galaxy) {
+	private void zoneInPlayer(Player player, CreatureObject creature, boolean firstZone) {
 		PlayerObject playerObj = creature.getPlayerObject();
 		player.setPlayerState(PlayerState.ZONING_IN);
 		player.setCreatureObject(creature);
 		creature.setOwner(player);
 		
-		sendZonePackets(player, creature);
+		if (firstZone)
+			sendZonePackets(player, creature);
+		startScene(creature, creature.getLocation());
+		if (firstZone)
+			playerObj.setStartPlayTime((int) System.currentTimeMillis());
 		initPlayerBeforeZoneIn(player, creature, playerObj);
 		System.out.printf("[%s] %s is zoning in%n", player.getUsername(), player.getCharacterName());
 		Log.i("ObjectManager", "Zoning in %s with character %s", player.getUsername(), player.getCharacterName());
-		new PlayerEventIntent(player, galaxy, PlayerEvent.PE_FIRST_ZONE).broadcast();
-		new PlayerEventIntent(player, galaxy, PlayerEvent.PE_ZONE_IN).broadcast();
-		sendCommitHistory(player);
-		sendMessageOfTheDay(player);
+		if (firstZone) {
+			new PlayerEventIntent(player, PlayerEvent.PE_FIRST_ZONE).broadcast();
+			sendCommitHistory(player);
+			sendMessageOfTheDay(player);
+		}
+		new PlayerEventIntent(player, PlayerEvent.PE_ZONE_IN).broadcast();
+	}
+	
+	private void startScene(CreatureObject object, Location newLocation) {
+		long time = (long) (ProjectSWG.getCoreTime() / 1E3);
+		Race race = ((CreatureObject)object).getRace();
+		sendPacket(object.getOwner(), new CmdStartScene(false, object.getObjectId(), race, newLocation, time, (int)(System.currentTimeMillis()/1E3)));
+		recursiveCreateObject(object, object.getOwner());
+	}
+	
+	private void recursiveCreateObject(SWGObject obj, Player p) {
+		SWGObject parent = obj.getParent();
+		if (parent != null)
+			recursiveCreateObject(parent, p);
+		else
+			obj.createObject(p);
 	}
 	
 	private void loadCommitHistory() {
@@ -185,20 +207,14 @@ public class ZoneManager extends Manager {
 	}
 	
 	private void sendZonePackets(Player player, CreatureObject creature) {
-		long objId = creature.getObjectId();
-		Race race = creature.getRace();
-		Location l = creature.getLocation();
 		sendPacket(player, new HeartBeat());
 		sendPacket(player, new ChatServerStatus(true));
 		sendPacket(player, new VoiceChatStatus());
 		sendPacket(player, new ParametersMessage());
 		sendPacket(player, new ChatOnConnectAvatar());
-		sendPacket(player, new CmdStartScene(false, objId, race, l, ProjectSWG.getGalacticTime(), (int)(System.currentTimeMillis()/1E3)));
-		flushPackets();
 	}
 	
 	private void initPlayerBeforeZoneIn(Player player, CreatureObject creatureObj, PlayerObject playerObj) {
-		playerObj.setStartPlayTime((int) System.currentTimeMillis());
 		creatureObj.setMoodId(CreatureMood.NONE.getMood());
 		playerObj.clearFlagBitmask(PlayerFlags.LD);	// Ziggy: Clear the LD flag in case it wasn't already.
 	}
@@ -230,14 +246,6 @@ public class ZoneManager extends Manager {
 		}
 		
 		ghost.updateWaypoint(waypoint);
-	}
-
-	private void sendServerInfo(Galaxy galaxy, long networkId) {
-		Config c = getConfig(ConfigFile.NETWORK);
-		String name = c.getString("ZONE-SERVER-NAME", galaxy.getName());
-		int id = c.getInt("ZONE-SERVER-ID", galaxy.getId());
-		sendPacket(networkId, new ServerString(name + ":" + id));
-		sendPacket(networkId, new ServerId(id));
 	}
 	
 	private void handleCmdSceneReady(Player player, CmdSceneReady p) {

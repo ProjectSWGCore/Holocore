@@ -30,10 +30,10 @@ package resources.player;
 public enum PlayerState {
 	
 	DISCONNECTED,
+	CONNECTED,
 	LOGGING_IN,
 	LOGGED_IN,
 	ZONING_IN,
-	ZONED_IN,
-	LOGGED_OUT
+	ZONED_IN
 	
 }

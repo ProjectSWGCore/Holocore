@@ -6,6 +6,7 @@ import java.util.Set;
 
 import resources.control.Intent;
 import resources.control.Service;
+import network.packets.Packet;
 import network.packets.swg.zone.ObjectMenuSelect;
 import network.packets.swg.zone.object_controller.ObjectMenuRequest;
 import network.packets.swg.zone.object_controller.ObjectMenuResponse;
@@ -38,18 +39,21 @@ public class RadialService extends Service {
 	public void onIntentReceived(Intent i) {
 		if (i instanceof GalacticPacketIntent) {
 			GalacticPacketIntent gpi = (GalacticPacketIntent) i;
-			if (gpi.getPacket() instanceof ObjectMenuRequest) {
-				onRequest(gpi.getObjectManager(), (ObjectMenuRequest) gpi.getPacket());
-			} else if (gpi.getPacket() instanceof ObjectMenuSelect) {
-				onSelection(gpi.getGalacticManager(), gpi.getNetworkId(), (ObjectMenuSelect) gpi.getPacket());
+			Packet p = gpi.getPacket();
+			if (p instanceof ObjectMenuRequest) {
+				onRequest(gpi.getObjectManager(), (ObjectMenuRequest) p);
+			} else if (p instanceof ObjectMenuSelect) {
+				onSelection(gpi.getGalacticManager(), gpi.getNetworkId(), (ObjectMenuSelect) p);
 			}
 		} else if (i instanceof RadialResponseIntent) {
 			onResponse((RadialResponseIntent) i);
 		} else if (i instanceof RadialRegisterIntent) {
-			if (((RadialRegisterIntent) i).isRegister()) {
-				templatesRegistered.addAll(((RadialRegisterIntent) i).getTemplates());
-			} else {
-				templatesRegistered.removeAll(((RadialRegisterIntent) i).getTemplates());
+			synchronized (templatesRegistered) {
+				if (((RadialRegisterIntent) i).isRegister()) {
+					templatesRegistered.addAll(((RadialRegisterIntent) i).getTemplates());
+				} else {
+					templatesRegistered.removeAll(((RadialRegisterIntent) i).getTemplates());
+				}
 			}
 		}
 	}
@@ -73,10 +77,12 @@ public class RadialService extends Service {
 			Log.w("RadialService", "Requestor of target: %s does not have an owner! %s", target, requestor);
 			return;
 		}
-		if (templatesRegistered.contains(target.getTemplate())) {
-			new RadialRequestIntent(player, target, request).broadcast();
-		} else {
-			sendResponse(player, target, request.getOptions(), request.getCounter());
+		synchronized (templatesRegistered) {
+			if (templatesRegistered.contains(target.getTemplate())) {
+				new RadialRequestIntent(player, target, request).broadcast();
+			} else {
+				sendResponse(player, target, request.getOptions(), request.getCounter());
+			}
 		}
 	}
 	

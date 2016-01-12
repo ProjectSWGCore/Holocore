@@ -27,43 +27,36 @@
 ***********************************************************************************/
 package services.galaxy;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.util.Hashtable;
+import java.util.Map;
 
-import intents.GalacticIntent;
+import intents.network.ConnectionClosedIntent;
+import intents.network.ConnectionOpenedIntent;
 import intents.network.GalacticPacketIntent;
 import intents.network.InboundPacketIntent;
-import resources.Galaxy;
 import resources.control.Intent;
 import resources.control.Manager;
-import resources.server_info.DataManager;
-import resources.server_info.Log;
-import resources.server_info.RelationalDatabase;
+import services.CoreManager;
 import services.chat.ChatManager;
 import services.objects.ObjectManager;
 import services.player.PlayerManager;
 
 public class GalacticManager extends Manager {
 	
-	private final Object prevPacketIntentMutex = new Object();
-	private final static String resetPopulationSQL = "UPDATE galaxies SET population = 0 WHERE id = ?";
-	
-	private ObjectManager objectManager;
-	private PlayerManager playerManager;
-	private GameManager gameManager;
-	private ChatManager chatManager;
+	private final ObjectManager objectManager;
+	private final PlayerManager playerManager;
+	private final GameManager gameManager;
+	private final ChatManager chatManager;
 	private final TravelService travelService;
-	private Intent prevPacketIntent;
-	private Galaxy galaxy;
+	private final Map<Long, Intent> prevIntentMap;
 	
-	public GalacticManager(Galaxy g) {
-		this.galaxy = g;
+	public GalacticManager() {
 		objectManager = new ObjectManager();
 		playerManager = new PlayerManager();
 		gameManager = new GameManager();
-		chatManager = new ChatManager(g);
+		chatManager = new ChatManager();
 		travelService = new TravelService(objectManager);
-		prevPacketIntent = null;
+		prevIntentMap = new Hashtable<>();
 		
 		addChildService(objectManager);
 		addChildService(playerManager);
@@ -72,6 +65,8 @@ public class GalacticManager extends Manager {
 		addChildService(travelService);
 		
 		registerForIntent(InboundPacketIntent.TYPE);
+		registerForIntent(ConnectionOpenedIntent.TYPE);
+		registerForIntent(ConnectionClosedIntent.TYPE);
 	}
 	
 	@Override
@@ -83,32 +78,17 @@ public class GalacticManager extends Manager {
 	@Override
 	public void onIntentReceived(Intent i) {
 		if (i instanceof InboundPacketIntent) {
-			synchronized (prevPacketIntentMutex) {
-				GalacticPacketIntent g = new GalacticPacketIntent((InboundPacketIntent) i);
-				if (prevPacketIntent == null)
-					broadcastGalacticIntent(g);
-				else
-					broadcastGalacticIntentAfterIntent(g, i);
-				prevPacketIntent = g;
+			long networkId = ((InboundPacketIntent) i).getNetworkId();
+			GalacticPacketIntent g = new GalacticPacketIntent((InboundPacketIntent) i);
+			g.setGalacticManager(this);
+			synchronized (prevIntentMap) {
+				g.broadcastAfterIntent(prevIntentMap.get(networkId));
+				prevIntentMap.put(networkId, g);
 			}
-		}
-	}
-	
-	public void broadcastGalacticIntent(GalacticIntent i) {
-		synchronized (i) {
-			if (i.isBroadcasted())
-				return;
-			prepareGalacticIntent(i);
-			i.broadcast();
-		}
-	}
-	
-	public void broadcastGalacticIntentAfterIntent(GalacticIntent g, Intent i) {
-		synchronized (g) {
-			if (g.isBroadcasted())
-				return;
-			prepareGalacticIntent(g);
-			g.broadcastAfterIntent(i);
+		} else if (i instanceof ConnectionClosedIntent) {
+			synchronized (prevIntentMap) {
+				prevIntentMap.remove(((ConnectionClosedIntent) i).getNetworkId());
+			}
 		}
 	}
 	
@@ -120,19 +100,8 @@ public class GalacticManager extends Manager {
 		return playerManager;
 	}
 	
-	private void prepareGalacticIntent(GalacticIntent i) {
-		i.setGalacticManager(this);
-		i.setGalaxy(galaxy);
-	}
 	private void resetPopulationCount() {
-		RelationalDatabase db = DataManager.getInstance().getLocalDatabase();
-		try(PreparedStatement resetPopulation =  db.prepareStatement(GalacticManager.resetPopulationSQL)) {
-			resetPopulation.setInt(1, galaxy.getId());
-			resetPopulation.executeUpdate();
-		} catch (SQLException e) {
-			Log.e("ProjectSWG", "SQLException occured when trying to reset population value.");
-			e.printStackTrace();
-		}
+		CoreManager.getGalaxy().setPopulation(0);
 	}
 	
 }

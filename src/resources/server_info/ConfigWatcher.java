@@ -39,6 +39,8 @@ import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import resources.config.ConfigFile;
 import static java.nio.file.StandardWatchEventKinds.OVERFLOW;
@@ -49,6 +51,7 @@ public final class ConfigWatcher {
 	private final WatchService watcher;
 	private final Map<ConfigFile, Config> configMap;
 	private final Path directory;
+	private ExecutorService executor;
 	private boolean stop;
 	private static final String CFGPATH = "cfg/";
 	
@@ -62,8 +65,8 @@ public final class ConfigWatcher {
 
 	@SuppressWarnings("unchecked")
 	public void start() {
-
-		Thread t = new Thread(() -> {
+		executor = Executors.newSingleThreadExecutor();
+		executor.execute(() -> {
 			WatchKey key;
 			Kind<?> eventKind;
 			WatchEvent<Path> ev;
@@ -74,8 +77,10 @@ public final class ConfigWatcher {
 			while (!stop) {
 				try {
 					key = watcher.take(); // We're stuck here until a change is made.
-				} catch (InterruptedException e) {
-					return;
+					if (key == null)
+						break;
+				} catch (Exception e) {
+					break;
 				}
 	
 				for (WatchEvent<?> event : key.pollEvents()) {
@@ -113,8 +118,17 @@ public final class ConfigWatcher {
 					key.reset();
 				}
 			}
+			try {
+				watcher.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		});
-
-		t.start();
+	}
+	
+	public void stop() {
+		stop = true;
+		if (executor != null)
+			executor.shutdownNow();
 	}
 }

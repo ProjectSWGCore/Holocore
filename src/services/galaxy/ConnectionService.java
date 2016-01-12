@@ -33,8 +33,6 @@ import intents.network.ForceDisconnectIntent;
 import intents.network.GalacticPacketIntent;
 import intents.player.ZonePlayerSwapIntent;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
@@ -43,12 +41,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import main.ProjectSWG;
-import network.packets.soe.Disconnect;
-import network.packets.soe.Disconnect.DisconnectReason;
 import network.packets.swg.zone.HeartBeat;
 import resources.control.Intent;
 import resources.control.Service;
+import resources.network.DisconnectReason;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
 import resources.player.Player;
@@ -56,43 +52,23 @@ import resources.player.PlayerEvent;
 import resources.player.PlayerFlags;
 import resources.player.PlayerState;
 import resources.server_info.Log;
+import services.CoreManager;
+import utilities.DebugUtilities;
 import utilities.ThreadUtilities;
 
 public class ConnectionService extends Service {
 	
-	private static final double LD_THRESHOLD = TimeUnit.MINUTES.toMillis(3); // Time since last packet
-	private static final double DISAPPEAR_THRESHOLD = TimeUnit.MINUTES.toMillis(2); // Time after the LD
-	private static final String INCREMENT_POPULATION_SQL = "UPDATE galaxies SET population = population + 1 WHERE id = ?";
-	private static final String DECREMENT_POPULATION_SQL = "UPDATE galaxies SET population = population - 1 WHERE id = ?";
+	private static final double DISAPPEAR_THRESHOLD = TimeUnit.MINUTES.toMillis(3); // Time after the LD
 	
 	private final ScheduledExecutorService updateService;
-	private final Runnable updateRunnable;
 	private final Runnable disappearRunnable;
 	private final Set <DisappearPlayer> disappearPlayers;
 	private final Set <Player> zonedInPlayers;
-	
-	private PreparedStatement incrementPopulation;
-	private PreparedStatement decrementPopulation;
 	
 	public ConnectionService() {
 		updateService = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("conn-update-service"));
 		zonedInPlayers = new LinkedHashSet<Player>();
 		disappearPlayers = new HashSet<DisappearPlayer>();
-		updateRunnable = new Runnable() {
-			public void run() {
-				synchronized (zonedInPlayers) {
-					Iterator<Player> i = zonedInPlayers.iterator();
-					while (i.hasNext()) {
-						Player p = i.next();
-						if (p.getTimeSinceLastPacket() > LD_THRESHOLD) {
-							i.remove();
-							logOut(p);
-							disconnect(p, DisconnectReason.TIMEOUT);
-						}
-					}
-				}
-			}
-		};
 		disappearRunnable = new Runnable() {
 			public void run() {
 				synchronized (disappearPlayers) {
@@ -100,7 +76,8 @@ public class ConnectionService extends Service {
 					while (iter.hasNext()) {
 						DisappearPlayer p = iter.next();
 						if ((System.nanoTime()-p.getTime())/1E6 >= DISAPPEAR_THRESHOLD) {
-							disappear(p.getPlayer(), DisconnectReason.TIMEOUT);
+							DebugUtilities.printPlayerCharacterDebug(ConnectionService.this, p.getPlayer(), "Disappearing");
+							disappear(p.getPlayer(), false, DisconnectReason.APPLICATION);
 							iter.remove();
 						}
 					}
@@ -115,15 +92,7 @@ public class ConnectionService extends Service {
 	}
 	
 	@Override
-	public boolean initialize() {
-		incrementPopulation = getLocalDatabase().prepareStatement(INCREMENT_POPULATION_SQL);
-		decrementPopulation = getLocalDatabase().prepareStatement(DECREMENT_POPULATION_SQL);
-		return super.initialize();
-	}
-	
-	@Override
 	public boolean start() {
-		updateService.scheduleAtFixedRate(updateRunnable, 10, 10, TimeUnit.SECONDS);
 		return super.start();
 	}
 	
@@ -155,15 +124,8 @@ public class ConnectionService extends Service {
 		switch (pei.getEvent()) {
 			case PE_FIRST_ZONE: {
 				Player p = pei.getPlayer();
-				try {
-					synchronized (incrementPopulation) {
-						incrementPopulation.setInt(1, ProjectSWG.getGalaxyId());
-						incrementPopulation.executeUpdate();
-					}
-				} catch (SQLException e) {
-					Log.e("ConnectionService", "SQLException occured when trying to increase population value.");
-					e.printStackTrace();
-				}
+				CoreManager.getGalaxy().incrementPopulationCount();
+				removeFromLists(p);
 				synchronized (zonedInPlayers) {
 					zonedInPlayers.add(p);
 				}
@@ -173,16 +135,9 @@ public class ConnectionService extends Service {
 				clearPlayerFlag(pei.getPlayer(), pei.getEvent(), PlayerFlags.LD);
 				break;
 			case PE_LOGGED_OUT:
-				try {
-					synchronized (decrementPopulation) {
-						decrementPopulation.setInt(1, ProjectSWG.getGalaxyId());
-						decrementPopulation.executeUpdate();
-					}
-				} catch (SQLException e) {
-					Log.e("ConnectionService", "SQLException occured when trying to decrease population value.");
-					e.printStackTrace();
-				}
+				CoreManager.getGalaxy().decrementPopulationCount();
 				setPlayerFlag(pei.getPlayer(), pei.getEvent(), PlayerFlags.LD);
+				logOut(pei.getPlayer(), true);
 				break;
 			default:
 				break;
@@ -190,20 +145,11 @@ public class ConnectionService extends Service {
 	}
 	
 	private void onGalacticPacketIntent(GalacticPacketIntent gpi) {
-		if (gpi.getPacket() instanceof HeartBeat) {
-			Player p = gpi.getPlayerManager().getPlayerFromNetworkId(gpi.getNetworkId());
-			if (p != null)
+		Player p = gpi.getPlayerManager().getPlayerFromNetworkId(gpi.getNetworkId());
+		if (p != null) {
+			p.updateLastPacketTimestamp();
+			if (gpi.getPacket() instanceof HeartBeat)
 				p.sendPacket(gpi.getPacket());
-		} else if (gpi.getPacket() instanceof Disconnect) {
-			Player p = gpi.getPlayerManager().getPlayerFromNetworkId(gpi.getNetworkId());
-			if (p != null) {
-				if (p.getPlayerState() != PlayerState.DISCONNECTED) {
-					logOut(p);
-					disconnect(p, DisconnectReason.TIMEOUT);
-				} else {
-					disconnect(p, DisconnectReason.OTHER_SIDE_TERMINATED);
-				}
-			}
 		}
 	}
 	
@@ -211,7 +157,7 @@ public class ConnectionService extends Service {
 		logOut(fdi.getPlayer(), !fdi.getDisappearImmediately());
 		disconnect(fdi.getPlayer(), fdi.getDisconnectReason());
 		if (fdi.getDisappearImmediately())
-			disappear(fdi.getPlayer(), fdi.getDisconnectReason());
+			disappear(fdi.getPlayer(), fdi.getDisappearImmediately(), fdi.getDisconnectReason());
 	}
 	
 	private void onZonePlayerSwapIntent(ZonePlayerSwapIntent zpsi) {
@@ -221,9 +167,9 @@ public class ConnectionService extends Service {
 		removeFromLists(before);
 		updatePlayTime(before);
 		Log.i("ConnectionService", "Logged out %s with character %s", before.getUsername(), before.getCharacterName());
-		new PlayerEventIntent(before, before.getGalaxyName(), PlayerEvent.PE_LOGGED_OUT).broadcast();
+		new PlayerEventIntent(before, PlayerEvent.PE_LOGGED_OUT).broadcast();
 		Log.i("ConnectionService", "Disconnected %s with character %s and reason: %s", before.getUsername(), before.getCharacterName(), DisconnectReason.NEW_CONNECTION_ATTEMPT);
-		new CloseConnectionIntent(before.getConnectionId(), before.getNetworkId(), DisconnectReason.NEW_CONNECTION_ATTEMPT).broadcast();
+		new CloseConnectionIntent(before.getNetworkId(), DisconnectReason.NEW_CONNECTION_ATTEMPT).broadcast();
 		before.setPlayerState(PlayerState.DISCONNECTED);
 		creature.setOwner(after);
 	}
@@ -277,17 +223,11 @@ public class ConnectionService extends Service {
 		return player;
 	}
 	
-	private void logOut(Player p) {
-		logOut(p, true);
-	}
-	
 	private void logOut(Player p, boolean addToDisappear) {
 		System.out.println("[" + p.getUsername() +"] Logged out " + p.getCharacterName());
 		Log.i("ConnectionService", "Logged out %s with character %s", p.getUsername(), p.getCharacterName());
 		removeFromLists(p);
 		updatePlayTime(p);
-		p.setPlayerState(PlayerState.LOGGED_OUT);
-		new PlayerEventIntent(p, p.getGalaxyName(), PlayerEvent.PE_LOGGED_OUT).broadcast();
 		if (addToDisappear) {
 			synchronized (disappearPlayers) {
 				disappearPlayers.add(new DisappearPlayer(System.nanoTime(), p));
@@ -296,25 +236,21 @@ public class ConnectionService extends Service {
 		}
 	}
 	
-	private void disappear(Player p, DisconnectReason reason) {
+	private void disappear(Player p, boolean newConnection, DisconnectReason reason) {
 		System.out.println("[" + p.getUsername() +"] " + p.getCharacterName() + " disappeared");
-		Log.i("ConnectionService", "Disappeared %s with character %s", p.getUsername(), p.getCharacterName());
+		Log.i("ConnectionService", "Disappeared %s with character %s with reason %s", p.getUsername(), p.getCharacterName(), reason);
 		
-		switch(reason) {
-			case NEW_CONNECTION_ATTEMPT: // The player is attempting to re-zone
-				removeFromDisappear(p);
-				break;
-			default:
-				removeFromLists(p);
-				break;
-		}
+		if (newConnection) // Attempting to re-zone
+			removeFromDisappear(p);
+		else
+			removeFromLists(p);
 		p.setPlayerState(PlayerState.DISCONNECTED);
 		new PlayerEventIntent(p, PlayerEvent.PE_DISAPPEAR).broadcast();
 	}
 	
 	private void disconnect(Player player, DisconnectReason reason) {
-		Log.i("ConnectionService", "Disconnected %s with character %s and reason: %s", player.getUsername(), player.getCharacterName(), reason);
-		new CloseConnectionIntent(player.getConnectionId(), player.getNetworkId(), reason).broadcast();
+		Log.i("ConnectionService", "Disconnected %s with character %s with reason %s", player.getUsername(), player.getCharacterName(), reason);
+		new CloseConnectionIntent(player.getNetworkId(), reason).broadcast();
 	}
 	
 	private void updatePlayTime(Player p) {

@@ -1,6 +1,7 @@
 package utilities;
 
 import java.io.BufferedWriter;
+import java.io.Closeable;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -8,7 +9,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.nio.charset.Charset;
 
-public class SdbGenerator {
+public class SdbGenerator implements Closeable {
 	
 	private static final Charset ASCII = Charset.forName("ASCII");
 	
@@ -24,6 +25,10 @@ public class SdbGenerator {
 	
 	public void open() throws FileNotFoundException {
 		writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), ASCII));
+	}
+	
+	public void close() throws IOException {
+		writer.close();
 	}
 	
 	public void setColumnNames(String ... names) throws IOException {
@@ -50,10 +55,6 @@ public class SdbGenerator {
 			if (i+1 < line.length)
 				writer.write('\t');
 		}
-	}
-	
-	public void close() throws IOException {
-		writer.close();
 	}
 	
 }
