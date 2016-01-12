@@ -7,15 +7,17 @@ import resources.objects.creature.CreatureObject;
 
 public class SkillModService extends Service {
 
-    public SkillModService() {
-        registerForIntent(SkillModIntent.TYPE);
-    }
-
-    @Override
-    public void onIntentReceived(Intent i) {
-        SkillModIntent smi = (SkillModIntent) i;
-        CreatureObject creature = smi.getCreature();
-        creature.adjustSkillmod(smi.getSkillModName(), smi.getAdjustBase(), smi.getAdjustModifier());
-    }
-
+	public SkillModService() {
+		registerForIntent(SkillModIntent.TYPE);
+	}
+	
+	@Override
+	public void onIntentReceived(Intent i) {
+		SkillModIntent smi = (SkillModIntent) i;
+		
+		for(CreatureObject creature : smi.getAffectedCreatures()) {
+			creature.adjustSkillmod(smi.getSkillModName(), smi.getAdjustBase(), smi.getAdjustModifier());
+		}
+	}
+	
 }

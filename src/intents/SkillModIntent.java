@@ -10,14 +10,14 @@ public class SkillModIntent extends Intent {
 	private final String skillModName;
 	private final int adjustBase;
 	private final int adjustModifier;
-	private final CreatureObject creature;
+	private final CreatureObject[] affectedCreatures;
 	
-	public SkillModIntent(String skillModName, int adjustBase, int adjustModifier, CreatureObject creature) {
+	public SkillModIntent(String skillModName, int adjustBase, int adjustModifier, CreatureObject... affectedCreatures) {
 		super(TYPE);
 		this.skillModName = skillModName;
 		this.adjustBase = adjustBase;
 		this.adjustModifier = adjustModifier;
-		this.creature = creature;
+		this.affectedCreatures = affectedCreatures;
 	}
 
 	public int getAdjustModifier() {
@@ -32,8 +32,8 @@ public class SkillModIntent extends Intent {
 		return skillModName;
 	}
 	
-	public CreatureObject getCreature() {
-		return creature;
+	public CreatureObject[] getAffectedCreatures() {
+		return affectedCreatures;
 	}
 	
 }
