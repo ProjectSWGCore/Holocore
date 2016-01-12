@@ -643,7 +643,7 @@ public class CreatureObject extends TangibleObject {
 			// They already had this skillmod.
 			// All we need to do is adjust the base and the modifier and send an update from the SWGMap
 			skillMod.adjustBase(base);
-			skillMod.adjustBase(modifier);
+			skillMod.adjustModifier(modifier);
 			skillMods.update(skillModName, this);
 		}
 	}
