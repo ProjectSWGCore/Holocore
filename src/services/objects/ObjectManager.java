@@ -36,7 +36,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import intents.object.ObjectCreateIntent;
 import intents.object.ObjectCreatedIntent;
 import intents.object.ObjectIdRequestIntent;
 import intents.object.ObjectIdResponseIntent;
@@ -99,7 +98,7 @@ public class ObjectManager extends Manager {
 		registerForIntent(GalacticPacketIntent.TYPE);
 		registerForIntent(ObjectTeleportIntent.TYPE);
 		registerForIntent(ObjectIdRequestIntent.TYPE);
-		registerForIntent(ObjectCreateIntent.TYPE);
+		registerForIntent(ObjectCreatedIntent.TYPE);
 		registerForIntent(DeleteCharacterIntent.TYPE);
 	}
 	
@@ -197,16 +196,21 @@ public class ObjectManager extends Manager {
 			processGalacticPacketIntent((GalacticPacketIntent) i);
 		} else if (i instanceof ObjectIdRequestIntent) {
 			processObjectIdRequestIntent((ObjectIdRequestIntent) i);
-		} else if (i instanceof ObjectCreateIntent) {
-			processObjectCreateIntent((ObjectCreateIntent) i);
+		} else if (i instanceof ObjectCreatedIntent) {
+			processObjectCreatedIntent((ObjectCreatedIntent) i);
 		} else if (i instanceof DeleteCharacterIntent) {
 			deleteObject(((DeleteCharacterIntent) i).getCreature().getObjectId());
 		}
 	}
-
-	private void processObjectCreateIntent(ObjectCreateIntent intent) {
+	
+	private void processObjectCreatedIntent(ObjectCreatedIntent intent) {
 		SWGObject object = intent.getObject();
-		objectMap.put(object.getObjectId(), object);
+		synchronized (objectMap) {
+			if (object.getObjectId() >= maxObjectId) {
+				maxObjectId = object.getObjectId() + 1;
+			}
+			objectMap.put(object.getObjectId(), object);
+		}
 	}
 
 	private void processObjectIdRequestIntent(ObjectIdRequestIntent intent) {

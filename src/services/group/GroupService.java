@@ -31,7 +31,7 @@ import intents.GroupEventIntent;
 import intents.NotifyPlayersPacketIntent;
 import intents.PlayerEventIntent;
 import intents.chat.ChatRoomUpdateIntent;
-import intents.object.ObjectCreateIntent;
+import intents.object.ObjectCreatedIntent;
 import intents.object.ObjectIdRequestIntent;
 import intents.object.ObjectIdResponseIntent;
 import network.packets.swg.zone.chat.ChatSystemMessage;
@@ -297,7 +297,7 @@ public class GroupService extends Service {
 
 		groups.put(group.getObjectId(), group);
 
-		new ObjectCreateIntent(group).broadcast();
+		new ObjectCreatedIntent(group).broadcast();
 
 		String galaxy = player.getGalaxyName();
 		new ChatRoomUpdateIntent(getGroupChatPath(group.getObjectId(), galaxy), String.valueOf(group.getObjectId()), null,

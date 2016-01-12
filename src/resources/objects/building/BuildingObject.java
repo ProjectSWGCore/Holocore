@@ -29,8 +29,8 @@ package resources.objects.building;
 
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.client_info.ClientFactory;
-import resources.client_info.visitors.ObjectData;
 import resources.client_info.visitors.PortalLayoutData;
+import resources.client_info.visitors.ObjectData.ObjectDataAttribute;
 import resources.objects.SWGObject;
 import resources.objects.cell.CellObject;
 import resources.objects.tangible.TangibleObject;
@@ -84,7 +84,7 @@ public class BuildingObject extends TangibleObject {
 		if (!added || !(object instanceof CellObject))
 			return added;
 
-		String portalFile = String.valueOf(getTemplateAttribute(ObjectData.PORTAL_LAYOUT));
+		String portalFile = (String) getTemplateAttribute(ObjectDataAttribute.PORTAL_LAYOUT_FILENAME);
 		if (portalFile == null || portalFile.isEmpty())
 			return true;
 

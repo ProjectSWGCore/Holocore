@@ -40,6 +40,7 @@ import network.packets.swg.zone.object_controller.DataTransformWithParent;
 import resources.Location;
 import resources.Terrain;
 import resources.buildout.BuildoutArea;
+import resources.client_info.visitors.ObjectData.ObjectDataAttribute;
 import resources.common.CRC;
 import resources.containers.ContainerPermissions;
 import resources.containers.ContainerResult;
@@ -62,6 +63,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Hashtable;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -76,7 +78,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	private final HashMap <String, SWGObject> slots; // HashMap used for null value support
 	private final Map<Long, SWGObject> containedObjects;
 	private final Map <String, String> attributes;
-	private final Map <String, Object> templateAttributes;
+	private final Map <ObjectDataAttribute, Object> templateAttributes;
 	private final BaselineType objectType;
 	private ContainerPermissions containerPermissions;
 	private transient Set <SWGObject> objectsAware;
@@ -109,8 +111,8 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		this.objectsAware = new HashSet<SWGObject>();
 		this.slots = new HashMap<>();
 		this.containedObjects = Collections.synchronizedMap(new HashMap<Long, SWGObject>());
-		this.attributes = new LinkedHashMap<String, String>();
-		this.templateAttributes = new HashMap<String, Object>();
+		this.attributes = new LinkedHashMap<>();
+		this.templateAttributes = new Hashtable<>();
 		this.containerPermissions = new DefaultPermissions();
 		this.objectType = objectType;
 	}
@@ -503,11 +505,11 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		return areaId;
 	}
 	
-	public Object getTemplateAttribute(String key) {
+	public Object getTemplateAttribute(ObjectDataAttribute key) {
 		return templateAttributes.get(key);
 	}
 
-	public void setTemplateAttribute(String key, Object value) {
+	public void setTemplateAttribute(ObjectDataAttribute key, Object value) {
 		templateAttributes.put(key, value);
 	}
 	
@@ -540,7 +542,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	}
 
 	public int getMaxContainerSize() {
-		Object volume = templateAttributes.get("containerVolumeLimit");
+		Object volume = templateAttributes.get(ObjectDataAttribute.CONTAINER_VOLUME_LIMIT);
 		if (volume == null)
 			return 0;
 		try {

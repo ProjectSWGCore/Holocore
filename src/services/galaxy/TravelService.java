@@ -509,11 +509,13 @@ public class TravelService extends Service {
 		String template = object.getTemplate();
 		
 		// There are non-functional shuttles, which are StaticObject. We run an instanceof check to make sure that we ignore those.
-		if((template.contains("shared_player_shuttle") || template.contains("shared_player_transport")) && object instanceof CreatureObject) {
+		if ((template.contains("shared_player_shuttle") || template.contains("shared_player_transport")) && object instanceof CreatureObject) {
 			Location shuttleLocation = object.getLocation();
 			TravelPoint pointForShuttle = getNearestTravelPoint(shuttleLocation);
 			CreatureObject shuttle = (CreatureObject) object;
 			
+			if (pointForShuttle == null)
+				return;
 			// Assign the shuttle to the nearest travel point
 			pointForShuttle.setShuttle(shuttle);
 			
