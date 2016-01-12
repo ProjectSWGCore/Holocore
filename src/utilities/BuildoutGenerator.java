@@ -120,13 +120,12 @@ public class BuildoutGenerator {
 	private void generateObjectFile(File objectFile, List<SWGObject> objects) throws IOException {
 		try (SdbGenerator gen = new SdbGenerator(objectFile)) {
 			gen.open();
-			gen.setColumnNames("id", "buildout_id", "area_id", "templateCrc", "containerId", "x", "y", "z", "orientation_x", "orientation_y", "orientation_z", "orientation_w", "radius", "cellIndex");
+			gen.setColumnNames("id", "buildout_depth", "area_id", "templateCrc", "containerId", "x", "y", "z", "orientation_x", "orientation_y", "orientation_z", "orientation_w", "radius", "cellIndex");
 			gen.setColumnTypes("INTEGER PRIMARY KEY", intType, intType, intType, intType, floatType, floatType, floatType, floatType, floatType, floatType, floatType, floatType, intType);
-			long buildoutId = 1;
 			int objNum = 0;
 			int percent = 0;
 			for (SWGObject obj : objects) {
-				writeObject(gen, obj, buildoutId++);
+				writeObject(gen, obj, getBuildoutDepth(obj));
 				while (percent / 100.0 * objects.size() <= objNum) {
 					System.out.print(".");
 					percent++;
@@ -135,6 +134,16 @@ public class BuildoutGenerator {
 			}
 			System.out.println();
 		}
+	}
+	
+	private int getBuildoutDepth(SWGObject object) { 
+		return getBuildoutDepth(object, 0);
+	}
+	
+	private int getBuildoutDepth(SWGObject object, int depth) {
+		if (object.getParent() == null)
+			return depth;
+		return getBuildoutDepth(object.getParent(), depth+1);
 	}
 	
 	private void addClientObject(List<SWGObject> objects, SWGObject obj) {

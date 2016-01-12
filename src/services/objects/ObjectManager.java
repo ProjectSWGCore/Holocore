@@ -130,15 +130,7 @@ public class ObjectManager extends Manager {
 	}
 	
 	private void loadClientObjects() {
-		for (SWGObject obj : clientBuildoutService.loadClientObjects().values()) {
-			synchronized (objectMap) {
-				if (obj.getObjectId() >= maxObjectId) {
-					maxObjectId = obj.getObjectId() + 1;
-				}
-			}
-			objectMap.put(obj.getObjectId(), obj);
-			new ObjectCreatedIntent(obj).broadcast();
-		}
+		clientBuildoutService.loadClientObjects();
 	}
 	
 	private void loadObject(SWGObject obj) {

@@ -29,6 +29,7 @@ package resources.client_info.visitors;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
@@ -39,26 +40,106 @@ import resources.client_info.SWGFile;
 
 public class ObjectData extends ClientData {
 
-	private final Map<String, Object> attributes = new HashMap<>();
+	private final Map<ObjectDataAttribute, Object> attributes = new HashMap<>();
 	private final List<String> parsedFiles = new ArrayList<>();
 	
-	public static final String APPEARANCE_FILE = "appearanceFilename";
-	public static final String ARRANGEMENT_FILE = "arrangementDescriptorFilename";
-	public static final String CONTAINER_TYPE = "containerType";
-	public static final String VOLUME_LIMIT = "containerVolumeLimit";
-	public static final String DETAIL_STF = "detailedDescription";
-	public static final String OBJ_STF = "objectName";
-	public static final String PORTAL_LAYOUT = "portalLayoutFilename";
-	public static final String SLOT_DESCRIPTOR = "slotDescriptorFilename";
-
+	public enum ObjectDataAttribute {
+		ACCELERATION							("acceleration"),
+		ANIMATION_MAP_FILENAME					("animationMapFilename"),
+		APPEARANCE_FILENAME						("appearanceFilename"),
+		ARRANGEMENT_DESCRIPTOR_FILENAME			("arrangementDescriptorFilename"),
+		ATTACK_TYPE								("attackType"),
+		CAMERA_HEIGHT							("cameraHeight"),
+		CERTIFICATIONS_REQUIRED					("certificationsRequired"),
+		CLEAR_FLORA_RADIUS						("clearFloraRadius"),
+		CLIENT_DATA_FILE						("clientDataFile"),
+		CLIENT_VISIBILITY_FLAG					("clientVisabilityFlag"),
+		COLLISION_ACTION_BLOCK_FLAGS			("collisionActionBlockFlags"),
+		COLLISION_ACTION_FLAGS					("collisionActionFlags"),
+		COLLISION_ACTION_PASS_FLAGS				("collisionActionPassFlags"),
+		COLLISION_HEIGHT						("collisionHeight"),
+		COLLISION_LENGTH						("collisionLength"),
+		COLLISION_MATERIAL_BLOCK_FLAGS			("collisionMaterialBlockFlags"),
+		COLLISION_MATERIAL_FLAGS				("collisionMaterialFlags"),
+		COLLISION_MATERIAL_PASS_FLAGS			("collisionMaterialPassFlags"),
+		COLLISION_OFFSET_X						("collisionOffsetX"),
+		COLLISION_OFFSET_Z						("collisionOffsetZ"),
+		COLLISION_RADIUS						("collisionRadius"),
+		CONST_STRING_CUSTOMIZATION_VARIABLES	("constStringCustomizationVariables"),
+		CONTAINER_TYPE							("containerType"),
+		CONTAINER_VOLUME_LIMIT					("containerVolumeLimit"),
+		CUSTOMIZATION_VARIABLE_MAPPING			("customizationVariableMapping"),
+		DETAILED_DESCRIPTION					("detailedDescription"),
+		FORCE_NO_COLLISION						("forceNoCollision"),
+		GAME_OBJECT_TYPE						("gameObjectType"),
+		GENDER									("gender"),
+		INTERIOR_LAYOUT_FILENAME				("interiorLayoutFileName"),
+		LOCATION_RESERVATION_RADIUS				("locationReservationRadius"),
+		LOOK_AT_TEXT							("lookAtText"),
+		MOVEMENT_DATATABLE						("movementDatatable"),
+		NICHE									("niche"),
+		NO_BUILD_RADIUS							("noBuildRadius"),
+		OBJECT_NAME								("objectName"),
+		ONLY_VISIBLE_IN_TOOLS					("onlyVisibleInTools"),
+		PALETTE_COLOR_CUSTOMIZATION_VARIABLES	("paletteColorCustomizationVariables"),
+		PORTAL_LAYOUT_FILENAME					("portalLayoutFilename"),
+		POSTURE_ALIGN_TO_TERRAIN				("postureAlignToTerrain"),
+		RACE									("race"),
+		RANGED_INT_CUSTOMIZATION_VARIABLES		("rangedIntCustomizationVariables"),
+		SCALE									("scale"),
+		SCALE_THRESHOLD_BEFORE_EXTENT_TEST		("scaleThresholdBeforeExtentTest"),
+		SEND_TO_CLIENT							("sendToClient"),
+		SLOPE_MOD_ANGLE							("slopeModAngle"),
+		SLOPE_MOD_PERCENT						("slopeModPercent"),
+		SLOT_DESCRIPTOR_FILENAME				("slotDescriptorFilename"),
+		SNAP_TO_TERRAIN							("snapToTerrain"),
+		SOCKET_DESTINATIONS						("socketDestinations"),
+		SPECIES									("species"),
+		SPEED									("speed"),
+		STEP_HEIGHT								("stepHeight"),
+		STRUCTURE_FOOTPRINT_FILENAME			("structureFootprintFileName"),
+		SURFACE_TYPE							("surfaceType"),
+		SWIM_HEIGHT								("swimHeight"),
+		TARGETABLE								("targetable"),
+		TERRAIN_MODIFICATION_FILENAME			("terrainModificationFileName"),
+		TINT_PALETTE							("tintPalette"),
+		TURN_RADIUS								("turnRate"),
+		USE_STRUCTURE_FOOTPRINT_OUTLINE			("useStructureFootprintOutline"),
+		WARP_TOLERANCE							("warpTolerance"),
+		WATER_MOD_PERCENT						("waterModPercent"),
+		WEAPON_EFFECT							("weaponEffect"),
+		WEAPON_EFFECT_INDEX						("weaponEffectIndex");
+		
+		private static final Map<String, ObjectDataAttribute> ATTRIBUTES = new Hashtable<>(values().length);
+		
+		static {
+			for (ObjectDataAttribute attr : values())
+				ATTRIBUTES.put(attr.getName(), attr);
+		}
+		
+		private String name;
+		
+		ObjectDataAttribute(String name) {
+			this.name = name;
+		}
+		
+		public String getName() {
+			return name;
+		}
+		
+		public static ObjectDataAttribute getForName(String name) {
+			return ATTRIBUTES.get(name);
+		}
+	}
+	
 	public ObjectData() {}
 
 	@Override
 	public void readIff(SWGFile iff) {
-		while(iff.enterNextForm() != null)
+		while (iff.enterNextForm() != null)
 			readNextForm(iff);
 	}
-
+	
 	private void readNextForm(SWGFile iff) {
 		IffNode next;
 		while ((next = iff.enterNextForm()) != null) {
@@ -73,7 +154,7 @@ public class ObjectData extends ClientData {
 
 		iff.exitForm();
 	}
-
+	
 	private void readVersionForm(SWGFile iff) {
 		IffNode attributeChunk;
 		while ((attributeChunk = iff.enterChunk("XXXX")) != null) {
@@ -106,67 +187,66 @@ public class ObjectData extends ClientData {
 
 	// Try and parse the attribute to map w/ appropriate Object type.
 	private void parseAttributeChunk(IffNode chunk) {
-		String attr = chunk.readString();
+		ObjectDataAttribute attr = ObjectDataAttribute.getForName(chunk.readString());
 		switch (attr) {
-		case "appearanceFilename": putString(chunk, attr); break;
-		case "arrangementDescriptorFilename": putString(chunk,attr); break;
-		case "containerType": putInt(chunk, attr); break;
-		case "containerVolumeLimit": putInt(chunk, attr);break;
-		case "detailedDescription": putStfString(chunk, attr); break;
-		case "forceNoCollision": putBoolean(chunk, attr); break;
-		case "gender": putInt(chunk, attr); break;
-		case "objectName": putStfString(chunk, attr); break;
-		case "portalLayoutFilename": putString(chunk, attr); break;
-		case "slotDescriptorFilename": putString(chunk, attr); break;
-		case "structureFootprintFileName": putString(chunk, attr); break;
-		case "useStructureFootprintOutline": putBoolean(chunk, attr); break;
-		default:/*System.out.println("Unknown attribute: " + attr);*/ break;
+			case APPEARANCE_FILENAME: putString(chunk, attr); break;
+			case ARRANGEMENT_DESCRIPTOR_FILENAME: putString(chunk,attr); break;
+			case CONTAINER_TYPE: putInt(chunk, attr); break;
+			case CONTAINER_VOLUME_LIMIT: putInt(chunk, attr);break;
+			case DETAILED_DESCRIPTION: putStfString(chunk, attr); break;
+			case FORCE_NO_COLLISION: putBoolean(chunk, attr); break;
+			case GENDER: putInt(chunk, attr); break;
+			case OBJECT_NAME: putStfString(chunk, attr); break;
+			case PORTAL_LAYOUT_FILENAME: putString(chunk, attr); break;
+			case SLOT_DESCRIPTOR_FILENAME: putString(chunk, attr); break;
+			case STRUCTURE_FOOTPRINT_FILENAME: putString(chunk, attr); break;
+			case TARGETABLE: putBoolean(chunk, attr); break;
+			case USE_STRUCTURE_FOOTPRINT_OUTLINE: putBoolean(chunk, attr); break;
+			default: /*Log.w("ObjectData", "Unknown attribute: %s", attr);*/ break;
 		}
 	}
 	
-	private void putStfString(IffNode chunk, String attr) {
+	private void putStfString(IffNode chunk, ObjectDataAttribute attr) {
 		if (chunk.readByte() == 0)
 			return;
 
-		chunk.readByte();
-
-		String stfFile = chunk.readString();
+		String stfFile = getString(chunk);
 		if (stfFile.isEmpty())
 			return;
+		attributes.put(attr, stfFile + ":" + getString(chunk));
+	}
+	
+	private String getString(IffNode chunk) {
+		chunk.readByte();
+		return chunk.readString();
+	}
+	
+	private void putString(IffNode chunk, ObjectDataAttribute attr) {
+		if (chunk.readByte() == 0)
+			return;
+		String s = chunk.readString();
+		if (s.isEmpty())
+			return;
 		
-		chunk.readByte(); // 0x00, 0x01 (Shows up as well even if stfFile prior data.get() is 0)
-		
-		String stfName = chunk.readString();
-
-		attributes.put(attr, stfFile + ":" + stfName);
+		attributes.put(attr, s);
 	}
 	
-	private void putString(IffNode chunk, String attr) {
-		if (chunk.readByte() != 0) {
-			String s = chunk.readString();
-			if (s.isEmpty())
-				return;
-			
-			attributes.put(attr, s);
-		}
+	private void putInt(IffNode chunk, ObjectDataAttribute attr) {
+		if (chunk.readByte() == 0)
+			return; // This should always be 1 if there is an int (note that 0x20 follows after this even if it's 0)
+		chunk.readByte(); // 0x20 byte for all it seems, unsure what it means
+		attributes.put(attr, chunk.readInt());
 	}
 	
-	private void putInt(IffNode chunk, String attr) {
-		if (chunk.readByte() != 0) { // This should always be 1 if there is an int (note that 0x20 follows after this even if it's 0)
-			chunk.readByte(); // 0x20 byte for all it seems, unsure what it means
-			attributes.put(attr, chunk.readInt());
-		}
-	}
-	
-	private void putBoolean(IffNode chunk, String attr) {
+	private void putBoolean(IffNode chunk, ObjectDataAttribute attr) {
 		attributes.put(attr, (chunk.readByte() == 1));
 	}
 	
-	public Object getAttribute(String attribute) {
+	public Object getAttribute(ObjectDataAttribute attribute) {
 		return attributes.get(attribute);
 	}
 	
-	public Map<String, Object> getAttributes() {
+	public Map<ObjectDataAttribute, Object> getAttributes() {
 		return attributes;
 	}
 }
