@@ -28,6 +28,7 @@
 package resources.objects.buildouts;
 
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
@@ -45,11 +46,11 @@ public class BuildoutLoader {
 	private static final CrcStringTableData crcTable = (CrcStringTableData) ClientFactory.getInfoFromFile("misc/object_template_crc_string_table.iff");
 	
 	private final Map <Long, SWGObject> objectTable;
-	private final List <SWGObject> objects;
+	private final Map<String, List <SWGObject>> objects;
 	
 	public BuildoutLoader() {
 		objectTable = new HashMap<>();
-		objects = new LinkedList<>();
+		objects = new Hashtable<String, List<SWGObject>>();
 	}
 	
 	public void loadAllBuildouts() {
@@ -63,7 +64,7 @@ public class BuildoutLoader {
 			if (table.getCell(row, 0).equals(terrain.name().toLowerCase(Locale.ENGLISH))) {
 				TerrainBuildoutLoader loader = new TerrainBuildoutLoader(crcTable, terrain);
 				loader.load(row);
-				objects.addAll(loader.getObjects());
+				objects.putAll(loader.getObjects());
 				objectTable.putAll(loader.getObjectTable());
 				return;
 			}
@@ -76,7 +77,7 @@ public class BuildoutLoader {
 		return objectTable;
 	}
 	
-	public List <SWGObject> getObjects() {
+	public Map<String, List <SWGObject>> getObjects() {
 		return objects;
 	}
 	

@@ -75,7 +75,7 @@ import utilities.namegen.SWGNameGenerator;
 
 public class CharacterCreationService extends Service {
 	
-	private static final String CREATE_CHARACTER_SQL = "INSERT INTO characters (id, name, race, userId, galaxyId) VALUES (?, ?, ?, ?, ?)";
+	private static final String CREATE_CHARACTER_SQL = "INSERT INTO characters (id, name, race, userId) VALUES (?, ?, ?, ?)";
 	private static final String GET_CHARACTER_SQL = "SELECT * FROM characters WHERE name == ?";
 	private static final String GET_LIKE_CHARACTER_SQL = "SELECT name FROM characters WHERE name ilike ?"; // NOTE: ilike is not SQL standard. It is an extension for postgres only.
 	private static final String GET_CHARACTER_COUNT_SQL = "SELECT count(*) FROM characters WHERE userId = ?";
@@ -254,7 +254,6 @@ public class CharacterCreationService extends Service {
 				createCharacter.setString(2, name);
 				createCharacter.setString(3, player.getCreatureObject().getRace().getFilename());
 				createCharacter.setInt(4, player.getUserId());
-				createCharacter.setInt(5, player.getGalaxyId());
 				return createCharacter.executeUpdate() == 1;
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -471,7 +470,7 @@ public class CharacterCreationService extends Service {
 		if (player == null || assignedTo == player)
 			return false;
 		PlayerState state = player.getPlayerState();
-		return state != PlayerState.DISCONNECTED && state != PlayerState.LOGGED_OUT;
+		return state != PlayerState.DISCONNECTED;
 	}
 	
 }

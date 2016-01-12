@@ -57,7 +57,7 @@ public final class ObjectCreator {
 			return null;
 		if (!template.endsWith(".iff"))
 			return null;
-		SWGObject obj = createObjectFromType(objectId, getFirstTemplatePart(template.substring(7, template.length()-7-4)));
+		SWGObject obj = createObjectFromType(objectId, getFirstTemplatePart(template.substring(7, template.length())));
 		if (obj == null)
 			return null;
 		obj.setTemplate(template);
@@ -84,7 +84,7 @@ public final class ObjectCreator {
 			case "tangible":			return new TangibleObject(objectId);
 			case "waypoint":			return new WaypointObject(objectId);
 			case "weapon":				return new WeaponObject(objectId);
-			default:					return null;
+			default:					System.err.println("Unknown type: " + type); return null;
 		}
 	}
 

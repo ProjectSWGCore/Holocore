@@ -143,8 +143,8 @@ public class ObjectManager extends Manager {
 	
 	private void loadObject(SWGObject obj) {
 		obj.setOwner(null);
-		// if player is not a player
-		if (!(obj instanceof CreatureObject && ((CreatureObject) obj).hasSlot("ghost")))
+		// if creature is not a player
+		if (!(obj instanceof CreatureObject && ((CreatureObject) obj).isLoggedOutPlayer()))
 			objectAwareness.add(obj);
 		if (obj instanceof CreatureObject && ((CreatureObject) obj).getPlayerObject() != null) {
 			if (!obj.hasSlot("bank")) {
@@ -230,9 +230,8 @@ public class ObjectManager extends Manager {
 		Packet packet = gpi.getPacket();
 		if (packet instanceof SelectCharacter) {
 			PlayerManager pm = gpi.getPlayerManager();
-			String galaxy = gpi.getGalaxy().getName();
 			long characterId = ((SelectCharacter) packet).getCharacterId();
-			zoneInCharacter(pm, galaxy, gpi.getNetworkId(), characterId);
+			zoneInCharacter(pm, gpi.getNetworkId(), characterId);
 		}
 	}
 	
@@ -250,7 +249,7 @@ public class ObjectManager extends Manager {
 				return null;
 			obj.clearAware();
 			objectAwareness.remove(obj);
-			Log.i("ObjectManager", "Deleted object %d [%s]", obj.getObjectId(), obj.getTemplate());
+			Log.v("ObjectManager", "Deleted object %d [%s]", obj.getObjectId(), obj.getTemplate());
 			return obj;
 		}
 	}
@@ -336,13 +335,13 @@ public class ObjectManager extends Manager {
 			if (addToDatabase) {
 				database.put(objectId, obj);
 			}
-			Log.i("ObjectManager", "Created object %d [%s]", obj.getObjectId(), obj.getTemplate());
+			Log.v("ObjectManager", "Created object %d [%s]", obj.getObjectId(), obj.getTemplate());
 			new ObjectCreatedIntent(obj).broadcast();
 			return obj;
 		}
 	}
 	
-	private void zoneInCharacter(PlayerManager playerManager, String galaxy, long netId, long characterId) {
+	private void zoneInCharacter(PlayerManager playerManager, long netId, long characterId) {
 		Player player = playerManager.getPlayerFromNetworkId(netId);
 		if (player == null) {
 			Log.e("ObjectManager", "Unable to zone in null player '%d'", netId);
@@ -367,15 +366,7 @@ public class ObjectManager extends Manager {
 			sendClientFatal(player, "Failed to zone", "There has been an internal server error: Null Ghost.\nPlease delete your character and create a new one", 10, TimeUnit.SECONDS);
 			return;
 		}
-		if (creatureObj.getParent() != null) {
-			objectAwareness.update(creatureObj);
-			Log.d("ObjectManager", "Zoning in to %s/%s - %s", creatureObj.getParent(), creatureObj.getTerrain(), creatureObj.getLocation().getPosition());
-		}else {
-			objectAwareness.remove(creatureObj);
-			objectAwareness.add(creatureObj);
-			Log.d("ObjectManager", "Zoning in to %s - %s", creatureObj.getTerrain(), creatureObj.getLocation().getPosition());
-		}
-		new RequestZoneInIntent(player, (CreatureObject) creatureObj, galaxy).broadcast();
+		new RequestZoneInIntent(player, (CreatureObject) creatureObj, true).broadcast();
 	}
 	
 	private void sendClientFatal(Player player, String title, String message, long timeToRead, TimeUnit time) {

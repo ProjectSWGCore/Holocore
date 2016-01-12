@@ -34,6 +34,7 @@ import intents.player.DeleteCharacterIntent;
 import resources.Location;
 import resources.Terrain;
 import resources.commands.ICmdCallback;
+import resources.network.DisconnectReason;
 import resources.objects.SWGObject;
 import resources.objects.building.BuildingObject;
 import resources.objects.cell.CellObject;
@@ -55,8 +56,6 @@ import services.player.PlayerManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
-
-import network.packets.soe.Disconnect.DisconnectReason;
 
 /**
  * Created by Waverunner on 8/19/2015
@@ -142,7 +141,7 @@ public class QaToolCmdCallback implements ICmdCallback {
 				new DeleteCharacterIntent((CreatureObject) target).broadcast();
 				Player owner = target.getOwner();
 				if (owner != null)
-					new CloseConnectionIntent(owner.getConnectionId(), owner.getNetworkId(), DisconnectReason.APPLICATION).broadcast();
+					new CloseConnectionIntent(owner.getNetworkId(), DisconnectReason.APPLICATION).broadcast();
 				return;
 			}
 			Log.i("QA", "[%s] Requested deletion of object: %s", player.getUsername(), target);

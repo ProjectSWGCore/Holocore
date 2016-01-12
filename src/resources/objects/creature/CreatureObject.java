@@ -57,8 +57,9 @@ public class CreatureObject extends TangibleObject {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private transient GroupInviterData inviterData = new GroupInviterData(0, null, "", 0);
-	private transient long lastReserveOperation	= 0;
+	private transient GroupInviterData inviterData	= new GroupInviterData(0, null, "", 0);
+	private transient long lastReserveOperation		= 0;
+	private transient long groupId					= 0;
 	
 	private Posture	posture					= Posture.UPRIGHT;
 	private Race	race					= Race.HUMAN; 
@@ -95,12 +96,12 @@ public class CreatureObject extends TangibleObject {
 	private boolean performing				= false;
 	private boolean shownOnRadar			= true;
 	private boolean beast					= false;
-	private long 	groupId					= 0;
 	private byte 	factionRank				= 0;
 	private long 	ownerId					= 0;
 	private int 	battleFatigue			= 0;
 	private long 	statesBitmask			= 0;
 	private String	currentCity				= "";
+	private long	lastTransform			= 0;
 	private HologramColour hologramColour = HologramColour.DEFAULT;
 	
 	private SWGList<Integer>	baseAttributes	= new SWGList<Integer>(BaselineType.CREO, 1, 2);
@@ -127,7 +128,10 @@ public class CreatureObject extends TangibleObject {
 
 	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
 		ois.defaultReadObject();
+		// Transient Variables
 		inviterData = new GroupInviterData(0, null, "", 0);
+		lastReserveOperation = 0;
+		groupId = 0;
 	}
 
 	public void removeEquipment(SWGObject obj) {
@@ -274,14 +278,31 @@ public class CreatureObject extends TangibleObject {
 		return currentCity;
 	}
 	
+	public double getTimeSinceLastTransform() {
+		return (System.nanoTime()-lastTransform)/1E6;
+	}
+	
 	public PlayerObject getPlayerObject() {
-		return (PlayerObject) (hasSlot("ghost") ? getSlottedObject("ghost") : null);
+		return (PlayerObject) getSlottedObject("ghost");
+	}
+	
+	public boolean isPlayer() {
+		return getSlottedObject("ghost") != null;
+	}
+	
+	public boolean isLoggedInPlayer() {
+		return getOwner() != null && isPlayer();
+	}
+	
+	public boolean isLoggedOutPlayer() {
+		return getOwner() == null && isPlayer();
 	}
 	
 	public void setPosture(Posture posture) {
 		this.posture = posture;
 		sendDelta(3, 13, posture.getId());
-		sendObserversAndSelf(new PostureUpdate(getObjectId(), posture));
+		if (isPlayer())
+			sendObserversAndSelf(new PostureUpdate(getObjectId(), posture));
 	}
 	
 	public void setRace(Race race) {
@@ -437,6 +458,10 @@ public class CreatureObject extends TangibleObject {
 	
 	public void setCurrentCity(String currentCity) {
 		this.currentCity = currentCity;
+	}
+	
+	public void updateLastTransformTime() {
+		lastTransform = System.nanoTime();
 	}
 	
 	public String getMoodAnimation() {
@@ -888,11 +913,4 @@ public class CreatureObject extends TangibleObject {
 		super.createBaseline9(target, bb);
 	}
 	
-	public void sendDelta(int type, int update, Object value) {
-		sendDelta(BaselineType.CREO, type, update, value);
-	}
-	
-	public void sendDelta(int type, int update, Object value, StringType strType) {
-		sendDelta(BaselineType.CREO, type, update, value, strType);
-	}
 }

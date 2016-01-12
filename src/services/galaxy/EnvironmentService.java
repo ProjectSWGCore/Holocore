@@ -85,6 +85,17 @@ public final class EnvironmentService extends Service {
 	}
 	
 	@Override
+	public boolean stop() {
+		executor.shutdownNow();
+		try {
+			executor.awaitTermination(3000, TimeUnit.MILLISECONDS);
+		} catch (InterruptedException e) {
+			
+		}
+		return super.stop();
+	}
+	
+	@Override
 	public void onIntentReceived(Intent i) {
 		if(i.getType().equals(PlayerEventIntent.TYPE))
 			if (i instanceof PlayerEventIntent) {

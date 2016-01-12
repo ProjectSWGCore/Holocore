@@ -27,21 +27,16 @@
 ***********************************************************************************/
 package services.network;
 
-import resources.Galaxy;
 import resources.control.Manager;
 
 public class NetworkManager extends Manager {
 	
-	private NetworkListenerService netListenerService;
-	private NetworkClientManager netClientManager;
+	private final NetworkClientManager netClientManager;
 	
-	public NetworkManager(Galaxy galaxy) {
-		netListenerService = new NetworkListenerService(galaxy);
-		netClientManager = new NetworkClientManager(netListenerService);
-		netListenerService.setPacketReceiver(netClientManager);
+	public NetworkManager() {
+		netClientManager = new NetworkClientManager();
 		
 		addChildService(netClientManager);
-		addChildService(netListenerService);
 	}
 	
 }

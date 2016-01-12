@@ -13,6 +13,7 @@ public class BuildoutArea implements Comparable<BuildoutArea> {
 	private double x2;
 	private double z2;
 	private boolean adjustCoordinates;
+	private boolean loaded;
 	
 	private BuildoutArea() {
 		
@@ -52,6 +53,14 @@ public class BuildoutArea implements Comparable<BuildoutArea> {
 	
 	public boolean isAdjustCoordinates() {
 		return adjustCoordinates;
+	}
+	
+	public boolean isLoaded() {
+		return loaded;
+	}
+	
+	public void setLoaded(boolean loaded) {
+		this.loaded = loaded;
 	}
 	
 	public int hashCode() {

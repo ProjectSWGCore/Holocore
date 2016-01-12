@@ -27,46 +27,36 @@
 ***********************************************************************************/
 package intents.network;
 
-import network.packets.soe.Disconnect.DisconnectReason;
 import resources.control.Intent;
+import resources.network.DisconnectReason;
 
 
 public class CloseConnectionIntent extends Intent {
 	
 	public static final String TYPE = "CloseConnectionIntent";
 	
-	private int connId;
 	private long networkId;
 	private DisconnectReason reason;
 	
-	public CloseConnectionIntent(int connId, long networkId, DisconnectReason reason) {
+	public CloseConnectionIntent(long networkId, DisconnectReason reason) {
 		super(TYPE);
-		setConnectionId(connId);
 		setNetworkId(networkId);
-		setReason(reason);
-	}
-	
-	public void setConnectionId(int connId) {
-		this.connId = connId;
+		setDisconnectReason(reason);
 	}
 	
 	public void setNetworkId(long networkId) {
 		this.networkId = networkId;
 	}
 	
-	public void setReason(DisconnectReason reason) {
+	public void setDisconnectReason(DisconnectReason reason) {
 		this.reason = reason;
-	}
-	
-	public int getConnectionId() {
-		return connId;
 	}
 	
 	public long getNetworkId() {
 		return networkId;
 	}
 	
-	public DisconnectReason getReason() {
+	public DisconnectReason getDisconnectReason() {
 		return reason;
 	}
 	
