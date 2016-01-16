@@ -27,10 +27,9 @@
 ***********************************************************************************/
 package services.objects;
 
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Hashtable;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -122,7 +121,11 @@ public class ObjectManager extends Manager {
 	}
 	
 	private void loadClientObjects() {
-		clientBuildoutService.loadClientObjects();
+		Collection<SWGObject> objects = clientBuildoutService.loadClientObjects();
+		for (SWGObject object : objects) {
+			putObject(object);
+			new ObjectCreatedIntent(object).broadcast();
+		}
 	}
 	
 	private void loadObject(SWGObject obj) {

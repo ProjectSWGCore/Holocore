@@ -3,12 +3,14 @@ package services.objects;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import intents.object.ObjectCreatedIntent;
 import intents.player.PlayerTransformedIntent;
 import resources.Location;
 import resources.Terrain;
@@ -22,7 +24,6 @@ import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.cell.CellObject;
 import resources.objects.creature.CreatureObject;
-import resources.server_info.Config;
 import resources.server_info.Log;
 import resources.server_info.RelationalServerData;
 import resources.server_info.RelationalServerFactory;
@@ -30,11 +31,11 @@ import resources.server_info.RelationalServerFactory;
 public class ClientBuildoutService extends Service {
 	
 	private static final String GET_BUILDOUT_AREAS = "SELECT * FROM areas ORDER BY area_name ASC, event ASC";
-	private static final String GET_CLIENT_OBJECTS_SQL = "SELECT objects.id, objects.area_id, objects.templateCrc, objects.containerId, "
+	private static final String GET_CLIENT_OBJECTS_SQL = "SELECT objects.id, objects.area_id, objects.template_crc, objects.container_id, "
 			+ "objects.x, objects.y, objects.z, objects.orientation_x, objects.orientation_y, objects.orientation_z, objects.orientation_w, "
-			+ "objects.radius, objects.cellIndex "
+			+ "objects.radius, objects.cell_index "
 			+ "FROM objects "
-			+ "ORDER BY buildout_depth, area_id ASC";
+			+ "ORDER BY buildout_id ASC";
 	
 	private final CrcStringTableData strings;
 	private final List<BuildoutArea> areas;
@@ -43,7 +44,7 @@ public class ClientBuildoutService extends Service {
 	public ClientBuildoutService() {
 		strings = (CrcStringTableData) ClientFactory.getInfoFromFile("misc/object_template_crc_string_table.iff");
 		areas = new ArrayList<>();
-		areasById = new Hashtable<>(2100); // Number of buildout areas
+		areasById = new Hashtable<>(1000); // Number of buildout areas
 		
 		registerForIntent(PlayerTransformedIntent.TYPE);
 	}
@@ -60,47 +61,72 @@ public class ClientBuildoutService extends Service {
 		}
 	}
 	
-	public void loadClientObjects() {
-		try (RelationalServerData clientSdb = RelationalServerFactory.getServerData("buildout/buildouts.db", "areas", "objects")) {
-			loadAreas(clientSdb, getEvents());
-			Config c = getConfig(ConfigFile.PRIMARY);
-			if (c.getBoolean("LOAD-OBJECTS", true)) {
-				System.out.println("ClientBuildoutService: Loading client objects...");
-				Log.i("ClientBuildoutService", "Loading client objects...");
-				long startLoad = System.nanoTime();
-				int objects = loadObjects(clientSdb);
-				double loadTime = (System.nanoTime() - startLoad) / 1E6;
-				System.out.printf("ClientObjectLoader: Finished loading %d client objects. Time: %fms%n", objects, loadTime);
-				Log.i("ClientObjectLoader", "Finished loading %d client objects. Time: %fms", objects, loadTime);
-			} else {
-				Log.w("ClientObjectLoader", "Did not load client objects. Reason: Disabled.");
-				System.out.println("ClientObjectLoader: Did not load client objects. Reason: Disabled!");
-			}
+	public Collection<SWGObject> loadClientObjects() {
+		Collection<SWGObject> objects;
+		long startLoad = System.nanoTime();
+		logInfo("Loading client objects...");
+		try {
+			loadAreas(getEvents());
+			if (getConfig(ConfigFile.PRIMARY).getBoolean("LOAD-OBJECTS", true))
+				objects = loadObjects();
+			else
+				objects = new HashSet<>();
 		} catch (SQLException e) {
+			objects = new HashSet<>();
 			e.printStackTrace();
 			Log.e(this, e);
 		}
+		double loadTime = (System.nanoTime() - startLoad) / 1E6;
+		logInfo("Finished loading %d client objects. Time: %fms", objects.size(), loadTime);
+		return objects;
 	}
 	
-	private int loadObjects(RelationalServerData data) {
-		int count = 0;
-		try (ResultSet set = data.executeQuery(GET_CLIENT_OBJECTS_SQL)) {
-			BuildoutArea area = null;
-			Map<Long, SWGObject> objects = new Hashtable<>();
-			ObjectInformation info = new ObjectInformation(set);
-			while (set.next()) {
-				area = areasById.get(info.getAreaIdNoLoad());
-				if (!area.isLoaded())
-					continue;
-				info.load(strings);
-				new ObjectCreatedIntent(createObject(objects, area, info)).broadcast();
-				count++;
+	private Collection<SWGObject> loadObjects() throws SQLException {
+		Map<Long, SWGObject> objects = new Hashtable<>();
+		try (RelationalServerData data = RelationalServerFactory.getServerData("buildout/buildouts.db", "objects")) {
+			try (ResultSet set = data.executeQuery(GET_CLIENT_OBJECTS_SQL)) {
+				set.setFetchSize(4*1024);
+				BuildoutArea area = null;
+				ObjectInformation info = new ObjectInformation(set);
+				int prevAreaId = Integer.MAX_VALUE;
+				int areaId = 0;
+				while (set.next()) {
+					areaId = info.getAreaIdNoLoad();
+					if (prevAreaId != areaId) {
+						area = areasById.get(areaId);
+						prevAreaId = areaId;
+					}
+					if (area == null)
+						continue;
+					info.load(strings);
+					createObject(objects, area, info);
+				}
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			Log.e(this, e);
 		}
-		return count;
+		return Collections.unmodifiableCollection(objects.values());
+	}
+	
+	private void createObject(Map<Long, SWGObject> objects, BuildoutArea area, ObjectInformation info) throws SQLException {
+		SWGObject obj = ObjectCreator.createObjectFromTemplate(info.getId(), info.getTemplate());
+		Location l = info.getLocation();
+		l.setTerrain(area.getTerrain());
+		obj.setLocation(l);
+		obj.setBuildout(true);
+		obj.setBuildoutArea(area);
+		obj.setLoadRange(info.getRadius());
+		checkCell(obj, info.getCell());
+		checkChild(objects, obj, info.getContainer());
+		objects.put(obj.getObjectId(), obj);
+	}
+	
+	private void checkCell(SWGObject obj, int cell) {
+		if (cell != 0 && obj instanceof CellObject)
+			((CellObject) obj).setNumber(cell);
+	}
+	
+	private void checkChild(Map<Long, SWGObject> objects, SWGObject obj, long container) {
+		if (container != 0)
+			objects.get(container).addObject(obj);
 	}
 	
 	private List<String> getEvents() {
@@ -115,50 +141,38 @@ public class ClientBuildoutService extends Service {
 		return events;
 	}
 	
-	private SWGObject createObject(Map<Long, SWGObject> objects, BuildoutArea area, ObjectInformation info) throws SQLException {
-		SWGObject obj = ObjectCreator.createObjectFromTemplate(info.getId(), info.getTemplate());
-		Location l = info.getLocation();
-		l.setTerrain(area.getTerrain());
-		obj.setLocation(l);
-		obj.setBuildout(true);
-		obj.setBuildoutArea(area);
-		obj.setLoadRange(info.getRadius());
-		int cell = info.getCell();
-		if (cell != 0 && obj instanceof CellObject)
-			((CellObject) obj).setNumber(cell);
-		long container = info.getContainer();
-		if (container != 0)
-			objects.get(container).addObject(obj);
-		objects.put(obj.getObjectId(), obj);
-		return obj;
+	private void loadAreas(List <String> events) throws SQLException {
+		BuildoutArea primary = null; // Stored as "best area" for what we want to load
+		try (RelationalServerData data = RelationalServerFactory.getServerData("buildout/areas.db", "areas")) {
+			try (ResultSet set = data.executeQuery(GET_BUILDOUT_AREAS)) {
+				areas.clear();
+				areasById.clear();
+				AreaIndexes ind = new AreaIndexes(set);
+				boolean loaded = false;
+				while (set.next()) {
+					BuildoutArea area = createArea(set, ind);
+					area.setLoaded(false);
+					if (area.getEvent().isEmpty() && (primary == null || !area.getName().equals(primary.getName()))) {
+						if (!loaded && primary != null)
+							loadArea(area);
+						loaded = false;
+						primary = area; // Primary area, no event
+					}
+					if (events.contains(area.getEvent())) {
+						loadArea(area);
+						loaded = true;
+					}
+				}
+				if (!loaded && primary != null)
+					loadArea(primary);
+			}
+		}
 	}
 	
-	private void loadAreas(RelationalServerData data, List <String> events) throws SQLException {
-		BuildoutArea primary = null; // Stored as "best area" for what we want to load
-		try (ResultSet set = data.executeQuery(GET_BUILDOUT_AREAS)) {
-			areas.clear();
-			areasById.clear();
-			AreaIndexes ind = new AreaIndexes(set);
-			boolean loaded = false;
-			while (set.next()) {
-				BuildoutArea area = createArea(set, ind);
-				area.setLoaded(false);
-				areas.add(area);
-				areasById.put(area.getId(), area);
-				if (area.getEvent().isEmpty() && (primary == null || !area.getName().equals(primary.getName()))) {
-					if (!loaded && primary != null)
-						area.setLoaded(true);
-					loaded = false;
-					primary = area; // Primary area, no event
-				}
-				if (events.contains(area.getEvent())) {
-					area.setLoaded(true);
-					loaded = true;
-				}
-			}
-			if (!loaded && primary != null)
-				primary.setLoaded(true);
-		}
+	private void loadArea(BuildoutArea area) {
+		area.setLoaded(true);
+		areas.add(area);
+		areasById.put(area.getId(), area);
 	}
 	
 	private void handlePlayerTransform(PlayerTransformedIntent pti) {
@@ -222,6 +236,11 @@ public class ClientBuildoutService extends Service {
 		return (low + high) / 2;
 	}
 	
+	private void logInfo(String message, Object ... args) {
+		System.out.printf(getClass().getSimpleName() + ": " + message + "%n", args);
+		Log.i(this, message, args);
+	}
+	
 	private static class AreaIndexes {
 		
 		private int id;
@@ -252,7 +271,7 @@ public class ClientBuildoutService extends Service {
 		private final Location l;
 		private long id;
 		private String template;
-		private int radius;
+		private float radius;
 		private long container;
 		private int cell;
 		
@@ -302,7 +321,7 @@ public class ClientBuildoutService extends Service {
 		
 		public ColumnIndexes(ResultSet set) throws SQLException {
 			idInd = set.findColumn("id");
-			crcInd = set.findColumn("templateCrc");
+			crcInd = set.findColumn("template_crc");
 			areaInd = set.findColumn("area_id");
 			xInd = set.findColumn("x");
 			yInd = set.findColumn("y");
@@ -312,8 +331,8 @@ public class ClientBuildoutService extends Service {
 			ozInd = set.findColumn("orientation_z");
 			owInd = set.findColumn("orientation_w");
 			radiusInd = set.findColumn("radius");
-			contInd = set.findColumn("containerId");
-			cellInd = set.findColumn("cellIndex");
+			contInd = set.findColumn("container_id");
+			cellInd = set.findColumn("cell_index");
 		}
 		
 	}

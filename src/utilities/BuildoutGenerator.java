@@ -120,12 +120,28 @@ public class BuildoutGenerator {
 	private void generateObjectFile(File objectFile, List<SWGObject> objects) throws IOException {
 		try (SdbGenerator gen = new SdbGenerator(objectFile)) {
 			gen.open();
-			gen.setColumnNames("id", "buildout_depth", "area_id", "templateCrc", "containerId", "x", "y", "z", "orientation_x", "orientation_y", "orientation_z", "orientation_w", "radius", "cellIndex");
+			gen.setColumnNames("buildout_id", "id", "area_id", "template_crc", "container_id", "x", "y", "z", "orientation_x", "orientation_y", "orientation_z", "orientation_w", "radius", "cell_index");
 			gen.setColumnTypes("INTEGER PRIMARY KEY", intType, intType, intType, intType, floatType, floatType, floatType, floatType, floatType, floatType, floatType, floatType, intType);
 			int objNum = 0;
 			int percent = 0;
+			Collections.sort(objects, (o1, o2) -> {
+				int comp = Integer.compare(getBuildoutDepth(o1), getBuildoutDepth(o2));
+				if (comp != 0)
+					return comp;
+				comp = Integer.compare(o1.getBuildoutAreaId(), o2.getBuildoutAreaId());
+				if (comp != 0)
+					return comp;
+				comp = Long.compare(o1.getParent()==null?0:o1.getParent().getObjectId(), o2.getParent()==null?0:o2.getParent().getObjectId());
+				if (comp != 0)
+					return comp;
+				comp = Integer.compare(o1 instanceof CellObject?((CellObject)o1).getNumber():0, o2 instanceof CellObject?((CellObject)o2).getNumber():0);
+				if (comp != 0)
+					return comp;
+				return 0;
+			});
+			long buildoutId = 0;
 			for (SWGObject obj : objects) {
-				writeObject(gen, obj, getBuildoutDepth(obj));
+				writeObject(gen, obj, buildoutId++);
 				while (percent / 100.0 * objects.size() <= objNum) {
 					System.out.print(".");
 					percent++;
@@ -214,7 +230,7 @@ public class BuildoutGenerator {
 		Quaternion q = l.getOrientation();
 		double radius = object.getLoadRange();
 		int cellIndex = (object instanceof CellObject) ? ((CellObject) object).getNumber() : 0;
-		gen.writeLine(id, buildoutId, object.getBuildoutAreaId(), crc, container, l.getX(), l.getY(), l.getZ(), q.getX(), q.getY(), q.getZ(), q.getW(), radius, cellIndex);
+		gen.writeLine(buildoutId, id, object.getBuildoutAreaId(), crc, container, l.getX(), l.getY(), l.getZ(), q.getX(), q.getY(), q.getZ(), q.getW(), radius, cellIndex);
 	}
 	
 	private GenBuildoutArea getAreaForObject(SWGObject obj) {
