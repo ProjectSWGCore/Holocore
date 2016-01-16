@@ -55,7 +55,7 @@ public class TravelGroup implements Runnable {
 	public TravelGroup(String template, long landTime, long groundTime, long airTime) {
 		this.points = new HashSet<>();
 		this.terrainToPoint = new HashMap<>();
-		this.timeRemaining = new AtomicLong(airTime);
+		this.timeRemaining = new AtomicLong(airTime / 1000);
 		this.template = template;
 		this.landTime = landTime + 10000;
 		this.groundTime = groundTime;
