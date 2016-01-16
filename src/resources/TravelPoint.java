@@ -29,7 +29,7 @@ package resources;
 
 import resources.objects.creature.CreatureObject;
 
-public final class TravelPoint {
+public final class TravelPoint implements Comparable<TravelPoint> {
 	
 	private final String name;
 	private final Location location;
@@ -71,4 +71,25 @@ public final class TravelPoint {
 	public String getSuiFormat() {
 		return String.format("@planet_n:%s -- %s", location.getTerrain().getName(), name);
 	}
+	
+	@Override
+	public int compareTo(TravelPoint o) {
+		int comp = location.getTerrain().compareTo(o.getLocation().getTerrain());
+		if (comp != 0)
+			return comp;
+		return name.compareTo(o.getName());
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (!(o instanceof TravelPoint))
+			return false;
+		return name.equals(((TravelPoint) o).getName());
+	}
+	
+	@Override
+	public int hashCode() {
+		return name.hashCode();
+	}
+	
 }
