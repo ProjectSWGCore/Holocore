@@ -119,31 +119,26 @@ public final class ObjectCreator {
 		if (attributes == null)
 			return;
 
-		ObjectDataAttribute key;
-		Object value;
 		for (Entry<ObjectDataAttribute, Object> e : attributes.getAttributes().entrySet()) {
-			key = e.getKey();
-			value = e.getValue();
-			obj.setTemplateAttribute(key, value);
-
-			setObjectAttribute(key, value.toString(), obj);
+			setObjectAttribute(e.getKey(), e.getValue(), obj);
 		}
 	}
 
-	private static void setObjectAttribute(ObjectDataAttribute key, String value, SWGObject object) {
+	private static void setObjectAttribute(ObjectDataAttribute key, Object value, SWGObject object) {
+		object.setDataAttribute(key, value);
 		switch (key) {
-			case OBJECT_NAME: object.setStringId(value); break;
-			case DETAILED_DESCRIPTION: object.setDetailStringId(value); break;
-			case CONTAINER_VOLUME_LIMIT: object.setVolume(Integer.parseInt(value)); break;
-			case CONTAINER_TYPE: object.setContainerType(Integer.parseInt(value)); break;
+			case OBJECT_NAME: object.setStringId(value.toString()); break;
+			case DETAILED_DESCRIPTION: object.setDetailStringId(value.toString()); break;
+			case CONTAINER_VOLUME_LIMIT: object.setVolume((Integer) value); break;
+			case CONTAINER_TYPE: object.setContainerType((Integer) value); break;
 			default: break;
 		}
 	}
 
 	private static void createObjectSlots(SWGObject object) {
-		if (object.getTemplateAttribute(ObjectDataAttribute.SLOT_DESCRIPTOR_FILENAME) != null) {
+		if (object.getDataAttribute(ObjectDataAttribute.SLOT_DESCRIPTOR_FILENAME) != null) {
 			// These are the slots that the object *HAS*
-			SlotDescriptorData descriptor = (SlotDescriptorData) ClientFactory.getInfoFromFile((String) object.getTemplateAttribute(ObjectDataAttribute.SLOT_DESCRIPTOR_FILENAME), true);
+			SlotDescriptorData descriptor = (SlotDescriptorData) ClientFactory.getInfoFromFile((String) object.getDataAttribute(ObjectDataAttribute.SLOT_DESCRIPTOR_FILENAME), true);
 			if (descriptor == null)
 				return;
 
@@ -152,9 +147,9 @@ public final class ObjectCreator {
 			}
 		}
 		
-		if (object.getTemplateAttribute(ObjectDataAttribute.ARRANGEMENT_DESCRIPTOR_FILENAME) != null) {
+		if (object.getDataAttribute(ObjectDataAttribute.ARRANGEMENT_DESCRIPTOR_FILENAME) != null) {
 			// This is what slots the created object is able to go into/use
-			SlotArrangementData arrangementData = (SlotArrangementData) ClientFactory.getInfoFromFile((String) object.getTemplateAttribute(ObjectDataAttribute.ARRANGEMENT_DESCRIPTOR_FILENAME), true);
+			SlotArrangementData arrangementData = (SlotArrangementData) ClientFactory.getInfoFromFile((String) object.getDataAttribute(ObjectDataAttribute.ARRANGEMENT_DESCRIPTOR_FILENAME), true);
 			if (arrangementData == null)
 				return;
 

@@ -84,7 +84,7 @@ public class BuildingObject extends TangibleObject {
 		if (!added || !(object instanceof CellObject))
 			return added;
 
-		String portalFile = (String) getTemplateAttribute(ObjectDataAttribute.PORTAL_LAYOUT_FILENAME);
+		String portalFile = (String) getDataAttribute(ObjectDataAttribute.PORTAL_LAYOUT_FILENAME);
 		if (portalFile == null || portalFile.isEmpty())
 			return true;
 
@@ -98,6 +98,6 @@ public class BuildingObject extends TangibleObject {
 
 	private void populateCellData(CellObject cellObject, PortalLayoutData.Cell cellData) {
 		cellObject.setCellName(cellData.getName());
-//		System.out.println(cellObject + " cell name " + cellObject.getCelName());
+//		System.out.println(cellObject + " cell name " + cellObject.getCellName());
 	}
 }
