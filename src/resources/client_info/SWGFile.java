@@ -28,10 +28,10 @@
 package resources.client_info;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.StandardCharsets;
 
@@ -65,21 +65,10 @@ public class SWGFile {
 	}
 
 	public void read(File file) throws IOException {
-		FileInputStream inputStream = new FileInputStream(file);
-		FileChannel channel = inputStream.getChannel();
-
+		FileChannel channel = FileChannel.open(file.toPath());
+		MappedByteBuffer bb = channel.map(FileChannel.MapMode.READ_ONLY, 0, channel.size());
 		int size = (int) channel.size();
-		ByteBuffer bb = ByteBuffer.allocate((int) channel.size());
-		if (channel.read(bb) != size) {
-			System.err.println("Failed to properly read the bytes in file " + file.getAbsolutePath() + "!");
-			inputStream.close();
-			return;
-		} else {
-			inputStream.close();
-		}
-
-		// Reading will add bytes to the buffer, so we need to flip it before reading the buffer to IffNode's
-		bb.flip();
+		channel.close();
 
 		master = new IffNode("", true);
 		currentForm = master;
