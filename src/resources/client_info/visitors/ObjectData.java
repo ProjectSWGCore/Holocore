@@ -136,7 +136,8 @@ public class ObjectData extends ClientData {
 
 	@Override
 	public void readIff(SWGFile iff) {
-		readNextForm(iff);
+		while (iff.enterNextForm() != null)
+			readNextForm(iff);
 	}
 	
 	private void readNextForm(SWGFile iff) {
