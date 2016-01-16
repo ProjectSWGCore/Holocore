@@ -28,8 +28,6 @@
 package services.spawn;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.nio.file.NoSuchFileException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -45,7 +43,6 @@ import resources.objects.building.BuildingObject;
 import resources.objects.SWGObject;
 import resources.server_info.Log;
 import resources.server_info.RelationalDatabase;
-import resources.server_info.RelationalServerData;
 import resources.server_info.RelationalServerFactory;
 import resources.spawn.SpawnerType;
 import resources.spawn.Spawner;
@@ -53,7 +50,10 @@ import services.objects.ObjectManager;
 
 public final class SpawnerService extends Service {
 	
-	private static final String GET_ALL_SPAWNERS_SQL = "SELECT static.*, buildings.object_id, buildings.terrain_name, creatures.iff_template "
+	private static final String GET_ALL_SPAWNERS_SQL = "SELECT static.x, static.y, static.z, static.oX, static.oY, static.oZ, static.oW, " // static columns
+			+ "static.spawner_type, static.cell_id, static.active, " // more static columns
+			+ "buildings.object_id AS building_id, buildings.terrain_name AS building_terrain, " // building columns
+			+ "creatures.iff_template AS iff, creatures.creature_name " // creature columns
 			+ "FROM static, buildings, creatures "
 			+ "WHERE buildings.building_id = static.building_id AND static.creature_id = creatures.creature_id";
 	
@@ -99,54 +99,80 @@ public final class SpawnerService extends Service {
 	}
 	
 	private void loadSpawners(boolean spawnEggs) {
+		long start = System.nanoTime();
+		int count = 0;
+		System.out.println("SpawnerService: Loading NPCs...");
+		Log.i(this, "Loading NPCs...");
 		try (RelationalDatabase spawnerDatabase = RelationalServerFactory.getServerData("spawn/static.db", "static", "building/buildings", "creatures/creatures")) {
 			try (ResultSet jointTable = spawnerDatabase.executeQuery(GET_ALL_SPAWNERS_SQL)) {
+				Location loc = new Location();
 				while (jointTable.next()) {
 					if (jointTable.getBoolean("active")) {
-						loadSpawner(jointTable, spawnEggs);
+						loadSpawner(jointTable, loc, spawnEggs);
+						count++;
 					}
 				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		double time = (System.nanoTime()-start)/1E6;
+		System.out.printf("SpawnerService: Finished loading %d NPCs. Time: %fms%n", count, time);
+		Log.i(this, "Finished loading %d NPCs. Time: %fms", count, time);
 	}
 	
-	private void loadSpawner(ResultSet set, boolean spawnEggs) throws SQLException {
-		Location loc = new Location(set.getFloat("x"), set.getFloat("y"), set.getFloat("z"), Terrain.valueOf(set.getString("terrain_name")));
-		SpawnerType spawnerType = SpawnerType.valueOf(set.getString("spawner_type"));
-		long objectId = set.getLong("object_id");
-		int cellId = set.getInt("cell_id");
+	private void loadSpawner(ResultSet set, Location loc, boolean spawnEggs) throws SQLException {
+		loc.setTerrain(Terrain.valueOf(set.getString("building_terrain")));
+		loc.setPosition(set.getFloat("x"), set.getFloat("y"), set.getFloat("z"));
 		loc.setOrientation(set.getFloat("oX"), set.getFloat("oY"), set.getFloat("oZ"), set.getFloat("oW"));
+		int cellId = set.getInt("cell_id");
 		
 		SWGObject parent = null;
 		if (cellId > 0) {
-			parent = objectManager.getObjectById(objectId);
+			parent = objectManager.getObjectById(set.getLong("building_id"));
 			if (parent instanceof BuildingObject)
 				parent = ((BuildingObject) parent).getCellByNumber(cellId);
 		}
 		
 		if (spawnEggs) {
+			SpawnerType spawnerType = SpawnerType.valueOf(set.getString("spawner_type"));
 			SWGObject egg = objectManager.createObject(parent, spawnerType.getObjectTemplate(), loc, false);
 			spawners.add(new Spawner(egg));
 		}
-		createNPC(parent, loc, set.getString("iff_template"), set.getString("creature_name"));
+		createNPC(parent, loc, set.getString("iff"), set.getString("creature_name"));
 	}
 	
-	private void createNPC(SWGObject parent, Location loc, String iff, String name) {
-		String [] possible = iff.split(";");
-		String template = possible[(int) (Math.random()*possible.length)];
+	private boolean createNPC(SWGObject parent, Location loc, String iff, String name) {
+		String template = createTemplate(getRandomIff(iff));
+		File f = new File("clientdata/"+template);
+		if (f.isFile()) {
+			SWGObject object = objectManager.createObject(parent, template, loc, false);
+			object.setName(getCreatureName(name));
+			return true;
+		} else
+			Log.e(this, "Unknown template: " + template);
+		return false;
+	}
+	
+	private String getCreatureName(String name) {
+		if (!name.contains("("))
+			return name;
+		return name.replace("(", "\n(");
+	}
+	
+	private String getRandomIff(String semicolonSeparated) {
+		String [] possible = semicolonSeparated.split(";");
+		return possible[(int) (Math.random()*possible.length)];
+	}
+	
+	private String createTemplate(String file) {
+		String template = file;
 		if (template.contains("/")) {
 			int ind = template.lastIndexOf('/');
 			template = "object/mobile/" + template.substring(0, ind) + "/shared_" + template.substring(ind+1);
 		} else
 			template = "object/mobile/shared_" + template;
-		File f = new File("clientdata/"+template);
-		if (f.isFile()) {
-			SWGObject object = objectManager.createObject(parent, template, loc, false);
-			object.setName(name);
-		} else
-			Log.e(this, "Unknown template: " + template);
+		return template;
 	}
 	
 	private void removeSpawners() {
