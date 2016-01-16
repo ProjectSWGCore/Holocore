@@ -117,7 +117,7 @@ public class ObjectData extends ClientData {
 				ATTRIBUTES.put(attr.getName(), attr);
 		}
 		
-		private String name;
+		private final String name;
 		
 		ObjectDataAttribute(String name) {
 			this.name = name;
@@ -136,8 +136,7 @@ public class ObjectData extends ClientData {
 
 	@Override
 	public void readIff(SWGFile iff) {
-		while (iff.enterNextForm() != null)
-			readNextForm(iff);
+		readNextForm(iff);
 	}
 	
 	private void readNextForm(SWGFile iff) {
@@ -148,7 +147,7 @@ public class ObjectData extends ClientData {
 				readExtendedAttributes(iff);
 			else if (tag.contains("0"))
 				readVersionForm(iff);
-			else if (!tag.isEmpty()) // More than likely to be a template form
+			else if (!tag.isEmpty())
 				readNextForm(iff);
 		}
 
@@ -181,13 +180,16 @@ public class ObjectData extends ClientData {
 		attributes.putAll(((ObjectData)attrData).getAttributes());
 
 		parsedFiles.add(file);
-
+		
 		iff.exitForm();
 	}
 
 	// Try and parse the attribute to map w/ appropriate Object type.
 	private void parseAttributeChunk(IffNode chunk) {
-		ObjectDataAttribute attr = ObjectDataAttribute.getForName(chunk.readString());
+		String str = chunk.readString();
+		if (str.isEmpty())
+			return;
+		ObjectDataAttribute attr = ObjectDataAttribute.getForName(str);
 		switch (attr) {
 			case APPEARANCE_FILENAME: putString(chunk, attr); break;
 			case ARRANGEMENT_DESCRIPTOR_FILENAME: putString(chunk,attr); break;
@@ -202,7 +204,7 @@ public class ObjectData extends ClientData {
 			case STRUCTURE_FOOTPRINT_FILENAME: putString(chunk, attr); break;
 			case TARGETABLE: putBoolean(chunk, attr); break;
 			case USE_STRUCTURE_FOOTPRINT_OUTLINE: putBoolean(chunk, attr); break;
-			default: /*Log.w("ObjectData", "Unknown attribute: %s", attr);*/ break;
+			default: break;
 		}
 	}
 	
