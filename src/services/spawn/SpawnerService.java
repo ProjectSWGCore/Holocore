@@ -27,7 +27,6 @@
 ***********************************************************************************/
 package services.spawn;
 
-import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -104,11 +103,11 @@ public final class SpawnerService extends Service {
 		System.out.println("SpawnerService: Loading NPCs...");
 		Log.i(this, "Loading NPCs...");
 		try (RelationalDatabase spawnerDatabase = RelationalServerFactory.getServerData("spawn/static.db", "static", "building/buildings", "creatures/creatures")) {
-			try (ResultSet jointTable = spawnerDatabase.executeQuery(GET_ALL_SPAWNERS_SQL)) {
+			try (ResultSet set = spawnerDatabase.executeQuery(GET_ALL_SPAWNERS_SQL)) {
 				Location loc = new Location();
-				while (jointTable.next()) {
-					if (jointTable.getBoolean("active")) {
-						loadSpawner(jointTable, loc, spawnEggs);
+				while (set.next()) {
+					if (set.getBoolean("active")) {
+						loadSpawner(set, loc, spawnEggs);
 						count++;
 					}
 				}
@@ -143,20 +142,12 @@ public final class SpawnerService extends Service {
 	}
 	
 	private boolean createNPC(SWGObject parent, Location loc, String iff, String name) {
-		String template = createTemplate(getRandomIff(iff));
-		File f = new File("clientdata/"+template);
-		if (f.isFile()) {
-			SWGObject object = objectManager.createObject(parent, template, loc, false);
-			object.setName(getCreatureName(name));
-			return true;
-		} else
-			Log.e(this, "Unknown template: " + template);
-		return false;
+		SWGObject object = objectManager.createObject(parent, createTemplate(getRandomIff(iff)), loc, false);
+		object.setName(getCreatureName(name));
+		return true;
 	}
 	
 	private String getCreatureName(String name) {
-		if (!name.contains("("))
-			return name;
 		return name.replace("(", "\n(");
 	}
 	
@@ -165,14 +156,12 @@ public final class SpawnerService extends Service {
 		return possible[(int) (Math.random()*possible.length)];
 	}
 	
-	private String createTemplate(String file) {
-		String template = file;
-		if (template.contains("/")) {
+	private String createTemplate(String template) {
+		if (template.indexOf('/') != -1) {
 			int ind = template.lastIndexOf('/');
-			template = "object/mobile/" + template.substring(0, ind) + "/shared_" + template.substring(ind+1);
+			return "object/mobile/" + template.substring(0, ind) + "/shared_" + template.substring(ind+1);
 		} else
-			template = "object/mobile/shared_" + template;
-		return template;
+			return "object/mobile/shared_" + template;
 	}
 	
 	private void removeSpawners() {
