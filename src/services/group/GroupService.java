@@ -32,8 +32,6 @@ import intents.NotifyPlayersPacketIntent;
 import intents.PlayerEventIntent;
 import intents.chat.ChatRoomUpdateIntent;
 import intents.object.ObjectCreatedIntent;
-import intents.object.ObjectIdRequestIntent;
-import intents.object.ObjectIdResponseIntent;
 import network.packets.swg.zone.chat.ChatSystemMessage;
 import resources.chat.ChatAvatar;
 import resources.control.Intent;
@@ -58,19 +56,16 @@ import java.util.Map;
  * Created by Waverunner on 10/4/2015
  */
 public class GroupService extends Service {
-
-	private final List<Long> reservedIds = new ArrayList<>();
+	
 	private final Map<Long, GroupObject> groups = new HashMap<>();
 	
 	public GroupService() {
 		registerForIntent(GroupEventIntent.TYPE);
 		registerForIntent(PlayerEventIntent.TYPE);
-		registerForIntent(ObjectIdResponseIntent.TYPE);
 	}
 	
 	@Override
 	public boolean start() {
-		new ObjectIdRequestIntent("GroupService", 50).broadcast();
 		return super.start();
 	}
 
@@ -81,11 +76,6 @@ public class GroupService extends Service {
 			case GroupEventIntent.TYPE:
 				if (i instanceof GroupEventIntent)
 					handleGroupEventIntent((GroupEventIntent) i);
-				break;
-			case ObjectIdResponseIntent.TYPE:
-				if (!(i instanceof ObjectIdResponseIntent) || !((ObjectIdResponseIntent) i).getIdentifier().equals("GroupService"))
-					break;
-				reservedIds.addAll(((ObjectIdResponseIntent)i).getReservedIds());
 				break;
 			case PlayerEventIntent.TYPE:
 				if (i instanceof PlayerEventIntent)
@@ -289,7 +279,7 @@ public class GroupService extends Service {
 	}
 
 	private GroupObject createGroup(Player player) {
-		GroupObject group = (GroupObject) ObjectCreator.createObjectFromTemplate(getNextObjectId(), "object/group/shared_group_object.iff");
+		GroupObject group = (GroupObject) ObjectCreator.createObjectFromTemplate("object/group/shared_group_object.iff");
 		if (group == null)
 			return null;
 
@@ -304,15 +294,6 @@ public class GroupService extends Service {
 				ChatAvatar.getSystemAvatar(galaxy), null, ChatRoomUpdateIntent.UpdateType.CREATE).broadcast();
 
 		return group;
-	}
-
-	private long getNextObjectId() {
-		synchronized (reservedIds) {
-			if (reservedIds.size() <= 5)
-				new ObjectIdRequestIntent("GroupService", 50).broadcast();
-
-			return reservedIds.remove(0);
-		}
 	}
 
 	private void sendGroupSystemMessage(GroupObject group, String id) {

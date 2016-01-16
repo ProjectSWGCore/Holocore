@@ -52,19 +52,38 @@ import resources.objects.waypoint.WaypointObject;
 import resources.objects.weapon.WeaponObject;
 
 public final class ObjectCreator {
-
+	
+	private static final Object OBJECT_ID_MUTEX = new Object();
+	private static long maxObjectId = 1;
+	
+	public static void updateMaxObjectId(long objectId) {
+		synchronized (OBJECT_ID_MUTEX) {
+			if (objectId > maxObjectId)
+				maxObjectId = objectId;
+		}
+	}
+	
 	public static SWGObject createObjectFromTemplate(long objectId, String template) {
 		if (!template.startsWith("object/"))
 			return null;
 		if (!template.endsWith(".iff"))
 			return null;
-		SWGObject obj = createObjectFromType(objectId, getFirstTemplatePart(template.substring(7, template.length())));
+		SWGObject obj = createObjectFromType(objectId, getTemplatePart(template, 1));
 		if (obj == null)
 			return null;
 		obj.setTemplate(template);
 
 		handlePostCreation(obj);
+		updateMaxObjectId(objectId);
 		return obj;
+	}
+	
+	public static SWGObject createObjectFromTemplate(String template) {
+		long id = 0;
+		synchronized (OBJECT_ID_MUTEX) {
+			id = maxObjectId++;
+		}
+		return createObjectFromTemplate(id, template);
 	}
 	
 	private static SWGObject createObjectFromType(long objectId, String type) {
@@ -146,11 +165,21 @@ public final class ObjectCreator {
 	/*
 		Misc helper methods
 	 */
-	private static String getFirstTemplatePart(String template) {
-		int ind = template.indexOf('/');
-		if (ind == -1)
-			return "";
-		return template.substring(0, ind);
+	private static String getTemplatePart(String template, int index) {
+		int start = 0;
+		int end = 0;
+		for (int i = 0; i < template.length(); i++) {
+			if (template.charAt(i) != '/')
+				continue;
+			index--;
+			if (index == 0)
+				start = i+1;
+			else if (index == -1) {
+				end = i;
+				break;
+			}
+		}
+		return template.substring(start, end);
 	}
 	
 }
