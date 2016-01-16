@@ -25,7 +25,7 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package services.galaxy;
+package services.galaxy.travel;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
