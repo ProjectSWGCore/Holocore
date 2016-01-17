@@ -28,12 +28,14 @@
 package resources;
 
 import resources.objects.creature.CreatureObject;
+import services.galaxy.travel.TravelGroup;
 
 public final class TravelPoint implements Comparable<TravelPoint> {
 	
 	private final String name;
 	private final Location location;
 	private final boolean reachable;
+	private TravelGroup group;
 	private CreatureObject shuttle;
 	private final boolean starport;
 	
@@ -42,6 +44,7 @@ public final class TravelPoint implements Comparable<TravelPoint> {
 		this.location = location;
 		this.starport = starport;
 		this.reachable = reachable;	// Not sure which effect this has on the client.
+		this.group = null;
 	}
 	
 	public String getName() {
@@ -50,6 +53,10 @@ public final class TravelPoint implements Comparable<TravelPoint> {
 	
 	public Location getLocation() {
 		return location;
+	}
+	
+	public TravelGroup getGroup() {
+		return group;
 	}
 
 	public boolean isStarport() {
@@ -66,6 +73,10 @@ public final class TravelPoint implements Comparable<TravelPoint> {
 
 	public void setShuttle(CreatureObject shuttle) {
 		this.shuttle = shuttle;
+	}
+	
+	public void setGroup(TravelGroup group) {
+		this.group = group;
 	}
 	
 	public String getSuiFormat() {

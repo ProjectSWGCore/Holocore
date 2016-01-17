@@ -67,13 +67,11 @@ import resources.player.Player;
 import resources.server_info.Log;
 import resources.server_info.RelationalServerData;
 import resources.server_info.RelationalServerFactory;
-import resources.sui.ISuiCallback;
 import resources.sui.SuiButtons;
-import resources.sui.SuiEvent;
 import resources.sui.SuiListBox;
-import resources.sui.SuiListBox.SuiListBoxItem;
 import resources.sui.SuiMessageBox;
 import services.galaxy.travel.TravelGroup;
+import services.galaxy.travel.TravelGroup.ShuttleStatus;
 import services.objects.ObjectManager;
 import utilities.ThreadUtilities;
 
@@ -460,7 +458,6 @@ public class TravelService extends Service {
 		Player player = i.getPlayer();
 		CreatureObject creature = player.getCreatureObject();
 		Collection<SWGObject> tickets = creature.getItemsByTemplate("inventory", "object/tangible/travel/travel_ticket/base/shared_base_travel_ticket.iff");
-		SuiListBox destinationSelection;
 		List<SWGObject> usableTickets = new ArrayList<>();
 		
 		for (SWGObject ticket : tickets) {
@@ -471,40 +468,43 @@ public class TravelService extends Service {
 		if (usableTickets.isEmpty())	// They don't have a valid ticket.
 			new ChatBroadcastIntent(player, "@travel:no_ticket_for_shuttle").broadcast();
 		else {
-			destinationSelection = new SuiListBox(SuiButtons.OK_CANCEL, "@travel:select_destination", "@travel:select_destination");
+			SuiListBox ticketBox = new SuiListBox(SuiButtons.OK_CANCEL, "@travel:select_destination", "@travel:select_destination");
 			
 			for(SWGObject usableTicket : usableTickets) {
 				TravelPoint destinationPoint = getDestinationPoint(usableTicket);
 				
-				destinationSelection.addListItem(destinationPoint.getSuiFormat(), destinationPoint);
+				ticketBox.addListItem(destinationPoint.getSuiFormat(), destinationPoint);
 			}
 			
-			destinationSelection.addOkButtonCallback("handleSelectedItem", new DestinationSelectionSuiCallback(destinationSelection, usableTickets));
-			destinationSelection.display(player);
+			ticketBox.addOkButtonCallback("handleSelectedItem", (callbackPlayer, actor, event, parameters) -> {
+				handleTicketUse(callbackPlayer, usableTickets.get(SuiListBox.getSelectedRow(parameters)));
+			});
+			ticketBox.display(player);
 		}
 	}
 	
 	private void handleTicketUseClick(TicketUseIntent i) {
-		CreatureObject traveler = i.getPlayer().getCreatureObject();
+		handleTicketUse(i.getPlayer(), i.getTicket());
+	}
+	
+	private void handleTicketUse(Player player, SWGObject ticket) {
+		CreatureObject traveler = player.getCreatureObject();
 		Location worldLoc = traveler.getWorldLocation();
 		TravelPoint nearestPoint = getNearestTravelPoint(worldLoc);
 		double distanceToNearestPoint = worldLoc.distanceTo(nearestPoint.getShuttle().getLocation());
-		SWGObject ticket = i.getTicket();
-		Player player = i.getPlayer();
-		
-		if (isTicket(ticket)) {
-			if (isTicketUsable(ticket)) {
-				if (distanceToNearestPoint <= TICKET_USE_RADIUS) {
-					// They can use their ticket if they're within range.
-					teleportAndDestroyTicket(getDestinationPoint(ticket), ticket, traveler);
-				} else {
-					// They're out of range - let them know.
-					new ChatBroadcastIntent(player, "@travel:boarding_too_far").broadcast();
-				}
-			} else {
-				// This ticket isn't valid for this point
-				new ChatBroadcastIntent(player, "@travel:wrong_shuttle").broadcast();
-			}
+		if (!isTicket(ticket)) {
+			Log.e(this, "%s attempted to use an object that isn't a ticket!", player);
+		} else if (nearestPoint.getGroup().getStatus() != ShuttleStatus.GROUNDED) {
+			int time = nearestPoint.getGroup().getTimeRemaining();
+			new ChatBroadcastIntent(player, new ProsePackage(new StringId("travel/travel", "shuttle_board_delay"), "DI", time)).broadcast();
+		} else if (!isTicketUsable(ticket)) {
+			// This ticket isn't valid for this point
+			new ChatBroadcastIntent(player, "@travel:wrong_shuttle").broadcast();
+		} else if (distanceToNearestPoint <= TICKET_USE_RADIUS) {
+			// They can use their ticket if they're within range.
+			teleportAndDestroyTicket(getDestinationPoint(ticket), ticket, traveler);
+		} else {
+			new ChatBroadcastIntent(player, "@travel:boarding_too_far").broadcast();
 		}
 	}
 	
@@ -581,26 +581,6 @@ public class TravelService extends Service {
 			}
 		}
 		return nearest;
-	}
-	
-	private class DestinationSelectionSuiCallback implements ISuiCallback {
-
-		private final SuiListBox destinationSelection;
-		private final List<SWGObject> usableTickets;
-		
-		private DestinationSelectionSuiCallback(SuiListBox destinationSelection, List<SWGObject> usableTickets) {
-			this.destinationSelection = destinationSelection;
-			this.usableTickets = usableTickets;
-		}
-		
-		@Override
-		public void handleEvent(Player player, SWGObject actor, SuiEvent event, Map<String, String> parameters) {
-			int selection = SuiListBox.getSelectedRow(parameters);
-			SuiListBoxItem selectedItem = destinationSelection.getListItem(selection);
-			TravelPoint selectedDestination = (TravelPoint) selectedItem.getObject();
-			
-			teleportAndDestroyTicket(selectedDestination, usableTickets.get(selection), player.getCreatureObject());
-		}
 	}
 	
 }

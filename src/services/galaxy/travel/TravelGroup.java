@@ -65,6 +65,7 @@ public class TravelGroup implements Runnable {
 	}
 	
 	public void addTravelPoint(TravelPoint point) {
+		point.setGroup(this);
 		synchronized (points) {
 			points.add(point);
 		}
