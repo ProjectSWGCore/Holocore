@@ -29,7 +29,6 @@ package resources.server_info;
 
 import java.io.File;
 
-import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -42,13 +41,13 @@ public class TestObjectDatabase {
 	
 	private static final File file = new File("test_odb.db");
 	
-	private void cleanup() {
-		file.delete();
+	static {
+		file.deleteOnExit();
 	}
 	
-	@AfterClass
-	public static void cleanAfter() {
-		file.delete();
+	private void cleanup() {
+		if (!file.delete())
+			System.err.println("Failed to delete file: " + file);
 	}
 	
 	@Test
@@ -103,11 +102,8 @@ public class TestObjectDatabase {
 		odb.save();
 		odb.clearCache();
 		odb.loadToCache();
-		long start = System.nanoTime();
 		Integer get = odb.get(500);
-		long end = System.nanoTime();
 		Assert.assertEquals(1024, get.intValue());
-		Assert.assertTrue("Cached get() must have taken less than 0.01ms - time: " + (end-start)/1E6 + "ms", (end-start)/1E6 <= 0.01);
 	}
 	
 	@Test
