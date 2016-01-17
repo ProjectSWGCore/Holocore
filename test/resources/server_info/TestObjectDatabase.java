@@ -43,8 +43,8 @@ public class TestObjectDatabase {
 	private static final File file = new File("test_odb.db");
 	
 	@AfterClass
-	private void cleanup() {
-		if (!file.delete())
+	public static void cleanup() {
+		if (file.exists() && !file.delete())
 			System.err.println("Failed to delete file: " + file);
 	}
 	
