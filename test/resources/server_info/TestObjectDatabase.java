@@ -29,6 +29,7 @@ package resources.server_info;
 
 import java.io.File;
 
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,10 +42,7 @@ public class TestObjectDatabase {
 	
 	private static final File file = new File("test_odb.db");
 	
-	static {
-		file.deleteOnExit();
-	}
-	
+	@AfterClass
 	private void cleanup() {
 		if (!file.delete())
 			System.err.println("Failed to delete file: " + file);
