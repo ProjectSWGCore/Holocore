@@ -123,7 +123,10 @@ public class OnlineInterfaceService extends Service implements HttpServerCallbac
 				}
 			}
 			if (!socket.isSecure()) {
-				socket.redirect(new URL("https", httpsServer.getBindAddress().getHostName(), httpsServer.getBindPort(), request.getURI().getPath()).toString());
+				String host = request.getURI().getHost();
+				if (host == null)
+					host = socket.getInetAddress().getHostName();
+				socket.redirect(new URL("https", host, httpsServer.getBindPort(), request.getURI().getPath()).toString());
 				return;
 			}
 			handler.handleRequest(socket, request);
