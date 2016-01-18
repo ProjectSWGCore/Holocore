@@ -198,7 +198,8 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		// Get a pre-parent-removal list of the observers so we can send create/destroy/update messages
 		Set<SWGObject> oldObservers = getObservers();
 		Player prevOwner = getOwner();
-		oldObservers.add(prevOwner.getCreatureObject());
+		if (prevOwner != null)
+			oldObservers.add(prevOwner.getCreatureObject());
 
 		// Remove this object from the old parent if one exists
 		SWGObject oldParent = null;
@@ -213,7 +214,8 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		// Observer notification
 		Player newOwner = getOwner();
 		Set<SWGObject> containerObservers = getObservers();
-		containerObservers.add(newOwner.getCreatureObject());
+		if (newOwner != null)
+			containerObservers.add(newOwner.getCreatureObject());
 		if (prevOwner != newOwner) {
 			if (prevOwner != null)
 				oldObservers.add(prevOwner.getCreatureObject());
