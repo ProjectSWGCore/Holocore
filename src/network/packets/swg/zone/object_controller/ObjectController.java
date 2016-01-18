@@ -93,6 +93,7 @@ public abstract class ObjectController extends SWGPacket {
 			case 0x00F1: return new DataTransformWithParent(data);
 			case 0x0116: return new CommandQueueEnqueue(data);
 			case 0x0117: return new CommandQueueDequeue(data);
+			case 0x0126: return null; // Look at target
 			case 0x012E: return new PlayerEmote(data);
 			case 0x0131: return new PostureUpdate(data);
 			case 0x0146: return new ObjectMenuRequest(data);
