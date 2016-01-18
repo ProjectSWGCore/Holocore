@@ -100,15 +100,11 @@ public class TerminalService extends Service {
 				if (i instanceof ObjectClickedIntent) {
 					ObjectClickedIntent oci = (ObjectClickedIntent) i;
 					String script = lookupScript(oci.getTarget().getTemplate());
-					if (script == null) {
-						Log.w(this, "No script available!");
+					if (script == null)
 						return;
-					}
 					List<RadialOption> options = Radials.getRadialOptions(script, oci.getRequestor().getOwner(), oci.getTarget());
-					if (options.isEmpty()) {
-						Log.w(this, "Empty options list!");
+					if (options.isEmpty())
 						return;
-					}
 					RadialItem item = RadialItem.getFromId(options.get(0).getId());
 					Radials.handleSelection(script, oci.getRequestor().getOwner(), oci.getTarget(), item);
 				}
