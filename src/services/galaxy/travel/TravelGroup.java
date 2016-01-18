@@ -95,8 +95,9 @@ public class TravelGroup implements Runnable {
 	public TravelPoint getNearestPoint(Location l) {
 		synchronized (terrainToPoint) {
 			Set<TravelPoint> set = terrainToPoint.get(l.getTerrain());
-			if (set == null)
+			if (set == null || set.isEmpty()) {
 				return null;
+			}
 			TravelPoint nearest = null;
 			double dist = Double.MAX_VALUE;
 			for (TravelPoint tp : set) {

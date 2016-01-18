@@ -79,7 +79,7 @@ public class TravelService extends Service {
 	
 	private static final String DB_TABLE_NAME = "travel";
 	private static final byte PLANET_NAMES_COLUMN_INDEX = 0;
-	private static final short TICKET_USE_RADIUS = 25;	// The distance a player needs to be within in order to use their ticket
+	private static final short TICKET_USE_RADIUS = 8;	// The distance a player needs to be within in order to use their ticket
 	
 	private final ObjectManager objectManager;
 	private Terrain[] travelPlanets;
@@ -107,7 +107,7 @@ public class TravelService extends Service {
 		
 		createGalaxyTravel("object/creature/npc/theme_park/shared_player_shuttle.iff", 17000);
 		createGalaxyTravel("object/creature/npc/theme_park/shared_player_transport.iff", 21000);
-		createGalaxyTravel("object/creature/npc/theme_park/shared_player_transport_theed_hangar.iff", 21000);
+		createGalaxyTravel("object/creature/npc/theme_park/shared_player_transport_theed_hangar.iff", 24000);
 		loadTravelPlanetNames();
 		loadAllowedRoutesAndPrices();
 		loadTravelPoints();
@@ -491,7 +491,7 @@ public class TravelService extends Service {
 		CreatureObject traveler = player.getCreatureObject();
 		Location worldLoc = traveler.getWorldLocation();
 		TravelPoint nearestPoint = getNearestTravelPoint(worldLoc);
-		double distanceToNearestPoint = worldLoc.distanceTo(nearestPoint.getShuttle().getLocation());
+		double distanceToNearestPoint = worldLoc.distanceTo(nearestPoint.getCollector().getWorldLocation());
 		if (!isTicket(ticket)) {
 			Log.e(this, "%s attempted to use an object that isn't a ticket!", player);
 		} else if (nearestPoint.getGroup().getStatus() != ShuttleStatus.GROUNDED) {
@@ -502,6 +502,7 @@ public class TravelService extends Service {
 			new ChatBroadcastIntent(player, "@travel:wrong_shuttle").broadcast();
 		} else if (distanceToNearestPoint <= TICKET_USE_RADIUS) {
 			// They can use their ticket if they're within range.
+			Log.i(this, "%s/%s is traveling from %s to %s", player.getUsername(), traveler.getName(), nearestPoint.getName(), getDestinationPoint(ticket).getName());
 			teleportAndDestroyTicket(getDestinationPoint(ticket), ticket, traveler);
 		} else {
 			new ChatBroadcastIntent(player, "@travel:boarding_too_far").broadcast();
@@ -513,18 +514,29 @@ public class TravelService extends Service {
 		
 		// There are non-functional shuttles, which are StaticObject. We run an instanceof check to make sure that we ignore those.
 		if (travel.containsKey(object.getTemplate()) && !(object instanceof StaticObject)) {
-			Location shuttleLocation = object.getLocation();
+			Location shuttleLocation = object.getWorldLocation();
 			TravelPoint pointForShuttle = getNearestTravelPoint(shuttleLocation);
 			CreatureObject shuttle = (CreatureObject) object;
 			
-			if (pointForShuttle == null)
+			if (pointForShuttle == null) {
+				Log.w(this, "No point for shuttle at location: " + object.getWorldLocation());
 				return;
+			}
 			// Assign the shuttle to the nearest travel point
 			pointForShuttle.setShuttle(shuttle);
 			
 			shuttle.setOptionFlags(OptionFlag.INVULNERABLE);
 			shuttle.setPosture(Posture.UPRIGHT);
 			shuttle.setShownOnRadar(false);
+		} else if (object.getTemplate().equals("object/tangible/travel/ticket_collector/shared_ticket_collector.iff")) {
+			TravelPoint pointForCollector = getNearestTravelPoint(object.getWorldLocation());
+			
+			if (pointForCollector == null) {
+				Log.w(this, "No point for collector at location: " + object.getWorldLocation());
+				return;
+			}
+			
+			pointForCollector.setCollector(object);
 		}
 	}
 	

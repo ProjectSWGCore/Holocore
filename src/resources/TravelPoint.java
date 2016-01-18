@@ -27,6 +27,7 @@
 ***********************************************************************************/
 package resources;
 
+import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import services.galaxy.travel.TravelGroup;
 
@@ -37,6 +38,7 @@ public final class TravelPoint implements Comparable<TravelPoint> {
 	private final boolean reachable;
 	private TravelGroup group;
 	private CreatureObject shuttle;
+	private SWGObject collector;
 	private final boolean starport;
 	
 	public TravelPoint(String name, Location location, boolean starport, boolean reachable) {
@@ -70,9 +72,17 @@ public final class TravelPoint implements Comparable<TravelPoint> {
 	public CreatureObject getShuttle() {
 		return shuttle;
 	}
+	
+	public SWGObject getCollector() {
+		return collector;
+	}
 
 	public void setShuttle(CreatureObject shuttle) {
 		this.shuttle = shuttle;
+	}
+	
+	public void setCollector(SWGObject collector) {
+		this.collector = collector;
 	}
 	
 	public void setGroup(TravelGroup group) {
