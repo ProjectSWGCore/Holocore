@@ -29,77 +29,36 @@ package network.packets.swg.zone.object_controller;
 
 import java.nio.ByteBuffer;
 
-import resources.server_info.Log;
-import network.packets.swg.SWGPacket;
-
-public abstract class ObjectController extends SWGPacket {
+public class IntendedTarget extends ObjectController {
 	
-	public static final int CRC = 0x80CE5E46;
-	protected static final int HEADER_LENGTH = 26;
+	public static final int CRC = 0x04C5;
 	
-	private final int controllerCrc;
-	private int update = 0;
-	private long objectId = 0;
+	private long targetId;
 	
-	public ObjectController() {
-		this(0, 0);
+	public IntendedTarget(long objectId, long targetId) {
+		super(objectId, CRC);
+		setTargetId(targetId);
 	}
 	
-	public ObjectController(int controllerCrc) {
-		this(0, controllerCrc);
+	public IntendedTarget(ByteBuffer data) {
+		super(CRC);
+		decode(data);
 	}
 	
-	public ObjectController(long objectId, int controllerCrc) {
-		this.objectId = objectId;
-		this.controllerCrc = controllerCrc;
-		this.update = 0x1B;
+	public void decode(ByteBuffer data) {
+		decodeHeader(data);
+		targetId = getLong(data);
 	}
 	
-	protected final void decodeHeader(ByteBuffer data) {
-		if (!super.decode(data, CRC))
-			return;
-		update = getInt(data);
-		if (getInt(data) != controllerCrc)
-			System.err.println("ObjectController[" + getClass().getSimpleName() + "] Attempting to process invalid controller");
-		objectId = getLong(data);
-		getInt(data);
-		return;
+	public ByteBuffer encode() {
+		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + 2);
+		encodeHeader(data);
+		addLong(data, targetId);
+		return data;
 	}
 	
-	protected final void encodeHeader(ByteBuffer data) {
-		addShort(data, 5);
-		addInt(  data, CRC);
-		addInt  (data, update);
-		addInt(  data, controllerCrc);
-		addLong( data, objectId);
-		addInt(  data, 0);
-	}
+	public long getTargetId() { return targetId; }
 	
-	public abstract void decode(ByteBuffer data);
-	public abstract ByteBuffer encode();
-	
-	public long getObjectId() { return objectId; }
-	public int getUpdate() { return update; }
-	public int getControllerCrc() { return controllerCrc; }
-	
-	public void setUpdate(int update) { this.update = update; }
-	
-	public static final ObjectController decodeController(ByteBuffer data) {
-		if (data.array().length < 14)
-			return null;
-		int crc = data.getInt(10);
-		switch (crc) {
-			case 0x0071: return new DataTransform(data);
-			case 0x00F1: return new DataTransformWithParent(data);
-			case 0x0116: return new CommandQueueEnqueue(data);
-			case 0x0117: return new CommandQueueDequeue(data);
-			case 0x012E: return new PlayerEmote(data);
-			case 0x0131: return new PostureUpdate(data);
-			case 0x0146: return new ObjectMenuRequest(data);
-			case 0x04C5: return new IntendedTarget(data);
-		}
-		Log.w("ObjectController", "Unknown object controller: %08X", crc);
-		return null;
-	}
+	public void setTargetId(long targetId) { this.targetId = targetId; }
 	
 }
