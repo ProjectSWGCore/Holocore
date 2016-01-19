@@ -4884,13 +4884,13 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 4882	TATOOINE	tat_jabbas_palace	AREA	1	-6.40	0.20	134.30	0.00	0.69	0.00	0.73	1	Ollobo	14010	POI	Jabbas Palace	1	none	0	300	120	0
 4883	TATOOINE	tat_jabbas_palace	EGG	4	-6.00	5.80	84.50	0.00	0.00	0.00	1.00	1	Ephant Mon	8330	POI	Jabbas Palace	1	none	0	300	120	0
 4884	TATOOINE	tat_jabbas_palace	EGG	22	-8.98	2.00	36.97	0.00	0.00	0.00	0.00	1	Sy Snootles	29870	POI	Jabbas Palace	1	none	0	300	120	0
-4885	TATOOINE	tat_jabbas_palace	EGG	22	-10.36	2.00	43.27	0.00	0.00	0.00	0.00	1	Oola	22390	POI	Jabbas Palace	1	none	0	300	120	0
-4886	TATOOINE	tat_jabbas_palace	EGG	22	-11.40	2.00	49.63	0.00	0.00	0.00	0.00	1	Bib Fortuna	1045	POI	Jabbas Palace	1	none	0	300	120	0
+4885	TATOOINE	tat_jabbas_palace	EGG	22	-10.36	2.00	43.27	0.00	0.69	0.00	0.73	1	Oola	22390	POI	Jabbas Palace	1	dance	0	300	120	0
+4886	TATOOINE	tat_jabbas_palace	EGG	22	-11.40	2.00	49.63	0.00	0.69	0.00	0.73	1	Bib Fortuna	1045	POI	Jabbas Palace	1	none	0	300	120	0
 4887	TATOOINE	tat_jabbas_palace	EGG	22	-11.46	2.00	34.87	0.00	0.00	0.00	0.00	1	Max Rebo	16105	POI	Jabbas Palace	1	none	0	300	120	0
 4888	TATOOINE	tat_jabbas_palace	EGG	22	-12.29	2.00	37.09	0.00	0.00	0.00	0.00	1	Droopy McCool	6035	POI	Jabbas Palace	1	none	0	300	120	0
-4889	TATOOINE	tat_jabbas_palace	EGG	22	-15.06	2.00	46.28	0.00	0.00	0.00	0.00	1	G-5P0	9845	POI	Jabbas Palace	1	none	0	300	120	0
-4890	TATOOINE	tat_jabbas_palace	EGG	22	-16.10	2.00	42.30	0.00	0.00	0.00	0.00	1	Salacious Crumb	25625	POI	Jabbas Palace	1	none	0	300	120	0
-4891	TATOOINE	tat_jabbas_palace	EGG	22	-17.10	2.00	44.20	0.00	0.00	0.00	0.00	1	Jabba the Hutt	13645	POI	Jabbas Palace	1	none	0	300	120	0
+4889	TATOOINE	tat_jabbas_palace	EGG	22	-15.06	2.00	46.28	0.00	0.69	0.00	0.73	1	G-5P0	9845	POI	Jabbas Palace	1	none	0	300	120	0
+4890	TATOOINE	tat_jabbas_palace	EGG	22	-16.10	2.80	42.30	0.00	0.69	0.00	0.73	1	Salacious Crumb	25625	POI	Jabbas Palace	1	none	0	300	120	0
+4891	TATOOINE	tat_jabbas_palace	EGG	22	-17.10	2.80	44.20	0.00	0.69	0.00	0.73	1	Jabba the Hutt	13645	POI	Jabbas Palace	1	none	0	300	120	0
 4892	TATOOINE	tat_jabbas_palace	EGG	12	-43.20	3.00	63.70	0.00	0.00	0.00	1.00	1	Porcellus	23545	POI	Jabbas Palace	1	none	0	300	120	0
 4893	TATOOINE	tat_legacy_darklighter_cave	EGG	3	-21.80	-29.80	-46.30	0.00	0.00	0.00	0.00	1	a Desert Demon brawler	5540	dungeon	Darklighter Cave	1	none	0	300	120	0
 4894	TATOOINE	tat_legacy_darklighter_cave	EGG	3	-21.80	-29.80	-46.30	0.00	0.00	0.00	0.00	1	a CLL-8 binary load lifter	2705	dungeon	Darklighter Cave	1	none	0	300	120	0
@@ -5020,7 +5020,7 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 5018	TATOOINE	tat_moseisley_cantina	EGG	3	-4.10	-0.90	5.70	0.00	0.00	0.00	0.00	1	a commoner	3185	city	Mos Eisley	1	drink	0	300	120	0
 5019	TATOOINE	tat_moseisley_cantina	EGG	3	-3.00	-0.90	5.70	0.00	0.00	0.00	0.00	1	a commoner	3185	city	Mos Eisley	1	drink	0	300	120	0
 5020	TATOOINE	tat_moseisley_combat_gh	EGG	6	-15.00	1.10	1.80	0.00	0.00	0.00	0.00	1	a Junk Dealer	13965	city	Mos Eisley	1	none	0	90	60	0
-5021	TATOOINE	tat_moseisley_combat_gh	EGG	8	-15.00	1.10	-8.40	0.00	0.00	0.00	0.00	1	a businessman	2255	city	Mos Eisley	1	none	0	90	60	0
+5021	TATOOINE	tat_moseisley_combat_gh	EGG	8	3.20	1.10	-8.40	0.00	0.00	0.00	0.00	1	a businessman	2255	city	Mos Eisley	1	none	0	90	60	0
 5022	TATOOINE	tat_moseisley_commerce_gh	EGG	4	0.72	2.50	5.40	0.00	0.00	0.00	0.00	1	Mayor Mikdanyell Guh'rantt	19260	city	Mos Eisley	1	none	0	300	120	0
 5023	TATOOINE	tat_moseisley_generic_house	AREA	1	-3.80	0.50	-1.50	0.00	0.93	0.00	-0.37	1	a Dead Biologist	3395	city	Mos Eisley	1	none	0	300	120	0
 5024	TATOOINE	tat_moseisley_legacy_cult_cave	AREA	15	88.26	-90.51	-330.19	0.00	0.00	0.00	0.00	1	a Krayt cult ministrant	30520	dungeon	Kult Cave	1	none	0	300	120	2
@@ -5864,7 +5864,7 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 5862	TATOOINE	tat_world	AREA	0	-5936.96	51.73	-5974.32	0.00	0.38	0.00	0.92	1	an Elite Dune Lizzard	6290	-	-	1	none	0	300	120	2
 5863	TATOOINE	tat_world	AREA	0	-5927.21	49.47	-5931.22	0.00	0.14	0.00	0.99	1	an Elite Dune Lizzard	6290	-	-	1	none	0	300	120	2
 5864	TATOOINE	tat_world	AREA	0	-5891.39	49.52	-5967.41	0.00	-0.44	0.00	0.90	1	an Elite Dune Lizzard	6290	-	-	1	none	0	300	120	2
-5865	TATOOINE	tat_world	EGG	0	-5889.00	90.00	-6196.00	0.00	0.00	0.00	0.00	1	a pilot	23430	dungeon	Jabbas Palace	1	none	0	300	120	0
+5865	TATOOINE	tat_world	EGG	0	-5858.00	90.00	-6193.00	0.00	0.00	0.00	0.00	1	a pilot	23430	dungeon	Jabbas Palace	1	none	0	300	120	0
 5866	TATOOINE	tat_world	AREA	0	-5880.49	50.47	-5932.83	0.00	-0.70	0.00	0.72	1	an Elite Dune Lizzard	6290	-	-	1	none	0	300	120	2
 5867	TATOOINE	tat_world	AREA	0	-5830.54	353.67	1501.66	0.00	0.61	0.00	0.80	1	a wild bladeback boar	23860	-	-	1	none	0	300	120	2
 5868	TATOOINE	tat_world	AREA	0	-5827.40	352.78	1517.93	0.00	1.00	0.00	0.00	1	a wounded miner	33075	-	-	1	none	0	1800	1500	0
