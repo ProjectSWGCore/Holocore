@@ -40,8 +40,12 @@ public class SkillModService extends Service {
 
     @Override
     public void onIntentReceived(Intent i) {
-        SkillModIntent smi = (SkillModIntent) i;
+        switch(i.getType()) {
+            case SkillModIntent.TYPE: handleSkillModIntent((SkillModIntent) i); break;
+        }
+    }
 
+    private void handleSkillModIntent(SkillModIntent smi) {
         for (CreatureObject creature : smi.getAffectedCreatures()) {
             int adjustBase = smi.getAdjustBase();
             int adjustModifier = smi.getAdjustModifier();
