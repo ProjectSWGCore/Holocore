@@ -1,10 +1,9 @@
 package network;
 
-import resources.network.ServerType;
-import resources.network.UDPServer.UDPPacket;
+import java.net.InetSocketAddress;
 
 public interface PacketSender {
 	
-	void sendPacket(ServerType type, UDPPacket packet);
+	void sendPacket(InetSocketAddress sock, byte [] data);
 	
 }

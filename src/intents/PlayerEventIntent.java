@@ -37,17 +37,11 @@ public class PlayerEventIntent extends Intent {
 	
 	private Player player;
 	private PlayerEvent event;
-	private String galaxy;
 	
 	public PlayerEventIntent(Player p, PlayerEvent event) {
 		super(TYPE);
 		setPlayer(p);
 		setEvent(event);
-	}
-	
-	public PlayerEventIntent(Player p, String galaxy, PlayerEvent event) {
-		this(p, event);
-		this.galaxy = galaxy;
 	}
 	
 	public void setPlayer(Player p) {
@@ -66,7 +60,4 @@ public class PlayerEventIntent extends Intent {
 		return event;
 	}
 	
-	public String getGalaxy() {
-		return galaxy;
-	}
 }

@@ -36,6 +36,8 @@ import resources.player.PlayerState;
 import utilities.Encoder;
 import utilities.Encoder.StringType;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -91,6 +93,11 @@ public class SWGList<E> extends AbstractList<E> implements Encodable, Serializab
 	public SWGList(BaselineType baseline, int view, int updateType, StringType strType) {
 		this (baseline, view, updateType);
 		this.strType = strType;
+	}
+
+	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
+		ois.defaultReadObject();
+		updateCount = 0;
 	}
 
 	/**

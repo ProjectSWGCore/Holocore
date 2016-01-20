@@ -6,10 +6,13 @@ import java.util.Set;
 
 import resources.control.Intent;
 import resources.control.Service;
+import network.packets.Packet;
 import network.packets.swg.zone.ObjectMenuSelect;
+import network.packets.swg.zone.object_controller.IntendedTarget;
 import network.packets.swg.zone.object_controller.ObjectMenuRequest;
 import network.packets.swg.zone.object_controller.ObjectMenuResponse;
 import intents.network.GalacticPacketIntent;
+import intents.radial.ObjectClickedIntent;
 import intents.radial.RadialRegisterIntent;
 import intents.radial.RadialRequestIntent;
 import intents.radial.RadialResponseIntent;
@@ -38,18 +41,23 @@ public class RadialService extends Service {
 	public void onIntentReceived(Intent i) {
 		if (i instanceof GalacticPacketIntent) {
 			GalacticPacketIntent gpi = (GalacticPacketIntent) i;
-			if (gpi.getPacket() instanceof ObjectMenuRequest) {
-				onRequest(gpi.getObjectManager(), (ObjectMenuRequest) gpi.getPacket());
-			} else if (gpi.getPacket() instanceof ObjectMenuSelect) {
-				onSelection(gpi.getGalacticManager(), gpi.getNetworkId(), (ObjectMenuSelect) gpi.getPacket());
+			Packet p = gpi.getPacket();
+			if (p instanceof ObjectMenuRequest) {
+				onRequest(gpi.getObjectManager(), (ObjectMenuRequest) p);
+			} else if (p instanceof ObjectMenuSelect) {
+				onSelection(gpi.getGalacticManager(), gpi.getNetworkId(), (ObjectMenuSelect) p);
+			} else if (p instanceof IntendedTarget) {
+				onObjectClicked(gpi.getObjectManager(), (IntendedTarget) p);
 			}
 		} else if (i instanceof RadialResponseIntent) {
 			onResponse((RadialResponseIntent) i);
 		} else if (i instanceof RadialRegisterIntent) {
-			if (((RadialRegisterIntent) i).isRegister()) {
-				templatesRegistered.addAll(((RadialRegisterIntent) i).getTemplates());
-			} else {
-				templatesRegistered.removeAll(((RadialRegisterIntent) i).getTemplates());
+			synchronized (templatesRegistered) {
+				if (((RadialRegisterIntent) i).isRegister()) {
+					templatesRegistered.addAll(((RadialRegisterIntent) i).getTemplates());
+				} else {
+					templatesRegistered.removeAll(((RadialRegisterIntent) i).getTemplates());
+				}
 			}
 		}
 	}
@@ -57,11 +65,8 @@ public class RadialService extends Service {
 	private void onRequest(ObjectManager objectManager, ObjectMenuRequest request) {
 		SWGObject requestor = objectManager.getObjectById(request.getRequestorId());
 		SWGObject target = objectManager.getObjectById(request.getTargetId());
-		if (target == null) {
-			System.err.println(requestor + " requested a null target! ID: " + request.getTargetId());
-			Log.w("RadialService", "%s requested a null target! ID: %d", requestor, request.getTargetId());
+		if (target == null)
 			return;
-		}
 		if (!(requestor instanceof CreatureObject)) {
 			System.err.println("Requestor of target: " + target + " is not a creature object!");
 			Log.w("RadialService", "Requestor of target: %s is not a creature object! %s", target, requestor);
@@ -73,10 +78,12 @@ public class RadialService extends Service {
 			Log.w("RadialService", "Requestor of target: %s does not have an owner! %s", target, requestor);
 			return;
 		}
-		if (templatesRegistered.contains(target.getTemplate())) {
-			new RadialRequestIntent(player, target, request).broadcast();
-		} else {
-			sendResponse(player, target, request.getOptions(), request.getCounter());
+		synchronized (templatesRegistered) {
+			if (templatesRegistered.contains(target.getTemplate())) {
+				new RadialRequestIntent(player, target, request).broadcast();
+			} else {
+				sendResponse(player, target, request.getOptions(), request.getCounter());
+			}
 		}
 	}
 	
@@ -102,6 +109,29 @@ public class RadialService extends Service {
 			return;
 		}
 		new RadialSelectionIntent(player, target, selection).broadcast();
+	}
+	
+	private void onObjectClicked(ObjectManager objectManager, IntendedTarget it) {
+		SWGObject requestor = objectManager.getObjectById(it.getObjectId());
+		SWGObject target = objectManager.getObjectById(it.getTargetId());
+		if (target == null)
+			return;
+		if (!(requestor instanceof CreatureObject)) {
+			System.err.println("Requestor of target: " + target + " is not a creature object!");
+			Log.w("RadialService", "Requestor of target: %s is not a creature object! %s", target, requestor);
+			return;
+		}
+		Player player = requestor.getOwner();
+		if (player == null) {
+			System.err.println("Requestor of target: " + target + " does not have an owner!");
+			Log.w("RadialService", "Requestor of target: %s does not have an owner! %s", target, requestor);
+			return;
+		}
+		synchronized (templatesRegistered) {
+			if (templatesRegistered.contains(target.getTemplate())) {
+				new ObjectClickedIntent((CreatureObject) requestor, target).broadcast();
+			}
+		}
 	}
 	
 	private void sendResponse(Player player, SWGObject target, List<RadialOption> options, int counter) {

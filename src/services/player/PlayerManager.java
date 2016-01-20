@@ -30,28 +30,22 @@ package services.player;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
 import network.packets.Packet;
-import network.packets.soe.SessionRequest;
-import network.packets.swg.login.ClientIdMsg;
-import network.packets.swg.zone.insertion.SelectCharacter;
 import intents.NotifyPlayersPacketIntent;
 import intents.PlayerEventIntent;
+import intents.network.ConnectionClosedIntent;
+import intents.network.ConnectionOpenedIntent;
 import intents.network.GalacticPacketIntent;
-import intents.network.InboundPacketIntent;
-import intents.player.ZonePlayerSwapIntent;
 import resources.Terrain;
 import resources.control.Intent;
 import resources.control.Manager;
-import resources.network.ServerType;
 import resources.player.Player;
 import resources.player.PlayerEvent;
 import resources.player.PlayerState;
-import resources.server_info.Log;
 
 public class PlayerManager extends Manager {
 	
@@ -68,10 +62,11 @@ public class PlayerManager extends Manager {
 		addChildService(loginService);
 		addChildService(zoneService);
 		
-		registerForIntent(InboundPacketIntent.TYPE);
 		registerForIntent(GalacticPacketIntent.TYPE);
 		registerForIntent(PlayerEventIntent.TYPE);
 		registerForIntent(NotifyPlayersPacketIntent.TYPE);
+		registerForIntent(ConnectionOpenedIntent.TYPE);
+		registerForIntent(ConnectionClosedIntent.TYPE);
 	}
 	
 	@Override
@@ -81,14 +76,14 @@ public class PlayerManager extends Manager {
 	
 	@Override
 	public void onIntentReceived(Intent i) {
-		if (i instanceof InboundPacketIntent)
-			onInboundPacketIntent((InboundPacketIntent) i);
-		else if (i instanceof GalacticPacketIntent)
-			onGalacticPacketIntent((GalacticPacketIntent) i);
-		else if (i instanceof PlayerEventIntent)
+		if (i instanceof PlayerEventIntent)
 			onPlayerEventIntent((PlayerEventIntent) i);
 		else if (i instanceof NotifyPlayersPacketIntent)
 			onNotifyPlayersPacketIntent((NotifyPlayersPacketIntent) i);
+		else if (i instanceof ConnectionOpenedIntent)
+			onConnectionOpenedIntent((ConnectionOpenedIntent) i);
+		else if (i instanceof ConnectionClosedIntent)
+			onConnectionClosedIntent((ConnectionClosedIntent) i);
 	}
 
 	public boolean playerExists(String name) {
@@ -241,45 +236,6 @@ public class PlayerManager extends Manager {
 		}
 	}
 	
-	private void removeDuplicatePlayers(Player player, long charId) {
-		synchronized (players) {
-			Iterator <Player> it = players.values().iterator();
-			while (it.hasNext()) {
-				Player p = it.next();
-				if (p != player && p.getCreatureObject() != null && p.getCreatureObject().getObjectId() == charId) {
-					new ZonePlayerSwapIntent(p, player, p.getCreatureObject()).broadcast();
-					it.remove();
-				}
-			}
-		}
-	}
-	
-	private Player transitionLoginToZone(long networkId, int galaxyId, String galaxyName, ClientIdMsg clientId) {
-		final byte [] nToken = clientId.getSessionToken();
-		synchronized (players) {
-			for (Player p : players.values()) {
-				byte [] pToken = p.getSessionToken();
-				if (pToken.length != nToken.length)
-					continue;
-				boolean match = true;
-				for (int t = 0; t < pToken.length && match; t++) {
-					if (pToken[t] != nToken[t])
-						match = false;
-				}
-				if (match) {
-					players.remove(p.getNetworkId());
-					p.setNetworkId(networkId);
-					p.setGalaxyId(galaxyId);
-					p.setGalaxyName(galaxyName);
-					players.put(networkId, p);
-					Log.i("PlayerManager", "Transitioned %s from login to zone", p.getUsername());
-					return p;
-				}
-			}
-		}
-		return null;
-	}
-	
 	private void onPlayerEventIntent(PlayerEventIntent pei) {
 		synchronized (players) {
 			if (pei.getEvent() == PlayerEvent.PE_DISAPPEAR) {
@@ -291,40 +247,6 @@ public class PlayerManager extends Manager {
 		}
 	}
 	
-	private void onInboundPacketIntent(InboundPacketIntent ipi) {
-		Player player = getPlayerFromNetworkId(ipi.getNetworkId());
-		if (player != null)
-			player.updateLastPacketTimestamp();
-	}
-	
-	private void onGalacticPacketIntent(GalacticPacketIntent gpi) {
-		Packet packet = gpi.getPacket();
-		ServerType type = gpi.getServerType();
-		long networkId = gpi.getNetworkId();
-		Player player = null;
-		if (type == ServerType.ZONE && packet instanceof ClientIdMsg) {
-			String galaxyName = gpi.getGalaxy().getName();
-			int galaxyId = gpi.getGalaxy().getId();
-			player = transitionLoginToZone(networkId, galaxyId, galaxyName, (ClientIdMsg) packet);
-		} else
-			player = getPlayerFromNetworkId(networkId);
-		if (player != null && type == ServerType.ZONE && packet instanceof SelectCharacter)
-			removeDuplicatePlayers(player, ((SelectCharacter)packet).getCharacterId());
-		if (type == ServerType.LOGIN && player == null) {
-			player = new Player(this, networkId);
-			synchronized (players) {
-				players.put(networkId, player);
-			}
-		}
-		if (player != null) {
-			if (type == ServerType.LOGIN)
-				loginService.handlePacket(gpi, player, packet);
-			else if (type == ServerType.ZONE)
-				zoneService.handlePacket(gpi, player, networkId, packet);
-		} else if (type == ServerType.ZONE && packet instanceof SessionRequest)
-			zoneService.handlePacket(gpi, player, networkId, packet);
-	}
-	
 	private void onNotifyPlayersPacketIntent(NotifyPlayersPacketIntent nppi) {
 		if (nppi.getNetworkIds() != null) {
 			if (nppi.getTerrain() != null) notifyPlayersAtPlanet(nppi.getNetworkIds(), nppi.getCondition(), nppi.getTerrain(), nppi.getPacket());
@@ -332,6 +254,28 @@ public class PlayerManager extends Manager {
 		} else {
 			if (nppi.getTerrain() != null) notifyPlayersAtPlanet(nppi.getCondition(), nppi.getTerrain(), nppi.getPacket());
 			else notifyPlayers(nppi.getCondition(), nppi.getPacket());
+		}
+	}
+	
+	private void onConnectionOpenedIntent(ConnectionOpenedIntent coi) {
+		Player p = new Player(this, coi.getNetworkId());
+		synchronized (players) {
+			players.put(coi.getNetworkId(), p);
+		}
+		p.setPlayerState(PlayerState.CONNECTED);
+		new PlayerEventIntent(p, PlayerEvent.PE_CONNECTED).broadcast();
+	}
+	
+	private void onConnectionClosedIntent(ConnectionClosedIntent cci) {
+		Player p;
+		synchronized (players) {
+			p = players.remove(cci.getNetworkId());
+		}
+		if (p != null) {
+			p.setPlayerState(PlayerState.DISCONNECTED);
+			new PlayerEventIntent(p, PlayerEvent.PE_LOGGED_OUT).broadcast();
+		} else {
+			System.err.println("No player found for ID: " + cci.getNetworkId());
 		}
 	}
 }

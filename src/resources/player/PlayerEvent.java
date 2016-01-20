@@ -29,6 +29,7 @@ package resources.player;
 
 public enum PlayerEvent {
 	
+	PE_CONNECTED,
 	PE_CREATE_CHARACTER,
 	PE_FIRST_ZONE,
 	PE_ZONE_IN,

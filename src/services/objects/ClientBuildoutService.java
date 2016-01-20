@@ -1,10 +1,11 @@
 package services.objects;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Locale;
@@ -23,7 +24,6 @@ import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.cell.CellObject;
 import resources.objects.creature.CreatureObject;
-import resources.server_info.Config;
 import resources.server_info.Log;
 import resources.server_info.RelationalServerData;
 import resources.server_info.RelationalServerFactory;
@@ -31,35 +31,22 @@ import resources.server_info.RelationalServerFactory;
 public class ClientBuildoutService extends Service {
 	
 	private static final String GET_BUILDOUT_AREAS = "SELECT * FROM areas ORDER BY area_name ASC, event ASC";
-	private static final String GET_CLIENT_OBJECTS_SQL = "SELECT objects.*, areas.terrain "
-			+ "FROM objects, areas "
-			+ "WHERE objects.area_id = areas.id "
+	private static final String GET_CLIENT_OBJECTS_SQL = "SELECT objects.id, objects.area_id, objects.template_crc, objects.container_id, "
+			+ "objects.x, objects.y, objects.z, objects.orientation_x, objects.orientation_y, objects.orientation_z, objects.orientation_w, "
+			+ "objects.radius, objects.cell_index "
+			+ "FROM objects "
 			+ "ORDER BY buildout_id ASC";
 	
 	private final CrcStringTableData strings;
-	private final RelationalServerData clientSdb;
 	private final List<BuildoutArea> areas;
 	private final Map<Integer, BuildoutArea> areasById;
-	private final PreparedStatement getClientObjects;
 	
 	public ClientBuildoutService() {
 		strings = (CrcStringTableData) ClientFactory.getInfoFromFile("misc/object_template_crc_string_table.iff");
-		clientSdb = RelationalServerFactory.getServerData("buildout/buildouts.db", "areas", "objects");
-		if (clientSdb == null)
-			throw new main.ProjectSWG.CoreException("Unable to load sdb files for ClientObjectLoader");
 		areas = new ArrayList<>();
 		areasById = new Hashtable<>(1000); // Number of buildout areas
 		
-		getClientObjects = clientSdb.prepareStatement(GET_CLIENT_OBJECTS_SQL);
-		
 		registerForIntent(PlayerTransformedIntent.TYPE);
-	}
-	
-	@Override
-	public boolean initialize() {
-		List<String> events = getEvents();
-		loadAreas(events);
-		return super.initialize();
 	}
 	
 	@Override
@@ -74,40 +61,72 @@ public class ClientBuildoutService extends Service {
 		}
 	}
 	
-	public Map<Long, SWGObject> loadClientObjects() {
-		Config c = getConfig(ConfigFile.PRIMARY);
-		if (c.getBoolean("LOAD-OBJECTS", true)) {
-			System.out.println("ClientBuildoutService: Loading client objects...");
-			Log.i("ClientBuildoutService", "Loading client objects...");
-			long startLoad = System.nanoTime();
-			Map<Long, SWGObject> objects = new Hashtable<>(4*1024);
-			loadClientObjects(objects);
-			double loadTime = (System.nanoTime() - startLoad) / 1E6;
-			System.out.printf("ClientObjectLoader: Finished loading %d client objects. Time: %fms%n", objects.size(), loadTime);
-			Log.i("ClientObjectLoader", "Finished loading %d client objects. Time: %fms", objects.size(), loadTime);
-			return objects;
-		} else {
-			Log.w("ClientObjectLoader", "Did not load client objects. Reason: Disabled.");
-			System.out.println("ClientObjectLoader: Did not load client objects. Reason: Disabled!");
+	public Collection<SWGObject> loadClientObjects() {
+		Collection<SWGObject> objects;
+		long startLoad = System.nanoTime();
+		logInfo("Loading client objects...");
+		try {
+			loadAreas(getEvents());
+			if (getConfig(ConfigFile.PRIMARY).getBoolean("LOAD-OBJECTS", true))
+				objects = loadObjects();
+			else
+				objects = new HashSet<>();
+		} catch (SQLException e) {
+			objects = new HashSet<>();
+			e.printStackTrace();
+			Log.e(this, e);
 		}
-		return new HashMap<>();
+		double loadTime = (System.nanoTime() - startLoad) / 1E6;
+		logInfo("Finished loading %d client objects. Time: %fms", objects.size(), loadTime);
+		return objects;
 	}
 	
-	private void loadClientObjects(Map<Long, SWGObject> objects) {
-		try (ResultSet set = getClientObjects.executeQuery()) {
-			set.setFetchSize(1500);
-			BuildoutArea area = null;
-			ColumnIndexes ind = new ColumnIndexes(set);
-			SWGObject obj;
-			Location l = new Location();
-			while (set.next()) {
-				area = areasById.get(ind.areaInd);
-				obj = createObject(set, objects, l, area, ind);
-				objects.put(obj.getObjectId(), obj);
+	private Collection<SWGObject> loadObjects() throws SQLException {
+		Map<Long, SWGObject> objects = new Hashtable<>();
+		try (RelationalServerData data = RelationalServerFactory.getServerData("buildout/buildouts.db", "objects")) {
+			try (ResultSet set = data.executeQuery(GET_CLIENT_OBJECTS_SQL)) {
+				set.setFetchSize(4*1024);
+				BuildoutArea area = null;
+				ObjectInformation info = new ObjectInformation(set);
+				int prevAreaId = Integer.MAX_VALUE;
+				int areaId = 0;
+				while (set.next()) {
+					areaId = info.getAreaIdNoLoad();
+					if (prevAreaId != areaId) {
+						area = areasById.get(areaId);
+						prevAreaId = areaId;
+					}
+					if (area == null)
+						continue;
+					info.load(strings);
+					createObject(objects, area, info);
+				}
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
 		}
+		return Collections.unmodifiableCollection(objects.values());
+	}
+	
+	private void createObject(Map<Long, SWGObject> objects, BuildoutArea area, ObjectInformation info) throws SQLException {
+		SWGObject obj = ObjectCreator.createObjectFromTemplate(info.getId(), info.getTemplate());
+		Location l = info.getLocation();
+		l.setTerrain(area.getTerrain());
+		obj.setLocation(l);
+		obj.setBuildout(true);
+		obj.setBuildoutArea(area);
+		obj.setLoadRange(info.getRadius());
+		checkCell(obj, info.getCell());
+		checkChild(objects, obj, info.getContainer());
+		objects.put(obj.getObjectId(), obj);
+	}
+	
+	private void checkCell(SWGObject obj, int cell) {
+		if (cell != 0 && obj instanceof CellObject)
+			((CellObject) obj).setNumber(cell);
+	}
+	
+	private void checkChild(Map<Long, SWGObject> objects, SWGObject obj, long container) {
+		if (container != 0)
+			objects.get(container).addObject(obj);
 	}
 	
 	private List<String> getEvents() {
@@ -122,37 +141,20 @@ public class ClientBuildoutService extends Service {
 		return events;
 	}
 	
-	private SWGObject createObject(ResultSet set, Map<Long, SWGObject> objects, Location l, BuildoutArea area, ColumnIndexes ind) throws SQLException {
-		SWGObject obj = ObjectCreator.createObjectFromTemplate(set.getLong(ind.idInd), strings.getTemplateString(set.getInt(ind.crcInd)));
-		l.setTerrain(Terrain.getTerrainFromName(set.getString(ind.terInd)));
-		l.setPosition(set.getDouble(ind.xInd), set.getDouble(ind.yInd), set.getDouble(ind.zInd));
-		l.setOrientation(set.getDouble(ind.oxInd), set.getDouble(ind.oyInd), set.getDouble(ind.ozInd), set.getDouble(ind.owInd));
-		obj.setLocation(l);
-		obj.setBuildout(true);
-		obj.setBuildoutArea(area);
-		obj.setLoadRange(set.getInt(ind.radiusInd));
-		int cell = set.getInt(ind.cellInd);
-		if (cell != 0 && obj instanceof CellObject)
-			((CellObject) obj).setNumber(cell);
-		long container = set.getLong(ind.contInd);
-		if (container != 0)
-			objects.get(container).addObject(obj);
-		return obj;
-	}
-	
-	private void loadAreas(List <String> events) {
+	private void loadAreas(List <String> events) throws SQLException {
 		BuildoutArea primary = null; // Stored as "best area" for what we want to load
-		try (RelationalServerData data = RelationalServerFactory.getServerData("buildout/buildouts.db", "areas")) {
-			try (ResultSet set = data.prepareStatement(GET_BUILDOUT_AREAS).executeQuery()) {
+		try (RelationalServerData data = RelationalServerFactory.getServerData("buildout/areas.db", "areas")) {
+			try (ResultSet set = data.executeQuery(GET_BUILDOUT_AREAS)) {
 				areas.clear();
 				areasById.clear();
 				AreaIndexes ind = new AreaIndexes(set);
 				boolean loaded = false;
 				while (set.next()) {
 					BuildoutArea area = createArea(set, ind);
+					area.setLoaded(false);
 					if (area.getEvent().isEmpty() && (primary == null || !area.getName().equals(primary.getName()))) {
 						if (!loaded && primary != null)
-							loadArea(primary);
+							loadArea(area);
 						loaded = false;
 						primary = area; // Primary area, no event
 					}
@@ -164,9 +166,13 @@ public class ClientBuildoutService extends Service {
 				if (!loaded && primary != null)
 					loadArea(primary);
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
 		}
+	}
+	
+	private void loadArea(BuildoutArea area) {
+		area.setLoaded(true);
+		areas.add(area);
+		areasById.put(area.getId(), area);
 	}
 	
 	private void handlePlayerTransform(PlayerTransformedIntent pti) {
@@ -177,11 +183,6 @@ public class ClientBuildoutService extends Service {
 			area = getAreaForObject(creature);
 			creature.setBuildoutArea(area);
 		}
-	}
-	
-	private void loadArea(BuildoutArea area) {
-		areas.add(area);
-		areasById.put(area.getId(), area);
 	}
 	
 	private BuildoutArea createArea(ResultSet set, AreaIndexes ind) throws SQLException {
@@ -235,6 +236,11 @@ public class ClientBuildoutService extends Service {
 		return (low + high) / 2;
 	}
 	
+	private void logInfo(String message, Object ... args) {
+		System.out.printf(getClass().getSimpleName() + ": " + message + "%n", args);
+		Log.i(this, message, args);
+	}
+	
 	private static class AreaIndexes {
 		
 		private int id;
@@ -258,11 +264,49 @@ public class ClientBuildoutService extends Service {
 		
 	}
 	
+	private static class ObjectInformation {
+		
+		private final ColumnIndexes index;
+		private final ResultSet set;
+		private final Location l;
+		private long id;
+		private String template;
+		private float radius;
+		private long container;
+		private int cell;
+		
+		public ObjectInformation(ResultSet set) throws SQLException {
+			this.set = set;
+			index = new ColumnIndexes(set);
+			l = new Location();
+		}
+		
+		public void load(CrcStringTableData strings) throws SQLException {
+			id = set.getLong(index.idInd);
+			template = strings.getTemplateString(set.getInt(index.crcInd));
+			l.setPosition(set.getDouble(index.xInd), set.getDouble(index.yInd), set.getDouble(index.zInd));
+			l.setOrientation(set.getDouble(index.oxInd), set.getDouble(index.oyInd), set.getDouble(index.ozInd), set.getDouble(index.owInd));
+			radius = set.getInt(index.radiusInd);
+			container = set.getLong(index.contInd);
+			cell = set.getInt(index.cellInd);
+		}
+		
+		public int getAreaIdNoLoad() throws SQLException {
+			return set.getInt(index.areaInd);
+		}
+		
+		public long getId() { return id; }
+		public String getTemplate() { return template; }
+		public Location getLocation() { return l; }
+		public double getRadius() { return radius; }
+		public long getContainer() { return container; }
+		public int getCell() { return cell; }
+	}
+	
 	private static class ColumnIndexes {
 		
 		public final int idInd;
 		public final int crcInd;
-		public final int terInd;
 		public final int areaInd;
 		public final int xInd;
 		public final int yInd;
@@ -277,8 +321,7 @@ public class ClientBuildoutService extends Service {
 		
 		public ColumnIndexes(ResultSet set) throws SQLException {
 			idInd = set.findColumn("id");
-			crcInd = set.findColumn("templateCrc");
-			terInd = set.findColumn("terrain");
+			crcInd = set.findColumn("template_crc");
 			areaInd = set.findColumn("area_id");
 			xInd = set.findColumn("x");
 			yInd = set.findColumn("y");
@@ -288,8 +331,8 @@ public class ClientBuildoutService extends Service {
 			ozInd = set.findColumn("orientation_z");
 			owInd = set.findColumn("orientation_w");
 			radiusInd = set.findColumn("radius");
-			contInd = set.findColumn("containerId");
-			cellInd = set.findColumn("cellIndex");
+			contInd = set.findColumn("container_id");
+			cellInd = set.findColumn("cell_index");
 		}
 		
 	}

@@ -30,7 +30,6 @@ package services;
 import java.io.File;
 import java.io.IOException;
 
-import resources.Galaxy;
 import resources.client_info.ServerFactory;
 import resources.config.ConfigFile;
 import resources.control.Manager;
@@ -43,8 +42,8 @@ public class EngineManager extends Manager {
 	private ShutdownService shutdownService;
 	private NetworkManager networkManager;
 	
-	public EngineManager(Galaxy galaxy) {
-		networkManager = new NetworkManager(galaxy);
+	public EngineManager() {
+		networkManager = new NetworkManager();
 		shutdownService = new ShutdownService();
 		
 		addChildService(networkManager);

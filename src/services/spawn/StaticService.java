@@ -105,6 +105,8 @@ public class StaticService extends Service {
 	}
 	
 	private SWGObject createObject(String iff, SWGObject parent, double x, double y, double z, double heading) {
+		if (parent == null)
+			return null;
 		Location loc = new Location(x, y, z, parent.getTerrain());
 		loc.setHeading(heading);
 		return objectManager.createObject(parent, iff, loc, false);

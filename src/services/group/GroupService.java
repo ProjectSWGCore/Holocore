@@ -31,9 +31,7 @@ import intents.GroupEventIntent;
 import intents.NotifyPlayersPacketIntent;
 import intents.PlayerEventIntent;
 import intents.chat.ChatRoomUpdateIntent;
-import intents.object.ObjectCreateIntent;
-import intents.object.ObjectIdRequestIntent;
-import intents.object.ObjectIdResponseIntent;
+import intents.object.ObjectCreatedIntent;
 import network.packets.swg.zone.chat.ChatSystemMessage;
 import resources.chat.ChatAvatar;
 import resources.control.Intent;
@@ -44,7 +42,6 @@ import resources.encodables.StringId;
 import resources.objects.creature.CreatureObject;
 import resources.objects.group.GroupObject;
 import resources.player.Player;
-import resources.player.PlayerEvent;
 import resources.server_info.Log;
 import services.objects.ObjectCreator;
 import services.player.PlayerManager;
@@ -59,19 +56,16 @@ import java.util.Map;
  * Created by Waverunner on 10/4/2015
  */
 public class GroupService extends Service {
-
-	private final List<Long> reservedIds = new ArrayList<>();
+	
 	private final Map<Long, GroupObject> groups = new HashMap<>();
 	
 	public GroupService() {
 		registerForIntent(GroupEventIntent.TYPE);
 		registerForIntent(PlayerEventIntent.TYPE);
-		registerForIntent(ObjectIdResponseIntent.TYPE);
 	}
 	
 	@Override
 	public boolean start() {
-		new ObjectIdRequestIntent("GroupService", 50).broadcast();
 		return super.start();
 	}
 
@@ -83,18 +77,9 @@ public class GroupService extends Service {
 				if (i instanceof GroupEventIntent)
 					handleGroupEventIntent((GroupEventIntent) i);
 				break;
-			case ObjectIdResponseIntent.TYPE:
-				if (!(i instanceof ObjectIdResponseIntent) || !((ObjectIdResponseIntent) i).getIdentifier().equals("GroupService"))
-					break;
-				reservedIds.addAll(((ObjectIdResponseIntent)i).getReservedIds());
-				break;
 			case PlayerEventIntent.TYPE:
-				if (i instanceof PlayerEventIntent) {
-					PlayerEventIntent pei = (PlayerEventIntent) i;
-					if (pei.getEvent() == PlayerEvent.PE_FIRST_ZONE) {
-						pei.getPlayer().getCreatureObject().setGroupId(0);
-					}
-				}
+				if (i instanceof PlayerEventIntent)
+					handlePlayerEventIntent((PlayerEventIntent) i);
 				break;
 			default: break;
 		}
@@ -112,6 +97,32 @@ public class GroupService extends Service {
 				handleGroupDisband(intent.getPlayer(), intent.getTarget());
 				break;
 		}
+	}
+
+	private void handlePlayerEventIntent(PlayerEventIntent intent) {
+		switch(intent.getEvent()) {
+			case PE_FIRST_ZONE:
+				handleMemberRezoned(intent.getPlayer());
+				break;
+			default: break;
+		}
+	}
+
+	private void handleMemberRezoned(Player player) {
+		CreatureObject creatureObject = player.getCreatureObject();
+		long groupId = creatureObject.getGroupId();
+
+		if (groupId == 0)
+			return;
+
+		GroupObject groupObject = getGroup(creatureObject.getGroupId());
+		if (groupObject == null) {
+			// Group was destroyed while logged out
+			creatureObject.setGroupId(0);
+			return;
+		}
+
+		groupObject.updateMember(creatureObject);
 	}
 
 	private void handleGroupDisband(Player player, CreatureObject target) {
@@ -268,7 +279,7 @@ public class GroupService extends Service {
 	}
 
 	private GroupObject createGroup(Player player) {
-		GroupObject group = (GroupObject) ObjectCreator.createObjectFromTemplate(getNextObjectId(), "object/group/shared_group_object.iff");
+		GroupObject group = (GroupObject) ObjectCreator.createObjectFromTemplate("object/group/shared_group_object.iff");
 		if (group == null)
 			return null;
 
@@ -276,22 +287,13 @@ public class GroupService extends Service {
 
 		groups.put(group.getObjectId(), group);
 
-		new ObjectCreateIntent(group).broadcast();
+		new ObjectCreatedIntent(group).broadcast();
 
 		String galaxy = player.getGalaxyName();
 		new ChatRoomUpdateIntent(getGroupChatPath(group.getObjectId(), galaxy), String.valueOf(group.getObjectId()), null,
 				ChatAvatar.getSystemAvatar(galaxy), null, ChatRoomUpdateIntent.UpdateType.CREATE).broadcast();
 
 		return group;
-	}
-
-	private long getNextObjectId() {
-		synchronized (reservedIds) {
-			if (reservedIds.size() <= 5)
-				new ObjectIdRequestIntent("GroupService", 50).broadcast();
-
-			return reservedIds.remove(0);
-		}
 	}
 
 	private void sendGroupSystemMessage(GroupObject group, String id) {
