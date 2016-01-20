@@ -123,7 +123,7 @@ public class OnlineInterfaceService extends Service implements HttpServerCallbac
 				}
 			}
 			if (!socket.isSecure()) {
-				socket.redirect(new URL("https", socket.getInetAddress().getHostName(), httpsServer.getBindPort(), request.getURI().getPath()).toString());
+				socket.redirect(new URL(request.getURI().getPath()).toString());
 				return;
 			}
 			handler.handleRequest(socket, request);
@@ -183,10 +183,7 @@ public class OnlineInterfaceService extends Service implements HttpServerCallbac
 							Log.i(TAG, "[%s] Successfully logged in to online interface", username);
 					} else {
 						Log.w(TAG, "[%s] Failed to login to online interface. Incorrect user/pass", username);
-						socket.redirect(new URL("https", socket.getInetAddress().getHostName(), httpsServer.getBindPort(), "/").toString());
 					}
-				} catch (IOException e) {
-					e.printStackTrace();
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
