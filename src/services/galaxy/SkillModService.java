@@ -27,44 +27,32 @@
 ***********************************************************************************/
 package services.galaxy;
 
-import resources.control.Manager;
-import services.commands.BuffService;
-import services.commands.CommandService;
-import services.faction.FactionService;
-import services.galaxy.terminals.TerminalService;
-import services.sui.SuiService;
+import intents.SkillModIntent;
+import resources.control.Intent;
+import resources.control.Service;
+import resources.objects.creature.CreatureObject;
 
-public class GameManager extends Manager {
+public class SkillModService extends Service {
 
-	private final CommandService commandService;
-	private final ConnectionService connectionService;
-	private final SuiService suiService;
-	private final EnvironmentService weatherService;
-	private final TerminalService terminalManager;
-	private final FactionService factionService;
-//	private final GroupService groupService;
-	private final BuffService buffService;
-        private final SkillModService skillModService;
+    public SkillModService() {
+        registerForIntent(SkillModIntent.TYPE);
+    }
 
-	public GameManager() {
-		commandService = new CommandService();
-		connectionService = new ConnectionService();
-		suiService = new SuiService();
-		weatherService = new EnvironmentService();
-		terminalManager = new TerminalService();
-		factionService = new FactionService();
-//		groupService = new GroupService();
-		buffService = new BuffService();
-                skillModService = new SkillModService();
+    @Override
+    public void onIntentReceived(Intent i) {
+        switch(i.getType()) {
+            case SkillModIntent.TYPE: handleSkillModIntent((SkillModIntent) i); break;
+        }
+    }
 
-		addChildService(commandService);
-		addChildService(connectionService);
-		addChildService(suiService);
-		addChildService(weatherService);
-		addChildService(terminalManager);
-		addChildService(factionService);
-//		addChildService(groupService);
-		addChildService(buffService);
-                addChildService(skillModService);
-	}
+    private void handleSkillModIntent(SkillModIntent smi) {
+        for (CreatureObject creature : smi.getAffectedCreatures()) {
+            int adjustBase = smi.getAdjustBase();
+            int adjustModifier = smi.getAdjustModifier();
+            String skillModName = smi.getSkillModName();
+            
+            creature.adjustSkillmod(skillModName, adjustBase, adjustModifier);
+        }
+    }
+
 }
