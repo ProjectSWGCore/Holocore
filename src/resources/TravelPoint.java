@@ -27,14 +27,18 @@
 ***********************************************************************************/
 package resources;
 
+import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
+import services.galaxy.travel.TravelGroup;
 
-public final class TravelPoint {
+public final class TravelPoint implements Comparable<TravelPoint> {
 	
 	private final String name;
 	private final Location location;
 	private final boolean reachable;
+	private TravelGroup group;
 	private CreatureObject shuttle;
+	private SWGObject collector;
 	private final boolean starport;
 	
 	public TravelPoint(String name, Location location, boolean starport, boolean reachable) {
@@ -42,6 +46,7 @@ public final class TravelPoint {
 		this.location = location;
 		this.starport = starport;
 		this.reachable = reachable;	// Not sure which effect this has on the client.
+		this.group = null;
 	}
 	
 	public String getName() {
@@ -50,6 +55,10 @@ public final class TravelPoint {
 	
 	public Location getLocation() {
 		return location;
+	}
+	
+	public TravelGroup getGroup() {
+		return group;
 	}
 
 	public boolean isStarport() {
@@ -63,12 +72,45 @@ public final class TravelPoint {
 	public CreatureObject getShuttle() {
 		return shuttle;
 	}
+	
+	public SWGObject getCollector() {
+		return collector;
+	}
 
 	public void setShuttle(CreatureObject shuttle) {
 		this.shuttle = shuttle;
 	}
 	
+	public void setCollector(SWGObject collector) {
+		this.collector = collector;
+	}
+	
+	public void setGroup(TravelGroup group) {
+		this.group = group;
+	}
+	
 	public String getSuiFormat() {
 		return String.format("@planet_n:%s -- %s", location.getTerrain().getName(), name);
 	}
+	
+	@Override
+	public int compareTo(TravelPoint o) {
+		int comp = location.getTerrain().compareTo(o.getLocation().getTerrain());
+		if (comp != 0)
+			return comp;
+		return name.compareTo(o.getName());
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (!(o instanceof TravelPoint))
+			return false;
+		return name.equals(((TravelPoint) o).getName());
+	}
+	
+	@Override
+	public int hashCode() {
+		return name.hashCode();
+	}
+	
 }

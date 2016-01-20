@@ -27,8 +27,6 @@
 ***********************************************************************************/
 package resources.player;
 
-import java.io.Serializable;
-
 import network.packets.Packet;
 import resources.control.Service;
 import resources.objects.SWGObject;
@@ -36,11 +34,9 @@ import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
 import services.player.PlayerManager;
 
-public class Player implements Serializable, Comparable<Player> {
+public class Player implements Comparable<Player> {
 	
-	private static final long serialVersionUID = 1L;
-	
-	private transient Service playerManager;
+	private Service playerManager;
 	
 	private long networkId;
 	private PlayerState state		= PlayerState.DISCONNECTED;

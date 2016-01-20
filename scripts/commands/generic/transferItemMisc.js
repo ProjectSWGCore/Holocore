@@ -14,14 +14,11 @@ function executeCommand(galacticManager, player, target, args) {
 		return;
 	}
 	
-	if(target.getParent() == actor) {
-		result = target.moveToContainer(actor, inventory);
-		actor.removeEquipment(target)
-	} else {
-		result = target.moveToContainer(actor, actor);
-		actor.addEquipment(target)
-	}
-
 	result = target.moveToContainer(actor, newContainer); // Move item from the old container to the new container
+	if (actor.getEquipmentList().contains(target)) {
+		actor.removeEquipment(target);
+	} else if (newContainer == actor) {
+		actor.addEquipment(target);
+	}
 
 }

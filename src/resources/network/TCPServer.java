@@ -129,17 +129,19 @@ public class TCPServer {
 	}
 	
 	public boolean send(InetSocketAddress sock, byte [] data) {
-		SocketChannel sc = sockets.get(sock);
-		try {
-			if (sc != null && sc.isConnected()) {
-				ByteBuffer bb = ByteBuffer.wrap(data);
-				while (bb.hasRemaining())
-					sc.write(bb);
-				return true;
+		synchronized (sockets) {
+			SocketChannel sc = sockets.get(sock);
+			try {
+				if (sc != null && sc.isConnected()) {
+					ByteBuffer bb = ByteBuffer.wrap(data);
+					while (bb.hasRemaining())
+						sc.write(bb);
+					return true;
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+				disconnect(sc);
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
-			disconnect(sc);
 		}
 		return false;
 	}

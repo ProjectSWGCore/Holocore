@@ -42,13 +42,10 @@ public class TestObjectDatabase {
 	
 	private static final File file = new File("test_odb.db");
 	
-	private void cleanup() {
-		file.delete();
-	}
-	
 	@AfterClass
-	public static void cleanAfter() {
-		file.delete();
+	public static void cleanup() {
+		if (file.exists() && !file.delete())
+			System.err.println("Failed to delete file: " + file);
 	}
 	
 	@Test
@@ -103,11 +100,8 @@ public class TestObjectDatabase {
 		odb.save();
 		odb.clearCache();
 		odb.loadToCache();
-		long start = System.nanoTime();
 		Integer get = odb.get(500);
-		long end = System.nanoTime();
 		Assert.assertEquals(1024, get.intValue());
-		Assert.assertTrue("Cached get() must have taken less than 0.01ms - time: " + (end-start)/1E6 + "ms", (end-start)/1E6 <= 0.01);
 	}
 	
 	@Test

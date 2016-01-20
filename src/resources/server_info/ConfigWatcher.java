@@ -91,8 +91,10 @@ public final class ConfigWatcher {
 					// but an OVERFLOW event can
 					// occur regardless if events
 					// are lost or discarded.
-					if (eventKind == OVERFLOW)
+					if (eventKind == OVERFLOW) {
+						key.reset();
 						continue;
+					}
 	
 					// The context is the name of the file.
 					ev = (WatchEvent<Path>) event;
@@ -101,8 +103,10 @@ public final class ConfigWatcher {
 					cfgFile = ConfigFile.configFileForName(CFGPATH + filename);
 					cfg = configMap.get(cfgFile);
 					
-					if(cfg == null)
+					if(cfg == null) {
+						key.reset();
 						continue;
+					}
 					
 					Map<String, String> delta = cfg.load();
 	

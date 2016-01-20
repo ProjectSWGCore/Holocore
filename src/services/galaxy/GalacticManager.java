@@ -38,6 +38,7 @@ import resources.control.Intent;
 import resources.control.Manager;
 import services.CoreManager;
 import services.chat.ChatManager;
+import services.galaxy.travel.TravelService;
 import services.objects.ObjectManager;
 import services.player.PlayerManager;
 
