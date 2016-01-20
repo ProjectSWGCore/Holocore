@@ -738,7 +738,7 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 736	CORELLIA	cor_world	AREA	0	6826.70	315.00	-5820.68	0.00	-0.43	0.00	0.90	1	a Stormtrooper	25540	-	-	1	none	0	300	120	0
 737	CORELLIA	cor_world	AREA	0	6825.35	315.00	-5620.37	0.00	-0.66	0.00	0.75	1	a Stormtrooper	25540	-	-	1	none	0	300	120	0
 738	CORELLIA	cor_world	AREA	0	6823.92	315.00	-5597.88	0.00	0.87	0.00	0.49	1	an Imperial sergeant	25445	-	-	1	none	0	300	120	0
-739	CORELLIA	cor_world	AREA	0	6800.57	314.97	-5623.70	0.00	0.48	0.00	0.88	1	Dalya	26665	-	-	1	none	0	300	120	0
+739	CORELLIA	cor_world	EGG	0	6800.57	314.97	-5623.70	0.00	0.48	0.00	0.88	1	Dalya	26665	city	Bela Vistal	1	none	0	300	120	0
 740	CORELLIA	cor_world	AREA	0	6795.22	315.00	-5702.92	0.00	0.53	0.00	0.85	1	an Imperial sergeant	25445	-	-	1	none	0	300	120	0
 741	CORELLIA	cor_world	AREA	0	6794.42	315.00	-5696.60	0.00	0.71	0.00	0.70	1	a Stormtrooper	25540	-	-	1	none	0	300	120	0
 742	CORELLIA	cor_world	AREA	0	6712.78	315.00	-5810.38	0.00	0.83	0.00	0.56	1	an Imperial sergeant	25445	-	-	1	none	0	300	120	0
@@ -1365,18 +1365,18 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 1363	DATHOMIR	dat_ns_rancor_cave	AREA	8	-106.20	-69.20	-131.60	0.00	0.00	0.00	0.00	1	a Nightsister rancor tamer	21135	dungeon	NS Rancor Cave	1	threaten	0	900	600	1
 1364	DATHOMIR	dat_ns_rancor_cave	AREA	8	-101.80	-72.80	-158.50	0.00	0.00	0.00	0.00	1	a Nightsister rancor	21130	dungeon	NS Rancor Cave	1	none	0	900	600	1
 1365	DATHOMIR	dat_ns_rancor_cave	AREA	6	-10.00	-64.10	-187.10	0.00	0.00	0.00	0.00	1	a Nightsister bull rancor	21090	dungeon	NS Rancor Cave	1	none	0	900	600	1
+1368	DATHOMIR	dat_ns_stronghold	AREA	5	12.60	0.80	-30.50	0.00	0.00	0.00	0.00	1	a Nightsister protector	21125	POI	NS Stronghold	1	none	0	300	120	2
+1370	DATHOMIR	dat_ns_stronghold	AREA	7	0.90	0.80	-54.50	0.00	0.00	0.00	0.00	1	a Nightsister elder	21095	POI	NS Stronghold	1	none	0	300	120	2
+1372	DATHOMIR	dat_ns_stronghold	AREA	9	-6.50	7.20	-16.80	0.00	0.00	0.00	0.00	1	a Nightsister spell weaver	21160	POI	NS Stronghold	1	none	0	300	120	2
 1366	DATHOMIR	dat_ns_stronghold	AREA	10	7.60	7.20	-34.80	0.00	0.00	0.00	0.00	1	a Nightsister sentinel	21145	POI	NS Stronghold	1	none	0	300	120	2
 1367	DATHOMIR	dat_ns_stronghold	AREA	10	13.50	7.20	-15.90	0.00	0.00	0.00	0.00	1	Kais	14115	POI	NS Stronghold	1	none	0	300	120	2
-1368	DATHOMIR	dat_ns_stronghold	AREA	5	12.60	0.80	-30.50	0.00	0.00	0.00	0.00	1	a Nightsister protector	21125	POI	NS Stronghold	1	none	0	300	120	2
-1369	DATHOMIR	dat_ns_stronghold	AREA	11	10.60	7.20	-8.40	0.00	0.00	0.00	0.00	1	a Nightsister stalker	21165	POI	NS Stronghold	1	none	0	300	120	2
-1370	DATHOMIR	dat_ns_stronghold	AREA	7	0.90	0.80	-54.50	0.00	0.00	0.00	0.00	1	a Nightsister elder	21095	POI	NS Stronghold	1	none	0	300	120	2
+1369	DATHOMIR	dat_ns_stronghold	AREA	11	3.70	7.20	-5.60	0.00	0.00	0.00	0.00	1	a Nightsister stalker	21165	POI	NS Stronghold	1	none	0	300	120	2
 1371	DATHOMIR	dat_ns_stronghold	AREA	11	-7.50	7.20	-3.50	0.00	0.00	0.00	0.00	1	a Nightsister rancor tamer	21135	POI	NS Stronghold	1	none	0	300	120	2
-1372	DATHOMIR	dat_ns_stronghold	AREA	9	-6.50	7.20	-16.80	0.00	0.00	0.00	0.00	1	a Nightsister spell weaver	21160	POI	NS Stronghold	1	none	0	300	120	2
+1377	DATHOMIR	dat_ns_stronghold	AREA	11	-1.00	7.20	-0.60	0.00	0.00	0.00	0.00	1	Gethzerion	10385	POI	NS Stronghold	1	none	0	300	120	2
 1373	DATHOMIR	dat_ns_stronghold	AREA	12	-21.00	7.20	-20.80	0.00	0.00	0.00	0.00	1	a Nightsister initiate	21115	POI	NS Stronghold	1	none	0	300	120	2
 1374	DATHOMIR	dat_ns_stronghold	AREA	12	-19.60	7.20	-28.50	0.00	0.00	0.00	0.00	1	a diax	5635	POI	NS Stronghold	1	none	0	300	120	2
 1375	DATHOMIR	dat_ns_stronghold	AREA	12	-12.90	7.20	-12.50	0.00	0.00	0.00	0.00	1	a Nightsister ranger	21140	POI	NS Stronghold	1	none	0	300	120	2
 1376	DATHOMIR	dat_ns_stronghold	AREA	12	-12.40	7.20	-36.30	0.00	0.00	0.00	0.00	1	Fath H'ray	8545	POI	NS Stronghold	1	none	0	300	120	2
-1377	DATHOMIR	dat_ns_stronghold	AREA	11	-1.00	7.20	-0.60	0.00	0.00	0.00	0.00	1	Gethzerion	10385	POI	NS Stronghold	1	none	0	300	120	2
 1378	DATHOMIR	dat_qz_blackwing_admin_bldg	AREA	12	8.30	7.00	10.30	0.00	0.67	0.00	0.74	1	Undead	22610	dungeon	Quarantine Zone	1	none	0	300	120	2
 1379	DATHOMIR	dat_qz_blackwing_admin_bldg	AREA	10	2.90	7.00	-11.60	0.00	0.04	0.00	1.00	1	Death Trooper	22870	dungeon	Quarantine Zone	1	none	0	300	120	2
 1380	DATHOMIR	dat_qz_blackwing_admin_bldg	AREA	10	2.80	7.00	-0.80	0.00	0.41	0.00	0.91	1	Dead Stormtrooper	22770	dungeon	Quarantine Zone	1	none	0	300	120	0
@@ -1540,7 +1540,7 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 1538	DATHOMIR	dat_world	AREA	0	5461.01	79.00	-4169.15	0.00	0.82	0.00	-0.58	1	Quharek	23995	city	Aurilia	1	none	0	300	120	0
 1539	DATHOMIR	dat_world	AREA	0	5440.12	78.50	-4163.61	0.00	0.80	0.00	-0.60	1	an Aurilia sentinel	9795	city	Aurilia	1	none	0	300	120	0
 1540	DATHOMIR	dat_world	AREA	0	5439.98	78.50	-4172.11	0.00	-0.70	0.00	0.71	1	Maximillian (Aurilian travel consultant)	21070	city	Aurilia	1	none	0	300	120	0
-1541	DATHOMIR	dat_world	AREA	0	543.00	6.21	5102.00	0.00	0.83	0.00	-0.56	1	Russell	26690	-	-	1	none	0	300	120	0
+1541	DATHOMIR	dat_world	AREA	0	543.00	6.21	3053.00	0.00	0.83	0.00	-0.56	1	Russell	26690	city	Dathomir Outpost	1	none	0	300	120	0
 1542	DATHOMIR	dat_world	AREA	0	5418.87	78.87	-4187.46	0.00	-0.60	0.00	0.80	1	Torvin	21300	city	Aurilia	1	none	0	300	120	0
 1543	DATHOMIR	dat_world	AREA	0	5417.54	78.50	-4138.08	0.00	0.96	0.00	0.30	1	an Aurilia sentinel	9795	city	Aurilia	1	none	0	300	120	0
 1544	DATHOMIR	dat_world	AREA	0	5381.02	78.50	-4150.03	0.00	1.00	0.00	0.02	1	an Aurilia sentinel	9795	city	Aurilia	1	none	0	300	120	0
@@ -1550,8 +1550,8 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 1548	DATHOMIR	dat_world	AREA	0	5367.15	98.40	-4210.23	0.00	0.91	0.00	0.41	1	an Aurilia sentinel	9795	city	Aurilia	1	none	0	300	120	0
 1549	DATHOMIR	dat_world	AREA	0	5363.56	78.50	-4105.85	0.00	0.98	0.00	0.18	1	an Aurilia citizen	9780	city	Aurilia	1	none	0	300	120	2
 1550	DATHOMIR	dat_world	AREA	0	5343.49	78.50	-4058.10	0.00	0.84	0.00	-0.54	1	an Aurilia citizen	9780	city	Aurilia	1	none	0	300	120	0
-1551	DATHOMIR	dat_world	AREA	0	5339.05	78.50	-4069.72	0.00	-0.34	0.00	0.94	1	an Aurilia citizen	9780	city	Aurilia	1	none	0	300	120	0
-1552	DATHOMIR	dat_world	AREA	0	5336.36	78.50	-4069.42	0.00	0.42	0.00	0.91	1	an Aurilia citizen	9780	city	Aurilia	1	none	0	300	120	0
+1551	DATHOMIR	dat_world	AREA	0	5339.05	78.50	-4069.72	0.00	-0.34	0.00	0.94	1	an Aurilia citizen	9780	city	Aurilia	1	sitting	0	300	120	0
+1552	DATHOMIR	dat_world	AREA	0	5336.36	78.50	-4069.42	0.00	0.42	0.00	0.91	1	an Aurilia citizen	9780	city	Aurilia	1	sitting	0	300	120	0
 1553	DATHOMIR	dat_world	AREA	0	5330.22	78.50	-4047.71	0.00	0.91	0.00	0.41	1	an Aurilia citizen	9780	city	Aurilia	1	none	0	300	120	0
 1554	DATHOMIR	dat_world	AREA	0	5306.08	78.50	-4213.75	0.00	1.00	0.00	0.00	1	Shaneeka (chief engineer of Aurilia)	9765	city	Aurilia	1	none	0	300	120	0
 1555	DATHOMIR	dat_world	AREA	0	5304.31	78.50	-4151.78	0.00	1.00	0.00	0.03	1	Paemos (Mayor of Aurilia)	9755	city	Aurilia	1	none	0	300	120	0
@@ -2281,7 +2281,7 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 2279	ENDOR	end_world	AREA	0	1112.12	11.13	2032.54	0.00	0.91	0.00	0.42	1	a Meatlump moop	19705	-	-	1	none	0	300	120	2
 2280	ENDOR	end_world	AREA	0	1107.63	8.26	1998.81	0.00	0.29	0.00	0.96	1	a Meatlump moop	19705	-	-	1	none	0	300	120	2
 2281	ENDOR	end_world	AREA	0	1104.28	10.66	2019.14	0.00	0.80	0.00	0.60	1	a Meatlump moop	19705	-	-	1	none	0	300	120	2
-2282	ENDOR	end_world	AREA	0	-838.00	80.59	1617.00	0.00	0.47	0.00	0.88	1	Harding	26675	-	-	1	none	0	300	120	0
+2282	ENDOR	end_world	EGG	0	-838.00	80.59	1617.00	0.00	0.47	0.00	0.88	1	Harding	26675	city	Smuggler Outpost	1	none	0	300	120	0
 2283	ENDOR	end_world	AREA	0	-834.96	80.10	1605.95	0.00	0.99	0.00	-0.15	1	Otonon Tracks	22420	-	-	1	none	0	300	120	0
 2284	ENDOR	end_world	AREA	0	-833.01	80.30	1603.80	0.00	0.96	0.00	-0.28	1	The Ice Cream Man	12650	-	-	1	none	0	300	120	0
 2285	ENDOR	end_world	AREA	0	-6878.00	15.18	618.00	0.00	0.80	0.00	0.60	1	Lavina	26855	-	-	1	none	0	300	120	0
@@ -2540,7 +2540,7 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 2538	LOK	lok_world	AREA	0	463.67	23.00	4967.00	0.00	-0.61	0.00	0.80	1	Ran Machado	22250	-	-	1	none	0	300	120	0
 2539	LOK	lok_world	AREA	0	4568.00	13.09	-1168.00	0.00	0.30	0.00	0.96	1	Oono Mor'in	23980	-	-	1	none	0	300	120	0
 2540	LOK	lok_world	AREA	0	4155.52	98.14	7594.58	0.00	0.83	0.00	0.56	1	Hunde Decan	12515	-	-	1	none	0	300	120	0
-2541	LOK	lok_world	AREA	0	401.00	11.98	5226.00	0.00	0.03	0.00	1.00	1	Baldwin	26655	-	-	1	none	0	300	120	0
+2541	LOK	lok_world	EGG	0	401.00	11.98	5226.00	0.00	0.03	0.00	1.00	1	Baldwin	26655	-	-	1	none	0	300	120	0
 2542	LOK	lok_world	AREA	0	3821.67	63.00	-542.40	0.00	0.43	0.00	0.90	1	Rei Reeven (injured)	22260	-	-	1	none	0	300	120	0
 2543	LOK	lok_world	AREA	0	362.00	12.07	4837.00	0.00	0.00	0.00	1.00	1	Ralia Reeven (Nym's Quartermaster)	22245	-	-	1	none	0	300	120	0
 2544	LOK	lok_world	AREA	0	361.59	11.98	4878.93	0.00	-0.54	0.00	0.84	1	Runt	22175	-	-	1	none	0	300	120	0
@@ -3558,7 +3558,7 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 3556	NABOO	nab_world	AREA	0	2275.96	12.24	1902.91	0.00	-0.63	0.00	0.78	1	a Mauler apprentice	15970	-	-	1	none	0	300	120	2
 3557	NABOO	nab_world	AREA	0	2270.86	12.48	1894.38	0.00	0.73	0.00	-0.68	1	a Mauler apprentice	15970	-	-	1	none	0	300	120	2
 3558	NABOO	nab_world	AREA	0	2268.39	12.24	1916.64	0.00	0.90	0.00	0.43	1	a Mauler apprentice	15970	-	-	1	none	0	300	120	2
-3559	NABOO	nab_world	AREA	0	1907.00	12.00	2352.00	0.00	1.00	0.00	0.06	1	Ogden	26680	-	-	1	none	0	300	120	0
+3559	NABOO	nab_world	EGG	0	1907.00	12.00	2352.00	0.00	1.00	0.00	0.06	1	Ogden	26680	city	Keren	1	none	0	300	120	0
 3560	NABOO	nab_world	AREA	0	1790.66	12.00	2712.38	0.00	0.94	0.00	-0.34	1	Captain Typho	15040	-	-	1	none	0	300	120	2
 3561	NABOO	nab_world	AREA	0	1776.12	12.00	2623.83	0.00	0.99	0.00	-0.14	1	Cam'doen	415	-	-	1	none	0	300	120	0
 3562	NABOO	nab_world	AREA	0	1373.09	13.00	2726.41	0.00	-0.48	0.00	0.88	1	Keren Shipping Master	14180	-	-	1	none	0	300	120	0
@@ -4748,6 +4748,7 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 4746	TATOOINE	tat_anchorhead_medium_house	EGG	2	-3.00	0.40	-9.40	0.00	0.00	0.00	0.00	1	Nitra Vendallan	21210	city	Anchorhead	1	none	0	300	120	0
 4747	TATOOINE	tat_anchorhead_medium_house	EGG	6	-6.40	-4.00	-6.00	0.00	0.00	0.00	0.00	1	a rebel recruiter	3300	city	Anchorhead	1	none	0	300	120	0
 4748	TATOOINE	tat_bestine_hotel	AREA	4	7.30	1.00	-6.87	0.00	0.00	0.00	0.00	1	a noble	21220	city	Bestine	1	none	0	90	60	2
+	TATOOINE	tat_bestine_hospital	EGG	2	-1.00	0.20	-1.93	0.00	0.76	0.00	0.64	1	a 2-1B surgical droid	29785	city	Bestine	1	none	0	300	120	0
 4749	TATOOINE	tat_cave_08	AREA	20	5.30	-59.10	-73.70	0.00	1.00	0.00	-0.06	1	Tusken Relic Worshiper	9305	dungeon	Flatland Damprock	1	none	0	300	120	2
 4750	TATOOINE	tat_cave_08	AREA	26	4.20	-63.60	-108.30	0.00	-0.02	0.00	1.00	1	Tusken Relic Worshiper	9305	dungeon	Flatland Damprock	1	none	0	300	120	2
 4751	TATOOINE	tat_cave_08	AREA	1	0.80	-11.70	-13.20	0.00	1.00	0.00	0.01	1	Tusken Relic Worshiper	9305	dungeon	Flatland Damprock	1	none	0	300	120	2
@@ -4874,56 +4875,89 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 4872	TATOOINE	tat_hutt_cave	AREA	6	-11.38	-64.60	-200.22	0.00	0.00	0.00	0.00	1	Jabba's compound guard	13620	dungeon	Hutt Cave	3	none	0	300	120	2
 4873	TATOOINE	tat_hutt_cave	AREA	2	-10.36	-30.77	-27.74	0.00	0.00	0.00	0.00	1	Jabba's enforcer	13625	dungeon	Hutt Cave	3	none	0	300	120	2
 4874	TATOOINE	tat_hutt_cave	AREA	1	-1.35	-5.26	9.08	0.00	0.00	0.00	0.00	1	Jabba's enforcer	13625	dungeon	Hutt Cave	2	none	0	300	120	2
-4875	TATOOINE	tat_jabbas_palace	EGG	1	7.70	0.20	130.30	0.00	0.00	0.00	1.00	1	Bruce McBrain	2235	POI	Jabbas Palace	1	none	0	300	120	0
+4875	TATOOINE	tat_jabbas_palace	EGG	1	7.70	0.20	130.30	0.00	0.73	0.00	1.00	1	Bruce McBrain	2235	POI	Jabbas Palace	1	none	0	300	120	0
 4876	TATOOINE	tat_jabbas_palace	EGG	1	-2.00	0.20	113.10	0.00	0.00	0.00	0.00	1	Reelo Baruk	24815	POI	Jabbas Palace	1	none	0	300	120	0
 4877	TATOOINE	tat_jabbas_palace	EGG	1	-5.42	0.20	114.30	0.00	0.00	0.00	0.00	1	Jawl	2805	POI	Jabbas Palace	1	none	0	300	120	0
-4878	TATOOINE	tat_jabbas_palace	EGG	1	-5.92	0.30	116.10	0.00	0.69	0.00	0.73	1	Ree-Yees	24810	POI	Jabbas Palace	1	none	0	300	120	0
+4878	TATOOINE	tat_jabbas_palace	EGG	1	5.92	0.30	116.10	0.00	-0.37	0.00	0.73	1	Ree-Yees	24810	POI	Jabbas Palace	1	none	0	300	120	0
 4879	TATOOINE	tat_jabbas_palace	EGG	1	-6.40	0.20	134.30	0.00	0.69	0.00	0.73	1	Ollobo	14010	POI	Jabbas Palace	1	none	0	300	120	0
 4880	TATOOINE	tat_jabbas_palace	EGG	1	6.60	0.30	128.30	0.00	0.00	0.00	1.00	1	8-LOM	24800	POI	Jabbas Palace	1	none	0	300	120	0
-4881	TATOOINE	tat_jabbas_palace	EGG	1	3.99	0.20	122.37	0.00	0.00	0.00	0.00	1	Ortugg	9885	POI	Jabbas Palace	1	none	0	300	120	0
+4881	TATOOINE	tat_jabbas_palace	EGG	1	3.99	0.20	122.37	0.00	0.00	0.00	0.00	1	Ortugg	33580	POI	Jabbas Palace	1	none	0	300	120	0
+	TATOOINE	tat_jabbas_palace	EGG	2	-1.80	0.20	103.90	0.00	0.00	0.00	0.00	1	a Bomarr monk	1810	POI	Jabbas Palace	1	none	0	300	120	0
 4882	TATOOINE	tat_jabbas_palace	EGG	4	-6.00	5.80	84.50	0.00	0.00	0.00	1.00	1	Ephant Mon	8330	POI	Jabbas Palace	1	none	0	300	120	0
-4883	TATOOINE	tat_jabbas_palace	EGG	4	-0.26	5.94	80.60	0.00	0.00	0.00	0.00	1	Rogua	9885	POI	Jabbas Palace	1	none	0	300	120	0
-4884	TATOOINE	tat_jabbas_palace	EGG	4	-0.55	5.80	97.97	0.00	0.00	0.00	0.00	1	Torrug	9885	POI	Jabbas Palace	1	none	0	300	120	0
+4883	TATOOINE	tat_jabbas_palace	EGG	4	-0.26	5.94	80.60	0.00	0.00	0.00	0.00	1	Rogua	33585	POI	Jabbas Palace	1	none	0	300	120	0
+4884	TATOOINE	tat_jabbas_palace	EGG	4	-0.55	5.80	97.97	0.00	0.00	0.00	0.00	1	Torrug	33590	POI	Jabbas Palace	1	none	0	300	120	0
 4885	TATOOINE	tat_jabbas_palace	EGG	4	-6.70	5.80	97.90	0.00	0.00	0.00	0.00	1	Bronell	2230	POI	Jabbas Palace	1	none	0	300	120	0
-4886	TATOOINE	tat_jabbas_palace	EGG	4	-11.17	5.80	87.45	0.00	0.00	0.00	0.00	1	Gartogg	9885	POI	Jabbas Palace	1	none	0	300	120	0
+4886	TATOOINE	tat_jabbas_palace	EGG	4	-11.17	5.80	87.45	0.00	0.00	0.00	0.00	1	Gartogg	33595	POI	Jabbas Palace	1	none	0	300	120	0
 4887	TATOOINE	tat_jabbas_palace	EGG	5	9.91	5.80	71.22	0.00	0.00	0.00	0.00	1	Grogur	9885	POI	Jabbas Palace	1	none	0	300	120	0
 4888	TATOOINE	tat_jabbas_palace	EGG	5	9.00	5.80	72.90	0.00	0.00	0.00	0.00	1	an outlaw	23120	POI	Jabbas Palace	1	none	0	300	120	0
+	TATOOINE	tat_jabbas_palace	EGG	5	5.50	5.80	70.40	0.00	0.00	0.00	0.00	1	a Bomarr monk	1810	POI	Jabbas Palace	1	none	0	300	120	0
 4889	TATOOINE	tat_jabbas_palace	EGG	7	29.40	0.20	46.71	0.00	0.00	0.00	0.00	1	a Jawa	13795	POI	Jabbas Palace	1	none	0	300	120	0
 4890	TATOOINE	tat_jabbas_palace	EGG	7	29.40	0.20	45.41	0.00	0.00	0.00	0.00	1	a Jawa	13795	POI	Jabbas Palace	1	none	0	300	120	0
-4891	TATOOINE	tat_jabbas_palace	EGG	7	27.71	0.20	51.72	0.00	0.00	0.00	0.00	1	Ugtaur	9885	POI	Jabbas Palace	1	none	0	300	120	0
+4891	TATOOINE	tat_jabbas_palace	EGG	7	27.71	0.20	51.72	0.00	0.00	0.00	0.00	1	Ugtaur	33600	POI	Jabbas Palace	1	none	0	300	120	0
 4892	TATOOINE	tat_jabbas_palace	EGG	9	-23.00	3.00	60.93	0.00	0.00	0.00	0.00	1	a Jawa	13795	POI	Jabbas Palace	1	none	0	300	120	0
 4893	TATOOINE	tat_jabbas_palace	EGG	9	-23.12	3.00	59.03	0.00	0.00	0.00	0.00	1	a Jawa	13795	POI	Jabbas Palace	1	none	0	300	120	0
-4894	TATOOINE	tat_jabbas_palace	EGG	9	-13.57	3.00	58.10	0.00	0.00	0.00	0.00	1	Ogtur	9885	POI	Jabbas Palace	1	none	0	300	120	0
+4894	TATOOINE	tat_jabbas_palace	EGG	9	-13.57	3.00	58.10	0.00	0.00	0.00	0.00	1	Ogtur	33605	POI	Jabbas Palace	1	none	0	300	120	0
 4895	TATOOINE	tat_jabbas_palace	EGG	9	-11.71	3.00	59.17	0.00	0.00	0.00	0.00	1	a roughneck	25310	POI	Jabbas Palace	1	none	0	300	120	0
 4896	TATOOINE	tat_jabbas_palace	EGG	12	-43.20	3.00	63.70	0.00	0.00	0.00	1.00	1	Porcellus	23545	POI	Jabbas Palace	1	none	0	300	120	0
-4897	TATOOINE	tat_jabbas_palace	EGG	14	23.94	0.20	87.92	0.00	0.00	0.00	0.00	1	EV-9D9	8360	POI	Jabbas Palace	1	none	0	300	120	0
+4897	TATOOINE	tat_jabbas_palace	EGG	14	23.94	0.20	87.92	0.00	0.76	0.00	0.00	1	EV-9D9	8360	POI	Jabbas Palace	1	none	0	300	120	0
 4898	TATOOINE	tat_jabbas_palace	EGG	14	23.80	0.20	76.81	0.00	0.00	0.00	0.00	1	an LE repair droid	14695	POI	Jabbas Palace	1	none	0	300	120	0
 4899	TATOOINE	tat_jabbas_palace	EGG	14	20.68	0.20	86.48	0.00	0.00	0.00	0.00	1	an EG-6 power droid	6195	POI	Jabbas Palace	1	none	0	300	120	0
 4900	TATOOINE	tat_jabbas_palace	EGG	14	18.81	0.20	85.06	0.00	0.00	0.00	0.00	1	R2-P1	24000	POI	Jabbas Palace	1	none	0	300	120	0
-4901	TATOOINE	tat_jabbas_palace	EGG	14	18.14	0.20	90.81	0.00	0.00	0.00	0.00	1	8D8	6015	POI	Jabbas Palace	1	none	0	300	120	0
+4901	TATOOINE	tat_jabbas_palace	EGG	14	18.14	0.20	90.81	0.00	1.00	0.00	0.00	1	8D8	33640	POI	Jabbas Palace	1	none	0	300	120	0
 4902	TATOOINE	tat_jabbas_palace	EGG	14	13.40	0.20	88.73	0.00	0.00	0.00	0.00	1	an RA-7 ''Bug'' droid	24085	POI	Jabbas Palace	1	none	0	300	120	0
 4903	TATOOINE	tat_jabbas_palace	EGG	14	10.71	0.20	84.20	0.00	0.00	0.00	0.00	1	a 3PO protocol droid	23635	POI	Jabbas Palace	1	none	0	300	120	0
-4904	TATOOINE	tat_jabbas_palace	EGG	15	-2.66	0.20	83.07	0.00	0.00	0.00	0.00	1	Urgott	9885	POI	Jabbas Palace	1	none	0	300	120	0
-4905	TATOOINE	tat_jabbas_palace	EGG	15	-18.34	0.20	82.55	0.00	0.00	0.00	0.00	1	Artogg	9885	POI	Jabbas Palace	1	none	0	300	120	0
-4906	TATOOINE	tat_jabbas_palace	EGG	22	5.91	2.00	26.95	0.00	0.00	0.00	0.00	1	Torgau	9885	POI	Jabbas Palace	1	none	0	300	120	0
+4904	TATOOINE	tat_jabbas_palace	EGG	15	-2.66	0.20	83.07	0.00	0.00	0.00	0.00	1	Urgott	33610	POI	Jabbas Palace	1	none	0	300	120	0
+4905	TATOOINE	tat_jabbas_palace	EGG	15	-18.34	0.20	82.55	0.00	0.00	0.00	0.00	1	Artogg	33615	POI	Jabbas Palace	1	none	0	300	120	0
+	TATOOINE	tat_jabbas_palace	EGG	16	-32.31	3.00	55.80	0.00	0.00	0.00	0.00	1	Rautog	33620	POI	Jabbas Palace	1	none	0	300	120	0
+	TATOOINE	tat_jabbas_palace	EGG	16	-38.14	3.00	53.12	0.00	0.00	0.00	0.00	1	a Jawa	13795	POI	Jabbas Palace	1	none	0	300	120	0
+	TATOOINE	tat_jabbas_palace	EGG	19	23.90	0.20	-8.70	0.00	0.00	0.00	0.00	1	a Bomarr monk	1810	POI	Jabbas Palace	1	none	0	300	120	0
+4906	TATOOINE	tat_jabbas_palace	EGG	22	5.91	2.00	26.95	0.00	0.00	0.00	0.00	1	Torgau	33625	POI	Jabbas Palace	1	none	0	300	120	0
+	TATOOINE	tat_jabbas_palace	EGG	22	9.11	3.00	25.04	0.00	0.00	0.00	0.00	1	a spacer	28635	POI	Jabbas Palace	1	none	0	300	120	0
+	TATOOINE	tat_jabbas_palace	EGG	22	9.91	3.00	25.61	0.00	0.00	0.00	0.00	1	a thug	30995	POI	Jabbas Palace	1	none	0	300	120	0
 4907	TATOOINE	tat_jabbas_palace	EGG	22	9.22	2.00	25.30	0.00	0.00	0.00	0.00	1	a Jawa	13795	POI	Jabbas Palace	1	none	0	300	120	0
 4908	TATOOINE	tat_jabbas_palace	EGG	22	5.02	2.00	44.11	0.00	0.00	0.00	0.00	1	a scoundrel	25815	POI	Jabbas Palace	1	none	0	300	120	0
-4909	TATOOINE	tat_jabbas_palace	EGG	22	5.02	2.00	45.51	0.00	0.00	0.00	0.00	1	a wastrel	19135	POI	Jabbas Palace	1	none	0	300	120	0
+4909	TATOOINE	tat_jabbas_palace	EGG	22	5.02	2.00	45.51	0.00	0.00	0.00	0.00	1	a wastrel	33055	POI	Jabbas Palace	1	none	0	300	120	0
+	TATOOINE	tat_jabbas_palace	EGG	22	-1.00	3.00	24.92	0.00	0.00	0.00	0.00	1	a Jawa	13795	POI	Jabbas Palace	1	none	0	300	120	0
+	TATOOINE	tat_jabbas_palace	EGG	22	0.22	3.00	25.21	0.00	0.00	0.00	0.00	1	a thug	30995	POI	Jabbas Palace	1	none	0	300	120	0
+	TATOOINE	tat_jabbas_palace	EGG	22	1.12	2.00	36.71	0.00	0.00	0.00	0.00	1	a thug	30995	POI	Jabbas Palace	1	none	0	300	120	0
+	TATOOINE	tat_jabbas_palace	EGG	22	1.12	2.00	35.20	0.00	0.00	0.00	0.00	1	a thug	30995	POI	Jabbas Palace	1	none	0	300	120	0
+	TATOOINE	tat_jabbas_palace	EGG	22	-5.81	2.00	44.12	0.00	0.00	0.00	0.00	1	a roughneck	25310	POI	Jabbas Palace	1	none	0	300	120	0
+	TATOOINE	tat_jabbas_palace	EGG	22	-5.91	2.00	43.12	0.00	0.00	0.00	0.00	1	a roughneck	25310	POI	Jabbas Palace	1	none	0	300	120	0
+	TATOOINE	tat_jabbas_palace	EGG	22	-8.74	2.00	49.61	0.00	0.00	0.00	0.00	1	a fringer	9710	POI	Jabbas Palace	1	none	0	300	120	0
+	TATOOINE	tat_jabbas_palace	EGG	22	-8.92	2.00	51.00	0.00	0.00	0.00	0.00	1	a slicer	26550	POI	Jabbas Palace	1	none	0	300	120	0
+	TATOOINE	tat_jabbas_palace	EGG	22	-14.33	2.00	52.10	0.00	0.00	0.00	0.00	1	a scoundrel	25815	POI	Jabbas Palace	1	none	0	300	120	0
+	TATOOINE	tat_jabbas_palace	EGG	22	-15.82	2.00	51.99	0.00	0.00	0.00	0.00	1	a thug	30995	POI	Jabbas Palace	1	none	0	300	120	0
 4910	TATOOINE	tat_jabbas_palace	EGG	22	8.82	2.00	23.54	0.00	0.00	0.00	0.00	1	a Jawa	13795	POI	Jabbas Palace	1	none	0	300	120	0
-4911	TATOOINE	tat_jabbas_palace	EGG	22	-23.26	3.60	46.12	0.00	0.00	0.00	0.00	1	Agtor	9885	POI	Jabbas Palace	1	none	0	300	120	0
+4911	TATOOINE	tat_jabbas_palace	EGG	22	-23.26	3.60	46.12	0.00	0.00	0.00	0.00	1	Agtor	33630	POI	Jabbas Palace	1	none	0	300	120	0
 4912	TATOOINE	tat_jabbas_palace	EGG	22	-15.12	2.00	45.82	0.00	0.69	0.00	0.73	1	G-5P0	9845	POI	Jabbas Palace	1	none	0	300	120	0
 4913	TATOOINE	tat_jabbas_palace	EGG	22	-9.00	2.00	37.01	0.00	0.00	0.00	0.00	1	Sy Snootles	29870	POI	Jabbas Palace	1	none	0	300	120	0
 4914	TATOOINE	tat_jabbas_palace	EGG	22	-10.03	2.00	43.00	0.00	0.69	0.00	0.73	1	Oola	22390	POI	Jabbas Palace	1	dance	0	300	120	0
 4915	TATOOINE	tat_jabbas_palace	EGG	22	-11.02	2.00	35.91	0.00	0.00	0.00	0.00	1	Max Rebo	16105	POI	Jabbas Palace	1	none	0	300	120	0
+	TATOOINE	tat_jabbas_palace	EGG	22	8.10	2.00	34.21	0.00	0.00	0.00	0.00	1	Beissa (Jabba's Pilot Trainer)	33575	POI	Jabbas Palace	1	none	0	300	120	0
 4916	TATOOINE	tat_jabbas_palace	EGG	22	-16.10	2.80	42.30	0.00	0.69	0.00	0.73	1	Salacious Crumb	25625	POI	Jabbas Palace	1	none	0	300	120	0
-4917	TATOOINE	tat_jabbas_palace	EGG	22	-17.10	2.80	44.20	0.00	0.69	0.00	0.73	1	Jabba the Hutt	13645	POI	Jabbas Palace	1	none	0	300	120	0
-4918	TATOOINE	tat_jabbas_palace	EGG	22	-1.78	2.00	47.31	0.00	0.00	0.00	0.00	1	Gurgot	9885	POI	Jabbas Palace	1	none	0	300	120	0
-4919	TATOOINE	tat_jabbas_palace	EGG	22	-1.00	3.00	31.02	0.00	0.00	0.00	0.00	1	Boba Fett	1675	POI	Jabbas Palace	1	none	0	300	120	0
+4917	TATOOINE	tat_jabbas_palace	EGG	22	-17.00	2.80	45.42	0.00	0.69	0.00	0.73	1	Jabba the Hutt	13645	POI	Jabbas Palace	1	none	0	300	120	0
+4918	TATOOINE	tat_jabbas_palace	EGG	22	-1.78	2.00	47.31	0.00	0.00	0.00	0.00	1	Gurgot	33635	POI	Jabbas Palace	1	none	0	300	120	0
+4919	TATOOINE	tat_jabbas_palace	EGG	22	-1.00	3.00	31.02	0.00	0.73	0.00	0.00	1	Boba Fett	1675	POI	Jabbas Palace	1	none	0	300	120	0
 4920	TATOOINE	tat_jabbas_palace	EGG	22	-12.11	2.00	49.43	0.00	0.69	0.00	0.73	1	Bib Fortuna	1045	POI	Jabbas Palace	1	none	0	300	120	0
 4921	TATOOINE	tat_jabbas_palace	EGG	22	-13.00	2.00	37.11	0.00	0.00	0.00	0.00	1	Droopy McCool	6035	POI	Jabbas Palace	1	none	0	300	120	0
-4922	TATOOINE	tat_jabbas_palace	EGG	34	39.10	0.20	5.51	0.00	0.00	0.00	0.00	1	an EG-6 power droid	6195	POI	Jabbas Palace	1	none	0	300	120	0
+	TATOOINE	tat_jabbas_palace	EGG	24	-18.00	5.80	73.10	0.00	0.00	0.00	0.00	1	a Bomarr monk	1810	POI	Jabbas Palace	1	none	0	300	120	0
+	TATOOINE	tat_jabbas_palace	EGG	26	-34.09	0.10	77.21	0.00	0.00	0.00	0.00	1	a commoner	3185	POI	Jabbas Palace	1	none	0	300	120	0
+	TATOOINE	tat_jabbas_palace	EGG	27	-37.88	0.10	76.75	0.00	0.00	0.00	0.00	1	a commoner	3185	POI	Jabbas Palace	1	none	0	300	120	0
+	TATOOINE	tat_jabbas_palace	EGG	28	-34.32	0.10	86.45	0.00	0.00	0.00	0.00	1	a commoner	3185	POI	Jabbas Palace	1	none	0	300	120	0
+	TATOOINE	tat_jabbas_palace	EGG	29	-40.41	0.10	87.50	0.00	0.00	0.00	0.00	1	a commoner	3185	POI	Jabbas Palace	1	none	0	300	120	0
+	TATOOINE	tat_jabbas_palace	EGG	30	-10.14	0.10	77.24	0.00	0.00	0.00	0.00	1	a commoner	3185	POI	Jabbas Palace	1	none	0	300	120	0
+	TATOOINE	tat_jabbas_palace	EGG	31	-14.72	0.10	76.92	0.00	0.00	0.00	0.00	1	a commoner	3185	POI	Jabbas Palace	1	none	0	300	120	0
+	TATOOINE	tat_jabbas_palace	EGG	32	-10.52	0.10	86.57	0.00	0.00	0.00	0.00	1	a commoner	3185	POI	Jabbas Palace	1	none	0	300	120	0
+	TATOOINE	tat_jabbas_palace	EGG	33	-17.24	0.10	87.85	0.00	0.00	0.00	0.00	1	a commoner	3185	POI	Jabbas Palace	1	none	0	300	120	0
+4922	TATOOINE	tat_jabbas_palace	EGG	34	37.51	0.20	-4.41	0.00	0.00	0.00	0.00	1	an EG-6 power droid	6195	POI	Jabbas Palace	1	none	0	300	120	0
 4923	TATOOINE	tat_jabbas_palace	EGG	34	30.57	0.20	-1.00	0.00	0.00	0.00	0.00	1	Barada	735	POI	Jabbas Palace	1	none	0	300	120	0
+	TATOOINE	tat_jabbas_palace	EGG	36	-17.91	3.00	13.00	0.00	0.00	0.00	0.00	1	a Jawa	13795	POI	Jabbas Palace	1	none	0	300	120	0
+	TATOOINE	tat_jabbas_palace	EGG	36	-7.95	3.00	20.00	0.00	0.00	0.00	0.00	1	a Jawa	13795	POI	Jabbas Palace	1	none	0	300	120	0
+	TATOOINE	tat_jabbas_palace	EGG	36	-8.41	3.00	21.10	0.00	0.00	0.00	0.00	1	a thug	30995	POI	Jabbas Palace	1	none	0	300	120	0
+	TATOOINE	tat_jabbas_palace	EGG	36	-18.00	3.00	9.00	0.00	0.00	0.00	0.00	1	a Bomarr monk	1810	POI	Jabbas Palace	1	none	0	300	120	0
+	TATOOINE	tat_jabbas_palace	EGG	36	3.20	3.00	15.40	0.00	0.00	0.00	0.00	1	a Bomarr monk	1810	POI	Jabbas Palace	1	none	0	300	120	0
 4924	TATOOINE	tat_jabbas_palace	EGG	37	19.00	-11.00	42.02	0.00	0.00	0.00	0.00	1	Malakili	15615	POI	Jabbas Palace	1	none	0	300	120	0
+	TATOOINE	tat_jabbas_palace	EGG	38	-0.70	-10.91	44.44	0.00	0.00	0.00	0.00	1	a rancor	13695	POI	Jabbas Palace	1	none	0	300	120	0
 4925	TATOOINE	tat_legacy_darklighter_cave	AREA	3	-21.80	-29.80	-46.30	0.00	0.00	0.00	0.00	1	a Desert Demon brawler	5540	dungeon	Darklighter Cave	1	none	0	300	120	0
 4926	TATOOINE	tat_legacy_darklighter_cave	AREA	3	-21.80	-29.80	-46.30	0.00	0.00	0.00	0.00	1	a CLL-8 binary load lifter	2705	dungeon	Darklighter Cave	1	none	0	300	120	0
 4927	TATOOINE	tat_legacy_darklighter_cave	AREA	4	-43.50	-46.90	-107.20	0.00	0.00	0.00	0.00	1	a Desert Demon	5530	dungeon	Darklighter Cave	1	none	0	300	120	0
@@ -5010,18 +5044,18 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 5008	TATOOINE	tat_moseisley_cantina	EGG	2	29.50	0.10	-7.30	0.00	0.00	0.00	0.00	1	a commoner	3185	city	Mos Eisley	1	sitting	0	300	120	0
 5009	TATOOINE	tat_moseisley_cantina	EGG	2	31.00	0.10	-8.80	0.00	0.00	0.00	0.00	1	a commoner	3185	city	Mos Eisley	1	sitting	0	300	120	0
 5010	TATOOINE	tat_moseisley_cantina	EGG	3	9.20	-0.90	4.10	0.00	0.00	0.00	0.00	1	an entertainer	6505	city	Mos Eisley	1	drink	0	300	120	0
-5011	TATOOINE	tat_moseisley_cantina	EGG	3	8.60	-0.90	-6.10	0.00	0.00	0.00	0.00	1	a patron	23305	city	Mos Eisley	1	listen	0	300	120	0
+5011	TATOOINE	tat_moseisley_cantina	EGG	3	8.60	-0.90	-6.10	0.00	0.00	0.00	0.00	1	a patron	23270	city	Mos Eisley	1	listen	0	300	120	0
 5012	TATOOINE	tat_moseisley_cantina	EGG	3	8.50	-0.90	4.80	0.00	0.00	0.00	0.00	1	a noble	21215	city	Mos Eisley	1	discuss	0	300	120	0
-5013	TATOOINE	tat_moseisley_cantina	EGG	3	6.70	-0.90	-6.70	0.00	0.00	0.00	0.00	1	a patron	23305	city	Mos Eisley	1	listen	0	300	120	0
+5013	TATOOINE	tat_moseisley_cantina	EGG	3	6.70	-0.90	-6.70	0.00	0.00	0.00	0.00	1	a patron	23275	city	Mos Eisley	1	listen	0	300	120	0
 5014	TATOOINE	tat_moseisley_cantina	EGG	3	4.10	-0.90	5.70	0.00	0.00	0.00	0.00	1	a commoner	3185	city	Mos Eisley	1	drink	0	300	120	0
 5015	TATOOINE	tat_moseisley_cantina	EGG	3	2.20	-0.90	5.70	0.00	0.00	0.00	0.00	1	a commoner	3185	city	Mos Eisley	1	discuss	0	300	120	0
-5016	TATOOINE	tat_moseisley_cantina	EGG	3	16.50	-0.90	-4.80	0.00	0.00	0.00	0.00	1	a patron	23305	city	Mos Eisley	1	sitting	0	300	120	0
+5016	TATOOINE	tat_moseisley_cantina	EGG	3	16.50	-0.90	-4.80	0.00	0.00	0.00	0.00	1	a patron	23280	city	Mos Eisley	1	sitting	0	300	120	0
 5017	TATOOINE	tat_moseisley_cantina	EGG	3	16.40	-0.90	7.40	0.00	0.00	0.00	0.00	1	a Quarren	23330	city	Mos Eisley	1	none	0	300	120	0
 5018	TATOOINE	tat_moseisley_cantina	EGG	3	16.40	-0.90	2.90	0.00	0.00	0.00	0.00	1	a commoner	3185	city	Mos Eisley	1	discuss	0	300	120	0
 5019	TATOOINE	tat_moseisley_cantina	EGG	3	15.90	-0.90	2.60	0.00	0.00	0.00	0.00	1	an Ithorian male	23315	city	Mos Eisley	1	scared	0	300	120	0
 5020	TATOOINE	tat_moseisley_cantina	EGG	3	15.00	-0.90	6.90	0.00	0.00	0.00	0.00	1	a Klaatu	23320	city	Mos Eisley	1	sitting	0	300	120	0
-5021	TATOOINE	tat_moseisley_cantina	EGG	3	14.60	-0.90	-2.90	0.00	0.00	0.00	0.00	1	a patron	23305	city	Mos Eisley	1	sitting	0	300	120	0
-5022	TATOOINE	tat_moseisley_cantina	EGG	3	14.30	-0.90	-4.80	0.00	0.00	0.00	0.00	1	a patron	23305	city	Mos Eisley	1	sitting	0	300	120	0
+5021	TATOOINE	tat_moseisley_cantina	EGG	3	14.60	-0.90	-2.90	0.00	0.00	0.00	0.00	1	a patron	23285	city	Mos Eisley	1	sitting	0	300	120	0
+5022	TATOOINE	tat_moseisley_cantina	EGG	3	14.30	-0.90	-4.80	0.00	0.00	0.00	0.00	1	a patron	23290	city	Mos Eisley	1	sitting	0	300	120	0
 5023	TATOOINE	tat_moseisley_cantina	EGG	3	10.70	-0.90	-0.30	0.00	0.00	0.00	0.00	1	a Chadra Fan male	17990	city	Mos Eisley	1	none	0	300	120	0
 5024	TATOOINE	tat_moseisley_cantina	EGG	3	10.70	-0.90	1.90	0.00	0.00	0.00	0.00	1	a businessman	2255	city	Mos Eisley	1	drink	0	300	120	0
 5025	TATOOINE	tat_moseisley_cantina	EGG	3	10.50	-0.90	-1.50	0.00	0.00	0.00	0.00	1	a Chadra Fan female	17985	city	Mos Eisley	1	none	0	300	120	0
@@ -5034,8 +5068,8 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 5032	TATOOINE	tat_moseisley_cantina	EGG	3	3.60	-0.90	-6.80	0.00	0.00	0.00	0.00	1	a Stormtrooper Squad Leader	13040	city	Mos Eisley	1	accuse	0	300	120	0
 5033	TATOOINE	tat_moseisley_cantina	EGG	3	3.60	-0.90	-4.80	0.00	0.00	0.00	0.00	1	a Chiss female	23255	city	Mos Eisley	1	sad	0	300	120	0
 5034	TATOOINE	tat_moseisley_cantina	EGG	3	3.20	-0.90	5.70	0.00	0.00	0.00	0.00	1	a commoner	3185	city	Mos Eisley	1	drink	0	300	120	0
-5035	TATOOINE	tat_moseisley_cantina	EGG	3	26.10	-0.90	-8.20	0.00	0.00	0.00	0.00	1	a patron	23305	city	Mos Eisley	1	sitting	0	300	120	0
-5036	TATOOINE	tat_moseisley_cantina	EGG	3	24.40	-0.90	-8.10	0.00	0.00	0.00	0.00	1	a patron	23285	city	Mos Eisley	1	none	0	300	120	0
+5035	TATOOINE	tat_moseisley_cantina	EGG	3	26.10	-0.90	-8.20	0.00	0.00	0.00	0.00	1	a patron	23295	city	Mos Eisley	1	sitting	0	300	120	0
+5036	TATOOINE	tat_moseisley_cantina	EGG	3	24.40	-0.90	-8.10	0.00	0.00	0.00	0.00	1	a patron	23300	city	Mos Eisley	1	none	0	300	120	0
 5037	TATOOINE	tat_moseisley_cantina	EGG	3	23.40	-0.90	4.90	0.00	0.00	0.00	0.00	1	a Nikto	23325	city	Mos Eisley	1	sitting	0	300	120	0
 5038	TATOOINE	tat_moseisley_cantina	EGG	3	22.30	-0.90	3.00	0.00	0.00	0.00	0.00	1	an Ishtib male	23310	city	Mos Eisley	1	sitting	0	300	120	0
 5039	TATOOINE	tat_moseisley_cantina	EGG	3	21.20	-0.90	5.70	0.00	0.00	0.00	0.00	1	a Devaronian male	23265	city	Mos Eisley	1	sitting	0	300	120	0
@@ -5055,7 +5089,6 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 5053	TATOOINE	tat_moseisley_cantina	EGG	8	-6.70	-0.90	-20.90	0.00	0.00	0.00	0.00	1	Cheated Gambler	6650	city	Mos Eisley	1	sad	0	300	120	0
 5054	TATOOINE	tat_moseisley_combat_gh	EGG	8	3.20	1.10	-8.40	0.00	0.00	0.00	0.00	1	a businessman	2255	city	Mos Eisley	1	none	0	90	60	0
 5055	TATOOINE	tat_moseisley_generic_house	EGG	1	-3.80	0.50	-1.50	0.00	0.93	0.00	-0.37	1	a Dead Biologist	3395	city	Mos Eisley	1	dead	0	300	120	0
-5056	TATOOINE	tat_moseisley_legacy_cult_cave	AREA	15	88.26	-90.51	-330.19	0.00	0.00	0.00	0.00	1	a Krayt cult ministrant	30520	dungeon	Kult Cave	1	none	0	300	120	2
 5057	TATOOINE	tat_moseisley_legacy_cult_cave	AREA	5	8.45	-52.70	-166.28	0.00	0.00	0.00	0.00	1	a Krayt cult acolyte	30565	dungeon	Kult Cave	1	none	0	300	120	2
 5058	TATOOINE	tat_moseisley_legacy_cult_cave	AREA	8	71.23	-81.04	-268.67	0.00	0.00	0.00	0.00	1	a Krayt cult acolyte	30565	dungeon	Kult Cave	1	none	0	300	120	2
 5059	TATOOINE	tat_moseisley_legacy_cult_cave	AREA	19	65.33	-106.59	-370.47	0.00	0.00	0.00	0.00	1	a Krayt cult ministrant	30520	dungeon	Kult Cave	1	none	0	300	120	2
@@ -5069,14 +5102,13 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 5067	TATOOINE	tat_moseisley_legacy_cult_cave	AREA	20	30.50	-118.99	-380.31	0.00	0.00	0.00	0.00	1	a Krayt cult ministrant	30520	dungeon	Kult Cave	1	none	0	300	120	2
 5068	TATOOINE	tat_moseisley_legacy_cult_cave	AREA	10	3.35	-63.53	-280.47	0.00	0.00	0.00	0.00	1	a Krayt cult zealot	30530	dungeon	Kult Cave	1	none	0	300	120	2
 5069	TATOOINE	tat_moseisley_legacy_cult_cave	AREA	17	28.68	-52.20	-190.31	0.00	0.00	0.00	0.00	1	a Krayt cult ministrant	30520	dungeon	Kult Cave	1	none	0	300	120	2
-5070	TATOOINE	tat_moseisley_legacy_cult_cave	AREA	20	27.61	-118.92	-364.88	0.00	0.00	0.00	0.00	1	a Krayt cult ministrant	30520	dungeon	Kult Cave	1	none	0	300	120	2
-5071	TATOOINE	tat_moseisley_legacy_cult_cave	AREA	20	22.46	-118.32	-385.24	0.00	0.00	0.00	0.00	1	a Krayt cult ministrant	30520	dungeon	Kult Cave	1	none	0	300	120	2
-5072	TATOOINE	tat_moseisley_legacy_cult_cave	AREA	20	2.84	-118.36	-399.91	0.00	0.00	0.00	0.00	1	a Krayt cult ministrant	30520	dungeon	Kult Cave	1	none	0	300	120	2
 5073	TATOOINE	tat_moseisley_legacy_cult_cave	AREA	10	2.58	-54.58	-246.91	0.00	0.00	0.00	0.00	1	a Krayt cult zealot	30530	dungeon	Kult Cave	1	none	0	300	120	2
 5074	TATOOINE	tat_moseisley_legacy_cult_cave	AREA	10	18.69	-57.47	-259.66	0.00	0.00	0.00	0.00	1	a Krayt cult zealot	30530	dungeon	Kult Cave	1	none	0	300	120	2
 5075	TATOOINE	tat_moseisley_legacy_cult_cave	AREA	20	15.51	-119.16	-347.45	0.00	0.00	0.00	0.00	1	a Krayt cult ministrant	30520	dungeon	Kult Cave	1	none	0	300	120	2
 5076	TATOOINE	tat_moseisley_legacy_cult_cave	AREA	2	15.01	-14.52	-23.94	0.00	0.00	0.00	0.00	1	a Krayt cult acolyte	30565	dungeon	Kult Cave	1	none	0	300	120	2
 5077	TATOOINE	tat_moseisley_legacy_cult_cave	AREA	20	13.95	-118.41	-393.59	0.00	0.00	0.00	0.00	1	a Krayt cult ministrant	30520	dungeon	Kult Cave	1	none	0	300	120	2
+5093	TATOOINE	tat_moseisley_legacy_cult_cave	AREA	12	-83.37	-75.49	-256.92	0.00	0.00	0.00	0.00	1	a Krayt cult ministrant	30520	dungeon	Kult Cave	1	none	0	300	120	2
+5056	TATOOINE	tat_moseisley_legacy_cult_cave	AREA	15	88.26	-90.51	-330.19	0.00	0.00	0.00	0.00	1	a Krayt cult ministrant	30520	dungeon	Kult Cave	1	none	0	300	120	2
 5078	TATOOINE	tat_moseisley_legacy_cult_cave	AREA	15	129.68	-91.91	-335.20	0.00	0.00	0.00	0.00	1	a Krayt cult ministrant	30520	dungeon	Kult Cave	1	none	0	300	120	2
 5079	TATOOINE	tat_moseisley_legacy_cult_cave	AREA	15	128.87	-92.39	-329.07	0.00	0.00	0.00	0.00	1	a Krayt cult ministrant	30520	dungeon	Kult Cave	1	none	0	300	120	2
 5080	TATOOINE	tat_moseisley_legacy_cult_cave	AREA	15	122.82	-91.90	-329.12	0.00	0.00	0.00	0.00	1	a Krayt cult monk	30540	dungeon	Kult Cave	1	none	0	300	120	2
@@ -5088,11 +5120,13 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 5086	TATOOINE	tat_moseisley_legacy_cult_cave	AREA	15	103.00	-90.67	-341.12	0.00	0.00	0.00	0.00	1	a Krayt cult ministrant	30520	dungeon	Kult Cave	1	none	0	300	120	2
 5087	TATOOINE	tat_moseisley_legacy_cult_cave	AREA	8	101.19	-89.02	-285.63	0.00	0.00	0.00	0.00	1	a Krayt cult ministrant	30520	dungeon	Kult Cave	1	none	0	300	120	2
 5088	TATOOINE	tat_moseisley_legacy_cult_cave	AREA	1	1.44	-5.96	781.28	0.00	0.00	0.00	0.00	1	a Krayt cult novice	30555	dungeon	Kult Cave	1	none	0	300	120	2
-5089	TATOOINE	tat_moseisley_legacy_cult_cave	AREA	20	1.32	-119.41	-357.82	0.00	0.00	0.00	0.00	1	a Krayt cult monk	30540	dungeon	Kult Cave	1	none	0	300	120	2
 5090	TATOOINE	tat_moseisley_legacy_cult_cave	AREA	17	-94.30	-82.15	-349.74	0.00	0.00	0.00	0.00	1	a Krayt cult ministrant	30520	dungeon	Kult Cave	1	none	0	300	120	2
 5091	TATOOINE	tat_moseisley_legacy_cult_cave	AREA	17	-91.25	-82.40	-349.29	0.00	0.00	0.00	0.00	1	a Krayt cult ministrant	30520	dungeon	Kult Cave	1	none	0	300	120	2
 5092	TATOOINE	tat_moseisley_legacy_cult_cave	AREA	17	-89.35	-82.73	-345.88	0.00	0.00	0.00	0.00	1	a Krayt cult ministrant	30520	dungeon	Kult Cave	1	none	0	300	120	2
-5093	TATOOINE	tat_moseisley_legacy_cult_cave	AREA	12	-83.37	-75.49	-256.92	0.00	0.00	0.00	0.00	1	a Krayt cult ministrant	30520	dungeon	Kult Cave	1	none	0	300	120	2
+5070	TATOOINE	tat_moseisley_legacy_cult_cave	AREA	20	27.61	-118.92	-364.88	0.00	0.00	0.00	0.00	1	a Krayt cult ministrant	30520	dungeon	Kult Cave	1	none	0	300	120	2
+5071	TATOOINE	tat_moseisley_legacy_cult_cave	AREA	20	22.46	-118.32	-385.24	0.00	0.00	0.00	0.00	1	a Krayt cult ministrant	30520	dungeon	Kult Cave	1	none	0	300	120	2
+5072	TATOOINE	tat_moseisley_legacy_cult_cave	AREA	20	2.84	-118.36	-399.91	0.00	0.00	0.00	0.00	1	a Krayt cult ministrant	30520	dungeon	Kult Cave	1	none	0	300	120	2
+5089	TATOOINE	tat_moseisley_legacy_cult_cave	AREA	20	1.32	-119.41	-357.82	0.00	0.00	0.00	0.00	1	a Krayt cult monk	30540	dungeon	Kult Cave	1	none	0	300	120	2
 5094	TATOOINE	tat_moseisley_legacy_cult_cave	AREA	5	-73.24	-56.15	-178.37	0.00	0.00	0.00	0.00	1	a Krayt cult acolyte	30565	dungeon	Kult Cave	1	none	0	300	120	2
 5095	TATOOINE	tat_moseisley_legacy_cult_cave	AREA	5	-70.51	-57.33	-172.22	0.00	0.00	0.00	0.00	1	a Krayt cult novice	30555	dungeon	Kult Cave	1	none	0	300	120	2
 5096	TATOOINE	tat_moseisley_legacy_cult_cave	AREA	5	-68.27	-57.92	-168.32	0.00	0.00	0.00	0.00	1	a Krayt cult acolyte	30565	dungeon	Kult Cave	1	none	0	300	120	2
@@ -5878,6 +5912,7 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 5876	TATOOINE	tat_world	AREA	0	-6233.05	36.84	-5929.44	0.00	-0.63	0.00	0.77	1	Valarian's soldier	30835	-	-	1	none	0	300	120	2
 5877	TATOOINE	tat_world	AREA	0	-6206.75	34.46	5060.16	0.00	0.00	0.00	0.00	1	a giant sand beetle	10510	-	-	5	none	0	1800	1500	2
 5878	TATOOINE	tat_world	AREA	0	-6205.45	23.63	1845.75	0.00	-0.41	0.00	0.91	1	XF-R5	30385	-	-	1	none	0	300	120	0
+	TATOOINE	tat_world	EGG	0	-6178.00	90.00	-6381.60	0.00	0.00	0.00	0.00	1	Klaatu	14260	POI	Jabbas Palace	1	none	0	300	120	0
 5879	TATOOINE	tat_world	AREA	0	-6158.00	23.59	1836.00	0.00	0.99	0.00	0.15	1	Protocol Droid	13810	-	-	1	none	0	300	120	0
 5880	TATOOINE	tat_world	AREA	0	-6157.95	51.10	2029.82	0.00	0.94	0.00	0.34	1	a greater desert womp rat	10850	-	-	1	none	0	300	120	2
 5881	TATOOINE	tat_world	EGG	0	-6152.08	23.63	1810.50	0.00	1.00	0.00	-0.04	1	C4-ZX	30855	-	-	1	none	0	300	120	0
@@ -5892,7 +5927,7 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 5890	TATOOINE	tat_world	AREA	0	-6001.97	44.20	1852.10	0.00	0.95	0.00	0.31	1	a greater desert womp rat	10850	-	-	1	none	0	300	120	2
 5891	TATOOINE	tat_world	AREA	0	-5998.23	62.91	1805.95	0.00	0.12	0.00	0.99	1	Tusken Follower	31690	-	-	1	none	0	300	120	2
 5892	TATOOINE	tat_world	AREA	0	-5969.66	53.20	-5960.45	0.00	0.70	0.00	0.72	1	an Elite Dune Lizzard	6290	-	-	1	none	0	300	120	2
-5893	TATOOINE	tat_world	AREA	0	-5943.73	58.73	-6036.86	0.00	0.91	0.00	0.41	1	Gotan	26670	-	-	1	none	0	300	120	0
+5893	TATOOINE	tat_world	EGG	0	-5943.73	58.73	-6043.00	0.00	0.91	0.00	0.41	1	Gotan	26670	-	-	1	none	0	300	120	0
 5894	TATOOINE	tat_world	AREA	0	-5936.96	51.73	-5974.32	0.00	0.38	0.00	0.92	1	an Elite Dune Lizzard	6290	-	-	1	none	0	300	120	2
 5895	TATOOINE	tat_world	AREA	0	-5927.21	49.47	-5931.22	0.00	0.14	0.00	0.99	1	an Elite Dune Lizzard	6290	-	-	1	none	0	300	120	2
 5896	TATOOINE	tat_world	AREA	0	-5891.39	49.52	-5967.41	0.00	-0.44	0.00	0.90	1	an Elite Dune Lizzard	6290	-	-	1	none	0	300	120	2
@@ -6174,23 +6209,29 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 6172	TATOOINE	tat_world	AREA	0	-1477.60	9.61	-4141.62	0.00	0.00	0.00	0.00	1	a tempest rill	25105	city	Bestine	6	none	0	90	60	2
 6173	TATOOINE	tat_world	AREA	0	-1472.49	41.00	-192.42	0.00	0.00	0.00	0.00	1	a Tusken warrior	31785	-	-	3	none	0	300	120	2
 6174	TATOOINE	tat_world	AREA	0	-1470.51	27.57	-3839.57	0.00	0.00	0.00	0.00	1	a city Rockmite	2690	city	Bestine	2	none	0	90	60	2
+	TATOOINE	tat_world	EGG	0	-1464.90	12.00	-3561.13	0.00	0.00	0.00	0.00	1	a commoner	3185	city	Bestine	1	none	0	300	120	0
 6175	TATOOINE	tat_world	AREA	0	-1461.28	107.11	-3354.89	0.00	0.00	0.00	0.00	1	a tempest rill	25105	city	Bestine	6	none	0	90	60	2
 6176	TATOOINE	tat_world	AREA	0	-1449.69	11.23	-4116.26	0.00	0.00	0.00	0.00	1	a womp rat	33210	city	Bestine	6	none	0	90	60	2
 6177	TATOOINE	tat_world	AREA	0	-1445.15	10.00	-3750.48	0.00	0.64	0.00	0.77	1	Beast Trainer	31310	-	-	1	none	0	300	120	0
 6178	TATOOINE	tat_world	AREA	0	-1438.30	16.83	-4154.53	0.00	0.00	0.00	0.00	1	a mound mite	19340	city	Bestine	6	none	0	90	60	2
 6179	TATOOINE	tat_world	AREA	0	-1433.59	111.41	-3347.85	0.00	0.00	0.00	0.00	1	a mound mite	19340	city	Bestine	6	none	0	90	60	2
 6180	TATOOINE	tat_world	AREA	0	-1430.88	42.50	-3963.80	0.00	0.00	0.00	0.00	1	a vicious Rill	32650	city	Bestine	2	none	0	90	60	2
+	TATOOINE	tat_world	EGG	0	-1429.08	12.00	-3628.00	0.00	0.00	0.00	0.00	1	a commoner	3185	city	Bestine	1	none	0	300	120	0
 6181	TATOOINE	tat_world	AREA	0	-1425.42	30.87	-3930.55	0.00	0.00	0.00	0.00	1	a carrion kreetle	9645	city	Bestine	6	none	0	90	60	2
 6182	TATOOINE	tat_world	AREA	0	-1406.51	32.04	-3955.90	0.00	0.00	0.00	0.00	1	a city sewer Swamprat	2695	city	Bestine	4	none	0	90	60	2
 6183	TATOOINE	tat_world	AREA	0	-1405.95	30.71	-4057.75	0.00	0.00	0.00	0.00	1	a kreetle	14480	city	Bestine	6	none	0	90	60	2
+	TATOOINE	tat_world	EGG	0	-1404.83	12.00	-3636.62	0.00	0.00	0.00	0.00	1	a commoner	3185	city	Bestine	1	none	0	300	120	0
 6184	TATOOINE	tat_world	AREA	0	-1402.88	101.23	-3338.65	0.00	0.00	0.00	0.00	1	a womp rat	33210	city	Bestine	6	none	0	90	60	2
+	TATOOINE	tat_world	EGG	0	-1396.33	10.00	-3773.30	0.00	0.00	0.00	0.00	1	a commoner	3185	city	Bestine	1	none	0	300	120	0
 6185	TATOOINE	tat_world	AREA	0	-1391.00	12.00	-3643.00	0.00	0.10	0.00	0.99	1	Joi	26825	-	-	1	none	0	300	120	0
 6186	TATOOINE	tat_world	AREA	0	-1381.05	30.95	-4038.31	0.00	0.00	0.00	0.00	1	a rill	25100	city	Bestine	4	none	0	90	60	2
 6187	TATOOINE	tat_world	AREA	0	-1377.69	29.25	5100.25	0.00	0.94	0.00	-0.35	1	a Large Rock Beetle	6345	-	-	1	none	0	300	120	2
 6188	TATOOINE	tat_world	AREA	0	-1369.43	34.59	-4060.60	0.00	0.00	0.00	0.00	1	a worrt	33315	city	Bestine	2	none	0	90	60	2
 6189	TATOOINE	tat_world	AREA	0	-1359.76	37.62	-384.07	0.00	0.70	0.00	0.72	1	an adolescent krayt dragon	14465	-	-	1	none	0	300	120	2
 6190	TATOOINE	tat_world	AREA	0	-1359.08	34.98	-372.94	0.00	0.97	0.00	0.26	1	an adolescent krayt dragon	14465	-	-	1	none	0	300	120	2
+	TATOOINE	tat_world	EGG	0	-1358.91	12.00	-3504.11	0.00	0.00	0.00	0.00	1	a commoner	3185	city	Bestine	1	none	0	300	120	0
 6191	TATOOINE	tat_world	EGG	0	-135.77	65.00	-5331.47	0.00	0.45	0.00	0.90	1	Sorna	30785	city	Anchorhead	1	none	0	300	120	0
+	TATOOINE	tat_world	EGG	0	-1347.51	12.00	-3695.90	0.00	0.00	0.00	0.00	1	a commoner	3185	city	Bestine	1	none	0	300	120	0
 6192	TATOOINE	tat_world	AREA	0	-1343.34	15.58	5136.02	0.00	0.74	0.00	-0.68	1	a Large Rock Beetle	6345	-	-	1	none	0	300	120	2
 6193	TATOOINE	tat_world	AREA	0	-1334.35	15.80	-3431.22	0.00	0.00	0.00	0.00	1	a worrt	33315	city	Bestine	2	none	0	90	60	2
 6194	TATOOINE	tat_world	AREA	0	-1334.08	19.76	5035.74	0.00	0.84	0.00	0.54	1	a Large Rock Beetle	6345	-	-	1	none	0	300	120	2
@@ -6198,15 +6239,20 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 6196	TATOOINE	tat_world	AREA	0	-1331.78	25.72	-368.05	0.00	0.22	0.00	0.98	1	an adolescent krayt dragon	14465	-	-	1	none	0	300	120	2
 6197	TATOOINE	tat_world	AREA	0	-1324.68	20.35	-3413.31	0.00	0.00	0.00	0.00	1	a Tame Rill	30295	city	Bestine	6	none	0	90	60	2
 6198	TATOOINE	tat_world	AREA	0	-1323.92	24.17	-381.69	0.00	-0.37	0.00	0.93	1	an adolescent krayt dragon	14465	-	-	1	none	0	300	120	2
+	TATOOINE	tat_world	EGG	0	-1320.40	12.00	-3633.47	0.00	0.00	0.00	0.00	1	a commoner	3185	city	Bestine	1	none	0	300	120	0
 6199	TATOOINE	tat_world	AREA	0	-1314.21	85.73	-4148.41	0.00	0.00	0.00	0.00	1	a womp rat	33210	city	Bestine	6	none	0	90	60	2
+	TATOOINE	tat_world	EGG	0	-1311.62	12.00	-3674.30	0.00	0.00	0.00	0.00	1	a commoner	3185	city	Bestine	1	none	0	300	120	0
 6200	TATOOINE	tat_world	AREA	0	-1309.81	48.11	-4035.65	0.00	0.00	0.00	0.00	1	a tame Worrt	30305	city	Bestine	4	none	0	90	60	2
 6201	TATOOINE	tat_world	AREA	0	-1303.07	31.22	-3766.41	0.00	0.00	0.00	0.00	1	a city Rockmite	2690	city	Bestine	2	none	0	90	60	2
 6202	TATOOINE	tat_world	AREA	0	-1301.38	58.72	-4055.27	0.00	0.00	0.00	0.00	1	a Sickly Womprat	26290	city	Bestine	6	none	0	90	60	2
 6203	TATOOINE	tat_world	AREA	0	-1298.51	11.83	-3434.93	0.00	0.00	0.00	0.00	1	a desert kreetle	22410	city	Bestine	4	none	0	90	60	2
 6204	TATOOINE	tat_world	AREA	0	-1296.23	40.91	-3789.79	0.00	0.00	0.00	0.00	1	a runted Rill	25610	city	Bestine	6	none	0	90	60	2
 6205	TATOOINE	tat_world	AREA	0	-1295.03	89.01	-4133.85	0.00	0.00	0.00	0.00	1	a tempest rill	25105	city	Bestine	6	none	0	90	60	2
+	TATOOINE	tat_world	EGG	0	-1291.61	12.00	-3618.84	0.00	0.00	0.00	0.00	1	a commoner	3185	city	Bestine	1	none	0	300	120	0
 6206	TATOOINE	tat_world	AREA	0	-1287.10	84.48	-4154.08	0.00	0.00	0.00	0.00	1	a mound mite	19340	city	Bestine	6	none	0	90	60	2
 6207	TATOOINE	tat_world	AREA	0	-1286.73	55.16	-4031.33	0.00	0.00	0.00	0.00	1	a vicious Rill	32650	city	Bestine	2	none	0	90	60	2
+	TATOOINE	tat_world	EGG	0	-1283.55	12.00	-3559.41	0.00	0.00	0.00	0.00	1	a commoner	3185	city	Bestine	1	none	0	300	120	0
+	TATOOINE	tat_world	EGG	0	-1279.50	12.00	-3584.70	0.00	0.00	0.00	0.00	1	a commoner	3185	city	Bestine	1	none	0	300	120	0
 6208	TATOOINE	tat_world	AREA	0	-1275.00	18.73	5074.00	0.00	0.15	0.00	0.99	1	a Large Rock Beetle	6345	-	-	1	none	0	300	120	2
 6209	TATOOINE	tat_world	AREA	0	-1266.21	47.41	-3877.86	0.00	0.00	0.00	0.00	1	a worrt	33315	city	Bestine	2	none	0	90	60	2
 6210	TATOOINE	tat_world	AREA	0	-1263.96	10.08	5463.37	0.00	0.00	0.00	0.00	1	an Alkhara bandit	145	-	-	5	none	0	300	120	2
@@ -6226,8 +6272,9 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 6224	TATOOINE	tat_world	EGG	0	-1145.42	98.00	-3893.60	0.00	0.78	0.00	0.62	1	Commander Arlan Barrezz	14715	city	Bestine	1	none	0	300	120	0
 6225	TATOOINE	tat_world	AREA	0	-1142.89	20.58	-3426.22	0.00	0.00	0.00	0.00	1	a minor worrt	16730	city	Bestine	6	none	0	90	60	2
 6226	TATOOINE	tat_world	AREA	0	-1139.94	47.43	-4040.86	0.00	0.00	0.00	0.00	1	a mound mite	19340	city	Bestine	6	none	0	90	60	2
+	TATOOINE	tat_world	EGG		-1138.20	98.00	-3897.00	0.0	-0.68	0.00	0.73	1	an Imperial recruiter	13170	city	Bestine	1	none	0	300	120	0
 6227	TATOOINE	tat_world	AREA	0	-1130.98	17.47	-3454.77	0.00	0.00	0.00	0.00	1	a lesser desert womp rat	15095	city	Bestine	4	none	0	90	60	2
-6228	TATOOINE	tat_world	EGG	0	-1128.67	98.00	-3900.49	0.00	-0.59	0.00	0.81	1	Jasha	1025	city	Bestine	1	none	0	300	120	0
+6228	TATOOINE	tat_world	EGG	0	-1128.67	98.00	-3900.49	0.00	-0.59	0.00	0.81	1	Captain Jasha	1025	city	Bestine	1	none	0	300	120	0
 6229	TATOOINE	tat_world	EGG	0	-1126.00	12.00	-3674.00	0.00	0.00	0.00	0.00	1	a Junk Dealer	22955	city	Bestine	1	none	0	90	60	0
 6230	TATOOINE	tat_world	EGG	0	-1118.00	12.00	-3687.00	0.00	0.00	0.00	0.00	1	a Junk Dealer	22955	city	Bestine	1	none	0	90	60	0
 6231	TATOOINE	tat_world	AREA	0	-1104.09	72.07	-3959.81	0.00	0.00	0.00	0.00	1	a womp rat	33210	city	Bestine	6	none	0	90	60	2
@@ -6237,7 +6284,7 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 6235	TATOOINE	tat_world	AREA	0	-1049.10	51.81	-3828.11	0.00	0.00	0.00	0.00	1	a sewer worrt	26095	city	Bestine	6	none	0	90	60	2
 6236	TATOOINE	tat_world	EGG	0	-1049.00	10.00	-3538.00	0.00	0.98	0.00	0.21	1	Barak	26660	city	Bestine	1	none	0	300	120	0
 6237	TATOOINE	tat_world	AREA	0	-1045.28	92.25	-3306.63	0.00	0.00	0.00	0.00	1	a mound mite	19340	city	Bestine	6	none	0	90	60	2
-6238	TATOOINE	tat_world	EGG	0	-1043.00	10.00	-3620.00	0.00	0.00	0.00	0.00	1	Kormund Thrylle	14455	city	Bestine	1	none	0	300	120	0
+6238	TATOOINE	tat_world	EGG	0	-1043.00	10.00	-3530.00	0.00	0.00	0.00	0.00	1	Kormund Thrylle	14455	city	Bestine	1	none	0	300	120	0
 6239	TATOOINE	tat_world	AREA	0	-1036.45	45.16	-3813.30	0.00	0.00	0.00	0.00	1	a vicious Rill	32650	city	Bestine	2	none	0	90	60	2
 6240	TATOOINE	tat_world	EGG	0	-1026.00	10.00	-3559.00	0.00	0.00	0.00	0.00	1	a Junk Dealer	22955	city	Bestine	1	none	0	90	60	0
 6241	TATOOINE	tat_world	AREA	0	-1013.99	25.04	-3444.64	0.00	0.00	0.00	0.00	1	a vicious Rill	32650	city	Bestine	2	none	0	90	60	2
