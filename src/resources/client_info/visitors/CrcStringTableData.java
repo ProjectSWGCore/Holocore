@@ -27,7 +27,7 @@
  ***********************************************************************************/
 package resources.client_info.visitors;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.Map;
 
 import resources.client_info.ClientData;
@@ -36,8 +36,8 @@ import resources.client_info.SWGFile;
 
 public class CrcStringTableData extends ClientData {
 	
-	private final Map<Integer, String> crcMap = new Hashtable<>(4 * 1024);
-	private final Map<String, Integer> reverseCrcMap = new Hashtable<>(4 * 1024);
+	private final Map<Integer, String> crcMap = new HashMap<>();
+	private final Map<String, Integer> reverseCrcMap = new HashMap<>();
 	
 	@Override
 	public void readIff(SWGFile iff) {

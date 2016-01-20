@@ -32,11 +32,9 @@ import services.commands.CommandService;
 import services.faction.FactionService;
 import services.galaxy.terminals.TerminalService;
 import services.sui.SuiService;
-import services.trader.TraderManager;
 
 public class GameManager extends Manager {
 
-	private final TraderManager traderManager;
 	private final CommandService commandService;
 	private final ConnectionService connectionService;
 	private final SuiService suiService;
@@ -47,7 +45,6 @@ public class GameManager extends Manager {
         private final SkillModService skillModService;
 
 	public GameManager() {
-		traderManager = new TraderManager();
 		commandService = new CommandService();
 		connectionService = new ConnectionService();
 		suiService = new SuiService();
@@ -57,7 +54,6 @@ public class GameManager extends Manager {
 //		groupService = new GroupService();
                 skillModService = new SkillModService();
 
-		addChildService(traderManager);
 		addChildService(commandService);
 		addChildService(connectionService);
 		addChildService(suiService);

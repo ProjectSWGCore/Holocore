@@ -4,9 +4,9 @@ import java.util.Arrays;
 
 import intents.LoginEventIntent;
 import intents.PlayerEventIntent;
-import intents.object.ObjectCreateIntent;
 import intents.object.ObjectCreatedIntent;
 import intents.object.ObjectTeleportIntent;
+import intents.object.UpdateObjectAwareness;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -21,7 +21,7 @@ public class TestIntentQueue {
 		Intent [] intents = new Intent[5];
 		intents[0] = new PlayerEventIntent(null, null);
 		intents[1] = new ObjectTeleportIntent(null, null);
-		intents[2] = new ObjectCreateIntent(null);
+		intents[2] = new UpdateObjectAwareness(null, false);
 		intents[3] = new ObjectCreatedIntent(null);
 		intents[4] = new LoginEventIntent(0, null);
 		IntentQueue queue = new IntentQueue();

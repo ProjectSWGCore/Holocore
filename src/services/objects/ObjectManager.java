@@ -27,19 +27,15 @@
 ***********************************************************************************/
 package services.objects;
 
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Hashtable;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import intents.object.ObjectCreateIntent;
 import intents.object.ObjectCreatedIntent;
-import intents.object.ObjectIdRequestIntent;
-import intents.object.ObjectIdResponseIntent;
 import intents.object.ObjectTeleportIntent;
 import intents.player.DeleteCharacterIntent;
 import intents.RequestZoneInIntent;
@@ -49,7 +45,6 @@ import network.packets.swg.ErrorMessage;
 import network.packets.swg.zone.SceneDestroyObject;
 import network.packets.swg.zone.insertion.SelectCharacter;
 import resources.Location;
-import resources.containers.ContainerPermissions;
 import resources.control.Intent;
 import resources.control.Manager;
 import resources.objects.SWGObject;
@@ -75,7 +70,6 @@ public class ObjectManager extends Manager {
 
 	private final ObjectDatabase<SWGObject> database;
 	private final Map <Long, SWGObject> objectMap;
-	private long maxObjectId;
 	
 	public ObjectManager() {
 		objectAwareness = new ObjectAwareness();
@@ -87,7 +81,6 @@ public class ObjectManager extends Manager {
 		
 		database = new CachedObjectDatabase<SWGObject>("odb/objects.db");
 		objectMap = new Hashtable<>(16*1024);
-		maxObjectId = 1;
 
 		addChildService(objectAwareness);
 		addChildService(mapManager);
@@ -98,8 +91,7 @@ public class ObjectManager extends Manager {
 		
 		registerForIntent(GalacticPacketIntent.TYPE);
 		registerForIntent(ObjectTeleportIntent.TYPE);
-		registerForIntent(ObjectIdRequestIntent.TYPE);
-		registerForIntent(ObjectCreateIntent.TYPE);
+		registerForIntent(ObjectCreatedIntent.TYPE);
 		registerForIntent(DeleteCharacterIntent.TYPE);
 	}
 	
@@ -114,30 +106,25 @@ public class ObjectManager extends Manager {
 		long startLoad = System.nanoTime();
 		Log.i("ObjectManager", "Loading objects from ObjectDatabase...");
 		System.out.println("ObjectManager: Loading objects from ObjectDatabase...");
-		database.load();
-		database.traverse(new Traverser<SWGObject>() {
-			@Override
-			public void process(SWGObject obj) {
-				loadObject(obj);
-				if (obj.getObjectId() >= maxObjectId) {
-					maxObjectId = obj.getObjectId() + 1;
+		synchronized (database) {
+			database.load();
+			database.traverse(new Traverser<SWGObject>() {
+				@Override
+				public void process(SWGObject obj) {
+					loadObject(obj);
 				}
-			}
-		});
+			});
+		}
 		double loadTime = (System.nanoTime() - startLoad) / 1E6;
 		Log.i("ObjectManager", "Finished loading %d objects. Time: %fms", database.size(), loadTime);
 		System.out.printf("ObjectManager: Finished loading %d objects. Time: %fms%n", database.size(), loadTime);
 	}
 	
 	private void loadClientObjects() {
-		for (SWGObject obj : clientBuildoutService.loadClientObjects().values()) {
-			synchronized (objectMap) {
-				if (obj.getObjectId() >= maxObjectId) {
-					maxObjectId = obj.getObjectId() + 1;
-				}
-			}
-			objectMap.put(obj.getObjectId(), obj);
-			new ObjectCreatedIntent(obj).broadcast();
+		Collection<SWGObject> objects = clientBuildoutService.loadClientObjects();
+		for (SWGObject object : objects) {
+			putObject(object);
+			new ObjectCreatedIntent(object).broadcast();
 		}
 	}
 	
@@ -146,23 +133,7 @@ public class ObjectManager extends Manager {
 		// if creature is not a player
 		if (!(obj instanceof CreatureObject && ((CreatureObject) obj).isLoggedOutPlayer()))
 			objectAwareness.add(obj);
-		if (obj instanceof CreatureObject && ((CreatureObject) obj).getPlayerObject() != null) {
-			if (!obj.hasSlot("bank")) {
-				SWGObject missing = createObject(obj, "object/tangible/bank/shared_character_bank.iff", false);
-				missing.setContainerPermissions(ContainerPermissions.INVENTORY);
-			}
-			
-			if (!obj.hasSlot("mission_bag")) {
-				SWGObject missing = createObject(obj, "object/tangible/mission_bag/shared_mission_bag.iff", false);
-				missing.setContainerPermissions(ContainerPermissions.INVENTORY);
-			}
-				
-			if (!obj.hasSlot("appearance_inventory")) {
-				SWGObject missing = createObject(obj, "object/tangible/inventory/shared_appearance_inventory.iff", false);
-				missing.setContainerPermissions(ContainerPermissions.INVENTORY);
-			}
-		}
-		objectMap.put(obj.getObjectId(), obj);
+		putObject(obj);
 		updateBuildoutParent(obj);
 		addChildrenObjects(obj);
 	}
@@ -172,7 +143,7 @@ public class ObjectManager extends Manager {
 			if (obj.getParent().isBuildout()) {
 				long id = obj.getParent().getObjectId();
 				obj.getParent().removeObject(obj);
-				SWGObject parent = objectMap.get(id);
+				SWGObject parent = getObjectById(id);
 				if (parent != null)
 					parent.addObject(obj);
 				else {
@@ -187,15 +158,17 @@ public class ObjectManager extends Manager {
 	
 	private void addChildrenObjects(SWGObject obj) {
 		for (SWGObject child : obj.getContainedObjects()) {
-			objectMap.put(child.getObjectId(), child);
+			putObject(child);
 			addChildrenObjects(child);
 		}
 	}
 	
 	@Override
 	public boolean terminate() {
-		database.traverse((obj) -> obj.setOwner(null));
-		database.close();
+		synchronized (database) {
+			database.traverse((obj) -> obj.setOwner(null));
+			database.close();
+		}
 		return super.terminate();
 	}
 	
@@ -203,29 +176,17 @@ public class ObjectManager extends Manager {
 	public void onIntentReceived(Intent i) {
 		if (i instanceof GalacticPacketIntent) {
 			processGalacticPacketIntent((GalacticPacketIntent) i);
-		} else if (i instanceof ObjectIdRequestIntent) {
-			processObjectIdRequestIntent((ObjectIdRequestIntent) i);
-		} else if (i instanceof ObjectCreateIntent) {
-			processObjectCreateIntent((ObjectCreateIntent) i);
+		} else if (i instanceof ObjectCreatedIntent) {
+			processObjectCreatedIntent((ObjectCreatedIntent) i);
 		} else if (i instanceof DeleteCharacterIntent) {
 			deleteObject(((DeleteCharacterIntent) i).getCreature().getObjectId());
 		}
 	}
-
-	private void processObjectCreateIntent(ObjectCreateIntent intent) {
-		SWGObject object = intent.getObject();
-		objectMap.put(object.getObjectId(), object);
+	
+	private void processObjectCreatedIntent(ObjectCreatedIntent intent) {
+		putObject(intent.getObject());
 	}
-
-	private void processObjectIdRequestIntent(ObjectIdRequestIntent intent) {
-		List<Long> reservedIds = new ArrayList<>();
-		for (int i = 0; i < intent.getAmount(); i++) {
-			reservedIds.add(getNextObjectId());
-		}
-
-		new ObjectIdResponseIntent(intent.getIdentifier(), reservedIds).broadcast();
-	}
-
+	
 	private void processGalacticPacketIntent(GalacticPacketIntent gpi) {
 		Packet packet = gpi.getPacket();
 		if (packet instanceof SelectCharacter) {
@@ -242,9 +203,11 @@ public class ObjectManager extends Manager {
 	}
 	
 	public SWGObject deleteObject(long objId) {
+		synchronized (database) {
+			database.remove(objId);
+		}
 		synchronized (objectMap) {
 			SWGObject obj = objectMap.remove(objId);
-			database.remove(objId);
 			if (obj == null)
 				return null;
 			obj.clearAware();
@@ -253,9 +216,16 @@ public class ObjectManager extends Manager {
 			return obj;
 		}
 	}
-
+	
+	private void putObject(SWGObject object) {
+		ObjectCreator.updateMaxObjectId(object.getObjectId());
+		synchronized (objectMap) {
+			objectMap.put(object.getObjectId(), object);
+		}
+	}
+	
 	public SWGObject destroyObject(long objectId) {
-		SWGObject object = objectMap.get(objectId);
+		SWGObject object = getObjectById(objectId);
 
 		return (object != null ? destroyObject(object) : null);
 	}
@@ -320,25 +290,22 @@ public class ObjectManager extends Manager {
 	}
 	
 	public SWGObject createObject(SWGObject parent, String template, Location l, boolean addToDatabase) {
-		synchronized (objectMap) {
-			long objectId = getNextObjectId();
-			SWGObject obj = ObjectCreator.createObjectFromTemplate(objectId, template);
-			if (obj == null) {
-				System.err.println("ObjectManager: Unable to create object with template " + template);
-				return null;
-			}
-			obj.setLocation(l);
-			objectMap.put(objectId, obj);
-			if (parent != null) {
-				parent.addObject(obj);
-			}
-			if (addToDatabase) {
-				database.put(objectId, obj);
-			}
-			Log.v("ObjectManager", "Created object %d [%s]", obj.getObjectId(), obj.getTemplate());
-			new ObjectCreatedIntent(obj).broadcast();
-			return obj;
+		SWGObject obj = ObjectCreator.createObjectFromTemplate(template);
+		if (obj == null) {
+			System.err.println("ObjectManager: Unable to create object with template " + template);
+			return null;
 		}
+		obj.setLocation(l);
+		if (parent != null) {
+			parent.addObject(obj);
+		}
+		synchronized (database) {
+			if (addToDatabase)
+				database.put(obj.getObjectId(), obj);
+		}
+		Log.v("ObjectManager", "Created object %d [%s]", obj.getObjectId(), obj.getTemplate());
+		new ObjectCreatedIntent(obj).broadcast();
+		return obj;
 	}
 	
 	private void zoneInCharacter(PlayerManager playerManager, long netId, long characterId) {
@@ -347,7 +314,7 @@ public class ObjectManager extends Manager {
 			Log.e("ObjectManager", "Unable to zone in null player '%d'", netId);
 			return;
 		}
-		SWGObject creatureObj = objectMap.get(characterId);
+		SWGObject creatureObj = getObjectById(characterId);
 		if (creatureObj == null) {
 			System.err.println("ObjectManager: Failed to start zone - CreatureObject could not be fetched from database [Character: " + characterId + "  User: " + player.getUsername() + "]");
 			Log.e("ObjectManager", "Failed to start zone - CreatureObject could not be fetched from database [Character: %d  User: %s]", characterId, player.getUsername());
@@ -381,10 +348,4 @@ public class ObjectManager extends Manager {
 		}, timeToRead, time);
 	}
 	
-	private long getNextObjectId() {
-		synchronized (objectMap) {
-			return maxObjectId++;
-		}
-	}
-
 }

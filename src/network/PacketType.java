@@ -45,6 +45,8 @@ import network.packets.swg.zone.spatial.*;
 import java.util.HashMap;
 import java.util.Map;
 
+import resources.server_info.Log;
+
 public enum PacketType {
 
 	// Both
@@ -222,8 +224,10 @@ public enum PacketType {
 
 	public static SWGPacket getForCrc(int crc) {
 		PacketType type = packetMap.get(crc);
-		if (type == null)
+		if (type == null) {
+			Log.w("PacketType", "Unknown packet: %08X", crc);
 			return null;
+		}
 		Class <? extends SWGPacket> c = type.c;
 		try {
 			return c.newInstance();

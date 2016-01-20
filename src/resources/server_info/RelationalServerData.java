@@ -301,8 +301,9 @@ public class RelationalServerData extends RelationalDatabase {
 			System.err.println("Could not load record: Types length and data length mismatch. Line: " + line);
 			return;
 		}
+		int column = 0;
 		try {
-			for (int i = 0; i < data.length; i++) {
+			for (int i = 0; i < data.length; i++, column++) {
 				if (types[i].startsWith("TEXT"))
 					insert.setString(i+1, data[i]);
 				else if (types[i].startsWith("REAL"))
@@ -314,7 +315,7 @@ public class RelationalServerData extends RelationalDatabase {
 			}
 			insert.addBatch();
 		} catch (NumberFormatException e) {
-			System.err.println("Could not load record: Record has invalid data. Line: " + line);
+			System.err.println("Could not load record: Record has invalid data. Line: " + line + "  Column: " + column);
 		}
 	}
 	

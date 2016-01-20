@@ -40,6 +40,7 @@ import network.packets.swg.zone.object_controller.DataTransformWithParent;
 import resources.Location;
 import resources.Terrain;
 import resources.buildout.BuildoutArea;
+import resources.client_info.visitors.ObjectData.ObjectDataAttribute;
 import resources.common.CRC;
 import resources.containers.ContainerPermissions;
 import resources.containers.ContainerResult;
@@ -62,6 +63,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Hashtable;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -76,14 +78,14 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	private final HashMap <String, SWGObject> slots; // HashMap used for null value support
 	private final Map<Long, SWGObject> containedObjects;
 	private final Map <String, String> attributes;
-	private final Map <String, Object> templateAttributes;
+	private final Map <ObjectDataAttribute, Object> dataAttributes;
 	private final BaselineType objectType;
 	private ContainerPermissions containerPermissions;
 	private transient Set <SWGObject> objectsAware;
 	private transient BuildoutArea buildoutArea;
+	private transient Player owner;
 	private List <List <String>> arrangement;
 
-	private Player	owner		= null;
 	private SWGObject	parent	= null;
 	private StringId stringId = new StringId("", "");
 	private StringId detailStringId = new StringId("", "");
@@ -109,8 +111,8 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		this.objectsAware = new HashSet<SWGObject>();
 		this.slots = new HashMap<>();
 		this.containedObjects = Collections.synchronizedMap(new HashMap<Long, SWGObject>());
-		this.attributes = new LinkedHashMap<String, String>();
-		this.templateAttributes = new HashMap<String, Object>();
+		this.attributes = new LinkedHashMap<>();
+		this.dataAttributes = new Hashtable<>();
 		this.containerPermissions = new DefaultPermissions();
 		this.objectType = objectType;
 	}
@@ -120,6 +122,7 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		ois.defaultReadObject();
 		objectsAware = new HashSet<SWGObject>();
 		buildoutArea = null;
+		owner = null;
 	}
 
 	/**
@@ -175,14 +178,17 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	 * @return {@link ContainerResult}
 	 */
 	public ContainerResult moveToContainer(SWGObject requester, SWGObject container) {
-		if (!container.hasPermission(requester, ContainerPermissions.Permission.MOVE))
+		if (!container.hasPermission(requester, ContainerPermissions.Permission.MOVE)) {
+			Log.w("SWGObject", "No permission 'MOVE' for requestor %s with object %s", requester, this);
 			return ContainerResult.NO_PERMISSION;
+		}
 
 		// Check if object can fit into container or slots
 		int arrangementId = container.getArrangementId(this);
 		if (arrangementId == -1) {
 			// Item is going to go into the container, so check to see if it'll fit
 			if (container.getMaxContainerSize() <= container.getContainedObjects().size()) {
+				Log.w("SWGObject", "Unable to add object to container! Container Full");
 				return ContainerResult.CONTAINER_FULL;
 			}
 		}
@@ -192,6 +198,8 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		// Get a pre-parent-removal list of the observers so we can send create/destroy/update messages
 		Set<SWGObject> oldObservers = getObservers();
 		Player prevOwner = getOwner();
+		if (prevOwner != null)
+			oldObservers.add(prevOwner.getCreatureObject());
 
 		// Remove this object from the old parent if one exists
 		SWGObject oldParent = null;
@@ -206,6 +214,8 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		// Observer notification
 		Player newOwner = getOwner();
 		Set<SWGObject> containerObservers = getObservers();
+		if (newOwner != null)
+			containerObservers.add(newOwner.getCreatureObject());
 		if (prevOwner != newOwner) {
 			if (prevOwner != null)
 				oldObservers.add(prevOwner.getCreatureObject());
@@ -503,12 +513,12 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 		return areaId;
 	}
 	
-	public Object getTemplateAttribute(String key) {
-		return templateAttributes.get(key);
+	public Object getDataAttribute(ObjectDataAttribute key) {
+		return dataAttributes.get(key);
 	}
 
-	public void setTemplateAttribute(String key, Object value) {
-		templateAttributes.put(key, value);
+	public void setDataAttribute(ObjectDataAttribute key, Object value) {
+		dataAttributes.put(key, value);
 	}
 	
 	public List<List<String>> getArrangement() {
@@ -540,14 +550,12 @@ public abstract class SWGObject implements Serializable, Comparable<SWGObject> {
 	}
 
 	public int getMaxContainerSize() {
-		Object volume = templateAttributes.get("containerVolumeLimit");
-		if (volume == null)
-			return 0;
-		try {
-			return Integer.parseInt(volume.toString());
-		} catch (NumberFormatException e) {
+		Object volume = dataAttributes.get(ObjectDataAttribute.CONTAINER_VOLUME_LIMIT);
+		if (volume == null) {
+			Log.w("SWGObject", "Volume is null!");
 			return 0;
 		}
+		return (Integer) volume;
 	}
 	
 	public void setBuildout(boolean buildout) {
