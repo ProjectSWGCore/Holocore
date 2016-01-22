@@ -232,7 +232,7 @@ public class ConnectionService extends Service {
 			synchronized (disappearPlayers) {
 				disappearPlayers.add(new DisappearPlayer(System.nanoTime(), p));
 			}
-			updateService.schedule(disappearRunnable, (long) DISAPPEAR_THRESHOLD, TimeUnit.MILLISECONDS);
+			updateService.schedule(disappearRunnable, (long) DISAPPEAR_THRESHOLD + 100, TimeUnit.MILLISECONDS);
 		}
 	}
 	
