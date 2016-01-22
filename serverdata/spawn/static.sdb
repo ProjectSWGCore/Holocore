@@ -4747,26 +4747,26 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 4747	TATOOINE	tat_anchorhead_medium_house	EGG	2	8.80	0.41	-0.01	0.00	0.00	0.00	0.00	1	a commoner	3300	city	Anchorhead	1	none	0	300	120	0
 4748	TATOOINE	tat_anchorhead_medium_house	EGG	2	-3.00	0.40	-9.40	0.00	0.00	0.00	0.00	1	Nitra Vendallan	21210	city	Anchorhead	1	none	0	300	120	0
 4749	TATOOINE	tat_anchorhead_medium_house	EGG	6	-6.40	-4.00	-6.00	0.00	0.00	0.00	0.00	1	a rebel recruiter	3300	city	Anchorhead	1	none	0	300	120	0
-	TATOOINE	tat_bestine_association_hall	EGG	10	0.22	1.75	-13.49	0.00	-0.00	0.00	1.00	1	Lt. Akal Colzet	33690	city	Bestine	1	none	0	300	120	0
-	TATOOINE	tat_bestine_cantina	EGG	3	3.02	-0.89	5.68	0.00	0.73	0.00	0.68	1	Qakkee	2860	city	Bestine	1	none	0	300	120	0
-	TATOOINE	tat_bestine_capitol	EGG	3	-2.35	3.08	-10.51	0.00	0.00	0.00	0.00	1	Prefect Talmont	23560	city	Bestine	1	none	0	300	120	0
-	TATOOINE	tat_bestine_capitol	EGG	7	-37.17	1.29	0.11	0.00	0.68	0.00	0.72	1	Governor Tour Aryon	31200	city	Bestine	1	none	0	300	120	0
-	TATOOINE	tat_bestine_capitol	EGG	8	-26.42	3.22	20.46	0.00	0.72	0.00	0.68	1	Victor Visalis	32680	city	Bestine	1	none	0	300	120	0
-	TATOOINE	tat_bestine_capitol	EGG	10	28.68	1.30	-6.36	0.00	0.72	0.00	0.68	1	Wilhalm Skrim	33175	city	Bestine	1	none	0	300	120	0
-	TATOOINE	tat_bestine_capitol	EGG	11	19.67	3.22	-35.60	0.00	0.06	0.00	0.99	1	Sean Trenwell	25865	city	Bestine	1	none	0	300	120	0
-	TATOOINE	tat_bestine_combat_gh	EGG	6	-14.51	1.1	2.87	0.00	0.95	0.28	0.00	1	a Junk Dealer	13965	city	Bestine	1	none	0	300	120	0
-	TATOOINE	tat_bestine_combat_gh	EGG	8	3.33	1.1	-8.51	0.00	0.00	0.00	0.00	1	a businessman	2255	city	Bestine	1	none	0	300	120	0
-	TATOOINE	tat_bestine_combat_gh	EGG	9	-14.00	1.1	-8.63	0.00	0.00	0.00	0.00	1	a hunter	12525	city	Bestine	1	none	0	300	120	0
-	TATOOINE	tat_bestine_commerce_gh	EGG	8	3.22	1.1	-9.63	0.00	0.00	0.00	0.00	1	a miner	16700	city	Bestine	1	none	0	300	120	0
+4750	TATOOINE	tat_bestine_association_hall	EGG	10	0.22	1.75	-13.49	0.00	-0.00	0.00	1.00	1	Lt. Akal Colzet	33690	city	Bestine	1	none	0	300	120	0
+4751	TATOOINE	tat_bestine_cantina	EGG	3	3.02	-0.89	5.68	0.00	0.73	0.00	0.68	1	Qakkee	2860	city	Bestine	1	none	0	300	120	0
+4752	TATOOINE	tat_bestine_capitol	EGG	3	-2.35	3.08	-10.51	0.00	0.00	0.00	0.00	1	Prefect Talmont	23560	city	Bestine	1	none	0	300	120	0
+4753	TATOOINE	tat_bestine_capitol	EGG	7	-37.17	1.29	0.11	0.00	0.68	0.00	0.72	1	Governor Tour Aryon	31200	city	Bestine	1	none	0	300	120	0
+4754	TATOOINE	tat_bestine_capitol	EGG	8	-26.42	3.22	20.46	0.00	0.72	0.00	0.68	1	Victor Visalis	32680	city	Bestine	1	none	0	300	120	0
+4755	TATOOINE	tat_bestine_capitol	EGG	10	28.68	1.30	-6.36	0.00	0.72	0.00	0.68	1	Wilhalm Skrim	33175	city	Bestine	1	none	0	300	120	0
+4756	TATOOINE	tat_bestine_capitol	EGG	11	19.67	3.22	-35.60	0.00	0.06	0.00	0.99	1	Sean Trenwell	25865	city	Bestine	1	none	0	300	120	0
+4757	TATOOINE	tat_bestine_combat_gh	EGG	6	-14.51	1.1	2.87	0.00	0.95	0.28	0.00	1	a Junk Dealer	13965	city	Bestine	1	none	0	300	120	0
+4758	TATOOINE	tat_bestine_combat_gh	EGG	8	3.33	1.1	-8.51	0.00	0.00	0.00	0.00	1	a businessman	2255	city	Bestine	1	none	0	300	120	0
+4759	TATOOINE	tat_bestine_combat_gh	EGG	9	-14.00	1.1	-8.63	0.00	0.00	0.00	0.00	1	a hunter	12525	city	Bestine	1	none	0	300	120	0
+4760	TATOOINE	tat_bestine_commerce_gh	EGG	8	3.22	1.1	-9.63	0.00	0.00	0.00	0.00	1	a miner	16700	city	Bestine	1	none	0	300	120	0
 4761	TATOOINE	tat_bestine_hotel	EGG	4	7.30	1.00	-6.87	0.00	0.00	0.00	0.00	1	a noble	21220	city	Bestine	1	none	0	90	60	2
-	TATOOINE	tat_bestine_hotel	EGG	4	0.75	1.00	3.09	0.00	0.93	0.00	-0.34	1	Gil Burtin	33700	city	Bestine	1	none	0	300	120	0
-	TATOOINE	tat_bestine_hotel	EGG	10	-23.00	1.6	-15.00	0.00	-0.04	0.00	1.00	1	An Event Coordinator	33705	city	Bestine	1	none	0	300	120	0
+4762	TATOOINE	tat_bestine_hotel	EGG	4	0.75	1.00	3.09	0.00	0.93	0.00	-0.34	1	Gil Burtin	33700	city	Bestine	1	none	0	300	120	0
+4763	TATOOINE	tat_bestine_hotel	EGG	10	-23.00	1.6	-15.00	0.00	-0.04	0.00	1.00	1	An Event Coordinator	33705	city	Bestine	1	none	0	300	120	0
 4764	TATOOINE	tat_bestine_hospital	EGG	2	-1.00	0.20	-1.93	0.00	0.76	0.00	0.64	1	a 2-1B surgical droid	29785	city	Bestine	1	none	0	300	120	0
-	TATOOINE	tat_bestine_hospital	EGG	2	-1.59	0.18	0.80	0.00	0.48	0.00	0.87	1	Melios Purl	16255	city	Bestine	1	none	0	300	120	0
-	TATOOINE	tat_bestine_imp_hill_base	EGG	5	4.24	0.13	-4.18	0.00	-0.64	0.00	0.76	1	Pfilbee Jhorn	23380	city	Bestine	1	none	0	300	120	0
-	TATOOINE	tat_bestine_large_house	EGG	5	22.64	0.20	-0.33	0.00	-0.57	0.00	0.81	1	Lilas Dinhint (Museum Curator)	15240	city	Bestine	1	none	0	300	120	0
-	TATOOINE	tat_bestine_small_house6	EGG	10	2.04	-0.38	-5.14	0.00	-0.50	0.00	0.86	1	Farious Gletch	8515	city	Bestine	1	none	0	300	120	0
-	TATOOINE	tat_bestine_starport	EGG	4	1.83	0.64	66.85	0.00	0.93	0.00	0.36	1	Chassis Dealer	33660	city	Bestine	1	none	0	300	120	0
+4765	TATOOINE	tat_bestine_hospital	EGG	2	-1.59	0.18	0.80	0.00	0.48	0.00	0.87	1	Melios Purl	16255	city	Bestine	1	none	0	300	120	0
+4766	TATOOINE	tat_bestine_imp_hill_base	EGG	5	4.24	0.13	-4.18	0.00	-0.64	0.00	0.76	1	Pfilbee Jhorn	23380	city	Bestine	1	none	0	300	120	0
+4767	TATOOINE	tat_bestine_large_house	EGG	5	22.64	0.20	-0.33	0.00	-0.57	0.00	0.81	1	Lilas Dinhint (Museum Curator)	15240	city	Bestine	1	none	0	300	120	0
+4768	TATOOINE	tat_bestine_small_house6	EGG	10	2.04	-0.38	-5.14	0.00	-0.50	0.00	0.86	1	Farious Gletch	8515	city	Bestine	1	none	0	300	120	0
+4769	TATOOINE	tat_bestine_starport	EGG	4	1.83	0.64	66.85	0.00	0.93	0.00	0.36	1	Chassis Dealer	33660	city	Bestine	1	none	0	300	120	0
 4770	TATOOINE	tat_cave_08	AREA	20	5.30	-59.10	-73.70	0.00	1.00	0.00	-0.06	1	Tusken Relic Worshiper	9305	dungeon	Flatland Damprock	1	none	0	300	120	2
 4771	TATOOINE	tat_cave_08	AREA	26	4.20	-63.60	-108.30	0.00	-0.02	0.00	1.00	1	Tusken Relic Worshiper	9305	dungeon	Flatland Damprock	1	none	0	300	120	2
 4772	TATOOINE	tat_cave_08	AREA	1	0.80	-11.70	-13.20	0.00	1.00	0.00	0.01	1	Tusken Relic Worshiper	9305	dungeon	Flatland Damprock	1	none	0	300	120	2
@@ -6250,7 +6250,7 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 6250	TATOOINE	tat_world	AREA	0	-1359.76	37.62	-384.07	0.00	0.70	0.00	0.72	1	an adolescent krayt dragon	14465	-	-	1	none	0	300	120	2
 6251	TATOOINE	tat_world	AREA	0	-1359.08	34.98	-372.94	0.00	0.97	0.00	0.26	1	an adolescent krayt dragon	14465	-	-	1	none	0	300	120	2
 6252	TATOOINE	tat_world	EGG	0	-1358.91	12.00	-3504.11	0.00	0.11	0.00	0.99	1	a commoner	3185	city	Bestine	1	none	0	300	120	0
-	TATOOINE	tat_world	AREA	0	-1355.00	12.00	-3659.00	0.00	0.00	0.00	0.00	1	a bounty hunter	26965	city	Bestine	4	none	0	300	120	0
+6253	TATOOINE	tat_world	AREA	0	-1355.00	12.00	-3659.00	0.00	0.00	0.00	0.00	1	a bounty hunter	26965	city	Bestine	4	none	0	300	120	0
 6254	TATOOINE	tat_world	EGG	0	-135.77	65.00	-5331.47	0.00	0.45	0.00	0.90	1	Sorna	30785	city	Anchorhead	1	none	0	300	120	0
 6255	TATOOINE	tat_world	EGG	0	-1347.51	12.00	-3695.90	0.00	0.00	0.00	0.00	1	a commoner	3185	city	Bestine	1	none	0	300	120	0
 6256	TATOOINE	tat_world	AREA	0	-1343.34	15.58	5136.02	0.00	0.74	0.00	-0.68	1	a Large Rock Beetle	6345	-	-	1	none	0	300	120	2
@@ -6270,7 +6270,7 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 6270	TATOOINE	tat_world	AREA	0	-1296.23	40.91	-3789.79	0.00	0.00	0.00	0.00	1	a runted Rill	25610	city	Bestine	6	none	0	90	60	2
 6271	TATOOINE	tat_world	AREA	0	-1295.03	89.01	-4133.85	0.00	0.00	0.00	0.00	1	a tempest rill	25105	city	Bestine	6	none	0	90	60	2
 6272	TATOOINE	tat_world	EGG	0	-1291.61	12.00	-3618.84	0.00	0.00	0.00	0.00	1	a commoner	3185	city	Bestine	1	none	0	300	120	0
-	TATOOINE	tat_world	EGG	0	-1290.65	12.00	-3537.43	0.00	0.91	0.00	0.41	1	Lt. Sabol	25620	city	Bestine	1	none	0	300	120	0
+6273	TATOOINE	tat_world	EGG	0	-1290.65	12.00	-3537.43	0.00	0.91	0.00	0.41	1	Lt. Sabol	25620	city	Bestine	1	none	0	300	120	0
 6274	TATOOINE	tat_world	AREA	0	-1287.10	84.48	-4154.08	0.00	0.00	0.00	0.00	1	a mound mite	19340	city	Bestine	6	none	0	90	60	2
 6275	TATOOINE	tat_world	AREA	0	-1286.73	55.16	-4031.33	0.00	0.00	0.00	0.00	1	a vicious Rill	32650	city	Bestine	2	none	0	90	60	2
 6276	TATOOINE	tat_world	EGG	0	-1283.55	12.00	-3559.41	0.00	0.00	0.00	0.00	1	a commoner	3185	city	Bestine	1	none	0	300	120	0
@@ -6282,28 +6282,28 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 6282	TATOOINE	tat_world	AREA	0	-1253.85	53.37	-3891.72	0.00	0.00	0.00	0.00	1	a tame Womprat	30300	city	Bestine	6	none	0	90	60	2
 6283	TATOOINE	tat_world	AREA	0	-1252.72	65.67	-3282.00	0.00	0.00	0.00	0.00	1	a mound mite	19340	city	Bestine	6	none	0	90	60	2
 6284	TATOOINE	tat_world	AREA	0	-1244.85	59.39	-3316.00	0.00	0.00	0.00	0.00	1	a womp rat	33210	city	Bestine	6	none	0	90	60	2
-	TATOOINE	tat_world	EGG	0	-1226.90	12.00	-3628.62	0.00	0.00	0.00	0.00	1	a commoner	3185	city	Bestine	1	none	0	300	120	0
+6285	TATOOINE	tat_world	EGG	0	-1226.90	12.00	-3628.62	0.00	0.00	0.00	0.00	1	a commoner	3185	city	Bestine	1	none	0	300	120	0
 6286	TATOOINE	tat_world	AREA	0	-1226.56	20.15	5129.36	0.00	-0.31	0.00	0.95	1	a Large Rock Beetle	6345	-	-	1	none	0	300	120	2
 6287	TATOOINE	tat_world	AREA	0	-1217.51	58.23	-3823.59	0.00	0.00	0.00	0.00	1	a rockmite	25170	city	Bestine	2	none	0	90	60	2
-	TATOOINE	tat_world	EGG	0	-1216.37	12.00	-3549.63	0.00	0.00	0.00	0.00	1	a commoner	3185	city	Bestine	1	none	0	300	120	0
+6288	TATOOINE	tat_world	EGG	0	-1216.37	12.00	-3549.63	0.00	0.00	0.00	0.00	1	a commoner	3185	city	Bestine	1	none	0	300	120	0
 6289	TATOOINE	tat_world	AREA	0	-1215.09	61.56	-3290.64	0.00	0.00	0.00	0.00	1	a tempest rill	25105	city	Bestine	6	none	0	90	60	2
 6268	TATOOINE	tat_world	EGG	0	-1213.00	12.00	-3630.00	0.00	0.00	0.00	0.00	1	a commoner	3185	city	Bestine	1	none	0	300	120	0
 6269	TATOOINE	tat_world	EGG	0	-1203.01	12.00	-3612.44	0.00	0.93	0.00	-0.34	1	Sol Windtide	33695	city	Bestine	1	none	0	300	120	0
 6292	TATOOINE	tat_world	AREA	0	-1201.71	76.31	-3852.47	0.00	0.00	0.00	0.00	1	a rill	25100	city	Bestine	4	none	0	90	60	2
-	TATOOINE	tat_world	EGG	0	-1200.90	12.00	-3553.31	0.00	0.00	0.00	0.00	1	a commoner	3185	city	Bestine	1	none	0	300	120	0
-	TATOOINE	tat_world	EGG	0	-1200.33	12.00	-3631.82	0.00	0.00	0.00	0.00	1	a commoner	3185	city	Bestine	1	none	0	300	120	0
+6293	TATOOINE	tat_world	EGG	0	-1200.90	12.00	-3553.31	0.00	0.00	0.00	0.00	1	a commoner	3185	city	Bestine	1	none	0	300	120	0
+6294	TATOOINE	tat_world	EGG	0	-1200.33	12.00	-3631.82	0.00	0.00	0.00	0.00	1	a commoner	3185	city	Bestine	1	none	0	300	120	0
 6273	TATOOINE	tat_world	EGG	0	-1175.00	12.00	-3635.74	0.00	0.00	0.00	0.00	1	a commoner	3185	city	Bestine	1	none	0	300	120	0
 6296	TATOOINE	tat_world	AREA	0	-1171.21	64.69	-3820.28	0.00	0.00	0.00	0.00	1	a Tame Rill	30295	city	Bestine	6	none	0	90	60	2
 6297	TATOOINE	tat_world	AREA	0	-1162.82	46.12	-4058.21	0.00	0.00	0.00	0.00	1	a womp rat	33210	city	Bestine	6	none	0	90	60	2
 6274	TATOOINE	tat_world	EGG	0	-1162.72	12.00	-3646.54	0.00	0.00	0.00	0.00	1	a commoner	3185	city	Bestine	1	none	0	300	120	0
 6299	TATOOINE	tat_world	AREA	0	-1161.35	52.15	-4035.61	0.00	0.00	0.00	0.00	1	a tempest rill	25105	city	Bestine	6	none	0	90	60	2
-	TATOOINE	tat_world	EGG	0	-1160.49	12.00	-3525.50	0.00	0.89	0.00	-0.43	1	Commander D'Krn	14715	city	Bestine	1	none	0	300	120	0
+6300	TATOOINE	tat_world	EGG	0	-1160.49	12.00	-3525.50	0.00	0.89	0.00	-0.43	1	Commander D'Krn	14715	city	Bestine	1	none	0	300	120	0
 6301	TATOOINE	tat_world	AREA	0	-1159.23	15.83	-3439.51	0.00	0.00	0.00	0.00	1	a worrt	33315	city	Bestine	2	none	0	90	60	2
 6277	TATOOINE	tat_world	EGG	0	-1157.53	12.00	-3666.61	0.00	0.00	0.00	0.00	1	a commoner	3185	city	Bestine	1	none	0	300	120	0
 6303	TATOOINE	tat_world	EGG	0	-1149.40	98.00	-3903.78	0.00	0.50	0.00	0.86	1	Major Caleb Knolar	12805	city	Bestine	1	none	0	300	120	0
 6278	TATOOINE	tat_world	EGG	0	-1145.63	12.00	-3656.34	0.00	0.00	0.00	0.00	1	a commoner	3185	city	Bestine	1	none	0	300	120	0
 6305	TATOOINE	tat_world	EGG	0	-1145.42	98.00	-3893.60	0.00	0.78	0.00	0.62	1	Commander Arlan Barrezz	14715	city	Bestine	1	none	0	300	120	0
-	TATOOINE	tat_world	EGG	0	-1145.10	12.00	-3507.66	0.00	0.00	0.00	0.00	1	a commoner	3185	city	Bestine	1	none	0	300	120	0
+6306	TATOOINE	tat_world	EGG	0	-1145.10	12.00	-3507.66	0.00	0.00	0.00	0.00	1	a commoner	3185	city	Bestine	1	none	0	300	120	0
 6307	TATOOINE	tat_world	AREA	0	-1142.89	20.58	-3426.22	0.00	0.00	0.00	0.00	1	a minor worrt	16730	city	Bestine	6	none	0	90	60	2
 6282	TATOOINE	tat_world	EGG	0	-1142.37	12.00	-3672.64	0.00	0.00	0.00	0.00	1	a commoner	3185	city	Bestine	1	none	0	300	120	0
 6309	TATOOINE	tat_world	AREA	0	-1139.94	47.43	-4040.86	0.00	0.00	0.00	0.00	1	a mound mite	19340	city	Bestine	6	none	0	90	60	2
@@ -6320,7 +6320,7 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 6320	TATOOINE	tat_world	AREA	0	-1086.45	62.75	-3952.99	0.00	0.00	0.00	0.00	1	a mound mite	19340	city	Bestine	6	none	0	90	60	2
 6294	TATOOINE	tat_world	EGG	0	-1085.61	12.00	-3647.62	0.00	0.00	0.00	0.00	1	a commoner	3185	city	Bestine	1	none	0	300	120	0
 6295	TATOOINE	tat_world	EGG	0	-1080.50	12.00	-3696.44	0.00	0.00	0.00	0.00	1	a commoner	3185	city	Bestine	1	none	0	300	120	0
-	TATOOINE	tat_world	EGG	0	-1077.52	12.00	-3513.95	0.00	0.00	0.00	0.00	1	a commoner	3185	city	Bestine	1	none	0	300	120	0
+6323	TATOOINE	tat_world	EGG	0	-1077.52	12.00	-3513.95	0.00	0.00	0.00	0.00	1	a commoner	3185	city	Bestine	1	none	0	300	120	0
 6296	TATOOINE	tat_world	EGG	0	-1076.30	12.00	-3657.64	0.00	0.00	0.00	0.00	1	a commoner	3185	city	Bestine	1	none	0	300	120	0
 6325	TATOOINE	tat_world	AREA	0	-1075.00	42.85	-3814.35	0.00	0.00	0.00	0.00	1	a city sewer Swamprat	2695	city	Bestine	4	none	0	90	60	2
 6298	TATOOINE	tat_world	EGG	0	-1068.26	12.00	-3691.00	0.00	0.00	0.00	0.00	1	a commoner	3185	city	Bestine	1	none	0	300	120	0
