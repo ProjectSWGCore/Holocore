@@ -822,6 +822,7 @@ tat_wayfar_small_house2	TATOOINE	1134492	housing_tatt_style01_small.iff	Tatooine
 tat_wayfar_small_house3	TATOOINE	1165379	housing_tatt_style01_small.iff	Tatooine - Wayfar / Small House 3	10	-5059	75	-6581
 tat_wayfar_small_house4	TATOOINE	1134573	housing_tatt_style01_small.iff	Tatooine - Wayfar / Small House 4	10	-5226	75	-6472
 tat_world	TATOOINE	0	empty	Tatooine - World	0	0	0	0
+umb_world	UMBRA	0	empty	Umbra - World	0	0	0	0
 yav_blue_leaf_temple	YAVIN4	468317	temple_blueleaf.iff	Yavin 4 - Blue Leaf Temple	2	-830	86	-2056
 yav_dark_enclave	YAVIN4	3435626	dark_enclave.iff	Yavin 4 - Dark Enclave	27	5070	79	310
 yav_exar_kun_temple	YAVIN4	3465379	temple_exar_kun.iff	Yavin 4 - Exar Kun Temple	15	5057	74	5538
@@ -880,4 +881,3 @@ yav_shed1	YAVIN4	8845440	military_base_shed_imperial_style_cantina_s01.iff	Yavin
 yav_shed2	YAVIN4	7146270	military_base_shed_imperial_style_01.iff	Yavin 4 - Shed 2	6	5812	142	3057
 yav_woolamander_temple	YAVIN4	3705352	temple_woolamander.iff	Yavin 4 - Woolamander Temple	10	549	81	-622
 yav_world	YAVIN4	0	empty	Yavin 4 - World	0	0	0	0
-tansarii	DUNGEON1	-535083930726957060	empty	Tansarii Station	33	0	0	0
