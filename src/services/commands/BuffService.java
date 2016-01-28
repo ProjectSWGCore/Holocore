@@ -79,7 +79,7 @@ public class BuffService extends Service {
 		CreatureObject receiver = bi.getReceiver();
 		CreatureObject buffer = bi.getBuffer();
 		int duration = 600;
-		Buff buff = new Buff(buffer, receiver, duration, 1337f);
+		Buff buff = new Buff(buffer.getObjectId(), receiver.getPlayerObject().getPlayTime(), duration, 1337f);
 		String buffName = bi.getBuffName();
 		
 		receiver.addBuff(buffName, buff);
@@ -155,7 +155,7 @@ public class BuffService extends Service {
 
 		@Override
 		public long getDelay(TimeUnit timeUnit) {
-			return timeUnit.convert(buff.getRemainingTime(), TimeUnit.MILLISECONDS);
+			return timeUnit.convert(buff.getEndTime() - System.currentTimeMillis(), TimeUnit.MILLISECONDS);
 		}
 		
 	}
