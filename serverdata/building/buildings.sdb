@@ -2,7 +2,7 @@ building_id	terrain_name	object_id	iff	building_name	total_cells	x	y	z
 TEXT PRIMARY KEY	TEXT NOT NULL	INTEGER NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER	REAL	REAL	REAL
 cor_afarathu_cave	CORELLIA	6035619	corellia_afarathu_cave.iff	Corellia - Afarathu Cave	11	-2523	28	2927
 cor_bela_asso_hall	CORELLIA	2365921	association_hall_civilian_corellia.iff	Corellia - Bela Vistal / Association Hall	17	6707	315	-5619
-cor_bela_cantina	CORELLIA	2625352	cantina_corellia.iff	Corellia - Bela Vistal / Cantina	15	6719	315	-5757
+cor_bela_cantina	CORELLIA	3375352	cantina_corellia.iff	Corellia - Bela Vistal / Cantina	15	6719	315	-5757
 cor_bela_cloning	CORELLIA	2365901	cloning_corellia.iff	Corellia - Bela Vistal / Cloning	6	6884	315	-5720
 cor_bela_combat_gh	CORELLIA	2365761	guild_combat_corellia_style_01.iff	Corellia - Bela Vistal / Combat GH	9	6872	315	-5784
 cor_bela_comm_gh	CORELLIA	2365939	guild_commerce_corellia_style_01.iff	Corellia - Bela Vistal / Commerce GH	9	6707	315	-5524
@@ -35,8 +35,8 @@ cor_coronet_tomi_jinsin	CORELLIA	1211545	bunker_corellia_tomi_jinsin.iff	Corelli
 cor_coronet_university	CORELLIA	1855519	guild_university_corellia_style_01.iff	Corellia - Coronet / University	9	40	28	-4440
 cor_deflarian_bunker	CORELLIA	-254171903971859809	bunker_deflarian.iff	Corellia - Deflarian Bunker	10	-6376	2	-2935
 cor_disappear_cave	CORELLIA	-268527129115696927	corellia_disappear_cave.iff	Corellia - Disappear Cave	11	3840	389	6511
-cor_doaba_asso_hall	CORELLIA	1935466	association_hall_civilian_corellia.iff	Corellia - Doaba Guerfel - Association Hall	17	3319	300	5364
-cor_doaba_cantina	CORELLIA	3375352	cantina_corellia.iff	Corellia - Doaba Guerfel - Cantina	15	3245	300	5327
+cor_doaba_asso_hall	CORELLIA	3075609	association_hall_civilian_corellia.iff	Corellia - Doaba Guerfel - Association Hall	17	3319	300	5364
+cor_doaba_cantina	CORELLIA	3075426	cantina_corellia.iff	Corellia - Doaba Guerfel - Cantina	15	3245	300	5327
 cor_doaba_cloning	CORELLIA	4345390	cloning_corellia.iff	Corellia - Doaba Guerfel - Cloning	6	3313	324	5739
 cor_doaba_combat_gh	CORELLIA	3075352	guild_combat_corellia_style_01.iff	Corellia - Doaba Guerfel - Combat GH	9	3200	300	5246
 cor_doaba_commerce_gh	CORELLIA	3055763	guild_commerce_corellia_style_01.iff	Corellia - Doaba Guerfel - Commerce GH	9	3160	290	5029
@@ -180,7 +180,7 @@ dan_rtp_generals_bunker	DANTOOINE	-369576644623243546	bunker_dantooine_generals_
 dan_underground_bunker	DANTOOINE	-382524493934115204	corellia_kor_vella_ryll_smuggler_bunker.iff	Dantooine - Underground Bunker	34	7023	17	-3994
 dan_warren	DANTOOINE	8575671	bunker_warren_01.iff	Dantooine - Warren	87	-547	1	-3846
 dan_world	DANTOOINE	0	empty	Dantooine - World	0	0	0	0
-dant_mining_outpost_cantina	DANTOOINE	6205563	ply_corl_house_m_s01_fp1.iff	Dantooine - Mining Outpost / Cantina	4	-587	3	2489
+dan_mining_outpost_cantina	DANTOOINE	6205563	ply_corl_house_m_s01_fp1.iff	Dantooine - Mining Outpost / Cantina	4	-587	3	2489
 dat_aurilia_adv_gh	DATHOMIR	-408138718213473085	aurilia_adventure_guildhall.iff	Dathomir - Aurilia / Adventure GH	17	5204	79	-4165
 dat_aurilia_kakirks_collections	DATHOMIR	-408138717018489785	aurilia_pyramid_hut.iff	Dathomir - Aurilia / Kakirks Collections	1	5355	79	-4138
 dat_aurilia_prisoner_hut1	DATHOMIR	-408420193162760474	aurilia_prisoner_hut.iff	Dathomir - Aurilia / Prisoner Hut 1	1	5263	79	-4066
@@ -378,7 +378,7 @@ nab_boss_nass_dungeon	NABOO	-289074801081843714	boss_nass_dungeon.iff	Naboo - Bo
 nab_crystal_cave	NABOO	-291889551893786565	cave_02.iff	Naboo - Crystal Cave	11	1944	304	-1552
 nab_darkwalker_bunker	NABOO	-286823001605529540	naboo_sacred_place_darkwalker_bunker.iff	Naboo - Darkwalker Bunker	10	-2206	13	-5178
 nab_darkwalker_cave	NABOO	-285697103311980886	naboo_theed_darkwalker_cave.iff	Naboo - Darkwalker Cave	29	-4265	-183	4352
-nab_deeja_association_hall	NABOO	1741484	association_hall_civilian_naboo.iff	Naboo - Deeja Peak / Association Hall	17	4911	360	-1373
+nab_deeja_association_hall	NABOO	8845416	association_hall_civilian_naboo.iff	Naboo - Deeja Peak / Association Hall	17	4911	360	-1373
 nab_deeja_capitol	NABOO	1945387	capitol_naboo_theed.iff	Naboo - Deeja Peak / Capitol	11	4647	330	-1406
 nab_deeja_darkwalker_cave	NABOO	-296393151134702237	naboo_deeja_darkwalker_cave.iff	Naboo - Deeja Peak / Darkwalker Cave	11	5033	276	-2061
 nab_deeja_hotel	NABOO	1419009	hotel_naboo_theed.iff	Naboo - Deeja Peak / Hotel	10	5145	350	-1431
@@ -404,24 +404,24 @@ nab_guard_house	NABOO	7825775	military_outpost_guard_house_imperial.iff	Naboo - 
 nab_house	NABOO	-298363475801225419	trapped_family_house.iff	Naboo - House	7	6358	4	-6970
 nab_insane_creature_bunker	NABOO	-287385951554433134	bunker_insane_creature.iff	Naboo - Insane Creature / Bunker	9	-2525	154	-1002
 nab_insane_creature_house	NABOO	-287385952181949841	trapped_family_house.iff	Naboo - Insane Creature / House	7	-2570	134	-892
-nab_kadaara_association_hall	NABOO	56919	association_hall_civilian_naboo.iff	Naboo - Kadaara / Association Hall	17	5196	-192	6737
-nab_kadaara_barracks	NABOO	1260047	military_base_shed_imperial_barracks_s01.iff	Naboo - Kadaara / Barracks	6	5386	-197	6443
-nab_kadaara_cantina	NABOO	61	cantina_naboo.iff	Naboo - Kadaara / Cantina	15	4980	-192	6710
-nab_kadaara_cloning	NABOO	1741512	cloning_facility_naboo.iff	Naboo - Kadaara / Cloning	6	5332	-192	6552
-nab_kadaara_combat_gh	NABOO	1741453	guild_combat_naboo_style_01.iff	Naboo - Kadaara / Combat GH	9	5100	-192	6776
-nab_kadaara_commerce_gh	NABOO	1741502	guild_commerce_naboo_style_01.iff	Naboo - Kadaara / Commerce GH	9	5168	-192	6701
-nab_kadaara_detachment_hq	NABOO	1259938	military_imperial_detachment_hq.iff	Naboo - Kadaara / Detatchment HQ	10	5369	-197	6420
-nab_kadaara_hospital	NABOO	1741437	hospital_naboo.iff	Naboo - Kadaara / Hospital	14	5101	-192	6639
-nab_kadaara_hotel	NABOO	1741473	hotel_naboo_theed.iff	Naboo - Kadaara / Hotel	10	5211	-192	6812
-nab_kadaara_house	NABOO	1741358	housing_naboo_style_1.iff	Naboo - Kadaara / House	7	5034	-189	6741
-nab_kadaara_officer_shed	NABOO	1260054	military_base_shed_imperial_style_officer_s01.iff	Naboo - Kadaara / Offier Shed	6	5346	-197	6437
-nab_kadaara_old_war_bunker	NABOO	-297800525359874056	naboo_old_war_bunker.iff	Naboo - Kadaara / Old War Bunker	9	5562	-208	6930
-nab_kadaara_skaak_tipper_bunker	NABOO	-300333800150269954	naboo_kadaara_skaak_tipper_bunker.iff	Naboo - Kadaara / Skaak Tipper Bunker	22	6706	-209	7202
-nab_kadaara_skaak_tipper_bunker_outpost	NABOO	-300333800150270051	pirate_outpost.iff	Naboo - Kadaara / Skaak Tipper Bunker / Outpost	6	6681	-209	7195
-nab_kadaara_skaak_tipper_bunker_warehouse	NABOO	-300333800150270060	pirate_warehouse.iff	Naboo - Kadaara / Skaak Tipper Bunker / Warehouse	6	6672	-209	7174
-nab_kadaara_starport	NABOO	1741535	starport_naboo.iff	Naboo - Kadaara / Starport	16	5295	-192	6664
-nab_kadaara_theater	NABOO	4105610	guild_theater_naboo_s01.iff	Naboo - Kadaara / Theater	10	5325	-192	6765
-nab_kadaara_university	NABOO	1741463	guild_university_naboo_style_01.iff	Naboo - Kadaara / University	9	5130	-192	6805
+nab_kaadara_association_hall	NABOO	1741484	association_hall_civilian_naboo.iff	Naboo - Kaadara / Association Hall	17	5196	-192	6737
+nab_kaadara_barracks	NABOO	1260047	military_base_shed_imperial_barracks_s01.iff	Naboo - Kaadara / Barracks	6	5386	-197	6443
+nab_kaadara_cantina	NABOO	61	cantina_naboo.iff	Naboo - Kaadara / Cantina	15	4980	-192	6710
+nab_kaadara_cloning	NABOO	1741512	cloning_facility_naboo.iff	Naboo - Kaadara / Cloning	6	5332	-192	6552
+nab_kaadara_combat_gh	NABOO	1741453	guild_combat_naboo_style_01.iff	Naboo - Kaadara / Combat GH	9	5100	-192	6776
+nab_kaadara_commerce_gh	NABOO	1741502	guild_commerce_naboo_style_01.iff	Naboo - Kaadara / Commerce GH	9	5168	-192	6701
+nab_kaadara_detachment_hq	NABOO	1259938	military_imperial_detachment_hq.iff	Naboo - Kaadara / Detatchment HQ	10	5369	-197	6420
+nab_kaadara_hospital	NABOO	1741437	hospital_naboo.iff	Naboo - Kaadara / Hospital	14	5101	-192	6639
+nab_kaadara_hotel	NABOO	1741473	hotel_naboo_theed.iff	Naboo - Kaadara / Hotel	10	5211	-192	6812
+nab_kaadara_house	NABOO	1741358	housing_naboo_style_1.iff	Naboo - Kaadara / House	7	5034	-189	6741
+nab_kaadara_officer_shed	NABOO	1260054	military_base_shed_imperial_style_officer_s01.iff	Naboo - Kaadara / Offier Shed	6	5346	-197	6437
+nab_kaadara_old_war_bunker	NABOO	-297800525359874056	naboo_old_war_bunker.iff	Naboo - Kaadara / Old War Bunker	9	5562	-208	6930
+nab_kaadara_skaak_tipper_bunker	NABOO	-300333800150269954	naboo_kaadara_skaak_tipper_bunker.iff	Naboo - Kaadara / Skaak Tipper Bunker	22	6706	-209	7202
+nab_kaadara_skaak_tipper_bunker_outpost	NABOO	-300333800150270051	pirate_outpost.iff	Naboo - Kaadara / Skaak Tipper Bunker / Outpost	6	6681	-209	7195
+nab_kaadara_skaak_tipper_bunker_warehouse	NABOO	-300333800150270060	pirate_warehouse.iff	Naboo - Kaadara / Skaak Tipper Bunker / Warehouse	6	6672	-209	7174
+nab_kaadara_starport	NABOO	1741535	starport_naboo.iff	Naboo - Kaadara / Starport	16	5295	-192	6664
+nab_kaadara_theater	NABOO	4105610	guild_theater_naboo_s01.iff	Naboo - Kaadara / Theater	10	5325	-192	6765
+nab_kaadara_university	NABOO	1741463	guild_university_naboo_style_01.iff	Naboo - Kaadara / University	9	5130	-192	6805
 nab_keren_association_hall	NABOO	8845416	association_hall_civilian_naboo.iff	Naboo - Keren / Association Hall	17	1678	12	2707
 nab_keren_cantina	NABOO	2	cantina_naboo.iff	Naboo - Keren / Cantina	15	2098	30	2526
 nab_keren_cloning	NABOO	1650611	cloning_facility_naboo.iff	Naboo - Keren / Cloning	6	1949	12	2760
@@ -822,6 +822,7 @@ tat_wayfar_small_house2	TATOOINE	1134492	housing_tatt_style01_small.iff	Tatooine
 tat_wayfar_small_house3	TATOOINE	1165379	housing_tatt_style01_small.iff	Tatooine - Wayfar / Small House 3	10	-5059	75	-6581
 tat_wayfar_small_house4	TATOOINE	1134573	housing_tatt_style01_small.iff	Tatooine - Wayfar / Small House 4	10	-5226	75	-6472
 tat_world	TATOOINE	0	empty	Tatooine - World	0	0	0	0
+umb_world	UMBRA	0	empty	Umbra - World	0	0	0	0
 yav_blue_leaf_temple	YAVIN4	468317	temple_blueleaf.iff	Yavin 4 - Blue Leaf Temple	2	-830	86	-2056
 yav_dark_enclave	YAVIN4	3435626	dark_enclave.iff	Yavin 4 - Dark Enclave	27	5070	79	310
 yav_exar_kun_temple	YAVIN4	3465379	temple_exar_kun.iff	Yavin 4 - Exar Kun Temple	15	5057	74	5538
