@@ -633,21 +633,28 @@ public class CreatureObject extends TangibleObject {
 		sendDelta(3, 18, statesBitmask);
 	}
 
-	public void adjustSkillmod(String skillModName, int base, int modifier) {
+	public synchronized void adjustSkillmod(String skillModName, int base, int modifier) {
 		SkillMod skillMod = skillMods.get(skillModName);
 		
 		if(skillMod == null) {
 			// They didn't have this SkillMod already.
 			// Therefore, we send a full delta.
 			skillMods.put(skillModName, new SkillMod(base, modifier));
-			skillMods.sendDeltaMessage(this);
 		} else {
 			// They already had this skillmod.
 			// All we need to do is adjust the base and the modifier and send an update from the SWGMap
 			skillMod.adjustBase(base);
 			skillMod.adjustModifier(modifier);
-			skillMods.update(skillModName, this);
+			
+			// If this skillmod now has a total value of 0
+			if(skillMod.getValue() == 0) {
+				// Then remove it from the map
+				skillMods.remove(skillModName);
+				skillMods.sendDeltaMessage(this);
+				return;
+			}
 		}
+		skillMods.update(skillModName, this);
 	}
 	
 	public int getSkillModValue(String skillModName) {
@@ -679,6 +686,10 @@ public class CreatureObject extends TangibleObject {
 		buff.adjustStackCount(adjustment);	// Adjust the stack count
 		// TODO reset time remaining?
 		buffs.update(buffCrc, this);	// Send deltas for this key.
+	}
+	
+	public Collection<Buff> getBuffs() {
+		return buffs.values();
 	}
 	
 	public boolean isVisible() {

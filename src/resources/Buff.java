@@ -13,14 +13,14 @@ public class Buff implements Encodable, Serializable {
 	
 	private int duration;
 	private long bufferId;
-	private int playTime;
+	private int startPlayTime;
 	private final long endTime;
 	private long stackCount;
 	private float skillMod1Value;
 	
 	public Buff(long bufferId, int playTime, int duration, float skillMod1Value) {
 		this.bufferId = bufferId;
-		this.playTime = playTime;
+		this.startPlayTime = playTime;
 		this.duration = duration;
 		this.skillMod1Value = skillMod1Value;
 		endTime = System.currentTimeMillis() + TimeUnit.MILLISECONDS.convert(duration, TimeUnit.SECONDS);
@@ -31,7 +31,7 @@ public class Buff implements Encodable, Serializable {
 	public byte[] encode() {
 		ByteBuffer data = ByteBuffer.allocate(Integer.BYTES * 2 + Float.BYTES + Long.BYTES * 2 + Short.BYTES ).order(ByteOrder.LITTLE_ENDIAN);
 		
-		data.putInt(duration + playTime);	// Buff duration + time played on character
+		data.putInt(duration + startPlayTime);	// Buff duration + time played on character
 		data.putFloat(skillMod1Value);	// The value for skillMod #1 on the buff. Displayed on the client as skillMod1Value * stackCount.
 		data.putInt(duration);	// Icon shadow "clock" overlay.
 		data.putLong(bufferId);	// Object ID of the buffer
@@ -46,7 +46,7 @@ public class Buff implements Encodable, Serializable {
 		int playerBuffTime = data.getInt();
 		skillMod1Value = data.getFloat();
 		duration = data.getInt();
-		playTime = playerBuffTime - duration;
+		startPlayTime = playerBuffTime - duration;
 		bufferId = data.getLong();
 		stackCount = data.getLong();
 		data.getShort();	// unknown
@@ -70,6 +70,10 @@ public class Buff implements Encodable, Serializable {
 	
 	public long getEndTime() {
 		return endTime;
+	}
+	
+	public long getTotalDuration() {
+		return duration + startPlayTime;
 	}
 	
 }
