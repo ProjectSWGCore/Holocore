@@ -63,7 +63,7 @@ public class StopClientEffectObjectByLabelMessage extends SWGPacket {
 	
 	@Override
 	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(Short.BYTES * 2 + Integer.BYTES + Long.BYTES + label.length());
+		ByteBuffer data = ByteBuffer.allocate(Short.BYTES * 2 + Integer.BYTES + Long.BYTES + Byte.BYTES + label.length());
 		addShort(data, 4);
 		addInt  (data, CRC);
 		addLong (data, objectId);
