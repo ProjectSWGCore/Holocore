@@ -35,36 +35,40 @@ public class StopClientEffectObjectByLabelMessage extends SWGPacket {
 	public static final int CRC = getCrc("StopClientEffectObjectByLabelMessage");
 	
 	private long objectId;
-	private String effect;
+	private String label;
+	private boolean softStop;
 	
 	public StopClientEffectObjectByLabelMessage() {
 		
 	}
 	
-	public StopClientEffectObjectByLabelMessage(long objectId, String effect) {
+	public StopClientEffectObjectByLabelMessage(long objectId, String label, boolean softStop) {
 		this.objectId = objectId;
-		this.effect = effect;
+		this.label = label;
+		this.softStop = softStop;
 	}
 	
 	public StopClientEffectObjectByLabelMessage(ByteBuffer data) {
 		decode(data);
 	}
 	
+	@Override
 	public void decode(ByteBuffer data) {
 		if (!super.decode(data, CRC))
 			return;
 		objectId = getLong(data);
-		effect = getAscii(data);
-		getByte(data);
+		label = getAscii(data);
+		softStop = getBoolean(data);
 	}
 	
+	@Override
 	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(6);
+		ByteBuffer data = ByteBuffer.allocate(Short.BYTES * 2 + Integer.BYTES + Long.BYTES + label.length());
 		addShort(data, 4);
 		addInt  (data, CRC);
 		addLong (data, objectId);
-		addAscii(data, effect);
-		addByte (data, 1);
+		addAscii(data, label);
+		addBoolean(data, softStop);
 		return data;
 	}
 
