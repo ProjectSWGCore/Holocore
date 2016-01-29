@@ -38,6 +38,7 @@ import java.util.concurrent.TimeUnit;
 import intents.BuffIntent;
 import intents.PlayerEventIntent;
 import intents.SkillModIntent;
+import network.packets.swg.zone.spatial.PlayClientEffectObjectMessage;
 import resources.Buff;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
@@ -124,7 +125,9 @@ public class BuffService extends Service {
 					(float) buffTable.getCell(row, 14),	// value4
 					(String) buffTable.getCell(row, 15),	// effect5
 					(float) buffTable.getCell(row, 16),	// value5
-					(float) buffTable.getCell(row, 6)	// default duration
+					(float) buffTable.getCell(row, 6),	// default duration
+					(String) buffTable.getCell(row, 19),	// particle effect
+					(String) buffTable.getCell(row, 20)	// particle hardpoint
 			));
 		} 
 	}
@@ -161,6 +164,11 @@ public class BuffService extends Service {
 		receiver.addBuff(buffName, buff);
 		
 		manageBuff(buff, buffName, receiver);
+		
+		String effectFileName = buffData.getEffectFileName();
+		
+		if(!effectFileName.isEmpty())
+			sendClientEffectMessage(receiver, effectFileName, buffData.getParticleHardPoint());
 	}
 	
 	private void handleBuffIntentRemove(BuffIntent bi) {
@@ -228,6 +236,10 @@ public class BuffService extends Service {
 			new SkillModIntent(effect5Name, 0, (int) buffData.getEffect5Value() * valueFactor, creature).broadcast();
 	}
 	
+	private void sendClientEffectMessage(CreatureObject target, String effectFileName, String hardPoint) {
+		target.sendObserversAndSelf(new PlayClientEffectObjectMessage(effectFileName, target.getObjectId(), hardPoint, ""));
+	}
+	
 	private class BuffRemover implements Runnable {
 		@Override
 		public void run() {
@@ -289,8 +301,10 @@ public class BuffService extends Service {
 		private final String effect5Name;
 		private final float effect5Value;
 		private final float defaultDuration;
-
-		private BuffData(int maxStackCount, String effect1Name, float effect1Value, String effect2Name, float effect2Value, String effect3Name, float effect3Value, String effect4Name, float effect4Value, String effect5Name, float effect5Value, float defaultDuration) {
+		private final String effectFileName;
+		private final String particleHardPoint;
+		
+		private BuffData(int maxStackCount, String effect1Name, float effect1Value, String effect2Name, float effect2Value, String effect3Name, float effect3Value, String effect4Name, float effect4Value, String effect5Name, float effect5Value, float defaultDuration, String effectFileName, String particleHardPoint) {
 			this.maxStackCount = maxStackCount;
 			this.effect1Name = effect1Name;
 			this.effect1Value = effect1Value;
@@ -303,54 +317,64 @@ public class BuffService extends Service {
 			this.effect5Name = effect5Name;
 			this.effect5Value = effect5Value;
 			this.defaultDuration = defaultDuration;
+			this.effectFileName = effectFileName;
+			this.particleHardPoint = particleHardPoint;
 		}
 
-		public int getMaxStackCount() {
+		private int getMaxStackCount() {
 			return maxStackCount;
 		}
 
-		public String getEffect1Name() {
+		private String getEffect1Name() {
 			return effect1Name;
 		}
 
-		public float getEffect1Value() {
+		private float getEffect1Value() {
 			return effect1Value;
 		}
 
-		public String getEffect2Name() {
+		private String getEffect2Name() {
 			return effect2Name;
 		}
 
-		public float getEffect2Value() {
+		private float getEffect2Value() {
 			return effect2Value;
 		}
 
-		public String getEffect3Name() {
+		private String getEffect3Name() {
 			return effect3Name;
 		}
 
-		public float getEffect3Value() {
+		private float getEffect3Value() {
 			return effect3Value;
 		}
 
-		public String getEffect4Name() {
+		private String getEffect4Name() {
 			return effect4Name;
 		}
 
-		public float getEffect4Value() {
+		private float getEffect4Value() {
 			return effect4Value;
 		}
 
-		public String getEffect5Name() {
+		private String getEffect5Name() {
 			return effect5Name;
 		}
 
-		public float getEffect5Value() {
+		private float getEffect5Value() {
 			return effect5Value;
 		}
 
-		public float getDefaultDuration() {
+		private float getDefaultDuration() {
 			return defaultDuration;
+		}
+
+		private String getEffectFileName() {
+			return effectFileName;
+		}
+
+		private String getParticleHardPoint() {
+			return particleHardPoint;
 		}
 		
 	}

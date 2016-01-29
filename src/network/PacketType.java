@@ -162,6 +162,7 @@ public enum PacketType {
 		NEW_TICKET_ACTIVITY_RESPONSE_MESSAGE	(NewTicketActivityResponseMessage.CRC, 		NewTicketActivityResponseMessage.class),
 		ATTRIBUTE_LIST_MESSAGE					(AttributeListMessage.CRC, 					AttributeListMessage.class),
 		STOP_CLIENT_EFFECT_OBJECT_BY_LABEL		(StopClientEffectObjectByLabelMessage.CRC, 	StopClientEffectObjectByLabelMessage.class),
+		PLAY_CLIENT_EFFECT_OBJECT_MESSAGE		(PlayClientEffectObjectMessage.CRC,			PlayClientEffectObjectMessage.class),
 		OPENED_CONTAINER_MESSAGE				(ClientOpenContainerMessage.CRC, 			ClientOpenContainerMessage.class),
 
 		// Combat
