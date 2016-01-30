@@ -60,7 +60,8 @@ public class TravelGroup implements Runnable {
 		this.landTime = landTime + 10000;
 		this.groundTime = groundTime;
 		this.airTime = airTime;
-		this.starport = template.endsWith("shared_player_transport.iff");
+		String [] folders = template.split("/");
+		this.starport = folders[folders.length - 1].startsWith("shared_player_transport");
 		this.status = ShuttleStatus.GROUNDED;
 	}
 	
