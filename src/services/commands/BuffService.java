@@ -42,37 +42,44 @@ import network.packets.swg.zone.spatial.PlayClientEffectObjectMessage;
 import resources.Buff;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
+import resources.common.CRC;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.creature.CreatureObject;
-import utilities.Scripts;
+import resources.objects.player.PlayerObject;
 
 public class BuffService extends Service {
+	
+	// TODO buff slots
+	
+	// TODO skillmod divisors in SkillmodService
 	
 	// TODO remove buffs on respec. Listen for respec intent and remove buffs with
 	// BuffData that has REMOVE_ON_RESPEC = 1
 	
 	// TODO group buffs
-	
-	// TODO particle effects
-	
+		// TODO remove group buff(s) when distance between receiver and caster is 100m
+		// is it possible to somehow determine if a buff is a group buff?
 	// TODO decay buffs on deathblow
 	
 	// TODO debuffs vs buffs
 	
+	// TODO test buff stacks
+	
+	// TODO cache conversions from buffName to buffCrc in buffNameToCrc()
+	
 //	private static final byte GROUP_BUFF_RANGE = 100;	
 	
-	private final DatatableData buffTable;
+	private DatatableData buffTable;
 	private final DelayQueue<BuffDelayed> buffRemoval;
 	private final ExecutorService executor;
 	private boolean stopBuffRemover;
-	private final Map<String, BuffData> dataMap;
+	private final Map<Integer, BuffData> dataMap;
 	
 	public BuffService() {
 		registerForIntent(BuffIntent.TYPE);
 		registerForIntent(PlayerEventIntent.TYPE);
 		
-		buffTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/buff/buff.iff");
 		buffRemoval = new DelayQueue<>();
 		executor = Executors.newSingleThreadScheduledExecutor();
 		dataMap = new HashMap<>();
@@ -112,8 +119,10 @@ public class BuffService extends Service {
 	}
 	
 	private void loadBuffs() {
+		buffTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/buff/buff.iff");
+		
 		for(int row = 0; row < buffTable.getRowCount(); row++) {
-			dataMap.put((String) buffTable.getCell(row, 0), new BuffData(
+			dataMap.put(buffNameToCrc((String) buffTable.getCell(row, 0)), new BuffData(
 					(int) buffTable.getCell(row, 28),	// max stacks
 					(String) buffTable.getCell(row, 7),	// effect1
 					(float) buffTable.getCell(row, 8),	// value1
@@ -127,7 +136,8 @@ public class BuffService extends Service {
 					(float) buffTable.getCell(row, 16),	// value5
 					(float) buffTable.getCell(row, 6),	// default duration
 					(String) buffTable.getCell(row, 19),	// particle effect
-					(String) buffTable.getCell(row, 20)	// particle hardpoint
+					(String) buffTable.getCell(row, 20),	// particle hardpoint
+					(String) buffTable.getCell(row, 18)	// Callback
 			));
 		} 
 	}
@@ -142,18 +152,21 @@ public class BuffService extends Service {
 	}
 	
 	private void handleFirstZone(CreatureObject creature) {
-		for(Buff buff : creature.getBuffs()) {
-			// TODO fix. Needs buffName
-			manageBuff(buff, null, creature);
-		}
+		Map<Integer, Buff> buffs = creature.getBuffs();
+		
+		buffs.forEach((crc, buff) -> manageBuff(buff, crc, creature));
+	}
+	
+	private int buffNameToCrc(String buffName) {
+		return CRC.getCrc(buffName);
 	}
 	
 	private void handleBuffIntentAdd(BuffIntent bi) {
-		CreatureObject receiver = bi.getReceiver();
-		CreatureObject buffer = bi.getBuffer();
-		String buffName = bi.getBuffName();
-		
-		BuffData buffData = dataMap.get(buffName);
+		addBuff(buffNameToCrc(bi.getBuffName()), bi.getReceiver(), bi.getBuffer());
+	}
+	
+	private void addBuff(int buffCrc, CreatureObject receiver, CreatureObject buffer) {
+		BuffData buffData = dataMap.get(buffCrc);
 		
 		if(buffData == null)
 			return;
@@ -161,9 +174,9 @@ public class BuffService extends Service {
 		Buff buff = new Buff(buffer.getObjectId(), receiver.getPlayerObject().getPlayTime(), (int) buffData.getDefaultDuration(), buffData.getEffect1Value());
 		
 		sendSkillModIntent(buffData, receiver, stopBuffRemover);
-		receiver.addBuff(buffName, buff);
+		receiver.addBuff(buffCrc, buff);
 		
-		manageBuff(buff, buffName, receiver);
+		manageBuff(buff, buffCrc, receiver);
 		
 		String effectFileName = buffData.getEffectFileName();
 		
@@ -172,46 +185,58 @@ public class BuffService extends Service {
 	}
 	
 	private void handleBuffIntentRemove(BuffIntent bi) {
-		removeBuff(bi.getReceiver(), bi.getBuffName(), false);
+		removeBuff(bi.getReceiver(), buffNameToCrc(bi.getBuffName()), false);
 	}
 	
-	private void manageBuff(Buff buff, String buffName, CreatureObject creature) {
+	private void manageBuff(Buff buff, int buffCrc, CreatureObject creature) {
 		// If this buff has less than or 0 seconds left, then remove it.
 		if(buff.getEndTime() <= 0) {
-			removeBuff(creature, buffName, true);
+			removeBuff(creature, buffCrc, true);
 		} else if(buff.getDuration() >= 0) {
 			// If this buff doesn't last forever, we'll schedule it for removal in the future
-			buffRemoval.put(new BuffDelayed(buff, buffName, creature));
+			buffRemoval.put(new BuffDelayed(buff, buffCrc, creature));
 		}
 	}
 	
-	private void removeBuff(CreatureObject creature, String buffName, boolean expired) {
+	private void removeBuff(CreatureObject creature, int buffCrc, boolean expired) {
 		// Get the BuffData for this buff name.
-		BuffData buffData = dataMap.get(buffName);
+		BuffData buffData = dataMap.get(buffCrc);
 		
 		if(buffData == null) {
 			return;
 		}
 		
-		Buff buff = creature.getBuffByName(buffName);
+		Buff buff = creature.getBuffByCrc(buffCrc);
 		
 		// Check if this buff can be stacked
 		if(buffData.getMaxStackCount() > 1 && !expired) {
 			// Check if this buff has been stacked
-			if(buff.getStackCount() > 1) {
-				// Get the adjustment from the script
-				// TODO casting exception if the script doesn't exist or returns null
-				int adjustment = Scripts.invoke(buffName, "onStackChange", creature);
-				
+			if(buff.getStackCount() > 1) {				
 				// If it has, reduce the stack count and reset the duration.
-				creature.adjustBuffStackCount(buffName, adjustment);
+				// TODO NGE: buffs can, based on skillmods, adjust with different values
+				creature.adjustBuffStackCount(buffCrc, -1);
 			}
 		} else {
 			// Remove skillmods
 			sendSkillModIntent(buffData, creature, true);
 			
 			// Remove the buff from the creature
-			creature.removeBuff(buffName);
+			creature.removeBuff(buffCrc);
+			
+			// Check if the callback is a buff
+			String callback = buffData.getCallback();
+			
+			if(callback.isEmpty())
+				return;
+			
+			int callbackCrc = buffNameToCrc(callback);
+			if(dataMap.containsKey(callbackCrc)) {
+				// Apply the callback buff
+				addBuff(callbackCrc, creature, creature);
+			} else {
+				// Call the callback command script
+				// TODO
+			}
 		}
 	}
 	
@@ -247,7 +272,7 @@ public class BuffService extends Service {
 				BuffDelayed buffToRemove = buffRemoval.poll();
 				
 				if(buffToRemove != null)
-					removeBuff(buffToRemove.owner, buffToRemove.buffName, true);
+					removeBuff(buffToRemove.creature, buffToRemove.buffCrc, true);
 			}
 		}
 	}
@@ -255,23 +280,25 @@ public class BuffService extends Service {
 	private class BuffDelayed implements Delayed {
 		
 		private final Buff buff;
-		private final String buffName;
-		private final CreatureObject owner;
+		private final int buffCrc;
+		private final PlayerObject owner;
+		private final CreatureObject creature;
 		
-		private BuffDelayed(Buff buff, String buffName, CreatureObject owner) {
+		private BuffDelayed(Buff buff, int buffCrc, CreatureObject creature) {
 			this.buff = buff;
-			this.buffName = buffName;
-			this.owner = owner;
+			this.buffCrc = buffCrc;
+			this.creature = creature;
+			owner = creature.getPlayerObject();
 		}
 		
 		@Override
 		public int compareTo(Delayed o) {
-			return Long.compare(buff.getEndTime(), ((BuffDelayed) o).buff.getEndTime());
+			return Integer.compare(buff.getEndTime(), ((BuffDelayed) o).buff.getEndTime());
 		}
 
 		@Override
 		public long getDelay(TimeUnit timeUnit) {
-			return timeUnit.convert(buff.getTotalDuration() - owner.getPlayerObject().getPlayTime(), TimeUnit.MILLISECONDS);
+			return timeUnit.convert(buff.getEndTime() - owner.getPlayTime(), TimeUnit.MILLISECONDS);
 		}
 		
 	}
@@ -279,14 +306,13 @@ public class BuffService extends Service {
 	/**
 	 * @author Mads
 	 * Each instance of this class holds the base information
-	 * for a specific buff name. Thus, we only store shared data that each {@code Buff} instance
-	 * would otherwise have been holding.
+	 * for a specific buff name.
 	 * 
-	 * Example: Instead of each {@code Buff} instance storing the max amount of times you can
-	 * stack it, a shared class stores that information.
+	 * Example: Instead of each {@code Buff} instance storing the max amount of
+	 * times you can stack it, a shared class stores that information.
 	 * 
-	 * With many {@code Buff} instances in play, this will result in memory
-	 * usage reduction.
+	 * With many {@code Buff} instances in play, this will result in a noticeable
+	 * memory usage reduction.
 	 */
 	private class BuffData {
 		private final int maxStackCount;
@@ -303,8 +329,9 @@ public class BuffService extends Service {
 		private final float defaultDuration;
 		private final String effectFileName;
 		private final String particleHardPoint;
+		private final String callback;
 		
-		private BuffData(int maxStackCount, String effect1Name, float effect1Value, String effect2Name, float effect2Value, String effect3Name, float effect3Value, String effect4Name, float effect4Value, String effect5Name, float effect5Value, float defaultDuration, String effectFileName, String particleHardPoint) {
+		private BuffData(int maxStackCount, String effect1Name, float effect1Value, String effect2Name, float effect2Value, String effect3Name, float effect3Value, String effect4Name, float effect4Value, String effect5Name, float effect5Value, float defaultDuration, String effectFileName, String particleHardPoint, String callback) {
 			this.maxStackCount = maxStackCount;
 			this.effect1Name = effect1Name;
 			this.effect1Value = effect1Value;
@@ -319,6 +346,7 @@ public class BuffService extends Service {
 			this.defaultDuration = defaultDuration;
 			this.effectFileName = effectFileName;
 			this.particleHardPoint = particleHardPoint;
+			this.callback = callback;
 		}
 
 		private int getMaxStackCount() {
@@ -375,6 +403,10 @@ public class BuffService extends Service {
 
 		private String getParticleHardPoint() {
 			return particleHardPoint;
+		}
+
+		public String getCallback() {
+			return callback;
 		}
 		
 	}

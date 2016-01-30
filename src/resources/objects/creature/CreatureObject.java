@@ -31,6 +31,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 import network.packets.swg.zone.UpdatePostureMessage;
 import network.packets.swg.zone.UpdatePvpStatusMessage;
@@ -662,34 +664,40 @@ public class CreatureObject extends TangibleObject {
 		return skillMod != null ? skillMod.getValue() : 0;
 	}
 	
-	public void addBuff(String buffName, Buff buff) {
-		buffs.put(CRC.getCrc(buffName), buff);
-		buffs.sendDeltaMessage(this);
+	public void addBuff(int buffCrc, Buff buff) {
+		if(!buffs.containsKey(buffCrc)) {
+			buffs.put(buffCrc, buff);
+			buffs.sendDeltaMessage(this);
+		}
 	}
 	
-	public void removeBuff(String buffName) {
-		buffs.remove(CRC.getCrc(buffName));
-		buffs.sendDeltaMessage(this);
+	public void removeBuff(int buffCrc) {
+		// If a value was associated with the key, then send a delta.
+		if(buffs.containsKey(buffCrc)) {
+			buffs.remove(buffCrc);
+			buffs.sendDeltaMessage(this);
+		}
 	}
 	
-	public boolean hasBuff(String buffName) {
-		return buffs.containsKey(CRC.getCrc(buffName));
+	public Buff getBuffByCrc(int buffCrc) {
+		return buffs.get(buffCrc);
 	}
 	
-	public Buff getBuffByName(String buffName) {
-		return buffs.get(CRC.getCrc(buffName));
-	}
-	
-	public void adjustBuffStackCount(String buffName, int adjustment) {
-		int buffCrc = CRC.getCrc(buffName);
+	public void adjustBuffStackCount(int buffCrc, int adjustment) {
 		Buff buff = buffs.get(buffCrc);
 		buff.adjustStackCount(adjustment);	// Adjust the stack count
 		// TODO reset time remaining?
 		buffs.update(buffCrc, this);	// Send deltas for this key.
 	}
 	
-	public Collection<Buff> getBuffs() {
-		return buffs.values();
+	/**
+	 * @return a copy of the buffs map. Removing and adding entries in this
+	 * map will not affect the internal {@code SWGMap}. Do not edit the
+	 * {@code Buff} values in the belief that deltas will be sent because
+	 * they won't - this is incorrect usage.
+	 */
+	public Map<Integer, Buff> getBuffs() {
+		return new HashMap<>(buffs);
 	}
 	
 	public boolean isVisible() {
