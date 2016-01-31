@@ -8,3 +8,4 @@
 /cfg/*.cfg
 packets.txt
 log.txt
+/target/
