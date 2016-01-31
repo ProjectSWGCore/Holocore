@@ -22,6 +22,7 @@ import resources.config.ConfigFile;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.SWGObject;
+import resources.objects.SWGObject.ObjectClassification;
 import resources.objects.cell.CellObject;
 import resources.objects.creature.CreatureObject;
 import resources.server_info.Log;
@@ -31,7 +32,7 @@ import resources.server_info.RelationalServerFactory;
 public class ClientBuildoutService extends Service {
 	
 	private static final String GET_BUILDOUT_AREAS = "SELECT * FROM areas ORDER BY area_name ASC, event ASC";
-	private static final String GET_CLIENT_OBJECTS_SQL = "SELECT objects.id, objects.area_id, objects.template_crc, objects.container_id, "
+	private static final String GET_CLIENT_OBJECTS_SQL = "SELECT objects.id, objects.snapshot, objects.area_id, objects.template_crc, objects.container_id, "
 			+ "objects.x, objects.y, objects.z, objects.orientation_x, objects.orientation_y, objects.orientation_z, objects.orientation_w, "
 			+ "objects.radius, objects.cell_index "
 			+ "FROM objects "
@@ -111,7 +112,7 @@ public class ClientBuildoutService extends Service {
 		Location l = info.getLocation();
 		l.setTerrain(area.getTerrain());
 		obj.setLocation(l);
-		obj.setBuildout(true);
+		obj.setClassification(info.isSnapshot() ? ObjectClassification.SNAPSHOT : ObjectClassification.BUILDOUT);
 		obj.setBuildoutArea(area);
 		obj.setLoadRange(info.getRadius());
 		checkCell(obj, info.getCell());
@@ -270,6 +271,7 @@ public class ClientBuildoutService extends Service {
 		private final ResultSet set;
 		private final Location l;
 		private long id;
+		private boolean snapshot;
 		private String template;
 		private float radius;
 		private long container;
@@ -283,6 +285,7 @@ public class ClientBuildoutService extends Service {
 		
 		public void load(CrcStringTableData strings) throws SQLException {
 			id = set.getLong(index.idInd);
+			snapshot = set.getBoolean(index.snapInd);
 			template = strings.getTemplateString(set.getInt(index.crcInd));
 			l.setPosition(set.getDouble(index.xInd), set.getDouble(index.yInd), set.getDouble(index.zInd));
 			l.setOrientation(set.getDouble(index.oxInd), set.getDouble(index.oyInd), set.getDouble(index.ozInd), set.getDouble(index.owInd));
@@ -296,6 +299,7 @@ public class ClientBuildoutService extends Service {
 		}
 		
 		public long getId() { return id; }
+		public boolean isSnapshot() { return snapshot; }
 		public String getTemplate() { return template; }
 		public Location getLocation() { return l; }
 		public double getRadius() { return radius; }
@@ -306,6 +310,7 @@ public class ClientBuildoutService extends Service {
 	private static class ColumnIndexes {
 		
 		public final int idInd;
+		public final int snapInd;
 		public final int crcInd;
 		public final int areaInd;
 		public final int xInd;
@@ -321,6 +326,7 @@ public class ClientBuildoutService extends Service {
 		
 		public ColumnIndexes(ResultSet set) throws SQLException {
 			idInd = set.findColumn("id");
+			snapInd = set.findColumn("snapshot");
 			crcInd = set.findColumn("template_crc");
 			areaInd = set.findColumn("area_id");
 			xInd = set.findColumn("x");

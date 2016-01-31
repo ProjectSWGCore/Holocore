@@ -140,7 +140,7 @@ public class ObjectManager extends Manager {
 	
 	private void updateBuildoutParent(SWGObject obj) {
 		if (obj.getParent() != null) {
-			if (obj.getParent().isBuildout()) {
+			if (!obj.getParent().isGenerated()) {
 				long id = obj.getParent().getObjectId();
 				obj.getParent().removeObject(obj);
 				SWGObject parent = getObjectById(id);

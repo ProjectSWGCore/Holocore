@@ -123,17 +123,18 @@ public class Equipment implements Encodable, Serializable {
 		BaselineBuilder bb = new BaselineBuilder(weapon, BaselineType.WEAO, 3);
 		Player target = weapon.getOwner();
 		weapon.createBaseline3(target, bb);
-		byte[] data3 = bb.buildAsBaselinePacket();
+		ByteBuffer data3 = bb.buildAsBaselinePacket().encode();
+		data3.position(0);
 
 		bb = new BaselineBuilder(weapon, BaselineType.WEAO, 6);
 		weapon.createBaseline6(target, bb);
-		byte[] data6 = bb.buildAsBaselinePacket();
+		ByteBuffer data6 = bb.buildAsBaselinePacket().encode();
+		data6.position(0);
 		
-		byte[] ret = new byte[data3.length + data6.length];
-		System.arraycopy(data3, 0, ret, 0, data3.length);
-		System.arraycopy(data6, 0, ret, data3.length, data6.length);
-		
-		return ret;
+		ByteBuffer ret = ByteBuffer.allocate(data3.remaining() + data6.remaining());
+		ret.put(data3);
+		ret.put(data6);
+		return ret.array();
 	}
 	
 	private WeaponObject createWeaponFromData(ByteBuffer data) {

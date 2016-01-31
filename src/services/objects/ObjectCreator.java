@@ -143,7 +143,7 @@ public final class ObjectCreator {
 				return;
 
 			for (String slotName : descriptor.getSlots()) {
-				object.getSlots().put(slotName, null);
+				object.setSlot(slotName, null);
 			}
 		}
 		

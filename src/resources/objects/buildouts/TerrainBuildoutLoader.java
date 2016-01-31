@@ -39,6 +39,7 @@ import resources.client_info.visitors.CrcStringTableData;
 import resources.client_info.visitors.DatatableData;
 import resources.containers.ContainerPermissions;
 import resources.objects.SWGObject;
+import resources.objects.SWGObject.ObjectClassification;
 import resources.objects.cell.CellObject;
 import resources.server_info.Log;
 import services.objects.ObjectCreator;
@@ -90,7 +91,7 @@ class TerrainBuildoutLoader {
 		for (int row = 0; row < areaTable.getRowCount(); row++) {
 			buildoutRow.load(areaTable.getRow(row), crcTable);
 			SWGObject object = createObject(buildoutRow);
-			object.setBuildout(true);
+			object.setClassification(ObjectClassification.BUILDOUT);
 			object.setLoadRange(buildoutRow.getRadius());
 			object.setBuildoutAreaId(area.getIndex());
 			setCellInformation(object, buildoutRow.getCellIndex());

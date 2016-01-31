@@ -39,6 +39,7 @@ import resources.client_info.visitors.WorldSnapshotData;
 import resources.client_info.visitors.WorldSnapshotData.Node;
 import resources.containers.ContainerPermissions;
 import resources.objects.SWGObject;
+import resources.objects.SWGObject.ObjectClassification;
 import resources.objects.cell.CellObject;
 import resources.server_info.Log;
 import services.objects.ObjectCreator;
@@ -77,7 +78,7 @@ public class TerrainSnapshotLoader {
 	
 	private void createFromNode(Map<Integer, String> templates, Node node) {
 		SWGObject object = createObject(templates, node);
-		object.setBuildout(true);
+		object.setClassification(ObjectClassification.SNAPSHOT);
 		object.setBuildoutAreaId(-1);
 		object.setLoadRange(node.getRadius());
 		setCellInformation(object, node.getCellIndex());
