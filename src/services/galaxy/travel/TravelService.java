@@ -130,7 +130,8 @@ public class TravelService extends Service {
 	
 	@Override
 	public boolean stop() {
-		executor.shutdownNow();
+		if (executor != null)
+			executor.shutdownNow();
 		
 		return super.stop();
 	}
