@@ -29,10 +29,8 @@ package resources.encodables.player;
 
 import network.packets.Packet;
 import network.packets.swg.zone.baselines.Baseline;
-import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.common.CRC;
 import resources.encodables.Encodable;
-import resources.network.BaselineBuilder;
 import resources.objects.SWGObject;
 import resources.objects.weapon.WeaponObject;
 import resources.player.Player;
@@ -120,15 +118,11 @@ public class Equipment implements Encodable, Serializable {
 	public void setTemplate(String template) { this.template = template; }
 
 	private byte[] getWeaponData() {
-		BaselineBuilder bb = new BaselineBuilder(weapon, BaselineType.WEAO, 3);
 		Player target = weapon.getOwner();
-		weapon.createBaseline3(target, bb);
-		ByteBuffer data3 = bb.buildAsBaselinePacket().encode();
+		ByteBuffer data3 = weapon.createBaseline3(target).encode();
 		data3.position(0);
 
-		bb = new BaselineBuilder(weapon, BaselineType.WEAO, 6);
-		weapon.createBaseline6(target, bb);
-		ByteBuffer data6 = bb.buildAsBaselinePacket().encode();
+		ByteBuffer data6 = weapon.createBaseline6(target).encode();
 		data6.position(0);
 		
 		ByteBuffer ret = ByteBuffer.allocate(data3.remaining() + data6.remaining());

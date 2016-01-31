@@ -27,9 +27,7 @@
 ***********************************************************************************/
 package resources.collections;
 
-import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.encodables.Encodable;
-import resources.network.DeltaBuilder;
 import resources.objects.SWGObject;
 import resources.player.PlayerState;
 import utilities.Encoder;
@@ -47,8 +45,6 @@ import java.util.concurrent.ConcurrentHashMap;
 public class SWGMap<K, V> extends AbstractMap<K, V> implements Encodable, Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private BaselineType baseline;
-	
 	private int view;
 	private int updateType;	
 	private transient int updateCount;
@@ -67,14 +63,12 @@ public class SWGMap<K, V> extends AbstractMap<K, V> implements Encodable, Serial
 	private Map<Object, byte[]> deltas = new HashMap<>();
 	private int deltaSize;
 	
-	public SWGMap(BaselineType baseline, int view, int updateType) {
-		this.baseline = baseline;
+	public SWGMap(int view, int updateType) {
 		this.view = view;
 		this.updateType = updateType;
 	}
 	
-	public SWGMap(BaselineType baseline, int view, int updateType, StringType strType) {
-		this.baseline = baseline;
+	public SWGMap(int view, int updateType, StringType strType) {
 		this.view = view;
 		this.updateType = updateType;
 		this.strType = strType;
@@ -205,8 +199,7 @@ public class SWGMap<K, V> extends AbstractMap<K, V> implements Encodable, Serial
 			return;
 		}
 		
-		DeltaBuilder builder = new DeltaBuilder(target, baseline, view, updateType, getDeltaData());
-		builder.send();
+		target.sendDelta(view, updateType, getDeltaData());
 		// Clear the queue since the delta has been sent to observers through the builder
 		clearDeltaQueue();
 	}

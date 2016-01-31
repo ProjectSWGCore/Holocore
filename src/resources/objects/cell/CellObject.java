@@ -87,13 +87,7 @@ public class CellObject extends SWGObject {
 	}
 
 	protected void sendBaselines(Player target) {
-		BaselineBuilder bb = new BaselineBuilder(this, BaselineType.SCLT, 3);
-		createBaseline3(target, bb);
-		bb.sendTo(target);
-		
-		bb = new BaselineBuilder(this, BaselineType.SCLT, 6);
-		createBaseline6(target, bb);
-		bb.sendTo(target);
+		super.sendBaselines(target);
 		target.sendPacket(new UpdateCellPermissionMessage((byte) 1, getObjectId()));
 	}
 	

@@ -104,18 +104,18 @@ public class CreatureObject extends TangibleObject {
 	private long	lastTransform			= 0;
 	private HologramColour hologramColour = HologramColour.DEFAULT;
 	
-	private SWGList<Integer>	baseAttributes	= new SWGList<Integer>(BaselineType.CREO, 1, 2);
-	private SWGList<String>		skills			= new SWGList<String>(BaselineType.CREO, 1, 3, StringType.ASCII); // SWGSet
-	private SWGList<Integer>	hamEncumbList	= new SWGList<Integer>(BaselineType.CREO, 4, 2);
-	private SWGList<Integer>	attributes		= new SWGList<Integer>(BaselineType.CREO, 6, 21);
-	private SWGList<Integer>	maxAttributes	= new SWGList<Integer>(BaselineType.CREO, 6, 22);
-	private SWGList<Equipment>	equipmentList 	= new SWGList<Equipment>(BaselineType.CREO, 6, 23);
-	private SWGList<Equipment>	appearanceList 	= new SWGList<Equipment>(BaselineType.CREO, 6, 33);
+	private SWGList<Integer>	baseAttributes	= new SWGList<Integer>(1, 2);
+	private SWGList<String>		skills			= new SWGList<String>(1, 3, StringType.ASCII); // SWGSet
+	private SWGList<Integer>	hamEncumbList	= new SWGList<Integer>(4, 2);
+	private SWGList<Integer>	attributes		= new SWGList<Integer>(6, 21);
+	private SWGList<Integer>	maxAttributes	= new SWGList<Integer>(6, 22);
+	private SWGList<Equipment>	equipmentList 	= new SWGList<Equipment>(6, 23);
+	private SWGList<Equipment>	appearanceList 	= new SWGList<Equipment>(6, 33);
 	
-	private SWGMap<String, Long> 	skillMods			= new SWGMap<>(BaselineType.CREO, 4, 3, StringType.ASCII); // TODO: SkillMod structure
-	private SWGMap<Long, Long>		missionCriticalObjs	= new SWGMap<>(BaselineType.CREO, 4, 13);
-	private SWGMap<String, Integer>	abilities			= new SWGMap<>(BaselineType.CREO, 4, 14, StringType.ASCII);
-	private SWGMap<Integer, Long>	buffs				= new SWGMap<>(BaselineType.CREO, 6, 26); // TODO: Buff structure
+	private SWGMap<String, Long> 	skillMods			= new SWGMap<>(4, 3, StringType.ASCII); // TODO: SkillMod structure
+	private SWGMap<Long, Long>		missionCriticalObjs	= new SWGMap<>(4, 13);
+	private SWGMap<String, Integer>	abilities			= new SWGMap<>(4, 14, StringType.ASCII);
+	private SWGMap<Integer, Long>	buffs				= new SWGMap<>(6, 26); // TODO: Buff structure
 
 
 	public CreatureObject(long objectId) {
@@ -784,36 +784,21 @@ public class CreatureObject extends TangibleObject {
 	}
 	
 	public void sendBaselines(Player target) {
-		BaselineBuilder bb = null;
+		boolean targetSelf = getOwner() == target;
 		
-		if (getOwner() == target) {
-			bb = new BaselineBuilder(this, BaselineType.CREO, 1);
-			createBaseline1(target, bb);
-			bb.sendTo(target);
-		}
+		if (targetSelf)
+			target.sendPacket(createBaseline1(target));
 		
-		bb = new BaselineBuilder(this, BaselineType.CREO, 3);
-		createBaseline3(target, bb);
-		bb.sendTo(target);
+		target.sendPacket(createBaseline3(target));
 		
-		if (getOwner() == target) {
-			bb = new BaselineBuilder(this, BaselineType.CREO, 4);
-			createBaseline4(target, bb);
-			bb.sendTo(target);
-		}
+		if (targetSelf)
+			target.sendPacket(createBaseline4(target));
 		
-		bb = new BaselineBuilder(this, BaselineType.CREO, 6);
-		createBaseline6(target, bb);
-		bb.sendTo(target);
+		target.sendPacket(createBaseline6(target));
 		
-		if (getOwner() == target) {
-			bb = new BaselineBuilder(this, BaselineType.CREO, 8);
-			createBaseline8(target, bb);
-			bb.sendTo(target);
-			
-			bb = new BaselineBuilder(this, BaselineType.CREO, 9);
-			createBaseline9(target, bb);
-			bb.sendTo(target);
+		if (targetSelf) {
+			target.sendPacket(createBaseline8(target));
+			target.sendPacket(createBaseline9(target));
 		}
 	}
 

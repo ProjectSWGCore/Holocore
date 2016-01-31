@@ -55,7 +55,6 @@ import resources.server_info.Log;
 import services.CoreManager;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -67,7 +66,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public abstract class SWGObject extends BaselineObject implements Serializable, Comparable<SWGObject> {
+public abstract class SWGObject extends BaselineObject implements Comparable<SWGObject> {
 	
 	private static final long serialVersionUID = 1L;
 
@@ -77,7 +76,6 @@ public abstract class SWGObject extends BaselineObject implements Serializable, 
 	private final Map<Long, SWGObject> containedObjects;
 	private final Map <String, String> attributes;
 	private final Map <ObjectDataAttribute, Object> dataAttributes;
-	private final BaselineType objectType;
 	private ContainerPermissions containerPermissions;
 	private transient Set <SWGObject> objectsAware;
 	private transient BuildoutArea buildoutArea;
@@ -113,7 +111,6 @@ public abstract class SWGObject extends BaselineObject implements Serializable, 
 		this.attributes = new LinkedHashMap<>();
 		this.dataAttributes = new Hashtable<>();
 		this.containerPermissions = new DefaultPermissions();
-		this.objectType = objectType;
 	}
 	
 	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
@@ -784,8 +781,6 @@ public abstract class SWGObject extends BaselineObject implements Serializable, 
 	}
 	
 	protected void sendBaselines(Player target) {
-		if (objectType == null)
-			return;
 		target.sendPacket(createBaseline3(target));
 		target.sendPacket(createBaseline6(target));
 		

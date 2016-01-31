@@ -94,7 +94,7 @@ public class BaselineObject implements Serializable {
 		
 	}
 	
-	protected final void sendDelta(int type, int update, Object value) {
+	public final void sendDelta(int type, int update, Object value) {
 		verifySwgObject();
 		synchronized (baselineData) {
 			baselineData.set(type-1, null);
@@ -103,7 +103,7 @@ public class BaselineObject implements Serializable {
 		builder.send();
 	}
 	
-	protected final void sendDelta(int type, int update, Object value, StringType strType) {
+	public final void sendDelta(int type, int update, Object value, StringType strType) {
 		verifySwgObject();
 		synchronized (baselineData) {
 			baselineData.set(type-1, null);
