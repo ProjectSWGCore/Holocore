@@ -36,8 +36,11 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
+import java.util.concurrent.locks.ReentrantLock;
 
 import resources.control.Intent;
+import resources.server_info.Log;
 import network.encryption.Compression;
 import network.packets.Packet;
 import network.packets.swg.SWGPacket;
@@ -48,11 +51,13 @@ public class NetworkClient {
 	private static final int DEFAULT_BUFFER = 128;
 	
 	private final Object prevPacketIntentMutex = new Object();
-	private final Object outboundMutex = new Object();
 	private final Object bufferMutex = new Object();
+	private final ReentrantLock inboundLock = new ReentrantLock(true);
+	private final ReentrantLock outboundLock = new ReentrantLock(true);
 	private final InetSocketAddress address;
 	private final long networkId;
 	private final PacketSender packetSender;
+	private final Queue<Packet> outboundQueue;
 	private Intent prevPacketIntent;
 	private ByteBuffer buffer;
 	private long lastBufferSizeModification;
@@ -62,8 +67,19 @@ public class NetworkClient {
 		this.networkId = networkId;
 		this.packetSender = packetSender;
 		this.buffer = ByteBuffer.allocate(DEFAULT_BUFFER);
+		this.outboundQueue = new LinkedList<>();
 		lastBufferSizeModification = System.nanoTime();
 		prevPacketIntent = null;
+	}
+	
+	public void close() {
+		synchronized (bufferMutex) {
+			buffer = ByteBuffer.allocate(0);
+		}
+		synchronized (prevPacketIntentMutex) {
+			prevPacketIntent = null;
+		}
+		outboundQueue.clear();
 	}
 	
 	public InetSocketAddress getAddress() {
@@ -81,27 +97,28 @@ public class NetworkClient {
 		}
 	}
 	
-	public void sendPacket(Packet p) {
-		byte [] encoded = p.encode().array();
-		int decompressedLength = encoded.length;
-		boolean compressed = encoded.length >= 16;
-		if (compressed) {
-			byte [] compressedData = Compression.compress(encoded);
-			if (compressedData.length >= encoded.length)
-				compressed = false;
-			else
-				encoded = compressedData;
+	public void processOutbound() {
+		if (!outboundLock.tryLock())
+			return;
+		try {
+			Packet p;
+			while (!outboundQueue.isEmpty()) {
+				p = outboundQueue.poll();
+				if (p == null)
+					break;
+				sendPacket(p);
+			}
+		} finally {
+			outboundLock.unlock();
 		}
-		ByteBuffer data = ByteBuffer.allocate(encoded.length + 5).order(ByteOrder.LITTLE_ENDIAN);
-		byte bitmask = 0;
-		bitmask |= (compressed?1:0) << 0; // Compressed
-		bitmask |= 1 << 1; // SWG
-		data.put(bitmask);
-		data.putShort((short) encoded.length);
-		data.putShort((short) decompressedLength);
-		data.put(encoded);
-		synchronized (outboundMutex) {
-			packetSender.sendPacket(address, data.array());
+	}
+	
+	public void addToOutbound(Packet packet) {
+		outboundLock.lock();
+		try {
+			outboundQueue.add(packet);
+		} finally {
+			outboundLock.unlock();
 		}
 	}
 	
@@ -125,23 +142,30 @@ public class NetworkClient {
 		}
 	}
 	
-	public boolean process() {
-		List <Packet> packets;
-		synchronized (bufferMutex) {
-			buffer.flip();
-			packets = processPackets();
-			buffer.compact();
-		}
-		synchronized (prevPacketIntentMutex) {
-			for (Packet p : packets) {
-				p.setAddress(address.getAddress());
-				p.setPort(address.getPort());
-				InboundPacketIntent i = new InboundPacketIntent(p, networkId);
-				i.broadcastAfterIntent(prevPacketIntent);
-				prevPacketIntent = i;
+	public boolean processInbound() {
+		if (!inboundLock.tryLock())
+			return false;
+		try {
+			List <Packet> packets;
+			synchronized (bufferMutex) {
+				buffer.flip();
+				packets = processPackets();
+				buffer.compact();
 			}
+			synchronized (prevPacketIntentMutex) {
+				for (Packet p : packets) {
+					p.setAddress(address.getAddress());
+					p.setPort(address.getPort());
+					Log.d("NetworkClient", "Inbound: %s", p.getClass().getSimpleName());
+					InboundPacketIntent i = new InboundPacketIntent(p, networkId);
+					i.broadcastAfterIntent(prevPacketIntent);
+					prevPacketIntent = i;
+				}
+			}
+			return packets.size() > 0;
+		} finally {
+			inboundLock.unlock();
 		}
-		return packets.size() > 0;
 	}
 	
 	private void shrinkBuffer() {
@@ -217,6 +241,44 @@ public class NetworkClient {
 				packet.decode(buffer);
 			return packet;
 		}
+	}
+	
+	private void sendPacket(Packet p) {
+		ByteBuffer encoded = p.encode();
+		encoded.position(0);
+		int decompressedLength = encoded.remaining();
+		boolean compressed = decompressedLength >= 50;
+		if (compressed) {
+			ByteBuffer compress = compress(encoded);
+			compressed = compress != encoded;
+			encoded = compress;
+		}
+		Log.d("NetworkClient", "Outbound: %s", p.getClass().getSimpleName());
+		sendPacket(encoded, compressed, decompressedLength);
+	}
+	
+	private ByteBuffer compress(ByteBuffer data) {
+		ByteBuffer compressedBuffer = ByteBuffer.allocate(Compression.getMaxCompressedLength(data.remaining()));
+		int length = Compression.compress(data.array(), compressedBuffer.array());
+		compressedBuffer.position(0);
+		compressedBuffer.limit(length);
+		if (length >= data.remaining())
+			return data;
+		else
+			return compressedBuffer;
+	}
+	
+	private void sendPacket(ByteBuffer packet, boolean compressed, int rawLength) {
+		ByteBuffer data = ByteBuffer.allocate(packet.remaining() + 5).order(ByteOrder.LITTLE_ENDIAN);
+		byte bitmask = 0;
+		bitmask |= (compressed?1:0) << 0; // Compressed
+		bitmask |= 1 << 1; // SWG
+		data.put(bitmask);
+		data.putShort((short) packet.remaining());
+		data.putShort((short) rawLength);
+		data.put(packet);
+		data.flip();
+		packetSender.sendPacket(address, data);
 	}
 	
 	public String toString() {
