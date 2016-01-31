@@ -136,8 +136,7 @@ public class ObjectData extends ClientData {
 
 	@Override
 	public void readIff(SWGFile iff) {
-		while (iff.enterNextForm() != null)
-			readNextForm(iff);
+		readNextForm(iff);
 	}
 	
 	private void readNextForm(SWGFile iff) {
@@ -150,9 +149,8 @@ public class ObjectData extends ClientData {
 				readVersionForm(iff);
 			else if (!tag.isEmpty())
 				readNextForm(iff);
+			iff.exitForm();
 		}
-
-		iff.exitForm();
 	}
 	
 	private void readVersionForm(SWGFile iff) {
@@ -160,8 +158,6 @@ public class ObjectData extends ClientData {
 		while ((attributeChunk = iff.enterChunk("XXXX")) != null) {
 			parseAttributeChunk(attributeChunk);
 		}
-
-		iff.exitForm();
 	}
 
 	private void readExtendedAttributes(SWGFile iff) {
@@ -181,8 +177,6 @@ public class ObjectData extends ClientData {
 		attributes.putAll(((ObjectData)attrData).getAttributes());
 
 		parsedFiles.add(file);
-		
-		iff.exitForm();
 	}
 
 	// Try and parse the attribute to map w/ appropriate Object type.
@@ -194,6 +188,7 @@ public class ObjectData extends ClientData {
 		switch (attr) {
 			case APPEARANCE_FILENAME: putString(chunk, attr); break;
 			case ARRANGEMENT_DESCRIPTOR_FILENAME: putString(chunk,attr); break;
+			case CLIENT_VISIBILITY_FLAG: putBoolean(chunk, attr); break;
 			case CONTAINER_TYPE: putInt(chunk, attr); break;
 			case CONTAINER_VOLUME_LIMIT: putInt(chunk, attr);break;
 			case DETAILED_DESCRIPTION: putStfString(chunk, attr); break;
