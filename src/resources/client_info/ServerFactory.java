@@ -40,12 +40,15 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
 
 /**
  * Created by Waverunner on 6/9/2015
  */
 public final class ServerFactory extends DataFactory {
+	
+	private static final Object instanceMutex = new Object();
 	private static ServerFactory instance;
 
 	public static DatatableData getDatatable(String file) {
@@ -135,10 +138,10 @@ public final class ServerFactory extends DataFactory {
 						String columnType = columnTypes[i];
 						if (columnType.contains("[")) {
 							String[] split = columnType.split("\\[");
-							columnTypes[i] = split[0].toLowerCase();
+							columnTypes[i] = split[0].toLowerCase(Locale.US);
 							defaultValues.add(split[1].replace("]", ""));
 						} else {
-							columnTypes[i] = columnType.toLowerCase();
+							columnTypes[i] = columnType.toLowerCase(Locale.US);
 							defaultValues.add("");
 						}
 					}
@@ -209,8 +212,10 @@ public final class ServerFactory extends DataFactory {
 	}
 
 	public static ServerFactory getInstance() {
-		if (instance == null)
-			instance = new ServerFactory();
-		return instance;
+		synchronized (instanceMutex) {
+			if (instance == null)
+				instance = new ServerFactory();
+			return instance;
+		}
 	}
 }

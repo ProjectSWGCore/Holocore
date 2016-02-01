@@ -115,9 +115,9 @@ public enum Terrain {
 		for (Terrain p : values()) {
 			CRC_TO_TERRAIN.put(p.getCrc(), p);
 			CRC_TO_NAME.put(p.getCrc(), p.name());
-			NAME_TO_CRC.put(p.name().toLowerCase(), p.getCrc());
-			NAME_TO_CRC.put(p.name().toLowerCase(), p.getCrc());
-			NAME_TO_TERRAIN.put(p.name().toLowerCase(), p);
+			NAME_TO_CRC.put(p.name().toLowerCase(Locale.US), p.getCrc());
+			NAME_TO_CRC.put(p.name().toLowerCase(Locale.US), p.getCrc());
+			NAME_TO_TERRAIN.put(p.name().toLowerCase(Locale.US), p);
 		}
 	}
 	

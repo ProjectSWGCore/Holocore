@@ -38,6 +38,7 @@ import resources.player.Player;
 import resources.player.PlayerState;
 import services.galaxy.GalacticManager;
 
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -51,7 +52,7 @@ public class FindFriendCallback implements ICmdCallback {
 		if (ghost == null || args.isEmpty())
 			return;
 
-		String friendName = args.split(" ")[0].toLowerCase();
+		String friendName = args.split(" ")[0].toLowerCase(Locale.US);
 
 		if (!ghost.getFriendsList().contains(friendName)) {
 			new ChatBroadcastIntent(player, "@ui_cmnty:friend_location_failed_noname").broadcast();
@@ -65,7 +66,7 @@ public class FindFriendCallback implements ICmdCallback {
 		}
 
 		PlayerObject friendGhost = friend.getPlayerObject();
-		if (friendGhost == null || !friendGhost.getFriendsList().contains(player.getCharacterName().split(" ")[0].toLowerCase())) {
+		if (friendGhost == null || !friendGhost.getFriendsList().contains(player.getCharacterName().split(" ")[0].toLowerCase(Locale.US))) {
 			new ChatBroadcastIntent(player, new ProsePackage("@ui_cmnty:friend_location_failed", "TU", friendName)).broadcast();
 			return;
 		}

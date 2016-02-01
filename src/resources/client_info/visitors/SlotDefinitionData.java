@@ -38,14 +38,27 @@ public class SlotDefinitionData extends ClientData {
 
 	private Map<String, SlotDefinition> definitions = new HashMap<>();
 
-	public class SlotDefinition {
-		public String name;
-		public boolean isGlobal;
-		public boolean isModdable;
-		public boolean isExclusive;
-		public boolean hasHardpoint;
-		public String hardpointName;
-		public int unk1;
+	public static class SlotDefinition {
+		private String name;
+		private boolean isGlobal;
+		private boolean isModdable;
+		private boolean isExclusive;
+		private boolean hasHardpoint;
+		private String hardpointName;
+		
+		public String getName() { return name; }
+		public boolean isGlobal() { return isGlobal; }
+		public boolean isModdable() { return isModdable; }
+		public boolean isExclusive() { return isExclusive; }
+		public boolean hasHardpoint() { return hasHardpoint; }
+		public String getHardpointName() { return hardpointName; }
+		
+		public void setName(String name) { this.name = name; }
+		public void setGlobal(boolean isGlobal) { this.isGlobal = isGlobal; }
+		public void setModdable(boolean isModdable) { this.isModdable = isModdable; }
+		public void setExclusive(boolean isExclusive) { this.isExclusive = isExclusive; }
+		public void setHasHardpoint(boolean hasHardpoint) { this.hasHardpoint = hasHardpoint; }
+		public void setHardpointName(String hardpointName) { this.hardpointName = hardpointName; }
 	}
 
 	@Override
@@ -55,22 +68,15 @@ public class SlotDefinitionData extends ClientData {
 		data.readChunk((chunk) -> {
 			SlotDefinition def = new SlotDefinition();
 
-			def.name = chunk.readString();
-			def.isGlobal = chunk.readBoolean();
-			def.isModdable = chunk.readBoolean();
-			def.isExclusive = chunk.readBoolean();
-			def.hasHardpoint = chunk.readBoolean();
-
-			if (def.hasHardpoint) {
-				if (chunk.readByte() != 0) {
-					chunk.skip(-1);
-					def.hardpointName = chunk.readString();
-				}
-			} else {
-				chunk.readByte();
-			}
-
-			def.unk1 = chunk.readInt(); // This seems to be a couple more booleans together, not sure what they would represent.
+			def.setName(chunk.readString());
+			def.setGlobal(chunk.readBoolean());
+			def.setModdable(chunk.readBoolean());
+			def.setExclusive(chunk.readBoolean());
+			def.setHasHardpoint(chunk.readBoolean());
+			def.setHardpointName(chunk.readString());
+			chunk.readBoolean(); // "combat bone"
+			chunk.readBoolean(); // "observe with parent"
+			chunk.readBoolean(); // "expose with parent"
 
 			definitions.put(def.name, def);
 		});

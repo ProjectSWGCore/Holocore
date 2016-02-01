@@ -33,6 +33,8 @@ import resources.player.PlayerState;
 import utilities.Encoder;
 import utilities.Encoder.StringType;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -72,6 +74,11 @@ public class SWGMap<K, V> extends AbstractMap<K, V> implements Encodable, Serial
 		this.view = view;
 		this.updateType = updateType;
 		this.strType = strType;
+	}
+	
+	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
+		ois.defaultReadObject();
+		updateCount = 0;
 	}
 	
 	@Override

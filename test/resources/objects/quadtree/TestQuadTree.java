@@ -68,7 +68,7 @@ public class TestQuadTree {
 	@Test
 	public void testDuplicatesBug() {
 		QuadTree<Double> tree = new QuadTree<Double>(2, 0, 0, 10, 10);
-		Double d = new Double(5.0);
+		Double d = Double.valueOf(5.0);
 		tree.put(5.0, 5.0, d);
 		Assert.assertEquals(1, tree.getWithinRange(5.0, 5.0, 10).size());
 		Assert.assertEquals(tree.getIgnoreCollisions(5.0, 5.0), d);
@@ -156,14 +156,6 @@ public class TestQuadTree {
 			inter = intersects(minX, minY, maxX, maxY, x, y, range);
 			Assert.assertEquals("Failed at ("+x+", "+y+")", actual, inter);
 		}
-		long start = System.nanoTime();
-		for (int i = 0; i < 1000000; i++) {
-			double x = Math.random() * 10;
-			double y = Math.random() * 10;
-			intersects(minX, minY, maxX, maxY, x, y, range);
-		}
-		long end = System.nanoTime();
-		System.out.printf("Time per intersect: %.10fms%n", (end-start)/1E6/1000000);
 	}
 	
 	@Test
@@ -233,7 +225,7 @@ public class TestQuadTree {
 		return x * x;
 	}
 	
-	private class Point2D {
+	private static class Point2D {
 		private double x;
 		private double y;
 		public Point2D(double x, double y) {
