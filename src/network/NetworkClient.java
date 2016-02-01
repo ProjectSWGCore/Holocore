@@ -40,7 +40,6 @@ import java.util.Queue;
 import java.util.concurrent.locks.ReentrantLock;
 
 import resources.control.Intent;
-import resources.server_info.Log;
 import network.encryption.Compression;
 import network.packets.Packet;
 import network.packets.swg.SWGPacket;
@@ -156,7 +155,6 @@ public class NetworkClient {
 				for (Packet p : packets) {
 					p.setAddress(address.getAddress());
 					p.setPort(address.getPort());
-					Log.d("NetworkClient", "Inbound: %s", p.getClass().getSimpleName());
 					InboundPacketIntent i = new InboundPacketIntent(p, networkId);
 					i.broadcastAfterIntent(prevPacketIntent);
 					prevPacketIntent = i;
@@ -253,7 +251,6 @@ public class NetworkClient {
 			compressed = compress != encoded;
 			encoded = compress;
 		}
-		Log.d("NetworkClient", "Outbound: %s", p.getClass().getSimpleName());
 		sendPacket(encoded, compressed, decompressedLength);
 	}
 	

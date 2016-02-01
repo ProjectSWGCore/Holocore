@@ -178,7 +178,6 @@ public class NetworkClientManager extends Manager implements TCPCallback, Packet
 			sockets.put(address, networkId);
 			clients.put(networkId, client);
 		}
-		Log.d(this, "Created " + client.getAddress());
 		client.onConnected();
 	}
 	
@@ -202,7 +201,6 @@ public class NetworkClientManager extends Manager implements TCPCallback, Packet
 				System.err.println("No NetworkClient found for network id: " + networkId);
 				return;
 			}
-			Log.d(this, "Deleted " + client.getAddress());
 			sockets.remove(client.getAddress());
 			synchronized (inboundQueue) {
 				inboundQueue.remove(client);
