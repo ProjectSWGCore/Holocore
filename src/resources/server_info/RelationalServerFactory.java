@@ -83,9 +83,9 @@ public class RelationalServerFactory {
 	
 	private String generatePath(File parent, String table) {
 		String base;
-		if (table.contains("/")) {
+		if (table.contains(File.separator))
 			base = BASE_PATH + table;
-		} else
+		else
 			base = parent.getPath() + File.separator + table;
 		if (new File(base + ".msdb").isFile())
 			return base + ".msdb";
