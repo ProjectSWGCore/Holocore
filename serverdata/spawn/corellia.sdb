@@ -1196,7 +1196,7 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 1201196	CORELLIA	cor_world	AREA	0	-7399.48	414.19	7515.49	0	1	a fiend of Lord Nyax	15300	outback	-	1	none	0	300	120	0
 1201197	CORELLIA	cor_world	AREA	0	-7412.72	414.13	7520.10	0	1	a zealot of Lord Nyax	15320	outback	-	1	none	0	300	120	0
 1201198	CORELLIA	cor_world	AREA	0	-7414.34	414.55	7501.98	0	1	a fiend of Lord Nyax	15300	outback	-	1	none	0	300	120	0
-1201199	CORELLIA	cor_world	AREA	0	-7488.00	241.20	-.3967.90	0	1	a vicious slice hound	26535	outback	Weather Station	4	none	0	300	120	8
+1201199	CORELLIA	cor_world	AREA	0	-7488.00	241.20	-3967.90	0	1	a vicious slice hound	26535	outback	Weather Station	4	none	0	300	120	8
 1201200	CORELLIA	cor_world	AREA	0	-75.39	28.95	-5069.70	0	1	a Meatlump lunk	3945	city	Coronet	1	none	0	300	120	0
 1201201	CORELLIA	cor_world	AREA	0	-7532.43	403.51	4642.74	0	1	a mountain murra	19360	-	-	2	none	0	300	180	4
 1201202	CORELLIA	cor_world	AREA	0	-77.08	29.24	-4983.40	0	1	a Meatlump lunk	3945	city	Coronet	1	none	0	300	120	0

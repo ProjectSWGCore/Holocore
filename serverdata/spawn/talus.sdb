@@ -340,7 +340,7 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 2300340	TALUS	tal_imp_vs_reb_base	AREA	2	-1.60	2.00	3.60	0	1	a Stormtrooper	25540	dungeon	RTP - Command Post	1	none	0	300	120	0
 2300341	TALUS	tal_imp_vs_reb_base	AREA	7	-0.40	1.00	-20.60	0	1	a Stormtrooper	25545	dungeon	RTP - Command Post	1	none	0	300	120	0
 2300342	TALUS	tal_nashal_cantina	EGG	10	-21.00	1.60	-16.80	0	1	Nym	2850	city	Narmle	1	sitting	0	300	120	0
-2300343	TALUS	tal_nashal_cantina	EGG	10	.23.30	1.60	-17.60	0	1	Kole	2810	city	Narmle	1	none	0	300	120	0
+2300343	TALUS	tal_nashal_cantina	EGG	10	23.30	1.60	-17.60	0	1	Kole	2810	city	Narmle	1	none	0	300	120	0
 2300344	TALUS	tal_nashal_cantina	EGG	3	-0.50	-0.90	3.40	0	1	Oecax	2720	city	Nashal	1	none	0	300	120	0
 2300345	TALUS	tal_nashal_cantina	EGG	13	-25.20	-0.50	8.50	0	1	Durge	2765	city	Nashal	1	none	0	300	120	0
 2300346	TALUS	tal_nashal_selonian_smugglers_cave	AREA	5	75.40	-54.90	-154.10	0	1	a Selonian	30250	dungeon	Selonian Smugglers	1	none	0	300	120	0
