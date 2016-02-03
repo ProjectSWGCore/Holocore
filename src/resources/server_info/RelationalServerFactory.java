@@ -31,20 +31,24 @@ public class RelationalServerFactory {
 		final Object lock = getFileLocking(file);
 		synchronized (lock) {
 			File f = new File(BASE_PATH + file);
-			File parent = f.getParentFile();
 			RelationalServerData data = new RelationalServerData(BASE_PATH + file);
-			try {
-				if (!loadTables(data, tables, parent)) {
-					data.close();
-					return null;
-				}
+			if (loadServerData(data, f, tables))
 				return data;
-			} catch (Exception e) {
-				e.printStackTrace();
-				data.close();
-			}
 			return null;
 		}
+	}
+	
+	private boolean loadServerData(RelationalServerData data, File file, String ... tables) {
+		File parent = file.getParentFile();
+		try {
+			if (loadTables(data, parent, tables))
+				return true;
+			data.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			data.close();
+		}
+		return false;
 	}
 	
 	private RelationalServerData getDatabase(String file) {
@@ -67,18 +71,25 @@ public class RelationalServerFactory {
 		}
 	}
 	
-	private boolean loadTables(RelationalServerData data, String [] tables, File parent) {
+	private boolean loadTables(RelationalServerData data, File parent, String [] tables) {
 		for (String table : tables) {
-			String path;
-			if (table.contains("/")) {
-				path = BASE_PATH + table + ".sdb";
-				table = table.substring(table.lastIndexOf('/')+1);
-			} else
-				path = parent.getPath() + File.separator + table + ".sdb";
+			String path = generatePath(parent, table);
+			table = path.substring(path.lastIndexOf('/')+1, path.lastIndexOf('.'));
 			if (!data.linkTableWithSdb(table, path))
 				return false;
 		}
 		return true;
+	}
+	
+	private String generatePath(File parent, String table) {
+		String base;
+		if (table.contains("/")) {
+			base = BASE_PATH + table;
+		} else
+			base = parent.getPath() + File.separator + table;
+		if (new File(base + ".msdb").isFile())
+			return base + ".msdb";
+		return base + ".sdb";
 	}
 	
 	private void executeCommand(RelationalServerData data, String command) {
