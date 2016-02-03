@@ -19,7 +19,7 @@ cor_chirq_jzoro1	CORELLIA	-267964178068047452	corellia_chirq_jzoro_bunker.iff	Co
 cor_chirq_jzoro2	CORELLIA	-260364354962171077	corellia_chirq_jzoro_bunker.iff	Corellia - Chirq Jzoro Bunker 2	10	-2713	44	2854
 cor_coronet_asso_hall1	CORELLIA	1855473	association_hall_civilian_corellia.iff	Corellia - Coronet / Association Hall 1	17	-276	28	-4720
 cor_coronet_asso_hall2	CORELLIA	3075609	association_hall_civilian_corellia.iff	Corellia - Coronet / Association Hall 2	17	-210	28	-4320
-cor_coronet_cantina	CORELLIA	3075426	cantina_corellia.iff	Corellia - Coronet / Cantina	15	-343	28	-4495
+cor_coronet_cantina	CORELLIA	8105493	cantina_corellia.iff	Corellia - Coronet / Cantina	15	-343	28	-4495
 cor_coronet_capitol	CORELLIA	1855460	capitol_corellia.iff	Corellia - Coronet / Capitol	11	-210	28	-4570
 cor_coronet_chronicle_vendor	CORELLIA	-261771729506220985	player_pgc_merchant_tent_s01.iff	Corellia - Coronet / Chronicle Vendor	1	-152	28	-4811
 cor_coronet_cloning	CORELLIA	1855491	cloning_corellia.iff	Corellia - Coronet / Cloning	6	-500	28	-4500
@@ -63,7 +63,7 @@ cor_imp_warehouse_bldg1	CORELLIA	-262616154953620266	mun_all_military_tower_impl
 cor_imp_warehouse_bldg2	CORELLIA	-262616154954802219	mun_all_military_tower_impl_guard_s01.iff	Corellia - Imp Warehouse Bldg 2	1	-1850	7	-1221
 cor_itp_thrawn_bunker	CORELLIA	-265712378856778254	itp_thrawn_rebel_bunker.iff	Corellia - ITP - Thrawn Reb Bunker	18	139	48	4500
 cor_itp_thrawn_bunker_guardtower	CORELLIA	-265712378958027098	military_outpost_guard_house_rebel.iff	Corellia - ITP - Thrawn Reb Bunker / Guardtower	2	118	48	4525
-cor_korvella_cantina	CORELLIA	8105493	cantina_corellia.iff	Corellia - Kor Vella / Cantina	15	-3480	78	3087
+cor_korvella_cantina	CORELLIA	3005396	cantina_corellia.iff	Corellia - Kor Vella / Cantina	15	-3480	78	3087
 cor_korvella_cloning	CORELLIA	3005426	cloning_corellia.iff	Corellia - Kor Vella / Cloning	6	-3535	70	3202
 cor_korvella_combat_gh	CORELLIA	2955418	guild_combat_corellia_style_01.iff	Corellia - Kor Vella / Combat GH	9	-3411	74	3384
 cor_korvella_commerce_gh	CORELLIA	2955408	guild_commerce_corellia_style_01.iff	Corellia - Kor Vella / Commerce GH	9	-3425	78	3182
