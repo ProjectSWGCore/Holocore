@@ -49,7 +49,7 @@ import services.objects.ObjectManager;
 
 public final class SpawnerService extends Service {
 	
-	private static final String GET_ALL_SPAWNERS_SQL = "SELECT static.x, static.y, static.z, static.oX, static.oY, static.oZ, static.oW, " // static columns
+	private static final String GET_ALL_SPAWNERS_SQL = "SELECT static.x, static.y, static.z, static.heading, " // static columns
 			+ "static.spawner_type, static.cell_id, static.active, " // more static columns
 			+ "buildings.object_id AS building_id, buildings.terrain_name AS building_terrain, " // building columns
 			+ "creatures.iff_template AS iff, creatures.creature_name " // creature columns

@@ -333,12 +333,12 @@ public class RelationalServerData extends RelationalDatabase {
 						System.err.println("    Failed to import sdb! File is not file or does not exist");
 						continue;
 					}
-					try (TableReader slave = new TableReader(table, sdb)) {
-						slave.columnNames = columnNames;
-						slave.columnTypes = columnTypes;
-						slave.insert = insert;
-						slave.readSlave();
-					}
+					@SuppressWarnings("resource") // This closes the database.. we don't want to do that yet
+					TableReader slave = new TableReader(table, sdb);
+					slave.columnNames = columnNames;
+					slave.columnTypes = columnTypes;
+					slave.insert = insert;
+					slave.readSlave();
 				}
 			}
 		}
