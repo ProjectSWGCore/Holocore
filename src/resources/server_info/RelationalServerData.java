@@ -329,6 +329,10 @@ public class RelationalServerData extends RelationalDatabase {
 				if (load) {
 					File sdb = new File(file.getParent(), parts[0]);
 					System.out.println("  Importing sdb... '" + sdb + "'");
+					if (!sdb.isFile()) {
+						System.err.println("    Failed to import sdb! File is not file or does not exist");
+						continue;
+					}
 					try (TableReader slave = new TableReader(table, sdb)) {
 						slave.columnNames = columnNames;
 						slave.columnTypes = columnTypes;
