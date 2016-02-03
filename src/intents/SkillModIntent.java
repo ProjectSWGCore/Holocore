@@ -25,42 +25,42 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package services.galaxy;
+package intents;
 
-import resources.control.Manager;
-import services.commands.CommandService;
-import services.faction.FactionService;
-import services.galaxy.terminals.TerminalService;
-import services.sui.SuiService;
+import resources.control.Intent;
+import resources.objects.creature.CreatureObject;
 
-public class GameManager extends Manager {
+public class SkillModIntent extends Intent {
 
-	private final CommandService commandService;
-	private final ConnectionService connectionService;
-	private final SuiService suiService;
-	private final EnvironmentService weatherService;
-	private final TerminalService terminalManager;
-	private final FactionService factionService;
-//	private final GroupService groupService;
-        private final SkillModService skillModService;
-
-	public GameManager() {
-		commandService = new CommandService();
-		connectionService = new ConnectionService();
-		suiService = new SuiService();
-		weatherService = new EnvironmentService();
-		terminalManager = new TerminalService();
-		factionService = new FactionService();
-//		groupService = new GroupService();
-		skillModService = new SkillModService();
-
-		addChildService(commandService);
-		addChildService(connectionService);
-		addChildService(suiService);
-		addChildService(weatherService);
-		addChildService(terminalManager);
-		addChildService(factionService);
-//		addChildService(groupService);
-		addChildService(skillModService);
+	public static final String TYPE = "SkillModIntent";
+	
+	private final String skillModName;
+	private final int adjustBase;
+	private final int adjustModifier;
+	private final CreatureObject[] affectedCreatures;
+	
+	public SkillModIntent(String skillModName, int adjustBase, int adjustModifier, CreatureObject... affectedCreatures) {
+		super(TYPE);
+		this.skillModName = skillModName;
+		this.adjustBase = adjustBase;
+		this.adjustModifier = adjustModifier;
+		this.affectedCreatures = affectedCreatures;
 	}
+
+	public int getAdjustModifier() {
+		return adjustModifier;
+	}
+
+	public int getAdjustBase() {
+		return adjustBase;
+	}
+
+	public String getSkillModName() {
+		return skillModName;
+	}
+	
+	public CreatureObject[] getAffectedCreatures() {
+		return affectedCreatures;
+	}
+	
 }

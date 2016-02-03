@@ -40,6 +40,7 @@ import resources.HologramColour;
 import resources.Posture;
 import resources.PvpFlag;
 import resources.Race;
+import resources.SkillMod;
 import resources.collections.SWGList;
 import resources.collections.SWGMap;
 import resources.encodables.player.Equipment;
@@ -55,7 +56,7 @@ import utilities.Encoder.StringType;
 
 public class CreatureObject extends TangibleObject {
 	
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 	
 	private transient GroupInviterData inviterData	= new GroupInviterData(0, null, "", 0);
 	private transient long lastReserveOperation		= 0;
@@ -112,11 +113,10 @@ public class CreatureObject extends TangibleObject {
 	private SWGList<Equipment>	equipmentList 	= new SWGList<Equipment>(6, 23);
 	private SWGList<Equipment>	appearanceList 	= new SWGList<Equipment>(6, 33);
 	
-	private SWGMap<String, Long> 	skillMods			= new SWGMap<>(4, 3, StringType.ASCII); // TODO: SkillMod structure
+	private SWGMap<String, SkillMod> 	skillMods			= new SWGMap<>(4, 3, StringType.ASCII); // TODO: SkillMod structure
 	private SWGMap<Long, Long>		missionCriticalObjs	= new SWGMap<>(4, 13);
 	private SWGMap<String, Integer>	abilities			= new SWGMap<>(4, 14, StringType.ASCII);
 	private SWGMap<Integer, Long>	buffs				= new SWGMap<>(6, 26); // TODO: Buff structure
-
 
 	public CreatureObject(long objectId) {
 		super(objectId, BaselineType.CREO);
@@ -630,6 +630,28 @@ public class CreatureObject extends TangibleObject {
 		sendDelta(3, 18, statesBitmask);
 	}
 
+	public void adjustSkillmod(String skillModName, int base, int modifier) {
+		SkillMod skillMod = skillMods.get(skillModName);
+		
+		if(skillMod == null) {
+			// They didn't have this SkillMod already.
+			// Therefore, we send a full delta.
+			skillMods.put(skillModName, new SkillMod(base, modifier));
+			skillMods.sendDeltaMessage(this);
+		} else {
+			// They already had this skillmod.
+			// All we need to do is adjust the base and the modifier and send an update from the SWGMap
+			skillMod.adjustBase(base);
+			skillMod.adjustModifier(modifier);
+			skillMods.update(skillModName, this);
+		}
+	}
+	
+	public int getSkillModValue(String skillModName) {
+		SkillMod skillMod = skillMods.get(skillModName);
+		return skillMod != null ? skillMod.getValue() : 0;
+	}
+	
 	public boolean isVisible() {
 		return visible;
 	}

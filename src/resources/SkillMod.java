@@ -25,42 +25,51 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package services.galaxy;
+package resources;
 
-import resources.control.Manager;
-import services.commands.CommandService;
-import services.faction.FactionService;
-import services.galaxy.terminals.TerminalService;
-import services.sui.SuiService;
+import java.io.Serializable;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 
-public class GameManager extends Manager {
+import resources.encodables.Encodable;
 
-	private final CommandService commandService;
-	private final ConnectionService connectionService;
-	private final SuiService suiService;
-	private final EnvironmentService weatherService;
-	private final TerminalService terminalManager;
-	private final FactionService factionService;
-//	private final GroupService groupService;
-        private final SkillModService skillModService;
+public class SkillMod implements Encodable, Serializable {
+	
+	private static final long serialVersionUID = 1L;
 
-	public GameManager() {
-		commandService = new CommandService();
-		connectionService = new ConnectionService();
-		suiService = new SuiService();
-		weatherService = new EnvironmentService();
-		terminalManager = new TerminalService();
-		factionService = new FactionService();
-//		groupService = new GroupService();
-		skillModService = new SkillModService();
-
-		addChildService(commandService);
-		addChildService(connectionService);
-		addChildService(suiService);
-		addChildService(weatherService);
-		addChildService(terminalManager);
-		addChildService(factionService);
-//		addChildService(groupService);
-		addChildService(skillModService);
+	private int base, modifier;
+	
+	public SkillMod(int base, int modifier) {
+		this.base = base;
+		this.modifier = modifier;
 	}
+	
+	@Override
+	public byte[] encode() {
+		ByteBuffer buffer = ByteBuffer.allocate(Integer.BYTES * 2).order(ByteOrder.LITTLE_ENDIAN);
+		
+		buffer.putInt(base);
+		buffer.putInt(modifier);
+		
+		return buffer.array();
+	}
+
+	@Override
+	public void decode(ByteBuffer data) {
+		base = data.getInt();
+		modifier = data.getInt();
+	}
+	
+	public void adjustBase(int adjustment) {
+		base += adjustment;
+	}
+	
+	public void adjustModifier(int adjustment) {
+		modifier += adjustment;
+	}
+	
+	public int getValue() {
+		return base + modifier;
+	}
+
 }
