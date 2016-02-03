@@ -85,6 +85,7 @@ public class DeltasMessage extends SWGPacket {
 	public long getObjectId() { return objId; }
 	public BaselineType getType() { return type; }
 	public int getNum() { return num; }
+	public int getUpdate() { return update; }
 	public byte [] getDeltaData() { return deltaData; }
 	
 	public void setType(BaselineType type) { this.type = type; }

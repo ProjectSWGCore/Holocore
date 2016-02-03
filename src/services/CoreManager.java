@@ -27,10 +27,20 @@
 ***********************************************************************************/
 package services;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import network.packets.Packet;
+import network.packets.swg.zone.baselines.Baseline;
+import network.packets.swg.zone.deltas.DeltasMessage;
+import network.packets.swg.zone.object_controller.ObjectController;
+import intents.network.InboundPacketIntent;
 import intents.network.OutboundPacketIntent;
 import intents.server.ServerManagementIntent;
 import intents.server.ServerStatusIntent;
@@ -53,10 +63,12 @@ public class CoreManager extends Manager {
 	private static final int GALAXY_ID = 1;
 	
 	private final ScheduledExecutorService shutdownService;
+	private final OnlineInterfaceService onlineInterfaceService;
+	private final EngineManager engineManager;
+	private final GalacticManager galacticManager;
+	private final PrintStream packetStream;
+	private final boolean packetDebug;
 	
-	private OnlineInterfaceService onlineInterfaceService;
-	private EngineManager engineManager;
-	private GalacticManager galacticManager;
 	private long startTime;
 	private boolean shutdownRequested;
 	
@@ -64,6 +76,8 @@ public class CoreManager extends Manager {
 		Config c = getConfig(ConfigFile.PRIMARY);
 		Log.setLogLevel(LogLevel.valueOf(c.getString("LOG-LEVEL", LogLevel.DEBUG.name())));
 		setupGalaxy(c);
+		packetStream = setupPrintStream(c);
+		packetDebug = packetStream != null;
 		shutdownService = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("core-shutdown-service"));
 		shutdownRequested = false;
 		onlineInterfaceService = new OnlineInterfaceService();
@@ -74,6 +88,7 @@ public class CoreManager extends Manager {
 		addChildService(engineManager);
 		addChildService(galacticManager);
 		
+		registerForIntent(InboundPacketIntent.TYPE);
 		registerForIntent(OutboundPacketIntent.TYPE);
 		registerForIntent(ServerManagementIntent.TYPE);
 	}
@@ -117,8 +132,18 @@ public class CoreManager extends Manager {
 	
 	@Override
 	public void onIntentReceived(Intent i) {
-		if (i instanceof ServerManagementIntent)
-			handleServerManagementIntent((ServerManagementIntent) i);
+		switch (i.getType()) {
+			case ServerManagementIntent.TYPE:
+				if (i instanceof ServerManagementIntent)
+					handleServerManagementIntent((ServerManagementIntent) i);
+				break;
+			case InboundPacketIntent.TYPE:
+				handleInboundPacketIntent((InboundPacketIntent) i);
+				break;
+			case OutboundPacketIntent.TYPE:
+				handleOutboundPacketIntent((OutboundPacketIntent) i);
+				break;
+		}
 	}
 	
 	private void handleServerManagementIntent(ServerManagementIntent i) {
@@ -126,6 +151,40 @@ public class CoreManager extends Manager {
 			case SHUTDOWN: initiateShutdownSequence(i);  break;
 			default: break;
 		}
+	}
+	
+	private void handleInboundPacketIntent(InboundPacketIntent i) {
+		if (!packetDebug)
+			return;
+		packetStream.println("IN "+i.getNetworkId()+":\t"+createExtendedPacketInformation(i.getPacket()));
+	}
+	
+	private void handleOutboundPacketIntent(OutboundPacketIntent i) {
+		if (!packetDebug)
+			return;
+		packetStream.println("OUT "+i.getNetworkId()+":\t"+createExtendedPacketInformation(i.getPacket()));
+	}
+	
+	private String createExtendedPacketInformation(Packet p) {
+		if (p instanceof Baseline)
+			return createBaselineInformation((Baseline) p);
+		if (p instanceof DeltasMessage)
+			return createDeltaInformation((DeltasMessage) p);
+		if (p instanceof ObjectController)
+			return createControllerInformation((ObjectController) p);
+		return p.getClass().getSimpleName();
+	}
+	
+	private String createBaselineInformation(Baseline b) {
+		return "Baseline:"+b.getType()+b.getNum()+"  ID="+b.getObjectId();
+	}
+	
+	private String createDeltaInformation(DeltasMessage d) {
+		return "Delta:"+d.getType()+d.getNum()+"  Var="+d.getUpdate()+"  ID="+d.getObjectId();
+	}
+	
+	private String createControllerInformation(ObjectController c) {
+		return "ObjectController:0x"+Integer.toHexString(c.getControllerCrc())+"  ID="+c.getObjectId();
 	}
 	
 	private void initiateShutdownSequence(ServerManagementIntent i) {
@@ -157,6 +216,18 @@ public class CoreManager extends Manager {
 	 */
 	public double getCoreTime() {
 		return (System.nanoTime()-startTime)/1E6;
+	}
+	
+	private PrintStream setupPrintStream(Config c) {
+		if (c.getBoolean("PACKET-DEBUG", false)) {
+			try {
+				return new PrintStream(new FileOutputStream("packets.txt", false), true, StandardCharsets.US_ASCII.name());
+			} catch (UnsupportedEncodingException | FileNotFoundException e) {
+				e.printStackTrace();
+				Log.e(this, e);
+			}
+		}
+		return null;
 	}
 	
 	public static Galaxy getGalaxy() {
