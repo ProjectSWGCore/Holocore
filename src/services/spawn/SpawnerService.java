@@ -123,7 +123,7 @@ public final class SpawnerService extends Service {
 	private void loadSpawner(ResultSet set, Location loc, boolean spawnEggs) throws SQLException {
 		loc.setTerrain(Terrain.valueOf(set.getString("building_terrain")));
 		loc.setPosition(set.getFloat("x"), set.getFloat("y"), set.getFloat("z"));
-		loc.setOrientation(set.getFloat("oX"), set.getFloat("oY"), set.getFloat("oZ"), set.getFloat("oW"));
+		loc.setHeading(set.getFloat("heading"));
 		int cellId = set.getInt("cell_id");
 		
 		SWGObject parent = null;
