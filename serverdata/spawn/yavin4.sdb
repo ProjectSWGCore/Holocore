@@ -3,19 +3,19 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 2400003	YAVIN4	yav_blue_leaf_temple	AREA	1	3.96	-1.30	32.45	0	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0
 2400004	YAVIN4	yav_blue_leaf_temple	AREA	1	-3.76	-1.30	32.45	0	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0
 2400005	YAVIN4	yav_blue_leaf_temple	AREA	2	-0.14	-37.30	-29.00	0	1	a kliknik dark queen	14280	poi	The Temple of the Blueleaf	1	none	0	300	180	0
-2400006	YAVIN4	yav_blue_leaf_temple	AREA	2	-13.11	-37.30	13.08	0	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0
-2400007	YAVIN4	yav_blue_leaf_temple	AREA	2	-13.63	-1.30	24.34	0	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0
+2400006	YAVIN4	yav_blue_leaf_temple	AREA	2	-13.11	-37.30	13.08	136	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0
+2400007	YAVIN4	yav_blue_leaf_temple	AREA	2	-13.63	-1.30	24.34	97	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0
 2400008	YAVIN4	yav_blue_leaf_temple	AREA	2	-13.83	-37.30	1.47	0	1	a kliknik dark worker	14290	poi	The Temple of the Blueleaf	2	none	0	300	180	4
 2400009	YAVIN4	yav_blue_leaf_temple	AREA	2	-25.33	-1.30	3.18	0	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0
 2400010	YAVIN4	yav_blue_leaf_temple	AREA	2	-3.30	-1.30	-25.77	0	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0
-2400011	YAVIN4	yav_blue_leaf_temple	AREA	2	-7.34	-37.30	-16.34	0	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0
+2400011	YAVIN4	yav_blue_leaf_temple	AREA	2	-7.34	-37.30	-16.34	26	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0
 2400012	YAVIN4	yav_blue_leaf_temple	AREA	2	1.82	-37.30	-22.06	0	1	a kliknik dark defender	14270	poi	The Temple of the Blueleaf	2	none	0	300	180	4
-2400013	YAVIN4	yav_blue_leaf_temple	AREA	2	10.80	-37.30	-0.01	0	1	a kliknik dark worker	14290	poi	The Temple of the Blueleaf	2	none	0	300	180	4
-2400014	YAVIN4	yav_blue_leaf_temple	AREA	2	12.57	-37.30	12.52	0	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0
+2400013	YAVIN4	yav_blue_leaf_temple	AREA	2	10.80	-37.30	-0.01	-92	1	a kliknik dark worker	14290	poi	The Temple of the Blueleaf	2	none	0	300	180	4
+2400014	YAVIN4	yav_blue_leaf_temple	AREA	2	12.57	-37.30	12.52	43	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0
 2400015	YAVIN4	yav_blue_leaf_temple	AREA	2	12.87	-1.30	24.98	0	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0
 2400016	YAVIN4	yav_blue_leaf_temple	AREA	2	2.03	-1.30	-25.68	0	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0
-2400017	YAVIN4	yav_blue_leaf_temple	AREA	2	24.96	-1.30	10.10	0	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0
-2400018	YAVIN4	yav_blue_leaf_temple	AREA	2	7.25	-37.30	-16.09	0	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0
+2400017	YAVIN4	yav_blue_leaf_temple	AREA	2	24.96	-1.30	10.10	0	-37	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0
+2400018	YAVIN4	yav_blue_leaf_temple	AREA	2	7.25	-37.30	-16.09	-24	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0
 2400019	YAVIN4	yav_geonosian_cave	AREA	1	-2.70	10.90	10.80	0	1	a scientist	10355	dungeon	Geonosian Cave	1	none	0	300	120	0
 2400020	YAVIN4	yav_geonosian_cave	AREA	2	24.90	9.90	-7.60	0	1	a crazed Geonosian guard	10310	dungeon	Geonosian Cave	1	none	0	300	120	0
 2400021	YAVIN4	yav_geonosian_cave	AREA	2	29.10	10.40	-13.50	0	1	a crazed Geonosian guard	10310	dungeon	Geonosian Cave	1	none	0	300	120	0
@@ -131,17 +131,17 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 2400131	YAVIN4	yav_itp_vader_reb_bunker	AREA	18	7.90	-10.00	62.60	0	1	a Rebel trooper	13505	dungeon	?	1	none	0	300	120	0
 2400132	YAVIN4	yav_itp_vader_reb_bunker_outpost	AREA	3	-0.10	0.10	-5.30	0	1	a Rebel trooper	13505	dungeon	?	1	none	0	300	120	0
 2400133	YAVIN4	yav_itp_vader_reb_bunker_outpost	AREA	4	2.90	0.10	1.80	0	1	a Rebel trooper	13505	dungeon	?	1	none	0	300	120	0
-2400134	YAVIN4	yav_labor_outpost_house	AREA	4	8.30	0.60	-4.50	0	1	Wuioe Opca	2725	city	Labor Outpost	1	drinking	0	300	120	0
+2400134	YAVIN4	yav_labor_outpost_medium_house	EGG	4	8.30	0.60	-4.50	90	1	Wuioe Opca	2725	city	Labor Outpost	1	drinking	0	300	120	0
 2400135	YAVIN4	yav_labor_outpost_medium_house	EGG	1	1.59	0.62	1.08	39	1	Lt. Colonel Aqzow (Arkon's Havoc Pilot Trainer)	33960	city	Labor Outpost	1	none	0	300	120	0
 2400136	YAVIN4	yav_labor_outpost_small_house	EGG	1	-3.00	0.63	1.03	-4	1	Major Eker (Rebel Pilot Trainer)	33865	city	Labor Outpost	1	none	0	300	120	0
 2400137	YAVIN4	yav_woolamander_temple	AREA	3	-0.81	2.02	6.00	0	1	a woolamander gatherer	33290	poi	Woolamander Palace	2	none	0	300	180	4
 2400138	YAVIN4	yav_woolamander_temple	AREA	3	15.35	2.02	-0.47	0	1	a woolamander	33285	poi	Woolamander Palace	2	none	0	300	180	4
 2400139	YAVIN4	yav_woolamander_temple	AREA	3	-18.54	2.02	-0.40	0	1	a woolamander	33285	poi	Woolamander Palace	2	none	0	300	180	4
 2400140	YAVIN4	yav_woolamander_temple	AREA	7	-59.25	2.02	-11.06	0	1	a woolamander gatherer	33290	poi	Woolamander Palace	1	none	0	300	180	0
-2400141	YAVIN4	yav_woolamander_temple	AREA	7	-59.32	2.05	21.06	0	1	a woolamander harvester	33300	poi	Woolamander Palace	1	none	0	300	180	0
-2400142	YAVIN4	yav_woolamander_temple	AREA	7	-84.07	2.02	5.02	0	1	a woolamander harrower	33295	poi	Woolamander Palace	2	none	0	300	180	4
-2400143	YAVIN4	yav_woolamander_temple	AREA	9	53.39	2.02	4.98	0	1	a woolamander harvester	33300	poi	Woolamander Palace	2	none	0	300	180	4
-2400144	YAVIN4	yav_woolamander_temple	AREA	10	74.40	2.02	4.75	0	1	a woolamander reaper	33305	poi	Woolamander Palace	2	none	0	300	180	4
+2400141	YAVIN4	yav_woolamander_temple	AREA	7	-59.32	2.05	21.06	178	1	a woolamander harvester	33300	poi	Woolamander Palace	1	none	0	300	180	0
+2400142	YAVIN4	yav_woolamander_temple	AREA	7	-84.07	2.02	5.02	89	1	a woolamander harrower	33295	poi	Woolamander Palace	2	none	0	300	180	4
+2400143	YAVIN4	yav_woolamander_temple	AREA	9	53.39	2.02	4.98	-90	1	a woolamander harvester	33300	poi	Woolamander Palace	2	none	0	300	180	4
+2400144	YAVIN4	yav_woolamander_temple	AREA	10	74.40	2.02	4.75	86	1	a woolamander reaper	33305	poi	Woolamander Palace	2	none	0	300	180	4
 2400145	YAVIN4	yav_world	AREA	0	-1154.81	82.93	-2909.28	0	1	a giant crystal snake	10415	-	-	3	none	0	300	180	6
 2400146	YAVIN4	yav_world	AREA	0	-1581.97	9.09	6764.79	0	1	a Dark Jedi Elder	31520	-	-	1	none	0	300	120	2
 2400147	YAVIN4	yav_world	AREA	0	-1589.17	39.70	-814.87	0	1	a giant angler	10395	-	-	5	none	0	300	180	10
@@ -220,9 +220,9 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 2400220	YAVIN4	yav_world	AREA	0	-6689.12	28.04	-2247.14	0	1	a Smuggler leader	33410	-	-	1	none	0	300	180	0
 2400221	YAVIN4	yav_world	AREA	0	-6895.39	14.36	-2038.54	0	1	a thief	30975	-	-	3	none	0	300	180	6
 2400222	YAVIN4	yav_world	AREA	0	-6896.79	572.10	1081.54	0	1	an angler	205	-	-	3	none	0	300	180	6
-2400223	YAVIN4	yav_world	AREA	0	-690.25	92.83	-2014.99	0	1	a kliknik dark hunter	14275	-	-	2	none	0	300	180	4
-2400224	YAVIN4	yav_world	QUEST	0	-6900.30	73.00	-5655.07	0	1	Soci	33430	-	-	1	none	0	300	180	0
-2400225	YAVIN4	yav_world	AREA	0	-6912.79	73.00	-5736.72	0	1	Nore Brrea	21235	-	-	1	none	0	300	120	0
+2400223	YAVIN4	yav_world	AREA	0	-690.25	92.83	-2014.99	-117	1	a kliknik dark hunter	14275	poi	Woolamander Palace	2	none	0	300	180	4
+2400224	YAVIN4	yav_world	QUEST	0	-6900.30	73.00	-5655.07	-161	1	Soci	33430	city	Labor Outpost	1	none	0	300	180	0
+2400225	YAVIN4	yav_world	EGG	0	-6912.79	73.00	-5736.72	74	1	Nore Brrea	21235	city	Labor Outpost	1	none	0	300	120	0
 2400226	YAVIN4	yav_world	AREA	0	-6924.56	69.33	6049.61	0	1	a master thief	15905	-	-	3	none	0	300	180	6
 2400227	YAVIN4	yav_world	AREA	0	-6942.03	45.68	-908.28	0	1	a Rebel scout	24670	-	-	3	none	0	300	180	6
 2400228	YAVIN4	yav_world	AREA	0	-6942.29	196.95	-105.68	0	1	a Rebel scout	24670	-	-	1	none	0	300	180	0
@@ -258,29 +258,29 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 2400258	YAVIN4	yav_world	AREA	0	-7450.42	224.56	3430.49	0	1	an Imperial trooper	13225	-	-	3	none	0	300	180	6
 2400259	YAVIN4	yav_world	AREA	0	-7458.68	341.70	2929.64	0	1	a Rebel scout	24670	-	-	3	none	0	300	180	6
 2400260	YAVIN4	yav_world	AREA	0	-7464.78	8.87	7038.75	0	1	a kliknik warrior	14340	-	-	5	none	0	300	180	10
-2400261	YAVIN4	yav_world	AREA	0	-747.50	84.00	-2055.49	0	1	a kliknik dark worker	14290	poi	Woolamander Palace	3	none	0	300	180	6
+2400261	YAVIN4	yav_world	AREA	0	-747.50	84.00	-2055.49	68	1	a kliknik dark worker	14290	poi	Woolamander Palace	3	none	0	300	180	6
 2400262	YAVIN4	yav_world	AREA	0	-7497.36	425.48	2590.57	0	1	a giant crystal snake	10415	-	-	3	none	0	300	180	6
-2400263	YAVIN4	yav_world	AREA	0	-751.50	84.00	-2086.15	0	1	a kliknik dark worker	14290	poi	Woolamander Palace	3	none	0	300	180	6
+2400263	YAVIN4	yav_world	AREA	0	-751.50	84.00	-2086.15	135	1	a kliknik dark worker	14290	poi	Woolamander Palace	3	none	0	300	180	6
 2400264	YAVIN4	yav_world	AREA	0	-7555.63	421.42	2121.15	0	1	a master thief	15905	-	-	3	none	0	300	180	6
 2400265	YAVIN4	yav_world	AREA	0	-7558.80	30.72	-5906.55	0	1	a tanc mite	30315	-	-	3	none	0	300	180	6
 2400266	YAVIN4	yav_world	AREA	0	-7569.39	20.59	-1094.07	0	1	a Rebel scout	24670	-	-	3	none	0	300	180	6
 2400267	YAVIN4	yav_world	AREA	0	-7572.08	227.06	121.24	0	1	a master thief	15905	-	-	3	none	0	300	180	6
 2400268	YAVIN4	yav_world	AREA	0	-7601.51	39.97	5428.47	0	1	a giant tanc mite	10535	-	-	3	none	0	300	180	6
-2400269	YAVIN4	yav_world	AREA	0	-800.75	84.00	-1979.16	0	1	a kliknik dark worker	14290	poi	Woolamander Palace	3	none	0	300	180	6
-2400270	YAVIN4	yav_world	AREA	0	-823.97	84.00	-2138.66	0	1	a kliknik dark worker	14290	poi	Woolamander Palace	3	none	0	300	180	6
-2400271	YAVIN4	yav_world	AREA	0	-831.14	84.00	-1974.75	0	1	a kliknik dark worker	14290	poi	Woolamander Palace	3	none	0	300	180	6
-2400272	YAVIN4	yav_world	AREA	0	-868.32	84.00	-2131.52	0	1	a kliknik dark worker	14290	poi	Woolamander Palace	3	none	0	300	180	6
-2400273	YAVIN4	yav_world	AREA	0	-879.82	84.78	-2047.74	0	1	a kliknik dark defender	14270	poi	Woolamander Palace	3	none	0	300	180	6
-2400274	YAVIN4	yav_world	AREA	0	-903.64	84.00	-2021.32	0	1	a kliknik dark worker	14290	poi	Woolamander Palace	3	none	0	300	180	6
-2400275	YAVIN4	yav_world	AREA	0	-910.05	84.00	-2070.91	0	1	a kliknik dark worker	14290	poi	Woolamander Palace	3	none	0	300	180	6
-2400276	YAVIN4	yav_world	AREA	0	-912.27	84.72	-2131.02	0	1	A Stormtrooper	25390	poi	Woolamander Palace	1	none	0	300	120	2
-2400277	YAVIN4	yav_world	AREA	0	-920.50	84.00	-2101.68	0	1	A Stormtrooper	25390	poi	Woolamander Palace	1	none	0	300	120	2
-2400278	YAVIN4	yav_world	AREA	0	-936.55	86.83	-2123.44	0	1	a Stormtrooper squad leader	25385	poi	Woolamander Palace	1	none	0	300	120	0
-2400279	YAVIN4	yav_world	AREA	0	-937.48	83.69	-2080.60	0	1	A Stormtrooper	25390	poi	Woolamander Palace	1	none	0	300	120	2
-2400280	YAVIN4	yav_world	AREA	0	-940.61	85.97	-2114.37	0	1	A Stormtrooper	25390	poi	Woolamander Palace	1	none	0	300	120	2
-2400281	YAVIN4	yav_world	AREA	0	-953.83	82.10	-2094.93	0	1	A Stormtrooper	25390	poi	Woolamander Palace	1	none	0	300	120	2
-2400282	YAVIN4	yav_world	AREA	0	-962.08	84.71	-2126.91	0	1	A Stormtrooper	25390	poi	Woolamander Palace	1	none	0	300	120	2
-2400283	YAVIN4	yav_world	AREA	0	-986.60	85.32	-2170.97	0	1	a kliknik dark hunter	14275	poi	Woolamander Palace	2	none	0	300	180	4
+2400269	YAVIN4	yav_world	AREA	0	-800.75	84.00	-1979.16	49	1	a kliknik dark worker	14290	poi	Woolamander Palace	3	none	0	300	180	6
+2400270	YAVIN4	yav_world	AREA	0	-823.97	84.00	-2138.66	-142	1	a kliknik dark worker	14290	poi	Woolamander Palace	3	none	0	300	180	6
+2400271	YAVIN4	yav_world	AREA	0	-831.14	84.00	-1974.75	-29	1	a kliknik dark worker	14290	poi	Woolamander Palace	3	none	0	300	180	6
+2400272	YAVIN4	yav_world	AREA	0	-868.32	84.00	-2131.52	-90	1	a kliknik dark worker	14290	poi	Woolamander Palace	3	none	0	300	180	6
+2400273	YAVIN4	yav_world	AREA	0	-879.82	84.78	-2047.74	-77	1	a kliknik dark defender	14270	poi	Woolamander Palace	3	none	0	300	180	6
+2400274	YAVIN4	yav_world	AREA	0	-903.64	84.00	-2021.32	-71	1	a kliknik dark worker	14290	poi	Woolamander Palace	3	none	0	300	180	6
+2400275	YAVIN4	yav_world	AREA	0	-910.05	84.00	-2070.91	-138	1	a kliknik dark worker	14290	poi	Woolamander Palace	3	none	0	300	180	6
+2400276	YAVIN4	yav_world	AREA	0	-912.27	84.72	-2131.02	101	1	A Stormtrooper	25390	poi	Woolamander Palace	1	none	0	300	120	2
+2400277	YAVIN4	yav_world	AREA	0	-920.50	84.00	-2101.68	31	1	A Stormtrooper	25390	poi	Woolamander Palace	1	none	0	300	120	2
+2400278	YAVIN4	yav_world	AREA	0	-937.40	86.80	-2123.00	15	1	a Stormtrooper squad leader	25385	poi	Woolamander Palace	1	none	0	300	120	0
+2400279	YAVIN4	yav_world	AREA	0	-937.48	83.69	-2080.60	56	1	A Stormtrooper	25390	poi	Woolamander Palace	1	none	0	300	120	2
+2400280	YAVIN4	yav_world	AREA	0	-940.61	85.97	-2114.37	167	1	A Stormtrooper	25390	poi	Woolamander Palace	1	none	0	300	120	2
+2400281	YAVIN4	yav_world	AREA	0	-953.83	82.10	-2094.93	-27	1	A Stormtrooper	25390	poi	Woolamander Palace	1	none	0	300	120	2
+2400282	YAVIN4	yav_world	AREA	0	-962.08	84.71	-2126.91	-111	1	A Stormtrooper	25390	poi	Woolamander Palace	1	none	0	300	120	2
+2400283	YAVIN4	yav_world	AREA	0	-986.60	85.32	-2170.97	44	1	a kliknik dark hunter	14275	poi	Woolamander Palace	2	none	0	300	180	4
 2400284	YAVIN4	yav_world	AREA	0	1590.47	100.39	1563.77	0	1	a Rebel commando	24375	-	-	4	none	0	300	180	8
 2400285	YAVIN4	yav_world	AREA	0	1596.37	102.64	1531.17	0	1	a Rebel commando	24375	-	-	4	none	0	300	180	8
 2400286	YAVIN4	yav_world	AREA	0	2127.41	83.78	977.32	0	1	a thug	30995	-	-	1	none	0	300	180	0

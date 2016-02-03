@@ -797,18 +797,18 @@ tat_mostaike_medium_house	TATOOINE	1154120	housing_tatt_style01_med.iff	Tatooine
 tat_pirate_outpost	TATOOINE	-233342755693134373	pirate_outpost.iff	Tatooine - Pirate Outpost	6	-1764	31	-3346
 tat_ranchers_house	TATOOINE	4005938	ranchers_house_tatooine.iff	Tatooine - Ranchers House	8	4974	180	-4696
 tat_romo_vax_bunker	TATOOINE	-227713257244161584	tatooine_romo_vax_bunker.iff	Tatooine - Romo Vax Bunker	10	-5056	44	-6976
+tat_sand_slum_pirate_bunker	TATOOINE	-240098155146063574	tatooine_tusken_bunker.iff	Tatooine - Sand Slum Pirate Bunker	10	5684	180	-5745
 tat_sand_splitters_cave	TATOOINE	-225742933305868191	tatooine_sand_splitters_cave.iff	Tatooine - Sand Splitters Cave	11	-6754	48	-5606
 tat_sennex_camp	TATOOINE	-229120631042474017	sennex_camp.iff	Tatooine - Sennex Camp	34	-4924	10	1251
 tat_sennex_cave	TATOOINE	5995564	tatooine_beetle_cave.iff	Tatooine - Sennex Cave	11	6544	115	-1294
 tat_sennex_slave_bunker	TATOOINE	-235313081201681839	tatooine_valarian_strategic_bunker.iff	Tatooine - Sennex Slave Bunker	22	56	84	-5257
-tat_shed	TATOOINE	-233342755693134365	outpost_shed.iff	Tatooine -  Shed	6	-1785	31	-3338
+tat_shed	TATOOINE	-233342755693134365	outpost_shed.iff	Tatooine - Shed	6	-1785	31	-3338
 tat_small_house1	TATOOINE	1106560	housing_tatt_style02_small.iff	Tatooine - Small House 1	10	-5337	40	-4422
 tat_small_house2	TATOOINE	1106549	housing_tatt_style02_small.iff	Tatooine - Small House 2	10	-5327	40	-4472
 tat_small_house3	TATOOINE	1106573	housing_tatt_style02_small.iff	Tatooine - Small House 3	10	-5290	40	-4457
 tat_squill_cave	TATOOINE	7125559	tatooine_squill_cave.iff	Tatooine - Squill Cave	29	39	156	-113
 tat_tosche_station	TATOOINE	1514805	poi_tosche_station.iff	Tatooine - Tosche Station	12	-165	65	-5298
-tat_tusken_bunker1	TATOOINE	4235596	tatooine_tusken_bunker.iff	Tatooine - Tusken Bunker 1	10	-1474	41	-175
-tat_tusken_bunker2	TATOOINE	-240098155146063574	tatooine_tusken_bunker.iff	Tatooine - Tusken Bunker 2	10	5684	180	-5745
+tat_tusken_bunker	TATOOINE	4235596	tatooine_tusken_bunker.iff	Tatooine - Tusken Bunker	10	-1474	41	-175
 tat_vaigon_shinn_hideout	TATOOINE	-237564882020792444	tatooine_vaigon_shinn_bunker.iff	Tatooine - Vaigon Shinn Hideout	10	3420	8	-5475
 tat_valarian_bunker	TATOOINE	-225742933415027318	tatooine_small_valarian_bunker.iff	Tatooine - Valarian Bunker	10	-6257	35	-5942
 tat_valarian_hackers_bunker	TATOOINE	-227713256216451886	tatooine_valarian_hackers_bunker.iff	Tatooine - Valarian Hackers Bunker	9	-5384	65	-6896
@@ -859,8 +859,8 @@ yav_labor_outpost_medium_house	YAVIN4	3035375	ply_corl_house_m_s01_fp1.iff	Yavin
 yav_labor_outpost_pirate	YAVIN4	3035390	pirate_outpost.iff	Yavin 4 - Labor Outpost / Pirate	6	-6942	73	-5765
 yav_labor_outpost_shed	YAVIN4	3035397	outpost_shed.iff	Yavin 4 - Labor Outpost / Shed	6	-6925	73	-5765
 yav_labor_outpost_small_house	YAVIN4	3035371	ply_corl_house_s_s02_fp1.iff	Yavin 4 - Labor Outpost / Small House	3	-6970	73	-5658
-yav_labour_outpost_cloning	YAVIN4	3035593	outpost_cloning_facility.iff	Yavin 4 - Labor Outpost Cloning	6	-6980	73	-5762
-yav_labour_outpost_starport	YAVIN4	3035484	outpost_starport.iff	Yavin 4 - Labor Outpost / Starport	1	-6939	73	-5706
+yav_labor_outpost_cloning	YAVIN4	3035593	outpost_cloning_facility.iff	Yavin 4 - Labor Outpost Cloning	6	-6980	73	-5762
+yav_labor_outpost_starport	YAVIN4	3035484	outpost_starport.iff	Yavin 4 - Labor Outpost / Starport	1	-6939	73	-5706
 yav_massassi_base	YAVIN4	-461056012634303325	gcw_battlefield_base.iff	Yavin 4 - BF Massassi / Base	10	1015	66	426
 yav_massassi_imp_field_hospital1	YAVIN4	-461056011857864532	military_imperial_field_hospital.iff	Yavin 4 - BF Massassi / Imp Field Hospital 1	9	1015	68	812
 yav_massassi_imp_tac_center1	YAVIN4	-461056012246216950	military_imperial_tactical_center.iff	Yavin 4 - BF Massassi / Imp Tac Center 1	10	873	62	640
