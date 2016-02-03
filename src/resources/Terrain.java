@@ -44,6 +44,7 @@ public enum Terrain {
 	CREATURE_TEST			("terrain/creature_test.trn"),
 	DANTOOINE				("terrain/dantooine.trn"),
 	DATHOMIR				("terrain/dathomir.trn"),
+	DEV_AREA				("terrain/tatooine.trn"),
 	DUNGEON1				("terrain/dungeon1.trn"),
 	ENDOR_ASOMMERS			("terrain/endor_asommers.trn"),
 	ENDOR					("terrain/endor.trn"),

@@ -59,6 +59,7 @@ import org.eclipse.jgit.revwalk.RevCommit;
 
 import resources.Location;
 import resources.Race;
+import resources.Terrain;
 import resources.config.ConfigFile;
 import resources.control.Intent;
 import resources.control.Manager;
@@ -155,7 +156,8 @@ public class ZoneManager extends Manager {
 	private void startScene(CreatureObject object, Location newLocation) {
 		long time = (long) (ProjectSWG.getCoreTime() / 1E3);
 		Race race = ((CreatureObject)object).getRace();
-		sendPacket(object.getOwner(), new CmdStartScene(false, object.getObjectId(), race, newLocation, time, (int)(System.currentTimeMillis()/1E3)));
+		boolean ignoreSnapshots = newLocation.getTerrain() == Terrain.DEV_AREA;
+		sendPacket(object.getOwner(), new CmdStartScene(ignoreSnapshots, object.getObjectId(), race, newLocation, time, (int)(System.currentTimeMillis()/1E3)));
 		recursiveCreateObject(object, object.getOwner());
 	}
 	
