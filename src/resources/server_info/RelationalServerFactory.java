@@ -14,7 +14,7 @@ import java.util.Map;
 public class RelationalServerFactory {
 	
 	private static final RelationalServerFactory INSTANCE = new RelationalServerFactory();
-	private static final String BASE_PATH = "serverdata/";
+	private static final String BASE_PATH = "serverdata" + File.separator;
 	private static final Map <String, Object> FILE_LOAD_LOCKING = new HashMap<>();
 	
 	public static RelationalServerData getServerData(String file, String ... tables) {
@@ -74,7 +74,7 @@ public class RelationalServerFactory {
 	private boolean loadTables(RelationalServerData data, File parent, String [] tables) {
 		for (String table : tables) {
 			String path = generatePath(parent, table);
-			table = path.substring(path.lastIndexOf('/')+1, path.lastIndexOf('.'));
+			table = path.substring(path.lastIndexOf(File.separatorChar)+1, path.lastIndexOf('.'));
 			if (!data.linkTableWithSdb(table, path))
 				return false;
 		}
