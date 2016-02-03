@@ -1,0 +1,706 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	creature_name	creature_id	spawn_category	spawn_area	amount	behaviour	patrol_id	max_spawn_time	min_spawn_time	float_radius
+INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGER NOT NULL	REAL	REAL	REAL	REAL	INTEGER	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER NOT NULL	TEXT NOT NULL	INTEGER	INTEGER NOT NULL	INTEGER NOT NULL	INTEGER
+1400003	DATHOMIR	dat_aurilia_adv_gh	AREA	11	8.60	1.80	-22.10	0	1	Tusken Fanatic	21075	city	Aurilia	1	none	0	300	120	0
+1400004	DATHOMIR	dat_aurilia_adv_gh	AREA	11	3.00	1.80	-17.30	0	1	Major Appleton (an Imperial investigator)	12085	city	Aurilia	1	none	0	300	120	0
+1400005	DATHOMIR	dat_aurilia_adv_gh	AREA	10	11.40	1.80	-10.90	0	1	an Imperial recruiter	13170	city	Aurilia	1	none	0	300	120	0
+1400006	DATHOMIR	dat_aurilia_adv_gh	AREA	10	11.30	1.80	-6.80	0	1	an Imperial snowtrooper	11585	city	Aurilia	1	none	0	300	120	0
+1400007	DATHOMIR	dat_aurilia_adv_gh	AREA	11	-8.90	1.80	-20.90	0	1	a Corellia University teaching assistant	8435	city	Aurilia	1	none	0	300	120	0
+1400008	DATHOMIR	dat_aurilia_adv_gh	AREA	8	-21.00	2.30	11.50	0	1	Nym's Envoy	21060	city	Aurilia	1	none	0	300	120	0
+1400009	DATHOMIR	dat_aurilia_adv_gh	AREA	11	-2.70	1.80	-16.70	0	1	Hirael Chindiaye (an independent investor)	12090	city	Aurilia	1	none	0	300	120	0
+1400010	DATHOMIR	dat_aurilia_adv_gh	AREA	10	-12.00	1.80	-11.80	0	1	a Rebel recruiter	24640	city	Aurilia	1	none	0	300	120	0
+1400011	DATHOMIR	dat_aurilia_adv_gh	AREA	10	-10.30	1.80	-6.00	0	1	a cold-weather Rebel trooper	11590	city	Aurilia	1	none	0	300	120	0
+1400012	DATHOMIR	dat_aurilia_kakirks_collections	AREA	1	0.10	1.20	-1.60	0	1	Kakirk (Nexus Collector)	21055	city	Aurilia	1	none	0	300	120	0
+1400013	DATHOMIR	dat_aurilia_prisoner_hut1	AREA	1	0.40	0.60	-1.60	0	1	a Nightsister prisoner	31215	city	Aurilia	1	none	0	300	120	0
+1400014	DATHOMIR	dat_aurilia_prisoner_hut2	AREA	1	-0.10	0.60	-0.90	0	1	Mellichae	16260	city	Aurilia	1	none	0	300	120	0
+1400015	DATHOMIR	dat_aurilia_pyramid_hut1	AREA	1	2.10	1.20	-2.20	0	1	Rohak (Town Elder)	9760	city	Aurilia	1	none	0	300	120	0
+1400016	DATHOMIR	dat_aurilia_pyramid_hut4	AREA	1	-1.20	1.20	-1.50	0	1	Dageerin	9800	city	Aurilia	1	none	0	300	120	0
+1400017	DATHOMIR	dat_aurilia_trinket_shop2	AREA	1	0.40	1.20	0.00	0	1	Sivarra Mecheaux	9790	city	Aurilia	1	none	0	300	120	0
+1400018	DATHOMIR	dat_aurilia_trinket_shop2	AREA	1	-2.10	1.20	-2.70	0	1	2-1B (medical droid)	9745	city	Aurilia	1	none	0	300	120	0
+1400019	DATHOMIR	dat_aurilia_vansics_scrap	AREA	1	-0.60	1.20	-1.00	0	1	Vansic (a junk dealer)	390	city	Aurilia	1	none	0	300	120	0
+1400020	DATHOMIR	dat_imp_weapons_research_facility	AREA	10	40.00	-12.00	58.80	0	1	a Meatlump pronk	19775	dungeon	Imperial Weapons Research Facility	1	none	0	300	120	0
+1400021	DATHOMIR	dat_imp_weapons_research_facility	AREA	13	39.90	-20.00	132.50	0	1	a Meatlump pronk	19775	dungeon	Imperial Weapons Research Facility	1	none	0	300	120	0
+1400022	DATHOMIR	dat_imp_weapons_research_facility	AREA	14	39.20	-12.00	10.60	0	1	a Meatlump pronk	19775	dungeon	Imperial Weapons Research Facility	1	none	0	300	120	0
+1400023	DATHOMIR	dat_imp_weapons_research_facility	AREA	14	39.00	-12.00	0.60	0	1	a Meatlump pronk	19775	dungeon	Imperial Weapons Research Facility	1	none	0	300	120	0
+1400024	DATHOMIR	dat_imp_weapons_research_facility	AREA	14	36.80	-12.00	19.60	0	1	a Meatlump pronk	19775	dungeon	Imperial Weapons Research Facility	1	none	0	300	120	0
+1400025	DATHOMIR	dat_imp_weapons_research_facility	AREA	13	35.50	-12.00	94.60	0	1	a Meatlump pronk	19775	dungeon	Imperial Weapons Research Facility	1	none	0	300	120	0
+1400026	DATHOMIR	dat_imp_weapons_research_facility	AREA	13	32.30	-20.00	132.40	0	1	a Meatlump pronk	19775	dungeon	Imperial Weapons Research Facility	1	none	0	300	120	0
+1400027	DATHOMIR	dat_imp_weapons_research_facility	AREA	10	30.50	-12.00	35.20	0	1	a Meatlump pronk	19775	dungeon	Imperial Weapons Research Facility	1	none	0	300	120	0
+1400028	DATHOMIR	dat_imp_weapons_research_facility	AREA	5	3.10	-12.00	35.30	0	1	a Meatlump pronk	19775	dungeon	Imperial Weapons Research Facility	1	none	0	300	120	0
+1400029	DATHOMIR	dat_imp_weapons_research_facility	AREA	13	29.70	-20.00	118.10	0	1	a Meatlump pronk	19775	dungeon	Imperial Weapons Research Facility	1	none	0	300	120	0
+1400030	DATHOMIR	dat_imp_weapons_research_facility	AREA	10	29.50	-12.00	70.90	0	1	a Meatlump pronk	19775	dungeon	Imperial Weapons Research Facility	1	none	0	300	120	0
+1400031	DATHOMIR	dat_imp_weapons_research_facility	AREA	14	24.80	-12.00	7.60	0	1	a Meatlump pronk	19775	dungeon	Imperial Weapons Research Facility	1	none	0	300	120	0
+1400032	DATHOMIR	dat_imp_weapons_research_facility	AREA	14	24.60	-12.00	17.80	0	1	a Meatlump pronk	19775	dungeon	Imperial Weapons Research Facility	1	none	0	300	120	0
+1400033	DATHOMIR	dat_imp_weapons_research_facility	AREA	14	20.40	-12.00	-0.80	0	1	a Meatlump pronk	19775	dungeon	Imperial Weapons Research Facility	1	none	0	300	120	0
+1400034	DATHOMIR	dat_imp_weapons_research_facility	AREA	5	2.70	-12.00	58.50	0	1	a Meatlump pronk	19775	dungeon	Imperial Weapons Research Facility	1	none	0	300	120	0
+1400035	DATHOMIR	dat_imp_weapons_research_facility	AREA	5	18.30	-12.00	47.70	0	1	a Meatlump pronk	19775	dungeon	Imperial Weapons Research Facility	1	none	0	300	120	0
+1400036	DATHOMIR	dat_imp_weapons_research_facility	AREA	15	11.20	-12.00	3.00	0	1	a Meatlump pronk	19775	dungeon	Imperial Weapons Research Facility	1	none	0	300	120	0
+1400037	DATHOMIR	dat_imp_weapons_research_facility	AREA	20	-8.50	-20.00	85.30	0	1	a Meatlump pronk	19775	dungeon	Imperial Weapons Research Facility	1	none	0	300	120	0
+1400038	DATHOMIR	dat_imp_weapons_research_facility	AREA	7	-71.80	-20.00	48.60	0	1	Dephax Stain (a Meatlump lieutenant)	19765	dungeon	Imperial Weapons Research Facility	1	none	0	300	120	0
+1400039	DATHOMIR	dat_imp_weapons_research_facility	AREA	7	-70.80	-20.00	25.70	0	1	a Meatlump pronk	19775	dungeon	Imperial Weapons Research Facility	1	none	0	300	120	0
+1400040	DATHOMIR	dat_imp_weapons_research_facility	AREA	8	-70.60	-20.00	13.70	0	1	a Meatlump pronk	19775	dungeon	Imperial Weapons Research Facility	1	none	0	300	120	0
+1400041	DATHOMIR	dat_imp_weapons_research_facility	AREA	7	-68.10	-20.00	64.20	0	1	a Meatlump pronk	19775	dungeon	Imperial Weapons Research Facility	1	none	0	300	120	0
+1400042	DATHOMIR	dat_imp_weapons_research_facility	AREA	7	-61.30	-20.00	50.60	0	1	a Meatlump pronk	19775	dungeon	Imperial Weapons Research Facility	1	none	0	300	120	0
+1400043	DATHOMIR	dat_imp_weapons_research_facility	AREA	8	-55.50	-20.00	12.90	0	1	a Meatlump pronk	19775	dungeon	Imperial Weapons Research Facility	1	none	0	300	120	0
+1400044	DATHOMIR	dat_imp_weapons_research_facility	AREA	7	-54.50	-20.00	31.20	0	1	a Meatlump pronk	19775	dungeon	Imperial Weapons Research Facility	1	none	0	300	120	0
+1400045	DATHOMIR	dat_imp_weapons_research_facility	AREA	7	-51.60	-20.00	48.00	0	1	a Meatlump pronk	19775	dungeon	Imperial Weapons Research Facility	1	none	0	300	120	0
+1400046	DATHOMIR	dat_imp_weapons_research_facility	AREA	21	-4.70	-20.00	74.80	0	1	a Meatlump pronk	19775	dungeon	Imperial Weapons Research Facility	1	none	0	300	120	0
+1400047	DATHOMIR	dat_imp_weapons_research_facility	AREA	21	-4.50	-20.00	66.50	0	1	a Meatlump pronk	19775	dungeon	Imperial Weapons Research Facility	1	none	0	300	120	0
+1400048	DATHOMIR	dat_imp_weapons_research_facility	AREA	19	-32.60	-20.00	100.90	0	1	a Meatlump pronk	19775	dungeon	Imperial Weapons Research Facility	1	none	0	300	120	0
+1400049	DATHOMIR	dat_imp_weapons_research_facility	AREA	18	-30.60	-20.00	19.00	0	1	a Meatlump pronk	19775	dungeon	Imperial Weapons Research Facility	1	none	0	300	120	0
+1400050	DATHOMIR	dat_imp_weapons_research_facility	AREA	18	-30.50	-20.00	86.80	0	1	a Meatlump pronk	19775	dungeon	Imperial Weapons Research Facility	1	none	0	300	120	0
+1400051	DATHOMIR	dat_imp_weapons_research_facility	AREA	16	-21.50	-20.00	2.80	0	1	a Meatlump pronk	19775	dungeon	Imperial Weapons Research Facility	1	none	0	300	120	0
+1400052	DATHOMIR	dat_imp_weapons_research_facility	AREA	5	-14.80	-12.00	46.90	0	1	a Meatlump pronk	19775	dungeon	Imperial Weapons Research Facility	1	none	0	300	120	0
+1400053	DATHOMIR	dat_imp_weapons_research_facility	AREA	16	-12.80	-20.00	3.00	0	1	a Meatlump pronk	19775	dungeon	Imperial Weapons Research Facility	1	none	0	300	120	0
+1400054	DATHOMIR	dat_imp_weapons_research_facility	AREA	19	-12.40	-20.00	100.70	0	1	a Meatlump pronk	19775	dungeon	Imperial Weapons Research Facility	1	none	0	300	120	0
+1400055	DATHOMIR	dat_ns_cave	AREA	6	3.10	3.00	-5.00	0	1	Aujante K'lee	385	dungeon	SMC Stronghold	1	none	0	1800	1500	0
+1400056	DATHOMIR	dat_ns_cave	AREA	10	26.00	2.00	-4.10	0	1	a Singing Mountain clan slave	26370	dungeon	SMC Stronghold	1	none	0	1800	1500	0
+1400057	DATHOMIR	dat_ns_cave	AREA	9	24.80	2.00	-12.50	0	1	a Singing Mountain clan slave	26370	dungeon	SMC Stronghold	1	none	0	1800	1500	0
+1400058	DATHOMIR	dat_ns_cave	AREA	8	23.40	2.00	-21.10	0	1	a Singing Mountain clan slave	26370	dungeon	SMC Stronghold	1	none	0	1800	1500	0
+1400059	DATHOMIR	dat_ns_cave	AREA	1	2.10	2.00	19.40	0	1	a Singing Mountain clan sentry	26320	dungeon	SMC Stronghold	1	none	0	1800	1500	0
+1400060	DATHOMIR	dat_ns_cave	AREA	11	16.50	2.00	7.40	0	1	a Singing Mountain clan slave	26370	dungeon	SMC Stronghold	1	none	0	1800	1500	0
+1400061	DATHOMIR	dat_ns_cave	AREA	7	16.40	2.00	-10.90	0	1	a Singing Mountain clan sentry	26320	dungeon	SMC Stronghold	1	none	0	1800	1500	0
+1400062	DATHOMIR	dat_ns_cave	AREA	3	-22.30	2.00	5.10	0	1	a Singing Mountain clan huntress	26345	dungeon	SMC Stronghold	1	none	0	1800	1500	0
+1400063	DATHOMIR	dat_ns_cave	AREA	5	-14.30	2.00	-21.10	0	1	a Singing Mountain clan initiate	26350	dungeon	SMC Stronghold	1	none	0	1800	1500	0
+1400064	DATHOMIR	dat_ns_cave	AREA	4	-13.40	2.00	-2.00	0	1	a rancor	13695	dungeon	SMC Stronghold	1	none	0	1800	1500	0
+1400065	DATHOMIR	dat_ns_cave	AREA	2	-12.80	2.40	4.50	0	1	a Singing Mountain clan dragoon	26335	dungeon	SMC Stronghold	1	none	0	1800	1500	0
+1400066	DATHOMIR	dat_ns_cave	AREA	2	-12.70	2.40	6.40	0	1	a Singing Mountain clan sentry	26320	dungeon	SMC Stronghold	1	none	0	1800	1500	0
+1400067	DATHOMIR	dat_ns_cave	AREA	2	-12.60	2.00	9.10	0	1	a Singing Mountain clan guardian	26340	dungeon	SMC Stronghold	1	none	0	1800	1500	0
+1400068	DATHOMIR	dat_ns_cave	AREA	4	-12.40	2.00	-5.50	0	1	a rancor	13695	dungeon	SMC Stronghold	1	none	0	1800	1500	0
+1400069	DATHOMIR	dat_ns_cave	AREA	4	-11.90	2.00	-3.50	0	1	a Singing Mountain clan rancor tamer	26360	dungeon	SMC Stronghold	1	none	0	1800	1500	0
+1400070	DATHOMIR	dat_ns_cave	AREA	2	-11.40	2.40	5.40	0	1	a Singing Mountain clan scout	26365	dungeon	SMC Stronghold	1	none	0	1800	1500	0
+1400071	DATHOMIR	dat_ns_rancor_cave	AREA	5	54.50	-56.50	-159.50	0	1	a Nightsister rancor tamer	21135	dungeon	NS Rancor Cave	1	npc_imperial	0	900	600	1
+1400072	DATHOMIR	dat_ns_rancor_cave	AREA	5	53.10	-56.70	-160.80	0	1	a Nightsister rancor tamer	21135	dungeon	NS Rancor Cave	1	npc_imperial	0	900	600	1
+1400073	DATHOMIR	dat_ns_rancor_cave	AREA	5	50.60	-56.50	-172.00	0	1	a Nightsister bull rancor	21090	dungeon	NS Rancor Cave	1	none	0	900	600	1
+1400074	DATHOMIR	dat_ns_rancor_cave	AREA	4	50.50	-46.00	-92.70	0	1	a Nightsister spell weaver	21160	dungeon	NS Rancor Cave	1	conversation	0	900	600	1
+1400075	DATHOMIR	dat_ns_rancor_cave	AREA	3	5.90	-40.80	-72.90	0	1	a Nightsister slave	21170	dungeon	NS Rancor Cave	1	sad	0	900	600	1
+1400076	DATHOMIR	dat_ns_rancor_cave	AREA	3	5.60	-41.00	-75.20	0	1	a Nightsister rancor	21130	dungeon	NS Rancor Cave	1	none	0	900	600	1
+1400077	DATHOMIR	dat_ns_rancor_cave	AREA	3	5.10	-40.50	-69.70	0	1	a Nightsister initiate	21115	dungeon	NS Rancor Cave	1	happy	0	900	600	1
+1400078	DATHOMIR	dat_ns_rancor_cave	AREA	4	48.40	-46.30	-92.60	0	1	a Nightsister rancor tamer	21135	dungeon	NS Rancor Cave	1	npc_imperial	0	900	600	1
+1400079	DATHOMIR	dat_ns_rancor_cave	AREA	4	48.00	-46.20	-95.60	0	1	a Nightsister rancor	21130	dungeon	NS Rancor Cave	1	none	0	900	600	1
+1400080	DATHOMIR	dat_ns_rancor_cave	AREA	4	41.40	-46.10	-59.80	0	1	a Nightsister rancor	21130	dungeon	NS Rancor Cave	1	none	0	900	600	1
+1400081	DATHOMIR	dat_ns_rancor_cave	AREA	5	39.00	-54.10	-148.10	0	1	a Nightsister rancor	21130	dungeon	NS Rancor Cave	1	none	0	900	600	1
+1400082	DATHOMIR	dat_ns_rancor_cave	AREA	4	37.30	-46.00	-61.90	0	1	a Nightsister rancor tamer	21135	dungeon	NS Rancor Cave	1	npc_accusing	0	900	600	1
+1400083	DATHOMIR	dat_ns_rancor_cave	AREA	5	36.20	-55.40	-153.10	0	1	a Nightsister enraged rancor	21105	dungeon	NS Rancor Cave	1	none	0	900	600	1
+1400084	DATHOMIR	dat_ns_rancor_cave	AREA	2	3.00	-25.70	-28.70	0	1	a Nightsister initiate	21115	dungeon	NS Rancor Cave	1	conversation	0	900	600	1
+1400085	DATHOMIR	dat_ns_rancor_cave	AREA	4	27.80	-45.50	-101.50	0	1	a Nightsister initiate	21115	dungeon	NS Rancor Cave	1	nervous	0	900	600	1
+1400086	DATHOMIR	dat_ns_rancor_cave	AREA	2	2.90	-25.80	-27.00	0	1	a Nightsister initiate	21115	dungeon	NS Rancor Cave	1	conversation	0	900	600	1
+1400087	DATHOMIR	dat_ns_rancor_cave	AREA	3	2.40	-41.10	-73.40	0	1	a Nightsister rancor tamer	21135	dungeon	NS Rancor Cave	1	entertained	0	900	600	1
+1400088	DATHOMIR	dat_ns_rancor_cave	AREA	1	11.00	-16.00	-9.30	0	1	a Nightsister rancor tamer	21135	dungeon	NS Rancor Cave	1	npc_accusing	0	900	600	1
+1400089	DATHOMIR	dat_ns_rancor_cave	AREA	1	10.10	-17.10	-11.80	0	1	a Nightsister initiate	21115	dungeon	NS Rancor Cave	1	nervous	0	900	600	1
+1400090	DATHOMIR	dat_ns_rancor_cave	AREA	8	-99.10	-69.90	-110.30	0	1	a Nightsister enraged rancor	21105	dungeon	NS Rancor Cave	1	none	0	900	600	1
+1400091	DATHOMIR	dat_ns_rancor_cave	AREA	11	-95.70	-102.70	-122.60	0	1	a Nightsister protector	21125	dungeon	NS Rancor Cave	1	none	0	900	600	1
+1400092	DATHOMIR	dat_ns_rancor_cave	AREA	11	-95.30	-102.40	-121.20	0	1	a Nightsister protector	21125	dungeon	NS Rancor Cave	1	none	0	900	600	1
+1400093	DATHOMIR	dat_ns_rancor_cave	AREA	11	-93.90	-102.90	-131.30	0	1	a Nightsister protector	21125	dungeon	NS Rancor Cave	1	none	0	900	600	1
+1400094	DATHOMIR	dat_ns_rancor_cave	AREA	11	-91.30	-101.10	-106.70	0	1	a Nightsister spell weaver	21160	dungeon	NS Rancor Cave	1	conversation	0	900	600	1
+1400095	DATHOMIR	dat_ns_rancor_cave	AREA	11	-90.00	-101.00	-105.00	0	1	a Nightsister elder	21095	dungeon	NS Rancor Cave	1	conversation	0	900	600	1
+1400096	DATHOMIR	dat_ns_rancor_cave	AREA	5	-9.30	-44.70	-140.60	0	1	a Nightsister enraged rancor	21105	dungeon	NS Rancor Cave	1	none	0	900	600	1
+1400097	DATHOMIR	dat_ns_rancor_cave	AREA	11	-88.40	-102.90	-118.00	0	1	a Nightsister protector	21125	dungeon	NS Rancor Cave	1	none	0	900	600	1
+1400098	DATHOMIR	dat_ns_rancor_cave	AREA	11	-88.00	-101.00	-106.00	0	1	a Nightsister spell weaver	21160	dungeon	NS Rancor Cave	1	nervous	0	900	600	1
+1400099	DATHOMIR	dat_ns_rancor_cave	AREA	11	-85.70	-102.60	-129.50	0	1	a Nightsister protector	21125	dungeon	NS Rancor Cave	1	none	0	900	600	1
+1400100	DATHOMIR	dat_ns_rancor_cave	AREA	11	-82.60	-102.40	-124.80	0	1	a Nightsister protector	21125	dungeon	NS Rancor Cave	1	none	0	900	600	1
+1400101	DATHOMIR	dat_ns_rancor_cave	AREA	11	-81.00	-99.50	-96.20	0	1	a Nightsister enraged bull rancor	21100	dungeon	NS Rancor Cave	1	none	0	900	600	1
+1400102	DATHOMIR	dat_ns_rancor_cave	AREA	3	-8.00	-39.80	-56.90	0	1	a Nightsister bull rancor	21090	dungeon	NS Rancor Cave	1	none	0	900	600	1
+1400103	DATHOMIR	dat_ns_rancor_cave	AREA	8	-78.00	-99.20	-145.10	0	1	a Nightsister enraged bull rancor	21100	dungeon	NS Rancor Cave	1	none	0	900	600	1
+1400104	DATHOMIR	dat_ns_rancor_cave	AREA	9	-72.00	-69.40	-97.40	0	1	a Nightsister rancor	21130	dungeon	NS Rancor Cave	1	none	0	900	600	1
+1400105	DATHOMIR	dat_ns_rancor_cave	AREA	7	-7.60	-64.20	-225.30	0	1	a Nightsister rancor	21130	dungeon	NS Rancor Cave	1	none	0	900	600	1
+1400106	DATHOMIR	dat_ns_rancor_cave	AREA	8	-61.10	-69.80	-189.30	0	1	a Nightsister rancor	21130	dungeon	NS Rancor Cave	1	none	0	900	600	1
+1400107	DATHOMIR	dat_ns_rancor_cave	AREA	9	-60.10	-69.70	-90.70	0	1	a Nightsister bull rancor	21090	dungeon	NS Rancor Cave	1	none	0	900	600	1
+1400108	DATHOMIR	dat_ns_rancor_cave	AREA	5	-6.00	-45.40	-145.00	0	1	a Nightsister slave	21170	dungeon	NS Rancor Cave	1	sad	0	900	600	1
+1400109	DATHOMIR	dat_ns_rancor_cave	AREA	8	-58.10	-71.00	-186.20	0	1	a Nightsister initiate	21115	dungeon	NS Rancor Cave	1	conversation	0	900	600	1
+1400110	DATHOMIR	dat_ns_rancor_cave	AREA	9	-42.50	-69.90	-88.80	0	1	a cavern spider	2455	dungeon	NS Rancor Cave	1	none	0	900	600	1
+1400111	DATHOMIR	dat_ns_rancor_cave	AREA	9	-36.40	-70.70	-89.70	0	1	a Nightsister enraged rancor	21105	dungeon	NS Rancor Cave	1	none	0	900	600	1
+1400112	DATHOMIR	dat_ns_rancor_cave	AREA	9	-25.80	-70.20	-112.70	0	1	a Nightsister rancor	21130	dungeon	NS Rancor Cave	1	none	0	900	600	1
+1400113	DATHOMIR	dat_ns_rancor_cave	AREA	10	-25.50	-79.20	-139.60	0	1	a Nightsister rancor tamer	21135	dungeon	NS Rancor Cave	1	conversation	0	900	600	1
+1400114	DATHOMIR	dat_ns_rancor_cave	AREA	7	-22.50	-63.80	-256.00	0	1	a Nightsister enraged bull rancor	21100	dungeon	NS Rancor Cave	1	none	0	900	600	1
+1400115	DATHOMIR	dat_ns_rancor_cave	AREA	10	-22.40	-78.80	-137.30	0	1	a Nightsister bull rancor	21090	dungeon	NS Rancor Cave	1	none	0	900	600	1
+1400116	DATHOMIR	dat_ns_rancor_cave	AREA	7	-18.10	-65.80	-239.40	0	1	a Nightsister bull rancor	21090	dungeon	NS Rancor Cave	1	none	0	900	600	1
+1400117	DATHOMIR	dat_ns_rancor_cave	AREA	7	-15.60	-65.60	-213.60	0	1	a Nightsister rancor	21130	dungeon	NS Rancor Cave	1	none	0	900	600	1
+1400118	DATHOMIR	dat_ns_rancor_cave	AREA	6	-15.40	-64.00	-181.10	0	1	a Nightsister spell weaver	21160	dungeon	NS Rancor Cave	1	conversation	0	900	600	1
+1400119	DATHOMIR	dat_ns_rancor_cave	AREA	8	-122.40	-70.00	-180.10	0	1	a Nightsister bull rancor	21090	dungeon	NS Rancor Cave	1	none	0	900	600	1
+1400120	DATHOMIR	dat_ns_rancor_cave	AREA	6	-12.30	-64.10	-182.20	0	1	a Nightsister rancor tamer	21135	dungeon	NS Rancor Cave	1	conversation	0	900	600	1
+1400121	DATHOMIR	dat_ns_rancor_cave	AREA	6	-12.10	-64.10	-180.40	0	1	a Nightsister initiate	21115	dungeon	NS Rancor Cave	1	npc_imperial	0	900	600	1
+1400122	DATHOMIR	dat_ns_rancor_cave	AREA	3	-11.30	-39.80	-56.60	0	1	a Nightsister spell weaver	21160	dungeon	NS Rancor Cave	1	conversation	0	900	600	1
+1400123	DATHOMIR	dat_ns_rancor_cave	AREA	8	-109.60	-69.10	-129.60	0	1	a Nightsister rancor	21130	dungeon	NS Rancor Cave	1	none	0	900	600	1
+1400124	DATHOMIR	dat_ns_rancor_cave	AREA	8	-107.10	-69.00	-203.70	0	1	a Nightsister enraged rancor	21105	dungeon	NS Rancor Cave	1	none	0	900	600	1
+1400125	DATHOMIR	dat_ns_rancor_cave	AREA	8	-106.20	-69.20	-131.60	0	1	a Nightsister rancor tamer	21135	dungeon	NS Rancor Cave	1	threaten	0	900	600	1
+1400126	DATHOMIR	dat_ns_rancor_cave	AREA	8	-101.80	-72.80	-158.50	0	1	a Nightsister rancor	21130	dungeon	NS Rancor Cave	1	none	0	900	600	1
+1400127	DATHOMIR	dat_ns_rancor_cave	AREA	6	-10.00	-64.10	-187.10	0	1	a Nightsister bull rancor	21090	dungeon	NS Rancor Cave	1	none	0	900	600	1
+1400128	DATHOMIR	dat_ns_stronghold	AREA	5	12.60	0.80	-30.50	0	1	a Nightsister protector	21125	poi	NS Stronghold	1	none	0	300	120	2
+1400129	DATHOMIR	dat_ns_stronghold	AREA	7	0.90	0.80	-54.50	0	1	a Nightsister elder	21095	poi	NS Stronghold	1	none	0	300	120	2
+1400130	DATHOMIR	dat_ns_stronghold	AREA	9	-6.50	7.20	-16.80	0	1	a Nightsister spell weaver	21160	poi	NS Stronghold	1	none	0	300	120	2
+1400131	DATHOMIR	dat_ns_stronghold	AREA	10	7.60	7.20	-34.80	0	1	a Nightsister sentinel	21145	poi	NS Stronghold	1	none	0	300	120	2
+1400132	DATHOMIR	dat_ns_stronghold	AREA	10	13.50	7.20	-15.90	0	1	Kais	14115	poi	NS Stronghold	1	none	0	300	120	2
+1400133	DATHOMIR	dat_ns_stronghold	AREA	11	3.70	7.20	-5.60	0	1	a Nightsister stalker	21165	poi	NS Stronghold	1	none	0	300	120	2
+1400134	DATHOMIR	dat_ns_stronghold	AREA	11	-7.50	7.20	-3.50	0	1	a Nightsister rancor tamer	21135	poi	NS Stronghold	1	none	0	300	120	2
+1400135	DATHOMIR	dat_ns_stronghold	AREA	11	-1.00	7.20	-0.60	0	1	Gethzerion	10385	poi	NS Stronghold	1	none	0	300	120	2
+1400136	DATHOMIR	dat_ns_stronghold	AREA	12	-21.00	7.20	-20.80	0	1	a Nightsister initiate	21115	poi	NS Stronghold	1	none	0	300	120	2
+1400137	DATHOMIR	dat_ns_stronghold	AREA	12	-19.60	7.20	-28.50	0	1	a diax	5635	poi	NS Stronghold	1	none	0	300	120	2
+1400138	DATHOMIR	dat_ns_stronghold	AREA	12	-12.90	7.20	-12.50	0	1	a Nightsister ranger	21140	poi	NS Stronghold	1	none	0	300	120	2
+1400139	DATHOMIR	dat_ns_stronghold	AREA	12	-12.40	7.20	-36.30	0	1	Fath H'ray	8545	poi	NS Stronghold	1	none	0	300	120	2
+1400140	DATHOMIR	dat_qz_blackwing_admin_bldg	AREA	12	8.30	7.00	10.30	0	1	Undead	22610	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400141	DATHOMIR	dat_qz_blackwing_admin_bldg	AREA	10	2.90	7.00	-11.60	0	1	Death Trooper	22870	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400142	DATHOMIR	dat_qz_blackwing_admin_bldg	AREA	10	2.80	7.00	-0.80	0	1	Dead Stormtrooper	22770	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400143	DATHOMIR	dat_qz_blackwing_admin_bldg	AREA	3	18.50	1.00	16.50	0	1	Undead	22610	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400144	DATHOMIR	dat_qz_blackwing_admin_bldg	AREA	6	17.70	1.00	-18.80	0	1	Undead	22610	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400145	DATHOMIR	dat_qz_blackwing_admin_bldg	AREA	2	16.10	1.00	7.80	0	1	Undead	22610	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400146	DATHOMIR	dat_qz_blackwing_admin_bldg	AREA	5	12.70	1.00	-5.80	0	1	Dead Imperial Officer	22730	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400147	DATHOMIR	dat_qz_blackwing_admin_bldg	AREA	5	12.30	1.00	0.40	0	1	Death Trooper	22870	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400148	DATHOMIR	dat_qz_blackwing_admin_bldg	AREA	6	10.80	1.00	-21.40	0	1	Dead Imperial Inquisitor	22720	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400149	DATHOMIR	dat_qz_blackwing_admin_bldg	AREA	2	0.20	1.00	-11.20	0	1	Death Trooper	22870	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400150	DATHOMIR	dat_qz_blackwing_admin_bldg	AREA	10	-4.40	7.00	-6.80	0	1	Undead	22610	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400151	DATHOMIR	dat_qz_blackwing_admin_bldg	AREA	11	-3.00	7.00	8.00	0	1	Undead	22610	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400152	DATHOMIR	dat_qz_blackwing_admin_bldg	AREA	4	-17.80	1.00	17.60	0	1	Death Trooper	22870	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400153	DATHOMIR	dat_qz_blackwing_admin_bldg	AREA	8	-17.30	1.00	-19.30	0	1	Undead	22610	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400154	DATHOMIR	dat_qz_blackwing_admin_bldg	AREA	11	-12.00	7.00	7.80	0	1	Dead Imperial Scientist	22750	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400155	DATHOMIR	dat_qz_blackwing_admin_bldg	AREA	8	-10.60	1.00	-21.60	0	1	Dead Scout Trooper	22760	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400156	DATHOMIR	dat_qz_blackwing_admin_bldg	AREA	2	-10.30	1.00	9.10	0	1	Undead	22610	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400157	DATHOMIR	dat_qz_blackwing_facility	AREA	34	93.40	-64.00	-121.30	0	1	A Super Battle Droid	22915	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400158	DATHOMIR	dat_qz_blackwing_facility	AREA	34	93.40	-64.00	-126.50	0	1	A Super Battle Droid	22915	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400159	DATHOMIR	dat_qz_blackwing_facility	AREA	28	93.30	-32.00	-88.80	0	1	Undead	22645	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400160	DATHOMIR	dat_qz_blackwing_facility	AREA	29	92.40	-32.00	-63.40	0	1	Undead	22645	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400161	DATHOMIR	dat_qz_blackwing_facility	AREA	34	91.60	-64.00	-131.90	0	1	A Super Battle Droid	22915	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400162	DATHOMIR	dat_qz_blackwing_facility	AREA	29	88.90	-32.00	-69.30	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400163	DATHOMIR	dat_qz_blackwing_facility	AREA	28	88.80	-32.00	-77.90	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400164	DATHOMIR	dat_qz_blackwing_facility	AREA	28	82.90	-32.00	-95.30	0	1	Corpse of a Scientist	22755	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400165	DATHOMIR	dat_qz_blackwing_facility	AREA	34	69.30	-64.00	-114.10	0	1	Death Trooper	22870	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400166	DATHOMIR	dat_qz_blackwing_facility	AREA	33	68.80	-64.00	-97.10	0	1	Death Trooper	22870	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400167	DATHOMIR	dat_qz_blackwing_facility	AREA	26	68.70	-32.00	-91.30	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400168	DATHOMIR	dat_qz_blackwing_facility	AREA	34	65.90	-52.00	-140.40	0	1	Death Trooper	22870	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400169	DATHOMIR	dat_qz_blackwing_facility	AREA	34	65.30	-54.00	-116.90	0	1	Death Trooper	22870	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400170	DATHOMIR	dat_qz_blackwing_facility	AREA	24	61.00	-32.00	-103.80	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400171	DATHOMIR	dat_qz_blackwing_facility	AREA	24	60.20	-52.00	-139.50	0	1	Death Trooper	22870	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400172	DATHOMIR	dat_qz_blackwing_facility	AREA	65	6.40	-52.00	-61.00	0	1	Death Trooper	22870	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400173	DATHOMIR	dat_qz_blackwing_facility	AREA	24	58.30	-42.00	-100.80	0	1	Death Trooper	22870	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400174	DATHOMIR	dat_qz_blackwing_facility	AREA	33	57.40	-64.00	-133.80	0	1	Death Trooper	22870	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400175	DATHOMIR	dat_qz_blackwing_facility	AREA	33	57.40	-64.00	-123.10	0	1	Death Trooper	22870	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400176	DATHOMIR	dat_qz_blackwing_facility	AREA	24	57.10	-42.00	-114.60	0	1	Death Trooper	22870	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400177	DATHOMIR	dat_qz_blackwing_facility	AREA	33	51.30	-64.00	-122.90	0	1	Death Trooper	22870	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400178	DATHOMIR	dat_qz_blackwing_facility	AREA	33	49.70	-64.00	-134.20	0	1	Death Trooper	22870	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400179	DATHOMIR	dat_qz_blackwing_facility	AREA	26	48.00	-32.00	-62.90	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400180	DATHOMIR	dat_qz_blackwing_facility	AREA	27	47.30	-32.00	-54.00	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400181	DATHOMIR	dat_qz_blackwing_facility	AREA	24	43.70	-52.00	-126.20	0	1	Undead	22625	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400182	DATHOMIR	dat_qz_blackwing_facility	AREA	27	41.30	-32.00	-54.10	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400183	DATHOMIR	dat_qz_blackwing_facility	AREA	33	39.90	-64.00	-147.40	0	1	Death Trooper	22870	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400184	DATHOMIR	dat_qz_blackwing_facility	AREA	33	37.20	-64.00	-100.70	0	1	Death Trooper	22870	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400185	DATHOMIR	dat_qz_blackwing_facility	AREA	33	36.70	-64.00	-93.60	0	1	Death Trooper	22870	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400186	DATHOMIR	dat_qz_blackwing_facility	AREA	33	30.00	-64.00	-139.40	0	1	Death Trooper	22870	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400187	DATHOMIR	dat_qz_blackwing_facility	AREA	65	3.60	-52.00	-122.40	0	1	Death Trooper	22870	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400188	DATHOMIR	dat_qz_blackwing_facility	AREA	19	27.40	-20.00	-44.00	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400189	DATHOMIR	dat_qz_blackwing_facility	AREA	41	26.60	-61.50	-297.50	0	1	Undead	22630	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400190	DATHOMIR	dat_qz_blackwing_facility	AREA	24	23.20	-32.00	-103.80	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400191	DATHOMIR	dat_qz_blackwing_facility	AREA	33	23.20	-64.00	-122.80	0	1	Death Trooper	22870	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400192	DATHOMIR	dat_qz_blackwing_facility	AREA	33	23.10	-64.00	-111.00	0	1	Death Trooper	22870	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400193	DATHOMIR	dat_qz_blackwing_facility	AREA	33	23.00	-64.00	-96.80	0	1	Death Trooper	22870	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400194	DATHOMIR	dat_qz_blackwing_facility	AREA	33	22.50	-64.00	-139.90	0	1	Death Trooper	22870	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400195	DATHOMIR	dat_qz_blackwing_facility	AREA	18	20.80	-20.00	-82.50	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400196	DATHOMIR	dat_qz_blackwing_facility	AREA	18	20.30	-20.00	-51.70	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400197	DATHOMIR	dat_qz_blackwing_facility	AREA	19	20.10	-20.00	-44.20	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400198	DATHOMIR	dat_qz_blackwing_facility	AREA	23	2.10	-32.00	-77.90	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400199	DATHOMIR	dat_qz_blackwing_facility	AREA	23	17.50	-32.00	-97.80	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400200	DATHOMIR	dat_qz_blackwing_facility	AREA	30	115.70	-32.00	-90.10	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400201	DATHOMIR	dat_qz_blackwing_facility	AREA	37	114.00	-68.00	-192.90	0	1	Dr. Griffax Jin	23005	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400202	DATHOMIR	dat_qz_blackwing_facility	AREA	30	112.20	-32.00	-69.20	0	1	Undead Cryogenic Laboratory Scientist	22640	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400203	DATHOMIR	dat_qz_blackwing_facility	AREA	23	11.20	-32.00	-77.70	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400204	DATHOMIR	dat_qz_blackwing_facility	AREA	30	108.50	-32.00	-89.50	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400205	DATHOMIR	dat_qz_blackwing_facility	AREA	28	102.90	-32.00	-97.80	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400206	DATHOMIR	dat_qz_blackwing_facility	AREA	28	102.30	-32.00	-79.70	0	1	Corpse of a Scientist	22750	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400207	DATHOMIR	dat_qz_blackwing_facility	AREA	43	-93.60	-60.10	-264.70	0	1	Undead	22630	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400208	DATHOMIR	dat_qz_blackwing_facility	AREA	43	-93.40	-60.30	-295.30	0	1	Undead	22630	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400209	DATHOMIR	dat_qz_blackwing_facility	AREA	12	-91.50	-20.00	-77.80	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400210	DATHOMIR	dat_qz_blackwing_facility	AREA	15	-91.00	-20.00	-107.70	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400211	DATHOMIR	dat_qz_blackwing_facility	AREA	40	-9.70	-59.70	-285.10	0	1	Death Trooper	22870	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400212	DATHOMIR	dat_qz_blackwing_facility	AREA	15	-85.60	-20.00	-107.80	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400213	DATHOMIR	dat_qz_blackwing_facility	AREA	9	-84.80	-20.00	-48.90	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400214	DATHOMIR	dat_qz_blackwing_facility	AREA	12	-84.60	-20.00	-77.80	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400215	DATHOMIR	dat_qz_blackwing_facility	AREA	9	-84.50	-20.00	-27.90	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400216	DATHOMIR	dat_qz_blackwing_facility	AREA	7	-77.50	-20.00	11.80	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400217	DATHOMIR	dat_qz_blackwing_facility	AREA	7	-77.40	-20.00	-8.70	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400218	DATHOMIR	dat_qz_blackwing_facility	AREA	16	-76.90	-20.00	-41.10	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400219	DATHOMIR	dat_qz_blackwing_facility	AREA	5	-75.10	-20.00	42.90	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400220	DATHOMIR	dat_qz_blackwing_facility	AREA	43	-74.10	-60.10	-317.80	0	1	Undead	22630	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400221	DATHOMIR	dat_qz_blackwing_facility	AREA	5	-71.10	-20.00	20.20	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400222	DATHOMIR	dat_qz_blackwing_facility	AREA	7	-71.10	-20.00	-9.50	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400223	DATHOMIR	dat_qz_blackwing_facility	AREA	12	-71.00	-20.00	-91.10	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400224	DATHOMIR	dat_qz_blackwing_facility	AREA	12	-70.70	-20.00	-98.90	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400225	DATHOMIR	dat_qz_blackwing_facility	AREA	6	-70.30	-20.00	50.50	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400226	DATHOMIR	dat_qz_blackwing_facility	AREA	7	-69.80	-20.00	11.80	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400227	DATHOMIR	dat_qz_blackwing_facility	AREA	5	-62.90	-20.00	27.80	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400228	DATHOMIR	dat_qz_blackwing_facility	AREA	13	-62.80	-20.00	-66.30	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400229	DATHOMIR	dat_qz_blackwing_facility	AREA	38	-62.30	-60.10	-175.10	0	1	Death Trooper	22870	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400230	DATHOMIR	dat_qz_blackwing_facility	AREA	38	-59.30	-60.00	-184.10	0	1	Death Trooper	22870	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400231	DATHOMIR	dat_qz_blackwing_facility	AREA	5	-58.10	-20.00	34.20	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400232	DATHOMIR	dat_qz_blackwing_facility	AREA	13	-56.10	-20.00	-66.70	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400233	DATHOMIR	dat_qz_blackwing_facility	AREA	5	-51.60	-20.00	27.40	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400234	DATHOMIR	dat_qz_blackwing_facility	AREA	40	-5.20	-60.00	-222.10	0	1	Death Trooper	22870	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400235	DATHOMIR	dat_qz_blackwing_facility	AREA	23	-4.80	-32.00	-98.10	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400236	DATHOMIR	dat_qz_blackwing_facility	AREA	17	-34.90	-20.00	-52.40	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400237	DATHOMIR	dat_qz_blackwing_facility	AREA	4	-3.20	-12.00	27.90	0	1	Undead	22625	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400238	DATHOMIR	dat_qz_blackwing_facility	AREA	56	-267.50	-40.00	-84.00	0	1	A Super Battle Droid	22915	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400239	DATHOMIR	dat_qz_blackwing_facility	AREA	56	-262.10	-40.00	-88.60	0	1	A Super Battle Droid	22915	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400240	DATHOMIR	dat_qz_blackwing_facility	AREA	17	-26.70	-32.00	-79.40	0	1	Undead	22625	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400241	DATHOMIR	dat_qz_blackwing_facility	AREA	56	-254.50	-40.00	-87.70	0	1	TK-217	22910	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400242	DATHOMIR	dat_qz_blackwing_facility	AREA	60	-245.90	-59.90	-233.70	0	1	Undead	22630	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400243	DATHOMIR	dat_qz_blackwing_facility	AREA	56	-245.70	-60.00	-121.70	0	1	Death Trooper	22870	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400244	DATHOMIR	dat_qz_blackwing_facility	AREA	56	-244.80	-50.00	-88.60	0	1	A Super Battle Droid	22915	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400245	DATHOMIR	dat_qz_blackwing_facility	AREA	56	-243.20	-40.00	-91.70	0	1	Dr. Stane Tritan	22905	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400246	DATHOMIR	dat_qz_blackwing_facility	AREA	56	-242.00	-40.00	-83.40	0	1	Dr. Nomi Rhane	22890	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400247	DATHOMIR	dat_qz_blackwing_facility	AREA	56	-239.30	-40.00	-91.10	0	1	Assistant Marpo Glenfik	22900	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400248	DATHOMIR	dat_qz_blackwing_facility	AREA	56	-239.00	-40.00	-87.80	0	1	Dr. Pram Dramango	22895	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400249	DATHOMIR	dat_qz_blackwing_facility	AREA	56	-236.70	-50.00	-85.50	0	1	A Super Battle Droid	22915	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400250	DATHOMIR	dat_qz_blackwing_facility	AREA	56	-232.80	-60.00	-121.20	0	1	Death Trooper	22870	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400251	DATHOMIR	dat_qz_blackwing_facility	AREA	64	-23.30	-52.00	-148.00	0	1	Death Trooper	22870	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400252	DATHOMIR	dat_qz_blackwing_facility	AREA	53	-222.80	-60.00	-128.80	0	1	Death Trooper	22870	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400253	DATHOMIR	dat_qz_blackwing_facility	AREA	65	-22.40	-52.00	-60.10	0	1	Death Trooper	22870	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400254	DATHOMIR	dat_qz_blackwing_facility	AREA	38	-22.00	-59.70	-175.60	0	1	Death Trooper	22870	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400255	DATHOMIR	dat_qz_blackwing_facility	AREA	58	-208.40	-60.10	-191.50	0	1	Undead	22630	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400256	DATHOMIR	dat_qz_blackwing_facility	AREA	58	-207.60	-60.10	-145.80	0	1	Undead	22630	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400257	DATHOMIR	dat_qz_blackwing_facility	AREA	38	-20.90	-60.00	-186.40	0	1	Death Trooper	22870	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400258	DATHOMIR	dat_qz_blackwing_facility	AREA	65	-20.90	-52.00	-121.90	0	1	Death Trooper	22870	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400259	DATHOMIR	dat_qz_blackwing_facility	AREA	64	-20.00	-52.00	-158.50	0	1	Undead	22645	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400260	DATHOMIR	dat_qz_blackwing_facility	AREA	40	-18.60	-60.00	-280.30	0	1	Death Trooper	22870	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400261	DATHOMIR	dat_qz_blackwing_facility	AREA	55	-177.80	-59.90	-141.50	0	1	Undead	22630	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400262	DATHOMIR	dat_qz_blackwing_facility	AREA	62	-177.80	-60.30	-235.90	0	1	Undead	22630	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400263	DATHOMIR	dat_qz_blackwing_facility	AREA	62	-175.80	-60.40	-255.70	0	1	Undead	22630	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400264	DATHOMIR	dat_qz_blackwing_facility	AREA	64	-17.50	-52.00	-148.30	0	1	Death Trooper	22870	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400265	DATHOMIR	dat_qz_blackwing_facility	AREA	40	-16.50	-59.80	-223.80	0	1	Death Trooper	22870	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400266	DATHOMIR	dat_qz_blackwing_facility	AREA	51	-154.50	-60.00	-106.70	0	1	Death Trooper	22870	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400267	DATHOMIR	dat_qz_blackwing_facility	AREA	50	-153.00	-59.20	-163.00	0	1	Death Trooper	22870	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400268	DATHOMIR	dat_qz_blackwing_facility	AREA	54	-152.70	-60.00	-73.60	0	1	Cornburr	22620	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400269	DATHOMIR	dat_qz_blackwing_facility	AREA	43	-152.30	-59.90	-316.90	0	1	Undead	22630	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400270	DATHOMIR	dat_qz_blackwing_facility	AREA	50	-147.10	-60.40	-200.80	0	1	Undead	22630	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400271	DATHOMIR	dat_qz_blackwing_facility	AREA	50	-141.30	-60.00	-163.90	0	1	Death Trooper	22870	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400272	DATHOMIR	dat_qz_blackwing_facility	AREA	43	-132.20	-60.20	-317.70	0	1	Undead	22630	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400273	DATHOMIR	dat_qz_blackwing_facility	AREA	47	-129.00	-60.20	-163.90	0	1	Death Trooper	22870	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400274	DATHOMIR	dat_qz_blackwing_facility	AREA	47	-126.00	-60.20	-141.40	0	1	Death Trooper	22870	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400275	DATHOMIR	dat_qz_blackwing_facility	AREA	11	-123.20	-20.00	-49.40	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400276	DATHOMIR	dat_qz_blackwing_facility	AREA	10	-122.90	-20.00	-27.90	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400277	DATHOMIR	dat_qz_blackwing_facility	AREA	11	-122.90	-20.00	-56.20	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400278	DATHOMIR	dat_qz_blackwing_facility	AREA	10	-122.70	-20.00	-21.40	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400279	DATHOMIR	dat_qz_blackwing_facility	AREA	47	-120.30	-59.90	-164.30	0	1	Death Trooper	22870	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400280	DATHOMIR	dat_qz_blackwing_facility	AREA	17	-12.10	-22.00	-53.10	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400281	DATHOMIR	dat_qz_blackwing_facility	AREA	9	-114.90	-20.00	-27.90	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400282	DATHOMIR	dat_qz_blackwing_facility	AREA	9	-114.60	-20.00	-49.20	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400283	DATHOMIR	dat_qz_blackwing_facility	AREA	47	-112.00	-59.90	-147.40	0	1	Death Trooper	22870	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400284	DATHOMIR	dat_qz_blackwing_facility	AREA	43	-103.00	-60.20	-317.70	0	1	Undead	22630	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400285	DATHOMIR	dat_qz_blackwing_facility	AREA	14	-101.60	-20.00	-99.00	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400286	DATHOMIR	dat_qz_blackwing_facility	AREA	14	-101.30	-20.00	-91.50	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400287	DATHOMIR	dat_qz_blackwing_facility	AREA	40	-10.10	-60.20	-249.40	0	1	Undead	22630	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400288	DATHOMIR	dat_qz_blackwing_facility	AREA	38	-1.90	-60.00	-174.20	0	1	Death Trooper	22870	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400289	DATHOMIR	dat_qz_blackwing_facility	AREA	18	-1.00	-20.00	-51.60	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400290	DATHOMIR	dat_qz_blackwing_facility	AREA	18	-0.60	-20.00	-82.30	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400291	DATHOMIR	dat_science_outpost_med_center	EGG	4	10.30	0.63	-4.52	-3	1	Arnecio Ulvaw'op (Crimson Phoenix Pilot Trainer)	33875	city	Science Outpost	1	sitting	0	300	120	0
+1400292	DATHOMIR	dat_trade_outpost_cantina	EGG	1	-0.08	0.62	0.89	35	1	Nirame Sakute (Smuggler Alliance Pilot Trainer)	33910	city	Trade Outpost	1	none	0	300	120	0
+1400293	DATHOMIR	dat_smc_stronghold	AREA	1	2.14	2.01	19.37	0	1	a Singing Mountain clan sentry	26320	dungeon	SMC Stronghold	1	none	0	1800	1500	0
+1400294	DATHOMIR	dat_smc_stronghold	EGG	2	-12.62	2.01	9.10	0	1	Vurlene	32805	dungeon	SMC Stronghold	1	none	0	1800	1500	0
+1400295	DATHOMIR	dat_smc_stronghold	AREA	2	-12.78	2.38	4.47	0	1	a Singing Mountain clan dragoon	26335	dungeon	SMC Stronghold	1	none	0	1800	1500	0
+1400296	DATHOMIR	dat_smc_stronghold	AREA	2	-11.39	2.38	5.38	0	1	a Singing Mountain clan scout	26365	dungeon	SMC Stronghold	1	none	0	1800	1500	0
+1400297	DATHOMIR	dat_smc_stronghold	AREA	2	-12.70	2.38	6.38	0	1	a Singing Mountain clan sentry	26320	dungeon	SMC Stronghold	1	none	0	1800	1500	0
+1400298	DATHOMIR	dat_smc_stronghold	EGG	3	-22.30	2.01	5.05	0	1	Vhaunda	32625	dungeon	SMC Stronghold	1	none	0	1800	1500	0
+1400299	DATHOMIR	dat_smc_stronghold	EGG	4	-12.38	2.01	-5.48	0	1	Mau'fel	33720	dungeon	SMC Stronghold	1	none	0	1800	1500	0
+1400300	DATHOMIR	dat_smc_stronghold	EGG	4	-13.38	2.01	-1.98	0	1	Shando	33725	dungeon	SMC Stronghold	1	none	0	1800	1500	0
+1400301	DATHOMIR	dat_smc_stronghold	EGG	4	-11.88	2.01	-3.48	0	1	Izaryx	13610	dungeon	SMC Stronghold	1	none	0	1800	1500	0
+1400302	DATHOMIR	dat_smc_stronghold	EGG	5	-14.29	1.99	-21.06	0	1	Zideera	33510	dungeon	SMC Stronghold	1	none	0	1800	1500	0
+1400303	DATHOMIR	dat_smc_stronghold	EGG	6	3.12	3.01	-4.95	0	1	Aujante K'lee	385	dungeon	SMC Stronghold	1	none	0	1800	1500	0
+1400304	DATHOMIR	dat_smc_stronghold	AREA	7	16.42	2.01	-10.87	0	1	a Singing Mountain clan sentry	26320	dungeon	SMC Stronghold	1	none	0	1800	1500	0
+1400305	DATHOMIR	dat_smc_stronghold	AREA	8	23.42	2.01	-21.14	0	1	a Singing Mountain clan slave	26370	dungeon	SMC Stronghold	1	none	0	1800	1500	0
+1400306	DATHOMIR	dat_smc_stronghold	AREA	9	24.79	2.01	-12.47	0	1	a Singing Mountain clan slave	26370	dungeon	SMC Stronghold	1	none	0	1800	1500	0
+1400307	DATHOMIR	dat_smc_stronghold	AREA	10	26.02	2.01	-4.12	0	1	a Singing Mountain clan slave	26370	dungeon	SMC Stronghold	1	none	0	1800	1500	0
+1400308	DATHOMIR	dat_smc_stronghold	AREA	11	16.47	2.01	7.43	0	1	a Singing Mountain clan slave	26370	dungeon	SMC Stronghold	1	none	0	1800	1500	0
+1400309	DATHOMIR	dat_world	AREA	0	736.25	107.23	4989.38	0	1	a Sith Shadow outlaw	26130	-	-	1	none	0	300	120	2
+1400310	DATHOMIR	dat_world	AREA	0	631.40	6.00	5139.94	0	1	Loisya Starkos	6235	-	-	1	none	0	300	120	0
+1400311	DATHOMIR	dat_world	AREA	0	5751.45	124.66	1826.28	0	1	a pirate	27070	outback	-	1	none	0	300	120	2
+1400312	DATHOMIR	dat_world	AREA	0	5729.82	125.00	1854.70	0	1	a pirate	27070	outback	-	1	none	0	300	120	2
+1400313	DATHOMIR	dat_world	AREA	0	5727.25	121.68	1791.54	0	1	a pirate	27070	outback	-	1	none	0	300	120	2
+1400314	DATHOMIR	dat_world	AREA	0	5711.00	125.00	1824.00	0	1	Kirby	26850	outback	-	1	none	0	300	120	0
+1400315	DATHOMIR	dat_world	AREA	0	5693.48	127.78	1797.68	0	1	a pirate	27070	outback	-	1	none	0	300	120	2
+1400316	DATHOMIR	dat_world	AREA	0	5476.62	98.40	-4132.26	0	1	an Aurilia sentinel	9795	city	Aurilia	1	none	0	300	120	0
+1400317	DATHOMIR	dat_world	AREA	0	5470.03	98.40	-4130.31	0	1	an Aurilia sentinel	9795	city	Aurilia	1	none	0	300	120	0
+1400318	DATHOMIR	dat_world	AREA	0	5461.01	79.00	-4169.15	0	1	Quharek	23995	city	Aurilia	1	none	0	300	120	0
+1400319	DATHOMIR	dat_world	AREA	0	5440.12	78.50	-4163.61	0	1	an Aurilia sentinel	9795	city	Aurilia	1	none	0	300	120	0
+1400320	DATHOMIR	dat_world	AREA	0	5439.98	78.50	-4172.11	0	1	Maximillian (Aurilian travel consultant)	21070	city	Aurilia	1	none	0	300	120	0
+1400321	DATHOMIR	dat_world	EGG	0	543.00	6.21	3053.00	0	1	Russell	26690	city	Dathomir Outpost	1	none	0	300	120	0
+1400322	DATHOMIR	dat_world	EGG	0	5418.87	78.87	-4187.46	0	1	Torvin	21300	city	Aurilia	1	none	0	300	120	0
+1400323	DATHOMIR	dat_world	AREA	0	5417.54	78.50	-4138.08	0	1	an Aurilia sentinel	9795	city	Aurilia	1	none	0	300	120	0
+1400324	DATHOMIR	dat_world	AREA	0	5381.02	78.50	-4150.03	0	1	an Aurilia sentinel	9795	city	Aurilia	1	none	0	300	120	0
+1400325	DATHOMIR	dat_world	AREA	0	5380.88	78.50	-4129.19	0	1	an Aurilia sentinel	9795	city	Aurilia	1	none	0	300	120	0
+1400326	DATHOMIR	dat_world	EGG	0	5378.91	98.40	-4073.01	0	1	Captain Sarguillo	9750	city	Aurilia	1	none	0	300	120	0
+1400327	DATHOMIR	dat_world	AREA	0	5377.35	98.40	-4066.70	0	1	an Aurilia sentinel	9795	city	Aurilia	1	none	0	300	120	0
+1400328	DATHOMIR	dat_world	AREA	0	5367.15	98.40	-4210.23	0	1	an Aurilia sentinel	9795	city	Aurilia	1	none	0	300	120	0
+1400329	DATHOMIR	dat_world	AREA	0	5363.56	78.50	-4105.85	0	1	an Aurilia citizen	9780	city	Aurilia	1	none	0	300	120	2
+1400330	DATHOMIR	dat_world	AREA	0	5343.49	78.50	-4058.10	0	1	an Aurilia citizen	9780	city	Aurilia	1	none	0	300	120	0
+1400331	DATHOMIR	dat_world	AREA	0	5339.05	78.50	-4069.72	0	1	an Aurilia citizen	9780	city	Aurilia	1	sitting	0	300	120	0
+1400332	DATHOMIR	dat_world	AREA	0	5336.36	78.50	-4069.42	0	1	an Aurilia citizen	9780	city	Aurilia	1	sitting	0	300	120	0
+1400333	DATHOMIR	dat_world	AREA	0	5330.22	78.50	-4047.71	0	1	an Aurilia citizen	9780	city	Aurilia	1	none	0	300	120	0
+1400334	DATHOMIR	dat_world	EGG	0	5306.08	78.50	-4213.75	0	1	Shaneeka (chief engineer of Aurilia)	9765	city	Aurilia	1	none	0	300	120	0
+1400335	DATHOMIR	dat_world	EGG	0	5304.31	78.50	-4151.78	0	1	Paemos (Mayor of Aurilia)	9755	city	Aurilia	1	none	0	300	120	0
+1400336	DATHOMIR	dat_world	AREA	0	5291.33	78.50	-4073.85	0	1	an Aurilia sentinel	9795	city	Aurilia	1	none	0	300	120	0
+1400337	DATHOMIR	dat_world	AREA	0	5287.68	78.50	-4077.45	0	1	an Aurilia sentinel	9795	city	Aurilia	1	none	0	300	120	0
+1400338	DATHOMIR	dat_world	AREA	0	5246.80	98.40	-4212.67	0	1	an Aurilia sentinel	9795	city	Aurilia	1	none	0	300	120	0
+1400339	DATHOMIR	dat_world	AREA	0	5242.03	78.50	-4182.72	0	1	an Aurilia citizen	9780	city	Aurilia	1	none	0	300	120	2
+1400340	DATHOMIR	dat_world	AREA	0	5241.83	98.40	-4211.26	0	1	an Aurilia sentinel	9795	city	Aurilia	1	none	0	300	120	0
+1400341	DATHOMIR	dat_world	AREA	0	5232.15	78.50	-4156.87	0	1	an Aurilia citizen	9780	city	Aurilia	1	none	0	300	120	2
+1400342	DATHOMIR	dat_world	AREA	0	5209.49	446.44	-6905.36	0	1	a Singing Mountain clan huntress	26345	-	-	1	none	0	300	120	0
+1400343	DATHOMIR	dat_world	EGG	0	5205.00	78.50	-4148.62	0	1	Lieutenant Thulough (a Rebel intelligence officer)	12095	city	Aurilia	1	none	0	300	120	0
+1400344	DATHOMIR	dat_world	AREA	0	5200.80	442.35	-6909.92	0	1	a Singing Mountain clan huntress	26345	-	-	1	none	0	300	120	0
+1400345	DATHOMIR	dat_world	AREA	0	5199.02	444.38	-6896.73	0	1	a Singing Mountain clan initiate	26350	-	-	1	none	0	300	120	0
+1400346	DATHOMIR	dat_world	EGG	0	3456.12	28.91	1378.54	0	1	Aramis Kariya (a Rebel pilot)	13595	-	-	1	none	0	300	120	0
+1400347	DATHOMIR	dat_world	AREA	0	1070.20	101.50	-4485.60	0	1	a rancor pygmy	24195	outback	Ceremonial Site	2	none	0	900	600	15
+1400348	DATHOMIR	dat_world	AREA	0	-7503.71	560.06	-6720.04	0	1	Undead	22590	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400349	DATHOMIR	dat_world	AREA	0	-7499.43	560.00	-6777.07	0	1	Undead	22590	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400350	DATHOMIR	dat_world	AREA	0	-7497.37	560.00	-6955.57	0	1	Wesk Kit'pay	22495	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400351	DATHOMIR	dat_world	AREA	0	-7483.38	568.61	-7284.29	0	1	Chak Krist	22505	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400352	DATHOMIR	dat_world	AREA	0	-7477.84	560.00	-6962.94	0	1	Undead	22595	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400353	DATHOMIR	dat_world	AREA	0	-7473.35	560.00	-7154.14	0	1	Undead	22605	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400354	DATHOMIR	dat_world	AREA	0	-7466.45	560.00	-6678.87	0	1	Wertsnik	22490	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400355	DATHOMIR	dat_world	AREA	0	-7458.73	570.00	-7337.41	0	1	Camp Guard	22970	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400356	DATHOMIR	dat_world	AREA	0	-7458.24	570.00	-7329.31	0	1	Sogan Varga	23055	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400357	DATHOMIR	dat_world	AREA	0	-7458.02	570.00	-7351.84	0	1	KD-121	23020	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400358	DATHOMIR	dat_world	AREA	0	-7457.90	570.00	-7314.03	0	1	a 2-1B surgical droid	22965	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400359	DATHOMIR	dat_world	AREA	0	-7454.77	570.00	-7314.72	0	1	Junk Dealer	22955	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400360	DATHOMIR	dat_world	AREA	0	-7454.54	570.00	-7345.15	0	1	KD-121	23020	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400361	DATHOMIR	dat_world	AREA	0	-7453.42	570.00	-7331.77	0	1	Camp Guard	22970	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400362	DATHOMIR	dat_world	AREA	0	-7452.20	560.00	-6657.51	0	1	Undead	22590	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400363	DATHOMIR	dat_world	AREA	0	-7450.29	570.00	-7344.61	0	1	Camp Guard	22970	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400364	DATHOMIR	dat_world	AREA	0	-7449.28	570.00	-7352.42	0	1	Zsu Val	23105	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400365	DATHOMIR	dat_world	AREA	0	-7445.82	560.00	-7143.97	0	1	Undead	22605	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400366	DATHOMIR	dat_world	AREA	0	-7442.48	570.00	-7421.74	0	1	Undead	22610	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400367	DATHOMIR	dat_world	AREA	0	-7441.79	570.00	-7319.98	0	1	Nils Cridmeen (Mechanic)	23025	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400368	DATHOMIR	dat_world	AREA	0	-7441.35	557.36	-6581.64	0	1	Undead	22590	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400369	DATHOMIR	dat_world	AREA	0	-7438.80	560.00	-6788.02	0	1	Undead	22590	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400370	DATHOMIR	dat_world	AREA	0	-7437.12	570.00	-7392.09	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400371	DATHOMIR	dat_world	AREA	0	-7437.09	560.42	-7183.68	0	1	Undead	22605	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400372	DATHOMIR	dat_world	AREA	0	-7436.33	560.00	-7093.41	0	1	Undead	22605	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400373	DATHOMIR	dat_world	AREA	0	-7435.35	570.00	-7383.57	0	1	Undead	22610	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400374	DATHOMIR	dat_world	AREA	0	-7433.95	569.98	-7257.15	0	1	Undead	22605	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400375	DATHOMIR	dat_world	AREA	0	-7430.55	570.00	-7336.69	0	1	Camp Guard	22970	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400376	DATHOMIR	dat_world	AREA	0	-7427.54	570.00	-7334.35	0	1	HX-138	23035	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400377	DATHOMIR	dat_world	AREA	0	-7427.17	570.00	-7427.94	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400378	DATHOMIR	dat_world	AREA	0	-7424.79	560.00	-6835.37	0	1	Undead	22590	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400379	DATHOMIR	dat_world	AREA	0	-7421.47	570.00	-7313.11	0	1	Klex Fulgor	22950	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400380	DATHOMIR	dat_world	AREA	0	-7417.91	570.00	-7472.36	0	1	Undead	22610	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400381	DATHOMIR	dat_world	AREA	0	-7417.41	570.00	-7313.26	0	1	Camp Guard	22970	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400382	DATHOMIR	dat_world	AREA	0	-7412.18	570.00	-7415.35	0	1	Undead	22610	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400383	DATHOMIR	dat_world	AREA	0	-7411.61	570.00	-7381.52	0	1	Undead	22610	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400384	DATHOMIR	dat_world	AREA	0	-7405.02	560.00	-6974.56	0	1	Undead	22595	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400385	DATHOMIR	dat_world	AREA	0	-7400.28	560.00	-6708.61	0	1	Undead	22590	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400386	DATHOMIR	dat_world	AREA	0	-7394.99	570.00	-7489.04	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400387	DATHOMIR	dat_world	AREA	0	-7392.91	560.00	-6760.70	0	1	Undead	22590	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400388	DATHOMIR	dat_world	AREA	0	-7391.19	570.00	-7413.12	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400389	DATHOMIR	dat_world	AREA	0	-7388.39	560.00	-6668.84	0	1	Death Trooper	22845	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400390	DATHOMIR	dat_world	AREA	0	-7385.34	569.64	-7227.37	0	1	Undead	22600	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400391	DATHOMIR	dat_world	AREA	0	-7385.34	545.00	-6479.18	0	1	Jaina Nassin	22485	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400392	DATHOMIR	dat_world	AREA	0	-7385.06	570.00	-7345.91	0	1	Undead	22610	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400393	DATHOMIR	dat_world	AREA	0	-7381.28	545.00	-6506.95	0	1	Undead	22585	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400394	DATHOMIR	dat_world	AREA	0	-7373.99	570.00	-7269.43	0	1	Death Trooper	22855	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400395	DATHOMIR	dat_world	AREA	0	-7373.09	560.00	-7046.86	0	1	Undead	22595	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400396	DATHOMIR	dat_world	AREA	0	-7367.33	570.00	-7362.22	0	1	Undead	22610	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400397	DATHOMIR	dat_world	AREA	0	-7366.06	570.00	-7415.07	0	1	Undead	22610	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400398	DATHOMIR	dat_world	AREA	0	-7361.51	560.01	-7178.04	0	1	Undead	22605	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400399	DATHOMIR	dat_world	AREA	0	-7354.89	570.00	-7392.98	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400400	DATHOMIR	dat_world	AREA	0	-7353.64	570.00	-7324.67	0	1	Undead	22610	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400401	DATHOMIR	dat_world	AREA	0	-7348.18	570.00	-7359.54	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400402	DATHOMIR	dat_world	AREA	0	-7343.82	570.00	-7481.45	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400403	DATHOMIR	dat_world	AREA	0	-7342.53	570.00	-7459.03	0	1	Undead	22610	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400404	DATHOMIR	dat_world	AREA	0	-7341.84	570.00	-7386.41	0	1	Undead	22610	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400405	DATHOMIR	dat_world	AREA	0	-7339.40	570.00	-7237.34	0	1	Undead	22595	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400406	DATHOMIR	dat_world	AREA	0	-7337.25	570.00	-7418.67	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400407	DATHOMIR	dat_world	AREA	0	-7336.91	570.00	-7331.73	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400408	DATHOMIR	dat_world	AREA	0	-7317.43	570.00	-7467.02	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400409	DATHOMIR	dat_world	AREA	0	-7315.65	574.30	-7482.99	0	1	Vina Maljazara	22515	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400410	DATHOMIR	dat_world	AREA	0	-7308.49	551.00	-6468.49	0	1	Undead	22585	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400411	DATHOMIR	dat_world	AREA	0	-7305.73	570.00	-7323.70	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400412	DATHOMIR	dat_world	AREA	0	-7301.45	570.00	-7408.89	0	1	Death Trooper	22865	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400413	DATHOMIR	dat_world	AREA	0	-7294.24	553.44	-6555.88	0	1	Undead	22585	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400414	DATHOMIR	dat_world	AREA	0	-7283.74	560.00	-7080.80	0	1	Undead	22605	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400415	DATHOMIR	dat_world	AREA	0	-7269.96	560.00	-6983.86	0	1	Undead	22595	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400416	DATHOMIR	dat_world	AREA	0	-7266.01	568.60	-7231.41	0	1	Death Trooper	22855	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400417	DATHOMIR	dat_world	AREA	0	-7265.34	570.00	-7429.86	0	1	Undead	22605	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400418	DATHOMIR	dat_world	AREA	0	-7250.13	569.38	-7480.44	0	1	Treena Moldovia	22510	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400419	DATHOMIR	dat_world	AREA	0	-7231.05	569.36	-7275.18	0	1	Death Trooper	22855	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400420	DATHOMIR	dat_world	AREA	0	-7223.19	560.00	-7088.16	0	1	Undead	22600	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400421	DATHOMIR	dat_world	AREA	0	-7219.08	570.00	-7383.37	0	1	Undead	22605	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400422	DATHOMIR	dat_world	AREA	0	-7216.26	561.73	-7191.73	0	1	Undead	22595	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400423	DATHOMIR	dat_world	AREA	0	-7204.63	558.17	-6763.06	0	1	Undead	22585	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400424	DATHOMIR	dat_world	AREA	0	-7197.21	553.76	-6664.00	0	1	Undead	22585	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400425	DATHOMIR	dat_world	AREA	0	-7182.67	559.16	-7144.53	0	1	Death Trooper	22855	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400426	DATHOMIR	dat_world	AREA	0	-7163.93	564.02	-6913.13	0	1	Junk Dealer	22955	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400427	DATHOMIR	dat_world	AREA	0	-7158.62	563.60	-6915.36	0	1	TR-522	23045	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400428	DATHOMIR	dat_world	AREA	0	-7152.88	563.05	-6927.64	0	1	Oona Wran	22700	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400429	DATHOMIR	dat_world	AREA	0	-7151.45	562.63	-7076.31	0	1	Undead	22595	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400430	DATHOMIR	dat_world	AREA	0	-7150.34	562.80	-6931.61	0	1	Camp Guard	22970	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400431	DATHOMIR	dat_world	AREA	0	-7149.99	562.77	-6936.83	0	1	Camp Guard	22970	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400432	DATHOMIR	dat_world	AREA	0	-7149.59	562.73	-6911.57	0	1	Camp Guard	22970	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400433	DATHOMIR	dat_world	AREA	0	-7148.16	562.59	-6941.05	0	1	Lieutenant Erlem Marh	23100	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400434	DATHOMIR	dat_world	AREA	0	-7147.40	550.03	-6554.20	0	1	Undead	22585	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400435	DATHOMIR	dat_world	AREA	0	-7137.86	540.10	-7472.35	0	1	Undead	22605	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400436	DATHOMIR	dat_world	AREA	0	-7135.19	561.35	-6917.74	0	1	a 2-1B surgical droid	22965	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400437	DATHOMIR	dat_world	AREA	0	-7134.56	561.30	-6907.17	0	1	Camp Guard	22970	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400438	DATHOMIR	dat_world	AREA	0	-7128.29	540.00	-7312.91	0	1	Death Trooper	22855	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400439	DATHOMIR	dat_world	AREA	0	-7113.19	540.00	-7240.51	0	1	Undead	22595	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400440	DATHOMIR	dat_world	AREA	0	-7101.40	553.63	-7135.75	0	1	Undead	22595	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400441	DATHOMIR	dat_world	AREA	0	-7101.31	540.00	-7416.82	0	1	Undead	22605	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400442	DATHOMIR	dat_world	AREA	0	-7095.56	540.00	-7405.51	0	1	Undead	22605	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400443	DATHOMIR	dat_world	AREA	0	-7073.24	540.00	-7330.46	0	1	Undead	22595	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400444	DATHOMIR	dat_world	AREA	0	-7050.91	553.84	-6743.23	0	1	Undead	22585	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400445	DATHOMIR	dat_world	AREA	0	-7047.35	551.18	-6693.71	0	1	Death Trooper	22835	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400446	DATHOMIR	dat_world	AREA	0	-7038.04	344.45	3947.05	0	1	a muscle smuggler	5375	-	-	1	none	0	300	120	2
+1400447	DATHOMIR	dat_world	AREA	0	-7034.60	550.00	-6633.52	0	1	Death Trooper	22835	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400448	DATHOMIR	dat_world	AREA	0	-7031.98	341.72	3932.06	0	1	a Dark Jedi Sentinel	31525	-	-	1	none	0	300	120	0
+1400449	DATHOMIR	dat_world	AREA	0	-7029.70	540.00	-7216.08	0	1	Undead	22595	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400450	DATHOMIR	dat_world	AREA	0	-7029.53	341.45	3914.37	0	1	a muscle smuggler	5375	-	-	1	none	0	300	120	2
+1400451	DATHOMIR	dat_world	AREA	0	-7016.26	539.98	-7499.93	0	1	Ghianna Hayde	22500	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400452	DATHOMIR	dat_world	AREA	0	-7013.22	545.00	-6929.87	0	1	Undead	22585	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400453	DATHOMIR	dat_world	AREA	0	-7012.06	342.32	3942.22	0	1	a Dark Jedi Master	31515	-	-	1	none	0	300	120	2
+1400454	DATHOMIR	dat_world	AREA	0	-7011.58	350.52	3956.15	0	1	a Dark Jedi Sentinel	31525	-	-	1	none	0	300	120	0
+1400455	DATHOMIR	dat_world	AREA	0	-7009.20	351.02	3973.23	0	1	a muscle smuggler	5375	-	-	1	none	0	300	120	2
+1400456	DATHOMIR	dat_world	AREA	0	-7008.96	550.00	-6489.91	0	1	Undead	22575	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400457	DATHOMIR	dat_world	AREA	0	-7007.04	540.00	-7478.87	0	1	Undead	22600	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400458	DATHOMIR	dat_world	AREA	0	-7000.86	540.00	-7284.94	0	1	Undead	22595	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400459	DATHOMIR	dat_world	AREA	0	-7000.57	340.01	3931.95	0	1	a Dark Jedi Sentinel	31525	-	-	1	none	0	300	120	0
+1400460	DATHOMIR	dat_world	AREA	0	-7000.47	343.75	3914.75	0	1	a muscle smuggler	5375	-	-	1	none	0	300	120	2
+1400461	DATHOMIR	dat_world	AREA	0	-6995.67	550.00	-6618.01	0	1	Undead	22580	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400462	DATHOMIR	dat_world	AREA	0	-6990.84	342.31	3948.39	0	1	a muscle smuggler	5375	-	-	1	none	0	300	120	2
+1400463	DATHOMIR	dat_world	AREA	0	-6984.04	550.00	-6558.20	0	1	Death Trooper	22830	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400464	DATHOMIR	dat_world	AREA	0	-6982.01	540.00	-7387.46	0	1	Undead	22595	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400465	DATHOMIR	dat_world	AREA	0	-6969.52	550.00	-6502.71	0	1	Soon Dom	22475	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400466	DATHOMIR	dat_world	AREA	0	-6966.31	550.00	-6610.10	0	1	Ool Awmod	22480	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400467	DATHOMIR	dat_world	AREA	0	-6964.00	545.00	-7067.92	0	1	Undead	22590	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400468	DATHOMIR	dat_world	AREA	0	-6962.57	550.00	-6530.16	0	1	Undead	22575	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400469	DATHOMIR	dat_world	AREA	0	-6955.29	550.00	-6564.52	0	1	Undead	22580	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400470	DATHOMIR	dat_world	AREA	0	-6954.40	575.00	-3002.60	0	1	a rancor pygmy	24195	outback	Worship Stone	4	none	0	900	600	30
+1400471	DATHOMIR	dat_world	AREA	0	-6950.65	550.00	-6624.14	0	1	Undead	22580	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400472	DATHOMIR	dat_world	AREA	0	-6949.63	540.00	-7504.10	0	1	Undead	22600	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400473	DATHOMIR	dat_world	AREA	0	-6946.57	548.00	-6796.48	0	1	Undead	22585	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400474	DATHOMIR	dat_world	AREA	0	-6937.13	553.37	-6440.71	0	1	Undead	22575	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400475	DATHOMIR	dat_world	AREA	0	-6921.53	540.00	-7243.79	0	1	Undead	22600	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400476	DATHOMIR	dat_world	AREA	0	-6916.80	540.00	-7338.41	0	1	Undead	22600	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400477	DATHOMIR	dat_world	AREA	0	-6915.88	545.00	-7005.53	0	1	Undead	22585	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400478	DATHOMIR	dat_world	AREA	0	-6901.10	545.00	-7082.49	0	1	Undead	22590	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400479	DATHOMIR	dat_world	AREA	0	-6900.08	550.00	-6550.37	0	1	Death Trooper	22830	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400480	DATHOMIR	dat_world	AREA	0	-6893.89	540.00	-7197.27	0	1	Undead	22590	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400481	DATHOMIR	dat_world	AREA	0	-6876.10	540.00	-7500.06	0	1	Undead	22595	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400482	DATHOMIR	dat_world	AREA	0	-6870.52	540.00	-7355.85	0	1	Undead	22595	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400483	DATHOMIR	dat_world	AREA	0	-6862.32	550.78	-6513.03	0	1	Undead	22565	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400484	DATHOMIR	dat_world	AREA	0	-6854.96	551.33	-6594.92	0	1	Death Trooper	22830	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400485	DATHOMIR	dat_world	AREA	0	-6854.03	551.40	-6464.14	0	1	Kyra 'Naa	23110	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400486	DATHOMIR	dat_world	AREA	0	-6843.94	552.25	-6463.33	0	1	Camp Guard	22970	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400487	DATHOMIR	dat_world	AREA	0	-6840.72	552.52	-6466.84	0	1	Oona Wran	22705	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400488	DATHOMIR	dat_world	AREA	0	-6840.47	552.54	-6455.26	0	1	Tripp D'jek	22960	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400489	DATHOMIR	dat_world	AREA	0	-6834.12	553.06	-6473.01	0	1	Camp Guard	22970	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400490	DATHOMIR	dat_world	AREA	0	-6832.17	545.22	-7164.61	0	1	Undead	22590	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400491	DATHOMIR	dat_world	AREA	0	-6831.50	553.25	-6450.67	0	1	a 2-1B surgical droid	22965	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400492	DATHOMIR	dat_world	AREA	0	-6828.67	553.46	-6462.55	0	1	Junk Dealer	22955	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400493	DATHOMIR	dat_world	AREA	0	-6820.05	553.97	-6467.97	0	1	Camp Guard	22970	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400494	DATHOMIR	dat_world	AREA	0	-6818.56	540.00	-7453.41	0	1	Undead	22595	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400495	DATHOMIR	dat_world	AREA	0	-6806.51	554.36	-6454.56	0	1	Camp Guard	22970	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400496	DATHOMIR	dat_world	AREA	0	-6801.99	547.90	-6773.44	0	1	Undead	22585	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400497	DATHOMIR	dat_world	AREA	0	-6755.46	550.17	-6567.44	0	1	Undead	22565	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400498	DATHOMIR	dat_world	AREA	0	-6750.70	540.00	-7326.58	0	1	Undead	22565	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400499	DATHOMIR	dat_world	AREA	0	-6750.00	540.00	-7486.00	0	1	Undead	22570	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400500	DATHOMIR	dat_world	AREA	0	-6743.44	551.86	-6473.86	0	1	Undead	22560	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400501	DATHOMIR	dat_world	AREA	0	-6721.77	540.00	-7411.85	0	1	Undead	22570	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400502	DATHOMIR	dat_world	AREA	0	-6719.26	546.40	-6509.70	0	1	Undead	22560	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400503	DATHOMIR	dat_world	AREA	0	-6714.27	540.85	-6959.74	0	1	Death Trooper	22825	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400504	DATHOMIR	dat_world	AREA	0	-6713.59	540.84	-6893.40	0	1	Death Trooper	22825	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400505	DATHOMIR	dat_world	AREA	0	-6710.87	556.47	-6444.48	0	1	Undead	22560	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400506	DATHOMIR	dat_world	AREA	0	-6710.66	549.48	-6488.94	0	1	Adol Mantid	22460	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400507	DATHOMIR	dat_world	AREA	0	-6701.42	542.21	-6731.19	0	1	Undead	22585	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400508	DATHOMIR	dat_world	AREA	0	-6689.00	540.00	-7231.00	0	1	Undead	22565	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400509	DATHOMIR	dat_world	AREA	0	-6683.05	540.28	-7105.23	0	1	Undead	22570	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400510	DATHOMIR	dat_world	AREA	0	-6681.29	541.04	-6597.93	0	1	Undead	22565	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400511	DATHOMIR	dat_world	AREA	0	-6680.49	549.76	-6487.18	0	1	Undead	22560	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400512	DATHOMIR	dat_world	AREA	0	-6625.01	540.00	-7370.91	0	1	Tal Freykaa	22465	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400513	DATHOMIR	dat_world	AREA	0	-6599.19	540.00	-7501.57	0	1	Undead	22570	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400514	DATHOMIR	dat_world	AREA	0	-6586.27	553.82	-6468.76	0	1	Undead	22555	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400515	DATHOMIR	dat_world	AREA	0	-6578.93	569.66	-6952.24	0	1	Death Trooper	22815	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400516	DATHOMIR	dat_world	AREA	0	-6577.11	565.61	-6817.66	0	1	Undead	22565	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400517	DATHOMIR	dat_world	AREA	0	-6575.80	540.00	-7406.42	0	1	Undead	22565	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400518	DATHOMIR	dat_world	AREA	0	-6567.33	568.14	-7006.19	0	1	Death Trooper	22810	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400519	DATHOMIR	dat_world	AREA	0	-6563.84	540.00	-7302.33	0	1	Undead	22565	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400520	DATHOMIR	dat_world	AREA	0	-6547.28	540.00	-7449.11	0	1	Undead	22570	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400521	DATHOMIR	dat_world	AREA	0	-6540.00	561.52	-6605.00	0	1	Undead	22565	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400522	DATHOMIR	dat_world	AREA	0	-6530.94	570.00	-6919.25	0	1	Death Trooper	22815	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400523	DATHOMIR	dat_world	AREA	0	-6510.59	540.00	-7510.95	0	1	Death Trooper	22820	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400524	DATHOMIR	dat_world	AREA	0	-6503.14	551.05	-6489.41	0	1	Undead	22555	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400525	DATHOMIR	dat_world	AREA	0	-6499.41	540.00	-7411.34	0	1	Death Trooper	22820	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400526	DATHOMIR	dat_world	AREA	0	-6496.25	563.55	-7089.60	0	1	Death Trooper	22810	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400527	DATHOMIR	dat_world	AREA	0	-6488.71	540.00	-7262.95	0	1	Undead	22565	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400528	DATHOMIR	dat_world	AREA	0	-6453.01	544.18	-7331.11	0	1	Undead	22560	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400529	DATHOMIR	dat_world	AREA	0	-6443.46	564.79	-7204.89	0	1	Undead	22555	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400530	DATHOMIR	dat_world	AREA	0	-6438.90	570.00	-6996.34	0	1	Death Trooper	22810	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400531	DATHOMIR	dat_world	AREA	0	-6431.15	570.00	-7004.73	0	1	Dugo Evnul	22455	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400532	DATHOMIR	dat_world	AREA	0	-6425.10	508.50	7217.10	0	1	a rancor pygmy	24195	outback	Large Stone Mast	3	none	0	900	600	30
+1400533	DATHOMIR	dat_world	AREA	0	-6416.13	540.00	-7439.79	0	1	Undead	22560	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400534	DATHOMIR	dat_world	AREA	0	-6415.16	544.05	-6527.51	0	1	Undead	22550	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400535	DATHOMIR	dat_world	AREA	0	-6406.67	564.74	-7101.99	0	1	Undead	22555	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400536	DATHOMIR	dat_world	AREA	0	-6403.08	563.99	-7175.56	0	1	Undead	22555	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400537	DATHOMIR	dat_world	AREA	0	-6402.12	566.22	-6818.26	0	1	Undead	22565	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400538	DATHOMIR	dat_world	AREA	0	-6390.70	120.00	933.99	0	1	Lucia	26870	-	-	1	none	0	300	120	0
+1400539	DATHOMIR	dat_world	AREA	0	-6389.71	540.00	-7502.76	0	1	Death Trooper	22820	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400540	DATHOMIR	dat_world	AREA	0	-6379.70	556.01	-6447.49	0	1	Death Trooper	22805	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400541	DATHOMIR	dat_world	AREA	0	-6370.37	544.11	-7324.85	0	1	Undead	22560	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400542	DATHOMIR	dat_world	AREA	0	-6367.04	540.18	-7401.48	0	1	Undead	22560	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400543	DATHOMIR	dat_world	AREA	0	-6364.58	563.41	-6978.90	0	1	Death Trooper	22805	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400544	DATHOMIR	dat_world	AREA	0	-6363.70	559.97	-7196.28	0	1	Undead	22555	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400545	DATHOMIR	dat_world	AREA	0	-6360.43	545.47	-6558.18	0	1	Navik Geelo	22450	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400546	DATHOMIR	dat_world	AREA	0	-6346.00	128.00	743.00	0	1	Tylar	26930	-	-	1	none	0	300	120	0
+1400547	DATHOMIR	dat_world	AREA	0	-6335.16	549.14	-6593.87	0	1	Undead	22550	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400548	DATHOMIR	dat_world	AREA	0	-6332.23	559.09	-7093.83	0	1	Death Trooper	22805	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400549	DATHOMIR	dat_world	AREA	0	-6320.65	551.41	-6493.57	0	1	Undead	22550	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400550	DATHOMIR	dat_world	AREA	0	-6304.16	554.02	-7279.93	0	1	Death Trooper	22800	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400551	DATHOMIR	dat_world	AREA	0	-6295.34	555.42	-6688.35	0	1	Death Trooper	22805	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400552	DATHOMIR	dat_world	AREA	0	-6295.17	558.82	-6886.99	0	1	Undead	22545	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400553	DATHOMIR	dat_world	AREA	0	-6290.70	561.21	-7520.08	0	1	Camp Guard	22970	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400554	DATHOMIR	dat_world	AREA	0	-6289.52	561.61	-7524.18	0	1	Oona Wran	22695	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400555	DATHOMIR	dat_world	AREA	0	-6286.69	560.98	-7518.14	0	1	a 2-1B surgical droid	22965	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400556	DATHOMIR	dat_world	AREA	0	-6286.58	561.70	-7531.01	0	1	Stephon Sprocketfire	23095	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400557	DATHOMIR	dat_world	AREA	0	-6282.76	561.70	-7526.23	0	1	Volo Madine	22930	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400558	DATHOMIR	dat_world	AREA	0	-6281.45	561.09	-7519.04	0	1	Camp Guard	22970	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400559	DATHOMIR	dat_world	AREA	0	-6280.57	561.71	-7528.56	0	1	Camp Guard	22970	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400560	DATHOMIR	dat_world	AREA	0	-6278.81	561.55	-7523.66	0	1	Junk Dealer	22955	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400561	DATHOMIR	dat_world	AREA	0	-6271.04	558.90	-7007.96	0	1	Undead	22545	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400562	DATHOMIR	dat_world	AREA	0	-6262.87	487.54	-6113.21	0	1	a Nightsister spell weaver	21160	-	-	1	none	0	300	120	2
+1400563	DATHOMIR	dat_world	AREA	0	-6262.26	559.39	-6609.41	0	1	Salek Panaka	22440	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400564	DATHOMIR	dat_world	AREA	0	-6262.10	559.39	-7245.23	0	1	Death Trooper	22800	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400565	DATHOMIR	dat_world	AREA	0	-6259.36	559.38	-7267.15	0	1	Snotharr	22445	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400566	DATHOMIR	dat_world	AREA	0	-6249.60	481.93	-6082.62	0	1	a Nightsister spell weaver	21160	-	-	1	none	0	300	120	2
+1400567	DATHOMIR	dat_world	AREA	0	-6248.08	485.73	-6124.49	0	1	a Nightsister spell weaver	21160	-	-	1	none	0	300	120	2
+1400568	DATHOMIR	dat_world	AREA	0	-6244.22	558.13	-6484.73	0	1	Undead	22550	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400569	DATHOMIR	dat_world	AREA	0	-6243.00	557.94	-7375.00	0	1	Undead	22550	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400570	DATHOMIR	dat_world	AREA	0	-6240.75	557.56	-7047.76	0	1	Undead	22545	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400571	DATHOMIR	dat_world	AREA	0	-6236.78	556.79	-6795.59	0	1	Undead	22545	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400572	DATHOMIR	dat_world	AREA	0	-6234.60	468.15	-6091.50	0	1	a Nightsister elder	21095	-	-	1	none	0	300	120	2
+1400573	DATHOMIR	dat_world	AREA	0	-6230.13	485.05	-6068.39	0	1	a Nightsister spell weaver	21160	-	-	1	none	0	300	120	2
+1400574	DATHOMIR	dat_world	AREA	0	-6224.74	480.45	-6108.53	0	1	a Nightsister spell weaver	21160	-	-	1	none	0	300	120	2
+1400575	DATHOMIR	dat_world	AREA	0	-6218.46	551.89	-6615.27	0	1	Undead	22540	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400576	DATHOMIR	dat_world	AREA	0	-6216.81	485.52	-6081.98	0	1	a Nightsister spell weaver	21160	-	-	1	none	0	300	120	2
+1400577	DATHOMIR	dat_world	AREA	0	-6201.91	546.16	-6703.80	0	1	Undead	22540	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400578	DATHOMIR	dat_world	AREA	0	-6198.95	545.08	-7271.28	0	1	Death Trooper	22800	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400579	DATHOMIR	dat_world	AREA	0	-6182.76	539.34	-6827.36	0	1	Undead	22540	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400580	DATHOMIR	dat_world	AREA	0	-6176.67	537.65	-6951.74	0	1	Undead	22540	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400581	DATHOMIR	dat_world	AREA	0	-6165.25	536.66	-7108.51	0	1	Undead	22540	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400582	DATHOMIR	dat_world	AREA	0	-6163.27	535.40	-7273.13	0	1	Undead	22540	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400583	DATHOMIR	dat_world	AREA	0	-6145.80	535.14	-6861.00	0	1	Death Trooper	22790	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400584	DATHOMIR	dat_world	AREA	0	-6142.70	530.31	-6578.58	0	1	Undead	22535	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400585	DATHOMIR	dat_world	AREA	0	-6125.08	543.00	-6970.36	0	1	Death Trooper	22790	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400586	DATHOMIR	dat_world	AREA	0	-6118.65	530.00	-7423.69	0	1	Undead	22535	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400587	DATHOMIR	dat_world	AREA	0	-6113.75	543.00	-7076.70	0	1	Death Trooper	22790	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400588	DATHOMIR	dat_world	AREA	0	-6113.75	530.00	-6616.76	0	1	Undead	22535	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400589	DATHOMIR	dat_world	AREA	0	-6113.49	530.00	-6672.74	0	1	Death Trooper	22790	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400590	DATHOMIR	dat_world	AREA	0	-6103.66	530.00	-6725.60	0	1	Undead	22535	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400591	DATHOMIR	dat_world	AREA	0	-6100.98	525.55	-6467.54	0	1	Undead	22535	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400592	DATHOMIR	dat_world	AREA	0	-6073.84	543.00	-7161.28	0	1	Death Trooper	22790	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400593	DATHOMIR	dat_world	AREA	0	-6072.33	527.44	-6505.35	0	1	Undead	22535	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400594	DATHOMIR	dat_world	AREA	0	-6066.34	531.13	-7474.32	0	1	Undead	22535	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400595	DATHOMIR	dat_world	AREA	0	-6048.06	530.01	-6539.10	0	1	Death Trooper	22785	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400596	DATHOMIR	dat_world	AREA	0	-6039.70	530.44	-6667.19	0	1	Death Trooper	22785	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400597	DATHOMIR	dat_world	AREA	0	-6039.62	541.27	-6879.27	0	1	Undead	22535	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400598	DATHOMIR	dat_world	AREA	0	-6039.29	541.83	-6986.42	0	1	Undead	22535	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400599	DATHOMIR	dat_world	AREA	0	-6037.19	530.70	-6694.72	0	1	Undead	22530	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400600	DATHOMIR	dat_world	AREA	0	-6035.49	540.84	-7107.58	0	1	Undead	22535	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400601	DATHOMIR	dat_world	AREA	0	-6033.69	531.15	-7319.67	0	1	Undead	22535	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400602	DATHOMIR	dat_world	AREA	0	-6032.87	536.01	-6450.40	0	1	Undead	22535	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400603	DATHOMIR	dat_world	AREA	0	-6011.31	536.17	-6805.79	0	1	Undead	22530	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400604	DATHOMIR	dat_world	AREA	0	-6006.99	537.48	-6604.47	0	1	Undead	22530	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400605	DATHOMIR	dat_world	AREA	0	-5994.85	541.53	-6958.09	0	1	Undead	22530	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400606	DATHOMIR	dat_world	AREA	0	-5989.30	543.53	-7450.05	0	1	Undead	22535	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400607	DATHOMIR	dat_world	AREA	0	-5987.68	544.12	-6798.75	0	1	Undead	22530	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400608	DATHOMIR	dat_world	AREA	0	-5984.43	545.31	-6450.24	0	1	Jawiin Danod	22435	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400609	DATHOMIR	dat_world	AREA	0	-5982.90	545.88	-7115.18	0	1	Undead	22530	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400610	DATHOMIR	dat_world	AREA	0	-5982.82	545.91	-6750.53	0	1	Death Trooper	22785	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400611	DATHOMIR	dat_world	AREA	0	-5965.18	552.27	-6524.02	0	1	Undead	22530	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400612	DATHOMIR	dat_world	AREA	0	-5947.27	556.25	-6474.25	0	1	Death Trooper	22785	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400613	DATHOMIR	dat_world	AREA	0	-5942.62	556.66	-6849.14	0	1	Undead	22530	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400614	DATHOMIR	dat_world	AREA	0	-5939.42	558.49	-6675.99	0	1	Jeb Maris	22880	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400615	DATHOMIR	dat_world	AREA	0	-5938.50	556.73	-6522.89	0	1	Undead	22525	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400616	DATHOMIR	dat_world	AREA	0	-5936.25	556.78	-6795.53	0	1	Death Trooper	22785	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400617	DATHOMIR	dat_world	AREA	0	-5935.01	558.89	-6667.23	0	1	a 2-1B surgical droid	22965	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400618	DATHOMIR	dat_world	AREA	0	-5932.05	558.96	-6675.52	0	1	Camp Guard	22970	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400619	DATHOMIR	dat_world	AREA	0	-5929.99	559.14	-6661.15	0	1	Camp Guard	22970	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400620	DATHOMIR	dat_world	AREA	0	-5927.15	559.19	-6657.08	0	1	Camp Guard	22970	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400621	DATHOMIR	dat_world	AREA	0	-5926.77	555.95	-6949.53	0	1	Death Trooper	22790	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400622	DATHOMIR	dat_world	AREA	0	-5926.11	559.15	-6675.28	0	1	Zahara Cody	23115	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400623	DATHOMIR	dat_world	AREA	0	-5924.86	559.18	-6676.41	0	1	Trig Longo	23060	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400624	DATHOMIR	dat_world	AREA	0	-5924.50	559.19	-6652.49	0	1	Sergeant Mika Horn	23090	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400625	DATHOMIR	dat_world	AREA	0	-5923.22	559.15	-6685.61	0	1	Camp Guard	22970	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400626	DATHOMIR	dat_world	AREA	0	-5919.89	559.08	-6660.92	0	1	Camp Guard	22970	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400627	DATHOMIR	dat_world	AREA	0	-5917.23	553.21	-7443.51	0	1	Undead	22535	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400628	DATHOMIR	dat_world	AREA	0	-5916.44	553.75	-6569.67	0	1	Undead	22525	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400629	DATHOMIR	dat_world	AREA	0	-5916.24	558.92	-6678.39	0	1	Oona Wran	22690	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400630	DATHOMIR	dat_world	AREA	0	-5914.40	553.16	-6500.25	0	1	Undead	22525	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400631	DATHOMIR	dat_world	AREA	0	-5913.17	558.77	-6671.66	0	1	Junk Dealer	22955	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400632	DATHOMIR	dat_world	AREA	0	-5905.64	558.37	-6426.65	0	1	Black Sun Escort	22665	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400633	DATHOMIR	dat_world	AREA	0	-5904.95	558.38	-6428.64	0	1	Black Sun Escort	22660	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400634	DATHOMIR	dat_world	AREA	0	-5904.76	558.32	-6427.42	0	1	Guri	22920	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400635	DATHOMIR	dat_world	AREA	0	-5891.29	544.69	-6517.31	0	1	Undead	22525	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400636	DATHOMIR	dat_world	AREA	0	-5888.88	543.75	-6560.10	0	1	Undead	22525	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400637	DATHOMIR	dat_world	AREA	0	-5886.00	542.63	-7060.00	0	1	Undead	22530	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400638	DATHOMIR	dat_world	AREA	0	-5884.87	542.18	-7262.99	0	1	Undead	22530	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400639	DATHOMIR	dat_world	AREA	0	-5869.41	536.21	-6639.35	0	1	Undead	22525	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400640	DATHOMIR	dat_world	AREA	0	-5868.97	536.09	-6519.89	0	1	Fenn Kay'lay	22780	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400641	DATHOMIR	dat_world	AREA	0	-5864.69	534.46	-6536.12	0	1	Undead	22525	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400642	DATHOMIR	dat_world	AREA	0	-5857.91	532.02	-6689.16	0	1	Undead	22525	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400643	DATHOMIR	dat_world	AREA	0	-5853.51	530.51	-6714.23	0	1	Undead	22525	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400644	DATHOMIR	dat_world	AREA	0	-5852.85	530.28	-6557.69	0	1	Death Trooper	22780	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400645	DATHOMIR	dat_world	AREA	0	-5852.08	530.03	-6594.85	0	1	Undead	22525	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400646	DATHOMIR	dat_world	AREA	0	-5850.79	529.60	-6517.22	0	1	Undead	22525	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400647	DATHOMIR	dat_world	AREA	0	-5828.65	523.45	-6580.90	0	1	Undead	22525	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400648	DATHOMIR	dat_world	AREA	0	-5820.39	521.84	-6663.47	0	1	Undead	22525	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400649	DATHOMIR	dat_world	AREA	0	-5820.36	521.84	-6879.68	0	1	Undead	22530	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400650	DATHOMIR	dat_world	AREA	0	-5817.42	521.38	-6604.36	0	1	Undead	22525	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400651	DATHOMIR	dat_world	AREA	0	-5807.71	529.93	-7313.15	0	1	Undead	22530	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400652	DATHOMIR	dat_world	AREA	0	-5803.00	529.51	-7452.00	0	1	Undead	22530	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400653	DATHOMIR	dat_world	AREA	0	-5802.75	517.44	-6570.75	0	1	Undead	22525	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400654	DATHOMIR	dat_world	AREA	0	-5800.43	512.33	-6551.40	0	1	outbreak_imperial_guard_aggro	22935	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400655	DATHOMIR	dat_world	AREA	0	-5795.41	511.32	-6552.23	0	1	outbreak_imperial_guard_aggro	22935	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400656	DATHOMIR	dat_world	AREA	0	-5792.29	520.00	-7109.88	0	1	Death Trooper	22785	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400657	DATHOMIR	dat_world	AREA	0	-5790.62	510.45	-6553.16	0	1	GT-643	23040	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400658	DATHOMIR	dat_world	AREA	0	-5784.61	510.77	-6544.87	0	1	GT-643	23040	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400659	DATHOMIR	dat_world	AREA	0	-5784.09	510.30	-6558.71	0	1	GT-643	23040	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400660	DATHOMIR	dat_world	AREA	0	-5783.04	511.43	-6564.44	0	1	outbreak_imperial_guard_aggro	22935	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400661	DATHOMIR	dat_world	AREA	0	-5781.05	512.12	-6568.82	0	1	outbreak_imperial_guard_aggro	22935	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400662	DATHOMIR	dat_world	AREA	0	-5780.61	522.74	-7224.15	0	1	Death Trooper	22785	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400663	DATHOMIR	dat_world	AREA	0	-5780.14	510.72	-6549.41	0	1	Lieutenant Liam Waurie	22945	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400664	DATHOMIR	dat_world	AREA	0	-5780.03	530.00	-7328.08	0	1	Death Trooper	22785	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400665	DATHOMIR	dat_world	AREA	0	-5777.94	520.00	-6677.07	0	1	Undead	22525	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400666	DATHOMIR	dat_world	AREA	0	-5774.88	510.71	-6553.52	0	1	GT-643	23040	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400667	DATHOMIR	dat_world	AREA	0	-5774.41	520.00	-6948.85	0	1	Undead	22530	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400668	DATHOMIR	dat_world	AREA	0	-5763.82	520.00	-6634.55	0	1	Undead	22525	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400669	DATHOMIR	dat_world	AREA	0	-5757.30	520.00	-6744.03	0	1	Death Trooper	22780	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400670	DATHOMIR	dat_world	AREA	0	-5754.84	520.00	-6769.31	0	1	Death Trooper	22780	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400671	DATHOMIR	dat_world	AREA	0	-5753.90	520.00	-6897.79	0	1	Undead	22530	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400672	DATHOMIR	dat_world	AREA	0	-5753.83	520.00	-7062.45	0	1	Death Trooper	22785	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400673	DATHOMIR	dat_world	AREA	0	-5752.72	520.00	-6987.80	0	1	Death Trooper	22785	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400674	DATHOMIR	dat_world	AREA	0	-5749.99	511.00	-6493.07	0	1	Captain Firmus Piett	22940	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400675	DATHOMIR	dat_world	AREA	0	-5749.83	520.00	-7164.21	0	1	Death Trooper	22785	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400676	DATHOMIR	dat_world	AREA	0	-5745.93	510.98	-6483.97	0	1	GT-643	23040	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400677	DATHOMIR	dat_world	AREA	0	-5745.82	530.00	-7351.48	0	1	Death Trooper	22785	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400678	DATHOMIR	dat_world	AREA	0	-5745.27	511.01	-6466.06	0	1	Rodian Smuggler	23000	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400679	DATHOMIR	dat_world	AREA	0	-5744.24	510.98	-6480.28	0	1	GT-643	23040	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400680	DATHOMIR	dat_world	AREA	0	-5742.17	530.00	-7279.86	0	1	Death Trooper	22785	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400681	DATHOMIR	dat_world	AREA	0	-5716.07	529.86	-7281.64	0	1	Undead	22530	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400682	DATHOMIR	dat_world	AREA	0	-5714.88	520.82	-7159.95	0	1	Undead	22530	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400683	DATHOMIR	dat_world	AREA	0	-5708.28	529.68	-7406.07	0	1	Undead	22530	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400684	DATHOMIR	dat_world	AREA	0	-5707.41	521.88	-7017.33	0	1	Undead	22530	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400685	DATHOMIR	dat_world	AREA	0	-5706.19	511.19	-6509.67	0	1	GT-643	23040	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400686	DATHOMIR	dat_world	AREA	0	-5703.98	529.58	-7372.20	0	1	Death Trooper	22785	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400687	DATHOMIR	dat_world	AREA	0	-5703.40	511.01	-6467.79	0	1	a Junk Dealer	22955	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400688	DATHOMIR	dat_world	AREA	0	-5694.61	511.03	-6467.00	0	1	GT-643	23040	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400689	DATHOMIR	dat_world	AREA	0	-5693.17	511.08	-6464.62	0	1	GT-643	23040	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400690	DATHOMIR	dat_world	AREA	0	-5691.90	511.09	-6488.73	0	1	TK-216	23615	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400691	DATHOMIR	dat_world	AREA	0	-5691.50	511.10	-6491.91	0	1	Tyla Gallamby	23610	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400692	DATHOMIR	dat_world	AREA	0	-5688.20	511.18	-6490.21	0	1	Illrian Nhagy	23605	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400693	DATHOMIR	dat_world	AREA	0	-5687.23	529.46	-7400.13	0	1	Vil Burren	22430	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400694	DATHOMIR	dat_world	AREA	0	-5664.70	533.95	-7090.04	0	1	Undead	22530	dungeon	Quarantine Zone	1	none	0	300	120	2
+1400695	DATHOMIR	dat_world	AREA	0	-5663.36	538.22	-6818.35	0	1	Chewbacca	22715	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400696	DATHOMIR	dat_world	AREA	0	-5663.16	538.27	-6817.33	0	1	Han Solo	22925	dungeon	Quarantine Zone	1	none	0	300	120	0
+1400697	DATHOMIR	dat_world	AREA	0	-3930.58	130.06	-227.44	0	1	Morris	26880	-	-	1	none	0	300	120	0
+1400698	DATHOMIR	dat_world	AREA	0	-2650.80	544.60	7387.30	0	1	a rancor pygmy	24195	outback	Tree and Skeletons	3	none	0	900	600	30
+1400699	DATHOMIR	dat_world	AREA	0	-2425.71	50.43	-3102.94	0	1	a Dark Jedi Elder	31520	-	-	1	none	0	300	120	0
+1400700	DATHOMIR	dat_world	AREA	0	-2420.21	48.24	-5083.00	0	1	a Dark Jedi Sentinel	31525	-	-	1	none	0	300	120	0
+1400701	DATHOMIR	dat_world	AREA	0	-2420.18	51.11	-3101.17	0	1	a Dark Jedi Elder	31520	-	-	1	none	0	300	120	0
+1400702	DATHOMIR	dat_world	AREA	0	-2169.36	18.00	-3658.42	0	1	Kam	26840	-	-	1	none	0	300	120	0
+1400703	DATHOMIR	dat_world	AREA	0	-1149.07	107.64	6332.40	0	1	a cut-throat	27065	-	-	1	none	0	300	120	2
+1400704	DATHOMIR	dat_world	AREA	0	-1138.00	111.58	6303.00	0	1	Gib	26800	-	-	1	none	0	300	120	0
+1400705	DATHOMIR	dat_world	AREA	0	-1113.76	107.72	6343.87	0	1	a cut-throat	27065	-	-	1	none	0	300	120	2
+1400706	DATHOMIR	dat_world	AREA	0	-1106.86	125.55	6268.64	0	1	a cut-throat	27065	-	-	1	none	0	300	120	2
