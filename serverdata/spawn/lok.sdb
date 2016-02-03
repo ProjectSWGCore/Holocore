@@ -239,11 +239,11 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 1800239	LOK	lok_nym_slicer_institute	AREA	6	-2.20	-4.00	-9.00	0	1	a Slicer student	26580	dungeon	Slicer Institute	1	none	0	300	120	0
 1800240	LOK	lok_nym_slicer_institute	AREA	2	-1.40	0.40	-7.30	0	1	a Slicer student	26580	dungeon	Slicer Institute	1	none	0	300	120	0
 1800241	LOK	lok_nym_stronghold	QUEST	3	-0.04	3.28	-23.03	0	1	Nym	21920	city	Nym's Stronghold	1	sitting	0	300	120	0
-1800242	LOK	lok_nym_stronghold	QUEST	3	-1.55	4.08	-11.80	1	1	Lady Viopa (Rebel Pilot Trainer)	33955	city	Nym's Stronghold	1	none	0	300	120	0
+1800242	LOK	lok_nym_stronghold	QUEST	3	-2.21	4.08	-11.02	-2	1	Lady Viopa (Rebel Pilot Trainer)	33955	city	Nym's Stronghold	1	none	0	300	120	0
 1800243	LOK	lok_nym_stronghold	QUEST	3	0.26	3.31	-15.72	-179	1	Vana Sage	22325	city	Nym's Stronghold	1	none	0	300	120	0
 1800244	LOK	lok_nym_stronghold	QUEST	3	1.89	4.08	-10.71	-172	1	Grenz Zittoun	22120	city	Nym's Stronghold	1	none	0	300	120	0
 1800245	LOK	lok_nym_stronghold	QUEST	3	-1.74	3.34	-19.21	-14	1	Kole	14400	city	Nym's Stronghold	1	none	0	300	120	0
-1800246	LOK	lok_nym_stronghold	QUEST	3	-5.22	3.42	-20.57	14	1	Rek Thelcar	22265	city	Nym's Stronghold	1	none	0	300	120	0
+1800246	LOK	lok_nym_stronghold	QUEST	3	-5.61	3.42	-20.73	14	1	Rek Thelcar	22265	city	Nym's Stronghold	1	none	0	300	120	0
 1800247	LOK	lok_nym_stronghold	QUEST	3	5.54	4.07	-13.73	-155	1	Mako Ghast	22205	city	Nym's Stronghold	1	none	0	300	120	0
 1800248	LOK	lok_nym_stronghold	QUEST	3	5.58	3.42	-20.81	-47	1	Stuvany Inglen	22290	city	Nym's Stronghold	1	none	0	300	120	0
 1800249	LOK	lok_nym_stronghold	QUEST	3	3.13	3.29	-21.21	-2	1	Jinkins	13935	city	Nym's Stronghold	1	none	0	300	120	0
@@ -256,7 +256,7 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 1800256	LOK	lok_nym_stronghold	EGG	3	-20.28	2.30	-18.78	0	1	Nym's guard	21975	city	Nym's Stronghold	1	none	0	300	120	0
 1800257	LOK	lok_nym_stronghold	EGG	3	20.28	2.30	-18.78	0	1	Nym's guard	21975	city	Nym's Stronghold	1	none	0	300	120	0
 1800258	LOK	lok_nym_stronghold	EGG	3	19.11	2.30	11.20	179	1	Nym's guard	21970	city	Nym's Stronghold	1	none	0	300	120	0
-1800259	LOK	lok_nym_stronghold	EGG	3	-19.11	2.30	11.20	179	1	Nym's guard	29170	city	Nym's Stronghold	1	none	0	300	120	0
+1800259	LOK	lok_nym_stronghold	EGG	3	-19.11	2.30	11.20	179	1	Nym's guard	21970	city	Nym's Stronghold	1	none	0	300	120	0
 1800260	LOK	lok_nym_stronghold	EGG	3	-8.06	1.30	-0.95	179	1	Nym's brawler	21930	city	Nym's Stronghold	1	discuss	0	300	120	0
 1800261	LOK	lok_nym_stronghold	EGG	3	-8.06	1.30	-2.23	0	1	Nym's surveyor	22015	city	Nym's Stronghold	1	listen	0	300	120	0
 1800262	LOK	lok_nym_stronghold	EGG	3	-3.51	1.30	3.96	90	1	Nym's bodyguard	21925	city	Nym's Stronghold	1	discuss	0	300	120	0
