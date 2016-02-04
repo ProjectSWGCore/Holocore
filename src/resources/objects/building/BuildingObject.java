@@ -28,12 +28,15 @@
 package resources.objects.building;
 
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
+import resources.Location;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.PortalLayoutData;
 import resources.client_info.visitors.ObjectData.ObjectDataAttribute;
 import resources.objects.SWGObject;
 import resources.objects.cell.CellObject;
 import resources.objects.tangible.TangibleObject;
+import services.objects.ObjectCreator;
+import intents.object.ObjectCreatedIntent;
 
 import java.util.Collections;
 import java.util.LinkedList;
@@ -94,6 +97,25 @@ public class BuildingObject extends TangibleObject {
 
 		populateCellData((CellObject) object, portalLayoutData.getCells().get(((CellObject) object).getNumber()));
 		return true;
+	}
+	
+	public void populateCells() {
+		String portalFile = (String) getDataAttribute(ObjectDataAttribute.PORTAL_LAYOUT_FILENAME);
+		if (portalFile == null || portalFile.isEmpty())
+			return;
+		
+		PortalLayoutData portalLayoutData = (PortalLayoutData) ClientFactory.getInfoFromFile(portalFile, true);
+		if (portalLayoutData == null || portalLayoutData.getCells() == null || portalLayoutData.getCells().size() == 0)
+			return;
+		
+		for (int i = 0; i < portalLayoutData.getCells().size() - 1; i++) {
+			CellObject cell = (CellObject) ObjectCreator.createObjectFromTemplate("object/cell/shared_cell.iff");
+			cell.setNumber(i+1);
+			cell.setLocation(new Location(0, 0, 0, getTerrain()));
+			populateCellData(cell, portalLayoutData.getCells().get(i+1));
+			super.addObject(cell);
+			new ObjectCreatedIntent(cell).broadcast();
+		}
 	}
 
 	private void populateCellData(CellObject cellObject, PortalLayoutData.Cell cellData) {
