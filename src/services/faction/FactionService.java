@@ -1,6 +1,6 @@
 package services.faction;
 
-import java.util.EnumSet;
+import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -185,11 +185,8 @@ public final class FactionService extends Service {
 	}
 	
 	private UpdatePvpStatusMessage createPvpStatusMessage(TangibleObject object, TangibleObject observer, int flags) {
-		EnumSet<PvpFlag> objectFlags = PvpFlag.getFlags(flags);
-		PvpFlag flag = PvpFlag.PLAYER;
-		if (!objectFlags.isEmpty())
-			flag = objectFlags.iterator().next();
-		return new UpdatePvpStatusMessage(flag, object.getPvpFaction().getCrc(), object.getObjectId());
+		Set<PvpFlag> flagSet = PvpFlag.getFlags(object.getPvpFlags());
+		return new UpdatePvpStatusMessage(object.getPvpFaction(), object.getObjectId(), flagSet.toArray(new PvpFlag[flagSet.size()]));
 	}
 	
 }

@@ -29,6 +29,7 @@ package resources.objects.creature;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Set;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 
@@ -830,8 +831,9 @@ public class CreatureObject extends TangibleObject {
 
 		target.sendPacket(new UpdatePostureMessage(posture.getId(), getObjectId()));
 
-		if (getOwner() != null && target != getOwner()) {
-			target.sendPacket(new UpdatePvpStatusMessage(PvpFlag.PLAYER, 0, getObjectId()));
+		if (target != getOwner()) {
+			Set<PvpFlag> flags = PvpFlag.getFlags(getPvpFlags());
+			target.sendPacket(new UpdatePvpStatusMessage(getPvpFaction(), getObjectId(), flags.toArray(new PvpFlag[flags.size()])));
 		}
 	}
 	
