@@ -78,7 +78,7 @@ public class NetworkClientManager extends Manager implements TCPCallback, Packet
 		inboundQueue = new LinkedList<>();
 		outboundQueue = new LinkedList<>();
 		networkIdCounter = new AtomicLong(1);
-		inboundProcessor = Executors.newFixedThreadPool(threadCount/10, ThreadUtilities.newThreadFactory("inbound-packet-processor-%d"));
+		inboundProcessor = Executors.newFixedThreadPool(threadCount, ThreadUtilities.newThreadFactory("inbound-packet-processor-%d"));
 		outboundProcessor = Executors.newFixedThreadPool(threadCount, ThreadUtilities.newThreadFactory("outbound-packet-processor-%d"));
 		processBufferRunnable = () -> processBufferRunnable();
 		processOutboundRunnable = () -> processOutboundRunnable();
