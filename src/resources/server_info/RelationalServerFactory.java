@@ -28,6 +28,7 @@ public class RelationalServerFactory {
 	private RelationalServerData getData(String file, String ... tables) {
 		if (!file.endsWith(".db"))
 			throw new IllegalArgumentException("File path for database must end in .db!");
+		file = file.replace('/', File.separatorChar);
 		final Object lock = getFileLocking(file);
 		synchronized (lock) {
 			File f = new File(BASE_PATH + file);
@@ -73,6 +74,7 @@ public class RelationalServerFactory {
 	
 	private boolean loadTables(RelationalServerData data, File parent, String [] tables) {
 		for (String table : tables) {
+			table = table.replace('/', File.separatorChar);
 			String path = generatePath(parent, table);
 			table = path.substring(path.lastIndexOf(File.separatorChar)+1, path.lastIndexOf('.'));
 			if (!data.linkTableWithSdb(table, path))
