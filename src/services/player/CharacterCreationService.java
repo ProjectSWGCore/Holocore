@@ -210,8 +210,9 @@ public class CharacterCreationService extends Service {
 			return ErrorMessage.NAME_DECLINED_INTERNAL_ERROR;
 		} else if (createCharacterInDb(characterId, create.getName(), player)) {
 			creationRestriction.createdCharacter(player);
-			System.out.println("[" + player.getUsername() + "] Create Character: " + create.getName() + ". IP: " + create.getAddress() + ":" + create.getPort());
-			Log.i("ZoneService", "%s created character %s from %s:%d", player.getUsername(), create.getName(), create.getAddress(), create.getPort());
+			String formatted = String.format("%s:%d [%s]", create.getAddress(), create.getPort(), create.getAddress().getCanonicalHostName());
+			System.out.println("[" + player.getUsername() + "] Create Character: " + create.getName() + ". IP: " + formatted);
+			Log.i("ZoneService", "%s created character %s from %s", player.getUsername(), create.getName(), formatted);
 			sendPacket(player, new CreateCharacterSuccess(characterId));
 			new PlayerEventIntent(player, PlayerEvent.PE_CREATE_CHARACTER).broadcast();
 			return ErrorMessage.NAME_APPROVED;

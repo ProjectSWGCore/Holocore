@@ -258,8 +258,9 @@ public class ZoneManager extends Manager {
 	}
 	
 	private void handleClientIdMsg(Player player, ClientIdMsg clientId) {
-		System.out.println("[" + player.getUsername() + "] Connected to the zone server. IP: " + clientId.getAddress() + ":" + clientId.getPort());
-		Log.i("ZoneService", "%s connected to the zone server from %s:%d", player.getUsername(), clientId.getAddress(), clientId.getPort());
+		String formatted = String.format("%s:%d [%s]", clientId.getAddress(), clientId.getPort(), clientId.getAddress().getCanonicalHostName());
+		System.out.println("[" + player.getUsername() + "] Connected to the zone server. IP: " + formatted);
+		Log.i("ZoneService", "%s connected to the zone server from %s", player.getUsername(), formatted);
 		sendPacket(player.getNetworkId(), new HeartBeat());
 		sendPacket(player.getNetworkId(), new AccountFeatureBits());
 		sendPacket(player.getNetworkId(), new ClientPermissionsMessage());

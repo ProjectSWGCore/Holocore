@@ -202,8 +202,12 @@ public class LoginService extends Service {
 			default: player.setAccessLevel(AccessLevel.PLAYER); break;
 		}
 		sendLoginSuccessPacket(player);
-		System.out.println("[" + player.getUsername() + "] Connected to the login server. IP: " + id.getAddress() + ":" + id.getPort());
-		Log.i("LoginService", "%s connected to the login server from %s:%d", player.getUsername(), id.getAddress(), id.getPort());
+		long start = System.nanoTime();
+		String host = id.getAddress().getCanonicalHostName();
+		double time = (System.nanoTime()-start)/1E6;
+		String formatted = String.format("%s:%d [%s-%.3f]", id.getAddress(), id.getPort(), host, time);
+		System.out.println("[" + player.getUsername() + "] Connected to the login server. IP: " + formatted);
+		Log.i("LoginService", "%s connected to the login server from %s", player.getUsername(), formatted);
 		new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_SUCCESS).broadcast();
 	}
 	
