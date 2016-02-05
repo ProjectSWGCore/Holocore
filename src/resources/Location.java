@@ -108,6 +108,12 @@ public class Location implements Encodable, Serializable {
 		return square(square(getX()-x) + square(getY()-y) + square(getZ()-z)) <= square(radius);
 	}
 	
+	public boolean isWithinFlatDistance(Point3D target, double radius){
+		double xD = Math.abs(getX() - target.getX());
+		double zD = Math.abs(getZ() - target.getZ());
+		return xD +  zD <= radius;
+	}
+	
 	public void translatePosition(double x, double y, double z) {
 		setX(getX() + x);
 		setY(getY() + y);
