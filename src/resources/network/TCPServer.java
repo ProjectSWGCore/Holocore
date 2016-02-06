@@ -268,7 +268,7 @@ public class TCPServer {
 					return true;
 				}
 			} catch (IOException e) {
-				if (e.getMessage().toLowerCase(Locale.US).contains("connection reset"))
+				if (e.getMessage() != null && e.getMessage().toLowerCase(Locale.US).contains("connection reset"))
 					Log.e("TCPServer", "Connection Reset with %s", s.socket().getRemoteSocketAddress());
 				else {
 					Log.e("TCPServer", e);
