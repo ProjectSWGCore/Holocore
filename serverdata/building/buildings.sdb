@@ -388,6 +388,7 @@ nab_deeja_house2	NABOO	1685119	housing_naboo_style_1.iff	Naboo - Deeja Peak / Ho
 nab_deeja_mummer_cave	NABOO	-294141351876756066	naboo_deeja_mummer_cave.iff	Naboo - Deeja Peak / Mummer Cave	11	4050	421	-1718
 nab_deeja_skaak_cave	NABOO	-296674625788608721	naboo_deeja_skaak_cave.iff	Naboo - Deeja Peak / Skaak Cave	11	4558	100	-960
 nab_deeja_stonewall_labs	NABOO	-296674626034364525	naboo_deeja_peak_stonewall_labs.iff	Naboo - Deeja Peak / Stonewall Labs	22	5812	229	-1981
+nab_deeja_theater	NABOO	2725352	guild_theater_naboo_s01.iff	Naboo - Deeja Peak / Theater	10	4929	360	-1473
 nab_deeja_university	NABOO	1685231	guild_university_naboo_style_01.iff	Naboo - Deeja Peak / University	9	4731	330	-1275
 nab_drennic_bunker	NABOO	-292171026579885505	naboo_ac_drennic_bunker.iff	Naboo - Drennic Bunker	10	357	13	2037
 nab_emperors_retreat	NABOO	1418871	emperors_retreat.iff	Naboo - Emperors Retreat	23	2421	292	-3941
@@ -451,7 +452,6 @@ nab_moenia_hotel	NABOO	1717465	hotel_naboo_theed.iff	Naboo - Moenia / Hotel	10	4
 nab_moenia_house	NABOO	1719359	housing_naboo_style_1.iff	Naboo - Moenia / House	7	4854	4	-4830
 nab_moenia_salon	NABOO	8575780	salon_naboo.iff	Naboo - Moenia / Salon	1	4787	5	-4731
 nab_moenia_starport	NABOO	4215406	starport_naboo.iff	Naboo - Moenia / Starport	16	4728	4	-4650
-nab_moenia_theater	NABOO	2725352	guild_theater_naboo_s01.iff	Naboo - Moenia / Theater	10	4929	360	-1473
 nab_moenia_university	NABOO	1717548	guild_university_naboo_style_01.iff	Naboo - Moenia / University	9	4805	4	-5000
 nab_mummer_bunker	NABOO	-285415627153769591	naboo_theed_mummer_bunker.iff	Naboo - Mummer Bunker	22	-4526	9	3633
 nab_mystril_safehouse	NABOO	-285415628435115831	ac_mystril_safehouse_01_memorial.iff	Naboo - Mystril Safehouse	7	-5427	13	3574
