@@ -432,8 +432,8 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 2000432	NABOO	nab_deeja_hotel	EGG	10	-23.48	1.60	-17.23	0	1	An Event Promoter	33705	city	Dee'ja Peak	1	none	0	300	120	0
 2000433	NABOO	nab_world	EGG	0	5139.00	346.50	-1530.00	46	1	Damalia Korde	5270	city	Dee'ja Peak	1	none	0	300	120	0
 2000434	NABOO	nab_world	EGG	0	4710.00	330.00	-1432.00	-94	1	Arven Wendik	315	city	Dee'ja Peak	1	none	0	300	120	0
-2200435	NABOO	nab_deeja_theater	EGG	1	7.00	0.60	-4.00	-178	1	a storyteller vendor	29575	city	Dee'ja Peak	1	none	0	300	120	0
-2200436	NABOO	nab_deeja_theater	EGG	8	21.90	2.10	64.50	0	1	a theater manager	23835	city	Dee'ja Peak	1	none	0	300	120	0
+2000435	NABOO	nab_deeja_theater	EGG	1	7.00	0.60	-4.00	-178	1	a storyteller vendor	29575	city	Dee'ja Peak	1	none	0	300	120	0
+2000436	NABOO	nab_deeja_theater	EGG	8	21.90	2.10	64.50	0	1	a theater manager	23835	city	Dee'ja Peak	1	none	0	300	120	0
 2000437	NABOO	nab_world	EGG	0	5310.00	326.00	-1583.00	88	1	an Imperial recruiter	13170	city	Deeja Peak	1	none	0	300	120	0
 2000438	NABOO	nab_world	EGG	0	5138.00	350.00	-1480.00	-149	1	an Imperial recruiter	13170	city	Deeja Peak	1	none	0	300	120	0
 2000439	NABOO	nab_kaadara_association_hall	EGG	10	0.07	1.75	-13.57	0	1	Lt. Barn Sinkko (Imperial Pilot Trainer)	33810	city	Kaadara	1	none	0	300	120	0
