@@ -42,6 +42,7 @@ public class GameManager extends Manager {
 	private final TerminalService terminalManager;
 	private final FactionService factionService;
 //	private final GroupService groupService;
+        private final SkillModService skillModService;
 
 	public GameManager() {
 		commandService = new CommandService();
@@ -51,6 +52,7 @@ public class GameManager extends Manager {
 		terminalManager = new TerminalService();
 		factionService = new FactionService();
 //		groupService = new GroupService();
+		skillModService = new SkillModService();
 
 		addChildService(commandService);
 		addChildService(connectionService);
@@ -59,5 +61,6 @@ public class GameManager extends Manager {
 		addChildService(terminalManager);
 		addChildService(factionService);
 //		addChildService(groupService);
+		addChildService(skillModService);
 	}
 }

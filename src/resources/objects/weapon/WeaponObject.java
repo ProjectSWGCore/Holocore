@@ -85,16 +85,6 @@ public class WeaponObject extends TangibleObject {
 		return super.hashCode() * 7 + type;
 	}
 	
-	protected void sendBaselines(Player target) {
-		BaselineBuilder bb = new BaselineBuilder(this, BaselineType.WEAO, 3);
-		createBaseline3(target, bb);
-		bb.sendTo(target);
-		
-		bb = new BaselineBuilder(this, BaselineType.WEAO, 6);
-		createBaseline6(target, bb);
-		bb.sendTo(target);
-	}
-	
 	public void createBaseline3(Player target, BaselineBuilder bb) {
 		super.createBaseline3(target, bb);
 		

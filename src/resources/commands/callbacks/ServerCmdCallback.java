@@ -142,7 +142,7 @@ public class ServerCmdCallback implements ICmdCallback {
 			});
 			
 			timeWindow.addOkButtonCallback("handleCustomShutdownCountdown", (player, actor1, event, parameters) -> {
-				long countdown = Long.valueOf(SuiInputBox.getEnteredText(parameters));
+				long countdown = Long.parseLong(SuiInputBox.getEnteredText(parameters));
 				new ServerManagementIntent(countdown, timeUnitReference.get(), ServerManagementEvent.SHUTDOWN).broadcast();
 			});
 			

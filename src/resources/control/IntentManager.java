@@ -87,7 +87,7 @@ public class IntentManager {
 		synchronized (intentQueue) {
 			intentQueue.add(i);
 		}
-		try { broadcastThreads.submit(broadcastRunnable); }
+		try { broadcastThreads.execute(broadcastRunnable); }
 		catch (RejectedExecutionException e) { } // This error is thrown when the server is being shut down
 	}
 	

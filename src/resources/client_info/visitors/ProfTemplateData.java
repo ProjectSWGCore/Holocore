@@ -38,7 +38,7 @@ public class ProfTemplateData extends ClientData {
 	
 	private List<Template> templates = new ArrayList<>();
 	
-	private class Template {
+	private static class Template {
 		
 		private List<String> items;
 		private String template;

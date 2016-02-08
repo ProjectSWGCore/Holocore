@@ -110,6 +110,22 @@ public class Point3D implements Encodable, Serializable {
 		y = Packet.getFloat(data);
 		z = Packet.getFloat(data);
 	}
+	
+	public boolean equals(Object o) {
+		if (!(o instanceof Point3D))
+			return false;
+		if (Math.abs(((Point3D) o).getX()-getX()) > 1E-7)
+			return false;
+		if (Math.abs(((Point3D) o).getY()-getY()) > 1E-7)
+			return false;
+		if (Math.abs(((Point3D) o).getZ()-getZ()) > 1E-7)
+			return false;
+		return true;
+	}
+	
+	public int hashCode() {
+		return Double.hashCode(getX()) ^ Double.hashCode(getY()) ^ Double.hashCode(getZ());
+	}
 
 	public String toString() {
 		return String.format("Point3D[%.2f, %.2f, %.2f]", x, y, z);

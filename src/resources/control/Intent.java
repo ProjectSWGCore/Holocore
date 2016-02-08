@@ -52,6 +52,7 @@ public abstract class Intent {
 		if (sequential != null)
 			sequential.broadcast();
 		sequential = null;
+		parallel = null;
 	}
 	
 	/**

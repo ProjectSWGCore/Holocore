@@ -99,7 +99,7 @@ public class HttpServer {
 	}
 	
 	private void startAcceptThread(ServerSocket serverSocket, boolean secure) {
-		executor.submit(() -> {
+		executor.execute(() -> {
 			try {
 				acceptThread(serverSocket, secure);
 			} catch (Throwable t) {
@@ -109,7 +109,7 @@ public class HttpServer {
 	}
 	
 	private void startSocketThread(HttpSocket socket) {
-		executor.submit(() -> {
+		executor.execute(() -> {
 			try {
 				socketThread(socket);
 			} catch (Throwable t) {

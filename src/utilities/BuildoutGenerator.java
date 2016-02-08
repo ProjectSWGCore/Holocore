@@ -120,8 +120,8 @@ public class BuildoutGenerator {
 	private void generateObjectFile(File objectFile, List<SWGObject> objects) throws IOException {
 		try (SdbGenerator gen = new SdbGenerator(objectFile)) {
 			gen.open();
-			gen.setColumnNames("buildout_id", "id", "area_id", "template_crc", "container_id", "x", "y", "z", "orientation_x", "orientation_y", "orientation_z", "orientation_w", "radius", "cell_index");
-			gen.setColumnTypes("INTEGER PRIMARY KEY", intType, intType, intType, intType, floatType, floatType, floatType, floatType, floatType, floatType, floatType, floatType, intType);
+			gen.setColumnNames("buildout_id", "id", "snapshot", "area_id", "template_crc", "container_id", "x", "y", "z", "orientation_x", "orientation_y", "orientation_z", "orientation_w", "radius", "cell_index");
+			gen.setColumnTypes("INTEGER PRIMARY KEY", intType, intType, intType, intType, intType, floatType, floatType, floatType, floatType, floatType, floatType, floatType, floatType, intType);
 			int objNum = 0;
 			int percent = 0;
 			Collections.sort(objects, (o1, o2) -> {
@@ -230,7 +230,8 @@ public class BuildoutGenerator {
 		Quaternion q = l.getOrientation();
 		double radius = object.getLoadRange();
 		int cellIndex = (object instanceof CellObject) ? ((CellObject) object).getNumber() : 0;
-		gen.writeLine(buildoutId, id, object.getBuildoutAreaId(), crc, container, l.getX(), l.getY(), l.getZ(), q.getX(), q.getY(), q.getZ(), q.getW(), radius, cellIndex);
+		int snapshot = object.isSnapshot() ? 1 : 0;
+		gen.writeLine(buildoutId, id, snapshot, object.getBuildoutAreaId(), crc, container, l.getX(), l.getY(), l.getZ(), q.getX(), q.getY(), q.getZ(), q.getW(), radius, cellIndex);
 	}
 	
 	private GenBuildoutArea getAreaForObject(SWGObject obj) {

@@ -27,7 +27,6 @@
 
 package resources.collections;
 
-import network.packets.swg.zone.baselines.Baseline;
 import org.junit.Assert;
 import org.junit.Test;
 import utilities.Encoder;
@@ -49,7 +48,7 @@ public class SWGListTest {
 			strings[i] = "test" + String.valueOf(i);
 		}
 
-		SWGList<String> swgList = new SWGList<>(Baseline.BaselineType.PLAY, 3, 6, Encoder.StringType.ASCII);
+		SWGList<String> swgList = new SWGList<>(3, 6, Encoder.StringType.ASCII);
 		long start = System.nanoTime();
 		Collections.addAll(swgList, strings);
 		long end = System.nanoTime();
@@ -84,7 +83,7 @@ public class SWGListTest {
 			strings[i] = "test" + String.valueOf(i);
 		}
 
-		SWGList<String> swgList = new SWGList<>(Baseline.BaselineType.PLAY, 3, 6, Encoder.StringType.ASCII);
+		SWGList<String> swgList = new SWGList<>(3, 6, Encoder.StringType.ASCII);
 		Collections.addAll(swgList, strings);
 
 		long start = System.nanoTime();

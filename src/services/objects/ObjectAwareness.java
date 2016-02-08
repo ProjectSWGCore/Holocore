@@ -319,7 +319,7 @@ public class ObjectAwareness extends Service {
 	 * @param obj the object to update
 	 */
 	private void update(SWGObject obj) {
-		if (obj.isBuildout())
+		if (!obj.isGenerated())
 			return;
 		Location l = obj.getWorldLocation();
 		if (invalidLocation(l))

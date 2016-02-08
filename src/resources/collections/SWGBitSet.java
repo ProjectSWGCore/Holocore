@@ -29,7 +29,6 @@ package resources.collections;
 
 import network.packets.swg.zone.baselines.Baseline;
 import resources.encodables.Encodable;
-import resources.network.DeltaBuilder;
 import resources.objects.SWGObject;
 
 import java.nio.ByteBuffer;
@@ -45,7 +44,6 @@ public class SWGBitSet extends BitSet implements Encodable {
 	
 	private static final long serialVersionUID = 200L;
 	
-	private final Baseline.BaselineType baseline;
 	private int view;
 	private int updateType;
 
@@ -56,9 +54,8 @@ public class SWGBitSet extends BitSet implements Encodable {
 	 * @param view The baseline number this BitSet resides in
 	 * @param updateType The update variable used for sending a delta, it's the operand count that this BitSet resides at within the baseline
 	 */
-	public SWGBitSet(Baseline.BaselineType baseline, int view, int updateType) {
+	public SWGBitSet(int view, int updateType) {
 		super(128); // Seems to be the default size for the bitmask sets in packets
-		this.baseline = baseline;
 		this.view = view;
 		this.updateType = updateType;
 	}
@@ -99,8 +96,7 @@ public class SWGBitSet extends BitSet implements Encodable {
 			return;
 		}
 
-		DeltaBuilder builder = new DeltaBuilder(target, baseline, view, updateType, encode());
-		builder.send();
+		target.sendDelta(view, updateType, encode());
 	}
 
 	public int[] toList() {

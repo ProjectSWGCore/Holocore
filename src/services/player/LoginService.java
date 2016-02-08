@@ -154,20 +154,24 @@ public class LoginService extends Service {
 			id.setUsername(sessionHash[0]);
 			id.setPassword(sessionHash[1]);
 		}
-		try {
-			ResultSet user = getUser(id.getUsername());
-			if (user.next()) {
-				if (isUserValid(user, id.getPassword()))
-					onSuccessfulLogin(user, player, id);
-				else if (user.getBoolean("banned"))
-					onLoginBanned(player, id);
-				else
-					onInvalidUserPass(player, id, user);
-			} else
-				onInvalidUserPass(player, id, null);
-		} catch (SQLException e) {
-			e.printStackTrace();
-			onLoginServerError(player, id);
+		synchronized (getUser) {
+			try {
+				getUser.setString(1, id.getUsername());
+				try (ResultSet user = getUser.executeQuery()) {
+					if (user.next()) {
+						if (isUserValid(user, id.getPassword()))
+							onSuccessfulLogin(user, player, id);
+						else if (user.getBoolean("banned"))
+							onLoginBanned(player, id);
+						else
+							onInvalidUserPass(player, id, user);
+					} else
+						onInvalidUserPass(player, id, null);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				onLoginServerError(player, id);
+			}
 		}
 	}
 	
@@ -265,11 +269,6 @@ public class LoginService extends Service {
 			return psqlPass.equals(password);
 		password = BCrypt.hashpw(BCrypt.hashpw(password, psqlPass), psqlPass);
 		return psqlPass.equals(password);
-	}
-	
-	private ResultSet getUser(String username) throws SQLException {
-		getUser.setString(1, username);
-		return getUser.executeQuery();
 	}
 	
 	private String getUserPassError(ResultSet set, String username, String password) throws SQLException {
