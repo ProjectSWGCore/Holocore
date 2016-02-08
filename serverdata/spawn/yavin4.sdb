@@ -1,356 +1,360 @@
-spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	creature_name	creature_id	spawn_category	spawn_area	amount	behaviour	patrol_id	max_spawn_time	min_spawn_time	float_radius
-INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGER NOT NULL	REAL	REAL	REAL	REAL	INTEGER	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER NOT NULL	TEXT NOT NULL	INTEGER	INTEGER NOT NULL	INTEGER NOT NULL	INTEGER
-2400003	YAVIN4	yav_blue_leaf_temple	AREA	1	3.96	-1.30	32.45	0	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0
-2400004	YAVIN4	yav_blue_leaf_temple	AREA	1	-3.76	-1.30	32.45	0	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0
-2400005	YAVIN4	yav_blue_leaf_temple	AREA	2	-0.14	-37.30	-29.00	0	1	a kliknik dark queen	14280	poi	The Temple of the Blueleaf	1	none	0	300	180	0
-2400006	YAVIN4	yav_blue_leaf_temple	AREA	2	-13.11	-37.30	13.08	136	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0
-2400007	YAVIN4	yav_blue_leaf_temple	AREA	2	-13.63	-1.30	24.34	97	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0
-2400008	YAVIN4	yav_blue_leaf_temple	AREA	2	-13.83	-37.30	1.47	0	1	a kliknik dark worker	14290	poi	The Temple of the Blueleaf	2	none	0	300	180	4
-2400009	YAVIN4	yav_blue_leaf_temple	AREA	2	-25.33	-1.30	3.18	0	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0
-2400010	YAVIN4	yav_blue_leaf_temple	AREA	2	-3.30	-1.30	-25.77	0	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0
-2400011	YAVIN4	yav_blue_leaf_temple	AREA	2	-7.34	-37.30	-16.34	26	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0
-2400012	YAVIN4	yav_blue_leaf_temple	AREA	2	1.82	-37.30	-22.06	0	1	a kliknik dark defender	14270	poi	The Temple of the Blueleaf	2	none	0	300	180	4
-2400013	YAVIN4	yav_blue_leaf_temple	AREA	2	10.80	-37.30	-0.01	-92	1	a kliknik dark worker	14290	poi	The Temple of the Blueleaf	2	none	0	300	180	4
-2400014	YAVIN4	yav_blue_leaf_temple	AREA	2	12.57	-37.30	12.52	43	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0
-2400015	YAVIN4	yav_blue_leaf_temple	AREA	2	12.87	-1.30	24.98	0	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0
-2400016	YAVIN4	yav_blue_leaf_temple	AREA	2	2.03	-1.30	-25.68	0	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0
-2400017	YAVIN4	yav_blue_leaf_temple	AREA	2	24.96	-1.30	10.10	0	-37	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0
-2400018	YAVIN4	yav_blue_leaf_temple	AREA	2	7.25	-37.30	-16.09	-24	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0
-2400019	YAVIN4	yav_geonosian_cave	AREA	1	-2.70	10.90	10.80	0	1	a scientist	10355	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400020	YAVIN4	yav_geonosian_cave	AREA	2	24.90	9.90	-7.60	0	1	a crazed Geonosian guard	10310	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400021	YAVIN4	yav_geonosian_cave	AREA	2	29.10	10.40	-13.50	0	1	a crazed Geonosian guard	10310	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400022	YAVIN4	yav_geonosian_cave	AREA	2	36.70	9.80	-8.00	0	1	a crazed Geonosian guard	10310	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400023	YAVIN4	yav_geonosian_cave	AREA	2	39.30	10.40	-14.50	0	1	a crazed Geonosian guard	10310	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400024	YAVIN4	yav_geonosian_cave	AREA	4	-18.20	-18.00	-34.90	0	1	an alert droideka	10315	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400025	YAVIN4	yav_geonosian_cave	AREA	5	-40.70	-18.00	-53.50	0	1	an enhanced kliknik	10340	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400026	YAVIN4	yav_geonosian_cave	AREA	5	-48.30	-8.00	-31.30	0	1	a Geonosian scientist	10350	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400027	YAVIN4	yav_geonosian_cave	AREA	5	-48.70	-18.00	-43.10	0	1	an enhanced kliknik	10340	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400028	YAVIN4	yav_geonosian_cave	AREA	6	-61.70	-18.00	-59.40	0	1	an alert droideka	10315	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400029	YAVIN4	yav_geonosian_cave	AREA	8	-74.50	-19.00	-38.30	0	1	a crazed Geonosian guard	10310	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400030	YAVIN4	yav_geonosian_cave	AREA	8	-77.10	-18.50	-44.50	0	1	a crazed Geonosian guard	10310	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400031	YAVIN4	yav_geonosian_cave	AREA	8	-77.70	-18.90	-35.00	0	1	a crazed Geonosian guard	10310	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400032	YAVIN4	yav_geonosian_cave	AREA	9	-89.90	-18.00	-75.00	0	1	an alert droideka	10315	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400033	YAVIN4	yav_geonosian_cave	AREA	10	-106.50	-18.00	-33.00	0	1	a Geonosian technical assistant	10365	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400034	YAVIN4	yav_geonosian_cave	AREA	10	-118.40	-20.00	-39.20	0	1	a Geonosian technical assistant	10365	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400035	YAVIN4	yav_geonosian_cave	AREA	11	-54.30	-18.30	-81.80	0	1	an alert droideka	10315	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400036	YAVIN4	yav_geonosian_cave	AREA	13	-107.30	-22.10	-101.80	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400037	YAVIN4	yav_geonosian_cave	AREA	13	-108.30	-22.20	-119.80	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400038	YAVIN4	yav_geonosian_cave	AREA	13	-130.00	-19.80	-109.40	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400039	YAVIN4	yav_geonosian_cave	AREA	13	-95.30	-20.10	-110.10	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400040	YAVIN4	yav_geonosian_cave	AREA	14	-131.00	-19.90	-81.20	0	1	an enhanced gaping spider	10325	dungeon	Geonosian Cave	1	none	0	1800	1500	0
-2400041	YAVIN4	yav_geonosian_cave	AREA	14	-134.20	-21.80	-74.50	0	1	a Geonosian scientist	10350	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400042	YAVIN4	yav_geonosian_cave	AREA	16	-16.50	-28.20	-114.80	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400043	YAVIN4	yav_geonosian_cave	AREA	16	-4.50	-28.10	-92.00	0	1	an alert droideka	10315	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400044	YAVIN4	yav_geonosian_cave	AREA	18	21.90	-31.00	-70.80	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400045	YAVIN4	yav_geonosian_cave	AREA	18	25.00	-29.70	-80.00	0	1	a scientist	10355	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400046	YAVIN4	yav_geonosian_cave	AREA	18	25.20	-31.40	-86.10	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400047	YAVIN4	yav_geonosian_cave	AREA	18	31.40	-29.70	-77.70	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400048	YAVIN4	yav_geonosian_cave	AREA	20	-48.60	-19.80	-135.80	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400049	YAVIN4	yav_geonosian_cave	AREA	21	-34.10	-20.00	-128.20	0	1	an alert droideka	10315	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400050	YAVIN4	yav_geonosian_cave	AREA	22	-19.90	-20.00	-117.20	0	1	an Imperial observer	10335	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400051	YAVIN4	yav_geonosian_cave	AREA	23	-19.40	-22.70	-152.30	0	1	Fen Corandel (a Rebel pilot)	13600	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400052	YAVIN4	yav_geonosian_cave	AREA	23	-31.90	-19.80	-157.80	0	1	a crazed Geonosian guard	10310	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400053	YAVIN4	yav_geonosian_cave	AREA	23	-35.60	-19.80	-162.40	0	1	a scientist	10355	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400054	YAVIN4	yav_geonosian_cave	AREA	23	-36.00	-19.80	-153.90	0	1	a crazed Geonosian guard	10310	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400055	YAVIN4	yav_geonosian_cave	AREA	24	-64.00	-20.00	-142.60	0	1	an alert droideka	10315	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400056	YAVIN4	yav_geonosian_cave	AREA	25	-75.60	-20.00	-161.10	0	1	a mercenary sentry	10330	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400057	YAVIN4	yav_geonosian_cave	AREA	25	-81.70	-20.00	-157.90	0	1	a mercenary sentry	10330	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400058	YAVIN4	yav_geonosian_cave	AREA	28	-107.10	-32.00	-213.80	0	1	an alert droideka	10315	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400059	YAVIN4	yav_geonosian_cave	AREA	29	-120.70	-31.80	-228.40	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400060	YAVIN4	yav_geonosian_cave	AREA	31	-63.40	-34.00	-252.00	0	1	an alert droideka	10315	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400061	YAVIN4	yav_geonosian_cave	AREA	32	-60.00	-34.00	-272.70	0	1	a Geonosian scientist	10350	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400062	YAVIN4	yav_geonosian_cave	AREA	32	-66.10	-34.00	-269.10	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400063	YAVIN4	yav_geonosian_cave	AREA	32	-66.10	-34.00	-283.00	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400064	YAVIN4	yav_geonosian_cave	AREA	32	-72.00	-34.00	-277.30	0	1	a Geonosian scientist	10350	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400065	YAVIN4	yav_geonosian_cave	AREA	34	-136.70	-32.00	-212.00	0	1	an alert droideka	10315	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400066	YAVIN4	yav_geonosian_cave	AREA	35	-124.90	-34.00	-200.60	0	1	a Geonosian scientist	10350	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400067	YAVIN4	yav_geonosian_cave	AREA	35	-127.50	-34.00	-188.90	0	1	a Geonosian scientist	10350	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400068	YAVIN4	yav_geonosian_cave	AREA	35	-132.90	-32.00	-191.30	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400069	YAVIN4	yav_geonosian_cave	AREA	35	-143.10	-34.00	-193.90	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400070	YAVIN4	yav_geonosian_cave	AREA	35	-144.50	-34.00	-180.60	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400071	YAVIN4	yav_geonosian_cave	AREA	36	-128.00	-32.00	-267.90	0	1	an alert droideka	10315	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400072	YAVIN4	yav_geonosian_cave	AREA	37	-127.80	-32.50	-324.70	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400073	YAVIN4	yav_geonosian_cave	AREA	37	-131.50	-33.80	-338.60	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400074	YAVIN4	yav_geonosian_cave	AREA	37	-136.30	-33.80	-343.10	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400075	YAVIN4	yav_geonosian_cave	AREA	37	-143.30	-31.60	-323.90	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400076	YAVIN4	yav_geonosian_cave	AREA	38	-121.90	-32.10	-349.90	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400077	YAVIN4	yav_geonosian_cave	AREA	38	-129.10	-33.50	-384.80	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400078	YAVIN4	yav_geonosian_cave	AREA	38	-135.90	-31.90	-373.00	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400079	YAVIN4	yav_geonosian_cave	AREA	39	-71.60	-32.10	-381.30	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400080	YAVIN4	yav_geonosian_cave	AREA	39	-73.10	-33.90	-372.80	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400081	YAVIN4	yav_geonosian_cave	AREA	39	-76.20	-31.90	-349.10	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400082	YAVIN4	yav_geonosian_cave	AREA	39	-89.30	-32.20	-375.70	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400083	YAVIN4	yav_geonosian_cave	AREA	39	-90.70	-34.40	-367.40	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400084	YAVIN4	yav_geonosian_cave	AREA	40	-28.10	-34.20	-407.50	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400085	YAVIN4	yav_geonosian_cave	AREA	40	-46.80	-31.90	-407.80	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400086	YAVIN4	yav_geonosian_cave	AREA	40	-68.80	-32.10	-407.00	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400087	YAVIN4	yav_geonosian_cave	AREA	41	-11.90	-34.00	-414.20	0	1	an alert droideka	10315	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400088	YAVIN4	yav_geonosian_cave	AREA	42	13.40	-20.00	-336.90	0	1	an enhanced kliknik	10340	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400089	YAVIN4	yav_geonosian_cave	AREA	42	14.10	-22.00	-341.50	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400090	YAVIN4	yav_geonosian_cave	AREA	42	17.30	-32.00	-370.50	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400091	YAVIN4	yav_geonosian_cave	AREA	42	23.20	-24.00	-333.80	0	1	an enhanced kliknik	10340	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400092	YAVIN4	yav_geonosian_cave	AREA	42	23.70	-34.00	-375.10	0	1	an enhanced kliknik	10340	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400093	YAVIN4	yav_geonosian_cave	AREA	42	23.80	-34.00	-398.70	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400094	YAVIN4	yav_geonosian_cave	AREA	42	4.50	-34.00	-400.80	0	1	an enhanced kliknik	10340	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400095	YAVIN4	yav_geonosian_cave	AREA	42	7.00	-22.00	-334.00	0	1	a Geonosian scientist	10350	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400096	YAVIN4	yav_geonosian_cave	AREA	43	119.60	-32.00	-330.30	0	1	an enhanced kliknik	10340	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400097	YAVIN4	yav_geonosian_cave	AREA	43	67.50	-31.90	-329.30	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400098	YAVIN4	yav_geonosian_cave	AREA	43	83.90	-31.50	-308.40	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400099	YAVIN4	yav_geonosian_cave	AREA	43	91.10	-33.80	-347.60	0	1	an enhanced kliknik	10340	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400100	YAVIN4	yav_geonosian_cave	AREA	43	91.80	-34.10	-336.20	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400101	YAVIN4	yav_geonosian_cave	AREA	43	95.70	-32.40	-322.20	0	1	an acklay	10305	dungeon	Geonosian Cave	1	none	0	1800	1500	0
-2400102	YAVIN4	yav_imp_outpost_barracks	EGG	3	-0.05	0.13	-6.00	0	1	Haymir Rendundi (Black Epsilon Pilot Trainer)	33800	city	Imperial Outpost	1	none	0	300	120	0
-2400103	YAVIN4	yav_imp_outpost_cantina	EGG	6	-3.88	0.13	-3.68	89	1	Captain Denner (Storm Squadron Pilot Trainer)	33780	city	Imperial Outpost	1	none	0	300	120	0
-2400104	YAVIN4	yav_imp_outpost_cantina	EGG	3	0.14	0.13	-5.83	0	1	Field Commander Alozen (Storm Squadron Pilot Trainer)	33775	city	Imperial Outpost	1	none	0	300	120	0
-2400105	YAVIN4	yav_itp_thrawn_thieves_bunker	AREA	4	4.20	-12.00	31.20	0	1	a dark jedi	13545	dungeon	?	1	none	0	300	120	2
-2400106	YAVIN4	yav_itp_thrawn_thieves_bunker	AREA	5	29.60	-12.00	31.00	0	1	a dark jedi	13545	dungeon	?	1	none	0	300	120	2
-2400107	YAVIN4	yav_itp_thrawn_thieves_bunker	AREA	7	-13.40	-16.00	79.80	0	1	a dark jedi	13545	dungeon	?	1	none	0	300	120	2
-2400108	YAVIN4	yav_itp_thrawn_thieves_bunker	AREA	7	19.90	-16.00	80.10	0	1	a dark jedi	13545	dungeon	?	1	none	0	300	120	2
-2400109	YAVIN4	yav_itp_thrawn_thieves_bunker	AREA	7	2.80	-16.00	81.30	0	1	a dark jedi	13545	dungeon	?	1	none	0	300	120	2
-2400110	YAVIN4	yav_itp_thrawn_thieves_bunker	AREA	7	3.10	-16.00	64.10	0	1	a dark jedi	13545	dungeon	?	1	none	0	300	120	2
-2400111	YAVIN4	yav_itp_thrawn_thieves_bunker	AREA	8	70.40	-16.00	74.70	0	1	Magus Jocle (a dark jedi)	13550	dungeon	?	1	none	0	300	120	0
-2400112	YAVIN4	yav_itp_thrawn_thieves_bunker	AREA	9	-34.70	-14.00	78.70	0	1	a dark jedi	13545	dungeon	?	1	none	0	300	120	2
-2400113	YAVIN4	yav_itp_vader_reb_bunker	AREA	4	2.70	-6.00	12.30	0	1	a Rebel trooper	13505	dungeon	?	1	none	0	300	120	0
-2400114	YAVIN4	yav_itp_vader_reb_bunker	AREA	5	16.20	-6.00	16.50	0	1	a Rebel trooper	13505	dungeon	?	1	none	0	300	120	0
-2400115	YAVIN4	yav_itp_vader_reb_bunker	AREA	5	20.60	-6.00	10.30	0	1	a Rebel trooper	13505	dungeon	?	1	none	0	300	120	0
-2400116	YAVIN4	yav_itp_vader_reb_bunker	AREA	6	-10.40	-6.00	15.20	0	1	a Rebel trooper	13505	dungeon	?	1	none	0	300	120	0
-2400117	YAVIN4	yav_itp_vader_reb_bunker	AREA	6	-12.40	-6.00	10.90	0	1	a Rebel trooper	13505	dungeon	?	1	none	0	300	120	0
-2400118	YAVIN4	yav_itp_vader_reb_bunker	AREA	7	2.90	-6.00	22.20	0	1	a Rebel trooper	13505	dungeon	?	1	none	0	300	120	0
-2400119	YAVIN4	yav_itp_vader_reb_bunker	AREA	8	2.70	-10.00	42.20	0	1	a Rebel trooper	13505	dungeon	?	1	none	0	300	120	0
-2400120	YAVIN4	yav_itp_vader_reb_bunker	AREA	13	-12.80	-10.00	52.80	0	1	a Rebel trooper	13505	dungeon	?	1	none	0	300	120	0
-2400121	YAVIN4	yav_itp_vader_reb_bunker	AREA	13	-15.90	-10.00	62.50	0	1	a Rebel trooper	13505	dungeon	?	1	none	0	300	120	0
-2400122	YAVIN4	yav_itp_vader_reb_bunker	AREA	13	-17.70	-10.00	77.60	0	1	a Rebel trooper	13505	dungeon	?	1	none	0	300	120	0
-2400123	YAVIN4	yav_itp_vader_reb_bunker	AREA	13	-22.20	-10.00	66.80	0	1	a Rebel trooper	13505	dungeon	?	1	none	0	300	120	0
-2400124	YAVIN4	yav_itp_vader_reb_bunker	AREA	14	20.00	-10.00	56.70	0	1	a Rebel trooper	13505	dungeon	?	1	none	0	300	120	0
-2400125	YAVIN4	yav_itp_vader_reb_bunker	AREA	14	22.10	-10.00	66.10	0	1	a Rebel trooper	13505	dungeon	?	1	none	0	300	120	0
-2400126	YAVIN4	yav_itp_vader_reb_bunker	AREA	14	26.60	-10.00	56.40	0	1	a Rebel trooper	13505	dungeon	?	1	none	0	300	120	0
-2400127	YAVIN4	yav_itp_vader_reb_bunker	AREA	14	27.20	-10.00	72.30	0	1	a Rebel trooper	13505	dungeon	?	1	none	0	300	120	0
-2400128	YAVIN4	yav_itp_vader_reb_bunker	AREA	17	4.50	-10.00	75.60	0	1	a Rebel trooper	13505	dungeon	?	1	none	0	300	120	0
-2400129	YAVIN4	yav_itp_vader_reb_bunker	AREA	17	1.00	-10.00	72.70	0	1	a Rebel trooper	13505	dungeon	?	1	none	0	300	120	0
-2400130	YAVIN4	yav_itp_vader_reb_bunker	AREA	18	4.10	-10.00	50.70	0	1	Major Osto Elrad	13580	dungeon	?	1	none	0	300	120	0
-2400131	YAVIN4	yav_itp_vader_reb_bunker	AREA	18	7.90	-10.00	62.60	0	1	a Rebel trooper	13505	dungeon	?	1	none	0	300	120	0
-2400132	YAVIN4	yav_itp_vader_reb_bunker_outpost	AREA	3	-0.10	0.10	-5.30	0	1	a Rebel trooper	13505	dungeon	?	1	none	0	300	120	0
-2400133	YAVIN4	yav_itp_vader_reb_bunker_outpost	AREA	4	2.90	0.10	1.80	0	1	a Rebel trooper	13505	dungeon	?	1	none	0	300	120	0
-2400134	YAVIN4	yav_labor_outpost_medium_house	EGG	4	8.30	0.60	-4.50	90	1	Wuioe Opca	2725	city	Labor Outpost	1	drinking	0	300	120	0
-2400135	YAVIN4	yav_labor_outpost_medium_house	EGG	1	1.59	0.62	1.08	39	1	Lt. Colonel Aqzow (Arkon's Havoc Pilot Trainer)	33960	city	Labor Outpost	1	none	0	300	120	0
-2400136	YAVIN4	yav_labor_outpost_small_house	EGG	1	-3.00	0.63	1.03	-4	1	Major Eker (Rebel Pilot Trainer)	33865	city	Labor Outpost	1	none	0	300	120	0
-2400137	YAVIN4	yav_woolamander_temple	AREA	3	-0.81	2.02	6.00	0	1	a woolamander gatherer	33290	poi	Woolamander Palace	2	none	0	300	180	4
-2400138	YAVIN4	yav_woolamander_temple	AREA	3	15.35	2.02	-0.47	0	1	a woolamander	33285	poi	Woolamander Palace	2	none	0	300	180	4
-2400139	YAVIN4	yav_woolamander_temple	AREA	3	-18.54	2.02	-0.40	0	1	a woolamander	33285	poi	Woolamander Palace	2	none	0	300	180	4
-2400140	YAVIN4	yav_woolamander_temple	AREA	7	-59.25	2.02	-11.06	0	1	a woolamander gatherer	33290	poi	Woolamander Palace	1	none	0	300	180	0
-2400141	YAVIN4	yav_woolamander_temple	AREA	7	-59.32	2.05	21.06	178	1	a woolamander harvester	33300	poi	Woolamander Palace	1	none	0	300	180	0
-2400142	YAVIN4	yav_woolamander_temple	AREA	7	-84.07	2.02	5.02	89	1	a woolamander harrower	33295	poi	Woolamander Palace	2	none	0	300	180	4
-2400143	YAVIN4	yav_woolamander_temple	AREA	9	53.39	2.02	4.98	-90	1	a woolamander harvester	33300	poi	Woolamander Palace	2	none	0	300	180	4
-2400144	YAVIN4	yav_woolamander_temple	AREA	10	74.40	2.02	4.75	86	1	a woolamander reaper	33305	poi	Woolamander Palace	2	none	0	300	180	4
-2400145	YAVIN4	yav_world	AREA	0	-1154.81	82.93	-2909.28	0	1	a giant crystal snake	10415	-	-	3	none	0	300	180	6
-2400146	YAVIN4	yav_world	AREA	0	-1581.97	9.09	6764.79	0	1	a Dark Jedi Elder	31520	-	-	1	none	0	300	120	2
-2400147	YAVIN4	yav_world	AREA	0	-1589.17	39.70	-814.87	0	1	a giant angler	10395	-	-	5	none	0	300	180	10
-2400148	YAVIN4	yav_world	AREA	0	-1593.14	9.19	6757.58	0	1	a Dark Jedi Elder	31520	-	-	1	none	0	300	120	2
-2400149	YAVIN4	yav_world	AREA	0	-1776.61	88.73	3317.55	0	1	a giant tanc mite	10535	-	-	5	none	0	300	180	10
-2400150	YAVIN4	yav_world	AREA	0	-1934.26	8.57	7135.54	0	1	a Smuggler henchmen	33405	-	-	1	none	0	300	120	2
-2400151	YAVIN4	yav_world	AREA	0	-1936.89	8.30	7139.73	0	1	a Smuggler leader	33415	-	-	1	none	0	300	120	2
-2400152	YAVIN4	yav_world	AREA	0	-1941.72	8.26	7142.43	0	1	a Smuggler bully	33400	-	-	1	none	0	300	120	2
-2400153	YAVIN4	yav_world	AREA	0	-2211.09	87.83	1156.26	0	1	a master thief	15905	-	-	4	none	0	300	180	8
-2400154	YAVIN4	yav_world	AREA	0	-247.00	35.00	4877.00	0	1	Zelma	26700	-	-	1	none	0	300	120	0
-2400155	YAVIN4	yav_world	AREA	0	-2800.69	107.71	1773.43	0	1	a stranded Imperial officer	29625	-	-	2	none	0	300	180	4
-2400156	YAVIN4	yav_world	AREA	0	-2843.10	81.91	-1177.96	0	1	Finned Blaggart	9460	-	-	1	none	0	300	180	0
-2400157	YAVIN4	yav_world	QUEST	0	-292.23	35.00	4833.63	0	1	Osae	33380	-	-	1	none	0	300	180	0
-2400158	YAVIN4	yav_world	AREA	0	-2986.73	68.43	-1116.67	0	1	a stranded Rebel soldier	29655	-	-	3	none	0	300	180	6
-2400159	YAVIN4	yav_world	AREA	0	-2991.30	68.36	-1116.24	0	1	a stranded Rebel officer	29640	-	-	2	none	0	300	180	4
-2400160	YAVIN4	yav_world	AREA	0	-3094.81	306.45	902.93	0	1	an angler	205	-	-	5	none	0	300	180	10
-2400161	YAVIN4	yav_world	AREA	0	-3140.01	136.80	6829.94	0	1	a stranded Rebel pilot	29645	-	-	2	none	0	300	180	4
-2400162	YAVIN4	yav_world	AREA	0	-3177.26	104.62	3350.55	0	1	a Dark Jedi Elder	31520	-	-	1	none	0	300	120	2
-2400163	YAVIN4	yav_world	AREA	0	-3180.28	105.19	3342.52	0	1	a stranded Imperial officer	29625	-	-	3	none	0	300	180	6
-2400164	YAVIN4	yav_world	AREA	0	-3252.67	147.31	-4089.21	0	1	a thief	30975	-	-	3	none	0	300	180	6
-2400165	YAVIN4	yav_world	AREA	0	-3262.08	69.74	-3047.53	0	1	an enforcer	27080	-	-	1	none	0	300	120	2
-2400166	YAVIN4	yav_world	AREA	0	-3267.66	71.20	-3112.68	0	1	an enforcer	27080	-	-	1	none	0	300	120	2
-2400167	YAVIN4	yav_world	AREA	0	-3291.00	68.01	-3077.00	0	1	Daren	26755	-	-	1	none	0	300	120	0
-2400168	YAVIN4	yav_world	AREA	0	-3294.96	68.35	-3045.38	0	1	an enforcer	27080	-	-	1	none	0	300	120	2
-2400169	YAVIN4	yav_world	AREA	0	-344.29	35.00	4812.17	0	1	Breac Slaus (Yavin IV Collector)	33440	-	-	1	none	0	300	120	0
-2400170	YAVIN4	yav_world	AREA	0	-3740.27	158.84	2161.54	0	1	a kliknik	14265	-	-	4	none	0	300	180	8
-2400171	YAVIN4	yav_world	AREA	0	-3759.79	426.59	6953.41	0	1	an angler	205	-	-	5	none	0	300	180	10
-2400172	YAVIN4	yav_world	AREA	0	-3838.92	103.88	3065.80	0	1	a lurking angler	15555	-	-	3	none	0	300	180	6
-2400173	YAVIN4	yav_world	AREA	0	-3915.38	416.78	-146.42	0	1	a tanc mite	30315	-	-	4	none	0	300	180	8
-2400174	YAVIN4	yav_world	AREA	0	-4091.42	219.94	-2963.27	0	1	a Rebel scout	24670	-	-	2	none	0	300	180	4
-2400175	YAVIN4	yav_world	AREA	0	-4149.91	64.67	5333.49	0	1	a master thief	15905	-	-	3	none	0	300	180	6
-2400176	YAVIN4	yav_world	AREA	0	-4210.43	455.66	-3897.50	0	1	a skreeg warrior elite	26475	-	-	3	none	0	300	180	6
-2400177	YAVIN4	yav_world	AREA	0	-4334.59	98.85	3972.36	0	1	a Dark Jedi Elder	31520	-	-	1	none	0	300	120	2
-2400178	YAVIN4	yav_world	AREA	0	-4338.05	97.94	3963.48	0	1	a Dark Jedi Elder	31520	-	-	1	none	0	300	120	2
-2400179	YAVIN4	yav_world	AREA	0	-4339.01	98.90	3980.17	0	1	a Dark Jedi Elder	31520	-	-	1	none	0	300	120	2
-2400180	YAVIN4	yav_world	AREA	0	-4342.58	98.16	3971.64	0	1	a Dark Jedi Elder	31520	-	-	1	none	0	300	120	2
-2400181	YAVIN4	yav_world	AREA	0	-4621.32	404.59	1196.71	0	1	a giant tanc mite	10535	-	-	3	none	0	300	180	6
-2400182	YAVIN4	yav_world	AREA	0	-4640.17	130.35	3435.29	0	1	a kliknik defender	14295	-	-	3	none	0	300	180	6
-2400183	YAVIN4	yav_world	AREA	0	-4690.52	534.28	-3638.33	0	1	a whisper bird hatchling	33155	-	-	4	none	0	300	180	8
-2400184	YAVIN4	yav_world	AREA	0	-4749.11	135.65	-2345.64	0	1	a Rebel scout	24670	-	-	5	none	0	300	180	10
-2400185	YAVIN4	yav_world	AREA	0	-4773.71	566.75	-4769.26	0	1	a Graverobber Leader	33365	-	-	1	none	0	300	180	0
-2400186	YAVIN4	yav_world	AREA	0	-4775.35	571.96	-4752.32	0	1	a Graverobber Member	33370	-	-	4	none	0	300	180	8
-2400187	YAVIN4	yav_world	AREA	0	-4812.39	592.24	-4732.78	0	1	a Graverobber digger	33360	-	-	4	none	0	300	180	8
-2400188	YAVIN4	yav_world	AREA	0	-4827.51	12.95	-1429.74	0	1	a stranded Rebel officer	29640	-	-	2	none	0	300	180	4
-2400189	YAVIN4	yav_world	AREA	0	-4971.55	144.53	-6067.97	0	1	a kliknik warrior	14340	-	-	3	none	0	300	180	6
-2400190	YAVIN4	yav_world	AREA	0	-4988.78	306.01	-2835.26	0	1	a master thief	15905	-	-	4	none	0	300	180	8
-2400191	YAVIN4	yav_world	AREA	0	-4989.06	290.01	450.90	0	1	a master thief	15905	-	-	3	none	0	300	180	6
-2400192	YAVIN4	yav_world	AREA	0	-4994.13	215.36	6490.25	0	1	a lurking angler	15555	-	-	3	none	0	300	180	6
-2400193	YAVIN4	yav_world	AREA	0	-5454.85	266.74	7657.22	0	1	a tanc mite	30315	-	-	3	none	0	300	180	6
-2400194	YAVIN4	yav_world	AREA	0	-5474.48	156.81	118.38	0	1	a kliknik	14265	-	-	4	none	0	300	180	8
-2400195	YAVIN4	yav_world	AREA	0	-5481.39	444.86	-5203.02	0	1	a kliknik warrior	14340	-	-	3	none	0	300	180	6
-2400196	YAVIN4	yav_world	AREA	0	-5506.18	11.78	-1252.92	0	1	a rancher	8540	-	-	3	none	0	300	180	6
-2400197	YAVIN4	yav_world	AREA	0	-5506.76	66.32	5097.54	0	1	a Rebel scout	24670	-	-	3	none	0	300	180	6
-2400198	YAVIN4	yav_world	AREA	0	-5506.67	12.98	-1259.89	0	1	a Smuggler	33420	-	-	1	none	0	300	120	2
-2400199	YAVIN4	yav_world	AREA	0	-5517.63	12.69	-1259.37	0	1	a Smuggler leader	33410	-	-	1	none	0	300	120	2
-2400200	YAVIN4	yav_world	AREA	0	-5527.03	13.16	-1262.78	0	1	a Smuggler	33420	-	-	1	none	0	300	120	2
-2400201	YAVIN4	yav_world	AREA	0	-5607.78	219.12	-2817.12	0	1	a giant tanc mite	10535	-	-	3	none	0	300	180	6
-2400202	YAVIN4	yav_world	AREA	0	-5644.28	453.31	956.41	0	1	a kliknik defender	14295	-	-	5	none	0	300	180	10
-2400203	YAVIN4	yav_world	AREA	0	-5662.64	124.38	-2241.68	0	1	a Rebel scout	24670	-	-	3	none	0	300	180	6
-2400204	YAVIN4	yav_world	AREA	0	-5689.26	379.67	-3906.26	0	1	an angler	205	-	-	5	none	0	300	180	10
-2400205	YAVIN4	yav_world	AREA	0	-5697.74	96.69	6710.73	0	1	a master thief	15905	-	-	2	none	0	300	180	4
-2400206	YAVIN4	yav_world	AREA	0	-6209.95	830.22	2045.20	0	1	a thief	30975	-	-	3	none	0	300	180	6
-2400207	YAVIN4	yav_world	AREA	0	-6229.70	157.85	4447.50	0	1	a giant spined puc	10520	-	-	3	none	0	300	180	6
-2400208	YAVIN4	yav_world	AREA	0	-6242.47	52.55	5355.43	0	1	a Rebel trooper	13505	-	-	1	none	0	300	120	2
-2400209	YAVIN4	yav_world	AREA	0	-6243.70	52.80	5372.49	0	1	a Rebel trooper	13505	-	-	1	none	0	300	120	2
-2400210	YAVIN4	yav_world	AREA	0	-6260.19	51.90	5361.54	0	1	a Rebel trooper	13505	-	-	1	none	0	300	120	2
-2400211	YAVIN4	yav_world	AREA	0	-6272.96	206.34	-5252.92	0	1	an angler	205	-	-	5	none	0	300	180	10
-2400212	YAVIN4	yav_world	AREA	0	-6341.80	79.29	-3091.27	0	1	a Rebel scout	24670	-	-	3	none	0	300	180	6
-2400213	YAVIN4	yav_world	AREA	0	-6354.33	66.11	-654.87	0	1	a tanc mite	30315	-	-	5	none	0	300	180	10
-2400214	YAVIN4	yav_world	AREA	0	-6385.66	115.93	-287.08	0	1	a kliknik hunter	14305	-	-	2	none	0	300	180	4
-2400215	YAVIN4	yav_world	AREA	0	-6451.32	118.59	-284.99	0	1	a mutant acklay	19980	-	-	1	none	0	300	180	0
-2400216	YAVIN4	yav_world	AREA	0	-6462.88	83.65	7358.76	0	1	a thug	30995	-	-	1	none	0	300	180	0
-2400217	YAVIN4	yav_world	AREA	0	-6519.15	108.68	-366.85	0	1	a kliknik hunter	14305	-	-	2	none	0	300	180	4
-2400218	YAVIN4	yav_world	AREA	0	-6673.21	29.07	-2244.56	0	1	a Smuggler	33425	-	-	2	none	0	300	180	4
-2400219	YAVIN4	yav_world	AREA	0	-6679.88	28.59	-2261.50	0	1	a Smuggler	33420	-	-	2	none	0	300	180	4
-2400220	YAVIN4	yav_world	AREA	0	-6689.12	28.04	-2247.14	0	1	a Smuggler leader	33410	-	-	1	none	0	300	180	0
-2400221	YAVIN4	yav_world	AREA	0	-6895.39	14.36	-2038.54	0	1	a thief	30975	-	-	3	none	0	300	180	6
-2400222	YAVIN4	yav_world	AREA	0	-6896.79	572.10	1081.54	0	1	an angler	205	-	-	3	none	0	300	180	6
-2400223	YAVIN4	yav_world	AREA	0	-690.25	92.83	-2014.99	-117	1	a kliknik dark hunter	14275	poi	Woolamander Palace	2	none	0	300	180	4
-2400224	YAVIN4	yav_world	QUEST	0	-6900.30	73.00	-5655.07	-161	1	Soci	33430	city	Labor Outpost	1	none	0	300	180	0
-2400225	YAVIN4	yav_world	EGG	0	-6912.79	73.00	-5736.72	74	1	Nore Brrea	21235	city	Labor Outpost	1	none	0	300	120	0
-2400226	YAVIN4	yav_world	AREA	0	-6924.56	69.33	6049.61	0	1	a master thief	15905	-	-	3	none	0	300	180	6
-2400227	YAVIN4	yav_world	AREA	0	-6942.03	45.68	-908.28	0	1	a Rebel scout	24670	-	-	3	none	0	300	180	6
-2400228	YAVIN4	yav_world	AREA	0	-6942.29	196.95	-105.68	0	1	a Rebel scout	24670	-	-	1	none	0	300	180	0
-2400229	YAVIN4	yav_world	AREA	0	-6944.34	50.45	6554.16	0	1	a giant tanc mite	10535	-	-	3	none	0	300	180	6
-2400230	YAVIN4	yav_world	AREA	0	-6955.64	8.31	-1587.53	0	1	a crystal snake	5205	-	-	3	none	0	300	180	6
-2400231	YAVIN4	yav_world	AREA	0	-6957.76	33.15	6983.01	0	1	a thief	30975	-	-	5	none	0	300	180	10
-2400232	YAVIN4	yav_world	AREA	0	-7053.12	274.46	3429.57	0	1	a kliknik worker	14345	-	-	3	none	0	300	180	6
-2400233	YAVIN4	yav_world	AREA	0	-7053.08	69.85	-5831.28	0	1	an enforcer	27080	-	-	1	none	0	300	120	2
-2400234	YAVIN4	yav_world	AREA	0	-7055.37	27.29	7348.57	0	1	a Dark Jedi Elder	31520	-	-	1	none	0	300	120	2
-2400235	YAVIN4	yav_world	AREA	0	-7068.97	123.37	4372.04	0	1	a Dark Jedi Sentinel	31525	outback	Northwest	1	none	0	300	120	0
-2400236	YAVIN4	yav_world	AREA	0	-7070.74	122.83	4389.82	0	1	a Dark Jedi Elder	31520	outback	Northwest	1	none	0	300	120	0
-2400237	YAVIN4	yav_world	AREA	0	-7077.00	68.42	-5849.00	0	1	Benton	26720	-	-	1	none	0	300	120	0
-2400238	YAVIN4	yav_world	AREA	0	-7078.29	47.96	7561.54	0	1	a Rebel scout	24670	-	-	3	none	0	300	180	6
-2400239	YAVIN4	yav_world	AREA	0	-7080.82	123.94	4408.02	0	1	a Dark Jedi Elder	31520	outback	Northwest	1	none	0	300	120	0
-2400240	YAVIN4	yav_world	AREA	0	-7084.10	66.01	-5819.90	0	1	an enforcer	27080	-	-	1	none	0	300	120	2
-2400241	YAVIN4	yav_world	AREA	0	-7087.73	122.48	4374.32	0	1	a Dark Jedi Elder	31520	outback	Northwest	1	none	0	300	120	0
-2400242	YAVIN4	yav_world	AREA	0	-7088.36	124.09	4408.00	0	1	a Dark Jedi Master	31515	outback	Northwest	1	none	0	300	120	0
-2400243	YAVIN4	yav_world	AREA	0	-7091.31	67.04	-5877.41	0	1	an enforcer	27080	-	-	1	none	0	300	120	2
-2400244	YAVIN4	yav_world	AREA	0	-7098.52	123.08	4393.96	0	1	a Dark Jedi Elder	31520	outback	Northwest	1	none	0	300	120	0
-2400245	YAVIN4	yav_world	AREA	0	-7099.21	123.27	4381.65	0	1	a Dark Jedi Master	31515	outback	Northwest	1	none	0	300	120	0
-2400246	YAVIN4	yav_world	AREA	0	-7099.30	138.24	4435.88	0	1	a Dark Jedi Master	31515	outback	Northwest	1	none	0	300	120	0
-2400247	YAVIN4	yav_world	AREA	0	-7101.16	83.39	4994.32	0	1	a choku pup	2610	-	-	3	none	0	300	180	6
-2400248	YAVIN4	yav_world	AREA	0	-7101.72	124.42	4407.50	0	1	a Dark Jedi Sentinel	31525	outback	Northwest	1	none	0	300	120	0
-2400249	YAVIN4	yav_world	AREA	0	-7107.81	561.10	1569.41	0	1	a master thief	15905	-	-	3	none	0	300	180	6
-2400250	YAVIN4	yav_world	AREA	0	-7107.89	83.95	5000.62	0	1	a choku male	2600	-	-	1	none	0	300	180	0
-2400251	YAVIN4	yav_world	AREA	0	-7110.39	124.98	4426.08	0	1	a Dark Jedi Sentinel	31525	outback	Northwest	1	none	0	300	120	0
-2400252	YAVIN4	yav_world	AREA	0	-7111.75	83.88	4995.23	0	1	a choku female	2590	-	-	1	none	0	300	180	0
-2400253	YAVIN4	yav_world	AREA	0	-7120.27	124.70	4410.81	0	1	a Dark Jedi Sentinel	31525	outback	Northwest	1	none	0	300	120	0
-2400254	YAVIN4	yav_world	AREA	0	-7141.57	122.82	4411.37	0	1	a Dark Jedi Master	31515	outback	Northwest	1	none	0	300	120	0
-2400255	YAVIN4	yav_world	AREA	0	-7374.72	103.76	4399.85	0	1	a bounty hunter	2100	-	-	1	none	0	300	180	0
-2400256	YAVIN4	yav_world	AREA	0	-7413.80	388.43	964.82	0	1	a kliknik	14265	-	-	4	none	0	300	180	8
-2400257	YAVIN4	yav_world	AREA	0	-7444.81	103.73	4112.68	0	1	a thug	30995	-	-	1	none	0	300	180	0
-2400258	YAVIN4	yav_world	AREA	0	-7450.42	224.56	3430.49	0	1	an Imperial trooper	13225	-	-	3	none	0	300	180	6
-2400259	YAVIN4	yav_world	AREA	0	-7458.68	341.70	2929.64	0	1	a Rebel scout	24670	-	-	3	none	0	300	180	6
-2400260	YAVIN4	yav_world	AREA	0	-7464.78	8.87	7038.75	0	1	a kliknik warrior	14340	-	-	5	none	0	300	180	10
-2400261	YAVIN4	yav_world	AREA	0	-747.50	84.00	-2055.49	68	1	a kliknik dark worker	14290	poi	Woolamander Palace	3	none	0	300	180	6
-2400262	YAVIN4	yav_world	AREA	0	-7497.36	425.48	2590.57	0	1	a giant crystal snake	10415	-	-	3	none	0	300	180	6
-2400263	YAVIN4	yav_world	AREA	0	-751.50	84.00	-2086.15	135	1	a kliknik dark worker	14290	poi	Woolamander Palace	3	none	0	300	180	6
-2400264	YAVIN4	yav_world	AREA	0	-7555.63	421.42	2121.15	0	1	a master thief	15905	-	-	3	none	0	300	180	6
-2400265	YAVIN4	yav_world	AREA	0	-7558.80	30.72	-5906.55	0	1	a tanc mite	30315	-	-	3	none	0	300	180	6
-2400266	YAVIN4	yav_world	AREA	0	-7569.39	20.59	-1094.07	0	1	a Rebel scout	24670	-	-	3	none	0	300	180	6
-2400267	YAVIN4	yav_world	AREA	0	-7572.08	227.06	121.24	0	1	a master thief	15905	-	-	3	none	0	300	180	6
-2400268	YAVIN4	yav_world	AREA	0	-7601.51	39.97	5428.47	0	1	a giant tanc mite	10535	-	-	3	none	0	300	180	6
-2400269	YAVIN4	yav_world	AREA	0	-800.75	84.00	-1979.16	49	1	a kliknik dark worker	14290	poi	Woolamander Palace	3	none	0	300	180	6
-2400270	YAVIN4	yav_world	AREA	0	-823.97	84.00	-2138.66	-142	1	a kliknik dark worker	14290	poi	Woolamander Palace	3	none	0	300	180	6
-2400271	YAVIN4	yav_world	AREA	0	-831.14	84.00	-1974.75	-29	1	a kliknik dark worker	14290	poi	Woolamander Palace	3	none	0	300	180	6
-2400272	YAVIN4	yav_world	AREA	0	-868.32	84.00	-2131.52	-90	1	a kliknik dark worker	14290	poi	Woolamander Palace	3	none	0	300	180	6
-2400273	YAVIN4	yav_world	AREA	0	-879.82	84.78	-2047.74	-77	1	a kliknik dark defender	14270	poi	Woolamander Palace	3	none	0	300	180	6
-2400274	YAVIN4	yav_world	AREA	0	-903.64	84.00	-2021.32	-71	1	a kliknik dark worker	14290	poi	Woolamander Palace	3	none	0	300	180	6
-2400275	YAVIN4	yav_world	AREA	0	-910.05	84.00	-2070.91	-138	1	a kliknik dark worker	14290	poi	Woolamander Palace	3	none	0	300	180	6
-2400276	YAVIN4	yav_world	AREA	0	-912.27	84.72	-2131.02	101	1	A Stormtrooper	25390	poi	Woolamander Palace	1	none	0	300	120	2
-2400277	YAVIN4	yav_world	AREA	0	-920.50	84.00	-2101.68	31	1	A Stormtrooper	25390	poi	Woolamander Palace	1	none	0	300	120	2
-2400278	YAVIN4	yav_world	AREA	0	-937.40	86.80	-2123.00	15	1	a Stormtrooper squad leader	25385	poi	Woolamander Palace	1	none	0	300	120	0
-2400279	YAVIN4	yav_world	AREA	0	-937.48	83.69	-2080.60	56	1	A Stormtrooper	25390	poi	Woolamander Palace	1	none	0	300	120	2
-2400280	YAVIN4	yav_world	AREA	0	-940.61	85.97	-2114.37	167	1	A Stormtrooper	25390	poi	Woolamander Palace	1	none	0	300	120	2
-2400281	YAVIN4	yav_world	AREA	0	-953.83	82.10	-2094.93	-27	1	A Stormtrooper	25390	poi	Woolamander Palace	1	none	0	300	120	2
-2400282	YAVIN4	yav_world	AREA	0	-962.08	84.71	-2126.91	-111	1	A Stormtrooper	25390	poi	Woolamander Palace	1	none	0	300	120	2
-2400283	YAVIN4	yav_world	AREA	0	-986.60	85.32	-2170.97	44	1	a kliknik dark hunter	14275	poi	Woolamander Palace	2	none	0	300	180	4
-2400284	YAVIN4	yav_world	AREA	0	1590.47	100.39	1563.77	0	1	a Rebel commando	24375	-	-	4	none	0	300	180	8
-2400285	YAVIN4	yav_world	AREA	0	1596.37	102.64	1531.17	0	1	a Rebel commando	24375	-	-	4	none	0	300	180	8
-2400286	YAVIN4	yav_world	AREA	0	2127.41	83.78	977.32	0	1	a thug	30995	-	-	1	none	0	300	180	0
-2400287	YAVIN4	yav_world	AREA	0	2348.19	53.57	4918.69	0	1	a master thief	15905	-	-	1	none	0	300	180	0
-2400288	YAVIN4	yav_world	AREA	0	2382.15	29.86	3081.03	0	1	a thug	30995	-	-	1	none	0	300	180	0
-2400289	YAVIN4	yav_world	AREA	0	306.74	8.84	-6764.50	0	1	a giant crystal snake	10415	-	-	5	none	0	300	180	10
-2400290	YAVIN4	yav_world	AREA	0	322.43	184.56	-3142.18	0	1	a master thief	15905	-	-	3	none	0	300	180	6
-2400291	YAVIN4	yav_world	AREA	0	3855.59	40.61	7158.71	0	1	a thief	30975	-	-	3	none	0	300	180	6
-2400292	YAVIN4	yav_world	AREA	0	3895.13	203.56	-876.23	0	1	a tanc mite	30315	-	-	4	none	0	300	180	8
-2400293	YAVIN4	yav_world	AREA	0	4283.98	54.41	4795.09	0	1	a kliknik dark defender	14270	-	-	2	none	0	300	180	4
-2400294	YAVIN4	yav_world	AREA	0	4340.26	60.35	4873.56	0	1	Scorpion Kliknik	25810	-	-	1	none	0	300	180	0
-2400295	YAVIN4	yav_world	AREA	0	4364.78	93.68	977.22	0	1	a stranded Rebel officer	29640	-	-	3	none	0	300	180	6
-2400296	YAVIN4	yav_world	AREA	0	4369.05	93.28	972.62	0	1	a Dark Jedi Elder	31520	-	-	1	none	0	300	120	2
-2400297	YAVIN4	yav_world	AREA	0	480.67	81.00	-657.18	0	1	a woolamander	33285	-	-	5	none	0	300	180	10
-2400298	YAVIN4	yav_world	AREA	0	4809.46	105.78	5590.37	0	1	an Exar Kun cultist	11885	dungeon	Exar Kun site	1	none	0	300	120	2
-2400299	YAVIN4	yav_world	AREA	0	4811.34	104.37	5537.35	0	1	an Exar Kun cultist	11885	dungeon	Exar Kun site	1	none	0	300	120	2
-2400300	YAVIN4	yav_world	AREA	0	4813.08	107.22	5567.59	0	1	an Exar Kun cultist	11885	dungeon	Exar Kun site	1	none	0	300	120	2
-2400301	YAVIN4	yav_world	AREA	0	4819.46	103.46	5607.67	0	1	an Exar Kun cultist	11885	dungeon	Exar Kun site	1	none	0	300	120	2
-2400302	YAVIN4	yav_world	AREA	0	4820.97	100.00	5582.41	0	1	an Exar Kun cultist	11885	dungeon	Exar Kun site	1	none	0	300	120	0
-2400303	YAVIN4	yav_world	AREA	0	4829.91	96.00	5572.64	0	1	an Exar Kun cultist	11885	dungeon	Exar Kun site	1	none	0	300	120	0
-2400304	YAVIN4	yav_world	AREA	0	4832.85	103.73	5545.29	0	1	an Exar Kun cultist	11885	dungeon	Exar Kun site	1	none	0	300	120	0
-2400305	YAVIN4	yav_world	AREA	0	4834.06	96.00	5586.11	0	1	an Exar Kun cultist	11885	dungeon	Exar Kun site	1	none	0	300	120	0
-2400306	YAVIN4	yav_world	AREA	0	4834.27	102.16	5514.60	0	1	an Exar Kun cultist	11885	dungeon	Exar Kun site	1	none	0	300	120	2
-2400307	YAVIN4	yav_world	AREA	0	4837.80	102.92	5623.81	0	1	an Exar Kun cultist	11885	dungeon	Exar Kun site	1	none	0	300	120	2
-2400308	YAVIN4	yav_world	AREA	0	4838.20	100.00	5558.79	0	1	an Exar Kun cultist	11885	dungeon	Exar Kun site	1	none	0	300	120	0
-2400309	YAVIN4	yav_world	AREA	0	4843.29	103.48	5606.93	0	1	an Exar Kun cultist	11885	dungeon	Exar Kun site	1	none	0	300	120	0
-2400310	YAVIN4	yav_world	AREA	0	4847.85	103.19	5544.97	0	1	an Exar Kun cultist	11885	dungeon	Exar Kun site	1	none	0	300	120	0
-2400311	YAVIN4	yav_world	AREA	0	4852.71	104.13	5607.40	0	1	an Exar Kun cultist	11885	dungeon	Exar Kun site	1	none	0	300	120	0
-2400312	YAVIN4	yav_world	AREA	0	4860.10	100.00	5591.14	0	1	an Exar Kun cultist	11885	dungeon	Exar Kun site	1	none	0	300	120	0
-2400313	YAVIN4	yav_world	AREA	0	4865.15	103.34	5534.06	0	1	an Exar Kun cultist	11885	dungeon	Exar Kun site	1	none	0	300	120	2
-2400314	YAVIN4	yav_world	AREA	0	4865.42	104.88	5619.11	0	1	an Exar Kun cultist	11885	dungeon	Exar Kun site	1	none	0	300	120	2
-2400315	YAVIN4	yav_world	AREA	0	4877.11	103.63	5591.34	0	1	an Exar Kun cultist	11885	dungeon	Exar Kun site	1	none	0	300	120	2
-2400316	YAVIN4	yav_world	AREA	0	4878.73	103.11	5562.99	0	1	an Exar Kun cultist	11885	dungeon	Exar Kun site	1	none	0	300	120	2
-2400317	YAVIN4	yav_world	AREA	0	4927.72	103.84	5593.47	0	1	a Rebel trooper	8450	-	-	1	none	0	300	120	0
-2400318	YAVIN4	yav_world	AREA	0	511.88	81.00	-687.19	0	1	a stunted woolamander	29665	-	-	3	none	0	300	180	6
-2400319	YAVIN4	yav_world	AREA	0	5185.00	85.05	5582.00	0	1	Rolo	26900	-	-	1	none	0	300	120	0
-2400320	YAVIN4	yav_world	AREA	0	5188.68	84.07	5550.87	0	1	an enforcer	27080	-	-	1	none	0	300	120	2
-2400321	YAVIN4	yav_world	AREA	0	5213.19	86.89	5599.51	0	1	an enforcer	27080	-	-	1	none	0	300	120	2
-2400322	YAVIN4	yav_world	AREA	0	546.05	35.87	4628.68	0	1	a Rebel trooper	13505	-	-	1	none	0	300	120	2
-2400323	YAVIN4	yav_world	AREA	0	556.80	34.59	4665.49	0	1	a Rebel trooper	13505	-	-	1	none	0	300	120	2
-2400324	YAVIN4	yav_world	AREA	0	5668.65	99.00	1428.41	0	1	a giant angler	10395	-	-	3	none	0	300	180	6
-2400325	YAVIN4	yav_world	AREA	0	568.54	35.34	4646.54	0	1	a Rebel trooper	13505	-	-	1	none	0	300	120	2
-2400326	YAVIN4	yav_world	AREA	0	574.77	35.76	4630.89	0	1	a Rebel trooper	13505	-	-	1	none	0	300	120	2
-2400327	YAVIN4	yav_world	AREA	0	578.47	34.66	4662.93	0	1	a Rebel trooper	13505	-	-	1	none	0	300	120	2
-2400328	YAVIN4	yav_world	AREA	0	5855.17	32.67	-336.09	0	1	Nagem Dr'lar	16250	-	-	1	none	0	300	180	0
-2400329	YAVIN4	yav_world	AREA	0	5860.15	32.33	-337.77	0	1	a technician	30945	-	-	6	none	0	300	180	12
-2400330	YAVIN4	yav_world	AREA	0	589.18	35.23	4645.48	0	1	Captain Demaia Maru	13575	-	-	1	none	0	300	120	0
-2400331	YAVIN4	yav_world	AREA	0	5943.21	123.54	3057.63	0	1	a Scavenger Member	33390	-	-	1	none	0	300	180	0
-2400332	YAVIN4	yav_world	AREA	0	595.70	35.94	4623.81	0	1	a Rebel trooper	13505	-	-	1	none	0	300	120	2
-2400333	YAVIN4	yav_world	AREA	0	5951.02	123.31	3058.54	0	1	a Scavenger Leader	33385	-	-	1	none	0	300	180	0
-2400334	YAVIN4	yav_world	AREA	0	5958.57	122.90	3055.06	0	1	a Scavenger Surveyer	33395	-	-	1	none	0	300	180	0
-2400335	YAVIN4	yav_world	AREA	0	596.23	34.49	4661.36	0	1	a Rebel trooper	13505	-	-	1	none	0	300	120	2
-2400336	YAVIN4	yav_world	AREA	0	596.44	33.53	4678.17	0	1	a Rebel trooper	13505	-	-	1	none	0	300	120	2
-2400337	YAVIN4	yav_world	AREA	0	600.62	35.06	4647.11	0	1	a Rebel trooper	13505	-	-	1	none	0	300	120	2
-2400338	YAVIN4	yav_world	AREA	0	6068.95	22.38	5440.28	0	1	a Dark Jedi	31510	-	-	1	none	0	300	120	2
-2400339	YAVIN4	yav_world	AREA	0	6074.33	22.19	5436.93	0	1	a Dark Jedi Elder	31520	-	-	1	none	0	300	120	2
-2400340	YAVIN4	yav_world	AREA	0	6080.06	21.90	5435.04	0	1	a Dark Jedi	31510	-	-	1	none	0	300	120	2
-2400341	YAVIN4	yav_world	AREA	0	619.15	34.89	4645.12	0	1	a Rebel trooper	13505	-	-	1	none	0	300	120	2
-2400342	YAVIN4	yav_world	AREA	0	6373.34	199.08	-2832.24	0	1	a master thief	15905	-	-	3	none	0	300	180	6
-2400343	YAVIN4	yav_world	AREA	0	638.15	81.00	-657.77	0	1	an enforcer	27080	-	-	1	none	0	300	120	2
-2400344	YAVIN4	yav_world	AREA	0	64.89	51.26	-679.50	0	1	a stranded Rebel officer	29640	-	-	3	none	0	300	180	6
-2400345	YAVIN4	yav_world	AREA	0	6468.19	14.60	5554.96	0	1	a Stormtrooper	25565	-	-	1	none	0	300	120	0
-2400346	YAVIN4	yav_world	AREA	0	6473.36	15.05	5563.86	0	1	a Stormtrooper	25565	-	-	1	none	0	300	120	0
-2400347	YAVIN4	yav_world	AREA	0	6481.38	14.09	5554.78	0	1	a Stormtrooper	25565	-	-	1	none	0	300	120	0
-2400348	YAVIN4	yav_world	AREA	0	661.59	83.14	-682.70	0	1	an enforcer	27080	-	-	1	none	0	300	120	2
-2400349	YAVIN4	yav_world	AREA	0	667.00	83.60	-650.00	0	1	Lennox	26865	-	-	1	none	0	300	120	0
-2400350	YAVIN4	yav_world	AREA	0	688.27	83.33	-672.55	0	1	an enforcer	27080	-	-	1	none	0	300	120	2
-2400351	YAVIN4	yav_world	AREA	0	693.02	83.17	-613.33	0	1	an enforcer	27080	-	-	1	none	0	300	120	2
-2400352	YAVIN4	yav_world	AREA	0	889.88	44.76	4453.42	0	1	a kliknik dark defender	14270	-	-	3	none	0	300	180	6
-2400353	YAVIN4	yav_world	AREA	0	948.05	86.82	-1459.01	0	1	a Dark Jedi	31510	-	-	1	none	0	300	120	2
-2400354	YAVIN4	yav_world	AREA	0	950.05	86.07	-1471.67	0	1	a Dark Jedi	31510	-	-	1	none	0	300	120	2
-2400355	YAVIN4	yav_world	AREA	0	954.43	87.17	-1465.23	0	1	a Dark Jedi Elder	31520	-	-	1	none	0	300	120	2
-2400356	YAVIN4	yav_world	AREA	0	959.19	42.82	4472.89	0	1	Scorpion Kliknik	25810	-	-	1	none	0	300	180	0
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	creature_name	creature_id	spawn_category	spawn_area	amount	behaviour	patrol_id	max_spawn_time	min_spawn_time	float_radius	
+INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGER NOT NULL	REAL	REAL	REAL	REAL	INTEGER	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER NOT NULL	TEXT NOT NULL	INTEGER	INTEGER NOT NULL	INTEGER NOT NULL	INTEGER	
+2400003	YAVIN4	yav_blue_leaf_temple	AREA	1	3.96	-1.30	32.45	0	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0	
+2400004	YAVIN4	yav_blue_leaf_temple	AREA	1	-3.76	-1.30	32.45	0	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0	
+2400005	YAVIN4	yav_blue_leaf_temple	AREA	2	-0.14	-37.30	-29.00	0	1	a kliknik dark queen	14280	poi	The Temple of the Blueleaf	1	none	0	300	180	0	
+2400006	YAVIN4	yav_blue_leaf_temple	AREA	2	-13.11	-37.30	13.08	136	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0	
+2400007	YAVIN4	yav_blue_leaf_temple	AREA	2	-13.63	-1.30	24.34	97	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0	
+2400008	YAVIN4	yav_blue_leaf_temple	AREA	2	-13.83	-37.30	1.47	0	1	a kliknik dark worker	14290	poi	The Temple of the Blueleaf	2	none	0	300	180	4	
+2400009	YAVIN4	yav_blue_leaf_temple	AREA	2	-25.33	-1.30	3.18	0	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0	
+2400010	YAVIN4	yav_blue_leaf_temple	AREA	2	-3.30	-1.30	-25.77	0	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0	
+2400011	YAVIN4	yav_blue_leaf_temple	AREA	2	-7.34	-37.30	-16.34	26	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0	
+2400012	YAVIN4	yav_blue_leaf_temple	AREA	2	1.82	-37.30	-22.06	0	1	a kliknik dark defender	14270	poi	The Temple of the Blueleaf	2	none	0	300	180	4	
+2400013	YAVIN4	yav_blue_leaf_temple	AREA	2	10.80	-37.30	-0.01	-92	1	a kliknik dark worker	14290	poi	The Temple of the Blueleaf	2	none	0	300	180	4	
+2400014	YAVIN4	yav_blue_leaf_temple	AREA	2	12.57	-37.30	12.52	43	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0	
+2400015	YAVIN4	yav_blue_leaf_temple	AREA	2	12.87	-1.30	24.98	0	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0	
+2400016	YAVIN4	yav_blue_leaf_temple	AREA	2	2.03	-1.30	-25.68	0	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0	
+2400017	YAVIN4	yav_blue_leaf_temple	AREA	2	24.96	-1.30	10.10	0	-37	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0	
+2400018	YAVIN4	yav_blue_leaf_temple	AREA	2	7.25	-37.30	-16.09	-24	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0	
+2400019	YAVIN4	yav_geonosian_cave	AREA	1	-2.70	10.90	10.80	0	1	a scientist	10355	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400020	YAVIN4	yav_geonosian_cave	AREA	2	24.90	9.90	-7.60	0	1	a crazed Geonosian guard	10310	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400021	YAVIN4	yav_geonosian_cave	AREA	2	29.10	10.40	-13.50	0	1	a crazed Geonosian guard	10310	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400022	YAVIN4	yav_geonosian_cave	AREA	2	36.70	9.80	-8.00	0	1	a crazed Geonosian guard	10310	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400023	YAVIN4	yav_geonosian_cave	AREA	2	39.30	10.40	-14.50	0	1	a crazed Geonosian guard	10310	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400024	YAVIN4	yav_geonosian_cave	AREA	4	-18.20	-18.00	-34.90	0	1	an alert droideka	10315	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400025	YAVIN4	yav_geonosian_cave	AREA	5	-40.70	-18.00	-53.50	0	1	an enhanced kliknik	10340	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400026	YAVIN4	yav_geonosian_cave	AREA	5	-48.30	-8.00	-31.30	0	1	a Geonosian scientist	10350	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400027	YAVIN4	yav_geonosian_cave	AREA	5	-48.70	-18.00	-43.10	0	1	an enhanced kliknik	10340	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400028	YAVIN4	yav_geonosian_cave	AREA	6	-61.70	-18.00	-59.40	0	1	an alert droideka	10315	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400029	YAVIN4	yav_geonosian_cave	AREA	8	-74.50	-19.00	-38.30	0	1	a crazed Geonosian guard	10310	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400030	YAVIN4	yav_geonosian_cave	AREA	8	-77.10	-18.50	-44.50	0	1	a crazed Geonosian guard	10310	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400031	YAVIN4	yav_geonosian_cave	AREA	8	-77.70	-18.90	-35.00	0	1	a crazed Geonosian guard	10310	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400032	YAVIN4	yav_geonosian_cave	AREA	9	-89.90	-18.00	-75.00	0	1	an alert droideka	10315	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400033	YAVIN4	yav_geonosian_cave	AREA	10	-106.50	-18.00	-33.00	0	1	a Geonosian technical assistant	10365	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400034	YAVIN4	yav_geonosian_cave	AREA	10	-118.40	-20.00	-39.20	0	1	a Geonosian technical assistant	10365	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400035	YAVIN4	yav_geonosian_cave	AREA	11	-54.30	-18.30	-81.80	0	1	an alert droideka	10315	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400036	YAVIN4	yav_geonosian_cave	AREA	13	-107.30	-22.10	-101.80	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400037	YAVIN4	yav_geonosian_cave	AREA	13	-108.30	-22.20	-119.80	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400038	YAVIN4	yav_geonosian_cave	AREA	13	-130.00	-19.80	-109.40	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400039	YAVIN4	yav_geonosian_cave	AREA	13	-95.30	-20.10	-110.10	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400040	YAVIN4	yav_geonosian_cave	AREA	14	-131.00	-19.90	-81.20	0	1	an enhanced gaping spider	10325	dungeon	Geonosian Cave	1	none	0	1800	1500	0	
+2400041	YAVIN4	yav_geonosian_cave	AREA	14	-134.20	-21.80	-74.50	0	1	a Geonosian scientist	10350	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400042	YAVIN4	yav_geonosian_cave	AREA	16	-16.50	-28.20	-114.80	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400043	YAVIN4	yav_geonosian_cave	AREA	16	-4.50	-28.10	-92.00	0	1	an alert droideka	10315	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400044	YAVIN4	yav_geonosian_cave	AREA	18	21.90	-31.00	-70.80	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400045	YAVIN4	yav_geonosian_cave	AREA	18	25.00	-29.70	-80.00	0	1	a scientist	10355	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400046	YAVIN4	yav_geonosian_cave	AREA	18	25.20	-31.40	-86.10	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400047	YAVIN4	yav_geonosian_cave	AREA	18	31.40	-29.70	-77.70	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400048	YAVIN4	yav_geonosian_cave	AREA	20	-48.60	-19.80	-135.80	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400049	YAVIN4	yav_geonosian_cave	AREA	21	-34.10	-20.00	-128.20	0	1	an alert droideka	10315	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400050	YAVIN4	yav_geonosian_cave	AREA	22	-19.90	-20.00	-117.20	0	1	an Imperial observer	10335	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400051	YAVIN4	yav_geonosian_cave	AREA	23	-19.40	-22.70	-152.30	0	1	Fen Corandel (a Rebel pilot)	13600	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400052	YAVIN4	yav_geonosian_cave	AREA	23	-31.90	-19.80	-157.80	0	1	a crazed Geonosian guard	10310	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400053	YAVIN4	yav_geonosian_cave	AREA	23	-35.60	-19.80	-162.40	0	1	a scientist	10355	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400054	YAVIN4	yav_geonosian_cave	AREA	23	-36.00	-19.80	-153.90	0	1	a crazed Geonosian guard	10310	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400055	YAVIN4	yav_geonosian_cave	AREA	24	-64.00	-20.00	-142.60	0	1	an alert droideka	10315	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400056	YAVIN4	yav_geonosian_cave	AREA	25	-75.60	-20.00	-161.10	0	1	a mercenary sentry	10330	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400057	YAVIN4	yav_geonosian_cave	AREA	25	-81.70	-20.00	-157.90	0	1	a mercenary sentry	10330	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400058	YAVIN4	yav_geonosian_cave	AREA	28	-107.10	-32.00	-213.80	0	1	an alert droideka	10315	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400059	YAVIN4	yav_geonosian_cave	AREA	29	-120.70	-31.80	-228.40	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400060	YAVIN4	yav_geonosian_cave	AREA	31	-63.40	-34.00	-252.00	0	1	an alert droideka	10315	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400061	YAVIN4	yav_geonosian_cave	AREA	32	-60.00	-34.00	-272.70	0	1	a Geonosian scientist	10350	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400062	YAVIN4	yav_geonosian_cave	AREA	32	-66.10	-34.00	-269.10	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400063	YAVIN4	yav_geonosian_cave	AREA	32	-66.10	-34.00	-283.00	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400064	YAVIN4	yav_geonosian_cave	AREA	32	-72.00	-34.00	-277.30	0	1	a Geonosian scientist	10350	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400065	YAVIN4	yav_geonosian_cave	AREA	34	-136.70	-32.00	-212.00	0	1	an alert droideka	10315	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400066	YAVIN4	yav_geonosian_cave	AREA	35	-124.90	-34.00	-200.60	0	1	a Geonosian scientist	10350	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400067	YAVIN4	yav_geonosian_cave	AREA	35	-127.50	-34.00	-188.90	0	1	a Geonosian scientist	10350	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400068	YAVIN4	yav_geonosian_cave	AREA	35	-132.90	-32.00	-191.30	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400069	YAVIN4	yav_geonosian_cave	AREA	35	-143.10	-34.00	-193.90	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400070	YAVIN4	yav_geonosian_cave	AREA	35	-144.50	-34.00	-180.60	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400071	YAVIN4	yav_geonosian_cave	AREA	36	-128.00	-32.00	-267.90	0	1	an alert droideka	10315	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400072	YAVIN4	yav_geonosian_cave	AREA	37	-127.80	-32.50	-324.70	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400073	YAVIN4	yav_geonosian_cave	AREA	37	-131.50	-33.80	-338.60	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400074	YAVIN4	yav_geonosian_cave	AREA	37	-136.30	-33.80	-343.10	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400075	YAVIN4	yav_geonosian_cave	AREA	37	-143.30	-31.60	-323.90	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400076	YAVIN4	yav_geonosian_cave	AREA	38	-121.90	-32.10	-349.90	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400077	YAVIN4	yav_geonosian_cave	AREA	38	-129.10	-33.50	-384.80	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400078	YAVIN4	yav_geonosian_cave	AREA	38	-135.90	-31.90	-373.00	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400079	YAVIN4	yav_geonosian_cave	AREA	39	-71.60	-32.10	-381.30	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400080	YAVIN4	yav_geonosian_cave	AREA	39	-73.10	-33.90	-372.80	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400081	YAVIN4	yav_geonosian_cave	AREA	39	-76.20	-31.90	-349.10	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400082	YAVIN4	yav_geonosian_cave	AREA	39	-89.30	-32.20	-375.70	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400083	YAVIN4	yav_geonosian_cave	AREA	39	-90.70	-34.40	-367.40	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400084	YAVIN4	yav_geonosian_cave	AREA	40	-28.10	-34.20	-407.50	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400085	YAVIN4	yav_geonosian_cave	AREA	40	-46.80	-31.90	-407.80	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400086	YAVIN4	yav_geonosian_cave	AREA	40	-68.80	-32.10	-407.00	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400087	YAVIN4	yav_geonosian_cave	AREA	41	-11.90	-34.00	-414.20	0	1	an alert droideka	10315	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400088	YAVIN4	yav_geonosian_cave	AREA	42	13.40	-20.00	-336.90	0	1	an enhanced kliknik	10340	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400089	YAVIN4	yav_geonosian_cave	AREA	42	14.10	-22.00	-341.50	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400090	YAVIN4	yav_geonosian_cave	AREA	42	17.30	-32.00	-370.50	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400091	YAVIN4	yav_geonosian_cave	AREA	42	23.20	-24.00	-333.80	0	1	an enhanced kliknik	10340	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400092	YAVIN4	yav_geonosian_cave	AREA	42	23.70	-34.00	-375.10	0	1	an enhanced kliknik	10340	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400093	YAVIN4	yav_geonosian_cave	AREA	42	23.80	-34.00	-398.70	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400094	YAVIN4	yav_geonosian_cave	AREA	42	4.50	-34.00	-400.80	0	1	an enhanced kliknik	10340	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400095	YAVIN4	yav_geonosian_cave	AREA	42	7.00	-22.00	-334.00	0	1	a Geonosian scientist	10350	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400096	YAVIN4	yav_geonosian_cave	AREA	43	119.60	-32.00	-330.30	0	1	an enhanced kliknik	10340	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400097	YAVIN4	yav_geonosian_cave	AREA	43	67.50	-31.90	-329.30	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400098	YAVIN4	yav_geonosian_cave	AREA	43	83.90	-31.50	-308.40	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400099	YAVIN4	yav_geonosian_cave	AREA	43	91.10	-33.80	-347.60	0	1	an enhanced kliknik	10340	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400100	YAVIN4	yav_geonosian_cave	AREA	43	91.80	-34.10	-336.20	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0	
+2400101	YAVIN4	yav_geonosian_cave	AREA	43	95.70	-32.40	-322.20	0	1	an acklay	10305	dungeon	Geonosian Cave	1	none	0	1800	1500	0	
+2400102	YAVIN4	yav_imp_outpost_barracks	EGG	3	-0.05	0.13	-6.00	0	1	Haymir Rendundi (Black Epsilon Pilot Trainer)	33800	city	Imperial Outpost	1	none	0	300	120	0	
+2400103	YAVIN4	yav_imp_outpost_cantina	EGG	6	-3.88	0.13	-3.68	89	1	Captain Denner (Storm Squadron Pilot Trainer)	33780	city	Imperial Outpost	1	none	0	300	120	0	
+2400104	YAVIN4	yav_imp_outpost_cantina	EGG	3	0.14	0.13	-5.83	0	1	Field Commander Alozen (Storm Squadron Pilot Trainer)	33775	city	Imperial Outpost	1	none	0	300	120	0	
+2400105	YAVIN4	yav_itp_thrawn_thieves_bunker	AREA	4	4.20	-12.00	31.20	0	1	a dark jedi	13545	dungeon	?	1	none	0	300	120	2	
+2400106	YAVIN4	yav_itp_thrawn_thieves_bunker	AREA	5	29.60	-12.00	31.00	0	1	a dark jedi	13545	dungeon	?	1	none	0	300	120	2	
+2400107	YAVIN4	yav_itp_thrawn_thieves_bunker	AREA	7	-13.40	-16.00	79.80	0	1	a dark jedi	13545	dungeon	?	1	none	0	300	120	2	
+2400108	YAVIN4	yav_itp_thrawn_thieves_bunker	AREA	7	19.90	-16.00	80.10	0	1	a dark jedi	13545	dungeon	?	1	none	0	300	120	2	
+2400109	YAVIN4	yav_itp_thrawn_thieves_bunker	AREA	7	2.80	-16.00	81.30	0	1	a dark jedi	13545	dungeon	?	1	none	0	300	120	2	
+2400110	YAVIN4	yav_itp_thrawn_thieves_bunker	AREA	7	3.10	-16.00	64.10	0	1	a dark jedi	13545	dungeon	?	1	none	0	300	120	2	
+2400111	YAVIN4	yav_itp_thrawn_thieves_bunker	AREA	8	70.40	-16.00	74.70	0	1	Magus Jocle (a dark jedi)	13550	dungeon	?	1	none	0	300	120	0	
+2400112	YAVIN4	yav_itp_thrawn_thieves_bunker	AREA	9	-34.70	-14.00	78.70	0	1	a dark jedi	13545	dungeon	?	1	none	0	300	120	2	
+2400113	YAVIN4	yav_itp_vader_reb_bunker	AREA	4	2.70	-6.00	12.30	0	1	a Rebel trooper	13505	dungeon	?	1	none	0	300	120	0	
+2400114	YAVIN4	yav_itp_vader_reb_bunker	AREA	5	16.20	-6.00	16.50	0	1	a Rebel trooper	13505	dungeon	?	1	none	0	300	120	0	
+2400115	YAVIN4	yav_itp_vader_reb_bunker	AREA	5	20.60	-6.00	10.30	0	1	a Rebel trooper	13505	dungeon	?	1	none	0	300	120	0	
+2400116	YAVIN4	yav_itp_vader_reb_bunker	AREA	6	-10.40	-6.00	15.20	0	1	a Rebel trooper	13505	dungeon	?	1	none	0	300	120	0	
+2400117	YAVIN4	yav_itp_vader_reb_bunker	AREA	6	-12.40	-6.00	10.90	0	1	a Rebel trooper	13505	dungeon	?	1	none	0	300	120	0	
+2400118	YAVIN4	yav_itp_vader_reb_bunker	AREA	7	2.90	-6.00	22.20	0	1	a Rebel trooper	13505	dungeon	?	1	none	0	300	120	0	
+2400119	YAVIN4	yav_itp_vader_reb_bunker	AREA	8	2.70	-10.00	42.20	0	1	a Rebel trooper	13505	dungeon	?	1	none	0	300	120	0	
+2400120	YAVIN4	yav_itp_vader_reb_bunker	AREA	13	-12.80	-10.00	52.80	0	1	a Rebel trooper	13505	dungeon	?	1	none	0	300	120	0	
+2400121	YAVIN4	yav_itp_vader_reb_bunker	AREA	13	-15.90	-10.00	62.50	0	1	a Rebel trooper	13505	dungeon	?	1	none	0	300	120	0	
+2400122	YAVIN4	yav_itp_vader_reb_bunker	AREA	13	-17.70	-10.00	77.60	0	1	a Rebel trooper	13505	dungeon	?	1	none	0	300	120	0	
+2400123	YAVIN4	yav_itp_vader_reb_bunker	AREA	13	-22.20	-10.00	66.80	0	1	a Rebel trooper	13505	dungeon	?	1	none	0	300	120	0	
+2400124	YAVIN4	yav_itp_vader_reb_bunker	AREA	14	20.00	-10.00	56.70	0	1	a Rebel trooper	13505	dungeon	?	1	none	0	300	120	0	
+2400125	YAVIN4	yav_itp_vader_reb_bunker	AREA	14	22.10	-10.00	66.10	0	1	a Rebel trooper	13505	dungeon	?	1	none	0	300	120	0	
+2400126	YAVIN4	yav_itp_vader_reb_bunker	AREA	14	26.60	-10.00	56.40	0	1	a Rebel trooper	13505	dungeon	?	1	none	0	300	120	0	
+2400127	YAVIN4	yav_itp_vader_reb_bunker	AREA	14	27.20	-10.00	72.30	0	1	a Rebel trooper	13505	dungeon	?	1	none	0	300	120	0	
+2400128	YAVIN4	yav_itp_vader_reb_bunker	AREA	17	4.50	-10.00	75.60	0	1	a Rebel trooper	13505	dungeon	?	1	none	0	300	120	0	
+2400129	YAVIN4	yav_itp_vader_reb_bunker	AREA	17	1.00	-10.00	72.70	0	1	a Rebel trooper	13505	dungeon	?	1	none	0	300	120	0	
+2400130	YAVIN4	yav_itp_vader_reb_bunker	AREA	18	4.10	-10.00	50.70	0	1	Major Osto Elrad	13580	dungeon	?	1	none	0	300	120	0	
+2400131	YAVIN4	yav_itp_vader_reb_bunker	AREA	18	7.90	-10.00	62.60	0	1	a Rebel trooper	13505	dungeon	?	1	none	0	300	120	0	
+2400132	YAVIN4	yav_itp_vader_reb_bunker_outpost	AREA	3	-0.10	0.10	-5.30	0	1	a Rebel trooper	13505	dungeon	?	1	none	0	300	120	0	
+2400133	YAVIN4	yav_itp_vader_reb_bunker_outpost	AREA	4	2.90	0.10	1.80	0	1	a Rebel trooper	13505	dungeon	?	1	none	0	300	120	0	
+2400134	YAVIN4	yav_labor_outpost_medium_house	EGG	4	8.30	0.60	-4.50	90	1	Wuioe Opca	2725	city	Labor Outpost	1	drinking	0	300	120	0	
+2400135	YAVIN4	yav_labor_outpost_medium_house	EGG	1	1.59	0.62	1.08	39	1	Lt. Colonel Aqzow (Arkon's Havoc Pilot Trainer)	33960	city	Labor Outpost	1	none	0	300	120	0	
+2400136	YAVIN4	yav_labor_outpost_small_house	EGG	1	-3.00	0.63	1.03	-4	1	Major Eker (Rebel Pilot Trainer)	33865	city	Labor Outpost	1	none	0	300	120	0	
+2400137	YAVIN4	yav_mining_outpost_shed	EGG	6	-3.90	0.13	-3.89	77	1	Gardo Valdell	11305	city	Mining Outpost	1	none	0	300	120	0	
+2400138	YAVIN4	yav_world	EGG	0	-351.11	35.00	4859.51	179	1	a commoner	3185	city	Mining Outpost	1	none	0	300	120	0	0
+2400139	YAVIN4	yav_woolamander_temple	AREA	3	-0.81	2.02	6.00	0	1	a woolamander gatherer	33290	poi	Woolamander Palace	2	none	0	300	180	4	
+2400140	YAVIN4	yav_woolamander_temple	AREA	3	15.35	2.02	-0.47	0	1	a woolamander	33285	poi	Woolamander Palace	2	none	0	300	180	4	
+2400141	YAVIN4	yav_woolamander_temple	AREA	3	-18.54	2.02	-0.40	0	1	a woolamander	33285	poi	Woolamander Palace	2	none	0	300	180	4	
+2400142	YAVIN4	yav_woolamander_temple	AREA	7	-59.25	2.02	-11.06	0	1	a woolamander gatherer	33290	poi	Woolamander Palace	1	none	0	300	180	0	
+2400143	YAVIN4	yav_woolamander_temple	AREA	7	-59.32	2.05	21.06	178	1	a woolamander harvester	33300	poi	Woolamander Palace	1	none	0	300	180	0	
+2400144	YAVIN4	yav_woolamander_temple	AREA	7	-84.07	2.02	5.02	89	1	a woolamander harrower	33295	poi	Woolamander Palace	2	none	0	300	180	4	
+2400145	YAVIN4	yav_woolamander_temple	AREA	9	53.39	2.02	4.98	-90	1	a woolamander harvester	33300	poi	Woolamander Palace	2	none	0	300	180	4	
+2400146	YAVIN4	yav_woolamander_temple	AREA	10	74.40	2.02	4.75	86	1	a woolamander reaper	33305	poi	Woolamander Palace	2	none	0	300	180	4	
+2400147	YAVIN4	yav_world	AREA	0	-1154.81	82.93	-2909.28	0	1	a giant crystal snake	10415	-	-	3	none	0	300	180	6	
+2400148	YAVIN4	yav_world	AREA	0	-1581.97	9.09	6764.79	0	1	a Dark Jedi Elder	31520	-	-	1	none	0	300	120	2	
+2400149	YAVIN4	yav_world	AREA	0	-1589.17	39.70	-814.87	0	1	a giant angler	10395	-	-	5	none	0	300	180	10	
+2400150	YAVIN4	yav_world	AREA	0	-1593.14	9.19	6757.58	0	1	a Dark Jedi Elder	31520	-	-	1	none	0	300	120	2	
+2400151	YAVIN4	yav_world	AREA	0	-1776.61	88.73	3317.55	0	1	a giant tanc mite	10535	-	-	5	none	0	300	180	10	
+2400152	YAVIN4	yav_world	AREA	0	-1934.26	8.57	7135.54	0	1	a Smuggler henchmen	33405	-	-	1	none	0	300	120	2	
+2400153	YAVIN4	yav_world	AREA	0	-1936.89	8.30	7139.73	0	1	a Smuggler leader	33415	-	-	1	none	0	300	120	2	
+2400154	YAVIN4	yav_world	AREA	0	-1941.72	8.26	7142.43	0	1	a Smuggler bully	33400	-	-	1	none	0	300	120	2	
+2400155	YAVIN4	yav_world	AREA	0	-2211.09	87.83	1156.26	0	1	a master thief	15905	-	-	4	none	0	300	180	8	
+2400156	YAVIN4	yav_world	AREA	0	-247.00	35.00	4877.00	0	1	Zelma	26700	-	-	1	none	0	300	120	0	
+2400157	YAVIN4	yav_world	AREA	0	-2800.69	107.71	1773.43	0	1	a stranded Imperial officer	29625	-	-	2	none	0	300	180	4	
+2400158	YAVIN4	yav_world	AREA	0	-2843.10	81.91	-1177.96	0	1	Finned Blaggart	9460	-	-	1	none	0	300	180	0	
+2400159	YAVIN4	yav_world	QUEST	0	-292.23	35.00	4833.63	0	1	Osae	33380	-	-	1	none	0	300	180	0	
+2400160	YAVIN4	yav_world	AREA	0	-2986.73	68.43	-1116.67	0	1	a stranded Rebel soldier	29655	-	-	3	none	0	300	180	6	
+2400161	YAVIN4	yav_world	AREA	0	-2991.30	68.36	-1116.24	0	1	a stranded Rebel officer	29640	-	-	2	none	0	300	180	4	
+2400162	YAVIN4	yav_world	AREA	0	-3094.81	306.45	902.93	0	1	an angler	205	-	-	5	none	0	300	180	10	
+2400163	YAVIN4	yav_world	AREA	0	-3140.01	136.80	6829.94	0	1	a stranded Rebel pilot	29645	-	-	2	none	0	300	180	4	
+2400164	YAVIN4	yav_world	AREA	0	-3177.26	104.62	3350.55	0	1	a Dark Jedi Elder	31520	-	-	1	none	0	300	120	2	
+2400165	YAVIN4	yav_world	AREA	0	-3180.28	105.19	3342.52	0	1	a stranded Imperial officer	29625	-	-	3	none	0	300	180	6	
+2400166	YAVIN4	yav_world	AREA	0	-3252.67	147.31	-4089.21	0	1	a thief	30975	-	-	3	none	0	300	180	6	
+2400167	YAVIN4	yav_world	AREA	0	-3262.08	69.74	-3047.53	0	1	an enforcer	27080	-	-	1	none	0	300	120	2	
+2400168	YAVIN4	yav_world	AREA	0	-3267.66	71.20	-3112.68	0	1	an enforcer	27080	-	-	1	none	0	300	120	2	
+2400169	YAVIN4	yav_world	AREA	0	-3291.00	68.01	-3077.00	0	1	Daren	26755	-	-	1	none	0	300	120	0	
+2400170	YAVIN4	yav_world	AREA	0	-3294.96	68.35	-3045.38	0	1	an enforcer	27080	-	-	1	none	0	300	120	2	
+2400171	YAVIN4	yav_world	AREA	0	-344.29	35.00	4812.17	0	1	Breac Slaus (Yavin IV Collector)	33440	-	-	1	none	0	300	120	0	
+2400172	YAVIN4	yav_world	AREA	0	-3740.27	158.84	2161.54	0	1	a kliknik	14265	-	-	4	none	0	300	180	8	
+2400173	YAVIN4	yav_world	AREA	0	-3759.79	426.59	6953.41	0	1	an angler	205	-	-	5	none	0	300	180	10	
+2400174	YAVIN4	yav_world	AREA	0	-3838.92	103.88	3065.80	0	1	a lurking angler	15555	-	-	3	none	0	300	180	6	
+2400175	YAVIN4	yav_world	AREA	0	-3915.38	416.78	-146.42	0	1	a tanc mite	30315	-	-	4	none	0	300	180	8	
+2400176	YAVIN4	yav_world	AREA	0	-4091.42	219.94	-2963.27	0	1	a Rebel scout	24670	-	-	2	none	0	300	180	4	
+2400177	YAVIN4	yav_world	AREA	0	-4149.91	64.67	5333.49	0	1	a master thief	15905	-	-	3	none	0	300	180	6	
+2400178	YAVIN4	yav_world	AREA	0	-4210.43	455.66	-3897.50	0	1	a skreeg warrior elite	26475	-	-	3	none	0	300	180	6	
+2400179	YAVIN4	yav_world	AREA	0	-4334.59	98.85	3972.36	0	1	a Dark Jedi Elder	31520	-	-	1	none	0	300	120	2	
+2400180	YAVIN4	yav_world	AREA	0	-4338.05	97.94	3963.48	0	1	a Dark Jedi Elder	31520	-	-	1	none	0	300	120	2	
+2400181	YAVIN4	yav_world	AREA	0	-4339.01	98.90	3980.17	0	1	a Dark Jedi Elder	31520	-	-	1	none	0	300	120	2	
+2400182	YAVIN4	yav_world	AREA	0	-4342.58	98.16	3971.64	0	1	a Dark Jedi Elder	31520	-	-	1	none	0	300	120	2	
+2400183	YAVIN4	yav_world	AREA	0	-4621.32	404.59	1196.71	0	1	a giant tanc mite	10535	-	-	3	none	0	300	180	6	
+2400184	YAVIN4	yav_world	AREA	0	-4640.17	130.35	3435.29	0	1	a kliknik defender	14295	-	-	3	none	0	300	180	6	
+2400185	YAVIN4	yav_world	AREA	0	-4690.52	534.28	-3638.33	0	1	a whisper bird hatchling	33155	-	-	4	none	0	300	180	8	
+2400186	YAVIN4	yav_world	AREA	0	-4749.11	135.65	-2345.64	0	1	a Rebel scout	24670	-	-	5	none	0	300	180	10	
+2400187	YAVIN4	yav_world	AREA	0	-4773.71	566.75	-4769.26	0	1	a Graverobber Leader	33365	-	-	1	none	0	300	180	0	
+2400188	YAVIN4	yav_world	AREA	0	-4775.35	571.96	-4752.32	0	1	a Graverobber Member	33370	-	-	4	none	0	300	180	8	
+2400189	YAVIN4	yav_world	AREA	0	-4812.39	592.24	-4732.78	0	1	a Graverobber digger	33360	-	-	4	none	0	300	180	8	
+2400190	YAVIN4	yav_world	AREA	0	-4827.51	12.95	-1429.74	0	1	a stranded Rebel officer	29640	-	-	2	none	0	300	180	4	
+2400191	YAVIN4	yav_world	AREA	0	-4971.55	144.53	-6067.97	0	1	a kliknik warrior	14340	-	-	3	none	0	300	180	6	
+2400192	YAVIN4	yav_world	AREA	0	-4988.78	306.01	-2835.26	0	1	a master thief	15905	-	-	4	none	0	300	180	8	
+2400193	YAVIN4	yav_world	AREA	0	-4989.06	290.01	450.90	0	1	a master thief	15905	-	-	3	none	0	300	180	6	
+2400194	YAVIN4	yav_world	AREA	0	-4994.13	215.36	6490.25	0	1	a lurking angler	15555	-	-	3	none	0	300	180	6	
+2400195	YAVIN4	yav_world	AREA	0	-5454.85	266.74	7657.22	0	1	a tanc mite	30315	-	-	3	none	0	300	180	6	
+2400196	YAVIN4	yav_world	AREA	0	-5474.48	156.81	118.38	0	1	a kliknik	14265	-	-	4	none	0	300	180	8	
+2400197	YAVIN4	yav_world	AREA	0	-5481.39	444.86	-5203.02	0	1	a kliknik warrior	14340	-	-	3	none	0	300	180	6	
+2400198	YAVIN4	yav_world	AREA	0	-5506.18	11.78	-1252.92	0	1	a rancher	8540	-	-	3	none	0	300	180	6	
+2400199	YAVIN4	yav_world	AREA	0	-5506.76	66.32	5097.54	0	1	a Rebel scout	24670	-	-	3	none	0	300	180	6	
+2400200	YAVIN4	yav_world	AREA	0	-5506.67	12.98	-1259.89	0	1	a Smuggler	33420	-	-	1	none	0	300	120	2	
+2400201	YAVIN4	yav_world	AREA	0	-5517.63	12.69	-1259.37	0	1	a Smuggler leader	33410	-	-	1	none	0	300	120	2	
+2400202	YAVIN4	yav_world	AREA	0	-5527.03	13.16	-1262.78	0	1	a Smuggler	33420	-	-	1	none	0	300	120	2	
+2400203	YAVIN4	yav_world	AREA	0	-5607.78	219.12	-2817.12	0	1	a giant tanc mite	10535	-	-	3	none	0	300	180	6	
+2400204	YAVIN4	yav_world	AREA	0	-5644.28	453.31	956.41	0	1	a kliknik defender	14295	-	-	5	none	0	300	180	10	
+2400205	YAVIN4	yav_world	AREA	0	-5662.64	124.38	-2241.68	0	1	a Rebel scout	24670	-	-	3	none	0	300	180	6	
+2400206	YAVIN4	yav_world	AREA	0	-5689.26	379.67	-3906.26	0	1	an angler	205	-	-	5	none	0	300	180	10	
+2400207	YAVIN4	yav_world	AREA	0	-5697.74	96.69	6710.73	0	1	a master thief	15905	-	-	2	none	0	300	180	4	
+2400208	YAVIN4	yav_world	AREA	0	-6209.95	830.22	2045.20	0	1	a thief	30975	-	-	3	none	0	300	180	6	
+2400209	YAVIN4	yav_world	AREA	0	-6229.70	157.85	4447.50	0	1	a giant spined puc	10520	-	-	3	none	0	300	180	6	
+2400210	YAVIN4	yav_world	AREA	0	-6242.47	52.55	5355.43	0	1	a Rebel trooper	13505	-	-	1	none	0	300	120	2	
+2400211	YAVIN4	yav_world	AREA	0	-6243.70	52.80	5372.49	0	1	a Rebel trooper	13505	-	-	1	none	0	300	120	2	
+2400212	YAVIN4	yav_world	AREA	0	-6260.19	51.90	5361.54	0	1	a Rebel trooper	13505	-	-	1	none	0	300	120	2	
+2400213	YAVIN4	yav_world	AREA	0	-6272.96	206.34	-5252.92	0	1	an angler	205	-	-	5	none	0	300	180	10	
+2400214	YAVIN4	yav_world	AREA	0	-6341.80	79.29	-3091.27	0	1	a Rebel scout	24670	-	-	3	none	0	300	180	6	
+2400215	YAVIN4	yav_world	AREA	0	-6354.33	66.11	-654.87	0	1	a tanc mite	30315	-	-	5	none	0	300	180	10	
+2400216	YAVIN4	yav_world	AREA	0	-6385.66	115.93	-287.08	0	1	a kliknik hunter	14305	-	-	2	none	0	300	180	4	
+2400217	YAVIN4	yav_world	AREA	0	-6451.32	118.59	-284.99	0	1	a mutant acklay	19980	-	-	1	none	0	300	180	0	
+2400218	YAVIN4	yav_world	AREA	0	-6462.88	83.65	7358.76	0	1	a thug	30995	-	-	1	none	0	300	180	0	
+2400219	YAVIN4	yav_world	AREA	0	-6519.15	108.68	-366.85	0	1	a kliknik hunter	14305	-	-	2	none	0	300	180	4	
+2400220	YAVIN4	yav_world	AREA	0	-6673.21	29.07	-2244.56	0	1	a Smuggler	33425	-	-	2	none	0	300	180	4	
+2400221	YAVIN4	yav_world	AREA	0	-6679.88	28.59	-2261.50	0	1	a Smuggler	33420	-	-	2	none	0	300	180	4	
+2400222	YAVIN4	yav_world	AREA	0	-6689.12	28.04	-2247.14	0	1	a Smuggler leader	33410	-	-	1	none	0	300	180	0	
+2400223	YAVIN4	yav_world	AREA	0	-6895.39	14.36	-2038.54	0	1	a thief	30975	-	-	3	none	0	300	180	6	
+2400224	YAVIN4	yav_world	AREA	0	-6896.79	572.10	1081.54	0	1	an angler	205	-	-	3	none	0	300	180	6	
+2400225	YAVIN4	yav_world	AREA	0	-690.25	92.83	-2014.99	-117	1	a kliknik dark hunter	14275	poi	Woolamander Palace	2	none	0	300	180	4	
+2400226	YAVIN4	yav_world	QUEST	0	-6900.30	73.00	-5655.07	-161	1	Soci	33430	city	Labor Outpost	1	none	0	300	180	0	
+2400227	YAVIN4	yav_world	EGG	0	-6912.79	73.00	-5736.72	74	1	Nore Brrea	21235	city	Labor Outpost	1	none	0	300	120	0	
+2400228	YAVIN4	yav_world	EGG	0	-6877.27	73.00	-5682.29	18	1	a Chiss male	23260	city	Labor Outpost	1	none	0	300	120	0	
+2400229	YAVIN4	yav_world	EGG	0	-6981.06	73.00	-5659.48	-174	1	a commoner	3185	city	Labor Outpost	1	none	0	300	120	0	
+2400230	YAVIN4	yav_world	AREA	0	-6924.56	69.33	6049.61	0	1	a master thief	15905	-	-	3	none	0	300	180	6	
+2400231	YAVIN4	yav_world	AREA	0	-6942.03	45.68	-908.28	0	1	a Rebel scout	24670	-	-	3	none	0	300	180	6	
+2400232	YAVIN4	yav_world	AREA	0	-6942.29	196.95	-105.68	0	1	a Rebel scout	24670	-	-	1	none	0	300	180	0	
+2400233	YAVIN4	yav_world	AREA	0	-6944.34	50.45	6554.16	0	1	a giant tanc mite	10535	-	-	3	none	0	300	180	6	
+2400234	YAVIN4	yav_world	AREA	0	-6955.64	8.31	-1587.53	0	1	a crystal snake	5205	-	-	3	none	0	300	180	6	
+2400235	YAVIN4	yav_world	AREA	0	-6957.76	33.15	6983.01	0	1	a thief	30975	-	-	5	none	0	300	180	10	
+2400236	YAVIN4	yav_world	AREA	0	-7053.12	274.46	3429.57	0	1	a kliknik worker	14345	-	-	3	none	0	300	180	6	
+2400237	YAVIN4	yav_world	AREA	0	-7053.08	69.85	-5831.28	0	1	an enforcer	27080	-	-	1	none	0	300	120	2	
+2400238	YAVIN4	yav_world	AREA	0	-7055.37	27.29	7348.57	0	1	a Dark Jedi Elder	31520	-	-	1	none	0	300	120	2	
+2400239	YAVIN4	yav_world	AREA	0	-7068.97	123.37	4372.04	0	1	a Dark Jedi Sentinel	31525	outback	Northwest	1	none	0	300	120	0	
+2400240	YAVIN4	yav_world	AREA	0	-7070.74	122.83	4389.82	0	1	a Dark Jedi Elder	31520	outback	Northwest	1	none	0	300	120	0	
+2400241	YAVIN4	yav_world	AREA	0	-7077.00	68.42	-5849.00	0	1	Benton	26720	-	-	1	none	0	300	120	0	
+2400242	YAVIN4	yav_world	AREA	0	-7078.29	47.96	7561.54	0	1	a Rebel scout	24670	-	-	3	none	0	300	180	6	
+2400243	YAVIN4	yav_world	AREA	0	-7080.82	123.94	4408.02	0	1	a Dark Jedi Elder	31520	outback	Northwest	1	none	0	300	120	0	
+2400244	YAVIN4	yav_world	AREA	0	-7084.10	66.01	-5819.90	0	1	an enforcer	27080	-	-	1	none	0	300	120	2	
+2400245	YAVIN4	yav_world	AREA	0	-7087.73	122.48	4374.32	0	1	a Dark Jedi Elder	31520	outback	Northwest	1	none	0	300	120	0	
+2400246	YAVIN4	yav_world	AREA	0	-7088.36	124.09	4408.00	0	1	a Dark Jedi Master	31515	outback	Northwest	1	none	0	300	120	0	
+2400247	YAVIN4	yav_world	AREA	0	-7091.31	67.04	-5877.41	0	1	an enforcer	27080	-	-	1	none	0	300	120	2	
+2400248	YAVIN4	yav_world	AREA	0	-7098.52	123.08	4393.96	0	1	a Dark Jedi Elder	31520	outback	Northwest	1	none	0	300	120	0	
+2400249	YAVIN4	yav_world	AREA	0	-7099.21	123.27	4381.65	0	1	a Dark Jedi Master	31515	outback	Northwest	1	none	0	300	120	0	
+2400250	YAVIN4	yav_world	AREA	0	-7099.30	138.24	4435.88	0	1	a Dark Jedi Master	31515	outback	Northwest	1	none	0	300	120	0	
+2400251	YAVIN4	yav_world	AREA	0	-7101.16	83.39	4994.32	0	1	a choku pup	2610	-	-	3	none	0	300	180	6	
+2400252	YAVIN4	yav_world	AREA	0	-7101.72	124.42	4407.50	0	1	a Dark Jedi Sentinel	31525	outback	Northwest	1	none	0	300	120	0	
+2400253	YAVIN4	yav_world	AREA	0	-7107.81	561.10	1569.41	0	1	a master thief	15905	-	-	3	none	0	300	180	6	
+2400254	YAVIN4	yav_world	AREA	0	-7107.89	83.95	5000.62	0	1	a choku male	2600	-	-	1	none	0	300	180	0	
+2400255	YAVIN4	yav_world	AREA	0	-7110.39	124.98	4426.08	0	1	a Dark Jedi Sentinel	31525	outback	Northwest	1	none	0	300	120	0	
+2400256	YAVIN4	yav_world	AREA	0	-7111.75	83.88	4995.23	0	1	a choku female	2590	-	-	1	none	0	300	180	0	
+2400257	YAVIN4	yav_world	AREA	0	-7120.27	124.70	4410.81	0	1	a Dark Jedi Sentinel	31525	outback	Northwest	1	none	0	300	120	0	
+2400258	YAVIN4	yav_world	AREA	0	-7141.57	122.82	4411.37	0	1	a Dark Jedi Master	31515	outback	Northwest	1	none	0	300	120	0	
+2400259	YAVIN4	yav_world	AREA	0	-7374.72	103.76	4399.85	0	1	a bounty hunter	2100	-	-	1	none	0	300	180	0	
+2400260	YAVIN4	yav_world	AREA	0	-7413.80	388.43	964.82	0	1	a kliknik	14265	-	-	4	none	0	300	180	8	
+2400261	YAVIN4	yav_world	AREA	0	-7444.81	103.73	4112.68	0	1	a thug	30995	-	-	1	none	0	300	180	0	
+2400262	YAVIN4	yav_world	AREA	0	-7450.42	224.56	3430.49	0	1	an Imperial trooper	13225	-	-	3	none	0	300	180	6	
+2400263	YAVIN4	yav_world	AREA	0	-7458.68	341.70	2929.64	0	1	a Rebel scout	24670	-	-	3	none	0	300	180	6	
+2400264	YAVIN4	yav_world	AREA	0	-7464.78	8.87	7038.75	0	1	a kliknik warrior	14340	-	-	5	none	0	300	180	10	
+2400265	YAVIN4	yav_world	AREA	0	-747.50	84.00	-2055.49	68	1	a kliknik dark worker	14290	poi	Woolamander Palace	3	none	0	300	180	6	
+2400266	YAVIN4	yav_world	AREA	0	-7497.36	425.48	2590.57	0	1	a giant crystal snake	10415	-	-	3	none	0	300	180	6	
+2400267	YAVIN4	yav_world	AREA	0	-751.50	84.00	-2086.15	135	1	a kliknik dark worker	14290	poi	Woolamander Palace	3	none	0	300	180	6	
+2400268	YAVIN4	yav_world	AREA	0	-7555.63	421.42	2121.15	0	1	a master thief	15905	-	-	3	none	0	300	180	6	
+2400269	YAVIN4	yav_world	AREA	0	-7558.80	30.72	-5906.55	0	1	a tanc mite	30315	-	-	3	none	0	300	180	6	
+2400270	YAVIN4	yav_world	AREA	0	-7569.39	20.59	-1094.07	0	1	a Rebel scout	24670	-	-	3	none	0	300	180	6	
+2400271	YAVIN4	yav_world	AREA	0	-7572.08	227.06	121.24	0	1	a master thief	15905	-	-	3	none	0	300	180	6	
+2400272	YAVIN4	yav_world	AREA	0	-7601.51	39.97	5428.47	0	1	a giant tanc mite	10535	-	-	3	none	0	300	180	6	
+2400273	YAVIN4	yav_world	AREA	0	-800.75	84.00	-1979.16	49	1	a kliknik dark worker	14290	poi	Woolamander Palace	3	none	0	300	180	6	
+2400274	YAVIN4	yav_world	AREA	0	-823.97	84.00	-2138.66	-142	1	a kliknik dark worker	14290	poi	Woolamander Palace	3	none	0	300	180	6	
+2400275	YAVIN4	yav_world	AREA	0	-831.14	84.00	-1974.75	-29	1	a kliknik dark worker	14290	poi	Woolamander Palace	3	none	0	300	180	6	
+2400276	YAVIN4	yav_world	AREA	0	-868.32	84.00	-2131.52	-90	1	a kliknik dark worker	14290	poi	Woolamander Palace	3	none	0	300	180	6	
+2400277	YAVIN4	yav_world	AREA	0	-879.82	84.78	-2047.74	-77	1	a kliknik dark defender	14270	poi	Woolamander Palace	3	none	0	300	180	6	
+2400278	YAVIN4	yav_world	AREA	0	-903.64	84.00	-2021.32	-71	1	a kliknik dark worker	14290	poi	Woolamander Palace	3	none	0	300	180	6	
+2400279	YAVIN4	yav_world	AREA	0	-910.05	84.00	-2070.91	-138	1	a kliknik dark worker	14290	poi	Woolamander Palace	3	none	0	300	180	6	
+2400280	YAVIN4	yav_world	AREA	0	-912.27	84.72	-2131.02	101	1	A Stormtrooper	25390	poi	Woolamander Palace	1	none	0	300	120	2	
+2400281	YAVIN4	yav_world	AREA	0	-920.50	84.00	-2101.68	31	1	A Stormtrooper	25390	poi	Woolamander Palace	1	none	0	300	120	2	
+2400282	YAVIN4	yav_world	AREA	0	-937.40	86.80	-2123.00	15	1	a Stormtrooper squad leader	25385	poi	Woolamander Palace	1	none	0	300	120	0	
+2400283	YAVIN4	yav_world	AREA	0	-937.48	83.69	-2080.60	56	1	A Stormtrooper	25390	poi	Woolamander Palace	1	none	0	300	120	2	
+2400284	YAVIN4	yav_world	AREA	0	-940.61	85.97	-2114.37	167	1	A Stormtrooper	25390	poi	Woolamander Palace	1	none	0	300	120	2	
+2400285	YAVIN4	yav_world	AREA	0	-953.83	82.10	-2094.93	-27	1	A Stormtrooper	25390	poi	Woolamander Palace	1	none	0	300	120	2	
+2400286	YAVIN4	yav_world	AREA	0	-962.08	84.71	-2126.91	-111	1	A Stormtrooper	25390	poi	Woolamander Palace	1	none	0	300	120	2	
+2400287	YAVIN4	yav_world	AREA	0	-986.60	85.32	-2170.97	44	1	a kliknik dark hunter	14275	poi	Woolamander Palace	2	none	0	300	180	4	
+2400288	YAVIN4	yav_world	AREA	0	1590.47	100.39	1563.77	0	1	a Rebel commando	24375	-	-	4	none	0	300	180	8	
+2400289	YAVIN4	yav_world	AREA	0	1596.37	102.64	1531.17	0	1	a Rebel commando	24375	-	-	4	none	0	300	180	8	
+2400290	YAVIN4	yav_world	AREA	0	2127.41	83.78	977.32	0	1	a thug	30995	-	-	1	none	0	300	180	0	
+2400291	YAVIN4	yav_world	AREA	0	2348.19	53.57	4918.69	0	1	a master thief	15905	-	-	1	none	0	300	180	0	
+2400292	YAVIN4	yav_world	AREA	0	2382.15	29.86	3081.03	0	1	a thug	30995	-	-	1	none	0	300	180	0	
+2400293	YAVIN4	yav_world	AREA	0	306.74	8.84	-6764.50	0	1	a giant crystal snake	10415	-	-	5	none	0	300	180	10	
+2400294	YAVIN4	yav_world	AREA	0	322.43	184.56	-3142.18	0	1	a master thief	15905	-	-	3	none	0	300	180	6	
+2400295	YAVIN4	yav_world	AREA	0	3855.59	40.61	7158.71	0	1	a thief	30975	-	-	3	none	0	300	180	6	
+2400296	YAVIN4	yav_world	AREA	0	3895.13	203.56	-876.23	0	1	a tanc mite	30315	-	-	4	none	0	300	180	8	
+2400297	YAVIN4	yav_world	AREA	0	4283.98	54.41	4795.09	0	1	a kliknik dark defender	14270	-	-	2	none	0	300	180	4	
+2400298	YAVIN4	yav_world	AREA	0	4340.26	60.35	4873.56	0	1	Scorpion Kliknik	25810	-	-	1	none	0	300	180	0	
+2400299	YAVIN4	yav_world	AREA	0	4364.78	93.68	977.22	0	1	a stranded Rebel officer	29640	-	-	3	none	0	300	180	6	
+2400300	YAVIN4	yav_world	AREA	0	4369.05	93.28	972.62	0	1	a Dark Jedi Elder	31520	-	-	1	none	0	300	120	2	
+2400301	YAVIN4	yav_world	AREA	0	480.67	81.00	-657.18	0	1	a woolamander	33285	-	-	5	none	0	300	180	10	
+2400302	YAVIN4	yav_world	AREA	0	4809.46	105.78	5590.37	0	1	an Exar Kun cultist	11885	dungeon	Exar Kun site	1	none	0	300	120	2	
+2400303	YAVIN4	yav_world	AREA	0	4811.34	104.37	5537.35	0	1	an Exar Kun cultist	11885	dungeon	Exar Kun site	1	none	0	300	120	2	
+2400304	YAVIN4	yav_world	AREA	0	4813.08	107.22	5567.59	0	1	an Exar Kun cultist	11885	dungeon	Exar Kun site	1	none	0	300	120	2	
+2400305	YAVIN4	yav_world	AREA	0	4819.46	103.46	5607.67	0	1	an Exar Kun cultist	11885	dungeon	Exar Kun site	1	none	0	300	120	2	
+2400306	YAVIN4	yav_world	AREA	0	4820.97	100.00	5582.41	0	1	an Exar Kun cultist	11885	dungeon	Exar Kun site	1	none	0	300	120	0	
+2400307	YAVIN4	yav_world	AREA	0	4829.91	96.00	5572.64	0	1	an Exar Kun cultist	11885	dungeon	Exar Kun site	1	none	0	300	120	0	
+2400308	YAVIN4	yav_world	AREA	0	4832.85	103.73	5545.29	0	1	an Exar Kun cultist	11885	dungeon	Exar Kun site	1	none	0	300	120	0	
+2400309	YAVIN4	yav_world	AREA	0	4834.06	96.00	5586.11	0	1	an Exar Kun cultist	11885	dungeon	Exar Kun site	1	none	0	300	120	0	
+2400310	YAVIN4	yav_world	AREA	0	4834.27	102.16	5514.60	0	1	an Exar Kun cultist	11885	dungeon	Exar Kun site	1	none	0	300	120	2	
+2400311	YAVIN4	yav_world	AREA	0	4837.80	102.92	5623.81	0	1	an Exar Kun cultist	11885	dungeon	Exar Kun site	1	none	0	300	120	2	
+2400312	YAVIN4	yav_world	AREA	0	4838.20	100.00	5558.79	0	1	an Exar Kun cultist	11885	dungeon	Exar Kun site	1	none	0	300	120	0	
+2400313	YAVIN4	yav_world	AREA	0	4843.29	103.48	5606.93	0	1	an Exar Kun cultist	11885	dungeon	Exar Kun site	1	none	0	300	120	0	
+2400314	YAVIN4	yav_world	AREA	0	4847.85	103.19	5544.97	0	1	an Exar Kun cultist	11885	dungeon	Exar Kun site	1	none	0	300	120	0	
+2400315	YAVIN4	yav_world	AREA	0	4852.71	104.13	5607.40	0	1	an Exar Kun cultist	11885	dungeon	Exar Kun site	1	none	0	300	120	0	
+2400316	YAVIN4	yav_world	AREA	0	4860.10	100.00	5591.14	0	1	an Exar Kun cultist	11885	dungeon	Exar Kun site	1	none	0	300	120	0	
+2400317	YAVIN4	yav_world	AREA	0	4865.15	103.34	5534.06	0	1	an Exar Kun cultist	11885	dungeon	Exar Kun site	1	none	0	300	120	2	
+2400318	YAVIN4	yav_world	AREA	0	4865.42	104.88	5619.11	0	1	an Exar Kun cultist	11885	dungeon	Exar Kun site	1	none	0	300	120	2	
+2400319	YAVIN4	yav_world	AREA	0	4877.11	103.63	5591.34	0	1	an Exar Kun cultist	11885	dungeon	Exar Kun site	1	none	0	300	120	2	
+2400320	YAVIN4	yav_world	AREA	0	4878.73	103.11	5562.99	0	1	an Exar Kun cultist	11885	dungeon	Exar Kun site	1	none	0	300	120	2	
+2400321	YAVIN4	yav_world	AREA	0	4927.72	103.84	5593.47	0	1	a Rebel trooper	8450	-	-	1	none	0	300	120	0	
+2400322	YAVIN4	yav_world	AREA	0	511.88	81.00	-687.19	0	1	a stunted woolamander	29665	-	-	3	none	0	300	180	6	
+2400323	YAVIN4	yav_world	AREA	0	5185.00	85.05	5582.00	0	1	Rolo	26900	-	-	1	none	0	300	120	0	
+2400324	YAVIN4	yav_world	AREA	0	5188.68	84.07	5550.87	0	1	an enforcer	27080	-	-	1	none	0	300	120	2	
+2400325	YAVIN4	yav_world	AREA	0	5213.19	86.89	5599.51	0	1	an enforcer	27080	-	-	1	none	0	300	120	2	
+2400326	YAVIN4	yav_world	AREA	0	546.05	35.87	4628.68	0	1	a Rebel trooper	13505	-	-	1	none	0	300	120	2	
+2400327	YAVIN4	yav_world	AREA	0	556.80	34.59	4665.49	0	1	a Rebel trooper	13505	-	-	1	none	0	300	120	2	
+2400328	YAVIN4	yav_world	AREA	0	5668.65	99.00	1428.41	0	1	a giant angler	10395	-	-	3	none	0	300	180	6	
+2400329	YAVIN4	yav_world	AREA	0	568.54	35.34	4646.54	0	1	a Rebel trooper	13505	-	-	1	none	0	300	120	2	
+2400330	YAVIN4	yav_world	AREA	0	574.77	35.76	4630.89	0	1	a Rebel trooper	13505	-	-	1	none	0	300	120	2	
+2400331	YAVIN4	yav_world	AREA	0	578.47	34.66	4662.93	0	1	a Rebel trooper	13505	-	-	1	none	0	300	120	2	
+2400332	YAVIN4	yav_world	AREA	0	5855.17	32.67	-336.09	0	1	Nagem Dr'lar	16250	-	-	1	none	0	300	180	0	
+2400333	YAVIN4	yav_world	AREA	0	5860.15	32.33	-337.77	0	1	a technician	30945	-	-	6	none	0	300	180	12	
+2400334	YAVIN4	yav_world	AREA	0	589.18	35.23	4645.48	0	1	Captain Demaia Maru	13575	-	-	1	none	0	300	120	0	
+2400335	YAVIN4	yav_world	AREA	0	5943.21	123.54	3057.63	0	1	a Scavenger Member	33390	-	-	1	none	0	300	180	0	
+2400336	YAVIN4	yav_world	AREA	0	595.70	35.94	4623.81	0	1	a Rebel trooper	13505	-	-	1	none	0	300	120	2	
+2400337	YAVIN4	yav_world	AREA	0	5951.02	123.31	3058.54	0	1	a Scavenger Leader	33385	-	-	1	none	0	300	180	0	
+2400338	YAVIN4	yav_world	AREA	0	5958.57	122.90	3055.06	0	1	a Scavenger Surveyer	33395	-	-	1	none	0	300	180	0	
+2400339	YAVIN4	yav_world	AREA	0	596.23	34.49	4661.36	0	1	a Rebel trooper	13505	-	-	1	none	0	300	120	2	
+2400340	YAVIN4	yav_world	AREA	0	596.44	33.53	4678.17	0	1	a Rebel trooper	13505	-	-	1	none	0	300	120	2	
+2400341	YAVIN4	yav_world	AREA	0	600.62	35.06	4647.11	0	1	a Rebel trooper	13505	-	-	1	none	0	300	120	2	
+2400342	YAVIN4	yav_world	AREA	0	6068.95	22.38	5440.28	0	1	a Dark Jedi	31510	-	-	1	none	0	300	120	2	
+2400343	YAVIN4	yav_world	AREA	0	6074.33	22.19	5436.93	0	1	a Dark Jedi Elder	31520	-	-	1	none	0	300	120	2	
+2400344	YAVIN4	yav_world	AREA	0	6080.06	21.90	5435.04	0	1	a Dark Jedi	31510	-	-	1	none	0	300	120	2	
+2400345	YAVIN4	yav_world	AREA	0	619.15	34.89	4645.12	0	1	a Rebel trooper	13505	-	-	1	none	0	300	120	2	
+2400346	YAVIN4	yav_world	AREA	0	6373.34	199.08	-2832.24	0	1	a master thief	15905	-	-	3	none	0	300	180	6	
+2400347	YAVIN4	yav_world	AREA	0	638.15	81.00	-657.77	0	1	an enforcer	27080	-	-	1	none	0	300	120	2	
+2400348	YAVIN4	yav_world	AREA	0	64.89	51.26	-679.50	0	1	a stranded Rebel officer	29640	-	-	3	none	0	300	180	6	
+2400349	YAVIN4	yav_world	AREA	0	6468.19	14.60	5554.96	0	1	a Stormtrooper	25565	-	-	1	none	0	300	120	0	
+2400350	YAVIN4	yav_world	AREA	0	6473.36	15.05	5563.86	0	1	a Stormtrooper	25565	-	-	1	none	0	300	120	0	
+2400351	YAVIN4	yav_world	AREA	0	6481.38	14.09	5554.78	0	1	a Stormtrooper	25565	-	-	1	none	0	300	120	0	
+2400352	YAVIN4	yav_world	AREA	0	661.59	83.14	-682.70	0	1	an enforcer	27080	-	-	1	none	0	300	120	2	
+2400353	YAVIN4	yav_world	AREA	0	667.00	83.60	-650.00	0	1	Lennox	26865	-	-	1	none	0	300	120	0	
+2400354	YAVIN4	yav_world	AREA	0	688.27	83.33	-672.55	0	1	an enforcer	27080	-	-	1	none	0	300	120	2	
+2400355	YAVIN4	yav_world	AREA	0	693.02	83.17	-613.33	0	1	an enforcer	27080	-	-	1	none	0	300	120	2	
+2400356	YAVIN4	yav_world	AREA	0	889.88	44.76	4453.42	0	1	a kliknik dark defender	14270	-	-	3	none	0	300	180	6	
+2400357	YAVIN4	yav_world	AREA	0	948.05	86.82	-1459.01	0	1	a Dark Jedi	31510	-	-	1	none	0	300	120	2	
+2400358	YAVIN4	yav_world	AREA	0	950.05	86.07	-1471.67	0	1	a Dark Jedi	31510	-	-	1	none	0	300	120	2	
+2400359	YAVIN4	yav_world	AREA	0	954.43	87.17	-1465.23	0	1	a Dark Jedi Elder	31520	-	-	1	none	0	300	120	2	
+2400360	YAVIN4	yav_world	AREA	0	959.19	42.82	4472.89	0	1	Scorpion Kliknik	25810	-	-	1	none	0	300	180	0	
