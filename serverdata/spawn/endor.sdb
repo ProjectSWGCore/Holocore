@@ -297,87 +297,117 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 1600297	ENDOR	end_mummer_bunker	AREA	16	-16.50	-20.00	1.80	0	1	a Black Sun blood reaper	1465	dungeon	Chirq Elite Council	1	none	0	300	120	0
 1600298	ENDOR	end_mummer_bunker	AREA	16	-16.40	-20.00	4.50	0	1	an elite Black Sun enforcer	1470	dungeon	Chirq Elite Council	1	none	0	300	120	0
 1600299	ENDOR	end_mummer_bunker	AREA	5	-1.10	-12.00	67.50	0	1	an elite Black Sun enforcer	1470	dungeon	Chirq Elite Council	1	none	0	300	120	0
-1600300	ENDOR	end_smuggler_outpost_house	AREA	3	3.60	0.60	-6.00	0	1	Tupit	12670	-	-	1	none	0	300	120	0
-1600301	ENDOR	end_smuggler_outpost_house	AREA	1	-2.80	0.60	2.10	0	1	Galody	12665	-	-	1	none	0	300	120	0
-1600302	ENDOR	end_research_outpost_cantina	EGG	3	-0.38	0.62	-7.89	-29	1	Admiral Kilnstrider (Storm Squadron Pilot Trainer)	33785	city	Research Outpost	1	none	0	300	120	0
-1600303	ENDOR	end_tao_ni_security_compound	AREA	14	56.00	-12.00	-0.10	0	1	Tao-Ni Security Battle Droid	6405,6410,6415	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	2
-1600304	ENDOR	end_tao_ni_security_compound	AREA	14	50.90	-12.00	21.60	0	1	Tao-Ni Security Battle Droid	6405,6410,6415	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	2
-1600305	ENDOR	end_tao_ni_security_compound	AREA	13	37.10	-20.00	138.60	0	1	Tao-Ni Security Mechanized Beta Class	6425	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	2
-1600306	ENDOR	end_tao_ni_security_compound	AREA	13	35.40	-20.00	122.80	0	1	Tao-Ni Security Battle Droid	6405,6410,6415	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	2
-1600307	ENDOR	end_tao_ni_security_compound	AREA	3	3.30	0.30	-4.50	0	1	Tao-Ni Security Battle Droid	6405,6410,6415	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
-1600308	ENDOR	end_tao_ni_security_compound	AREA	5	3.30	-12.00	31.70	0	1	Tao-Ni Security Battle Droid	6405,6410,6415	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	2
-1600309	ENDOR	end_tao_ni_security_compound	AREA	14	25.40	-12.00	9.50	0	1	Tao-Ni Security Battle Droid	6405,6410,6415	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	2
-1600310	ENDOR	end_tao_ni_security_compound	AREA	5	22.50	-12.00	47.90	0	1	Tao-Ni Security Battle Droid	6405,6410,6415	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	2
-1600311	ENDOR	end_tao_ni_security_compound	AREA	13	21.00	-20.00	133.00	0	1	Tao-Ni Security Mechanized Beta Class	6425	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	2
-1600312	ENDOR	end_tao_ni_security_compound	AREA	7	-71.20	-20.00	62.70	0	1	Tao-Ni Security Battle Droid	6405,6410,6415	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	2
-1600313	ENDOR	end_tao_ni_security_compound	AREA	7	-68.30	-20.00	33.70	0	1	Tao-Ni Security Battle Droid	6405,6410,6415	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	2
-1600314	ENDOR	end_tao_ni_security_compound	AREA	7	-63.20	-20.00	43.40	0	1	Tao-Ni Security Mechanized Beta Class	6425	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	2
-1600315	ENDOR	end_tao_ni_security_compound	AREA	7	-52.10	-20.00	60.40	0	1	Tao-Ni Security Battle Droid	6405,6410,6415	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	2
-1600316	ENDOR	end_tao_ni_security_compound	AREA	21	-3.20	-20.00	69.10	0	1	Tao-Ni Security Battle Droid	6405,6410,6415	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	2
-1600317	ENDOR	end_tao_ni_security_compound	AREA	19	-22.70	-20.00	115.60	0	1	Tao-Ni Security Battle Droid	6405,6410,6415	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	2
-1600318	ENDOR	end_tao_ni_security_compound	AREA	16	-16.70	-20.00	3.10	0	1	Tao-Ni Security Mechanized Beta Class	6425	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	2
-1600319	ENDOR	end_tao_ni_security_compound	AREA	19	-15.70	-20.00	101.80	0	1	Tao-Ni Security Mechanized Alpha Class	6420	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	2
-1600320	ENDOR	end_tao_ni_security_compound	AREA	5	-14.10	-12.00	46.60	0	1	Tao-Ni Security Battle Droid	6405,6410,6415	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	2
-1600321	ENDOR	end_tao_ni_security_compound	AREA	2	-0.30	0.30	3.00	0	1	Tao-Ni Security Battle Droid	6405,6410,6415	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
-1600322	ENDOR	end_world	AREA	0	667.00	207.80	4972.00	0	1	Carter	26740	-	-	1	none	0	300	120	0
-1600323	ENDOR	end_world	AREA	0	6401.71	220.21	-254.76	0	1	Macchbraus	19860	-	-	1	none	0	300	120	0
-1600324	ENDOR	end_world	AREA	0	6107.20	265.00	-2451.55	0	1	the Dulok outcast leader	6045	-	-	1	none	0	300	120	0
-1600325	ENDOR	end_world	AREA	0	6097.32	265.00	-2461.88	0	1	a Dulok outcast raider	6050	-	-	1	none	0	300	120	0
-1600326	ENDOR	end_world	AREA	0	6094.16	265.00	-2454.76	0	1	a Dulok outcast raider	6050	-	-	1	none	0	300	120	0
-1600327	ENDOR	end_world	AREA	0	6092.86	263.00	-2485.46	0	1	a Dulok outcast raider	6050	-	-	1	none	0	300	120	2
-1600328	ENDOR	end_world	AREA	0	6092.30	263.00	-2511.00	0	1	a Dulok outcast	6040	-	-	1	none	0	300	120	2
-1600329	ENDOR	end_world	AREA	0	6068.64	263.00	-2448.37	0	1	a Dulok outcast raider	6050	-	-	1	none	0	300	120	2
-1600330	ENDOR	end_world	AREA	0	6054.38	262.00	-2508.48	0	1	a Dulok outcast raider	6050	-	-	1	none	0	300	120	2
-1600331	ENDOR	end_world	AREA	0	6039.19	262.00	-2455.34	0	1	a Dulok outcast raider	6050	-	-	1	none	0	300	120	2
-1600332	ENDOR	end_world	AREA	0	6018.00	212.15	6146.00	0	1	Dreda	26765	-	-	1	none	0	300	120	0
-1600333	ENDOR	end_world	AREA	0	3346.54	25.66	-3501.79	0	1	a mercenary	27120	-	-	1	none	0	300	120	2
-1600334	ENDOR	end_world	AREA	0	3334.00	25.70	-3521.00	0	1	Alec	26705	-	-	1	none	0	300	120	0
-1600335	ENDOR	end_world	AREA	0	3327.81	24.99	-3543.82	0	1	a mercenary	27120	-	-	1	none	0	300	120	2
-1600336	ENDOR	end_world	AREA	0	3309.59	24.37	-3518.16	0	1	a mercenary	27120	-	-	1	none	0	300	120	2
-1600337	ENDOR	end_world	AREA	0	3278.48	24.00	-3498.35	0	1	Jener Mich (Endor Collector)	6400	-	-	1	none	0	300	120	0
-1600338	ENDOR	end_world	AREA	0	2584.92	199.11	6654.78	0	1	Tao-Ni Security Battle Droid	6405,6410,6415	-	-	1	none	0	300	120	2
-1600339	ENDOR	end_world	AREA	0	1214.22	19.61	1987.71	0	1	a Meatlump moop	19705	-	-	1	none	0	300	120	2
-1600340	ENDOR	end_world	AREA	0	1213.04	9.64	1930.84	0	1	a Meatlump moop	19705	-	-	1	none	0	300	120	2
-1600341	ENDOR	end_world	AREA	0	1201.88	10.98	1943.24	0	1	a Meatlump moop	19705	-	-	1	none	0	300	120	2
-1600342	ENDOR	end_world	AREA	0	1201.45	21.51	1973.95	0	1	a Meatlump moop	19705	-	-	1	none	0	300	120	2
-1600343	ENDOR	end_world	AREA	0	1195.09	19.03	1994.74	0	1	a Meatlump moop	19705	-	-	1	none	0	300	120	2
-1600344	ENDOR	end_world	AREA	0	1192.96	10.67	1919.00	0	1	a Meatlump moop	19705	-	-	1	none	0	300	120	2
-1600345	ENDOR	end_world	AREA	0	1189.21	10.84	1947.51	0	1	a Meatlump moop	19705	-	-	1	none	0	300	120	2
-1600346	ENDOR	end_world	AREA	0	1179.57	20.81	1978.01	0	1	a Meatlump moop	19705	-	-	1	none	0	300	120	2
-1600347	ENDOR	end_world	AREA	0	1171.25	8.50	1947.97	0	1	a Meatlump moop	19705	-	-	1	none	0	300	120	2
-1600348	ENDOR	end_world	AREA	0	1167.16	9.71	1931.80	0	1	a Meatlump moop	19705	-	-	1	none	0	300	120	2
-1600349	ENDOR	end_world	AREA	0	1161.27	9.41	2018.82	0	1	a Meatlump moop	19705	-	-	1	none	0	300	120	2
-1600350	ENDOR	end_world	AREA	0	1161.25	8.20	1999.26	0	1	a Meatlump moop	19705	-	-	1	none	0	300	120	2
-1600351	ENDOR	end_world	AREA	0	1157.51	12.71	1974.02	0	1	a Meatlump moop	19705	-	-	1	none	0	300	120	2
-1600352	ENDOR	end_world	AREA	0	1154.81	10.79	1932.63	0	1	a Meatlump moop	19705	-	-	1	none	0	300	120	2
-1600353	ENDOR	end_world	AREA	0	1150.53	11.08	1960.94	0	1	a Meatlump moop	19705	-	-	1	none	0	300	120	2
-1600354	ENDOR	end_world	AREA	0	1140.98	11.40	1990.05	0	1	a Meatlump moop	19705	-	-	1	none	0	300	120	2
-1600355	ENDOR	end_world	AREA	0	1140.13	11.86	1945.47	0	1	a Meatlump moop	19705	-	-	1	none	0	300	120	2
-1600356	ENDOR	end_world	AREA	0	1137.28	8.41	2042.07	0	1	a Meatlump moop	19705	-	-	1	none	0	300	120	2
-1600357	ENDOR	end_world	AREA	0	1135.45	8.29	2017.40	0	1	a Meatlump moop	19705	-	-	1	none	0	300	120	2
-1600358	ENDOR	end_world	AREA	0	1126.33	8.69	1971.60	0	1	a Meatlump moop	19705	-	-	1	none	0	300	120	2
-1600359	ENDOR	end_world	AREA	0	1117.33	8.50	1983.74	0	1	a Meatlump moop	19705	-	-	1	none	0	300	120	2
-1600360	ENDOR	end_world	AREA	0	1112.12	11.13	2032.54	0	1	a Meatlump moop	19705	-	-	1	none	0	300	120	2
-1600361	ENDOR	end_world	AREA	0	1107.63	8.26	1998.81	0	1	a Meatlump moop	19705	-	-	1	none	0	300	120	2
-1600362	ENDOR	end_world	AREA	0	1104.28	10.66	2019.14	0	1	a Meatlump moop	19705	-	-	1	none	0	300	120	2
-1600363	ENDOR	end_world	EGG	0	-838.00	80.59	1617.00	0	1	Harding	26675	city	Smuggler Outpost	1	none	0	300	120	0
-1600364	ENDOR	end_world	AREA	0	-834.96	80.10	1605.95	0	1	Otonon Tracks	22420	-	-	1	none	0	300	120	0
-1600365	ENDOR	end_world	AREA	0	-833.01	80.30	1603.80	0	1	The Ice Cream Man	12650	-	-	1	none	0	300	120	0
-1600366	ENDOR	end_world	AREA	0	-6878.00	15.18	618.00	0	1	Lavina	26855	-	-	1	none	0	300	120	0
-1600367	ENDOR	end_world	AREA	0	-4669.66	98.01	-2173.32	0	1	a mercenary	27120	-	-	1	none	0	300	120	2
-1600368	ENDOR	end_world	AREA	0	-4654.37	94.91	-2140.39	0	1	a mercenary	27120	-	-	1	none	0	300	120	2
-1600369	ENDOR	end_world	AREA	0	-4645.00	88.81	-2163.00	0	1	Quinton	26895	-	-	1	none	0	300	120	0
-1600370	ENDOR	end_world	AREA	0	-4612.02	73.74	-2184.01	0	1	a mercenary	27120	-	-	1	none	0	300	120	2
-1600371	ENDOR	end_world	AREA	0	-4610.77	177.20	-2549.98	0	1	Zalbar Jyvun	13440	-	-	1	none	0	300	120	0
-1600372	ENDOR	end_world	AREA	0	-2888.46	21.55	-4640.48	0	1	a Dark Jedi	31510	-	-	1	none	0	300	120	2
-1600373	ENDOR	end_world	AREA	0	-2872.37	19.43	-4634.57	0	1	a Dark Jedi Elder	31520	-	-	1	none	0	300	120	2
-1600374	ENDOR	end_world	AREA	0	-2869.70	16.70	-4621.73	0	1	a Dark Jedi	31510	-	-	1	none	0	300	120	2
-1600375	ENDOR	end_world	AREA	0	-2864.26	17.66	-4638.55	0	1	a Dark Jedi	31510	-	-	1	none	0	300	120	2
-1600376	ENDOR	end_world	AREA	0	-235.89	208.20	3534.84	0	1	a Jedi Padawan	31530	-	-	1	none	0	300	120	2
-1600377	ENDOR	end_world	AREA	0	-235.70	208.47	3521.44	0	1	Captured old man	2420	-	-	1	none	0	300	120	2
-1600378	ENDOR	end_world	AREA	0	-226.12	208.51	3543.06	0	1	a Jedi Padawan	31530	-	-	1	none	0	300	120	2
-1600379	ENDOR	end_world	AREA	0	-222.29	207.98	3517.26	0	1	a Dark Jedi	31510	-	-	1	none	0	300	120	2
-1600380	ENDOR	end_world	AREA	0	-212.14	207.69	3522.83	0	1	a Dark Jedi	31510	-	-	1	none	0	300	120	2
-1600381	ENDOR	end_world	AREA	0	-208.36	207.02	3511.30	0	1	a Dark Jedi Elder	31520	-	-	1	none	0	300	120	2
-1600382	ENDOR	end_world	AREA	0	-1228.37	12.00	2935.95	0	1	a Donkuwah scout	5890	-	-	1	none	0	300	120	0
-1600383	ENDOR	end_world	AREA	0	-1215.12	12.00	2932.08	0	1	a Donkuwah scout	5890	-	-	1	none	0	300	120	0
+1600300	ENDOR	end_smuggler_outpost_house	QUEST	3	3.60	0.62	-6.00	0	1	Tupit	12670	city	Smuggler Outpost	1	none	0	300	120	0
+1600301	ENDOR	end_smuggler_outpost_house	QUEST	1	-4.28	0.63	1.99	12	1	Galody	12665	city	Smuggler Outpost	1	none	0	300	120	0
+1600302	ENDOR	end_world	EGG	0	-986.68	73.00	1575.34	-135	1	Eyd Tommsin	34225	city	Smuggler Outpost	1	none	0	300	120	0
+1600303	ENDOR	end_research_outpost_cantina	QUEST	3	-0.38	0.62	-7.89	-29	1	Admiral Kilnstrider (Storm Squadron Pilot Trainer)	33785	city	Research Outpost	1	none	0	300	120	0
+1600304	ENDOR	end_world	EGG	0	3212.71	24.50	-3452.25	163	1	a commoner	3185	city	Research Outpost	1	none	0	300	120	0
+1600305	ENDOR	end_world	EGG	0	3245.07	24.00	-3492.27	56	1	a commoner	3185	city	Research Outpost	1	none	0	300	120	0
+1600306	ENDOR	end_world	EGG	0	3196.19	24.00	-3509.81	2	1	a hunter	12525	city	Research Outpost	1	discuss	0	300	120	0
+1600307	ENDOR	end_world	EGG	0	3196.38	24.00	-3506.13	179	1	a scientist	25750	city	Research Outpost	1	discuss	0	300	120	0
+1600308	ENDOR	end_world	EGG	0	3169.34	24.00	-3497.30	149	1	a traveller	31490	city	Research Outpost	1	none	0	300	120	0
+1600309	ENDOR	end_world	EGG	0	3228.22	24.00	-3478.42	-98	1	an agriculturalist	8525	city	Research Outpost	1	discuss	0	300	120	0
+1600310	ENDOR	end_world	EGG	0	3226.93	24.00	-3479.55	24	1	a scientist	25750	city	Research Outpost	1	discuss	0	300	120	0
+1600311	ENDOR	end_world	EGG	0	3227.85	24.00	-3476.93	140	1	a scientist	25750	city	Research Outpost	1	discuss	0	300	120	0
+1600312	ENDOR	end_world	EGG	0	3249.01	24.00	-3450.00	178	1	a frontiersman	9715	city	Research Outpost	1	none	0	300	120	0
+1600313	ENDOR	end_world	EGG	0	3191.43	24.00	-3450.58	-143	1	a scientist	25750	city	Research Outpost	1	discuss	0	300	120	0
+1600314	ENDOR	end_world	EGG	0	3190.81	24.00	-3451.61	42	1	a mercenary	16605	city	Research Outpost	1	discuss	0	300	120	0
+1600315	ENDOR	end_world	EGG	0	3260.00	24.00	-3466.73	-82	1	a technician	30945	city	Research Outpost	1	none	0	300	120	0
+1600316	ENDOR	end_world	EGG	0	3265.13	24.00	-3501.48	41	1	a nomad	18495	city	Research Outpost	1	none	0	300	120	0
+1600317	ENDOR	end_tao_ni_security_compound	AREA	14	56.00	-12.00	-0.10	0	1	Tao-Ni Security Battle Droid	6405,6410,6415	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	2
+1600318	ENDOR	end_tao_ni_security_compound	AREA	14	50.90	-12.00	21.60	0	1	Tao-Ni Security Battle Droid	6405,6410,6415	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	2
+1600319	ENDOR	end_tao_ni_security_compound	AREA	13	37.10	-20.00	138.60	0	1	Tao-Ni Security Mechanized Beta Class	6425	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	2
+1600320	ENDOR	end_tao_ni_security_compound	AREA	13	35.40	-20.00	122.80	0	1	Tao-Ni Security Battle Droid	6405,6410,6415	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	2
+1600321	ENDOR	end_tao_ni_security_compound	AREA	3	3.30	0.30	-4.50	0	1	Tao-Ni Security Battle Droid	6405,6410,6415	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
+1600322	ENDOR	end_tao_ni_security_compound	AREA	5	3.30	-12.00	31.70	0	1	Tao-Ni Security Battle Droid	6405,6410,6415	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	2
+1600323	ENDOR	end_tao_ni_security_compound	AREA	14	25.40	-12.00	9.50	0	1	Tao-Ni Security Battle Droid	6405,6410,6415	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	2
+1600324	ENDOR	end_tao_ni_security_compound	AREA	5	22.50	-12.00	47.90	0	1	Tao-Ni Security Battle Droid	6405,6410,6415	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	2
+1600325	ENDOR	end_tao_ni_security_compound	AREA	13	21.00	-20.00	133.00	0	1	Tao-Ni Security Mechanized Beta Class	6425	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	2
+1600326	ENDOR	end_tao_ni_security_compound	AREA	7	-71.20	-20.00	62.70	0	1	Tao-Ni Security Battle Droid	6405,6410,6415	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	2
+1600327	ENDOR	end_tao_ni_security_compound	AREA	7	-68.30	-20.00	33.70	0	1	Tao-Ni Security Battle Droid	6405,6410,6415	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	2
+1600328	ENDOR	end_tao_ni_security_compound	AREA	7	-63.20	-20.00	43.40	0	1	Tao-Ni Security Mechanized Beta Class	6425	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	2
+1600329	ENDOR	end_tao_ni_security_compound	AREA	7	-52.10	-20.00	60.40	0	1	Tao-Ni Security Battle Droid	6405,6410,6415	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	2
+1600330	ENDOR	end_tao_ni_security_compound	AREA	21	-3.20	-20.00	69.10	0	1	Tao-Ni Security Battle Droid	6405,6410,6415	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	2
+1600331	ENDOR	end_tao_ni_security_compound	AREA	19	-22.70	-20.00	115.60	0	1	Tao-Ni Security Battle Droid	6405,6410,6415	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	2
+1600332	ENDOR	end_tao_ni_security_compound	AREA	16	-16.70	-20.00	3.10	0	1	Tao-Ni Security Mechanized Beta Class	6425	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	2
+1600333	ENDOR	end_tao_ni_security_compound	AREA	19	-15.70	-20.00	101.80	0	1	Tao-Ni Security Mechanized Alpha Class	6420	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	2
+1600334	ENDOR	end_tao_ni_security_compound	AREA	5	-14.10	-12.00	46.60	0	1	Tao-Ni Security Battle Droid	6405,6410,6415	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	2
+1600335	ENDOR	end_tao_ni_security_compound	AREA	2	-0.30	0.30	3.00	0	1	Tao-Ni Security Battle Droid	6405,6410,6415	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
+1600336	ENDOR	end_world	AREA	0	667.00	207.80	4972.00	0	1	Carter	26740	-	-	1	none	0	300	120	0
+1600337	ENDOR	end_world	AREA	0	6401.71	220.21	-254.76	0	1	Macchbraus	19860	-	-	1	none	0	300	120	0
+1600338	ENDOR	end_world	AREA	0	6107.20	265.00	-2451.55	0	1	the Dulok outcast leader	6045	-	-	1	none	0	300	120	0
+1600339	ENDOR	end_world	AREA	0	6097.32	265.00	-2461.88	0	1	a Dulok outcast raider	6050	-	-	1	none	0	300	120	0
+1600340	ENDOR	end_world	AREA	0	6094.16	265.00	-2454.76	0	1	a Dulok outcast raider	6050	-	-	1	none	0	300	120	0
+1600341	ENDOR	end_world	AREA	0	6092.86	263.00	-2485.46	0	1	a Dulok outcast raider	6050	-	-	1	none	0	300	120	2
+1600342	ENDOR	end_world	AREA	0	6092.30	263.00	-2511.00	0	1	a Dulok outcast	6040	-	-	1	none	0	300	120	2
+1600343	ENDOR	end_world	AREA	0	6068.64	263.00	-2448.37	0	1	a Dulok outcast raider	6050	-	-	1	none	0	300	120	2
+1600344	ENDOR	end_world	AREA	0	6054.38	262.00	-2508.48	0	1	a Dulok outcast raider	6050	-	-	1	none	0	300	120	2
+1600345	ENDOR	end_world	AREA	0	6039.19	262.00	-2455.34	0	1	a Dulok outcast raider	6050	-	-	1	none	0	300	120	2
+1600346	ENDOR	end_world	AREA	0	6018.00	212.15	6146.00	0	1	Dreda	26765	-	-	1	none	0	300	120	0
+1600347	ENDOR	end_world	AREA	0	3346.54	25.66	-3501.79	0	1	a mercenary	27120	-	-	1	none	0	300	120	2
+1600348	ENDOR	end_world	AREA	0	3334.00	25.70	-3521.00	0	1	Alec	26705	-	-	1	none	0	300	120	0
+1600349	ENDOR	end_world	AREA	0	3327.81	24.99	-3543.82	0	1	a mercenary	27120	-	-	1	none	0	300	120	2
+1600350	ENDOR	end_world	AREA	0	3309.59	24.37	-3518.16	0	1	a mercenary	27120	-	-	1	none	0	300	120	2
+1600351	ENDOR	end_world	EGG	0	3278.48	24.00	-3498.35	-78	1	Jener Mich (Endor Collector)	6400	city	Research Outpost	1	none	0	300	120	0
+1600352	ENDOR	end_world	AREA	0	2584.92	199.11	6654.78	0	1	Tao-Ni Security Battle Droid	6405,6410,6415	-	-	1	none	0	300	120	2
+1600353	ENDOR	end_world	AREA	0	1214.22	19.61	1987.71	0	1	a Meatlump moop	19705	-	-	1	none	0	300	120	2
+1600354	ENDOR	end_world	AREA	0	1213.04	9.64	1930.84	0	1	a Meatlump moop	19705	-	-	1	none	0	300	120	2
+1600355	ENDOR	end_world	AREA	0	1201.88	10.98	1943.24	0	1	a Meatlump moop	19705	-	-	1	none	0	300	120	2
+1600356	ENDOR	end_world	AREA	0	1201.45	21.51	1973.95	0	1	a Meatlump moop	19705	-	-	1	none	0	300	120	2
+1600357	ENDOR	end_world	AREA	0	1195.09	19.03	1994.74	0	1	a Meatlump moop	19705	-	-	1	none	0	300	120	2
+1600358	ENDOR	end_world	AREA	0	1192.96	10.67	1919.00	0	1	a Meatlump moop	19705	-	-	1	none	0	300	120	2
+1600359	ENDOR	end_world	AREA	0	1189.21	10.84	1947.51	0	1	a Meatlump moop	19705	-	-	1	none	0	300	120	2
+1600360	ENDOR	end_world	AREA	0	1179.57	20.81	1978.01	0	1	a Meatlump moop	19705	-	-	1	none	0	300	120	2
+1600361	ENDOR	end_world	AREA	0	1171.25	8.50	1947.97	0	1	a Meatlump moop	19705	-	-	1	none	0	300	120	2
+1600362	ENDOR	end_world	AREA	0	1167.16	9.71	1931.80	0	1	a Meatlump moop	19705	-	-	1	none	0	300	120	2
+1600363	ENDOR	end_world	AREA	0	1161.27	9.41	2018.82	0	1	a Meatlump moop	19705	-	-	1	none	0	300	120	2
+1600364	ENDOR	end_world	AREA	0	1161.25	8.20	1999.26	0	1	a Meatlump moop	19705	-	-	1	none	0	300	120	2
+1600365	ENDOR	end_world	AREA	0	1157.51	12.71	1974.02	0	1	a Meatlump moop	19705	-	-	1	none	0	300	120	2
+1600366	ENDOR	end_world	AREA	0	1154.81	10.79	1932.63	0	1	a Meatlump moop	19705	-	-	1	none	0	300	120	2
+1600367	ENDOR	end_world	AREA	0	1150.53	11.08	1960.94	0	1	a Meatlump moop	19705	-	-	1	none	0	300	120	2
+1600368	ENDOR	end_world	AREA	0	1140.98	11.40	1990.05	0	1	a Meatlump moop	19705	-	-	1	none	0	300	120	2
+1600369	ENDOR	end_world	AREA	0	1140.13	11.86	1945.47	0	1	a Meatlump moop	19705	-	-	1	none	0	300	120	2
+1600370	ENDOR	end_world	AREA	0	1137.28	8.41	2042.07	0	1	a Meatlump moop	19705	-	-	1	none	0	300	120	2
+1600371	ENDOR	end_world	AREA	0	1135.45	8.29	2017.40	0	1	a Meatlump moop	19705	-	-	1	none	0	300	120	2
+1600372	ENDOR	end_world	AREA	0	1126.33	8.69	1971.60	0	1	a Meatlump moop	19705	-	-	1	none	0	300	120	2
+1600373	ENDOR	end_world	AREA	0	1117.33	8.50	1983.74	0	1	a Meatlump moop	19705	-	-	1	none	0	300	120	2
+1600374	ENDOR	end_world	AREA	0	1112.12	11.13	2032.54	0	1	a Meatlump moop	19705	-	-	1	none	0	300	120	2
+1600375	ENDOR	end_world	AREA	0	1107.63	8.26	1998.81	0	1	a Meatlump moop	19705	-	-	1	none	0	300	120	2
+1600376	ENDOR	end_world	AREA	0	1104.28	10.66	2019.14	0	1	a Meatlump moop	19705	-	-	1	none	0	300	120	2
+1600377	ENDOR	end_world	QUEST	0	-841.43	79.85	1613.36	25	1	Harding	26675	city	Smuggler Outpost	1	none	0	300	120	0
+1600378	ENDOR	end_world	EGG	0	-834.96	80.10	1605.95	-155	1	Otonon Tracks	22420	city	Smuggler Outpost	1	none	0	300	120	0
+1600379	ENDOR	end_world	EGG	0	-833.01	80.30	1603.80	-159	1	The Ice Cream Man	12650	city	Smuggler Outpost	1	none	0	300	120	0
+1600380	ENDOR	end_world	PATROL	0	-922.73	76.00	1565.38	0	1	a smuggler	33420	city	Smuggler Outpost	1	none	0	300	120	0
+1600381	ENDOR	end_world	PATROL	0	-924.21	76.00	1567.19	0	1	a smuggler	33420	city	Smuggler Outpost	1	none	0	300	120	0
+1600382	ENDOR	end_world	PATROL	0	-920.56	76.00	1567.73	0	1	a thief	27115	city	Smuggler Outpost	1	none	0	300	120	0
+1600383	ENDOR	end_world	EGG	0	-875.19	76.00	1631.95	112	1	a hunter	12525	city	Smuggler Outpost	1	discuss	0	300	120	0
+1600384	ENDOR	end_world	EGG	0	-872.57	76.00	1632.41	-130	1	a smuggler	26650	city	Smuggler Outpost	1	discuss	0	300	120	0
+1600385	ENDOR	end_world	EGG	0	-878.78	76.00	1627.93	138	1	a hunter	12525	city	Smuggler Outpost	1	none	0	300	120	0
+1600386	ENDOR	end_world	EGG	0	-915.06	80.15	1605.65	148	1	a commoner	3185	city	Smuggler Outpost	1	none	0	300	120	0
+1600387	ENDOR	end_world	EGG	0	-899.45	77.98	1565.84	-68	1	a commoner	3185	city	Smuggler Outpost	1	none	0	300	120	0
+1600388	ENDOR	end_world	EGG	0	-830.82	76.00	1576.85	-137	1	a hunter	12525	city	Smuggler Outpost	1	none	0	300	120	0
+1600389	ENDOR	end_world	EGG	0	-829.38	76.00	1569.20	-70	1	a hunter	12525	city	Smuggler Outpost	1	none	0	300	120	0
+1600390	ENDOR	end_world	EGG	0	-831.16	76.00	1569.83	105	1	a hunter	12525	city	Smuggler Outpost	1	none	0	300	120	0
+1600391	ENDOR	end_world	EGG	0	-836.42	76.00	1582.85	-105	1	a hunter	12525	city	Smuggler Outpost	1	none	0	300	120	0
+1600392	ENDOR	end_world	EGG	0	-867.72	76.00	1624.16	-142	1	a smuggler	26650	city	Smuggler Outpost	1	none	0	300	120	0
+1600393	ENDOR	end_world	EGG	0	-874.23	80.00	1565.62	-78	1	a scoundrel	18790	city	Smuggler Outpost	1	none	0	300	120	0
+1600394	ENDOR	end_world	EGG	0	-964.38	73.00	1533.99	116	1	a criminal	5180	city	Smuggler Outpost	1	none	0	300	120	0
+1600395	ENDOR	end_world	EGG	0	-962.68	73.00	1533.05	-53	1	a pirate	18530	city	Smuggler Outpost	1	none	0	300	120	0
+1600396	ENDOR	end_world	AREA	0	-6878.00	15.18	618.00	0	1	Lavina	26855	-	-	1	none	0	300	120	0
+1600397	ENDOR	end_world	AREA	0	-4669.66	98.01	-2173.32	0	1	a mercenary	27120	-	-	1	none	0	300	120	2
+1600398	ENDOR	end_world	AREA	0	-4654.37	94.91	-2140.39	0	1	a mercenary	27120	-	-	1	none	0	300	120	2
+1600399	ENDOR	end_world	AREA	0	-4645.00	88.81	-2163.00	0	1	Quinton	26895	-	-	1	none	0	300	120	0
+1600400	ENDOR	end_world	AREA	0	-4612.02	73.74	-2184.01	0	1	a mercenary	27120	-	-	1	none	0	300	120	2
+1600401	ENDOR	end_world	AREA	0	-4610.77	177.20	-2549.98	0	1	Zalbar Jyvun	13440	-	-	1	none	0	300	120	0
+1600402	ENDOR	end_world	AREA	0	-2888.46	21.55	-4640.48	0	1	a Dark Jedi	31510	-	-	1	none	0	300	120	2
+1600403	ENDOR	end_world	AREA	0	-2872.37	19.43	-4634.57	0	1	a Dark Jedi Elder	31520	-	-	1	none	0	300	120	2
+1600404	ENDOR	end_world	AREA	0	-2869.70	16.70	-4621.73	0	1	a Dark Jedi	31510	-	-	1	none	0	300	120	2
+1600405	ENDOR	end_world	AREA	0	-2864.26	17.66	-4638.55	0	1	a Dark Jedi	31510	-	-	1	none	0	300	120	2
+1600406	ENDOR	end_world	AREA	0	-235.89	208.20	3534.84	0	1	a Jedi Padawan	31530	-	-	1	none	0	300	120	2
+1600407	ENDOR	end_world	AREA	0	-235.70	208.47	3521.44	0	1	Captured old man	2420	-	-	1	none	0	300	120	2
+1600408	ENDOR	end_world	AREA	0	-226.12	208.51	3543.06	0	1	a Jedi Padawan	31530	-	-	1	none	0	300	120	2
+1600409	ENDOR	end_world	AREA	0	-222.29	207.98	3517.26	0	1	a Dark Jedi	31510	-	-	1	none	0	300	120	2
+1600410	ENDOR	end_world	AREA	0	-212.14	207.69	3522.83	0	1	a Dark Jedi	31510	-	-	1	none	0	300	120	2
+1600411	ENDOR	end_world	AREA	0	-208.36	207.02	3511.30	0	1	a Dark Jedi Elder	31520	-	-	1	none	0	300	120	2
+1600412	ENDOR	end_world	AREA	0	-1228.37	12.00	2935.95	0	1	a Donkuwah scout	5890	-	-	1	none	0	300	120	0
+1600413	ENDOR	end_world	AREA	0	-1215.12	12.00	2932.08	0	1	a Donkuwah scout	5890	-	-	1	none	0	300	120	0
