@@ -54,7 +54,7 @@ cor_drall_cave	CORELLIA	4275364	corellia_drall_cave.iff	Corellia - Drall Cave	11
 cor_droid_bunker	CORELLIA	-254734854929078302	bunker_droid_corellia.iff	Corellia - Droid Bunker	44	-6351	169	357
 cor_gcw_base_shed	CORELLIA	-269090079453790705	outpost_shed.iff	Corellia - GCW Base / Shed	6	4776	95	-5207
 cor_gcw_base_warehouse	CORELLIA	-269090078635378213	bunker_corellia_warehouse.iff	Corellia - GCW Base / Warehouse	9	4746	95	-5240
-cor_hidden_reb_base	CORELLIA	6335638	rebel_hideout_themepark.iff	Corellia - Reb Hideout	12	-6506	398	5990
+cor_hidden_reb_base	CORELLIA	8555470	rebel_hideout_themepark.iff	Corellia - Reb Hideout	12	-6506	398	5990
 cor_imp_captured_starships	CORELLIA	-266838279168441737	bunker_imperial_captured_starships.iff	Corellia - Imp Captured Starships	17	3785	380	-4064
 cor_imp_captured_starships_tower1	CORELLIA	-266838278420031395	military_outpost_guard_house_imperial.iff	Corellia - Imp Captured Starships / Tower 1	2	3747	380	-4059
 cor_imp_captured_starships_tower2	CORELLIA	-266838279701081551	military_outpost_guard_house_imperial.iff	Corellia - Imp Captured Starships / Tower 2	2	3775	380	-4000
@@ -483,7 +483,7 @@ nab_theed_theater	NABOO	5475479	guild_theater_naboo_s01.iff	Naboo - Theed / Thea
 nab_theed_trando_slave_house	NABOO	-286541526962548185	trandoshan_slave_naboo_house.iff	Naboo - Theed / Trando Slave House	14	-2719	6	-7256
 nab_theed_university	NABOO	1692086	guild_university_naboo_style_01.iff	Naboo - Theed / University	9	-5452	6	3997
 nab_veermok_cave	NABOO	4295393	naboo_veermok_cave.iff	Naboo - Veermok Cave	11	5703	290	-1558
-nab_weapon_development_facility	NABOO	8555470	bunker_imperial_weapons_research_facility_01.iff	Naboo - Weapon Development Facility	22	-6506	40	-3327
+nab_weapon_development_facility	NABOO	6335638	bunker_imperial_weapons_research_facility_01.iff	Naboo - Weapon Development Facility	22	-6506	40	-3327
 nab_world	NABOO	0	empty	Naboo - World	0	0	0	0
 ror_bark_mite_cave	RORI	5095989	rori_bark_mite_cave.iff	Rori - Bark Mite Cave	11	3580	98	5440
 ror_bat_cave	RORI	5407162	rori_bat_cave.iff	Rori - Bat Cave	11	849	100	-4880
