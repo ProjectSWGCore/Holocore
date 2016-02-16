@@ -30,6 +30,7 @@ package resources.objects.player;
 import network.packets.swg.zone.UpdatePostureMessage;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import network.packets.swg.zone.chat.ChatSystemMessage;
+import resources.collections.SWGFlag;
 import resources.collections.SWGBitSet;
 import resources.collections.SWGList;
 import resources.collections.SWGMap;
@@ -45,6 +46,7 @@ import utilities.MathUtils;
 import utilities.Encoder.StringType;
 
 import java.util.ArrayList;
+import java.util.BitSet;
 import java.util.Collections;
 import java.util.List;
 
@@ -56,8 +58,8 @@ public class PlayerObject extends IntangibleObject {
 	private List<String> 		joinedChannels		= new ArrayList<>();
 
 	// PLAY 03
-	private SWGBitSet 	        flagsList			= new SWGBitSet(3, 5);
-	private SWGBitSet 	        profileFlags		= new SWGBitSet(3, 6);
+	private SWGFlag 	        flagsList			= new SWGFlag(3, 5);
+	private SWGFlag 	        profileFlags		= new SWGFlag(3, 6);
 	private String 				title				= "";
 	private int 				bornDate			= 0;
 	private int 				playTime			= 0;
@@ -66,7 +68,7 @@ public class PlayerObject extends IntangibleObject {
 	private int 				pvpKills			= 0;
 	private long 				lifetimeGcwPoints	= 0;
 	private int 				lifetimePvpKills	= 0;
-	private SWGList<Integer> 	collections			= new SWGList<>(3, 16);
+	private SWGBitSet 		 	collectionBadges	= new SWGBitSet(3, 16);
 	private SWGList<Integer> 	guildRanks			= new SWGList<>(3, 17);
 	private boolean				showHelmet			= true;
 	private boolean				showBackpack		= true;
@@ -151,7 +153,7 @@ public class PlayerObject extends IntangibleObject {
 		this.title = title;
 		sendDelta(3, 7, title, StringType.ASCII);
 	}
-
+	
 	public int getPlayTime() {
 		return playTime;
 	}
@@ -195,6 +197,16 @@ public class PlayerObject extends IntangibleObject {
 	public void setLifetimePvpKills(int lifetimePvpKills) {
 		this.lifetimePvpKills = lifetimePvpKills;
 		sendDelta(3, 15, lifetimePvpKills);
+	}
+	
+	public byte[] getCollectionBadges() {
+		return collectionBadges.toByteArray();
+	}
+	
+	public void setCollectionBadges(byte[] collection) {
+		this.collectionBadges.clear();
+		this.collectionBadges.or(BitSet.valueOf(collection));
+		sendDelta(3, 16, collectionBadges);
 	}
 
 	public SWGList<Integer> getGuildRanks() {
@@ -491,7 +503,7 @@ public class PlayerObject extends IntangibleObject {
 		bb.addInt(pvpKills); // 13
 		bb.addLong(lifetimeGcwPoints); // 14
 		bb.addInt(lifetimePvpKills); // 15
-		bb.addObject(collections); // 16
+		bb.addObject(collectionBadges); // 16
 		bb.addObject(guildRanks); // 17
 		bb.addBoolean(showBackpack); // 18
 		bb.addBoolean(showHelmet); // 19
