@@ -64,31 +64,31 @@ public class CollectionBadgeService extends Service {
 	}
 	
 	public static void grantBadgeIncrement(PlayerObject player, int beginSlotId, int endSlotId, int maxSlotValue){
-        BitSet collections = BitSet.valueOf(player.getCollectionBadges());
+		BitSet collections = BitSet.valueOf(player.getCollectionBadges());
 		
-        int binaryValue = 1;
-	    int curValue = 0;
-	    			
-	    for (int i=0; i < endSlotId - beginSlotId; i++){
+		int binaryValue = 1;
+		int curValue = 0;
+		
+		for (int i=0; i < endSlotId - beginSlotId; i++){
 			if (collections.get(beginSlotId + i)){
 				curValue = curValue + binaryValue;
 			}
 			binaryValue = binaryValue * 2;
 		}
-	    
-	    if (curValue < maxSlotValue){
-	    	collections.clear(beginSlotId, (endSlotId + 1));
-	    	BitSet bitSet = BitSet.valueOf(new long[] { curValue + 1 });
 		
-	    	for (int i=0; i < endSlotId - beginSlotId; i++){
-	    		if (bitSet.get(i)){
-	    			collections.set(beginSlotId + i);
-	    		}else{
-	    			collections.clear(beginSlotId + i);
-	    		}
+		if (curValue < maxSlotValue){
+			collections.clear(beginSlotId, (endSlotId + 1));
+			BitSet bitSet = BitSet.valueOf(new long[] { curValue + 1 });
+			
+			for (int i=0; i < endSlotId - beginSlotId; i++){
+				if (bitSet.get(i)){
+					collections.set(beginSlotId + i);
+				}else {
+					collections.clear(beginSlotId + i);
+				}
+				player.setCollectionBadges(collections.toByteArray());	
 			}
-			player.setCollectionBadges(collections.toByteArray());
-	    }
+		}
 	}
 
 	public void handleCollectionBadge(CreatureObject creature, String collectionBadgeName) {
