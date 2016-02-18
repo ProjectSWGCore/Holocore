@@ -64,6 +64,7 @@ public class CollectionBadgeService extends Service {
 	}
 	
 	public static void grantBadgeIncrement(PlayerObject player, int beginSlotId, int endSlotId, int maxSlotValue){
+
 		BitSet collections = BitSet.valueOf(player.getCollectionBadges());
 	    int binaryValue = 1;
 	    int curValue = 0;
