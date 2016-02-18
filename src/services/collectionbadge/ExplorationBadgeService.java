@@ -28,7 +28,6 @@
 ***********************************************************************************/
 package services.collectionbadge;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
@@ -47,9 +46,7 @@ import resources.server_info.RelationalServerFactory;
 
 public class ExplorationBadgeService extends Service {
 
-	private static final String GET_SUPPORTING_SQL = "SELECT * FROM explorationBadges";
-	private PreparedStatement getSupportingStatement;
-	private RelationalServerData explorerBadgeDatabase;
+	private static final String GET_BADGES_SQL = "SELECT * FROM explorationBadges";
 	private Map<String, Map<String, ExplorationRegion>> explorationLocations = new TreeMap<String, Map<String, ExplorationRegion>>();
 	private CollectionBadgeService collectionBadgeService = new CollectionBadgeService();
 	
@@ -62,22 +59,13 @@ public class ExplorationBadgeService extends Service {
 	public void onIntentReceived(Intent i) {
 		if (i instanceof PlayerTransformedIntent) {
 			String badgeName = checkExplorationRegions(((PlayerTransformedIntent) i).getPlayer());
-			collectionBadgeService.handleCollectionBadge(((PlayerTransformedIntent) i).getPlayer(),badgeName);
+			if (badgeName != null){
+				collectionBadgeService.handleCollectionBadge(((PlayerTransformedIntent) i).getPlayer(),badgeName);	
+			}
 		}
 	}
 	
-	private class ExplorationRegion {
-		
-		public Point3D location;
-		public float range;
-		
-		public ExplorationRegion(Point3D location, float range) {
-			this.location = location;
-			this.range = range;
-		}
-	}	
-	
-	public String checkExplorationRegions(CreatureObject creature) {
+	private String checkExplorationRegions(CreatureObject creature) {
 		String planet = "";
 		
 		if (creature.getTerrain().getName() != null){
@@ -90,31 +78,40 @@ public class ExplorationBadgeService extends Service {
 					return badge.getKey();
 				}
 			}
-		}return null;
+		}
+		return null;
 	}	
 	
-	public void registerExplorationBadge() {
-		explorerBadgeDatabase = RelationalServerFactory.getServerData("badges/explorationBadges.db", "explorationBadges");
-		if (explorerBadgeDatabase == null)
-			throw new main.ProjectSWG.CoreException("Unable to load sdb files for StaticService");
+	private void registerExplorationBadge() {
 		
-		getSupportingStatement = explorerBadgeDatabase.prepareStatement(GET_SUPPORTING_SQL);
-		
-		try(ResultSet set =  getSupportingStatement.executeQuery()){
-			while (set.next()) {
-				String planet = set.getString(set.findColumn("planet")).toLowerCase();
-				String badgeName = set.getString(set.findColumn("badge"));
-				int x = set.getInt(set.findColumn("x"));
-				int y = set.getInt(set.findColumn("y"));
-				int range = 5; //arbitrary number used
-				
-				if (!explorationLocations.containsKey(planet)) {
-					explorationLocations.put(planet, new TreeMap<String, ExplorationRegion>());
+		try (RelationalServerData explorerBadgeDatabase = RelationalServerFactory.getServerData("badges/explorationBadges.db", "explorationBadges")) {
+			try(ResultSet set =  explorerBadgeDatabase.executeQuery(GET_BADGES_SQL)){
+				while (set.next()) {
+					String planet = set.getString(set.findColumn("planet")).toLowerCase();
+					String badgeName = set.getString(set.findColumn("badge"));
+					int x = set.getInt(set.findColumn("x"));
+					int y = set.getInt(set.findColumn("y"));
+					int range = 5; //arbitrary number used
+					
+					if (!explorationLocations.containsKey(planet)) {
+						explorationLocations.put(planet, new TreeMap<String, ExplorationRegion>());
+					}
+					explorationLocations.get(planet).put(badgeName, new ExplorationRegion(new Point3D(x, 0, y), range));
 				}
-				explorationLocations.get(planet).put(badgeName, new ExplorationRegion(new Point3D(x, 0, y), range));
-			}
-		}catch (SQLException e) {
-			e.printStackTrace();
+			}catch (SQLException e) {
+				e.printStackTrace();
+			}			
 		}
 	}	
+	
+	private class ExplorationRegion {
+		
+		public Point3D location;
+		public float range;
+		
+		public ExplorationRegion(Point3D location, float range) {
+			this.location = location;
+			this.range = range;
+		}
+	}		
 }

@@ -49,19 +49,21 @@ public class CollectionBadgeService extends Service {
 	//music
 	//fix to appropriate message ex: kill_merek_activation_01
 	
-	private DatatableData collectionTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/collection/collection.iff");
+	private static DatatableData collectionTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/collection/collection.iff");
 	
+
 	public CollectionBadgeService(){
 	}
 	
-	public void grantBadge(PlayerObject player, int beginSlotId){
+	public static void grantBadge(PlayerObject player, int beginSlotId, String collectionName, boolean isHidden, String slotName){
 		BitSet collections = BitSet.valueOf(player.getCollectionBadges());
 		
 		collections.set(beginSlotId);
 		player.setCollectionBadges(collections.toByteArray());	
+		handleMessage(player, hasCompletedCollection(player, collectionName), collectionName, isHidden, slotName);
 	}
 	
-	public void grantBadgeIncrement(PlayerObject player, int beginSlotId, int endSlotId, int maxSlotValue){
+	public static void grantBadgeIncrement(PlayerObject player, int beginSlotId, int endSlotId, int maxSlotValue){
 		BitSet collections = BitSet.valueOf(player.getCollectionBadges());
 	    int binaryValue = 1;
 	    int curValue = 0;
@@ -90,69 +92,32 @@ public class CollectionBadgeService extends Service {
 
 	public void handleCollectionBadge(CreatureObject creature, String collectionBadgeName) {
 		PlayerObject player = (PlayerObject) creature.getSlottedObject("ghost");
-		
-		String bookName = "";
-		int bookBadgeCount = 0;
-		String pageName = "";
-		int pageBadgeCount = 0;
-		String collectionName = "";
-		String slotName = "";
-		int beginSlotId = -1;
-		int endSlotId = -1;		
-		int maxSlotValue = -1;
-		boolean preReqMet = true;
+		BadgeInformation badgeInformation = new BadgeInformation(player, collectionBadgeName);
 
 		for (int row = 0; row < collectionTable.getRowCount(); row++) {
-			if (collectionTable.getCell(row, 0).toString() != ""){
-				bookName = collectionTable.getCell(row, 0).toString();
-			}else if (collectionTable.getCell(row, 1).toString() != ""){
-				pageName = collectionTable.getCell(row, 1).toString();
-			}else if (collectionTable.getCell(row, 2).toString() != ""){
-				collectionName = collectionTable.getCell(row, 2).toString();
-			}else if (collectionTable.getCell(row, 3).toString() != ""){
-				slotName = collectionTable.getCell(row, 3).toString();
-				if (bookName.equals("badge_book")){
-					beginSlotId = (int) collectionTable.getCell(row, 4);
-					if (hasBadge(player, beginSlotId)){
-						bookBadgeCount ++;
-					}
-				}				
-				if (pageName.equals("bdg_explore")){
-					beginSlotId = (int) collectionTable.getCell(row, 4);
-					if (hasBadge(player, beginSlotId)){
-						pageBadgeCount ++;
-					}
-				}
-				if (slotName.equals(collectionBadgeName)){
-					beginSlotId = (int) collectionTable.getCell(row, 4);
-					endSlotId = (int) collectionTable.getCell(row, 5);
-					maxSlotValue = (int) collectionTable.getCell(row, 6);
-				
-					boolean isHidden = (boolean) collectionTable.getCell(row, 26);
-					String preReqSlotName = (String) collectionTable.getCell(row, 18);
-					preReqMet = hasPreReqComplete(player, preReqSlotName); 
-
-					if (endSlotId != -1 && preReqMet == true){
-						grantBadgeIncrement(player, beginSlotId, endSlotId, maxSlotValue);
-					}else if (!hasBadge(player, beginSlotId) && preReqMet == true){
-						grantBadge(player, beginSlotId);
-						handleMessage(player, hasCompletedCollection(player, collectionName), collectionName, isHidden, slotName);
-						if (bookName.equals("badge_book") && !isHidden){
-							bookBadgeCount ++;
-						}
-						if (pageName.equals("bdg_explore") && !isHidden){
-							pageBadgeCount ++;
-						}								
-					}
-				}
+			if (!collectionTable.getCell(row, 0).toString().isEmpty()){
+				badgeInformation.bookName = collectionTable.getCell(row, 0).toString();
+			}else if (!collectionTable.getCell(row, 1).toString().isEmpty()){
+				badgeInformation.pageName = collectionTable.getCell(row, 1).toString();
+			}else if (!collectionTable.getCell(row, 2).toString().isEmpty()){
+				badgeInformation.collectionName = collectionTable.getCell(row, 2).toString();
+			}else if (!collectionTable.getCell(row, 3).toString().isEmpty()){
+				badgeInformation.isHidden = (boolean) collectionTable.getCell(row, 26);
+				badgeInformation.beginSlotId = (int) collectionTable.getCell(row, 4);
+				badgeInformation.endSlotId = (int) collectionTable.getCell(row, 5);
+				badgeInformation.maxSlotValue = (int) collectionTable.getCell(row, 6);
+				badgeInformation.preReqSlotName = (String) collectionTable.getCell(row, 18);
+				badgeInformation.setSlotName(collectionTable.getCell(row, 3).toString());
 			}
 		}
-		checkBadgeCount(creature, "badge_book", bookBadgeCount);
-		checkBadgeCount(creature, "bdg_explore", pageBadgeCount);
+		
+		checkBadgeCount(player, "badge_book", badgeInformation.bookBadgeCount);
+		checkBadgeCount(player, "bdg_explore", badgeInformation.pageBadgeCount);
 	}	
 	
-	public void checkBadgeCount(CreatureObject creature, String collectionName, int badgeCount){
-
+	private void checkBadgeCount(PlayerObject player, String collectionName, int badgeCount){
+		String slotName = "";
+		
 		if (collectionName.equals("badge_book")){
 			
 			switch (badgeCount) {
@@ -160,56 +125,59 @@ public class CollectionBadgeService extends Service {
 			case 0:
 					break;
 			case 5:
-				handleCollectionBadge(creature, "count_5");
+				slotName = "count_5";
 				break;
 			case 10:
-				handleCollectionBadge(creature, "count_10");
+				slotName = "count_10";
 				break;
 			default:
 				if (((badgeCount % 25) == 0) && !(badgeCount > 500)) {
-					handleCollectionBadge(creature, "count_" + badgeCount);
-					
+					slotName = "count_" + badgeCount;
 				}
 				break;			
 			}
+		}else if (collectionName.equals("bdg_explore")){
 
-		}else if (collectionName.equals("badge_book")){
 			switch (badgeCount) {
 			
 			case 0:
 				break;
 			case 10:
-				handleCollectionBadge(creature, "bdg_exp_10_badges");
+				slotName = "bdg_exp_10_badges";
 				break;
 			case 20:
-				handleCollectionBadge(creature, "bdg_exp_20_badges");
+				slotName = "bdg_exp_20_badges";
 				break;
 			case 30:
-				handleCollectionBadge(creature, "bdg_exp_30_badges");
+				slotName = "bdg_exp_30_badges";
 				break;
 			case 40:
-				handleCollectionBadge(creature, "bdg_exp_40_badges");
+				slotName = "bdg_exp_40_badges";
 				break;
 			case 45:
-				handleCollectionBadge(creature, "bdg_exp_45_badges");
+				slotName = "bdg_exp_45_badges";
+				break;
+			default:
 				break;
 			}			
-			
+		}
+		
+		if (!hasBadge(player,getBeginSlotID(slotName)) && !slotName.isEmpty()){
+			grantBadge(player, getBeginSlotID(slotName), collectionName, false, slotName);
 		}
 	}
 	
-	public int getBeginSlotID(String slotName){
-		int beginSlotId = -1;
+	private static int getBeginSlotID(String slotName){
 
 		for (int row = 0; row < collectionTable.getRowCount(); row++) {
 			if (collectionTable.getCell(row, 3).toString().equals(slotName)){
-				beginSlotId = (int) collectionTable.getCell(row, 4);
+				return (int) collectionTable.getCell(row, 4);
 			}
 		}
-		return beginSlotId;
+		return -1;
 	}		
 	
-	public void handleMessage(PlayerObject player, boolean collectionComplete, String collectionName, boolean hidden, String slotName){
+	private static void handleMessage(PlayerObject player, boolean collectionComplete, String collectionName, boolean hidden, String slotName){
 		Player thisplayer = player.getOwner();
 		
 		if (hidden){
@@ -222,7 +190,7 @@ public class CollectionBadgeService extends Service {
 		}			
 	}
 
-	public boolean hasBadge(PlayerObject player, int badgeBeginSlotId){
+	private static boolean hasBadge(PlayerObject player, int badgeBeginSlotId){
 		BitSet collections = BitSet.valueOf(player.getCollectionBadges()); 
 		
 		if (collections.get(badgeBeginSlotId)){
@@ -231,11 +199,10 @@ public class CollectionBadgeService extends Service {
 		return false;
 	}
 	
-	public boolean hasCompletedCollection(PlayerObject player, String collectionTitle){
+	private static boolean hasCompletedCollection(PlayerObject player, String collectionTitle){
 		
 		String collectionName = "";
 		BitSet collections = BitSet.valueOf(player.getCollectionBadges()); 
-		boolean isComplete = true;
 
 		for (int row = 0; row < collectionTable.getRowCount(); row++) {
 			int beginSlotId = (int) collectionTable.getCell(row, 4);
@@ -243,26 +210,78 @@ public class CollectionBadgeService extends Service {
 				collectionName = collectionTable.getCell(row, 2).toString();
 			}else if (collectionName.equals(collectionTitle)){
 				if (!collections.get(beginSlotId)){
-					isComplete = false;
+					return false;
 				}
+			}else if (collectionTitle.equals(collectionTable.getCell(row, 0).toString()) || collectionTitle.equals(collectionTable.getCell(row, 1).toString())){
+				return false;
 			}
 		}
-		
-		return isComplete;
+		return true;
 	}
 	
-	public boolean hasPreReqComplete(PlayerObject player, String preReqSlotName){
+	private static boolean hasPreReqComplete(PlayerObject player, String preReqSlotName){
 		Player thisplayer = player.getOwner();
 		
-		if (preReqSlotName != ""){
+		if (!preReqSlotName.isEmpty()){
 			if (!hasBadge(player, getBeginSlotID(preReqSlotName))){
 				sendSystemMessage(thisplayer, "@collection:need_to_activate_collection");
 				return false;
 			}
-		}return true;
+		}
+		return true;
 	}
 		
-	private void sendSystemMessage(Player target, String id, Object ... objects) {
+	private static void sendSystemMessage(Player target, String id, Object ... objects) {
 		IntentFactory.sendSystemMessage(target, id, objects);
 	}	
+
+	private static class BadgeInformation{
+		
+		private final PlayerObject player;
+		private final String collectionBadgeName;
+		
+		private int bookBadgeCount = 0;
+		private int pageBadgeCount = 0;
+		private String bookName = "";
+		private String pageName = "";
+		private String collectionName = "";
+		private String slotName = "";
+		private int beginSlotId = -1;
+		private int endSlotId = -1;		
+		private int maxSlotValue = -1;
+		private boolean isHidden = false;
+		private String preReqSlotName = ""; 
+		
+		BadgeInformation(PlayerObject player, String collectionBadgeName){
+			this.player = player;
+			this.collectionBadgeName = collectionBadgeName;
+		}
+		
+		private void setSlotName(String slotName){
+			this.slotName = slotName;
+			
+			if (this.slotName.equals(collectionBadgeName)){
+				if (endSlotId != -1 && hasPreReqComplete(player, preReqSlotName)){
+					grantBadgeIncrement(player, beginSlotId, endSlotId, maxSlotValue);
+				}else if (!hasBadge(player, beginSlotId) && hasPreReqComplete(player, preReqSlotName)){
+					grantBadge(player, beginSlotId, collectionName, isHidden, this.slotName);
+
+				}				
+			}
+			
+			if (bookName.equals("badge_book")){
+				if (hasBadge(player,this.beginSlotId)){
+					bookBadgeCount++;
+				}
+			}
+			
+			if (pageName.equals("bdg_explore")){
+				if (hasBadge(player,this.beginSlotId)){
+					pageBadgeCount++;
+				}
+			}				
+
+		}
+		
+	}		
 }
