@@ -86,8 +86,8 @@ public class CollectionBadgeService extends Service {
 				}else {
 					collections.clear(beginSlotId + i);
 				}
-				player.setCollectionBadges(collections.toByteArray());	
 			}
+			player.setCollectionBadges(collections.toByteArray());
 		}
 	}
 
