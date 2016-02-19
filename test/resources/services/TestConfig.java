@@ -56,7 +56,7 @@ public class TestConfig {
 		c.save();
 		c.load();
 		Assert.assertTrue(c.getBoolean("TEST-VALUE", false));
-		file.delete();
+		Assert.assertTrue(file.delete());
 	}
 	
 }

@@ -45,7 +45,7 @@ public class SlotDescriptorData extends ClientData {
 		IffNode chunk = iff.enterChunk("DATA");
 
 		String slot;
-		while((slot = chunk.readString()) != null && !slot.isEmpty()) {
+		while (!(slot = chunk.readString()).isEmpty()) {
 			slots.add(slot);
 		}
 

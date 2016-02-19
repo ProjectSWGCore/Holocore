@@ -47,7 +47,7 @@ import java.util.Map;
 public class GroupObject extends SWGObject { // Extends INTO or TANO?
 	private static final long serialVersionUID = 200L;
 
-	private final SWGList<GroupMember> groupMembers = new SWGList<>(Baseline.BaselineType.GRUP, 6, 2, Encoder.StringType.ASCII);
+	private final SWGList<GroupMember> groupMembers = new SWGList<>(6, 2, Encoder.StringType.ASCII);
 	private long leader;
 	private short level;
 	private long lootMaster;
@@ -63,11 +63,6 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
 		ois.defaultReadObject();
 		pickupPointTimer = new PickupPointTimer();
-	}
-
-	@Override
-	public void createBaseline3(Player target, BaselineBuilder bb) {
-		super.createBaseline3(target, bb);
 	}
 
 	@Override

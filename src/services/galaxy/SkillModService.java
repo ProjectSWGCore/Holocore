@@ -34,25 +34,29 @@ import resources.objects.creature.CreatureObject;
 
 public class SkillModService extends Service {
 
-    public SkillModService() {
-        registerForIntent(SkillModIntent.TYPE);
-    }
+	public SkillModService() {
+		registerForIntent(SkillModIntent.TYPE);
+	}
 
-    @Override
-    public void onIntentReceived(Intent i) {
-        switch(i.getType()) {
-            case SkillModIntent.TYPE: handleSkillModIntent((SkillModIntent) i); break;
-        }
-    }
+	@Override
+	public void onIntentReceived(Intent i) {
+		switch (i.getType()) {
+			case SkillModIntent.TYPE:
+				if (i instanceof SkillModIntent) {
+					handleSkillModIntent((SkillModIntent) i);
+				}
+				break;
+		}
+	}
 
-    private void handleSkillModIntent(SkillModIntent smi) {
-        for (CreatureObject creature : smi.getAffectedCreatures()) {
-            int adjustBase = smi.getAdjustBase();
-            int adjustModifier = smi.getAdjustModifier();
-            String skillModName = smi.getSkillModName();
-            
-            creature.adjustSkillmod(skillModName, adjustBase, adjustModifier);
-        }
-    }
+	private void handleSkillModIntent(SkillModIntent smi) {
+		for (CreatureObject creature : smi.getAffectedCreatures()) {
+			int adjustBase = smi.getAdjustBase();
+			int adjustModifier = smi.getAdjustModifier();
+			String skillModName = smi.getSkillModName();
+
+			creature.adjustSkillmod(skillModName, adjustBase, adjustModifier);
+		}
+	}
 
 }

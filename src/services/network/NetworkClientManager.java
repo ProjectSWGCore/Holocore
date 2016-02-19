@@ -35,6 +35,7 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
+import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.LinkedList;
@@ -61,33 +62,26 @@ public class NetworkClientManager extends Manager implements TCPCallback, Packet
 	
 	private final Map <InetSocketAddress, Long> sockets;
 	private final Map <Long, NetworkClient> clients;
-	private final Queue<NetworkClient> processQueue;
-	private final ExecutorService clientProcessor;
+	private final Queue<NetworkClient> inboundQueue;
+	private final Queue<NetworkClient> outboundQueue;
+	private final ExecutorService inboundProcessor;
+	private final ExecutorService outboundProcessor;
 	private final Runnable processBufferRunnable;
+	private final Runnable processOutboundRunnable;
 	private final AtomicLong networkIdCounter;
 	private final TCPServer tcpServer;
 	
 	public NetworkClientManager() {
+		final int threadCount = getConfig(ConfigFile.NETWORK).getInt("PACKET-THREAD-COUNT", 10);
 		sockets = new HashMap<InetSocketAddress, Long>();
 		clients = new Hashtable<Long, NetworkClient>();
-		processQueue = new LinkedList<>();
+		inboundQueue = new LinkedList<>();
+		outboundQueue = new LinkedList<>();
 		networkIdCounter = new AtomicLong(1);
-		clientProcessor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors(), ThreadUtilities.newThreadFactory("packet-processor-%d"));
-		processBufferRunnable = new Runnable() {
-			public void run() {
-				try {
-					NetworkClient client;
-					synchronized (processQueue) {
-						client = processQueue.poll();
-						if (client == null)
-							return;
-					}
-					client.process();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		};
+		inboundProcessor = Executors.newFixedThreadPool(threadCount, ThreadUtilities.newThreadFactory("inbound-packet-processor-%d"));
+		outboundProcessor = Executors.newFixedThreadPool(threadCount, ThreadUtilities.newThreadFactory("outbound-packet-processor-%d"));
+		processBufferRunnable = () -> processBufferRunnable();
+		processOutboundRunnable = () -> processOutboundRunnable();
 		tcpServer = new TCPServer(getBindPort(), getBufferSize());
 		
 		registerForIntent(OutboundPacketIntent.TYPE);
@@ -114,10 +108,12 @@ public class NetworkClientManager extends Manager implements TCPCallback, Packet
 	
 	@Override
 	public boolean terminate() {
-		clientProcessor.shutdownNow();
+		inboundProcessor.shutdownNow();
+		outboundProcessor.shutdownNow();
 		boolean success = true;
 		try {
-			success = clientProcessor.awaitTermination(5, TimeUnit.SECONDS);
+			success = inboundProcessor.awaitTermination(5, TimeUnit.SECONDS);
+			success = outboundProcessor.awaitTermination(5, TimeUnit.SECONDS) && success;
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -146,8 +142,8 @@ public class NetworkClientManager extends Manager implements TCPCallback, Packet
 	}
 	
 	@Override
-	public void onConnectionDisconnect(Socket s) {
-		SocketAddress addr = s.getRemoteSocketAddress();
+	public void onConnectionDisconnect(Socket s, SocketAddress addr) {
+		Log.i(this, "Disconnected from %s", addr);
 		if (addr instanceof InetSocketAddress)
 			onSessionDisconnect((InetSocketAddress) addr);
 		else if (addr != null)
@@ -164,7 +160,7 @@ public class NetworkClientManager extends Manager implements TCPCallback, Packet
 	}
 	
 	@Override
-	public void sendPacket(InetSocketAddress sock, byte[] data) {
+	public void sendPacket(InetSocketAddress sock, ByteBuffer data) {
 		tcpServer.send(sock, data);
 	}
 	
@@ -186,14 +182,15 @@ public class NetworkClientManager extends Manager implements TCPCallback, Packet
 	}
 	
 	private void onSessionDisconnect(InetSocketAddress address) {
+		Long networkId;
 		synchronized (clients) {
-			Long networkId = sockets.get(address);
-			if (networkId != null) {
-				deleteSession(networkId);
-				new ConnectionClosedIntent(networkId, DisconnectReason.OTHER_SIDE_TERMINATED).broadcast();
-			} else {
-				System.err.println("Network ID not found for " + address + "!");
-			}
+			networkId = sockets.get(address);
+		}
+		if (networkId != null) {
+			deleteSession(networkId);
+			new ConnectionClosedIntent(networkId, DisconnectReason.OTHER_SIDE_TERMINATED).broadcast();
+		} else {
+			System.err.println("Network ID not found for " + address + "!");
 		}
 	}
 	
@@ -205,35 +202,78 @@ public class NetworkClientManager extends Manager implements TCPCallback, Packet
 				return;
 			}
 			sockets.remove(client.getAddress());
+			synchronized (inboundQueue) {
+				inboundQueue.remove(client);
+			}
+			synchronized (outboundQueue) {
+				outboundQueue.remove(client);
+			}
+			client.close();
 		}
 	}
 	
 	private void handleOutboundPacket(long networkId, Packet p) {
+		NetworkClient client;
 		synchronized (clients) {
-			NetworkClient client = clients.get(networkId);
-			if (client != null)
-				client.sendPacket(p);
-			else
-				Log.w(this, "NetworkClient does not exist for ID: %d", networkId);
+			client = clients.get(networkId);
+		}
+		if (client != null) {
+			client.addToOutbound(p);
+			synchronized (outboundQueue) {
+				while (outboundQueue.remove(client));
+				outboundQueue.add(client);
+			}
+			outboundProcessor.execute(processOutboundRunnable);
 		}
 	}
 	
 	private void handleIncomingData(InetSocketAddress addr, byte [] data) {
+		Long netId = sockets.get(addr);
+		if (netId == null) {
+			Log.w(this, "Unknown socket address! Address: %s", addr);
+			return;
+		}
+		NetworkClient client;
 		synchronized (clients) {
-			Long netId = sockets.get(addr);
-			if (netId == null) {
-				Log.w(this, "Unknown socket address! Address: %s", addr);
-				return;
+			client = clients.get(netId);
+		}
+		if (client != null) {
+			client.addToBuffer(data);
+			synchronized (inboundQueue) {
+				inboundQueue.add(client);
 			}
-			NetworkClient client = clients.get(netId);
-			if (client != null) {
-				client.addToBuffer(data);
-				synchronized (processQueue) {
-					processQueue.add(client);
-				}
-				clientProcessor.execute(processBufferRunnable);
-			} else
-				Log.w(this, "Unknown connection! Network ID: %d  Address: %s", netId, addr);
+			inboundProcessor.execute(processBufferRunnable);
+		} else
+			Log.w(this, "Unknown connection! Network ID: %d  Address: %s", netId, addr);
+	}
+	
+	private void processBufferRunnable() {
+		try {
+			NetworkClient client;
+			synchronized (inboundQueue) {
+				client = inboundQueue.poll();
+				if (client == null)
+					return;
+			}
+			client.processInbound();
+		} catch (Exception e) {
+			e.printStackTrace();
+			Log.e(this, e);
+		}
+	}
+	
+	private void processOutboundRunnable() {
+		try {
+			NetworkClient client;
+			synchronized (outboundQueue) {
+				client = outboundQueue.poll();
+				if (client == null)
+					return;
+			}
+			client.processOutbound();
+		} catch (Exception e) {
+			e.printStackTrace();
+			Log.e(this, e);
 		}
 	}
 	

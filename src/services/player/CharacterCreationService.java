@@ -467,7 +467,7 @@ public class CharacterCreationService extends Service {
 		synchronized (lockedNames) {
 			player = lockedNames.get(firstName);
 		}
-		if (player == null || assignedTo == player)
+		if (player == null || assignedTo.getUserId() == player.getUserId())
 			return false;
 		PlayerState state = player.getPlayerState();
 		return state != PlayerState.DISCONNECTED;

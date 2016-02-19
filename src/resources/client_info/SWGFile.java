@@ -57,6 +57,18 @@ public class SWGFile {
 		this.master = new IffNode(type, true);
 		this.currentForm = master;
 	}
+	
+	public void printTree() {
+		printTree(master, 0);
+	}
+	
+	private void printTree(IffNode node, int depth) {
+		for (int i = 0; i < depth; i++)
+			System.out.print("\t");
+		System.out.println(node.getTag()+":"+node.isForm());
+		for (IffNode child : node.getChildren())
+			printTree(child, depth+1);
+	}
 
 	public void save(File file) throws IOException {
 		try (FileOutputStream outputStream = new FileOutputStream(file, false)) {
@@ -122,6 +134,10 @@ public class SWGFile {
 		IffNode chunk = new IffNode(tag, false);
 		currentForm.addChild(chunk);
 		return chunk;
+	}
+	
+	public boolean hasNextForm() {
+		return currentForm.getNextUnreadForm() != null;
 	}
 
 	/**
@@ -199,6 +215,17 @@ public class SWGFile {
 		}
 
 		return currentForm;
+	}
+	
+	public boolean containsUnreadChunk(String tag) {
+		for (IffNode child : currentForm.getChildren()) {
+			if (child.isForm() || child.hasBeenRead())
+				continue;
+
+			if (child.getTag().equals(tag))
+				return true;
+		}
+		return false;
 	}
 
 	public byte[] getData() {

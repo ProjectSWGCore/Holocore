@@ -58,6 +58,7 @@ public class Mail implements Encodable, Serializable {
 		this.message = message;
 		this.receiverId = receiverId;
 		this.status = NEW;
+		this.outOfBandPackage = null;
 	}
 
 	public int getId() {

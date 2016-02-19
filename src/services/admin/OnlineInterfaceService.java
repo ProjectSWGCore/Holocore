@@ -4,6 +4,7 @@ import intents.PlayerEventIntent;
 
 import java.io.IOException;
 import java.net.InetAddress;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.UnknownHostException;
 import java.sql.PreparedStatement;
@@ -123,7 +124,11 @@ public class OnlineInterfaceService extends Service implements HttpServerCallbac
 				}
 			}
 			if (!socket.isSecure()) {
-				socket.redirect(new URL(request.getURI().getPath()).toString());
+				try {
+					socket.redirect(new URL(request.getURI().getPath()).toString());
+				} catch (MalformedURLException e) {
+					Log.w(this, "Malformed URL: " + request.getURI().getPath());
+				}
 				return;
 			}
 			handler.handleRequest(socket, request);

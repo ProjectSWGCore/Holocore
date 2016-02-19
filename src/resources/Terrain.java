@@ -44,6 +44,7 @@ public enum Terrain {
 	CREATURE_TEST			("terrain/creature_test.trn"),
 	DANTOOINE				("terrain/dantooine.trn"),
 	DATHOMIR				("terrain/dathomir.trn"),
+	DEV_AREA				("terrain/tatooine.trn"),
 	DUNGEON1				("terrain/dungeon1.trn"),
 	ENDOR_ASOMMERS			("terrain/endor_asommers.trn"),
 	ENDOR					("terrain/endor.trn"),
@@ -115,9 +116,9 @@ public enum Terrain {
 		for (Terrain p : values()) {
 			CRC_TO_TERRAIN.put(p.getCrc(), p);
 			CRC_TO_NAME.put(p.getCrc(), p.name());
-			NAME_TO_CRC.put(p.name().toLowerCase(), p.getCrc());
-			NAME_TO_CRC.put(p.name().toLowerCase(), p.getCrc());
-			NAME_TO_TERRAIN.put(p.name().toLowerCase(), p);
+			NAME_TO_CRC.put(p.name().toLowerCase(Locale.US), p.getCrc());
+			NAME_TO_CRC.put(p.name().toLowerCase(Locale.US), p.getCrc());
+			NAME_TO_TERRAIN.put(p.name().toLowerCase(Locale.US), p);
 		}
 	}
 	

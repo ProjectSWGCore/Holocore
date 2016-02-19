@@ -40,7 +40,7 @@ import resources.control.Service;
 
 public class Log {
 	
-	private static final DateFormat LOG_FORMAT = new SimpleDateFormat("dd-mm-yy HH:mm:ss.SSS");
+	private static final DateFormat LOG_FORMAT = new SimpleDateFormat("dd-MM-yy HH:mm:ss.SSS");
 	private static final Log LOG = new Log("log.txt", LogLevel.VERBOSE);
 	
 	private final File file;

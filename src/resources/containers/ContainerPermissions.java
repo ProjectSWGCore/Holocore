@@ -160,8 +160,13 @@ public abstract class ContainerPermissions implements Serializable {
 		}
 
 		public static int valueOf(EnumSet<Permission> bitmaskSet) {
-			Permission[] permissions = bitmaskSet.toArray(new Permission[0]);
-			return valueOf(permissions);
+			int value = 0;
+
+			for (Permission permission : bitmaskSet) {
+				value += permission.bitmask;
+			}
+
+			return value;
 		}
 
 		public static int valueOf(Permission... permissions) {

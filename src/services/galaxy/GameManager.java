@@ -55,7 +55,7 @@ public class GameManager extends Manager {
 		factionService = new FactionService();
 //		groupService = new GroupService();
 		buffService = new BuffService();
-                skillModService = new SkillModService();
+		skillModService = new SkillModService();
 
 		addChildService(commandService);
 		addChildService(connectionService);
@@ -65,6 +65,6 @@ public class GameManager extends Manager {
 		addChildService(factionService);
 //		addChildService(groupService);
 		addChildService(buffService);
-                addChildService(skillModService);
+		addChildService(skillModService);
 	}
 }

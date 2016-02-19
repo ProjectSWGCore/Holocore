@@ -1,0 +1,506 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	creature_name	creature_id	spawn_category	spawn_area	amount	behaviour	patrol_id	max_spawn_time	min_spawn_time	float_radius
+INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGER NOT NULL	REAL	REAL	REAL	REAL	INTEGER	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER NOT NULL	TEXT NOT NULL	INTEGER	INTEGER NOT NULL	INTEGER NOT NULL	INTEGER
+1800003	LOK	lok_world	AREA	0	6199.27	61.78	916.43	0	1	a mercenary elite	16625	-	-	1	none	0	300	120	2
+1800004	LOK	lok_world	AREA	0	6199.10	62.11	900.91	0	1	a mercenary elite	16625	-	-	1	none	0	300	120	2
+1800005	LOK	lok_world	AREA	0	6192.58	61.93	909.65	0	1	a Jedi Padawan	31530	-	-	1	none	0	300	120	2
+1800006	LOK	lok_world	AREA	0	6189.33	61.97	913.42	0	1	a strong mercenary	16645	-	-	1	none	0	300	120	2
+1800007	LOK	lok_world	AREA	0	6018.00	11.99	5182.00	0	1	Etta	26790	-	-	1	none	0	300	120	0
+1800008	LOK	lok_world	AREA	0	5065.91	96.78	412.12	0	1	a Jedi Padawan	31530	-	-	1	none	0	300	120	2
+1800009	LOK	lok_world	AREA	0	5065.85	97.20	406.36	0	1	a Jedi Padawan	31530	-	-	1	none	0	300	120	2
+1800010	LOK	lok_world	AREA	0	4155.52	98.14	7594.58	0	1	Hunde Decan	12515	-	-	1	none	0	300	120	0
+1800011	LOK	lok_world	AREA	0	3821.67	63.00	-542.40	0	1	Rei Reeven (injured)	22260	-	-	1	none	0	300	120	0
+1800012	LOK	lok_world	AREA	0	3562.30	0.88	2086.41	0	1	Nym's elite enforcer	27000	-	-	1	none	0	300	120	2
+1800013	LOK	lok_world	AREA	0	3529.67	2.54	2137.61	0	1	Nym's elite enforcer	27000	-	-	1	none	0	300	120	2
+1800014	LOK	lok_world	AREA	0	3519.94	6.74	2058.30	0	1	Nym's elite enforcer	27000	-	-	1	none	0	300	120	2
+1800015	LOK	lok_world	AREA	0	3511.00	6.88	2116.00	0	1	Briscoe	26730	-	-	1	none	0	300	120	0
+1800016	LOK	lok_world	AREA	0	3037.39	325.16	-4489.41	0	1	a pirate	27075	-	-	1	none	0	300	120	2
+1800017	LOK	lok_world	AREA	0	3033.91	337.48	-4545.86	0	1	a pirate	27075	-	-	1	none	0	300	120	2
+1800018	LOK	lok_world	AREA	0	3012.16	286.55	-4402.43	0	1	Raphael Mar-Shayal (a Rebel pilot)	13590	-	-	1	none	0	300	120	0
+1800019	LOK	lok_world	AREA	0	2965.03	330.36	-4523.87	0	1	Dak Vox	22285	-	-	1	none	0	300	120	0
+1800020	LOK	lok_world	AREA	0	2963.00	325.04	-4500.00	0	1	Edwyn	26775	-	-	1	none	0	300	120	0
+1800021	LOK	lok_world	AREA	0	2921.43	345.00	-4589.13	0	1	a pirate	27075	-	-	1	none	0	300	120	2
+1800022	LOK	lok_world	AREA	0	2896.97	328.48	-4533.27	0	1	a pirate	27075	-	-	1	none	0	300	120	2
+1800023	LOK	lok_world	AREA	0	2890.10	307.39	-4472.50	0	1	a pirate	27075	-	-	1	none	0	300	120	2
+1800024	LOK	lok_world	AREA	0	2882.75	334.61	-4568.83	0	1	a pirate	27075	-	-	1	none	0	300	120	2
+1800025	LOK	lok_world	AREA	0	281.74	11.96	4618.07	0	1	Meatlump Dunder (Outpost Guard)	16190	-	-	1	none	0	300	120	2
+1800026	LOK	lok_world	AREA	0	272.34	12.04	4656.36	0	1	Meatlump Dunder (Outpost Guard)	16190	-	-	1	none	0	300	120	2
+1800027	LOK	lok_world	AREA	0	241.81	11.99	4628.48	0	1	Meatlump Dunder (Outpost Guard)	16190	-	-	1	none	0	300	120	2
+1800028	LOK	lok_world	AREA	0	1894.49	11.92	-2208.96	0	1	a Canyon Corsair cutthroat	25515	-	-	1	none	0	300	120	2
+1800029	LOK	lok_world	AREA	0	1880.61	12.15	-2183.04	0	1	a Canyon Corsair cutthroat	25515	-	-	1	none	0	300	120	2
+1800030	LOK	lok_world	AREA	0	1879.79	39.19	-2286.23	0	1	a Canyon Corsair pirate	25525	-	-	1	none	0	300	120	2
+1800031	LOK	lok_world	AREA	0	1875.20	12.15	-2209.25	0	1	a Canyon Corsair destroyer	25520	-	-	1	none	0	300	120	2
+1800032	LOK	lok_world	AREA	0	1858.11	11.82	-2323.52	0	1	a Canyon Corsair destroyer	25520	-	-	1	none	0	300	120	2
+1800033	LOK	lok_world	AREA	0	1854.72	12.04	-2233.07	0	1	a Canyon Corsair pirate	25525	-	-	1	none	0	300	120	2
+1800034	LOK	lok_world	AREA	0	1850.31	12.03	-2174.77	0	1	a Canyon Corsair cutthroat	25515	-	-	1	none	0	300	120	2
+1800035	LOK	lok_world	AREA	0	1848.35	12.17	-2253.36	0	1	a Canyon Corsair pirate	25525	-	-	1	none	0	300	120	2
+1800036	LOK	lok_world	AREA	0	1845.84	11.99	-2201.16	0	1	a Canyon Corsair destroyer	25520	-	-	1	none	0	300	120	2
+1800037	LOK	lok_world	AREA	0	1840.01	12.01	-2302.35	0	1	a Canyon Corsair pirate	25525	-	-	1	none	0	300	120	2
+1800038	LOK	lok_world	AREA	0	1827.67	12.09	-2337.41	0	1	a Canyon Corsair destroyer	25520	-	-	1	none	0	300	120	2
+1800039	LOK	lok_world	AREA	0	1806.61	41.60	-2285.14	0	1	a Canyon Corsair pirate	25525	-	-	1	none	0	300	120	2
+1800040	LOK	lok_world	AREA	0	1804.43	34.83	-2257.86	0	1	a Canyon Corsair cutthroat	25515	-	-	1	none	0	300	120	2
+1800041	LOK	lok_world	AREA	0	1793.59	31.87	-2313.45	0	1	a Canyon Corsair destroyer	25520	-	-	1	none	0	300	120	2
+1800042	LOK	lok_world	AREA	0	730.42	11.99	-3361.74	0	1	a gurk	11160	-	-	1	none	0	300	120	0
+1800043	LOK	lok_world	AREA	0	729.99	12.06	-3367.28	0	1	a gurk	11160	-	-	1	none	0	300	120	0
+1800044	LOK	lok_world	AREA	0	716.69	11.91	-3362.56	0	1	a reclusive gurk king	24780	-	-	1	none	0	1800	1800	0
+1800045	LOK	lok_world	AREA	0	705.12	12.16	-3369.32	0	1	a gurk	11160	-	-	1	none	0	300	120	0
+1800046	LOK	lok_world	AREA	0	704.38	12.18	-3363.69	0	1	a gurk	11160	-	-	1	none	0	300	120	0
+1800047	LOK	lok_world	AREA	0	135.63	11.87	4889.73	0	1	a Slicer sentry	26570	-	-	1	none	0	300	120	0
+1800048	LOK	lok_world	AREA	0	111.18	11.70	4906.17	0	1	a Slicer sentry	26570	-	-	1	none	0	300	120	0
+1800049	LOK	lok_world	AREA	0	104.36	11.89	4891.24	0	1	a Slicer sentry	26570	-	-	1	none	0	300	120	0
+1800050	LOK	lok_world	AREA	0	-796.43	15.37	-4974.22	0	1	a Jedi Padawan	31530	-	-	1	none	0	300	120	2
+1800051	LOK	lok_world	AREA	0	-785.70	14.68	-4965.36	0	1	a Jedi Padawan	31530	-	-	1	none	0	300	120	2
+1800052	LOK	lok_world	AREA	0	-783.51	14.25	-4980.35	0	1	a Jedi Padawan	31530	-	-	1	none	0	300	120	2
+1800053	LOK	lok_world	AREA	0	-7668.05	92.05	3528.92	0	1	Tao-Ni Security Elite Protector	15275	-	-	1	none	0	300	120	2
+1800054	LOK	lok_world	AREA	0	-7667.21	92.06	3484.03	0	1	Tao-Ni Security Elite Protector	15275	-	-	1	none	0	300	120	2
+1800055	LOK	lok_world	AREA	0	-7658.22	92.15	3489.35	0	1	Tao-Ni Security Elite Protector	15275	-	-	1	none	0	300	120	2
+1800056	LOK	lok_world	AREA	0	-7657.30	91.97	3517.77	0	1	Tao-Ni Security Elite Protector	15275	-	-	1	none	0	300	120	2
+1800057	LOK	lok_world	AREA	0	-7648.56	91.95	3511.14	0	1	Tao-Ni Security Elite Protector	15275	-	-	1	none	0	300	120	2
+1800058	LOK	lok_world	AREA	0	-7648.18	92.04	3496.66	0	1	Tao-Ni Security Elite Protector	15275	-	-	1	none	0	300	120	2
+1800059	LOK	lok_world	AREA	0	-7629.02	106.63	3534.14	0	1	Tao-Ni Security Elite Protector	15275	-	-	1	none	0	300	120	2
+1800060	LOK	lok_world	AREA	0	-7628.95	92.03	3500.72	0	1	Tao-Ni Security Elite Protector	15275	-	-	1	none	0	300	120	2
+1800061	LOK	lok_world	AREA	0	-7512.42	61.83	-7108.22	0	1	a strong mercenary	16645	-	-	1	none	0	300	120	2
+1800062	LOK	lok_world	AREA	0	-7509.71	54.13	-7090.87	0	1	a mercenary elite	16625	-	-	1	none	0	300	120	2
+1800063	LOK	lok_world	AREA	0	-7499.55	62.13	-7073.90	0	1	a strong mercenary	16645	-	-	1	none	0	300	120	2
+1800064	LOK	lok_world	AREA	0	-7496.67	54.53	-7105.00	0	1	a mercenary elite	16625	-	-	1	none	0	300	120	2
+1800065	LOK	lok_world	AREA	0	-7494.81	50.91	-7088.04	0	1	a mercenary warlord	16650	-	-	1	none	0	300	120	0
+1800066	LOK	lok_world	AREA	0	-7487.25	50.98	-7093.04	0	1	a mercenary elite	16625	-	-	1	none	0	300	120	2
+1800067	LOK	lok_world	AREA	0	-7479.54	62.09	-7120.55	0	1	a strong mercenary	16645	-	-	1	none	0	300	120	2
+1800068	LOK	lok_world	AREA	0	-7470.93	61.94	-7078.96	0	1	a strong mercenary	16645	-	-	1	none	0	300	120	2
+1800069	LOK	lok_world	AREA	0	-7454.56	62.13	-7105.42	0	1	a strong mercenary	16645	-	-	1	none	0	300	120	2
+1800070	LOK	lok_world	AREA	0	-6504.93	19.50	3854.31	0	1	a Blood Razor pirate	25400	-	-	1	none	0	300	120	2
+1800071	LOK	lok_world	AREA	0	-6501.70	16.22	3883.78	0	1	a Blood Razor pirate	25400	-	-	1	none	0	300	120	2
+1800072	LOK	lok_world	AREA	0	-6485.83	17.07	3903.24	0	1	a Blood Razor pirate	25400	-	-	1	none	0	300	120	2
+1800073	LOK	lok_world	AREA	0	-6479.09	11.61	3856.44	0	1	a Blood Razor pirate	25400	-	-	1	none	0	300	120	2
+1800074	LOK	lok_world	AREA	0	-6472.38	15.36	3921.17	0	1	a Blood Razor pirate	25400	-	-	1	none	0	300	120	2
+1800075	LOK	lok_world	AREA	0	-6468.12	16.11	3886.43	0	1	Jorund Saleem (a Blood Razor captain)	25395	-	-	1	none	0	300	120	0
+1800076	LOK	lok_world	AREA	0	-6461.57	16.60	3874.20	0	1	a Blood Razor pirate	25400	-	-	1	none	0	300	120	2
+1800077	LOK	lok_world	AREA	0	-6442.76	12.91	3846.97	0	1	a Blood Razor pirate	25400	-	-	1	none	0	300	120	2
+1800078	LOK	lok_world	AREA	0	-6441.53	16.59	3913.88	0	1	a Blood Razor pirate	25400	-	-	1	none	0	300	120	2
+1800079	LOK	lok_world	AREA	0	-6428.46	13.12	3878.30	0	1	a Blood Razor pirate	25400	-	-	1	none	0	300	120	2
+1800080	LOK	lok_world	AREA	0	-6414.30	13.09	3855.35	0	1	a Blood Razor pirate	25400	-	-	1	none	0	300	120	2
+1800081	LOK	lok_world	AREA	0	-6302.82	13.00	4080.74	0	1	a Jedi Padawan	31530	-	-	1	none	0	300	120	2
+1800082	LOK	lok_world	AREA	0	-6302.73	13.02	4090.28	0	1	a Jedi Padawan	31530	-	-	1	none	0	300	120	2
+1800083	LOK	lok_world	AREA	0	-6294.01	13.06	4080.92	0	1	a Jedi Padawan	31530	-	-	1	none	0	300	120	2
+1800084	LOK	lok_world	AREA	0	-6290.15	12.91	4093.46	0	1	a Jedi Padawan	31530	-	-	1	none	0	300	120	2
+1800085	LOK	lok_world	AREA	0	-6283.39	13.02	4080.64	0	1	a Jedi Padawan	31530	-	-	1	none	0	300	120	2
+1800086	LOK	lok_world	AREA	0	-6223.26	13.61	3389.98	0	1	a Jedi Padawan	31530	-	-	1	none	0	300	120	2
+1800087	LOK	lok_world	AREA	0	-3922.00	12.03	-3922.00	0	1	Marla	26875	-	-	1	none	0	300	120	0
+1800088	LOK	lok_world	AREA	0	-3772.73	61.79	-3474.10	-177	1	a gurk	11160	-	-	1	none	0	300	120	0
+1800089	LOK	lok_world	AREA	0	-3772.25	62.05	-3478.67	-177	1	a gurk	11160	-	-	1	none	0	300	120	0
+1800090	LOK	lok_world	AREA	0	-3765.55	61.90	-3486.46	-177	1	a reclusive gurk king	24780	-	-	1	none	0	1800	1800	0
+1800091	LOK	lok_world	AREA	0	-3760.73	62.73	-3478.18	-177	1	a gurk	11160	-	-	1	none	0	300	120	0
+1800092	LOK	lok_world	AREA	0	-3757.21	63.30	-3473.17	-177	1	a gurk	11160	-	-	1	none	0	300	120	0
+1800093	LOK	lok_world	AREA	0	-2036.34	42.26	5969.93	0	1	Cale Herron (a Slicer)	3485	-	-	1	none	0	300	120	0
+1800094	LOK	lok_world	AREA	0	-2004.01	12.00	-3074.15	0	1	a Stormtrooper	25550	poi	Imperial Outpost	1	none	0	300	120	2
+1800095	LOK	lok_world	AREA	0	-1991.73	11.24	-3345.88	0	1	Nym's elite enforcer	27000	-	-	1	none	0	300	120	2
+1800096	LOK	lok_world	AREA	0	-1981.52	11.12	-3407.14	0	1	Nym's elite enforcer	27000	-	-	1	none	0	300	120	2
+1800097	LOK	lok_world	AREA	0	-1976.19	12.00	-3030.87	0	1	a Stormtrooper	25555	poi	Imperial Outpost	1	none	0	300	120	2
+1800098	LOK	lok_world	AREA	0	-1969.48	12.00	-3001.60	0	1	a Stormtrooper	25555	poi	Imperial Outpost	1	none	0	300	120	2
+1800099	LOK	lok_world	AREA	0	-1967.00	11.94	-3365.00	0	1	Emmett	26780	-	-	1	none	0	300	120	0
+1800100	LOK	lok_world	AREA	0	-1957.70	12.00	-3149.53	0	1	a Stormtrooper	25550	poi	Imperial Outpost	1	none	0	300	120	2
+1800101	LOK	lok_world	AREA	0	-1939.65	12.00	-3101.75	0	1	a Stormtrooper	25555	poi	Imperial Outpost	1	none	0	300	120	2
+1800102	LOK	lok_world	AREA	0	-1936.50	12.09	-3386.84	0	1	Nym's elite enforcer	27000	-	-	1	none	0	300	120	2
+1800103	LOK	lok_world	AREA	0	-1917.27	12.00	-3175.72	0	1	a Stormtrooper	25550	poi	Imperial Outpost	1	none	0	300	120	2
+1800104	LOK	lok_world	AREA	0	-1916.42	12.00	-3135.65	0	1	a Stormtrooper	25555	poi	Imperial Outpost	1	none	0	300	120	2
+1800105	LOK	lok_world	AREA	0	-1905.50	12.00	-3109.29	0	1	a Stormtrooper	25555	poi	Imperial Outpost	1	none	0	300	120	2
+1800106	LOK	lok_world	AREA	0	-1903.74	12.00	-3058.05	0	1	a Stormtrooper	25555	poi	Imperial Outpost	1	none	0	300	120	2
+1800107	LOK	lok_world	AREA	0	-1900.43	12.00	-2984.39	0	1	a Stormtrooper	25555	poi	Imperial Outpost	1	none	0	300	120	2
+1800108	LOK	lok_world	AREA	0	-1887.32	12.00	-3175.29	0	1	a Stormtrooper	25550	poi	Imperial Outpost	1	none	0	300	120	2
+1800109	LOK	lok_world	AREA	0	-1866.59	12.00	-3114.77	0	1	a Stormtrooper	25550	poi	Imperial Outpost	1	none	0	300	120	2
+1800110	LOK	lok_world	AREA	0	-1832.53	12.00	-3049.33	0	1	a Stormtrooper	25550	poi	Imperial Outpost	1	none	0	300	120	2
+1800111	LOK	lok_world	AREA	0	-1830.43	12.00	-3086.94	0	1	a Stormtrooper	25550	poi	Imperial Outpost	1	none	0	300	120	2
+1800112	LOK	lok_world	AREA	0	-1828.21	12.00	-3126.61	0	1	a Stormtrooper	25555	poi	Imperial Outpost	1	none	0	300	120	2
+1800113	LOK	lok_world	EGG	0	-1874.15	12.00	-3123.66	30	1	a commoner	3185	poi	Imperial Outpost	1	none	0	300	120	0
+1800114	LOK	lok_nym_cantina	EGG	1	43.98	0.10	2.85	167	1	a fixer	9465	city	Nym's Stronghold	1	listen	0	300	120	0
+1800115	LOK	lok_nym_cantina	EGG	1	44.04	0.10	0.72	-1	1	a warder	32865	city	Nym's Stronghold	1	discuss	0	300	120	0
+1800116	LOK	lok_nym_cantina	EGG	3	6.60	-0.89	3.00	37	1	a bartender	790	city	Nym's Stronghold	1	none	0	300	120	0
+1800117	LOK	lok_nym_cantina	EGG	3	-4.17	-0.89	-4.92	176	1	a miner	16700	city	Nym's Stronghold	1	listen	0	300	120	0
+1800118	LOK	lok_nym_cantina	EGG	3	-4.05	-0.89	-7.09	-7	1	a pilot	23430	city	Nym's Stronghold	1	discuss	0	300	120	0
+1800119	LOK	lok_nym_cantina	EGG	3	-7.78	-0.89	7.05	-20	1	a gambler	9880	city	Nym's Stronghold	1	discuss	0	300	120	0
+1800120	LOK	lok_nym_cantina	EGG	3	-9.26	-0.89	9.03	141	1	a noble	21215	city	Nym's Stronghold	1	listen	0	300	120	0
+1800121	LOK	lok_nym_cantina	EGG	3	-7.16	-0.89	9.20	-161	1	a farmer	8520	city	Nym's Stronghold	1	discuss	0	300	120	0
+1800122	LOK	lok_nym_cantina	EGG	3	5.14	-0.89	-6.38	-148	1	a businessman	2255	city	Nym's Stronghold	1	discuss	0	300	120	0
+1800123	LOK	lok_nym_cantina	EGG	3	4.10	-0.89	-8.11	26	1	a commoner	3185	city	Nym's Stronghold	1	discuss	0	300	120	0
+1800124	LOK	lok_nym_cantina	EGG	3	3.69	-0.89	-6.54	114	1	an artisan	310	city	Nym's Stronghold	1	listen	0	300	120	0
+1800125	LOK	lok_nym_cantina	EGG	3	5.06	-0.89	-7.69	-68	1	a commoner	3185	city	Nym's Stronghold	1	discuss	0	300	120	0
+1800126	LOK	lok_nym_cantina	EGG	3	24.67	-0.89	-9.07	133	1	a bodyguard	1700	city	Nym's Stronghold	1	listen	0	300	120	0
+1800127	LOK	lok_nym_cantina	EGG	3	26.36	-0.89	-10.82	-21	1	an assassin	325	city	Nym's Stronghold	1	listen	0	300	120	0
+1800128	LOK	lok_nym_cantina	EGG	3	25.89	-0.89	-8.95	165	1	a businessman	2255	city	Nym's Stronghold	1	discuss	0	300	120	0
+1800129	LOK	lok_nym_cantina	EGG	3	24.05	-0.89	8.42	6	1	a farmer	8520	city	Nym's Stronghold	1	discuss	0	300	120	0
+1800130	LOK	lok_nym_cantina	EGG	3	24.36	-0.89	10.99	-178	1	an entertainer	6505	city	Nym's Stronghold	1	discuss	0	300	120	0
+1800131	LOK	lok_nym_cantina	EGG	4	20.32	-0.89	-19.77	6	1	Commander Ramna (CorSec Pilot Trainer)	33940	city	Nym's Stronghold	1	none	0	300	120	0
+1800132	LOK	lok_nym_cantina	EGG	4	18.22	-0.89	-13.83	-178	1	a pilot	23430	city	Nym's Stronghold	1	discuss	0	300	120	0
+1800133	LOK	lok_nym_cantina	EGG	4	18.15	-0.89	-16.04	-7	1	a mercenary	16605	city	Nym's Stronghold	1	listen	0	300	120	0
+1800134	LOK	lok_nym_cantina	EGG	5	16.48	-0.89	21.87	-103	1	Berema	34145	city	Nym's Stronghold	1	sitting	0	300	120	0
+1800135	LOK	lok_nym_cantina	EGG	5	18.16	-0.89	18.21	0	1	a technician	30945	city	Nym's Stronghold	1	discuss	0	300	120	0
+1800136	LOK	lok_nym_cantina	EGG	5	18.17	-0.89	20.80	175	1	a slicer	26540	city	Nym's Stronghold	1	listen	0	300	120	0
+1800137	LOK	lok_nym_cantina	EGG	6	11.60	-0.89	-16.70	-80	1	Choster (Retired Engineer)	22065	city	Nym's Stronghold	1	drinking	0	300	120	0
+1800138	LOK	lok_nym_cantina	EGG	6	0.51	-0.89	-16.98	3	1	a hunter	12525	city	Nym's Stronghold	1	discuss	0	300	120	0
+1800139	LOK	lok_nym_cantina	EGG	6	0.71	-0.89	-14.79	-172	1	a businessman	2255	city	Nym's Stronghold	1	discuss	0	300	120	0
+1800140	LOK	lok_nym_cantina	EGG	8	-13.23	-0.89	-20.23	16	1	Vixur Webb (a musician)	34140	city	Nym's Stronghold	1	sitting	0	300	120	0
+1800141	LOK	lok_nym_cantina	QUEST	9	-10.41	-0.89	24.44	-179	1	Nien Nunb	21085	city	Nym's Stronghold	1	sitting	0	300	120	0
+1800142	LOK	lok_nym_cantina	EGG	9	-7.69	-0.89	21.24	58	1	a vendor	32240	city	Nym's Stronghold	1	discuss	0	300	120	0
+1800143	LOK	lok_nym_cantina	EGG	9	-6.41	-0.89	21.73	-77	1	a smuggler	26650	city	Nym's Stronghold	1	listen	0	300	120	0
+1800144	LOK	lok_nym_cantina	EGG	9	-6.84	-0.89	23.04	174	1	a hunter	12525	city	Nym's Stronghold	1	listen	0	300	120	0
+1800145	LOK	lok_nym_cantina	EGG	12	-26.07	-0.89	24.95	143	1	a rancher	8540	city	Nym's Stronghold	1	discuss	0	300	120	0
+1800146	LOK	lok_nym_cantina	EGG	12	-24.98	-0.89	23.80	-45	1	a farmer	8520	city	Nym's Stronghold	1	discuss	0	300	120	0
+1800147	LOK	lok_nym_cantina	QUEST	13	-30.20	-0.52	7.30	29	1	Han Solo	11255	city	Nym's Stronghold	1	none	0	300	120	0
+1800148	LOK	lok_nym_cantina	EGG	13	-28.50	-0.52	6.00	13	1	Chewbacca	2555	city	Nym's Stronghold	1	none	0	300	120	0
+1800149	LOK	lok_nym_cantina	EGG	14	-36.20	0.10	-14.10	87	1	Sergeant Moore (Retired)	22275	city	Nym's Stronghold	1	none	0	300	120	0
+1800150	LOK	lok_nym_hospital	EGG	6	-25.50	0.26	-3.50	119	1	a 2-1B surgical droid	29785	city	Nym's Stronghold	1	none	0	300	120	0
+1800151	LOK	lok_nym_hotel	EGG	9	-12.56	1.60	-16.03	-67	1	Warvog Arkon (Arkon's Havoc Pilot Trainer)	33965	city	Nym's Stronghold	1	none	0	300	120	0
+1800152	LOK	lok_nym_hotel	EGG	10	-23.48	1.60	-17.23	0	1	An Event Promoter	33705	city	Nym's Stronghold	1	none	0	300	120	0
+1800153	LOK	lok_nym_hotel	EGG	5	20.69	1.57	12.96	178	1	a bartender	790	city	Nym's Stronghold	1	none	0	300	120	0
+1800154	LOK	lok_nym_hotel	EGG	5	19.98	1.28	-2.42	-85	1	a pilot	23430	city	Nym's Stronghold	1	sitting	0	300	120	0
+1800155	LOK	lok_nym_hotel	EGG	5	16.68	1.28	-9.55	-175	1	a vendor	32245	city	Nym's Stronghold	1	sitting	0	300	120	0
+1800156	LOK	lok_nym_hotel	EGG	5	16.49	1.28	-12.48	4	1	a gambler	9880	city	Nym's Stronghold	1	sitting	0	300	120	0
+1800157	LOK	lok_nym_hotel	EGG	4	-7.73	1.00	-4.01	88	1	a medic	18425	city	Nym's Stronghold	1	none	0	300	120	0
+1800158	LOK	lok_nym_hotel	EGG	4	-6.36	1.00	-3.98	-100	1	a mercenary	16605	city	Nym's Stronghold	1	none	0	300	120	0
+1800159	LOK	lok_nym_stronghold	QUEST	3	-0.04	3.28	-23.03	0	1	Nym	21920	city	Nym's Stronghold	1	sitting	0	300	120	0
+1800160	LOK	lok_nym_stronghold	QUEST	3	-2.21	4.08	-11.02	-2	1	Lady Viopa (Rebel Pilot Trainer)	33955	city	Nym's Stronghold	1	none	0	300	120	0
+1800161	LOK	lok_nym_stronghold	QUEST	3	0.26	3.31	-15.72	-179	1	Vana Sage	22325	city	Nym's Stronghold	1	none	0	300	120	0
+1800162	LOK	lok_nym_stronghold	QUEST	3	1.89	4.08	-10.71	-172	1	Grenz Zittoun	22120	city	Nym's Stronghold	1	none	0	300	120	0
+1800163	LOK	lok_nym_stronghold	QUEST	3	-1.74	3.34	-19.21	-14	1	Kole	14400	city	Nym's Stronghold	1	none	0	300	120	0
+1800164	LOK	lok_nym_stronghold	QUEST	3	-5.61	3.42	-20.73	14	1	Rek Thelcar	22265	city	Nym's Stronghold	1	none	0	300	120	0
+1800165	LOK	lok_nym_stronghold	QUEST	3	5.54	4.07	-13.73	-155	1	Mako Ghast	22205	city	Nym's Stronghold	1	none	0	300	120	0
+1800166	LOK	lok_nym_stronghold	QUEST	3	5.58	3.42	-20.81	-47	1	Stuvany Inglen	22290	city	Nym's Stronghold	1	none	0	300	120	0
+1800167	LOK	lok_nym_stronghold	QUEST	3	3.13	3.29	-21.21	-2	1	Jinkins	13935	city	Nym's Stronghold	1	none	0	300	120	0
+1800168	LOK	lok_nym_stronghold	EGG	3	3.61	3.28	-25.73	-43	1	Razor	34155	city	Nym's Stronghold	1	sitting	0	300	120	0
+1800169	LOK	lok_nym_stronghold	EGG	3	-3.61	3.28	-25.73	34	1	Scourge	34160	city	Nym's Stronghold	1	sitting	0	300	120	0
+1800170	LOK	lok_nym_stronghold	EGG	3	-3.30	4.08	-9.49	0	1	Nym's elite guard	21965	city	Nym's Stronghold	1	none	0	300	120	0
+1800171	LOK	lok_nym_stronghold	EGG	3	3.30	4.08	-9.49	0	1	Nym's elite guard	21965	city	Nym's Stronghold	1	none	0	300	120	0
+1800172	LOK	lok_nym_stronghold	EGG	3	1.85	8.90	-30.50	0	1	Nym's elite guard	21965	city	Nym's Stronghold	1	none	0	300	120	0
+1800173	LOK	lok_nym_stronghold	EGG	3	-1.85	8.90	-30.50	0	1	Nym's elite guard	21965	city	Nym's Stronghold	1	none	0	300	120	0
+1800174	LOK	lok_nym_stronghold	EGG	3	-20.28	2.30	-18.78	0	1	Nym's guard	21975	city	Nym's Stronghold	1	none	0	300	120	0
+1800175	LOK	lok_nym_stronghold	EGG	3	20.28	2.30	-18.78	0	1	Nym's guard	21975	city	Nym's Stronghold	1	none	0	300	120	0
+1800176	LOK	lok_nym_stronghold	EGG	3	19.11	2.30	11.20	179	1	Nym's guard	21970	city	Nym's Stronghold	1	none	0	300	120	0
+1800177	LOK	lok_nym_stronghold	EGG	3	-19.11	2.30	11.20	179	1	Nym's guard	21970	city	Nym's Stronghold	1	none	0	300	120	0
+1800178	LOK	lok_nym_stronghold	EGG	3	-8.06	1.30	-0.95	179	1	Nym's brawler	21930	city	Nym's Stronghold	1	discuss	0	300	120	0
+1800179	LOK	lok_nym_stronghold	EGG	3	-8.06	1.30	-2.23	0	1	Nym's surveyor	22015	city	Nym's Stronghold	1	listen	0	300	120	0
+1800180	LOK	lok_nym_stronghold	EGG	3	-3.51	1.30	3.96	90	1	Nym's bodyguard	21925	city	Nym's Stronghold	1	discuss	0	300	120	0
+1800181	LOK	lok_nym_stronghold	EGG	3	-2.04	1.30	3.96	-90	1	Nym's destroyer	21935	city	Nym's Stronghold	1	discuss	0	300	120	0
+1800182	LOK	lok_nym_stronghold	EGG	3	4.38	1.30	-4.14	150	1	Nym's surveyor	22015	city	Nym's Stronghold	1	discuss	0	300	120	0
+1800183	LOK	lok_nym_stronghold	EGG	3	5.65	1.30	-5.27	-88	1	Nym's bodyguard	21925	city	Nym's Stronghold	1	discuss	0	300	120	0
+1800184	LOK	lok_nym_stronghold	EGG	3	3.86	1.30	-5.60	32	1	Nym's brawler	21930	city	Nym's Stronghold	1	listen	0	300	120	0
+1800185	LOK	lok_nym_stronghold	EGG	3	-5.57	2.30	8.58	-179	1	Kelson Sharphorn	26555	city	Nym's Stronghold	1	none	0	300	120	0
+1800186	LOK	lok_nym_stronghold	EGG	6	-23.88	4.22	-37.43	7	1	Nym's Fuel Technician	34150	city	Nym's Stronghold	1	none	0	300	120	0
+1800187	LOK	lok_nym_stronghold	EGG	7	-28.48	2.30	1.41	-90	1	Nym's bodyguard	21925	city	Nym's Stronghold	1	none	0	300	120	0
+1800188	LOK	lok_nym_stronghold	EGG	10	38.00	2.29	-2.48	87	1	Nym's elite pirate	22000	city	Nym's Stronghold	1	fiddle	0	300	120	0
+1800189	LOK	lok_nym_stronghold	EGG	10	32.61	2.29	-4.49	64	1	Nym's elite pirate	22000	city	Nym's Stronghold	1	fiddle	0	300	120	0
+1800190	LOK	lok_world	AREA	0	711.00	11.39	5265.00	-92	1	Phor Cl-lan (A Water Treatment Tech)	22225	city	Nym's Stronghold	1	none	0	300	120	0
+1800191	LOK	lok_world	AREA	0	684.90	45.69	4987.94	0	1	Troubles	22200	city	Nym's Stronghold	1	none	0	300	120	0
+1800192	LOK	lok_world	EGG	0	588.28	3.00	5354.67	-117	1	Balfur Jhcor (associate bounty hunter)	23930	city	Nym's Stronghold	1	none	0	300	120	0
+1800193	LOK	lok_world	AREA	0	484.17	23.00	4948.35	0	1	a disgruntled townsperson	22100	city	Nym's Stronghold	1	none	0	300	120	2
+1800194	LOK	lok_world	EGG	0	461.67	23.00	4981.47	-100	1	a pirate	18530	city	Nym's Stronghold	1	none	0	300	120	0
+1800195	LOK	lok_world	EGG	0	430.05	13.00	5137.73	-13	1	a commoner	3185	city	Nym's Stronghold	1	none	0	300	120	0
+1800196	LOK	lok_world	EGG	0	220.22	17.01	5153.76	45	1	Andria E'liyha	11355	city	Nym's Stronghold	1	none	0	300	120	0
+1800197	LOK	lok_world	EGG	0	373.32	11.84	5179.19	88	1	Talia v'laenya	11360	city	Nym's Stronghold	1	none	0	300	120	0
+1800198	LOK	lok_world	EGG	0	414.43	11.92	4972.05	-114	1	a commoner	3185	city	Nym's Stronghold	1	none	0	300	120	0
+1800199	LOK	lok_world	EGG	0	392.98	12.00	5010.58	55	1	a settler	26085	city	Nym's Stronghold	1	none	0	300	120	0
+1800200	LOK	lok_world	EGG	0	378.41	11.93	5042.87	173	1	a pirate	18530	city	Nym's Stronghold	1	none	0	300	120	0
+1800201	LOK	lok_world	EGG	0	329.76	12.11	5063.76	86	1	a commoner	3185	city	Nym's Stronghold	1	none	0	300	120	0
+1800202	LOK	lok_world	EGG	0	334.05	11.96	5118.49	42	1	a settler	26085	city	Nym's Stronghold	1	none	0	300	120	0
+1800203	LOK	lok_world	EGG	0	375.48	11.97	5129.73	42	1	a commoner	3185	city	Nym's Stronghold	1	none	0	300	120	0
+1800204	LOK	lok_world	EGG	0	385.15	12.00	5147.74	176	1	a smuggler	26650	city	Nym's Stronghold	1	none	0	300	120	0
+1800205	LOK	lok_world	EGG	0	370.68	12.01	5095.36	86	1	a commoner	3185	city	Nym's Stronghold	1	none	0	300	120	0
+1800206	LOK	lok_world	EGG	0	429.86	13.00	5135.67	-78	1	an information broker	18355	city	Nym's Stronghold	1	none	0	300	120	0
+1800207	LOK	lok_world	EGG	0	427.81	13.00	5136.07	108	1	a bounty hunter	2100	city	Nym's Stronghold	1	none	0	300	120	0
+1800208	LOK	lok_world	EGG	0	451.08	12.00	5127.30	74	1	a commoner	3185	city	Nym's Stronghold	1	none	0	300	120	0
+1800209	LOK	lok_world	EGG	0	470.81	12.13	5089.58	-102	1	a commoner	3185	city	Nym's Stronghold	1	none	0	300	120	0
+1800210	LOK	lok_world	EGG	0	471.04	11.94	5018.36	-123	1	a pirate	18530	city	Nym's Stronghold	1	none	0	300	120	0
+1800211	LOK	lok_world	EGG	0	506.35	12.10	5011.16	22	1	a commoner	3185	city	Nym's Stronghold	1	none	0	300	120	0
+1800212	LOK	lok_world	EGG	0	519.86	11.99	5037.10	-130	1	a smuggler	26650	city	Nym's Stronghold	1	none	0	300	120	0
+1800213	LOK	lok_world	EGG	0	519.25	11.95	5097.93	-29	1	a farmer	8520	city	Nym's Stronghold	1	discuss	0	300	120	0
+1800214	LOK	lok_world	EGG	0	517.77	12.01	5100.49	141	1	a technician	30945	city	Nym's Stronghold	1	none	0	300	120	0
+1800215	LOK	lok_world	EGG	0	482.90	11.91	5126.22	-171	1	a commoner	3185	city	Nym's Stronghold	1	none	0	300	120	0
+1800216	LOK	lok_world	EGG	0	242.40	12.04	4968.33	-3	1	a commoner	3185	city	Nym's Stronghold	1	none	0	300	120	0
+1800217	LOK	lok_world	EGG	0	216.12	11.91	4988.29	92	1	a settler	26085	city	Nym's Stronghold	1	none	0	300	120	0
+1800218	LOK	lok_world	EGG	0	301.33	11.98	5043.77	9	1	a settler	26085	city	Nym's Stronghold	1	none	0	300	120	0
+1800219	LOK	lok_world	EGG	0	340.71	12.07	4998.94	-175	1	a commoner	3185	city	Nym's Stronghold	1	none	0	300	120	0
+1800220	LOK	lok_world	EGG	0	335.71	11.99	4925.47	101	1	a pirate	18530	city	Nym's Stronghold	1	none	0	300	120	0
+1800221	LOK	lok_world	EGG	0	297.84	11.87	5155.84	77	1	a commoner	3185	city	Nym's Stronghold	1	none	0	300	120	0
+1800222	LOK	lok_world	EGG	0	367.36	12.00	5176.94	77	1	a smuggler	26650	city	Nym's Stronghold	1	none	0	300	120	0
+1800223	LOK	lok_world	EGG	0	437.63	11.89	5169.42	-69	1	a commoner	3185	city	Nym's Stronghold	1	none	0	300	120	0
+1800224	LOK	lok_world	EGG	0	492.99	11.99	5146.04	89	1	a settler	26085	city	Nym's Stronghold	1	none	0	300	120	0
+1800225	LOK	lok_world	EGG	0	527.90	11.88	5184.46	156	1	a commoner	3185	city	Nym's Stronghold	1	none	0	300	120	0
+1800226	LOK	lok_world	EGG	0	560.37	11.89	5141.86	-90	1	a commoner	3185	city	Nym's Stronghold	1	none	0	300	120	0
+1800227	LOK	lok_world	EGG	0	537.69	11.97	5100.86	-31	1	a commoner	3185	city	Nym's Stronghold	1	none	0	300	120	0
+1800228	LOK	lok_world	EGG	0	610.20	11.88	5105.33	34	1	a pirate	18530	city	Nym's Stronghold	1	none	0	300	120	0
+1800229	LOK	lok_world	EGG	0	578.42	11.92	4993.40	4	1	a commoner	3185	city	Nym's Stronghold	1	none	0	300	120	0
+1800230	LOK	lok_world	EGG	0	531.08	12.04	4983.26	-93	1	a commoner	3185	city	Nym's Stronghold	1	none	0	300	120	0
+1800231	LOK	lok_world	EGG	0	437.10	8.72	5503.94	68	1	an outlaw	18510	city	Nym's Stronghold	1	discuss	0	300	120	0
+1800232	LOK	lok_world	EGG	0	439.06	8.72	5504.78	-123	1	a fixer	9465	city	Nym's Stronghold	1	discuss	0	300	120	0
+1800233	LOK	lok_world	EGG	0	488.55	9.50	5498.96	-92	1	a commoner	3185	city	Nym's Stronghold	1	none	0	300	120	0
+1800234	LOK	lok_world	AREA	0	480.93	22.84	4921.16	0	1	Nym's guard	21970	city	Nym's Stronghold	1	none	0	300	120	0
+1800235	LOK	lok_world	AREA	0	477.89	23.00	4952.12	0	1	a disgruntled townsperson	22095	city	Nym's Stronghold	1	none	0	300	120	2
+1800236	LOK	lok_world	AREA	0	477.00	23.00	4947.00	0	1	a disgruntled townsperson	22075	city	Nym's Stronghold	1	none	0	300	120	2
+1800237	LOK	lok_world	AREA	0	473.00	23.00	4956.00	0	1	a disgruntled townsperson	22080	city	Nym's Stronghold	1	none	0	300	120	2
+1800238	LOK	lok_world	AREA	0	472.83	22.78	4920.99	0	1	Nym's guard	21970	city	Nym's Stronghold	1	none	0	300	120	0
+1800239	LOK	lok_world	PATROL	0	339.39	11.97	4889.31	0	1	Speedbump	22180	city	Nym's Stronghold	1	none	0	300	120	0
+1800240	LOK	lok_world	PATROL	0	591.04	12.35	5020.81	0	1	Ding	22185	city	Nym's Stronghold	1	none	0	300	120	0
+1800241	LOK	lok_world	QUEST	0	470.00	23.00	4946.00	172	1	a disgruntled townsperson	22105	city	Nym's Stronghold	1	none	0	300	120	0
+1800242	LOK	lok_world	AREA	0	470.00	23.00	4952.00	0	1	a disgruntled townsperson	22085	city	Nym's Stronghold	1	none	0	300	120	2
+1800243	LOK	lok_world	EGG	0	467.18	34.47	4810.25	90	1	Arena Referee	22045	city	Nym's Stronghold	1	none	0	300	120	0
+1800244	LOK	lok_world	AREA	0	464.00	23.00	4950.00	0	1	a disgruntled townsperson	22090	city	Nym's Stronghold	1	none	0	300	120	2
+1800245	LOK	lok_world	EGG	0	463.67	23.00	4967.00	-90	1	Ran Machado	22250	city	Nym's Stronghold	1	none	0	300	120	0
+1800246	LOK	lok_world	EGG	0	401.00	11.98	5226.00	0	1	Baldwin	26655	city	Nym's Stronghold	1	none	0	300	120	0
+1800247	LOK	lok_world	EGG	0	362.00	12.07	4837.00	0	1	Ralia Reeven (Nym's Quartermaster)	22245	city	Nym's Stronghold	1	none	0	300	120	0
+1800248	LOK	lok_world	EGG	0	361.59	11.98	4878.93	-60	1	Runt	22175	city	Nym's Stronghold	1	none	0	300	120	0
+1800249	LOK	lok_world	EGG	0	351.66	12.14	4846.00	90	1	Scarecrow	22165	city	Nym's Stronghold	1	none	0	300	120	0
+1800250	LOK	lok_world	EGG	0	351.66	11.87	4854.02	90	1	Blinky	22160	city	Nym's Stronghold	1	none	0	300	120	0
+1800251	LOK	lok_world	EGG	0	351.45	12.06	4862.06	90	1	Bedhead	22155	city	Nym's Stronghold	1	none	0	300	120	0
+1800252	LOK	lok_world	EGG	0	351.17	12.07	4838.05	90	1	Slobbers	22170	city	Nym's Stronghold	1	none	0	300	120	0
+1800253	LOK	lok_world	EGG	0	630.10	12.67	5054.94	-66	1	Race Coordinator	34175	city	Nym's Stronghold	1	none	0	300	120	0
+1800254	LOK	lok_world	PATROL	0	517.60	12.09	5121.50	0	1	Gargle	22190	city	Nym's Stronghold	1	none	0	300	120	0
+1800255	LOK	lok_world	EGG	0	490.20	11.97	5021.58	138	1	Kaibe	12675	city	Nym's Stronghold	1	none	0	300	120	0
+1800256	LOK	lok_world	EGG	0	480.17	23.00	4961.80	-174	1	Nym's Fuel Technician	34170	city	Nym's Stronghold	1	none	0	300	120	0
+1800257	LOK	lok_world	PATROL	0	465.39	7.24	5475.64	0	1	Nym's guard	21970	city	Nym's Stronghold	1	none	0	300	120	0
+1800258	LOK	lok_world	PATROL	0	463.50	7.15	5474.84	0	1	Nym's guard	21975	city	Nym's Stronghold	1	none	0	300	120	0
+1800259	LOK	lok_world	PATROL	0	461.58	7.42	5477.04	0	1	Nym's guard	21970	city	Nym's Stronghold	1	none	0	300	120	0
+1800260	LOK	lok_world	EGG	0	373.43	11.99	4985.35	43	1	Nym's Fuel Technician	34165	city	Nym's Stronghold	1	none	0	300	120	0
+1800261	LOK	lok_world	PATROL	0	376.30	11.20	5225.30	0	1	Wart Face	22195	city	Nym's Stronghold	1	none	0	300	120	0
+1800262	LOK	lok_world	PATROL	0	251.42	12.00	4998.52	0	1	Joti Laike	23960	city	Nym's Stronghold	1	none	0	300	120	0
+1800263	LOK	lok_imperial_gas_mine	AREA	5	7.30	-45.00	-126.90	0	1	an infuriated miner	32020	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800264	LOK	lok_imperial_gas_mine	AREA	5	67.30	-58.60	-167.90	0	1	an infuriated miner	32020	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800265	LOK	lok_imperial_gas_mine	AREA	5	65.00	-50.00	-136.10	0	1	an infuriated miner	32020	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800266	LOK	lok_imperial_gas_mine	AREA	5	61.40	-48.70	-131.80	0	1	a droideka	31955	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800267	LOK	lok_imperial_gas_mine	AREA	2	6.60	-24.30	-27.20	0	1	an enraged miner	31960	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800268	LOK	lok_imperial_gas_mine	AREA	5	6.00	-44.90	-129.40	0	1	an enraged miner	31960	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800269	LOK	lok_imperial_gas_mine	AREA	5	51.40	-56.60	-169.60	0	1	an enraged miner	31960	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800270	LOK	lok_imperial_gas_mine	AREA	5	50.40	-56.40	-175.20	0	1	a droideka	31955	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800271	LOK	lok_imperial_gas_mine	AREA	4	50.10	-46.60	-59.80	0	1	a maddened miner	32025	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800272	LOK	lok_imperial_gas_mine	AREA	2	5.80	-23.60	-23.00	0	1	a maddened miner	32025	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800273	LOK	lok_imperial_gas_mine	AREA	3	5.10	-41.00	-76.20	0	1	an enraged miner	31960	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800274	LOK	lok_imperial_gas_mine	AREA	5	47.90	-56.70	-169.40	0	1	an enraged miner	31960	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800275	LOK	lok_imperial_gas_mine	AREA	4	47.00	-46.20	-93.40	0	1	a maddened miner	32025	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800276	LOK	lok_imperial_gas_mine	AREA	5	43.00	-55.30	-154.90	0	1	a droideka	31955	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800277	LOK	lok_imperial_gas_mine	AREA	4	40.90	-46.10	-91.30	0	1	a droideka	31955	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800278	LOK	lok_imperial_gas_mine	AREA	5	40.90	-48.80	-132.30	0	1	an enraged miner	31960	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800279	LOK	lok_imperial_gas_mine	AREA	4	40.20	-46.40	-86.40	0	1	an enraged miner	31960	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800280	LOK	lok_imperial_gas_mine	AREA	5	40.10	-49.50	-135.10	0	1	a maddened miner	32025	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800281	LOK	lok_imperial_gas_mine	AREA	4	37.90	-46.00	-61.90	0	1	an enraged miner	31960	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800282	LOK	lok_imperial_gas_mine	AREA	5	36.30	-56.10	-157.10	0	1	a maddened miner	32025	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800283	LOK	lok_imperial_gas_mine	AREA	5	31.60	-48.20	-132.50	0	1	a droideka	31955	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800284	LOK	lok_imperial_gas_mine	AREA	4	30.80	-45.10	-50.20	0	1	an infuriated miner	32020	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800285	LOK	lok_imperial_gas_mine	AREA	4	27.60	-45.70	-107.40	0	1	an infuriated miner	32020	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800286	LOK	lok_imperial_gas_mine	AREA	3	25.60	-44.70	-59.00	0	1	an enraged miner	31960	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800287	LOK	lok_imperial_gas_mine	AREA	5	18.80	-63.10	-170.70	0	1	a droideka	31955	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800288	LOK	lok_imperial_gas_mine	AREA	3	14.10	-40.20	-77.10	0	1	a droideka	31955	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800289	LOK	lok_imperial_gas_mine	AREA	1	12.60	-19.30	-16.00	0	1	a maddened miner	32025	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800290	LOK	lok_imperial_gas_mine	AREA	6	11.80	-63.60	-181.40	0	1	a maddened miner	32025	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800291	LOK	lok_imperial_gas_mine	AREA	2	11.10	-23.60	-27.80	0	1	a droideka	31955	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800292	LOK	lok_imperial_gas_mine	AREA	3	1.80	-41.20	-75.10	0	1	a maddened miner	32025	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800293	LOK	lok_imperial_gas_mine	AREA	1	1.20	-6.30	6.10	0	1	an enraged miner	31960	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800294	LOK	lok_imperial_gas_mine	AREA	1	1.10	-4.60	17.30	0	1	an enraged miner	31960	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800295	LOK	lok_imperial_gas_mine	AREA	7	0.60	-63.50	-231.00	0	1	an infuriated miner	32020	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800296	LOK	lok_imperial_gas_mine	AREA	1	0.20	-8.80	2.20	0	1	an enraged miner	31960	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800297	LOK	lok_imperial_gas_mine	AREA	8	-99.70	-72.20	-151.80	0	1	a maddened miner	32025	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800298	LOK	lok_imperial_gas_mine	AREA	8	-95.90	-71.90	-183.20	0	1	a droideka	31955	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800299	LOK	lok_imperial_gas_mine	AREA	8	-94.40	-103.20	-128.60	0	1	a droideka	31955	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800300	LOK	lok_imperial_gas_mine	AREA	8	-93.50	-73.60	-170.70	0	1	Raynar Cath	22255	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800301	LOK	lok_imperial_gas_mine	AREA	8	-92.10	-70.30	-102.20	0	1	an enraged miner	31960	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800302	LOK	lok_imperial_gas_mine	AREA	11	-89.30	-101.40	-110.60	0	1	a droideka	31955	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800303	LOK	lok_imperial_gas_mine	AREA	8	-89.10	-70.00	-101.70	0	1	an infuriated miner	32020	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800304	LOK	lok_imperial_gas_mine	AREA	8	-84.50	-70.20	-122.40	0	1	a droideka	31955	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800305	LOK	lok_imperial_gas_mine	AREA	8	-82.70	-70.40	-128.90	0	1	an enraged miner	31960	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800306	LOK	lok_imperial_gas_mine	AREA	8	-80.10	-70.60	-127.30	0	1	an infuriated miner	32020	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800307	LOK	lok_imperial_gas_mine	AREA	7	-8.20	-64.60	-235.50	0	1	an enraged miner	31960	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800308	LOK	lok_imperial_gas_mine	AREA	8	-79.70	-99.90	-142.30	0	1	an infuriated miner	32020	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800309	LOK	lok_imperial_gas_mine	AREA	8	-76.10	-99.20	-142.10	0	1	a maddened miner	32025	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800310	LOK	lok_imperial_gas_mine	AREA	8	-72.90	-69.90	-201.60	0	1	an infuriated miner	32020	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800311	LOK	lok_imperial_gas_mine	AREA	9	-71.00	-68.50	-104.50	0	1	an infuriated miner	32020	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800312	LOK	lok_imperial_gas_mine	AREA	8	-70.20	-70.80	-154.90	0	1	a droideka	31955	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800313	LOK	lok_imperial_gas_mine	AREA	2	-7.00	-30.40	-27.20	0	1	a maddened miner	32025	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800314	LOK	lok_imperial_gas_mine	AREA	8	-63.60	-69.50	-189.00	0	1	a maddened miner	32025	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800315	LOK	lok_imperial_gas_mine	AREA	8	-62.50	-69.60	-189.80	0	1	a droideka	31955	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800316	LOK	lok_imperial_gas_mine	AREA	8	-61.20	-69.90	-191.20	0	1	an enraged miner	31960	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800317	LOK	lok_imperial_gas_mine	AREA	9	-55.50	-68.50	-113.00	0	1	a droideka	31955	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800318	LOK	lok_imperial_gas_mine	AREA	10	-55.40	-90.90	-148.60	0	1	an enraged miner	31960	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800319	LOK	lok_imperial_gas_mine	AREA	9	-54.10	-68.60	-114.20	0	1	an infuriated miner	32020	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800320	LOK	lok_imperial_gas_mine	AREA	9	-51.10	-68.70	-114.70	0	1	an enraged miner	31960	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800321	LOK	lok_imperial_gas_mine	AREA	5	-5.20	-45.00	-134.70	0	1	Wes Riggers	22330	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800322	LOK	lok_imperial_gas_mine	AREA	10	-48.00	-86.60	-142.60	0	1	a maddened miner	32025	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800323	LOK	lok_imperial_gas_mine	AREA	6	-34.60	-66.50	-178.80	0	1	an enraged miner	31960	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800324	LOK	lok_imperial_gas_mine	AREA	10	-33.50	-80.30	-147.20	0	1	an infuriated miner	32020	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800325	LOK	lok_imperial_gas_mine	AREA	9	-25.50	-70.20	-112.50	0	1	an infuriated miner	32020	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800326	LOK	lok_imperial_gas_mine	AREA	9	-25.20	-69.30	-98.20	0	1	a maddened miner	32025	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800327	LOK	lok_imperial_gas_mine	AREA	10	-24.30	-79.90	-146.90	0	1	an infuriated miner	32020	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800328	LOK	lok_imperial_gas_mine	AREA	7	-22.10	-64.20	-254.20	0	1	an infuriated miner	32020	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800329	LOK	lok_imperial_gas_mine	AREA	9	-21.50	-68.90	-99.50	0	1	an enraged miner	31960	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800330	LOK	lok_imperial_gas_mine	AREA	7	-20.40	-63.10	-260.50	0	1	an enraged miner	31960	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800331	LOK	lok_imperial_gas_mine	AREA	7	-19.60	-65.60	-242.10	0	1	a droideka	31955	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800332	LOK	lok_imperial_gas_mine	AREA	7	-13.70	-62.90	-261.80	0	1	a maddened miner	32025	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800333	LOK	lok_imperial_gas_mine	AREA	2	-12.30	-38.10	-50.00	0	1	an enraged miner	31960	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800334	LOK	lok_imperial_gas_mine	AREA	8	-119.80	-69.70	-199.40	0	1	a droideka	31955	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800335	LOK	lok_imperial_gas_mine	AREA	6	-11.10	-64.00	-182.90	0	1	an infuriated miner	32020	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800336	LOK	lok_imperial_gas_mine	AREA	6	-11.00	-63.90	-185.40	0	1	an infuriated miner	32020	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800337	LOK	lok_imperial_gas_mine	AREA	8	-105.40	-70.90	-172.00	0	1	an infuriated miner	32020	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800338	LOK	lok_imperial_gas_mine	AREA	7	-1.90	-65.40	-210.20	0	1	a droideka	31955	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800339	LOK	lok_imperial_gas_mine	AREA	7	-1.90	-63.80	-233.10	0	1	a maddened miner	32025	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800340	LOK	lok_imperial_gas_mine	AREA	5	-0.40	-46.00	-149.80	0	1	a droideka	31955	dungeon	Imperial Gas Mine	1	none	0	300	120	0
+1800341	LOK	lok_prolog_bunker	AREA	6	4.70	-6.80	-15.90	0	1	a Dead Biologist	3425	dungeon	Prolog Bunker Dungeon	1	none	0	300	120	0
+1800342	LOK	lok_prolog_bunker	AREA	7	3.80	-6.80	-1.50	0	1	a Dead Biologist	3430	dungeon	Prolog Bunker Dungeon	1	none	0	300	120	0
+1800343	LOK	lok_prolog_bunker	AREA	9	3.20	-13.80	-12.50	0	1	a Dead Biologist	3405	dungeon	Prolog Bunker Dungeon	1	none	0	300	120	0
+1800344	LOK	lok_prolog_bunker	AREA	5	-4.50	-6.80	-7.50	0	1	a Dead Biologist	3415	dungeon	Prolog Bunker Dungeon	1	none	0	300	120	0
+1800345	LOK	lok_reb_base_hospital	AREA	7	7.60	-6.80	-2.70	0	1	a Rebel trooper	13485	dungeon	Rebel Field Hospital	1	none	0	300	120	0
+1800346	LOK	lok_reb_base_hospital	AREA	6	5.80	-6.80	-16.20	0	1	a Rebel trooper	13485	dungeon	Rebel Field Hospital	1	none	0	300	120	0
+1800347	LOK	lok_reb_base_hospital	AREA	7	2.00	-6.80	-3.80	0	1	a Rebel trooper	13485	dungeon	Rebel Field Hospital	1	none	0	300	120	0
+1800348	LOK	lok_reb_base_hospital	AREA	5	-7.30	-6.80	-7.20	0	1	a Rebel trooper	13485	dungeon	Rebel Field Hospital	1	none	0	300	120	0
+1800349	LOK	lok_reb_base_hospital	AREA	9	-5.90	-13.80	-4.50	0	1	a Rebel trooper	13485	dungeon	Rebel Field Hospital	1	none	0	300	120	0
+1800350	LOK	lok_reb_base_hospital	AREA	5	-3.20	-6.80	-5.30	0	1	a Rebel trooper	13485	dungeon	Rebel Field Hospital	1	none	0	300	120	0
+1800351	LOK	lok_reb_base_hospital	AREA	9	-0.80	-13.80	-9.90	0	1	Captain Jeza Goloc	13430	dungeon	Rebel Field Hospital	1	none	0	300	120	0
+1800352	LOK	lok_reb_base_hospital	AREA	6	-0.70	-6.80	-14.30	0	1	a Rebel trooper	13485	dungeon	Rebel Field Hospital	1	none	0	300	120	0
+1800353	LOK	lok_world	AREA	0	-6116.88	61.87	5948.04	0	1	a Rebel trooper	13485	dungeon	Rebel Field Hospital	1	none	0	300	120	2
+1800354	LOK	lok_world	AREA	0	-6094.00	59.55	5970.40	0	1	a Rebel trooper	13485	dungeon	Rebel Field Hospital	1	none	0	300	120	2
+1800355	LOK	lok_world	AREA	0	-6090.87	61.96	5937.50	0	1	a Rebel trooper	13485	dungeon	Rebel Field Hospital	1	none	0	300	120	0
+1800356	LOK	lok_world	AREA	0	-6086.50	62.13	5941.89	0	1	a Rebel trooper	13485	dungeon	Rebel Field Hospital	1	none	0	300	120	0
+1800357	LOK	lok_world	AREA	0	-6079.12	61.94	5921.17	0	1	a Rebel trooper	13485	dungeon	Rebel Field Hospital	1	none	0	300	120	2
+1800358	LOK	lok_world	AREA	0	-6074.71	62.13	5938.66	0	1	a Rebel trooper	13485	dungeon	Rebel Field Hospital	1	none	0	300	120	0
+1800359	LOK	lok_world	AREA	0	-6069.94	61.94	5965.03	0	1	a Rebel trooper	13485	dungeon	Rebel Field Hospital	1	none	0	300	120	2
+1800360	LOK	lok_world	AREA	0	-6048.62	60.41	5943.93	0	1	a Rebel trooper	13485	dungeon	Rebel Field Hospital	1	none	0	300	120	2
+1800361	LOK	lok_reb_base_outpost	AREA	3	0.20	0.10	-5.70	0	1	a Rebel trooper	13485	dungeon	Rebel Forward Outpost	1	none	0	300	120	0
+1800362	LOK	lok_ntp_mercenary_bunker	AREA	5	9.90	-12.00	60.40	0	1	a Droideka	22110	dungeon	Research Lab	1	none	0	300	120	0
+1800363	LOK	lok_ntp_mercenary_bunker	AREA	5	9.50	-12.00	47.00	0	1	a Scientist	22125	dungeon	Research Lab	1	none	0	300	120	0
+1800364	LOK	lok_ntp_mercenary_bunker	AREA	5	8.70	-12.00	67.80	0	1	a Scientist	22125	dungeon	Research Lab	1	none	0	300	120	0
+1800365	LOK	lok_ntp_mercenary_bunker	AREA	11	73.60	-12.00	78.60	0	1	Kendo Ryzak	22145	dungeon	Research Lab	1	none	0	300	120	0
+1800366	LOK	lok_ntp_mercenary_bunker	AREA	11	72.80	-12.00	79.80	0	1	Platt Pareja	22240	dungeon	Research Lab	1	none	0	300	120	0
+1800367	LOK	lok_ntp_mercenary_bunker	AREA	12	68.70	-12.00	59.00	0	1	a mercenary	31965	dungeon	Research Lab	1	none	0	300	120	0
+1800368	LOK	lok_ntp_mercenary_bunker	AREA	11	65.80	-12.00	87.90	0	1	a Droideka	22110	dungeon	Research Lab	1	none	0	300	120	0
+1800369	LOK	lok_ntp_mercenary_bunker	AREA	12	62.40	-12.00	65.10	0	1	a Droideka	22110	dungeon	Research Lab	1	none	0	300	120	0
+1800370	LOK	lok_ntp_mercenary_bunker	AREA	14	61.40	-12.00	18.40	0	1	a mercenary	31965	dungeon	Research Lab	1	none	0	300	120	0
+1800371	LOK	lok_ntp_mercenary_bunker	AREA	14	61.00	-12.00	0.10	0	1	a mercenary	31965	dungeon	Research Lab	1	none	0	300	120	0
+1800372	LOK	lok_ntp_mercenary_bunker	AREA	11	59.70	-12.00	78.60	0	1	a mercenary	31965	dungeon	Research Lab	1	none	0	300	120	0
+1800373	LOK	lok_ntp_mercenary_bunker	AREA	14	56.10	-12.00	13.80	0	1	a mercenary	31965	dungeon	Research Lab	1	none	0	300	120	0
+1800374	LOK	lok_ntp_mercenary_bunker	AREA	11	55.90	-12.00	86.30	0	1	a Scientist	22125	dungeon	Research Lab	1	none	0	300	120	0
+1800375	LOK	lok_ntp_mercenary_bunker	AREA	12	51.60	-12.00	59.10	0	1	a Droideka	22110	dungeon	Research Lab	1	none	0	300	120	0
+1800376	LOK	lok_ntp_mercenary_bunker	AREA	11	47.60	-12.00	88.00	0	1	a mercenary	31965	dungeon	Research Lab	1	none	0	300	120	0
+1800377	LOK	lok_ntp_mercenary_bunker	AREA	14	45.30	-12.00	5.20	0	1	a mercenary	31965	dungeon	Research Lab	1	none	0	300	120	0
+1800378	LOK	lok_ntp_mercenary_bunker	AREA	13	40.00	-20.00	118.40	0	1	a Droideka	22110	dungeon	Research Lab	1	none	0	300	120	0
+1800379	LOK	lok_ntp_mercenary_bunker	AREA	14	39.80	-12.00	15.80	0	1	a mercenary	31965	dungeon	Research Lab	1	none	0	300	120	0
+1800380	LOK	lok_ntp_mercenary_bunker	AREA	14	38.20	-12.00	-0.70	0	1	a Droideka	22110	dungeon	Research Lab	1	none	0	300	120	0
+1800381	LOK	lok_ntp_mercenary_bunker	AREA	13	36.70	-20.00	134.30	0	1	a Scientist	22125	dungeon	Research Lab	1	none	0	300	120	0
+1800382	LOK	lok_ntp_mercenary_bunker	AREA	14	36.20	-12.00	12.10	0	1	a mercenary	31965	dungeon	Research Lab	1	none	0	300	120	0
+1800383	LOK	lok_ntp_mercenary_bunker	AREA	13	32.10	-20.00	142.90	0	1	a mercenary	31965	dungeon	Research Lab	1	none	0	300	120	0
+1800384	LOK	lok_ntp_mercenary_bunker	AREA	14	32.00	-12.00	25.60	0	1	a Droideka	22110	dungeon	Research Lab	1	none	0	300	120	0
+1800385	LOK	lok_ntp_mercenary_bunker	AREA	5	3.80	-12.00	53.00	0	1	a Scientist	22125	dungeon	Research Lab	1	none	0	300	120	0
+1800386	LOK	lok_ntp_mercenary_bunker	AREA	3	3.70	0.30	-4.10	0	1	a mercenary	31965	dungeon	Research Lab	1	none	0	300	120	0
+1800387	LOK	lok_ntp_mercenary_bunker	AREA	5	3.60	-12.00	41.00	0	1	a Scientist	22125	dungeon	Research Lab	1	none	0	300	120	0
+1800388	LOK	lok_ntp_mercenary_bunker	AREA	4	3.40	-12.00	23.90	0	1	a mercenary	31965	dungeon	Research Lab	1	none	0	300	120	0
+1800389	LOK	lok_ntp_mercenary_bunker	AREA	5	3.00	-12.00	34.90	0	1	a mercenary	31965	dungeon	Research Lab	1	none	0	300	120	0
+1800390	LOK	lok_ntp_mercenary_bunker	AREA	13	26.40	-20.00	128.00	0	1	a mercenary	31965	dungeon	Research Lab	1	none	0	300	120	0
+1800391	LOK	lok_ntp_mercenary_bunker	AREA	5	25.40	-12.00	52.70	0	1	a Droideka	22110	dungeon	Research Lab	1	none	0	300	120	0
+1800392	LOK	lok_ntp_mercenary_bunker	AREA	14	25.40	-12.00	7.90	0	1	a mercenary	31965	dungeon	Research Lab	1	none	0	300	120	0
+1800393	LOK	lok_ntp_mercenary_bunker	AREA	14	23.00	-12.00	12.80	0	1	a mercenary	31965	dungeon	Research Lab	1	none	0	300	120	0
+1800394	LOK	lok_ntp_mercenary_bunker	AREA	13	21.50	-20.00	143.30	0	1	Goll Bardok	22115	dungeon	Research Lab	1	none	0	300	120	0
+1800395	LOK	lok_ntp_mercenary_bunker	AREA	13	17.70	-20.00	131.00	0	1	a Scientist	22125	dungeon	Research Lab	1	none	0	300	120	0
+1800396	LOK	lok_ntp_mercenary_bunker	AREA	13	17.10	-20.00	143.60	0	1	Jeran Tarven	22130	dungeon	Research Lab	1	none	0	300	120	0
+1800397	LOK	lok_ntp_mercenary_bunker	AREA	2	0.10	0.30	2.90	0	1	a Droideka	22110	dungeon	Research Lab	1	none	0	300	120	0
+1800398	LOK	lok_ntp_mercenary_bunker	AREA	7	-76.20	-20.00	46.40	0	1	a Droideka	22110	dungeon	Research Lab	1	none	0	300	120	0
+1800399	LOK	lok_ntp_mercenary_bunker	AREA	7	-70.70	-20.00	58.40	0	1	a mercenary	31965	dungeon	Research Lab	1	none	0	300	120	0
+1800400	LOK	lok_ntp_mercenary_bunker	AREA	7	-70.10	-20.00	49.70	0	1	a Droideka	22110	dungeon	Research Lab	1	none	0	300	120	0
+1800401	LOK	lok_ntp_mercenary_bunker	AREA	7	-66.20	-20.00	61.50	0	1	a mercenary	31965	dungeon	Research Lab	1	none	0	300	120	0
+1800402	LOK	lok_ntp_mercenary_bunker	AREA	7	-65.60	-20.00	34.70	0	1	a mercenary	31965	dungeon	Research Lab	1	none	0	300	120	0
+1800403	LOK	lok_ntp_mercenary_bunker	AREA	7	-58.80	-20.00	42.30	0	1	a mercenary	31965	dungeon	Research Lab	1	none	0	300	120	0
+1800404	LOK	lok_ntp_mercenary_bunker	AREA	7	-56.60	-20.00	59.70	0	1	a mercenary	31965	dungeon	Research Lab	1	none	0	300	120	0
+1800405	LOK	lok_ntp_mercenary_bunker	AREA	21	-5.10	-20.00	77.50	0	1	a mercenary	31965	dungeon	Research Lab	1	none	0	300	120	0
+1800406	LOK	lok_ntp_mercenary_bunker	AREA	7	-49.30	-20.00	67.60	0	1	a Droideka	22110	dungeon	Research Lab	1	none	0	300	120	0
+1800407	LOK	lok_ntp_mercenary_bunker	AREA	7	-49.20	-20.00	26.10	0	1	a Droideka	22110	dungeon	Research Lab	1	none	0	300	120	0
+1800408	LOK	lok_ntp_mercenary_bunker	AREA	19	-36.00	-20.00	96.00	0	1	a Droideka	22110	dungeon	Research Lab	1	none	0	300	120	0
+1800409	LOK	lok_ntp_mercenary_bunker	AREA	19	-32.30	-20.00	120.20	0	1	a Scientist	22125	dungeon	Research Lab	1	none	0	300	120	0
+1800410	LOK	lok_ntp_mercenary_bunker	AREA	19	-29.20	-20.00	107.90	0	1	a mercenary	31965	dungeon	Research Lab	1	none	0	300	120	0
+1800411	LOK	lok_ntp_mercenary_bunker	AREA	21	-2.60	-20.00	67.00	0	1	a mercenary	31965	dungeon	Research Lab	1	none	0	300	120	0
+1800412	LOK	lok_ntp_mercenary_bunker	AREA	5	-2.50	-12.00	47.00	0	1	a Scientist	22125	dungeon	Research Lab	1	none	0	300	120	0
+1800413	LOK	lok_ntp_mercenary_bunker	AREA	5	-2.20	-12.00	60.60	0	1	a Droideka	22110	dungeon	Research Lab	1	none	0	300	120	0
+1800414	LOK	lok_ntp_mercenary_bunker	AREA	19	-19.60	-20.00	95.30	0	1	a mercenary	31965	dungeon	Research Lab	1	none	0	300	120	0
+1800415	LOK	lok_ntp_mercenary_bunker	AREA	19	-17.80	-20.00	110.20	0	1	a Droideka	22110	dungeon	Research Lab	1	none	0	300	120	0
+1800416	LOK	lok_ntp_mercenary_bunker	AREA	16	-17.40	-20.00	3.20	0	1	a mercenary	31965	dungeon	Research Lab	1	none	0	300	120	0
+1800417	LOK	lok_ntp_mercenary_bunker	AREA	5	-12.50	-12.00	53.10	0	1	a Droideka	22110	dungeon	Research Lab	1	none	0	300	120	0
+1800418	LOK	lok_ntp_mercenary_bunker	AREA	5	-12.50	-12.00	40.90	0	1	a Droideka	22110	dungeon	Research Lab	1	none	0	300	120	0
+1800419	LOK	lok_ntp_mercenary_bunker	AREA	16	-11.10	-20.00	7.10	0	1	a mercenary	31965	dungeon	Research Lab	1	none	0	300	120	0
+1800420	LOK	lok_ntp_mercenary_bunker	AREA	5	-1.50	-12.00	68.00	0	1	a Scientist	22125	dungeon	Research Lab	1	none	0	300	120	0
+1800421	LOK	lok_nym_slicer_institute	AREA	8	-90.40	-72.90	-171.10	0	1	Wes Riggers	22330	dungeon	Slicer Institute	1	none	0	300	120	0
+1800422	LOK	lok_nym_slicer_institute	AREA	5	-9.10	-44.80	-138.20	0	1	Raynar Cath	22255	dungeon	Slicer Institute	1	none	0	300	120	0
+1800423	LOK	lok_nym_slicer_institute	AREA	12	9.90	-9.50	-0.40	0	1	a Slicer sentry	26570	dungeon	Slicer Institute	1	none	0	300	120	0
+1800424	LOK	lok_nym_slicer_institute	AREA	2	9.40	0.40	-6.40	0	1	a Slicer sentry	26570	dungeon	Slicer Institute	1	none	0	300	120	0
+1800425	LOK	lok_nym_slicer_institute	AREA	8	9.00	-4.00	-6.20	0	1	a Slicer Quality Assurance Staff Member	26565	dungeon	Slicer Institute	1	none	0	300	120	0
+1800426	LOK	lok_nym_slicer_institute	AREA	7	6.60	-3.40	7.20	0	1	Skaelor Tay	26575	dungeon	Slicer Institute	1	none	0	300	120	0
+1800427	LOK	lok_nym_slicer_institute	AREA	12	4.10	-9.50	-8.80	0	1	a Slicer sentry	26570	dungeon	Slicer Institute	1	none	0	300	120	0
+1800428	LOK	lok_nym_slicer_institute	AREA	11	0.50	-9.50	7.30	0	1	Byd Chillings	26545	dungeon	Slicer Institute	1	none	0	300	120	0
+1800429	LOK	lok_nym_slicer_institute	AREA	2	-8.70	0.40	-0.50	0	1	a Slicer student	26580	dungeon	Slicer Institute	1	none	0	300	120	0
+1800430	LOK	lok_nym_slicer_institute	AREA	7	-8.60	-4.00	2.00	0	1	a Slicer Quality Assurance Staff Member	26565	dungeon	Slicer Institute	1	none	0	300	120	0
+1800431	LOK	lok_nym_slicer_institute	AREA	10	-8.20	-10.00	-7.80	0	1	a Slicer student	26580	dungeon	Slicer Institute	1	none	0	300	120	0
+1800432	LOK	lok_nym_slicer_institute	AREA	3	-5.60	1.00	8.20	0	1	Kelson Sharphorn	26555	dungeon	Slicer Institute	1	none	0	300	120	0
+1800433	LOK	lok_nym_slicer_institute	AREA	7	-3.00	-4.00	8.50	0	1	a Slicer Quality Assurance Staff Member	26565	dungeon	Slicer Institute	1	none	0	300	120	0
+1800434	LOK	lok_nym_slicer_institute	AREA	6	-2.20	-4.00	-9.00	0	1	a Slicer student	26580	dungeon	Slicer Institute	1	none	0	300	120	0
+1800435	LOK	lok_nym_slicer_institute	AREA	2	-1.40	0.40	-7.30	0	1	a Slicer student	26580	dungeon	Slicer Institute	1	none	0	300	120	0
+1800436	LOK	lok_world	AREA	0	-4501.60	39.30	-5801.40	0	1	a langlatch giant	14630	outback	Broken Wall Hill	4	none	0	900	600	15
+1800437	LOK	lok_world	AREA	0	5101.70	12.10	-4139.90	0	1	a kimogila dwarf	14220	outback	Broken Walls	3	none	0	900	600	30
+1800438	LOK	lok_world	AREA	0	-2129.00	104.00	5939.00	0	1	a langlatch giant	14630	outback	Mysterious Shrine	4	none	0	900	600	15
+1800439	LOK	lok_world	AREA	0	-6014.70	56.30	6430.50	0	1	an aged kimogila	14215	outback	Pit with Stone Claws	3	none	0	900	600	30
+1800440	LOK	lok_world	AREA	0	-122.90	60.30	-358.00	0	1	an aged kimogila	14215	outback	Wall Array Hill	3	none	0	900	600	30
+1800441	LOK	lok_world	AREA	0	6410.70	42.00	5020.00	0	1	a kimogila dwarf	14220	outback	Water Feature	4	none	0	900	600	40
+1800442	LOK	lok_evil_droid_eng_cave	AREA	19	4.50	-20.00	-16.30	0	1	a Sulfur Lake pirate	31980	poi	Droid Engineers Cave	1	none	0	300	120	0
+1800443	LOK	lok_evil_droid_eng_cave	AREA	26	4.10	-71.70	-110.80	0	1	a Sulfur Lake pirate	31980	poi	Droid Engineers Cave	1	none	0	300	120	0
+1800444	LOK	lok_evil_droid_eng_cave	AREA	20	3.10	-67.40	-69.80	0	1	a Sulfur Lake pirate	31980	poi	Droid Engineers Cave	1	none	0	300	120	0
+1800445	LOK	lok_evil_droid_eng_cave	AREA	20	20.00	-35.20	-72.30	0	1	a Sulfur Lake cutthroat	31975	poi	Droid Engineers Cave	1	none	0	300	120	0
+1800446	LOK	lok_evil_droid_eng_cave	AREA	19	18.80	-27.30	-38.10	0	1	a Sulfur Lake pirate	31980	poi	Droid Engineers Cave	1	none	0	300	120	0
+1800447	LOK	lok_evil_droid_eng_cave	AREA	20	17.00	-35.30	-76.60	0	1	a Sulfur Lake pirate	31980	poi	Droid Engineers Cave	1	none	0	300	120	0
+1800448	LOK	lok_evil_droid_eng_cave	AREA	6	-98.10	-51.10	-65.10	0	1	a Sulfur Lake pirate	31980	poi	Droid Engineers Cave	1	none	0	300	120	0
+1800449	LOK	lok_evil_droid_eng_cave	AREA	11	-96.80	-39.20	-87.40	0	1	a Sulfur Lake armsman	31970	poi	Droid Engineers Cave	1	none	0	300	120	0
+1800450	LOK	lok_evil_droid_eng_cave	AREA	9	-92.90	-71.10	-113.60	0	1	a Sulfur Lake pirate	31980	poi	Droid Engineers Cave	1	none	0	300	120	0
+1800451	LOK	lok_evil_droid_eng_cave	AREA	9	-85.50	-53.40	-113.90	0	1	a Sulfur Lake cutthroat	31975	poi	Droid Engineers Cave	1	none	0	300	120	0
+1800452	LOK	lok_evil_droid_eng_cave	AREA	14	-80.90	-57.90	-41.90	0	1	a Sulfur Lake pirate	31980	poi	Droid Engineers Cave	1	none	0	300	120	0
+1800453	LOK	lok_evil_droid_eng_cave	AREA	14	-79.40	-57.60	-81.10	0	1	a Sulfur Lake pirate	31980	poi	Droid Engineers Cave	1	none	0	300	120	0
+1800454	LOK	lok_evil_droid_eng_cave	AREA	5	-79.20	-46.80	-42.10	0	1	a Sulfur Lake pirate	31980	poi	Droid Engineers Cave	1	none	0	300	120	0
+1800455	LOK	lok_evil_droid_eng_cave	AREA	5	-76.80	-47.10	-63.80	0	1	a Sulfur Lake armsman	31970	poi	Droid Engineers Cave	1	none	0	300	120	0
+1800456	LOK	lok_evil_droid_eng_cave	AREA	5	-76.00	-30.00	-40.40	0	1	a Sulfur Lake pirate	31980	poi	Droid Engineers Cave	1	none	0	300	120	0
+1800457	LOK	lok_evil_droid_eng_cave	AREA	9	-72.50	-38.00	-118.60	0	1	a Sulfur Lake cutthroat	31975	poi	Droid Engineers Cave	1	none	0	300	120	0
+1800458	LOK	lok_evil_droid_eng_cave	AREA	9	-71.10	-70.30	-119.40	0	1	Lok Revenant Prisoner	22235	poi	Droid Engineers Cave	1	none	0	300	120	0
+1800459	LOK	lok_evil_droid_eng_cave	AREA	5	-64.30	-46.60	-47.20	0	1	a Sulfur Lake cutthroat	31975	poi	Droid Engineers Cave	1	none	0	300	120	0
+1800460	LOK	lok_evil_droid_eng_cave	AREA	5	-63.90	-30.50	-72.00	0	1	a Sulfur Lake pirate	31980	poi	Droid Engineers Cave	1	none	0	300	120	0
+1800461	LOK	lok_evil_droid_eng_cave	AREA	4	-63.30	-44.60	-22.00	0	1	a Sulfur Lake pirate	31980	poi	Droid Engineers Cave	1	none	0	300	120	0
+1800462	LOK	lok_evil_droid_eng_cave	AREA	25	-50.20	-69.50	-124.40	0	1	a Sulfur Lake pirate	31980	poi	Droid Engineers Cave	1	none	0	300	120	0
+1800463	LOK	lok_evil_droid_eng_cave	AREA	3	-43.50	-29.80	-42.40	0	1	a Sulfur Lake pirate	31980	poi	Droid Engineers Cave	1	none	0	300	120	0
+1800464	LOK	lok_evil_droid_eng_cave	AREA	22	-39.00	-45.00	-107.30	0	1	a Sulfur Lake pirate	31980	poi	Droid Engineers Cave	1	none	0	300	120	0
+1800465	LOK	lok_evil_droid_eng_cave	AREA	2	-38.00	-31.60	-25.80	0	1	a Sulfur Lake armsman	31970	poi	Droid Engineers Cave	1	none	0	300	120	0
+1800466	LOK	lok_evil_droid_eng_cave	AREA	21	-27.50	-40.10	-83.10	0	1	a Sulfur Lake armsman	31970	poi	Droid Engineers Cave	1	none	0	300	120	0
+1800467	LOK	lok_evil_droid_eng_cave	AREA	2	-25.00	-30.50	-19.70	0	1	a Sulfur Lake armsman	31970	poi	Droid Engineers Cave	1	none	0	300	120	0
+1800468	LOK	lok_evil_droid_eng_cave	AREA	20	-21.00	-35.10	-69.70	0	1	a Sulfur Lake armsman	31970	poi	Droid Engineers Cave	1	none	0	300	120	0
+1800469	LOK	lok_evil_droid_eng_cave	AREA	12	-177.50	-53.80	-122.60	0	1	a Sulfur Lake pirate	31980	poi	Droid Engineers Cave	1	none	0	300	120	0
+1800470	LOK	lok_evil_droid_eng_cave	AREA	8	-168.00	-49.60	-39.50	0	1	a Sulfur Lake armsman	31970	poi	Droid Engineers Cave	1	none	0	300	120	0
+1800471	LOK	lok_evil_droid_eng_cave	AREA	10	-167.20	-49.70	-68.10	0	1	a Sulfur Lake armsman	31970	poi	Droid Engineers Cave	1	none	0	300	120	0
+1800472	LOK	lok_evil_droid_eng_cave	AREA	10	-164.00	-49.40	-86.70	0	1	a Sulfur Lake pirate	31980	poi	Droid Engineers Cave	1	none	0	300	120	0
+1800473	LOK	lok_evil_droid_eng_cave	AREA	22	-16.80	-44.20	-101.30	0	1	a Sulfur Lake pirate	31980	poi	Droid Engineers Cave	1	none	0	300	120	0
+1800474	LOK	lok_evil_droid_eng_cave	AREA	6	-144.80	-49.60	-65.70	0	1	a Sulfur Lake armsman	31970	poi	Droid Engineers Cave	1	none	0	300	120	0
+1800475	LOK	lok_evil_droid_eng_cave	AREA	8	-140.00	-49.80	-46.80	0	1	a Sulfur Lake pirate	31980	poi	Droid Engineers Cave	1	none	0	300	120	0
+1800476	LOK	lok_evil_droid_eng_cave	AREA	11	-139.70	-53.90	-80.10	0	1	a Sulfur Lake armsman	31970	poi	Droid Engineers Cave	1	none	0	300	120	0
+1800477	LOK	lok_evil_droid_eng_cave	AREA	18	-135.20	-57.40	-26.40	0	1	a Sulfur Lake pirate	31980	poi	Droid Engineers Cave	1	none	0	300	120	0
+1800478	LOK	lok_evil_droid_eng_cave	AREA	26	-13.60	-67.90	-107.50	0	1	a Sulfur Lake armsman	31970	poi	Droid Engineers Cave	1	none	0	300	120	0
+1800479	LOK	lok_evil_droid_eng_cave	AREA	24	-128.80	-60.20	-138.30	0	1	a Sulfur Lake armsman	31970	poi	Droid Engineers Cave	1	none	0	300	120	0
+1800480	LOK	lok_evil_droid_eng_cave	AREA	2	-12.00	-30.30	-49.00	0	1	a Sulfur Lake armsman	31970	poi	Droid Engineers Cave	1	none	0	300	120	0
+1800481	LOK	lok_evil_droid_eng_cave	AREA	23	-116.70	-53.80	-112.60	0	1	a Sulfur Lake pirate	31980	poi	Droid Engineers Cave	1	none	0	300	120	0
+1800482	LOK	lok_evil_droid_eng_cave	AREA	6	-116.20	-49.40	-58.80	0	1	a Sulfur Lake pirate	31980	poi	Droid Engineers Cave	1	none	0	300	120	0
+1800483	LOK	lok_evil_droid_eng_cave	AREA	16	-113.90	-57.90	-25.80	0	1	a Sulfur Lake pirate	31980	poi	Droid Engineers Cave	1	none	0	300	120	0
+1800484	LOK	lok_evil_droid_eng_cave	AREA	9	-110.80	-69.60	-108.00	0	1	a Sulfur Lake pirate	31980	poi	Droid Engineers Cave	1	none	0	300	120	0
+1800485	LOK	lok_evil_droid_eng_cave	AREA	20	-11.20	-34.90	-66.20	0	1	a Sulfur Lake armsman	31970	poi	Droid Engineers Cave	1	none	0	300	120	0
+1800486	LOK	lok_evil_droid_eng_cave	AREA	15	-104.50	-39.60	-44.90	0	1	Bridge Troll	22060	poi	Droid Engineers Cave	1	none	0	300	120	0
+1800487	LOK	lok_evil_droid_eng_cave	AREA	6	-103.60	-36.20	-64.30	0	1	a Sulfur Lake armsman	31970	poi	Droid Engineers Cave	1	none	0	300	120	0
+1800488	LOK	lok_evil_droid_eng_cave	AREA	16	-103.40	-42.10	-32.10	0	1	a Sulfur Lake cutthroat	31975	poi	Droid Engineers Cave	1	none	0	300	120	0
+1800489	LOK	lok_evil_droid_eng_cave	AREA	22	-10.20	-43.80	-97.50	0	1	a Sulfur Lake pirate	31980	poi	Droid Engineers Cave	1	none	0	300	120	0
+1800490	LOK	lok_world	AREA	0	4568.00	13.09	-1168.00	0	1	Oono Mor'in	23980	poi	Great Kimogila's Skeleton	1	none	0	300	120	2
+1800491	LOK	lok_world	AREA	0	1.16	11.95	2711.75	-26	1	a giant dune Kimogila	10460	poi	Kimogila Town	1	none	0	300	120	0
+1800492	LOK	lok_world	EGG	0	-83.47	12.00	2719.78	87	1	Cale Serasai	22055	poi	Kimogila Town	1	none	0	300	120	0
+1800493	LOK	lok_world	AREA	0	-144.42	11.98	2753.73	118	1	a kimogila hatchling	14225	poi	Kimogila Town	1	none	0	300	120	0
+1800494	LOK	lok_world	AREA	0	-136.70	11.97	2764.55	126	1	a kimogila hatchling	14225	poi	Kimogila Town	1	none	0	300	120	0
+1800495	LOK	lok_world	AREA	0	-136.38	12.00	2658.42	79	1	a kimogila hatchling	14225	poi	Kimogila Town	1	none	0	300	120	0
+1800496	LOK	lok_world	AREA	0	-130.61	12.07	2647.27	58	1	a kimogila hatchling	14225	poi	Kimogila Town	1	none	0	300	120	0
+1800497	LOK	lok_world	AREA	0	-129.54	12.02	2774.12	126	1	a kimogila hatchling	14225	poi	Kimogila Town	1	none	0	300	120	0
+1800498	LOK	lok_world	AREA	0	-126.66	12.10	2641.21	49	1	a kimogila hatchling	14225	poi	Kimogila Town	1	none	0	300	120	0
+1800499	LOK	lok_world	AREA	0	-113.27	12.00	2713.99	26	1	Vekis Kiyanu (a bounty hunter)	25510	poi	Kimogila Town	1	none	0	300	120	0
+1800500	LOK	lok_world	AREA	0	-87.19	12.00	2724.93	0	1	a commoner	34180	poi	Kimogila Town	2	none	0	300	120	4
+1800501	LOK	lok_world	AREA	0	-86.32	12.00	2685.97	0	1	a commoner	34180	poi	Kimogila Town	5	none	0	300	120	10
+1800502	LOK	lok_world	AREA	0	-83.48	12.00	2702.80	0	1	a commoner	34180	poi	Kimogila Town	2	none	0	300	120	4
+1800503	LOK	lok_world	AREA	0	-66.62	12.00	2691.91	0	1	a commoner	34180	poi	Kimogila Town	3	none	0	300	120	6
+1800504	LOK	lok_world	AREA	0	-52.95	12.00	2720.46	0	1	a commoner	34180	poi	Kimogila Town	3	none	0	300	120	6
+1800505	LOK	lok_world	AREA	0	-43.94	12.00	2725.31	0	1	a commoner	34180	poi	Kimogila Town	2	none	0	300	120	4
+1800506	LOK	lok_world	AREA	0	-10.77	12.02	2712.69	-26	1	Cas Vankoo	2445	poi	Kimogila Town	1	none	0	300	120	0

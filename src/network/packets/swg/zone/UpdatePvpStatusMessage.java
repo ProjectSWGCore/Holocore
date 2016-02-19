@@ -32,51 +32,56 @@ import network.packets.swg.SWGPacket;
 import java.nio.ByteBuffer;
 import java.util.EnumSet;
 
+import resources.PvpFaction;
 import resources.PvpFlag;
 
 public class UpdatePvpStatusMessage extends SWGPacket {
 	public static final int CRC = getCrc("UpdatePvpStatusMessage");
 
-	private PvpFlag flag = PvpFlag.PLAYER;
-	private int playerFaction = 0;
-	private long objId = 0;
+	private PvpFlag[] pvpFlags;
+	private PvpFaction pvpFaction;
+	private long objId;
 	
 	public UpdatePvpStatusMessage() {
-		
+		pvpFlags = new PvpFlag[]{PvpFlag.PLAYER};
+		pvpFaction = PvpFaction.NEUTRAL;
+		objId = 0;
 	}
 	
-	public UpdatePvpStatusMessage(PvpFlag playerType, int flag, long objId) {
-		this.flag = playerType;
-		this.playerFaction = flag;
+	public UpdatePvpStatusMessage(PvpFaction pvpFaction, long objId, PvpFlag... pvpFlags) {
+		this.pvpFlags = pvpFlags;
+		this.pvpFaction = pvpFaction;
 		this.objId = objId;
 	}
 	
 	public void decode(ByteBuffer data) {
 		if (!super.decode(data, CRC))
 			return;
-		EnumSet<PvpFlag> flags = PvpFlag.getFlags(getInt(data));
-		if (!flags.isEmpty())
-			flag = flags.iterator().next();
-		else
-			flag = PvpFlag.PLAYER;
+		EnumSet<PvpFlag> enumFlags = PvpFlag.getFlags(getInt(data));
 		
-		playerFaction = getInt(data);
+		pvpFlags = enumFlags.toArray(new PvpFlag[enumFlags.size()]);
+		pvpFaction = PvpFaction.getFactionForCrc(getInt(data));
 		objId = getLong(data);
 	}
 	
 	public ByteBuffer encode() {
 		int length = 22;
+		int flagBitmask = 0;
 		ByteBuffer data = ByteBuffer.allocate(length);
+		
+		for(PvpFlag pvpFlag : pvpFlags)
+			flagBitmask |= pvpFlag.getBitmask();
+		
 		addShort(data, 4);
 		addInt(  data, CRC);
-		addInt(  data, flag.getBitmask());
-		addInt(  data, playerFaction);
+		addInt(  data, flagBitmask);
+		addInt(  data, pvpFaction.getCrc());
 		addLong( data, objId);
 		return data;
 	}
 	
 	public long getObjectId() { return objId; }
-	public int getPlayerFaction() { return playerFaction; }
-	public PvpFlag getPlayerType() { return flag; }
+	public PvpFaction getPlayerFaction() { return pvpFaction; }
+	public PvpFlag[] getPvpFlags() { return pvpFlags; }
 	
 }

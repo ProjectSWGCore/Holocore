@@ -130,7 +130,8 @@ public class TravelService extends Service {
 	
 	@Override
 	public boolean stop() {
-		executor.shutdownNow();
+		if (executor != null)
+			executor.shutdownNow();
 		
 		return super.stop();
 	}
@@ -238,7 +239,7 @@ public class TravelService extends Service {
 		double z = set.getDouble("z");
 		String type = set.getString("type");
 		
-		TravelPoint point = new TravelPoint(pointName, new Location(x, y, z, travelPlanet), type.equals("starport"), true);
+		TravelPoint point = new TravelPoint(pointName, new Location(x, y, z, travelPlanet), type.endsWith("starport"), true);
 		switch (type) {
 			case "shuttleport":
 				travel.get("object/creature/npc/theme_park/shared_player_shuttle.iff").addTravelPoint(point);

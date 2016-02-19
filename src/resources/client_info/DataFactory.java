@@ -35,16 +35,21 @@ import java.io.IOException;
  */
 public abstract class DataFactory {
 
-	protected ClientData readFile(String file) {
-		if (file == null || file.isEmpty()) {
+	protected ClientData readFile(String filename) {
+		if (filename == null || filename.isEmpty()) {
 			System.err.println("File cannot be null or empty!");
+			return null;
+		}
+		File file = new File(getFolder() + filename);
+		if (!file.isFile()) {
+			System.err.println("Not a file: " + file);
 			return null;
 		}
 
 		SWGFile swgFile = new SWGFile();
 
 		try {
-			swgFile.read(new File(getFolder() + file));
+			swgFile.read(file);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
