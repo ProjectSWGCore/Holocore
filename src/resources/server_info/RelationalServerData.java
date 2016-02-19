@@ -28,6 +28,7 @@
 package resources.server_info;
 
 import java.io.BufferedReader;
+import java.io.Closeable;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -68,14 +69,33 @@ public class RelationalServerData extends RelationalDatabase {
 		File sdb = new File(filepath);
 		if (!sdb.isFile())
 			return false;
-		long sdbModified = sdb.lastModified();
-		long imported = getLastImported(table);
-		if (sdbModified > imported) {
+		if (testLastModified(table, sdb) || testMasterSdbModified(table, sdb)) {
 			updateQuery("DROP TABLE IF EXISTS " + table);
 			importFromSdb(table, sdb);
 			updateLastImported(table, System.currentTimeMillis());
 		}
 		return true;
+	}
+	
+	private boolean testLastModified(String table, File sdb) {
+		return sdb.lastModified() > getLastImported(table);
+	}
+	
+	private boolean testMasterSdbModified(String table, File sdb) {
+		if (!sdb.getName().endsWith(".msdb"))
+			return false;
+		try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(sdb), ASCII))) {
+			reader.readLine();
+			reader.readLine();
+			String line;
+			while ((line = reader.readLine()) != null) {
+				if (testLastModified(table, new File(sdb.getParent(), line.substring(0, line.indexOf('\t')))))
+					return true;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
 	/**
@@ -229,9 +249,12 @@ public class RelationalServerData extends RelationalDatabase {
 	}
 	
 	private boolean importFromSdb(String table, File sdb) {
-		try {
-			processSdb(table, sdb);
-			System.out.println("Imported from sdb: " + sdb);
+		try (TableReader reader = new TableReader(table, sdb)) {
+			System.out.println("Importing sdb... '" + sdb + "'");
+			if (sdb.getName().endsWith(".msdb"))
+				reader.readMaster();
+			else
+				reader.readNormal();
 			return true;
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -243,79 +266,159 @@ public class RelationalServerData extends RelationalDatabase {
 		return false;
 	}
 	
-	private void processSdb(String table, File file) throws IOException, SQLException {
-		BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), ASCII));
-		String line = null;
-		String [] columnNames = null;
-		String [] columnTypes = null;
-		PreparedStatement insert = null;
-		try {
-			int lineNum = 1;
+	private class TableReader implements Closeable {
+		
+		private final String table;
+		private final File file;
+		private String [] columnNames;
+		private String [] columnTypes;
+		private PreparedStatement insert;
+		
+		public TableReader(String table, File file) {
+			this.table = table;
+			this.file = file;
+			this.columnNames = null;
+			this.columnTypes = null;
+			this.insert = null;
+		}
+		
+		@Override
+		public void close() {
+			if (insert != null) {
+				try {
+					insert.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		public void readNormal() throws IOException, SQLException {
+			try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), ASCII))) {
+				readNormalRemainder(reader, 1);
+			}
+		}
+		
+		public void readMaster() throws SQLException, IOException {
+			try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), ASCII))) {
+				int lineNum = 1;
+				readLine(reader.readLine(), lineNum++);
+				readLine(reader.readLine(), lineNum++);
+				readMasterRemainder(reader, lineNum);
+			}
+		}
+		
+		private void readSlave() throws IOException, SQLException {
+			try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), ASCII))) {
+				int lineNum = 3;
+				reader.readLine();
+				reader.readLine(); // Skip column names and types
+				readNormalRemainder(reader, lineNum);
+			}
+		}
+		
+		private void readMasterRemainder(BufferedReader reader, int lineNum) throws IOException, SQLException {
+			String line;
 			while ((line = reader.readLine()) != null) {
-				String [] parts = line.split("\t", -1);
-				if (columnNames == null)
-					columnNames = parts;
-				else if (columnTypes == null) {
-					columnTypes = parts;
-					createTable(table, columnNames, columnTypes);
-					insert = prepareStatement(createPreparedStatement(table, columnNames.length));
-				} else
-					generateInsert(insert, columnTypes, parts, lineNum);
-				lineNum++;
+				String [] parts = line.split("\t");
+				if (parts.length != 2) {
+					System.err.println("RelationalServerData: Invalid line ["+lineNum+"]: " + line);
+					continue;
+				}
+				boolean load = Boolean.parseBoolean(parts[1]);
+				if (load) {
+					File sdb = new File(file.getParent(), parts[0]);
+					System.out.println("  Importing sdb... '" + sdb + "'");
+					if (!sdb.isFile()) {
+						System.err.println("    Failed to import sdb! File is not file or does not exist");
+						continue;
+					}
+					@SuppressWarnings("resource") // This closes the database.. we don't want to do that yet
+					TableReader slave = new TableReader(table, sdb);
+					slave.columnNames = columnNames;
+					slave.columnTypes = columnTypes;
+					slave.insert = insert;
+					slave.readSlave();
+				}
+			}
+		}
+		
+		private void readNormalRemainder(BufferedReader reader, int lineNum) throws IOException, SQLException {
+			String line;
+			while ((line = reader.readLine()) != null) {
+				readLine(line, lineNum++);
 			}
 			if (insert != null)
 				insert.executeBatch();
-		} finally {
-			reader.close();
 		}
-	}
-	
-	private void createTable(String table, String [] names, String [] types) {
-		if (names.length != types.length)
-			throw new IllegalArgumentException("Names length and types length mismatch");
-		StringBuilder sql = new StringBuilder("CREATE TABLE "+table+" (");
-		for (int i = 0; i < names.length; i++) {
-			if (i > 0)
-				sql.append(", ");
-			sql.append(names[i]);
-			sql.append(' ');
-			sql.append(types[i]);
-		}
-		sql.append(')');
-		updateQuery(sql.toString());
-	}
-	
-	private String createPreparedStatement(String table, int valueSize) {
-		StringBuilder sql = new StringBuilder("INSERT INTO " + table + " VALUES (");
-		for (int i = 0; i < valueSize; i++) {
-			if (i > 0)
-				sql.append(", ");
-			sql.append('?');
-		}
-		sql.append(')');
-		return sql.toString();
-	}
-	
-	private void generateInsert(PreparedStatement insert, String [] types, String [] data, int line) throws SQLException {
-		if (types.length != data.length) {
-			System.err.println("Could not load record: Types length and data length mismatch. Line: " + line);
-			return;
-		}
-		try {
-			for (int i = 0; i < data.length; i++) {
-				if (types[i].startsWith("TEXT"))
-					insert.setString(i+1, data[i]);
-				else if (types[i].startsWith("REAL"))
-					insert.setDouble(i+1, Double.parseDouble(data[i]));
-				else if (types[i].startsWith("INTEGER"))
-					insert.setLong(i+1, Long.parseLong(data[i]));
-				else
-					throw new SQLException("Data type unsupported by sdb/sqlite! Type: " + types[i]);
+		
+		private void readLine(String line, int lineNum) throws SQLException {
+			if (line == null)
+				return;
+			switch (lineNum) {
+				case 1:
+					columnNames = line.split("\t");
+					break;
+				case 2:
+					columnTypes = line.split("\t");
+					createTable();
+					createPreparedStatement();
+					break;
+				default:
+					generateInsert(line.split("\t"), lineNum);
+					break;
 			}
-			insert.addBatch();
-		} catch (NumberFormatException e) {
-			System.err.println("Could not load record: Record has invalid data. Line: " + line);
 		}
+		
+		private void createTable() {
+			if (columnNames.length != columnTypes.length)
+				throw new IllegalArgumentException("Names length and types length mismatch");
+			StringBuilder sql = new StringBuilder("CREATE TABLE "+table+" (");
+			for (int i = 0; i < columnNames.length; i++) {
+				if (i > 0)
+					sql.append(", ");
+				sql.append(columnNames[i]);
+				sql.append(' ');
+				sql.append(columnTypes[i]);
+			}
+			sql.append(')');
+			updateQuery(sql.toString());
+		}
+		
+		private void createPreparedStatement() {
+			StringBuilder sql = new StringBuilder("INSERT INTO " + table + " VALUES (");
+			for (int i = 0; i < columnNames.length; i++) {
+				if (i > 0)
+					sql.append(", ");
+				sql.append('?');
+			}
+			sql.append(')');
+			insert = prepareStatement(sql.toString());
+		}
+		
+		private void generateInsert(String [] data, int line) throws SQLException {
+			if (columnTypes.length != data.length) {
+				System.err.println("Could not load record: Types length and data length mismatch. Line: " + line);
+				return;
+			}
+			int column = 0;
+			try {
+				for (int i = 0; i < data.length; i++, column++) {
+					if (columnTypes[i].startsWith("TEXT"))
+						insert.setString(i+1, data[i]);
+					else if (columnTypes[i].startsWith("REAL"))
+						insert.setDouble(i+1, Double.parseDouble(data[i]));
+					else if (columnTypes[i].startsWith("INTEGER"))
+						insert.setLong(i+1, Long.parseLong(data[i]));
+					else
+						throw new SQLException("Data type unsupported by sdb/sqlite! Type: " + columnTypes[i]);
+				}
+				insert.addBatch();
+			} catch (NumberFormatException e) {
+				System.err.println("Could not load record: Record has invalid data. Line: " + line + "  Column: " + column);
+			}
+		}
+		
 	}
 	
 }

@@ -36,6 +36,8 @@ import resources.player.PlayerState;
 import utilities.Encoder;
 import utilities.Encoder.StringType;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -53,8 +55,6 @@ import java.util.List;
 public class SWGList<E> extends AbstractList<E> implements Encodable, Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private BaselineType baseline;
-	
 	private int view;
 	private int updateType;	
 	private transient int updateCount;
@@ -76,8 +76,7 @@ public class SWGList<E> extends AbstractList<E> implements Encodable, Serializab
 	 * @param view The baseline number this list resides in
 	 * @param updateType The update variable used for sending a delta, it's the operand count that this list resides at within the baseline
 	 */
-	public SWGList(BaselineType baseline, int view, int updateType) {
-		this.baseline = baseline;
+	public SWGList(int view, int updateType) {
 		this.view = view;
 		this.updateType = updateType;
 	}
@@ -88,9 +87,14 @@ public class SWGList<E> extends AbstractList<E> implements Encodable, Serializab
 	 * @param view The baseline number this list resides in
 	 * @param strType The {@link StringType} of the string, required only if the element in the list is a String as it's used for encoding either Unicode or ASCII characters
 	 */
-	public SWGList(BaselineType baseline, int view, int updateType, StringType strType) {
-		this (baseline, view, updateType);
+	public SWGList(int view, int updateType, StringType strType) {
+		this (view, updateType);
 		this.strType = strType;
+	}
+
+	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
+		ois.defaultReadObject();
+		updateCount = 0;
 	}
 
 	/**
@@ -260,8 +264,7 @@ public class SWGList<E> extends AbstractList<E> implements Encodable, Serializab
 			return;
 		}
 		
-		DeltaBuilder builder = new DeltaBuilder(target, baseline, view, updateType, getDeltaData());
-		builder.send();
+		target.sendDelta(view, updateType, getDeltaData());
 		// Clear the queue since the delta has been sent to observers through the builder
 		clearDeltaQueue();
 	}
@@ -279,8 +282,7 @@ public class SWGList<E> extends AbstractList<E> implements Encodable, Serializab
 			bb.put(bytes);
 		}
 
-		DeltaBuilder builder = new DeltaBuilder(target, baseline, view, updateType, bb.array());
-		builder.send();
+		target.sendDelta(view, updateType, bb.array());
 	}
 
 	public void clearDeltaQueue() {
@@ -360,10 +362,8 @@ public class SWGList<E> extends AbstractList<E> implements Encodable, Serializab
 		}
 	}
 
-	public BaselineType getBaseline() { return baseline; }
-
 	@Override
 	public String toString() {
-		return "SWGList[" + baseline + "0" + view + ":" + updateType + "]";
+		return "SWGList[0" + view + ":" + updateType + "]";
 	}
 }

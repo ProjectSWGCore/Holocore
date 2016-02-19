@@ -4,6 +4,7 @@ import intents.PlayerEventIntent;
 
 import java.io.IOException;
 import java.net.InetAddress;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.UnknownHostException;
 import java.sql.PreparedStatement;
@@ -123,7 +124,11 @@ public class OnlineInterfaceService extends Service implements HttpServerCallbac
 				}
 			}
 			if (!socket.isSecure()) {
-				socket.redirect(new URL("https", httpsServer.getBindAddress().getHostName(), httpsServer.getBindPort(), request.getURI().getPath()).toString());
+				try {
+					socket.redirect(new URL(request.getURI().getPath()).toString());
+				} catch (MalformedURLException e) {
+					Log.w(this, "Malformed URL: " + request.getURI().getPath());
+				}
 				return;
 			}
 			handler.handleRequest(socket, request);
@@ -183,10 +188,7 @@ public class OnlineInterfaceService extends Service implements HttpServerCallbac
 							Log.i(TAG, "[%s] Successfully logged in to online interface", username);
 					} else {
 						Log.w(TAG, "[%s] Failed to login to online interface. Incorrect user/pass", username);
-						socket.redirect(new URL("https", httpsServer.getBindAddress().getHostName(), httpsServer.getBindPort(), "/").toString());
 					}
-				} catch (IOException e) {
-					e.printStackTrace();
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();

@@ -40,14 +40,18 @@ import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+import resources.server_info.Log;
+import utilities.ThreadUtilities;
 
 
 public class TCPServer {
 	
+	private final ExecutorService callbackExecutor;
 	private final Map<SocketAddress, SocketChannel> sockets;
 	private final InetAddress addr;
 	private final int port;
@@ -61,6 +65,7 @@ public class TCPServer {
 	}
 	
 	public TCPServer(InetAddress addr, int port, int bufferSize) {
+		this.callbackExecutor = Executors.newSingleThreadExecutor(ThreadUtilities.newThreadFactory("tcp-server-callback-executor"));
 		this.sockets = new HashMap<>();
 		this.addr = addr;
 		this.port = port;
@@ -95,11 +100,14 @@ public class TCPServer {
 	public boolean disconnect(SocketAddress sock) {
 		synchronized (sockets) {
 			SocketChannel sc = sockets.get(sock);
+			if (sc == null)
+				return false;
 			sockets.remove(sock);
 			try {
+				Socket s = sc.socket();
 				sc.close();
 				if (callback != null)
-					callback.onConnectionDisconnect(sc.socket());
+					callbackExecutor.execute(() -> callback.onConnectionDisconnect(s, sock));
 				return true;
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -128,18 +136,19 @@ public class TCPServer {
 		return false;
 	}
 	
-	public boolean send(InetSocketAddress sock, byte [] data) {
-		SocketChannel sc = sockets.get(sock);
-		try {
-			if (sc != null && sc.isConnected()) {
-				ByteBuffer bb = ByteBuffer.wrap(data);
-				while (bb.hasRemaining())
-					sc.write(bb);
-				return true;
+	public boolean send(InetSocketAddress sock, ByteBuffer data) {
+		synchronized (sockets) {
+			SocketChannel sc = sockets.get(sock);
+			try {
+				if (sc != null && sc.isConnected()) {
+					while (data.hasRemaining())
+						sc.write(data);
+					return true;
+				}
+			} catch (IOException e) {
+				Log.e("TCPServer", "Terminated connection with %s. Error: %s", sock.toString(), e.getMessage());
+				disconnect(sc);
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
-			disconnect(sc);
 		}
 		return false;
 	}
@@ -150,7 +159,7 @@ public class TCPServer {
 	
 	public interface TCPCallback {
 		void onIncomingConnection(Socket s);
-		void onConnectionDisconnect(Socket s);
+		void onConnectionDisconnect(Socket s, SocketAddress addr);
 		void onIncomingData(Socket s, byte [] data);
 	}
 	
@@ -206,37 +215,43 @@ public class TCPServer {
 		}
 		
 		private void processSelectionKeys(Selector selector) throws ClosedChannelException {
-			Set<SelectionKey> keys = selector.selectedKeys();
-			Iterator<SelectionKey> it = keys.iterator();
-			while (it.hasNext()) {
-				SelectionKey key = it.next();
+			for (SelectionKey key : selector.selectedKeys()) {
+				if (!key.isValid())
+					continue;
 				if (key.isAcceptable()) {
 					accept(selector);
 				} else if (key.isReadable()) {
 					SelectableChannel selectable = key.channel();
-					if (selectable instanceof SocketChannel)
-						read(key, (SocketChannel) selectable);
+					if (selectable instanceof SocketChannel) {
+						boolean canRead = true;
+						while (canRead)
+							canRead = read(key, (SocketChannel) selectable);
+					}
 				}
-				it.remove();
 			}
 		}
 		
 		private void accept(Selector selector) {
 			try {
-				SocketChannel sc = channel.accept();
-				if (sc == null)
-					return;
-				sc.configureBlocking(false);
-				sc.register(selector, SelectionKey.OP_READ);
-				sockets.put(sc.getRemoteAddress(), sc);
-				if (callback != null)
-					callback.onIncomingConnection(sc.socket());
+				while (channel.isOpen()) {
+					SocketChannel sc = channel.accept();
+					if (sc == null)
+						break;
+					SocketChannel old = sockets.get(sc.getRemoteAddress());
+					if (old != null)
+						disconnect(old);
+					sockets.put(sc.getRemoteAddress(), sc);
+					sc.configureBlocking(false);
+					sc.register(selector, SelectionKey.OP_READ);
+					if (callback != null)
+						callbackExecutor.execute(() -> callback.onIncomingConnection(sc.socket()));
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
 		
-		private void read(SelectionKey key, SocketChannel s) {
+		private boolean read(SelectionKey key, SocketChannel s) {
 			try {
 				buffer.position(0);
 				buffer.limit(bufferSize);
@@ -249,17 +264,19 @@ public class TCPServer {
 					ByteBuffer smaller = ByteBuffer.allocate(n);
 					smaller.put(buffer);
 					if (callback != null)
-						callback.onIncomingData(s.socket(), smaller.array());
+						callbackExecutor.execute(() -> callback.onIncomingData(s.socket(), smaller.array()));
+					return true;
 				}
 			} catch (IOException e) {
-				if (e.getMessage().toLowerCase(Locale.US).contains("connection reset"))
-					System.err.println("Connection Reset");
-				else
-					e.printStackTrace();
-				System.err.flush();
+				if (e.getMessage() != null && e.getMessage().toLowerCase(Locale.US).contains("connection reset"))
+					Log.e("TCPServer", "Connection Reset with %s", s.socket().getRemoteSocketAddress());
+				else {
+					Log.e("TCPServer", e);
+				}
 				key.cancel();
 				disconnect(s);
 			}
+			return false;
 		}
 	}
 	

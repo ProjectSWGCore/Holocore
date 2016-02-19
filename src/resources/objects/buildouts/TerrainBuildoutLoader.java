@@ -39,6 +39,7 @@ import resources.client_info.visitors.CrcStringTableData;
 import resources.client_info.visitors.DatatableData;
 import resources.containers.ContainerPermissions;
 import resources.objects.SWGObject;
+import resources.objects.SWGObject.ObjectClassification;
 import resources.objects.cell.CellObject;
 import resources.server_info.Log;
 import services.objects.ObjectCreator;
@@ -50,13 +51,13 @@ class TerrainBuildoutLoader {
 	private final CrcStringTableData crcTable;
 	private final Terrain terrain;
 	private final Map <Long, SWGObject> objectTable;
-	private final List <SWGObject> objects;
+	private final Map<String, List <SWGObject>> objects;
 	
 	public TerrainBuildoutLoader(CrcStringTableData crcTable, Terrain terrain) {
 		this.crcTable = crcTable;
 		this.terrain = terrain;
-		this.objectTable = new Hashtable<Long, SWGObject>(12*1024);
-		this.objects = new LinkedList<SWGObject>();
+		this.objectTable = new Hashtable<Long, SWGObject>(512);
+		this.objects = new Hashtable<String, List<SWGObject>>();
 	}
 	
 	public void load(int sceneNumber) {
@@ -68,12 +69,11 @@ class TerrainBuildoutLoader {
 		return objectTable;
 	}
 	
-	public List <SWGObject> getObjects() {
+	public Map<String, List <SWGObject>> getObjects() {
 		return objects;
 	}
 	
 	private void loadAreas(int sceneNumber) {
-		objects.clear();
 		String file = BASE_PATH+"areas_"+terrain.getName()+".iff";
 		DatatableData areaTable = (DatatableData) ClientFactory.getInfoFromFile(file);
 		for (int row = 0; row < areaTable.getRowCount(); row++) {
@@ -87,14 +87,15 @@ class TerrainBuildoutLoader {
 		String file = BASE_PATH+terrain.getName()+"/"+area.getName().replace("server", "client")+".iff";
 		DatatableData areaTable = (DatatableData) ClientFactory.getInfoFromFile(file);
 		SwgBuildoutRow buildoutRow = new SwgBuildoutRow(area);
+		objectTable.clear();
 		for (int row = 0; row < areaTable.getRowCount(); row++) {
 			buildoutRow.load(areaTable.getRow(row), crcTable);
 			SWGObject object = createObject(buildoutRow);
-			object.setBuildout(true);
+			object.setClassification(ObjectClassification.BUILDOUT);
 			object.setLoadRange(buildoutRow.getRadius());
 			object.setBuildoutAreaId(area.getIndex());
 			setCellInformation(object, buildoutRow.getCellIndex());
-			addObject(object, buildoutRow.getContainerId());
+			addObject(area.getName(), object, buildoutRow.getContainerId());
 			updatePermissions(object);
 		}
 	}
@@ -107,7 +108,7 @@ class TerrainBuildoutLoader {
 		return object;
 	}
 	
-	private void addObject(SWGObject object, long containerId) {
+	private void addObject(String areaName, SWGObject object, long containerId) {
 		objectTable.put(object.getObjectId(), object);
 		if (containerId != 0) {
 			SWGObject container = objectTable.get(containerId);
@@ -118,7 +119,12 @@ class TerrainBuildoutLoader {
 //				objects.add(object);
 			}
 		} else {
-			objects.add(object);
+			List<SWGObject> list = objects.get(areaName);
+			if (list == null) {
+				list = new LinkedList<>();
+				objects.put(areaName, list);
+			}
+			list.add(object);
 		}
 	}
 	

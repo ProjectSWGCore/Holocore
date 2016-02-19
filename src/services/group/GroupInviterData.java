@@ -31,15 +31,13 @@ import network.packets.Packet;
 import resources.encodables.Encodable;
 import resources.player.Player;
 
-import java.io.Serializable;
 import java.nio.ByteBuffer;
 
 /**
  * Created by Waverunner on 10/4/2015
  */
-public class GroupInviterData implements Encodable, Serializable {
-	private static final long serialVersionUID = 1L;
-
+public class GroupInviterData implements Encodable {
+	
 	private long id;
 	private Player sender;
 	private String name;

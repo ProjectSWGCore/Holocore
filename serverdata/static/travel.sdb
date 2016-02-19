@@ -34,7 +34,7 @@ naboo	starport	Moenia Starport	4745	4	-4672
 naboo	shuttleport	Theed Shuttle A	-5856	6	4172
 naboo	shuttleport	Theed Shuttle B	-5005	6	4072
 naboo	shuttleport	Theed Shuttle C	-5411	6	4321
-naboo	starport	Theed Spaceport	-4866	6	4155
+naboo	theed_starport	Theed Spaceport	-4866	6	4155
 rori	starport	Narmle Starport	-5359	80	-2188
 rori	shuttleport	Narmle Shuttleport	-5255	80	-2161
 rori	starport	Rebel Outpost	3693	96	-6403

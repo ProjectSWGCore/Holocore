@@ -33,10 +33,9 @@ import resources.encodables.Encodable;
 import resources.objects.SWGObject;
 import resources.player.Player;
 
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.nio.charset.Charset;
-import java.util.LinkedList;
 
 public class BaselineBuilder {
 	
@@ -47,15 +46,15 @@ public class BaselineBuilder {
 	private BaselineType type;
 	private int num;
 	private int opCount = 0;
-	private LinkedList <byte []> data;
-	private int size;
+	private LittleEndianDataOutputStream dataStream;
+	private ByteArrayOutputStream rawDataStream;
 	
 	public BaselineBuilder(SWGObject object, BaselineType type, int num) {
 		this.object = object;
 		this.type = type;
 		this.num = num;
-		data = new LinkedList<byte []>();
-		size = 0;
+		rawDataStream = new ByteArrayOutputStream();
+		dataStream = new LittleEndianDataOutputStream(rawDataStream);
 	}
 	
 	public void sendTo(Player target) {
@@ -69,32 +68,26 @@ public class BaselineBuilder {
 		target.sendPacket(baseline);
 	}
 	
-	public byte [] buildAsBaselinePacket() {
-		byte [] data = build();
+	public Baseline buildAsBaselinePacket() {
 		Baseline baseline = new Baseline();
 		baseline.setId(object.getObjectId());
 		baseline.setType(type);
 		baseline.setNum(num);
 		baseline.setOperandCount(opCount);
-		baseline.setBaselineData(data);
-		
-		return baseline.encode().array();
+		baseline.setBaselineData(build());
+		return baseline;
 	}
 	
 	public byte [] build() {
-		byte [] data = new byte[size];
-		int offset = 0;
-		for (byte [] d : this.data) {
-			System.arraycopy(d, 0, data, offset, d.length);
-			offset += d.length;
-		}
-		return data;
+		return rawDataStream.toByteArray();
 	}
 	
 	public void addObject(Encodable e) {
-		byte [] d = e.encode();
-		size += d.length;
-		data.add(d);
+		try {
+			dataStream.write(e.encode());
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
 	}
 	
 	public void addBoolean(boolean b) {
@@ -102,63 +95,74 @@ public class BaselineBuilder {
 	}
 	
 	public void addAscii(String str) {
-		ByteBuffer bb = ByteBuffer.allocate(2 + str.length()).order(ByteOrder.LITTLE_ENDIAN);
-		bb.putShort((short) str.length());
-		bb.put(str.getBytes(ASCII));
-		data.add(bb.array());
-		size += bb.array().length;
+		addShort(str.length());
+		try {
+			dataStream.write(str.getBytes(ASCII));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void addUnicode(String str) {
-		ByteBuffer bb = ByteBuffer.allocate(4 + str.length()*2).order(ByteOrder.LITTLE_ENDIAN);
-		bb.putInt(str.length());
-		bb.put(str.getBytes(UNICODE));
-		data.add(bb.array());
-		size += bb.array().length;
+		addInt(str.length());
+		try {
+			dataStream.write(str.getBytes(UNICODE));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void addByte(int b) {
-		data.add(new byte[]{(byte) b});
-		size += 1;
+		try {
+			dataStream.writeByte(b);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void addShort(int s) {
-		ByteBuffer bb = ByteBuffer.allocate(2).order(ByteOrder.LITTLE_ENDIAN);
-		bb.putShort((short) s);
-		data.add(bb.array());
-		size += bb.array().length;
+		try {
+			dataStream.writeShort(s);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void addInt(int i) {
-		ByteBuffer bb = ByteBuffer.allocate(4).order(ByteOrder.LITTLE_ENDIAN);
-		bb.putInt(i);
-		data.add(bb.array());
-		size += bb.array().length;
+		try {
+			dataStream.writeInt(i);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void addLong(long l) {
-		ByteBuffer bb = ByteBuffer.allocate(8).order(ByteOrder.LITTLE_ENDIAN);
-		bb.putLong(l);
-		data.add(bb.array());
-		size += bb.array().length;
+		try {
+			dataStream.writeLong(l);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void addFloat(float f) {
-		ByteBuffer bb = ByteBuffer.allocate(4).order(ByteOrder.LITTLE_ENDIAN);
-		bb.putFloat(f);
-		data.add(bb.array());
-		size += bb.array().length;
+		try {
+			dataStream.writeFloat(f);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void addArray(byte [] array) {
-		ByteBuffer bb = ByteBuffer.allocate(2 + array.length).order(ByteOrder.LITTLE_ENDIAN);
-		bb.putShort((short) array.length);
-		bb.put(array);
-		data.add(bb.array());
-		size += bb.array().length;
+		addShort(array.length);
+		try {
+			dataStream.write(array);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public int incrementOperandCount(int operands) {
 		return opCount+=operands;
 	}
+	
 }

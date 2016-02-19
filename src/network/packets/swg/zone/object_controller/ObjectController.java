@@ -29,6 +29,7 @@ package network.packets.swg.zone.object_controller;
 
 import java.nio.ByteBuffer;
 
+import resources.server_info.Log;
 import network.packets.swg.SWGPacket;
 
 public abstract class ObjectController extends SWGPacket {
@@ -88,14 +89,17 @@ public abstract class ObjectController extends SWGPacket {
 			return null;
 		int crc = data.getInt(10);
 		switch (crc) {
-			case 0x00000071: return new DataTransform(data);
-			case 0x000000F1: return new DataTransformWithParent(data);
-			case 0x00000116: return new CommandQueueEnqueue(data);
-			case 0x00000117: return new CommandQueueDequeue(data);
-			case 0x0000012E: return new PlayerEmote(data);
-			case 0x00000131: return new PostureUpdate(data);
-			case 0x00000146: return new ObjectMenuRequest(data);
+			case 0x0071: return new DataTransform(data);
+			case 0x00F1: return new DataTransformWithParent(data);
+			case 0x0116: return new CommandQueueEnqueue(data);
+			case 0x0117: return new CommandQueueDequeue(data);
+			case 0x0126: return null; // Look at target
+			case 0x012E: return new PlayerEmote(data);
+			case 0x0131: return new PostureUpdate(data);
+			case 0x0146: return new ObjectMenuRequest(data);
+			case 0x04C5: return new IntendedTarget(data);
 		}
+		Log.w("ObjectController", "Unknown object controller: %08X", crc);
 		return null;
 	}
 	

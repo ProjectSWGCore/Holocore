@@ -30,7 +30,6 @@ package services.objects;
 import intents.PlayerEventIntent;
 import intents.RequestZoneInIntent;
 import intents.network.GalacticPacketIntent;
-import intents.object.ObjectCreateIntent;
 import intents.object.ObjectCreatedIntent;
 import intents.object.ObjectTeleportIntent;
 import intents.object.UpdateObjectAwareness;
@@ -54,7 +53,7 @@ import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.quadtree.QuadTree;
-import resources.objects.staticobject.StaticObject;
+import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
 import resources.server_info.Log;
 
@@ -68,7 +67,6 @@ public class ObjectAwareness extends Service {
 	public ObjectAwareness() {
 		quadTree = new HashMap<Terrain, QuadTree<SWGObject>>();
 		registerForIntent(PlayerEventIntent.TYPE);
-		registerForIntent(ObjectCreateIntent.TYPE);
 		registerForIntent(ObjectCreatedIntent.TYPE);
 		registerForIntent(ObjectTeleportIntent.TYPE);
 		registerForIntent(GalacticPacketIntent.TYPE);
@@ -82,10 +80,6 @@ public class ObjectAwareness extends Service {
 			case PlayerEventIntent.TYPE:
 				if (i instanceof PlayerEventIntent)
 					handlePlayerEventIntent((PlayerEventIntent) i);
-				break;
-			case ObjectCreateIntent.TYPE:
-				if (i instanceof ObjectCreateIntent)
-					handleObjectCreateIntent((ObjectCreateIntent) i);
 				break;
 			case ObjectCreatedIntent.TYPE:
 				if (i instanceof ObjectCreatedIntent)
@@ -127,14 +121,6 @@ public class ObjectAwareness extends Service {
 				break;
 			default:
 				break;
-		}
-	}
-	
-	private void handleObjectCreateIntent(ObjectCreateIntent oci) {
-		SWGObject object = oci.getObject();
-		if (isInAwareness(object)) {
-			add(object);
-			update(object);
 		}
 	}
 	
@@ -251,7 +237,7 @@ public class ObjectAwareness extends Service {
 	}
 	
 	private boolean isInAwareness(SWGObject object) {
-		return object.getParent() == null && !(object instanceof StaticObject);
+		return object.getParent() == null && object instanceof TangibleObject;
 	}
 	
 	private double invertNormalizedValue(double x) {
@@ -333,7 +319,7 @@ public class ObjectAwareness extends Service {
 	 * @param obj the object to update
 	 */
 	private void update(SWGObject obj) {
-		if (obj.isBuildout())
+		if (!obj.isGenerated())
 			return;
 		Location l = obj.getWorldLocation();
 		if (invalidLocation(l))

@@ -175,6 +175,8 @@ public class DataManager implements IntentReceiver {
 
 	@Override
 	public void onIntentReceived(Intent i) {
+		if (!(i instanceof ConfigChangedIntent))
+			return;
 		ConfigChangedIntent cci = (ConfigChangedIntent) i;
 		boolean log = Boolean.valueOf(cci.getNewValue());
 

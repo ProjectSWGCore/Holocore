@@ -74,7 +74,7 @@ public class AuctionQueryHeadersResponseMessage extends SWGPacket {
 			item.setObjectId(getLong(data));
 			getByte(data);
 			item.setPrice(getInt(data));
-			item.setExpireTime(getInt(data)*1000+System.currentTimeMillis());
+			item.setExpireTime(getInt(data)*1000L+System.currentTimeMillis());
 			if (getInt(data) != item.getPrice())
 				throw new IllegalStateException("I WAS LIED TO AT INDEX " + itemI);
 			item.setVuid(locations[getShort(data)]);

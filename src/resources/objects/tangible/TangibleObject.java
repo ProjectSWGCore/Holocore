@@ -260,22 +260,6 @@ public class TangibleObject extends SWGObject {
 		bb.incrementOperandCount(6);
 	}
 	
-	public void createBaseline8(Player target, BaselineBuilder bb) {
-		super.createBaseline8(target, bb);
-		bb.addShort(0);
-		bb.addShort(0);
-		
-		bb.incrementOperandCount(2);
-	}
-	
-	public void createBaseline9(Player target, BaselineBuilder bb) {
-		super.createBaseline9(target, bb);
-		bb.addShort(0);
-		bb.addShort(0);
-		
-		bb.incrementOperandCount(2);
-	}
-	
 	@Override
 	protected void sendBaselines(Player target) {
 		super.sendBaselines(target);

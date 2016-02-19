@@ -66,11 +66,9 @@ public class WaypointCmdCallback implements ICmdCallback {
 						try {
 							if (cmdArgs.length > 2) {
 								x = Float.parseFloat(cmdArgs[1]);
-								if (cmdArgs.length >= 3) {
-									z = Float.parseFloat(cmdArgs[2]); // Just to be sure.. Maybe someone wanted some numbers in the name.
-									if (cmdArgs.length != 6)
-										cmdArgs = args.split(" ", 6);
-								}
+								z = Float.parseFloat(cmdArgs[2]); // Just to be sure.. Maybe someone wanted some numbers in the name.
+								if (cmdArgs.length != 6)
+									cmdArgs = args.split(" ", 6);
 							}
 						} catch (NumberFormatException e) {
 							// This is just a named waypoint.

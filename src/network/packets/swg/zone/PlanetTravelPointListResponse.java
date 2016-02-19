@@ -80,9 +80,7 @@ public class PlanetTravelPointListResponse extends SWGPacket {
 	}
 	
 	private boolean isStarport(String pointName) {
-		boolean result = pointName.endsWith(" Starport") || pointName.endsWith(" Spaceport");
-		
-		return result || (pointName.split(" ").length == 2 && !result);
+		return pointName.endsWith(" Starport") || pointName.endsWith(" Spaceport") || pointName.split(" ").length == 2;
 	}
 	
 	private int calculateSize() {

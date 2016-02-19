@@ -31,6 +31,7 @@ package services.map;
  * Created by Waverunner on 6/1/2015
  */
 public class MappingTemplate {
+	
 	private String template;
 	private String name;
 	private String category;
@@ -38,7 +39,14 @@ public class MappingTemplate {
 	private int type;
 	private int flag;
 
-	public MappingTemplate() {}
+	public MappingTemplate() {
+		template = null;
+		name = null;
+		category = null;
+		subcategory = null;
+		type = 0;
+		flag = 0;
+	}
 
 	public String getTemplate() {
 		return template;

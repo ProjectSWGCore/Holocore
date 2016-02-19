@@ -30,12 +30,13 @@ package resources.collections;
 import network.packets.Packet;
 import network.packets.swg.zone.baselines.Baseline;
 import resources.encodables.Encodable;
-import resources.network.DeltaBuilder;
 import resources.objects.SWGObject;
 import resources.player.PlayerState;
 import utilities.Encoder;
 import utilities.Encoder.StringType;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -50,8 +51,6 @@ import java.util.Set;
  */
 public class SWGSet<E> extends AbstractSet<E> implements Encodable, Serializable {
 	private static final long serialVersionUID = 1L;
-
-	private Baseline.BaselineType baseline;
 
 	private int view;
 	private int updateType;
@@ -74,8 +73,7 @@ public class SWGSet<E> extends AbstractSet<E> implements Encodable, Serializable
 	 * @param view The baseline number this list resides in
 	 * @param updateType The update variable used for sending a delta, it's the operand count that this list resides at within the baseline
 	 */
-	public SWGSet(Baseline.BaselineType baseline, int view, int updateType) {
-		this.baseline = baseline;
+	public SWGSet(int view, int updateType) {
 		this.view = view;
 		this.updateType = updateType;
 	}
@@ -86,11 +84,16 @@ public class SWGSet<E> extends AbstractSet<E> implements Encodable, Serializable
 	 * @param view The baseline number this set resides in
 	 * @param strType The {@link StringType} of the string, required only if the element in the set is a String as it's used for encoding either Unicode or ASCII characters
 	 */
-	public SWGSet(Baseline.BaselineType baseline, int view, int updateType, StringType strType) {
-		this (baseline, view, updateType);
+	public SWGSet(int view, int updateType, StringType strType) {
+		this(view, updateType);
 		this.strType = strType;
 	}
-
+	
+	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
+		ois.defaultReadObject();
+		updateCount = 0;
+	}
+	
 	@Override
 	public boolean add(E e) {
 		if (!set.add(e))
@@ -135,8 +138,7 @@ public class SWGSet<E> extends AbstractSet<E> implements Encodable, Serializable
 			return;
 		}
 
-		DeltaBuilder builder = new DeltaBuilder(target, baseline, view, updateType, getDeltaData());
-		builder.send();
+		target.sendDelta(view, updateType, getDeltaData());
 		// Clear the queue since the delta has been sent to observers through the builder
 		clearDeltaQueue();
 	}

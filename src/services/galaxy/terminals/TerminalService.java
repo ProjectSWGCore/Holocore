@@ -1,5 +1,6 @@
 package services.galaxy.terminals;
 
+import intents.radial.ObjectClickedIntent;
 import intents.radial.RadialRegisterIntent;
 import intents.radial.RadialRequestIntent;
 import intents.radial.RadialResponseIntent;
@@ -8,12 +9,14 @@ import intents.radial.RadialSelectionIntent;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import resources.control.Intent;
 import resources.control.Service;
+import resources.radial.RadialItem;
 import resources.radial.RadialOption;
 import resources.radial.Radials;
 import resources.server_info.Log;
@@ -41,6 +44,7 @@ public class TerminalService extends Service {
 		
 		registerForIntent(RadialRequestIntent.TYPE);
 		registerForIntent(RadialSelectionIntent.TYPE);
+		registerForIntent(ObjectClickedIntent.TYPE);
 	}
 	
 	@Override
@@ -80,7 +84,8 @@ public class TerminalService extends Service {
 					String script = lookupScript(rri.getTarget().getTemplate());
 					if (script == null)
 						return;
-					List<RadialOption> options = Radials.getRadialOptions(script, rri.getPlayer(), rri.getTarget());
+					List<RadialOption> options = new ArrayList<RadialOption>(rri.getRequest().getOptions());
+					options.addAll(Radials.getRadialOptions(script, rri.getPlayer(), rri.getTarget()));
 					new RadialResponseIntent(rri.getPlayer(), rri.getTarget(), options, rri.getRequest().getCounter()).broadcast();
 				}
 				break;
@@ -91,6 +96,19 @@ public class TerminalService extends Service {
 					if (script == null)
 						return;
 					Radials.handleSelection(script, rsi.getPlayer(), rsi.getTarget(), rsi.getSelection());
+				}
+				break;
+			case ObjectClickedIntent.TYPE:
+				if (i instanceof ObjectClickedIntent) {
+					ObjectClickedIntent oci = (ObjectClickedIntent) i;
+					String script = lookupScript(oci.getTarget().getTemplate());
+					if (script == null)
+						return;
+					List<RadialOption> options = Radials.getRadialOptions(script, oci.getRequestor().getOwner(), oci.getTarget());
+					if (options.isEmpty())
+						return;
+					RadialItem item = RadialItem.getFromId(options.get(0).getId());
+					Radials.handleSelection(script, oci.getRequestor().getOwner(), oci.getTarget(), item);
 				}
 				break;
 		}

@@ -34,6 +34,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLFeatureNotSupportedException;
 import java.sql.Statement;
 
 public abstract class RelationalDatabase implements Closeable {
@@ -144,12 +145,21 @@ public abstract class RelationalDatabase implements Closeable {
 	public ResultSet executeQuery(String query) {
 		if (connection == null)
 			return null;
+		Statement s = null;
 		try {
-			Statement s = connection.createStatement();
+			s = connection.createStatement();
 			s.execute(query);
+			try {
+				s.closeOnCompletion();
+			} catch (SQLFeatureNotSupportedException e) {
+				// It was worth a shot
+			}
 			return s.getResultSet();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			if (s != null) {
+				try { s.close(); } catch (SQLException ex) { }
+			}
 			return null;
 		}
 	}

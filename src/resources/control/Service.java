@@ -31,6 +31,7 @@ import network.OutboundPacketService;
 import network.packets.Packet;
 import resources.config.ConfigFile;
 import resources.player.Player;
+import resources.player.PlayerState;
 import resources.server_info.Config;
 import resources.server_info.DataManager;
 import resources.server_info.RelationalDatabase;
@@ -124,6 +125,8 @@ public abstract class Service implements IntentReceiver {
 	 * @param packets the packet(s) to send
 	 */
 	public void sendPacket(Player player, Packet ... packets) {
+		if (player.getPlayerState() == PlayerState.DISCONNECTED)
+			return;
 		sendPacket(player.getNetworkId(), packets);
 	}
 	

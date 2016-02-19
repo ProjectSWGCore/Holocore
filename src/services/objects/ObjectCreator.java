@@ -31,6 +31,7 @@ import java.util.Map.Entry;
 
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.ObjectData;
+import resources.client_info.visitors.ObjectData.ObjectDataAttribute;
 import resources.client_info.visitors.SlotArrangementData;
 import resources.client_info.visitors.SlotDescriptorData;
 import resources.objects.SWGObject;
@@ -51,19 +52,38 @@ import resources.objects.waypoint.WaypointObject;
 import resources.objects.weapon.WeaponObject;
 
 public final class ObjectCreator {
-
+	
+	private static final Object OBJECT_ID_MUTEX = new Object();
+	private static long maxObjectId = 1;
+	
+	public static void updateMaxObjectId(long objectId) {
+		synchronized (OBJECT_ID_MUTEX) {
+			if (objectId > maxObjectId)
+				maxObjectId = objectId;
+		}
+	}
+	
 	public static SWGObject createObjectFromTemplate(long objectId, String template) {
 		if (!template.startsWith("object/"))
 			return null;
 		if (!template.endsWith(".iff"))
 			return null;
-		SWGObject obj = createObjectFromType(objectId, getFirstTemplatePart(template.substring(7, template.length())));
+		SWGObject obj = createObjectFromType(objectId, getTemplatePart(template, 1));
 		if (obj == null)
 			return null;
 		obj.setTemplate(template);
 
 		handlePostCreation(obj);
+		updateMaxObjectId(objectId);
 		return obj;
+	}
+	
+	public static SWGObject createObjectFromTemplate(String template) {
+		long id = 0;
+		synchronized (OBJECT_ID_MUTEX) {
+			id = maxObjectId++;
+		}
+		return createObjectFromTemplate(id, template);
 	}
 	
 	private static SWGObject createObjectFromType(long objectId, String type) {
@@ -99,38 +119,37 @@ public final class ObjectCreator {
 		if (attributes == null)
 			return;
 
-		for (Entry<String, Object> e : attributes.getAttributes().entrySet()) {
-			obj.setTemplateAttribute(e.getKey(), e.getValue());
-
-			setObjectAttribute(e.getKey(), e.getValue().toString(), obj);
+		for (Entry<ObjectDataAttribute, Object> e : attributes.getAttributes().entrySet()) {
+			setObjectAttribute(e.getKey(), e.getValue(), obj);
 		}
 	}
 
-	private static void setObjectAttribute(String key, String value, SWGObject object) {
-		switch(key) {
-			case ObjectData.OBJ_STF: object.setStringId(value); break;
-			case ObjectData.DETAIL_STF: object.setDetailStringId(value); break;
-			case ObjectData.VOLUME_LIMIT: object.setVolume(Integer.parseInt(value)); break;
-			case ObjectData.CONTAINER_TYPE: object.setContainerType(Integer.parseInt(value)); break;
+	private static void setObjectAttribute(ObjectDataAttribute key, Object value, SWGObject object) {
+		object.setDataAttribute(key, value);
+		switch (key) {
+			case OBJECT_NAME: object.setStringId(value.toString()); break;
+			case DETAILED_DESCRIPTION: object.setDetailStringId(value.toString()); break;
+			case CONTAINER_VOLUME_LIMIT: object.setVolume((Integer) value); break;
+			case CONTAINER_TYPE: object.setContainerType((Integer) value); break;
 			default: break;
 		}
 	}
 
 	private static void createObjectSlots(SWGObject object) {
-		if (object.getTemplateAttribute(ObjectData.SLOT_DESCRIPTOR) != null) {
+		if (object.getDataAttribute(ObjectDataAttribute.SLOT_DESCRIPTOR_FILENAME) != null) {
 			// These are the slots that the object *HAS*
-			SlotDescriptorData descriptor = (SlotDescriptorData) ClientFactory.getInfoFromFile((String) object.getTemplateAttribute(ObjectData.SLOT_DESCRIPTOR), true);
+			SlotDescriptorData descriptor = (SlotDescriptorData) ClientFactory.getInfoFromFile((String) object.getDataAttribute(ObjectDataAttribute.SLOT_DESCRIPTOR_FILENAME), true);
 			if (descriptor == null)
 				return;
 
 			for (String slotName : descriptor.getSlots()) {
-				object.getSlots().put(slotName, null);
+				object.setSlot(slotName, null);
 			}
 		}
 		
-		if (object.getTemplateAttribute(ObjectData.ARRANGEMENT_FILE) != null) {
+		if (object.getDataAttribute(ObjectDataAttribute.ARRANGEMENT_DESCRIPTOR_FILENAME) != null) {
 			// This is what slots the created object is able to go into/use
-			SlotArrangementData arrangementData = (SlotArrangementData) ClientFactory.getInfoFromFile((String) object.getTemplateAttribute(ObjectData.ARRANGEMENT_FILE), true);
+			SlotArrangementData arrangementData = (SlotArrangementData) ClientFactory.getInfoFromFile((String) object.getDataAttribute(ObjectDataAttribute.ARRANGEMENT_DESCRIPTOR_FILENAME), true);
 			if (arrangementData == null)
 				return;
 
@@ -141,11 +160,21 @@ public final class ObjectCreator {
 	/*
 		Misc helper methods
 	 */
-	private static String getFirstTemplatePart(String template) {
-		int ind = template.indexOf('/');
-		if (ind == -1)
-			return "";
-		return template.substring(0, ind);
+	private static String getTemplatePart(String template, int index) {
+		int start = 0;
+		int end = 0;
+		for (int i = 0; i < template.length(); i++) {
+			if (template.charAt(i) != '/')
+				continue;
+			index--;
+			if (index == 0)
+				start = i+1;
+			else if (index == -1) {
+				end = i;
+				break;
+			}
+		}
+		return template.substring(start, end);
 	}
 	
 }

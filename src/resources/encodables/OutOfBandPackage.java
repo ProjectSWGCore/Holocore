@@ -30,6 +30,8 @@ package resources.encodables;
 import network.packets.Packet;
 import resources.objects.waypoint.WaypointObject;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -47,11 +49,19 @@ public class OutOfBandPackage implements Encodable, Serializable {
 
 	public OutOfBandPackage() {
 		packages = new ArrayList<>(5);
+		data = null;
+		dataSize = 0;
 	}
 
 	public OutOfBandPackage(OutOfBandData... outOfBandData) {
 		this();
 		Collections.addAll(packages, outOfBandData);
+	}
+	
+	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
+		ois.defaultReadObject();
+		data = null;
+		dataSize = 0;
 	}
 
 	public List<OutOfBandData> getPackages() {
