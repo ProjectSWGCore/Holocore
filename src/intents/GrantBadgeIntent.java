@@ -30,7 +30,7 @@ import resources.control.Intent;
 import resources.objects.creature.CreatureObject;
 
 public class GrantBadgeIntent extends Intent {
-	public static final String TYPE = "CollectionBadgesIntent";
+	public static final String TYPE = "GrantBadgeIntent";
 	
 	private CreatureObject creature;
 	private String collectionBadgeName;

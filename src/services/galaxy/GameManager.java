@@ -43,8 +43,9 @@ public class GameManager extends Manager {
 	private final EnvironmentService weatherService;
 	private final TerminalService terminalManager;
 	private final FactionService factionService;
-//	private final GroupService groupService;
-    private final SkillModService skillModService;
+	//private final GroupService groupService;
+	private final SkillModService skillModService;
+
 
 	public GameManager() {
 		commandService = new CommandService();
