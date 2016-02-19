@@ -33,6 +33,7 @@ import java.sql.SQLException;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import intents.GrantBadgeIntent;
 import intents.player.PlayerTransformedIntent;
 
 import java.util.TreeMap;
@@ -48,7 +49,6 @@ public class ExplorationBadgeService extends Service {
 
 	private static final String GET_BADGES_SQL = "SELECT * FROM explorationBadges";
 	private Map<String, Map<String, ExplorationRegion>> explorationLocations = new TreeMap<String, Map<String, ExplorationRegion>>();
-	private CollectionBadgeService collectionBadgeService = new CollectionBadgeService();
 	
 	public ExplorationBadgeService(){
 		registerExplorationBadge();
@@ -60,7 +60,7 @@ public class ExplorationBadgeService extends Service {
 		if (i instanceof PlayerTransformedIntent) {
 			String badgeName = checkExplorationRegions(((PlayerTransformedIntent) i).getPlayer());
 			if (badgeName != null){
-				collectionBadgeService.handleCollectionBadge(((PlayerTransformedIntent) i).getPlayer(),badgeName);	
+				new GrantBadgeIntent(((PlayerTransformedIntent) i).getPlayer(), badgeName).broadcast();;
 			}
 		}
 	}
