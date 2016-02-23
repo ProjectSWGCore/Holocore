@@ -60,7 +60,7 @@ public class ExplorationBadgeService extends Service {
 		if (i instanceof PlayerTransformedIntent) {
 			String badgeName = checkExplorationRegions(((PlayerTransformedIntent) i).getPlayer());
 			if (badgeName != null){
-				new GrantBadgeIntent(((PlayerTransformedIntent) i).getPlayer(), badgeName).broadcast();;
+				new GrantBadgeIntent(((PlayerTransformedIntent) i).getPlayer(), badgeName).broadcast();
 			}
 		}
 	}
