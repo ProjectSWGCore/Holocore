@@ -26,7 +26,7 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package services.collectionbadge;
+package services.collections;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
