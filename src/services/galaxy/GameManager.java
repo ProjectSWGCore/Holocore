@@ -28,7 +28,7 @@
 package services.galaxy;
 
 import resources.control.Manager;
-import services.collectionbadge.CollectionBadgeManager;
+import services.collections.CollectionBadgeManager;
 import services.commands.CommandService;
 import services.faction.FactionService;
 import services.galaxy.terminals.TerminalService;
