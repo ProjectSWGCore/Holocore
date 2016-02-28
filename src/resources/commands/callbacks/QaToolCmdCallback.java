@@ -128,7 +128,7 @@ public class QaToolCmdCallback implements ICmdCallback {
 		if (inventory == null)
 			return;
 
-		inventory.addObject(object);
+		object.moveToContainer(inventory);
 		sendSystemMessage(player, "Object has been created and placed in your inventory");
 		Log.i("QA", "%s created item from template %s", player, template);
 	}
