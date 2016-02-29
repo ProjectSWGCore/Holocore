@@ -1,5 +1,5 @@
 profession	race	gender	boots	pants	belt	gloves	shirt	vest	hat	necklace	robe	weapon
-TEXT	TEXT	TEXT	TEXT	TEXT		TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT
+TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT
 bounty_hunter	bothan	3	item_bounty_hunter_boots_02_01	item_bounty_hunter_pants_02_01			item_bounty_hunter_shirt_02_01	item_bounty_hunter_vest_02_01				weapon_npe_carbine_bh_03_01
 bounty_hunter	human	3	item_bounty_hunter_boots_02_01	item_bounty_hunter_pants_02_01			item_bounty_hunter_shirt_02_01	item_bounty_hunter_vest_02_01				weapon_npe_carbine_bh_03_01
 bounty_hunter	ithorian	3	item_bounty_hunter_boots_02_01	item_bounty_hunter_pants_02_01			item_bounty_hunter_shirt_02_01	item_bounty_hunter_vest_02_01				weapon_npe_carbine_bh_03_01
