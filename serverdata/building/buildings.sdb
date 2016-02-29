@@ -18,7 +18,7 @@ cor_chirq_council2	CORELLIA	-267964179022417199	corellia_chirq_elite_council_02.
 cor_chirq_jzoro1	CORELLIA	-267964178068047452	corellia_chirq_jzoro_bunker.iff	Corellia - Chirq Jzoro Bunker 1	10	2635	150	5647
 cor_chirq_jzoro2	CORELLIA	-260364354962171077	corellia_chirq_jzoro_bunker.iff	Corellia - Chirq Jzoro Bunker 2	10	-2713	44	2854
 cor_coronet_asso_hall1	CORELLIA	1855473	association_hall_civilian_corellia.iff	Corellia - Coronet / Association Hall 1	17	-276	28	-4720
-cor_coronet_asso_hall2	CORELLIA	3075609	association_hall_civilian_corellia.iff	Corellia - Coronet / Association Hall 2	17	-210	28	-4320
+cor_coronet_asso_hall2	CORELLIA	1935565	association_hall_civilian_corellia.iff	Corellia - Coronet / Association Hall 2	17	-210	28	-4320
 cor_coronet_cantina	CORELLIA	8105493	cantina_corellia.iff	Corellia - Coronet / Cantina	15	-343	28	-4495
 cor_coronet_capitol	CORELLIA	1855460	capitol_corellia.iff	Corellia - Coronet / Capitol	11	-210	28	-4570
 cor_coronet_chronicle_vendor	CORELLIA	-261771729506220985	player_pgc_merchant_tent_s01.iff	Corellia - Coronet / Chronicle Vendor	1	-152	28	-4811
@@ -54,7 +54,7 @@ cor_drall_cave	CORELLIA	4275364	corellia_drall_cave.iff	Corellia - Drall Cave	11
 cor_droid_bunker	CORELLIA	-254734854929078302	bunker_droid_corellia.iff	Corellia - Droid Bunker	44	-6351	169	357
 cor_gcw_base_shed	CORELLIA	-269090079453790705	outpost_shed.iff	Corellia - GCW Base / Shed	6	4776	95	-5207
 cor_gcw_base_warehouse	CORELLIA	-269090078635378213	bunker_corellia_warehouse.iff	Corellia - GCW Base / Warehouse	9	4746	95	-5240
-cor_hidden_reb_base	CORELLIA	6335638	rebel_hideout_themepark.iff	Corellia - Reb Hideout	12	-6506	398	5990
+cor_hidden_reb_base	CORELLIA	8555470	rebel_hideout_themepark.iff	Corellia - Reb Hideout	12	-6506	398	5990
 cor_imp_captured_starships	CORELLIA	-266838279168441737	bunker_imperial_captured_starships.iff	Corellia - Imp Captured Starships	17	3785	380	-4064
 cor_imp_captured_starships_tower1	CORELLIA	-266838278420031395	military_outpost_guard_house_imperial.iff	Corellia - Imp Captured Starships / Tower 1	2	3747	380	-4059
 cor_imp_captured_starships_tower2	CORELLIA	-266838279701081551	military_outpost_guard_house_imperial.iff	Corellia - Imp Captured Starships / Tower 2	2	3775	380	-4000
@@ -424,7 +424,7 @@ nab_kaadara_skaak_tipper_bunker_warehouse	NABOO	-300333800150270060	pirate_wareh
 nab_kaadara_starport	NABOO	1741535	starport_naboo.iff	Naboo - Kaadara / Starport	16	5295	-192	6664
 nab_kaadara_theater	NABOO	4105610	guild_theater_naboo_s01.iff	Naboo - Kaadara / Theater	10	5325	-192	6765
 nab_kaadara_university	NABOO	1741463	guild_university_naboo_style_01.iff	Naboo - Kaadara / University	9	5130	-192	6805
-nab_keren_association_hall	NABOO	8845416	association_hall_civilian_naboo.iff	Naboo - Keren / Association Hall	17	1678	12	2707
+nab_keren_association_hall	NABOO	1393871	association_hall_civilian_naboo.iff	Naboo - Keren / Association Hall	17	1678	12	2707
 nab_keren_cantina	NABOO	2	cantina_naboo.iff	Naboo - Keren / Cantina	15	2098	30	2526
 nab_keren_cloning	NABOO	1650611	cloning_facility_naboo.iff	Naboo - Keren / Cloning	6	1949	12	2760
 nab_keren_combat_gh	NABOO	1650526	guild_combat_naboo_style_01.iff	Naboo - Keren / Combat GH	9	1836	12	2614
@@ -483,7 +483,7 @@ nab_theed_theater	NABOO	5475479	guild_theater_naboo_s01.iff	Naboo - Theed / Thea
 nab_theed_trando_slave_house	NABOO	-286541526962548185	trandoshan_slave_naboo_house.iff	Naboo - Theed / Trando Slave House	14	-2719	6	-7256
 nab_theed_university	NABOO	1692086	guild_university_naboo_style_01.iff	Naboo - Theed / University	9	-5452	6	3997
 nab_veermok_cave	NABOO	4295393	naboo_veermok_cave.iff	Naboo - Veermok Cave	11	5703	290	-1558
-nab_weapon_development_facility	NABOO	8555470	bunker_imperial_weapons_research_facility_01.iff	Naboo - Weapon Development Facility	22	-6506	40	-3327
+nab_weapon_development_facility	NABOO	6335638	bunker_imperial_weapons_research_facility_01.iff	Naboo - Weapon Development Facility	22	-6506	40	-3327
 nab_world	NABOO	0	empty	Naboo - World	0	0	0	0
 ror_bark_mite_cave	RORI	5095989	rori_bark_mite_cave.iff	Rori - Bark Mite Cave	11	3580	98	5440
 ror_bat_cave	RORI	5407162	rori_bat_cave.iff	Rori - Bat Cave	11	849	100	-4880
