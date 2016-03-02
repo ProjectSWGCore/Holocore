@@ -39,4 +39,11 @@ public enum HologramColour {
 	public int getValue() {
 		return value;
 	}
+	
+	public static final HologramColour getForValue(int value) {
+		for (HologramColour d : values())
+			if (d.getValue() == value)
+				return d;
+		return DEFAULT;
+	}
 }
