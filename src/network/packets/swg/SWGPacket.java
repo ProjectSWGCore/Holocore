@@ -37,16 +37,16 @@ import java.nio.ByteBuffer;
 public class SWGPacket extends Packet {
 	
 	private ByteBuffer data = null;
-	private int opcode = 0;
+	private int crc = 0;
 	private PacketType type = PacketType.UNKNOWN;
 
 	public void setSWGOpcode(int opcode) {
-		this.opcode = opcode;
+		this.crc = opcode;
 		this.type = PacketType.fromCrc(opcode);
 	}
 	
 	public int getSWGOpcode() {
-		return opcode;
+		return crc;
 	}
 	
 	public PacketType getPacketType() {
