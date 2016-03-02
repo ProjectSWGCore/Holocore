@@ -150,7 +150,7 @@ public class ZoneManager extends Manager {
 			sendCommitHistory(player);
 			sendMessageOfTheDay(player);
 		}
-		new PlayerEventIntent(player, PlayerEvent.PE_ZONE_IN).broadcast();
+		new PlayerEventIntent(player, PlayerEvent.PE_ZONE_IN_CLIENT).broadcast();
 	}
 	
 	private void startScene(CreatureObject object, Location newLocation) {
@@ -166,7 +166,7 @@ public class ZoneManager extends Manager {
 		if (parent != null)
 			recursiveCreateObject(parent, p);
 		else
-			obj.createObject(p);
+			obj.createObject(p, true);
 	}
 	
 	private void loadCommitHistory() {
@@ -251,8 +251,8 @@ public class ZoneManager extends Manager {
 	}
 	
 	private void handleCmdSceneReady(Player player, CmdSceneReady p) {
+		new PlayerEventIntent(player, PlayerEvent.PE_ZONE_IN_SERVER).broadcast();
 		player.setPlayerState(PlayerState.ZONED_IN);
-		player.sendPacket(p);
 		System.out.println("[" + player.getUsername() +"] " + player.getCharacterName() + " zoned in");
 		Log.i("ZoneService", "%s with character %s zoned in from %s:%d", player.getUsername(), player.getCharacterName(), p.getAddress(), p.getPort());
 	}

@@ -42,6 +42,7 @@ import java.util.Map;
 import java.util.Set;
 
 import network.packets.Packet;
+import network.packets.swg.zone.CmdSceneReady;
 import network.packets.swg.zone.UpdateContainmentMessage;
 import network.packets.swg.zone.object_controller.DataTransform;
 import network.packets.swg.zone.object_controller.DataTransformWithParent;
@@ -115,9 +116,10 @@ public class ObjectAwareness extends Service {
 				creature.setOwner(null);
 				p.setCreatureObject(null);
 				break;
-			case PE_ZONE_IN:
+			case PE_ZONE_IN_SERVER:
 				creature.clearAware(false);
 				update(creature);
+				p.sendPacket(new CmdSceneReady());
 				break;
 			default:
 				break;
