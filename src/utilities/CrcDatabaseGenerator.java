@@ -49,10 +49,10 @@ public class CrcDatabaseGenerator {
 	
 	private static void addClientdata(CrcDatabase database) {
 		try {
-			Files.walkFileTree(new File("clientdata/object").toPath(), new SimpleFileVisitor<Path>() {
+			Files.walkFileTree(new File("clientdata"+File.separator+"object").toPath(), new SimpleFileVisitor<Path>() {
 				public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
 					String template = file.toFile().getAbsolutePath();
-					database.addCrcBatch(template.substring(template.indexOf("object/")));
+					database.addCrcBatch(template.substring(template.indexOf("object"+File.separator)));
 					return FileVisitResult.CONTINUE;
 				}
 			});
