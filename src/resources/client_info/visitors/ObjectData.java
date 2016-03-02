@@ -54,6 +54,7 @@ public class ObjectData extends ClientData {
 		CLEAR_FLORA_RADIUS						("clearFloraRadius"),
 		CLIENT_DATA_FILE						("clientDataFile"),
 		CLIENT_VISIBILITY_FLAG					("clientVisabilityFlag"),
+		COCKPIT_FILENAME						("cockpitFilename"),
 		COLLISION_ACTION_BLOCK_FLAGS			("collisionActionBlockFlags"),
 		COLLISION_ACTION_FLAGS					("collisionActionFlags"),
 		COLLISION_ACTION_PASS_FLAGS				("collisionActionPassFlags"),
@@ -73,6 +74,7 @@ public class ObjectData extends ClientData {
 		FORCE_NO_COLLISION						("forceNoCollision"),
 		GAME_OBJECT_TYPE						("gameObjectType"),
 		GENDER									("gender"),
+		HAS_WINGS								("hasWings"),
 		INTERIOR_LAYOUT_FILENAME				("interiorLayoutFileName"),
 		LOCATION_RESERVATION_RADIUS				("locationReservationRadius"),
 		LOOK_AT_TEXT							("lookAtText"),
@@ -82,6 +84,7 @@ public class ObjectData extends ClientData {
 		OBJECT_NAME								("objectName"),
 		ONLY_VISIBLE_IN_TOOLS					("onlyVisibleInTools"),
 		PALETTE_COLOR_CUSTOMIZATION_VARIABLES	("paletteColorCustomizationVariables"),
+		PLAYER_CONTROLLED						("playerControlled"),
 		PORTAL_LAYOUT_FILENAME					("portalLayoutFilename"),
 		POSTURE_ALIGN_TO_TERRAIN				("postureAlignToTerrain"),
 		RACE									("race"),
@@ -185,6 +188,10 @@ public class ObjectData extends ClientData {
 		if (str.isEmpty())
 			return;
 		ObjectDataAttribute attr = ObjectDataAttribute.getForName(str);
+		if (attr == null) {
+			System.err.println("Unknown attribute: " + str);
+			return;
+		}
 		switch (attr) {
 			case APPEARANCE_FILENAME: putString(chunk, attr); break;
 			case ARRANGEMENT_DESCRIPTOR_FILENAME: putString(chunk,attr); break;
