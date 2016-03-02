@@ -1,104 +1,104 @@
 spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	creature_name	creature_id	spawn_category	spawn_area	amount	behaviour	patrol_id	max_spawn_time	min_spawn_time	float_radius
 INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGER NOT NULL	REAL	REAL	REAL	REAL	INTEGER	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER NOT NULL	TEXT NOT NULL	INTEGER	INTEGER NOT NULL	INTEGER NOT NULL	INTEGER
-2400003	YAVIN4	yav_blue_leaf_temple	AREA	1	3.96	-1.30	32.45	0	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0
-2400004	YAVIN4	yav_blue_leaf_temple	AREA	1	-3.76	-1.30	32.45	0	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0
-2400005	YAVIN4	yav_blue_leaf_temple	AREA	2	-0.14	-37.30	-29.00	0	1	a kliknik dark queen	14280	poi	The Temple of the Blueleaf	1	none	0	300	180	0
-2400006	YAVIN4	yav_blue_leaf_temple	AREA	2	-13.11	-37.30	13.08	136	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0
-2400007	YAVIN4	yav_blue_leaf_temple	AREA	2	-13.63	-1.30	24.34	97	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0
+2400003	YAVIN4	yav_blue_leaf_temple	AREA	1	3.96	-1.30	32.45	0	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	2
+2400004	YAVIN4	yav_blue_leaf_temple	AREA	1	-3.76	-1.30	32.45	0	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	2
+2400005	YAVIN4	yav_blue_leaf_temple	AREA	2	-0.14	-37.30	-29.00	0	1	a kliknik dark queen	14280	poi	The Temple of the Blueleaf	1	none	0	300	180	2
+2400006	YAVIN4	yav_blue_leaf_temple	AREA	2	-13.11	-37.30	13.08	136	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	2
+2400007	YAVIN4	yav_blue_leaf_temple	AREA	2	-13.63	-1.30	24.34	97	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	2
 2400008	YAVIN4	yav_blue_leaf_temple	AREA	2	-13.83	-37.30	1.47	0	1	a kliknik dark worker	14290	poi	The Temple of the Blueleaf	2	none	0	300	180	4
-2400009	YAVIN4	yav_blue_leaf_temple	AREA	2	-25.33	-1.30	3.18	0	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0
-2400010	YAVIN4	yav_blue_leaf_temple	AREA	2	-3.30	-1.30	-25.77	0	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0
-2400011	YAVIN4	yav_blue_leaf_temple	AREA	2	-7.34	-37.30	-16.34	26	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0
+2400009	YAVIN4	yav_blue_leaf_temple	AREA	2	-25.33	-1.30	3.18	0	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	2
+2400010	YAVIN4	yav_blue_leaf_temple	AREA	2	-3.30	-1.30	-25.77	0	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	2
+2400011	YAVIN4	yav_blue_leaf_temple	AREA	2	-7.34	-37.30	-16.34	26	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	2
 2400012	YAVIN4	yav_blue_leaf_temple	AREA	2	1.82	-37.30	-22.06	0	1	a kliknik dark defender	14270	poi	The Temple of the Blueleaf	2	none	0	300	180	4
 2400013	YAVIN4	yav_blue_leaf_temple	AREA	2	10.80	-37.30	-0.01	-92	1	a kliknik dark worker	14290	poi	The Temple of the Blueleaf	2	none	0	300	180	4
-2400014	YAVIN4	yav_blue_leaf_temple	AREA	2	12.57	-37.30	12.52	43	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0
-2400015	YAVIN4	yav_blue_leaf_temple	AREA	2	12.87	-1.30	24.98	0	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0
-2400016	YAVIN4	yav_blue_leaf_temple	AREA	2	2.03	-1.30	-25.68	0	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0
-2400017	YAVIN4	yav_blue_leaf_temple	AREA	2	24.96	-1.30	10.10	0	-37	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0
-2400018	YAVIN4	yav_blue_leaf_temple	AREA	2	7.25	-37.30	-16.09	-24	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	0
-2400019	YAVIN4	yav_geonosian_cave	AREA	1	-2.70	10.90	10.80	0	1	a scientist	10355	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400020	YAVIN4	yav_geonosian_cave	AREA	2	24.90	9.90	-7.60	0	1	a crazed Geonosian guard	10310	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400021	YAVIN4	yav_geonosian_cave	AREA	2	29.10	10.40	-13.50	0	1	a crazed Geonosian guard	10310	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400022	YAVIN4	yav_geonosian_cave	AREA	2	36.70	9.80	-8.00	0	1	a crazed Geonosian guard	10310	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400023	YAVIN4	yav_geonosian_cave	AREA	2	39.30	10.40	-14.50	0	1	a crazed Geonosian guard	10310	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400024	YAVIN4	yav_geonosian_cave	AREA	4	-18.20	-18.00	-34.90	0	1	an alert droideka	10315	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400025	YAVIN4	yav_geonosian_cave	AREA	5	-40.70	-18.00	-53.50	0	1	an enhanced kliknik	10340	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400026	YAVIN4	yav_geonosian_cave	AREA	5	-48.30	-8.00	-31.30	0	1	a Geonosian scientist	10350	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400027	YAVIN4	yav_geonosian_cave	AREA	5	-48.70	-18.00	-43.10	0	1	an enhanced kliknik	10340	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400028	YAVIN4	yav_geonosian_cave	AREA	6	-61.70	-18.00	-59.40	0	1	an alert droideka	10315	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400029	YAVIN4	yav_geonosian_cave	AREA	8	-74.50	-19.00	-38.30	0	1	a crazed Geonosian guard	10310	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400030	YAVIN4	yav_geonosian_cave	AREA	8	-77.10	-18.50	-44.50	0	1	a crazed Geonosian guard	10310	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400031	YAVIN4	yav_geonosian_cave	AREA	8	-77.70	-18.90	-35.00	0	1	a crazed Geonosian guard	10310	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400032	YAVIN4	yav_geonosian_cave	AREA	9	-89.90	-18.00	-75.00	0	1	an alert droideka	10315	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400033	YAVIN4	yav_geonosian_cave	AREA	10	-106.50	-18.00	-33.00	0	1	a Geonosian technical assistant	10365	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400034	YAVIN4	yav_geonosian_cave	AREA	10	-118.40	-20.00	-39.20	0	1	a Geonosian technical assistant	10365	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400035	YAVIN4	yav_geonosian_cave	AREA	11	-54.30	-18.30	-81.80	0	1	an alert droideka	10315	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400036	YAVIN4	yav_geonosian_cave	AREA	13	-107.30	-22.10	-101.80	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400037	YAVIN4	yav_geonosian_cave	AREA	13	-108.30	-22.20	-119.80	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400038	YAVIN4	yav_geonosian_cave	AREA	13	-130.00	-19.80	-109.40	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400039	YAVIN4	yav_geonosian_cave	AREA	13	-95.30	-20.10	-110.10	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400040	YAVIN4	yav_geonosian_cave	AREA	14	-131.00	-19.90	-81.20	0	1	an enhanced gaping spider	10325	dungeon	Geonosian Cave	1	none	0	1800	1500	0
-2400041	YAVIN4	yav_geonosian_cave	AREA	14	-134.20	-21.80	-74.50	0	1	a Geonosian scientist	10350	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400042	YAVIN4	yav_geonosian_cave	AREA	16	-16.50	-28.20	-114.80	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400043	YAVIN4	yav_geonosian_cave	AREA	16	-4.50	-28.10	-92.00	0	1	an alert droideka	10315	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400044	YAVIN4	yav_geonosian_cave	AREA	18	21.90	-31.00	-70.80	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400045	YAVIN4	yav_geonosian_cave	AREA	18	25.00	-29.70	-80.00	0	1	a scientist	10355	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400046	YAVIN4	yav_geonosian_cave	AREA	18	25.20	-31.40	-86.10	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400047	YAVIN4	yav_geonosian_cave	AREA	18	31.40	-29.70	-77.70	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400048	YAVIN4	yav_geonosian_cave	AREA	20	-48.60	-19.80	-135.80	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400049	YAVIN4	yav_geonosian_cave	AREA	21	-34.10	-20.00	-128.20	0	1	an alert droideka	10315	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400050	YAVIN4	yav_geonosian_cave	AREA	22	-19.90	-20.00	-117.20	0	1	an Imperial observer	10335	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400051	YAVIN4	yav_geonosian_cave	AREA	23	-19.40	-22.70	-152.30	0	1	Fen Corandel (a Rebel pilot)	13600	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400052	YAVIN4	yav_geonosian_cave	AREA	23	-31.90	-19.80	-157.80	0	1	a crazed Geonosian guard	10310	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400053	YAVIN4	yav_geonosian_cave	AREA	23	-35.60	-19.80	-162.40	0	1	a scientist	10355	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400054	YAVIN4	yav_geonosian_cave	AREA	23	-36.00	-19.80	-153.90	0	1	a crazed Geonosian guard	10310	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400055	YAVIN4	yav_geonosian_cave	AREA	24	-64.00	-20.00	-142.60	0	1	an alert droideka	10315	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400056	YAVIN4	yav_geonosian_cave	AREA	25	-75.60	-20.00	-161.10	0	1	a mercenary sentry	10330	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400057	YAVIN4	yav_geonosian_cave	AREA	25	-81.70	-20.00	-157.90	0	1	a mercenary sentry	10330	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400058	YAVIN4	yav_geonosian_cave	AREA	28	-107.10	-32.00	-213.80	0	1	an alert droideka	10315	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400059	YAVIN4	yav_geonosian_cave	AREA	29	-120.70	-31.80	-228.40	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400060	YAVIN4	yav_geonosian_cave	AREA	31	-63.40	-34.00	-252.00	0	1	an alert droideka	10315	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400061	YAVIN4	yav_geonosian_cave	AREA	32	-60.00	-34.00	-272.70	0	1	a Geonosian scientist	10350	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400062	YAVIN4	yav_geonosian_cave	AREA	32	-66.10	-34.00	-269.10	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400063	YAVIN4	yav_geonosian_cave	AREA	32	-66.10	-34.00	-283.00	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400064	YAVIN4	yav_geonosian_cave	AREA	32	-72.00	-34.00	-277.30	0	1	a Geonosian scientist	10350	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400065	YAVIN4	yav_geonosian_cave	AREA	34	-136.70	-32.00	-212.00	0	1	an alert droideka	10315	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400066	YAVIN4	yav_geonosian_cave	AREA	35	-124.90	-34.00	-200.60	0	1	a Geonosian scientist	10350	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400067	YAVIN4	yav_geonosian_cave	AREA	35	-127.50	-34.00	-188.90	0	1	a Geonosian scientist	10350	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400068	YAVIN4	yav_geonosian_cave	AREA	35	-132.90	-32.00	-191.30	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400069	YAVIN4	yav_geonosian_cave	AREA	35	-143.10	-34.00	-193.90	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400070	YAVIN4	yav_geonosian_cave	AREA	35	-144.50	-34.00	-180.60	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400071	YAVIN4	yav_geonosian_cave	AREA	36	-128.00	-32.00	-267.90	0	1	an alert droideka	10315	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400072	YAVIN4	yav_geonosian_cave	AREA	37	-127.80	-32.50	-324.70	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400073	YAVIN4	yav_geonosian_cave	AREA	37	-131.50	-33.80	-338.60	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400074	YAVIN4	yav_geonosian_cave	AREA	37	-136.30	-33.80	-343.10	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400075	YAVIN4	yav_geonosian_cave	AREA	37	-143.30	-31.60	-323.90	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400076	YAVIN4	yav_geonosian_cave	AREA	38	-121.90	-32.10	-349.90	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400077	YAVIN4	yav_geonosian_cave	AREA	38	-129.10	-33.50	-384.80	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400078	YAVIN4	yav_geonosian_cave	AREA	38	-135.90	-31.90	-373.00	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400079	YAVIN4	yav_geonosian_cave	AREA	39	-71.60	-32.10	-381.30	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400080	YAVIN4	yav_geonosian_cave	AREA	39	-73.10	-33.90	-372.80	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400081	YAVIN4	yav_geonosian_cave	AREA	39	-76.20	-31.90	-349.10	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400082	YAVIN4	yav_geonosian_cave	AREA	39	-89.30	-32.20	-375.70	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400083	YAVIN4	yav_geonosian_cave	AREA	39	-90.70	-34.40	-367.40	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400084	YAVIN4	yav_geonosian_cave	AREA	40	-28.10	-34.20	-407.50	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400085	YAVIN4	yav_geonosian_cave	AREA	40	-46.80	-31.90	-407.80	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400086	YAVIN4	yav_geonosian_cave	AREA	40	-68.80	-32.10	-407.00	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400087	YAVIN4	yav_geonosian_cave	AREA	41	-11.90	-34.00	-414.20	0	1	an alert droideka	10315	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400088	YAVIN4	yav_geonosian_cave	AREA	42	13.40	-20.00	-336.90	0	1	an enhanced kliknik	10340	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400089	YAVIN4	yav_geonosian_cave	AREA	42	14.10	-22.00	-341.50	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400090	YAVIN4	yav_geonosian_cave	AREA	42	17.30	-32.00	-370.50	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400091	YAVIN4	yav_geonosian_cave	AREA	42	23.20	-24.00	-333.80	0	1	an enhanced kliknik	10340	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400092	YAVIN4	yav_geonosian_cave	AREA	42	23.70	-34.00	-375.10	0	1	an enhanced kliknik	10340	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400093	YAVIN4	yav_geonosian_cave	AREA	42	23.80	-34.00	-398.70	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400094	YAVIN4	yav_geonosian_cave	AREA	42	4.50	-34.00	-400.80	0	1	an enhanced kliknik	10340	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400095	YAVIN4	yav_geonosian_cave	AREA	42	7.00	-22.00	-334.00	0	1	a Geonosian scientist	10350	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400096	YAVIN4	yav_geonosian_cave	AREA	43	119.60	-32.00	-330.30	0	1	an enhanced kliknik	10340	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400097	YAVIN4	yav_geonosian_cave	AREA	43	67.50	-31.90	-329.30	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400098	YAVIN4	yav_geonosian_cave	AREA	43	83.90	-31.50	-308.40	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400099	YAVIN4	yav_geonosian_cave	AREA	43	91.10	-33.80	-347.60	0	1	an enhanced kliknik	10340	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400100	YAVIN4	yav_geonosian_cave	AREA	43	91.80	-34.10	-336.20	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	0
-2400101	YAVIN4	yav_geonosian_cave	AREA	43	95.70	-32.40	-322.20	0	1	an acklay	10305	dungeon	Geonosian Cave	1	none	0	1800	1500	0
+2400014	YAVIN4	yav_blue_leaf_temple	AREA	2	12.57	-37.30	12.52	43	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	2
+2400015	YAVIN4	yav_blue_leaf_temple	AREA	2	12.87	-1.30	24.98	0	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	2
+2400016	YAVIN4	yav_blue_leaf_temple	AREA	2	2.03	-1.30	-25.68	0	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	2
+2400017	YAVIN4	yav_blue_leaf_temple	AREA	2	24.96	-1.30	10.10	0	-37	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	2
+2400018	YAVIN4	yav_blue_leaf_temple	AREA	2	7.25	-37.30	-16.09	-24	1	a kliknik dark warrior	14285	poi	The Temple of the Blueleaf	1	none	0	300	180	2
+2400019	YAVIN4	yav_geonosian_cave	AREA	1	-2.70	10.90	10.80	0	1	a scientist	10355	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400020	YAVIN4	yav_geonosian_cave	AREA	2	24.90	9.90	-7.60	0	1	a crazed Geonosian guard	10310	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400021	YAVIN4	yav_geonosian_cave	AREA	2	29.10	10.40	-13.50	0	1	a crazed Geonosian guard	10310	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400022	YAVIN4	yav_geonosian_cave	AREA	2	36.70	9.80	-8.00	0	1	a crazed Geonosian guard	10310	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400023	YAVIN4	yav_geonosian_cave	AREA	2	39.30	10.40	-14.50	0	1	a crazed Geonosian guard	10310	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400024	YAVIN4	yav_geonosian_cave	AREA	4	-18.20	-18.00	-34.90	0	1	an alert droideka	10315	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400025	YAVIN4	yav_geonosian_cave	AREA	5	-40.70	-18.00	-53.50	0	1	an enhanced kliknik	10340	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400026	YAVIN4	yav_geonosian_cave	AREA	5	-48.30	-8.00	-31.30	0	1	a Geonosian scientist	10350	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400027	YAVIN4	yav_geonosian_cave	AREA	5	-48.70	-18.00	-43.10	0	1	an enhanced kliknik	10340	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400028	YAVIN4	yav_geonosian_cave	AREA	6	-61.70	-18.00	-59.40	0	1	an alert droideka	10315	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400029	YAVIN4	yav_geonosian_cave	AREA	8	-74.50	-19.00	-38.30	0	1	a crazed Geonosian guard	10310	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400030	YAVIN4	yav_geonosian_cave	AREA	8	-77.10	-18.50	-44.50	0	1	a crazed Geonosian guard	10310	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400031	YAVIN4	yav_geonosian_cave	AREA	8	-77.70	-18.90	-35.00	0	1	a crazed Geonosian guard	10310	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400032	YAVIN4	yav_geonosian_cave	AREA	9	-89.90	-18.00	-75.00	0	1	an alert droideka	10315	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400033	YAVIN4	yav_geonosian_cave	AREA	10	-106.50	-18.00	-33.00	0	1	a Geonosian technical assistant	10365	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400034	YAVIN4	yav_geonosian_cave	AREA	10	-118.40	-20.00	-39.20	0	1	a Geonosian technical assistant	10365	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400035	YAVIN4	yav_geonosian_cave	AREA	11	-54.30	-18.30	-81.80	0	1	an alert droideka	10315	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400036	YAVIN4	yav_geonosian_cave	AREA	13	-107.30	-22.10	-101.80	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400037	YAVIN4	yav_geonosian_cave	AREA	13	-108.30	-22.20	-119.80	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400038	YAVIN4	yav_geonosian_cave	AREA	13	-130.00	-19.80	-109.40	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400039	YAVIN4	yav_geonosian_cave	AREA	13	-95.30	-20.10	-110.10	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400040	YAVIN4	yav_geonosian_cave	AREA	14	-131.00	-19.90	-81.20	0	1	an enhanced gaping spider	10325	dungeon	Geonosian Cave	1	none	0	1800	1500	2
+2400041	YAVIN4	yav_geonosian_cave	AREA	14	-134.20	-21.80	-74.50	0	1	a Geonosian scientist	10350	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400042	YAVIN4	yav_geonosian_cave	AREA	16	-16.50	-28.20	-114.80	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400043	YAVIN4	yav_geonosian_cave	AREA	16	-4.50	-28.10	-92.00	0	1	an alert droideka	10315	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400044	YAVIN4	yav_geonosian_cave	AREA	18	21.90	-31.00	-70.80	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400045	YAVIN4	yav_geonosian_cave	AREA	18	25.00	-29.70	-80.00	0	1	a scientist	10355	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400046	YAVIN4	yav_geonosian_cave	AREA	18	25.20	-31.40	-86.10	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400047	YAVIN4	yav_geonosian_cave	AREA	18	31.40	-29.70	-77.70	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400048	YAVIN4	yav_geonosian_cave	AREA	20	-48.60	-19.80	-135.80	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400049	YAVIN4	yav_geonosian_cave	AREA	21	-34.10	-20.00	-128.20	0	1	an alert droideka	10315	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400050	YAVIN4	yav_geonosian_cave	AREA	22	-19.90	-20.00	-117.20	0	1	an Imperial observer	10335	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400051	YAVIN4	yav_geonosian_cave	AREA	23	-19.40	-22.70	-152.30	0	1	Fen Corandel (a Rebel pilot)	13600	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400052	YAVIN4	yav_geonosian_cave	AREA	23	-31.90	-19.80	-157.80	0	1	a crazed Geonosian guard	10310	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400053	YAVIN4	yav_geonosian_cave	AREA	23	-35.60	-19.80	-162.40	0	1	a scientist	10355	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400054	YAVIN4	yav_geonosian_cave	AREA	23	-36.00	-19.80	-153.90	0	1	a crazed Geonosian guard	10310	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400055	YAVIN4	yav_geonosian_cave	AREA	24	-64.00	-20.00	-142.60	0	1	an alert droideka	10315	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400056	YAVIN4	yav_geonosian_cave	AREA	25	-75.60	-20.00	-161.10	0	1	a mercenary sentry	10330	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400057	YAVIN4	yav_geonosian_cave	AREA	25	-81.70	-20.00	-157.90	0	1	a mercenary sentry	10330	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400058	YAVIN4	yav_geonosian_cave	AREA	28	-107.10	-32.00	-213.80	0	1	an alert droideka	10315	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400059	YAVIN4	yav_geonosian_cave	AREA	29	-120.70	-31.80	-228.40	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400060	YAVIN4	yav_geonosian_cave	AREA	31	-63.40	-34.00	-252.00	0	1	an alert droideka	10315	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400061	YAVIN4	yav_geonosian_cave	AREA	32	-60.00	-34.00	-272.70	0	1	a Geonosian scientist	10350	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400062	YAVIN4	yav_geonosian_cave	AREA	32	-66.10	-34.00	-269.10	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400063	YAVIN4	yav_geonosian_cave	AREA	32	-66.10	-34.00	-283.00	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400064	YAVIN4	yav_geonosian_cave	AREA	32	-72.00	-34.00	-277.30	0	1	a Geonosian scientist	10350	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400065	YAVIN4	yav_geonosian_cave	AREA	34	-136.70	-32.00	-212.00	0	1	an alert droideka	10315	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400066	YAVIN4	yav_geonosian_cave	AREA	35	-124.90	-34.00	-200.60	0	1	a Geonosian scientist	10350	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400067	YAVIN4	yav_geonosian_cave	AREA	35	-127.50	-34.00	-188.90	0	1	a Geonosian scientist	10350	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400068	YAVIN4	yav_geonosian_cave	AREA	35	-132.90	-32.00	-191.30	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400069	YAVIN4	yav_geonosian_cave	AREA	35	-143.10	-34.00	-193.90	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400070	YAVIN4	yav_geonosian_cave	AREA	35	-144.50	-34.00	-180.60	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400071	YAVIN4	yav_geonosian_cave	AREA	36	-128.00	-32.00	-267.90	0	1	an alert droideka	10315	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400072	YAVIN4	yav_geonosian_cave	AREA	37	-127.80	-32.50	-324.70	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400073	YAVIN4	yav_geonosian_cave	AREA	37	-131.50	-33.80	-338.60	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400074	YAVIN4	yav_geonosian_cave	AREA	37	-136.30	-33.80	-343.10	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400075	YAVIN4	yav_geonosian_cave	AREA	37	-143.30	-31.60	-323.90	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400076	YAVIN4	yav_geonosian_cave	AREA	38	-121.90	-32.10	-349.90	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400077	YAVIN4	yav_geonosian_cave	AREA	38	-129.10	-33.50	-384.80	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400078	YAVIN4	yav_geonosian_cave	AREA	38	-135.90	-31.90	-373.00	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400079	YAVIN4	yav_geonosian_cave	AREA	39	-71.60	-32.10	-381.30	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400080	YAVIN4	yav_geonosian_cave	AREA	39	-73.10	-33.90	-372.80	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400081	YAVIN4	yav_geonosian_cave	AREA	39	-76.20	-31.90	-349.10	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400082	YAVIN4	yav_geonosian_cave	AREA	39	-89.30	-32.20	-375.70	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400083	YAVIN4	yav_geonosian_cave	AREA	39	-90.70	-34.40	-367.40	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400084	YAVIN4	yav_geonosian_cave	AREA	40	-28.10	-34.20	-407.50	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400085	YAVIN4	yav_geonosian_cave	AREA	40	-46.80	-31.90	-407.80	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400086	YAVIN4	yav_geonosian_cave	AREA	40	-68.80	-32.10	-407.00	0	1	an enhanced kliknik	10345	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400087	YAVIN4	yav_geonosian_cave	AREA	41	-11.90	-34.00	-414.20	0	1	an alert droideka	10315	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400088	YAVIN4	yav_geonosian_cave	AREA	42	13.40	-20.00	-336.90	0	1	an enhanced kliknik	10340	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400089	YAVIN4	yav_geonosian_cave	AREA	42	14.10	-22.00	-341.50	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400090	YAVIN4	yav_geonosian_cave	AREA	42	17.30	-32.00	-370.50	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400091	YAVIN4	yav_geonosian_cave	AREA	42	23.20	-24.00	-333.80	0	1	an enhanced kliknik	10340	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400092	YAVIN4	yav_geonosian_cave	AREA	42	23.70	-34.00	-375.10	0	1	an enhanced kliknik	10340	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400093	YAVIN4	yav_geonosian_cave	AREA	42	23.80	-34.00	-398.70	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400094	YAVIN4	yav_geonosian_cave	AREA	42	4.50	-34.00	-400.80	0	1	an enhanced kliknik	10340	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400095	YAVIN4	yav_geonosian_cave	AREA	42	7.00	-22.00	-334.00	0	1	a Geonosian scientist	10350	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400096	YAVIN4	yav_geonosian_cave	AREA	43	119.60	-32.00	-330.30	0	1	an enhanced kliknik	10340	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400097	YAVIN4	yav_geonosian_cave	AREA	43	67.50	-31.90	-329.30	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400098	YAVIN4	yav_geonosian_cave	AREA	43	83.90	-31.50	-308.40	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400099	YAVIN4	yav_geonosian_cave	AREA	43	91.10	-33.80	-347.60	0	1	an enhanced kliknik	10340	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400100	YAVIN4	yav_geonosian_cave	AREA	43	91.80	-34.10	-336.20	0	1	a cavern spider	2455	dungeon	Geonosian Cave	1	none	0	300	120	2
+2400101	YAVIN4	yav_geonosian_cave	AREA	43	95.70	-32.40	-322.20	0	1	an acklay	10305	dungeon	Geonosian Cave	1	none	0	1800	1500	2
 2400102	YAVIN4	yav_imp_outpost_barracks	EGG	3	-0.05	0.13	-6.00	0	1	Haymir Rendundi (Black Epsilon Pilot Trainer)	33800	city	Imperial Outpost	1	none	0	300	120	0
 2400103	YAVIN4	yav_imp_outpost_cantina	EGG	6	-3.88	0.13	-3.68	89	1	Captain Denner (Storm Squadron Pilot Trainer)	33780	city	Imperial Outpost	1	none	0	300	120	0
 2400104	YAVIN4	yav_imp_outpost_cantina	EGG	3	0.14	0.13	-5.83	0	1	Field Commander Alozen (Storm Squadron Pilot Trainer)	33775	city	Imperial Outpost	1	none	0	300	120	0
@@ -225,7 +225,7 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 2400225	YAVIN4	yav_world	AREA	0	-690.25	92.83	-2014.99	-117	1	a kliknik dark hunter	14275	poi	Woolamander Palace	2	none	0	300	180	4
 2400226	YAVIN4	yav_world	QUEST	0	-6900.30	73.00	-5655.07	-161	1	Soci	33430	city	Labor Outpost	1	none	0	300	180	0
 2400227	YAVIN4	yav_world	EGG	0	-6912.79	73.00	-5736.72	74	1	Nore Brrea	21235	city	Labor Outpost	1	none	0	300	120	0
-2400228	YAVIN4	yav_world	EGG	0	-6877.27	73.00	-5682.29	18	1	a Chiss male	23260	city	Labor Outpost	1	none	0	300	120	0
+2400228	YAVIN4	yav_world	EGG	0	-6877.27	73.00	-5682.29	-61	1	a Chiss male	23260	city	Labor Outpost	1	none	0	300	120	0
 2400229	YAVIN4	yav_world	EGG	0	-6981.06	73.00	-5659.48	-174	1	a commoner	3185	city	Labor Outpost	1	none	0	300	120	0
 2400230	YAVIN4	yav_world	AREA	0	-6924.56	69.33	6049.61	0	1	a master thief	15905	-	-	3	none	0	300	180	6
 2400231	YAVIN4	yav_world	AREA	0	-6942.03	45.68	-908.28	0	1	a Rebel scout	24670	-	-	3	none	0	300	180	6
