@@ -55,6 +55,7 @@ import resources.server_info.Log;
 import resources.server_info.Log.LogLevel;
 import services.admin.OnlineInterfaceService;
 import services.galaxy.GalacticManager;
+import utilities.CrcDatabaseGenerator;
 import utilities.ThreadUtilities;
 
 public class CoreManager extends Manager {
@@ -76,6 +77,7 @@ public class CoreManager extends Manager {
 		Config c = getConfig(ConfigFile.PRIMARY);
 		Log.setLogLevel(LogLevel.valueOf(c.getString("LOG-LEVEL", LogLevel.DEBUG.name())));
 		setupGalaxy(c);
+		setupCrcDatabase();
 		packetStream = setupPrintStream(c);
 		packetDebug = packetStream != null;
 		shutdownService = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("core-shutdown-service"));
@@ -228,6 +230,11 @@ public class CoreManager extends Manager {
 			}
 		}
 		return null;
+	}
+	
+	private void setupCrcDatabase() {
+		Log.i(this, "Generating CRCs...");
+		CrcDatabaseGenerator.generate(false);
 	}
 	
 	public static Galaxy getGalaxy() {
