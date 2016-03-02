@@ -675,7 +675,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			sendSceneCreateObject(target);
 			sendBaselines(target);
 		}
-		createChildrenObjects(target);
+		createChildrenObjects(target, ignoreSnapshotChecks);
 		if (!isSnapshot() || ignoreSnapshotChecks)
 			target.sendPacket(new SceneEndBaselines(getObjectId()));
 	}
@@ -923,6 +923,10 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	protected void createChildrenObjects(Player target) {
+		createChildrenObjects(target, false);
+	}
+	
+	protected void createChildrenObjects(Player target, boolean ignoreSnapshotChecks) {
 		synchronized (slots) {
 			if (slots.size() == 0 && containedObjects.size() == 0)
 				return;
@@ -935,7 +939,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			for (SWGObject slotObject : slots.values()) {
 				if (slotObject != null && !sentObjects.contains(slotObject)) {
 					//Log.i("ChildrenObjects", "Sending slotObj " + slotObject + " to " + target);
-					slotObject.createObject(target);
+					slotObject.createObject(target, ignoreSnapshotChecks);
 					sentObjects.add(slotObject);
 				}
 			}
@@ -947,7 +951,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 				if (containedObject != null && !sentObjects.contains(containedObject)) {
 					if (containedObject instanceof CreatureObject && ((CreatureObject) containedObject).isLoggedOutPlayer())
 						continue; // If it's a player, but that's logged out
-					containedObject.createObject(target);
+					containedObject.createObject(target, ignoreSnapshotChecks);
 				}
 			}
 		}
