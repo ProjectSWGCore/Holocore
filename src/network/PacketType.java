@@ -214,6 +214,10 @@ public enum PacketType {
 	public int getCrc() {
 		return crc;
 	}
+	
+	public Class<? extends SWGPacket> getSwgClass() {
+		return c;
+	}
 
 	public static PacketType fromCrc(int crc) {
 		PacketType type = packetMap.get(crc);
