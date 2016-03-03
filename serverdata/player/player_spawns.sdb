@@ -9,6 +9,9 @@ dat_aurillia	dathomir			5304	78	-4135	5
 tal_dearic	talus			336	6	-2930	5
 ror_restuss	rori			5289	80	6131	5
 dan_miningoutpost	dantooine			-614	3	2527	5
-kas_kashirho	kashyyyk_hunting			244	41	466	5
-tansarii	tutorial			-4108.5	0	-2028.5	5
+kas_kachirho	kashyyyk_hunting			244	41	466	5
+tansarii	dungeon1	du1_npe_dungeon	hangarbay1	76.70	0.80	55.70	5
+heroic_ek	dungeon1	du1_heroic_ek	r1	-11.70	0.20	-116.50	5
+heroic_isd	dungeon1	du1_heroic_isd	mainhangar	0.10	172.30	326.30	5
+nova_orion	dungeon1	du1_nova_orion	hangarbay1	76.70	0.80	55.70	5
 dev_area	dev_area			3525	4	-4807	5
