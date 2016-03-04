@@ -34,6 +34,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
 
+import intents.object.DestroyObjectIntent;
 import intents.radial.RadialSelectionIntent;
 import resources.control.Intent;
 import resources.control.Service;
@@ -50,13 +51,11 @@ public class UniformBoxService extends Service {
 	
 	private final String uniformBoxTemplate = "object/tangible/npe/shared_npe_uniform_box.iff";
 	private static final String GET_UNIFORMBOX_SQL = "SELECT * FROM npe_uniformbox where profession = ? AND race = ? AND (gender = ? OR gender = 3)";
-	private final ObjectManager objectManager;
 	private RelationalServerData uniformBoxDatabase;
 	private PreparedStatement getUniformBoxStatement;
 	
 	
-	public UniformBoxService(ObjectManager objectManager){
-		this.objectManager = objectManager;
+	public UniformBoxService(){
 
 		uniformBoxDatabase = RelationalServerFactory.getServerData("player/npe_uniformbox.db", "npe_uniformbox");
 		if (uniformBoxDatabase == null)
@@ -101,7 +100,7 @@ public class UniformBoxService extends Service {
 				if (set.next()){
 					for (int i = 4; i <= 13; i++){
 						if (!set.getObject(i).toString().isEmpty()){
-							SWGObject item = objectManager.createObject(getItemIffTemplate(set.getObject(i).toString()));
+							SWGObject item = ObjectCreator.createObjectFromTemplate(getItemIffTemplate(set.getObject(i).toString()));
 							item.moveToContainer(inventory);
 						}
 					}
@@ -142,7 +141,7 @@ public class UniformBoxService extends Service {
 		
 		for (SWGObject item : items){
 			if (item.getTemplate().equals(uniformBoxTemplate)){
-				objectManager.destroyObject(item);
+				new DestroyObjectIntent(item).broadcast();
 			}
 		}		
 

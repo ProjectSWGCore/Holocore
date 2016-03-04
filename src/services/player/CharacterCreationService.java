@@ -423,7 +423,8 @@ public class CharacterCreationService extends Service {
 		
 		SWGObject inventory = player.getSlottedObject("inventory");
 		SWGObject item = objManager.createObject("object/tangible/npe/shared_npe_uniform_box.iff");
-		inventory.addObject(item);		
+		item.moveToContainer(inventory);
+
 	}
 	
 	private void loadProfTemplates() {
