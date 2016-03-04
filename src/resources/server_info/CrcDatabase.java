@@ -12,10 +12,12 @@ public class CrcDatabase implements AutoCloseable {
 	
 	private static final String INSERT_CRC_SQL = "INSERT INTO crcs (string, crc) VALUES (?, ?)";
 	private static final String GET_STRING_SQL = "SELECT string FROM crcs WHERE crc = ?";
+	private static final String GET_ALL_STRINGS_SQL = "SELECT crc, string FROM crcs";
 	
 	private final RelationalDatabase database;
 	private final PreparedStatement insertCrcStatement;
 	private final PreparedStatement getStringStatement;
+	private final PreparedStatement getStringsStatement;
 	private final Map<Integer, String> crcTable;
 	
 	public CrcDatabase() {
@@ -26,6 +28,7 @@ public class CrcDatabase implements AutoCloseable {
 		
 		insertCrcStatement = database.prepareStatement(INSERT_CRC_SQL);
 		getStringStatement = database.prepareStatement(GET_STRING_SQL);
+		getStringsStatement = database.prepareStatement(GET_ALL_STRINGS_SQL);
 	}
 	
 	public void close() {
@@ -38,13 +41,46 @@ public class CrcDatabase implements AutoCloseable {
 		database.close();
 	}
 	
+	public void loadStrings() {
+		synchronized (getStringsStatement) {
+			try {
+				try (ResultSet set = getStringsStatement.executeQuery()) {
+					while (set.next()) {
+						addCrcTable(set.getString("string"), set.getInt("crc"));
+					}
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void addCrcBatch(String string) {
+		int crc = CRC.getCrc(string);
+		if (getString(crc) != null)
+			return;
+		if (addCrcTable(string, crc))
+			return;
+		addCrcDatabase(string, crc, false);
+	}
+	
+	public void commitBatch() {
+		synchronized (insertCrcStatement) {
+			try {
+				insertCrcStatement.executeBatch();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	public void addCrc(String string) {
 		int crc = CRC.getCrc(string);
 		if (getString(crc) != null)
 			return;
 		if (addCrcTable(string, crc))
 			return;
-		addCrcDatabase(string, crc);
+		addCrcDatabase(string, crc, true);
 	}
 	
 	public String getString(int crc) {
@@ -56,12 +92,15 @@ public class CrcDatabase implements AutoCloseable {
 		return str;
 	}
 	
-	private void addCrcDatabase(String string, int crc) {
+	private void addCrcDatabase(String string, int crc, boolean commit) {
 		synchronized (insertCrcStatement) {
 			try {
 				insertCrcStatement.setString(1, string);
 				insertCrcStatement.setInt(2, crc);
-				insertCrcStatement.executeUpdate();
+				if (commit)
+					insertCrcStatement.executeUpdate();
+				else
+					insertCrcStatement.addBatch();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

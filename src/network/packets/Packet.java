@@ -361,4 +361,8 @@ public class Packet {
 		return data;
 	}
 	
+	public String toString() {
+		return getClass().getSimpleName();
+	}
+	
 }

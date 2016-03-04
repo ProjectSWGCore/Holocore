@@ -37,8 +37,10 @@ import resources.PvpFaction;
 import resources.PvpFlag;
 import resources.PvpStatus;
 import resources.network.BaselineBuilder;
+import resources.network.NetBuffer;
 import resources.objects.SWGObject;
 import resources.player.Player;
+import utilities.Encoder.StringType;
 
 public class TangibleObject extends SWGObject {
 	
@@ -228,8 +230,10 @@ public class TangibleObject extends SWGObject {
 		return super.hashCode();
 	}
 	
-	public void createBaseline3(Player target, BaselineBuilder bb) {
+	protected void createBaseline3(Player target, BaselineBuilder bb) {
 		super.createBaseline3(target, bb); // 4 variables - BASE3 (4)
+		if (getStringId().toString().equals("@obj_n:unknown_object"))
+			return;
 		bb.addInt(pvpFaction.getCrc()); // Faction - 4
 		bb.addInt(pvpStatus.getValue()); // Faction Status - 5
 		bb.addArray(appearanceData); // - 6
@@ -244,20 +248,49 @@ public class TangibleObject extends SWGObject {
 		bb.incrementOperandCount(9);
 	}
 	
-	public void createBaseline6(Player target, BaselineBuilder bb) {
+	protected void createBaseline6(Player target, BaselineBuilder bb) {
 		super.createBaseline6(target, bb);
-		bb.addBoolean(false); // Combat flag
-		bb.addInt(0); // Defenders List (Set, Long)
+		if (getStringId().toString().equals("@obj_n:unknown_object"))
+			return;
+		bb.addBoolean(inCombat); // 2 - Combat flag
+		bb.addInt(0); // 3 - Defenders List (Set, Long)
 			bb.addInt(0);
-		bb.addInt(0); // Map color
-		bb.addInt(0); // Access List
+		bb.addInt(0); // 4 - Map color
+		bb.addInt(0); // 5 - Access List
 			bb.addInt(0);
-		bb.addInt(0); // Guild Access Set
+		bb.addInt(0); // 6 - Guild Access Set
 			bb.addInt(0);
-		bb.addInt(0); // Effects Map
+		bb.addInt(0); // 7 - Effects Map
 			bb.addInt(0);
 		
 		bb.incrementOperandCount(6);
+	}
+	
+	protected void parseBaseline3(NetBuffer buffer) {
+		super.parseBaseline3(buffer);
+		if (getStringId().toString().equals("@obj_n:unknown_object"))
+			return;
+		pvpFaction = PvpFaction.getFactionForCrc(buffer.getInt());
+		pvpStatus = PvpStatus.getStatusForValue(buffer.getInt());
+		appearanceData = buffer.getArray();
+		buffer.getSwgSet(3, 7, Integer.TYPE);
+		optionFlags = buffer.getInt();
+		buffer.getInt();
+		condition = buffer.getInt();
+		buffer.getInt();
+		buffer.getBoolean();
+	}
+	
+	protected void parseBaseline6(NetBuffer buffer) {
+		super.parseBaseline6(buffer);
+		if (getStringId().toString().equals("@obj_n:unknown_object"))
+			return;
+		inCombat = buffer.getBoolean();
+		buffer.getSwgSet(6, 3, Long.TYPE);
+		buffer.getInt();
+		buffer.getSwgSet(6, 5, StringType.ASCII.getClass());
+		buffer.getSwgSet(6, 6, StringType.ASCII.getClass());
+		buffer.getSwgMap(6, 7, StringType.ASCII.getClass(), StringType.ASCII.getClass());
 	}
 	
 	@Override

@@ -142,7 +142,7 @@ public class OnlineInterfaceService extends Service implements HttpServerCallbac
 		if (i instanceof PlayerEventIntent) {
 			PlayerEventIntent pei = (PlayerEventIntent) i;
 			switch (pei.getEvent()) {
-				case PE_ZONE_IN:
+				case PE_ZONE_IN_CLIENT:
 					data.addOnlinePlayer(pei.getPlayer());
 					break;
 				case PE_LOGGED_OUT:
