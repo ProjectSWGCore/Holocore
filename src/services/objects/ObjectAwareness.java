@@ -198,12 +198,10 @@ public class ObjectAwareness extends Service {
 			transform.setSpeed((float) (obj.getMovementScale()*7.3));
 		}
 		BuildoutArea area = obj.getBuildoutArea();
-		if (area != null && area.isAdjustCoordinates())
-			newLocation.translatePosition(area.getX1(), 0, area.getZ1());
+		area.adjustLocation(newLocation);
 		new PlayerTransformedIntent(obj, obj.getParent(), null, obj.getLocation(), newLocation).broadcast();
 		move(obj, newLocation, true);
-		if (area != null && area.isAdjustCoordinates())
-			newLocation.translatePosition(-area.getX1(), 0, -area.getZ1());
+		area.readjustLocation(newLocation);
 		obj.sendDataTransforms(transform);
 	}
 	
