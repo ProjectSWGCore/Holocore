@@ -30,13 +30,13 @@ package intents.object;
 import resources.control.Intent;
 import resources.objects.SWGObject;
 
-public class ObjectCreatedIntent extends Intent {
+public class DestroyObjectIntent extends Intent {
 	
-	public static final String TYPE = "ObjectCreatedIntent";
+	public static final String TYPE = "DestroyObjectIntent";
 	
 	private final SWGObject obj;
 	
-	public ObjectCreatedIntent(SWGObject obj) {
+	public DestroyObjectIntent(SWGObject obj) {
 		super(TYPE);
 		this.obj = obj;
 	}
