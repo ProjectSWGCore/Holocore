@@ -35,6 +35,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import intents.object.DestroyObjectIntent;
 import intents.object.ObjectCreatedIntent;
 import intents.object.ObjectTeleportIntent;
 import intents.player.DeleteCharacterIntent;
@@ -92,6 +93,7 @@ public class ObjectManager extends Manager {
 		registerForIntent(GalacticPacketIntent.TYPE);
 		registerForIntent(ObjectTeleportIntent.TYPE);
 		registerForIntent(ObjectCreatedIntent.TYPE);
+		registerForIntent(DestroyObjectIntent.TYPE);
 		registerForIntent(DeleteCharacterIntent.TYPE);
 	}
 	
@@ -174,17 +176,32 @@ public class ObjectManager extends Manager {
 	
 	@Override
 	public void onIntentReceived(Intent i) {
-		if (i instanceof GalacticPacketIntent) {
-			processGalacticPacketIntent((GalacticPacketIntent) i);
-		} else if (i instanceof ObjectCreatedIntent) {
-			processObjectCreatedIntent((ObjectCreatedIntent) i);
-		} else if (i instanceof DeleteCharacterIntent) {
-			deleteObject(((DeleteCharacterIntent) i).getCreature().getObjectId());
+		switch (i.getType()) {
+			case GalacticPacketIntent.TYPE:
+				if (i instanceof GalacticPacketIntent)
+					processGalacticPacketIntent((GalacticPacketIntent) i);
+				break;
+			case ObjectCreatedIntent.TYPE:
+				if (i instanceof ObjectCreatedIntent)
+					processObjectCreatedIntent((ObjectCreatedIntent) i);
+				break;
+			case DestroyObjectIntent.TYPE:
+				if (i instanceof DestroyObjectIntent)
+					processDestroyObjectIntent((DestroyObjectIntent) i);
+				break;
+			case DeleteCharacterIntent.TYPE:
+				if (i instanceof DeleteCharacterIntent)
+					deleteObject(((DeleteCharacterIntent) i).getCreature().getObjectId());
+				break;
 		}
 	}
 	
 	private void processObjectCreatedIntent(ObjectCreatedIntent intent) {
 		putObject(intent.getObject());
+	}
+	
+	private void processDestroyObjectIntent(DestroyObjectIntent doi) {
+		destroyObject(doi.getObject());
 	}
 	
 	private void processGalacticPacketIntent(GalacticPacketIntent gpi) {
