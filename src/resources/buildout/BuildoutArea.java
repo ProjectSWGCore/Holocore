@@ -1,5 +1,6 @@
 package resources.buildout;
 
+import resources.Location;
 import resources.Terrain;
 
 public class BuildoutArea implements Comparable<BuildoutArea> {
@@ -97,6 +98,18 @@ public class BuildoutArea implements Comparable<BuildoutArea> {
 		if (comp != 0)
 			return comp;
 		return 0;
+	}
+	
+	public void adjustLocation(Location l) {
+		if (!isAdjustCoordinates())
+			return;
+		l.translatePosition(x1, 0, z1);
+	}
+	
+	public void readjustLocation(Location l) {
+		if (!isAdjustCoordinates())
+			return;
+		l.translatePosition(-x1, 0, -z1);
 	}
 	
 	public String toString() {

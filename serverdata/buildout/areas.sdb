@@ -57,7 +57,7 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL DEFAULT ""	REAL NO
 -12	endor	endor_global		-8196	-8196	8196	8196	0
 -11	endor_asommers	endor_asommers_global		-8196	-8196	8196	8196	0
 -10	dungeon1	dungeon1_global		-8196	-8196	8196	8196	0
--9	tatooine	tatooine_global		-8196	-8196	8196	8196	0
+-9	dev_area	dev_area_global		-8196	-8196	8196	8196	0
 -8	dathomir	dathomir_global		-8196	-8196	8196	8196	0
 -7	dantooine	dantooine_global		-8196	-8196	8196	8196	0
 -6	creature_test	creature_test_global		-8196	-8196	8196	8196	0
