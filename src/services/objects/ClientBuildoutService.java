@@ -16,8 +16,6 @@ import resources.Location;
 import resources.Terrain;
 import resources.buildout.BuildoutArea;
 import resources.buildout.BuildoutArea.BuildoutAreaBuilder;
-import resources.client_info.ClientFactory;
-import resources.client_info.visitors.CrcStringTableData;
 import resources.config.ConfigFile;
 import resources.control.Intent;
 import resources.control.Service;
@@ -25,6 +23,7 @@ import resources.objects.SWGObject;
 import resources.objects.SWGObject.ObjectClassification;
 import resources.objects.cell.CellObject;
 import resources.objects.creature.CreatureObject;
+import resources.server_info.CrcDatabase;
 import resources.server_info.Log;
 import resources.server_info.RelationalServerData;
 import resources.server_info.RelationalServerFactory;
@@ -38,12 +37,10 @@ public class ClientBuildoutService extends Service {
 			+ "FROM objects "
 			+ "ORDER BY buildout_id ASC";
 	
-	private final CrcStringTableData strings;
 	private final List<BuildoutArea> areas;
 	private final Map<Integer, BuildoutArea> areasById;
 	
 	public ClientBuildoutService() {
-		strings = (CrcStringTableData) ClientFactory.getInfoFromFile("misc/object_template_crc_string_table.iff");
 		areas = new ArrayList<>();
 		areasById = new Hashtable<>(1000); // Number of buildout areas
 		
@@ -84,23 +81,25 @@ public class ClientBuildoutService extends Service {
 	
 	private Collection<SWGObject> loadObjects() throws SQLException {
 		Map<Long, SWGObject> objects = new Hashtable<>();
-		try (RelationalServerData data = RelationalServerFactory.getServerData("buildout/buildouts.db", "objects")) {
-			try (ResultSet set = data.executeQuery(GET_CLIENT_OBJECTS_SQL)) {
-				set.setFetchSize(4*1024);
-				BuildoutArea area = null;
-				ObjectInformation info = new ObjectInformation(set);
-				int prevAreaId = Integer.MAX_VALUE;
-				int areaId = 0;
-				while (set.next()) {
-					areaId = info.getAreaIdNoLoad();
-					if (prevAreaId != areaId) {
-						area = areasById.get(areaId);
-						prevAreaId = areaId;
+		try (CrcDatabase strings = new CrcDatabase()) {
+			try (RelationalServerData data = RelationalServerFactory.getServerData("buildout/buildouts.db", "objects")) {
+				try (ResultSet set = data.executeQuery(GET_CLIENT_OBJECTS_SQL)) {
+					set.setFetchSize(4*1024);
+					BuildoutArea area = null;
+					ObjectInformation info = new ObjectInformation(set);
+					int prevAreaId = Integer.MAX_VALUE;
+					int areaId = 0;
+					while (set.next()) {
+						areaId = info.getAreaIdNoLoad();
+						if (prevAreaId != areaId) {
+							area = areasById.get(areaId);
+							prevAreaId = areaId;
+						}
+						if (area == null)
+							continue;
+						info.load(strings);
+						createObject(objects, area, info);
 					}
-					if (area == null)
-						continue;
-					info.load(strings);
-					createObject(objects, area, info);
 				}
 			}
 		}
@@ -283,10 +282,10 @@ public class ClientBuildoutService extends Service {
 			l = new Location();
 		}
 		
-		public void load(CrcStringTableData strings) throws SQLException {
+		public void load(CrcDatabase strings) throws SQLException {
 			id = set.getLong(index.idInd);
 			snapshot = set.getBoolean(index.snapInd);
-			template = strings.getTemplateString(set.getInt(index.crcInd));
+			template = strings.getString(set.getInt(index.crcInd));
 			l.setPosition(set.getDouble(index.xInd), set.getDouble(index.yInd), set.getDouble(index.zInd));
 			l.setOrientation(set.getDouble(index.oxInd), set.getDouble(index.oyInd), set.getDouble(index.ozInd), set.getDouble(index.owInd));
 			radius = set.getInt(index.radiusInd);

@@ -59,7 +59,7 @@ public class CityService extends Service {
 		} else if (i instanceof PlayerEventIntent) {
 			Player player = ((PlayerEventIntent) i).getPlayer();
 			CreatureObject creature = player.getCreatureObject();
-			if (((PlayerEventIntent) i).getEvent() == PlayerEvent.PE_ZONE_IN) {
+			if (((PlayerEventIntent) i).getEvent() == PlayerEvent.PE_ZONE_IN_CLIENT) {
 				performLocationUpdate(creature, creature.getLocation());
 			}
 		}

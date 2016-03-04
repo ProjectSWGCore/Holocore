@@ -12,8 +12,8 @@ import resources.Location;
 import resources.Quaternion;
 import resources.Terrain;
 import resources.client_info.ClientFactory;
-import resources.client_info.visitors.CrcStringTableData;
 import resources.client_info.visitors.DatatableData;
+import resources.common.CRC;
 import resources.objects.SWGObject;
 import resources.objects.buildouts.SwgBuildoutArea;
 import resources.objects.buildouts.BuildoutLoader;
@@ -21,8 +21,6 @@ import resources.objects.buildouts.SnapshotLoader;
 import resources.objects.cell.CellObject;
 
 public class BuildoutGenerator {
-	
-	private static final CrcStringTableData CRC_TABLE = (CrcStringTableData) ClientFactory.getInfoFromFile("misc/object_template_crc_string_table.iff");
 	
 	private static final String floatType = "REAL NOT NULL";
 	private static final String intType = "INTEGER NOT NULL";
@@ -224,7 +222,7 @@ public class BuildoutGenerator {
 	
 	private void writeObject(SdbGenerator gen, SWGObject object, long buildoutId) throws IOException {
 		long id = object.getObjectId();
-		int crc = CRC_TABLE.getCrcForString(object.getTemplate());
+		int crc = CRC.getCrc(object.getTemplate());
 		long container = (object.getParent() != null) ? object.getParent().getObjectId() : 0;
 		Location l = object.getLocation();
 		Quaternion q = l.getOrientation();
