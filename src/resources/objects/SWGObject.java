@@ -644,7 +644,13 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	private final void sendSceneCreateObject(Player target) {
 		SceneCreateObjectByCrc create = new SceneCreateObjectByCrc();
 		create.setObjectId(objectId);
-		create.setLocation(location);
+		if (buildoutArea == null || !buildoutArea.isAdjustCoordinates())
+			create.setLocation(location);
+		else {
+			Location nLoc = new Location(location);
+			buildoutArea.adjustLocation(nLoc);
+			create.setLocation(nLoc);
+		}
 		create.setObjectCrc(crc);
 		if (target != null) {
 			target.sendPacket(create);

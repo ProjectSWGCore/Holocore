@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map.Entry;
 
 import resources.Location;
@@ -181,7 +182,8 @@ public class BuildoutGenerator {
 		Collections.sort(areas);
 		for (int i = fallbackAreas.size()-1; i >= 0; i--) {
 			GenBuildoutArea fallback = fallbackAreas.get(i);
-			gen.writeLine(fallback.id, fallback.terrain.getName(), fallback.terrain.getName() + "_global", "", -8196, -8196, 8196, 8196, "0");
+			String name = fallback.terrain.name().toLowerCase(Locale.US);
+			gen.writeLine(fallback.id, name, name + "_global", "", -8196, -8196, 8196, 8196, "0");
 		}
 		int percent = 0;
 		for (int i = 0; i < areas.size(); i++) {

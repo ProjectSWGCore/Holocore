@@ -86,9 +86,11 @@ public final class EnvironmentService extends Service {
 	
 	@Override
 	public boolean stop() {
-		executor.shutdownNow();
 		try {
-			executor.awaitTermination(3000, TimeUnit.MILLISECONDS);
+			if (executor != null) {
+				executor.shutdownNow();
+				executor.awaitTermination(3000, TimeUnit.MILLISECONDS);
+			}
 		} catch (InterruptedException e) {
 			
 		}

@@ -11,18 +11,19 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import intents.object.ObjectCreatedIntent;
 import intents.player.PlayerTransformedIntent;
 import resources.Location;
 import resources.Terrain;
 import resources.buildout.BuildoutArea;
 import resources.buildout.BuildoutArea.BuildoutAreaBuilder;
+import resources.buildout.BuildoutAreaGrid;
 import resources.config.ConfigFile;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.SWGObject.ObjectClassification;
 import resources.objects.cell.CellObject;
-import resources.objects.creature.CreatureObject;
 import resources.server_info.CrcDatabase;
 import resources.server_info.Log;
 import resources.server_info.RelationalServerData;
@@ -37,14 +38,15 @@ public class ClientBuildoutService extends Service {
 			+ "FROM objects "
 			+ "ORDER BY buildout_id ASC";
 	
-	private final List<BuildoutArea> areas;
+	private final BuildoutAreaGrid areaGrid;
 	private final Map<Integer, BuildoutArea> areasById;
 	
 	public ClientBuildoutService() {
-		areas = new ArrayList<>();
+		areaGrid = new BuildoutAreaGrid();
 		areasById = new Hashtable<>(1000); // Number of buildout areas
 		
 		registerForIntent(PlayerTransformedIntent.TYPE);
+		registerForIntent(ObjectCreatedIntent.TYPE);
 	}
 	
 	@Override
@@ -53,6 +55,10 @@ public class ClientBuildoutService extends Service {
 			case PlayerTransformedIntent.TYPE:
 				if (i instanceof PlayerTransformedIntent)
 					handlePlayerTransform((PlayerTransformedIntent) i);
+				break;
+			case ObjectCreatedIntent.TYPE:
+				if (i instanceof ObjectCreatedIntent)
+					handleObjectCreated((ObjectCreatedIntent) i);
 				break;
 			default:
 				break;
@@ -145,7 +151,7 @@ public class ClientBuildoutService extends Service {
 		BuildoutArea primary = null; // Stored as "best area" for what we want to load
 		try (RelationalServerData data = RelationalServerFactory.getServerData("buildout/areas.db", "areas")) {
 			try (ResultSet set = data.executeQuery(GET_BUILDOUT_AREAS)) {
-				areas.clear();
+				areaGrid.clear();
 				areasById.clear();
 				AreaIndexes ind = new AreaIndexes(set);
 				boolean loaded = false;
@@ -171,17 +177,26 @@ public class ClientBuildoutService extends Service {
 	
 	private void loadArea(BuildoutArea area) {
 		area.setLoaded(true);
-		areas.add(area);
+		areaGrid.addBuildoutArea(area);
 		areasById.put(area.getId(), area);
 	}
 	
 	private void handlePlayerTransform(PlayerTransformedIntent pti) {
-		CreatureObject creature = pti.getPlayer();
-		Location world = creature.getWorldLocation();
-		BuildoutArea area = creature.getBuildoutArea();
-		if (area == null || compare(area, world.getTerrain(), world.getX(), world.getZ()) != 0) {
-			area = getAreaForObject(creature);
-			creature.setBuildoutArea(area);
+		setObjectArea(pti.getPlayer());
+	}
+	
+	private void handleObjectCreated(ObjectCreatedIntent oci) {
+		setObjectArea(oci.getObject());
+	}
+	
+	private void setObjectArea(SWGObject obj) {
+		if (obj.getParent() != null)
+			return; // Not necessary if the object is in another object
+		Location world = obj.getWorldLocation();
+		BuildoutArea area = obj.getBuildoutArea();
+		if (area == null || !isWithin(area, world.getTerrain(), world.getX(), world.getZ())) {
+			area = getAreaForObject(obj);
+			obj.setBuildoutArea(area);
 		}
 	}
 	
@@ -201,39 +216,11 @@ public class ClientBuildoutService extends Service {
 	
 	private BuildoutArea getAreaForObject(SWGObject obj) {
 		Location l = obj.getWorldLocation();
-		return binarySearch(l.getTerrain(), l.getX(), l.getZ(), 0, areas.size());
+		return areaGrid.getBuildoutArea(l.getTerrain(), l.getX(), l.getZ());
 	}
 	
-	private BuildoutArea binarySearch(Terrain t, double x, double z, int low, int high) {
-		int mid = mid(low, high);
-		BuildoutArea midArea = areas.get(mid);
-		int comp = compare(midArea, t, x, z);
-		if (comp == 0)
-			return midArea;
-		if (low == mid)
-			return null;
-		if (comp < 0)
-			return binarySearch(t, x, z, low, mid);
-		return binarySearch(t, x, z, mid, high);
-	}
-	
-	private int compare(BuildoutArea cur, Terrain t, double x, double z) {
-		int comp = cur.getTerrain().getName().compareTo(t.getName());
-		if (comp != 0)
-			return comp;
-		if (x < cur.getX1())
-			return 1;
-		if (x > cur.getX2())
-			return -1;
-		if (z < cur.getZ1())
-			return 1;
-		if (z > cur.getZ2())
-			return -1;
-		return 0;
-	}
-	
-	private int mid(int low, int high) {
-		return (low + high) / 2;
+	private boolean isWithin(BuildoutArea area, Terrain t, double x, double z) {
+		return area.getTerrain() == t && x >= area.getX1() && x <= area.getX2() && z >= area.getZ1() && z <= area.getZ2();
 	}
 	
 	private void logInfo(String message, Object ... args) {
