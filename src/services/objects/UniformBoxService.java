@@ -50,8 +50,8 @@ public class UniformBoxService extends Service {
 	
 	private static final String [] UNIFORM_COLUMNS = {"boots", "pants", "belt", "gloves", "shirt", "vest", "hat", "necklace", "robe", "weapon"};
 	private static final String GET_UNIFORMBOX_SQL = "SELECT * FROM npe_uniformbox where profession = ? AND race = ? AND (gender = ? OR gender = 3)";
+	private static final String UNIFORM_BOX_IFF = "object/tangible/npe/shared_npe_uniform_box.iff";
 	
-	private final String uniformBoxTemplate = "object/tangible/npe/shared_npe_uniform_box.iff";
 	private RelationalServerData uniformBoxDatabase;
 	private PreparedStatement getUniformBoxStatement;
 	
@@ -71,8 +71,14 @@ public class UniformBoxService extends Service {
 			processUseUniformBox((RadialSelectionIntent) i);
 	}
 	
+	@Override
+	public boolean terminate() {
+		uniformBoxDatabase.close();
+		return super.terminate();
+	}
+	
 	private void processUseUniformBox(RadialSelectionIntent rsi) {
-		if (!rsi.getTarget().getTemplate().equals(uniformBoxTemplate))
+		if (!rsi.getTarget().getTemplate().equals(UNIFORM_BOX_IFF))
 			return;
 		
 		CreatureObject creature = rsi.getPlayer().getCreatureObject();
@@ -96,7 +102,7 @@ public class UniformBoxService extends Service {
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}		
+			}
 		}
 	}
 	
@@ -124,15 +130,12 @@ public class UniformBoxService extends Service {
 	}
 	
 	private void destroyUniformBox(CreatureObject creature){
-		Collection<SWGObject> items = creature.getItemsByTemplate("inventory", uniformBoxTemplate);
+		Collection<SWGObject> items = creature.getItemsByTemplate("inventory", UNIFORM_BOX_IFF);
 		
 		for (SWGObject item : items){
-			if (item.getTemplate().equals(uniformBoxTemplate)){
+			if (item.getTemplate().equals(UNIFORM_BOX_IFF)){
 				new DestroyObjectIntent(item).broadcast();
 			}
-		}		
-
+		}
 	}
 }
-
-
