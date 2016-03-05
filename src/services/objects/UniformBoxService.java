@@ -25,7 +25,6 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
  ***********************************************************************************/
-
 package services.objects;
 
 
@@ -37,12 +36,11 @@ import java.util.Collection;
 import intents.object.DestroyObjectIntent;
 import intents.object.ObjectCreatedIntent;
 import intents.radial.RadialSelectionIntent;
+import resources.Race;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
-import resources.objects.player.PlayerObject;
-import resources.player.Player;
 import resources.server_info.ItemDatabase;
 import resources.server_info.RelationalServerData;
 import resources.server_info.RelationalServerFactory;
@@ -50,82 +48,69 @@ import resources.server_info.RelationalServerFactory;
 public class UniformBoxService extends Service {
 	//TODO: Display loot box
 	
-	private final String uniformBoxTemplate = "object/tangible/npe/shared_npe_uniform_box.iff";
+	private static final String [] UNIFORM_COLUMNS = {"boots", "pants", "belt", "gloves", "shirt", "vest", "hat", "necklace", "robe", "weapon"};
 	private static final String GET_UNIFORMBOX_SQL = "SELECT * FROM npe_uniformbox where profession = ? AND race = ? AND (gender = ? OR gender = 3)";
+	
+	private final String uniformBoxTemplate = "object/tangible/npe/shared_npe_uniform_box.iff";
 	private RelationalServerData uniformBoxDatabase;
 	private PreparedStatement getUniformBoxStatement;
 	
-	
 	public UniformBoxService(){
-
 		uniformBoxDatabase = RelationalServerFactory.getServerData("player/npe_uniformbox.db", "npe_uniformbox");
 		if (uniformBoxDatabase == null)
-			throw new main.ProjectSWG.CoreException("Unable to load npe_uniformbox.sdb file for UniformBoxService");	
+			throw new main.ProjectSWG.CoreException("Unable to load npe_uniformbox.sdb file for UniformBoxService");
 		
 		getUniformBoxStatement = uniformBoxDatabase.prepareStatement(GET_UNIFORMBOX_SQL);
-
+		
 		registerForIntent(RadialSelectionIntent.TYPE);
 	}
 	
 	@Override
 	public void onIntentReceived(Intent i) {
-		if ((((RadialSelectionIntent) i).getTarget().getTemplate()).equals(uniformBoxTemplate)){
-			processUseUniformBox(((RadialSelectionIntent) i).getPlayer());
-		}
-		
-	}	
+		if (i instanceof RadialSelectionIntent)
+			processUseUniformBox((RadialSelectionIntent) i);
+	}
 	
-	private void processUseUniformBox(Player player){
-		CreatureObject creature = player.getCreatureObject();
-		PlayerObject playerObj = creature.getPlayerObject();	
-		SWGObject ghost = player.getCreatureObject();
-		SWGObject inventory = ghost.getSlottedObject("inventory");	
-		String profession = playerObj.getProfession().substring(0, playerObj.getProfession().lastIndexOf("_"));
-		String race = creature.getRace().toString().substring(0, creature.getRace().toString().indexOf("_")).toLowerCase();
-		String gender = creature.getRace().toString().substring(creature.getRace().toString().lastIndexOf("_") + 1).toLowerCase();
+	private void processUseUniformBox(RadialSelectionIntent rsi) {
+		if (!rsi.getTarget().getTemplate().equals(uniformBoxTemplate))
+			return;
+		
+		CreatureObject creature = rsi.getPlayer().getCreatureObject();
+		SWGObject inventory = creature.getSlottedObject("inventory");
+		String profession = creature.getPlayerObject().getProfession();
 		
 		destroyUniformBox(creature);
-		handleCreateItems(inventory, gender, profession, race);
-
+		handleCreateItems(inventory, profession.substring(0, profession.lastIndexOf('_')), creature.getRace());
 	}
 	
-	private void handleCreateItems(SWGObject inventory, String playerGender, String profession, String race) {
-		String gender = getGenderValue(playerGender); 
-
-		try {
-			getUniformBoxStatement.setString(1, profession);
-			getUniformBoxStatement.setString(2, race);
-			getUniformBoxStatement.setString(3, gender);
-			
-			try (ResultSet set = getUniformBoxStatement.executeQuery()) {
-				if (set.next()){
-					for (int i = 4; i <= 13; i++){
-						if (!set.getObject(i).toString().isEmpty()){
-							SWGObject item = ObjectCreator.createObjectFromTemplate(getItemIffTemplate(set.getObject(i).toString()));
-							item.moveToContainer(inventory);
-							new ObjectCreatedIntent(item).broadcast();							
-						}
-					}
+	private void handleCreateItems(SWGObject inventory, String profession, Race race) {
+		synchronized (getUniformBoxStatement) {
+			try {
+				getUniformBoxStatement.setString(1, profession);
+				getUniformBoxStatement.setString(2, race.getSpecies());
+				getUniformBoxStatement.setInt(3, race.isMale() ? 1 : 2);
+				
+				try (ResultSet set = getUniformBoxStatement.executeQuery()) {
+					if (set.next())
+						createItems(set, inventory);
 				}
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}		
-	}
-	
-	private String getGenderValue(String gender){
-		
-		switch (gender) {
-		
-		case "male":
-			return "1";
-		case "female":
-			return "2";
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}		
 		}
-		
-		return null;
 	}
 	
+	private void createItems(ResultSet set, SWGObject inventory) throws SQLException {
+		for (String uniformItem : UNIFORM_COLUMNS) {
+			String item = set.getString(uniformItem);
+			if (item.isEmpty())
+				continue;
+			
+			SWGObject object = ObjectCreator.createObjectFromTemplate(getItemIffTemplate(item));
+			object.moveToContainer(inventory);
+			new ObjectCreatedIntent(object).broadcast();
+		}
+	}
 	
 	private String getItemIffTemplate(String item_name){
 		String template = "";
