@@ -35,6 +35,7 @@ import java.sql.SQLException;
 import java.util.Collection;
 
 import intents.object.DestroyObjectIntent;
+import intents.object.ObjectCreatedIntent;
 import intents.radial.RadialSelectionIntent;
 import resources.control.Intent;
 import resources.control.Service;
@@ -102,6 +103,7 @@ public class UniformBoxService extends Service {
 						if (!set.getObject(i).toString().isEmpty()){
 							SWGObject item = ObjectCreator.createObjectFromTemplate(getItemIffTemplate(set.getObject(i).toString()));
 							item.moveToContainer(inventory);
+							new ObjectCreatedIntent(item).broadcast();							
 						}
 					}
 				}
