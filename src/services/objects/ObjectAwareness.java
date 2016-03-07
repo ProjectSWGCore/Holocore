@@ -198,10 +198,14 @@ public class ObjectAwareness extends Service {
 			transform.setSpeed((float) (obj.getMovementScale()*7.3));
 		}
 		BuildoutArea area = obj.getBuildoutArea();
-		area.adjustLocation(newLocation);
+		if (area == null)
+			System.err.println("Unknown buildout area at: " + obj.getWorldLocation());
+		else
+			newLocation = area.adjustLocation(newLocation);
 		new PlayerTransformedIntent(obj, obj.getParent(), null, obj.getLocation(), newLocation).broadcast();
 		move(obj, newLocation, true);
-		area.readjustLocation(newLocation);
+		if (area != null)
+			newLocation = area.readjustLocation(newLocation);
 		obj.sendDataTransforms(transform);
 	}
 	

@@ -190,14 +190,21 @@ public class ClientBuildoutService extends Service {
 	}
 	
 	private void setObjectArea(SWGObject obj) {
-		if (obj.getParent() != null)
-			return; // Not necessary if the object is in another object
+		if (obj.getObjectId() == -507780858040143424L)
+			System.out.println("MENSIX " + obj.getParent());
+		if (obj.getParent() != null) {
+			obj.setBuildoutArea(null);
+			return;
+		}
 		Location world = obj.getWorldLocation();
 		BuildoutArea area = obj.getBuildoutArea();
 		if (area == null || !isWithin(area, world.getTerrain(), world.getX(), world.getZ())) {
 			area = getAreaForObject(obj);
 			obj.setBuildoutArea(area);
-		}
+			if (obj.getObjectId() == -507780858040143424L)
+				System.out.println("       AREA: " + area);
+		} else if (obj.getObjectId() == -507780858040143424L)
+			System.out.println("       NOT SET");
 	}
 	
 	private BuildoutArea createArea(ResultSet set, AreaIndexes ind) throws SQLException {
@@ -210,7 +217,9 @@ public class ClientBuildoutService extends Service {
 			.setZ1(set.getDouble(ind.z1))
 			.setX2(set.getDouble(ind.x2))
 			.setZ2(set.getDouble(ind.z2))
-			.setAdjustCoordinates(set.getBoolean(ind.adjust));
+			.setAdjustCoordinates(set.getBoolean(ind.adjust))
+			.setTranslationX(set.getDouble(ind.transX))
+			.setTranslationZ(set.getDouble(ind.transZ));
 		return bldr.build();
 	}
 	
@@ -236,6 +245,7 @@ public class ClientBuildoutService extends Service {
 		private int event;
 		private int x1, z1, x2, z2;
 		private int adjust;
+		private int transX, transZ;
 		
 		public AreaIndexes(ResultSet set) throws SQLException {
 			id = set.findColumn("id");
@@ -247,6 +257,8 @@ public class ClientBuildoutService extends Service {
 			x2 = set.findColumn("max_x");
 			z2 = set.findColumn("max_z");
 			adjust = set.findColumn("adjust_coordinates");
+			transX = set.findColumn("translate_x");
+			transZ = set.findColumn("translate_z");
 		}
 		
 	}
