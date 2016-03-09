@@ -107,39 +107,39 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 1200107	CORELLIA	cor_world	AREA	0	-4727.17	16.51	-1902.42	0	1	Bannoc G'noc	4165	-	-	1	none	0	300	120	0
 1200108	CORELLIA	cor_world	AREA	0	-4795.52	4.32	-1951.86	0	1	Hoolar Freeb	505	-	-	1	none	0	300	120	0
 1200109	CORELLIA	cor_world	AREA	0	-500.21	28.00	-4410.67	0	1	an armor thief	3750	-	-	1	none	0	300	120	0
-1200110	CORELLIA	cor_world	AREA	0	-5010.00	21.00	-2468.00	0	1	Sinis	4110	-	-	1	none	0	300	120	0
+1200110	CORELLIA	cor_world	AREA	0	-5010.00	21.00	-2468.00	0	1	Sinis	4110	city	Tyrena	1	none	0	300	120	0
 1200111	CORELLIA	cor_world	AREA	0	-5067.19	27.55	-2784.16	0	1	a Meatlump donk	3925	-	-	1	none	0	300	120	0
 1200112	CORELLIA	cor_world	AREA	0	-5086.57	24.73	-2743.40	0	1	a Meatlump donk	3925	-	-	1	none	0	300	120	0
 1200113	CORELLIA	cor_world	AREA	0	-5091.00	27.77	-2793.06	0	1	a Meatlump donk	3925	-	-	1	none	0	300	120	0
-1200114	CORELLIA	cor_world	AREA	0	-5096.19	21.00	-2445.25	0	1	Edbr Yamagh (aide to Lt. Col. Quelsh)	3815	-	-	1	none	0	300	120	0
+1200114	CORELLIA	cor_world	AREA	0	-5096.19	21.00	-2445.25	-135	1	Edbr Yamagh (aide to Lt. Col. Quelsh)	3815	city	Tyrena	1	none	0	300	120	0
 1200115	CORELLIA	cor_world	AREA	0	-5097.18	23.50	-2729.59	0	1	a Meatlump donk	3925	-	-	1	none	0	300	120	0
-1200116	CORELLIA	cor_world	AREA	0	-5099.63	21.00	-2442.71	0	1	Lt. Col. Wilfred Quelsh (a retired CorSec officer)	4055	-	-	1	none	0	300	120	0
+1200116	CORELLIA	cor_world	AREA	0	-5099.63	21.00	-2442.71	-135	1	Lt. Col. Wilfred Quelsh (a retired CorSec officer)	4055	city	Tyrena	1	none	0	300	120	0
 1200117	CORELLIA	cor_world	AREA	0	-5119.61	24.36	-2763.41	0	1	a Meatlump donk	3925	-	-	1	none	0	300	120	0
-1200118	CORELLIA	cor_world	AREA	0	-5132.00	21.00	-2633.00	0	1	Madison Silene	4190	-	-	1	none	0	300	120	0
+1200118	CORELLIA	cor_world	AREA	0	-5132.00	21.00	-2633.00	-135	1	Madison Silene	4190	city	Tyrena	1	none	0	300	120	0
 1200119	CORELLIA	cor_world	AREA	0	-5132.55	22.13	-2740.05	0	1	a Meatlump donk	3925	-	-	1	none	0	300	120	0
-1200120	CORELLIA	cor_world	AREA	0	-5145.02	21.00	-2291.90	0	1	a Braggan's Fist thug	3555	-	-	1	none	0	300	120	0
-1200121	CORELLIA	cor_world	AREA	0	-5150.46	21.00	-2361.35	0	1	Major Alana Walden (a CorSec officer)	3920	-	-	1	none	0	300	120	0
-1200122	CORELLIA	cor_world	AREA	0	-5173.50	21.00	-2545.31	0	1	Captain Jark	3870	-	-	1	none	0	300	120	0
+1200120	CORELLIA	cor_world	AREA	0	-5145.02	21.00	-2291.90	0	1	a Braggan's Fist thug	3555	city	Tyrena	1	none	0	300	120	0
+1200121	CORELLIA	cor_world	AREA	0	-5150.46	21.00	-2361.35	0	1	Major Alana Walden (a CorSec officer)	3920	city	Tyrena	1	none	0	300	120	0
+1200122	CORELLIA	cor_world	AREA	0	-5173.50	21.00	-2545.31	-135	1	Captain Jark	3870	city	Tyrena	1	none	0	300	120	0
 1200123	CORELLIA	cor_world	AREA	0	-5180.11	190.27	6236.56	0	1	an agrilat rasp	135	-	-	4	none	0	300	180	8
 1200124	CORELLIA	cor_world	AREA	0	-5197.00	21.00	-2273.00	0	1	Yorick	4310	-	-	1	none	0	300	120	0
-1200125	CORELLIA	cor_world	AREA	0	-5217.39	21.00	-2334.55	0	1	a Braggan's Fist thug	3555	-	-	1	none	0	300	120	0
-1200126	CORELLIA	cor_world	AREA	0	-5225.11	21.00	-2381.07	0	1	a Braggan's Fist thug	3555	-	-	1	none	0	300	120	0
-1200127	CORELLIA	cor_world	AREA	0	-5240.01	21.00	-2397.94	0	1	a Braggan's Fist thug	3555	-	-	1	none	0	300	120	0
-1200128	CORELLIA	cor_world	AREA	0	-5260.38	21.00	-2319.41	0	1	a Braggan's Fist thug	3555	-	-	1	none	0	300	120	0
+1200125	CORELLIA	cor_world	AREA	0	-5217.39	21.00	-2334.55	0	1	a Braggan's Fist thug	3555	city	Tyrena	1	none	0	300	120	0
+1200126	CORELLIA	cor_world	AREA	0	-5225.11	21.00	-2381.07	0	1	a Braggan's Fist thug	3555	city	Tyrena	1	none	0	300	120	0
+1200127	CORELLIA	cor_world	AREA	0	-5240.01	21.00	-2397.94	0	1	a Braggan's Fist thug	3555	city	Tyrena	1	none	0	300	120	0
+1200128	CORELLIA	cor_world	AREA	0	-5260.38	21.00	-2319.41	0	1	a Braggan's Fist thug	3555	city	Tyrena	1	none	0	300	120	0
 1200129	CORELLIA	cor_world	AREA	0	-5266.24	12.51	-2016.63	0	1	a Deflarian Mechanic	5470	-	-	1	none	0	300	120	0
-1200130	CORELLIA	cor_world	AREA	0	-5267.13	21.00	-2419.55	0	1	a Braggan's Fist thug	3555	-	-	1	none	0	300	120	0
-1200131	CORELLIA	cor_world	AREA	0	-5275.50	21.00	-2379.41	0	1	a Braggan's Fist thug	3555	-	-	1	none	0	300	120	0
+1200130	CORELLIA	cor_world	AREA	0	-5267.13	21.00	-2419.55	0	1	a Braggan's Fist thug	3555	city	Tyrena	1	none	0	300	120	0
+1200131	CORELLIA	cor_world	AREA	0	-5275.50	21.00	-2379.41	0	1	a Braggan's Fist thug	3555	city	Tyrena	1	none	0	300	120	0
 1200132	CORELLIA	cor_world	AREA	0	-5278.19	11.43	-2002.52	0	1	a Braggan's Fist thug	3555	-	-	1	none	0	300	120	0
 1200133	CORELLIA	cor_world	AREA	0	-5280.42	17.92	-2030.68	0	1	a Braggan's Fist thug	3555	-	-	1	none	0	300	120	0
 1200134	CORELLIA	cor_world	AREA	0	-5289.20	0.41	-2942.59	0	1	a Braggan's Fist thug	3555	-	-	1	none	0	300	120	0
-1200135	CORELLIA	cor_world	AREA	0	-5289.62	21.00	-2523.21	0	1	Faye Patrick	4230	-	-	1	none	0	300	120	0
+1200135	CORELLIA	cor_world	AREA	0	-5289.62	21.00	-2523.21	0	1	Faye Patrick	4230	city	Tyrena	1	none	0	300	120	0
 1200136	CORELLIA	cor_world	AREA	0	-529.00	28.00	-4517.00	0	1	Dustin	26770	-	-	1	none	0	300	120	0
 1200137	CORELLIA	cor_world	AREA	0	-5290.37	21.00	-2345.56	0	1	a Braggan's Fist thug	3555	-	-	1	none	0	300	120	0
 1200138	CORELLIA	cor_world	AREA	0	-5291.60	15.07	-2017.27	0	1	a Braggan's Fist thug	3555	-	-	1	none	0	300	120	0
 1200139	CORELLIA	cor_world	AREA	0	-530.52	28.00	-4374.40	0	1	an armor thief	3750	-	-	1	none	0	300	120	0
 1200140	CORELLIA	cor_world	AREA	0	-5303.11	18.86	-2078.94	0	1	Sergeant Sola Hus (a CorSec agent)	4100	-	-	1	none	0	300	120	0
 1200141	CORELLIA	cor_world	AREA	0	-5307.99	12.04	-2016.48	0	1	a Braggan's Fist thug	3555	-	-	1	none	0	300	120	0
-1200142	CORELLIA	cor_world	AREA	0	-5315.00	21.00	-2397.00	0	1	Bandor Mokk	4160	-	-	1	none	0	300	120	0
+1200142	CORELLIA	cor_world	AREA	0	-5315.00	21.00	-2397.00	90	1	Bandor Mokk	4160	-	-	1	none	0	300	120	0
 1200143	CORELLIA	cor_world	AREA	0	-542.16	28.00	-4399.83	0	1	an armor thief	3750	-	-	1	none	0	300	120	0
 1200144	CORELLIA	cor_world	AREA	0	-5445.20	21.00	-2738.03	0	1	Serina	26915	-	-	1	none	0	300	120	0
 1200145	CORELLIA	cor_world	AREA	0	-5469.49	27.90	-2981.80	0	1	Professor Cornelius Wagglehorn	8445	-	-	1	none	0	300	120	0
@@ -472,21 +472,21 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 1200472	CORELLIA	cor_world	EGG	0	3257.57	300.00	5418.30	-55	1	Selonian Diplomat	34210	city	Doaba Guerfel	1	none	0	300	120	0
 1200473	CORELLIA	cor_korvella_hotel	EGG	4	0.75	1.00	5.46	2	1	Commander Zhanks (Imperial Pilot Coordinator)	33925	city	Kor Vella	1	none	0	300	120	0
 1200474	CORELLIA	cor_korvella_hotel	EGG	4	2.36	1.00	5.50	-33	1	TA-667	34105	city	Kor Vella	1	none	0	300	120	0
-1200475	CORELLIA	cor_korvella_mayor	AREA	4	8.90	0.60	-4.30	0	1	Deel Draav (mayor of Kor Vella)	3785	city	Kor Vella	1	none	0	300	120	0
+1200475	CORELLIA	cor_korvella_mayor	EGG	4	8.90	0.60	-4.30	0	1	Deel Draav (mayor of Kor Vella)	3785	city	Kor Vella	1	none	0	300	120	0
 1200476	CORELLIA	cor_korvella_starport	EGG	1	-0.03	0.64	73.02	0	1	Chassis Dealer	33665	city	Kor Vella	1	none	0	300	120	0
 1200477	CORELLIA	cor_world	EGG	0	-3142.65	31.00	2801.60	-108	1	Col. Dac Axfow (an Imperial officer)	34260	city	Kor Vella	1	none	0	300	120	0
 1200478	CORELLIA	cor_world	EGG	0	-3144.66	31.00	2801.60	98	1	Sgt. Eryk Chinn (an Imperial bodyguard)	34265	city	Kor Vella	1	none	0	300	120	0
 1200479	CORELLIA	cor_world	EGG	0	-3144.69	31.00	2806.74	175	1	Lt. Logro Elsin (an Imperial pilot)	34270	city	Kor Vella	1	none	0	300	120	0
 1200480	CORELLIA	cor_world	EGG	0	-3366.32	86.00	3143.84	-63	1	(Retired) CorSec Pilot	34275	city	Kor Vella	1	none	0	300	120	0
 1200481	CORELLIA	cor_tyrena_cantina	EGG	3	5.20	-0.90	-6.70	0	1	missing	24630	city	Tyrena	1	none	0	300	120	0
-1200482	CORELLIA	cor_tyrena_cantina	EGG	4	19.50	-0.90	-18.80	0	1	missing	24630	city	Tyrena	1	none	0	300	120	0
+1200482	CORELLIA	cor_tyrena_cantina	EGG	4	19.50	-0.90	-18.80	0	1	Acun Solari	34360	city	Tyrena	1	none	0	300	120	0
 1200483	CORELLIA	cor_tyrena_hotel2	EGG	5	21.15	1.28	9.68	68	1	Teraeza Furloti	11315	city	Tyrena	1	drinking	0	300	120	0
 1200484	CORELLIA	cor_tyrena_small_house	EGG	3	-4.22	0.62	-3.77	67	1	Captain Kreezo (Rebel Pilot Trainer)	33950	city	Tyrena	1	none	0	300	120	0
 1200485	CORELLIA	cor_tyrena_starport	EGG	1	-0.03	0.64	73.02	0	1	Chassis Dealer	33675	city	Tyrena	1	none	0	300	120	0
-1200486	CORELLIA	cor_tyrena_starport	EGG	4	15.00	0.60	56.90	0	1	a commoner	3260	city	Tyrena	1	none	0	300	120	0
+1200486	CORELLIA	cor_tyrena_starport	EGG	4	15.00	0.60	56.90	-77	1	Amarent Loren	34355	city	Tyrena	1	none	0	300	120	0
 1200487	CORELLIA	cor_world	EGG	0	-5416.57	20.99	-2792.67	-89	1	Lock Vlash	11325	city	Tyrena	1	none	0	300	120	0
 1200488	CORELLIA	cor_world	EGG	0	-5069.03	21.00	-2345.85	170	1	J'pai Brek (Rebel Pilot Coordinator)	33855	city	Tyrena	1	none	0	300	120	0
-1200489	CORELLIA	cor_world	AREA	0	-5210.35	21.00	-2578.05	0	1	Osto Grissom (a starship captain)	3990	city	Tyrena	1	none	0	300	120	0
+1200489	CORELLIA	cor_world	EGG	0	-5210.35	21.00	-2578.05	127	1	Osto Grissom (a starship captain)	3990	city	Tyrena	1	none	0	300	120	0
 1200490	CORELLIA	cor_world	EGG	0	-5520.00	21.30	-2631.00	0	1	missing	24630	city	Tyrena	1	none	0	300	120	0
 1200491	CORELLIA	cor_world	EGG	0	-5523.42	21.00	-2644.10	0	1	Matarmeno Krahnn (an adventuresome Jedi)	3130	city	Tyrena	1	none	0	300	120	0
 1200492	CORELLIA	cor_world	EGG	0	-5192.90	21.00	-2545.55	66	1	Excited Journalist	34220	city	Tyrena	1	none	0	300	120	0
@@ -499,7 +499,7 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 1200499	CORELLIA	cor_world	AREA	0	-5278.92	21.00	-2390.41	-140	1	a commoner	3185	city	Tyrena	1	none	0	300	120	0
 1200500	CORELLIA	cor_world	AREA	0	-5072.49	21.00	-2459.97	135	1	a commoner	3185	city	Tyrena	1	none	0	300	120	0
 1200501	CORELLIA	cor_world	AREA	0	-5158.84	21.00	-2405.12	43	1	a commoner	3185	city	Tyrena	1	none	0	300	120	0
-1200502	CORELLIA	cor_world	AREA	0	-5259.32	21.00	-2447.20	-79	1	a commoner	3185	city	Tyrena	1	none	0	300	120	0
+1200502	CORELLIA	cor_world	AREA	0	-5201.97	21.00	-2505.07	131	1	a commoner	3185	city	Tyrena	1	none	0	300	120	0
 1200503	CORELLIA	cor_world	AREA	0	-5321.97	21.00	-2456.77	-4	1	a commoner	3185	city	Tyrena	1	none	0	300	120	0
 1200504	CORELLIA	cor_world	AREA	0	-5070.87	21.00	-2461.57	-46	1	a commoner	3185	city	Tyrena	1	none	0	300	120	0
 1200505	CORELLIA	cor_world	AREA	0	-5162.85	21.00	-2277.60	119	1	a commoner	3185	city	Tyrena	1	none	0	300	120	0
@@ -772,55 +772,55 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 1200772	CORELLIA	cor_world	AREA	0	-6426.88	27.38	-2177.43	0	1	a slaver guard	4235	dungeon	Corellian Slaver Bunker	1	none	0	300	120	0
 1200773	CORELLIA	cor_world	AREA	0	-6431.87	26.53	-2127.01	0	1	a slaver guard	4235	dungeon	Corellian Slaver Bunker	1	none	0	300	120	0
 1200774	CORELLIA	cor_world	AREA	0	-6456.13	28.13	-2156.28	0	1	a slaver guard	4235	dungeon	Corellian Slaver Bunker	1	none	0	300	120	0
-1200775	CORELLIA	cor_weather_station	EGG	3	4.70	0.30	-5.50	0	1	R2-D2	23985	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
-1200776	CORELLIA	cor_weather_station	EGG	3	5.00	0.30	-3.70	0	1	C-3P0	23935	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
-1200777	CORELLIA	cor_weather_station	AREA	5	-13.10	-12.00	44.30	0	1	a helper droid	23945	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
-1200778	CORELLIA	cor_weather_station	AREA	5	2.80	-12.00	60.80	0	1	a helper droid	23945	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
-1200779	CORELLIA	cor_weather_station	AREA	5	21.60	-12.00	47.30	0	1	a helper droid	23945	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
-1200780	CORELLIA	cor_weather_station	AREA	5	3.60	-12.00	30.80	0	1	a helper droid	23945	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
-1200781	CORELLIA	cor_weather_station	AREA	5	5.10	-12.00	61.00	0	1	a helper droid	23945	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
-1200782	CORELLIA	cor_weather_station	AREA	7	-51.60	-20.00	63.60	0	1	a helper droid	23945	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
-1200783	CORELLIA	cor_weather_station	AREA	7	-58.40	-20.00	49.50	0	1	a helper droid	23945	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
-1200784	CORELLIA	cor_weather_station	AREA	7	-66.10	-20.00	36.30	0	1	a helper droid	23945	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
-1200785	CORELLIA	cor_weather_station	AREA	7	-67.00	-20.00	65.20	0	1	a helper droid	23945	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
-1200786	CORELLIA	cor_weather_station	AREA	8	-53.60	-20.00	11.80	0	1	a helper droid	23945	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
-1200787	CORELLIA	cor_weather_station	AREA	8	-63.90	-20.00	15.90	0	1	a helper droid	23945	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
-1200788	CORELLIA	cor_weather_station	AREA	8	-72.60	-20.00	10.20	0	1	a helper droid	23945	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
-1200789	CORELLIA	cor_weather_station	AREA	9	-52.80	-20.00	82.80	0	1	a helper droid	23945	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
-1200790	CORELLIA	cor_weather_station	AREA	9	-62.20	-20.00	77.00	0	1	a helper droid	23945	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
-1200791	CORELLIA	cor_weather_station	AREA	9	-73.60	-20.00	77.60	0	1	a helper droid	23945	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
-1200792	CORELLIA	cor_weather_station	AREA	11	47.90	-12.00	84.70	0	1	a helper droid	23945	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
-1200793	CORELLIA	cor_weather_station	AREA	11	51.00	-12.00	78.90	0	1	a helper droid	23945	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
-1200794	CORELLIA	cor_weather_station	AREA	11	69.80	-12.00	79.30	0	1	a helper droid	23945	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
-1200795	CORELLIA	cor_weather_station	AREA	11	69.90	-12.00	86.30	0	1	a helper droid	23945	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
-1200796	CORELLIA	cor_weather_station	AREA	12	48.30	-12.00	61.40	0	1	a helper droid	23945	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
-1200797	CORELLIA	cor_weather_station	AREA	12	49.00	-12.00	55.70	0	1	a helper droid	23945	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
-1200798	CORELLIA	cor_weather_station	AREA	12	70.40	-12.00	58.90	0	1	a helper droid	23945	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
-1200799	CORELLIA	cor_weather_station	AREA	13	18.50	-20.00	127.40	0	1	a helper droid	23945	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
-1200800	CORELLIA	cor_weather_station	AREA	13	21.50	-20.00	122.60	0	1	a helper droid	23945	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
-1200801	CORELLIA	cor_weather_station	AREA	13	22.50	-20.00	136.30	0	1	a helper droid	23945	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
-1200802	CORELLIA	cor_weather_station	AREA	13	36.50	-20.00	124.40	0	1	a helper droid	23945	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
-1200803	CORELLIA	cor_weather_station	AREA	13	36.50	-20.00	137.90	0	1	a helper droid	23945	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
-1200804	CORELLIA	cor_weather_station	AREA	14	20.70	-12.00	5.20	0	1	a helper droid	23945	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
-1200805	CORELLIA	cor_weather_station	AREA	14	22.40	-12.00	20.40	0	1	a helper droid	23945	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
-1200806	CORELLIA	cor_weather_station	AREA	14	25.50	-12.00	-1.20	0	1	a helper droid	23945	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
-1200807	CORELLIA	cor_weather_station	AREA	14	27.90	-12.00	20.60	0	1	a helper droid	23945	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
-1200808	CORELLIA	cor_weather_station	AREA	14	40.10	-12.00	18.90	0	1	a helper droid	23945	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
-1200809	CORELLIA	cor_weather_station	AREA	14	45.00	-12.00	0.70	0	1	a helper droid	23945	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
-1200810	CORELLIA	cor_weather_station	AREA	14	58.80	-12.00	16.00	0	1	a helper droid	23945	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
-1200811	CORELLIA	cor_weather_station	AREA	14	59.40	-12.00	9.50	0	1	a helper droid	23945	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
-1200812	CORELLIA	cor_weather_station	AREA	14	59.40	-12.00	4.90	0	1	a helper droid	23945	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
-1200813	CORELLIA	cor_weather_station	AREA	16	-14.20	-20.00	-0.80	0	1	a helper droid	23945	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
-1200814	CORELLIA	cor_weather_station	AREA	16	-17.60	-20.00	9.20	0	1	a helper droid	23945	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
-1200815	CORELLIA	cor_weather_station	AREA	16	-21.10	-20.00	-0.60	0	1	a helper droid	23945	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
-1200816	CORELLIA	cor_weather_station	AREA	19	-10.80	-20.00	98.60	0	1	a helper droid	23945	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
-1200817	CORELLIA	cor_weather_station	AREA	19	-20.70	-20.00	116.00	0	1	a helper droid	23945	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
-1200818	CORELLIA	cor_weather_station	AREA	19	-20.80	-20.00	99.20	0	1	a helper droid	23945	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
-1200819	CORELLIA	cor_weather_station	AREA	19	-22.80	-20.00	115.40	0	1	QU3-3N (a helper droid)	23950	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
-1200820	CORELLIA	cor_weather_station	AREA	19	-31.60	-20.00	100.90	0	1	a helper droid	23945	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
-1200821	CORELLIA	cor_weather_station	AREA	21	-2.10	-20.00	73.70	0	1	a helper droid	23945	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
-1200822	CORELLIA	cor_weather_station	AREA	21	-3.50	-20.00	68.30	0	1	a helper droid	23945	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
-1200823	CORELLIA	cor_world	AREA	0	-7340.49	213.36	-4001.55	0	1	Draykken Bender (a Meatlump Leader)	23940	dungeon	Deeja Peak Stonewall Labs	1	none	0	300	120	0
+1200775	CORELLIA	cor_weather_station	EGG	3	4.70	0.30	-5.50	0	1	R2-D2	23985	dungeon	Dee'ja Peak Stonewall Labs	1	none	0	300	120	0
+1200776	CORELLIA	cor_weather_station	EGG	3	5.00	0.30	-3.70	0	1	C-3P0	23935	dungeon	Dee'ja Peak Stonewall Labs	1	none	0	300	120	0
+1200777	CORELLIA	cor_weather_station	AREA	5	-13.10	-12.00	44.30	0	1	a helper droid	23945	dungeon	Dee'ja Peak Stonewall Labs	1	none	0	300	120	0
+1200778	CORELLIA	cor_weather_station	AREA	5	2.80	-12.00	60.80	0	1	a helper droid	23945	dungeon	Dee'ja Peak Stonewall Labs	1	none	0	300	120	0
+1200779	CORELLIA	cor_weather_station	AREA	5	21.60	-12.00	47.30	0	1	a helper droid	23945	dungeon	Dee'ja Peak Stonewall Labs	1	none	0	300	120	0
+1200780	CORELLIA	cor_weather_station	AREA	5	3.60	-12.00	30.80	0	1	a helper droid	23945	dungeon	Dee'ja Peak Stonewall Labs	1	none	0	300	120	0
+1200781	CORELLIA	cor_weather_station	AREA	5	5.10	-12.00	61.00	0	1	a helper droid	23945	dungeon	Dee'ja Peak Stonewall Labs	1	none	0	300	120	0
+1200782	CORELLIA	cor_weather_station	AREA	7	-51.60	-20.00	63.60	0	1	a helper droid	23945	dungeon	Dee'ja Peak Stonewall Labs	1	none	0	300	120	0
+1200783	CORELLIA	cor_weather_station	AREA	7	-58.40	-20.00	49.50	0	1	a helper droid	23945	dungeon	Dee'ja Peak Stonewall Labs	1	none	0	300	120	0
+1200784	CORELLIA	cor_weather_station	AREA	7	-66.10	-20.00	36.30	0	1	a helper droid	23945	dungeon	Dee'ja Peak Stonewall Labs	1	none	0	300	120	0
+1200785	CORELLIA	cor_weather_station	AREA	7	-67.00	-20.00	65.20	0	1	a helper droid	23945	dungeon	Dee'ja Peak Stonewall Labs	1	none	0	300	120	0
+1200786	CORELLIA	cor_weather_station	AREA	8	-53.60	-20.00	11.80	0	1	a helper droid	23945	dungeon	Dee'ja Peak Stonewall Labs	1	none	0	300	120	0
+1200787	CORELLIA	cor_weather_station	AREA	8	-63.90	-20.00	15.90	0	1	a helper droid	23945	dungeon	Dee'ja Peak Stonewall Labs	1	none	0	300	120	0
+1200788	CORELLIA	cor_weather_station	AREA	8	-72.60	-20.00	10.20	0	1	a helper droid	23945	dungeon	Dee'ja Peak Stonewall Labs	1	none	0	300	120	0
+1200789	CORELLIA	cor_weather_station	AREA	9	-52.80	-20.00	82.80	0	1	a helper droid	23945	dungeon	Dee'ja Peak Stonewall Labs	1	none	0	300	120	0
+1200790	CORELLIA	cor_weather_station	AREA	9	-62.20	-20.00	77.00	0	1	a helper droid	23945	dungeon	Dee'ja Peak Stonewall Labs	1	none	0	300	120	0
+1200791	CORELLIA	cor_weather_station	AREA	9	-73.60	-20.00	77.60	0	1	a helper droid	23945	dungeon	Dee'ja Peak Stonewall Labs	1	none	0	300	120	0
+1200792	CORELLIA	cor_weather_station	AREA	11	47.90	-12.00	84.70	0	1	a helper droid	23945	dungeon	Dee'ja Peak Stonewall Labs	1	none	0	300	120	0
+1200793	CORELLIA	cor_weather_station	AREA	11	51.00	-12.00	78.90	0	1	a helper droid	23945	dungeon	Dee'ja Peak Stonewall Labs	1	none	0	300	120	0
+1200794	CORELLIA	cor_weather_station	AREA	11	69.80	-12.00	79.30	0	1	a helper droid	23945	dungeon	Dee'ja Peak Stonewall Labs	1	none	0	300	120	0
+1200795	CORELLIA	cor_weather_station	AREA	11	69.90	-12.00	86.30	0	1	a helper droid	23945	dungeon	Dee'ja Peak Stonewall Labs	1	none	0	300	120	0
+1200796	CORELLIA	cor_weather_station	AREA	12	48.30	-12.00	61.40	0	1	a helper droid	23945	dungeon	Dee'ja Peak Stonewall Labs	1	none	0	300	120	0
+1200797	CORELLIA	cor_weather_station	AREA	12	49.00	-12.00	55.70	0	1	a helper droid	23945	dungeon	Dee'ja Peak Stonewall Labs	1	none	0	300	120	0
+1200798	CORELLIA	cor_weather_station	AREA	12	70.40	-12.00	58.90	0	1	a helper droid	23945	dungeon	Dee'ja Peak Stonewall Labs	1	none	0	300	120	0
+1200799	CORELLIA	cor_weather_station	AREA	13	18.50	-20.00	127.40	0	1	a helper droid	23945	dungeon	Dee'ja Peak Stonewall Labs	1	none	0	300	120	0
+1200800	CORELLIA	cor_weather_station	AREA	13	21.50	-20.00	122.60	0	1	a helper droid	23945	dungeon	Dee'ja Peak Stonewall Labs	1	none	0	300	120	0
+1200801	CORELLIA	cor_weather_station	AREA	13	22.50	-20.00	136.30	0	1	a helper droid	23945	dungeon	Dee'ja Peak Stonewall Labs	1	none	0	300	120	0
+1200802	CORELLIA	cor_weather_station	AREA	13	36.50	-20.00	124.40	0	1	a helper droid	23945	dungeon	Dee'ja Peak Stonewall Labs	1	none	0	300	120	0
+1200803	CORELLIA	cor_weather_station	AREA	13	36.50	-20.00	137.90	0	1	a helper droid	23945	dungeon	Dee'ja Peak Stonewall Labs	1	none	0	300	120	0
+1200804	CORELLIA	cor_weather_station	AREA	14	20.70	-12.00	5.20	0	1	a helper droid	23945	dungeon	Dee'ja Peak Stonewall Labs	1	none	0	300	120	0
+1200805	CORELLIA	cor_weather_station	AREA	14	22.40	-12.00	20.40	0	1	a helper droid	23945	dungeon	Dee'ja Peak Stonewall Labs	1	none	0	300	120	0
+1200806	CORELLIA	cor_weather_station	AREA	14	25.50	-12.00	-1.20	0	1	a helper droid	23945	dungeon	Dee'ja Peak Stonewall Labs	1	none	0	300	120	0
+1200807	CORELLIA	cor_weather_station	AREA	14	27.90	-12.00	20.60	0	1	a helper droid	23945	dungeon	Dee'ja Peak Stonewall Labs	1	none	0	300	120	0
+1200808	CORELLIA	cor_weather_station	AREA	14	40.10	-12.00	18.90	0	1	a helper droid	23945	dungeon	Dee'ja Peak Stonewall Labs	1	none	0	300	120	0
+1200809	CORELLIA	cor_weather_station	AREA	14	45.00	-12.00	0.70	0	1	a helper droid	23945	dungeon	Dee'ja Peak Stonewall Labs	1	none	0	300	120	0
+1200810	CORELLIA	cor_weather_station	AREA	14	58.80	-12.00	16.00	0	1	a helper droid	23945	dungeon	Dee'ja Peak Stonewall Labs	1	none	0	300	120	0
+1200811	CORELLIA	cor_weather_station	AREA	14	59.40	-12.00	9.50	0	1	a helper droid	23945	dungeon	Dee'ja Peak Stonewall Labs	1	none	0	300	120	0
+1200812	CORELLIA	cor_weather_station	AREA	14	59.40	-12.00	4.90	0	1	a helper droid	23945	dungeon	Dee'ja Peak Stonewall Labs	1	none	0	300	120	0
+1200813	CORELLIA	cor_weather_station	AREA	16	-14.20	-20.00	-0.80	0	1	a helper droid	23945	dungeon	Dee'ja Peak Stonewall Labs	1	none	0	300	120	0
+1200814	CORELLIA	cor_weather_station	AREA	16	-17.60	-20.00	9.20	0	1	a helper droid	23945	dungeon	Dee'ja Peak Stonewall Labs	1	none	0	300	120	0
+1200815	CORELLIA	cor_weather_station	AREA	16	-21.10	-20.00	-0.60	0	1	a helper droid	23945	dungeon	Dee'ja Peak Stonewall Labs	1	none	0	300	120	0
+1200816	CORELLIA	cor_weather_station	AREA	19	-10.80	-20.00	98.60	0	1	a helper droid	23945	dungeon	Dee'ja Peak Stonewall Labs	1	none	0	300	120	0
+1200817	CORELLIA	cor_weather_station	AREA	19	-20.70	-20.00	116.00	0	1	a helper droid	23945	dungeon	Dee'ja Peak Stonewall Labs	1	none	0	300	120	0
+1200818	CORELLIA	cor_weather_station	AREA	19	-20.80	-20.00	99.20	0	1	a helper droid	23945	dungeon	Dee'ja Peak Stonewall Labs	1	none	0	300	120	0
+1200819	CORELLIA	cor_weather_station	AREA	19	-22.80	-20.00	115.40	0	1	QU3-3N (a helper droid)	23950	dungeon	Dee'ja Peak Stonewall Labs	1	none	0	300	120	0
+1200820	CORELLIA	cor_weather_station	AREA	19	-31.60	-20.00	100.90	0	1	a helper droid	23945	dungeon	Dee'ja Peak Stonewall Labs	1	none	0	300	120	0
+1200821	CORELLIA	cor_weather_station	AREA	21	-2.10	-20.00	73.70	0	1	a helper droid	23945	dungeon	Dee'ja Peak Stonewall Labs	1	none	0	300	120	0
+1200822	CORELLIA	cor_weather_station	AREA	21	-3.50	-20.00	68.30	0	1	a helper droid	23945	dungeon	Dee'ja Peak Stonewall Labs	1	none	0	300	120	0
+1200823	CORELLIA	cor_world	AREA	0	-7340.49	213.36	-4001.55	0	1	Draykken Bender (a Meatlump Leader)	23940	dungeon	Dee'ja Peak Stonewall Labs	1	none	0	300	120	0
 1200824	CORELLIA	cor_deflarian_bunker	AREA	3	3.40	0.30	-3.60	0	1	a Deflarian guard	5455	dungeon	Deflarian Bunker	1	none	0	300	120	0
 1200825	CORELLIA	cor_deflarian_bunker	AREA	4	3.60	-12.00	31.40	0	1	a Deflarian Henchman	5460	dungeon	Deflarian Bunker	1	none	0	300	120	0
 1200826	CORELLIA	cor_deflarian_bunker	EGG	5	33.70	-12.00	31.00	0	1	Captain Donovan	3795	dungeon	Deflarian Bunker	1	none	0	300	120	0
@@ -1379,178 +1379,191 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 1201379	CORELLIA	cor_world	AREA	0	-7399.48	414.19	7515.49	0	1	a fiend of Lord Nyax	15300	outback	-	1	none	0	300	120	0
 1201380	CORELLIA	cor_world	AREA	0	-7412.72	414.13	7520.10	0	1	a zealot of Lord Nyax	15320	outback	-	1	none	0	300	120	0
 1201381	CORELLIA	cor_world	AREA	0	-7414.34	414.55	7501.98	0	1	a fiend of Lord Nyax	15300	outback	-	1	none	0	300	120	0
-1201382	CORELLIA	cor_world	AREA	0	4829.10	34.40	-2633.70	0	1	a vicious slice hound	26535	outback	Enormeous Crystal Arch	2	none	0	300	120	4
-1201383	CORELLIA	cor_world	AREA	0	-4735.00	28.00	-1511.00	0	1	a Flail slayer	9495	outback	Flail Camp	12	none	0	900	600	30
-1201384	CORELLIA	cor_world	AREA	0	-4735.00	28.00	-1511.00	0	1	a Flail cutthroat	9480	outback	Flail Camp	4	none	0	900	600	8
-1201385	CORELLIA	cor_world	AREA	0	4992.00	5.00	2914.00	0	1	a vicious slice hound	26535	outback	Large Broken Tower	4	none	0	300	120	8
-1201386	CORELLIA	cor_world	AREA	0	746.00	395.00	2511.00	0	1	a vicious slice hound	26535	outback	Monument	3	none	0	300	120	6
-1201387	CORELLIA	cor_world	AREA	0	-6905.00	448.00	4533.00	0	1	a vicious slice hound	26535	outback	Mysterious Shrine	4	none	0	300	120	8
-1201388	CORELLIA	cor_world	AREA	0	-1689.10	372.10	6878.00	0	1	a vicious slice hound	26535	outback	Rock Formations	4	none	0	300	120	8
-1201389	CORELLIA	cor_world	AREA	0	-7488.00	241.20	-3967.90	0	1	a vicious slice hound	26535	outback	Weather Station	4	none	0	300	120	8
-1201390	CORELLIA	cor_world	EGG	1	1678.32	20.58	4699.98	0	1	Race Coordinator	34175	poi	Agrilat Crystal Swamp	1	none	0	300	180	0
-1201391	CORELLIA	cor_drall_cave	AREA	1	-16.20	-4.32	-7.04	0	1	a Drall patriot	5965	poi	Drall Patriot's Cave	3	none	0	300	180	6
-1201392	CORELLIA	cor_drall_cave	AREA	1	11.76	-22.14	-6.04	0	1	a Drall patriot	5965	poi	Drall Patriot's Cave	2	none	0	300	180	4
-1201393	CORELLIA	cor_drall_cave	AREA	2	21.62	-41.94	-62.64	0	1	a Drall patriot	5965	poi	Drall Patriot's Cave	4	none	0	300	180	8
-1201394	CORELLIA	cor_drall_cave	AREA	2	24.12	-35.48	-22.29	0	1	a Drall patriot	5965	poi	Drall Patriot's Cave	3	none	0	300	180	6
-1201395	CORELLIA	cor_drall_cave	AREA	2	47.63	-48.44	-61.93	0	1	a Drall patriot	5965	poi	Drall Patriot's Cave	2	none	0	300	180	4
-1201396	CORELLIA	cor_drall_cave	AREA	2	50.11	-48.84	-27.74	0	1	a Drall patriot foot soldier	5975	poi	Drall Patriot's Cave	3	none	0	300	180	6
-1201397	CORELLIA	cor_drall_cave	AREA	2	50.16	-48.55	-65.20	0	1	a Drall patriot foot soldier	5975	poi	Drall Patriot's Cave	2	none	0	300	180	4
-1201398	CORELLIA	cor_drall_cave	AREA	2	53.45	-68.14	-41.26	0	1	a Drall patriot legionnaire	5980	poi	Drall Patriot's Cave	1	none	0	300	180	0
-1201399	CORELLIA	cor_drall_cave	AREA	3	65.90	-68.75	-36.06	0	1	a Drall patriot foot soldier	5975	poi	Drall Patriot's Cave	3	none	0	300	180	6
-1201400	CORELLIA	cor_drall_cave	AREA	3	90.35	-61.79	-11.77	0	1	a Drall patriot foot soldier	5975	poi	Drall Patriot's Cave	4	none	0	300	180	8
-1201401	CORELLIA	cor_drall_cave	AREA	4	62.83	-75.79	-71.16	0	1	a Drall patriot legionnaire	5980	poi	Drall Patriot's Cave	2	none	0	300	180	4
-1201402	CORELLIA	cor_drall_cave	AREA	4	76.40	-76.84	-88.24	0	1	a Drall patriot conqueror	5970	poi	Drall Patriot's Cave	1	none	0	300	180	0
-1201403	CORELLIA	cor_drall_cave	AREA	4	78.84	-74.51	-54.27	0	1	a Drall patriot legionnaire	5980	poi	Drall Patriot's Cave	2	none	0	300	180	4
-1201404	CORELLIA	cor_drall_cave	AREA	4	94.65	-75.66	-68.45	0	1	a Drall patriot legionnaire	5980	poi	Drall Patriot's Cave	2	none	0	300	180	4
-1201405	CORELLIA	cor_drall_cave	AREA	5	70.95	-46.47	-106.00	0	1	a Drall patriot foot soldier	5975	poi	Drall Patriot's Cave	2	none	0	300	180	4
-1201406	CORELLIA	cor_drall_cave	AREA	5	71.07	-46.83	-109.15	0	1	a Drall patriot legionnaire	5980	poi	Drall Patriot's Cave	1	none	0	300	180	0
-1201407	CORELLIA	cor_drall_cave	AREA	5	91.12	-66.62	-118.30	0	1	a Drall patriot legionnaire	5980	poi	Drall Patriot's Cave	2	none	0	300	180	4
-1201408	CORELLIA	cor_drall_cave	AREA	5	91.84	-46.73	-113.45	0	1	a Drall patriot foot soldier	5975	poi	Drall Patriot's Cave	2	none	0	300	180	4
-1201409	CORELLIA	cor_drall_cave	AREA	5	94.08	-45.92	-107.11	0	1	a Drall patriot legionnaire	5980	poi	Drall Patriot's Cave	2	none	0	300	180	4
-1201410	CORELLIA	cor_drall_cave	AREA	6	52.36	-75.36	-101.42	0	1	a Drall patriot legionnaire	5980	poi	Drall Patriot's Cave	3	none	0	300	180	6
-1201411	CORELLIA	cor_drall_cave	AREA	6	63.10	-66.35	-137.48	0	1	a Drall patriot legionnaire	5980	poi	Drall Patriot's Cave	4	none	0	300	180	8
-1201412	CORELLIA	cor_drall_cave	EGG	7	186.60	-66.00	-98.90	0	1	a Drall chieftain	5945	poi	Drall Patriot's Cave	1	none	0	300	180	0
-1201413	CORELLIA	cor_drall_cave	AREA	8	113.11	-66.81	-96.16	0	1	a Drall patriot conqueror	5970	poi	Drall Patriot's Cave	1	none	0	300	180	0
-1201414	CORELLIA	cor_drall_cave	AREA	8	114.23	-66.69	-99.76	0	1	a Drall patriot legionnaire	5980	poi	Drall Patriot's Cave	2	none	0	300	180	4
-1201415	CORELLIA	cor_drall_cave	AREA	8	118.96	-65.73	-124.35	0	1	a Drall patriot legionnaire	5980	poi	Drall Patriot's Cave	4	none	0	300	180	8
-1201416	CORELLIA	cor_drall_cave	AREA	8	134.51	-66.79	-93.84	0	1	a Drall patriot conqueror	5970	poi	Drall Patriot's Cave	1	none	0	300	180	0
-1201417	CORELLIA	cor_drall_cave	AREA	8	140.99	-67.09	-94.67	0	1	a Drall patriot legionnaire	5980	poi	Drall Patriot's Cave	2	none	0	300	180	4
-1201418	CORELLIA	cor_drall_cave	AREA	8	148.79	-67.16	-120.17	0	1	a Drall patriot legionnaire	5980	poi	Drall Patriot's Cave	3	none	0	300	180	6
-1201419	CORELLIA	cor_drall_cave	AREA	9	161.88	-66.89	-97.22	0	1	a Drall patriot legionnaire	5980	poi	Drall Patriot's Cave	2	none	0	300	180	4
-1201420	CORELLIA	cor_drall_cave	AREA	9	182.10	-65.73	-102.41	0	1	a Drall patriot legionnaire	5980	poi	Drall Patriot's Cave	4	none	0	300	180	8
-1201421	CORELLIA	cor_drall_cave	AREA	10	49.30	-51.85	-87.68	0	1	a Drall patriot foot soldier	5975	poi	Drall Patriot's Cave	2	none	0	300	180	4
-1201422	CORELLIA	cor_drall_cave	AREA	11	85.40	-46.57	-141.25	0	1	a Drall patriot conqueror	5970	poi	Drall Patriot's Cave	1	none	0	300	180	0
-1201423	CORELLIA	cor_drall_cave	AREA	11	93.83	-46.14	-141.91	0	1	a Drall patriot legionnaire	5980	poi	Drall Patriot's Cave	3	none	0	300	180	6
-1201424	CORELLIA	cor_world	AREA	0	1041.12	33.07	4213.03	0	1	a Drall patriot	5965	poi	Drall Patriot's Cave	6	none	0	300	180	12
-1201425	CORELLIA	cor_world	AREA	0	4243.31	24.84	-155.27	0	1	a Drall abbot	5940	poi	Drall Patriot's Cave	1	none	0	300	180	0
-1201426	CORELLIA	cor_world	AREA	0	4248.56	25.12	-160.00	0	1	a Drall monk	5960	poi	Drall Patriot's Cave	3	none	0	300	180	6
-1201427	CORELLIA	cor_nyax_bunker	AREA	2	3.76	0.25	-0.66	0	1	a minion of Lord Nyax	15305	poi	Lord Nyax's Cult	1	none	0	300	180	0
-1201428	CORELLIA	cor_nyax_bunker	AREA	3	-3.74	0.25	-4.16	0	1	a disciple of Lord Nyax	15290	poi	Lord Nyax's Cult	2	none	0	300	180	4
-1201429	CORELLIA	cor_nyax_bunker	AREA	5	2.56	-6.75	-0.65	0	1	a zealot of Lord Nyax	15320	poi	Lord Nyax's Cult	2	none	0	300	180	4
-1201430	CORELLIA	cor_nyax_bunker	AREA	5	5.44	-6.76	-8.69	0	1	a fanatic of Lord Nyax	15295	poi	Lord Nyax's Cult	2	none	0	300	180	4
-1201431	CORELLIA	cor_nyax_bunker	AREA	7	-1.19	-13.75	4.70	0	1	a disciple of Lord Nyax	15290	poi	Lord Nyax's Cult	2	none	0	300	180	4
-1201432	CORELLIA	cor_nyax_bunker	AREA	7	-1.54	-13.75	-11.80	0	1	a zealot of Lord Nyax	15320	poi	Lord Nyax's Cult	2	none	0	300	180	4
-1201433	CORELLIA	cor_nyax_bunker	AREA	8	-4.68	-13.76	12.10	0	1	a fiend of Lord Nyax	15300	poi	Lord Nyax's Cult	1	none	0	300	180	0
-1201434	CORELLIA	cor_nyax_bunker	AREA	8	6.16	-13.76	11.80	0	1	a zealot of Lord Nyax	15320	poi	Lord Nyax's Cult	2	none	0	300	180	4
-1201435	CORELLIA	cor_nyax_bunker	AREA	9	15.24	-13.76	14.05	0	1	a fiend of Lord Nyax	15300	poi	Lord Nyax's Cult	2	none	0	300	180	4
-1201436	CORELLIA	cor_nyax_bunker	AREA	9	15.81	-13.76	1.40	0	1	a fiend of Lord Nyax	15300	poi	Lord Nyax's Cult	2	none	0	300	180	4
-1201437	CORELLIA	cor_nyax_bunker	AREA	10	15.46	-13.76	-13.73	0	1	a visionary of Lord Nyax	15315	poi	Lord Nyax's Cult	1	none	0	300	180	0
-1201438	CORELLIA	cor_nyax_bunker	AREA	10	15.56	-13.76	-7.08	0	1	a fiend of Lord Nyax	15300	poi	Lord Nyax's Cult	2	none	0	300	180	4
-1201439	CORELLIA	cor_nyax_bunker	EGG	10	18.59	-11.5	-20.9	0	1	Lord Nyax	15285	poi	Lord Nyax's Cult	1	none	0	600	300	0
-1201440	CORELLIA	cor_world	AREA	0	-6831.07	454.34	2211.75	0	1	a visionary of Lord Nyax	15315	poi	Lord Nyax's Cult	1	none	0	300	180	0
-1201441	CORELLIA	cor_world	AREA	0	1346.02	31	-335.29	0	1	a fanatic of Lord Nyax	15295	poi	Lord Nyax's Cult	2	none	0	300	180	4
-1201442	CORELLIA	cor_world	AREA	0	1356.71	31	-319.37	0	1	a zealot of Lord Nyax	15320	poi	Lord Nyax's Cult	1	none	0	300	180	0
-1201443	CORELLIA	cor_world	AREA	0	1378.39	31	-320.84	0	1	a fanatic of Lord Nyax	15295	poi	Lord Nyax's Cult	2	none	0	300	180	4
-1201444	CORELLIA	cor_hidden_reb_base	PATROL	2	18.97	1.01	8.10	0	1	an MSE-6 ''Mouse'' droid	19405	poi	Rebel Hideout	1	none	999	300	120	0
-1201445	CORELLIA	cor_hidden_reb_base	EGG	2	7.27	1.01	-8.20	-90	1	Falton Molard	34300	poi	Rebel Hideout	1	none	0	300	120	0
-1201446	CORELLIA	cor_hidden_reb_base	PATROL	2	6.37	1.01	2.49	0	1	a Rebel trooper	24765	poi	Rebel Hideout	1	none	999	300	120	0
-1201447	CORELLIA	cor_hidden_reb_base	EGG	2	-3.95	1.01	-0.93	26	1	R2-D2	24020	poi	Rebel Hideout	1	none	0	300	120	0
-1201448	CORELLIA	cor_hidden_reb_base	EGG	2	-2.78	2.01	4.47	141	1	C3-PO	2260	poi	Rebel Hideout	1	none	0	300	120	0
-1201449	CORELLIA	cor_hidden_reb_base	PATROL	2	-2.94	1.01	-0.03	0	1	an MSE-6 ''Mouse'' droid	19405	poi	Rebel Hideout	1	none	999	300	120	0
-1201450	CORELLIA	cor_hidden_reb_base	PATROL	2	-0.33	1.01	-14.29	0	1	a Rebel Second Lieutenant	24680	poi	Rebel Hideout	1	none	999	300	120	0
-1201451	CORELLIA	cor_hidden_reb_base	PATROL	2	4.70	1.01	-8.44	0	1	a Rebel Staff Corporal	24725	poi	Rebel Hideout	1	none	999	300	120	0
-1201452	CORELLIA	cor_hidden_reb_base	PATROL	2	-14.76	1.01	-11.98	0	1	a Rebel trooper	24765	poi	Rebel Hideout	1	none	999	300	120	0
-1201453	CORELLIA	cor_hidden_reb_base	EGG	2	0.34	2.01	5.50	0	1	a Rebel Second Lieutenant	24680	poi	Rebel Hideout	1	none	0	300	120	0
-1201454	CORELLIA	cor_hidden_reb_base	PATROL	5	15.30	1.01	-1.68	0	1	a 3PO protocol droid	29445	poi	Rebel Hideout	1	none	999	300	120	0
-1201455	CORELLIA	cor_hidden_reb_base	EGG	5	13.11	1.01	1.63	179	1	a Rebel First Lieutenant	24570	poi	Rebel Hideout	1	sitting	0	300	120	0
-1201456	CORELLIA	cor_hidden_reb_base	EGG	5	13.28	1.01	-6.27	87	1	a Rebel scout	24670	poi	Rebel Hideout	1	sitting	0	300	120	0
-1201457	CORELLIA	cor_hidden_reb_base	EGG	5	15.00	1.01	-6.53	-81	1	Major Qual'do Herm	23775	poi	Rebel Hideout	1	none	0	300	120	0
-1201458	CORELLIA	cor_hidden_reb_base	EGG	7	0.00	1.01	-21.89	0	1	Wedge Antilles	33115	poi	Rebel Hideout	1	sitting	0	300	120	0
-1201459	CORELLIA	cor_hidden_reb_base	EGG	7	-4.13	1.01	-20.79	-86	1	a Rebel Corporal	24380	poi	Rebel Hideout	1	none	0	300	120	0
-1201460	CORELLIA	cor_hidden_reb_base	EGG	10	5.48	7.01	-0.39	4	1	a Rebel trooper	24765	poi	Rebel Hideout	1	none	0	300	120	0
-1201461	CORELLIA	cor_hidden_reb_base	EGG	10	11.64	7.01	-9.04	90	1	a Rebel trooper	24765	poi	Rebel Hideout	1	none	0	300	120	0
-1201462	CORELLIA	cor_hidden_reb_base	EGG	11	-13.07	7.01	9.64	95	1	a Rebel Army Captain	24335	poi	Rebel Hideout	1	none	0	300	120	0
-1201463	CORELLIA	cor_hidden_reb_base	EGG	11	-11.19	7.01	11.68	167	1	Leia Organa	25455	poi	Rebel Hideout	1	none	0	300	120	0
-1201464	CORELLIA	cor_hidden_reb_base	EGG	11	-3.31	7.01	12.61	100	1	a Rebel Corporal	24380	poi	Rebel Hideout	1	sitting	0	300	120	0
-1201465	CORELLIA	cor_hidden_reb_base	EGG	11	-2.71	7.01	6.05	-92	1	a Rebel trooper	24765	poi	Rebel Hideout	1	none	0	300	120	0
-1201466	CORELLIA	cor_hidden_reb_base	EGG	11	-6.23	7.01	6.05	82	1	a Rebel trooper	24765	poi	Rebel Hideout	1	none	0	300	120	0
-1201467	CORELLIA	cor_hidden_reb_base	EGG	12	5.91	7.01	10.03	87	1	a Rebel Colonel	24355	poi	Rebel Hideout	1	sitting	0	300	120	0
-1201468	CORELLIA	cor_world	EGG	0	-6538.48	398.00	5985.63	-86	1	a smuggler	26650	poi	Rebel Hideout	1	none	0	300	120	0
-1201469	CORELLIA	cor_world	EGG	0	-6563.62	398.00	5984.90	51	1	a commoner	3185	poi	Rebel Hideout	1	none	0	300	120	0
-1201470	CORELLIA	cor_world	EGG	0	-6552.44	398.00	6014.82	78	1	a commoner	3185	poi	Rebel Hideout	1	none	0	300	120	0
-1201471	CORELLIA	cor_world	EGG	0	-6510.09	398.00	6040.92	-148	1	a commoner	3185	poi	Rebel Hideout	1	none	0	300	120	0
-1201472	CORELLIA	cor_world	EGG	0	-6490.71	398.00	6047.45	100	1	a medic	18425	poi	Rebel Hideout	1	none	0	300	120	0
-1201473	CORELLIA	cor_world	EGG	0	-6454.66	398.00	6008.84	-142	1	a commoner	3185	poi	Rebel Hideout	1	none	0	300	120	0
-1201474	CORELLIA	cor_world	EGG	0	-6462.82	398.00	5955.16	-131	1	a smuggler	26650	poi	Rebel Hideout	1	none	0	300	120	0
-1201475	CORELLIA	cor_world	EGG	0	-6485.96	398.00	5970.23	120	1	a commoner	3185	poi	Rebel Hideout	1	none	0	300	120	0
-1201476	CORELLIA	cor_world	EGG	0	-6497.05	398.00	5950.87	-171	1	a commoner	3185	poi	Rebel Hideout	1	none	0	300	120	0
-1201477	CORELLIA	cor_world	EGG	0	-6522.76	398.00	5956.46	111	1	a slicer	26540	poi	Rebel Hideout	1	none	0	300	120	0
-1201478	CORELLIA	cor_world	AREA	0	-6430.63	405.00	6033.71	0	1	a Rebel guard	24340	poi	Rebel Hideout	1	none	0	300	120	0
-1201479	CORELLIA	cor_world	AREA	0	-6435.16	405.00	6032.51	0	1	a Rebel guard captain	25375	poi	Rebel Hideout	1	none	0	300	120	0
-1201480	CORELLIA	cor_world	AREA	0	-6438.44	405.00	6036.31	0	1	a Rebel guard	24340	poi	Rebel Hideout	1	none	0	300	120	0
-1201481	CORELLIA	cor_world	AREA	0	-6478.36	405.00	5916.57	0	1	a Rebel guard	24340	poi	Rebel Hideout	1	none	0	300	120	0
-1201482	CORELLIA	cor_world	AREA	0	-6482.10	405.00	5914.92	0	1	a Rebel guard	24340	poi	Rebel Hideout	1	none	0	300	120	0
-1201483	CORELLIA	cor_world	EGG	0	-6485.00	398.00	6017.00	35	1	Teslo Ten'Doora	24630	poi	Rebel Hideout	1	none	0	300	120	0
-1201484	CORELLIA	cor_world	AREA	0	-6529.17	405.00	5910.89	0	1	a Rebel guard	24340	poi	Rebel Hideout	1	none	0	300	120	0
-1201485	CORELLIA	cor_world	AREA	0	-6570.11	405.00	5942.90	0	1	a Rebel guard	24340	poi	Rebel Hideout	1	none	0	300	120	0
-1201486	CORELLIA	cor_world	EGG	0	-6519.32	398.00	6043.70	149	1	Lt. Lance	15525	poi	Rebel Hideout	1	none	0	300	120	0
-1201487	CORELLIA	cor_world	PATROL	0	-6550.86	401.63	5949.75	0	1	a Rebel First Lieutenant	24570	poi	Rebel Hideout	1	none	999	300	120	0
-1201488	CORELLIA	cor_world	PATROL	0	-6553.28	402.58	5946.93	0	1	a Rebel Major	24610	poi	Rebel Hideout	1	none	999	300	120	0
-1201489	CORELLIA	cor_world	PATROL	0	-6555.23	403.34	5944.66	0	1	a Rebel commando	24375	poi	Rebel Hideout	1	none	999	300	120	0
-1201490	CORELLIA	cor_world	PATROL	0	-6559.73	405.00	5920.79	0	1	a Rebel Major	24610	poi	Rebel Hideout	1	none	999	300	120	0
-1201491	CORELLIA	cor_world	PATROL	0	-6558.93	405.00	5923.41	0	1	a Rebel Major	24610	poi	Rebel Hideout	1	none	999	300	120	0
-1201492	CORELLIA	cor_world	PATROL	0	-6498.89	398.00	6035.33	0	1	a Rebel Major	24610	poi	Rebel Hideout	1	none	999	300	120	0
-1201493	CORELLIA	cor_world	PATROL	0	-6482.04	398.00	6024.85	0	1	a Rebel Major	24610	poi	Rebel Hideout	1	none	999	300	120	0
-1201494	CORELLIA	cor_world	PATROL	0	-6474.63	398.00	6020.03	0	1	a Rebel Sergeant	24685	poi	Rebel Hideout	1	none	999	300	120	0
-1201495	CORELLIA	cor_world	PATROL	0	-6487.88	398.00	6022.32	0	1	an R3 unit	34245	poi	Rebel Hideout	1	none	999	300	120	0
-1201496	CORELLIA	cor_world	PATROL	0	-6472.88	398.00	6029.06	0	1	an R5 unit	34015	poi	Rebel Hideout	1	none	999	300	120	0
-1201497	CORELLIA	cor_world	PATROL	0	-6454.20	398.00	5985.37	0	1	an R5 unit	34015	poi	Rebel Hideout	1	none	999	300	120	0
-1201498	CORELLIA	cor_world	PATROL	0	-6479.03	398.00	5966.28	0	1	a CLL-8 binary load lifter	2705	poi	Rebel Hideout	1	none	999	300	120	0
-1201499	CORELLIA	cor_world	PATROL	0	-6475.40	398.00	5958.95	0	1	a EG-6 power droid	6195	poi	Rebel Hideout	1	none	999	300	120	0
-1201500	CORELLIA	cor_world	PATROL	0	-6583.82	405.00	5967.56	0	1	a Rebel Captain	4755	poi	Rebel Hideout	1	none	999	300	120	0
-1201501	CORELLIA	cor_world	PATROL	0	-6586.66	405.00	5967.40	0	1	a Rebel commando	24375	poi	Rebel Hideout	1	none	999	300	120	0
-1201502	CORELLIA	cor_world	PATROL	0	-6584.70	405.00	5963.74	0	1	a Rebel commando	24375	poi	Rebel Hideout	1	none	999	300	120	0
-1201503	CORELLIA	cor_world	PATROL	0	-6581.84	405.00	5966.13	0	1	a Rebel commando	24375	poi	Rebel Hideout	1	none	999	300	120	0
-1201504	CORELLIA	cor_rogue_corsec_base_bldg1	AREA	2	-8.59	0.18	-4.97	0	1	a renegade CorSec trooper	4495	poi	Rogue Corsec Base	2	none	0	300	180	4
-1201505	CORELLIA	cor_rogue_corsec_base_bldg1	AREA	2	0.16	0.18	-1.35	0	1	a CorSec traitor	4520	poi	Rogue Corsec Base	2	none	0	300	180	4
-1201506	CORELLIA	cor_rogue_corsec_base_bldg1	EGG	2	2.00	0.20	5.50	178	1	Hiram Bish (a rogue CorSec commander)	3760	poi	Rogue Corsec Base	1	none	0	300	180	0
-1201507	CORELLIA	cor_rogue_corsec_base_bldg1	AREA	2	8.60	0.18	4.29	0	1	a CorSec deserter	4435	poi	Rogue Corsec Base	2	none	0	300	180	4
-1201508	CORELLIA	cor_rogue_corsec_base_bldg2	AREA	2	-3.19	0.18	-6.14	0	1	a CorSec deserter	4435	poi	Rogue Corsec Base	5	none	0	300	180	10
-1201509	CORELLIA	cor_rogue_corsec_base_bldg2	AREA	2	3.99	0.18	6.18	0	1	a renegade CorSec trooper	4495	poi	Rogue Corsec Base	3	none	0	300	180	6
-1201510	CORELLIA	cor_rogue_corsec_base_bldg3	AREA	2	-7.68	0.18	4.89	0	1	a rogue CorSec trooper	4500	poi	Rogue Corsec Base	3	none	0	300	180	6
-1201511	CORELLIA	cor_rogue_corsec_base_bldg3	AREA	2	8.88	0.18	-4.83	0	1	a CorSec deserter	4435	poi	Rogue Corsec Base	3	none	0	300	180	6
-1201512	CORELLIA	cor_rogue_corsec_base_bunker	AREA	3	3.83	0.25	-4.01	0	1	a CorSec deserter	4435	poi	Rogue Corsec Base	1	none	0	300	180	0
-1201513	CORELLIA	cor_rogue_corsec_base_bunker	AREA	7	-8.21	-13.75	8.77	0	1	a renegade CorSec trooper	4495	poi	Rogue Corsec Base	1	none	0	300	180	0
-1201514	CORELLIA	cor_rogue_corsec_base_bunker	AREA	7	5.37	-13.75	8.78	0	1	a CorSec deserter	4435	poi	Rogue Corsec Base	2	none	0	300	180	4
-1201515	CORELLIA	cor_rogue_corsec_base_bunker	AREA	9	1.57	-20.73	6.95	0	1	a renegade CorSec trooper	4495	poi	Rogue Corsec Base	3	none	0	300	180	6
-1201516	CORELLIA	cor_rogue_corsec_base_bunker	AREA	10	-1.32	-20.75	31.22	0	1	a CorSec traitor	4520	poi	Rogue Corsec Base	2	none	0	300	180	4
-1201517	CORELLIA	cor_rogue_corsec_base_bunker	AREA	10	2.30	-20.75	18.57	0	1	a renegade CorSec trooper	4495	poi	Rogue Corsec Base	2	none	0	300	180	4
-1201518	CORELLIA	cor_rogue_corsec_base_bunker	AREA	10	4.00	-20.75	30.29	0	1	a CorSec traitor	4520	poi	Rogue Corsec Base	2	none	0	300	180	4
-1201519	CORELLIA	cor_world	AREA	0	-1751.43	1.02	-5594.28	0	1	a renegade CorSec trooper	4495	poi	Rogue Corsec Base	2	none	0	300	180	4
-1201520	CORELLIA	cor_world	AREA	0	5189.92	5	1584.88	0	1	a CorSec deserter	4435	poi	Rogue Corsec Base	3	none	0	300	180	6
-1201521	CORELLIA	cor_world	AREA	0	5162.38	5	1613.72	0	1	a rogue CorSec trooper	4500	poi	Rogue Corsec Base	3	none	0	300	180	6
-1201522	CORELLIA	cor_world	AREA	0	5180.04	5	1554.03	0	1	a CorSec deserter	4435	poi	Rogue Corsec Base	2	none	0	300	180	4
-1201523	CORELLIA	cor_world	AREA	0	5202.67	5	1516.82	0	1	a rogue CorSec trooper	4500	poi	Rogue Corsec Base	3	none	0	300	180	6
-1201524	CORELLIA	cor_world	AREA	0	5206.87	5	1648.81	0	1	a rogue CorSec trooper	4500	poi	Rogue Corsec Base	3	none	0	300	180	6
-1201525	CORELLIA	cor_world	EGG	0	5217.80	5.00	1585.70	-78	1	Mtara Vinram (a rogue CorSec commander)	3770	poi	Rogue Corsec Base	1	none	0	300	180	0
-1201526	CORELLIA	cor_world	AREA	0	5224.39	5	1589.30	0	1	a renegade CorSec trooper	4495	poi	Rogue Corsec Base	2	none	0	300	180	4
-1201527	CORELLIA	cor_world	AREA	0	5228.77	5	1611.18	0	1	a CorSec deserter	4435	poi	Rogue Corsec Base	3	none	0	300	180	6
-1201528	CORELLIA	cor_world	AREA	0	5230.81	5	1563.15	0	1	a renegade CorSec trooper	4495	poi	Rogue Corsec Base	2	none	0	300	180	4
-1201529	CORELLIA	cor_world	AREA	0	5231.01	5	1530.22	0	1	a rogue CorSec trooper	4500	poi	Rogue Corsec Base	3	none	0	300	180	6
-1201530	CORELLIA	cor_world	AREA	0	5266.47	5	1603.72	0	1	a CorSec deserter	4435	poi	Rogue Corsec Base	2	none	0	300	180	4
-1201531	CORELLIA	cor_world	AREA	0	5280.13	5	1565.07	0	1	a rogue CorSec trooper	4500	poi	Rogue Corsec Base	3	none	0	300	180	6
-1201532	CORELLIA	cor_world	AREA	0	5280.62	5	1586.40	0	1	a rogue CorSec trooper	4500	poi	Rogue Corsec Base	3	none	0	300	180	6
-1201533	CORELLIA	cor_stronghold_1	AREA	3	0.00	0.13	-0.91	0	1	an Imperial Sergeant	13190	poi	Stronghold	1	none	0	300	180	0
-1201534	CORELLIA	cor_stronghold_1	AREA	6	-3.94	0.13	-3.75	0	1	a High Colonel	12385	poi	Stronghold	1	none	0	300	180	0
-1201535	CORELLIA	cor_stronghold_2	AREA	3	0.02	0.13	0.89	0	1	an Assault Trooper	350	poi	Stronghold	1	none	0	300	180	0
-1201536	CORELLIA	cor_stronghold_2	AREA	5	3.05	0.13	-3.97	0	1	an Imperial surface Marshall	13220	poi	Stronghold	1	none	0	300	180	0
-1201537	CORELLIA	cor_stronghold_3	AREA	3	0.00	0.13	-0.95	0	1	a Stormtrooper	28990	poi	Stronghold	2	none	0	300	180	4
-1201538	CORELLIA	cor_stronghold_4	AREA	3	0.00	0.13	-3.55	0	1	an Imperial noncom	13135	poi	Stronghold	2	none	0	300	180	4
-1201539	CORELLIA	cor_stronghold_5	AREA	3	-0.05	0.13	-0.98	0	1	a Stormtrooper	28990	poi	Stronghold	2	none	0	300	180	4
-1201540	CORELLIA	cor_stronghold_6	AREA	3	0.03	0.13	-0.81	0	1	an Imperial trooper	13225	poi	Stronghold	2	none	0	300	180	4
-1201541	CORELLIA	cor_stronghold_7	AREA	3	-0.01	0.13	-1.07	0	1	a Stormtrooper Medic	29035	poi	Stronghold	1	none	0	300	180	0
-1201542	CORELLIA	cor_stronghold_7	AREA	6	-3.12	0.13	-3.93	0	1	a Stormtrooper Commando	28985	poi	Stronghold	1	none	0	300	180	0
-1201543	CORELLIA	cor_stronghold_8	AREA	3	-0.02	0.13	-0.78	0	1	an Imperial First Lieutenant	13065	poi	Stronghold	1	none	0	300	180	0
-1201544	CORELLIA	cor_world	AREA	0	4582.01	25	-5771.90	0	1	an AT-AT	365	poi	Stronghold	1	none	0	300	180	0
-1201545	CORELLIA	cor_world	AREA	0	4625.94	25	-5770.79	0	1	an Imperial Major	13100	poi	Stronghold	1	none	0	300	180	0
-1201546	CORELLIA	cor_world	AREA	0	4627.21	25	-5796.45	0	1	an Imperial Lieutenant Colonel	13090	poi	Stronghold	1	none	0	300	180	0
-1201547	CORELLIA	cor_world	AREA	0	4636.85	25	-5778.14	0	1	an Imperial First Lieutenant	13065	poi	Stronghold	2	none	0	300	180	4
-1201548	CORELLIA	cor_world	AREA	0	4642.90	25	-5811.65	0	1	Imperial TIE Fighter pilot	13145	poi	Stronghold	1	none	0	300	180	0
-1201549	CORELLIA	cor_world	AREA	0	4643.44	25	-5756.35	0	1	Imperial TIE Fighter pilot	13145	poi	Stronghold	1	none	0	300	180	0
-1201550	CORELLIA	cor_world	AREA	0	4680.51	25	-5750.79	0	1	a Dark Trooper	5340	poi	Stronghold	5	none	0	300	180	10
-1201551	CORELLIA	cor_world	AREA	0	4680.94	25	-5820.61	0	1	a Stormtrooper	28990	poi	Stronghold	5	none	0	300	180	10
-1201552	CORELLIA	cor_world	AREA	0	4682.24	25	-5762.14	0	1	a Novatrooper Squad Leader	29080	poi	Stronghold	1	none	0	300	180	0
-1201553	CORELLIA	cor_world	AREA	0	4683.26	25	-5811.92	0	1	a Novatrooper Squad Leader	29080	poi	Stronghold	1	none	0	300	180	0
-1201554	CORELLIA	cor_world	AREA	0	4692.95	25	-5762.53	0	1	a Stormtrooper	28990	poi	Stronghold	5	none	0	300	180	10
-1201555	CORELLIA	cor_world	AREA	0	4696.01	25	-5805.19	0	1	a Dark Trooper	5340	poi	Stronghold	5	none	0	300	180	10
-1201556	CORELLIA	cor_world	AREA	0	4705.13	25	-5773.65	0	1	Imperial TIE Fighter pilot	13145	poi	Stronghold	1	none	0	300	180	0
+1201382	CORELLIA	cor_world	EGG	1	1678.32	20.58	4699.98	0	1	Race Coordinator	34175	poi	Agrilat Crystal Swamp	1	none	0	300	180	0
+1201383	CORELLIA	cor_drall_cave	AREA	1	-16.20	-4.32	-7.04	0	1	a Drall patriot	5965	poi	Drall Patriot's Cave	3	none	0	300	180	6
+1201384	CORELLIA	cor_drall_cave	AREA	1	11.76	-22.14	-6.04	0	1	a Drall patriot	5965	poi	Drall Patriot's Cave	2	none	0	300	180	4
+1201385	CORELLIA	cor_drall_cave	AREA	2	21.62	-41.94	-62.64	0	1	a Drall patriot	5965	poi	Drall Patriot's Cave	4	none	0	300	180	8
+1201386	CORELLIA	cor_drall_cave	AREA	2	24.12	-35.48	-22.29	0	1	a Drall patriot	5965	poi	Drall Patriot's Cave	3	none	0	300	180	6
+1201387	CORELLIA	cor_drall_cave	AREA	2	47.63	-48.44	-61.93	0	1	a Drall patriot	5965	poi	Drall Patriot's Cave	2	none	0	300	180	4
+1201388	CORELLIA	cor_drall_cave	AREA	2	50.11	-48.84	-27.74	0	1	a Drall patriot foot soldier	5975	poi	Drall Patriot's Cave	3	none	0	300	180	6
+1201389	CORELLIA	cor_drall_cave	AREA	2	50.16	-48.55	-65.20	0	1	a Drall patriot foot soldier	5975	poi	Drall Patriot's Cave	2	none	0	300	180	4
+1201390	CORELLIA	cor_drall_cave	AREA	2	53.45	-68.14	-41.26	0	1	a Drall patriot legionnaire	5980	poi	Drall Patriot's Cave	1	none	0	300	180	0
+1201391	CORELLIA	cor_drall_cave	AREA	3	65.90	-68.75	-36.06	0	1	a Drall patriot foot soldier	5975	poi	Drall Patriot's Cave	3	none	0	300	180	6
+1201392	CORELLIA	cor_drall_cave	AREA	3	90.35	-61.79	-11.77	0	1	a Drall patriot foot soldier	5975	poi	Drall Patriot's Cave	4	none	0	300	180	8
+1201393	CORELLIA	cor_drall_cave	AREA	4	62.83	-75.79	-71.16	0	1	a Drall patriot legionnaire	5980	poi	Drall Patriot's Cave	2	none	0	300	180	4
+1201394	CORELLIA	cor_drall_cave	AREA	4	76.40	-76.84	-88.24	0	1	a Drall patriot conqueror	5970	poi	Drall Patriot's Cave	1	none	0	300	180	0
+1201395	CORELLIA	cor_drall_cave	AREA	4	78.84	-74.51	-54.27	0	1	a Drall patriot legionnaire	5980	poi	Drall Patriot's Cave	2	none	0	300	180	4
+1201396	CORELLIA	cor_drall_cave	AREA	4	94.65	-75.66	-68.45	0	1	a Drall patriot legionnaire	5980	poi	Drall Patriot's Cave	2	none	0	300	180	4
+1201397	CORELLIA	cor_drall_cave	AREA	5	70.95	-46.47	-106.00	0	1	a Drall patriot foot soldier	5975	poi	Drall Patriot's Cave	2	none	0	300	180	4
+1201398	CORELLIA	cor_drall_cave	AREA	5	71.07	-46.83	-109.15	0	1	a Drall patriot legionnaire	5980	poi	Drall Patriot's Cave	1	none	0	300	180	0
+1201399	CORELLIA	cor_drall_cave	AREA	5	91.12	-66.62	-118.30	0	1	a Drall patriot legionnaire	5980	poi	Drall Patriot's Cave	2	none	0	300	180	4
+1201400	CORELLIA	cor_drall_cave	AREA	5	91.84	-46.73	-113.45	0	1	a Drall patriot foot soldier	5975	poi	Drall Patriot's Cave	2	none	0	300	180	4
+1201401	CORELLIA	cor_drall_cave	AREA	5	94.08	-45.92	-107.11	0	1	a Drall patriot legionnaire	5980	poi	Drall Patriot's Cave	2	none	0	300	180	4
+1201402	CORELLIA	cor_drall_cave	AREA	6	52.36	-75.36	-101.42	0	1	a Drall patriot legionnaire	5980	poi	Drall Patriot's Cave	3	none	0	300	180	6
+1201403	CORELLIA	cor_drall_cave	AREA	6	63.10	-66.35	-137.48	0	1	a Drall patriot legionnaire	5980	poi	Drall Patriot's Cave	4	none	0	300	180	8
+1201404	CORELLIA	cor_drall_cave	EGG	7	186.60	-66.00	-98.90	0	1	a Drall chieftain	5945	poi	Drall Patriot's Cave	1	none	0	300	180	0
+1201405	CORELLIA	cor_drall_cave	AREA	8	113.11	-66.81	-96.16	0	1	a Drall patriot conqueror	5970	poi	Drall Patriot's Cave	1	none	0	300	180	0
+1201406	CORELLIA	cor_drall_cave	AREA	8	114.23	-66.69	-99.76	0	1	a Drall patriot legionnaire	5980	poi	Drall Patriot's Cave	2	none	0	300	180	4
+1201407	CORELLIA	cor_drall_cave	AREA	8	118.96	-65.73	-124.35	0	1	a Drall patriot legionnaire	5980	poi	Drall Patriot's Cave	4	none	0	300	180	8
+1201408	CORELLIA	cor_drall_cave	AREA	8	134.51	-66.79	-93.84	0	1	a Drall patriot conqueror	5970	poi	Drall Patriot's Cave	1	none	0	300	180	0
+1201409	CORELLIA	cor_drall_cave	AREA	8	140.99	-67.09	-94.67	0	1	a Drall patriot legionnaire	5980	poi	Drall Patriot's Cave	2	none	0	300	180	4
+1201410	CORELLIA	cor_drall_cave	AREA	8	148.79	-67.16	-120.17	0	1	a Drall patriot legionnaire	5980	poi	Drall Patriot's Cave	3	none	0	300	180	6
+1201411	CORELLIA	cor_drall_cave	AREA	9	161.88	-66.89	-97.22	0	1	a Drall patriot legionnaire	5980	poi	Drall Patriot's Cave	2	none	0	300	180	4
+1201412	CORELLIA	cor_drall_cave	AREA	9	182.10	-65.73	-102.41	0	1	a Drall patriot legionnaire	5980	poi	Drall Patriot's Cave	4	none	0	300	180	8
+1201413	CORELLIA	cor_drall_cave	AREA	10	49.30	-51.85	-87.68	0	1	a Drall patriot foot soldier	5975	poi	Drall Patriot's Cave	2	none	0	300	180	4
+1201414	CORELLIA	cor_drall_cave	AREA	11	85.40	-46.57	-141.25	0	1	a Drall patriot conqueror	5970	poi	Drall Patriot's Cave	1	none	0	300	180	0
+1201415	CORELLIA	cor_drall_cave	AREA	11	93.83	-46.14	-141.91	0	1	a Drall patriot legionnaire	5980	poi	Drall Patriot's Cave	3	none	0	300	180	6
+1201416	CORELLIA	cor_world	AREA	0	1041.12	33.07	4213.03	0	1	a Drall patriot	5965	poi	Drall Patriot's Cave	6	none	0	300	180	12
+1201417	CORELLIA	cor_world	AREA	0	4243.31	24.84	-155.27	0	1	a Drall abbot	5940	poi	Drall Patriot's Cave	1	none	0	300	180	0
+1201418	CORELLIA	cor_world	AREA	0	4248.56	25.12	-160.00	0	1	a Drall monk	5960	poi	Drall Patriot's Cave	3	none	0	300	180	6
+1201419	CORELLIA	cor_nyax_bunker	AREA	2	3.76	0.25	-0.66	0	1	a minion of Lord Nyax	15305	poi	Lord Nyax's Cult	1	none	0	300	180	0
+1201420	CORELLIA	cor_nyax_bunker	AREA	3	-3.74	0.25	-4.16	0	1	a disciple of Lord Nyax	15290	poi	Lord Nyax's Cult	2	none	0	300	180	4
+1201421	CORELLIA	cor_nyax_bunker	AREA	5	2.56	-6.75	-0.65	0	1	a zealot of Lord Nyax	15320	poi	Lord Nyax's Cult	2	none	0	300	180	4
+1201422	CORELLIA	cor_nyax_bunker	AREA	5	5.44	-6.76	-8.69	0	1	a fanatic of Lord Nyax	15295	poi	Lord Nyax's Cult	2	none	0	300	180	4
+1201423	CORELLIA	cor_nyax_bunker	AREA	7	-1.19	-13.75	4.70	0	1	a disciple of Lord Nyax	15290	poi	Lord Nyax's Cult	2	none	0	300	180	4
+1201424	CORELLIA	cor_nyax_bunker	AREA	7	-1.54	-13.75	-11.80	0	1	a zealot of Lord Nyax	15320	poi	Lord Nyax's Cult	2	none	0	300	180	4
+1201425	CORELLIA	cor_nyax_bunker	AREA	8	-4.68	-13.76	12.10	0	1	a fiend of Lord Nyax	15300	poi	Lord Nyax's Cult	1	none	0	300	180	0
+1201426	CORELLIA	cor_nyax_bunker	AREA	8	6.16	-13.76	11.80	0	1	a zealot of Lord Nyax	15320	poi	Lord Nyax's Cult	2	none	0	300	180	4
+1201427	CORELLIA	cor_nyax_bunker	AREA	9	15.24	-13.76	14.05	0	1	a fiend of Lord Nyax	15300	poi	Lord Nyax's Cult	2	none	0	300	180	4
+1201428	CORELLIA	cor_nyax_bunker	AREA	9	15.81	-13.76	1.40	0	1	a fiend of Lord Nyax	15300	poi	Lord Nyax's Cult	2	none	0	300	180	4
+1201429	CORELLIA	cor_nyax_bunker	AREA	10	15.46	-13.76	-13.73	0	1	a visionary of Lord Nyax	15315	poi	Lord Nyax's Cult	1	none	0	300	180	0
+1201430	CORELLIA	cor_nyax_bunker	AREA	10	15.56	-13.76	-7.08	0	1	a fiend of Lord Nyax	15300	poi	Lord Nyax's Cult	2	none	0	300	180	4
+1201431	CORELLIA	cor_nyax_bunker	EGG	10	18.59	-11.5	-20.9	0	1	Lord Nyax	15285	poi	Lord Nyax's Cult	1	none	0	600	300	0
+1201432	CORELLIA	cor_world	AREA	0	-6831.07	454.34	2211.75	0	1	a visionary of Lord Nyax	15315	poi	Lord Nyax's Cult	1	none	0	300	180	0
+1201433	CORELLIA	cor_world	AREA	0	1346.02	31	-335.29	0	1	a fanatic of Lord Nyax	15295	poi	Lord Nyax's Cult	2	none	0	300	180	4
+1201434	CORELLIA	cor_world	AREA	0	1356.71	31	-319.37	0	1	a zealot of Lord Nyax	15320	poi	Lord Nyax's Cult	1	none	0	300	180	0
+1201435	CORELLIA	cor_world	AREA	0	1378.39	31	-320.84	0	1	a fanatic of Lord Nyax	15295	poi	Lord Nyax's Cult	2	none	0	300	180	4
+1201436	CORELLIA	cor_hidden_reb_base	PATROL	2	18.97	1.01	8.10	0	1	an MSE-6 ''Mouse'' droid	19405	poi	Hidden Rebel Base	1	none	999	300	120	0
+1201437	CORELLIA	cor_hidden_reb_base	EGG	2	7.27	1.01	-8.20	-90	1	Falton Molard	34300	poi	Hidden Rebel Base	1	none	0	300	120	0
+1201438	CORELLIA	cor_hidden_reb_base	PATROL	2	6.37	1.01	2.49	0	1	a Rebel trooper	24765	poi	Hidden Rebel Base	1	none	999	300	120	0
+1201439	CORELLIA	cor_hidden_reb_base	EGG	2	-3.95	1.01	-0.93	26	1	R2-D2	24020	poi	Hidden Rebel Base	1	none	0	300	120	0
+1201440	CORELLIA	cor_hidden_reb_base	EGG	2	-2.78	2.01	4.47	141	1	C3-PO	2260	poi	Hidden Rebel Base	1	none	0	300	120	0
+1201441	CORELLIA	cor_hidden_reb_base	PATROL	2	-2.94	1.01	-0.03	0	1	an MSE-6 ''Mouse'' droid	19405	poi	Hidden Rebel Base	1	none	999	300	120	0
+1201442	CORELLIA	cor_hidden_reb_base	PATROL	2	-0.33	1.01	-14.29	0	1	a Rebel Second Lieutenant	24680	poi	Hidden Rebel Base	1	none	999	300	120	0
+1201443	CORELLIA	cor_hidden_reb_base	PATROL	2	4.70	1.01	-8.44	0	1	a Rebel Staff Corporal	24725	poi	Hidden Rebel Base	1	none	999	300	120	0
+1201444	CORELLIA	cor_hidden_reb_base	PATROL	2	-14.76	1.01	-11.98	0	1	a Rebel trooper	24765	poi	Hidden Rebel Base	1	none	999	300	120	0
+1201445	CORELLIA	cor_hidden_reb_base	EGG	2	0.34	2.01	5.50	0	1	a Rebel Second Lieutenant	24680	poi	Hidden Rebel Base	1	none	0	300	120	0
+1201446	CORELLIA	cor_hidden_reb_base	PATROL	5	15.30	1.01	-1.68	0	1	a 3PO protocol droid	29445	poi	Hidden Rebel Base	1	none	999	300	120	0
+1201447	CORELLIA	cor_hidden_reb_base	EGG	5	13.11	1.01	1.63	179	1	a Rebel First Lieutenant	24570	poi	Hidden Rebel Base	1	sitting	0	300	120	0
+1201448	CORELLIA	cor_hidden_reb_base	EGG	5	13.28	1.01	-6.27	87	1	a Rebel scout	24670	poi	Hidden Rebel Base	1	sitting	0	300	120	0
+1201449	CORELLIA	cor_hidden_reb_base	EGG	5	15.00	1.01	-6.53	-81	1	Major Qual'do Herm	23775	poi	Hidden Rebel Base	1	none	0	300	120	0
+1201450	CORELLIA	cor_hidden_reb_base	EGG	7	0.00	1.01	-21.89	0	1	Wedge Antilles	33115	poi	Hidden Rebel Base	1	sitting	0	300	120	0
+1201451	CORELLIA	cor_hidden_reb_base	EGG	7	-4.13	1.01	-20.79	-86	1	a Rebel Corporal	24380	poi	Hidden Rebel Base	1	none	0	300	120	0
+1201452	CORELLIA	cor_hidden_reb_base	EGG	10	5.48	7.01	-0.39	4	1	a Rebel trooper	24765	poi	Hidden Rebel Base	1	none	0	300	120	0
+1201453	CORELLIA	cor_hidden_reb_base	EGG	10	11.64	7.01	-9.04	90	1	a Rebel trooper	24765	poi	Hidden Rebel Base	1	none	0	300	120	0
+1201454	CORELLIA	cor_hidden_reb_base	EGG	11	-13.07	7.01	9.64	95	1	a Rebel Army Captain	24335	poi	Hidden Rebel Base	1	none	0	300	120	0
+1201455	CORELLIA	cor_hidden_reb_base	EGG	11	-11.19	7.01	11.68	167	1	Leia Organa	25455	poi	Hidden Rebel Base	1	none	0	300	120	0
+1201456	CORELLIA	cor_hidden_reb_base	EGG	11	-3.31	7.01	12.61	100	1	a Rebel Corporal	24380	poi	Hidden Rebel Base	1	sitting	0	300	120	0
+1201457	CORELLIA	cor_hidden_reb_base	EGG	11	-2.71	7.01	6.05	-92	1	a Rebel trooper	24765	poi	Hidden Rebel Base	1	none	0	300	120	0
+1201458	CORELLIA	cor_hidden_reb_base	EGG	11	-6.23	7.01	6.05	82	1	a Rebel trooper	24765	poi	Hidden Rebel Base	1	none	0	300	120	0
+1201459	CORELLIA	cor_hidden_reb_base	EGG	12	5.91	7.01	10.03	87	1	a Rebel Colonel	24355	poi	Hidden Rebel Base	1	sitting	0	300	120	0
+1201460	CORELLIA	cor_world	EGG	0	-6538.48	398.00	5985.63	-86	1	a smuggler	26650	poi	Hidden Rebel Base	1	none	0	300	120	0
+1201461	CORELLIA	cor_world	EGG	0	-6563.62	398.00	5984.90	51	1	a commoner	3185	poi	Hidden Rebel Base	1	none	0	300	120	0
+1201462	CORELLIA	cor_world	EGG	0	-6552.44	398.00	6014.82	78	1	a commoner	3185	poi	Hidden Rebel Base	1	none	0	300	120	0
+1201463	CORELLIA	cor_world	EGG	0	-6510.09	398.00	6040.92	-148	1	a commoner	3185	poi	Hidden Rebel Base	1	none	0	300	120	0
+1201464	CORELLIA	cor_world	EGG	0	-6490.71	398.00	6047.45	100	1	a medic	18425	poi	Hidden Rebel Base	1	none	0	300	120	0
+1201465	CORELLIA	cor_world	EGG	0	-6454.66	398.00	6008.84	-142	1	a commoner	3185	poi	Hidden Rebel Base	1	none	0	300	120	0
+1201466	CORELLIA	cor_world	EGG	0	-6462.82	398.00	5955.16	-131	1	a smuggler	26650	poi	Hidden Rebel Base	1	none	0	300	120	0
+1201467	CORELLIA	cor_world	EGG	0	-6485.96	398.00	5970.23	120	1	a commoner	3185	poi	Hidden Rebel Base	1	none	0	300	120	0
+1201468	CORELLIA	cor_world	EGG	0	-6497.05	398.00	5950.87	-171	1	a commoner	3185	poi	Hidden Rebel Base	1	none	0	300	120	0
+1201469	CORELLIA	cor_world	EGG	0	-6522.76	398.00	5956.46	111	1	a slicer	26540	poi	Hidden Rebel Base	1	none	0	300	120	0
+1201470	CORELLIA	cor_world	AREA	0	-6430.63	405.00	6033.71	0	1	a Rebel guard	24340	poi	Hidden Rebel Base	1	none	0	300	120	0
+1201471	CORELLIA	cor_world	AREA	0	-6435.16	405.00	6032.51	0	1	a Rebel guard captain	25375	poi	Hidden Rebel Base	1	none	0	300	120	0
+1201472	CORELLIA	cor_world	AREA	0	-6438.44	405.00	6036.31	0	1	a Rebel guard	24340	poi	Hidden Rebel Base	1	none	0	300	120	0
+1201473	CORELLIA	cor_world	AREA	0	-6478.36	405.00	5916.57	0	1	a Rebel guard	24340	poi	Hidden Rebel Base	1	none	0	300	120	0
+1201474	CORELLIA	cor_world	AREA	0	-6482.10	405.00	5914.92	0	1	a Rebel guard	24340	poi	Hidden Rebel Base	1	none	0	300	120	0
+1201475	CORELLIA	cor_world	EGG	0	-6485.00	398.00	6017.00	35	1	Teslo Ten'Doora	24630	poi	Hidden Rebel Base	1	none	0	300	120	0
+1201476	CORELLIA	cor_world	AREA	0	-6529.17	405.00	5910.89	0	1	a Rebel guard	24340	poi	Hidden Rebel Base	1	none	0	300	120	0
+1201477	CORELLIA	cor_world	AREA	0	-6570.11	405.00	5942.90	0	1	a Rebel guard	24340	poi	Hidden Rebel Base	1	none	0	300	120	0
+1201478	CORELLIA	cor_world	EGG	0	-6519.32	398.00	6043.70	149	1	Lt. Lance	15525	poi	Hidden Rebel Base	1	none	0	300	120	0
+1201479	CORELLIA	cor_world	PATROL	0	-6550.86	401.63	5949.75	0	1	a Rebel First Lieutenant	24570	poi	Hidden Rebel Base	1	none	999	300	120	0
+1201480	CORELLIA	cor_world	PATROL	0	-6553.28	402.58	5946.93	0	1	a Rebel Major	24610	poi	Hidden Rebel Base	1	none	999	300	120	0
+1201481	CORELLIA	cor_world	PATROL	0	-6555.23	403.34	5944.66	0	1	a Rebel commando	24375	poi	Hidden Rebel Base	1	none	999	300	120	0
+1201482	CORELLIA	cor_world	PATROL	0	-6559.73	405.00	5920.79	0	1	a Rebel Major	24610	poi	Hidden Rebel Base	1	none	999	300	120	0
+1201483	CORELLIA	cor_world	PATROL	0	-6558.93	405.00	5923.41	0	1	a Rebel Major	24610	poi	Hidden Rebel Base	1	none	999	300	120	0
+1201484	CORELLIA	cor_world	PATROL	0	-6498.89	398.00	6035.33	0	1	a Rebel Major	24610	poi	Hidden Rebel Base	1	none	999	300	120	0
+1201485	CORELLIA	cor_world	PATROL	0	-6482.04	398.00	6024.85	0	1	a Rebel Major	24610	poi	Hidden Rebel Base	1	none	999	300	120	0
+1201486	CORELLIA	cor_world	PATROL	0	-6474.63	398.00	6020.03	0	1	a Rebel Sergeant	24685	poi	Hidden Rebel Base	1	none	999	300	120	0
+1201487	CORELLIA	cor_world	PATROL	0	-6487.88	398.00	6022.32	0	1	an R3 unit	34245	poi	Hidden Rebel Base	1	none	999	300	120	0
+1201488	CORELLIA	cor_world	PATROL	0	-6472.88	398.00	6029.06	0	1	an R5 unit	34015	poi	Hidden Rebel Base	1	none	999	300	120	0
+1201489	CORELLIA	cor_world	PATROL	0	-6454.20	398.00	5985.37	0	1	an R5 unit	34015	poi	Hidden Rebel Base	1	none	999	300	120	0
+1201490	CORELLIA	cor_world	PATROL	0	-6479.03	398.00	5966.28	0	1	a CLL-8 binary load lifter	2705	poi	Hidden Rebel Base	1	none	999	300	120	0
+1201491	CORELLIA	cor_world	PATROL	0	-6475.40	398.00	5958.95	0	1	a EG-6 power droid	6195	poi	Hidden Rebel Base	1	none	999	300	120	0
+1201492	CORELLIA	cor_world	PATROL	0	-6583.82	405.00	5967.56	0	1	a Rebel Captain	4755	poi	Hidden Rebel Base	1	none	999	300	120	0
+1201493	CORELLIA	cor_world	PATROL	0	-6586.66	405.00	5967.40	0	1	a Rebel commando	24375	poi	Hidden Rebel Base	1	none	999	300	120	0
+1201494	CORELLIA	cor_world	PATROL	0	-6584.70	405.00	5963.74	0	1	a Rebel commando	24375	poi	Hidden Rebel Base	1	none	999	300	120	0
+1201495	CORELLIA	cor_world	PATROL	0	-6581.84	405.00	5966.13	0	1	a Rebel commando	24375	poi	Hidden Rebel Base	1	none	999	300	120	0
+1201496	CORELLIA	cor_rogue_corsec_base_bldg1	AREA	2	-8.59	0.18	-4.97	0	1	a renegade CorSec trooper	4495	poi	Rogue Corsec Base	2	none	0	300	180	4
+1201497	CORELLIA	cor_rogue_corsec_base_bldg1	AREA	2	0.16	0.18	-1.35	0	1	a CorSec traitor	4520	poi	Rogue Corsec Base	2	none	0	300	180	4
+1201498	CORELLIA	cor_rogue_corsec_base_bldg1	EGG	2	2.00	0.20	5.50	178	1	Hiram Bish (a rogue CorSec commander)	3760	poi	Rogue Corsec Base	1	none	0	300	180	0
+1201499	CORELLIA	cor_rogue_corsec_base_bldg1	AREA	2	8.60	0.18	4.29	0	1	a CorSec deserter	4435	poi	Rogue Corsec Base	2	none	0	300	180	4
+1201500	CORELLIA	cor_rogue_corsec_base_bldg2	AREA	2	-3.19	0.18	-6.14	0	1	a CorSec deserter	4435	poi	Rogue Corsec Base	5	none	0	300	180	10
+1201501	CORELLIA	cor_rogue_corsec_base_bldg2	AREA	2	3.99	0.18	6.18	0	1	a renegade CorSec trooper	4495	poi	Rogue Corsec Base	3	none	0	300	180	6
+1201502	CORELLIA	cor_rogue_corsec_base_bldg3	AREA	2	-7.68	0.18	4.89	0	1	a rogue CorSec trooper	4500	poi	Rogue Corsec Base	3	none	0	300	180	6
+1201503	CORELLIA	cor_rogue_corsec_base_bldg3	AREA	2	8.88	0.18	-4.83	0	1	a CorSec deserter	4435	poi	Rogue Corsec Base	3	none	0	300	180	6
+1201504	CORELLIA	cor_rogue_corsec_base_bunker	AREA	3	3.83	0.25	-4.01	0	1	a CorSec deserter	4435	poi	Rogue Corsec Base	1	none	0	300	180	0
+1201505	CORELLIA	cor_rogue_corsec_base_bunker	AREA	7	-8.21	-13.75	8.77	0	1	a renegade CorSec trooper	4495	poi	Rogue Corsec Base	1	none	0	300	180	0
+1201506	CORELLIA	cor_rogue_corsec_base_bunker	AREA	7	5.37	-13.75	8.78	0	1	a CorSec deserter	4435	poi	Rogue Corsec Base	2	none	0	300	180	4
+1201507	CORELLIA	cor_rogue_corsec_base_bunker	AREA	9	1.57	-20.73	6.95	0	1	a renegade CorSec trooper	4495	poi	Rogue Corsec Base	3	none	0	300	180	6
+1201508	CORELLIA	cor_rogue_corsec_base_bunker	AREA	10	-1.32	-20.75	31.22	0	1	a CorSec traitor	4520	poi	Rogue Corsec Base	2	none	0	300	180	4
+1201509	CORELLIA	cor_rogue_corsec_base_bunker	AREA	10	2.30	-20.75	18.57	0	1	a renegade CorSec trooper	4495	poi	Rogue Corsec Base	2	none	0	300	180	4
+1201510	CORELLIA	cor_rogue_corsec_base_bunker	AREA	10	4.00	-20.75	30.29	0	1	a CorSec traitor	4520	poi	Rogue Corsec Base	2	none	0	300	180	4
+1201511	CORELLIA	cor_world	AREA	0	-1751.43	1.02	-5594.28	0	1	a renegade CorSec trooper	4495	poi	Rogue Corsec Base	2	none	0	300	180	4
+1201512	CORELLIA	cor_world	AREA	0	5189.92	5	1584.88	0	1	a CorSec deserter	4435	poi	Rogue Corsec Base	3	none	0	300	180	6
+1201513	CORELLIA	cor_world	AREA	0	5162.38	5	1613.72	0	1	a rogue CorSec trooper	4500	poi	Rogue Corsec Base	3	none	0	300	180	6
+1201514	CORELLIA	cor_world	AREA	0	5180.04	5	1554.03	0	1	a CorSec deserter	4435	poi	Rogue Corsec Base	2	none	0	300	180	4
+1201515	CORELLIA	cor_world	AREA	0	5202.67	5	1516.82	0	1	a rogue CorSec trooper	4500	poi	Rogue Corsec Base	3	none	0	300	180	6
+1201516	CORELLIA	cor_world	AREA	0	5206.87	5	1648.81	0	1	a rogue CorSec trooper	4500	poi	Rogue Corsec Base	3	none	0	300	180	6
+1201517	CORELLIA	cor_world	EGG	0	5217.80	5.00	1585.70	-78	1	Mtara Vinram (a rogue CorSec commander)	3770	poi	Rogue Corsec Base	1	none	0	300	180	0
+1201518	CORELLIA	cor_world	AREA	0	5224.39	5	1589.30	0	1	a renegade CorSec trooper	4495	poi	Rogue Corsec Base	2	none	0	300	180	4
+1201519	CORELLIA	cor_world	AREA	0	5228.77	5	1611.18	0	1	a CorSec deserter	4435	poi	Rogue Corsec Base	3	none	0	300	180	6
+1201520	CORELLIA	cor_world	AREA	0	5230.81	5	1563.15	0	1	a renegade CorSec trooper	4495	poi	Rogue Corsec Base	2	none	0	300	180	4
+1201521	CORELLIA	cor_world	AREA	0	5231.01	5	1530.22	0	1	a rogue CorSec trooper	4500	poi	Rogue Corsec Base	3	none	0	300	180	6
+1201522	CORELLIA	cor_world	AREA	0	5266.47	5	1603.72	0	1	a CorSec deserter	4435	poi	Rogue Corsec Base	2	none	0	300	180	4
+1201523	CORELLIA	cor_world	AREA	0	5280.13	5	1565.07	0	1	a rogue CorSec trooper	4500	poi	Rogue Corsec Base	3	none	0	300	180	6
+1201524	CORELLIA	cor_world	AREA	0	5280.62	5	1586.40	0	1	a rogue CorSec trooper	4500	poi	Rogue Corsec Base	3	none	0	300	180	6
+1201525	CORELLIA	cor_stronghold_1	AREA	3	0.00	0.13	-0.91	0	1	an Imperial Sergeant	13190	poi	Stronghold	1	none	0	300	180	0
+1201526	CORELLIA	cor_stronghold_1	AREA	6	-3.94	0.13	-3.75	0	1	a High Colonel	12385	poi	Stronghold	1	none	0	300	180	0
+1201527	CORELLIA	cor_stronghold_2	AREA	3	0.02	0.13	0.89	0	1	an Assault Trooper	350	poi	Stronghold	1	none	0	300	180	0
+1201528	CORELLIA	cor_stronghold_2	AREA	5	3.05	0.13	-3.97	0	1	an Imperial surface Marshall	13220	poi	Stronghold	1	none	0	300	180	0
+1201529	CORELLIA	cor_stronghold_3	AREA	3	0.00	0.13	-0.95	0	1	a Stormtrooper	28990	poi	Stronghold	2	none	0	300	180	4
+1201530	CORELLIA	cor_stronghold_4	AREA	3	0.00	0.13	-3.55	0	1	an Imperial noncom	13135	poi	Stronghold	2	none	0	300	180	4
+1201531	CORELLIA	cor_stronghold_5	AREA	3	-0.05	0.13	-0.98	0	1	a Stormtrooper	28990	poi	Stronghold	2	none	0	300	180	4
+1201532	CORELLIA	cor_stronghold_6	AREA	3	0.03	0.13	-0.81	0	1	an Imperial trooper	13225	poi	Stronghold	2	none	0	300	180	4
+1201533	CORELLIA	cor_stronghold_7	AREA	3	-0.01	0.13	-1.07	0	1	a Stormtrooper Medic	29035	poi	Stronghold	1	none	0	300	180	0
+1201534	CORELLIA	cor_stronghold_7	AREA	6	-3.12	0.13	-3.93	0	1	a Stormtrooper Commando	28985	poi	Stronghold	1	none	0	300	180	0
+1201535	CORELLIA	cor_stronghold_8	AREA	3	-0.02	0.13	-0.78	0	1	an Imperial First Lieutenant	13065	poi	Stronghold	1	none	0	300	180	0
+1201536	CORELLIA	cor_world	AREA	0	4582.01	25	-5771.90	0	1	an AT-AT	365	poi	Stronghold	1	none	0	300	180	0
+1201537	CORELLIA	cor_world	AREA	0	4625.94	25	-5770.79	0	1	an Imperial Major	13100	poi	Stronghold	1	none	0	300	180	0
+1201538	CORELLIA	cor_world	AREA	0	4627.21	25	-5796.45	0	1	an Imperial Lieutenant Colonel	13090	poi	Stronghold	1	none	0	300	180	0
+1201539	CORELLIA	cor_world	AREA	0	4636.85	25	-5778.14	0	1	an Imperial First Lieutenant	13065	poi	Stronghold	2	none	0	300	180	4
+1201540	CORELLIA	cor_world	AREA	0	4642.90	25	-5811.65	0	1	Imperial TIE Fighter pilot	13145	poi	Stronghold	1	none	0	300	180	0
+1201541	CORELLIA	cor_world	AREA	0	4643.44	25	-5756.35	0	1	Imperial TIE Fighter pilot	13145	poi	Stronghold	1	none	0	300	180	0
+1201542	CORELLIA	cor_world	AREA	0	4680.51	25	-5750.79	0	1	a Dark Trooper	5340	poi	Stronghold	5	none	0	300	180	10
+1201543	CORELLIA	cor_world	AREA	0	4680.94	25	-5820.61	0	1	a Stormtrooper	28990	poi	Stronghold	5	none	0	300	180	10
+1201544	CORELLIA	cor_world	AREA	0	4682.24	25	-5762.14	0	1	a Novatrooper Squad Leader	29080	poi	Stronghold	1	none	0	300	180	0
+1201545	CORELLIA	cor_world	AREA	0	4683.26	25	-5811.92	0	1	a Novatrooper Squad Leader	29080	poi	Stronghold	1	none	0	300	180	0
+1201546	CORELLIA	cor_world	AREA	0	4692.95	25	-5762.53	0	1	a Stormtrooper	28990	poi	Stronghold	5	none	0	300	180	10
+1201547	CORELLIA	cor_world	AREA	0	4696.01	25	-5805.19	0	1	a Dark Trooper	5340	poi	Stronghold	5	none	0	300	180	10
+1201548	CORELLIA	cor_world	AREA	0	4705.13	25	-5773.65	0	1	Imperial TIE Fighter pilot	13145	poi	Stronghold	1	none	0	300	180	0
+1201549	CORELLIA	cor_world	AREA	0	-5633.73	21.00	-2757.46	93	1	a commoner	3185	city	Tyrena	1	none	0	300	120	0
+1201550	CORELLIA	cor_world	AREA	0	-5583.79	21.00	-2764.80	-145	1	a commoner	3185	city	Tyrena	1	none	0	300	120	0
+1201551	CORELLIA	cor_world	AREA	0	-5538.94	21.00	-2600.55	4	1	a commoner	3185	city	Tyrena	1	none	0	300	120	0
+1201552	CORELLIA	cor_world	AREA	0	-5500.80	21.00	-2778.27	175	1	a commoner	3185	city	Tyrena	1	none	0	300	120	0
+1201553	CORELLIA	cor_world	AREA	0	-5409.42	21.00	-2700.49	-170	1	a commoner	3185	city	Tyrena	1	none	0	300	120	0
+1201554	CORELLIA	cor_world	AREA	0	-5411.79	21.00	-2655.41	7	1	a commoner	3185	city	Tyrena	1	none	0	300	120	0
+1201555	CORELLIA	cor_world	AREA	0	-5464.86	21.00	-2680.32	-158	1	a commoner	3185	city	Tyrena	1	discuss	0	300	120	0
+1201556	CORELLIA	cor_world	AREA	0	-5466.88	21.00	-2680.78	135	1	a commoner	3185	city	Tyrena	1	discuss	0	300	120	0
+1201557	CORELLIA	cor_world	AREA	0	-5466.87	21.00	-2682.90	39	1	a commoner	3185	city	Tyrena	1	discuss	0	300	120	0
+1201558	CORELLIA	cor_world	AREA	0	-5464.75	21.00	-2683.17	-40	1	a commoner	3185	city	Tyrena	1	discuss	0	300	120	0
+1201559	CORELLIA	cor_world	AREA	0	-5492.66	21.00	-2796.23	-97	1	a commoner	3185	city	Tyrena	1	none	0	300	120	0
+1201560	CORELLIA	cor_world	AREA	0	-5495.19	21.00	-2796.66	88	1	a commoner	3185	city	Tyrena	1	none	0	300	120	0
+1201561	CORELLIA	cor_world	AREA	0	-5436.16	21.00	-2781.23	-37	1	a commoner	3185	city	Tyrena	1	none	0	300	120	0
+1201562	CORELLIA	cor_world	AREA	0	-5471.41	23.50	-2720.79	47	1	a commoner	3185	city	Tyrena	1	discuss	0	300	120	0
+1201563	CORELLIA	cor_world	AREA	0	-5470.32	23.50	-2719.90	-130	1	a commoner	3185	city	Tyrena	1	discuss	0	300	120	0
+1201564	CORELLIA	cor_world	AREA	0	-5497.58	23.50	-2667.56	-152	1	a commoner	3185	city	Tyrena	1	discuss	0	300	120	0
+1201565	CORELLIA	cor_world	AREA	0	-5498.69	23.50	-2668.60	55	1	a commoner	3185	city	Tyrena	1	discuss	0	300	120	0
+1201566	CORELLIA	cor_world	AREA	0	-5396.60	21.00	-2675.04	-124	1	a commoner	3185	city	Tyrena	1	none	0	300	120	0
+1201567	CORELLIA	cor_world	AREA	0	-5567.26	21.60	-2633.49	-7	1	a commoner	3185	city	Tyrena	1	discuss	0	300	120	0
+1201568	CORELLIA	cor_world	AREA	0	-5567.26	21.60	-2631.92	166	1	a commoner	3185	city	Tyrena	1	discuss	0	300	120	0
+1201569	CORELLIA	cor_tyrena_cantina	QUEST	1	45.23	0.11	0.02	-135	1	Crev Bombaasa	5165	city	Tyrena	1	none	0	300	120	0
