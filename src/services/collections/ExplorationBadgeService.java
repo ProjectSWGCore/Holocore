@@ -88,7 +88,7 @@ public class ExplorationBadgeService extends Service {
 			try(ResultSet set =  explorerBadgeDatabase.executeQuery(GET_BADGES_SQL)){
 				while (set.next()) {
 					String planet = set.getString(set.findColumn("planet")).toLowerCase();
-					String badgeName = set.getString(set.findColumn("badge"));
+					String badgeName = set.getString(set.findColumn("badge_name"));
 					int x = set.getInt(set.findColumn("x"));
 					int y = set.getInt(set.findColumn("y"));
 					int range = 5; //arbitrary number used
