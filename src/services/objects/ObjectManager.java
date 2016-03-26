@@ -138,6 +138,7 @@ public class ObjectManager extends Manager {
 		putObject(obj);
 		updateBuildoutParent(obj);
 		addChildrenObjects(obj);
+		new ObjectCreatedIntent(obj).broadcast();
 	}
 	
 	private void updateBuildoutParent(SWGObject obj) {
