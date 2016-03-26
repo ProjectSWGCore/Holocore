@@ -85,6 +85,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	private List <List <String>> arrangement;
 
 	private ObjectClassification classification = ObjectClassification.GENERATED;
+	private GameObjectType gameObjectType = GameObjectType.GOT_NONE;
 	private SWGObject	parent	= null;
 	private StringId stringId = new StringId("", "");
 	private StringId detailStringId = new StringId("", "");
@@ -524,6 +525,8 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	public BuildoutArea getBuildoutArea() {
+		if (buildoutArea == null && parent != null)
+			return parent.getBuildoutArea();
 		return buildoutArea;
 	}
 	
@@ -566,7 +569,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	public void setSlotArrangement(int slotArrangement) {
 		this.slotArrangement = slotArrangement;
 	}
-
+	
 	public int getMaxContainerSize() {
 		Object volume = dataAttributes.get(ObjectDataAttribute.CONTAINER_VOLUME_LIMIT);
 		if (volume == null) {
@@ -582,6 +585,14 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	public ObjectClassification getClassification() {
 		return classification;
+	}
+	
+	public GameObjectType getGameObjectType() {
+		return gameObjectType;
+	}
+	
+	public void setGameObjectType(GameObjectType gameObjectType) {
+		this.gameObjectType = gameObjectType;
 	}
 	
 	public boolean isBuildout() {
@@ -642,22 +653,15 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 
 	private final void sendSceneCreateObject(Player target) {
+		if (target == null)
+			return;
 		SceneCreateObjectByCrc create = new SceneCreateObjectByCrc();
 		create.setObjectId(objectId);
-		if (buildoutArea == null || !buildoutArea.isAdjustCoordinates())
-			create.setLocation(location);
-		else {
-			Location nLoc = new Location(location);
-			buildoutArea.adjustLocation(nLoc);
-			create.setLocation(nLoc);
-		}
+		create.setLocation(buildoutArea == null ? location : buildoutArea.adjustLocation(location));
 		create.setObjectCrc(crc);
-		if (target != null) {
-			target.sendPacket(create);
-			if (parent != null)
-				target.sendPacket(new UpdateContainmentMessage(objectId, parent.getObjectId(), slotArrangement));
-		}
-
+		target.sendPacket(create);
+		if (parent != null)
+			target.sendPacket(new UpdateContainmentMessage(objectId, parent.getObjectId(), slotArrangement));
 	}
 	
 	private final void sendSceneDestroyObject(Player target) {

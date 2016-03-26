@@ -49,6 +49,14 @@ public class NetBuffer {
 		data.position(position);
 	}
 	
+	public void seek(int relative) {
+		data.position(data.position()+relative);
+	}
+	
+	public ByteBuffer getBuffer() {
+		return data;
+	}
+	
 	public void addBoolean(boolean b) {
 		data.put(b ? (byte)1 : (byte)0);
 	}
@@ -109,6 +117,14 @@ public class NetBuffer {
 	public void addArray(byte [] b) {
 		addShort(b.length);
 		data.put(b);
+	}
+	
+	public void addRawArray(byte [] b) {
+		data.put(b);
+	}
+	
+	public void addEncodable(Encodable e) {
+		data.put(e.encode());
 	}
 	
 	public boolean getBoolean() {
@@ -246,32 +262,20 @@ public class NetBuffer {
 	}
 	
 	public SWGMap<String, String> getSwgMap(int num, int var, StringType key, StringType val) {
-		return getSwgMap(num, var, key, val, false);
-	}
-	
-	public SWGMap<String, String> getSwgMap(int num, int var, StringType key, StringType val, boolean addByte) {
 		SWGMap<String, String> map = new SWGMap<>(num, var);
-		map.decode(data, key, val, addByte);
+		map.decode(data, key, val, true);
 		return map;
 	}
 	
 	public <V> SWGMap<String, V> getSwgMap(int num, int var, StringType key, Class<V> val) {
-		return getSwgMap(num, var, key, val, false);
-	}
-	
-	public <V> SWGMap<String, V> getSwgMap(int num, int var, StringType key, Class<V> val, boolean addByte) {
 		SWGMap<String, V> map = new SWGMap<>(num, var);
-		map.decode(data, key, val, addByte);
+		map.decode(data, key, val, true);
 		return map;
 	}
 	
 	public <K, V> SWGMap<K, V> getSwgMap(int num, int var, Class<K> key, Class<V> val) {
-		return getSwgMap(num, var, key, val, false);
-	}
-	
-	public <K, V> SWGMap<K, V> getSwgMap(int num, int var, Class<K> key, Class<V> val, boolean addByte) {
 		SWGMap<K, V> map = new SWGMap<>(num, var);
-		map.decode(data, key, val, addByte);
+		map.decode(data, key, val, true);
 		return map;
 	}
 	
@@ -293,7 +297,7 @@ public class NetBuffer {
 		if (offset+length > size)
 			throw new IllegalArgumentException("Length extends past the end of the array!");
 		byte [] ret = new byte[length];
-		System.arraycopy(array(), 0, ret, offset, length);
+		System.arraycopy(array(), offset, ret, 0, length);
 		return ret;
 	}
 	

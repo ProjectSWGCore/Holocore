@@ -192,21 +192,77 @@ public class ObjectData extends ClientData {
 			System.err.println("Unknown attribute: " + str);
 			return;
 		}
+		parseObjectAttribute(chunk, attr);
+		parseBuildingAttribute(chunk, attr);
+		parseVehicleAttribute(chunk, attr);
+		parseWeaponAttribute(chunk, attr);
+		parseShipAttribute(chunk, attr);
+	}
+	
+	private void parseObjectAttribute(IffNode chunk, ObjectDataAttribute attr) {
 		switch (attr) {
 			case APPEARANCE_FILENAME: putString(chunk, attr); break;
 			case ARRANGEMENT_DESCRIPTOR_FILENAME: putString(chunk,attr); break;
+			case CLEAR_FLORA_RADIUS: putFloat(chunk, attr); break;
+			case CLIENT_DATA_FILE: putString(chunk, attr); break;
 			case CLIENT_VISIBILITY_FLAG: putBoolean(chunk, attr); break;
 			case CONTAINER_TYPE: putInt(chunk, attr); break;
 			case CONTAINER_VOLUME_LIMIT: putInt(chunk, attr);break;
 			case DETAILED_DESCRIPTION: putStfString(chunk, attr); break;
 			case FORCE_NO_COLLISION: putBoolean(chunk, attr); break;
+			case GAME_OBJECT_TYPE: putInt(chunk, attr); break;
 			case GENDER: putInt(chunk, attr); break;
+			case LOCATION_RESERVATION_RADIUS: putFloat(chunk, attr); break;
+			case LOOK_AT_TEXT: putString(chunk, attr); break;
+			case NO_BUILD_RADIUS: putFloat(chunk, attr); break;
 			case OBJECT_NAME: putStfString(chunk, attr); break;
+			case ONLY_VISIBLE_IN_TOOLS: putBoolean(chunk, attr); break;
 			case PORTAL_LAYOUT_FILENAME: putString(chunk, attr); break;
+			case SCALE: putFloat(chunk, attr); break;
+			case SCALE_THRESHOLD_BEFORE_EXTENT_TEST: putFloat(chunk, attr); break;
+			case SEND_TO_CLIENT: putBoolean(chunk, attr); break;
 			case SLOT_DESCRIPTOR_FILENAME: putString(chunk, attr); break;
+			case SNAP_TO_TERRAIN: putBoolean(chunk, attr); break;
 			case STRUCTURE_FOOTPRINT_FILENAME: putString(chunk, attr); break;
+			case SURFACE_TYPE: putInt(chunk, attr); break;
 			case TARGETABLE: putBoolean(chunk, attr); break;
+			case TINT_PALETTE: putString(chunk, attr); break;
 			case USE_STRUCTURE_FOOTPRINT_OUTLINE: putBoolean(chunk, attr); break;
+			default: break;
+		}
+	}
+	
+	private void parseBuildingAttribute(IffNode chunk, ObjectDataAttribute attr) {
+		switch (attr) {
+			case INTERIOR_LAYOUT_FILENAME: putString(chunk, attr); break;
+			case TERRAIN_MODIFICATION_FILENAME: putString(chunk, attr); break;
+			default: break;
+		}
+	}
+	
+	private void parseWeaponAttribute(IffNode chunk, ObjectDataAttribute attr) {
+		switch (attr) {
+			case WEAPON_EFFECT: putString(chunk, attr); break;
+			case WEAPON_EFFECT_INDEX: putInt(chunk, attr); break;
+			case ATTACK_TYPE: putInt(chunk, attr); break;
+			default: break;
+		}
+	}
+	
+	private void parseVehicleAttribute(IffNode chunk, ObjectDataAttribute attr) {
+		switch (attr) {
+			case SPEED: putFloat(chunk, attr); break;
+			case TURN_RADIUS: putFloat(chunk, attr); break;
+			case ACCELERATION: putFloat(chunk, attr); break;
+			default: break;
+		}
+	}
+	
+	private void parseShipAttribute(IffNode chunk, ObjectDataAttribute attr) {
+		switch (attr) {
+			case COCKPIT_FILENAME: putString(chunk, attr); break;
+			case HAS_WINGS: putBoolean(chunk, attr); break;
+			case PLAYER_CONTROLLED: putBoolean(chunk, attr); break;
 			default: break;
 		}
 	}
@@ -241,6 +297,13 @@ public class ObjectData extends ClientData {
 			return; // This should always be 1 if there is an int (note that 0x20 follows after this even if it's 0)
 		chunk.readByte(); // 0x20 byte for all it seems, unsure what it means
 		attributes.put(attr, chunk.readInt());
+	}
+	
+	private void putFloat(IffNode chunk, ObjectDataAttribute attr) {
+		if (chunk.readByte() == 0)
+			return; // This should always be 1 if there is an int (note that 0x20 follows after this even if it's 0)
+		chunk.readByte(); // 0x20 byte for all it seems, unsure what it means
+		attributes.put(attr, chunk.readFloat());
 	}
 	
 	private void putBoolean(IffNode chunk, ObjectDataAttribute attr) {

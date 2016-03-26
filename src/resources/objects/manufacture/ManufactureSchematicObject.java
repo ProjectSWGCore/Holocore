@@ -114,7 +114,7 @@ public class ManufactureSchematicObject extends IntangibleObject {
 	@Override
 	public void parseBaseline3(NetBuffer buffer) {
 		super.parseBaseline3(buffer);
-		attributes = buffer.getSwgMap(3, 5, StringId.class, Float.class, true);
+		attributes = buffer.getSwgMap(3, 5, StringId.class, Float.class);
 		itemsPerContainer = buffer.getInt();
 		manufactureTime = buffer.getFloat();
 	}

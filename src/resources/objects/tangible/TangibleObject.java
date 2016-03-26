@@ -273,7 +273,7 @@ public class TangibleObject extends SWGObject {
 		pvpFaction = PvpFaction.getFactionForCrc(buffer.getInt());
 		pvpStatus = PvpStatus.getStatusForValue(buffer.getInt());
 		appearanceData = buffer.getArray();
-		buffer.getSwgSet(3, 7, Integer.TYPE);
+		buffer.getSwgSet(3, 7, Integer.class);
 		optionFlags = buffer.getInt();
 		buffer.getInt();
 		condition = buffer.getInt();
@@ -288,9 +288,9 @@ public class TangibleObject extends SWGObject {
 		inCombat = buffer.getBoolean();
 		buffer.getSwgSet(6, 3, Long.TYPE);
 		buffer.getInt();
-		buffer.getSwgSet(6, 5, StringType.ASCII.getClass());
-		buffer.getSwgSet(6, 6, StringType.ASCII.getClass());
-		buffer.getSwgMap(6, 7, StringType.ASCII.getClass(), StringType.ASCII.getClass());
+		buffer.getSwgSet(6, 5, StringType.ASCII);
+		buffer.getSwgSet(6, 6, StringType.ASCII);
+		buffer.getSwgMap(6, 7, StringType.ASCII, StringType.ASCII);
 	}
 	
 	@Override

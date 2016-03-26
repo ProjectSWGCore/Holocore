@@ -44,6 +44,8 @@ import resources.Race;
 import resources.SkillMod;
 import resources.collections.SWGList;
 import resources.collections.SWGMap;
+import resources.collections.SWGSet;
+import resources.common.CRC;
 import resources.encodables.player.Equipment;
 import resources.network.BaselineBuilder;
 import resources.network.NetBuffer;
@@ -107,6 +109,8 @@ public class CreatureObject extends TangibleObject {
 	private long	lastTransform			= 0;
 	private HologramColour hologramColour = HologramColour.DEFAULT;
 	
+	private SWGSet<String>		missionCriticalObjs			= new SWGSet<>(4, 13);
+	
 	private SWGList<Integer>	baseAttributes	= new SWGList<Integer>(1, 2);
 	private SWGList<String>		skills			= new SWGList<String>(1, 3, StringType.ASCII); // SWGSet
 	private SWGList<Integer>	hamEncumbList	= new SWGList<Integer>(4, 2);
@@ -116,9 +120,8 @@ public class CreatureObject extends TangibleObject {
 	private SWGList<Equipment>	appearanceList 	= new SWGList<Equipment>(6, 33);
 	
 	private SWGMap<String, SkillMod> 	skillMods			= new SWGMap<>(4, 3, StringType.ASCII); // TODO: SkillMod structure
-	private SWGMap<Long, Long>		missionCriticalObjs	= new SWGMap<>(4, 13);
-	private SWGMap<String, Long>	abilities			= new SWGMap<>(4, 14, StringType.ASCII);
-	private SWGMap<Integer, Integer>	buffs				= new SWGMap<>(6, 26); // TODO: Buff structure
+	private SWGMap<String, Integer>	abilities				= new SWGMap<>(4, 14, StringType.ASCII);
+	private SWGMap<CRC, Buff>	buffs				= new SWGMap<>(6, 26);
 
 	public CreatureObject(long objectId) {
 		super(objectId, BaselineType.CREO);
@@ -710,7 +713,7 @@ public class CreatureObject extends TangibleObject {
 		return attributes.get(2);
 	}
 
-	public void addAbility(String abilityName){ abilities.put(abilityName, 1L); }//TODO: Figure out what the integer value should be for each ability
+	public void addAbility(String abilityName){ abilities.put(abilityName, 1); }//TODO: Figure out what the integer value should be for each ability
 
 	public void removeAbility(String abilityName) { abilities.remove(abilityName); }
 
@@ -950,6 +953,7 @@ public class CreatureObject extends TangibleObject {
 		if (getStringId().toString().equals("@obj_n:unknown_object"))
 			return;
 		accelPercent = buffer.getFloat();
+		accelScale = buffer.getFloat();
 		hamEncumbList = buffer.getSwgList(4, 2, Integer.class);
 		skillMods = buffer.getSwgMap(4, 3, StringType.ASCII, SkillMod.class);
 		movementPercent = buffer.getFloat();
@@ -961,8 +965,8 @@ public class CreatureObject extends TangibleObject {
 		turnScale = buffer.getFloat();
 		walkSpeed = buffer.getFloat();
 		waterModPercent = buffer.getFloat();
-		missionCriticalObjs = buffer.getSwgMap(4, 13, Long.class, Long.class);
-		abilities = buffer.getSwgMap(4, 14, StringType.ASCII, Long.class);
+		missionCriticalObjs = buffer.getSwgSet(4, 13, StringType.ASCII);
+		abilities = buffer.getSwgMap(4, 14, StringType.ASCII, Integer.class);
 		totalLevelXp = buffer.getInt();
 	}
 	
@@ -988,7 +992,7 @@ public class CreatureObject extends TangibleObject {
 		equipmentList = buffer.getSwgList(6, 23, Equipment.class);
 		costume = buffer.getAscii();
 		visible = buffer.getBoolean();
-		buffs = buffer.getSwgMap(6, 26, Integer.class, Integer.class);
+		buffs = buffer.getSwgMap(6, 26, CRC.class, Buff.class);
 		performing = buffer.getBoolean();
 		difficulty = CreatureDifficulty.getForDifficulty(buffer.getByte());
 		hologramColour = HologramColour.getForValue(buffer.getInt());
