@@ -139,7 +139,7 @@ public class ZoneManager extends Manager {
 		
 		if (firstZone)
 			sendZonePackets(player, creature);
-		startScene(creature, creature.getLocation());
+		startScene(creature, creature.getWorldLocation());
 		if (firstZone)
 			playerObj.setStartPlayTime((int) System.currentTimeMillis());
 		initPlayerBeforeZoneIn(player, creature, playerObj);
