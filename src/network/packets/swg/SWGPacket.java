@@ -56,9 +56,11 @@ public class SWGPacket extends Packet {
 	public boolean decode(ByteBuffer data, int crc) {
 		this.data = data;
 		super.decode(data);
-		data.position(2);
 		setSWGOpcode(getInt(data));
-		return getSWGOpcode() == crc;
+		if (getSWGOpcode() == crc)
+			return true;
+		System.err.printf("SWG Opcode does not match actual! Expected: 0x%08X  Actual: 0x%08X%n", crc, getSWGOpcode());
+		return false;
 	}
 	
 	public void decode(ByteBuffer data) {
