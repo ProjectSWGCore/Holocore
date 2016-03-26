@@ -100,7 +100,27 @@ public abstract class ObjectController extends SWGPacket {
 			case 0x04C5: return new IntendedTarget(data);
 		}
 		Log.w("ObjectController", "Unknown object controller: %08X", crc);
-		return null;
+		return new GenericObjectController(crc, data);
+	}
+	
+	private static class GenericObjectController extends ObjectController {
+		
+		public GenericObjectController(int crc, ByteBuffer data) {
+			super(0, crc);
+			decode(data);
+		}
+		
+		@Override
+		public ByteBuffer encode() {
+			ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH);
+			encodeHeader(data);
+			return data;
+		}
+		
+		@Override
+		public void decode(ByteBuffer data) {
+			decodeHeader(data);
+		}
 	}
 	
 }
