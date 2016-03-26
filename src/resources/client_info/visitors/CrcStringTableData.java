@@ -57,7 +57,7 @@ public class CrcStringTableData extends ClientData {
 					break;
 				case "CRCT":
 					for (int i = 0; i < count; ++i) {
-						crcList[i] = chunk.readUInt();
+						crcList[i] = chunk.readInt();
 					}
 					break;
 				case "STRT":
