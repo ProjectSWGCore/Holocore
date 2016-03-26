@@ -28,6 +28,9 @@ public class CrcDatabaseGenerator {
 				System.out.printf("Loading CrcStringTableData... [%.3f]%n", (System.nanoTime()-start)/1E6);
 			addStringTable(database);
 			if (output)
+				System.out.printf("Loading BuffTable...          [%.3f]%n", (System.nanoTime()-start)/1E6);
+			addBuffTable(database);
+			if (output)
 				System.out.printf("Loading Clientdata...         [%.3f]%n", (System.nanoTime()-start)/1E6);
 			addClientdata(database);
 			if (output)
@@ -44,6 +47,13 @@ public class CrcDatabaseGenerator {
 		CrcStringTableData table = (CrcStringTableData) ClientFactory.getInfoFromFile("misc/object_template_crc_string_table.iff");
 		for (String string : table.getStrings()) {
 			database.addCrcBatch(string);
+		}
+	}
+	
+	private static void addBuffTable(CrcDatabase database) {
+		DatatableData data = (DatatableData) ClientFactory.getInfoFromFile("datatables/buff/buff.iff");
+		for (int row = 0; row < data.getRowCount(); row++) {
+			database.addCrcBatch((String) data.getCell(row, 0));
 		}
 	}
 	
