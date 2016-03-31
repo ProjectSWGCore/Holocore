@@ -155,11 +155,12 @@ public class PlayerObject extends IntangibleObject {
 		sendDelta(3, 7, title, StringType.ASCII);
 	}
 	
+    /**
+     * Calling this method will update the playTime field.
+     * @return the amount of time this PlayerObject has played.
+     */
 	public int getPlayTime() {
-		int startTime = getStartPlayTime();
-		int deltaTime = (int) ((System.currentTimeMillis()) - startTime);
-		setPlayTime((int) TimeUnit.MILLISECONDS.toSeconds(deltaTime));	// Set new time and send delta
-		
+		playTime = (int) TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis() - getStartPlayTime());	// Set new time and send delta
 		return playTime;
 	}
 
@@ -167,7 +168,7 @@ public class PlayerObject extends IntangibleObject {
 		this.playTime = playTime;
 		sendDelta(3, 9, playTime);
 	}
-
+    
 	public int getGcwPoints() {
 		return gcwPoints;
 	}
