@@ -1,1001 +1,1002 @@
-id	terrain	area_name	event	min_x	min_z	max_x	max_z	adjust_coordinates
-INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL DEFAULT ""	REAL NOT NULL	REAL NOT NULL	REAL NOT NULL	REAL NOT NULL	INTEGER NOT NULL DEFAULT 0
--65	yavin4	yavin4_global		-8196	-8196	8196	8196	0
--64	watertabletest	watertabletest_global		-8196	-8196	8196	8196	0
--63	umbra	umbra_global		-8196	-8196	8196	8196	0
--62	tutorial	tutorial_global		-8196	-8196	8196	8196	0
--61	tuskan_raid_encounter	tuskan_raid_encounter_global		-8196	-8196	8196	8196	0
--60	test_wearables	test_wearables_global		-8196	-8196	8196	8196	0
--59	terrain_test	terrain_test_global		-8196	-8196	8196	8196	0
--58	tatooine	tatooine_global		-8196	-8196	8196	8196	0
--57	talus	talus_global		-8196	-8196	8196	8196	0
--56	taanab	taanab_global		-8196	-8196	8196	8196	0
--55	space_yavin4	space_yavin4_global		-8196	-8196	8196	8196	0
--54	space_tatooine	space_tatooine_global		-8196	-8196	8196	8196	0
--53	space_tatooine_2	space_tatooine_2_global		-8196	-8196	8196	8196	0
--52	space_ord_mantell	space_ord_mantell_global		-8196	-8196	8196	8196	0
--51	space_ord_mantell_6	space_ord_mantell_6_global		-8196	-8196	8196	8196	0
--50	space_ord_mantell_5	space_ord_mantell_5_global		-8196	-8196	8196	8196	0
--49	space_ord_mantell_4	space_ord_mantell_4_global		-8196	-8196	8196	8196	0
--48	space_ord_mantell_3	space_ord_mantell_3_global		-8196	-8196	8196	8196	0
--47	space_ord_mantell_2	space_ord_mantell_2_global		-8196	-8196	8196	8196	0
--46	space_npe_falcon	space_npe_falcon_global		-8196	-8196	8196	8196	0
--45	space_npe_falcon_3	space_npe_falcon_3_global		-8196	-8196	8196	8196	0
--44	space_npe_falcon_2	space_npe_falcon_2_global		-8196	-8196	8196	8196	0
--43	space_nova_orion	space_nova_orion_global		-8196	-8196	8196	8196	0
--42	space_naboo	space_naboo_global		-8196	-8196	8196	8196	0
--41	space_naboo_2	space_naboo_2_global		-8196	-8196	8196	8196	0
--40	space_lok	space_lok_global		-8196	-8196	8196	8196	0
--39	space_light1	space_light1_global		-8196	-8196	8196	8196	0
--38	space_kashyyyk	space_kashyyyk_global		-8196	-8196	8196	8196	0
--37	space_heavy1	space_heavy1_global		-8196	-8196	8196	8196	0
--36	space_halos	space_halos_global		-8196	-8196	8196	8196	0
--35	space_env	space_env_global		-8196	-8196	8196	8196	0
--34	space_endor	space_endor_global		-8196	-8196	8196	8196	0
--33	space_dathomir	space_dathomir_global		-8196	-8196	8196	8196	0
--32	space_dantooine	space_dantooine_global		-8196	-8196	8196	8196	0
--31	space_corellia	space_corellia_global		-8196	-8196	8196	8196	0
--30	space_corellia_2	space_corellia_2_global		-8196	-8196	8196	8196	0
--29	simple	simple_global		-8196	-8196	8196	8196	0
--28	runtimerules	runtimerules_global		-8196	-8196	8196	8196	0
--27	rori	rori_global		-8196	-8196	8196	8196	0
--26	rivertest	rivertest_global		-8196	-8196	8196	8196	0
--25	otoh_gunga	otoh_gunga_global		-8196	-8196	8196	8196	0
--24	naboo	naboo_global		-8196	-8196	8196	8196	0
--23	mustafar	mustafar_global		-8196	-8196	8196	8196	0
--22	lok	lok_global		-8196	-8196	8196	8196	0
--21	kashyyyk	kashyyyk_global		-8196	-8196	8196	8196	0
--20	kashyyyk_south_dungeons	kashyyyk_south_dungeons_global		-8196	-8196	8196	8196	0
--19	kashyyyk_rryatt_trail	kashyyyk_rryatt_trail_global		-8196	-8196	8196	8196	0
--18	kashyyyk_pob_dungeons	kashyyyk_pob_dungeons_global		-8196	-8196	8196	8196	0
--17	kashyyyk_north_dungeons	kashyyyk_north_dungeons_global		-8196	-8196	8196	8196	0
--16	kashyyyk_main	kashyyyk_main_global		-8196	-8196	8196	8196	0
--15	kashyyyk_hunting	kashyyyk_hunting_global		-8196	-8196	8196	8196	0
--14	kashyyyk_dead_forest	kashyyyk_dead_forest_global		-8196	-8196	8196	8196	0
--13	godclient_test	godclient_test_global		-8196	-8196	8196	8196	0
--12	floratest	floratest_global		-8196	-8196	8196	8196	0
--11	endor	endor_global		-8196	-8196	8196	8196	0
--10	endor_asommers	endor_asommers_global		-8196	-8196	8196	8196	0
--9	dungeon1	dungeon1_global		-8196	-8196	8196	8196	0
--8	dathomir	dathomir_global		-8196	-8196	8196	8196	0
--7	dantooine	dantooine_global		-8196	-8196	8196	8196	0
--6	creature_test	creature_test_global		-8196	-8196	8196	8196	0
--5	corellia	corellia_global		-8196	-8196	8196	8196	0
--4	cinco_city_test_m5	cinco_city_test_m5_global		-8196	-8196	8196	8196	0
--3	character_farm	character_farm_global		-8196	-8196	8196	8196	0
--2	adventure2	adventure2_global		-8196	-8196	8196	8196	0
--1	adventure1	adventure1_global		-8196	-8196	8196	8196	0
-0	kashyyyk_dead_forest	kashyyyk_dead_forest		-2048.0	-2048.0	2048.0	2048.0	0
-100	kashyyyk_hunting	kashyyyk_hunting		-2048.0	-2048.0	2048.0	2048.0	0
-200	kashyyyk_main	kashyyyk_main		-4096.0	-4096.0	4096.0	4096.0	0
-300	kashyyyk_north_dungeons	slaver		-3840.0	2816.0	-2816.0	3840.0	0
-301	kashyyyk_north_dungeons	slaver		-2560.0	2816.0	-1536.0	3840.0	0
-302	kashyyyk_north_dungeons	slaver		-1280.0	2816.0	-256.0	3840.0	0
-303	kashyyyk_north_dungeons	slaver		0.0	2816.0	1024.0	3840.0	0
-304	kashyyyk_north_dungeons	slaver		1280.0	2816.0	2304.0	3840.0	0
-305	kashyyyk_north_dungeons	slaver		2560.0	2816.0	3584.0	3840.0	0
-306	kashyyyk_north_dungeons	slaver		-3840.0	1536.0	-2816.0	2560.0	0
-307	kashyyyk_north_dungeons	slaver		-2560.0	1536.0	-1536.0	2560.0	0
-308	kashyyyk_north_dungeons	slaver		-1280.0	1536.0	-256.0	2560.0	0
-309	kashyyyk_north_dungeons	slaver		0.0	1536.0	1024.0	2560.0	0
-310	kashyyyk_north_dungeons	slaver		1280.0	1536.0	2304.0	2560.0	0
-311	kashyyyk_north_dungeons	slaver		2560.0	1536.0	3584.0	2560.0	0
-312	kashyyyk_north_dungeons	arena		88.0	-2192.0	936.0	-1392.0	0
-313	kashyyyk_north_dungeons	arena		1352.0	-2192.0	2200.0	-1392.0	0
-314	kashyyyk_north_dungeons	arena		88.0	-3480.0	936.0	-2680.0	0
-315	kashyyyk_north_dungeons	arena		1352.0	-3480.0	2200.0	-2680.0	0
-400	kashyyyk_pob_dungeons	avatar_platform		1024.0	1024.0	2048.0	2048.0	0
-401	kashyyyk_pob_dungeons	avatar_platform		2048.0	1024.0	3072.0	2048.0	0
-402	kashyyyk_pob_dungeons	avatar_platform		3072.0	1024.0	4096.0	2048.0	0
-403	kashyyyk_pob_dungeons	avatar_platform		4096.0	1024.0	5120.0	2048.0	0
-404	kashyyyk_pob_dungeons	avatar_platform		5120.0	1024.0	6144.0	2048.0	0
-405	kashyyyk_pob_dungeons	avatar_platform		1024.0	2048.0	2048.0	3072.0	0
-406	kashyyyk_pob_dungeons	avatar_platform		2048.0	2048.0	3072.0	3072.0	0
-407	kashyyyk_pob_dungeons	avatar_platform		3072.0	2048.0	4096.0	3072.0	0
-408	kashyyyk_pob_dungeons	avatar_platform		4096.0	2048.0	5120.0	3072.0	0
-409	kashyyyk_pob_dungeons	avatar_platform		5120.0	2048.0	6144.0	3072.0	0
-410	kashyyyk_pob_dungeons	avatar_platform		-2048.0	1024.0	-1024.0	2048.0	0
-411	kashyyyk_pob_dungeons	avatar_platform		-3072.0	1024.0	-2048.0	2048.0	0
-412	kashyyyk_pob_dungeons	avatar_platform		-4096.0	1024.0	-3072.0	2048.0	0
-413	kashyyyk_pob_dungeons	avatar_platform		-5120.0	1024.0	-4096.0	2048.0	0
-414	kashyyyk_pob_dungeons	avatar_platform		-6144.0	1024.0	-5120.0	2048.0	0
-415	kashyyyk_pob_dungeons	avatar_platform		-2048.0	2048.0	-1024.0	3072.0	0
-416	kashyyyk_pob_dungeons	avatar_platform		-3072.0	2048.0	-2048.0	3072.0	0
-417	kashyyyk_pob_dungeons	avatar_platform		-4096.0	2048.0	-3072.0	3072.0	0
-418	kashyyyk_pob_dungeons	avatar_platform		-5120.0	2048.0	-4096.0	3072.0	0
-419	kashyyyk_pob_dungeons	avatar_platform		-6144.0	2048.0	-5120.0	3072.0	0
-420	kashyyyk_pob_dungeons	myyydril_caverns		1024.0	-2048.0	2048.0	-1024.0	0
-421	kashyyyk_pob_dungeons	myyydril_caverns		2048.0	-2048.0	3072.0	-1024.0	0
-422	kashyyyk_pob_dungeons	myyydril_caverns		3072.0	-2048.0	4096.0	-1024.0	0
-423	kashyyyk_pob_dungeons	myyydril_caverns		4096.0	-2048.0	5120.0	-1024.0	0
-424	kashyyyk_pob_dungeons	myyydril_caverns		5120.0	-2048.0	6144.0	-1024.0	0
-425	kashyyyk_pob_dungeons	myyydril_caverns		1024.0	-3072.0	2048.0	-2048.0	0
-426	kashyyyk_pob_dungeons	myyydril_caverns		2048.0	-3072.0	3072.0	-2048.0	0
-427	kashyyyk_pob_dungeons	myyydril_caverns		3072.0	-3072.0	4096.0	-2048.0	0
-428	kashyyyk_pob_dungeons	myyydril_caverns		4096.0	-3072.0	5120.0	-2048.0	0
-429	kashyyyk_pob_dungeons	myyydril_caverns		5120.0	-3072.0	6144.0	-2048.0	0
-500	kashyyyk_rryatt_trail	kashyyyk_rryatt_trail_lvl_1_and_2		-3908.0	3114.0	-2208.0	4614.0	1
-501	kashyyyk_rryatt_trail	kashyyyk_rryatt_trail_lvl_3		-2208.0	2614.0	-408.0	4614.0	1
-502	kashyyyk_rryatt_trail	kashyyyk_rryatt_trail_lvl_4		-3908.0	1864.0	-2208.0	3114.0	1
-503	kashyyyk_rryatt_trail	kashyyyk_rryatt_trail_lvl_5		-2208.0	1864.0	-708.0	2614.0	1
-504	kashyyyk_rryatt_trail	kashyyyk_rryatt_trail_lvl_1_and_2		444.0	3130.0	2144.0	4630.0	1
-505	kashyyyk_rryatt_trail	kashyyyk_rryatt_trail_lvl_3		2144.0	2630.0	3944.0	4630.0	1
-506	kashyyyk_rryatt_trail	kashyyyk_rryatt_trail_lvl_4		444.0	1880.0	2144.0	3130.0	1
-507	kashyyyk_rryatt_trail	kashyyyk_rryatt_trail_lvl_5		2144.0	1880.0	3644.0	2630.0	1
-508	kashyyyk_rryatt_trail	kashyyyk_rryatt_trail_lvl_1_and_2		-3892.0	-182.0	-2192.0	1318.0	1
-509	kashyyyk_rryatt_trail	kashyyyk_rryatt_trail_lvl_3		-2192.0	-682.0	-392.0	1318.0	1
-510	kashyyyk_rryatt_trail	kashyyyk_rryatt_trail_lvl_4		-3892.0	-1432.0	-2192.0	-182.0	1
-511	kashyyyk_rryatt_trail	kashyyyk_rryatt_trail_lvl_5		-2192.0	-1432.0	-692.0	-682.0	1
-512	kashyyyk_rryatt_trail	kashyyyk_rryatt_trail_lvl_1_and_2		460.0	-166.0	2160.0	1334.0	1
-513	kashyyyk_rryatt_trail	kashyyyk_rryatt_trail_lvl_3		2160.0	-666.0	3960.0	1334.0	1
-514	kashyyyk_rryatt_trail	kashyyyk_rryatt_trail_lvl_4		460.0	-1416.0	2160.0	-166.0	1
-515	kashyyyk_rryatt_trail	kashyyyk_rryatt_trail_lvl_5		2160.0	-1416.0	3660.0	-666.0	1
-516	kashyyyk_rryatt_trail	kashyyyk_rryatt_trail_lvl_1_and_2		-3924.0	-3622.0	-2224.0	-2122.0	1
-517	kashyyyk_rryatt_trail	kashyyyk_rryatt_trail_lvl_3		-2224.0	-4122.0	-424.0	-2122.0	1
-518	kashyyyk_rryatt_trail	kashyyyk_rryatt_trail_lvl_4		-3924.0	-4872.0	-2224.0	-3622.0	1
-519	kashyyyk_rryatt_trail	kashyyyk_rryatt_trail_lvl_5		-2224.0	-4872.0	-724.0	-4122.0	1
-520	kashyyyk_rryatt_trail	kashyyyk_rryatt_trail_lvl_1_and_2		428.0	-3606.0	2128.0	-2106.0	1
-521	kashyyyk_rryatt_trail	kashyyyk_rryatt_trail_lvl_3		2128.0	-4106.0	3928.0	-2106.0	1
-522	kashyyyk_rryatt_trail	kashyyyk_rryatt_trail_lvl_4		428.0	-4856.0	2128.0	-3606.0	1
-523	kashyyyk_rryatt_trail	kashyyyk_rryatt_trail_lvl_5		2128.0	-4856.0	3628.0	-4106.0	1
-600	kashyyyk_south_dungeons	hracca		-3968.0	2944.0	-2944.0	3968.0	0
-601	kashyyyk_south_dungeons	hracca		-2816.0	2944.0	-1792.0	3968.0	0
-602	kashyyyk_south_dungeons	hracca		-1664.0	2944.0	-640.0	3968.0	0
-603	kashyyyk_south_dungeons	hracca		-3968.0	1792.0	-2944.0	2816.0	0
-604	kashyyyk_south_dungeons	hracca		-2816.0	1792.0	-1792.0	2816.0	0
-605	kashyyyk_south_dungeons	hracca		-1664.0	1792.0	-640.0	2816.0	0
-606	kashyyyk_south_dungeons	hracca		-3968.0	640.0	-2944.0	1664.0	0
-607	kashyyyk_south_dungeons	hracca		-2816.0	640.0	-1792.0	1664.0	0
-608	kashyyyk_south_dungeons	hracca		-1664.0	640.0	-640.0	1664.0	0
-609	kashyyyk_south_dungeons	hracca		-3968.0	-512.0	-2944.0	512.0	0
-610	kashyyyk_south_dungeons	hracca		-2816.0	-512.0	-1792.0	512.0	0
-611	kashyyyk_south_dungeons	hracca		-1664.0	-512.0	-640.0	512.0	0
-612	kashyyyk_south_dungeons	bocctyyy		128.0	-256.0	640.0	256.0	0
-613	kashyyyk_south_dungeons	bocctyyy		768.0	-256.0	1284.0	256.0	0
-614	kashyyyk_south_dungeons	bocctyyy		1412.0	-256.0	1924.0	256.0	0
-615	kashyyyk_south_dungeons	bocctyyy		2052.0	-256.0	2564.0	256.0	0
-616	kashyyyk_south_dungeons	bocctyyy		128.0	-896.0	640.0	-384.0	0
-617	kashyyyk_south_dungeons	bocctyyy		768.0	-896.0	1284.0	-384.0	0
-618	kashyyyk_south_dungeons	bocctyyy		1412.0	-896.0	1924.0	-384.0	0
-619	kashyyyk_south_dungeons	bocctyyy		2052.0	-896.0	2564.0	-384.0	0
-620	kashyyyk_south_dungeons	bocctyyy		128.0	-1536.0	640.0	-1024.0	0
-621	kashyyyk_south_dungeons	bocctyyy		768.0	-1536.0	1284.0	-1024.0	0
-622	kashyyyk_south_dungeons	bocctyyy		1408.0	-1536.0	1928.0	-1024.0	0
-623	kashyyyk_south_dungeons	bocctyyy		2052.0	-1536.0	2564.0	-1024.0	0
-700	simple	simple		-4096.0	-4096.0	4096.0	4096.0	0
-800	tatooine	tatooine_1_1		-8192.0	-8192.0	-6144.0	-6144.0	0
-801	tatooine	tatooine_1_2		-8192.0	-6144.0	-6144.0	-4096.0	0
-802	tatooine	tatooine_1_3		-8192.0	-4096.0	-6144.0	-2048.0	0
-803	tatooine	tatooine_1_4		-8192.0	-2048.0	-6144.0	0.0	0
-804	tatooine	tatooine_1_5		-8192.0	0.0	-6144.0	2048.0	0
-805	tatooine	tatooine_1_6		-8192.0	2048.0	-6144.0	4096.0	0
-806	tatooine	tatooine_1_7		-8192.0	4096.0	-6144.0	6144.0	0
-807	tatooine	tatooine_1_8		-8192.0	6144.0	-6144.0	8192.0	0
-808	tatooine	tatooine_2_1		-6144.0	-8192.0	-4096.0	-6144.0	0
-809	tatooine	tatooine_2_1	lifeday	-6144.0	-8192.0	-4096.0	-6144.0	0
-810	tatooine	tatooine_2_2		-6144.0	-6144.0	-4096.0	-4096.0	0
-811	tatooine	tatooine_2_3		-6144.0	-4096.0	-4096.0	-2048.0	0
-812	tatooine	tatooine_2_4		-6144.0	-2048.0	-4096.0	0.0	0
-813	tatooine	tatooine_2_5		-6144.0	0.0	-4096.0	2048.0	0
-814	tatooine	tatooine_2_6		-6144.0	2048.0	-4096.0	4096.0	0
-815	tatooine	tatooine_2_7		-6144.0	4096.0	-4096.0	6144.0	0
-816	tatooine	tatooine_2_8		-6144.0	6144.0	-4096.0	8192.0	0
-817	tatooine	tatooine_3_1		-4096.0	-8192.0	-2048.0	-6144.0	0
-818	tatooine	tatooine_3_2		-4096.0	-6144.0	-2048.0	-4096.0	0
-819	tatooine	tatooine_3_3		-4096.0	-4096.0	-2048.0	-2048.0	0
-820	tatooine	tatooine_3_4		-4096.0	-2048.0	-2048.0	0.0	0
-821	tatooine	tatooine_3_5		-4096.0	0.0	-2048.0	2048.0	0
-822	tatooine	tatooine_3_6		-4096.0	2048.0	-2048.0	4096.0	0
-823	tatooine	tatooine_3_6	lifeday	-4096.0	2048.0	-2048.0	4096.0	0
-824	tatooine	tatooine_3_7		-4096.0	4096.0	-2048.0	6144.0	0
-825	tatooine	tatooine_3_8		-4096.0	6144.0	-2048.0	8192.0	0
-826	tatooine	tatooine_4_1		-2048.0	-8192.0	0.0	-6144.0	0
-827	tatooine	tatooine_4_2		-2048.0	-6144.0	0.0	-4096.0	0
-828	tatooine	tatooine_4_3		-2048.0	-4096.0	0.0	-2048.0	0
-829	tatooine	tatooine_4_4		-2048.0	-2048.0	0.0	0.0	0
-830	tatooine	tatooine_4_5		-2048.0	0.0	0.0	2048.0	0
-831	tatooine	tatooine_4_6		-2048.0	2048.0	0.0	4096.0	0
-832	tatooine	tatooine_4_7		-2048.0	4096.0	0.0	6144.0	0
-833	tatooine	tatooine_4_8		-2048.0	6144.0	0.0	8192.0	0
-834	tatooine	tatooine_5_1		0.0	-8192.0	2048.0	-6144.0	0
-835	tatooine	tatooine_5_2		0.0	-6144.0	2048.0	-4096.0	0
-836	tatooine	tatooine_5_3		0.0	-4096.0	2048.0	-2048.0	0
-837	tatooine	tatooine_5_4		0.0	-2048.0	2048.0	0.0	0
-838	tatooine	tatooine_5_5		0.0	0.0	2048.0	2048.0	0
-839	tatooine	tatooine_5_6		0.0	2048.0	2048.0	4096.0	0
-840	tatooine	tatooine_5_7		0.0	4096.0	2048.0	6144.0	0
-841	tatooine	tatooine_5_8		0.0	6144.0	2048.0	8192.0	0
-842	tatooine	tatooine_6_1		2048.0	-8192.0	4096.0	-6144.0	0
-843	tatooine	tatooine_6_2		2048.0	-6144.0	4096.0	-4096.0	0
-844	tatooine	tatooine_6_2	halloween	2048.0	-6144.0	4096.0	-4096.0	0
-845	tatooine	tatooine_6_3		2048.0	-4096.0	4096.0	-2048.0	0
-846	tatooine	tatooine_6_4		2048.0	-2048.0	4096.0	0.0	0
-847	tatooine	tatooine_6_5		2048.0	0.0	4096.0	2048.0	0
-848	tatooine	tatooine_6_6		2048.0	2048.0	4096.0	4096.0	0
-849	tatooine	tatooine_6_7		2048.0	4096.0	4096.0	6144.0	0
-850	tatooine	tatooine_6_8		2048.0	6144.0	4096.0	8192.0	0
-851	tatooine	tatooine_7_1		4096.0	-8192.0	6144.0	-6144.0	0
-852	tatooine	tatooine_7_2		4096.0	-6144.0	6144.0	-4096.0	0
-853	tatooine	tatooine_7_3		4096.0	-4096.0	6144.0	-2048.0	0
-854	tatooine	tatooine_7_4		4096.0	-2048.0	6144.0	0.0	0
-855	tatooine	tatooine_7_5		4096.0	0.0	6144.0	2048.0	0
-856	tatooine	tatooine_7_6		4096.0	2048.0	6144.0	4096.0	0
-857	tatooine	tatooine_7_7		4096.0	4096.0	6144.0	6144.0	0
-858	tatooine	tatooine_7_8		4096.0	6144.0	6144.0	8192.0	0
-859	tatooine	tatooine_8_1		6144.0	-8192.0	8192.0	-6144.0	0
-860	tatooine	tatooine_8_2		6144.0	-6144.0	8192.0	-4096.0	0
-861	tatooine	tatooine_8_3		6144.0	-4096.0	8192.0	-2048.0	0
-862	tatooine	tatooine_8_4		6144.0	-2048.0	8192.0	0.0	0
-863	tatooine	tatooine_8_5		6144.0	0.0	8192.0	2048.0	0
-864	tatooine	tatooine_8_6		6144.0	2048.0	8192.0	4096.0	0
-865	tatooine	tatooine_8_7		6144.0	4096.0	8192.0	6144.0	0
-866	tatooine	tatooine_8_8		6144.0	6144.0	8192.0	8192.0	0
-900	corellia	corellia_1_1		-8192.0	-8192.0	-6144.0	-6144.0	0
-901	corellia	corellia_1_2		-8192.0	-6144.0	-6144.0	-4096.0	0
-902	corellia	corellia_1_3		-8192.0	-4096.0	-6144.0	-2048.0	0
-903	corellia	corellia_1_4		-8192.0	-2048.0	-6144.0	0.0	0
-904	corellia	corellia_1_5		-8192.0	0.0	-6144.0	2048.0	0
-905	corellia	corellia_1_6		-8192.0	2048.0	-6144.0	4096.0	0
-906	corellia	corellia_1_7		-8192.0	4096.0	-6144.0	6144.0	0
-907	corellia	corellia_1_7	empireday_ceremony	-8192.0	4096.0	-6144.0	6144.0	0
-908	corellia	corellia_1_8		-8192.0	6144.0	-6144.0	8192.0	0
-909	corellia	corellia_2_1		-6144.0	-8192.0	-4096.0	-6144.0	0
-910	corellia	corellia_2_2		-6144.0	-6144.0	-4096.0	-4096.0	0
-911	corellia	corellia_2_3		-6144.0	-4096.0	-4096.0	-2048.0	0
-912	corellia	corellia_2_3	empireday_ceremony	-6144.0	-4096.0	-4096.0	-2048.0	0
-913	corellia	corellia_2_3	loveday	-6144.0	-4096.0	-4096.0	-2048.0	0
-914	corellia	corellia_2_4		-6144.0	-2048.0	-4096.0	0.0	0
-915	corellia	corellia_2_5		-6144.0	0.0	-4096.0	2048.0	0
-916	corellia	corellia_2_6		-6144.0	2048.0	-4096.0	4096.0	0
-917	corellia	corellia_2_7		-6144.0	4096.0	-4096.0	6144.0	0
-918	corellia	corellia_2_8		-6144.0	6144.0	-4096.0	8192.0	0
-919	corellia	corellia_3_1		-4096.0	-8192.0	-2048.0	-6144.0	0
-920	corellia	corellia_3_2		-4096.0	-6144.0	-2048.0	-4096.0	0
-921	corellia	corellia_3_3		-4096.0	-4096.0	-2048.0	-2048.0	0
-922	corellia	corellia_3_4		-4096.0	-2048.0	-2048.0	0.0	0
-923	corellia	corellia_3_5		-4096.0	0.0	-2048.0	2048.0	0
-924	corellia	corellia_3_6		-4096.0	2048.0	-2048.0	4096.0	0
-925	corellia	corellia_3_7		-4096.0	4096.0	-2048.0	6144.0	0
-926	corellia	corellia_3_8		-4096.0	6144.0	-2048.0	8192.0	0
-927	corellia	corellia_4_1		-2048.0	-8192.0	0.0	-6144.0	0
-928	corellia	remembranceday_coronet	empireday_ceremony	-2048.0	-6144.0	0.0	-4096.0	0
-929	corellia	remembranceday_coronet		-2048.0	-6144.0	0.0	-4096.0	0
-930	corellia	remembranceday_coronet_02	empireday_ceremony	-2048.0	-4096.0	0.0	-2048.0	0
-931	corellia	remembranceday_coronet_02		-2048.0	-4096.0	0.0	-2048.0	0
-932	corellia	corellia_4_4		-2048.0	-2048.0	0.0	0.0	0
-933	corellia	corellia_4_5		-2048.0	0.0	0.0	2048.0	0
-934	corellia	corellia_4_6		-2048.0	2048.0	0.0	4096.0	0
-935	corellia	corellia_4_7		-2048.0	4096.0	0.0	6144.0	0
-936	corellia	corellia_4_8		-2048.0	6144.0	0.0	8192.0	0
-937	corellia	corellia_5_1		0.0	-8192.0	2048.0	-6144.0	0
-938	corellia	corellia_5_2		0.0	-6144.0	2048.0	-4096.0	0
-939	corellia	corellia_5_3		0.0	-4096.0	2048.0	-2048.0	0
-940	corellia	corellia_5_4		0.0	-2048.0	2048.0	0.0	0
-941	corellia	corellia_5_5		0.0	0.0	2048.0	2048.0	0
-942	corellia	corellia_5_6		0.0	2048.0	2048.0	4096.0	0
-943	corellia	corellia_5_7		0.0	4096.0	2048.0	6144.0	0
-944	corellia	corellia_5_8		0.0	6144.0	2048.0	8192.0	0
-945	corellia	corellia_6_1		2048.0	-8192.0	4096.0	-6144.0	0
-946	corellia	corellia_6_2		2048.0	-6144.0	4096.0	-4096.0	0
-947	corellia	corellia_6_3		2048.0	-4096.0	4096.0	-2048.0	0
-948	corellia	corellia_6_4		2048.0	-2048.0	4096.0	0.0	0
-949	corellia	corellia_6_5		2048.0	0.0	4096.0	2048.0	0
-950	corellia	corellia_6_6		2048.0	2048.0	4096.0	4096.0	0
-951	corellia	corellia_6_7		2048.0	4096.0	4096.0	6144.0	0
-952	corellia	corellia_6_7	lifeday	2048.0	4096.0	4096.0	6144.0	0
-953	corellia	corellia_6_8		2048.0	6144.0	4096.0	8192.0	0
-954	corellia	corellia_7_1		4096.0	-8192.0	6144.0	-6144.0	0
-955	corellia	corellia_7_2		4096.0	-6144.0	6144.0	-4096.0	0
-956	corellia	corellia_7_3		4096.0	-4096.0	6144.0	-2048.0	0
-957	corellia	corellia_7_4		4096.0	-2048.0	6144.0	0.0	0
-958	corellia	corellia_7_5		4096.0	0.0	6144.0	2048.0	0
-959	corellia	corellia_7_6		4096.0	2048.0	6144.0	4096.0	0
-960	corellia	corellia_7_7		4096.0	4096.0	6144.0	6144.0	0
-961	corellia	corellia_7_8		4096.0	6144.0	6144.0	8192.0	0
-962	corellia	corellia_8_1		6144.0	-8192.0	8192.0	-6144.0	0
-963	corellia	corellia_8_2		6144.0	-6144.0	8192.0	-4096.0	0
-964	corellia	corellia_8_3		6144.0	-4096.0	8192.0	-2048.0	0
-965	corellia	corellia_8_4		6144.0	-2048.0	8192.0	0.0	0
-966	corellia	corellia_8_5		6144.0	0.0	8192.0	2048.0	0
-967	corellia	corellia_8_6		6144.0	2048.0	8192.0	4096.0	0
-968	corellia	corellia_8_7		6144.0	4096.0	8192.0	6144.0	0
-969	corellia	corellia_8_8		6144.0	6144.0	8192.0	8192.0	0
-1000	naboo	naboo_1_1		-8192.0	-8192.0	-6144.0	-6144.0	0
-1001	naboo	naboo_1_2		-8192.0	-6144.0	-6144.0	-4096.0	0
-1002	naboo	naboo_1_3		-8192.0	-4096.0	-6144.0	-2048.0	0
-1003	naboo	naboo_1_4		-8192.0	-2048.0	-6144.0	0.0	0
-1004	naboo	naboo_1_5		-8192.0	0.0	-6144.0	2048.0	0
-1005	naboo	naboo_1_6		-8192.0	2048.0	-6144.0	4096.0	0
-1006	naboo	naboo_1_7		-8192.0	4096.0	-6144.0	6144.0	0
-1007	naboo	naboo_1_8		-8192.0	6144.0	-6144.0	8192.0	0
-1008	naboo	naboo_2_1		-6144.0	-8192.0	-4096.0	-6144.0	0
-1009	naboo	naboo_2_2		-6144.0	-6144.0	-4096.0	-4096.0	0
-1010	naboo	naboo_2_3		-6144.0	-4096.0	-4096.0	-2048.0	0
-1011	naboo	naboo_2_4		-6144.0	-2048.0	-4096.0	0.0	0
-1012	naboo	naboo_2_5		-6144.0	0.0	-4096.0	2048.0	0
-1013	naboo	naboo_2_6		-6144.0	2048.0	-4096.0	4096.0	0
-1014	naboo	naboo_2_7		-6144.0	4096.0	-4096.0	6144.0	0
-1015	naboo	naboo_2_7	empireday_ceremony	-6144.0	4096.0	-4096.0	6144.0	0
-1016	naboo	naboo_2_8		-6144.0	6144.0	-4096.0	8192.0	0
-1017	naboo	naboo_3_1		-4096.0	-8192.0	-2048.0	-6144.0	0
-1018	naboo	naboo_3_2		-4096.0	-6144.0	-2048.0	-4096.0	0
-1019	naboo	naboo_3_3		-4096.0	-4096.0	-2048.0	-2048.0	0
-1020	naboo	naboo_3_4		-4096.0	-2048.0	-2048.0	0.0	0
-1021	naboo	naboo_3_5		-4096.0	0.0	-2048.0	2048.0	0
-1022	naboo	naboo_3_6		-4096.0	2048.0	-2048.0	4096.0	0
-1023	naboo	naboo_3_7		-4096.0	4096.0	-2048.0	6144.0	0
-1024	naboo	naboo_3_8		-4096.0	6144.0	-2048.0	8192.0	0
-1025	naboo	naboo_4_1		-2048.0	-8192.0	0.0	-6144.0	0
-1026	naboo	naboo_4_2		-2048.0	-6144.0	0.0	-4096.0	0
-1027	naboo	naboo_4_3		-2048.0	-4096.0	0.0	-2048.0	0
-1028	naboo	naboo_4_4		-2048.0	-2048.0	0.0	0.0	0
-1029	naboo	naboo_4_5		-2048.0	0.0	0.0	2048.0	0
-1030	naboo	naboo_4_6		-2048.0	2048.0	0.0	4096.0	0
-1031	naboo	naboo_4_7		-2048.0	4096.0	0.0	6144.0	0
-1032	naboo	naboo_4_8		-2048.0	6144.0	0.0	8192.0	0
-1033	naboo	naboo_5_1		0.0	-8192.0	2048.0	-6144.0	0
-1034	naboo	naboo_5_2		0.0	-6144.0	2048.0	-4096.0	0
-1035	naboo	naboo_5_3		0.0	-4096.0	2048.0	-2048.0	0
-1036	naboo	naboo_5_4		0.0	-2048.0	2048.0	0.0	0
-1037	naboo	naboo_5_5		0.0	0.0	2048.0	2048.0	0
-1038	naboo	naboo_5_6		0.0	2048.0	2048.0	4096.0	0
-1039	naboo	naboo_5_7		0.0	4096.0	2048.0	6144.0	0
-1040	naboo	naboo_5_8		0.0	6144.0	2048.0	8192.0	0
-1041	naboo	naboo_6_1		2048.0	-8192.0	4096.0	-6144.0	0
-1042	naboo	naboo_6_2		2048.0	-6144.0	4096.0	-4096.0	0
-1043	naboo	naboo_6_3		2048.0	-4096.0	4096.0	-2048.0	0
-1044	naboo	naboo_6_4		2048.0	-2048.0	4096.0	0.0	0
-1045	naboo	naboo_6_5		2048.0	0.0	4096.0	2048.0	0
-1046	naboo	naboo_6_6		2048.0	2048.0	4096.0	4096.0	0
-1047	naboo	naboo_6_7		2048.0	4096.0	4096.0	6144.0	0
-1048	naboo	naboo_6_8		2048.0	6144.0	4096.0	8192.0	0
-1049	naboo	naboo_7_1		4096.0	-8192.0	6144.0	-6144.0	0
-1050	naboo	naboo_7_2		4096.0	-6144.0	6144.0	-4096.0	0
-1051	naboo	naboo_7_2	halloween	4096.0	-6144.0	6144.0	-4096.0	0
-1052	naboo	naboo_7_3		4096.0	-4096.0	6144.0	-2048.0	0
-1053	naboo	naboo_7_4		4096.0	-2048.0	6144.0	0.0	0
-1054	naboo	naboo_7_5		4096.0	0.0	6144.0	2048.0	0
-1055	naboo	naboo_7_6		4096.0	2048.0	6144.0	4096.0	0
-1056	naboo	naboo_7_7		4096.0	4096.0	6144.0	6144.0	0
-1057	naboo	naboo_7_8		4096.0	6144.0	6144.0	8192.0	0
-1058	naboo	naboo_7_8	loveday	4096.0	6144.0	6144.0	8192.0	0
-1059	naboo	naboo_8_1		6144.0	-8192.0	8192.0	-6144.0	0
-1060	naboo	naboo_8_2		6144.0	-6144.0	8192.0	-4096.0	0
-1061	naboo	naboo_8_3		6144.0	-4096.0	8192.0	-2048.0	0
-1062	naboo	naboo_8_4		6144.0	-2048.0	8192.0	0.0	0
-1063	naboo	naboo_8_5		6144.0	0.0	8192.0	2048.0	0
-1064	naboo	naboo_8_6		6144.0	2048.0	8192.0	4096.0	0
-1065	naboo	naboo_8_7		6144.0	4096.0	8192.0	6144.0	0
-1066	naboo	naboo_8_8		6144.0	6144.0	8192.0	8192.0	0
-1100	rori	rori_1_1		-8192.0	-8192.0	-6144.0	-6144.0	0
-1101	rori	rori_1_1	empireday_ceremony	-8192.0	-8192.0	-6144.0	-6144.0	0
-1102	rori	rori_1_2		-8192.0	-6144.0	-6144.0	-4096.0	0
-1103	rori	rori_1_3		-8192.0	-4096.0	-6144.0	-2048.0	0
-1104	rori	rori_1_4		-8192.0	-2048.0	-6144.0	0.0	0
-1105	rori	rori_1_5		-8192.0	0.0	-6144.0	2048.0	0
-1106	rori	rori_1_6		-8192.0	2048.0	-6144.0	4096.0	0
-1107	rori	rori_1_7		-8192.0	4096.0	-6144.0	6144.0	0
-1108	rori	rori_1_8		-8192.0	6144.0	-6144.0	8192.0	0
-1109	rori	rori_2_1		-6144.0	-8192.0	-4096.0	-6144.0	0
-1110	rori	rori_2_2		-6144.0	-6144.0	-4096.0	-4096.0	0
-1111	rori	rori_2_3		-6144.0	-4096.0	-4096.0	-2048.0	0
-1112	rori	rori_2_4		-6144.0	-2048.0	-4096.0	0.0	0
-1113	rori	rori_2_5		-6144.0	0.0	-4096.0	2048.0	0
-1114	rori	rori_2_6		-6144.0	2048.0	-4096.0	4096.0	0
-1115	rori	rori_2_7		-6144.0	4096.0	-4096.0	6144.0	0
-1116	rori	rori_2_8		-6144.0	6144.0	-4096.0	8192.0	0
-1117	rori	rori_3_1		-4096.0	-8192.0	-2048.0	-6144.0	0
-1118	rori	rori_3_2		-4096.0	-6144.0	-2048.0	-4096.0	0
-1119	rori	rori_3_3		-4096.0	-4096.0	-2048.0	-2048.0	0
-1120	rori	rori_3_4		-4096.0	-2048.0	-2048.0	0.0	0
-1121	rori	rori_3_5		-4096.0	0.0	-2048.0	2048.0	0
-1122	rori	rori_3_6		-4096.0	2048.0	-2048.0	4096.0	0
-1123	rori	rori_3_7		-4096.0	4096.0	-2048.0	6144.0	0
-1124	rori	rori_3_8		-4096.0	6144.0	-2048.0	8192.0	0
-1125	rori	rori_4_1		-2048.0	-8192.0	0.0	-6144.0	0
-1126	rori	rori_4_2		-2048.0	-6144.0	0.0	-4096.0	0
-1127	rori	rori_4_3		-2048.0	-4096.0	0.0	-2048.0	0
-1128	rori	rori_4_4		-2048.0	-2048.0	0.0	0.0	0
-1129	rori	rori_4_5		-2048.0	0.0	0.0	2048.0	0
-1130	rori	rori_4_6		-2048.0	2048.0	0.0	4096.0	0
-1131	rori	rori_4_7		-2048.0	4096.0	0.0	6144.0	0
-1132	rori	rori_4_8		-2048.0	6144.0	0.0	8192.0	0
-1133	rori	rori_5_1		0.0	-8192.0	2048.0	-6144.0	0
-1134	rori	rori_5_2		0.0	-6144.0	2048.0	-4096.0	0
-1135	rori	rori_5_3		0.0	-4096.0	2048.0	-2048.0	0
-1136	rori	rori_5_4		0.0	-2048.0	2048.0	0.0	0
-1137	rori	rori_5_5		0.0	0.0	2048.0	2048.0	0
-1138	rori	rori_5_6		0.0	2048.0	2048.0	4096.0	0
-1139	rori	rori_5_7		0.0	4096.0	2048.0	6144.0	0
-1140	rori	rori_5_8		0.0	6144.0	2048.0	8192.0	0
-1141	rori	rori_5_8	empireday_ceremony	0.0	6144.0	2048.0	8192.0	0
-1142	rori	rori_6_1		2048.0	-8192.0	4096.0	-6144.0	0
-1143	rori	rori_6_2		2048.0	-6144.0	4096.0	-4096.0	0
-1144	rori	rori_6_3		2048.0	-4096.0	4096.0	-2048.0	0
-1145	rori	rori_6_4		2048.0	-2048.0	4096.0	0.0	0
-1146	rori	rori_6_5		2048.0	0.0	4096.0	2048.0	0
-1147	rori	rori_6_6		2048.0	2048.0	4096.0	4096.0	0
-1148	rori	rori_6_7		2048.0	4096.0	4096.0	6144.0	0
-1149	rori	rori_6_8		2048.0	6144.0	4096.0	8192.0	0
-1150	rori	rori_7_1		4096.0	-8192.0	6144.0	-6144.0	0
-1151	rori	rori_7_2		4096.0	-6144.0	6144.0	-4096.0	0
-1152	rori	rori_7_3		4096.0	-4096.0	6144.0	-2048.0	0
-1153	rori	rori_7_4		4096.0	-2048.0	6144.0	0.0	0
-1154	rori	rori_7_5		4096.0	0.0	6144.0	2048.0	0
-1155	rori	rori_7_6		4096.0	2048.0	6144.0	4096.0	0
-1156	rori	rori_7_7		4096.0	4096.0	6144.0	6144.0	0
-1157	rori	rori_7_8		4096.0	6144.0	6144.0	8192.0	0
-1158	rori	rori_8_1		6144.0	-8192.0	8192.0	-6144.0	0
-1159	rori	rori_8_2		6144.0	-6144.0	8192.0	-4096.0	0
-1160	rori	rori_8_3		6144.0	-4096.0	8192.0	-2048.0	0
-1161	rori	rori_8_4		6144.0	-2048.0	8192.0	0.0	0
-1162	rori	rori_8_4	empireday_ceremony	6144.0	-2048.0	8192.0	0.0	0
-1163	rori	rori_8_5		6144.0	0.0	8192.0	2048.0	0
-1164	rori	rori_8_6		6144.0	2048.0	8192.0	4096.0	0
-1165	rori	rori_8_7		6144.0	4096.0	8192.0	6144.0	0
-1166	rori	rori_8_8		6144.0	6144.0	8192.0	8192.0	0
-1200	talus	talus_1_1		-8192.0	-8192.0	-6144.0	-6144.0	0
-1201	talus	talus_1_2		-8192.0	-6144.0	-6144.0	-4096.0	0
-1202	talus	talus_1_2	empireday_ceremony	-8192.0	-6144.0	-6144.0	-4096.0	0
-1203	talus	talus_1_3		-8192.0	-4096.0	-6144.0	-2048.0	0
-1204	talus	talus_1_4		-8192.0	-2048.0	-6144.0	0.0	0
-1205	talus	talus_1_5		-8192.0	0.0	-6144.0	2048.0	0
-1206	talus	talus_1_6		-8192.0	2048.0	-6144.0	4096.0	0
-1207	talus	talus_1_7		-8192.0	4096.0	-6144.0	6144.0	0
-1208	talus	talus_1_7	empireday_ceremony	-8192.0	4096.0	-6144.0	6144.0	0
-1209	talus	talus_1_8		-8192.0	6144.0	-6144.0	8192.0	0
-1210	talus	talus_2_1		-6144.0	-8192.0	-4096.0	-6144.0	0
-1211	talus	talus_2_2		-6144.0	-6144.0	-4096.0	-4096.0	0
-1212	talus	talus_2_3		-6144.0	-4096.0	-4096.0	-2048.0	0
-1213	talus	talus_2_4		-6144.0	-2048.0	-4096.0	0.0	0
-1214	talus	talus_2_5		-6144.0	0.0	-4096.0	2048.0	0
-1215	talus	talus_2_6		-6144.0	2048.0	-4096.0	4096.0	0
-1216	talus	talus_2_7		-6144.0	4096.0	-4096.0	6144.0	0
-1217	talus	talus_2_8		-6144.0	6144.0	-4096.0	8192.0	0
-1218	talus	talus_3_1		-4096.0	-8192.0	-2048.0	-6144.0	0
-1219	talus	talus_3_2		-4096.0	-6144.0	-2048.0	-4096.0	0
-1220	talus	talus_3_3		-4096.0	-4096.0	-2048.0	-2048.0	0
-1221	talus	talus_3_4		-4096.0	-2048.0	-2048.0	0.0	0
-1222	talus	talus_3_5		-4096.0	0.0	-2048.0	2048.0	0
-1223	talus	talus_3_6		-4096.0	2048.0	-2048.0	4096.0	0
-1224	talus	talus_3_7		-4096.0	4096.0	-2048.0	6144.0	0
-1225	talus	talus_3_8		-4096.0	6144.0	-2048.0	8192.0	0
-1226	talus	talus_4_1		-2048.0	-8192.0	0.0	-6144.0	0
-1227	talus	talus_4_2		-2048.0	-6144.0	0.0	-4096.0	0
-1228	talus	talus_4_3		-2048.0	-4096.0	0.0	-2048.0	0
-1229	talus	talus_4_4		-2048.0	-2048.0	0.0	0.0	0
-1230	talus	talus_4_5		-2048.0	0.0	0.0	2048.0	0
-1231	talus	talus_4_6		-2048.0	2048.0	0.0	4096.0	0
-1232	talus	talus_4_7		-2048.0	4096.0	0.0	6144.0	0
-1233	talus	talus_4_8		-2048.0	6144.0	0.0	8192.0	0
-1234	talus	talus_5_1		0.0	-8192.0	2048.0	-6144.0	0
-1235	talus	talus_5_2		0.0	-6144.0	2048.0	-4096.0	0
-1236	talus	talus_5_3		0.0	-4096.0	2048.0	-2048.0	0
-1237	talus	talus_5_3	lifeday	0.0	-4096.0	2048.0	-2048.0	0
-1238	talus	talus_5_4		0.0	-2048.0	2048.0	0.0	0
-1239	talus	talus_5_5		0.0	0.0	2048.0	2048.0	0
-1240	talus	talus_5_6		0.0	2048.0	2048.0	4096.0	0
-1241	talus	talus_5_7		0.0	4096.0	2048.0	6144.0	0
-1242	talus	talus_5_8		0.0	6144.0	2048.0	8192.0	0
-1243	talus	talus_6_1		2048.0	-8192.0	4096.0	-6144.0	0
-1244	talus	talus_6_2		2048.0	-6144.0	4096.0	-4096.0	0
-1245	talus	talus_6_3		2048.0	-4096.0	4096.0	-2048.0	0
-1246	talus	talus_6_4		2048.0	-2048.0	4096.0	0.0	0
-1247	talus	talus_6_5		2048.0	0.0	4096.0	2048.0	0
-1248	talus	talus_6_6		2048.0	2048.0	4096.0	4096.0	0
-1249	talus	talus_6_7		2048.0	4096.0	4096.0	6144.0	0
-1250	talus	talus_6_8		2048.0	6144.0	4096.0	8192.0	0
-1251	talus	talus_7_1		4096.0	-8192.0	6144.0	-6144.0	0
-1252	talus	talus_7_2		4096.0	-6144.0	6144.0	-4096.0	0
-1253	talus	talus_7_3		4096.0	-4096.0	6144.0	-2048.0	0
-1254	talus	talus_7_4		4096.0	-2048.0	6144.0	0.0	0
-1255	talus	talus_7_5		4096.0	0.0	6144.0	2048.0	0
-1256	talus	talus_7_6		4096.0	2048.0	6144.0	4096.0	0
-1257	talus	talus_7_7		4096.0	4096.0	6144.0	6144.0	0
-1258	talus	talus_7_8		4096.0	6144.0	6144.0	8192.0	0
-1259	talus	talus_8_1		6144.0	-8192.0	8192.0	-6144.0	0
-1260	talus	talus_8_2		6144.0	-6144.0	8192.0	-4096.0	0
-1261	talus	talus_8_2	empireday_ceremony	6144.0	-6144.0	8192.0	-4096.0	0
-1262	talus	talus_8_3		6144.0	-4096.0	8192.0	-2048.0	0
-1263	talus	talus_8_4		6144.0	-2048.0	8192.0	0.0	0
-1264	talus	talus_8_5		6144.0	0.0	8192.0	2048.0	0
-1265	talus	talus_8_6		6144.0	2048.0	8192.0	4096.0	0
-1266	talus	talus_8_7		6144.0	4096.0	8192.0	6144.0	0
-1267	talus	talus_8_8		6144.0	6144.0	8192.0	8192.0	0
-1300	dantooine	dantooine_1_1		-8192.0	-8192.0	-6144.0	-6144.0	0
-1301	dantooine	dantooine_1_2		-8192.0	-6144.0	-6144.0	-4096.0	0
-1302	dantooine	dantooine_1_3		-8192.0	-4096.0	-6144.0	-2048.0	0
-1303	dantooine	dantooine_1_4		-8192.0	-2048.0	-6144.0	0.0	0
-1304	dantooine	dantooine_1_5		-8192.0	0.0	-6144.0	2048.0	0
-1305	dantooine	dantooine_1_6		-8192.0	2048.0	-6144.0	4096.0	0
-1306	dantooine	dantooine_1_7		-8192.0	4096.0	-6144.0	6144.0	0
-1307	dantooine	dantooine_1_8		-8192.0	6144.0	-6144.0	8192.0	0
-1308	dantooine	dantooine_2_1		-6144.0	-8192.0	-4096.0	-6144.0	0
-1309	dantooine	dantooine_2_2		-6144.0	-6144.0	-4096.0	-4096.0	0
-1310	dantooine	dantooine_2_3		-6144.0	-4096.0	-4096.0	-2048.0	0
-1311	dantooine	dantooine_2_4		-6144.0	-2048.0	-4096.0	0.0	0
-1312	dantooine	dantooine_2_5		-6144.0	0.0	-4096.0	2048.0	0
-1313	dantooine	dantooine_2_6		-6144.0	2048.0	-4096.0	4096.0	0
-1314	dantooine	dantooine_2_7		-6144.0	4096.0	-4096.0	6144.0	0
-1315	dantooine	dantooine_2_8		-6144.0	6144.0	-4096.0	8192.0	0
-1316	dantooine	dantooine_3_1		-4096.0	-8192.0	-2048.0	-6144.0	0
-1317	dantooine	dantooine_3_2		-4096.0	-6144.0	-2048.0	-4096.0	0
-1318	dantooine	dantooine_3_3		-4096.0	-4096.0	-2048.0	-2048.0	0
-1319	dantooine	dantooine_3_4		-4096.0	-2048.0	-2048.0	0.0	0
-1320	dantooine	dantooine_3_5		-4096.0	0.0	-2048.0	2048.0	0
-1321	dantooine	dantooine_3_6		-4096.0	2048.0	-2048.0	4096.0	0
-1322	dantooine	dantooine_3_7		-4096.0	4096.0	-2048.0	6144.0	0
-1323	dantooine	dantooine_3_8		-4096.0	6144.0	-2048.0	8192.0	0
-1324	dantooine	dantooine_4_1		-2048.0	-8192.0	0.0	-6144.0	0
-1325	dantooine	dantooine_4_2		-2048.0	-6144.0	0.0	-4096.0	0
-1326	dantooine	dantooine_4_3		-2048.0	-4096.0	0.0	-2048.0	0
-1327	dantooine	dantooine_4_4		-2048.0	-2048.0	0.0	0.0	0
-1328	dantooine	dantooine_4_5		-2048.0	0.0	0.0	2048.0	0
-1329	dantooine	dantooine_4_6		-2048.0	2048.0	0.0	4096.0	0
-1330	dantooine	dantooine_4_7		-2048.0	4096.0	0.0	6144.0	0
-1331	dantooine	dantooine_4_8		-2048.0	6144.0	0.0	8192.0	0
-1332	dantooine	dantooine_5_1		0.0	-8192.0	2048.0	-6144.0	0
-1333	dantooine	dantooine_5_2		0.0	-6144.0	2048.0	-4096.0	0
-1334	dantooine	dantooine_5_3		0.0	-4096.0	2048.0	-2048.0	0
-1335	dantooine	dantooine_5_4		0.0	-2048.0	2048.0	0.0	0
-1336	dantooine	dantooine_5_5		0.0	0.0	2048.0	2048.0	0
-1337	dantooine	dantooine_5_6		0.0	2048.0	2048.0	4096.0	0
-1338	dantooine	dantooine_5_7		0.0	4096.0	2048.0	6144.0	0
-1339	dantooine	dantooine_5_8		0.0	6144.0	2048.0	8192.0	0
-1340	dantooine	dantooine_6_1		2048.0	-8192.0	4096.0	-6144.0	0
-1341	dantooine	dantooine_6_2		2048.0	-6144.0	4096.0	-4096.0	0
-1342	dantooine	dantooine_6_3		2048.0	-4096.0	4096.0	-2048.0	0
-1343	dantooine	dantooine_6_4		2048.0	-2048.0	4096.0	0.0	0
-1344	dantooine	dantooine_6_5		2048.0	0.0	4096.0	2048.0	0
-1345	dantooine	dantooine_6_6		2048.0	2048.0	4096.0	4096.0	0
-1346	dantooine	dantooine_6_7		2048.0	4096.0	4096.0	6144.0	0
-1347	dantooine	dantooine_6_8		2048.0	6144.0	4096.0	8192.0	0
-1348	dantooine	dantooine_7_1		4096.0	-8192.0	6144.0	-6144.0	0
-1349	dantooine	dantooine_7_2		4096.0	-6144.0	6144.0	-4096.0	0
-1350	dantooine	dantooine_7_3		4096.0	-4096.0	6144.0	-2048.0	0
-1351	dantooine	dantooine_7_4		4096.0	-2048.0	6144.0	0.0	0
-1352	dantooine	dantooine_7_5		4096.0	0.0	6144.0	2048.0	0
-1353	dantooine	dantooine_7_6		4096.0	2048.0	6144.0	4096.0	0
-1354	dantooine	dantooine_7_7		4096.0	4096.0	6144.0	6144.0	0
-1355	dantooine	dantooine_7_8		4096.0	6144.0	6144.0	8192.0	0
-1356	dantooine	dantooine_8_1		6144.0	-8192.0	8192.0	-6144.0	0
-1357	dantooine	dantooine_8_2		6144.0	-6144.0	8192.0	-4096.0	0
-1358	dantooine	dantooine_8_3		6144.0	-4096.0	8192.0	-2048.0	0
-1359	dantooine	dantooine_8_4		6144.0	-2048.0	8192.0	0.0	0
-1360	dantooine	dantooine_8_5		6144.0	0.0	8192.0	2048.0	0
-1361	dantooine	dantooine_8_6		6144.0	2048.0	8192.0	4096.0	0
-1362	dantooine	dantooine_8_7		6144.0	4096.0	8192.0	6144.0	0
-1363	dantooine	dantooine_8_8		6144.0	6144.0	8192.0	8192.0	0
-1400	dathomir	dathomir_1_1		-8192.0	-8192.0	-6144.0	-6144.0	0
-1401	dathomir	dathomir_1_2		-8192.0	-6144.0	-6144.0	-4096.0	0
-1402	dathomir	dathomir_1_3		-8192.0	-4096.0	-6144.0	-2048.0	0
-1403	dathomir	dathomir_1_4		-8192.0	-2048.0	-6144.0	0.0	0
-1404	dathomir	dathomir_1_5		-8192.0	0.0	-6144.0	2048.0	0
-1405	dathomir	dathomir_1_6		-8192.0	2048.0	-6144.0	4096.0	0
-1406	dathomir	dathomir_1_7		-8192.0	4096.0	-6144.0	6144.0	0
-1407	dathomir	dathomir_1_8		-8192.0	6144.0	-6144.0	8192.0	0
-1408	dathomir	dathomir_2_1		-6144.0	-8192.0	-4096.0	-6144.0	0
-1409	dathomir	dathomir_2_2		-6144.0	-6144.0	-4096.0	-4096.0	0
-1410	dathomir	dathomir_2_3		-6144.0	-4096.0	-4096.0	-2048.0	0
-1411	dathomir	dathomir_2_4		-6144.0	-2048.0	-4096.0	0.0	0
-1412	dathomir	dathomir_2_5		-6144.0	0.0	-4096.0	2048.0	0
-1413	dathomir	dathomir_2_6		-6144.0	2048.0	-4096.0	4096.0	0
-1414	dathomir	dathomir_2_7		-6144.0	4096.0	-4096.0	6144.0	0
-1415	dathomir	dathomir_2_8		-6144.0	6144.0	-4096.0	8192.0	0
-1416	dathomir	dathomir_3_1		-4096.0	-8192.0	-2048.0	-6144.0	0
-1417	dathomir	dathomir_3_2		-4096.0	-6144.0	-2048.0	-4096.0	0
-1418	dathomir	dathomir_3_3		-4096.0	-4096.0	-2048.0	-2048.0	0
-1419	dathomir	dathomir_3_4		-4096.0	-2048.0	-2048.0	0.0	0
-1420	dathomir	dathomir_3_5		-4096.0	0.0	-2048.0	2048.0	0
-1421	dathomir	dathomir_3_6		-4096.0	2048.0	-2048.0	4096.0	0
-1422	dathomir	dathomir_3_7		-4096.0	4096.0	-2048.0	6144.0	0
-1423	dathomir	dathomir_3_8		-4096.0	6144.0	-2048.0	8192.0	0
-1424	dathomir	dathomir_4_1		-2048.0	-8192.0	0.0	-6144.0	0
-1425	dathomir	dathomir_4_2		-2048.0	-6144.0	0.0	-4096.0	0
-1426	dathomir	dathomir_4_3		-2048.0	-4096.0	0.0	-2048.0	0
-1427	dathomir	dathomir_4_4		-2048.0	-2048.0	0.0	0.0	0
-1428	dathomir	dathomir_4_5		-2048.0	0.0	0.0	2048.0	0
-1429	dathomir	dathomir_4_6		-2048.0	2048.0	0.0	4096.0	0
-1430	dathomir	dathomir_4_7		-2048.0	4096.0	0.0	6144.0	0
-1431	dathomir	dathomir_4_8		-2048.0	6144.0	0.0	8192.0	0
-1432	dathomir	dathomir_5_1		0.0	-8192.0	2048.0	-6144.0	0
-1433	dathomir	dathomir_5_2		0.0	-6144.0	2048.0	-4096.0	0
-1434	dathomir	dathomir_5_3		0.0	-4096.0	2048.0	-2048.0	0
-1435	dathomir	dathomir_5_4		0.0	-2048.0	2048.0	0.0	0
-1436	dathomir	dathomir_5_5		0.0	0.0	2048.0	2048.0	0
-1437	dathomir	dathomir_5_6		0.0	2048.0	2048.0	4096.0	0
-1438	dathomir	dathomir_5_7		0.0	4096.0	2048.0	6144.0	0
-1439	dathomir	dathomir_5_8		0.0	6144.0	2048.0	8192.0	0
-1440	dathomir	dathomir_6_1		2048.0	-8192.0	4096.0	-6144.0	0
-1441	dathomir	dathomir_6_2		2048.0	-6144.0	4096.0	-4096.0	0
-1442	dathomir	dathomir_6_3		2048.0	-4096.0	4096.0	-2048.0	0
-1443	dathomir	dathomir_6_4		2048.0	-2048.0	4096.0	0.0	0
-1444	dathomir	dathomir_6_5		2048.0	0.0	4096.0	2048.0	0
-1445	dathomir	dathomir_6_6		2048.0	2048.0	4096.0	4096.0	0
-1446	dathomir	dathomir_6_7		2048.0	4096.0	4096.0	6144.0	0
-1447	dathomir	dathomir_6_8		2048.0	6144.0	4096.0	8192.0	0
-1448	dathomir	dathomir_7_1		4096.0	-8192.0	6144.0	-6144.0	0
-1449	dathomir	dathomir_7_2		4096.0	-6144.0	6144.0	-4096.0	0
-1450	dathomir	dathomir_7_3		4096.0	-4096.0	6144.0	-2048.0	0
-1451	dathomir	dathomir_7_4		4096.0	-2048.0	6144.0	0.0	0
-1452	dathomir	dathomir_7_5		4096.0	0.0	6144.0	2048.0	0
-1453	dathomir	dathomir_7_6		4096.0	2048.0	6144.0	4096.0	0
-1454	dathomir	dathomir_7_7		4096.0	4096.0	6144.0	6144.0	0
-1455	dathomir	dathomir_7_8		4096.0	6144.0	6144.0	8192.0	0
-1456	dathomir	dathomir_8_1		6144.0	-8192.0	8192.0	-6144.0	0
-1457	dathomir	dathomir_8_2		6144.0	-6144.0	8192.0	-4096.0	0
-1458	dathomir	dathomir_8_3		6144.0	-4096.0	8192.0	-2048.0	0
-1459	dathomir	dathomir_8_4		6144.0	-2048.0	8192.0	0.0	0
-1460	dathomir	dathomir_8_5		6144.0	0.0	8192.0	2048.0	0
-1461	dathomir	dathomir_8_6		6144.0	2048.0	8192.0	4096.0	0
-1462	dathomir	dathomir_8_7		6144.0	4096.0	8192.0	6144.0	0
-1463	dathomir	dathomir_8_8		6144.0	6144.0	8192.0	8192.0	0
-1500	endor	endor_1_1		-8192.0	-8192.0	-6144.0	-6144.0	0
-1501	endor	endor_1_2		-8192.0	-6144.0	-6144.0	-4096.0	0
-1502	endor	endor_1_3		-8192.0	-4096.0	-6144.0	-2048.0	0
-1503	endor	endor_1_4		-8192.0	-2048.0	-6144.0	0.0	0
-1504	endor	endor_1_5		-8192.0	0.0	-6144.0	2048.0	0
-1505	endor	endor_1_6		-8192.0	2048.0	-6144.0	4096.0	0
-1506	endor	endor_1_7		-8192.0	4096.0	-6144.0	6144.0	0
-1507	endor	endor_1_8		-8192.0	6144.0	-6144.0	8192.0	0
-1508	endor	endor_2_1		-6144.0	-8192.0	-4096.0	-6144.0	0
-1509	endor	endor_2_2		-6144.0	-6144.0	-4096.0	-4096.0	0
-1510	endor	endor_2_3		-6144.0	-4096.0	-4096.0	-2048.0	0
-1511	endor	endor_2_4		-6144.0	-2048.0	-4096.0	0.0	0
-1512	endor	endor_2_5		-6144.0	0.0	-4096.0	2048.0	0
-1513	endor	endor_2_6		-6144.0	2048.0	-4096.0	4096.0	0
-1514	endor	endor_2_7		-6144.0	4096.0	-4096.0	6144.0	0
-1515	endor	endor_2_8		-6144.0	6144.0	-4096.0	8192.0	0
-1516	endor	endor_3_1		-4096.0	-8192.0	-2048.0	-6144.0	0
-1517	endor	endor_3_2		-4096.0	-6144.0	-2048.0	-4096.0	0
-1518	endor	endor_3_3		-4096.0	-4096.0	-2048.0	-2048.0	0
-1519	endor	endor_3_4		-4096.0	-2048.0	-2048.0	0.0	0
-1520	endor	endor_3_5		-4096.0	0.0	-2048.0	2048.0	0
-1521	endor	endor_3_6		-4096.0	2048.0	-2048.0	4096.0	0
-1522	endor	endor_3_7		-4096.0	4096.0	-2048.0	6144.0	0
-1523	endor	endor_3_8		-4096.0	6144.0	-2048.0	8192.0	0
-1524	endor	endor_4_1		-2048.0	-8192.0	0.0	-6144.0	0
-1525	endor	endor_4_2		-2048.0	-6144.0	0.0	-4096.0	0
-1526	endor	endor_4_2	loveday	-2048.0	-6144.0	0.0	-4096.0	0
-1527	endor	endor_4_3		-2048.0	-4096.0	0.0	-2048.0	0
-1528	endor	endor_4_4		-2048.0	-2048.0	0.0	0.0	0
-1529	endor	endor_4_5		-2048.0	0.0	0.0	2048.0	0
-1530	endor	endor_4_6		-2048.0	2048.0	0.0	4096.0	0
-1531	endor	endor_4_7		-2048.0	4096.0	0.0	6144.0	0
-1532	endor	endor_4_8		-2048.0	6144.0	0.0	8192.0	0
-1533	endor	endor_5_1		0.0	-8192.0	2048.0	-6144.0	0
-1534	endor	endor_5_2		0.0	-6144.0	2048.0	-4096.0	0
-1535	endor	endor_5_3		0.0	-4096.0	2048.0	-2048.0	0
-1536	endor	endor_5_4		0.0	-2048.0	2048.0	0.0	0
-1537	endor	endor_5_5		0.0	0.0	2048.0	2048.0	0
-1538	endor	endor_5_6		0.0	2048.0	2048.0	4096.0	0
-1539	endor	endor_5_7		0.0	4096.0	2048.0	6144.0	0
-1540	endor	endor_5_8		0.0	6144.0	2048.0	8192.0	0
-1541	endor	endor_6_1		2048.0	-8192.0	4096.0	-6144.0	0
-1542	endor	endor_6_2		2048.0	-6144.0	4096.0	-4096.0	0
-1543	endor	endor_6_3		2048.0	-4096.0	4096.0	-2048.0	0
-1544	endor	endor_6_4		2048.0	-2048.0	4096.0	0.0	0
-1545	endor	endor_6_5		2048.0	0.0	4096.0	2048.0	0
-1546	endor	endor_6_6		2048.0	2048.0	4096.0	4096.0	0
-1547	endor	endor_6_7		2048.0	4096.0	4096.0	6144.0	0
-1548	endor	endor_6_8		2048.0	6144.0	4096.0	8192.0	0
-1549	endor	endor_7_1		4096.0	-8192.0	6144.0	-6144.0	0
-1550	endor	endor_7_2		4096.0	-6144.0	6144.0	-4096.0	0
-1551	endor	endor_7_3		4096.0	-4096.0	6144.0	-2048.0	0
-1552	endor	endor_7_4		4096.0	-2048.0	6144.0	0.0	0
-1553	endor	endor_7_5		4096.0	0.0	6144.0	2048.0	0
-1554	endor	endor_7_6		4096.0	2048.0	6144.0	4096.0	0
-1555	endor	endor_7_7		4096.0	4096.0	6144.0	6144.0	0
-1556	endor	endor_7_8		4096.0	6144.0	6144.0	8192.0	0
-1557	endor	endor_8_1		6144.0	-8192.0	8192.0	-6144.0	0
-1558	endor	endor_8_2		6144.0	-6144.0	8192.0	-4096.0	0
-1559	endor	endor_8_3		6144.0	-4096.0	8192.0	-2048.0	0
-1560	endor	endor_8_4		6144.0	-2048.0	8192.0	0.0	0
-1561	endor	endor_8_5		6144.0	0.0	8192.0	2048.0	0
-1562	endor	endor_8_6		6144.0	2048.0	8192.0	4096.0	0
-1563	endor	endor_8_7		6144.0	4096.0	8192.0	6144.0	0
-1564	endor	endor_8_8		6144.0	6144.0	8192.0	8192.0	0
-1600	yavin4	yavin4_1_1		-8192.0	-8192.0	-6144.0	-6144.0	0
-1601	yavin4	yavin4_1_2		-8192.0	-6144.0	-6144.0	-4096.0	0
-1602	yavin4	yavin4_1_3		-8192.0	-4096.0	-6144.0	-2048.0	0
-1603	yavin4	yavin4_1_4		-8192.0	-2048.0	-6144.0	0.0	0
-1604	yavin4	yavin4_1_5		-8192.0	0.0	-6144.0	2048.0	0
-1605	yavin4	yavin4_1_6		-8192.0	2048.0	-6144.0	4096.0	0
-1606	yavin4	yavin4_1_7		-8192.0	4096.0	-6144.0	6144.0	0
-1607	yavin4	yavin4_1_8		-8192.0	6144.0	-6144.0	8192.0	0
-1608	yavin4	yavin4_2_1		-6144.0	-8192.0	-4096.0	-6144.0	0
-1609	yavin4	yavin4_2_2		-6144.0	-6144.0	-4096.0	-4096.0	0
-1610	yavin4	yavin4_2_3		-6144.0	-4096.0	-4096.0	-2048.0	0
-1611	yavin4	yavin4_2_4		-6144.0	-2048.0	-4096.0	0.0	0
-1612	yavin4	yavin4_2_5		-6144.0	0.0	-4096.0	2048.0	0
-1613	yavin4	yavin4_2_6		-6144.0	2048.0	-4096.0	4096.0	0
-1614	yavin4	yavin4_2_7		-6144.0	4096.0	-4096.0	6144.0	0
-1615	yavin4	yavin4_2_8		-6144.0	6144.0	-4096.0	8192.0	0
-1616	yavin4	yavin4_3_1		-4096.0	-8192.0	-2048.0	-6144.0	0
-1617	yavin4	yavin4_3_2		-4096.0	-6144.0	-2048.0	-4096.0	0
-1618	yavin4	yavin4_3_3		-4096.0	-4096.0	-2048.0	-2048.0	0
-1619	yavin4	yavin4_3_4		-4096.0	-2048.0	-2048.0	0.0	0
-1620	yavin4	yavin4_3_5		-4096.0	0.0	-2048.0	2048.0	0
-1621	yavin4	yavin4_3_6		-4096.0	2048.0	-2048.0	4096.0	0
-1622	yavin4	yavin4_3_7		-4096.0	4096.0	-2048.0	6144.0	0
-1623	yavin4	yavin4_3_8		-4096.0	6144.0	-2048.0	8192.0	0
-1624	yavin4	yavin4_4_1		-2048.0	-8192.0	0.0	-6144.0	0
-1625	yavin4	yavin4_4_2		-2048.0	-6144.0	0.0	-4096.0	0
-1626	yavin4	yavin4_4_3		-2048.0	-4096.0	0.0	-2048.0	0
-1627	yavin4	yavin4_4_4		-2048.0	-2048.0	0.0	0.0	0
-1628	yavin4	yavin4_4_5		-2048.0	0.0	0.0	2048.0	0
-1629	yavin4	yavin4_4_6		-2048.0	2048.0	0.0	4096.0	0
-1630	yavin4	yavin4_4_7		-2048.0	4096.0	0.0	6144.0	0
-1631	yavin4	yavin4_4_7	empireday_ceremony	-2048.0	4096.0	0.0	6144.0	0
-1632	yavin4	yavin4_4_8		-2048.0	6144.0	0.0	8192.0	0
-1633	yavin4	yavin4_5_1		0.0	-8192.0	2048.0	-6144.0	0
-1634	yavin4	yavin4_5_2		0.0	-6144.0	2048.0	-4096.0	0
-1635	yavin4	yavin4_5_3		0.0	-4096.0	2048.0	-2048.0	0
-1636	yavin4	yavin4_5_4		0.0	-2048.0	2048.0	0.0	0
-1637	yavin4	yavin4_5_5		0.0	0.0	2048.0	2048.0	0
-1638	yavin4	yavin4_5_6		0.0	2048.0	2048.0	4096.0	0
-1639	yavin4	yavin4_5_7		0.0	4096.0	2048.0	6144.0	0
-1640	yavin4	yavin4_5_8		0.0	6144.0	2048.0	8192.0	0
-1641	yavin4	yavin4_6_1		2048.0	-8192.0	4096.0	-6144.0	0
-1642	yavin4	yavin4_6_1	empireday_ceremony	2048.0	-8192.0	4096.0	-6144.0	0
-1643	yavin4	yavin4_6_2		2048.0	-6144.0	4096.0	-4096.0	0
-1644	yavin4	yavin4_6_3		2048.0	-4096.0	4096.0	-2048.0	0
-1645	yavin4	yavin4_6_4		2048.0	-2048.0	4096.0	0.0	0
-1646	yavin4	yavin4_6_5		2048.0	0.0	4096.0	2048.0	0
-1647	yavin4	yavin4_6_6		2048.0	2048.0	4096.0	4096.0	0
-1648	yavin4	yavin4_6_7		2048.0	4096.0	4096.0	6144.0	0
-1649	yavin4	yavin4_6_8		2048.0	6144.0	4096.0	8192.0	0
-1650	yavin4	yavin4_7_1		4096.0	-8192.0	6144.0	-6144.0	0
-1651	yavin4	yavin4_7_2		4096.0	-6144.0	6144.0	-4096.0	0
-1652	yavin4	yavin4_7_3		4096.0	-4096.0	6144.0	-2048.0	0
-1653	yavin4	yavin4_7_4		4096.0	-2048.0	6144.0	0.0	0
-1654	yavin4	yavin4_7_5		4096.0	0.0	6144.0	2048.0	0
-1655	yavin4	yavin4_7_6		4096.0	2048.0	6144.0	4096.0	0
-1656	yavin4	yavin4_7_7		4096.0	4096.0	6144.0	6144.0	0
-1657	yavin4	yavin4_7_8		4096.0	6144.0	6144.0	8192.0	0
-1658	yavin4	yavin4_8_1		6144.0	-8192.0	8192.0	-6144.0	0
-1659	yavin4	yavin4_8_2		6144.0	-6144.0	8192.0	-4096.0	0
-1660	yavin4	yavin4_8_3		6144.0	-4096.0	8192.0	-2048.0	0
-1661	yavin4	yavin4_8_4		6144.0	-2048.0	8192.0	0.0	0
-1662	yavin4	yavin4_8_5		6144.0	0.0	8192.0	2048.0	0
-1663	yavin4	yavin4_8_6		6144.0	2048.0	8192.0	4096.0	0
-1664	yavin4	yavin4_8_7		6144.0	4096.0	8192.0	6144.0	0
-1665	yavin4	yavin4_8_8		6144.0	6144.0	8192.0	8192.0	0
-1700	lok	lok_1_1		-8192.0	-8192.0	-6144.0	-6144.0	0
-1701	lok	lok_1_2		-8192.0	-6144.0	-6144.0	-4096.0	0
-1702	lok	lok_1_3		-8192.0	-4096.0	-6144.0	-2048.0	0
-1703	lok	lok_1_4		-8192.0	-2048.0	-6144.0	0.0	0
-1704	lok	lok_1_5		-8192.0	0.0	-6144.0	2048.0	0
-1705	lok	lok_1_6		-8192.0	2048.0	-6144.0	4096.0	0
-1706	lok	lok_1_7		-8192.0	4096.0	-6144.0	6144.0	0
-1707	lok	lok_1_8		-8192.0	6144.0	-6144.0	8192.0	0
-1708	lok	lok_2_1		-6144.0	-8192.0	-4096.0	-6144.0	0
-1709	lok	lok_2_2		-6144.0	-6144.0	-4096.0	-4096.0	0
-1710	lok	lok_2_3		-6144.0	-4096.0	-4096.0	-2048.0	0
-1711	lok	lok_2_4		-6144.0	-2048.0	-4096.0	0.0	0
-1712	lok	lok_2_5		-6144.0	0.0	-4096.0	2048.0	0
-1713	lok	lok_2_6		-6144.0	2048.0	-4096.0	4096.0	0
-1714	lok	lok_2_7		-6144.0	4096.0	-4096.0	6144.0	0
-1715	lok	lok_2_8		-6144.0	6144.0	-4096.0	8192.0	0
-1716	lok	lok_3_1		-4096.0	-8192.0	-2048.0	-6144.0	0
-1717	lok	lok_3_2		-4096.0	-6144.0	-2048.0	-4096.0	0
-1718	lok	lok_3_3		-4096.0	-4096.0	-2048.0	-2048.0	0
-1719	lok	lok_3_4		-4096.0	-2048.0	-2048.0	0.0	0
-1720	lok	lok_3_5		-4096.0	0.0	-2048.0	2048.0	0
-1721	lok	lok_3_6		-4096.0	2048.0	-2048.0	4096.0	0
-1722	lok	lok_3_7		-4096.0	4096.0	-2048.0	6144.0	0
-1723	lok	lok_3_8		-4096.0	6144.0	-2048.0	8192.0	0
-1724	lok	lok_4_1		-2048.0	-8192.0	0.0	-6144.0	0
-1725	lok	lok_4_2		-2048.0	-6144.0	0.0	-4096.0	0
-1726	lok	lok_4_3		-2048.0	-4096.0	0.0	-2048.0	0
-1727	lok	lok_4_3	empireday_ceremony	-2048.0	-4096.0	0.0	-2048.0	0
-1728	lok	lok_4_4		-2048.0	-2048.0	0.0	0.0	0
-1729	lok	lok_4_5		-2048.0	0.0	0.0	2048.0	0
-1730	lok	lok_4_6		-2048.0	2048.0	0.0	4096.0	0
-1731	lok	lok_4_7		-2048.0	4096.0	0.0	6144.0	0
-1732	lok	lok_4_8		-2048.0	6144.0	0.0	8192.0	0
-1733	lok	lok_5_1		0.0	-8192.0	2048.0	-6144.0	0
-1734	lok	lok_5_2		0.0	-6144.0	2048.0	-4096.0	0
-1735	lok	lok_5_3		0.0	-4096.0	2048.0	-2048.0	0
-1736	lok	lok_5_4		0.0	-2048.0	2048.0	0.0	0
-1737	lok	lok_5_5		0.0	0.0	2048.0	2048.0	0
-1738	lok	lok_5_6		0.0	2048.0	2048.0	4096.0	0
-1739	lok	lok_5_7		0.0	4096.0	2048.0	6144.0	0
-1740	lok	lok_5_7	empireday_ceremony	0.0	4096.0	2048.0	6144.0	0
-1741	lok	lok_5_8		0.0	6144.0	2048.0	8192.0	0
-1742	lok	lok_6_1		2048.0	-8192.0	4096.0	-6144.0	0
-1743	lok	lok_6_2		2048.0	-6144.0	4096.0	-4096.0	0
-1744	lok	lok_6_3		2048.0	-4096.0	4096.0	-2048.0	0
-1745	lok	lok_6_4		2048.0	-2048.0	4096.0	0.0	0
-1746	lok	lok_6_5		2048.0	0.0	4096.0	2048.0	0
-1747	lok	lok_6_6		2048.0	2048.0	4096.0	4096.0	0
-1748	lok	lok_6_7		2048.0	4096.0	4096.0	6144.0	0
-1749	lok	lok_6_8		2048.0	6144.0	4096.0	8192.0	0
-1750	lok	lok_7_1		4096.0	-8192.0	6144.0	-6144.0	0
-1751	lok	lok_7_2		4096.0	-6144.0	6144.0	-4096.0	0
-1752	lok	lok_7_3		4096.0	-4096.0	6144.0	-2048.0	0
-1753	lok	lok_7_4		4096.0	-2048.0	6144.0	0.0	0
-1754	lok	lok_7_5		4096.0	0.0	6144.0	2048.0	0
-1755	lok	lok_7_6		4096.0	2048.0	6144.0	4096.0	0
-1756	lok	lok_7_7		4096.0	4096.0	6144.0	6144.0	0
-1757	lok	lok_7_8		4096.0	6144.0	6144.0	8192.0	0
-1758	lok	lok_8_1		6144.0	-8192.0	8192.0	-6144.0	0
-1759	lok	lok_8_2		6144.0	-6144.0	8192.0	-4096.0	0
-1760	lok	lok_8_3		6144.0	-4096.0	8192.0	-2048.0	0
-1761	lok	lok_8_4		6144.0	-2048.0	8192.0	0.0	0
-1762	lok	lok_8_5		6144.0	0.0	8192.0	2048.0	0
-1763	lok	lok_8_6		6144.0	2048.0	8192.0	4096.0	0
-1764	lok	lok_8_7		6144.0	4096.0	8192.0	6144.0	0
-1765	lok	lok_8_8		6144.0	6144.0	8192.0	8192.0	0
-1800	mustafar	mustafar_main_nw		-6880.0	2848.0	-2304.0	6976.0	0
-1801	mustafar	mustafar_main_ne		-2304.0	2848.0	1120.0	6976.0	0
-1802	mustafar	mustafar_main_sw		-6880.0	-1024.0	-3480.0	2848.0	0
-1803	mustafar	mustafar_main_se		-3480.0	-1024.0	1120.0	2848.0	0
-1804	mustafar	mustafar_volcano		1552.0	6016.0	2576.0	7040.0	0
-1805	mustafar	mustafar_volcano		1552.0	4592.0	2576.0	5616.0	0
-1806	mustafar	mustafar_volcano		1552.0	3168.0	2576.0	4192.0	0
-1807	mustafar	mustafar_volcano		1552.0	1744.0	2576.0	2768.0	0
-1808	mustafar	mustafar_volcano		1552.0	320.0	2576.0	1344.0	0
-1809	mustafar	mustafar_volcano		1552.0	-1104.0	2576.0	-80.0	0
-1810	mustafar	mustafar_volcano		3040.0	6014.0	4064.0	7038.0	0
-1811	mustafar	mustafar_volcano		3040.0	4590.0	4064.0	5614.0	0
-1812	mustafar	mustafar_volcano		3040.0	3166.0	4064.0	4190.0	0
-1813	mustafar	mustafar_volcano		3040.0	1742.0	4064.0	2766.0	0
-1814	mustafar	mustafar_volcano		3040.0	318.0	4064.0	1342.0	0
-1815	mustafar	mustafar_volcano		3040.0	-1106.0	4064.0	-82.0	0
-1816	mustafar	mustafar_droid_army		4560.0	5952.0	5072.0	6464.0	0
-1817	mustafar	mustafar_droid_army		4560.0	5020.0	5072.0	5532.0	0
-1818	mustafar	mustafar_droid_army		4560.0	4032.0	5072.0	4544.0	0
-1819	mustafar	mustafar_droid_army		4560.0	3088.0	5072.0	3600.0	0
-1820	mustafar	mustafar_droid_army		4560.0	2160.0	5072.0	2672.0	0
-1821	mustafar	mustafar_droid_army		4560.0	1168.0	5072.0	1680.0	0
-1822	mustafar	mustafar_droid_army		4560.0	192.0	5072.0	704.0	0
-1823	mustafar	mustafar_droid_army		4560.0	-741.0	5072.0	-229.0	0
-1824	mustafar	uplink_cave		5700.0	6000.0	6200.0	6500.0	0
-1825	mustafar	uplink_cave		5700.0	5300.0	6200.0	5800.0	0
-1826	mustafar	uplink_cave		5700.0	4600.0	6200.0	5100.0	0
-1827	mustafar	uplink_cave		5700.0	3900.0	6200.0	4400.0	0
-1828	mustafar	uplink_cave		5700.0	3200.0	6200.0	3700.0	0
-1829	mustafar	uplink_cave		5700.0	2500.0	6200.0	3000.0	0
-1830	mustafar	uplink_cave		5700.0	1800.0	6200.0	2300.0	0
-1831	mustafar	uplink_cave		5700.0	1100.0	6200.0	1600.0	0
-1832	mustafar	obiwan_crystal_cave		6500.0	6700.0	7000.0	7200.0	0
-1833	mustafar	obiwan_crystal_cave		6500.0	6000.0	7000.0	6500.0	0
-1834	mustafar	obiwan_crystal_cave		6500.0	5300.0	7000.0	5800.0	0
-1835	mustafar	obiwan_crystal_cave		6500.0	4600.0	7000.0	5100.0	0
-1836	mustafar	obiwan_crystal_cave		6500.0	3900.0	7000.0	4400.0	0
-1837	mustafar	obiwan_crystal_cave		6500.0	3200.0	7000.0	3700.0	0
-1838	mustafar	obiwan_crystal_cave		6500.0	2500.0	7000.0	3000.0	0
-1839	mustafar	obiwan_crystal_cave		6500.0	1800.0	7000.0	2300.0	0
-1840	mustafar	obiwan_crystal_cave		6500.0	1100.0	7000.0	1600.0	0
-1841	mustafar	obiwan_crystal_cave		6500.0	400.0	7000.0	900.0	0
-1842	mustafar	obiwan_crystal_cave		6500.0	-300.0	7000.0	200.0	0
-1843	mustafar	obiwan_crystal_cave		6500.0	-1000.0	7000.0	-500.0	0
-1844	mustafar	decrepit_droid_factory		-7000.0	-3000.0	-6500.0	-2500.0	0
-1845	mustafar	decrepit_droid_factory		-6300.0	-3000.0	-5800.0	-2500.0	0
-1846	mustafar	decrepit_droid_factory		-5600.0	-3000.0	-5100.0	-2500.0	0
-1847	mustafar	decrepit_droid_factory		-4900.0	-3000.0	-4400.0	-2500.0	0
-1848	mustafar	decrepit_droid_factory		-4200.0	-3000.0	-3700.0	-2500.0	0
-1849	mustafar	decrepit_droid_factory		-3500.0	-3000.0	-3000.0	-2500.0	0
-1850	mustafar	decrepit_droid_factory		-2800.0	-3000.0	-2300.0	-2500.0	0
-1851	mustafar	decrepit_droid_factory		-2100.0	-3000.0	-1600.0	-2500.0	0
-1852	mustafar	working_droid_factory		-7000.0	-4000.0	-6500.0	-3500.0	0
-1853	mustafar	working_droid_factory		-6300.0	-4000.0	-5800.0	-3500.0	0
-1854	mustafar	working_droid_factory		-5600.0	-4000.0	-5100.0	-3500.0	0
-1855	mustafar	working_droid_factory		-4900.0	-4000.0	-4400.0	-3500.0	0
-1856	mustafar	working_droid_factory		-4200.0	-4000.0	-3700.0	-3500.0	0
-1857	mustafar	working_droid_factory		-3500.0	-4000.0	-3000.0	-3500.0	0
-1858	mustafar	working_droid_factory		-2800.0	-4000.0	-2300.0	-3500.0	0
-1859	mustafar	working_droid_factory		-2100.0	-4000.0	-1600.0	-3500.0	0
-1860	mustafar	working_droid_factory		-1400.0	-4000.0	-900.0	-3500.0	0
-1861	mustafar	working_droid_factory		-700.0	-4000.0	-200.0	-3500.0	0
-1862	mustafar	working_droid_factory		0.0	-4000.0	500.0	-3500.0	0
-1863	mustafar	working_droid_factory		700.0	-4000.0	1200.0	-3500.0	0
-1864	mustafar	old_republic_facility		-7000.0	-5000.0	-6500.0	-4500.0	0
-1865	mustafar	old_republic_facility		-6300.0	-5000.0	-5800.0	-4500.0	0
-1866	mustafar	old_republic_facility		-5600.0	-5000.0	-5100.0	-4500.0	0
-1867	mustafar	old_republic_facility		-4900.0	-5000.0	-4400.0	-4500.0	0
-1868	mustafar	old_republic_facility		-4200.0	-5000.0	-3700.0	-4500.0	0
-1869	mustafar	old_republic_facility		-3500.0	-5000.0	-3000.0	-4500.0	0
-1870	mustafar	old_republic_facility		-2800.0	-5000.0	-2300.0	-4500.0	0
-1871	mustafar	old_republic_facility		-2100.0	-5000.0	-1600.0	-4500.0	0
-1872	mustafar	old_republic_facility		-1400.0	-5000.0	-900.0	-4500.0	0
-1873	mustafar	old_republic_facility		-700.0	-5000.0	-200.0	-4500.0	0
-1874	mustafar	old_republic_facility		0.0	-5000.0	500.0	-4500.0	0
-1875	mustafar	old_republic_facility		700.0	-5000.0	1200.0	-4500.0	0
-1876	mustafar	sher_kar_cave		-7000.0	-6000.0	-6500.0	-5500.0	0
-1877	mustafar	sher_kar_cave		-6300.0	-6000.0	-5800.0	-5500.0	0
-1878	mustafar	sher_kar_cave		-5600.0	-6000.0	-5100.0	-5500.0	0
-1879	mustafar	sher_kar_cave		-4900.0	-6000.0	-4400.0	-5500.0	0
-1880	mustafar	sher_kar_cave		-4200.0	-6000.0	-3700.0	-5500.0	0
-1881	mustafar	sher_kar_cave		-3500.0	-6000.0	-3000.0	-5500.0	0
-1882	mustafar	sher_kar_cave		-2800.0	-6000.0	-2300.0	-5500.0	0
-1883	mustafar	sher_kar_cave		-2100.0	-6000.0	-1600.0	-5500.0	0
-1884	mustafar	sher_kar_cave		-1400.0	-6000.0	-900.0	-5500.0	0
-1885	mustafar	sher_kar_cave		-700.0	-6000.0	-200.0	-5500.0	0
-1886	mustafar	sher_kar_cave		0.0	-6000.0	500.0	-5500.0	0
-1887	mustafar	sher_kar_cave		700.0	-6000.0	1200.0	-5500.0	0
-1900	dungeon1	npe_shared_station		-300.0	0.0	0.0	300.0	1
-1901	dungeon1	npe_shared_station		-1200.0	0.0	-900.0	300.0	1
-1902	dungeon1	npe_shared_station		-2100.0	0.0	-1800.0	300.0	1
-1903	dungeon1	npe_shared_station		-3000.0	0.0	-2700.0	300.0	1
-1904	dungeon1	npe_shared_station		-3900.0	0.0	-3600.0	300.0	1
-1905	dungeon1	npe_shared_station		-4800.0	0.0	-4500.0	300.0	1
-1906	dungeon1	nova_orion_station		-5700.0	0.0	-5400.0	300.0	1
-1907	dungeon1	npe_dungeon		-400.0	800.0	0.0	1350.0	1
-1908	dungeon1	npe_dungeon		-1300.0	800.0	-900.0	1350.0	1
-1909	dungeon1	npe_dungeon		-2200.0	800.0	-1800.0	1350.0	1
-1910	dungeon1	npe_dungeon		-3100.0	800.0	-2700.0	1350.0	1
-1911	dungeon1	npe_dungeon		-4000.0	800.0	-3600.0	1350.0	1
-1912	dungeon1	npe_dungeon		-4900.0	800.0	-4500.0	1350.0	1
-1913	dungeon1	heroic_axkva_min		-7000.0	-7000.0	-6500.0	-6500.0	1
-1914	dungeon1	heroic_axkva_min		-6000.0	-7000.0	-5500.0	-6500.0	1
-1915	dungeon1	heroic_axkva_min		-5000.0	-7000.0	-4500.0	-6500.0	1
-1916	dungeon1	heroic_axkva_min		-4000.0	-7000.0	-3500.0	-6500.0	1
-1917	dungeon1	heroic_axkva_min		-3000.0	-7000.0	-2500.0	-6500.0	1
-1918	dungeon1	heroic_axkva_min		-2000.0	-7000.0	-1500.0	-6500.0	1
-1919	dungeon1	heroic_axkva_min		-1000.0	-7000.0	-500.0	-6500.0	1
-1920	dungeon1	heroic_axkva_min		0.0	-7000.0	500.0	-6500.0	1
-1921	dungeon1	heroic_axkva_min		1000.0	-7000.0	1500.0	-6500.0	1
-1922	dungeon1	heroic_axkva_min		2000.0	-7000.0	2500.0	-6500.0	1
-1923	dungeon1	heroic_ig88		-7000.0	-6000.0	-6500.0	-5500.0	1
-1924	dungeon1	heroic_ig88		-6000.0	-6000.0	-5500.0	-5500.0	1
-1925	dungeon1	heroic_ig88		-5000.0	-6000.0	-4500.0	-5500.0	1
-1926	dungeon1	heroic_ig88		-4000.0	-6000.0	-3500.0	-5500.0	1
-1927	dungeon1	heroic_ig88		-3000.0	-6000.0	-2500.0	-5500.0	1
-1928	dungeon1	heroic_ig88		-2000.0	-6000.0	-1500.0	-5500.0	1
-1929	dungeon1	heroic_ig88		-1000.0	-6000.0	-500.0	-5500.0	1
-1930	dungeon1	heroic_ig88		0.0	-6000.0	500.0	-5500.0	1
-1931	dungeon1	heroic_ig88		1000.0	-6000.0	1500.0	-5500.0	1
-1932	dungeon1	heroic_ig88		2000.0	-6000.0	2500.0	-5500.0	1
-1933	dungeon1	heroic_star_destroyer		-7750.0	5500.0	-6750.0	7000.0	1
-1934	dungeon1	heroic_star_destroyer		-6150.0	5500.0	-5150.0	7000.0	1
-1935	dungeon1	heroic_star_destroyer		-4550.0	5500.0	-3550.0	7000.0	1
-1936	dungeon1	heroic_star_destroyer		-2950.0	5500.0	-1950.0	7000.0	1
-1937	dungeon1	heroic_star_destroyer		-1350.0	5500.0	-350.0	7000.0	1
-1938	dungeon1	heroic_star_destroyer		250.0	5500.0	1250.0	7000.0	1
-1939	dungeon1	heroic_star_destroyer		1850.0	5500.0	2850.0	7000.0	1
-1940	dungeon1	heroic_star_destroyer		3450.0	5500.0	4450.0	7000.0	1
-1941	dungeon1	heroic_star_destroyer		5050.0	5500.0	6050.0	7000.0	1
-1942	dungeon1	heroic_star_destroyer		6650.0	5500.0	7650.0	7000.0	1
-1943	dungeon1	heroic_exar_kun		-7000.0	-4000.0	-6000.0	-3000.0	1
-1944	dungeon1	heroic_exar_kun		-5500.0	-4000.0	-4500.0	-3000.0	1
-1945	dungeon1	heroic_exar_kun		-4000.0	-4000.0	-3000.0	-3000.0	1
-1946	dungeon1	heroic_exar_kun		-2500.0	-4000.0	-1500.0	-3000.0	1
-1947	dungeon1	heroic_exar_kun		-1000.0	-4000.0	0.0	-3000.0	1
-1948	dungeon1	heroic_exar_kun		500.0	-4000.0	1500.0	-3000.0	1
-1949	dungeon1	heroic_exar_kun		2000.0	-4000.0	3000.0	-3000.0	1
-1950	dungeon1	heroic_exar_kun		3500.0	-4000.0	4500.0	-3000.0	1
-1951	dungeon1	heroic_exar_kun		5000.0	-4000.0	6000.0	-3000.0	1
-1952	dungeon1	heroic_exar_kun		6500.0	-4000.0	7500.0	-3000.0	1
-1953	dungeon1	mtp_hideout_instance		7284.0	2590.0	7584.0	2890.0	1
-1954	dungeon1	mtp_hideout_instance		7284.0	2050.0	7584.0	2350.0	1
-1955	dungeon1	mtp_hideout_instance		7284.0	1510.0	7584.0	1810.0	1
-1956	dungeon1	mtp_hideout_instance		7284.0	970.0	7584.0	1270.0	1
-1957	dungeon1	mtp_hideout_instance		7284.0	430.0	7584.0	730.0	1
-1958	dungeon1	mtp_hideout_instance		7284.0	-110.0	7584.0	190.0	1
-1959	dungeon1	mtp_hideout_instance		7284.0	-650.0	7584.0	-350.0	1
-1960	dungeon1	mtp_hideout_instance		7284.0	-1190.0	7584.0	-890.0	1
-1961	dungeon1	mtp_hideout_instance		7284.0	-1730.0	7584.0	-1430.0	1
-1962	dungeon1	mtp_hideout_instance		7284.0	-2270.0	7584.0	-1970.0	1
-2000	adventure1	heroic_tusken_army		-4964.0	2822.0	-2964.0	4822.0	1
-2001	adventure1	heroic_tusken_army		-1964.0	2822.0	36.0	4822.0	1
-2002	adventure1	heroic_tusken_army		1036.0	2822.0	3036.0	4822.0	1
-2003	adventure1	heroic_tusken_army		4036.0	2822.0	6036.0	4822.0	1
-2004	adventure1	heroic_tusken_army		-4964.0	-178.0	-2964.0	1822.0	1
-2005	adventure1	heroic_tusken_army		-1964.0	-178.0	36.0	1822.0	1
-2006	adventure1	heroic_tusken_army		1036.0	-178.0	3036.0	1822.0	1
-2007	adventure1	heroic_tusken_army		4036.0	-178.0	6036.0	1822.0	1
-2008	adventure1	heroic_tusken_army		-4964.0	-3178.0	-2964.0	-1178.0	1
-2009	adventure1	heroic_tusken_army		-1956.0	-3170.0	44.0	-1170.0	1
-2010	adventure1	heroic_tusken_army		1036.0	-3178.0	3036.0	-1178.0	1
-2011	adventure1	heroic_tusken_army		4036.0	-3178.0	6036.0	-1178.0	1
-2100	adventure2	echo_base		-6900.0	3100.0	-3100.0	6900.0	1
-2101	adventure2	echo_base		-1900.0	3100.0	1900.0	6900.0	1
-2102	adventure2	echo_base		3100.0	3100.0	6900.0	6900.0	1
-2103	adventure2	echo_base		-6900.0	-1900.0	-3100.0	1900.0	1
-2104	adventure2	echo_base		-1900.0	-1900.0	1900.0	1900.0	1
-2105	adventure2	echo_base		3100.0	-1900.0	6900.0	1900.0	1
-2106	adventure2	echo_base		-6900.0	-6900.0	-3100.0	-3100.0	1
-2107	adventure2	echo_base		-1900.0	-6900.0	1900.0	-3100.0	1
-2108	adventure2	echo_base		3100.0	-6900.0	6900.0	-3100.0	1
+id	terrain	area_name	event	min_x	min_z	max_x	max_z	adjust_coordinates	translate_x	translate_z
+INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL DEFAULT ""	REAL NOT NULL	REAL NOT NULL	REAL NOT NULL	REAL NOT NULL	INTEGER NOT NULL DEFAULT 0	REAL NOT NULL	REAL NOT NULL
+-66	yavin4	yavin4_global		-8196	-8196	8196	8196	0	0	0
+-65	watertabletest	watertabletest_global		-8196	-8196	8196	8196	0	0	0
+-64	umbra	umbra_global		-8196	-8196	8196	8196	0	0	0
+-63	tutorial	tutorial_global		-8196	-8196	8196	8196	0	0	0
+-62	tuskan_raid_encounter	tuskan_raid_encounter_global		-8196	-8196	8196	8196	0	0	0
+-61	test_wearables	test_wearables_global		-8196	-8196	8196	8196	0	0	0
+-60	terrain_test	terrain_test_global		-8196	-8196	8196	8196	0	0	0
+-59	tatooine	tatooine_global		-8196	-8196	8196	8196	0	0	0
+-58	talus	talus_global		-8196	-8196	8196	8196	0	0	0
+-57	taanab	taanab_global		-8196	-8196	8196	8196	0	0	0
+-56	space_yavin4	space_yavin4_global		-8196	-8196	8196	8196	0	0	0
+-55	space_tatooine	space_tatooine_global		-8196	-8196	8196	8196	0	0	0
+-54	space_tatooine_2	space_tatooine_2_global		-8196	-8196	8196	8196	0	0	0
+-53	space_ord_mantell	space_ord_mantell_global		-8196	-8196	8196	8196	0	0	0
+-52	space_ord_mantell_6	space_ord_mantell_6_global		-8196	-8196	8196	8196	0	0	0
+-51	space_ord_mantell_5	space_ord_mantell_5_global		-8196	-8196	8196	8196	0	0	0
+-50	space_ord_mantell_4	space_ord_mantell_4_global		-8196	-8196	8196	8196	0	0	0
+-49	space_ord_mantell_3	space_ord_mantell_3_global		-8196	-8196	8196	8196	0	0	0
+-48	space_ord_mantell_2	space_ord_mantell_2_global		-8196	-8196	8196	8196	0	0	0
+-47	space_npe_falcon	space_npe_falcon_global		-8196	-8196	8196	8196	0	0	0
+-46	space_npe_falcon_3	space_npe_falcon_3_global		-8196	-8196	8196	8196	0	0	0
+-45	space_npe_falcon_2	space_npe_falcon_2_global		-8196	-8196	8196	8196	0	0	0
+-44	space_nova_orion	space_nova_orion_global		-8196	-8196	8196	8196	0	0	0
+-43	space_naboo	space_naboo_global		-8196	-8196	8196	8196	0	0	0
+-42	space_naboo_2	space_naboo_2_global		-8196	-8196	8196	8196	0	0	0
+-41	space_lok	space_lok_global		-8196	-8196	8196	8196	0	0	0
+-40	space_light1	space_light1_global		-8196	-8196	8196	8196	0	0	0
+-39	space_kashyyyk	space_kashyyyk_global		-8196	-8196	8196	8196	0	0	0
+-38	space_heavy1	space_heavy1_global		-8196	-8196	8196	8196	0	0	0
+-37	space_halos	space_halos_global		-8196	-8196	8196	8196	0	0	0
+-36	space_env	space_env_global		-8196	-8196	8196	8196	0	0	0
+-35	space_endor	space_endor_global		-8196	-8196	8196	8196	0	0	0
+-34	space_dathomir	space_dathomir_global		-8196	-8196	8196	8196	0	0	0
+-33	space_dantooine	space_dantooine_global		-8196	-8196	8196	8196	0	0	0
+-32	space_corellia	space_corellia_global		-8196	-8196	8196	8196	0	0	0
+-31	space_corellia_2	space_corellia_2_global		-8196	-8196	8196	8196	0	0	0
+-30	simple	simple_global		-8196	-8196	8196	8196	0	0	0
+-29	runtimerules	runtimerules_global		-8196	-8196	8196	8196	0	0	0
+-28	rori	rori_global		-8196	-8196	8196	8196	0	0	0
+-27	rivertest	rivertest_global		-8196	-8196	8196	8196	0	0	0
+-26	otoh_gunga	otoh_gunga_global		-8196	-8196	8196	8196	0	0	0
+-25	naboo	naboo_global		-8196	-8196	8196	8196	0	0	0
+-24	mustafar	mustafar_global		-8196	-8196	8196	8196	0	0	0
+-23	lok	lok_global		-8196	-8196	8196	8196	0	0	0
+-22	kashyyyk	kashyyyk_global		-8196	-8196	8196	8196	0	0	0
+-21	kashyyyk_south_dungeons	kashyyyk_south_dungeons_global		-8196	-8196	8196	8196	0	0	0
+-20	kashyyyk_rryatt_trail	kashyyyk_rryatt_trail_global		-8196	-8196	8196	8196	0	0	0
+-19	kashyyyk_pob_dungeons	kashyyyk_pob_dungeons_global		-8196	-8196	8196	8196	0	0	0
+-18	kashyyyk_north_dungeons	kashyyyk_north_dungeons_global		-8196	-8196	8196	8196	0	0	0
+-17	kashyyyk_main	kashyyyk_main_global		-8196	-8196	8196	8196	0	0	0
+-16	kashyyyk_hunting	kashyyyk_hunting_global		-8196	-8196	8196	8196	0	0	0
+-15	kashyyyk_dead_forest	kashyyyk_dead_forest_global		-8196	-8196	8196	8196	0	0	0
+-14	godclient_test	godclient_test_global		-8196	-8196	8196	8196	0	0	0
+-13	floratest	floratest_global		-8196	-8196	8196	8196	0	0	0
+-12	endor	endor_global		-8196	-8196	8196	8196	0	0	0
+-11	endor_asommers	endor_asommers_global		-8196	-8196	8196	8196	0	0	0
+-10	dungeon1	dungeon1_global		-8196	-8196	8196	8196	0	0	0
+-9	dev_area	dev_area_global		-8196	-8196	8196	8196	0	0	0
+-8	dathomir	dathomir_global		-8196	-8196	8196	8196	0	0	0
+-7	dantooine	dantooine_global		-8196	-8196	8196	8196	0	0	0
+-6	creature_test	creature_test_global		-8196	-8196	8196	8196	0	0	0
+-5	corellia	corellia_global		-8196	-8196	8196	8196	0	0	0
+-4	cinco_city_test_m5	cinco_city_test_m5_global		-8196	-8196	8196	8196	0	0	0
+-3	character_farm	character_farm_global		-8196	-8196	8196	8196	0	0	0
+-2	adventure2	adventure2_global		-8196	-8196	8196	8196	0	0	0
+-1	adventure1	adventure1_global		-8196	-8196	8196	8196	0	0	0
+0	kashyyyk_dead_forest	kashyyyk_dead_forest		-2048.0	-2048.0	2048.0	2048.0	1	0.0	0.0
+100	kashyyyk_hunting	kashyyyk_hunting		-2048.0	-2048.0	2048.0	2048.0	1	0.0	0.0
+200	kashyyyk_main	kashyyyk_main		-4096.0	-4096.0	4096.0	4096.0	1	0.0	0.0
+300	kashyyyk_north_dungeons	slaver		-3840.0	2816.0	-2816.0	3840.0	0	0.0	0.0
+301	kashyyyk_north_dungeons	slaver		-2560.0	2816.0	-1536.0	3840.0	0	0.0	0.0
+302	kashyyyk_north_dungeons	slaver		-1280.0	2816.0	-256.0	3840.0	0	0.0	0.0
+303	kashyyyk_north_dungeons	slaver		0.0	2816.0	1024.0	3840.0	0	0.0	0.0
+304	kashyyyk_north_dungeons	slaver		1280.0	2816.0	2304.0	3840.0	0	0.0	0.0
+305	kashyyyk_north_dungeons	slaver		2560.0	2816.0	3584.0	3840.0	0	0.0	0.0
+306	kashyyyk_north_dungeons	slaver		-3840.0	1536.0	-2816.0	2560.0	0	0.0	0.0
+307	kashyyyk_north_dungeons	slaver		-2560.0	1536.0	-1536.0	2560.0	0	0.0	0.0
+308	kashyyyk_north_dungeons	slaver		-1280.0	1536.0	-256.0	2560.0	0	0.0	0.0
+309	kashyyyk_north_dungeons	slaver		0.0	1536.0	1024.0	2560.0	0	0.0	0.0
+310	kashyyyk_north_dungeons	slaver		1280.0	1536.0	2304.0	2560.0	0	0.0	0.0
+311	kashyyyk_north_dungeons	slaver		2560.0	1536.0	3584.0	2560.0	0	0.0	0.0
+312	kashyyyk_north_dungeons	arena		88.0	-2192.0	936.0	-1392.0	0	0.0	0.0
+313	kashyyyk_north_dungeons	arena		1352.0	-2192.0	2200.0	-1392.0	0	0.0	0.0
+314	kashyyyk_north_dungeons	arena		88.0	-3480.0	936.0	-2680.0	0	0.0	0.0
+315	kashyyyk_north_dungeons	arena		1352.0	-3480.0	2200.0	-2680.0	0	0.0	0.0
+400	kashyyyk_pob_dungeons	avatar_platform		1024.0	1024.0	2048.0	2048.0	0	0.0	0.0
+401	kashyyyk_pob_dungeons	avatar_platform		2048.0	1024.0	3072.0	2048.0	0	0.0	0.0
+402	kashyyyk_pob_dungeons	avatar_platform		3072.0	1024.0	4096.0	2048.0	0	0.0	0.0
+403	kashyyyk_pob_dungeons	avatar_platform		4096.0	1024.0	5120.0	2048.0	0	0.0	0.0
+404	kashyyyk_pob_dungeons	avatar_platform		5120.0	1024.0	6144.0	2048.0	0	0.0	0.0
+405	kashyyyk_pob_dungeons	avatar_platform		1024.0	2048.0	2048.0	3072.0	0	0.0	0.0
+406	kashyyyk_pob_dungeons	avatar_platform		2048.0	2048.0	3072.0	3072.0	0	0.0	0.0
+407	kashyyyk_pob_dungeons	avatar_platform		3072.0	2048.0	4096.0	3072.0	0	0.0	0.0
+408	kashyyyk_pob_dungeons	avatar_platform		4096.0	2048.0	5120.0	3072.0	0	0.0	0.0
+409	kashyyyk_pob_dungeons	avatar_platform		5120.0	2048.0	6144.0	3072.0	0	0.0	0.0
+410	kashyyyk_pob_dungeons	avatar_platform		-2048.0	1024.0	-1024.0	2048.0	0	0.0	0.0
+411	kashyyyk_pob_dungeons	avatar_platform		-3072.0	1024.0	-2048.0	2048.0	0	0.0	0.0
+412	kashyyyk_pob_dungeons	avatar_platform		-4096.0	1024.0	-3072.0	2048.0	0	0.0	0.0
+413	kashyyyk_pob_dungeons	avatar_platform		-5120.0	1024.0	-4096.0	2048.0	0	0.0	0.0
+414	kashyyyk_pob_dungeons	avatar_platform		-6144.0	1024.0	-5120.0	2048.0	0	0.0	0.0
+415	kashyyyk_pob_dungeons	avatar_platform		-2048.0	2048.0	-1024.0	3072.0	0	0.0	0.0
+416	kashyyyk_pob_dungeons	avatar_platform		-3072.0	2048.0	-2048.0	3072.0	0	0.0	0.0
+417	kashyyyk_pob_dungeons	avatar_platform		-4096.0	2048.0	-3072.0	3072.0	0	0.0	0.0
+418	kashyyyk_pob_dungeons	avatar_platform		-5120.0	2048.0	-4096.0	3072.0	0	0.0	0.0
+419	kashyyyk_pob_dungeons	avatar_platform		-6144.0	2048.0	-5120.0	3072.0	0	0.0	0.0
+420	kashyyyk_pob_dungeons	myyydril_caverns		1024.0	-2048.0	2048.0	-1024.0	0	0.0	0.0
+421	kashyyyk_pob_dungeons	myyydril_caverns		2048.0	-2048.0	3072.0	-1024.0	0	0.0	0.0
+422	kashyyyk_pob_dungeons	myyydril_caverns		3072.0	-2048.0	4096.0	-1024.0	0	0.0	0.0
+423	kashyyyk_pob_dungeons	myyydril_caverns		4096.0	-2048.0	5120.0	-1024.0	0	0.0	0.0
+424	kashyyyk_pob_dungeons	myyydril_caverns		5120.0	-2048.0	6144.0	-1024.0	0	0.0	0.0
+425	kashyyyk_pob_dungeons	myyydril_caverns		1024.0	-3072.0	2048.0	-2048.0	0	0.0	0.0
+426	kashyyyk_pob_dungeons	myyydril_caverns		2048.0	-3072.0	3072.0	-2048.0	0	0.0	0.0
+427	kashyyyk_pob_dungeons	myyydril_caverns		3072.0	-3072.0	4096.0	-2048.0	0	0.0	0.0
+428	kashyyyk_pob_dungeons	myyydril_caverns		4096.0	-3072.0	5120.0	-2048.0	0	0.0	0.0
+429	kashyyyk_pob_dungeons	myyydril_caverns		5120.0	-3072.0	6144.0	-2048.0	0	0.0	0.0
+500	kashyyyk_rryatt_trail	kashyyyk_rryatt_trail_lvl_1_and_2		-3908.0	3114.0	-2208.0	4614.0	1	-3058.0	3864.0
+501	kashyyyk_rryatt_trail	kashyyyk_rryatt_trail_lvl_3		-2208.0	2614.0	-408.0	4614.0	1	-1308.0	3614.0
+502	kashyyyk_rryatt_trail	kashyyyk_rryatt_trail_lvl_4		-3908.0	1864.0	-2208.0	3114.0	1	-3058.0	2489.0
+503	kashyyyk_rryatt_trail	kashyyyk_rryatt_trail_lvl_5		-2208.0	1864.0	-708.0	2614.0	1	-1458.0	2239.0
+504	kashyyyk_rryatt_trail	kashyyyk_rryatt_trail_lvl_1_and_2		444.0	3130.0	2144.0	4630.0	1	1294.0	3880.0
+505	kashyyyk_rryatt_trail	kashyyyk_rryatt_trail_lvl_3		2144.0	2630.0	3944.0	4630.0	1	3044.0	3630.0
+506	kashyyyk_rryatt_trail	kashyyyk_rryatt_trail_lvl_4		444.0	1880.0	2144.0	3130.0	1	1294.0	2505.0
+507	kashyyyk_rryatt_trail	kashyyyk_rryatt_trail_lvl_5		2144.0	1880.0	3644.0	2630.0	1	2894.0	2255.0
+508	kashyyyk_rryatt_trail	kashyyyk_rryatt_trail_lvl_1_and_2		-3892.0	-182.0	-2192.0	1318.0	1	-3042.0	568.0
+509	kashyyyk_rryatt_trail	kashyyyk_rryatt_trail_lvl_3		-2192.0	-682.0	-392.0	1318.0	1	-1292.0	318.0
+510	kashyyyk_rryatt_trail	kashyyyk_rryatt_trail_lvl_4		-3892.0	-1432.0	-2192.0	-182.0	1	-3042.0	-807.0
+511	kashyyyk_rryatt_trail	kashyyyk_rryatt_trail_lvl_5		-2192.0	-1432.0	-692.0	-682.0	1	-1442.0	-1057.0
+512	kashyyyk_rryatt_trail	kashyyyk_rryatt_trail_lvl_1_and_2		460.0	-166.0	2160.0	1334.0	1	1310.0	584.0
+513	kashyyyk_rryatt_trail	kashyyyk_rryatt_trail_lvl_3		2160.0	-666.0	3960.0	1334.0	1	3060.0	334.0
+514	kashyyyk_rryatt_trail	kashyyyk_rryatt_trail_lvl_4		460.0	-1416.0	2160.0	-166.0	1	1310.0	-791.0
+515	kashyyyk_rryatt_trail	kashyyyk_rryatt_trail_lvl_5		2160.0	-1416.0	3660.0	-666.0	1	2910.0	-1041.0
+516	kashyyyk_rryatt_trail	kashyyyk_rryatt_trail_lvl_1_and_2		-3924.0	-3622.0	-2224.0	-2122.0	1	-3074.0	-2872.0
+517	kashyyyk_rryatt_trail	kashyyyk_rryatt_trail_lvl_3		-2224.0	-4122.0	-424.0	-2122.0	1	-1324.0	-3122.0
+518	kashyyyk_rryatt_trail	kashyyyk_rryatt_trail_lvl_4		-3924.0	-4872.0	-2224.0	-3622.0	1	-3074.0	-4247.0
+519	kashyyyk_rryatt_trail	kashyyyk_rryatt_trail_lvl_5		-2224.0	-4872.0	-724.0	-4122.0	1	-1474.0	-4497.0
+520	kashyyyk_rryatt_trail	kashyyyk_rryatt_trail_lvl_1_and_2		428.0	-3606.0	2128.0	-2106.0	1	1278.0	-2856.0
+521	kashyyyk_rryatt_trail	kashyyyk_rryatt_trail_lvl_3		2128.0	-4106.0	3928.0	-2106.0	1	3028.0	-3106.0
+522	kashyyyk_rryatt_trail	kashyyyk_rryatt_trail_lvl_4		428.0	-4856.0	2128.0	-3606.0	1	1278.0	-4231.0
+523	kashyyyk_rryatt_trail	kashyyyk_rryatt_trail_lvl_5		2128.0	-4856.0	3628.0	-4106.0	1	2878.0	-4481.0
+600	kashyyyk_south_dungeons	hracca		-3968.0	2944.0	-2944.0	3968.0	0	0.0	0.0
+601	kashyyyk_south_dungeons	hracca		-2816.0	2944.0	-1792.0	3968.0	0	0.0	0.0
+602	kashyyyk_south_dungeons	hracca		-1664.0	2944.0	-640.0	3968.0	0	0.0	0.0
+603	kashyyyk_south_dungeons	hracca		-3968.0	1792.0	-2944.0	2816.0	0	0.0	0.0
+604	kashyyyk_south_dungeons	hracca		-2816.0	1792.0	-1792.0	2816.0	0	0.0	0.0
+605	kashyyyk_south_dungeons	hracca		-1664.0	1792.0	-640.0	2816.0	0	0.0	0.0
+606	kashyyyk_south_dungeons	hracca		-3968.0	640.0	-2944.0	1664.0	0	0.0	0.0
+607	kashyyyk_south_dungeons	hracca		-2816.0	640.0	-1792.0	1664.0	0	0.0	0.0
+608	kashyyyk_south_dungeons	hracca		-1664.0	640.0	-640.0	1664.0	0	0.0	0.0
+609	kashyyyk_south_dungeons	hracca		-3968.0	-512.0	-2944.0	512.0	0	0.0	0.0
+610	kashyyyk_south_dungeons	hracca		-2816.0	-512.0	-1792.0	512.0	0	0.0	0.0
+611	kashyyyk_south_dungeons	hracca		-1664.0	-512.0	-640.0	512.0	0	0.0	0.0
+612	kashyyyk_south_dungeons	bocctyyy		128.0	-256.0	640.0	256.0	0	0.0	0.0
+613	kashyyyk_south_dungeons	bocctyyy		768.0	-256.0	1284.0	256.0	0	0.0	0.0
+614	kashyyyk_south_dungeons	bocctyyy		1412.0	-256.0	1924.0	256.0	0	0.0	0.0
+615	kashyyyk_south_dungeons	bocctyyy		2052.0	-256.0	2564.0	256.0	0	0.0	0.0
+616	kashyyyk_south_dungeons	bocctyyy		128.0	-896.0	640.0	-384.0	0	0.0	0.0
+617	kashyyyk_south_dungeons	bocctyyy		768.0	-896.0	1284.0	-384.0	0	0.0	0.0
+618	kashyyyk_south_dungeons	bocctyyy		1412.0	-896.0	1924.0	-384.0	0	0.0	0.0
+619	kashyyyk_south_dungeons	bocctyyy		2052.0	-896.0	2564.0	-384.0	0	0.0	0.0
+620	kashyyyk_south_dungeons	bocctyyy		128.0	-1536.0	640.0	-1024.0	0	0.0	0.0
+621	kashyyyk_south_dungeons	bocctyyy		768.0	-1536.0	1284.0	-1024.0	0	0.0	0.0
+622	kashyyyk_south_dungeons	bocctyyy		1408.0	-1536.0	1928.0	-1024.0	0	0.0	0.0
+623	kashyyyk_south_dungeons	bocctyyy		2052.0	-1536.0	2564.0	-1024.0	0	0.0	0.0
+700	simple	simple		-4096.0	-4096.0	4096.0	4096.0	0	0.0	0.0
+800	tatooine	tatooine_1_1		-8192.0	-8192.0	-6144.0	-6144.0	0	0.0	0.0
+801	tatooine	tatooine_1_2		-8192.0	-6144.0	-6144.0	-4096.0	0	0.0	0.0
+802	tatooine	tatooine_1_3		-8192.0	-4096.0	-6144.0	-2048.0	0	0.0	0.0
+803	tatooine	tatooine_1_4		-8192.0	-2048.0	-6144.0	0.0	0	0.0	0.0
+804	tatooine	tatooine_1_5		-8192.0	0.0	-6144.0	2048.0	0	0.0	0.0
+805	tatooine	tatooine_1_6		-8192.0	2048.0	-6144.0	4096.0	0	0.0	0.0
+806	tatooine	tatooine_1_7		-8192.0	4096.0	-6144.0	6144.0	0	0.0	0.0
+807	tatooine	tatooine_1_8		-8192.0	6144.0	-6144.0	8192.0	0	0.0	0.0
+808	tatooine	tatooine_2_1		-6144.0	-8192.0	-4096.0	-6144.0	0	0.0	0.0
+809	tatooine	tatooine_2_1	lifeday	-6144.0	-8192.0	-4096.0	-6144.0	0	0.0	0.0
+810	tatooine	tatooine_2_2		-6144.0	-6144.0	-4096.0	-4096.0	0	0.0	0.0
+811	tatooine	tatooine_2_3		-6144.0	-4096.0	-4096.0	-2048.0	0	0.0	0.0
+812	tatooine	tatooine_2_4		-6144.0	-2048.0	-4096.0	0.0	0	0.0	0.0
+813	tatooine	tatooine_2_5		-6144.0	0.0	-4096.0	2048.0	0	0.0	0.0
+814	tatooine	tatooine_2_6		-6144.0	2048.0	-4096.0	4096.0	0	0.0	0.0
+815	tatooine	tatooine_2_7		-6144.0	4096.0	-4096.0	6144.0	0	0.0	0.0
+816	tatooine	tatooine_2_8		-6144.0	6144.0	-4096.0	8192.0	0	0.0	0.0
+817	tatooine	tatooine_3_1		-4096.0	-8192.0	-2048.0	-6144.0	0	0.0	0.0
+818	tatooine	tatooine_3_2		-4096.0	-6144.0	-2048.0	-4096.0	0	0.0	0.0
+819	tatooine	tatooine_3_3		-4096.0	-4096.0	-2048.0	-2048.0	0	0.0	0.0
+820	tatooine	tatooine_3_4		-4096.0	-2048.0	-2048.0	0.0	0	0.0	0.0
+821	tatooine	tatooine_3_5		-4096.0	0.0	-2048.0	2048.0	0	0.0	0.0
+822	tatooine	tatooine_3_6		-4096.0	2048.0	-2048.0	4096.0	0	0.0	0.0
+823	tatooine	tatooine_3_6	lifeday	-4096.0	2048.0	-2048.0	4096.0	0	0.0	0.0
+824	tatooine	tatooine_3_7		-4096.0	4096.0	-2048.0	6144.0	0	0.0	0.0
+825	tatooine	tatooine_3_8		-4096.0	6144.0	-2048.0	8192.0	0	0.0	0.0
+826	tatooine	tatooine_4_1		-2048.0	-8192.0	0.0	-6144.0	0	0.0	0.0
+827	tatooine	tatooine_4_2		-2048.0	-6144.0	0.0	-4096.0	0	0.0	0.0
+828	tatooine	tatooine_4_3		-2048.0	-4096.0	0.0	-2048.0	0	0.0	0.0
+829	tatooine	tatooine_4_4		-2048.0	-2048.0	0.0	0.0	0	0.0	0.0
+830	tatooine	tatooine_4_5		-2048.0	0.0	0.0	2048.0	0	0.0	0.0
+831	tatooine	tatooine_4_6		-2048.0	2048.0	0.0	4096.0	0	0.0	0.0
+832	tatooine	tatooine_4_7		-2048.0	4096.0	0.0	6144.0	0	0.0	0.0
+833	tatooine	tatooine_4_8		-2048.0	6144.0	0.0	8192.0	0	0.0	0.0
+834	tatooine	tatooine_5_1		0.0	-8192.0	2048.0	-6144.0	0	0.0	0.0
+835	tatooine	tatooine_5_2		0.0	-6144.0	2048.0	-4096.0	0	0.0	0.0
+836	tatooine	tatooine_5_3		0.0	-4096.0	2048.0	-2048.0	0	0.0	0.0
+837	tatooine	tatooine_5_4		0.0	-2048.0	2048.0	0.0	0	0.0	0.0
+838	tatooine	tatooine_5_5		0.0	0.0	2048.0	2048.0	0	0.0	0.0
+839	tatooine	tatooine_5_6		0.0	2048.0	2048.0	4096.0	0	0.0	0.0
+840	tatooine	tatooine_5_7		0.0	4096.0	2048.0	6144.0	0	0.0	0.0
+841	tatooine	tatooine_5_8		0.0	6144.0	2048.0	8192.0	0	0.0	0.0
+842	tatooine	tatooine_6_1		2048.0	-8192.0	4096.0	-6144.0	0	0.0	0.0
+843	tatooine	tatooine_6_2		2048.0	-6144.0	4096.0	-4096.0	0	0.0	0.0
+844	tatooine	tatooine_6_2	halloween	2048.0	-6144.0	4096.0	-4096.0	0	0.0	0.0
+845	tatooine	tatooine_6_3		2048.0	-4096.0	4096.0	-2048.0	0	0.0	0.0
+846	tatooine	tatooine_6_4		2048.0	-2048.0	4096.0	0.0	0	0.0	0.0
+847	tatooine	tatooine_6_5		2048.0	0.0	4096.0	2048.0	0	0.0	0.0
+848	tatooine	tatooine_6_6		2048.0	2048.0	4096.0	4096.0	0	0.0	0.0
+849	tatooine	tatooine_6_7		2048.0	4096.0	4096.0	6144.0	0	0.0	0.0
+850	tatooine	tatooine_6_8		2048.0	6144.0	4096.0	8192.0	0	0.0	0.0
+851	tatooine	tatooine_7_1		4096.0	-8192.0	6144.0	-6144.0	0	0.0	0.0
+852	tatooine	tatooine_7_2		4096.0	-6144.0	6144.0	-4096.0	0	0.0	0.0
+853	tatooine	tatooine_7_3		4096.0	-4096.0	6144.0	-2048.0	0	0.0	0.0
+854	tatooine	tatooine_7_4		4096.0	-2048.0	6144.0	0.0	0	0.0	0.0
+855	tatooine	tatooine_7_5		4096.0	0.0	6144.0	2048.0	0	0.0	0.0
+856	tatooine	tatooine_7_6		4096.0	2048.0	6144.0	4096.0	0	0.0	0.0
+857	tatooine	tatooine_7_7		4096.0	4096.0	6144.0	6144.0	0	0.0	0.0
+858	tatooine	tatooine_7_8		4096.0	6144.0	6144.0	8192.0	0	0.0	0.0
+859	tatooine	tatooine_8_1		6144.0	-8192.0	8192.0	-6144.0	0	0.0	0.0
+860	tatooine	tatooine_8_2		6144.0	-6144.0	8192.0	-4096.0	0	0.0	0.0
+861	tatooine	tatooine_8_3		6144.0	-4096.0	8192.0	-2048.0	0	0.0	0.0
+862	tatooine	tatooine_8_4		6144.0	-2048.0	8192.0	0.0	0	0.0	0.0
+863	tatooine	tatooine_8_5		6144.0	0.0	8192.0	2048.0	0	0.0	0.0
+864	tatooine	tatooine_8_6		6144.0	2048.0	8192.0	4096.0	0	0.0	0.0
+865	tatooine	tatooine_8_7		6144.0	4096.0	8192.0	6144.0	0	0.0	0.0
+866	tatooine	tatooine_8_8		6144.0	6144.0	8192.0	8192.0	0	0.0	0.0
+900	corellia	corellia_1_1		-8192.0	-8192.0	-6144.0	-6144.0	0	0.0	0.0
+901	corellia	corellia_1_2		-8192.0	-6144.0	-6144.0	-4096.0	0	0.0	0.0
+902	corellia	corellia_1_3		-8192.0	-4096.0	-6144.0	-2048.0	0	0.0	0.0
+903	corellia	corellia_1_4		-8192.0	-2048.0	-6144.0	0.0	0	0.0	0.0
+904	corellia	corellia_1_5		-8192.0	0.0	-6144.0	2048.0	0	0.0	0.0
+905	corellia	corellia_1_6		-8192.0	2048.0	-6144.0	4096.0	0	0.0	0.0
+906	corellia	corellia_1_7		-8192.0	4096.0	-6144.0	6144.0	0	0.0	0.0
+907	corellia	corellia_1_7	empireday_ceremony	-8192.0	4096.0	-6144.0	6144.0	0	0.0	0.0
+908	corellia	corellia_1_8		-8192.0	6144.0	-6144.0	8192.0	0	0.0	0.0
+909	corellia	corellia_2_1		-6144.0	-8192.0	-4096.0	-6144.0	0	0.0	0.0
+910	corellia	corellia_2_2		-6144.0	-6144.0	-4096.0	-4096.0	0	0.0	0.0
+911	corellia	corellia_2_3		-6144.0	-4096.0	-4096.0	-2048.0	0	0.0	0.0
+912	corellia	corellia_2_3	empireday_ceremony	-6144.0	-4096.0	-4096.0	-2048.0	0	0.0	0.0
+913	corellia	corellia_2_3	loveday	-6144.0	-4096.0	-4096.0	-2048.0	0	0.0	0.0
+914	corellia	corellia_2_4		-6144.0	-2048.0	-4096.0	0.0	0	0.0	0.0
+915	corellia	corellia_2_5		-6144.0	0.0	-4096.0	2048.0	0	0.0	0.0
+916	corellia	corellia_2_6		-6144.0	2048.0	-4096.0	4096.0	0	0.0	0.0
+917	corellia	corellia_2_7		-6144.0	4096.0	-4096.0	6144.0	0	0.0	0.0
+918	corellia	corellia_2_8		-6144.0	6144.0	-4096.0	8192.0	0	0.0	0.0
+919	corellia	corellia_3_1		-4096.0	-8192.0	-2048.0	-6144.0	0	0.0	0.0
+920	corellia	corellia_3_2		-4096.0	-6144.0	-2048.0	-4096.0	0	0.0	0.0
+921	corellia	corellia_3_3		-4096.0	-4096.0	-2048.0	-2048.0	0	0.0	0.0
+922	corellia	corellia_3_4		-4096.0	-2048.0	-2048.0	0.0	0	0.0	0.0
+923	corellia	corellia_3_5		-4096.0	0.0	-2048.0	2048.0	0	0.0	0.0
+924	corellia	corellia_3_6		-4096.0	2048.0	-2048.0	4096.0	0	0.0	0.0
+925	corellia	corellia_3_7		-4096.0	4096.0	-2048.0	6144.0	0	0.0	0.0
+926	corellia	corellia_3_8		-4096.0	6144.0	-2048.0	8192.0	0	0.0	0.0
+927	corellia	corellia_4_1		-2048.0	-8192.0	0.0	-6144.0	0	0.0	0.0
+928	corellia	remembranceday_coronet	empireday_ceremony	-2048.0	-6144.0	0.0	-4096.0	0	0.0	0.0
+929	corellia	remembranceday_coronet		-2048.0	-6144.0	0.0	-4096.0	0	0.0	0.0
+930	corellia	remembranceday_coronet_02	empireday_ceremony	-2048.0	-4096.0	0.0	-2048.0	0	0.0	0.0
+931	corellia	remembranceday_coronet_02		-2048.0	-4096.0	0.0	-2048.0	0	0.0	0.0
+932	corellia	corellia_4_4		-2048.0	-2048.0	0.0	0.0	0	0.0	0.0
+933	corellia	corellia_4_5		-2048.0	0.0	0.0	2048.0	0	0.0	0.0
+934	corellia	corellia_4_6		-2048.0	2048.0	0.0	4096.0	0	0.0	0.0
+935	corellia	corellia_4_7		-2048.0	4096.0	0.0	6144.0	0	0.0	0.0
+936	corellia	corellia_4_8		-2048.0	6144.0	0.0	8192.0	0	0.0	0.0
+937	corellia	corellia_5_1		0.0	-8192.0	2048.0	-6144.0	0	0.0	0.0
+938	corellia	corellia_5_2		0.0	-6144.0	2048.0	-4096.0	0	0.0	0.0
+939	corellia	corellia_5_3		0.0	-4096.0	2048.0	-2048.0	0	0.0	0.0
+940	corellia	corellia_5_4		0.0	-2048.0	2048.0	0.0	0	0.0	0.0
+941	corellia	corellia_5_5		0.0	0.0	2048.0	2048.0	0	0.0	0.0
+942	corellia	corellia_5_6		0.0	2048.0	2048.0	4096.0	0	0.0	0.0
+943	corellia	corellia_5_7		0.0	4096.0	2048.0	6144.0	0	0.0	0.0
+944	corellia	corellia_5_8		0.0	6144.0	2048.0	8192.0	0	0.0	0.0
+945	corellia	corellia_6_1		2048.0	-8192.0	4096.0	-6144.0	0	0.0	0.0
+946	corellia	corellia_6_2		2048.0	-6144.0	4096.0	-4096.0	0	0.0	0.0
+947	corellia	corellia_6_3		2048.0	-4096.0	4096.0	-2048.0	0	0.0	0.0
+948	corellia	corellia_6_4		2048.0	-2048.0	4096.0	0.0	0	0.0	0.0
+949	corellia	corellia_6_5		2048.0	0.0	4096.0	2048.0	0	0.0	0.0
+950	corellia	corellia_6_6		2048.0	2048.0	4096.0	4096.0	0	0.0	0.0
+951	corellia	corellia_6_7		2048.0	4096.0	4096.0	6144.0	0	0.0	0.0
+952	corellia	corellia_6_7	lifeday	2048.0	4096.0	4096.0	6144.0	0	0.0	0.0
+953	corellia	corellia_6_8		2048.0	6144.0	4096.0	8192.0	0	0.0	0.0
+954	corellia	corellia_7_1		4096.0	-8192.0	6144.0	-6144.0	0	0.0	0.0
+955	corellia	corellia_7_2		4096.0	-6144.0	6144.0	-4096.0	0	0.0	0.0
+956	corellia	corellia_7_3		4096.0	-4096.0	6144.0	-2048.0	0	0.0	0.0
+957	corellia	corellia_7_4		4096.0	-2048.0	6144.0	0.0	0	0.0	0.0
+958	corellia	corellia_7_5		4096.0	0.0	6144.0	2048.0	0	0.0	0.0
+959	corellia	corellia_7_6		4096.0	2048.0	6144.0	4096.0	0	0.0	0.0
+960	corellia	corellia_7_7		4096.0	4096.0	6144.0	6144.0	0	0.0	0.0
+961	corellia	corellia_7_8		4096.0	6144.0	6144.0	8192.0	0	0.0	0.0
+962	corellia	corellia_8_1		6144.0	-8192.0	8192.0	-6144.0	0	0.0	0.0
+963	corellia	corellia_8_2		6144.0	-6144.0	8192.0	-4096.0	0	0.0	0.0
+964	corellia	corellia_8_3		6144.0	-4096.0	8192.0	-2048.0	0	0.0	0.0
+965	corellia	corellia_8_4		6144.0	-2048.0	8192.0	0.0	0	0.0	0.0
+966	corellia	corellia_8_5		6144.0	0.0	8192.0	2048.0	0	0.0	0.0
+967	corellia	corellia_8_6		6144.0	2048.0	8192.0	4096.0	0	0.0	0.0
+968	corellia	corellia_8_7		6144.0	4096.0	8192.0	6144.0	0	0.0	0.0
+969	corellia	corellia_8_8		6144.0	6144.0	8192.0	8192.0	0	0.0	0.0
+1000	naboo	naboo_1_1		-8192.0	-8192.0	-6144.0	-6144.0	0	0.0	0.0
+1001	naboo	naboo_1_2		-8192.0	-6144.0	-6144.0	-4096.0	0	0.0	0.0
+1002	naboo	naboo_1_3		-8192.0	-4096.0	-6144.0	-2048.0	0	0.0	0.0
+1003	naboo	naboo_1_4		-8192.0	-2048.0	-6144.0	0.0	0	0.0	0.0
+1004	naboo	naboo_1_5		-8192.0	0.0	-6144.0	2048.0	0	0.0	0.0
+1005	naboo	naboo_1_6		-8192.0	2048.0	-6144.0	4096.0	0	0.0	0.0
+1006	naboo	naboo_1_7		-8192.0	4096.0	-6144.0	6144.0	0	0.0	0.0
+1007	naboo	naboo_1_8		-8192.0	6144.0	-6144.0	8192.0	0	0.0	0.0
+1008	naboo	naboo_2_1		-6144.0	-8192.0	-4096.0	-6144.0	0	0.0	0.0
+1009	naboo	naboo_2_2		-6144.0	-6144.0	-4096.0	-4096.0	0	0.0	0.0
+1010	naboo	naboo_2_3		-6144.0	-4096.0	-4096.0	-2048.0	0	0.0	0.0
+1011	naboo	naboo_2_4		-6144.0	-2048.0	-4096.0	0.0	0	0.0	0.0
+1012	naboo	naboo_2_5		-6144.0	0.0	-4096.0	2048.0	0	0.0	0.0
+1013	naboo	naboo_2_6		-6144.0	2048.0	-4096.0	4096.0	0	0.0	0.0
+1014	naboo	naboo_2_7		-6144.0	4096.0	-4096.0	6144.0	0	0.0	0.0
+1015	naboo	naboo_2_7	empireday_ceremony	-6144.0	4096.0	-4096.0	6144.0	0	0.0	0.0
+1016	naboo	naboo_2_8		-6144.0	6144.0	-4096.0	8192.0	0	0.0	0.0
+1017	naboo	naboo_3_1		-4096.0	-8192.0	-2048.0	-6144.0	0	0.0	0.0
+1018	naboo	naboo_3_2		-4096.0	-6144.0	-2048.0	-4096.0	0	0.0	0.0
+1019	naboo	naboo_3_3		-4096.0	-4096.0	-2048.0	-2048.0	0	0.0	0.0
+1020	naboo	naboo_3_4		-4096.0	-2048.0	-2048.0	0.0	0	0.0	0.0
+1021	naboo	naboo_3_5		-4096.0	0.0	-2048.0	2048.0	0	0.0	0.0
+1022	naboo	naboo_3_6		-4096.0	2048.0	-2048.0	4096.0	0	0.0	0.0
+1023	naboo	naboo_3_7		-4096.0	4096.0	-2048.0	6144.0	0	0.0	0.0
+1024	naboo	naboo_3_8		-4096.0	6144.0	-2048.0	8192.0	0	0.0	0.0
+1025	naboo	naboo_4_1		-2048.0	-8192.0	0.0	-6144.0	0	0.0	0.0
+1026	naboo	naboo_4_2		-2048.0	-6144.0	0.0	-4096.0	0	0.0	0.0
+1027	naboo	naboo_4_3		-2048.0	-4096.0	0.0	-2048.0	0	0.0	0.0
+1028	naboo	naboo_4_4		-2048.0	-2048.0	0.0	0.0	0	0.0	0.0
+1029	naboo	naboo_4_5		-2048.0	0.0	0.0	2048.0	0	0.0	0.0
+1030	naboo	naboo_4_6		-2048.0	2048.0	0.0	4096.0	0	0.0	0.0
+1031	naboo	naboo_4_7		-2048.0	4096.0	0.0	6144.0	0	0.0	0.0
+1032	naboo	naboo_4_8		-2048.0	6144.0	0.0	8192.0	0	0.0	0.0
+1033	naboo	naboo_5_1		0.0	-8192.0	2048.0	-6144.0	0	0.0	0.0
+1034	naboo	naboo_5_2		0.0	-6144.0	2048.0	-4096.0	0	0.0	0.0
+1035	naboo	naboo_5_3		0.0	-4096.0	2048.0	-2048.0	0	0.0	0.0
+1036	naboo	naboo_5_4		0.0	-2048.0	2048.0	0.0	0	0.0	0.0
+1037	naboo	naboo_5_5		0.0	0.0	2048.0	2048.0	0	0.0	0.0
+1038	naboo	naboo_5_6		0.0	2048.0	2048.0	4096.0	0	0.0	0.0
+1039	naboo	naboo_5_7		0.0	4096.0	2048.0	6144.0	0	0.0	0.0
+1040	naboo	naboo_5_8		0.0	6144.0	2048.0	8192.0	0	0.0	0.0
+1041	naboo	naboo_6_1		2048.0	-8192.0	4096.0	-6144.0	0	0.0	0.0
+1042	naboo	naboo_6_2		2048.0	-6144.0	4096.0	-4096.0	0	0.0	0.0
+1043	naboo	naboo_6_3		2048.0	-4096.0	4096.0	-2048.0	0	0.0	0.0
+1044	naboo	naboo_6_4		2048.0	-2048.0	4096.0	0.0	0	0.0	0.0
+1045	naboo	naboo_6_5		2048.0	0.0	4096.0	2048.0	0	0.0	0.0
+1046	naboo	naboo_6_6		2048.0	2048.0	4096.0	4096.0	0	0.0	0.0
+1047	naboo	naboo_6_7		2048.0	4096.0	4096.0	6144.0	0	0.0	0.0
+1048	naboo	naboo_6_8		2048.0	6144.0	4096.0	8192.0	0	0.0	0.0
+1049	naboo	naboo_7_1		4096.0	-8192.0	6144.0	-6144.0	0	0.0	0.0
+1050	naboo	naboo_7_2		4096.0	-6144.0	6144.0	-4096.0	0	0.0	0.0
+1051	naboo	naboo_7_2	halloween	4096.0	-6144.0	6144.0	-4096.0	0	0.0	0.0
+1052	naboo	naboo_7_3		4096.0	-4096.0	6144.0	-2048.0	0	0.0	0.0
+1053	naboo	naboo_7_4		4096.0	-2048.0	6144.0	0.0	0	0.0	0.0
+1054	naboo	naboo_7_5		4096.0	0.0	6144.0	2048.0	0	0.0	0.0
+1055	naboo	naboo_7_6		4096.0	2048.0	6144.0	4096.0	0	0.0	0.0
+1056	naboo	naboo_7_7		4096.0	4096.0	6144.0	6144.0	0	0.0	0.0
+1057	naboo	naboo_7_8		4096.0	6144.0	6144.0	8192.0	0	0.0	0.0
+1058	naboo	naboo_7_8	loveday	4096.0	6144.0	6144.0	8192.0	0	0.0	0.0
+1059	naboo	naboo_8_1		6144.0	-8192.0	8192.0	-6144.0	0	0.0	0.0
+1060	naboo	naboo_8_2		6144.0	-6144.0	8192.0	-4096.0	0	0.0	0.0
+1061	naboo	naboo_8_3		6144.0	-4096.0	8192.0	-2048.0	0	0.0	0.0
+1062	naboo	naboo_8_4		6144.0	-2048.0	8192.0	0.0	0	0.0	0.0
+1063	naboo	naboo_8_5		6144.0	0.0	8192.0	2048.0	0	0.0	0.0
+1064	naboo	naboo_8_6		6144.0	2048.0	8192.0	4096.0	0	0.0	0.0
+1065	naboo	naboo_8_7		6144.0	4096.0	8192.0	6144.0	0	0.0	0.0
+1066	naboo	naboo_8_8		6144.0	6144.0	8192.0	8192.0	0	0.0	0.0
+1100	rori	rori_1_1		-8192.0	-8192.0	-6144.0	-6144.0	0	0.0	0.0
+1101	rori	rori_1_1	empireday_ceremony	-8192.0	-8192.0	-6144.0	-6144.0	0	0.0	0.0
+1102	rori	rori_1_2		-8192.0	-6144.0	-6144.0	-4096.0	0	0.0	0.0
+1103	rori	rori_1_3		-8192.0	-4096.0	-6144.0	-2048.0	0	0.0	0.0
+1104	rori	rori_1_4		-8192.0	-2048.0	-6144.0	0.0	0	0.0	0.0
+1105	rori	rori_1_5		-8192.0	0.0	-6144.0	2048.0	0	0.0	0.0
+1106	rori	rori_1_6		-8192.0	2048.0	-6144.0	4096.0	0	0.0	0.0
+1107	rori	rori_1_7		-8192.0	4096.0	-6144.0	6144.0	0	0.0	0.0
+1108	rori	rori_1_8		-8192.0	6144.0	-6144.0	8192.0	0	0.0	0.0
+1109	rori	rori_2_1		-6144.0	-8192.0	-4096.0	-6144.0	0	0.0	0.0
+1110	rori	rori_2_2		-6144.0	-6144.0	-4096.0	-4096.0	0	0.0	0.0
+1111	rori	rori_2_3		-6144.0	-4096.0	-4096.0	-2048.0	0	0.0	0.0
+1112	rori	rori_2_4		-6144.0	-2048.0	-4096.0	0.0	0	0.0	0.0
+1113	rori	rori_2_5		-6144.0	0.0	-4096.0	2048.0	0	0.0	0.0
+1114	rori	rori_2_6		-6144.0	2048.0	-4096.0	4096.0	0	0.0	0.0
+1115	rori	rori_2_7		-6144.0	4096.0	-4096.0	6144.0	0	0.0	0.0
+1116	rori	rori_2_8		-6144.0	6144.0	-4096.0	8192.0	0	0.0	0.0
+1117	rori	rori_3_1		-4096.0	-8192.0	-2048.0	-6144.0	0	0.0	0.0
+1118	rori	rori_3_2		-4096.0	-6144.0	-2048.0	-4096.0	0	0.0	0.0
+1119	rori	rori_3_3		-4096.0	-4096.0	-2048.0	-2048.0	0	0.0	0.0
+1120	rori	rori_3_4		-4096.0	-2048.0	-2048.0	0.0	0	0.0	0.0
+1121	rori	rori_3_5		-4096.0	0.0	-2048.0	2048.0	0	0.0	0.0
+1122	rori	rori_3_6		-4096.0	2048.0	-2048.0	4096.0	0	0.0	0.0
+1123	rori	rori_3_7		-4096.0	4096.0	-2048.0	6144.0	0	0.0	0.0
+1124	rori	rori_3_8		-4096.0	6144.0	-2048.0	8192.0	0	0.0	0.0
+1125	rori	rori_4_1		-2048.0	-8192.0	0.0	-6144.0	0	0.0	0.0
+1126	rori	rori_4_2		-2048.0	-6144.0	0.0	-4096.0	0	0.0	0.0
+1127	rori	rori_4_3		-2048.0	-4096.0	0.0	-2048.0	0	0.0	0.0
+1128	rori	rori_4_4		-2048.0	-2048.0	0.0	0.0	0	0.0	0.0
+1129	rori	rori_4_5		-2048.0	0.0	0.0	2048.0	0	0.0	0.0
+1130	rori	rori_4_6		-2048.0	2048.0	0.0	4096.0	0	0.0	0.0
+1131	rori	rori_4_7		-2048.0	4096.0	0.0	6144.0	0	0.0	0.0
+1132	rori	rori_4_8		-2048.0	6144.0	0.0	8192.0	0	0.0	0.0
+1133	rori	rori_5_1		0.0	-8192.0	2048.0	-6144.0	0	0.0	0.0
+1134	rori	rori_5_2		0.0	-6144.0	2048.0	-4096.0	0	0.0	0.0
+1135	rori	rori_5_3		0.0	-4096.0	2048.0	-2048.0	0	0.0	0.0
+1136	rori	rori_5_4		0.0	-2048.0	2048.0	0.0	0	0.0	0.0
+1137	rori	rori_5_5		0.0	0.0	2048.0	2048.0	0	0.0	0.0
+1138	rori	rori_5_6		0.0	2048.0	2048.0	4096.0	0	0.0	0.0
+1139	rori	rori_5_7		0.0	4096.0	2048.0	6144.0	0	0.0	0.0
+1140	rori	rori_5_8		0.0	6144.0	2048.0	8192.0	0	0.0	0.0
+1141	rori	rori_5_8	empireday_ceremony	0.0	6144.0	2048.0	8192.0	0	0.0	0.0
+1142	rori	rori_6_1		2048.0	-8192.0	4096.0	-6144.0	0	0.0	0.0
+1143	rori	rori_6_2		2048.0	-6144.0	4096.0	-4096.0	0	0.0	0.0
+1144	rori	rori_6_3		2048.0	-4096.0	4096.0	-2048.0	0	0.0	0.0
+1145	rori	rori_6_4		2048.0	-2048.0	4096.0	0.0	0	0.0	0.0
+1146	rori	rori_6_5		2048.0	0.0	4096.0	2048.0	0	0.0	0.0
+1147	rori	rori_6_6		2048.0	2048.0	4096.0	4096.0	0	0.0	0.0
+1148	rori	rori_6_7		2048.0	4096.0	4096.0	6144.0	0	0.0	0.0
+1149	rori	rori_6_8		2048.0	6144.0	4096.0	8192.0	0	0.0	0.0
+1150	rori	rori_7_1		4096.0	-8192.0	6144.0	-6144.0	0	0.0	0.0
+1151	rori	rori_7_2		4096.0	-6144.0	6144.0	-4096.0	0	0.0	0.0
+1152	rori	rori_7_3		4096.0	-4096.0	6144.0	-2048.0	0	0.0	0.0
+1153	rori	rori_7_4		4096.0	-2048.0	6144.0	0.0	0	0.0	0.0
+1154	rori	rori_7_5		4096.0	0.0	6144.0	2048.0	0	0.0	0.0
+1155	rori	rori_7_6		4096.0	2048.0	6144.0	4096.0	0	0.0	0.0
+1156	rori	rori_7_7		4096.0	4096.0	6144.0	6144.0	0	0.0	0.0
+1157	rori	rori_7_8		4096.0	6144.0	6144.0	8192.0	0	0.0	0.0
+1158	rori	rori_8_1		6144.0	-8192.0	8192.0	-6144.0	0	0.0	0.0
+1159	rori	rori_8_2		6144.0	-6144.0	8192.0	-4096.0	0	0.0	0.0
+1160	rori	rori_8_3		6144.0	-4096.0	8192.0	-2048.0	0	0.0	0.0
+1161	rori	rori_8_4		6144.0	-2048.0	8192.0	0.0	0	0.0	0.0
+1162	rori	rori_8_4	empireday_ceremony	6144.0	-2048.0	8192.0	0.0	0	0.0	0.0
+1163	rori	rori_8_5		6144.0	0.0	8192.0	2048.0	0	0.0	0.0
+1164	rori	rori_8_6		6144.0	2048.0	8192.0	4096.0	0	0.0	0.0
+1165	rori	rori_8_7		6144.0	4096.0	8192.0	6144.0	0	0.0	0.0
+1166	rori	rori_8_8		6144.0	6144.0	8192.0	8192.0	0	0.0	0.0
+1200	talus	talus_1_1		-8192.0	-8192.0	-6144.0	-6144.0	0	0.0	0.0
+1201	talus	talus_1_2		-8192.0	-6144.0	-6144.0	-4096.0	0	0.0	0.0
+1202	talus	talus_1_2	empireday_ceremony	-8192.0	-6144.0	-6144.0	-4096.0	0	0.0	0.0
+1203	talus	talus_1_3		-8192.0	-4096.0	-6144.0	-2048.0	0	0.0	0.0
+1204	talus	talus_1_4		-8192.0	-2048.0	-6144.0	0.0	0	0.0	0.0
+1205	talus	talus_1_5		-8192.0	0.0	-6144.0	2048.0	0	0.0	0.0
+1206	talus	talus_1_6		-8192.0	2048.0	-6144.0	4096.0	0	0.0	0.0
+1207	talus	talus_1_7		-8192.0	4096.0	-6144.0	6144.0	0	0.0	0.0
+1208	talus	talus_1_7	empireday_ceremony	-8192.0	4096.0	-6144.0	6144.0	0	0.0	0.0
+1209	talus	talus_1_8		-8192.0	6144.0	-6144.0	8192.0	0	0.0	0.0
+1210	talus	talus_2_1		-6144.0	-8192.0	-4096.0	-6144.0	0	0.0	0.0
+1211	talus	talus_2_2		-6144.0	-6144.0	-4096.0	-4096.0	0	0.0	0.0
+1212	talus	talus_2_3		-6144.0	-4096.0	-4096.0	-2048.0	0	0.0	0.0
+1213	talus	talus_2_4		-6144.0	-2048.0	-4096.0	0.0	0	0.0	0.0
+1214	talus	talus_2_5		-6144.0	0.0	-4096.0	2048.0	0	0.0	0.0
+1215	talus	talus_2_6		-6144.0	2048.0	-4096.0	4096.0	0	0.0	0.0
+1216	talus	talus_2_7		-6144.0	4096.0	-4096.0	6144.0	0	0.0	0.0
+1217	talus	talus_2_8		-6144.0	6144.0	-4096.0	8192.0	0	0.0	0.0
+1218	talus	talus_3_1		-4096.0	-8192.0	-2048.0	-6144.0	0	0.0	0.0
+1219	talus	talus_3_2		-4096.0	-6144.0	-2048.0	-4096.0	0	0.0	0.0
+1220	talus	talus_3_3		-4096.0	-4096.0	-2048.0	-2048.0	0	0.0	0.0
+1221	talus	talus_3_4		-4096.0	-2048.0	-2048.0	0.0	0	0.0	0.0
+1222	talus	talus_3_5		-4096.0	0.0	-2048.0	2048.0	0	0.0	0.0
+1223	talus	talus_3_6		-4096.0	2048.0	-2048.0	4096.0	0	0.0	0.0
+1224	talus	talus_3_7		-4096.0	4096.0	-2048.0	6144.0	0	0.0	0.0
+1225	talus	talus_3_8		-4096.0	6144.0	-2048.0	8192.0	0	0.0	0.0
+1226	talus	talus_4_1		-2048.0	-8192.0	0.0	-6144.0	0	0.0	0.0
+1227	talus	talus_4_2		-2048.0	-6144.0	0.0	-4096.0	0	0.0	0.0
+1228	talus	talus_4_3		-2048.0	-4096.0	0.0	-2048.0	0	0.0	0.0
+1229	talus	talus_4_4		-2048.0	-2048.0	0.0	0.0	0	0.0	0.0
+1230	talus	talus_4_5		-2048.0	0.0	0.0	2048.0	0	0.0	0.0
+1231	talus	talus_4_6		-2048.0	2048.0	0.0	4096.0	0	0.0	0.0
+1232	talus	talus_4_7		-2048.0	4096.0	0.0	6144.0	0	0.0	0.0
+1233	talus	talus_4_8		-2048.0	6144.0	0.0	8192.0	0	0.0	0.0
+1234	talus	talus_5_1		0.0	-8192.0	2048.0	-6144.0	0	0.0	0.0
+1235	talus	talus_5_2		0.0	-6144.0	2048.0	-4096.0	0	0.0	0.0
+1236	talus	talus_5_3		0.0	-4096.0	2048.0	-2048.0	0	0.0	0.0
+1237	talus	talus_5_3	lifeday	0.0	-4096.0	2048.0	-2048.0	0	0.0	0.0
+1238	talus	talus_5_4		0.0	-2048.0	2048.0	0.0	0	0.0	0.0
+1239	talus	talus_5_5		0.0	0.0	2048.0	2048.0	0	0.0	0.0
+1240	talus	talus_5_6		0.0	2048.0	2048.0	4096.0	0	0.0	0.0
+1241	talus	talus_5_7		0.0	4096.0	2048.0	6144.0	0	0.0	0.0
+1242	talus	talus_5_8		0.0	6144.0	2048.0	8192.0	0	0.0	0.0
+1243	talus	talus_6_1		2048.0	-8192.0	4096.0	-6144.0	0	0.0	0.0
+1244	talus	talus_6_2		2048.0	-6144.0	4096.0	-4096.0	0	0.0	0.0
+1245	talus	talus_6_3		2048.0	-4096.0	4096.0	-2048.0	0	0.0	0.0
+1246	talus	talus_6_4		2048.0	-2048.0	4096.0	0.0	0	0.0	0.0
+1247	talus	talus_6_5		2048.0	0.0	4096.0	2048.0	0	0.0	0.0
+1248	talus	talus_6_6		2048.0	2048.0	4096.0	4096.0	0	0.0	0.0
+1249	talus	talus_6_7		2048.0	4096.0	4096.0	6144.0	0	0.0	0.0
+1250	talus	talus_6_8		2048.0	6144.0	4096.0	8192.0	0	0.0	0.0
+1251	talus	talus_7_1		4096.0	-8192.0	6144.0	-6144.0	0	0.0	0.0
+1252	talus	talus_7_2		4096.0	-6144.0	6144.0	-4096.0	0	0.0	0.0
+1253	talus	talus_7_3		4096.0	-4096.0	6144.0	-2048.0	0	0.0	0.0
+1254	talus	talus_7_4		4096.0	-2048.0	6144.0	0.0	0	0.0	0.0
+1255	talus	talus_7_5		4096.0	0.0	6144.0	2048.0	0	0.0	0.0
+1256	talus	talus_7_6		4096.0	2048.0	6144.0	4096.0	0	0.0	0.0
+1257	talus	talus_7_7		4096.0	4096.0	6144.0	6144.0	0	0.0	0.0
+1258	talus	talus_7_8		4096.0	6144.0	6144.0	8192.0	0	0.0	0.0
+1259	talus	talus_8_1		6144.0	-8192.0	8192.0	-6144.0	0	0.0	0.0
+1260	talus	talus_8_2		6144.0	-6144.0	8192.0	-4096.0	0	0.0	0.0
+1261	talus	talus_8_2	empireday_ceremony	6144.0	-6144.0	8192.0	-4096.0	0	0.0	0.0
+1262	talus	talus_8_3		6144.0	-4096.0	8192.0	-2048.0	0	0.0	0.0
+1263	talus	talus_8_4		6144.0	-2048.0	8192.0	0.0	0	0.0	0.0
+1264	talus	talus_8_5		6144.0	0.0	8192.0	2048.0	0	0.0	0.0
+1265	talus	talus_8_6		6144.0	2048.0	8192.0	4096.0	0	0.0	0.0
+1266	talus	talus_8_7		6144.0	4096.0	8192.0	6144.0	0	0.0	0.0
+1267	talus	talus_8_8		6144.0	6144.0	8192.0	8192.0	0	0.0	0.0
+1300	dantooine	dantooine_1_1		-8192.0	-8192.0	-6144.0	-6144.0	0	0.0	0.0
+1301	dantooine	dantooine_1_2		-8192.0	-6144.0	-6144.0	-4096.0	0	0.0	0.0
+1302	dantooine	dantooine_1_3		-8192.0	-4096.0	-6144.0	-2048.0	0	0.0	0.0
+1303	dantooine	dantooine_1_4		-8192.0	-2048.0	-6144.0	0.0	0	0.0	0.0
+1304	dantooine	dantooine_1_5		-8192.0	0.0	-6144.0	2048.0	0	0.0	0.0
+1305	dantooine	dantooine_1_6		-8192.0	2048.0	-6144.0	4096.0	0	0.0	0.0
+1306	dantooine	dantooine_1_7		-8192.0	4096.0	-6144.0	6144.0	0	0.0	0.0
+1307	dantooine	dantooine_1_8		-8192.0	6144.0	-6144.0	8192.0	0	0.0	0.0
+1308	dantooine	dantooine_2_1		-6144.0	-8192.0	-4096.0	-6144.0	0	0.0	0.0
+1309	dantooine	dantooine_2_2		-6144.0	-6144.0	-4096.0	-4096.0	0	0.0	0.0
+1310	dantooine	dantooine_2_3		-6144.0	-4096.0	-4096.0	-2048.0	0	0.0	0.0
+1311	dantooine	dantooine_2_4		-6144.0	-2048.0	-4096.0	0.0	0	0.0	0.0
+1312	dantooine	dantooine_2_5		-6144.0	0.0	-4096.0	2048.0	0	0.0	0.0
+1313	dantooine	dantooine_2_6		-6144.0	2048.0	-4096.0	4096.0	0	0.0	0.0
+1314	dantooine	dantooine_2_7		-6144.0	4096.0	-4096.0	6144.0	0	0.0	0.0
+1315	dantooine	dantooine_2_8		-6144.0	6144.0	-4096.0	8192.0	0	0.0	0.0
+1316	dantooine	dantooine_3_1		-4096.0	-8192.0	-2048.0	-6144.0	0	0.0	0.0
+1317	dantooine	dantooine_3_2		-4096.0	-6144.0	-2048.0	-4096.0	0	0.0	0.0
+1318	dantooine	dantooine_3_3		-4096.0	-4096.0	-2048.0	-2048.0	0	0.0	0.0
+1319	dantooine	dantooine_3_4		-4096.0	-2048.0	-2048.0	0.0	0	0.0	0.0
+1320	dantooine	dantooine_3_5		-4096.0	0.0	-2048.0	2048.0	0	0.0	0.0
+1321	dantooine	dantooine_3_6		-4096.0	2048.0	-2048.0	4096.0	0	0.0	0.0
+1322	dantooine	dantooine_3_7		-4096.0	4096.0	-2048.0	6144.0	0	0.0	0.0
+1323	dantooine	dantooine_3_8		-4096.0	6144.0	-2048.0	8192.0	0	0.0	0.0
+1324	dantooine	dantooine_4_1		-2048.0	-8192.0	0.0	-6144.0	0	0.0	0.0
+1325	dantooine	dantooine_4_2		-2048.0	-6144.0	0.0	-4096.0	0	0.0	0.0
+1326	dantooine	dantooine_4_3		-2048.0	-4096.0	0.0	-2048.0	0	0.0	0.0
+1327	dantooine	dantooine_4_4		-2048.0	-2048.0	0.0	0.0	0	0.0	0.0
+1328	dantooine	dantooine_4_5		-2048.0	0.0	0.0	2048.0	0	0.0	0.0
+1329	dantooine	dantooine_4_6		-2048.0	2048.0	0.0	4096.0	0	0.0	0.0
+1330	dantooine	dantooine_4_7		-2048.0	4096.0	0.0	6144.0	0	0.0	0.0
+1331	dantooine	dantooine_4_8		-2048.0	6144.0	0.0	8192.0	0	0.0	0.0
+1332	dantooine	dantooine_5_1		0.0	-8192.0	2048.0	-6144.0	0	0.0	0.0
+1333	dantooine	dantooine_5_2		0.0	-6144.0	2048.0	-4096.0	0	0.0	0.0
+1334	dantooine	dantooine_5_3		0.0	-4096.0	2048.0	-2048.0	0	0.0	0.0
+1335	dantooine	dantooine_5_4		0.0	-2048.0	2048.0	0.0	0	0.0	0.0
+1336	dantooine	dantooine_5_5		0.0	0.0	2048.0	2048.0	0	0.0	0.0
+1337	dantooine	dantooine_5_6		0.0	2048.0	2048.0	4096.0	0	0.0	0.0
+1338	dantooine	dantooine_5_7		0.0	4096.0	2048.0	6144.0	0	0.0	0.0
+1339	dantooine	dantooine_5_8		0.0	6144.0	2048.0	8192.0	0	0.0	0.0
+1340	dantooine	dantooine_6_1		2048.0	-8192.0	4096.0	-6144.0	0	0.0	0.0
+1341	dantooine	dantooine_6_2		2048.0	-6144.0	4096.0	-4096.0	0	0.0	0.0
+1342	dantooine	dantooine_6_3		2048.0	-4096.0	4096.0	-2048.0	0	0.0	0.0
+1343	dantooine	dantooine_6_4		2048.0	-2048.0	4096.0	0.0	0	0.0	0.0
+1344	dantooine	dantooine_6_5		2048.0	0.0	4096.0	2048.0	0	0.0	0.0
+1345	dantooine	dantooine_6_6		2048.0	2048.0	4096.0	4096.0	0	0.0	0.0
+1346	dantooine	dantooine_6_7		2048.0	4096.0	4096.0	6144.0	0	0.0	0.0
+1347	dantooine	dantooine_6_8		2048.0	6144.0	4096.0	8192.0	0	0.0	0.0
+1348	dantooine	dantooine_7_1		4096.0	-8192.0	6144.0	-6144.0	0	0.0	0.0
+1349	dantooine	dantooine_7_2		4096.0	-6144.0	6144.0	-4096.0	0	0.0	0.0
+1350	dantooine	dantooine_7_3		4096.0	-4096.0	6144.0	-2048.0	0	0.0	0.0
+1351	dantooine	dantooine_7_4		4096.0	-2048.0	6144.0	0.0	0	0.0	0.0
+1352	dantooine	dantooine_7_5		4096.0	0.0	6144.0	2048.0	0	0.0	0.0
+1353	dantooine	dantooine_7_6		4096.0	2048.0	6144.0	4096.0	0	0.0	0.0
+1354	dantooine	dantooine_7_7		4096.0	4096.0	6144.0	6144.0	0	0.0	0.0
+1355	dantooine	dantooine_7_8		4096.0	6144.0	6144.0	8192.0	0	0.0	0.0
+1356	dantooine	dantooine_8_1		6144.0	-8192.0	8192.0	-6144.0	0	0.0	0.0
+1357	dantooine	dantooine_8_2		6144.0	-6144.0	8192.0	-4096.0	0	0.0	0.0
+1358	dantooine	dantooine_8_3		6144.0	-4096.0	8192.0	-2048.0	0	0.0	0.0
+1359	dantooine	dantooine_8_4		6144.0	-2048.0	8192.0	0.0	0	0.0	0.0
+1360	dantooine	dantooine_8_5		6144.0	0.0	8192.0	2048.0	0	0.0	0.0
+1361	dantooine	dantooine_8_6		6144.0	2048.0	8192.0	4096.0	0	0.0	0.0
+1362	dantooine	dantooine_8_7		6144.0	4096.0	8192.0	6144.0	0	0.0	0.0
+1363	dantooine	dantooine_8_8		6144.0	6144.0	8192.0	8192.0	0	0.0	0.0
+1400	dathomir	dathomir_1_1		-8192.0	-8192.0	-6144.0	-6144.0	0	0.0	0.0
+1401	dathomir	dathomir_1_2		-8192.0	-6144.0	-6144.0	-4096.0	0	0.0	0.0
+1402	dathomir	dathomir_1_3		-8192.0	-4096.0	-6144.0	-2048.0	0	0.0	0.0
+1403	dathomir	dathomir_1_4		-8192.0	-2048.0	-6144.0	0.0	0	0.0	0.0
+1404	dathomir	dathomir_1_5		-8192.0	0.0	-6144.0	2048.0	0	0.0	0.0
+1405	dathomir	dathomir_1_6		-8192.0	2048.0	-6144.0	4096.0	0	0.0	0.0
+1406	dathomir	dathomir_1_7		-8192.0	4096.0	-6144.0	6144.0	0	0.0	0.0
+1407	dathomir	dathomir_1_8		-8192.0	6144.0	-6144.0	8192.0	0	0.0	0.0
+1408	dathomir	dathomir_2_1		-6144.0	-8192.0	-4096.0	-6144.0	0	0.0	0.0
+1409	dathomir	dathomir_2_2		-6144.0	-6144.0	-4096.0	-4096.0	0	0.0	0.0
+1410	dathomir	dathomir_2_3		-6144.0	-4096.0	-4096.0	-2048.0	0	0.0	0.0
+1411	dathomir	dathomir_2_4		-6144.0	-2048.0	-4096.0	0.0	0	0.0	0.0
+1412	dathomir	dathomir_2_5		-6144.0	0.0	-4096.0	2048.0	0	0.0	0.0
+1413	dathomir	dathomir_2_6		-6144.0	2048.0	-4096.0	4096.0	0	0.0	0.0
+1414	dathomir	dathomir_2_7		-6144.0	4096.0	-4096.0	6144.0	0	0.0	0.0
+1415	dathomir	dathomir_2_8		-6144.0	6144.0	-4096.0	8192.0	0	0.0	0.0
+1416	dathomir	dathomir_3_1		-4096.0	-8192.0	-2048.0	-6144.0	0	0.0	0.0
+1417	dathomir	dathomir_3_2		-4096.0	-6144.0	-2048.0	-4096.0	0	0.0	0.0
+1418	dathomir	dathomir_3_3		-4096.0	-4096.0	-2048.0	-2048.0	0	0.0	0.0
+1419	dathomir	dathomir_3_4		-4096.0	-2048.0	-2048.0	0.0	0	0.0	0.0
+1420	dathomir	dathomir_3_5		-4096.0	0.0	-2048.0	2048.0	0	0.0	0.0
+1421	dathomir	dathomir_3_6		-4096.0	2048.0	-2048.0	4096.0	0	0.0	0.0
+1422	dathomir	dathomir_3_7		-4096.0	4096.0	-2048.0	6144.0	0	0.0	0.0
+1423	dathomir	dathomir_3_8		-4096.0	6144.0	-2048.0	8192.0	0	0.0	0.0
+1424	dathomir	dathomir_4_1		-2048.0	-8192.0	0.0	-6144.0	0	0.0	0.0
+1425	dathomir	dathomir_4_2		-2048.0	-6144.0	0.0	-4096.0	0	0.0	0.0
+1426	dathomir	dathomir_4_3		-2048.0	-4096.0	0.0	-2048.0	0	0.0	0.0
+1427	dathomir	dathomir_4_4		-2048.0	-2048.0	0.0	0.0	0	0.0	0.0
+1428	dathomir	dathomir_4_5		-2048.0	0.0	0.0	2048.0	0	0.0	0.0
+1429	dathomir	dathomir_4_6		-2048.0	2048.0	0.0	4096.0	0	0.0	0.0
+1430	dathomir	dathomir_4_7		-2048.0	4096.0	0.0	6144.0	0	0.0	0.0
+1431	dathomir	dathomir_4_8		-2048.0	6144.0	0.0	8192.0	0	0.0	0.0
+1432	dathomir	dathomir_5_1		0.0	-8192.0	2048.0	-6144.0	0	0.0	0.0
+1433	dathomir	dathomir_5_2		0.0	-6144.0	2048.0	-4096.0	0	0.0	0.0
+1434	dathomir	dathomir_5_3		0.0	-4096.0	2048.0	-2048.0	0	0.0	0.0
+1435	dathomir	dathomir_5_4		0.0	-2048.0	2048.0	0.0	0	0.0	0.0
+1436	dathomir	dathomir_5_5		0.0	0.0	2048.0	2048.0	0	0.0	0.0
+1437	dathomir	dathomir_5_6		0.0	2048.0	2048.0	4096.0	0	0.0	0.0
+1438	dathomir	dathomir_5_7		0.0	4096.0	2048.0	6144.0	0	0.0	0.0
+1439	dathomir	dathomir_5_8		0.0	6144.0	2048.0	8192.0	0	0.0	0.0
+1440	dathomir	dathomir_6_1		2048.0	-8192.0	4096.0	-6144.0	0	0.0	0.0
+1441	dathomir	dathomir_6_2		2048.0	-6144.0	4096.0	-4096.0	0	0.0	0.0
+1442	dathomir	dathomir_6_3		2048.0	-4096.0	4096.0	-2048.0	0	0.0	0.0
+1443	dathomir	dathomir_6_4		2048.0	-2048.0	4096.0	0.0	0	0.0	0.0
+1444	dathomir	dathomir_6_5		2048.0	0.0	4096.0	2048.0	0	0.0	0.0
+1445	dathomir	dathomir_6_6		2048.0	2048.0	4096.0	4096.0	0	0.0	0.0
+1446	dathomir	dathomir_6_7		2048.0	4096.0	4096.0	6144.0	0	0.0	0.0
+1447	dathomir	dathomir_6_8		2048.0	6144.0	4096.0	8192.0	0	0.0	0.0
+1448	dathomir	dathomir_7_1		4096.0	-8192.0	6144.0	-6144.0	0	0.0	0.0
+1449	dathomir	dathomir_7_2		4096.0	-6144.0	6144.0	-4096.0	0	0.0	0.0
+1450	dathomir	dathomir_7_3		4096.0	-4096.0	6144.0	-2048.0	0	0.0	0.0
+1451	dathomir	dathomir_7_4		4096.0	-2048.0	6144.0	0.0	0	0.0	0.0
+1452	dathomir	dathomir_7_5		4096.0	0.0	6144.0	2048.0	0	0.0	0.0
+1453	dathomir	dathomir_7_6		4096.0	2048.0	6144.0	4096.0	0	0.0	0.0
+1454	dathomir	dathomir_7_7		4096.0	4096.0	6144.0	6144.0	0	0.0	0.0
+1455	dathomir	dathomir_7_8		4096.0	6144.0	6144.0	8192.0	0	0.0	0.0
+1456	dathomir	dathomir_8_1		6144.0	-8192.0	8192.0	-6144.0	0	0.0	0.0
+1457	dathomir	dathomir_8_2		6144.0	-6144.0	8192.0	-4096.0	0	0.0	0.0
+1458	dathomir	dathomir_8_3		6144.0	-4096.0	8192.0	-2048.0	0	0.0	0.0
+1459	dathomir	dathomir_8_4		6144.0	-2048.0	8192.0	0.0	0	0.0	0.0
+1460	dathomir	dathomir_8_5		6144.0	0.0	8192.0	2048.0	0	0.0	0.0
+1461	dathomir	dathomir_8_6		6144.0	2048.0	8192.0	4096.0	0	0.0	0.0
+1462	dathomir	dathomir_8_7		6144.0	4096.0	8192.0	6144.0	0	0.0	0.0
+1463	dathomir	dathomir_8_8		6144.0	6144.0	8192.0	8192.0	0	0.0	0.0
+1500	endor	endor_1_1		-8192.0	-8192.0	-6144.0	-6144.0	0	0.0	0.0
+1501	endor	endor_1_2		-8192.0	-6144.0	-6144.0	-4096.0	0	0.0	0.0
+1502	endor	endor_1_3		-8192.0	-4096.0	-6144.0	-2048.0	0	0.0	0.0
+1503	endor	endor_1_4		-8192.0	-2048.0	-6144.0	0.0	0	0.0	0.0
+1504	endor	endor_1_5		-8192.0	0.0	-6144.0	2048.0	0	0.0	0.0
+1505	endor	endor_1_6		-8192.0	2048.0	-6144.0	4096.0	0	0.0	0.0
+1506	endor	endor_1_7		-8192.0	4096.0	-6144.0	6144.0	0	0.0	0.0
+1507	endor	endor_1_8		-8192.0	6144.0	-6144.0	8192.0	0	0.0	0.0
+1508	endor	endor_2_1		-6144.0	-8192.0	-4096.0	-6144.0	0	0.0	0.0
+1509	endor	endor_2_2		-6144.0	-6144.0	-4096.0	-4096.0	0	0.0	0.0
+1510	endor	endor_2_3		-6144.0	-4096.0	-4096.0	-2048.0	0	0.0	0.0
+1511	endor	endor_2_4		-6144.0	-2048.0	-4096.0	0.0	0	0.0	0.0
+1512	endor	endor_2_5		-6144.0	0.0	-4096.0	2048.0	0	0.0	0.0
+1513	endor	endor_2_6		-6144.0	2048.0	-4096.0	4096.0	0	0.0	0.0
+1514	endor	endor_2_7		-6144.0	4096.0	-4096.0	6144.0	0	0.0	0.0
+1515	endor	endor_2_8		-6144.0	6144.0	-4096.0	8192.0	0	0.0	0.0
+1516	endor	endor_3_1		-4096.0	-8192.0	-2048.0	-6144.0	0	0.0	0.0
+1517	endor	endor_3_2		-4096.0	-6144.0	-2048.0	-4096.0	0	0.0	0.0
+1518	endor	endor_3_3		-4096.0	-4096.0	-2048.0	-2048.0	0	0.0	0.0
+1519	endor	endor_3_4		-4096.0	-2048.0	-2048.0	0.0	0	0.0	0.0
+1520	endor	endor_3_5		-4096.0	0.0	-2048.0	2048.0	0	0.0	0.0
+1521	endor	endor_3_6		-4096.0	2048.0	-2048.0	4096.0	0	0.0	0.0
+1522	endor	endor_3_7		-4096.0	4096.0	-2048.0	6144.0	0	0.0	0.0
+1523	endor	endor_3_8		-4096.0	6144.0	-2048.0	8192.0	0	0.0	0.0
+1524	endor	endor_4_1		-2048.0	-8192.0	0.0	-6144.0	0	0.0	0.0
+1525	endor	endor_4_2		-2048.0	-6144.0	0.0	-4096.0	0	0.0	0.0
+1526	endor	endor_4_2	loveday	-2048.0	-6144.0	0.0	-4096.0	0	0.0	0.0
+1527	endor	endor_4_3		-2048.0	-4096.0	0.0	-2048.0	0	0.0	0.0
+1528	endor	endor_4_4		-2048.0	-2048.0	0.0	0.0	0	0.0	0.0
+1529	endor	endor_4_5		-2048.0	0.0	0.0	2048.0	0	0.0	0.0
+1530	endor	endor_4_6		-2048.0	2048.0	0.0	4096.0	0	0.0	0.0
+1531	endor	endor_4_7		-2048.0	4096.0	0.0	6144.0	0	0.0	0.0
+1532	endor	endor_4_8		-2048.0	6144.0	0.0	8192.0	0	0.0	0.0
+1533	endor	endor_5_1		0.0	-8192.0	2048.0	-6144.0	0	0.0	0.0
+1534	endor	endor_5_2		0.0	-6144.0	2048.0	-4096.0	0	0.0	0.0
+1535	endor	endor_5_3		0.0	-4096.0	2048.0	-2048.0	0	0.0	0.0
+1536	endor	endor_5_4		0.0	-2048.0	2048.0	0.0	0	0.0	0.0
+1537	endor	endor_5_5		0.0	0.0	2048.0	2048.0	0	0.0	0.0
+1538	endor	endor_5_6		0.0	2048.0	2048.0	4096.0	0	0.0	0.0
+1539	endor	endor_5_7		0.0	4096.0	2048.0	6144.0	0	0.0	0.0
+1540	endor	endor_5_8		0.0	6144.0	2048.0	8192.0	0	0.0	0.0
+1541	endor	endor_6_1		2048.0	-8192.0	4096.0	-6144.0	0	0.0	0.0
+1542	endor	endor_6_2		2048.0	-6144.0	4096.0	-4096.0	0	0.0	0.0
+1543	endor	endor_6_3		2048.0	-4096.0	4096.0	-2048.0	0	0.0	0.0
+1544	endor	endor_6_4		2048.0	-2048.0	4096.0	0.0	0	0.0	0.0
+1545	endor	endor_6_5		2048.0	0.0	4096.0	2048.0	0	0.0	0.0
+1546	endor	endor_6_6		2048.0	2048.0	4096.0	4096.0	0	0.0	0.0
+1547	endor	endor_6_7		2048.0	4096.0	4096.0	6144.0	0	0.0	0.0
+1548	endor	endor_6_8		2048.0	6144.0	4096.0	8192.0	0	0.0	0.0
+1549	endor	endor_7_1		4096.0	-8192.0	6144.0	-6144.0	0	0.0	0.0
+1550	endor	endor_7_2		4096.0	-6144.0	6144.0	-4096.0	0	0.0	0.0
+1551	endor	endor_7_3		4096.0	-4096.0	6144.0	-2048.0	0	0.0	0.0
+1552	endor	endor_7_4		4096.0	-2048.0	6144.0	0.0	0	0.0	0.0
+1553	endor	endor_7_5		4096.0	0.0	6144.0	2048.0	0	0.0	0.0
+1554	endor	endor_7_6		4096.0	2048.0	6144.0	4096.0	0	0.0	0.0
+1555	endor	endor_7_7		4096.0	4096.0	6144.0	6144.0	0	0.0	0.0
+1556	endor	endor_7_8		4096.0	6144.0	6144.0	8192.0	0	0.0	0.0
+1557	endor	endor_8_1		6144.0	-8192.0	8192.0	-6144.0	0	0.0	0.0
+1558	endor	endor_8_2		6144.0	-6144.0	8192.0	-4096.0	0	0.0	0.0
+1559	endor	endor_8_3		6144.0	-4096.0	8192.0	-2048.0	0	0.0	0.0
+1560	endor	endor_8_4		6144.0	-2048.0	8192.0	0.0	0	0.0	0.0
+1561	endor	endor_8_5		6144.0	0.0	8192.0	2048.0	0	0.0	0.0
+1562	endor	endor_8_6		6144.0	2048.0	8192.0	4096.0	0	0.0	0.0
+1563	endor	endor_8_7		6144.0	4096.0	8192.0	6144.0	0	0.0	0.0
+1564	endor	endor_8_8		6144.0	6144.0	8192.0	8192.0	0	0.0	0.0
+1600	yavin4	yavin4_1_1		-8192.0	-8192.0	-6144.0	-6144.0	0	0.0	0.0
+1601	yavin4	yavin4_1_2		-8192.0	-6144.0	-6144.0	-4096.0	0	0.0	0.0
+1602	yavin4	yavin4_1_3		-8192.0	-4096.0	-6144.0	-2048.0	0	0.0	0.0
+1603	yavin4	yavin4_1_4		-8192.0	-2048.0	-6144.0	0.0	0	0.0	0.0
+1604	yavin4	yavin4_1_5		-8192.0	0.0	-6144.0	2048.0	0	0.0	0.0
+1605	yavin4	yavin4_1_6		-8192.0	2048.0	-6144.0	4096.0	0	0.0	0.0
+1606	yavin4	yavin4_1_7		-8192.0	4096.0	-6144.0	6144.0	0	0.0	0.0
+1607	yavin4	yavin4_1_8		-8192.0	6144.0	-6144.0	8192.0	0	0.0	0.0
+1608	yavin4	yavin4_2_1		-6144.0	-8192.0	-4096.0	-6144.0	0	0.0	0.0
+1609	yavin4	yavin4_2_2		-6144.0	-6144.0	-4096.0	-4096.0	0	0.0	0.0
+1610	yavin4	yavin4_2_3		-6144.0	-4096.0	-4096.0	-2048.0	0	0.0	0.0
+1611	yavin4	yavin4_2_4		-6144.0	-2048.0	-4096.0	0.0	0	0.0	0.0
+1612	yavin4	yavin4_2_5		-6144.0	0.0	-4096.0	2048.0	0	0.0	0.0
+1613	yavin4	yavin4_2_6		-6144.0	2048.0	-4096.0	4096.0	0	0.0	0.0
+1614	yavin4	yavin4_2_7		-6144.0	4096.0	-4096.0	6144.0	0	0.0	0.0
+1615	yavin4	yavin4_2_8		-6144.0	6144.0	-4096.0	8192.0	0	0.0	0.0
+1616	yavin4	yavin4_3_1		-4096.0	-8192.0	-2048.0	-6144.0	0	0.0	0.0
+1617	yavin4	yavin4_3_2		-4096.0	-6144.0	-2048.0	-4096.0	0	0.0	0.0
+1618	yavin4	yavin4_3_3		-4096.0	-4096.0	-2048.0	-2048.0	0	0.0	0.0
+1619	yavin4	yavin4_3_4		-4096.0	-2048.0	-2048.0	0.0	0	0.0	0.0
+1620	yavin4	yavin4_3_5		-4096.0	0.0	-2048.0	2048.0	0	0.0	0.0
+1621	yavin4	yavin4_3_6		-4096.0	2048.0	-2048.0	4096.0	0	0.0	0.0
+1622	yavin4	yavin4_3_7		-4096.0	4096.0	-2048.0	6144.0	0	0.0	0.0
+1623	yavin4	yavin4_3_8		-4096.0	6144.0	-2048.0	8192.0	0	0.0	0.0
+1624	yavin4	yavin4_4_1		-2048.0	-8192.0	0.0	-6144.0	0	0.0	0.0
+1625	yavin4	yavin4_4_2		-2048.0	-6144.0	0.0	-4096.0	0	0.0	0.0
+1626	yavin4	yavin4_4_3		-2048.0	-4096.0	0.0	-2048.0	0	0.0	0.0
+1627	yavin4	yavin4_4_4		-2048.0	-2048.0	0.0	0.0	0	0.0	0.0
+1628	yavin4	yavin4_4_5		-2048.0	0.0	0.0	2048.0	0	0.0	0.0
+1629	yavin4	yavin4_4_6		-2048.0	2048.0	0.0	4096.0	0	0.0	0.0
+1630	yavin4	yavin4_4_7		-2048.0	4096.0	0.0	6144.0	0	0.0	0.0
+1631	yavin4	yavin4_4_7	empireday_ceremony	-2048.0	4096.0	0.0	6144.0	0	0.0	0.0
+1632	yavin4	yavin4_4_8		-2048.0	6144.0	0.0	8192.0	0	0.0	0.0
+1633	yavin4	yavin4_5_1		0.0	-8192.0	2048.0	-6144.0	0	0.0	0.0
+1634	yavin4	yavin4_5_2		0.0	-6144.0	2048.0	-4096.0	0	0.0	0.0
+1635	yavin4	yavin4_5_3		0.0	-4096.0	2048.0	-2048.0	0	0.0	0.0
+1636	yavin4	yavin4_5_4		0.0	-2048.0	2048.0	0.0	0	0.0	0.0
+1637	yavin4	yavin4_5_5		0.0	0.0	2048.0	2048.0	0	0.0	0.0
+1638	yavin4	yavin4_5_6		0.0	2048.0	2048.0	4096.0	0	0.0	0.0
+1639	yavin4	yavin4_5_7		0.0	4096.0	2048.0	6144.0	0	0.0	0.0
+1640	yavin4	yavin4_5_8		0.0	6144.0	2048.0	8192.0	0	0.0	0.0
+1641	yavin4	yavin4_6_1		2048.0	-8192.0	4096.0	-6144.0	0	0.0	0.0
+1642	yavin4	yavin4_6_1	empireday_ceremony	2048.0	-8192.0	4096.0	-6144.0	0	0.0	0.0
+1643	yavin4	yavin4_6_2		2048.0	-6144.0	4096.0	-4096.0	0	0.0	0.0
+1644	yavin4	yavin4_6_3		2048.0	-4096.0	4096.0	-2048.0	0	0.0	0.0
+1645	yavin4	yavin4_6_4		2048.0	-2048.0	4096.0	0.0	0	0.0	0.0
+1646	yavin4	yavin4_6_5		2048.0	0.0	4096.0	2048.0	0	0.0	0.0
+1647	yavin4	yavin4_6_6		2048.0	2048.0	4096.0	4096.0	0	0.0	0.0
+1648	yavin4	yavin4_6_7		2048.0	4096.0	4096.0	6144.0	0	0.0	0.0
+1649	yavin4	yavin4_6_8		2048.0	6144.0	4096.0	8192.0	0	0.0	0.0
+1650	yavin4	yavin4_7_1		4096.0	-8192.0	6144.0	-6144.0	0	0.0	0.0
+1651	yavin4	yavin4_7_2		4096.0	-6144.0	6144.0	-4096.0	0	0.0	0.0
+1652	yavin4	yavin4_7_3		4096.0	-4096.0	6144.0	-2048.0	0	0.0	0.0
+1653	yavin4	yavin4_7_4		4096.0	-2048.0	6144.0	0.0	0	0.0	0.0
+1654	yavin4	yavin4_7_5		4096.0	0.0	6144.0	2048.0	0	0.0	0.0
+1655	yavin4	yavin4_7_6		4096.0	2048.0	6144.0	4096.0	0	0.0	0.0
+1656	yavin4	yavin4_7_7		4096.0	4096.0	6144.0	6144.0	0	0.0	0.0
+1657	yavin4	yavin4_7_8		4096.0	6144.0	6144.0	8192.0	0	0.0	0.0
+1658	yavin4	yavin4_8_1		6144.0	-8192.0	8192.0	-6144.0	0	0.0	0.0
+1659	yavin4	yavin4_8_2		6144.0	-6144.0	8192.0	-4096.0	0	0.0	0.0
+1660	yavin4	yavin4_8_3		6144.0	-4096.0	8192.0	-2048.0	0	0.0	0.0
+1661	yavin4	yavin4_8_4		6144.0	-2048.0	8192.0	0.0	0	0.0	0.0
+1662	yavin4	yavin4_8_5		6144.0	0.0	8192.0	2048.0	0	0.0	0.0
+1663	yavin4	yavin4_8_6		6144.0	2048.0	8192.0	4096.0	0	0.0	0.0
+1664	yavin4	yavin4_8_7		6144.0	4096.0	8192.0	6144.0	0	0.0	0.0
+1665	yavin4	yavin4_8_8		6144.0	6144.0	8192.0	8192.0	0	0.0	0.0
+1700	lok	lok_1_1		-8192.0	-8192.0	-6144.0	-6144.0	0	0.0	0.0
+1701	lok	lok_1_2		-8192.0	-6144.0	-6144.0	-4096.0	0	0.0	0.0
+1702	lok	lok_1_3		-8192.0	-4096.0	-6144.0	-2048.0	0	0.0	0.0
+1703	lok	lok_1_4		-8192.0	-2048.0	-6144.0	0.0	0	0.0	0.0
+1704	lok	lok_1_5		-8192.0	0.0	-6144.0	2048.0	0	0.0	0.0
+1705	lok	lok_1_6		-8192.0	2048.0	-6144.0	4096.0	0	0.0	0.0
+1706	lok	lok_1_7		-8192.0	4096.0	-6144.0	6144.0	0	0.0	0.0
+1707	lok	lok_1_8		-8192.0	6144.0	-6144.0	8192.0	0	0.0	0.0
+1708	lok	lok_2_1		-6144.0	-8192.0	-4096.0	-6144.0	0	0.0	0.0
+1709	lok	lok_2_2		-6144.0	-6144.0	-4096.0	-4096.0	0	0.0	0.0
+1710	lok	lok_2_3		-6144.0	-4096.0	-4096.0	-2048.0	0	0.0	0.0
+1711	lok	lok_2_4		-6144.0	-2048.0	-4096.0	0.0	0	0.0	0.0
+1712	lok	lok_2_5		-6144.0	0.0	-4096.0	2048.0	0	0.0	0.0
+1713	lok	lok_2_6		-6144.0	2048.0	-4096.0	4096.0	0	0.0	0.0
+1714	lok	lok_2_7		-6144.0	4096.0	-4096.0	6144.0	0	0.0	0.0
+1715	lok	lok_2_8		-6144.0	6144.0	-4096.0	8192.0	0	0.0	0.0
+1716	lok	lok_3_1		-4096.0	-8192.0	-2048.0	-6144.0	0	0.0	0.0
+1717	lok	lok_3_2		-4096.0	-6144.0	-2048.0	-4096.0	0	0.0	0.0
+1718	lok	lok_3_3		-4096.0	-4096.0	-2048.0	-2048.0	0	0.0	0.0
+1719	lok	lok_3_4		-4096.0	-2048.0	-2048.0	0.0	0	0.0	0.0
+1720	lok	lok_3_5		-4096.0	0.0	-2048.0	2048.0	0	0.0	0.0
+1721	lok	lok_3_6		-4096.0	2048.0	-2048.0	4096.0	0	0.0	0.0
+1722	lok	lok_3_7		-4096.0	4096.0	-2048.0	6144.0	0	0.0	0.0
+1723	lok	lok_3_8		-4096.0	6144.0	-2048.0	8192.0	0	0.0	0.0
+1724	lok	lok_4_1		-2048.0	-8192.0	0.0	-6144.0	0	0.0	0.0
+1725	lok	lok_4_2		-2048.0	-6144.0	0.0	-4096.0	0	0.0	0.0
+1726	lok	lok_4_3		-2048.0	-4096.0	0.0	-2048.0	0	0.0	0.0
+1727	lok	lok_4_3	empireday_ceremony	-2048.0	-4096.0	0.0	-2048.0	0	0.0	0.0
+1728	lok	lok_4_4		-2048.0	-2048.0	0.0	0.0	0	0.0	0.0
+1729	lok	lok_4_5		-2048.0	0.0	0.0	2048.0	0	0.0	0.0
+1730	lok	lok_4_6		-2048.0	2048.0	0.0	4096.0	0	0.0	0.0
+1731	lok	lok_4_7		-2048.0	4096.0	0.0	6144.0	0	0.0	0.0
+1732	lok	lok_4_8		-2048.0	6144.0	0.0	8192.0	0	0.0	0.0
+1733	lok	lok_5_1		0.0	-8192.0	2048.0	-6144.0	0	0.0	0.0
+1734	lok	lok_5_2		0.0	-6144.0	2048.0	-4096.0	0	0.0	0.0
+1735	lok	lok_5_3		0.0	-4096.0	2048.0	-2048.0	0	0.0	0.0
+1736	lok	lok_5_4		0.0	-2048.0	2048.0	0.0	0	0.0	0.0
+1737	lok	lok_5_5		0.0	0.0	2048.0	2048.0	0	0.0	0.0
+1738	lok	lok_5_6		0.0	2048.0	2048.0	4096.0	0	0.0	0.0
+1739	lok	lok_5_7		0.0	4096.0	2048.0	6144.0	0	0.0	0.0
+1740	lok	lok_5_7	empireday_ceremony	0.0	4096.0	2048.0	6144.0	0	0.0	0.0
+1741	lok	lok_5_8		0.0	6144.0	2048.0	8192.0	0	0.0	0.0
+1742	lok	lok_6_1		2048.0	-8192.0	4096.0	-6144.0	0	0.0	0.0
+1743	lok	lok_6_2		2048.0	-6144.0	4096.0	-4096.0	0	0.0	0.0
+1744	lok	lok_6_3		2048.0	-4096.0	4096.0	-2048.0	0	0.0	0.0
+1745	lok	lok_6_4		2048.0	-2048.0	4096.0	0.0	0	0.0	0.0
+1746	lok	lok_6_5		2048.0	0.0	4096.0	2048.0	0	0.0	0.0
+1747	lok	lok_6_6		2048.0	2048.0	4096.0	4096.0	0	0.0	0.0
+1748	lok	lok_6_7		2048.0	4096.0	4096.0	6144.0	0	0.0	0.0
+1749	lok	lok_6_8		2048.0	6144.0	4096.0	8192.0	0	0.0	0.0
+1750	lok	lok_7_1		4096.0	-8192.0	6144.0	-6144.0	0	0.0	0.0
+1751	lok	lok_7_2		4096.0	-6144.0	6144.0	-4096.0	0	0.0	0.0
+1752	lok	lok_7_3		4096.0	-4096.0	6144.0	-2048.0	0	0.0	0.0
+1753	lok	lok_7_4		4096.0	-2048.0	6144.0	0.0	0	0.0	0.0
+1754	lok	lok_7_5		4096.0	0.0	6144.0	2048.0	0	0.0	0.0
+1755	lok	lok_7_6		4096.0	2048.0	6144.0	4096.0	0	0.0	0.0
+1756	lok	lok_7_7		4096.0	4096.0	6144.0	6144.0	0	0.0	0.0
+1757	lok	lok_7_8		4096.0	6144.0	6144.0	8192.0	0	0.0	0.0
+1758	lok	lok_8_1		6144.0	-8192.0	8192.0	-6144.0	0	0.0	0.0
+1759	lok	lok_8_2		6144.0	-6144.0	8192.0	-4096.0	0	0.0	0.0
+1760	lok	lok_8_3		6144.0	-4096.0	8192.0	-2048.0	0	0.0	0.0
+1761	lok	lok_8_4		6144.0	-2048.0	8192.0	0.0	0	0.0	0.0
+1762	lok	lok_8_5		6144.0	0.0	8192.0	2048.0	0	0.0	0.0
+1763	lok	lok_8_6		6144.0	2048.0	8192.0	4096.0	0	0.0	0.0
+1764	lok	lok_8_7		6144.0	4096.0	8192.0	6144.0	0	0.0	0.0
+1765	lok	lok_8_8		6144.0	6144.0	8192.0	8192.0	0	0.0	0.0
+1800	mustafar	mustafar_main_nw		-6880.0	2848.0	-2304.0	6976.0	1	-2880.0	2976.0
+1801	mustafar	mustafar_main_ne		-2304.0	2848.0	1120.0	6976.0	1	-2880.0	2976.0
+1802	mustafar	mustafar_main_sw		-6880.0	-1024.0	-3480.0	2848.0	1	-2880.0	2976.0
+1803	mustafar	mustafar_main_se		-3480.0	-1024.0	1120.0	2848.0	1	-2880.0	2976.0
+1804	mustafar	mustafar_volcano		1552.0	6016.0	2576.0	7040.0	0	0.0	0.0
+1805	mustafar	mustafar_volcano		1552.0	4592.0	2576.0	5616.0	0	0.0	0.0
+1806	mustafar	mustafar_volcano		1552.0	3168.0	2576.0	4192.0	0	0.0	0.0
+1807	mustafar	mustafar_volcano		1552.0	1744.0	2576.0	2768.0	0	0.0	0.0
+1808	mustafar	mustafar_volcano		1552.0	320.0	2576.0	1344.0	0	0.0	0.0
+1809	mustafar	mustafar_volcano		1552.0	-1104.0	2576.0	-80.0	0	0.0	0.0
+1810	mustafar	mustafar_volcano		3040.0	6014.0	4064.0	7038.0	0	0.0	0.0
+1811	mustafar	mustafar_volcano		3040.0	4590.0	4064.0	5614.0	0	0.0	0.0
+1812	mustafar	mustafar_volcano		3040.0	3166.0	4064.0	4190.0	0	0.0	0.0
+1813	mustafar	mustafar_volcano		3040.0	1742.0	4064.0	2766.0	0	0.0	0.0
+1814	mustafar	mustafar_volcano		3040.0	318.0	4064.0	1342.0	0	0.0	0.0
+1815	mustafar	mustafar_volcano		3040.0	-1106.0	4064.0	-82.0	0	0.0	0.0
+1816	mustafar	mustafar_droid_army		4560.0	5952.0	5072.0	6464.0	0	0.0	0.0
+1817	mustafar	mustafar_droid_army		4560.0	5020.0	5072.0	5532.0	0	0.0	0.0
+1818	mustafar	mustafar_droid_army		4560.0	4032.0	5072.0	4544.0	0	0.0	0.0
+1819	mustafar	mustafar_droid_army		4560.0	3088.0	5072.0	3600.0	0	0.0	0.0
+1820	mustafar	mustafar_droid_army		4560.0	2160.0	5072.0	2672.0	0	0.0	0.0
+1821	mustafar	mustafar_droid_army		4560.0	1168.0	5072.0	1680.0	0	0.0	0.0
+1822	mustafar	mustafar_droid_army		4560.0	192.0	5072.0	704.0	0	0.0	0.0
+1823	mustafar	mustafar_droid_army		4560.0	-741.0	5072.0	-229.0	0	0.0	0.0
+1824	mustafar	uplink_cave		5700.0	6000.0	6200.0	6500.0	0	0.0	0.0
+1825	mustafar	uplink_cave		5700.0	5300.0	6200.0	5800.0	0	0.0	0.0
+1826	mustafar	uplink_cave		5700.0	4600.0	6200.0	5100.0	0	0.0	0.0
+1827	mustafar	uplink_cave		5700.0	3900.0	6200.0	4400.0	0	0.0	0.0
+1828	mustafar	uplink_cave		5700.0	3200.0	6200.0	3700.0	0	0.0	0.0
+1829	mustafar	uplink_cave		5700.0	2500.0	6200.0	3000.0	0	0.0	0.0
+1830	mustafar	uplink_cave		5700.0	1800.0	6200.0	2300.0	0	0.0	0.0
+1831	mustafar	uplink_cave		5700.0	1100.0	6200.0	1600.0	0	0.0	0.0
+1832	mustafar	obiwan_crystal_cave		6500.0	6700.0	7000.0	7200.0	0	0.0	0.0
+1833	mustafar	obiwan_crystal_cave		6500.0	6000.0	7000.0	6500.0	0	0.0	0.0
+1834	mustafar	obiwan_crystal_cave		6500.0	5300.0	7000.0	5800.0	0	0.0	0.0
+1835	mustafar	obiwan_crystal_cave		6500.0	4600.0	7000.0	5100.0	0	0.0	0.0
+1836	mustafar	obiwan_crystal_cave		6500.0	3900.0	7000.0	4400.0	0	0.0	0.0
+1837	mustafar	obiwan_crystal_cave		6500.0	3200.0	7000.0	3700.0	0	0.0	0.0
+1838	mustafar	obiwan_crystal_cave		6500.0	2500.0	7000.0	3000.0	0	0.0	0.0
+1839	mustafar	obiwan_crystal_cave		6500.0	1800.0	7000.0	2300.0	0	0.0	0.0
+1840	mustafar	obiwan_crystal_cave		6500.0	1100.0	7000.0	1600.0	0	0.0	0.0
+1841	mustafar	obiwan_crystal_cave		6500.0	400.0	7000.0	900.0	0	0.0	0.0
+1842	mustafar	obiwan_crystal_cave		6500.0	-300.0	7000.0	200.0	0	0.0	0.0
+1843	mustafar	obiwan_crystal_cave		6500.0	-1000.0	7000.0	-500.0	0	0.0	0.0
+1844	mustafar	decrepit_droid_factory		-7000.0	-3000.0	-6500.0	-2500.0	0	0.0	0.0
+1845	mustafar	decrepit_droid_factory		-6300.0	-3000.0	-5800.0	-2500.0	0	0.0	0.0
+1846	mustafar	decrepit_droid_factory		-5600.0	-3000.0	-5100.0	-2500.0	0	0.0	0.0
+1847	mustafar	decrepit_droid_factory		-4900.0	-3000.0	-4400.0	-2500.0	0	0.0	0.0
+1848	mustafar	decrepit_droid_factory		-4200.0	-3000.0	-3700.0	-2500.0	0	0.0	0.0
+1849	mustafar	decrepit_droid_factory		-3500.0	-3000.0	-3000.0	-2500.0	0	0.0	0.0
+1850	mustafar	decrepit_droid_factory		-2800.0	-3000.0	-2300.0	-2500.0	0	0.0	0.0
+1851	mustafar	decrepit_droid_factory		-2100.0	-3000.0	-1600.0	-2500.0	0	0.0	0.0
+1852	mustafar	working_droid_factory		-7000.0	-4000.0	-6500.0	-3500.0	0	0.0	0.0
+1853	mustafar	working_droid_factory		-6300.0	-4000.0	-5800.0	-3500.0	0	0.0	0.0
+1854	mustafar	working_droid_factory		-5600.0	-4000.0	-5100.0	-3500.0	0	0.0	0.0
+1855	mustafar	working_droid_factory		-4900.0	-4000.0	-4400.0	-3500.0	0	0.0	0.0
+1856	mustafar	working_droid_factory		-4200.0	-4000.0	-3700.0	-3500.0	0	0.0	0.0
+1857	mustafar	working_droid_factory		-3500.0	-4000.0	-3000.0	-3500.0	0	0.0	0.0
+1858	mustafar	working_droid_factory		-2800.0	-4000.0	-2300.0	-3500.0	0	0.0	0.0
+1859	mustafar	working_droid_factory		-2100.0	-4000.0	-1600.0	-3500.0	0	0.0	0.0
+1860	mustafar	working_droid_factory		-1400.0	-4000.0	-900.0	-3500.0	0	0.0	0.0
+1861	mustafar	working_droid_factory		-700.0	-4000.0	-200.0	-3500.0	0	0.0	0.0
+1862	mustafar	working_droid_factory		0.0	-4000.0	500.0	-3500.0	0	0.0	0.0
+1863	mustafar	working_droid_factory		700.0	-4000.0	1200.0	-3500.0	0	0.0	0.0
+1864	mustafar	old_republic_facility		-7000.0	-5000.0	-6500.0	-4500.0	0	0.0	0.0
+1865	mustafar	old_republic_facility		-6300.0	-5000.0	-5800.0	-4500.0	0	0.0	0.0
+1866	mustafar	old_republic_facility		-5600.0	-5000.0	-5100.0	-4500.0	0	0.0	0.0
+1867	mustafar	old_republic_facility		-4900.0	-5000.0	-4400.0	-4500.0	0	0.0	0.0
+1868	mustafar	old_republic_facility		-4200.0	-5000.0	-3700.0	-4500.0	0	0.0	0.0
+1869	mustafar	old_republic_facility		-3500.0	-5000.0	-3000.0	-4500.0	0	0.0	0.0
+1870	mustafar	old_republic_facility		-2800.0	-5000.0	-2300.0	-4500.0	0	0.0	0.0
+1871	mustafar	old_republic_facility		-2100.0	-5000.0	-1600.0	-4500.0	0	0.0	0.0
+1872	mustafar	old_republic_facility		-1400.0	-5000.0	-900.0	-4500.0	0	0.0	0.0
+1873	mustafar	old_republic_facility		-700.0	-5000.0	-200.0	-4500.0	0	0.0	0.0
+1874	mustafar	old_republic_facility		0.0	-5000.0	500.0	-4500.0	0	0.0	0.0
+1875	mustafar	old_republic_facility		700.0	-5000.0	1200.0	-4500.0	0	0.0	0.0
+1876	mustafar	sher_kar_cave		-7000.0	-6000.0	-6500.0	-5500.0	0	0.0	0.0
+1877	mustafar	sher_kar_cave		-6300.0	-6000.0	-5800.0	-5500.0	0	0.0	0.0
+1878	mustafar	sher_kar_cave		-5600.0	-6000.0	-5100.0	-5500.0	0	0.0	0.0
+1879	mustafar	sher_kar_cave		-4900.0	-6000.0	-4400.0	-5500.0	0	0.0	0.0
+1880	mustafar	sher_kar_cave		-4200.0	-6000.0	-3700.0	-5500.0	0	0.0	0.0
+1881	mustafar	sher_kar_cave		-3500.0	-6000.0	-3000.0	-5500.0	0	0.0	0.0
+1882	mustafar	sher_kar_cave		-2800.0	-6000.0	-2300.0	-5500.0	0	0.0	0.0
+1883	mustafar	sher_kar_cave		-2100.0	-6000.0	-1600.0	-5500.0	0	0.0	0.0
+1884	mustafar	sher_kar_cave		-1400.0	-6000.0	-900.0	-5500.0	0	0.0	0.0
+1885	mustafar	sher_kar_cave		-700.0	-6000.0	-200.0	-5500.0	0	0.0	0.0
+1886	mustafar	sher_kar_cave		0.0	-6000.0	500.0	-5500.0	0	0.0	0.0
+1887	mustafar	sher_kar_cave		700.0	-6000.0	1200.0	-5500.0	0	0.0	0.0
+1900	dungeon1	npe_shared_station		-300.0	0.0	0.0	300.0	1	-150.0	150.0
+1901	dungeon1	npe_shared_station		-1200.0	0.0	-900.0	300.0	1	-1050.0	150.0
+1902	dungeon1	npe_shared_station		-2100.0	0.0	-1800.0	300.0	1	-1950.0	150.0
+1903	dungeon1	npe_shared_station		-3000.0	0.0	-2700.0	300.0	1	-2850.0	150.0
+1904	dungeon1	npe_shared_station		-3900.0	0.0	-3600.0	300.0	1	-3750.0	150.0
+1905	dungeon1	npe_shared_station		-4800.0	0.0	-4500.0	300.0	1	-4650.0	150.0
+1906	dungeon1	nova_orion_station		-5700.0	0.0	-5400.0	300.0	1	-5550.0	150.0
+1907	dungeon1	npe_dungeon		-400.0	800.0	0.0	1350.0	1	-200.0	1075.0
+1908	dungeon1	npe_dungeon		-1300.0	800.0	-900.0	1350.0	1	-1100.0	1075.0
+1909	dungeon1	npe_dungeon		-2200.0	800.0	-1800.0	1350.0	1	-2000.0	1075.0
+1910	dungeon1	npe_dungeon		-3100.0	800.0	-2700.0	1350.0	1	-2900.0	1075.0
+1911	dungeon1	npe_dungeon		-4000.0	800.0	-3600.0	1350.0	1	-3800.0	1075.0
+1912	dungeon1	npe_dungeon		-4900.0	800.0	-4500.0	1350.0	1	-4700.0	1075.0
+1913	dungeon1	heroic_axkva_min		-7000.0	-7000.0	-6500.0	-6500.0	1	-6750.0	-6750.0
+1914	dungeon1	heroic_axkva_min		-6000.0	-7000.0	-5500.0	-6500.0	1	-5750.0	-6750.0
+1915	dungeon1	heroic_axkva_min		-5000.0	-7000.0	-4500.0	-6500.0	1	-4750.0	-6750.0
+1916	dungeon1	heroic_axkva_min		-4000.0	-7000.0	-3500.0	-6500.0	1	-3750.0	-6750.0
+1917	dungeon1	heroic_axkva_min		-3000.0	-7000.0	-2500.0	-6500.0	1	-2750.0	-6750.0
+1918	dungeon1	heroic_axkva_min		-2000.0	-7000.0	-1500.0	-6500.0	1	-1750.0	-6750.0
+1919	dungeon1	heroic_axkva_min		-1000.0	-7000.0	-500.0	-6500.0	1	-750.0	-6750.0
+1920	dungeon1	heroic_axkva_min		0.0	-7000.0	500.0	-6500.0	1	250.0	-6750.0
+1921	dungeon1	heroic_axkva_min		1000.0	-7000.0	1500.0	-6500.0	1	1250.0	-6750.0
+1922	dungeon1	heroic_axkva_min		2000.0	-7000.0	2500.0	-6500.0	1	2250.0	-6750.0
+1923	dungeon1	heroic_ig88		-7000.0	-6000.0	-6500.0	-5500.0	1	-6750.0	-5750.0
+1924	dungeon1	heroic_ig88		-6000.0	-6000.0	-5500.0	-5500.0	1	-5750.0	-5750.0
+1925	dungeon1	heroic_ig88		-5000.0	-6000.0	-4500.0	-5500.0	1	-4750.0	-5750.0
+1926	dungeon1	heroic_ig88		-4000.0	-6000.0	-3500.0	-5500.0	1	-3750.0	-5750.0
+1927	dungeon1	heroic_ig88		-3000.0	-6000.0	-2500.0	-5500.0	1	-2750.0	-5750.0
+1928	dungeon1	heroic_ig88		-2000.0	-6000.0	-1500.0	-5500.0	1	-1750.0	-5750.0
+1929	dungeon1	heroic_ig88		-1000.0	-6000.0	-500.0	-5500.0	1	-750.0	-5750.0
+1930	dungeon1	heroic_ig88		0.0	-6000.0	500.0	-5500.0	1	250.0	-5750.0
+1931	dungeon1	heroic_ig88		1000.0	-6000.0	1500.0	-5500.0	1	1250.0	-5750.0
+1932	dungeon1	heroic_ig88		2000.0	-6000.0	2500.0	-5500.0	1	2250.0	-5750.0
+1933	dungeon1	heroic_star_destroyer		-7750.0	5500.0	-6750.0	7000.0	1	-7250.0	6250.0
+1934	dungeon1	heroic_star_destroyer		-6150.0	5500.0	-5150.0	7000.0	1	-5650.0	6250.0
+1935	dungeon1	heroic_star_destroyer		-4550.0	5500.0	-3550.0	7000.0	1	-4050.0	6250.0
+1936	dungeon1	heroic_star_destroyer		-2950.0	5500.0	-1950.0	7000.0	1	-2450.0	6250.0
+1937	dungeon1	heroic_star_destroyer		-1350.0	5500.0	-350.0	7000.0	1	-850.0	6250.0
+1938	dungeon1	heroic_star_destroyer		250.0	5500.0	1250.0	7000.0	1	750.0	6250.0
+1939	dungeon1	heroic_star_destroyer		1850.0	5500.0	2850.0	7000.0	1	2350.0	6250.0
+1940	dungeon1	heroic_star_destroyer		3450.0	5500.0	4450.0	7000.0	1	3950.0	6250.0
+1941	dungeon1	heroic_star_destroyer		5050.0	5500.0	6050.0	7000.0	1	5550.0	6250.0
+1942	dungeon1	heroic_star_destroyer		6650.0	5500.0	7650.0	7000.0	1	7150.0	6250.0
+1943	dungeon1	heroic_exar_kun		-7000.0	-4000.0	-6000.0	-3000.0	1	-6500.0	-3500.0
+1944	dungeon1	heroic_exar_kun		-5500.0	-4000.0	-4500.0	-3000.0	1	-5000.0	-3500.0
+1945	dungeon1	heroic_exar_kun		-4000.0	-4000.0	-3000.0	-3000.0	1	-3500.0	-3500.0
+1946	dungeon1	heroic_exar_kun		-2500.0	-4000.0	-1500.0	-3000.0	1	-2000.0	-3500.0
+1947	dungeon1	heroic_exar_kun		-1000.0	-4000.0	0.0	-3000.0	1	-500.0	-3500.0
+1948	dungeon1	heroic_exar_kun		500.0	-4000.0	1500.0	-3000.0	1	1000.0	-3500.0
+1949	dungeon1	heroic_exar_kun		2000.0	-4000.0	3000.0	-3000.0	1	2500.0	-3500.0
+1950	dungeon1	heroic_exar_kun		3500.0	-4000.0	4500.0	-3000.0	1	4000.0	-3500.0
+1951	dungeon1	heroic_exar_kun		5000.0	-4000.0	6000.0	-3000.0	1	5500.0	-3500.0
+1952	dungeon1	heroic_exar_kun		6500.0	-4000.0	7500.0	-3000.0	1	7000.0	-3500.0
+1953	dungeon1	mtp_hideout_instance		7284.0	2590.0	7584.0	2890.0	1	7434.0	2740.0
+1954	dungeon1	mtp_hideout_instance		7284.0	2050.0	7584.0	2350.0	1	7434.0	2200.0
+1955	dungeon1	mtp_hideout_instance		7284.0	1510.0	7584.0	1810.0	1	7434.0	1660.0
+1956	dungeon1	mtp_hideout_instance		7284.0	970.0	7584.0	1270.0	1	7434.0	1120.0
+1957	dungeon1	mtp_hideout_instance		7284.0	430.0	7584.0	730.0	1	7434.0	580.0
+1958	dungeon1	mtp_hideout_instance		7284.0	-110.0	7584.0	190.0	1	7434.0	40.0
+1959	dungeon1	mtp_hideout_instance		7284.0	-650.0	7584.0	-350.0	1	7434.0	-500.0
+1960	dungeon1	mtp_hideout_instance		7284.0	-1190.0	7584.0	-890.0	1	7434.0	-1040.0
+1961	dungeon1	mtp_hideout_instance		7284.0	-1730.0	7584.0	-1430.0	1	7434.0	-1580.0
+1962	dungeon1	mtp_hideout_instance		7284.0	-2270.0	7584.0	-1970.0	1	7434.0	-2120.0
+2000	adventure1	heroic_tusken_army		-4964.0	2822.0	-2964.0	4822.0	1	-3964.0	3822.0
+2001	adventure1	heroic_tusken_army		-1964.0	2822.0	36.0	4822.0	1	-964.0	3822.0
+2002	adventure1	heroic_tusken_army		1036.0	2822.0	3036.0	4822.0	1	2036.0	3822.0
+2003	adventure1	heroic_tusken_army		4036.0	2822.0	6036.0	4822.0	1	5036.0	3822.0
+2004	adventure1	heroic_tusken_army		-4964.0	-178.0	-2964.0	1822.0	1	-3964.0	822.0
+2005	adventure1	heroic_tusken_army		-1964.0	-178.0	36.0	1822.0	1	-964.0	822.0
+2006	adventure1	heroic_tusken_army		1036.0	-178.0	3036.0	1822.0	1	2036.0	822.0
+2007	adventure1	heroic_tusken_army		4036.0	-178.0	6036.0	1822.0	1	5036.0	822.0
+2008	adventure1	heroic_tusken_army		-4964.0	-3178.0	-2964.0	-1178.0	1	-3964.0	-2178.0
+2009	adventure1	heroic_tusken_army		-1956.0	-3170.0	44.0	-1170.0	1	-956.0	-2170.0
+2010	adventure1	heroic_tusken_army		1036.0	-3178.0	3036.0	-1178.0	1	2036.0	-2178.0
+2011	adventure1	heroic_tusken_army		4036.0	-3178.0	6036.0	-1178.0	1	5036.0	-2178.0
+2100	adventure2	echo_base		-6900.0	3100.0	-3100.0	6900.0	1	-5000.0	5000.0
+2101	adventure2	echo_base		-1900.0	3100.0	1900.0	6900.0	1	0.0	5000.0
+2102	adventure2	echo_base		3100.0	3100.0	6900.0	6900.0	1	5000.0	5000.0
+2103	adventure2	echo_base		-6900.0	-1900.0	-3100.0	1900.0	1	-5000.0	0.0
+2104	adventure2	echo_base		-1900.0	-1900.0	1900.0	1900.0	1	0.0	0.0
+2105	adventure2	echo_base		3100.0	-1900.0	6900.0	1900.0	1	5000.0	0.0
+2106	adventure2	echo_base		-6900.0	-6900.0	-3100.0	-3100.0	1	-5000.0	-5000.0
+2107	adventure2	echo_base		-1900.0	-6900.0	1900.0	-3100.0	1	0.0	-5000.0
+2108	adventure2	echo_base		3100.0	-6900.0	6900.0	-3100.0	1	5000.0	-5000.0

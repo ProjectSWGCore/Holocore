@@ -56,6 +56,7 @@ import network.packets.swg.login.LoginEnumCluster;
 import network.packets.swg.login.LoginIncorrectClientId;
 import network.packets.swg.login.OfflineServersMessage;
 import network.packets.swg.login.StationIdHasJediSlot;
+import network.packets.swg.zone.ServerNowEpochTime;
 import resources.Galaxy;
 import resources.Race;
 import resources.common.BCrypt;
@@ -249,6 +250,7 @@ public class LoginService extends Service {
 		}
 		cluster.setMaxCharacters(getConfig(ConfigFile.PRIMARY).getInt("GALAXY-MAX-CHARACTERS", 2));
 		sendPacket(p.getNetworkId(), new ServerUnixEpochTime((int) (ProjectSWG.getCoreTime() / 1000)));
+		sendPacket(p.getNetworkId(), new ServerNowEpochTime((int)(System.currentTimeMillis()/1E3)));
 		sendPacket(p.getNetworkId(), token);
 		sendPacket(p.getNetworkId(), cluster);
 		sendPacket(p.getNetworkId(), new OfflineServersMessage());

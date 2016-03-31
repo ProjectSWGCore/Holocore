@@ -31,6 +31,7 @@ import network.packets.Packet;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.encodables.Encodable;
 import resources.network.DeltaBuilder;
+import resources.network.NetBuffer;
 import resources.objects.SWGObject;
 import resources.player.PlayerState;
 import utilities.Encoder;
@@ -232,22 +233,40 @@ public class SWGList<E> extends AbstractList<E> implements Encodable, Serializab
 			e.printStackTrace();
 		}
 	}
+	
+	@SuppressWarnings("unchecked") // Unfortunately the exception is just caught
+	public void decode(ByteBuffer data, StringType type) {
+		int size	= Packet.getInt(data);
+		updateCount	= Packet.getInt(data);
+		NetBuffer buffer = NetBuffer.wrap(data);
+		try {
+			for (int i = 0; i < size; i++)
+				list.add((E) buffer.getString(type));
+		} catch (ClassCastException e) {
+			e.printStackTrace();
+		}
+	}
 
+	@SuppressWarnings("unchecked") // There is type checking in the respective if's
 	public void decode(ByteBuffer data, Class<E> elementType) {
-		// TODO: Decode other instance types besides encodable for SWGList
 		int size 	= Packet.getInt(data);
 		updateCount = Packet.getInt(data);
 
 		try {
+			boolean encodable = Encodable.class.isAssignableFrom(elementType);
+			NetBuffer wrap = NetBuffer.wrap(data);
 			for (int i = 0; i < size; i++) {
-				E instance = elementType.newInstance();
-				if (instance instanceof Encodable)
-					((Encodable) instance).decode(data);
-				else {
-					System.out.println("No decode support for the type " + elementType.getName());
-					break;
+				if (encodable) {
+					E instance = elementType.newInstance();
+					if (instance instanceof Encodable) {
+						((Encodable) instance).decode(data);
+						list.add(instance);
+					}
+				} else {
+					Object o = wrap.getGeneric(elementType);
+					if (o != null && elementType.isAssignableFrom(o.getClass()))
+						list.add((E) o);
 				}
-				list.add(instance);
 			}
 		} catch (InstantiationException | IllegalAccessException e) {
 			e.printStackTrace();

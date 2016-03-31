@@ -65,7 +65,7 @@ public class SWGFile {
 	private void printTree(IffNode node, int depth) {
 		for (int i = 0; i < depth; i++)
 			System.out.print("\t");
-		System.out.println(node.getTag()+":"+node.isForm());
+		System.out.println(node.getTag()+":form="+node.isForm());
 		for (IffNode child : node.getChildren())
 			printTree(child, depth+1);
 	}

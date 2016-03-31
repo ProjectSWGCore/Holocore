@@ -218,7 +218,7 @@ public class ChatRoomService extends Service {
 			return;
 
 		switch (intent.getEvent()) {
-			case PE_ZONE_IN:
+			case PE_ZONE_IN_CLIENT:
 				enterPlanetaryChatChannels(player);
 				break;
 			case PE_FIRST_ZONE:

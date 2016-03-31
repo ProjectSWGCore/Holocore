@@ -61,6 +61,7 @@ public enum PacketType {
 	CLIENT_PERMISSIONS_MESSAGE					(ClientPermissionsMessage.CRC, 	ClientPermissionsMessage.class),
 	REQUEST_EXTENDED_CLUSTERS					(RequestExtendedClusters.CRC, 	RequestExtendedClusters.class),
 	OFFLINE_SERVERS_MESSAGE     				(OfflineServersMessage.CRC, 	OfflineServersMessage.class),
+	SERVER_NOW_EPOCH_TIME						(ServerNowEpochTime.CRC,		ServerNowEpochTime.class),
 
 		// Post-Login
 		LOGIN_CLIENT_ID							(LoginClientId.CRC, 			LoginClientId.class),
@@ -214,6 +215,10 @@ public enum PacketType {
 
 	public int getCrc() {
 		return crc;
+	}
+	
+	public Class<? extends SWGPacket> getSwgClass() {
+		return c;
 	}
 
 	public static PacketType fromCrc(int crc) {

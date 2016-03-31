@@ -90,3 +90,65 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 1500090	DUNGEON1	du1_imp_corvette_1	AREA	66	-3.00	0.20	151.41	0	1	a Rebel Commodore	4550	dungeon	Imperial Corvette - 1	1	none	0	300	120	0
 1500091	DUNGEON1	du1_imp_corvette_1	AREA	66	3.00	0.20	151.41	0	1	a 3PO protocol droid	23625	dungeon	Imperial Corvette - 1	1	none	0	300	120	0
 1500092	DUNGEON1	du1_imp_corvette_1	AREA	66	-4.68	0.00	146.70	0	1	an R3 unit	24025	dungeon	Imperial Corvette - 1	1	none	0	300	120	0
+1500093	DUNGEON1	du1_nova_orion	EGG	1	3.2	-0.5	-2.9	124	1	a bartender	790	dungeon	Nova Orion Station	1	none	0	300	120	0
+1500094	DUNGEON1	du1_nova_orion	EGG	1	-3.1	-0.5	3	-50	1	a bartender	790	dungeon	Nova Orion Station	1	none	0	300	120	0
+1500095	DUNGEON1	du1_nova_orion	EGG	1	2.9	-0.5	2.8	34	1	a bartender	790	dungeon	Nova Orion Station	1	none	0	300	120	0
+1500096	DUNGEON1	du1_nova_orion	EGG	1	-18.9	0	-13.7	41	1	Cisvin (a junk dealer)	21315	dungeon	Nova Orion Station	1	none	0	300	120	0
+1500097	DUNGEON1	du1_nova_orion	EGG	1	6.19	0	18.5	-172	1	O'choa Detera	21245	dungeon	Nova Orion Station	1	npc_dance_basic	0	300	120	0
+1500098	DUNGEON1	du1_nova_orion	EGG	1	8.75	0	17.26	-169	1	Alitra	21250	dungeon	Nova Orion Station	1	themepark_music_3	0	300	120	0
+1500099	DUNGEON1	du1_nova_orion	EGG	1	13.48	0	14.24	-150	1	Mako	21255	dungeon	Nova Orion Station	1	themepark_music_2	0	300	120	0
+1500100	DUNGEON1	du1_nova_orion	EGG	1	17.12	0	8.36	-105	1	Alisia	21260	dungeon	Nova Orion Station	1	themepark_music_1	0	300	120	0
+1500101	DUNGEON1	du1_nova_orion	EGG	1	18.85	0	6.05	-100	1	Mestral	21265	dungeon	Nova Orion Station	1	npc_dance_basic	0	300	120	0
+1500102	DUNGEON1	du1_nova_orion	EGG	1	21.3	0	-6.6	0.1	1	a Nova Orion Industries employee	21285	dungeon	Nova Orion Station	1	npc_sitting_chair	0	300	120	0
+1500103	DUNGEON1	du1_nova_orion	EGG	1	7.8	-0.5	-2	-94	1	a Nova Orion Industries employee	21285	dungeon	Nova Orion Station	1	npc_standing_drinking	0	300	120	0
+1500104	DUNGEON1	du1_nova_orion	EGG	1	7.5	-0.5	-3.6	-48	1	a Nova Orion Industries employee	21285	dungeon	Nova Orion Station	1	npc_standing_drinking	0	300	120	0
+1500105	DUNGEON1	du1_nova_orion	EGG	1	12.3	0	-18.5	0	1	a Nova Orion Industries employee	21285	dungeon	Nova Orion Station	1	npc_sitting_chair	0	300	120	0
+1500106	DUNGEON1	du1_nova_orion	EGG	1	18	0	-11	-79	1	a Nova Orion Industries employee	21285	dungeon	Nova Orion Station	1	npc_sitting_chair	0	300	120	0
+1500107	DUNGEON1	du1_nova_orion	EGG	1	3.8	-0.5	8.1	46	1	a Nova Orion Industries employee	21285	dungeon	Nova Orion Station	1	entertained	0	300	120	0
+1500108	DUNGEON1	du1_nova_orion	EGG	1	7.5	-0.5	4.5	26	1	a Nova Orion Industries employee	21285	dungeon	Nova Orion Station	1	entertained	0	300	120	0
+1500109	DUNGEON1	du1_nova_orion	EGG	1	-16.8	0	11.2	-144	1	a Nova Orion Industries employee	21285	dungeon	Nova Orion Station	1	npc_sitting_chair	0	300	120	0
+1500110	DUNGEON1	du1_nova_orion	EGG	1	-8.4	0	18.7	1	1	a Nova Orion Industries employee	21285	dungeon	Nova Orion Station	1	npc_standing_drinking	0	300	120	0
+1500111	DUNGEON1	du1_nova_orion	EGG	1	-8	-0.5	0.7	98	1	a Nova Orion Industries employee	21285	dungeon	Nova Orion Station	1	npc_standing_drinking	0	300	120	0
+1500112	DUNGEON1	du1_nova_orion	EGG	6	53	0.8	17.2	-58	1	Byrec	21330	dungeon	Nova Orion Station	1	none	0	300	120	0
+1500113	DUNGEON1	du1_nova_orion	EGG	6	37.2	0.8	38	128	1	Fen Ackdo (a chassis broker)	21275	dungeon	Nova Orion Station	1	none	0	300	120	0
+1500114	DUNGEON1	du1_nova_orion	EGG	7	103.3	0.8	24.8	53	1	a Nova Orion Industries employee	21285	dungeon	Nova Orion Station	1	none	0	300	120	0
+1500115	DUNGEON1	du1_nova_orion	EGG	7	96.1	0.8	21.6	-30	1	a Nova Orion Industries employee	21285	dungeon	Nova Orion Station	1	npc_use_terminal_low	0	300	120	0
+1500116	DUNGEON1	du1_nova_orion	EGG	8	54.9	0.9	-27.9	146	1	Maikia	21305	dungeon	Nova Orion Station	1	none	0	300	120	0
+1500117	DUNGEON1	du1_nova_orion	EGG	8	36	0.9	-45.9	51	1	Mazzlo (a chassis broker)	21270	dungeon	Nova Orion Station	1	none	0	300	120	0
+1500118	DUNGEON1	du1_nova_orion	EGG	8	47.9	0.8	-25.4	33	1	a Nova Orion Industries employee	21285	dungeon	Nova Orion Station	1	none	0	300	120	0
+1500119	DUNGEON1	du1_nova_orion	EGG	9	83.1	0.8	-16.9	-56	1	a Nova Orion Industries employee	21285	dungeon	Nova Orion Station	1	npc_use_terminal_low	0	300	120	0
+1500120	DUNGEON1	du1_nova_orion	EGG	9	92.4	0.8	-7.1	34	1	a Nova Orion Industries employee	21285	dungeon	Nova Orion Station	1	none	0	300	120	0
+1500121	DUNGEON1	du1_nova_orion	EGG	9	97.6	0.8	-10	34	1	a Nova Orion Industries employee	21285	dungeon	Nova Orion Station	1	npc_use_terminal_low	0	300	120	0
+1500122	DUNGEON1	du1_nova_orion	EGG	10	-8.2	0.8	42.9	-110	1	Willard Wassleman III (Career Advancement Advisor)	21325	dungeon	Nova Orion Station	1	none	0	300	120	0
+1500123	DUNGEON1	du1_nova_orion	EGG	10	-14.9	0.8	55.4	-121	1	Evie Denigh (Humanoid Resources Advisor)	21295	dungeon	Nova Orion Station	1	none	0	300	120	0
+1500124	DUNGEON1	du1_nova_orion	EGG	10	-15.6	0.8	37.5	-22	1	a Nova Orion Industries employee	21285	dungeon	Nova Orion Station	1	npc_sitting_chair	0	300	120	0
+1500125	DUNGEON1	du1_nova_orion	EGG	10	-24.4	0.8	44.3	-112	1	a Nova Orion Industries employee	21285	dungeon	Nova Orion Station	1	none	0	300	120	0
+1500126	DUNGEON1	du1_nova_orion	EGG	11	-40.9	0.6	29.4	125	1	Skyron Waurie (a Nova Orion security supervisor)	21335	dungeon	Nova Orion Station	1	none	0	300	120	0
+1500127	DUNGEON1	du1_nova_orion	EGG	12	-56	-1	7.6	159	1	Vothinyak	21350	dungeon	Nova Orion Station	1	none	0	300	120	0
+1500128	DUNGEON1	du1_nova_orion	EGG	12	-44.4	-1	-5.3	24	1	a Nova Orion Industries employee	21285	dungeon	Nova Orion Station	1	none	0	300	120	0
+1500129	DUNGEON1	du1_nova_orion	EGG	12	-58.1	-1	-9.5	160	1	a Nova Orion Industries employee	21285	dungeon	Nova Orion Station	1	npc_sitting_chair	0	300	120	0
+1500130	DUNGEON1	du1_nova_orion	EGG	13	-34.7	0.8	-36.7	16	1	Vothinyak	21350	dungeon	Nova Orion Station	1	none	0	300	120	0
+1500131	DUNGEON1	du1_nova_orion	EGG	13	-30.5	0.8	-25.8	-118	1	a Nova Orion Industries employee	21285	dungeon	Nova Orion Station	1	none	0	300	120	0
+1500132	DUNGEON1	du1_nova_orion	EGG	15	2.1	-31.7	0.5	-112	1	Garrick Orion (co-owner of Nova Orion Industries)	21290	dungeon	Nova Orion Station	1	none	0	300	120	0
+1500133	DUNGEON1	du1_nova_orion	EGG	15	11.5	-31	-8.8	-56	1	Nemdon Ralleck (an Orion protoype vendor)	21345	dungeon	Nova Orion Station	1	none	0	300	120	0
+1500134	DUNGEON1	du1_nova_orion	EGG	15	17.9	-30	12.9	55	1	a Nova Orion Industries employee	21285	dungeon	Nova Orion Station	1	none	0	300	120	0
+1500135	DUNGEON1	du1_nova_orion	EGG	15	-7.2	-31.7	1.3	147	1	a Nova Orion Industries employee	21285	dungeon	Nova Orion Station	1	none	0	300	120	0
+1500136	DUNGEON1	du1_nova_orion	EGG	24	-19.7	-29.2	43.1	-133	1	Dexen Eronoss (a Nova Orion shift foreman)	21280	dungeon	Nova Orion Station	1	none	0	300	120	0
+1500137	DUNGEON1	du1_nova_orion	EGG	24	-9.5	-29.2	48.5	69	1	a Nova Orion Industries employee	21285	dungeon	Nova Orion Station	1	npc_sitting_chair	0	300	120	0
+1500138	DUNGEON1	du1_nova_orion	EGG	24	-20.6	-29.2	45.3	-108	1	a Nova Orion Industries employee	21285	dungeon	Nova Orion Station	1	npc_use_terminal_low	0	300	120	0
+1500139	DUNGEON1	du1_nova_orion	EGG	25	-43.9	-29.3	-24.3	-31	1	a Nova Orion Industries employee	21285	dungeon	Nova Orion Station	1	npc_sitting_chair	0	300	120	0
+1500140	DUNGEON1	du1_nova_orion	EGG	25	-41.3	-29.3	-35.5	-171	1	a Nova Orion Industries employee	21285	dungeon	Nova Orion Station	1	npc_sitting_chair	0	300	120	0
+1500141	DUNGEON1	du1_nova_orion	EGG	25	-36.6	-29.3	-34.6	151	1	a Nova Orion Industries employee	21285	dungeon	Nova Orion Station	1	npc_sitting_chair	0	300	120	0
+1500142	DUNGEON1	du1_nova_orion	EGG	28	-20	29.5	0	89	1	a Nova Orion Industries employee	21285	dungeon	Nova Orion Station	1	npc_sitting_chair	0	300	120	0
+1500143	DUNGEON1	du1_nova_orion	EGG	29	-18.5	28.9	-71.5	134	1	Jonas Nova (co-owner of Nova Orion Industries)	21310	dungeon	Nova Orion Station	1	none	0	300	120	0
+1500144	DUNGEON1	du1_nova_orion	EGG	29	-11.9	29	-91	-2	1	Cyll Annora (a Nova protoype vendor)	21340	dungeon	Nova Orion Station	1	none	0	300	120	0
+1500145	DUNGEON1	du1_nova_orion	EGG	29	-10.2	29	-58.5	177	1	a Nova Orion Industries employee	21285	dungeon	Nova Orion Station	1	npc_use_terminal_low	0	300	120	0
+1500146	DUNGEON1	du1_nova_orion	EGG	29	-1.9	29	-68	0.1	1	a Nova Orion Industries employee	21285	dungeon	Nova Orion Station	1	npc_sitting_chair	0	300	120	0
+1500147	DUNGEON1	du1_nova_orion	EGG	29	-21.4	29	-78.6	81	1	a Nova Orion Industries employee	21285	dungeon	Nova Orion Station	1	npc_use_terminal_low	0	300	120	0
+1500148	DUNGEON1	du1_nova_orion	EGG	29	-2.6	29	-78.3	-98	1	a Nova Orion Industries employee	21285	dungeon	Nova Orion Station	1	none	0	300	120	0
+1500149	DUNGEON1	du1_nova_orion	EGG	30	-82.6	29	9.7	153	1	a Nova Orion Industries employee	21285	dungeon	Nova Orion Station	1	npc_sitting_chair	0	300	120	0
+1500150	DUNGEON1	du1_nova_orion	EGG	30	-82.1	29	1.7	-170	1	a Nova Orion Industries employee	21285	dungeon	Nova Orion Station	1	conversation	0	300	120	0
+1500151	DUNGEON1	du1_nova_orion	EGG	30	-82.3	29	0.3	-3	1	a Nova Orion Industries employee	21285	dungeon	Nova Orion Station	1	conversation	0	300	120	0
+1500152	DUNGEON1	du1_nova_orion	EGG	31	-2.1	28.9	78	10	1	a Nova Orion Industries employee	21285	dungeon	Nova Orion Station	1	conversation	0	300	120	0
+1500153	DUNGEON1	du1_nova_orion	EGG	31	-1.9	28.9	79.5	174	1	a Nova Orion Industries employee	21285	dungeon	Nova Orion Station	1	conversation	0	300	120	0
+1500154	DUNGEON1	du1_nova_orion	EGG	14	-18.6	0.8	-40.7	130	1	a Nova Orion Industries employee	21285	dungeon	Nova Orion Station	1	none	0	300	120	0

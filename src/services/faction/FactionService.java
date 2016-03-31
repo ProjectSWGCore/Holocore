@@ -54,12 +54,15 @@ public final class FactionService extends Service {
 	
 	@Override
 	public boolean terminate() {
-		executor.shutdownNow();
-		boolean success = false;
+		boolean success = true;
 		try {
-			success = executor.awaitTermination(5, TimeUnit.SECONDS);
+			if (executor != null) {
+				executor.shutdownNow();
+				success = executor.awaitTermination(5, TimeUnit.SECONDS);
+			}
 		} catch (InterruptedException e) {
 			e.printStackTrace();
+			success = false;
 		}
 		return super.terminate() && success;
 	}

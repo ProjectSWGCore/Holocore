@@ -74,7 +74,7 @@ public final class EnvironmentService extends Service {
 			weatherForTerrain.put(t, randomWeather());
 			executor.scheduleAtFixedRate(new WeatherChanger(t), 0, cycleDuration, TimeUnit.SECONDS);
 		}
-		executor.scheduleAtFixedRate(() -> { updateTime(); }, 0, 30, TimeUnit.SECONDS);
+		executor.scheduleAtFixedRate(() -> { updateTime(); }, 0, 1, TimeUnit.SECONDS);
 		
 		return super.initialize();
 	}
@@ -86,9 +86,11 @@ public final class EnvironmentService extends Service {
 	
 	@Override
 	public boolean stop() {
-		executor.shutdownNow();
 		try {
-			executor.awaitTermination(3000, TimeUnit.MILLISECONDS);
+			if (executor != null) {
+				executor.shutdownNow();
+				executor.awaitTermination(3000, TimeUnit.MILLISECONDS);
+			}
 		} catch (InterruptedException e) {
 			
 		}
@@ -101,7 +103,7 @@ public final class EnvironmentService extends Service {
 			if (i instanceof PlayerEventIntent) {
 				PlayerEventIntent pei = (PlayerEventIntent) i;
 				
-				if(pei.getEvent().equals(PlayerEvent.PE_ZONE_IN))
+				if(pei.getEvent().equals(PlayerEvent.PE_ZONE_IN_CLIENT))
 					handleZoneIn(pei);
 				}
 	}
@@ -114,7 +116,7 @@ public final class EnvironmentService extends Service {
 	}
 	
 	private void updateTime() {
-		ServerTimeMessage stm = new ServerTimeMessage(ProjectSWG.getGalacticTime());
+		ServerTimeMessage stm = new ServerTimeMessage((long) (ProjectSWG.getCoreTime()/1E3));
 		new NotifyPlayersPacketIntent(stm).broadcast();
 	}
 	
