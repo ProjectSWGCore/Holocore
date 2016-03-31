@@ -1,5 +1,6 @@
 package resources.buildout;
 
+import resources.Location;
 import resources.Terrain;
 
 public class BuildoutArea implements Comparable<BuildoutArea> {
@@ -13,6 +14,8 @@ public class BuildoutArea implements Comparable<BuildoutArea> {
 	private double x2;
 	private double z2;
 	private boolean adjustCoordinates;
+	private double translationX;
+	private double translationZ;
 	private boolean loaded;
 	
 	private BuildoutArea() {
@@ -53,6 +56,14 @@ public class BuildoutArea implements Comparable<BuildoutArea> {
 	
 	public boolean isAdjustCoordinates() {
 		return adjustCoordinates;
+	}
+	
+	public double getTranslationX() {
+		return translationX;
+	}
+	
+	public double getTranslationZ() {
+		return translationZ;
 	}
 	
 	public boolean isLoaded() {
@@ -99,8 +110,24 @@ public class BuildoutArea implements Comparable<BuildoutArea> {
 		return 0;
 	}
 	
+	public Location adjustLocation(Location l) {
+		if (!isAdjustCoordinates())
+			return l;
+		Location ret = new Location(l);
+		ret.translatePosition(-translationX, 0, -translationZ);
+		return ret;
+	}
+	
+	public Location readjustLocation(Location l) {
+		if (!isAdjustCoordinates())
+			return l;
+		Location ret = new Location(l);
+		ret.translatePosition(translationX, 0, translationZ);
+		return ret;
+	}
+	
 	public String toString() {
-		return String.format("%s  %s: %.1f, %.1f/%.1f, %.1f", name, terrain.getName(), x1, z1, x2, z2);
+		return String.format("%s/%s: (%.1f,%.1f)/(%.1f,%.1f) %b(%.1f,%.1f)", name, terrain.getName(), x1, z1, x2, z2, adjustCoordinates, translationX, translationZ);
 	}
 	
 	public static class BuildoutAreaBuilder {
@@ -144,6 +171,16 @@ public class BuildoutArea implements Comparable<BuildoutArea> {
 		
 		public BuildoutAreaBuilder setZ2(double z2) {
 			area.z2 = z2;
+			return this;
+		}
+		
+		public BuildoutAreaBuilder setTranslationX(double x) {
+			area.translationX = x;
+			return this;
+		}
+		
+		public BuildoutAreaBuilder setTranslationZ(double z) {
+			area.translationZ = z;
 			return this;
 		}
 		

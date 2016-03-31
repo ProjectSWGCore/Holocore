@@ -29,6 +29,7 @@ package resources.objects.weapon;
 
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.network.BaselineBuilder;
+import resources.network.NetBuffer;
 import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
 
@@ -107,12 +108,20 @@ public class WeaponObject extends TangibleObject {
 		bb.incrementOperandCount(1);
 	}
 	
-	public void createBaseline8(Player target, BaselineBuilder bb) {
-		super.createBaseline8(target, bb);
+	public void parseBaseline3(NetBuffer buffer) {
+		super.parseBaseline3(buffer);
+		attackSpeed = buffer.getFloat();
+		buffer.getInt(); // accuracy
+		buffer.getFloat(); // minRange
+		maxRange = buffer.getFloat();
+		buffer.getInt(); // damageType
+		buffer.getInt(); // elementalType
+		buffer.getInt(); // elementalValue
 	}
 	
-	public void createBaseline9(Player target, BaselineBuilder bb) {
-		super.createBaseline9(target, bb);
+	public void parseBaseline6(NetBuffer buffer) {
+		super.parseBaseline6(buffer);
+		type = buffer.getInt();
 	}
 	
 }

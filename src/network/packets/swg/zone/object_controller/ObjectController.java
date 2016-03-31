@@ -93,14 +93,34 @@ public abstract class ObjectController extends SWGPacket {
 			case 0x00F1: return new DataTransformWithParent(data);
 			case 0x0116: return new CommandQueueEnqueue(data);
 			case 0x0117: return new CommandQueueDequeue(data);
-			case 0x0126: return null; // Look at target
+			case 0x0126: return new LookAtTarget(data);
 			case 0x012E: return new PlayerEmote(data);
 			case 0x0131: return new PostureUpdate(data);
 			case 0x0146: return new ObjectMenuRequest(data);
 			case 0x04C5: return new IntendedTarget(data);
 		}
 		Log.w("ObjectController", "Unknown object controller: %08X", crc);
-		return null;
+		return new GenericObjectController(crc, data);
+	}
+	
+	private static class GenericObjectController extends ObjectController {
+		
+		public GenericObjectController(int crc, ByteBuffer data) {
+			super(0, crc);
+			decode(data);
+		}
+		
+		@Override
+		public ByteBuffer encode() {
+			ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH);
+			encodeHeader(data);
+			return data;
+		}
+		
+		@Override
+		public void decode(ByteBuffer data) {
+			decodeHeader(data);
+		}
 	}
 	
 }

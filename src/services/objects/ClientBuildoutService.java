@@ -11,20 +11,20 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import intents.object.ObjectCreatedIntent;
 import intents.player.PlayerTransformedIntent;
 import resources.Location;
 import resources.Terrain;
 import resources.buildout.BuildoutArea;
 import resources.buildout.BuildoutArea.BuildoutAreaBuilder;
-import resources.client_info.ClientFactory;
-import resources.client_info.visitors.CrcStringTableData;
+import resources.buildout.BuildoutAreaGrid;
 import resources.config.ConfigFile;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.SWGObject.ObjectClassification;
 import resources.objects.cell.CellObject;
-import resources.objects.creature.CreatureObject;
+import resources.server_info.CrcDatabase;
 import resources.server_info.Log;
 import resources.server_info.RelationalServerData;
 import resources.server_info.RelationalServerFactory;
@@ -38,16 +38,15 @@ public class ClientBuildoutService extends Service {
 			+ "FROM objects "
 			+ "ORDER BY buildout_id ASC";
 	
-	private final CrcStringTableData strings;
-	private final List<BuildoutArea> areas;
+	private final BuildoutAreaGrid areaGrid;
 	private final Map<Integer, BuildoutArea> areasById;
 	
 	public ClientBuildoutService() {
-		strings = (CrcStringTableData) ClientFactory.getInfoFromFile("misc/object_template_crc_string_table.iff");
-		areas = new ArrayList<>();
+		areaGrid = new BuildoutAreaGrid();
 		areasById = new Hashtable<>(1000); // Number of buildout areas
 		
 		registerForIntent(PlayerTransformedIntent.TYPE);
+		registerForIntent(ObjectCreatedIntent.TYPE);
 	}
 	
 	@Override
@@ -56,6 +55,10 @@ public class ClientBuildoutService extends Service {
 			case PlayerTransformedIntent.TYPE:
 				if (i instanceof PlayerTransformedIntent)
 					handlePlayerTransform((PlayerTransformedIntent) i);
+				break;
+			case ObjectCreatedIntent.TYPE:
+				if (i instanceof ObjectCreatedIntent)
+					handleObjectCreated((ObjectCreatedIntent) i);
 				break;
 			default:
 				break;
@@ -84,23 +87,25 @@ public class ClientBuildoutService extends Service {
 	
 	private Collection<SWGObject> loadObjects() throws SQLException {
 		Map<Long, SWGObject> objects = new Hashtable<>();
-		try (RelationalServerData data = RelationalServerFactory.getServerData("buildout/buildouts.db", "objects")) {
-			try (ResultSet set = data.executeQuery(GET_CLIENT_OBJECTS_SQL)) {
-				set.setFetchSize(4*1024);
-				BuildoutArea area = null;
-				ObjectInformation info = new ObjectInformation(set);
-				int prevAreaId = Integer.MAX_VALUE;
-				int areaId = 0;
-				while (set.next()) {
-					areaId = info.getAreaIdNoLoad();
-					if (prevAreaId != areaId) {
-						area = areasById.get(areaId);
-						prevAreaId = areaId;
+		try (CrcDatabase strings = new CrcDatabase()) {
+			try (RelationalServerData data = RelationalServerFactory.getServerData("buildout/buildouts.db", "objects")) {
+				try (ResultSet set = data.executeQuery(GET_CLIENT_OBJECTS_SQL)) {
+					set.setFetchSize(4*1024);
+					BuildoutArea area = null;
+					ObjectInformation info = new ObjectInformation(set);
+					int prevAreaId = Integer.MAX_VALUE;
+					int areaId = 0;
+					while (set.next()) {
+						areaId = info.getAreaIdNoLoad();
+						if (prevAreaId != areaId) {
+							area = areasById.get(areaId);
+							prevAreaId = areaId;
+						}
+						if (area == null)
+							continue;
+						info.load(strings);
+						createObject(objects, area, info);
 					}
-					if (area == null)
-						continue;
-					info.load(strings);
-					createObject(objects, area, info);
 				}
 			}
 		}
@@ -146,7 +151,7 @@ public class ClientBuildoutService extends Service {
 		BuildoutArea primary = null; // Stored as "best area" for what we want to load
 		try (RelationalServerData data = RelationalServerFactory.getServerData("buildout/areas.db", "areas")) {
 			try (ResultSet set = data.executeQuery(GET_BUILDOUT_AREAS)) {
-				areas.clear();
+				areaGrid.clear();
 				areasById.clear();
 				AreaIndexes ind = new AreaIndexes(set);
 				boolean loaded = false;
@@ -172,18 +177,34 @@ public class ClientBuildoutService extends Service {
 	
 	private void loadArea(BuildoutArea area) {
 		area.setLoaded(true);
-		areas.add(area);
+		areaGrid.addBuildoutArea(area);
 		areasById.put(area.getId(), area);
 	}
 	
 	private void handlePlayerTransform(PlayerTransformedIntent pti) {
-		CreatureObject creature = pti.getPlayer();
-		Location world = creature.getWorldLocation();
-		BuildoutArea area = creature.getBuildoutArea();
-		if (area == null || compare(area, world.getTerrain(), world.getX(), world.getZ()) != 0) {
-			area = getAreaForObject(creature);
-			creature.setBuildoutArea(area);
+		setObjectArea(pti.getPlayer());
+	}
+	
+	private void handleObjectCreated(ObjectCreatedIntent oci) {
+		setObjectArea(oci.getObject());
+	}
+	
+	private void setObjectArea(SWGObject obj) {
+		if (obj.getObjectId() == -507780858040143424L)
+			System.out.println("MENSIX " + obj.getParent());
+		if (obj.getParent() != null) {
+			obj.setBuildoutArea(null);
+			return;
 		}
+		Location world = obj.getWorldLocation();
+		BuildoutArea area = obj.getBuildoutArea();
+		if (area == null || !isWithin(area, world.getTerrain(), world.getX(), world.getZ())) {
+			area = getAreaForObject(obj);
+			obj.setBuildoutArea(area);
+			if (obj.getObjectId() == -507780858040143424L)
+				System.out.println("       AREA: " + area);
+		} else if (obj.getObjectId() == -507780858040143424L)
+			System.out.println("       NOT SET");
 	}
 	
 	private BuildoutArea createArea(ResultSet set, AreaIndexes ind) throws SQLException {
@@ -196,45 +217,19 @@ public class ClientBuildoutService extends Service {
 			.setZ1(set.getDouble(ind.z1))
 			.setX2(set.getDouble(ind.x2))
 			.setZ2(set.getDouble(ind.z2))
-			.setAdjustCoordinates(set.getBoolean(ind.adjust));
+			.setAdjustCoordinates(set.getBoolean(ind.adjust))
+			.setTranslationX(set.getDouble(ind.transX))
+			.setTranslationZ(set.getDouble(ind.transZ));
 		return bldr.build();
 	}
 	
 	private BuildoutArea getAreaForObject(SWGObject obj) {
 		Location l = obj.getWorldLocation();
-		return binarySearch(l.getTerrain(), l.getX(), l.getZ(), 0, areas.size());
+		return areaGrid.getBuildoutArea(l.getTerrain(), l.getX(), l.getZ());
 	}
 	
-	private BuildoutArea binarySearch(Terrain t, double x, double z, int low, int high) {
-		int mid = mid(low, high);
-		BuildoutArea midArea = areas.get(mid);
-		int comp = compare(midArea, t, x, z);
-		if (comp == 0)
-			return midArea;
-		if (low == mid)
-			return null;
-		if (comp < 0)
-			return binarySearch(t, x, z, low, mid);
-		return binarySearch(t, x, z, mid, high);
-	}
-	
-	private int compare(BuildoutArea cur, Terrain t, double x, double z) {
-		int comp = cur.getTerrain().getName().compareTo(t.getName());
-		if (comp != 0)
-			return comp;
-		if (x < cur.getX1())
-			return 1;
-		if (x > cur.getX2())
-			return -1;
-		if (z < cur.getZ1())
-			return 1;
-		if (z > cur.getZ2())
-			return -1;
-		return 0;
-	}
-	
-	private int mid(int low, int high) {
-		return (low + high) / 2;
+	private boolean isWithin(BuildoutArea area, Terrain t, double x, double z) {
+		return area.getTerrain() == t && x >= area.getX1() && x <= area.getX2() && z >= area.getZ1() && z <= area.getZ2();
 	}
 	
 	private void logInfo(String message, Object ... args) {
@@ -250,6 +245,7 @@ public class ClientBuildoutService extends Service {
 		private int event;
 		private int x1, z1, x2, z2;
 		private int adjust;
+		private int transX, transZ;
 		
 		public AreaIndexes(ResultSet set) throws SQLException {
 			id = set.findColumn("id");
@@ -261,6 +257,8 @@ public class ClientBuildoutService extends Service {
 			x2 = set.findColumn("max_x");
 			z2 = set.findColumn("max_z");
 			adjust = set.findColumn("adjust_coordinates");
+			transX = set.findColumn("translate_x");
+			transZ = set.findColumn("translate_z");
 		}
 		
 	}
@@ -283,10 +281,10 @@ public class ClientBuildoutService extends Service {
 			l = new Location();
 		}
 		
-		public void load(CrcStringTableData strings) throws SQLException {
+		public void load(CrcDatabase strings) throws SQLException {
 			id = set.getLong(index.idInd);
 			snapshot = set.getBoolean(index.snapInd);
-			template = strings.getTemplateString(set.getInt(index.crcInd));
+			template = strings.getString(set.getInt(index.crcInd));
 			l.setPosition(set.getDouble(index.xInd), set.getDouble(index.yInd), set.getDouble(index.zInd));
 			l.setOrientation(set.getDouble(index.oxInd), set.getDouble(index.oyInd), set.getDouble(index.ozInd), set.getDouble(index.owInd));
 			radius = set.getInt(index.radiusInd);

@@ -28,6 +28,7 @@
 package resources.collections;
 
 import resources.encodables.Encodable;
+import resources.network.NetBuffer;
 import resources.objects.SWGObject;
 import resources.player.PlayerState;
 import utilities.Encoder;
@@ -43,6 +44,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+
+import network.packets.Packet;
 
 public class SWGMap<K, V> extends AbstractMap<K, V> implements Encodable, Serializable {
 	private static final long serialVersionUID = 1L;
@@ -195,6 +198,70 @@ public class SWGMap<K, V> extends AbstractMap<K, V> implements Encodable, Serial
 		}
 
 		return 0;*/
+	}
+	
+	@SuppressWarnings("unchecked") // Unfortunately the exception is just caught
+	public void decode(ByteBuffer data, StringType keyType, StringType valType, boolean addByte) {
+		int size	= Packet.getInt(data);
+		updateCount	= Packet.getInt(data);
+		NetBuffer buffer = NetBuffer.wrap(data);
+		try {
+			for (int i = 0; i < size; i++) {
+				if (addByte)
+					buffer.getByte();
+				map.put((K) buffer.getString(keyType), (V) buffer.getString(valType));
+			}
+		} catch (ClassCastException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@SuppressWarnings("unchecked") // Unfortunately the exception is just caught
+	public void decode(ByteBuffer data, StringType keyType, Class<V> vType, boolean addByte) {
+		int size	= Packet.getInt(data);
+		updateCount	= Packet.getInt(data);
+		NetBuffer buffer = NetBuffer.wrap(data);
+		try {
+			for (int i = 0; i < size; i++) {
+				if (addByte)
+					buffer.getByte();
+				String key = buffer.getString(keyType);
+				Object value = buffer.getGeneric(vType);
+				if (value != null && vType.isAssignableFrom(value.getClass()))
+					map.put((K) key, (V) value);
+				else
+					System.err.println("Unable to parse: key="+key+"  value="+value);
+			}
+		} catch (ClassCastException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@SuppressWarnings("unchecked") // There is type checking in the respective if's
+	public void decode(ByteBuffer data, Class<K> kType, Class<V> vType, boolean addByte) {
+		int size 	= Packet.getInt(data);
+		updateCount = Packet.getInt(data);
+
+		NetBuffer buffer = NetBuffer.wrap(data);
+		for (int i = 0; i < size; i++) {
+			if (addByte)
+				buffer.getByte();
+			Object key = buffer.getGeneric(kType);
+			if (key == null) {
+				System.err.println("Failed to decode: "+kType.getSimpleName());
+				break;
+			}
+			Object value = buffer.getGeneric(vType);
+			if (value == null) {
+				System.err.println("Failed to decode: "+vType.getSimpleName());
+				break;
+			}
+			if (kType.isAssignableFrom(key.getClass()) && vType.isAssignableFrom(value.getClass()))
+				map.put((K) key, (V) value);
+			else
+				System.err.println("Failed to insert key="+key+"  value="+value);
+		}
+		clearDeltaQueue();
 	}
 
 	public void sendDeltaMessage(SWGObject target) {

@@ -27,7 +27,10 @@
  ***********************************************************************************/
 package resources.client_info.visitors;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import resources.client_info.ClientData;
@@ -54,7 +57,7 @@ public class CrcStringTableData extends ClientData {
 					break;
 				case "CRCT":
 					for (int i = 0; i < count; ++i) {
-						crcList[i] = chunk.readUInt();
+						crcList[i] = chunk.readInt();
 					}
 					break;
 				case "STRT":
@@ -84,5 +87,13 @@ public class CrcStringTableData extends ClientData {
 	public int getCrcForString(String str) {
 		Integer crc = reverseCrcMap.get(str);
 		return crc == null ? 0 : crc.intValue();
+	}
+	
+	public Map<Integer, String> getCrcMap() {
+		return Collections.unmodifiableMap(crcMap);
+	}
+	
+	public List<String> getStrings() {
+		return new ArrayList<>(reverseCrcMap.keySet());
 	}
 }

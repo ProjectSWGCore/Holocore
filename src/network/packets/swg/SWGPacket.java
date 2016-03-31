@@ -37,16 +37,16 @@ import java.nio.ByteBuffer;
 public class SWGPacket extends Packet {
 	
 	private ByteBuffer data = null;
-	private int opcode = 0;
+	private int crc = 0;
 	private PacketType type = PacketType.UNKNOWN;
 
 	public void setSWGOpcode(int opcode) {
-		this.opcode = opcode;
+		this.crc = opcode;
 		this.type = PacketType.fromCrc(opcode);
 	}
 	
 	public int getSWGOpcode() {
-		return opcode;
+		return crc;
 	}
 	
 	public PacketType getPacketType() {
@@ -56,9 +56,11 @@ public class SWGPacket extends Packet {
 	public boolean decode(ByteBuffer data, int crc) {
 		this.data = data;
 		super.decode(data);
-		data.position(2);
 		setSWGOpcode(getInt(data));
-		return getSWGOpcode() == crc;
+		if (getSWGOpcode() == crc)
+			return true;
+		System.err.printf("SWG Opcode does not match actual! Expected: 0x%08X  Actual: 0x%08X%n", crc, getSWGOpcode());
+		return false;
 	}
 	
 	public void decode(ByteBuffer data) {

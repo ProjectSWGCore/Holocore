@@ -42,6 +42,7 @@ import java.util.Map;
 import java.util.Set;
 
 import network.packets.Packet;
+import network.packets.swg.zone.CmdSceneReady;
 import network.packets.swg.zone.UpdateContainmentMessage;
 import network.packets.swg.zone.object_controller.DataTransform;
 import network.packets.swg.zone.object_controller.DataTransformWithParent;
@@ -115,9 +116,10 @@ public class ObjectAwareness extends Service {
 				creature.setOwner(null);
 				p.setCreatureObject(null);
 				break;
-			case PE_ZONE_IN:
+			case PE_ZONE_IN_SERVER:
 				creature.clearAware(false);
 				update(creature);
+				p.sendPacket(new CmdSceneReady());
 				break;
 			default:
 				break;
@@ -196,12 +198,14 @@ public class ObjectAwareness extends Service {
 			transform.setSpeed((float) (obj.getMovementScale()*7.3));
 		}
 		BuildoutArea area = obj.getBuildoutArea();
-		if (area != null && area.isAdjustCoordinates())
-			newLocation.translatePosition(area.getX1(), 0, area.getZ1());
+		if (area == null)
+			System.err.println("Unknown buildout area at: " + obj.getWorldLocation());
+		else
+			newLocation = area.adjustLocation(newLocation);
 		new PlayerTransformedIntent(obj, obj.getParent(), null, obj.getLocation(), newLocation).broadcast();
 		move(obj, newLocation, true);
-		if (area != null && area.isAdjustCoordinates())
-			newLocation.translatePosition(-area.getX1(), 0, -area.getZ1());
+		if (area != null)
+			newLocation = area.readjustLocation(newLocation);
 		obj.sendDataTransforms(transform);
 	}
 	
