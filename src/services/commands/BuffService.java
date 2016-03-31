@@ -39,12 +39,12 @@ import intents.BuffIntent;
 import intents.PlayerEventIntent;
 import intents.SkillModIntent;
 import network.packets.swg.zone.spatial.PlayClientEffectObjectMessage;
-import resources.Buff;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
 import resources.common.CRC;
 import resources.control.Intent;
 import resources.control.Service;
+import resources.objects.creature.Buff;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
 
@@ -66,15 +66,13 @@ public class BuffService extends Service {
 	
 	// TODO test buff stacks
 	
-	// TODO cache conversions from buffName to buffCrc in buffNameToCrc()
-	
 //	private static final byte GROUP_BUFF_RANGE = 100;	
 	
 	private DatatableData buffTable;
 	private final DelayQueue<BuffDelayed> buffRemoval;
 	private final ExecutorService executor;
 	private boolean stopBuffRemover;
-	private final Map<Integer, BuffData> dataMap;
+	private final Map<CRC, BuffData> dataMap;
 	
 	public BuffService() {
 		registerForIntent(BuffIntent.TYPE);
@@ -122,7 +120,7 @@ public class BuffService extends Service {
 		buffTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/buff/buff.iff");
 		
 		for(int row = 0; row < buffTable.getRowCount(); row++) {
-			dataMap.put(buffNameToCrc((String) buffTable.getCell(row, 0)), new BuffData(
+			dataMap.put(new CRC((String) buffTable.getCell(row, 0)), new BuffData(
 					(int) buffTable.getCell(row, 28),	// max stacks
 					(String) buffTable.getCell(row, 7),	// effect1
 					(float) buffTable.getCell(row, 8),	// value1
@@ -152,28 +150,26 @@ public class BuffService extends Service {
 	}
 	
 	private void handleFirstZone(CreatureObject creature) {
-		Map<Integer, Buff> buffs = creature.getBuffs();
+		Map<CRC, Buff> buffs = creature.getBuffs();
 		
 		buffs.forEach((crc, buff) -> manageBuff(buff, crc, creature));
 	}
 	
-	private int buffNameToCrc(String buffName) {
-		return CRC.getCrc(buffName);
-	}
-	
 	private void handleBuffIntentAdd(BuffIntent bi) {
-		addBuff(buffNameToCrc(bi.getBuffName()), bi.getReceiver(), bi.getBuffer());
+		addBuff(new CRC(bi.getBuffName()), bi.getReceiver(), bi.getBuffer());
 	}
 	
-	private void addBuff(int buffCrc, CreatureObject receiver, CreatureObject buffer) {
+	private void addBuff(CRC buffCrc, CreatureObject receiver, CreatureObject buffer) {
 		BuffData buffData = dataMap.get(buffCrc);
 		
 		if(buffData == null)
 			return;
+        // TODO stack counts upon add/remove probably need to be defined on a per-buff basis due to skillmod influence.
+		int stackCount = 1;
+        int buffDuration = (int) buffData.getDefaultDuration();
+		Buff buff = new Buff(receiver.getPlayerObject().getPlayTime() + buffDuration, buffData.getEffect1Value(), buffDuration, buffer.getObjectId(), stackCount);
 		
-		Buff buff = new Buff(buffer.getObjectId(), receiver.getPlayerObject().getPlayTime(), (int) buffData.getDefaultDuration(), buffData.getEffect1Value());
-		
-		sendSkillModIntent(buffData, receiver, stopBuffRemover);
+		sendSkillModIntent(buffData, receiver, false);
 		receiver.addBuff(buffCrc, buff);
 		
 		manageBuff(buff, buffCrc, receiver);
@@ -185,10 +181,10 @@ public class BuffService extends Service {
 	}
 	
 	private void handleBuffIntentRemove(BuffIntent bi) {
-		removeBuff(bi.getReceiver(), buffNameToCrc(bi.getBuffName()), false);
+		removeBuff(bi.getReceiver(), new CRC(bi.getBuffName()), false);
 	}
 	
-	private void manageBuff(Buff buff, int buffCrc, CreatureObject creature) {
+	private void manageBuff(Buff buff, CRC buffCrc, CreatureObject creature) {
 		// If this buff has less than or 0 seconds left, then remove it.
 		if(buff.getEndTime() <= 0) {
 			removeBuff(creature, buffCrc, true);
@@ -198,7 +194,7 @@ public class BuffService extends Service {
 		}
 	}
 	
-	private void removeBuff(CreatureObject creature, int buffCrc, boolean expired) {
+	private void removeBuff(CreatureObject creature, CRC buffCrc, boolean expired) {
 		// Get the BuffData for this buff name.
 		BuffData buffData = dataMap.get(buffCrc);
 		
@@ -229,7 +225,7 @@ public class BuffService extends Service {
 			if(callback.isEmpty())
 				return;
 			
-			int callbackCrc = buffNameToCrc(callback);
+			CRC callbackCrc = new CRC(callback);
 			if(dataMap.containsKey(callbackCrc)) {
 				// Apply the callback buff
 				addBuff(callbackCrc, creature, creature);
@@ -280,11 +276,11 @@ public class BuffService extends Service {
 	private class BuffDelayed implements Delayed {
 		
 		private final Buff buff;
-		private final int buffCrc;
+		private final CRC buffCrc;
 		private final PlayerObject owner;
 		private final CreatureObject creature;
 		
-		private BuffDelayed(Buff buff, int buffCrc, CreatureObject creature) {
+		private BuffDelayed(Buff buff, CRC buffCrc, CreatureObject creature) {
 			this.buff = buff;
 			this.buffCrc = buffCrc;
 			this.creature = creature;

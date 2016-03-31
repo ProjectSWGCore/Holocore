@@ -39,7 +39,6 @@ import network.packets.swg.zone.UpdatePostureMessage;
 import network.packets.swg.zone.UpdatePvpStatusMessage;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import network.packets.swg.zone.object_controller.PostureUpdate;
-import resources.Buff;
 import resources.HologramColour;
 import resources.Posture;
 import resources.PvpFlag;
@@ -667,7 +666,7 @@ public class CreatureObject extends TangibleObject {
 		return skillMod != null ? skillMod.getValue() : 0;
 	}
 	
-	public void addBuff(int buffCrc, Buff buff) {
+	public void addBuff(CRC buffCrc, Buff buff) {
 		if(!buffs.containsKey(buffCrc)) {
 			buffs.put(buffCrc, buff);
 			buffs.sendDeltaMessage(this);
@@ -675,7 +674,7 @@ public class CreatureObject extends TangibleObject {
 		}
 	}
 	
-	public void removeBuff(int buffCrc) {
+	public void removeBuff(CRC buffCrc) {
 		// If a value was associated with the key, then send a delta.
 		if(buffs.containsKey(buffCrc)) {
 			buffs.remove(buffCrc);
@@ -684,11 +683,11 @@ public class CreatureObject extends TangibleObject {
 		}
 	}
 	
-	public Buff getBuffByCrc(int buffCrc) {
+	public Buff getBuffByCrc(CRC buffCrc) {
 		return buffs.get(buffCrc);
 	}
 	
-	public void adjustBuffStackCount(int buffCrc, int adjustment) {
+	public void adjustBuffStackCount(CRC buffCrc, int adjustment) {
 		Buff buff = buffs.get(buffCrc);
 		buff.adjustStackCount(adjustment);	// Adjust the stack count
 		// TODO reset time remaining?
@@ -701,7 +700,7 @@ public class CreatureObject extends TangibleObject {
 	 * {@code Buff} values in the belief that deltas will be sent because
 	 * they won't - this is incorrect usage.
 	 */
-	public Map<Integer, Buff> getBuffs() {
+	public Map<CRC, Buff> getBuffs() {
 		return new HashMap<>(buffs);
 	}
 	
