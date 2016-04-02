@@ -670,7 +670,6 @@ public class CreatureObject extends TangibleObject {
 		if(!buffs.containsKey(buffCrc)) {
 			buffs.put(buffCrc, buff);
 			buffs.sendDeltaMessage(this);
-			System.out.println("added buff");
 		}
 	}
 	
@@ -679,7 +678,6 @@ public class CreatureObject extends TangibleObject {
 		if(buffs.containsKey(buffCrc)) {
 			buffs.remove(buffCrc);
 			buffs.sendDeltaMessage(this);
-			System.out.println("removed buff");
 		}
 	}
 	
