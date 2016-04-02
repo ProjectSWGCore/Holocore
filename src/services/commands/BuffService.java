@@ -185,11 +185,11 @@ public class BuffService extends Service {
 	}
 	
 	private void manageBuff(Buff buff, CRC buffCrc, CreatureObject creature) {
-		// If this buff has less than or 0 seconds left, then remove it.
 		if(buff.getEndTime() <= 0) {
+			// If this buff has less than or 0 seconds left, then remove it.
 			removeBuff(creature, buffCrc, true);
 		} else if(buff.getDuration() >= 0) {
-			// If this buff doesn't last forever, we'll schedule it for removal in the future
+			// If this buff doesn't last forever or hasn't expired, we'll schedule it for removal in the future
 			buffRemoval.put(new BuffDelayed(buff, buffCrc, creature));
 		}
 	}
