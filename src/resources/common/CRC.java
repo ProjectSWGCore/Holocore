@@ -121,6 +121,31 @@ public class CRC implements Encodable, Serializable {
 	public String toString() {
 		return str;
 	}
+
+	@Override
+	public int hashCode() {
+		int hash = 7;
+		hash = 89 * hash + this.crc;
+		return hash;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		final CRC other = (CRC) obj;
+		if (this.crc != other.crc) {
+			return false;
+		}
+		return true;
+	}
 	
 	public static int getCrc(String input) {
 		return getCrc(input.getBytes(StandardCharsets.UTF_8));
