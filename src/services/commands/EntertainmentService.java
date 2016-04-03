@@ -34,9 +34,15 @@ public class EntertainmentService extends Service {
 		DatatableData performanceTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/performance/performance.iff");
 
 		for (int i = 0; i < performanceTable.getRowCount(); i++) {
-			danceMap.put((String) performanceTable.getCell(i, 0), (int) performanceTable.getCell(i, 5));	// performanceName, danceVisualId
+			String requiredDance = (String) performanceTable.getCell(i, 4);
+			
+			if(!requiredDance.isEmpty()) {
+				danceMap.put((String) performanceTable.getCell(i, 0), (int) performanceTable.getCell(i, 5));	// performanceName, danceVisualId
+			}
 		}
-
+		
+		System.out.println(danceMap);
+		
 		return super.initialize();
 	}
 
