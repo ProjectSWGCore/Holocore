@@ -17,10 +17,23 @@ public class DanceIntent extends Intent {
 	private final String danceName;
 	private final CreatureObject creatureObject;
 	
+	/**
+	 * Start dancing
+	 * @param danceName
+	 * @param creatureObject 
+	 */
 	public DanceIntent(String danceName, CreatureObject creatureObject) {
 		super(TYPE);
 		this.danceName = danceName;
 		this.creatureObject = creatureObject;
+	}
+	
+	/**
+	 * Stop dancing
+	 * @param creatureObject 
+	 */
+	public DanceIntent(CreatureObject creatureObject) {
+		this(null, creatureObject);
 	}
 
 	public String getDanceName() {
@@ -29,6 +42,10 @@ public class DanceIntent extends Intent {
 
 	public CreatureObject getCreatureObject() {
 		return creatureObject;
+	}
+	
+	public boolean isStartDance() {
+		return danceName != null;
 	}
 	
 }

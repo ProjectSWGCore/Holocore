@@ -28,6 +28,7 @@
  */
 package resources.commands.callbacks;
 
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import resources.commands.ICmdCallback;
@@ -55,7 +56,11 @@ public class StartDanceCallback implements ICmdCallback {
 			
 			for(String abilityName : abilityNames) {
 				if(abilityName.startsWith(ABILITY_NAME_PREFIX)) {
-					listBox.addListItem(abilityName.replace(ABILITY_NAME_PREFIX, ""));
+					String displayName = abilityName.replace(ABILITY_NAME_PREFIX, "");
+					String firstCharacter = displayName.substring(0, 1);
+					String otherCharacters = displayName.substring(1, displayName.length());
+					
+					listBox.addListItem(firstCharacter.toUpperCase(Locale.ENGLISH) + otherCharacters);
 				}
 			}
 			
@@ -63,7 +68,7 @@ public class StartDanceCallback implements ICmdCallback {
 				@Override
 				public void handleEvent(Player player, SWGObject actor, SuiEvent event, Map<String, String> parameters) {
 					int selection = SuiListBox.getSelectedRow(parameters);
-					String selectedDanceName = listBox.getListItem(selection).getName();
+					String selectedDanceName = listBox.getListItem(selection).getName().toLowerCase(Locale.ENGLISH);
 					
 					new intents.DanceIntent(selectedDanceName, player.getCreatureObject()).broadcast();
 				}

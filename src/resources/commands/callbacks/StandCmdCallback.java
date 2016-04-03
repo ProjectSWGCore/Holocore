@@ -42,11 +42,16 @@ public class StandCmdCallback implements ICmdCallback {
 	public void execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
 		CreatureObject creature = player.getCreatureObject();
 		
-		creature.clearStatesBitmask(CreatureState.SITTING_ON_CHAIR);
-		creature.setPosture(Posture.UPRIGHT);
-		creature.setMovementScale(1);
-		creature.setTurnScale(1);
-		creature.sendObserversAndSelf(new PostureUpdate(creature.getObjectId(), Posture.UPRIGHT));
+		if(creature.isPerforming()) {
+			// Ziggy: When you move while dancing, the client wants to execute /stand instead of /stopDance. Blame SOE.
+			new intents.DanceIntent(player.getCreatureObject()).broadcast();
+		} else {
+			creature.clearStatesBitmask(CreatureState.SITTING_ON_CHAIR);
+			creature.setPosture(Posture.UPRIGHT);
+			creature.setMovementScale(1);
+			creature.setTurnScale(1);
+			creature.sendObserversAndSelf(new PostureUpdate(creature.getObjectId(), Posture.UPRIGHT));
+		}
 	}
 	
 }
