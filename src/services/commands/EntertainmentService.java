@@ -84,7 +84,6 @@ public class EntertainmentService extends Service {
 	private void startDancing(CreatureObject dancer, String danceId) {
 		dancer.setAnimation(danceId);
 		dancer.setPerformanceId(0);	// 0 - anything else will make it look like we're playing music
-		dancer.setPerformanceCounter(0);	// TODO is this correct?
 		dancer.setPerforming(true);
 		dancer.setPosture(Posture.SKILL_ANIMATING);
 		new ChatBroadcastIntent(dancer.getOwner(), "@performance:dance_start_self").broadcast();
