@@ -6,6 +6,7 @@
 package services.commands;
 
 import intents.DanceIntent;
+import intents.PlayerEventIntent;
 import intents.chat.ChatBroadcastIntent;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,6 +16,7 @@ import resources.client_info.visitors.DatatableData;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.creature.CreatureObject;
+import resources.player.PlayerEvent;
 
 /**
  *
@@ -27,6 +29,7 @@ public class EntertainmentService extends Service {
 	public EntertainmentService() {
 		danceMap = new HashMap<>();
 		registerForIntent(DanceIntent.TYPE);
+		registerForIntent(PlayerEventIntent.TYPE);
 	}
 
 	@Override
@@ -35,14 +38,12 @@ public class EntertainmentService extends Service {
 
 		for (int i = 0; i < performanceTable.getRowCount(); i++) {
 			String requiredDance = (String) performanceTable.getCell(i, 4);
-			
-			if(!requiredDance.isEmpty()) {
+
+			if (!requiredDance.isEmpty()) {
 				danceMap.put((String) performanceTable.getCell(i, 0), (int) performanceTable.getCell(i, 5));	// performanceName, danceVisualId
 			}
 		}
-		
-		System.out.println(danceMap);
-		
+
 		return super.initialize();
 	}
 
@@ -52,6 +53,22 @@ public class EntertainmentService extends Service {
 			case DanceIntent.TYPE:
 				handleDanceIntent((DanceIntent) i);
 				break;
+			case PlayerEventIntent.TYPE:
+				PlayerEventIntent pei = (PlayerEventIntent) i;
+
+				if (pei.getEvent() == PlayerEvent.PE_FIRST_ZONE) {
+					handleFirstZone(pei.getPlayer().getCreatureObject());
+				}
+				
+				break;
+		}
+	}
+
+	private void handleFirstZone(CreatureObject creature) {
+		String basicDance = "startDance+basic";
+
+		if (!creature.hasAbility(basicDance)) {
+			creature.addAbility(basicDance);
 		}
 	}
 
