@@ -59,6 +59,7 @@ import services.map.MapManager;
 import services.player.PlayerManager;
 import services.spawn.SpawnerService;
 import services.spawn.StaticService;
+import utilities.Scripts;
 
 public class ObjectManager extends Manager {
 	
@@ -135,6 +136,9 @@ public class ObjectManager extends Manager {
 		// if creature is not a player
 		if (!(obj instanceof CreatureObject && ((CreatureObject) obj).isLoggedOutPlayer()))
 			objectAwareness.add(obj);
+		else	// If creature is a player
+			Scripts.invoke("objects/load_creature", "onLoad", obj);
+		
 		putObject(obj);
 		updateBuildoutParent(obj);
 		addChildrenObjects(obj);
