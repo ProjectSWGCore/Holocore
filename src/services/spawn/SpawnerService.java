@@ -56,6 +56,7 @@ public final class SpawnerService extends Service {
 			+ "creatures.iff_template AS iff, creatures.creature_name " // creature columns
 			+ "FROM static, buildings, creatures "
 			+ "WHERE buildings.building_id = static.building_id AND static.creature_id = creatures.creature_id";
+	private static final String IDLE_MOOD = "idle";
 	
 	private final ObjectManager objectManager;
 	private final Collection<Spawner> spawners;
@@ -145,7 +146,8 @@ public final class SpawnerService extends Service {
 	private boolean createNPC(SWGObject parent, Location loc, String iff, String name, String moodAnimation) {
 		CreatureObject object = (CreatureObject) objectManager.createObject(parent, createTemplate(getRandomIff(iff)), loc, false);
 		object.setName(getCreatureName(name));
-        object.setMoodAnimation(moodAnimation);
+		if(!moodAnimation.equals(IDLE_MOOD))
+			object.setMoodAnimation(moodAnimation);
 		return true;
 	}
 	
