@@ -59,7 +59,6 @@ public class LoginClusterStatus extends SWGPacket {
 			g.setPopulation(getInt(data));
 			getInt(data); // population status
 			g.setMaxCharacters(getInt(data));
-			
 			g.setZoneOffset(ZoneOffset.ofTotalSeconds(getInt(data)));
 			g.setStatus(getInt(data));
 			g.setRecommended(getBoolean(data));
