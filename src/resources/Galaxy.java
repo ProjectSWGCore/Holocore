@@ -27,7 +27,10 @@
 ***********************************************************************************/
 package resources;
 
+import java.time.ZoneOffset;
 import java.util.TimeZone;
+import java.util.concurrent.TimeUnit;
+
 
 public class Galaxy {
 	
@@ -46,14 +49,14 @@ public class Galaxy {
 	private int pingPort = 44462;
 	private int population = 0;
 	private GalaxyStatus status = GalaxyStatus.DOWN;
-	private final TimeZone timeZone;
+	private ZoneOffset zoneOffset;
 	private int maxCharacters = 0;
 	private int onlinePlayerLimit = 0;
 	private int onlineFreeTrialLimit = 0;
 	private boolean recommended = true;
 	
 	public Galaxy() {
-		timeZone = TimeZone.getDefault();
+		
 	}
 	
 	public synchronized int    getId()                   { return id; }
@@ -63,13 +66,14 @@ public class Galaxy {
 	public synchronized int    getPingPort()             { return pingPort; }
 	public synchronized int    getPopulation()           { return population; }
 	public synchronized GalaxyStatus getStatus()         { return status; }
-	public synchronized int    getDistance()             { return timeZone.getRawOffset() / 1000; }
+	public synchronized int    getDistance()             { return zoneOffset.getTotalSeconds() - (int) TimeUnit.SECONDS.convert(TimeZone.getDefault().getDSTSavings(), TimeUnit.MILLISECONDS); }
 	public synchronized int    getMaxCharacters()        { return maxCharacters; }
 	public synchronized int    getOnlinePlayerLimit()    { return onlinePlayerLimit; }
 	public synchronized int    getOnlineFreeTrialLimit() { return onlineFreeTrialLimit; }
 	public synchronized boolean isRecommended()          { return recommended; }
 	
 	public synchronized int getPopulationStatus() {
+		
 		if (population < VERY_LIGHT)
 			return 0;
 		else if(population < LIGHT)
@@ -92,6 +96,7 @@ public class Galaxy {
 	public synchronized void setPingPort(int port)            { this.pingPort = port; }
 	public synchronized void setPopulation(int population)    { this.population = population; }
 	public synchronized void setStatus(GalaxyStatus status)   { this.status = status; }
+	public synchronized void setZoneOffset(ZoneOffset zoneOffset)        { this.zoneOffset = zoneOffset; }
 	public synchronized void setMaxCharacters(int max)        { this.maxCharacters = max; }
 	public synchronized void setOnlinePlayerLimit(int max)    { this.onlinePlayerLimit = max; }
 	public synchronized void setOnlineFreeTrialLimit(int max) { this.onlineFreeTrialLimit = max; }
@@ -100,8 +105,8 @@ public class Galaxy {
 	public synchronized void decrementPopulationCount()       { population--; }
 	
 	public String toString() {
-		return String.format("Galaxy[ID=%d Name=%s Address=%s Zone=%d Ping=%d Pop=%d PopStat=%d Status=%s Time=%d Max=%d Rec=%b]",
-				id, name, address, zonePort, pingPort, population, getPopulationStatus(), status, timeZone, maxCharacters, recommended);
+		return String.format("Galaxy[ID=%d Name=%s Address=%s Zone=%d Ping=%d Pop=%d PopStat=%d Status=%s Time=%s Max=%d Rec=%b]",
+				id, name, address, zonePort, pingPort, population, getPopulationStatus(), status, zoneOffset.getId(), maxCharacters, recommended);
 	}
 	
 	public void setStatus(int status) {

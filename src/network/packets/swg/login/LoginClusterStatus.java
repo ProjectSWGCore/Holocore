@@ -28,6 +28,7 @@
 package network.packets.swg.login;
 
 import java.nio.ByteBuffer;
+import java.time.ZoneOffset;
 import java.util.List;
 import java.util.Vector;
 
@@ -58,7 +59,8 @@ public class LoginClusterStatus extends SWGPacket {
 			g.setPopulation(getInt(data));
 			getInt(data); // population status
 			g.setMaxCharacters(getInt(data));
-			getInt(data);	// Time zone
+			
+			g.setZoneOffset(ZoneOffset.ofTotalSeconds(getInt(data)));
 			g.setStatus(getInt(data));
 			g.setRecommended(getBoolean(data));
 			g.setOnlinePlayerLimit(getInt(data));
