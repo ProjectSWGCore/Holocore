@@ -58,7 +58,7 @@ public class LoginClusterStatus extends SWGPacket {
 			g.setPopulation(getInt(data));
 			getInt(data); // population status
 			g.setMaxCharacters(getInt(data));
-			g.setTimeZone(getInt(data));
+			getInt(data);	// Time zone
 			g.setStatus(getInt(data));
 			g.setRecommended(getBoolean(data));
 			g.setOnlinePlayerLimit(getInt(data));
@@ -83,7 +83,7 @@ public class LoginClusterStatus extends SWGPacket {
 			 addInt(    data, g.getPopulation());
 			 addInt(    data, g.getPopulationStatus());
 			 addInt(    data, g.getMaxCharacters());
-			 addInt(    data, g.getTimeZone());
+			 addInt(    data, g.getDistance());
 			 addInt(    data, g.getStatus().getStatus());
 			 addBoolean(data, g.isRecommended());
 			 addInt(    data, g.getOnlinePlayerLimit());

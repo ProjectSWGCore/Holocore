@@ -59,7 +59,7 @@ public class LoginEnumCluster extends SWGPacket {
 			Galaxy g = new Galaxy();
 			g.setId(getInt(data));
 			g.setName(getAscii(data));
-			g.setTimeZone(getInt(data));
+			getInt(data);	// Time zone
 			galaxies.add(g);
 		}
 		maxCharacters = getInt(data);
@@ -76,7 +76,7 @@ public class LoginEnumCluster extends SWGPacket {
 		for (Galaxy g : galaxies) {
 			addInt(  data, g.getId());
 			addAscii(data, g.getName());
-			addInt(  data, g.getTimeZone());
+			addInt(  data, g.getDistance());
 		}
 		addInt(data, maxCharacters);
 		return data;

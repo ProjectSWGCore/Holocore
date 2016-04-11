@@ -44,6 +44,7 @@ import intents.network.InboundPacketIntent;
 import intents.network.OutboundPacketIntent;
 import intents.server.ServerManagementIntent;
 import intents.server.ServerStatusIntent;
+import java.util.TimeZone;
 import resources.Galaxy;
 import resources.Galaxy.GalaxyStatus;
 import resources.config.ConfigFile;
@@ -250,7 +251,6 @@ public class CoreManager extends Manager {
 		GALAXY.setName(c.getString("GALAXY-NAME", "Holocore"));
 		GALAXY.setAddress("");
 		GALAXY.setPopulation(0);
-		GALAXY.setTimeZone(c.getInt("GALAXY-TIMEZONE", -6));
 		GALAXY.setZonePort(0);
 		GALAXY.setPingPort(0);
 		GALAXY.setStatus(GalaxyStatus.DOWN);

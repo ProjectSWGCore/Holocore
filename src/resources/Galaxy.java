@@ -27,6 +27,7 @@
 ***********************************************************************************/
 package resources;
 
+import java.util.TimeZone;
 
 public class Galaxy {
 	
@@ -45,14 +46,14 @@ public class Galaxy {
 	private int pingPort = 44462;
 	private int population = 0;
 	private GalaxyStatus status = GalaxyStatus.DOWN;
-	private int timeZone = 0;
+	private final TimeZone timeZone;
 	private int maxCharacters = 0;
 	private int onlinePlayerLimit = 0;
 	private int onlineFreeTrialLimit = 0;
 	private boolean recommended = true;
 	
 	public Galaxy() {
-		
+		timeZone = TimeZone.getDefault();
 	}
 	
 	public synchronized int    getId()                   { return id; }
@@ -62,7 +63,7 @@ public class Galaxy {
 	public synchronized int    getPingPort()             { return pingPort; }
 	public synchronized int    getPopulation()           { return population; }
 	public synchronized GalaxyStatus getStatus()         { return status; }
-	public synchronized int    getTimeZone()             { return timeZone; }
+	public synchronized int    getDistance()             { System.out.println(timeZone.getRawOffset() / 1000); return timeZone.getRawOffset() / 1000; }
 	public synchronized int    getMaxCharacters()        { return maxCharacters; }
 	public synchronized int    getOnlinePlayerLimit()    { return onlinePlayerLimit; }
 	public synchronized int    getOnlineFreeTrialLimit() { return onlineFreeTrialLimit; }
@@ -91,7 +92,6 @@ public class Galaxy {
 	public synchronized void setPingPort(int port)            { this.pingPort = port; }
 	public synchronized void setPopulation(int population)    { this.population = population; }
 	public synchronized void setStatus(GalaxyStatus status)   { this.status = status; }
-	public synchronized void setTimeZone(int timeZone)        { this.timeZone = timeZone; }
 	public synchronized void setMaxCharacters(int max)        { this.maxCharacters = max; }
 	public synchronized void setOnlinePlayerLimit(int max)    { this.onlinePlayerLimit = max; }
 	public synchronized void setOnlineFreeTrialLimit(int max) { this.onlineFreeTrialLimit = max; }
