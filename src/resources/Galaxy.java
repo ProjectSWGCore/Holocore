@@ -63,7 +63,7 @@ public class Galaxy {
 	public synchronized int    getPingPort()             { return pingPort; }
 	public synchronized int    getPopulation()           { return population; }
 	public synchronized GalaxyStatus getStatus()         { return status; }
-	public synchronized int    getDistance()             { System.out.println(timeZone.getRawOffset() / 1000); return timeZone.getRawOffset() / 1000; }
+	public synchronized int    getDistance()             { return timeZone.getRawOffset() / 1000; }
 	public synchronized int    getMaxCharacters()        { return maxCharacters; }
 	public synchronized int    getOnlinePlayerLimit()    { return onlinePlayerLimit; }
 	public synchronized int    getOnlineFreeTrialLimit() { return onlineFreeTrialLimit; }
