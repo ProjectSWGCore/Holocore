@@ -719,6 +719,8 @@ public class CreatureObject extends TangibleObject {
 
 	public boolean hasAbility(String abilityName) { return abilities.get(abilityName) != null; }
 	
+	public Set<String> getAbilityNames() { return abilities.keySet(); };
+	
 	public void setHealth(int health) {
 		synchronized(attributes) {
 			attributes.set(0, health);

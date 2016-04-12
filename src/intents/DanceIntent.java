@@ -25,50 +25,49 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package services.galaxy;
+package intents;
 
-import resources.control.Manager;
-import services.collections.CollectionBadgeManager;
-import services.commands.CommandService;
-import services.commands.EntertainmentService;
-import services.faction.FactionService;
-import services.galaxy.terminals.TerminalService;
-import services.sui.SuiService;
+import resources.control.Intent;
+import resources.objects.creature.CreatureObject;
 
-public class GameManager extends Manager {
-
-	private final CommandService commandService;
-	private final ConnectionService connectionService;
-	private final SuiService suiService;
-	private final CollectionBadgeManager collectionBadgeManager;
-	private final EnvironmentService weatherService;
-	private final TerminalService terminalManager;
-	private final FactionService factionService;
-	//private final GroupService groupService;
-	private final SkillModService skillModService;
-	private final EntertainmentService entertainmentService;
-
-	public GameManager() {
-		commandService = new CommandService();
-		connectionService = new ConnectionService();
-		suiService = new SuiService();
-		collectionBadgeManager = new CollectionBadgeManager();
-		weatherService = new EnvironmentService();
-		terminalManager = new TerminalService();
-		factionService = new FactionService();
-//		groupService = new GroupService();
-		skillModService = new SkillModService();
-		entertainmentService = new EntertainmentService();
-
-		addChildService(commandService);
-		addChildService(connectionService);
-		addChildService(suiService);
-		addChildService(collectionBadgeManager);
-		addChildService(weatherService);
-		addChildService(terminalManager);
-		addChildService(factionService);
-//		addChildService(groupService);
-		addChildService(skillModService);
-		addChildService(entertainmentService);
+/**
+ *
+ * @author Mads
+ */
+public class DanceIntent extends Intent {
+	public static final String TYPE = "DanceIntent";
+	private final String danceName;
+	private final CreatureObject creatureObject;
+	
+	/**
+	 * Start dancing
+	 * @param danceName
+	 * @param creatureObject 
+	 */
+	public DanceIntent(String danceName, CreatureObject creatureObject) {
+		super(TYPE);
+		this.danceName = danceName;
+		this.creatureObject = creatureObject;
 	}
+	
+	/**
+	 * Stop dancing
+	 * @param creatureObject 
+	 */
+	public DanceIntent(CreatureObject creatureObject) {
+		this(null, creatureObject);
+	}
+
+	public String getDanceName() {
+		return danceName;
+	}
+
+	public CreatureObject getCreatureObject() {
+		return creatureObject;
+	}
+	
+	public boolean isStartDance() {
+		return danceName != null;
+	}
+	
 }
