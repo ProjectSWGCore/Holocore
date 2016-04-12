@@ -143,17 +143,17 @@ public final class SpawnerService extends Service {
 		createNPC(parent, loc, set.getString("iff"), set.getString("creature_name"), set.getString("mood"));
 	}
 	
-    private boolean createNPC(SWGObject parent, Location loc, String iff, String name, String moodAnimation) {
-        CreatureObject object = (CreatureObject) objectManager.createObject(parent, createTemplate(getRandomIff(iff)), loc, false);
-        boolean objectCreated = object != null;
-        if (objectCreated) {
-            object.setName(getCreatureName(name));
-            if (!moodAnimation.equals(IDLE_MOOD)) {
-                object.setMoodAnimation(moodAnimation);
+        private boolean createNPC(SWGObject parent, Location loc, String iff, String name, String moodAnimation) {
+            CreatureObject object = (CreatureObject) objectManager.createObject(parent, createTemplate(getRandomIff(iff)), loc, false);
+            boolean objectCreated = object != null;
+            if (objectCreated) {
+                object.setName(getCreatureName(name));
+                if (!moodAnimation.equals(IDLE_MOOD)) {
+                    object.setMoodAnimation(moodAnimation);
+                }
             }
+            return objectCreated;
         }
-        return objectCreated;
-    }
 	
 	private String getCreatureName(String name) {
 		return name.replace("(", "\n(");
