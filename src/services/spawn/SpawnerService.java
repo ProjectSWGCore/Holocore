@@ -143,8 +143,10 @@ public final class SpawnerService extends Service {
 	
 	private boolean createNPC(SWGObject parent, Location loc, String iff, String name) {
 		SWGObject object = objectManager.createObject(parent, createTemplate(getRandomIff(iff)), loc, false);
-		object.setName(getCreatureName(name));
-		return true;
+        boolean objectCreated = object != null;
+        if(objectCreated)
+            object.setName(getCreatureName(name));
+		return objectCreated;
 	}
 	
 	private String getCreatureName(String name) {
