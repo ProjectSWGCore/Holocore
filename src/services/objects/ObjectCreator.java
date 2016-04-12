@@ -75,7 +75,7 @@ public final class ObjectCreator {
 		if (!template.endsWith(".iff"))
 			return null;
 		ObjectData attributes = (ObjectData) ClientFactory.getInfoFromFile(ClientFactory.formatToSharedFile(template), true);
-		if(attributes == null)
+        if(attributes == null)
             return null;
         GameObjectType type = GameObjectType.getTypeFromId((Integer) attributes.getAttribute(ObjectDataAttribute.GAME_OBJECT_TYPE));
 		SWGObject obj = createObjectFromType(objectId, template, type);

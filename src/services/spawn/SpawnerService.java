@@ -152,7 +152,6 @@ public final class SpawnerService extends Service {
                 object.setMoodAnimation(moodAnimation);
             }
         }
-
         return objectCreated;
     }
 	
