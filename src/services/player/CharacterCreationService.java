@@ -398,6 +398,9 @@ public class CharacterCreationService extends Service {
 		createInventoryObject(objManager, creatureObj, "object/tangible/bank/shared_character_bank.iff");
 		createInventoryObject(objManager, creatureObj, "object/tangible/mission_bag/shared_mission_bag.iff");
 		
+		// Any character can perform the basic dance.
+		creatureObj.addAbility("startDance+basic");
+		
 		creatureObj.joinPermissionGroup("world");
 	}
 	
