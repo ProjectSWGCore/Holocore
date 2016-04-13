@@ -49,7 +49,7 @@ public class UniformBoxService extends Service {
 	//TODO: Display loot box
 	
 	private static final String [] UNIFORM_COLUMNS = {"boots", "pants", "belt", "gloves", "shirt", "vest", "hat", "necklace", "robe", "weapon"};
-	private static final String GET_UNIFORMBOX_SQL = "SELECT * FROM npe_uniformbox where profession = ? AND race = ? AND (gender = ? OR gender = 3)";
+	private static final String GET_UNIFORMBOX_SQL = "SELECT * FROM npe_uniformbox where profession = ? AND race = ?";
 	private static final String UNIFORM_BOX_IFF = "object/tangible/npe/shared_npe_uniform_box.iff";
 	
 	private RelationalServerData uniformBoxDatabase;
@@ -86,15 +86,14 @@ public class UniformBoxService extends Service {
 		String profession = creature.getPlayerObject().getProfession();
 		
 		destroyUniformBox(creature);
-		handleCreateItems(inventory, profession.substring(0, profession.lastIndexOf('_')), creature.getRace());
+		handleCreateItems(inventory, profession, creature.getRace());
 	}
 	
 	private void handleCreateItems(SWGObject inventory, String profession, Race race) {
 		synchronized (getUniformBoxStatement) {
 			try {
 				getUniformBoxStatement.setString(1, profession);
-				getUniformBoxStatement.setString(2, race.getSpecies());
-				getUniformBoxStatement.setInt(3, race.isMale() ? 1 : 2);
+				getUniformBoxStatement.setString(2, race.name());
 				
 				try (ResultSet set = getUniformBoxStatement.executeQuery()) {
 					if (set.next())
