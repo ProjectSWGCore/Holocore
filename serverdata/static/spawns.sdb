@@ -55,7 +55,7 @@ starport_restuss	object/tangible/terminal/shared_terminal_space.iff	r1	-7.6	0	-1
 cloning_tat	object/tangible/terminal/shared_terminal_cloning.iff	insurance	1.04	0.1	2.57	0
 cloning_tat	object/tangible/terminal/shared_terminal_cloning.iff	insurance	1.04	0.1	-1.25	180
 cloning_tat	object/mobile/shared_clone_droid.iff	insurance	-5	0.1	1.8	90
-cloning_tat_sml	object/tangible/terminal/shared_terminal_cloning.iff	livingroom1	4.4	0.3	4.8	-90
+cloning_tat_sml	object/tangible/terminal/shared_terminal_cloning.iff	foyer1	4.4	0.3	4.8	-90
 cloning_tat_sml	object/mobile/shared_clone_droid.iff	livingroom1	4.6	-0.4	-4.3	-90
 cloning_nab	object/tangible/terminal/shared_terminal_cloning.iff	insurance	1.04	0.1	2.57	0
 cloning_nab	object/tangible/terminal/shared_terminal_cloning.iff	insurance	1.04	0.1	-1.25	180
