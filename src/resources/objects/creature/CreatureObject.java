@@ -67,7 +67,7 @@ public class CreatureObject extends TangibleObject {
 	private transient long groupId					= 0;
 	
 	private Posture	posture					= Posture.UPRIGHT;
-	private Race	race					= Race.HUMAN; 
+	private Race	race					= Race.HUMAN_MALE;
 	private double	movementScale			= 1;
 	private double	movementPercent			= 1;
 	private double	walkSpeed				= 1.549;

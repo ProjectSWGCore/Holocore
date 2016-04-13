@@ -47,7 +47,7 @@ public class CmdStartScene extends SWGPacket {
 	public CmdStartScene() {
 		ignoreLayoutFiles = false;
 		charId = 0;
-		race = Race.HUMAN;
+		race = Race.HUMAN_MALE;
 		l = new Location();
 		galacticTime = 0;
 		serverEpoch = 0;
