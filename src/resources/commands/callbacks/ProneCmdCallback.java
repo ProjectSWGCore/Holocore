@@ -33,17 +33,17 @@ public class ProneCmdCallback implements ICmdCallback {
 
     @Override
     public void execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
-        CreatureObject creature = player.getCreatureObject();
+		CreatureObject creature = player.getCreatureObject();
 
-        if (creature.isPerforming()) {
-            // Ziggy: When you move while dancing, the client wants to execute /stand instead of /stopDance. Blame SOE.
-            new intents.DanceIntent(player.getCreatureObject()).broadcast();
-        } else {
-            creature.setPosture(Posture.PRONE);
-            creature.setTurnScale(1);
-            creature.setMovementScale(0.50);
-            creature.sendObserversAndSelf(new PostureUpdate(creature.getObjectId(), Posture.PRONE));
-        }
-    }
+		if (creature.isPerforming()) {
+			// Ziggy: When you move while dancing, the client wants to execute /stand instead of /stopDance. Blame SOE.
+			new intents.DanceIntent(player.getCreatureObject()).broadcast();
+		} else {
+			creature.setPosture(Posture.PRONE);
+			creature.setTurnScale(1);
+			creature.setMovementScale(0.50);
+			creature.sendObserversAndSelf(new PostureUpdate(creature.getObjectId(), Posture.PRONE));
+		}
+	}
 
 }
