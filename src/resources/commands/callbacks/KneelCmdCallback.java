@@ -41,7 +41,6 @@ public class KneelCmdCallback implements ICmdCallback {
 	public void execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
 		CreatureObject creature = player.getCreatureObject();
 		if (creature.isPerforming()) {
-			// Ziggy: When you move while dancing, the client wants to execute /stand instead of /stopDance. Blame SOE.
 			new intents.DanceIntent(player.getCreatureObject()).broadcast();
 		} else {
 			creature.setPosture(Posture.CROUCHED);
