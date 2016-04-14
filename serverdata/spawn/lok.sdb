@@ -253,55 +253,55 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 1800253	LOK	lok_world	AREA	0	-6074.71	62.13	5938.66	-125	1	a Rebel trooper	13485	dungeon	ITP - Rebel Forward Outpost	1	STOP	idle	0	0	0	0	300	120	0
 1800254	LOK	lok_world	AREA	0	-6069.94	61.94	5965.03	0	1	a Rebel trooper	13485	dungeon	ITP - Rebel Forward Outpost	1	STOP	idle	0	0	0	0	300	120	2
 1800255	LOK	lok_world	AREA	0	-6048.62	60.41	5943.93	0	1	a Rebel trooper	13485	dungeon	ITP - Rebel Forward Outpost	1	STOP	idle	0	0	0	0	300	120	2
-1800256	LOK	lok_ntp_pirate_cave	AREA	19	4.50	-20.00	-16.30	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	0
-1800257	LOK	lok_ntp_pirate_cave	AREA	26	4.10	-71.70	-110.80	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	0
-1800258	LOK	lok_ntp_pirate_cave	AREA	20	3.10	-67.40	-69.80	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	0
-1800259	LOK	lok_ntp_pirate_cave	AREA	20	20.00	-35.20	-72.30	0	1	a Sulfur Lake cutthroat	31975	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	0
-1800260	LOK	lok_ntp_pirate_cave	AREA	19	18.80	-27.30	-38.10	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	0
-1800261	LOK	lok_ntp_pirate_cave	AREA	20	17.00	-35.30	-76.60	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	0
-1800262	LOK	lok_ntp_pirate_cave	AREA	6	-98.10	-51.10	-65.10	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	0
-1800263	LOK	lok_ntp_pirate_cave	AREA	11	-96.80	-39.20	-87.40	0	1	a Sulfur Lake armsman	31970	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	0
-1800264	LOK	lok_ntp_pirate_cave	AREA	9	-92.90	-71.10	-113.60	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	0
-1800265	LOK	lok_ntp_pirate_cave	AREA	9	-85.50	-53.40	-113.90	0	1	a Sulfur Lake cutthroat	31975	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	0
-1800266	LOK	lok_ntp_pirate_cave	AREA	14	-80.90	-57.90	-41.90	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	0
-1800267	LOK	lok_ntp_pirate_cave	AREA	14	-79.40	-57.60	-81.10	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	0
-1800268	LOK	lok_ntp_pirate_cave	AREA	5	-79.20	-46.80	-42.10	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	0
-1800269	LOK	lok_ntp_pirate_cave	AREA	5	-76.80	-47.10	-63.80	0	1	a Sulfur Lake armsman	31970	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	0
-1800270	LOK	lok_ntp_pirate_cave	AREA	5	-76.00	-30.00	-40.40	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	0
-1800271	LOK	lok_ntp_pirate_cave	AREA	9	-72.50	-38.00	-118.60	0	1	a Sulfur Lake cutthroat	31975	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	0
+1800256	LOK	lok_ntp_pirate_cave	AREA	1	0.31	-20.34	-14.30	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	2
+1800257	LOK	lok_ntp_pirate_cave	AREA	26	4.10	-71.70	-110.80	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	2	STOP	idle	0	0	0	0	300	120	4
+1800258	LOK	lok_ntp_pirate_cave	AREA	20	3.10	-67.40	-69.80	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	2	STOP	idle	0	0	0	0	300	120	4
+1800259	LOK	lok_ntp_pirate_cave	AREA	20	20.00	-35.20	-72.30	0	1	a Sulfur Lake cutthroat	31975	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	2
+1800260	LOK	lok_ntp_pirate_cave	AREA	19	18.80	-27.30	-38.10	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	2
+1800261	LOK	lok_ntp_pirate_cave	AREA	20	17.00	-35.30	-76.60	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	2
+1800262	LOK	lok_ntp_pirate_cave	AREA	6	-98.10	-51.10	-65.10	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	2
+1800263	LOK	lok_ntp_pirate_cave	AREA	11	-96.80	-39.20	-87.40	0	1	a Sulfur Lake armsman	31970	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	2
+1800264	LOK	lok_ntp_pirate_cave	AREA	9	-92.90	-71.10	-113.60	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	2	STOP	idle	0	0	0	0	300	120	4
+1800265	LOK	lok_ntp_pirate_cave	AREA	9	-85.50	-53.40	-113.90	0	1	a Sulfur Lake cutthroat	31975	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	2
+1800266	LOK	lok_ntp_pirate_cave	AREA	14	-80.90	-57.90	-41.90	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	2
+1800267	LOK	lok_ntp_pirate_cave	AREA	14	-79.40	-57.60	-81.10	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	2
+1800268	LOK	lok_ntp_pirate_cave	AREA	5	-79.20	-46.80	-42.10	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	2
+1800269	LOK	lok_ntp_pirate_cave	AREA	5	-76.80	-47.10	-63.80	0	1	a Sulfur Lake armsman	31970	dungeon	NTP - Sulfur Pirate Cave	2	STOP	idle	0	0	0	0	300	120	4
+1800270	LOK	lok_ntp_pirate_cave	AREA	5	-76.00	-30.00	-40.40	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	2
+1800271	LOK	lok_ntp_pirate_cave	AREA	9	-72.50	-38.00	-118.60	0	1	a Sulfur Lake cutthroat	31975	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	2
 1800272	LOK	lok_ntp_pirate_cave	EGG	9	-71.10	-70.30	-119.40	-24	1	Lok Revenant Prisoner	22235	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	0
-1800273	LOK	lok_ntp_pirate_cave	AREA	5	-64.30	-46.60	-47.20	0	1	a Sulfur Lake cutthroat	31975	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	0
-1800274	LOK	lok_ntp_pirate_cave	AREA	5	-63.90	-30.50	-72.00	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	0
-1800275	LOK	lok_ntp_pirate_cave	AREA	4	-63.30	-44.60	-22.00	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	0
-1800276	LOK	lok_ntp_pirate_cave	AREA	25	-50.20	-69.50	-124.40	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	0
-1800277	LOK	lok_ntp_pirate_cave	AREA	3	-43.50	-29.80	-42.40	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	0
-1800278	LOK	lok_ntp_pirate_cave	AREA	22	-39.00	-45.00	-107.30	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	0
-1800279	LOK	lok_ntp_pirate_cave	AREA	2	-38.00	-31.60	-25.80	0	1	a Sulfur Lake armsman	31970	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	0
-1800280	LOK	lok_ntp_pirate_cave	AREA	21	-27.50	-40.10	-83.10	0	1	a Sulfur Lake armsman	31970	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	0
-1800281	LOK	lok_ntp_pirate_cave	AREA	2	-25.00	-30.50	-19.70	0	1	a Sulfur Lake armsman	31970	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	0
-1800282	LOK	lok_ntp_pirate_cave	AREA	20	-21.00	-35.10	-69.70	0	1	a Sulfur Lake armsman	31970	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	0
-1800283	LOK	lok_ntp_pirate_cave	AREA	12	-177.50	-53.80	-122.60	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	0
-1800284	LOK	lok_ntp_pirate_cave	AREA	8	-168.00	-49.60	-39.50	0	1	a Sulfur Lake armsman	31970	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	0
-1800285	LOK	lok_ntp_pirate_cave	AREA	10	-167.20	-49.70	-68.10	0	1	a Sulfur Lake armsman	31970	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	0
-1800286	LOK	lok_ntp_pirate_cave	AREA	10	-164.00	-49.40	-86.70	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	0
-1800287	LOK	lok_ntp_pirate_cave	AREA	22	-16.80	-44.20	-101.30	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	0
-1800288	LOK	lok_ntp_pirate_cave	AREA	6	-144.80	-49.60	-65.70	0	1	a Sulfur Lake armsman	31970	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	0
-1800289	LOK	lok_ntp_pirate_cave	AREA	8	-140.00	-49.80	-46.80	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	0
-1800290	LOK	lok_ntp_pirate_cave	AREA	11	-139.70	-53.90	-80.10	0	1	a Sulfur Lake armsman	31970	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	0
-1800291	LOK	lok_ntp_pirate_cave	AREA	18	-135.20	-57.40	-26.40	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	0
-1800292	LOK	lok_ntp_pirate_cave	AREA	26	-13.60	-67.90	-107.50	0	1	a Sulfur Lake armsman	31970	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	0
-1800293	LOK	lok_ntp_pirate_cave	AREA	24	-128.80	-60.20	-138.30	0	1	a Sulfur Lake armsman	31970	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	0
-1800294	LOK	lok_ntp_pirate_cave	AREA	2	-12.00	-30.30	-49.00	0	1	a Sulfur Lake armsman	31970	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	0
-1800295	LOK	lok_ntp_pirate_cave	AREA	23	-116.70	-53.80	-112.60	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	0
-1800296	LOK	lok_ntp_pirate_cave	AREA	6	-116.20	-49.40	-58.80	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	0
-1800297	LOK	lok_ntp_pirate_cave	AREA	16	-113.90	-57.90	-25.80	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	0
+1800273	LOK	lok_ntp_pirate_cave	AREA	5	-64.30	-46.60	-47.20	0	1	a Sulfur Lake cutthroat	31975	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	2
+1800274	LOK	lok_ntp_pirate_cave	AREA	5	-63.90	-30.50	-72.00	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	2	STOP	idle	0	0	0	0	300	120	4
+1800275	LOK	lok_ntp_pirate_cave	AREA	4	-63.30	-44.60	-22.00	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	2	STOP	idle	0	0	0	0	300	120	4
+1800276	LOK	lok_ntp_pirate_cave	AREA	25	-50.20	-69.50	-124.40	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	2
+1800277	LOK	lok_ntp_pirate_cave	AREA	3	-43.50	-29.80	-42.40	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	2
+1800278	LOK	lok_ntp_pirate_cave	AREA	22	-39.00	-45.00	-107.30	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	2
+1800279	LOK	lok_ntp_pirate_cave	AREA	2	-38.00	-31.60	-25.80	0	1	a Sulfur Lake armsman	31970	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	2
+1800280	LOK	lok_ntp_pirate_cave	AREA	21	-27.50	-40.10	-83.10	0	1	a Sulfur Lake armsman	31970	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	2
+1800281	LOK	lok_ntp_pirate_cave	AREA	2	-25.00	-30.50	-19.70	0	1	a Sulfur Lake armsman	31970	dungeon	NTP - Sulfur Pirate Cave	2	STOP	idle	0	0	0	0	300	120	4
+1800282	LOK	lok_ntp_pirate_cave	AREA	21	-23.02	-35.11	-71.07	0	1	a Sulfur Lake armsman	31970	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	2
+1800283	LOK	lok_ntp_pirate_cave	AREA	12	-177.50	-53.80	-122.60	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	2
+1800284	LOK	lok_ntp_pirate_cave	AREA	8	-168.00	-49.60	-39.50	0	1	a Sulfur Lake armsman	31970	dungeon	NTP - Sulfur Pirate Cave	2	STOP	idle	0	0	0	0	300	120	4
+1800285	LOK	lok_ntp_pirate_cave	AREA	10	-167.20	-49.70	-68.10	0	1	a Sulfur Lake armsman	31970	dungeon	NTP - Sulfur Pirate Cave	2	STOP	idle	0	0	0	0	300	120	4
+1800286	LOK	lok_ntp_pirate_cave	AREA	10	-164.00	-49.40	-86.70	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	2
+1800287	LOK	lok_ntp_pirate_cave	AREA	22	-16.80	-44.20	-101.30	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	2
+1800288	LOK	lok_ntp_pirate_cave	AREA	6	-144.80	-49.60	-65.70	0	1	a Sulfur Lake armsman	31970	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	2
+1800289	LOK	lok_ntp_pirate_cave	AREA	8	-140.00	-49.80	-46.80	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	2	STOP	idle	0	0	0	0	300	120	4
+1800290	LOK	lok_ntp_pirate_cave	AREA	11	-139.70	-53.90	-80.10	0	1	a Sulfur Lake armsman	31970	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	2
+1800291	LOK	lok_ntp_pirate_cave	AREA	18	-135.20	-57.40	-26.40	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	2
+1800292	LOK	lok_ntp_pirate_cave	AREA	26	-13.60	-67.90	-107.50	0	1	a Sulfur Lake armsman	31970	dungeon	NTP - Sulfur Pirate Cave	2	STOP	idle	0	0	0	0	300	120	4
+1800293	LOK	lok_ntp_pirate_cave	AREA	24	-128.80	-60.20	-138.30	0	1	a Sulfur Lake armsman	31970	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	2
+1800294	LOK	lok_ntp_pirate_cave	AREA	2	-12.00	-30.30	-49.00	0	1	a Sulfur Lake armsman	31970	dungeon	NTP - Sulfur Pirate Cave	2	STOP	idle	0	0	0	0	300	120	4
+1800295	LOK	lok_ntp_pirate_cave	AREA	23	-116.70	-53.80	-112.60	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	2
+1800296	LOK	lok_ntp_pirate_cave	AREA	6	-116.20	-49.40	-58.80	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	2
+1800297	LOK	lok_ntp_pirate_cave	AREA	16	-113.90	-57.90	-25.80	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	2	STOP	idle	0	0	0	0	300	120	4
 1800298	LOK	lok_ntp_pirate_cave	EGG	25	-61.61	-65.80	-142.68	-58	1	a Hacker	34400	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	0
-1800299	LOK	lok_ntp_pirate_cave	AREA	9	-110.80	-69.60	-108.00	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	0
-1800300	LOK	lok_ntp_pirate_cave	AREA	20	-11.20	-34.90	-66.20	0	1	a Sulfur Lake armsman	31970	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	0
-1800301	LOK	lok_ntp_pirate_cave	AREA	15	-104.50	-39.60	-44.90	0	1	Bridge Troll	22060	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	300	0
-1800302	LOK	lok_ntp_pirate_cave	AREA	6	-103.60	-36.20	-64.30	0	1	a Sulfur Lake armsman	31970	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	0
-1800303	LOK	lok_ntp_pirate_cave	AREA	16	-103.40	-42.10	-32.10	0	1	a Sulfur Lake cutthroat	31975	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	0
-1800304	LOK	lok_ntp_pirate_cave	AREA	22	-10.20	-43.80	-97.50	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	0
+1800299	LOK	lok_ntp_pirate_cave	AREA	9	-110.80	-69.60	-108.00	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	2	STOP	idle	0	0	0	0	300	120	4
+1800300	LOK	lok_ntp_pirate_cave	AREA	20	-11.20	-34.90	-66.20	0	1	a Sulfur Lake armsman	31970	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	2
+1800301	LOK	lok_ntp_pirate_cave	AREA	15	-104.50	-39.60	-44.90	4	1	Bridge Troll	22060	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	300	0
+1800302	LOK	lok_ntp_pirate_cave	AREA	6	-103.60	-36.20	-64.30	0	1	a Sulfur Lake armsman	31970	dungeon	NTP - Sulfur Pirate Cave	2	STOP	idle	0	0	0	0	300	120	4
+1800303	LOK	lok_ntp_pirate_cave	AREA	16	-103.40	-42.10	-32.10	0	1	a Sulfur Lake cutthroat	31975	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	2
+1800304	LOK	lok_ntp_pirate_cave	AREA	22	-10.20	-43.80	-97.50	0	1	a Sulfur Lake pirate	31980	dungeon	NTP - Sulfur Pirate Cave	1	STOP	idle	0	0	0	0	300	120	2
 1800305	LOK	lok_prolog_bunker	AREA	6	4.70	-6.80	-15.90	0	1	a Dead Biologist	3425	dungeon	Prolog Bunker Dungeon	1	STOP	npc_dead_02	0	0	0	0	300	120	0
 1800306	LOK	lok_prolog_bunker	AREA	7	3.80	-6.80	-1.50	0	1	a Dead Biologist	3430	dungeon	Prolog Bunker Dungeon	1	STOP	npc_dead_02	0	0	0	0	300	120	0
 1800307	LOK	lok_prolog_bunker	AREA	9	3.20	-13.80	-12.50	0	1	a Dead Biologist	3405	dungeon	Prolog Bunker Dungeon	1	STOP	npc_dead_02	0	0	0	0	300	120	0
@@ -437,115 +437,207 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 1800437	LOK	lok_world	AREA	0	-796.43	15.37	-4974.22	0	1	a Jedi Padawan	31530	outback	Glowing Stone	1	STOP	idle	0	0	0	0	300	120	2
 1800438	LOK	lok_world	AREA	0	-785.70	14.68	-4965.36	0	1	a Jedi Padawan	31530	outback	Glowing Stone	1	STOP	idle	0	0	0	0	300	120	2
 1800439	LOK	lok_world	AREA	0	-783.51	14.25	-4980.35	0	1	a Jedi Padawan	31530	outback	Glowing Stone	1	STOP	idle	0	0	0	0	300	120	2
-	LOK	lok_world	EGG	0	-2036.34	42.26	5969.93	146	1	Cale Herron (a Slicer)	3485	outback	Lok	1	STOP	idle	0	0	0	0	300	120	0
+1800440	LOK	lok_world	EGG	0	-2036.34	42.26	5969.93	146	1	Cale Herron (a Slicer)	3485	outback	Lok	1	STOP	idle	0	0	0	0	300	120	0
 1800441	LOK	lok_world	AREA	0	-6223.26	13.61	3389.98	0	1	a Jedi Padawan	31530	outback	Lok	1	STOP	idle	0	0	0	0	300	120	2
 1800442	LOK	lok_world	EGG	0	4155.52	98.14	7594.58	116	1	Hunde Decan	12515	outback	Lok	1	STOP	idle	0	0	0	0	300	120	0
-1800443	LOK	lok_world	AREA	0	281.74	11.96	4618.07	0	1	Meatlump Dunder (Outpost Guard)	16190	outback	Meatlump Camp - Nym's	1	STOP	idle	0	0	0	0	300	120	2
-1800444	LOK	lok_world	AREA	0	272.34	12.04	4656.36	0	1	Meatlump Dunder (Outpost Guard)	16190	outback	Meatlump Camp - Nym's	1	STOP	idle	0	0	0	0	300	120	2
-1800445	LOK	lok_world	AREA	0	241.81	11.99	4628.48	0	1	Meatlump Dunder (Outpost Guard)	16190	outback	Meatlump Camp - Nym's	1	STOP	idle	0	0	0	0	300	120	2
-1800446	LOK	lok_world	AREA	0	-2129.00	104.00	5939.00	0	1	a langlatch giant	14630	outback	Mysterious Shrine	4	STOP	idle	0	0	0	0	900	600	15
-1800447	LOK	lok_world	AREA	0	-6014.70	56.30	6430.50	0	1	an aged kimogila	14215	outback	Pit with Stone Claws	3	STOP	idle	0	0	0	0	900	600	30
-1800448	LOK	lok_world	AREA	0	730.42	11.99	-3361.74	0	1	a gurk	11160	outback	Reclusive Gurk King #1	1	STOP	idle	0	0	0	0	300	120	0
-1800449	LOK	lok_world	AREA	0	729.99	12.06	-3367.28	0	1	a gurk	11160	outback	Reclusive Gurk King #1	1	STOP	idle	0	0	0	0	300	120	0
-1800450	LOK	lok_world	AREA	0	716.69	11.91	-3362.56	0	1	a reclusive gurk king	24780	outback	Reclusive Gurk King #1	1	STOP	idle	0	0	0	0	1800	1800	0
-1800451	LOK	lok_world	AREA	0	705.12	12.16	-3369.32	0	1	a gurk	11160	outback	Reclusive Gurk King #1	1	STOP	idle	0	0	0	0	300	120	0
-1800452	LOK	lok_world	AREA	0	704.38	12.18	-3363.69	0	1	a gurk	11160	outback	Reclusive Gurk King #1	1	STOP	idle	0	0	0	0	300	120	0
-1800453	LOK	lok_world	AREA	0	-3772.73	61.79	-3474.10	-177	1	a gurk	11160	outback	Reclusive Gurk King #2	1	STOP	idle	0	0	0	0	300	120	0
-1800454	LOK	lok_world	AREA	0	-3772.25	62.05	-3478.67	-177	1	a gurk	11160	outback	Reclusive Gurk King #2	1	STOP	idle	0	0	0	0	300	120	0
-1800455	LOK	lok_world	AREA	0	-3765.55	61.90	-3486.46	-177	1	a reclusive gurk king	24780	outback	Reclusive Gurk King #2	1	STOP	idle	0	0	0	0	1800	1800	0
-1800456	LOK	lok_world	AREA	0	-3760.73	62.73	-3478.18	-177	1	a gurk	11160	outback	Reclusive Gurk King #2	1	STOP	idle	0	0	0	0	300	120	0
-1800457	LOK	lok_world	AREA	0	-3757.21	63.30	-3473.17	-177	1	a gurk	11160	outback	Reclusive Gurk King #2	1	STOP	idle	0	0	0	0	300	120	0
-1800458	LOK	lok_world	AREA	0	5065.91	96.78	412.12	0	1	a Jedi Padawan	31530	outback	Steaming Stone	1	STOP	idle	0	0	0	0	300	120	2
-1800459	LOK	lok_world	AREA	0	5065.85	97.20	406.36	0	1	a Jedi Padawan	31530	outback	Steaming Stone	1	STOP	idle	0	0	0	0	300	120	2
-1800460	LOK	lok_world	AREA	0	-122.90	60.30	-358.00	0	1	an aged kimogila	14215	outback	Wall Array Hill	3	STOP	idle	0	0	0	0	900	600	30
-1800461	LOK	lok_world	AREA	0	6410.70	42.00	5020.00	0	1	a kimogila dwarf	14220	outback	Water Feature	4	STOP	idle	0	0	0	0	900	600	40
-1800462	LOK	lok_world	EGG	0	-3922.00	12.03	-3922.00	0	1	Marla	26875	poi	Canyon Corsair's Stronghold	1	STOP	idle	0	0	0	0	300	120	0
-1800463	LOK	lok_world	PATROL	0	-3954.42	10.82	-3895.44	0	1	a criminal	27100	poi	Canyon Corsair's Stronghold	1	STOP	idle	0	999	0	0	300	120	0
-1800464	LOK	lok_world	PATROL	0	-3950.56	11.57	-3887.66	0	1	a criminal	27100	poi	Canyon Corsair's Stronghold	1	STOP	idle	0	999	0	0	300	120	0
-1800465	LOK	lok_world	PATROL	0	-3896.39	11.81	-3932.09	0	1	a criminal	27100	poi	Canyon Corsair's Stronghold	1	STOP	idle	0	999	0	0	300	120	0
-1800466	LOK	lok_world	PATROL	0	-3892.97	11.99	-3907.85	0	1	a criminal	27100	poi	Canyon Corsair's Stronghold	1	STOP	idle	0	999	0	0	300	120	0
-1800467	LOK	lok_world	AREA	0	-3725.21	12.10	-3903.55	0	1	a Canyon Corsair guard	2345	poi	Canyon Corsair's Stronghold	2	STOP	idle	0	0	0	0	300	120	4
-1800468	LOK	lok_world	AREA	0	-3881.25	12.00	-3969.88	0	1	a Canyon Corsair guard	2345	poi	Canyon Corsair's Stronghold	2	STOP	idle	0	0	0	0	300	120	4
-1800469	LOK	lok_world	AREA	0	-3813.31	12.01	-3968.21	0	1	a Canyon Corsair guard	2345	poi	Canyon Corsair's Stronghold	2	STOP	idle	0	0	0	0	300	120	4
-1800470	LOK	lok_world	AREA	0	-3837.98	13.00	-3738.68	167	1	a Canyon Corsair captain	2330	poi	Canyon Corsair's Stronghold	1	STOP	idle	0	0	0	0	300	120	0
-1800471	LOK	lok_world	AREA	0	-3832.44	13.00	-3757.08	0	1	a Canyon Corsair strong pirate	2355	poi	Canyon Corsair's Stronghold	2	STOP	idle	0	0	0	0	300	120	4
-1800472	LOK	lok_world	AREA	0	-3809.31	11.86	-3834.61	0	1	a Canyon Corsair weak pirate	2360	poi	Canyon Corsair's Stronghold	3	STOP	idle	0	0	0	0	300	120	6
-1800473	LOK	lok_world	AREA	0	-3860.32	11.99	-3859.63	0	1	a Canyon Corsair weak pirate	2360	poi	Canyon Corsair's Stronghold	3	STOP	idle	0	0	0	0	300	120	6
-1800474	LOK	lok_world	AREA	0	-3793.77	12.01	-3919.00	0	1	a Canyon Corsair scout	2365	poi	Canyon Corsair's Stronghold	2	STOP	idle	0	0	0	0	300	120	4
-1800475	LOK	lok_world	AREA	0	-3908.19	12.00	-3803.57	0	1	a Canyon Corsair elite pirate	2350	poi	Canyon Corsair's Stronghold	2	STOP	idle	0	0	0	0	300	120	4
-1800476	LOK	lok_world	AREA	0	-3884.67	12.00	-3818.19	0	1	a Canyon Corsair cutthroat	2335	poi	Canyon Corsair's Stronghold	2	STOP	idle	0	0	0	0	300	120	4
-1800477	LOK	lok_world	AREA	0	-3850.15	12.00	-3810.15	0	1	a Canyon Corsair destroyer	2340	poi	Canyon Corsair's Stronghold	3	STOP	idle	0	0	0	0	300	120	6
-1800478	LOK	lok_world	AREA	0	-3877.88	11.98	-3872.33	0	1	a Canyon Corsair destroyer	2340	poi	Canyon Corsair's Stronghold	2	STOP	idle	0	0	0	0	300	120	4
-1800479	LOK	lok_blood_razor_transport_outpost	AREA	3	-0.00	0.13	-5.95	0	1	a Blood Razor berzerker	1520	poi	Downed Blood Razor Transport	1	STOP	idle	0	0	0	0	300	120	0
-1800480	LOK	lok_blood_razor_transport_outpost	AREA	4	4.48	0.13	3.34	-152	1	a Blood Razor berzerker	1520	poi	Downed Blood Razor Transport	1	STOP	idle	0	0	0	0	300	120	0
-1800481	LOK	lok_blood_razor_transport_shed	AREA	6	-3.19	0.13	-3.81	90	1	a Blood Razor cutthroat	1530	poi	Downed Blood Razor Transport	1	STOP	idle	0	0	0	0	300	120	0
-1800482	LOK	lok_blood_razor_transport_shed	AREA	5	5.02	0.13	-4.38	-81	1	a Blood Razor cutthroat	1530	poi	Downed Blood Razor Transport	1	STOP	idle	0	0	0	0	300	120	0
-1800483	LOK	lok_blood_razor_transport_shed	AREA	4	3.83	0.13	3.44	-177	1	a Blood Razor cutthroat	1530	poi	Downed Blood Razor Transport	1	STOP	idle	0	0	0	0	300	120	0
-1800484	LOK	lok_blood_razor_transport_warehouse	AREA	6	-4.07	0.13	-1.72	151	1	a Blood Razor cutthroat	1530	poi	Downed Blood Razor Transport	1	STOP	idle	0	0	0	0	300	120	0
-1800485	LOK	lok_blood_razor_transport_warehouse	AREA	4	2.45	0.13	1.33	-90	1	a Blood Razor destroyer	1535	poi	Downed Blood Razor Transport	1	STOP	idle	0	0	0	0	300	120	0
-1800486	LOK	lok_world	AREA	0	3562.30	0.88	2086.41	0	1	Nym's elite enforcer	27000	poi	Downed Blood Razor Transport	2	STOP	idle	0	0	0	0	300	120	4
-1800487	LOK	lok_world	AREA	0	3529.67	2.54	2137.61	0	1	Nym's elite enforcer	27000	poi	Downed Blood Razor Transport	2	STOP	idle	0	0	0	0	300	120	4
-1800488	LOK	lok_world	AREA	0	3519.94	6.74	2058.30	0	1	Nym's elite enforcer	27000	poi	Downed Blood Razor Transport	2	STOP	idle	0	0	0	0	300	120	4
-1800489	LOK	lok_world	EGG	0	3511.00	6.88	2116.00	50	1	Briscoe	26730	poi	Downed Blood Razor Transport	1	STOP	idle	0	0	0	0	300	120	0
-1800490	LOK	lok_world	AREA	0	3640.84	1.22	2126.22	0	1	a Blood Razor guard	1540	poi	Downed Blood Razor Transport	2	STOP	idle	0	0	0	0	300	120	4
-1800491	LOK	lok_world	AREA	0	3607.65	1.16	2127.93	0	1	a Blood Razor guard	1540	poi	Downed Blood Razor Transport	2	STOP	idle	0	0	0	0	300	120	4
-1800492	LOK	lok_world	AREA	0	3599.32	1.05	2218.73	0	1	a Blood Razor guard	1540	poi	Downed Blood Razor Transport	2	STOP	idle	0	0	0	0	300	120	4
-1800493	LOK	lok_world	AREA	0	3622.80	1.03	2230.33	0	1	a Blood Razor guard	1540	poi	Downed Blood Razor Transport	2	STOP	idle	0	0	0	0	300	120	4
-1800494	LOK	lok_world	AREA	0	3695.37	1.56	2211.39	0	1	a Blood Razor guard	1540	poi	Downed Blood Razor Transport	2	STOP	idle	0	0	0	0	300	120	4
-1800495	LOK	lok_world	AREA	0	3674.93	2.02	2223.58	0	1	a Blood Razor guard	1540	poi	Downed Blood Razor Transport	2	STOP	idle	0	0	0	0	300	120	4
-1800496	LOK	lok_world	AREA	0	3669.72	1.00	2194.01	27	1	a Blood Razor officer	1545	poi	Downed Blood Razor Transport	1	STOP	idle	0	0	0	0	300	120	0
-1800497	LOK	lok_world	AREA	0	3642.17	1.00	2157.15	-63	1	a Blood Razor officer	1545	poi	Downed Blood Razor Transport	1	STOP	idle	0	0	0	0	300	120	0
-1800498	LOK	lok_world	AREA	0	3607.42	1.00	2202.03	0	1	a Blood Razor weak pirate	1560	poi	Downed Blood Razor Transport	1	STOP	idle	0	0	0	0	300	120	2
-1800499	LOK	lok_world	AREA	0	3650.89	1.00	2200.70	0	1	a Blood Razor weak pirate	1560	poi	Downed Blood Razor Transport	2	STOP	idle	0	0	0	0	300	120	4
-1800500	LOK	lok_world	AREA	0	3613.53	1.00	2151.53	0	1	a Blood Razor weak pirate	1560	poi	Downed Blood Razor Transport	2	STOP	idle	0	0	0	0	300	120	4
-1800501	LOK	lok_world	AREA	0	3606.58	1.00	2172.88	116	1	a Blood Razor captain	1525	poi	Downed Blood Razor Transport	1	STOP	idle	0	0	0	0	300	120	0
-1800502	LOK	lok_world	AREA	0	3607.42	1.00	2166.33	40	1	a Blood Razor strong pirate	1555	poi	Downed Blood Razor Transport	1	STOP	idle	0	0	0	0	300	120	0
-1800503	LOK	lok_evil_droid_eng_cave	AREA	27	32.55	-68.79	-101.56	0	1	Sardeya Elgrin (droid engineer)	23990	poi	Droid Engineers Cave	1	STOP	idle	0	0	0	0	300	120	2
-1800504	LOK	lok_world	AREA	0	4568.00	13.09	-1168.00	0	1	Oono Mor'in	23980	poi	Great Kimogila's Skeleton	1	STOP	idle	0	0	0	0	300	120	2
-1800505	LOK	lok_world	EGG	0	3821.67	63.00	-542.40	51	1	Rei Reeven (injured)	22260	poi	Great Maze	1	STOP	idle	0	0	0	0	300	120	0
-1800506	LOK	lok_world	AREA	0	-1991.73	11.24	-3345.88	0	1	Nym's elite enforcer	27000	poi	Imperial Outpost	2	STOP	idle	0	0	0	0	300	120	4
-1800507	LOK	lok_world	AREA	0	-1981.52	11.12	-3407.14	0	1	Nym's elite enforcer	27000	poi	Imperial Outpost	2	STOP	idle	0	0	0	0	300	120	4
-1800508	LOK	lok_world	EGG	0	-1967.00	11.94	-3365.00	0	1	Emmett	26780	poi	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	0
-1800509	LOK	lok_world	AREA	0	-1936.50	12.09	-3386.84	0	1	Nym's elite enforcer	27000	poi	Imperial Outpost	2	STOP	idle	0	0	0	0	300	120	4
-1800510	LOK	lok_world	AREA	0	-2004.01	12.00	-3074.15	0	1	a Stormtrooper	25550	poi	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	2
-1800511	LOK	lok_world	AREA	0	-1976.19	12.00	-3030.87	0	1	a Stormtrooper	25555	poi	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	2
-1800512	LOK	lok_world	AREA	0	-1969.48	12.00	-3001.60	0	1	a Stormtrooper	25555	poi	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	2
-1800513	LOK	lok_world	AREA	0	-1957.70	12.00	-3149.53	0	1	a Stormtrooper	25550	poi	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	2
-1800514	LOK	lok_world	AREA	0	-1939.65	12.00	-3101.75	0	1	a Stormtrooper	25555	poi	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	2
-1800515	LOK	lok_world	AREA	0	-1917.27	12.00	-3175.72	0	1	a Stormtrooper	25550	poi	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	2
-1800516	LOK	lok_world	AREA	0	-1916.42	12.00	-3135.65	0	1	a Stormtrooper	25555	poi	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	2
-1800517	LOK	lok_world	AREA	0	-1905.50	12.00	-3109.29	0	1	a Stormtrooper	25555	poi	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	2
-1800518	LOK	lok_world	AREA	0	-1903.74	12.00	-3058.05	0	1	a Stormtrooper	25555	poi	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	2
-1800519	LOK	lok_world	AREA	0	-1900.43	12.00	-2984.39	0	1	a Stormtrooper	25555	poi	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	2
-1800520	LOK	lok_world	AREA	0	-1887.32	12.00	-3175.29	0	1	a Stormtrooper	25550	poi	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	2
-1800521	LOK	lok_world	AREA	0	-1866.59	12.00	-3114.77	0	1	a Stormtrooper	25550	poi	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	2
-1800522	LOK	lok_world	AREA	0	-1832.53	12.00	-3049.33	0	1	a Stormtrooper	25550	poi	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	2
-1800523	LOK	lok_world	AREA	0	-1830.43	12.00	-3086.94	0	1	a Stormtrooper	25550	poi	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	2
-1800524	LOK	lok_world	AREA	0	-1828.21	12.00	-3126.61	0	1	a Stormtrooper	25555	poi	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	2
-1800525	LOK	lok_world	EGG	0	-1844.42	12.00	-3069.08	90	1	an Imperial recruiter	13170	poi	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	0
-1800526	LOK	lok_world	EGG	0	-1874.15	12.00	-3123.66	30	1	a commoner	3185	poi	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	0
-1800527	LOK	lok_world	AREA	0	1.16	11.95	2711.75	-26	1	a giant dune Kimogila	10460	poi	Kimogila Town	1	STOP	idle	0	0	0	0	300	120	0
-1800528	LOK	lok_world	EGG	0	-83.47	12.00	2719.78	87	1	Cale Serasai	22055	poi	Kimogila Town	1	STOP	idle	0	0	0	0	300	120	0
-1800529	LOK	lok_world	AREA	0	-144.42	11.98	2753.73	118	1	a kimogila hatchling	14225	poi	Kimogila Town	1	STOP	idle	0	0	0	0	300	120	0
-1800530	LOK	lok_world	AREA	0	-136.70	11.97	2764.55	126	1	a kimogila hatchling	14225	poi	Kimogila Town	1	STOP	idle	0	0	0	0	300	120	0
-1800531	LOK	lok_world	AREA	0	-136.38	12.00	2658.42	79	1	a kimogila hatchling	14225	poi	Kimogila Town	1	STOP	idle	0	0	0	0	300	120	0
-1800532	LOK	lok_world	AREA	0	-130.61	12.07	2647.27	58	1	a kimogila hatchling	14225	poi	Kimogila Town	1	STOP	idle	0	0	0	0	300	120	0
-1800533	LOK	lok_world	AREA	0	-129.54	12.02	2774.12	126	1	a kimogila hatchling	14225	poi	Kimogila Town	1	STOP	idle	0	0	0	0	300	120	0
-1800534	LOK	lok_world	AREA	0	-126.66	12.10	2641.21	49	1	a kimogila hatchling	14225	poi	Kimogila Town	1	STOP	idle	0	0	0	0	300	120	0
-1800535	LOK	lok_world	AREA	0	-113.27	12.00	2713.99	26	1	Vekis Kiyanu (a bounty hunter)	25510	poi	Kimogila Town	1	STOP	idle	0	0	0	0	300	120	0
-1800536	LOK	lok_world	AREA	0	-87.19	12.00	2724.93	0	1	a commoner	34180	poi	Kimogila Town	2	STOP	idle	0	0	0	0	300	120	4
-1800537	LOK	lok_world	AREA	0	-86.32	12.00	2685.97	0	1	a commoner	34180	poi	Kimogila Town	5	STOP	idle	0	0	0	0	300	120	10
-1800538	LOK	lok_world	AREA	0	-83.48	12.00	2702.80	0	1	a commoner	34180	poi	Kimogila Town	2	STOP	idle	0	0	0	0	300	120	4
-1800539	LOK	lok_world	AREA	0	-66.62	12.00	2691.91	0	1	a commoner	34180	poi	Kimogila Town	3	STOP	idle	0	0	0	0	300	120	6
-1800540	LOK	lok_world	AREA	0	-52.95	12.00	2720.46	0	1	a commoner	34180	poi	Kimogila Town	3	STOP	idle	0	0	0	0	300	120	6
-1800541	LOK	lok_world	AREA	0	-43.94	12.00	2725.31	0	1	a commoner	34180	poi	Kimogila Town	2	STOP	idle	0	0	0	0	300	120	4
-1800542	LOK	lok_world	AREA	0	-10.77	12.02	2712.69	-26	1	Cas Vankoo	2445	poi	Kimogila Town	1	STOP	idle	0	0	0	0	300	120	0
-1800543	LOK	lok_world	AREA	0	3037.39	325.16	-4489.41	0	1	a pirate	27075	poi	Mount Chaolt	2	STOP	idle	0	0	0	0	300	120	4
-1800544	LOK	lok_world	AREA	0	3033.91	337.48	-4545.86	0	1	a pirate	27075	poi	Mount Chaolt	2	STOP	idle	0	0	0	0	300	120	4
-1800545	LOK	lok_world	AREA	0	3012.16	286.65	-4402.43	0	1	Raphael Mar-Shayal (a Rebel pilot)	13590	poi	Mount Chaolt	1	STOP	idle	0	0	0	0	300	120	0
-1800546	LOK	lok_world	AREA	0	2965.03	330.36	-4523.87	0	1	Dak Vox	22285	poi	Mount Chaolt	1	STOP	idle	0	0	0	0	300	120	0
-1800547	LOK	lok_world	EGG	0	2963.00	325.04	-4500.00	0	1	Edwyn	26775	poi	Mount Chaolt	1	STOP	idle	0	0	0	0	300	120	0
-1800548	LOK	lok_world	AREA	0	2921.43	345.00	-4589.13	0	1	a pirate	27075	poi	Mount Chaolt	2	STOP	idle	0	0	0	0	300	120	4
-1800549	LOK	lok_world	AREA	0	2896.97	328.48	-4533.27	0	1	a pirate	27075	poi	Mount Chaolt	2	STOP	idle	0	0	0	0	300	120	4
-1800550	LOK	lok_world	AREA	0	2890.10	307.39	-4472.50	0	1	a pirate	27075	poi	Mount Chaolt	2	STOP	idle	0	0	0	0	300	120	4
-1800551	LOK	lok_world	AREA	0	2882.75	334.61	-4568.83	0	1	a pirate	27075	poi	Mount Chaolt	2	STOP	idle	0	0	0	0	300	120	4
+1800443	LOK	lok_world	AREA	0	-5003.06	15.41	4498.52	0	1	a gurk whelp	11180	outback	Lok	2	STOP	idle	0	0	0	0	300	120	4
+1800444	LOK	lok_world	AREA	0	-2580.55	11.92	6180.50	0	1	a lowland salt mynock	15515	outback	Lok	4	STOP	idle	0	0	0	0	300	120	8
+1800445	LOK	lok_world	AREA	0	-5991.81	76.71	6391.01	0	1	a gurk tracker	11175	outback	Lok	2	STOP	idle	0	0	0	0	300	120	0
+1800446	LOK	lok_world	AREA	0	-6397.31	91.98	5740.15	0	1	a kimogila	14210	outback	Lok	1	STOP	idle	0	0	0	0	7200	7200	2
+1800447	LOK	lok_world	AREA	0	-6077.26	56.55	5314.00	0	1	Nym's patrol	21995	outback	Lok	3	STOP	idle	0	0	0	0	300	120	6
+1800448	LOK	lok_world	AREA	0	-6080.58	56.71	5308.02	0	1	Nym's droideka	21950	outback	Lok	1	STOP	idle	0	0	0	0	300	120	2
+1800449	LOK	lok_world	AREA	0	-6909.85	105.79	4505.32	0	1	a crazed gurk destroyer	5145	outback	Lok	1	STOP	idle	0	0	0	0	300	120	2
+1800450	LOK	lok_world	AREA	0	-6214.92	12.96	3381.59	0	1	Nym's destroyer	21935	outback	Lok	3	STOP	idle	0	0	0	0	300	120	6
+1800451	LOK	lok_world	AREA	0	-6206.81	13.16	3384.31	0	1	Nym's droideka	21945	outback	Lok	2	STOP	idle	0	0	0	0	300	120	4
+1800452	LOK	lok_world	AREA	0	-6357.65	39.95	1128.18	0	1	a Blood Razor destroyer	1535	outback	Lok	2	STOP	idle	0	0	0	0	300	120	4
+1800453	LOK	lok_world	AREA	0	-5689.57	43.5	272.48	0	1	a flit bloodsucker	9525	outback	Lok	5	STOP	idle	0	0	0	0	300	120	10
+1800454	LOK	lok_world	AREA	0	-4482.37	81.15	7404.32	0	1	a Scout Trooper	25820	outback	Lok	2	STOP	idle	0	0	0	0	300	120	4
+1800455	LOK	lok_world	AREA	0	-2720.56	40.39	4169.96	0	1	a giant spined snake	10525	outback	Lok	1	STOP	idle	0	0	0	0	300	120	2
+1800456	LOK	lok_world	AREA	0	-990.44	12.05	3686.52	0	1	a sulfur pool mynock	29670	outback	Lok	2	STOP	idle	0	0	0	0	300	120	4
+1800457	LOK	lok_world	AREA	0	6055.13	11.92	5152.75	0	1	a marooned pirate	15880	outback	Lok	4	STOP	idle	0	0	0	0	300	120	8
+1800458	LOK	lok_world	AREA	0	6053.67	11.92	5143.63	0	1	a marooned pirate captain	15885	outback	Lok	1	STOP	idle	0	0	0	0	300	120	2
+1800459	LOK	lok_world	AREA	0	2952.38	13.22	3954.31	0	1	a Blood Razor guard	1540	outback	Lok	2	STOP	idle	0	0	0	0	300	120	4
+1800460	LOK	lok_world	AREA	0	2949.94	13.16	3949.35	0	1	a Blood Razor officer	1545	outback	Lok	1	STOP	idle	0	0	0	0	300	120	2
+1800461	LOK	lok_world	AREA	0	477.75	63.12	4041.41	0	1	a Rebel commando	18575	outback	Lok	5	STOP	idle	0	0	0	0	300	120	10
+1800462	LOK	lok_world	AREA	0	475.64	63.31	4030.27	0	1	a Rebel Specforce Captain	18650	outback	Lok	1	STOP	idle	0	0	0	0	300	120	2
+1800463	LOK	lok_world	AREA	0	2375.46	19.27	2743.43	0	1	a frontiersman	9715	outback	Lok	3	STOP	idle	0	0	0	0	300	120	6
+1800464	LOK	lok_world	AREA	0	2365.84	20.14	2741.36	0	1	a warder	32865	outback	Lok	1	STOP	idle	0	0	0	0	300	120	2
+1800465	LOK	lok_world	AREA	0	6202.96	62.06	923.37	0	1	a farmer	8520	outback	Lok	6	STOP	idle	0	0	0	0	300	120	12
+1800466	LOK	lok_world	AREA	0	6208.66	61.91	917.37	0	1	a mercenary	16605	outback	Lok	4	STOP	idle	0	0	0	0	300	120	8
+1800467	LOK	lok_world	AREA	0	3891.37	11.95	591.56	0	1	a riverside sulfur mynock	25115	outback	Lok	4	STOP	idle	0	0	0	0	300	120	8
+1800468	LOK	lok_world	AREA	0	2225.37	3.00	1896.36	0	1	a droideka	6025	outback	Lok	1	STOP	idle	0	0	0	0	300	120	2
+1800469	LOK	lok_world	AREA	0	1998.01	12.94	4954.37	0	1	a mature snorbal male	15955	outback	Lok	1	STOP	idle	0	0	0	0	300	120	2
+1800470	LOK	lok_world	AREA	0	2001.35	12.76	4950.39	0	1	a mature snorbal female	15950	outback	Lok	1	STOP	idle	0	0	0	0	300	120	2
+1800471	LOK	lok_world	AREA	0	1994.39	13.16	4958.50	0	1	a male snorbal calf	15635	outback	Lok	2	STOP	idle	0	0	0	0	300	120	4
+1800472	LOK	lok_world	AREA	0	3503.36	92.05	5485.62	0	1	a kusak mauler	14575	outback	Lok	3	STOP	idle	0	0	0	0	300	120	6
+1800473	LOK	lok_world	AREA	0	5040.44	63.55	4327.74	0	1	a Scout Trooper	25820	outback	Lok	4	STOP	idle	0	0	0	0	300	120	8
+1800474	LOK	lok_world	AREA	0	5049.12	62.60	4310.36	0	1	a Rebel commando	24375	outback	Lok	3	STOP	idle	0	0	0	0	300	120	6
+1800475	LOK	lok_world	AREA	0	5066.07	11.99	-5142.34	0	1	a warder	32865	outback	Lok	2	STOP	idle	0	0	0	0	300	120	4
+1800476	LOK	lok_world	AREA	0	282.26	13.09	-5602.52	0	1	a Canyon Corsair guard	2345	outback	Lok	2	STOP	idle	0	0	0	0	300	120	4
+1800477	LOK	lok_world	AREA	0	4966.68	13.04	-2087.88	0	1	a spined snake	28825	outback	Lok	4	STOP	idle	0	0	0	0	300	120	8
+1800478	LOK	lok_world	AREA	0	3828.54	63.00	-531.78	-138	1	a farmer	8520	outback	Lok	1	STOP	idle	0	0	0	0	300	120	0
+1800479	LOK	lok_world	AREA	0	582.68	28.67	-2160.53	0	1	a thug	31190	outback	Lok	1	STOP	idle	0	0	0	0	300	120	2
+1800480	LOK	lok_world	AREA	0	5543.52	12.06	-5998.40	0	1	a warder	32865	outback	Lok	1	STOP	idle	0	0	0	0	300	120	2
+1800481	LOK	lok_world	AREA	0	3881.30	11.88	-5514.20	0	1	a weak mercenary	16655	outback	Lok	2	STOP	idle	0	0	0	0	300	120	4
+1800482	LOK	lok_world	AREA	0	3876.54	12.03	-5516.96	0	1	a farmer	8520	outback	Lok	4	STOP	idle	0	0	0	0	300	120	8
+1800483	LOK	lok_world	AREA	0	1564.78	26.16	-6428.00	0	1	a kusak stalker	14858	outback	Lok	3	STOP	idle	0	0	0	0	300	120	6
+1800484	LOK	lok_world	AREA	0	6513.42	18.39	-2009.42	0	1	a salt mynock	25630	outback	Lok	2	STOP	idle	0	0	0	0	300	120	4
+1800485	LOK	lok_world	AREA	0	2705.03	13.23	-5374.72	0	1	an elder snorbal male	6245	outback	Lok	1	STOP	idle	0	0	0	0	300	120	2
+1800486	LOK	lok_world	AREA	0	2705.55	12.86	-5370.92	0	1	a mature snorbal female	15950	outback	Lok	3	STOP	idle	0	0	0	0	300	120	6
+1800487	LOK	lok_world	AREA	0	1475.32	15.90	-4458.58	0	1	a thug	31190	outback	Lok	1	STOP	idle	0	0	0	0	300	120	2
+1800488	LOK	lok_world	AREA	0	1862.10	23.43	-3000.70	0	1	a thug	31190	outback	Lok	1	STOP	idle	0	0	0	0	300	120	2
+1800489	LOK	lok_world	AREA	0	4487.65	13.09	-2837.38	0	1	a giant flit	10465	outback	Lok	2	STOP	idle	0	0	0	0	300	120	4
+1800490	LOK	lok_world	AREA	0	5882.43	15.15	-1130.91	0	1	a Blood Razor officer	1545	outback	Lok	1	STOP	idle	0	0	0	0	300	120	2
+1800491	LOK	lok_world	AREA	0	5878.85	14.33	-1136.76	0	1	a Blood Razor guard	1540	outback	Lok	2	STOP	idle	0	0	0	0	300	120	4
+1800492	LOK	lok_world	AREA	0	-6163.24	91.80	6204.77	0	1	a farmer	8520	outback	Lok	2	STOP	idle	0	0	0	0	300	120	4
+1800493	LOK	lok_world	AREA	0	-6031.43	12.91	-292.66	0	1	Nym's surveyor	22015	outback	Lok	2	STOP	idle	0	0	0	0	300	120	4
+1800494	LOK	lok_world	AREA	0	-224.99	12.91	-462.79	0	1	a gurnaset	11190	outback	Lok	2	STOP	idle	0	0	0	0	300	120	4
+1800495	LOK	lok_world	AREA	0	-227.78	13.13	-458.19	0	1	a gurnaset hatchling	11195	outback	Lok	4	STOP	idle	0	0	0	0	300	120	8
+1800496	LOK	lok_world	AREA	0	-3886.63	11.99	-4496.57	0	1	a shaggy Gurk youth	26175	outback	Lok	3	STOP	idle	0	0	0	0	300	120	6
+1800497	LOK	lok_world	AREA	0	-2894.20	15.80	-225.93	0	1	a marooned pirate engineer	15890	outback	Lok	4	STOP	idle	0	0	0	0	300	120	8
+1800498	LOK	lok_world	AREA	0	-2074.61	11.98	-2641.18	0	1	a CompForce trooper	3385	outback	Lok	2	STOP	idle	0	0	0	0	300	120	4
+1800499	LOK	lok_world	AREA	0	-2087.94	11.86	-2642.83	0	1	a special missions engineer	28695	outback	Lok	1	STOP	idle	0	0	0	0	300	120	2
+1800500	LOK	lok_world	AREA	0	-4866.72	13.00	-1047.39	0	1	a Blood Razor guard	1540	outback	Lok	4	STOP	idle	0	0	0	0	300	120	8
+1800501	LOK	lok_world	AREA	0	-4873.23	12.93	-1042.72	0	1	a Blood Razor captain	1525	outback	Lok	1	STOP	idle	0	0	0	0	300	120	2
+1800502	LOK	lok_world	AREA	0	-3647.04	12.16	-2034.15	0	1	Nym's elite pirate	22000	outback	Lok	2	STOP	idle	0	0	0	0	300	120	4
+1800503	LOK	lok_world	AREA	0	-3644.05	12.10	-2035.31	0	1	Nym's droideka	21945	outback	Lok	1	STOP	idle	0	0	0	0	300	120	2
+1800504	LOK	lok_world	AREA	0	-3315.29	12.19	-5633.84	0	1	a pharple	23385	outback	Lok	10	STOP	idle	0	0	0	0	300	120	20
+1800505	LOK	lok_world	AREA	0	-5185.50	11.99	-4818.12	0	1	a feral gurk	9390	outback	Lok	2	STOP	idle	0	0	0	0	300	120	4
+1800506	LOK	lok_world	AREA	0	281.74	11.96	4618.07	0	1	Meatlump Dunder (Outpost Guard)	16190	outback	Meatlump Camp - Nym's	1	STOP	idle	0	0	0	0	300	120	2
+1800507	LOK	lok_world	AREA	0	272.34	12.04	4656.36	0	1	Meatlump Dunder (Outpost Guard)	16190	outback	Meatlump Camp - Nym's	1	STOP	idle	0	0	0	0	300	120	2
+1800508	LOK	lok_world	AREA	0	241.81	11.99	4628.48	0	1	Meatlump Dunder (Outpost Guard)	16190	outback	Meatlump Camp - Nym's	1	STOP	idle	0	0	0	0	300	120	2
+1800509	LOK	lok_world	AREA	0	-2129.00	104.00	5939.00	0	1	a langlatch giant	14630	outback	Mysterious Shrine	4	STOP	idle	0	0	0	0	900	600	15
+1800510	LOK	lok_world	AREA	0	-6014.70	56.30	6430.50	0	1	an aged kimogila	14215	outback	Pit with Stone Claws	3	STOP	idle	0	0	0	0	900	600	30
+1800511	LOK	lok_world	AREA	0	730.42	11.99	-3361.74	0	1	a gurk	11160	outback	Reclusive Gurk King #1	1	STOP	idle	0	0	0	0	300	120	0
+1800512	LOK	lok_world	AREA	0	729.99	12.06	-3367.28	0	1	a gurk	11160	outback	Reclusive Gurk King #1	1	STOP	idle	0	0	0	0	300	120	0
+1800513	LOK	lok_world	AREA	0	716.69	11.91	-3362.56	0	1	a reclusive gurk king	24780	outback	Reclusive Gurk King #1	1	STOP	idle	0	0	0	0	1800	1800	0
+1800514	LOK	lok_world	AREA	0	705.12	12.16	-3369.32	0	1	a gurk	11160	outback	Reclusive Gurk King #1	1	STOP	idle	0	0	0	0	300	120	0
+1800515	LOK	lok_world	AREA	0	704.38	12.18	-3363.69	0	1	a gurk	11160	outback	Reclusive Gurk King #1	1	STOP	idle	0	0	0	0	300	120	0
+1800516	LOK	lok_world	AREA	0	-3772.73	61.79	-3474.10	-177	1	a gurk	11160	outback	Reclusive Gurk King #2	1	STOP	idle	0	0	0	0	300	120	0
+1800517	LOK	lok_world	AREA	0	-3772.25	62.05	-3478.67	-177	1	a gurk	11160	outback	Reclusive Gurk King #2	1	STOP	idle	0	0	0	0	300	120	0
+1800518	LOK	lok_world	AREA	0	-3765.55	61.90	-3486.46	-177	1	a reclusive gurk king	24780	outback	Reclusive Gurk King #2	1	STOP	idle	0	0	0	0	1800	1800	0
+1800519	LOK	lok_world	AREA	0	-3760.73	62.73	-3478.18	-177	1	a gurk	11160	outback	Reclusive Gurk King #2	1	STOP	idle	0	0	0	0	300	120	0
+1800520	LOK	lok_world	AREA	0	-3757.21	63.30	-3473.17	-177	1	a gurk	11160	outback	Reclusive Gurk King #2	1	STOP	idle	0	0	0	0	300	120	0
+1800521	LOK	lok_world	AREA	0	5065.91	96.78	412.12	0	1	a Jedi Padawan	31530	outback	Steaming Stone	1	STOP	idle	0	0	0	0	300	120	2
+1800522	LOK	lok_world	AREA	0	5065.85	97.20	406.36	0	1	a Jedi Padawan	31530	outback	Steaming Stone	1	STOP	idle	0	0	0	0	300	120	2
+1800523	LOK	lok_world	AREA	0	-122.90	60.30	-358.00	0	1	an aged kimogila	14215	outback	Wall Array Hill	3	STOP	idle	0	0	0	0	900	600	30
+1800524	LOK	lok_world	AREA	0	6410.70	42.00	5020.00	0	1	a kimogila dwarf	14220	outback	Water Feature	4	STOP	idle	0	0	0	0	900	600	40
+1800525	LOK	lok_world	EGG	0	-3922.00	12.03	-3922.00	0	1	Marla	26875	poi	Canyon Corsair's Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1800526	LOK	lok_world	PATROL	0	-3954.42	10.82	-3895.44	0	1	a criminal	27100	poi	Canyon Corsair's Stronghold	1	STOP	idle	0	999	0	0	300	120	0
+1800527	LOK	lok_world	PATROL	0	-3950.56	11.57	-3887.66	0	1	a criminal	27100	poi	Canyon Corsair's Stronghold	1	STOP	idle	0	999	0	0	300	120	0
+1800528	LOK	lok_world	PATROL	0	-3896.39	11.81	-3932.09	0	1	a criminal	27100	poi	Canyon Corsair's Stronghold	1	STOP	idle	0	999	0	0	300	120	0
+1800529	LOK	lok_world	PATROL	0	-3892.97	11.99	-3907.85	0	1	a criminal	27100	poi	Canyon Corsair's Stronghold	1	STOP	idle	0	999	0	0	300	120	0
+1800530	LOK	lok_world	AREA	0	-3725.21	12.10	-3903.55	0	1	a Canyon Corsair guard	2345	poi	Canyon Corsair's Stronghold	2	STOP	idle	0	0	0	0	300	120	4
+1800531	LOK	lok_world	AREA	0	-3881.25	12.00	-3969.88	0	1	a Canyon Corsair guard	2345	poi	Canyon Corsair's Stronghold	2	STOP	idle	0	0	0	0	300	120	4
+1800532	LOK	lok_world	AREA	0	-3813.31	12.01	-3968.21	0	1	a Canyon Corsair guard	2345	poi	Canyon Corsair's Stronghold	2	STOP	idle	0	0	0	0	300	120	4
+1800533	LOK	lok_world	AREA	0	-3837.98	13.00	-3738.68	167	1	a Canyon Corsair captain	2330	poi	Canyon Corsair's Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1800534	LOK	lok_world	AREA	0	-3832.44	13.00	-3757.08	0	1	a Canyon Corsair strong pirate	2355	poi	Canyon Corsair's Stronghold	2	STOP	idle	0	0	0	0	300	120	4
+1800535	LOK	lok_world	AREA	0	-3809.31	11.86	-3834.61	0	1	a Canyon Corsair weak pirate	2360	poi	Canyon Corsair's Stronghold	3	STOP	idle	0	0	0	0	300	120	6
+1800536	LOK	lok_world	AREA	0	-3860.32	11.99	-3859.63	0	1	a Canyon Corsair weak pirate	2360	poi	Canyon Corsair's Stronghold	3	STOP	idle	0	0	0	0	300	120	6
+1800537	LOK	lok_world	AREA	0	-3793.77	12.01	-3919.00	0	1	a Canyon Corsair scout	2365	poi	Canyon Corsair's Stronghold	2	STOP	idle	0	0	0	0	300	120	4
+1800538	LOK	lok_world	AREA	0	-3908.19	12.00	-3803.57	0	1	a Canyon Corsair elite pirate	2350	poi	Canyon Corsair's Stronghold	2	STOP	idle	0	0	0	0	300	120	4
+1800539	LOK	lok_world	AREA	0	-3884.67	12.00	-3818.19	0	1	a Canyon Corsair cutthroat	2335	poi	Canyon Corsair's Stronghold	2	STOP	idle	0	0	0	0	300	120	4
+1800540	LOK	lok_world	AREA	0	-3850.15	12.00	-3810.15	0	1	a Canyon Corsair destroyer	2340	poi	Canyon Corsair's Stronghold	3	STOP	idle	0	0	0	0	300	120	6
+1800541	LOK	lok_world	AREA	0	-3877.88	11.98	-3872.33	0	1	a Canyon Corsair destroyer	2340	poi	Canyon Corsair's Stronghold	2	STOP	idle	0	0	0	0	300	120	4
+1800542	LOK	lok_blood_razor_transport_outpost	AREA	3	-0.00	0.13	-5.95	0	1	a Blood Razor berzerker	1520	poi	Downed Blood Razor Transport	1	STOP	idle	0	0	0	0	300	120	0
+1800543	LOK	lok_blood_razor_transport_outpost	AREA	4	4.48	0.13	3.34	-152	1	a Blood Razor berzerker	1520	poi	Downed Blood Razor Transport	1	STOP	idle	0	0	0	0	300	120	0
+1800544	LOK	lok_blood_razor_transport_shed	AREA	6	-3.19	0.13	-3.81	90	1	a Blood Razor cutthroat	1530	poi	Downed Blood Razor Transport	1	STOP	idle	0	0	0	0	300	120	0
+1800545	LOK	lok_blood_razor_transport_shed	AREA	5	5.02	0.13	-4.38	-81	1	a Blood Razor cutthroat	1530	poi	Downed Blood Razor Transport	1	STOP	idle	0	0	0	0	300	120	0
+1800546	LOK	lok_blood_razor_transport_shed	AREA	4	3.83	0.13	3.44	-177	1	a Blood Razor cutthroat	1530	poi	Downed Blood Razor Transport	1	STOP	idle	0	0	0	0	300	120	0
+1800547	LOK	lok_blood_razor_transport_warehouse	AREA	6	-4.07	0.13	-1.72	151	1	a Blood Razor cutthroat	1530	poi	Downed Blood Razor Transport	1	STOP	idle	0	0	0	0	300	120	0
+1800548	LOK	lok_blood_razor_transport_warehouse	AREA	4	2.45	0.13	1.33	-90	1	a Blood Razor destroyer	1535	poi	Downed Blood Razor Transport	1	STOP	idle	0	0	0	0	300	120	0
+1800549	LOK	lok_world	AREA	0	3562.30	0.88	2086.41	0	1	Nym's elite enforcer	27000	poi	Downed Blood Razor Transport	2	STOP	idle	0	0	0	0	300	120	4
+1800550	LOK	lok_world	AREA	0	3529.67	2.54	2137.61	0	1	Nym's elite enforcer	27000	poi	Downed Blood Razor Transport	2	STOP	idle	0	0	0	0	300	120	4
+1800551	LOK	lok_world	AREA	0	3519.94	6.74	2058.30	0	1	Nym's elite enforcer	27000	poi	Downed Blood Razor Transport	2	STOP	idle	0	0	0	0	300	120	4
+1800552	LOK	lok_world	EGG	0	3511.00	6.88	2116.00	50	1	Briscoe	26730	poi	Downed Blood Razor Transport	1	STOP	idle	0	0	0	0	300	120	0
+1800553	LOK	lok_world	AREA	0	3640.84	1.22	2126.22	0	1	a Blood Razor guard	1540	poi	Downed Blood Razor Transport	2	STOP	idle	0	0	0	0	300	120	4
+1800554	LOK	lok_world	AREA	0	3607.65	1.16	2127.93	0	1	a Blood Razor guard	1540	poi	Downed Blood Razor Transport	2	STOP	idle	0	0	0	0	300	120	4
+1800555	LOK	lok_world	AREA	0	3599.32	1.05	2218.73	0	1	a Blood Razor guard	1540	poi	Downed Blood Razor Transport	2	STOP	idle	0	0	0	0	300	120	4
+1800556	LOK	lok_world	AREA	0	3622.80	1.03	2230.33	0	1	a Blood Razor guard	1540	poi	Downed Blood Razor Transport	2	STOP	idle	0	0	0	0	300	120	4
+1800557	LOK	lok_world	AREA	0	3695.37	1.56	2211.39	0	1	a Blood Razor guard	1540	poi	Downed Blood Razor Transport	2	STOP	idle	0	0	0	0	300	120	4
+1800558	LOK	lok_world	AREA	0	3674.93	2.02	2223.58	0	1	a Blood Razor guard	1540	poi	Downed Blood Razor Transport	2	STOP	idle	0	0	0	0	300	120	4
+1800559	LOK	lok_world	AREA	0	3669.72	1.00	2194.01	27	1	a Blood Razor officer	1545	poi	Downed Blood Razor Transport	1	STOP	idle	0	0	0	0	300	120	0
+1800560	LOK	lok_world	AREA	0	3642.17	1.00	2157.15	-63	1	a Blood Razor officer	1545	poi	Downed Blood Razor Transport	1	STOP	idle	0	0	0	0	300	120	0
+1800561	LOK	lok_world	AREA	0	3607.42	1.00	2202.03	0	1	a Blood Razor weak pirate	1560	poi	Downed Blood Razor Transport	1	STOP	idle	0	0	0	0	300	120	2
+1800562	LOK	lok_world	AREA	0	3650.89	1.00	2200.70	0	1	a Blood Razor weak pirate	1560	poi	Downed Blood Razor Transport	2	STOP	idle	0	0	0	0	300	120	4
+1800563	LOK	lok_world	AREA	0	3613.53	1.00	2151.53	0	1	a Blood Razor weak pirate	1560	poi	Downed Blood Razor Transport	2	STOP	idle	0	0	0	0	300	120	4
+1800564	LOK	lok_world	AREA	0	3606.58	1.00	2172.88	116	1	a Blood Razor captain	1525	poi	Downed Blood Razor Transport	1	STOP	idle	0	0	0	0	300	120	0
+1800565	LOK	lok_world	AREA	0	3607.42	1.00	2166.33	40	1	a Blood Razor strong pirate	1555	poi	Downed Blood Razor Transport	1	STOP	idle	0	0	0	0	300	120	0
+1800566	LOK	lok_evil_droid_eng_cave	AREA	27	32.55	-68.79	-101.56	0	1	Sardeya Elgrin (droid engineer)	23990	poi	Droid Engineers Cave	1	STOP	idle	0	0	0	0	300	120	2
+1800567	LOK	lok_evil_droid_eng_cave	AREA	2	-12.02	-30.38	-46.63	0	1	a droideka	6030	poi	Droid Engineers Cave	1	STOP	idle	0	0	0	0	300	120	2
+1800568	LOK	lok_evil_droid_eng_cave	AREA	5	-67.54	-30.56	-62.35	0	1	a droideka	6025	poi	Droid Engineers Cave	1	STOP	idle	0	0	0	0	300	120	2
+1800569	LOK	lok_evil_droid_eng_cave	AREA	11	-102.45	-38.94	-88.51	0	1	a droideka	6020	poi	Droid Engineers Cave	2	STOP	idle	0	0	0	0	300	120	4
+1800570	LOK	lok_evil_droid_eng_cave	AREA	16	-114.93	-58.42	-29.91	0	1	an IG assassin droid	34405	poi	Droid Engineers Cave	2	STOP	idle	0	0	0	0	300	120	4
+1800571	LOK	lok_evil_droid_eng_cave	AREA	11	-111.20	-54.49	-84.49	0	1	a droideka	6025	poi	Droid Engineers Cave	1	STOP	idle	0	0	0	0	300	120	2
+1800572	LOK	lok_evil_droid_eng_cave	AREA	11	-125.01	-53.77	-82.93	0	1	a droideka	6020	poi	Droid Engineers Cave	3	STOP	idle	0	0	0	0	300	120	6
+1800573	LOK	lok_evil_droid_eng_cave	AREA	10	-171.11	-49.69	-67.65	0	1	a droideka	6030	poi	Droid Engineers Cave	2	STOP	idle	0	0	0	0	300	120	4
+1800574	LOK	lok_evil_droid_eng_cave	AREA	6	-140.99	-49.50	-55.64	0	1	a droideka	6020	poi	Droid Engineers Cave	4	STOP	idle	0	0	0	0	300	120	8
+1800575	LOK	lok_evil_droid_eng_cave	AREA	5	-73.74	-47.08	-66.17	0	1	a droideka	6020	poi	Droid Engineers Cave	3	STOP	idle	0	0	0	0	300	120	6
+1800576	LOK	lok_evil_droid_eng_cave	AREA	5	-76.99	-46.54	-56.95	0	1	an IG assassin droid	34405	poi	Droid Engineers Cave	2	STOP	idle	0	0	0	0	300	120	4
+1800577	LOK	lok_evil_droid_eng_cave	AREA	22	-20.87	-43.08	-91.17	0	1	a droideka	6020	poi	Droid Engineers Cave	2	STOP	idle	0	0	0	0	300	120	4
+1800578	LOK	lok_evil_droid_eng_cave	AREA	22	-30.62	-43.32	-91.28	0	1	a droideka	6020	poi	Droid Engineers Cave	2	STOP	idle	0	0	0	0	300	120	4
+1800579	LOK	lok_evil_droid_eng_cave	AREA	23	-121.26	-53.64	-112.74	0	1	an IG assassin droid	34405	poi	Droid Engineers Cave	2	STOP	idle	0	0	0	0	300	120	4
+1800580	LOK	lok_evil_droid_eng_cave	AREA	9	-107.47	-69.60	-110.50	0	1	a droideka	6020	poi	Droid Engineers Cave	4	STOP	idle	0	0	0	0	300	120	8
+1800581	LOK	lok_evil_droid_eng_cave	AREA	9	-97.14	-70.59	-107.47	0	1	a droideka	6025	poi	Droid Engineers Cave	1	STOP	idle	0	0	0	0	300	120	2
+1800582	LOK	lok_evil_droid_eng_cave	AREA	9	-83.11	-72.27	-107.6	0	1	a droideka	6030	poi	Droid Engineers Cave	2	STOP	idle	0	0	0	0	300	120	4
+1800583	LOK	lok_evil_droid_eng_cave	AREA	29	-51.67	-65.38	-225.91	0	1	a droideka	6020	poi	Droid Engineers Cave	1	STOP	idle	0	0	0	0	300	120	2
+1800584	LOK	lok_evil_droid_eng_cave	AREA	29	-60.24	-65.15	-226.78	0	1	a droideka	6020	poi	Droid Engineers Cave	1	STOP	idle	0	0	0	0	300	120	2
+1800585	LOK	lok_evil_droid_eng_cave	AREA	28	-42.03	-66.12	-183.46	0	1	a droideka	6020	poi	Droid Engineers Cave	1	STOP	idle	0	0	0	0	300	120	2
+1800586	LOK	lok_evil_droid_eng_cave	AREA	28	-86.67	-65.93	-167.54	0	1	a droideka	6020	poi	Droid Engineers Cave	1	STOP	idle	0	0	0	0	300	120	2
+1800587	LOK	lok_evil_droid_eng_cave	AREA	28	-86.96	-65.51	-187.48	0	1	a droideka	6020	poi	Droid Engineers Cave	1	STOP	idle	0	0	0	0	300	120	2
+1800588	LOK	lok_evil_droid_eng_cave	AREA	28	-62.58	-65.82	-195.55	0	1	a droideka	6020	poi	Droid Engineers Cave	1	STOP	idle	0	0	0	0	300	120	2
+1800589	LOK	lok_evil_droid_eng_cave	AREA	28	-52.69	-65.86	-175.00	0	1	a droideka	6020	poi	Droid Engineers Cave	1	STOP	idle	0	0	0	0	300	120	2
+1800590	LOK	lok_evil_droid_eng_cave	AREA	28	-75.20	-65.68	-175.59	0	1	a droideka	6020	poi	Droid Engineers Cave	1	STOP	idle	0	0	0	0	300	120	2
+1800591	LOK	lok_evil_droid_eng_cave	AREA	25	-63.53	-66.02	-139.87	0	1	a droideka	6030	poi	Droid Engineers Cave	2	STOP	idle	0	0	0	0	300	120	4
+1800592	LOK	lok_evil_droid_eng_cave	AREA	26	3.22	-71.85	-113.12	0	1	an IG assassin droid	34405	poi	Droid Engineers Cave	2	STOP	idle	0	0	0	0	300	120	4
+1800593	LOK	lok_evil_droid_eng_cave	AREA	27	39.22	-66.98	-69.84	0	1	an IG assassin droid	34405	poi	Droid Engineers Cave	3	STOP	idle	0	0	0	0	300	120	6
+1800594	LOK	lok_evil_droid_eng_cave	AREA	27	29.04	-67.27	-91.45	0	1	a droideka	6030	poi	Droid Engineers Cave	2	STOP	idle	0	0	0	0	300	120	4
+1800595	LOK	lok_evil_droid_eng_cave	AREA	27	43.67	-65.71	-85.56	0	1	a droideka	6025	poi	Droid Engineers Cave	1	STOP	idle	0	0	0	0	300	120	2
+1800596	LOK	lok_world	AREA	0	4568.00	13.09	-1168.00	0	1	Oono Mor'in	23980	poi	Great Kimogila's Skeleton	1	STOP	idle	0	0	0	0	300	120	2
+1800597	LOK	lok_world	EGG	0	3821.67	63.00	-542.40	51	1	Rei Reeven (injured)	22260	poi	Great Maze	1	STOP	idle	0	0	0	0	300	120	0
+1800598	LOK	lok_world	AREA	0	-1991.73	11.24	-3345.88	0	1	Nym's elite enforcer	27000	poi	Imperial Outpost	2	STOP	idle	0	0	0	0	300	120	4
+1800599	LOK	lok_world	AREA	0	-1981.52	11.12	-3407.14	0	1	Nym's elite enforcer	27000	poi	Imperial Outpost	2	STOP	idle	0	0	0	0	300	120	4
+1800600	LOK	lok_world	EGG	0	-1967.00	11.94	-3365.00	0	1	Emmett	26780	poi	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	0
+1800601	LOK	lok_world	AREA	0	-1936.50	12.09	-3386.84	0	1	Nym's elite enforcer	27000	poi	Imperial Outpost	2	STOP	idle	0	0	0	0	300	120	4
+1800602	LOK	lok_world	AREA	0	-2004.01	12.00	-3074.15	0	1	a Stormtrooper	25550	poi	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	2
+1800603	LOK	lok_world	AREA	0	-1976.19	12.00	-3030.87	0	1	a Stormtrooper	25555	poi	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	2
+1800604	LOK	lok_world	AREA	0	-1969.48	12.00	-3001.60	0	1	a Stormtrooper	25555	poi	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	2
+1800605	LOK	lok_world	AREA	0	-1957.70	12.00	-3149.53	0	1	a Stormtrooper	25550	poi	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	2
+1800606	LOK	lok_world	AREA	0	-1939.65	12.00	-3101.75	0	1	a Stormtrooper	25555	poi	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	2
+1800607	LOK	lok_world	AREA	0	-1917.27	12.00	-3175.72	0	1	a Stormtrooper	25550	poi	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	2
+1800608	LOK	lok_world	AREA	0	-1916.42	12.00	-3135.65	0	1	a Stormtrooper	25555	poi	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	2
+1800609	LOK	lok_world	AREA	0	-1905.50	12.00	-3109.29	0	1	a Stormtrooper	25555	poi	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	2
+1800610	LOK	lok_world	AREA	0	-1903.74	12.00	-3058.05	0	1	a Stormtrooper	25555	poi	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	2
+1800611	LOK	lok_world	AREA	0	-1900.43	12.00	-2984.39	0	1	a Stormtrooper	25555	poi	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	2
+1800612	LOK	lok_world	AREA	0	-1887.32	12.00	-3175.29	0	1	a Stormtrooper	25550	poi	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	2
+1800613	LOK	lok_world	AREA	0	-1866.59	12.00	-3114.77	0	1	a Stormtrooper	25550	poi	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	2
+1800614	LOK	lok_world	AREA	0	-1832.53	12.00	-3049.33	0	1	a Stormtrooper	25550	poi	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	2
+1800615	LOK	lok_world	AREA	0	-1830.43	12.00	-3086.94	0	1	a Stormtrooper	25550	poi	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	2
+1800616	LOK	lok_world	AREA	0	-1828.21	12.00	-3126.61	0	1	a Stormtrooper	25555	poi	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	2
+1800617	LOK	lok_world	EGG	0	-1844.42	12.00	-3069.08	90	1	an Imperial recruiter	13170	poi	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	0
+1800618	LOK	lok_world	EGG	0	-1874.15	12.00	-3123.66	30	1	a commoner	3185	poi	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	0
+1800619	LOK	lok_world	AREA	0	1.16	11.95	2711.75	-26	1	a giant dune Kimogila	10460	poi	Kimogila Town	1	STOP	idle	0	0	0	0	300	120	0
+1800620	LOK	lok_world	EGG	0	-83.47	12.00	2719.78	87	1	Cale Serasai	22055	poi	Kimogila Town	1	STOP	idle	0	0	0	0	300	120	0
+1800621	LOK	lok_world	AREA	0	-144.42	11.98	2753.73	118	1	a kimogila hatchling	14225	poi	Kimogila Town	1	STOP	idle	0	0	0	0	300	120	0
+1800622	LOK	lok_world	AREA	0	-136.70	11.97	2764.55	126	1	a kimogila hatchling	14225	poi	Kimogila Town	1	STOP	idle	0	0	0	0	300	120	0
+1800623	LOK	lok_world	AREA	0	-136.38	12.00	2658.42	79	1	a kimogila hatchling	14225	poi	Kimogila Town	1	STOP	idle	0	0	0	0	300	120	0
+1800624	LOK	lok_world	AREA	0	-130.61	12.07	2647.27	58	1	a kimogila hatchling	14225	poi	Kimogila Town	1	STOP	idle	0	0	0	0	300	120	0
+1800625	LOK	lok_world	AREA	0	-129.54	12.02	2774.12	126	1	a kimogila hatchling	14225	poi	Kimogila Town	1	STOP	idle	0	0	0	0	300	120	0
+1800626	LOK	lok_world	AREA	0	-126.66	12.10	2641.21	49	1	a kimogila hatchling	14225	poi	Kimogila Town	1	STOP	idle	0	0	0	0	300	120	0
+1800627	LOK	lok_world	AREA	0	-113.27	12.00	2713.99	26	1	Vekis Kiyanu (a bounty hunter)	25510	poi	Kimogila Town	1	STOP	idle	0	0	0	0	300	120	0
+1800628	LOK	lok_world	AREA	0	-87.19	12.00	2724.93	0	1	a commoner	34180	poi	Kimogila Town	2	STOP	idle	0	0	0	0	300	120	4
+1800629	LOK	lok_world	AREA	0	-86.32	12.00	2685.97	0	1	a commoner	34180	poi	Kimogila Town	5	STOP	idle	0	0	0	0	300	120	10
+1800630	LOK	lok_world	AREA	0	-83.48	12.00	2702.80	0	1	a commoner	34180	poi	Kimogila Town	2	STOP	idle	0	0	0	0	300	120	4
+1800631	LOK	lok_world	AREA	0	-66.62	12.00	2691.91	0	1	a commoner	34180	poi	Kimogila Town	3	STOP	idle	0	0	0	0	300	120	6
+1800632	LOK	lok_world	AREA	0	-52.95	12.00	2720.46	0	1	a commoner	34180	poi	Kimogila Town	3	STOP	idle	0	0	0	0	300	120	6
+1800633	LOK	lok_world	AREA	0	-43.94	12.00	2725.31	0	1	a commoner	34180	poi	Kimogila Town	2	STOP	idle	0	0	0	0	300	120	4
+1800634	LOK	lok_world	AREA	0	-10.77	12.02	2712.69	-26	1	Cas Vankoo	2445	poi	Kimogila Town	1	STOP	idle	0	0	0	0	300	120	0
+1800635	LOK	lok_world	AREA	0	3037.39	325.16	-4489.41	0	1	a pirate	27075	poi	Mount Chaolt	2	STOP	idle	0	0	0	0	300	120	4
+1800636	LOK	lok_world	AREA	0	3033.91	337.48	-4545.86	0	1	a pirate	27075	poi	Mount Chaolt	2	STOP	idle	0	0	0	0	300	120	4
+1800637	LOK	lok_world	AREA	0	3012.16	286.65	-4402.43	0	1	Raphael Mar-Shayal (a Rebel pilot)	13590	poi	Mount Chaolt	1	STOP	idle	0	0	0	0	300	120	0
+1800638	LOK	lok_world	AREA	0	2965.03	330.36	-4523.87	0	1	Dak Vox	22285	poi	Mount Chaolt	1	STOP	idle	0	0	0	0	300	120	0
+1800639	LOK	lok_world	EGG	0	2963.00	325.04	-4500.00	0	1	Edwyn	26775	poi	Mount Chaolt	1	STOP	idle	0	0	0	0	300	120	0
+1800640	LOK	lok_world	AREA	0	2921.43	345.00	-4589.13	0	1	a pirate	27075	poi	Mount Chaolt	2	STOP	idle	0	0	0	0	300	120	4
+1800641	LOK	lok_world	AREA	0	2896.97	328.48	-4533.27	0	1	a pirate	27075	poi	Mount Chaolt	2	STOP	idle	0	0	0	0	300	120	4
+1800642	LOK	lok_world	AREA	0	2890.10	307.39	-4472.50	0	1	a pirate	27075	poi	Mount Chaolt	2	STOP	idle	0	0	0	0	300	120	4
+1800643	LOK	lok_world	AREA	0	2882.75	334.61	-4568.83	0	1	a pirate	27075	poi	Mount Chaolt	2	STOP	idle	0	0	0	0	300	120	4
