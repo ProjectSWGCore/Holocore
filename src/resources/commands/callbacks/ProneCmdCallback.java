@@ -31,8 +31,8 @@ import services.galaxy.GalacticManager;
 
 public class ProneCmdCallback implements ICmdCallback {
 
-    @Override
-    public void execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
+	@Override
+	public void execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
 		CreatureObject creature = player.getCreatureObject();
 
 		if (creature.isPerforming()) {
