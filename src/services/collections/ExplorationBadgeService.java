@@ -87,10 +87,10 @@ public class ExplorationBadgeService extends Service {
 		try (RelationalServerData explorerBadgeDatabase = RelationalServerFactory.getServerData("badges/explorationBadges.db", "explorationBadges")) {
 			try(ResultSet set =  explorerBadgeDatabase.executeQuery(GET_BADGES_SQL)){
 				while (set.next()) {
-					String planet = set.getString(set.findColumn("planet")).toLowerCase();
-					String badgeName = set.getString(set.findColumn("badge_name"));
-					int x = set.getInt(set.findColumn("x"));
-					int y = set.getInt(set.findColumn("y"));
+					String planet = set.getString("planet").toLowerCase();
+					String badgeName = set.getString("badge_name");
+					int x = set.getInt("x");
+					int y = set.getInt("y");
 					int range = 5; //arbitrary number used
 					
 					if (!explorationLocations.containsKey(planet)) {
