@@ -35,6 +35,7 @@ import java.util.Map.Entry;
 
 import intents.GrantBadgeIntent;
 import intents.player.PlayerTransformedIntent;
+import java.util.Locale;
 
 import java.util.TreeMap;
 
@@ -87,7 +88,7 @@ public class ExplorationBadgeService extends Service {
 		try (RelationalServerData explorerBadgeDatabase = RelationalServerFactory.getServerData("badges/explorationBadges.db", "explorationBadges")) {
 			try(ResultSet set =  explorerBadgeDatabase.executeQuery(GET_BADGES_SQL)){
 				while (set.next()) {
-					String planet = set.getString("planet").toLowerCase();
+					String planet = set.getString("planet").toLowerCase(Locale.ENGLISH);
 					String badgeName = set.getString("badge_name");
 					int x = set.getInt("x");
 					int y = set.getInt("y");
