@@ -92,7 +92,7 @@ public class ExplorationBadgeService extends Service {
 					String badgeName = set.getString("badge_name");
 					int x = set.getInt("x");
 					int y = set.getInt("y");
-					int range = 5; //arbitrary number used
+					int range = set.getInt("radius");
 					
 					if (!explorationLocations.containsKey(planet)) {
 						explorationLocations.put(planet, new TreeMap<String, ExplorationRegion>());
