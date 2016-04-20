@@ -27,7 +27,6 @@ package resources.client_info;
 import resources.Point3D;
 import utilities.ByteUtilities;
 
-import java.nio.BufferUnderflowException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.charset.Charset;
@@ -272,7 +271,7 @@ public class IffNode {
 		isForm = true;
 		int size = bb.getInt(); // Size includes the "FORM" length (4)
 		tag = getTag(bb);
-		for (int read = 4; read < size; read++) {
+		for (int read = 4; read < size; ) {
 			IffNode child = new IffNode();
 			child.parent = this;
 
@@ -294,15 +293,8 @@ public class IffNode {
 
 	private int readChunk(ByteBuffer bb) {
 		isForm = false;
-		int chunkSize = bb.getInt();
-		chunkData = new byte[chunkSize];
-		try {
-			bb.get(chunkData);
-		} catch (BufferUnderflowException e) {
-			System.err.println("Couldn't get all the chunk data for size " + chunkSize + " in chunk " + getTag());
-			e.printStackTrace();
-		}
-
+		chunkData = new byte[bb.getInt()];
+		bb.get(chunkData);
 		return 4 + chunkData.length;
 	}
 
