@@ -274,8 +274,6 @@ public class PlayerManager extends Manager {
 		if (p != null) {
 			p.setPlayerState(PlayerState.DISCONNECTED);
 			new PlayerEventIntent(p, PlayerEvent.PE_LOGGED_OUT).broadcast();
-		} else {
-			System.err.println("No player found for ID: " + cci.getNetworkId());
 		}
 	}
 }

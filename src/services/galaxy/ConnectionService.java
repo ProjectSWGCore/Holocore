@@ -131,7 +131,7 @@ public class ConnectionService extends Service {
 				}
 				break;
 			}
-			case PE_ZONE_IN_CLIENT:
+			case PE_ZONE_IN_SERVER:
 				clearPlayerFlag(pei.getPlayer(), pei.getEvent(), PlayerFlags.LD);
 				break;
 			case PE_LOGGED_OUT:

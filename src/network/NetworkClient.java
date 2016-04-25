@@ -27,6 +27,7 @@
 ***********************************************************************************/
 package network;
 
+import intents.network.ConnectionClosedIntent;
 import intents.network.ConnectionOpenedIntent;
 import intents.network.InboundPacketIntent;
 
@@ -37,19 +38,26 @@ import java.nio.ByteOrder;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import resources.control.Intent;
+import resources.network.DisconnectReason;
+import resources.network.NetBufferStream;
+import utilities.IntentChain;
 import network.encryption.Compression;
 import network.packets.Packet;
+import network.packets.swg.ErrorMessage;
 import network.packets.swg.SWGPacket;
+import network.packets.swg.holo.HoloPacket;
 import network.packets.swg.zone.object_controller.ObjectController;
 
 public class NetworkClient {
 	
 	private static final int DEFAULT_BUFFER = 128;
+	private static final int TRY_LOCK_TIME = 100;
 	
-	private final Object prevPacketIntentMutex = new Object();
+	private final IntentChain intentChain = new IntentChain();
 	private final Object bufferMutex = new Object();
 	private final ReentrantLock inboundLock = new ReentrantLock(true);
 	private final ReentrantLock outboundLock = new ReentrantLock(true);
@@ -57,28 +65,23 @@ public class NetworkClient {
 	private final long networkId;
 	private final PacketSender packetSender;
 	private final Queue<Packet> outboundQueue;
-	private Intent prevPacketIntent;
-	private ByteBuffer buffer;
-	private long lastBufferSizeModification;
+	private final NetBufferStream buffer;
+	private ClientStatus status;
 	
 	public NetworkClient(InetSocketAddress address, long networkId, PacketSender packetSender) {
 		this.address = address;
 		this.networkId = networkId;
 		this.packetSender = packetSender;
-		this.buffer = ByteBuffer.allocate(DEFAULT_BUFFER);
 		this.outboundQueue = new LinkedList<>();
-		lastBufferSizeModification = System.nanoTime();
-		prevPacketIntent = null;
+		this.buffer = new NetBufferStream(DEFAULT_BUFFER);
+		this.status = ClientStatus.DISCONNECTED;
 	}
 	
 	public void close() {
-		synchronized (bufferMutex) {
-			buffer = ByteBuffer.allocate(0);
-		}
-		synchronized (prevPacketIntentMutex) {
-			prevPacketIntent = null;
-		}
+		buffer.reset();
+		intentChain.reset();
 		outboundQueue.clear();
+		status = ClientStatus.DISCONNECTED;
 	}
 	
 	public InetSocketAddress getAddress() {
@@ -90,14 +93,24 @@ public class NetworkClient {
 	}
 	
 	public void onConnected() {
-		synchronized (prevPacketIntentMutex) {
-			prevPacketIntent = new ConnectionOpenedIntent(networkId);
-			prevPacketIntent.broadcast();
-		}
+		status = ClientStatus.CONNECTED;
+		intentChain.broadcastAfter(new ConnectionOpenedIntent(networkId));
+	}
+	
+	public void onConnecting() {
+		status = ClientStatus.CONNECTING;
+	}
+	
+	public void onDisconnected() {
+		status = ClientStatus.DISCONNECTED;
+	}
+	
+	public ClientStatus getStatus() {
+		return status;
 	}
 	
 	public void processOutbound() {
-		if (!outboundLock.tryLock())
+		if (!tryLockInterruptable(outboundLock))
 			return;
 		try {
 			Packet p;
@@ -123,61 +136,33 @@ public class NetworkClient {
 	
 	public void addToBuffer(byte [] data) {
 		synchronized (bufferMutex) {
-			if (data.length > buffer.remaining()) { // Increase size
-				int nCapacity = buffer.capacity() * 2;
-				while (nCapacity < buffer.position()+data.length)
-					nCapacity *= 2;
-				ByteBuffer bb = ByteBuffer.allocate(nCapacity);
-				buffer.flip();
-				bb.put(buffer);
-				bb.put(data);
-				this.buffer = bb;
-				lastBufferSizeModification = System.nanoTime();
-			} else {
-				buffer.put(data);
-				if (buffer.position() < buffer.capacity()/4 && (System.nanoTime()-lastBufferSizeModification) >= 1E9)
-					shrinkBuffer();
-			}
+			buffer.write(data);
 		}
 	}
 	
 	public boolean processInbound() {
-		if (!inboundLock.tryLock())
+		if (!tryLockInterruptable(inboundLock))
 			return false;
 		try {
 			List <Packet> packets;
 			synchronized (bufferMutex) {
-				buffer.flip();
 				packets = processPackets();
 				buffer.compact();
 			}
-			synchronized (prevPacketIntentMutex) {
-				for (Packet p : packets) {
-					p.setAddress(address.getAddress());
-					p.setPort(address.getPort());
-					InboundPacketIntent i = new InboundPacketIntent(p, networkId);
-					i.broadcastAfterIntent(prevPacketIntent);
-					prevPacketIntent = i;
+			for (Packet p : packets) {
+				p.setAddress(address.getAddress());
+				p.setPort(address.getPort());
+				if (status != ClientStatus.CONNECTED && !(p instanceof HoloPacket)) {
+					addToOutbound(new ErrorMessage("Network Manager", "Upgrade your launcher!", false));
+					processOutbound();
+					new ConnectionClosedIntent(networkId, DisconnectReason.CONNECTION_REFUSED).broadcast();
+					break;
 				}
+				intentChain.broadcastAfter(new InboundPacketIntent(p, networkId));
 			}
 			return packets.size() > 0;
 		} finally {
 			inboundLock.unlock();
-		}
-	}
-	
-	private void shrinkBuffer() {
-		synchronized (bufferMutex) {
-			int nCapacity = DEFAULT_BUFFER;
-			while (nCapacity < buffer.position())
-				nCapacity *= 2;
-			if (nCapacity >= buffer.capacity())
-				return;
-			ByteBuffer bb = ByteBuffer.allocate(nCapacity).order(ByteOrder.LITTLE_ENDIAN);
-			buffer.flip();
-			bb.put(buffer);
-			buffer = bb;
-			lastBufferSizeModification = System.nanoTime();
 		}
 	}
 	
@@ -199,29 +184,19 @@ public class NetworkClient {
 	private Packet processPacket() throws EOFException {
 		if (buffer.remaining() < 5)
 			throw new EOFException("Not enough remaining data for header! Remaining: " + buffer.remaining());
-		buffer.order(ByteOrder.LITTLE_ENDIAN);
-		byte bitfield = buffer.get();
-		boolean compressed = (bitfield & (1<<0)) != 0;
-		boolean swg = (bitfield & (1<<1)) != 0;
+		byte bitfield = buffer.getByte();
+		boolean compressed = (bitfield & 0x01) != 0;
 		int length = buffer.getShort();
 		int decompressedLength = buffer.getShort();
 		if (buffer.remaining() < length) {
 			buffer.position(buffer.position() - 5);
 			throw new EOFException("Not enough remaining data! Remaining: " + buffer.remaining() + "  Length: " + length);
 		}
-		byte [] pData = new byte[length];
-		buffer.get(pData);
+		byte [] pData = buffer.getArray(length);
 		if (compressed) {
 			pData = Compression.decompress(pData, decompressedLength);
 		}
-		if (swg)
-			return processSWG(pData);
-		else
-			return processProtocol(pData);
-	}
-	
-	private Packet processProtocol(byte [] data) {
-		return null;
+		return processSWG(pData);
 	}
 	
 	private SWGPacket processSWG(byte [] data) {
@@ -278,8 +253,22 @@ public class NetworkClient {
 		packetSender.sendPacket(address, data);
 	}
 	
+	private boolean tryLockInterruptable(Lock l) {
+		try {
+			return l.tryLock(TRY_LOCK_TIME, TimeUnit.MILLISECONDS);
+		} catch (InterruptedException e) {
+			return false;
+		}
+	}
+	
 	public String toString() {
 		return "NetworkClient["+address+"]";
+	}
+	
+	public enum ClientStatus {
+		DISCONNECTED,
+		CONNECTING,
+		CONNECTED
 	}
 	
 }

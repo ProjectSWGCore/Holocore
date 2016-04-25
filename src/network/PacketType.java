@@ -28,6 +28,9 @@
 package network;
 
 import network.packets.swg.*;
+import network.packets.swg.holo.HoloConnectionStarted;
+import network.packets.swg.holo.HoloConnectionStopped;
+import network.packets.swg.holo.HoloSetProtocolVersion;
 import network.packets.swg.login.*;
 import network.packets.swg.login.creation.*;
 import network.packets.swg.zone.*;
@@ -49,6 +52,11 @@ import resources.server_info.Log;
 
 public enum PacketType {
 
+	// Holocore
+	HOLO_SET_PROTOCOL_VERSION					(HoloSetProtocolVersion.CRC, HoloSetProtocolVersion.class),
+	HOLO_CONNECTION_STARTED						(HoloConnectionStarted.CRC,	HoloConnectionStarted.class),
+	HOLO_CONNECTION_STOPPED						(HoloConnectionStopped.CRC,	HoloConnectionStopped.class),
+	
 	// Both
 	SERVER_UNIX_EPOCH_TIME						(ServerUnixEpochTime.CRC, 	ServerUnixEpochTime.class),
 	SERVER_ID									(ServerId.CRC, 				ServerId.class),
