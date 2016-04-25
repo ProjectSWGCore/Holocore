@@ -85,7 +85,7 @@ public class UniformBoxService extends Service {
 		SWGObject inventory = creature.getSlottedObject("inventory");
 		String profession = creature.getPlayerObject().getProfession();
 		
-		destroyUniformBox(creature);
+		new DestroyObjectIntent(rsi.getTarget()).broadcast();
 		handleCreateItems(inventory, profession, creature.getRace());
 	}
 	
@@ -128,13 +128,4 @@ public class UniformBoxService extends Service {
 		return template;
 	}
 	
-	private void destroyUniformBox(CreatureObject creature){
-		Collection<SWGObject> items = creature.getItemsByTemplate("inventory", UNIFORM_BOX_IFF);
-		
-		for (SWGObject item : items){
-			if (item.getTemplate().equals(UNIFORM_BOX_IFF)){
-				new DestroyObjectIntent(item).broadcast();
-			}
-		}
-	}
 }
