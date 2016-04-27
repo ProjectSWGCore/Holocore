@@ -135,7 +135,8 @@ public class ConnectionService extends Service {
 				clearPlayerFlag(pei.getPlayer(), pei.getEvent(), PlayerFlags.LD);
 				break;
 			case PE_LOGGED_OUT:
-				CoreManager.getGalaxy().decrementPopulationCount();
+				if (pei.getPlayer().getCreatureObject() != null)
+					CoreManager.getGalaxy().decrementPopulationCount();
 				setPlayerFlag(pei.getPlayer(), pei.getEvent(), PlayerFlags.LD);
 				logOut(pei.getPlayer(), true);
 				break;
