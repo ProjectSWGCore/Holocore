@@ -49,7 +49,6 @@ import network.packets.swg.login.EnumerateCharacterId;
 import network.packets.swg.login.EnumerateCharacterId.SWGCharacter;
 import network.packets.swg.login.creation.DeleteCharacterRequest;
 import network.packets.swg.login.creation.DeleteCharacterResponse;
-import network.packets.swg.login.ConnectionServerLagResponse;
 import network.packets.swg.login.LoginClientId;
 import network.packets.swg.login.LoginClientToken;
 import network.packets.swg.login.LoginClusterStatus;
@@ -57,6 +56,7 @@ import network.packets.swg.login.LoginEnumCluster;
 import network.packets.swg.login.LoginIncorrectClientId;
 import network.packets.swg.login.OfflineServersMessage;
 import network.packets.swg.login.StationIdHasJediSlot;
+import network.packets.swg.zone.GameServerLagResponse;
 import network.packets.swg.zone.LagRequest;
 import network.packets.swg.zone.ServerNowEpochTime;
 import resources.Galaxy;
@@ -132,7 +132,7 @@ public class LoginService extends Service {
 	}
 	
 	private void handleLagRequest(Player player) {
-		player.sendPacket(new ConnectionServerLagResponse());
+		player.sendPacket(new GameServerLagResponse());
 	}
 	
 	private void handleCharDeletion(GalacticIntent intent, Player player, DeleteCharacterRequest request) {

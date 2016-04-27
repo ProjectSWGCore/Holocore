@@ -37,9 +37,9 @@ import network.packets.Packet;
 import network.packets.swg.login.AccountFeatureBits;
 import network.packets.swg.login.ClientIdMsg;
 import network.packets.swg.login.ClientPermissionsMessage;
+import network.packets.swg.login.ConnectionServerLagResponse;
 import network.packets.swg.zone.CmdSceneReady;
 import network.packets.swg.zone.GalaxyLoopTimesResponse;
-import network.packets.swg.zone.GameServerLagResponse;
 import network.packets.swg.zone.HeartBeat;
 import network.packets.swg.zone.LagRequest;
 import network.packets.swg.zone.ParametersMessage;
@@ -137,7 +137,7 @@ public class ZoneManager extends Manager {
 	}
 	
 	private void handleLagRequest(Player player) {
-		player.sendPacket(new GameServerLagResponse());
+		player.sendPacket(new ConnectionServerLagResponse());
 	}
 	
 	private void zoneInPlayer(Player player, CreatureObject creature, boolean firstZone) {
