@@ -48,11 +48,13 @@ import resources.containers.DefaultPermissions;
 import resources.encodables.StringId;
 import resources.network.BaselineBuilder;
 import resources.network.BaselineObject;
+import resources.network.NetBuffer;
 import resources.objects.building.BuildingObject;
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
 import resources.server_info.Log;
 import services.CoreManager;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
@@ -83,6 +85,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	private List <List <String>> arrangement;
 
 	private ObjectClassification classification = ObjectClassification.GENERATED;
+	private GameObjectType gameObjectType = GameObjectType.GOT_NONE;
 	private SWGObject	parent	= null;
 	private StringId stringId = new StringId("", "");
 	private StringId detailStringId = new StringId("", "");
@@ -138,7 +141,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			// Check to make sure this object is able to go into a slot in the parent
 			List<String> requiredSlots = object.getArrangement().get(arrangementId - 4);
 			// Note that some objects don't have a descriptor, meaning it has no slots
-
+			
 			// Add object to the slot
 			for (String requiredSlot : requiredSlots) {
 				setSlot(requiredSlot, object);
@@ -178,11 +181,17 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	 * @return {@link ContainerResult}
 	 */
 	public ContainerResult moveToContainer(SWGObject requester, SWGObject container) {
+		// Check if the requester has MOVE permissions for the current container of the object
+		if(!hasPermission(requester, ContainerPermissions.Permission.MOVE)) {
+			return ContainerResult.NO_PERMISSION;
+		}
+		
+		// Check if the requester has MOVE permissions to the destination container
 		if (!container.hasPermission(requester, ContainerPermissions.Permission.MOVE)) {
 			Log.w("SWGObject", "No permission 'MOVE' for requestor %s with object %s", requester, this);
 			return ContainerResult.NO_PERMISSION;
 		}
-
+		
 		// Check if object can fit into container or slots
 		int arrangementId = container.getArrangementId(this);
 		if (arrangementId == -1) {
@@ -191,10 +200,17 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 				Log.w("SWGObject", "Unable to add object to container! Container Full");
 				return ContainerResult.CONTAINER_FULL;
 			}
+		} else {
+			// Item is going into slot(s)
+			Map<String, SWGObject> containerSlots = container.getSlots();
+			for (String slotName : getArrangement().get(arrangementId - 4)) {
+				SWGObject equippedItem = containerSlots.get(slotName);
+				if (equippedItem != null) {
+					equippedItem.moveToContainer(requester, container.getSlottedObject("inventory"));
+				}
+			}
 		}
-
-		// TODO Slot occupation check, old version was not working properly, always returning SLOT_OCCUPIED
-
+		
 		// Get a pre-parent-removal list of the observers so we can send create/destroy/update messages
 		Set<SWGObject> oldObservers = getObservers();
 		Player prevOwner = getOwner();
@@ -244,7 +260,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	 * @return
 	 */
 	public boolean hasPermission(SWGObject object, ContainerPermissions.Permission... permissions) {
-		if (object == null || object == this || object.getOwner() == getOwner())
+		if (object == null)
 			return true;
 		for (ContainerPermissions.Permission permission : permissions) {
 			switch(permission) {
@@ -522,6 +538,8 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	public BuildoutArea getBuildoutArea() {
+		if (buildoutArea == null && parent != null)
+			return parent.getBuildoutArea();
 		return buildoutArea;
 	}
 	
@@ -564,7 +582,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	public void setSlotArrangement(int slotArrangement) {
 		this.slotArrangement = slotArrangement;
 	}
-
+	
 	public int getMaxContainerSize() {
 		Object volume = dataAttributes.get(ObjectDataAttribute.CONTAINER_VOLUME_LIMIT);
 		if (volume == null) {
@@ -580,6 +598,14 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	public ObjectClassification getClassification() {
 		return classification;
+	}
+	
+	public GameObjectType getGameObjectType() {
+		return gameObjectType;
+	}
+	
+	public void setGameObjectType(GameObjectType gameObjectType) {
+		this.gameObjectType = gameObjectType;
 	}
 	
 	public boolean isBuildout() {
@@ -640,16 +666,15 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 
 	private final void sendSceneCreateObject(Player target) {
+		if (target == null)
+			return;
 		SceneCreateObjectByCrc create = new SceneCreateObjectByCrc();
 		create.setObjectId(objectId);
-		create.setLocation(location);
+		create.setLocation(buildoutArea == null ? location : buildoutArea.adjustLocation(location));
 		create.setObjectCrc(crc);
-		if (target != null) {
-			target.sendPacket(create);
-			if (parent != null)
-				target.sendPacket(new UpdateContainmentMessage(objectId, parent.getObjectId(), slotArrangement));
-		}
-
+		target.sendPacket(create);
+		if (parent != null)
+			target.sendPacket(new UpdateContainmentMessage(objectId, parent.getObjectId(), slotArrangement));
 	}
 	
 	private final void sendSceneDestroyObject(Player target) {
@@ -660,17 +685,21 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	public void createObject(Player target) {
+		createObject(target, false);
+	}
+	
+	public void createObject(Player target, boolean ignoreSnapshotChecks) {
 		if (!hasPermission(target.getCreatureObject(), ContainerPermissions.Permission.VIEW)) {
 			// Log.i("SWGObject", target.getCreatureObject() + " doesn't have permission to view " + this + " -- skipping packet sending");
 			return;
 		}
 
-		if (!isSnapshot()) {
+		if (!isSnapshot() || ignoreSnapshotChecks) {
 			sendSceneCreateObject(target);
 			sendBaselines(target);
 		}
-		createChildrenObjects(target);
-		if (!isSnapshot())
+		createChildrenObjects(target, ignoreSnapshotChecks);
+		if (!isSnapshot() || ignoreSnapshotChecks)
 			target.sendPacket(new SceneEndBaselines(getObjectId()));
 	}
 	
@@ -917,6 +946,10 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	protected void createChildrenObjects(Player target) {
+		createChildrenObjects(target, false);
+	}
+	
+	protected void createChildrenObjects(Player target, boolean ignoreSnapshotChecks) {
 		synchronized (slots) {
 			if (slots.size() == 0 && containedObjects.size() == 0)
 				return;
@@ -929,7 +962,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			for (SWGObject slotObject : slots.values()) {
 				if (slotObject != null && !sentObjects.contains(slotObject)) {
 					//Log.i("ChildrenObjects", "Sending slotObj " + slotObject + " to " + target);
-					slotObject.createObject(target);
+					slotObject.createObject(target, ignoreSnapshotChecks);
 					sentObjects.add(slotObject);
 				}
 			}
@@ -941,7 +974,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 				if (containedObject != null && !sentObjects.contains(containedObject)) {
 					if (containedObject instanceof CreatureObject && ((CreatureObject) containedObject).isLoggedOutPlayer())
 						continue; // If it's a player, but that's logged out
-					containedObject.createObject(target);
+					containedObject.createObject(target, ignoreSnapshotChecks);
 				}
 			}
 		}
@@ -981,7 +1014,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		return Long.valueOf(getObjectId()).hashCode();
 	}
 	
-	public void createBaseline3(Player target, BaselineBuilder bb) {
+	protected void createBaseline3(Player target, BaselineBuilder bb) {
 		super.createBaseline3(target, bb);
 		bb.addFloat(complexity); // 0
 		bb.addObject(stringId); // 1
@@ -991,12 +1024,26 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		bb.incrementOperandCount(4);
 	}
 	
-	public void createBaseline6(Player target, BaselineBuilder bb) {
+	protected void createBaseline6(Player target, BaselineBuilder bb) {
 		super.createBaseline6(target, bb);
 		bb.addInt(CoreManager.getGalaxyId()); // 0
 		bb.addObject(detailStringId); // 1
 		
 		bb.incrementOperandCount(2);
+	}
+	
+	protected void parseBaseline3(NetBuffer buffer) {
+		super.parseBaseline3(buffer);
+		complexity = buffer.getFloat();
+		stringId = buffer.getEncodable(StringId.class);
+		objectName = buffer.getUnicode();
+		volume = buffer.getInt();
+	}
+	
+	protected void parseBaseline6(NetBuffer buffer) {
+		super.parseBaseline6(buffer);
+		buffer.getInt(); // Immutable ... can't change the galaxy id
+		detailStringId = buffer.getEncodable(StringId.class);
 	}
 	
 	/* Baseline send permissions based on packet observations:

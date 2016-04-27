@@ -38,6 +38,34 @@ public class BaselineObject implements Serializable {
 		}
 	}
 	
+	public void parseBaseline(Baseline baseline) {
+		NetBuffer buffer = NetBuffer.wrap(baseline.getBaselineData());
+		buffer.getShort();
+		switch (baseline.getNum()) {
+			case 1:
+				parseBaseline1(buffer);
+				break;
+			case 3:
+				parseBaseline3(buffer);
+				break;
+			case 4:
+				parseBaseline4(buffer);
+				break;
+			case 6:
+				parseBaseline6(buffer);
+				break;
+			case 7:
+				parseBaseline7(buffer);
+				break;
+			case 8:
+				parseBaseline8(buffer);
+				break;
+			case 9:
+				parseBaseline9(buffer);
+				break;
+		}
+	}
+	
 	public Baseline createBaseline1(Player target) {
 		return createBaseline(target, 1, (t, bb)->createBaseline1(t, bb));
 	}
@@ -91,6 +119,34 @@ public class BaselineObject implements Serializable {
 	}
 	
 	protected void createBaseline9(Player target, BaselineBuilder data) {
+		
+	}
+	
+	protected void parseBaseline1(NetBuffer buffer) {
+		
+	}
+	
+	protected void parseBaseline3(NetBuffer buffer) {
+		
+	}
+	
+	protected void parseBaseline4(NetBuffer buffer) {
+		
+	}
+	
+	protected void parseBaseline6(NetBuffer buffer) {
+		
+	}
+	
+	protected void parseBaseline7(NetBuffer buffer) {
+		
+	}
+	
+	protected void parseBaseline8(NetBuffer buffer) {
+		
+	}
+	
+	protected void parseBaseline9(NetBuffer buffer) {
 		
 	}
 	

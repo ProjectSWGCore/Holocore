@@ -29,6 +29,7 @@ package resources.objects.installation;
 
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.network.BaselineBuilder;
+import resources.network.NetBuffer;
 import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
 
@@ -76,6 +77,13 @@ public class InstallationObject extends TangibleObject {
 		bb.addFloat((float) powerRate);
 		
 		bb.incrementOperandCount(3);
+	}
+	
+	public void parseBaseline3(NetBuffer data) {
+		super.parseBaseline3(data);
+		activated = data.getBoolean();
+		power = data.getFloat();
+		powerRate = data.getFloat();
 	}
 	
 	@Override

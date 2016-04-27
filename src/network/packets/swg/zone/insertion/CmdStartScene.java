@@ -47,7 +47,7 @@ public class CmdStartScene extends SWGPacket {
 	public CmdStartScene() {
 		ignoreLayoutFiles = false;
 		charId = 0;
-		race = Race.HUMAN;
+		race = Race.HUMAN_MALE;
 		l = new Location();
 		galacticTime = 0;
 		serverEpoch = 0;
@@ -104,5 +104,11 @@ public class CmdStartScene extends SWGPacket {
 	public Race getRace() { return race; }
 	public long getGalacticTime() { return galacticTime; }
 	public int getServerEpoch() { return serverEpoch; }
+	
+	public void setCharacterId(long id) { this.charId = id; }
+	public void setLocation(Location l) { this.l = l; }
+	public void setRace(Race r) { this.race = r; }
+	public void setGalacticTime(long time) { this.galacticTime = time; }
+	public void setServerEpoch(int epoch) { this.serverEpoch = epoch; }
 	
 }

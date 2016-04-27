@@ -37,9 +37,11 @@ import network.packets.Packet;
 import network.packets.swg.login.AccountFeatureBits;
 import network.packets.swg.login.ClientIdMsg;
 import network.packets.swg.login.ClientPermissionsMessage;
+import network.packets.swg.login.ConnectionServerLagResponse;
 import network.packets.swg.zone.CmdSceneReady;
 import network.packets.swg.zone.GalaxyLoopTimesResponse;
 import network.packets.swg.zone.HeartBeat;
+import network.packets.swg.zone.LagRequest;
 import network.packets.swg.zone.ParametersMessage;
 import network.packets.swg.zone.RequestGalaxyLoopTimes;
 import network.packets.swg.zone.SetWaypointColor;
@@ -73,6 +75,7 @@ import resources.player.Player;
 import resources.player.PlayerEvent;
 import resources.player.PlayerFlags;
 import resources.player.PlayerState;
+import resources.player.Player.PlayerServer;
 import resources.server_info.Log;
 
 import java.io.File;
@@ -125,10 +128,16 @@ public class ZoneManager extends Manager {
 			handleShowBackpack(player, (ShowBackpack) p);
 		if(p instanceof ShowHelmet)
 			handleShowHelmet(player, (ShowHelmet) p);
+		if (p instanceof LagRequest && player.getPlayerServer() == PlayerServer.ZONE)
+			handleLagRequest(player);
 	}
 	
 	public boolean characterExistsForName(String name) {
 		return characterCreationService.characterExistsForName(name);
+	}
+	
+	private void handleLagRequest(Player player) {
+		player.sendPacket(new ConnectionServerLagResponse());
 	}
 	
 	private void zoneInPlayer(Player player, CreatureObject creature, boolean firstZone) {
@@ -139,7 +148,7 @@ public class ZoneManager extends Manager {
 		
 		if (firstZone)
 			sendZonePackets(player, creature);
-		startScene(creature, creature.getLocation());
+		startScene(creature, creature.getWorldLocation());
 		if (firstZone)
 			playerObj.setStartPlayTime((int) System.currentTimeMillis());
 		initPlayerBeforeZoneIn(player, creature, playerObj);
@@ -150,7 +159,7 @@ public class ZoneManager extends Manager {
 			sendCommitHistory(player);
 			sendMessageOfTheDay(player);
 		}
-		new PlayerEventIntent(player, PlayerEvent.PE_ZONE_IN).broadcast();
+		new PlayerEventIntent(player, PlayerEvent.PE_ZONE_IN_CLIENT).broadcast();
 	}
 	
 	private void startScene(CreatureObject object, Location newLocation) {
@@ -166,7 +175,7 @@ public class ZoneManager extends Manager {
 		if (parent != null)
 			recursiveCreateObject(parent, p);
 		else
-			obj.createObject(p);
+			obj.createObject(p, true);
 	}
 	
 	private void loadCommitHistory() {
@@ -251,8 +260,8 @@ public class ZoneManager extends Manager {
 	}
 	
 	private void handleCmdSceneReady(Player player, CmdSceneReady p) {
+		new PlayerEventIntent(player, PlayerEvent.PE_ZONE_IN_SERVER).broadcast();
 		player.setPlayerState(PlayerState.ZONED_IN);
-		player.sendPacket(p);
 		System.out.println("[" + player.getUsername() +"] " + player.getCharacterName() + " zoned in");
 		Log.i("ZoneService", "%s with character %s zoned in from %s:%d", player.getUsername(), player.getCharacterName(), p.getAddress(), p.getPort());
 	}
@@ -260,6 +269,7 @@ public class ZoneManager extends Manager {
 	private void handleClientIdMsg(Player player, ClientIdMsg clientId) {
 		System.out.println("[" + player.getUsername() + "] Connected to the zone server. IP: " + clientId.getAddress() + ":" + clientId.getPort());
 		Log.i("ZoneService", "%s connected to the zone server from %s:%d", player.getUsername(), clientId.getAddress(), clientId.getPort());
+		player.setPlayerServer(PlayerServer.ZONE);
 		sendPacket(player.getNetworkId(), new HeartBeat());
 		sendPacket(player.getNetworkId(), new AccountFeatureBits());
 		sendPacket(player.getNetworkId(), new ClientPermissionsMessage());

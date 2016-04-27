@@ -1,12 +1,65 @@
-spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	creature_name	creature_id	spawn_category	spawn_area	amount	behaviour	patrol_id	max_spawn_time	min_spawn_time	float_radius
-INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGER NOT NULL	REAL	REAL	REAL	REAL	INTEGER	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER NOT NULL	TEXT NOT NULL	INTEGER	INTEGER NOT NULL	INTEGER NOT NULL	INTEGER
-17000003	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	EGG	7	-1.15	-13.75	9.50	-163	1	a comm operator	3150	city	Kachirho	1	npc_sitting_chair	0	300	120	0
-17000004	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	EGG	7	2.07	-13.75	4.50	0	1	a Stormtrooper	28990	city	Kachirho	1	npc_imperial	0	300	120	0
-17000005	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	EGG	7	-7.97	-13.75	6.87	-106	1	an Imperial First Lieutenant	13065	city	Kachirho	1	none	0	300	120	0
-17000006	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	EGG	7	-6.37	-13.75	6.20	0	1	Admiral Krieg	2715	city	Kachirho	1	none	0	300	120	0
-17000007	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	EGG	7	4.90	-13.75	4.50	0	1	a Stormtrooper	28990	city	Kachirho	1	npc_imperial	0	300	120	0
-17000008	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	EGG	10	-0.23	-20.75	30.50	-179	1	a Dark Trooper	5340	city	Kachirho	1	npc_imperial	0	300	120	0
-17000009	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	EGG	10	3.58	-20.75	30.50	-179	1	a Dark Trooper	5340	city	Kachirho	1	npc_imperial	0	300	120	0
-17000010	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	EGG	10	3.59	-20.75	28.00	-179	1	a Dark Trooper	5340	city	Kachirho	1	npc_imperial	0	300	120	0
-17000011	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	EGG	10	-0.45	-20.75	28.00	-179	1	a Dark Trooper	5340	city	Kachirho	1	npc_imperial	0	300	120	0
-17000012	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	EGG	10	1.60	-20.75	32.67	-179	1	Darth Vader	2760	city	Kachirho	1	none	0	300	120	0
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	creature_name	creature_id	spawn_category	spawn_area	amount	behaviour	mood	equipment_id	patrol_id	quest_id	loot_id	max_spawn_time	min_spawn_time	float_radius
+INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGER NOT NULL	REAL	REAL	REAL	REAL	INTEGER	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL	INTEGER NOT NULL	INTEGER
+17000003	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	EGG	7	-1.15	-13.75	9.50	-163.00	1	a comm operator	3150	city	Kachirho	1	STOP	npc_sitting_chair	0	0	0	0	300	120	0
+17000004	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	EGG	7	2.07	-13.75	4.50	0.00	1	a Stormtrooper	28990	city	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
+17000005	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	EGG	7	-7.97	-13.75	6.87	-106.00	1	an Imperial First Lieutenant	13065	city	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
+17000006	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	EGG	7	-6.37	-13.75	6.20	0.00	1	Admiral Krieg	2715	city	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
+17000007	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	EGG	7	4.90	-13.75	4.50	0.00	1	a Stormtrooper	28990	city	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
+17000008	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	EGG	10	-0.23	-20.75	30.50	-179.00	1	a Dark Trooper	5340	city	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
+17000009	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	EGG	10	3.58	-20.75	30.50	-179.00	1	a Dark Trooper	5340	city	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
+17000010	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	EGG	10	3.59	-20.75	28.00	-179.00	1	a Dark Trooper	5340	city	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
+17000011	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	EGG	10	-0.45	-20.75	28.00	-179.00	1	a Dark Trooper	5340	city	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
+17000012	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	EGG	10	1.60	-20.75	32.67	-179.00	1	Darth Vader	2760	city	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
+17000013	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	AREA	1	-1.98	-11.86	-7.08	86.85	1	a webweaver gravespinner	7210	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000014	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	AREA	1	26.47	-26.43	-6.26	-93.80	1	an Outcast Assassin	7115	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000015	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	AREA	1	-15.52	-4.57	-8.02	-36.86	1	an Outcast Assassin	7115	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000016	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	AREA	1	23.17	-28.13	-10.18	-174.80	1	a webweaver gravespinner	7210	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000017	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	AREA	2	23.03	-37.26	-29.91	-179.37	1	a webweaver tombsinger	7215	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000018	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	AREA	2	24.02	-40.95	-50.58	175.70	1	a webweaver tombsinger	7215	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000019	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	AREA	2	20.84	-41.79	-65.70	-2.11	1	an Outcast Assassin	7115	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000020	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	AREA	2	28.01	-43.10	-65.82	99.87	1	a webweaver gravespinner	7210	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000021	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	AREA	2	50.83	-48.00	-68.31	-4.12	1	a webweaver bloodseeker	7205	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000022	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	AREA	2	45.18	-47.65	-39.21	-1.31	1	a webweaver gravespinner	7210	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000023	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	AREA	2	55.70	-49.64	-15.51	81.39	1	a webweaver tombsinger	7215	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000024	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	AREA	2	57.30	-68.39	-36.90	-80.31	1	a webweaver gravespinner	7210	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000025	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	AREA	2	52.18	-67.97	-36.79	-20.27	1	an Outcast Assassin	7115	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000026	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	AREA	2	44.34	-47.18	-10.10	-16.95	1	an Outcast Assassin	7115	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000027	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	AREA	2	41.22	-46.31	-28.54	-145.14	1	an Outcast Assassin	7115	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000028	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	AREA	2	52.34	-48.89	-61.43	-157.73	1	an Outcast Assassin	7115	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000029	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	AREA	2	50.82	-67.49	-47.37	50.07	1	a webweaver tombsinger	7215	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000030	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	AREA	3	84.87	-62.92	-18.54	165.32	1	a webweaver tombsinger	7215	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000031	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	AREA	3	83.18	-68.70	-41.07	-174.62	1	a webweaver bloodseeker	7205	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000032	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	AREA	4	67.63	-75.41	-59.71	-133.45	1	a webweaver bloodseeker	7205	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000033	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	AREA	4	63.76	-76.64	-82.24	123.45	1	a webweaver tombsinger	7215	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000034	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	AREA	4	84.01	-76.64	-89.12	93.01	1	a webweaver gravespinner	7210	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000035	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	AREA	4	90.57	-76.20	-66.70	-28.75	1	a webweaver bloodseeker	7205	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000036	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	AREA	4	80.00	-76.20	-65.02	4.68	1	Mother Ves'ad	7100	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000037	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	AREA	5	71.96	-46.44	-107.32	94.41	1	a webweaver tombsinger	7215	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000038	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	AREA	5	94.24	-66.14	-115.17	24.38	1	a webweaver bloodseeker	7205	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000039	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	AREA	5	93.42	-45.84	-100.16	-169.87	1	a webweaver bloodseeker	7205	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000040	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	AREA	5	94.60	-66.59	-105.82	-95.57	1	an Outcast Assassin	7115	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000041	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	AREA	2	56.73	-68.41	-43.42	-126.79	1	an Outcast Assassin	7115	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000042	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	AREA	5	94.75	-46.84	-113.25	62.97	1	an Outcast Assassin	7115	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000043	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	AREA	5	84.62	-46.60	-116.12	6.72	1	an Outcast Assassin	7115	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000044	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	AREA	6	53.00	-75.65	-98.31	170.95	1	a webweaver bloodseeker	7205	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000045	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	AREA	6	55.41	-71.35	-115.08	169.90	1	a webweaver tombsinger	7215	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000046	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	AREA	7	69.78	-66.19	-139.04	105.32	1	a webweaver gravespinner	7210	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000047	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	AREA	7	89.21	-67.07	-133.90	12.95	1	a webweaver tombsinger	7215	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000048	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	AREA	8	113.63	-66.43	-118.86	166.91	1	an Outcast Assassin	7115	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000049	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	AREA	8	130.18	-66.64	-104.88	60.45	1	an Outcast Assassin	7115	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000050	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	AREA	8	151.90	-66.62	-123.97	9.96	1	an Outcast Assassin	7115	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000051	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	AREA	8	155.32	-66.36	-96.12	-132.39	1	an Outcast Assassin	7115	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000052	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	AREA	8	146.52	-67.23	-123.67	26.35	1	Rhiek Okina	7135	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000053	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	AREA	8	140.03	-67.13	-91.29	160.71	1	a great mouf	7045	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000054	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	EGG	8	131.94	-66.91	-86.92	-142.32	1	Rhuiw (Junk Dealer)	7120	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000055	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	EGG	8	135.74	-66.23	-109.19	-82.66	1	Cryl Kydris	7060	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000056	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	EGG	9	180.14	-66.12	-96.73	-90.52	1	Dahlia Damask	7065	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000057	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	AREA	10	48.82	-48.91	-101.05	166.34	1	an Outcast Assassin	7115	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000058	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	AREA	10	49.68	-51.66	-90.87	-178.14	1	a webweaver bloodseeker	7205	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000059	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	AREA	10	62.97	-47.21	-106.43	98.46	1	a webweaver gravespinner	7210	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000060	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	AREA	11	92.30	-46.92	-137.27	-126.23	1	a webweaver gravespinner	7210	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000061	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	AREA	11	79.00	-46.55	-141.93	63.27	1	a webweaver tombsinger	7215	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000062	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	AREA	11	90.01	-46.37	-147.79	-89.62	1	an Outcast Assassin	7115	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000063	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	AREA	11	82.37	-46.21	-138.22	-39.88	1	an Outcast Assassin	7115	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000064	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	AREA	11	73.61	-46.10	-141.44	-98.05	1	an Outcast Assassin	7115	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0
+17000065	KASHYYYK_DEAD_FOREST	kas_dead_f_shadowwave_caverns	EGG	11	82.90	-46.41	-143.16	-33.53	1	Risyl	7140	POI	ShadowWeave Cavern	1	STOP	idle	0	0	0	0	300	120	0

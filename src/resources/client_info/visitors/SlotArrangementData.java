@@ -43,11 +43,13 @@ public class SlotArrangementData extends ClientData {
 		iff.enterNextForm(); // Version
 
 		List<String> slots = new ArrayList<>();
-		IffNode chunk;
-		while((chunk = iff.enterNextChunk()) != null) {
-			slots.add(chunk.readString());
+		
+		IffNode chunk = iff.enterNextChunk();	// Enter ARG chunk
+		String slotName;
+		while((slotName = chunk.readString()) != null && !slotName.isEmpty()) {	// Read strings until there are none left.
+			slots.add(slotName);
 		}
-
+		
 		occupiedSlots.add(slots);
 	}
 

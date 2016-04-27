@@ -40,6 +40,7 @@ import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.building.BuildingObject;
 import resources.objects.SWGObject;
+import resources.objects.creature.CreatureObject;
 import resources.server_info.Log;
 import resources.server_info.RelationalDatabase;
 import resources.server_info.RelationalServerFactory;
@@ -50,11 +51,12 @@ import services.objects.ObjectManager;
 public final class SpawnerService extends Service {
 	
 	private static final String GET_ALL_SPAWNERS_SQL = "SELECT static.x, static.y, static.z, static.heading, " // static columns
-			+ "static.spawner_type, static.cell_id, static.active, " // more static columns
+			+ "static.spawner_type, static.cell_id, static.active, static.mood, " // more static columns
 			+ "buildings.object_id AS building_id, buildings.terrain_name AS building_terrain, " // building columns
 			+ "creatures.iff_template AS iff, creatures.creature_name " // creature columns
 			+ "FROM static, buildings, creatures "
 			+ "WHERE buildings.building_id = static.building_id AND static.creature_id = creatures.creature_id";
+	private static final String IDLE_MOOD = "idle";
 	
 	private final ObjectManager objectManager;
 	private final Collection<Spawner> spawners;
@@ -138,12 +140,17 @@ public final class SpawnerService extends Service {
 			SWGObject egg = objectManager.createObject(parent, spawnerType.getObjectTemplate(), loc, false);
 			spawners.add(new Spawner(egg));
 		}
-		createNPC(parent, loc, set.getString("iff"), set.getString("creature_name"));
+		createNPC(parent, loc, set.getString("iff"), set.getString("creature_name"), set.getString("mood"));
 	}
 	
-	private boolean createNPC(SWGObject parent, Location loc, String iff, String name) {
-		SWGObject object = objectManager.createObject(parent, createTemplate(getRandomIff(iff)), loc, false);
+	private boolean createNPC(SWGObject parent, Location loc, String iff, String name, String moodAnimation) {
+		CreatureObject object = (CreatureObject) objectManager.createObject(parent, createTemplate(getRandomIff(iff)), loc, false);
+		if (object == null)
+			return false;
 		object.setName(getCreatureName(name));
+		if (!moodAnimation.equals(IDLE_MOOD)) {
+			object.setMoodAnimation(moodAnimation);
+		}
 		return true;
 	}
 	

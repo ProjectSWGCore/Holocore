@@ -1,324 +1,621 @@
-spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	creature_name	creature_id	spawn_category	spawn_area	amount	behaviour	patrol_id	max_spawn_time	min_spawn_time	float_radius
-INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGER NOT NULL	REAL	REAL	REAL	REAL	INTEGER	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER NOT NULL	TEXT NOT NULL	INTEGER	INTEGER NOT NULL	INTEGER NOT NULL	INTEGER
-1300003	DANTOOINE	dan_world	AREA	0	5474.17	1.37	5841.03	0	1	an Imperial master sergeant	25435	-	-	1	none	0	300	120	0
-1300004	DANTOOINE	dan_world	AREA	0	5472.35	1.87	5847.51	0	1	a Stormtrooper	25560	-	-	1	none	0	300	120	0
-1300005	DANTOOINE	dan_world	AREA	0	4517.93	3.03	-6494.32	0	1	a Mokk hunter	19170	-	-	1	none	0	300	120	2
-1300006	DANTOOINE	dan_world	AREA	0	4501.84	1.99	-6496.45	0	1	a Mokk hunter	19170	-	-	1	none	0	300	120	2
-1300007	DANTOOINE	dan_world	AREA	0	4491.90	3.72	-6481.56	0	1	a Mokk hunter	19170	-	-	1	none	0	300	120	2
-1300008	DANTOOINE	dan_world	AREA	0	3213.28	0.52	5988.51	0	1	a Mokk Harvester	19160	-	-	2	none	0	300	120	4
-1300009	DANTOOINE	dan_world	AREA	0	3192.71	3.36	5982.25	0	1	a Mokk Scout	19190	-	-	3	none	0	300	120	6
-1300010	DANTOOINE	dan_world	AREA	0	2911.92	2.21	4517.31	0	1	a Dark Jedi Sentinel	31525	-	-	1	none	0	300	120	2
-1300011	DANTOOINE	dan_world	AREA	0	2099.37	80.82	7435.46	0	1	Lepwalk C'han	15075	-	-	1	none	0	300	120	0
-1300012	DANTOOINE	dan_world	QUEST	0	-6806.41	126.00	6025.05	173	1	Mol Ni'mai	25110	-	-	1	none	0	300	120	0
-1300013	DANTOOINE	dan_world	AREA	0	-6628.21	22.13	5704.44	0	1	an enforcer	27085	-	-	1	none	0	300	120	2
-1300014	DANTOOINE	dan_world	AREA	0	-6599.08	19.56	5654.78	0	1	an enforcer	27085	-	-	1	none	0	300	120	2
-1300015	DANTOOINE	dan_world	AREA	0	-6594.00	18.40	5689.00	0	1	Nola	26885	-	-	1	none	0	300	120	0
-1300016	DANTOOINE	dan_world	AREA	0	-6567.25	16.88	5685.90	0	1	an enforcer	27085	-	-	1	none	0	300	120	2
-1300017	DANTOOINE	dan_imp_outpost_cantina	QUEST	3	0.02	0.13	-5.72	0	1	Insurgent (Black Epsilon Pilot Trainer)	33805	city	Imperial Outpost	1	none	0	300	120	0
-1300018	DANTOOINE	dan_imp_outpost_hospital	QUEST	6	-4.45	0.13	-1.59	136	1	Xaan Talmaron	33340	city	Imperial Outpost	1	none	0	300	120	0
-1300019	DANTOOINE	dan_world	AREA	0	-4291.37	3.00	-2408.11	90	1	a Stormtrooper	28990	city	Imperial Outpost	1	none	0	300	120	0
-1300020	DANTOOINE	dan_world	EGG	0	-4275.44	3.00	-2413.99	89	1	an explorer	8455	city	Imperial Outpost	1	none	0	300	120	0
-1300021	DANTOOINE	dan_world	AREA	0	-4273.00	3.00	-2314.65	0	1	an AT-ST	370	city	Imperial Outpost	1	none	0	300	120	2
-1300022	DANTOOINE	dan_world	AREA	0	-4268.18	3.00	-2480.42	0	1	an AT-ST	370	city	Imperial Outpost	1	none	0	300	120	2
-1300023	DANTOOINE	dan_world	EGG	0	-4259.36	3.00	-2384.13	87	1	an technician	30945	city	Imperial Outpost	1	none	0	300	120	0
-1300024	DANTOOINE	dan_world	EGG	0	-4248.68	3.00	-2376.61	68	1	a scientist	25750	city	Imperial Outpost	1	none	0	300	120	0
-1300025	DANTOOINE	dan_world	PATROL	0	-4246.33	3.00	-2380.44	0	1	a Stormtrooper	28990	city	Imperial Outpost	3	none	0	300	120	6
-1300026	DANTOOINE	dan_world	PATROL	0	-4234.88	3.00	-2418.17	0	1	a Stormtrooper	28990	city	Imperial Outpost	3	none	0	300	120	6
-1300027	DANTOOINE	dan_world	EGG	0	-4233.76	3.00	-2354.45	-170	1	a bounty hunter	2100	city	Imperial Outpost	1	none	0	300	120	0
-1300028	DANTOOINE	dan_world	EGG	0	-4233.70	3.00	-2402.08	133	1	a commoner	3185	city	Imperial Outpost	1	discuss	0	300	120	0
-1300029	DANTOOINE	dan_world	EGG	0	-4231.80	3.00	-2403.62	-61	1	a hunter	12525	city	Imperial Outpost	1	discuss	0	300	120	0
-1300030	DANTOOINE	dan_world	EGG	0	-4231.60	10.01	-2439.76	-137	1	an Imperial officer	29355	city	Imperial Outpost	1	sitting	0	300	120	0
-1300031	DANTOOINE	dan_world	EGG	0	-4198.86	3.00	-2426.41	46	1	a settler	26085	city	Imperial Outpost	1	none	0	300	120	0
-1300032	DANTOOINE	dan_world	EGG	0	-4197.65	3.00	-2425.58	-138	1	a commoner	3185	city	Imperial Outpost	1	none	0	300	120	0
-1300033	DANTOOINE	dan_world	EGG	0	-4231.60	3.00	-2425.57	-32	1	a commoner	3185	city	Imperial Outpost	1	none	0	300	120	0
-1300034	DANTOOINE	dan_world	PATROL	0	-4231.26	3.00	-2431.13	0	1	an EG-6 power droid	6195	city	Imperial Outpost	1	none	0	300	120	2
-1300035	DANTOOINE	dan_world	AREA	0	-4226.21	3.00	-2398.51	-2	1	a Stormtrooper	28990	city	Imperial Outpost	1	none	0	300	120	0
-1300036	DANTOOINE	dan_world	QUEST	0	-4225.36	10.01	-2442.61	-135	1	Commander Jatrian Lytus	13790	city	Imperial Outpost	1	none	0	300	120	0
-1300037	DANTOOINE	dan_world	AREA	0	-4223.37	3.00	-2398.44	-2	1	a Stormtrooper Captain	29010	city	Imperial Outpost	1	none	0	300	120	0
-1300038	DANTOOINE	dan_world	EGG	0	-4221.80	10.01	-2440.99	-47	1	an Imperial officer	34010	city	Imperial Outpost	1	ponder	0	300	120	0
-1300039	DANTOOINE	dan_world	EGG	0	-4221.48	3.00	-2378.41	104	1	Col. Bek Rabor (an Imperial officer)	34070	city	Imperial Outpost	1	none	0	300	120	0
-1300040	DANTOOINE	dan_world	PATROL	0	-4219.94	3.00	-2363.13	0	1	an R5 unit	34015	city	Imperial Outpost	1	none	0	300	120	2
-1300041	DANTOOINE	dan_world	PATROL	0	-4217.94	3.00	-2365.13	0	1	an R5 unit	34015	city	Imperial Outpost	1	none	0	300	120	2
-1300042	DANTOOINE	dan_world	EGG	0	-4219.92	3.00	-2378.92	-83	1	Lt. Juntah Herm (an Imperial pilot)	34075	city	Imperial Outpost	1	none	0	300	120	0
-1300043	DANTOOINE	dan_world	EGG	0	-4217.35	3.00	-2402.64	127	1	a settler	26085	city	Imperial Outpost	1	none	0	300	120	0
-1300044	DANTOOINE	dan_world	QUEST	0	-4216.49	3.00	-2436.70	-10	1	SG-567	34025	city	Imperial Outpost	1	none	0	300	120	0
-1300045	DANTOOINE	dan_world	EGG	0	-4212.96	3.00	-2393.80	175	1	a businessman	2255	city	Imperial Outpost	1	tap	0	300	120	0
-1300046	DANTOOINE	dan_world	PATROL	0	-4211.78	3.00	-2384.06	0	1	a Veteran Stormtrooper Squad Leader	32610	city	Imperial Outpost	1	none	0	300	120	2
-1300047	DANTOOINE	dan_world	PATROL	0	-4211.78	3.00	-2381.14	0	1	a Stormtrooper	28990	city	Imperial Outpost	1	none	0	300	120	2
-1300048	DANTOOINE	dan_world	PATROL	0	-4208.91	3.00	-2384.88	0	1	an Imperial Lance Corporal	13085	city	Imperial Outpost	1	none	0	300	120	2
-1300049	DANTOOINE	dan_world	PATROL	0	-4208.22	3.00	-2381.14	0	1	an Imperial noncom	13135	city	Imperial Outpost	1	none	0	300	120	2
-1300050	DANTOOINE	dan_world	EGG	0	-4203.23	3.00	-2357.84	-135	1	an explorer	8455	city	Imperial Outpost	1	none	0	300	120	0
-1300051	DANTOOINE	dan_world	EGG	0	-4197.36	3.00	-2402.45	-92	1	an Imperial Recruiter	13170	city	Imperial Outpost	1	none	0	300	120	0
-1300052	DANTOOINE	dan_world	QUEST	0	-4182.72	3.00	-2385.55	-140	1	LX-466	34020	city	Imperial Outpost	1	none	0	300	120	0
-1300053	DANTOOINE	dan_world	PATROL	0	-4179.53	3.00	-2395.33	0	1	a Stormtrooper	28990	city	Imperial Outpost	3	none	0	300	120	6
-1300054	DANTOOINE	dan_world	AREA	0	-4158.04	3.00	-2408.21	-90	1	a Stormtrooper	28990	city	Imperial Outpost	1	none	0	300	120	0
-1300055	DANTOOINE	dan_world	AREA	0	-4137.92	3.00	-2354.91	0	1	an AT-ST	370	city	Imperial Outpost	1	none	0	300	120	2
-1300056	DANTOOINE	dan_jedi_temple_ruins_cave	AREA	2	54.37	-68.28	-39.93	0	1	a savage quenker	25700	city	Jedi Temple Ruins	3	none	0	300	120	6
-1300057	DANTOOINE	dan_jedi_temple_ruins_cave	AREA	6	56.88	-70.50	-119.77	0	1	a bile-drenched quenker	1050	city	Jedi Temple Ruins	3	none	0	300	120	6
-1300058	DANTOOINE	dan_jedi_temple_ruins_cave	AREA	8	116.92	-66.01	-107.56	0	1	a quenker ravager	23805	city	Jedi Temple Ruins	3	none	0	300	120	6
-1300059	DANTOOINE	dan_jedi_temple_ruins_cave	AREA	8	135.95	-66.92	-96.15	0	1	a quenker ravager	23805	city	Jedi Temple Ruins	3	none	0	300	120	6
-1300060	DANTOOINE	dan_jedi_temple_ruins_cave	AREA	8	141.53	-66.77	-125.87	0	1	a quenker ravager	23805	city	Jedi Temple Ruins	3	none	0	300	120	6
-1300061	DANTOOINE	dan_jedi_temple_ruins_cave	QUEST	11	72.59	-45.78	-140.82	93	1	Drakka Judarrl	5935	city	Jedi Temple Ruins	1	none	0	300	120	0
-1300062	DANTOOINE	dan_mining_outpost_cantina	EGG	1	9.28	0.62	1.83	-39	1	a fringer	9710	city	Mining Outpost	1	sitting	0	300	120	0
-1300063	DANTOOINE	dan_mining_outpost_cantina	EGG	1	7.14	0.62	1.70	40	1	a scavenger	9585	city	Mining Outpost	1	sitting	0	300	120	0
-1300064	DANTOOINE	dan_mining_outpost_cantina	QUEST	2	-9.07	0.63	3.40	88	1	Adwan Turoldine (CorSec Pilot Trainer)	33945	city	Mining Outpost	1	none	0	300	120	0
-1300065	DANTOOINE	dan_mining_outpost_cantina	EGG	3	-3.23	0.62	-4.06	-45	1	a miner	16700	city	Mining Outpost	1	sitting	0	300	120	0
-1300066	DANTOOINE	dan_mining_outpost_cantina	EGG	3	-3.05	0.62	-1.91	-134	1	a miner	16700	city	Mining Outpost	1	sitting	0	300	120	0
-1300067	DANTOOINE	dan_mining_outpost_shed2	QUEST	5	5.32	0.13	-3.64	-105	1	Stoos Olko	28980	city	Mining Outpost	1	sitting	0	300	120	0
-1300068	DANTOOINE	dan_world	EGG	0	-589.16	3.00	2497.92	-55	1	an Imperial Colonel	8640	city	Mining Outpost	1	none	0	300	120	0
-1300069	DANTOOINE	dan_world	EGG	0	-642.28	3.00	2448.36	-56	1	a commoner	3185	city	Mining Outpost	1	none	0	300	120	0
-1300070	DANTOOINE	dan_world	EGG	0	-657.45	3.00	2502.54	97	1	a settler	26085	city	Mining Outpost	1	none	0	300	120	0
-1300071	DANTOOINE	dan_world	EGG	0	-647.40	3.00	2467.50	-87	1	a settler	26085	city	Mining Outpost	1	none	0	300	120	0
-1300072	DANTOOINE	dan_world	EGG	0	-647.16	3.00	2441.89	-60	1	a farmer	8520	city	Mining Outpost	1	none	0	300	120	0
-1300073	DANTOOINE	dan_world	EGG	0	-644.88	3.00	2460.71	23	1	a businessman	2255	city	Mining Outpost	1	none	0	300	120	0
-1300074	DANTOOINE	dan_world	PATROL	0	-637.53	3.00	2484.25	0	1	an R5 unit	34015	city	Mining Outpost	1	none	0	300	120	0
-1300075	DANTOOINE	dan_world	EGG	0	-593.76	3.00	2527.33	128	1	a miner	16700	city	Mining Outpost	1	none	0	300	120	0
-1300076	DANTOOINE	dan_world	EGG	0	-680.03	3.00	2471.46	11	1	a miner	16700	city	Mining Outpost	1	none	0	300	120	0
-1300077	DANTOOINE	dan_world	EGG	0	-594.85	3.00	2495.26	68	1	a scavenger	9585	city	Mining Outpost	1	discuss	0	300	120	0
-1300078	DANTOOINE	dan_world	EGG	0	-592.29	3.00	2496.41	-112	1	a scavenger	9585	city	Mining Outpost	1	discuss	0	300	120	0
-1300079	DANTOOINE	dan_world	EGG	0	-622.31	3.00	2451.74	-51	1	a technician	30945	city	Mining Outpost	1	none	0	300	120	0
-1300080	DANTOOINE	dan_world	EGG	0	-636.29	3.00	2507.78	149	1	a traveller	31490	city	Mining Outpost	1	none	0	300	120	0
-1300081	DANTOOINE	dan_world	EGG	0	-628.25	3.00	2531.72	64	1	a miner	16700	city	Mining Outpost	1	tired	0	300	120	0
-1300082	DANTOOINE	dan_world	EGG	0	-627.53	3.00	2534.15	141	1	a miner	16700	city	Mining Outpost	1	tired	0	300	120	0
-1300083	DANTOOINE	dan_world	EGG	0	-625.60	3.00	2481.34	116	1	Fern Yarrow (an Imperial pilot)	34090	city	Mining Outpost	1	none	0	300	120	0
-1300084	DANTOOINE	dan_world	EGG	0	-625.78	3.00	2479.02	26	1	Rane Yarrow (a freelance pilot)	34085	city	Mining Outpost	1	none	0	300	120	0
-1300085	DANTOOINE	dan_world	EGG	0	-623.73	3.00	2482.80	-174	1	Kess Yarrow (a Rebel pilot)	34095	city	Mining Outpost	1	none	0	300	120	0
-1300086	DANTOOINE	dan_world	QUEST	0	-618.69	3.00	2539.31	-45	1	Kelvus Naria	14175	city	Mining Outpost	1	fiddle	0	300	120	0
-1300087	DANTOOINE	dan_world	EGG	0	-574.85	3.00	2499.19	64	1	a settler	26085	city	Mining Outpost	1	none	0	300	120	0
-1300088	DANTOOINE	dan_world	PATROL	0	1631.90	4.00	-6392.56	90	1	a pirate	23445	city	Pirate Outpost	4	none	0	300	120	8
-1300089	DANTOOINE	dan_world	EGG	0	1621.30	4.00	-6379.10	142	1	a pirate	18530	city	Pirate Outpost	1	none	0	300	120	0
-1300090	DANTOOINE	dan_world	EGG	0	1608.00	4.00	-6395.71	91	1	a scoundrel	18790	city	Pirate Outpost	1	none	0	300	120	0
-1300091	DANTOOINE	dan_world	EGG	0	1601.54	4.00	-6419.63	-24	1	a criminal	5180	city	Pirate Outpost	1	none	0	300	120	0
-1300092	DANTOOINE	dan_world	EGG	0	1596.00	4.00	-6394.50	-37	1	a criminal	5180	city	Pirate Outpost	1	none	0	300	120	0
-1300093	DANTOOINE	dan_world	PATROL	0	1591.89	4.00	-6400.29	0	1	an R4 unit	34125	city	Pirate Outpost	1	none	0	300	120	0
-1300094	DANTOOINE	dan_world	EGG	0	1593.61	4.00	-6442.24	-22	1	an agriculturalist	8525	city	Pirate Outpost	1	none	0	300	120	0
-1300095	DANTOOINE	dan_world	EGG	0	1629.16	4.00	-6414.93	-66	1	an assassin	325	city	Pirate Outpost	1	none	0	300	120	0
-1300096	DANTOOINE	dan_world	EGG	0	1559.28	4.00	-6372.92	136	1	a pilot	23430	city	Pirate Outpost	1	none	0	300	120	0
-1300097	DANTOOINE	dan_world	PATROL	0	1588.90	4.00	-6399.20	0	1	an R5 unit	34015	city	Pirate Outpost	1	none	0	300	120	0
-1300098	DANTOOINE	dan_world	EGG	0	1577.99	4.00	-6373.08	170	1	Quich Marae	14015	city	Pirate Outpost	1	none	0	300	120	0
-1300099	DANTOOINE	dan_world	EGG	0	1571.62	4.00	-6418.70	-1	1	Yras Shen-jen (a self-employed pilot)	34100	city	Pirate Outpost	1	none	0	300	120	0
-1300100	DANTOOINE	dan_world	EGG	0	1569.90	4.00	-6404.30	-57	1	a smuggler	26650	city	Pirate Outpost	1	none	0	300	120	0
-1300101	DANTOOINE	dan_world	EGG	0	1567.10	4.00	-6436.61	-33	1	a thief	9590	city	Pirate Outpost	1	none	0	300	120	0
-1300102	DANTOOINE	dan_world	PATROL	0	1563.71	4.00	-6414.03	0	1	a CLL-8 binary load lifter	2705	city	Pirate Outpost	1	none	0	300	120	0
-1300103	DANTOOINE	dan_world	PATROL	0	1553.16	4.00	-6390.29	-90	1	a pirate	23445	city	Pirate Outpost	4	none	0	300	120	8
-1300104	DANTOOINE	dan_world	EGG	0	1549.00	4.00	-6374.00	-163	1	a pirate	18530	city	Pirate Outpost	1	none	0	300	120	0
-1300105	DANTOOINE	dan_world	EGG	0	1542.68	4.00	-6416.95	36	1	a commoner	3185	city	Pirate Outpost	1	none	0	300	120	0
-1300106	DANTOOINE	dan_world	EGG	0	1602.00	4.00	-6434.53	74	1	Daiv Dekven	34230	city	Pirate Outpost	1	none	0	300	120	0
-1300107	DANTOOINE	dan_abandoned_reb_shed	AREA	5	4.60	0.10	-3.80	0	1	a Mokk tribesman	19205	dungeon	Abandoned Rebel Base	1	none	0	300	120	2
-1300108	DANTOOINE	dan_abandoned_reb_shed	AREA	4	3.00	0.10	1.80	0	1	a Mokk tribesman	19205	dungeon	Abandoned Rebel Base	1	none	0	300	120	2
-1300109	DANTOOINE	dan_abandoned_reb_shed	AREA	2	-4.30	0.10	3.80	0	1	a Mokk tribesman	19205	dungeon	Abandoned Rebel Base	1	none	0	300	120	0
-1300110	DANTOOINE	dan_abandoned_reb_shed	AREA	6	-3.30	0.10	-3.80	0	1	a Mokk clan leader	19155	dungeon	Abandoned Rebel Base	1	none	0	300	120	2
-1300111	DANTOOINE	dan_world	AREA	0	4069.95	10.65	-5144.73	0	1	a Mokk hunter	19170	dungeon	Abandoned Rebel Base	1	none	0	300	120	2
-1300112	DANTOOINE	dan_world	AREA	0	4054.05	12.52	-5141.72	0	1	a Mokk hunter	19170	dungeon	Abandoned Rebel Base	1	none	0	300	120	2
-1300113	DANTOOINE	dan_world	AREA	0	4051.79	10.86	-5127.00	0	1	a Mokk hunter	19170	dungeon	Abandoned Rebel Base	1	none	0	300	120	2
-1300114	DANTOOINE	dan_reb_detach_hq	AREA	8	7.30	-13.80	10.20	0	1	a Rebel trooper	13505	dungeon	Rebel Detachment HQ	1	none	0	300	120	0
-1300115	DANTOOINE	dan_reb_detach_hq	AREA	5	6.70	-6.80	-2.70	0	1	a Rebel trooper	13505	dungeon	Rebel Detachment HQ	1	none	0	300	120	0
-1300116	DANTOOINE	dan_reb_detach_hq	AREA	5	2.70	-6.80	-6.20	0	1	a Rebel trooper	13505	dungeon	Rebel Detachment HQ	1	none	0	300	120	0
-1300117	DANTOOINE	dan_reb_detach_hq	AREA	9	16.30	-13.80	5.90	0	1	a Rebel trooper	13505	dungeon	Rebel Detachment HQ	1	none	0	300	120	0
-1300118	DANTOOINE	dan_reb_detach_hq	AREA	9	15.30	-13.80	14.90	0	1	a Rebel trooper	13505	dungeon	Rebel Detachment HQ	1	none	0	300	120	0
-1300119	DANTOOINE	dan_reb_detach_hq	AREA	10	14.90	-13.80	-16.20	0	1	a Rebel trooper	13505	dungeon	Rebel Detachment HQ	1	none	0	300	120	0
-1300120	DANTOOINE	dan_reb_detach_hq	AREA	9	13.30	-13.80	3.70	0	1	a Rebel trooper	13505	dungeon	Rebel Detachment HQ	1	none	0	300	120	0
-1300121	DANTOOINE	dan_reb_detach_hq	AREA	8	1.60	-13.80	10.90	0	1	a Rebel trooper	13505	dungeon	Rebel Detachment HQ	1	none	0	300	120	0
-1300122	DANTOOINE	dan_reb_detach_hq	AREA	8	-4.40	-13.80	13.30	0	1	a Rebel trooper	13505	dungeon	Rebel Detachment HQ	1	none	0	300	120	0
-1300123	DANTOOINE	dan_reb_detach_hq	AREA	7	-3.10	-13.80	1.50	0	1	a Rebel trooper	13505	dungeon	Rebel Detachment HQ	1	none	0	300	120	0
-1300124	DANTOOINE	dan_reb_detach_hq	AREA	7	-2.70	-13.80	-3.40	0	1	a Rebel trooper	13505	dungeon	Rebel Detachment HQ	1	none	0	300	120	0
-1300125	DANTOOINE	dan_reb_detach_hq	AREA	2	-0.20	0.30	2.70	0	1	a Rebel trooper	13505	dungeon	Rebel Detachment HQ	1	none	0	300	120	0
-1300126	DANTOOINE	dan_reb_detach_hq_shed	AREA	4	3.00	0.10	1.70	0	1	a Rebel trooper	13475	dungeon	Rebel Detachment HQ	1	none	0	300	120	0
-1300127	DANTOOINE	dan_reb_detach_hq_shed	AREA	3	0.20	0.10	-5.10	0	1	a Rebel trooper	13475	dungeon	Rebel Detachment HQ	1	none	0	300	120	0
-1300128	DANTOOINE	dan_world	AREA	0	4057.65	2.03	5410.56	0	1	a Rebel trooper	13505	dungeon	Rebel Detachment HQ	1	none	0	300	120	0
-1300129	DANTOOINE	dan_world	AREA	0	4042.77	1.96	5426.95	0	1	a Rebel trooper	13475	dungeon	Rebel Detachment HQ	1	none	0	300	120	0
-1300130	DANTOOINE	dan_world	AREA	0	4041.85	2.00	5411.06	0	1	a Rebel trooper	13505	dungeon	Rebel Detachment HQ	1	none	0	300	120	0
-1300131	DANTOOINE	dan_rtp_generals_bunker	AREA	24	99.90	-20.00	152.00	0	1	a Stormtrooper	25565	dungeon	RTP - Dantooine Generals Bunker	1	none	0	300	120	2
-1300132	DANTOOINE	dan_rtp_generals_bunker	AREA	26	99.90	-20.00	113.50	0	1	an Imperial master sergeant	25435	dungeon	RTP - Dantooine Generals Bunker	1	none	0	300	120	0
-1300133	DANTOOINE	dan_rtp_generals_bunker	AREA	25	98.40	-20.00	131.20	0	1	a Stormtrooper	25565	dungeon	RTP - Dantooine Generals Bunker	1	none	0	300	120	0
-1300134	DANTOOINE	dan_rtp_generals_bunker	AREA	23	83.60	-20.00	109.70	0	1	a Stormtrooper	25565	dungeon	RTP - Dantooine Generals Bunker	1	none	0	300	120	0
-1300135	DANTOOINE	dan_rtp_generals_bunker	AREA	27	67.60	-20.00	111.50	0	1	a Stormtrooper	25500	dungeon	RTP - Dantooine Generals Bunker	1	none	0	300	120	0
-1300136	DANTOOINE	dan_rtp_generals_bunker	AREA	34	65.20	-20.00	16.00	0	1	a Stormtrooper	25565	dungeon	RTP - Dantooine Generals Bunker	1	none	0	300	120	0
-1300137	DANTOOINE	dan_rtp_generals_bunker	AREA	35	64.90	-20.00	59.30	0	1	an Imperial first lieutenant	25425	dungeon	RTP - Dantooine Generals Bunker	1	none	0	300	120	2
-1300138	DANTOOINE	dan_rtp_generals_bunker	AREA	31	6.70	-20.00	120.90	0	1	Barthis Belangus	25495	dungeon	RTP - Dantooine Generals Bunker	1	none	0	300	120	0
-1300139	DANTOOINE	dan_rtp_generals_bunker	AREA	34	57.20	-20.00	13.70	0	1	General Stromgald Rholar	25505	dungeon	RTP - Dantooine Generals Bunker	1	none	0	300	120	0
-1300140	DANTOOINE	dan_rtp_generals_bunker	AREA	34	48.90	-20.00	14.10	0	1	a Stormtrooper	25565	dungeon	RTP - Dantooine Generals Bunker	1	none	0	300	120	0
-1300141	DANTOOINE	dan_rtp_generals_bunker	AREA	34	44.10	-20.00	35.90	0	1	an Imperial master sergeant	25435	dungeon	RTP - Dantooine Generals Bunker	1	none	0	300	120	0
-1300142	DANTOOINE	dan_rtp_generals_bunker	AREA	29	34.90	-20.00	59.20	0	1	a Stormtrooper	25565	dungeon	RTP - Dantooine Generals Bunker	1	none	0	300	120	2
-1300143	DANTOOINE	dan_rtp_generals_bunker	AREA	29	19.80	-20.00	44.40	0	1	a Stormtrooper	25565	dungeon	RTP - Dantooine Generals Bunker	1	none	0	300	120	2
-1300144	DANTOOINE	dan_rtp_generals_bunker	AREA	29	19.60	-20.00	74.40	0	1	a Stormtrooper	25565	dungeon	RTP - Dantooine Generals Bunker	1	none	0	300	120	2
-1300145	DANTOOINE	dan_rtp_generals_bunker	AREA	9	-5677.30	-12.00	60.40	0	1	an Imperial first lieutenant	25425	dungeon	RTP - Dantooine Generals Bunker	1	none	0	300	120	0
-1300146	DANTOOINE	dan_rtp_generals_bunker	AREA	10	-5652.40	-12.00	57.90	0	1	a Stormtrooper	25560	dungeon	RTP - Dantooine Generals Bunker	1	none	0	300	120	2
-1300147	DANTOOINE	dan_rtp_generals_bunker	AREA	6	-5650.70	-12.00	29.10	0	1	a Stormtrooper	25560	dungeon	RTP - Dantooine Generals Bunker	1	none	0	300	120	2
-1300148	DANTOOINE	dan_rtp_generals_bunker	AREA	9	-5650.70	-12.00	59.20	0	1	a Stormtrooper	25560	dungeon	RTP - Dantooine Generals Bunker	1	none	0	300	120	2
-1300149	DANTOOINE	dan_rtp_generals_bunker	AREA	14	-5634.40	-12.00	99.10	0	1	a Stormtrooper	25565	dungeon	RTP - Dantooine Generals Bunker	1	none	0	300	120	2
-1300150	DANTOOINE	dan_rtp_generals_bunker	AREA	10	-5619.00	-12.00	74.90	0	1	an Imperial first lieutenant	25425	dungeon	RTP - Dantooine Generals Bunker	1	none	0	300	120	0
-1300151	DANTOOINE	dan_rtp_generals_bunker	AREA	21	-3879.90	-20.00	139.00	0	1	a Stormtrooper	25565	dungeon	RTP - Dantooine Generals Bunker	1	none	0	300	120	0
-1300152	DANTOOINE	dan_rtp_generals_bunker	AREA	15	-3865.20	-12.00	113.30	0	1	a Stormtrooper	25565	dungeon	RTP - Dantooine Generals Bunker	1	none	0	300	120	2
-1300153	DANTOOINE	dan_rtp_generals_bunker	AREA	21	-3863.00	-20.00	155.10	0	1	a Stormtrooper	25565	dungeon	RTP - Dantooine Generals Bunker	1	none	0	300	120	0
-1300154	DANTOOINE	dan_rtp_generals_bunker	AREA	21	-3846.50	-20.00	133.60	0	1	a Stormtrooper	25565	dungeon	RTP - Dantooine Generals Bunker	1	none	0	300	120	0
-1300155	DANTOOINE	dan_rtp_generals_bunker	AREA	16	-3824.40	-12.00	99.10	0	1	an Imperial master sergeant	25435	dungeon	RTP - Dantooine Generals Bunker	1	none	0	300	120	2
-1300156	DANTOOINE	dan_world	AREA	0	-5677.28	15.44	1950.34	0	1	a Stormtrooper	25560	dungeon	RTP - Dantooine Generals Bunker	1	none	0	300	120	2
-1300157	DANTOOINE	dan_world	AREA	0	-5652.44	8.40	1922.08	0	1	a Stormtrooper	25560	dungeon	RTP - Dantooine Generals Bunker	1	none	0	300	120	2
-1300158	DANTOOINE	dan_world	AREA	0	-5650.71	15.52	1948.79	0	1	a Stormtrooper	25560	dungeon	RTP - Dantooine Generals Bunker	1	none	0	300	120	0
-1300159	DANTOOINE	dan_world	AREA	0	-5650.71	15.23	1956.05	0	1	a Stormtrooper	25560	dungeon	RTP - Dantooine Generals Bunker	1	none	0	300	120	0
-1300160	DANTOOINE	dan_world	AREA	0	-5634.40	28.22	1981.98	0	1	a Stormtrooper	25560	dungeon	RTP - Dantooine Generals Bunker	1	none	0	300	120	2
-1300161	DANTOOINE	dan_world	AREA	0	-5618.96	15.10	1950.99	0	1	a Stormtrooper	25560	dungeon	RTP - Dantooine Generals Bunker	1	none	0	300	120	2
-1300162	DANTOOINE	dan_underground_bunker	AREA	10	3.80	-16.00	140.70	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	1	none	0	300	120	0
-1300163	DANTOOINE	dan_underground_bunker	AREA	5	3.20	-12.00	35.50	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	1	none	0	300	120	0
-1300164	DANTOOINE	dan_underground_bunker	AREA	7	21.00	-16.00	76.60	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	1	none	0	300	120	0
-1300165	DANTOOINE	dan_underground_bunker	AREA	5	2.20	-12.00	47.40	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	1	none	0	300	120	0
-1300166	DANTOOINE	dan_underground_bunker	AREA	7	17.40	-16.00	79.80	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	1	none	0	300	120	0
-1300167	DANTOOINE	dan_underground_bunker	AREA	10	16.60	-16.00	123.20	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	1	none	0	300	120	0
-1300168	DANTOOINE	dan_underground_bunker	AREA	10	1.50	-16.00	105.90	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	1	none	0	300	120	0
-1300169	DANTOOINE	dan_underground_bunker	AREA	17	-93.10	-28.00	105.20	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	1	none	0	300	120	0
-1300170	DANTOOINE	dan_underground_bunker	AREA	32	-90.50	-44.00	-9.50	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	1	none	0	300	120	0
-1300171	DANTOOINE	dan_underground_bunker	AREA	17	-85.60	-28.00	118.30	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	1	none	0	300	120	0
-1300172	DANTOOINE	dan_underground_bunker	AREA	26	-81.00	-28.00	60.90	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	1	none	0	300	120	0
-1300173	DANTOOINE	dan_underground_bunker	AREA	24	-65.00	-28.00	62.80	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	1	none	0	300	120	0
-1300174	DANTOOINE	dan_underground_bunker	AREA	25	-64.70	-28.00	72.90	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	1	none	0	300	120	0
-1300175	DANTOOINE	dan_underground_bunker	AREA	32	-57.80	-44.00	-9.00	0	1	a Rebel trooper	13605	dungeon	Ryll Smuggler Bunker	1	none	0	300	120	0
-1300176	DANTOOINE	dan_underground_bunker	AREA	23	-53.60	-27.90	62.80	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	1	none	0	300	120	0
-1300177	DANTOOINE	dan_underground_bunker	AREA	23	-45.10	-24.00	62.90	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	1	none	0	300	120	0
-1300178	DANTOOINE	dan_underground_bunker	AREA	20	-38.10	-12.00	96.30	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	1	none	0	300	120	0
-1300179	DANTOOINE	dan_underground_bunker	AREA	20	-37.90	-12.00	108.90	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	1	none	0	300	120	0
-1300180	DANTOOINE	dan_underground_bunker	AREA	21	-37.00	-12.00	132.20	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	1	none	0	300	120	0
-1300181	DANTOOINE	dan_underground_bunker	AREA	21	-35.20	-12.00	131.30	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	1	none	0	300	120	0
-1300182	DANTOOINE	dan_underground_bunker	AREA	12	-28.10	-12.00	151.00	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	1	none	0	300	120	0
-1300183	DANTOOINE	dan_underground_bunker	AREA	12	-27.30	-12.00	164.10	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	1	none	0	300	120	0
-1300184	DANTOOINE	dan_underground_bunker	AREA	23	-21.40	-16.00	62.90	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	1	none	0	300	120	0
-1300185	DANTOOINE	dan_underground_bunker	AREA	29	-163.20	-44.00	79.00	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	1	none	0	300	120	0
-1300186	DANTOOINE	dan_underground_bunker	AREA	29	-153.00	-44.00	93.10	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	1	none	0	300	120	0
-1300187	DANTOOINE	dan_underground_bunker	AREA	29	-144.80	-44.00	76.70	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	1	none	0	300	120	0
-1300188	DANTOOINE	dan_underground_bunker	AREA	18	-14.00	-12.00	95.20	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	1	none	0	300	120	0
-1300189	DANTOOINE	dan_underground_bunker	AREA	18	-12.90	-12.00	90.30	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	1	none	0	300	120	0
-1300190	DANTOOINE	dan_underground_bunker	AREA	22	-12.20	-16.00	70.10	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	1	none	0	300	120	0
-1300191	DANTOOINE	dan_underground_bunker	AREA	10	-11.60	-16.00	121.30	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	1	none	0	300	120	0
-1300192	DANTOOINE	dan_abandoned_reb_base_main	QUEST	2	-2.52	1.01	0.99	159	1	Brother Vrovel (Rebel Pilot Trainer)	33995	poi	Abandoned Rebel Base	1	none	0	300	120	0
-1300193	DANTOOINE	dan_abandoned_reb_base_main	QUEST	2	-2.83	1.01	-8.30	-20	1	Brother Ezkiel (Vortex Pilot Trainer)	34000	poi	Abandoned Rebel Base	1	none	0	300	120	0
-1300194	DANTOOINE	dan_abandoned_reb_base_main	EGG	5	16.31	1.01	-1.71	-78	1	a Rebel First Lieutenant	24570	poi	Abandoned Rebel Base	1	none	0	300	120	0
-1300195	DANTOOINE	dan_abandoned_reb_base_main	QUEST	8	-14.51	1.01	-22.09	29	1	Captain Ackbar	36	poi	Abandoned Rebel Base	1	none	0	300	120	0
-1300196	DANTOOINE	dan_abandoned_reb_base_main	EGG	8	-12.42	1.01	-19.44	-150	1	Leia Organa	2815	poi	Abandoned Rebel Base	1	none	0	300	120	0
-1300197	DANTOOINE	dan_abandoned_reb_base_main	QUEST	10	-2.28	7.01	-11.97	-36	1	Mon Mothma	19215	poi	Abandoned Rebel Base	1	none	0	300	120	0
-1300198	DANTOOINE	dan_abandoned_reb_base_main	EGG	10	-4.72	7.01	-10.22	124	1	a Rebel General	24575	poi	Abandoned Rebel Base	1	none	0	300	120	0
-1300199	DANTOOINE	dan_abandoned_reb_base_main	EGG	10	-2.24	7.01	-8.91	178	1	a Rebel Army Captain	24335	poi	Abandoned Rebel Base	1	none	0	300	120	0
-1300200	DANTOOINE	dan_world	AREA	0	-6954.54	25.00	5421.27	0	1	a Rebel commando	24375	poi	Abandoned Rebel Base	3	none	0	300	120	6
-1300201	DANTOOINE	dan_world	AREA	0	-6817.92	46.00	5511.86	179	1	a Rebel recruiter	24640	poi	Abandoned Rebel Base	1	none	0	300	120	0
-1300202	DANTOOINE	dan_world	AREA	0	-6657.43	30.00	5560.84	0	1	a Rebel commando	24375	poi	Abandoned Rebel Base	4	none	0	300	120	8
-1300203	DANTOOINE	dan_world	AREA	0	-3917.98	2.70	-5697.53	0	1	a Janta scout	13765	poi	Dantari Village (1)	1	none	0	300	120	2
-1300204	DANTOOINE	dan_world	AREA	0	-3871.68	2.50	-5705.37	149	1	a Janta warrior	13785	poi	Dantari Village (1)	1	none	0	300	120	0
-1300205	DANTOOINE	dan_world	AREA	0	-3870.56	2.50	-5690.56	149	1	a Janta clan leader	13730	poi	Dantari Village (1)	1	none	0	300	120	0
-1300206	DANTOOINE	dan_world	AREA	0	-3865.15	2.50	-5704.09	159	1	a Janta warrior	13785	poi	Dantari Village (1)	1	none	0	300	120	0
-1300207	DANTOOINE	dan_world	AREA	0	-3825.14	2.43	-5788.01	0	1	a Janta scout	13765	poi	Dantari Village (1)	1	none	0	300	120	2
-1300208	DANTOOINE	dan_world	AREA	0	-3878.78	2.50	-5708.15	0	1	a Janta tribesman	13780	poi	Dantari Village (1)	1	none	0	300	120	2
-1300209	DANTOOINE	dan_world	AREA	0	-3895.07	2.47	-5706.52	0	1	a Janta rockshaper	13760	poi	Dantari Village (1)	1	none	0	300	120	2
-1300210	DANTOOINE	dan_world	AREA	0	-3886.21	2.50	-5724.82	0	1	a Janta tribesman	13780	poi	Dantari Village (1)	1	none	0	300	120	2
-1300211	DANTOOINE	dan_world	AREA	0	-3869.26	2.46	-5725.01	0	1	a Janta primalist	13755	poi	Dantari Village (1)	1	none	0	300	120	2
-1300212	DANTOOINE	dan_world	AREA	0	-3866.23	2.35	-5728.56	0	1	a Janta herbalist	13740	poi	Dantari Village (1)	1	none	0	300	120	2
-1300213	DANTOOINE	dan_world	AREA	0	-3850.24	1.92	-5715.29	0	1	a Janta tribesman	13780	poi	Dantari Village (1)	1	none	0	300	120	2
-1300214	DANTOOINE	dan_world	AREA	0	-3851.84	2.66	-5707.07	0	1	a Janta loreweaver	13750	poi	Dantari Village (1)	1	none	0	300	120	2
-1300215	DANTOOINE	dan_world	AREA	0	-3817.92	3.46	-5725.23	0	1	a Janta hunter	13745	poi	Dantari Village (1)	1	none	0	300	120	2
-1300216	DANTOOINE	dan_world	AREA	0	-3834.87	6.17	-5697.60	0	1	a Janta hunter	13745	poi	Dantari Village (1)	1	none	0	300	120	2
-1300217	DANTOOINE	dan_world	AREA	0	-3808.17	3.50	-5724.13	0	1	a Janta loreweaver	13750	poi	Dantari Village (1)	1	none	0	300	120	2
-1300218	DANTOOINE	dan_world	AREA	0	-3792.34	6.23	-5720.93	0	1	a Janta harvester	13735	poi	Dantari Village (1)	1	none	0	300	120	2
-1300219	DANTOOINE	dan_world	AREA	0	-3837.63	8.00	-5756.95	0	1	a Janta hunter	13745	poi	Dantari Village (1)	1	none	0	300	120	2
-1300220	DANTOOINE	dan_world	AREA	0	-3844.48	7.98	-5751.61	0	1	a Janta herbalist	13740	poi	Dantari Village (1)	1	none	0	300	120	2
-1300221	DANTOOINE	dan_world	AREA	0	-3851.93	2.00	-5727.09	0	1	a Janta primalist	13755	poi	Dantari Village (1)	1	none	0	300	120	2
-1300222	DANTOOINE	dan_world	AREA	0	-3824.38	1.16	-5659.03	0	1	a Janta scout	13765	poi	Dantari Village (1)	1	none	0	300	120	2
-1300223	DANTOOINE	dan_world	AREA	0	-3756.43	3.41	-5717.92	0	1	a Janta scout	13765	poi	Dantari Village (1)	1	none	0	300	120	2
-1300224	DANTOOINE	dan_world	AREA	0	-3897.20	14.20	-5771.20	0	1	a Janta scout	13765	poi	Dantari Village (1)	1	none	0	300	120	2
-1300225	DANTOOINE	dan_world	AREA	0	-7218.38	7.00	-787.30	-43	1	a Kunga tribe member	14555	poi	Dantari Village (2)	1	none	0	300	120	0
-1300226	DANTOOINE	dan_world	AREA	0	-7169.36	3.00	-927.30	0	1	a Kunga hunter	14570	poi	Dantari Village (2)	1	none	0	300	120	2
-1300227	DANTOOINE	dan_world	AREA	0	-7188.91	3.00	-931.45	0	1	a Kunga herbalist	14520	poi	Dantari Village (2)	1	none	0	300	120	2
-1300228	DANTOOINE	dan_world	AREA	0	-7153.89	3.00	-907.88	0	1	a Kunga shaman	14545	poi	Dantari Village (2)	1	none	0	300	120	2
-1300229	DANTOOINE	dan_world	AREA	0	-7134.39	3.00	-886.98	-113	1	a Kunga tribe member	14555	poi	Dantari Village (2)	1	none	0	300	120	0
-1300230	DANTOOINE	dan_world	AREA	0	-7132.86	3.00	-892.83	-102	1	a Kunga rockshaper	14535	poi	Dantari Village (2)	1	none	0	300	120	0
-1300231	DANTOOINE	dan_world	AREA	0	-7129.00	3.00	-887.32	-111	1	a Kunga loreweaver	14530	poi	Dantari Village (2)	1	none	0	300	120	0
-1300232	DANTOOINE	dan_world	AREA	0	-7154.71	3.00	-864.32	0	1	a Kunga hunter	14570	poi	Dantari Village (2)	1	none	0	300	120	2
-1300233	DANTOOINE	dan_world	AREA	0	-7161.53	3.00	-844.89	0	1	a Kunga tribe member	14555	poi	Dantari Village (2)	1	none	0	300	120	2
-1300234	DANTOOINE	dan_world	AREA	0	-7179.87	3.00	-849.32	0	1	a Kunga loreweaver	14530	poi	Dantari Village (2)	1	none	0	300	120	2
-1300235	DANTOOINE	dan_world	AREA	0	-7231.23	3.00	-868.31	0	1	a Kunga primalist	14510	poi	Dantari Village (2)	1	none	0	300	120	2
-1300236	DANTOOINE	dan_world	AREA	0	-7228.12	3.00	-882.03	0	1	a Kunga primalist	14510	poi	Dantari Village (2)	1	none	0	300	120	2
-1300237	DANTOOINE	dan_world	AREA	0	-7215.39	3.00	-872.50	0	1	a Kunga primalist	14510	poi	Dantari Village (2)	1	none	0	300	120	2
-1300238	DANTOOINE	dan_world	AREA	0	-7219.75	3.00	-891.74	0	1	a Kunga soothsayer	14550	poi	Dantari Village (2)	1	none	0	300	120	2
-1300239	DANTOOINE	dan_world	AREA	0	-7245.53	2.31	-823.40	0	1	a Kunga scout	14540	poi	Dantari Village (2)	1	none	0	300	120	2
-1300240	DANTOOINE	dan_world	AREA	0	-7209.88	3.00	-923.01	41	1	a Kunga clan leader	14505	poi	Dantari Village (2)	1	none	0	300	120	0
-1300241	DANTOOINE	dan_world	AREA	0	-7199.33	3.00	-908.15	40	1	a Kunga warrior	14560	poi	Dantari Village (2)	1	none	0	300	120	0
-1300242	DANTOOINE	dan_world	AREA	0	-7195.49	3.00	-913.13	40	1	a Kunga warrior	14560	poi	Dantari Village (2)	1	none	0	300	120	0
-1300243	DANTOOINE	dan_world	AREA	0	-7124.68	3.00	-941.23	0	1	a Kunga scout	14540	poi	Dantari Village (2)	1	none	0	300	120	2
-1300244	DANTOOINE	dan_world	AREA	0	5574.36	0.32	-634.73	31	1	a Mokk clan leader	19155	poi	Dantari Village (3)	1	none	0	300	120	0
-1300245	DANTOOINE	dan_world	AREA	0	5573.73	0.24	-646.79	179	1	a Mokk warrior	19210	poi	Dantari Village (3)	1	none	0	300	120	0
-1300246	DANTOOINE	dan_world	AREA	0	5566.81	0.16	-644.43	179	1	a Mokk warrior	19210	poi	Dantari Village (3)	1	none	0	300	120	0
-1300247	DANTOOINE	dan_world	AREA	0	5479.57	12.23	-675.30	0	1	a Mokk scout	19190	poi	Dantari Village (3)	1	none	0	300	120	2
-1300248	DANTOOINE	dan_world	AREA	0	5592.64	1.27	-651.40	0	1	a Mokk tribesman	19205	poi	Dantari Village (3)	1	none	0	300	120	2
-1300249	DANTOOINE	dan_world	AREA	0	5590.11	1.53	-616.59	0	1	a Mokk shaman	19195	poi	Dantari Village (3)	1	none	0	300	120	2
-1300250	DANTOOINE	dan_world	AREA	0	5594.57	1.12	-628.27	0	1	a Mokk shaman	19195	poi	Dantari Village (3)	1	none	0	300	120	2
-1300251	DANTOOINE	dan_world	AREA	0	5559.45	0.22	-617.24	0	1	a Mokk tribesman	19205	poi	Dantari Village (3)	1	none	0	300	120	2
-1300252	DANTOOINE	dan_world	AREA	0	5562.82	0.14	-653.98	0	1	a Mokk loreweaver	19175	poi	Dantari Village (3)	1	none	0	300	120	2
-1300253	DANTOOINE	dan_world	AREA	0	5548.80	0.14	-653.40	0	1	a Mokk harvester	19160	poi	Dantari Village (3)	1	none	0	300	120	2
-1300254	DANTOOINE	dan_world	AREA	0	5541.53	0.15	-688.85	0	1	a Mokk rockshaper	19185	poi	Dantari Village (3)	1	none	0	300	120	2
-1300255	DANTOOINE	dan_world	AREA	0	5538.97	0.17	-683.14	0	1	a Mokk clan primalist	19180	poi	Dantari Village (3)	1	none	0	300	120	2
-1300256	DANTOOINE	dan_world	AREA	0	5524.60	0.28	-695.56	0	1	a Mokk clan primalist	19180	poi	Dantari Village (3)	1	none	0	300	120	2
-1300257	DANTOOINE	dan_world	AREA	0	5521.26	0.21	-713.74	0	1	a Mokk loreweaver	19175	poi	Dantari Village (3)	1	none	0	300	120	2
-1300258	DANTOOINE	dan_world	AREA	0	5520.07	9.52	-665.32	0	1	a Mokk clan primalist	19180	poi	Dantari Village (3)	1	none	0	300	120	2
-1300259	DANTOOINE	dan_world	AREA	0	5487.60	11.80	-674.00	0	1	a Mokk scout	19190	poi	Dantari Village (3)	1	none	0	300	120	2
-1300260	DANTOOINE	dan_force_crystal_hunter_cave	AREA	1	24.73	-28.68	-11.69	-118	1	an untrained wielder of the Dark Side	32035	poi	Force Crystal Hunters Cave	1	none	0	300	120	0
-1300261	DANTOOINE	dan_force_crystal_hunter_cave	AREA	1	23.08	-29.53	-14.12	11	1	an untrained wielder of the Dark Side	32035	poi	Force Crystal Hunters Cave	1	none	0	300	120	0
-1300262	DANTOOINE	dan_force_crystal_hunter_cave	AREA	1	22.78	-28.58	-11.72	106	1	an untrained wielder of the Dark Side	32035	poi	Force Crystal Hunters Cave	1	none	0	300	120	0
-1300263	DANTOOINE	dan_force_crystal_hunter_cave	AREA	2	25.70	-41.06	-52.56	-86	1	an untrained wielder of the Dark Side	32035	poi	Force Crystal Hunters Cave	1	none	0	300	120	0
-1300264	DANTOOINE	dan_force_crystal_hunter_cave	AREA	2	23.63	-40.97	-52.20	99	1	an untrained wielder of the Dark Side	32035	poi	Force Crystal Hunters Cave	1	none	0	300	120	0
-1300265	DANTOOINE	dan_force_crystal_hunter_cave	AREA	2	24.75	-41.16	-54.58	-1	1	an untrained wielder of the Dark Side	32035	poi	Force Crystal Hunters Cave	1	none	0	300	120	0
-1300266	DANTOOINE	dan_force_crystal_hunter_cave	AREA	2	51.94	-48.60	-64.72	-6	1	a force crystal hunter	5315	poi	Force Crystal Hunters Cave	1	none	0	300	120	0
-1300267	DANTOOINE	dan_force_crystal_hunter_cave	AREA	2	39.10	-45.80	-61.08	92	1	an untrained wielder of the Dark Side	32035	poi	Force Crystal Hunters Cave	1	none	0	300	120	0
-1300268	DANTOOINE	dan_force_crystal_hunter_cave	AREA	2	41.84	-46.52	-60.94	-81	1	an untrained wielder of the Dark Side	32035	poi	Force Crystal Hunters Cave	1	none	0	300	120	0
-1300269	DANTOOINE	dan_force_crystal_hunter_cave	AREA	2	48.88	-47.17	-8.27	-86	1	an untrained wielder of the Dark Side	32035	poi	Force Crystal Hunters Cave	1	none	0	300	120	0
-1300270	DANTOOINE	dan_force_crystal_hunter_cave	AREA	2	48.10	-47.00	-6.96	-136	1	an untrained wielder of the Dark Side	32035	poi	Force Crystal Hunters Cave	1	none	0	300	120	0
-1300271	DANTOOINE	dan_force_crystal_hunter_cave	AREA	2	52.48	-48.54	-18.17	-134	1	a force crystal hunter	5315	poi	Force Crystal Hunters Cave	1	none	0	300	120	0
-1300272	DANTOOINE	dan_force_crystal_hunter_cave	AREA	2	50.26	-48.28	-20.34	46	1	a force crystal hunter	5315	poi	Force Crystal Hunters Cave	1	none	0	300	120	0
-1300273	DANTOOINE	dan_force_crystal_hunter_cave	AREA	3	90.92	-63.49	-24.81	0	1	an untrained wielder of the Dark Side	32035	poi	Force Crystal Hunters Cave	4	none	0	300	120	0
-1300274	DANTOOINE	dan_force_crystal_hunter_cave	AREA	4	67.76	-75.42	-55.26	167	1	a force crystal hunter	5315	poi	Force Crystal Hunters Cave	1	none	0	300	120	0
-1300275	DANTOOINE	dan_force_crystal_hunter_cave	AREA	4	68.41	-75.61	-57.75	-16	1	a force crystal hunter	5315	poi	Force Crystal Hunters Cave	1	none	0	300	120	0
-1300276	DANTOOINE	dan_force_crystal_hunter_cave	AREA	4	63.65	-75.48	-64.44	74	1	a force crystal hunter	5315	poi	Force Crystal Hunters Cave	1	none	0	300	120	0
-1300277	DANTOOINE	dan_force_crystal_hunter_cave	AREA	4	65.69	-75.37	-63.86	-112	1	a force crystal hunter	5315	poi	Force Crystal Hunters Cave	1	none	0	300	120	0
-1300278	DANTOOINE	dan_force_crystal_hunter_cave	AREA	4	89.69	-76.89	-62.32	-78	1	a force crystal hunter	5315	poi	Force Crystal Hunters Cave	1	none	0	300	120	0
-1300279	DANTOOINE	dan_force_crystal_hunter_cave	AREA	4	87.41	-76.53	-65.64	-59	1	a force crystal hunter	5315	poi	Force Crystal Hunters Cave	1	none	0	300	120	0
-1300280	DANTOOINE	dan_force_crystal_hunter_cave	AREA	4	94.38	-76.05	-83.56	-27	1	a force crystal hunter	5315	poi	Force Crystal Hunters Cave	1	none	0	300	120	0
-1300281	DANTOOINE	dan_force_crystal_hunter_cave	AREA	4	90.38	-76.41	-86.09	-76	1	a force crystal hunter	5315	poi	Force Crystal Hunters Cave	1	none	0	300	120	0
-1300282	DANTOOINE	dan_force_crystal_hunter_cave	AREA	2	54.73	-68.11	-36.51	96	1	a force crystal hunter	5315	poi	Force Crystal Hunters Cave	1	none	0	300	120	0
-1300283	DANTOOINE	dan_force_crystal_hunter_cave	AREA	2	53.10	-68.14	-39.89	163	1	a force crystal hunter	5315	poi	Force Crystal Hunters Cave	1	none	0	300	120	0
-1300284	DANTOOINE	dan_force_crystal_hunter_cave	AREA	4	64.64	-76.70	-87.42	-98	1	a force crystal hunter	5315	poi	Force Crystal Hunters Cave	1	none	0	300	120	0
-1300285	DANTOOINE	dan_force_crystal_hunter_cave	AREA	4	64.14	-76.50	-85.19	-101	1	a force crystal hunter	5315	poi	Force Crystal Hunters Cave	1	none	0	300	120	0
-1300286	DANTOOINE	dan_world	QUEST	0	4277.98	8.43	5350.80	7	1	Luthik Uwyr	15565	poi	Jedi Temple Ruins	1	none	0	300	120	0
-1300287	DANTOOINE	dan_world	AREA	0	-7074.98	1.99	-3332.33	30	1	a Mokk warrior	19210	poi	Mokk Stronghold	1	none	0	300	120	0
-1300288	DANTOOINE	dan_world	AREA	0	-7074.32	2.02	-3330.55	-162	1	a Mokk warrior	19210	poi	Mokk Stronghold	1	none	0	300	120	0
-1300289	DANTOOINE	dan_world	AREA	0	-7072.65	2.24	-3340.59	-127	1	a Mokk loreweaver	19175	poi	Mokk Stronghold	1	none	0	300	120	0
-1300290	DANTOOINE	dan_world	AREA	0	-7072.50	2.01	-3320.72	-97	1	a Mokk warrior	19210	poi	Mokk Stronghold	1	none	0	300	120	0
-1300291	DANTOOINE	dan_world	AREA	0	-7067.09	1.94	-3337.00	119	1	a Mokk rockshaper	19185	poi	Mokk Stronghold	1	none	0	300	120	0
-1300292	DANTOOINE	dan_world	AREA	0	-7065.56	1.95	-3340.06	-35	1	a Mokk hunter	19170	poi	Mokk Stronghold	1	none	0	300	120	0
-1300293	DANTOOINE	dan_world	AREA	0	-7064.73	1.97	-3337.16	-149	1	a Mokk rockshaper	19185	poi	Mokk Stronghold	1	none	0	300	120	0
-1300294	DANTOOINE	dan_world	AREA	0	-7060.94	2.48	-3356.68	135	1	a Mokk warrior	19210	poi	Mokk Stronghold	1	none	0	300	120	0
-1300295	DANTOOINE	dan_world	AREA	0	-7061.70	2.41	-3359.82	-27	1	a Mokk hunter	19170	poi	Mokk Stronghold	1	none	0	300	120	0
-1300296	DANTOOINE	dan_world	AREA	0	-7060.48	2.49	-3358.11	-89	1	a Mokk scout	19190	poi	Mokk Stronghold	1	none	0	300	120	0
-1300297	DANTOOINE	dan_world	AREA	0	-7059.34	2.24	-3346.09	129	1	a Mokk warrior	19210	poi	Mokk Stronghold	1	none	0	300	120	0
-1300298	DANTOOINE	dan_world	AREA	0	-7057.09	2.03	-3307.64	55	1	a Mokk hunter	19170	poi	Mokk Stronghold	1	none	0	300	120	0
-1300299	DANTOOINE	dan_world	AREA	0	-7055.66	2.01	-3306.58	-130	1	a Mokk scout	19190	poi	Mokk Stronghold	1	none	0	300	120	0
-1300300	DANTOOINE	dan_world	AREA	0	-7055.25	2.46	-3346.07	179	1	a Mokk warrior	19210	poi	Mokk Stronghold	1	none	0	300	120	0
-1300301	DANTOOINE	dan_world	AREA	0	-7051.84	2.30	-3334.73	71	1	a Mokk soothsayer	19200	poi	Mokk Stronghold	1	none	0	300	120	0
-1300302	DANTOOINE	dan_world	AREA	0	-7051.94	2.19	-3332.08	114	1	a Mokk loreweaver	19175	poi	Mokk Stronghold	1	none	0	300	120	0
-1300303	DANTOOINE	dan_world	AREA	0	-7050.55	2.11	-3330.06	147	1	a Mokk shaman	19195	poi	Mokk Stronghold	1	none	0	300	120	0
-1300304	DANTOOINE	dan_world	AREA	0	-7049.26	1.93	-3312.30	95	1	a Mokk rockshaper	19185	poi	Mokk Stronghold	1	none	0	300	120	0
-1300305	DANTOOINE	dan_world	AREA	0	-7048.77	2.76	-3347.81	179	1	a Mokk warrior	19210	poi	Mokk Stronghold	1	none	0	300	120	0
-1300306	DANTOOINE	dan_world	AREA	0	-7047.02	2.17	-3329.06	-163	1	a Mokk clan leader	19155	poi	Mokk Stronghold	1	none	0	300	120	0
-1300307	DANTOOINE	dan_world	AREA	0	-7046.48	3.01	-3351.75	-146	1	a Mokk warrior	19210	poi	Mokk Stronghold	1	none	0	300	120	0
-1300308	DANTOOINE	dan_world	AREA	0	-7045.03	2.58	-3336.85	-46	1	a Mokk tribesman	19205	poi	Mokk Stronghold	1	none	0	300	120	0
-1300309	DANTOOINE	dan_world	AREA	0	-7044.32	3.10	-3355.51	126	1	a Mokk scout	19190	poi	Mokk Stronghold	1	none	0	300	120	0
-1300310	DANTOOINE	dan_world	AREA	0	-7043.63	2.38	-3331.72	-117	1	a Mokk shaman	19195	poi	Mokk Stronghold	1	none	0	300	120	0
-1300311	DANTOOINE	dan_world	AREA	0	-7043.37	2.53	-3334.29	-85	1	a Mokk loreweaver	19175	poi	Mokk Stronghold	1	none	0	300	120	0
-1300312	DANTOOINE	dan_world	AREA	0	-7040.54	3.12	-3355.59	-127	1	a Mokk scout	19190	poi	Mokk Stronghold	1	none	0	300	120	0
-1300313	DANTOOINE	dan_world	AREA	0	-7039.69	1.10	-3305.01	0	1	a Mokk warrior	19210	poi	Mokk Stronghold	1	none	0	300	120	0
-1300314	DANTOOINE	dan_world	AREA	0	-7039.20	3.05	-3353.35	141	1	a Mokk warrior	19210	poi	Mokk Stronghold	1	none	0	300	120	0
-1300315	DANTOOINE	dan_world	AREA	0	-7038.37	2.01	-3315.89	98	1	a Mokk scout	19190	poi	Mokk Stronghold	1	none	0	300	120	0
-1300316	DANTOOINE	dan_world	AREA	0	-7038.00	1.33	-3305.00	0	1	a Mokk warrior	19210	poi	Mokk Stronghold	1	none	0	300	120	0
-1300317	DANTOOINE	dan_world	AREA	0	-7034.31	1.99	3316.90	-64	1	a Mokk warrior	19210	poi	Mokk Stronghold	1	none	0	300	120	0
-1300318	DANTOOINE	dan_world	AREA	0	-7034.03	2.69	-3346.34	-158	1	a Mokk rockshaper	19185	poi	Mokk Stronghold	1	none	0	300	120	0
-1300319	DANTOOINE	dan_world	AREA	0	-7032.14	2.78	-3339.08	24	1	a Mokk rockshaper	19185	poi	Mokk Stronghold	1	none	0	300	120	0
-1300320	DANTOOINE	dan_world	AREA	0	-7031.75	2.93	-3352.42	159	1	a Mokk rockshaper	19185	poi	Mokk Stronghold	1	none	0	300	120	0
-1300321	DANTOOINE	dan_world	AREA	0	-7030.51	2.81	-3335.55	-159	1	a Mokk warrior	19210	poi	Mokk Stronghold	1	none	0	300	120	0
-1300322	DANTOOINE	dan_world	AREA	0	-7029.42	1.96	-3315.57	25	1	a Mokk rockshaper	19185	poi	Mokk Stronghold	1	none	0	300	120	0
-1300323	DANTOOINE	dan_world	AREA	0	-7026.00	1.93	-3309.61	59	1	a Mokk hunter	19170	poi	Mokk Stronghold	1	none	0	300	120	0
-1300324	DANTOOINE	dan_world	AREA	0	-7021.41	2.26	-3306.16	-143	1	a Mokk hunter	19170	poi	Mokk Stronghold	1	none	0	300	120	0
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	creature_name	creature_id	spawn_category	spawn_area	amount	behaviour	mood	equipment_id	patrol_id	quest_id	loot_id	max_spawn_time	min_spawn_time	float_radius
+INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGER NOT NULL	REAL	REAL	REAL	REAL	INTEGER	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL	INTEGER NOT NULL	INTEGER
+1300003	DANTOOINE	dan_imp_outpost_cantina	EGG	3	0.02	0.13	-5.72	0	1	Insurgent (Black Epsilon Pilot Trainer)	33805	city	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	0
+1300004	DANTOOINE	dan_imp_outpost_hospital	EGG	6	-4.45	0.13	-1.59	136	1	Xaan Talmaron	33340	city	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	0
+1300005	DANTOOINE	dan_world	AREA	0	-4291.37	3.00	-2408.11	90	1	a Stormtrooper	28990	city	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	0
+1300006	DANTOOINE	dan_world	EGG	0	-4275.44	3.00	-2413.99	89	1	an explorer	8455	city	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	0
+1300007	DANTOOINE	dan_world	AREA	0	-4273.00	3.00	-2314.65	0	1	an AT-ST	370	city	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	2
+1300008	DANTOOINE	dan_world	AREA	0	-4268.18	3.00	-2480.42	0	1	an AT-ST	370	city	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	2
+1300009	DANTOOINE	dan_world	EGG	0	-4259.36	3.00	-2384.13	87	1	an technician	30945	city	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	0
+1300010	DANTOOINE	dan_world	EGG	0	-4248.68	3.00	-2376.61	68	1	a scientist	25750	city	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	0
+1300011	DANTOOINE	dan_world	PATROL	0	-4246.33	3.00	-2380.44	0	1	a Stormtrooper	28990	city	Imperial Outpost	3	STOP	idle	0	999	0	0	300	120	6
+1300012	DANTOOINE	dan_world	PATROL	0	-4234.88	3.00	-2418.17	0	1	a Stormtrooper	28990	city	Imperial Outpost	3	STOP	idle	0	999	0	0	300	120	6
+1300013	DANTOOINE	dan_world	EGG	0	-4233.76	3.00	-2354.45	-170	1	a bounty hunter	2100	city	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	0
+1300014	DANTOOINE	dan_world	EGG	0	-4233.70	3.00	-2402.08	133	1	a commoner	3185	city	Imperial Outpost	1	STOP	conversation	0	0	0	0	300	120	0
+1300015	DANTOOINE	dan_world	EGG	0	-4231.80	3.00	-2403.62	-61	1	a hunter	12525	city	Imperial Outpost	1	STOP	conversation	0	0	0	0	300	120	0
+1300016	DANTOOINE	dan_world	EGG	0	-4231.60	10.01	-2439.76	-137	1	an Imperial officer	29355	city	Imperial Outpost	1	STOP	npc_sitting_chair	0	0	0	0	300	120	0
+1300017	DANTOOINE	dan_world	EGG	0	-4198.86	3.00	-2426.41	46	1	a settler	26085	city	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	0
+1300018	DANTOOINE	dan_world	EGG	0	-4197.65	3.00	-2425.58	-138	1	a commoner	3185	city	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	0
+1300019	DANTOOINE	dan_world	EGG	0	-4231.60	3.00	-2425.57	-32	1	a commoner	3185	city	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	0
+1300020	DANTOOINE	dan_world	PATROL	0	-4231.26	3.00	-2431.13	0	1	an EG-6 power droid	6195	city	Imperial Outpost	1	STOP	idle	0	999	0	0	300	120	2
+1300021	DANTOOINE	dan_world	AREA	0	-4226.21	3.00	-2398.51	-2	1	a Stormtrooper	28990	city	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	0
+1300022	DANTOOINE	dan_world	EGG	0	-4225.36	10.01	-2442.61	-135	1	Commander Jatrian Lytus	13790	city	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	0
+1300023	DANTOOINE	dan_world	AREA	0	-4223.37	3.00	-2398.44	-2	1	a Stormtrooper Captain	29010	city	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	0
+1300024	DANTOOINE	dan_world	EGG	0	-4221.80	10.01	-2440.99	-47	1	an Imperial officer	34010	city	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	0
+1300025	DANTOOINE	dan_world	EGG	0	-4221.48	3.00	-2378.41	104	1	Col. Bek Rabor (an Imperial officer)	34070	city	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	0
+1300026	DANTOOINE	dan_world	PATROL	0	-4219.94	3.00	-2363.13	0	1	an R5 unit	34015	city	Imperial Outpost	1	STOP	idle	0	999	0	0	300	120	2
+1300027	DANTOOINE	dan_world	PATROL	0	-4217.94	3.00	-2365.13	0	1	an R5 unit	34015	city	Imperial Outpost	1	STOP	idle	0	999	0	0	300	120	2
+1300028	DANTOOINE	dan_world	EGG	0	-4219.92	3.00	-2378.92	-83	1	Lt. Juntah Herm (an Imperial pilot)	34075	city	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	0
+1300029	DANTOOINE	dan_world	EGG	0	-4217.35	3.00	-2402.64	127	1	a settler	26085	city	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	0
+1300030	DANTOOINE	dan_world	EGG	0	-4216.49	3.00	-2436.70	-10	1	SG-567	34025	city	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	0
+1300031	DANTOOINE	dan_world	EGG	0	-4212.96	3.00	-2393.80	175	1	a businessman	2255	city	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	0
+1300032	DANTOOINE	dan_world	PATROL	0	-4211.78	3.00	-2384.06	0	1	a Veteran Stormtrooper Squad Leader	32610	city	Imperial Outpost	1	STOP	idle	0	999	0	0	300	120	2
+1300033	DANTOOINE	dan_world	PATROL	0	-4211.78	3.00	-2381.14	0	1	a Stormtrooper	28990	city	Imperial Outpost	1	STOP	idle	0	999	0	0	300	120	2
+1300034	DANTOOINE	dan_world	PATROL	0	-4208.91	3.00	-2384.88	0	1	an Imperial Lance Corporal	13085	city	Imperial Outpost	1	STOP	idle	0	999	0	0	300	120	2
+1300035	DANTOOINE	dan_world	PATROL	0	-4208.22	3.00	-2381.14	0	1	an Imperial noncom	13135	city	Imperial Outpost	1	STOP	idle	0	999	0	0	300	120	2
+1300036	DANTOOINE	dan_world	EGG	0	-4203.23	3.00	-2357.84	-135	1	an explorer	8455	city	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	0
+1300037	DANTOOINE	dan_world	EGG	0	-4197.36	3.00	-2402.45	-92	1	an Imperial Recruiter	13170	city	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	0
+1300038	DANTOOINE	dan_world	EGG	0	-4182.72	3.00	-2385.55	-140	1	LX-466	15575	city	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	0
+1300039	DANTOOINE	dan_world	PATROL	0	-4179.53	3.00	-2395.33	0	1	a Stormtrooper	28990	city	Imperial Outpost	3	STOP	idle	0	999	0	0	300	120	6
+1300040	DANTOOINE	dan_world	AREA	0	-4158.04	3.00	-2408.21	-90	1	a Stormtrooper	28990	city	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	0
+1300041	DANTOOINE	dan_world	AREA	0	-4137.92	3.00	-2354.91	0	1	an AT-ST	370	city	Imperial Outpost	1	STOP	idle	0	0	0	0	300	120	2
+1300042	DANTOOINE	dan_mining_outpost_cantina	EGG	1	9.28	0.62	1.83	-39	1	a fringer	9710	city	Mining Outpost	1	STOP	npc_sitting_chair	0	0	0	0	300	120	0
+1300043	DANTOOINE	dan_mining_outpost_cantina	EGG	1	7.14	0.62	1.70	40	1	a scavenger	9585	city	Mining Outpost	1	STOP	npc_sitting_chair	0	0	0	0	300	120	0
+1300044	DANTOOINE	dan_mining_outpost_cantina	EGG	2	-9.07	0.63	3.40	88	1	Adwan Turoldine (CorSec Pilot Trainer)	33945	city	Mining Outpost	1	STOP	idle	0	0	0	0	300	120	0
+1300045	DANTOOINE	dan_mining_outpost_cantina	EGG	3	-3.23	0.62	-4.06	-45	1	a miner	16700	city	Mining Outpost	1	STOP	npc_sitting_chair	0	0	0	0	300	120	0
+1300046	DANTOOINE	dan_mining_outpost_cantina	EGG	3	-3.05	0.62	-1.91	-134	1	a miner	16700	city	Mining Outpost	1	STOP	npc_sitting_chair	0	0	0	0	300	120	0
+1300047	DANTOOINE	dan_mining_outpost_shed2	EGG	5	5.32	0.13	-3.64	-105	1	Stoos Olko	28980	city	Mining Outpost	1	STOP	npc_sitting_chair	0	0	0	0	300	120	0
+1300048	DANTOOINE	dan_world	EGG	0	-589.16	3.00	2497.92	-55	1	an Imperial Colonel	8640	city	Mining Outpost	1	STOP	idle	0	0	0	0	300	120	0
+1300049	DANTOOINE	dan_world	EGG	0	-642.28	3.00	2448.36	-56	1	a commoner	3185	city	Mining Outpost	1	STOP	idle	0	0	0	0	300	120	0
+1300050	DANTOOINE	dan_world	EGG	0	-657.45	3.00	2502.54	97	1	a settler	26085	city	Mining Outpost	1	STOP	idle	0	0	0	0	300	120	0
+1300051	DANTOOINE	dan_world	EGG	0	-647.40	3.00	2467.50	-87	1	a settler	26085	city	Mining Outpost	1	STOP	idle	0	0	0	0	300	120	0
+1300052	DANTOOINE	dan_world	EGG	0	-647.16	3.00	2441.89	-60	1	a farmer	8520	city	Mining Outpost	1	STOP	idle	0	0	0	0	300	120	0
+1300053	DANTOOINE	dan_world	EGG	0	-644.88	3.00	2460.71	23	1	a businessman	2255	city	Mining Outpost	1	STOP	idle	0	0	0	0	300	120	0
+1300054	DANTOOINE	dan_world	PATROL	0	-637.53	3.00	2484.25	0	1	an R5 unit	34015	city	Mining Outpost	1	STOP	idle	0	999	0	0	300	120	0
+1300055	DANTOOINE	dan_world	EGG	0	-593.76	3.00	2527.33	128	1	a miner	16700	city	Mining Outpost	1	STOP	idle	0	0	0	0	300	120	0
+1300056	DANTOOINE	dan_world	EGG	0	-680.03	3.00	2471.46	11	1	a miner	16700	city	Mining Outpost	1	STOP	idle	0	0	0	0	300	120	0
+1300057	DANTOOINE	dan_world	EGG	0	-594.85	3.00	2495.26	68	1	a scavenger	9585	city	Mining Outpost	1	STOP	conversation	0	0	0	0	300	120	0
+1300058	DANTOOINE	dan_world	EGG	0	-592.29	3.00	2496.41	-112	1	a scavenger	9585	city	Mining Outpost	1	STOP	conversation	0	0	0	0	300	120	0
+1300059	DANTOOINE	dan_world	EGG	0	-622.31	3.00	2451.74	-51	1	a technician	30945	city	Mining Outpost	1	STOP	npc_use_terminal_high	0	0	0	0	300	120	0
+1300060	DANTOOINE	dan_world	EGG	0	-636.29	3.00	2507.78	149	1	a traveller	31490	city	Mining Outpost	1	STOP	bored	0	0	0	0	300	120	0
+1300061	DANTOOINE	dan_world	EGG	0	-628.25	3.00	2531.72	64	1	a miner	16700	city	Mining Outpost	1	STOP	bored	0	0	0	0	300	120	0
+1300062	DANTOOINE	dan_world	EGG	0	-627.53	3.00	2534.15	141	1	a miner	16700	city	Mining Outpost	1	STOP	bored	0	0	0	0	300	120	0
+1300063	DANTOOINE	dan_world	EGG	0	-625.60	3.00	2481.34	116	1	Fern Yarrow (an Imperial pilot)	34090	city	Mining Outpost	1	STOP	conversation	0	0	0	0	300	120	0
+1300064	DANTOOINE	dan_world	EGG	0	-625.78	3.00	2479.02	26	1	Rane Yarrow (a freelance pilot)	34085	city	Mining Outpost	1	STOP	conversation	0	0	0	0	300	120	0
+1300065	DANTOOINE	dan_world	EGG	0	-623.73	3.00	2482.80	-174	1	Kess Yarrow (a Rebel pilot)	34095	city	Mining Outpost	1	STOP	conversation	0	0	0	0	300	120	0
+1300066	DANTOOINE	dan_world	EGG	0	-618.69	3.00	2539.31	-45	1	Kelvus Naria	14175	city	Mining Outpost	1	STOP	npc_use_terminal_high	0	0	0	0	300	120	0
+1300067	DANTOOINE	dan_world	EGG	0	-574.85	3.00	2499.19	64	1	a settler	26085	city	Mining Outpost	1	STOP	idle	0	0	0	0	300	120	0
+1300068	DANTOOINE	dan_world	PATROL	0	1631.90	4.00	-6392.56	90	1	a pirate	23445	city	Pirate Outpost	4	STOP	idle	0	999	0	0	300	120	8
+1300069	DANTOOINE	dan_world	EGG	0	1621.30	4.00	-6379.10	142	1	a pirate	18530	city	Pirate Outpost	1	STOP	idle	0	0	0	0	300	120	0
+1300070	DANTOOINE	dan_world	EGG	0	1608.00	4.00	-6395.71	91	1	a scoundrel	18790	city	Pirate Outpost	1	STOP	idle	0	0	0	0	300	120	0
+1300071	DANTOOINE	dan_world	EGG	0	1601.54	4.00	-6419.63	-24	1	a criminal	5180	city	Pirate Outpost	1	STOP	idle	0	0	0	0	300	120	0
+1300072	DANTOOINE	dan_world	EGG	0	1596.00	4.00	-6394.50	-37	1	a criminal	5180	city	Pirate Outpost	1	STOP	idle	0	0	0	0	300	120	0
+1300073	DANTOOINE	dan_world	PATROL	0	1591.89	4.00	-6400.29	0	1	an R4 unit	34125	city	Pirate Outpost	1	STOP	idle	0	999	0	0	300	120	0
+1300074	DANTOOINE	dan_world	EGG	0	1593.61	4.00	-6442.24	-22	1	an agriculturalist	8525	city	Pirate Outpost	1	STOP	idle	0	0	0	0	300	120	0
+1300075	DANTOOINE	dan_world	EGG	0	1629.16	4.00	-6414.93	-66	1	an assassin	325	city	Pirate Outpost	1	STOP	idle	0	0	0	0	300	120	0
+1300076	DANTOOINE	dan_world	EGG	0	1559.28	4.00	-6372.92	136	1	a pilot	23430	city	Pirate Outpost	1	STOP	idle	0	0	0	0	300	120	0
+1300077	DANTOOINE	dan_world	PATROL	0	1588.90	4.00	-6399.20	0	1	an R5 unit	34015	city	Pirate Outpost	1	STOP	idle	0	999	0	0	300	120	0
+1300078	DANTOOINE	dan_world	EGG	0	1577.99	4.00	-6373.08	170	1	Quich Marae	14015	city	Pirate Outpost	1	STOP	idle	0	0	0	0	300	120	0
+1300079	DANTOOINE	dan_world	EGG	0	1571.62	4.00	-6418.70	-1	1	Yras Shen-jen (a self-employed pilot)	34100	city	Pirate Outpost	1	STOP	idle	0	0	0	0	300	120	0
+1300080	DANTOOINE	dan_world	EGG	0	1569.90	4.00	-6404.30	-57	1	a smuggler	26650	city	Pirate Outpost	1	STOP	idle	0	0	0	0	300	120	0
+1300081	DANTOOINE	dan_world	EGG	0	1567.10	4.00	-6436.61	-33	1	a thief	9590	city	Pirate Outpost	1	STOP	idle	0	0	0	0	300	120	0
+1300082	DANTOOINE	dan_world	PATROL	0	1563.71	4.00	-6414.03	0	1	a CLL-8 binary load lifter	2705	city	Pirate Outpost	1	STOP	idle	0	999	0	0	300	120	0
+1300083	DANTOOINE	dan_world	PATROL	0	1553.16	4.00	-6390.29	-90	1	a pirate	23445	city	Pirate Outpost	4	STOP	idle	0	999	0	0	300	120	8
+1300084	DANTOOINE	dan_world	EGG	0	1549.00	4.00	-6374.00	-163	1	a pirate	18530	city	Pirate Outpost	1	STOP	idle	0	0	0	0	300	120	0
+1300085	DANTOOINE	dan_world	EGG	0	1542.68	4.00	-6416.95	36	1	a commoner	3185	city	Pirate Outpost	1	STOP	idle	0	0	0	0	300	120	0
+1300086	DANTOOINE	dan_world	EGG	0	1602.00	4.00	-6434.53	74	1	Daiv Dekven	34230	city	Pirate Outpost	1	STOP	idle	0	0	0	0	300	120	0
+1300087	DANTOOINE	dan_abandoned_reb_shed	AREA	5	4.60	0.10	-3.80	0	1	a Mokk tribesman	19205	dungeon	Abandoned Rebel Base	1	STOP	idle	0	0	0	0	300	120	2
+1300088	DANTOOINE	dan_abandoned_reb_shed	AREA	4	3.00	0.10	1.80	0	1	a Mokk tribesman	19205	dungeon	Abandoned Rebel Base	1	STOP	idle	0	0	0	0	300	120	2
+1300089	DANTOOINE	dan_abandoned_reb_shed	AREA	2	-4.30	0.10	3.80	90	1	a Mokk tribesman	19205	dungeon	Abandoned Rebel Base	1	STOP	idle	0	0	0	0	300	120	0
+1300090	DANTOOINE	dan_abandoned_reb_shed	AREA	6	-3.30	0.10	-3.80	0	1	a Mokk clan leader	19155	dungeon	Abandoned Rebel Base	1	STOP	idle	0	0	0	0	300	120	2
+1300091	DANTOOINE	dan_world	AREA	0	4069.95	10.65	-5144.73	0	1	a Mokk hunter	19170	dungeon	Abandoned Rebel Base	1	STOP	idle	0	0	0	0	300	120	2
+1300092	DANTOOINE	dan_world	AREA	0	4054.05	12.52	-5141.72	0	1	a Mokk hunter	19170	dungeon	Abandoned Rebel Base	1	STOP	idle	0	0	0	0	300	120	2
+1300093	DANTOOINE	dan_world	AREA	0	4051.79	10.86	-5127.00	0	1	a Mokk hunter	19170	dungeon	Abandoned Rebel Base	1	STOP	idle	0	0	0	0	300	120	2
+1300094	DANTOOINE	dan_reb_detach_hq	AREA	8	7.30	-13.80	10.20	0	1	a Rebel trooper	13505	dungeon	Rebel Detachment HQ	1	STOP	idle	0	0	0	0	300	120	2
+1300095	DANTOOINE	dan_reb_detach_hq	AREA	5	6.70	-6.80	-2.70	0	1	a Rebel trooper	13505	dungeon	Rebel Detachment HQ	1	STOP	idle	0	0	0	0	300	120	2
+1300096	DANTOOINE	dan_reb_detach_hq	AREA	5	2.70	-6.80	-6.20	0	1	a Rebel trooper	13505	dungeon	Rebel Detachment HQ	1	STOP	idle	0	0	0	0	300	120	2
+1300097	DANTOOINE	dan_reb_detach_hq	AREA	9	16.30	-13.80	5.90	0	1	a Rebel trooper	13505	dungeon	Rebel Detachment HQ	1	STOP	idle	0	0	0	0	300	120	2
+1300098	DANTOOINE	dan_reb_detach_hq	AREA	9	15.30	-13.80	14.90	0	1	a Rebel trooper	13505	dungeon	Rebel Detachment HQ	1	STOP	idle	0	0	0	0	300	120	2
+1300099	DANTOOINE	dan_reb_detach_hq	AREA	10	14.90	-13.80	-16.20	0	1	a Rebel trooper	13505	dungeon	Rebel Detachment HQ	1	STOP	idle	0	0	0	0	300	120	2
+1300100	DANTOOINE	dan_reb_detach_hq	AREA	9	13.30	-13.80	3.70	0	1	a Rebel trooper	13505	dungeon	Rebel Detachment HQ	1	STOP	idle	0	0	0	0	300	120	2
+1300101	DANTOOINE	dan_reb_detach_hq	AREA	8	1.60	-13.80	10.90	0	1	a Rebel trooper	13505	dungeon	Rebel Detachment HQ	1	STOP	idle	0	0	0	0	300	120	2
+1300102	DANTOOINE	dan_reb_detach_hq	AREA	8	-4.40	-13.80	13.30	0	1	a Rebel trooper	13505	dungeon	Rebel Detachment HQ	1	STOP	idle	0	0	0	0	300	120	2
+1300103	DANTOOINE	dan_reb_detach_hq	AREA	7	-3.10	-13.80	1.50	0	1	a Rebel trooper	13505	dungeon	Rebel Detachment HQ	1	STOP	idle	0	0	0	0	300	120	2
+1300104	DANTOOINE	dan_reb_detach_hq	AREA	7	-2.70	-13.80	-3.40	0	1	a Rebel trooper	13505	dungeon	Rebel Detachment HQ	1	STOP	idle	0	0	0	0	300	120	2
+1300105	DANTOOINE	dan_reb_detach_hq	AREA	2	-0.20	0.30	2.70	0	1	a Rebel trooper	13505	dungeon	Rebel Detachment HQ	1	STOP	idle	0	0	0	0	300	120	0
+1300106	DANTOOINE	dan_reb_detach_hq_shed	AREA	4	3.00	0.10	1.70	-90	1	a Rebel trooper	13475	dungeon	Rebel Detachment HQ	1	STOP	idle	0	0	0	0	300	120	0
+1300107	DANTOOINE	dan_reb_detach_hq_shed	AREA	3	0.20	0.10	-5.10	0	1	a Rebel trooper	13475	dungeon	Rebel Detachment HQ	1	STOP	idle	0	0	0	0	300	120	0
+1300108	DANTOOINE	dan_world	AREA	0	4057.65	2.03	5410.56	120	1	a Rebel trooper	13505	dungeon	Rebel Detachment HQ	1	STOP	idle	0	0	0	0	300	120	0
+1300109	DANTOOINE	dan_world	AREA	0	4042.77	1.96	5426.95	166	1	a Rebel trooper	13475	dungeon	Rebel Detachment HQ	1	STOP	idle	0	0	0	0	300	120	0
+1300110	DANTOOINE	dan_world	AREA	0	4041.85	2.00	5411.06	15	1	a Rebel trooper	13505	dungeon	Rebel Detachment HQ	1	STOP	idle	0	0	0	0	300	120	0
+1300111	DANTOOINE	dan_rtp_generals_bunker	AREA	24	99.90	-20.00	152.00	0	1	a Stormtrooper	25565	dungeon	RTP - Dantooine Generals Bunker	1	STOP	idle	0	0	0	0	300	120	2
+1300112	DANTOOINE	dan_rtp_generals_bunker	AREA	26	99.90	-20.00	113.50	0	1	an Imperial master sergeant	25435	dungeon	RTP - Dantooine Generals Bunker	1	STOP	idle	0	0	0	0	300	120	2
+1300113	DANTOOINE	dan_rtp_generals_bunker	AREA	25	98.40	-20.00	131.20	0	1	a Stormtrooper	25565	dungeon	RTP - Dantooine Generals Bunker	1	STOP	idle	0	0	0	0	300	120	2
+1300114	DANTOOINE	dan_rtp_generals_bunker	AREA	23	83.60	-20.00	109.70	0	1	a Stormtrooper	25565	dungeon	RTP - Dantooine Generals Bunker	1	STOP	idle	0	0	0	0	300	120	0
+1300115	DANTOOINE	dan_rtp_generals_bunker	AREA	27	67.60	-20.00	111.50	0	1	a Stormtrooper	25500	dungeon	RTP - Dantooine Generals Bunker	1	STOP	idle	0	0	0	0	300	120	2
+1300116	DANTOOINE	dan_rtp_generals_bunker	AREA	34	65.20	-20.00	16.00	0	1	a Stormtrooper	25565	dungeon	RTP - Dantooine Generals Bunker	1	STOP	idle	0	0	0	0	300	120	0
+1300117	DANTOOINE	dan_rtp_generals_bunker	AREA	35	64.90	-20.00	59.30	0	1	an Imperial first lieutenant	25425	dungeon	RTP - Dantooine Generals Bunker	1	STOP	idle	0	0	0	0	300	120	2
+1300118	DANTOOINE	dan_rtp_generals_bunker	AREA	31	6.70	-20.00	120.90	0	1	Barthis Belangus	25495	dungeon	RTP - Dantooine Generals Bunker	1	STOP	idle	0	0	0	0	300	120	2
+1300119	DANTOOINE	dan_rtp_generals_bunker	AREA	34	57.20	-20.00	13.70	0	1	General Stromgald Rholar	25505	dungeon	RTP - Dantooine Generals Bunker	1	STOP	idle	0	0	0	0	300	120	0
+1300120	DANTOOINE	dan_rtp_generals_bunker	AREA	34	48.90	-20.00	14.10	0	1	a Stormtrooper	25565	dungeon	RTP - Dantooine Generals Bunker	1	STOP	idle	0	0	0	0	300	120	0
+1300121	DANTOOINE	dan_rtp_generals_bunker	AREA	34	44.10	-20.00	35.90	90	1	an Imperial master sergeant	25435	dungeon	RTP - Dantooine Generals Bunker	1	STOP	idle	0	0	0	0	300	120	0
+1300122	DANTOOINE	dan_rtp_generals_bunker	AREA	29	34.90	-20.00	59.20	0	1	a Stormtrooper	25565	dungeon	RTP - Dantooine Generals Bunker	2	STOP	idle	0	0	0	0	300	120	4
+1300123	DANTOOINE	dan_rtp_generals_bunker	AREA	29	19.80	-20.00	44.40	0	1	a Stormtrooper	25565	dungeon	RTP - Dantooine Generals Bunker	1	STOP	idle	0	0	0	0	300	120	2
+1300124	DANTOOINE	dan_rtp_generals_bunker	AREA	29	19.60	-20.00	74.40	0	1	a Stormtrooper	25565	dungeon	RTP - Dantooine Generals Bunker	1	STOP	idle	0	0	0	0	300	120	2
+1300125	DANTOOINE	dan_rtp_generals_bunker	AREA	9	35.72	-12.00	63.31	179	1	an Imperial first lieutenant	25425	dungeon	RTP - Dantooine Generals Bunker	1	STOP	idle	0	0	0	0	300	120	0
+1300126	DANTOOINE	dan_rtp_generals_bunker	AREA	10	4.00	-12.00	59.66	0	1	a Stormtrooper	25560	dungeon	RTP - Dantooine Generals Bunker	2	STOP	idle	0	0	0	0	300	120	4
+1300127	DANTOOINE	dan_rtp_generals_bunker	AREA	6	17.31	-12.00	29.38	0	1	a Stormtrooper	25560	dungeon	RTP - Dantooine Generals Bunker	2	STOP	idle	0	0	0	0	300	120	4
+1300128	DANTOOINE	dan_rtp_generals_bunker	AREA	9	34.93	-12.00	59.37	0	1	a Stormtrooper	25560	dungeon	RTP - Dantooine Generals Bunker	2	STOP	idle	0	0	0	0	300	120	4
+1300129	DANTOOINE	dan_rtp_generals_bunker	AREA	14	18.21	-12.00	99.04	0	1	a Stormtrooper	25565	dungeon	RTP - Dantooine Generals Bunker	1	STOP	idle	0	0	0	0	300	120	2
+1300130	DANTOOINE	dan_rtp_generals_bunker	AREA	10	3.78	-12.00	69.32	0	1	an Imperial first lieutenant	25425	dungeon	RTP - Dantooine Generals Bunker	1	STOP	idle	0	0	0	0	300	120	0
+1300131	DANTOOINE	dan_rtp_generals_bunker	AREA	21	48.01	-20.00	140.69	0	1	a Stormtrooper	25565	dungeon	RTP - Dantooine Generals Bunker	2	STOP	idle	0	0	0	0	300	120	4
+1300132	DANTOOINE	dan_rtp_generals_bunker	AREA	15	3.31	-12.00	113.44	0	1	a Stormtrooper	25565	dungeon	RTP - Dantooine Generals Bunker	1	STOP	idle	0	0	0	0	300	120	2
+1300133	DANTOOINE	dan_rtp_generals_bunker	AREA	21	48.13	-20.00	154.69	0	1	a Stormtrooper	25565	dungeon	RTP - Dantooine Generals Bunker	1	STOP	idle	0	0	0	0	300	120	2
+1300134	DANTOOINE	dan_rtp_generals_bunker	AREA	21	51.78	-20.00	129.37	0	1	a Stormtrooper	25565	dungeon	RTP - Dantooine Generals Bunker	1	STOP	idle	0	0	0	0	300	120	2
+1300135	DANTOOINE	dan_rtp_generals_bunker	AREA	16	-10.49	-12.00	98.38	0	1	an Imperial master sergeant	25435	dungeon	RTP - Dantooine Generals Bunker	1	STOP	idle	0	0	0	0	300	120	2
+1300136	DANTOOINE	dan_world	AREA	0	-5677.28	15.44	1950.34	0	1	a Stormtrooper	25560	dungeon	RTP - Dantooine Generals Bunker	2	STOP	idle	0	0	0	0	300	120	4
+1300137	DANTOOINE	dan_world	AREA	0	-5652.44	8.40	1922.08	0	1	a Stormtrooper	25560	dungeon	RTP - Dantooine Generals Bunker	2	STOP	idle	0	0	0	0	300	120	4
+1300138	DANTOOINE	dan_world	AREA	0	-5650.71	15.52	1948.79	-90	1	a Stormtrooper	25560	dungeon	RTP - Dantooine Generals Bunker	1	STOP	idle	0	0	0	0	300	120	0
+1300139	DANTOOINE	dan_world	AREA	0	-5650.71	15.23	1956.05	-90	1	a Stormtrooper	25560	dungeon	RTP - Dantooine Generals Bunker	1	STOP	idle	0	0	0	0	300	120	0
+1300140	DANTOOINE	dan_world	AREA	0	-5634.40	28.22	1981.98	0	1	a Stormtrooper	25560	dungeon	RTP - Dantooine Generals Bunker	2	STOP	idle	0	0	0	0	300	120	4
+1300141	DANTOOINE	dan_world	AREA	0	-5618.96	15.10	1950.99	0	1	a Stormtrooper	25560	dungeon	RTP - Dantooine Generals Bunker	2	STOP	idle	0	0	0	0	300	120	4
+1300142	DANTOOINE	dan_underground_bunker	AREA	10	3.80	-16.00	140.70	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	2	STOP	idle	0	0	0	0	300	120	4
+1300143	DANTOOINE	dan_underground_bunker	AREA	5	3.20	-12.00	35.50	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	1	STOP	idle	0	0	0	0	300	120	2
+1300144	DANTOOINE	dan_underground_bunker	AREA	7	21.00	-16.00	76.60	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	1	STOP	idle	0	0	0	0	300	120	2
+1300145	DANTOOINE	dan_underground_bunker	AREA	5	2.20	-12.00	47.40	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	2	STOP	idle	0	0	0	0	300	120	4
+1300146	DANTOOINE	dan_underground_bunker	AREA	7	17.40	-16.00	79.80	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	2	STOP	idle	0	0	0	0	300	120	4
+1300147	DANTOOINE	dan_underground_bunker	AREA	10	16.60	-16.00	123.20	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	2	STOP	idle	0	0	0	0	300	120	4
+1300148	DANTOOINE	dan_underground_bunker	AREA	10	1.50	-16.00	105.90	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	2	STOP	idle	0	0	0	0	300	120	4
+1300149	DANTOOINE	dan_underground_bunker	AREA	17	-93.10	-28.00	105.20	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	2	STOP	idle	0	0	0	0	300	120	4
+1300150	DANTOOINE	dan_underground_bunker	AREA	32	-90.50	-44.00	-9.50	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	2	STOP	idle	0	0	0	0	300	120	4
+1300151	DANTOOINE	dan_underground_bunker	AREA	17	-85.60	-28.00	118.30	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	2	STOP	idle	0	0	0	0	300	120	4
+1300152	DANTOOINE	dan_underground_bunker	AREA	26	-81.00	-28.00	60.90	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	2	STOP	idle	0	0	0	0	300	120	4
+1300153	DANTOOINE	dan_underground_bunker	PATROL	24	-65.00	-28.00	62.80	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	1	STOP	idle	0	999	0	0	300	120	0
+1300154	DANTOOINE	dan_underground_bunker	PATROL	25	-64.70	-28.00	72.90	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	1	STOP	idle	0	999	0	0	300	120	0
+1300155	DANTOOINE	dan_underground_bunker	AREA	32	-57.80	-44.00	-9.00	-97	1	First Lieutenant Verls Tarrk	13605	dungeon	Ryll Smuggler Bunker	1	STOP	idle	0	0	0	0	300	120	0
+1300156	DANTOOINE	dan_underground_bunker	PATROL	23	-53.60	-27.90	62.80	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	1	STOP	idle	0	999	0	0	300	120	0
+1300157	DANTOOINE	dan_underground_bunker	PATROL	23	-45.10	-24.00	62.90	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	1	STOP	idle	0	999	0	0	300	120	0
+1300158	DANTOOINE	dan_underground_bunker	AREA	20	-38.10	-12.00	96.30	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	1	STOP	idle	0	0	0	0	300	120	2
+1300159	DANTOOINE	dan_underground_bunker	AREA	20	-37.90	-12.00	108.90	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	2	STOP	idle	0	0	0	0	300	120	4
+1300160	DANTOOINE	dan_underground_bunker	AREA	21	-37.00	-12.00	132.20	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	1	STOP	idle	0	0	0	0	300	120	2
+1300161	DANTOOINE	dan_underground_bunker	AREA	21	-35.20	-12.00	131.30	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	1	STOP	idle	0	0	0	0	300	120	2
+1300162	DANTOOINE	dan_underground_bunker	AREA	12	-28.10	-12.00	151.00	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	1	STOP	idle	0	0	0	0	300	120	2
+1300163	DANTOOINE	dan_underground_bunker	AREA	12	-27.30	-12.00	164.10	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	2	STOP	idle	0	0	0	0	300	120	4
+1300164	DANTOOINE	dan_underground_bunker	PATROL	23	-21.40	-16.00	62.90	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	1	STOP	idle	0	999	0	0	300	120	0
+1300165	DANTOOINE	dan_underground_bunker	AREA	29	-163.20	-44.00	79.00	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	1	STOP	idle	0	0	0	0	300	120	2
+1300166	DANTOOINE	dan_underground_bunker	AREA	29	-153.00	-44.00	93.10	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	1	STOP	idle	0	0	0	0	300	120	2
+1300167	DANTOOINE	dan_underground_bunker	AREA	29	-144.80	-44.00	76.70	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	2	STOP	idle	0	0	0	0	300	120	4
+1300168	DANTOOINE	dan_underground_bunker	AREA	18	-14.00	-12.00	95.20	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	1	STOP	idle	0	0	0	0	300	120	2
+1300169	DANTOOINE	dan_underground_bunker	AREA	18	-12.90	-12.00	90.30	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	1	STOP	idle	0	0	0	0	300	120	2
+1300170	DANTOOINE	dan_underground_bunker	PATROL	22	-12.20	-16.00	70.10	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	1	STOP	idle	0	999	0	0	300	120	0
+1300171	DANTOOINE	dan_underground_bunker	AREA	10	-11.60	-16.00	121.30	0	1	a Rebel trooper	13505	dungeon	Ryll Smuggler Bunker	2	STOP	idle	0	0	0	0	300	120	4
+1300172	DANTOOINE	dan_world	AREA	0	5474.17	1.37	5841.03	-17	1	an Imperial master sergeant	25435	outback	Broken Imperial Recon Droid	1	STOP	idle	0	0	0	0	300	120	0
+1300173	DANTOOINE	dan_world	AREA	0	5472.35	1.87	5847.51	72	1	a Stormtrooper	25560	outback	Broken Imperial Recon Droid	1	STOP	idle	0	0	0	0	300	120	0
+1300174	DANTOOINE	dan_world	AREA	0	-206.51	12.39	4866.02	0	1	a Kunga loreweaver	14530	outback	Collapsed AT-AT	1	STOP	idle	0	0	0	0	300	120	2
+1300175	DANTOOINE	dan_world	AREA	0	-201.07	12.34	4861.41	0	1	a Kunga scout	14540	outback	Collapsed AT-AT	2	STOP	idle	0	0	0	0	300	120	4
+1300176	DANTOOINE	dan_world	AREA	0	-4433.40	2.23	5300.00	0	1	a Dantari battlelord	5285	outback	Dantari Pillaged Camp	1	STOP	idle	0	0	0	0	300	120	2
+1300177	DANTOOINE	dan_world	AREA	0	-4431.31	3.09	5293.49	0	1	a Dantari raider	5280	outback	Dantari Pillaged Camp	5	STOP	idle	0	0	0	0	300	120	10
+1300178	DANTOOINE	dan_world	AREA	0	2911.92	2.21	4517.31	0	1	a Dark Jedi Sentinel	31525	outback	Dantooine	1	STOP	idle	0	0	0	0	300	120	2
+1300179	DANTOOINE	dan_world	AREA	0	2099.37	80.82	7435.46	167	1	Lepwalk C'han	15075	outback	Dantooine	1	STOP	idle	0	0	0	0	300	120	0
+1300180	DANTOOINE	dan_world	AREA	0	-405.76	26.78	-5131.12	0	1	an abandoned Rebel private	65	outback	Dantooine	3	STOP	idle	0	0	0	0	300	120	6
+1300181	DANTOOINE	dan_world	AREA	0	-7074.82	0.33	-6148.37	0	1	a dark side savage	5335	outback	Dantooine	1	STOP	idle	0	0	0	0	300	120	2
+1300182	DANTOOINE	dan_world	AREA	0	5762.44	1.92	-2972.36	0	1	a Dantari raider	5280	outback	Dantooine	5	STOP	idle	0	0	0	0	300	120	10
+1300183	DANTOOINE	dan_world	AREA	0	1920.94	1.35	-4745.84	0	1	a Force-sensitive crypt crawler	9595	outback	Dantooine	2	STOP	idle	0	0	0	0	300	120	4
+1300184	DANTOOINE	dan_world	AREA	0	-1117.50	1.41	-3397.93	0	1	a Janta shaman	13770	outback	Dantooine	2	STOP	idle	0	0	0	0	300	120	4
+1300185	DANTOOINE	dan_world	AREA	0	-5964.98	2.68	-4571.80	0	1	a thug	30995	outback	Dantooine	1	STOP	idle	0	0	0	0	300	120	2
+1300186	DANTOOINE	dan_world	AREA	0	5425.48	11.14	-860.30	0	1	a bol	1710	outback	Dantooine	5	STOP	idle	0	0	0	0	300	120	10
+1300187	DANTOOINE	dan_world	AREA	0	2529.48	56.58	-2857.74	0	1	a Force-sensitive renegade	9600	outback	Dantooine	2	STOP	idle	0	0	0	0	300	120	4
+1300188	DANTOOINE	dan_world	AREA	0	-2175.41	7.85	-2226.47	0	1	a bile-drenched quenker	1050	outback	Dantooine	3	STOP	idle	0	0	0	0	300	120	6
+1300189	DANTOOINE	dan_world	AREA	0	-4057.98	2.09	-737.40	0	1	a Kunga clan primalist	14510	outback	Dantooine	2	STOP	idle	0	0	0	0	300	120	4
+1300190	DANTOOINE	dan_world	AREA	0	-5499.90	15.54	-1778.16	0	1	a vexed voritor lizard	32620	outback	Dantooine	3	STOP	idle	0	0	0	0	300	120	6
+1300191	DANTOOINE	dan_world	AREA	0	7022.43	2.60	1014.84	0	1	a savage quenker	25700	outback	Dantooine	3	STOP	idle	0	0	0	0	300	120	6
+1300192	DANTOOINE	dan_world	AREA	0	6063.16	2.07	1898.74	0	1	a Mokk shaman	19195	outback	Dantooine	2	STOP	idle	0	0	0	0	300	120	4
+1300193	DANTOOINE	dan_world	AREA	0	4616.35	3.04	3644.47	0	1	a Janta scout	13765	outback	Dantooine	3	STOP	idle	0	0	0	0	300	120	6
+1300194	DANTOOINE	dan_world	AREA	0	2740.27	20.66	3358.76	0	1	a Janta soothsayer	13775	outback	Dantooine	2	STOP	idle	0	0	0	0	300	120	4
+1300195	DANTOOINE	dan_world	AREA	0	4891.75	23.34	4511.47	0	1	a feral Force wielder	9380	outback	Dantooine	1	STOP	idle	0	0	0	0	300	120	2
+1300196	DANTOOINE	dan_world	AREA	0	5020.90	16.92	6873.79	0	1	a Force-sensitive crypt crawler	9595	outback	Dantooine	2	STOP	idle	0	0	0	0	300	120	4
+1300197	DANTOOINE	dan_world	AREA	0	5458.11	2.02	5837.39	0	1	a Janta rockshaper	13760	outback	Dantooine	2	STOP	idle	0	0	0	0	300	120	4
+1300198	DANTOOINE	dan_world	AREA	0	2150.55	23.62	292.94	0	1	a stranded Rebel scout	29650	outback	Dantooine	5	STOP	idle	0	0	0	0	300	120	10
+1300199	DANTOOINE	dan_world	AREA	0	1929.35	10.50	1461.24	0	1	a novice force mystic	21360	outback	Dantooine	2	STOP	idle	0	0	0	0	300	120	4
+1300200	DANTOOINE	dan_world	AREA	0	-4721.75	3.44	7025.59	0	1	a huurton matron	12630	outback	Dantooine	2	STOP	idle	0	0	0	0	300	120	4
+1300201	DANTOOINE	dan_world	AREA	0	899.37	21.02	1394.83	0	1	a force crystal hunter	5315	outback	Dantooine	2	STOP	idle	0	0	0	0	300	120	4
+1300202	DANTOOINE	dan_world	AREA	0	-2083.28	2.56	-322.33	0	1	a forsaken force drifter	9625	outback	Dantooine	1	STOP	idle	0	0	0	0	300	120	2
+1300203	DANTOOINE	dan_world	AREA	0	-1884.39	2.73	500.71	0	1	an untrained wielder of the Dark Side	32035	outback	Dantooine	1	STOP	idle	0	0	0	0	300	120	2
+1300204	DANTOOINE	dan_world	AREA	0	-2993.90	23.22	132.23	0	1	a Janta warrior	13785	outback	Dantooine	3	STOP	idle	0	0	0	0	300	120	6
+1300205	DANTOOINE	dan_world	AREA	0	-4657.42	7.63	-451.79	0	1	a Kunga shaman	14545	outback	Dantooine	1	STOP	idle	0	0	0	0	300	120	2
+1300206	DANTOOINE	dan_world	AREA	0	-5903.60	21.96	-31.98	0	1	a voritor dasher	32730	outback	Dantooine	2	STOP	idle	0	0	0	0	300	120	4
+1300207	DANTOOINE	dan_world	AREA	0	-6055.39	2.18	1133.08	0	1	a Mokk rockshaper	19185	outback	Dantooine	2	STOP	idle	0	0	0	0	300	120	4
+1300208	DANTOOINE	dan_world	AREA	0	-922.53	7.91	6915.99	0	1	a Force-sensitive renegade	9600	outback	Dantooine	1	STOP	idle	0	0	0	0	300	120	2
+1300209	DANTOOINE	dan_world	AREA	0	-478.62	8.08	6560.37	0	1	a Janta scout	13765	outback	Dantooine	2	STOP	idle	0	0	0	0	300	120	4
+1300210	DANTOOINE	dan_world	AREA	0	373.27	1.96	7233.99	0	1	a Kunga loreweaver	14530	outback	Dantooine	1	STOP	idle	0	0	0	0	300	120	2
+1300211	DANTOOINE	dan_world	AREA	0	-1953.41	1.15	839.66	0	1	a dark side savage	5335	outback	Dantooine	2	STOP	idle	0	0	0	0	300	120	4
+1300212	DANTOOINE	dan_world	AREA	0	1179.06	12.95	7049.39	0	1	a Mokk hunter	19170	outback	Dantooine	2	STOP	idle	0	0	0	0	300	120	4
+1300213	DANTOOINE	dan_world	AREA	0	2111.09	20.34	32.89	0	1	a bol pack runner	1720	outback	Dantooine	6	STOP	idle	0	0	0	0	300	120	12
+1300214	DANTOOINE	dan_world	AREA	0	-722.76	2.75	1445.22	0	1	a quenker	23800	outback	Dantooine	3	STOP	idle	0	0	0	0	300	120	6
+1300215	DANTOOINE	dan_world	AREA	0	-4506.40	69.10	1614.92	0	1	a novice force mystic	21360	outback	Dantooine	3	STOP	idle	0	0	0	0	300	120	6
+1300216	DANTOOINE	dan_world	AREA	0	-2495.39	26.09	1858.30	0	1	a Kunga rockshaper	14535	outback	Dantooine	3	STOP	idle	0	0	0	0	300	120	6
+1300217	DANTOOINE	dan_world	AREA	0	-246.70	1.20	5946.87	0	1	a bile-drenched quenker	1050	outback	Dantooine	3	STOP	idle	0	0	0	0	300	120	6
+1300218	DANTOOINE	dan_world	AREA	0	334.26	16.50	5551.11	0	1	a Kunga scout	14540	outback	Dantooine	2	STOP	idle	0	0	0	0	300	120	4
+1300219	DANTOOINE	dan_world	AREA	0	-2779.67	13.58	5665.81	0	1	a Janta shaman	13770	outback	Dantooine	1	STOP	idle	0	0	0	0	300	120	2
+1300220	DANTOOINE	dan_world	AREA	0	972.97	14.52	2419.00	0	1	a Janta scout	13765	outback	Dantooine	3	STOP	idle	0	0	0	0	300	120	6
+1300221	DANTOOINE	dan_world	AREA	0	-2001.25	1.87	1494.42	0	1	a quenker	23800	outback	Dantooine	3	STOP	idle	0	0	0	0	300	120	6
+1300222	DANTOOINE	dan_world	AREA	0	-739.05	1.64	2103.25	0	1	a feral Force wielder	9380	outback	Dantooine	2	STOP	idle	0	0	0	0	300	120	4
+1300223	DANTOOINE	dan_world	AREA	0	-4977.41	63.41	6368.01	0	1	a Mokk shaman	19195	outback	Dantooine	1	STOP	idle	0	0	0	0	300	120	2
+1300224	DANTOOINE	dan_world	AREA	0	-6502.32	17.52	4890.56	0	1	a piket longhorn	23415	outback	Dantooine	2	STOP	idle	0	0	0	0	300	120	4
+1300225	DANTOOINE	dan_world	AREA	0	-504.57	8.08	2063.56	0	1	a Kunga warrior	14560	outback	Dantooine	2	STOP	idle	0	0	0	0	300	120	4
+1300226	DANTOOINE	dan_world	AREA	0	-4218.51	33.03	4259.70	0	1	a forsaken force drifter	9625	outback	Dantooine	1	STOP	idle	0	0	0	0	300	120	2
+1300227	DANTOOINE	dan_world	AREA	0	-1817.00	2.76	2831.31	0	1	a Mokk scout	19190	outback	Dantooine	3	STOP	idle	0	0	0	0	300	120	6
+1300228	DANTOOINE	dan_world	AREA	0	-1927.69	7.00	4615.64	0	1	a Mokk rockshaper	19185	outback	Dantooine	1	STOP	idle	0	0	0	0	300	120	2
+1300229	DANTOOINE	dan_world	AREA	0	-1562.08	7.00	5463.48	0	1	a Kunga herbalist	14520	outback	Dantooine	2	STOP	idle	0	0	0	0	300	120	4
+1300230	DANTOOINE	dan_world	AREA	0	-2567.83	15.38	2602.59	0	1	a Mokk hunter	19170	outback	Dantooine	2	STOP	idle	0	0	0	0	300	120	4
+1300231	DANTOOINE	dan_world	AREA	0	-4557.95	3.50	2742.47	0	1	a Janta rockshaper	13760	outback	Dantooine	2	STOP	idle	0	0	0	0	300	120	4
+1300232	DANTOOINE	dan_world	AREA	0	1360.09	24.30	5196.34	0	1	a Janta harvester	13735	outback	Dantooine	4	STOP	idle	0	0	0	0	300	120	8
+1300233	DANTOOINE	dan_world	AREA	0	-5170.56	35.31	2699.21	0	1	a novice force mystic	21360	outback	Dantooine	2	STOP	idle	0	0	0	0	300	120	4
+1300234	DANTOOINE	dan_world	AREA	0	1675.61	21.70	4868.47	0	1	a huurton huntress	12625	outback	Dantooine	2	STOP	idle	0	0	0	0	300	120	4
+1300235	DANTOOINE	dan_world	AREA	0	1512.23	1.14	4657.58	0	1	a Mokk hunter	19170	outback	Dantooine	2	STOP	idle	0	0	0	0	300	120	4
+1300236	DANTOOINE	dan_world	AREA	0	-6847.01	35.57	4254.28	0	1	a Mokk hunter	19170	outback	Dantooine	2	STOP	idle	0	0	0	0	300	120	4
+1300237	DANTOOINE	dan_world	AREA	0	-1186.86	22.49	4101.42	0	1	a Janta scout	13765	outback	Dantooine	2	STOP	idle	0	0	0	0	300	120	4
+1300238	DANTOOINE	dan_world	AREA	0	-5791.81	15.00	3444.92	0	1	a Mokk warrior	19210	outback	Dantooine	3	STOP	idle	0	0	0	0	300	120	6
+1300239	DANTOOINE	dan_world	AREA	0	1048.07	0.19	3624.23	0	1	a Kunga hunter	14525	outback	Dantooine	4	STOP	idle	0	0	0	0	300	120	8
+1300240	DANTOOINE	dan_world	AREA	0	1788.13	1.30	3201.19	0	1	a stranded Rebel scout	29650	outback	Dantooine	2	STOP	idle	0	0	0	0	300	120	4
+1300241	DANTOOINE	dan_world	AREA	0	-1823.41	9.33	3796.78	0	1	a Mokk scout	19190	outback	Dantooine	2	STOP	idle	0	0	0	0	300	120	4
+1300242	DANTOOINE	dan_world	AREA	0	-3117.51	0.49	3415.69	0	1	a feral Force wielder	9380	outback	Dantooine	2	STOP	idle	0	0	0	0	300	120	4
+1300243	DANTOOINE	dan_world	AREA	0	-2459.16	6.40	4580.84	0	1	a Kunga rockshaper	14535	outback	Dantooine	2	STOP	idle	0	0	0	0	300	120	4
+1300244	DANTOOINE	dan_world	AREA	0	-2488.17	2.82	3421.82	0	1	a novice force mystic	21360	outback	Dantooine	2	STOP	idle	0	0	0	0	300	120	4
+1300245	DANTOOINE	dan_world	AREA	0	4517.93	3.03	-6494.32	0	1	a Mokk hunter	19170	outback	Datapad Stone Hut	1	STOP	idle	0	0	0	0	300	120	2
+1300246	DANTOOINE	dan_world	AREA	0	4501.84	1.99	-6496.45	0	1	a Mokk hunter	19170	outback	Datapad Stone Hut	1	STOP	idle	0	0	0	0	300	120	2
+1300247	DANTOOINE	dan_world	AREA	0	4491.90	3.72	-6481.56	0	1	a Mokk hunter	19170	outback	Datapad Stone Hut	1	STOP	idle	0	0	0	0	300	120	2
+1300248	DANTOOINE	dan_world	AREA	0	1931.15	15.67	2169.14	0	1	an abandoned Rebel private	65	outback	Destroyed Rebel Outpost	2	STOP	idle	0	0	0	0	300	120	4
+1300249	DANTOOINE	dan_world	AREA	0	1940.62	16.01	2171.49	0	1	a stranded Rebel scout	29650	outback	Destroyed Rebel Outpost	2	STOP	idle	0	0	0	0	300	120	4
+1300250	DANTOOINE	dan_world	AREA	0	-6187.03	35.53	2696.35	0	1	a Janta primalist	13755	outback	Janta Small Camp	3	STOP	idle	0	0	0	0	300	120	6
+1300251	DANTOOINE	dan_world	AREA	0	-6195.38	35.00	2702.83	0	1	a Janta warrior	13785	outback	Janta Small Camp	3	STOP	idle	0	0	0	0	300	120	6
+1300252	DANTOOINE	dan_world	AREA	0	-7271.39	3.35	4327.38	0	1	a Janta tribesman	13780	outback	Janta Standing Stones	4	STOP	idle	0	0	0	0	300	120	8
+1300253	DANTOOINE	dan_world	AREA	0	-7276.52	2.47	4324.13	0	1	a Janta rockshaper	13760	outback	Janta Standing Stones	1	STOP	idle	0	0	0	0	300	120	2
+1300254	DANTOOINE	dan_world	AREA	0	-3991.38	18.28	2137.47	0	1	a Kunga clan leader	14505	outback	Kunga Small Camp	1	STOP	idle	0	0	0	0	300	120	2
+1300255	DANTOOINE	dan_world	AREA	0	-3996.33	18.19	2120.26	0	1	a Kunga hunter	14525	outback	Kunga Small Camp	3	STOP	idle	0	0	0	0	300	120	6
+1300256	DANTOOINE	dan_world	AREA	0	-3972.74	17.20	2142.93	0	1	a Kunga warrior	14560	outback	Kunga Small Camp	3	STOP	idle	0	0	0	0	300	120	6
+1300257	DANTOOINE	dan_world	AREA	0	-5750.20	35.49	1939.79	0	1	a Mokk hunter	19170	outback	Mokk Altar	3	STOP	idle	0	0	0	0	300	120	6
+1300258	DANTOOINE	dan_world	AREA	0	-5744.49	35.52	1918.62	0	1	a Mokk warrior	19210	outback	Mokk Altar	3	STOP	idle	0	0	0	0	300	120	6
+1300259	DANTOOINE	dan_world	AREA	0	1559.25	7.11	1742.98	0	1	a domestic bol mount	5810	outback	Mokk Camp Potted Plant	2	STOP	idle	0	0	0	0	300	120	4
+1300260	DANTOOINE	dan_world	AREA	0	1554.31	7.15	1762.75	0	1	a Mokk warrior	19210	outback	Mokk Camp Potted Plant	2	STOP	idle	0	0	0	0	300	120	4
+1300261	DANTOOINE	dan_world	AREA	0	4326.71	25.05	3908.33	0	1	a Mokk clan leader	19155	outback	Mokk Scaffold	1	STOP	idle	0	0	0	0	300	120	2
+1300262	DANTOOINE	dan_world	AREA	0	4335.93	25.63	3911.10	0	1	a Mokk herbalist	19165	outback	Mokk Scaffold	3	STOP	idle	0	0	0	0	300	120	6
+1300263	DANTOOINE	dan_world	AREA	0	4330.19	24.73	3913.55	0	1	a Mokk warrior	19210	outback	Mokk Scaffold	2	STOP	idle	0	0	0	0	300	120	4
+1300264	DANTOOINE	dan_world	AREA	0	-3763.29	1.16	2544.26	0	1	a Mokk clan leader	19155	outback	Mokk Stone Building	1	STOP	idle	0	0	0	0	300	120	2
+1300265	DANTOOINE	dan_world	AREA	0	-3756.14	1.49	2548.19	0	1	a Mokk harvester	19160	outback	Mokk Stone Building	2	STOP	idle	0	0	0	0	300	120	4
+1300266	DANTOOINE	dan_world	AREA	0	-3762.84	1.11	2536.29	0	1	a Mokk warrior	19210	outback	Mokk Stone Building	3	STOP	idle	0	0	0	0	300	120	6
+1300267	DANTOOINE	dan_world	AREA	0	3215.18	0.99	5998.13	0	1	a Dantari battlelord	5285	outback	Potted Plant Hut	1	STOP	idle	0	0	0	0	300	120	2
+1300268	DANTOOINE	dan_world	AREA	0	3208.90	1.37	5992.44	0	1	a Dantari raider	5280	outback	Potted Plant Hut	10	STOP	idle	0	0	0	0	300	120	20
+1300269	DANTOOINE	dan_world	AREA	0	-2993.80	1.43	6670.49	0	1	a savage quenker	25700	outback	Quenker Hut	3	STOP	idle	0	0	0	0	300	120	6
+1300270	DANTOOINE	dan_world	AREA	0	-2999.10	1.41	6669.39	0	1	a bile-drenched quenker	1050	outback	Quenker Hut	1	STOP	idle	0	0	0	0	300	120	2
+1300271	DANTOOINE	dan_world	AREA	0	288.50	2.02	3523.18	0	1	a quenker ravager	23805	outback	Quenker Small Huts	1	STOP	idle	0	0	0	0	300	120	2
+1300272	DANTOOINE	dan_world	AREA	0	285.67	2.51	3528.59	0	1	a savage quenker	25700	outback	Quenker Small Huts	3	STOP	idle	0	0	0	0	300	120	6
+1300273	DANTOOINE	dan_world	EGG	0	-6806.41	126.00	6025.05	173	1	Mol Ni'mai	25110	outback	RIS Creator	1	STOP	idle	0	0	0	0	300	120	0
+1300274	DANTOOINE	dan_world	AREA	0	-3379.48	11.14	-4724.64	0	1	a Kunga warrior	14560	outback	Steaming Stone	3	STOP	idle	0	0	0	0	300	120	6
+1300275	DANTOOINE	dan_world	AREA	0	-3387.19	10.93	-4728.37	0	1	a Janta loreweaver	13750	outback	Steaming Stone	2	STOP	idle	0	0	0	0	300	120	4
+1300276	DANTOOINE	dan_world	AREA	0	6562.41	5.04	-164.33	0	1	a thune grassland guardian	31095	outback	Thune Ruins #1	4	STOP	idle	0	0	0	0	300	120	8
+1300277	DANTOOINE	dan_world	AREA	0	6555.19	5.03	-162.10	0	1	a thune herd leader	31100	outback	Thune Ruins #1	1	STOP	idle	0	0	0	0	300	120	2
+1300278	DANTOOINE	dan_world	AREA	0	-5655.35	23.96	7077.11	0	1	a thune grassland guardian	31095	outback	Thune Ruins #2	3	STOP	idle	0	0	0	0	300	120	6
+1300279	DANTOOINE	dan_world	AREA	0	-5661.22	23.17	7069.70	0	1	a thune herd leader	31100	outback	Thune Ruins #2	1	STOP	idle	0	0	0	0	300	120	2
+1300280	DANTOOINE	dan_world	AREA	0	1630.69	22.55	5936.95	0	1	a vexed voritor lizard	32620	outback	Voritor Hut	1	STOP	idle	0	0	0	0	300	120	2
+1300281	DANTOOINE	dan_world	AREA	0	1635.63	22.35	5929.75	0	1	a voritor lizard	32735	outback	Voritor Hut	3	STOP	idle	0	0	0	0	300	120	6
+1300282	DANTOOINE	dan_abandoned_reb_base_main	EGG	2	-2.52	1.01	0.99	159	1	Brother Vrovel (Rebel Pilot Trainer)	33995	poi	Abandoned Rebel Base	1	STOP	idle	0	0	0	0	300	120	0
+1300283	DANTOOINE	dan_abandoned_reb_base_main	EGG	2	-2.83	1.01	-8.30	-20	1	Brother Ezkiel (Vortex Pilot Trainer)	34000	poi	Abandoned Rebel Base	1	STOP	idle	0	0	0	0	300	120	0
+1300284	DANTOOINE	dan_abandoned_reb_base_main	EGG	5	16.31	1.01	-1.71	-78	1	a Rebel First Lieutenant	24570	poi	Abandoned Rebel Base	1	STOP	idle	0	0	0	0	300	120	0
+1300285	DANTOOINE	dan_abandoned_reb_base_main	EGG	8	-14.51	1.01	-22.09	29	1	Captain Ackbar	36	poi	Abandoned Rebel Base	1	STOP	idle	0	0	0	0	300	120	0
+1300286	DANTOOINE	dan_abandoned_reb_base_main	EGG	8	-12.42	1.01	-19.44	-150	1	Leia Organa	2815	poi	Abandoned Rebel Base	1	STOP	idle	0	0	0	0	300	120	0
+1300287	DANTOOINE	dan_abandoned_reb_base_main	EGG	10	-2.28	7.01	-11.97	-36	1	Mon Mothma	19215	poi	Abandoned Rebel Base	1	STOP	idle	0	0	0	0	300	120	0
+1300288	DANTOOINE	dan_abandoned_reb_base_main	EGG	10	-4.72	7.01	-10.22	124	1	a Rebel General	24575	poi	Abandoned Rebel Base	1	STOP	idle	0	0	0	0	300	120	0
+1300289	DANTOOINE	dan_abandoned_reb_base_main	EGG	10	-2.24	7.01	-8.91	178	1	a Rebel Army Captain	24335	poi	Abandoned Rebel Base	1	STOP	idle	0	0	0	0	300	120	0
+1300290	DANTOOINE	dan_world	AREA	0	-6628.21	22.13	5704.44	0	1	an enforcer	27085	poi	Abandoned Rebel Base	1	STOP	idle	0	0	0	0	300	120	2
+1300291	DANTOOINE	dan_world	AREA	0	-6599.08	19.56	5654.78	0	1	an enforcer	27085	poi	Abandoned Rebel Base	1	STOP	idle	0	0	0	0	300	120	2
+1300292	DANTOOINE	dan_world	AREA	0	-6594.00	18.40	5689.00	133	1	Nola	26885	poi	Abandoned Rebel Base	1	STOP	idle	0	0	0	0	300	120	0
+1300293	DANTOOINE	dan_world	AREA	0	-6567.25	16.88	5685.90	0	1	an enforcer	27085	poi	Abandoned Rebel Base	1	STOP	idle	0	0	0	0	300	120	2
+1300294	DANTOOINE	dan_world	AREA	0	-6954.54	25.00	5421.27	0	1	a Rebel commando	24375	poi	Abandoned Rebel Base	3	STOP	idle	0	0	0	0	300	120	6
+1300295	DANTOOINE	dan_world	AREA	0	-6817.92	46.00	5511.86	179	1	a Rebel recruiter	24640	poi	Abandoned Rebel Base	1	STOP	idle	0	0	0	0	300	120	0
+1300296	DANTOOINE	dan_world	AREA	0	-6657.43	30.00	5560.84	0	1	a Rebel commando	24375	poi	Abandoned Rebel Base	4	STOP	idle	0	0	0	0	300	120	8
+1300297	DANTOOINE	dan_world	AREA	0	-3917.98	2.70	-5697.53	0	1	a Janta scout	13765	poi	Dantari Village (1)	1	STOP	idle	0	0	0	0	300	120	2
+1300298	DANTOOINE	dan_world	AREA	0	-3871.68	2.50	-5705.37	149	1	a Janta warrior	13785	poi	Dantari Village (1)	1	STOP	idle	0	0	0	0	300	120	0
+1300299	DANTOOINE	dan_world	AREA	0	-3870.56	2.50	-5690.56	149	1	a Janta clan leader	13730	poi	Dantari Village (1)	1	STOP	idle	0	0	0	0	300	120	0
+1300300	DANTOOINE	dan_world	AREA	0	-3865.15	2.50	-5704.09	159	1	a Janta warrior	13785	poi	Dantari Village (1)	1	STOP	idle	0	0	0	0	300	120	0
+1300301	DANTOOINE	dan_world	AREA	0	-3825.14	2.43	-5788.01	0	1	a Janta scout	13765	poi	Dantari Village (1)	1	STOP	idle	0	0	0	0	300	120	2
+1300302	DANTOOINE	dan_world	AREA	0	-3878.78	2.50	-5708.15	0	1	a Janta tribesman	13780	poi	Dantari Village (1)	1	STOP	idle	0	0	0	0	300	120	2
+1300303	DANTOOINE	dan_world	AREA	0	-3895.07	2.47	-5706.52	0	1	a Janta rockshaper	13760	poi	Dantari Village (1)	1	STOP	idle	0	0	0	0	300	120	2
+1300304	DANTOOINE	dan_world	AREA	0	-3886.21	2.50	-5724.82	0	1	a Janta tribesman	13780	poi	Dantari Village (1)	1	STOP	idle	0	0	0	0	300	120	2
+1300305	DANTOOINE	dan_world	AREA	0	-3869.26	2.46	-5725.01	0	1	a Janta primalist	13755	poi	Dantari Village (1)	1	STOP	idle	0	0	0	0	300	120	2
+1300306	DANTOOINE	dan_world	AREA	0	-3866.23	2.35	-5728.56	0	1	a Janta herbalist	13740	poi	Dantari Village (1)	1	STOP	idle	0	0	0	0	300	120	2
+1300307	DANTOOINE	dan_world	AREA	0	-3850.24	1.92	-5715.29	0	1	a Janta tribesman	13780	poi	Dantari Village (1)	1	STOP	idle	0	0	0	0	300	120	2
+1300308	DANTOOINE	dan_world	AREA	0	-3851.84	2.66	-5707.07	0	1	a Janta loreweaver	13750	poi	Dantari Village (1)	1	STOP	idle	0	0	0	0	300	120	2
+1300309	DANTOOINE	dan_world	AREA	0	-3817.92	3.46	-5725.23	0	1	a Janta hunter	13745	poi	Dantari Village (1)	1	STOP	idle	0	0	0	0	300	120	2
+1300310	DANTOOINE	dan_world	AREA	0	-3834.87	6.17	-5697.60	0	1	a Janta hunter	13745	poi	Dantari Village (1)	1	STOP	idle	0	0	0	0	300	120	2
+1300311	DANTOOINE	dan_world	AREA	0	-3808.17	3.50	-5724.13	0	1	a Janta loreweaver	13750	poi	Dantari Village (1)	1	STOP	idle	0	0	0	0	300	120	2
+1300312	DANTOOINE	dan_world	AREA	0	-3792.34	6.23	-5720.93	0	1	a Janta harvester	13735	poi	Dantari Village (1)	1	STOP	idle	0	0	0	0	300	120	2
+1300313	DANTOOINE	dan_world	AREA	0	-3837.63	8.00	-5756.95	0	1	a Janta hunter	13745	poi	Dantari Village (1)	1	STOP	idle	0	0	0	0	300	120	2
+1300314	DANTOOINE	dan_world	AREA	0	-3844.48	7.98	-5751.61	0	1	a Janta herbalist	13740	poi	Dantari Village (1)	1	STOP	idle	0	0	0	0	300	120	2
+1300315	DANTOOINE	dan_world	AREA	0	-3851.93	2.00	-5727.09	0	1	a Janta primalist	13755	poi	Dantari Village (1)	1	STOP	idle	0	0	0	0	300	120	2
+1300316	DANTOOINE	dan_world	AREA	0	-3824.38	1.16	-5659.03	0	1	a Janta scout	13765	poi	Dantari Village (1)	1	STOP	idle	0	0	0	0	300	120	2
+1300317	DANTOOINE	dan_world	AREA	0	-3756.43	3.41	-5717.92	0	1	a Janta scout	13765	poi	Dantari Village (1)	1	STOP	idle	0	0	0	0	300	120	2
+1300318	DANTOOINE	dan_world	AREA	0	-3897.20	14.20	-5771.20	0	1	a Janta scout	13765	poi	Dantari Village (1)	1	STOP	idle	0	0	0	0	300	120	2
+1300319	DANTOOINE	dan_world	AREA	0	-7218.38	7.00	-787.30	-43	1	a Kunga tribe member	14555	poi	Dantari Village (2)	1	STOP	idle	0	0	0	0	300	120	0
+1300320	DANTOOINE	dan_world	AREA	0	-7169.36	3.00	-927.30	0	1	a Kunga hunter	14570	poi	Dantari Village (2)	1	STOP	idle	0	0	0	0	300	120	2
+1300321	DANTOOINE	dan_world	AREA	0	-7188.91	3.00	-931.45	0	1	a Kunga herbalist	14520	poi	Dantari Village (2)	1	STOP	idle	0	0	0	0	300	120	2
+1300322	DANTOOINE	dan_world	AREA	0	-7153.89	3.00	-907.88	0	1	a Kunga shaman	14545	poi	Dantari Village (2)	1	STOP	idle	0	0	0	0	300	120	2
+1300323	DANTOOINE	dan_world	AREA	0	-7134.39	3.00	-886.98	-113	1	a Kunga tribe member	14555	poi	Dantari Village (2)	1	STOP	idle	0	0	0	0	300	120	0
+1300324	DANTOOINE	dan_world	AREA	0	-7132.86	3.00	-892.83	-102	1	a Kunga rockshaper	14535	poi	Dantari Village (2)	1	STOP	idle	0	0	0	0	300	120	0
+1300325	DANTOOINE	dan_world	AREA	0	-7129.00	3.00	-887.32	-111	1	a Kunga loreweaver	14530	poi	Dantari Village (2)	1	STOP	idle	0	0	0	0	300	120	0
+1300326	DANTOOINE	dan_world	AREA	0	-7154.71	3.00	-864.32	0	1	a Kunga hunter	14525	poi	Dantari Village (2)	1	STOP	idle	0	0	0	0	300	120	2
+1300327	DANTOOINE	dan_world	AREA	0	-7161.53	3.00	-844.89	0	1	a Kunga tribe member	14555	poi	Dantari Village (2)	1	STOP	idle	0	0	0	0	300	120	2
+1300328	DANTOOINE	dan_world	AREA	0	-7179.87	3.00	-849.32	0	1	a Kunga loreweaver	14530	poi	Dantari Village (2)	1	STOP	idle	0	0	0	0	300	120	2
+1300329	DANTOOINE	dan_world	AREA	0	-7231.23	3.00	-868.31	0	1	a Kunga primalist	14510	poi	Dantari Village (2)	1	STOP	idle	0	0	0	0	300	120	2
+1300330	DANTOOINE	dan_world	AREA	0	-7228.12	3.00	-882.03	0	1	a Kunga primalist	14510	poi	Dantari Village (2)	1	STOP	idle	0	0	0	0	300	120	2
+1300331	DANTOOINE	dan_world	AREA	0	-7215.39	3.00	-872.50	0	1	a Kunga primalist	14510	poi	Dantari Village (2)	1	STOP	idle	0	0	0	0	300	120	2
+1300332	DANTOOINE	dan_world	AREA	0	-7219.75	3.00	-891.74	0	1	a Kunga soothsayer	14550	poi	Dantari Village (2)	1	STOP	idle	0	0	0	0	300	120	2
+1300333	DANTOOINE	dan_world	AREA	0	-7245.53	2.31	-823.40	0	1	a Kunga scout	14540	poi	Dantari Village (2)	1	STOP	idle	0	0	0	0	300	120	2
+1300334	DANTOOINE	dan_world	AREA	0	-7209.88	3.00	-923.01	41	1	a Kunga clan leader	14505	poi	Dantari Village (2)	1	STOP	idle	0	0	0	0	300	120	0
+1300335	DANTOOINE	dan_world	AREA	0	-7199.33	3.00	-908.15	40	1	a Kunga warrior	14560	poi	Dantari Village (2)	1	STOP	idle	0	0	0	0	300	120	0
+1300336	DANTOOINE	dan_world	AREA	0	-7195.49	3.00	-913.13	40	1	a Kunga warrior	14560	poi	Dantari Village (2)	1	STOP	idle	0	0	0	0	300	120	0
+1300337	DANTOOINE	dan_world	AREA	0	-7124.68	3.00	-941.23	0	1	a Kunga scout	14540	poi	Dantari Village (2)	1	STOP	idle	0	0	0	0	300	120	2
+1300338	DANTOOINE	dan_world	AREA	0	5574.36	0.32	-634.73	31	1	a Mokk clan leader	19155	poi	Dantari Village (3)	1	STOP	idle	0	0	0	0	300	120	0
+1300339	DANTOOINE	dan_world	AREA	0	5573.73	0.24	-646.79	179	1	a Mokk warrior	19210	poi	Dantari Village (3)	1	STOP	idle	0	0	0	0	300	120	0
+1300340	DANTOOINE	dan_world	AREA	0	5566.81	0.16	-644.43	179	1	a Mokk warrior	19210	poi	Dantari Village (3)	1	STOP	idle	0	0	0	0	300	120	0
+1300341	DANTOOINE	dan_world	AREA	0	5479.57	12.23	-675.30	0	1	a Mokk scout	19190	poi	Dantari Village (3)	1	STOP	idle	0	0	0	0	300	120	2
+1300342	DANTOOINE	dan_world	AREA	0	5592.64	1.27	-651.40	0	1	a Mokk tribesman	19205	poi	Dantari Village (3)	1	STOP	idle	0	0	0	0	300	120	2
+1300343	DANTOOINE	dan_world	AREA	0	5590.11	1.53	-616.59	0	1	a Mokk shaman	19195	poi	Dantari Village (3)	1	STOP	idle	0	0	0	0	300	120	2
+1300344	DANTOOINE	dan_world	AREA	0	5594.57	1.12	-628.27	0	1	a Mokk shaman	19195	poi	Dantari Village (3)	1	STOP	idle	0	0	0	0	300	120	2
+1300345	DANTOOINE	dan_world	AREA	0	5559.45	0.22	-617.24	0	1	a Mokk tribesman	19205	poi	Dantari Village (3)	1	STOP	idle	0	0	0	0	300	120	2
+1300346	DANTOOINE	dan_world	AREA	0	5562.82	0.14	-653.98	0	1	a Mokk loreweaver	19175	poi	Dantari Village (3)	1	STOP	idle	0	0	0	0	300	120	2
+1300347	DANTOOINE	dan_world	AREA	0	5548.80	0.14	-653.40	0	1	a Mokk harvester	19160	poi	Dantari Village (3)	1	STOP	idle	0	0	0	0	300	120	2
+1300348	DANTOOINE	dan_world	AREA	0	5541.53	0.15	-688.85	0	1	a Mokk rockshaper	19185	poi	Dantari Village (3)	1	STOP	idle	0	0	0	0	300	120	2
+1300349	DANTOOINE	dan_world	AREA	0	5538.97	0.17	-683.14	0	1	a Mokk clan primalist	19180	poi	Dantari Village (3)	1	STOP	idle	0	0	0	0	300	120	2
+1300350	DANTOOINE	dan_world	AREA	0	5524.60	0.28	-695.56	0	1	a Mokk clan primalist	19180	poi	Dantari Village (3)	1	STOP	idle	0	0	0	0	300	120	2
+1300351	DANTOOINE	dan_world	AREA	0	5521.26	0.21	-713.74	0	1	a Mokk loreweaver	19175	poi	Dantari Village (3)	1	STOP	idle	0	0	0	0	300	120	2
+1300352	DANTOOINE	dan_world	AREA	0	5520.07	9.52	-665.32	0	1	a Mokk clan primalist	19180	poi	Dantari Village (3)	1	STOP	idle	0	0	0	0	300	120	2
+1300353	DANTOOINE	dan_world	AREA	0	5487.60	11.80	-674.00	0	1	a Mokk scout	19190	poi	Dantari Village (3)	1	STOP	idle	0	0	0	0	300	120	2
+1300354	DANTOOINE	dan_force_crystal_hunter_cave	AREA	1	24.73	-28.68	-11.69	-118	1	an untrained wielder of the Dark Side	32035	poi	Force Crystal Hunters Cave	1	STOP	idle	0	0	0	0	300	120	0
+1300355	DANTOOINE	dan_force_crystal_hunter_cave	AREA	1	23.08	-29.53	-14.12	11	1	an untrained wielder of the Dark Side	32035	poi	Force Crystal Hunters Cave	1	STOP	idle	0	0	0	0	300	120	0
+1300356	DANTOOINE	dan_force_crystal_hunter_cave	AREA	1	22.78	-28.58	-11.72	106	1	an untrained wielder of the Dark Side	32035	poi	Force Crystal Hunters Cave	1	STOP	idle	0	0	0	0	300	120	0
+1300357	DANTOOINE	dan_force_crystal_hunter_cave	AREA	2	25.70	-41.06	-52.56	-86	1	an untrained wielder of the Dark Side	32035	poi	Force Crystal Hunters Cave	1	STOP	idle	0	0	0	0	300	120	0
+1300358	DANTOOINE	dan_force_crystal_hunter_cave	AREA	2	23.63	-40.97	-52.20	99	1	an untrained wielder of the Dark Side	32035	poi	Force Crystal Hunters Cave	1	STOP	idle	0	0	0	0	300	120	0
+1300359	DANTOOINE	dan_force_crystal_hunter_cave	AREA	2	24.75	-41.16	-54.58	-1	1	an untrained wielder of the Dark Side	32035	poi	Force Crystal Hunters Cave	1	STOP	idle	0	0	0	0	300	120	0
+1300360	DANTOOINE	dan_force_crystal_hunter_cave	AREA	2	51.94	-48.60	-64.72	-6	1	a force crystal hunter	5315	poi	Force Crystal Hunters Cave	1	STOP	idle	0	0	0	0	300	120	0
+1300361	DANTOOINE	dan_force_crystal_hunter_cave	AREA	2	39.10	-45.80	-61.08	92	1	an untrained wielder of the Dark Side	32035	poi	Force Crystal Hunters Cave	1	STOP	idle	0	0	0	0	300	120	0
+1300362	DANTOOINE	dan_force_crystal_hunter_cave	AREA	2	41.84	-46.52	-60.94	-81	1	an untrained wielder of the Dark Side	32035	poi	Force Crystal Hunters Cave	1	STOP	idle	0	0	0	0	300	120	0
+1300363	DANTOOINE	dan_force_crystal_hunter_cave	AREA	2	48.88	-47.17	-8.27	-86	1	an untrained wielder of the Dark Side	32035	poi	Force Crystal Hunters Cave	1	STOP	idle	0	0	0	0	300	120	0
+1300364	DANTOOINE	dan_force_crystal_hunter_cave	AREA	2	48.10	-47.00	-6.96	-136	1	an untrained wielder of the Dark Side	32035	poi	Force Crystal Hunters Cave	1	STOP	idle	0	0	0	0	300	120	0
+1300365	DANTOOINE	dan_force_crystal_hunter_cave	AREA	2	52.48	-48.54	-18.17	-134	1	a force crystal hunter	5315	poi	Force Crystal Hunters Cave	1	STOP	idle	0	0	0	0	300	120	0
+1300366	DANTOOINE	dan_force_crystal_hunter_cave	AREA	2	50.26	-48.28	-20.34	46	1	a force crystal hunter	5315	poi	Force Crystal Hunters Cave	1	STOP	idle	0	0	0	0	300	120	0
+1300367	DANTOOINE	dan_force_crystal_hunter_cave	AREA	3	90.92	-63.49	-24.81	0	1	an untrained wielder of the Dark Side	32035	poi	Force Crystal Hunters Cave	4	STOP	idle	0	0	0	0	300	120	0
+1300368	DANTOOINE	dan_force_crystal_hunter_cave	AREA	4	67.76	-75.42	-55.26	167	1	a force crystal hunter	5315	poi	Force Crystal Hunters Cave	1	STOP	idle	0	0	0	0	300	120	0
+1300369	DANTOOINE	dan_force_crystal_hunter_cave	AREA	4	68.41	-75.61	-57.75	-16	1	a force crystal hunter	5315	poi	Force Crystal Hunters Cave	1	STOP	idle	0	0	0	0	300	120	0
+1300370	DANTOOINE	dan_force_crystal_hunter_cave	AREA	4	63.65	-75.48	-64.44	74	1	a force crystal hunter	5315	poi	Force Crystal Hunters Cave	1	STOP	idle	0	0	0	0	300	120	0
+1300371	DANTOOINE	dan_force_crystal_hunter_cave	AREA	4	65.69	-75.37	-63.86	-112	1	a force crystal hunter	5315	poi	Force Crystal Hunters Cave	1	STOP	idle	0	0	0	0	300	120	0
+1300372	DANTOOINE	dan_force_crystal_hunter_cave	AREA	4	89.69	-76.89	-62.32	-78	1	a force crystal hunter	5315	poi	Force Crystal Hunters Cave	1	STOP	idle	0	0	0	0	300	120	0
+1300373	DANTOOINE	dan_force_crystal_hunter_cave	AREA	4	87.41	-76.53	-65.64	-59	1	a force crystal hunter	5315	poi	Force Crystal Hunters Cave	1	STOP	idle	0	0	0	0	300	120	0
+1300374	DANTOOINE	dan_force_crystal_hunter_cave	AREA	4	94.38	-76.05	-83.56	-27	1	a force crystal hunter	5315	poi	Force Crystal Hunters Cave	1	STOP	idle	0	0	0	0	300	120	0
+1300375	DANTOOINE	dan_force_crystal_hunter_cave	AREA	4	90.38	-76.41	-86.09	-76	1	a force crystal hunter	5315	poi	Force Crystal Hunters Cave	1	STOP	idle	0	0	0	0	300	120	0
+1300376	DANTOOINE	dan_force_crystal_hunter_cave	AREA	2	54.73	-68.11	-36.51	96	1	a force crystal hunter	5315	poi	Force Crystal Hunters Cave	1	STOP	idle	0	0	0	0	300	120	0
+1300377	DANTOOINE	dan_force_crystal_hunter_cave	AREA	2	53.10	-68.14	-39.89	163	1	a force crystal hunter	5315	poi	Force Crystal Hunters Cave	1	STOP	idle	0	0	0	0	300	120	0
+1300378	DANTOOINE	dan_force_crystal_hunter_cave	AREA	4	64.64	-76.70	-87.42	-98	1	a force crystal hunter	5315	poi	Force Crystal Hunters Cave	1	STOP	idle	0	0	0	0	300	120	0
+1300379	DANTOOINE	dan_force_crystal_hunter_cave	AREA	4	64.14	-76.50	-85.19	-101	1	a force crystal hunter	5315	poi	Force Crystal Hunters Cave	1	STOP	idle	0	0	0	0	300	120	0
+1300380	DANTOOINE	dan_janta_cave	AREA	2	10.44	-23.72	-26.86	-9	1	a Janta tribesman	13780	poi	Janta Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300381	DANTOOINE	dan_janta_cave	AREA	3	-2.66	-40.50	-77.50	1	1	a Janta tribesman	13780	poi	Janta Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300382	DANTOOINE	dan_janta_cave	AREA	3	7.48	-40.67	-77.13	30	1	a Janta rockshaper	13760	poi	Janta Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300383	DANTOOINE	dan_janta_cave	AREA	4	42.06	-46.40	-55.03	63	1	a Janta hunter	13745	poi	Janta Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300384	DANTOOINE	dan_janta_cave	AREA	4	42.68	-46.52	-56.61	63	1	a Janta hunter	13745	poi	Janta Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300385	DANTOOINE	dan_janta_cave	AREA	4	48.59	-46.06	-98.70	-40	1	a Janta herbalist	13740	poi	Janta Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300386	DANTOOINE	dan_janta_cave	AREA	4	47.45	-46.16	-99.34	-36	1	a Janta tribesman	13780	poi	Janta Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300387	DANTOOINE	dan_janta_cave	AREA	5	-10.42	-44.96	-132.46	136	1	a Janta tribesman	13780	poi	Janta Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300388	DANTOOINE	dan_janta_cave	AREA	5	-10.04	-44.65	-135.87	72	1	a Janta tribesman	13780	poi	Janta Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300389	DANTOOINE	dan_janta_cave	AREA	5	-2.96	-45.51	-145.58	133	1	a Janta hunter	13745	poi	Janta Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300390	DANTOOINE	dan_janta_cave	AREA	5	-0.14	-45.52	-145.61	-176	1	a Janta harvester	13735	poi	Janta Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300391	DANTOOINE	dan_janta_cave	AREA	7	-14.16	-63.63	-226.59	10	1	a Janta loreweaver	13750	poi	Janta Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300392	DANTOOINE	dan_janta_cave	AREA	7	-12.11	-63.59	-226.71	13	1	a Janta loreweaver	13750	poi	Janta Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300393	DANTOOINE	dan_janta_cave	AREA	7	-1.61	-63.81	-234.96	49	1	a Janta soothsayer	13775	poi	Janta Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300394	DANTOOINE	dan_janta_cave	AREA	7	-2.84	-63.88	-233.43	49	1	a Janta soothsayer	13775	poi	Janta Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300395	DANTOOINE	dan_janta_cave	AREA	8	-66.49	-69.74	-194.31	1	1	a Janta tribesman	13780	poi	Janta Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300396	DANTOOINE	dan_janta_cave	AREA	8	-69.52	-69.29	-192.69	-1	1	a Janta tribesman	13780	poi	Janta Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300397	DANTOOINE	dan_janta_cave	AREA	8	-69.63	-68.76	-188.30	41	1	a Janta tribesman	13780	poi	Janta Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300398	DANTOOINE	dan_janta_cave	AREA	8	-66.60	-69.16	-189.26	20	1	a Janta tribesman	13780	poi	Janta Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300399	DANTOOINE	dan_janta_cave	AREA	8	-89.34	-101.90	-140.13	-7	1	a Janta primalist	13755	poi	Janta Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300400	DANTOOINE	dan_janta_cave	AREA	8	-91.42	-101.97	-142.08	-7	1	a Janta primalist	13755	poi	Janta Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300401	DANTOOINE	dan_janta_cave	AREA	8	-87.67	-101.52	-141.38	43	1	a Janta primalist	13755	poi	Janta Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300402	DANTOOINE	dan_janta_cave	AREA	8	-93.79	-70.67	-114.77	-156	1	a Janta tribesman	13780	poi	Janta Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300403	DANTOOINE	dan_janta_cave	AREA	8	-100.48	-69.59	-112.11	40	1	a Janta tribesman	13780	poi	Janta Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300404	DANTOOINE	dan_janta_cave	AREA	9	-51.14	-68.79	-108.51	-148	1	a Janta primalist	13755	poi	Janta Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300405	DANTOOINE	dan_janta_cave	AREA	9	-62.70	-70.48	-86.06	-65	1	a Janta hunter	13745	poi	Janta Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300406	DANTOOINE	dan_janta_cave	AREA	9	-61.83	-70.38	-81.85	-128	1	a Janta hunter	13745	poi	Janta Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300407	DANTOOINE	dan_janta_cave	AREA	9	-33.29	-70.88	-87.45	-46	1	a Janta tribesman	13780	poi	Janta Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300408	DANTOOINE	dan_janta_cave	AREA	9	-11.96	-69.17	-92.80	-130	1	a Janta tribesman	13780	poi	Janta Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300409	DANTOOINE	dan_janta_cave	AREA	9	-58.56	-68.80	-95.30	-114	1	a Janta primalist	13755	poi	Janta Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300410	DANTOOINE	dan_janta_cave	AREA	9	-57.04	-68.58	-98.65	-114	1	a Janta primalist	13755	poi	Janta Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300411	DANTOOINE	dan_janta_cave	AREA	11	-98.75	-100.80	-97.07	18	1	a Janta clan leader	13730	poi	Janta Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300412	DANTOOINE	dan_janta_cave	AREA	11	-85.70	-100.25	-99.52	-118	1	a Janta warrior	13785	poi	Janta Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300413	DANTOOINE	dan_world	AREA	0	7052.00	49.21	-4128.21	0	1	a Janta herbalist	13740	poi	Janta Stronghold	2	STOP	idle	0	0	0	0	300	120	0
+1300414	DANTOOINE	dan_world	AREA	0	7037.06	45.33	-4077.80	0	1	a Janta tribesman	13780	poi	Janta Stronghold	2	STOP	idle	0	0	0	0	300	120	0
+1300415	DANTOOINE	dan_jedi_temple_ruins_cave	AREA	2	54.37	-68.28	-39.93	0	1	a savage quenker	25700	poi	Jedi Temple Ruins	3	STOP	idle	0	0	0	0	300	120	6
+1300416	DANTOOINE	dan_jedi_temple_ruins_cave	AREA	6	56.88	-70.50	-119.77	0	1	a bile-drenched quenker	1050	poi	Jedi Temple Ruins	3	STOP	idle	0	0	0	0	300	120	6
+1300417	DANTOOINE	dan_jedi_temple_ruins_cave	AREA	8	116.92	-66.01	-107.56	0	1	a quenker ravager	23805	poi	Jedi Temple Ruins	3	STOP	idle	0	0	0	0	300	120	6
+1300418	DANTOOINE	dan_jedi_temple_ruins_cave	AREA	8	135.95	-66.92	-96.15	0	1	a quenker ravager	23805	poi	Jedi Temple Ruins	3	STOP	idle	0	0	0	0	300	120	6
+1300419	DANTOOINE	dan_jedi_temple_ruins_cave	AREA	8	141.53	-66.77	-125.87	0	1	a quenker ravager	23805	poi	Jedi Temple Ruins	3	STOP	idle	0	0	0	0	300	120	6
+1300420	DANTOOINE	dan_jedi_temple_ruins_cave	EGG	11	72.59	-45.78	-140.82	93	1	Drakka Judarrl	5935	poi	Jedi Temple Ruins	1	STOP	idle	0	0	0	0	300	120	0
+1300421	DANTOOINE	dan_world	EGG	0	4277.98	8.43	5350.80	7	1	Luthik Uwyr	15565	poi	Jedi Temple Ruins	1	STOP	idle	0	0	0	0	300	120	0
+1300422	DANTOOINE	dan_kunga_cave	AREA	1	-1.88	-21.52	-15.99	-5	1	a Kunga warrior	14560	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300423	DANTOOINE	dan_kunga_cave	AREA	1	-0.99	-20.53	-16.15	-5	1	a Kunga warrior	14560	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300424	DANTOOINE	dan_kunga_cave	AREA	2	-39.19	-31.81	-26.48	-9	1	a Kunga harvester	14515	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300425	DANTOOINE	dan_kunga_cave	AREA	2	-12.51	-30.04	-41.57	155	1	a Kunga hunter	14525	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300426	DANTOOINE	dan_kunga_cave	AREA	2	-11.61	-30.30	-49.17	21	1	a Kunga tribe member	14555	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300427	DANTOOINE	dan_kunga_cave	AREA	2	-26.58	-28.73	-27.82	60	1	a Kunga herbalist	14520	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300428	DANTOOINE	dan_kunga_cave	PATROL	4	-63.19	-44.36	-14.54	0	1	a Kunga warrior	14560	poi	Kunga Stronghold	1	STOP	idle	0	999	0	0	300	120	0
+1300429	DANTOOINE	dan_kunga_cave	AREA	5	-71.68	-46.98	-67.62	-73	1	a Kunga warrior	14560	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300430	DANTOOINE	dan_kunga_cave	AREA	5	-68.61	-46.94	-73.75	-50	1	a Kunga shaman	14545	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300431	DANTOOINE	dan_kunga_cave	PATROL	6	-138.61	-49.35	-56.54	0	1	a Kunga warrior	14560	poi	Kunga Stronghold	1	STOP	idle	0	999	0	0	300	120	0
+1300432	DANTOOINE	dan_kunga_cave	PATROL	10	-167.57	-49.44	-55.82	0	1	a Kunga warrior	14560	poi	Kunga Stronghold	1	STOP	idle	0	999	0	0	300	120	0
+1300433	DANTOOINE	dan_kunga_cave	AREA	10	-163.28	-49.48	-83.20	-68	1	a Kunga harvester	14515	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300434	DANTOOINE	dan_kunga_cave	AREA	10	-166.23	-49.63	-91.52	-161	1	a Kunga harvester	14515	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300435	DANTOOINE	dan_kunga_cave	AREA	10	-170.19	-49.89	-64.92	87	1	a Kunga scout	14540	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300436	DANTOOINE	dan_kunga_cave	AREA	10	-167.68	-49.50	-64.63	-94	1	a Kunga hunter	14525	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300437	DANTOOINE	dan_kunga_cave	AREA	10	-175.16	-49.67	-73.29	76	1	a Kunga scout	14540	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300438	DANTOOINE	dan_kunga_cave	AREA	12	-137.71	-54.30	-97.63	-23	1	a Kunga loreweaver	14530	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300439	DANTOOINE	dan_kunga_cave	PATROL	12	-154.32	-55.43	-123.51	0	1	a Kunga warrior	14560	poi	Kunga Stronghold	1	STOP	idle	0	999	0	0	300	120	0
+1300440	DANTOOINE	dan_kunga_cave	AREA	11	-132.18	-53.94	-81.61	165	1	a Kunga tribe member	14555	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300441	DANTOOINE	dan_kunga_cave	AREA	12	-144.64	-54.06	-95.14	57	1	a Kunga tribe member	14555	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300442	DANTOOINE	dan_kunga_cave	AREA	11	-106.14	-54.44	-84.83	85	1	a Kunga warrior	14560	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300443	DANTOOINE	dan_kunga_cave	PATROL	14	-80.11	-61.89	-60.83	0	1	a Kunga warrior	14560	poi	Kunga Stronghold	1	STOP	idle	0	999	0	0	300	120	0
+1300444	DANTOOINE	dan_kunga_cave	AREA	16	-107.48	-57.69	-25.55	-93	1	a Kunga soothsayer	14550	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300445	DANTOOINE	dan_kunga_cave	AREA	16	-110.43	-57.82	-25.75	106	1	a Kunga soothsayer	14550	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300446	DANTOOINE	dan_kunga_cave	AREA	16	-120.19	-57.77	-33.79	-8	1	a Kunga tribe member	14555	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300447	DANTOOINE	dan_kunga_cave	PATROL	17	-104.28	-42.45	-10.85	0	1	a Kunga warrior	14560	poi	Kunga Stronghold	1	STOP	idle	0	999	0	0	300	120	0
+1300448	DANTOOINE	dan_kunga_cave	AREA	6	-101.88	-35.98	-65.85	71	1	a Kunga warrior	14560	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300449	DANTOOINE	dan_kunga_cave	AREA	6	-129.17	-34.14	-63.13	-46	1	a Kunga warrior	14560	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300450	DANTOOINE	dan_kunga_cave	AREA	11	-112.32	-38.37	-79.18	-110	1	a Kunga tribe member	14555	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300451	DANTOOINE	dan_kunga_cave	AREA	11	-115.11	-38.55	-80.22	83	1	a Kunga tribe member	14555	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300452	DANTOOINE	dan_kunga_cave	AREA	9	-101.23	-39.79	-113.14	89	1	a Kunga warrior	14560	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300453	DANTOOINE	dan_kunga_cave	AREA	9	-71.33	-37.89	-119.94	-83	1	a Kunga tribe member	14555	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300454	DANTOOINE	dan_kunga_cave	AREA	5	-65.05	-30.77	-65.52	20	1	a Kunga tribe member	14555	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300455	DANTOOINE	dan_kunga_cave	AREA	5	-62.22	-30.91	-60.47	-134	1	a Kunga tribe member	14555	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300456	DANTOOINE	dan_kunga_cave	AREA	5	-67.29	-31.60	-56.87	-81	1	a Kunga tribe member	14555	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300457	DANTOOINE	dan_kunga_cave	AREA	5	-63.55	-30.65	-51.20	167	1	a Kunga harvester	14515	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300458	DANTOOINE	dan_kunga_cave	AREA	5	-63.07	-30.22	-71.29	174	1	a Kunga rockshaper	14535	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300459	DANTOOINE	dan_kunga_cave	PATROL	3	-40.00	-29.71	-49.86	0	1	a Kunga warrior	14560	poi	Kunga Stronghold	1	STOP	idle	0	999	0	0	300	120	0
+1300460	DANTOOINE	dan_kunga_cave	AREA	19	13.33	-32.75	-54.43	26	1	a Kunga warrior	14560	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300461	DANTOOINE	dan_kunga_cave	AREA	19	18.52	-33.25	-55.20	-42	1	a Kunga warrior	14560	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300462	DANTOOINE	dan_kunga_cave	AREA	20	-8.56	-34.75	-82.54	11	1	a Kunga loreweaver	14530	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300463	DANTOOINE	dan_kunga_cave	AREA	22	-12.76	-43.41	-93.77	-166	1	a Kunga clan primalist	14510	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300464	DANTOOINE	dan_kunga_cave	AREA	22	-12.77	-43.88	-101.44	-103	1	a Kunga clan primalist	14510	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300465	DANTOOINE	dan_kunga_cave	AREA	22	-38.16	-45.04	-103.09	-94	1	a Kunga tribe member	14555	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300466	DANTOOINE	dan_kunga_cave	AREA	22	-39.91	-44.48	-113.52	-19	1	a Kunga tribe member	14555	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300467	DANTOOINE	dan_kunga_cave	AREA	22	-33.62	-43.47	-91.74	107	1	a Kunga clan primalist	14510	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300468	DANTOOINE	dan_kunga_cave	PATROL	9	-99.72	-53.73	-112.99	0	1	a Kunga warrior	14560	poi	Kunga Stronghold	1	STOP	idle	0	999	0	0	300	120	0
+1300469	DANTOOINE	dan_kunga_cave	AREA	9	-81.40	-52.87	-113.38	88	1	a Kunga warrior	14560	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300470	DANTOOINE	dan_kunga_cave	AREA	23	-118.24	-53.63	-113.12	91	1	a Kunga warrior	14560	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300471	DANTOOINE	dan_kunga_cave	AREA	9	-104.21	-69.45	-104.90	117	1	a Kunga clan primalist	14510	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300472	DANTOOINE	dan_kunga_cave	AREA	9	-90.25	-70.98	-121.43	0	1	a Kunga clan primalist	14510	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300473	DANTOOINE	dan_kunga_cave	AREA	9	-75.25	-71.32	-119.86	-94	1	a Kunga clan primalist	14510	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300474	DANTOOINE	dan_kunga_cave	AREA	9	-78.26	-71.76	-120.11	90	1	a Kunga clan primalist	14510	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300475	DANTOOINE	dan_kunga_cave	AREA	25	-61.39	-65.85	-141.59	-83	1	a Kunga warrior	14560	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300476	DANTOOINE	dan_kunga_cave	AREA	25	-61.43	-65.89	-137.44	-109	1	a Kunga warrior	14560	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300477	DANTOOINE	dan_kunga_cave	AREA	28	-58.99	-65.04	-160.99	-28	1	a Kunga warrior	14560	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300478	DANTOOINE	dan_kunga_cave	AREA	28	-73.73	-65.50	-160.65	39	1	a Kunga warrior	14560	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300479	DANTOOINE	dan_kunga_cave	AREA	28	-67.26	-65.24	-181.17	7	1	a Kunga warrior	14560	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300480	DANTOOINE	dan_kunga_cave	AREA	28	-47.10	-65.63	-190.01	-35	1	a Kunga warrior	14560	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300481	DANTOOINE	dan_kunga_cave	AREA	29	-56.67	-65.62	-221.41	1	1	a Kunga warrior	14560	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300482	DANTOOINE	dan_kunga_cave	AREA	29	-51.15	-65.44	-221.90	-6	1	a Kunga warrior	14560	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300483	DANTOOINE	dan_kunga_cave	AREA	29	-59.21	-66.34	-237.96	10	1	a Kunga clan leader	14505	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300484	DANTOOINE	dan_kunga_cave	AREA	29	-65.05	-65.39	-232.89	81	1	a Kunga loreweaver	14530	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300485	DANTOOINE	dan_kunga_cave	AREA	29	-54.89	-66.16	-236.39	-57	1	a Kunga shaman	14545	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300486	DANTOOINE	dan_kunga_cave	AREA	28	-81.10	-66.33	-186.61	0	1	a Kunga clan primalist	14510	poi	Kunga Stronghold	2	STOP	idle	0	0	0	0	300	120	0
+1300487	DANTOOINE	dan_kunga_cave	AREA	28	-44.47	-66.52	-179.65	0	1	a Kunga clan primalist	14510	poi	Kunga Stronghold	2	STOP	idle	0	0	0	0	300	120	0
+1300488	DANTOOINE	dan_kunga_cave	AREA	26	-1.01	-67.45	-81.18	54	1	a Kunga soothsayer	14550	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300489	DANTOOINE	dan_kunga_cave	AREA	20	18.10	-67.17	-67.33	-103	1	a Kunga shaman	14545	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300490	DANTOOINE	dan_kunga_cave	AREA	27	53.51	-65.70	-87.48	-85	1	a Kunga soothsayer	14550	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300491	DANTOOINE	dan_kunga_cave	AREA	27	28.29	-66.36	-86.32	76	1	a Kunga soothsayer	14550	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300492	DANTOOINE	dan_kunga_cave	AREA	27	38.94	-69.35	-110.02	-45	1	a Kunga loreweaver	14530	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300493	DANTOOINE	dan_kunga_cave	AREA	27	35.29	-69.09	-106.48	131	1	a Kunga loreweaver	14530	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300494	DANTOOINE	dan_kunga_cave	AREA	26	0.37	-71.13	-104.09	0	1	a Kunga clan primalist	14510	poi	Kunga Stronghold	2	STOP	idle	0	0	0	0	300	120	0
+1300495	DANTOOINE	dan_kunga_cave	AREA	26	-15.59	-67.70	-105.96	0	1	a Kunga clan primalist	14510	poi	Kunga Stronghold	2	STOP	idle	0	0	0	0	300	120	0
+1300496	DANTOOINE	dan_world	AREA	0	-145.15	7.25	-412.16	-53	1	a Kunga warrior	14560	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300497	DANTOOINE	dan_world	AREA	0	-147.61	7.16	-410.53	91	1	a Kunga warrior	14560	poi	Kunga Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300498	DANTOOINE	dan_world	AREA	0	-173.50	7.50	-396.76	0	1	a Kunga warrior	14560	poi	Kunga Stronghold	2	STOP	idle	0	0	0	0	300	120	4
+1300499	DANTOOINE	dan_world	AREA	0	-7074.98	1.99	-3332.33	30	1	a Mokk warrior	19210	poi	Mokk Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300500	DANTOOINE	dan_world	AREA	0	-7074.32	2.02	-3330.55	-162	1	a Mokk warrior	19210	poi	Mokk Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300501	DANTOOINE	dan_world	AREA	0	-7072.65	2.24	-3340.59	-127	1	a Mokk loreweaver	19175	poi	Mokk Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300502	DANTOOINE	dan_world	AREA	0	-7072.50	2.01	-3320.72	-97	1	a Mokk warrior	19210	poi	Mokk Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300503	DANTOOINE	dan_world	AREA	0	-7067.09	1.94	-3337.00	119	1	a Mokk rockshaper	19185	poi	Mokk Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300504	DANTOOINE	dan_world	AREA	0	-7065.56	1.95	-3340.06	-35	1	a Mokk hunter	19170	poi	Mokk Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300505	DANTOOINE	dan_world	AREA	0	-7064.73	1.97	-3337.16	-149	1	a Mokk rockshaper	19185	poi	Mokk Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300506	DANTOOINE	dan_world	AREA	0	-7060.94	2.48	-3356.68	135	1	a Mokk warrior	19210	poi	Mokk Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300507	DANTOOINE	dan_world	AREA	0	-7061.70	2.41	-3359.82	-27	1	a Mokk hunter	19170	poi	Mokk Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300508	DANTOOINE	dan_world	AREA	0	-7060.48	2.49	-3358.11	-89	1	a Mokk scout	19190	poi	Mokk Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300509	DANTOOINE	dan_world	AREA	0	-7059.34	2.24	-3346.09	129	1	a Mokk warrior	19210	poi	Mokk Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300510	DANTOOINE	dan_world	AREA	0	-7057.09	2.03	-3307.64	55	1	a Mokk hunter	19170	poi	Mokk Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300511	DANTOOINE	dan_world	AREA	0	-7055.66	2.01	-3306.58	-130	1	a Mokk scout	19190	poi	Mokk Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300512	DANTOOINE	dan_world	AREA	0	-7055.25	2.46	-3346.07	179	1	a Mokk warrior	19210	poi	Mokk Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300513	DANTOOINE	dan_world	AREA	0	-7051.84	2.30	-3334.73	71	1	a Mokk soothsayer	19200	poi	Mokk Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300514	DANTOOINE	dan_world	AREA	0	-7051.94	2.19	-3332.08	114	1	a Mokk loreweaver	19175	poi	Mokk Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300515	DANTOOINE	dan_world	AREA	0	-7050.55	2.11	-3330.06	147	1	a Mokk shaman	19195	poi	Mokk Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300516	DANTOOINE	dan_world	AREA	0	-7049.26	1.93	-3312.30	95	1	a Mokk rockshaper	19185	poi	Mokk Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300517	DANTOOINE	dan_world	AREA	0	-7048.77	2.76	-3347.81	179	1	a Mokk warrior	19210	poi	Mokk Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300518	DANTOOINE	dan_world	AREA	0	-7047.02	2.17	-3329.06	-163	1	a Mokk clan leader	19155	poi	Mokk Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300519	DANTOOINE	dan_world	AREA	0	-7046.48	3.01	-3351.75	-146	1	a Mokk warrior	19210	poi	Mokk Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300520	DANTOOINE	dan_world	AREA	0	-7045.03	2.58	-3336.85	-46	1	a Mokk tribesman	19205	poi	Mokk Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300521	DANTOOINE	dan_world	AREA	0	-7044.32	3.10	-3355.51	126	1	a Mokk scout	19190	poi	Mokk Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300522	DANTOOINE	dan_world	AREA	0	-7043.63	2.38	-3331.72	-117	1	a Mokk shaman	19195	poi	Mokk Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300523	DANTOOINE	dan_world	AREA	0	-7043.37	2.53	-3334.29	-85	1	a Mokk loreweaver	19175	poi	Mokk Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300524	DANTOOINE	dan_world	AREA	0	-7040.54	3.12	-3355.59	-127	1	a Mokk scout	19190	poi	Mokk Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300525	DANTOOINE	dan_world	AREA	0	-7039.69	1.10	-3305.01	0	1	a Mokk warrior	19210	poi	Mokk Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300526	DANTOOINE	dan_world	AREA	0	-7039.20	3.05	-3353.35	141	1	a Mokk warrior	19210	poi	Mokk Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300527	DANTOOINE	dan_world	AREA	0	-7038.37	2.01	-3315.89	98	1	a Mokk scout	19190	poi	Mokk Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300528	DANTOOINE	dan_world	AREA	0	-7038.00	1.33	-3305.00	0	1	a Mokk warrior	19210	poi	Mokk Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300529	DANTOOINE	dan_world	AREA	0	-7034.31	1.99	3316.90	-64	1	a Mokk warrior	19210	poi	Mokk Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300530	DANTOOINE	dan_world	AREA	0	-7034.03	2.69	-3346.34	-158	1	a Mokk rockshaper	19185	poi	Mokk Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300531	DANTOOINE	dan_world	AREA	0	-7032.14	2.78	-3339.08	24	1	a Mokk rockshaper	19185	poi	Mokk Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300532	DANTOOINE	dan_world	AREA	0	-7031.75	2.93	-3352.42	159	1	a Mokk rockshaper	19185	poi	Mokk Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300533	DANTOOINE	dan_world	AREA	0	-7030.51	2.81	-3335.55	-159	1	a Mokk warrior	19210	poi	Mokk Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300534	DANTOOINE	dan_world	AREA	0	-7029.42	1.96	-3315.57	25	1	a Mokk rockshaper	19185	poi	Mokk Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300535	DANTOOINE	dan_world	AREA	0	-7026.00	1.93	-3309.61	59	1	a Mokk hunter	19170	poi	Mokk Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300536	DANTOOINE	dan_world	AREA	0	-7021.41	2.26	-3306.16	-143	1	a Mokk hunter	19170	poi	Mokk Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1300537	DANTOOINE	dan_warren	AREA	6	-26.15	-20.00	-23.32	0	1	a hostile huurton	32955	poi	The Warren	3	STOP	idle	0	0	0	0	300	120	6
+1300538	DANTOOINE	dan_warren	AREA	6	-17.51	-20.00	-10.65	0	1	a hostile huurton	32955	poi	The Warren	3	STOP	idle	0	0	0	0	300	120	6
+1300539	DANTOOINE	dan_warren	AREA	6	-6.82	-20.00	-24.61	0	1	a hostile huurton	32955	poi	The Warren	3	STOP	idle	0	0	0	0	300	120	6
+1300540	DANTOOINE	dan_warren	AREA	6	-2.25	-20.00	-9.93	0	1	a hostile huurton	32955	poi	The Warren	3	STOP	idle	0	0	0	0	300	120	6
+1300541	DANTOOINE	dan_warren	AREA	6	8.56	-20.00	-29.95	0	1	an Imperial worker	32975	poi	The Warren	3	STOP	idle	0	0	0	0	300	120	6
+1300542	DANTOOINE	dan_warren	AREA	6	13.90	-20.00	-14.64	0	1	an Imperial worker	32975	poi	The Warren	3	STOP	idle	0	0	0	0	300	120	6
+1300543	DANTOOINE	dan_warren	AREA	7	-24.93	-20.00	-47.41	0	1	an Imperial worker	32975	poi	The Warren	3	STOP	idle	0	0	0	0	300	120	6
+1300544	DANTOOINE	dan_warren	AREA	7	-23.18	-20.00	-38.92	0	1	an Imperial worker	32975	poi	The Warren	3	STOP	idle	0	0	0	0	300	120	6
+1300545	DANTOOINE	dan_warren	AREA	7	-8.34	-20.00	-46.05	0	1	a hostile huurton	32955	poi	The Warren	3	STOP	idle	0	0	0	0	300	120	6
+1300546	DANTOOINE	dan_warren	AREA	7	-6.59	-20.00	-39.44	0	1	a hostile huurton	32955	poi	The Warren	3	STOP	idle	0	0	0	0	300	120	6
+1300547	DANTOOINE	dan_warren	AREA	11	-40.67	-20.00	-59.05	0	1	a fierce huurton	32950	poi	The Warren	1	STOP	idle	0	0	0	0	300	120	0
+1300548	DANTOOINE	dan_warren	AREA	14	-27.26	-20.00	-96.41	90	1	a savage huurton	32960	poi	The Warren	1	STOP	idle	0	0	0	0	300	120	0
+1300549	DANTOOINE	dan_warren	AREA	13	-62.80	-18.00	-110.52	0	1	a hostile huurton	32955	poi	The Warren	3	STOP	idle	0	0	0	0	300	120	6
+1300550	DANTOOINE	dan_warren	AREA	13	-81.31	-18.00	-97.00	0	1	a hostile huurton	32955	poi	The Warren	3	STOP	idle	0	0	0	0	300	120	6
+1300551	DANTOOINE	dan_warren	AREA	13	-71.97	-18.00	-85.47	0	1	a hostile huurton	32955	poi	The Warren	3	STOP	idle	0	0	0	0	300	120	6
+1300552	DANTOOINE	dan_warren	AREA	13	-63.01	-18.00	-97.74	0	1	an Imperial worker	32975	poi	The Warren	3	STOP	idle	0	0	0	0	300	120	6
+1300553	DANTOOINE	dan_warren	AREA	13	-82.06	-18.00	-111.65	0	1	an Imperial worker	32975	poi	The Warren	3	STOP	idle	0	0	0	0	300	120	6
+1300554	DANTOOINE	dan_warren	AREA	13	-83.28	-18.00	-81.84	0	1	an Imperial worker	32975	poi	The Warren	3	STOP	idle	0	0	0	0	300	120	6
+1300555	DANTOOINE	dan_warren	AREA	21	3.34	-28.00	-70.44	0	1	an enhanced droid	32875	poi	The Warren	1	STOP	idle	0	0	0	0	300	120	0
+1300556	DANTOOINE	dan_warren	AREA	18	-24.78	-28.00	-39.22	0	1	a scientist	32995	poi	The Warren	3	STOP	idle	0	0	0	0	180	120	6
+1300557	DANTOOINE	dan_warren	AREA	18	2.08	-28.00	-44.47	0	1	a scientist	32995	poi	The Warren	3	STOP	idle	0	0	0	0	180	120	6
+1300558	DANTOOINE	dan_warren	AREA	18	-30.20	-28.00	-54.62	0	1	a rogue droid	32895	poi	The Warren	1	STOP	idle	0	0	0	0	300	120	0
+1300559	DANTOOINE	dan_warren	AREA	18	-19.01	-28.00	-45.46	0	1	a rogue droid	32890	poi	The Warren	1	STOP	idle	0	0	0	0	300	120	0
+1300560	DANTOOINE	dan_warren	AREA	18	-5.38	-28.00	-40.80	0	1	a rogue droid	32885	poi	The Warren	1	STOP	idle	0	0	0	0	300	120	0
+1300561	DANTOOINE	dan_warren	AREA	18	3.46	-28.00	-51.84	0	1	a rogue droid	32880	poi	The Warren	1	STOP	idle	0	0	0	0	300	120	0
+1300562	DANTOOINE	dan_warren	AREA	25	22.57	-20.00	-107.50	0	1	a rogue droid	32885	poi	The Warren	1	STOP	idle	0	0	0	0	300	120	0
+1300563	DANTOOINE	dan_warren	AREA	25	17.38	-20.00	-93.93	0	1	a rogue droid	32885	poi	The Warren	1	STOP	idle	0	0	0	0	300	120	0
+1300564	DANTOOINE	dan_warren	AREA	25	38.14	-20.00	-104.71	-83	1	a computer scientist	32985	poi	The Warren	1	STOP	idle	0	0	0	0	300	120	0
+1300565	DANTOOINE	dan_warren	AREA	27	-26.88	-28.00	-130.64	0	1	an Unstable Cracktooth Narglatch	34310	poi	The Warren	1	STOP	idle	0	0	0	0	1800	1800	0
+1300566	DANTOOINE	dan_warren	EGG	27	-41.02	-28.00	-194.88	22	1	a tusk-cat	33040	poi	The Warren	1	STOP	idle	0	0	0	0	300	120	0
+1300567	DANTOOINE	dan_warren	EGG	27	-48.37	-28.00	-192.56	-22	1	a tusk-cat	33040	poi	The Warren	1	STOP	idle	0	0	0	0	300	120	0
+1300568	DANTOOINE	dan_warren	EGG	27	-16.23	-28.00	-193.77	12	1	a slice hound	33000	poi	The Warren	1	STOP	idle	0	0	0	0	300	120	0
+1300569	DANTOOINE	dan_warren	EGG	27	-8.96	-28.00	-189.47	12	1	a slice hound	33000	poi	The Warren	1	STOP	idle	0	0	0	0	300	120	0
+1300570	DANTOOINE	dan_warren	EGG	27	3.58	-28.00	-190.53	0	1	a warren thune	33035	poi	The Warren	1	STOP	idle	0	0	0	0	300	120	0
+1300571	DANTOOINE	dan_warren	EGG	27	-34.71	-28.00	-130.22	0	1	a sludgepanther	33005	poi	The Warren	1	STOP	idle	0	0	0	0	300	120	0
+1300572	DANTOOINE	dan_warren	EGG	27	28.80	-28.00	-133.92	0	1	a sludgepanther	33005	poi	The Warren	1	STOP	idle	0	0	0	0	300	120	0
+1300573	DANTOOINE	dan_warren	EGG	27	3.07	-28.00	-129.26	-90	1	a bol	32900	poi	The Warren	1	STOP	idle	0	0	0	0	300	120	0
+1300574	DANTOOINE	dan_warren	EGG	27	5.18	-28.00	-111.10	-53	1	a bol	32900	poi	The Warren	1	STOP	idle	0	0	0	0	300	120	0
+1300575	DANTOOINE	dan_warren	EGG	29	-56.14	-28.00	-88.62	-155	1	Dirk Maggin (a dying loyalist)	34315	poi	The Warren	1	STOP	idle	0	0	0	0	300	120	0
+1300576	DANTOOINE	dan_warren	AREA	32	-78.46	-20.00	-1.01	0	1	a Teraud loyalist cyborg	33025	poi	The Warren	3	STOP	idle	0	0	0	0	300	120	6
+1300577	DANTOOINE	dan_warren	AREA	41	-36.96	-52.00	-94.43	0	1	an Imperial officer	32970	poi	The Warren	4	STOP	idle	0	0	0	0	300	120	8
+1300578	DANTOOINE	dan_warren	AREA	38	-63.21	-52.00	-70.77	0	1	an Imperial worker	32980	poi	The Warren	4	STOP	idle	0	0	0	0	300	120	8
+1300579	DANTOOINE	dan_warren	EGG	43	35.45	-54.00	-117.61	0	1	M'anx Try (a researcher)	34320	poi	The Warren	1	STOP	idle	0	0	0	0	300	120	0
+1300580	DANTOOINE	dan_warren	AREA	44	62.36	-54.00	-128.69	-48	1	a crazed scientist	32990	poi	The Warren	1	STOP	idle	0	0	0	0	300	120	0
+1300581	DANTOOINE	dan_warren	AREA	44	59.34	-54.00	-121.10	141	1	a crazed scientist	32990	poi	The Warren	1	STOP	idle	0	0	0	0	300	120	0
+1300582	DANTOOINE	dan_warren	AREA	69	19.21	-52.00	-33.75	0	1	a hostile huurton	32955	poi	The Warren	3	STOP	idle	0	0	0	0	300	120	6
+1300583	DANTOOINE	dan_warren	AREA	69	-24.43	-52.00	-72.81	0	1	a hostile huurton	32955	poi	The Warren	3	STOP	idle	0	0	0	0	300	120	6
+1300584	DANTOOINE	dan_warren	AREA	69	13.85	-52.00	-52.92	0	1	a Teraud loyalist cyborg	33025	poi	The Warren	3	STOP	idle	0	0	0	0	300	120	6
+1300585	DANTOOINE	dan_warren	AREA	69	-27.59	-52.00	-35.34	0	1	a Teraud loyalist	33015	poi	The Warren	3	STOP	idle	0	0	0	0	300	120	6
+1300586	DANTOOINE	dan_warren	AREA	69	-5.86	-52.00	-70.70	0	1	a Teraud loyalist	33015	poi	The Warren	3	STOP	idle	0	0	0	0	300	120	6
+1300587	DANTOOINE	dan_warren	AREA	69	-22.71	-52.00	-55.51	0	1	a stormtrooper	33010	poi	The Warren	3	STOP	idle	0	0	0	0	300	120	6
+1300588	DANTOOINE	dan_warren	AREA	69	1.28	-52.00	-36.22	0	1	an Imperial officer	32965	poi	The Warren	3	STOP	idle	0	0	0	0	300	120	6
+1300589	DANTOOINE	dan_warren	AREA	69	15.04	-52.00	-69.36	0	1	an Imperial officer	32965	poi	The Warren	3	STOP	idle	0	0	0	0	300	120	6
+1300590	DANTOOINE	dan_warren	AREA	48	-61.32	-52.00	-8.59	0	1	a cyborg huurton	32925	poi	The Warren	2	STOP	idle	0	0	0	0	300	120	4
+1300591	DANTOOINE	dan_warren	AREA	48	-71.10	-52.00	-12.03	0	1	a cyborg huurton	32925	poi	The Warren	2	STOP	idle	0	0	0	0	300	120	4
+1300592	DANTOOINE	dan_warren	EGG	54	-59.62	-76.00	-35.37	44	1	Mirla (a worker)	34325	poi	The Warren	1	STOP	idle	0	0	0	0	300	120	0
+1300593	DANTOOINE	dan_warren	AREA	45	-27.07	-54.00	-147.77	0	1	a Teraud loyalist	33015	poi	The Warren	3	STOP	idle	0	0	0	0	300	120	6
+1300594	DANTOOINE	dan_warren	AREA	45	-25.62	-54.00	-131.37	0	1	a Teraud loyalist	33015	poi	The Warren	3	STOP	idle	0	0	0	0	300	120	6
+1300595	DANTOOINE	dan_warren	AREA	45	-10.03	-54.00	-140.10	0	1	an Imperial officer	32965	poi	The Warren	3	STOP	idle	0	0	0	0	300	120	6
+1300596	DANTOOINE	dan_warren	AREA	45	-15.29	-54.00	-144.12	0	1	a stormtrooper	33010	poi	The Warren	3	STOP	idle	0	0	0	0	300	120	6
+1300597	DANTOOINE	dan_warren	AREA	45	-14.31	-54.00	-131.51	0	1	a stormtrooper	33010	poi	The Warren	3	STOP	idle	0	0	0	0	300	120	6
+1300598	DANTOOINE	dan_warren	AREA	78	85.87	-60.00	-54.67	0	1	a rogue droid	32880	poi	The Warren	4	STOP	idle	0	0	0	0	300	120	8
+1300599	DANTOOINE	dan_warren	AREA	60	-8.88	-60.00	33.21	0	1	a cyborg slice hound	32930	poi	The Warren	4	STOP	idle	0	0	0	0	300	120	8
+1300600	DANTOOINE	dan_warren	AREA	60	5.00	-60.00	29.92	0	1	a Teraud loyalist	33015	poi	The Warren	3	STOP	idle	0	0	0	0	300	120	6
+1300601	DANTOOINE	dan_warren	AREA	60	6.83	-60.00	35.93	0	1	a Teraud loyalist	33015	poi	The Warren	3	STOP	idle	0	0	0	0	300	120	6
+1300602	DANTOOINE	dan_warren	AREA	65	77.10	-68.00	20.94	-90	1	a Teraud loyalist cyborg	33025	poi	The Warren	1	STOP	idle	0	0	0	0	300	120	0
+1300603	DANTOOINE	dan_warren	AREA	66	71.34	-68.00	39.10	90	1	Doctor Knag (a researcher)	34330	poi	The Warren	1	STOP	idle	0	0	0	0	300	120	0
+1300604	DANTOOINE	dan_warren	AREA	55	-52.79	-52.00	16.76	110	1	a cyborg bol	32915	poi	The Warren	1	STOP	idle	0	0	0	0	300	120	0
+1300605	DANTOOINE	dan_warren	AREA	55	-46.43	-52.00	16.66	-70	1	a scientist	33030	poi	The Warren	1	STOP	idle	0	0	0	0	300	120	0
+1300606	DANTOOINE	dan_warren	AREA	56	-85.39	-52.00	1.41	0	1	a scientist	32995	poi	The Warren	2	STOP	idle	0	0	0	0	300	120	4
+1300607	DANTOOINE	dan_warren	AREA	56	-96.68	-52.00	16.67	90	1	a scientist	32995	poi	The Warren	2	STOP	idle	0	0	0	0	300	120	4
+1300608	DANTOOINE	dan_warren	AREA	56	-84.34	-52.00	28.45	-179	1	a scientist	32995	poi	The Warren	2	STOP	idle	0	0	0	0	300	120	4
+1300609	DANTOOINE	dan_warren	AREA	58	-61.85	-52.00	50.27	-179	1	a cyborg dune lizard	32920	poi	The Warren	1	STOP	idle	0	0	0	0	300	120	0
+1300610	DANTOOINE	dan_warren	AREA	58	-50.11	-52.00	55.47	-179	1	a cyborg dune lizard	32920	poi	The Warren	1	STOP	idle	0	0	0	0	300	120	0
+1300611	DANTOOINE	dan_warren	AREA	74	23.92	-84.00	-20.61	0	1	an altered AT-ST	32870	poi	The Warren	1	STOP	idle	0	0	0	0	900	900	0
+1300612	DANTOOINE	dan_warren	AREA	63	23.28	-60.00	1.10	0	1	a Teraud loyalist cyborg	33025	poi	The Warren	1	STOP	idle	0	0	0	0	300	120	0
+1300613	DANTOOINE	dan_warren	AREA	64	28.76	-60.00	-19.20	-33	1	an Imperial worker	32980	poi	The Warren	1	STOP	idle	0	0	0	0	300	120	0
+1300614	DANTOOINE	dan_warren	AREA	82	117.87	-60.00	-77.03	-90	1	an Unstable Wing-clipped Hawk Bat	34335	poi	The Warren	1	STOP	idle	0	0	0	0	1800	1800	0
+1300615	DANTOOINE	dan_warren	AREA	80	95.75	-84.00	-98.40	0	1	a Teraud loyalist	33015	poi	The Warren	4	STOP	idle	0	0	0	0	300	120	8
+1300616	DANTOOINE	dan_warren	AREA	84	91.75	-52.00	11.09	0	1	a Teraud loyalist	33015	poi	The Warren	3	STOP	idle	0	0	0	0	300	120	6
+1300617	DANTOOINE	dan_warren	AREA	84	87.48	-52.00	10.89	0	1	a Teraud loyalist commander	33020	poi	The Warren	1	STOP	idle	0	0	0	0	300	120	2
+1300618	DANTOOINE	dan_warren	AREA	87	118.43	-52.00	39.37	179	1	Bors Teraud	32910	poi	The Warren	1	STOP	idle	0	0	0	0	900	900	0
+1300619	DANTOOINE	dan_warren	EGG	9	-10.04	-20.00	-59.88	101	1	Phy Hudgen (an escaped worker)	34340	poi	The Warren	1	STOP	idle	0	0	0	0	300	120	0
+1300620	DANTOOINE	dan_warren	AREA	46	28.87	-50.00	-149.01	-90	1	Jerrd Sonclim (a guard)	34345	poi	The Warren	1	STOP	idle	0	0	0	0	300	120	0
+1300621	DANTOOINE	dan_world	PATROL	0	-462.07	15.51	-3800.02	0	1	O'Evitt Piboi (an escapee)	34305	poi	The Warren	1	STOP	idle	0	999	0	0	300	120	0

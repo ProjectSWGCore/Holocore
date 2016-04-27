@@ -186,7 +186,7 @@ public class DatatableData extends ClientData {
 					break;
 				
 				case "h": // CRC
-					table[r][t] = chunk.readUInt();
+					table[r][t] = chunk.readInt();
 					break;
 					
 				case "i": // Integer

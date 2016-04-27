@@ -44,8 +44,11 @@ import resources.Race;
 import resources.SkillMod;
 import resources.collections.SWGList;
 import resources.collections.SWGMap;
+import resources.collections.SWGSet;
+import resources.common.CRC;
 import resources.encodables.player.Equipment;
 import resources.network.BaselineBuilder;
+import resources.network.NetBuffer;
 import resources.objects.SWGObject;
 import resources.objects.player.PlayerObject;
 import resources.objects.tangible.OptionFlag;
@@ -64,7 +67,7 @@ public class CreatureObject extends TangibleObject {
 	private transient long groupId					= 0;
 	
 	private Posture	posture					= Posture.UPRIGHT;
-	private Race	race					= Race.HUMAN; 
+	private Race	race					= Race.HUMAN_MALE;
 	private double	movementScale			= 1;
 	private double	movementPercent			= 1;
 	private double	walkSpeed				= 1.549;
@@ -106,6 +109,8 @@ public class CreatureObject extends TangibleObject {
 	private long	lastTransform			= 0;
 	private HologramColour hologramColour = HologramColour.DEFAULT;
 	
+	private SWGSet<String>		missionCriticalObjs			= new SWGSet<>(4, 13);
+	
 	private SWGList<Integer>	baseAttributes	= new SWGList<Integer>(1, 2);
 	private SWGList<String>		skills			= new SWGList<String>(1, 3, StringType.ASCII); // SWGSet
 	private SWGList<Integer>	hamEncumbList	= new SWGList<Integer>(4, 2);
@@ -115,9 +120,8 @@ public class CreatureObject extends TangibleObject {
 	private SWGList<Equipment>	appearanceList 	= new SWGList<Equipment>(6, 33);
 	
 	private SWGMap<String, SkillMod> 	skillMods			= new SWGMap<>(4, 3, StringType.ASCII); // TODO: SkillMod structure
-	private SWGMap<Long, Long>		missionCriticalObjs	= new SWGMap<>(4, 13);
-	private SWGMap<String, Integer>	abilities			= new SWGMap<>(4, 14, StringType.ASCII);
-	private SWGMap<Integer, Long>	buffs				= new SWGMap<>(6, 26); // TODO: Buff structure
+	private SWGMap<String, Integer>	abilities				= new SWGMap<>(4, 14, StringType.ASCII);
+	private SWGMap<CRC, Buff>	buffs				= new SWGMap<>(6, 26);
 
 	public CreatureObject(long objectId) {
 		super(objectId, BaselineType.CREO);
@@ -715,6 +719,8 @@ public class CreatureObject extends TangibleObject {
 
 	public boolean hasAbility(String abilityName) { return abilities.get(abilityName) != null; }
 	
+	public Set<String> getAbilityNames() { return abilities.keySet(); };
+	
 	public void setHealth(int health) {
 		synchronized(attributes) {
 			attributes.set(0, health);
@@ -839,6 +845,8 @@ public class CreatureObject extends TangibleObject {
 	
 	public void createBaseline1(Player target, BaselineBuilder bb) {
 		super.createBaseline1(target, bb); // 0 variables
+		if (getStringId().toString().equals("@obj_n:unknown_object"))
+			return;
 		bb.addInt(bankBalance); // 0
 		bb.addInt(cashBalance); // 1
 		bb.addObject(baseAttributes); // Attributes player has without any gear on -- 2
@@ -849,6 +857,8 @@ public class CreatureObject extends TangibleObject {
 	
 	public void createBaseline3(Player target, BaselineBuilder bb) {
 		super.createBaseline3(target, bb); // 13 variables - TANO3 (9) + BASE3 (4)
+		if (getStringId().toString().equals("@obj_n:unknown_object"))
+			return;
 		bb.addByte(posture.getId()); // 13
 		bb.addByte(factionRank); // 14
 		bb.addLong(ownerId); // 15
@@ -861,6 +871,8 @@ public class CreatureObject extends TangibleObject {
 	
 	public void createBaseline4(Player target, BaselineBuilder bb) {
 		super.createBaseline4(target, bb); // 0 variables
+		if (getStringId().toString().equals("@obj_n:unknown_object"))
+			return;
 		bb.addFloat((float) accelPercent); // 0
 		bb.addFloat((float) accelScale); // 1
 		bb.addObject(hamEncumbList); // Rename to bonusAttributes? 2
@@ -883,6 +895,8 @@ public class CreatureObject extends TangibleObject {
 	
 	public void createBaseline6(Player target, BaselineBuilder bb) {
 		super.createBaseline6(target, bb); // 8 variables - TANO6 (6) + BASE6 (2)
+		if (getStringId().toString().equals("@obj_n:unknown_object"))
+			return;
 		bb.addShort(level); // 8
 		bb.addInt(levelHealthGranted); // 9
 		bb.addAscii(animation); // 10
@@ -914,12 +928,81 @@ public class CreatureObject extends TangibleObject {
 		bb.incrementOperandCount(27);
 	}
 	
-	public void createBaseline8(Player target, BaselineBuilder bb) {
-		super.createBaseline8(target, bb);
+	protected void parseBaseline1(NetBuffer buffer) {
+		super.parseBaseline1(buffer);
+		if (getStringId().toString().equals("@obj_n:unknown_object"))
+			return;
+		bankBalance = buffer.getInt();
+		cashBalance = buffer.getInt();
+		baseAttributes = buffer.getSwgList(1, 2, Integer.class);
+		skills = buffer.getSwgList(1, 2, StringType.ASCII);
 	}
 	
-	public void createBaseline9(Player target, BaselineBuilder bb) {
-		super.createBaseline9(target, bb);
+	protected void parseBaseline3(NetBuffer buffer) {
+		super.parseBaseline3(buffer);
+		if (getStringId().toString().equals("@obj_n:unknown_object"))
+			return;
+		posture = Posture.getFromId(buffer.getByte());
+		factionRank = buffer.getByte();
+		ownerId = buffer.getLong();
+		height = buffer.getFloat();
+		battleFatigue = buffer.getInt();
+		statesBitmask = buffer.getLong();
+	}
+	
+	protected void parseBaseline4(NetBuffer buffer) {
+		super.parseBaseline4(buffer);
+		if (getStringId().toString().equals("@obj_n:unknown_object"))
+			return;
+		accelPercent = buffer.getFloat();
+		accelScale = buffer.getFloat();
+		hamEncumbList = buffer.getSwgList(4, 2, Integer.class);
+		skillMods = buffer.getSwgMap(4, 3, StringType.ASCII, SkillMod.class);
+		movementPercent = buffer.getFloat();
+		movementScale = buffer.getFloat();
+		performanceListenTarget = buffer.getLong();
+		runSpeed = buffer.getFloat();
+		slopeModAngle = buffer.getFloat();
+		slopeModPercent = buffer.getFloat();
+		turnScale = buffer.getFloat();
+		walkSpeed = buffer.getFloat();
+		waterModPercent = buffer.getFloat();
+		missionCriticalObjs = buffer.getSwgSet(4, 13, StringType.ASCII);
+		abilities = buffer.getSwgMap(4, 14, StringType.ASCII, Integer.class);
+		totalLevelXp = buffer.getInt();
+	}
+	
+	protected void parseBaseline6(NetBuffer buffer) {
+		super.parseBaseline6(buffer);
+		if (getStringId().toString().equals("@obj_n:unknown_object"))
+			return;
+		level = buffer.getShort();
+		levelHealthGranted = buffer.getInt();
+		animation = buffer.getAscii();
+		moodAnimation = buffer.getAscii();
+		equippedWeaponId = buffer.getLong();
+		groupId = buffer.getLong();
+		inviterData = buffer.getEncodable(GroupInviterData.class);
+		guildId = buffer.getInt();
+		lookAtTargetId = buffer.getLong();
+		intendedTargetId = buffer.getLong();
+		moodId = buffer.getByte();
+		performanceCounter = buffer.getInt();
+		performanceId = buffer.getInt();
+		attributes = buffer.getSwgList(6, 21, Integer.class);
+		maxAttributes = buffer.getSwgList(6, 22, Integer.class);
+		equipmentList = buffer.getSwgList(6, 23, Equipment.class);
+		costume = buffer.getAscii();
+		visible = buffer.getBoolean();
+		buffs = buffer.getSwgMap(6, 26, CRC.class, Buff.class);
+		performing = buffer.getBoolean();
+		difficulty = CreatureDifficulty.getForDifficulty(buffer.getByte());
+		hologramColour = HologramColour.getForValue(buffer.getInt());
+		shownOnRadar = buffer.getBoolean();
+		beast = buffer.getBoolean();
+		buffer.getBoolean();
+		appearanceList = buffer.getSwgList(6, 33, Equipment.class);
+		buffer.getLong();
 	}
 	
 }

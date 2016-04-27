@@ -347,10 +347,8 @@ public class Packet {
 	}
 
 	public void decode(ByteBuffer data) {
-		data.position(0);
 		this.data = data;
 		opcode = getNetShort(data);
-		data.position(0);
 	}
 	
 	public ByteBuffer getData() {
@@ -359,6 +357,10 @@ public class Packet {
 	
 	public ByteBuffer encode() {
 		return data;
+	}
+	
+	public String toString() {
+		return getClass().getSimpleName();
 	}
 	
 }

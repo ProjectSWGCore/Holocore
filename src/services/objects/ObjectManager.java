@@ -35,6 +35,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import intents.object.DestroyObjectIntent;
 import intents.object.ObjectCreatedIntent;
 import intents.object.ObjectTeleportIntent;
 import intents.player.DeleteCharacterIntent;
@@ -58,6 +59,7 @@ import services.map.MapManager;
 import services.player.PlayerManager;
 import services.spawn.SpawnerService;
 import services.spawn.StaticService;
+import utilities.Scripts;
 
 public class ObjectManager extends Manager {
 	
@@ -92,6 +94,7 @@ public class ObjectManager extends Manager {
 		registerForIntent(GalacticPacketIntent.TYPE);
 		registerForIntent(ObjectTeleportIntent.TYPE);
 		registerForIntent(ObjectCreatedIntent.TYPE);
+		registerForIntent(DestroyObjectIntent.TYPE);
 		registerForIntent(DeleteCharacterIntent.TYPE);
 	}
 	
@@ -133,9 +136,13 @@ public class ObjectManager extends Manager {
 		// if creature is not a player
 		if (!(obj instanceof CreatureObject && ((CreatureObject) obj).isLoggedOutPlayer()))
 			objectAwareness.add(obj);
+		else	// If creature is a player
+			Scripts.invoke("objects/load_creature", "onLoad", obj);
+		
 		putObject(obj);
 		updateBuildoutParent(obj);
 		addChildrenObjects(obj);
+		new ObjectCreatedIntent(obj).broadcast();
 	}
 	
 	private void updateBuildoutParent(SWGObject obj) {
@@ -174,17 +181,32 @@ public class ObjectManager extends Manager {
 	
 	@Override
 	public void onIntentReceived(Intent i) {
-		if (i instanceof GalacticPacketIntent) {
-			processGalacticPacketIntent((GalacticPacketIntent) i);
-		} else if (i instanceof ObjectCreatedIntent) {
-			processObjectCreatedIntent((ObjectCreatedIntent) i);
-		} else if (i instanceof DeleteCharacterIntent) {
-			deleteObject(((DeleteCharacterIntent) i).getCreature().getObjectId());
+		switch (i.getType()) {
+			case GalacticPacketIntent.TYPE:
+				if (i instanceof GalacticPacketIntent)
+					processGalacticPacketIntent((GalacticPacketIntent) i);
+				break;
+			case ObjectCreatedIntent.TYPE:
+				if (i instanceof ObjectCreatedIntent)
+					processObjectCreatedIntent((ObjectCreatedIntent) i);
+				break;
+			case DestroyObjectIntent.TYPE:
+				if (i instanceof DestroyObjectIntent)
+					processDestroyObjectIntent((DestroyObjectIntent) i);
+				break;
+			case DeleteCharacterIntent.TYPE:
+				if (i instanceof DeleteCharacterIntent)
+					deleteObject(((DeleteCharacterIntent) i).getCreature().getObjectId());
+				break;
 		}
 	}
 	
 	private void processObjectCreatedIntent(ObjectCreatedIntent intent) {
 		putObject(intent.getObject());
+	}
+	
+	private void processDestroyObjectIntent(DestroyObjectIntent doi) {
+		destroyObject(doi.getObject());
 	}
 	
 	private void processGalacticPacketIntent(GalacticPacketIntent gpi) {

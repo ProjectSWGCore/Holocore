@@ -39,6 +39,10 @@ public class SkillMod implements Encodable, Serializable {
 
 	private int base, modifier;
 	
+	public SkillMod() {
+		this(0, 0);
+	}
+	
 	public SkillMod(int base, int modifier) {
 		this.base = base;
 		this.modifier = modifier;
@@ -70,6 +74,10 @@ public class SkillMod implements Encodable, Serializable {
 	
 	public int getValue() {
 		return base + modifier;
+	}
+	
+	public String toString() {
+		return "SkillMod[Base="+base+", Modifier="+modifier+"]";
 	}
 
 }
