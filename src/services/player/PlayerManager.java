@@ -39,7 +39,6 @@ import intents.NotifyPlayersPacketIntent;
 import intents.PlayerEventIntent;
 import intents.network.ConnectionClosedIntent;
 import intents.network.ConnectionOpenedIntent;
-import intents.network.GalacticPacketIntent;
 import resources.Terrain;
 import resources.control.Intent;
 import resources.control.Manager;
@@ -62,7 +61,6 @@ public class PlayerManager extends Manager {
 		addChildService(loginService);
 		addChildService(zoneService);
 		
-		registerForIntent(GalacticPacketIntent.TYPE);
 		registerForIntent(PlayerEventIntent.TYPE);
 		registerForIntent(NotifyPlayersPacketIntent.TYPE);
 		registerForIntent(ConnectionOpenedIntent.TYPE);
