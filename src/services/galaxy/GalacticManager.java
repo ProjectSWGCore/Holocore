@@ -94,6 +94,10 @@ public class GalacticManager extends Manager {
 			synchronized (prevIntentMap) {
 				prevIntentMap.remove(((ConnectionClosedIntent) i).getNetworkId());
 			}
+		} else if (i instanceof ConnectionOpenedIntent) {
+			synchronized (prevIntentMap) {
+				prevIntentMap.put(((ConnectionOpenedIntent) i).getNetworkId(), i);
+			}
 		}
 	}
 	

@@ -181,11 +181,17 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	 * @return {@link ContainerResult}
 	 */
 	public ContainerResult moveToContainer(SWGObject requester, SWGObject container) {
+		// Check if the requester has MOVE permissions for the current container of the object
+		if(!hasPermission(requester, ContainerPermissions.Permission.MOVE)) {
+			return ContainerResult.NO_PERMISSION;
+		}
+		
+		// Check if the requester has MOVE permissions to the destination container
 		if (!container.hasPermission(requester, ContainerPermissions.Permission.MOVE)) {
 			Log.w("SWGObject", "No permission 'MOVE' for requestor %s with object %s", requester, this);
 			return ContainerResult.NO_PERMISSION;
 		}
-
+		
 		// Check if object can fit into container or slots
 		int arrangementId = container.getArrangementId(this);
 		if (arrangementId == -1) {
@@ -254,7 +260,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	 * @return
 	 */
 	public boolean hasPermission(SWGObject object, ContainerPermissions.Permission... permissions) {
-		if (object == null || object == this || object.getOwner() == getOwner())
+		if (object == null)
 			return true;
 		for (ContainerPermissions.Permission permission : permissions) {
 			switch(permission) {

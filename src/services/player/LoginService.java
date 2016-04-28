@@ -56,6 +56,8 @@ import network.packets.swg.login.LoginEnumCluster;
 import network.packets.swg.login.LoginIncorrectClientId;
 import network.packets.swg.login.OfflineServersMessage;
 import network.packets.swg.login.StationIdHasJediSlot;
+import network.packets.swg.zone.GameServerLagResponse;
+import network.packets.swg.zone.LagRequest;
 import network.packets.swg.zone.ServerNowEpochTime;
 import resources.Galaxy;
 import resources.Race;
@@ -68,6 +70,7 @@ import resources.objects.creature.CreatureObject;
 import resources.player.AccessLevel;
 import resources.player.Player;
 import resources.player.PlayerState;
+import resources.player.Player.PlayerServer;
 import resources.server_info.Config;
 import resources.server_info.Log;
 import resources.server_info.RelationalDatabase;
@@ -117,6 +120,8 @@ public class LoginService extends Service {
 			handleLogin(player, (LoginClientId) p);
 		if (p instanceof DeleteCharacterRequest)
 			handleCharDeletion(intent, player, (DeleteCharacterRequest) p);
+		if (p instanceof LagRequest && player.getPlayerServer() == PlayerServer.LOGIN)
+			handleLagRequest(player);
 	}
 	
 	private String getServerString() {
@@ -124,6 +129,10 @@ public class LoginService extends Service {
 		String name = c.getString("LOGIN-SERVER-NAME", "LoginServer");
 		int id = c.getInt("LOGIN-SERVER-ID", 1);
 		return name + ":" + id;
+	}
+	
+	private void handleLagRequest(Player player) {
+		player.sendPacket(new GameServerLagResponse());
 	}
 	
 	private void handleCharDeletion(GalacticIntent intent, Player player, DeleteCharacterRequest request) {
@@ -141,6 +150,11 @@ public class LoginService extends Service {
 			System.err.println("Player cannot login when " + player.getPlayerState());
 			return;
 		}
+		if (player.getPlayerServer() != PlayerServer.NONE) {
+			System.err.println("Player cannot login when connected to " + player.getPlayerServer());
+			return;
+		}
+		player.setPlayerServer(PlayerServer.LOGIN);
 		final boolean doClientCheck = getConfig(ConfigFile.NETWORK).getBoolean("LOGIN-VERSION-CHECKS", true);
 		if (doClientCheck)
 			Log.d("LoginService", "Running login checks for %s", id.getUsername());

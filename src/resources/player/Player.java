@@ -46,6 +46,7 @@ public class Player implements Comparable<Player> {
 	private byte [] sessionToken	= new byte[0];
 	private int connectionId		= 0;
 	private AccessLevel accessLevel	= AccessLevel.PLAYER;
+	private PlayerServer server		= PlayerServer.NONE;
 	
 	private String galaxyName		= "";
 	private CreatureObject creatureObject= null;
@@ -74,6 +75,10 @@ public class Player implements Comparable<Player> {
 	
 	public void setPlayerState(PlayerState state) {
 		this.state = state;
+	}
+	
+	public void setPlayerServer(PlayerServer server) {
+		this.server = server;
 	}
 	
 	public void setUsername(String username) {
@@ -114,6 +119,10 @@ public class Player implements Comparable<Player> {
 	
 	public PlayerState getPlayerState() {
 		return state;
+	}
+	
+	public PlayerServer getPlayerServer() {
+		return server;
 	}
 	
 	public String getUsername() {
@@ -209,6 +218,12 @@ public class Player implements Comparable<Player> {
 		if (creatureObject == null)
 			return getUserId();
 		return Long.valueOf(creatureObject.getObjectId()).hashCode() ^ getUserId();
+	}
+	
+	public static enum PlayerServer {
+		NONE,
+		LOGIN,
+		ZONE
 	}
 	
 }
