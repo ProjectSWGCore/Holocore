@@ -319,14 +319,7 @@ public enum RadialItem {
 	BIO_LINK													(""),
 	LANDMINE_DISARM												(""),
 	LANDMINE_REVERSE_TRIGGER									(""),
-	REWARD_TRADE_IN												(""),
-	BANK_TRANSFER												("@sui:bank_credits"),
-	BANK_ITEMS													("@sui:bank_items"),
-	BANK_WITHDRAW_ALL											("@sui:bank_withdrawall"),
-	BANK_DEPOSIT_ALL											("@sui:bank_depositall"),
-	BANK_RESERVE												("@sui:bank_galactic_reserve"),
-	BANK_RESERVE_WITHDRAW										("@sui:bank_galactic_reserve_withdraw"),
-	BANK_RESERVE_DEPOSIT										("@sui:bank_galactic_reserve_deposit");
+	REWARD_TRADE_IN												("");
 	
 	private static final Map<Integer, RadialItem> INT_TO_ITEM = new Hashtable<>(values().length);
 	private int id;
