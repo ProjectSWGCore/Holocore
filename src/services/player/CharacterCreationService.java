@@ -29,6 +29,7 @@ package services.player;
 
 import intents.GalacticIntent;
 import intents.PlayerEventIntent;
+import intents.experience.SkillBoxGrantedIntent;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -317,6 +318,7 @@ public class CharacterCreationService extends Service {
 		creatureObj.addObject(playerObj); // ghost slot
 		playerObj.setAdminTag(player.getAccessLevel());
 		player.setCreatureObject(creatureObj);
+		new SkillBoxGrantedIntent(create.getStartingPhase(), creatureObj).broadcast();
 		return creatureObj.getObjectId();
 	}
 	

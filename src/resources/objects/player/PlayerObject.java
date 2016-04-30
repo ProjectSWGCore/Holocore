@@ -63,6 +63,7 @@ public class PlayerObject extends IntangibleObject {
 	private String 				title				= "";
 	private int 				bornDate			= 0;
 	private int 				playTime			= 0;
+	private int					professionIcon		= 0;
 	private String				profession			= "";
 	private int 				gcwPoints			= 0;
 	private int 				pvpKills			= 0;
@@ -81,7 +82,7 @@ public class PlayerObject extends IntangibleObject {
 	private int 				gcwNextUpdate		= 0;
 	private String 				home				= "";
 	// PLAY 08
-	private SWGMap<String, Integer> 		experience			= new SWGMap<>(8, 0);
+	private SWGMap<String, Integer> 		experience			= new SWGMap<>(8, 0, StringType.ASCII);
 	private SWGMap<Long, WaypointObject> 	waypoints			= new SWGMap<>(8, 1);
 	private boolean 						citizen				= false;
 	private int 							guildRankTitle		= 0;
@@ -92,7 +93,7 @@ public class PlayerObject extends IntangibleObject {
 	private int 				experimentFlag		= 0;
 	private int 				craftingStage		= 0;
 	private long 				nearbyCraftStation	= 0;
-	private SWGList<String> 	draftSchemList		= new SWGList<>(9, 3);
+	private SWGList<String> 	draftSchemList		= new SWGList<>(9, 3, StringType.ASCII);
 	private int 				experimentPoints	= 0;
 	private SWGList<String> 	friendsList			= new SWGList<>(9, 7, StringType.ASCII);
 	private SWGList<String> 	ignoreList			= new SWGList<>(9, 8, StringType.ASCII);
@@ -403,7 +404,7 @@ public class PlayerObject extends IntangibleObject {
 
 	public void setProfWheelPosition(String profWheelPosition) {
 		this.profWheelPosition = profWheelPosition;
-		sendDelta(8, 8, profWheelPosition);
+		sendDelta(8, 8, profWheelPosition, StringType.ASCII);
 	}
 	
 	public void setFlagBitmask(PlayerFlags ... flags) {
@@ -446,31 +447,27 @@ public class PlayerObject extends IntangibleObject {
 		}
 	}
 
-	private int getProfessionIcon() {
-		switch (profession) {
-			case "entertainer_1a":
-				return 5;
-			case "medic_1a":
-				return 10;
-			case "officer_1a":
-				return 15;
-			case "bounty_hunter_1a":
-				return 20;
-			case "smuggler_1a":
-				return 25;
-			case "commando_1a":
-				return 30;
-			case "spy_1a":
-				return 35;
-			case "force_sensitive_1a":
-				return 40;
-			case "trader_0a":
-			case "trader_0b":
-			case "trader_0c":
-			case "trader_0d":
-			default:
-				return 0;
-		}
+	public void setProfessionIcon(int professionIcon) {
+		this.professionIcon = professionIcon;
+		sendDelta(3, 10, professionIcon);
+	}
+	
+	public int getProfessionIcon() {
+		return professionIcon;
+	}
+	
+	public void addDraftSchematic(String schematic) {
+		draftSchemList.add(schematic);
+		draftSchemList.sendDeltaMessage(this);
+	}
+	
+	public Integer getExperiencePoints(String xpType) {
+		return experience.get(xpType);
+	}
+	
+	public void setExperiencePoints(String xpType, int experiencePoints) {
+		experience.put(xpType, experiencePoints);
+		experience.sendDeltaMessage(this);
 	}
 
 	@Override
@@ -497,7 +494,7 @@ public class PlayerObject extends IntangibleObject {
 		bb.addAscii(title); // 7
 		bb.addInt(bornDate); // Born Date -- 4001 = 12/15/2011 || Number of days after 12/31/2000 -- 8
 		bb.addInt(playTime); // 9
-		bb.addInt(getProfessionIcon()); // 10
+		bb.addInt(professionIcon); // 10
 		bb.addAscii(profession); // 11
 		bb.addInt(gcwPoints); // 12
 		bb.addInt(pvpKills); // 13

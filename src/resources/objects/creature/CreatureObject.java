@@ -112,7 +112,7 @@ public class CreatureObject extends TangibleObject {
 	private SWGSet<String>		missionCriticalObjs			= new SWGSet<>(4, 13);
 	
 	private SWGList<Integer>	baseAttributes	= new SWGList<Integer>(1, 2);
-	private SWGList<String>		skills			= new SWGList<String>(1, 3, StringType.ASCII); // SWGSet
+	private SWGSet<String>		skills			= new SWGSet<String>(1, 3, StringType.ASCII);
 	private SWGList<Integer>	hamEncumbList	= new SWGList<Integer>(4, 2);
 	private SWGList<Integer>	attributes		= new SWGList<Integer>(6, 21);
 	private SWGList<Integer>	maxAttributes	= new SWGList<Integer>(6, 22);
@@ -187,7 +187,16 @@ public class CreatureObject extends TangibleObject {
 		return appearanceList;
 	}
 	
-	public SWGList<String> getSkills() {
+	public void addSkill(String skillName) {
+		skills.add(skillName);
+		skills.sendDeltaMessage(this);
+	}
+	
+	public boolean hasSkill(String skillName) {
+		return skills.contains(skillName);
+	}
+	
+	public SWGSet<String> getSkills() {
 		return skills;
 	}
 	
@@ -263,7 +272,7 @@ public class CreatureObject extends TangibleObject {
 		return guildId;
 	}
 	
-	public int getLevel() {
+	public short getLevel() {
 		return level;
 	}
 	
@@ -713,7 +722,10 @@ public class CreatureObject extends TangibleObject {
 		return attributes.get(2);
 	}
 
-	public void addAbility(String abilityName){ abilities.put(abilityName, 1); }//TODO: Figure out what the integer value should be for each ability
+	public void addAbility(String abilityName){
+		abilities.put(abilityName, 1);	//TODO: Figure out what the integer value should be for each ability
+		abilities.sendDeltaMessage(this);
+	}
 
 	public void removeAbility(String abilityName) { abilities.remove(abilityName); }
 
@@ -935,7 +947,7 @@ public class CreatureObject extends TangibleObject {
 		bankBalance = buffer.getInt();
 		cashBalance = buffer.getInt();
 		baseAttributes = buffer.getSwgList(1, 2, Integer.class);
-		skills = buffer.getSwgList(1, 2, StringType.ASCII);
+		skills = buffer.getSwgSet(1, 2, StringType.ASCII);
 	}
 	
 	protected void parseBaseline3(NetBuffer buffer) {

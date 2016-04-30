@@ -98,6 +98,7 @@ public abstract class ObjectController extends SWGPacket {
 			case 0x0131: return new PostureUpdate(data);
 			case 0x0146: return new ObjectMenuRequest(data);
 			case 0x04C5: return new IntendedTarget(data);
+			case ChangeRoleIconChoice.CRC: return new ChangeRoleIconChoice(data);
 		}
 		Log.w("ObjectController", "Unknown object controller: %08X", crc);
 		return new GenericObjectController(crc, data);

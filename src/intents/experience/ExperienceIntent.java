@@ -25,54 +25,50 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package services.galaxy;
+package intents.experience;
 
-import resources.control.Manager;
-import services.collections.CollectionBadgeManager;
-import services.commands.CommandService;
-import services.commands.EntertainmentService;
-import services.experience.ExperienceManager;
-import services.faction.FactionService;
-import services.galaxy.terminals.TerminalService;
-import services.sui.SuiService;
+import resources.control.Intent;
+import resources.objects.creature.CreatureObject;
 
-public class GameManager extends Manager {
-
-	private final CommandService commandService;
-	private final ConnectionService connectionService;
-	private final SuiService suiService;
-	private final CollectionBadgeManager collectionBadgeManager;
-	private final EnvironmentService weatherService;
-	private final TerminalService terminalManager;
-	private final FactionService factionService;
-	//private final GroupService groupService;
-	private final SkillModService skillModService;
-	private final EntertainmentService entertainmentService;
-	private final ExperienceManager experienceManager;
-
-	public GameManager() {
-		commandService = new CommandService();
-		connectionService = new ConnectionService();
-		suiService = new SuiService();
-		collectionBadgeManager = new CollectionBadgeManager();
-		weatherService = new EnvironmentService();
-		terminalManager = new TerminalService();
-		factionService = new FactionService();
-//		groupService = new GroupService();
-		skillModService = new SkillModService();
-		entertainmentService = new EntertainmentService();
-		experienceManager = new ExperienceManager();
-
-		addChildService(commandService);
-		addChildService(connectionService);
-		addChildService(suiService);
-		addChildService(collectionBadgeManager);
-		addChildService(weatherService);
-		addChildService(terminalManager);
-		addChildService(factionService);
-//		addChildService(groupService);
-		addChildService(skillModService);
-		addChildService(entertainmentService);
-		addChildService(experienceManager);
+/**
+ *
+ * @author Mads
+ */
+public final class ExperienceIntent extends Intent {
+	
+	public static final String TYPE = "ExperienceIntent";
+	
+	private final CreatureObject creatureObject;
+	private final String xpType;
+	private final int experienceGained;
+	private final EventType eventType;
+	
+	public ExperienceIntent(EventType eventType, CreatureObject creatureObject, String xpType, int experienceGained) {
+		super(TYPE);
+		this.eventType = eventType;
+		this.creatureObject = creatureObject;
+		this.xpType = xpType;
+		this.experienceGained = experienceGained;
 	}
+
+	public EventType getEventType() {
+		return eventType;
+	}
+
+	public CreatureObject getCreatureObject() {
+		return creatureObject;
+	}
+
+	public String getXpType() {
+		return xpType;
+	}
+
+	public int getExperienceGained() {
+		return experienceGained;
+	}
+	
+	public enum EventType {
+		GRANT, GIVEN
+	}
+	
 }

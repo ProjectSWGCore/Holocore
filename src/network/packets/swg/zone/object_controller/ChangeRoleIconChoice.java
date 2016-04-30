@@ -25,54 +25,46 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package services.galaxy;
+package network.packets.swg.zone.object_controller;
 
-import resources.control.Manager;
-import services.collections.CollectionBadgeManager;
-import services.commands.CommandService;
-import services.commands.EntertainmentService;
-import services.experience.ExperienceManager;
-import services.faction.FactionService;
-import services.galaxy.terminals.TerminalService;
-import services.sui.SuiService;
+import java.nio.ByteBuffer;
 
-public class GameManager extends Manager {
-
-	private final CommandService commandService;
-	private final ConnectionService connectionService;
-	private final SuiService suiService;
-	private final CollectionBadgeManager collectionBadgeManager;
-	private final EnvironmentService weatherService;
-	private final TerminalService terminalManager;
-	private final FactionService factionService;
-	//private final GroupService groupService;
-	private final SkillModService skillModService;
-	private final EntertainmentService entertainmentService;
-	private final ExperienceManager experienceManager;
-
-	public GameManager() {
-		commandService = new CommandService();
-		connectionService = new ConnectionService();
-		suiService = new SuiService();
-		collectionBadgeManager = new CollectionBadgeManager();
-		weatherService = new EnvironmentService();
-		terminalManager = new TerminalService();
-		factionService = new FactionService();
-//		groupService = new GroupService();
-		skillModService = new SkillModService();
-		entertainmentService = new EntertainmentService();
-		experienceManager = new ExperienceManager();
-
-		addChildService(commandService);
-		addChildService(connectionService);
-		addChildService(suiService);
-		addChildService(collectionBadgeManager);
-		addChildService(weatherService);
-		addChildService(terminalManager);
-		addChildService(factionService);
-//		addChildService(groupService);
-		addChildService(skillModService);
-		addChildService(entertainmentService);
-		addChildService(experienceManager);
+public class ChangeRoleIconChoice extends ObjectController {
+	
+	public static final int CRC = 1101;
+	
+	private int iconChoice;
+	
+	public ChangeRoleIconChoice(long objectId) {
+		super(objectId, CRC);
 	}
+	
+	public ChangeRoleIconChoice(ByteBuffer data) {
+		super(CRC);
+		decode(data);
+	}
+	
+	public ChangeRoleIconChoice(long objectId, int iconChoice) {
+		super(objectId, CRC);
+		this.iconChoice = iconChoice;
+	}
+	
+	@Override
+	public void decode(ByteBuffer data) {
+		decodeHeader(data);
+		iconChoice = getInt(data);
+	}
+	
+	@Override
+	public ByteBuffer encode() {
+		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + Integer.BYTES);
+		encodeHeader(data);
+		addInt(data, iconChoice);
+		return data;
+	}
+
+	public int getIconChoice() {
+		return iconChoice;
+	}
+	
 }
