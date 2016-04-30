@@ -157,7 +157,7 @@ public final class SkillService extends Service {
 			playerObject.addDraftSchematic(schematic);
 		}
 		
-		Log.d(this, "%s was given skill %s", target, skillName);
+		Log.i(this, "%s was given skill %s", target, skillName);
 	}
 	
 	private void handleGalacticPacket(GalacticPacketIntent gpi) {
