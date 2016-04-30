@@ -47,7 +47,7 @@ public class GameServerLagResponse extends SWGPacket {
 	
 	public ByteBuffer encode() {
 		ByteBuffer data = ByteBuffer.allocate(6);
-		addShort(data, 2);
+		addShort(data, 1);
 		addInt(  data, CRC);
 		return data;
 	}

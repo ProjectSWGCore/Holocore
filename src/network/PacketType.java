@@ -71,7 +71,7 @@ public enum PacketType {
 	REQUEST_EXTENDED_CLUSTERS					(RequestExtendedClusters.CRC, 	RequestExtendedClusters.class),
 	OFFLINE_SERVERS_MESSAGE     				(OfflineServersMessage.CRC, 	OfflineServersMessage.class),
 	SERVER_NOW_EPOCH_TIME						(ServerNowEpochTime.CRC,		ServerNowEpochTime.class),
-	CONNECTION_SERVER_LAG_RESPONSE				(ConnectionServerLagResponse.CRC,ConnectionServerLagResponse.class),
+	GAME_SERVER_LAG_RESPONSE					(GameServerLagResponse.CRC,		GameServerLagResponse.class),
 
 		// Post-Login
 		LOGIN_CLIENT_ID							(LoginClientId.CRC, 			LoginClientId.class),
@@ -97,7 +97,7 @@ public enum PacketType {
 		DELETE_CHARACTER_REQUEST				(DeleteCharacterRequest.CRC, 	DeleteCharacterRequest.class),
 
 	// Zone
-	GAME_SERVER_LAG_RESPONSE					(GameServerLagResponse.CRC,			GameServerLagResponse.class),
+	CONNECTION_SERVER_LAG_RESPONSE				(ConnectionServerLagResponse.CRC,	ConnectionServerLagResponse.class),
 	COMMAND_QUEUE_ENQUEUE						(0x00000116, 						CommandQueueEnqueue.class),
 	SELECT_CHARACTER							(SelectCharacter.CRC, 				SelectCharacter.class),
 	CMD_SCENE_READY								(CmdSceneReady.CRC, 				CmdSceneReady.class),

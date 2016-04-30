@@ -40,10 +40,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import main.ProjectSWG;
 import network.packets.Packet;
 import network.packets.swg.ErrorMessage;
-import network.packets.swg.ServerUnixEpochTime;
 import network.packets.swg.login.CharacterCreationDisabled;
 import network.packets.swg.login.EnumerateCharacterId;
 import network.packets.swg.login.EnumerateCharacterId.SWGCharacter;
@@ -54,8 +52,6 @@ import network.packets.swg.login.LoginClientToken;
 import network.packets.swg.login.LoginClusterStatus;
 import network.packets.swg.login.LoginEnumCluster;
 import network.packets.swg.login.LoginIncorrectClientId;
-import network.packets.swg.login.OfflineServersMessage;
-import network.packets.swg.login.StationIdHasJediSlot;
 import network.packets.swg.zone.GameServerLagResponse;
 import network.packets.swg.zone.LagRequest;
 import network.packets.swg.zone.ServerNowEpochTime;
@@ -263,15 +259,12 @@ public class LoginService extends Service {
 			clusterStatus.addGalaxy(g);
 		}
 		cluster.setMaxCharacters(getConfig(ConfigFile.PRIMARY).getInt("GALAXY-MAX-CHARACTERS", 2));
-		sendPacket(p.getNetworkId(), new ServerUnixEpochTime((int) (ProjectSWG.getCoreTime() / 1000)));
 		sendPacket(p.getNetworkId(), new ServerNowEpochTime((int)(System.currentTimeMillis()/1E3)));
 		sendPacket(p.getNetworkId(), token);
 		sendPacket(p.getNetworkId(), cluster);
-		sendPacket(p.getNetworkId(), new OfflineServersMessage());
 		sendPacket(p.getNetworkId(), new CharacterCreationDisabled());
-		sendPacket(p.getNetworkId(), clusterStatus);
-		sendPacket(p.getNetworkId(), new StationIdHasJediSlot(0));
 		sendPacket(p.getNetworkId(), new EnumerateCharacterId(characters));
+		sendPacket(p.getNetworkId(), clusterStatus);
 		p.setPlayerState(PlayerState.LOGGED_IN);
 	}
 	
