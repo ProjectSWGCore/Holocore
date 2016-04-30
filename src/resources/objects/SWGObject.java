@@ -141,7 +141,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			// Check to make sure this object is able to go into a slot in the parent
 			List<String> requiredSlots = object.getArrangement().get(arrangementId - 4);
 			// Note that some objects don't have a descriptor, meaning it has no slots
-
+			
 			// Add object to the slot
 			for (String requiredSlot : requiredSlots) {
 				setSlot(requiredSlot, object);
@@ -181,11 +181,17 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	 * @return {@link ContainerResult}
 	 */
 	public ContainerResult moveToContainer(SWGObject requester, SWGObject container) {
+		// Check if the requester has MOVE permissions for the current container of the object
+		if(!hasPermission(requester, ContainerPermissions.Permission.MOVE)) {
+			return ContainerResult.NO_PERMISSION;
+		}
+		
+		// Check if the requester has MOVE permissions to the destination container
 		if (!container.hasPermission(requester, ContainerPermissions.Permission.MOVE)) {
 			Log.w("SWGObject", "No permission 'MOVE' for requestor %s with object %s", requester, this);
 			return ContainerResult.NO_PERMISSION;
 		}
-
+		
 		// Check if object can fit into container or slots
 		int arrangementId = container.getArrangementId(this);
 		if (arrangementId == -1) {
@@ -194,10 +200,17 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 				Log.w("SWGObject", "Unable to add object to container! Container Full");
 				return ContainerResult.CONTAINER_FULL;
 			}
+		} else {
+			// Item is going into slot(s)
+			Map<String, SWGObject> containerSlots = container.getSlots();
+			for (String slotName : getArrangement().get(arrangementId - 4)) {
+				SWGObject equippedItem = containerSlots.get(slotName);
+				if (equippedItem != null) {
+					equippedItem.moveToContainer(requester, container.getSlottedObject("inventory"));
+				}
+			}
 		}
-
-		// TODO Slot occupation check, old version was not working properly, always returning SLOT_OCCUPIED
-
+		
 		// Get a pre-parent-removal list of the observers so we can send create/destroy/update messages
 		Set<SWGObject> oldObservers = getObservers();
 		Player prevOwner = getOwner();
@@ -247,7 +260,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	 * @return
 	 */
 	public boolean hasPermission(SWGObject object, ContainerPermissions.Permission... permissions) {
-		if (object == null || object == this || object.getOwner() == getOwner())
+		if (object == null)
 			return true;
 		for (ContainerPermissions.Permission permission : permissions) {
 			switch(permission) {

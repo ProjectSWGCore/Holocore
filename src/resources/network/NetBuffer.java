@@ -200,6 +200,12 @@ public class NetBuffer {
 		return bData;
 	}
 	
+	public byte [] getArray(int size) {
+		byte [] bData = new byte[size];
+		data.get(bData);
+		return bData;
+	}
+	
 	public <T> Object getGeneric(Class<T> type) {
 		if (Encodable.class.isAssignableFrom(type)) {
 			T instance = null;
