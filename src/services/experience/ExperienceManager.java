@@ -104,33 +104,40 @@ public final class ExperienceManager extends Manager {
 			// TODO show +XP flytext
 
 			// At this point, we check if their level should be adjusted.
-			short currentLevel = creatureObject.getLevel();
-
-			if (currentLevel == getMaxLevel()) {
-				// This player has already reached max level
-				Log.d(this, "%s is already max level (%d) - skipping remaining checks", creatureObject, currentLevel);
-			} else {
-				short nextLevel = (short) (currentLevel + 1);
-				Integer xpNextLevel = levelXpMap.get(nextLevel);
-
-				if (xpNextLevel != null) {
-					if (newXpTotal >= xpNextLevel) {
-						new LevelChangedIntent(creatureObject, currentLevel, nextLevel).broadcast();
-						creatureObject.setLevel(nextLevel);
-						// TODO increase health of creatureObject
-						// TODO flytext object.showFlyText(OutOfBand.ProsePackage("@cbt_spam:skill_up"), 2.5f, new RGB(154, 205, 50), 0, true);
-						// TODO client effect clienteffect/skill_granted.cef
-						// TODO audio sound/music_acq_bountyhunter.snd
-						Log.i(this, "%s leveled up to %d from %d", creatureObject, currentLevel, nextLevel);
-					} else {
-						Log.d(this, "%s didn't gain enough %s XP to level up from %d to %d", creatureObject, xpType, currentLevel, nextLevel);
-					}
-				} else {
-					Log.e(this, "%s can't become level %d because it was not found in the level-to-XP Map", creatureObject, nextLevel);
-				}
-			}
+			attemptLevelUp(creatureObject, xpType, newXpTotal);
 		} else {
 			Log.e(this, "%d %s XP to %s failed because XP can't be given to NPCs", xpGained, xpType, creatureObject);
+		}
+	}
+	
+	private void attemptLevelUp(CreatureObject creatureObject, String xpType, int newXpTotal) {
+		short currentLevel = creatureObject.getLevel();
+
+		if (currentLevel == getMaxLevel()) {
+			// This player has already reached max level
+			Log.d(this, "%s is already max level (%d) - skipping remaining checks", creatureObject, currentLevel);
+		} else {
+			short nextLevel = (short) (currentLevel + 1);
+			Integer xpNextLevel = levelXpMap.get(nextLevel);
+
+			if (xpNextLevel != null) {
+				if (newXpTotal >= xpNextLevel) {
+					new LevelChangedIntent(creatureObject, currentLevel, nextLevel).broadcast();
+					creatureObject.setLevel(nextLevel);
+					// TODO increase health of creatureObject
+					// TODO flytext object.showFlyText(OutOfBand.ProsePackage("@cbt_spam:skill_up"), 2.5f, new RGB(154, 205, 50), 0, true);
+					// TODO client effect clienteffect/skill_granted.cef
+					// TODO audio sound/music_acq_bountyhunter.snd
+					
+					// Recursively attempt to level up again, in case we've gained enough XP to level up multiple times.
+					attemptLevelUp(creatureObject, xpType, newXpTotal);
+					Log.i(this, "%s leveled up to %d from %d", creatureObject, currentLevel, nextLevel);
+				} else {
+					Log.d(this, "%s didn't gain enough %s XP to level up from %d to %d", creatureObject, xpType, currentLevel, nextLevel);
+				}
+			} else {
+				Log.e(this, "%s can't become level %d because it was not found in the level-to-XP Map", creatureObject, nextLevel);
+			}
 		}
 	}
 	
