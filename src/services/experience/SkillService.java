@@ -27,6 +27,7 @@
 ***********************************************************************************/
 package services.experience;
 
+import intents.SkillModIntent;
 import intents.experience.LevelChangedIntent;
 import intents.experience.SkillBoxGrantedIntent;
 import intents.network.GalacticPacketIntent;
@@ -150,7 +151,7 @@ public final class SkillService extends Service {
 			target.addAbility(commandName);
 		}
 		
-		skillData.skillMods.forEach((skillModName, skillModValue) -> target.adjustSkillmod(skillModName, 0, skillModValue));
+		skillData.skillMods.forEach((skillModName, skillModValue) -> new SkillModIntent(skillModName, 0, skillModValue, target).broadcast());
 		
 		for(String schematic : skillData.schematics) {
 			playerObject.addDraftSchematic(schematic);
