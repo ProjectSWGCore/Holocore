@@ -41,18 +41,12 @@ public final class ExperienceIntent extends Intent {
 	private final CreatureObject creatureObject;
 	private final String xpType;
 	private final int experienceGained;
-	private final EventType eventType;
 	
-	public ExperienceIntent(EventType eventType, CreatureObject creatureObject, String xpType, int experienceGained) {
+	public ExperienceIntent(CreatureObject creatureObject, String xpType, int experienceGained) {
 		super(TYPE);
-		this.eventType = eventType;
 		this.creatureObject = creatureObject;
 		this.xpType = xpType;
 		this.experienceGained = experienceGained;
-	}
-
-	public EventType getEventType() {
-		return eventType;
 	}
 
 	public CreatureObject getCreatureObject() {
