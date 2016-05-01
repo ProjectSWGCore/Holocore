@@ -73,28 +73,30 @@ public final class SkillTemplateService extends Service {
 	}
 	
 	private void handleLevelChangedIntent(LevelChangedIntent i) {
+		short oldLevel = i.getPreviousLevel();
 		short newLevel = i.getNewLevel();
 		CreatureObject creatureObject = i.getCreatureObject();
 		
-		// Skills are only awarded every third or fourth level
-		if ((newLevel == 4 || newLevel == 7 || newLevel == 10) || ((newLevel > 10) && (((newLevel - 10) % 4) == 0))) {
-			PlayerObject playerObject = creatureObject.getPlayerObject();
-			String profession = playerObject.getProfession();
-			String[] templates = skillTemplates.get(profession);
-			
-			if(templates == null) {
-				Log.w(this, "%s tried to level up to %d with invalid profession %s", creatureObject, newLevel, profession);
+		for (int level = oldLevel; level < newLevel; level++) {
+			// Skills are only awarded every third or fourth level
+			if ((level == 4 || level == 7 || level == 10) || ((level > 10) && (((level - 10) % 4) == 0))) {
+				PlayerObject playerObject = creatureObject.getPlayerObject();
+				String profession = playerObject.getProfession();
+				String[] templates = skillTemplates.get(profession);
+
+				if (templates == null) {
+					Log.w(this, "%s tried to level up to %d with invalid profession %s", creatureObject, level, profession);
+				} else {
+					int skillIndex = ((level <= 10) ? ((level - 1) / 3) : ((((level - 10) / 4)) + 3));
+
+					String skillName = templates[skillIndex];
+					new SkillBoxGrantedIntent(skillName, creatureObject).broadcast();
+					playerObject.setProfWheelPosition(skillName);
+					// TODO roadmap reward items
+				}
 			} else {
-				int skillIndex = ((newLevel <= 10) ? ((newLevel - 1) / 3) : ((((newLevel - 10) / 4)) + 3));
-				
-				String skillName = templates[skillIndex];
-				new SkillBoxGrantedIntent(skillName, creatureObject).broadcast();
-				playerObject.setProfWheelPosition(skillName);
-				// TODO roadmap reward items
+				Log.d(this, "Level %d has no skillbox - %s is rewarded nothing", level, creatureObject);
 			}
-		} else {
-			Log.d(this, "Level %d has no skillbox - %s is rewarded nothing", newLevel, creatureObject);
 		}
 	}
-	
 }

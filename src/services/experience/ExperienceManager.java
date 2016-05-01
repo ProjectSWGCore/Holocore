@@ -104,7 +104,17 @@ public final class ExperienceManager extends Manager {
 			// TODO show +XP flytext
 
 			// At this point, we check if their level should be adjusted.
+			short oldLevel = creatureObject.getLevel();
 			attemptLevelUp(creatureObject, xpType, newXpTotal);
+			short newLevel = creatureObject.getLevel();
+			
+			if (oldLevel > newLevel) {	// If we've leveled up at least once
+				new LevelChangedIntent(creatureObject, oldLevel, newLevel).broadcast();
+				// TODO increase health of creatureObject
+				// TODO flytext object.showFlyText(OutOfBand.ProsePackage("@cbt_spam:skill_up"), 2.5f, new RGB(154, 205, 50), 0, true);
+				// TODO client effect clienteffect/skill_granted.cef
+				// TODO audio sound/music_acq_bountyhunter.snd
+			}
 		} else {
 			Log.e(this, "%d %s XP to %s failed because XP can't be given to NPCs", xpGained, xpType, creatureObject);
 		}
@@ -122,12 +132,7 @@ public final class ExperienceManager extends Manager {
 
 			if (xpNextLevel != null) {
 				if (newXpTotal >= xpNextLevel) {
-					new LevelChangedIntent(creatureObject, currentLevel, nextLevel).broadcast();
 					creatureObject.setLevel(nextLevel);
-					// TODO increase health of creatureObject
-					// TODO flytext object.showFlyText(OutOfBand.ProsePackage("@cbt_spam:skill_up"), 2.5f, new RGB(154, 205, 50), 0, true);
-					// TODO client effect clienteffect/skill_granted.cef
-					// TODO audio sound/music_acq_bountyhunter.snd
 					
 					// Recursively attempt to level up again, in case we've gained enough XP to level up multiple times.
 					attemptLevelUp(creatureObject, xpType, newXpTotal);
