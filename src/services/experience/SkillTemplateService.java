@@ -40,7 +40,8 @@ import resources.objects.player.PlayerObject;
 import resources.server_info.Log;
 
 /**
- *
+ * This is a service that listens for {@link LevelCHangedIntent} and grants
+ * everything linked to a skillbox.
  * @author Mads
  */
 public final class SkillTemplateService extends Service {
