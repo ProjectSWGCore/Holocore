@@ -1,6 +1,7 @@
 package network.packets.swg.zone;
 
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -18,6 +19,10 @@ public class PlanetTravelPointListResponse extends SWGPacket {
 	private Collection<TravelPoint> travelPoints;
 	private String planetName;
 	private Collection<Integer> additionalCosts;
+	
+	public PlanetTravelPointListResponse() {
+		this("", new ArrayList<>(), new ArrayList<>());
+	}
 	
 	public PlanetTravelPointListResponse(String planetName, Collection<TravelPoint> travelPoints, Collection<Integer> additionalCosts) {
 		this.planetName = planetName;
