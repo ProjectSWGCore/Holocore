@@ -118,6 +118,7 @@ public class ObjectAwareness extends Service {
 				break;
 			case PE_ZONE_IN_SERVER:
 				creature.clearAware(false);
+				add(creature);
 				update(creature);
 				p.sendPacket(new CmdSceneReady());
 				break;
@@ -129,6 +130,11 @@ public class ObjectAwareness extends Service {
 	private void handleObjectCreatedIntent(ObjectCreatedIntent oci) {
 		SWGObject object = oci.getObject();
 		if (isInAwareness(object)) {
+			// We don't add logged out players to awareness when objects are being loaded from ODB.
+			if(object instanceof CreatureObject && ((CreatureObject) object).isLoggedOutPlayer()) {
+				return;
+			}
+			
 			add(object);
 			update(object);
 		}
