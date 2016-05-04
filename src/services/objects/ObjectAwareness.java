@@ -118,6 +118,7 @@ public class ObjectAwareness extends Service {
 				break;
 			case PE_ZONE_IN_SERVER:
 				creature.clearAware(false);
+				add(creature);
 				update(creature);
 				p.sendPacket(new CmdSceneReady());
 				break;
@@ -241,6 +242,8 @@ public class ObjectAwareness extends Service {
 	}
 	
 	private boolean isInAwareness(SWGObject object) {
+		if (object instanceof CreatureObject && ((CreatureObject) object).isLoggedOutPlayer())
+			return false;
 		return object.getParent() == null && object instanceof TangibleObject;
 	}
 	
