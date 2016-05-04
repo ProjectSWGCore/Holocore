@@ -179,6 +179,11 @@ public class DataManager implements IntentReceiver {
 			return;
 		ConfigChangedIntent cci = (ConfigChangedIntent) i;
 		boolean log = Boolean.valueOf(cci.getNewValue());
+		boolean oldValue = Boolean.valueOf(cci.getOldValue());
+		
+		// If the value hasn't changed, then do nothing.
+		if(log == oldValue)
+			return;
 
 		if (log)
 			Log.start();
