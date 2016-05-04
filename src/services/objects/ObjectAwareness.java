@@ -242,14 +242,9 @@ public class ObjectAwareness extends Service {
 	}
 	
 	private boolean isInAwareness(SWGObject object) {
-		if(object.getParent() == null && object instanceof TangibleObject) {
-			// We don't add logged out players to awareness when objects are being loaded from ODB.
-			if(object instanceof CreatureObject && ((CreatureObject) object).isLoggedOutPlayer()) {
-				return false;
-			}
-			return true;
-		}
-		return false;
+		if (object instanceof CreatureObject && ((CreatureObject) object).isLoggedOutPlayer())
+			return false;
+		return object.getParent() == null && object instanceof TangibleObject;
 	}
 	
 	private double invertNormalizedValue(double x) {
