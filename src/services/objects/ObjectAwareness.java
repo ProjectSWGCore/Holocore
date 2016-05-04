@@ -130,11 +130,6 @@ public class ObjectAwareness extends Service {
 	private void handleObjectCreatedIntent(ObjectCreatedIntent oci) {
 		SWGObject object = oci.getObject();
 		if (isInAwareness(object)) {
-			// We don't add logged out players to awareness when objects are being loaded from ODB.
-			if(object instanceof CreatureObject && ((CreatureObject) object).isLoggedOutPlayer()) {
-				return;
-			}
-			
 			add(object);
 			update(object);
 		}
@@ -247,7 +242,14 @@ public class ObjectAwareness extends Service {
 	}
 	
 	private boolean isInAwareness(SWGObject object) {
-		return object.getParent() == null && object instanceof TangibleObject;
+		if(object.getParent() == null && object instanceof TangibleObject) {
+			// We don't add logged out players to awareness when objects are being loaded from ODB.
+			if(object instanceof CreatureObject && ((CreatureObject) object).isLoggedOutPlayer()) {
+				return false;
+			}
+			return true;
+		}
+		return false;
 	}
 	
 	private double invertNormalizedValue(double x) {
