@@ -44,6 +44,7 @@ import resources.control.IntentReceiver;
 public class DataManager implements IntentReceiver {
 
 	private static final Object instanceLock = new Object();
+	private static final String ENABLE_LOGGING = "ENABLE-LOGGING";
 	private static DataManager instance = null;
 
 	private Map<ConfigFile, Config> config;
@@ -60,7 +61,7 @@ public class DataManager implements IntentReceiver {
 	private synchronized void initialize() {
 		initializeConfig();
 		initializeDatabases();
-		if (getConfig(ConfigFile.PRIMARY).getBoolean("ENABLE-LOGGING", true))
+		if (getConfig(ConfigFile.PRIMARY).getBoolean(ENABLE_LOGGING, true))
 			Log.start();
 		initialized = localDatabase.isOnline()
 				&& localDatabase.isTable("users");
@@ -122,7 +123,7 @@ public class DataManager implements IntentReceiver {
 		String db = c.getString("LOCAL-DB", "nge");
 		String user = c.getString("LOCAL-USER", "nge");
 		String pass = c.getString("LOCAL-PASS", "nge");
-		localDatabase = new PostgresqlDatabase("localhost", db, user, pass);
+		localDatabase = new PostgresqlDatabase("192.168.1.87", db, user, pass);
 	}
 
 	/**
@@ -178,6 +179,8 @@ public class DataManager implements IntentReceiver {
 		if (!(i instanceof ConfigChangedIntent))
 			return;
 		ConfigChangedIntent cci = (ConfigChangedIntent) i;
+		if(!cci.getKey().equals(ENABLE_LOGGING))
+			return;
 		boolean log = Boolean.valueOf(cci.getNewValue());
 		boolean oldValue = Boolean.valueOf(cci.getOldValue());
 		
