@@ -28,7 +28,6 @@
 package services.experience;
 
 import intents.SkillModIntent;
-import intents.experience.LevelChangedIntent;
 import intents.experience.SkillBoxGrantedIntent;
 import intents.network.GalacticPacketIntent;
 import java.util.HashMap;
