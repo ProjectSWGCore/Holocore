@@ -44,6 +44,7 @@ import resources.control.IntentReceiver;
 public class DataManager implements IntentReceiver {
 
 	private static final Object instanceLock = new Object();
+	private static final String ENABLE_LOGGING = "ENABLE-LOGGING";
 	private static DataManager instance = null;
 
 	private Map<ConfigFile, Config> config;
@@ -60,7 +61,7 @@ public class DataManager implements IntentReceiver {
 	private synchronized void initialize() {
 		initializeConfig();
 		initializeDatabases();
-		if (getConfig(ConfigFile.PRIMARY).getBoolean("ENABLE-LOGGING", true))
+		if (getConfig(ConfigFile.PRIMARY).getBoolean(ENABLE_LOGGING, true))
 			Log.start();
 		initialized = localDatabase.isOnline()
 				&& localDatabase.isTable("users");
@@ -178,7 +179,14 @@ public class DataManager implements IntentReceiver {
 		if (!(i instanceof ConfigChangedIntent))
 			return;
 		ConfigChangedIntent cci = (ConfigChangedIntent) i;
+		if(!cci.getKey().equals(ENABLE_LOGGING))
+			return;
 		boolean log = Boolean.valueOf(cci.getNewValue());
+		boolean oldValue = Boolean.valueOf(cci.getOldValue());
+		
+		// If the value hasn't changed, then do nothing.
+		if(log == oldValue)
+			return;
 
 		if (log)
 			Log.start();
