@@ -50,8 +50,8 @@ import resources.server_info.Log;
 public final class SkillService extends Service {
 	
 	// Maps icon index to qualifying skill.
-	private Map<Integer, String> roleIconMap;
-	private Map<String, SkillData> skillDataMap;
+	private final Map<Integer, String> roleIconMap;
+	private final Map<String, SkillData> skillDataMap;
 	
 	public SkillService() {
 		roleIconMap = new HashMap<>();
