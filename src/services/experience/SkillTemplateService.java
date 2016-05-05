@@ -94,6 +94,9 @@ public final class SkillTemplateService extends Service {
 					new SkillBoxGrantedIntent(skillName, creatureObject).broadcast();
 					playerObject.setProfWheelPosition(skillName);
 					// TODO roadmap reward items
+					// TODO flytext object.showFlyText(OutOfBand.ProsePackage("@cbt_spam:skill_up"), 2.5f, new RGB(154, 205, 50), 0, true);
+					// TODO client effect clienteffect/skill_granted.cef
+					// TODO audio sound/music_acq_bountyhunter.snd
 				}
 			} else {
 				Log.d(this, "Level %d has no skillbox - %s is rewarded nothing", level, creatureObject);
