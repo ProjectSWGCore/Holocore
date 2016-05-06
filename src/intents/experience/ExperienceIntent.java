@@ -61,8 +61,4 @@ public final class ExperienceIntent extends Intent {
 		return experienceGained;
 	}
 	
-	public enum EventType {
-		GRANT, GIVEN
-	}
-	
 }
