@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.Locale;
 
 import network.PacketType;
 import resources.client_info.ClientFactory;
@@ -78,15 +79,19 @@ public class CrcDatabaseGenerator {
 	}
 	
 	private static void addCommands(CrcDatabase database) {
-		addCommands(database, "command_table");
-		addCommands(database, "command_table_ground");
+		addCommands(database, "client_command_table_space");
+		addCommands(database, "client_command_table_ground");
 		addCommands(database, "client_command_table");
+		addCommands(database, "command_table_space");
+		addCommands(database, "command_table_ground");
+		addCommands(database, "command_table");
 	}
 	
 	private static void addCommands(CrcDatabase database, String table) {
 		DatatableData baseCommands = (DatatableData) ClientFactory.getInfoFromFile("datatables/command/"+table+".iff");
 		for (int row = 0; row < baseCommands.getRowCount(); row++) {
 			database.addCrcBatch((String) baseCommands.getCell(row, 0));
+			database.addCrcBatch(((String) baseCommands.getCell(row, 0)).toLowerCase(Locale.ENGLISH));
 		}
 	}
 	
