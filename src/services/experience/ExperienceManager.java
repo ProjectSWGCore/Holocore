@@ -108,12 +108,11 @@ public final class ExperienceManager extends Manager {
 			attemptLevelUp(creatureObject, xpType, newXpTotal);
 			short newLevel = creatureObject.getLevel();
 			
-			if (oldLevel > newLevel) {	// If we've leveled up at least once
+			if (oldLevel < newLevel) {	// If we've leveled up at least once
 				new LevelChangedIntent(creatureObject, oldLevel, newLevel).broadcast();
-				// TODO increase health of creatureObject
-				// TODO flytext object.showFlyText(OutOfBand.ProsePackage("@cbt_spam:skill_up"), 2.5f, new RGB(154, 205, 50), 0, true);
-				// TODO client effect clienteffect/skill_granted.cef
-				// TODO audio sound/music_acq_bountyhunter.snd
+				adjustHealth(creatureObject, newLevel);
+				adjustAction(creatureObject, newLevel);
+				Log.i(this, "%s leveled from %d to %d", creatureObject, oldLevel, newLevel);
 			}
 		} else {
 			Log.e(this, "%d %s XP to %s failed because XP can't be given to NPCs", xpGained, xpType, creatureObject);
@@ -129,21 +128,49 @@ public final class ExperienceManager extends Manager {
 		} else {
 			short nextLevel = (short) (currentLevel + 1);
 			Integer xpNextLevel = levelXpMap.get(nextLevel);
-
+			
 			if (xpNextLevel != null) {
 				if (newXpTotal >= xpNextLevel) {
 					creatureObject.setLevel(nextLevel);
 					
 					// Recursively attempt to level up again, in case we've gained enough XP to level up multiple times.
 					attemptLevelUp(creatureObject, xpType, newXpTotal);
-					Log.i(this, "%s leveled up to %d from %d", creatureObject, currentLevel, nextLevel);
 				} else {
 					Log.d(this, "%s didn't gain enough %s XP to level up from %d to %d", creatureObject, xpType, currentLevel, nextLevel);
 				}
 			} else {
-				Log.e(this, "%s can't become level %d because it was not found in the level-to-XP Map", creatureObject, nextLevel);
+				Log.d(this, "%s can't become level %d because it was not found in the level-to-XP Map", creatureObject, nextLevel);
 			}
 		}
+	}
+	
+	private void adjustHealth(CreatureObject creatureObject, short newLevel) {
+		int currentLevelHealthGranted = creatureObject.getLevelHealthGranted();	// The existing levelHealthGranted
+		int newLevelHealthGranted = 100 * newLevel;	// new levelHealthGranted
+		int difference = newLevelHealthGranted - currentLevelHealthGranted;
+		
+		// Set new levelHealthGranted
+		creatureObject.setLevelHealthGranted(newLevelHealthGranted);
+		
+		// Add the difference to their max health
+		int newMaxHealth = creatureObject.getMaxHealth() + difference;
+		creatureObject.setMaxHealth(newMaxHealth);
+		
+		// Give them full health
+		creatureObject.setHealth(newMaxHealth);
+	}
+	
+	private void adjustAction(CreatureObject creatureObject, short newLevel) {
+		int currentMaxAction = creatureObject.getMaxAction();
+		int newLevelActionGranted = 75 * newLevel;
+		int difference = newLevelActionGranted - currentMaxAction;
+		
+		// Add the difference to their max action
+		int newMaxAction = currentMaxAction + difference;
+		creatureObject.setMaxAction(newMaxAction);
+		
+		// Give them full action
+		creatureObject.setAction(newMaxAction);
 	}
 	
 	private int getMaxLevel() {
