@@ -645,25 +645,29 @@ public class CreatureObject extends TangibleObject {
 	}
 
 	public void adjustSkillmod(String skillModName, int base, int modifier) {
-		SkillMod skillMod = skillMods.get(skillModName);
-		
-		if(skillMod == null) {
-			// They didn't have this SkillMod already.
-			// Therefore, we send a full delta.
-			skillMods.put(skillModName, new SkillMod(base, modifier));
-			skillMods.sendDeltaMessage(this);
-		} else {
-			// They already had this skillmod.
-			// All we need to do is adjust the base and the modifier and send an update from the SWGMap
-			skillMod.adjustBase(base);
-			skillMod.adjustModifier(modifier);
-			skillMods.update(skillModName, this);
+		synchronized(skillMods) {
+			SkillMod skillMod = skillMods.get(skillModName);
+
+			if(skillMod == null) {
+				// They didn't have this SkillMod already.
+				// Therefore, we send a full delta.
+				skillMods.put(skillModName, new SkillMod(base, modifier));
+				skillMods.sendDeltaMessage(this);
+			} else {
+				// They already had this skillmod.
+				// All we need to do is adjust the base and the modifier and send an update from the SWGMap
+				skillMod.adjustBase(base);
+				skillMod.adjustModifier(modifier);
+				skillMods.update(skillModName, this);
+			}
 		}
 	}
 	
 	public int getSkillModValue(String skillModName) {
-		SkillMod skillMod = skillMods.get(skillModName);
-		return skillMod != null ? skillMod.getValue() : 0;
+		synchronized(skillMods) {
+			SkillMod skillMod = skillMods.get(skillModName);
+			return skillMod != null ? skillMod.getValue() : 0;
+		}
 	}
 	
 	public boolean isVisible() {
@@ -723,8 +727,10 @@ public class CreatureObject extends TangibleObject {
 	}
 
 	public void addAbility(String abilityName){
-		abilities.put(abilityName, 1);	//TODO: Figure out what the integer value should be for each ability
-		abilities.sendDeltaMessage(this);
+		synchronized(abilities) {
+			abilities.put(abilityName, 1);	//TODO: Figure out what the integer value should be for each ability
+			abilities.sendDeltaMessage(this);
+		}
 	}
 
 	public void removeAbility(String abilityName) { abilities.remove(abilityName); }
