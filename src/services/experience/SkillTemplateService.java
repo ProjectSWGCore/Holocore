@@ -78,7 +78,7 @@ public final class SkillTemplateService extends Service {
 		short newLevel = i.getNewLevel();
 		CreatureObject creatureObject = i.getCreatureObject();
 		
-		for (int level = oldLevel; level < newLevel; level++) {
+		for (int level = oldLevel; level <= newLevel; level++) {
 			// Skills are only awarded every third or fourth level
 			if ((level == 4 || level == 7 || level == 10) || ((level > 10) && (((level - 10) % 4) == 0))) {
 				PlayerObject playerObject = creatureObject.getPlayerObject();
