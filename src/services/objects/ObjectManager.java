@@ -227,6 +227,7 @@ public class ObjectManager extends Manager {
 	public SWGObject deleteObject(long objId) {
 		synchronized (database) {
 			database.remove(objId);
+			database.save();
 		}
 		synchronized (objectMap) {
 			SWGObject obj = objectMap.remove(objId);
@@ -322,8 +323,10 @@ public class ObjectManager extends Manager {
 			parent.addObject(obj);
 		}
 		synchronized (database) {
-			if (addToDatabase)
+			if (addToDatabase) {
 				database.put(obj.getObjectId(), obj);
+				database.save();
+			}
 		}
 		Log.v("ObjectManager", "Created object %d [%s]", obj.getObjectId(), obj.getTemplate());
 		new ObjectCreatedIntent(obj).broadcast();
