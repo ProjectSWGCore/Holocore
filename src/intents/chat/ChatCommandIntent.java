@@ -27,36 +27,45 @@
 ***********************************************************************************/
 package intents.chat;
 
+import resources.commands.Command;
 import resources.control.Intent;
+import resources.objects.creature.CreatureObject;
 
 public class ChatCommandIntent extends Intent {
 	
 	public static final String TYPE = "ChatCommandIntent";
 	
+	private CreatureObject source;
 	private long target;
-	private int crc;
+	private Command command;
 	private String [] arguments;
 	
 	public ChatCommandIntent() {
 		super(TYPE);
+		setSource(null);
 		setTarget(0);
-		setCrc(0);
+		setCommand(null);
 		setArguments(new String[0]);
 	}
 	
-	public ChatCommandIntent(long target, int crc, String [] arguments) {
+	public ChatCommandIntent(CreatureObject source, long target, Command command, String [] arguments) {
 		super(TYPE);
+		setSource(source);
 		setTarget(target);
-		setCrc(crc);
+		setCommand(command);
 		setArguments(arguments);
+	}
+	
+	public void setSource(CreatureObject source) {
+		this.source = source;
 	}
 	
 	public void setTarget(long target) {
 		this.target = target;
 	}
 	
-	public void setCrc(int crc) {
-		this.crc = crc;
+	public void setCommand(Command command) {
+		this.command = command;
 	}
 	
 	public void setArguments(String [] arguments) {
@@ -64,12 +73,16 @@ public class ChatCommandIntent extends Intent {
 		System.arraycopy(arguments, 0, this.arguments, 0, arguments.length);
 	}
 	
+	public CreatureObject getSource() {
+		return source;
+	}
+	
 	public long getTarget() {
 		return target;
 	}
 	
-	public int getCrc() {
-		return crc;
+	public Command getCommand() {
+		return command;
 	}
 	
 	public String [] getArguments() {

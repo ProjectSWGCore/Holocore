@@ -108,7 +108,7 @@ public class CommandService extends Service {
 		}
 		
 		executeCommand(galacticManager, player, command, target, request.getArguments());
-		new ChatCommandIntent(request.getTargetId(), request.getCommandCrc(), arguments).broadcast();
+		new ChatCommandIntent(player.getCreatureObject(), request.getTargetId(), command, arguments).broadcast();
 	}
 	
 	private void executeCommand(GalacticManager galacticManager, Player player, Command command, SWGObject target, String args) {
@@ -153,7 +153,10 @@ public class CommandService extends Service {
 	
 	private void loadBaseCommands() {
 		// First = Higher Priority, Last = Lower Priority ---- Some tables contain duplicates, ORDER MATTERS!
-		final String [] commandTables = new String [] {"command_table", "command_table_ground", "client_command_table", };
+		final String [] commandTables = new String [] {
+			"command_table", "command_table_ground", "client_command_table",
+			"command_table_space", "client_command_table_ground", "client_command_table_space"
+		};
 		
 		clearCommands();
 		for (String table : commandTables) {
@@ -165,6 +168,7 @@ public class CommandService extends Service {
 		DatatableData baseCommands = (DatatableData) ClientFactory.getInfoFromFile("datatables/command/"+table+".iff");
 
 		int godLevel = baseCommands.getColumnFromName("godLevel");
+		int combatCommand = baseCommands.getColumnFromName("addToCombatQueue");
 		for (int row = 0; row < baseCommands.getRowCount(); row++) {
 			Object [] cmdRow = baseCommands.getRow(row);
 
@@ -174,6 +178,10 @@ public class CommandService extends Service {
 			command.setCppHook((String)cmdRow[4]);
 			command.setDefaultTime((float) cmdRow[6]);
 			command.setCharacterAbility((String) cmdRow[7]);
+			if (combatCommand != -1)
+				command.setCombatCommand((Boolean) cmdRow[combatCommand]);
+			else
+				command.setCombatCommand(false);
 
 			if(godLevel >= 0){
 				command.setGodLevel((int) cmdRow[godLevel]);
