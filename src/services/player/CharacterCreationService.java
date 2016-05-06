@@ -63,6 +63,7 @@ import resources.objects.cell.CellObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
 import resources.objects.tangible.TangibleObject;
+import resources.objects.weapon.WeaponObject;
 import resources.player.AccessLevel;
 import resources.player.Player;
 import resources.player.PlayerEvent;
@@ -315,6 +316,7 @@ public class CharacterCreationService extends Service {
 		creatureObj.setVolume(0x000F4240);
 		creatureObj.setOwner(player);
 		creatureObj.addObject(playerObj); // ghost slot
+		
 		playerObj.setAdminTag(player.getAccessLevel());
 		player.setCreatureObject(creatureObj);
 		return creatureObj.getObjectId();
@@ -392,9 +394,13 @@ public class CharacterCreationService extends Service {
 		creatureObj.setPvpFlags(PvpFlag.PLAYER, PvpFlag.OVERT);
 		creatureObj.getSkills().add("species_" + creatureObj.getRace().getSpecies());
 
+		WeaponObject defWeapon = (WeaponObject) createInventoryObject(objManager, creatureObj, "object/weapon/melee/unarmed/shared_unarmed_default_player.iff");
+		defWeapon.setMaxRange(5);
+		creatureObj.setEquippedWeaponId(defWeapon.getObjectId());
 		creatureObj.addEquipment(createInventoryObject(objManager, creatureObj, "object/tangible/inventory/shared_character_inventory.iff"));
 		creatureObj.addEquipment(createInventoryObject(objManager, creatureObj, "object/tangible/datapad/shared_character_datapad.iff"));
 		creatureObj.addEquipment(createInventoryObject(objManager, creatureObj, "object/tangible/inventory/shared_appearance_inventory.iff"));
+		creatureObj.addEquipment(defWeapon);
 		createInventoryObject(objManager, creatureObj, "object/tangible/bank/shared_character_bank.iff");
 		createInventoryObject(objManager, creatureObj, "object/tangible/mission_bag/shared_mission_bag.iff");
 		
