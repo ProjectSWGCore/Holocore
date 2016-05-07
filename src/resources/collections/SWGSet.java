@@ -32,7 +32,6 @@ import network.packets.swg.zone.baselines.Baseline;
 import resources.encodables.Encodable;
 import resources.network.NetBuffer;
 import resources.objects.SWGObject;
-import resources.player.PlayerState;
 import utilities.Encoder;
 import utilities.Encoder.StringType;
 
@@ -133,12 +132,7 @@ public class SWGSet<E> extends AbstractSet<E> implements Encodable, Serializable
 	public void sendDeltaMessage(SWGObject target) {
 		if (!(deltas.size() > 0))
 			return;
-
-		if (target.getOwner() == null || target.getOwner().getPlayerState() != PlayerState.ZONED_IN) {
-			clearDeltaQueue();
-			return;
-		}
-
+		
 		target.sendDelta(view, updateType, getDeltaData());
 		// Clear the queue since the delta has been sent to observers through the builder
 		clearDeltaQueue();
