@@ -27,20 +27,37 @@
 ***********************************************************************************/
 package resources.objects.weapon;
 
-public final class WeaponType {
-	// combat_timing.iff datatable
-	public static final int RIFLE = 0;
-	public static final int CARBINE = 1;
-	public static final int PISTOL = 2;
-	public static final int HEAVY = 3;
-	public static final int ONEHANDEDMELEE = 4;
-	public static final int TWOHANDEDMELEE = 5;
-	public static final int UNARMED = 6;
-	public static final int POLEARMMELEE = 7;
-	public static final int THROWN = 8;
-	public static final int ONEHANDEDSABER = 9;
-	public static final int TWOHANDEDSABER = 10;
-	public static final int POLEARMSABER = 11;
-	public static final int HEAVYWEAPON = 12;
-	public static final int DIRECTIONALTARGETWEAPON = 13;
+public enum WeaponType {
+	RIFLE						(0),
+	CARBINE						(1),
+	PISTOL						(2),
+	HEAVY						(3),
+	ONE_HANDED_MELEE			(4),
+	TWO_HANDED_MELEE			(5),
+	UNARMED						(6),
+	POLEARM_MELEE				(7),
+	THROWN						(8),
+	ONE_HANDED_SABER			(9),
+	TWO_HANDED_SABER			(10),
+	POLEARM_SABER				(11),
+	HEAVY_WEAPON				(12),
+	DIRECTIONAL_TARGET_WEAPON	(13);
+	
+	private static final WeaponType [] VALUES = values();
+	
+	private int num;
+	
+	WeaponType(int num) {
+		this.num = num;
+	}
+	
+	public int getNum() {
+		return num;
+	}
+	
+	public static WeaponType getWeaponType(int num) {
+		if (num < 0 || num >= VALUES.length)
+			return RIFLE;
+		return VALUES[num];
+	}
 }
