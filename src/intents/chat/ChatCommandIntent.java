@@ -29,6 +29,7 @@ package intents.chat;
 
 import resources.commands.Command;
 import resources.control.Intent;
+import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 
 public class ChatCommandIntent extends Intent {
@@ -36,19 +37,19 @@ public class ChatCommandIntent extends Intent {
 	public static final String TYPE = "ChatCommandIntent";
 	
 	private CreatureObject source;
-	private long target;
+	private SWGObject target;
 	private Command command;
 	private String [] arguments;
 	
 	public ChatCommandIntent() {
 		super(TYPE);
 		setSource(null);
-		setTarget(0);
+		setTarget(null);
 		setCommand(null);
 		setArguments(new String[0]);
 	}
 	
-	public ChatCommandIntent(CreatureObject source, long target, Command command, String [] arguments) {
+	public ChatCommandIntent(CreatureObject source, SWGObject target, Command command, String [] arguments) {
 		super(TYPE);
 		setSource(source);
 		setTarget(target);
@@ -60,7 +61,7 @@ public class ChatCommandIntent extends Intent {
 		this.source = source;
 	}
 	
-	public void setTarget(long target) {
+	public void setTarget(SWGObject target) {
 		this.target = target;
 	}
 	
@@ -77,7 +78,7 @@ public class ChatCommandIntent extends Intent {
 		return source;
 	}
 	
-	public long getTarget() {
+	public SWGObject getTarget() {
 		return target;
 	}
 	

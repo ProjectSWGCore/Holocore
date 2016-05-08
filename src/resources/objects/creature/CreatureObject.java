@@ -90,7 +90,7 @@ public class CreatureObject extends TangibleObject {
 	private long	reserveBalance			= 0; // Galactic Reserve - capped at 3 billion
 	private String	moodAnimation			= "neutral";
 	private String	animation				= "";
-	private long	equippedWeaponId		= 0;
+	private WeaponObject equippedWeapon		= null;
 	private byte	moodId					= 0;
 	private long 	lookAtTargetId			= 0;
 	private long 	intendedTargetId		= 0;
@@ -122,7 +122,7 @@ public class CreatureObject extends TangibleObject {
 	private SWGMap<String, SkillMod> 	skillMods			= new SWGMap<>(4, 3, StringType.ASCII); // TODO: SkillMod structure
 	private SWGMap<String, Integer>	abilities				= new SWGMap<>(4, 14, StringType.ASCII);
 	private SWGMap<CRC, Buff>	buffs				= new SWGMap<>(6, 26);
-
+	
 	public CreatureObject(long objectId) {
 		super(objectId, BaselineType.CREO);
 		initMaxAttributes();
@@ -130,7 +130,7 @@ public class CreatureObject extends TangibleObject {
 		initBaseAttributes();
 		setOptionFlags(OptionFlag.HAM_BAR);
 	}
-
+	
 	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
 		ois.defaultReadObject();
 		// Transient Variables
@@ -496,13 +496,13 @@ public class CreatureObject extends TangibleObject {
 		sendDelta(6, 10, animation, StringType.ASCII);
 	}
 
-	public long getEquippedWeaponId() {
-		return equippedWeaponId;
+	public WeaponObject getEquippedWeapon() {
+		return equippedWeapon;
 	}
 
-	public void setEquippedWeaponId(long equippedWeaponId) {
-		this.equippedWeaponId = equippedWeaponId;
-		sendDelta(6, 12, equippedWeaponId);
+	public void setEquippedWeapon(WeaponObject weapon) {
+		this.equippedWeapon = weapon;
+		sendDelta(6, 12, weapon.getObjectId());
 	}
 
 	public byte getMoodId() {
@@ -690,27 +690,57 @@ public class CreatureObject extends TangibleObject {
 	}
 
 	public int getHealth() {
-		return attributes.get(0);
+		synchronized (attributes) {
+			return attributes.get(0);
+		}
 	}
 	
 	public int getMaxHealth() {
-		return maxAttributes.get(0);
+		synchronized (maxAttributes) {
+			return maxAttributes.get(0);
+		}
 	}
 	
 	public int getBaseHealth() {
-		return baseAttributes.get(0);
+		synchronized (baseAttributes) {
+			return baseAttributes.get(0);
+		}
 	}
 	
 	public int getAction() {
-		return attributes.get(2);
+		synchronized (attributes) {
+			return attributes.get(2);
+		}
 	}
 	
 	public int getMaxAction() {
-		return attributes.get(2);
+		synchronized (maxAttributes) {
+			return maxAttributes.get(2);
+		}
 	}
 	
 	public int getBaseAction() {
-		return attributes.get(2);
+		synchronized (baseAttributes) {
+			return baseAttributes.get(2);
+		}
+	}
+	
+	public int getMind() {
+		synchronized (attributes) {
+			return attributes.get(4);
+		}
+	}
+	
+	public int getMaxMind() {
+		synchronized (maxAttributes) {
+			return maxAttributes.get(4);
+		}
+	}
+	
+	public int getBaseMind() {
+		synchronized (baseAttributes) {
+			return baseAttributes.get(4);
+		}
 	}
 
 	public void addAbility(String abilityName){ abilities.put(abilityName, 1); }//TODO: Figure out what the integer value should be for each ability
@@ -724,6 +754,13 @@ public class CreatureObject extends TangibleObject {
 	public void setHealth(int health) {
 		synchronized(attributes) {
 			attributes.set(0, health);
+			attributes.sendDeltaMessage(this);
+		}
+	}
+	
+	public void modifyHealth(int mod) {
+		synchronized(attributes) {
+			attributes.set(0, getHealth() + mod);
 			attributes.sendDeltaMessage(this);
 		}
 	}
@@ -742,9 +779,37 @@ public class CreatureObject extends TangibleObject {
 		}
 	}
 	
+	public void modifyAction(int mod) {
+		synchronized(attributes) {
+			attributes.set(2, getAction() + mod);
+			attributes.sendDeltaMessage(this);
+		}
+	}
+	
 	public void setMaxAction(int maxAction) {
 		synchronized(maxAttributes) {
 			maxAttributes.set(2, maxAction);
+			maxAttributes.sendDeltaMessage(this);
+		}
+	}
+	
+	public void setMind(int mind) {
+		synchronized(attributes) {
+			attributes.set(4, mind);
+			attributes.sendDeltaMessage(this);
+		}
+	}
+	
+	public void modifyMind(int mod) {
+		synchronized(attributes) {
+			attributes.set(4, getMind() + mod);
+			attributes.sendDeltaMessage(this);
+		}
+	}
+	
+	public void setMaxMind(int maxMind) {
+		synchronized(maxAttributes) {
+			maxAttributes.set(4, maxMind);
 			maxAttributes.sendDeltaMessage(this);
 		}
 	}
@@ -754,7 +819,7 @@ public class CreatureObject extends TangibleObject {
 		maxAttributes.add(1, 0);
 		maxAttributes.add(2, 300); // Action
 		maxAttributes.add(3, 0);
-		maxAttributes.add(4, 300); // ??
+		maxAttributes.add(4, 300); // Mind
 		maxAttributes.add(5, 0);
 		maxAttributes.clearDeltaQueue();
 	}
@@ -764,7 +829,7 @@ public class CreatureObject extends TangibleObject {
 		attributes.add(1, 0);
 		attributes.add(2, 300); // Action
 		attributes.add(3, 0);
-		attributes.add(4, 300); // ??
+		attributes.add(4, 300); // Mind
 		attributes.add(5, 0);
 		attributes.clearDeltaQueue();
 	}
@@ -774,7 +839,7 @@ public class CreatureObject extends TangibleObject {
 		baseAttributes.add(1, 0);
 		baseAttributes.add(2, 300); // Action
 		baseAttributes.add(3, 0);
-		baseAttributes.add(4, 300); // ??
+		baseAttributes.add(4, 300); // Mind
 		baseAttributes.add(5, 0);
 		baseAttributes.clearDeltaQueue();
 	}
@@ -901,7 +966,7 @@ public class CreatureObject extends TangibleObject {
 		bb.addInt(levelHealthGranted); // 9
 		bb.addAscii(animation); // 10
 		bb.addAscii(moodAnimation); // 11
-		bb.addLong(equippedWeaponId); // 12
+		bb.addLong(equippedWeapon == null ? 0 : equippedWeapon.getObjectId()); // 12
 		bb.addLong(groupId); // 13
 		bb.addObject(inviterData); // TODO: Check structure -- 14
 		bb.addInt(guildId); // 15
@@ -980,7 +1045,7 @@ public class CreatureObject extends TangibleObject {
 		levelHealthGranted = buffer.getInt();
 		animation = buffer.getAscii();
 		moodAnimation = buffer.getAscii();
-		equippedWeaponId = buffer.getLong();
+		long weaponId = buffer.getLong();
 		groupId = buffer.getLong();
 		inviterData = buffer.getEncodable(GroupInviterData.class);
 		guildId = buffer.getInt();
@@ -1003,6 +1068,13 @@ public class CreatureObject extends TangibleObject {
 		buffer.getBoolean();
 		appearanceList = buffer.getSwgList(6, 33, Equipment.class);
 		buffer.getLong();
+		equippedWeapon = null;
+		for (Equipment e : equipmentList) {
+			if (e.getObjectId() == weaponId && e.getWeapon() instanceof WeaponObject) {
+				equippedWeapon = (WeaponObject) e.getWeapon();
+				break;
+			}
+		}
 	}
 	
 }
