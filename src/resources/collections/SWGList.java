@@ -96,6 +96,10 @@ public class SWGList<E> extends AbstractList<E> implements Encodable, Serializab
 		ois.defaultReadObject();
 		updateCount = 0;
 	}
+	
+	public void resetUpdateCount() {
+		updateCount = 0;
+	}
 
 	/**
 	 * Appends the specified element to the end of this list if it doesn't already exist. Once added, the updateCount is incremented by one

@@ -83,6 +83,10 @@ public class SWGMap<K, V> extends AbstractMap<K, V> implements Encodable, Serial
 		updateCount = 0;
 	}
 	
+	public void resetUpdateCount() {
+		updateCount = 0;
+	}
+	
 	@Override
 	public V get(Object key) {
 		return map.get(key);

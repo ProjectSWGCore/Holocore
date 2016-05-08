@@ -94,6 +94,10 @@ public class SWGSet<E> extends AbstractSet<E> implements Encodable, Serializable
 		updateCount = 0;
 	}
 	
+	public void resetUpdateCount() {
+		updateCount = 0;
+	}
+	
 	@Override
 	public boolean add(E e) {
 		if (!set.add(e))
