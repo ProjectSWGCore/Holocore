@@ -25,6 +25,7 @@ public enum ValidTarget {
 	}
 	
 	public static ValidTarget getValidTarget(int num) {
+		++num;
 		if (num < 0 || num >= VALUES.length)
 			return STANDARD;
 		return VALUES[num];
