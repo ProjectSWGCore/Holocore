@@ -78,7 +78,6 @@ public class TangibleObject extends SWGObject {
 		pvpStatus = PvpStatus.COMBATANT;
 		pvpFaction = PvpFaction.NEUTRAL;
 		ois.defaultReadObject();
-		effectsMap = new SWGMap<>(6, 7);
 		defenders.clear();
 		defenders.resetUpdateCount();
 		inCombat = false;
