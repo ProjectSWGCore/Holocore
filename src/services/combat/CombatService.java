@@ -17,6 +17,7 @@ import resources.combat.CombatStatus;
 import resources.combat.HitLocation;
 import resources.combat.TrailLocation;
 import resources.commands.CombatCommand;
+import resources.common.CRC;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.encodables.ProsePackage;
@@ -103,7 +104,9 @@ public class CombatService extends Service {
 		updateCombatList(cci.getSource());
 		if (cci.getTarget() instanceof CreatureObject)
 			updateCombatList((CreatureObject) cci.getTarget());
-		if (res instanceof AttackInfoLight)
+		if (res instanceof Number)
+			doCombat(cci.getSource(), cci.getTarget(), new AttackInfoLight(((Number) res).intValue()), c);
+		else if (res instanceof AttackInfoLight)
 			doCombat(cci.getSource(), cci.getTarget(), (AttackInfoLight) res, c);
 		else {
 			Log.w(this, "Unknown return from combat script: " + res);
@@ -127,9 +130,11 @@ public class CombatService extends Service {
 	
 	private void doCombat(CreatureObject source, SWGObject target, AttackInfoLight info, CombatCommand command) {
 		CombatAction action = new CombatAction(source.getObjectId());
+		String anim = command.getRandomAnimation(source.getEquippedWeapon().getType());
+		action.setActionCrc(CRC.getCrc(anim));
 		action.setAttacker(source);
 		action.setClientEffectId((byte) 0);
-		action.setActionCrc(command.getCrc());
+		action.setCommandCrc(command.getCrc());
 		action.setTrail(TrailLocation.WEAPON);
 		action.setUseLocation(false);
 		if (target instanceof CreatureObject) {

@@ -3,5 +3,5 @@ function canPerform(source, target, command) {
 }
 
 function doCombat(source, target, command) {
-	return new (Java.type("resources.combat.AttackInfoLight"))(100);
+	return 100;
 }
