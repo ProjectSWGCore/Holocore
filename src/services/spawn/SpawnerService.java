@@ -147,7 +147,7 @@ public final class SpawnerService extends Service {
 		CreatureDifficulty difficulty;
 		
 		switch(difficultyChar) {
-			default: Log.w(this, "An unknown creature difficulty of %s was set for %s", difficultyChar, creatureName);
+			default: Log.w(this, "An unknown creature difficulty of %s was set for %s. Using default NORMAL", difficultyChar, creatureName);
 			case "N": difficulty = CreatureDifficulty.NORMAL; break;
 			case "E": difficulty = CreatureDifficulty.ELITE; break;
 			case "B": difficulty = CreatureDifficulty.BOSS; break;
