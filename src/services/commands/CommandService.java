@@ -48,6 +48,7 @@ import resources.control.Service;
 import resources.encodables.ProsePackage;
 import resources.encodables.StringId;
 import resources.objects.SWGObject;
+import resources.objects.weapon.WeaponType;
 import resources.player.AccessLevel;
 import resources.player.Player;
 import resources.server_info.Log;
@@ -212,7 +213,6 @@ public class CommandService extends Service {
 	
 	private void loadCombatCommands() {
 		DatatableData combatCommands = (DatatableData) ClientFactory.getInfoFromFile("datatables/combat/combat_data.iff");
-		// validTarget  forcesCharacterIntoCombat  attackType  healthCost  actionCost  damageType  ignore_distance  pvp_only  attack_rolls
 		int validTarget = combatCommands.getColumnFromName("validTarget");
 		int forceCombat = combatCommands.getColumnFromName("forcesCharacterIntoCombat");
 		int attackType = combatCommands.getColumnFromName("attackType");
@@ -222,6 +222,10 @@ public class CommandService extends Service {
 		int ignoreDistance = combatCommands.getColumnFromName("ignore_distance");
 		int pvpOnly = combatCommands.getColumnFromName("pvp_only");
 		int attackRolls = combatCommands.getColumnFromName("attack_rolls");
+		int animDefault = combatCommands.getColumnFromName("animDefault");
+		// animDefault	anim_unarmed	anim_onehandmelee	anim_twohandmelee	anim_polearm
+		// anim_pistol	anim_lightRifle	anim_carbine	anim_rifle	anim_heavyweapon
+		// anim_thrown	anim_onehandlightsaber	anim_twohandlightsaber	anim_polearmlightsaber
 		for (int row = 0; row < combatCommands.getRowCount(); row++) {
 			Object [] cmdRow = combatCommands.getRow(row);
 			
@@ -239,8 +243,28 @@ public class CommandService extends Service {
 			cc.setIgnoreDistance(((int) cmdRow[ignoreDistance]) != 0);
 			cc.setPvpOnly(((int) cmdRow[pvpOnly]) != 0);
 			cc.setAttackRolls((int) cmdRow[attackRolls]);
+			cc.setDefaultAnimation(getAnimationList((String) cmdRow[animDefault]));
+			cc.setAnimations(WeaponType.UNARMED, getAnimationList((String) cmdRow[animDefault+1]));
+			cc.setAnimations(WeaponType.ONE_HANDED_MELEE, getAnimationList((String) cmdRow[animDefault+2]));
+			cc.setAnimations(WeaponType.TWO_HANDED_MELEE, getAnimationList((String) cmdRow[animDefault+3]));
+			cc.setAnimations(WeaponType.POLEARM_MELEE, getAnimationList((String) cmdRow[animDefault+4]));
+			cc.setAnimations(WeaponType.POLEARM_MELEE, getAnimationList((String) cmdRow[animDefault+5]));
+			cc.setAnimations(WeaponType.PISTOL, getAnimationList((String) cmdRow[animDefault+6]));
+			cc.setAnimations(WeaponType.LIGHT_RIFLE, getAnimationList((String) cmdRow[animDefault+7]));
+			cc.setAnimations(WeaponType.CARBINE, getAnimationList((String) cmdRow[animDefault+8]));
+			cc.setAnimations(WeaponType.RIFLE, getAnimationList((String) cmdRow[animDefault+9]));
+			cc.setAnimations(WeaponType.THROWN, getAnimationList((String) cmdRow[animDefault+10]));
+			cc.setAnimations(WeaponType.ONE_HANDED_SABER, getAnimationList((String) cmdRow[animDefault+11]));
+			cc.setAnimations(WeaponType.TWO_HANDED_SABER, getAnimationList((String) cmdRow[animDefault+12]));
+			cc.setAnimations(WeaponType.POLEARM_SABER, getAnimationList((String) cmdRow[animDefault+13]));
 			addCommand(cc);
 		}
+	}
+	
+	private String [] getAnimationList(String cell) {
+		if (cell.isEmpty())
+			return new String[0];
+		return cell.split(",");
 	}
 	
 	private <T extends ICmdCallback> Command registerCallback(String command, Class<T> callback) {

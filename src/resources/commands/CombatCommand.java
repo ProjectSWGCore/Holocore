@@ -1,13 +1,19 @@
 package resources.commands;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import resources.combat.AttackType;
 import resources.combat.DamageType;
 import resources.combat.ValidTarget;
+import resources.objects.weapon.WeaponType;
 
 public class CombatCommand extends Command {
 	
 	private ValidTarget validTarget;
 	private boolean forceCombat;
+	private Map<WeaponType, String[]> animations;
+	private String [] defaultAnimation;
 	private AttackType attackType;
 	private double healthCost;
 	private double actionCost;
@@ -18,6 +24,7 @@ public class CombatCommand extends Command {
 	
 	public CombatCommand(String name) {
 		super(name);
+		animations = new HashMap<>();
 	}
 	
 	public ValidTarget getValidTarget() {
@@ -56,6 +63,19 @@ public class CombatCommand extends Command {
 		return attackRolls;
 	}
 	
+	public String [] getDefaultAnimations() {
+		return defaultAnimation;
+	}
+	
+	public String getRandomAnimation(WeaponType type) {
+		String [] animations = this.animations.get(type);
+		if (animations == null || animations.length == 0)
+			animations = defaultAnimation;
+		if (animations == null || animations.length == 0)
+			return "";
+		return animations[(int) (Math.random() * animations.length)];
+	}
+	
 	public void setValidTarget(ValidTarget validTarget) {
 		this.validTarget = validTarget;
 	}
@@ -90,6 +110,14 @@ public class CombatCommand extends Command {
 	
 	public void setAttackRolls(int attackRolls) {
 		this.attackRolls = attackRolls;
+	}
+	
+	public void setDefaultAnimation(String [] animations) {
+		this.defaultAnimation = animations;
+	}
+	
+	public void setAnimations(WeaponType type, String [] animations) {
+		this.animations.put(type, animations);
 	}
 	
 }

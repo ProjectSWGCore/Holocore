@@ -41,7 +41,8 @@ public enum WeaponType {
 	TWO_HANDED_SABER			(10),
 	POLEARM_SABER				(11),
 	HEAVY_WEAPON				(12),
-	DIRECTIONAL_TARGET_WEAPON	(13);
+	DIRECTIONAL_TARGET_WEAPON	(13),
+	LIGHT_RIFLE					(14);
 	
 	private static final WeaponType [] VALUES = values();
 	
