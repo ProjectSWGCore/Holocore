@@ -150,11 +150,12 @@ public final class SkillService extends Service {
 			target.addAbility(commandName);
 		}
 		
-		skillData.skillMods.forEach((skillModName, skillModValue) -> new SkillModIntent(skillModName, 0, skillModValue, target).broadcast());
+//		skillData.skillMods.forEach((skillModName, skillModValue) -> new SkillModIntent(skillModName, 0, skillModValue, target).broadcast());
 		
-		for(String schematic : skillData.schematics) {
-			playerObject.addDraftSchematic(schematic);
-		}
+		// Ziggy: These are disabled for now, since we don't have the structs in place for it.
+//		for(String schematic : skillData.schematics) {
+			// Add schematic to PlayerObject
+//		}
 		
 		Log.i(this, "%s was given skill %s", target, skillName);
 	}
