@@ -112,6 +112,7 @@ public final class ExperienceManager extends Manager {
 				new LevelChangedIntent(creatureObject, oldLevel, newLevel).broadcast();
 				adjustHealth(creatureObject, newLevel);
 				adjustAction(creatureObject, newLevel);
+				// TODO NGE: system message health and action differences. @spam:level_up_stat_gain_#
 				Log.i(this, "%s leveled from %d to %d", creatureObject, oldLevel, newLevel);
 			}
 		} else {
@@ -157,6 +158,7 @@ public final class ExperienceManager extends Manager {
 		creatureObject.setMaxHealth(newMaxHealth);
 		
 		// Give them full health
+		creatureObject.setBaseHealth(newMaxHealth);
 		creatureObject.setHealth(newMaxHealth);
 	}
 	
@@ -170,6 +172,7 @@ public final class ExperienceManager extends Manager {
 		creatureObject.setMaxAction(newMaxAction);
 		
 		// Give them full action
+		creatureObject.setBaseAction(newMaxAction);
 		creatureObject.setAction(newMaxAction);
 	}
 	
