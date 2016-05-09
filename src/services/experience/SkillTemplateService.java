@@ -40,7 +40,7 @@ import resources.objects.player.PlayerObject;
 import resources.server_info.Log;
 
 /**
- * This is a service that listens for {@link LevelCHangedIntent} and grants
+ * This is a service that listens for {@link LevelChangedIntent} and grants
  * everything linked to a skillbox.
  * @author Mads
  */
