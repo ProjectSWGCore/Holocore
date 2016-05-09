@@ -34,6 +34,7 @@ import java.util.Collection;
 
 import intents.server.ConfigChangedIntent;
 import resources.Location;
+import resources.PvpFlag;
 import resources.Terrain;
 import resources.config.ConfigFile;
 import resources.control.Intent;
@@ -42,6 +43,7 @@ import resources.objects.building.BuildingObject;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureDifficulty;
 import resources.objects.creature.CreatureObject;
+import resources.objects.tangible.OptionFlag;
 import resources.server_info.Log;
 import resources.server_info.RelationalDatabase;
 import resources.server_info.RelationalServerFactory;
@@ -153,16 +155,25 @@ public final class SpawnerService extends Service {
 			case "B": difficulty = CreatureDifficulty.BOSS; break;
 		}
 		
-		createNPC(parent, loc, set.getString("iff"), creatureName, set.getString("mood"), set.getInt("combat_level"), difficulty, set.getInt("HP"), set.getInt("Action"));
+		createNPC(parent, loc, set.getString("iff"), creatureName, set.getString("mood"), set.getInt("combat_level"), difficulty, set.getInt("HP"), set.getInt("Action"), set.getString("attackable"));
 	}
 	
-	private boolean createNPC(SWGObject parent, Location loc, String iff, String name, String moodAnimation, int combatLevel, CreatureDifficulty difficulty, int health, int action) {
+	private boolean createNPC(SWGObject parent, Location loc, String iff, String name, String moodAnimation, int combatLevel, CreatureDifficulty difficulty, int health, int action, String attackable) {
 		CreatureObject object = (CreatureObject) objectManager.createObject(parent, createTemplate(getRandomIff(iff)), loc, false);
 		if (object == null)
 			return false;
 		object.setName(getCreatureName(name));
 		object.setLevel((short) combatLevel);
 		object.setDifficulty(difficulty);
+		object.setHealth(health);
+		object.setAction(action);
+		
+		switch(attackable) {
+			case "AGGRESSIVE": object.setOptionFlags(OptionFlag.AGGRESSIVE);	// Ziggy: There's also an AGGRESSIVE PvpFlag?
+			case "ATTACKABLE": object.setPvpFlags(PvpFlag.ATTACKABLE); break;
+			case "INVULNERABLE": object.setOptionFlags(OptionFlag.INVULNERABLE); break;
+		}
+		
 		if (!moodAnimation.equals(IDLE_MOOD)) {
 			object.setMoodAnimation(moodAnimation);
 		}
