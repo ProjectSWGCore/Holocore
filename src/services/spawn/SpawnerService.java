@@ -40,6 +40,7 @@ import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.building.BuildingObject;
 import resources.objects.SWGObject;
+import resources.objects.creature.CreatureDifficulty;
 import resources.objects.creature.CreatureObject;
 import resources.server_info.Log;
 import resources.server_info.RelationalDatabase;
@@ -53,9 +54,10 @@ public final class SpawnerService extends Service {
 	private static final String GET_ALL_SPAWNERS_SQL = "SELECT static.x, static.y, static.z, static.heading, " // static columns
 			+ "static.spawner_type, static.cell_id, static.active, static.mood, " // more static columns
 			+ "buildings.object_id AS building_id, buildings.terrain_name AS building_terrain, " // building columns
-			+ "creatures.iff_template AS iff, creatures.creature_name creatures.combat_level " // creature columns
-			+ "FROM static, buildings, creatures "
-			+ "WHERE buildings.building_id = static.building_id AND static.creature_id = creatures.creature_id";
+			+ "creatures.iff_template AS iff, creatures.creature_name creatures.combat_level creatures.difficulty " // creature columns
+			+ "npc_stats.HP, npc_stats.Action "	// npc_stats columns
+			+ "FROM static, buildings, creatures, npc_stats "
+			+ "WHERE buildings.building_id = static.building_id AND static.creature_id = creatures.creature_id AND creatures.combat_level = npc_stats.Level";
 	private static final String IDLE_MOOD = "idle";
 	
 	private final ObjectManager objectManager;
@@ -140,15 +142,27 @@ public final class SpawnerService extends Service {
 			SWGObject egg = objectManager.createObject(parent, spawnerType.getObjectTemplate(), loc, false);
 			spawners.add(new Spawner(egg));
 		}
-		createNPC(parent, loc, set.getString("iff"), set.getString("creature_name"), set.getString("mood"), set.getInt("combat_level"));
+		String difficultyChar = set.getString("difficulty");
+		String creatureName = set.getString("creature_name");
+		CreatureDifficulty difficulty;
+		
+		switch(difficultyChar) {
+			default: Log.w(this, "An unknown creature difficulty of %s was set for %s", difficultyChar, creatureName);
+			case "N": difficulty = CreatureDifficulty.NORMAL; break;
+			case "E": difficulty = CreatureDifficulty.ELITE; break;
+			case "B": difficulty = CreatureDifficulty.BOSS; break;
+		}
+		
+		createNPC(parent, loc, set.getString("iff"), creatureName, set.getString("mood"), set.getInt("combat_level"), difficulty, set.getInt("HP"), set.getInt("Action"));
 	}
 	
-	private boolean createNPC(SWGObject parent, Location loc, String iff, String name, String moodAnimation, int combatLevel) {
+	private boolean createNPC(SWGObject parent, Location loc, String iff, String name, String moodAnimation, int combatLevel, CreatureDifficulty difficulty, int health, int action) {
 		CreatureObject object = (CreatureObject) objectManager.createObject(parent, createTemplate(getRandomIff(iff)), loc, false);
 		if (object == null)
 			return false;
 		object.setName(getCreatureName(name));
 		object.setLevel((short) combatLevel);
+		object.setDifficulty(difficulty);
 		if (!moodAnimation.equals(IDLE_MOOD)) {
 			object.setMoodAnimation(moodAnimation);
 		}
