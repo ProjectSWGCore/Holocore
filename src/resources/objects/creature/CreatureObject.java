@@ -719,11 +719,11 @@ public class CreatureObject extends TangibleObject {
 	}
 	
 	public int getMaxAction() {
-		return attributes.get(2);
+		return maxAttributes.get(2);
 	}
 	
 	public int getBaseAction() {
-		return attributes.get(2);
+		return baseAttributes.get(2);
 	}
 
 	public void addAbility(String abilityName){
@@ -739,6 +739,13 @@ public class CreatureObject extends TangibleObject {
 	
 	public Set<String> getAbilityNames() { return abilities.keySet(); };
 	
+	public void setBaseHealth(int baseHealth) {
+		synchronized(baseAttributes) {
+			baseAttributes.set(0, baseHealth);
+			baseAttributes.sendDeltaMessage(this);
+		}
+	}
+	
 	public void setHealth(int health) {
 		synchronized(attributes) {
 			attributes.set(0, health);
@@ -750,6 +757,13 @@ public class CreatureObject extends TangibleObject {
 		synchronized(maxAttributes) {
 			maxAttributes.set(0, maxHealth);
 			maxAttributes.sendDeltaMessage(this);
+		}
+	}
+	
+	public void setBaseAction(int baseAction) {
+		synchronized(baseAttributes) {
+			baseAttributes.set(2, baseAction);
+			baseAttributes.sendDeltaMessage(this);
 		}
 	}
 	
