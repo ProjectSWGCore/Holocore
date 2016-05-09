@@ -53,7 +53,7 @@ public final class SpawnerService extends Service {
 	private static final String GET_ALL_SPAWNERS_SQL = "SELECT static.x, static.y, static.z, static.heading, " // static columns
 			+ "static.spawner_type, static.cell_id, static.active, static.mood, " // more static columns
 			+ "buildings.object_id AS building_id, buildings.terrain_name AS building_terrain, " // building columns
-			+ "creatures.iff_template AS iff, creatures.creature_name " // creature columns
+			+ "creatures.iff_template AS iff, creatures.creature_name creatures.combat_level " // creature columns
 			+ "FROM static, buildings, creatures "
 			+ "WHERE buildings.building_id = static.building_id AND static.creature_id = creatures.creature_id";
 	private static final String IDLE_MOOD = "idle";
@@ -140,14 +140,15 @@ public final class SpawnerService extends Service {
 			SWGObject egg = objectManager.createObject(parent, spawnerType.getObjectTemplate(), loc, false);
 			spawners.add(new Spawner(egg));
 		}
-		createNPC(parent, loc, set.getString("iff"), set.getString("creature_name"), set.getString("mood"));
+		createNPC(parent, loc, set.getString("iff"), set.getString("creature_name"), set.getString("mood"), set.getInt("combat_level"));
 	}
 	
-	private boolean createNPC(SWGObject parent, Location loc, String iff, String name, String moodAnimation) {
+	private boolean createNPC(SWGObject parent, Location loc, String iff, String name, String moodAnimation, int combatLevel) {
 		CreatureObject object = (CreatureObject) objectManager.createObject(parent, createTemplate(getRandomIff(iff)), loc, false);
 		if (object == null)
 			return false;
 		object.setName(getCreatureName(name));
+		object.setLevel((short) combatLevel);
 		if (!moodAnimation.equals(IDLE_MOOD)) {
 			object.setMoodAnimation(moodAnimation);
 		}
