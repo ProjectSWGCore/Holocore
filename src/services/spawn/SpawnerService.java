@@ -172,6 +172,7 @@ public final class SpawnerService extends Service {
 			case "AGGRESSIVE": object.setOptionFlags(OptionFlag.AGGRESSIVE);	// Ziggy: There's also an AGGRESSIVE PvpFlag?
 			case "ATTACKABLE": object.setPvpFlags(PvpFlag.ATTACKABLE); break;
 			case "INVULNERABLE": object.setOptionFlags(OptionFlag.INVULNERABLE); break;
+			default: Log.w(this, "An unknown attackable type of %s was specified for %s", attackable, name); break;
 		}
 		
 		if (!moodAnimation.equals(IDLE_MOOD)) {
