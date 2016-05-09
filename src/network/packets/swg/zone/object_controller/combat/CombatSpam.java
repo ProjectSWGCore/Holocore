@@ -91,6 +91,7 @@ public class CombatSpam extends ObjectController {
 	@Override
 	public ByteBuffer encode() {
 		NetBuffer data = NetBuffer.allocate(getEncodeSize());
+		encodeHeader(data.getBuffer());
 		data.addByte(dataType);
 		data.addLong(attacker);
 		data.addEncodable(attackerPosition);
@@ -136,7 +137,7 @@ public class CombatSpam extends ObjectController {
 	}
 	
 	private int getEncodeSize() {
-		int size = 48;
+		int size = HEADER_LENGTH + 48;
 		if (isAttackDataWeaponObject(dataType))
 			size += 9 + getStringIdSize(attackName) + (info.isSuccess() ? 97 : 2);
 		else if (isAttackWeaponName(dataType))

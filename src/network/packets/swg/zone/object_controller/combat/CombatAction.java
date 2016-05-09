@@ -16,13 +16,15 @@ public class CombatAction extends ObjectController {
 	
 	public static final int CRC = 0x00CC;
 	
+	private int actionCrc;
 	private long attackerId;
+	private long weaponId;
 	private Posture posture;
 	private Point3D position;
 	private long cell;
 	private TrailLocation trail;
 	private byte clientEffectId;
-	private int actionCrc;
+	private int commandCrc;
 	private boolean useLocation;
 	private Set<Defender> defenders;
 	
@@ -40,17 +42,19 @@ public class CombatAction extends ObjectController {
 	@Override
 	public void decode(ByteBuffer data) {
 		decodeHeader(data);
+		actionCrc = getInt(data);
 		attackerId = getLong(data);
+		weaponId = getLong(data);
 		posture = Posture.getFromId(getByte(data));
 		trail = TrailLocation.getTrailLocation(getByte(data));
 		clientEffectId = getByte(data);
-		actionCrc = getInt(data);
+		commandCrc = getInt(data);
 		useLocation = getBoolean(data);
 		if (useLocation) {
 			position = getEncodable(data, Point3D.class);
 			cell = getLong(data);
 		}
-		int count = getInt(data);
+		int count = getShort(data);
 		for (int i = 0; i < count; i++) {
 			Defender d = new Defender();
 			d.setCreatureId(getLong(data));
@@ -65,18 +69,21 @@ public class CombatAction extends ObjectController {
 	
 	@Override
 	public ByteBuffer encode() {
-		NetBuffer data = NetBuffer.allocate(HEADER_LENGTH + 20 + defenders.size() * 14 + (useLocation ? 20 : 0));
+		NetBuffer data = NetBuffer.allocate(HEADER_LENGTH + 30 + defenders.size() * 14 + (useLocation ? 20 : 0));
+		encodeHeader(data.getBuffer());
+		data.addInt(actionCrc);
 		data.addLong(attackerId);
+		data.addLong(weaponId);
 		data.addByte(posture.getId());
 		data.addByte(trail.getNum());
 		data.addByte(clientEffectId);
-		data.addInt(actionCrc);
+		data.addInt(commandCrc);
 		data.addBoolean(useLocation);
 		if (useLocation) {
 			data.addEncodable(position);
 			data.addLong(cell);
 		}
-		data.addInt(defenders.size());
+		data.addShort(defenders.size());
 		for (Defender d : defenders) {
 			data.addLong(d.getCreatureId());
 			data.addByte(d.getPosture().getId());
@@ -88,12 +95,16 @@ public class CombatAction extends ObjectController {
 		return data.getBuffer();
 	}
 	
-	public static int getCrc() {
-		return CRC;
+	public int getActionCrc() {
+		return actionCrc;
 	}
 	
 	public long getAttackerId() {
 		return attackerId;
+	}
+	
+	public long getWeaponId() {
+		return weaponId;
 	}
 	
 	public Posture getPosture() {
@@ -116,8 +127,8 @@ public class CombatAction extends ObjectController {
 		return clientEffectId;
 	}
 	
-	public int getActionCrc() {
-		return actionCrc;
+	public int getCommandCrc() {
+		return commandCrc;
 	}
 	
 	public boolean isUseLocation() {
@@ -128,13 +139,22 @@ public class CombatAction extends ObjectController {
 		return defenders;
 	}
 	
+	public void setActionCrc(int actionCrc) {
+		this.actionCrc = actionCrc;
+	}
+	
 	public void setAttacker(CreatureObject attacker) {
 		setAttackerId(attacker.getObjectId());
+		setWeaponId(attacker.getEquippedWeapon() == null ? 0 : attacker.getEquippedWeapon().getObjectId());
 		setPosture(attacker.getPosture());
 	}
 	
 	public void setAttackerId(long attackerId) {
 		this.attackerId = attackerId;
+	}
+	
+	public void setWeaponId(long weaponId) {
+		this.weaponId = weaponId;
 	}
 	
 	public void setPosture(Posture posture) {
@@ -157,8 +177,8 @@ public class CombatAction extends ObjectController {
 		this.clientEffectId = clientEffectId;
 	}
 	
-	public void setActionCrc(int actionCrc) {
-		this.actionCrc = actionCrc;
+	public void setCommandCrc(int commandCrc) {
+		this.commandCrc = commandCrc;
 	}
 	
 	public void setUseLocation(boolean useLocation) {
@@ -245,6 +265,10 @@ public class CombatAction extends ObjectController {
 		
 		public boolean equals(Defender d) {
 			return creatureId == d.getCreatureId();
+		}
+		
+		public String toString() {
+			return String.format("CREO=%d:%s  Defense=%b  EffectId=%d  HitLoc=%s  Damage=%d", creatureId, posture, defense, clientEffectId, hitLocation, damage);
 		}
 	}
 
