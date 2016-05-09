@@ -33,7 +33,6 @@ import resources.encodables.Encodable;
 import resources.network.DeltaBuilder;
 import resources.network.NetBuffer;
 import resources.objects.SWGObject;
-import resources.player.PlayerState;
 import utilities.Encoder;
 import utilities.Encoder.StringType;
 
@@ -95,6 +94,10 @@ public class SWGList<E> extends AbstractList<E> implements Encodable, Serializab
 
 	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
 		ois.defaultReadObject();
+		updateCount = 0;
+	}
+	
+	public void resetUpdateCount() {
 		updateCount = 0;
 	}
 
@@ -277,11 +280,6 @@ public class SWGList<E> extends AbstractList<E> implements Encodable, Serializab
 	public void sendDeltaMessage(SWGObject target) {
 		if (deltas.size() == 0)
 			return;
-
-		if (target.getOwner() == null || target.getOwner().getPlayerState() != PlayerState.ZONED_IN) {
-			clearDeltaQueue();
-			return;
-		}
 		
 		target.sendDelta(view, updateType, getDeltaData());
 		// Clear the queue since the delta has been sent to observers through the builder

@@ -36,9 +36,12 @@ import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.PvpFaction;
 import resources.PvpFlag;
 import resources.PvpStatus;
+import resources.collections.SWGMap;
+import resources.collections.SWGSet;
 import resources.network.BaselineBuilder;
 import resources.network.NetBuffer;
 import resources.objects.SWGObject;
+import resources.objects.creature.CreatureObject;
 import resources.player.Player;
 import utilities.Encoder.StringType;
 
@@ -47,7 +50,6 @@ public class TangibleObject extends SWGObject {
 	private static final long serialVersionUID = 1L;
 	
 	private byte []	appearanceData	= new byte[0];
-	private int		damageTaken		= 0;
 	private int		maxHitPoints	= 0;
 	private int		components		= 0;
 	private boolean	inCombat		= false;
@@ -55,9 +57,13 @@ public class TangibleObject extends SWGObject {
 	private int		pvpFlags		= 0;
 	private PvpStatus pvpStatus = PvpStatus.COMBATANT;
 	private PvpFaction pvpFaction = PvpFaction.NEUTRAL;
-	private boolean	visibleGmOnly	= false;
+	private boolean	visibleGmOnly	= true;
 	private byte []	objectEffects	= new byte[0];
 	private int     optionFlags     = 0;
+	
+	private SWGSet<Long>	defenders	= new SWGSet<>(6, 3);
+	
+	private SWGMap<String, String> effectsMap	= new SWGMap<>(6, 7);
 	
 	public TangibleObject(long objectId) {
 		super(objectId, BaselineType.TANO);
@@ -72,14 +78,13 @@ public class TangibleObject extends SWGObject {
 		pvpStatus = PvpStatus.COMBATANT;
 		pvpFaction = PvpFaction.NEUTRAL;
 		ois.defaultReadObject();
+		defenders.clear();
+		defenders.resetUpdateCount();
+		inCombat = false;
 	}
 	
 	public byte [] getAppearanceData() {
 		return appearanceData;
-	}
-	
-	public int getDamageTaken() {
-		return damageTaken;
 	}
 	
 	public int getMaxHitPoints() {
@@ -152,12 +157,9 @@ public class TangibleObject extends SWGObject {
 		this.appearanceData = appearanceData;
 	}
 	
-	public void setDamageTaken(int damageTaken) {
-		this.damageTaken = damageTaken;
-	}
-	
 	public void setMaxHitPoints(int maxHitPoints) {
 		this.maxHitPoints = maxHitPoints;
+		sendDelta(3, 11, maxHitPoints);
 	}
 	
 	public void setComponents(int components) {
@@ -166,6 +168,7 @@ public class TangibleObject extends SWGObject {
 	
 	public void setInCombat(boolean inCombat) {
 		this.inCombat = inCombat;
+		sendDelta(6, 2, inCombat);
 	}
 	
 	public void setCondition(int condition) {
@@ -219,7 +222,22 @@ public class TangibleObject extends SWGObject {
 
 		return passCount == options.length;
 	}
-
+	
+	public void addDefender(CreatureObject creature) {
+		if (defenders.add(creature.getObjectId()))
+			defenders.sendDeltaMessage(this);
+	}
+	
+	public void removeDefender(CreatureObject creature) {
+		if (defenders.remove(creature.getObjectId()))
+			defenders.sendDeltaMessage(this);
+	}
+	
+	public void clearDefenders() {
+		defenders.clear();
+		defenders.sendDeltaMessage(this);
+	}
+	
 	@Override
 	public boolean equals(Object o) {
 		return super.equals(o);
@@ -238,12 +256,12 @@ public class TangibleObject extends SWGObject {
 		bb.addInt(pvpStatus.getValue()); // Faction Status - 5
 		bb.addArray(appearanceData); // - 6
 		bb.addInt(0); // Component customization (Set, Integer) - 7
-			bb.addInt(0); //updates
+			bb.addInt(0);
 		bb.addInt(optionFlags); // 8
 		bb.addInt(0); // Generic Counter -- use count and incap timer - 9
 		bb.addInt(condition); // 10
-		bb.addInt(100); // maxHitPoints - 11
-		bb.addBoolean(true); // isVisible - 12
+		bb.addInt(maxHitPoints); // maxHitPoints - 11
+		bb.addBoolean(visibleGmOnly); // isVisible - 12
 		
 		bb.incrementOperandCount(9);
 	}
@@ -253,15 +271,13 @@ public class TangibleObject extends SWGObject {
 		if (getStringId().toString().equals("@obj_n:unknown_object"))
 			return;
 		bb.addBoolean(inCombat); // 2 - Combat flag
-		bb.addInt(0); // 3 - Defenders List (Set, Long)
-			bb.addInt(0);
+		bb.addObject(defenders); // 3 - Defenders List (Set, Long)
 		bb.addInt(0); // 4 - Map color
 		bb.addInt(0); // 5 - Access List
 			bb.addInt(0);
 		bb.addInt(0); // 6 - Guild Access Set
 			bb.addInt(0);
-		bb.addInt(0); // 7 - Effects Map
-			bb.addInt(0);
+		bb.addObject(effectsMap); // 7 - Effects Map
 		
 		bb.incrementOperandCount(6);
 	}
@@ -277,8 +293,8 @@ public class TangibleObject extends SWGObject {
 		optionFlags = buffer.getInt();
 		buffer.getInt();
 		condition = buffer.getInt();
-		buffer.getInt();
-		buffer.getBoolean();
+		maxHitPoints = buffer.getInt();
+		visibleGmOnly = buffer.getBoolean();
 	}
 	
 	protected void parseBaseline6(NetBuffer buffer) {
@@ -286,11 +302,11 @@ public class TangibleObject extends SWGObject {
 		if (getStringId().toString().equals("@obj_n:unknown_object"))
 			return;
 		inCombat = buffer.getBoolean();
-		buffer.getSwgSet(6, 3, Long.TYPE);
+		defenders = buffer.getSwgSet(6, 3, Long.TYPE);
 		buffer.getInt();
 		buffer.getSwgSet(6, 5, StringType.ASCII);
 		buffer.getSwgSet(6, 6, StringType.ASCII);
-		buffer.getSwgMap(6, 7, StringType.ASCII, StringType.ASCII);
+		effectsMap = buffer.getSwgMap(6, 7, StringType.ASCII, StringType.ASCII);
 	}
 	
 	@Override

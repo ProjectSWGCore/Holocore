@@ -70,10 +70,12 @@ public class CommandQueueEnqueue extends ObjectController {
 		return data;
 	}
 	
+	public int getCounter() { return counter; }
 	public int getCommandCrc() { return crc; }
 	public String getArguments() { return arguments; }
 	public long getTargetId() { return targetId; }
 	
+	public void setCounter(int counter) { this.counter = counter; }
 	public void setCommandCrc(int crc) { this.crc = crc; }
 	public void setArguments(String args) { this.arguments = args; }
 	public void setTargetId(long targetId) { this.targetId = targetId; }

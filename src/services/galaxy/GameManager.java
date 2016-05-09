@@ -29,6 +29,7 @@ package services.galaxy;
 
 import resources.control.Manager;
 import services.collections.CollectionBadgeManager;
+import services.combat.CombatService;
 import services.commands.CommandService;
 import services.commands.EntertainmentService;
 import services.faction.FactionService;
@@ -47,6 +48,7 @@ public class GameManager extends Manager {
 	//private final GroupService groupService;
 	private final SkillModService skillModService;
 	private final EntertainmentService entertainmentService;
+	private final CombatService combatService;
 
 	public GameManager() {
 		commandService = new CommandService();
@@ -59,6 +61,7 @@ public class GameManager extends Manager {
 //		groupService = new GroupService();
 		skillModService = new SkillModService();
 		entertainmentService = new EntertainmentService();
+		combatService = new CombatService();
 
 		addChildService(commandService);
 		addChildService(connectionService);
@@ -70,5 +73,6 @@ public class GameManager extends Manager {
 //		addChildService(groupService);
 		addChildService(skillModService);
 		addChildService(entertainmentService);
+		addChildService(combatService);
 	}
 }

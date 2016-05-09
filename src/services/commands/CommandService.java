@@ -30,12 +30,15 @@ package services.commands;
 import intents.chat.ChatBroadcastIntent;
 import intents.chat.ChatCommandIntent;
 import intents.network.GalacticPacketIntent;
-
-
 import network.packets.Packet;
+import network.packets.swg.zone.object_controller.CommandQueueDequeue;
 import network.packets.swg.zone.object_controller.CommandQueueEnqueue;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
+import resources.combat.AttackType;
+import resources.combat.DamageType;
+import resources.combat.ValidTarget;
+import resources.commands.CombatCommand;
 import resources.commands.Command;
 import resources.commands.ICmdCallback;
 import resources.commands.callbacks.*;
@@ -45,6 +48,7 @@ import resources.control.Service;
 import resources.encodables.ProsePackage;
 import resources.encodables.StringId;
 import resources.objects.SWGObject;
+import resources.objects.weapon.WeaponType;
 import resources.player.AccessLevel;
 import resources.player.Player;
 import resources.server_info.Log;
@@ -75,6 +79,7 @@ public class CommandService extends Service {
 	@Override
 	public boolean initialize() {
 		loadBaseCommands();
+		loadCombatCommands();
 		registerCallbacks();
 		return super.initialize();
 	}
@@ -108,7 +113,14 @@ public class CommandService extends Service {
 		}
 		
 		executeCommand(galacticManager, player, command, target, request.getArguments());
-		new ChatCommandIntent(request.getTargetId(), request.getCommandCrc(), arguments).broadcast();
+		new ChatCommandIntent(player.getCreatureObject(), target, command, arguments).broadcast();
+		
+		CommandQueueDequeue dequeue = new CommandQueueDequeue(player.getCreatureObject().getObjectId());
+		dequeue.setCounter(request.getCounter());
+		dequeue.setAction(0);
+		dequeue.setError(0);
+		dequeue.setTimer(0);
+		player.sendPacket(dequeue);
 	}
 	
 	private void executeCommand(GalacticManager galacticManager, Player player, Command command, SWGObject target, String args) {
@@ -153,7 +165,10 @@ public class CommandService extends Service {
 	
 	private void loadBaseCommands() {
 		// First = Higher Priority, Last = Lower Priority ---- Some tables contain duplicates, ORDER MATTERS!
-		final String [] commandTables = new String [] {"command_table", "command_table_ground", "client_command_table", };
+		final String [] commandTables = new String [] {
+			"command_table", "command_table_ground", "client_command_table",
+			"command_table_space", "client_command_table_ground", "client_command_table_space"
+		};
 		
 		clearCommands();
 		for (String table : commandTables) {
@@ -167,20 +182,89 @@ public class CommandService extends Service {
 		int godLevel = baseCommands.getColumnFromName("godLevel");
 		for (int row = 0; row < baseCommands.getRowCount(); row++) {
 			Object [] cmdRow = baseCommands.getRow(row);
-
+			
 			Command command = new Command((String) cmdRow[0]);
 			command.setCrc(CRC.getCrc(command.getName().toLowerCase(Locale.ENGLISH)));
 			command.setScriptHook((String) cmdRow[2]);
 			command.setCppHook((String)cmdRow[4]);
 			command.setDefaultTime((float) cmdRow[6]);
 			command.setCharacterAbility((String) cmdRow[7]);
-
+			command.setCombatCommand(false);
+			
 			if(godLevel >= 0){
 				command.setGodLevel((int) cmdRow[godLevel]);
 			}
-
+			
 			addCommand(command);
 		}
+	}
+	
+	private CombatCommand createAsCombatCommand(Command c) {
+		CombatCommand cc = new CombatCommand(c.getName());
+		cc.setCrc(c.getCrc());
+		cc.setScriptHook(c.getScriptHook());
+		cc.setCppHook(c.getScriptHook());
+		cc.setDefaultTime(c.getDefaultTime());
+		cc.setCharacterAbility(c.getCharacterAbility());
+		cc.setGodLevel(c.getGodLevel());
+		cc.setCombatCommand(true);
+		return cc;
+	}
+	
+	private void loadCombatCommands() {
+		DatatableData combatCommands = (DatatableData) ClientFactory.getInfoFromFile("datatables/combat/combat_data.iff");
+		int validTarget = combatCommands.getColumnFromName("validTarget");
+		int forceCombat = combatCommands.getColumnFromName("forcesCharacterIntoCombat");
+		int attackType = combatCommands.getColumnFromName("attackType");
+		int healthCost = combatCommands.getColumnFromName("healthCost");
+		int actionCost = combatCommands.getColumnFromName("actionCost");
+		int damageType = combatCommands.getColumnFromName("damageType");
+		int ignoreDistance = combatCommands.getColumnFromName("ignore_distance");
+		int pvpOnly = combatCommands.getColumnFromName("pvp_only");
+		int attackRolls = combatCommands.getColumnFromName("attack_rolls");
+		int animDefault = combatCommands.getColumnFromName("animDefault");
+		// animDefault	anim_unarmed	anim_onehandmelee	anim_twohandmelee	anim_polearm
+		// anim_pistol	anim_lightRifle	anim_carbine	anim_rifle	anim_heavyweapon
+		// anim_thrown	anim_onehandlightsaber	anim_twohandlightsaber	anim_polearmlightsaber
+		for (int row = 0; row < combatCommands.getRowCount(); row++) {
+			Object [] cmdRow = combatCommands.getRow(row);
+			
+			Command c = commands.get(CRC.getCrc(((String) cmdRow[0]).toLowerCase(Locale.ENGLISH)));
+			if (c == null)
+				continue;
+			CombatCommand cc = createAsCombatCommand(c);
+			commands.remove(c.getCrc());
+			cc.setValidTarget(ValidTarget.getValidTarget((Integer) cmdRow[validTarget]));
+			cc.setForceCombat(((int) cmdRow[forceCombat]) != 0);
+			cc.setAttackType(AttackType.getAttackType((Integer) cmdRow[attackType]));
+			cc.setHealthCost((float) cmdRow[healthCost]);
+			cc.setActionCost((float) cmdRow[actionCost]);
+			cc.setDamageType(DamageType.getDamageType((Integer) cmdRow[damageType]));
+			cc.setIgnoreDistance(((int) cmdRow[ignoreDistance]) != 0);
+			cc.setPvpOnly(((int) cmdRow[pvpOnly]) != 0);
+			cc.setAttackRolls((int) cmdRow[attackRolls]);
+			cc.setDefaultAnimation(getAnimationList((String) cmdRow[animDefault]));
+			cc.setAnimations(WeaponType.UNARMED, getAnimationList((String) cmdRow[animDefault+1]));
+			cc.setAnimations(WeaponType.ONE_HANDED_MELEE, getAnimationList((String) cmdRow[animDefault+2]));
+			cc.setAnimations(WeaponType.TWO_HANDED_MELEE, getAnimationList((String) cmdRow[animDefault+3]));
+			cc.setAnimations(WeaponType.POLEARM_MELEE, getAnimationList((String) cmdRow[animDefault+4]));
+			cc.setAnimations(WeaponType.POLEARM_MELEE, getAnimationList((String) cmdRow[animDefault+5]));
+			cc.setAnimations(WeaponType.PISTOL, getAnimationList((String) cmdRow[animDefault+6]));
+			cc.setAnimations(WeaponType.LIGHT_RIFLE, getAnimationList((String) cmdRow[animDefault+7]));
+			cc.setAnimations(WeaponType.CARBINE, getAnimationList((String) cmdRow[animDefault+8]));
+			cc.setAnimations(WeaponType.RIFLE, getAnimationList((String) cmdRow[animDefault+9]));
+			cc.setAnimations(WeaponType.THROWN, getAnimationList((String) cmdRow[animDefault+10]));
+			cc.setAnimations(WeaponType.ONE_HANDED_SABER, getAnimationList((String) cmdRow[animDefault+11]));
+			cc.setAnimations(WeaponType.TWO_HANDED_SABER, getAnimationList((String) cmdRow[animDefault+12]));
+			cc.setAnimations(WeaponType.POLEARM_SABER, getAnimationList((String) cmdRow[animDefault+13]));
+			addCommand(cc);
+		}
+	}
+	
+	private String [] getAnimationList(String cell) {
+		if (cell.isEmpty())
+			return new String[0];
+		return cell.split(",");
 	}
 	
 	private <T extends ICmdCallback> Command registerCallback(String command, Class<T> callback) {
