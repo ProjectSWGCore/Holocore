@@ -204,7 +204,7 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 2100204	RORI	ror_narmle_hotel1	AREA	5	21.10	1.30	10.10	0	1	a patron	14780	city	Narmle	1	STOP	idle	0	0	999	0	300	120	0
 2100205	RORI	ror_narmle_starport	AREA	4	5.67	0.64	67.19	147	1	Chassis Dealer	10597	city	Narmle	1	STOP	idle	0	0	0	0	300	120	0
 2100206	RORI	ror_world	AREA	0	-5272.67	80.08	-2234.24	-94	1	an Imperial Major	12734	city	Narmle	1	STOP	idle	0	0	0	0	300	120	0
-2100094	RORI	ror_world	AREA	0	-5257.00	80.00	-2255.10	-90	1	an Imperial coordinator	10683	city	Narmle	1	STOP	idle	0	0	0	0	300	120	0
+2100207	RORI	ror_world	AREA	0	-5257.00	80.00	-2255.10	-90	1	an Imperial coordinator	10683	city	Narmle	1	STOP	idle	0	0	0	0	300	120	0
 2100208	RORI	ror_world	AREA	0	-5210.70	80.00	-2269.64	-101	1	a commoner	10733	city	Narmle	1	STOP	idle	0	0	0	0	300	120	0
 2100209	RORI	ror_world	AREA	0	-5120.56	80.00	-2443.12	33	1	a commoner	10733	city	Narmle	1	STOP	idle	0	0	0	0	300	120	0
 2100210	RORI	ror_world	AREA	0	-4975.00	79.89	-2227.00	19	1	Race Coordinator	10077	city	Narmle	1	STOP	idle	0	0	0	0	300	120	0
