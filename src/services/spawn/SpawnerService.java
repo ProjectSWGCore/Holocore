@@ -165,7 +165,9 @@ public final class SpawnerService extends Service {
 		object.setName(getCreatureName(name));
 		object.setLevel((short) combatLevel);
 		object.setDifficulty(difficulty);
+		object.setMaxHealth(health);
 		object.setHealth(health);
+		object.setMaxAction(action);
 		object.setAction(action);
 		
 		switch(attackable) {
