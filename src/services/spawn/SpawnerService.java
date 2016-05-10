@@ -56,7 +56,7 @@ public final class SpawnerService extends Service {
 	private static final String GET_ALL_SPAWNERS_SQL = "SELECT static.x, static.y, static.z, static.heading, " // static columns
 			+ "static.spawner_type, static.cell_id, static.active, static.mood, " // more static columns
 			+ "buildings.object_id AS building_id, buildings.terrain_name AS building_terrain, " // building columns
-			+ "creatures.iff_template AS iff, creatures.creature_name creatures.combat_level creatures.difficulty " // creature columns
+			+ "creatures.iff_template AS iff, creatures.creature_name, creatures.combat_level, creatures.difficulty, creatures.attackable, " // creature columns
 			+ "npc_stats.HP, npc_stats.Action "	// npc_stats columns
 			+ "FROM static, buildings, creatures, npc_stats "
 			+ "WHERE buildings.building_id = static.building_id AND static.creature_id = creatures.creature_id AND creatures.combat_level = npc_stats.Level";
@@ -108,7 +108,7 @@ public final class SpawnerService extends Service {
 		int count = 0;
 		System.out.println("SpawnerService: Loading NPCs...");
 		Log.i(this, "Loading NPCs...");
-		try (RelationalDatabase spawnerDatabase = RelationalServerFactory.getServerData("spawn/static.db", "static", "building/buildings", "creatures/creatures")) {
+		try (RelationalDatabase spawnerDatabase = RelationalServerFactory.getServerData("spawn/static.db", "static", "building/buildings", "creatures/creatures", "creatures/npc_stats")) {
 			try (ResultSet set = spawnerDatabase.executeQuery(GET_ALL_SPAWNERS_SQL)) {
 				Location loc = new Location();
 				while (set.next()) {
@@ -171,9 +171,9 @@ public final class SpawnerService extends Service {
 		object.setAction(action);
 		
 		switch(attackable) {
-			case "AGGRESSIVE": object.setOptionFlags(OptionFlag.AGGRESSIVE);	// Ziggy: There's also an AGGRESSIVE PvpFlag?
+			case "AGGRESSIVE": object.addOptionFlags(OptionFlag.AGGRESSIVE);	// Ziggy: There's also an AGGRESSIVE PvpFlag?
 			case "ATTACKABLE": object.setPvpFlags(PvpFlag.ATTACKABLE); break;
-			case "INVULNERABLE": object.setOptionFlags(OptionFlag.INVULNERABLE); break;
+			case "INVULNERABLE": object.addOptionFlags(OptionFlag.INVULNERABLE); break;
 			default: Log.w(this, "An unknown attackable type of %s was specified for %s", attackable, name); break;
 		}
 		
