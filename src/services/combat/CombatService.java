@@ -85,8 +85,7 @@ public class CombatService extends Service {
 		synchronized (inCombat) {
 			inCombat.remove(combat.getCreature().getObjectId());
 		}
-		combat.getCreature().setInCombat(false);
-		combat.getCreature().clearDefenders();
+		exitCombat(combat.getCreature());
 	}
 	
 	private void processChatCommand(ChatCommandIntent cci) {
@@ -147,15 +146,24 @@ public class CombatService extends Service {
 	
 	private void doCombatSingle(CreatureObject source, CreatureObject target, AttackInfoLight info, CombatCommand command) {
 		if (!source.isInCombat())
-			source.setInCombat(true);
+			enterCombat(source);
 		if (!target.isInCombat())
-			target.setInCombat(true);
+			enterCombat(target);
 		target.addDefender(source);
 		// Note: This will not kill anyone
 		if (target.getHealth() <= info.getDamage())
 			target.setHealth(target.getMaxHealth());
 		else
 			target.modifyHealth(-info.getDamage());
+	}
+	
+	private void enterCombat(CreatureObject creature) {
+		creature.setInCombat(true);
+	}
+	
+	private void exitCombat(CreatureObject creature) {
+		creature.setInCombat(false);
+		creature.clearDefenders();
 	}
 	
 	private boolean handleStatus(CreatureObject source, CombatStatus status) {
