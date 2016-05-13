@@ -450,9 +450,9 @@ public class CreatureObject extends TangibleObject {
 		sendDelta(6, 15, guildId);
 	}
 	
-	public void setLevel(short level) {
-		this.level = level;
-		sendDelta(6, 8, level);
+	public void setLevel(int level) {
+		this.level = (short) level;
+		sendDelta(6, 8, (short) level);
 	}
 	
 	public void setLevelHealthGranted(int levelHealthGranted) {
