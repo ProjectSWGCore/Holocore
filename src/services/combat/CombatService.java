@@ -56,11 +56,13 @@ public class CombatService extends Service {
 	
 	@Override
 	public boolean terminate() {
-		executor.shutdownNow();
-		try {
-			executor.awaitTermination(3, TimeUnit.SECONDS);
-		} catch (InterruptedException e) {
-			
+		if (executor != null) {
+			executor.shutdownNow();
+			try {
+				executor.awaitTermination(3, TimeUnit.SECONDS);
+			} catch (InterruptedException e) {
+				
+			}
 		}
 		return super.terminate();
 	}
