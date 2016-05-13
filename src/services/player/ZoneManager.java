@@ -39,11 +39,9 @@ import network.packets.swg.login.ClientIdMsg;
 import network.packets.swg.login.ClientPermissionsMessage;
 import network.packets.swg.login.ConnectionServerLagResponse;
 import network.packets.swg.zone.CmdSceneReady;
-import network.packets.swg.zone.GalaxyLoopTimesResponse;
 import network.packets.swg.zone.HeartBeat;
 import network.packets.swg.zone.LagRequest;
 import network.packets.swg.zone.ParametersMessage;
-import network.packets.swg.zone.RequestGalaxyLoopTimes;
 import network.packets.swg.zone.SetWaypointColor;
 import network.packets.swg.zone.ShowBackpack;
 import network.packets.swg.zone.ShowHelmet;
@@ -118,8 +116,6 @@ public class ZoneManager extends Manager {
 		characterCreationService.handlePacket(intent, player, networkId, p);
 		if (p instanceof ClientIdMsg)
 			handleClientIdMsg(player, (ClientIdMsg) p);
-		if (p instanceof RequestGalaxyLoopTimes)
-			handleGalaxyLoopTimesRequest(player, (RequestGalaxyLoopTimes) p);
 		if (p instanceof CmdSceneReady)
 			handleCmdSceneReady(player, (CmdSceneReady) p);
 		if (p instanceof SetWaypointColor)
@@ -163,7 +159,7 @@ public class ZoneManager extends Manager {
 	}
 	
 	private void startScene(CreatureObject object, Location newLocation) {
-		long time = (long) (ProjectSWG.getCoreTime() / 1E3);
+		long time = ProjectSWG.getGalacticTime();
 		Race race = ((CreatureObject)object).getRace();
 		boolean ignoreSnapshots = newLocation.getTerrain() == Terrain.DEV_AREA;
 		sendPacket(object.getOwner(), new CmdStartScene(ignoreSnapshots, object.getObjectId(), race, newLocation, time, (int)(System.currentTimeMillis()/1E3)));
@@ -273,10 +269,6 @@ public class ZoneManager extends Manager {
 		sendPacket(player.getNetworkId(), new HeartBeat());
 		sendPacket(player.getNetworkId(), new AccountFeatureBits());
 		sendPacket(player.getNetworkId(), new ClientPermissionsMessage());
-	}
-	
-	private void handleGalaxyLoopTimesRequest(Player player, RequestGalaxyLoopTimes req) {
-		sendPacket(player, new GalaxyLoopTimesResponse(ProjectSWG.getCoreTime()/1000));
 	}
 	
 }
