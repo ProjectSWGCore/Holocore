@@ -10,13 +10,13 @@ public class DefaultAIObject extends AIObject {
 	private static final long serialVersionUID = 1L;
 	
 	private Location mainLocation;
-	private Behavior behavior;
+	private AIBehavior behavior;
 	private int updateCounter;
 	private double radius;
 	
 	public DefaultAIObject(long objectId) {
 		super(objectId);
-		behavior = Behavior.FLOAT;
+		behavior = AIBehavior.STOP;
 		updateCounter = 0;
 		radius = 2;
 	}
@@ -27,11 +27,11 @@ public class DefaultAIObject extends AIObject {
 		setSchedulerProperties(30, 30, TimeUnit.SECONDS);
 	}
 	
-	public Behavior getBehavior() {
+	public AIBehavior getBehavior() {
 		return behavior;
 	}
 	
-	public void setBehavior(Behavior behavior) {
+	public void setBehavior(AIBehavior behavior) {
 		this.behavior = behavior;
 	}
 	
@@ -45,6 +45,7 @@ public class DefaultAIObject extends AIObject {
 	protected void aiLoop() {
 		switch (behavior) {
 			case FLOAT:	aiLoopFloat();	break;
+			case STOP:
 			default:	break;
 		}
 	}
@@ -52,13 +53,11 @@ public class DefaultAIObject extends AIObject {
 	private void aiLoopFloat() {
 		if (isInCombat())
 			return;
+		if (getParent() != null)
+			return;
 		Location l = new Location(mainLocation);
 		l.translatePosition((Math.random()-.5)*2*radius, 0, (Math.random()-.5)*2*radius);
 		new MoveObjectIntent(this, l, 1.37, updateCounter++).broadcast();
-	}
-	
-	public static enum Behavior {
-		FLOAT // got lots of options here
 	}
 	
 }
