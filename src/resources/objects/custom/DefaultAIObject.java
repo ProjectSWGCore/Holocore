@@ -31,8 +31,16 @@ public class DefaultAIObject extends AIObject {
 		return behavior;
 	}
 	
+	public double getFloatRadius() {
+		return radius;
+	}
+	
 	public void setBehavior(AIBehavior behavior) {
 		this.behavior = behavior;
+	}
+	
+	public void setFloatRadius(double radius) {
+		this.radius = radius;
 	}
 	
 	@Override
@@ -53,11 +61,9 @@ public class DefaultAIObject extends AIObject {
 	private void aiLoopFloat() {
 		if (isInCombat())
 			return;
-		if (getParent() != null)
-			return;
 		Location l = new Location(mainLocation);
 		l.translatePosition((Math.random()-.5)*2*radius, 0, (Math.random()-.5)*2*radius);
-		new MoveObjectIntent(this, l, 1.37, updateCounter++).broadcast();
+		new MoveObjectIntent(this, getParent(), l, 1.37, updateCounter++).broadcast();
 	}
 	
 }

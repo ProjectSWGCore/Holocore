@@ -57,7 +57,7 @@ import services.objects.ObjectManager;
 public final class SpawnerService extends Service {
 	
 	private static final String GET_ALL_SPAWNERS_SQL = "SELECT static.x, static.y, static.z, static.heading, " // static columns
-			+ "static.spawner_type, static.cell_id, static.active, static.mood, static.behaviour, " // more static columns
+			+ "static.spawner_type, static.cell_id, static.active, static.mood, static.behaviour, static.float_radius, " // more static columns
 			+ "buildings.object_id AS building_id, buildings.terrain_name AS building_terrain, " // building columns
 			+ "creatures.iff_template AS iff, creatures.creature_name, creatures.combat_level, creatures.difficulty, creatures.attackable, " // creature columns
 			+ "npc_stats.HP, npc_stats.Action "	// npc_stats columns
@@ -174,6 +174,8 @@ public final class SpawnerService extends Service {
 		object.setMaxAction(set.getInt("Action"));
 		object.setAction(object.getMaxAction());
 		object.setBehavior(AIBehavior.valueOf(set.getString("behaviour")));
+		if (object.getBehavior() == AIBehavior.FLOAT)
+			object.setFloatRadius((Integer) set.getInt("float_radius"));
 		
 		switch (set.getString("attackable")) {
 			case "AGGRESSIVE": object.addOptionFlags(OptionFlag.AGGRESSIVE);	// Ziggy: There's also an AGGRESSIVE PvpFlag?

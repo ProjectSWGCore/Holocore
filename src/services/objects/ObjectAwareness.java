@@ -194,6 +194,13 @@ public class ObjectAwareness extends Service {
 	}
 	
 	private void processMoveObjectIntent(MoveObjectIntent i) {
+		if (i.getParent() != null)
+			processMoveObjectIntentParent(i);
+		else
+			processMoveObjectIntentNoParent(i);
+	}
+	
+	private void processMoveObjectIntentNoParent(MoveObjectIntent i) {
 		SWGObject obj = i.getObject();
 		Location newLocation = i.getNewLocation();
 		BuildoutArea area = obj.getBuildoutArea();
@@ -204,16 +211,28 @@ public class ObjectAwareness extends Service {
 		move(obj, newLocation, true);
 		if (area != null)
 			newLocation = area.readjustLocation(newLocation);
-		if (i.getParent() == null) {
-			DataTransform transform = new DataTransform(obj.getObjectId());
-			transform.setTimestamp((int) ProjectSWG.getGalacticTime());
-			transform.setLocation(newLocation);
-			transform.setLookAtYaw(0);
-			transform.setUseLookAtYaw(false);
-			transform.setSpeed((float) i.getSpeed());
-			transform.setUpdateCounter(i.getUpdateCounter());
-			obj.sendDataTransforms(transform);
-		}
+		DataTransform transform = new DataTransform(obj.getObjectId());
+		transform.setTimestamp((int) ProjectSWG.getGalacticTime());
+		transform.setLocation(newLocation);
+		transform.setLookAtYaw(0);
+		transform.setUseLookAtYaw(false);
+		transform.setSpeed((float) i.getSpeed());
+		transform.setUpdateCounter(i.getUpdateCounter());
+		obj.sendDataTransforms(transform);
+	}
+	
+	private void processMoveObjectIntentParent(MoveObjectIntent i) {
+		SWGObject obj = i.getObject();
+		Location newLocation = i.getNewLocation();
+		move(obj, i.getParent(), newLocation, true);
+		DataTransformWithParent transform = new DataTransformWithParent(obj.getObjectId());
+		transform.setTimestamp((int) ProjectSWG.getGalacticTime());
+		transform.setLocation(newLocation);
+		transform.setLookAtYaw(0);
+		transform.setUseLookAtYaw(false);
+		transform.setSpeed((float) i.getSpeed());
+		transform.setUpdateCounter(i.getUpdateCounter());
+		obj.sendParentDataTransforms(transform);
 	}
 	
 	private void moveObject(CreatureObject obj, DataTransform transform) {
