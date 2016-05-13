@@ -196,7 +196,9 @@ public final class ObjectCreator {
 	private static void handlePostCreation(SWGObject object, ObjectData attributes) {
 		addObjectAttributes(object, attributes);
 		createObjectSlots(object);
-		object.setGameObjectType(GameObjectType.getTypeFromId((Integer) object.getDataAttribute(ObjectDataAttribute.GAME_OBJECT_TYPE)));
+		Object got = object.getDataAttribute(ObjectDataAttribute.GAME_OBJECT_TYPE);
+		if (got != null)
+			object.setGameObjectType(GameObjectType.getTypeFromId((Integer) got));
 	}
 
 	private static void addObjectAttributes(SWGObject obj, ObjectData attributes) {
