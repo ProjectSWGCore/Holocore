@@ -209,14 +209,16 @@ public class ConnectionService extends Service {
 	}
 	
 	private PlayerObject getPlayerObject(Player p, PlayerEvent event) {
+		if (p.getPlayerState() != PlayerState.ZONED_IN)
+			return null;
 		CreatureObject creature = p.getCreatureObject();
 		if (creature == null) {
-			Log.e("ConnectionService", "Unable to set player flags for user: %s  on event: %s - CreatureObject is null", p.getUsername(), event);
+			Log.e("ConnectionService", "Unable to set player flags for user: %s on event: %s - CreatureObject is null", p.getUsername(), event);
 			return null;
 		}
 		PlayerObject player = creature.getPlayerObject();
 		if (player == null) {
-			Log.e("ConnectionService", "Unable to set player flags for user: %s  on event: %s - PlayerObject is null", p.getUsername(), event);
+			Log.e("ConnectionService", "Unable to set player flags for user: %s on event: %s - PlayerObject is null", p.getUsername(), event);
 			return null;
 		}
 		return player;
