@@ -34,6 +34,7 @@ import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import intents.object.DestroyObjectIntent;
 import intents.object.ObjectCreatedIntent;
@@ -50,11 +51,11 @@ import resources.control.Intent;
 import resources.control.Manager;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
+import resources.objects.custom.AIObject;
 import resources.player.Player;
 import resources.server_info.CachedObjectDatabase;
 import resources.server_info.Log;
 import resources.server_info.ObjectDatabase;
-import resources.server_info.ObjectDatabase.Traverser;
 import services.map.MapManager;
 import services.player.PlayerManager;
 import services.spawn.SpawnerService;
@@ -72,6 +73,7 @@ public class ObjectManager extends Manager {
 
 	private final ObjectDatabase<SWGObject> database;
 	private final Map <Long, SWGObject> objectMap;
+	private final AtomicBoolean started;
 	
 	public ObjectManager() {
 		objectAwareness = new ObjectAwareness();
@@ -83,6 +85,7 @@ public class ObjectManager extends Manager {
 		
 		database = new CachedObjectDatabase<SWGObject>("odb/objects.db");
 		objectMap = new Hashtable<>(16*1024);
+		started = new AtomicBoolean(false);
 
 		addChildService(objectAwareness);
 		addChildService(mapManager);
@@ -111,12 +114,7 @@ public class ObjectManager extends Manager {
 		System.out.println("ObjectManager: Loading objects from ObjectDatabase...");
 		synchronized (database) {
 			database.load();
-			database.traverse(new Traverser<SWGObject>() {
-				@Override
-				public void process(SWGObject obj) {
-					loadObject(obj);
-				}
-			});
+			database.traverse((obj) -> loadObject(obj));
 		}
 		double loadTime = (System.nanoTime() - startLoad) / 1E6;
 		Log.i("ObjectManager", "Finished loading %d objects. Time: %fms", database.size(), loadTime);
@@ -171,6 +169,30 @@ public class ObjectManager extends Manager {
 	}
 	
 	@Override
+	public boolean start() {
+		synchronized (objectMap) {
+			for (SWGObject obj : objectMap.values()) {
+				if (obj instanceof AIObject)
+					((AIObject) obj).aiStart();
+			}
+			started.set(true);
+		}
+		return super.start();
+	}
+	
+	@Override
+	public boolean stop() {
+		synchronized (objectMap) {
+			started.set(false);
+			for (SWGObject obj : objectMap.values()) {
+				if (obj instanceof AIObject)
+					((AIObject) obj).aiStop();
+			}
+		}
+		return super.stop();
+	}
+	
+	@Override
 	public boolean terminate() {
 		synchronized (database) {
 			database.traverse((obj) -> obj.setOwner(null));
@@ -203,10 +225,22 @@ public class ObjectManager extends Manager {
 	
 	private void processObjectCreatedIntent(ObjectCreatedIntent intent) {
 		putObject(intent.getObject());
+		if (!(intent.getObject() instanceof AIObject))
+			return;
+		synchronized (objectMap) {
+			if (started.get())
+				((AIObject) intent.getObject()).aiStart();
+		}
 	}
 	
 	private void processDestroyObjectIntent(DestroyObjectIntent doi) {
 		destroyObject(doi.getObject());
+		if (!(doi.getObject() instanceof AIObject))
+			return;
+		synchronized (objectMap) {
+			if (started.get())
+				((AIObject) doi.getObject()).aiStop();
+		}
 	}
 	
 	private void processGalacticPacketIntent(GalacticPacketIntent gpi) {
