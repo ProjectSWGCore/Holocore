@@ -91,7 +91,7 @@ public final class ObjectCreator {
 	public static <T extends SWGObject> T createObjectFromTemplate(long objectId, String template, Class <T> c) {
 		T obj;
 		try {
-			obj = c.getConstructor(Integer.TYPE).newInstance(objectId);
+			obj = c.getConstructor(Long.TYPE).newInstance(objectId);
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
 			e.printStackTrace();
 			obj = null;
