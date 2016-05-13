@@ -141,12 +141,8 @@ public class LoginService extends Service {
 	}
 	
 	private void handleLogin(Player player, LoginClientId id) {
-		if (player.getPlayerState() != PlayerState.CONNECTED) {
+		if (player.getPlayerState() != PlayerState.CONNECTED && player.getPlayerState() != PlayerState.LOGGED_IN) {
 			Log.w(this, "Player cannot login when " + player.getPlayerState());
-			return;
-		}
-		if (player.getPlayerServer() != PlayerServer.NONE) {
-			Log.w(this, "Player cannot login when connected to " + player.getPlayerServer());
 			return;
 		}
 		player.setPlayerServer(PlayerServer.LOGIN);
