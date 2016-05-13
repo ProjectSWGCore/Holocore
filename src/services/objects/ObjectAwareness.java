@@ -30,6 +30,7 @@ package services.objects;
 import intents.PlayerEventIntent;
 import intents.RequestZoneInIntent;
 import intents.network.GalacticPacketIntent;
+import intents.object.MoveObjectIntent;
 import intents.object.ObjectCreatedIntent;
 import intents.object.ObjectTeleportIntent;
 import intents.object.UpdateObjectAwareness;
@@ -41,6 +42,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import main.ProjectSWG;
 import network.packets.Packet;
 import network.packets.swg.zone.CmdSceneReady;
 import network.packets.swg.zone.UpdateContainmentMessage;
@@ -72,6 +74,7 @@ public class ObjectAwareness extends Service {
 		registerForIntent(ObjectTeleportIntent.TYPE);
 		registerForIntent(GalacticPacketIntent.TYPE);
 		registerForIntent(UpdateObjectAwareness.TYPE);
+		registerForIntent(MoveObjectIntent.TYPE);
 		loadQuadTree();
 	}
 	
@@ -97,6 +100,11 @@ public class ObjectAwareness extends Service {
 			case UpdateObjectAwareness.TYPE:
 				if (i instanceof UpdateObjectAwareness)
 					processUpdateObjectAwarenessIntent((UpdateObjectAwareness) i);
+				break;
+			case MoveObjectIntent.TYPE:
+				if (i instanceof MoveObjectIntent)
+					processMoveObjectIntent((MoveObjectIntent) i);
+				break;
 			default:
 				break;
 		}
@@ -183,6 +191,29 @@ public class ObjectAwareness extends Service {
 		}
 		add(obj);
 		update(obj);
+	}
+	
+	private void processMoveObjectIntent(MoveObjectIntent i) {
+		SWGObject obj = i.getObject();
+		Location newLocation = i.getNewLocation();
+		BuildoutArea area = obj.getBuildoutArea();
+		if (area == null)
+			System.err.println("Unknown buildout area at: " + obj.getWorldLocation());
+		else
+			newLocation = area.adjustLocation(newLocation);
+		move(obj, newLocation, true);
+		if (area != null)
+			newLocation = area.readjustLocation(newLocation);
+		if (i.getParent() == null) {
+			DataTransform transform = new DataTransform(obj.getObjectId());
+			transform.setTimestamp((int) ProjectSWG.getGalacticTime());
+			transform.setLocation(newLocation);
+			transform.setLookAtYaw(0);
+			transform.setUseLookAtYaw(false);
+			transform.setSpeed((float) i.getSpeed());
+			transform.setUpdateCounter(i.getUpdateCounter());
+			obj.sendDataTransforms(transform);
+		}
 	}
 	
 	private void moveObject(CreatureObject obj, DataTransform transform) {
