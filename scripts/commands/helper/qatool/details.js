@@ -9,4 +9,7 @@ function sendDetails(player, object) {
 	intentFactory.sendSystemMessage(player, "    GOT: " + object.getGameObjectType());
 	intentFactory.sendSystemMessage(player, "    Classification: " + object.getClassification());
 	intentFactory.sendSystemMessage(player, "    Load Range: " + object.getLoadRange());
+	intentFactory.sendSystemMessage(player, "    Health/Action: " + object.getHealth() + "/" + object.getAction());
+	intentFactory.sendSystemMessage(player, "    Base Health/Action: " + object.getBaseHealth() + "/" + object.getBaseAction());
+	intentFactory.sendSystemMessage(player, "    Max Health/Action: " + object.getMaxHealth() + "/" + object.getMaxAction());
 }
