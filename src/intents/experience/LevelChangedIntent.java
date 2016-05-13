@@ -25,58 +25,40 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package services.galaxy;
+package intents.experience;
 
-import resources.control.Manager;
-import services.collections.CollectionBadgeManager;
-import services.combat.CombatService;
-import services.commands.CommandService;
-import services.commands.EntertainmentService;
-import services.experience.ExperienceManager;
-import services.faction.FactionService;
-import services.galaxy.terminals.TerminalService;
-import services.sui.SuiService;
+import resources.control.Intent;
+import resources.objects.creature.CreatureObject;
 
-public class GameManager extends Manager {
+/**
+ *
+ * @author Mads
+ */
+public final class LevelChangedIntent extends Intent {
 
-	private final CommandService commandService;
-	private final ConnectionService connectionService;
-	private final SuiService suiService;
-	private final CollectionBadgeManager collectionBadgeManager;
-	private final EnvironmentService weatherService;
-	private final TerminalService terminalManager;
-	private final FactionService factionService;
-	//private final GroupService groupService;
-	private final SkillModService skillModService;
-	private final EntertainmentService entertainmentService;
-	private final CombatService combatService;
-	private final ExperienceManager experienceManager;
+	public static final String TYPE = "LevelChangedIntent";
 
-	public GameManager() {
-		commandService = new CommandService();
-		connectionService = new ConnectionService();
-		suiService = new SuiService();
-		collectionBadgeManager = new CollectionBadgeManager();
-		weatherService = new EnvironmentService();
-		terminalManager = new TerminalService();
-		factionService = new FactionService();
-//		groupService = new GroupService();
-		skillModService = new SkillModService();
-		entertainmentService = new EntertainmentService();
-		combatService = new CombatService();
-		experienceManager = new ExperienceManager();
+	private final CreatureObject creatureObject;
+	private final short previousLevel;
+	private final short newLevel;
 
-		addChildService(commandService);
-		addChildService(connectionService);
-		addChildService(suiService);
-		addChildService(collectionBadgeManager);
-		addChildService(weatherService);
-		addChildService(terminalManager);
-		addChildService(factionService);
-//		addChildService(groupService);
-		addChildService(skillModService);
-		addChildService(entertainmentService);
-		addChildService(combatService);
-		addChildService(experienceManager);
+	public LevelChangedIntent(CreatureObject creatureObject, short previousLevel, short newLevel) {
+		super(TYPE);
+		this.creatureObject = creatureObject;
+		this.previousLevel = previousLevel;
+		this.newLevel = newLevel;
 	}
+
+	public CreatureObject getCreatureObject() {
+		return creatureObject;
+	}
+
+	public short getPreviousLevel() {
+		return previousLevel;
+	}
+
+	public short getNewLevel() {
+		return newLevel;
+	}
+
 }

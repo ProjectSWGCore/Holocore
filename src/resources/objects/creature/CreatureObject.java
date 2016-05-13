@@ -112,7 +112,7 @@ public class CreatureObject extends TangibleObject {
 	private SWGSet<String>		missionCriticalObjs			= new SWGSet<>(4, 13);
 	
 	private SWGList<Integer>	baseAttributes	= new SWGList<Integer>(1, 2);
-	private SWGList<String>		skills			= new SWGList<String>(1, 3, StringType.ASCII); // SWGSet
+	private SWGSet<String>		skills			= new SWGSet<String>(1, 3, StringType.ASCII);
 	private SWGList<Integer>	hamEncumbList	= new SWGList<Integer>(4, 2);
 	private SWGList<Integer>	attributes		= new SWGList<Integer>(6, 21);
 	private SWGList<Integer>	maxAttributes	= new SWGList<Integer>(6, 22);
@@ -187,7 +187,16 @@ public class CreatureObject extends TangibleObject {
 		return appearanceList;
 	}
 	
-	public SWGList<String> getSkills() {
+	public void addSkill(String skillName) {
+		skills.add(skillName);
+		skills.sendDeltaMessage(this);
+	}
+	
+	public boolean hasSkill(String skillName) {
+		return skills.contains(skillName);
+	}
+	
+	public SWGSet<String> getSkills() {
 		return skills;
 	}
 	
@@ -263,7 +272,7 @@ public class CreatureObject extends TangibleObject {
 		return guildId;
 	}
 	
-	public int getLevel() {
+	public short getLevel() {
 		return level;
 	}
 	
@@ -636,25 +645,29 @@ public class CreatureObject extends TangibleObject {
 	}
 
 	public void adjustSkillmod(String skillModName, int base, int modifier) {
-		SkillMod skillMod = skillMods.get(skillModName);
-		
-		if(skillMod == null) {
-			// They didn't have this SkillMod already.
-			// Therefore, we send a full delta.
-			skillMods.put(skillModName, new SkillMod(base, modifier));
-			skillMods.sendDeltaMessage(this);
-		} else {
-			// They already had this skillmod.
-			// All we need to do is adjust the base and the modifier and send an update from the SWGMap
-			skillMod.adjustBase(base);
-			skillMod.adjustModifier(modifier);
-			skillMods.update(skillModName, this);
+		synchronized(skillMods) {
+			SkillMod skillMod = skillMods.get(skillModName);
+
+			if(skillMod == null) {
+				// They didn't have this SkillMod already.
+				// Therefore, we send a full delta.
+				skillMods.put(skillModName, new SkillMod(base, modifier));
+				skillMods.sendDeltaMessage(this);
+			} else {
+				// They already had this skillmod.
+				// All we need to do is adjust the base and the modifier and send an update from the SWGMap
+				skillMod.adjustBase(base);
+				skillMod.adjustModifier(modifier);
+				skillMods.update(skillModName, this);
+			}
 		}
 	}
 	
 	public int getSkillModValue(String skillModName) {
-		SkillMod skillMod = skillMods.get(skillModName);
-		return skillMod != null ? skillMod.getValue() : 0;
+		synchronized(skillMods) {
+			SkillMod skillMod = skillMods.get(skillModName);
+			return skillMod != null ? skillMod.getValue() : 0;
+		}
 	}
 	
 	public boolean isVisible() {
@@ -743,13 +756,25 @@ public class CreatureObject extends TangibleObject {
 		}
 	}
 
-	public void addAbility(String abilityName){ abilities.put(abilityName, 1); }//TODO: Figure out what the integer value should be for each ability
+	public void addAbility(String abilityName){
+		synchronized(abilities) {
+			abilities.put(abilityName, 1);	//TODO: Figure out what the integer value should be for each ability
+			abilities.sendDeltaMessage(this);
+		}
+	}
 
 	public void removeAbility(String abilityName) { abilities.remove(abilityName); }
 
 	public boolean hasAbility(String abilityName) { return abilities.get(abilityName) != null; }
 	
 	public Set<String> getAbilityNames() { return abilities.keySet(); };
+	
+	public void setBaseHealth(int baseHealth) {
+		synchronized(baseAttributes) {
+			baseAttributes.set(0, baseHealth);
+			baseAttributes.sendDeltaMessage(this);
+		}
+	}
 	
 	public void setHealth(int health) {
 		synchronized(attributes) {
@@ -769,6 +794,13 @@ public class CreatureObject extends TangibleObject {
 		synchronized(maxAttributes) {
 			maxAttributes.set(0, maxHealth);
 			maxAttributes.sendDeltaMessage(this);
+		}
+	}
+	
+	public void setBaseAction(int baseAction) {
+		synchronized(baseAttributes) {
+			baseAttributes.set(2, baseAction);
+			baseAttributes.sendDeltaMessage(this);
 		}
 	}
 	
@@ -1000,7 +1032,7 @@ public class CreatureObject extends TangibleObject {
 		bankBalance = buffer.getInt();
 		cashBalance = buffer.getInt();
 		baseAttributes = buffer.getSwgList(1, 2, Integer.class);
-		skills = buffer.getSwgList(1, 2, StringType.ASCII);
+		skills = buffer.getSwgSet(1, 2, StringType.ASCII);
 	}
 	
 	protected void parseBaseline3(NetBuffer buffer) {
