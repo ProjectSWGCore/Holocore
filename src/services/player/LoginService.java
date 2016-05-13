@@ -223,8 +223,8 @@ public class LoginService extends Service {
 	private void onInvalidUserPass(Player player, LoginClientId id, ResultSet set) throws SQLException {
 		String type = "Login Failed!";
 		String message = getUserPassError(set, id.getUsername(), id.getPassword());
-		sendPacket(player, new LoginIncorrectClientId(getServerString(), "3.14159265"));
 		sendPacket(player, new ErrorMessage(type, message, false));
+		sendPacket(player, new LoginIncorrectClientId(getServerString(), REQUIRED_VERSION));
 		Log.i("LoginService", "%s cannot login due to invalid user/pass from %s:%d", id.getUsername(), id.getAddress(), id.getPort());
 		player.setPlayerState(PlayerState.DISCONNECTED);
 		new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_FAIL_INVALID_USER_PASS).broadcast();
