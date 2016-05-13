@@ -50,6 +50,8 @@ public class DefaultAIObject extends AIObject {
 	}
 	
 	private void aiLoopFloat() {
+		if (isInCombat())
+			return;
 		Location l = new Location(mainLocation);
 		l.translatePosition((Math.random()-.5)*2*radius, 0, (Math.random()-.5)*2*radius);
 		new MoveObjectIntent(this, l, 1.37, updateCounter++).broadcast();
