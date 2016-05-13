@@ -202,7 +202,7 @@ public class CoreManager extends Manager {
 	}
 	
 	private void initiateShutdownSequence(ServerManagementIntent i) {
-		System.out.println("Beginning server shutdown sequence...");
+		Log.i(this, "Beginning server shutdown sequence...");
 		long time = i.getTime();
 		TimeUnit timeUnit = i.getTimeUnit();
 		

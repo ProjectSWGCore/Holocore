@@ -225,7 +225,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		}
 
 		if (!container.addObject(this))
-			System.err.println("Failed adding " + this + " to " + container);
+			Log.e("SWGObject", "Failed adding " + this + " to " + container);
 
 		// Observer notification
 		Player newOwner = getOwner();

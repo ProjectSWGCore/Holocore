@@ -111,14 +111,12 @@ public class ObjectManager extends Manager {
 	private void loadObjects() {
 		long startLoad = System.nanoTime();
 		Log.i("ObjectManager", "Loading objects from ObjectDatabase...");
-		System.out.println("ObjectManager: Loading objects from ObjectDatabase...");
 		synchronized (database) {
 			database.load();
 			database.traverse((obj) -> loadObject(obj));
 		}
 		double loadTime = (System.nanoTime() - startLoad) / 1E6;
 		Log.i("ObjectManager", "Finished loading %d objects. Time: %fms", database.size(), loadTime);
-		System.out.printf("ObjectManager: Finished loading %d objects. Time: %fms%n", database.size(), loadTime);
 	}
 	
 	private void loadClientObjects() {
@@ -152,7 +150,6 @@ public class ObjectManager extends Manager {
 				if (parent != null)
 					parent.addObject(obj);
 				else {
-					System.err.println("Parent for " + obj + " is null! ParentID: " + id);
 					Log.e("ObjectManager", "Parent for %s is null! ParentID: %d", obj, id);
 				}
 			} else {
@@ -349,7 +346,7 @@ public class ObjectManager extends Manager {
 	public SWGObject createObject(SWGObject parent, String template, Location l, boolean addToDatabase) {
 		SWGObject obj = ObjectCreator.createObjectFromTemplate(template);
 		if (obj == null) {
-			System.err.println("ObjectManager: Unable to create object with template " + template);
+			Log.e(this, "Unable to create object with template " + template);
 			return null;
 		}
 		obj.setLocation(l);
@@ -375,19 +372,16 @@ public class ObjectManager extends Manager {
 		}
 		SWGObject creatureObj = getObjectById(characterId);
 		if (creatureObj == null) {
-			System.err.println("ObjectManager: Failed to start zone - CreatureObject could not be fetched from database [Character: " + characterId + "  User: " + player.getUsername() + "]");
 			Log.e("ObjectManager", "Failed to start zone - CreatureObject could not be fetched from database [Character: %d  User: %s]", characterId, player.getUsername());
 			sendClientFatal(player, "Failed to zone", "You were not found in the database\nTry relogging to fix this problem", 10, TimeUnit.SECONDS);
 			return;
 		}
 		if (!(creatureObj instanceof CreatureObject)) {
-			System.err.println("ObjectManager: Failed to start zone - Object is not a CreatureObject for ID " + characterId);
 			Log.e("ObjectManager", "Failed to start zone - Object is not a CreatureObject [Character: %d  User: %s]", characterId, player.getUsername());
 			sendClientFatal(player, "Failed to zone", "There has been an internal server error: Not a Creature.\nPlease delete your character and create a new one", 10, TimeUnit.SECONDS);
 			return;
 		}
 		if (((CreatureObject) creatureObj).getPlayerObject() == null) {
-			System.err.println("ObjectManager: Failed to start zone - " + player.getUsername() + "'s CreatureObject has a null ghost!");
 			Log.e("ObjectManager", "Failed to start zone - CreatureObject doesn't have a ghost [Character: %d  User: %s", characterId, player.getUsername());
 			sendClientFatal(player, "Failed to zone", "There has been an internal server error: Null Ghost.\nPlease delete your character and create a new one", 10, TimeUnit.SECONDS);
 			return;

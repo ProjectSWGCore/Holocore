@@ -205,7 +205,7 @@ public class ObjectAwareness extends Service {
 		Location newLocation = i.getNewLocation();
 		BuildoutArea area = obj.getBuildoutArea();
 		if (area == null)
-			System.err.println("Unknown buildout area at: " + obj.getWorldLocation());
+			Log.e(this, "Unknown buildout area at: " + obj.getWorldLocation());
 		else
 			newLocation = area.adjustLocation(newLocation);
 		move(obj, newLocation, true);
@@ -250,7 +250,7 @@ public class ObjectAwareness extends Service {
 		}
 		BuildoutArea area = obj.getBuildoutArea();
 		if (area == null)
-			System.err.println("Unknown buildout area at: " + obj.getWorldLocation());
+			Log.e(this, "Unknown buildout area at: " + obj.getWorldLocation());
 		else
 			newLocation = area.adjustLocation(newLocation);
 		new PlayerTransformedIntent(obj, obj.getParent(), null, obj.getLocation(), newLocation).broadcast();
@@ -264,7 +264,6 @@ public class ObjectAwareness extends Service {
 		Location newLocation = transformWithParent.getLocation();
 		newLocation.setTerrain(obj.getTerrain());
 		if (parent == null) {
-			System.err.println("ObjectManager: Could not find parent for transform! Cell: " + transformWithParent.getCellId());
 			Log.e("ObjectManager", "Could not find parent for transform! Cell: %d  Object: %s", transformWithParent.getCellId(), obj);
 			return;
 		}

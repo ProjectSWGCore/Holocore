@@ -56,6 +56,7 @@ import resources.objects.staticobject.StaticObject;
 import resources.objects.tangible.TangibleObject;
 import resources.objects.waypoint.WaypointObject;
 import resources.objects.weapon.WeaponObject;
+import resources.server_info.Log;
 
 public final class ObjectCreator {
 	
@@ -189,7 +190,7 @@ public final class ObjectCreator {
 			case "tangible":				return new TangibleObject(objectId);
 			case "waypoint":				return new WaypointObject(objectId);
 			case "weapon":					return new WeaponObject(objectId);
-			default:						System.err.println("Unknown type: " + type); return null;
+			default:						Log.e("ObjectCreator", "Unknown type: " + type); return null;
 		}
 	}
 	

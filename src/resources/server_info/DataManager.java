@@ -78,7 +78,7 @@ public class DataManager implements IntentReceiver {
 			File f = new File(file.getFilename());
 			try {
 				if (!createFilesAndDirectories(f)) {
-					System.err.println("Service: Warning - ConfigFile could not be loaded! " + file.getFilename());
+					Log.w("DataManager", "ConfigFile could not be loaded! " + file.getFilename());
 				} else {
 					config.put(file, new Config(f));
 				}
@@ -100,14 +100,14 @@ public class DataManager implements IntentReceiver {
 			if (parentName != null && !parentName.isEmpty()) {
 				File parent = new File(file.getParent());
 				if (!parent.exists() && !parent.mkdirs())
-					System.err.println(getClass().getSimpleName() + ": Failed to create parent directories for ODB: " + file.getCanonicalPath());
+					Log.e(getClass().getSimpleName(), "Failed to create parent directories for ODB: " + file.getCanonicalPath());
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		try {
 			if (!file.createNewFile())
-				System.err.println(getClass().getSimpleName() + ": Failed to create new ODB: " + file.getCanonicalPath());
+				Log.e(getClass().getSimpleName(), "Failed to create new ODB: " + file.getCanonicalPath());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

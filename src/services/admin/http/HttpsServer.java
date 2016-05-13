@@ -56,9 +56,8 @@ public class HttpsServer extends HttpServer {
 		try {
 			return sslServerSocketFactory.createServerSocket(getBindPort(), 0, getBindAddress());
 		} catch (IOException e) {
-			System.err.println("Failed to start HTTPS server!");
 			Log.e("HttpsServer", "Failed to start HTTPS server!");
-			e.printStackTrace();
+			Log.e("HttpsServer", e);
 		}
 		return null;
 	}

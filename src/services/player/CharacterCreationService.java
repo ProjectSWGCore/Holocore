@@ -112,7 +112,7 @@ public class CharacterCreationService extends Service {
 		nameGenerator.loadAllRules();
 		loadProfTemplates();
 		if (!nameFilter.load())
-			System.err.println("Failed to load name filter!");
+			Log.e(this, "Failed to load name filter!");
 		return super.initialize();
 	}
 	
@@ -212,7 +212,6 @@ public class CharacterCreationService extends Service {
 			return ErrorMessage.NAME_DECLINED_INTERNAL_ERROR;
 		} else if (createCharacterInDb(characterId, create.getName(), player)) {
 			creationRestriction.createdCharacter(player);
-			System.out.println("[" + player.getUsername() + "] Create Character: " + create.getName() + ". IP: " + create.getAddress() + ":" + create.getPort());
 			Log.i("ZoneService", "%s created character %s from %s:%d", player.getUsername(), create.getName(), create.getAddress(), create.getPort());
 			sendPacket(player, new CreateCharacterSuccess(characterId));
 			new PlayerEventIntent(player, PlayerEvent.PE_CREATE_CHARACTER).broadcast();
@@ -242,7 +241,6 @@ public class CharacterCreationService extends Service {
 			default:
 				break;
 		}
-		System.err.println("ZoneService: Unable to create character [Name: " + create.getName() + "  User: " + player.getUsername() + "] and put into database! Reason: " + err);
 		Log.e("ZoneService", "Failed to create character %s for user %s with error %s and reason %s from %s:%d", create.getName(), player.getUsername(), err, reason, create.getAddress(), create.getPort());
 		sendPacket(player, new CreateCharacterFailure(reason));
 	}

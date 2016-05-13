@@ -159,7 +159,7 @@ public class UncachedObjectDatabase<V extends Serializable> extends ObjectDataba
 			}
 			dis.close();
 		} catch (IOException | ClassNotFoundException | ClassCastException e) {
-			System.err.println("UncachedObjectDatabase: Unable to load cache with error: " + e.getClass().getSimpleName() + " - " + e.getMessage());
+			Log.e("UncachedObjectDatabase", "Unable to load cache with error: %s - %s", e.getClass().getSimpleName(), e.getMessage());
 			return false;
 		} finally {
 			safeClose(dis);
@@ -185,7 +185,7 @@ public class UncachedObjectDatabase<V extends Serializable> extends ObjectDataba
 				}
 			}
 		} catch (IOException | ClassNotFoundException e) {
-			System.err.println("UncachedObjectDatabase: Unable to traverse with error: " + e.getClass().getSimpleName() + " - " + e.getMessage());
+			Log.e("UncachedObjectDatabase", "Unable to traverse with error: %s - %s", e.getClass().getSimpleName(), e.getMessage());
 		}
 		safeClose(dis);
 	}
@@ -221,7 +221,7 @@ public class UncachedObjectDatabase<V extends Serializable> extends ObjectDataba
 			safeClose(outStream);
 		}
 		if (!sFile.delete())
-			System.err.println("UncachedObjectDatabase: Failed to delete source file when moving "+sFile+" -> "+dFile);
+			Log.e("UncachedObjectDatabase", "Failed to delete source file when moving %s -> %s", sFile, dFile);
 	}
 	
 	private V getFromDB(long key) {

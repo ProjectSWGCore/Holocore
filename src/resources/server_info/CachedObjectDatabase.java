@@ -155,15 +155,14 @@ public class CachedObjectDatabase<V extends Serializable> extends ObjectDatabase
 			loaded = true;
 		} catch (IOException | ClassNotFoundException | ClassCastException e) {
 			Log.e("CachedObjectDatabase", "load() - unable to load with error: %s - %s", e.getClass().getSimpleName(), e.getMessage());
-			System.err.println("CachedObjectDatabase: Unable to load with error: " + e.getClass().getSimpleName() + " - " + e.getMessage());
 			return false;
 		} finally {
 			if (ois != null) {
 				try {
 					ois.close();
 				} catch (Exception e) {
-					System.err.println("CachedObjectDatabase: Failed to close stream when loading! " + e.getMessage());
-					e.printStackTrace();
+					Log.e("CachedObjectDatabase", "Failed to close stream when loading! " + e.getMessage());
+					Log.e("CachedObjectDatabase", e);
 				}
 			}
 		}

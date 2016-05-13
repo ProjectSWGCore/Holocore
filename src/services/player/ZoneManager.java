@@ -148,7 +148,6 @@ public class ZoneManager extends Manager {
 		if (firstZone)
 			playerObj.setStartPlayTime((int) System.currentTimeMillis());
 		initPlayerBeforeZoneIn(player, creature, playerObj);
-		System.out.printf("[%s] %s is zoning in%n", player.getUsername(), player.getCharacterName());
 		Log.i("ObjectManager", "Zoning in %s with character %s", player.getUsername(), player.getCharacterName());
 		if (firstZone) {
 			new PlayerEventIntent(player, PlayerEvent.PE_FIRST_ZONE).broadcast();
@@ -196,7 +195,7 @@ public class ZoneManager extends Manager {
 				e.printStackTrace();
 			}
 		} catch (IOException e) {
-			System.err.println("ZoneManager: Failed to open "+repoDir+" to read commit history");
+			Log.e(this, "Failed to open %s to read commit history", repoDir);
 			// An exception is thrown if bash isn't installed.
 			// https://www.eclipse.org/forums/index.php/t/1031740/
 		}
@@ -249,7 +248,7 @@ public class ZoneManager extends Manager {
 			case "yellow": waypoint.setColor(WaypointColor.YELLOW); break;
 			case "purple": waypoint.setColor(WaypointColor.PURPLE); break;
 			case "white": waypoint.setColor(WaypointColor.WHITE); break;
-			default: System.err.println("Don't know color " + p.getColor());
+			default: Log.e(this, "Don't know color %s", p.getColor()); break;
 		}
 		
 		ghost.updateWaypoint(waypoint);
@@ -258,12 +257,10 @@ public class ZoneManager extends Manager {
 	private void handleCmdSceneReady(Player player, CmdSceneReady p) {
 		new PlayerEventIntent(player, PlayerEvent.PE_ZONE_IN_SERVER).broadcast();
 		player.setPlayerState(PlayerState.ZONED_IN);
-		System.out.println("[" + player.getUsername() +"] " + player.getCharacterName() + " zoned in");
 		Log.i("ZoneService", "%s with character %s zoned in from %s:%d", player.getUsername(), player.getCharacterName(), p.getAddress(), p.getPort());
 	}
 	
 	private void handleClientIdMsg(Player player, ClientIdMsg clientId) {
-		System.out.println("[" + player.getUsername() + "] Connected to the zone server. IP: " + clientId.getAddress() + ":" + clientId.getPort());
 		Log.i("ZoneService", "%s connected to the zone server from %s:%d", player.getUsername(), clientId.getAddress(), clientId.getPort());
 		player.setPlayerServer(PlayerServer.ZONE);
 		sendPacket(player.getNetworkId(), new HeartBeat());

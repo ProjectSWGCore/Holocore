@@ -33,6 +33,7 @@ import resources.encodables.Encodable;
 import resources.network.DeltaBuilder;
 import resources.network.NetBuffer;
 import resources.objects.SWGObject;
+import resources.server_info.Log;
 import utilities.Encoder;
 import utilities.Encoder.StringType;
 
@@ -332,7 +333,7 @@ public class SWGList<E> extends AbstractList<E> implements Encodable, Serializab
 	private void addObjectData(int index, E obj, byte update) {
 		byte[] encodedData = Encoder.encode(obj, strType);
 		if (encodedData == null) {
-			System.err.println(toString() + " FATAL: Tried to encode an object that could not be encoded properly. Object: " + obj);
+			Log.e(toString(), "Tried to encode an object that could not be encoded properly. Object: " + obj);
 			return;
 		}
 

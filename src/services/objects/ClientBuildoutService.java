@@ -68,7 +68,7 @@ public class ClientBuildoutService extends Service {
 	public Collection<SWGObject> loadClientObjects() {
 		Collection<SWGObject> objects;
 		long startLoad = System.nanoTime();
-		logInfo("Loading client objects...");
+		Log.i(this, "Loading client objects...");
 		try {
 			loadAreas(getEvents());
 			if (getConfig(ConfigFile.PRIMARY).getBoolean("LOAD-OBJECTS", true))
@@ -81,7 +81,7 @@ public class ClientBuildoutService extends Service {
 			Log.e(this, e);
 		}
 		double loadTime = (System.nanoTime() - startLoad) / 1E6;
-		logInfo("Finished loading %d client objects. Time: %fms", objects.size(), loadTime);
+		Log.i(this, "Finished loading %d client objects. Time: %fms", objects.size(), loadTime);
 		return objects;
 	}
 	
@@ -190,8 +190,6 @@ public class ClientBuildoutService extends Service {
 	}
 	
 	private void setObjectArea(SWGObject obj) {
-		if (obj.getObjectId() == -507780858040143424L)
-			System.out.println("MENSIX " + obj.getParent());
 		if (obj.getParent() != null) {
 			obj.setBuildoutArea(null);
 			return;
@@ -201,10 +199,7 @@ public class ClientBuildoutService extends Service {
 		if (area == null || !isWithin(area, world.getTerrain(), world.getX(), world.getZ())) {
 			area = getAreaForObject(obj);
 			obj.setBuildoutArea(area);
-			if (obj.getObjectId() == -507780858040143424L)
-				System.out.println("       AREA: " + area);
-		} else if (obj.getObjectId() == -507780858040143424L)
-			System.out.println("       NOT SET");
+		}
 	}
 	
 	private BuildoutArea createArea(ResultSet set, AreaIndexes ind) throws SQLException {
@@ -230,11 +225,6 @@ public class ClientBuildoutService extends Service {
 	
 	private boolean isWithin(BuildoutArea area, Terrain t, double x, double z) {
 		return area.getTerrain() == t && x >= area.getX1() && x <= area.getX2() && z >= area.getZ1() && z <= area.getZ2();
-	}
-	
-	private void logInfo(String message, Object ... args) {
-		System.out.printf(getClass().getSimpleName() + ": " + message + "%n", args);
-		Log.i(this, message, args);
 	}
 	
 	private static class AreaIndexes {

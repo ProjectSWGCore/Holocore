@@ -44,6 +44,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import resources.network.DisconnectReason;
 import resources.network.NetBufferStream;
+import resources.server_info.Log;
 import utilities.IntentChain;
 import network.encryption.Compression;
 import network.packets.Packet;
@@ -176,7 +177,7 @@ public class NetworkClient {
 					packets.add(p);
 			}
 		} catch (EOFException e) {
-			System.err.println(e.getMessage());
+			Log.e("NetworkClient", "EOFException: " + e.getMessage());
 		}
 		return packets;
 	}
@@ -201,7 +202,7 @@ public class NetworkClient {
 	
 	private SWGPacket processSWG(byte [] data) {
 		if (data.length < 6) {
-			System.err.println("Length too small: " + data.length);
+			Log.e("NetworkClient", "Length too small: " + data.length);
 			return null;
 		}
 		ByteBuffer buffer = ByteBuffer.wrap(data).order(ByteOrder.LITTLE_ENDIAN);

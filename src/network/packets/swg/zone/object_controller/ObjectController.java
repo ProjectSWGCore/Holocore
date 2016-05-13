@@ -61,7 +61,7 @@ public abstract class ObjectController extends SWGPacket {
 			return;
 		update = getInt(data);
 		if (getInt(data) != controllerCrc)
-			System.err.println("ObjectController[" + getClass().getSimpleName() + "] Attempting to process invalid controller");
+			Log.e(getClass().getSimpleName(), "Attempting to process invalid controller");
 		objectId = getLong(data);
 		getInt(data);
 		return;

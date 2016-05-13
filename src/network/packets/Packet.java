@@ -29,6 +29,7 @@ package network.packets;
 
 import resources.common.CRC;
 import resources.encodables.Encodable;
+import resources.server_info.Log;
 import utilities.Encoder;
 
 import java.net.InetAddress;
@@ -107,7 +108,7 @@ public class Packet {
 				break;
 			case UNICODE: for (String s : list) { addUnicode(bb, s); }
 				break;
-			default: System.err.println("Cannot encode StringType " + type);
+			default: Log.e("Packet", "Cannot encode StringType " + type);
 				break;
 		}
 	}
@@ -287,7 +288,7 @@ public class Packet {
 		int size = getInt(bb);
 
 		if (size < 0) {
-			System.err.println("Read list with size less than zero!");
+			Log.e("Packet", "Read list with size less than zero!");
 			return null;
 		} else if (size == 0) {
 			return new ArrayList<>();
@@ -306,7 +307,7 @@ public class Packet {
 		}
 
 		if (size != list.size())
-			System.err.println("Expected list size " + size + " but only have " + list.size() + " elements in the list");
+			Log.e("Packet", "Expected list size %d but only have %d elements in the list", size, list.size());
 		return list;
 	}
 
@@ -326,7 +327,7 @@ public class Packet {
 		int size = getInt(bb);
 
 		if (size < 0) {
-			System.err.println("Read list with size less than zero!");
+			Log.e("Packet", "Read list with size less than zero!");
 			return null;
 		} else if (size == 0) {
 			return new ArrayList<>();
@@ -339,7 +340,7 @@ public class Packet {
 				break;
 			case UNICODE: for (int i = 0; i < size; i++) { list.add(getUnicode(bb)); }
 				break;
-			default: System.err.println("Do not know how to read list of StringType " + type);
+			default: Log.e("Packet", "Do not know how to read list of StringType " + type);
 				break;
 		}
 

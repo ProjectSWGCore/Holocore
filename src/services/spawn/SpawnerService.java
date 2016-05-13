@@ -109,7 +109,6 @@ public final class SpawnerService extends Service {
 	private void loadSpawners(boolean spawnEggs) {
 		long start = System.nanoTime();
 		int count = 0;
-		System.out.println("SpawnerService: Loading NPCs...");
 		Log.i(this, "Loading NPCs...");
 		try (RelationalDatabase spawnerDatabase = RelationalServerFactory.getServerData("spawn/static.db", "static", "building/buildings", "creatures/creatures", "creatures/npc_stats")) {
 			try (ResultSet set = spawnerDatabase.executeQuery(GET_ALL_SPAWNERS_SQL)) {
@@ -125,7 +124,6 @@ public final class SpawnerService extends Service {
 			e.printStackTrace();
 		}
 		double time = (System.nanoTime()-start)/1E6;
-		System.out.printf("SpawnerService: Finished loading %d NPCs. Time: %fms%n", count, time);
 		Log.i(this, "Finished loading %d NPCs. Time: %fms", count, time);
 	}
 	
