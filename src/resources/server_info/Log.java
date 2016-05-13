@@ -129,9 +129,9 @@ public class Log {
 		String logStr = String.format(str, args);
 		String log = String.format("%s %c/[%s]: %s", date, level.getChar(), tag, logStr);
 		if (level.compareTo(LogLevel.WARN) >= 0)
-			System.err.println(log);
+			System.err.println(date + " " + level.getChar() + ": " + logStr);
 		else
-			System.out.println(log);
+			System.out.println(date + " " + level.getChar() + ": " + logStr);
 		synchronized (LOG) {
 			try {
 				LOG.write(log);
