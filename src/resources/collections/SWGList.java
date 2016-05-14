@@ -339,7 +339,7 @@ public class SWGList<E> extends AbstractList<E> implements Encodable, Serializab
 
 		dataSize += encodedData.length;
 		synchronized (data) {
-			data.add(encodedData);
+			data.add(index, encodedData);
 		}
 
 		createIndexedDelta(encodedData, index, update);

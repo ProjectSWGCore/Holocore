@@ -167,10 +167,13 @@ public final class SpawnerService extends Service {
 		object.setName(getCreatureName(name));
 		object.setLevel((short) set.getInt("combat_level"));
 		object.setDifficulty(difficulty);
+		
 		object.setMaxHealth(set.getInt("HP"));
 		object.setHealth(object.getMaxHealth());
+		
 		object.setMaxAction(set.getInt("Action"));
 		object.setAction(object.getMaxAction());
+		
 		object.setBehavior(AIBehavior.valueOf(set.getString("behaviour")));
 		if (object.getBehavior() == AIBehavior.FLOAT)
 			object.setFloatRadius((Integer) set.getInt("float_radius"));
