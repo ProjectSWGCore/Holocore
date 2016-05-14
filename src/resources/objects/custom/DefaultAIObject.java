@@ -1,5 +1,6 @@
 package resources.objects.custom;
 
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import intents.object.MoveObjectIntent;
@@ -24,7 +25,8 @@ public class DefaultAIObject extends AIObject {
 	@Override
 	protected void aiInitialize() {
 		super.aiInitialize();
-		setSchedulerProperties(15, 15, TimeUnit.SECONDS);
+		long delay = (long) (30E3 + Math.random() * 10E3);
+		setSchedulerProperties(delay, delay, TimeUnit.MILLISECONDS); // Using milliseconds allows for more distribution between AI loops
 	}
 	
 	public AIBehavior getBehavior() {
@@ -61,12 +63,21 @@ public class DefaultAIObject extends AIObject {
 	private void aiLoopFloat() {
 		if (isInCombat())
 			return;
-		if (Math.random() > 0.25) // Only a 25% movement chance
+		Random r = new Random();
+		if (r.nextDouble() > 0.25) // Only a 25% movement chance
 			return;
 		if (getObservers().isEmpty()) // No need to dance if nobody is watching
 			return;
-		Location l = new Location(mainLocation);
-		l.translatePosition((Math.random()-.5)*2*radius, 0, (Math.random()-.5)*2*radius);
+		double dist = Math.sqrt(radius);
+		double x, z, theta;
+		Location l = getLocation();
+		do {
+			theta = r.nextDouble() * Math.PI * 2;
+			x = l.getX() + Math.cos(theta) * dist;
+			z = l.getZ() + Math.sin(theta) * dist;
+		} while (mainLocation.isWithinDistance(mainLocation.getTerrain(), x, mainLocation.getY(), z, radius));
+		l.setPosition(x, mainLocation.getY(), z);
+		l.setHeading(l.getYaw() - Math.toDegrees(theta));
 		new MoveObjectIntent(this, getParent(), l, 1.37, updateCounter++).broadcast();
 	}
 	
