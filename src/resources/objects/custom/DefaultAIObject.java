@@ -24,7 +24,7 @@ public class DefaultAIObject extends AIObject {
 	@Override
 	protected void aiInitialize() {
 		super.aiInitialize();
-		setSchedulerProperties(30, 30, TimeUnit.SECONDS);
+		setSchedulerProperties(15, 15, TimeUnit.SECONDS);
 	}
 	
 	public AIBehavior getBehavior() {
@@ -60,6 +60,10 @@ public class DefaultAIObject extends AIObject {
 	
 	private void aiLoopFloat() {
 		if (isInCombat())
+			return;
+		if (Math.random() > 0.25) // Only a 25% movement chance
+			return;
+		if (getObservers().isEmpty()) // No need to dance if nobody is watching
 			return;
 		Location l = new Location(mainLocation);
 		l.translatePosition((Math.random()-.5)*2*radius, 0, (Math.random()-.5)*2*radius);
