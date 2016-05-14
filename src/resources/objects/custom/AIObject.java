@@ -11,7 +11,7 @@ public abstract class AIObject extends CreatureObject {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private ScheduledFuture<?> future;
+	private transient ScheduledFuture<?> future;
 	private long initialDelay;
 	private long delay;
 	private TimeUnit unit;
