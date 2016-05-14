@@ -179,7 +179,8 @@ public final class SpawnerService extends Service {
 			object.setFloatRadius((Integer) set.getInt("float_radius"));
 		
 		switch (set.getString("attackable")) {
-			case "AGGRESSIVE": object.addOptionFlags(OptionFlag.AGGRESSIVE);	// Ziggy: There's also an AGGRESSIVE PvpFlag?
+			case "AGGRESSIVE": object.setPvpFlags(PvpFlag.AGGRESSIVE);	// Ziggy: There's also an AGGRESSIVE PvpFlag?
+			object.setPvpFlags(PvpFlag.ENEMY);
 			case "ATTACKABLE": object.setPvpFlags(PvpFlag.ATTACKABLE); break;
 			case "INVULNERABLE": object.addOptionFlags(OptionFlag.INVULNERABLE); break;
 			default: Log.w(this, "An unknown attackable type of %s was specified for %s", set.getString("attackable"), name); break;
