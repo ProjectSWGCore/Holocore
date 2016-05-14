@@ -68,13 +68,11 @@ public class RadialService extends Service {
 		if (target == null)
 			return;
 		if (!(requestor instanceof CreatureObject)) {
-			System.err.println("Requestor of target: " + target + " is not a creature object!");
 			Log.w("RadialService", "Requestor of target: %s is not a creature object! %s", target, requestor);
 			return;
 		}
 		Player player = requestor.getOwner();
 		if (player == null) {
-			System.err.println("Requestor of target: " + target + " does not have an owner!");
 			Log.w("RadialService", "Requestor of target: %s does not have an owner! %s", target, requestor);
 			return;
 		}
@@ -117,13 +115,11 @@ public class RadialService extends Service {
 		if (target == null)
 			return;
 		if (!(requestor instanceof CreatureObject)) {
-			System.err.println("Requestor of target: " + target + " is not a creature object!");
 			Log.w("RadialService", "Requestor of target: %s is not a creature object! %s", target, requestor);
 			return;
 		}
 		Player player = requestor.getOwner();
 		if (player == null) {
-			System.err.println("Requestor of target: " + target + " does not have an owner!");
 			Log.w("RadialService", "Requestor of target: %s does not have an owner! %s", target, requestor);
 			return;
 		}

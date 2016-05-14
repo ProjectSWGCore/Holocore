@@ -225,7 +225,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		}
 
 		if (!container.addObject(this))
-			System.err.println("Failed adding " + this + " to " + container);
+			Log.e("SWGObject", "Failed adding " + this + " to " + container);
 
 		// Observer notification
 		Player newOwner = getOwner();
@@ -773,24 +773,19 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	private boolean isValidPlayer(Player player) {
 		Player owner = getOwner();
-		if (player == null || player == owner)
-			return false;
-		if (player.getCreatureObject() == null)
-			return false;
-		if (player.getCreatureObject().getPlayerObject() == null)
-			return false;
-		if (player.equals(owner))
+		if (player == null)
 			return false;
 		if (owner == null)
 			return true;
-		SWGObject creature = owner.getCreatureObject();
-		if (creature == null)
+		if (player.getCreatureObject() == null)
 			return false;
-		if (player.getCreatureObject().equals(creature))
+		if (owner.getCreatureObject() == null)
+			return true;
+		if (player.getCreatureObject().equals(owner.getCreatureObject()))
 			return false;
-		return true;
+		return player.getCreatureObject().isLoggedInPlayer();
 	}
-
+	
 	public void sendObserversAndSelf(Packet ... packets) {
 		sendSelf(packets);
 		sendObservers(packets);

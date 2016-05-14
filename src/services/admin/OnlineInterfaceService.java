@@ -63,7 +63,7 @@ public class OnlineInterfaceService extends Service implements HttpServerCallbac
 		httpServer.setMaxConnections(network.getInt("HTTP-MAX-CONNECTIONS", 2));
 		httpsServer.setMaxConnections(network.getInt("HTTPS-MAX-CONNECTIONS", 5));
 		if (!httpsServer.initialize(network)) {
-			System.err.println("Failed to initialize HTTPS server! Incorrect password?");
+			Log.e(this, "Failed to initialize HTTPS server! Incorrect password?");
 			httpServer.stop();
 			httpsServer.stop();
 			super.initialize();
@@ -82,7 +82,7 @@ public class OnlineInterfaceService extends Service implements HttpServerCallbac
 			httpServer.start();
 			httpsServer.start();
 			executor.scheduleAtFixedRate(dataCollectionRunnable, 0, 1, TimeUnit.SECONDS);
-			System.out.println("OnlineInterfaceService: Web server is now online.");
+			Log.i(this, "Web server is now online.");
 		}
 		return super.start();
 	}
@@ -167,7 +167,7 @@ public class OnlineInterfaceService extends Service implements HttpServerCallbac
 			if (c.containsKey(secondTry))
 				return InetAddress.getByName(c.getString(secondTry, "127.0.0.1"));
 		} catch (UnknownHostException e) {
-			System.err.println("NetworkListenerService: Unknown host for IP: " + t);
+			Log.e(this, "Unknown host for IP: " + t);
 		}
 		return null;
 	}

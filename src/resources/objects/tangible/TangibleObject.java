@@ -50,7 +50,7 @@ public class TangibleObject extends SWGObject {
 	private static final long serialVersionUID = 1L;
 	
 	private byte []	appearanceData	= new byte[0];
-	private int		maxHitPoints	= 0;
+	private int		maxHitPoints	= 1000;
 	private int		components		= 0;
 	private boolean	inCombat		= false;
 	private int		condition		= 0;
@@ -67,7 +67,6 @@ public class TangibleObject extends SWGObject {
 	
 	public TangibleObject(long objectId) {
 		super(objectId, BaselineType.TANO);
-		addOptionFlags(OptionFlag.INVULNERABLE);
 	}
 	
 	public TangibleObject(long objectId, BaselineType objectType) {

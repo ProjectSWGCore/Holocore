@@ -1,5 +1,6 @@
 package services.combat;
 
+import java.awt.Color;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -8,8 +9,9 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import network.packets.swg.zone.object_controller.ShowFlyText;
+import network.packets.swg.zone.object_controller.ShowFlyText.Scale;
 import network.packets.swg.zone.object_controller.combat.CombatAction;
-import intents.chat.ChatBroadcastIntent;
 import intents.chat.ChatCommandIntent;
 import resources.combat.AttackInfoLight;
 import resources.combat.AttackType;
@@ -18,11 +20,12 @@ import resources.combat.HitLocation;
 import resources.combat.TrailLocation;
 import resources.commands.CombatCommand;
 import resources.common.CRC;
+import resources.common.RGB;
 import resources.control.Intent;
 import resources.control.Service;
-import resources.encodables.ProsePackage;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
+import resources.objects.tangible.TangibleObject;
 import resources.objects.weapon.WeaponObject;
 import resources.server_info.Log;
 import utilities.Scripts;
@@ -53,11 +56,13 @@ public class CombatService extends Service {
 	
 	@Override
 	public boolean terminate() {
-		executor.shutdownNow();
-		try {
-			executor.awaitTermination(3, TimeUnit.SECONDS);
-		} catch (InterruptedException e) {
-			
+		if (executor != null) {
+			executor.shutdownNow();
+			try {
+				executor.awaitTermination(3, TimeUnit.SECONDS);
+			} catch (InterruptedException e) {
+				
+			}
 		}
 		return super.terminate();
 	}
@@ -85,8 +90,7 @@ public class CombatService extends Service {
 		synchronized (inCombat) {
 			inCombat.remove(combat.getCreature().getObjectId());
 		}
-		combat.getCreature().setInCombat(false);
-		combat.getCreature().clearDefenders();
+		exitCombat(combat.getCreature());
 	}
 	
 	private void processChatCommand(ChatCommandIntent cci) {
@@ -147,9 +151,9 @@ public class CombatService extends Service {
 	
 	private void doCombatSingle(CreatureObject source, CreatureObject target, AttackInfoLight info, CombatCommand command) {
 		if (!source.isInCombat())
-			source.setInCombat(true);
+			enterCombat(source);
 		if (!target.isInCombat())
-			target.setInCombat(true);
+			enterCombat(target);
 		target.addDefender(source);
 		// Note: This will not kill anyone
 		if (target.getHealth() <= info.getDamage())
@@ -158,18 +162,27 @@ public class CombatService extends Service {
 			target.modifyHealth(-info.getDamage());
 	}
 	
+	private void enterCombat(CreatureObject creature) {
+		creature.setInCombat(true);
+	}
+	
+	private void exitCombat(CreatureObject creature) {
+		creature.setInCombat(false);
+		creature.clearDefenders();
+	}
+	
 	private boolean handleStatus(CreatureObject source, CombatStatus status) {
 		switch (status) {
 			case SUCCESS:
 				return true;
 			case NO_TARGET:
-				new ChatBroadcastIntent(source.getOwner(), new ProsePackage("combat_effects", "target_invalid_fly")).broadcast();
+				showFlyText(source, "@combat_effects:target_invalid_fly", Scale.MEDIUM, Color.WHITE, ShowFlyText.Flag.PRIVATE);
 				return false;
 			case TOO_FAR:
-				new ChatBroadcastIntent(source.getOwner(), new ProsePackage("combat_effects", "range_too_far")).broadcast();
+				showFlyText(source, "@combat_effects:range_too_far", Scale.MEDIUM, Color.CYAN, ShowFlyText.Flag.PRIVATE);
 				return false;
 			default:
-				new ChatBroadcastIntent(source.getOwner(), new ProsePackage("combat_effects", "cant_attack_fly")).broadcast();
+				showFlyText(source, "@combat_effects:cant_attack_fly", Scale.MEDIUM, Color.WHITE, ShowFlyText.Flag.PRIVATE);
 				Log.e(this, "Character unable to attack. Player: %s  Reason: %s", source.getName(), status);
 				return false;
 		}
@@ -212,6 +225,10 @@ public class CombatService extends Service {
 	
 	private CombatStatus canPerformArea(CreatureObject source, CombatCommand c) {
 		return CombatStatus.SUCCESS;
+	}
+	
+	private void showFlyText(TangibleObject obj, String text, Scale scale, Color c, ShowFlyText.Flag ... flags) {
+		obj.sendSelf(new ShowFlyText(obj.getObjectId(), text, scale, new RGB(c), flags));
 	}
 	
 	private static class CombatCreature {

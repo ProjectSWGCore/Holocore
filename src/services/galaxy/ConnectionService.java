@@ -53,7 +53,6 @@ import resources.player.PlayerFlags;
 import resources.player.PlayerState;
 import resources.server_info.Log;
 import services.CoreManager;
-import utilities.DebugUtilities;
 import utilities.ThreadUtilities;
 
 public class ConnectionService extends Service {
@@ -76,7 +75,6 @@ public class ConnectionService extends Service {
 					while (iter.hasNext()) {
 						DisappearPlayer p = iter.next();
 						if ((System.nanoTime()-p.getTime())/1E6 >= DISAPPEAR_THRESHOLD) {
-							DebugUtilities.printPlayerCharacterDebug(ConnectionService.this, p.getPlayer(), "Disappearing");
 							disappear(p.getPlayer(), false, DisconnectReason.APPLICATION);
 							iter.remove();
 						}
@@ -211,21 +209,22 @@ public class ConnectionService extends Service {
 	}
 	
 	private PlayerObject getPlayerObject(Player p, PlayerEvent event) {
+		if (p.getPlayerState() != PlayerState.ZONED_IN)
+			return null;
 		CreatureObject creature = p.getCreatureObject();
 		if (creature == null) {
-			Log.e("ConnectionService", "Unable to set player flags for user: %s  on event: %s - CreatureObject is null", p.getUsername(), event);
+			Log.e("ConnectionService", "Unable to set player flags for user: %s on event: %s - CreatureObject is null", p.getUsername(), event);
 			return null;
 		}
 		PlayerObject player = creature.getPlayerObject();
 		if (player == null) {
-			Log.e("ConnectionService", "Unable to set player flags for user: %s  on event: %s - PlayerObject is null", p.getUsername(), event);
+			Log.e("ConnectionService", "Unable to set player flags for user: %s on event: %s - PlayerObject is null", p.getUsername(), event);
 			return null;
 		}
 		return player;
 	}
 	
 	private void logOut(Player p, boolean addToDisappear) {
-		System.out.println("[" + p.getUsername() +"] Logged out " + p.getCharacterName());
 		Log.i("ConnectionService", "Logged out %s with character %s", p.getUsername(), p.getCharacterName());
 		removeFromLists(p);
 		updatePlayTime(p);
@@ -238,7 +237,6 @@ public class ConnectionService extends Service {
 	}
 	
 	private void disappear(Player p, boolean newConnection, DisconnectReason reason) {
-		System.out.println("[" + p.getUsername() +"] " + p.getCharacterName() + " disappeared");
 		Log.i("ConnectionService", "Disappeared %s with character %s with reason %s", p.getUsername(), p.getCharacterName(), reason);
 		
 		if (newConnection) // Attempting to re-zone

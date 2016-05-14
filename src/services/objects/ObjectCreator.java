@@ -56,6 +56,7 @@ import resources.objects.staticobject.StaticObject;
 import resources.objects.tangible.TangibleObject;
 import resources.objects.waypoint.WaypointObject;
 import resources.objects.weapon.WeaponObject;
+import resources.server_info.Log;
 
 public final class ObjectCreator {
 	
@@ -91,7 +92,7 @@ public final class ObjectCreator {
 	public static <T extends SWGObject> T createObjectFromTemplate(long objectId, String template, Class <T> c) {
 		T obj;
 		try {
-			obj = c.getConstructor(Integer.TYPE).newInstance(objectId);
+			obj = c.getConstructor(Long.TYPE).newInstance(objectId);
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
 			e.printStackTrace();
 			obj = null;
@@ -189,14 +190,16 @@ public final class ObjectCreator {
 			case "tangible":				return new TangibleObject(objectId);
 			case "waypoint":				return new WaypointObject(objectId);
 			case "weapon":					return new WeaponObject(objectId);
-			default:						System.err.println("Unknown type: " + type); return null;
+			default:						Log.e("ObjectCreator", "Unknown type: " + type); return null;
 		}
 	}
 	
 	private static void handlePostCreation(SWGObject object, ObjectData attributes) {
 		addObjectAttributes(object, attributes);
 		createObjectSlots(object);
-		object.setGameObjectType(GameObjectType.getTypeFromId((Integer) object.getDataAttribute(ObjectDataAttribute.GAME_OBJECT_TYPE)));
+		Object got = object.getDataAttribute(ObjectDataAttribute.GAME_OBJECT_TYPE);
+		if (got != null)
+			object.setGameObjectType(GameObjectType.getTypeFromId((Integer) got));
 	}
 
 	private static void addObjectAttributes(SWGObject obj, ObjectData attributes) {

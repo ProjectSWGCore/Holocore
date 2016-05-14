@@ -240,16 +240,14 @@ public enum PacketType {
 
 	public static SWGPacket getForCrc(int crc) {
 		PacketType type = packetMap.get(crc);
-		if (type == null) {
-			Log.w("PacketType", "Unknown packet: %08X", crc);
+		if (type == null)
 			return null;
-		}
 		Class <? extends SWGPacket> c = type.c;
 		try {
 			return c.newInstance();
 		} catch (Exception e) {
-			System.err.printf("Packet: [%08X] %s%n", crc, c.getName());
-			e.printStackTrace();
+			Log.e("PacketType", "Packet: [%08X] %s", crc, c.getName());
+			Log.e("PacketType", e);
 		}
 		return null;
 	}

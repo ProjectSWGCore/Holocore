@@ -219,7 +219,6 @@ public class NetworkClientManager extends Manager implements TCPCallback, Packet
 	
 	@Override
 	public void onConnectionDisconnect(Socket s, SocketAddress addr) {
-		Log.i(this, "Disconnected from %s", addr);
 		if (addr instanceof InetSocketAddress)
 			onSessionDisconnect((InetSocketAddress) addr);
 		else if (addr != null)

@@ -30,6 +30,7 @@ package resources.collections;
 import resources.encodables.Encodable;
 import resources.network.NetBuffer;
 import resources.objects.SWGObject;
+import resources.server_info.Log;
 import utilities.Encoder;
 import utilities.Encoder.StringType;
 
@@ -233,7 +234,7 @@ public class SWGMap<K, V> extends AbstractMap<K, V> implements Encodable, Serial
 				if (value != null && vType.isAssignableFrom(value.getClass()))
 					map.put((K) key, (V) value);
 				else
-					System.err.println("Unable to parse: key="+key+"  value="+value);
+					Log.e("SWGMap", "Unable to parse: key=%s  value=%s", key, value);
 			}
 		} catch (ClassCastException e) {
 			e.printStackTrace();
@@ -251,18 +252,18 @@ public class SWGMap<K, V> extends AbstractMap<K, V> implements Encodable, Serial
 				buffer.getByte();
 			Object key = buffer.getGeneric(kType);
 			if (key == null) {
-				System.err.println("Failed to decode: "+kType.getSimpleName());
+				Log.e("SWGMap", "Failed to decode: "+kType.getSimpleName());
 				break;
 			}
 			Object value = buffer.getGeneric(vType);
 			if (value == null) {
-				System.err.println("Failed to decode: "+vType.getSimpleName());
+				Log.e("SWGMap", "Failed to decode: "+vType.getSimpleName());
 				break;
 			}
 			if (kType.isAssignableFrom(key.getClass()) && vType.isAssignableFrom(value.getClass()))
 				map.put((K) key, (V) value);
 			else
-				System.err.println("Failed to insert key="+key+"  value="+value);
+				Log.e("SWGMap", "Failed to insert key="+key+"  value="+value);
 		}
 		clearDeltaQueue();
 	}
@@ -334,7 +335,7 @@ public class SWGMap<K, V> extends AbstractMap<K, V> implements Encodable, Serial
 	private void removeData(Object key) {
 		byte[] bytes = data.remove(key);
 		if (bytes == null) {
-			System.err.println("[SWGMap] Could not remove key as it wasn't in the data map: " + key);
+			Log.e("SWGMap", "Could not remove key as it wasn't in the data map: " + key);
 			return;
 		}
 		

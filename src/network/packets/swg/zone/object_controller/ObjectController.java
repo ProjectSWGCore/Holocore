@@ -61,7 +61,7 @@ public abstract class ObjectController extends SWGPacket {
 			return;
 		update = getInt(data);
 		if (getInt(data) != controllerCrc)
-			System.err.println("ObjectController[" + getClass().getSimpleName() + "] Attempting to process invalid controller");
+			Log.e(getClass().getSimpleName(), "Attempting to process invalid controller");
 		objectId = getLong(data);
 		getInt(data);
 		return;
@@ -100,6 +100,8 @@ public abstract class ObjectController extends SWGPacket {
 			case 0x0131: return new PostureUpdate(data);
 			case 0x0134: return new CombatSpam(data);
 			case 0x0146: return new ObjectMenuRequest(data);
+			case 0x01BD: return new ShowFlyText(data);
+			case 0x044D: return new ChangeRoleIconChoice(data);
 			case 0x04C5: return new IntendedTarget(data);
 		}
 		Log.w("ObjectController", "Unknown object controller: %08X", crc);

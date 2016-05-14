@@ -30,6 +30,8 @@ package resources.control;
 import java.util.ArrayList;
 import java.util.List;
 
+import resources.server_info.Log;
+
 
 /**
  * A Manager is a class that will manage services, and generally controls the
@@ -55,7 +57,7 @@ public abstract class Manager extends Service {
 		synchronized (children) {
 			for (Service child : children) {
 				if (!child.initialize()) {
-					System.err.println(child.getClass().getSimpleName() + " failed to initialize!");
+					Log.e(this, child.getClass().getSimpleName() + " failed to initialize!");
 					success = false;
 					break;
 				}
@@ -76,7 +78,7 @@ public abstract class Manager extends Service {
 		synchronized (children) {
 			for (Service child : children) {
 				if (!child.start()) {
-					System.err.println(child.getClass().getSimpleName() + " failed to start!");
+					Log.e(this, child.getClass().getSimpleName() + " failed to start!");
 					success = false;
 					break;
 				}
@@ -100,7 +102,7 @@ public abstract class Manager extends Service {
 					break;
 				cSuccess = child.stop();
 				if (!cSuccess) {
-					System.err.println(child.getClass().getSimpleName() + " failed to stop!");
+					Log.e(this, child.getClass().getSimpleName() + " failed to stop!");
 					success = false;
 				}
 			}

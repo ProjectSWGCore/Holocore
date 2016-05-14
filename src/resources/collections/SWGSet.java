@@ -32,6 +32,7 @@ import network.packets.swg.zone.baselines.Baseline;
 import resources.encodables.Encodable;
 import resources.network.NetBuffer;
 import resources.objects.SWGObject;
+import resources.server_info.Log;
 import utilities.Encoder;
 import utilities.Encoder.StringType;
 
@@ -145,7 +146,7 @@ public class SWGSet<E> extends AbstractSet<E> implements Encodable, Serializable
 	private void addObjectData(E obj, byte update) {
 		byte[] encodedData = Encoder.encode(obj, strType);
 		if (encodedData == null) {
-			System.err.println(toString() + " FATAL: Tried to encode an object that could not be encoded properly. Object: " + obj);
+			Log.e("SWGSet", "Tried to encode an object that could not be encoded properly. Object: " + obj);
 			return;
 		}
 
@@ -159,7 +160,7 @@ public class SWGSet<E> extends AbstractSet<E> implements Encodable, Serializable
 	private void removeObjectData(Object obj, byte update) {
 		byte[] encodedData = Encoder.encode(obj, strType);
 		if (encodedData == null) {
-			System.err.println(toString() + " FATAL: Tried to encode an object that could not be encoded properly. Object: " + obj);
+			Log.e("SWGSet", "Tried to encode an object that could not be encoded properly. Object: " + obj);
 			return;
 		}
 
