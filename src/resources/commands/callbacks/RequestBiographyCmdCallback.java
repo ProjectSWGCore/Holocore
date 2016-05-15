@@ -46,7 +46,6 @@ public class RequestBiographyCmdCallback implements ICmdCallback {
 		CreatureObject creatureObject = player.getCreatureObject();
 		if(target != null) {
 			if(creatureObject.isPlayer()) {
-				// TODO send BiographyUpdate to Player
 				player.sendPacket(new BiographyUpdate(creatureObject.getObjectId(), target.getObjectId(), creatureObject.getPlayerObject().getBiography()));
 			} else {
 				Log.w("RequestBiographyCmdCallback", "%s tried to request biography of NPC %s", creatureObject, target);
