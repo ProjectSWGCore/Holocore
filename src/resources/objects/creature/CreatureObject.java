@@ -51,7 +51,6 @@ import resources.network.BaselineBuilder;
 import resources.network.NetBuffer;
 import resources.objects.SWGObject;
 import resources.objects.player.PlayerObject;
-import resources.objects.tangible.OptionFlag;
 import resources.objects.tangible.TangibleObject;
 import resources.objects.weapon.WeaponObject;
 import resources.player.Player;
@@ -128,7 +127,6 @@ public class CreatureObject extends TangibleObject {
 		initMaxAttributes();
 		initCurrentAttributes();
 		initBaseAttributes();
-		setOptionFlags(OptionFlag.HAM_BAR);
 	}
 	
 	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
@@ -930,17 +928,14 @@ public class CreatureObject extends TangibleObject {
 			target.sendPacket(createBaseline9(target));
 		}
 	}
-
-	@Override
-	public void createObject(Player target) {
-		super.createObject(target);
-
+	
+	protected void sendFinalBaselinePackets(Player target) {
+		super.sendFinalBaselinePackets(target);
+		
 		target.sendPacket(new UpdatePostureMessage(posture.getId(), getObjectId()));
-
-		if (target != getOwner()) {
-			Set<PvpFlag> flags = PvpFlag.getFlags(getPvpFlags());
-			target.sendPacket(new UpdatePvpStatusMessage(getPvpFaction(), getObjectId(), flags.toArray(new PvpFlag[flags.size()])));
-		}
+		
+		Set<PvpFlag> flags = PvpFlag.getFlags(getPvpFlags());
+		target.sendPacket(new UpdatePvpStatusMessage(getPvpFaction(), getObjectId(), flags.toArray(new PvpFlag[flags.size()])));
 	}
 	
 	public void createBaseline1(Player target, BaselineBuilder bb) {

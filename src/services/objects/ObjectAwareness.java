@@ -137,10 +137,8 @@ public class ObjectAwareness extends Service {
 	
 	private void handleObjectCreatedIntent(ObjectCreatedIntent oci) {
 		SWGObject object = oci.getObject();
-		if (isInAwareness(object)) {
-			add(object);
-			update(object);
-		}
+		add(object);
+		update(object);
 	}
 	
 	private void processObjectTeleportIntent(ObjectTeleportIntent oti) {
@@ -153,6 +151,7 @@ public class ObjectAwareness extends Service {
 		} else {
 			moveFromOld(object, old, false);
 		}
+		object.clearAware();
 		if (object instanceof CreatureObject && ((CreatureObject) object).isLoggedInPlayer())
 			new RequestZoneInIntent(owner, (CreatureObject) object, false).broadcast();
 	}
@@ -181,7 +180,6 @@ public class ObjectAwareness extends Service {
 		synchronized (tree) {
 			objects = tree.get(l.getX(), l.getZ());
 		}
-		Log.d(this, "Updated awareness for %s", obj);
 		if (objects.contains(obj)) {
 			if (!i.isInAwareness()) {
 				remove(obj);
@@ -307,6 +305,8 @@ public class ObjectAwareness extends Service {
 	 * @param object the object to add
 	 */
 	public void add(SWGObject object) {
+		if (!isInAwareness(object))
+			return;
 		Location l = object.getLocation();
 		if (invalidLocation(l))
 			return;
@@ -375,7 +375,7 @@ public class ObjectAwareness extends Service {
 	 * @param obj the object to update
 	 */
 	private void update(SWGObject obj) {
-		if (!obj.isGenerated())
+		if (!obj.isGenerated() || !isInAwareness(obj))
 			return;
 		Location l = obj.getWorldLocation();
 		if (invalidLocation(l))
@@ -426,6 +426,8 @@ public class ObjectAwareness extends Service {
 		if (inRange.getObjectId() == obj.getObjectId())
 			return false;
 		if (obj instanceof CreatureObject && ((CreatureObject) obj).isLoggedOutPlayer())
+			return false;
+		if (obj.getParent() != null)
 			return false;
 		int distSquared = distanceSquared(objLoc, inRange.getWorldLocation());
 		int loadSquared = (int) (square(inRange.getLoadRange()) + 0.5);

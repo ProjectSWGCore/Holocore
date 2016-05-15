@@ -51,6 +51,7 @@ import resources.network.BaselineObject;
 import resources.network.NetBuffer;
 import resources.objects.building.BuildingObject;
 import resources.objects.creature.CreatureObject;
+import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
 import resources.server_info.Log;
 import services.CoreManager;
@@ -699,6 +700,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			sendBaselines(target);
 		}
 		createChildrenObjects(target, ignoreSnapshotChecks);
+		sendFinalBaselinePackets(target);
 		if (!isSnapshot() || ignoreSnapshotChecks)
 			target.sendPacket(new SceneEndBaselines(getObjectId()));
 	}
@@ -729,61 +731,41 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	public Set<SWGObject> getObservers() {
-		return getObservers(this);
-	}
-	
-	private Set<SWGObject> getObservers(SWGObject childObject) {
-		return getObserversFromSet(new HashSet<SWGObject>(), childObject);
-	}
-	
-	private Set<SWGObject> getObserversFromSet(Set<SWGObject> aware, SWGObject childObject) {
-		Set<SWGObject> awareExtra;
-		synchronized (aware) {
-			awareExtra = new HashSet<>(aware);
-		}
-		synchronized (objectsAware) {
-			awareExtra.addAll(objectsAware);
-		}
-		if (getParent() == null) {
-			Set<SWGObject> observers = new HashSet<>();
-			for (SWGObject obj : awareExtra) {
-				Player p = obj.getOwner();
-				if (childObject.isValidPlayer(p))
-					observers.add(obj);
-				else
-					childObject.getChildrenObservers(observers, obj);
-			}
-			childObject.getChildrenObservers(observers, this);
-			return observers;
-		} else {
-			return getParent().getObserversFromSet(awareExtra, childObject); // Search for top level parent
-		}
-	}
-	
-	private void getChildrenObservers(Set<SWGObject> observers, SWGObject obj) {
-		for (SWGObject child : obj.getContainedObjects()) {
-			Player p = child.getOwner();
-			if (isValidPlayer(p)) {
-				observers.add(child);
-			} else {
-				getChildrenObservers(observers, child);
-			}
-		}
-	}
-	
-	private boolean isValidPlayer(Player player) {
 		Player owner = getOwner();
-		if (player == null)
-			return false;
-		if (owner == null)
-			return true;
-		if (player.getCreatureObject() == null)
-			return false;
-		if (owner.getCreatureObject() == null)
-			return true;
-		if (player.getCreatureObject().equals(owner.getCreatureObject()))
-			return false;
-		return player.getCreatureObject().isLoggedInPlayer();
+		SWGObject parent = getParent();
+		if (parent == null)
+			return getObservers(owner, true);
+		while (parent.getParent() != null)
+			parent = parent.getParent();
+		return parent.getObservers(owner, true);
+	}
+	
+	private Set<SWGObject> getObservers(Player owner, boolean initial) {
+		Set<SWGObject> nearby = new HashSet<>();
+		synchronized (containedObjects) {
+			nearby.addAll(containedObjects.values());
+		}
+		if (initial) {
+			synchronized (objectsAware) {
+				nearby.addAll(objectsAware);
+			}
+		}
+		return getObserversFromSet(nearby, owner);
+	}
+	
+	private Set<SWGObject> getObserversFromSet(Set<SWGObject> nearby, Player owner) {
+		Set<SWGObject> observers = new HashSet<>();
+		for (SWGObject aware : nearby) {
+			if (aware instanceof CreatureObject) {
+				Player awareOwner = aware.getOwner();
+				if (awareOwner == null || awareOwner.equals(owner))
+					continue;
+				if (((CreatureObject) aware).isLoggedInPlayer())
+					observers.add(aware);
+			} else if (aware instanceof TangibleObject)
+				observers.addAll(aware.getObservers(owner, false));
+		}
+		return observers;
 	}
 	
 	public void sendObserversAndSelf(Packet ... packets) {
@@ -844,7 +826,8 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		synchronized (objectsAware) {
 			outOfRange = new HashSet<>(objectsAware);
 		}
-		Set<SWGObject> observers = getObserversFromSet(withinRange, this);
+		outOfRange.addAll(getObservers());
+		Set<SWGObject> observers = getObserversFromSet(withinRange, getOwner());
 		outOfRange.removeAll(withinRange);
 		outOfRange.removeAll(observers);
 		for (SWGObject o : outOfRange) {
@@ -870,8 +853,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			Player owner = o.getOwner();
 			if (owner != null)
 				destroyObject(owner);
-			else
-				destroyObjectObservers(o);
 		}
 	}
 	
@@ -884,27 +865,9 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			Player owner = o.getOwner();
 			if (owner != null)
 				createObject(owner);
-			else
-				createObjectObservers(o);
-		}
-	}
-
-	private void createObjectObservers(SWGObject obj) {
-		Set<SWGObject> observers = new HashSet<>();
-		getChildrenObservers(observers, obj);
-		for (SWGObject observer : observers) {
-			createObject(observer.getOwner());
 		}
 	}
 	
-	private void destroyObjectObservers(SWGObject obj) {
-		Set<SWGObject> observers = new HashSet<>();
-		getChildrenObservers(observers, obj);
-		for (SWGObject observer : observers) {
-			destroyObject(observer.getOwner());
-		}
-	}
-
 	public void sendDataTransforms(DataTransform dTransform) {
 		Location loc = dTransform.getLocation();
 		float speed = dTransform.getSpeed();
@@ -974,7 +937,11 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			}
 		}
 	}
-
+	
+	protected void sendFinalBaselinePackets(Player target) {
+		
+	}
+	
 	public boolean isInBuilding() {
 		SWGObject parent = getParent();
 		if (parent == null)

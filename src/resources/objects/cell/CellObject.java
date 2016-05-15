@@ -87,8 +87,8 @@ public class CellObject extends SWGObject {
 		this.labelZ = z;
 	}
 
-	protected void sendBaselines(Player target) {
-		super.sendBaselines(target);
+	protected void sendFinalBaselinePackets(Player target) {
+		super.sendFinalBaselinePackets(target);
 		target.sendPacket(new UpdateCellPermissionMessage((byte) 1, getObjectId()));
 	}
 	
