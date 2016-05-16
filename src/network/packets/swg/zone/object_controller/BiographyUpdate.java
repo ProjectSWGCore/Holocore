@@ -54,7 +54,7 @@ public class BiographyUpdate extends ObjectController {
 	}
 	
 	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + Long.BYTES + biography.length() * 2);
+		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + Long.BYTES + Integer.BYTES + biography.length() * 2);
 		encodeHeader(data);
 		addLong(data, targetId);
 		addUnicode(data, biography);
