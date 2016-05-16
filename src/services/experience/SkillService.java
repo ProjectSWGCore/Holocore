@@ -195,6 +195,7 @@ public final class SkillService extends Service {
 
 					if(playerObject != null) {
 						playerObject.setProfessionIcon(chosenIcon);
+						break;
 					} else {
 						Log.e(this, "Could not alter role icon for PlayerObject of %s because it has none attached" , creature);
 					}
