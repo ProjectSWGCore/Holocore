@@ -51,7 +51,6 @@ import resources.network.BaselineObject;
 import resources.network.NetBuffer;
 import resources.objects.building.BuildingObject;
 import resources.objects.creature.CreatureObject;
-import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
 import resources.server_info.Log;
 import services.CoreManager;
