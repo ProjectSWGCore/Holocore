@@ -762,7 +762,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 					continue;
 				if (((CreatureObject) aware).isLoggedInPlayer())
 					observers.add(aware);
-			} else if (aware instanceof TangibleObject)
+			} else
 				observers.addAll(aware.getObservers(owner, false));
 		}
 		return observers;

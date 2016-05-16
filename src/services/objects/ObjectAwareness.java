@@ -147,7 +147,7 @@ public class ObjectAwareness extends Service {
 		Location old = object.getLocation();
 		object.setLocation(oti.getNewLocation());
 		if (oti.getParent() != null) {
-			move(object, oti.getParent(), oti.getNewLocation(), false);
+			move(object, oti.getParent(), oti.getNewLocation());
 		} else {
 			moveFromOld(object, old, false);
 		}
@@ -222,7 +222,7 @@ public class ObjectAwareness extends Service {
 	private void processMoveObjectIntentParent(MoveObjectIntent i) {
 		SWGObject obj = i.getObject();
 		Location newLocation = i.getNewLocation();
-		move(obj, i.getParent(), newLocation, true);
+		move(obj, i.getParent(), newLocation);
 		DataTransformWithParent transform = new DataTransformWithParent(obj.getObjectId());
 		transform.setTimestamp((int) ProjectSWG.getGalacticTime());
 		transform.setLocation(newLocation);
@@ -278,7 +278,7 @@ public class ObjectAwareness extends Service {
 			transformWithParent.setSpeed((float) (obj.getMovementScale()*7.3));
 		}
 		new PlayerTransformedIntent((CreatureObject) obj, obj.getParent(), parent, obj.getLocation(), newLocation).broadcast();
-		move(obj, parent, newLocation, true);
+		move(obj, parent, newLocation);
 		obj.sendParentDataTransforms(transformWithParent);
 	}
 	
@@ -353,7 +353,7 @@ public class ObjectAwareness extends Service {
 	 * @param nLocation the new location relative to the parent
 	 * @param update boolean on whether or not to update the object's awareness
 	 */
-	private void move(SWGObject object, SWGObject nParent, Location nLocation, boolean update) {
+	private void move(SWGObject object, SWGObject nParent, Location nLocation) {
 		SWGObject parent = object.getParent();
 		if (parent != null && nParent != parent) {
 			parent.removeObject(object); // Moving from cell to cell, for instance
@@ -365,8 +365,7 @@ public class ObjectAwareness extends Service {
 			object.sendObserversAndSelf(new UpdateContainmentMessage(object.getObjectId(), nParent.getObjectId(), object.getSlotArrangement()));
 		}
 		object.setLocation(nLocation);
-		if (update)
-			update(object);
+		object.clearAware(false);
 	}
 	
 	/**
