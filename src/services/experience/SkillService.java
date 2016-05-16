@@ -30,7 +30,9 @@ package services.experience;
 import intents.experience.SkillBoxGrantedIntent;
 import intents.network.GalacticPacketIntent;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import network.packets.Packet;
 import network.packets.swg.zone.object_controller.ChangeRoleIconChoice;
 import resources.client_info.ClientFactory;
@@ -49,7 +51,7 @@ import resources.server_info.Log;
 public final class SkillService extends Service {
 	
 	// Maps icon index to qualifying skill.
-	private final Map<Integer, String> roleIconMap;
+	private final Map<Integer, Set<String>> roleIconMap;
 	private final Map<String, SkillData> skillDataMap;
 	
 	public SkillService() {
@@ -81,7 +83,14 @@ public final class SkillService extends Service {
 			int iconIndex = (int) roleIconTable.getCell(i, 0);
 			String qualifyingSkill = (String) roleIconTable.getCell(i, 2);
 			
-			roleIconMap.put(iconIndex, qualifyingSkill);
+			Set<String> qualifyingSkills = roleIconMap.get(iconIndex);
+			
+			if(qualifyingSkills == null) {
+				qualifyingSkills = new HashSet<>();
+				roleIconMap.put(iconIndex, qualifyingSkills);
+			}
+			
+			qualifyingSkills.add(qualifyingSkill);
 		}
 		
 		loadSkills();
@@ -166,19 +175,20 @@ public final class SkillService extends Service {
 	}
 	
 	private void changeRoleIcon(CreatureObject creature, int chosenIcon) {
-		String qualifyingSkill = roleIconMap.get(chosenIcon);
+		Set<String> qualifyingSkills = roleIconMap.get(chosenIcon);
 		
-		if (qualifyingSkill != null) {
-			if (creature.hasSkill(qualifyingSkill)) {
-				PlayerObject playerObject = creature.getPlayerObject();
-				
-				if(playerObject != null) {
-					playerObject.setProfessionIcon(chosenIcon);
-				} else {
-					Log.e(this, "Could not alter role icon for PlayerObject of %s because it has none attached" , creature);
+		if (qualifyingSkills != null) {
+			for(String qualifyingSkill : qualifyingSkills) {
+				if (creature.hasSkill(qualifyingSkill)) {
+					PlayerObject playerObject = creature.getPlayerObject();
+
+					if(playerObject != null) {
+						playerObject.setProfessionIcon(chosenIcon);
+						break;
+					} else {
+						Log.e(this, "Could not alter role icon for PlayerObject of %s because it has none attached" , creature);
+					}
 				}
-			} else {
-				Log.w(this, "%s cannot use role icon %d because they lack the qualifying skill %s", creature, chosenIcon, qualifyingSkill);
 			}
 		} else {
 			Log.w(this, "%s tried to use undefined role icon %d", creature, chosenIcon);
