@@ -113,9 +113,11 @@ public class ObjectManager extends Manager {
 		long startLoad = System.nanoTime();
 		Log.i("ObjectManager", "Loading objects from ObjectDatabase...");
 		synchronized (database) {
-			if (!database.load())
-				return false;
-			database.traverse((obj) -> loadObject(obj));
+			if (database.fileExists()) {
+				if (!database.load())
+					return false;
+				database.traverse((obj) -> loadObject(obj));
+			}
 		}
 		double loadTime = (System.nanoTime() - startLoad) / 1E6;
 		Log.i("ObjectManager", "Finished loading %d objects. Time: %fms", database.size(), loadTime);
