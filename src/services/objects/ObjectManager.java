@@ -104,19 +104,22 @@ public class ObjectManager extends Manager {
 	@Override
 	public boolean initialize() {
 		loadClientObjects();
-		loadObjects();
+		if (!loadObjects())
+			return false;
 		return super.initialize();
 	}
 	
-	private void loadObjects() {
+	private boolean loadObjects() {
 		long startLoad = System.nanoTime();
 		Log.i("ObjectManager", "Loading objects from ObjectDatabase...");
 		synchronized (database) {
-			database.load();
+			if (!database.load())
+				return false;
 			database.traverse((obj) -> loadObject(obj));
 		}
 		double loadTime = (System.nanoTime() - startLoad) / 1E6;
 		Log.i("ObjectManager", "Finished loading %d objects. Time: %fms", database.size(), loadTime);
+		return true;
 	}
 	
 	private void loadClientObjects() {
