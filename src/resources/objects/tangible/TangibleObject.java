@@ -305,7 +305,7 @@ public class TangibleObject extends SWGObject {
 		buffer.getInt();
 		buffer.getSwgSet(6, 5, StringType.ASCII);
 		buffer.getSwgSet(6, 6, StringType.ASCII);
-		effectsMap = buffer.getSwgMap(6, 7, StringType.ASCII, StringType.ASCII);
+		effectsMap = buffer.getSwgMap(6, 7, StringType.ASCII);
 	}
 	
 	@Override

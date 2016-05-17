@@ -30,7 +30,6 @@ package resources.collections;
 import network.packets.Packet;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.encodables.Encodable;
-import resources.network.DeltaBuilder;
 import resources.network.NetBuffer;
 import resources.objects.SWGObject;
 import resources.server_info.Log;
@@ -46,238 +45,243 @@ import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Supports a list of elements which automatically sends data as a delta when changed for baselines.
- * @author Waverunner
- *
- * @param <E> Element that implements {@link Encodable} in order for data to be sent, or a basic type.
+ * 
+ * @param <E> Element that implements {@link Encodable} in order for data to be sent, or a basic
+ *            type.
  */
-public class SWGList<E> extends AbstractList<E> implements Encodable, Serializable {
-	private static final long serialVersionUID = 1L;
-
-	private int view;
-	private int updateType;	
-	private transient int updateCount;
-	private int dataSize;
-
-	private StringType strType = StringType.UNSPECIFIED;
-
-	// This list is a listing of all the data for the element list, this should always be in sync with list
-	private final List<byte[]> data = new ArrayList<>();
-
-	private final List<E> list = new ArrayList<>(); // thread-safe list
+public class SWGList<E> extends ArrayList<E> implements Encodable, Serializable {
 	
-	private final LinkedList<byte[]> deltas = new LinkedList<>();
-	private int deltaSize;
-
+	private static final long serialVersionUID = 2L;
+	
+	private final StringType strType;
+	private final int view;
+	private final int updateType;
+	
+	private transient Object updateMutex = new Object();
+	private transient AtomicInteger updateCount;
+	private transient List<byte[]> deltas;
+	private transient List<byte[]> data;
+	private transient int deltaSize;
+	private transient int dataSize;
+	
 	/**
-	 * Creates a new {@link SWGList} for the defined baseline with the given view and update. Note that this is an extension of {@link AbstractList} and makes use of {@link java.util.ArrayList}
-	 * @param baseline {@link BaselineType} for this list, should be the same as the parent class this list resides in
+	 * Creates a new {@link SWGList} for the defined baseline with the given view and update. Note
+	 * that this is an extension of {@link AbstractList} and makes use of
+	 * {@link java.util.ArrayList}
+	 * 
+	 * @param baseline {@link BaselineType} for this list, should be the same as the parent class
+	 *            this list resides in
 	 * @param view The baseline number this list resides in
-	 * @param updateType The update variable used for sending a delta, it's the operand count that this list resides at within the baseline
+	 * @param updateType The update variable used for sending a delta, it's the operand count that
+	 *            this list resides at within the baseline
 	 */
 	public SWGList(int view, int updateType) {
-		this.view = view;
-		this.updateType = updateType;
+		this(view, updateType, StringType.UNSPECIFIED);
 	}
-
+	
 	/**
-	 * Creates a new {@link SWGList} with the given StringType to encode in. Note that this constructor must be used if the elements within the list is a String.
-	 * @param baseline {@link BaselineType} for this list, should be the same as the parent class this list resides in
+	 * Creates a new {@link SWGList} with the given StringType to encode in. Note that this
+	 * constructor must be used if the elements within the list is a String.
+	 * 
+	 * @param baseline {@link BaselineType} for this list, should be the same as the parent class
+	 *            this list resides in
 	 * @param view The baseline number this list resides in
-	 * @param strType The {@link StringType} of the string, required only if the element in the list is a String as it's used for encoding either Unicode or ASCII characters
+	 * @param strType The {@link StringType} of the string, required only if the element in the list
+	 *            is a String as it's used for encoding either Unicode or ASCII characters
 	 */
 	public SWGList(int view, int updateType, StringType strType) {
-		this (view, updateType);
+		this.view = view;
+		this.updateType = updateType;
 		this.strType = strType;
+		this.data = new ArrayList<>();
+		this.dataSize = 0;
+		this.updateMutex = new Object();
+		this.updateCount = new AtomicInteger(0);
+		this.deltaSize = 0;
+		this.deltas = new LinkedList<>();
 	}
-
+	
 	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
 		ois.defaultReadObject();
-		updateCount = 0;
+		updateMutex = new Object();
+		updateCount = new AtomicInteger(0);
+		data = new ArrayList<>();
+		dataSize = 0;
+		deltas = new LinkedList<>();
+		deltaSize = 0;
+		for (E e : this) {
+			add(e);
+		}
+		clearDeltaQueue();
 	}
 	
 	public void resetUpdateCount() {
-		updateCount = 0;
+		updateCount.set(0);
 	}
-
-	/**
-	 * Appends the specified element to the end of this list if it doesn't already exist. Once added, the updateCount is incremented by one
-	 * and data for the object is encoded.
-	 * <br><br>An <i>add delta</i> is then sent using {@link DeltaBuilder} if noUpdates = false (false by default)
-	 * @param e element to be appended to this list
-	 * @return true if the element was added
-	 */
+	
 	@Override
 	public boolean add(E e) {
-		add(list.size(), e);
-		return list.contains(e);
+		add(size(), e);
+		return get(size() - 1).equals(e);
 	}
-
-	/**
-	 * Inserts the specified element at the specified position in this list. Shifts the element currently
-	 * at that position (if any) and any subsequent elements to the right (adds one to their indices).
-	 * <br><br>An <i>add delta</i> is then sent using {@link DeltaBuilder} if noUpdates = false (false by default)
-	 * @param index index at which the specified element is to be inserted
-	 * @param e element to be inserted
-	 */
+	
 	@Override
 	public void add(int index, E e) {
-		synchronized (list) {
-			updateCount++;
-			list.add(index, e);
-			addObjectData(index, e, (byte) 1);
+		synchronized (updateMutex) {
+			super.add(index, e);
 		}
+		updateCount.incrementAndGet();
+		addObjectData(index, e, (byte) 1);
 	}
-
-	/**
-	 * Replaces the element at the specified position in this list with the specified element.
-	 * <br><br>A <i>change delta</i> is then sent using {@link DeltaBuilder} if noUpdates = false (false by default). Since this
-	 * sends a change delta, it should only be used for replacing an element, not for adding one.
-	 * @param index index of the element to replace
-	 * @param element element to be stored at the specified position
-	 * @return The element that was replaced
-	 */
+	
 	@Override
 	public E set(int index, E element) {
 		// Sends a "change" delta
 		E previous;
-		synchronized (list) {
-			previous = list.set(index, element);
-			if (previous != null) {
-				updateCount++;
-				removeDataSize(index);
-				removeData(index);
-			}
-			addObjectData(index, element, (byte) 2);
+		synchronized (updateMutex) {
+			previous = super.set(index, element);
 		}
+		if (previous != null) {
+			removeData(index);
+		}
+		updateCount.incrementAndGet();
+		addObjectData(index, element, (byte) 2);
 		return previous;
 	}
-
+	
 	@Override
 	public boolean remove(Object o) {
-		//noinspection SuspiciousMethodCalls
-		int index = list.indexOf(o); // No idea why this produces a suspicious method call..
+		int index = indexOf(o);
 		if (index != -1) {
 			remove(index);
 			return true;
 		}
 		return false;
 	}
-
-	/**
-	 * Removes the element at the specified position in this list. Shifts any subsequent elements to the left
-	 * (subtracts one from their indices). Returns the element that was removed from the list.
-	 * @param index the index of the element to be removed
-	 * @return the element previously at the specified position
-	 */
+	
 	@Override
 	public E remove(int index) {
 		E element;
-
-		synchronized (list) {
-			element = list.remove(index);
-			if (element != null) {
-				updateCount++;
-				removeObjectData(index, (byte) 0);
-			}
+		
+		synchronized (updateMutex) {
+			element = super.remove(index);
 		}
-
+		if (element != null) {
+			updateCount.incrementAndGet();
+			removeObjectData(index);
+		}
+		
 		return element;
 	}
-
-	@Override
-	public int indexOf(Object o) {
-		return list.indexOf(o);
-	}
-
+	
 	@Override
 	public E get(int index) {
-		return list.get(index);
+		synchronized (updateMutex) {
+			return super.get(index);
+		}
 	}
-
-	@Override
-	public int size() {
-		return list.size();
-	}
-
+	
 	/**
-	 * Creates an array of bytes based off of the elements within this list. Elements that are not of a standard type
-	 * handled by {@link Encoder} should implement the {@link Encodable} interface.
+	 * Creates an array of bytes based off of the elements within this Elements that are not of a
+	 * standard type handled by {@link Encoder} should implement the {@link Encodable} interface.
+	 * 
 	 * @return Array of bytes with the size, update count, and encoded elements
 	 */
 	@Override
 	public byte[] encode() {
-		int size = list.size();
-
-		if (size == 0) {
-			return new byte[8];
+		ByteBuffer buffer;
+		synchronized (data) {
+			if (dataSize == 0)
+				return new byte[8];
+			buffer = ByteBuffer.allocate(8 + dataSize).order(ByteOrder.LITTLE_ENDIAN);
+			
+			buffer.putInt(data.size());
+			buffer.putInt(updateCount.get());
+			data.forEach(buffer::put);
 		}
-
-		ByteBuffer buffer = ByteBuffer.allocate(8 + dataSize).order(ByteOrder.LITTLE_ENDIAN);
-
-		buffer.putInt(size);
-		buffer.putInt(updateCount);
-
-		data.forEach(buffer::put);
-
+		
 		return buffer.array();
 	}
-
+	
 	@Override
 	public void decode(ByteBuffer data) {
-/*		Not sure how to do decoding for an SWGList because of generics, won't know what specific type to decode as
-		One possible workaround is to refactor decode to create new object instead of directly initializing the variables
-		During compile time, a List<Type> is just a List due to type erasure.
-		*/
-		try {
-			throw new Exception("This is not a supported operation. Use decode(ByteBuffer data, Class<T> elementType) instead");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		// We need specific type information
+		throw new UnsupportedOperationException("Use decode(ByteBuffer data, Class<E> elementType) instead");
 	}
 	
-	@SuppressWarnings("unchecked") // Unfortunately the exception is just caught
 	public void decode(ByteBuffer data, StringType type) {
-		int size	= Packet.getInt(data);
-		updateCount	= Packet.getInt(data);
+		int size = Packet.getInt(data);
+		updateCount.set(Packet.getInt(data));
 		NetBuffer buffer = NetBuffer.wrap(data);
-		try {
-			for (int i = 0; i < size; i++)
-				list.add((E) buffer.getString(type));
-		} catch (ClassCastException e) {
-			e.printStackTrace();
-		}
-	}
-
-	@SuppressWarnings("unchecked") // There is type checking in the respective if's
-	public void decode(ByteBuffer data, Class<E> elementType) {
-		int size 	= Packet.getInt(data);
-		updateCount = Packet.getInt(data);
-
-		try {
-			boolean encodable = Encodable.class.isAssignableFrom(elementType);
-			NetBuffer wrap = NetBuffer.wrap(data);
-			for (int i = 0; i < size; i++) {
-				if (encodable) {
-					E instance = elementType.newInstance();
-					if (instance instanceof Encodable) {
-						((Encodable) instance).decode(data);
-						list.add(instance);
-					}
-				} else {
-					Object o = wrap.getGeneric(elementType);
-					if (o != null && elementType.isAssignableFrom(o.getClass()))
-						list.add((E) o);
-				}
-			}
-		} catch (InstantiationException | IllegalAccessException e) {
-			e.printStackTrace();
+		for (int i = 0; i < size; i++) {
+			@SuppressWarnings("unchecked")
+			E obj = (E) buffer.getString(type);
+			add(obj);
 		}
 		clearDeltaQueue();
 	}
-
+	
+	public void decode(ByteBuffer data, Class<E> elementType) {
+		int size = Packet.getInt(data);
+		updateCount.set(Packet.getInt(data));
+		
+		boolean encodable = Encodable.class.isAssignableFrom(elementType);
+		NetBuffer wrap = NetBuffer.wrap(data);
+		for (int i = 0; i < size; i++) {
+			if (!decodeElement(wrap, elementType, encodable))
+				break;
+		}
+		clearDeltaQueue();
+	}
+	
+	private boolean decodeElement(NetBuffer wrap, Class<E> elementType, boolean encodable) {
+		if (encodable) {
+			try {
+				E instance = elementType.newInstance();
+				if (instance instanceof Encodable) {
+					((Encodable) instance).decode(wrap.getBuffer());
+					add(instance);
+				}
+			} catch (InstantiationException | IllegalAccessException e) {
+				Log.e("SWGList", e);
+				return false;
+			}
+		} else {
+			Object o = wrap.getGeneric(elementType);
+			if (o != null && elementType.isAssignableFrom(o.getClass())) {
+				// Shouldn't be possible to get an exception with the isAssignableFrom check
+				@SuppressWarnings("unchecked")
+				E obj = (E) o;
+				add(obj);
+			} else
+				return false;
+		}
+		return true;
+	}
+	
+	public void sendRefreshedListData(SWGObject target) {
+		clearDeltaQueue();
+		ByteBuffer buffer;
+		synchronized (data) {
+			updateCount.set(data.size()+1);
+			
+			buffer = ByteBuffer.allocate(11 + dataSize).order(ByteOrder.LITTLE_ENDIAN);
+			buffer.putInt(data.size() + 1);
+			buffer.putInt(updateCount.get());
+			buffer.put((byte) 3);
+			buffer.putShort((short) data.size());
+			for (byte[] bytes : data) {
+				buffer.put(bytes);
+			}
+		}
+		
+		target.sendDelta(view, updateType, buffer.array());
+	}
+	
 	public void sendDeltaMessage(SWGObject target) {
 		if (deltas.size() == 0)
 			return;
@@ -286,47 +290,34 @@ public class SWGList<E> extends AbstractList<E> implements Encodable, Serializab
 		// Clear the queue since the delta has been sent to observers through the builder
 		clearDeltaQueue();
 	}
-
-	public void sendRefreshedListData(SWGObject target) {
-		clearDeltaQueue();
-		updateCount = 0;
-
-		ByteBuffer bb = ByteBuffer.allocate(11 + dataSize).order(ByteOrder.LITTLE_ENDIAN);
-		bb.putInt(data.size() + 1);
-		bb.putInt(updateCount += data.size() + 1);
-		bb.put((byte) 3);
-		bb.putShort((short) data.size());
-		for (byte[] bytes : data) {
-			bb.put(bytes);
-		}
-
-		target.sendDelta(view, updateType, bb.array());
-	}
-
+	
 	public void clearDeltaQueue() {
-		deltas.clear();
-		deltaSize = 0;
+		synchronized (deltas) {
+			deltas.clear();
+			deltaSize = 0;
+		}
 	}
 	
 	private byte[] getDeltaData() {
-		ByteBuffer buffer = ByteBuffer.allocate(8 + deltaSize).order(ByteOrder.LITTLE_ENDIAN);
+		ByteBuffer buffer;
 		
-		buffer.putInt(deltas.size());
-		buffer.putInt(updateCount);
-		for (byte[] data : deltas) {
-			buffer.put(data);
+		synchronized (deltas) {
+			buffer = ByteBuffer.allocate(8 + deltaSize).order(ByteOrder.LITTLE_ENDIAN);
+			
+			buffer.putInt(deltas.size());
+			buffer.putInt(updateCount.get());
+			for (byte[] data : deltas) {
+				buffer.put(data);
+			}
 		}
 		
 		return buffer.array();
 	}
 	
-	private void createDeltaData(byte[] delta, byte update) {
-		synchronized(deltas) {
-			byte[] combinedUpdate = new byte[delta.length + 1];
-			combinedUpdate[0] = update;
-			System.arraycopy(delta, 0, combinedUpdate, 1, delta.length);
-			deltaSize += delta.length + 1;
-			deltas.add(combinedUpdate);
+	private void createDeltaData(byte[] delta) {
+		synchronized (deltas) {
+			deltaSize += delta.length;
+			deltas.add(delta);
 		}
 	}
 	
@@ -336,50 +327,35 @@ public class SWGList<E> extends AbstractList<E> implements Encodable, Serializab
 			Log.e(toString(), "Tried to encode an object that could not be encoded properly. Object: " + obj);
 			return;
 		}
-
-		dataSize += encodedData.length;
+		
 		synchronized (data) {
+			dataSize += encodedData.length;
 			data.add(index, encodedData);
 		}
-
-		createIndexedDelta(encodedData, index, update);
-	}
-
-	private void createIndexedDelta(byte[] encodedData, int index, byte update) {
-		ByteBuffer buffer = ByteBuffer.allocate(encodedData.length + 2).order(ByteOrder.LITTLE_ENDIAN);
+		
+		ByteBuffer buffer = ByteBuffer.allocate(encodedData.length + 3).order(ByteOrder.LITTLE_ENDIAN);
+		buffer.put(update);
 		buffer.putShort((short) index);
 		buffer.put(encodedData);
-
-		byte[] indexedBytes = buffer.array();
-		createDeltaData(indexedBytes, update);
+		createDeltaData(buffer.array());
 	}
-
-	private void removeObjectData(int index, byte update) {
-		if (data.get(index) == null) {
-			return;
-		}
-
+	
+	private void removeObjectData(int index) {
+		removeData(index);
+		
+		// Only the index is sent for removing data
+		ByteBuffer buffer = ByteBuffer.allocate(3).order(ByteOrder.LITTLE_ENDIAN);
+		buffer.put((byte) 0);
+		buffer.putShort((short) index);
+		createDeltaData(buffer.array());
+	}
+	
+	private void removeData(int index) {
 		synchronized (data) {
 			dataSize -= data.remove(index).length;
 		}
-
-		// Only the index is sent for removing data
-		ByteBuffer buffer = ByteBuffer.allocate(2).order(ByteOrder.LITTLE_ENDIAN);
-		buffer.putShort((short) index);
-		createDeltaData(buffer.array(), update);
 	}
-
-	// Removes obj size of data without removing it from the data map
-	private void removeDataSize(int index) {
-		dataSize -= data.get(index).length;
-	}
-
-	private void removeData(int index) {
-		synchronized (data) {
-			data.remove(index);
-		}
-	}
-
+	
 	@Override
 	public String toString() {
 		return "SWGList[0" + view + ":" + updateType + "]";

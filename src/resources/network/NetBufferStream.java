@@ -276,9 +276,9 @@ public class NetBufferStream extends OutputStream {
 		}
 	}
 	
-	public SWGMap<String, String> getSwgMap(int num, int var, StringType key, StringType val) {
+	public SWGMap<String, String> getSwgMap(int num, int var, StringType strType) {
 		synchronized (bufferMutex) {
-			return buffer.getSwgMap(num, var, key, val);
+			return buffer.getSwgMap(num, var, strType);
 		}
 	}
 	

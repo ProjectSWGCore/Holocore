@@ -108,18 +108,18 @@ public class CreatureObject extends TangibleObject {
 	private long	lastTransform			= 0;
 	private HologramColour hologramColour = HologramColour.DEFAULT;
 	
-	private SWGSet<String>		missionCriticalObjs			= new SWGSet<>(4, 13);
+	private SWGSet<String>		missionCriticalObjs	= new SWGSet<>(4, 13);
+	private SWGSet<String>		skills				= new SWGSet<String>(1, 3, StringType.ASCII);
 	
-	private SWGList<Integer>	baseAttributes	= new SWGList<Integer>(1, 2);
-	private SWGSet<String>		skills			= new SWGSet<String>(1, 3, StringType.ASCII);
-	private SWGList<Integer>	hamEncumbList	= new SWGList<Integer>(4, 2);
-	private SWGList<Integer>	attributes		= new SWGList<Integer>(6, 21);
-	private SWGList<Integer>	maxAttributes	= new SWGList<Integer>(6, 22);
-	private SWGList<Equipment>	equipmentList 	= new SWGList<Equipment>(6, 23);
-	private SWGList<Equipment>	appearanceList 	= new SWGList<Equipment>(6, 33);
+	private SWGList<Integer>	baseAttributes		= new SWGList<Integer>(1, 2);
+	private SWGList<Integer>	hamEncumbList		= new SWGList<Integer>(4, 2);
+	private SWGList<Integer>	attributes			= new SWGList<Integer>(6, 21);
+	private SWGList<Integer>	maxAttributes		= new SWGList<Integer>(6, 22);
+	private SWGList<Equipment>	equipmentList 		= new SWGList<Equipment>(6, 23);
+	private SWGList<Equipment>	appearanceList 		= new SWGList<Equipment>(6, 33);
 	
-	private SWGMap<String, SkillMod> 	skillMods			= new SWGMap<>(4, 3, StringType.ASCII); // TODO: SkillMod structure
-	private SWGMap<String, Integer>	abilities				= new SWGMap<>(4, 14, StringType.ASCII);
+	private SWGMap<String, SkillMod> 	skillMods	= new SWGMap<>(4, 3, StringType.ASCII); // TODO: SkillMod structure
+	private SWGMap<String, Integer>	abilities		= new SWGMap<>(4, 14, StringType.ASCII);
 	private SWGMap<CRC, Buff>	buffs				= new SWGMap<>(6, 26);
 	
 	public CreatureObject(long objectId) {
