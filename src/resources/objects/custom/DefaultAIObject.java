@@ -78,7 +78,7 @@ public class DefaultAIObject extends AIObject {
 			theta = r.nextDouble() * Math.PI * 2;
 			point.setX(l.getX() + Math.cos(theta) * dist);
 			point.setZ(l.getZ() + Math.sin(theta) * dist);
-		} while (mainLocation.isWithinFlatDistance(point, radius));
+		} while (!mainLocation.isWithinFlatDistance(point, radius));
 		l.setPosition(point.getX(), l.getY(), point.getZ());
 		l.setHeading(l.getYaw() - Math.toDegrees(theta));
 		new MoveObjectIntent(this, getParent(), l, 1.37, updateCounter++).broadcast();
