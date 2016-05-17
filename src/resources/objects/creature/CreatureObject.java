@@ -27,33 +27,46 @@
 ***********************************************************************************/
 package resources.objects.creature;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Set;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+
 import network.packets.swg.zone.UpdatePostureMessage;
 import network.packets.swg.zone.UpdatePvpStatusMessage;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import network.packets.swg.zone.object_controller.PostureUpdate;
 import resources.HologramColour;
 import resources.Posture;
+import resources.PvpFlag;
 import resources.Race;
+import resources.SkillMod;
 import resources.collections.SWGList;
 import resources.collections.SWGMap;
+import resources.collections.SWGSet;
+import resources.common.CRC;
 import resources.encodables.player.Equipment;
 import resources.network.BaselineBuilder;
+import resources.network.NetBuffer;
 import resources.objects.SWGObject;
 import resources.objects.player.PlayerObject;
-import resources.objects.tangible.OptionFlag;
 import resources.objects.tangible.TangibleObject;
 import resources.objects.weapon.WeaponObject;
 import resources.player.Player;
+import services.group.GroupInviterData;
 import utilities.Encoder.StringType;
 
 public class CreatureObject extends TangibleObject {
 	
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 	
-	private transient long lastReserveOperation	= 0;
+	private transient GroupInviterData inviterData	= new GroupInviterData(0, null, "", 0);
+	private transient long lastReserveOperation		= 0;
+	private transient long groupId					= 0;
 	
 	private Posture	posture					= Posture.UPRIGHT;
-	private Race	race					= Race.HUMAN; 
+	private Race	race					= Race.HUMAN_MALE;
 	private double	movementScale			= 1;
 	private double	movementPercent			= 1;
 	private double	walkSpeed				= 1.549;
@@ -76,7 +89,7 @@ public class CreatureObject extends TangibleObject {
 	private long	reserveBalance			= 0; // Galactic Reserve - capped at 3 billion
 	private String	moodAnimation			= "neutral";
 	private String	animation				= "";
-	private long	equippedWeaponId		= 0;
+	private WeaponObject equippedWeapon		= null;
 	private byte	moodId					= 0;
 	private long 	lookAtTargetId			= 0;
 	private long 	intendedTargetId		= 0;
@@ -87,34 +100,41 @@ public class CreatureObject extends TangibleObject {
 	private boolean performing				= false;
 	private boolean shownOnRadar			= true;
 	private boolean beast					= false;
-	private long 	groupId					= 0;
 	private byte 	factionRank				= 0;
 	private long 	ownerId					= 0;
 	private int 	battleFatigue			= 0;
 	private long 	statesBitmask			= 0;
 	private String	currentCity				= "";
+	private long	lastTransform			= 0;
 	private HologramColour hologramColour = HologramColour.DEFAULT;
 	
-	private SWGList<Integer>	baseAttributes	= new SWGList<Integer>(BaselineType.CREO, 1, 2);
-	private SWGList<String>		skills			= new SWGList<String>(BaselineType.CREO, 1, 3, StringType.ASCII); // SWGSet
-	private SWGList<Integer>	hamEncumbList	= new SWGList<Integer>(BaselineType.CREO, 4, 2);
-	private SWGList<Integer>	attributes		= new SWGList<Integer>(BaselineType.CREO, 6, 21);
-	private SWGList<Integer>	maxAttributes	= new SWGList<Integer>(BaselineType.CREO, 6, 22);
-	private SWGList<Equipment>	equipmentList 	= new SWGList<Equipment>(BaselineType.CREO, 6, 23);
-	private SWGList<Equipment>	appearanceList 	= new SWGList<Equipment>(BaselineType.CREO, 6, 33);
+	private SWGSet<String>		missionCriticalObjs	= new SWGSet<>(4, 13);
+	private SWGSet<String>		skills				= new SWGSet<String>(1, 3, StringType.ASCII);
 	
-	private SWGMap<String, Long> 	skillMods			= new SWGMap<>(BaselineType.CREO, 4, 3, StringType.ASCII); // TODO: SkillMod structure
-	private SWGMap<Long, Long>		missionCriticalObjs	= new SWGMap<>(BaselineType.CREO, 4, 13);
-	private SWGMap<String, Integer>	abilities			= new SWGMap<>(BaselineType.CREO, 4, 14, StringType.ASCII);
-	private SWGMap<Integer, Long>	buffs				= new SWGMap<>(BaselineType.CREO, 6, 26); // TODO: Buff structure
-
-
+	private SWGList<Integer>	baseAttributes		= new SWGList<Integer>(1, 2);
+	private SWGList<Integer>	hamEncumbList		= new SWGList<Integer>(4, 2);
+	private SWGList<Integer>	attributes			= new SWGList<Integer>(6, 21);
+	private SWGList<Integer>	maxAttributes		= new SWGList<Integer>(6, 22);
+	private SWGList<Equipment>	equipmentList 		= new SWGList<Equipment>(6, 23);
+	private SWGList<Equipment>	appearanceList 		= new SWGList<Equipment>(6, 33);
+	
+	private SWGMap<String, SkillMod> 	skillMods	= new SWGMap<>(4, 3, StringType.ASCII); // TODO: SkillMod structure
+	private SWGMap<String, Integer>	abilities		= new SWGMap<>(4, 14, StringType.ASCII);
+	private SWGMap<CRC, Buff>	buffs				= new SWGMap<>(6, 26);
+	
 	public CreatureObject(long objectId) {
 		super(objectId, BaselineType.CREO);
 		initMaxAttributes();
 		initCurrentAttributes();
 		initBaseAttributes();
-		setOptionFlags(OptionFlag.HAM_BAR);
+	}
+	
+	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
+		ois.defaultReadObject();
+		// Transient Variables
+		inviterData = new GroupInviterData(0, null, "", 0);
+		lastReserveOperation = 0;
+		groupId = 0;
 	}
 
 	public void removeEquipment(SWGObject obj) {
@@ -165,7 +185,19 @@ public class CreatureObject extends TangibleObject {
 		return appearanceList;
 	}
 	
-	public SWGList<String> getSkills() {
+	public void addSkill(String skillName) {
+		synchronized(skills) {
+			if(skills.add(skillName)) {
+				skills.sendDeltaMessage(this);
+			}
+		}
+	}
+	
+	public boolean hasSkill(String skillName) {
+		return skills.contains(skillName);
+	}
+	
+	public SWGSet<String> getSkills() {
 		return skills;
 	}
 	
@@ -241,7 +273,7 @@ public class CreatureObject extends TangibleObject {
 		return guildId;
 	}
 	
-	public int getLevel() {
+	public short getLevel() {
 		return level;
 	}
 	
@@ -261,14 +293,31 @@ public class CreatureObject extends TangibleObject {
 		return currentCity;
 	}
 	
+	public double getTimeSinceLastTransform() {
+		return (System.nanoTime()-lastTransform)/1E6;
+	}
+	
 	public PlayerObject getPlayerObject() {
-		return (PlayerObject) (hasSlot("ghost") ? getSlottedObject("ghost") : null);
+		return (PlayerObject) getSlottedObject("ghost");
+	}
+	
+	public boolean isPlayer() {
+		return getSlottedObject("ghost") != null;
+	}
+	
+	public boolean isLoggedInPlayer() {
+		return getOwner() != null && isPlayer();
+	}
+	
+	public boolean isLoggedOutPlayer() {
+		return getOwner() == null && isPlayer();
 	}
 	
 	public void setPosture(Posture posture) {
 		this.posture = posture;
 		sendDelta(3, 13, posture.getId());
-		sendObserversAndSelf(new PostureUpdate(getObjectId(), posture));
+		if (isPlayer())
+			sendObserversAndSelf(new PostureUpdate(getObjectId(), posture));
 	}
 	
 	public void setRace(Race race) {
@@ -289,7 +338,7 @@ public class CreatureObject extends TangibleObject {
 				reserve += leftover;
 			}
 			this.cashBalance = (int) cashBalance;
-			sendDelta(1, 1, cashBalance);
+			sendDelta(1, 1, (int) cashBalance);
 			setBankBalance(bank);
 			setReserveBalance(reserve);
 		} else {
@@ -312,7 +361,7 @@ public class CreatureObject extends TangibleObject {
 				reserve += leftover;
 			}
 			this.bankBalance = (int) bankBalance;
-			sendDelta(1, 0, bankBalance);
+			sendDelta(1, 0, (int) bankBalance);
 			setCashBalance(cash);
 			setReserveBalance(reserve);
 		} else {
@@ -402,9 +451,9 @@ public class CreatureObject extends TangibleObject {
 		sendDelta(6, 15, guildId);
 	}
 	
-	public void setLevel(short level) {
-		this.level = level;
-		sendDelta(6, 8, level);
+	public void setLevel(int level) {
+		this.level = (short) level;
+		sendDelta(6, 8, (short) level);
 	}
 	
 	public void setLevelHealthGranted(int levelHealthGranted) {
@@ -424,6 +473,10 @@ public class CreatureObject extends TangibleObject {
 	
 	public void setCurrentCity(String currentCity) {
 		this.currentCity = currentCity;
+	}
+	
+	public void updateLastTransformTime() {
+		lastTransform = System.nanoTime();
 	}
 	
 	public String getMoodAnimation() {
@@ -453,13 +506,13 @@ public class CreatureObject extends TangibleObject {
 		sendDelta(6, 10, animation, StringType.ASCII);
 	}
 
-	public long getEquippedWeaponId() {
-		return equippedWeaponId;
+	public WeaponObject getEquippedWeapon() {
+		return equippedWeapon;
 	}
 
-	public void setEquippedWeaponId(long equippedWeaponId) {
-		this.equippedWeaponId = equippedWeaponId;
-		sendDelta(6, 12, equippedWeaponId);
+	public void setEquippedWeapon(WeaponObject weapon) {
+		this.equippedWeapon = weapon;
+		sendDelta(6, 12, weapon.getObjectId());
 	}
 
 	public byte getMoodId() {
@@ -518,6 +571,19 @@ public class CreatureObject extends TangibleObject {
 
 	public long getGroupId() {
 		return groupId;
+	}
+
+	public void updateGroupInviteData(Player sender, long groupId, String name) {
+		inviterData.setName(name);
+		inviterData.setSender(sender);
+		inviterData.setId(groupId);
+		inviterData.incrementCounter();
+
+		sendDelta(6, 14, inviterData);
+	}
+
+	public GroupInviterData getInviterData() {
+		return inviterData;
 	}
 
 	public void setGroupId(long groupId) {
@@ -579,6 +645,32 @@ public class CreatureObject extends TangibleObject {
 		sendDelta(3, 18, statesBitmask);
 	}
 
+	public void adjustSkillmod(String skillModName, int base, int modifier) {
+		synchronized(skillMods) {
+			SkillMod skillMod = skillMods.get(skillModName);
+
+			if(skillMod == null) {
+				// They didn't have this SkillMod already.
+				// Therefore, we send a full delta.
+				skillMods.put(skillModName, new SkillMod(base, modifier));
+				skillMods.sendDeltaMessage(this);
+			} else {
+				// They already had this skillmod.
+				// All we need to do is adjust the base and the modifier and send an update from the SWGMap
+				skillMod.adjustBase(base);
+				skillMod.adjustModifier(modifier);
+				skillMods.update(skillModName, this);
+			}
+		}
+	}
+	
+	public int getSkillModValue(String skillModName) {
+		synchronized(skillMods) {
+			SkillMod skillMod = skillMods.get(skillModName);
+			return skillMod != null ? skillMod.getValue() : 0;
+		}
+	}
+	
 	public boolean isVisible() {
 		return visible;
 	}
@@ -612,32 +704,89 @@ public class CreatureObject extends TangibleObject {
 	}
 
 	public int getHealth() {
-		return attributes.get(0);
+		synchronized (attributes) {
+			return attributes.get(0);
+		}
 	}
 	
 	public int getMaxHealth() {
-		return maxAttributes.get(0);
+		synchronized (maxAttributes) {
+			return maxAttributes.get(0);
+		}
 	}
 	
 	public int getBaseHealth() {
-		return baseAttributes.get(0);
+		synchronized (baseAttributes) {
+			return baseAttributes.get(0);
+		}
 	}
 	
 	public int getAction() {
-		return attributes.get(2);
+		synchronized (attributes) {
+			return attributes.get(2);
+		}
 	}
 	
 	public int getMaxAction() {
-		return attributes.get(2);
+		synchronized (maxAttributes) {
+			return maxAttributes.get(2);
+		}
 	}
 	
 	public int getBaseAction() {
-		return attributes.get(2);
+		synchronized (baseAttributes) {
+			return baseAttributes.get(2);
+		}
+	}
+	
+	public int getMind() {
+		synchronized (attributes) {
+			return attributes.get(4);
+		}
+	}
+	
+	public int getMaxMind() {
+		synchronized (maxAttributes) {
+			return maxAttributes.get(4);
+		}
+	}
+	
+	public int getBaseMind() {
+		synchronized (baseAttributes) {
+			return baseAttributes.get(4);
+		}
+	}
+
+	public void addAbility(String abilityName){
+		synchronized(abilities) {
+			abilities.put(abilityName, 1);	//TODO: Figure out what the integer value should be for each ability
+			abilities.sendDeltaMessage(this);
+		}
+	}
+
+	public void removeAbility(String abilityName) { abilities.remove(abilityName); }
+
+	public boolean hasAbility(String abilityName) { return abilities.get(abilityName) != null; }
+	
+	public Set<String> getAbilityNames() { return abilities.keySet(); };
+	
+	public void setBaseHealth(int baseHealth) {
+		synchronized(baseAttributes) {
+			baseAttributes.set(0, baseHealth);
+			baseAttributes.sendDeltaMessage(this);
+		}
 	}
 	
 	public void setHealth(int health) {
 		synchronized(attributes) {
 			attributes.set(0, health);
+			attributes.sendDeltaMessage(this);
+		}
+	}
+	
+	public void modifyHealth(int mod) {
+		synchronized(attributes) {
+			attributes.set(0, getHealth() + mod);
 			attributes.sendDeltaMessage(this);
 		}
 	}
@@ -649,9 +798,23 @@ public class CreatureObject extends TangibleObject {
 		}
 	}
 	
+	public void setBaseAction(int baseAction) {
+		synchronized(baseAttributes) {
+			baseAttributes.set(2, baseAction);
+			baseAttributes.sendDeltaMessage(this);
+		}
+	}
+	
 	public void setAction(int action) {
 		synchronized(attributes) {
 			attributes.set(2, action);
+			attributes.sendDeltaMessage(this);
+		}
+	}
+	
+	public void modifyAction(int mod) {
+		synchronized(attributes) {
+			attributes.set(2, getAction() + mod);
 			attributes.sendDeltaMessage(this);
 		}
 	}
@@ -663,12 +826,33 @@ public class CreatureObject extends TangibleObject {
 		}
 	}
 	
+	public void setMind(int mind) {
+		synchronized(attributes) {
+			attributes.set(4, mind);
+			attributes.sendDeltaMessage(this);
+		}
+	}
+	
+	public void modifyMind(int mod) {
+		synchronized(attributes) {
+			attributes.set(4, getMind() + mod);
+			attributes.sendDeltaMessage(this);
+		}
+	}
+	
+	public void setMaxMind(int maxMind) {
+		synchronized(maxAttributes) {
+			maxAttributes.set(4, maxMind);
+			maxAttributes.sendDeltaMessage(this);
+		}
+	}
+	
 	private void initMaxAttributes() {
 		maxAttributes.add(0, 1000); // Health
 		maxAttributes.add(1, 0);
 		maxAttributes.add(2, 300); // Action
 		maxAttributes.add(3, 0);
-		maxAttributes.add(4, 300); // ??
+		maxAttributes.add(4, 300); // Mind
 		maxAttributes.add(5, 0);
 		maxAttributes.clearDeltaQueue();
 	}
@@ -678,7 +862,7 @@ public class CreatureObject extends TangibleObject {
 		attributes.add(1, 0);
 		attributes.add(2, 300); // Action
 		attributes.add(3, 0);
-		attributes.add(4, 300); // ??
+		attributes.add(4, 300); // Mind
 		attributes.add(5, 0);
 		attributes.clearDeltaQueue();
 	}
@@ -688,9 +872,32 @@ public class CreatureObject extends TangibleObject {
 		baseAttributes.add(1, 0);
 		baseAttributes.add(2, 300); // Action
 		baseAttributes.add(3, 0);
-		baseAttributes.add(4, 300); // ??
+		baseAttributes.add(4, 300); // Mind
 		baseAttributes.add(5, 0);
 		baseAttributes.clearDeltaQueue();
+	}
+	
+	public Collection<SWGObject> getItemsByTemplate(String slotName, String template) {
+		Collection<SWGObject> items = new ArrayList<>(getContainedObjects()); // We also search the creature itself - not just the inventory.
+		SWGObject container = getSlottedObject(slotName);
+		Collection<SWGObject> candidateChildren;
+		
+		for(SWGObject candidate : container.getContainedObjects()) {
+			
+			if(candidate.getTemplate().equals(template)) {
+				items.add(candidate);
+			} else {
+				// check the children. This way we're also searching containers, such as backpacks.
+				candidateChildren = candidate.getContainedObjects();
+				
+				for(SWGObject candidateChild : candidateChildren) {
+					if(candidate.getTemplate().equals(template)) {
+						items.add(candidateChild);
+					}
+				}
+			}
+		}
+		return items;
 	}
 	
 	@Override
@@ -704,52 +911,37 @@ public class CreatureObject extends TangibleObject {
 	}
 	
 	public void sendBaselines(Player target) {
-		BaselineBuilder bb = null;
+		boolean targetSelf = getOwner() == target;
 		
-		if (getOwner() == target) {
-			bb = new BaselineBuilder(this, BaselineType.CREO, 1);
-			createBaseline1(target, bb);
-			bb.sendTo(target);
-		}
+		if (targetSelf)
+			target.sendPacket(createBaseline1(target));
 		
-		bb = new BaselineBuilder(this, BaselineType.CREO, 3);
-		createBaseline3(target, bb);
-		bb.sendTo(target);
+		target.sendPacket(createBaseline3(target));
 		
-		if (getOwner() == target) {
-			bb = new BaselineBuilder(this, BaselineType.CREO, 4);
-			createBaseline4(target, bb);
-			bb.sendTo(target);
-		}
+		if (targetSelf)
+			target.sendPacket(createBaseline4(target));
 		
-		bb = new BaselineBuilder(this, BaselineType.CREO, 6);
-		createBaseline6(target, bb);
-		bb.sendTo(target);
+		target.sendPacket(createBaseline6(target));
 		
-		if (getOwner() == target) {
-			bb = new BaselineBuilder(this, BaselineType.CREO, 8);
-			createBaseline8(target, bb);
-			bb.sendTo(target);
-			
-			bb = new BaselineBuilder(this, BaselineType.CREO, 9);
-			createBaseline9(target, bb);
-			bb.sendTo(target);
+		if (targetSelf) {
+			target.sendPacket(createBaseline8(target));
+			target.sendPacket(createBaseline9(target));
 		}
 	}
-
-	@Override
-	public void createObject(Player target) {
-		super.createObject(target);
-
+	
+	protected void sendFinalBaselinePackets(Player target) {
+		super.sendFinalBaselinePackets(target);
+		
 		target.sendPacket(new UpdatePostureMessage(posture.getId(), getObjectId()));
-
-		if (getOwner() != null && target != getOwner()) {
-			target.sendPacket(new UpdatePvpStatusMessage(UpdatePvpStatusMessage.PLAYER, 0, getObjectId()));
-		}
+		
+		Set<PvpFlag> flags = PvpFlag.getFlags(getPvpFlags());
+		target.sendPacket(new UpdatePvpStatusMessage(getPvpFaction(), getObjectId(), flags.toArray(new PvpFlag[flags.size()])));
 	}
 	
 	public void createBaseline1(Player target, BaselineBuilder bb) {
 		super.createBaseline1(target, bb); // 0 variables
+		if (getStringId().toString().equals("@obj_n:unknown_object"))
+			return;
 		bb.addInt(bankBalance); // 0
 		bb.addInt(cashBalance); // 1
 		bb.addObject(baseAttributes); // Attributes player has without any gear on -- 2
@@ -760,6 +952,8 @@ public class CreatureObject extends TangibleObject {
 	
 	public void createBaseline3(Player target, BaselineBuilder bb) {
 		super.createBaseline3(target, bb); // 13 variables - TANO3 (9) + BASE3 (4)
+		if (getStringId().toString().equals("@obj_n:unknown_object"))
+			return;
 		bb.addByte(posture.getId()); // 13
 		bb.addByte(factionRank); // 14
 		bb.addLong(ownerId); // 15
@@ -772,6 +966,8 @@ public class CreatureObject extends TangibleObject {
 	
 	public void createBaseline4(Player target, BaselineBuilder bb) {
 		super.createBaseline4(target, bb); // 0 variables
+		if (getStringId().toString().equals("@obj_n:unknown_object"))
+			return;
 		bb.addFloat((float) accelPercent); // 0
 		bb.addFloat((float) accelScale); // 1
 		bb.addObject(hamEncumbList); // Rename to bonusAttributes? 2
@@ -794,15 +990,15 @@ public class CreatureObject extends TangibleObject {
 	
 	public void createBaseline6(Player target, BaselineBuilder bb) {
 		super.createBaseline6(target, bb); // 8 variables - TANO6 (6) + BASE6 (2)
+		if (getStringId().toString().equals("@obj_n:unknown_object"))
+			return;
 		bb.addShort(level); // 8
 		bb.addInt(levelHealthGranted); // 9
 		bb.addAscii(animation); // 10
 		bb.addAscii(moodAnimation); // 11
-		bb.addLong(equippedWeaponId); // 12
+		bb.addLong(equippedWeapon == null ? 0 : equippedWeapon.getObjectId()); // 12
 		bb.addLong(groupId); // 13
-		bb.addLong(0); // Group Inviter ID -- 14
-			bb.addAscii(""); // Group Inviter Name
-			bb.addLong(0); // Invite counter
+		bb.addObject(inviterData); // TODO: Check structure -- 14
 		bb.addInt(guildId); // 15
 		bb.addLong(lookAtTargetId); // 16
 		bb.addLong(intendedTargetId); // 17
@@ -827,19 +1023,88 @@ public class CreatureObject extends TangibleObject {
 		bb.incrementOperandCount(27);
 	}
 	
-	public void createBaseline8(Player target, BaselineBuilder bb) {
-		super.createBaseline8(target, bb);
+	protected void parseBaseline1(NetBuffer buffer) {
+		super.parseBaseline1(buffer);
+		if (getStringId().toString().equals("@obj_n:unknown_object"))
+			return;
+		bankBalance = buffer.getInt();
+		cashBalance = buffer.getInt();
+		baseAttributes = buffer.getSwgList(1, 2, Integer.class);
+		skills = buffer.getSwgSet(1, 2, StringType.ASCII);
 	}
 	
-	public void createBaseline9(Player target, BaselineBuilder bb) {
-		super.createBaseline9(target, bb);
+	protected void parseBaseline3(NetBuffer buffer) {
+		super.parseBaseline3(buffer);
+		if (getStringId().toString().equals("@obj_n:unknown_object"))
+			return;
+		posture = Posture.getFromId(buffer.getByte());
+		factionRank = buffer.getByte();
+		ownerId = buffer.getLong();
+		height = buffer.getFloat();
+		battleFatigue = buffer.getInt();
+		statesBitmask = buffer.getLong();
 	}
 	
-	public void sendDelta(int type, int update, Object value) {
-		sendDelta(BaselineType.CREO, type, update, value);
+	protected void parseBaseline4(NetBuffer buffer) {
+		super.parseBaseline4(buffer);
+		if (getStringId().toString().equals("@obj_n:unknown_object"))
+			return;
+		accelPercent = buffer.getFloat();
+		accelScale = buffer.getFloat();
+		hamEncumbList = buffer.getSwgList(4, 2, Integer.class);
+		skillMods = buffer.getSwgMap(4, 3, StringType.ASCII, SkillMod.class);
+		movementPercent = buffer.getFloat();
+		movementScale = buffer.getFloat();
+		performanceListenTarget = buffer.getLong();
+		runSpeed = buffer.getFloat();
+		slopeModAngle = buffer.getFloat();
+		slopeModPercent = buffer.getFloat();
+		turnScale = buffer.getFloat();
+		walkSpeed = buffer.getFloat();
+		waterModPercent = buffer.getFloat();
+		missionCriticalObjs = buffer.getSwgSet(4, 13, StringType.ASCII);
+		abilities = buffer.getSwgMap(4, 14, StringType.ASCII, Integer.class);
+		totalLevelXp = buffer.getInt();
 	}
 	
-	public void sendDelta(int type, int update, Object value, StringType strType) {
-		sendDelta(BaselineType.CREO, type, update, value, strType);
+	protected void parseBaseline6(NetBuffer buffer) {
+		super.parseBaseline6(buffer);
+		if (getStringId().toString().equals("@obj_n:unknown_object"))
+			return;
+		level = buffer.getShort();
+		levelHealthGranted = buffer.getInt();
+		animation = buffer.getAscii();
+		moodAnimation = buffer.getAscii();
+		long weaponId = buffer.getLong();
+		groupId = buffer.getLong();
+		inviterData = buffer.getEncodable(GroupInviterData.class);
+		guildId = buffer.getInt();
+		lookAtTargetId = buffer.getLong();
+		intendedTargetId = buffer.getLong();
+		moodId = buffer.getByte();
+		performanceCounter = buffer.getInt();
+		performanceId = buffer.getInt();
+		attributes = buffer.getSwgList(6, 21, Integer.class);
+		maxAttributes = buffer.getSwgList(6, 22, Integer.class);
+		equipmentList = buffer.getSwgList(6, 23, Equipment.class);
+		costume = buffer.getAscii();
+		visible = buffer.getBoolean();
+		buffs = buffer.getSwgMap(6, 26, CRC.class, Buff.class);
+		performing = buffer.getBoolean();
+		difficulty = CreatureDifficulty.getForDifficulty(buffer.getByte());
+		hologramColour = HologramColour.getForValue(buffer.getInt());
+		shownOnRadar = buffer.getBoolean();
+		beast = buffer.getBoolean();
+		buffer.getBoolean();
+		appearanceList = buffer.getSwgList(6, 33, Equipment.class);
+		buffer.getLong();
+		equippedWeapon = null;
+		for (Equipment e : equipmentList) {
+			if (e.getObjectId() == weaponId && e.getWeapon() instanceof WeaponObject) {
+				equippedWeapon = (WeaponObject) e.getWeapon();
+				break;
+			}
+		}
 	}
+	
 }

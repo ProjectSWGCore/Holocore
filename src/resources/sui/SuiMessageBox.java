@@ -27,61 +27,78 @@
 ***********************************************************************************/
 package resources.sui;
 
-import java.util.ArrayList;
-import java.util.List;
+public class SuiMessageBox extends SuiWindow {
 
-import resources.player.Player;
+	public SuiMessageBox(SuiButtons buttons, String title, String prompt) {
+		super("Script.messageBox", buttons, title, prompt);
+	}
 
-public class SuiMessageBox extends SuiBaseWindow {
+	public SuiMessageBox(SuiButtons buttons, String title, String prompt, String callbackScript, String function) {
+		super("Script.messageBox", buttons, title, prompt, callbackScript, function);
+	}
 
-	public SuiMessageBox(Player owner, MessageBoxType type, String title, String prompt) {
-		super("Script.messageBox", owner, title, prompt);
-		
-		setProperty("btnRevert:visible", "False");
-		switch(type) {
-		case OK:
-			setProperty("btnOk:visible", "True");
-			setProperty("btnOk:Text", "@ok");
-			setProperty("btnCancel:visible", "False");
-			break;
-		case OK_CANCEL:
-			setProperty("btnOk:visible", "True");
-			setProperty("btnCancel:visible", "True");
-			setProperty("btnOk:Text", "@ok");
-			setProperty("btnCancel:Text", "@cancel");
-			break;
-		case YES_NO:
-			setProperty("btnOk:visible", "True");
-			setProperty("btnCancel:visible", "True");
-			setProperty("btnOk:Text", "@yes");
-			setProperty("btnCancel:Text", "@no");
-			break;
-		default: break;
+	public SuiMessageBox(SuiButtons buttons, String title, String prompt, String callback, ISuiCallback suiCallback) {
+		super("Script.messageBox", buttons, title, prompt, callback, suiCallback);
+	}
+
+	public SuiMessageBox(String title, String prompt) {
+		this(SuiButtons.OK_CANCEL, title, prompt);
+	}
+
+	@Override
+	protected void setButtons(SuiButtons buttons) {
+		switch(buttons) {
+			case OK_CANCEL:
+				setOkButtonText();
+				setCancelButtonText();
+				setShowRevertButton(false);
+				break;
+			case YES_NO:
+				setOkButtonText("@yes");
+				setCancelButtonText("@no");
+				setShowRevertButton(false);
+				break;
+			case YES_NO_CANCEL:
+				setOkButtonText("@yes");
+				setRevertButtonText("@no");
+				setCancelButtonText();
+				break;
+			case YES_NO_MAYBE:
+				setOkButtonText("@yes");
+				setRevertButtonText("@maybe");
+				setCancelButtonText("@no");
+				break;
+			case YES_NO_ABSTAIN:
+				setOkButtonText("@yes");
+				setCancelButtonText("@no");
+				setRevertButtonText("@abstain");
+				break;
+			case RETRY_CANCEL:
+				setOkButtonText("@retry");
+				setCancelButtonText("@cancel");
+				setShowRevertButton(false);
+				break;
+			case RETRY_ABORT_CANCEL:
+				setOkButtonText("@abort");
+				setCancelButtonText("@cancel");
+				setRevertButtonText("@retry");
+				break;
+			case OK:
+			default:
+				setOkButtonText();
+				setShowRevertButton(false);
+				setShowCancelButton(false);
+				break;
 		}
 	}
 
-	public SuiMessageBox(Player owner, String title, String prompt) {
-		this(owner, MessageBoxType.OK_CANCEL, title, prompt);
+	private void setShowRevertButton(boolean shown) {
+		String value = String.valueOf(shown);
+		setProperty("btnRevert", "Enabled", value);
+		setProperty("btnRevert", "Visible", value);
 	}
-	
-	public void addOkCancelButtonsCallback(int okEventId, int cancelEventId, ISuiCallback callback) {
-		List<String> returnParams = new ArrayList<String>();
-		returnParams.add("btnOk:Text");
-		returnParams.add("btnCancel:Text");
-		addCallback(okEventId, "", Trigger.OK, returnParams, callback);
-		addCallback(cancelEventId, "", Trigger.CANCEL, returnParams, callback);
-	}
-	
-	public void addOkButtonCallback(int eventId, ISuiCallback callback) {
-		List<String> returnParams = new ArrayList<String>();
-		returnParams.add("btnOk:Text");
-		addCallback(eventId, "", Trigger.OK, returnParams, callback);
-	}
-	
-	public enum MessageBoxType {
-		OK,
-		OK_CANCEL,
-		YES_NO,
-		DEFAULT;
+
+	private void setRevertButtonText(String text) {
+		setProperty("btnRevert", "Text", text);
 	}
 }

@@ -42,21 +42,24 @@ public class CmdStartScene extends SWGPacket {
 	private Race race;
 	private Location l;
 	private long galacticTime;
+	private int serverEpoch;
 	
 	public CmdStartScene() {
 		ignoreLayoutFiles = false;
 		charId = 0;
-		race = Race.HUMAN;
+		race = Race.HUMAN_MALE;
 		l = new Location();
 		galacticTime = 0;
+		serverEpoch = 0;
 	}
 	
-	public CmdStartScene(boolean ignoreLayoutFiles, long charId, Race race, Location l, long galacticTime) {
+	public CmdStartScene(boolean ignoreLayoutFiles, long charId, Race race, Location l, long galacticTime, int serverEpoch) {
 		this.ignoreLayoutFiles = ignoreLayoutFiles;
 		this.charId = charId;
 		this.race = race;
 		this.l = l;
 		this.galacticTime = galacticTime;
+		this.serverEpoch = serverEpoch;
 	}
 	
 	public void decode(ByteBuffer data) {
@@ -64,14 +67,18 @@ public class CmdStartScene extends SWGPacket {
 			return;
 		ignoreLayoutFiles = getBoolean(data);
 		charId = getLong(data);
-		l.setTerrain(Terrain.getTerrainFromName(getAscii(data)));
+		String ter = getAscii(data);
+		l.setTerrain(null);
+		for (Terrain t : Terrain.values())
+			if (t.getFile().equals(ter))
+				l.setTerrain(t);
 		l.setX(getFloat(data));
 		l.setY(getFloat(data));
 		l.setZ(getFloat(data));
-		getFloat(data); // yaw
+		l.setHeading(getFloat(data));
 		race = Race.getRaceByFile(getAscii(data));
 		galacticTime = getLong(data);
-		getInt(data); // 0x8EB5EA4E
+		serverEpoch = getInt(data);
 	}
 	
 	public ByteBuffer encode() {
@@ -88,7 +95,7 @@ public class CmdStartScene extends SWGPacket {
 		addFloat(  data, (float) l.getYaw());
 		addAscii(  data, race.getFilename());
 		addLong(   data, galacticTime);
-		addInt    (data, 0x8EB5EA4E);
+		addInt    (data, serverEpoch);
 		return data;
 	}
 	
@@ -96,4 +103,12 @@ public class CmdStartScene extends SWGPacket {
 	public Location getLocation() { return l; }
 	public Race getRace() { return race; }
 	public long getGalacticTime() { return galacticTime; }
+	public int getServerEpoch() { return serverEpoch; }
+	
+	public void setCharacterId(long id) { this.charId = id; }
+	public void setLocation(Location l) { this.l = l; }
+	public void setRace(Race r) { this.race = r; }
+	public void setGalacticTime(long time) { this.galacticTime = time; }
+	public void setServerEpoch(int epoch) { this.serverEpoch = epoch; }
+	
 }

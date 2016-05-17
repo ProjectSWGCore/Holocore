@@ -27,19 +27,27 @@
 ***********************************************************************************/
 package services.objects;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Map.Entry;
 
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.ObjectData;
+import resources.client_info.visitors.ObjectData.ObjectDataAttribute;
 import resources.client_info.visitors.SlotArrangementData;
 import resources.client_info.visitors.SlotDescriptorData;
+import resources.objects.GameObjectType;
+import resources.objects.GameObjectTypeMask;
 import resources.objects.SWGObject;
 import resources.objects.building.BuildingObject;
 import resources.objects.cell.CellObject;
 import resources.objects.creature.CreatureObject;
+import resources.objects.factory.FactoryObject;
+import resources.objects.group.GroupObject;
+import resources.objects.guild.GuildObject;
 import resources.objects.installation.InstallationObject;
 import resources.objects.intangible.IntangibleObject;
-import resources.objects.mobile.MobileObject;
+import resources.objects.manufacture.ManufactureSchematicObject;
+import resources.objects.mission.MissionObject;
 import resources.objects.player.PlayerObject;
 import resources.objects.resource.ResourceContainerObject;
 import resources.objects.ship.ShipObject;
@@ -48,86 +56,187 @@ import resources.objects.staticobject.StaticObject;
 import resources.objects.tangible.TangibleObject;
 import resources.objects.waypoint.WaypointObject;
 import resources.objects.weapon.WeaponObject;
+import resources.server_info.Log;
 
 public final class ObjectCreator {
-
+	
+	private static final Object OBJECT_ID_MUTEX = new Object();
+	private static long maxObjectId = 1;
+	
+	public static void updateMaxObjectId(long objectId) {
+		synchronized (OBJECT_ID_MUTEX) {
+			if (objectId > maxObjectId)
+				maxObjectId = objectId;
+		}
+	}
+	
 	public static SWGObject createObjectFromTemplate(long objectId, String template) {
 		if (!template.startsWith("object/"))
 			return null;
 		if (!template.endsWith(".iff"))
 			return null;
-		SWGObject obj = createObjectFromType(objectId, getFirstTemplatePart(template.substring(7, template.length()-7-4)));
+		ObjectData attributes = (ObjectData) ClientFactory.getInfoFromFile(ClientFactory.formatToSharedFile(template), true);
+		if(attributes == null)
+			return null;
+		GameObjectType type = GameObjectType.getTypeFromId((Integer) attributes.getAttribute(ObjectDataAttribute.GAME_OBJECT_TYPE));
+		SWGObject obj = createObjectFromType(objectId, template, type);
 		if (obj == null)
 			return null;
 		obj.setTemplate(template);
 
-		handlePostCreation(obj);
+		handlePostCreation(obj, attributes);
+		updateMaxObjectId(objectId);
 		return obj;
 	}
 	
-	private static SWGObject createObjectFromType(long objectId, String type) {
-		switch (type) {
-			case "creature":			return new CreatureObject(objectId);
-			case "player":				return new PlayerObject(objectId);
-			case "tangible":			return new TangibleObject(objectId);
-			case "intangible":			return new IntangibleObject(objectId);
-			case "waypoint":			return new WaypointObject(objectId);
-			case "weapon":				return new WeaponObject(objectId);
-			case "building":			return new BuildingObject(objectId);
-			case "cell":				return new CellObject(objectId);
-			case "static":				return new StaticObject(objectId);
-			case "resource_container":	return new ResourceContainerObject(objectId);
-			case "installation":		return new InstallationObject(objectId);
-			case "ship":				return new ShipObject(objectId);
-			case "soundobject":			return new SoundObject(objectId);
-			case "mobile":				return new MobileObject(objectId);
+	public static <T extends SWGObject> T createObjectFromTemplate(long objectId, String template, Class <T> c) {
+		T obj;
+		try {
+			obj = c.getConstructor(Long.TYPE).newInstance(objectId);
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
+			e.printStackTrace();
+			obj = null;
 		}
-		return null;
-	}
+		if (obj == null)
+			return null;
+		obj.setTemplate(template);
 
-	private static void handlePostCreation(SWGObject object) {
-		addObjectAttributes(object, object.getTemplate());
-		createObjectSlots(object);
-	}
-
-	private static void addObjectAttributes(SWGObject obj, String template) {
 		ObjectData attributes = (ObjectData) ClientFactory.getInfoFromFile(ClientFactory.formatToSharedFile(template), true);
+		handlePostCreation(obj, attributes);
+		updateMaxObjectId(objectId);
+		return obj;
+	}
+	
+	public static SWGObject createObjectFromTemplate(String template) {
+		long id = 0;
+		synchronized (OBJECT_ID_MUTEX) {
+			id = maxObjectId++;
+		}
+		return createObjectFromTemplate(id, template);
+	}
+	
+	public static <T extends SWGObject> T createObjectFromTemplate(String template, Class <T> c) {
+		long id = 0;
+		synchronized (OBJECT_ID_MUTEX) {
+			id = maxObjectId++;
+		}
+		return createObjectFromTemplate(id, template, c);
+	}
+	
+	private static SWGObject createObjectFromType(long objectId, String template, GameObjectType got) {
+		SWGObject obj;
+		obj = createFastFromMask(objectId, got.getMask());
+		if (obj != null)
+			return obj;
+		obj = createFastFromType(objectId, got);
+		if (obj != null)
+			return obj;
+		return createSlowFromType(objectId, getTemplatePart(template, 1));
+	}
+	
+	private static SWGObject createFastFromType(long objectId, GameObjectType type) {
+		switch (type) {
+			case GOT_DATA_MANUFACTURING_SCHEMATIC:	return new ManufactureSchematicObject(objectId);
+			case GOT_MISC_ITEM:
+			case GOT_MISC_SIGN:
+			case GOT_MISC_CONTAINER:
+			case GOT_MISC_CONTAINER_PUBLIC:
+			case GOT_MISC_CONTAINER_SHIP_LOOT:
+			case GOT_MISC_CONTAINER_WEARABLE:		return new TangibleObject(objectId);
+			default:								return null;
+		}
+	}
+	
+	private static SWGObject createFastFromMask(long objectId, GameObjectTypeMask mask) {
+		switch (mask) {
+			case GOTM_BUILDING:				return new BuildingObject(objectId);
+			case GOTM_INSTALLATION:			return new InstallationObject(objectId);
+			case GOTM_RESOURCE_CONTAINER:	return new ResourceContainerObject(objectId);
+			case GOTM_SHIP:					return new ShipObject(objectId);
+			case GOTM_WEAPON:				return new WeaponObject(objectId);
+			case GOTM_ARMOR:
+			case GOTM_CLOTHING:
+			case GOTM_COMPONENT:
+			case GOTM_SHIP_COMPONENT:
+			case GOTM_TOOL:
+			case GOTM_JEWELRY:
+			case GOTM_CHRONICLES:
+			case GOTM_CYBERNETIC:
+			case GOTM_TERMINAL:
+			case GOTM_POWERUP_WEAPON:
+			case GOTM_VEHICLE:				return new TangibleObject(objectId);
+			default: 						return null;
+		}
+	}
+	
+	private static SWGObject createSlowFromType(long objectId, String type) {
+		switch (type) {
+			case "building":				return new BuildingObject(objectId);
+			case "cell":					return new CellObject(objectId);
+			case "creature":				return new CreatureObject(objectId);
+			case "factory":					return new FactoryObject(objectId);
+			case "group":					return new GroupObject(objectId);
+			case "guild":					return new GuildObject(objectId);
+			case "installation":			return new InstallationObject(objectId);
+			case "intangible":				return new IntangibleObject(objectId);
+			case "manufacture_schematic":	return new ManufactureSchematicObject(objectId);
+			case "mission":					return new MissionObject(objectId);
+			case "mobile":					return new CreatureObject(objectId);
+			case "player":					return new PlayerObject(objectId);
+			case "resource_container":		return new ResourceContainerObject(objectId);
+			case "ship":					return new ShipObject(objectId);
+			case "soundobject":				return new SoundObject(objectId);
+			case "static":					return new StaticObject(objectId);
+			case "tangible":				return new TangibleObject(objectId);
+			case "waypoint":				return new WaypointObject(objectId);
+			case "weapon":					return new WeaponObject(objectId);
+			default:						Log.e("ObjectCreator", "Unknown type: " + type); return null;
+		}
+	}
+	
+	private static void handlePostCreation(SWGObject object, ObjectData attributes) {
+		addObjectAttributes(object, attributes);
+		createObjectSlots(object);
+		Object got = object.getDataAttribute(ObjectDataAttribute.GAME_OBJECT_TYPE);
+		if (got != null)
+			object.setGameObjectType(GameObjectType.getTypeFromId((Integer) got));
+	}
 
+	private static void addObjectAttributes(SWGObject obj, ObjectData attributes) {
 		if (attributes == null)
 			return;
 
-		for (Entry<String, Object> e : attributes.getAttributes().entrySet()) {
-			obj.setTemplateAttribute(e.getKey(), e.getValue());
-
-			setObjectAttribute(e.getKey(), e.getValue().toString(), obj);
+		for (Entry<ObjectDataAttribute, Object> e : attributes.getAttributes().entrySet()) {
+			setObjectAttribute(e.getKey(), e.getValue(), obj);
 		}
 	}
 
-	private static void setObjectAttribute(String key, String value, SWGObject object) {
-		switch(key) {
-			case ObjectData.OBJ_STF: object.setStringId(value); break;
-			case ObjectData.DETAIL_STF: object.setDetailStringId(value); break;
-			case ObjectData.VOLUME_LIMIT: object.setVolume(Integer.valueOf(value)); break;
-			case ObjectData.CONTAINER_TYPE: object.setContainerType(Integer.valueOf(value)); break;
+	private static void setObjectAttribute(ObjectDataAttribute key, Object value, SWGObject object) {
+		object.setDataAttribute(key, value);
+		switch (key) {
+			case OBJECT_NAME: object.setStringId(value.toString()); break;
+			case DETAILED_DESCRIPTION: object.setDetailStringId(value.toString()); break;
+			case CONTAINER_VOLUME_LIMIT: object.setVolume((Integer) value); break;
+			case CONTAINER_TYPE: object.setContainerType((Integer) value); break;
 			default: break;
 		}
 	}
 
 	private static void createObjectSlots(SWGObject object) {
-		if (object.getTemplateAttribute(ObjectData.SLOT_DESCRIPTOR) != null) {
+		if (object.getDataAttribute(ObjectDataAttribute.SLOT_DESCRIPTOR_FILENAME) != null) {
 			// These are the slots that the object *HAS*
-			SlotDescriptorData descriptor = (SlotDescriptorData) ClientFactory.getInfoFromFile((String) object.getTemplateAttribute(ObjectData.SLOT_DESCRIPTOR), true);
+			SlotDescriptorData descriptor = (SlotDescriptorData) ClientFactory.getInfoFromFile((String) object.getDataAttribute(ObjectDataAttribute.SLOT_DESCRIPTOR_FILENAME), true);
 			if (descriptor == null)
 				return;
 
 			for (String slotName : descriptor.getSlots()) {
-				object.getSlots().put(slotName, null);
+				object.setSlot(slotName, null);
 			}
 		}
 		
-		if (object.getTemplateAttribute(ObjectData.ARRANGEMENT_FILE) != null) {
+		if (object.getDataAttribute(ObjectDataAttribute.ARRANGEMENT_DESCRIPTOR_FILENAME) != null) {
 			// This is what slots the created object is able to go into/use
-			SlotArrangementData arrangementData = (SlotArrangementData) ClientFactory.getInfoFromFile((String) object.getTemplateAttribute(ObjectData.ARRANGEMENT_FILE), true);
+			SlotArrangementData arrangementData = (SlotArrangementData) ClientFactory.getInfoFromFile((String) object.getDataAttribute(ObjectDataAttribute.ARRANGEMENT_DESCRIPTOR_FILENAME), true);
 			if (arrangementData == null)
 				return;
 
@@ -138,11 +247,21 @@ public final class ObjectCreator {
 	/*
 		Misc helper methods
 	 */
-	private static String getFirstTemplatePart(String template) {
-		int ind = template.indexOf('/');
-		if (ind == -1)
-			return "";
-		return template.substring(0, ind);
+	private static String getTemplatePart(String template, int index) {
+		int start = 0;
+		int end = 0;
+		for (int i = 0; i < template.length(); i++) {
+			if (template.charAt(i) != '/')
+				continue;
+			index--;
+			if (index == 0)
+				start = i+1;
+			else if (index == -1) {
+				end = i;
+				break;
+			}
+		}
+		return template.substring(start, end);
 	}
 	
 }

@@ -24,12 +24,13 @@
 
 package resources.client_info;
 
+import resources.Point3D;
 import utilities.ByteUtilities;
 
-import java.nio.BufferUnderflowException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -50,17 +51,22 @@ public class IffNode {
 	private Iterator<IffNode> childrenItr;
 
 	public IffNode() {
+		children = new LinkedList<>();
 	}
 
 	public IffNode(String tag, boolean isForm) {
+		this();
 		this.tag = tag;
 		this.isForm = isForm;
 	}
 
 	public void addChild(IffNode child) {
-		if (children == null)
-			children = new LinkedList<>();
 		children.add(child);
+	}
+	
+	public int remaining() {
+		initBuffer();
+		return bb.remaining();
 	}
 
 	public byte readByte() {
@@ -92,7 +98,7 @@ public class IffNode {
 
 	public float readFloat() {
 		initBuffer();
-		return bb.getFloat();
+		return bb.order(ByteOrder.LITTLE_ENDIAN).getFloat();
 	}
 
 	public void writeFloat(float val) {
@@ -143,6 +149,17 @@ public class IffNode {
 	public void writeString(String s) {
 		bb.put(s.getBytes(Charset.forName("US-ASCII")));
 		writeByte((byte) 0);
+	}
+	
+	public Point3D readVector() {
+		initBuffer();
+		return new Point3D(readFloat(), readFloat(), readFloat());
+	}
+	
+	public void writeVector(Point3D vector) {
+		writeFloat((float) vector.getX());
+		writeFloat((float) vector.getY());
+		writeFloat((float) vector.getZ());
 	}
 
 	public void readChunk(ChunkReader reader) {
@@ -254,15 +271,14 @@ public class IffNode {
 		isForm = true;
 		int size = bb.getInt(); // Size includes the "FORM" length (4)
 		tag = getTag(bb);
-		for (int read = 4; read < size; read++) {
+		for (int read = 4; read < size; ) {
 			IffNode child = new IffNode();
 			child.parent = this;
 
 			read += child.populateFromBuffer(bb);
 			addChild(child);
 		}
-		if (children != null)
-			childrenItr = children.listIterator();
+		childrenItr = children.listIterator();
 
 		return 4 + size;
 	}
@@ -277,22 +293,15 @@ public class IffNode {
 
 	private int readChunk(ByteBuffer bb) {
 		isForm = false;
-		int chunkSize = bb.getInt();
-		chunkData = new byte[chunkSize];
-		try {
-			bb.get(chunkData);
-		} catch (BufferUnderflowException e) {
-			System.err.println("Couldn't get all the chunk data for size " + chunkSize + " in chunk " + getTag());
-			e.printStackTrace();
-		}
-
+		chunkData = new byte[bb.getInt()];
+		bb.get(chunkData);
 		return 4 + chunkData.length;
 	}
 
 	private String getTag(ByteBuffer bb) {
 		byte[] tagBytes = new byte[4];
 		bb.get(tagBytes);
-		return new String(tagBytes);
+		return new String(tagBytes, StandardCharsets.UTF_8);
 	}
 
 	@Override

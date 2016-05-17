@@ -27,15 +27,17 @@
 ***********************************************************************************/
 package resources.server_info;
 
+import java.io.Closeable;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLFeatureNotSupportedException;
 import java.sql.Statement;
 
-public abstract class RelationalDatabase {
+public abstract class RelationalDatabase implements Closeable {
 	
 	private DatabaseMetaData metaData;
 	private Connection connection;
@@ -92,7 +94,7 @@ public abstract class RelationalDatabase {
 			metaData = connection.getMetaData();
 			online = true;
 		} catch (SQLException e) {
-			System.err.println("Failed to initialize relational database! " + e.getClass().getSimpleName() + " - " + e.getMessage());
+			Log.e("RelationalDatabase", "Failed to initialize relational database! %s - %s", e.getClass().getSimpleName(), e.getMessage());
 			online = false;
 		}
 	}
@@ -103,18 +105,17 @@ public abstract class RelationalDatabase {
 			metaData = connection.getMetaData();
 			online = true;
 		} catch (SQLException e) {
-			System.err.println("Failed to initialize relational database! " + e.getClass().getSimpleName() + " - " + e.getMessage());
+			Log.e("RelationalDatabase", "Failed to initialize relational database! %s - %s", e.getClass().getSimpleName(), e.getMessage());
 			online = false;
 		}
 	}
 	
-	public boolean close() {
+	public void close() {
 		try {
 			connection.close();
 			online = false;
-			return true;
 		} catch (SQLException e) {
-			return false;
+			e.printStackTrace();
 		}
 	}
 	
@@ -130,7 +131,7 @@ public abstract class RelationalDatabase {
 	
 	public PreparedStatement prepareStatement(String sql) {
 		if (connection == null) {
-			System.err.println("Cannot prepare statement! Connection is null");
+			Log.e("RelationalDatabase", "Cannot prepare statement! Connection is null");
 			return null;
 		}
 		try {
@@ -144,12 +145,21 @@ public abstract class RelationalDatabase {
 	public ResultSet executeQuery(String query) {
 		if (connection == null)
 			return null;
+		Statement s = null;
 		try {
-			Statement s = connection.createStatement();
+			s = connection.createStatement();
 			s.execute(query);
+			try {
+				s.closeOnCompletion();
+			} catch (SQLFeatureNotSupportedException e) {
+				// It was worth a shot
+			}
 			return s.getResultSet();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			if (s != null) {
+				try { s.close(); } catch (SQLException ex) { }
+			}
 			return null;
 		}
 	}
@@ -158,8 +168,9 @@ public abstract class RelationalDatabase {
 		if (connection == null)
 			return 0;
 		try {
-			Statement s = connection.createStatement();
-			return s.executeUpdate(query);
+			try (Statement s = connection.createStatement()) {
+				return s.executeUpdate(query);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return 0;

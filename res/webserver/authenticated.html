@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>ProjectSWG Server Management Interface</title>
+        <link href="css/style.css" rel="stylesheet" type="text/css" />
+        <link href="css/auth.css" rel="stylesheet" type="text/css" />
+        <link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script type="text/javascript">
+            
+    $(document).ready(
+        function () {
+            setInterval(function () {
+                var newDate = new Date();
+                var datetime = newDate.getTime();
+                $('#resource_img').html('<img src="memory_usage.png?currenttime?' + datetime + '" style="width:624px;height:225px;" alt="memory_usage" />');
+                $('#online_players_count').load('playercount.html');
+		$('#online_players').load('online.html');
+                $('#character_info').load('charinfo.html');
+              	$('#log_container').load('log.html');
+        },3000);
+   
+ });
+        </script>
+    </head>
+    <body>
+    <div class="header"><div class="logo_small"></div></div>
+        <div class="wrapper">
+        
+            <div class="content_wrapper">
+                
+                <div class="stats_wrapper">
+                    <div id="memory_container" class="memory_container">
+                        <div class="resoure_label">
+                            Resource Usage
+                        </div>
+                        <div id="resource_img" class="resource_img">
+                            <img src="memory_usage.png" style="width:624px;height:225px;" alt="memory_usage" />
+                        </div>
+                    </div>
+                    <div class="dist">&nbsp;</div>
+                    <div class="server_info">
+                        <div id="online_players_count" class="online_players_count">
+                            ${ONLINE_PLAYER_COUNT}
+                        </div>                        
+                        <div id="online_players" class="online_players">
+                            ${ONLINE_PLAYERS}
+                        </div>
+                        <div class="character_info">
+                            ${CHARACTER_INFO}
+                        </div>
+                    </div>
+                </div>
+                <div style="clear:both;"></div>
+                <div class="main_log">
+                    <div class="log_label">Server Log</div>
+                    <div style="clear:both;"></div>
+                    <div id="log_container" class="log_container">
+                        ${LOG}                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

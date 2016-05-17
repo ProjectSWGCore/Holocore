@@ -44,10 +44,10 @@ public class ServerWeatherMessage extends SWGPacket {
 	public void decode(ByteBuffer data) {
 		if (!super.decode(data, CRC))
 			return;
-		WeatherType type = WeatherType.CLEAR;
 		
-		switch(getInt(data)) {
+		switch (getInt(data)) {
 			case 0:
+			default:
 				type = WeatherType.CLEAR;
 				break;
 			case 1:
@@ -60,8 +60,6 @@ public class ServerWeatherMessage extends SWGPacket {
 				type = WeatherType.HEAVY;
 				break;
 		}
-		
-		this.type = type;
 		
 		cloudVectorX = getFloat(data);
 		cloudVectorZ = getFloat(data);

@@ -27,15 +27,14 @@
 ***********************************************************************************/
 package resources.objects.staticobject;
 
-import network.packets.swg.zone.baselines.Baseline.BaselineType;
-import resources.objects.SWGObject;
+import resources.objects.creature.CreatureObject;
 
-public class StaticObject extends SWGObject {
+public class StaticObject extends CreatureObject {
 	
 	private static final long serialVersionUID = 1L;
 	
 	public StaticObject(long objectId) {
-		super(objectId, BaselineType.STAO);
+		super(objectId);
 	}
 	
 }

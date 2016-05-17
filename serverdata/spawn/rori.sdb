@@ -1,0 +1,310 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	creature_name	creature_id	spawn_category	spawn_area	amount	behaviour	mood	equipment_id	patrol_id	quest_id	loot_id	max_spawn_time	min_spawn_time	float_radius
+INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGER NOT NULL	REAL	REAL	REAL	REAL	INTEGER	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL	INTEGER NOT NULL	INTEGER
+2100003	RORI	ror_itp_vader_dark_jedi_bunker1	AREA	10	18.30	-13.80	-11.90	0	1	a techno-thief	12824	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100004	RORI	ror_itp_vader_dark_jedi_bunker1	AREA	10	14.20	-13.80	-16.30	0	1	a techno-thief	12824	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100005	RORI	ror_itp_vader_dark_jedi_bunker1	AREA	5	7.90	-6.80	-4.20	0	1	a techno-thief	12824	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100006	RORI	ror_itp_vader_dark_jedi_bunker1	AREA	5	1.50	-6.80	-5.80	0	1	a techno-thief	12824	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100007	RORI	ror_itp_vader_dark_jedi_bunker1	AREA	7	-6.00	-13.80	1.40	0	1	a techno-thief	12824	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100008	RORI	ror_itp_vader_dark_jedi_bunker1	AREA	7	-5.90	-13.80	-7.80	0	1	a techno-thief	12824	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100009	RORI	ror_itp_vader_dark_jedi_bunker1	AREA	7	-5.40	-13.80	-10.70	0	1	a techno-thief	12824	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100010	RORI	ror_itp_vader_dark_jedi_bunker1	AREA	7	-2.60	-13.80	0.60	0	1	a techno-thief	12824	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100011	RORI	ror_itp_vader_dark_jedi_bunker1	AREA	8	7.20	-13.80	10.20	0	1	a techno-thief	12824	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100012	RORI	ror_itp_vader_dark_jedi_bunker1	AREA	8	1.60	-13.80	13.60	0	1	a techno-thief	12824	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100013	RORI	ror_itp_vader_dark_jedi_bunker1	AREA	8	-5.40	-13.80	12.70	0	1	a techno-thief	12824	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100014	RORI	ror_itp_vader_dark_jedi_bunker1	AREA	9	17.60	-13.80	5.40	0	1	a techno-thief	12824	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100015	RORI	ror_itp_vader_dark_jedi_bunker1	AREA	9	16.60	-13.80	12.80	0	1	a techno-thief	12824	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100016	RORI	ror_itp_vader_dark_jedi_bunker1	AREA	9	14.10	-13.80	1.00	0	1	a techno-thief	12824	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100017	RORI	ror_itp_vader_dark_jedi_bunker2	AREA	10	17.00	-13.80	-13.90	0	1	a Gundark flunky	16510	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100018	RORI	ror_itp_vader_dark_jedi_bunker2	AREA	10	13.70	-13.80	-13.80	0	1	a Gundark flunky	16510	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100019	RORI	ror_itp_vader_dark_jedi_bunker2	AREA	5	6.00	-6.80	-9.20	0	1	a Gundark hoodlum	16511	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100020	RORI	ror_itp_vader_dark_jedi_bunker2	AREA	5	3.90	-6.80	-4.50	0	1	a Gundark overseer	16512	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100021	RORI	ror_itp_vader_dark_jedi_bunker2	AREA	7	-6.50	-13.80	-2.80	0	1	a Gundark overseer	16512	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100022	RORI	ror_itp_vader_dark_jedi_bunker2	AREA	7	-2.10	-13.80	4.50	0	1	a Gundark flunky	16510	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100023	RORI	ror_itp_vader_dark_jedi_bunker2	AREA	7	-1.50	-13.80	-8.90	0	1	a Gundark hoodlum	16511	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100024	RORI	ror_itp_vader_dark_jedi_bunker2	AREA	8	7.30	-13.80	11.80	0	1	a Gundark flunky	16510	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100025	RORI	ror_itp_vader_dark_jedi_bunker2	AREA	8	1.10	-13.80	13.20	0	1	a Gundark hoodlum	16511	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100026	RORI	ror_itp_vader_dark_jedi_bunker2	AREA	9	16.40	-13.80	2.30	0	1	a Gundark hoodlum	16511	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100027	RORI	ror_itp_vader_dark_jedi_bunker2	AREA	9	14.80	-13.80	8.70	0	1	a Gundark overseer	16512	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100028	RORI	ror_narmle_chirq_bunker	AREA	4	6.50	-12.00	32.20	0	1	a Cobral brute	16506	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100029	RORI	ror_narmle_chirq_bunker	AREA	4	0.00	-12.00	30.70	0	1	a Cobral killer	16507	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100030	RORI	ror_narmle_chirq_bunker	AREA	5	31.70	-12.00	28.70	0	1	a Cobral killer	16507	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100031	RORI	ror_narmle_chirq_bunker	AREA	5	28.80	-12.00	33.30	0	1	a Cobral brute	16506	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100032	RORI	ror_narmle_chirq_bunker	AREA	7	6.10	-16.00	62.90	0	1	a Cobral killer	16507	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100033	RORI	ror_narmle_chirq_bunker	AREA	7	20.70	-16.00	76.00	0	1	a Cobral killer	16507	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100034	RORI	ror_narmle_chirq_bunker	AREA	7	2.30	-16.00	79.80	0	1	a Cobral brute	16506	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100035	RORI	ror_narmle_chirq_bunker	AREA	7	19.00	-16.00	82.60	0	1	a Cobral killer	16507	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100036	RORI	ror_narmle_chirq_bunker	AREA	7	0.70	-16.00	63.10	0	1	a Cobral brute	16506	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100037	RORI	ror_narmle_chirq_bunker	AREA	7	-8.80	-16.00	74.60	0	1	a Cobral brute	16506	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100038	RORI	ror_narmle_chirq_bunker	AREA	7	-10.30	-16.00	82.20	0	1	a Cobral killer	16507	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100039	RORI	ror_narmle_chirq_bunker	AREA	8	78.10	-16.00	79.50	0	1	a Cobral brute	16506	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100040	RORI	ror_narmle_chirq_bunker	AREA	8	75.70	-16.00	61.60	0	1	a Cobral killer	16507	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100041	RORI	ror_narmle_chirq_bunker	AREA	8	72.10	-16.00	73.70	0	1	a Cobral brute	16506	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100042	RORI	ror_narmle_chirq_bunker	AREA	8	63.70	-16.00	61.70	0	1	a Cobral killer	16507	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100043	RORI	ror_narmle_chirq_bunker	AREA	8	49.70	-16.00	60.50	0	1	a Cobral brute	16506	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100044	RORI	ror_narmle_chirq_bunker	AREA	8	48.20	-16.00	82.20	0	1	a Cobral killer	16507	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100045	RORI	ror_narmle_chirq_bunker	AREA	8	44.50	-16.00	61.30	0	1	a Cobral brute	16506	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100046	RORI	ror_narmle_chirq_bunker	AREA	9	-36.90	-14.00	81.70	0	1	a Cobral killer	16507	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100047	RORI	ror_narmle_chirq_bunker	AREA	9	-36.90	-14.00	76.30	0	1	a Cobral brute	16506	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100048	RORI	ror_underground_bunker1	AREA	10	7.70	-16.00	140.40	0	1	a Jurgen's bandit	16514	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100049	RORI	ror_underground_bunker1	AREA	10	3.70	-16.00	105.10	0	1	a Jurgen's bandit	16514	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100050	RORI	ror_underground_bunker1	AREA	10	17.60	-16.00	122.60	0	1	a Jurgen's bandit	16514	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100051	RORI	ror_underground_bunker1	AREA	10	0.00	-16.00	140.00	0	1	a Jurgen's bandit	16514	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100052	RORI	ror_underground_bunker1	AREA	10	-10.80	-16.00	121.80	0	1	a Jurgen's bandit	16514	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100053	RORI	ror_underground_bunker1	AREA	12	-27.70	-12.00	157.60	0	1	a Jurgen's bandit	16514	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100054	RORI	ror_underground_bunker1	AREA	12	-27.20	-12.00	146.20	0	1	a Jurgen's bandit	16514	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100055	RORI	ror_underground_bunker1	AREA	17	-82.60	-28.00	104.20	0	1	a Jurgen's bandit	16514	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100056	RORI	ror_underground_bunker1	AREA	17	-79.00	-28.00	118.90	0	1	a Jurgen's bandit	16514	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100057	RORI	ror_underground_bunker1	AREA	17	-94.30	-28.00	111.10	0	1	Jurgen Nath	16515	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100058	RORI	ror_underground_bunker1	AREA	18	-13.10	-12.00	92.80	0	1	a Jurgen's bandit	16514	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100059	RORI	ror_underground_bunker1	AREA	20	-38.50	-12.00	100.10	0	1	a Jurgen's bandit	16514	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100060	RORI	ror_underground_bunker1	AREA	20	-35.90	-12.00	106.30	0	1	a Jurgen's bandit	16514	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100061	RORI	ror_underground_bunker1	AREA	23	-43.60	-24.00	63.10	0	1	a Jurgen's bandit	16514	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100062	RORI	ror_underground_bunker1	AREA	26	-81.70	-28.00	65.90	0	1	a Jurgen's bandit	16514	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100063	RORI	ror_underground_bunker1	AREA	26	-80.20	-28.00	76.60	0	1	a Jurgen's bandit	16514	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100064	RORI	ror_underground_bunker1	AREA	5	7.20	-12.00	30.70	0	1	a Jurgen's bandit	16514	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100065	RORI	ror_underground_bunker1	AREA	5	6.30	-12.00	45.70	0	1	a Jurgen's bandit	16514	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100066	RORI	ror_underground_bunker1	AREA	5	-2.50	-12.00	31.00	0	1	a Jurgen's bandit	16514	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100067	RORI	ror_underground_bunker1	AREA	5	-1.10	-12.00	47.10	0	1	a Jurgen's bandit	16514	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100068	RORI	ror_underground_bunker1	AREA	7	20.30	-16.00	80.20	0	1	a Jurgen's bandit	16514	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100069	RORI	ror_underground_bunker1	AREA	7	14.10	-16.00	81.20	0	1	a Jurgen's bandit	16514	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100070	RORI	ror_underground_bunker2	AREA	10	5.00	-12.00	56.30	0	1	Vladlun's henchman	16526	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100071	RORI	ror_underground_bunker2	AREA	10	3.70	-12.00	81.40	0	1	Vladlun's henchman	16526	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100072	RORI	ror_underground_bunker2	AREA	10	2.70	-12.00	64.40	0	1	Vladlun's henchman	16526	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100073	RORI	ror_underground_bunker2	AREA	13	3.40	-12.00	102.80	0	1	Vladlun's henchman	16526	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100074	RORI	ror_underground_bunker2	AREA	14	16.70	-12.00	99.00	0	1	Vladlun's henchman	16526	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100075	RORI	ror_underground_bunker2	AREA	15	3.90	-12.00	114.60	0	1	Aztin Maru	16504	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100076	RORI	ror_underground_bunker2	AREA	16	-9.70	-12.00	98.10	0	1	Vladlun's henchman	16526	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100077	RORI	ror_underground_bunker2	AREA	19	48.70	-20.00	115.70	0	1	Vladlun's henchman	16526	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100078	RORI	ror_underground_bunker2	AREA	19	47.50	-20.00	107.60	0	1	Vladlun's henchman	16526	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100079	RORI	ror_underground_bunker2	AREA	2	-4.80	0.30	3.10	0	1	Boba Fett	16505	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100080	RORI	ror_underground_bunker2	AREA	21	52.00	-20.00	142.50	0	1	Vladlun's henchman	16526	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100081	RORI	ror_underground_bunker2	AREA	21	43.20	-20.00	147.10	0	1	Vladlun's henchman	16526	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100082	RORI	ror_underground_bunker2	AREA	24	101.50	-20.00	150.40	0	1	Vladlun's henchman	16526	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100083	RORI	ror_underground_bunker2	AREA	25	98.00	-20.00	131.20	0	1	Vladlun's henchman	16526	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100084	RORI	ror_underground_bunker2	AREA	26	104.40	-20.00	109.90	0	1	Titus Dabrini	16525	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100085	RORI	ror_underground_bunker2	AREA	26	101.10	-20.00	114.50	0	1	Vladlun's henchman	16526	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100086	RORI	ror_underground_bunker2	AREA	27	66.50	-20.00	111.20	0	1	Vladlun's henchman	16526	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100087	RORI	ror_underground_bunker2	AREA	28	63.50	-20.00	131.50	0	1	Vladlun's henchman	16526	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100088	RORI	ror_underground_bunker2	AREA	29	39.00	-20.00	58.70	0	1	Vladlun's henchman	16526	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100089	RORI	ror_underground_bunker2	AREA	29	20.00	-20.00	43.60	0	1	Vladlun's henchman	16526	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100090	RORI	ror_underground_bunker2	AREA	29	20.00	-20.00	79.40	0	1	Vladlun's henchman	16526	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100091	RORI	ror_underground_bunker2	AREA	29	11.00	-20.00	59.90	0	1	Vladlun's henchman	16526	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100092	RORI	ror_underground_bunker2	AREA	31	1.40	-20.00	123.10	0	1	Tiaba Charr	16524	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100093	RORI	ror_underground_bunker2	AREA	31	7.60	-20.00	111.70	0	1	Vladlun's henchman	16526	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100094	RORI	ror_underground_bunker2	AREA	31	4.10	-20.00	129.10	0	1	Vladlun's henchman	16526	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100095	RORI	ror_underground_bunker2	AREA	31	20.80	-20.00	112.90	0	1	Vladlun's henchman	16526	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100096	RORI	ror_underground_bunker2	AREA	34	63.30	-20.00	21.70	0	1	Vladlun's henchman	16526	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100097	RORI	ror_underground_bunker2	AREA	34	58.80	-20.00	35.20	0	1	Vladlun's henchman	16526	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100098	RORI	ror_underground_bunker2	AREA	34	47.20	-20.00	34.90	0	1	Vladlun's henchman	16526	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100099	RORI	ror_underground_bunker2	AREA	34	55.10	-20.00	23.70	0	1	Vladlun Travan	16527	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100100	RORI	ror_underground_bunker2	AREA	35	65.00	-20.00	61.70	0	1	Vladlun's henchman	16526	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100101	RORI	ror_underground_bunker2	AREA	35	64.70	-20.00	56.20	0	1	Vladlun's henchman	16526	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100102	RORI	ror_underground_bunker2	AREA	6	19.40	-12.00	32.30	0	1	Vladlun's henchman	16526	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100103	RORI	ror_underground_bunker2	AREA	6	18.00	-12.00	25.30	0	1	Vladlun's henchman	16526	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100104	RORI	ror_underground_bunker2	AREA	9	49.30	-12.00	59.90	0	1	Vladlun's henchman	16526	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100105	RORI	ror_underground_bunker2	AREA	9	42.60	-12.00	62.30	0	1	Vladlun's henchman	16526	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100106	RORI	ror_world	AREA	0	5916.43	80.82	5551.91	0	1	an Imperial recruiter	12750	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100107	RORI	ror_world	AREA	0	-5130.31	80.00	-2270.00	0	1	Seldair Keeloo	12819	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100108	RORI	ror_world	AREA	0	7293.48	79.42	112.61	0	1	a Rebel commando	12821	-	-	1	STOP	idle	0	0	0	0	300	120	2
+2100109	RORI	ror_world	AREA	0	7287.85	78.55	100.54	0	1	a Rebel commando	12821	-	-	1	STOP	idle	0	0	0	0	300	120	2
+2100110	RORI	ror_world	AREA	0	7281.25	80.49	117.48	0	1	a Rebel commando	12821	-	-	1	STOP	idle	0	0	0	0	300	120	2
+2100111	RORI	ror_world	AREA	0	7280.49	78.22	88.56	0	1	a Rebel commando	12821	-	-	1	STOP	idle	0	0	0	0	300	120	2
+2100112	RORI	ror_world	AREA	0	7271.66	82.39	105.93	0	1	a Rebel commando	12821	-	-	1	STOP	idle	0	0	0	0	300	120	2
+2100113	RORI	ror_world	AREA	0	7267.82	79.80	119.61	0	1	a Rebel commando	12821	-	-	1	STOP	idle	0	0	0	0	300	120	2
+2100114	RORI	ror_world	AREA	0	7265.72	83.69	93.02	0	1	a Rebel commando	12821	-	-	1	STOP	idle	0	0	0	0	300	120	2
+2100115	RORI	ror_world	AREA	0	-5299.00	80.07	-2098.49	0	1	Major Geg Winthazen	12825	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100116	RORI	ror_world	AREA	0	-4968.00	79.99	-2399.00	0	1	a courier	12831	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100117	RORI	ror_world	AREA	0	5241.64	80.00	6149.71	0	1	a Junk Dealer	12913	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100118	RORI	ror_world	AREA	0	-5165.15	80.00	-2534.27	0	1	Meatlump Donk (Outpost Guard)	13353	-	-	1	STOP	idle	0	0	0	0	300	120	2
+2100119	RORI	ror_world	AREA	0	-5143.84	79.97	-2541.67	0	1	Meatlump Donk (Outpost Guard)	13353	-	-	1	STOP	idle	0	0	0	0	300	120	2
+2100120	RORI	ror_world	AREA	0	-5163.32	79.28	-2562.23	0	1	Meatlump Dunder (Outpost Guard)	13354	-	-	1	STOP	idle	0	0	0	0	300	120	2
+2100121	RORI	ror_world	AREA	0	-6959.56	231.89	-3128.53	0	1	Captain Pir'pwn	10573	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100122	RORI	ror_world	AREA	0	4827.97	80.00	5843.40	0	1	a Rebel recruiter	15056	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100123	RORI	ror_world	AREA	0	5310.77	80.00	6206.38	0	1	Marles Jacobe	15122	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100124	RORI	ror_world	AREA	0	-6983.69	180.00	-3127.11	0	1	a Rorgunagan Guard	15183	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100125	RORI	ror_world	AREA	0	-6981.66	180.26	-3152.22	0	1	a Rorgunagan Guard	15183	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100126	RORI	ror_world	AREA	0	-6965.06	219.93	-3120.58	0	1	a Rorgunagan Guard	15183	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100127	RORI	ror_world	AREA	0	-6962.79	216.00	-3144.61	0	1	a Rorgunagan Guard	15183	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100128	RORI	ror_world	AREA	0	-6954.16	227.48	-3136.51	0	1	a Rorgunagan Guard	15183	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100129	RORI	ror_world	AREA	0	-6951.45	181.26	-3164.11	0	1	a Rorgunagan Guard	15183	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100130	RORI	ror_world	AREA	0	-6949.71	221.63	-3124.33	0	1	a Rorgunagan Guard	15183	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100131	RORI	ror_world	AREA	0	-6949.42	197.63	-3097.18	0	1	a Rorgunagan Guard	15183	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100132	RORI	ror_world	AREA	0	-6939.81	206.35	-3116.09	0	1	a Rorgunagan Guard	15183	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100133	RORI	ror_world	AREA	0	-6905.99	189.92	-3143.53	0	1	a Rorgunagan Guard	15183	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100134	RORI	ror_world	AREA	0	-6972.22	180.85	-3162.33	0	1	a Rorgungan Lieutenant	15184	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100135	RORI	ror_world	AREA	0	-6971.89	180.00	-3101.57	0	1	a Rorgungan Lieutenant	15184	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100136	RORI	ror_world	AREA	0	-6960.48	231.76	-3133.66	0	1	a Rorgungan Lieutenant	15184	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100137	RORI	ror_world	AREA	0	-6957.66	224.41	-3119.93	0	1	a Rorgungan Lieutenant	15184	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100138	RORI	ror_world	AREA	0	-6946.50	199.72	-3109.41	0	1	a Rorgungan Lieutenant	15184	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100139	RORI	ror_world	AREA	0	-6945.82	225.01	-3141.89	0	1	a Rorgungan Lieutenant	15184	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100140	RORI	ror_world	AREA	0	-6925.08	181.43	-3156.69	0	1	a Rorgungan Lieutenant	15184	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100141	RORI	ror_world	AREA	0	-5154.00	80.00	-2268.00	0	1	Ria	15468	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100142	RORI	ror_world	AREA	0	-4812.00	76.21	-2270.00	0	1	Alwynn	15474	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100143	RORI	ror_world	AREA	0	-5577.00	75.50	-5787.00	0	1	Carlton	15478	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100144	RORI	ror_world	AREA	0	5398.00	82.00	6124.00	0	1	Emory	15488	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100145	RORI	ror_world	AREA	0	-5197.00	77.02	5067.00	0	1	Ike	15492	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100146	RORI	ror_world	AREA	0	-1110.00	75.88	4418.00	0	1	Jeanna	15495	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100147	RORI	ror_world	AREA	0	2879.00	106.95	-1277.00	0	1	Zola	15521	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100148	RORI	ror_world	AREA	0	200.59	90.00	-994.50	0	1	a CLL-8 binary load lifter	10637	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100149	RORI	ror_world	AREA	0	5427.49	80.00	6125.39	0	1	a thief	15553	-	-	1	STOP	idle	0	0	0	0	300	120	2
+2100150	RORI	ror_world	AREA	0	5409.66	80.00	6097.57	0	1	a thief	15553	-	-	1	STOP	idle	0	0	0	0	300	120	2
+2100151	RORI	ror_world	AREA	0	5368.53	80.89	6140.09	0	1	a thief	15553	-	-	1	STOP	idle	0	0	0	0	300	120	2
+2100152	RORI	ror_world	AREA	0	2922.85	107.84	-1266.49	0	1	a thief	15553	-	-	1	STOP	idle	0	0	0	0	300	120	2
+2100153	RORI	ror_world	AREA	0	2892.49	106.90	-1240.86	0	1	a thief	15553	-	-	1	STOP	idle	0	0	0	0	300	120	2
+2100154	RORI	ror_world	AREA	0	2883.97	106.87	-1305.73	0	1	a thief	15553	-	-	1	STOP	idle	0	0	0	0	300	120	2
+2100155	RORI	ror_world	AREA	0	-5601.61	75.64	-5773.12	0	1	a thief	15553	-	-	1	STOP	idle	0	0	0	0	300	120	2
+2100156	RORI	ror_world	AREA	0	-5590.61	75.64	-5809.16	0	1	a thief	15553	-	-	1	STOP	idle	0	0	0	0	300	120	2
+2100157	RORI	ror_world	AREA	0	-5576.28	75.62	-5755.60	0	1	a thief	15553	-	-	1	STOP	idle	0	0	0	0	300	120	2
+2100158	RORI	ror_world	AREA	0	-5217.08	75.80	5102.35	0	1	a thief	15553	-	-	1	STOP	idle	0	0	0	0	300	120	2
+2100159	RORI	ror_world	AREA	0	-5186.05	77.33	5038.37	0	1	a thief	15553	-	-	1	STOP	idle	0	0	0	0	300	120	2
+2100160	RORI	ror_world	AREA	0	-5182.99	77.66	5091.85	0	1	a thief	15553	-	-	1	STOP	idle	0	0	0	0	300	120	2
+2100161	RORI	ror_world	AREA	0	-1136.98	79.31	4412.58	0	1	a thief	15553	-	-	1	STOP	idle	0	0	0	0	300	120	2
+2100162	RORI	ror_world	AREA	0	-1112.10	77.34	4453.12	0	1	a thief	15553	-	-	1	STOP	idle	0	0	0	0	300	120	2
+2100163	RORI	ror_world	AREA	0	-1081.69	78.02	4396.16	0	1	a thief	15553	-	-	1	STOP	idle	0	0	0	0	300	120	2
+2100164	RORI	ror_world	AREA	0	-4831.35	79.99	-2304.40	0	1	a thief	15554	-	-	1	STOP	idle	0	0	0	0	300	120	2
+2100165	RORI	ror_world	AREA	0	-4818.97	77.76	-2241.92	0	1	a thief	15554	-	-	1	STOP	idle	0	0	0	0	300	120	2
+2100166	RORI	ror_world	AREA	0	-4784.06	77.04	-2257.27	0	1	a thief	15554	-	-	1	STOP	idle	0	0	0	0	300	120	2
+2100167	RORI	ror_world	AREA	0	773.57	81.93	-2084.98	0	1	Tombl Blaus	16349	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100168	RORI	ror_world	AREA	0	300.56	81.48	-982.39	0	1	Antaria Wellos (a melodramatic Jedi)	10723	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100169	RORI	ror_world	AREA	0	-5725.69	77.01	-2108.55	0	1	a Cobral brute	16506	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100170	RORI	ror_world	AREA	0	-5698.44	76.76	-2158.49	0	1	a Cobral killer	16507	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100171	RORI	ror_world	AREA	0	-5697.50	75.90	-2115.82	0	1	a Cobral brute	16506	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100172	RORI	ror_world	AREA	0	-5686.63	75.70	-2126.22	0	1	a Cobral killer	16507	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100173	RORI	ror_world	AREA	0	-5686.52	77.00	-2144.22	0	1	a Cobral brute	16506	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100174	RORI	ror_world	AREA	0	-5470.50	77.46	-1758.15	0	1	a Gundark overseer	16512	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100175	RORI	ror_world	AREA	0	-5469.33	77.53	-1753.27	0	1	a Gundark flunky	16510	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100176	RORI	ror_world	AREA	0	-5447.74	76.13	-1785.25	0	1	a Gundark hoodlum	16511	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100177	RORI	ror_world	AREA	0	-5445.43	75.82	-1741.72	0	1	a Gundark overseer	16512	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100178	RORI	ror_world	AREA	0	-5441.44	76.35	-1745.42	0	1	a Gundark flunky	16510	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100179	RORI	ror_world	AREA	0	-5433.13	76.62	-1786.47	0	1	a Gundark hoodlum	16511	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100180	RORI	ror_world	AREA	0	-5429.00	77.55	-1760.63	0	1	a Gundark overseer	16512	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100181	RORI	ror_world	AREA	0	-5426.48	77.22	-1765.38	0	1	a Gundark flunky	16510	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100182	RORI	ror_world	AREA	0	-5126.32	80.00	-2249.32	0	1	Horace Korr (a retired Corellia Times reporter)	16513	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100183	RORI	ror_world	AREA	0	221.17	90.00	-981.26	0	1	a Jurgen's bandit	16514	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100184	RORI	ror_world	AREA	0	218.89	90.00	-1000.06	0	1	a Jurgen's bandit	16514	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100185	RORI	ror_world	AREA	0	218.68	90.00	-965.65	0	1	a Jurgen's bandit	16514	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100186	RORI	ror_world	AREA	0	210.07	90.00	-964.94	0	1	a Jurgen's bandit	16514	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100187	RORI	ror_world	AREA	0	180.86	90.10	-1010.60	0	1	a Jurgen's bandit	16514	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100188	RORI	ror_world	AREA	0	172.77	90.00	-1016.48	0	1	a Jurgen's bandit	16514	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100189	RORI	ror_world	AREA	0	171.13	108.00	-970.04	0	1	a Jurgen's bandit	16514	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100190	RORI	ror_world	AREA	0	164.82	108.00	-978.54	0	1	a Jurgen's bandit	16514	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100191	RORI	ror_world	AREA	0	-5120.20	80.00	-2514.52	0	1	Lieutenant Orden Tarc	16516	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100192	RORI	ror_world	AREA	0	-4846.70	81.31	-2561.48	0	1	Ponda Baba	16523	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100193	RORI	ror_world	AREA	0	-182.34	78.06	1902.44	0	1	Vladlun's henchman	16526	-	-	1	STOP	idle	0	0	0	0	300	120	2
+2100194	RORI	ror_world	AREA	0	-180.32	78.01	1928.56	0	1	Vladlun's henchman	16526	-	-	1	STOP	idle	0	0	0	0	300	120	2
+2100195	RORI	ror_world	AREA	0	-161.25	76.92	1946.05	0	1	Vladlun's henchman	16526	-	-	1	STOP	idle	0	0	0	0	300	120	2
+2100196	RORI	ror_world	AREA	0	-158.71	77.65	1876.40	0	1	Vladlun's henchman	16526	-	-	1	STOP	idle	0	0	0	0	300	120	2
+2100197	RORI	ror_world	AREA	0	-142.42	76.34	1928.19	0	1	Vladlun's henchman	16526	-	-	1	STOP	idle	0	0	0	0	300	120	2
+2100198	RORI	ror_world	AREA	0	-122.65	78.23	1899.42	0	1	Vladlun's henchman	16526	-	-	1	STOP	idle	0	0	0	0	300	120	2
+2100199	RORI	ror_world	AREA	0	-114.53	78.19	1870.51	0	1	Vladlun's henchman	16526	-	-	1	STOP	idle	0	0	0	0	300	120	2
+2100200	RORI	ror_world	AREA	0	-5219.56	80.00	-2313.55	0	1	Wernell Covington	16529	-	-	1	STOP	idle	0	0	0	0	300	120	0
+2100201	RORI	ror_narmle_hospital	AREA	6	-18.40	0.30	-9.50	0	1	a scientist	15284	city	Narmle	1	STOP	idle	0	0	999	0	300	120	0
+2100202	RORI	ror_narmle_hotel1	AREA	10	-23.30	1.60	-17.60	0	1	Kole	10658	city	Narmle	1	STOP	idle	0	0	0	0	300	120	0
+2100203	RORI	ror_narmle_hotel1	AREA	10	-21.00	1.60	-16.80	0	1	Nym	10666	city	Narmle	1	STOP	npc_sitting_chair	0	0	0	0	300	120	0
+2100204	RORI	ror_narmle_hotel1	AREA	5	21.10	1.30	10.10	0	1	a patron	14780	city	Narmle	1	STOP	idle	0	0	999	0	300	120	0
+2100205	RORI	ror_narmle_starport	AREA	4	5.67	0.64	67.19	147	1	Chassis Dealer	10597	city	Narmle	1	STOP	idle	0	0	0	0	300	120	0
+2100206	RORI	ror_world	AREA	0	-5272.67	80.08	-2234.24	-94	1	an Imperial Major	12734	city	Narmle	1	STOP	idle	0	0	0	0	300	120	0
+2100207	RORI	ror_world	AREA	0	-5257.00	80.00	-2255.10	-90	1	an Imperial coordinator	10683	city	Narmle	1	STOP	idle	0	0	0	0	300	120	0
+2100208	RORI	ror_world	AREA	0	-5210.70	80.00	-2269.64	-101	1	a commoner	10733	city	Narmle	1	STOP	idle	0	0	0	0	300	120	0
+2100209	RORI	ror_world	AREA	0	-5120.56	80.00	-2443.12	33	1	a commoner	10733	city	Narmle	1	STOP	idle	0	0	0	0	300	120	0
+2100210	RORI	ror_world	AREA	0	-4975.00	79.89	-2227.00	19	1	Race Coordinator	10077	city	Narmle	1	STOP	idle	0	0	0	0	300	120	0
+2100211	RORI	ror_reb_outpost_medium_house	AREA	2	-9.07	0.63	3.68	92	1	General Ufwol (Rebel Pilot Trainer)	16532	city	Rebel Outpost	1	STOP	idle	0	0	0	0	300	120	0
+2100212	RORI	ror_reb_outpost_shed1	AREA	4	4.25	0.13	3.23	-10	1	Vordin Sildor	16674	city	Rebel Outpost	1	STOP	idle	0	0	0	0	300	120	0
+2100213	RORI	ror_reb_outpost_shed1	AREA	6	-4.05	0.13	-2.79	111	1	Raxa Binn	14977	city	Rebel Outpost	1	STOP	idle	0	0	0	0	300	120	0
+2100214	RORI	ror_reb_outpost_small_house	AREA	3	5.73	0.74	0.88	-120	1	Booto Lubble	10456	city	Rebel Outpost	1	STOP	idle	0	0	0	0	300	120	0
+2100215	RORI	ror_world	AREA	0	3664.73	96.00	-6427.16	-133	1	Staff Sergeant Levardio	14880	city	Rebel Outpost	1	STOP	idle	0	0	0	0	300	120	0
+2100216	RORI	ror_world	PATROL	0	3669.42	96.00	-6486.70	0	1	a Rebel commando	15003	city	Rebel Outpost	1	PATROL	idle	0	999	0	0	300	120	0
+2100217	RORI	ror_world	PATROL	0	3669.78	96.00	-6482.10	0	1	a Rebel commando	15003	city	Rebel Outpost	1	PATROL	idle	0	999	0	0	300	120	0
+2100218	RORI	ror_world	PATROL	0	3670.09	96.00	-6490.85	0	1	a Rebel commando	15003	city	Rebel Outpost	1	PATROL	idle	0	999	0	0	300	120	0
+2100219	RORI	ror_world	AREA	0	3656.45	96.00	-6461.18	71	1	a Rebel First Lieutenant	15042	city	Rebel Outpost	1	STOP	idle	0	0	0	0	300	120	0
+2100220	RORI	ror_world	PATROL	0	3660.27	96.00	-6485.89	0	1	a Rebel First Lieutenant	15042	city	Rebel Outpost	1	PATROL	idle	0	999	0	0	300	120	0
+2100221	RORI	ror_world	AREA	0	3656.53	96.00	-6460.00	63	1	a Rebel Major	15050	city	Rebel Outpost	1	STOP	idle	0	0	0	0	300	120	0
+2100222	RORI	ror_world	AREA	0	3684.72	96.00	-6460.77	-92	1	a Rebel recruiter	15056	city	Rebel Outpost	1	STOP	idle	0	0	0	0	300	120	0
+2100223	RORI	ror_world	PATROL	0	3664.60	96.00	-6484.45	0	1	a Rebel trooper	15081	city	Rebel Outpost	1	PATROL	idle	0	999	0	0	300	120	0
+2100224	RORI	ror_world	PATROL	0	3662.35	96.00	-6485.79	0	1	a Rebel trooper	15081	city	Rebel Outpost	1	PATROL	idle	0	999	0	0	300	120	0
+2100225	RORI	ror_world	PATROL	0	3682.44	96.00	-6462.79	0	1	a CLL-8 binary load lifter	10637	city	Rebel Outpost	1	PATROL	idle	0	999	0	0	300	120	0
+2100226	RORI	ror_world	PATROL	0	3659.08	96.00	-6410.46	0	1	an R5 unit	14941	city	Rebel Outpost	1	PATROL	idle	0	999	0	0	300	120	0
+2100227	RORI	ror_world	PATROL	0	3674.90	96.00	-6475.65	0	1	an R4 unit	14936	city	Rebel Outpost	1	PATROL	idle	0	999	0	0	300	120	0
+2100228	RORI	ror_restuss_starport	AREA	1	-6.10	80.00	-16.00	0	1	Kkrax	10642	city	Restuss	1	STOP	idle	0	0	0	0	300	120	0
+2100229	RORI	ror_narmle_warehouse_bunker	AREA	5	-5.00	-6.80	-5.80	0	1	a warehouse thug	10710	dungeon	Corellia Warehouse	1	STOP	idle	0	0	0	0	300	120	0
+2100230	RORI	ror_narmle_warehouse_bunker	AREA	5	-1.80	-6.80	-6.60	0	1	a warehouse thug	10710	dungeon	Corellia Warehouse	1	STOP	idle	0	0	0	0	300	120	0
+2100231	RORI	ror_narmle_warehouse_bunker	AREA	6	4.30	-6.80	-16.70	0	1	a warehouse thug	10710	dungeon	Corellia Warehouse	1	STOP	idle	0	0	0	0	300	120	0
+2100232	RORI	ror_narmle_warehouse_bunker	AREA	6	-0.20	-6.80	-13.60	0	1	a warehouse thug	10710	dungeon	Corellia Warehouse	1	STOP	idle	0	0	0	0	300	120	0
+2100233	RORI	ror_narmle_warehouse_bunker	AREA	7	7.40	-6.80	-1.40	0	1	a warehouse thug	10710	dungeon	Corellia Warehouse	1	STOP	idle	0	0	0	0	300	120	0
+2100234	RORI	ror_narmle_warehouse_bunker	AREA	7	3.60	-6.80	-1.80	0	1	a warehouse thug	10710	dungeon	Corellia Warehouse	1	STOP	idle	0	0	0	0	300	120	0
+2100235	RORI	ror_narmle_warehouse_bunker	AREA	9	0.50	-13.80	-8.80	0	1	a warehouse thug	10710	dungeon	Corellia Warehouse	1	STOP	idle	0	0	0	0	300	120	0
+2100236	RORI	ror_narmle_warehouse_bunker	AREA	9	-5.50	-13.80	-14.30	0	1	a warehouse thug	10710	dungeon	Corellia Warehouse	1	STOP	idle	0	0	0	0	300	120	0
+2100237	RORI	ror_narmle_warehouse_bunker	AREA	9	-3.70	-13.80	-1.50	0	1	a warehouse thug	10710	dungeon	Corellia Warehouse	1	STOP	idle	0	0	0	0	300	120	0
+2100238	RORI	ror_nyax_bunker	AREA	10	18.10	-13.80	-14.20	0	1	a Garyn Raider shooter	16509	dungeon	Nyax Bunker	1	STOP	idle	0	0	0	0	300	120	0
+2100239	RORI	ror_nyax_bunker	AREA	10	12.90	-13.80	-15.90	0	1	a Garyn Raider shooter	16509	dungeon	Nyax Bunker	1	STOP	idle	0	0	0	0	300	120	0
+2100240	RORI	ror_nyax_bunker	AREA	3	-4.70	0.30	-5.00	0	1	a Garyn Raider shiv	16508	dungeon	Nyax Bunker	1	STOP	idle	0	0	0	0	300	120	0
+2100241	RORI	ror_nyax_bunker	AREA	5	6.10	-6.80	-3.90	0	1	a Garyn Raider shooter	16509	dungeon	Nyax Bunker	1	STOP	idle	0	0	0	0	300	120	0
+2100242	RORI	ror_nyax_bunker	AREA	5	3.00	-6.80	-7.10	0	1	a Garyn Raider shiv	16508	dungeon	Nyax Bunker	1	STOP	idle	0	0	0	0	300	120	0
+2100243	RORI	ror_nyax_bunker	AREA	7	-5.70	-13.80	-0.10	0	1	a Garyn Raider shooter	16509	dungeon	Nyax Bunker	1	STOP	idle	0	0	0	0	300	120	0
+2100244	RORI	ror_nyax_bunker	AREA	7	-1.70	-13.80	-8.60	0	1	a Garyn Raider shooter	16509	dungeon	Nyax Bunker	1	STOP	idle	0	0	0	0	300	120	0
+2100245	RORI	ror_nyax_bunker	AREA	7	-1.30	-13.80	4.20	0	1	a Garyn Raider shiv	16508	dungeon	Nyax Bunker	1	STOP	idle	0	0	0	0	300	120	0
+2100246	RORI	ror_nyax_bunker	AREA	8	6.50	-13.80	12.10	0	1	a Garyn Raider shiv	16508	dungeon	Nyax Bunker	1	STOP	idle	0	0	0	0	300	120	0
+2100247	RORI	ror_nyax_bunker	AREA	8	0.40	-13.80	13.80	0	1	a Garyn Raider shiv	16508	dungeon	Nyax Bunker	1	STOP	idle	0	0	0	0	300	120	0
+2100248	RORI	ror_nyax_bunker	AREA	9	16.70	-13.80	8.10	0	1	a Garyn Raider shiv	16508	dungeon	Nyax Bunker	1	STOP	idle	0	0	0	0	300	120	0
+2100249	RORI	ror_nyax_bunker	AREA	9	16.10	-13.80	16.10	0	1	a Garyn Raider shooter	16509	dungeon	Nyax Bunker	1	STOP	idle	0	0	0	0	300	120	0
+2100250	RORI	ror_nyax_bunker	AREA	9	15.50	-13.80	2.90	0	1	a Garyn Raider shiv	16508	dungeon	Nyax Bunker	1	STOP	idle	0	0	0	0	300	120	0
+2100251	RORI	ror_world	AREA	0	-4651.67	180.81	-7533.80	0	1	a Garyn Raider shooter	16509	dungeon	Nyax Bunker	1	STOP	idle	0	0	0	0	300	120	0
+2100252	RORI	ror_world	AREA	0	-4648.48	180.57	-7536.98	0	1	a Garyn Raider shiv	16508	dungeon	Nyax Bunker	1	STOP	idle	0	0	0	0	300	120	0
+2100253	RORI	ror_world	AREA	0	-4632.70	182.33	-7495.49	0	1	a Garyn Raider shooter	16509	dungeon	Nyax Bunker	1	STOP	idle	0	0	0	0	300	120	0
+2100254	RORI	ror_world	AREA	0	-4616.50	180.46	-7554.64	0	1	a Garyn Raider shiv	16508	dungeon	Nyax Bunker	1	STOP	idle	0	0	0	0	300	120	2
+2100255	RORI	ror_large_naboo_house2	AREA	1	9.90	1.10	-10.20	0	1	a Rorgunagan Guard	15183	dungeon	Trapped Family House	1	STOP	idle	0	0	0	0	300	120	0
+2100256	RORI	ror_large_naboo_house2	AREA	2	5.20	4.10	6.90	0	1	a Rorgunagan Guard	15183	dungeon	Trapped Family House	1	STOP	idle	0	0	0	0	300	120	0
+2100257	RORI	ror_large_naboo_house2	AREA	2	-9.60	6.10	0.90	0	1	a Rorgunagan Guard	15183	dungeon	Trapped Family House	1	STOP	idle	0	0	0	0	300	120	0
+2100258	RORI	ror_large_naboo_house2	AREA	2	-5.70	1.10	0.90	0	1	a Rorgunagan Guard	15183	dungeon	Trapped Family House	1	STOP	idle	0	0	0	0	300	120	0
+2100259	RORI	ror_large_naboo_house2	AREA	2	-2.60	1.10	2.60	0	1	a Rorgunagan Guard	15183	dungeon	Trapped Family House	1	STOP	idle	0	0	0	0	300	120	0
+2100260	RORI	ror_large_naboo_house2	AREA	4	-9.00	1.10	-10.10	0	1	a Rorgungan Lieutenant	15184	dungeon	Trapped Family House	1	STOP	idle	0	0	0	0	300	120	0
+2100261	RORI	ror_large_naboo_house2	AREA	4	-3.50	1.10	-10.20	0	1	a Rorgungan Lieutenant	15184	dungeon	Trapped Family House	1	STOP	idle	0	0	0	0	300	120	0
+2100262	RORI	ror_large_naboo_house2	AREA	5	-2.90	6.10	-8.90	0	1	a Rorgungan Lieutenant	15184	dungeon	Trapped Family House	1	STOP	idle	0	0	0	0	300	120	0
+2100263	RORI	ror_large_naboo_house2	AREA	5	-10.50	6.10	-4.10	0	1	a Rorgungan Lieutenant	15184	dungeon	Trapped Family House	1	STOP	idle	0	0	0	0	300	120	0
+2100264	RORI	ror_large_naboo_house2	AREA	7	9.90	6.10	-10.40	0	1	a Rorgungan Lieutenant	15184	dungeon	Trapped Family House	1	STOP	idle	0	0	0	0	300	120	0
+2100265	RORI	ror_world	AREA	0	7056.51	96.55	-5277.03	0	1	Captain Meh'ur	10572	dungeon	Trapped Family House	1	STOP	idle	0	0	0	0	300	120	0
+2100266	RORI	ror_world	AREA	0	7068.28	83.16	-5266.90	0	1	a Rorgunagan Guard	15183	dungeon	Trapped Family House	1	STOP	idle	0	0	0	0	300	120	0
+2100267	RORI	ror_world	AREA	0	7055.09	90.95	-5275.98	0	1	a Rorgunagan Guard	15183	dungeon	Trapped Family House	1	STOP	idle	0	0	0	0	300	120	0
+2100268	RORI	ror_world	AREA	0	7046.37	79.60	-5257.21	0	1	a Rorgungan scout	15185	dungeon	Trapped Family House	1	STOP	idle	0	0	0	0	300	120	2
+2100269	RORI	ror_world	AREA	0	7031.27	80.30	-5316.32	0	1	a Rorgungan scout	15185	dungeon	Trapped Family House	1	STOP	idle	0	0	0	0	300	120	2
+2100270	RORI	ror_world	AREA	0	7020.89	90.53	-5278.65	0	1	a Rorgungan scout	15185	dungeon	Trapped Family House	1	STOP	idle	0	0	0	0	300	120	2
+2100271	RORI	ror_imp_weapons_research_facility	PATROL	10	36.10	-12.00	34.40	0	1	a Meatlump pronk	14075	dungeon	Weapon Research Facility	1	PATROL	idle	0	999	0	0	300	120	0
+2100272	RORI	ror_imp_weapons_research_facility	PATROL	10	35.50	-12.00	77.80	0	1	a Meatlump pronk	14075	dungeon	Weapon Research Facility	1	PATROL	idle	0	999	0	0	300	120	0
+2100273	RORI	ror_imp_weapons_research_facility	AREA	13	34.90	-20.00	140.80	0	1	Stephax Dain (a Meatlump lieutenant)	14072	dungeon	Weapon Research Facility	1	STOP	idle	0	0	0	0	300	120	0
+2100274	RORI	ror_imp_weapons_research_facility	AREA	13	37.10	-20.00	127.10	0	1	a Meatlump pronk	14075	dungeon	Weapon Research Facility	1	STOP	idle	0	0	0	0	300	120	2
+2100275	RORI	ror_imp_weapons_research_facility	AREA	13	30.30	-20.00	129.80	0	1	a Meatlump pronk	14075	dungeon	Weapon Research Facility	1	STOP	idle	0	0	0	0	300	120	2
+2100276	RORI	ror_imp_weapons_research_facility	AREA	13	28.90	-20.00	119.00	0	1	a Meatlump pronk	14075	dungeon	Weapon Research Facility	1	STOP	idle	0	0	0	0	300	120	2
+2100277	RORI	ror_imp_weapons_research_facility	AREA	14	35.10	-12.00	19.90	0	1	a Meatlump pronk	14075	dungeon	Weapon Research Facility	1	STOP	idle	0	0	0	0	300	120	2
+2100278	RORI	ror_imp_weapons_research_facility	AREA	14	32.70	-12.00	2.80	0	1	a Meatlump pronk	14075	dungeon	Weapon Research Facility	1	STOP	idle	0	0	0	0	300	120	2
+2100279	RORI	ror_imp_weapons_research_facility	AREA	14	25.50	-12.00	21.10	0	1	a Meatlump pronk	14075	dungeon	Weapon Research Facility	1	STOP	idle	0	0	0	0	300	120	2
+2100280	RORI	ror_imp_weapons_research_facility	AREA	14	23.80	-12.00	2.10	0	1	a Meatlump pronk	14075	dungeon	Weapon Research Facility	1	STOP	idle	0	0	0	0	300	120	2
+2100281	RORI	ror_imp_weapons_research_facility	AREA	16	-20.60	-20.00	3.00	0	1	a Meatlump pronk	14075	dungeon	Weapon Research Facility	1	STOP	idle	0	0	0	0	300	120	2
+2100282	RORI	ror_imp_weapons_research_facility	AREA	16	-13.20	-20.00	2.90	0	1	a Meatlump pronk	14075	dungeon	Weapon Research Facility	1	STOP	idle	0	0	0	0	300	120	2
+2100283	RORI	ror_imp_weapons_research_facility	PATROL	17	-30.60	-20.00	8.10	0	1	a Meatlump pronk	14075	dungeon	Weapon Research Facility	1	PATROL	idle	0	999	0	0	300	120	0
+2100284	RORI	ror_imp_weapons_research_facility	PATROL	18	-30.50	-20.00	17.10	0	1	a Meatlump pronk	14075	dungeon	Weapon Research Facility	1	PATROL	idle	0	999	0	0	300	120	0
+2100285	RORI	ror_imp_weapons_research_facility	PATROL	18	-30.40	-20.00	83.80	0	1	a Meatlump pronk	14075	dungeon	Weapon Research Facility	1	PATROL	idle	0	999	0	0	300	120	0
+2100286	RORI	ror_imp_weapons_research_facility	AREA	19	-33.80	-20.00	100.90	0	1	a Meatlump pronk	14075	dungeon	Weapon Research Facility	1	STOP	idle	0	0	0	0	300	120	2
+2100287	RORI	ror_imp_weapons_research_facility	AREA	19	-14.00	-20.00	101.50	0	1	a Meatlump pronk	14075	dungeon	Weapon Research Facility	1	STOP	idle	0	0	0	0	300	120	2
+2100288	RORI	ror_imp_weapons_research_facility	PATROL	20	-14.80	-20.00	84.70	0	1	a Meatlump pronk	14075	dungeon	Weapon Research Facility	1	PATROL	idle	0	999	0	0	300	120	0
+2100289	RORI	ror_imp_weapons_research_facility	AREA	21	-7.90	-20.00	74.70	0	1	a Meatlump pronk	14075	dungeon	Weapon Research Facility	1	STOP	idle	0	0	0	0	300	120	2
+2100290	RORI	ror_imp_weapons_research_facility	AREA	21	-1.20	-20.00	67.50	0	1	a Meatlump pronk	14075	dungeon	Weapon Research Facility	1	STOP	idle	0	0	0	0	300	120	2
+2100291	RORI	ror_imp_weapons_research_facility	PATROL	22	29.50	-12.00	70.70	0	1	a Meatlump pronk	14075	dungeon	Weapon Research Facility	1	PATROL	idle	0	999	0	0	300	120	0
+2100292	RORI	ror_imp_weapons_research_facility	AREA	5	3.80	-12.00	35.40	0	1	a Meatlump pronk	14075	dungeon	Weapon Research Facility	1	STOP	idle	0	0	0	0	300	120	2
+2100293	RORI	ror_imp_weapons_research_facility	AREA	5	2.00	-12.00	59.20	0	1	a Meatlump pronk	14075	dungeon	Weapon Research Facility	1	STOP	idle	0	0	0	0	300	120	2
+2100294	RORI	ror_imp_weapons_research_facility	AREA	5	19.20	-12.00	46.60	0	1	a Meatlump pronk	14075	dungeon	Weapon Research Facility	1	STOP	idle	0	0	0	0	300	120	2
+2100295	RORI	ror_imp_weapons_research_facility	AREA	5	-11.50	-12.00	46.40	0	1	a Meatlump pronk	14075	dungeon	Weapon Research Facility	1	STOP	idle	0	0	0	0	300	120	2
+2100296	RORI	ror_imp_weapons_research_facility	AREA	7	-70.20	-20.00	30.00	0	1	a Meatlump pronk	14075	dungeon	Weapon Research Facility	1	STOP	idle	0	0	0	0	300	120	2
+2100297	RORI	ror_imp_weapons_research_facility	AREA	7	-66.40	-20.00	61.30	0	1	a Meatlump pronk	14075	dungeon	Weapon Research Facility	1	STOP	idle	0	0	0	0	300	120	2
+2100298	RORI	ror_imp_weapons_research_facility	AREA	7	-57.80	-20.00	48.10	0	1	a Meatlump pronk	14075	dungeon	Weapon Research Facility	1	STOP	idle	0	0	0	0	300	120	2
+2100299	RORI	ror_imp_weapons_research_facility	AREA	8	-71.40	-20.00	12.80	0	1	a Meatlump pronk	14075	dungeon	Weapon Research Facility	1	STOP	idle	0	0	0	0	300	120	2
+2100300	RORI	ror_imp_weapons_research_facility	AREA	8	-63.00	-20.00	17.20	0	1	a Meatlump pronk	14075	dungeon	Weapon Research Facility	1	STOP	idle	0	0	0	0	300	120	2
+2100301	RORI	ror_world	AREA	0	6797.90	77.10	3043.70	0	1	Enraged Miner	11403	outback	Archstream	4	STOP	idle	0	0	0	0	900	600	8
+2100302	RORI	ror_world	AREA	0	6797.90	77.10	3043.70	0	1	Garyn's prowler	12127	outback	Archstream	2	STOP	idle	0	0	0	0	900	600	4
+2100303	RORI	ror_world	AREA	0	6797.90	77.10	3043.70	0	1	Garyn's thief	12129	outback	Archstream	3	STOP	idle	0	0	0	0	900	600	6
+2100304	RORI	ror_world	AREA	0	-2643.00	81.00	-3208.00	0	1	Garyn's prowler	12127	outback	Camp	3	STOP	idle	0	0	0	0	300	120	6
+2100305	RORI	ror_world	AREA	0	-2643.00	81.00	-3208.00	0	1	Garyn's thief	12129	outback	Camp	1	STOP	idle	0	0	0	0	300	120	2
+2100306	RORI	ror_world	AREA	0	-5.00	77.00	1992.00	0	1	a Rebel scout	12822	outback	Crash Site	15	STOP	idle	0	0	0	0	300	200	30
+2100307	RORI	ror_world	AREA	0	1928.60	80.90	1763.10	0	1	Enraged Miner	11403	outback	Ruins	2	STOP	idle	0	0	0	0	900	600	4
+2100308	RORI	ror_world	AREA	0	-768.90	81.20	-4106.60	0	1	Enraged Miner	11403	outback	Ruins	3	STOP	idle	0	0	0	0	900	600	6
+2100309	RORI	ror_world	AREA	0	1928.60	80.90	1763.10	0	1	Garyn's raider	12128	outback	Ruins	4	STOP	idle	0	0	0	0	900	600	8
+2100310	RORI	ror_world	AREA	0	1928.60	80.90	1763.10	0	1	Garyn's vigo	12130	outback	Ruins	1	STOP	idle	0	0	0	0	900	600	2

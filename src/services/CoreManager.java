@@ -31,23 +31,22 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.nio.charset.StandardCharsets;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import network.packets.Packet;
-import network.packets.soe.DataChannelA;
-import network.packets.soe.MultiPacket;
-import network.packets.swg.SWGPacket;
 import network.packets.swg.zone.baselines.Baseline;
+import network.packets.swg.zone.deltas.DeltasMessage;
 import network.packets.swg.zone.object_controller.ObjectController;
 import intents.network.InboundPacketIntent;
 import intents.network.OutboundPacketIntent;
 import intents.server.ServerManagementIntent;
 import intents.server.ServerStatusIntent;
+import java.time.OffsetTime;
 import resources.Galaxy;
 import resources.Galaxy.GalaxyStatus;
 import resources.config.ConfigFile;
@@ -55,33 +54,49 @@ import resources.control.Intent;
 import resources.control.Manager;
 import resources.control.ServerStatus;
 import resources.server_info.Config;
+import resources.server_info.Log;
+import resources.server_info.Log.LogLevel;
+import services.admin.OnlineInterfaceService;
 import services.galaxy.GalacticManager;
+import utilities.CrcDatabaseGenerator;
 import utilities.ThreadUtilities;
 
 public class CoreManager extends Manager {
-	
-	private static final int galaxyId = 1;
+
+	private static final DateFormat LOG_FORMAT = new SimpleDateFormat("dd-MM-yy HH:mm:ss.SSS");
+	private static final Galaxy GALAXY = new Galaxy();
+	private static final int GALAXY_ID = 1;
 	
 	private final ScheduledExecutorService shutdownService;
-	private EngineManager engineManager;
-	private GalacticManager galacticManager;
-	private PrintStream packetOutput;
-	private Galaxy galaxy;
+	private final OnlineInterfaceService onlineInterfaceService;
+	private final EngineManager engineManager;
+	private final GalacticManager galacticManager;
+	private final PrintStream packetStream;
+	private final boolean packetDebug;
+	
 	private long startTime;
 	private boolean shutdownRequested;
-	private boolean packetDebug;
 	
 	public CoreManager() {
+		Config c = getConfig(ConfigFile.PRIMARY);
+		Log.setLogLevel(LogLevel.valueOf(c.getString("LOG-LEVEL", LogLevel.DEBUG.name())));
+		setupGalaxy(c);
+		setupCrcDatabase();
+		packetStream = setupPrintStream(c);
+		packetDebug = packetStream != null;
 		shutdownService = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("core-shutdown-service"));
 		shutdownRequested = false;
-		galaxy = getGalaxy();
-		if (galaxy != null) {
-			engineManager = new EngineManager(galaxy);
-			galacticManager = new GalacticManager(galaxy);
-			
-			addChildService(engineManager);
-			addChildService(galacticManager);
-		}
+		onlineInterfaceService = new OnlineInterfaceService();
+		engineManager = new EngineManager();
+		galacticManager = new GalacticManager();
+		
+		addChildService(onlineInterfaceService);
+		addChildService(engineManager);
+		addChildService(galacticManager);
+		
+		registerForIntent(InboundPacketIntent.TYPE);
+		registerForIntent(OutboundPacketIntent.TYPE);
+		registerForIntent(ServerManagementIntent.TYPE);
 	}
 	
 	/**
@@ -99,17 +114,19 @@ public class CoreManager extends Manager {
 	@Override
 	public boolean initialize() {
 		startTime = System.nanoTime();
-		registerForIntent(InboundPacketIntent.TYPE);
-		registerForIntent(OutboundPacketIntent.TYPE);
-		registerForIntent(ServerManagementIntent.TYPE);
-		packetDebug = getConfig(ConfigFile.PRIMARY).getBoolean("PACKET-DEBUG", false);
-		initializePacketOutput();
-		return galaxy != null && super.initialize();
+		GALAXY.setStatus(GalaxyStatus.LOADING);
+		return super.initialize();
+	}
+	
+	@Override
+	public boolean start() {
+		GALAXY.setStatus(GalaxyStatus.UP);
+		return super.start();
 	}
 	
 	@Override
 	public boolean stop() {
-		galaxy.setStatus(GalaxyStatus.LOCKED);
+		GALAXY.setStatus(GalaxyStatus.LOCKED);
 		return super.stop();
 	}
 	
@@ -121,27 +138,17 @@ public class CoreManager extends Manager {
 	
 	@Override
 	public void onIntentReceived(Intent i) {
-		if (packetDebug) {
-			if (i instanceof InboundPacketIntent) {
-				InboundPacketIntent in = (InboundPacketIntent) i;
-				packetOutput.println("IN  " + in.getNetworkId() + ":" + in.getServerType());
-				outputPacket(1, in.getPacket());
-			} else if (i instanceof OutboundPacketIntent) {
-				OutboundPacketIntent out = (OutboundPacketIntent) i;
-				packetOutput.println("OUT " + out.getNetworkId());
-				outputPacket(1, out.getPacket());
-			}
-		}
-		if (i instanceof ServerManagementIntent)
-			handleServerManagementIntent((ServerManagementIntent) i);
-	}
-	
-	private void initializePacketOutput() {
-		try {
-			packetOutput = new PrintStream(new FileOutputStream("packets.txt", false), true, "UTF-8");
-		} catch (FileNotFoundException | UnsupportedEncodingException e) {
-			e.printStackTrace();
-			packetOutput = System.out;
+		switch (i.getType()) {
+			case ServerManagementIntent.TYPE:
+				if (i instanceof ServerManagementIntent)
+					handleServerManagementIntent((ServerManagementIntent) i);
+				break;
+			case InboundPacketIntent.TYPE:
+				handleInboundPacketIntent((InboundPacketIntent) i);
+				break;
+			case OutboundPacketIntent.TYPE:
+				handleOutboundPacketIntent((OutboundPacketIntent) i);
+				break;
 		}
 	}
 	
@@ -152,8 +159,50 @@ public class CoreManager extends Manager {
 		}
 	}
 	
+	private void handleInboundPacketIntent(InboundPacketIntent i) {
+		if (!packetDebug)
+			return;
+		printPacketStream(true, i.getNetworkId(), createExtendedPacketInformation(i.getPacket()));
+	}
+	
+	private void handleOutboundPacketIntent(OutboundPacketIntent i) {
+		if (!packetDebug)
+			return;
+		printPacketStream(false, i.getNetworkId(), createExtendedPacketInformation(i.getPacket()));
+	}
+	
+	private void printPacketStream(boolean in, long networkId, String str) {
+		String date;
+		synchronized (LOG_FORMAT) {
+			date = LOG_FORMAT.format(System.currentTimeMillis());
+		}
+		packetStream.printf("%s %s %d:\t%s%n", date, in?"IN ":"OUT", networkId, str);
+	}
+	
+	private String createExtendedPacketInformation(Packet p) {
+		if (p instanceof Baseline)
+			return createBaselineInformation((Baseline) p);
+		if (p instanceof DeltasMessage)
+			return createDeltaInformation((DeltasMessage) p);
+		if (p instanceof ObjectController)
+			return createControllerInformation((ObjectController) p);
+		return p.getClass().getSimpleName();
+	}
+	
+	private String createBaselineInformation(Baseline b) {
+		return "Baseline:"+b.getType()+b.getNum()+"  ID="+b.getObjectId();
+	}
+	
+	private String createDeltaInformation(DeltasMessage d) {
+		return "Delta:"+d.getType()+d.getNum()+"  Var="+d.getUpdate()+"  ID="+d.getObjectId();
+	}
+	
+	private String createControllerInformation(ObjectController c) {
+		return "ObjectController:0x"+Integer.toHexString(c.getControllerCrc())+"  ID="+c.getObjectId();
+	}
+	
 	private void initiateShutdownSequence(ServerManagementIntent i) {
-		System.out.println("Beginning server shutdown sequence...");
+		Log.i(this, "Beginning server shutdown sequence...");
 		long time = i.getTime();
 		TimeUnit timeUnit = i.getTimeUnit();
 		
@@ -172,53 +221,7 @@ public class CoreManager extends Manager {
 	}
 	
 	public GalaxyStatus getGalaxyStatus() {
-		return galaxy.getStatus();
-	}
-	
-	private void outputPacket(int indent, Packet packet) {
-		if (packet instanceof DataChannelA) {
-			for (SWGPacket p : ((DataChannelA) packet).getPackets()) {
-				for (int i = 0; i < indent; i++)
-					packetOutput.print("    ");
-				outputSWG(p);
-			}
-		} else if (packet instanceof MultiPacket) {
-			for (Packet p : ((MultiPacket) packet).getPackets()) {
-				for (int i = 0; i < indent; i++)
-					packetOutput.print("    ");
-				if (p instanceof SWGPacket)
-					outputSWG((SWGPacket) p);
-				if (p instanceof DataChannelA)
-					outputPacket(indent+1, p);
-			}
-		} else if (packet instanceof SWGPacket) {
-			for (int i = 0; i < indent; i++)
-				packetOutput.print("    ");
-			outputSWG((SWGPacket) packet);
-		} else {
-			for (int i = 0; i < indent; i++)
-				packetOutput.print("    ");
-			packetOutput.println(packet.getClass().getSimpleName());
-		}
-	}
-	
-	private void outputSWG(SWGPacket p) {
-		if (p instanceof Baseline)
-			outputBaseline((Baseline) p);
-		else if (p instanceof ObjectController)
-			outputObjectController((ObjectController) p);
-		else
-			packetOutput.println(p.getClass().getSimpleName());
-	}
-	
-	private void outputBaseline(Baseline b) {
-		packetOutput.println("Baseline [" + b.getId() + "] " + b.getType() + " " + b.getNum());
-	}
-	
-	private void outputObjectController(ObjectController cont) {
-		int crc = cont.getControllerCrc();
-		long id = cont.getObjectId();
-		packetOutput.println("ObjectController [" + id + "] 0x" + Integer.toHexString(crc));
+		return GALAXY.getStatus();
 	}
 	
 	/**
@@ -229,47 +232,44 @@ public class CoreManager extends Manager {
 		return (System.nanoTime()-startTime)/1E6;
 	}
 	
-	private Galaxy getGalaxy() {
-		PreparedStatement getGalaxy = getLocalDatabase().prepareStatement("SELECT * FROM galaxies WHERE id = ?");
-		Config c = getConfig(ConfigFile.PRIMARY);
-		ResultSet set = null;
-		try {
-			getGalaxy.setInt(1, galaxyId);
-			set = getGalaxy.executeQuery();
-			if (!set.next()) {
-				System.err.println("CoreManager: No such galaxy exists with ID " + galaxyId + "!");
-				return null;
-			}
-			Galaxy g = new Galaxy();
-			g.setId(set.getInt("id"));
-			g.setName(set.getString("name"));
-			g.setAddress(set.getString("address"));
-			g.setPopulation(set.getInt("population"));
-			g.setTimeZone(set.getInt("timezone"));
-			g.setZonePort(set.getInt("zone_port"));
-			g.setPingPort(set.getInt("ping_port"));
-			g.setStatus(set.getInt("status"));
-			g.setMaxCharacters(c.getInt("GALAXY-MAX-CHARACTERS", 2));
-			g.setOnlinePlayerLimit(c.getInt("GALAXY-MAX-ONLINE", 3000));
-			g.setOnlineFreeTrialLimit(c.getInt("GALAXY-MAX-ONLINE", 3000));
-			g.setRecommended(true);
-			return g;
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if (set != null) {
-				try {
-					set.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
+	private PrintStream setupPrintStream(Config c) {
+		if (c.getBoolean("PACKET-DEBUG", false)) {
+			try {
+				return new PrintStream(new FileOutputStream("packets.txt", false), true, StandardCharsets.US_ASCII.name());
+			} catch (UnsupportedEncodingException | FileNotFoundException e) {
+				e.printStackTrace();
+				Log.e(this, e);
 			}
 		}
 		return null;
 	}
 	
-	public static final int getGalaxyId() {
-		return galaxyId;
+	private void setupCrcDatabase() {
+		Log.i(this, "Generating CRCs...");
+		CrcDatabaseGenerator.generate(false);
+	}
+	
+	public static Galaxy getGalaxy() {
+		return GALAXY;
+	}
+	
+	public static int getGalaxyId() {
+		return GALAXY_ID;
+	}
+	
+	private static void setupGalaxy(Config c) {
+		GALAXY.setId(GALAXY_ID);
+		GALAXY.setName(c.getString("GALAXY-NAME", "Holocore"));
+		GALAXY.setAddress("");
+		GALAXY.setPopulation(0);
+		GALAXY.setZoneOffset(OffsetTime.now().getOffset());
+		GALAXY.setZonePort(0);
+		GALAXY.setPingPort(0);
+		GALAXY.setStatus(GalaxyStatus.DOWN);
+		GALAXY.setMaxCharacters(c.getInt("GALAXY-MAX-CHARACTERS", 2));
+		GALAXY.setOnlinePlayerLimit(c.getInt("GALAXY-MAX-ONLINE", 3000));
+		GALAXY.setOnlineFreeTrialLimit(c.getInt("GALAXY-MAX-ONLINE", 3000));
+		GALAXY.setRecommended(true);
 	}
 	
 }

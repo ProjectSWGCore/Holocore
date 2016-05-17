@@ -38,15 +38,17 @@ public class SceneCreateObjectByCrc extends SWGPacket {
 	private long objId = 0;
 	private Location l = new Location();
 	private int objCrc = 0;
+	private boolean hyperspace;
 	
 	public SceneCreateObjectByCrc() {
 		
 	}
 	
-	public SceneCreateObjectByCrc(long objId, Location l, int objCrc) {
+	public SceneCreateObjectByCrc(long objId, Location l, int objCrc, boolean hyperspace) {
 		this.objId = objId;
 		this.l = l;
 		this.objCrc = objCrc;
+		this.hyperspace = hyperspace;
 	}
 	
 	public void decode(ByteBuffer data) {
@@ -55,7 +57,7 @@ public class SceneCreateObjectByCrc extends SWGPacket {
 		objId = getLong(data);
 		l = getEncodable(data, Location.class);
 		objCrc = getInt(data);
-		getByte(data); // Unknown Byte
+		hyperspace = getBoolean(data);
 	}
 	
 	public ByteBuffer encode() {
@@ -65,15 +67,17 @@ public class SceneCreateObjectByCrc extends SWGPacket {
 		addLong( data, objId);
 		addEncodable(data, l);
 		addInt(  data, objCrc);
-		addByte( data, 0); // Unknown Byte
+		addBoolean(data, hyperspace);
 		return data;
 	}
 	
 	public void setObjectId(long objId) { this.objId = objId; }
 	public void setLocation(Location l) { this.l = l; }
 	public void setObjectCrc(int objCrc) { this.objCrc = objCrc; }
+	public void setHyperspace(boolean hyperspace) { this.hyperspace = hyperspace; }
 	
 	public long getObjectId() { return objId; }
 	public Location getLocation() { return l; }
 	public int getObjectCrc() { return objCrc; }
+	public boolean isHyperspace() { return hyperspace; }
 }

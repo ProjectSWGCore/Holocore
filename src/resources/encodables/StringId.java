@@ -32,6 +32,8 @@ import network.packets.Packet;
 import java.io.Serializable;
 import java.nio.ByteBuffer;
 
+import resources.server_info.Log;
+
 public class StringId implements OutOfBandData, Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -47,7 +49,7 @@ public class StringId implements OutOfBandData, Serializable {
 	
 	public StringId(String stf) {
 		if (!stf.contains(":")) {
-			System.err.println("Stf: Invalid stf format! Expected a semi-colon for " + stf);
+			Log.e("Stf", "Invalid stf format! Expected a semi-colon for " + stf);
 			return;
 		}
 		

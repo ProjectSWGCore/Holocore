@@ -31,6 +31,8 @@ import java.lang.ref.SoftReference;
 import java.util.HashMap;
 import java.util.Map;
 
+import resources.client_info.visitors.AppearanceTemplateData;
+import resources.client_info.visitors.AppearanceTemplateListData;
 import resources.client_info.visitors.CrcStringTableData;
 import resources.client_info.visitors.DatatableData;
 import resources.client_info.visitors.ObjectData;
@@ -40,9 +42,11 @@ import resources.client_info.visitors.SlotArrangementData;
 import resources.client_info.visitors.SlotDefinitionData;
 import resources.client_info.visitors.SlotDescriptorData;
 import resources.client_info.visitors.WorldSnapshotData;
+import resources.server_info.Log;
 
 public class ClientFactory extends DataFactory {
-	private static ClientFactory instance;
+	
+	private static final ClientFactory INSTANCE = new ClientFactory();
 
 	private Map <String, SoftReference<ClientData>> dataMap = new HashMap<>();
 	private Map <String, String> typeMap = new HashMap<>();
@@ -81,24 +85,24 @@ public class ClientFactory extends DataFactory {
 	public synchronized static ClientData getInfoFromFile(String file, boolean save) {
 		ClientFactory factory = ClientFactory.getInstance();
 		SoftReference<ClientData> reference = factory.dataMap.get(file);
+		ClientData data = null;
+		if (reference != null)
+			data = reference.get();
 		
-		if (reference == null) {
-			ClientData data = factory.readFile(file);
+		if (data == null) {
+			data = factory.readFile(file);
 			if (data == null) {
 				return null;
 			}
-
+			reference = new SoftReference<ClientData>(data);
+			
 			// Soft used over Weak because Weak cleared as soon as the reference was not longer needed, Soft will be cleared when memory is needed by the JVM.
 			if (save) {
-				reference = new SoftReference<>(data);
-				if (reference.get() != null)
-					factory.dataMap.put(file, reference);
-			} else {
-				return data;
+				factory.dataMap.put(file, reference);
 			}
 		}
 		
-		return reference.get();
+		return data;
 	}
 
 	/**
@@ -119,7 +123,7 @@ public class ClientFactory extends DataFactory {
 		if (original.contains("shared_"))
 			return original;
 		
-		int index = original.lastIndexOf("/");
+		int index = original.lastIndexOf('/');
 		return original.substring(0, index) + "/shared_" + original.substring(index+1);
 	}
 
@@ -131,11 +135,13 @@ public class ClientFactory extends DataFactory {
 	protected ClientData createDataObject(String type) {
 		String c = typeMap.get(type);
 		if (c == null) {
-			System.err.println("Don't know what class to use for " + type);
+			Log.e("ClientFactory", "Don't know what class to use for " + type);
 			return null;
 		}
 		
 		switch (c) {
+			case "AppearanceTemplateData": return new AppearanceTemplateData();
+			case "AppearanceTemplateListData": return new AppearanceTemplateListData();
 			case "CrcStringTableData": return new CrcStringTableData();
 			case "DatatableData": return new DatatableData();
 			case "ObjectData": return new ObjectData();
@@ -145,12 +151,17 @@ public class ClientFactory extends DataFactory {
 			case "SlotArrangementData": return new SlotArrangementData();
 			case "WorldSnapshotData": return new WorldSnapshotData();
 			case "PortalLayoutData": return new PortalLayoutData();
-			default: return null;
+			default: Log.e("ClientFactory", "Unimplemented typeMap value: " + c); return null;
 		}
 	}
 
 	// The typeMap is used for determining what DataObject class
 	private void populateTypeMap() {
+		typeMap.put("APT ", "AppearanceTemplateListData");
+		typeMap.put("DTLA", "AppearanceTemplateData");
+		typeMap.put("MESH", "AppearanceTemplateData");
+		typeMap.put("PEFT", "AppearanceTemplateData");
+		typeMap.put("CMPA", "AppearanceTemplateData");
 		typeMap.put("ARGD", "SlotArrangementData");
 		typeMap.put("0006", "SlotDefinitionData");
 		typeMap.put("CSTB", "CrcStringTableData");
@@ -195,8 +206,6 @@ public class ClientFactory extends DataFactory {
 	}
 
 	private static ClientFactory getInstance() {
-		if (instance == null)
-			instance = new ClientFactory();
-		return instance;
+		return INSTANCE;
 	}
 }

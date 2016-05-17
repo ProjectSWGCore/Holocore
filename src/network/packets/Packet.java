@@ -29,6 +29,7 @@ package network.packets;
 
 import resources.common.CRC;
 import resources.encodables.Encodable;
+import resources.server_info.Log;
 import utilities.Encoder;
 
 import java.net.InetAddress;
@@ -107,7 +108,7 @@ public class Packet {
 				break;
 			case UNICODE: for (String s : list) { addUnicode(bb, s); }
 				break;
-			default: System.err.println("Cannot encode StringType " + type);
+			default: Log.e("Packet", "Cannot encode StringType " + type);
 				break;
 		}
 	}
@@ -162,6 +163,12 @@ public class Packet {
 
 	public static void addData(ByteBuffer bb, byte[] data) {
 		bb.put(data);
+	}
+	
+	public static void addArray(ByteBuffer bb, byte[] data) {
+		bb.order(ByteOrder.LITTLE_ENDIAN);
+		addShort(bb, data.length);
+		addData(bb, data);
 	}
 
 	public static void addArrayList(ByteBuffer bb, byte[] b) {
@@ -244,7 +251,31 @@ public class Packet {
 		bb.get(data);
 		return data;
 	}
-
+	
+	public static int [] getIntArray(ByteBuffer bb) {
+		bb.order(ByteOrder.LITTLE_ENDIAN);
+		int [] ints = new int[bb.getInt()];
+		for (int i = 0; i < ints.length; i++)
+			ints[i] = bb.getInt();
+		return ints;
+	}
+	
+	public static int [] getIntArray(ByteBuffer bb, int size) {
+		bb.order(ByteOrder.LITTLE_ENDIAN);
+		int [] ints = new int[size];
+		for (int i = 0; i < ints.length; i++)
+			ints[i] = bb.getInt();
+		return ints;
+	}
+	
+	public static boolean[] getBooleanArray(ByteBuffer bb) {
+		bb.order(ByteOrder.LITTLE_ENDIAN);
+		boolean[] booleans = new boolean[bb.getInt()];
+		for(int i = 0; i < booleans.length; i++)
+			booleans[i] = getBoolean(bb);
+		return booleans;
+	}
+	
 	/**
 	 * Decodes the ByteBuffer stream into the passed List using the given listType instance for creating elements
 	 * for the list from the buffer.
@@ -257,7 +288,7 @@ public class Packet {
 		int size = getInt(bb);
 
 		if (size < 0) {
-			System.err.println("Read list with size less than zero!");
+			Log.e("Packet", "Read list with size less than zero!");
 			return null;
 		} else if (size == 0) {
 			return new ArrayList<>();
@@ -276,7 +307,7 @@ public class Packet {
 		}
 
 		if (size != list.size())
-			System.err.println("Expected list size " + size + " but only have " + list.size() + " elements in the list");
+			Log.e("Packet", "Expected list size %d but only have %d elements in the list", size, list.size());
 		return list;
 	}
 
@@ -296,7 +327,7 @@ public class Packet {
 		int size = getInt(bb);
 
 		if (size < 0) {
-			System.err.println("Read list with size less than zero!");
+			Log.e("Packet", "Read list with size less than zero!");
 			return null;
 		} else if (size == 0) {
 			return new ArrayList<>();
@@ -309,7 +340,7 @@ public class Packet {
 				break;
 			case UNICODE: for (int i = 0; i < size; i++) { list.add(getUnicode(bb)); }
 				break;
-			default: System.err.println("Do not know how to read list of StringType " + type);
+			default: Log.e("Packet", "Do not know how to read list of StringType " + type);
 				break;
 		}
 
@@ -317,10 +348,8 @@ public class Packet {
 	}
 
 	public void decode(ByteBuffer data) {
-		data.position(0);
 		this.data = data;
 		opcode = getNetShort(data);
-		data.position(0);
 	}
 	
 	public ByteBuffer getData() {
@@ -329,6 +358,10 @@ public class Packet {
 	
 	public ByteBuffer encode() {
 		return data;
+	}
+	
+	public String toString() {
+		return getClass().getSimpleName();
 	}
 	
 }

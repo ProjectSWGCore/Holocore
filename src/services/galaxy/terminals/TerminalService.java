@@ -1,29 +1,32 @@
 package services.galaxy.terminals;
 
+import intents.radial.ObjectClickedIntent;
 import intents.radial.RadialRegisterIntent;
 import intents.radial.RadialRequestIntent;
 import intents.radial.RadialResponseIntent;
 import intents.radial.RadialSelectionIntent;
 
-import java.io.FileNotFoundException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import resources.control.Intent;
 import resources.control.Service;
+import resources.radial.RadialItem;
 import resources.radial.RadialOption;
 import resources.radial.Radials;
 import resources.server_info.Log;
 import resources.server_info.RelationalServerData;
+import resources.server_info.RelationalServerFactory;
 
 public class TerminalService extends Service {
 	
-	private static final String GET_ALL_TEMPLATES_SQL = "SELECT iff FROM iff_to_script";
-	private static final String GET_SCRIPT_FOR_IFF_SQL = "SELECT script FROM iff_to_script WHERE iff = ?";
+	private static final String GET_ALL_TEMPLATES_SQL = "SELECT iff FROM radials";
+	private static final String GET_SCRIPT_FOR_IFF_SQL = "SELECT script FROM radials WHERE iff = ?";
 	
 	private final Set<String> templates;
 	private final RelationalServerData iffDatabase;
@@ -32,21 +35,20 @@ public class TerminalService extends Service {
 	
 	public TerminalService() {
 		templates = new HashSet<>();
-		iffDatabase = new RelationalServerData("serverdata/radial/radials.db");
-		try {
-			iffDatabase.linkTableWithSdb("iff_to_script", "serverdata/radial/radials.sdb");
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+		iffDatabase = RelationalServerFactory.getServerData("radial/radials.db", "radials");
+		if (iffDatabase == null)
 			throw new main.ProjectSWG.CoreException("Unable to load sdb files for StaticService");
-		}
+
 		getAllTemplatesStatement = iffDatabase.prepareStatement(GET_ALL_TEMPLATES_SQL);
 		getScriptForIffStatement = iffDatabase.prepareStatement(GET_SCRIPT_FOR_IFF_SQL);
+		
+		registerForIntent(RadialRequestIntent.TYPE);
+		registerForIntent(RadialSelectionIntent.TYPE);
+		registerForIntent(ObjectClickedIntent.TYPE);
 	}
 	
 	@Override
 	public boolean initialize() {
-		registerForIntent(RadialRequestIntent.TYPE);
-		registerForIntent(RadialSelectionIntent.TYPE);
 		synchronized (getAllTemplatesStatement) {
 			// Cool and fancy Java thing to auto-cleanup resources
 			try (ResultSet set = getAllTemplatesStatement.executeQuery()) {
@@ -82,7 +84,8 @@ public class TerminalService extends Service {
 					String script = lookupScript(rri.getTarget().getTemplate());
 					if (script == null)
 						return;
-					List<RadialOption> options = Radials.getRadialOptions(script, rri.getPlayer(), rri.getTarget());
+					List<RadialOption> options = new ArrayList<RadialOption>(rri.getRequest().getOptions());
+					options.addAll(Radials.getRadialOptions(script, rri.getPlayer(), rri.getTarget()));
 					new RadialResponseIntent(rri.getPlayer(), rri.getTarget(), options, rri.getRequest().getCounter()).broadcast();
 				}
 				break;
@@ -95,10 +98,25 @@ public class TerminalService extends Service {
 					Radials.handleSelection(script, rsi.getPlayer(), rsi.getTarget(), rsi.getSelection());
 				}
 				break;
+			case ObjectClickedIntent.TYPE:
+				if (i instanceof ObjectClickedIntent) {
+					ObjectClickedIntent oci = (ObjectClickedIntent) i;
+					String script = lookupScript(oci.getTarget().getTemplate());
+					if (script == null)
+						return;
+					List<RadialOption> options = Radials.getRadialOptions(script, oci.getRequestor().getOwner(), oci.getTarget());
+					if (options.isEmpty())
+						return;
+					RadialItem item = RadialItem.getFromId(options.get(0).getId());
+					Radials.handleSelection(script, oci.getRequestor().getOwner(), oci.getTarget(), item);
+				}
+				break;
 		}
 	}
 	
 	private String lookupScript(String iff) {
+		if (!templates.contains(iff))
+			return null;
 		synchronized (getScriptForIffStatement) {
 			ResultSet set = null;
 			try {
@@ -107,7 +125,7 @@ public class TerminalService extends Service {
 				if (set.next())
 					return set.getString("script");
 				else
-					Log.e("RadialService", "Cannot find script for template: " + iff);
+					Log.e("TerminalService", "Cannot find script for template: " + iff);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} finally {

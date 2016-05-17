@@ -28,6 +28,7 @@
 package services.chat;
 
 import intents.NotifyPlayersPacketIntent;
+import intents.PlayerEventIntent;
 import intents.chat.ChatRoomUpdateIntent;
 import intents.network.GalacticPacketIntent;
 import network.packets.Packet;
@@ -61,7 +62,6 @@ import network.packets.swg.zone.chat.ChatSendToRoom;
 import network.packets.swg.zone.chat.ChatUnbanAvatarFromRoom;
 import network.packets.swg.zone.chat.ChatUninviteFromRoom;
 import network.packets.swg.zone.insertion.ChatRoomList;
-import resources.Galaxy;
 import resources.Terrain;
 import resources.chat.ChatAvatar;
 import resources.chat.ChatResult;
@@ -74,11 +74,18 @@ import resources.objects.player.PlayerObject;
 import resources.player.AccessLevel;
 import resources.player.Player;
 import resources.server_info.CachedObjectDatabase;
+import resources.server_info.Log;
 import resources.server_info.ObjectDatabase;
+import resources.server_info.RelationalServerData;
+import resources.server_info.RelationalServerFactory;
+import services.CoreManager;
+import services.chat.ChatManager.ChatRange;
+import services.chat.ChatManager.ChatType;
 import services.player.PlayerManager;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -92,22 +99,25 @@ public class ChatRoomService extends Service {
 	private final Map<Long, Map<Integer, Integer>> messages;
 	private final ObjectDatabase<ChatRoom> database;
 	private final Map<Integer, ChatRoom> roomMap;
-	private final Galaxy galaxy;
+	private final RelationalServerData chatLogs;
+	private final PreparedStatement insertChatLog;
 	private int maxChatRoomId;
 
-	public ChatRoomService(Galaxy g) {
-		galaxy		= g;
+	public ChatRoomService() {
 		database	= new CachedObjectDatabase<>("odb/chat_rooms.db");
 		roomMap 	= new ConcurrentHashMap<>();
 		messages	= new ConcurrentHashMap<>();
+		chatLogs	= RelationalServerFactory.getServerDatabase("chat/chat_log.db");
+		insertChatLog = chatLogs.prepareStatement("INSERT INTO chat_log VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 		maxChatRoomId = 1;
+		
+		registerForIntent(ChatRoomUpdateIntent.TYPE);
+		registerForIntent(GalacticPacketIntent.TYPE);
+		registerForIntent(PlayerEventIntent.TYPE);
 	}
 
 	@Override
 	public boolean initialize() {
-		registerForIntent(ChatRoomUpdateIntent.TYPE);
-		registerForIntent(GalacticPacketIntent.TYPE);
-
 		database.load();
 		database.traverse((room) -> {
 			if (room.getId() >= maxChatRoomId)
@@ -115,18 +125,30 @@ public class ChatRoomService extends Service {
 			roomMap.put(room.getId(), room);
 		});
 
-		createSystemChannels(galaxy.getName());
+		createSystemChannels(CoreManager.getGalaxy().getName());
 		return super.initialize();
+	}
+	
+	@Override
+	public boolean terminate() {
+		database.close();
+		return super.terminate();
 	}
 
 	@Override
 	public void onIntentReceived(Intent i) {
 		switch(i.getType()) {
 			case ChatRoomUpdateIntent.TYPE:
-				processChatRoomUpdateIntent((ChatRoomUpdateIntent) i);
+				if (i instanceof ChatRoomUpdateIntent)
+					processChatRoomUpdateIntent((ChatRoomUpdateIntent) i);
 				break;
 			case GalacticPacketIntent.TYPE:
-				processPacket((GalacticPacketIntent) i);
+				if (i instanceof GalacticPacketIntent)
+					processPacket((GalacticPacketIntent) i);
+				break;
+			case PlayerEventIntent.TYPE:
+				if (i instanceof PlayerEventIntent)
+					handlePlayerEventIntent((PlayerEventIntent) i);
 				break;
 		}
 	}
@@ -190,6 +212,24 @@ public class ChatRoomService extends Service {
 			default: break;
 		}
 	}
+	
+	private void handlePlayerEventIntent(PlayerEventIntent intent) {
+		Player player = intent.getPlayer();
+		if (player == null)
+			return;
+
+		switch (intent.getEvent()) {
+			case PE_ZONE_IN_CLIENT:
+				enterPlanetaryChatChannels(player);
+				break;
+			case PE_FIRST_ZONE:
+				if (player.getPlayerObject() != null)
+					enterChatChannels(player, player.getPlayerObject().getJoinedChannels());
+				break;
+			default:
+				break;
+		}
+	}
 
 	private void processChatRoomUpdateIntent(ChatRoomUpdateIntent i) {
 		switch(i.getUpdateType()) {
@@ -224,7 +264,7 @@ public class ChatRoomService extends Service {
 			return;
 		}
 
-		if (!room.getModerators().remove(target)) {
+		if (!room.removeModerator(target)) {
 			player.sendPacket(new ChatOnRemoveModeratorFromRoom(target, sender, ChatResult.TARGET_AVATAR_DOESNT_EXIST.getCode(), path, sequence));
 			return;
 		}
@@ -261,12 +301,12 @@ public class ChatRoomService extends Service {
 			return;
 		}
 
-		// Remove from ban list
-		if (room.getBanned().remove(target)) {
+		if (room.removeBanned(target)) {
+			// Remove player from the ban list for players that have joined the room, since this player is now a moderator
 			room.sendPacketToMembers(player.getPlayerManager(), new ChatOnUnbanAvatarFromRoom(path, sender, target, ChatResult.SUCCESS.getCode(), 0));
 		}
 
-		if (!room.getModerators().add(target)) {
+		if (!room.addModerator(target)) {
 			player.sendPacket(new ChatOnAddModeratorToRoom(target, sender, ChatResult.NONE.getCode(), path, sequence));
 			return;
 		}
@@ -292,7 +332,7 @@ public class ChatRoomService extends Service {
 			return;
 		}
 
-		if (!room.getBanned().remove(target)) {
+		if (!room.isBanned(target) || !room.removeBanned(target)) {
 			player.sendPacket(new ChatOnUnbanAvatarFromRoom(path, sender, target, ChatResult.ROOM_AVATAR_BANNED.getCode(), sequence));
 			return;
 		}
@@ -329,12 +369,12 @@ public class ChatRoomService extends Service {
 		}
 
 		if (room.isModerator(target))
-			room.getModerators().remove(target);
+			room.removeModerator(target);
 
-		if (room.getInvited().contains(target))
-			room.getInvited().remove(target);
+		if (room.isInvited(target))
+			room.removeInvited(target);
 
-		room.getBanned().add(target);
+		room.addBanned(target);
 
 		room.sendPacketToMembers(player.getPlayerManager(), new ChatOnBanAvatarFromRoom(path, sender, target, ChatResult.SUCCESS.getCode(), sequence));
 	}
@@ -392,7 +432,7 @@ public class ChatRoomService extends Service {
 			return;
 		}
 
-		if (!room.getInvited().remove(invitee)) {
+		if (!room.removeInvited(invitee)) {
 			player.sendPacket(new ChatOnUninviteFromRoom(path, sender, invitee, ChatResult.ROOM_PRIVATE.getCode(), p.getSequence()));
 			return;
 		}
@@ -429,7 +469,7 @@ public class ChatRoomService extends Service {
 
 		player.sendPacket(new ChatOnInviteToRoom(path, sender, invitee, ChatResult.SUCCESS.getCode()));
 
-		room.getInvited().add(invitee);
+		room.addInvited(invitee);
 
 		// Notify the invited client that the room exists if not already in the clients chat lists
 		invitedPlayer.sendPacket(new ChatRoomList(room));
@@ -442,13 +482,16 @@ public class ChatRoomService extends Service {
 		ChatAvatar avatar = ChatAvatar.getFromPlayer(player);
 
 		if ((room == null || !room.getCreator().equals(avatar) || !room.getOwner().equals(avatar))) {
-			player.sendPacket(new ChatOnDestroyRoom(ChatAvatar.getFromPlayer(player), ChatResult.ROOM_AVATAR_NO_PERMISSION.getCode(), p.getRoomId(), p.getSequence()));
+			player.sendPacket(new ChatOnDestroyRoom(avatar, ChatResult.ROOM_AVATAR_NO_PERMISSION.getCode(), p.getRoomId(), p.getSequence()));
 			return;
 		}
 
 		if (!notifyDestroyRoom(avatar, room.getPath(), p.getSequence())) {
-			player.sendPacket(new ChatOnDestroyRoom(ChatAvatar.getFromPlayer(player), ChatResult.NONE.getCode(), p.getRoomId(), p.getSequence()));
+			player.sendPacket(new ChatOnDestroyRoom(avatar, ChatResult.NONE.getCode(), p.getRoomId(), p.getSequence()));
+			return;
 		}
+
+		player.sendPacket(new ChatOnDestroyRoom(avatar, ChatResult.SUCCESS.getCode(), p.getRoomId(), p.getSequence()));
 	}
 
 	private void handleChatCreateRoom(Player player, ChatCreateRoom p) {
@@ -491,8 +534,10 @@ public class ChatRoomService extends Service {
 
 		player.sendPacket(new ChatOnSendRoomMessage(result.getCode(), p.getSequence()));
 
-		if (result == ChatResult.SUCCESS)
+		if (result == ChatResult.SUCCESS) {
 			room.sendMessage(avatar, p.getMessage(), p.getOutOfBandPackage(), player.getPlayerManager());
+			logChat(player.getCreatureObject().getObjectId(), player.getCharacterName(), room.getId()+"/"+room.getPath(), p.getMessage());
+		}
 	}
 
 	private void handleChatQueryRoom(Player player, ChatQueryRoom p) {
@@ -508,7 +553,7 @@ public class ChatRoomService extends Service {
 
 		List<ChatRoom> rooms = new ArrayList<>();
 		for (ChatRoom chatRoom : roomMap.values()) {
-			if (!chatRoom.isPublic() && !chatRoom.getInvited().contains(avatar) && !chatRoom.getOwner().equals(avatar))
+			if (!chatRoom.isPublic() && !chatRoom.isInvited(avatar) && !chatRoom.getOwner().equals(avatar))
 				continue;
 			rooms.add(chatRoom);
 		}
@@ -594,7 +639,7 @@ public class ChatRoomService extends Service {
 		// Notify everyone that a player entered the room
 		room.sendPacketToMembers(manager, new ChatOnEnteredRoom(avatar, result.getCode(), room.getId(), 0));
 
-		room.getMembers().add(avatar);
+		room.addMember(avatar);
 	}
 
 	public void enterChatChannel(Player player, int id, int sequence) {
@@ -617,7 +662,7 @@ public class ChatRoomService extends Service {
 		// This can happen if a channel was deleted while the player was offline
 		PlayerObject ghost = player.getPlayerObject();
 		if (ghost == null) {
-			System.err.println("Tried to join a room with a path that does not exist: " + path);
+			Log.e(this, "Tried to join a room with a path that does not exist: " + path);
 			return;
 		}
 		ghost.removeJoinedChannel(path);
@@ -630,7 +675,7 @@ public class ChatRoomService extends Service {
 		if (ghost == null)
 			return; // ChatOnLeaveRoom doesn't do anything other than for a ChatResult.SUCCESS, so no need to send a fail
 
-		if (!room.getMembers().remove(avatar) && !ghost.removeJoinedChannel(room.getPath()))
+		if (!room.removeMember(avatar) && !ghost.removeJoinedChannel(room.getPath()))
 			return;
 
 		player.sendPacket(new ChatOnLeaveRoom(avatar, ChatResult.SUCCESS.getCode(), room.getId(), sequence));
@@ -669,7 +714,7 @@ public class ChatRoomService extends Service {
 			return getRoom(path);
 
 		// All paths should have parents, lets validate to make sure they exist first. Create them if they don't.
-		int lastIndex = path.lastIndexOf(".");
+		int lastIndex = path.lastIndexOf('.');
 		if (lastIndex != -1) {
 			String parentPath = path.substring(0, lastIndex);
 			if (getRoom(parentPath) == null) {
@@ -687,6 +732,7 @@ public class ChatRoomService extends Service {
 		room.setIsPublic(isPublic);
 		room.setPath(path);
 		room.setTitle(title);
+		room.addModerator(creator);
 
 		roomMap.put(id, room);
 
@@ -724,11 +770,6 @@ public class ChatRoomService extends Service {
 
 		new NotifyPlayersPacketIntent(new ChatOnDestroyRoom(destroyer, ChatResult.SUCCESS.getCode(), room.getId(), 0),
 				networkIds).broadcast();
-
-		if (!destroyer.equals(ChatAvatar.getSystemAvatar(destroyer.getGalaxy()))) {
-			new NotifyPlayersPacketIntent(new ChatOnDestroyRoom(destroyer, ChatResult.SUCCESS.getCode(), room.getId(), sequence),
-					Collections.singletonList(destroyer.getNetworkId())).broadcast();
-		}
 
 		return true;
 	}
@@ -800,6 +841,26 @@ public class ChatRoomService extends Service {
 
 	public ChatRoom getRoom(int roomId) {
 		return roomMap.get(roomId);
+	}
+	
+	private void logChat(long sendId, String sendName, String room, String message) {
+		try {
+			synchronized (insertChatLog) {
+				insertChatLog.setLong(1, System.currentTimeMillis());
+				insertChatLog.setLong(2, sendId);
+				insertChatLog.setString(3, sendName);
+				insertChatLog.setLong(4, 0);
+				insertChatLog.setString(5, "");
+				insertChatLog.setString(6, ChatType.CHAT.name());
+				insertChatLog.setString(7, ChatRange.ROOM.name());
+				insertChatLog.setString(8, room);
+				insertChatLog.setString(9, "");
+				insertChatLog.setString(10, message);
+				insertChatLog.executeUpdate();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

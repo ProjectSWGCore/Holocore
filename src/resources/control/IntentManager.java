@@ -27,55 +27,54 @@
 ***********************************************************************************/
 package resources.control;
 
-import intents.server.ServerStatusIntent;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
-import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
 
+import resources.server_info.Log;
 import utilities.ThreadUtilities;
 
 
 public class IntentManager {
 	
-	private static final IntentManager instance = new IntentManager();
+	private static final IntentManager INSTANCE = new IntentManager();
+	
 	private final Runnable broadcastRunnable;
+	private final Map <String, List<IntentReceiver>> intentRegistrations;
+	private final Queue <Intent> intentQueue;
 	private ExecutorService broadcastThreads;
-	private Map <String, List<IntentReceiver>> intentRegistrations;
-	private Queue <Intent> intentQueue;
 	private boolean initialized = false;
 	private boolean terminated = false;
 	
 	private IntentManager() {
+		intentRegistrations = new HashMap<String, List<IntentReceiver>>();
+		intentQueue = new IntentQueue();
 		initialize();
-		broadcastRunnable = new Runnable() {
-			public void run() {
-				Intent i = intentQueue.poll();
-				if (i != null)
-					broadcast(i);
-				if (i instanceof ServerStatusIntent)
-					onServerStatusIntent((ServerStatusIntent) i);
+		broadcastRunnable = () -> {
+			Intent i;
+			synchronized (intentQueue) {
+				i = intentQueue.poll();
 			}
+			if (i != null)
+				broadcast(i);
 		};
 	}
 	
 	protected void initialize() {
 		if (!initialized) {
-			broadcastThreads = Executors.newCachedThreadPool(ThreadUtilities.newThreadFactory("intent-processor-%d"));
-			intentRegistrations = new HashMap<String, List<IntentReceiver>>();
-			intentQueue = new ConcurrentLinkedQueue<Intent>();
+			final int broadcastThreadCount = Runtime.getRuntime().availableProcessors() * 10;
+			broadcastThreads = Executors.newFixedThreadPool(broadcastThreadCount, ThreadUtilities.newThreadFactory("intent-processor-%d"));
 			initialized = true;
 			terminated = false;
 		}
 	}
 	
-	private void terminate() {
+	protected void terminate() {
 		if (!terminated) {
 			broadcastThreads.shutdown();
 			initialized = false;
@@ -83,17 +82,13 @@ public class IntentManager {
 		}
 	}
 	
-	private void onServerStatusIntent(ServerStatusIntent i) {
-		if (i.getStatus() == ServerStatus.TERMINATING) {
-			terminate();
-		}
-	}
-	
 	protected void broadcastIntent(Intent i) {
 		if (i == null)
 			throw new NullPointerException("Intent cannot be null!");
-		intentQueue.add(i);
-		try { broadcastThreads.submit(broadcastRunnable); }
+		synchronized (intentQueue) {
+			intentQueue.add(i);
+		}
+		try { broadcastThreads.execute(broadcastRunnable); }
 		catch (RejectedExecutionException e) { } // This error is thrown when the server is being shut down
 	}
 	
@@ -103,7 +98,7 @@ public class IntentManager {
 		synchronized (intentRegistrations) {
 			List <IntentReceiver> intents = intentRegistrations.get(intentType);
 			if (intents == null) {
-				intents = new ArrayList<IntentReceiver>();
+				intents = new CopyOnWriteArrayList<>();
 				intentRegistrations.put(intentType, intents);
 			}
 			synchronized (intents) {
@@ -136,10 +131,8 @@ public class IntentManager {
 		}
 		if (receivers == null)
 			return;
-		synchronized (receivers) {
-			for (IntentReceiver r : receivers) {
-				broadcast(r, i);
-			}
+		for (IntentReceiver r : receivers) {
+			broadcast(r, i);
 		}
 		i.markAsComplete();
 	}
@@ -148,17 +141,19 @@ public class IntentManager {
 		try {
 			r.onIntentReceived(i);
 		} catch (Exception e) {
-			System.err.println("Fatal Exception while processing intent: " + i);
-			e.printStackTrace();
+			Log.e("IntentManager", "Fatal Exception while processing intent: " + i);
+			Log.e("IntentManager", e);
 		}
 	}
 	
 	public static int getIntentsQueued() {
-		return getInstance().intentQueue.size();
+		synchronized (getInstance().intentQueue) {
+			return getInstance().intentQueue.size();
+		}
 	}
 	
 	public static IntentManager getInstance() {
-		return instance;
+		return INSTANCE;
 	}
 	
 }

@@ -28,20 +28,18 @@
 package resources.objects.weapon;
 
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
-import resources.encodables.Encodable;
 import resources.network.BaselineBuilder;
+import resources.network.NetBuffer;
 import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
 
-import java.nio.ByteBuffer;
-
-public class WeaponObject extends TangibleObject implements Encodable {
+public class WeaponObject extends TangibleObject {
 	
 	private static final long serialVersionUID = 1L;
 	
 	private float attackSpeed = 0.5f;
 	private float maxRange = 5f;
-	private int type = WeaponType.UNARMED;
+	private WeaponType type = WeaponType.UNARMED;
 	
 	public WeaponObject(long objectId) {
 		super(objectId, BaselineType.WEAO);
@@ -64,11 +62,11 @@ public class WeaponObject extends TangibleObject implements Encodable {
 		this.maxRange = maxRange;
 	}
 	
-	public int getType() {
+	public WeaponType getType() {
 		return type;
 	}
 	
-	public void setType(int type) {
+	public void setType(WeaponType type) {
 		this.type = type;
 	}
 	
@@ -85,17 +83,7 @@ public class WeaponObject extends TangibleObject implements Encodable {
 	
 	@Override
 	public int hashCode() {
-		return super.hashCode() * 7 + type;
-	}
-	
-	protected void sendBaselines(Player target) {
-		BaselineBuilder bb = new BaselineBuilder(this, BaselineType.WEAO, 3);
-		createBaseline3(target, bb);
-		bb.sendTo(target);
-		
-		bb = new BaselineBuilder(this, BaselineType.WEAO, 6);
-		createBaseline6(target, bb);
-		bb.sendTo(target);
+		return super.hashCode() * 7 + type.getNum();
 	}
 	
 	public void createBaseline3(Player target, BaselineBuilder bb) {
@@ -115,40 +103,25 @@ public class WeaponObject extends TangibleObject implements Encodable {
 	public void createBaseline6(Player target, BaselineBuilder bb) {
 		super.createBaseline6(target, bb);
 
-		bb.addInt(type);
+		bb.addInt(type.getNum());
 		
 		bb.incrementOperandCount(1);
 	}
 	
-	public void createBaseline8(Player target, BaselineBuilder bb) {
-		super.createBaseline8(target, bb);
+	public void parseBaseline3(NetBuffer buffer) {
+		super.parseBaseline3(buffer);
+		attackSpeed = buffer.getFloat();
+		buffer.getInt(); // accuracy
+		buffer.getFloat(); // minRange
+		maxRange = buffer.getFloat();
+		buffer.getInt(); // damageType
+		buffer.getInt(); // elementalType
+		buffer.getInt(); // elementalValue
 	}
 	
-	public void createBaseline9(Player target, BaselineBuilder bb) {
-		super.createBaseline9(target, bb);
+	public void parseBaseline6(NetBuffer buffer) {
+		super.parseBaseline6(buffer);
+		type = WeaponType.getWeaponType(buffer.getInt());
 	}
 	
-	@Override
-	public byte[] encode() {
-		// TODO: Refactor, causes crashes
-		BaselineBuilder bb = new BaselineBuilder(this, BaselineType.WEAO, 3);
-		createBaseline3(null, bb);
-		byte[] data3 = bb.buildAsBaselinePacket();
-
-		bb = new BaselineBuilder(this, BaselineType.WEAO, 6);
-		createBaseline6(null, bb); // TODO: This needs to have a target otherwise null pointer will be thrown, new encode function in encodable?
-		byte[] data6 = bb.buildAsBaselinePacket();
-		
-		byte[] ret = new byte[data3.length + data6.length];
-		System.arraycopy(data3, 0, ret, 0, data3.length);
-		System.arraycopy(data6, 0, ret, data3.length, data6.length);
-		
-		return ret;
-	}
-
-	@Override
-	public void decode(ByteBuffer data) {
-		// TODO: Implement decode method in WeaponObject
-	}
-
 }

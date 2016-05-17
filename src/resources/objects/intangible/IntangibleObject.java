@@ -29,6 +29,7 @@ package resources.objects.intangible;
 
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.network.BaselineBuilder;
+import resources.network.NetBuffer;
 import resources.objects.SWGObject;
 import resources.player.Player;
 
@@ -54,15 +55,16 @@ public class IntangibleObject extends SWGObject {
 		this.count = count;
 	}
 
-	public void createBaseline3(Player target, BaselineBuilder bb) {
+	protected void createBaseline3(Player target, BaselineBuilder bb) {
 		super.createBaseline3(target, bb); // 4 variables
 		bb.addInt(count); // 4
 		
 		bb.incrementOperandCount(1);
 	}
 
-	public void createBaseline6(Player target, BaselineBuilder bb) {
-		super.createBaseline6(target, bb); // 2 variables
+	protected void parseBaseline3(NetBuffer buffer) {
+		super.parseBaseline3(buffer);
+		count = buffer.getInt();
 	}
 	
 	@Override

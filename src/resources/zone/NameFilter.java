@@ -29,11 +29,14 @@ package resources.zone;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class NameFilter {
 	
@@ -71,14 +74,15 @@ public class NameFilter {
 		if (!file.exists())
 			return false;
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader(file));
-			String line = "";
-			list.clear();
-			while ((line = reader.readLine()) != null) {
-				if (!line.isEmpty() && !list.contains(line.toLowerCase()))
-					list.add(line.toLowerCase());
+			try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8))) {
+				String line = "";
+				list.clear();
+				while ((line = reader.readLine()) != null) {
+					line = line.toLowerCase(Locale.US);
+					if (!line.isEmpty() && !list.contains(line))
+						list.add(line);
+				}
 			}
-			reader.close();
 			return true;
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -169,7 +173,7 @@ public class NameFilter {
 	}
 	
 	private boolean contains(List <String> list, String name) {
-		name = name.toLowerCase();
+		name = name.toLowerCase(Locale.US);
 		for (String str : list)
 			if (name.length() >= str.length() && (name.startsWith(str) || name.endsWith(str)))
 				return true;

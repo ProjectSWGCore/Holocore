@@ -27,105 +27,249 @@
 ***********************************************************************************/
 package network;
 
+import intents.network.ConnectionClosedIntent;
+import intents.network.ConnectionOpenedIntent;
 import intents.network.InboundPacketIntent;
 
-import java.net.InetAddress;
+import java.io.EOFException;
+import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
-import resources.control.Intent;
-import resources.network.ServerType;
+import resources.network.DisconnectReason;
+import resources.network.NetBufferStream;
+import resources.server_info.Log;
+import utilities.IntentChain;
+import network.encryption.Compression;
 import network.packets.Packet;
+import network.packets.swg.ErrorMessage;
+import network.packets.swg.SWGPacket;
+import network.packets.swg.holo.HoloPacket;
+import network.packets.swg.zone.object_controller.ObjectController;
 
 public class NetworkClient {
 	
-	private final Object prevPacketIntentMutex = new Object();
+	private static final int DEFAULT_BUFFER = 128;
+	private static final int TRY_LOCK_TIME = 100;
+	
+	private final IntentChain intentChain = new IntentChain();
+	private final Object bufferMutex = new Object();
+	private final ReentrantLock inboundLock = new ReentrantLock(true);
+	private final ReentrantLock outboundLock = new ReentrantLock(true);
+	private final InetSocketAddress address;
 	private final long networkId;
-	private final ServerType serverType;
-	private final NetworkProtocol protocol;
-	private InetAddress address;
-	private Intent prevPacketIntent;
-	private int port;
-	private int connId;
+	private final PacketSender packetSender;
+	private final Queue<Packet> outboundQueue;
+	private final NetBufferStream buffer;
+	private ClientStatus status;
 	
-	public NetworkClient(ServerType type, InetAddress addr, int port, long networkId, PacketSender packetSender) {
-		this.serverType = type;
+	public NetworkClient(InetSocketAddress address, long networkId, PacketSender packetSender) {
+		this.address = address;
 		this.networkId = networkId;
-		protocol = new NetworkProtocol(type, addr, port, packetSender);
-		prevPacketIntent = null;
-		connId = 0;
-		updateNetworkInfo(addr, port);
+		this.packetSender = packetSender;
+		this.outboundQueue = new LinkedList<>();
+		this.buffer = new NetBufferStream(DEFAULT_BUFFER);
+		this.status = ClientStatus.DISCONNECTED;
 	}
 	
-	public void updateNetworkInfo(InetAddress addr, int port) {
-		protocol.updateNetworkInfo(addr, port);
-		this.address = addr;
-		this.port = port;
+	public void close() {
+		buffer.reset();
+		intentChain.reset();
+		outboundQueue.clear();
+		status = ClientStatus.DISCONNECTED;
 	}
 	
-	public void resetNetwork() {
-		protocol.resetNetwork();
-		connId = 0;
-	}
-	
-	public void resendOldUnacknowledged() {
-		protocol.resendOldUnacknowledged();
-	}
-	
-	public void setCrc(int crc) {
-		protocol.setCrc(crc);
-	}
-	
-	public void setConnectionId(int id) {
-		connId = id;
-	}
-	
-	public InetAddress getAddress() {
+	public InetSocketAddress getAddress() {
 		return address;
-	}
-	
-	public int getPort() {
-		return port;
-	}
-	
-	public int getCrc() {
-		return protocol.getCrc();
-	}
-	
-	public int getConnectionId() {
-		return connId;
 	}
 	
 	public long getNetworkId() {
 		return networkId;
 	}
 	
-	public void sendPacket(Packet p) {
-		protocol.sendPacket(p);
+	public void onConnected() {
+		status = ClientStatus.CONNECTED;
+		intentChain.broadcastAfter(new ConnectionOpenedIntent(networkId));
 	}
 	
-	public boolean processPacket(ServerType type, byte [] data) {
-		if (type != serverType || type == ServerType.UNKNOWN)
-			return false;
-		if (type == ServerType.PING)
-			return true;
-		List <Packet> packets = protocol.process(data);
-		for (Packet p : packets) {
-			p.setAddress(address);
-			p.setPort(port);
-			synchronized (prevPacketIntentMutex) {
-				InboundPacketIntent i = new InboundPacketIntent(type, p, networkId);
-				if (prevPacketIntent == null)
-					i.broadcast();
-				else
-					i.broadcastAfterIntent(prevPacketIntent);
-				prevPacketIntent = i;
+	public void onConnecting() {
+		status = ClientStatus.CONNECTING;
+	}
+	
+	public void onDisconnected() {
+		status = ClientStatus.DISCONNECTED;
+	}
+	
+	public ClientStatus getStatus() {
+		return status;
+	}
+	
+	public void processOutbound() {
+		if (!tryLockInterruptable(outboundLock))
+			return;
+		try {
+			Packet p;
+			while (!outboundQueue.isEmpty()) {
+				p = outboundQueue.poll();
+				if (p == null)
+					break;
+				sendPacket(p);
 			}
+		} finally {
+			outboundLock.unlock();
 		}
-		return packets.size() > 0;
+	}
+	
+	public void addToOutbound(Packet packet) {
+		outboundLock.lock();
+		try {
+			outboundQueue.add(packet);
+		} finally {
+			outboundLock.unlock();
+		}
+	}
+	
+	public void addToBuffer(byte [] data) {
+		synchronized (bufferMutex) {
+			buffer.write(data);
+		}
+	}
+	
+	public boolean processInbound() {
+		if (!tryLockInterruptable(inboundLock))
+			return false;
+		try {
+			List <Packet> packets;
+			synchronized (bufferMutex) {
+				packets = processPackets();
+				buffer.compact();
+			}
+			for (Packet p : packets) {
+				p.setAddress(address.getAddress());
+				p.setPort(address.getPort());
+				if (status != ClientStatus.CONNECTED && !(p instanceof HoloPacket)) {
+					addToOutbound(new ErrorMessage("Network Manager", "Upgrade your launcher!", false));
+					processOutbound();
+					new ConnectionClosedIntent(networkId, DisconnectReason.CONNECTION_REFUSED).broadcast();
+					break;
+				}
+				intentChain.broadcastAfter(new InboundPacketIntent(p, networkId));
+			}
+			return packets.size() > 0;
+		} finally {
+			inboundLock.unlock();
+		}
+	}
+	
+	private List<Packet> processPackets() {
+		List <Packet> packets = new LinkedList<>();
+		Packet p = null;
+		try {
+			while (buffer.hasRemaining()) {
+				p = processPacket();
+				if (p != null)
+					packets.add(p);
+			}
+		} catch (EOFException e) {
+			Log.e("NetworkClient", "EOFException: " + e.getMessage());
+		}
+		return packets;
+	}
+	
+	private Packet processPacket() throws EOFException {
+		if (buffer.remaining() < 5)
+			throw new EOFException("Not enough remaining data for header! Remaining: " + buffer.remaining());
+		byte bitfield = buffer.getByte();
+		boolean compressed = (bitfield & 0x01) != 0;
+		int length = buffer.getShort();
+		int decompressedLength = buffer.getShort();
+		if (buffer.remaining() < length) {
+			buffer.position(buffer.position() - 5);
+			throw new EOFException("Not enough remaining data! Remaining: " + buffer.remaining() + "  Length: " + length);
+		}
+		byte [] pData = buffer.getArray(length);
+		if (compressed) {
+			pData = Compression.decompress(pData, decompressedLength);
+		}
+		return processSWG(pData);
+	}
+	
+	private SWGPacket processSWG(byte [] data) {
+		if (data.length < 6) {
+			Log.e("NetworkClient", "Length too small: " + data.length);
+			return null;
+		}
+		ByteBuffer buffer = ByteBuffer.wrap(data).order(ByteOrder.LITTLE_ENDIAN);
+		int crc = buffer.getInt(2);
+		if (crc == 0x80CE5E46)
+			return ObjectController.decodeController(buffer);
+		else {
+			SWGPacket packet = PacketType.getForCrc(crc);
+			if (packet != null)
+				packet.decode(buffer);
+			return packet;
+		}
+	}
+	
+	private void sendPacket(Packet p) {
+		ByteBuffer encoded = p.encode();
+		encoded.position(0);
+		int decompressedLength = encoded.remaining();
+		boolean compressed = decompressedLength >= 50;
+		if (compressed) {
+			ByteBuffer compress = compress(encoded);
+			compressed = compress != encoded;
+			encoded = compress;
+		}
+		sendPacket(encoded, compressed, decompressedLength);
+	}
+	
+	private ByteBuffer compress(ByteBuffer data) {
+		ByteBuffer compressedBuffer = ByteBuffer.allocate(Compression.getMaxCompressedLength(data.remaining()));
+		int length = Compression.compress(data.array(), compressedBuffer.array());
+		compressedBuffer.position(0);
+		compressedBuffer.limit(length);
+		if (length >= data.remaining())
+			return data;
+		else
+			return compressedBuffer;
+	}
+	
+	private void sendPacket(ByteBuffer packet, boolean compressed, int rawLength) {
+		ByteBuffer data = ByteBuffer.allocate(packet.remaining() + 5).order(ByteOrder.LITTLE_ENDIAN);
+		byte bitmask = 0;
+		bitmask |= (compressed?1:0) << 0; // Compressed
+		bitmask |= 1 << 1; // SWG
+		data.put(bitmask);
+		data.putShort((short) packet.remaining());
+		data.putShort((short) rawLength);
+		data.put(packet);
+		data.flip();
+		packetSender.sendPacket(address, data);
+	}
+	
+	private boolean tryLockInterruptable(Lock l) {
+		try {
+			return l.tryLock(TRY_LOCK_TIME, TimeUnit.MILLISECONDS);
+		} catch (InterruptedException e) {
+			return false;
+		}
 	}
 	
 	public String toString() {
-		return "NetworkClient[ConnId=" + connId + " " + address + ":" + port + "]";
+		return "NetworkClient["+address+"]";
+	}
+	
+	public enum ClientStatus {
+		DISCONNECTED,
+		CONNECTING,
+		CONNECTED
 	}
 	
 }

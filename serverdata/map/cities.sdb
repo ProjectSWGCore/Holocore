@@ -1,68 +1,45 @@
-city	terrain	x	z	radius
-TEXT PRIMARY KEY	TEXT NOT NULL	INTEGER NOT NULL	INTEGER NOT NULL	INTEGER NOT NULL
-@corellia_region_names:bela_vistal	corellia	6766	-5692	370
-@corellia_region_names:coronet	corellia	-178	-4504	581
-@corellia_region_names:doaba_guerfel	corellia	3274	5582	325
-@corellia_region_names:doaba_guerfel	corellia	3206	5200	325
-@corellia_region_names:kor_vella	corellia	-3420	3146	620
-@corellia_region_names:tyrena	corellia	-5140	-2450	300
-@corellia_region_names:tyrena	corellia	-5536	-2688	250
-@corellia_region_names:tyrena	corellia	-4975	-2230	140
-@corellia_region_names:vreni_island	corellia	-5538	-6176	220
-@corellia_region_names:vreni_island	corellia	-5260	-6416	220
-@dantooine_region_names:a_mining_outpost	dantooine	-640	2486	135
-@dantooine_region_names:a_pirate_outpost	dantooine	1588	-6399	135
-@dantooine_region_names:an_imperial_outpost	dantooine	-4224	-2400	250
-@dantooine_region_names:dantari_village_1	dantooine	-3843	-5713	70
-@dantooine_region_names:dantari_village_2	dantooine	-7202	-859	90
-@dantooine_region_names:dantari_village_3	dantooine	5550	-654	65
-@dantooine_region_names:imperial_outpost	dantooine	-4224	-2400	350
-@dathomir_region_names:a_restricted_area	dathomir	-6358	930	280
-@dathomir_region_names:science_outpost	dathomir	-85	-1600	125
-@dathomir_region_names:trade_outpost	dathomir	599	3046	110
-@endor_region_names:an_outpost	endor	-905	1584	130
-@endor_region_names:an_outpost	endor	3221	-3471	100
-@endor_region_names:dulok_village_1	endor	6068	-2475	100
-@endor_region_names:dulok_village_2	endor	-1211	2952	128
-@endor_region_names:ewok_lake_village_1	endor	1435	-3190	150
-@endor_region_names:ewok_lake_village_2	endor	-573	-5040	175
-@endor_region_names:ewok_village_tree_1	endor	84	39	80
-@endor_region_names:ewok_village_tree_2	endor	4545	-2395	128
-@kashyyyk_region_names:kachirho	kashyyyk	-530	-90	225
-@lok_region_names:an_imperial_outpost	lok	-1920	-3084	136
-@lok_region_names:nyms_stronghold	lok	440	5029	315
-@lok_region_names:nyms_stronghold	lok	460	5400	140
-@naboo_region_names:deeja_peak	naboo	4686	-1375	220
-@naboo_region_names:deeja_peak	naboo	5021	-1446	225
-@naboo_region_names:deeja_peak	naboo	5302	-1553	111
-@naboo_region_names:kaadara	naboo	5288	6687	225
-@naboo_region_names:kaadara	naboo	5091	6714	225
-@naboo_region_names:keren	naboo	1888	2700	550
-@naboo_region_names:keren	naboo	1344	2772	180
-@naboo_region_names:moenia	naboo	4836	-4830,5	277
-@naboo_region_names:moenia	naboo	4736	-4628	190
-@naboo_region_names:theed	naboo	-5488	4380	610
-@naboo_region_names:theed	naboo	-5036	4124	569
-@rori_region_names:a_rebel_outpost	rori	3677	-6447	80
-@rori_region_names:narmle	rori	-5140	-2368	250
-@rori_region_names:narmle	rori	-5395	-2148	180
-@rori_region_names:restuss	rori	5318	5680	325
-@talus_region_names:an_imperial_outpost	talus	-2178	2300	150
-@talus_region_names:dearic	talus	422	-3004	435
-@talus_region_names:nashal	talus	4163	5220	195
-@talus_region_names:nashal	talus	4443	5119	195
-@talus_region_names:nashal	talus	4439	5395	205
-@tatooine_region_names:anchorhead	tatooine	40	-5348	330
-@tatooine_region_names:bestine	tatooine	-1204	-3692	375
-@tatooine_region_names:fort_tusken	tatooine	-3900	6260	250
-@tatooine_region_names:jabbas_palace	tatooine	-5983	-6267	500
-@tatooine_region_names:mos_eisley	tatooine	3969	-4818	150
-@tatooine_region_names:mos_eisley	tatooine	3418	-4758	412
-@tatooine_region_names:mos_entha	tatooine	1470	3248	390
-@tatooine_region_names:mos_entha	tatooine	1219	3051	215
-@tatooine_region_names:mos_espa	tatooine	-2878	2226	435
-@tatooine_region_names:mos_taike	tatooine	3855	2338	170
-@tatooine_region_names:wayfar	tatooine	-5157	-6549	210
-@yavin4_region_names:yavin4_imperial_fort	yavin4	4030	-6215	200
-@yavin4_region_names:yavin4_labor_outpost	yavin4	-6925	-5707	130
-@yavin4_region_names:yavin4_mining_outpost	yavin4	-312	4865	100
+id	city	terrain	x	z	radius
+INTEGER PRIMARY KEY AUTOINCREMENT	TEXT NOT NULL	TEXT NOT NULL	INTEGER NOT NULL	INTEGER NOT NULL	INTEGER NOT NULL
+1	@corellia_region_names:coronet	corellia	-178	-4504	581
+2	@corellia_region_names:tyrena	corellia	-5282	-2526	622
+3	@dantooine_region_names:dantari_village_1	dantooine	-3843	-5713	70
+4	@dantooine_region_names:dantari_village_2	dantooine	-7202	-859	90
+5	@dantooine_region_names:dantari_village_3	dantooine	5550	-654	65
+6	@dantooine_region_names:imperial_outpost	dantooine	-4224	-2400	350
+7	@dantooine_region_names:dantooine_mining_outpost	dantooine	-622	2488	400
+8	@dantooine_region_names:dantooine_pirate_outpost	dantooine	1588	-6390	400
+9	@dathomir_region_names:dathomir_trade_outpost	dathomir	599	3071	400
+10	@dathomir_region_names:dathomir_survey_outpost	dathomir	-85	-1600	400
+11	@endor_region_names:ewok_village_tree_1	endor	84	39	80
+12	@endor_region_names:ewok_village_tree_2	endor	4545	-2395	128
+13	@endor_region_names:ewok_lake_village_1	endor	1435	-3190	150
+14	@endor_region_names:ewok_lake_village_2	endor	-573	-5040	175
+15	@endor_region_names:dulok_village_1	endor	6068	-2475	100
+16	@endor_region_names:dulok_village_2	endor	-1211	2952	128
+17	@endor_region_names:endor_smuggler_outpost	endor	-898	1587	400
+18	@endor_region_names:endor_neutral_outpost	endor	3222	-3467	400
+19	@kashyyyk_region_names:kachirho	kashyyyk	-530	-90	225
+20	@lok_region_names:lok_nyms_stronghold	lok	436	5120	429
+21	@lok_region_names:lok_imperial_outpost	lok	-1920	-3084	201
+22	@naboo_region_names:kaadara	circle	5168	6704	320
+23	@naboo_region_names:keren	naboo	336	2140	2512
+24	@naboo_region_names:moenia	naboo	4800	-4784	336
+25	@naboo_region_names:theed	naboo	-6160	3920	-4480
+26	@rori_region_names:narmle	rori	-5200	-2288	392
+27	@rori_region_names:restuss	rori	5318	5680	700
+28	@rori_region_names:sdungeon_rebel_outpost	rori	3677	-6447	150
+29	@talus_region_names:dearic	talus	425	-3000	400
+30	@talus_region_names:nashal	talus	4360	5251	350
+31	@talus_region_names:talus_imperial_outpost	talus	-2178	2300	240
+32	@tatooine_region_names:bestine	tatooine	-1218	-3688	336
+33	@tatooine_region_names:fort_tusken	tatooine	-3900	6260	250
+34	@tatooine_region_names:jabbas_palace	tatooine	-5983	-6267	500
+35	@tatooine_region_names:mos_eisley	tatooine	3460	-4768	456
+36	@tatooine_region_names:mos_entha	tatooine	1488	3256	424
+37	@tatooine_region_names:mos_espa	tatooine	-2940	2190	533
+38	@tatooine_region_names:mos_teike	tatooine	3832	2360	264
+39	@tatooine_region_names:wayfar	tatooine	-5174	-6582	230
+40	@tatooine_region_names:anchorhead	tatooine	102	-5360	125
+41	@yavin4_region_names:yavin4_labor_outpost	yavin4	-6925	-5707	200
+42	@yavin4_region_names:yavin4_mining_outpost	yavin4	-307	4861	200
+43	@yavin4_region_names:yavin4_imperial_fort	yavin4	4030	-6215	200

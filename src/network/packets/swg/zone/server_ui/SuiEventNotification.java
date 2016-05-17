@@ -37,12 +37,12 @@ public class SuiEventNotification extends SWGPacket {
 	public static final int CRC = getCrc("SuiEventNotification");
 	
 	private int windowId;
-	private int eventId;
+	private int eventIndex;
 	private int updateCount;
-	private List <String> dataStrings;
+	private List <String> subscribedToProperties;
 	
 	public SuiEventNotification() { 
-		dataStrings = new ArrayList<String>();
+		subscribedToProperties = new ArrayList<>();
 	}
 	
 	public SuiEventNotification(ByteBuffer data) {
@@ -54,20 +54,33 @@ public class SuiEventNotification extends SWGPacket {
 		if (!super.decode(data, CRC))
 			return;
 		windowId = getInt(data);
-		eventId = getInt(data);
+		eventIndex = getInt(data);
 		int size = getInt(data);
 		updateCount = getInt(data);
 		for (int i = 0; i < size; i++) {
-			dataStrings.add(getUnicode(data));
+			subscribedToProperties.add(getUnicode(data));
 		}
 	}
 	
 	public ByteBuffer encode() {
-		return null;
+		int size = 0;
+		for (String property : subscribedToProperties) {
+			size += 4 + (property.length() * 2);
+		}
+
+		ByteBuffer bb = ByteBuffer.allocate(size + 16);
+		addInt(bb, windowId);
+		addInt(bb, eventIndex);
+		addInt(bb, subscribedToProperties.size());
+		addInt(bb, updateCount);
+		for (String property : subscribedToProperties) {
+			addUnicode(bb, property);
+		}
+		return bb;
 	}
 	
 	public int getWindowId() { return this.windowId; }
-	public List<String> getDataStrings() { return this.dataStrings; }
-	public int getEventId() { return this.eventId; }
+	public List<String> getSubscribedToProperties() { return this.subscribedToProperties; }
+	public int getEventIndex() { return this.eventIndex; }
 	public int getUpdateCount() { return this.updateCount; }
 }

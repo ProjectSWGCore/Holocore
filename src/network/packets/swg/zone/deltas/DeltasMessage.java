@@ -66,6 +66,9 @@ public class DeltasMessage extends SWGPacket {
 		num = getByte(data);
 		int length = getInt(data);
 		this.deltaData = getArray(data, length);
+		data = ByteBuffer.wrap(deltaData);
+		getShort(data);
+		update = getShort(data);
 	}
 	
 	public ByteBuffer encode() {
@@ -85,6 +88,7 @@ public class DeltasMessage extends SWGPacket {
 	public long getObjectId() { return objId; }
 	public BaselineType getType() { return type; }
 	public int getNum() { return num; }
+	public int getUpdate() { return update; }
 	public byte [] getDeltaData() { return deltaData; }
 	
 	public void setType(BaselineType type) { this.type = type; }

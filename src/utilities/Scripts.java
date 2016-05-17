@@ -27,13 +27,18 @@
 ***********************************************************************************/
 package utilities;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
+
+import resources.server_info.Log;
 
 public class Scripts {
 
@@ -48,6 +53,9 @@ public class Scripts {
 			ENGINE.eval("var RadialOption = Java.type('resources.radial.RadialOption')");
 			ENGINE.eval("var RadialItem = Java.type('resources.radial.RadialItem')");
 			ENGINE.eval("var Log = Java.type('resources.server_info.Log')");
+			ENGINE.eval("var SuiWindow = Java.type('resources.sui.SuiWindow')");
+			ENGINE.eval("var SuiButtons = Java.type('resources.sui.SuiButtons')");
+			ENGINE.eval("var SuiEvent = Java.type('resources.sui.SuiEvent')");
 		} catch (ScriptException e) {
 			e.printStackTrace();
 		}
@@ -66,14 +74,16 @@ public class Scripts {
 	@SuppressWarnings("unchecked")
 	public static <T> T invoke(String script, String function, Object... args) {
 		try {
-			ENGINE.eval(new FileReader(SCRIPTS + script + EXTENSION));
+			ENGINE.eval(new InputStreamReader(new FileInputStream(SCRIPTS + script + EXTENSION), StandardCharsets.UTF_8));
 			return (T) INVOCABLE.invokeFunction(function, args);
 		} catch (FileNotFoundException e) {
 			// No need to print anything, this is a common error.
 			// Returning null is all that's necessary
 			return null;
 		} catch (Throwable t) {
-			t.printStackTrace();
+			Log.e("Scripts", "Error invoking script: " + script + "  with function: " + function);
+			Log.e("Scripts", "    Args: " + Arrays.toString(args));
+			Log.e("Scripts", t);
 			return null;
 		}
 	}

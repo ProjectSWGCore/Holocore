@@ -29,7 +29,10 @@ package resources.encodables;
 
 import network.packets.Packet;
 import resources.objects.waypoint.WaypointObject;
+import resources.server_info.Log;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -47,11 +50,19 @@ public class OutOfBandPackage implements Encodable, Serializable {
 
 	public OutOfBandPackage() {
 		packages = new ArrayList<>(5);
+		data = null;
+		dataSize = 0;
 	}
 
 	public OutOfBandPackage(OutOfBandData... outOfBandData) {
 		this();
 		Collections.addAll(packages, outOfBandData);
+	}
+	
+	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
+		ois.defaultReadObject();
+		data = null;
+		dataSize = 0;
 	}
 
 	public List<OutOfBandData> getPackages() {
@@ -118,7 +129,7 @@ public class OutOfBandPackage implements Encodable, Serializable {
 				packages.add(stringId);
 				break;
 			default:
-				System.err.println("Tried to decode an unsupported OutOfBandData Type: " + type);
+				Log.e("OutOfBandPackage", "Tried to decode an unsupported OutOfBandData Type: " + type);
 				break;
 		}
 	}

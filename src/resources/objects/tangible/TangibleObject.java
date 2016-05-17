@@ -27,43 +27,63 @@
 ***********************************************************************************/
 package resources.objects.tangible;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+
+import intents.FactionIntent;
+import intents.FactionIntent.FactionIntentType;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
+import resources.PvpFaction;
+import resources.PvpFlag;
+import resources.PvpStatus;
+import resources.collections.SWGMap;
+import resources.collections.SWGSet;
 import resources.network.BaselineBuilder;
+import resources.network.NetBuffer;
 import resources.objects.SWGObject;
+import resources.objects.creature.CreatureObject;
 import resources.player.Player;
+import utilities.Encoder.StringType;
 
 public class TangibleObject extends SWGObject {
 	
 	private static final long serialVersionUID = 1L;
 	
 	private byte []	appearanceData	= new byte[0];
-	private int		damageTaken		= 0;
-	private int		maxHitPoints	= 0;
+	private int		maxHitPoints	= 1000;
 	private int		components		= 0;
 	private boolean	inCombat		= false;
 	private int		condition		= 0;
 	private int		pvpFlags		= 0;
-	private int		pvpType			= 0;
-	private int		pvpFactionId	= 0;
-	private boolean	visibleGmOnly	= false;
+	private PvpStatus pvpStatus = PvpStatus.COMBATANT;
+	private PvpFaction pvpFaction = PvpFaction.NEUTRAL;
+	private boolean	visibleGmOnly	= true;
 	private byte []	objectEffects	= new byte[0];
 	private int     optionFlags     = 0;
 	
+	private SWGSet<Long>	defenders	= new SWGSet<>(6, 3);
+	
+	private SWGMap<String, String> effectsMap	= new SWGMap<>(6, 7);
+	
 	public TangibleObject(long objectId) {
 		super(objectId, BaselineType.TANO);
-		addOptionFlags(OptionFlag.INVULNERABLE);
 	}
 	
 	public TangibleObject(long objectId, BaselineType objectType) {
 		super(objectId, objectType);
 	}
 	
-	public byte [] getAppearanceData() {
-		return appearanceData;
+	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
+		pvpStatus = PvpStatus.COMBATANT;
+		pvpFaction = PvpFaction.NEUTRAL;
+		ois.defaultReadObject();
+		defenders.clear();
+		defenders.resetUpdateCount();
+		inCombat = false;
 	}
 	
-	public int getDamageTaken() {
-		return damageTaken;
+	public byte [] getAppearanceData() {
+		return appearanceData;
 	}
 	
 	public int getMaxHitPoints() {
@@ -82,16 +102,46 @@ public class TangibleObject extends SWGObject {
 		return condition;
 	}
 	
+	public void setPvpFlags(PvpFlag... pvpFlags) {
+		for(PvpFlag pvpFlag : pvpFlags)
+			this.pvpFlags |= pvpFlag.getBitmask();
+		
+		new FactionIntent(this, FactionIntentType.FLAGUPDATE).broadcast();
+	}
+	
+	public void clearPvpFlags(PvpFlag... pvpFlags) {
+		for(PvpFlag pvpFlag : pvpFlags)
+			this.pvpFlags  &= ~pvpFlag.getBitmask();
+		
+		new FactionIntent(this, FactionIntentType.FLAGUPDATE).broadcast();
+	}
+	
+	public boolean hasPvpFlag(PvpFlag pvpFlag) {
+		return (pvpFlags & pvpFlag.getBitmask()) != 0;
+	}
+	
+	public PvpStatus getPvpStatus() {
+		return pvpStatus;
+	}
+
+	public void setPvpStatus(PvpStatus pvpStatus) {
+		this.pvpStatus = pvpStatus;
+		
+		sendDelta(3, 5, pvpStatus.getValue());
+	}
+	
+	public PvpFaction getPvpFaction() {
+		return pvpFaction;
+	}
+	
+	public void setPvpFaction(PvpFaction pvpFaction) {
+		this.pvpFaction = pvpFaction;
+		
+		sendDelta(3, 4, pvpFaction.getCrc());
+	}
+	
 	public int getPvpFlags() {
 		return pvpFlags;
-	}
-	
-	public int getPvpType() {
-		return pvpType;
-	}
-	
-	public int getPvpFactionId() {
-		return pvpFactionId;
 	}
 	
 	public boolean isVisibleGmOnly() {
@@ -106,12 +156,9 @@ public class TangibleObject extends SWGObject {
 		this.appearanceData = appearanceData;
 	}
 	
-	public void setDamageTaken(int damageTaken) {
-		this.damageTaken = damageTaken;
-	}
-	
 	public void setMaxHitPoints(int maxHitPoints) {
 		this.maxHitPoints = maxHitPoints;
+		sendDelta(3, 11, maxHitPoints);
 	}
 	
 	public void setComponents(int components) {
@@ -120,22 +167,11 @@ public class TangibleObject extends SWGObject {
 	
 	public void setInCombat(boolean inCombat) {
 		this.inCombat = inCombat;
+		sendDelta(6, 2, inCombat);
 	}
 	
 	public void setCondition(int condition) {
 		this.condition = condition;
-	}
-	
-	public void setPvpFlags(int pvpFlags) {
-		this.pvpFlags = pvpFlags;
-	}
-	
-	public void setPvpType(int pvpType) {
-		this.pvpType = pvpType;
-	}
-	
-	public void setPvpFactionId(int pvpFactionId) {
-		this.pvpFactionId = pvpFactionId;
 	}
 	
 	public void setVisibleGmOnly(boolean visibleGmOnly) {
@@ -185,7 +221,22 @@ public class TangibleObject extends SWGObject {
 
 		return passCount == options.length;
 	}
-
+	
+	public void addDefender(CreatureObject creature) {
+		if (defenders.add(creature.getObjectId()))
+			defenders.sendDeltaMessage(this);
+	}
+	
+	public void removeDefender(CreatureObject creature) {
+		if (defenders.remove(creature.getObjectId()))
+			defenders.sendDeltaMessage(this);
+	}
+	
+	public void clearDefenders() {
+		defenders.clear();
+		defenders.sendDeltaMessage(this);
+	}
+	
 	@Override
 	public boolean equals(Object o) {
 		return super.equals(o);
@@ -196,51 +247,72 @@ public class TangibleObject extends SWGObject {
 		return super.hashCode();
 	}
 	
-	public void createBaseline3(Player target, BaselineBuilder bb) {
+	protected void createBaseline3(Player target, BaselineBuilder bb) {
 		super.createBaseline3(target, bb); // 4 variables - BASE3 (4)
-		bb.addInt(0); // Faction - 4
-		bb.addInt(0); // Faction Status - 5
+		if (getStringId().toString().equals("@obj_n:unknown_object"))
+			return;
+		bb.addInt(pvpFaction.getCrc()); // Faction - 4
+		bb.addInt(pvpStatus.getValue()); // Faction Status - 5
 		bb.addArray(appearanceData); // - 6
 		bb.addInt(0); // Component customization (Set, Integer) - 7
-			bb.addInt(0); //updates
+			bb.addInt(0);
 		bb.addInt(optionFlags); // 8
 		bb.addInt(0); // Generic Counter -- use count and incap timer - 9
 		bb.addInt(condition); // 10
-		bb.addInt(100); // maxHitPoints - 11
-		bb.addBoolean(true); // isVisible - 12
+		bb.addInt(maxHitPoints); // maxHitPoints - 11
+		bb.addBoolean(visibleGmOnly); // isVisible - 12
 		
 		bb.incrementOperandCount(9);
 	}
 	
-	public void createBaseline6(Player target, BaselineBuilder bb) {
+	protected void createBaseline6(Player target, BaselineBuilder bb) {
 		super.createBaseline6(target, bb);
-		bb.addBoolean(false); // Combat flag
-		bb.addInt(0); // Defenders List (Set, Long)
+		if (getStringId().toString().equals("@obj_n:unknown_object"))
+			return;
+		bb.addBoolean(inCombat); // 2 - Combat flag
+		bb.addObject(defenders); // 3 - Defenders List (Set, Long)
+		bb.addInt(0); // 4 - Map color
+		bb.addInt(0); // 5 - Access List
 			bb.addInt(0);
-		bb.addInt(0); // Map color
-		bb.addInt(0); // Access List
+		bb.addInt(0); // 6 - Guild Access Set
 			bb.addInt(0);
-		bb.addInt(0); // Guild Access Set
-			bb.addInt(0);
-		bb.addInt(0); // Effects Map
-			bb.addInt(0);
+		bb.addObject(effectsMap); // 7 - Effects Map
 		
 		bb.incrementOperandCount(6);
 	}
 	
-	public void createBaseline8(Player target, BaselineBuilder bb) {
-		super.createBaseline8(target, bb);
-		bb.addShort(0);
-		bb.addShort(0);
-		
-		bb.incrementOperandCount(2);
+	protected void parseBaseline3(NetBuffer buffer) {
+		super.parseBaseline3(buffer);
+		if (getStringId().toString().equals("@obj_n:unknown_object"))
+			return;
+		pvpFaction = PvpFaction.getFactionForCrc(buffer.getInt());
+		pvpStatus = PvpStatus.getStatusForValue(buffer.getInt());
+		appearanceData = buffer.getArray();
+		buffer.getSwgSet(3, 7, Integer.class);
+		optionFlags = buffer.getInt();
+		buffer.getInt();
+		condition = buffer.getInt();
+		maxHitPoints = buffer.getInt();
+		visibleGmOnly = buffer.getBoolean();
 	}
 	
-	public void createBaseline9(Player target, BaselineBuilder bb) {
-		super.createBaseline9(target, bb);
-		bb.addShort(0);
-		bb.addShort(0);
-		
-		bb.incrementOperandCount(2);
+	protected void parseBaseline6(NetBuffer buffer) {
+		super.parseBaseline6(buffer);
+		if (getStringId().toString().equals("@obj_n:unknown_object"))
+			return;
+		inCombat = buffer.getBoolean();
+		defenders = buffer.getSwgSet(6, 3, Long.TYPE);
+		buffer.getInt();
+		buffer.getSwgSet(6, 5, StringType.ASCII);
+		buffer.getSwgSet(6, 6, StringType.ASCII);
+		effectsMap = buffer.getSwgMap(6, 7, StringType.ASCII);
 	}
+	
+	@Override
+	protected void sendBaselines(Player target) {
+		super.sendBaselines(target);
+		
+		new FactionIntent(this, FactionIntentType.FLAGUPDATE).broadcast();
+	}
+
 }

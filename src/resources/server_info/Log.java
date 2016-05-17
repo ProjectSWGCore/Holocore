@@ -29,28 +29,34 @@ package resources.server_info;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
+import resources.control.Service;
+
 public class Log {
 	
-	private static final DateFormat LOG_FORMAT = new SimpleDateFormat("dd-mm-yy HH:mm:ss.SSS");
-	private static final Log LOG = new Log("log.txt");
+	private static final DateFormat LOG_FORMAT = new SimpleDateFormat("dd-MM-yy HH:mm:ss.SSS");
+	private static final Log LOG = new Log("log.txt", LogLevel.VERBOSE);
 	
 	private final File file;
 	private BufferedWriter writer;
+	private LogLevel level;
 	private boolean open;
 	
-	private Log(String filename) {
+	private Log(String filename, LogLevel level) {
 		this.file = new File(filename);
+		this.level = level;
 		open = false;
 	}
 	
 	private synchronized void open() throws IOException {
 		if (!open)
-			writer = new BufferedWriter(new FileWriter(file));
+			writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8));
 		open = true;
 	}
 	
@@ -66,6 +72,14 @@ public class Log {
 			writer.newLine();
 			writer.flush();
 		}
+	}
+	
+	private synchronized void setLevel(LogLevel level) {
+		this.level = level;
+	}
+	
+	private synchronized LogLevel getLevel() {
+		return level;
 	}
 	
 	protected static final void start() {
@@ -85,17 +99,39 @@ public class Log {
 	}
 	
 	/**
+	 * Sets the minimum level for logs to be reported. This is according to the
+	 * following order: VERBOSE, DEBUG, INFO, WARNING, ERROR, then ASSERT.
+	 * @param level the minimum log level, inclusively. Default is VERBOSE
+	 */
+	public static final void setLogLevel(LogLevel level) {
+		synchronized (LOG) {
+			LOG.setLevel(level);
+		}
+	}
+	
+	/**
 	 * Logs the string to the server log file, formatted to display the log
 	 * severity, time, tag and message.
-	 * @param level the log level of this message between INFO and ASSERT
+	 * @param level the log level of this message between VERBOSE and ASSERT
 	 * @param tag the tag to use for the log
 	 * @param str the format string for the log
 	 * @param args the string format arguments, if specified
 	 */
 	public static final void log(LogLevel level, String tag, String str, Object ... args) {
-		String date = LOG_FORMAT.format(System.currentTimeMillis());
+		synchronized (LOG) {
+			if (LOG.getLevel().compareTo(level) > 0)
+				return;
+		}
+		String date;
+		synchronized (LOG_FORMAT) {
+			date = LOG_FORMAT.format(System.currentTimeMillis());
+		}
 		String logStr = String.format(str, args);
 		String log = String.format("%s %c/[%s]: %s", date, level.getChar(), tag, logStr);
+		if (level.compareTo(LogLevel.WARN) >= 0)
+			System.err.println(date + " " + level.getChar() + ": " + logStr);
+		else
+			System.out.println(date + " " + level.getChar() + ": " + logStr);
 		synchronized (LOG) {
 			try {
 				LOG.write(log);
@@ -107,22 +143,31 @@ public class Log {
 	
 	/**
 	 * Logs the string to the server log file, formatted to display the log
-	 * severity as INFO, as well as the time, tag and message.
-	 * @param level the log level of this message between INFO and ASSERT
+	 * severity as VERBOSE, as well as the time, tag and message.
 	 * @param tag the tag to use for the log
-	 * @param str the format string for the log
+	 * @param message the format string for the log
 	 * @param args the string format arguments, if specified
 	 */
-	public static final void i(String tag, String message, Object ... args) {
-		log(LogLevel.INFO, tag, message, args);
+	public static final void v(String tag, String message, Object ... args) {
+		log(LogLevel.VERBOSE, tag, message, args);
+	}
+	
+	/**
+	 * Logs the string to the server log file, formatted to display the log
+	 * severity as VERBOSE, as well as the time, service name and message.
+	 * @param service the service outputting this log info
+	 * @param message the format string for the log
+	 * @param args the string format arguments, if specified
+	 */
+	public static final void v(Service service, String message, Object ... args) {
+		log(LogLevel.VERBOSE, service.getClass().getSimpleName(), message, args);
 	}
 	
 	/**
 	 * Logs the string to the server log file, formatted to display the log
 	 * severity as DEBUG, as well as the time, tag and message.
-	 * @param level the log level of this message between INFO and ASSERT
 	 * @param tag the tag to use for the log
-	 * @param str the format string for the log
+	 * @param message the format string for the log
 	 * @param args the string format arguments, if specified
 	 */
 	public static final void d(String tag, String message, Object ... args) {
@@ -131,10 +176,42 @@ public class Log {
 	
 	/**
 	 * Logs the string to the server log file, formatted to display the log
-	 * severity as WARN, as well as the time, tag and message.
-	 * @param level the log level of this message between INFO and ASSERT
+	 * severity as DEBUG, as well as the time, tag and message.
+	 * @param service the service outputting this log info
+	 * @param message the format string for the log
+	 * @param args the string format arguments, if specified
+	 */
+	public static final void d(Service service, String message, Object ... args) {
+		log(LogLevel.DEBUG, service.getClass().getSimpleName(), message, args);
+	}
+	
+	/**
+	 * Logs the string to the server log file, formatted to display the log
+	 * severity as INFO, as well as the time, tag and message.
 	 * @param tag the tag to use for the log
-	 * @param str the format string for the log
+	 * @param message the format string for the log
+	 * @param args the string format arguments, if specified
+	 */
+	public static final void i(String tag, String message, Object ... args) {
+		log(LogLevel.INFO, tag, message, args);
+	}
+	
+	/**
+	 * Logs the string to the server log file, formatted to display the log
+	 * severity as INFO, as well as the time, service name and message.
+	 * @param service the service outputting this log info
+	 * @param message the format string for the log
+	 * @param args the string format arguments, if specified
+	 */
+	public static final void i(Service service, String message, Object ... args) {
+		log(LogLevel.INFO, service.getClass().getSimpleName(), message, args);
+	}
+	
+	/**
+	 * Logs the string to the server log file, formatted to display the log
+	 * severity as WARN, as well as the time, tag and message.
+	 * @param tag the tag to use for the log
+	 * @param message the format string for the log
 	 * @param args the string format arguments, if specified
 	 */
 	public static final void w(String tag, String message, Object ... args) {
@@ -143,10 +220,40 @@ public class Log {
 	
 	/**
 	 * Logs the string to the server log file, formatted to display the log
-	 * severity as ERROR, as well as the time, tag and message.
-	 * @param level the log level of this message between INFO and ASSERT
+	 * severity as WARN, as well as the time, tag and message.
+	 * @param service the service outputting this log info
+	 * @param message the format string for the log
+	 * @param args the string format arguments, if specified
+	 */
+	public static final void w(Service service, String message, Object ... args) {
+		log(LogLevel.WARN, service.getClass().getSimpleName(), message, args);
+	}
+	
+	/**
+	 * Logs the exception to the server log file, formatted to display the log
+	 * severity as WARN, as well as the time, and tag.
 	 * @param tag the tag to use for the log
-	 * @param str the format string for the log
+	 * @param exception the exception to print
+	 */
+	public static final void w(String tag, Throwable exception) {
+		printException(LogLevel.WARN, tag, exception);
+	}
+	
+	/**
+	 * Logs the exception to the server log file, formatted to display the log
+	 * severity as WARN, as well as the time, and tag.
+	 * @param service the service outputting this log info
+	 * @param exception the exception to print
+	 */
+	public static final void w(Service service, Throwable exception) {
+		printException(LogLevel.WARN, service.getClass().getSimpleName(), exception);
+	}
+	
+	/**
+	 * Logs the string to the server log file, formatted to display the log
+	 * severity as ERROR, as well as the time, tag and message.
+	 * @param tag the tag to use for the log
+	 * @param message the format string for the log
 	 * @param args the string format arguments, if specified
 	 */
 	public static final void e(String tag, String message, Object ... args) {
@@ -155,19 +262,89 @@ public class Log {
 	
 	/**
 	 * Logs the string to the server log file, formatted to display the log
-	 * severity as ASSERT, as well as the time, tag and message.
-	 * @param level the log level of this message between INFO and ASSERT
+	 * severity as ERROR, as well as the time, tag and message.
+	 * @param service the service outputting this log info
+	 * @param message the format string for the log
+	 * @param args the string format arguments, if specified
+	 */
+	public static final void e(Service service, String message, Object ... args) {
+		log(LogLevel.ERROR, service.getClass().getSimpleName(), message, args);
+	}
+	
+	/**
+	 * Logs the exception to the server log file, formatted to display the log
+	 * severity as ERROR, as well as the time, and tag.
 	 * @param tag the tag to use for the log
-	 * @param str the format string for the log
+	 * @param exception the exception to print
+	 */
+	public static final void e(String tag, Throwable exception) {
+		printException(LogLevel.ERROR, tag, exception);
+	}
+	
+	/**
+	 * Logs the exception to the server log file, formatted to display the log
+	 * severity as ERROR, as well as the time, and tag.
+	 * @param service the service outputting this log info
+	 * @param exception the exception to print
+	 */
+	public static final void e(Service service, Throwable exception) {
+		printException(LogLevel.ERROR, service.getClass().getSimpleName(), exception);
+	}
+	
+	/**
+	 * Logs the string to the server log file, formatted to display the log
+	 * severity as ASSERT, as well as the time, tag and message.
+	 * @param tag the tag to use for the log
+	 * @param message the format string for the log
 	 * @param args the string format arguments, if specified
 	 */
 	public static final void a(String tag, String message, Object ... args) {
 		log(LogLevel.ASSERT, tag, message, args);
 	}
 	
+	/**
+	 * Logs the string to the server log file, formatted to display the log
+	 * severity as ASSERT, as well as the time, tag and message.
+	 * @param service the service outputting this log info
+	 * @param str the format string for the log
+	 * @param args the string format arguments, if specified
+	 */
+	public static final void a(Service service, String message, Object ... args) {
+		log(LogLevel.ASSERT, service.getClass().getSimpleName(), message, args);
+	}
+	
+	/**
+	 * Logs the exception to the server log file, formatted to display the log
+	 * severity as ASSERT, as well as the time, and tag.
+	 * @param tag the tag to use for the log
+	 * @param exception the exception to print
+	 */
+	public static final void a(String tag, Throwable exception) {
+		printException(LogLevel.ASSERT, tag, exception);
+	}
+	
+	/**
+	 * Logs the exception to the server log file, formatted to display the log
+	 * severity as ASSERT, as well as the time, and tag.
+	 * @param service the service outputting this log info
+	 * @param exception the exception to print
+	 */
+	public static final void a(Service service, Throwable exception) {
+		printException(LogLevel.ASSERT, service.getClass().getSimpleName(), exception);
+	}
+	
+	private static final void printException(LogLevel level, String tag, Throwable exception) {
+		log(level, tag, "Exception in thread\"%s\" %s: %s", Thread.currentThread().getName(), exception.getClass().getName(), exception.getMessage());
+		log(level, tag, "Caused by: %s: %s", exception.getClass(), exception.getMessage());
+		for (StackTraceElement e : exception.getStackTrace()) {
+			log(level, tag, "    " + e.toString());
+		}
+	}
+	
 	public static enum LogLevel {
-		INFO	('I'),
+		VERBOSE	('V'),
 		DEBUG	('D'),
+		INFO	('I'),
 		WARN	('W'),
 		ERROR	('E'),
 		ASSERT	('A');

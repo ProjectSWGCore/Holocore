@@ -27,28 +27,40 @@
 ***********************************************************************************/
 package resources.encodables.player;
 
-import network.packets.Packet;
+import network.packets.swg.zone.baselines.Baseline;
 import resources.common.CRC;
 import resources.encodables.Encodable;
+import resources.network.NetBuffer;
 import resources.objects.SWGObject;
+import resources.objects.tangible.TangibleObject;
 import resources.objects.weapon.WeaponObject;
+import resources.player.Player;
+import resources.server_info.Log;
+import services.objects.ObjectCreator;
 
 import java.io.Serializable;
 import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 
 public class Equipment implements Encodable, Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	private WeaponObject 	weapon;
-	private byte[] 			customizationString;
-	private int 			arrangementId = 4;
-	private long 			objectId;
-	private String          template;
+	private TangibleObject 	weapon;
+	private byte []			customizationString;
+	private int				arrangementId;
+	private long			objectId;
+	private CRC				template;
+	
+	public Equipment() {
+		this(0, null);
+	}
 	
 	public Equipment(long objectId, String template) {
 		this.objectId = objectId;
-		this.template = template;
+		this.template = new CRC(template);
+		this.customizationString = new byte[0];
+		this.arrangementId = 4;
+		this.objectId = 0;
+		this.weapon = null;
 	}
 	
 	public Equipment(WeaponObject weapon) {
@@ -57,45 +69,32 @@ public class Equipment implements Encodable, Serializable {
 	}
 	
 	@Override
-	public byte[] encode() {
-		// TODO: This is not working for weapons (crashes w/ a weapon), needs to be refactored
-		ByteBuffer buffer;
-		//byte[] weaponData = null;
+	public byte [] encode() {
+		byte [] weaponData = new byte[0];
+		if (weapon != null)
+			weaponData = getWeaponData();
 		
-/*		if (weapon != null) {
-			weaponData = weapon.encode();
-			
-			buffer = ByteBuffer.allocate(19 + weaponData.length).order(ByteOrder.LITTLE_ENDIAN);
-		} else {*/
-			buffer = ByteBuffer.allocate(19).order(ByteOrder.LITTLE_ENDIAN);
-/*		}*/
-
-		if (customizationString == null) buffer.putShort((short) 0); // TODO: Create encodable class for customization string
-		else buffer.put(customizationString);
+		NetBuffer buffer = NetBuffer.allocate(19 + weaponData.length);
 		
-		buffer.putInt(arrangementId);
-		buffer.putLong(objectId);
-		buffer.putInt(CRC.getCrc(template));
-		
-/*		if (weapon != null) {
-			buffer.put((byte) 0x01);
-			buffer.put(weaponData);
-		} else {*/
-			buffer.put((byte) 0x00);
-/*		}*/
+		buffer.addArray(customizationString); // TODO: Create encodable class for customization string
+		buffer.addInt(arrangementId);
+		buffer.addLong(objectId);
+		buffer.addEncodable(template);
+		buffer.addBoolean(weapon != null);
+		buffer.addRawArray(weaponData);
 		
 		return buffer.array();
 	}
 
 	@Override
-	public void decode(ByteBuffer data) {
-		customizationString	= Packet.getArray(data); // TODO: Create encodable class for customization string
-		arrangementId		= Packet.getInt(data);
-		objectId			= Packet.getLong(data);
-/*		template			=*/Packet.getInt(data);
-
-		// TODO: Re-do when weapon encode for Equipment is fixed
-/*		boolean weapon		=*/Packet.getBoolean(data);
+	public void decode(ByteBuffer bb) {
+		NetBuffer data = NetBuffer.wrap(bb);
+		customizationString	= data.getArray(); // TODO: Create encodable class for customization string
+		arrangementId		= data.getInt();
+		objectId			= data.getLong();
+		template			= data.getEncodable(CRC.class);
+		if (data.getBoolean())
+			this.weapon = createWeaponFromData(data);
 	}
 
 	public byte[] getCustomizationString() {return customizationString;}
@@ -107,11 +106,46 @@ public class Equipment implements Encodable, Serializable {
 	public long getObjectId() { return objectId; }
 	public void setObjectId(long objectId) { this.objectId = objectId; }
 
-	public String getTemplate() { return template; }
-	public void setTemplate(String template) { this.template = template; }
+	public String getTemplate() { return template.getString(); }
+	public void setTemplate(String template) { this.template = new CRC(template); }
+	
+	public TangibleObject getWeapon() { return weapon; }
+	public void setWeapon(TangibleObject weapon) { this.weapon = weapon; }
+	
+	private byte[] getWeaponData() {
+		Player target = weapon.getOwner();
+		ByteBuffer data3 = weapon.createBaseline3(target).encode();
+		data3.position(0);
 
+		ByteBuffer data6 = weapon.createBaseline6(target).encode();
+		data6.position(0);
+		
+		ByteBuffer ret = ByteBuffer.allocate(data3.remaining() + data6.remaining());
+		ret.put(data3);
+		ret.put(data6);
+		return ret.array();
+	}
+	
+	private TangibleObject createWeaponFromData(NetBuffer data) {
+		SWGObject weapon = ObjectCreator.createObjectFromTemplate(objectId, template.getString());
+		
+		Baseline b3 = new Baseline();
+		b3.decode(data.getBuffer());
+		Baseline b6 = new Baseline();
+		b6.decode(data.getBuffer());
+		
+		weapon.parseBaseline(b3);
+		weapon.parseBaseline(b6);
+		if (weapon instanceof TangibleObject)
+			return (TangibleObject) weapon;
+		Log.e("Equipment", "Unknown Equipment Type: " + weapon.getClass().getSimpleName());
+		return null;
+	}
+	
 	@Override
 	public String toString() {
+		if (weapon != null)
+			return "Equipment: " + weapon;
 		return "Equipment: " + template;
 	}
 
@@ -121,5 +155,10 @@ public class Equipment implements Encodable, Serializable {
 			return super.equals(o);
 
 		return ((SWGObject) o).getObjectId() == objectId;
+	}
+	
+	@Override
+	public int hashCode() {
+		return Long.hashCode(objectId);
 	}
 }

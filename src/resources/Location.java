@@ -90,10 +90,26 @@ public class Location implements Encodable, Serializable {
 	public Quaternion getOrientation() { return new Quaternion(orientation); }
 	
 	public boolean isWithinDistance(Location l, double x, double y, double z) {
+		if (getTerrain() != l.getTerrain())
+			return false;
 		double xD = Math.abs(getX() - l.getX());
 		double yD = Math.abs(getY() - l.getY());
 		double zD = Math.abs(getZ() - l.getZ());
 		return xD <= x && yD <= y && zD <= z;
+	}
+	
+	public boolean isWithinDistance(Location l, double radius) {
+		return isWithinDistance(l.getTerrain(), l.getX(), l.getY(), l.getZ(), radius);
+	}
+	
+	public boolean isWithinDistance(Terrain t, double x, double y, double z, double radius) {
+		if (getTerrain() != t)
+			return false;
+		return square(getX()-x) + square(getY()-y) + square(getZ()-z) <= square(radius);
+	}
+	
+	public boolean isWithinFlatDistance(Point3D target, double radius){
+		return square(getX() - target.getX()) + square(getZ() - target.getZ()) <= square(radius);
 	}
 	
 	public void translatePosition(double x, double y, double z) {
@@ -153,15 +169,15 @@ public class Location implements Encodable, Serializable {
 	
 	public boolean mergeLocation(double lX, double lY, double lZ) {
 		boolean changed = false;
-		if (Double.isNaN(getX()) || getX() != lX) {
+		if (Double.isNaN(getX()) || !isEqual(getX(), lX)) {
 			setX(lX);
 			changed = true;
 		}
-		if (Double.isNaN(getY()) || getY() != lY) {
+		if (Double.isNaN(getY()) || !isEqual(getY(), lY)) {
 			setY(lY);
 			changed = true;
 		}
-		if (Double.isNaN(getZ()) || getZ() != lZ) {
+		if (Double.isNaN(getZ()) || !isEqual(getZ(), lZ)) {
 			setZ(lZ);
 			changed = true;
 		}
@@ -174,19 +190,19 @@ public class Location implements Encodable, Serializable {
 		double oZ = getOrientationZ();
 		double oW = getOrientationW();
 		boolean changed = false;
-		if (!Double.isNaN(l.getOrientationX()) && (Double.isNaN(oX) || oX != l.getOrientationX())) {
+		if (!Double.isNaN(l.getOrientationX()) && (Double.isNaN(oX) || !isEqual(oX, l.getOrientationX()))) {
 			oX = l.getOrientationX();
 			changed = true;
 		}
-		if (!Double.isNaN(l.getOrientationY()) && (Double.isNaN(oY) || oY != l.getOrientationY())) {
+		if (!Double.isNaN(l.getOrientationY()) && (Double.isNaN(oY) || !isEqual(oY, l.getOrientationY()))) {
 			oY = l.getOrientationY();
 			changed = true;
 		}
-		if (!Double.isNaN(l.getOrientationZ()) && (Double.isNaN(oZ) || oZ != l.getOrientationZ())) {
+		if (!Double.isNaN(l.getOrientationZ()) && (Double.isNaN(oZ) || !isEqual(oZ, l.getOrientationZ()))) {
 			oZ = l.getOrientationZ();
 			changed = true;
 		}
-		if (!Double.isNaN(l.getOrientationW()) && (Double.isNaN(oW) || oW != l.getOrientationW())) {
+		if (!Double.isNaN(l.getOrientationW()) && (Double.isNaN(oW) || !isEqual(oW,  l.getOrientationW()))) {
 			oW = l.getOrientationW();
 			changed = true;
 		}
@@ -205,6 +221,12 @@ public class Location implements Encodable, Serializable {
 	
 	private double square(double x) {
 		return x*x;
+	}
+	
+	public boolean equals(Object o) {
+		if (!(o instanceof Location))
+			return false;
+		return equals((Location) o);
 	}
 	
 	public boolean equals(Location l) {
@@ -241,7 +263,7 @@ public class Location implements Encodable, Serializable {
 			return Double.isNaN(y);
 		if (Double.isNaN(y))
 			return false;
-		return x == y;
+		return Math.abs(x - y) <= 1E-7;
 	}
 
 	@Override
@@ -263,7 +285,16 @@ public class Location implements Encodable, Serializable {
 		point.decode(data);
 	}
 
+	@Override
 	public String toString() {
 		return String.format("Location[TRN=%s, %s %s]", terrain, point, orientation);
+	}
+	
+	/**
+	 * @param destination to get the distance for
+	 * @return the distance between {@code this} and destination, which is ALWAYS positive.
+	 */
+	public double distanceTo(Location destination) {
+		return Math.sqrt(square(destination.getX() - getX()) + square(destination.getY() - getY()) + square(destination.getZ() - getZ()));
 	}
 }

@@ -28,16 +28,20 @@
 package resources.client_info;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
+import java.nio.charset.StandardCharsets;
+
+import resources.server_info.Log;
 
 /**
  * Created by Waverunner on 6/4/2015
  */
 public class SWGFile {
+
 	private String type;
 	private IffNode master;
 	private IffNode currentForm;
@@ -55,40 +59,41 @@ public class SWGFile {
 		this.master = new IffNode(type, true);
 		this.currentForm = master;
 	}
+	
+	public void printTree() {
+		printTree(master, 0);
+	}
+	
+	private void printTree(IffNode node, int depth) {
+		for (int i = 0; i < depth; i++)
+			System.out.print("\t");
+		System.out.println(node.getTag()+":form="+node.isForm());
+		for (IffNode child : node.getChildren())
+			printTree(child, depth+1);
+	}
 
 	public void save(File file) throws IOException {
-		FileOutputStream outputStream = new FileOutputStream(file, false);
-		outputStream.write(getData());
-		outputStream.close();
+		try (FileOutputStream outputStream = new FileOutputStream(file, false)) {
+			outputStream.write(getData());
+		}
 	}
 
 	public void read(File file) throws IOException {
-		FileInputStream inputStream = new FileInputStream(file);
-		FileChannel channel = inputStream.getChannel();
-
+		FileChannel channel = FileChannel.open(file.toPath());
+		MappedByteBuffer bb = channel.map(FileChannel.MapMode.READ_ONLY, 0, channel.size());
 		int size = (int) channel.size();
-		ByteBuffer bb = ByteBuffer.allocate((int) channel.size());
-		if (channel.read(bb) != size) {
-			System.err.println("Failed to properly read the bytes in file " + file.getAbsolutePath() + "!");
-			inputStream.close();
-			return;
-		} else {
-			inputStream.close();
-		}
-
-		// Reading will add bytes to the buffer, so we need to flip it before reading the buffer to IffNode's
-		bb.flip();
+		channel.close();
 
 		master = new IffNode("", true);
 		currentForm = master;
 
 		if (!isValidIff(bb, size)) {
-			System.err.println("Tried to open a file not in a valid Interchangeable File Format: " + file.getAbsolutePath());
+			Log.e("SWGFile", "Tried to open a file not in a valid Interchangeable File Format: " + file.getAbsolutePath());
 			return;
 		}
 
 		if (size != master.populateFromBuffer(bb)) {
-			System.err.println("Size mismatch between population result and channel size: " + file.getAbsolutePath());
+			Log.e("SWGFile", "Size mismatch between population result and channel size: " + file.getAbsolutePath());
 			return;
 		}
 
@@ -101,7 +106,7 @@ public class SWGFile {
 
 		byte[] tag = new byte[4];
 		buffer.get(tag);
-		String root = new String(tag);
+		String root = new String(tag, StandardCharsets.UTF_8);
 		if (!root.equals("FORM"))
 			return false;
 
@@ -131,6 +136,10 @@ public class SWGFile {
 		IffNode chunk = new IffNode(tag, false);
 		currentForm.addChild(chunk);
 		return chunk;
+	}
+	
+	public boolean hasNextForm() {
+		return currentForm.getNextUnreadForm() != null;
 	}
 
 	/**
@@ -208,6 +217,17 @@ public class SWGFile {
 		}
 
 		return currentForm;
+	}
+	
+	public boolean containsUnreadChunk(String tag) {
+		for (IffNode child : currentForm.getChildren()) {
+			if (child.isForm() || child.hasBeenRead())
+				continue;
+
+			if (child.getTag().equals(tag))
+				return true;
+		}
+		return false;
 	}
 
 	public byte[] getData() {

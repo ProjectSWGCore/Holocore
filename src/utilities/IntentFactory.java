@@ -1,6 +1,6 @@
 package utilities;
 
-import intents.sui.SuiWindowIntent;
+import network.packets.swg.zone.chat.ChatSystemMessage;
 import resources.Terrain;
 import resources.encodables.OutOfBandPackage;
 import resources.encodables.ProsePackage;
@@ -12,7 +12,7 @@ import resources.player.Player;
 import intents.chat.ChatBroadcastIntent;
 import intents.chat.ChatBroadcastIntent.BroadcastType;
 import intents.chat.PersistentMessageIntent;
-import resources.sui.SuiWindow;
+import resources.server_info.Log;
 
 /**
  * @author Mads
@@ -36,9 +36,10 @@ public final class IntentFactory {
 	/**
 	 * Sends a system message to the entire galaxy.
 	 * @param message System message to broadcast.
+	 * @param source The source of this system message.
 	 */
-	public void broadcastGalaxy(String message) {
-		broadcast(message, null, BroadcastType.GALAXY);
+	public void broadcastGalaxy(String message, Player source) {
+		broadcast(message, source, BroadcastType.GALAXY);
 	}
 
 	/**
@@ -74,12 +75,23 @@ public final class IntentFactory {
 	 *                set the %DI to the value of 500 for the StringId.
 	 *                Note that the prose key must always come first and the value for that key must always come second.
 	 */
-	public void sendSystemMessage(Player target, String stf, Object ... objects) {
+	public static void sendSystemMessage(Player target, String stf, Object ... objects) {
+		if (objects.length % 2 != 0)
+			Log.e("ProsePackage", "Sent a ProsePackage chat message with an uneven number of object arguments for StringId %s", stf);
 		Object [] prose = new Object[objects.length + 2];
 		prose[0] = "StringId";
 		prose[1] = new StringId(stf);
 		System.arraycopy(objects, 0, prose, 2, objects.length);
 		new ChatBroadcastIntent(target, new ProsePackage(prose)).broadcast();
+	}
+
+	/**
+	 * Sends a message to just the console chat for the target.
+	 * @param target Player to receive the message
+	 * @param message Message to display in the players chat console.
+	 */
+	public void sendConsoleMessage(Player target, String message) {
+		target.sendPacket(new ChatSystemMessage(ChatSystemMessage.SystemChatType.CHAT, message));
 	}
 
 	/**
@@ -111,12 +123,4 @@ public final class IntentFactory {
 		new PersistentMessageIntent(receiver, mail, receiver.getOwner().getGalaxyName()).broadcast();
 	}
 
-	/**
-	 * Displays the provided {@link SuiWindow} to the player.
-	 * @param player Player to be shown the {@link SuiWindow}.
-	 * @param suiWindow {@link SuiWindow} to be shown
-	 */
-	public void showSuiWindow(Player player, SuiWindow suiWindow) {
-		new SuiWindowIntent(player, suiWindow, SuiWindowIntent.SuiWindowEvent.NEW).broadcast();
-	}
 }

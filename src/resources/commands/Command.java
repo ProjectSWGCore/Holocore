@@ -33,8 +33,10 @@ public class Command {
 	
 	private String name;
 	// defaultPriority
-	private String scriptCallback;
+	private String scriptHook;
+
 	// fail
+	private String cppHook;
 	private Class<? extends ICmdCallback> javaCallback;
 	// fail
 	private float defaultTime;
@@ -51,7 +53,7 @@ public class Command {
 	private int maxRange;
 	private int godLevel;
 	// display group
-	// add to combat queue
+	private boolean combatCommand;
 	private int validWeapon;
 	private int invalidWeapon;
 	private String cooldownGroup;
@@ -72,8 +74,10 @@ public class Command {
 	public void setCrc(int crc) { this.crc = crc; }
 	public String getName() { return name; }
 	public void setName(String name) { this.name = name; }
-	public String getScriptCallback() { return scriptCallback; }
-	public void setScriptCallback(String scriptCallback) { this.scriptCallback = scriptCallback; }
+	public String getScriptHook() { return scriptHook; }
+	public void setScriptHook(String scriptHook) { this.scriptHook = scriptHook; }
+	public String getCppHook() { return cppHook; }
+	public void setCppHook(String cppHook) { this.cppHook = cppHook; }
 	public Class<? extends ICmdCallback> getJavaCallback() { return javaCallback; }
 	public <T extends ICmdCallback> void setJavaCallback(Class<T> javaCallback) { this.javaCallback = javaCallback; }
 	public boolean hasJavaCallback() { return javaCallback != null; }
@@ -91,6 +95,8 @@ public class Command {
 	public void setMaxRange(int maxRange) { this.maxRange = maxRange; }
 	public int getGodLevel() { return godLevel; }
 	public void setGodLevel(int godLevel) { this.godLevel = godLevel; }
+	public boolean isCombatCommand() { return combatCommand; }
+	public void setCombatCommand(boolean combatCommand) { this.combatCommand = combatCommand; }
 	public int getValidWeapon() { return validWeapon; }
 	public void setValidWeapon(int validWeapon) { this.validWeapon = validWeapon; }
 	public int getInvalidWeapon() { return invalidWeapon; }
@@ -109,6 +115,8 @@ public class Command {
 	public void setCooldownTime2(int cooldownTime2) { this.cooldownTime2 = cooldownTime2; }
 	public boolean isAutoAddToToolbar() { return autoAddToToolbar; }
 	public void setAutoAddToToolbar(boolean autoAddToToolbar) { this.autoAddToToolbar = autoAddToToolbar; }
+
+	public String getDefaultScriptCallback(){ return (scriptHook == null || scriptHook.isEmpty()) ? cppHook : scriptHook; }
 	
 	@Override
 	public String toString() {

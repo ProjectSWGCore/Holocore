@@ -31,6 +31,8 @@ import intents.server.ConfigChangedIntent;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -42,25 +44,32 @@ import resources.control.IntentReceiver;
 public class DataManager implements IntentReceiver {
 
 	private static final Object instanceLock = new Object();
+	private static final String ENABLE_LOGGING = "ENABLE-LOGGING";
 	private static DataManager instance = null;
 
 	private Map<ConfigFile, Config> config;
+	private List<ConfigWatcher> watchers;
 	private RelationalDatabase localDatabase;
 	private boolean initialized;
-	private ConfigWatcher cfgWatcher;
 
 	private DataManager() {
 		initialized = false;
 		IntentManager.getInstance().registerForIntent(ConfigChangedIntent.TYPE, this);
+		watchers = new ArrayList<>();
 	}
 
 	private synchronized void initialize() {
 		initializeConfig();
 		initializeDatabases();
-		if (getConfig(ConfigFile.PRIMARY).getBoolean("ENABLE-LOGGING", true))
+		if (getConfig(ConfigFile.PRIMARY).getBoolean(ENABLE_LOGGING, true))
 			Log.start();
 		initialized = localDatabase.isOnline()
 				&& localDatabase.isTable("users");
+	}
+	
+	private synchronized void shutdown() {
+		for (ConfigWatcher watcher : watchers)
+			watcher.stop();
 	}
 
 	private synchronized void initializeConfig() {
@@ -68,18 +77,41 @@ public class DataManager implements IntentReceiver {
 		for (ConfigFile file : ConfigFile.values()) {
 			File f = new File(file.getFilename());
 			try {
-				if (!f.exists() && !f.createNewFile() && !f.isFile()) {
-					System.err.println("Service: Warning - ConfigFile could not be loaded! " + file.getFilename());
+				if (!createFilesAndDirectories(f)) {
+					Log.w("DataManager", "ConfigFile could not be loaded! " + file.getFilename());
 				} else {
 					config.put(file, new Config(f));
 				}
 
-				cfgWatcher = new ConfigWatcher(config);
-				cfgWatcher.start();
+				ConfigWatcher watcher = new ConfigWatcher(config);
+				watcher.start();
+				watchers.add(watcher);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	private boolean createFilesAndDirectories(File file) {
+		if (file.exists())
+			return true;
+		try {
+			String parentName = file.getParent();
+			if (parentName != null && !parentName.isEmpty()) {
+				File parent = new File(file.getParent());
+				if (!parent.exists() && !parent.mkdirs())
+					Log.e(getClass().getSimpleName(), "Failed to create parent directories for ODB: " + file.getCanonicalPath());
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		try {
+			if (!file.createNewFile())
+				Log.e(getClass().getSimpleName(), "Failed to create new ODB: " + file.getCanonicalPath());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return file.exists();
 	}
 
 	private synchronized void initializeDatabases() {
@@ -132,11 +164,29 @@ public class DataManager implements IntentReceiver {
 			return instance;
 		}
 	}
+	
+	public synchronized static final void terminate() {
+		synchronized (instanceLock) {
+			if (instance != null) {
+				instance.shutdown();
+				instance = null;
+			}
+		}
+	}
 
 	@Override
 	public void onIntentReceived(Intent i) {
+		if (!(i instanceof ConfigChangedIntent))
+			return;
 		ConfigChangedIntent cci = (ConfigChangedIntent) i;
+		if(!cci.getKey().equals(ENABLE_LOGGING))
+			return;
 		boolean log = Boolean.valueOf(cci.getNewValue());
+		boolean oldValue = Boolean.valueOf(cci.getOldValue());
+		
+		// If the value hasn't changed, then do nothing.
+		if(log == oldValue)
+			return;
 
 		if (log)
 			Log.start();

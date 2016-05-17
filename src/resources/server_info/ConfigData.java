@@ -30,9 +30,12 @@ package resources.server_info;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
@@ -52,15 +55,21 @@ class ConfigData {
 	}
 	
 	public boolean containsKey(String key) {
-		return data.containsKey(key);
+		synchronized (data) {
+			return data.containsKey(key);
+		}
 	}
 	
 	public String get(String key) {
-		return data.get(key);
+		synchronized (data) {
+			return data.get(key);
+		}
 	}
 	
 	public String put(String key, String value) {
-		return data.put(key, value);
+		synchronized (data) {
+			return data.put(key, value);
+		}
 	}
 	
 	/**
@@ -71,54 +80,57 @@ class ConfigData {
 		Map<String, String> delta = new HashMap<>();
 		BufferedReader reader = null;
 		
-		delta.putAll(data);	// Copy the current data
-		
-		try {
-			reader = new BufferedReader(new FileReader(file));
-			String line = reader.readLine();
-			while (line != null) {
-				loadLine(line);
-				line = reader.readLine();
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-			return null;
-		} finally {
-			if (reader != null) {
-				try {
-					reader.close();
-				} catch (IOException e) {
-					return null;
+		synchronized (data) {
+			delta.putAll(data);	// Copy the current data
+			
+			try {
+				reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8));
+				String line = reader.readLine();
+				while (line != null) {
+					loadLine(line);
+					line = reader.readLine();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+				return null;
+			} finally {
+				if (reader != null) {
+					try {
+						reader.close();
+					} catch (IOException e) {
+						return null;
+					}
 				}
 			}
+			for(Entry<String, String> entry : data.entrySet())
+				delta.remove(entry.getKey(), entry.getValue());
 		}
-		
-		for(Entry<String, String> entry : data.entrySet())
-			delta.remove(entry.getKey(), entry.getValue());
 		
 		return delta;
 	}
 	
 	public boolean save() {
 		BufferedWriter writer = null;
-		try {
-			writer = new BufferedWriter(new FileWriter(file));
-			writer.write("# "+FORMAT.format(System.currentTimeMillis()));
-			writer.newLine();
-			for (Entry <String, String> e : data.entrySet()) {
-				writer.write(e.getKey() + "=" + e.getValue());
+		synchronized (data) {
+			try {
+				writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8));
+				writer.write("# "+FORMAT.format(System.currentTimeMillis()));
 				writer.newLine();
-			}
-			return true;
-		} catch (IOException e) {
-			e.printStackTrace();
-			return false;
-		} finally {
-			if (writer != null) {
-				try {
-					writer.close();
-				} catch (IOException e) {
-					
+				for (Entry <String, String> e : data.entrySet()) {
+					writer.write(e.getKey() + "=" + e.getValue());
+					writer.newLine();
+				}
+				return true;
+			} catch (IOException e) {
+				e.printStackTrace();
+				return false;
+			} finally {
+				if (writer != null) {
+					try {
+						writer.close();
+					} catch (IOException e) {
+						
+					}
 				}
 			}
 		}
@@ -132,7 +144,9 @@ class ConfigData {
 			return;
 		String key = beforeComment.substring(0, beforeComment.indexOf('='));
 		String val = beforeComment.substring(key.length()+1);
-		data.put(key, val);
+		synchronized (data) {
+			data.put(key, val);
+		}
 	}
 	
 }

@@ -29,6 +29,7 @@ package services.player;
 
 import intents.GalacticIntent;
 import intents.PlayerEventIntent;
+import intents.experience.SkillBoxGrantedIntent;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -50,18 +51,20 @@ import network.packets.swg.login.creation.RandomNameRequest;
 import network.packets.swg.login.creation.RandomNameResponse;
 import network.packets.swg.login.creation.ClientVerifyAndLockNameResponse.ErrorMessage;
 import network.packets.swg.login.creation.CreateCharacterFailure.NameFailureReason;
-import resources.Location;
+import resources.PvpFlag;
 import resources.Race;
-import resources.Terrain;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.ProfTemplateData;
 import resources.config.ConfigFile;
 import resources.containers.ContainerPermissions;
 import resources.control.Service;
 import resources.objects.SWGObject;
+import resources.objects.building.BuildingObject;
+import resources.objects.cell.CellObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
 import resources.objects.tangible.TangibleObject;
+import resources.objects.weapon.WeaponObject;
 import resources.player.AccessLevel;
 import resources.player.Player;
 import resources.player.PlayerEvent;
@@ -69,19 +72,27 @@ import resources.player.PlayerState;
 import resources.server_info.Log;
 import resources.zone.NameFilter;
 import services.objects.ObjectManager;
+import services.player.TerrainZoneInsertion.SpawnInformation;
 import utilities.namegen.SWGNameGenerator;
 
 public class CharacterCreationService extends Service {
-
+	
+	private static final String CREATE_CHARACTER_SQL = "INSERT INTO characters (id, name, race, userId) VALUES (?, ?, ?, ?)";
+	private static final String GET_CHARACTER_SQL = "SELECT * FROM characters WHERE name == ?";
+	private static final String GET_LIKE_CHARACTER_SQL = "SELECT name FROM characters WHERE name ilike ?"; // NOTE: ilike is not SQL standard. It is an extension for postgres only.
+	private static final String GET_CHARACTER_COUNT_SQL = "SELECT count(*) FROM characters WHERE userId = ?";
+	
 	private final Map <String, Player> lockedNames;
 	private final Map <String, ProfTemplateData> profTemplates;
 	private final NameFilter nameFilter;
 	private final SWGNameGenerator nameGenerator;
 	private final CharacterCreationRestriction creationRestriction;
+	private final TerrainZoneInsertion insertion;
 	
 	private PreparedStatement createCharacter;
 	private PreparedStatement getCharacter;
 	private PreparedStatement getLikeCharacterName;
+	private PreparedStatement getCharacterCount;
 	
 	public CharacterCreationService() {
 		lockedNames = new HashMap<String, Player>();
@@ -89,24 +100,25 @@ public class CharacterCreationService extends Service {
 		nameFilter = new NameFilter("namegen/bad_word_list.txt", "namegen/reserved_words.txt", "namegen/fiction_reserved.txt");
 		nameGenerator = new SWGNameGenerator(nameFilter);
 		creationRestriction = new CharacterCreationRestriction(2);
+		insertion = new TerrainZoneInsertion();
 	}
 	
 	@Override
 	public boolean initialize() {
-		String createCharacterSql = "INSERT INTO characters (id, name, race, userId, galaxyId) VALUES (?, ?, ?, ?, ?)";
-		createCharacter = getLocalDatabase().prepareStatement(createCharacterSql);
-		getCharacter = getLocalDatabase().prepareStatement("SELECT * FROM characters WHERE name == ?");
-		getLikeCharacterName = getLocalDatabase().prepareStatement("SELECT name FROM characters WHERE name ilike ?"); //NOTE: ilike is not SQL standard. It is an extension for postgres only.
+		createCharacter = getLocalDatabase().prepareStatement(CREATE_CHARACTER_SQL);
+		getCharacter = getLocalDatabase().prepareStatement(GET_CHARACTER_SQL);
+		getLikeCharacterName = getLocalDatabase().prepareStatement(GET_LIKE_CHARACTER_SQL);
+		getCharacterCount = getLocalDatabase().prepareStatement(GET_CHARACTER_COUNT_SQL);
 		nameGenerator.loadAllRules();
 		loadProfTemplates();
 		if (!nameFilter.load())
-			System.err.println("Failed to load name filter!");
+			Log.e(this, "Failed to load name filter!");
 		return super.initialize();
 	}
 	
 	@Override
 	public boolean start() {
-		creationRestriction.setCreationsPerPeriod(getConfig(ConfigFile.PRIMARY).getInt("GALAXY-MAX-CHARACTERS", 2));
+		creationRestriction.setCreationsPerPeriod(getConfig(ConfigFile.PRIMARY).getInt("GALAXY-MAX-CHARACTERS-PER-PERIOD", 2));
 		return super.start();
 	}
 	
@@ -165,6 +177,9 @@ public class CharacterCreationService extends Service {
 	private void handleApproveNameRequest(PlayerManager playerMgr, Player player, ClientVerifyAndLockNameRequest request) {
 		String name = request.getName();
 		ErrorMessage err = getNameValidity(name, player.getAccessLevel() != AccessLevel.PLAYER);
+		int max = getConfig(ConfigFile.PRIMARY).getInt("GALAXY-MAX-CHARACTERS", 0);
+		if (max != 0 && getCharacterCount(player.getUserId()) >= max)
+			err = ErrorMessage.SERVER_CHARACTER_CREATION_MAX_CHARS;
 		if (err == ErrorMessage.NAME_APPROVED_MODIFIED)
 			name = nameFilter.cleanName(name);
 		if (err == ErrorMessage.NAME_APPROVED || err == ErrorMessage.NAME_APPROVED_MODIFIED) {
@@ -177,22 +192,35 @@ public class CharacterCreationService extends Service {
 	
 	private void handleCharCreation(ObjectManager objManager, Player player, ClientCreateCharacter create) {
 		ErrorMessage err = getNameValidity(create.getName(), player.getAccessLevel() != AccessLevel.PLAYER);
-		if (!creationRestriction.isAbleToCreate(player))
+		boolean success = false;
+		int max = getConfig(ConfigFile.PRIMARY).getInt("GALAXY-MAX-CHARACTERS", 0);
+		if (max != 0 && getCharacterCount(player.getUserId()) >= max)
+			err = ErrorMessage.SERVER_CHARACTER_CREATION_MAX_CHARS;
+		else if (!creationRestriction.isAbleToCreate(player))
 			err = ErrorMessage.NAME_DECLINED_TOO_FAST;
-		if (err == ErrorMessage.NAME_APPROVED) {
-			long characterId = createCharacter(objManager, player, create);
-			if (createCharacterInDb(characterId, create.getName(), player)) {
-				creationRestriction.createdCharacter(player);
-				System.out.println("[" + player.getUsername() + "] Create Character: " + create.getName() + ". IP: " + create.getAddress() + ":" + create.getPort());
-				Log.i("ZoneService", "%s created character %s from %s:%d", player.getUsername(), create.getName(), create.getAddress(), create.getPort());
-				sendPacket(player, new CreateCharacterSuccess(characterId));
-				new PlayerEventIntent(player, PlayerEvent.PE_CREATE_CHARACTER).broadcast();
-				return;
-			}
+		else if (err == ErrorMessage.NAME_APPROVED) {
+			err = completeCharCreation(objManager, player, create);
+			success = (err == ErrorMessage.NAME_APPROVED);
+		}
+		if (!success)
+			sendCharCreationFailure(player, create, err);
+	}
+	
+	private ErrorMessage completeCharCreation(ObjectManager objManager, Player player, ClientCreateCharacter create) {
+		long characterId = createCharacter(objManager, player, create);
+		if (characterId == -1) {
+			return ErrorMessage.NAME_DECLINED_INTERNAL_ERROR;
+		} else if (createCharacterInDb(characterId, create.getName(), player)) {
+			creationRestriction.createdCharacter(player);
+			Log.i("ZoneService", "%s created character %s from %s:%d", player.getUsername(), create.getName(), create.getAddress(), create.getPort());
+			sendPacket(player, new CreateCharacterSuccess(characterId));
+			new PlayerEventIntent(player, PlayerEvent.PE_CREATE_CHARACTER).broadcast();
+			return ErrorMessage.NAME_APPROVED;
+		} else {
 			Log.e("ZoneService", "Failed to create character %s for user %s with server error from %s:%d", create.getName(), player.getUsername(), create.getAddress(), create.getPort());
 			objManager.deleteObject(characterId);
+			return ErrorMessage.NAME_DECLINED_INTERNAL_ERROR;
 		}
-		sendCharCreationFailure(player, create, err);
 	}
 	
 	private void sendCharCreationFailure(Player player, ClientCreateCharacter create, ErrorMessage err) {
@@ -209,10 +237,10 @@ public class CharacterCreationService extends Service {
 			case NAME_DECLINED_EMPTY:    reason = NameFailureReason.NAME_DECLINED_EMPTY; break;
 			case NAME_DECLINED_RESERVED: reason = NameFailureReason.NAME_DEV_RESERVED; break;
 			case NAME_DECLINED_TOO_FAST: reason = NameFailureReason.NAME_TOO_FAST; break;
+			case SERVER_CHARACTER_CREATION_MAX_CHARS: reason = NameFailureReason.TOO_MANY_CHARACTERS; break;
 			default:
 				break;
 		}
-		System.err.println("ZoneService: Unable to create character [Name: " + create.getName() + "  User: " + player.getUsername() + "] and put into database! Reason: " + err);
 		Log.e("ZoneService", "Failed to create character %s for user %s with error %s and reason %s from %s:%d", create.getName(), player.getUsername(), err, reason, create.getAddress(), create.getPort());
 		sendPacket(player, new CreateCharacterFailure(reason));
 	}
@@ -226,13 +254,27 @@ public class CharacterCreationService extends Service {
 				createCharacter.setString(2, name);
 				createCharacter.setString(3, player.getCreatureObject().getRace().getFilename());
 				createCharacter.setInt(4, player.getUserId());
-				createCharacter.setInt(5, player.getGalaxyId());
 				return createCharacter.executeUpdate() == 1;
 			} catch (SQLException e) {
 				e.printStackTrace();
 				return false;
 			}
 		}
+	}
+	
+	private int getCharacterCount(int userId) {
+		synchronized (getCharacterCount) {
+			try {
+				getCharacterCount.setInt(1, userId);
+				try (ResultSet set = getCharacterCount.executeQuery()) {
+					if (set.next())
+						return set.getInt("count");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return 0;
 	}
 	
 	private ErrorMessage getNameValidity(String name, boolean admin) {
@@ -259,12 +301,11 @@ public class CharacterCreationService extends Service {
 	}
 	
 	private long createCharacter(ObjectManager objManager, Player player, ClientCreateCharacter create) {
-		Location		start		= getStartLocation(create.getStart());
 		Race			race		= Race.getRaceByFile(create.getRace());
-		CreatureObject	creatureObj	= createCreature(objManager, race.getFilename(), start);
+		CreatureObject	creatureObj	= createCreature(objManager, race.getFilename(), getConfig(ConfigFile.PRIMARY).getString("PRIMARY-SPAWN-LOCATION", "tat_moseisley"));
+		if (creatureObj == null)
+			return -1;
 		PlayerObject	playerObj	= createPlayer(objManager, "object/player/shared_player.iff");
-		SWGObject		bankObj		= objManager.createObject("object/tangible/bank/shared_character_bank.iff", false);
-		SWGObject		missionObj	= objManager.createObject("object/tangible/mission_bag/shared_mission_bag.iff", false);
 		
 		setCreatureObjectValues(objManager, creatureObj, create);
 		setPlayerObjectValues(playerObj, create);
@@ -274,15 +315,42 @@ public class CharacterCreationService extends Service {
 		creatureObj.setVolume(0x000F4240);
 		creatureObj.setOwner(player);
 		creatureObj.addObject(playerObj); // ghost slot
-		creatureObj.addObject(bankObj);
-		creatureObj.addObject(missionObj);
+		
 		playerObj.setAdminTag(player.getAccessLevel());
 		player.setCreatureObject(creatureObj);
+		new SkillBoxGrantedIntent(create.getStartingPhase(), creatureObj).broadcast();
 		return creatureObj.getObjectId();
 	}
 	
-	private CreatureObject createCreature(ObjectManager objManager, String template, Location location) {
-		SWGObject obj = objManager.createObject(template, location);
+	private CreatureObject createCreature(ObjectManager objManager, String template, String spawnLocation) {
+		SpawnInformation info = insertion.generateSpawnLocation(spawnLocation);
+		if (info == null) {
+			Log.e("CharacterCreationService", "Failed to get spawn information for location: " + spawnLocation);
+			return null;
+		}
+		if (info.building)
+			return createCreatureBuilding(objManager, template, info);
+		else {
+			SWGObject obj = objManager.createObject(template, info.location);
+			if (obj instanceof CreatureObject)
+				return (CreatureObject) obj;
+		}
+		return null;
+	}
+	
+	private CreatureObject createCreatureBuilding(ObjectManager objManager, String template, SpawnInformation info) {
+		SWGObject parent = objManager.getObjectById(info.buildingId);
+		if (parent == null || !(parent instanceof BuildingObject)) {
+			Log.e("CharacterCreationService", "Invalid parent! Either null or not a building: %s  BUID: %d", parent, info.buildingId);
+			return null;
+		}
+		CellObject cell = ((BuildingObject) parent).getCellByName(info.cell);
+		if (cell == null) {
+			Log.e("CharacterCreationService", "Invalid cell! Cell does not exist: %s  B-Template: %s  BUID: %d", info.cell, parent.getTemplate(), info.buildingId);
+			return null;
+		}
+		SWGObject obj = objManager.createObject(template, info.location);
+		cell.addObject(obj);
 		if (obj instanceof CreatureObject)
 			return (CreatureObject) obj;
 		return null;
@@ -302,6 +370,12 @@ public class CharacterCreationService extends Service {
 		return null;
 	}
 	
+	private SWGObject createInventoryObject(ObjectManager objManager, CreatureObject creatureObj, String template) {
+		SWGObject obj = objManager.createObject(creatureObj, template);
+		obj.setContainerPermissions(ContainerPermissions.INVENTORY);
+		return obj;
+	}
+	
 	private void createHair(ObjectManager objManager, CreatureObject creatureObj, String hair, byte [] customization) {
 		if (hair.isEmpty())
 			return;
@@ -313,28 +387,26 @@ public class CharacterCreationService extends Service {
 	}
 	
 	private void setCreatureObjectValues(ObjectManager objManager, CreatureObject creatureObj, ClientCreateCharacter create) {
-		TangibleObject inventory	= createTangible(objManager, "object/tangible/inventory/shared_character_inventory.iff");
-		inventory.setContainerPermissions(ContainerPermissions.INVENTORY);
-		TangibleObject datapad		= createTangible(objManager, "object/tangible/datapad/shared_character_datapad.iff");
-		datapad.setContainerPermissions(ContainerPermissions.INVENTORY);
-		TangibleObject apprncInventory = createTangible(objManager, "object/tangible/inventory/shared_appearance_inventory.iff");
-		apprncInventory.setContainerPermissions(ContainerPermissions.INVENTORY);
-		
 		creatureObj.setRace(Race.getRaceByFile(create.getRace()));
 		creatureObj.setAppearanceData(create.getCharCustomization());
 		creatureObj.setHeight(create.getHeight());
 		creatureObj.setName(create.getName());
-		creatureObj.setPvpType(20);
+		creatureObj.setPvpFlags(PvpFlag.PLAYER, PvpFlag.OVERT);
 		creatureObj.getSkills().add("species_" + creatureObj.getRace().getSpecies());
 
-		creatureObj.addObject(inventory); // slot = inventory
-		creatureObj.addObject(datapad); // slot = datapad
-		creatureObj.addObject(apprncInventory); // slot = appearance_inventory
+		WeaponObject defWeapon = (WeaponObject) createInventoryObject(objManager, creatureObj, "object/weapon/melee/unarmed/shared_unarmed_default_player.iff");
+		defWeapon.setMaxRange(5);
+		creatureObj.setEquippedWeapon(defWeapon);
+		creatureObj.addEquipment(createInventoryObject(objManager, creatureObj, "object/tangible/inventory/shared_character_inventory.iff"));
+		creatureObj.addEquipment(createInventoryObject(objManager, creatureObj, "object/tangible/datapad/shared_character_datapad.iff"));
+		creatureObj.addEquipment(createInventoryObject(objManager, creatureObj, "object/tangible/inventory/shared_appearance_inventory.iff"));
+		creatureObj.addEquipment(defWeapon);
+		createInventoryObject(objManager, creatureObj, "object/tangible/bank/shared_character_bank.iff");
+		createInventoryObject(objManager, creatureObj, "object/tangible/mission_bag/shared_mission_bag.iff");
 		
-		creatureObj.addEquipment(inventory);
-		creatureObj.addEquipment(datapad);
-		creatureObj.addEquipment(apprncInventory);
-
+		// Any character can perform the basic dance.
+		creatureObj.addAbility("startDance+basic");
+		
 		creatureObj.joinPermissionGroup("world");
 	}
 	
@@ -357,6 +429,10 @@ public class CharacterCreationService extends Service {
 			item.moveToContainer(player, player);
 			player.addEquipment(item);
 		}
+		
+		SWGObject inventory = player.getSlottedObject("inventory");
+		SWGObject item = objManager.createObject("object/tangible/npe/shared_npe_uniform_box.iff");
+		item.moveToContainer(inventory);
 
 	}
 	
@@ -404,15 +480,10 @@ public class CharacterCreationService extends Service {
 		synchronized (lockedNames) {
 			player = lockedNames.get(firstName);
 		}
-		if (player == null || assignedTo == player)
+		if (player == null || assignedTo.getUserId() == player.getUserId())
 			return false;
 		PlayerState state = player.getPlayerState();
-		return state != PlayerState.DISCONNECTED && state != PlayerState.LOGGED_OUT;
-	}
-	
-	private Location getStartLocation(String start) {
-		return TerrainZoneInsertion.getInsertionForTerrain(Terrain.TATOOINE);
-//		return TerrainZoneInsertion.getInsertionForArea(Terrain.CORELLIA, -5436, 24, -6211);
+		return state != PlayerState.DISCONNECTED;
 	}
 	
 }

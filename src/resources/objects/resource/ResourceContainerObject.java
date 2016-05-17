@@ -113,4 +113,23 @@ public class ResourceContainerObject extends TangibleObject {
 		bb.incrementOperandCount(4);
 	}
 	
+	@Override
+	public boolean equals(Object o) {
+		if (!(o instanceof ResourceContainerObject))
+			return super.equals(o);
+		ResourceContainerObject rcno = (ResourceContainerObject) o;
+		if (!super.equals(o))
+			return false;
+		return maxQuantity == rcno.maxQuantity && parentName.equals(rcno.parentName) && resourceName.equals(rcno.resourceName);
+	}
+	
+	@Override
+	public int hashCode() {
+		int hash = super.hashCode();
+		hash ^= maxQuantity;
+		hash ^= parentName.hashCode();
+		hash ^= resourceName.hashCode();
+		return hash;
+	}
+	
 }

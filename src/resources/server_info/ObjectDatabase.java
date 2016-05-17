@@ -39,9 +39,7 @@ import utilities.ThreadUtilities;
 public abstract class ObjectDatabase<V extends Serializable> {
 	
 	private final File file;
-	private final long autosaveInterval;
 	private final ScheduledExecutorService autosaveService;
-	private final Runnable autosaveRunnable;
 	
 	public ObjectDatabase(String filename) {
 		this(filename, TimeUnit.MINUTES.toMillis(5));
@@ -56,30 +54,14 @@ public abstract class ObjectDatabase<V extends Serializable> {
 		this.file = new File(filename);
 		if (autosaveInterval < 60000)
 			autosaveInterval = 60000;
-		this.autosaveInterval = autosaveInterval;
 		this.autosaveService = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("odb-autosave-"+file.getName()));
-		this.autosaveRunnable = new Runnable() {
-			public void run() {
-				autosavePeriodic();
-			}
-		};
 		// Setup
-		setupAutosave();
+		autosaveService.scheduleAtFixedRate(() -> save(), autosaveInterval, autosaveInterval, TimeUnit.MILLISECONDS);
 		try {
 			createFilesAndDirectories();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	private void setupAutosave() {
-		synchronized (autosaveService) {
-			autosaveService.scheduleAtFixedRate(autosaveRunnable, autosaveInterval, autosaveInterval, TimeUnit.MILLISECONDS);
-		}
-	}
-	
-	private void autosavePeriodic() {
-		save();
 	}
 	
 	private void createFilesAndDirectories() throws IOException {
@@ -89,19 +71,24 @@ public abstract class ObjectDatabase<V extends Serializable> {
 		if (parentName != null && !parentName.isEmpty()) {
 			File parent = new File(file.getParent());
 			if (!parent.exists() && !parent.mkdirs())
-				System.err.println(getClass().getSimpleName() + ": Failed to create parent directories for ODB: " + file.getCanonicalPath());
+				Log.e(getClass().getSimpleName(), "Failed to create parent directories for ODB: " + file.getCanonicalPath());
 		}
 		try {
 			if (!file.createNewFile())
-				System.err.println(getClass().getSimpleName() + ": Failed to create new ODB: " + file.getCanonicalPath());
+				Log.e(getClass().getSimpleName(), "Failed to create new ODB: " + file.getCanonicalPath());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public void close() {
-		save();
+	public final void close() {
 		autosaveService.shutdownNow();
+		try {
+			autosaveService.awaitTermination(1000, TimeUnit.MILLISECONDS);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		save();
 	}
 	
 	public final File getFile() {

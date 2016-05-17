@@ -28,6 +28,7 @@
 package services.map;
 
 import intents.network.GalacticPacketIntent;
+import intents.object.ObjectCreatedIntent;
 import network.packets.Packet;
 import network.packets.swg.SWGPacket;
 import network.packets.swg.zone.spatial.GetMapLocationsMessage;
@@ -78,11 +79,13 @@ public class MapManager extends Manager {
 		loadMappingTemplates();
 		
 		addChildService(cityService);
+		
+		registerForIntent(GalacticPacketIntent.TYPE);
+		registerForIntent(ObjectCreatedIntent.TYPE);
 	}
 
 	@Override
 	public boolean initialize() {
-		registerForIntent(GalacticPacketIntent.TYPE);
 		loadStaticCityPoints();
 		return super.initialize();
 	}
@@ -91,7 +94,12 @@ public class MapManager extends Manager {
 	public void onIntentReceived(Intent i) {
 		switch (i.getType()) {
 			case GalacticPacketIntent.TYPE:
-				processPacket((GalacticPacketIntent) i);
+				if (i instanceof GalacticPacketIntent)
+					processPacket((GalacticPacketIntent) i);
+				break;
+			case ObjectCreatedIntent.TYPE:
+				if (i instanceof ObjectCreatedIntent)
+					addMapLocation(((ObjectCreatedIntent) i).getObject(), MapType.STATIC);
 				break;
 			default:
 				break;
@@ -106,11 +114,12 @@ public class MapManager extends Manager {
 		if (p instanceof SWGPacket)
 			processSwgPacket(player, (SWGPacket) p);
 	}
-
+	
 	private void processSwgPacket(Player player, SWGPacket p) {
 		switch (p.getPacketType()) {
 			case GET_MAP_LOCATIONS_MESSAGE:
-				handleMapLocationsRequest(player, (GetMapLocationsMessage) p);
+				if (p instanceof GetMapLocationsMessage)
+					handleMapLocationsRequest(player, (GetMapLocationsMessage) p);
 				break;
 			default:
 				break;
@@ -140,7 +149,7 @@ public class MapManager extends Manager {
 		for (int row = 0; row < table.getRowCount(); row++) {
 			MapCategory category = new MapCategory();
 			category.setName(table.getCell(row, 0).toString());
-			category.setIndex(Integer.valueOf(table.getCell(row, 1).toString()));
+			category.setIndex((Integer) table.getCell(row, 1));
 			category.setIsCategory(Boolean.valueOf(table.getCell(row, 2).toString()));
 			category.setIsSubCategory(Boolean.valueOf(table.getCell(row, 3).toString()));
 			category.setCanBeActive(Boolean.valueOf(table.getCell(row, 4).toString()));
@@ -158,8 +167,8 @@ public class MapManager extends Manager {
 			template.setName(table.getCell(row, 1).toString());
 			template.setCategory(table.getCell(row, 2).toString());
 			template.setSubcategory(table.getCell(row, 3).toString());
-			template.setType(Integer.valueOf(table.getCell(row, 4).toString()));
-			template.setFlag(Integer.valueOf(table.getCell(row, 5).toString()));
+			template.setType((Integer) table.getCell(row, 4));
+			template.setFlag((Integer) table.getCell(row, 5));
 
 			mappingTemplates.put(template.getTemplate(), template);
 		}

@@ -31,8 +31,10 @@ import network.OutboundPacketService;
 import network.packets.Packet;
 import resources.config.ConfigFile;
 import resources.player.Player;
+import resources.player.PlayerState;
 import resources.server_info.Config;
 import resources.server_info.DataManager;
+import resources.server_info.Log;
 import resources.server_info.RelationalDatabase;
 
 
@@ -43,14 +45,17 @@ public abstract class Service implements IntentReceiver {
 	
 	private static final OutboundPacketService outboundPacketService = new OutboundPacketService();
 	
+	public Service() {
+		IntentManager.getInstance().initialize();
+	}
+	
 	/**
 	 * Initializes this service. If the service returns false on this method
 	 * then the initialization failed and may not work as intended.
 	 * @return TRUE if initialization was successful, FALSE otherwise
 	 */
 	public boolean initialize() {
-		IntentManager.getInstance().initialize();
-		return DataManager.getInstance().isInitialized() && ServerManager.getInstance().initialize();
+		return DataManager.getInstance().isInitialized();
 	}
 	
 	/**
@@ -78,7 +83,9 @@ public abstract class Service implements IntentReceiver {
 	 * @return TRUE if termination was successful, FALSE otherwise
 	 */
 	public boolean terminate() {
-		return ServerManager.getInstance().terminate();
+		DataManager.terminate();
+		IntentManager.getInstance().terminate();
+		return true;
 	}
 	
 	/**
@@ -109,7 +116,7 @@ public abstract class Service implements IntentReceiver {
 	 * Callback when an intent is received from the system
 	 */
 	public void onIntentReceived(Intent i) {
-		System.out.println("Warning: " + getClass().getSimpleName() + " did not override onIntentReceived");
+		Log.w(this, "Warning: " + getClass().getSimpleName() + " did not override onIntentReceived");
 	}
 	
 	/**
@@ -119,6 +126,8 @@ public abstract class Service implements IntentReceiver {
 	 * @param packets the packet(s) to send
 	 */
 	public void sendPacket(Player player, Packet ... packets) {
+		if (player.getPlayerState() == PlayerState.DISCONNECTED)
+			return;
 		sendPacket(player.getNetworkId(), packets);
 	}
 	
@@ -129,16 +138,7 @@ public abstract class Service implements IntentReceiver {
 	 * @param packets the packet(s) to send
 	 */
 	public void sendPacket(final long networkId, final Packet ... packets) {
-		outboundPacketService.sendPacket(networkId, packets);
-	}
-	
-	/**
-	 * Sends all packets that were stored in the buffer via sendPacket()
-	 * @return the number of packets sent (includes SWG packets inside
-	 * multi/data packets)
-	 */
-	public int flushPackets() {
-		return outboundPacketService.flushPackets();
+		outboundPacketService.send(networkId, packets);
 	}
 	
 	/**

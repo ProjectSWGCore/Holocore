@@ -1,6 +1,5 @@
 package services.map;
 
-import java.io.FileNotFoundException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,6 +7,7 @@ import java.util.Locale;
 
 import intents.PlayerEventIntent;
 import intents.network.GalacticPacketIntent;
+import network.packets.Packet;
 import network.packets.swg.zone.object_controller.DataTransform;
 import resources.Location;
 import resources.control.Intent;
@@ -17,6 +17,7 @@ import resources.player.Player;
 import resources.player.PlayerEvent;
 import resources.server_info.Log;
 import resources.server_info.RelationalServerData;
+import resources.server_info.RelationalServerFactory;
 
 public class CityService extends Service {
 	
@@ -26,28 +27,21 @@ public class CityService extends Service {
 	private final PreparedStatement getAllCitiesStatement;
 	
 	public CityService() {
-		spawnDatabase = new RelationalServerData("serverdata/map/cities.db");
-		try {
-			spawnDatabase.linkTableWithSdb("cities", "serverdata/map/cities.sdb");
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+		spawnDatabase = RelationalServerFactory.getServerData("map/cities.db", "cities");
+		if (spawnDatabase == null)
 			throw new main.ProjectSWG.CoreException("Unable to load sdb files for StaticService");
-		}
 		getAllCitiesStatement = spawnDatabase.prepareStatement(GET_ALL_CITIES_FROM_TERRAIN);
-	}
-	
-	@Override
-	public boolean initialize() {
+		
 		registerForIntent(GalacticPacketIntent.TYPE);
 		registerForIntent(PlayerEventIntent.TYPE);
-		return super.initialize();
 	}
 	
 	@Override
 	public void onIntentReceived(Intent i) {
 		if (i instanceof GalacticPacketIntent) {
 			GalacticPacketIntent gpi = (GalacticPacketIntent) i;
-			if (gpi.getPacket() instanceof DataTransform) {
+			Packet p = gpi.getPacket();
+			if (p instanceof DataTransform) {
 				Player player = gpi.getPlayerManager().getPlayerFromNetworkId(gpi.getNetworkId());
 				if (player == null) {
 					Log.e("CityService", "Player is null in GalacticPacketIntent:DataTransform!");
@@ -58,14 +52,14 @@ public class CityService extends Service {
 					Log.e("CityService", "Creature is null in GalacticPacketIntent:DataTransform!");
 					return;
 				}
-				DataTransform transform = (DataTransform) gpi.getPacket();
+				DataTransform transform = (DataTransform) p;
 				Location loc = transform.getLocation();
 				performLocationUpdate(creature, loc);
 			}
 		} else if (i instanceof PlayerEventIntent) {
 			Player player = ((PlayerEventIntent) i).getPlayer();
 			CreatureObject creature = player.getCreatureObject();
-			if (((PlayerEventIntent) i).getEvent() == PlayerEvent.PE_ZONE_IN) {
+			if (((PlayerEventIntent) i).getEvent() == PlayerEvent.PE_ZONE_IN_CLIENT) {
 				performLocationUpdate(creature, creature.getLocation());
 			}
 		}

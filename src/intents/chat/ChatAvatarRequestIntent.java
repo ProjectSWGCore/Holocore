@@ -65,6 +65,7 @@ public class ChatAvatarRequestIntent extends Intent{
 		FRIEND_ADD_TARGET,
 		FRIEND_REMOVE_TARGET,
 		IGNORE_ADD_TARGET,
-		IGNORE_REMOVE_TARGET
+		IGNORE_REMOVE_TARGET,
+		IGNORE_LIST
 	}
 }

@@ -27,53 +27,88 @@
 ***********************************************************************************/
 package resources.sui;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 
-import resources.player.Player;
+public class SuiInputBox extends SuiWindow {
 
-public class SuiInputBox extends SuiBaseWindow {
+	public SuiInputBox(SuiButtons buttons, String title, String prompt) {
+		super("Script.inputBox", buttons, title, prompt);
+	}
 
-	public SuiInputBox(Player owner, InputBoxType type, String title, String prompt) {
-		super("Script.inputBox", owner, title, prompt);
-		switch(type){
-		case OK:
-			setProperty("btnOk:visible", "True");
-			setProperty("btnOk:Text", "@ok");
-			setProperty("btnCancel:visible", "False");
-			setProperty("cmbInput:visible", "False");
-			break;
-		case OK_CANCEL:
-			setProperty("btnOk:visible", "True");
-			setProperty("btnCancel:visible", "True");
-			setProperty("btnCancel:Text", "@cancel");
-			setProperty("btnOk:Text", "@ok");
-			setProperty("cmbInput:visible", "False");
-			break;
-		default: break;
+	public SuiInputBox(String title, String prompt) {
+		this(SuiButtons.OK_CANCEL, title, prompt);
+	}
+
+	public static String getEnteredText(Map<String, String> parameters) {
+		String input = parameters.get("txtInput.LocalText");
+		return input != null ? input : "";
+	}
+
+	public static String getSelectedComboText(Map<String, String> parameters) {
+		return parameters.get("cmbInput.SelectedText");
+	}
+
+	@Override
+	protected void setButtons(SuiButtons buttons) {
+		switch(buttons) {
+			case OK_CANCEL:
+				setProperty("btnOk", "Visible", "True");
+				setProperty("btnCancel", "Visible", "True");
+				setCancelButtonText("@cancel");
+				setOkButtonText("@ok");
+				displayComboBox(false);
+				break;
+			case COMBO_OK:
+				setProperty("btnOk", "Visible", "True");
+				setProperty("btnCancel", "Visible", "False");
+				setOkButtonText("@ok");
+				displayComboBox(true);
+				break;
+			case COMBO_OK_CANCEL:
+				setProperty("btnOk", "Visible", "True");
+				setProperty("btnCancel", "Visible", "True");
+				setOkButtonText("@ok");
+				setCancelButtonText("@cancel");
+				displayComboBox(true);
+				break;
+			case OK:
+			default:
+				setProperty("btnOk", "Visible", "True");
+				setProperty("btnCancel", "Visible", "False");
+				setOkButtonText("@ok");
+				displayComboBox(false);
+				break;
 		}
 	}
 
-	public SuiInputBox(Player owner, String title, String prompt) {
-		this(owner, InputBoxType.OK_CANCEL, title, prompt);
+	@Override
+	protected void onDisplayRequest() {
+		addReturnableProperty("txtInput", "LocalText");
+		addReturnableProperty("cmbInput", "SelectedText");
+		addReturnableProperty("txtInput", "MaxLength");
 	}
-	
-	public void addInputTextCallback(int eventType, ISuiCallback callback) {
-		List<String> returnParams = new ArrayList<String>();
-		returnParams.add("txtInput:LocalText");
-		addCallback(eventType, "", Trigger.OK, returnParams, callback);
+
+	private void displayComboBox(boolean show) {
+		if (show) {
+			setProperty("cmbInput", "Visible", "True");
+			setProperty("cmbInput", "Visible", "True");
+
+			setProperty("txtInput", "Enabled", "False");
+			setProperty("txtInput", "Visible", "False");
+		} else {
+			setProperty("cmbInput", "Visible", "False");
+			setProperty("cmbInput", "Visible", "False");
+
+			setProperty("txtInput", "Enabled", "True");
+			setProperty("txtInput", "Visible", "True");
+		}
 	}
-	
+
 	public void allowStringCharacters(boolean stringCharacters) {
-		setProperty("txtInput:NumericInteger", String.valueOf(stringCharacters));
+		setProperty("txtInput", "NumericInteger", String.valueOf(stringCharacters));
 	}
-	
-	public void setMaxInputLength(int maxLength) {
-		setProperty("txtInput:MaxLength", String.valueOf(maxLength));
-	}
-	
-	public enum InputBoxType {
-		OK,
-		OK_CANCEL;
+
+	public void setMaxLength(int maxLength) {
+		setProperty("txtInput", "MaxLength", String.valueOf(maxLength));
 	}
 }

@@ -56,7 +56,7 @@ public class EnumerateCharacterId extends SWGPacket {
 			c.decode(data);
 			_characters.add(c);
 		}
-		characters = _characters.toArray(new SWGCharacter[0]);
+		characters = _characters.toArray(new SWGCharacter[characters.length]);
 	}
 	
 	public ByteBuffer encode() {
@@ -130,6 +130,10 @@ public class EnumerateCharacterId extends SWGPacket {
 		public int		getRaceCrc()	{ return raceCrc; }
 		public int		getGalaxyId()	{ return galaxyId; }
 		public int		getType()		{ return type; }
+		
+		public String toString() {
+			return String.format("SWGCharacter[id=%d  name=%s  race=%d  galaxy=%d  type=%d", id, name, raceCrc, galaxyId, type);
+		}
 		
 	}
 }

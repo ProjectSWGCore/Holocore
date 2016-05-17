@@ -28,6 +28,9 @@
 package network;
 
 import network.packets.swg.*;
+import network.packets.swg.holo.HoloConnectionStarted;
+import network.packets.swg.holo.HoloConnectionStopped;
+import network.packets.swg.holo.HoloSetProtocolVersion;
 import network.packets.swg.login.*;
 import network.packets.swg.login.creation.*;
 import network.packets.swg.zone.*;
@@ -45,12 +48,20 @@ import network.packets.swg.zone.spatial.*;
 import java.util.HashMap;
 import java.util.Map;
 
+import resources.server_info.Log;
+
 public enum PacketType {
 
+	// Holocore
+	HOLO_SET_PROTOCOL_VERSION					(HoloSetProtocolVersion.CRC, HoloSetProtocolVersion.class),
+	HOLO_CONNECTION_STARTED						(HoloConnectionStarted.CRC,	HoloConnectionStarted.class),
+	HOLO_CONNECTION_STOPPED						(HoloConnectionStopped.CRC,	HoloConnectionStopped.class),
+	
 	// Both
 	SERVER_UNIX_EPOCH_TIME						(ServerUnixEpochTime.CRC, 	ServerUnixEpochTime.class),
 	SERVER_ID									(ServerId.CRC, 				ServerId.class),
 	SERVER_STRING								(ServerString.CRC, 			ServerString.class),
+	LAG_REQUEST									(LagRequest.CRC,			LagRequest.class),
 
 	// Login
 	CLIENT_ID_MSG								(ClientIdMsg.CRC, 				ClientIdMsg.class),
@@ -59,6 +70,8 @@ public enum PacketType {
 	CLIENT_PERMISSIONS_MESSAGE					(ClientPermissionsMessage.CRC, 	ClientPermissionsMessage.class),
 	REQUEST_EXTENDED_CLUSTERS					(RequestExtendedClusters.CRC, 	RequestExtendedClusters.class),
 	OFFLINE_SERVERS_MESSAGE     				(OfflineServersMessage.CRC, 	OfflineServersMessage.class),
+	SERVER_NOW_EPOCH_TIME						(ServerNowEpochTime.CRC,		ServerNowEpochTime.class),
+	GAME_SERVER_LAG_RESPONSE					(GameServerLagResponse.CRC,		GameServerLagResponse.class),
 
 		// Post-Login
 		LOGIN_CLIENT_ID							(LoginClientId.CRC, 			LoginClientId.class),
@@ -84,6 +97,7 @@ public enum PacketType {
 		DELETE_CHARACTER_REQUEST				(DeleteCharacterRequest.CRC, 	DeleteCharacterRequest.class),
 
 	// Zone
+	CONNECTION_SERVER_LAG_RESPONSE				(ConnectionServerLagResponse.CRC,	ConnectionServerLagResponse.class),
 	COMMAND_QUEUE_ENQUEUE						(0x00000116, 						CommandQueueEnqueue.class),
 	SELECT_CHARACTER							(SelectCharacter.CRC, 				SelectCharacter.class),
 	CMD_SCENE_READY								(CmdSceneReady.CRC, 				CmdSceneReady.class),
@@ -184,6 +198,13 @@ public enum PacketType {
 		RETRIEVE_AUCTION_ITEM_MESSAGE			(RetrieveAuctionItemMessage.CRC, 			RetrieveAuctionItemMessage.class),
 		RETRIEVE_AUCTION_ITEM_RESPONSE_MESSAGE	(RetrieveAuctionItemResponseMessage.CRC, 	RetrieveAuctionItemResponseMessage.class),
 
+		
+		// Travel
+		ENTER_TICKET_PURCHASE_MODE_MESSAGE		(EnterTicketPurchaseModeMessage.CRC,		EnterTicketPurchaseModeMessage.class),
+		PLANET_TRAVEL_POINT_LIST_REQUEST		(PlanetTravelPointListRequest.CRC,			PlanetTravelPointListRequest.class),
+		PLANET_TRAVEL_POINT_LIST_RESPONSE		(PlanetTravelPointListResponse.CRC,			PlanetTravelPointListResponse.class),
+		
+		
 	UNKNOWN (0xFFFFFFFF, SWGPacket.class);
 
 	private static final Map <Integer, PacketType> packetMap = new HashMap<>();
@@ -205,6 +226,10 @@ public enum PacketType {
 	public int getCrc() {
 		return crc;
 	}
+	
+	public Class<? extends SWGPacket> getSwgClass() {
+		return c;
+	}
 
 	public static PacketType fromCrc(int crc) {
 		PacketType type = packetMap.get(crc);
@@ -221,7 +246,8 @@ public enum PacketType {
 		try {
 			return c.newInstance();
 		} catch (Exception e) {
-			e.printStackTrace();
+			Log.e("PacketType", "Packet: [%08X] %s", crc, c.getName());
+			Log.e("PacketType", e);
 		}
 		return null;
 	}

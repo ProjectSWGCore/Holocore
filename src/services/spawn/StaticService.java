@@ -27,81 +27,143 @@
 ***********************************************************************************/
 package services.spawn;
 
-import java.io.FileNotFoundException;
+import intents.object.ObjectCreatedIntent;
+
+import java.lang.ref.SoftReference;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import resources.Location;
+import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.building.BuildingObject;
+import resources.server_info.Log;
 import resources.server_info.RelationalServerData;
-import services.objects.ObjectManager;
+import resources.server_info.RelationalServerFactory;
+import services.objects.ObjectCreator;
 
 public class StaticService extends Service {
 	
 	private static final String GET_SUPPORTING_SQL = "SELECT spawns.* FROM spawns, types WHERE types.iff = ? AND spawns.iff_type = types.iff_type";
 	
 	private final Object databaseMutex;
-	private final ObjectManager objectManager;
+	private final Map<String, SoftReference<List<SpawnedObject>>> spawnableObjects;
 	private RelationalServerData spawnDatabase;
 	private PreparedStatement getSupportingStatement;
 	
-	public StaticService(ObjectManager objectManager) {
+	public StaticService() {
 		this.databaseMutex = new Object();
-		this.objectManager = objectManager;
 		
-		spawnDatabase = new RelationalServerData("serverdata/static/spawns.db");
-		try {
-			spawnDatabase.linkTableWithSdb("spawns", "serverdata/static/spawns.sdb");
-			spawnDatabase.linkTableWithSdb("types", "serverdata/static/types.sdb");
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+		spawnDatabase = RelationalServerFactory.getServerData("static/spawns.db", "spawns", "types");
+		if (spawnDatabase == null)
 			throw new main.ProjectSWG.CoreException("Unable to load sdb files for StaticService");
-		}
+		
 		getSupportingStatement = spawnDatabase.prepareStatement(GET_SUPPORTING_SQL);
+		spawnableObjects = new HashMap<>();
+		
+		registerForIntent(ObjectCreatedIntent.TYPE);
 	}
 	
-	public void createSupportingObjects(SWGObject object) {
+	@Override
+	public void onIntentReceived(Intent i) {
+		switch (i.getType()) {
+			case ObjectCreatedIntent.TYPE:
+				if (i instanceof ObjectCreatedIntent)
+					createSupportingObjects(((ObjectCreatedIntent) i).getObject());
+				break;
+		}
+	}
+	
+	private void createSupportingObjects(SWGObject object) {
+		List<SpawnedObject> objects = null;
+		synchronized (spawnableObjects) {
+			SoftReference<List<SpawnedObject>> ref = spawnableObjects.get(object.getTemplate());
+			if (ref != null)
+				objects = ref.get();
+			if (objects == null) {
+				objects = fetchFromDatabase(object.getTemplate());
+				spawnableObjects.put(object.getTemplate(), new SoftReference<List<SpawnedObject>>(objects));
+			}
+		}
+		Location world = object.getWorldLocation();
+		for (SpawnedObject spawn : objects) {
+			spawn.createObject(object, world);
+		}
+	}
+	
+	private List<SpawnedObject> fetchFromDatabase(String template) {
+		List<SpawnedObject> objects = new ArrayList<>();
 		synchronized (databaseMutex) {
 			try {
-				getSupportingStatement.setString(1, object.getTemplate());
-				ResultSet set = getSupportingStatement.executeQuery();
-				Location world = object.getWorldLocation();
-				while (set.next()) {
-					String iff = set.getString("child_iff");
-					String cell = set.getString("cell");
-					double x = set.getDouble("x");
-					double y = set.getDouble("y");
-					double z = set.getDouble("z");
-					double heading = set.getDouble("heading");
-					if (cell.isEmpty()) {
-						createObject(iff, world, x, y, z, heading);
-					} else {
-						BuildingObject buio = (BuildingObject) object;
-						createObject(iff, buio.getCellByName(cell), x, y, z, heading);
+				getSupportingStatement.setString(1, template);
+				try (ResultSet set = getSupportingStatement.executeQuery()) {
+					while (set.next()) {
+						objects.add(new SpawnedObject(set));
 					}
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
+		return objects;
 	}
 	
-	private SWGObject createObject(String iff, SWGObject parent, double x, double y, double z, double heading) {
-		Location loc = new Location(x, y, z, parent.getTerrain());
-		loc.setHeading(heading);
-		SWGObject obj = objectManager.createObject(iff, loc, false, false);
-		parent.addObject(obj);
-		return obj;
-	}
-	
-	private SWGObject createObject(String iff, Location parentLoc, double x, double y, double z, double heading) {
-		Location loc = new Location(x, y, z, parentLoc.getTerrain());
-		loc.setHeading(heading);
-		loc.translateLocation(parentLoc);
-		return objectManager.createObject(iff, loc, true, false);
+	private static class SpawnedObject {
+		
+		private final String iff;
+		private final String cell;
+		private final double x;
+		private final double y;
+		private final double z;
+		private final double heading;
+		
+		public SpawnedObject(ResultSet set) throws SQLException {
+			this.iff = set.getString("child_iff");
+			this.cell = set.getString("cell");
+			this.x = set.getDouble("x");
+			this.y = set.getDouble("y");
+			this.z = set.getDouble("z");
+			this.heading = set.getDouble("heading");
+		}
+		
+		public void createObject(SWGObject building, Location parentLocation) {
+			if (cell.isEmpty())
+				createObject(parentLocation);
+			else if (building instanceof BuildingObject)
+				createObjectInParent(((BuildingObject) building).getCellByName(cell));
+			else
+				Log.e("StaticService", "Parent object with cell specified is not a BuildingObject!");
+		}
+		
+		private SWGObject createObjectInParent(SWGObject parent) {
+			if (parent == null)
+				return null;
+			Location loc = new Location(x, y, z, parent.getTerrain());
+			loc.setHeading(heading);
+			SWGObject obj = ObjectCreator.createObjectFromTemplate(iff);
+			obj.setParent(parent);
+			obj.setLocation(loc);
+			parent.addObject(obj);
+			new ObjectCreatedIntent(obj).broadcast();
+			return obj;
+		}
+		
+		private SWGObject createObject(Location parentLocation) {
+			Location loc = new Location(x, y, z, parentLocation.getTerrain());
+			loc.setHeading(heading);
+			loc.translateLocation(parentLocation);
+			SWGObject obj = ObjectCreator.createObjectFromTemplate(iff);
+			obj.setLocation(loc);
+			new ObjectCreatedIntent(obj).broadcast();
+			return obj;
+		}
+		
 	}
 	
 }

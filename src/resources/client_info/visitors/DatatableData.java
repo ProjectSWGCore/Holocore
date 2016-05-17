@@ -31,6 +31,9 @@ import resources.client_info.ClientData;
 import resources.client_info.IffNode;
 import resources.client_info.SWGFile;
 
+import java.util.Arrays;
+import java.util.Locale;
+
 public class DatatableData extends ClientData {
 	
 	private String[] columnNames;
@@ -147,7 +150,7 @@ public class DatatableData extends ClientData {
 			if (type.contains("(")) // relevant only to enums
 				type = type.split("\\(")[0];
 			
-			columnTypes[t] = type;
+			columnTypes[t] = type.toLowerCase(Locale.ENGLISH);
 /* TODO: Need to come up with a better way of doing enums. Example of what this type looks like:
 * e(RIFLE=0,CARBINE=1,PISTOL=2,HEAVY=3,1HAND_MELEE=4,2HAND_MELEE=5,UNARMED=6,POLEARM=7,THROWN=8,1HAND_LIGHTSABER=9,2HAND_LIGHTSABER=10,POLEARM_LIGHTSABER=11)
 			if (type.startsWith("e(")) {
@@ -183,7 +186,7 @@ public class DatatableData extends ClientData {
 					break;
 				
 				case "h": // CRC
-					table[r][t] = chunk.readUInt();
+					table[r][t] = chunk.readInt();
 					break;
 					
 				case "i": // Integer
@@ -261,6 +264,10 @@ public class DatatableData extends ClientData {
 		if (column < 0 || column >= columnTypes.length)
 			return null;
 		return columnTypes[column];
+	}
+
+	public int getColumnFromName(String name){
+		return Arrays.asList(columnNames).indexOf(name);
 	}
 
 	public void handleRows(DatatableRowHandler handler) {

@@ -27,76 +27,81 @@
 ***********************************************************************************/
 package services.galaxy;
 
-import intents.GalacticIntent;
+import java.util.Hashtable;
+import java.util.Map;
+
+import intents.network.ConnectionClosedIntent;
+import intents.network.ConnectionOpenedIntent;
 import intents.network.GalacticPacketIntent;
 import intents.network.InboundPacketIntent;
-import resources.Galaxy;
 import resources.control.Intent;
 import resources.control.Manager;
+import services.CoreManager;
 import services.chat.ChatManager;
+import services.dev.DeveloperService;
+import services.galaxy.travel.TravelService;
 import services.objects.ObjectManager;
+import services.objects.UniformBoxService;
 import services.player.PlayerManager;
 
 public class GalacticManager extends Manager {
 	
-	private final Object prevPacketIntentMutex = new Object();
+	private final ObjectManager objectManager;
+	private final PlayerManager playerManager;
+	private final GameManager gameManager;
+	private final ChatManager chatManager;
+	private final TravelService travelService;
+	private final DeveloperService developerService;
+	private final UniformBoxService uniformBox;
+	private final Map<Long, Intent> prevIntentMap;
 	
-	private ObjectManager objectManager;
-	private PlayerManager playerManager;
-	private GameManager gameManager;
-	private ChatManager chatManager;
-	private Intent prevPacketIntent;
-	private Galaxy galaxy;
-	
-	public GalacticManager(Galaxy g) {
-		this.galaxy = g;
+	public GalacticManager() {
 		objectManager = new ObjectManager();
 		playerManager = new PlayerManager();
 		gameManager = new GameManager();
-		chatManager = new ChatManager(g);
-		prevPacketIntent = null;
+		chatManager = new ChatManager();
+		travelService = new TravelService(objectManager);
+		developerService = new DeveloperService();
+		uniformBox = new UniformBoxService();
+		prevIntentMap = new Hashtable<>();
 		
 		addChildService(objectManager);
 		addChildService(playerManager);
 		addChildService(gameManager);
 		addChildService(chatManager);
+		addChildService(travelService);
+		addChildService(developerService);
+		addChildService(uniformBox);
+		
+		registerForIntent(InboundPacketIntent.TYPE);
+		registerForIntent(ConnectionOpenedIntent.TYPE);
+		registerForIntent(ConnectionClosedIntent.TYPE);
 	}
 	
 	@Override
 	public boolean initialize() {
-		registerForIntent(InboundPacketIntent.TYPE);
+		resetPopulationCount();
 		return super.initialize();
 	}
 	
 	@Override
 	public void onIntentReceived(Intent i) {
 		if (i instanceof InboundPacketIntent) {
-			synchronized (prevPacketIntentMutex) {
-				GalacticPacketIntent g = new GalacticPacketIntent((InboundPacketIntent) i);
-				if (prevPacketIntent == null)
-					broadcastGalacticIntent(g);
-				else
-					broadcastGalacticIntentAfterIntent(g, i);
-				prevPacketIntent = g;
+			long networkId = ((InboundPacketIntent) i).getNetworkId();
+			GalacticPacketIntent g = new GalacticPacketIntent((InboundPacketIntent) i);
+			g.setGalacticManager(this);
+			synchronized (prevIntentMap) {
+				g.broadcastAfterIntent(prevIntentMap.get(networkId));
+				prevIntentMap.put(networkId, g);
 			}
-		}
-	}
-	
-	public void broadcastGalacticIntent(GalacticIntent i) {
-		synchronized (i) {
-			if (i.isBroadcasted())
-				return;
-			prepareGalacticIntent(i);
-			i.broadcast();
-		}
-	}
-	
-	public void broadcastGalacticIntentAfterIntent(GalacticIntent g, Intent i) {
-		synchronized (g) {
-			if (g.isBroadcasted())
-				return;
-			prepareGalacticIntent(g);
-			g.broadcastAfterIntent(i);
+		} else if (i instanceof ConnectionClosedIntent) {
+			synchronized (prevIntentMap) {
+				prevIntentMap.remove(((ConnectionClosedIntent) i).getNetworkId());
+			}
+		} else if (i instanceof ConnectionOpenedIntent) {
+			synchronized (prevIntentMap) {
+				prevIntentMap.put(((ConnectionOpenedIntent) i).getNetworkId(), i);
+			}
 		}
 	}
 	
@@ -108,9 +113,8 @@ public class GalacticManager extends Manager {
 		return playerManager;
 	}
 	
-	private void prepareGalacticIntent(GalacticIntent i) {
-		i.setGalacticManager(this);
-		i.setGalaxy(galaxy);
+	private void resetPopulationCount() {
+		CoreManager.getGalaxy().setPopulation(0);
 	}
 	
 }

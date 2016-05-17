@@ -4,3 +4,5 @@ object/tangible/terminal/shared_terminal_bank.iff	terminal/bank
 object/tangible/terminal/shared_terminal_bazaar.iff	terminal/bazaar
 object/tangible/terminal/shared_terminal_travel.iff	terminal/travel
 object/tangible/travel/ticket_collector/shared_ticket_collector.iff	terminal/ticket_collector
+object/tangible/travel/travel_ticket/base/shared_base_travel_ticket.iff	terminal/ticket
+object/tangible/npe/shared_npe_uniform_box.iff	object/usable

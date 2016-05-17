@@ -30,6 +30,7 @@ package resources.objects.player;
 import network.packets.swg.zone.UpdatePostureMessage;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import network.packets.swg.zone.chat.ChatSystemMessage;
+import resources.collections.SWGFlag;
 import resources.collections.SWGBitSet;
 import resources.collections.SWGList;
 import resources.collections.SWGMap;
@@ -45,6 +46,7 @@ import utilities.MathUtils;
 import utilities.Encoder.StringType;
 
 import java.util.ArrayList;
+import java.util.BitSet;
 import java.util.Collections;
 import java.util.List;
 
@@ -56,18 +58,19 @@ public class PlayerObject extends IntangibleObject {
 	private List<String> 		joinedChannels		= new ArrayList<>();
 
 	// PLAY 03
-	private SWGBitSet 	        flagsList			= new SWGBitSet(BaselineType.PLAY, 3, 5);
-	private SWGBitSet 	        profileFlags		= new SWGBitSet(BaselineType.PLAY, 3, 6);
+	private SWGFlag 	        flagsList			= new SWGFlag(3, 5);
+	private SWGFlag 	        profileFlags		= new SWGFlag(3, 6);
 	private String 				title				= "";
 	private int 				bornDate			= 0;
 	private int 				playTime			= 0;
+	private int					professionIcon		= 0;
 	private String				profession			= "";
 	private int 				gcwPoints			= 0;
 	private int 				pvpKills			= 0;
 	private long 				lifetimeGcwPoints	= 0;
 	private int 				lifetimePvpKills	= 0;
-	private SWGList<Integer> 	collections			= new SWGList<>(BaselineType.PLAY, 3, 16);
-	private SWGList<Integer> 	guildRanks			= new SWGList<>(BaselineType.PLAY, 3, 17);
+	private SWGBitSet 		 	collectionBadges	= new SWGBitSet(3, 16);
+	private SWGList<Integer> 	guildRanks			= new SWGList<>(3, 17);
 	private boolean				showHelmet			= true;
 	private boolean				showBackpack		= true;
 	// PLAY 06
@@ -79,27 +82,27 @@ public class PlayerObject extends IntangibleObject {
 	private int 				gcwNextUpdate		= 0;
 	private String 				home				= "";
 	// PLAY 08
-	private SWGMap<String, Integer> 		experience			= new SWGMap<>(BaselineType.PLAY, 8, 0);
-	private SWGMap<Long, WaypointObject> 	waypoints			= new SWGMap<>(BaselineType.PLAY, 8, 1);
+	private SWGMap<String, Integer> 		experience			= new SWGMap<>(8, 0, StringType.ASCII);
+	private SWGMap<Long, WaypointObject> 	waypoints			= new SWGMap<>(8, 1);
 	private boolean 						citizen				= false;
 	private int 							guildRankTitle		= 0;
 	private int 							activeQuest			= 0;
-	private SWGMap<Integer, Integer>		quests				= new SWGMap<>(BaselineType.PLAY, 8, 7);
+	private SWGMap<Integer, Integer>		quests				= new SWGMap<>(8, 7);
 	private String 							profWheelPosition	= "";
 	// PLAY 09
 	private int 				experimentFlag		= 0;
 	private int 				craftingStage		= 0;
 	private long 				nearbyCraftStation	= 0;
-	private SWGList<String> 	draftSchemList		= new SWGList<>(BaselineType.PLAY, 9, 3);
+	private SWGList<String> 	draftSchemList		= new SWGList<>(9, 3, StringType.ASCII);
 	private int 				experimentPoints	= 0;
-	private SWGList<String> 	friendsList			= new SWGList<>(BaselineType.PLAY, 9, 7, StringType.ASCII);
-	private SWGList<String> 	ignoreList			= new SWGList<>(BaselineType.PLAY, 9, 8, StringType.ASCII);
+	private SWGList<String> 	friendsList			= new SWGList<>(9, 7, StringType.ASCII);
+	private SWGList<String> 	ignoreList			= new SWGList<>(9, 8, StringType.ASCII);
 	private int 				languageId			= 0;
-	private SWGList<Long> 		defenders			= new SWGList<>(BaselineType.PLAY, 9, 17); // TODO: Change to set
+	private SWGList<Long> 		defenders			= new SWGList<>(9, 17); // TODO: Change to set
 	private int 				killMeter			= 0;
 	private long 				petId				= 0;
-	private SWGList<String> 	petAbilities		= new SWGList<>(BaselineType.PLAY, 9, 21);
-	private SWGList<String> 	activePetAbilities	= new SWGList<>(BaselineType.PLAY, 9, 22);
+	private SWGList<String> 	petAbilities		= new SWGList<>(9, 21);
+	private SWGList<String> 	activePetAbilities	= new SWGList<>(9, 22);
 	private int startPlayTime;
 	
 	public PlayerObject(long objectId) {
@@ -151,7 +154,7 @@ public class PlayerObject extends IntangibleObject {
 		this.title = title;
 		sendDelta(3, 7, title, StringType.ASCII);
 	}
-
+	
 	public int getPlayTime() {
 		return playTime;
 	}
@@ -195,6 +198,16 @@ public class PlayerObject extends IntangibleObject {
 	public void setLifetimePvpKills(int lifetimePvpKills) {
 		this.lifetimePvpKills = lifetimePvpKills;
 		sendDelta(3, 15, lifetimePvpKills);
+	}
+	
+	public byte[] getCollectionBadges() {
+		return collectionBadges.toByteArray();
+	}
+	
+	public void setCollectionBadges(byte[] collection) {
+		this.collectionBadges.clear();
+		this.collectionBadges.or(BitSet.valueOf(collection));
+		sendDelta(3, 16, collectionBadges);
 	}
 
 	public SWGList<Integer> getGuildRanks() {
@@ -250,10 +263,11 @@ public class PlayerObject extends IntangibleObject {
 	
 	public void setAdminTag(AccessLevel access) {
 		switch(access) {
-		case PLAYER: break;
-		case ADMIN: adminTag = 1; break;
-		case DEV: adminTag = 2; break;
-		case QA: adminTag = 4; break;
+			case PLAYER: break;
+			case CSR: adminTag = 1; break;
+			case DEV: adminTag = 2; break;
+			case WARDEN: adminTag = 3; break;
+			case QA: adminTag = 4; break;
 		}
 		sendDelta(6, 2, adminTag);
 	}
@@ -359,7 +373,29 @@ public class PlayerObject extends IntangibleObject {
 	}
 
 	public List<String> getFriendsList() {
-		return this.friendsList;
+		return friendsList;
+	}
+
+	public void addIgnored(String ignored) {
+		synchronized (ignoreList) {
+			ignoreList.add(ignored);
+		}
+		ignoreList.sendDeltaMessage(this);
+	}
+
+	public void removeIgnored(String ignored) {
+		synchronized (ignoreList) {
+			ignoreList.remove(ignored);
+		}
+		ignoreList.sendDeltaMessage(this);
+	}
+
+	public boolean isIgnored(String target) {
+		return ignoreList.contains(target);
+	}
+
+	public List<String> getIgnoreList() {
+		return ignoreList;
 	}
 
 	public String getProfWheelPosition() {
@@ -368,7 +404,7 @@ public class PlayerObject extends IntangibleObject {
 
 	public void setProfWheelPosition(String profWheelPosition) {
 		this.profWheelPosition = profWheelPosition;
-		sendDelta(8, 8, profWheelPosition);
+		sendDelta(8, 8, profWheelPosition, StringType.ASCII);
 	}
 	
 	public void setFlagBitmask(PlayerFlags ... flags) {
@@ -411,41 +447,27 @@ public class PlayerObject extends IntangibleObject {
 		}
 	}
 
-	private int getProfessionIcon() {
-		switch (profession) {
-			case "entertainer_1a":
-				return 5;
-			case "medic_1a":
-				return 10;
-			case "officer_1a":
-				return 15;
-			case "bounty_hunter_1a":
-				return 20;
-			case "smuggler_1a":
-				return 25;
-			case "commando_1a":
-				return 30;
-			case "spy_1a":
-				return 35;
-			case "force_sensitive_1a":
-				return 40;
-			case "trader_0a":
-			case "trader_0b":
-			case "trader_0c":
-			case "trader_0d":
-			default:
-				return 0;
-		}
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		return super.equals(o);
+	public void setProfessionIcon(int professionIcon) {
+		this.professionIcon = professionIcon;
+		sendDelta(3, 10, professionIcon);
 	}
 	
-	@Override
-	public int hashCode() {
-		return super.hashCode();
+	public int getProfessionIcon() {
+		return professionIcon;
+	}
+	
+	public void addDraftSchematic(String schematic) {
+		draftSchemList.add(schematic);
+		draftSchemList.sendDeltaMessage(this);
+	}
+	
+	public Integer getExperiencePoints(String xpType) {
+		return experience.get(xpType);
+	}
+	
+	public void setExperiencePoints(String xpType, int experiencePoints) {
+		experience.put(xpType, experiencePoints);
+		experience.sendDeltaMessage(this);
 	}
 	
 	public void createChildrenObjects(Player target) {
@@ -462,13 +484,13 @@ public class PlayerObject extends IntangibleObject {
 		bb.addAscii(title); // 7
 		bb.addInt(bornDate); // Born Date -- 4001 = 12/15/2011 || Number of days after 12/31/2000 -- 8
 		bb.addInt(playTime); // 9
-		bb.addInt(getProfessionIcon()); // 10
+		bb.addInt(professionIcon); // 10
 		bb.addAscii(profession); // 11
 		bb.addInt(gcwPoints); // 12
 		bb.addInt(pvpKills); // 13
 		bb.addLong(lifetimeGcwPoints); // 14
 		bb.addInt(lifetimePvpKills); // 15
-		bb.addObject(collections); // 16
+		bb.addObject(collectionBadges); // 16
 		bb.addObject(guildRanks); // 17
 		bb.addBoolean(showBackpack); // 18
 		bb.addBoolean(showHelmet); // 19
@@ -557,14 +579,6 @@ public class PlayerObject extends IntangibleObject {
 		bb.incrementOperandCount(31);
 	}
 	
-	public void sendDelta(int type, int update, Object value) {
-		sendDelta(BaselineType.PLAY, type, update, value);
-	}
-	
-	public void sendDelta(int type, int update, Object value, StringType strType) {
-		sendDelta(BaselineType.PLAY, type, update, value, strType);
-	}
-
 	public int getStartPlayTime() {
 		return startPlayTime;
 	}

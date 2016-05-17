@@ -30,21 +30,28 @@ package resources.client_info;
 import java.io.File;
 import java.io.IOException;
 
+import resources.server_info.Log;
+
 /**
  * Created by Waverunner on 6/9/2015
  */
 public abstract class DataFactory {
 
-	protected ClientData readFile(String file) {
-		if (file == null || file.isEmpty()) {
-			System.err.println("File cannot be null or empty!");
+	protected ClientData readFile(String filename) {
+		if (filename == null || filename.isEmpty()) {
+			Log.e("DataFactory", "File cannot be null or empty!");
+			return null;
+		}
+		File file = new File(getFolder() + filename);
+		if (!file.isFile()) {
+			Log.e("DataFactory", "Not a file: " + file);
 			return null;
 		}
 
 		SWGFile swgFile = new SWGFile();
 
 		try {
-			swgFile.read(new File(getFolder() + file));
+			swgFile.read(file);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -59,7 +66,7 @@ public abstract class DataFactory {
 
 	protected File writeFile(SWGFile swgFile, ClientData data) {
 		if (swgFile == null || data == null) {
-			System.err.println("File or data objects cannot be null or empty!");
+			Log.e("DataFactory", "File or data objects cannot be null or empty!");
 			return null;
 		}
 

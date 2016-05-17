@@ -28,6 +28,7 @@
 package utilities;
 
 import resources.encodables.Encodable;
+import resources.server_info.Log;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -64,7 +65,7 @@ public class Encoder {
 			} else if (object instanceof String){
 				throw new UnsupportedOperationException("You must specify a String type!");
 			} else {
-				System.err.println("[Encoder] Do not know how to encode instance type " + object.getClass().getName());
+				Log.e("Encoder", "Do not know how to encode instance type " + object.getClass().getName());
 			}
 		}
 		return null;

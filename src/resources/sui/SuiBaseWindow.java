@@ -27,29 +27,299 @@
 ***********************************************************************************/
 package resources.sui;
 
-import resources.player.Player;
+import network.packets.Packet;
+import resources.encodables.Encodable;
+import resources.server_info.Log;
 
-public class SuiBaseWindow extends SuiWindow {
-	private String windowType;
-	
-	public SuiBaseWindow(String script, Player owner, String title, String prompt) {
-		super(script, owner);
-		windowType = script.replace("Script.", "");
-		setTitle(title);
-		setPrompt(prompt);
+import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class SuiBaseWindow implements Encodable {
+
+	private int id;
+	private String suiScript;
+	private long rangeObjId;
+	private float maxDistance = 0;
+	private List<SuiComponent> components = new ArrayList<>();
+	private Map<String, ISuiCallback> callbacks;
+	private Map<String, String> scriptCallbacks;
+	private boolean hasSubscriptionComponent = false;
+
+	public SuiBaseWindow() {
 	}
 
-	public void setSize(int x, int z) {
-		setProperty(windowType + ":Size", String.valueOf(x) + "," + String.valueOf(z));
+	public SuiBaseWindow(String suiScript) {
+		this.suiScript = suiScript;
 	}
-	
-	public void setTitle(String title) {
-		if (title != null)
-			setProperty("bg.caption.lblTitle:Text", title);
+
+	public final void clearDataSource(String dataSource) {
+		SuiComponent component = new SuiComponent(SuiComponent.Type.CLEAR_DATA_SOURCE, dataSource);
+		components.add(component);
 	}
-	
-	public void setPrompt(String prompt) {
-		if (prompt != null)
-			setProperty("Prompt.lblPrompt:Text", prompt);
+
+	public final void addChildWidget(String type, String childWidget, String parentWidget) {
+		SuiComponent component = new SuiComponent(SuiComponent.Type.ADD_CHILD_WIDGET, parentWidget);
+
+		component.addNarrowParam(type);
+		component.addNarrowParam(childWidget);
+
+		components.add(component);
+	}
+
+	public final void setProperty(String widget, String property, String value) {
+		SuiComponent component = new SuiComponent(SuiComponent.Type.SET_PROPERTY, widget);
+
+		component.addNarrowParam(property);
+		component.addWideParam(value);
+
+		components.add(component);
+	}
+
+	public final void addDataItem(String dataSource, String name, String value) {
+		SuiComponent component = new SuiComponent(SuiComponent.Type.ADD_DATA_ITEM, dataSource);
+
+		component.addNarrowParam(name);
+		component.addWideParam(value);
+
+		components.add(component);
+	}
+
+	protected void subscribeToEvent(int event, String widgetSource, String callback) {
+		SuiComponent component = getSubscriptionForEvent(event, widgetSource);
+		if (component != null) {
+			Log.i("SuiWindow", "Added event callback %d to %s when the event is already subscribed to, replacing callback to %s", event, widgetSource, callback);
+			component.getNarrowParams().set(2, callback);
+		} else {
+			component = new SuiComponent(SuiComponent.Type.SUBSCRIBE_TO_EVENT, widgetSource);
+			component.addNarrowParam(getWrappedEventString(event));
+			component.addNarrowParam(callback);
+
+			components.add(component);
+		}
+		if (!hasSubscriptionComponent())
+			hasSubscriptionComponent = true;
+	}
+
+	protected void subscribeToPropertyEvent(int event, String widgetSource, String propertyWidget, String propertyName) {
+		SuiComponent component = getSubscriptionForEvent(event, widgetSource);
+		if (component != null) {
+			// This component already has the trigger and source param, just need to add the widget and property
+			// for client to return the value to the server
+			component.addNarrowParam(propertyWidget);
+			component.addNarrowParam(propertyName);
+		} else {
+			component = new SuiComponent(SuiComponent.Type.SUBSCRIBE_TO_EVENT, widgetSource);
+			component.addNarrowParam(getWrappedEventString(event));
+			component.addNarrowParam("");
+			component.addNarrowParam(propertyWidget);
+			component.addNarrowParam(propertyName);
+			components.add(component);
+		}
+		if (!hasSubscriptionComponent())
+			hasSubscriptionComponent = true;
+	}
+
+	public final void addDataSourceContainer(String dataSourceContainer, String name, String value) {
+		SuiComponent component = new SuiComponent(SuiComponent.Type.ADD_DATA_SOURCE_CONTAINER, dataSourceContainer);
+
+		component.addNarrowParam(name);
+		component.addWideParam(value);
+
+		components.add(component);
+	}
+
+	public final void clearDataSourceContainer(String dataSourceContainer) {
+		SuiComponent component = new SuiComponent(SuiComponent.Type.CLEAR_DATA_SOURCE_CONTAINER, dataSourceContainer);
+		components.add(component);
+	}
+
+	public final void addDataSource(String dataSource, String name, String value) {
+		SuiComponent component = new SuiComponent(SuiComponent.Type.ADD_DATA_SOURCE, dataSource);
+
+		component.addNarrowParam(name);
+		component.addWideParam(value);
+
+		components.add(component);
+	}
+
+	public final void addReturnableProperty(SuiEvent event, String source, String widget, String property) {
+		subscribeToPropertyEvent(event.getValue(), source, widget, property);
+	}
+
+	public final void addReturnableProperty(SuiEvent event, String widget, String property) {
+		addReturnableProperty(event, "", widget, property);
+	}
+
+	public final void addReturnableProperty(String widget, String property) {
+		subscribeToPropertyEvent(SuiEvent.OK_PRESSED.getValue(), "", widget, property);
+		subscribeToPropertyEvent(SuiEvent.CANCEL_PRESSED.getValue(), "", widget, property);
+	}
+
+	public final void addCallback(SuiEvent event, String source, String name, ISuiCallback callback) {
+		subscribeToEvent(event.getValue(), source, name);
+		addJavaCallback(name, callback);
+	}
+
+	public final void addCallback(SuiEvent event, String name, ISuiCallback callback) {
+		addCallback(event, "", name, callback);
+	}
+
+	public final void addCallback(SuiEvent event, String source, String script, String function) {
+		subscribeToEvent(event.getValue(), source, function);
+		addScriptCallback(function, script);
+	}
+
+	public final void addCallback(SuiEvent event, String script, String function) {
+		addCallback(event, "", script, function);
+	}
+
+	public final void addCallback(String source, String script, String function) {
+		subscribeToEvent(SuiEvent.OK_PRESSED.getValue(), source, function);
+		subscribeToEvent(SuiEvent.CANCEL_PRESSED.getValue(), source, function);
+		addScriptCallback(function, script);
+	}
+
+	public final void addCallback(String script, String function) {
+		addCallback("", script, function);
+	}
+
+	public final void addCallback(String source, String name, ISuiCallback callback) {
+		subscribeToEvent(SuiEvent.OK_PRESSED.getValue(), source, name);
+		subscribeToEvent(SuiEvent.CANCEL_PRESSED.getValue(), source, name);
+		addJavaCallback(name, callback);
+	}
+
+	public final void addCallback(String name, ISuiCallback callback) {
+		addCallback("", name, callback);
+	}
+
+	public final SuiComponent getSubscriptionForEvent(int event, String widget) {
+		for (SuiComponent component : components) {
+			if (component.getType() != SuiComponent.Type.SUBSCRIBE_TO_EVENT)
+				continue;
+
+			int eventType = component.getSubscribedToEventType();
+
+			if (eventType == event && component.getTarget().equals(widget))
+				return component;
+		}
+		return null;
+	}
+
+	public final SuiComponent getSubscriptionByIndex(int index) {
+		int count = 0;
+		for (SuiComponent component : components) {
+			if (component.getType() == SuiComponent.Type.SUBSCRIBE_TO_EVENT) {
+				if (index == count) return component;
+				else count++;
+			}
+		}
+		return null;
+	}
+
+	public final long getRangeObjId() {
+		return rangeObjId;
+	}
+
+	public final void setRangeObjId(long rangeObjId) {
+		this.rangeObjId = rangeObjId;
+	}
+
+	public final int getId() {
+		return id;
+	}
+
+	public final void setId(int id) {
+		this.id = id;
+	}
+
+	public final String getSuiScript() {
+		return suiScript;
+	}
+
+	public final float getMaxDistance() {
+		return maxDistance;
+	}
+
+	public final void setMaxDistance(float maxDistance) {
+		this.maxDistance = maxDistance;
+	}
+
+	public final List<SuiComponent> getComponents() {
+		return components;
+	}
+
+	public final ISuiCallback getJavaCallback(String name) {
+		return callbacks != null ? callbacks.get(name) : null;
+	}
+
+	public final String getCallbackScript(String function) {
+		return scriptCallbacks != null ? scriptCallbacks.get(function) : null;
+	}
+
+	public final boolean hasCallbackFunction(String function) {
+		return scriptCallbacks != null && scriptCallbacks.containsKey(function);
+	}
+
+	public final boolean hasJavaCallback(String name) {
+		return callbacks != null && callbacks.containsKey(name);
+	}
+
+	public final boolean hasSubscriptionComponent() {
+		return hasSubscriptionComponent;
+	}
+
+	private void addJavaCallback(String name, ISuiCallback callback) {
+		if (callbacks == null) callbacks = new HashMap<>();
+
+		callbacks.put(name, callback);
+	}
+
+	private void addScriptCallback(String function, String script) {
+		if (scriptCallbacks == null) scriptCallbacks = new HashMap<>();
+
+		scriptCallbacks.put(function, script);
+	}
+
+	private String getWrappedEventString(int event) {
+		return new String(new byte[]{(byte) event}, StandardCharsets.UTF_8);
+	}
+
+	@Override
+	public byte[] encode() {
+
+		int listSize = 0;
+		List<byte[]> componentData = new ArrayList<>();
+		for (SuiComponent component : components) {
+			byte[] data = component.encode();
+			componentData.add(data);
+			listSize += data.length;
+		}
+
+		ByteBuffer data = ByteBuffer.allocate(34 + suiScript.length() + listSize);
+		Packet.addInt(data, id);
+		Packet.addAscii(data, suiScript);
+		Packet.addList(data, componentData);
+		Packet.addLong(data, rangeObjId);
+		Packet.addFloat(data, maxDistance);
+		Packet.addLong(data, 0); // Window Location?
+		Packet.addInt(data, 0);
+
+		return data.array();
+	}
+
+	@Override
+	public void decode(ByteBuffer data) {
+		id = Packet.getInt(data);
+		suiScript = Packet.getAscii(data);
+		components = Packet.getList(data, SuiComponent.class);
+		rangeObjId = Packet.getLong(data);
+		maxDistance = Packet.getFloat(data);
+		// unk long
+		// unk int
 	}
 }

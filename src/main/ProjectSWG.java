@@ -31,6 +31,7 @@ import intents.server.ServerStatusIntent;
 import resources.Galaxy.GalaxyStatus;
 import resources.control.IntentManager;
 import resources.control.ServerStatus;
+import resources.server_info.Log;
 import services.CoreManager;
 
 public class ProjectSWG {
@@ -51,14 +52,15 @@ public class ProjectSWG {
 		try {
 			server.run();
 		} catch (CoreException e) {
-			System.err.println("ProjectSWG: Shutting down. Reason: " + e.getMessage());
+			Log.e("CoreManager", "Shutting down. Reason: " + e.getMessage());
+			Log.e("CoreManager", e);
 		} catch (Exception e) {
-			e.printStackTrace();
-			System.err.println("ProjectSWG: Shutting down - unknown error.");
+			Log.e("CoreManager", "Shutting down - unknown error.");
+			Log.e("CoreManager", e);
 		}
 		server.stop();
 		server.terminate();
-		System.out.println("ProjectSWG: Server shut down.");
+		Log.i("CoreManager", "Server shut down.");
 	}
 	
 	/**
@@ -70,13 +72,12 @@ public class ProjectSWG {
 	}
 	
 	/**
-	 * Returns the server's galaxy ID. This may be
-	 * deprecated in the future if multiple servers are run
-	 * at once.
-	 * @return the server's galaxy ID
+	 * Returns the server's galactic time. This is the official time sent to
+	 * the client and should be used for any official client-time purposes.
+	 * @return the server's galactic time
 	 */
-	public static final int getGalaxyId() {
-		return CoreManager.getGalaxyId();
+	public static final long getGalacticTime() {
+		return (long) (System.currentTimeMillis()/1E3 - 1309996800L); // Date is 07/07/2011 GMT
 	}
 	
 	private ProjectSWG() {
@@ -88,7 +89,7 @@ public class ProjectSWG {
 		long start = System.nanoTime();
 		manager = new CoreManager();
 		long end = System.nanoTime();
-		System.out.println("ProjectSWG: Created new manager in " + (end-start)/1E6 + "ms");
+		Log.i(manager, "Created new manager in %.3fms", (end-start)/1E6);
 		while (!shutdownRequested && !manager.isShutdownRequested()) {
 			initialize();
 			start();
@@ -99,7 +100,7 @@ public class ProjectSWG {
 				start = System.nanoTime();
 				manager = new CoreManager();
 				end = System.nanoTime();
-				System.out.println("ProjectSWG: Created new manager in " + (end-start)/1E6 + "ms");
+				Log.i(manager, "Created new manager in %.3fms", (end-start)/1E6);
 			}
 		}
 	}
@@ -117,23 +118,22 @@ public class ProjectSWG {
 	
 	private void initialize() {
 		setStatus(ServerStatus.INITIALIZING);
-		System.out.println("ProjectSWG: Initializing...");
+		Log.i(manager, "Initializing...");
 		if (!manager.initialize())
 			throw new CoreException("Failed to initialize.");
-		System.out.println("ProjectSWG: Initialized. Time: " + manager.getCoreTime() + "ms");
+		Log.i(manager, "Initialized. Time: %.3fms", manager.getCoreTime());
 	}
 	
 	private void start() {
-		System.out.println("ProjectSWG: Starting...");
+		Log.i(manager, "Starting...");
 		if (!manager.start())
 			throw new CoreException("Failed to start.");
-		System.out.println("ProjectSWG: Started. Time: " + manager.getCoreTime() + "ms");
+		Log.i(manager, "Started. Time: %.3fms", manager.getCoreTime());
 	}
 	
 	private void loop() {
 		setStatus((manager.getGalaxyStatus() == GalaxyStatus.UP) ? ServerStatus.OPEN : ServerStatus.LOCKED);
 		while (!shutdownRequested && !manager.isShutdownRequested() && manager.isOperational()) {
-			manager.flushPackets(); // Sends any packets that weren't sent
 			try {
 				Thread.sleep(50);
 			} catch (InterruptedException e) {
@@ -145,31 +145,32 @@ public class ProjectSWG {
 	private void stop() {
 		if (manager == null || status == ServerStatus.OFFLINE)
 			return;
-		System.out.println("ProjectSWG: Stopping...");
+		Log.i(manager, "Stopping...");
 		setStatus(ServerStatus.STOPPING);
-		if (!manager.stop())
-			System.err.println("Failed to stop.");
+		if (!manager.stop()) {
+			Log.e(manager, "Failed to stop.");
+		}
 		long intentWait = System.nanoTime();
 		while (IntentManager.getIntentsQueued() > 0 && System.nanoTime()-intentWait < 3E9) {
 			try {
 				Thread.sleep(10);
 			} catch (InterruptedException e) {
-				System.err.println("ProjectSWG: Failed to stop! Interrupted with " + IntentManager.getIntentsQueued() + " intents remaining");
+				Log.e(manager, "Failed to stop! Interrupted with %d intents remaining", IntentManager.getIntentsQueued());
 				break;
 			}
 		}
-		System.out.println("ProjectSWG: Stopped. Time: " + manager.getCoreTime() + "ms");
+		Log.i(manager, "Stopped. Time: %.3fms", manager.getCoreTime());
 	}
 	
 	private void terminate() {
 		if (manager == null || status == ServerStatus.OFFLINE)
 			return;
-		System.out.println("ProjectSWG: Terminating...");
+		Log.i(manager, "Terminating...");
 		setStatus(ServerStatus.TERMINATING);
 		if (!manager.terminate())
 			throw new CoreException("Failed to terminate.");
 		setStatus(ServerStatus.OFFLINE);
-		System.out.println("ProjectSWG: Terminated. Time: " + manager.getCoreTime() + "ms");
+		Log.i(manager, "Terminated. Time: %.3fms", manager.getCoreTime());
 	}
 	
 	public static class CoreException extends RuntimeException {

@@ -27,14 +27,14 @@
 ***********************************************************************************/
 package resources.objects.sound;
 
-import resources.objects.SWGObject;
+import resources.objects.staticobject.StaticObject;
 
-public class SoundObject extends SWGObject {
+public class SoundObject extends StaticObject {
 	
 	private static final long serialVersionUID = 1L;
 	
 	public SoundObject(long objectId) {
-		super(objectId, null);
+		super(objectId);
 	}
 	
 }

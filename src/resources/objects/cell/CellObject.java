@@ -30,6 +30,7 @@ package resources.objects.cell;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import network.packets.swg.zone.building.UpdateCellPermissionMessage;
 import resources.network.BaselineBuilder;
+import resources.network.NetBuffer;
 import resources.objects.SWGObject;
 import resources.player.Player;
 
@@ -42,8 +43,8 @@ public class CellObject extends SWGObject {
 	private String	label		= "";
 	private String	name		= "";
 
-	private float label_x       = 0f;
-	private float label_z       = 0f;
+	private double labelX       = 0;
+	private double labelZ       = 0;
 
 	public CellObject(long objectId) {
 		super(objectId, BaselineType.SCLT);
@@ -82,34 +83,42 @@ public class CellObject extends SWGObject {
 	}
 
 	public void setLabelMapPosition(float x, float z) {
-		this.label_x = x;
-		this.label_z = z;
+		this.labelX = x;
+		this.labelZ = z;
 	}
 
-	protected void sendBaselines(Player target) {
-		BaselineBuilder bb = new BaselineBuilder(this, BaselineType.SCLT, 3);
-		createBaseline3(target, bb);
-		bb.sendTo(target);
-		
-		bb = new BaselineBuilder(this, BaselineType.SCLT, 6);
-		createBaseline6(target, bb);
-		bb.sendTo(target);
+	protected void sendFinalBaselinePackets(Player target) {
+		super.sendFinalBaselinePackets(target);
 		target.sendPacket(new UpdateCellPermissionMessage((byte) 1, getObjectId()));
 	}
 	
-	public void createBaseline3(Player target, BaselineBuilder bb) {
+	protected void createBaseline3(Player target, BaselineBuilder bb) {
 		super.createBaseline3(target, bb);
 		bb.addBoolean(isPublic);
 		bb.addInt(number);
 		bb.incrementOperandCount(2);
 	}
 	
-	public void createBaseline6(Player target, BaselineBuilder bb) {
+	protected void createBaseline6(Player target, BaselineBuilder bb) {
 		super.createBaseline6(target, bb);
 		bb.addUnicode(label);
-		bb.addFloat(label_x);
+		bb.addFloat((float) labelX);
 		bb.addFloat((float) 0);
-		bb.addFloat(label_z);
+		bb.addFloat((float) labelZ);
 		bb.incrementOperandCount(2);
+	}
+	
+	protected void parseBaseline3(NetBuffer buffer) {
+		super.parseBaseline3(buffer);
+		isPublic = buffer.getBoolean();
+		number = buffer.getInt();
+	}
+	
+	protected void parseBaseline6(NetBuffer buffer) {
+		super.parseBaseline6(buffer);
+		label = buffer.getUnicode();
+		labelX = buffer.getFloat();
+		buffer.getFloat();
+		labelZ = buffer.getFloat();
 	}
 }

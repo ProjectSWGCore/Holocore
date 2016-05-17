@@ -29,9 +29,11 @@ package resources.player;
 
 public enum PlayerEvent {
 	
+	PE_CONNECTED,
 	PE_CREATE_CHARACTER,
 	PE_FIRST_ZONE,
-	PE_ZONE_IN,
+	PE_ZONE_IN_CLIENT,
+	PE_ZONE_IN_SERVER,
 	PE_LOGGED_OUT,
 	PE_DISAPPEAR,
 	PE_SERVER_KICKED

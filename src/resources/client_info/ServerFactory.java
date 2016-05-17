@@ -40,12 +40,15 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
 
 /**
  * Created by Waverunner on 6/9/2015
  */
 public final class ServerFactory extends DataFactory {
+	
+	private static final Object instanceMutex = new Object();
 	private static ServerFactory instance;
 
 	public static DatatableData getDatatable(String file) {
@@ -72,14 +75,12 @@ public final class ServerFactory extends DataFactory {
 					File iff = new File(name);
 
 					if (!iff.exists()) {
-						convertSif(path, name);
-						System.out.println("Created Server Datatable: " + name);
+						convertSdf(path, name);
 						Log.i("ServerFactory", "Created Server Datatable: %s", name);
 					} else {
 						File sif = path.toFile();
 						if (sif.lastModified() > iff.lastModified()) {
-							convertSif(path, name);
-							System.out.println("Updated Server Datatable: " + name);
+							convertSdf(path, name);
 							Log.i("ServerFactory", "Updated Server Datatable: %s", name);
 						}
 					}
@@ -99,7 +100,7 @@ public final class ServerFactory extends DataFactory {
 		});
 	}
 
-	private void convertSif(Path sif, String newPath) {
+	private void convertSdf(Path sif, String newPath) {
 		SWGFile swgFile = new SWGFile(newPath, "DTII");
 
 		DatatableData data = (DatatableData) createDataObject(swgFile);
@@ -128,25 +129,26 @@ public final class ServerFactory extends DataFactory {
 				lineNum++;
 				if (lineNum == 0) {
 					columnNames = row.split("\t");
+					itr.remove();
 				} else if (lineNum == 1) {
 					columnTypes = row.split("\t");
 					for (int i = 0; i < columnTypes.length; i++) {
 						String columnType = columnTypes[i];
 						if (columnType.contains("[")) {
 							String[] split = columnType.split("\\[");
-							columnTypes[i] = split[0].toLowerCase();
+							columnTypes[i] = split[0].toLowerCase(Locale.US);
 							defaultValues.add(split[1].replace("]", ""));
 						} else {
-							columnTypes[i] = columnType.toLowerCase();
+							columnTypes[i] = columnType.toLowerCase(Locale.US);
 							defaultValues.add("");
 						}
 					}
+					itr.remove();
 				}
-				itr.remove();
 			}
 
 			if (columnNames == null || columnTypes == null) {
-				System.err.println("Failed to convert sif " + sif.getFileName());
+				Log.e("ServerFactory", "Failed to convert sdf " + sif.getFileName());
 				return;
 			}
 
@@ -177,14 +179,20 @@ public final class ServerFactory extends DataFactory {
 			if (val.isEmpty() && !defValues.get(t).isEmpty())
 				val = defValues.get(t);
 
-			switch(type) {
-				case "b": table[rowNum][t] = Boolean.valueOf(val); break;
-				case "h":
-				case "i": table[rowNum][t] = Integer.valueOf(val); break;
-				case "f": table[rowNum][t] = Float.valueOf(val); break;
-				case "s": table[rowNum][t] = val; break;
-				default: System.err.println("Don't know how to parse type " + type); break;
+			try {
+				switch(type) {
+					case "b": table[rowNum][t] = Boolean.valueOf(val); break;
+					case "h":
+					case "i": table[rowNum][t] = Integer.valueOf(val); break;
+					case "f": table[rowNum][t] = Float.valueOf(val); break;
+					case "s": table[rowNum][t] = val; break;
+					default: Log.e("ServerFactory", "Don't know how to parse type " + type); break;
+				}
+			} catch (NumberFormatException e) {
+				Log.e("ServerFactory:createDatableRow", "Cannot format string %s to a number", val);
+				e.printStackTrace();
 			}
+
 		}
 	}
 
@@ -202,8 +210,10 @@ public final class ServerFactory extends DataFactory {
 	}
 
 	public static ServerFactory getInstance() {
-		if (instance == null)
-			instance = new ServerFactory();
-		return instance;
+		synchronized (instanceMutex) {
+			if (instance == null)
+				instance = new ServerFactory();
+			return instance;
+		}
 	}
 }

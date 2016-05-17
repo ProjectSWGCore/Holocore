@@ -28,6 +28,7 @@
 package network.packets.swg.login.creation;
 
 import java.nio.ByteBuffer;
+import java.util.Locale;
 
 import network.packets.swg.SWGPacket;
 
@@ -53,7 +54,7 @@ public class ClientVerifyAndLockNameResponse extends SWGPacket {
 		name = getUnicode(data);
 		getAscii(data); // ui
 		getInt(data);
-		error = ErrorMessage.valueOf(getAscii(data).toUpperCase());
+		error = ErrorMessage.valueOf(getAscii(data).toUpperCase(Locale.US));
 	}
 	
 	public ByteBuffer encode() {
@@ -63,7 +64,7 @@ public class ClientVerifyAndLockNameResponse extends SWGPacket {
 		addUnicode(data, name);
 		addAscii(  data, "ui");
 		addInt(    data, 0);
-		addAscii(  data, error.name().toLowerCase());
+		addAscii(  data, error.name().toLowerCase(Locale.US));
 		return data;
 	}
 	
@@ -85,7 +86,8 @@ public class ClientVerifyAndLockNameResponse extends SWGPacket {
 		NAME_DECLINED_RETRY,
 		NAME_DECLINED_TOO_FAST,
 		NAME_DECLINED_NOT_AUTHORIZED_FOR_SPECIES,
-		NAME_DECLINED_FICTIONALLY_RESERVED;
+		NAME_DECLINED_FICTIONALLY_RESERVED,
+		SERVER_CHARACTER_CREATION_MAX_CHARS;
 	}
 	
 }

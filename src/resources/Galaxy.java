@@ -27,8 +27,20 @@
 ***********************************************************************************/
 package resources;
 
+import java.time.ZoneOffset;
+import java.util.TimeZone;
+import java.util.concurrent.TimeUnit;
+
 
 public class Galaxy {
+	
+	// Population status values. Values are in percent.
+	private static final double VERY_LIGHT = 10;
+	private static final double LIGHT = 20;
+	private static final double MEDIUM = 30;
+	private static final double HEAVY = 40;
+	private static final double VERY_HEAVY = 50;
+	private static final double EXTREMELY_HEAVY = 100;
 	
 	private int id = 0;
 	private String name = "";
@@ -36,9 +48,8 @@ public class Galaxy {
 	private int zonePort = 44463;
 	private int pingPort = 44462;
 	private int population = 0;
-	private int popStatus = 0;
 	private GalaxyStatus status = GalaxyStatus.DOWN;
-	private int timeZone = 0;
+	private ZoneOffset zoneOffset;
 	private int maxCharacters = 0;
 	private int onlinePlayerLimit = 0;
 	private int onlineFreeTrialLimit = 0;
@@ -48,33 +59,55 @@ public class Galaxy {
 		
 	}
 	
-	public int    getId()                   { return id; }
-	public String getName()                 { return name; }
-	public String getAddress()              { return address; }
-	public int    getZonePort()             { return zonePort; }
-	public int    getPingPort()             { return pingPort; }
-	public int    getPopulation()           { return population; }
-	public int    getPopulationStatus()     { return popStatus; }
-	public GalaxyStatus getStatus()         { return status; }
-	public int    getTimeZone()             { return timeZone; }
-	public int    getMaxCharacters()        { return maxCharacters; }
-	public int    getOnlinePlayerLimit()    { return onlinePlayerLimit; }
-	public int    getOnlineFreeTrialLimit() { return onlineFreeTrialLimit; }
-	public boolean isRecommended()          { return recommended; }
+	public synchronized int    getId()                   { return id; }
+	public synchronized String getName()                 { return name; }
+	public synchronized String getAddress()              { return address; }
+	public synchronized int    getZonePort()             { return zonePort; }
+	public synchronized int    getPingPort()             { return pingPort; }
+	public synchronized int    getPopulation()           { return population; }
+	public synchronized GalaxyStatus getStatus()         { return status; }
+	public synchronized int    getDistance()             { return zoneOffset.getTotalSeconds() - (int) TimeUnit.SECONDS.convert(TimeZone.getDefault().getDSTSavings(), TimeUnit.MILLISECONDS); }
+	public synchronized int    getMaxCharacters()        { return maxCharacters; }
+	public synchronized int    getOnlinePlayerLimit()    { return onlinePlayerLimit; }
+	public synchronized int    getOnlineFreeTrialLimit() { return onlineFreeTrialLimit; }
+	public synchronized boolean isRecommended()          { return recommended; }
 	
-	public void setId(int id)                    { this.id = id; }
-	public void setName(String name)             { this.name = name; }
-	public void setAddress(String addr)          { this.address = addr; }
-	public void setZonePort(int port)            { this.zonePort = port; }
-	public void setPingPort(int port)            { this.pingPort = port; }
-	public void setPopulation(int population)    { this.population = population; }
-	public void setPopulationStatus(int status)  { this.popStatus = status; }
-	public void setStatus(GalaxyStatus status)   { this.status = status; }
-	public void setTimeZone(int timeZone)        { this.timeZone = timeZone; }
-	public void setMaxCharacters(int max)        { this.maxCharacters = max; }
-	public void setOnlinePlayerLimit(int max)    { this.onlinePlayerLimit = max; }
-	public void setOnlineFreeTrialLimit(int max) { this.onlineFreeTrialLimit = max; }
-	public void setRecommended(boolean r)        { this.recommended = r; }
+	public synchronized int getPopulationStatus() {
+		
+		if (population < VERY_LIGHT)
+			return 0;
+		else if(population < LIGHT)
+			return 1;
+		else if(population < MEDIUM)
+			return 2;
+		else if(population < HEAVY)
+			return 3;
+		else if(population < VERY_HEAVY)
+			return 4;
+		else if(population < EXTREMELY_HEAVY)
+			return 5;
+		return 6;
+	}
+	
+	public synchronized void setId(int id)                    { this.id = id; }
+	public synchronized void setName(String name)             { this.name = name; }
+	public synchronized void setAddress(String addr)          { this.address = addr; }
+	public synchronized void setZonePort(int port)            { this.zonePort = port; }
+	public synchronized void setPingPort(int port)            { this.pingPort = port; }
+	public synchronized void setPopulation(int population)    { this.population = population; }
+	public synchronized void setStatus(GalaxyStatus status)   { this.status = status; }
+	public synchronized void setZoneOffset(ZoneOffset zoneOffset)        { this.zoneOffset = zoneOffset; }
+	public synchronized void setMaxCharacters(int max)        { this.maxCharacters = max; }
+	public synchronized void setOnlinePlayerLimit(int max)    { this.onlinePlayerLimit = max; }
+	public synchronized void setOnlineFreeTrialLimit(int max) { this.onlineFreeTrialLimit = max; }
+	public synchronized void setRecommended(boolean r)        { this.recommended = r; }
+	public synchronized void incrementPopulationCount()       { population++; }
+	public synchronized void decrementPopulationCount()       { population--; }
+	
+	public String toString() {
+		return String.format("Galaxy[ID=%d Name=%s Address=%s Zone=%d Ping=%d Pop=%d PopStat=%d Status=%s Time=%s Max=%d Rec=%b]",
+				id, name, address, zonePort, pingPort, population, getPopulationStatus(), status, zoneOffset.getId(), maxCharacters, recommended);
+	}
 	
 	public void setStatus(int status) {
 		for (GalaxyStatus gs : GalaxyStatus.values()) {

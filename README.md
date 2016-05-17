@@ -1,8 +1,6 @@
 ### **Branch** ###
 
-**Quality Assurance:** Upload your Pull Requests here so it can be tested
-
-**Development:** This is the main working space
+**Quality Assurance:** Upload your Pull Requests here so it can be tested. This is the main working space
 
 **Master:** Tested and approved commits will be moved to this branch (Test Center)
 
@@ -33,6 +31,35 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with Holocore.  If not, see <http://www.gnu.org/licenses/>.
 
+## Setting up the developer environment ##
+
+### Java 1.8 ###
+
+You need to have a Java compiler that supports [Java 1.8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html). Which
+you can download from Oracle.
+
+### Maven ###
+
+This project uses Maven as it's build tool of choice, and requires Maven 3.x. To install Maven, see your
+specific OS instructions from the [Maven installation](http://books.sonatype.com/mvnref-book/reference/installation.html) section
+from the Sonatype site.
+
+**The Maven build will generate two artifacts**
+
+- Standalone 'uber' jar that you can run the Holocore server out of.
+- Jar containing a sub-set of files as defined by 'asselby-tools.xml'
+
+**Using the standard Maven life-cycle, you have the following supported goals:**
+
+- clean   - Removes any .class and old jar files
+- compile - Just compiles the java code, does *not* update any artifacts
+- test    - Does all that 'compile' does, plus runs the unit tests
+- package - Does all that 'test' does but generates all of the artifacts
+
+### Forwarder ###
+
+Holocore uses TCP for network communications, whereas SWG was programmed for UDP.  This adds numerous efficiencies with long distance communications, but requires that a little more work is done on the client side.  If you are using the launcher, you do not have to worry about this.  If you are not using the launcher, follow the guide [here](https://bitbucket.org/projectswg/forwarder).
+
 ### Running Holocore ###
 In order to successfully build and run Holocore, you must:
 
@@ -43,8 +70,8 @@ In order to successfully build and run Holocore, you must:
     * abstract
     * appearance
     * creation
-    * customization 
-    * datatables 
+    * customization
+    * datatables
     * footprint
     * interiorlayout
     * misc

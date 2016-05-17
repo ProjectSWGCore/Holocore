@@ -71,7 +71,7 @@ public class DataTransformWithParent extends ObjectController {
 		return null;
 	}
 	
-	public void setCounter(int counter) {
+	public void setUpdateCounter(int counter) {
 		this.counter = counter;
 	}
 

@@ -135,8 +135,10 @@ public class CachedObjectDatabase<V extends Serializable> extends ObjectDatabase
 	}
 	
 	public synchronized boolean load() {
-		if (!fileExists())
+		if (!fileExists()) {
+			Log.e("CachedObjectDatabase", "load() - file '%s' does not exist!", getFile());
 			return false;
+		}
 		ObjectInputStream ois = null;
 		try {
 			ois = new ObjectInputStream(new FileInputStream(getFile()));
@@ -152,15 +154,15 @@ public class CachedObjectDatabase<V extends Serializable> extends ObjectDatabase
 		} catch (EOFException e) {
 			loaded = true;
 		} catch (IOException | ClassNotFoundException | ClassCastException e) {
-			System.err.println("CachedObjectDatabase: Unable to load with error: " + e.getClass().getSimpleName() + " - " + e.getMessage());
+			Log.e("CachedObjectDatabase", "load() - unable to load with error: %s - %s", e.getClass().getSimpleName(), e.getMessage());
 			return false;
 		} finally {
 			if (ois != null) {
 				try {
 					ois.close();
 				} catch (Exception e) {
-					System.err.println("CachedObjectDatabase: Failed to close stream when loading! " + e.getMessage());
-					e.printStackTrace();
+					Log.e("CachedObjectDatabase", "Failed to close stream when loading! " + e.getMessage());
+					Log.e("CachedObjectDatabase", e);
 				}
 			}
 		}
