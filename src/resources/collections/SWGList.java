@@ -114,7 +114,7 @@ public class SWGList<E> extends ArrayList<E> implements Encodable, Serializable 
 		deltas = new LinkedList<>();
 		deltaSize = 0;
 		for (E e : this) {
-			add(e);
+			addObjectData(data.size(), e, (byte) 1);
 		}
 		clearDeltaQueue();
 	}

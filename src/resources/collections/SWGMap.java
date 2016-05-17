@@ -85,7 +85,7 @@ public class SWGMap<K, V> extends HashMap<K, V> implements Encodable, Serializab
 		deltaSize = 0;
 		dataSize = 0;
 		for (Entry<K, V> e : entrySet()) {
-			put(e.getKey(), e.getValue());
+			addData(e.getKey(), e.getValue(), (byte) 0);
 		}
 		clearDeltaQueue();
 	}
