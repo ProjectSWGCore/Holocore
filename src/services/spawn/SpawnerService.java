@@ -43,6 +43,7 @@ import resources.control.Service;
 import resources.objects.building.BuildingObject;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureDifficulty;
+import resources.objects.creature.CreatureObject;
 import resources.objects.custom.AIBehavior;
 import resources.objects.custom.DefaultAIObject;
 import resources.objects.tangible.OptionFlag;
@@ -60,7 +61,7 @@ public final class SpawnerService extends Service {
 			+ "static.spawner_type, static.cell_id, static.active, static.mood, static.behaviour, static.float_radius, " // more static columns
 			+ "buildings.object_id AS building_id, buildings.terrain_name AS building_terrain, " // building columns
 			+ "creatures.iff_template AS iff, creatures.creature_name, creatures.combat_level, creatures.difficulty, creatures.attackable, " // creature columns
-			+ "npc_stats.HP, npc_stats.Action "	// npc_stats columns
+			+ "npc_stats.HP, npc_stats.Action, npc_stats.Boss_HP, npc_stats.Boss_Action, npc_stats.Elite_HP, npc_stats.Elite_Action "	// npc_stats columns
 			+ "FROM static, buildings, creatures, npc_stats "
 			+ "WHERE buildings.building_id = static.building_id AND static.creature_id = creatures.creature_id AND creatures.combat_level = npc_stats.Level";
 	private static final String IDLE_MOOD = "idle";
@@ -167,31 +168,58 @@ public final class SpawnerService extends Service {
 		object.setName(getCreatureName(name));
 		object.setLevel((short) set.getInt("combat_level"));
 		object.setDifficulty(difficulty);
-		
-		object.setMaxHealth(set.getInt("HP"));
-		object.setHealth(object.getMaxHealth());
-		
-		object.setMaxAction(set.getInt("Action"));
-		object.setAction(object.getMaxAction());
+		setHAM(object, difficulty, set);
+		setFlags(object, set);
 		
 		object.setBehavior(AIBehavior.valueOf(set.getString("behaviour")));
 		if (object.getBehavior() == AIBehavior.FLOAT)
 			object.setFloatRadius((Integer) set.getInt("float_radius"));
-		
-		switch (set.getString("attackable")) {
-			case "AGGRESSIVE":
-				object.setPvpFlags(PvpFlag.AGGRESSIVE);
-				object.setPvpFlags(PvpFlag.ENEMY);
-			case "ATTACKABLE": object.setPvpFlags(PvpFlag.ATTACKABLE); break;
-			case "INVULNERABLE": object.addOptionFlags(OptionFlag.INVULNERABLE); break;
-			default: Log.w(this, "An unknown attackable type of %s was specified for %s", set.getString("attackable"), name); break;
-		}
 		
 		String moodAnimation = set.getString("mood");
 		if (!moodAnimation.equals(IDLE_MOOD)) {
 			object.setMoodAnimation(moodAnimation);
 		}
 		new ObjectCreatedIntent(object).broadcast();
+	}
+	
+	private void setHAM(CreatureObject creature, CreatureDifficulty difficulty, ResultSet set) throws SQLException {
+		int health = 0, action = 0;
+		switch (difficulty) {
+			case BOSS:
+				health = set.getInt("Boss_HP");
+				action = set.getInt("Boss_Action");
+				break;
+			case ELITE:
+				health = set.getInt("Elite_HP");
+				action = set.getInt("Elite_Action");
+				break;
+			case NORMAL:
+				health = set.getInt("HP");
+				action = set.getInt("Action");
+				break;
+		}
+		creature.setMaxHealth(health);
+		creature.setHealth(health);
+		creature.setMaxAction(action);
+		creature.setAction(action);
+	}
+	
+	private void setFlags(CreatureObject creature, ResultSet set) throws SQLException {
+		switch (set.getString("attackable")) {
+			case "AGGRESSIVE":
+				creature.setPvpFlags(PvpFlag.AGGRESSIVE);
+				creature.addOptionFlags(OptionFlag.AGGRESSIVE);
+			case "ATTACKABLE":
+				creature.setPvpFlags(PvpFlag.ATTACKABLE);
+				creature.addOptionFlags(OptionFlag.HAM_BAR);
+				break;
+			case "INVULNERABLE":
+				creature.addOptionFlags(OptionFlag.INVULNERABLE);
+				break;
+			default:
+				Log.w(this, "An unknown attackable type of %s was specified for %s", set.getString("attackable"), creature.getName());
+				break;
+		}
 	}
 	
 	private String getCreatureName(String name) {

@@ -243,7 +243,7 @@ public class NetBuffer {
 	}
 	
 	public SWGSet<String> getSwgSet(int num, int var, StringType type) {
-		SWGSet<String> set = new SWGSet<>(num, var);
+		SWGSet<String> set = new SWGSet<>(num, var, type);
 		set.decode(data, type);
 		return set;
 	}
@@ -255,11 +255,10 @@ public class NetBuffer {
 	}
 	
 	public SWGList<String> getSwgList(int num, int var, StringType type) {
-		SWGList<String> set = new SWGList<>(num, var);
+		SWGList<String> set = new SWGList<>(num, var, type);
 		set.decode(data, type);
 		return set;
 	}
-	
 	
 	public <T> SWGList<T> getSwgList(int num, int var, Class<T> type) {
 		SWGList<T> set = new SWGList<>(num, var);
@@ -267,21 +266,21 @@ public class NetBuffer {
 		return set;
 	}
 	
-	public SWGMap<String, String> getSwgMap(int num, int var, StringType key, StringType val) {
-		SWGMap<String, String> map = new SWGMap<>(num, var);
-		map.decode(data, key, val, true);
+	public SWGMap<String, String> getSwgMap(int num, int var, StringType strType) {
+		SWGMap<String, String> map = new SWGMap<>(num, var, strType);
+		map.decode(data, strType, strType);
 		return map;
 	}
 	
 	public <V> SWGMap<String, V> getSwgMap(int num, int var, StringType key, Class<V> val) {
-		SWGMap<String, V> map = new SWGMap<>(num, var);
-		map.decode(data, key, val, true);
+		SWGMap<String, V> map = new SWGMap<>(num, var, key);
+		map.decode(data, key, val);
 		return map;
 	}
 	
 	public <K, V> SWGMap<K, V> getSwgMap(int num, int var, Class<K> key, Class<V> val) {
 		SWGMap<K, V> map = new SWGMap<>(num, var);
-		map.decode(data, key, val, true);
+		map.decode(data, key, val);
 		return map;
 	}
 	

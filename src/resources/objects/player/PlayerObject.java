@@ -469,16 +469,6 @@ public class PlayerObject extends IntangibleObject {
 		experience.put(xpType, experiencePoints);
 		experience.sendDeltaMessage(this);
 	}
-
-	@Override
-	public boolean equals(Object o) {
-		return super.equals(o);
-	}
-	
-	@Override
-	public int hashCode() {
-		return super.hashCode();
-	}
 	
 	public void createChildrenObjects(Player target) {
 		SWGObject parent = getParent();

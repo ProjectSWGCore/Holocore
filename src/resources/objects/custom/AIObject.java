@@ -47,7 +47,6 @@ public abstract class AIObject extends CreatureObject {
 	 */
 	public void aiStart() {
 		if (future != null) {
-			Log.e(getClass().getSimpleName(), "AI has already started!");
 			return;
 		}
 		future = ScheduledUtilities.scheduleAtFixedRate(() -> aiLoop(), initialDelay, delay, unit);
@@ -64,7 +63,6 @@ public abstract class AIObject extends CreatureObject {
 	 */
 	public void aiStop() {
 		if (future == null) {
-			Log.e(getClass().getSimpleName(), "AI has already stopped!");
 			return;
 		}
 		future.cancel(true);

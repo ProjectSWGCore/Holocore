@@ -312,6 +312,7 @@ public class CommandService extends Service {
 		registerCallback("qatool", QaToolCmdCallback.class);
 		registerCallback("goto", GotoCmdCallback.class);
 		registerCallback("startDance", StartDanceCallback.class);
+		registerCallback("requestBiography", RequestBiographyCmdCallback.class);
 	}
 	
 	private void clearCommands() {

@@ -92,7 +92,7 @@ public class QaToolCmdCallback implements ICmdCallback {
 					recoverPlayer(galacticManager.getObjectManager(), galacticManager.getPlayerManager(), player, args.substring(args.indexOf(' ') + 1));
 					break;
 				case "details":
-					Scripts.invoke("commands/helper/qatool/details", "sendDetails", player, target);
+					Scripts.invoke("commands/helper/qatool/details", "sendDetails", player, target, args.split(" "));
 					break;
 				default:
 					displayMainWindow(player);

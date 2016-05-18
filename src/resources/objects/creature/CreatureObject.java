@@ -51,7 +51,6 @@ import resources.network.BaselineBuilder;
 import resources.network.NetBuffer;
 import resources.objects.SWGObject;
 import resources.objects.player.PlayerObject;
-import resources.objects.tangible.OptionFlag;
 import resources.objects.tangible.TangibleObject;
 import resources.objects.weapon.WeaponObject;
 import resources.player.Player;
@@ -109,18 +108,18 @@ public class CreatureObject extends TangibleObject {
 	private long	lastTransform			= 0;
 	private HologramColour hologramColour = HologramColour.DEFAULT;
 	
-	private SWGSet<String>		missionCriticalObjs			= new SWGSet<>(4, 13);
+	private SWGSet<String>		missionCriticalObjs	= new SWGSet<>(4, 13);
+	private SWGSet<String>		skills				= new SWGSet<String>(1, 3, StringType.ASCII);
 	
-	private SWGList<Integer>	baseAttributes	= new SWGList<Integer>(1, 2);
-	private SWGSet<String>		skills			= new SWGSet<String>(1, 3, StringType.ASCII);
-	private SWGList<Integer>	hamEncumbList	= new SWGList<Integer>(4, 2);
-	private SWGList<Integer>	attributes		= new SWGList<Integer>(6, 21);
-	private SWGList<Integer>	maxAttributes	= new SWGList<Integer>(6, 22);
-	private SWGList<Equipment>	equipmentList 	= new SWGList<Equipment>(6, 23);
-	private SWGList<Equipment>	appearanceList 	= new SWGList<Equipment>(6, 33);
+	private SWGList<Integer>	baseAttributes		= new SWGList<Integer>(1, 2);
+	private SWGList<Integer>	hamEncumbList		= new SWGList<Integer>(4, 2);
+	private SWGList<Integer>	attributes			= new SWGList<Integer>(6, 21);
+	private SWGList<Integer>	maxAttributes		= new SWGList<Integer>(6, 22);
+	private SWGList<Equipment>	equipmentList 		= new SWGList<Equipment>(6, 23);
+	private SWGList<Equipment>	appearanceList 		= new SWGList<Equipment>(6, 33);
 	
-	private SWGMap<String, SkillMod> 	skillMods			= new SWGMap<>(4, 3, StringType.ASCII); // TODO: SkillMod structure
-	private SWGMap<String, Integer>	abilities				= new SWGMap<>(4, 14, StringType.ASCII);
+	private SWGMap<String, SkillMod> 	skillMods	= new SWGMap<>(4, 3, StringType.ASCII); // TODO: SkillMod structure
+	private SWGMap<String, Integer>	abilities		= new SWGMap<>(4, 14, StringType.ASCII);
 	private SWGMap<CRC, Buff>	buffs				= new SWGMap<>(6, 26);
 	
 	public CreatureObject(long objectId) {
@@ -128,7 +127,6 @@ public class CreatureObject extends TangibleObject {
 		initMaxAttributes();
 		initCurrentAttributes();
 		initBaseAttributes();
-		setOptionFlags(OptionFlag.HAM_BAR);
 	}
 	
 	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
@@ -188,8 +186,11 @@ public class CreatureObject extends TangibleObject {
 	}
 	
 	public void addSkill(String skillName) {
-		skills.add(skillName);
-		skills.sendDeltaMessage(this);
+		synchronized(skills) {
+			if(skills.add(skillName)) {
+				skills.sendDeltaMessage(this);
+			}
+		}
 	}
 	
 	public boolean hasSkill(String skillName) {
@@ -927,17 +928,14 @@ public class CreatureObject extends TangibleObject {
 			target.sendPacket(createBaseline9(target));
 		}
 	}
-
-	@Override
-	public void createObject(Player target) {
-		super.createObject(target);
-
+	
+	protected void sendFinalBaselinePackets(Player target) {
+		super.sendFinalBaselinePackets(target);
+		
 		target.sendPacket(new UpdatePostureMessage(posture.getId(), getObjectId()));
-
-		if (target != getOwner()) {
-			Set<PvpFlag> flags = PvpFlag.getFlags(getPvpFlags());
-			target.sendPacket(new UpdatePvpStatusMessage(getPvpFaction(), getObjectId(), flags.toArray(new PvpFlag[flags.size()])));
-		}
+		
+		Set<PvpFlag> flags = PvpFlag.getFlags(getPvpFlags());
+		target.sendPacket(new UpdatePvpStatusMessage(getPvpFaction(), getObjectId(), flags.toArray(new PvpFlag[flags.size()])));
 	}
 	
 	public void createBaseline1(Player target, BaselineBuilder bb) {
