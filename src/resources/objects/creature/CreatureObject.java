@@ -91,6 +91,7 @@ public class CreatureObject extends TangibleObject {
 	private String	moodAnimation			= "neutral";
 	private String	animation				= "";
 	private WeaponObject equippedWeapon		= null;
+	private WeaponObject defaultWeapon		= null;
 	private byte	moodId					= 0;
 	private long 	lookAtTargetId			= 0;
 	private long 	intendedTargetId		= 0;
@@ -514,6 +515,14 @@ public class CreatureObject extends TangibleObject {
 		sendDelta(6, 12, weapon.getObjectId());
 	}
 
+	public WeaponObject getDefaultWeapon() {
+		return defaultWeapon;
+	}
+
+	public void setDefaultWeapon(WeaponObject defaultWeapon) {
+		this.defaultWeapon = defaultWeapon;
+	}
+	
 	public byte getMoodId() {
 		return moodId;
 	}
