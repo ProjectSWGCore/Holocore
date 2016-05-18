@@ -85,19 +85,22 @@ public class GroupService extends Service {
 		}
 	}
 
-	private void handleGroupEventIntent(GroupEventIntent intent) {
-		switch(intent.getEventType()) {
-			case GROUP_INVITE:
-				handleGroupInvite(intent.getPlayer(), intent.getTarget());
-				break;
-			case GROUP_JOIN:
-				handleGroupJoin(intent.getPlayer());
-				break;
-			case GROUP_DISBAND:
-				handleGroupDisband(intent.getPlayer(), intent.getTarget());
-				break;
-		}
-	}
+    private void handleGroupEventIntent(GroupEventIntent intent) {
+        switch (intent.getEventType()) {
+            case GROUP_INVITE:
+                handleGroupInvite(intent.getPlayer(), intent.getTarget());
+                break;
+            case GROUP_JOIN:
+                handleGroupJoin(intent.getPlayer());
+                break;
+            case GROUP_DISBAND:
+                handleGroupDisband(intent.getPlayer(), intent.getTarget());
+                break;
+            case GROUP_LEAVE:
+                handleGroupLeave(intent.getPlayer());
+                break;
+        }
+    }
 
 	private void handlePlayerEventIntent(PlayerEventIntent intent) {
 		switch(intent.getEvent()) {
@@ -153,6 +156,10 @@ public class GroupService extends Service {
 			// TODO: Leave group chat room
 		}
 	}
+        
+    private void handleGroupLeave(Player player) {
+        System.out.println("Group member leaving");
+    }
 
 	private void handleGroupInvite(Player player, CreatureObject target) {
 		CreatureObject playerCreo = player.getCreatureObject();

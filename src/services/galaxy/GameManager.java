@@ -36,6 +36,7 @@ import services.experience.ExperienceManager;
 import services.faction.FactionService;
 import services.galaxy.terminals.TerminalService;
 import services.sui.SuiService;
+import services.group.GroupService;
 
 public class GameManager extends Manager {
 
@@ -46,7 +47,7 @@ public class GameManager extends Manager {
 	private final EnvironmentService weatherService;
 	private final TerminalService terminalManager;
 	private final FactionService factionService;
-	//private final GroupService groupService;
+	private final GroupService groupService;
 	private final SkillModService skillModService;
 	private final EntertainmentService entertainmentService;
 	private final CombatService combatService;
@@ -60,7 +61,7 @@ public class GameManager extends Manager {
 		weatherService = new EnvironmentService();
 		terminalManager = new TerminalService();
 		factionService = new FactionService();
-//		groupService = new GroupService();
+		groupService = new GroupService();
 		skillModService = new SkillModService();
 		entertainmentService = new EntertainmentService();
 		combatService = new CombatService();
@@ -73,7 +74,7 @@ public class GameManager extends Manager {
 		addChildService(weatherService);
 		addChildService(terminalManager);
 		addChildService(factionService);
-//		addChildService(groupService);
+		addChildService(groupService);
 		addChildService(skillModService);
 		addChildService(entertainmentService);
 		addChildService(combatService);

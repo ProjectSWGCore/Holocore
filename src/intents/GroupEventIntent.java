@@ -66,9 +66,10 @@ public class GroupEventIntent extends Intent {
 		return target;
 	}
 
-	public enum GroupEventType {
-		GROUP_INVITE,
-		GROUP_JOIN,
-		GROUP_DISBAND
-	}
+    public enum GroupEventType {
+        GROUP_INVITE,
+        GROUP_JOIN,
+        GROUP_DISBAND,
+        GROUP_LEAVE
+    }
 }
