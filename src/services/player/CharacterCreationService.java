@@ -395,6 +395,7 @@ public class CharacterCreationService extends Service {
 		creatureObj.getSkills().add("species_" + creatureObj.getRace().getSpecies());
 
 		WeaponObject defWeapon = (WeaponObject) createInventoryObject(objManager, creatureObj, "object/weapon/melee/unarmed/shared_unarmed_default_player.iff");
+		creatureObj.setDefaultWeapon(defWeapon);
 		defWeapon.setMaxRange(5);
 		creatureObj.setEquippedWeapon(defWeapon);
 		creatureObj.addEquipment(createInventoryObject(objManager, creatureObj, "object/tangible/inventory/shared_character_inventory.iff"));
