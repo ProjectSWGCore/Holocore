@@ -70,6 +70,7 @@ public class GroupEventIntent extends Intent {
 		GROUP_INVITE,
 		GROUP_JOIN,
 		GROUP_DISBAND,
-		GROUP_LEAVE
+		GROUP_LEAVE,
+		GROUP_MAKE_LEADER
 	}
 }
