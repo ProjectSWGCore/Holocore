@@ -102,11 +102,9 @@ public class TerrainSnapshotLoader {
 		objectTable.put(object.getObjectId(), object);
 		if (containerId != 0) {
 			SWGObject container = objectTable.get(containerId);
-			if (container != null)
-				container.addObject(object);
-			else {
+			object.moveToContainer(container);
+			if (container == null)
 				Log.e("TerrainSnapshotLoader", "Failed to load object: " + object.getTemplate());
-			}
 		} else {
 			objects.add(object);
 		}

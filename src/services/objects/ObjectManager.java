@@ -150,13 +150,10 @@ public class ObjectManager extends Manager {
 		if (obj.getParent() != null) {
 			if (!obj.getParent().isGenerated()) {
 				long id = obj.getParent().getObjectId();
-				obj.getParent().removeObject(obj);
 				SWGObject parent = getObjectById(id);
-				if (parent != null)
-					parent.addObject(obj);
-				else {
+				obj.moveToContainer(parent);
+				if (parent == null)
 					Log.e("ObjectManager", "Parent for %s is null! ParentID: %d", obj, id);
-				}
 			} else {
 				updateBuildoutParent(obj.getParent());
 			}
@@ -313,7 +310,7 @@ public class ObjectManager extends Manager {
 			}
 			object.sendObserversAndSelf(new SceneDestroyObject(objId));
 
-			parent.removeObject(object);
+			object.moveToContainer(null);
 		} else {
 			object.sendObservers(new SceneDestroyObject(objId));
 		}
@@ -355,9 +352,7 @@ public class ObjectManager extends Manager {
 			return null;
 		}
 		obj.setLocation(l);
-		if (parent != null) {
-			parent.addObject(obj);
-		}
+		obj.moveToContainer(parent);
 		synchronized (database) {
 			if (addToDatabase) {
 				database.put(obj.getObjectId(), obj);

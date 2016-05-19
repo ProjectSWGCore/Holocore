@@ -164,7 +164,7 @@ public final class SpawnerService extends Service {
 		DefaultAIObject object = ObjectCreator.createObjectFromTemplate(createTemplate(getRandomIff(set.getString("iff"))), DefaultAIObject.class);
 		object.setLocation(loc);
 		if (parent != null)
-			parent.addObject(object);
+			object.moveToContainer(parent);
 		object.setName(getCreatureName(name));
 		object.setLevel((short) set.getInt("combat_level"));
 		object.setDifficulty(difficulty);

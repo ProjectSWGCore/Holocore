@@ -313,10 +313,10 @@ public class CharacterCreationService extends Service {
 		createStarterClothing(objManager, creatureObj, create.getRace(), create.getClothes());
 		
 		creatureObj.setVolume(0x000F4240);
-		creatureObj.setOwner(player);
-		creatureObj.addObject(playerObj); // ghost slot
+		playerObj.moveToContainer(creatureObj); // ghost slot
 		
 		playerObj.setAdminTag(player.getAccessLevel());
+		creatureObj.setOwner(player);
 		player.setCreatureObject(creatureObj);
 		new SkillBoxGrantedIntent(create.getStartingPhase(), creatureObj).broadcast();
 		return creatureObj.getObjectId();
@@ -350,7 +350,7 @@ public class CharacterCreationService extends Service {
 			return null;
 		}
 		SWGObject obj = objManager.createObject(template, info.location);
-		cell.addObject(obj);
+		obj.moveToContainer(cell);
 		if (obj instanceof CreatureObject)
 			return (CreatureObject) obj;
 		return null;
@@ -382,7 +382,7 @@ public class CharacterCreationService extends Service {
 		TangibleObject hairObj = createTangible(objManager, ClientFactory.formatToSharedFile(hair));
 		hairObj.setAppearanceData(customization);
 
-		creatureObj.addObject(hairObj); // slot = hair
+		hairObj.moveToContainer(creatureObj); // hair slot
 		creatureObj.addEquipment(hairObj);
 	}
 	

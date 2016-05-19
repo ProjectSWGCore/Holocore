@@ -82,7 +82,7 @@ public class BuildingObject extends TangibleObject {
 	}
 
 	@Override
-	public boolean addObject(SWGObject object) {
+	protected boolean addObject(SWGObject object) {
 		boolean added = super.addObject(object);
 		if (!added || !(object instanceof CellObject))
 			return added;

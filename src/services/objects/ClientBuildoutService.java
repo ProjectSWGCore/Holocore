@@ -132,7 +132,7 @@ public class ClientBuildoutService extends Service {
 	
 	private void checkChild(Map<Long, SWGObject> objects, SWGObject obj, long container) {
 		if (container != 0)
-			objects.get(container).addObject(obj);
+			obj.moveToContainer(objects.get(container));
 	}
 	
 	private List<String> getEvents() {
