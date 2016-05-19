@@ -108,6 +108,8 @@ public class Player implements Comparable<Player> {
 	
 	public void setCreatureObject(CreatureObject obj) {
 		this.creatureObject = obj;
+		if (obj.getOwner() != this)
+			obj.setOwner(this);
 	}
 	
 	public void updateLastPacketTimestamp() {
