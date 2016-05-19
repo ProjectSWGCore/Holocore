@@ -409,7 +409,11 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 
 	public void setOwner(Player player) {
+		if (owner != null)
+			owner.setCreatureObject(null);
 		this.owner = player;
+		if (player != null && this instanceof CreatureObject)
+			player.setCreatureObject((CreatureObject) this);
 	}
 	
 	public void setLocation(Location l) {

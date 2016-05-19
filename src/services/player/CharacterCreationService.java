@@ -317,7 +317,6 @@ public class CharacterCreationService extends Service {
 		
 		playerObj.setAdminTag(player.getAccessLevel());
 		creatureObj.setOwner(player);
-		player.setCreatureObject(creatureObj);
 		new SkillBoxGrantedIntent(create.getStartingPhase(), creatureObj).broadcast();
 		return creatureObj.getObjectId();
 	}

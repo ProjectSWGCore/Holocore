@@ -139,7 +139,6 @@ public class ZoneManager extends Manager {
 	private void zoneInPlayer(Player player, CreatureObject creature, boolean firstZone) {
 		PlayerObject playerObj = creature.getPlayerObject();
 		player.setPlayerState(PlayerState.ZONING_IN);
-		player.setCreatureObject(creature);
 		creature.setOwner(player);
 		
 		if (firstZone)

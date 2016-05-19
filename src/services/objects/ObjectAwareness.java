@@ -115,7 +115,6 @@ public class ObjectAwareness extends Service {
 					creature.destroyObject(obj.getOwner());
 				creature.clearAware();
 				creature.setOwner(null);
-				p.setCreatureObject(null);
 				break;
 			case PE_ZONE_IN_SERVER:
 				creature.clearAware(false);
