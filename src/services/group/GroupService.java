@@ -99,6 +99,9 @@ public class GroupService extends Service {
 			case GROUP_LEAVE:
 				handleGroupLeave(intent.getPlayer());
 				break;
+			case GROUP_MAKE_LEADER:
+				handleMakeLeader(intent.getPlayer(), intent.getTarget());
+				break;
 		}
 	}
 
@@ -158,6 +161,25 @@ public class GroupService extends Service {
 	}
 
 	private void handleGroupLeave(Player player) {
+		CreatureObject creo = player.getCreatureObject();
+		
+		if (creo == null)
+			return;
+		
+		GroupObject group = getGroup(creo.getGroupId());
+		
+		if (group == null)
+			return;
+		
+		// Check size of the group, if it only has two members, destroy the group
+		if (group.getGroupMembers().size() == 2) {
+			destroyGroup(group, player);
+			return;
+		}
+		
+		// Otherwise, remove player
+		group.removeMember(creo);
+		
 		System.out.println("Group member leaving");
 	}
 
@@ -191,14 +213,32 @@ public class GroupService extends Service {
 				else
 					sendSystemMessage(player, "considering_your_group");
 			}
-		} else {
-			sendSystemMessage(targetOwner, "invite_target", "TT", inviterId);
-			sendSystemMessage(player, "invite_leader", "TT", targetId);
+			
+			// Otherwise, just send the invite as normal
+			this.sendInvite(player, target, inviterId, groupId);
 
-			target.updateGroupInviteData(player, -1, player.getCharacterName());
+		} else {
+			this.sendInvite(player, target, inviterId);
 		}
 	}
+	
+	private void sendInvite(Player groupLeader, CreatureObject invitee, long inviterId, long groupId) {
+		sendSystemMessage(invitee.getOwner(), "invite_target", "TT", inviterId);
+		sendSystemMessage(groupLeader, "invite_leader", "TT", invitee.getObjectId());
+		
+		// Set the invite data to the current group ID
+		invitee.updateGroupInviteData(groupLeader, groupId, groupLeader.getCharacterName());
+	}
 
+
+	private void sendInvite(Player groupLeader, CreatureObject invitee, long inviterId) {
+		sendSystemMessage(invitee.getOwner(), "invite_target", "TT", inviterId);
+		sendSystemMessage(groupLeader, "invite_leader", "TT", invitee.getObjectId());
+		
+		// Set the invite data to -1 to mark a new group to be formed
+		invitee.updateGroupInviteData(groupLeader, -1, groupLeader.getCharacterName());
+	}
+	
 	private void handleGroupJoin(Player player) {
 		CreatureObject creo = player.getCreatureObject();
 
@@ -259,6 +299,15 @@ public class GroupService extends Service {
 		creo.updateGroupInviteData(null, 0, "");
 		// TODO: Join group chat room
 	}
+	
+	private void handleMakeLeader(Player formerLeader, CreatureObject newLeader)
+	{
+		// Set the group leader to newLeader
+		GroupObject group = getGroup(newLeader.getGroupId());
+		group.setLeader(newLeader);
+
+	}
+
 
 	private void destroyGroup(GroupObject group, Player player) {
 		String galaxy = player.getGalaxyName();
