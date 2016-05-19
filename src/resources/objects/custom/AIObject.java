@@ -4,7 +4,6 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 import resources.objects.creature.CreatureObject;
-import resources.server_info.Log;
 import utilities.ScheduledUtilities;
 
 public abstract class AIObject extends CreatureObject {

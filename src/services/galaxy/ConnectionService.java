@@ -51,6 +51,7 @@ import resources.player.Player;
 import resources.player.PlayerEvent;
 import resources.player.PlayerFlags;
 import resources.player.PlayerState;
+import resources.player.Player.PlayerServer;
 import resources.server_info.Log;
 import services.CoreManager;
 import utilities.ThreadUtilities;
@@ -122,7 +123,6 @@ public class ConnectionService extends Service {
 		switch (pei.getEvent()) {
 			case PE_FIRST_ZONE: {
 				Player p = pei.getPlayer();
-				CoreManager.getGalaxy().incrementPopulationCount();
 				removeFromLists(p);
 				synchronized (zonedInPlayers) {
 					zonedInPlayers.add(p);
@@ -130,10 +130,11 @@ public class ConnectionService extends Service {
 				break;
 			}
 			case PE_ZONE_IN_SERVER:
+				CoreManager.getGalaxy().incrementPopulationCount();
 				clearPlayerFlag(pei.getPlayer(), pei.getEvent(), PlayerFlags.LD);
 				break;
 			case PE_LOGGED_OUT:
-				if (pei.getPlayer().getCreatureObject() != null)
+				if (pei.getPlayer().getPlayerServer() != PlayerServer.ZONE)
 					CoreManager.getGalaxy().decrementPopulationCount();
 				setPlayerFlag(pei.getPlayer(), pei.getEvent(), PlayerFlags.LD);
 				logOut(pei.getPlayer(), true);
@@ -209,7 +210,7 @@ public class ConnectionService extends Service {
 	}
 	
 	private PlayerObject getPlayerObject(Player p, PlayerEvent event) {
-		if (p.getPlayerState() != PlayerState.ZONED_IN)
+		if (p.getPlayerServer() != PlayerServer.ZONE)
 			return null;
 		CreatureObject creature = p.getCreatureObject();
 		if (creature == null) {
