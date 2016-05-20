@@ -517,7 +517,7 @@ public class PlayerObject extends IntangibleObject {
 		bb.addLong(0); // General? -- 12
 		bb.addInt(guildRankTitle); // 13
 		bb.addShort(0); // Citizen Rank Title? 6 bytes -- 14
-		bb.addInt(1); // Speeder Elevation -- 15
+		bb.addInt(0); // Environment Flags Override -- 15
 		bb.addAscii(""); // Vehicle Attack Command -- 16
 		
 		bb.incrementOperandCount(15);
