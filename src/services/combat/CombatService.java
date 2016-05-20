@@ -13,6 +13,7 @@ import network.packets.swg.zone.object_controller.ShowFlyText;
 import network.packets.swg.zone.object_controller.ShowFlyText.Scale;
 import network.packets.swg.zone.object_controller.combat.CombatAction;
 import intents.chat.ChatCommandIntent;
+import resources.PvpFlag;
 import resources.combat.AttackInfoLight;
 import resources.combat.AttackType;
 import resources.combat.CombatStatus;
@@ -191,6 +192,10 @@ public class CombatService extends Service {
 	private CombatStatus canPerform(CreatureObject source, SWGObject target, CombatCommand c) {
 		if (source.getEquippedWeapon() == null)
 			return CombatStatus.NO_WEAPON;
+		if (!(target instanceof TangibleObject))
+			return CombatStatus.INVALID_TARGET;
+		if ((((TangibleObject) target).getPvpFlags() & PvpFlag.ATTACKABLE.getBitmask()) == 0)
+			return CombatStatus.INVALID_TARGET;
 		CombatStatus status;
 		switch (c.getAttackType()) {
 			case AREA:
