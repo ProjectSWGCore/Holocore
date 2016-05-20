@@ -108,7 +108,7 @@ public class Player implements Comparable<Player> {
 	
 	public void setCreatureObject(CreatureObject obj) {
 		this.creatureObject = obj;
-		if (obj.getOwner() != this)
+		if (obj != null && obj.getOwner() != this)
 			obj.setOwner(this);
 	}
 	
