@@ -54,21 +54,19 @@ public class CityService extends Service {
 				}
 				DataTransform transform = (DataTransform) p;
 				Location loc = transform.getLocation();
-				performLocationUpdate(creature, loc);
+				performLocationUpdate(creature, (int) (loc.getX() + 0.5), (int) (loc.getZ() + 0.5));
 			}
 		} else if (i instanceof PlayerEventIntent) {
 			Player player = ((PlayerEventIntent) i).getPlayer();
 			CreatureObject creature = player.getCreatureObject();
 			if (((PlayerEventIntent) i).getEvent() == PlayerEvent.PE_ZONE_IN_CLIENT) {
-				performLocationUpdate(creature, creature.getLocation());
+				performLocationUpdate(creature, (int) (creature.getX()+0.5), (int) (creature.getZ()+0.5));
 			}
 		}
 	}
 	
-	private void performLocationUpdate(CreatureObject object, Location loc) {
-		String terrain = loc.getTerrain().getName().toLowerCase(Locale.US);
-		int locX = (int) (loc.getX() + 0.5);
-		int locZ = (int) (loc.getZ() + 0.5);
+	private void performLocationUpdate(CreatureObject object, int locX, int locZ) {
+		String terrain = object.getTerrain().getName().toLowerCase(Locale.US);
 		synchronized (spawnDatabase) {
 			ResultSet set = null;
 			try {

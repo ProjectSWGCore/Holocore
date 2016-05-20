@@ -207,6 +207,7 @@ public class ObjectAwareness extends Service {
 	}
 	
 	private void moveObject(CreatureObject obj, DataTransform transform) {
+		transform = new DataTransform(transform);
 		Location newLocation = transform.getLocation();
 		newLocation.setTerrain(obj.getTerrain());
 		double time = ((CreatureObject) obj).getTimeSinceLastTransform() / 1000;
