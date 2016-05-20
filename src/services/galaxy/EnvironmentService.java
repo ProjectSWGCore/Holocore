@@ -74,13 +74,12 @@ public final class EnvironmentService extends Service {
 			weatherForTerrain.put(t, randomWeather());
 			executor.scheduleAtFixedRate(new WeatherChanger(t), 0, cycleDuration, TimeUnit.SECONDS);
 		}
-		executor.scheduleAtFixedRate(() -> { updateTime(); }, 0, 1, TimeUnit.SECONDS);
-		
 		return super.initialize();
 	}
 	
 	@Override
 	public boolean start() {
+		executor.scheduleAtFixedRate(() -> { updateTime(); }, 30, 30, TimeUnit.SECONDS);
 		return super.start();
 	}
 	
