@@ -96,8 +96,11 @@ public class QaToolCmdCallback implements ICmdCallback {
 					Scripts.invoke("commands/helper/qatool/details", "sendDetails", player, target);
 					break;
 				case "xp":
-					if(command.length > 3)
-						grantXp(player.getCreatureObject(), command[1], Integer.valueOf(command[2]));
+					if(command.length == 3)
+						grantXp(player, command[1], command[2]);
+					else
+						sendSystemMessage(player, "QATool XP: Expected format: /qatool xp <xpType> <xpGained>");
+					break;
 				default:
 					displayMainWindow(player);
 					break;
@@ -252,8 +255,13 @@ public class QaToolCmdCallback implements ICmdCallback {
 		createMessageBox(player, "QA Tool - Help", prompt);
 	}
 	
-	private void grantXp(CreatureObject receiver, String xpType, int xpGained) {
-		new ExperienceIntent(receiver, xpType, xpGained).broadcast();
+	private void grantXp(Player player, String xpType, String xpGainedArg) {
+		try {
+			int xpGained = Integer.valueOf(xpGainedArg);
+			new ExperienceIntent(player.getCreatureObject(), xpType, xpGained).broadcast();
+		} catch (NumberFormatException e) {
+			Log.e("QA", "XP command error: %s gave a non-numerical XP gained argument of %s", player.getUsername(), xpGainedArg);
+		}
 	}
 	
 	/* Utility Methods */
