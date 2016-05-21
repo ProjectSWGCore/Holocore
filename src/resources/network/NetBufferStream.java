@@ -47,15 +47,19 @@ public class NetBufferStream extends OutputStream {
 	 * Sets the mark to the buffer's current position
 	 */
 	public void mark() {
-		mark = buffer.position();
+		synchronized (bufferMutex) {
+			mark = buffer.position();
+		}
 	}
 	
 	/**
 	 * Rewinds the buffer to the previously set mark
 	 */
 	public void rewind() {
-		buffer.position(mark);
-		mark = 0;
+		synchronized (bufferMutex) {
+			buffer.position(mark);
+			mark = 0;
+		}
 	}
 	
 	/**
@@ -119,7 +123,9 @@ public class NetBufferStream extends OutputStream {
 	}
 	
 	public int remaining() {
-		return size - buffer.position();
+		synchronized (bufferMutex) {
+			return size - buffer.position();
+		}
 	}
 	
 	public boolean hasRemaining() {
@@ -127,115 +133,171 @@ public class NetBufferStream extends OutputStream {
 	}
 	
 	public int position() {
-		return buffer.position();
+		synchronized (bufferMutex) {
+			return buffer.position();
+		}
 	}
 	
 	public void position(int position) {
-		buffer.position(position);
+		synchronized (bufferMutex) {
+			buffer.position(position);
+		}
 	}
 	
 	public void seek(int relative) {
-		buffer.seek(relative);
+		synchronized (bufferMutex) {
+			buffer.seek(relative);
+		}
 	}
 	
 	public ByteBuffer getBuffer() {
-		return buffer.getBuffer();
+		synchronized (bufferMutex) {
+			return buffer.getBuffer();
+		}
 	}
 	
 	public boolean getBoolean() {
-		return buffer.getBoolean();
+		synchronized (bufferMutex) {
+			return buffer.getBoolean();
+		}
 	}
 	
 	public String getAscii() {
-		return buffer.getAscii();
+		synchronized (bufferMutex) {
+			return buffer.getAscii();
+		}
 	}
 	
 	public String getUnicode() {
-		return buffer.getUnicode();
+		synchronized (bufferMutex) {
+			return buffer.getUnicode();
+		}
 	}
 	
 	public String getString(StringType type) {
-		return buffer.getString(type);
+		synchronized (bufferMutex) {
+			return buffer.getString(type);
+		}
 	}
 	
 	public byte getByte() {
-		return buffer.getByte();
+		synchronized (bufferMutex) {
+			return buffer.getByte();
+		}
 	}
 	
 	public short getShort() {
-		return buffer.getShort();
+		synchronized (bufferMutex) {
+			return buffer.getShort();
+		}
 	}
 	
 	public int getInt() {
-		return buffer.getInt();
+		synchronized (bufferMutex) {
+			return buffer.getInt();
+		}
 	}
 	
 	public float getFloat() {
-		return buffer.getFloat();
+		synchronized (bufferMutex) {
+			return buffer.getFloat();
+		}
 	}
 	
 	public long getLong() {
-		return buffer.getLong();
+		synchronized (bufferMutex) {
+			return buffer.getLong();
+		}
 	}
 	
 	public short getNetShort() {
-		return buffer.getNetShort();
+		synchronized (bufferMutex) {
+			return buffer.getNetShort();
+		}
 	}
 	
 	public int getNetInt() {
-		return buffer.getNetInt();
+		synchronized (bufferMutex) {
+			return buffer.getNetInt();
+		}
 	}
 	
 	public long getNetLong() {
-		return buffer.getNetLong();
+		synchronized (bufferMutex) {
+			return buffer.getNetLong();
+		}
 	}
 	
 	public byte[] getArray() {
-		return buffer.getArray();
+		synchronized (bufferMutex) {
+			return buffer.getArray();
+		}
 	}
 	
 	public byte[] getArray(int size) {
-		return buffer.getArray(size);
+		synchronized (bufferMutex) {
+			return buffer.getArray(size);
+		}
 	}
 	
 	public <T> Object getGeneric(Class<T> type) {
-		return buffer.getGeneric(type);
+		synchronized (bufferMutex) {
+			return buffer.getGeneric(type);
+		}
 	}
 	
 	public <T extends Encodable> T getEncodable(Class<T> type) {
-		return buffer.getEncodable(type);
+		synchronized (bufferMutex) {
+			return buffer.getEncodable(type);
+		}
 	}
 	
 	public SWGSet<String> getSwgSet(int num, int var, StringType type) {
-		return buffer.getSwgSet(num, var, type);
+		synchronized (bufferMutex) {
+			return buffer.getSwgSet(num, var, type);
+		}
 	}
 	
 	public <T> SWGSet<T> getSwgSet(int num, int var, Class<T> type) {
-		return buffer.getSwgSet(num, var, type);
+		synchronized (bufferMutex) {
+			return buffer.getSwgSet(num, var, type);
+		}
 	}
 	
 	public SWGList<String> getSwgList(int num, int var, StringType type) {
-		return buffer.getSwgList(num, var, type);
+		synchronized (bufferMutex) {
+			return buffer.getSwgList(num, var, type);
+		}
 	}
 	
 	public <T> SWGList<T> getSwgList(int num, int var, Class<T> type) {
-		return buffer.getSwgList(num, var, type);
+		synchronized (bufferMutex) {
+			return buffer.getSwgList(num, var, type);
+		}
 	}
 	
-	public SWGMap<String, String> getSwgMap(int num, int var, StringType key, StringType val) {
-		return buffer.getSwgMap(num, var, key, val);
+	public SWGMap<String, String> getSwgMap(int num, int var, StringType strType) {
+		synchronized (bufferMutex) {
+			return buffer.getSwgMap(num, var, strType);
+		}
 	}
 	
 	public <V> SWGMap<String, V> getSwgMap(int num, int var, StringType key, Class<V> val) {
-		return buffer.getSwgMap(num, var, key, val);
+		synchronized (bufferMutex) {
+			return buffer.getSwgMap(num, var, key, val);
+		}
 	}
 	
 	public <K, V> SWGMap<K, V> getSwgMap(int num, int var, Class<K> key, Class<V> val) {
-		return buffer.getSwgMap(num, var, key, val);
+		synchronized (bufferMutex) {
+			return buffer.getSwgMap(num, var, key, val);
+		}
 	}
 	
 	public byte [] array() {
-		return buffer.array();
+		synchronized (bufferMutex) {
+			return buffer.array();
+		}
 	}
 	
 	public int size() {

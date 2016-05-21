@@ -35,6 +35,7 @@ import resources.objects.SWGObject;
 import resources.objects.tangible.TangibleObject;
 import resources.objects.weapon.WeaponObject;
 import resources.player.Player;
+import resources.server_info.Log;
 import services.objects.ObjectCreator;
 
 import java.io.Serializable;
@@ -107,7 +108,10 @@ public class Equipment implements Encodable, Serializable {
 
 	public String getTemplate() { return template.getString(); }
 	public void setTemplate(String template) { this.template = new CRC(template); }
-
+	
+	public TangibleObject getWeapon() { return weapon; }
+	public void setWeapon(TangibleObject weapon) { this.weapon = weapon; }
+	
 	private byte[] getWeaponData() {
 		Player target = weapon.getOwner();
 		ByteBuffer data3 = weapon.createBaseline3(target).encode();
@@ -134,7 +138,7 @@ public class Equipment implements Encodable, Serializable {
 		weapon.parseBaseline(b6);
 		if (weapon instanceof TangibleObject)
 			return (TangibleObject) weapon;
-		System.err.println("Unknown Equipment Type: " + weapon.getClass().getSimpleName());
+		Log.e("Equipment", "Unknown Equipment Type: " + weapon.getClass().getSimpleName());
 		return null;
 	}
 	

@@ -29,6 +29,7 @@ package services.player;
 
 import intents.GalacticIntent;
 import intents.PlayerEventIntent;
+import intents.experience.SkillBoxGrantedIntent;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -63,6 +64,7 @@ import resources.objects.cell.CellObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
 import resources.objects.tangible.TangibleObject;
+import resources.objects.weapon.WeaponObject;
 import resources.player.AccessLevel;
 import resources.player.Player;
 import resources.player.PlayerEvent;
@@ -110,7 +112,7 @@ public class CharacterCreationService extends Service {
 		nameGenerator.loadAllRules();
 		loadProfTemplates();
 		if (!nameFilter.load())
-			System.err.println("Failed to load name filter!");
+			Log.e(this, "Failed to load name filter!");
 		return super.initialize();
 	}
 	
@@ -210,7 +212,6 @@ public class CharacterCreationService extends Service {
 			return ErrorMessage.NAME_DECLINED_INTERNAL_ERROR;
 		} else if (createCharacterInDb(characterId, create.getName(), player)) {
 			creationRestriction.createdCharacter(player);
-			System.out.println("[" + player.getUsername() + "] Create Character: " + create.getName() + ". IP: " + create.getAddress() + ":" + create.getPort());
 			Log.i("ZoneService", "%s created character %s from %s:%d", player.getUsername(), create.getName(), create.getAddress(), create.getPort());
 			sendPacket(player, new CreateCharacterSuccess(characterId));
 			new PlayerEventIntent(player, PlayerEvent.PE_CREATE_CHARACTER).broadcast();
@@ -240,7 +241,6 @@ public class CharacterCreationService extends Service {
 			default:
 				break;
 		}
-		System.err.println("ZoneService: Unable to create character [Name: " + create.getName() + "  User: " + player.getUsername() + "] and put into database! Reason: " + err);
 		Log.e("ZoneService", "Failed to create character %s for user %s with error %s and reason %s from %s:%d", create.getName(), player.getUsername(), err, reason, create.getAddress(), create.getPort());
 		sendPacket(player, new CreateCharacterFailure(reason));
 	}
@@ -313,10 +313,11 @@ public class CharacterCreationService extends Service {
 		createStarterClothing(objManager, creatureObj, create.getRace(), create.getClothes());
 		
 		creatureObj.setVolume(0x000F4240);
-		creatureObj.setOwner(player);
-		creatureObj.addObject(playerObj); // ghost slot
+		playerObj.moveToContainer(creatureObj); // ghost slot
+		
 		playerObj.setAdminTag(player.getAccessLevel());
-		player.setCreatureObject(creatureObj);
+		creatureObj.setOwner(player);
+		new SkillBoxGrantedIntent(create.getStartingPhase(), creatureObj).broadcast();
 		return creatureObj.getObjectId();
 	}
 	
@@ -348,7 +349,7 @@ public class CharacterCreationService extends Service {
 			return null;
 		}
 		SWGObject obj = objManager.createObject(template, info.location);
-		cell.addObject(obj);
+		obj.moveToContainer(cell);
 		if (obj instanceof CreatureObject)
 			return (CreatureObject) obj;
 		return null;
@@ -380,7 +381,7 @@ public class CharacterCreationService extends Service {
 		TangibleObject hairObj = createTangible(objManager, ClientFactory.formatToSharedFile(hair));
 		hairObj.setAppearanceData(customization);
 
-		creatureObj.addObject(hairObj); // slot = hair
+		hairObj.moveToContainer(creatureObj); // hair slot
 		creatureObj.addEquipment(hairObj);
 	}
 	
@@ -392,9 +393,14 @@ public class CharacterCreationService extends Service {
 		creatureObj.setPvpFlags(PvpFlag.PLAYER, PvpFlag.OVERT);
 		creatureObj.getSkills().add("species_" + creatureObj.getRace().getSpecies());
 
+		WeaponObject defWeapon = (WeaponObject) createInventoryObject(objManager, creatureObj, "object/weapon/melee/unarmed/shared_unarmed_default_player.iff");
+		creatureObj.setDefaultWeapon(defWeapon);
+		defWeapon.setMaxRange(5);
+		creatureObj.setEquippedWeapon(defWeapon);
 		creatureObj.addEquipment(createInventoryObject(objManager, creatureObj, "object/tangible/inventory/shared_character_inventory.iff"));
 		creatureObj.addEquipment(createInventoryObject(objManager, creatureObj, "object/tangible/datapad/shared_character_datapad.iff"));
 		creatureObj.addEquipment(createInventoryObject(objManager, creatureObj, "object/tangible/inventory/shared_appearance_inventory.iff"));
+		creatureObj.addEquipment(defWeapon);
 		createInventoryObject(objManager, creatureObj, "object/tangible/bank/shared_character_bank.iff");
 		createInventoryObject(objManager, creatureObj, "object/tangible/mission_bag/shared_mission_bag.iff");
 		

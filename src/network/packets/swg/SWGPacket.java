@@ -30,6 +30,7 @@ package network.packets.swg;
 import network.PacketType;
 import network.packets.Packet;
 import resources.common.CRC;
+import resources.server_info.Log;
 
 import java.nio.ByteBuffer;
 
@@ -59,7 +60,7 @@ public class SWGPacket extends Packet {
 		setSWGOpcode(getInt(data));
 		if (getSWGOpcode() == crc)
 			return true;
-		System.err.printf("SWG Opcode does not match actual! Expected: 0x%08X  Actual: 0x%08X%n", crc, getSWGOpcode());
+		Log.w(getClass().getSimpleName(), "SWG Opcode does not match actual! Expected: 0x%08X  Actual: 0x%08X", crc, getSWGOpcode());
 		return false;
 	}
 	

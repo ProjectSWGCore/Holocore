@@ -34,6 +34,7 @@ import resources.player.Player;
 import resources.player.PlayerState;
 import resources.server_info.Config;
 import resources.server_info.DataManager;
+import resources.server_info.Log;
 import resources.server_info.RelationalDatabase;
 
 
@@ -115,7 +116,7 @@ public abstract class Service implements IntentReceiver {
 	 * Callback when an intent is received from the system
 	 */
 	public void onIntentReceived(Intent i) {
-		System.out.println("Warning: " + getClass().getSimpleName() + " did not override onIntentReceived");
+		Log.w(this, "Warning: " + getClass().getSimpleName() + " did not override onIntentReceived");
 	}
 	
 	/**

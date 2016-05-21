@@ -29,6 +29,7 @@ package resources.encodables;
 
 import network.packets.Packet;
 import resources.objects.waypoint.WaypointObject;
+import resources.server_info.Log;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -128,7 +129,7 @@ public class OutOfBandPackage implements Encodable, Serializable {
 				packages.add(stringId);
 				break;
 			default:
-				System.err.println("Tried to decode an unsupported OutOfBandData Type: " + type);
+				Log.e("OutOfBandPackage", "Tried to decode an unsupported OutOfBandData Type: " + type);
 				break;
 		}
 	}

@@ -34,6 +34,7 @@ import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import intents.object.DestroyObjectIntent;
 import intents.object.ObjectCreatedIntent;
@@ -50,11 +51,11 @@ import resources.control.Intent;
 import resources.control.Manager;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
+import resources.objects.custom.AIObject;
 import resources.player.Player;
 import resources.server_info.CachedObjectDatabase;
 import resources.server_info.Log;
 import resources.server_info.ObjectDatabase;
-import resources.server_info.ObjectDatabase.Traverser;
 import services.map.MapManager;
 import services.player.PlayerManager;
 import services.spawn.SpawnerService;
@@ -72,6 +73,7 @@ public class ObjectManager extends Manager {
 
 	private final ObjectDatabase<SWGObject> database;
 	private final Map <Long, SWGObject> objectMap;
+	private final AtomicBoolean started;
 	
 	public ObjectManager() {
 		objectAwareness = new ObjectAwareness();
@@ -83,6 +85,7 @@ public class ObjectManager extends Manager {
 		
 		database = new CachedObjectDatabase<SWGObject>("odb/objects.db");
 		objectMap = new Hashtable<>(16*1024);
+		started = new AtomicBoolean(false);
 
 		addChildService(objectAwareness);
 		addChildService(mapManager);
@@ -101,26 +104,24 @@ public class ObjectManager extends Manager {
 	@Override
 	public boolean initialize() {
 		loadClientObjects();
-		loadObjects();
+		if (!loadObjects())
+			return false;
 		return super.initialize();
 	}
 	
-	private void loadObjects() {
+	private boolean loadObjects() {
 		long startLoad = System.nanoTime();
 		Log.i("ObjectManager", "Loading objects from ObjectDatabase...");
-		System.out.println("ObjectManager: Loading objects from ObjectDatabase...");
 		synchronized (database) {
-			database.load();
-			database.traverse(new Traverser<SWGObject>() {
-				@Override
-				public void process(SWGObject obj) {
-					loadObject(obj);
-				}
-			});
+			if (database.fileExists()) {
+				if (!database.load())
+					return false;
+				database.traverse((obj) -> loadObject(obj));
+			}
 		}
 		double loadTime = (System.nanoTime() - startLoad) / 1E6;
 		Log.i("ObjectManager", "Finished loading %d objects. Time: %fms", database.size(), loadTime);
-		System.out.printf("ObjectManager: Finished loading %d objects. Time: %fms%n", database.size(), loadTime);
+		return true;
 	}
 	
 	private void loadClientObjects() {
@@ -149,14 +150,10 @@ public class ObjectManager extends Manager {
 		if (obj.getParent() != null) {
 			if (!obj.getParent().isGenerated()) {
 				long id = obj.getParent().getObjectId();
-				obj.getParent().removeObject(obj);
 				SWGObject parent = getObjectById(id);
-				if (parent != null)
-					parent.addObject(obj);
-				else {
-					System.err.println("Parent for " + obj + " is null! ParentID: " + id);
+				obj.moveToContainer(parent);
+				if (parent == null)
 					Log.e("ObjectManager", "Parent for %s is null! ParentID: %d", obj, id);
-				}
 			} else {
 				updateBuildoutParent(obj.getParent());
 			}
@@ -168,6 +165,30 @@ public class ObjectManager extends Manager {
 			putObject(child);
 			addChildrenObjects(child);
 		}
+	}
+	
+	@Override
+	public boolean start() {
+		synchronized (objectMap) {
+			for (SWGObject obj : objectMap.values()) {
+				if (obj instanceof AIObject)
+					((AIObject) obj).aiStart();
+			}
+			started.set(true);
+		}
+		return super.start();
+	}
+	
+	@Override
+	public boolean stop() {
+		synchronized (objectMap) {
+			started.set(false);
+			for (SWGObject obj : objectMap.values()) {
+				if (obj instanceof AIObject)
+					((AIObject) obj).aiStop();
+			}
+		}
+		return super.stop();
 	}
 	
 	@Override
@@ -203,10 +224,22 @@ public class ObjectManager extends Manager {
 	
 	private void processObjectCreatedIntent(ObjectCreatedIntent intent) {
 		putObject(intent.getObject());
+		if (!(intent.getObject() instanceof AIObject))
+			return;
+		synchronized (objectMap) {
+			if (started.get())
+				((AIObject) intent.getObject()).aiStart();
+		}
 	}
 	
 	private void processDestroyObjectIntent(DestroyObjectIntent doi) {
 		destroyObject(doi.getObject());
+		if (!(doi.getObject() instanceof AIObject))
+			return;
+		synchronized (objectMap) {
+			if (started.get())
+				((AIObject) doi.getObject()).aiStop();
+		}
 	}
 	
 	private void processGalacticPacketIntent(GalacticPacketIntent gpi) {
@@ -227,6 +260,7 @@ public class ObjectManager extends Manager {
 	public SWGObject deleteObject(long objId) {
 		synchronized (database) {
 			database.remove(objId);
+			database.save();
 		}
 		synchronized (objectMap) {
 			SWGObject obj = objectMap.remove(objId);
@@ -276,7 +310,7 @@ public class ObjectManager extends Manager {
 			}
 			object.sendObserversAndSelf(new SceneDestroyObject(objId));
 
-			parent.removeObject(object);
+			object.moveToContainer(null);
 		} else {
 			object.sendObservers(new SceneDestroyObject(objId));
 		}
@@ -314,16 +348,16 @@ public class ObjectManager extends Manager {
 	public SWGObject createObject(SWGObject parent, String template, Location l, boolean addToDatabase) {
 		SWGObject obj = ObjectCreator.createObjectFromTemplate(template);
 		if (obj == null) {
-			System.err.println("ObjectManager: Unable to create object with template " + template);
+			Log.e(this, "Unable to create object with template " + template);
 			return null;
 		}
 		obj.setLocation(l);
-		if (parent != null) {
-			parent.addObject(obj);
-		}
+		obj.moveToContainer(parent);
 		synchronized (database) {
-			if (addToDatabase)
+			if (addToDatabase) {
 				database.put(obj.getObjectId(), obj);
+				database.save();
+			}
 		}
 		Log.v("ObjectManager", "Created object %d [%s]", obj.getObjectId(), obj.getTemplate());
 		new ObjectCreatedIntent(obj).broadcast();
@@ -338,19 +372,16 @@ public class ObjectManager extends Manager {
 		}
 		SWGObject creatureObj = getObjectById(characterId);
 		if (creatureObj == null) {
-			System.err.println("ObjectManager: Failed to start zone - CreatureObject could not be fetched from database [Character: " + characterId + "  User: " + player.getUsername() + "]");
 			Log.e("ObjectManager", "Failed to start zone - CreatureObject could not be fetched from database [Character: %d  User: %s]", characterId, player.getUsername());
 			sendClientFatal(player, "Failed to zone", "You were not found in the database\nTry relogging to fix this problem", 10, TimeUnit.SECONDS);
 			return;
 		}
 		if (!(creatureObj instanceof CreatureObject)) {
-			System.err.println("ObjectManager: Failed to start zone - Object is not a CreatureObject for ID " + characterId);
 			Log.e("ObjectManager", "Failed to start zone - Object is not a CreatureObject [Character: %d  User: %s]", characterId, player.getUsername());
 			sendClientFatal(player, "Failed to zone", "There has been an internal server error: Not a Creature.\nPlease delete your character and create a new one", 10, TimeUnit.SECONDS);
 			return;
 		}
 		if (((CreatureObject) creatureObj).getPlayerObject() == null) {
-			System.err.println("ObjectManager: Failed to start zone - " + player.getUsername() + "'s CreatureObject has a null ghost!");
 			Log.e("ObjectManager", "Failed to start zone - CreatureObject doesn't have a ghost [Character: %d  User: %s", characterId, player.getUsername());
 			sendClientFatal(player, "Failed to zone", "There has been an internal server error: Null Ghost.\nPlease delete your character and create a new one", 10, TimeUnit.SECONDS);
 			return;

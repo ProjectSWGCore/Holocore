@@ -35,6 +35,8 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.charset.Charset;
 
+import resources.server_info.Log;
+
 public class ProsePackage implements OutOfBandData, Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -112,13 +114,13 @@ public class ProsePackage implements OutOfBandData, Serializable {
 		case "DI":
 			if (prose instanceof Integer)
 				setDI((Integer) prose);
-			else { System.err.println("DI can only be a Integer!"); }
+			else { Log.w("ProsePackage", "DI can only be a Integer!"); }
 			break;
 			
 		case "DF":
 			if (prose instanceof Float)
 				setDF((Float) prose);
-			else { System.err.println("DF can only be a Float!"); }
+			else { Log.w("ProsePackage", "DF can only be a Float!"); }
 			break;
 			
 		default: break;
@@ -130,8 +132,8 @@ public class ProsePackage implements OutOfBandData, Serializable {
 		if (prose instanceof StringId) { base = (StringId) prose; }
 		else if (prose instanceof String) {
 			if (((String) prose).startsWith("@")) { base = new StringId((String) prose); }
-			else { System.err.println("The base STF cannot be a custom string!"); }
-		} else { System.err.println("The base STF must be either a Stf or a String! Received class: " + prose.getClass().getName()); }
+			else { Log.w("ProsePackage", "The base STF cannot be a custom string!"); }
+		} else { Log.w("ProsePackage", "The base STF must be either a Stf or a String! Received class: " + prose.getClass().getName()); }
 	}
 	
 	public void setTU(Object prose) {
@@ -147,7 +149,7 @@ public class ProsePackage implements OutOfBandData, Serializable {
 		else if (prose instanceof BigInteger)
 			actor.setObjectId(((BigInteger) prose).longValue());
 		else
-			System.err.println("Proses can only be Strings or Longs! Received class: " + prose.getClass().getName());
+			Log.w("ProsePackage", "Proses can only be Strings or Longs! Received class: " + prose.getClass().getName());
 	}
 	
 	public void setTT(Object prose) {
@@ -163,7 +165,7 @@ public class ProsePackage implements OutOfBandData, Serializable {
 		else if (prose instanceof BigInteger)
 			target.setObjectId(((BigInteger) prose).longValue());
 		else
-			System.err.println("Proses can only be Strings or Longs! Received class: " + prose.getClass().getName());
+			Log.w("ProsePackage", "Proses can only be Strings or Longs! Received class: " + prose.getClass().getName());
 	}
 	
 	public void setTO(Object prose) {
@@ -179,7 +181,7 @@ public class ProsePackage implements OutOfBandData, Serializable {
 		else if (prose instanceof BigInteger)
 			other.setObjectId(((BigInteger) prose).longValue());
 		else
-			System.err.println("Proses can only be Strings or Longs! Received class: " + prose.getClass().getName());
+			Log.w("ProsePackage", "Proses can only be Strings or Longs! Received class: " + prose.getClass().getName());
 	}
 	
 	public void setDI(Integer prose) {

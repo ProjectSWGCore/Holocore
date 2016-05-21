@@ -105,13 +105,11 @@ public class Location implements Encodable, Serializable {
 	public boolean isWithinDistance(Terrain t, double x, double y, double z, double radius) {
 		if (getTerrain() != t)
 			return false;
-		return square(square(getX()-x) + square(getY()-y) + square(getZ()-z)) <= square(radius);
+		return square(getX()-x) + square(getY()-y) + square(getZ()-z) <= square(radius);
 	}
 	
 	public boolean isWithinFlatDistance(Point3D target, double radius){
-		double xD = Math.abs(getX() - target.getX());
-		double zD = Math.abs(getZ() - target.getZ());
-		return xD +  zD <= radius;
+		return square(getX() - target.getX()) + square(getZ() - target.getZ()) <= square(radius);
 	}
 	
 	public void translatePosition(double x, double y, double z) {
