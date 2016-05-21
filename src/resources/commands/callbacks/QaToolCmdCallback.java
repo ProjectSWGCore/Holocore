@@ -28,6 +28,7 @@
 package resources.commands.callbacks;
 
 import intents.chat.ChatBroadcastIntent;
+import intents.experience.ExperienceIntent;
 import intents.network.CloseConnectionIntent;
 import intents.object.ObjectTeleportIntent;
 import intents.player.DeleteCharacterIntent;
@@ -94,6 +95,9 @@ public class QaToolCmdCallback implements ICmdCallback {
 				case "details":
 					Scripts.invoke("commands/helper/qatool/details", "sendDetails", player, target);
 					break;
+				case "xp":
+					if(command.length > 3)
+						grantXp(player.getCreatureObject(), command[1], Integer.valueOf(command[2]));
 				default:
 					displayMainWindow(player);
 					break;
@@ -246,6 +250,10 @@ public class QaToolCmdCallback implements ICmdCallback {
 	private void displayHelp(Player player) {
 		String prompt = "The following are acceptable arguments that can be used as shortcuts to the various QA tools:\n" + "item <template> -- Generates a new item and adds it to your inventory, not providing template parameter will display Item Creator window\n" + "help -- Displays this window\n";
 		createMessageBox(player, "QA Tool - Help", prompt);
+	}
+	
+	private void grantXp(CreatureObject receiver, String xpType, int xpGained) {
+		new ExperienceIntent(receiver, xpType, xpGained).broadcast();
 	}
 	
 	/* Utility Methods */
