@@ -64,6 +64,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -81,6 +82,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	private final Map <ObjectDataAttribute, Object> dataAttributes;
 	private ContainerPermissions containerPermissions;
 	private transient Set <SWGObject> objectsAware;
+	private transient Set <SWGObject> customObservers;
 	private transient BuildoutArea buildoutArea;
 	private transient Player owner;
 	private List <List <String>> arrangement;
@@ -109,7 +111,8 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		super(objectType);
 		this.objectId = objectId;
 		this.location = new Location();
-		this.objectsAware = new HashSet<SWGObject>();
+		this.objectsAware = new HashSet<>();
+		this.customObservers = new HashSet<>();
 		this.slots = new HashMap<>();
 		this.containedObjects = Collections.synchronizedMap(new HashMap<Long, SWGObject>());
 		this.attributes = new LinkedHashMap<>();
@@ -121,6 +124,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		areaId = -1;
 		ois.defaultReadObject();
 		objectsAware = new HashSet<>();
+		customObservers = new HashSet<>();
 		buildoutArea = null;
 		owner = null;
 	}
@@ -772,6 +776,39 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		return false;
 	}
 	
+	public void addCustomObserver(SWGObject observer) {
+		if (observer.getOwner() == null)
+			throw new IllegalArgumentException("Observer must have an owner!");
+		synchronized (customObservers) {
+			customObservers.add(observer);
+		}
+	}
+	
+	public void removeCustomObserver(SWGObject observer) {
+		synchronized (customObservers) {
+			customObservers.remove(observer);
+		}
+	}
+	
+	private Set<SWGObject> getCustomObservers() {
+		Set<SWGObject> custom;
+		if (parent != null)
+			custom = parent.getCustomObservers();
+		else
+			custom = new HashSet<>();
+		synchronized (customObservers) {
+			Iterator<SWGObject> observerIter = customObservers.iterator();
+			while (observerIter.hasNext()) {
+				SWGObject observer = observerIter.next();
+				if (observer.getOwner() == null)
+					observerIter.remove();
+				else
+					custom.add(observer);
+			}
+		}
+		return custom;
+	}
+	
 	public Set<SWGObject> getObservers() {
 		Player owner = getOwner();
 		SWGObject parent = getParent();
@@ -789,6 +826,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		}
 		if (initial) {
 			nearby.addAll(getObjectsAware());
+			nearby.addAll(getCustomObservers());
 		}
 		Set<SWGObject> observers = new HashSet<>();
 		for (SWGObject aware : nearby) {
