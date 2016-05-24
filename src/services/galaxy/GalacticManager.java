@@ -60,7 +60,7 @@ public class GalacticManager extends Manager {
 		playerManager = new PlayerManager();
 		gameManager = new GameManager();
 		chatManager = new ChatManager();
-		travelService = new TravelService(objectManager);
+		travelService = new TravelService();
 		developerService = new DeveloperService();
 		uniformBox = new UniformBoxService();
 		prevIntentMap = new Hashtable<>();

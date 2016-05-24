@@ -29,6 +29,8 @@ package resources.commands.callbacks;
 
 import intents.chat.ChatBroadcastIntent;
 import intents.network.CloseConnectionIntent;
+import intents.object.DestroyObjectIntent;
+import intents.object.ObjectCreatedIntent;
 import intents.object.ObjectTeleportIntent;
 import intents.player.DeleteCharacterIntent;
 import resources.Location;
@@ -50,6 +52,7 @@ import resources.sui.SuiInputBox;
 import resources.sui.SuiListBox;
 import resources.sui.SuiMessageBox;
 import services.galaxy.GalacticManager;
+import services.objects.ObjectCreator;
 import services.objects.ObjectManager;
 import services.player.PlayerManager;
 import utilities.Scripts;
@@ -124,11 +127,12 @@ public class QaToolCmdCallback implements ICmdCallback {
 	/* Handlers */
 	
 	private void handleCreateItem(Player player, String template) {
-		SWGObject object = galacticManager.getObjectManager().createObject(template);
+		SWGObject object = ObjectCreator.createObjectFromTemplate(template);
 		if (object == null) {
 			sendSystemMessage(player, "Failed to create object with template \'" + template + "\'");
 			return;
 		}
+		new ObjectCreatedIntent(object).broadcast();
 		
 		SWGObject creature = player.getCreatureObject();
 		if (creature == null)
@@ -156,7 +160,7 @@ public class QaToolCmdCallback implements ICmdCallback {
 			}
 			Log.i("QA", "[%s] Requested deletion of object: %s", player.getUsername(), target);
 			if (target != null) {
-				objManager.deleteObject(target.getObjectId());
+				new DestroyObjectIntent(target).broadcast();
 			}
 		});
 		inputBox.display(player);

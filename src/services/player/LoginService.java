@@ -31,6 +31,7 @@ import intents.GalacticIntent;
 import intents.LoginEventIntent;
 import intents.LoginEventIntent.LoginEvent;
 import intents.network.GalacticPacketIntent;
+import intents.object.DestroyObjectIntent;
 import intents.player.DeleteCharacterIntent;
 
 import java.sql.PreparedStatement;
@@ -132,8 +133,10 @@ public class LoginService extends Service {
 	}
 	
 	private void handleCharDeletion(GalacticIntent intent, Player player, DeleteCharacterRequest request) {
-		SWGObject obj = intent.getObjectManager().destroyObject(request.getPlayerId());
+		SWGObject obj = intent.getObjectManager().getObjectById(request.getPlayerId());
+		if (obj != null)
 		if (obj != null && obj instanceof CreatureObject) {
+			new DestroyObjectIntent(obj).broadcast();
 			Log.i("LoginService", "Deleted character %s for user %s", ((CreatureObject)obj).getName(), player.getUsername());
 		} else
 			Log.w("LoginService", "Could not delete character! Character: ID: " + request.getPlayerId() + " / " + obj);
