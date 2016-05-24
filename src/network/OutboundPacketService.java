@@ -1,13 +1,12 @@
 package network;
 
 import intents.network.OutboundPacketIntent;
-import resources.control.Intent;
+import utilities.IntentChain;
 import network.packets.Packet;
 
 public class OutboundPacketService {
 	
-	private final Object outboundMutex = new Object();
-	private Intent previousOutboundIntent = null;
+	private final IntentChain chain = new IntentChain();
 	
 	public void send(long networkId, Packet ... packets) {
 		for (Packet packet : packets)
@@ -15,11 +14,7 @@ public class OutboundPacketService {
 	}
 	
 	public void send(long networkId, Packet packet) {
-		synchronized (outboundMutex) {
-			Intent i = new OutboundPacketIntent(packet, networkId);
-			i.broadcastAfterIntent(previousOutboundIntent);
-			previousOutboundIntent = i;
-		}
+		chain.broadcastAfter(new OutboundPacketIntent(packet, networkId));
 	}
 	
 }

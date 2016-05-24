@@ -38,9 +38,6 @@ import java.nio.ByteOrder;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 import resources.network.DisconnectReason;
 import resources.network.NetBufferStream;
@@ -56,12 +53,8 @@ import network.packets.swg.zone.object_controller.ObjectController;
 public class NetworkClient {
 	
 	private static final int DEFAULT_BUFFER = 128;
-	private static final int TRY_LOCK_TIME = 100;
 	
 	private final IntentChain intentChain = new IntentChain();
-	private final Object bufferMutex = new Object();
-	private final ReentrantLock inboundLock = new ReentrantLock(true);
-	private final ReentrantLock outboundLock = new ReentrantLock(true);
 	private final InetSocketAddress address;
 	private final long networkId;
 	private final PacketSender packetSender;
@@ -111,9 +104,7 @@ public class NetworkClient {
 	}
 	
 	public void processOutbound() {
-		if (!tryLockInterruptable(outboundLock))
-			return;
-		try {
+		synchronized (outboundQueue) {
 			Packet p;
 			while (!outboundQueue.isEmpty()) {
 				p = outboundQueue.poll();
@@ -121,50 +112,39 @@ public class NetworkClient {
 					break;
 				sendPacket(p);
 			}
-		} finally {
-			outboundLock.unlock();
 		}
 	}
 	
 	public void addToOutbound(Packet packet) {
-		outboundLock.lock();
-		try {
+		synchronized (outboundQueue) {
 			outboundQueue.add(packet);
-		} finally {
-			outboundLock.unlock();
 		}
 	}
 	
 	public void addToBuffer(byte [] data) {
-		synchronized (bufferMutex) {
+		synchronized (buffer) {
 			buffer.write(data);
 		}
 	}
 	
 	public boolean processInbound() {
-		if (!tryLockInterruptable(inboundLock))
-			return false;
-		try {
-			List <Packet> packets;
-			synchronized (bufferMutex) {
-				packets = processPackets();
-				buffer.compact();
-			}
-			for (Packet p : packets) {
-				p.setAddress(address.getAddress());
-				p.setPort(address.getPort());
-				if (status != ClientStatus.CONNECTED && !(p instanceof HoloPacket)) {
-					addToOutbound(new ErrorMessage("Network Manager", "Upgrade your launcher!", false));
-					processOutbound();
-					new ConnectionClosedIntent(networkId, DisconnectReason.CONNECTION_REFUSED).broadcast();
-					break;
-				}
-				intentChain.broadcastAfter(new InboundPacketIntent(p, networkId));
-			}
-			return packets.size() > 0;
-		} finally {
-			inboundLock.unlock();
+		List <Packet> packets;
+		synchronized (buffer) {
+			packets = processPackets();
+			buffer.compact();
 		}
+		for (Packet p : packets) {
+			p.setAddress(address.getAddress());
+			p.setPort(address.getPort());
+			if (status != ClientStatus.CONNECTED && !(p instanceof HoloPacket)) {
+				addToOutbound(new ErrorMessage("Network Manager", "Upgrade your launcher!", false));
+				processOutbound();
+				new ConnectionClosedIntent(networkId, DisconnectReason.CONNECTION_REFUSED).broadcast();
+				break;
+			}
+			intentChain.broadcastAfter(new InboundPacketIntent(p, networkId));
+		}
+		return packets.size() > 0;
 	}
 	
 	private List<Packet> processPackets() {
@@ -252,14 +232,6 @@ public class NetworkClient {
 		data.put(packet);
 		data.flip();
 		packetSender.sendPacket(address, data);
-	}
-	
-	private boolean tryLockInterruptable(Lock l) {
-		try {
-			return l.tryLock(TRY_LOCK_TIME, TimeUnit.MILLISECONDS);
-		} catch (InterruptedException e) {
-			return false;
-		}
 	}
 	
 	public String toString() {
