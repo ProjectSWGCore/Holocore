@@ -29,6 +29,7 @@ package resources.objects.tangible;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.util.Set;
 
 import intents.FactionIntent;
 import intents.FactionIntent.FactionIntentType;
@@ -74,8 +75,6 @@ public class TangibleObject extends SWGObject {
 	}
 	
 	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
-		pvpStatus = PvpStatus.COMBATANT;
-		pvpFaction = PvpFaction.NEUTRAL;
 		ois.defaultReadObject();
 		defenders.clear();
 		defenders.resetUpdateCount();
@@ -213,13 +212,15 @@ public class TangibleObject extends SWGObject {
 	}
 
 	public boolean hasOptionFlags(OptionFlag ... options) {
-		int passCount = 0;
 		for (OptionFlag option : options) {
-			if ((optionFlags & option.getFlag()) == option.getFlag())
-				passCount++;
+			if ((optionFlags & option.getFlag()) == 0)
+				return false;
 		}
-
-		return passCount == options.length;
+		return true;
+	}
+	
+	public Set<OptionFlag> getOptionFlags() {
+		return OptionFlag.toEnumSet(optionFlags);
 	}
 	
 	public void addDefender(CreatureObject creature) {
