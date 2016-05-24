@@ -46,7 +46,6 @@ import network.packets.Packet;
 import network.packets.swg.ErrorMessage;
 import network.packets.swg.zone.SceneDestroyObject;
 import network.packets.swg.zone.insertion.SelectCharacter;
-import resources.Location;
 import resources.control.Intent;
 import resources.control.Manager;
 import resources.objects.SWGObject;
@@ -150,13 +149,10 @@ public class ObjectManager extends Manager {
 		if (obj.getParent() != null) {
 			if (!obj.getParent().isGenerated()) {
 				long id = obj.getParent().getObjectId();
-				obj.getParent().removeObject(obj);
 				SWGObject parent = getObjectById(id);
-				if (parent != null)
-					parent.addObject(obj);
-				else {
+				obj.moveToContainer(parent);
+				if (parent == null)
 					Log.e("ObjectManager", "Parent for %s is null! ParentID: %d", obj, id);
-				}
 			} else {
 				updateBuildoutParent(obj.getParent());
 			}
@@ -226,12 +222,19 @@ public class ObjectManager extends Manager {
 	}
 	
 	private void processObjectCreatedIntent(ObjectCreatedIntent intent) {
-		putObject(intent.getObject());
-		if (!(intent.getObject() instanceof AIObject))
+		SWGObject obj = intent.getObject();
+		putObject(obj);
+		if (obj instanceof CreatureObject && ((CreatureObject) obj).isPlayer()) {
+			synchronized (database) {
+				database.put(obj.getObjectId(), obj);
+				database.save();
+			}
+		}
+		if (!(obj instanceof AIObject))
 			return;
 		synchronized (objectMap) {
 			if (started.get())
-				((AIObject) intent.getObject()).aiStart();
+				((AIObject) obj).aiStart();
 		}
 	}
 	
@@ -260,7 +263,7 @@ public class ObjectManager extends Manager {
 		}
 	}
 	
-	public SWGObject deleteObject(long objId) {
+	private SWGObject deleteObject(long objId) {
 		synchronized (database) {
 			database.remove(objId);
 			database.save();
@@ -282,14 +285,8 @@ public class ObjectManager extends Manager {
 			objectMap.put(object.getObjectId(), object);
 		}
 	}
-	
-	public SWGObject destroyObject(long objectId) {
-		SWGObject object = getObjectById(objectId);
 
-		return (object != null ? destroyObject(object) : null);
-	}
-
-	public SWGObject destroyObject(SWGObject object) {
+	private SWGObject destroyObject(SWGObject object) {
 
 		long objId = object.getObjectId();
 
@@ -313,7 +310,7 @@ public class ObjectManager extends Manager {
 			}
 			object.sendObserversAndSelf(new SceneDestroyObject(objId));
 
-			parent.removeObject(object);
+			object.moveToContainer(null);
 		} else {
 			object.sendObservers(new SceneDestroyObject(objId));
 		}
@@ -322,51 +319,6 @@ public class ObjectManager extends Manager {
 		deleteObject(object.getObjectId());
 
 		return object;
-	}
-	
-	public SWGObject createObject(String template) {
-		return createObject(template, null);
-	}
-	
-	public SWGObject createObject(SWGObject parent, String template) {
-		return createObject(parent, template, null);
-	}
-	
-	public SWGObject createObject(String template, Location l) {
-		return createObject(template, l, true);
-	}
-	
-	public SWGObject createObject(SWGObject parent, String template, boolean addToDatabase) {
-		return createObject(parent, template, null, addToDatabase);
-	}
-	
-	public SWGObject createObject(SWGObject parent, String template, Location l) {
-		return createObject(parent, template, l, true);
-	}
-	
-	public SWGObject createObject(String template, Location l, boolean addToDatabase) {
-		return createObject(null, template, l, addToDatabase);
-	}
-	
-	public SWGObject createObject(SWGObject parent, String template, Location l, boolean addToDatabase) {
-		SWGObject obj = ObjectCreator.createObjectFromTemplate(template);
-		if (obj == null) {
-			Log.e(this, "Unable to create object with template " + template);
-			return null;
-		}
-		obj.setLocation(l);
-		if (parent != null) {
-			parent.addObject(obj);
-		}
-		synchronized (database) {
-			if (addToDatabase) {
-				database.put(obj.getObjectId(), obj);
-				database.save();
-			}
-		}
-		Log.v("ObjectManager", "Created object %d [%s]", obj.getObjectId(), obj.getTemplate());
-		new ObjectCreatedIntent(obj).broadcast();
-		return obj;
 	}
 	
 	private void zoneInCharacter(PlayerManager playerManager, long netId, long characterId) {

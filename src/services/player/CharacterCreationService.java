@@ -30,6 +30,8 @@ package services.player;
 import intents.GalacticIntent;
 import intents.PlayerEventIntent;
 import intents.experience.SkillBoxGrantedIntent;
+import intents.object.DestroyObjectIntent;
+import intents.object.ObjectCreatedIntent;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -71,6 +73,7 @@ import resources.player.PlayerEvent;
 import resources.player.PlayerState;
 import resources.server_info.Log;
 import resources.zone.NameFilter;
+import services.objects.ObjectCreator;
 import services.objects.ObjectManager;
 import services.player.TerrainZoneInsertion.SpawnInformation;
 import utilities.namegen.SWGNameGenerator;
@@ -207,18 +210,18 @@ public class CharacterCreationService extends Service {
 	}
 	
 	private ErrorMessage completeCharCreation(ObjectManager objManager, Player player, ClientCreateCharacter create) {
-		long characterId = createCharacter(objManager, player, create);
-		if (characterId == -1) {
+		CreatureObject creature = createCharacter(objManager, player, create);
+		if (creature == null) {
 			return ErrorMessage.NAME_DECLINED_INTERNAL_ERROR;
-		} else if (createCharacterInDb(characterId, create.getName(), player)) {
+		} else if (createCharacterInDb(creature, create.getName(), player)) {
 			creationRestriction.createdCharacter(player);
 			Log.i("ZoneService", "%s created character %s from %s:%d", player.getUsername(), create.getName(), create.getAddress(), create.getPort());
-			sendPacket(player, new CreateCharacterSuccess(characterId));
+			sendPacket(player, new CreateCharacterSuccess(creature.getObjectId()));
 			new PlayerEventIntent(player, PlayerEvent.PE_CREATE_CHARACTER).broadcast();
 			return ErrorMessage.NAME_APPROVED;
 		} else {
 			Log.e("ZoneService", "Failed to create character %s for user %s with server error from %s:%d", create.getName(), player.getUsername(), create.getAddress(), create.getPort());
-			objManager.deleteObject(characterId);
+			new DestroyObjectIntent(creature).broadcast();
 			return ErrorMessage.NAME_DECLINED_INTERNAL_ERROR;
 		}
 	}
@@ -245,14 +248,14 @@ public class CharacterCreationService extends Service {
 		sendPacket(player, new CreateCharacterFailure(reason));
 	}
 	
-	private boolean createCharacterInDb(long characterId, String name, Player player) {
+	private boolean createCharacterInDb(CreatureObject creature, String name, Player player) {
 		if (characterExistsForName(name))
 			return false;
 		synchronized (createCharacter) {
 			try {
-				createCharacter.setLong(1, characterId);
+				createCharacter.setLong(1, creature.getObjectId());
 				createCharacter.setString(2, name);
-				createCharacter.setString(3, player.getCreatureObject().getRace().getFilename());
+				createCharacter.setString(3, creature.getRace().getFilename());
 				createCharacter.setInt(4, player.getUserId());
 				return createCharacter.executeUpdate() == 1;
 			} catch (SQLException e) {
@@ -300,26 +303,23 @@ public class CharacterCreationService extends Service {
 		return ErrorMessage.NAME_APPROVED;
 	}
 	
-	private long createCharacter(ObjectManager objManager, Player player, ClientCreateCharacter create) {
+	private CreatureObject createCharacter(ObjectManager objManager, Player player, ClientCreateCharacter create) {
 		Race			race		= Race.getRaceByFile(create.getRace());
 		CreatureObject	creatureObj	= createCreature(objManager, race.getFilename(), getConfig(ConfigFile.PRIMARY).getString("PRIMARY-SPAWN-LOCATION", "tat_moseisley"));
 		if (creatureObj == null)
-			return -1;
+			return null;
 		PlayerObject	playerObj	= createPlayer(objManager, "object/player/shared_player.iff");
+		playerObj.moveToContainer(creatureObj); // ghost slot
 		
 		setCreatureObjectValues(objManager, creatureObj, create);
 		setPlayerObjectValues(playerObj, create);
 		createHair(objManager, creatureObj, create.getHair(), create.getHairCustomization());
 		createStarterClothing(objManager, creatureObj, create.getRace(), create.getClothes());
 		
-		creatureObj.setVolume(0x000F4240);
-		creatureObj.setOwner(player);
-		creatureObj.addObject(playerObj); // ghost slot
-		
 		playerObj.setAdminTag(player.getAccessLevel());
-		player.setCreatureObject(creatureObj);
+		new ObjectCreatedIntent(creatureObj).broadcast();
 		new SkillBoxGrantedIntent(create.getStartingPhase(), creatureObj).broadcast();
-		return creatureObj.getObjectId();
+		return creatureObj;
 	}
 	
 	private CreatureObject createCreature(ObjectManager objManager, String template, String spawnLocation) {
@@ -331,7 +331,9 @@ public class CharacterCreationService extends Service {
 		if (info.building)
 			return createCreatureBuilding(objManager, template, info);
 		else {
-			SWGObject obj = objManager.createObject(template, info.location);
+			SWGObject obj = ObjectCreator.createObjectFromTemplate(template);
+			if (obj != null)
+				obj.setLocation(info.location);
 			if (obj instanceof CreatureObject)
 				return (CreatureObject) obj;
 		}
@@ -349,7 +351,8 @@ public class CharacterCreationService extends Service {
 			Log.e("CharacterCreationService", "Invalid cell! Cell does not exist: %s  B-Template: %s  BUID: %d", info.cell, parent.getTemplate(), info.buildingId);
 			return null;
 		}
-		SWGObject obj = objManager.createObject(template, info.location);
+		SWGObject obj = ObjectCreator.createObjectFromTemplate(template);
+		obj.setLocation(info.location);
 		cell.addObject(obj);
 		if (obj instanceof CreatureObject)
 			return (CreatureObject) obj;
@@ -357,22 +360,26 @@ public class CharacterCreationService extends Service {
 	}
 	
 	private PlayerObject createPlayer(ObjectManager objManager, String template) {
-		SWGObject obj = objManager.createObject(template);
+		SWGObject obj = ObjectCreator.createObjectFromTemplate(template);
+		new ObjectCreatedIntent(obj).broadcast();
 		if (obj instanceof PlayerObject)
 			return (PlayerObject) obj;
 		return null;
 	}
 	
 	private TangibleObject createTangible(ObjectManager objManager, String template) {
-		SWGObject obj = objManager.createObject(template);
+		SWGObject obj = ObjectCreator.createObjectFromTemplate(template);
+		new ObjectCreatedIntent(obj).broadcast();
 		if (obj instanceof TangibleObject)
 			return (TangibleObject) obj;
 		return null;
 	}
 	
 	private SWGObject createInventoryObject(ObjectManager objManager, CreatureObject creatureObj, String template) {
-		SWGObject obj = objManager.createObject(creatureObj, template);
+		SWGObject obj = ObjectCreator.createObjectFromTemplate(template);
+		obj.moveToContainer(creatureObj);
 		obj.setContainerPermissions(ContainerPermissions.INVENTORY);
+		new ObjectCreatedIntent(obj).broadcast();
 		return obj;
 	}
 	
@@ -381,8 +388,8 @@ public class CharacterCreationService extends Service {
 			return;
 		TangibleObject hairObj = createTangible(objManager, ClientFactory.formatToSharedFile(hair));
 		hairObj.setAppearanceData(customization);
-
-		creatureObj.addObject(hairObj); // slot = hair
+		
+		hairObj.moveToContainer(creatureObj); // hair slot
 		creatureObj.addEquipment(hairObj);
 	}
 	
@@ -391,10 +398,12 @@ public class CharacterCreationService extends Service {
 		creatureObj.setAppearanceData(create.getCharCustomization());
 		creatureObj.setHeight(create.getHeight());
 		creatureObj.setName(create.getName());
-		creatureObj.setPvpFlags(PvpFlag.PLAYER, PvpFlag.OVERT);
+		creatureObj.setPvpFlags(PvpFlag.PLAYER);
 		creatureObj.getSkills().add("species_" + creatureObj.getRace().getSpecies());
-
+		creatureObj.setVolume(0x000F4240);
+		
 		WeaponObject defWeapon = (WeaponObject) createInventoryObject(objManager, creatureObj, "object/weapon/melee/unarmed/shared_unarmed_default_player.iff");
+		creatureObj.setDefaultWeapon(defWeapon);
 		defWeapon.setMaxRange(5);
 		creatureObj.setEquippedWeapon(defWeapon);
 		creatureObj.addEquipment(createInventoryObject(objManager, creatureObj, "object/tangible/inventory/shared_character_inventory.iff"));
@@ -416,7 +425,6 @@ public class CharacterCreationService extends Service {
 		playerObj.setBornDate(date.get(Calendar.YEAR), date.get(Calendar.MONTH) + 1, date.get(Calendar.DAY_OF_MONTH));
 	}
 	
-
 	private void createStarterClothing(ObjectManager objManager, CreatureObject player, String race, String profession) {
 		if (player.getSlottedObject("inventory") == null)
 			return;
@@ -431,9 +439,9 @@ public class CharacterCreationService extends Service {
 		}
 		
 		SWGObject inventory = player.getSlottedObject("inventory");
-		SWGObject item = objManager.createObject("object/tangible/npe/shared_npe_uniform_box.iff");
+		SWGObject item = ObjectCreator.createObjectFromTemplate("object/tangible/npe/shared_npe_uniform_box.iff");
 		item.moveToContainer(inventory);
-
+		new ObjectCreatedIntent(item).broadcast();
 	}
 	
 	private void loadProfTemplates() {

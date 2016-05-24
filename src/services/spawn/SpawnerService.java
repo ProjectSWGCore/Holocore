@@ -32,6 +32,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import intents.object.DestroyObjectIntent;
 import intents.object.ObjectCreatedIntent;
 import intents.server.ConfigChangedIntent;
 import resources.Location;
@@ -143,7 +144,10 @@ public final class SpawnerService extends Service {
 		
 		if (spawnEggs) {
 			SpawnerType spawnerType = SpawnerType.valueOf(set.getString("spawner_type"));
-			SWGObject egg = objectManager.createObject(parent, spawnerType.getObjectTemplate(), loc, false);
+			SWGObject egg = ObjectCreator.createObjectFromTemplate(spawnerType.getObjectTemplate());
+			egg.setLocation(loc);
+			egg.moveToContainer(parent);
+			new ObjectCreatedIntent(egg).broadcast();
 			spawners.add(new Spawner(egg));
 		}
 		String difficultyChar = set.getString("difficulty");
@@ -164,7 +168,7 @@ public final class SpawnerService extends Service {
 		DefaultAIObject object = ObjectCreator.createObjectFromTemplate(createTemplate(getRandomIff(set.getString("iff"))), DefaultAIObject.class);
 		object.setLocation(loc);
 		if (parent != null)
-			parent.addObject(object);
+			object.moveToContainer(parent);
 		object.setName(getCreatureName(name));
 		object.setLevel((short) set.getInt("combat_level"));
 		object.setDifficulty(difficulty);
@@ -240,8 +244,8 @@ public final class SpawnerService extends Service {
 	}
 	
 	private void removeSpawners() {
-		for(Spawner spawner : spawners)
-			objectManager.destroyObject(spawner.getSpawnerObject());
+		for (Spawner spawner : spawners)
+			new DestroyObjectIntent(spawner.getSpawnerObject()).broadcast();;
 		
 		spawners.clear();
 	}

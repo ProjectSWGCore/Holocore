@@ -70,7 +70,7 @@ public class PlayerObject extends IntangibleObject {
 	private long 				lifetimeGcwPoints	= 0;
 	private int 				lifetimePvpKills	= 0;
 	private SWGBitSet 		 	collectionBadges	= new SWGBitSet(3, 16);
-	private SWGList<Integer> 	guildRanks			= new SWGList<>(3, 17);
+	private SWGBitSet		 	collectionBadges2	= new SWGBitSet(3, 17);
 	private boolean				showHelmet			= true;
 	private boolean				showBackpack		= true;
 	// PLAY 06
@@ -208,14 +208,6 @@ public class PlayerObject extends IntangibleObject {
 		this.collectionBadges.clear();
 		this.collectionBadges.or(BitSet.valueOf(collection));
 		sendDelta(3, 16, collectionBadges);
-	}
-
-	public SWGList<Integer> getGuildRanks() {
-		return guildRanks;
-	}
-
-	public void setGuildRanks(SWGList<Integer> guildRanks) {
-		this.guildRanks = guildRanks;
 	}
 
 	public boolean isShowHelmet() {
@@ -408,15 +400,23 @@ public class PlayerObject extends IntangibleObject {
 	}
 	
 	public void setFlagBitmask(PlayerFlags ... flags) {
-		for (PlayerFlags flag : flags)
+		boolean changed = false;
+		for (PlayerFlags flag : flags) {
+			changed |= !flagsList.get(flag.getFlag());
 			flagsList.set(flag.getFlag());
-		flagsList.sendDeltaMessage(this);
+		}
+		if (changed)
+			flagsList.sendDeltaMessage(this);
 	}
 	
 	public void clearFlagBitmask(PlayerFlags ... flags) {
-		for (PlayerFlags flag : flags)
+		boolean changed = false;
+		for (PlayerFlags flag : flags) {
+			changed |= flagsList.get(flag.getFlag());
 			flagsList.clear(flag.getFlag());
-		flagsList.sendDeltaMessage(this);
+		}
+		if (changed)
+			flagsList.sendDeltaMessage(this);
 	}
 	
 	public void toggleFlag(PlayerFlags ... flags) {
@@ -491,9 +491,11 @@ public class PlayerObject extends IntangibleObject {
 		bb.addLong(lifetimeGcwPoints); // 14
 		bb.addInt(lifetimePvpKills); // 15
 		bb.addObject(collectionBadges); // 16
-		bb.addObject(guildRanks); // 17
+		bb.addObject(collectionBadges2); // 17
 		bb.addBoolean(showBackpack); // 18
 		bb.addBoolean(showHelmet); // 19
+		for (int i = 0; i < 64; i++)
+			bb.addByte(0);
 		
 		bb.incrementOperandCount(15);
 	}
@@ -503,21 +505,21 @@ public class PlayerObject extends IntangibleObject {
 		bb.addByte(adminTag); // Admin Tag (0 = none, 1 = CSR, 2 = Developer, 3 = Warden, 4 = QA) -- 2
 		bb.addInt(currentRank); // 3
 		bb.addFloat(rankProgress); // 4
-		bb.addInt(highestRebelRank); // 5
-		bb.addInt(highestImperialRank); // 6
+		bb.addInt(highestImperialRank); // 5
+		bb.addInt(highestRebelRank); // 6
 		bb.addInt(gcwNextUpdate); // 7
 		bb.addAscii(home); // 8
 		bb.addBoolean(citizen); // 9
 		bb.addAscii(""); // City Region Defender 'region' -- 10
-			bb.addByte(0); // City Region Defender byte #1
-			bb.addByte(0); // City Region Defender byte #2
+			bb.addBoolean(false); // City Region Defender byte #1
+			bb.addBoolean(false); // City Region Defender byte #2
 		bb.addAscii(""); // Guild Region Defender 'region' -- 11
-			bb.addByte(0); // Guild Region Defender byte #1
-			bb.addByte(0); // Guild Region Defender byte #2
+			bb.addBoolean(false); // Guild Region Defender byte #1
+			bb.addBoolean(false); // Guild Region Defender byte #2
 		bb.addLong(0); // General? -- 12
-		bb.addInt(guildRankTitle); // 13
-		bb.addShort(0); // Citizen Rank Title? 6 bytes -- 14
-		bb.addInt(1); // Speeder Elevation -- 15
+		bb.addAscii(""); // 13
+		bb.addInt(0); // Citizen Rank Title? 6 bytes -- 14
+		bb.addInt(0); // Environment Flags Override -- 15
 		bb.addAscii(""); // Vehicle Attack Command -- 16
 		
 		bb.incrementOperandCount(15);

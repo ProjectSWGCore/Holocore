@@ -27,6 +27,7 @@
 ***********************************************************************************/
 package resources.commands.callbacks;
 
+import intents.object.ObjectCreatedIntent;
 import resources.Location;
 import resources.Terrain;
 import resources.commands.ICmdCallback;
@@ -35,6 +36,7 @@ import resources.objects.player.PlayerObject;
 import resources.objects.waypoint.WaypointObject;
 import resources.player.Player;
 import services.galaxy.GalacticManager;
+import services.objects.ObjectCreator;
 
 public class RequestWaypointCmdCallback implements ICmdCallback {
 
@@ -62,11 +64,12 @@ public class RequestWaypointCmdCallback implements ICmdCallback {
 
 		String name = (cmd.length == 6 ? cmd[5] : "@planet_n:" + terrain.getName());
 
-		WaypointObject waypoint = (WaypointObject) galacticManager.getObjectManager().createObject("object/waypoint/shared_waypoint.iff");
+		WaypointObject waypoint = (WaypointObject) ObjectCreator.createObjectFromTemplate("object/waypoint/shared_waypoint.iff");
 		waypoint.setLocation(new Location(x, y, z, terrain));
 		waypoint.setName(name.isEmpty() ? "@planet_n:" + terrain.getName() : name);
 		if (color != null)
 			waypoint.setColor(color);
 		ghost.addWaypoint(waypoint);
+		new ObjectCreatedIntent(waypoint).broadcast();
 	}
 }

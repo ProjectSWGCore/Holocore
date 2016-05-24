@@ -90,20 +90,13 @@ public class SWGFlag extends BitSet implements Encodable {
 	}
 	
 	public void sendDeltaMessage(SWGObject target) {
-		if (target.getOwner() == null)
-			return;
-		
 		target.sendDelta(view, updateType, encode());
 	}
 	
 	public int[] toList() {
 		int[] integers = new int[(int) Math.ceil(size()/32.0)];
 		
-		for (int i = 0; i < size(); i++) {
-			i = nextSetBit(i);
-			if (i == -1) // No more bits after this one
-				break;
-			
+		for (int i = nextSetBit(0); i >= 0; i = nextSetBit(i+1)) {
 			integers[i / 32] |= (1 << (i % 32));
 		}
 		

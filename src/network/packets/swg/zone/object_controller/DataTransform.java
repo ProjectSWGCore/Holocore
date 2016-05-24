@@ -47,6 +47,16 @@ public class DataTransform extends ObjectController {
 		super(objectId, CRC);
 	}
 	
+	public DataTransform(DataTransform transform) {
+		super(transform.getObjectId(), CRC);
+		timestamp = transform.getTimestamp();
+		updateCounter = transform.getUpdateCounter();
+		l = new Location(transform.getLocation());
+		speed = transform.getSpeed();
+		lookAtYaw = transform.getLookAtYaw();
+		useLookAtYaw = transform.isUseLookAtYaw();
+	}
+	
 	public DataTransform(long objectId, int counter, Location l, float speed) {
 		super(objectId, CRC);
 		if (l == null)

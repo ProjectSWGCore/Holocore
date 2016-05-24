@@ -32,6 +32,8 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import resources.collections.SWGListTest;
+import resources.collections.TestSWGBitSet;
+import resources.collections.TestSWGFlag;
 import resources.network.TestLittleEndianDataOutputStream;
 import resources.objects.quadtree.TestQuadTree;
 import resources.server_info.TestObjectDatabase;
@@ -40,6 +42,8 @@ import resources.services.TestConfig;
 @RunWith(Suite.class)
 @SuiteClasses({
 	SWGListTest.class,
+	TestSWGFlag.class,
+	TestSWGBitSet.class,
 	TestWeatherType.class,
 	TestQuadTree.class,
 	TestObjectDatabase.class,
