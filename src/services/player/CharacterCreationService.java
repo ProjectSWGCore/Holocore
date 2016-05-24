@@ -389,8 +389,7 @@ public class CharacterCreationService extends Service {
 		TangibleObject hairObj = createTangible(objManager, ClientFactory.formatToSharedFile(hair));
 		hairObj.setAppearanceData(customization);
 		
-//		hairObj.moveToContainer(creatureObj); // hair slot
-		creatureObj.addObject(hairObj);
+		hairObj.moveToContainer(creatureObj); // hair slot
 		creatureObj.addEquipment(hairObj);
 	}
 	
