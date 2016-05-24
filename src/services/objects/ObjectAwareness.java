@@ -117,7 +117,7 @@ public class ObjectAwareness extends Service {
 				creature.setOwner(null);
 				break;
 			case PE_ZONE_IN_SERVER:
-				creature.clearAware(false);
+				creature.resetAwareness();
 				add(creature);
 				update(creature);
 				p.sendPacket(new CmdSceneReady());

@@ -52,6 +52,7 @@ import resources.network.NetBuffer;
 import resources.objects.building.BuildingObject;
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
+import resources.player.PlayerState;
 import resources.server_info.Log;
 import services.CoreManager;
 
@@ -128,7 +129,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	 * Adds the specified object to this object and places it in the appropriate slot if needed
 	 * @param object Object to add to this container, which will either be put into the appropriate slot(s) or become a contained object
 	 */
-	protected boolean addObject(SWGObject object) {
+	public boolean addObject(SWGObject object) {
 		// If the arrangement is -1, then this object will be a contained object
 		int arrangementId = getArrangementId(object);
 		if (arrangementId == -1) {
@@ -160,7 +161,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	 * Removes the specified object from this current object.
 	 * @param object Object to remove
 	 */
-	protected void removeObject(SWGObject object) {
+	public void removeObject(SWGObject object) {
 		synchronized (object.objectsAware) {
 			object.objectsAware.clear();
 			object.objectsAware.addAll(getObjectsAware());
@@ -740,6 +741,12 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			awarenessOutOfRange(o, updateSelf);
 		}
 	}
+	
+	public void resetAwareness() {
+		synchronized (objectsAware) {
+			objectsAware.clear();
+		}
+	}
 
 	public Set <SWGObject> getObjectsAware() {
 		Set<SWGObject> aware;
@@ -788,6 +795,8 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			if (aware instanceof CreatureObject) {
 				Player awareOwner = aware.getOwner();
 				if (awareOwner == null || awareOwner.equals(owner))
+					continue;
+				if (awareOwner.getPlayerState() != PlayerState.ZONED_IN)
 					continue;
 				if (((CreatureObject) aware).isLoggedInPlayer())
 					observers.add(aware);
@@ -844,12 +853,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		Set <SWGObject> outOfRange;
 		synchronized (objectsAware) {
 			outOfRange = new HashSet<>(objectsAware);
-		}
-		if (outOfRange.contains(this)) {
-			Log.e("SWGObject", "outOfRange contains this");
-		}
-		if (withinRange.contains(this)) {
-			Log.e("SWGObject", "withinRange contains this");
 		}
 		for (SWGObject o : outOfRange) {
 			if (!withinRange.contains(o)) {
@@ -940,7 +943,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		synchronized (slots) {
 			for (SWGObject slotObject : slots.values()) {
 				if (slotObject != null && !sentObjects.contains(slotObject)) {
-					//Log.i("ChildrenObjects", "Sending slotObj " + slotObject + " to " + target);
 					slotObject.createObject(target, ignoreSnapshotChecks);
 					sentObjects.add(slotObject);
 				}
