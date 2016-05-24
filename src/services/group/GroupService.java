@@ -102,6 +102,9 @@ public class GroupService extends Service {
 			case GROUP_MAKE_LEADER:
 				handleMakeLeader(intent.getPlayer(), intent.getTarget());
 				break;
+			case GROUP_KICK:
+				handleKick(intent.getPlayer(), intent.getTarget());
+				break;
 		}
 	}
 
@@ -300,14 +303,34 @@ public class GroupService extends Service {
 		// TODO: Join group chat room
 	}
 	
-	private void handleMakeLeader(Player formerLeader, CreatureObject newLeader)
-	{
+	private void handleMakeLeader(Player formerLeader, CreatureObject newLeader) {
+
 		// Set the group leader to newLeader
+		// TODO: send system message
 		GroupObject group = getGroup(newLeader.getGroupId());
 		group.setLeader(newLeader);
 
 	}
 
+	private void handleKick(Player leader, CreatureObject kickedCreo) {
+		
+		GroupObject group = getGroup(kickedCreo.getGroupId());
+
+		// Make sure leader is truly the leader
+		if (group.getLeader() != leader.getCreatureObject().getObjectId()) {
+			sendSystemMessage(leader, "must_be_leader");
+			return;
+		}
+		
+		// If the group size is 2, disband instead
+		if (group.getGroupMembers().size() == 2) {
+			destroyGroup(group, leader);
+			return;
+		}
+		
+		// Otherwise kick the member
+		group.removeMember(kickedCreo);
+	}
 
 	private void destroyGroup(GroupObject group, Player player) {
 		String galaxy = player.getGalaxyName();
