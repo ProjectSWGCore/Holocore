@@ -81,6 +81,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	private final Map <ObjectDataAttribute, Object> dataAttributes;
 	private ContainerPermissions containerPermissions;
 	private transient Set <SWGObject> objectsAware;
+	private transient Set <SWGObject> customAware;
 	private transient BuildoutArea buildoutArea;
 	private transient Player owner;
 	private List <List <String>> arrangement;
@@ -109,7 +110,8 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		super(objectType);
 		this.objectId = objectId;
 		this.location = new Location();
-		this.objectsAware = new HashSet<SWGObject>();
+		this.objectsAware = new HashSet<>();
+		this.customAware = new HashSet<>();
 		this.slots = new HashMap<>();
 		this.containedObjects = Collections.synchronizedMap(new HashMap<Long, SWGObject>());
 		this.attributes = new LinkedHashMap<>();
@@ -121,6 +123,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		areaId = -1;
 		ois.defaultReadObject();
 		objectsAware = new HashSet<>();
+		customAware = new HashSet<>();
 		buildoutArea = null;
 		owner = null;
 	}
@@ -753,6 +756,9 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		synchronized (objectsAware) {
 			aware = new HashSet<>(objectsAware);
 		}
+		synchronized (customAware) {
+			aware.addAll(customAware);
+		}
 		if (parent != null) {
 			aware.addAll(parent.getObjectsAware());
 			aware.add(getSuperParent());
@@ -767,9 +773,25 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			if (objectsAware.contains(obj))
 				return true;
 		}
+		synchronized (customAware) {
+			if (customAware.contains(obj))
+				return true;
+		}
 		if (parent != null)
 			return parent.isAware(obj);
 		return false;
+	}
+	
+	public void addCustomAware(SWGObject aware) {
+		synchronized (customAware) {
+			customAware.add(aware);
+		}
+	}
+	
+	public void removeCustomAware(SWGObject aware) {
+		synchronized (customAware) {
+			customAware.remove(aware);
+		}
 	}
 	
 	public Set<SWGObject> getObservers() {
