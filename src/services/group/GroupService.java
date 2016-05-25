@@ -113,6 +113,9 @@ public class GroupService extends Service {
 			case PE_FIRST_ZONE:
 				handleMemberRezoned(intent.getPlayer());
 				break;
+			case PE_DISAPPEAR:
+				handleMemberDisappeared(intent.getPlayer());
+				break;
 			default: break;
 		}
 	}
@@ -134,6 +137,10 @@ public class GroupService extends Service {
 		groupObject.updateMember(creatureObject);
 	}
 
+	private void handleMemberDisappeared(Player player) {
+		System.out.println("Group member " + player.getCharacterName() + " disappeared.");
+	}
+	
 	private void handleGroupDisband(Player player, CreatureObject target) {
 		CreatureObject creo = player.getCreatureObject();
 
