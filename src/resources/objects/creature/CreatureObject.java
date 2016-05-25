@@ -49,6 +49,7 @@ import resources.common.CRC;
 import resources.encodables.player.Equipment;
 import resources.network.BaselineBuilder;
 import resources.network.NetBuffer;
+import resources.objects.GameObjectType;
 import resources.objects.SWGObject;
 import resources.objects.player.PlayerObject;
 import resources.objects.tangible.TangibleObject;
@@ -136,6 +137,44 @@ public class CreatureObject extends TangibleObject {
 		inviterData = new GroupInviterData(0, null, "", 0);
 		lastReserveOperation = 0;
 		groupId = 0;
+	}
+	
+	@Override
+	public void addObject(SWGObject obj) {
+		super.addObject(obj);
+		if (isEquipment(obj.getGameObjectType()))
+			addEquipment(obj);
+	}
+	
+	@Override
+	public void removeObject(SWGObject obj) {
+		super.removeObject(obj);
+		if (isEquipment(obj.getGameObjectType()))
+			removeEquipment(obj);
+	}
+	
+	private boolean isEquipment(GameObjectType type) {
+		switch (type.getMask()) {
+			case GOTM_ARMOR:
+			case GOTM_CLOTHING:
+			case GOTM_CYBERNETIC:
+			case GOTM_JEWELRY:
+			case GOTM_TOOL:
+			case GOTM_WEAPON:
+				return true;
+			case GOTM_MISC:
+				switch (type) {
+					case GOT_MISC_CONTAINER:
+					case GOT_MISC_CONTAINER_PUBLIC:
+					case GOT_MISC_CONTAINER_SHIP_LOOT:
+					case GOT_MISC_CONTAINER_WEARABLE:
+						return true;
+					default:
+						return false;
+				}
+			default:
+				return false;
+		}
 	}
 
 	public void removeEquipment(SWGObject obj) {
