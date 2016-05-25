@@ -783,15 +783,21 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	public void addCustomAware(SWGObject aware) {
+		boolean changed = false;
 		synchronized (customAware) {
-			customAware.add(aware);
+			changed = customAware.add(aware);
 		}
+		if (changed && aware.getOwner() != null)
+			createObject(aware.getOwner());
 	}
 	
 	public void removeCustomAware(SWGObject aware) {
+		boolean changed = false;
 		synchronized (customAware) {
-			customAware.remove(aware);
+			changed = customAware.remove(aware);
 		}
+		if (changed && aware.getOwner() != null)
+			destroyObject(aware.getOwner());
 	}
 	
 	public Set<SWGObject> getObservers() {
