@@ -82,21 +82,20 @@ public class BuildingObject extends TangibleObject {
 	}
 
 	@Override
-	public boolean addObject(SWGObject object) {
-		boolean added = super.addObject(object);
-		if (!added || !(object instanceof CellObject))
-			return added;
+	public void addObject(SWGObject object) {
+		super.addObject(object);
+		if (!(object instanceof CellObject))
+			return;
 
 		String portalFile = (String) getDataAttribute(ObjectDataAttribute.PORTAL_LAYOUT_FILENAME);
 		if (portalFile == null || portalFile.isEmpty())
-			return true;
+			return;
 
 		PortalLayoutData portalLayoutData = (PortalLayoutData) ClientFactory.getInfoFromFile(portalFile, true);
 		if (portalLayoutData == null || portalLayoutData.getCells() == null || portalLayoutData.getCells().size() == 0)
-			return true;
+			return;
 
 		populateCellData((CellObject) object, portalLayoutData.getCells().get(((CellObject) object).getNumber()));
-		return true;
 	}
 	
 	public void populateCells() {

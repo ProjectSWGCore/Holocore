@@ -132,7 +132,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	 * Adds the specified object to this object and places it in the appropriate slot if needed
 	 * @param object Object to add to this container, which will either be put into the appropriate slot(s) or become a contained object
 	 */
-	public boolean addObject(SWGObject object) {
+	public void addObject(SWGObject object) {
 		// If the arrangement is -1, then this object will be a contained object
 		int arrangementId = getArrangementId(object);
 		if (arrangementId == -1) {
@@ -157,7 +157,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		synchronized (object.objectsAware) {
 			object.objectsAware.clear();
 		}
-		return true;
 	}
 
 	/**
@@ -211,8 +210,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		
 		Player newOwner = null;
 		if (container != null) {
-			if (!container.addObject(this))
-				Log.e("SWGObject", "Failed adding " + this + " to " + container);
+			container.addObject(this);
 			newOwner = container.getOwner();
 		}
 		
@@ -257,9 +255,8 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			}
 		} else {
 			// Item is going into slot(s)
-			Map<String, SWGObject> containerSlots = container.getSlots();
 			for (String slotName : getArrangement().get(arrangementId - 4)) {
-				SWGObject equippedItem = containerSlots.get(slotName);
+				SWGObject equippedItem = container.getSlottedObject(slotName);
 				if (equippedItem != null) {
 					equippedItem.moveToContainer(requester, container.getSlottedObject("inventory"));
 				}
@@ -301,6 +298,8 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 					break;
 			}
 		}
+		if (parent != null)
+			return parent.hasPermission(object, permissions);
 		return true;
 	}
 
@@ -715,7 +714,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	public void createObject(Player target, boolean ignoreSnapshotChecks) {
 		if (!hasPermission(target.getCreatureObject(), ContainerPermissions.Permission.VIEW)) {
-			// Log.i("SWGObject", target.getCreatureObject() + " doesn't have permission to view " + this + " -- skipping packet sending");
+//			Log.i("SWGObject", target.getCreatureObject() + " doesn't have permission to view " + this + " -- skipping packet sending");
 			return;
 		}
 
@@ -800,17 +799,29 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			destroyObject(aware.getOwner());
 	}
 	
+	public void clearCustomAware(boolean sendUpdates) {
+		synchronized (customAware) {
+			if (sendUpdates) {
+				for (SWGObject aware : customAware) {
+					if (aware.getOwner() != null)
+						destroyObject(aware.getOwner());
+				}
+			}
+			customAware.clear();
+		}
+	}
+	
 	public Set<SWGObject> getObservers() {
 		Player owner = getOwner();
 		SWGObject parent = getParent();
 		if (parent == null)
-			return getObservers(owner, true);
+			return getObservers(owner, this, true);
 		while (parent.getParent() != null)
 			parent = parent.getParent();
-		return parent.getObservers(owner, true);
+		return parent.getObservers(owner, this, true);
 	}
 	
-	private Set<SWGObject> getObservers(Player owner, boolean initial) {
+	private Set<SWGObject> getObservers(Player owner, SWGObject original, boolean initial) {
 		Set<SWGObject> nearby;
 		synchronized (containedObjects) {
 			nearby = new HashSet<>(containedObjects.values());
@@ -826,10 +837,12 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 					continue;
 				if (awareOwner.getPlayerState() != PlayerState.ZONED_IN)
 					continue;
+				if (!original.hasPermission(aware, ContainerPermissions.Permission.VIEW))
+					continue;
 				if (((CreatureObject) aware).isLoggedInPlayer())
 					observers.add(aware);
 			} else
-				observers.addAll(aware.getObservers(owner, false));
+				observers.addAll(aware.getObservers(owner, original, false));
 		}
 		return observers;
 	}
