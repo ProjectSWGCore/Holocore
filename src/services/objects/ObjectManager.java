@@ -29,7 +29,6 @@ package services.objects;
 
 import java.util.Collection;
 import java.util.Hashtable;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -44,7 +43,6 @@ import intents.RequestZoneInIntent;
 import intents.network.GalacticPacketIntent;
 import network.packets.Packet;
 import network.packets.swg.ErrorMessage;
-import network.packets.swg.zone.SceneDestroyObject;
 import network.packets.swg.zone.insertion.SelectCharacter;
 import resources.control.Intent;
 import resources.control.Manager;
@@ -214,10 +212,6 @@ public class ObjectManager extends Manager {
 				if (i instanceof DestroyObjectIntent)
 					processDestroyObjectIntent((DestroyObjectIntent) i);
 				break;
-			case DeleteCharacterIntent.TYPE:
-				if (i instanceof DeleteCharacterIntent)
-					deleteObject(((DeleteCharacterIntent) i).getCreature().getObjectId());
-				break;
 		}
 	}
 	
@@ -263,22 +257,6 @@ public class ObjectManager extends Manager {
 		}
 	}
 	
-	private SWGObject deleteObject(long objId) {
-		synchronized (database) {
-			database.remove(objId);
-			database.save();
-		}
-		synchronized (objectMap) {
-			SWGObject obj = objectMap.remove(objId);
-			if (obj == null)
-				return null;
-			obj.clearAware();
-			objectAwareness.remove(obj);
-			Log.v("ObjectManager", "Deleted object %d [%s]", obj.getObjectId(), obj.getTemplate());
-			return obj;
-		}
-	}
-	
 	private void putObject(SWGObject object) {
 		ObjectCreator.updateMaxObjectId(object.getObjectId());
 		synchronized (objectMap) {
@@ -287,36 +265,25 @@ public class ObjectManager extends Manager {
 	}
 
 	private SWGObject destroyObject(SWGObject object) {
-
-		long objId = object.getObjectId();
-
 		for (SWGObject slottedObj : object.getSlots().values()) {
 			if (slottedObj != null)
 				destroyObject(slottedObj);
 		}
-
-		Iterator<SWGObject> containerIterator = object.getContainedObjects().iterator();
-		while(containerIterator.hasNext()) {
-			SWGObject containedObject = containerIterator.next();
-			if (containedObject != null)
-				destroyObject(containedObject);
+		
+		for (SWGObject contained : object.getContainedObjects()) {
+			if (contained != null)
+				destroyObject(contained);
 		}
-
-		// Remove object from the parent
-		SWGObject parent = object.getParent();
-		if (parent != null) {
-			if (parent instanceof CreatureObject) {
-				((CreatureObject) parent).removeEquipment(object);
-			}
-			object.sendObserversAndSelf(new SceneDestroyObject(objId));
-
-			object.moveToContainer(null);
-		} else {
-			object.sendObservers(new SceneDestroyObject(objId));
+		object.moveToContainer(null);
+		objectAwareness.remove(object);
+		object.clearAware();
+		synchronized (database) {
+			database.remove(object.getObjectId());
+			database.save();
 		}
-
-		// Finally, remove from the awareness tree
-		deleteObject(object.getObjectId());
+		synchronized (objectMap) {
+			objectMap.remove(object.getObjectId());
+		}
 
 		return object;
 	}

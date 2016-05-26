@@ -105,7 +105,7 @@ public class LoginService extends Service {
 	@Override
 	public void onIntentReceived(Intent i) {
 		if (i instanceof DeleteCharacterIntent) {
-			deleteCharacter(((DeleteCharacterIntent) i).getCreature().getObjectId());
+			deleteCharacter(((DeleteCharacterIntent) i).getCreature());
 		} else if (i instanceof GalacticPacketIntent) {
 			GalacticPacketIntent gpi = (GalacticPacketIntent) i;
 			handlePacket(gpi, gpi.getPlayerManager().getPlayerFromNetworkId(gpi.getNetworkId()), gpi.getPacket());
@@ -134,13 +134,13 @@ public class LoginService extends Service {
 	
 	private void handleCharDeletion(GalacticIntent intent, Player player, DeleteCharacterRequest request) {
 		SWGObject obj = intent.getObjectManager().getObjectById(request.getPlayerId());
-		if (obj != null)
+		boolean success = false;
 		if (obj != null && obj instanceof CreatureObject) {
-			new DestroyObjectIntent(obj).broadcast();
+			success = deleteCharacter(obj);
 			Log.i("LoginService", "Deleted character %s for user %s", ((CreatureObject)obj).getName(), player.getUsername());
 		} else
 			Log.w("LoginService", "Could not delete character! Character: ID: " + request.getPlayerId() + " / " + obj);
-		sendPacket(player, new DeleteCharacterResponse(deleteCharacter(request.getPlayerId())));
+		sendPacket(player, new DeleteCharacterResponse(success));
 	}
 	
 	private void handleLogin(Player player, LoginClientId id) {
@@ -320,10 +320,11 @@ public class LoginService extends Service {
 		return characters.toArray(new SWGCharacter[characters.size()]);
 	}
 	
-	private boolean deleteCharacter(long id) {
+	private boolean deleteCharacter(SWGObject obj) {
+		new DestroyObjectIntent(obj).broadcast();
 		synchronized (deleteCharacter) {
 			try {
-				deleteCharacter.setLong(1, id);
+				deleteCharacter.setLong(1, obj.getObjectId());
 				return deleteCharacter.executeUpdate() > 0;
 			} catch (SQLException e) {
 				e.printStackTrace();
