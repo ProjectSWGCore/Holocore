@@ -278,8 +278,8 @@ public class ObjectManager extends Manager {
 		objectAwareness.remove(object);
 		object.clearAware();
 		synchronized (database) {
-			database.remove(object.getObjectId());
-			database.save();
+			if (database.remove(object.getObjectId()) != null)
+				database.save();
 		}
 		synchronized (objectMap) {
 			objectMap.remove(object.getObjectId());
