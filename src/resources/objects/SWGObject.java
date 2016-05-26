@@ -799,6 +799,18 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			destroyObject(aware.getOwner());
 	}
 	
+	public void clearCustomAware(boolean sendUpdates) {
+		synchronized (customAware) {
+			if (sendUpdates) {
+				for (SWGObject aware : customAware) {
+					if (aware.getOwner() != null)
+						destroyObject(aware.getOwner());
+				}
+			}
+			customAware.clear();
+		}
+	}
+	
 	public Set<SWGObject> getObservers() {
 		Player owner = getOwner();
 		SWGObject parent = getParent();
