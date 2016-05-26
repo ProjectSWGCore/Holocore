@@ -109,9 +109,10 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 	}
 
 	public void updateMember(CreatureObject object) {
-		if (groupMembers.contains(new GroupMember(object.getObjectId(), object.getName())))
+		if (groupMembers.contains(new GroupMember(object.getObjectId(), object.getName()))) // make sure GroupMember implements hashCode and equals
 			addCustomAware(object);
-		else awarenessOutOfRange(object, true);
+		else
+			removeCustomAware(object);
 	}
 
 	public long getLeader() {
