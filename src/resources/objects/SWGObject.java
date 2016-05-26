@@ -780,30 +780,30 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	public void addCustomAware(SWGObject aware) {
-		internalAddCustomAware(aware);
-		aware.internalAddCustomAware(this);
+		internalAddCustomAware(aware, true);
+		aware.internalAddCustomAware(this, true);
 	}
 	
 	public void removeCustomAware(SWGObject aware) {
-		internalRemoveCustomAware(aware);
-		aware.internalRemoveCustomAware(this);
+		internalRemoveCustomAware(aware, true);
+		aware.internalRemoveCustomAware(this, true);
 	}
 	
-	private void internalAddCustomAware(SWGObject aware) {
+	private void internalAddCustomAware(SWGObject aware, boolean sendUpdates) {
 		boolean changed = false;
 		synchronized (customAware) {
 			changed = customAware.add(aware);
 		}
-		if (changed && aware.getOwner() != null)
+		if (changed && sendUpdates && aware.getOwner() != null)
 			createObject(aware.getOwner());
 	}
 	
-	private void internalRemoveCustomAware(SWGObject aware) {
+	private void internalRemoveCustomAware(SWGObject aware, boolean sendUpdates) {
 		boolean changed = false;
 		synchronized (customAware) {
 			changed = customAware.remove(aware);
 		}
-		if (changed && aware.getOwner() != null)
+		if (changed && sendUpdates && aware.getOwner() != null)
 			destroyObject(aware.getOwner());
 	}
 	
@@ -814,17 +814,13 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	public void clearCustomAware(boolean sendUpdates) {
-		if (sendUpdates) {
-			Set<SWGObject> copy;
-			synchronized (customAware) {
-				copy = new HashSet<>(customAware);
-			}
-			for (SWGObject aware : copy) {
-				removeCustomAware(aware);
-			}
-		}
+		Set<SWGObject> copy;
 		synchronized (customAware) {
-			customAware.clear();
+			copy = new HashSet<>(customAware);
+		}
+		for (SWGObject aware : copy) {
+			internalRemoveCustomAware(aware, sendUpdates);
+			aware.internalRemoveCustomAware(this, sendUpdates);
 		}
 	}
 	
