@@ -90,7 +90,7 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 
 		groupMembers.sendDeltaMessage(this);
 
-		awarenessInRange(object, true);
+		addCustomAware(object);
 		object.setGroupId(getObjectId());
 
 		if (object.getLevel() > level)
@@ -110,7 +110,7 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 
 	public void updateMember(CreatureObject object) {
 		if (groupMembers.contains(new GroupMember(object.getObjectId(), object.getName())))
-			awarenessInRange(object, true);
+			addCustomAware(object);
 		else awarenessOutOfRange(object, true);
 	}
 
