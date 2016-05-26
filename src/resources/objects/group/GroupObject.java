@@ -226,7 +226,7 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 		public boolean equals(Object o) {
 			if (this == o)
 				return true;
-			if (o == null || getClass() != o.getClass())
+			if (o == null || !(o instanceof GroupObject))
 				return false;
 
 			GroupMember that = (GroupMember) o;
