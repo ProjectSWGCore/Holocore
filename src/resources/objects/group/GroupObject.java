@@ -43,6 +43,8 @@ import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class GroupObject extends SWGObject { // Extends INTO or TANO?
 	private static final long serialVersionUID = 200L;
@@ -52,6 +54,7 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 	private short level;
 	private long lootMaster;
 	private int lootRule;
+	private HashMap<GroupMember, Timer> logoffTimers = new HashMap<>();
 
 	private transient PickupPointTimer pickupPointTimer;
 
@@ -98,8 +101,15 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 	}
 
 	public void removeMember(CreatureObject object) {
+		
+		GroupMember member = new GroupMember(object.getObjectId(), object.getName());
 		synchronized (groupMembers) {
-			groupMembers.remove(new GroupMember(object.getObjectId(), object.getName()));
+			
+			if (this.leader == object.getObjectId()) {
+				this.setLeader(this.groupMembers.get(2));
+			}
+			
+			groupMembers.remove(member);
 
 			object.setGroupId(0);
 			awarenessOutOfRange(object, true);
@@ -123,17 +133,28 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 		this.leader = object.getObjectId();
 
 		GroupMember member = new GroupMember(object.getObjectId(), object.getName());
+		this.changeLeader(member);
+	}
+
+	public void setLeader(GroupMember member) {
+		this.leader = member.getId();
+		
+		this.changeLeader(member);
+	}
+	
+	private void changeLeader(GroupMember member) {
+				
 		if (groupMembers.size() > 0) {
 			synchronized (groupMembers) {
 				GroupMember previous = groupMembers.set(0, member);
-				groupMembers.add(previous);
+				//groupMembers.add(previous);
 			}
 		} else {
 			groupMembers.add(member);
 		}
 		groupMembers.sendDeltaMessage(this);
 	}
-
+	
 	public short getLevel() {
 		return level;
 	}
@@ -170,7 +191,47 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 
 		return members;
 	}
-
+	
+	private GroupMember getGroupMember(Player player) {
+		
+		GroupMember foundMember = null;
+		
+		synchronized(groupMembers) {
+			GroupMember testMember = new GroupMember(player.getCreatureObject().getObjectId(), player.getCharacterName());
+			int index = groupMembers.indexOf(testMember);
+			
+			if (index != -1)
+				foundMember = groupMembers.get(index);
+		}
+		
+		return foundMember;
+	}
+	
+	public void markPlayerForLogoff(Player player) {
+		
+		// Create a timer with the GroupMember player owns as the key
+		// and a timer set to fire and remove that member as the value
+		GroupMember loggedMember = this.getGroupMember(player);
+		
+		Timer timer = new Timer();
+		LogOffTask task = new LogOffTask(this, player.getCreatureObject());
+		
+		timer.schedule(task, 240000);
+		
+		this.logoffTimers.put(loggedMember, timer);
+	}
+	
+	public void unmarkPlayerForLogoff(Player player) {
+		
+		GroupMember loggedMember = this.getGroupMember(player);
+		
+		if (loggedMember == null)
+			return;
+		
+		// Cancel the timer and remove from the list
+		this.logoffTimers.remove(loggedMember).cancel();
+	}
+	
 	private static class PickupPointTimer implements Serializable, Encodable {
 		private static final long serialVersionUID = 1L;
 
@@ -241,5 +302,24 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 			result = 31 * result + name.hashCode();
 			return result;
 		}
+	}
+	
+	private static class LogOffTask extends TimerTask {
+		
+		GroupObject taskingGroup;
+		CreatureObject loggedMember;
+		
+		public LogOffTask(GroupObject group, CreatureObject member) {
+			
+			this.taskingGroup = group;
+			this.loggedMember = member;
+		}
+		
+		@Override
+		public void run() {
+			
+			this.taskingGroup.removeMember(loggedMember);
+		}
+		
 	}
 }

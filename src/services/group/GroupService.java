@@ -113,8 +113,8 @@ public class GroupService extends Service {
 			case PE_FIRST_ZONE:
 				handleMemberRezoned(intent.getPlayer());
 				break;
-			case PE_DISAPPEAR:
-				handleMemberDisappeared(intent.getPlayer());
+			case PE_LOGGED_OUT:
+				handleMemberLoggedOff(intent.getPlayer());
 				break;
 			default: break;
 		}
@@ -134,11 +134,20 @@ public class GroupService extends Service {
 			return;
 		}
 
+		// Tell group to remove that player from the log off timer
+		groupObject.unmarkPlayerForLogoff(player);
 		groupObject.updateMember(creatureObject);
 	}
 
-	private void handleMemberDisappeared(Player player) {
-		System.out.println("Group member " + player.getCharacterName() + " disappeared.");
+	private void handleMemberLoggedOff(Player player) {
+	
+		CreatureObject playerCreo = player.getCreatureObject();
+		GroupObject group = getGroup(playerCreo.getGroupId());
+		
+		if (group == null)
+			return;
+		
+		group.markPlayerForLogoff(player);
 	}
 	
 	private void handleGroupDisband(Player player, CreatureObject target) {
@@ -190,7 +199,6 @@ public class GroupService extends Service {
 		// Otherwise, remove player
 		group.removeMember(creo);
 		
-		System.out.println("Group member leaving");
 	}
 
 	private void handleGroupInvite(Player player, CreatureObject target) {
