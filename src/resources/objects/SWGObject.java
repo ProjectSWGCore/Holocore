@@ -298,8 +298,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 					break;
 			}
 		}
-		if (parent != null)
-			return parent.hasPermission(object, permissions);
 		return true;
 	}
 
@@ -844,13 +842,13 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		}
 		Set<SWGObject> observers = new HashSet<>();
 		for (SWGObject aware : nearby) {
+			if (!aware.hasPermission(original, ContainerPermissions.Permission.VIEW))
+				continue;
 			if (aware instanceof CreatureObject) {
 				Player awareOwner = aware.getOwner();
 				if (awareOwner == null || awareOwner.equals(owner))
 					continue;
 				if (awareOwner.getPlayerState() != PlayerState.ZONED_IN)
-					continue;
-				if (!original.hasPermission(aware, ContainerPermissions.Permission.VIEW))
 					continue;
 				if (((CreatureObject) aware).isLoggedInPlayer())
 					observers.add(aware);
