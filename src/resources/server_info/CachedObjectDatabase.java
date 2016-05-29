@@ -108,9 +108,15 @@ public class CachedObjectDatabase<V extends Persistable> extends ObjectDatabase<
 					objects.add(is.read(creator));
 				loaded = true;
 			}
-		} catch (IOException e) {
-			Log.e("CachedObjectDatabase", "Error while loading file. IOException: " + e.getMessage());
+			if (is.available() > 0) {
+				loaded = false;
+				clearObjects();
+				return false;
+			}
+		} catch (Exception e) {
+			Log.e("CachedObjectDatabase", "Error while loading file. %s: %s", e.getClass().getSimpleName(), e.getMessage());
 			Log.e("CachedObjectDatabase", e);
+			clearObjects();
 			return false;
 		}
 		return true;
