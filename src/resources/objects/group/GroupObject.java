@@ -42,6 +42,7 @@ import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -100,27 +101,23 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 	}
 
 	public void removeMember(CreatureObject object) {
-		
+
 		GroupMember member = new GroupMember(object);
 		synchronized (groupMembers) {
-			
-			if (this.leader == object.getObjectId()) {
+
+			if (this.leader == object.getObjectId() && this.groupMembers.size() > 2) {
 				this.setLeader(this.groupMembers.get(2));
 			}
 			
-			groupMembers.remove(member);
+			if (this.groupMembers.size() == 3) {
+				this.disbandGroup();
+				return;
+			}
 
+			groupMembers.remove(member);
 			object.setGroupId(0);
 			awarenessOutOfRange(object, true);
-			
-			if (groupMembers.size() == 2) {
-				
-				for (GroupMember grpMember : groupMembers) {
-					
-					groupMembers.remove(grpMember);
-					grpMember.playerCreo.setGroupId(0);
-				}
-			}
+
 			groupMembers.sendDeltaMessage(this);
 		}
 	}
@@ -237,6 +234,24 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 		
 		// Cancel the timer and remove from the list
 		this.logoffTimers.remove(loggedMember).cancel();
+	}
+	
+	public void disbandGroup() {
+		
+		synchronized (groupMembers) {
+			
+			Iterator<GroupMember> iter = this.groupMembers.iterator();
+
+			while (iter.hasNext()) {
+				GroupMember grpMember = iter.next();
+				iter.remove();
+				grpMember.playerCreo.setGroupId(0);
+				awarenessOutOfRange(grpMember.playerCreo, true);
+
+			}
+		}
+
+		groupMembers.sendDeltaMessage(this);
 	}
 	
 	private static class PickupPointTimer implements Serializable, Encodable {

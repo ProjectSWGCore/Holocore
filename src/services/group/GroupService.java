@@ -360,18 +360,19 @@ public class GroupService extends Service {
 		PlayerManager playerManager = player.getPlayerManager();
 
 		sendGroupSystemMessage(group, "disbanded");
-
-		for (String name : members.keySet()) {
-			Player memPlayer = playerManager.getPlayerByCreatureName(name);
-			if (memPlayer == null)
-				continue;
-
-			CreatureObject memCreo = memPlayer.getCreatureObject();
-			if (memCreo == null)
-				continue;
-
-			group.removeMember(memCreo);
-		}
+		group.disbandGroup();
+		
+//		for (String name : members.keySet()) {
+//			Player memPlayer = playerManager.getPlayerByCreatureName(name);
+//			if (memPlayer == null)
+//				continue;
+//
+//			CreatureObject memCreo = memPlayer.getCreatureObject();
+//			if (memCreo == null)
+//				continue;
+//
+//			group.removeMember(memCreo);
+//		}
 
 		// TODO: Object destroy intent
 	}
