@@ -37,6 +37,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.atomic.AtomicReference;
 
 import network.packets.Packet;
 import network.packets.swg.SWGPacket;
@@ -69,7 +70,7 @@ public class ChatMailService extends Service {
 	private int maxMailId;
 	
 	public ChatMailService() {
-		mails = new CachedObjectDatabase<>("odb/mails.db");
+		mails = new CachedObjectDatabase<>("odb/mails.db", Mail::create, Mail::saveMail);
 		chatLogs = RelationalServerFactory.getServerDatabase("chat/chat_log.db");
 		insertChatLog = chatLogs.prepareStatement("INSERT INTO chat_log VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 		maxMailId = 1;
@@ -179,7 +180,7 @@ public class ChatMailService extends Service {
 		mail.setId(maxMailId++);
 		mail.setTimestamp((int) (new Date().getTime() / 1000));
 		mail.setOutOfBandPackage(request.getOutOfBandPackage());
-		mails.put(mail.getId(), mail);
+		mails.add(mail);
 		
 		if (recipient != null) {
 			sendPersistentMessage(recipient, mail, MailFlagType.HEADER_ONLY, galaxy);
@@ -203,14 +204,13 @@ public class ChatMailService extends Service {
 		maxMailId++;
 		mail.setTimestamp((int) (new Date().getTime() / 1000));
 		
-		mails.put(mail.getId(), mail);
+		mails.add(mail);
 		
 		sendPersistentMessage(recipient, mail, MailFlagType.HEADER_ONLY, intent.getGalaxy());
 	}
 	
 	private void handlePersistentMessageRequest(Player player, String galaxy, ChatRequestPersistentMessage request) {
-		Mail mail = mails.get(request.getMailId());
-		
+		Mail mail = getMail(request.getMailId());
 		if (mail == null)
 			return;
 		
@@ -219,6 +219,18 @@ public class ChatMailService extends Service {
 		
 		mail.setStatus(Mail.READ);
 		sendPersistentMessage(player, mail, MailFlagType.FULL_MESSAGE, galaxy);
+	}
+	
+	private Mail getMail(int id) {
+		AtomicReference<Mail> ref = new AtomicReference<>(null);
+		mails.traverseInterruptable((m) -> {
+			if (m.getId() == id) {
+				ref.set(m);
+				return false;
+			}
+			return true;
+		});
+		return ref.get();
 	}
 	
 	private void sendPersistentMessageHeaders(Player player) {
@@ -244,7 +256,7 @@ public class ChatMailService extends Service {
 
 		PlayerObject ghost = receiver.getPlayerObject();
 		if (ghost.isIgnored(mail.getSender())) {
-			mails.remove(mail.getId());
+			mails.remove(mail);
 			return;
 		}
 
@@ -263,7 +275,7 @@ public class ChatMailService extends Service {
 	}
 	
 	private void deletePersistentMessage(int mailId) {
-		mails.remove(mailId);
+		mails.remove(getMail(mailId));
 	}
 	
 	private void logChat(long sendId, String sendName, long recvId, String recvName, String subject, String message) {

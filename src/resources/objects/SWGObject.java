@@ -49,18 +49,18 @@ import resources.encodables.StringId;
 import resources.network.BaselineBuilder;
 import resources.network.BaselineObject;
 import resources.network.NetBuffer;
+import resources.network.NetBufferStream;
 import resources.objects.building.BuildingObject;
 import resources.objects.creature.CreatureObject;
+import resources.persistable.Persistable;
+import resources.persistable.SWGObjectFactory;
 import resources.player.Player;
 import resources.player.PlayerState;
 import resources.server_info.Log;
 import services.CoreManager;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Hashtable;
@@ -69,17 +69,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public abstract class SWGObject extends BaselineObject implements Comparable<SWGObject> {
+public abstract class SWGObject extends BaselineObject implements Comparable<SWGObject>, Persistable {
 	
-	private static final long serialVersionUID = 1L;
-
 	private final Location location;
 	private final long objectId;
 	private final HashMap <String, SWGObject> slots; // HashMap used for null value support
-	private final Map<Long, SWGObject> containedObjects;
+	private final Set<SWGObject> containedObjects;
 	private final Map <String, String> attributes;
 	private final Map <ObjectDataAttribute, Object> dataAttributes;
-	private ContainerPermissions containerPermissions;
 	private transient Set <SWGObject> objectsAware;
 	private transient Set <SWGObject> customAware;
 	private transient BuildoutArea buildoutArea;
@@ -88,6 +85,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 
 	private ObjectClassification classification = ObjectClassification.GENERATED;
 	private GameObjectType gameObjectType = GameObjectType.GOT_NONE;
+	private ContainerPermissions containerPermissions;
 	private SWGObject	parent	= null;
 	private StringId stringId = new StringId("", "");
 	private StringId detailStringId = new StringId("", "");
@@ -113,19 +111,10 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		this.objectsAware = new HashSet<>();
 		this.customAware = new HashSet<>();
 		this.slots = new HashMap<>();
-		this.containedObjects = Collections.synchronizedMap(new HashMap<Long, SWGObject>());
+		this.containedObjects = new HashSet<>();
 		this.attributes = new LinkedHashMap<>();
 		this.dataAttributes = new Hashtable<>();
 		this.containerPermissions = new DefaultPermissions();
-	}
-	
-	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
-		areaId = -1;
-		ois.defaultReadObject();
-		objectsAware = new HashSet<>();
-		customAware = new HashSet<>();
-		buildoutArea = null;
-		owner = null;
 	}
 
 	/**
@@ -137,7 +126,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		int arrangementId = getArrangementId(object);
 		if (arrangementId == -1) {
 			synchronized (containedObjects) {
-				containedObjects.put(object.getObjectId(), object);
+				containedObjects.add(object);
 			}
 		} else {
 			// Not a child object, so time to check the slots!
@@ -370,24 +359,13 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 
 	/**
-	 * Gets the object in the container with the specified objectId
-	 * @param objectId of the {@link SWGObject} to retrieve
-	 * @return {@link SWGObject} with the specified objectId
-	 */
-	public SWGObject getContainedObject(long objectId) {
-		synchronized (containedObjects) {
-			return containedObjects.get(objectId);
-		}
-	}
-
-	/**
 	 * Gets a list of all the objects in the current container. This should only be used for viewing the objects
 	 * in the current container.
 	 * @return An unmodifiable {@link Collection} of {@link SWGObject}'s in the container
 	 */
 	public Collection<SWGObject> getContainedObjects() {
 		synchronized (containedObjects) {
-			return new ArrayList<>(containedObjects.values());
+			return new ArrayList<>(containedObjects);
 		}
 	}
 
@@ -835,7 +813,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	private Set<SWGObject> getObservers(Player owner, SWGObject original, boolean initial) {
 		Set<SWGObject> nearby;
 		synchronized (containedObjects) {
-			nearby = new HashSet<>(containedObjects.values());
+			nearby = new HashSet<>(containedObjects);
 		}
 		if (initial) {
 			nearby.addAll(getObjectsAware());
@@ -1003,7 +981,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		
 		// Now create the contained objects
 		synchronized (containedObjects) {
-			for (SWGObject containedObject : containedObjects.values()) {
+			for (SWGObject containedObject : containedObjects) {
 				if (containedObject != null && !sentObjects.contains(containedObject)) {
 					if (containedObject instanceof CreatureObject && ((CreatureObject) containedObject).isLoggedOutPlayer())
 						continue; // If it's a player, but that's logged out
@@ -1098,6 +1076,66 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	 * 
 	 * Only sent if they are defined (can still be empty if defined).
 	 */
+	
+	/*
+	private SWGObject	parent	= null;
+	
+	private final Location location;
+	private final Map <String, String> attributes;
+	private ContainerPermissions containerPermissions;
+	private ObjectClassification classification = ObjectClassification.GENERATED;
+	private String	objectName	= "";
+	private int		volume		= 0;
+	private float	complexity	= 1;
+	private int     containerType = 0;
+	private double	loadRange	= 0;
+	private int		areaId		= -1;
+
+	private final HashMap <String, SWGObject> slots;
+	private final Map<Long, SWGObject> containedObjects;
+	 */
+	@Override
+	public void save(NetBufferStream stream) {
+		stream.addByte(0);
+		location.save(stream);
+		containerPermissions.save(stream);
+		synchronized (attributes) {
+			stream.addMap(attributes, (e) -> {
+				stream.addAscii(e.getKey());
+				stream.addAscii(e.getValue());
+			});
+		}
+		stream.addAscii(classification.name());
+		stream.addUnicode(objectName);
+		stream.addInt(volume);
+		stream.addFloat(complexity);
+		stream.addFloat((float) loadRange);
+		Set<SWGObject> contained;
+		synchronized (containedObjects) {
+			contained = new HashSet<>(containedObjects);
+		}
+		synchronized (slots) {
+			contained.addAll(slots.values());
+			contained.remove(null);
+		}
+		stream.addList(contained, (c) -> SWGObjectFactory.save(c, stream));
+	}
+	
+	public void read(NetBufferStream stream) {
+		stream.getByte();
+		location.read(stream);
+		containerPermissions.read(stream);
+		stream.getList((i) -> attributes.put(stream.getAscii(), stream.getAscii()));
+		classification = ObjectClassification.valueOf(stream.getAscii());
+		objectName = stream.getUnicode();
+		volume = stream.getInt();
+		complexity = stream.getFloat();
+		loadRange = stream.getFloat();
+		Set<SWGObject> contained = new HashSet<>();
+		stream.getList((i) -> contained.add(SWGObjectFactory.create(stream)));
+		for (SWGObject obj : contained)
+			obj.moveToContainer(this);
+	}
 	
 	public enum ObjectClassification {
 		GENERATED,

@@ -38,7 +38,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import intents.object.DestroyObjectIntent;
 import intents.object.ObjectCreatedIntent;
 import intents.object.ObjectTeleportIntent;
-import intents.player.DeleteCharacterIntent;
 import intents.RequestZoneInIntent;
 import intents.network.GalacticPacketIntent;
 import network.packets.Packet;
@@ -49,6 +48,7 @@ import resources.control.Manager;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.custom.AIObject;
+import resources.persistable.SWGObjectFactory;
 import resources.player.Player;
 import resources.server_info.CachedObjectDatabase;
 import resources.server_info.Log;
@@ -80,10 +80,10 @@ public class ObjectManager extends Manager {
 		radialService = new RadialService();
 		clientBuildoutService = new ClientBuildoutService();
 		
-		database = new CachedObjectDatabase<SWGObject>("odb/objects.db");
+		database = new CachedObjectDatabase<>("odb/objects.db", SWGObjectFactory::create, SWGObjectFactory::save);
 		objectMap = new Hashtable<>(16*1024);
 		started = new AtomicBoolean(false);
-
+		
 		addChildService(objectAwareness);
 		addChildService(mapManager);
 		addChildService(staticService);
@@ -95,7 +95,6 @@ public class ObjectManager extends Manager {
 		registerForIntent(ObjectTeleportIntent.TYPE);
 		registerForIntent(ObjectCreatedIntent.TYPE);
 		registerForIntent(DestroyObjectIntent.TYPE);
-		registerForIntent(DeleteCharacterIntent.TYPE);
 	}
 	
 	@Override
@@ -110,11 +109,9 @@ public class ObjectManager extends Manager {
 		long startLoad = System.nanoTime();
 		Log.i("ObjectManager", "Loading objects from ObjectDatabase...");
 		synchronized (database) {
-			if (database.fileExists()) {
-				if (!database.load())
-					return false;
-				database.traverse((obj) -> loadObject(obj));
-			}
+			if (!database.load() && database.fileExists())
+				return false;
+			database.traverse((obj) -> loadObject(obj));
 		}
 		double loadTime = (System.nanoTime() - startLoad) / 1E6;
 		Log.i("ObjectManager", "Finished loading %d objects. Time: %fms", database.size(), loadTime);
@@ -220,8 +217,8 @@ public class ObjectManager extends Manager {
 		putObject(obj);
 		if (obj instanceof CreatureObject && ((CreatureObject) obj).isPlayer()) {
 			synchronized (database) {
-				database.put(obj.getObjectId(), obj);
-				database.save();
+				if (database.add(obj))
+					database.save();
 			}
 		}
 		if (!(obj instanceof AIObject))
@@ -278,7 +275,7 @@ public class ObjectManager extends Manager {
 		objectAwareness.remove(object);
 		object.clearAware();
 		synchronized (database) {
-			if (database.remove(object.getObjectId()) != null)
+			if (database.remove(object))
 				database.save();
 		}
 		synchronized (objectMap) {

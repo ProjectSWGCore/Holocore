@@ -37,13 +37,13 @@ import resources.encodables.Encodable;
 import resources.encodables.StringId;
 import resources.network.BaselineBuilder;
 import resources.network.NetBuffer;
+import resources.network.NetBufferStream;
 import resources.objects.intangible.IntangibleObject;
 import resources.objects.waypoint.WaypointObject;
+import resources.persistable.Persistable;
 import resources.player.Player;
 
 public class MissionObject extends IntangibleObject {
-	
-	private static final long serialVersionUID = 1L;
 	
 	private int difficulty					= 0;
 	private MissionLocation location		= new MissionLocation();
@@ -109,7 +109,43 @@ public class MissionObject extends IntangibleObject {
 		buffer.getInt();
 	}
 	
-	public static class MissionLocation implements Encodable {
+	@Override
+	public void save(NetBufferStream stream) {
+		super.save(stream);
+		stream.addByte(0);
+		stream.addInt(difficulty);
+		stream.addInt(reward);
+		stream.addInt(status);
+		stream.addUnicode(missionCreator);
+		stream.addUnicode(targetName);
+		title.save(stream);
+		description.save(stream);
+		targetAppearance.save(stream);
+		missionType.save(stream);
+		waypoint.save(stream);
+		startLocation.save(stream);
+		location.save(stream);
+	}
+	
+	@Override
+	public void read(NetBufferStream stream) {
+		super.read(stream);
+		stream.getByte();
+		difficulty = stream.getInt();
+		reward = stream.getInt();
+		status = stream.getInt();
+		missionCreator = stream.getUnicode();
+		targetName = stream.getUnicode();
+		title.read(stream);
+		description.read(stream);
+		targetAppearance.read(stream);
+		missionType.read(stream);
+		waypoint.read(stream);
+		startLocation.read(stream);
+		location.read(stream);
+	}
+	
+	public static class MissionLocation implements Encodable, Persistable {
 		
 		private Point3D location;
 		private long objectId;
@@ -136,6 +172,22 @@ public class MissionObject extends IntangibleObject {
 			location = data.getEncodable(Point3D.class);
 			objectId = data.getLong();
 			terrain = Terrain.getTerrainFromCrc(data.getInt());
+		}
+		
+		@Override
+		public void save(NetBufferStream stream) {
+			stream.addInt(0);
+			stream.addLong(objectId);
+			location.save(stream);
+			stream.addAscii(terrain.name());
+		}
+		
+		@Override
+		public void read(NetBufferStream stream) {
+			stream.getInt();
+			objectId = stream.getLong();
+			location.read(stream);
+			terrain = Terrain.valueOf(stream.getAscii());
 		}
 		
 	}

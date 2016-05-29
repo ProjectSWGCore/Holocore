@@ -31,18 +31,19 @@ import network.packets.swg.zone.baselines.Baseline;
 import resources.common.CRC;
 import resources.encodables.Encodable;
 import resources.network.NetBuffer;
+import resources.network.NetBufferStream;
 import resources.objects.SWGObject;
 import resources.objects.tangible.TangibleObject;
 import resources.objects.weapon.WeaponObject;
+import resources.persistable.Persistable;
+import resources.persistable.SWGObjectFactory;
 import resources.player.Player;
 import resources.server_info.Log;
 import services.objects.ObjectCreator;
 
-import java.io.Serializable;
 import java.nio.ByteBuffer;
 
-public class Equipment implements Encodable, Serializable {
-	private static final long serialVersionUID = 1L;
+public class Equipment implements Encodable, Persistable {
 	
 	private TangibleObject 	weapon;
 	private byte []			customizationString;
@@ -95,6 +96,29 @@ public class Equipment implements Encodable, Serializable {
 		template			= data.getEncodable(CRC.class);
 		if (data.getBoolean())
 			this.weapon = createWeaponFromData(data);
+	}
+	
+	@Override
+	public void save(NetBufferStream stream) {
+		stream.addByte(0);
+		stream.addLong(objectId);
+		stream.addInt(arrangementId);
+		stream.addInt(template.getCrc());
+		stream.addArray(customizationString);
+		stream.addBoolean(weapon != null);
+		if (weapon != null)
+			SWGObjectFactory.save(weapon, stream);
+	}
+	
+	@Override
+	public void read(NetBufferStream stream) {
+		stream.getByte();
+		objectId = stream.getLong();
+		arrangementId = stream.getInt();
+		template = new CRC(stream.getInt());
+		customizationString = stream.getArray();
+		if (stream.getBoolean())
+			weapon = (TangibleObject) SWGObjectFactory.create(stream);
 	}
 
 	public byte[] getCustomizationString() {return customizationString;}

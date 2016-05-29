@@ -82,7 +82,6 @@ public class LoginService extends Service {
 	private PreparedStatement getCharacter;
 	private PreparedStatement getCharacters;
 	private PreparedStatement deleteCharacter;
-	private boolean autoLogin;
 	
 	public LoginService() {
 		random = new Random();
@@ -98,7 +97,6 @@ public class LoginService extends Service {
 		getCharacter = local.prepareStatement("SELECT * FROM characters WHERE LOWER(name) = LOWER(?)");
 		getCharacters = local.prepareStatement("SELECT * FROM characters WHERE userid = ?");
 		deleteCharacter = local.prepareStatement("DELETE FROM characters WHERE id = ?");
-		autoLogin = getConfig(ConfigFile.NETWORK).getInt("AUTO-LOGIN", 0) == 1;
 		return super.initialize();
 	}
 	
@@ -153,11 +151,6 @@ public class LoginService extends Service {
 		if (!id.getVersion().equals(REQUIRED_VERSION) && doClientCheck) {
 			onLoginClientVersionError(player, id);
 			return;
-		}
-		if (autoLogin) {
-			String [] sessionHash = id.getPassword().split("-");
-			id.setUsername(sessionHash[0]);
-			id.setPassword(sessionHash[1]);
 		}
 		synchronized (getUser) {
 			try {

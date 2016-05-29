@@ -28,13 +28,15 @@
 package resources.collections;
 
 import resources.encodables.Encodable;
+import resources.network.NetBufferStream;
 import resources.objects.SWGObject;
+import resources.persistable.Persistable;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.BitSet;
 
-public class SWGBitSet extends BitSet implements Encodable {
+public class SWGBitSet extends BitSet implements Encodable, Persistable {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -62,6 +64,17 @@ public class SWGBitSet extends BitSet implements Encodable {
 	public void decode(ByteBuffer data) {
 		// TODO: Decode method for SWGBitSet
 		throw new UnsupportedOperationException("Unable to decode bitset!");
+	}
+	
+	@Override
+	public void save(NetBufferStream stream) {
+		stream.addArray(toByteArray());
+	}
+	
+	@Override
+	public void read(NetBufferStream stream) {
+		clear();
+		xor(valueOf(stream.getArray()));
 	}
 	
 	public void sendDeltaMessage(SWGObject target) {

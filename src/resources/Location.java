@@ -29,15 +29,14 @@ package resources;
 
 import network.packets.Packet;
 import resources.encodables.Encodable;
+import resources.network.NetBufferStream;
+import resources.persistable.Persistable;
 
-import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
 
-public class Location implements Encodable, Serializable {
-	
-	private static final long serialVersionUID = 1L;
+public class Location implements Encodable, Persistable {
 	
 	private final Point3D point;
 	private final Quaternion orientation;
@@ -283,6 +282,25 @@ public class Location implements Encodable, Serializable {
 	public void decode(ByteBuffer data) {
 		orientation.decode(data);
 		point.decode(data);
+	}
+	
+	@Override
+	public void save(NetBufferStream stream) {
+		stream.addByte(0);
+		orientation.save(stream);
+		point.save(stream);
+		stream.addBoolean(terrain != null);
+		if (terrain != null)
+			stream.addAscii(terrain.name());
+	}
+	
+	@Override
+	public void read(NetBufferStream stream) {
+		stream.getByte();
+		orientation.read(stream);
+		point.read(stream);
+		if (stream.getBoolean())
+			terrain = Terrain.valueOf(stream.getAscii());
 	}
 
 	@Override

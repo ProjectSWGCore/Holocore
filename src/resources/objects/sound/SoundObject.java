@@ -27,14 +27,25 @@
 ***********************************************************************************/
 package resources.objects.sound;
 
+import resources.network.NetBufferStream;
 import resources.objects.staticobject.StaticObject;
 
 public class SoundObject extends StaticObject {
 	
-	private static final long serialVersionUID = 1L;
-	
 	public SoundObject(long objectId) {
 		super(objectId);
+	}
+	
+	@Override
+	public void save(NetBufferStream stream) {
+		super.save(stream);
+		stream.addByte(0);
+	}
+	
+	@Override
+	public void read(NetBufferStream stream) {
+		super.read(stream);
+		stream.getByte();
 	}
 	
 }

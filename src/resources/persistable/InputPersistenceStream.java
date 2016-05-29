@@ -25,28 +25,87 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
  ***********************************************************************************/
-package resources.objects.factory;
+package resources.persistable;
 
-import network.packets.swg.zone.baselines.Baseline.BaselineType;
+import java.io.IOException;
+import java.io.InputStream;
+
 import resources.network.NetBufferStream;
-import resources.objects.tangible.TangibleObject;
 
-public class FactoryObject extends TangibleObject {
+public class InputPersistenceStream extends InputStream {
 	
-	public FactoryObject(long objectId) {
-		super(objectId, BaselineType.FCYT);
+	private final InputStream is;
+	
+	public InputPersistenceStream(InputStream is) {
+		this.is = is;
 	}
 	
-	@Override
-	public void save(NetBufferStream stream) {
-		super.save(stream);
-		stream.addByte(0);
+	public int read() {
+		throw new UnsupportedOperationException("Unable to read raw data");
 	}
 	
-	@Override
-	public void read(NetBufferStream stream) {
-		super.read(stream);
-		stream.getByte();
+	public int read(byte[] b) {
+		throw new UnsupportedOperationException("Unable to read raw data");
+	}
+	
+	public int read(byte[] b, int off, int len) {
+		throw new UnsupportedOperationException("Unable to read raw data");
+	}
+	
+	public <T extends Persistable> T read(PersistableCreator<T> creator) throws IOException {
+		int size = readInt();
+		try (NetBufferStream stream = new NetBufferStream(size)) {
+			byte [] buffer = new byte[Math.min(size, 2048)];
+			int pos = 0;
+			while (pos < size) {
+				int n = is.read(buffer, 0, Math.min(size-pos, buffer.length));
+				if (n == -1)
+					break;
+				stream.write(buffer, 0, n);
+				pos += n;
+			}
+			stream.position(0);
+			return creator.create(stream);
+		}
+	}
+	
+	public long skip(long n) throws IOException {
+		return is.skip(n);
+	}
+	
+	public int available() throws IOException {
+		return is.available();
+	}
+	
+	public void close() throws IOException {
+		is.close();
+	}
+	
+	public void mark(int readlimit) {
+		is.mark(readlimit);
+	}
+	
+	public void reset() throws IOException {
+		is.reset();
+	}
+	
+	public boolean markSupported() {
+		return is.markSupported();
+	}
+	
+	private int readInt() throws IOException {
+		int ret = 0;
+		int b;
+		for (int i = 0; i < 4; i++) {
+			b = is.read();
+			if (b != -1)
+				ret |= b << (i * 8);
+		}
+		return ret;
+	}
+	
+	public static interface PersistableCreator<T extends Persistable> {
+		T create(NetBufferStream stream);
 	}
 	
 }
