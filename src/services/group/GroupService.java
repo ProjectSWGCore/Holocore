@@ -142,6 +142,10 @@ public class GroupService extends Service {
 	private void handleMemberLoggedOff(Player player) {
 	
 		CreatureObject playerCreo = player.getCreatureObject();
+		
+		if (playerCreo == null)
+			return;
+		
 		GroupObject group = getGroup(playerCreo.getGroupId());
 		
 		if (group == null)

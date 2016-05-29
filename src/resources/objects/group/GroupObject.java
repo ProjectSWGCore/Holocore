@@ -89,7 +89,7 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 	}
 
 	public void addMember(CreatureObject object) {
-		groupMembers.add(new GroupMember(object.getObjectId(), object.getName()));
+		groupMembers.add(new GroupMember(object));
 
 		groupMembers.sendDeltaMessage(this);
 
@@ -102,7 +102,7 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 
 	public void removeMember(CreatureObject object) {
 		
-		GroupMember member = new GroupMember(object.getObjectId(), object.getName());
+		GroupMember member = new GroupMember(object);
 		synchronized (groupMembers) {
 			
 			if (this.leader == object.getObjectId()) {
@@ -113,13 +113,21 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 
 			object.setGroupId(0);
 			awarenessOutOfRange(object, true);
-
+			
+			if (groupMembers.size() == 2) {
+				
+				for (GroupMember grpMember : groupMembers) {
+					
+					groupMembers.remove(grpMember);
+					grpMember.playerCreo.setGroupId(0);
+				}
+			}
 			groupMembers.sendDeltaMessage(this);
 		}
 	}
 
 	public void updateMember(CreatureObject object) {
-		if (groupMembers.contains(new GroupMember(object.getObjectId(), object.getName()))) // make sure GroupMember implements hashCode and equals
+		if (groupMembers.contains(new GroupMember(object))) // make sure GroupMember implements hashCode and equals
 			addCustomAware(object);
 		else
 			removeCustomAware(object);
@@ -132,7 +140,7 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 	public void setLeader(CreatureObject object) {
 		this.leader = object.getObjectId();
 
-		GroupMember member = new GroupMember(object.getObjectId(), object.getName());
+		GroupMember member = new GroupMember(object);
 		this.changeLeader(member);
 	}
 
@@ -197,7 +205,7 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 		GroupMember foundMember = null;
 		
 		synchronized(groupMembers) {
-			GroupMember testMember = new GroupMember(player.getCreatureObject().getObjectId(), player.getCharacterName());
+			GroupMember testMember = new GroupMember(player.getCreatureObject());
 			int index = groupMembers.indexOf(testMember);
 			
 			if (index != -1)
@@ -255,10 +263,13 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 
 		private long id;
 		private String name;
-
-		public GroupMember(long id, String name) {
-			this.id = id;
-			this.name = name;
+		private CreatureObject playerCreo;
+		
+		public GroupMember(CreatureObject creo) {
+			
+			this.id = creo.getObjectId();
+			this.name = creo.getName();
+			this.playerCreo = creo;
 		}
 
 		@Override
