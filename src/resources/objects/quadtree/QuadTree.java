@@ -56,6 +56,18 @@ public class QuadTree<V> {
 		headNode.insert(x, y, value);
 	}
 	
+	public boolean contains(double x, double y, V obj) {
+		return containsWithinRange(x, y, obj, DEFAULT_RANGE);
+	}
+	
+	public boolean containsWithinRange(double x, double y, V obj, double range) {
+		if (Double.isNaN(x) || Double.isNaN(y))
+			return false;
+		if (x < minX || y < minY || x > maxX || y > maxY)
+			return false;
+		return headNode.containsWithinRange(x, y, obj, range);
+	}
+	
 	public List<V> get(double x, double y) {
 		return getWithinRange(x, y, DEFAULT_RANGE);
 	}
@@ -198,6 +210,26 @@ public class QuadTree<V> {
 				obj.insert(v);
 		}
 		
+		public boolean containsWithinRange(double x, double y, V v, double range) {
+			if (obj != null && square(obj.x - x) + square(obj.y - y) <= square(range)) {
+				return obj.contains(v);
+			}
+			int mnX = (x - range <= minX) ? 0 : getIndex(x - range, minX, cellWidth);
+			int mnY = (y - range <= minY) ? 0 : getIndex(y - range, minY, cellHeight);
+			int mxX = (x + range >= maxX) ? subnodes.length() - 1 : getIndex(x + range, minX, cellWidth);
+			int mxY = (y + range >= maxY) ? subnodes.length() - 1 : getIndex(y + range, minY, cellHeight);
+			for (int xInd = mnX; xInd <= mxX; xInd++) {
+				for (int yInd = mnY-1; yInd <= mxY; yInd++) {
+					if (yInd < 0)
+						continue;
+					QuadNode node = subnodes.getSubnode(xInd, yInd);
+					if (node != null && node.containsWithinRange(x, y, v, range))
+						return true;
+				}
+			}
+			return false;
+		}
+		
 		public void getWithinRange(List<V> list, double x, double y, double range) {
 			if (obj != null && square(obj.x - x) + square(obj.y - y) <= square(range)) {
 				obj.addAll(list);
@@ -248,6 +280,14 @@ public class QuadTree<V> {
 				next = new Node(x, y, value, null);
 			else
 				next.insert(value);
+		}
+		
+		public boolean contains(V v) {
+			if (value.equals(v))
+				return true;
+			if (next != null)
+				return next.contains(v);
+			return false;
 		}
 		
 		public int addAll(List<V> list) {

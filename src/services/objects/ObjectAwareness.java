@@ -286,7 +286,8 @@ public class ObjectAwareness extends Service {
 			return;
 		QuadTree <SWGObject> tree = getTree(l);
 		synchronized (tree) {
-			tree.put(l.getX(), l.getZ(), object);
+			if (!tree.get(l.getX(), l.getZ()).contains(object))
+				tree.put(l.getX(), l.getZ(), object);
 		}
 	}
 	
