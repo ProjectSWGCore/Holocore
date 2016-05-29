@@ -48,8 +48,6 @@ import resources.objects.SWGObject;
  */
 public class WorldPermissions extends DefaultPermissions {
 	
-	private static final long serialVersionUID = 200L;
-	
 	@Override
 	public boolean canView(SWGObject viewer, SWGObject container) {
 		if (super.canView(viewer, container))

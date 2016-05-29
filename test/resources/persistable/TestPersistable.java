@@ -25,28 +25,17 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
  ***********************************************************************************/
-package resources.objects.factory;
+package resources.persistable;
 
-import network.packets.swg.zone.baselines.Baseline.BaselineType;
-import resources.network.NetBufferStream;
-import resources.objects.tangible.TangibleObject;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
 
-public class FactoryObject extends TangibleObject {
-	
-	public FactoryObject(long objectId) {
-		super(objectId, BaselineType.FCYT);
-	}
-	
-	@Override
-	public void save(NetBufferStream stream) {
-		super.save(stream);
-		stream.addByte(0);
-	}
-	
-	@Override
-	public void read(NetBufferStream stream) {
-		super.read(stream);
-		stream.getByte();
-	}
+@RunWith(Suite.class)
+@SuiteClasses({
+	TestSimplePersistable.class,
+	TestSWGPersistable.class
+})
+public class TestPersistable {
 	
 }

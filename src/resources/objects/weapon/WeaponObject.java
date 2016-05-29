@@ -30,12 +30,11 @@ package resources.objects.weapon;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.network.BaselineBuilder;
 import resources.network.NetBuffer;
+import resources.network.NetBufferStream;
 import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
 
 public class WeaponObject extends TangibleObject {
-	
-	private static final long serialVersionUID = 1L;
 	
 	private float attackSpeed = 0.5f;
 	private float maxRange = 5f;
@@ -122,6 +121,24 @@ public class WeaponObject extends TangibleObject {
 	public void parseBaseline6(NetBuffer buffer) {
 		super.parseBaseline6(buffer);
 		type = WeaponType.getWeaponType(buffer.getInt());
+	}
+	
+	@Override
+	public void save(NetBufferStream stream) {
+		super.save(stream);
+		stream.addByte(0);
+		stream.addFloat(attackSpeed);
+		stream.addFloat(maxRange);
+		stream.addAscii(type.name());
+	}
+	
+	@Override
+	public void read(NetBufferStream stream) {
+		super.read(stream);
+		stream.getByte();
+		attackSpeed = stream.getFloat();
+		maxRange = stream.getFloat();
+		type = WeaponType.valueOf(stream.getAscii());
 	}
 	
 }

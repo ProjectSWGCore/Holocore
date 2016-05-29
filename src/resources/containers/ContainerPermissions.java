@@ -24,21 +24,25 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>
  ******************************************************************************/
-
 package resources.containers;
 
-import resources.objects.SWGObject;
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
-import java.io.Serializable;
-import java.util.*;
+import resources.network.NetBufferStream;
+import resources.objects.SWGObject;
+import resources.persistable.Persistable;
 
 /**
  * Structure for creating permission sets that will allow the object to be viewed/modified/added/removed by a requested
  * object depending on the implemented abstract methods.
  * @author Waverunner
  */
-public abstract class ContainerPermissions implements Serializable {
-	private static final long serialVersionUID = 1L;
+public abstract class ContainerPermissions implements Persistable {
 
 	public static final WorldPermissions      WORLD       = new WorldPermissions();
 	public static final InventoryPermissions  INVENTORY   = new InventoryPermissions();
@@ -129,6 +133,27 @@ public abstract class ContainerPermissions implements Serializable {
 
 	public void addDefaultWorldPermissions() {
 		addPermissions("world", Permission.VIEW, Permission.ENTER);
+	}
+	
+	@Override
+	public void save(NetBufferStream stream) {
+		stream.addByte(0);
+		synchronized (permissionGroups) {
+			stream.addMap(permissionGroups, (e) -> {
+				stream.addAscii(e.getKey());
+				stream.addInt(e.getValue());
+			});
+		}
+		synchronized (joinedGroups) {
+			stream.addList(joinedGroups, (g) -> stream.addAscii(g));
+		}
+	}
+	
+	@Override
+	public void read(NetBufferStream stream) {
+		stream.getByte();
+		stream.getList((i) -> permissionGroups.put(stream.getAscii(), stream.getInt()));
+		stream.getList((i) -> joinedGroups.add(stream.getAscii()));
 	}
 
 	public abstract boolean canView(SWGObject viewer, SWGObject container);

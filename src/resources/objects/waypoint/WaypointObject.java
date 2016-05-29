@@ -33,14 +33,13 @@ import resources.Location;
 import resources.Terrain;
 import resources.encodables.OutOfBandData;
 import resources.encodables.OutOfBandPackage;
+import resources.network.NetBufferStream;
 import resources.objects.intangible.IntangibleObject;
 import resources.player.Player;
 
 import java.nio.ByteBuffer;
 
 public class WaypointObject extends IntangibleObject implements OutOfBandData {
-
-	private static final long serialVersionUID = 1L;
 	
 	private long cellId;
 	private String name = "New Waypoint";
@@ -115,6 +114,26 @@ public class WaypointObject extends IntangibleObject implements OutOfBandData {
 		color		= WaypointColor.valueOf(data.get());
 		active 		= Packet.getBoolean(data);
 		setLocation(loc);
+	}
+	
+	@Override
+	public void save(NetBufferStream stream) {
+		super.save(stream);
+		stream.addByte(0);
+		stream.addBoolean(active);
+		stream.addLong(cellId);
+		stream.addAscii(name);
+		stream.addAscii(color.name());
+	}
+	
+	@Override
+	public void read(NetBufferStream stream) {
+		super.read(stream);
+		stream.getByte();
+		active = stream.getBoolean();
+		cellId = stream.getLong();
+		name = stream.getAscii();
+		color = WaypointColor.valueOf(stream.getAscii());
 	}
 
 	@Override

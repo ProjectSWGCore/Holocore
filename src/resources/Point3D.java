@@ -29,13 +29,12 @@ package resources;
 
 import network.packets.Packet;
 import resources.encodables.Encodable;
+import resources.network.NetBufferStream;
+import resources.persistable.Persistable;
 
-import java.io.Serializable;
 import java.nio.ByteBuffer;
 
-public class Point3D implements Encodable, Serializable {
-	
-	private static final long serialVersionUID = 1L;
+public class Point3D implements Encodable, Persistable {
 	
 	private double x;
 	private double y;
@@ -111,6 +110,20 @@ public class Point3D implements Encodable, Serializable {
 		z = Packet.getFloat(data);
 	}
 	
+	@Override
+	public void save(NetBufferStream stream) {
+		stream.addFloat((float) x);
+		stream.addFloat((float) y);
+		stream.addFloat((float) z);
+	}
+	
+	@Override
+	public void read(NetBufferStream stream) {
+		x = stream.getFloat();
+		y = stream.getFloat();
+		z = stream.getFloat();
+	}
+
 	public boolean equals(Object o) {
 		if (!(o instanceof Point3D))
 			return false;

@@ -29,7 +29,6 @@ package resources.network;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.Serializable;
 import java.lang.ref.SoftReference;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,9 +39,7 @@ import utilities.Encoder.StringType;
 import network.packets.swg.zone.baselines.Baseline;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 
-public class BaselineObject implements Serializable {
-	
-	private static final long serialVersionUID = 1L;
+public class BaselineObject {
 	
 	private transient List<SoftReference<Baseline>> baselineData;
 	

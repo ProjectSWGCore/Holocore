@@ -27,18 +27,17 @@
 ***********************************************************************************/
 package resources.common;
 
-import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.charset.StandardCharsets;
 
 import resources.encodables.Encodable;
 import resources.network.NetBuffer;
+import resources.network.NetBufferStream;
+import resources.persistable.Persistable;
 import resources.server_info.CrcDatabase;
 
-public class CRC implements Encodable, Serializable {
-	
-	private static final long serialVersionUID = 1L;
+public class CRC implements Encodable, Persistable {
 	
 	private static final int CRC_TABLE[] = {
 		0x00000000, 0x04C11DB7, 0x09823B6E, 0x0D4326D9, 0x130476DC, 0x17C56B6B, 0x1A864DB2, 0x1E475005,
@@ -117,6 +116,16 @@ public class CRC implements Encodable, Serializable {
 		this.str = getString(crc);
 	}
 	
+	@Override
+	public void save(NetBufferStream stream) {
+		stream.addInt(crc);
+	}
+	
+	@Override
+	public void read(NetBufferStream stream) {
+		crc = stream.getInt();
+	}
+
 	@Override
 	public String toString() {
 		return str;

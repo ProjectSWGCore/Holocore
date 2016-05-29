@@ -47,8 +47,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class GroupObject extends SWGObject { // Extends INTO or TANO?
-	private static final long serialVersionUID = 200L;
-
+	
 	private final SWGList<GroupMember> groupMembers = new SWGList<>(6, 2, Encoder.StringType.ASCII);
 	private long leader;
 	private short level;

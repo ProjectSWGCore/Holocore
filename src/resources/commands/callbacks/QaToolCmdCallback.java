@@ -150,7 +150,7 @@ public class QaToolCmdCallback implements ICmdCallback {
 	private void forceDelete(final ObjectManager objManager, final Player player, final SWGObject target) {
 		SuiMessageBox inputBox = new SuiMessageBox(SuiButtons.OK_CANCEL, "Force Delete?", "Are you sure you want to delete this object?");
 		inputBox.addOkButtonCallback("handleDeleteObject", (caller, actor, event, parameters) -> {
-			if (target instanceof CreatureObject && ((CreatureObject) target).getPlayerObject() != null) {
+			if (target instanceof CreatureObject && ((CreatureObject) target).isPlayer()) {
 				Log.i("QA", "[%s] Requested deletion of character: %s", player.getUsername(), target.getName());
 				new DeleteCharacterIntent((CreatureObject) target).broadcast();
 				Player owner = target.getOwner();

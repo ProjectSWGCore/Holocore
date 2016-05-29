@@ -29,14 +29,16 @@ package resources.collections;
 
 import network.packets.swg.zone.baselines.Baseline;
 import resources.encodables.Encodable;
+import resources.network.NetBufferStream;
 import resources.objects.SWGObject;
+import resources.persistable.Persistable;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.Arrays;
 import java.util.BitSet;
 
-public class SWGFlag extends BitSet implements Encodable {
+public class SWGFlag extends BitSet implements Encodable, Persistable {
 	
 	private static final long serialVersionUID = 2L;
 	
@@ -77,6 +79,17 @@ public class SWGFlag extends BitSet implements Encodable {
 		throw new UnsupportedOperationException("Unable to decode bitset!");
 	}
 	
+	@Override
+	public void save(NetBufferStream stream) {
+		stream.addArray(toByteArray());
+	}
+	
+	@Override
+	public void read(NetBufferStream stream) {
+		clear();
+		xor(valueOf(stream.getArray()));
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (!(o instanceof SWGFlag))

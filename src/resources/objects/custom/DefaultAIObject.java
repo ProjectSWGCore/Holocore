@@ -36,8 +36,6 @@ import resources.Point3D;
 
 public class DefaultAIObject extends AIObject {
 	
-	private static final long serialVersionUID = 1L;
-	
 	private Location mainLocation;
 	private AIBehavior behavior;
 	private int updateCounter;

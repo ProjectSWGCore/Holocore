@@ -29,13 +29,13 @@ package resources.encodables;
 
 import network.packets.Packet;
 
-import java.io.Serializable;
 import java.nio.ByteBuffer;
 
+import resources.network.NetBufferStream;
+import resources.persistable.Persistable;
 import resources.server_info.Log;
 
-public class StringId implements OutOfBandData, Serializable {
-	private static final long serialVersionUID = 1L;
+public class StringId implements OutOfBandData, Persistable {
 	
 	private String key = "";
 	private String file = "";
@@ -78,6 +78,18 @@ public class StringId implements OutOfBandData, Serializable {
 		file 	= Packet.getAscii(data);
 		Packet.getInt(data);
 		key 	= Packet.getAscii(data);
+	}
+	
+	@Override
+	public void save(NetBufferStream stream) {
+		stream.addAscii(file);
+		stream.addAscii(key);
+	}
+	
+	@Override
+	public void read(NetBufferStream stream) {
+		file = stream.getAscii();
+		key = stream.getAscii();
 	}
 
 	@Override

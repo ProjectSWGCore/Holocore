@@ -104,7 +104,7 @@ public class ChatRoomService extends Service {
 	private int maxChatRoomId;
 
 	public ChatRoomService() {
-		database	= new CachedObjectDatabase<>("odb/chat_rooms.db");
+		database	= new CachedObjectDatabase<ChatRoom>("odb/chat_rooms.db", ChatRoom::create, (r, s)->r.save(s));
 		roomMap 	= new ConcurrentHashMap<>();
 		messages	= new ConcurrentHashMap<>();
 		chatLogs	= RelationalServerFactory.getServerDatabase("chat/chat_log.db");
@@ -737,7 +737,7 @@ public class ChatRoomService extends Service {
 		roomMap.put(id, room);
 
 		if (persist)
-			database.put(id, room);
+			database.add(room);
 		return room;
 	}
 

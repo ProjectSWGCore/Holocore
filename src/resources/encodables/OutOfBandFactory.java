@@ -25,28 +25,46 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
  ***********************************************************************************/
-package resources.objects.factory;
+package resources.encodables;
 
-import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.network.NetBufferStream;
-import resources.objects.tangible.TangibleObject;
+import resources.objects.waypoint.WaypointObject;
+import resources.persistable.SWGObjectFactory;
 
-public class FactoryObject extends TangibleObject {
+public class OutOfBandFactory {
 	
-	public FactoryObject(long objectId) {
-		super(objectId, BaselineType.FCYT);
+	public static void save(OutOfBandData oob, NetBufferStream stream) {
+		if (oob instanceof StringId)
+			stream.addByte(1);
+		else if (oob instanceof ProsePackage)
+			stream.addByte(2);
+		else if (oob instanceof WaypointObject) {
+			stream.addByte(3);
+			SWGObjectFactory.save((WaypointObject) oob, stream);
+			return;
+		} else
+			throw new IllegalArgumentException("Unknown OOB data!");
+		oob.save(stream);
 	}
 	
-	@Override
-	public void save(NetBufferStream stream) {
-		super.save(stream);
-		stream.addByte(0);
-	}
-	
-	@Override
-	public void read(NetBufferStream stream) {
-		super.read(stream);
-		stream.getByte();
+	public static OutOfBandData create(NetBufferStream stream) {
+		OutOfBandData oob;
+		byte type = stream.getByte();
+		switch (type) {
+			case 1:
+				oob = new StringId();
+				break;
+			case 2:
+				oob = new ProsePackage();
+				break;
+			case 3:
+				oob = (WaypointObject) SWGObjectFactory.create(stream);
+				return oob;
+			default:
+				throw new IllegalStateException("Unknown type byte! Type: " + type);
+		}
+		oob.read(stream);
+		return oob;
 	}
 	
 }

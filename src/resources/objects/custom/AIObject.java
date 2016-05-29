@@ -35,8 +35,6 @@ import utilities.ScheduledUtilities;
 
 public abstract class AIObject extends CreatureObject {
 	
-	private static final long serialVersionUID = 1L;
-	
 	private transient ScheduledFuture<?> future;
 	private long initialDelay;
 	private long delay;

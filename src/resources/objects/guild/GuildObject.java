@@ -41,8 +41,6 @@ import utilities.Encoder.StringType;
 
 public class GuildObject extends SWGObject {
 	
-	private static final long serialVersionUID = 1L;
-	
 	private SWGSet<String> abbreviations = new SWGSet<String>(3, 4, StringType.ASCII);
 	private SWGMap<String, CurrentServerGCWZonePercent> gcwImperialScorePercentileThisGalaxy = new SWGMap<>(6, 2);
 	private SWGMap<String, CurrentServerGCWZonePercent> gcwGroupImperialScorePercentileThisGalaxy = new SWGMap<>(6, 3);

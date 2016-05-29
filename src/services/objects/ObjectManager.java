@@ -29,7 +29,6 @@ package services.objects;
 
 import java.util.Collection;
 import java.util.Hashtable;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -39,18 +38,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import intents.object.DestroyObjectIntent;
 import intents.object.ObjectCreatedIntent;
 import intents.object.ObjectTeleportIntent;
-import intents.player.DeleteCharacterIntent;
 import intents.RequestZoneInIntent;
 import intents.network.GalacticPacketIntent;
 import network.packets.Packet;
 import network.packets.swg.ErrorMessage;
-import network.packets.swg.zone.SceneDestroyObject;
 import network.packets.swg.zone.insertion.SelectCharacter;
 import resources.control.Intent;
 import resources.control.Manager;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.custom.AIObject;
+import resources.persistable.SWGObjectFactory;
 import resources.player.Player;
 import resources.server_info.CachedObjectDatabase;
 import resources.server_info.Log;
@@ -82,10 +80,10 @@ public class ObjectManager extends Manager {
 		radialService = new RadialService();
 		clientBuildoutService = new ClientBuildoutService();
 		
-		database = new CachedObjectDatabase<SWGObject>("odb/objects.db");
+		database = new CachedObjectDatabase<>("odb/objects.db", SWGObjectFactory::create, SWGObjectFactory::save);
 		objectMap = new Hashtable<>(16*1024);
 		started = new AtomicBoolean(false);
-
+		
 		addChildService(objectAwareness);
 		addChildService(mapManager);
 		addChildService(staticService);
@@ -97,7 +95,6 @@ public class ObjectManager extends Manager {
 		registerForIntent(ObjectTeleportIntent.TYPE);
 		registerForIntent(ObjectCreatedIntent.TYPE);
 		registerForIntent(DestroyObjectIntent.TYPE);
-		registerForIntent(DeleteCharacterIntent.TYPE);
 	}
 	
 	@Override
@@ -112,11 +109,9 @@ public class ObjectManager extends Manager {
 		long startLoad = System.nanoTime();
 		Log.i("ObjectManager", "Loading objects from ObjectDatabase...");
 		synchronized (database) {
-			if (database.fileExists()) {
-				if (!database.load())
-					return false;
-				database.traverse((obj) -> loadObject(obj));
-			}
+			if (!database.load() && database.fileExists())
+				return false;
+			database.traverse((obj) -> loadObject(obj));
 		}
 		double loadTime = (System.nanoTime() - startLoad) / 1E6;
 		Log.i("ObjectManager", "Finished loading %d objects. Time: %fms", database.size(), loadTime);
@@ -214,10 +209,6 @@ public class ObjectManager extends Manager {
 				if (i instanceof DestroyObjectIntent)
 					processDestroyObjectIntent((DestroyObjectIntent) i);
 				break;
-			case DeleteCharacterIntent.TYPE:
-				if (i instanceof DeleteCharacterIntent)
-					deleteObject(((DeleteCharacterIntent) i).getCreature().getObjectId());
-				break;
 		}
 	}
 	
@@ -226,8 +217,8 @@ public class ObjectManager extends Manager {
 		putObject(obj);
 		if (obj instanceof CreatureObject && ((CreatureObject) obj).isPlayer()) {
 			synchronized (database) {
-				database.put(obj.getObjectId(), obj);
-				database.save();
+				if (database.add(obj))
+					database.save();
 			}
 		}
 		if (!(obj instanceof AIObject))
@@ -263,22 +254,6 @@ public class ObjectManager extends Manager {
 		}
 	}
 	
-	private SWGObject deleteObject(long objId) {
-		synchronized (database) {
-			database.remove(objId);
-			database.save();
-		}
-		synchronized (objectMap) {
-			SWGObject obj = objectMap.remove(objId);
-			if (obj == null)
-				return null;
-			obj.clearAware();
-			objectAwareness.remove(obj);
-			Log.v("ObjectManager", "Deleted object %d [%s]", obj.getObjectId(), obj.getTemplate());
-			return obj;
-		}
-	}
-	
 	private void putObject(SWGObject object) {
 		ObjectCreator.updateMaxObjectId(object.getObjectId());
 		synchronized (objectMap) {
@@ -287,36 +262,25 @@ public class ObjectManager extends Manager {
 	}
 
 	private SWGObject destroyObject(SWGObject object) {
-
-		long objId = object.getObjectId();
-
 		for (SWGObject slottedObj : object.getSlots().values()) {
 			if (slottedObj != null)
 				destroyObject(slottedObj);
 		}
-
-		Iterator<SWGObject> containerIterator = object.getContainedObjects().iterator();
-		while(containerIterator.hasNext()) {
-			SWGObject containedObject = containerIterator.next();
-			if (containedObject != null)
-				destroyObject(containedObject);
+		
+		for (SWGObject contained : object.getContainedObjects()) {
+			if (contained != null)
+				destroyObject(contained);
 		}
-
-		// Remove object from the parent
-		SWGObject parent = object.getParent();
-		if (parent != null) {
-			if (parent instanceof CreatureObject) {
-				((CreatureObject) parent).removeEquipment(object);
-			}
-			object.sendObserversAndSelf(new SceneDestroyObject(objId));
-
-			object.moveToContainer(null);
-		} else {
-			object.sendObservers(new SceneDestroyObject(objId));
+		object.moveToContainer(null);
+		objectAwareness.remove(object);
+		object.clearAware();
+		synchronized (database) {
+			if (database.remove(object))
+				database.save();
 		}
-
-		// Finally, remove from the awareness tree
-		deleteObject(object.getObjectId());
+		synchronized (objectMap) {
+			objectMap.remove(object.getObjectId());
+		}
 
 		return object;
 	}

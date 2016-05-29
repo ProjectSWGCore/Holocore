@@ -25,28 +25,26 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
  ***********************************************************************************/
-package resources.objects.factory;
+package resources.persistable;
 
-import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.network.NetBufferStream;
-import resources.objects.tangible.TangibleObject;
+import resources.objects.SWGObject;
+import services.objects.ObjectCreator;
 
-public class FactoryObject extends TangibleObject {
+public class SWGObjectFactory {
 	
-	public FactoryObject(long objectId) {
-		super(objectId, BaselineType.FCYT);
+	public static void save(SWGObject obj, NetBufferStream stream) {
+		stream.addLong(obj.getObjectId());
+		stream.addAscii(obj.getTemplate());
+		obj.save(stream);
 	}
 	
-	@Override
-	public void save(NetBufferStream stream) {
-		super.save(stream);
-		stream.addByte(0);
-	}
-	
-	@Override
-	public void read(NetBufferStream stream) {
-		super.read(stream);
-		stream.getByte();
+	public static SWGObject create(NetBufferStream stream) {
+		long objectId = stream.getLong();
+		String template = stream.getAscii();
+		SWGObject obj = ObjectCreator.createObjectFromTemplate(objectId, template);
+		obj.read(stream);
+		return obj;
 	}
 	
 }
