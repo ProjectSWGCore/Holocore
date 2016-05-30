@@ -58,6 +58,7 @@ import resources.player.Player;
 import resources.player.PlayerState;
 import resources.server_info.Log;
 import services.CoreManager;
+import services.objects.ObjectCreator;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -1077,28 +1078,14 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	 * Only sent if they are defined (can still be empty if defined).
 	 */
 	
-	/*
-	private SWGObject	parent	= null;
-	
-	private final Location location;
-	private final Map <String, String> attributes;
-	private ContainerPermissions containerPermissions;
-	private ObjectClassification classification = ObjectClassification.GENERATED;
-	private String	objectName	= "";
-	private int		volume		= 0;
-	private float	complexity	= 1;
-	private int     containerType = 0;
-	private double	loadRange	= 0;
-	private int		areaId		= -1;
-
-	private final HashMap <String, SWGObject> slots;
-	private final Map<Long, SWGObject> containedObjects;
-	 */
 	@Override
 	public void save(NetBufferStream stream) {
-		stream.addByte(0);
+		stream.addByte(1);
 		location.save(stream);
-		containerPermissions.save(stream);
+		ContainerPermissionsFactory.save(containerPermissions, stream);
+		stream.addBoolean(parent != null && parent.getClassification() != ObjectClassification.GENERATED);
+		if (parent != null && parent.getClassification() != ObjectClassification.GENERATED)
+			SWGObjectFactory.save(ObjectCreator.createObjectFromTemplate(parent.getObjectId(), parent.getTemplate()), stream);
 		synchronized (attributes) {
 			stream.addMap(attributes, (e) -> {
 				stream.addAscii(e.getKey());
@@ -1122,9 +1109,11 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	public void read(NetBufferStream stream) {
-		stream.getByte();
+		byte ver = stream.getByte();
 		location.read(stream);
-		containerPermissions.read(stream);
+		containerPermissions = ContainerPermissionsFactory.create(stream);
+		if (ver >= 1 && stream.getBoolean())
+			parent = SWGObjectFactory.create(stream);
 		stream.getList((i) -> attributes.put(stream.getAscii(), stream.getAscii()));
 		classification = ObjectClassification.valueOf(stream.getAscii());
 		objectName = stream.getUnicode();
