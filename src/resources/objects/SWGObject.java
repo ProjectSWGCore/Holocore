@@ -1079,7 +1079,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	@Override
 	public void save(NetBufferStream stream) {
-		stream.addByte(1);
+		stream.addByte(2);
 		location.save(stream);
 		ContainerPermissionsFactory.save(containerPermissions, stream);
 		stream.addBoolean(parent != null && parent.getClassification() != ObjectClassification.GENERATED);
@@ -1110,7 +1110,10 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	public void read(NetBufferStream stream) {
 		byte ver = stream.getByte();
 		location.read(stream);
-		containerPermissions = ContainerPermissionsFactory.create(stream);
+		if (ver <= 1)
+			containerPermissions.read(stream);
+		else
+			containerPermissions = ContainerPermissionsFactory.create(stream);
 		if (ver >= 1 && stream.getBoolean())
 			parent = SWGObjectFactory.create(stream);
 		stream.getList((i) -> attributes.put(stream.getAscii(), stream.getAscii()));
