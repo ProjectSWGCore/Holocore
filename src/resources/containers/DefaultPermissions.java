@@ -48,16 +48,28 @@ public class DefaultPermissions extends ContainerPermissions {
 
 	@Override
 	public boolean canRemove(SWGObject requester, SWGObject container) {
-		return requester.getOwner() == container.getOwner();
+		if (requester.getOwner() == null)
+			return true;
+		if (container.getOwner() == null)
+			return false;
+		return requester.getOwner().equals(container.getOwner());
 	}
 
 	@Override
 	public boolean canMove(SWGObject requester, SWGObject container) {
-		return requester.getOwner() == container.getOwner();
+		if (requester.getOwner() == null)
+			return true;
+		if (container.getOwner() == null)
+			return false;
+		return requester.getOwner().equals(container.getOwner());
 	}
 
 	@Override
 	public boolean canAdd(SWGObject requester, SWGObject container) {
-		return requester.getOwner() == container.getOwner();
+		if (requester.getOwner() == null)
+			return true;
+		if (container.getOwner() == null)
+			return false;
+		return requester.getOwner().equals(container.getOwner());
 	}
 }

@@ -38,11 +38,19 @@ public class InventoryPermissions extends DefaultPermissions {
 	
 	@Override
 	public boolean canView(SWGObject requester, SWGObject container) {
-		return requester.getOwner() == container.getOwner();
+		if (requester.getOwner() == null)
+			return true;
+		if (container.getOwner() == null)
+			return false;
+		return requester.getOwner().equals(container.getOwner());
 	}
 
 	@Override
 	public boolean canEnter(SWGObject requester, SWGObject container) {
-		return requester.getOwner() == container.getOwner();
+		if (requester.getOwner() == null)
+			return true;
+		if (container.getOwner() == null)
+			return false;
+		return requester.getOwner().equals(container.getOwner());
 	}
 }
