@@ -113,6 +113,9 @@ public class GroupService extends Service {
 			case GROUP_KICK:
 				handleKick(intent.getPlayer(), intent.getTarget());
 				break;
+			case GROUP_MAKE_MASTER_LOOTER:
+				handleMakeMasterLooter(intent.getPlayer(), intent.getTarget());
+				break;
 		}
 	}
 
@@ -269,6 +272,10 @@ public class GroupService extends Service {
 				return;
 			}
 
+			if (group.isFull()) {
+				sendSystemMessage(player, "full");
+				return;
+			}
 			if (target.getInviterData().getId() != 0 ) {
 				if(target.getInviterData().getId() != groupId)
 					sendSystemMessage(player, "considering_other_group");
@@ -349,7 +356,7 @@ public class GroupService extends Service {
 				return;
 			}
 
-			if (group.getGroupMembers().size() == 8) {
+			if (group.isFull()) {
 				sendSystemMessage(player, "join_full");
 				creo.updateGroupInviteData(null, 0, "");
 				return;
@@ -381,7 +388,43 @@ public class GroupService extends Service {
 		group.setLeader(newLeader);
 
 	}
-
+	
+	private void handleMakeMasterLooter(Player player, CreatureObject target) {
+		
+		CreatureObject playerCreo = player.getCreatureObject();
+		if (playerCreo.getGroupId() == 0) {
+			
+			sendSystemMessage(player, "group_only");
+			return;
+		}
+		
+		GroupObject group = getGroup(playerCreo.getGroupId());
+		
+		if (group.getLeader() != playerCreo.getObjectId()) {
+			
+			int lootRule = group.getLootRule();
+			sendNonLeaderLootMessage(player, lootRule);
+		}
+	}
+	
+	private void sendNonLeaderLootMessage(Player player, int lootRule) {
+		switch (lootRule) {
+			case 0:
+				sendSystemMessage(player, "leader_only");
+				break;
+			case GroupObject.LOOT_FREE_FOR_ALL:
+				sendSystemMessage(player, "leader_only_free4all");
+				break;
+			case GroupObject.LOOT_LOTTERY:
+				sendSystemMessage(player, "leader_only_lottery");
+				break;
+			case GroupObject.LOOT_MASTER:
+				sendSystemMessage(player, "leader_only_master");
+				break;
+			default:
+				break;
+		}
+	}
 	private void handleKick(Player leader, CreatureObject kickedCreo) {
 		
 		GroupObject group = getGroup(kickedCreo.getGroupId());

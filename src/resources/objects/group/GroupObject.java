@@ -53,6 +53,10 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 	private short level;
 	private long lootMaster;
 	private int lootRule;
+	
+	public static final int LOOT_FREE_FOR_ALL = 1;
+	public static final int LOOT_LOTTERY = 2;
+	public static final int LOOT_MASTER = 3;
 
 	private transient PickupPointTimer pickupPointTimer;
 
@@ -181,6 +185,8 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 		this.lootRule = lootRule;
 		sendDelta(6, 8, lootRule);
 	}
+	
+	public boolean isFull() { return groupMembers.size() == 9; }
 
 	public Map<String, Long> getGroupMembers() {
 		Map<String, Long> members = new HashMap<>();

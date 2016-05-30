@@ -73,6 +73,7 @@ public class GroupEventIntent extends Intent {
 		GROUP_DISBAND,
 		GROUP_LEAVE,
 		GROUP_MAKE_LEADER,
-		GROUP_KICK
+		GROUP_KICK,
+		GROUP_MAKE_MASTER_LOOTER
 	}
 }
