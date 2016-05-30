@@ -41,8 +41,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.nio.ByteBuffer;
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -194,9 +194,9 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 		return members;
 	}
 	
-	public ArrayList<CreatureObject> getGroupMemberObjects() {
+	public HashSet<CreatureObject> getGroupMemberObjects() {
 		
-		ArrayList<CreatureObject> memberObjects = new ArrayList<>();
+		HashSet<CreatureObject> memberObjects = new HashSet<>();
 		
 		synchronized (groupMembers) {
 			

@@ -50,6 +50,7 @@ import utilities.IntentFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Timer;
@@ -421,7 +422,7 @@ public class GroupService extends Service {
 
 	private void sendGroupSystemMessage(GroupObject group, String id) {
 		
-		ArrayList<CreatureObject> members = group.getGroupMemberObjects();
+		HashSet<CreatureObject> members = group.getGroupMemberObjects();
 		
 		for (CreatureObject member : members) {
 			new ChatBroadcastIntent(member.getOwner(), new ProsePackage("group", id)).broadcast();
