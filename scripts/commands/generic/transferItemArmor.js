@@ -12,11 +12,6 @@ function executeCommand(galacticManager, player, target, args) {
 	
 	switch (containerResult) {
 		case ContainerResult.SUCCESS:
-			if (actor.getEquipmentList().contains(target)) {
-				actor.removeEquipment(target);
-			} else if (newContainer === actor) {
-				actor.addEquipment(target);
-			}
 			break;
 		case ContainerResult.CONTAINER_FULL:
 			// TODO container03_prose if container is named

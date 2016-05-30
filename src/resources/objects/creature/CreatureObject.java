@@ -87,15 +87,21 @@ public class CreatureObject extends TangibleObject {
 	@Override
 	public void addObject(SWGObject obj) {
 		super.addObject(obj);
-		if (isEquipment(obj.getGameObjectType()))
+		if (isEquipment(obj.getGameObjectType())) {
 			addEquipment(obj);
+			if (obj instanceof WeaponObject && defaultWeapon != null && !obj.equals(defaultWeapon))
+				removeEquipment(defaultWeapon);
+		}
 	}
 	
 	@Override
 	public void removeObject(SWGObject obj) {
 		super.removeObject(obj);
-		if (isEquipment(obj.getGameObjectType()))
+		if (isEquipment(obj.getGameObjectType())) {
 			removeEquipment(obj);
+			if (obj instanceof WeaponObject && defaultWeapon != null && !obj.equals(defaultWeapon))
+				addEquipment(defaultWeapon);
+		}
 	}
 	
 	private boolean isEquipment(GameObjectType type) {

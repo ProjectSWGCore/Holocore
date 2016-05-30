@@ -406,10 +406,9 @@ public class CharacterCreationService extends Service {
 		creatureObj.setDefaultWeapon(defWeapon);
 		defWeapon.setMaxRange(5);
 		creatureObj.setEquippedWeapon(defWeapon);
-		creatureObj.addEquipment(createInventoryObject(objManager, creatureObj, "object/tangible/inventory/shared_character_inventory.iff"));
-		creatureObj.addEquipment(createInventoryObject(objManager, creatureObj, "object/tangible/datapad/shared_character_datapad.iff"));
-		creatureObj.addEquipment(createInventoryObject(objManager, creatureObj, "object/tangible/inventory/shared_appearance_inventory.iff"));
-		creatureObj.addEquipment(defWeapon);
+		createInventoryObject(objManager, creatureObj, "object/tangible/inventory/shared_character_inventory.iff");
+		createInventoryObject(objManager, creatureObj, "object/tangible/datapad/shared_character_datapad.iff");
+		createInventoryObject(objManager, creatureObj, "object/tangible/inventory/shared_appearance_inventory.iff");
 		createInventoryObject(objManager, creatureObj, "object/tangible/bank/shared_character_bank.iff");
 		createInventoryObject(objManager, creatureObj, "object/tangible/mission_bag/shared_mission_bag.iff");
 		
