@@ -33,7 +33,7 @@ import java.util.NoSuchElementException;
 
 public class QuadTree<V> {
 	
-	private static final double	DEFAULT_RANGE	= 1E-3;
+	private static final double	DEFAULT_RANGE	= 1E-5;
 	
 	private final QuadNode	headNode;
 	private final double	minX, minY, maxX, maxY;
