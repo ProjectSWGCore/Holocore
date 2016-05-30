@@ -43,6 +43,7 @@ import resources.buildout.BuildoutArea;
 import resources.client_info.visitors.ObjectData.ObjectDataAttribute;
 import resources.common.CRC;
 import resources.containers.ContainerPermissions;
+import resources.containers.ContainerPermissionsFactory;
 import resources.containers.ContainerResult;
 import resources.containers.DefaultPermissions;
 import resources.encodables.StringId;
@@ -224,6 +225,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	private ContainerResult moveToContainerChecks(SWGObject requester, SWGObject container) {
 		if(!hasPermission(requester, ContainerPermissions.Permission.MOVE)) {
+			Log.w("SWGObject", "No permission 'MOVE' for requestor %s with object %s", requester, this);
 			return ContainerResult.NO_PERMISSION;
 		}
 		if (container == null)
@@ -248,6 +250,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			for (String slotName : getArrangement().get(arrangementId - 4)) {
 				SWGObject equippedItem = container.getSlottedObject(slotName);
 				if (equippedItem != null) {
+					Log.d("SWGObject", "Moving %s into inventory %s", equippedItem, container.getSlottedObject("inventory"));
 					equippedItem.moveToContainer(requester, container.getSlottedObject("inventory"));
 				}
 			}
@@ -1006,16 +1009,12 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 
 	@Override
 	public String toString() {
-		return "SWGObject[ID=" + objectId + " NAME=" + objectName + " TEMPLATE=" + template + "]";
+		return String.format("SWGObject[%d '%s' %s]", objectId, objectName, template.replace("object/", ""));
 	}
 	
 	@Override
 	public int compareTo(SWGObject obj) {
-		if (getObjectId() < obj.getObjectId())
-			return -1;
-		if (getObjectId() == obj.getObjectId())
-			return 0;
-		return 1;
+		return Long.compare(objectId, obj.getObjectId());
 	}
 	
 	@Override

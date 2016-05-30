@@ -121,42 +121,31 @@ public class ObjectManager extends Manager {
 	private void loadClientObjects() {
 		Collection<SWGObject> objects = clientBuildoutService.loadClientObjects();
 		for (SWGObject object : objects) {
-			putObject(object);
 			new ObjectCreatedIntent(object).broadcast();
 		}
 	}
 	
 	private void loadObject(SWGObject obj) {
-		obj.setOwner(null);
-		// if creature is not a player
-		if (!(obj instanceof CreatureObject && ((CreatureObject) obj).isLoggedOutPlayer()))
-			objectAwareness.add(obj);
-		else	// If creature is a player
+		if (obj instanceof CreatureObject && ((CreatureObject) obj).isPlayer())
 			Scripts.invoke("objects/load_creature", "onLoad", obj);
 		
-		putObject(obj);
 		updateBuildoutParent(obj);
 		addChildrenObjects(obj);
-		new ObjectCreatedIntent(obj).broadcast();
 	}
 	
 	private void updateBuildoutParent(SWGObject obj) {
 		if (obj.getParent() != null) {
-			if (!obj.getParent().isGenerated()) {
-				long id = obj.getParent().getObjectId();
-				SWGObject parent = getObjectById(id);
-				obj.moveToContainer(parent);
-				if (parent == null)
-					Log.e("ObjectManager", "Parent for %s is null! ParentID: %d", obj, id);
-			} else {
-				updateBuildoutParent(obj.getParent());
-			}
+			long id = obj.getParent().getObjectId();
+			SWGObject parent = getObjectById(id);
+			obj.moveToContainer(parent);
+			if (parent == null)
+				Log.e("ObjectManager", "Parent for %s is null! ParentID: %d", obj, id);
 		}
 	}
 	
 	private void addChildrenObjects(SWGObject obj) {
+		new ObjectCreatedIntent(obj).broadcast();
 		for (SWGObject child : obj.getContainedObjects()) {
-			putObject(child);
 			addChildrenObjects(child);
 		}
 	}
@@ -255,9 +244,10 @@ public class ObjectManager extends Manager {
 	}
 	
 	private void putObject(SWGObject object) {
-		ObjectCreator.updateMaxObjectId(object.getObjectId());
 		synchronized (objectMap) {
-			objectMap.put(object.getObjectId(), object);
+			SWGObject replaced = objectMap.put(object.getObjectId(), object);
+			if (replaced != null)
+				Log.e(this, "Replaced object in object map! Old: %s  New: %s", replaced, object);
 		}
 	}
 
