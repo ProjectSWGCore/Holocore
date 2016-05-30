@@ -98,6 +98,9 @@ public class GroupService extends Service {
 			case GROUP_JOIN:
 				handleGroupJoin(intent.getPlayer());
 				break;
+			case GROUP_DECLINE:
+				handleGroupDecline(intent.getPlayer());
+				break;
 			case GROUP_DISBAND:
 				handleGroupDisband(intent.getPlayer(), intent.getTarget());
 				break;
@@ -357,6 +360,17 @@ public class GroupService extends Service {
 		sendSystemMessage(player, "joined_self");
 		creo.updateGroupInviteData(null, 0, "");
 		// TODO: Join group chat room
+	}
+	
+	private void handleGroupDecline(Player invitee) {
+		
+		CreatureObject creo = invitee.getCreatureObject();
+		GroupInviterData invitation = creo.getInviterData();
+		
+		sendSystemMessage(invitee, "decline_self", "TT", invitation.getSender().getCharacterName());
+		sendSystemMessage(invitation.getSender(), "decline_leader", "TT", invitee.getCharacterName());
+		
+		creo.updateGroupInviteData(null, 0, "");
 	}
 	
 	private void handleMakeLeader(Player formerLeader, CreatureObject newLeader) {

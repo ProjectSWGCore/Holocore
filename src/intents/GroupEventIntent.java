@@ -69,6 +69,7 @@ public class GroupEventIntent extends Intent {
 	public enum GroupEventType {
 		GROUP_INVITE,
 		GROUP_JOIN,
+		GROUP_DECLINE,
 		GROUP_DISBAND,
 		GROUP_LEAVE,
 		GROUP_MAKE_LEADER,
