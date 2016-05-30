@@ -41,11 +41,10 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class GroupObject extends SWGObject { // Extends INTO or TANO?
 	
@@ -54,7 +53,6 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 	private short level;
 	private long lootMaster;
 	private int lootRule;
-	private HashMap<GroupMember, Timer> logoffTimers = new HashMap<>();
 
 	private transient PickupPointTimer pickupPointTimer;
 
@@ -73,7 +71,7 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 		super.createBaseline6(target, bb); // BASE06 -- 2 variables
 		bb.addObject(groupMembers); // 2 -- NOTE: First person is the leader
 		bb.addInt(0); // formationmembers // 3
-			bb.addInt(0); // updateCount
+		bb.addInt(0); // updateCount
 		bb.addAscii(""); // groupName // 4
 		bb.addShort(level); // 5
 		bb.addInt(0); // formationNameCrc // 6
@@ -81,9 +79,9 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 		bb.addInt(lootRule); // 8
 		bb.addObject(pickupPointTimer); // 9
 		bb.addAscii(""); // PickupPoint planetName // 10
-			bb.addFloat(0); // x
-			bb.addFloat(0); // y
-			bb.addFloat(0); // z
+		bb.addFloat(0); // x
+		bb.addFloat(0); // y
+		bb.addFloat(0); // z
 
 		bb.incrementOperandCount(9);
 	}
@@ -196,6 +194,19 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 		return members;
 	}
 	
+	public ArrayList<CreatureObject> getGroupMemberObjects() {
+		
+		ArrayList<CreatureObject> memberObjects = new ArrayList<>();
+		
+		synchronized (groupMembers) {
+			
+			for (GroupMember groupMember : groupMembers)
+				memberObjects.add(groupMember.playerCreo);
+		}
+		
+		return memberObjects;
+	}
+	
 	private GroupMember getGroupMember(Player player) {
 		
 		GroupMember foundMember = null;
@@ -209,31 +220,6 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 		}
 		
 		return foundMember;
-	}
-	
-	public void markPlayerForLogoff(Player player) {
-		
-		// Create a timer with the GroupMember player owns as the key
-		// and a timer set to fire and remove that member as the value
-		GroupMember loggedMember = this.getGroupMember(player);
-		
-		Timer timer = new Timer();
-		LogOffTask task = new LogOffTask(this, player.getCreatureObject());
-		
-		timer.schedule(task, 240000);
-		
-		this.logoffTimers.put(loggedMember, timer);
-	}
-	
-	public void unmarkPlayerForLogoff(Player player) {
-		
-		GroupMember loggedMember = this.getGroupMember(player);
-		
-		if (loggedMember == null)
-			return;
-		
-		// Cancel the timer and remove from the list
-		this.logoffTimers.remove(loggedMember).cancel();
 	}
 	
 	public void disbandGroup() {
@@ -327,24 +313,5 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 			result = 31 * result + name.hashCode();
 			return result;
 		}
-	}
-	
-	private static class LogOffTask extends TimerTask {
-		
-		GroupObject taskingGroup;
-		CreatureObject loggedMember;
-		
-		public LogOffTask(GroupObject group, CreatureObject member) {
-			
-			this.taskingGroup = group;
-			this.loggedMember = member;
-		}
-		
-		@Override
-		public void run() {
-			
-			this.taskingGroup.removeMember(loggedMember);
-		}
-		
 	}
 }

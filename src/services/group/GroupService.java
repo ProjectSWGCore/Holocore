@@ -30,6 +30,7 @@ package services.group;
 import intents.GroupEventIntent;
 import intents.NotifyPlayersPacketIntent;
 import intents.PlayerEventIntent;
+import intents.chat.ChatBroadcastIntent;
 import intents.chat.ChatRoomUpdateIntent;
 import intents.object.ObjectCreatedIntent;
 import network.packets.swg.zone.chat.ChatSystemMessage;
@@ -51,6 +52,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by Waverunner on 10/4/2015
@@ -58,7 +61,8 @@ import java.util.Map;
 public class GroupService extends Service {
 	
 	private final Map<Long, GroupObject> groups = new HashMap<>();
-	
+	private HashMap<CreatureObject, Timer> logoffTimers = new HashMap<>();
+
 	public GroupService() {
 		registerForIntent(GroupEventIntent.TYPE);
 		registerForIntent(PlayerEventIntent.TYPE);
@@ -135,7 +139,7 @@ public class GroupService extends Service {
 		}
 
 		// Tell group to remove that player from the log off timer
-		groupObject.unmarkPlayerForLogoff(player);
+		unmarkPlayerForLogoff(player);
 		groupObject.updateMember(creatureObject);
 	}
 
@@ -151,7 +155,32 @@ public class GroupService extends Service {
 		if (group == null)
 			return;
 		
-		group.markPlayerForLogoff(player);
+		markPlayerForLogoff(player);
+	}
+	
+	public void markPlayerForLogoff(Player player) {
+		
+		// Create a timer with the GroupMember player owns as the key
+		// and a timer set to fire and remove that member as the value
+		
+		Timer timer = new Timer();
+		CreatureObject playerCreo = player.getCreatureObject();
+		LogOffTask task = new LogOffTask(this, player.getCreatureObject());
+		
+		timer.schedule(task, 60000);
+		
+		this.logoffTimers.put(playerCreo, timer);
+		System.out.println(this.logoffTimers);
+	}
+	
+	public void unmarkPlayerForLogoff(Player player ) {
+		
+		CreatureObject playerCreo = player.getCreatureObject();
+		
+		if (playerCreo.getGroupId() == 0)
+			return;
+		
+		this.logoffTimers.remove(playerCreo).cancel();
 	}
 	
 	private void handleGroupDisband(Player player, CreatureObject target) {
@@ -201,6 +230,8 @@ public class GroupService extends Service {
 		}
 		
 		// Otherwise, remove player
+		sendGroupSystemMessage(group, "other_left_prose", "TU", creo.getObjectId());
+		sendSystemMessage(creo.getOwner(), "removed");
 		group.removeMember(creo);
 		
 	}
@@ -208,6 +239,11 @@ public class GroupService extends Service {
 	private void handleGroupInvite(Player player, CreatureObject target) {
 		CreatureObject playerCreo = player.getCreatureObject();
 
+		if (target == null) {
+			sendSystemMessage(player, "invite_no_target_self");
+			return;
+		}
+		
 		Player targetOwner = target.getOwner();
 		if (targetOwner == null)
 			return;
@@ -361,18 +397,6 @@ public class GroupService extends Service {
 
 		sendGroupSystemMessage(group, "disbanded");
 		group.disbandGroup();
-		
-//		for (String name : members.keySet()) {
-//			Player memPlayer = playerManager.getPlayerByCreatureName(name);
-//			if (memPlayer == null)
-//				continue;
-//
-//			CreatureObject memCreo = memPlayer.getCreatureObject();
-//			if (memCreo == null)
-//				continue;
-//
-//			group.removeMember(memCreo);
-//		}
 
 		// TODO: Object destroy intent
 	}
@@ -396,11 +420,14 @@ public class GroupService extends Service {
 	}
 
 	private void sendGroupSystemMessage(GroupObject group, String id) {
-		Map<String, Long> members = group.getGroupMembers();
+		
+		ArrayList<CreatureObject> members = group.getGroupMemberObjects();
+		
+		for (CreatureObject member : members) {
+			new ChatBroadcastIntent(member.getOwner(), new ProsePackage("group", id)).broadcast();
 
-		List<Long> ids = new ArrayList<>(members.values());
-
-		new NotifyPlayersPacketIntent(new ChatSystemMessage(ChatSystemMessage.SystemChatType.SCREEN_AND_CHAT, "@group:" + id), ids).broadcast();
+		}
+		//new NotifyPlayersPacketIntent(new ChatSystemMessage(ChatSystemMessage.SystemChatType.SCREEN_AND_CHAT, "@group:" + id), ids).broadcast();
 	}
 
 	private void sendGroupSystemMessage(GroupObject group, String id, Object ... objects) {
@@ -430,10 +457,36 @@ public class GroupService extends Service {
 	}
 
 	private void sendSystemMessage(Player target, String id) {
-		target.sendPacket(new ChatSystemMessage(ChatSystemMessage.SystemChatType.SCREEN_AND_CHAT, id));
+		new ChatBroadcastIntent(target, new ProsePackage("group", id)).broadcast();
 	}
 
 	private void sendSystemMessage(Player target, String id, Object ... objects) {
 		IntentFactory.sendSystemMessage(target, "@group:" + id, objects);
 	}
+	
+	private void removeTimer(CreatureObject groupMember) {
+		
+		this.logoffTimers.remove(groupMember).cancel();
+	}
+	
+	private static class LogOffTask extends TimerTask {
+
+		GroupService taskingGroupService;
+		CreatureObject loggedMember;
+
+		public LogOffTask(GroupService groupService, CreatureObject member) {
+
+			this.taskingGroupService = groupService;
+			this.loggedMember = member;
+		}
+
+		@Override
+		public void run() {
+
+			this.taskingGroupService.handleGroupLeave(loggedMember.getOwner());
+			this.taskingGroupService.removeTimer(loggedMember);
+		}
+	}
 }
+
+
