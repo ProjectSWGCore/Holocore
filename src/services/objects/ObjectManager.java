@@ -99,9 +99,13 @@ public class ObjectManager extends Manager {
 	
 	@Override
 	public boolean initialize() {
-		loadClientObjects();
+		Collection<SWGObject> buildouts = clientBuildoutService.loadClientObjects();
 		if (!loadObjects())
 			return false;
+		for (SWGObject obj : buildouts) {
+			putObject(obj);
+			new ObjectCreatedIntent(obj).broadcast();
+		}
 		return super.initialize();
 	}
 	
@@ -116,13 +120,6 @@ public class ObjectManager extends Manager {
 		double loadTime = (System.nanoTime() - startLoad) / 1E6;
 		Log.i("ObjectManager", "Finished loading %d objects. Time: %fms", database.size(), loadTime);
 		return true;
-	}
-	
-	private void loadClientObjects() {
-		Collection<SWGObject> objects = clientBuildoutService.loadClientObjects();
-		for (SWGObject object : objects) {
-			new ObjectCreatedIntent(object).broadcast();
-		}
 	}
 	
 	private void loadObject(SWGObject obj) {
@@ -145,6 +142,10 @@ public class ObjectManager extends Manager {
 	
 	private void addChildrenObjects(SWGObject obj) {
 		new ObjectCreatedIntent(obj).broadcast();
+		for (SWGObject child : obj.getSlots().values()) {
+			if (child != null)
+				addChildrenObjects(child);
+		}
 		for (SWGObject child : obj.getContainedObjects()) {
 			addChildrenObjects(child);
 		}
@@ -246,7 +247,7 @@ public class ObjectManager extends Manager {
 	private void putObject(SWGObject object) {
 		synchronized (objectMap) {
 			SWGObject replaced = objectMap.put(object.getObjectId(), object);
-			if (replaced != null)
+			if (replaced != null && replaced != object)
 				Log.e(this, "Replaced object in object map! Old: %s  New: %s", replaced, object);
 		}
 	}
