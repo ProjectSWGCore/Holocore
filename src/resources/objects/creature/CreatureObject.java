@@ -44,7 +44,6 @@ import resources.collections.SWGSet;
 import resources.network.BaselineBuilder;
 import resources.network.NetBuffer;
 import resources.network.NetBufferStream;
-import resources.objects.GameObjectType;
 import resources.objects.SWGObject;
 import resources.objects.player.PlayerObject;
 import resources.objects.tangible.TangibleObject;
@@ -87,52 +86,30 @@ public class CreatureObject extends TangibleObject {
 	@Override
 	public void addObject(SWGObject obj) {
 		super.addObject(obj);
-		if (isEquipment(obj.getGameObjectType())) {
+		if (getArrangementId(obj) != -1 && !(obj instanceof PlayerObject)) {
 			addEquipment(obj);
-			if (obj instanceof WeaponObject && defaultWeapon != null && !obj.equals(defaultWeapon))
-				removeEquipment(defaultWeapon);
+			if (obj instanceof WeaponObject && defaultWeapon != null && !obj.equals(defaultWeapon)) {
+				removeObject(defaultWeapon);
+			}
 		}
 	}
 	
 	@Override
 	public void removeObject(SWGObject obj) {
 		super.removeObject(obj);
-		if (isEquipment(obj.getGameObjectType())) {
+		if (getArrangementId(obj) != -1 && !(obj instanceof PlayerObject)) {
 			removeEquipment(obj);
-			if (obj instanceof WeaponObject && defaultWeapon != null && !obj.equals(defaultWeapon))
-				addEquipment(defaultWeapon);
-		}
-	}
-	
-	private boolean isEquipment(GameObjectType type) {
-		switch (type.getMask()) {
-			case GOTM_ARMOR:
-			case GOTM_CLOTHING:
-			case GOTM_CYBERNETIC:
-			case GOTM_JEWELRY:
-			case GOTM_TOOL:
-			case GOTM_WEAPON:
-				return true;
-			case GOTM_MISC:
-				switch (type) {
-					case GOT_MISC_CONTAINER:
-					case GOT_MISC_CONTAINER_PUBLIC:
-					case GOT_MISC_CONTAINER_SHIP_LOOT:
-					case GOT_MISC_CONTAINER_WEARABLE:
-						return true;
-					default:
-						return false;
-				}
-			default:
-				return false;
+			if (obj instanceof WeaponObject && defaultWeapon != null && !obj.equals(defaultWeapon)) {
+				addObject(defaultWeapon);
+			}
 		}
 	}
 
-	public void addEquipment(SWGObject obj) {
+	private void addEquipment(SWGObject obj) {
 		creo6.addEquipment(obj, this);
 	}
 
-	public void removeEquipment(SWGObject obj) {
+	private void removeEquipment(SWGObject obj) {
 		creo6.removeEquipment(obj, this);
 	}
 	

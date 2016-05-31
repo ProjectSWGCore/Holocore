@@ -390,7 +390,6 @@ public class CharacterCreationService extends Service {
 		hairObj.setAppearanceData(customization);
 		
 		hairObj.moveToContainer(creatureObj); // hair slot
-		creatureObj.addEquipment(hairObj);
 	}
 	
 	private void setCreatureObjectValues(ObjectManager objManager, CreatureObject creatureObj, ClientCreateCharacter create) {
@@ -434,7 +433,6 @@ public class CharacterCreationService extends Service {
 				return;
 			// Move the new item to the player's clothing slots and add to equipment list
 			item.moveToContainer(player, player);
-			player.addEquipment(item);
 		}
 		
 		SWGObject inventory = player.getSlottedObject("inventory");

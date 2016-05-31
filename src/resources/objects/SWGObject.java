@@ -163,7 +163,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		// This object is a container object, so remove it from the container
 		if (object.getSlotArrangement() == -1) {
 			synchronized (containedObjects) {
-				containedObjects.remove(object.objectId);
+				containedObjects.remove(object);
 			}
 		} else {
 			for (String slot : (slotArrangement == -1 ?
@@ -250,7 +250,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			for (String slotName : getArrangement().get(arrangementId - 4)) {
 				SWGObject equippedItem = container.getSlottedObject(slotName);
 				if (equippedItem != null) {
-					Log.d("SWGObject", "Moving %s into inventory %s", equippedItem, container.getSlottedObject("inventory"));
 					equippedItem.moveToContainer(requester, container.getSlottedObject("inventory"));
 				}
 			}
