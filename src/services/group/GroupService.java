@@ -336,6 +336,8 @@ public class GroupService extends Service {
 	}
 	
 	private void handleGroupJoin(Player player) {
+		
+		GroupObject group = null;
 		CreatureObject creo = player.getCreatureObject();
 
 		GroupInviterData invitation = creo.getInviterData();
@@ -347,19 +349,20 @@ public class GroupService extends Service {
 			return;
 		}
 
-		GroupObject group = getGroup(groupId);
-
 		Player sender = invitation.getSender();
 
-		if (invitation.getSender() == null) {
+		if (sender == null) {
 			// Inviter logged out, invitation is no good
 			sendSystemMessage(player, "must_be_invited");
 			creo.updateGroupInviteData(null, 0, "");
 			return;
 		}
 
+		CreatureObject senderCreo = sender.getCreatureObject();
+		
 		// Group doesn't exist yet
-		if (group == null) {
+		//if (group == null) {
+		if (senderCreo.getGroupId() == 0) {
 
 			group = createGroup(sender);
 
@@ -369,13 +372,14 @@ public class GroupService extends Service {
 				return;
 			}
 
-			group.addMember(sender.getCreatureObject());
+			group.addMember(senderCreo);
 
-			sendSystemMessage(sender, "formed_self", "TT", sender.getCreatureObject().getObjectId());
+			sendSystemMessage(sender, "formed_self", "TT", senderCreo.getObjectId());
 
 			// TODO: Join group chat room
 		} else {
 			// Group already exists
+			group = getGroup(senderCreo.getGroupId());
 
 			if (group.getLeader() != sender.getCreatureObject().getObjectId()) {
 				sendSystemMessage(player, "join_inviter_not_leader", sender.getCreatureObject().getObjectId());
@@ -389,9 +393,9 @@ public class GroupService extends Service {
 				return;
 			}
 		}
-		sendGroupSystemMessage(group, "other_joined_prose", "TU", creo.getObjectId());
-		group.addMember(creo);
+		
 		sendSystemMessage(player, "joined_self");
+		group.addMember(creo);
 		creo.updateGroupInviteData(null, 0, "");
 		// TODO: Join group chat room
 	}
