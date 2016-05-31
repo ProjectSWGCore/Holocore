@@ -443,6 +443,7 @@ public class GroupService extends Service {
 		
 		// Otherwise kick the member
 		group.removeMember(kickedCreo);
+		sendSystemMessage(kickedCreo.getOwner(), "removed");
 	}
 
 	private void destroyGroup(GroupObject group, Player player) {
