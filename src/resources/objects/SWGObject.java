@@ -46,6 +46,7 @@ import resources.containers.ContainerPermissions;
 import resources.containers.ContainerPermissionsFactory;
 import resources.containers.ContainerResult;
 import resources.containers.DefaultPermissions;
+import resources.containers.ContainerPermissions.Permission;
 import resources.encodables.StringId;
 import resources.network.BaselineBuilder;
 import resources.network.BaselineObject;
@@ -290,6 +291,16 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 					break;
 			}
 		}
+		return true;
+	}
+	
+	public boolean isVisible(SWGObject target) {
+		if (target == null)
+			return true;
+		if (!hasPermission(target, Permission.VIEW))
+			return false;
+		if (getParent() != null)
+			return getParent().isVisible(target);
 		return true;
 	}
 
@@ -823,7 +834,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		}
 		Set<SWGObject> observers = new HashSet<>();
 		for (SWGObject aware : nearby) {
-			if (!aware.hasPermission(original, ContainerPermissions.Permission.VIEW))
+			if (!aware.isVisible(original))
 				continue;
 			if (aware instanceof CreatureObject) {
 				Player awareOwner = aware.getOwner();
