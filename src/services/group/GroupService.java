@@ -95,6 +95,9 @@ public class GroupService extends Service {
 			case GROUP_INVITE:
 				handleGroupInvite(intent.getPlayer(), intent.getTarget());
 				break;
+			case GROUP_UNINVITE:
+				handleGroupUninvite(intent.getPlayer(), intent.getTarget());
+				break;
 			case GROUP_JOIN:
 				handleGroupJoin(intent.getPlayer());
 				break;
@@ -306,6 +309,30 @@ public class GroupService extends Service {
 		
 		// Set the invite data to -1 to mark a new group to be formed
 		invitee.updateGroupInviteData(groupLeader, -1, groupLeader.getCharacterName());
+	}
+	
+	private void handleGroupUninvite(Player player, CreatureObject target) {
+		
+		CreatureObject playerCreo = player.getCreatureObject();
+		
+		if (target == null) {
+			sendSystemMessage(player, "uninvite_no_target_self");
+			return;
+		}
+		
+		Player targetOwner = target.getOwner();
+		String targetName = targetOwner.getCharacterName();
+		if (targetOwner == null)
+			return;
+		
+		if (target.getInviterData() == null) {
+			sendSystemMessage(player, "uninvite_not_invited", "TT", targetName);
+			return;
+		}
+		
+		sendSystemMessage(player, "uninvite_self", "TT", targetName);
+		sendSystemMessage(targetOwner, "uninvite_target", "TT", player.getCharacterName());
+		target.updateGroupInviteData(null, 0, "");
 	}
 	
 	private void handleGroupJoin(Player player) {
