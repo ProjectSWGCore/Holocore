@@ -385,8 +385,9 @@ public class GroupService extends Service {
 		// Set the group leader to newLeader
 		// TODO: send system message
 		GroupObject group = getGroup(newLeader.getGroupId());
+		
+		sendGroupSystemMessage(group, "new_leader", "TU", newLeader.getName());
 		group.setLeader(newLeader);
-
 	}
 	
 	private void handleMakeMasterLooter(Player player, CreatureObject target) {
@@ -403,7 +404,6 @@ public class GroupService extends Service {
 		if (group.getLeader() != playerCreo.getObjectId()) {
 			
 			int lootRule = group.getLootRule();
-			sendNonLeaderLootMessage(player, lootRule);
 		}
 	}
 	
@@ -489,20 +489,28 @@ public class GroupService extends Service {
 	}
 
 	private void sendGroupSystemMessage(GroupObject group, String id, Object ... objects) {
-		Map<String, Long> members = group.getGroupMembers();
+		
+		HashSet<CreatureObject> members = group.getGroupMemberObjects();
+		
+		for (CreatureObject member : members) {
+			IntentFactory.sendSystemMessage(member.getOwner(), "@group:" + id, objects);
 
-		List<Long> ids = new ArrayList<>(members.values());
-
-		if (objects.length % 2 != 0)
-			Log.e("ProsePackage", "Sent a ProsePackage chat message with an uneven number of object arguments for StringId %s", "@group:" + id);
-		Object [] prose = new Object[objects.length + 2];
-		prose[0] = "StringId";
-		prose[1] = new StringId("@group:" + id);
-		System.arraycopy(objects, 0, prose, 2, objects.length);
-
-		new NotifyPlayersPacketIntent(
-				new ChatSystemMessage(ChatSystemMessage.SystemChatType.SCREEN_AND_CHAT,
-						new OutOfBandPackage(new ProsePackage(prose))), ids).broadcast();
+		}
+		
+//		Map<String, Long> members = group.getGroupMembers();
+//
+//		List<Long> ids = new ArrayList<>(members.values());
+//
+//		if (objects.length % 2 != 0)
+//			Log.e("ProsePackage", "Sent a ProsePackage chat message with an uneven number of object arguments for StringId %s", "@group:" + id);
+//		Object [] prose = new Object[objects.length + 2];
+//		prose[0] = "StringId";
+//		prose[1] = new StringId("@group:" + id);
+//		System.arraycopy(objects, 0, prose, 2, objects.length);
+//
+//		new NotifyPlayersPacketIntent(
+//				new ChatSystemMessage(ChatSystemMessage.SystemChatType.SCREEN_AND_CHAT,
+//						new OutOfBandPackage(new ProsePackage(prose))), ids).broadcast();
 	}
 
 	private String getGroupChatPath(long groupId, String galaxy) {
