@@ -28,18 +28,14 @@
 package services.group;
 
 import intents.GroupEventIntent;
-import intents.NotifyPlayersPacketIntent;
 import intents.PlayerEventIntent;
 import intents.chat.ChatBroadcastIntent;
 import intents.chat.ChatRoomUpdateIntent;
 import intents.object.ObjectCreatedIntent;
-import network.packets.swg.zone.chat.ChatSystemMessage;
 import resources.chat.ChatAvatar;
 import resources.control.Intent;
 import resources.control.Service;
-import resources.encodables.OutOfBandPackage;
 import resources.encodables.ProsePackage;
-import resources.encodables.StringId;
 import resources.objects.creature.CreatureObject;
 import resources.objects.group.GroupObject;
 import resources.player.Player;
@@ -48,10 +44,8 @@ import services.objects.ObjectCreator;
 import services.player.PlayerManager;
 import utilities.IntentFactory;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -135,6 +129,10 @@ public class GroupService extends Service {
 	}
 
 	private void handleMemberRezoned(Player player) {
+		
+		if (player == null)
+			return;
+		
 		CreatureObject creatureObject = player.getCreatureObject();
 		long groupId = creatureObject.getGroupId();
 
@@ -142,6 +140,7 @@ public class GroupService extends Service {
 			return;
 
 		GroupObject groupObject = getGroup(creatureObject.getGroupId());
+		
 		if (groupObject == null) {
 			// Group was destroyed while logged out
 			creatureObject.setGroupId(0);
@@ -155,6 +154,9 @@ public class GroupService extends Service {
 
 	private void handleMemberLoggedOff(Player player) {
 	
+		if (player == null)
+			return;
+		
 		CreatureObject playerCreo = player.getCreatureObject();
 		
 		if (playerCreo == null)
@@ -177,13 +179,12 @@ public class GroupService extends Service {
 		CreatureObject playerCreo = player.getCreatureObject();
 		LogOffTask task = new LogOffTask(this, player.getCreatureObject());
 		
-		timer.schedule(task, 60000);
+		timer.schedule(task, 240000);
 		
 		this.logoffTimers.put(playerCreo, timer);
-		System.out.println(this.logoffTimers);
 	}
 	
-	public void unmarkPlayerForLogoff(Player player ) {
+	public void unmarkPlayerForLogoff(Player player) {
 		
 		CreatureObject playerCreo = player.getCreatureObject();
 		
@@ -243,7 +244,6 @@ public class GroupService extends Service {
 		sendGroupSystemMessage(group, "other_left_prose", "TU", creo.getObjectId());
 		sendSystemMessage(creo.getOwner(), "removed");
 		group.removeMember(creo);
-		
 	}
 
 	private void handleGroupInvite(Player player, CreatureObject target) {
@@ -322,6 +322,7 @@ public class GroupService extends Service {
 		
 		Player targetOwner = target.getOwner();
 		String targetName = targetOwner.getCharacterName();
+		
 		if (targetOwner == null)
 			return;
 		
@@ -361,7 +362,6 @@ public class GroupService extends Service {
 		CreatureObject senderCreo = sender.getCreatureObject();
 		
 		// Group doesn't exist yet
-		//if (group == null) {
 		if (senderCreo.getGroupId() == 0) {
 
 			group = createGroup(sender);
@@ -411,11 +411,26 @@ public class GroupService extends Service {
 		creo.updateGroupInviteData(null, 0, "");
 	}
 	
-	private void handleMakeLeader(Player formerLeader, CreatureObject newLeader) {
+	private void handleMakeLeader(Player currentLeader, CreatureObject newLeader) {
 
-		// Set the group leader to newLeader
-		// TODO: send system message
+		if (newLeader == null || currentLeader == null)
+			return;
+		
+		CreatureObject currentLeaderCreo = currentLeader.getCreatureObject();
 		GroupObject group = getGroup(newLeader.getGroupId());
+		
+		if (group == null)
+			return;
+		
+		if (group.getLeader() != currentLeaderCreo.getObjectId()) {
+			sendSystemMessage(currentLeader, "must_be_leader");
+			return;
+		}
+		
+		if (group.getLeader() == newLeader.getObjectId())
+			return;
+		
+		// Set the group leader to newLeader
 		
 		sendGroupSystemMessage(group, "new_leader", "TU", newLeader.getName());
 		group.setLeader(newLeader);
@@ -458,7 +473,13 @@ public class GroupService extends Service {
 	}
 	private void handleKick(Player leader, CreatureObject kickedCreo) {
 		
+		if (!basicChecks(leader, kickedCreo))
+			return;
+		
 		GroupObject group = getGroup(kickedCreo.getGroupId());
+		
+		if (group == null)
+			return;
 
 		// Make sure leader is truly the leader
 		if (group.getLeader() != leader.getCreatureObject().getObjectId()) {
@@ -513,11 +534,8 @@ public class GroupService extends Service {
 		
 		HashSet<CreatureObject> members = group.getGroupMemberObjects();
 		
-		for (CreatureObject member : members) {
+		for (CreatureObject member : members)
 			new ChatBroadcastIntent(member.getOwner(), new ProsePackage("group", id)).broadcast();
-
-		}
-		//new NotifyPlayersPacketIntent(new ChatSystemMessage(ChatSystemMessage.SystemChatType.SCREEN_AND_CHAT, "@group:" + id), ids).broadcast();
 	}
 
 	private void sendGroupSystemMessage(GroupObject group, String id, Object ... objects) {
@@ -528,21 +546,6 @@ public class GroupService extends Service {
 			IntentFactory.sendSystemMessage(member.getOwner(), "@group:" + id, objects);
 
 		}
-		
-//		Map<String, Long> members = group.getGroupMembers();
-//
-//		List<Long> ids = new ArrayList<>(members.values());
-//
-//		if (objects.length % 2 != 0)
-//			Log.e("ProsePackage", "Sent a ProsePackage chat message with an uneven number of object arguments for StringId %s", "@group:" + id);
-//		Object [] prose = new Object[objects.length + 2];
-//		prose[0] = "StringId";
-//		prose[1] = new StringId("@group:" + id);
-//		System.arraycopy(objects, 0, prose, 2, objects.length);
-//
-//		new NotifyPlayersPacketIntent(
-//				new ChatSystemMessage(ChatSystemMessage.SystemChatType.SCREEN_AND_CHAT,
-//						new OutOfBandPackage(new ProsePackage(prose))), ids).broadcast();
 	}
 
 	private String getGroupChatPath(long groupId, String galaxy) {
@@ -565,6 +568,11 @@ public class GroupService extends Service {
 	private void removeTimer(CreatureObject groupMember) {
 		
 		this.logoffTimers.remove(groupMember).cancel();
+	}
+	
+	private static boolean basicChecks(Player player, CreatureObject target) {
+		
+		return (player == null || target == null);
 	}
 	
 	private static class LogOffTask extends TimerTask {
