@@ -52,21 +52,21 @@ public class Equipment implements Encodable, Persistable {
 	private CRC				template;
 	
 	public Equipment() {
-		this(0, null);
+		this(0, "", 4);
 	}
 	
-	public Equipment(long objectId, String template) {
+	public Equipment(SWGObject obj) {
+		this(obj.getObjectId(), obj.getTemplate(), obj.getSlotArrangement());
+		if (obj instanceof WeaponObject)
+			this.weapon = (WeaponObject) obj;
+	}
+	
+	private Equipment(long objectId, String template, int arrangementId) {
 		this.objectId = objectId;
 		this.template = new CRC(template);
 		this.customizationString = new byte[0];
 		this.arrangementId = 4;
-		this.objectId = 0;
 		this.weapon = null;
-	}
-	
-	public Equipment(WeaponObject weapon) {
-		this(weapon.getObjectId(), weapon.getTemplate());
-		this.weapon = weapon;
 	}
 	
 	@Override
@@ -175,10 +175,10 @@ public class Equipment implements Encodable, Persistable {
 
 	@Override
 	public boolean equals(Object o) {
-		if (!(o instanceof SWGObject))
-			return super.equals(o);
+		if (!(o instanceof Equipment))
+			return false;
 
-		return ((SWGObject) o).getObjectId() == objectId;
+		return ((Equipment) o).getObjectId() == objectId;
 	}
 	
 	@Override

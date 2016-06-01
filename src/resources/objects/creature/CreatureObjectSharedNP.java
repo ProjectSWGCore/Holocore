@@ -79,44 +79,61 @@ class CreatureObjectSharedNP implements Persistable {
 	}
 	
 	public void addEquipment(SWGObject obj, SWGObject target) {
+		if (getEquipment(obj) != null)
+			return;
 		synchronized (equipmentList) {
-			if (obj instanceof WeaponObject)
-				equipmentList.add(new Equipment((WeaponObject) obj));
-			else
-				equipmentList.add(new Equipment(obj.getObjectId(), obj.getTemplate()));
+			equipmentList.add(new Equipment(obj));
 			equipmentList.sendDeltaMessage(target);
 		}
 	}
 	
 	public void removeEquipment(SWGObject obj, SWGObject target) {
+		Equipment e = getEquipment(obj);
+		if (e == null)
+			return;
+		synchronized (equipmentList) {
+			equipmentList.remove(e);
+			equipmentList.sendDeltaMessage(target);
+		}
+	}
+	
+	public Equipment getEquipment(SWGObject obj) {
 		synchronized (equipmentList) {
 			for (Equipment equipment : equipmentList) {
 				if (equipment.getObjectId() == obj.getObjectId()) {
-					equipmentList.remove(equipment);
-					equipmentList.sendDeltaMessage(target);
-					return;
+					return equipment;
 				}
 			}
 		}
+		return null;
 	}
 	
 	public void addAppearanceItem(SWGObject obj, SWGObject target) {
 		synchronized (appearanceList) {
-			appearanceList.add(new Equipment(obj.getObjectId(), obj.getTemplate()));
+			appearanceList.add(new Equipment(obj));
 			appearanceList.sendDeltaMessage(target);
 		}
 	}
 	
 	public void removeAppearanceItem(SWGObject obj, SWGObject target) {
+		Equipment e = getEquipment(obj);
+		if (e == null)
+			return;
+		synchronized (appearanceList) {
+			appearanceList.remove(e);
+			appearanceList.sendDeltaMessage(target);
+		}
+	}
+	
+	public Equipment getAppearance(SWGObject obj) {
 		synchronized (appearanceList) {
 			for (Equipment equipment : appearanceList) {
 				if (equipment.getObjectId() == obj.getObjectId()) {
-					appearanceList.remove(equipment);
-					appearanceList.sendDeltaMessage(target);
-					return;
+					return equipment;
 				}
 			}
 		}
+		return null;
 	}
 	
 	public SWGList<Equipment> getEquipmentList() {

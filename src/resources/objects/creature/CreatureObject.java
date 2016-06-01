@@ -86,7 +86,7 @@ public class CreatureObject extends TangibleObject {
 	@Override
 	public void addObject(SWGObject obj) {
 		super.addObject(obj);
-		if (getArrangementId(obj) != -1 && !(obj instanceof PlayerObject)) {
+		if (obj.getSlotArrangement() != -1 && !(obj instanceof PlayerObject)) {
 			addEquipment(obj);
 			if (obj instanceof WeaponObject && defaultWeapon != null && !obj.equals(defaultWeapon)) {
 				removeObject(defaultWeapon);
@@ -97,10 +97,18 @@ public class CreatureObject extends TangibleObject {
 	@Override
 	public void removeObject(SWGObject obj) {
 		super.removeObject(obj);
-		if (getArrangementId(obj) != -1 && !(obj instanceof PlayerObject)) {
-			removeEquipment(obj);
-			if (obj instanceof WeaponObject && defaultWeapon != null && !obj.equals(defaultWeapon)) {
-				addObject(defaultWeapon);
+		removeEquipment(obj);
+		if (obj instanceof WeaponObject && defaultWeapon != null && !obj.equals(defaultWeapon)) {
+			addObject(defaultWeapon);
+		}
+	}
+	
+	protected void handleSlotReplacement(SWGObject oldParent, SWGObject obj, int arrangement) {
+		SWGObject inventory = getSlottedObject("inventory");
+		for (String slot : obj.getArrangement().get(arrangement-4)) {
+			SWGObject slotObj = getSlottedObject(slot);
+			if (slotObj != null) {
+				slotObj.moveToContainer(inventory);
 			}
 		}
 	}

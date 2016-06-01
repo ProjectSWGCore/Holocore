@@ -195,6 +195,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		if (prevOwner != null)
 			oldObservers.add(prevOwner.getCreatureObject());
 		
+		SWGObject parent = this.parent;
 		// Remove this object from the old parent if one exists
 		if (parent != null) {
 			parent.removeObject(this);
@@ -202,6 +203,9 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		
 		Player newOwner = null;
 		if (container != null) {
+			int arrangement = container.getArrangementId(this);
+			if (arrangement != -1)
+				container.handleSlotReplacement(parent, this, arrangement);
 			container.addObject(this);
 			newOwner = container.getOwner();
 		}
@@ -241,21 +245,20 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		// Check if object can fit into container or slots
 		int arrangementId = container.getArrangementId(this);
 		if (arrangementId == -1) {
-			// Item is going to go into the container, so check to see if it'll fit
 			if (container.getMaxContainerSize() <= container.getContainedObjects().size() && container.getMaxContainerSize() > 0) {
 				Log.w("SWGObject", "Unable to add object to container! Container Full. Max Size: %d", container.getMaxContainerSize());
 				return ContainerResult.CONTAINER_FULL;
 			}
-		} else {
-			// Item is going into slot(s)
-			for (String slotName : getArrangement().get(arrangementId - 4)) {
-				SWGObject equippedItem = container.getSlottedObject(slotName);
-				if (equippedItem != null) {
-					equippedItem.moveToContainer(requester, container.getSlottedObject("inventory"));
-				}
-			}
 		}
 		return ContainerResult.SUCCESS;
+	}
+	
+	protected void handleSlotReplacement(SWGObject oldParent, SWGObject obj, int arrangement) {
+		for (String slot : obj.getArrangement().get(arrangement-4)) {
+			SWGObject slotObj = getSlottedObject(slot);
+			if (slotObj != null)
+				slotObj.moveToContainer(oldParent);
+		}
 	}
 
 	/**
