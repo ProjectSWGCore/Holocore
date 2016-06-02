@@ -130,9 +130,6 @@ public class GroupService extends Service {
 
 	private void handleMemberRezoned(Player player) {
 		
-		if (player == null)
-			return;
-		
 		CreatureObject creatureObject = player.getCreatureObject();
 		long groupId = creatureObject.getGroupId();
 
@@ -148,7 +145,7 @@ public class GroupService extends Service {
 		}
 
 		// Tell group to remove that player from the log off timer
-		unmarkPlayerForLogoff(player);
+		unmarkPlayerForLogoff(creatureObject);
 		groupObject.updateMember(creatureObject);
 	}
 
@@ -184,10 +181,8 @@ public class GroupService extends Service {
 		this.logoffTimers.put(playerCreo, timer);
 	}
 	
-	public void unmarkPlayerForLogoff(Player player) {
-		
-		CreatureObject playerCreo = player.getCreatureObject();
-		
+	public void unmarkPlayerForLogoff(CreatureObject playerCreo) {
+				
 		if (playerCreo.getGroupId() == 0)
 			return;
 		
@@ -204,48 +199,43 @@ public class GroupService extends Service {
 		if (group == null)
 			return;
 
-		if (group.getLeader() != creo.getObjectId()) {
+		if (group.getLeaderID() != creo.getObjectId()) {
 			sendSystemMessage(player, "must_be_leader");
 			return;
 		}
-
-		// Disband Group
-		if (target == null) {
-			destroyGroup(group, player);
-		} else {
-			// Kick player
-			group.removeMember(target);
-
-			sendGroupSystemMessage(group, "other_left_prose", "TU", target.getObjectId());
-			sendSystemMessage(target.getOwner(), "removed");
-
-			// TODO: Leave group chat room
-		}
+		
+		destroyGroup(group, player);
 	}
 
 	private void handleGroupLeave(Player player) {
 		CreatureObject creo = player.getCreatureObject();
 		
-		if (creo == null)
-			return;
+		this.removePlayerFromGroup(creo);
+	}
+
+	private void removePlayerFromGroup(CreatureObject playerCreo) {
 		
-		GroupObject group = getGroup(creo.getGroupId());
+		GroupObject group = getGroup(playerCreo.getGroupId());
 		
 		if (group == null)
 			return;
 		
+		// If the player is not online, manually send the message (normally the client does this if they're online)
+		if (playerCreo.getOwner() == null)
+			sendGroupSystemMessage(group, "other_left_prose", "TU", playerCreo.getName());
+		
+		if (playerCreo.getOwner() != null)
+			sendSystemMessage(playerCreo.getOwner(), "removed");
+		
 		// Check size of the group, if it only has two members, destroy the group
 		if (group.getGroupMembers().size() == 2) {
-			destroyGroup(group, player);
+			destroyGroup(group, group.getLeaderPlayer());
 			return;
 		}
-		
-		// Otherwise, remove player
-		sendGroupSystemMessage(group, "other_left_prose", "TU", creo.getObjectId());
-		sendSystemMessage(creo.getOwner(), "removed");
-		group.removeMember(creo);
-	}
 
+		group.removeMember(playerCreo);
+	}
+	
 	private void handleGroupInvite(Player player, CreatureObject target) {
 		CreatureObject playerCreo = player.getCreatureObject();
 
@@ -265,7 +255,7 @@ public class GroupService extends Service {
 		if (groupId != 0) {
 			GroupObject group = getGroup(groupId);
 
-			if (group.getLeader() != inviterId) {
+			if (group.getLeaderID() != inviterId) {
 				sendSystemMessage(player, "must_be_leader");
 				return;
 			}
@@ -381,7 +371,7 @@ public class GroupService extends Service {
 			// Group already exists
 			group = getGroup(senderCreo.getGroupId());
 
-			if (group.getLeader() != sender.getCreatureObject().getObjectId()) {
+			if (group.getLeaderID() != sender.getCreatureObject().getObjectId()) {
 				sendSystemMessage(player, "join_inviter_not_leader", sender.getCreatureObject().getObjectId());
 				creo.updateGroupInviteData(null, 0, "");
 				return;
@@ -412,9 +402,6 @@ public class GroupService extends Service {
 	}
 	
 	private void handleMakeLeader(Player currentLeader, CreatureObject newLeader) {
-
-		if (newLeader == null || currentLeader == null)
-			return;
 		
 		CreatureObject currentLeaderCreo = currentLeader.getCreatureObject();
 		GroupObject group = getGroup(newLeader.getGroupId());
@@ -422,12 +409,12 @@ public class GroupService extends Service {
 		if (group == null)
 			return;
 		
-		if (group.getLeader() != currentLeaderCreo.getObjectId()) {
+		if (group.getLeaderID() != currentLeaderCreo.getObjectId()) {
 			sendSystemMessage(currentLeader, "must_be_leader");
 			return;
 		}
 		
-		if (group.getLeader() == newLeader.getObjectId())
+		if (group.getLeaderID() == newLeader.getObjectId())
 			return;
 		
 		// Set the group leader to newLeader
@@ -447,7 +434,7 @@ public class GroupService extends Service {
 		
 		GroupObject group = getGroup(playerCreo.getGroupId());
 		
-		if (group.getLeader() != playerCreo.getObjectId()) {
+		if (group.getLeaderID() != playerCreo.getObjectId()) {
 			
 			int lootRule = group.getLootRule();
 		}
@@ -473,29 +460,18 @@ public class GroupService extends Service {
 	}
 	private void handleKick(Player leader, CreatureObject kickedCreo) {
 		
-		if (!basicChecks(leader, kickedCreo))
-			return;
-		
 		GroupObject group = getGroup(kickedCreo.getGroupId());
 		
 		if (group == null)
 			return;
 
 		// Make sure leader is truly the leader
-		if (group.getLeader() != leader.getCreatureObject().getObjectId()) {
+		if (group.getLeaderID() != leader.getCreatureObject().getObjectId()) {
 			sendSystemMessage(leader, "must_be_leader");
 			return;
 		}
 		
-		// If the group size is 2, disband instead
-		if (group.getGroupMembers().size() == 2) {
-			destroyGroup(group, leader);
-			return;
-		}
-		
-		// Otherwise kick the member
-		group.removeMember(kickedCreo);
-		sendSystemMessage(kickedCreo.getOwner(), "removed");
+		this.removePlayerFromGroup(kickedCreo);
 	}
 
 	private void destroyGroup(GroupObject group, Player player) {
@@ -534,8 +510,10 @@ public class GroupService extends Service {
 		
 		HashSet<CreatureObject> members = group.getGroupMemberObjects();
 		
-		for (CreatureObject member : members)
-			new ChatBroadcastIntent(member.getOwner(), new ProsePackage("group", id)).broadcast();
+		for (CreatureObject member : members) {
+			if (member.getOwner() != null)
+				new ChatBroadcastIntent(member.getOwner(), new ProsePackage("group", id)).broadcast();
+		}
 	}
 
 	private void sendGroupSystemMessage(GroupObject group, String id, Object ... objects) {
@@ -543,7 +521,9 @@ public class GroupService extends Service {
 		HashSet<CreatureObject> members = group.getGroupMemberObjects();
 		
 		for (CreatureObject member : members) {
-			IntentFactory.sendSystemMessage(member.getOwner(), "@group:" + id, objects);
+			// If there is no owner, (probably logged off), do not send the message
+			if (member.getOwner() != null)
+				IntentFactory.sendSystemMessage(member.getOwner(), "@group:" + id, objects);
 
 		}
 	}
@@ -589,7 +569,7 @@ public class GroupService extends Service {
 		@Override
 		public void run() {
 
-			this.taskingGroupService.handleGroupLeave(loggedMember.getOwner());
+			this.taskingGroupService.removePlayerFromGroup(loggedMember);
 			this.taskingGroupService.removeTimer(loggedMember);
 		}
 	}

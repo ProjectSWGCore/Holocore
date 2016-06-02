@@ -131,10 +131,14 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 			removeCustomAware(object);
 	}
 
-	public long getLeader() {
+	public long getLeaderID() {
 		return leader;
 	}
 
+	public Player getLeaderPlayer() {
+		return this.groupMembers.get(0).playerCreo.getOwner();
+	}
+	
 	public void setLeader(CreatureObject object) {
 		this.leader = object.getObjectId();
 
