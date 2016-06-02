@@ -58,7 +58,7 @@ import resources.Race;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.ProfTemplateData;
 import resources.config.ConfigFile;
-import resources.containers.ContainerPermissions;
+import resources.containers.ContainerPermissionsType;
 import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.building.BuildingObject;
@@ -378,7 +378,7 @@ public class CharacterCreationService extends Service {
 	private SWGObject createInventoryObject(ObjectManager objManager, CreatureObject creatureObj, String template) {
 		SWGObject obj = ObjectCreator.createObjectFromTemplate(template);
 		obj.moveToContainer(creatureObj);
-		obj.setContainerPermissions(ContainerPermissions.INVENTORY);
+		obj.setContainerPermissions(ContainerPermissionsType.INVENTORY);
 		new ObjectCreatedIntent(obj).broadcast();
 		return obj;
 	}
@@ -413,8 +413,6 @@ public class CharacterCreationService extends Service {
 		
 		// Any character can perform the basic dance.
 		creatureObj.addAbility("startDance+basic");
-		
-		creatureObj.joinPermissionGroup("world");
 	}
 	
 	private void setPlayerObjectValues(PlayerObject playerObj, ClientCreateCharacter create) {

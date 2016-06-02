@@ -34,39 +34,39 @@ import resources.objects.SWGObject;
  * for every new object.
  * @author Waverunner
  */
-public class DefaultPermissions extends ContainerPermissions {
+class DefaultPermissions extends ContainerPermissions {
 	
 	@Override
 	public boolean canView(SWGObject requester, SWGObject container) {
 		return true;
 	}
-
+	
 	@Override
 	public boolean canEnter(SWGObject requester, SWGObject container) {
 		return true;
 	}
-
+	
 	@Override
 	public boolean canRemove(SWGObject requester, SWGObject container) {
-		if (requester.getOwner() == null)
+		if (requester == null || requester.getOwner() == null)
 			return true;
 		if (container.getOwner() == null)
 			return false;
 		return requester.getOwner().equals(container.getOwner());
 	}
-
+	
 	@Override
 	public boolean canMove(SWGObject requester, SWGObject container) {
-		if (requester.getOwner() == null)
+		if (requester == null || requester.getOwner() == null)
 			return true;
 		if (container.getOwner() == null)
 			return false;
 		return requester.getOwner().equals(container.getOwner());
 	}
-
+	
 	@Override
 	public boolean canAdd(SWGObject requester, SWGObject container) {
-		if (requester.getOwner() == null)
+		if (requester == null || requester.getOwner() == null)
 			return true;
 		if (container.getOwner() == null)
 			return false;

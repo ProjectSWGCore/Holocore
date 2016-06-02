@@ -66,10 +66,10 @@ class CreatureObjectSharedNP implements Persistable {
 	private boolean shownOnRadar			= true;
 	private boolean beast					= false;
 	
-	private SWGList<Integer>	attributes		= new SWGList<Integer>(6, 21);
-	private SWGList<Integer>	maxAttributes	= new SWGList<Integer>(6, 22);
-	private SWGList<Equipment>	equipmentList 	= new SWGList<Equipment>(6, 23);
-	private SWGList<Equipment>	appearanceList 	= new SWGList<Equipment>(6, 33);
+	private SWGList<Integer>	attributes		= new SWGList<>(6, 21);
+	private SWGList<Integer>	maxAttributes	= new SWGList<>(6, 22);
+	private SWGList<Equipment>	equipmentList 	= new SWGList<>(6, 23);
+	private SWGList<Equipment>	appearanceList 	= new SWGList<>(6, 33);
 	
 	private SWGMap<CRC, Buff>	buffs			= new SWGMap<>(6, 26);
 	

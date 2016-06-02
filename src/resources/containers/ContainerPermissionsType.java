@@ -27,40 +27,40 @@
  ***********************************************************************************/
 package resources.containers;
 
-import resources.network.NetBufferStream;
+import resources.objects.SWGObject;
 
-public class ContainerPermissionsFactory {
+public enum ContainerPermissionsType {
+	DEFAULT		(new DefaultPermissions()),
+	INVENTORY	(new InventoryPermissions());
 	
-	public static ContainerPermissions create(NetBufferStream stream) {
-		ContainerPermissions permissions;
-		byte type = stream.getByte();
-		switch (type) {
-			case 1:
-				permissions = new DefaultPermissions();
-				break;
-			case 2:
-				permissions = new InventoryPermissions();
-				break;
-			case 3:
-				permissions = new WorldPermissions();
-				break;
-			default:
-				throw new IllegalStateException("Unknown type byte! Type: " + type);
-		}
-		permissions.read(stream);
+	private final ContainerPermissions permissions;
+	
+	ContainerPermissionsType(ContainerPermissions permissions) {
+		this.permissions = permissions;
+	}
+	
+	public ContainerPermissions getContainerPermissions() {
 		return permissions;
 	}
 	
-	public static void save(ContainerPermissions permissions, NetBufferStream stream) {
-		if (permissions instanceof DefaultPermissions)
-			stream.addByte(1);
-		else if (permissions instanceof InventoryPermissions)
-			stream.addByte(2);
-		else if (permissions instanceof WorldPermissions)
-			stream.addByte(3);
-		else
-			throw new IllegalArgumentException("Unknown permissions type! Permissions: " + permissions);
-		permissions.save(stream);
+	public boolean canView(SWGObject viewer, SWGObject container) {
+		return permissions.canView(viewer, container);
+	}
+	
+	public boolean canEnter(SWGObject viewer, SWGObject container) {
+		return permissions.canEnter(viewer, container);
+	}
+	
+	public boolean canRemove(SWGObject viewer, SWGObject container) {
+		return permissions.canRemove(viewer, container);
+	}
+	
+	public boolean canMove(SWGObject viewer, SWGObject container) {
+		return permissions.canMove(viewer, container);
+	}
+	
+	public boolean canAdd(SWGObject viewer, SWGObject container) {
+		return permissions.canAdd(viewer, container);
 	}
 	
 }

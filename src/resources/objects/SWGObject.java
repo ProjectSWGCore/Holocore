@@ -42,11 +42,8 @@ import resources.Terrain;
 import resources.buildout.BuildoutArea;
 import resources.client_info.visitors.ObjectData.ObjectDataAttribute;
 import resources.common.CRC;
-import resources.containers.ContainerPermissions;
-import resources.containers.ContainerPermissionsFactory;
+import resources.containers.ContainerPermissionsType;
 import resources.containers.ContainerResult;
-import resources.containers.DefaultPermissions;
-import resources.containers.ContainerPermissions.Permission;
 import resources.encodables.StringId;
 import resources.network.BaselineBuilder;
 import resources.network.BaselineObject;
@@ -66,42 +63,40 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Hashtable;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 public abstract class SWGObject extends BaselineObject implements Comparable<SWGObject>, Persistable {
 	
-	private final Location location;
-	private final long objectId;
-	private final HashMap <String, SWGObject> slots; // HashMap used for null value support
-	private final Set<SWGObject> containedObjects;
-	private final Map <String, String> attributes;
-	private final Map <ObjectDataAttribute, Object> dataAttributes;
-	private transient Set <SWGObject> objectsAware;
-	private transient Set <SWGObject> customAware;
-	private transient BuildoutArea buildoutArea;
-	private transient Player owner;
-	private List <List <String>> arrangement;
-
-	private ObjectClassification classification = ObjectClassification.GENERATED;
-	private GameObjectType gameObjectType = GameObjectType.GOT_NONE;
-	private ContainerPermissions containerPermissions;
-	private SWGObject	parent	= null;
-	private StringId stringId = new StringId("", "");
-	private StringId detailStringId = new StringId("", "");
-	private String	template	= "";
-	private int		crc			= 0;
-	private String	objectName	= "";
-	private int		volume		= 0;
-	private float	complexity	= 1;
-	private int     containerType = 0;
-	private double	loadRange	= 0;
-	private int		areaId		= -1;
-
-	private int     slotArrangement = -1;
+	private final long 							objectId;
+	private final Location 						location		= new Location();
+	private final Set<SWGObject>				containedObjects= new HashSet<>();
+	private final Map <String, String>			attributes		= new HashMap<>();
+	private final Set <SWGObject>				objectsAware	= new HashSet<>();
+	private final Set <SWGObject>				customAware		= new HashSet<>();
+	private final HashMap <String, SWGObject>	slots			= new HashMap<>(); // HashMap used for null value support
+	private final Map <ObjectDataAttribute, Object> dataAttributes = new HashMap<>();
+	
+	private ObjectClassification		classification	= ObjectClassification.GENERATED;
+	private GameObjectType				gameObjectType	= GameObjectType.GOT_NONE;
+	private ContainerPermissionsType	permissions		= ContainerPermissionsType.DEFAULT;
+	private List <List <String>>		arrangement		= new ArrayList<>();
+	private BuildoutArea				buildoutArea	= null;
+	private Player						owner			= null;
+	
+	private SWGObject	parent			= null;
+	private StringId 	stringId		= new StringId("", "");
+	private StringId 	detailStringId	= new StringId("", "");
+	private String		template		= "";
+	private int			crc				= 0;
+	private String		objectName		= "";
+	private int			volume			= 0;
+	private float		complexity		= 1;
+	private int     	containerType	= 0;
+	private double		loadRange		= 0;
+	private int			areaId			= -1;
+	private int     	slotArrangement	= -1;
 	
 	public SWGObject() {
 		this(0, null);
@@ -110,16 +105,8 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	public SWGObject(long objectId, BaselineType objectType) {
 		super(objectType);
 		this.objectId = objectId;
-		this.location = new Location();
-		this.objectsAware = new HashSet<>();
-		this.customAware = new HashSet<>();
-		this.slots = new HashMap<>();
-		this.containedObjects = new HashSet<>();
-		this.attributes = new LinkedHashMap<>();
-		this.dataAttributes = new Hashtable<>();
-		this.containerPermissions = new DefaultPermissions();
 	}
-
+	
 	/**
 	 * Adds the specified object to this object and places it in the appropriate slot if needed
 	 * @param object Object to add to this container, which will either be put into the appropriate slot(s) or become a contained object
@@ -229,7 +216,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	private ContainerResult moveToContainerChecks(SWGObject requester, SWGObject container) {
-		if(!hasPermission(requester, ContainerPermissions.Permission.MOVE)) {
+		if (!permissions.canMove(requester, this)) {
 			Log.w("SWGObject", "No permission 'MOVE' for requestor %s with object %s", requester, this);
 			return ContainerResult.NO_PERMISSION;
 		}
@@ -237,8 +224,8 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			return ContainerResult.SUCCESS;
 		
 		// Check if the requester has MOVE permissions to the destination container
-		if (!container.hasPermission(requester, ContainerPermissions.Permission.MOVE)) {
-			Log.w("SWGObject", "No permission 'MOVE' for requestor %s with object %s", requester, this);
+		if (!permissions.canMove(requester, container)) {
+			Log.w("SWGObject", "No permission 'MOVE' for requestor %s with container %s", requester, this);
 			return ContainerResult.NO_PERMISSION;
 		}
 		
@@ -260,106 +247,17 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 				slotObj.moveToContainer(oldParent);
 		}
 	}
-
-	/**
-	 * Checks if the passed object has all of the passed permissions
-	 * @param object Requester to view this container
-	 * @param permissions Permissions to check for
-	 * @return
-	 */
-	public boolean hasPermission(SWGObject object, ContainerPermissions.Permission... permissions) {
-		if (object == null)
-			return true;
-		for (ContainerPermissions.Permission permission : permissions) {
-			switch(permission) {
-				case VIEW:
-					if (!containerPermissions.canView(object, this))
-						return false;
-					break;
-				case MOVE:
-					if (!containerPermissions.canMove(object, this))
-						return false;
-					break;
-				case REMOVE:
-					if (!containerPermissions.canRemove(object, this))
-						return false;
-					break;
-				case ADD:
-					if (!containerPermissions.canAdd(object, this))
-						return false;
-					break;
-				case ENTER:
-					if (!containerPermissions.canEnter(object, this))
-						return false;
-					break;
-			}
-		}
-		return true;
-	}
 	
 	public boolean isVisible(SWGObject target) {
 		if (target == null)
 			return true;
-		if (!hasPermission(target, Permission.VIEW))
+		if (!permissions.canView(target, this))
 			return false;
 		if (getParent() != null)
 			return getParent().isVisible(target);
 		return true;
 	}
-
-	/**
-	 * Creates a new permission group for this object with the given permissions for that group
-	 * @param group Name of the permission group
-	 * @param permissions Permissions for the group
-	 */
-	public void addPermissions(String group, ContainerPermissions.Permission... permissions) {
-		containerPermissions.addPermissions(group, permissions);
-	}
-
-	/**
-	 * Removes the stated permissions from the group.
-	 * @param group Name of the permission group
-	 * @param permissions Permissions to remove
-	 */
-	public void removePermissions(String group, ContainerPermissions.Permission... permissions) {
-		containerPermissions.removePermissions(group, permissions);
-	}
-
-	/**
-	 * Creates a new permission group specific to the permission requester that has the defined permissions. The name of the
-	 * new group for this object will be the objectId of this object plus the objectId of the requester.
-	 * <br>This is the same as calling addPermissions(String.valueOf(permissionRequester.getObjectId() + getObjectId()), permissions)
-	 * with the added benefit of adding the group to the permissionRequester's joined container groups
-	 * @param permissionRequester The object that should be given unique permissions to this object
-	 * @param permissions Permissions that the permissionRequester will have for this object
-	 */
-	public void addPermissions(SWGObject permissionRequester, ContainerPermissions.Permission... permissions) {
-		addPermissions(String.valueOf(permissionRequester.getObjectId() + getObjectId()), permissions);
-		permissionRequester.joinPermissionGroup(String.valueOf(getObjectId() + permissionRequester.getObjectId()));
-	}
-
-	/**
-	 * Removes all the unique permissions for the permissionRequester from this object.
-	 * @param permissionRequester The object that should no longer have unique permissions to this object
-	 */
-	public void removePermissions(SWGObject permissionRequester) {
-		String group = String.valueOf(permissionRequester.getObjectId() + getObjectId());
-		removePermissions(group);
-		permissionRequester.containerPermissions.getJoinedGroups().remove(group);
-	}
-
-	/**
-	 * Assigns this object to a permission group
-	 * @param group
-	 */
-	public void joinPermissionGroup(String group) {
-		containerPermissions.getJoinedGroups().add(group);
-	}
-
-	public void setContainerPermissions(ContainerPermissions permissions) {
-		this.containerPermissions = permissions;
-	}
-
+	
 	public void addAttribute(String attribute, String value) {
 		attributes.put(attribute, value);
 	}
@@ -624,6 +522,14 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		this.gameObjectType = gameObjectType;
 	}
 	
+	public ContainerPermissionsType getContainerPermissions() {
+		return permissions;
+	}
+	
+	public void setContainerPermissions(ContainerPermissionsType permissions) {
+		this.permissions = permissions;
+	}
+
 	public boolean isBuildout() {
 		return classification == ObjectClassification.BUILDOUT;
 	}
@@ -643,9 +549,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	public void setLoadRange(double range) {
 		this.loadRange = range;
 	}
-
-	public ContainerPermissions getContainerPermissions() { return containerPermissions; }
-
+	
 	/**
 	 * Gets the arrangementId for the {@link SWGObject} for the current instance
 	 * @param object
@@ -706,7 +610,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	public void createObject(Player target, boolean ignoreSnapshotChecks) {
-		if (!hasPermission(target.getCreatureObject(), ContainerPermissions.Permission.VIEW)) {
+		if (!isVisible(target.getCreatureObject())) {
 //			Log.i("SWGObject", target.getCreatureObject() + " doesn't have permission to view " + this + " -- skipping packet sending");
 			return;
 		}
@@ -1092,23 +996,23 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	@Override
 	public void save(NetBufferStream stream) {
-		stream.addByte(2);
+		stream.addByte(0);
 		location.save(stream);
-		ContainerPermissionsFactory.save(containerPermissions, stream);
 		stream.addBoolean(parent != null && parent.getClassification() != ObjectClassification.GENERATED);
 		if (parent != null && parent.getClassification() != ObjectClassification.GENERATED)
 			SWGObjectFactory.save(ObjectCreator.createObjectFromTemplate(parent.getObjectId(), parent.getTemplate()), stream);
+		stream.addAscii(permissions.name());
+		stream.addAscii(classification.name());
+		stream.addUnicode(objectName);
+		stream.addInt(volume);
+		stream.addFloat(complexity);
+		stream.addFloat((float) loadRange);
 		synchronized (attributes) {
 			stream.addMap(attributes, (e) -> {
 				stream.addAscii(e.getKey());
 				stream.addAscii(e.getValue());
 			});
 		}
-		stream.addAscii(classification.name());
-		stream.addUnicode(objectName);
-		stream.addInt(volume);
-		stream.addFloat(complexity);
-		stream.addFloat((float) loadRange);
 		Set<SWGObject> contained;
 		synchronized (containedObjects) {
 			contained = new HashSet<>(containedObjects);
@@ -1121,24 +1025,18 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	public void read(NetBufferStream stream) {
-		byte ver = stream.getByte();
+		stream.getByte();
 		location.read(stream);
-		if (ver <= 1)
-			containerPermissions.read(stream);
-		else
-			containerPermissions = ContainerPermissionsFactory.create(stream);
-		if (ver >= 1 && stream.getBoolean())
+		if (stream.getBoolean())
 			parent = SWGObjectFactory.create(stream);
-		stream.getList((i) -> attributes.put(stream.getAscii(), stream.getAscii()));
+		permissions = ContainerPermissionsType.valueOf(stream.getAscii());
 		classification = ObjectClassification.valueOf(stream.getAscii());
 		objectName = stream.getUnicode();
 		volume = stream.getInt();
 		complexity = stream.getFloat();
 		loadRange = stream.getFloat();
-		Set<SWGObject> contained = new HashSet<>();
-		stream.getList((i) -> contained.add(SWGObjectFactory.create(stream)));
-		for (SWGObject obj : contained)
-			obj.moveToContainer(this);
+		stream.getList((i) -> attributes.put(stream.getAscii(), stream.getAscii()));
+		stream.getList((i) -> SWGObjectFactory.create(stream).moveToContainer(this));
 	}
 	
 	public enum ObjectClassification {
