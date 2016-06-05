@@ -49,6 +49,10 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import utilities.ThreadUtilities;
 
 /**
  * Created by Waverunner on 10/4/2015
@@ -56,7 +60,7 @@ import java.util.TimerTask;
 public class GroupService extends Service {
 	
 	private final Map<Long, GroupObject> groups = new HashMap<>();
-	private HashMap<CreatureObject, Timer> logoffTimers = new HashMap<>();
+	private HashMap<CreatureObject, ScheduledExecutorService> logoffTimers = new HashMap<>();
 
 	public GroupService() {
 		registerForIntent(GroupEventIntent.TYPE);
@@ -172,13 +176,13 @@ public class GroupService extends Service {
 		// Create a timer with the GroupMember player owns as the key
 		// and a timer set to fire and remove that member as the value
 		
-		Timer timer = new Timer();
 		CreatureObject playerCreo = player.getCreatureObject();
-		LogOffTask task = new LogOffTask(this, player.getCreatureObject());
+		ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("group-logout-timer"));
+		service.schedule(new LogOffTask(this, playerCreo), 4, TimeUnit.MINUTES);
 		
-		timer.schedule(task, 240000);
-		
-		this.logoffTimers.put(playerCreo, timer);
+		synchronized (this.logoffTimers) {
+			this.logoffTimers.put(playerCreo, service);
+		}
 	}
 	
 	public void unmarkPlayerForLogoff(CreatureObject playerCreo) {
@@ -186,7 +190,7 @@ public class GroupService extends Service {
 		if (playerCreo.getGroupId() == 0)
 			return;
 		
-		this.logoffTimers.remove(playerCreo).cancel();
+		this.removeTimer(playerCreo);
 	}
 	
 	private void handleGroupDisband(Player player, CreatureObject target) {
@@ -547,15 +551,12 @@ public class GroupService extends Service {
 	
 	private void removeTimer(CreatureObject groupMember) {
 		
-		this.logoffTimers.remove(groupMember).cancel();
+		synchronized (this.logoffTimers) {
+			this.logoffTimers.remove(groupMember).shutdownNow();
+		}
 	}
-	
-	private static boolean basicChecks(Player player, CreatureObject target) {
-		
-		return (player == null || target == null);
-	}
-	
-	private static class LogOffTask extends TimerTask {
+
+	private static class LogOffTask implements Runnable {
 
 		GroupService taskingGroupService;
 		CreatureObject loggedMember;
