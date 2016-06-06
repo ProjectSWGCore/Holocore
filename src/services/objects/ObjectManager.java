@@ -106,6 +106,9 @@ public class ObjectManager extends Manager {
 			putObject(obj);
 			new ObjectCreatedIntent(obj).broadcast();
 		}
+		synchronized (database) {
+			database.traverse((obj) -> loadObject(obj));
+		}
 		return super.initialize();
 	}
 	
@@ -115,7 +118,6 @@ public class ObjectManager extends Manager {
 		synchronized (database) {
 			if (!database.load() && database.fileExists())
 				return false;
-			database.traverse((obj) -> loadObject(obj));
 		}
 		double loadTime = (System.nanoTime() - startLoad) / 1E6;
 		Log.i("ObjectManager", "Finished loading %d objects. Time: %fms", database.size(), loadTime);
