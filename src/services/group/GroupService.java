@@ -570,8 +570,10 @@ public class GroupService extends Service {
 		@Override
 		public void run() {
 
-			this.taskingGroupService.removePlayerFromGroup(loggedMember);
-			this.taskingGroupService.removeTimer(loggedMember);
+			synchronized (this.taskingGroupService) {
+				this.taskingGroupService.removePlayerFromGroup(loggedMember);
+				this.taskingGroupService.removeTimer(loggedMember);
+			}
 		}
 	}
 }
