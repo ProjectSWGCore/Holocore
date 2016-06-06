@@ -218,7 +218,6 @@ public class ObjectAwareness extends Service {
 		Location newLocation = transform.getLocation();
 		newLocation.setTerrain(obj.getTerrain());
 		moveObjectSpeedChecks(obj, newLocation);
-		transform.setSpeed((float) (obj.getMovementScale()*7.3));
 		BuildoutArea area = obj.getBuildoutArea();
 		if (area != null)
 			newLocation = area.adjustLocation(newLocation);
@@ -237,7 +236,6 @@ public class ObjectAwareness extends Service {
 			return;
 		}
 		moveObjectSpeedChecks(obj, parent, newLocation);
-		transformWithParent.setSpeed((float) (obj.getMovementScale()*7.3));
 		new PlayerTransformedIntent((CreatureObject) obj, obj.getParent(), parent, obj.getLocation(), newLocation).broadcast();
 		move(obj, parent, newLocation);
 		obj.sendParentDataTransforms(transformWithParent);
