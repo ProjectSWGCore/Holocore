@@ -283,6 +283,10 @@ public class PlayerObject extends IntangibleObject {
 		play9.addFriend(friend, this);
 	}
 
+	public boolean isFriend(String target) {
+		return play9.isFriend(target);
+	}
+
 	public List<String> getFriendsList() {
 		return play9.getFriendsList();
 	}
