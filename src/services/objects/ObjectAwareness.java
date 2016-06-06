@@ -123,6 +123,13 @@ public class ObjectAwareness extends Service {
 				creature.resetAwareness();
 				add(creature);
 				update(creature);
+				if (creature.getParent() != null && creature.getOwner() != null) {
+					for (SWGObject observer : creature.getObservers())
+						creature.createObject(observer.getOwner());
+					for (SWGObject object : creature.getObjectsAware()) {
+						object.createObject(creature.getOwner());
+					}
+				}
 				p.sendPacket(new CmdSceneReady());
 				break;
 			default:
