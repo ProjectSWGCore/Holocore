@@ -46,9 +46,11 @@ import resources.server_info.Log;
  * This class is to be used exclusively in cases where using the intents directly isn't practical.
  */
 public final class IntentFactory {
-
+	
+	private final IntentChain broadcastChain = new IntentChain();
+	
 	private void broadcast(String message, Player source, BroadcastType type) {
-		new ChatBroadcastIntent(message, source, source.getCreatureObject().getTerrain(), type).broadcast();
+		broadcastChain.broadcastAfter(new ChatBroadcastIntent(message, source, source.getCreatureObject().getTerrain(), type));
 	}
 
 	/**
