@@ -61,12 +61,18 @@ import resources.server_info.Log;
 public final class ObjectCreator {
 	
 	private static final Object OBJECT_ID_MUTEX = new Object();
-	private static long maxObjectId = 1;
+	private static long nextObjectId = 1;
 	
-	public static void updateMaxObjectId(long objectId) {
+	private static void updateMaxObjectId(long objectId) {
 		synchronized (OBJECT_ID_MUTEX) {
-			if (objectId > maxObjectId)
-				maxObjectId = objectId;
+			if (objectId >= nextObjectId)
+				nextObjectId = objectId+1;
+		}
+	}
+	
+	private static long getNextObjectId() {
+		synchronized (OBJECT_ID_MUTEX) {
+			return nextObjectId++;
 		}
 	}
 	
@@ -108,19 +114,11 @@ public final class ObjectCreator {
 	}
 	
 	public static SWGObject createObjectFromTemplate(String template) {
-		long id = 0;
-		synchronized (OBJECT_ID_MUTEX) {
-			id = maxObjectId++;
-		}
-		return createObjectFromTemplate(id, template);
+		return createObjectFromTemplate(getNextObjectId(), template);
 	}
 	
 	public static <T extends SWGObject> T createObjectFromTemplate(String template, Class <T> c) {
-		long id = 0;
-		synchronized (OBJECT_ID_MUTEX) {
-			id = maxObjectId++;
-		}
-		return createObjectFromTemplate(id, template, c);
+		return createObjectFromTemplate(getNextObjectId(), template, c);
 	}
 	
 	private static SWGObject createObjectFromType(long objectId, String template, GameObjectType got) {

@@ -56,7 +56,7 @@ public class FindFriendCallback implements ICmdCallback {
 
 		String friendName = args.split(" ")[0].toLowerCase(Locale.US);
 
-		if (!ghost.getFriendsList().contains(friendName)) {
+		if (!ghost.isFriend(friendName)) {
 			new ChatBroadcastIntent(player, "@ui_cmnty:friend_location_failed_noname").broadcast();
 			return;
 		}
@@ -68,7 +68,7 @@ public class FindFriendCallback implements ICmdCallback {
 		}
 
 		PlayerObject friendGhost = friend.getPlayerObject();
-		if (friendGhost == null || !friendGhost.getFriendsList().contains(player.getCharacterName().split(" ")[0].toLowerCase(Locale.US))) {
+		if (friendGhost == null || !friendGhost.isFriend(player.getCharacterName().split(" ")[0].toLowerCase(Locale.US))) {
 			new ChatBroadcastIntent(player, new ProsePackage("@ui_cmnty:friend_location_failed", "TU", friendName)).broadcast();
 			return;
 		}

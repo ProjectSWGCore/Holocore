@@ -29,20 +29,23 @@ package resources.containers;
 
 import resources.objects.SWGObject;
 
-/**
- * This set of permissions will allow only the owner to view the container.
- *
- * @author Waverunner
- */
-public class InventoryPermissions extends DefaultPermissions {
+class InventoryPermissions extends DefaultPermissions {
 	
 	@Override
 	public boolean canView(SWGObject requester, SWGObject container) {
-		return requester.getOwner() == container.getOwner();
+		if (requester == null || requester.getOwner() == null)
+			return true;
+		if (container.getOwner() == null)
+			return false;
+		return requester.getOwner().equals(container.getOwner());
 	}
 
 	@Override
 	public boolean canEnter(SWGObject requester, SWGObject container) {
-		return requester.getOwner() == container.getOwner();
+		if (requester == null || requester.getOwner() == null)
+			return true;
+		if (container.getOwner() == null)
+			return false;
+		return requester.getOwner().equals(container.getOwner());
 	}
 }

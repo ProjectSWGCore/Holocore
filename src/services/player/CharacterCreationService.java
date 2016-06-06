@@ -58,7 +58,7 @@ import resources.Race;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.ProfTemplateData;
 import resources.config.ConfigFile;
-import resources.containers.ContainerPermissions;
+import resources.containers.ContainerPermissionsType;
 import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.building.BuildingObject;
@@ -378,7 +378,7 @@ public class CharacterCreationService extends Service {
 	private SWGObject createInventoryObject(ObjectManager objManager, CreatureObject creatureObj, String template) {
 		SWGObject obj = ObjectCreator.createObjectFromTemplate(template);
 		obj.moveToContainer(creatureObj);
-		obj.setContainerPermissions(ContainerPermissions.INVENTORY);
+		obj.setContainerPermissions(ContainerPermissionsType.INVENTORY);
 		new ObjectCreatedIntent(obj).broadcast();
 		return obj;
 	}
@@ -390,7 +390,6 @@ public class CharacterCreationService extends Service {
 		hairObj.setAppearanceData(customization);
 		
 		hairObj.moveToContainer(creatureObj); // hair slot
-		creatureObj.addEquipment(hairObj);
 	}
 	
 	private void setCreatureObjectValues(ObjectManager objManager, CreatureObject creatureObj, ClientCreateCharacter create) {
@@ -406,17 +405,14 @@ public class CharacterCreationService extends Service {
 		creatureObj.setDefaultWeapon(defWeapon);
 		defWeapon.setMaxRange(5);
 		creatureObj.setEquippedWeapon(defWeapon);
-		creatureObj.addEquipment(createInventoryObject(objManager, creatureObj, "object/tangible/inventory/shared_character_inventory.iff"));
-		creatureObj.addEquipment(createInventoryObject(objManager, creatureObj, "object/tangible/datapad/shared_character_datapad.iff"));
-		creatureObj.addEquipment(createInventoryObject(objManager, creatureObj, "object/tangible/inventory/shared_appearance_inventory.iff"));
-		creatureObj.addEquipment(defWeapon);
+		createInventoryObject(objManager, creatureObj, "object/tangible/inventory/shared_character_inventory.iff");
+		createInventoryObject(objManager, creatureObj, "object/tangible/datapad/shared_character_datapad.iff");
+		createInventoryObject(objManager, creatureObj, "object/tangible/inventory/shared_appearance_inventory.iff");
 		createInventoryObject(objManager, creatureObj, "object/tangible/bank/shared_character_bank.iff");
 		createInventoryObject(objManager, creatureObj, "object/tangible/mission_bag/shared_mission_bag.iff");
 		
 		// Any character can perform the basic dance.
 		creatureObj.addAbility("startDance+basic");
-		
-		creatureObj.joinPermissionGroup("world");
 	}
 	
 	private void setPlayerObjectValues(PlayerObject playerObj, ClientCreateCharacter create) {
@@ -435,7 +431,6 @@ public class CharacterCreationService extends Service {
 				return;
 			// Move the new item to the player's clothing slots and add to equipment list
 			item.moveToContainer(player, player);
-			player.addEquipment(item);
 		}
 		
 		SWGObject inventory = player.getSlottedObject("inventory");

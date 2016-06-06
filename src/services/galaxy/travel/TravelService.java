@@ -555,7 +555,7 @@ public class TravelService extends Service {
 	}
 	
 	private boolean isTicketUsable(SWGObject ticket) {
-		Location worldLoc = ticket.getOwner().getCreatureObject().getWorldLocation();
+		Location worldLoc = ticket.getWorldLocation();
 		TravelPoint nearest = getNearestTravelPoint(worldLoc);
 		String departurePoint = ticket.getAttribute("@obj_attr_n:travel_departure_point");
 		String departurePlanet = ticket.getAttribute("@obj_attr_n:travel_departure_planet");

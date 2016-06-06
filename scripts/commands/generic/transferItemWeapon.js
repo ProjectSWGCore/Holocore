@@ -12,16 +12,6 @@ function executeCommand(galacticManager, player, target, args) {
 	
 	switch (containerResult) {
 		case ContainerResult.SUCCESS:
-			var defaultWeapon = actor.getDefaultWeapon();
-			if (actor.getEquipmentList().contains(target)) {
-				actor.removeEquipment(target);
-				actor.addEquipment(defaultWeapon);
-				actor.setEquippedWeapon(defaultWeapon);
-			} else if (newContainer === actor) {
-				actor.removeEquipment(defaultWeapon);
-				actor.addEquipment(target);
-				actor.setEquippedWeapon(target);
-			}
 			break;
 		case ContainerResult.CONTAINER_FULL:
 			// TODO container03_prose if container is named

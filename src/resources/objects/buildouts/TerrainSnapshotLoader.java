@@ -37,7 +37,6 @@ import resources.Terrain;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.WorldSnapshotData;
 import resources.client_info.visitors.WorldSnapshotData.Node;
-import resources.containers.ContainerPermissions;
 import resources.objects.SWGObject;
 import resources.objects.SWGObject.ObjectClassification;
 import resources.objects.cell.CellObject;
@@ -83,8 +82,7 @@ public class TerrainSnapshotLoader {
 		object.setLoadRange(node.getRadius());
 		setCellInformation(object, node.getCellIndex());
 		addObject(object, node.getContainerId());
-		updatePermissions(object);
-
+		
 		for (Node child : node.getChildren()) {
 			createFromNode(templates, child);
 		}
@@ -115,10 +113,6 @@ public class TerrainSnapshotLoader {
 			return;
 		CellObject cell = (CellObject) object;
 		cell.setNumber(cellIndex);
-	}
-	
-	private void updatePermissions(SWGObject object) {
-		object.setContainerPermissions(ContainerPermissions.WORLD);
 	}
 	
 }

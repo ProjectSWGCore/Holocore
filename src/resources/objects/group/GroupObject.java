@@ -118,7 +118,6 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 
 			groupMembers.remove(member);
 			object.setGroupId(0);
-			awarenessOutOfRange(object, true);
 
 			groupMembers.sendDeltaMessage(this);
 		}

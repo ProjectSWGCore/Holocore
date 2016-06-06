@@ -72,6 +72,12 @@ class PlayerObjectPrivateNP implements Persistable {
 		friendsList.sendDeltaMessage(target);
 	}
 	
+	public boolean isFriend(String friend) {
+		synchronized (friendsList) {
+			return friendsList.contains(friend);
+		}
+	}
+	
 	public List<String> getFriendsList() {
 		return friendsList;
 	}
