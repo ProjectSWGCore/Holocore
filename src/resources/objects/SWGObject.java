@@ -813,39 +813,29 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		}
 	}
 	
-	public void sendDataTransforms(DataTransform dTransform) {
-		Location loc = dTransform.getLocation();
-		float speed = dTransform.getSpeed();
-/*		Even with these speed calculations, observer clients still have stuttering for movements, live only sent UTM's to observers or bouncing back the player
-		that is moving. The only work around to this seems to be to send a UTM to the client to force multiple DTM's to be sent back to the server for fluid movements.
-		if (x != loc.getX() && y != loc.getY() && z != loc.getZ())
-			speed = (float) loc.getSpeed(x, 0, z, MathUtils.calculateDeltaTime(lastMovementTimestamp, dTransform.getTimestamp()));*/
-		sendDataTransforms(loc, dTransform.getMovementAngle(), speed, dTransform.getLookAtYaw(), dTransform.isUseLookAtYaw(), dTransform.getUpdateCounter());
+	public void sendDataTransforms(DataTransform dt) {
+		UpdateTransformMessage transform = new UpdateTransformMessage();
+		transform.setObjectId(getObjectId());
+		transform.setX((short) (dt.getLocation().getX() * 4 + 0.5));
+		transform.setY((short) (dt.getLocation().getY() * 4 + 0.5));
+		transform.setZ((short) (dt.getLocation().getZ() * 4 + 0.5));
+		transform.setUpdateCounter(dt.getUpdateCounter());
+		transform.setDirection(dt.getMovementAngle());
+		transform.setSpeed((byte) (dt.getSpeed()+0.5));
+		transform.setLookAtYaw((byte) (dt.getLookAtYaw() * 16));
+		transform.setUseLookAtYaw(dt.isUseLookAtYaw());
+		sendObservers(transform);
 	}
 
 	public void sendParentDataTransforms(DataTransformWithParent ptm) {
 		UpdateTransformWithParentMessage transform = new UpdateTransformWithParentMessage(ptm.getCellId(), getObjectId());
 		transform.setLocation(ptm.getLocation());
-		transform.setUpdateCounter(ptm.getCounter() + 1);
+		transform.setUpdateCounter(ptm.getCounter());
 		transform.setDirection(ptm.getMovementAngle());
 		transform.setSpeed((byte) ptm.getSpeed());
 		transform.setLookDirection((byte) (ptm.getLookAtYaw() * 16));
 		transform.setUseLookDirection(ptm.isUseLookAtYaw());
-		sendObserversAndSelf(transform);
-	}
-
-	public void sendDataTransforms(Location loc, byte direction, double speed, float lookAtYaw, boolean useLookAtYaw, int updates) {
-		UpdateTransformMessage transform = new UpdateTransformMessage();
-		transform.setObjectId(getObjectId()); // (short) (xPosition * 4 + 0.5)
-		transform.setX((short) (loc.getX() * 4));
-		transform.setY((short) (loc.getY() * 4));
-		transform.setZ((short) (loc.getZ() * 4));
-		transform.setUpdateCounter(updates + 1);
-		transform.setDirection(direction);
-		transform.setSpeed((byte) speed);
-		transform.setLookAtYaw((byte) (lookAtYaw * 16));
-		transform.setUseLookAtYaw(useLookAtYaw);
-		sendObserversAndSelf(transform);
+		sendObservers(transform);
 	}
 	
 	protected void createChildrenObjects(Player target) {
