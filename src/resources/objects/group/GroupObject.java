@@ -89,7 +89,6 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 
 		groupMembers.sendDeltaMessage(this);
 
-		awarenessInRange(object, true);
 		object.setGroupId(getObjectId());
 
 		if (object.getLevel() > level)
@@ -101,16 +100,13 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 			groupMembers.remove(new GroupMember(object.getObjectId(), object.getName()));
 
 			object.setGroupId(0);
-			awarenessOutOfRange(object, true);
 
 			groupMembers.sendDeltaMessage(this);
 		}
 	}
 
 	public void updateMember(CreatureObject object) {
-		if (groupMembers.contains(new GroupMember(object.getObjectId(), object.getName())))
-			awarenessInRange(object, true);
-		else awarenessOutOfRange(object, true);
+		
 	}
 
 	public long getLeader() {
