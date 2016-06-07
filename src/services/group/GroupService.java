@@ -133,7 +133,6 @@ public class GroupService extends Service {
 	}
 
 	private void handleMemberRezoned(Player player) {
-		
 		CreatureObject creatureObject = player.getCreatureObject();
 		long groupId = creatureObject.getGroupId();
 
@@ -154,7 +153,6 @@ public class GroupService extends Service {
 	}
 
 	private void handleMemberLoggedOff(Player player) {
-	
 		if (player == null)
 			return;
 		
@@ -172,10 +170,8 @@ public class GroupService extends Service {
 	}
 	
 	public void markPlayerForLogoff(Player player) {
-		
 		// Create a timer with the GroupMember player owns as the key
 		// and a timer set to fire and remove that member as the value
-		
 		CreatureObject playerCreo = player.getCreatureObject();
 		ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("group-logout-timer"));
 		service.schedule(new LogOffTask(this, playerCreo), 4, TimeUnit.MINUTES);
@@ -186,7 +182,6 @@ public class GroupService extends Service {
 	}
 	
 	public void unmarkPlayerForLogoff(CreatureObject playerCreo) {
-				
 		if (playerCreo.getGroupId() == 0)
 			return;
 		
@@ -213,12 +208,10 @@ public class GroupService extends Service {
 
 	private void handleGroupLeave(Player player) {
 		CreatureObject creo = player.getCreatureObject();
-		
 		this.removePlayerFromGroup(creo);
 	}
 
 	private void removePlayerFromGroup(CreatureObject playerCreo) {
-		
 		GroupObject group = getGroup(playerCreo.getGroupId());
 		
 		if (group == null)
@@ -263,12 +256,10 @@ public class GroupService extends Service {
 				sendSystemMessage(player, "must_be_leader");
 				return;
 			}
-
 			if (target.getGroupId() != 0) {
 				sendSystemMessage(player, "already_grouped", "TT", targetId);
 				return;
 			}
-
 			if (group.isFull()) {
 				sendSystemMessage(player, "full");
 				return;
@@ -283,9 +274,8 @@ public class GroupService extends Service {
 			// Otherwise, just send the invite as normal
 			this.sendInvite(player, target, inviterId, groupId);
 
-		} else {
+		} else
 			this.sendInvite(player, target, inviterId);
-		}
 	}
 	
 	private void sendInvite(Player groupLeader, CreatureObject invitee, long inviterId, long groupId) {
@@ -306,7 +296,6 @@ public class GroupService extends Service {
 	}
 	
 	private void handleGroupUninvite(Player player, CreatureObject target) {
-		
 		CreatureObject playerCreo = player.getCreatureObject();
 		
 		if (target == null) {
@@ -331,7 +320,6 @@ public class GroupService extends Service {
 	}
 	
 	private void handleGroupJoin(Player player) {
-		
 		GroupObject group = null;
 		CreatureObject creo = player.getCreatureObject();
 
@@ -395,7 +383,6 @@ public class GroupService extends Service {
 	}
 	
 	private void handleGroupDecline(Player invitee) {
-		
 		CreatureObject creo = invitee.getCreatureObject();
 		GroupInviterData invitation = creo.getInviterData();
 		
@@ -406,7 +393,6 @@ public class GroupService extends Service {
 	}
 	
 	private void handleMakeLeader(Player currentLeader, CreatureObject newLeader) {
-		
 		CreatureObject currentLeaderCreo = currentLeader.getCreatureObject();
 		GroupObject group = getGroup(newLeader.getGroupId());
 		
@@ -428,7 +414,6 @@ public class GroupService extends Service {
 	}
 	
 	private void handleMakeMasterLooter(Player player, CreatureObject target) {
-		
 		CreatureObject playerCreo = player.getCreatureObject();
 		if (playerCreo.getGroupId() == 0) {
 			
@@ -462,8 +447,8 @@ public class GroupService extends Service {
 				break;
 		}
 	}
+	
 	private void handleKick(Player leader, CreatureObject kickedCreo) {
-		
 		GroupObject group = getGroup(kickedCreo.getGroupId());
 		
 		if (group == null)
@@ -499,7 +484,9 @@ public class GroupService extends Service {
 
 		group.setLeader(player.getCreatureObject());
 
-		groups.put(group.getObjectId(), group);
+		synchronized (groups) {
+			groups.put(group.getObjectId(), group);
+		}
 
 		new ObjectCreatedIntent(group).broadcast();
 
@@ -511,7 +498,6 @@ public class GroupService extends Service {
 	}
 
 	private void sendGroupSystemMessage(GroupObject group, String id) {
-		
 		HashSet<CreatureObject> members = group.getGroupMemberObjects();
 		
 		for (CreatureObject member : members) {
@@ -521,7 +507,6 @@ public class GroupService extends Service {
 	}
 
 	private void sendGroupSystemMessage(GroupObject group, String id, Object ... objects) {
-		
 		HashSet<CreatureObject> members = group.getGroupMemberObjects();
 		
 		for (CreatureObject member : members) {
@@ -533,7 +518,6 @@ public class GroupService extends Service {
 	}
 
 	private String getGroupChatPath(long groupId, String galaxy) {
-		// SWG.serverName.group.GroupObjectId.GroupChat || title = groupid
 		String groupIdString = String.valueOf(groupId);
 		return "SWG." + galaxy + ".group." + groupIdString + ".GroupChat";
 	}
@@ -557,7 +541,6 @@ public class GroupService extends Service {
 	}
 
 	private static class LogOffTask implements Runnable {
-
 		GroupService taskingGroupService;
 		CreatureObject loggedMember;
 
@@ -569,7 +552,6 @@ public class GroupService extends Service {
 
 		@Override
 		public void run() {
-
 			synchronized (this.taskingGroupService) {
 				this.taskingGroupService.removePlayerFromGroup(loggedMember);
 				this.taskingGroupService.removeTimer(loggedMember);

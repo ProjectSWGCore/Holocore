@@ -241,8 +241,6 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 				GroupMember grpMember = iter.next();
 				iter.remove();
 				grpMember.playerCreo.setGroupId(0);
-				awarenessOutOfRange(grpMember.playerCreo, true);
-
 			}
 		}
 
