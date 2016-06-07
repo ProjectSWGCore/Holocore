@@ -66,6 +66,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class SWGObject extends BaselineObject implements Comparable<SWGObject>, Persistable {
 	
@@ -77,6 +78,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	private final Set <SWGObject>				customAware		= new HashSet<>();
 	private final HashMap <String, SWGObject>	slots			= new HashMap<>(); // HashMap used for null value support
 	private final Map <ObjectDataAttribute, Object> dataAttributes = new HashMap<>();
+	private final AtomicInteger					updateCounter	= new AtomicInteger(1);
 	
 	private ObjectClassification		classification	= ObjectClassification.GENERATED;
 	private GameObjectType				gameObjectType	= GameObjectType.GOT_NONE;
@@ -819,7 +821,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		transform.setX((short) (dt.getLocation().getX() * 4 + 0.5));
 		transform.setY((short) (dt.getLocation().getY() * 4 + 0.5));
 		transform.setZ((short) (dt.getLocation().getZ() * 4 + 0.5));
-		transform.setUpdateCounter(dt.getUpdateCounter());
+		transform.setUpdateCounter(updateCounter.incrementAndGet());
 		transform.setDirection(dt.getMovementAngle());
 		transform.setSpeed((byte) (dt.getSpeed()+0.5));
 		transform.setLookAtYaw((byte) (dt.getLookAtYaw() * 16));
@@ -830,7 +832,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	public void sendParentDataTransforms(DataTransformWithParent ptm) {
 		UpdateTransformWithParentMessage transform = new UpdateTransformWithParentMessage(ptm.getCellId(), getObjectId());
 		transform.setLocation(ptm.getLocation());
-		transform.setUpdateCounter(ptm.getCounter());
+		transform.setUpdateCounter(updateCounter.incrementAndGet());
 		transform.setDirection(ptm.getMovementAngle());
 		transform.setSpeed((byte) ptm.getSpeed());
 		transform.setLookDirection((byte) (ptm.getLookAtYaw() * 16));
