@@ -47,7 +47,6 @@ import java.util.Iterator;
 import java.util.Map;
 
 public class GroupObject extends SWGObject { // Extends INTO or TANO?
-	
 	private final SWGList<GroupMember> groupMembers = new SWGList<>(6, 2, Encoder.StringType.ASCII);
 	private long leader;
 	private short level;
@@ -103,7 +102,6 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 	}
 
 	public void removeMember(CreatureObject object) {
-
 		GroupMember member = new GroupMember(object);
 		synchronized (groupMembers) {
 
@@ -152,7 +150,6 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 	}
 	
 	private void changeLeader(GroupMember member) {
-				
 		if (groupMembers.size() > 0) {
 			synchronized (groupMembers) {
 				GroupMember previous = groupMembers.set(0, member);
@@ -204,7 +201,6 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 	}
 	
 	public HashSet<CreatureObject> getGroupMemberObjects() {
-		
 		HashSet<CreatureObject> memberObjects = new HashSet<>();
 		
 		synchronized (groupMembers) {
@@ -217,7 +213,6 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 	}
 	
 	private GroupMember getGroupMember(Player player) {
-		
 		GroupMember foundMember = null;
 		
 		synchronized(groupMembers) {
@@ -232,7 +227,6 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 	}
 	
 	public void disbandGroup() {
-		
 		synchronized (groupMembers) {
 			
 			Iterator<GroupMember> iter = this.groupMembers.iterator();
