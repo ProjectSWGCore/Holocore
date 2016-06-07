@@ -264,9 +264,6 @@ public class ObjectManager extends Manager {
 			if (contained != null)
 				destroyObject(contained);
 		}
-		object.moveToContainer(null);
-		objectAwareness.remove(object);
-		object.clearAware();
 		synchronized (database) {
 			if (database.remove(object))
 				database.save();
