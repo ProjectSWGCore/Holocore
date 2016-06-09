@@ -28,6 +28,7 @@
 package resources.commands.callbacks;
 
 import intents.chat.ChatBroadcastIntent;
+import intents.object.ObjectCreatedIntent;
 import resources.Location;
 import resources.Terrain;
 import resources.commands.ICmdCallback;
@@ -38,6 +39,7 @@ import resources.objects.waypoint.WaypointObject;
 import resources.objects.waypoint.WaypointObject.WaypointColor;
 import resources.player.Player;
 import services.galaxy.GalacticManager;
+import services.objects.ObjectCreator;
 import services.objects.ObjectManager;
 
 public class WaypointCmdCallback implements ICmdCallback {
@@ -180,9 +182,11 @@ public class WaypointCmdCallback implements ICmdCallback {
 	}
 
 	private WaypointObject createWaypoint(ObjectManager objManager, WaypointColor color, String name, Location location) {
-		WaypointObject waypoint = (WaypointObject) objManager.createObject("object/waypoint/shared_waypoint.iff", location, false);
+		WaypointObject waypoint = (WaypointObject) ObjectCreator.createObjectFromTemplate("object/waypoint/shared_waypoint.iff");
+		waypoint.setLocation(location);
 		waypoint.setColor(color);
 		waypoint.setName(name);
+		new ObjectCreatedIntent(waypoint).broadcast();
 		return waypoint;
 	}
 	

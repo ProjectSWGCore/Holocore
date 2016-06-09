@@ -28,11 +28,13 @@
 package resources.encodables;
 
 import network.packets.Packet;
+import resources.network.NetBufferStream;
 import resources.objects.waypoint.WaypointObject;
+import resources.persistable.Persistable;
+import resources.server_info.Log;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.ArrayList;
@@ -40,9 +42,8 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-public class OutOfBandPackage implements Encodable, Serializable {
-	private static final long serialVersionUID = 1L;
-
+public class OutOfBandPackage implements Encodable, Persistable {
+	
 	private List<OutOfBandData> packages;
 	private transient List<byte[]> data;
 	private transient int dataSize;
@@ -107,6 +108,16 @@ public class OutOfBandPackage implements Encodable, Serializable {
 			read += data.position() - start;
 		}
 	}
+	
+	@Override
+	public void save(NetBufferStream stream) {
+		stream.addList(packages, (p) -> p.save(stream));
+	}
+	
+	@Override
+	public void read(NetBufferStream stream) {
+		stream.getList((i) -> packages.add(OutOfBandFactory.create(stream)));
+	}
 
 	private void unpackOutOfBandData(ByteBuffer data, Type type) {
 		// Position doesn't seem to be reflective of it's spot in the package list, not sure if this can be automated
@@ -128,7 +139,7 @@ public class OutOfBandPackage implements Encodable, Serializable {
 				packages.add(stringId);
 				break;
 			default:
-				System.err.println("Tried to decode an unsupported OutOfBandData Type: " + type);
+				Log.e("OutOfBandPackage", "Tried to decode an unsupported OutOfBandData Type: " + type);
 				break;
 		}
 	}

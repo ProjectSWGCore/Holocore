@@ -128,6 +128,10 @@ public class Log {
 		}
 		String logStr = String.format(str, args);
 		String log = String.format("%s %c/[%s]: %s", date, level.getChar(), tag, logStr);
+		if (level.compareTo(LogLevel.WARN) >= 0)
+			System.err.println(date + " " + level.getChar() + ": " + logStr);
+		else
+			System.out.println(date + " " + level.getChar() + ": " + logStr);
 		synchronized (LOG) {
 			try {
 				LOG.write(log);
@@ -231,7 +235,7 @@ public class Log {
 	 * @param tag the tag to use for the log
 	 * @param exception the exception to print
 	 */
-	public static final void w(String tag, Exception exception) {
+	public static final void w(String tag, Throwable exception) {
 		printException(LogLevel.WARN, tag, exception);
 	}
 	
@@ -241,7 +245,7 @@ public class Log {
 	 * @param service the service outputting this log info
 	 * @param exception the exception to print
 	 */
-	public static final void w(Service service, Exception exception) {
+	public static final void w(Service service, Throwable exception) {
 		printException(LogLevel.WARN, service.getClass().getSimpleName(), exception);
 	}
 	
@@ -273,7 +277,7 @@ public class Log {
 	 * @param tag the tag to use for the log
 	 * @param exception the exception to print
 	 */
-	public static final void e(String tag, Exception exception) {
+	public static final void e(String tag, Throwable exception) {
 		printException(LogLevel.ERROR, tag, exception);
 	}
 	
@@ -283,7 +287,7 @@ public class Log {
 	 * @param service the service outputting this log info
 	 * @param exception the exception to print
 	 */
-	public static final void e(Service service, Exception exception) {
+	public static final void e(Service service, Throwable exception) {
 		printException(LogLevel.ERROR, service.getClass().getSimpleName(), exception);
 	}
 	
@@ -315,7 +319,7 @@ public class Log {
 	 * @param tag the tag to use for the log
 	 * @param exception the exception to print
 	 */
-	public static final void a(String tag, Exception exception) {
+	public static final void a(String tag, Throwable exception) {
 		printException(LogLevel.ASSERT, tag, exception);
 	}
 	
@@ -325,15 +329,17 @@ public class Log {
 	 * @param service the service outputting this log info
 	 * @param exception the exception to print
 	 */
-	public static final void a(Service service, Exception exception) {
+	public static final void a(Service service, Throwable exception) {
 		printException(LogLevel.ASSERT, service.getClass().getSimpleName(), exception);
 	}
 	
-	private static final void printException(LogLevel level, String tag, Exception exception) {
-		log(level, tag, "Exception in thread\"%s\" %s: %s", Thread.currentThread().getName(), exception.getClass().getName(), exception.getMessage());
-		log(level, tag, "Caused by: %s: %s", exception.getClass(), exception.getMessage());
-		for (StackTraceElement e : exception.getStackTrace()) {
-			log(level, tag, "    " + e.toString());
+	private static final void printException(LogLevel level, String tag, Throwable exception) {
+		synchronized (LOG) {
+			log(level, tag, "Exception in thread\"%s\" %s: %s", Thread.currentThread().getName(), exception.getClass().getName(), exception.getMessage());
+			log(level, tag, "Caused by: %s: %s", exception.getClass(), exception.getMessage());
+			for (StackTraceElement e : exception.getStackTrace()) {
+				log(level, tag, "    " + e.toString());
+			}
 		}
 	}
 	

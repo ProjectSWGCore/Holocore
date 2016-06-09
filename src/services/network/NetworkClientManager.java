@@ -219,7 +219,6 @@ public class NetworkClientManager extends Manager implements TCPCallback, Packet
 	
 	@Override
 	public void onConnectionDisconnect(Socket s, SocketAddress addr) {
-		Log.i(this, "Disconnected from %s", addr);
 		if (addr instanceof InetSocketAddress)
 			onSessionDisconnect((InetSocketAddress) addr);
 		else if (addr != null)
@@ -296,10 +295,11 @@ public class NetworkClientManager extends Manager implements TCPCallback, Packet
 		if (client != null) {
 			client.addToOutbound(p);
 			synchronized (outboundQueue) {
-				while (outboundQueue.remove(client));
-				outboundQueue.add(client);
+				if (!outboundQueue.contains(client)) {
+					outboundQueue.add(client);
+					outboundProcessor.execute(processOutboundRunnable);
+				}
 			}
-			outboundProcessor.execute(processOutboundRunnable);
 		}
 	}
 	
@@ -313,9 +313,11 @@ public class NetworkClientManager extends Manager implements TCPCallback, Packet
 		if (client != null) {
 			client.addToBuffer(data);
 			synchronized (inboundQueue) {
-				inboundQueue.add(client);
+				if (!inboundQueue.contains(client)) {
+					inboundQueue.add(client);
+					inboundProcessor.execute(processBufferRunnable);
+				}
 			}
-			inboundProcessor.execute(processBufferRunnable);
 		} else
 			Log.w(this, "Unknown connection! Network ID: %d  Address: %s", netId, addr);
 	}

@@ -24,7 +24,6 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>
  ******************************************************************************/
-
 package resources.chat;
 
 import network.packets.Packet;
@@ -32,13 +31,14 @@ import network.packets.swg.SWGPacket;
 import network.packets.swg.zone.chat.ChatRoomMessage;
 import resources.encodables.Encodable;
 import resources.encodables.OutOfBandPackage;
+import resources.network.NetBufferStream;
 import resources.objects.player.PlayerObject;
+import resources.persistable.Persistable;
 import resources.player.Player;
 import services.player.PlayerManager;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,9 +46,8 @@ import java.util.List;
 /**
  * @author Waverunner
  */
-public class ChatRoom implements Encodable, Serializable {
-	private static final long serialVersionUID = 1L;
-
+public class ChatRoom implements Encodable, Persistable {
+	
 	private int id;
 	private int type;
 	private String path;
@@ -306,10 +305,63 @@ public class ChatRoom implements Encodable, Serializable {
 
 		return data;
 	}
+	/*
+	private int id;
+	private int type;
+	private String path;
+	private ChatAvatar owner;
+	private ChatAvatar creator;
+	private String title;
+	private List<ChatAvatar> moderators;
+	private List<ChatAvatar> invited;
+	private boolean moderated; // No one but moderators can talk
+	private List<ChatAvatar> banned;
+	 */
+	@Override
+	public void save(NetBufferStream stream) {
+		stream.addByte(0);
+		owner.save(stream);
+		creator.save(stream);
+		stream.addInt(id);
+		stream.addInt(type);
+		stream.addAscii(path);
+		stream.addUnicode(title);
+		stream.addBoolean(moderated);
+		stream.addList(moderators, (a) -> a.save(stream));
+		stream.addList(invited, (a) -> a.save(stream));
+		stream.addList(banned, (a) -> a.save(stream));
+	}
+	
+	@Override
+	public void read(NetBufferStream stream) {
+		stream.getByte();
+		owner.read(stream);
+		creator.read(stream);
+		id = stream.getInt();
+		type = stream.getInt();
+		path = stream.getAscii();
+		title = stream.getUnicode();
+		moderated = stream.getBoolean();
+		stream.getList((i) -> moderators.add(inflateAvatar(stream)));
+		stream.getList((i) -> invited.add(inflateAvatar(stream)));
+		stream.getList((i) -> banned.add(inflateAvatar(stream)));
+	}
+	
+	private ChatAvatar inflateAvatar(NetBufferStream stream) {
+		ChatAvatar avatar = new ChatAvatar();
+		avatar.read(stream);
+		return avatar;
+	}
 
 	@Override
 	public String toString() {
 		return "ChatRoom[id=" + id + ", type=" + type + ", path='" + path + "', title='" + title + '\'' +
 				", creator=" + creator + ", moderated=" + moderated + ", isPublic=" + isPublic() + "]";
+	}
+	
+	public static ChatRoom create(NetBufferStream stream) {
+		ChatRoom room = new ChatRoom();
+		room.read(stream);
+		return room;
 	}
 }

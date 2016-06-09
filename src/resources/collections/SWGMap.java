@@ -30,7 +30,7 @@ package resources.collections;
 import resources.encodables.Encodable;
 import resources.network.NetBuffer;
 import resources.objects.SWGObject;
-import resources.player.PlayerState;
+import resources.server_info.Log;
 import utilities.Encoder;
 import utilities.Encoder.StringType;
 
@@ -39,62 +39,73 @@ import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import java.util.AbstractMap;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import network.packets.Packet;
 
-public class SWGMap<K, V> extends AbstractMap<K, V> implements Encodable, Serializable {
-	private static final long serialVersionUID = 1L;
-
-	private int view;
-	private int updateType;	
-	private transient int updateCount;
-	private int dataSize;
+public class SWGMap<K, V> extends HashMap<K, V> implements Encodable, Serializable {
 	
-	private StringType strType = StringType.UNSPECIFIED;
+	private static final long serialVersionUID = 2L;
 	
-	/*
-	 * Map which will contain all the byte data. A map is used here because it allows the encode method to not have to guess the ByteBuffer size. Doing it this way will
-	 * also allow all the data to be pre-compiled for the list, so it can have a positive impact on large SWGList's. This means that only 1 ByteBuffer is being created,
-	 * and that is to just take the data from this map and put it all together!
-	 */
-	private Map<Object, byte[]> data = new ConcurrentHashMap<>();
-	private Map<K, V> map = new ConcurrentHashMap<K, V>();
+	private final int view;
+	private final int updateType;
+	private final StringType strType;
 	
-	private Map<Object, byte[]> deltas = new HashMap<>();
-	private int deltaSize;
+	private transient Object updateMutex;
+	private transient AtomicInteger updateCount;
+	private transient Map<Object, byte[]> deltas;
+	private transient Map<Object, byte[]> data;
+	private transient int deltaSize;
+	private transient int dataSize;
 	
 	public SWGMap(int view, int updateType) {
-		this.view = view;
-		this.updateType = updateType;
+		this(view, updateType, StringType.UNSPECIFIED);
 	}
 	
 	public SWGMap(int view, int updateType, StringType strType) {
 		this.view = view;
 		this.updateType = updateType;
 		this.strType = strType;
+		this.updateMutex = new Object();
+		this.updateCount = new AtomicInteger(0);
+		this.deltas = new HashMap<>();
+		this.data = new HashMap<>();
+		this.deltaSize = 0;
+		this.dataSize = 0;
 	}
 	
 	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
 		ois.defaultReadObject();
-		updateCount = 0;
+		updateMutex = new Object();
+		updateCount = new AtomicInteger(0);
+		deltas = new HashMap<>();
+		data = new HashMap<>();
+		deltaSize = 0;
+		dataSize = 0;
+		for (Entry<K, V> e : entrySet()) {
+			addData(e.getKey(), e.getValue(), (byte) 0);
+		}
+		clearDeltaQueue();
+	}
+	
+	public void resetUpdateCount() {
+		updateCount.set(0);
 	}
 	
 	@Override
 	public V get(Object key) {
-		return map.get(key);
+		return super.get(key);
 	}
-
+	
 	@Override
 	public V put(K key, V value) {
-		updateCount++;
-		
-		V old = map.put(key, value);
-		
+		V old;
+		synchronized (updateMutex) {
+			old = super.put(key, value);
+		}
+		updateCount.incrementAndGet();
 		if (old != null) {
 			removeData(key);
 		}
@@ -105,173 +116,125 @@ public class SWGMap<K, V> extends AbstractMap<K, V> implements Encodable, Serial
 	
 	@Override
 	public V remove(Object key) {
-		updateCount++;
-		
-		V old = map.remove(key);
-		
+		V old;
+		synchronized (updateMutex) {
+			old = super.remove(key);
+		}
+		updateCount.incrementAndGet();
 		removeData(key);
 		
 		return old;
 	}
-
-	@Override
-	public Set<K> keySet() {
-		return map.keySet();
-	}
-
-	@Override
-	public Set<Entry<K, V>> entrySet() {
-		return map.entrySet();
-	}
-
-	@Override
-	public int size() {
-		return map.size();
-	}
-
-	@Override
-	public boolean containsValue(Object value) {
-		return map.containsValue(value);
-	}
-
-	@Override
-	public boolean containsKey(Object key) {
-		return map.containsKey(key);
-	}
-
+	
 	/**
-	 * Sends a delta and updates the data, notifying clients of the changed item in this map. Use this if you are not adding or removing the element
-	 * and just simply changing it. Should be used after changing values for an item in this map.
+	 * Sends a delta and updates the data, notifying clients of the changed item in this map. Use
+	 * this if you are not adding or removing the element and just simply changing it. Should be
+	 * used after changing values for an item in this super.
+	 * 
 	 * @param key Associated key with the value that was modified.
 	 * @param parent The parent of this map, who the map is bound to in order to send the delta
 	 */
 	public void update(Object key, SWGObject parent) {
-		updateCount++;
-		
-		removeDataSize(key); // remove the size of the prior data because not all encodables are fixed sizes (ie some have strings inside them)
-		addData(key, map.get(key), (byte) 2);
+		updateCount.incrementAndGet();
+		removeDataSize(key); // remove the size of the prior data
+		addData(key, super.get(key), (byte) 2);
 		sendDeltaMessage(parent);
 	}
 	
 	@Override
 	public byte[] encode() {
-		int size = map.size();
-
-		if (size == 0) {
-			return new byte[8];
+		ByteBuffer buffer;
+		synchronized (data) {
+			if (dataSize == 0)
+				return new byte[8];
+			buffer = ByteBuffer.allocate(8 + dataSize + data.size()).order(ByteOrder.LITTLE_ENDIAN);
+			
+			buffer.putInt(data.size());
+			buffer.putInt(updateCount.get());
+			
+			for (byte[] bytes : data.values()) {
+				buffer.put((byte) 0);
+				buffer.put(bytes);
+			}
 		}
 		
-		ByteBuffer buffer = ByteBuffer.allocate(8 + dataSize + data.size()).order(ByteOrder.LITTLE_ENDIAN);
-
-		buffer.putInt(size);
-		buffer.putInt(updateCount);
-
-		if (data.size() != size) {
-			// Data got out of sync with the map, so lets clean that up!
-			clearAllData();
-			for (Entry<K, V> entry : map.entrySet()) {
-				addData(entry.getKey(), entry.getValue(), (byte) 0);
-			}
-			clearDeltaQueue();
-		}
-
-		for (byte[] bytes : data.values()) {
-			buffer.put((byte) 0);
-			buffer.put(bytes);
-		}
-
 		return buffer.array();
 	}
-
+	
 	@Override
 	public void decode(ByteBuffer data) {
-
-		//throw new NotImplementedException();
-/*		Not sure how to do decoding for an SWGMap because of generics, won't know what specific type to decode as
-		One possible workaround is to refactor decode to create new object instead of directly initializing the variables
-
-		int size 	= Packet.getInt(data);
-		updateCount	= Packet.getInt(data);
-
-		for (int i = 0; i < size; i++) {
-
-		}
-
-		return 0;*/
+		throw new UnsupportedOperationException("Use decode(ByteBuffer data, Class<K> kType, Class<V> vType) instead");
 	}
 	
-	@SuppressWarnings("unchecked") // Unfortunately the exception is just caught
-	public void decode(ByteBuffer data, StringType keyType, StringType valType, boolean addByte) {
-		int size	= Packet.getInt(data);
-		updateCount	= Packet.getInt(data);
+	@SuppressWarnings("unchecked")
+	// Unfortunately the exception is just caught
+	public void decode(ByteBuffer data, StringType keyType, StringType valType) {
+		int size = Packet.getInt(data);
+		updateCount.set(Packet.getInt(data));
 		NetBuffer buffer = NetBuffer.wrap(data);
 		try {
 			for (int i = 0; i < size; i++) {
-				if (addByte)
-					buffer.getByte();
-				map.put((K) buffer.getString(keyType), (V) buffer.getString(valType));
+				buffer.getByte();
+				put((K) buffer.getString(keyType), (V) buffer.getString(valType));
 			}
 		} catch (ClassCastException e) {
 			e.printStackTrace();
 		}
+		clearDeltaQueue();
 	}
 	
-	@SuppressWarnings("unchecked") // Unfortunately the exception is just caught
-	public void decode(ByteBuffer data, StringType keyType, Class<V> vType, boolean addByte) {
-		int size	= Packet.getInt(data);
-		updateCount	= Packet.getInt(data);
+	@SuppressWarnings("unchecked")
+	// Unfortunately the exception is just caught
+	public void decode(ByteBuffer data, StringType keyType, Class<V> vType) {
+		int size = Packet.getInt(data);
+		updateCount.set(Packet.getInt(data));
 		NetBuffer buffer = NetBuffer.wrap(data);
 		try {
 			for (int i = 0; i < size; i++) {
-				if (addByte)
-					buffer.getByte();
+				buffer.getByte();
 				String key = buffer.getString(keyType);
 				Object value = buffer.getGeneric(vType);
 				if (value != null && vType.isAssignableFrom(value.getClass()))
-					map.put((K) key, (V) value);
+					put((K) key, (V) value);
 				else
-					System.err.println("Unable to parse: key="+key+"  value="+value);
+					Log.e("SWGMap", "Unable to parse: key=%s  value=%s", key, value);
 			}
 		} catch (ClassCastException e) {
 			e.printStackTrace();
 		}
+		clearDeltaQueue();
 	}
 	
-	@SuppressWarnings("unchecked") // There is type checking in the respective if's
-	public void decode(ByteBuffer data, Class<K> kType, Class<V> vType, boolean addByte) {
-		int size 	= Packet.getInt(data);
-		updateCount = Packet.getInt(data);
-
+	@SuppressWarnings("unchecked")
+	// There is type checking in the respective if's
+	public void decode(ByteBuffer data, Class<K> kType, Class<V> vType) {
+		int size = Packet.getInt(data);
+		updateCount.set(Packet.getInt(data));
+		
 		NetBuffer buffer = NetBuffer.wrap(data);
 		for (int i = 0; i < size; i++) {
-			if (addByte)
-				buffer.getByte();
+			buffer.getByte();
 			Object key = buffer.getGeneric(kType);
 			if (key == null) {
-				System.err.println("Failed to decode: "+kType.getSimpleName());
+				Log.e("SWGMap", "Failed to decode: " + kType.getSimpleName());
 				break;
 			}
 			Object value = buffer.getGeneric(vType);
 			if (value == null) {
-				System.err.println("Failed to decode: "+vType.getSimpleName());
+				Log.e("SWGMap", "Failed to decode: " + vType.getSimpleName());
 				break;
 			}
 			if (kType.isAssignableFrom(key.getClass()) && vType.isAssignableFrom(value.getClass()))
-				map.put((K) key, (V) value);
+				put((K) key, (V) value);
 			else
-				System.err.println("Failed to insert key="+key+"  value="+value);
+				Log.e("SWGMap", "Failed to insert key=" + key + "  value=" + value);
 		}
 		clearDeltaQueue();
 	}
-
+	
 	public void sendDeltaMessage(SWGObject target) {
-		if (!(deltas.size() > 0))
+		if (deltas.size() == 0)
 			return;
-
-		if (target.getOwner() == null || target.getOwner().getPlayerState() != PlayerState.ZONED_IN) {
-			clearDeltaQueue();
-			return;
-		}
 		
 		target.sendDelta(view, updateType, getDeltaData());
 		// Clear the queue since the delta has been sent to observers through the builder
@@ -279,43 +242,40 @@ public class SWGMap<K, V> extends AbstractMap<K, V> implements Encodable, Serial
 	}
 	
 	public void clearDeltaQueue() {
-		deltas.clear();
-		deltaSize = 0;
+		synchronized (deltas) {
+			deltas.clear();
+			deltaSize = 0;
+		}
 	}
 	
 	private byte[] getDeltaData() {
-		ByteBuffer buffer = ByteBuffer.allocate(8 + deltaSize).order(ByteOrder.LITTLE_ENDIAN);
-		
-		buffer.putInt(deltas.size());
-		buffer.putInt(updateCount);
-		for (byte[] data : deltas.values()) {
-			buffer.put(data);
+		ByteBuffer buffer;
+		synchronized (deltas) {
+			buffer = ByteBuffer.allocate(8 + deltaSize).order(ByteOrder.LITTLE_ENDIAN);
+			
+			buffer.putInt(deltas.size());
+			buffer.putInt(updateCount.get());
+			for (byte[] data : deltas.values()) {
+				buffer.put(data);
+			}
 		}
 		
 		return buffer.array();
 	}
 	
 	private void createDeltaData(Object key, byte[] delta, byte update) {
-		synchronized(deltas) {
-			byte[] combinedUpdate = new byte[delta.length + 1];
-			combinedUpdate[0] = update;
-			System.arraycopy(delta, 0, combinedUpdate, 1, delta.length);
-
+		byte[] combinedUpdate = new byte[delta.length + 1];
+		combinedUpdate[0] = update;
+		System.arraycopy(delta, 0, combinedUpdate, 1, delta.length);
+		synchronized (deltas) {
 			if (deltas.containsKey(key)) {
 				deltaSize -= deltas.remove(key).length;
 			}
-			deltaSize += delta.length + 1;
+			deltaSize += combinedUpdate.length;
 			deltas.put(key, combinedUpdate);
 		}
 	}
-
-	private void clearAllData() {
-		dataSize = 0;
-		data.clear();
-
-		clearDeltaQueue();
-	}
-
+	
 	private void addData(Object key, Object value, byte update) {
 		byte[] encodedKey = Encoder.encode(key, strType);
 		byte[] encodedValue = Encoder.encode(value, strType);
@@ -324,29 +284,27 @@ public class SWGMap<K, V> extends AbstractMap<K, V> implements Encodable, Serial
 		System.arraycopy(encodedKey, 0, encodedData, 0, encodedKey.length);
 		System.arraycopy(encodedValue, 0, encodedData, encodedKey.length, encodedValue.length);
 		
-		data.put(key, encodedData);
-		
-		dataSize += encodedData.length;
+		synchronized (data) {
+			data.put(key, encodedData);
+			dataSize += encodedData.length;
+		}
 		
 		createDeltaData(key, encodedData, update);
 	}
 	
-	
-	// Removes Key and its Value size of data and removes it from the data map
 	private void removeData(Object key) {
-		byte[] bytes = data.remove(key);
-		if (bytes == null) {
-			System.err.println("[SWGMap] Could not remove key as it wasn't in the data map: " + key);
-			return;
+		byte [] value;
+		synchronized (data) {
+			value = data.remove(key);
+			dataSize -= value.length;
 		}
 		
-		dataSize -= bytes.length;
-		
-		createDeltaData(key, bytes, (byte) 1);
+		createDeltaData(key, value, (byte) 1);
 	}
 	
-	// Removes Key and its Value size of data without removing it from the data map
 	private void removeDataSize(Object key) {
-		dataSize -= data.get(key).length;
+		synchronized (data) {
+			dataSize -= data.get(key).length;
+		}
 	}
 }

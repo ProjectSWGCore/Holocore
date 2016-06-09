@@ -42,12 +42,28 @@ public class DataTransform extends ObjectController {
 	private float speed = 0;
 	private float lookAtYaw = 0;
 	private boolean useLookAtYaw;
-
+	
+	public DataTransform(long objectId) {
+		super(objectId, CRC);
+	}
+	
+	public DataTransform(DataTransform transform) {
+		super(transform.getObjectId(), CRC);
+		timestamp = transform.getTimestamp();
+		updateCounter = transform.getUpdateCounter();
+		l = new Location(transform.getLocation());
+		speed = transform.getSpeed();
+		lookAtYaw = transform.getLookAtYaw();
+		useLookAtYaw = transform.isUseLookAtYaw();
+	}
+	
 	public DataTransform(long objectId, int counter, Location l, float speed) {
 		super(objectId, CRC);
 		if (l == null)
 			l = new Location();
 		this.l = l;
+		this.speed = speed;
+		this.updateCounter = counter;
 	}
 	
 	public DataTransform(ByteBuffer data) {
@@ -78,6 +94,7 @@ public class DataTransform extends ObjectController {
 		return data;
 	}
 	
+	public void setTimestamp(int timestamp) { this.timestamp = timestamp; }
 	public void setUpdateCounter(int counter) { this.updateCounter = counter; }
 	public void setLocation(Location l) { this.l = l; }
 	public void setSpeed(float speed) { this.speed = speed; }

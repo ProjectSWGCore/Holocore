@@ -38,6 +38,8 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
+import resources.server_info.Log;
+
 public class Scripts {
 
 	private static final String SCRIPTS = "scripts/";
@@ -79,9 +81,9 @@ public class Scripts {
 			// Returning null is all that's necessary
 			return null;
 		} catch (Throwable t) {
-			System.err.println("Error invoking script: " + script + "  with function: " + function);
-			System.err.println("    Args: " + Arrays.toString(args));
-			t.printStackTrace();
+			Log.e("Scripts", "Error invoking script: " + script + "  with function: " + function);
+			Log.e("Scripts", "    Args: " + Arrays.toString(args));
+			Log.e("Scripts", t);
 			return null;
 		}
 	}

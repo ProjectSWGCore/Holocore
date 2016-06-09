@@ -27,16 +27,15 @@
 ***********************************************************************************/
 package resources;
 
-import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
 import resources.encodables.Encodable;
+import resources.network.NetBufferStream;
+import resources.persistable.Persistable;
 
-public class SkillMod implements Encodable, Serializable {
+public class SkillMod implements Encodable, Persistable {
 	
-	private static final long serialVersionUID = 1L;
-
 	private int base, modifier;
 	
 	public SkillMod() {
@@ -64,6 +63,18 @@ public class SkillMod implements Encodable, Serializable {
 		modifier = data.getInt();
 	}
 	
+	@Override
+	public void save(NetBufferStream stream) {
+		stream.addInt(base);
+		stream.addInt(modifier);
+	}
+	
+	@Override
+	public void read(NetBufferStream stream) {
+		base = stream.getInt();
+		modifier = stream.getInt();
+	}
+
 	public void adjustBase(int adjustment) {
 		base += adjustment;
 	}

@@ -28,14 +28,25 @@
 package resources.objects.ship;
 
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
+import resources.network.NetBufferStream;
 import resources.objects.tangible.TangibleObject;
 
 public class ShipObject extends TangibleObject {
 	
-	private static final long serialVersionUID = 1L;
-	
 	public ShipObject(long objectId) {
 		super(objectId, BaselineType.SHIP);
+	}
+	
+	@Override
+	public void save(NetBufferStream stream) {
+		super.save(stream);
+		stream.addByte(0);
+	}
+	
+	@Override
+	public void read(NetBufferStream stream) {
+		super.read(stream);
+		stream.getByte();
 	}
 	
 }

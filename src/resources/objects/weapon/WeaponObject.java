@@ -30,16 +30,15 @@ package resources.objects.weapon;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.network.BaselineBuilder;
 import resources.network.NetBuffer;
+import resources.network.NetBufferStream;
 import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
 
 public class WeaponObject extends TangibleObject {
 	
-	private static final long serialVersionUID = 1L;
-	
 	private float attackSpeed = 0.5f;
 	private float maxRange = 5f;
-	private int type = WeaponType.UNARMED;
+	private WeaponType type = WeaponType.UNARMED;
 	
 	public WeaponObject(long objectId) {
 		super(objectId, BaselineType.WEAO);
@@ -62,11 +61,11 @@ public class WeaponObject extends TangibleObject {
 		this.maxRange = maxRange;
 	}
 	
-	public int getType() {
+	public WeaponType getType() {
 		return type;
 	}
 	
-	public void setType(int type) {
+	public void setType(WeaponType type) {
 		this.type = type;
 	}
 	
@@ -83,7 +82,7 @@ public class WeaponObject extends TangibleObject {
 	
 	@Override
 	public int hashCode() {
-		return super.hashCode() * 7 + type;
+		return super.hashCode() * 7 + type.getNum();
 	}
 	
 	public void createBaseline3(Player target, BaselineBuilder bb) {
@@ -103,7 +102,7 @@ public class WeaponObject extends TangibleObject {
 	public void createBaseline6(Player target, BaselineBuilder bb) {
 		super.createBaseline6(target, bb);
 
-		bb.addInt(type);
+		bb.addInt(type.getNum());
 		
 		bb.incrementOperandCount(1);
 	}
@@ -121,7 +120,25 @@ public class WeaponObject extends TangibleObject {
 	
 	public void parseBaseline6(NetBuffer buffer) {
 		super.parseBaseline6(buffer);
-		type = buffer.getInt();
+		type = WeaponType.getWeaponType(buffer.getInt());
+	}
+	
+	@Override
+	public void save(NetBufferStream stream) {
+		super.save(stream);
+		stream.addByte(0);
+		stream.addFloat(attackSpeed);
+		stream.addFloat(maxRange);
+		stream.addAscii(type.name());
+	}
+	
+	@Override
+	public void read(NetBufferStream stream) {
+		super.read(stream);
+		stream.getByte();
+		attackSpeed = stream.getFloat();
+		maxRange = stream.getFloat();
+		type = WeaponType.valueOf(stream.getAscii());
 	}
 	
 }

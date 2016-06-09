@@ -250,7 +250,7 @@ public class RelationalServerData extends RelationalDatabase {
 	
 	private boolean importFromSdb(String table, File sdb) {
 		try (TableReader reader = new TableReader(table, sdb)) {
-			System.out.println("Importing sdb... '" + sdb + "'");
+			Log.i("RelationalServerData", "Importing sdb... '" + sdb + "'");
 			if (sdb.getName().endsWith(".msdb"))
 				reader.readMaster();
 			else
@@ -261,7 +261,7 @@ public class RelationalServerData extends RelationalDatabase {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (IllegalArgumentException e) {
-			System.err.println("Invalid file format. Aborting read of " + sdb + "! Message: " + e.getMessage());
+			Log.e("RelationalServerData", "Invalid file format. Aborting read of %s! Message: %s", sdb, e.getMessage());
 		}
 		return false;
 	}
@@ -322,15 +322,15 @@ public class RelationalServerData extends RelationalDatabase {
 			while ((line = reader.readLine()) != null) {
 				String [] parts = line.split("\t");
 				if (parts.length != 2) {
-					System.err.println("RelationalServerData: Invalid line ["+lineNum+"]: " + line);
+					Log.e("RelationalServerData", "Invalid line [%d]: %s", lineNum, line);
 					continue;
 				}
 				boolean load = Boolean.parseBoolean(parts[1]);
 				if (load) {
 					File sdb = new File(file.getParent(), parts[0]);
-					System.out.println("  Importing sdb... '" + sdb + "'");
+					Log.i("RelationalServerData", "  Importing sdb... '" + sdb + "'");
 					if (!sdb.isFile()) {
-						System.err.println("    Failed to import sdb! File is not file or does not exist");
+						Log.e("RelationalServerData", "    Failed to import sdb! File is not file or does not exist");
 						continue;
 					}
 					@SuppressWarnings("resource") // This closes the database.. we don't want to do that yet
@@ -357,17 +357,38 @@ public class RelationalServerData extends RelationalDatabase {
 				return;
 			switch (lineNum) {
 				case 1:
-					columnNames = line.split("\t");
+					columnNames = fastTabSplit(line);
 					break;
 				case 2:
-					columnTypes = line.split("\t");
+					columnTypes = fastTabSplit(line);
 					createTable();
 					createPreparedStatement();
 					break;
 				default:
-					generateInsert(line.split("\t"), lineNum);
+					generateInsert(fastTabSplit(line), lineNum);
 					break;
 			}
+		}
+		
+		private String [] fastTabSplit(String str) {
+			int count = 1;
+			for (int i = 0; i < str.length(); i++) {
+				if (str.charAt(i) == '\t') {
+					count++;
+				}
+			}
+			String [] tabs = new String[count];
+			int tabInd = 0;
+			int prevInd = 0;
+			for (int i = 0; i < str.length(); i++) {
+				if (str.charAt(i) == '\t') {
+					tabs[tabInd++] = str.substring(prevInd, i);
+					prevInd = i+1;
+				}
+			}
+			if (prevInd < str.length())
+				tabs[tabInd++] = str.substring(prevInd);
+			return tabs;
 		}
 		
 		private void createTable() {
@@ -398,7 +419,7 @@ public class RelationalServerData extends RelationalDatabase {
 		
 		private void generateInsert(String [] data, int line) throws SQLException {
 			if (columnTypes.length != data.length) {
-				System.err.println("Could not load record: Types length and data length mismatch. Line: " + line);
+				Log.e("RelationalServerData", "Could not load record: Types length and data length mismatch. Line: " + line);
 				return;
 			}
 			int column = 0;
@@ -415,7 +436,7 @@ public class RelationalServerData extends RelationalDatabase {
 				}
 				insert.addBatch();
 			} catch (NumberFormatException e) {
-				System.err.println("Could not load record: Record has invalid data. Line: " + line + "  Column: " + column);
+				Log.e("RelationalServerData", "Could not load record: Record has invalid data. Line: " + line + "  Column: " + column);
 			}
 		}
 		

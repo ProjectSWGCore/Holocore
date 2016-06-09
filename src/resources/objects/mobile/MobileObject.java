@@ -31,8 +31,6 @@ import resources.objects.creature.CreatureObject;
 
 public class MobileObject extends CreatureObject {
 	
-	private static final long serialVersionUID = 1L;
-	
 	public MobileObject(long objectId) {
 		super(objectId);
 	}

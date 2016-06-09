@@ -29,15 +29,17 @@ package resources.encodables;
 
 import network.packets.Packet;
 
-import java.io.Serializable;
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.charset.Charset;
 
-public class ProsePackage implements OutOfBandData, Serializable {
-	private static final long serialVersionUID = 1L;
+import resources.network.NetBufferStream;
+import resources.persistable.Persistable;
+import resources.server_info.Log;
 
+public class ProsePackage implements OutOfBandData {
+	
 	private StringId base = new StringId("", "");
 
 	private Prose actor = new Prose();
@@ -112,13 +114,13 @@ public class ProsePackage implements OutOfBandData, Serializable {
 		case "DI":
 			if (prose instanceof Integer)
 				setDI((Integer) prose);
-			else { System.err.println("DI can only be a Integer!"); }
+			else { Log.w("ProsePackage", "DI can only be a Integer!"); }
 			break;
 			
 		case "DF":
 			if (prose instanceof Float)
 				setDF((Float) prose);
-			else { System.err.println("DF can only be a Float!"); }
+			else { Log.w("ProsePackage", "DF can only be a Float!"); }
 			break;
 			
 		default: break;
@@ -130,8 +132,8 @@ public class ProsePackage implements OutOfBandData, Serializable {
 		if (prose instanceof StringId) { base = (StringId) prose; }
 		else if (prose instanceof String) {
 			if (((String) prose).startsWith("@")) { base = new StringId((String) prose); }
-			else { System.err.println("The base STF cannot be a custom string!"); }
-		} else { System.err.println("The base STF must be either a Stf or a String! Received class: " + prose.getClass().getName()); }
+			else { Log.w("ProsePackage", "The base STF cannot be a custom string!"); }
+		} else { Log.w("ProsePackage", "The base STF must be either a Stf or a String! Received class: " + prose.getClass().getName()); }
 	}
 	
 	public void setTU(Object prose) {
@@ -147,7 +149,7 @@ public class ProsePackage implements OutOfBandData, Serializable {
 		else if (prose instanceof BigInteger)
 			actor.setObjectId(((BigInteger) prose).longValue());
 		else
-			System.err.println("Proses can only be Strings or Longs! Received class: " + prose.getClass().getName());
+			Log.w("ProsePackage", "Proses can only be Strings or Longs! Received class: " + prose.getClass().getName());
 	}
 	
 	public void setTT(Object prose) {
@@ -163,7 +165,7 @@ public class ProsePackage implements OutOfBandData, Serializable {
 		else if (prose instanceof BigInteger)
 			target.setObjectId(((BigInteger) prose).longValue());
 		else
-			System.err.println("Proses can only be Strings or Longs! Received class: " + prose.getClass().getName());
+			Log.w("ProsePackage", "Proses can only be Strings or Longs! Received class: " + prose.getClass().getName());
 	}
 	
 	public void setTO(Object prose) {
@@ -179,7 +181,7 @@ public class ProsePackage implements OutOfBandData, Serializable {
 		else if (prose instanceof BigInteger)
 			other.setObjectId(((BigInteger) prose).longValue());
 		else
-			System.err.println("Proses can only be Strings or Longs! Received class: " + prose.getClass().getName());
+			Log.w("ProsePackage", "Proses can only be Strings or Longs! Received class: " + prose.getClass().getName());
 	}
 	
 	public void setDI(Integer prose) {
@@ -226,6 +228,30 @@ public class ProsePackage implements OutOfBandData, Serializable {
 		df			= Packet.getInt(data);
 		grammarFlag	= Packet.getBoolean(data);
 	}
+	
+	@Override
+	public void save(NetBufferStream stream) {
+		stream.addByte(0);
+		base.save(stream);
+		actor.save(stream);
+		target.save(stream);
+		other.save(stream);
+		stream.addBoolean(grammarFlag);
+		stream.addInt(di);
+		stream.addFloat(df);
+	}
+	
+	@Override
+	public void read(NetBufferStream stream) {
+		stream.getByte();
+		base.read(stream);
+		actor.read(stream);
+		target.read(stream);
+		other.read(stream);
+		grammarFlag = stream.getBoolean();
+		di = stream.getInt();
+		df = stream.getFloat();
+	}
 
 	@Override
 	public OutOfBandPackage.Type getOobType() {
@@ -245,10 +271,8 @@ public class ProsePackage implements OutOfBandData, Serializable {
 				"]";
 	}
 
-	private static class Prose implements Encodable, Serializable {
-
-		private static final long	serialVersionUID	= 1L;
-
+	private static class Prose implements Encodable, Persistable {
+		
 		private long objectId;
 		private StringId stringId;
 		private String text;
@@ -291,6 +315,22 @@ public class ProsePackage implements OutOfBandData, Serializable {
 			objectId 	= Packet.getLong(data);
 			stringId	= Packet.getEncodable(data, StringId.class);
 			text		= Packet.getUnicode(data);
+		}
+		
+		@Override
+		public void save(NetBufferStream stream) {
+			stream.addByte(0);
+			stringId.save(stream);
+			stream.addLong(objectId);
+			stream.addUnicode(text);
+		}
+		
+		@Override
+		public void read(NetBufferStream stream) {
+			stream.getByte();
+			stringId.read(stream);
+			objectId = stream.getLong();
+			text = stream.getUnicode();
 		}
 
 		@Override

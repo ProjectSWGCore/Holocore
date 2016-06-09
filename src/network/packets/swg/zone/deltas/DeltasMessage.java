@@ -66,6 +66,9 @@ public class DeltasMessage extends SWGPacket {
 		num = getByte(data);
 		int length = getInt(data);
 		this.deltaData = getArray(data, length);
+		data = ByteBuffer.wrap(deltaData);
+		getShort(data);
+		update = getShort(data);
 	}
 	
 	public ByteBuffer encode() {
