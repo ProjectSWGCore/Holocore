@@ -63,6 +63,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -73,7 +74,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	private final long 							objectId;
 	private final Location 						location		= new Location(0, 0, 0, null);
 	private final Set<SWGObject>				containedObjects= new HashSet<>();
-	private final Map <String, String>			attributes		= new HashMap<>();
+	private final Map <String, String>			attributes		= new LinkedHashMap<>();
 	private final Set <SWGObject>				objectsAware	= new HashSet<>();
 	private final Set <SWGObject>				customAware		= new HashSet<>();
 	private final HashMap <String, SWGObject>	slots			= new HashMap<>(); // HashMap used for null value support
@@ -407,6 +408,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		while (parent != null) {
 			Location l = parent.location;
 			loc.translateLocation(l); // Have to access privately to avoid copies
+			loc.setTerrain(l.getTerrain());
 			parent = parent.getParent();
 		}
 		return loc;
