@@ -311,6 +311,7 @@ public class TravelService extends Service {
 			}
 			for (TravelGroup gt : travel.values())
 				gt.getPointsForTerrain(pointsForPlanet, nearest, to);
+			pointsForPlanet.remove(nearest);
 			Collections.sort(pointsForPlanet);
 			
 			player.sendPacket(new PlanetTravelPointListResponse(req.getPlanetName(), pointsForPlanet, getAdditionalCosts(objectLocation, pointsForPlanet)));
