@@ -313,6 +313,7 @@ public class TravelService extends Service {
 				gt.getPointsForTerrain(pointsForPlanet, nearest, to);
 			pointsForPlanet.remove(nearest);
 			Collections.sort(pointsForPlanet);
+			pointsForPlanet.add(nearest); // Yes ... adding it to the end of the list because I hate the client
 			
 			player.sendPacket(new PlanetTravelPointListResponse(req.getPlanetName(), pointsForPlanet, getAdditionalCosts(objectLocation, pointsForPlanet)));
 		}
