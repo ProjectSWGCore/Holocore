@@ -74,13 +74,12 @@ public final class EnvironmentService extends Service {
 			weatherForTerrain.put(t, randomWeather());
 			executor.scheduleAtFixedRate(new WeatherChanger(t), 0, cycleDuration, TimeUnit.SECONDS);
 		}
-		executor.scheduleAtFixedRate(() -> { updateTime(); }, 0, 30, TimeUnit.SECONDS);
-		
 		return super.initialize();
 	}
 	
 	@Override
 	public boolean start() {
+		executor.scheduleAtFixedRate(() -> { updateTime(); }, 30, 30, TimeUnit.SECONDS);
 		return super.start();
 	}
 	
@@ -116,8 +115,7 @@ public final class EnvironmentService extends Service {
 	}
 	
 	private void updateTime() {
-		ServerTimeMessage stm = new ServerTimeMessage((long) (ProjectSWG.getCoreTime()/1E3));
-		new NotifyPlayersPacketIntent(stm).broadcast();
+		new NotifyPlayersPacketIntent(new ServerTimeMessage(ProjectSWG.getGalacticTime())).broadcast();
 	}
 	
 	private void setWeather(Terrain terrain, WeatherType type) {
@@ -140,8 +138,8 @@ public final class EnvironmentService extends Service {
 		WeatherType type = weatherForTerrain.get(terrain);
 		
 		swm.setType(type);
-		swm.setCloudVectorX(random.nextFloat());	// randomised
-		swm.setCloudVectorZ(random.nextFloat());	// randomised	
+		swm.setCloudVectorX(random.nextFloat()+1);	// randomised
+		swm.setCloudVectorZ(random.nextFloat()+1);	// randomised	
 		swm.setCloudVectorY(0);	// Ziggy: Always 0, clouds don't move up/down
 		
 		return swm;

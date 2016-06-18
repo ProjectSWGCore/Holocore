@@ -1,3 +1,30 @@
+/************************************************************************************
+ * Copyright (c) 2015 /// Project SWG /// www.projectswg.com                        *
+ *                                                                                  *
+ * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on           *
+ * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies.  *
+ * Our goal is to create an emulator which will provide a server for players to     *
+ * continue playing a game similar to the one they used to play. We are basing      *
+ * it on the final publish of the game prior to end-game events.                    *
+ *                                                                                  *
+ * This file is part of Holocore.                                                   *
+ *                                                                                  *
+ * -------------------------------------------------------------------------------- *
+ *                                                                                  *
+ * Holocore is free software: you can redistribute it and/or modify                 *
+ * it under the terms of the GNU Affero General Public License as                   *
+ * published by the Free Software Foundation, either version 3 of the               *
+ * License, or (at your option) any later version.                                  *
+ *                                                                                  *
+ * Holocore is distributed in the hope that it will be useful,                      *
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of                   *
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                    *
+ * GNU Affero General Public License for more details.                              *
+ *                                                                                  *
+ * You should have received a copy of the GNU Affero General Public License         *
+ * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
+ *                                                                                  *
+ ***********************************************************************************/
 package services.objects;
 
 import java.sql.ResultSet;
@@ -68,7 +95,7 @@ public class ClientBuildoutService extends Service {
 	public Collection<SWGObject> loadClientObjects() {
 		Collection<SWGObject> objects;
 		long startLoad = System.nanoTime();
-		logInfo("Loading client objects...");
+		Log.i(this, "Loading client objects...");
 		try {
 			loadAreas(getEvents());
 			if (getConfig(ConfigFile.PRIMARY).getBoolean("LOAD-OBJECTS", true))
@@ -81,7 +108,7 @@ public class ClientBuildoutService extends Service {
 			Log.e(this, e);
 		}
 		double loadTime = (System.nanoTime() - startLoad) / 1E6;
-		logInfo("Finished loading %d client objects. Time: %fms", objects.size(), loadTime);
+		Log.i(this, "Finished loading %d client objects. Time: %fms", objects.size(), loadTime);
 		return objects;
 	}
 	
@@ -132,7 +159,7 @@ public class ClientBuildoutService extends Service {
 	
 	private void checkChild(Map<Long, SWGObject> objects, SWGObject obj, long container) {
 		if (container != 0)
-			objects.get(container).addObject(obj);
+			obj.moveToContainer(objects.get(container));
 	}
 	
 	private List<String> getEvents() {
@@ -190,8 +217,6 @@ public class ClientBuildoutService extends Service {
 	}
 	
 	private void setObjectArea(SWGObject obj) {
-		if (obj.getObjectId() == -507780858040143424L)
-			System.out.println("MENSIX " + obj.getParent());
 		if (obj.getParent() != null) {
 			obj.setBuildoutArea(null);
 			return;
@@ -201,10 +226,7 @@ public class ClientBuildoutService extends Service {
 		if (area == null || !isWithin(area, world.getTerrain(), world.getX(), world.getZ())) {
 			area = getAreaForObject(obj);
 			obj.setBuildoutArea(area);
-			if (obj.getObjectId() == -507780858040143424L)
-				System.out.println("       AREA: " + area);
-		} else if (obj.getObjectId() == -507780858040143424L)
-			System.out.println("       NOT SET");
+		}
 	}
 	
 	private BuildoutArea createArea(ResultSet set, AreaIndexes ind) throws SQLException {
@@ -230,11 +252,6 @@ public class ClientBuildoutService extends Service {
 	
 	private boolean isWithin(BuildoutArea area, Terrain t, double x, double z) {
 		return area.getTerrain() == t && x >= area.getX1() && x <= area.getX2() && z >= area.getZ1() && z <= area.getZ2();
-	}
-	
-	private void logInfo(String message, Object ... args) {
-		System.out.printf(getClass().getSimpleName() + ": " + message + "%n", args);
-		Log.i(this, message, args);
 	}
 	
 	private static class AreaIndexes {

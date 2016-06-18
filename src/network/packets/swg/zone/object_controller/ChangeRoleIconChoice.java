@@ -31,7 +31,7 @@ import java.nio.ByteBuffer;
 
 public class ChangeRoleIconChoice extends ObjectController {
 	
-	public static final int CRC = 1101;
+	public static final int CRC = 0x044D;
 	
 	private int iconChoice;
 	

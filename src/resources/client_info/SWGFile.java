@@ -35,6 +35,8 @@ import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.StandardCharsets;
 
+import resources.server_info.Log;
+
 /**
  * Created by Waverunner on 6/4/2015
  */
@@ -86,12 +88,12 @@ public class SWGFile {
 		currentForm = master;
 
 		if (!isValidIff(bb, size)) {
-			System.err.println("Tried to open a file not in a valid Interchangeable File Format: " + file.getAbsolutePath());
+			Log.e("SWGFile", "Tried to open a file not in a valid Interchangeable File Format: " + file.getAbsolutePath());
 			return;
 		}
 
 		if (size != master.populateFromBuffer(bb)) {
-			System.err.println("Size mismatch between population result and channel size: " + file.getAbsolutePath());
+			Log.e("SWGFile", "Size mismatch between population result and channel size: " + file.getAbsolutePath());
 			return;
 		}
 

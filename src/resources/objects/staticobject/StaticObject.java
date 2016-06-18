@@ -27,14 +27,25 @@
 ***********************************************************************************/
 package resources.objects.staticobject;
 
+import resources.network.NetBufferStream;
 import resources.objects.creature.CreatureObject;
 
 public class StaticObject extends CreatureObject {
 	
-	private static final long serialVersionUID = 1L;
-	
 	public StaticObject(long objectId) {
 		super(objectId);
+	}
+	
+	@Override
+	public void save(NetBufferStream stream) {
+		super.save(stream);
+		stream.addByte(0);
+	}
+	
+	@Override
+	public void read(NetBufferStream stream) {
+		super.read(stream);
+		stream.getByte();
 	}
 	
 }

@@ -31,6 +31,7 @@ import java.nio.ByteBuffer;
 
 import resources.server_info.Log;
 import network.packets.swg.SWGPacket;
+import network.packets.swg.zone.object_controller.combat.*;
 
 public abstract class ObjectController extends SWGPacket {
 	
@@ -60,7 +61,7 @@ public abstract class ObjectController extends SWGPacket {
 			return;
 		update = getInt(data);
 		if (getInt(data) != controllerCrc)
-			System.err.println("ObjectController[" + getClass().getSimpleName() + "] Attempting to process invalid controller");
+			Log.e(getClass().getSimpleName(), "Attempting to process invalid controller");
 		objectId = getLong(data);
 		getInt(data);
 		return;
@@ -90,15 +91,19 @@ public abstract class ObjectController extends SWGPacket {
 		int crc = data.getInt(10);
 		switch (crc) {
 			case 0x0071: return new DataTransform(data);
+			case 0x00CC: return new CombatAction(data);
 			case 0x00F1: return new DataTransformWithParent(data);
 			case 0x0116: return new CommandQueueEnqueue(data);
 			case 0x0117: return new CommandQueueDequeue(data);
 			case 0x0126: return new LookAtTarget(data);
 			case 0x012E: return new PlayerEmote(data);
 			case 0x0131: return new PostureUpdate(data);
+			case 0x0134: return new CombatSpam(data);
 			case 0x0146: return new ObjectMenuRequest(data);
+			case 0x01BD: return new ShowFlyText(data);
+			case 0x01DB: return new BiographyUpdate(data);
+			case 0x044D: return new ChangeRoleIconChoice(data);
 			case 0x04C5: return new IntendedTarget(data);
-			case ChangeRoleIconChoice.CRC: return new ChangeRoleIconChoice(data);
 		}
 		Log.w("ObjectController", "Unknown object controller: %08X", crc);
 		return new GenericObjectController(crc, data);

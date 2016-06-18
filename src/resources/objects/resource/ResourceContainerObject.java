@@ -29,12 +29,11 @@ package resources.objects.resource;
 
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.network.BaselineBuilder;
+import resources.network.NetBufferStream;
 import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
 
 public class ResourceContainerObject extends TangibleObject {
-	
-	private static final long serialVersionUID = 1L;
 	
 	private long	resourceType	= 0;
 	private String	resourceName	= "";
@@ -130,6 +129,39 @@ public class ResourceContainerObject extends TangibleObject {
 		hash ^= parentName.hashCode();
 		hash ^= resourceName.hashCode();
 		return hash;
+	}
+	
+	/*
+	private long	resourceType	= 0;
+	private String	resourceName	= "";
+	private int		quantity		= 0;
+	private int		maxQuantity		= 0;
+	private String	parentName		= "";
+	private String	displayName		= "";
+	 */
+	
+	@Override
+	public void save(NetBufferStream stream) {
+		super.save(stream);
+		stream.addByte(0);
+		stream.addInt(quantity);
+		stream.addInt(maxQuantity);
+		stream.addLong(resourceType);
+		stream.addAscii(parentName);
+		stream.addUnicode(resourceName);
+		stream.addUnicode(displayName);
+	}
+	
+	@Override
+	public void read(NetBufferStream stream) {
+		super.read(stream);
+		stream.getByte();
+		quantity = stream.getInt();
+		maxQuantity = stream.getInt();
+		resourceType = stream.getLong();
+		parentName = stream.getAscii();
+		resourceName = stream.getUnicode();
+		displayName = stream.getUnicode();
 	}
 	
 }
