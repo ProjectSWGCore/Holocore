@@ -27,13 +27,13 @@
 
 package resources.commands.callbacks;
 
+import intents.object.DestroyObjectIntent;
 import resources.commands.ICmdCallback;
 import resources.objects.SWGObject;
 import resources.objects.player.PlayerObject;
 import resources.objects.waypoint.WaypointObject;
 import resources.player.Player;
 import services.galaxy.GalacticManager;
-import services.objects.ObjectManager;
 
 public class ServerDestroyObjectCmdCallback implements ICmdCallback {
 	@Override
@@ -42,16 +42,12 @@ public class ServerDestroyObjectCmdCallback implements ICmdCallback {
 		if (target == null)
 			return;
 
-		ObjectManager objectManager = galacticManager.getObjectManager();
-
 		// TODO Take into account container permissions
 
 		if (target instanceof WaypointObject) {
 			PlayerObject ghost = player.getPlayerObject();
 			ghost.removeWaypoint(target.getObjectId());
-			objectManager.deleteObject(target.getObjectId());
-		} else {
-			objectManager.destroyObject(target);
 		}
+		new DestroyObjectIntent(target).broadcast();
 	}
 }

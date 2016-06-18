@@ -76,13 +76,11 @@ public final class ServerFactory extends DataFactory {
 
 					if (!iff.exists()) {
 						convertSdf(path, name);
-						System.out.println("Created Server Datatable: " + name);
 						Log.i("ServerFactory", "Created Server Datatable: %s", name);
 					} else {
 						File sif = path.toFile();
 						if (sif.lastModified() > iff.lastModified()) {
 							convertSdf(path, name);
-							System.out.println("Updated Server Datatable: " + name);
 							Log.i("ServerFactory", "Updated Server Datatable: %s", name);
 						}
 					}
@@ -150,7 +148,7 @@ public final class ServerFactory extends DataFactory {
 			}
 
 			if (columnNames == null || columnTypes == null) {
-				System.err.println("Failed to convert sdf " + sif.getFileName());
+				Log.e("ServerFactory", "Failed to convert sdf " + sif.getFileName());
 				return;
 			}
 
@@ -188,7 +186,7 @@ public final class ServerFactory extends DataFactory {
 					case "i": table[rowNum][t] = Integer.valueOf(val); break;
 					case "f": table[rowNum][t] = Float.valueOf(val); break;
 					case "s": table[rowNum][t] = val; break;
-					default: System.err.println("Don't know how to parse type " + type); break;
+					default: Log.e("ServerFactory", "Don't know how to parse type " + type); break;
 				}
 			} catch (NumberFormatException e) {
 				Log.e("ServerFactory:createDatableRow", "Cannot format string %s to a number", val);

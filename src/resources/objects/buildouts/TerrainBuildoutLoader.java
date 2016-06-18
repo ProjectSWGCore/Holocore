@@ -37,7 +37,6 @@ import resources.Terrain;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.CrcStringTableData;
 import resources.client_info.visitors.DatatableData;
-import resources.containers.ContainerPermissions;
 import resources.objects.SWGObject;
 import resources.objects.SWGObject.ObjectClassification;
 import resources.objects.cell.CellObject;
@@ -96,7 +95,6 @@ class TerrainBuildoutLoader {
 			object.setBuildoutAreaId(area.getIndex());
 			setCellInformation(object, buildoutRow.getCellIndex());
 			addObject(area.getName(), object, buildoutRow.getContainerId());
-			updatePermissions(object);
 		}
 	}
 	
@@ -112,12 +110,9 @@ class TerrainBuildoutLoader {
 		objectTable.put(object.getObjectId(), object);
 		if (containerId != 0) {
 			SWGObject container = objectTable.get(containerId);
-			if (container != null)
-				container.addObject(object);
-			else {
+			object.moveToContainer(container);
+			if (container == null)
 				Log.e("TerrainBuildoutLoader", "Failed to load object: " + object.getTemplate());
-//				objects.add(object);
-			}
 		} else {
 			List<SWGObject> list = objects.get(areaName);
 			if (list == null) {
@@ -133,10 +128,6 @@ class TerrainBuildoutLoader {
 			return;
 		CellObject cell = (CellObject) object;
 		cell.setNumber(cellIndex);
-	}
-	
-	private void updatePermissions(SWGObject object) {
-		object.setContainerPermissions(ContainerPermissions.WORLD);
 	}
 	
 }

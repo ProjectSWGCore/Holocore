@@ -147,9 +147,8 @@ public class StaticService extends Service {
 			Location loc = new Location(x, y, z, parent.getTerrain());
 			loc.setHeading(heading);
 			SWGObject obj = ObjectCreator.createObjectFromTemplate(iff);
-			obj.setParent(parent);
 			obj.setLocation(loc);
-			parent.addObject(obj);
+			obj.moveToContainer(parent);
 			new ObjectCreatedIntent(obj).broadcast();
 			return obj;
 		}

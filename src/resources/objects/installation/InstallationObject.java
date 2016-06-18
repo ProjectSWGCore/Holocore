@@ -30,12 +30,11 @@ package resources.objects.installation;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.network.BaselineBuilder;
 import resources.network.NetBuffer;
+import resources.network.NetBufferStream;
 import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
 
 public class InstallationObject extends TangibleObject {
-	
-	private static final long serialVersionUID = 1L;
 	
 	private boolean activated	= false;
 	private double	power		= 0;
@@ -103,6 +102,24 @@ public class InstallationObject extends TangibleObject {
 		hash ^= Double.hashCode(power);
 		hash ^= Double.hashCode(powerRate);
 		return hash;
+	}
+	
+	@Override
+	public void save(NetBufferStream stream) {
+		super.save(stream);
+		stream.addByte(0);
+		stream.addBoolean(activated);
+		stream.addFloat((float) power);
+		stream.addFloat((float) powerRate);
+	}
+	
+	@Override
+	public void read(NetBufferStream stream) {
+		super.read(stream);
+		stream.getByte();
+		activated = stream.getBoolean();
+		power = stream.getFloat();
+		powerRate = stream.getFloat();
 	}
 	
 }

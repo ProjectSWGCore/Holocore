@@ -37,6 +37,7 @@ import resources.client_info.ClientFactory;
 import resources.client_info.ClientData;
 import resources.client_info.IffNode;
 import resources.client_info.SWGFile;
+import resources.server_info.Log;
 
 public class ObjectData extends ClientData {
 
@@ -172,7 +173,7 @@ public class ObjectData extends ClientData {
 
 		ClientData attrData = ClientFactory.getInfoFromFile(file, true);
 		if (attrData == null || !(attrData instanceof ObjectData)) {
-			System.out.println("Could not load attribute data from file " + file + "!");
+			Log.w("ObjectData", "Could not load attribute data from file " + file + "!");
 			return; // break out of whole method as we should only continue if we have all the extended attributes
 		}
 

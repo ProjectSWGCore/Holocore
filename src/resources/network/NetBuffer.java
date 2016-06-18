@@ -1,3 +1,30 @@
+/************************************************************************************
+ * Copyright (c) 2015 /// Project SWG /// www.projectswg.com                        *
+ *                                                                                  *
+ * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on           *
+ * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies.  *
+ * Our goal is to create an emulator which will provide a server for players to     *
+ * continue playing a game similar to the one they used to play. We are basing      *
+ * it on the final publish of the game prior to end-game events.                    *
+ *                                                                                  *
+ * This file is part of Holocore.                                                   *
+ *                                                                                  *
+ * -------------------------------------------------------------------------------- *
+ *                                                                                  *
+ * Holocore is free software: you can redistribute it and/or modify                 *
+ * it under the terms of the GNU Affero General Public License as                   *
+ * published by the Free Software Foundation, either version 3 of the               *
+ * License, or (at your option) any later version.                                  *
+ *                                                                                  *
+ * Holocore is distributed in the hope that it will be useful,                      *
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of                   *
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                    *
+ * GNU Affero General Public License for more details.                              *
+ *                                                                                  *
+ * You should have received a copy of the GNU Affero General Public License         *
+ * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
+ *                                                                                  *
+ ***********************************************************************************/
 package resources.network;
 
 import java.nio.ByteBuffer;
@@ -243,7 +270,7 @@ public class NetBuffer {
 	}
 	
 	public SWGSet<String> getSwgSet(int num, int var, StringType type) {
-		SWGSet<String> set = new SWGSet<>(num, var);
+		SWGSet<String> set = new SWGSet<>(num, var, type);
 		set.decode(data, type);
 		return set;
 	}
@@ -255,11 +282,10 @@ public class NetBuffer {
 	}
 	
 	public SWGList<String> getSwgList(int num, int var, StringType type) {
-		SWGList<String> set = new SWGList<>(num, var);
+		SWGList<String> set = new SWGList<>(num, var, type);
 		set.decode(data, type);
 		return set;
 	}
-	
 	
 	public <T> SWGList<T> getSwgList(int num, int var, Class<T> type) {
 		SWGList<T> set = new SWGList<>(num, var);
@@ -267,21 +293,21 @@ public class NetBuffer {
 		return set;
 	}
 	
-	public SWGMap<String, String> getSwgMap(int num, int var, StringType key, StringType val) {
-		SWGMap<String, String> map = new SWGMap<>(num, var);
-		map.decode(data, key, val, true);
+	public SWGMap<String, String> getSwgMap(int num, int var, StringType strType) {
+		SWGMap<String, String> map = new SWGMap<>(num, var, strType);
+		map.decode(data, strType, strType);
 		return map;
 	}
 	
 	public <V> SWGMap<String, V> getSwgMap(int num, int var, StringType key, Class<V> val) {
-		SWGMap<String, V> map = new SWGMap<>(num, var);
-		map.decode(data, key, val, true);
+		SWGMap<String, V> map = new SWGMap<>(num, var, key);
+		map.decode(data, key, val);
 		return map;
 	}
 	
 	public <K, V> SWGMap<K, V> getSwgMap(int num, int var, Class<K> key, Class<V> val) {
 		SWGMap<K, V> map = new SWGMap<>(num, var);
-		map.decode(data, key, val, true);
+		map.decode(data, key, val);
 		return map;
 	}
 	

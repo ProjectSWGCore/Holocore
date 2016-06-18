@@ -32,30 +32,39 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import intents.object.DestroyObjectIntent;
+import intents.object.ObjectCreatedIntent;
 import intents.server.ConfigChangedIntent;
 import resources.Location;
+import resources.PvpFlag;
 import resources.Terrain;
 import resources.config.ConfigFile;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.building.BuildingObject;
 import resources.objects.SWGObject;
+import resources.objects.creature.CreatureDifficulty;
 import resources.objects.creature.CreatureObject;
+import resources.objects.custom.AIBehavior;
+import resources.objects.custom.DefaultAIObject;
+import resources.objects.tangible.OptionFlag;
 import resources.server_info.Log;
 import resources.server_info.RelationalDatabase;
 import resources.server_info.RelationalServerFactory;
 import resources.spawn.SpawnerType;
 import resources.spawn.Spawner;
+import services.objects.ObjectCreator;
 import services.objects.ObjectManager;
 
 public final class SpawnerService extends Service {
 	
 	private static final String GET_ALL_SPAWNERS_SQL = "SELECT static.x, static.y, static.z, static.heading, " // static columns
-			+ "static.spawner_type, static.cell_id, static.active, static.mood, " // more static columns
+			+ "static.spawner_type, static.cell_id, static.active, static.mood, static.behaviour, static.float_radius, " // more static columns
 			+ "buildings.object_id AS building_id, buildings.terrain_name AS building_terrain, " // building columns
-			+ "creatures.iff_template AS iff, creatures.creature_name " // creature columns
-			+ "FROM static, buildings, creatures "
-			+ "WHERE buildings.building_id = static.building_id AND static.creature_id = creatures.creature_id";
+			+ "creatures.iff_template AS iff, creatures.creature_name, creatures.combat_level, creatures.difficulty, creatures.attackable, " // creature columns
+			+ "npc_stats.HP, npc_stats.Action, npc_stats.Boss_HP, npc_stats.Boss_Action, npc_stats.Elite_HP, npc_stats.Elite_Action "	// npc_stats columns
+			+ "FROM static, buildings, creatures, npc_stats "
+			+ "WHERE buildings.building_id = static.building_id AND static.creature_id = creatures.creature_id AND creatures.combat_level = npc_stats.Level";
 	private static final String IDLE_MOOD = "idle";
 	
 	private final ObjectManager objectManager;
@@ -83,28 +92,27 @@ public final class SpawnerService extends Service {
 		ConfigChangedIntent cgi = (ConfigChangedIntent) i;
 		String newValue, oldValue;
 		
-		if(cgi.getChangedConfig().equals(ConfigFile.FEATURES))
-			if(cgi.getKey().equals("NPCS-ENABLED")) {
+		if (cgi.getChangedConfig().equals(ConfigFile.FEATURES)) {
+			if (cgi.getKey().equals("NPCS-ENABLED")) {
 				newValue = cgi.getNewValue();
 				oldValue = cgi.getOldValue();
 				
-				if(!newValue.equals(oldValue)) {
-					if(Boolean.valueOf(newValue) && spawners.isEmpty()) { // If nothing's been spawned, create it.
+				if (!newValue.equals(oldValue)) {
+					if (Boolean.valueOf(newValue) && spawners.isEmpty()) { // If nothing's been spawned, create it.
 						loadSpawners(getConfig(ConfigFile.FEATURES).getBoolean("SPAWN-EGGS-ENABLED", false));
 					} else { // If anything's been spawned, delete it.
 						removeSpawners();
 					}
 				}
 			}
-		
+		}
 	}
 	
 	private void loadSpawners(boolean spawnEggs) {
 		long start = System.nanoTime();
 		int count = 0;
-		System.out.println("SpawnerService: Loading NPCs...");
 		Log.i(this, "Loading NPCs...");
-		try (RelationalDatabase spawnerDatabase = RelationalServerFactory.getServerData("spawn/static.db", "static", "building/buildings", "creatures/creatures")) {
+		try (RelationalDatabase spawnerDatabase = RelationalServerFactory.getServerData("spawn/static.db", "static", "building/buildings", "creatures/creatures", "creatures/npc_stats")) {
 			try (ResultSet set = spawnerDatabase.executeQuery(GET_ALL_SPAWNERS_SQL)) {
 				Location loc = new Location();
 				while (set.next()) {
@@ -118,7 +126,6 @@ public final class SpawnerService extends Service {
 			e.printStackTrace();
 		}
 		double time = (System.nanoTime()-start)/1E6;
-		System.out.printf("SpawnerService: Finished loading %d NPCs. Time: %fms%n", count, time);
 		Log.i(this, "Finished loading %d NPCs. Time: %fms", count, time);
 	}
 	
@@ -137,21 +144,86 @@ public final class SpawnerService extends Service {
 		
 		if (spawnEggs) {
 			SpawnerType spawnerType = SpawnerType.valueOf(set.getString("spawner_type"));
-			SWGObject egg = objectManager.createObject(parent, spawnerType.getObjectTemplate(), loc, false);
+			SWGObject egg = ObjectCreator.createObjectFromTemplate(spawnerType.getObjectTemplate());
+			egg.setLocation(loc);
+			egg.moveToContainer(parent);
+			new ObjectCreatedIntent(egg).broadcast();
 			spawners.add(new Spawner(egg));
 		}
-		createNPC(parent, loc, set.getString("iff"), set.getString("creature_name"), set.getString("mood"));
+		String difficultyChar = set.getString("difficulty");
+		String creatureName = set.getString("creature_name");
+		CreatureDifficulty difficulty;
+		
+		switch(difficultyChar) {
+			default: Log.w(this, "An unknown creature difficulty of %s was set for %s. Using default NORMAL", difficultyChar, creatureName);
+			case "N": difficulty = CreatureDifficulty.NORMAL; break;
+			case "E": difficulty = CreatureDifficulty.ELITE; break;
+			case "B": difficulty = CreatureDifficulty.BOSS; break;
+		}
+		
+		createNPC(parent, loc, creatureName, difficulty, set);
 	}
 	
-	private boolean createNPC(SWGObject parent, Location loc, String iff, String name, String moodAnimation) {
-		CreatureObject object = (CreatureObject) objectManager.createObject(parent, createTemplate(getRandomIff(iff)), loc, false);
-		if (object == null)
-			return false;
+	private void createNPC(SWGObject parent, Location loc, String name, CreatureDifficulty difficulty, ResultSet set) throws SQLException {
+		DefaultAIObject object = ObjectCreator.createObjectFromTemplate(createTemplate(getRandomIff(set.getString("iff"))), DefaultAIObject.class);
+		object.setLocation(loc);
+		if (parent != null)
+			object.moveToContainer(parent);
 		object.setName(getCreatureName(name));
+		object.setLevel((short) set.getInt("combat_level"));
+		object.setDifficulty(difficulty);
+		setHAM(object, difficulty, set);
+		setFlags(object, set);
+		
+		object.setBehavior(AIBehavior.valueOf(set.getString("behaviour")));
+		if (object.getBehavior() == AIBehavior.FLOAT)
+			object.setFloatRadius((Integer) set.getInt("float_radius"));
+		
+		String moodAnimation = set.getString("mood");
 		if (!moodAnimation.equals(IDLE_MOOD)) {
 			object.setMoodAnimation(moodAnimation);
 		}
-		return true;
+		new ObjectCreatedIntent(object).broadcast();
+	}
+	
+	private void setHAM(CreatureObject creature, CreatureDifficulty difficulty, ResultSet set) throws SQLException {
+		int health = 0, action = 0;
+		switch (difficulty) {
+			case BOSS:
+				health = set.getInt("Boss_HP");
+				action = set.getInt("Boss_Action");
+				break;
+			case ELITE:
+				health = set.getInt("Elite_HP");
+				action = set.getInt("Elite_Action");
+				break;
+			case NORMAL:
+				health = set.getInt("HP");
+				action = set.getInt("Action");
+				break;
+		}
+		creature.setMaxHealth(health);
+		creature.setHealth(health);
+		creature.setMaxAction(action);
+		creature.setAction(action);
+	}
+	
+	private void setFlags(CreatureObject creature, ResultSet set) throws SQLException {
+		switch (set.getString("attackable")) {
+			case "AGGRESSIVE":
+				creature.setPvpFlags(PvpFlag.AGGRESSIVE);
+				creature.addOptionFlags(OptionFlag.AGGRESSIVE);
+			case "ATTACKABLE":
+				creature.setPvpFlags(PvpFlag.ATTACKABLE);
+				creature.addOptionFlags(OptionFlag.HAM_BAR);
+				break;
+			case "INVULNERABLE":
+				creature.addOptionFlags(OptionFlag.INVULNERABLE);
+				break;
+			default:
+				Log.w(this, "An unknown attackable type of %s was specified for %s", set.getString("attackable"), creature.getName());
+				break;
+		}
 	}
 	
 	private String getCreatureName(String name) {
@@ -172,8 +244,8 @@ public final class SpawnerService extends Service {
 	}
 	
 	private void removeSpawners() {
-		for(Spawner spawner : spawners)
-			objectManager.destroyObject(spawner.getSpawnerObject());
+		for (Spawner spawner : spawners)
+			new DestroyObjectIntent(spawner.getSpawnerObject()).broadcast();;
 		
 		spawners.clear();
 	}

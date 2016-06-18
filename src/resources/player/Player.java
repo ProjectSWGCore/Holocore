@@ -32,6 +32,7 @@ import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
+import resources.server_info.Log;
 import services.player.PlayerManager;
 
 public class Player implements Comparable<Player> {
@@ -107,6 +108,8 @@ public class Player implements Comparable<Player> {
 	
 	public void setCreatureObject(CreatureObject obj) {
 		this.creatureObject = obj;
+		if (obj != null && obj.getOwner() != this)
+			obj.setOwner(this);
 	}
 	
 	public void updateLastPacketTimestamp() {
@@ -175,7 +178,7 @@ public class Player implements Comparable<Player> {
 	public void sendPacket(Packet ... packets) {
 		if (playerManager != null)
 			playerManager.sendPacket(this, packets);
-		else System.err.println("Couldn't send packet due to playerManager being null.");
+		else Log.e("Player", "Couldn't send packet due to playerManager being null.");
 	}
 	
 	@Override

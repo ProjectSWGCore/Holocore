@@ -31,12 +31,11 @@ import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import network.packets.swg.zone.building.UpdateCellPermissionMessage;
 import resources.network.BaselineBuilder;
 import resources.network.NetBuffer;
+import resources.network.NetBufferStream;
 import resources.objects.SWGObject;
 import resources.player.Player;
 
 public class CellObject extends SWGObject {
-	
-	private static final long serialVersionUID = 1L;
 	
 	private boolean	isPublic	= true;
 	private int		number		= 0;
@@ -87,8 +86,8 @@ public class CellObject extends SWGObject {
 		this.labelZ = z;
 	}
 
-	protected void sendBaselines(Player target) {
-		super.sendBaselines(target);
+	protected void sendFinalBaselinePackets(Player target) {
+		super.sendFinalBaselinePackets(target);
 		target.sendPacket(new UpdateCellPermissionMessage((byte) 1, getObjectId()));
 	}
 	
@@ -120,5 +119,25 @@ public class CellObject extends SWGObject {
 		labelX = buffer.getFloat();
 		buffer.getFloat();
 		labelZ = buffer.getFloat();
+	}
+	
+	@Override
+	public void save(NetBufferStream stream) {
+		super.save(stream);
+		stream.addByte(0);
+		stream.addBoolean(isPublic);
+		stream.addAscii(label);
+		stream.addFloat((float) labelX);
+		stream.addFloat((float) labelZ);
+	}
+	
+	@Override
+	public void read(NetBufferStream stream) {
+		super.read(stream);
+		stream.getByte();
+		isPublic = stream.getBoolean();
+		label = stream.getAscii();
+		labelX = stream.getFloat();
+		labelZ = stream.getFloat();
 	}
 }

@@ -29,13 +29,12 @@ package resources;
 
 import network.packets.Packet;
 import resources.encodables.Encodable;
+import resources.network.NetBufferStream;
+import resources.persistable.Persistable;
 
-import java.io.Serializable;
 import java.nio.ByteBuffer;
 
-public class Quaternion implements Encodable, Serializable {
-	
-	private static final long	serialVersionUID	= 1L;
+public class Quaternion implements Encodable, Persistable {
 	
 	private double x;
 	private double y;
@@ -152,6 +151,22 @@ public class Quaternion implements Encodable, Serializable {
 		y = Packet.getFloat(data);
 		z = Packet.getFloat(data);
 		w = Packet.getFloat(data);
+	}
+	
+	@Override
+	public void save(NetBufferStream stream) {
+		stream.addFloat((float) x);
+		stream.addFloat((float) y);
+		stream.addFloat((float) z);
+		stream.addFloat((float) w);
+	}
+	
+	@Override
+	public void read(NetBufferStream stream) {
+		x = stream.getFloat();
+		y = stream.getFloat();
+		z = stream.getFloat();
+		w = stream.getFloat();
 	}
 
 	public String toString() {

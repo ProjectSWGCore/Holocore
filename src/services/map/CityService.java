@@ -1,3 +1,30 @@
+/************************************************************************************
+ * Copyright (c) 2015 /// Project SWG /// www.projectswg.com                        *
+ *                                                                                  *
+ * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on           *
+ * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies.  *
+ * Our goal is to create an emulator which will provide a server for players to     *
+ * continue playing a game similar to the one they used to play. We are basing      *
+ * it on the final publish of the game prior to end-game events.                    *
+ *                                                                                  *
+ * This file is part of Holocore.                                                   *
+ *                                                                                  *
+ * -------------------------------------------------------------------------------- *
+ *                                                                                  *
+ * Holocore is free software: you can redistribute it and/or modify                 *
+ * it under the terms of the GNU Affero General Public License as                   *
+ * published by the Free Software Foundation, either version 3 of the               *
+ * License, or (at your option) any later version.                                  *
+ *                                                                                  *
+ * Holocore is distributed in the hope that it will be useful,                      *
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of                   *
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                    *
+ * GNU Affero General Public License for more details.                              *
+ *                                                                                  *
+ * You should have received a copy of the GNU Affero General Public License         *
+ * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
+ *                                                                                  *
+ ***********************************************************************************/
 package services.map;
 
 import java.sql.PreparedStatement;
@@ -54,21 +81,19 @@ public class CityService extends Service {
 				}
 				DataTransform transform = (DataTransform) p;
 				Location loc = transform.getLocation();
-				performLocationUpdate(creature, loc);
+				performLocationUpdate(creature, (int) (loc.getX() + 0.5), (int) (loc.getZ() + 0.5));
 			}
 		} else if (i instanceof PlayerEventIntent) {
 			Player player = ((PlayerEventIntent) i).getPlayer();
 			CreatureObject creature = player.getCreatureObject();
 			if (((PlayerEventIntent) i).getEvent() == PlayerEvent.PE_ZONE_IN_CLIENT) {
-				performLocationUpdate(creature, creature.getLocation());
+				performLocationUpdate(creature, (int) (creature.getX()+0.5), (int) (creature.getZ()+0.5));
 			}
 		}
 	}
 	
-	private void performLocationUpdate(CreatureObject object, Location loc) {
-		String terrain = loc.getTerrain().getName().toLowerCase(Locale.US);
-		int locX = (int) (loc.getX() + 0.5);
-		int locZ = (int) (loc.getZ() + 0.5);
+	private void performLocationUpdate(CreatureObject object, int locX, int locZ) {
+		String terrain = object.getTerrain().getName().toLowerCase(Locale.US);
 		synchronized (spawnDatabase) {
 			ResultSet set = null;
 			try {

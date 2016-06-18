@@ -45,6 +45,7 @@ import network.packets.swg.zone.PlanetTravelPointListRequest;
 import network.packets.swg.zone.PlanetTravelPointListResponse;
 import intents.chat.ChatBroadcastIntent;
 import intents.network.GalacticPacketIntent;
+import intents.object.DestroyObjectIntent;
 import intents.object.ObjectCreatedIntent;
 import intents.object.ObjectTeleportIntent;
 import intents.travel.*;
@@ -72,7 +73,7 @@ import resources.sui.SuiListBox;
 import resources.sui.SuiMessageBox;
 import services.galaxy.travel.TravelGroup;
 import services.galaxy.travel.TravelGroup.ShuttleStatus;
-import services.objects.ObjectManager;
+import services.objects.ObjectCreator;
 import utilities.ThreadUtilities;
 
 public class TravelService extends Service {
@@ -81,7 +82,6 @@ public class TravelService extends Service {
 	private static final byte PLANET_NAMES_COLUMN_INDEX = 0;
 	private static final short TICKET_USE_RADIUS = 8;	// The distance a player needs to be within in order to use their ticket
 	
-	private final ObjectManager objectManager;
 	private Terrain[] travelPlanets;
 	private final Map<Terrain, Map<Terrain, Integer>> allowedRoutes; // Describes which planets are linked and base prices.
 	private final DatatableData travelFeeTable;
@@ -94,9 +94,7 @@ public class TravelService extends Service {
 	private final Map<String, TravelGroup> travel;
 	private ExecutorService executor;
 	
-	public TravelService(ObjectManager objectManager) {
-		this.objectManager = objectManager;
-		
+	public TravelService() {
 		allowedRoutes = new HashMap<>();
 		travelFeeTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/travel/travel.iff");
 		travel = new HashMap<>();
@@ -313,7 +311,9 @@ public class TravelService extends Service {
 			}
 			for (TravelGroup gt : travel.values())
 				gt.getPointsForTerrain(pointsForPlanet, nearest, to);
+			pointsForPlanet.remove(nearest);
 			Collections.sort(pointsForPlanet);
+			pointsForPlanet.add(nearest); // Yes ... adding it to the end of the list because I hate the client
 			
 			player.sendPacket(new PlanetTravelPointListResponse(req.getPlanetName(), pointsForPlanet, getAdditionalCosts(objectLocation, pointsForPlanet)));
 		}
@@ -411,7 +411,8 @@ public class TravelService extends Service {
 	
 	private void grantTicket(TravelPoint departure, TravelPoint destination, SWGObject receiver) {
 		// Create the ticket object
-		SWGObject ticket = objectManager.createObject("object/tangible/travel/travel_ticket/base/shared_base_travel_ticket.iff");
+		SWGObject ticket = ObjectCreator.createObjectFromTemplate("object/tangible/travel/travel_ticket/base/shared_base_travel_ticket.iff");
+		new ObjectCreatedIntent(ticket).broadcast();
 		
 		// Departure attributes
 		ticket.addAttribute("@obj_attr_n:travel_departure_planet", "@planet_n:" + departure.getLocation().getTerrain().getName());
@@ -542,8 +543,7 @@ public class TravelService extends Service {
 	}
 	
 	private void teleportAndDestroyTicket(TravelPoint destination, SWGObject ticket, CreatureObject traveler) {
-		objectManager.destroyObject(ticket);
-		
+		new DestroyObjectIntent(ticket).broadcast();
 		new ObjectTeleportIntent(traveler, destination.getLocation()).broadcast();
 	}
 	
@@ -557,7 +557,7 @@ public class TravelService extends Service {
 	}
 	
 	private boolean isTicketUsable(SWGObject ticket) {
-		Location worldLoc = ticket.getOwner().getCreatureObject().getWorldLocation();
+		Location worldLoc = ticket.getWorldLocation();
 		TravelPoint nearest = getNearestTravelPoint(worldLoc);
 		String departurePoint = ticket.getAttribute("@obj_attr_n:travel_departure_point");
 		String departurePlanet = ticket.getAttribute("@obj_attr_n:travel_departure_planet");

@@ -74,6 +74,7 @@ import resources.objects.player.PlayerObject;
 import resources.player.AccessLevel;
 import resources.player.Player;
 import resources.server_info.CachedObjectDatabase;
+import resources.server_info.Log;
 import resources.server_info.ObjectDatabase;
 import resources.server_info.RelationalServerData;
 import resources.server_info.RelationalServerFactory;
@@ -103,7 +104,7 @@ public class ChatRoomService extends Service {
 	private int maxChatRoomId;
 
 	public ChatRoomService() {
-		database	= new CachedObjectDatabase<>("odb/chat_rooms.db");
+		database	= new CachedObjectDatabase<ChatRoom>("odb/chat_rooms.db", ChatRoom::create, (r, s)->r.save(s));
 		roomMap 	= new ConcurrentHashMap<>();
 		messages	= new ConcurrentHashMap<>();
 		chatLogs	= RelationalServerFactory.getServerDatabase("chat/chat_log.db");
@@ -661,7 +662,7 @@ public class ChatRoomService extends Service {
 		// This can happen if a channel was deleted while the player was offline
 		PlayerObject ghost = player.getPlayerObject();
 		if (ghost == null) {
-			System.err.println("Tried to join a room with a path that does not exist: " + path);
+			Log.e(this, "Tried to join a room with a path that does not exist: " + path);
 			return;
 		}
 		ghost.removeJoinedChannel(path);
@@ -736,7 +737,7 @@ public class ChatRoomService extends Service {
 		roomMap.put(id, room);
 
 		if (persist)
-			database.put(id, room);
+			database.add(room);
 		return room;
 	}
 

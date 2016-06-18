@@ -78,34 +78,22 @@ public final class ExperienceManager extends Manager {
 	@Override
 	public void onIntentReceived(Intent i) {
 		switch(i.getType()) {
-			case ExperienceIntent.TYPE: handleExperienceGainedIntent((ExperienceIntent) i); break;
+			case ExperienceIntent.TYPE:
+				if (i instanceof ExperienceIntent)
+					handleExperienceGainedIntent((ExperienceIntent) i);
+			break;
 		}
 	}
 	
 	private void handleExperienceGainedIntent(ExperienceIntent i) {
 		CreatureObject creatureObject = i.getCreatureObject();
 		PlayerObject playerObject = creatureObject.getPlayerObject();
-		String xpType = i.getXpType();
-		int xpGained = i.getExperienceGained();
-
 		if (playerObject != null) {
-			Integer currentXp = playerObject.getExperiencePoints(xpType);
-			int newXpTotal;
-
-			if (currentXp == null) {	// They don't have this type of XP already
-				newXpTotal = xpGained;
-			} else {	// They already have this kind of XP - add gained to current
-				newXpTotal = currentXp + xpGained;
-			}
-
-			playerObject.setExperiencePoints(xpType, newXpTotal);
-			creatureObject.setTotalLevelXp(newXpTotal);
-			Log.d(this, "%s gained %d %s XP", creatureObject, xpGained, xpType);
-			// TODO show +XP flytext
-
+			int newXpTotal = awardExperience(creatureObject, playerObject, i.getXpType(), i.getExperienceGained());
+			
 			// At this point, we check if their level should be adjusted.
 			short oldLevel = creatureObject.getLevel();
-			attemptLevelUp(creatureObject, xpType, newXpTotal);
+			attemptLevelUp(creatureObject, i.getXpType(), newXpTotal);
 			short newLevel = creatureObject.getLevel();
 			
 			if (oldLevel < newLevel) {	// If we've leveled up at least once
@@ -115,18 +103,30 @@ public final class ExperienceManager extends Manager {
 				// TODO NGE: system message health and action differences. @spam:level_up_stat_gain_#
 				Log.i(this, "%s leveled from %d to %d", creatureObject, oldLevel, newLevel);
 			}
-		} else {
-			Log.e(this, "%d %s XP to %s failed because XP can't be given to NPCs", xpGained, xpType, creatureObject);
 		}
+	}
+	
+	private int awardExperience(CreatureObject creatureObject, PlayerObject playerObject, String xpType, int xpGained) {
+		Integer currentXp = playerObject.getExperiencePoints(xpType);
+		int newXpTotal;
+		
+		if (currentXp == null) {	// They don't have this type of XP already
+			newXpTotal = xpGained;
+		} else {	// They already have this kind of XP - add gained to current
+			newXpTotal = currentXp + xpGained;
+		}
+		
+		playerObject.setExperiencePoints(xpType, newXpTotal);
+		creatureObject.setTotalLevelXp(newXpTotal);
+		Log.d(this, "%s gained %d %s XP", creatureObject, xpGained, xpType);
+		// TODO show +XP flytext
+		return newXpTotal;
 	}
 	
 	private void attemptLevelUp(CreatureObject creatureObject, String xpType, int newXpTotal) {
 		short currentLevel = creatureObject.getLevel();
 
-		if (currentLevel == getMaxLevel()) {
-			// This player has already reached max level
-			Log.d(this, "%s is already max level (%d) - skipping remaining checks", creatureObject, currentLevel);
-		} else {
+		if (currentLevel != getMaxLevel()) {
 			short nextLevel = (short) (currentLevel + 1);
 			Integer xpNextLevel = levelXpMap.get(nextLevel);
 			
@@ -136,11 +136,7 @@ public final class ExperienceManager extends Manager {
 					
 					// Recursively attempt to level up again, in case we've gained enough XP to level up multiple times.
 					attemptLevelUp(creatureObject, xpType, newXpTotal);
-				} else {
-					Log.d(this, "%s didn't gain enough %s XP to level up from %d to %d", creatureObject, xpType, currentLevel, nextLevel);
 				}
-			} else {
-				Log.d(this, "%s can't become level %d because it was not found in the level-to-XP Map", creatureObject, nextLevel);
 			}
 		}
 	}

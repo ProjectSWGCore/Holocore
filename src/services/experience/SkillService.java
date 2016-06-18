@@ -27,7 +27,6 @@
 ***********************************************************************************/
 package services.experience;
 
-import intents.SkillModIntent;
 import intents.experience.SkillBoxGrantedIntent;
 import intents.network.GalacticPacketIntent;
 import java.util.HashMap;
@@ -65,15 +64,21 @@ public final class SkillService extends Service {
 	@Override
 	public void onIntentReceived(Intent i) {
 		switch(i.getType()) {
-			case SkillBoxGrantedIntent.TYPE: handleSkillAddIntent((SkillBoxGrantedIntent) i); break;
-			case GalacticPacketIntent.TYPE: handleGalacticPacket((GalacticPacketIntent) i);
+			case SkillBoxGrantedIntent.TYPE:
+				if (i instanceof SkillBoxGrantedIntent)
+					handleSkillAddIntent((SkillBoxGrantedIntent) i);
+				break;
+			case GalacticPacketIntent.TYPE:
+				if (i instanceof GalacticPacketIntent)
+					handleGalacticPacket((GalacticPacketIntent) i);
+				break;
 		}
 	}
 	
 	@Override
 	public boolean initialize() {
-		DatatableData roleIconTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/role/role.iff");
-
+		DatatableData roleIconTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/role/role.iff", false);
+		
 		for (int i = 0; i < roleIconTable.getRowCount(); i++) {
 			int iconIndex = (int) roleIconTable.getCell(i, 0);
 			String qualifyingSkill = (String) roleIconTable.getCell(i, 2);
@@ -88,55 +93,40 @@ public final class SkillService extends Service {
 			qualifyingSkills.add(qualifyingSkill);
 		}
 		
-		DatatableData skillsTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/skill/skills.iff", true);
-
+		loadSkills();
+		
+		return super.initialize();
+	}
+	
+	private void loadSkills() {
+		DatatableData skillsTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/skill/skills.iff", false);
+		
 		for (int i = 0; i < skillsTable.getRowCount(); i++) {
 			String skillName = (String) skillsTable.getCell(i, 0);
-			String requiredSkillString = (String) skillsTable.getCell(i, 11);
-			String xpType = (String) skillsTable.getCell(i, 12);
-			int xpCost = (int) skillsTable.getCell(i, 13);
-			String commandsString = (String) skillsTable.getCell(i, 21);
-			String schematicsString = (String) skillsTable.getCell(i, 23);
-			
-			String skillModsString = (String) skillsTable.getCell(i, 22);
+			String [] skillModsStrings = splitCsv((String) skillsTable.getCell(i, 22));
 			Map<String, Integer> skillMods = new HashMap<>();
-			if(!skillModsString.isEmpty()) {
-				String[] skillModsStrings = skillModsString.split(",");
-
-				for(String skillModString : skillModsStrings) {
-					String[] values = skillModString.split("=");
-					skillMods.put(values[0], Integer.parseInt(values[1]));
-				}
-			}
-			
-			String[] requiredSkills = requiredSkillString.split(",");
-			if(requiredSkills.length == 1 && requiredSkills[0].isEmpty()) {
-				requiredSkills = new String[0];
-			}
-			
-			String[] commands = commandsString.split(",");
-			if(commands.length == 1 && commands[0].isEmpty()) {
-				commands = new String[0];
-			}
-			
-			String[] schematics = schematicsString.split(",");
-			if(schematics.length == 1 && schematics[0].isEmpty()) {
-				schematics = new String[0];
+			for (String skillModString : skillModsStrings) {
+				String [] values = skillModString.split("=", 2);
+				skillMods.put(values[0], Integer.parseInt(values[1]));
 			}
 			
 			SkillData skillData = new SkillData(
-					requiredSkills,
-					xpType,
-					xpCost,
-					commands,
+					splitCsv((String) skillsTable.getCell(i, 11)),	// required skills
+					(String) skillsTable.getCell(i, 12),			// xp type
+					(int) skillsTable.getCell(i, 13),				// xp cost
+					splitCsv((String) skillsTable.getCell(i, 21)),	// commands
 					skillMods,
-					schematics
+					splitCsv((String) skillsTable.getCell(i, 23))	// schematics
 			);
 			
 			skillDataMap.put(skillName, skillData);
 		}
-		
-		return super.initialize();
+	}
+	
+	private String [] splitCsv(String str) {
+		if (str.isEmpty() || str.indexOf(',') == -1)
+			return new String[0];
+		return str.split(",");
 	}
 	
 	private void handleSkillAddIntent(SkillBoxGrantedIntent intent) {
@@ -144,7 +134,6 @@ public final class SkillService extends Service {
 		CreatureObject target = intent.getTarget();
 		SkillData skillData = skillDataMap.get(skillName);
 		String[] requiredSkills = skillData.requiredSkills;
-		PlayerObject playerObject = target.getPlayerObject();
 		
 		for(String requiredSkill : requiredSkills) {
 			if(!target.hasSkill(requiredSkill)) {
@@ -206,6 +195,7 @@ public final class SkillService extends Service {
 		}
 	}
 	
+	@SuppressWarnings("unused")
 	private static class SkillData {
 		private String[] requiredSkills;
 		private String xpType;
@@ -222,7 +212,13 @@ public final class SkillService extends Service {
 			this.skillMods = skillMods;
 			this.schematics = schematics;
 		}
-		
+
+		public String[] getRequiredSkills() { return requiredSkills; }
+		public String getXpType() { return xpType; }
+		public int getXpCost() { return xpCost; }
+		public String[] getCommands() { return commands; }
+		public Map<String, Integer> getSkillMods() { return skillMods; }
+		public String[] getSchematics() { return schematics; }
 	}
 	
 }
