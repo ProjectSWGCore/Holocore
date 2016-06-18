@@ -259,8 +259,10 @@ public class QaToolCmdCallback implements ICmdCallback {
 		try {
 			int xpGained = Integer.valueOf(xpGainedArg);
 			new ExperienceIntent(player.getCreatureObject(), xpType, xpGained).broadcast();
+			Log.i("QA", "XP command: %s gave themselves %d %s XP", player.getUsername(), xpGained, xpType);
 		} catch (NumberFormatException e) {
-			Log.e("QA", "XP command error: %s gave a non-numerical XP gained argument of %s", player.getUsername(), xpGainedArg);
+			sendSystemMessage(player, String.format("XP command: %s is not a number", xpGainedArg));
+			Log.e("QA", "XP command: %s gave a non-numerical XP gained argument of %s", player.getUsername(), xpGainedArg);
 		}
 	}
 	
