@@ -45,17 +45,14 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 public class GroupObject extends SWGObject { // Extends INTO or TANO?
 	private final SWGList<GroupMember> groupMembers = new SWGList<>(6, 2, Encoder.StringType.ASCII);
 	private long leader;
 	private short level;
 	private long lootMaster;
-	private int lootRule;
-	
-	public static final int LOOT_FREE_FOR_ALL = 1;
-	public static final int LOOT_LOTTERY = 2;
-	public static final int LOOT_MASTER = 3;
+	private LootRule lootRule = LootRule.RANDOM;
 
 	private transient PickupPointTimer pickupPointTimer;
 
@@ -74,17 +71,17 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 		super.createBaseline6(target, bb); // BASE06 -- 2 variables
 		bb.addObject(groupMembers); // 2 -- NOTE: First person is the leader
 		bb.addInt(0); // formationmembers // 3
-		bb.addInt(0); // updateCount
+			bb.addInt(0); // updateCount
 		bb.addAscii(""); // groupName // 4
 		bb.addShort(level); // 5
 		bb.addInt(0); // formationNameCrc // 6
 		bb.addLong(lootMaster); // 7
-		bb.addInt(lootRule); // 8
+		bb.addInt(lootRule.getId()); // 8
 		bb.addObject(pickupPointTimer); // 9
 		bb.addAscii(""); // PickupPoint planetName // 10
-		bb.addFloat(0); // x
-		bb.addFloat(0); // y
-		bb.addFloat(0); // z
+			bb.addFloat(0); // x
+			bb.addFloat(0); // y
+			bb.addFloat(0); // z
 
 		bb.incrementOperandCount(9);
 	}
@@ -128,7 +125,7 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 			removeCustomAware(object);
 	}
 
-	public long getLeaderID() {
+	public long getLeaderId() {
 		return leader;
 	}
 
@@ -153,7 +150,6 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 		if (groupMembers.size() > 0) {
 			synchronized (groupMembers) {
 				GroupMember previous = groupMembers.set(0, member);
-				//groupMembers.add(previous);
 			}
 		} else {
 			groupMembers.add(member);
@@ -177,16 +173,27 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 		this.lootMaster = lootMaster;
 	}
 
-	public int getLootRule() {
+	public LootRule getLootRule() {
 		return lootRule;
 	}
 
 	public void setLootRule(int lootRule) {
+		this.lootRule = LootRule.fromId(lootRule);
+		sendLootRuleDelta(lootRule);
+	}
+	
+	public void setLootRule(LootRule lootRule) {
 		this.lootRule = lootRule;
+		sendLootRuleDelta(lootRule.getId());
+	}
+	
+	public void sendLootRuleDelta(int lootRule) {
 		sendDelta(6, 8, lootRule);
 	}
 	
-	public boolean isFull() { return groupMembers.size() == 9; }
+	public boolean isFull() { 
+		return groupMembers.size() == 9;
+	}
 
 	public Map<String, Long> getGroupMembers() {
 		Map<String, Long> members = new HashMap<>();
@@ -200,11 +207,10 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 		return members;
 	}
 	
-	public HashSet<CreatureObject> getGroupMemberObjects() {
-		HashSet<CreatureObject> memberObjects = new HashSet<>();
+	public Set<CreatureObject> getGroupMemberObjects() {
+		Set<CreatureObject> memberObjects = new HashSet<>();
 		
 		synchronized (groupMembers) {
-			
 			for (GroupMember groupMember : groupMembers)
 				memberObjects.add(groupMember.playerCreo);
 		}
@@ -234,7 +240,8 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 			while (iter.hasNext()) {
 				GroupMember grpMember = iter.next();
 				iter.remove();
-				grpMember.playerCreo.setGroupId(0);
+				grpMember.getCreatureObject().setGroupId(0);
+				removeCustomAware(grpMember.playerCreo);
 			}
 		}
 
@@ -289,6 +296,10 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 
 		public long getId() {
 			return id;
+		}
+		
+		public CreatureObject getCreatureObject() {
+			return playerCreo;
 		}
 
 		public String getName() {
