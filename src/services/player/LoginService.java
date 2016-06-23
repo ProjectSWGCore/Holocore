@@ -31,6 +31,7 @@ import intents.GalacticIntent;
 import intents.LoginEventIntent;
 import intents.LoginEventIntent.LoginEvent;
 import intents.network.GalacticPacketIntent;
+import intents.object.DestroyObjectIntent;
 import intents.player.DeleteCharacterIntent;
 
 import java.sql.PreparedStatement;
@@ -81,7 +82,6 @@ public class LoginService extends Service {
 	private PreparedStatement getCharacter;
 	private PreparedStatement getCharacters;
 	private PreparedStatement deleteCharacter;
-	private boolean autoLogin;
 	
 	public LoginService() {
 		random = new Random();
@@ -97,14 +97,13 @@ public class LoginService extends Service {
 		getCharacter = local.prepareStatement("SELECT * FROM characters WHERE LOWER(name) = LOWER(?)");
 		getCharacters = local.prepareStatement("SELECT * FROM characters WHERE userid = ?");
 		deleteCharacter = local.prepareStatement("DELETE FROM characters WHERE id = ?");
-		autoLogin = getConfig(ConfigFile.NETWORK).getInt("AUTO-LOGIN", 0) == 1;
 		return super.initialize();
 	}
 	
 	@Override
 	public void onIntentReceived(Intent i) {
 		if (i instanceof DeleteCharacterIntent) {
-			deleteCharacter(((DeleteCharacterIntent) i).getCreature().getObjectId());
+			deleteCharacter(((DeleteCharacterIntent) i).getCreature());
 		} else if (i instanceof GalacticPacketIntent) {
 			GalacticPacketIntent gpi = (GalacticPacketIntent) i;
 			handlePacket(gpi, gpi.getPlayerManager().getPlayerFromNetworkId(gpi.getNetworkId()), gpi.getPacket());
@@ -132,12 +131,14 @@ public class LoginService extends Service {
 	}
 	
 	private void handleCharDeletion(GalacticIntent intent, Player player, DeleteCharacterRequest request) {
-		SWGObject obj = intent.getObjectManager().destroyObject(request.getPlayerId());
+		SWGObject obj = intent.getObjectManager().getObjectById(request.getPlayerId());
+		boolean success = false;
 		if (obj != null && obj instanceof CreatureObject) {
+			success = deleteCharacter(obj);
 			Log.i("LoginService", "Deleted character %s for user %s", ((CreatureObject)obj).getName(), player.getUsername());
 		} else
 			Log.w("LoginService", "Could not delete character! Character: ID: " + request.getPlayerId() + " / " + obj);
-		sendPacket(player, new DeleteCharacterResponse(deleteCharacter(request.getPlayerId())));
+		sendPacket(player, new DeleteCharacterResponse(success));
 	}
 	
 	private void handleLogin(Player player, LoginClientId id) {
@@ -150,11 +151,6 @@ public class LoginService extends Service {
 		if (!id.getVersion().equals(REQUIRED_VERSION) && doClientCheck) {
 			onLoginClientVersionError(player, id);
 			return;
-		}
-		if (autoLogin) {
-			String [] sessionHash = id.getPassword().split("-");
-			id.setUsername(sessionHash[0]);
-			id.setPassword(sessionHash[1]);
 		}
 		synchronized (getUser) {
 			try {
@@ -317,10 +313,11 @@ public class LoginService extends Service {
 		return characters.toArray(new SWGCharacter[characters.size()]);
 	}
 	
-	private boolean deleteCharacter(long id) {
+	private boolean deleteCharacter(SWGObject obj) {
+		new DestroyObjectIntent(obj).broadcast();
 		synchronized (deleteCharacter) {
 			try {
-				deleteCharacter.setLong(1, id);
+				deleteCharacter.setLong(1, obj.getObjectId());
 				return deleteCharacter.executeUpdate() > 0;
 			} catch (SQLException e) {
 				e.printStackTrace();

@@ -222,6 +222,7 @@ public class ZoneManager extends Manager {
 	private void initPlayerBeforeZoneIn(Player player, CreatureObject creatureObj, PlayerObject playerObj) {
 		creatureObj.setMoodId(CreatureMood.NONE.getMood());
 		playerObj.clearFlagBitmask(PlayerFlags.LD);	// Ziggy: Clear the LD flag in case it wasn't already.
+		creatureObj.clearCustomAware(false);
 	}
 	
 	private void handleShowBackpack(Player player, ShowBackpack p) {

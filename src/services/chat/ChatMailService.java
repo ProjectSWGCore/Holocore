@@ -1,3 +1,30 @@
+/************************************************************************************
+ * Copyright (c) 2015 /// Project SWG /// www.projectswg.com                        *
+ *                                                                                  *
+ * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on           *
+ * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies.  *
+ * Our goal is to create an emulator which will provide a server for players to     *
+ * continue playing a game similar to the one they used to play. We are basing      *
+ * it on the final publish of the game prior to end-game events.                    *
+ *                                                                                  *
+ * This file is part of Holocore.                                                   *
+ *                                                                                  *
+ * -------------------------------------------------------------------------------- *
+ *                                                                                  *
+ * Holocore is free software: you can redistribute it and/or modify                 *
+ * it under the terms of the GNU Affero General Public License as                   *
+ * published by the Free Software Foundation, either version 3 of the               *
+ * License, or (at your option) any later version.                                  *
+ *                                                                                  *
+ * Holocore is distributed in the hope that it will be useful,                      *
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of                   *
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                    *
+ * GNU Affero General Public License for more details.                              *
+ *                                                                                  *
+ * You should have received a copy of the GNU Affero General Public License         *
+ * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
+ *                                                                                  *
+ ***********************************************************************************/
 package services.chat;
 
 import intents.PlayerEventIntent;
@@ -10,6 +37,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.atomic.AtomicReference;
 
 import network.packets.Packet;
 import network.packets.swg.SWGPacket;
@@ -42,7 +70,7 @@ public class ChatMailService extends Service {
 	private int maxMailId;
 	
 	public ChatMailService() {
-		mails = new CachedObjectDatabase<>("odb/mails.db");
+		mails = new CachedObjectDatabase<>("odb/mails.db", Mail::create, Mail::saveMail);
 		chatLogs = RelationalServerFactory.getServerDatabase("chat/chat_log.db");
 		insertChatLog = chatLogs.prepareStatement("INSERT INTO chat_log VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 		maxMailId = 1;
@@ -152,7 +180,7 @@ public class ChatMailService extends Service {
 		mail.setId(maxMailId++);
 		mail.setTimestamp((int) (new Date().getTime() / 1000));
 		mail.setOutOfBandPackage(request.getOutOfBandPackage());
-		mails.put(mail.getId(), mail);
+		mails.add(mail);
 		
 		if (recipient != null) {
 			sendPersistentMessage(recipient, mail, MailFlagType.HEADER_ONLY, galaxy);
@@ -176,14 +204,13 @@ public class ChatMailService extends Service {
 		maxMailId++;
 		mail.setTimestamp((int) (new Date().getTime() / 1000));
 		
-		mails.put(mail.getId(), mail);
+		mails.add(mail);
 		
 		sendPersistentMessage(recipient, mail, MailFlagType.HEADER_ONLY, intent.getGalaxy());
 	}
 	
 	private void handlePersistentMessageRequest(Player player, String galaxy, ChatRequestPersistentMessage request) {
-		Mail mail = mails.get(request.getMailId());
-		
+		Mail mail = getMail(request.getMailId());
 		if (mail == null)
 			return;
 		
@@ -192,6 +219,18 @@ public class ChatMailService extends Service {
 		
 		mail.setStatus(Mail.READ);
 		sendPersistentMessage(player, mail, MailFlagType.FULL_MESSAGE, galaxy);
+	}
+	
+	private Mail getMail(int id) {
+		AtomicReference<Mail> ref = new AtomicReference<>(null);
+		mails.traverseInterruptable((m) -> {
+			if (m.getId() == id) {
+				ref.set(m);
+				return false;
+			}
+			return true;
+		});
+		return ref.get();
 	}
 	
 	private void sendPersistentMessageHeaders(Player player) {
@@ -217,7 +256,7 @@ public class ChatMailService extends Service {
 
 		PlayerObject ghost = receiver.getPlayerObject();
 		if (ghost.isIgnored(mail.getSender())) {
-			mails.remove(mail.getId());
+			mails.remove(mail);
 			return;
 		}
 
@@ -236,7 +275,7 @@ public class ChatMailService extends Service {
 	}
 	
 	private void deletePersistentMessage(int mailId) {
-		mails.remove(mailId);
+		mails.remove(getMail(mailId));
 	}
 	
 	private void logChat(long sendId, String sendName, long recvId, String recvName, String subject, String message) {

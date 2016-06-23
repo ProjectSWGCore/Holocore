@@ -37,7 +37,6 @@ import resources.Terrain;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.CrcStringTableData;
 import resources.client_info.visitors.DatatableData;
-import resources.containers.ContainerPermissions;
 import resources.objects.SWGObject;
 import resources.objects.SWGObject.ObjectClassification;
 import resources.objects.cell.CellObject;
@@ -96,7 +95,6 @@ class TerrainBuildoutLoader {
 			object.setBuildoutAreaId(area.getIndex());
 			setCellInformation(object, buildoutRow.getCellIndex());
 			addObject(area.getName(), object, buildoutRow.getContainerId());
-			updatePermissions(object);
 		}
 	}
 	
@@ -130,10 +128,6 @@ class TerrainBuildoutLoader {
 			return;
 		CellObject cell = (CellObject) object;
 		cell.setNumber(cellIndex);
-	}
-	
-	private void updatePermissions(SWGObject object) {
-		object.setContainerPermissions(ContainerPermissions.WORLD);
 	}
 	
 }

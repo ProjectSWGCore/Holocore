@@ -30,12 +30,11 @@ package resources.objects.intangible;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.network.BaselineBuilder;
 import resources.network.NetBuffer;
+import resources.network.NetBufferStream;
 import resources.objects.SWGObject;
 import resources.player.Player;
 
 public class IntangibleObject extends SWGObject {
-	
-	private static final long serialVersionUID = 1L;
 	
 	private int	count	= 0;
 	
@@ -75,5 +74,19 @@ public class IntangibleObject extends SWGObject {
 	@Override
 	public int hashCode() {
 		return super.hashCode();
+	}
+	
+	@Override
+	public void save(NetBufferStream stream) {
+		super.save(stream);
+		stream.addByte(0);
+		stream.addInt(count);
+	}
+	
+	@Override
+	public void read(NetBufferStream stream) {
+		super.read(stream);
+		stream.getByte();
+		count = stream.getInt();
 	}
 }

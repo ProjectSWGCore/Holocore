@@ -68,4 +68,20 @@ public class UpdatePostureMessage extends SWGPacket {
 		addLong (data, objId);
 		return data;
 	}
+	
+	public int getPosture() {
+		return posture;
+	}
+	
+	public long getObjectId() {
+		return objId;
+	}
+	
+	public void setPosture(int posture) {
+		this.posture = posture;
+	}
+	
+	public void setObjId(long objId) {
+		this.objId = objId;
+	}
 }

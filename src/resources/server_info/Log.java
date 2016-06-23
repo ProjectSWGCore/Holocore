@@ -334,10 +334,12 @@ public class Log {
 	}
 	
 	private static final void printException(LogLevel level, String tag, Throwable exception) {
-		log(level, tag, "Exception in thread\"%s\" %s: %s", Thread.currentThread().getName(), exception.getClass().getName(), exception.getMessage());
-		log(level, tag, "Caused by: %s: %s", exception.getClass(), exception.getMessage());
-		for (StackTraceElement e : exception.getStackTrace()) {
-			log(level, tag, "    " + e.toString());
+		synchronized (LOG) {
+			log(level, tag, "Exception in thread\"%s\" %s: %s", Thread.currentThread().getName(), exception.getClass().getName(), exception.getMessage());
+			log(level, tag, "Caused by: %s: %s", exception.getClass(), exception.getMessage());
+			for (StackTraceElement e : exception.getStackTrace()) {
+				log(level, tag, "    " + e.toString());
+			}
 		}
 	}
 	

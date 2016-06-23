@@ -29,14 +29,16 @@ package resources.collections;
 
 import network.packets.swg.zone.baselines.Baseline;
 import resources.encodables.Encodable;
+import resources.network.NetBufferStream;
 import resources.objects.SWGObject;
+import resources.persistable.Persistable;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.Arrays;
 import java.util.BitSet;
 
-public class SWGFlag extends BitSet implements Encodable {
+public class SWGFlag extends BitSet implements Encodable, Persistable {
 	
 	private static final long serialVersionUID = 2L;
 	
@@ -78,6 +80,17 @@ public class SWGFlag extends BitSet implements Encodable {
 	}
 	
 	@Override
+	public void save(NetBufferStream stream) {
+		stream.addArray(toByteArray());
+	}
+	
+	@Override
+	public void read(NetBufferStream stream) {
+		clear();
+		xor(valueOf(stream.getArray()));
+	}
+
+	@Override
 	public boolean equals(Object o) {
 		if (!(o instanceof SWGFlag))
 			return super.equals(o);
@@ -90,20 +103,13 @@ public class SWGFlag extends BitSet implements Encodable {
 	}
 	
 	public void sendDeltaMessage(SWGObject target) {
-		if (target.getOwner() == null)
-			return;
-		
 		target.sendDelta(view, updateType, encode());
 	}
 	
 	public int[] toList() {
 		int[] integers = new int[(int) Math.ceil(size()/32.0)];
 		
-		for (int i = 0; i < size(); i++) {
-			i = nextSetBit(i);
-			if (i == -1) // No more bits after this one
-				break;
-			
+		for (int i = nextSetBit(0); i >= 0; i = nextSetBit(i+1)) {
 			integers[i / 32] |= (1 << (i % 32));
 		}
 		

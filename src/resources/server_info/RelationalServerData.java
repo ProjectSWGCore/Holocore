@@ -357,17 +357,38 @@ public class RelationalServerData extends RelationalDatabase {
 				return;
 			switch (lineNum) {
 				case 1:
-					columnNames = line.split("\t");
+					columnNames = fastTabSplit(line);
 					break;
 				case 2:
-					columnTypes = line.split("\t");
+					columnTypes = fastTabSplit(line);
 					createTable();
 					createPreparedStatement();
 					break;
 				default:
-					generateInsert(line.split("\t"), lineNum);
+					generateInsert(fastTabSplit(line), lineNum);
 					break;
 			}
+		}
+		
+		private String [] fastTabSplit(String str) {
+			int count = 1;
+			for (int i = 0; i < str.length(); i++) {
+				if (str.charAt(i) == '\t') {
+					count++;
+				}
+			}
+			String [] tabs = new String[count];
+			int tabInd = 0;
+			int prevInd = 0;
+			for (int i = 0; i < str.length(); i++) {
+				if (str.charAt(i) == '\t') {
+					tabs[tabInd++] = str.substring(prevInd, i);
+					prevInd = i+1;
+				}
+			}
+			if (prevInd < str.length())
+				tabs[tabInd++] = str.substring(prevInd);
+			return tabs;
 		}
 		
 		private void createTable() {

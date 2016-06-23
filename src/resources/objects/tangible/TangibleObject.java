@@ -29,6 +29,7 @@ package resources.objects.tangible;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.util.Set;
 
 import intents.FactionIntent;
 import intents.FactionIntent.FactionIntentType;
@@ -40,14 +41,13 @@ import resources.collections.SWGMap;
 import resources.collections.SWGSet;
 import resources.network.BaselineBuilder;
 import resources.network.NetBuffer;
+import resources.network.NetBufferStream;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
 import utilities.Encoder.StringType;
 
 public class TangibleObject extends SWGObject {
-	
-	private static final long serialVersionUID = 1L;
 	
 	private byte []	appearanceData	= new byte[0];
 	private int		maxHitPoints	= 1000;
@@ -74,8 +74,6 @@ public class TangibleObject extends SWGObject {
 	}
 	
 	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
-		pvpStatus = PvpStatus.COMBATANT;
-		pvpFaction = PvpFaction.NEUTRAL;
 		ois.defaultReadObject();
 		defenders.clear();
 		defenders.resetUpdateCount();
@@ -213,13 +211,15 @@ public class TangibleObject extends SWGObject {
 	}
 
 	public boolean hasOptionFlags(OptionFlag ... options) {
-		int passCount = 0;
 		for (OptionFlag option : options) {
-			if ((optionFlags & option.getFlag()) == option.getFlag())
-				passCount++;
+			if ((optionFlags & option.getFlag()) == 0)
+				return false;
 		}
-
-		return passCount == options.length;
+		return true;
+	}
+	
+	public Set<OptionFlag> getOptionFlags() {
+		return OptionFlag.toEnumSet(optionFlags);
 	}
 	
 	public void addDefender(CreatureObject creature) {
@@ -313,6 +313,45 @@ public class TangibleObject extends SWGObject {
 		super.sendBaselines(target);
 		
 		new FactionIntent(this, FactionIntentType.FLAGUPDATE).broadcast();
+	}
+	
+	@Override
+	public void save(NetBufferStream stream) {
+		super.save(stream);
+		stream.addByte(0);
+		stream.addArray(appearanceData);
+		stream.addInt(maxHitPoints);
+		stream.addInt(components);
+		stream.addBoolean(inCombat);
+		stream.addInt(condition);
+		stream.addInt(pvpFlags);
+		stream.addAscii(pvpStatus.name());
+		stream.addAscii(pvpFaction.name());
+		stream.addBoolean(visibleGmOnly);
+		stream.addArray(objectEffects);
+		stream.addInt(optionFlags);
+		stream.addMap(effectsMap, (e) -> {
+			stream.addAscii(e.getKey());
+			stream.addAscii(e.getValue());
+		});
+	}
+	
+	@Override
+	public void read(NetBufferStream stream) {
+		super.read(stream);
+		stream.getByte();
+		appearanceData = stream.getArray();
+		maxHitPoints = stream.getInt();
+		components = stream.getInt();
+		inCombat = stream.getBoolean();
+		condition = stream.getInt();
+		pvpFlags = stream.getInt();
+		pvpStatus = PvpStatus.valueOf(stream.getAscii());
+		pvpFaction = PvpFaction.valueOf(stream.getAscii());
+		visibleGmOnly = stream.getBoolean();
+		objectEffects = stream.getArray();
+		optionFlags = stream.getInt();
+		stream.getList((i) -> effectsMap.put(stream.getAscii(), stream.getAscii()));
 	}
 
 }

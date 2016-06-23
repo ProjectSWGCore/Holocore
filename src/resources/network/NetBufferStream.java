@@ -1,7 +1,38 @@
+/************************************************************************************
+ * Copyright (c) 2015 /// Project SWG /// www.projectswg.com                        *
+ *                                                                                  *
+ * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on           *
+ * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies.  *
+ * Our goal is to create an emulator which will provide a server for players to     *
+ * continue playing a game similar to the one they used to play. We are basing      *
+ * it on the final publish of the game prior to end-game events.                    *
+ *                                                                                  *
+ * This file is part of Holocore.                                                   *
+ *                                                                                  *
+ * -------------------------------------------------------------------------------- *
+ *                                                                                  *
+ * Holocore is free software: you can redistribute it and/or modify                 *
+ * it under the terms of the GNU Affero General Public License as                   *
+ * published by the Free Software Foundation, either version 3 of the               *
+ * License, or (at your option) any later version.                                  *
+ *                                                                                  *
+ * Holocore is distributed in the hope that it will be useful,                      *
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of                   *
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                    *
+ * GNU Affero General Public License for more details.                              *
+ *                                                                                  *
+ * You should have received a copy of the GNU Affero General Public License         *
+ * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
+ *                                                                                  *
+ ***********************************************************************************/
 package resources.network;
 
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import resources.collections.SWGList;
 import resources.collections.SWGMap;
@@ -252,6 +283,12 @@ public class NetBufferStream extends OutputStream {
 		}
 	}
 	
+	public void getList(NumericalIterator ni) {
+		int size = getInt();
+		for (int i = 0; i < size; i++)
+			ni.onItem(i);
+	}
+	
 	public SWGSet<String> getSwgSet(int num, int var, StringType type) {
 		synchronized (bufferMutex) {
 			return buffer.getSwgSet(num, var, type);
@@ -294,6 +331,136 @@ public class NetBufferStream extends OutputStream {
 		}
 	}
 	
+	public void addBoolean(boolean b) {
+		ensureCapacity(size+1);
+		synchronized (bufferMutex) {
+			buffer.addBoolean(b);
+			size++;
+		}
+	}
+	
+	public void addAscii(String s) {
+		ensureCapacity(size+2+s.length());
+		synchronized (bufferMutex) {
+			buffer.addAscii(s);
+			size += 2 + s.length();
+		}
+	}
+	
+	public void addAscii(char[] s) {
+		ensureCapacity(size+2+s.length);
+		synchronized (bufferMutex) {
+			buffer.addAscii(s);
+			size += 2 + s.length;
+		}
+	}
+	
+	public void addUnicode(String s) {
+		ensureCapacity(size+4+s.length()*2);
+		synchronized (bufferMutex) {
+			buffer.addUnicode(s);
+			size += 4 + s.length()*2;
+		}
+	}
+	
+	public void addLong(long l) {
+		ensureCapacity(size+8);
+		synchronized (bufferMutex) {
+			buffer.addLong(l);
+			size += 8;
+		}
+	}
+	
+	public void addInt(int i) {
+		ensureCapacity(size+4);
+		synchronized (bufferMutex) {
+			buffer.addInt(i);
+			size += 4;
+		}
+	}
+	
+	public void addFloat(float f) {
+		ensureCapacity(size+4);
+		synchronized (bufferMutex) {
+			buffer.addFloat(f);
+			size += 4;
+		}
+	}
+	
+	public void addShort(int i) {
+		ensureCapacity(size+2);
+		synchronized (bufferMutex) {
+			buffer.addShort(i);
+			size += 2;
+		}
+	}
+	
+	public void addNetLong(long l) {
+		ensureCapacity(size+8);
+		synchronized (bufferMutex) {
+			buffer.addNetLong(l);
+			size += 8;
+		}
+	}
+	
+	public void addNetInt(int i) {
+		ensureCapacity(size+4);
+		synchronized (bufferMutex) {
+			buffer.addNetInt(i);
+			size += 4;
+		}
+	}
+	
+	public void addNetShort(int i) {
+		ensureCapacity(size+2);
+		synchronized (bufferMutex) {
+			buffer.addNetShort(i);
+			size += 2;
+		}
+	}
+	
+	public void addByte(int b) {
+		ensureCapacity(size+1);
+		synchronized (bufferMutex) {
+			buffer.addByte(b);
+			size++;
+		}
+	}
+	
+	public void addArray(byte[] b) {
+		ensureCapacity(size+2+b.length);
+		synchronized (bufferMutex) {
+			buffer.addArray(b);
+			size += 2 + b.length;
+		}
+	}
+	
+	public <T> void addList(List<T> l, ListIterable<T> r) {
+		addInt(l.size());
+		for (T t : l)
+			r.onItem(t);
+	}
+	
+	public <T> void addList(Set<T> s, ListIterable<T> r) {
+		addInt(s.size());
+		for (T t : s)
+			r.onItem(t);
+	}
+	
+	public <K, V> void addMap(Map<K, V> m, MapIterable<K, V> r) {
+		addInt(m.size());
+		for (Entry<K, V> e : m.entrySet())
+			r.onItem(e);
+	}
+	
+	public void addRawArray(byte[] b) {
+		write(b);
+	}
+	
+	public void addEncodable(Encodable e) {
+		addRawArray(e.encode());
+	}
+
 	public byte [] array() {
 		synchronized (bufferMutex) {
 			return buffer.array();
@@ -321,6 +488,18 @@ public class NetBufferStream extends OutputStream {
 				this.buffer = buf;
 			}
 		}
+	}
+	
+	public static interface ListIterable<T> {
+		void onItem(T item);
+	}
+	
+	public static interface MapIterable<K, V> {
+		void onItem(Entry<K, V> item);
+	}
+	
+	public static interface NumericalIterator {
+		void onItem(int index);
 	}
 	
 }

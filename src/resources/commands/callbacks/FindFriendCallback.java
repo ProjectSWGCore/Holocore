@@ -28,6 +28,7 @@
 package resources.commands.callbacks;
 
 import intents.chat.ChatBroadcastIntent;
+import intents.object.ObjectCreatedIntent;
 import resources.Location;
 import resources.commands.ICmdCallback;
 import resources.encodables.ProsePackage;
@@ -37,6 +38,7 @@ import resources.objects.waypoint.WaypointObject;
 import resources.player.Player;
 import resources.player.PlayerState;
 import services.galaxy.GalacticManager;
+import services.objects.ObjectCreator;
 
 import java.util.Locale;
 import java.util.Map;
@@ -54,7 +56,7 @@ public class FindFriendCallback implements ICmdCallback {
 
 		String friendName = args.split(" ")[0].toLowerCase(Locale.US);
 
-		if (!ghost.getFriendsList().contains(friendName)) {
+		if (!ghost.isFriend(friendName)) {
 			new ChatBroadcastIntent(player, "@ui_cmnty:friend_location_failed_noname").broadcast();
 			return;
 		}
@@ -66,7 +68,7 @@ public class FindFriendCallback implements ICmdCallback {
 		}
 
 		PlayerObject friendGhost = friend.getPlayerObject();
-		if (friendGhost == null || !friendGhost.getFriendsList().contains(player.getCharacterName().split(" ")[0].toLowerCase(Locale.US))) {
+		if (friendGhost == null || !friendGhost.isFriend(player.getCharacterName().split(" ")[0].toLowerCase(Locale.US))) {
 			new ChatBroadcastIntent(player, new ProsePackage("@ui_cmnty:friend_location_failed", "TU", friendName)).broadcast();
 			return;
 		}
@@ -84,10 +86,12 @@ public class FindFriendCallback implements ICmdCallback {
 		}
 
 		if (waypoint == null) {
-			waypoint = (WaypointObject) galacticManager.getObjectManager().createObject("object/waypoint/shared_waypoint.iff", location, false);
+			waypoint = (WaypointObject) ObjectCreator.createObjectFromTemplate("object/waypoint/shared_waypoint.iff");
+			waypoint.setLocation(location);
 			waypoint.setColor(WaypointObject.WaypointColor.PURPLE);
 			waypoint.setName(friendName);
 			ghost.addWaypoint(waypoint);
+			new ObjectCreatedIntent(waypoint).broadcast();
 			new ChatBroadcastIntent(player, new ProsePackage("@ui_cmnty:friend_location_create_new_wp", "TU", friendName)).broadcast();
 		} else {
 			waypoint.setLocation(location);

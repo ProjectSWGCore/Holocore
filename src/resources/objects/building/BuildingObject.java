@@ -32,6 +32,7 @@ import resources.Location;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.PortalLayoutData;
 import resources.client_info.visitors.ObjectData.ObjectDataAttribute;
+import resources.network.NetBufferStream;
 import resources.objects.SWGObject;
 import resources.objects.cell.CellObject;
 import resources.objects.tangible.TangibleObject;
@@ -43,8 +44,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class BuildingObject extends TangibleObject {
-	
-	private static final long serialVersionUID = 1L;
 	
 	public BuildingObject(long objectId) {
 		super(objectId, BaselineType.BUIO);
@@ -82,21 +81,20 @@ public class BuildingObject extends TangibleObject {
 	}
 
 	@Override
-	protected boolean addObject(SWGObject object) {
-		boolean added = super.addObject(object);
-		if (!added || !(object instanceof CellObject))
-			return added;
+	public void addObject(SWGObject object) {
+		super.addObject(object);
+		if (!(object instanceof CellObject))
+			return;
 
 		String portalFile = (String) getDataAttribute(ObjectDataAttribute.PORTAL_LAYOUT_FILENAME);
 		if (portalFile == null || portalFile.isEmpty())
-			return true;
+			return;
 
 		PortalLayoutData portalLayoutData = (PortalLayoutData) ClientFactory.getInfoFromFile(portalFile, true);
 		if (portalLayoutData == null || portalLayoutData.getCells() == null || portalLayoutData.getCells().size() == 0)
-			return true;
+			return;
 
 		populateCellData((CellObject) object, portalLayoutData.getCells().get(((CellObject) object).getNumber()));
-		return true;
 	}
 	
 	public void populateCells() {
@@ -121,5 +119,17 @@ public class BuildingObject extends TangibleObject {
 	private void populateCellData(CellObject cellObject, PortalLayoutData.Cell cellData) {
 		cellObject.setCellName(cellData.getName());
 //		System.out.println(cellObject + " cell name " + cellObject.getCellName());
+	}
+	
+	@Override
+	public void save(NetBufferStream stream) {
+		super.save(stream);
+		stream.addByte(0);
+	}
+	
+	@Override
+	public void read(NetBufferStream stream) {
+		super.read(stream);
+		stream.getByte();
 	}
 }
