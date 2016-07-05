@@ -52,13 +52,14 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 	private long leader;
 	private short level;
 	private long lootMaster;
-	private LootRule lootRule = LootRule.RANDOM;
+	private LootRule lootRule;
 
 	private transient PickupPointTimer pickupPointTimer;
 
 	public GroupObject(long objectId) {
 		super(objectId, Baseline.BaselineType.GRUP);
 		pickupPointTimer = new PickupPointTimer();
+		lootRule = LootRule.RANDOM;
 	}
 
 	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
@@ -106,7 +107,7 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 				this.setLeader(this.groupMembers.get(2));
 			}
 			
-			if (this.groupMembers.size() == 3) {
+			if (this.groupMembers.size() == 2) {
 				this.disbandGroup();
 				return;
 			}
@@ -152,8 +153,10 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 				GroupMember previous = groupMembers.set(0, member);
 			}
 		} else {
-			groupMembers.add(member);
+			this.addMember(member.getCreatureObject());
 		}
+		
+		this.leader = member.getId();
 		groupMembers.sendDeltaMessage(this);
 	}
 	
@@ -192,7 +195,7 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 	}
 	
 	public boolean isFull() { 
-		return groupMembers.size() == 9;
+		return groupMembers.size() == 8;
 	}
 
 	public Map<String, Long> getGroupMembers() {
@@ -219,17 +222,15 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 	}
 	
 	private GroupMember getGroupMember(Player player) {
-		GroupMember foundMember = null;
-		
 		synchronized(groupMembers) {
-			GroupMember testMember = new GroupMember(player.getCreatureObject());
-			int index = groupMembers.indexOf(testMember);
-			
-			if (index != -1)
-				foundMember = groupMembers.get(index);
+			for (GroupMember member : groupMembers) {
+				if (member.getId() == player.getUserId()) {
+					return member;
+				}
+			}
 		}
 		
-		return foundMember;
+		return null;
 	}
 	
 	public void disbandGroup() {

@@ -63,12 +63,13 @@ import utilities.ThreadUtilities;
 public class GroupService extends Service {
 	
 	private final ScheduledExecutorService logoutService;
-	private final Map<Long, GroupObject> groups = new HashMap<>();
-	private Map<CreatureObject, Future> logoffTimers = new HashMap<>();
+	private final Map<Long, GroupObject> groups;
+	private Map<CreatureObject, Future> logoffTimers;
 
 	public GroupService() {
 		logoutService = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("group-logout-timer"));
-		
+		logoffTimers = new HashMap<>();
+		groups = new HashMap<>();
 		registerForIntent(GroupEventIntent.TYPE);
 		registerForIntent(PlayerEventIntent.TYPE);
 	}
@@ -120,9 +121,9 @@ public class GroupService extends Service {
 			case GROUP_KICK:
 				handleKick(intent.getPlayer(), intent.getTarget());
 				break;
-//			case GROUP_MAKE_MASTER_LOOTER:
-//				handleMakeMasterLooter(intent.getPlayer(), intent.getTarget());
-//				break;
+			case GROUP_MAKE_MASTER_LOOTER:
+				handleMakeMasterLooter(intent.getPlayer(), intent.getTarget());
+				break;
 		}
 	}
 
@@ -359,7 +360,7 @@ public class GroupService extends Service {
 				return;
 			}
 
-			group.addMember(senderCreo);
+			//group.addMember(senderCreo);
 
 			sendSystemMessage(sender, "formed_self", "TT", senderCreo.getObjectId());
 
@@ -417,19 +418,19 @@ public class GroupService extends Service {
 		group.setLeader(newLeader);
 	}
 	
-//	private void handleMakeMasterLooter(Player player, CreatureObject target) {
-//		CreatureObject playerCreo = player.getCreatureObject();
-//		if (playerCreo.getGroupId() == 0) {
-//			sendSystemMessage(player, "group_only");
-//			return;
-//		}
-//		
-//		GroupObject group = getGroup(playerCreo.getGroupId());
-//		
-//		if (group.getLeaderId() != playerCreo.getObjectId()) {
-//			int lootRule = group.getLootRule();
-//		}
-//	}
+	private void handleMakeMasterLooter(Player player, CreatureObject target) {
+		CreatureObject playerCreo = player.getCreatureObject();
+		if (playerCreo.getGroupId() == 0) {
+			sendSystemMessage(player, "group_only");
+			return;
+		}
+		
+		GroupObject group = getGroup(playerCreo.getGroupId());
+		
+		if (group.getLeaderId() != playerCreo.getObjectId()) {
+			LootRule lootRule = group.getLootRule();
+		}
+	}
 	
 	private void sendNonLeaderLootMessage(Player player, int lootRule) {
 		switch (LootRule.fromId(lootRule)) {
@@ -485,7 +486,8 @@ public class GroupService extends Service {
 			return null;
 
 		group.setLeader(player.getCreatureObject());
-
+		//group.addMember(player.getCreatureObject());
+		
 		synchronized (groups) {
 			groups.put(group.getObjectId(), group);
 		}
