@@ -360,8 +360,6 @@ public class GroupService extends Service {
 				return;
 			}
 
-			//group.addMember(senderCreo);
-
 			sendSystemMessage(sender, "formed_self", "TT", senderCreo.getObjectId());
 
 			// TODO: Join group chat room
@@ -486,7 +484,6 @@ public class GroupService extends Service {
 			return null;
 
 		group.setLeader(player.getCreatureObject());
-		//group.addMember(player.getCreatureObject());
 		
 		synchronized (groups) {
 			groups.put(group.getObjectId(), group);
