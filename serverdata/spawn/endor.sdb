@@ -112,9 +112,9 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 1600112	ENDOR	end_dwb	AREA	17	-10.20	-32.00	-102.20	0	1	Super Battle Droid	13286	dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
 1600113	ENDOR	end_dwb	AREA	18	24.20	-20.00	-80.80	-39	1	Battle Droid	13268	dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
 1600114	ENDOR	end_dwb	AREA	18	-5.30	-20.00	-57.30	125	1	Battle Droid	13268	dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-1600115	ENDOR	end_dwb	AREA	18	6.70	-22.00	-73.50	25	1	a scientist	11185	dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	2
-1600116	ENDOR	end_dwb	AREA	18	12.90	-20.00	-57.30	-169	1	a technician	11186	dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	2
-1600117	ENDOR	end_dwb	AREA	18	11.10	-22.00	-73.50	-6	1	a technician	11186	dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	2
+1600115	ENDOR	end_dwb	AREA	18	6.70	-22.00	-73.50	25	1	a scientist	11185	dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
+1600116	ENDOR	end_dwb	AREA	18	12.90	-20.00	-57.30	-169	1	a technician	11186	dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
+1600117	ENDOR	end_dwb	AREA	18	11.10	-22.00	-73.50	-6	1	a technician	11186	dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
 1600118	ENDOR	end_dwb	AREA	19	24.90	-20.00	-42.90	0	1	Death Watch Ghost	13280	dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
 1600119	ENDOR	end_dwb	AREA	19	20.80	-20.00	-44.20	0	1	Death Watch Wraith	13282	dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
 1600120	ENDOR	end_dwb	AREA	19	23.90	-20.00	-29.00	-176	1	Super Battle Droid	13286	dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
@@ -130,8 +130,8 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 1600130	ENDOR	end_dwb	AREA	22	35.60	-20.00	-86.50	-175	1	Death Watch Wraith	13282	dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
 1600131	ENDOR	end_dwb	AREA	22	5.80	-28.00	-61.90	2	1	Super Battle Droid	13286	dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
 1600132	ENDOR	end_dwb	AREA	23	5.60	-31.90	-91.40	2	1	Super Battle Droid	13286	dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
-1600133	ENDOR	end_dwb	AREA	23	16.50	-32.00	-96.10	-51	1	a miner	11182	dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	2
-1600134	ENDOR	end_dwb	AREA	23	-5.23	-32.00	-78.29	159	1	a miner	11182	dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	2
+1600133	ENDOR	end_dwb	AREA	23	16.50	-32.00	-96.10	-51	1	a miner	11182	dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
+1600134	ENDOR	end_dwb	AREA	23	-5.23	-32.00	-78.29	159	1	a miner	11182	dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
 1600135	ENDOR	end_dwb	AREA	24	48.80	-32.00	-113.60	169	1	Battle Droid	13268	dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
 1600136	ENDOR	end_dwb	AREA	24	42.10	-32.00	-114.60	-88	1	Battle Droid	13268	dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
 1600137	ENDOR	end_dwb	AREA	24	43.80	-36.80	-101.00	-88	1	Death Watch Bloodguard	13281	dungeon	DWB	1	STOP	idle	0	0	0	0	600	450	0
@@ -418,15 +418,124 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 1600418	ENDOR	end_world	AREA	0	6068.64	263.00	-2448.37	0	1	a Dulok outcast raider	11318	poi	Dulok Village #2	1	FLOAT	idle	0	0	0	0	300	120	2
 1600419	ENDOR	end_world	AREA	0	6054.38	262.00	-2508.48	0	1	a Dulok outcast raider	11318	poi	Dulok Village #2	1	FLOAT	idle	0	0	0	0	300	120	2
 1600420	ENDOR	end_world	AREA	0	6039.19	262.00	-2455.34	0	1	a Dulok outcast raider	11318	poi	Dulok Village #2	1	FLOAT	idle	0	0	0	0	300	120	2
-1600421	ENDOR	end_world	AREA	0	-4645.00	88.81	-2163.00	0	1	Quinton	15510	poi	Marauder's Stronghold	1	GUARD	idle	0	0	0	0	300	120	0
-1600422	ENDOR	end_world	AREA	0	-4669.66	98.01	-2173.32	0	1	a mercenary	15555	poi	Marauder's Stronghold	1	FLOAT	idle	0	0	0	0	300	120	2
-1600423	ENDOR	end_world	AREA	0	-4654.37	94.91	-2140.39	0	1	a mercenary	15555	poi	Marauder's Stronghold	1	FLOAT	idle	0	0	0	0	300	120	2
-1600424	ENDOR	end_world	AREA	0	-4612.02	73.74	-2184.01	0	1	a mercenary	15555	poi	Marauder's Stronghold	1	FLOAT	idle	0	0	0	0	300	120	2
-1600425	ENDOR	end_world	AREA	0	-4618.70	90.00	-2295.10	-44	1	Scholar Zingo	15280	poi	Marauder's Stronghold	1	STOP	idle	0	0	0	0	300	120	0
-1600426	ENDOR	end_world	AREA	0	-4581.60	99.10	-2243.20	-176	1	Fightmaster Jorak	12022	poi	Marauder's Stronghold	1	STOP	idle	0	0	0	0	300	120	0
-1600427	ENDOR	end_world	AREA	0	-4570.50	99.00	-2273.00	-84	1	King Terak	12973	poi	Marauder's Stronghold	1	STOP	idle	0	0	0	0	300	120	0
-1600428	ENDOR	end_world	AREA	0	-4564.00	99.00	-2297.30	1	1	Charal	10594	poi	Marauder's Stronghold	1	STOP	idle	0	0	0	0	300	120	0
-1600429	ENDOR	end_world	AREA	0	-6878.00	15.18	618.00	0	1	Lavina	15502	poi	Orphaned Marauder's Cave	1	GUARD	idle	0	0	0	0	300	120	0
-1600430	ENDOR	end_world	AREA	0	-6859.60	17.70	607.00	0	1	a mercenary	15555	poi	Orphaned Marauder's Cave	1	FLOAT	idle	0	0	0	0	300	120	2
-1600431	ENDOR	end_world	AREA	0	-6899.20	11.90	649.60	0	1	a mercenary	15555	poi	Orphaned Marauder's Cave	1	FLOAT	idle	0	0	0	0	300	120	2
-1600432	ENDOR	end_world	AREA	0	-6865.20	13.00	658.00	0	1	a mercenary	15555	poi	Orphaned Marauder's Cave	1	FLOAT	idle	0	0	0	0	300	120	2
+1600421	ENDOR	end_jinda_cave	AREA	1	0.81	-12.42	-15.83	0	1	a Jinda warrior	12905	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600422	ENDOR	end_jinda_cave	AREA	10	-162.79	-41.83	-75.27	0	1	a Jinda cub	12895	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600423	ENDOR	end_jinda_cave	AREA	10	-172.64	-41.65	-69.64	0	1	a Jinda cub	12895	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600424	ENDOR	end_jinda_cave	AREA	10	-162.96	-41.55	-67.47	0	1	a Jinda elder	12896	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600425	ENDOR	end_jinda_cave	AREA	10	-173.07	-41.32	-75.21	0	1	a Jinda elder	12896	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600426	ENDOR	end_jinda_cave	AREA	10	-174.36	-41.83	-87.03	0	1	a Jinda tribesman	12903	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600427	ENDOR	end_jinda_cave	AREA	10	-172.62	-42.06	-63.34	0	1	a Jinda warrior	12905	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600428	ENDOR	end_jinda_cave	AREA	10	-162.99	-41.51	-83.21	0	1	a Jinda worker	12906	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600429	ENDOR	end_jinda_cave	AREA	11	-98.85	-47.01	-83.69	0	1	a Jinda elder worker	12897	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600430	ENDOR	end_jinda_cave	AREA	11	-112.02	-46.74	-86.64	0	1	a Jinda worker	12906	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600431	ENDOR	end_jinda_cave	AREA	11	-97.82	-30.93	-88.94	0	1	a seasoned Jinda warrior	15307	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600432	ENDOR	end_jinda_cave	AREA	11	-102.92	-30.91	-91.04	0	1	a seasoned Jinda warrior	15307	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600433	ENDOR	end_jinda_cave	AREA	11	-138.56	-45.76	-82.31	0	1	a skilled Jinda worker	15414	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600434	ENDOR	end_jinda_cave	AREA	16	-107.31	-50.06	-27.89	0	1	a Jinda veteran	12904	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600435	ENDOR	end_jinda_cave	AREA	16	-115.80	-50.03	-27.54	0	1	a Jinda warrior	12905	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600436	ENDOR	end_jinda_cave	AREA	16	-110.70	-49.70	-34.44	0	1	a seasoned Jinda warrior	15307	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600437	ENDOR	end_jinda_cave	AREA	16	-102.87	-33.99	-36.55	0	1	a seasoned Jinda warrior	15307	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600438	ENDOR	end_jinda_cave	AREA	17	-105.14	-34.35	-16.98	0	1	a seasoned Jinda warrior	15307	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600439	ENDOR	end_jinda_cave	AREA	19	16.58	-14.04	-22.75	0	1	a Jinda elder worker	12897	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600440	ENDOR	end_jinda_cave	AREA	19	20.63	-17.45	-33.07	0	1	a Jinda tribesman	12903	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600441	ENDOR	end_jinda_cave	AREA	19	15.35	-22.83	-49.09	0	1	a Jinda worker	12906	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600442	ENDOR	end_jinda_cave	AREA	2	-39.99	-23.99	-25.94	0	1	a Jinda cub	12895	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600443	ENDOR	end_jinda_cave	AREA	2	-38.58	-23.91	-23.03	0	1	a Jinda elder	12896	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600444	ENDOR	end_jinda_cave	AREA	2	-8.45	-22.16	-43.40	0	1	a Jinda warrior	12905	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600445	ENDOR	end_jinda_cave	AREA	2	-10.85	-22.40	-48.23	0	1	a Jinda warrior	12905	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600446	ENDOR	end_jinda_cave	AREA	2	-29.17	-21.05	-23.00	0	1	a Jinda worker	12906	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600447	ENDOR	end_jinda_cave	AREA	20	-15.59	-26.82	-66.85	0	1	a Jinda tribesman	12903	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600448	ENDOR	end_jinda_cave	AREA	20	-7.87	-27.00	-80.75	0	1	a Jinda warrior	12905	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600449	ENDOR	end_jinda_cave	AREA	20	-9.36	-26.83	-65.96	0	1	a Jinda worker	12906	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600450	ENDOR	end_jinda_cave	AREA	21	-28.41	-29.65	-77.40	0	1	a Jinda elder	12896	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600451	ENDOR	end_jinda_cave	AREA	21	-29.95	-27.54	-67.40	0	1	a skilled Jinda worker	15414	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600452	ENDOR	end_jinda_cave	AREA	22	-7.61	-36.05	-96.61	0	1	a hardened Jinda warrior	12378	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600453	ENDOR	end_jinda_cave	AREA	22	-24.52	-59.94	-106.45	0	1	a Jinda elder worker	12897	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600454	ENDOR	end_jinda_cave	AREA	22	-15.73	-36.03	-105.35	0	1	a masterful Jinda warrior	13304	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600455	ENDOR	end_jinda_cave	AREA	22	-40.00	-36.80	-111.00	0	1	a masterful Jinda warrior	13304	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600456	ENDOR	end_jinda_cave	AREA	22	-64.25	-44.84	-112.98	0	1	a masterful Jinda warrior	13304	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600457	ENDOR	end_jinda_cave	AREA	22	-31.73	-59.78	-114.31	0	1	a skilled Jinda worker	15414	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600458	ENDOR	end_jinda_cave	AREA	27	-1.73	-59.85	-85.56	0	1	a masterful Jinda warrior	13304	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600459	ENDOR	end_jinda_cave	AREA	27	9.94	-61.11	-96.63	0	1	a masterful Jinda warrior	13304	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600460	ENDOR	end_jinda_cave	AREA	27	-0.32	-63.06	-107.42	0	1	a masterful Jinda warrior	13304	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600461	ENDOR	end_jinda_cave	AREA	28	55.34	-57.91	-87.28	0	1	an archaic Jinda ritualist	10140	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600462	ENDOR	end_jinda_cave	AREA	28	41.98	-60.84	-100.97	0	1	a hardened Jinda warrior	12378	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600463	ENDOR	end_jinda_cave	AREA	28	28.46	-60.56	-100.11	0	1	a hardened Jinda warrior	12378	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600464	ENDOR	end_jinda_cave	AREA	28	50.58	-58.62	-77.81	0	1	a hardened Jinda warrior	12378	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600465	ENDOR	end_jinda_cave	AREA	28	50.17	-58.16	-90.74	0	1	a hardened Jinda warrior	12378	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600466	ENDOR	end_jinda_cave	AREA	28	37.53	-61.37	-114.30	0	1	a Jinda chief	12894	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600467	ENDOR	end_jinda_cave	AREA	28	30.72	-61.21	-107.96	0	1	a Jinda cub	12895	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600468	ENDOR	end_jinda_cave	AREA	28	33.61	-61.28	-115.03	0	1	a Jinda matriarch	12899	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600469	ENDOR	end_jinda_cave	AREA	28	35.23	-59.00	-63.93	0	1	a Jinda veteran	12904	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600470	ENDOR	end_jinda_cave	AREA	29	-63.95	-58.23	-175.08	0	1	a Jinda loremaster	12898	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600471	ENDOR	end_jinda_cave	AREA	29	-42.06	-58.20	-174.20	0	1	a masterful Jinda warrior	13304	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600472	ENDOR	end_jinda_cave	AREA	29	-85.05	-58.38	-175.49	0	1	a masterful Jinda warrior	13304	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600473	ENDOR	end_jinda_cave	AREA	29	-59.89	-57.80	-175.69	0	1	a weathered Jinda shaman	16754	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600474	ENDOR	end_jinda_cave	AREA	29	-68.25	-58.05	-175.90	0	1	a weathered Jinda shaman	16754	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600475	ENDOR	end_jinda_cave	AREA	30	-61.91	-58.43	-236.02	0	1	an archaic Jinda ritualist	10140	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600476	ENDOR	end_jinda_cave	AREA	30	-56.16	-58.01	-205.68	0	1	a Jinda veteran	12904	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600477	ENDOR	end_jinda_cave	AREA	30	-52.84	-58.06	-205.70	0	1	a Jinda veteran	12904	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600478	ENDOR	end_jinda_cave	AREA	30	-52.83	-57.88	-236.06	0	1	a wise Jinda ritualist	16774	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600479	ENDOR	end_jinda_cave	AREA	30	-56.54	-57.53	-229.86	0	1	a wise Jinda ritualist	16774	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600480	ENDOR	end_jinda_cave	AREA	30	-65.21	-57.07	-228.96	0	1	a wise Jinda ritualist	16774	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600481	ENDOR	end_jinda_cave	AREA	4	-68.44	-38.57	-28.47	0	1	a Jinda tribesman	12903	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600482	ENDOR	end_jinda_cave	AREA	4	-55.78	-33.91	-20.40	0	1	a Jinda worker	12906	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600483	ENDOR	end_jinda_cave	AREA	4	-67.36	-37.50	-14.32	0	1	a Jinda worker	12906	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600484	ENDOR	end_jinda_cave	AREA	5	-80.50	-39.13	-54.29	0	1	a Jinda cub	12895	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600485	ENDOR	end_jinda_cave	AREA	5	-78.28	-39.19	-66.95	0	1	a Jinda cub	12895	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600486	ENDOR	end_jinda_cave	AREA	5	-65.38	-38.94	-72.43	0	1	a Jinda matriarch	12899	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600487	ENDOR	end_jinda_cave	AREA	5	-74.31	-39.31	-72.01	0	1	a Jinda shaman	12902	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600488	ENDOR	end_jinda_cave	AREA	5	-71.58	-38.52	-57.64	0	1	a Jinda tribesman	12903	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600489	ENDOR	end_jinda_cave	AREA	5	-64.50	-23.33	-60.70	0	1	a Jinda veteran	12904	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600490	ENDOR	end_jinda_cave	AREA	5	-65.32	-23.04	-51.74	0	1	a Jinda warrior	12905	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600491	ENDOR	end_jinda_cave	AREA	5	-68.15	-23.44	-58.64	0	1	a masterful Jinda warrior	13304	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600492	ENDOR	end_jinda_cave	AREA	5	-66.72	-22.69	-66.70	0	1	a seasoned Jinda warrior	15307	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600493	ENDOR	end_jinda_cave	AREA	5	-79.07	-22.58	-40.15	0	1	a weathered Jinda shaman	16754	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600494	ENDOR	end_jinda_cave	AREA	6	-125.95	-41.53	-61.43	0	1	a Jinda tribesman	12903	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600495	ENDOR	end_jinda_cave	AREA	6	-109.54	-26.75	-64.71	0	1	a seasoned Jinda warrior	15307	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600496	ENDOR	end_jinda_cave	AREA	8	-165.27	-41.99	-40.85	0	1	a Jinda worker	12906	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600497	ENDOR	end_jinda_cave	AREA	9	-108.88	-61.74	-115.51	0	1	an adept Jinda shaman	10093	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600498	ENDOR	end_jinda_cave	AREA	9	-94.64	-62.80	-106.90	0	1	a Jinda cub	12895	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600499	ENDOR	end_jinda_cave	AREA	9	-85.95	-64.13	-109.61	0	1	a Jinda matriarch	12899	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600500	ENDOR	end_jinda_cave	AREA	9	-85.36	-63.92	-119.47	0	1	a Jinda veteran	12904	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600501	ENDOR	end_jinda_cave	AREA	9	-112.63	-45.92	-112.76	0	1	a masterful Jinda warrior	13304	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600502	ENDOR	end_jinda_cave	AREA	9	-91.49	-63.11	-118.82	0	1	a masterful Jinda warrior	13304	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600503	ENDOR	end_jinda_cave	AREA	9	-72.76	-62.65	-109.97	0	1	a skilled Jinda worker	15414	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600504	ENDOR	end_jinda_cave	AREA	9	-109.29	-61.64	-108.81	0	1	a skilled Jinda worker	15414	poi	Jinda Ritualist's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600505	ENDOR	end_korga_cave	AREA	1	25.19	-27.50	-7.81	0	1	a Korga adept	13006	poi	Korga Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600506	ENDOR	end_korga_cave	AREA	10	49.94	-48.75	-102.88	0	1	an enraged Korga	11400	poi	Korga Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600507	ENDOR	end_korga_cave	AREA	11	83.86	-46.28	-138.60	0	1	a crafty Korga scout	11125	poi	Korga Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600508	ENDOR	end_korga_cave	AREA	11	83.58	-46.63	-144.47	0	1	a Korga ancient	13007	poi	Korga Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600509	ENDOR	end_korga_cave	AREA	2	47.05	-48.33	-63.45	0	1	a Korga elder	13012	poi	Korga Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600510	ENDOR	end_korga_cave	AREA	2	53.63	-68.17	-37.60	0	1	a Korga elder	13012	poi	Korga Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600511	ENDOR	end_korga_cave	AREA	2	23.13	-42.27	-63.62	0	1	a Korga scout	13014	poi	Korga Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600512	ENDOR	end_korga_cave	AREA	3	87.73	-62.10	-14.29	0	1	a Korga spiritmaster	13015	poi	Korga Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600513	ENDOR	end_korga_cave	AREA	5	92.73	-46.16	-104.06	0	1	a frenzied Korga	12070	poi	Korga Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600514	ENDOR	end_korga_cave	AREA	5	95.95	-66.03	-116.34	0	1	a Korga battlelord	13008	poi	Korga Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600515	ENDOR	end_korga_cave	AREA	5	90.02	-46.01	-120.93	0	1	a Korga dark shaman	13011	poi	Korga Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600516	ENDOR	end_korga_cave	AREA	8	131.02	-66.28	-98.01	0	1	an eerie Korga spiritmaster	11345	poi	Korga Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600517	ENDOR	end_korga_cave	AREA	8	131.46	-66.15	-116.88	0	1	a tricky Korga scout	16435	poi	Korga Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600518	ENDOR	end_korga_cave	AREA	9	188.33	-66.18	-99.46	0	1	a Korga chieftain	13009	poi	Korga Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600519	ENDOR	end_korga_cave	AREA	9	180.93	-66.03	-98.38	0	1	a Korga spiritmaster	13015	poi	Korga Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600520	ENDOR	end_korga_cave	AREA	9	188.39	-65.78	-106.51	0	1	a spooky Korga spiritmaster	15906	poi	Korga Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600521	ENDOR	end_world	AREA	0	-4645.00	88.81	-2163.00	0	1	Quinton	15510	poi	Marauder's Stronghold	1	GUARD	idle	0	0	0	0	300	120	0
+1600522	ENDOR	end_world	AREA	0	-4669.66	98.01	-2173.32	0	1	a mercenary	15555	poi	Marauder's Stronghold	1	FLOAT	idle	0	0	0	0	300	120	2
+1600523	ENDOR	end_world	AREA	0	-4654.37	94.91	-2140.39	0	1	a mercenary	15555	poi	Marauder's Stronghold	1	FLOAT	idle	0	0	0	0	300	120	2
+1600524	ENDOR	end_world	AREA	0	-4612.02	73.74	-2184.01	0	1	a mercenary	15555	poi	Marauder's Stronghold	1	FLOAT	idle	0	0	0	0	300	120	2
+1600525	ENDOR	end_world	AREA	0	-4618.70	90.00	-2295.10	-44	1	Scholar Zingo	15280	poi	Marauder's Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1600526	ENDOR	end_world	AREA	0	-4581.60	99.10	-2243.20	-176	1	Fightmaster Jorak	12022	poi	Marauder's Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1600527	ENDOR	end_world	AREA	0	-4570.50	99.00	-2273.00	-84	1	King Terak	12973	poi	Marauder's Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1600528	ENDOR	end_world	AREA	0	-4564.00	99.00	-2297.30	1	1	Charal	10594	poi	Marauder's Stronghold	1	STOP	idle	0	0	0	0	300	120	0
+1600529	ENDOR	end_world	AREA	0	-6878.00	15.18	618.00	0	1	Lavina	15502	poi	Orphaned Marauder's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600530	ENDOR	end_world	AREA	0	-6859.60	17.70	607.00	0	1	a mercenary	15555	poi	Orphaned Marauder's Cave	1	FLOAT	idle	0	0	0	0	300	120	2
+1600531	ENDOR	end_world	AREA	0	-6899.20	11.90	649.60	0	1	a mercenary	15555	poi	Orphaned Marauder's Cave	1	FLOAT	idle	0	0	0	0	300	120	2
+1600532	ENDOR	end_world	AREA	0	-6865.20	13.00	658.00	0	1	a mercenary	15555	poi	Orphaned Marauder's Cave	1	FLOAT	idle	0	0	0	0	300	120	2
+1600533	ENDOR	end_marauder_orphans_cave	AREA	1	-12.11	-5.81	-7.25	0	1	a feral Marauder	12010	poi	Orphaned Marauder's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600534	ENDOR	end_marauder_orphans_cave	AREA	11	78.67	-46.59	-142.28	0	1	a frenzied Marauder	12071	poi	Orphaned Marauder's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600535	ENDOR	end_marauder_orphans_cave	AREA	2	48.09	-48.51	-63.92	0	1	a Marauder	13295	poi	Orphaned Marauder's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600536	ENDOR	end_marauder_orphans_cave	AREA	4	68.28	-75.36	-64.33	0	1	a blood-crazed plains Marauder	10388	poi	Orphaned Marauder's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600537	ENDOR	end_marauder_orphans_cave	AREA	4	91.47	-76.04	-68.05	0	1	a grassland blood Marauder	12275	poi	Orphaned Marauder's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600538	ENDOR	end_marauder_orphans_cave	AREA	5	92.11	-46.60	-110.45	0	1	a Marauder	13295	poi	Orphaned Marauder's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600539	ENDOR	end_marauder_orphans_cave	AREA	8	130.79	-66.18	-119.14	0	1	a frenzied Marauder	12071	poi	Orphaned Marauder's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600540	ENDOR	end_marauder_orphans_cave	AREA	8	131.08	-66.27	-97.04	0	1	a Marauder	13295	poi	Orphaned Marauder's Cave	1	GUARD	idle	0	0	0	0	300	120	0
+1600541	ENDOR	end_marauder_orphans_cave	AREA	9	180.99	-66.13	-97.13	0	1	a Marauder	13295	poi	Orphaned Marauder's Cave	1	GUARD	idle	0	0	0	0	300	120	0
