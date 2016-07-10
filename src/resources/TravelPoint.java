@@ -113,4 +113,8 @@ public final class TravelPoint implements Comparable<TravelPoint> {
 		return name.hashCode();
 	}
 	
+	public String toString() {
+		return String.format("TravelPoint[name=%s location=%s %s", name, location.getTerrain(), location.getPosition());
+	}
+	
 }
