@@ -227,7 +227,8 @@ public class GroupService extends Service {
 			destroyGroup(group, group.getLeaderPlayer());
 			return;
 		}
-
+		
+		this.sendSystemMessage(playerCreo.getOwner(), "removed");
 		group.removeMember(playerCreo);
 	}
 	
@@ -242,7 +243,10 @@ public class GroupService extends Service {
 		Player targetOwner = target.getOwner();
 		if (targetOwner == null)
 			return;
-
+		
+		if (player.equals(targetOwner))
+			return;
+		
 		long groupId = playerCreo.getGroupId();
 		long inviterId = playerCreo.getObjectId();
 
