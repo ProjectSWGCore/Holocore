@@ -1,6 +1,6 @@
 spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	creature_name	creature_id	spawn_category	spawn_area	amount	behaviour	mood	equipment_id	patrol_id	quest_id	loot_id	max_spawn_time	min_spawn_time	float_radius
 INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGER NOT NULL	REAL	REAL	REAL	REAL	INTEGER	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL	INTEGER NOT NULL	INTEGER
-2000003	NABOO	nab_world	AREA	0	1131.49	-187.95	4866.35	0	1	Doogal Belstar	13095	outback	Naboo	1	STOP	idle	0	0	0	0	300	120	2
+2000003	NABOO	nab_world	AREA	0	1131.49	-187.95	4866.35	0	1	Doogal Belstar	13095	outback	Naboo	1	FLOAT	idle	0	0	0	0	300	120	2
 2000004	NABOO	nab_deeja_hotel	AREA	10	-23.48	1.60	-17.23	0	1	an Event Promoter	10011	city	Dee'ja Peak	1	STOP	idle	0	0	0	0	300	120	0
 2000005	NABOO	nab_deeja_house2	AREA	5	-7.20	6.10	-8.80	90	1	Uwo Poal	10662	city	Dee'ja Peak	1	STOP	idle	0	0	0	0	300	120	0
 2000006	NABOO	nab_deeja_house2	AREA	5	-8.10	6.10	-7.40	90	1	Bodyguard	10663	city	Dee'ja Peak	1	STOP	idle	0	0	0	0	300	120	0
@@ -155,10 +155,10 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 2000155	NABOO	nab_world	PATROL	0	4939.14	3.75	-4800.32	0	1	a Naboo security inspector	15550	city	Moenia	1	PATROL	idle	0	999	0	0	300	120	0
 2000156	NABOO	nab_world	PATROL	0	4868.09	3.75	-4799.88	0	1	a Naboo security inspector	15550	city	Moenia	1	PATROL	idle	0	999	0	0	300	120	0
 2000157	NABOO	nab_world	AREA	0	4810.00	6.25	-4977.00	-20	1	Ronin Lightrunner	12399	city	Moenia	1	STOP	idle	0	0	0	0	300	120	0
-2000158	NABOO	nab_world	AREA	0	4503.55	6.74	-5196.16	0	1	Borvo's champion	13474	city	Moenia	3	STOP	idle	0	0	0	0	300	120	6
-2000159	NABOO	nab_world	AREA	0	4851.14	4.17	-4680.41	0	1	a Mummer thug	14091	city	Moenia	4	STOP	idle	0	0	0	0	300	120	8
-2000160	NABOO	nab_world	AREA	0	4861.51	4.17	-4695.16	0	1	a Mummer thug	14091	city	Moenia	4	STOP	idle	0	0	0	0	300	120	8
-2000161	NABOO	nab_world	AREA	0	4880.76	3.93	-4684.31	0	1	a Mummer thug	14091	city	Moenia	4	STOP	idle	0	0	0	0	300	120	8
+2000158	NABOO	nab_world	AREA	0	4503.55	6.74	-5196.16	0	1	Borvo's champion	13474	city	Moenia	3	FLOAT	idle	0	0	0	0	300	120	6
+2000159	NABOO	nab_world	AREA	0	4851.14	4.17	-4680.41	0	1	a Mummer thug	14091	city	Moenia	4	FLOAT	idle	0	0	0	0	300	120	8
+2000160	NABOO	nab_world	AREA	0	4861.51	4.17	-4695.16	0	1	a Mummer thug	14091	city	Moenia	4	FLOAT	idle	0	0	0	0	300	120	8
+2000161	NABOO	nab_world	AREA	0	4880.76	3.93	-4684.31	0	1	a Mummer thug	14091	city	Moenia	4	FLOAT	idle	0	0	0	0	300	120	8
 2000162	NABOO	nab_world	AREA	0	4653.00	3.70	-4412.00	0	1	Teslo Ten'Doora	15054	city	Moenia	1	STOP	idle	0	0	0	0	300	120	0
 2000163	NABOO	nab_world	AREA	0	4928.00	3.75	-4816.00	-118	1	Brigham	15476	city	Moenia	1	STOP	idle	0	0	0	0	300	120	0
 2000164	NABOO	nab_world	AREA	0	4764.79	6.13	-4795.34	169	1	V3-FX (Rebel Pilot Trainer)	16535	city	Moenia	1	STOP	idle	0	0	0	0	300	120	0
@@ -207,7 +207,7 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 2000207	NABOO	nab_theed_hangar	AREA	4	15.98	8.00	-54.26	-3	1	Chassis Dealer	10600	city	Theed	1	STOP	idle	0	0	0	0	300	120	0
 2000208	NABOO	nab_theed_hangar	AREA	5	46.30	8.00	-28.90	-111	1	Sergeant Harriet Brunser (an RSF assault leader)	14278	city	Theed	1	STOP	idle	0	0	0	0	300	120	0
 2000209	NABOO	nab_theed_hangar	AREA	5	37.20	7.90	15.40	5	1	Aurilian Contact	14331	city	Theed	1	STOP	npc_sitting_chair	0	0	0	0	300	120	0
-2000210	NABOO	nab_theed_hospital	AREA	10	26.80	7.30	0.20	0	1	Aboo Aramflahad (Cybernetic Specialist)	10006	city	Theed	1	STOP	idle	0	0	0	0	300	120	2
+2000210	NABOO	nab_theed_hospital	AREA	10	26.80	7.30	0.20	0	1	Aboo Aramflahad (Cybernetic Specialist)	10006	city	Theed	1	FLOAT	idle	0	0	0	0	300	120	2
 2000211	NABOO	nab_theed_hotel1	AREA	10	-23.48	1.60	-17.23	0	1	an Event Promoter	10011	city	Theed	1	STOP	idle	0	0	0	0	300	120	0
 2000212	NABOO	nab_theed_hotel2	AREA	10	-23.48	1.60	-17.23	0	1	an Event Promoter	10011	city	Theed	1	STOP	idle	0	0	0	0	300	120	0
 2000213	NABOO	nab_theed_palace	AREA	10	42.70	19.00	23.70	15	1	a noble	14363	city	Theed	1	STOP	conversation	0	0	0	0	300	120	0
@@ -254,7 +254,7 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 2000254	NABOO	nab_world	AREA	0	-5150.91	6.00	4285.07	51	1	Loruna Scathe	14179	city	Theed	1	STOP	idle	0	0	0	0	300	120	0
 2000255	NABOO	nab_world	AREA	0	-5112.49	4.75	4597.09	159	1	Ados Jarkey	14268	city	Theed	1	STOP	idle	0	0	0	0	300	120	0
 2000256	NABOO	nab_world	AREA	0	-5440.36	6.00	3929.11	-14	1	Jorgellansel (a Darkwalker adjutant)	14271	city	Theed	1	STOP	idle	0	0	0	0	300	120	0
-2000257	NABOO	nab_world	AREA	0	-6097.73	6.00	4284.81	0	1	Kermollus Preen (a freelance thief)	14273	city	Theed	1	STOP	idle	0	0	0	0	300	120	2
+2000257	NABOO	nab_world	AREA	0	-6097.73	6.00	4284.81	0	1	Kermollus Preen (a freelance thief)	14273	city	Theed	1	FLOAT	idle	0	0	0	0	300	120	2
 2000258	NABOO	nab_world	AREA	0	-4887.71	6.00	4187.64	-148	1	Lieutenant Sundria Khartoor (an RSF violent crimes officer)	14275	city	Theed	1	STOP	idle	0	0	0	0	300	120	0
 2000259	NABOO	nab_world	AREA	0	-4704.20	6.00	4015.52	-30	1	Major Harvin Franchels (an RSF officer)	14276	city	Theed	1	STOP	idle	0	0	0	0	300	120	0
 2000260	NABOO	nab_world	AREA	0	-4703.40	6.00	3933.60	0	1	a terrorist	14279	city	Theed	3	FLOAT	idle	0	0	0	0	300	120	6
@@ -337,16 +337,16 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 2000337	NABOO	nab_black_sun_outpost	AREA	9	39.70	-12.00	63.50	0	1	a Skaak Tipper bruiser	14240	dungeon	Blacksun Outpost	1	GUARD	idle	0	0	0	0	300	120	0
 2000338	NABOO	nab_black_sun_outpost	AREA	9	33.80	-12.00	54.30	0	1	a Skaak Tipper bruiser	14240	dungeon	Blacksun Outpost	1	GUARD	idle	0	0	0	0	300	120	0
 2000339	NABOO	nab_black_sun_outpost	AREA	9	55.10	-12.00	57.70	0	1	a Skaak Tipper vanguard	14253	dungeon	Blacksun Outpost	1	GUARD	idle	0	0	0	0	300	120	0
-2000340	NABOO	nab_world	AREA	0	-4825.90	-197.56	4875.78	0	1	a Skaak Tipper bruiser	14240	dungeon	Blacksun Outpost	1	STOP	idle	0	0	0	0	300	120	2
-2000341	NABOO	nab_world	AREA	0	-4812.38	-197.97	4925.08	0	1	a Skaak Tipper bruiser	14240	dungeon	Blacksun Outpost	1	STOP	idle	0	0	0	0	300	120	2
-2000342	NABOO	nab_world	AREA	0	-4799.97	-195.83	4848.04	0	1	a Skaak Tipper bruiser	14240	dungeon	Blacksun Outpost	1	STOP	idle	0	0	0	0	300	120	2
-2000343	NABOO	nab_world	AREA	0	-4790.78	-197.00	4899.96	0	1	a Skaak Tipper bruiser	14240	dungeon	Blacksun Outpost	1	STOP	idle	0	0	0	0	300	120	2
-2000344	NABOO	nab_world	AREA	0	-4761.19	-195.89	4849.80	0	1	a Skaak Tipper bruiser	14240	dungeon	Blacksun Outpost	1	STOP	idle	0	0	0	0	300	120	2
-2000345	NABOO	nab_world	AREA	0	-4755.36	-196.31	4941.68	0	1	a Skaak Tipper bruiser	14240	dungeon	Blacksun Outpost	1	STOP	idle	0	0	0	0	300	120	2
-2000346	NABOO	nab_world	AREA	0	-4739.79	-196.60	4866.58	0	1	a Skaak Tipper bruiser	14240	dungeon	Blacksun Outpost	1	STOP	idle	0	0	0	0	300	120	2
-2000347	NABOO	nab_world	AREA	0	-4733.63	-195.95	4811.35	0	1	a Skaak Tipper bruiser	14240	dungeon	Blacksun Outpost	1	STOP	idle	0	0	0	0	300	120	2
-2000348	NABOO	nab_world	AREA	0	-4709.57	-196.76	4896.06	0	1	a Skaak Tipper bruiser	14240	dungeon	Blacksun Outpost	1	STOP	idle	0	0	0	0	300	120	2
-2000349	NABOO	nab_world	AREA	0	-4698.46	-196.19	4851.88	0	1	a Skaak Tipper bruiser	14240	dungeon	Blacksun Outpost	1	STOP	idle	0	0	0	0	300	120	2
+2000340	NABOO	nab_world	AREA	0	-4825.90	-197.56	4875.78	0	1	a Skaak Tipper bruiser	14240	dungeon	Blacksun Outpost	1	FLOAT	idle	0	0	0	0	300	120	2
+2000341	NABOO	nab_world	AREA	0	-4812.38	-197.97	4925.08	0	1	a Skaak Tipper bruiser	14240	dungeon	Blacksun Outpost	1	FLOAT	idle	0	0	0	0	300	120	2
+2000342	NABOO	nab_world	AREA	0	-4799.97	-195.83	4848.04	0	1	a Skaak Tipper bruiser	14240	dungeon	Blacksun Outpost	1	FLOAT	idle	0	0	0	0	300	120	2
+2000343	NABOO	nab_world	AREA	0	-4790.78	-197.00	4899.96	0	1	a Skaak Tipper bruiser	14240	dungeon	Blacksun Outpost	1	FLOAT	idle	0	0	0	0	300	120	2
+2000344	NABOO	nab_world	AREA	0	-4761.19	-195.89	4849.80	0	1	a Skaak Tipper bruiser	14240	dungeon	Blacksun Outpost	1	FLOAT	idle	0	0	0	0	300	120	2
+2000345	NABOO	nab_world	AREA	0	-4755.36	-196.31	4941.68	0	1	a Skaak Tipper bruiser	14240	dungeon	Blacksun Outpost	1	FLOAT	idle	0	0	0	0	300	120	2
+2000346	NABOO	nab_world	AREA	0	-4739.79	-196.60	4866.58	0	1	a Skaak Tipper bruiser	14240	dungeon	Blacksun Outpost	1	FLOAT	idle	0	0	0	0	300	120	2
+2000347	NABOO	nab_world	AREA	0	-4733.63	-195.95	4811.35	0	1	a Skaak Tipper bruiser	14240	dungeon	Blacksun Outpost	1	FLOAT	idle	0	0	0	0	300	120	2
+2000348	NABOO	nab_world	AREA	0	-4709.57	-196.76	4896.06	0	1	a Skaak Tipper bruiser	14240	dungeon	Blacksun Outpost	1	FLOAT	idle	0	0	0	0	300	120	2
+2000349	NABOO	nab_world	AREA	0	-4698.46	-196.19	4851.88	0	1	a Skaak Tipper bruiser	14240	dungeon	Blacksun Outpost	1	FLOAT	idle	0	0	0	0	300	120	2
 2000350	NABOO	nab_borvo_bunker	AREA	3	3.40	0.30	-4.20	-90	1	Borvo's thug	10488	dungeon	Borvo Bunker	1	STOP	idle	0	0	0	0	300	120	0
 2000351	NABOO	nab_borvo_bunker	AREA	5	-6.20	-6.80	-7.80	14	1	Borvo's thug	10488	dungeon	Borvo Bunker	1	STOP	idle	0	0	0	0	300	120	0
 2000352	NABOO	nab_borvo_bunker	AREA	5	-3.60	-6.80	-2.70	-13	1	Borvo's thug	10488	dungeon	Borvo Bunker	1	STOP	idle	0	0	0	0	300	120	0
@@ -357,40 +357,40 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 2000357	NABOO	nab_borvo_bunker	AREA	9	-5.50	-13.80	-12.10	14	1	Derm Worrit (a Borvo thug)	14136	dungeon	Borvo Bunker	1	STOP	idle	0	0	0	0	300	120	0
 2000358	NABOO	nab_borvo_bunker	AREA	9	0.50	-13.80	-10.20	-11	1	Borvo's thug	10488	dungeon	Borvo Bunker	1	STOP	idle	0	0	0	0	300	120	0
 2000359	NABOO	nab_borvo_bunker	AREA	9	-1.60	-13.80	-0.40	-9	1	Borvo's thug	10488	dungeon	Borvo Bunker	1	STOP	idle	0	0	0	0	300	120	0
-2000360	NABOO	nab_world	AREA	0	-4249.41	38.78	3929.37	0	1	Borvo's thug	10488	dungeon	Borvo Bunker	2	STOP	idle	0	0	0	0	300	120	4
-2000361	NABOO	nab_world	AREA	0	-4228.64	44.35	3877.18	0	1	Borvo's thug	10488	dungeon	Borvo Bunker	2	STOP	idle	0	0	0	0	300	120	4
-2000362	NABOO	nab_world	AREA	0	-4204.28	38.25	3937.16	0	1	Borvo's thug	10488	dungeon	Borvo Bunker	2	STOP	idle	0	0	0	0	300	120	4
-2000363	NABOO	nab_world	AREA	0	-4203.40	47.44	3854.72	0	1	Borvo's thug	10488	dungeon	Borvo Bunker	2	STOP	idle	0	0	0	0	300	120	4
-2000364	NABOO	nab_world	AREA	0	-4165.85	41.20	3864.89	0	1	Borvo's thug	10488	dungeon	Borvo Bunker	2	STOP	idle	0	0	0	0	300	120	4
-2000365	NABOO	nab_world	AREA	0	-4146.54	45.19	3923.15	0	1	Borvo's thug	10488	dungeon	Borvo Bunker	2	STOP	idle	0	0	0	0	300	120	4
-2000366	NABOO	nab_world	AREA	0	-4123.81	45.43	3889.46	0	1	Borvo's thug	10488	dungeon	Borvo Bunker	2	STOP	idle	0	0	0	0	300	120	4
-2000367	NABOO	nab_world	AREA	0	-4192.85	45.56	3872.65	0	1	Borvo's thug	10488	dungeon	Borvo Bunker	2	STOP	idle	0	0	0	0	300	120	4
-2000368	NABOO	nab_crystal_cave	AREA	1	-16.61	-4.14	-5.97	22	1	a sick narglatch	14305	dungeon	Crystal Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000369	NABOO	nab_crystal_cave	AREA	1	21.22	-28.07	-10.49	0	1	a sick narglatch	14305	dungeon	Crystal Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000370	NABOO	nab_crystal_cave	AREA	10	52.09	-48.82	-102.52	0	1	a sick narglatch	14305	dungeon	Crystal Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000371	NABOO	nab_crystal_cave	AREA	11	89.78	-47.05	-142.21	0	1	a narglatch	14297	dungeon	Crystal Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000372	NABOO	nab_crystal_cave	AREA	2	23.82	-41.12	-56.15	0	1	a narglatch	14297	dungeon	Crystal Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000373	NABOO	nab_crystal_cave	AREA	2	52.66	-47.62	-69.58	0	1	a narglatch	14297	dungeon	Crystal Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000374	NABOO	nab_crystal_cave	AREA	2	51.16	-48.10	-11.34	0	1	a narglatch	14297	dungeon	Crystal Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000375	NABOO	nab_crystal_cave	AREA	2	48.60	-48.73	-62.02	0	1	a sick narglatch	14305	dungeon	Crystal Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000376	NABOO	nab_crystal_cave	AREA	2	55.11	-68.37	-40.93	0	1	a sick narglatch	14305	dungeon	Crystal Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000377	NABOO	nab_crystal_cave	AREA	3	87.01	-62.37	-17.29	0	1	a sick narglatch	14305	dungeon	Crystal Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000378	NABOO	nab_crystal_cave	AREA	4	77.62	-75.52	-57.53	0	1	a narglatch	14297	dungeon	Crystal Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000379	NABOO	nab_crystal_cave	AREA	4	63.97	-76.55	-83.71	0	1	a sick narglatch	14305	dungeon	Crystal Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000380	NABOO	nab_crystal_cave	AREA	4	90.86	-76.51	-63.28	0	1	a sick narglatch	14305	dungeon	Crystal Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000381	NABOO	nab_crystal_cave	AREA	5	94.82	-66.11	-115.71	0	1	a narglatch	14297	dungeon	Crystal Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000382	NABOO	nab_crystal_cave	AREA	5	90.20	-46.64	-111.17	0	1	a sick narglatch	14305	dungeon	Crystal Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000383	NABOO	nab_crystal_cave	AREA	6	56.37	-71.20	-115.90	0	1	a narglatch	14297	dungeon	Crystal Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000384	NABOO	nab_crystal_cave	AREA	7	76.19	-65.92	-139.76	0	1	a sick narglatch	14305	dungeon	Crystal Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000385	NABOO	nab_crystal_cave	AREA	8	149.16	-67.16	-120.88	0	1	a narglatch	14297	dungeon	Crystal Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000386	NABOO	nab_crystal_cave	AREA	8	131.90	-66.71	-106.75	0	1	a narglatch	14297	dungeon	Crystal Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000387	NABOO	nab_crystal_cave	AREA	8	137.38	-67.17	-90.57	0	1	a sick narglatch	14305	dungeon	Crystal Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000388	NABOO	nab_crystal_cave	AREA	8	113.13	-67.21	-90.36	0	1	a sick narglatch	14305	dungeon	Crystal Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000389	NABOO	nab_crystal_cave	AREA	9	183.73	-65.66	-101.13	0	1	a sick narglatch	14305	dungeon	Crystal Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000390	NABOO	nab_darkwalker_bunker	AREA	10	4.00	-20.80	23.20	-169	1	a Darkwalker deathraven	14141	dungeon	Darkwalker Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+2000360	NABOO	nab_world	AREA	0	-4249.41	38.78	3929.37	0	1	Borvo's thug	10488	dungeon	Borvo Bunker	2	FLOAT	idle	0	0	0	0	300	120	4
+2000361	NABOO	nab_world	AREA	0	-4228.64	44.35	3877.18	0	1	Borvo's thug	10488	dungeon	Borvo Bunker	2	FLOAT	idle	0	0	0	0	300	120	4
+2000362	NABOO	nab_world	AREA	0	-4204.28	38.25	3937.16	0	1	Borvo's thug	10488	dungeon	Borvo Bunker	2	FLOAT	idle	0	0	0	0	300	120	4
+2000363	NABOO	nab_world	AREA	0	-4203.40	47.44	3854.72	0	1	Borvo's thug	10488	dungeon	Borvo Bunker	2	FLOAT	idle	0	0	0	0	300	120	4
+2000364	NABOO	nab_world	AREA	0	-4165.85	41.20	3864.89	0	1	Borvo's thug	10488	dungeon	Borvo Bunker	2	FLOAT	idle	0	0	0	0	300	120	4
+2000365	NABOO	nab_world	AREA	0	-4146.54	45.19	3923.15	0	1	Borvo's thug	10488	dungeon	Borvo Bunker	2	FLOAT	idle	0	0	0	0	300	120	4
+2000366	NABOO	nab_world	AREA	0	-4123.81	45.43	3889.46	0	1	Borvo's thug	10488	dungeon	Borvo Bunker	2	FLOAT	idle	0	0	0	0	300	120	4
+2000367	NABOO	nab_world	AREA	0	-4192.85	45.56	3872.65	0	1	Borvo's thug	10488	dungeon	Borvo Bunker	2	FLOAT	idle	0	0	0	0	300	120	4
+2000368	NABOO	nab_crystal_cave	AREA	1	-16.61	-4.14	-5.97	0	1	a sick narglatch	14305	dungeon	Crystal Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000369	NABOO	nab_crystal_cave	AREA	1	21.22	-28.07	-10.49	0	1	a sick narglatch	14305	dungeon	Crystal Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000370	NABOO	nab_crystal_cave	AREA	10	52.09	-48.82	-102.52	0	1	a sick narglatch	14305	dungeon	Crystal Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000371	NABOO	nab_crystal_cave	AREA	11	89.78	-47.05	-142.21	0	1	a narglatch	14297	dungeon	Crystal Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000372	NABOO	nab_crystal_cave	AREA	2	23.82	-41.12	-56.15	0	1	a narglatch	14297	dungeon	Crystal Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000373	NABOO	nab_crystal_cave	AREA	2	52.66	-47.62	-69.58	0	1	a narglatch	14297	dungeon	Crystal Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000374	NABOO	nab_crystal_cave	AREA	2	51.16	-48.10	-11.34	0	1	a narglatch	14297	dungeon	Crystal Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000375	NABOO	nab_crystal_cave	AREA	2	48.60	-48.73	-62.02	0	1	a sick narglatch	14305	dungeon	Crystal Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000376	NABOO	nab_crystal_cave	AREA	2	55.11	-68.37	-40.93	0	1	a sick narglatch	14305	dungeon	Crystal Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000377	NABOO	nab_crystal_cave	AREA	3	87.01	-62.37	-17.29	0	1	a sick narglatch	14305	dungeon	Crystal Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000378	NABOO	nab_crystal_cave	AREA	4	77.62	-75.52	-57.53	0	1	a narglatch	14297	dungeon	Crystal Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000379	NABOO	nab_crystal_cave	AREA	4	63.97	-76.55	-83.71	0	1	a sick narglatch	14305	dungeon	Crystal Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000380	NABOO	nab_crystal_cave	AREA	4	90.86	-76.51	-63.28	0	1	a sick narglatch	14305	dungeon	Crystal Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000381	NABOO	nab_crystal_cave	AREA	5	94.82	-66.11	-115.71	0	1	a narglatch	14297	dungeon	Crystal Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000382	NABOO	nab_crystal_cave	AREA	5	90.20	-46.64	-111.17	0	1	a sick narglatch	14305	dungeon	Crystal Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000383	NABOO	nab_crystal_cave	AREA	6	56.37	-71.20	-115.90	0	1	a narglatch	14297	dungeon	Crystal Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000384	NABOO	nab_crystal_cave	AREA	7	76.19	-65.92	-139.76	0	1	a sick narglatch	14305	dungeon	Crystal Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000385	NABOO	nab_crystal_cave	AREA	8	149.16	-67.16	-120.88	0	1	a narglatch	14297	dungeon	Crystal Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000386	NABOO	nab_crystal_cave	AREA	8	131.90	-66.71	-106.75	0	1	a narglatch	14297	dungeon	Crystal Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000387	NABOO	nab_crystal_cave	AREA	8	137.38	-67.17	-90.57	0	1	a sick narglatch	14305	dungeon	Crystal Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000388	NABOO	nab_crystal_cave	AREA	8	113.13	-67.21	-90.36	0	1	a sick narglatch	14305	dungeon	Crystal Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000389	NABOO	nab_crystal_cave	AREA	9	183.73	-65.66	-101.13	0	1	a sick narglatch	14305	dungeon	Crystal Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000390	NABOO	nab_darkwalker_bunker	AREA	10	4.00	-20.80	23.20	0	1	a Darkwalker deathraven	14141	dungeon	Darkwalker Bunker	1	GUARD	idle	0	0	0	0	300	120	0
 2000391	NABOO	nab_darkwalker_bunker	AREA	10	1.50	-20.80	16.10	0	1	a Darkwalker deathraven	14141	dungeon	Darkwalker Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-2000392	NABOO	nab_darkwalker_bunker	AREA	10	-1.80	-20.80	22.20	169	1	a Darkwalker deathraven	14141	dungeon	Darkwalker Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-2000393	NABOO	nab_darkwalker_bunker	AREA	10	1.47	-20.75	31.81	179	1	Vran Tristen (a Darkwalker bloodlord)	14158	dungeon	Darkwalker Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+2000392	NABOO	nab_darkwalker_bunker	AREA	10	-1.80	-20.80	22.20	0	1	a Darkwalker deathraven	14141	dungeon	Darkwalker Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+2000393	NABOO	nab_darkwalker_bunker	AREA	10	1.47	-20.75	31.81	0	1	Vran Tristen (a Darkwalker bloodlord)	14158	dungeon	Darkwalker Bunker	1	GUARD	idle	0	0	0	0	300	120	0
 2000394	NABOO	nab_darkwalker_bunker	AREA	3	3.40	0.30	-3.70	0	1	a Darkwalker deathraven	14141	dungeon	Darkwalker Bunker	1	GUARD	idle	0	0	0	0	300	120	0
 2000395	NABOO	nab_darkwalker_bunker	AREA	4	-4.60	-6.80	5.30	0	1	a Darkwalker deathraven	14141	dungeon	Darkwalker Bunker	1	GUARD	idle	0	0	0	0	300	120	0
 2000396	NABOO	nab_darkwalker_bunker	AREA	7	-7.70	-13.80	6.30	0	1	a Darkwalker deathraven	14141	dungeon	Darkwalker Bunker	1	GUARD	idle	0	0	0	0	300	120	0
@@ -411,70 +411,70 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 2000411	NABOO	nab_world	AREA	0	-2192.41	8.77	-5118.30	0	1	a Darkwalker preylord	14149	dungeon	Darkwalker Bunker	2	FLOAT	idle	0	0	0	0	300	120	4
 2000412	NABOO	nab_world	AREA	0	-2164.29	11.54	-5184.41	0	1	a Darkwalker preylord	14149	dungeon	Darkwalker Bunker	2	FLOAT	idle	0	0	0	0	300	120	4
 2000413	NABOO	nab_world	AREA	0	-2154.57	9.67	-5163.63	0	1	a Darkwalker preylord	14149	dungeon	Darkwalker Bunker	2	FLOAT	idle	0	0	0	0	300	120	4
-2000414	NABOO	nab_darkwalker_cave	AREA	10	-175.10	-49.30	-75.10	0	1	a Darkwalker scoff	14151	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000415	NABOO	nab_darkwalker_cave	AREA	10	-165.00	-49.70	-80.60	0	1	a Darkwalker scoff	14151	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000416	NABOO	nab_darkwalker_cave	AREA	11	-129.30	-53.70	-89.90	0	1	a Darkwalker ruffal	14150	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000417	NABOO	nab_darkwalker_cave	AREA	11	-105.20	-38.80	-81.60	0	1	a Darkwalker ruffal	14150	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000418	NABOO	nab_darkwalker_cave	AREA	11	-97.10	-54.90	-87.90	0	1	a Darkwalker scoff	14151	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
+2000414	NABOO	nab_darkwalker_cave	AREA	10	-175.10	-49.30	-75.10	0	1	a Darkwalker scoff	14151	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000415	NABOO	nab_darkwalker_cave	AREA	10	-165.00	-49.70	-80.60	0	1	a Darkwalker scoff	14151	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000416	NABOO	nab_darkwalker_cave	AREA	11	-129.30	-53.70	-89.90	0	1	a Darkwalker ruffal	14150	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000417	NABOO	nab_darkwalker_cave	AREA	11	-105.20	-38.80	-81.60	0	1	a Darkwalker ruffal	14150	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000418	NABOO	nab_darkwalker_cave	AREA	11	-97.10	-54.90	-87.90	0	1	a Darkwalker scoff	14151	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
 2000419	NABOO	nab_darkwalker_cave	AREA	11	-142.10	-53.90	-83.10	130	1	Solon Gaw (a Darkwalker aegis guard)	14152	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000420	NABOO	nab_darkwalker_cave	AREA	12	-175.20	-53.30	-112.60	0	1	a Darkwalker ruffal	14150	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000421	NABOO	nab_darkwalker_cave	AREA	12	-170.40	-53.00	-110.80	0	1	a Darkwalker ruffal	14150	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000422	NABOO	nab_darkwalker_cave	AREA	12	-136.90	-54.30	-96.50	0	1	a Darkwalker ruffal	14150	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000423	NABOO	nab_darkwalker_cave	AREA	12	-144.30	-54.10	-121.00	0	1	a Darkwalker scoff	14151	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000424	NABOO	nab_darkwalker_cave	AREA	14	-79.40	-57.50	-82.60	0	1	a Darkwalker scoff	14151	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000425	NABOO	nab_darkwalker_cave	AREA	16	-112.80	-58.00	-26.50	0	1	a Darkwalker scoff	14151	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000426	NABOO	nab_darkwalker_cave	AREA	18	-132.20	-57.60	-28.30	0	1	a Darkwalker ruffal	14150	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000427	NABOO	nab_darkwalker_cave	AREA	18	-129.10	-57.70	-25.80	0	1	a Darkwalker ruffal	14150	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000428	NABOO	nab_darkwalker_cave	AREA	19	15.10	-21.50	-19.30	0	1	a Darkwalker drudge	14143	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000429	NABOO	nab_darkwalker_cave	AREA	2	-32.70	-31.10	-19.80	0	1	a Darkwalker ruffal	14150	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000430	NABOO	nab_darkwalker_cave	AREA	2	-13.90	-30.50	-46.10	0	1	a Darkwalker ruffal	14150	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000431	NABOO	nab_darkwalker_cave	AREA	2	-31.00	-29.40	-26.00	0	1	a Darkwalker scoff	14151	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000432	NABOO	nab_darkwalker_cave	AREA	2	-18.30	-28.90	-30.30	0	1	a Darkwalker scoff	14151	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000433	NABOO	nab_darkwalker_cave	AREA	20	6.80	-67.20	-69.60	0	1	a Darkwalker sentinel	14142	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000434	NABOO	nab_darkwalker_cave	AREA	20	-14.70	-35.00	-73.10	0	1	a Darkwalker grinder	14146	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000435	NABOO	nab_darkwalker_cave	AREA	22	-29.10	-43.60	-93.60	0	1	a Darkwalker sentinel	14142	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000436	NABOO	nab_darkwalker_cave	AREA	22	-22.30	-43.30	-91.80	0	1	a Darkwalker sentinel	14142	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000437	NABOO	nab_darkwalker_cave	AREA	22	-15.70	-44.10	-98.60	0	1	a Darkwalker sentinel	14142	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000438	NABOO	nab_darkwalker_cave	AREA	25	-76.80	-67.10	-136.00	0	1	a Darkwalker sentinel	14142	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000439	NABOO	nab_darkwalker_cave	AREA	26	-15.50	-67.70	-107.30	0	1	a Darkwalker sentinel	14142	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000440	NABOO	nab_darkwalker_cave	AREA	27	42.70	-66.30	-90.40	0	1	Critolus Masse (a Darkwalker underlord)	14140	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000441	NABOO	nab_darkwalker_cave	AREA	27	45.70	-66.00	-81.90	0	1	a Darkwalker sentinel	14142	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000442	NABOO	nab_darkwalker_cave	AREA	27	37.20	-66.40	-81.20	0	1	a Darkwalker sentinel	14142	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000443	NABOO	nab_darkwalker_cave	AREA	27	33.50	-67.20	-72.00	0	1	a Darkwalker sentinel	14142	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000444	NABOO	nab_darkwalker_cave	AREA	28	-82.60	-66.50	-190.70	0	1	a Darkwalker sentinel	14142	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000445	NABOO	nab_darkwalker_cave	AREA	28	-73.90	-65.90	-195.60	0	1	a Darkwalker sentinel	14142	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000446	NABOO	nab_darkwalker_cave	AREA	28	-63.90	-65.90	-164.60	0	1	a Darkwalker sentinel	14142	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000447	NABOO	nab_darkwalker_cave	AREA	28	-50.10	-66.70	-184.50	0	1	a Darkwalker sentinel	14142	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000448	NABOO	nab_darkwalker_cave	AREA	28	-46.10	-66.60	-160.00	0	1	a Darkwalker sentinel	14142	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000449	NABOO	nab_darkwalker_cave	AREA	28	-76.00	-65.90	-179.50	0	1	a Darkwalker drudge	14143	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000450	NABOO	nab_darkwalker_cave	AREA	28	-74.80	-66.10	-157.80	0	1	a Darkwalker grinder	14146	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000451	NABOO	nab_darkwalker_cave	AREA	29	-55.80	-65.40	-228.10	0	1	a Darkwalker sentinel	14142	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000452	NABOO	nab_darkwalker_cave	AREA	29	-54.40	-66.10	-237.50	0	1	Marcus Gaw (a Darkwalker bloodlord)	14148	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000453	NABOO	nab_darkwalker_cave	AREA	3	-46.30	-30.10	-45.10	0	1	a Darkwalker ruffal	14150	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000454	NABOO	nab_darkwalker_cave	AREA	3	-44.10	-29.60	-41.20	0	1	a Darkwalker ruffal	14150	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000455	NABOO	nab_darkwalker_cave	AREA	5	-71.70	-47.30	-36.50	0	1	a Darkwalker ruffal	14150	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000456	NABOO	nab_darkwalker_cave	AREA	5	-66.60	-47.30	-39.40	0	1	a Darkwalker ruffal	14150	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000457	NABOO	nab_darkwalker_cave	AREA	5	-80.90	-47.10	-64.30	0	1	a Darkwalker scoff	14151	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000458	NABOO	nab_darkwalker_cave	AREA	5	-78.30	-30.50	-41.80	0	1	a Darkwalker scoff	14151	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000459	NABOO	nab_darkwalker_cave	AREA	5	-69.50	-30.90	-73.00	0	1	a Darkwalker scoff	14151	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000460	NABOO	nab_darkwalker_cave	AREA	5	-68.60	-31.20	-49.50	0	1	a Darkwalker scoff	14151	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
+2000420	NABOO	nab_darkwalker_cave	AREA	12	-175.20	-53.30	-112.60	0	1	a Darkwalker ruffal	14150	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000421	NABOO	nab_darkwalker_cave	AREA	12	-170.40	-53.00	-110.80	0	1	a Darkwalker ruffal	14150	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000422	NABOO	nab_darkwalker_cave	AREA	12	-136.90	-54.30	-96.50	0	1	a Darkwalker ruffal	14150	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000423	NABOO	nab_darkwalker_cave	AREA	12	-144.30	-54.10	-121.00	0	1	a Darkwalker scoff	14151	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000424	NABOO	nab_darkwalker_cave	AREA	14	-79.40	-57.50	-82.60	0	1	a Darkwalker scoff	14151	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000425	NABOO	nab_darkwalker_cave	AREA	16	-112.80	-58.00	-26.50	0	1	a Darkwalker scoff	14151	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000426	NABOO	nab_darkwalker_cave	AREA	18	-132.20	-57.60	-28.30	0	1	a Darkwalker ruffal	14150	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000427	NABOO	nab_darkwalker_cave	AREA	18	-129.10	-57.70	-25.80	0	1	a Darkwalker ruffal	14150	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000428	NABOO	nab_darkwalker_cave	AREA	19	15.10	-21.50	-19.30	0	1	a Darkwalker drudge	14143	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000429	NABOO	nab_darkwalker_cave	AREA	2	-32.70	-31.10	-19.80	0	1	a Darkwalker ruffal	14150	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000430	NABOO	nab_darkwalker_cave	AREA	2	-13.90	-30.50	-46.10	0	1	a Darkwalker ruffal	14150	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000431	NABOO	nab_darkwalker_cave	AREA	2	-31.00	-29.40	-26.00	0	1	a Darkwalker scoff	14151	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000432	NABOO	nab_darkwalker_cave	AREA	2	-18.30	-28.90	-30.30	0	1	a Darkwalker scoff	14151	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000433	NABOO	nab_darkwalker_cave	AREA	20	6.80	-67.20	-69.60	0	1	a Darkwalker sentinel	14142	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000434	NABOO	nab_darkwalker_cave	AREA	20	-14.70	-35.00	-73.10	0	1	a Darkwalker grinder	14146	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000435	NABOO	nab_darkwalker_cave	AREA	22	-29.10	-43.60	-93.60	0	1	a Darkwalker sentinel	14142	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000436	NABOO	nab_darkwalker_cave	AREA	22	-22.30	-43.30	-91.80	0	1	a Darkwalker sentinel	14142	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000437	NABOO	nab_darkwalker_cave	AREA	22	-15.70	-44.10	-98.60	0	1	a Darkwalker sentinel	14142	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000438	NABOO	nab_darkwalker_cave	AREA	25	-76.80	-67.10	-136.00	0	1	a Darkwalker sentinel	14142	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000439	NABOO	nab_darkwalker_cave	AREA	26	-15.50	-67.70	-107.30	0	1	a Darkwalker sentinel	14142	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000440	NABOO	nab_darkwalker_cave	AREA	27	42.70	-66.30	-90.40	0	1	Critolus Masse (a Darkwalker underlord)	14140	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000441	NABOO	nab_darkwalker_cave	AREA	27	45.70	-66.00	-81.90	0	1	a Darkwalker sentinel	14142	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000442	NABOO	nab_darkwalker_cave	AREA	27	37.20	-66.40	-81.20	0	1	a Darkwalker sentinel	14142	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000443	NABOO	nab_darkwalker_cave	AREA	27	33.50	-67.20	-72.00	0	1	a Darkwalker sentinel	14142	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000444	NABOO	nab_darkwalker_cave	AREA	28	-82.60	-66.50	-190.70	0	1	a Darkwalker sentinel	14142	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000445	NABOO	nab_darkwalker_cave	AREA	28	-73.90	-65.90	-195.60	0	1	a Darkwalker sentinel	14142	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000446	NABOO	nab_darkwalker_cave	AREA	28	-63.90	-65.90	-164.60	0	1	a Darkwalker sentinel	14142	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000447	NABOO	nab_darkwalker_cave	AREA	28	-50.10	-66.70	-184.50	0	1	a Darkwalker sentinel	14142	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000448	NABOO	nab_darkwalker_cave	AREA	28	-46.10	-66.60	-160.00	0	1	a Darkwalker sentinel	14142	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000449	NABOO	nab_darkwalker_cave	AREA	28	-76.00	-65.90	-179.50	0	1	a Darkwalker drudge	14143	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000450	NABOO	nab_darkwalker_cave	AREA	28	-74.80	-66.10	-157.80	0	1	a Darkwalker grinder	14146	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000451	NABOO	nab_darkwalker_cave	AREA	29	-55.80	-65.40	-228.10	0	1	a Darkwalker sentinel	14142	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000452	NABOO	nab_darkwalker_cave	AREA	29	-54.40	-66.10	-237.50	0	1	Marcus Gaw (a Darkwalker bloodlord)	14148	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000453	NABOO	nab_darkwalker_cave	AREA	3	-46.30	-30.10	-45.10	0	1	a Darkwalker ruffal	14150	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000454	NABOO	nab_darkwalker_cave	AREA	3	-44.10	-29.60	-41.20	0	1	a Darkwalker ruffal	14150	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000455	NABOO	nab_darkwalker_cave	AREA	5	-71.70	-47.30	-36.50	0	1	a Darkwalker ruffal	14150	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000456	NABOO	nab_darkwalker_cave	AREA	5	-66.60	-47.30	-39.40	0	1	a Darkwalker ruffal	14150	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000457	NABOO	nab_darkwalker_cave	AREA	5	-80.90	-47.10	-64.30	0	1	a Darkwalker scoff	14151	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000458	NABOO	nab_darkwalker_cave	AREA	5	-78.30	-30.50	-41.80	0	1	a Darkwalker scoff	14151	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000459	NABOO	nab_darkwalker_cave	AREA	5	-69.50	-30.90	-73.00	0	1	a Darkwalker scoff	14151	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000460	NABOO	nab_darkwalker_cave	AREA	5	-68.60	-31.20	-49.50	0	1	a Darkwalker scoff	14151	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
 2000461	NABOO	nab_darkwalker_cave	AREA	5	-61.80	-46.70	-73.40	-72	1	Karl Eckener	14272	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000462	NABOO	nab_darkwalker_cave	AREA	6	-117.10	-49.30	-59.40	0	1	a Darkwalker ruffal	14150	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000463	NABOO	nab_darkwalker_cave	AREA	6	-115.00	-49.60	-64.10	0	1	a Darkwalker ruffal	14150	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000464	NABOO	nab_darkwalker_cave	AREA	6	-86.80	-48.50	-58.20	0	1	a Darkwalker scoff	14151	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000465	NABOO	nab_darkwalker_cave	AREA	6	-143.00	-49.60	-55.10	0	1	a Darkwalker scoff	14151	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000466	NABOO	nab_darkwalker_cave	AREA	6	-127.00	-33.70	-66.70	0	1	a Darkwalker scoff	14151	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000467	NABOO	nab_darkwalker_cave	AREA	8	-164.80	-49.60	-47.40	0	1	a Darkwalker ruffal	14150	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000468	NABOO	nab_darkwalker_cave	AREA	8	-163.70	-50.00	-41.40	0	1	a Darkwalker ruffal	14150	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000469	NABOO	nab_darkwalker_cave	AREA	8	-137.50	-49.60	-50.10	0	1	a Darkwalker ruffal	14150	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000470	NABOO	nab_darkwalker_cave	AREA	9	-106.90	-69.90	-115.70	0	1	a Darkwalker sentinel	14142	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000471	NABOO	nab_darkwalker_cave	AREA	9	-102.30	-70.00	-114.70	0	1	a Darkwalker sentinel	14142	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000472	NABOO	nab_darkwalker_cave	AREA	9	-84.00	-71.90	-119.80	0	1	a Darkwalker drudge	14143	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000473	NABOO	nab_darkwalker_cave	AREA	9	-78.90	-52.90	-113.80	0	1	a Darkwalker drudge	14143	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000474	NABOO	nab_darkwalker_cave	AREA	9	-79.90	-71.90	-115.60	0	1	a Darkwalker grinder	14146	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000475	NABOO	nab_darkwalker_cave	AREA	9	-113.60	-54.00	-112.60	0	1	a Darkwalker grinder	14146	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000476	NABOO	nab_darkwalker_cave	AREA	9	-71.70	-38.00	-118.60	0	1	a Darkwalker ruffal	14150	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
-2000477	NABOO	nab_darkwalker_cave	AREA	9	-103.00	-39.60	-113.70	0	1	a Darkwalker scoff	14151	dungeon	Darkwalker Cave	1	STOP	idle	0	0	0	0	300	120	0
+2000462	NABOO	nab_darkwalker_cave	AREA	6	-117.10	-49.30	-59.40	0	1	a Darkwalker ruffal	14150	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000463	NABOO	nab_darkwalker_cave	AREA	6	-115.00	-49.60	-64.10	0	1	a Darkwalker ruffal	14150	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000464	NABOO	nab_darkwalker_cave	AREA	6	-86.80	-48.50	-58.20	0	1	a Darkwalker scoff	14151	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000465	NABOO	nab_darkwalker_cave	AREA	6	-143.00	-49.60	-55.10	0	1	a Darkwalker scoff	14151	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000466	NABOO	nab_darkwalker_cave	AREA	6	-127.00	-33.70	-66.70	0	1	a Darkwalker scoff	14151	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000467	NABOO	nab_darkwalker_cave	AREA	8	-164.80	-49.60	-47.40	0	1	a Darkwalker ruffal	14150	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000468	NABOO	nab_darkwalker_cave	AREA	8	-163.70	-50.00	-41.40	0	1	a Darkwalker ruffal	14150	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000469	NABOO	nab_darkwalker_cave	AREA	8	-137.50	-49.60	-50.10	0	1	a Darkwalker ruffal	14150	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000470	NABOO	nab_darkwalker_cave	AREA	9	-106.90	-69.90	-115.70	0	1	a Darkwalker sentinel	14142	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000471	NABOO	nab_darkwalker_cave	AREA	9	-102.30	-70.00	-114.70	0	1	a Darkwalker sentinel	14142	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000472	NABOO	nab_darkwalker_cave	AREA	9	-84.00	-71.90	-119.80	0	1	a Darkwalker drudge	14143	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000473	NABOO	nab_darkwalker_cave	AREA	9	-78.90	-52.90	-113.80	0	1	a Darkwalker drudge	14143	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000474	NABOO	nab_darkwalker_cave	AREA	9	-79.90	-71.90	-115.60	0	1	a Darkwalker grinder	14146	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000475	NABOO	nab_darkwalker_cave	AREA	9	-113.60	-54.00	-112.60	0	1	a Darkwalker grinder	14146	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000476	NABOO	nab_darkwalker_cave	AREA	9	-71.70	-38.00	-118.60	0	1	a Darkwalker ruffal	14150	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2000477	NABOO	nab_darkwalker_cave	AREA	9	-103.00	-39.60	-113.70	0	1	a Darkwalker scoff	14151	dungeon	Darkwalker Cave	1	GUARD	idle	0	0	0	0	300	120	0
 2000478	NABOO	nab_world	AREA	0	-4303.17	-201.44	4405.10	0	1	a Darkwalker drudge	14143	dungeon	Darkwalker Cave	1	FLOAT	idle	0	0	0	0	300	120	2
 2000479	NABOO	nab_world	AREA	0	-4289.40	-175.06	4298.34	0	1	a Darkwalker drudge	14143	dungeon	Darkwalker Cave	1	FLOAT	idle	0	0	0	0	300	120	2
 2000480	NABOO	nab_world	AREA	0	-4280.77	-186.61	4382.36	0	1	a Darkwalker drudge	14143	dungeon	Darkwalker Cave	1	FLOAT	idle	0	0	0	0	300	120	2
@@ -596,7 +596,7 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 2000596	NABOO	nab_world	AREA	0	5862.89	229.03	-1949.44	0	1	a Stonewall Labs watchman droid	14258	dungeon	Dee'ja Peak Stonewall Labs	2	FLOAT	idle	0	0	0	0	300	120	4
 2000597	NABOO	nab_world	AREA	0	5841.58	234.31	-1893.77	0	1	a Stonewall Labs watchman droid	14258	dungeon	Dee'ja Peak Stonewall Labs	2	FLOAT	idle	0	0	0	0	300	120	4
 2000598	NABOO	nab_world	AREA	0	5788.70	233.08	-1952.73	0	1	a Stonewall Labs watchman droid	14258	dungeon	Dee'ja Peak Stonewall Labs	2	FLOAT	idle	0	0	0	0	300	120	4
-2000599	NABOO	nab_drennic_bunker	AREA	10	15.21	-11.50	-20.74	-2	1	Drenn (Drennic leader)	14218	dungeon	Drennic Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+2000599	NABOO	nab_drennic_bunker	AREA	10	15.21	-11.50	-20.74	-2	1	Drenn (Drennic leader)	14218	dungeon	Drennic Bunker	1	STOP	idle	0	0	0	0	300	120	0
 2000600	NABOO	nab_drennic_bunker	AREA	10	15.20	-13.80	-11.00	0	1	a Drennic guardian	14219	dungeon	Drennic Bunker	1	GUARD	idle	0	0	0	0	300	120	0
 2000601	NABOO	nab_drennic_bunker	AREA	5	4.20	-6.80	-3.70	0	1	a Drennic guardian	14219	dungeon	Drennic Bunker	1	GUARD	idle	0	0	0	0	300	120	0
 2000602	NABOO	nab_drennic_bunker	AREA	7	-3.40	-13.80	-7.50	0	1	a Drennic guardian	14219	dungeon	Drennic Bunker	1	GUARD	idle	0	0	0	0	300	120	0
@@ -607,18 +607,18 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 2000607	NABOO	nab_world	AREA	0	397.38	10.90	2106.52	0	1	a Drennic Hunter	14220	dungeon	Drennic Bunker	2	FLOAT	idle	0	0	0	0	300	120	4
 2000608	NABOO	nab_world	AREA	0	324.50	11.90	2051.94	0	1	a Drennic Hunter	14220	dungeon	Drennic Bunker	2	FLOAT	idle	0	0	0	0	300	120	4
 2000609	NABOO	nab_world	AREA	0	314.78	10.59	2121.25	0	1	a Drennic Hunter	14220	dungeon	Drennic Bunker	2	FLOAT	idle	0	0	0	0	300	120	4
-2000610	NABOO	nab_insane_creature_bunker	AREA	2	-3.53	0.25	3.26	94	1	a trained narglatch	14306	dungeon	Insane Creature Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-2000611	NABOO	nab_insane_creature_bunker	AREA	5	-7.07	-6.75	-6.35	42	1	a trained narglatch	14306	dungeon	Insane Creature Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-2000612	NABOO	nab_insane_creature_bunker	AREA	5	-2.47	-6.75	-3.82	-73	1	a trained narglatch	14306	dungeon	Insane Creature Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+2000610	NABOO	nab_insane_creature_bunker	AREA	2	-3.53	0.25	3.26	94	1	a trained narglatch	14306	dungeon	Insane Creature Bunker	1	STOP	idle	0	0	0	0	300	120	0
+2000611	NABOO	nab_insane_creature_bunker	AREA	5	-7.07	-6.75	-6.35	42	1	a trained narglatch	14306	dungeon	Insane Creature Bunker	1	STOP	idle	0	0	0	0	300	120	0
+2000612	NABOO	nab_insane_creature_bunker	AREA	5	-2.47	-6.75	-3.82	-73	1	a trained narglatch	14306	dungeon	Insane Creature Bunker	1	STOP	idle	0	0	0	0	300	120	0
 2000613	NABOO	nab_insane_creature_bunker	AREA	6	5.02	-6.77	-14.64	0	1	a trained narglatch	14306	dungeon	Insane Creature Bunker	1	GUARD	idle	0	0	0	0	300	120	0
 2000614	NABOO	nab_insane_creature_bunker	AREA	6	-5.30	-6.77	-14.83	0	1	a mountain poacher	16406	dungeon	Insane Creature Bunker	1	GUARD	idle	0	0	0	0	300	120	0
 2000615	NABOO	nab_insane_creature_bunker	AREA	7	5.47	-6.75	-6.17	0	1	a mountain poacher	16406	dungeon	Insane Creature Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-2000616	NABOO	nab_insane_creature_bunker	AREA	8	-2.75	-13.75	7.19	178	1	a mountain poacher	16406	dungeon	Insane Creature Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+2000616	NABOO	nab_insane_creature_bunker	AREA	8	-2.75	-13.75	7.19	178	1	a mountain poacher	16406	dungeon	Insane Creature Bunker	1	STOP	idle	0	0	0	0	300	120	0
 2000617	NABOO	nab_insane_creature_bunker	AREA	9	-0.02	-13.75	-2.80	0	1	a trained narglatch	14306	dungeon	Insane Creature Bunker	1	GUARD	idle	0	0	0	0	300	120	0
 2000618	NABOO	nab_insane_creature_bunker	AREA	9	-4.82	-13.75	-7.66	0	1	a trained narglatch	14306	dungeon	Insane Creature Bunker	1	GUARD	idle	0	0	0	0	300	120	0
 2000619	NABOO	nab_insane_creature_bunker	AREA	9	-2.88	-13.75	-14.71	0	1	a trained narglatch	14306	dungeon	Insane Creature Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-2000620	NABOO	nab_insane_creature_bunker	AREA	9	2.66	-13.75	-11.88	-81	1	a mountain poacher	16406	dungeon	Insane Creature Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-2000621	NABOO	nab_insane_creature_bunker	AREA	9	-5.26	-13.75	-15.00	-113	1	a mountain poacher	16406	dungeon	Insane Creature Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+2000620	NABOO	nab_insane_creature_bunker	AREA	9	2.66	-13.75	-11.88	-81	1	a mountain poacher	16406	dungeon	Insane Creature Bunker	1	STOP	idle	0	0	0	0	300	120	0
+2000621	NABOO	nab_insane_creature_bunker	AREA	9	-5.26	-13.75	-15.00	-113	1	a mountain poacher	16406	dungeon	Insane Creature Bunker	1	STOP	idle	0	0	0	0	300	120	0
 2000622	NABOO	nab_kaadara_detachment_hq	AREA	10	14.98	-11.50	-20.65	2	1	an Imperial comm specialist	11020	dungeon	Kaadara Imperial Detachment HQ	1	STOP	idle	0	0	0	0	300	120	0
 2000623	NABOO	nab_kaadara_detachment_hq	AREA	10	20.14	-11.50	-21.76	-48	1	an elite Imperial security guard	11022	dungeon	Kaadara Imperial Detachment HQ	1	STOP	idle	0	0	0	0	300	120	0
 2000624	NABOO	nab_kaadara_detachment_hq	AREA	10	10.70	-11.50	-20.63	21	1	a decorated Imperial colonel	11032	dungeon	Kaadara Imperial Detachment HQ	1	STOP	idle	0	0	0	0	300	120	0
@@ -820,11 +820,11 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 2000820	NABOO	nab_pirate_bunker	AREA	9	-40.21	-14.00	78.46	0	1	missing	14174	dungeon	Pirate Bunker	1	STOP	idle	0	0	0	0	300	120	0
 2000821	NABOO	nab_pirate_bunker	AREA	9	-29.29	-14.00	81.56	-90	1	a Naboo pirate cutthroat	14227	dungeon	Pirate Bunker	1	STOP	idle	0	0	0	0	300	120	0
 2000822	NABOO	nab_pirate_bunker	AREA	9	-29.10	-14.00	76.60	-90	1	a Naboo pirate cutthroat	14227	dungeon	Pirate Bunker	1	STOP	idle	0	0	0	0	300	120	0
-2000823	NABOO	nab_world	AREA	0	-1531.54	278.00	-1741.94	0	1	a Naboo pirate	14223	dungeon	Pirate Bunker	2	STOP	idle	0	0	0	0	300	120	4
-2000824	NABOO	nab_world	AREA	0	-1511.00	278.00	-1690.67	0	1	a Naboo pirate	14223	dungeon	Pirate Bunker	2	STOP	idle	0	0	0	0	300	120	4
-2000825	NABOO	nab_world	AREA	0	-1541.89	278.00	-1721.69	0	1	a Naboo pirate	14223	dungeon	Pirate Bunker	2	STOP	idle	0	0	0	0	300	120	4
-2000826	NABOO	nab_world	AREA	0	-1498.33	278.00	-1721.14	0	1	a Naboo pirate armsman	14224	dungeon	Pirate Bunker	2	STOP	idle	0	0	0	0	300	120	4
-2000827	NABOO	nab_world	AREA	0	-1501.80	278.00	-1736.33	0	1	a Naboo pirate cutthroat	14227	dungeon	Pirate Bunker	2	STOP	idle	0	0	0	0	300	120	4
+2000823	NABOO	nab_world	AREA	0	-1531.54	278.00	-1741.94	0	1	a Naboo pirate	14223	dungeon	Pirate Bunker	2	FLOAT	idle	0	0	0	0	300	120	4
+2000824	NABOO	nab_world	AREA	0	-1511.00	278.00	-1690.67	0	1	a Naboo pirate	14223	dungeon	Pirate Bunker	2	FLOAT	idle	0	0	0	0	300	120	4
+2000825	NABOO	nab_world	AREA	0	-1541.89	278.00	-1721.69	0	1	a Naboo pirate	14223	dungeon	Pirate Bunker	2	FLOAT	idle	0	0	0	0	300	120	4
+2000826	NABOO	nab_world	AREA	0	-1498.33	278.00	-1721.14	0	1	a Naboo pirate armsman	14224	dungeon	Pirate Bunker	2	FLOAT	idle	0	0	0	0	300	120	4
+2000827	NABOO	nab_world	AREA	0	-1501.80	278.00	-1736.33	0	1	a Naboo pirate cutthroat	14227	dungeon	Pirate Bunker	2	FLOAT	idle	0	0	0	0	300	120	4
 2000828	NABOO	nab_rtp_imp_small_spy	AREA	10	2.40	-20.80	24.40	-163	1	a Stormtrooper	15236	dungeon	RTP - Imperial Small Spy Bunker	1	STOP	idle	0	0	0	0	300	120	0
 2000829	NABOO	nab_rtp_imp_small_spy	AREA	10	-2.40	-20.80	24.40	163	1	a Stormtrooper	15236	dungeon	RTP - Imperial Small Spy Bunker	1	STOP	idle	0	0	0	0	300	120	0
 2000830	NABOO	nab_rtp_imp_small_spy	PATROL	6	3.50	-13.80	0.00	0	1	a Stormtrooper	15236	dungeon	RTP - Imperial Small Spy Bunker	1	PATROL	idle	0	999	0	0	300	120	0
@@ -832,8 +832,8 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 2000832	NABOO	nab_rtp_imp_small_spy	AREA	7	-6.80	-13.80	10.00	179	1	a Stormtrooper	15236	dungeon	RTP - Imperial Small Spy Bunker	1	STOP	idle	0	0	0	0	300	120	0
 2000833	NABOO	nab_rtp_imp_small_spy	AREA	9	3.60	-20.70	9.30	-160	1	a Stormtrooper	15236	dungeon	RTP - Imperial Small Spy Bunker	1	STOP	idle	0	0	0	0	300	120	0
 2000834	NABOO	nab_rtp_imp_small_spy	AREA	9	-3.60	-20.70	9.30	160	1	a Stormtrooper	15236	dungeon	RTP - Imperial Small Spy Bunker	1	STOP	idle	0	0	0	0	300	120	0
-2000835	NABOO	nab_world	AREA	0	-3678.23	5.96	-5294.26	0	1	a Stormtrooper	15244	dungeon	RTP - Imperial Small Spy Bunker	1	STOP	idle	0	0	0	0	300	120	2
-2000836	NABOO	nab_world	AREA	0	-3658.54	5.29	-5293.93	0	1	a Stormtrooper	15244	dungeon	RTP - Imperial Small Spy Bunker	1	STOP	idle	0	0	0	0	300	120	2
+2000835	NABOO	nab_world	AREA	0	-3678.23	5.96	-5294.26	0	1	a Stormtrooper	15244	dungeon	RTP - Imperial Small Spy Bunker	1	FLOAT	idle	0	0	0	0	300	120	2
+2000836	NABOO	nab_world	AREA	0	-3658.54	5.29	-5293.93	0	1	a Stormtrooper	15244	dungeon	RTP - Imperial Small Spy Bunker	1	FLOAT	idle	0	0	0	0	300	120	2
 2000837	NABOO	nab_skaak_bunker	AREA	4	3.20	-12.00	26.00	0	1	a Skaak Tipper pariah	14247	dungeon	Skaak Bunker Sacred Place	1	GUARD	idle	0	0	0	0	300	120	0
 2000838	NABOO	nab_skaak_bunker	AREA	4	3.50	-12.00	38.00	0	1	a Skaak Tipper raider	14248	dungeon	Skaak Bunker Sacred Place	1	GUARD	idle	0	0	0	0	300	120	0
 2000839	NABOO	nab_skaak_bunker	AREA	5	32.10	-12.00	27.30	0	1	a Skaak Tipper pariah	14247	dungeon	Skaak Bunker Sacred Place	1	GUARD	idle	0	0	0	0	300	120	0
@@ -855,13 +855,13 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 2000855	NABOO	nab_skaak_bunker	AREA	8	42.90	-16.00	59.80	0	1	a Skaak Tipper raider	14248	dungeon	Skaak Bunker Sacred Place	1	GUARD	idle	0	0	0	0	300	120	0
 2000856	NABOO	nab_skaak_bunker	AREA	9	-34.30	-14.00	80.50	0	1	a Skaak Tipper raider	14248	dungeon	Skaak Bunker Sacred Place	1	GUARD	idle	0	0	0	0	300	120	0
 2000857	NABOO	nab_skaak_bunker	AREA	9	-40.20	-14.00	79.50	89	1	Tomi Skaak (a Skaak Tipper leader)	14252	dungeon	Skaak Bunker Sacred Place	1	STOP	idle	0	0	0	0	300	120	0
-2000858	NABOO	nab_world	AREA	0	-1680.30	6.46	-5372.46	0	1	a Skaak Tipper pariah	14247	dungeon	Skaak Bunker Sacred Place	2	STOP	idle	0	0	0	0	300	120	4
-2000859	NABOO	nab_world	AREA	0	-1680.24	5.53	-5341.46	0	1	a Skaak Tipper pariah	14247	dungeon	Skaak Bunker Sacred Place	2	STOP	idle	0	0	0	0	300	120	4
-2000860	NABOO	nab_world	AREA	0	-1663.38	5.34	-5401.94	0	1	a Skaak Tipper pariah	14247	dungeon	Skaak Bunker Sacred Place	2	STOP	idle	0	0	0	0	300	120	4
-2000861	NABOO	nab_world	AREA	0	-1642.19	5.86	-5349.69	0	1	a Skaak Tipper pariah	14247	dungeon	Skaak Bunker Sacred Place	2	STOP	idle	0	0	0	0	300	120	4
-2000862	NABOO	nab_world	AREA	0	-1625.06	7.37	-5403.45	0	1	a Skaak Tipper pariah	14247	dungeon	Skaak Bunker Sacred Place	2	STOP	idle	0	0	0	0	300	120	4
-2000863	NABOO	nab_world	AREA	0	-1618.03	9.07	-5360.50	0	1	a Skaak Tipper pariah	14247	dungeon	Skaak Bunker Sacred Place	2	STOP	idle	0	0	0	0	300	120	4
-2000864	NABOO	nab_world	AREA	0	-1610.93	10.58	-5379.56	0	1	a Skaak Tipper pariah	14247	dungeon	Skaak Bunker Sacred Place	2	STOP	idle	0	0	0	0	300	120	4
+2000858	NABOO	nab_world	AREA	0	-1680.30	6.46	-5372.46	0	1	a Skaak Tipper pariah	14247	dungeon	Skaak Bunker Sacred Place	2	FLOAT	idle	0	0	0	0	300	120	4
+2000859	NABOO	nab_world	AREA	0	-1680.24	5.53	-5341.46	0	1	a Skaak Tipper pariah	14247	dungeon	Skaak Bunker Sacred Place	2	FLOAT	idle	0	0	0	0	300	120	4
+2000860	NABOO	nab_world	AREA	0	-1663.38	5.34	-5401.94	0	1	a Skaak Tipper pariah	14247	dungeon	Skaak Bunker Sacred Place	2	FLOAT	idle	0	0	0	0	300	120	4
+2000861	NABOO	nab_world	AREA	0	-1642.19	5.86	-5349.69	0	1	a Skaak Tipper pariah	14247	dungeon	Skaak Bunker Sacred Place	2	FLOAT	idle	0	0	0	0	300	120	4
+2000862	NABOO	nab_world	AREA	0	-1625.06	7.37	-5403.45	0	1	a Skaak Tipper pariah	14247	dungeon	Skaak Bunker Sacred Place	2	FLOAT	idle	0	0	0	0	300	120	4
+2000863	NABOO	nab_world	AREA	0	-1618.03	9.07	-5360.50	0	1	a Skaak Tipper pariah	14247	dungeon	Skaak Bunker Sacred Place	2	FLOAT	idle	0	0	0	0	300	120	4
+2000864	NABOO	nab_world	AREA	0	-1610.93	10.58	-5379.56	0	1	a Skaak Tipper pariah	14247	dungeon	Skaak Bunker Sacred Place	2	FLOAT	idle	0	0	0	0	300	120	4
 2000865	NABOO	nab_deeja_skaak_cave	AREA	10	-59.30	-92.10	-143.70	0	1	a Skaak Tipper bootjack	14239	dungeon	Skaak Cave	1	GUARD	idle	0	0	0	0	300	120	0
 2000866	NABOO	nab_deeja_skaak_cave	AREA	10	-26.00	-80.30	-153.30	0	1	a Skaak Tipper machinist	14245	dungeon	Skaak Cave	1	GUARD	idle	0	0	0	0	300	120	0
 2000867	NABOO	nab_deeja_skaak_cave	AREA	10	-19.70	-79.30	-141.70	0	1	a Skaak Tipper machinist	14245	dungeon	Skaak Cave	1	GUARD	idle	0	0	0	0	300	120	0
@@ -903,9 +903,9 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 2000903	NABOO	nab_deeja_skaak_cave	AREA	9	-55.60	-70.00	-86.70	0	1	a Skaak Tipper machinist	14245	dungeon	Skaak Cave	1	GUARD	idle	0	0	0	0	300	120	0
 2000904	NABOO	nab_deeja_skaak_cave	AREA	9	-36.90	-70.70	-89.40	0	1	a Skaak Tipper machinist	14245	dungeon	Skaak Cave	1	GUARD	idle	0	0	0	0	300	120	0
 2000905	NABOO	nab_deeja_skaak_cave	AREA	9	-10.40	-69.00	-95.20	0	1	a Skaak Tipper machinist	14245	dungeon	Skaak Cave	1	GUARD	idle	0	0	0	0	300	120	0
-2000906	NABOO	nab_world	AREA	0	4558.59	91.49	-928.65	0	1	a Skaak Tipper bootjack	14239	dungeon	Skaak Cave	2	STOP	idle	0	0	0	0	300	120	4
-2000907	NABOO	nab_world	AREA	0	4540.13	93.41	-929.65	0	1	a Skaak Tipper bootjack	14239	dungeon	Skaak Cave	2	STOP	idle	0	0	0	0	300	120	4
-2000908	NABOO	nab_world	AREA	0	4587.31	92.67	-940.25	0	1	a Skaak Tipper bootjack	14239	dungeon	Skaak Cave	2	STOP	idle	0	0	0	0	300	120	4
+2000906	NABOO	nab_world	AREA	0	4558.59	91.49	-928.65	0	1	a Skaak Tipper bootjack	14239	dungeon	Skaak Cave	2	FLOAT	idle	0	0	0	0	300	120	4
+2000907	NABOO	nab_world	AREA	0	4540.13	93.41	-929.65	0	1	a Skaak Tipper bootjack	14239	dungeon	Skaak Cave	2	FLOAT	idle	0	0	0	0	300	120	4
+2000908	NABOO	nab_world	AREA	0	4587.31	92.67	-940.25	0	1	a Skaak Tipper bootjack	14239	dungeon	Skaak Cave	2	FLOAT	idle	0	0	0	0	300	120	4
 2000909	NABOO	nab_kaadara_skaak_tipper_bunker	AREA	11	65.60	-12.00	87.10	0	1	a Skaak Tipper scrounger	14250	dungeon	Skaak Tipper Bunker	1	GUARD	idle	0	0	0	0	300	120	0
 2000910	NABOO	nab_kaadara_skaak_tipper_bunker	AREA	11	63.40	-12.00	85.10	0	1	a Skaak Tipper scrounger	14250	dungeon	Skaak Tipper Bunker	1	GUARD	idle	0	0	0	0	300	120	0
 2000911	NABOO	nab_kaadara_skaak_tipper_bunker	AREA	12	62.50	-12.00	55.00	0	1	a Skaak Tipper crasher	14241	dungeon	Skaak Tipper Bunker	1	GUARD	idle	0	0	0	0	300	120	0
@@ -1034,9 +1034,9 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 2001034	NABOO	nab_world	AREA	0	-2601.43	128.27	-911.74	0	1	a rabid mott	14947	dungeon	Trapped Family House 2	2	FLOAT	idle	0	0	0	0	300	120	4
 2001035	NABOO	nab_world	AREA	0	-2555.09	135.10	-923.96	0	1	a strong rabid mott	14948	dungeon	Trapped Family House 2	2	FLOAT	idle	0	0	0	0	300	120	4
 2001036	NABOO	nab_world	AREA	0	-2582.59	133.00	-877.23	0	1	a strong rabid mott	14948	dungeon	Trapped Family House 2	2	FLOAT	idle	0	0	0	0	300	120	4
-2001037	NABOO	nab_boss_nass_dungeon	AREA	2	-4.16	0.25	3.23	90	1	an Ultragungan foot soldier	14285	dungeon	Ultragungan Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+2001037	NABOO	nab_boss_nass_dungeon	AREA	2	-4.16	0.25	3.23	90	1	an Ultragungan foot soldier	14285	dungeon	Ultragungan Bunker	1	STOP	idle	0	0	0	0	300	120	0
 2001038	NABOO	nab_boss_nass_dungeon	AREA	3	-0.17	0.25	-4.50	0	1	an Ultragungan flawed battle droid	14284	dungeon	Ultragungan Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-2001039	NABOO	nab_boss_nass_dungeon	AREA	4	3.24	-3.25	4.80	179	1	an Ultragungan foot soldier	14285	dungeon	Ultragungan Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+2001039	NABOO	nab_boss_nass_dungeon	AREA	4	3.24	-3.25	4.80	179	1	an Ultragungan foot soldier	14285	dungeon	Ultragungan Bunker	1	STOP	idle	0	0	0	0	300	120	0
 2001040	NABOO	nab_boss_nass_dungeon	AREA	4	-4.59	-6.75	3.03	0	1	an Ultragungan foot soldier	14285	dungeon	Ultragungan Bunker	1	GUARD	idle	0	0	0	0	300	120	0
 2001041	NABOO	nab_boss_nass_dungeon	AREA	5	-6.33	-6.75	-0.70	0	1	an Ultragungan flawed battle droid	14284	dungeon	Ultragungan Bunker	1	GUARD	idle	0	0	0	0	300	120	0
 2001042	NABOO	nab_boss_nass_dungeon	AREA	5	-4.34	-6.75	-9.05	0	1	an Ultragungan flawed battle droid	14284	dungeon	Ultragungan Bunker	1	GUARD	idle	0	0	0	0	300	120	0
@@ -1045,8 +1045,8 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 2001045	NABOO	nab_boss_nass_dungeon	AREA	6	-3.00	-6.77	-14.02	0	1	an Ultragungan flawed battle droid	14284	dungeon	Ultragungan Bunker	1	GUARD	idle	0	0	0	0	300	120	0
 2001046	NABOO	nab_boss_nass_dungeon	AREA	7	5.37	-6.75	-8.33	0	1	an Ultragungan flawed battle droid	14284	dungeon	Ultragungan Bunker	1	GUARD	idle	0	0	0	0	300	120	0
 2001047	NABOO	nab_boss_nass_dungeon	AREA	7	5.95	-6.75	-1.29	0	1	an Ultragungan flawed battle droid	14284	dungeon	Ultragungan Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-2001048	NABOO	nab_boss_nass_dungeon	AREA	8	5.79	-10.25	7.48	179	1	an Ultragungan foot soldier	14285	dungeon	Ultragungan Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-2001049	NABOO	nab_boss_nass_dungeon	AREA	8	-2.54	-13.75	7.62	90	1	an Ultragungan foot soldier	14285	dungeon	Ultragungan Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+2001048	NABOO	nab_boss_nass_dungeon	AREA	8	5.79	-10.25	7.48	179	1	an Ultragungan foot soldier	14285	dungeon	Ultragungan Bunker	1	STOP	idle	0	0	0	0	300	120	0
+2001049	NABOO	nab_boss_nass_dungeon	AREA	8	-2.54	-13.75	7.62	90	1	an Ultragungan foot soldier	14285	dungeon	Ultragungan Bunker	1	STOP	idle	0	0	0	0	300	120	0
 2001050	NABOO	nab_boss_nass_dungeon	AREA	9	-7.00	-13.80	-9.70	0	1	an Ultragungan blastromech	14282	dungeon	Ultragungan Bunker	1	GUARD	idle	0	0	0	0	300	120	0
 2001051	NABOO	nab_boss_nass_dungeon	AREA	9	2.66	-13.75	-6.34	0	1	an Ultragungan flawed battle droid	14284	dungeon	Ultragungan Bunker	1	GUARD	idle	0	0	0	0	300	120	0
 2001052	NABOO	nab_boss_nass_dungeon	AREA	9	1.50	-13.75	-13.80	0	1	an Ultragungan flawed battle droid	14284	dungeon	Ultragungan Bunker	1	GUARD	idle	0	0	0	0	300	120	0
@@ -1057,7 +1057,7 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 2001057	NABOO	nab_veermok_cave	AREA	11	80.41	-46.49	-143.01	0	1	a veermok scavenger	16570	dungeon	Veermok Cave	1	GUARD	idle	0	0	0	0	300	120	0
 2001058	NABOO	nab_veermok_cave	AREA	2	51.65	-48.91	-62.43	0	1	a veermok	16561	dungeon	Veermok Cave	1	GUARD	idle	0	0	0	0	300	120	0
 2001059	NABOO	nab_veermok_cave	AREA	2	43.74	-47.16	-9.44	0	1	a veermok	16561	dungeon	Veermok Cave	1	GUARD	idle	0	0	0	0	300	120	0
-2001060	NABOO	nab_veermok_cave	AREA	2	53.63	-68.00	-36.52	99	1	a veermok	16561	dungeon	Veermok Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2001060	NABOO	nab_veermok_cave	AREA	2	53.63	-68.00	-36.52	99	1	a veermok	16561	dungeon	Veermok Cave	1	STOP	idle	0	0	0	0	300	120	0
 2001061	NABOO	nab_veermok_cave	AREA	2	24.93	-40.01	-43.31	0	1	a veermok	16561	dungeon	Veermok Cave	1	GUARD	idle	0	0	0	0	300	120	0
 2001062	NABOO	nab_veermok_cave	AREA	3	89.77	-63.42	-23.77	0	1	a veermok scout	16572	dungeon	Veermok Cave	1	GUARD	idle	0	0	0	0	300	120	0
 2001063	NABOO	nab_veermok_cave	AREA	4	76.17	-75.39	-59.75	0	1	a veermok ravager	16569	dungeon	Veermok Cave	1	GUARD	idle	0	0	0	0	300	120	0
@@ -1066,11 +1066,11 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 2001066	NABOO	nab_veermok_cave	AREA	5	96.68	-66.32	-108.07	0	1	a veermok guard	16566	dungeon	Veermok Cave	1	GUARD	idle	0	0	0	0	300	120	0
 2001067	NABOO	nab_veermok_cave	AREA	6	52.58	-77.10	-92.96	0	1	a veermok ravager	16569	dungeon	Veermok Cave	1	GUARD	idle	0	0	0	0	300	120	0
 2001068	NABOO	nab_veermok_cave	AREA	7	77.86	-65.57	-140.20	0	1	a veermok sentry	16574	dungeon	Veermok Cave	1	GUARD	idle	0	0	0	0	300	120	0
-2001069	NABOO	nab_veermok_cave	AREA	8	153.47	-66.08	-98.10	-98	1	a veermok guard	16566	dungeon	Veermok Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2001069	NABOO	nab_veermok_cave	AREA	8	153.47	-66.08	-98.10	-98	1	a veermok guard	16566	dungeon	Veermok Cave	1	STOP	idle	0	0	0	0	300	120	0
 2001070	NABOO	nab_veermok_cave	AREA	8	129.83	-66.72	-106.70	0	1	a veermok ravager	16569	dungeon	Veermok Cave	1	GUARD	idle	0	0	0	0	300	120	0
 2001071	NABOO	nab_veermok_cave	AREA	8	150.50	-66.94	-120.25	0	1	a veermok ravager	16569	dungeon	Veermok Cave	1	GUARD	idle	0	0	0	0	300	120	0
-2001072	NABOO	nab_veermok_cave	AREA	9	188.06	-66.00	-103.91	-100	1	an alpha veermok	10115	dungeon	Veermok Cave	1	GUARD	idle	0	0	0	0	300	120	0
-2001073	NABOO	nab_veermok_cave	AREA	9	185.37	-65.91	-99.71	-93	1	a giant cave veermok	16564	dungeon	Veermok Cave	1	GUARD	idle	0	0	0	0	300	120	0
+2001072	NABOO	nab_veermok_cave	AREA	9	188.06	-66.00	-103.91	-100	1	an alpha veermok	10115	dungeon	Veermok Cave	1	STOP	idle	0	0	0	0	300	120	0
+2001073	NABOO	nab_veermok_cave	AREA	9	185.37	-65.91	-99.71	-93	1	a giant cave veermok	16564	dungeon	Veermok Cave	1	STOP	idle	0	0	0	0	300	120	0
 2001074	NABOO	nab_world	AREA	0	5718.63	289.95	-1540.30	0	1	a veermok sentry	16574	dungeon	Veermok Cave	1	GUARD	idle	0	0	0	0	300	120	0
 2001075	NABOO	nab_world	AREA	0	-1774.50	12.12	2387.43	0	1	an IG assassin droid	12647	outback	Assassin Camp	1	GUARD	idle	0	0	0	0	300	120	0
 2001076	NABOO	nab_world	AREA	0	-1771.51	11.97	2390.70	-89	1	an assassin	10148	outback	Assassin Camp	1	STOP	idle	0	0	0	0	300	120	0
@@ -1303,7 +1303,7 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 2001303	NABOO	nab_world	AREA	0	-4428.06	261.68	-2230.72	0	1	a Gungan outcast	12342	outback	Naboo	5	FLOAT	idle	0	0	0	0	300	120	10
 2001304	NABOO	nab_world	AREA	0	3488.17	112.47	-2885.51	0	1	a Gungan outcast	12342	outback	Naboo	5	FLOAT	idle	0	0	0	0	300	120	10
 2001305	NABOO	nab_world	AREA	0	1234.16	-196.07	5510.05	0	1	a Gungan outcast	12342	outback	Naboo	5	FLOAT	idle	0	0	0	0	300	120	10
-2001306	NABOO	nab_world	AREA	0	3942.23	5.85	2699.24	20	1	a Gungan outcast	12342	outback	Naboo	1	GUARD	idle	0	0	0	0	300	120	0
+2001306	NABOO	nab_world	AREA	0	3942.23	5.85	2699.24	20	1	a Gungan outcast	12342	outback	Naboo	1	STOP	idle	0	0	0	0	300	120	0
 2001307	NABOO	nab_world	AREA	0	7588.39	-209.83	6948.17	0	1	a Gungan outcast	12342	outback	Naboo	1	FLOAT	idle	0	0	0	0	300	120	2
 2001308	NABOO	nab_world	AREA	0	-7542.90	10.50	2254.27	0	1	a Gungan outcast	12342	outback	Naboo	5	FLOAT	idle	0	0	0	0	300	120	10
 2001309	NABOO	nab_world	AREA	0	-1032.40	-209.42	6831.92	0	1	a Gungan outcast	12342	outback	Naboo	5	FLOAT	idle	0	0	0	0	300	120	10
@@ -1336,7 +1336,7 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 2001336	NABOO	nab_world	AREA	0	4382.40	77.97	-792.29	0	1	a narglatch protector	14303	outback	Naboo	1	GUARD	idle	0	0	0	0	300	120	0
 2001337	NABOO	nab_world	AREA	0	4381.81	68.71	-761.90	0	1	a narglatch protector	14303	outback	Naboo	1	GUARD	idle	0	0	0	0	300	120	0
 2001338	NABOO	nab_world	AREA	0	4357.01	72.67	-776.10	0	1	a narglatch protector	14303	outback	Naboo	1	GUARD	idle	0	0	0	0	300	120	0
-2001339	NABOO	nab_world	AREA	0	5024.66	39.68	4154.00	0	1	a bounty hunter	10506	outback	Naboo	1	STOP	idle	0	0	0	0	300	120	2
+2001339	NABOO	nab_world	AREA	0	5024.66	39.68	4154.00	0	1	a bounty hunter	10506	outback	Naboo	1	FLOAT	idle	0	0	0	0	300	120	2
 2001340	NABOO	nab_world	AREA	0	-6085.13	9.01	3835.64	0	1	a nightspider	14354	outback	Naboo	5	FLOAT	idle	0	0	0	0	300	120	10
 2001341	NABOO	nab_world	AREA	0	-1693.88	-196.51	5430.15	0	1	a nightspider poison spitter	14357	outback	Naboo	5	FLOAT	idle	0	0	0	0	300	120	10
 2001342	NABOO	nab_world	AREA	0	-2944.88	10.76	1698.61	0	1	a brigand scout	10531	outback	Naboo	2	FLOAT	idle	0	0	0	0	300	120	4
@@ -1352,7 +1352,7 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 2001352	NABOO	nab_world	AREA	0	-6080.19	-209.14	5943.29	0	1	a Bounty Hunter	16425	outback	Naboo	1	GUARD	idle	0	0	0	0	300	120	0
 2001353	NABOO	nab_world	AREA	0	-6080.99	-196.49	6767.78	0	1	a dread pirate	11305	outback	Naboo	1	GUARD	idle	0	0	0	0	300	120	0
 2001354	NABOO	nab_world	AREA	0	-3977.49	-135.58	4387.46	23	1	a mauler gore master	11373	outback	Naboo	1	STOP	idle	0	0	0	0	300	120	0
-2001355	NABOO	nab_world	AREA	0	-6314.58	5.21	-5088.85	0	1	a rancher	11839	outback	Naboo	1	STOP	idle	0	0	0	0	300	120	2
+2001355	NABOO	nab_world	AREA	0	-6314.58	5.21	-5088.85	0	1	a rancher	11839	outback	Naboo	1	FLOAT	idle	0	0	0	0	300	120	2
 2001356	NABOO	nab_world	AREA	0	-5099.04	10.56	3020.92	0	1	a wild-eyed fambaa	12006	outback	Naboo	1	GUARD	idle	0	0	0	0	300	120	0
 2001357	NABOO	nab_world	AREA	0	-5052.96	12.32	3069.58	0	1	a wild-eyed fambaa	12006	outback	Naboo	1	GUARD	idle	0	0	0	0	300	120	0
 2001358	NABOO	nab_world	AREA	0	-5029.52	10.92	3104.72	0	1	a wild-eyed fambaa	12006	outback	Naboo	1	GUARD	idle	0	0	0	0	300	120	0
@@ -1443,7 +1443,7 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 2001443	NABOO	nab_world	AREA	0	-6038.03	-197.32	4788.81	0	1	a Naboo pirate savage	14231	outback	Theed Pirate Outpost	2	FLOAT	idle	0	0	0	0	300	120	4
 2001444	NABOO	nab_world	AREA	0	-6025.16	-199.63	4760.04	0	1	a Naboo pirate savage	14231	outback	Theed Pirate Outpost	2	FLOAT	idle	0	0	0	0	300	120	4
 2001445	NABOO	nab_world	AREA	0	-6116.23	-203.06	4822.39	0	1	a Skaak Tipper bruiser	14240	outback	Theed Pirate Outpost	1	FLOAT	idle	0	0	0	0	300	120	2
-2001446	NABOO	nab_world	AREA	0	-6064.14	-196.17	4749.21	178	1	Hunnos Jarkey	14270	outback	Theed Pirate Outpost	1	FLOAT	idle	0	0	0	0	300	120	0
+2001446	NABOO	nab_world	AREA	0	-6064.14	-196.17	4749.21	178	1	Hunnos Jarkey	14270	outback	Theed Pirate Outpost	1	STOP	idle	0	0	0	0	300	120	0
 2001447	NABOO	nab_world	AREA	0	-1855.33	4.60	-5077.12	0	1	an Ultragungan droidtech	14283	outback	Ultragungan Ruins Sacred Place	1	FLOAT	idle	0	0	0	0	300	120	2
 2001448	NABOO	nab_world	AREA	0	-1838.27	4.34	-5059.46	0	1	an Ultragungan droidtech	14283	outback	Ultragungan Ruins Sacred Place	1	FLOAT	idle	0	0	0	0	300	120	2
 2001449	NABOO	nab_world	AREA	0	-1837.22	3.79	-5096.24	0	1	an Ultragungan droidtech	14283	outback	Ultragungan Ruins Sacred Place	1	FLOAT	idle	0	0	0	0	300	120	0
@@ -1625,7 +1625,7 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 2001625	NABOO	nab_mauler_stronghold	AREA	29	-163.79	-44.00	88.23	0	1	a Mauler Strongman	13324	poi	Mauler Stronghold	1	GUARD	idle	0	0	0	0	300	120	0
 2001626	NABOO	nab_mauler_stronghold	AREA	29	-139.67	-44.00	94.43	0	1	a Mauler Strongman	13324	poi	Mauler Stronghold	1	GUARD	idle	0	0	0	0	300	120	0
 2001627	NABOO	nab_mauler_stronghold	PATROL	3	3.31	0.25	-2.17	0	1	a Mauler Guard	13319	poi	Mauler Stronghold	1	PATROL	idle	0	999	0	0	300	120	0
-2001628	NABOO	nab_mauler_stronghold	AREA	30	-94.59	-28.00	60.15	77	1	a Mauler Strongman	13324	poi	Mauler Stronghold	1	GUARD	idle	0	0	0	0	300	120	0
+2001628	NABOO	nab_mauler_stronghold	AREA	30	-94.59	-28.00	60.15	77	1	a Mauler Strongman	13324	poi	Mauler Stronghold	1	STOP	idle	0	0	0	0	300	120	0
 2001629	NABOO	nab_mauler_stronghold	PATROL	31	-93.80	-34.20	38.99	0	1	a Mauler Guard	13319	poi	Mauler Stronghold	1	PATROL	idle	0	999	0	0	300	120	0
 2001630	NABOO	nab_mauler_stronghold	PATROL	32	-93.53	-44.00	-2.68	0	1	Walus Mutin	13096	poi	Mauler Stronghold	1	PATROL	idle	0	999	0	0	300	120	0
 2001631	NABOO	nab_mauler_stronghold	AREA	32	-63.25	-44.00	4.63	134	1	a Mauler Beastmaster	13316	poi	Mauler Stronghold	1	STOP	idle	0	0	0	0	300	120	0
@@ -1745,7 +1745,7 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 2001745	NABOO	nab_weapon_development_facility	AREA	5	-16.64	-12.00	41.13	16	1	a Dark Trooper	11170	poi	Weapon Development Facility	1	STOP	idle	0	0	0	0	300	120	0
 2001746	NABOO	nab_weapon_development_facility	AREA	7	-75.94	-20.00	47.02	90	1	an Imperial Lieutenant Colonel	12732	poi	Weapon Development Facility	1	STOP	idle	0	0	0	0	300	120	0
 2001747	NABOO	nab_weapon_development_facility	PATROL	7	-64.12	-20.00	48.49	0	1	a Veteran Stormtrooper	16643	poi	Weapon Development Facility	1	PATROL	idle	0	999	0	0	300	120	0
-2001748	NABOO	nab_weapon_development_facility	AREA	7	-53.47	-20.00	40.12	-6	1	an AT-ST	10157	poi	Weapon Development Facility	1	GUARD	idle	0	0	0	0	300	120	0
+2001748	NABOO	nab_weapon_development_facility	AREA	7	-53.47	-20.00	40.12	-6	1	an AT-ST	10157	poi	Weapon Development Facility	1	STOP	idle	0	0	0	0	300	120	0
 2001749	NABOO	nab_weapon_development_facility	AREA	7	-74.01	-20.00	65.89	-20	1	an Imperial specialist	11103	poi	Weapon Development Facility	1	STOP	idle	0	0	0	0	300	120	0
 2001750	NABOO	nab_weapon_development_facility	AREA	7	-73.25	-20.00	37.31	-39	1	an Imperial specialist	11103	poi	Weapon Development Facility	1	STOP	idle	0	0	0	0	300	120	0
 2001751	NABOO	nab_weapon_development_facility	AREA	7	-51.61	-20.00	24.72	-56	1	an Imperial specialist	11103	poi	Weapon Development Facility	1	STOP	idle	0	0	0	0	300	120	0
