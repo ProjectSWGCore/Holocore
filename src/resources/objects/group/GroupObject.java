@@ -41,6 +41,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.nio.ByteBuffer;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -150,13 +151,16 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 	private void changeLeader(GroupMember member) {
 		if (groupMembers.size() > 0) {
 			synchronized (groupMembers) {
-				GroupMember previous = groupMembers.set(0, member);
+				//GroupMember previous = groupMembers.set(0, member);
+				// TODO: need to account for group member order of joining
+				Collections.swap(groupMembers, 0, groupMembers.indexOf(member));
 			}
 		} else {
 			this.addMember(member.getCreatureObject());
 		}
 		
 		this.leader = member.getId();
+
 		groupMembers.sendDeltaMessage(this);
 	}
 	
