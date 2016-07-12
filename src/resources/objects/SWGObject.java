@@ -42,64 +42,64 @@ import resources.Terrain;
 import resources.buildout.BuildoutArea;
 import resources.client_info.visitors.ObjectData.ObjectDataAttribute;
 import resources.common.CRC;
-import resources.containers.ContainerPermissions;
+import resources.containers.ContainerPermissionsType;
 import resources.containers.ContainerResult;
-import resources.containers.DefaultPermissions;
 import resources.encodables.StringId;
 import resources.network.BaselineBuilder;
 import resources.network.BaselineObject;
 import resources.network.NetBuffer;
+import resources.network.NetBufferStream;
 import resources.objects.building.BuildingObject;
 import resources.objects.creature.CreatureObject;
+import resources.persistable.Persistable;
+import resources.persistable.SWGObjectFactory;
 import resources.player.Player;
 import resources.player.PlayerState;
 import resources.server_info.Log;
 import services.CoreManager;
+import services.objects.ObjectCreator;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Hashtable;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 
-public abstract class SWGObject extends BaselineObject implements Comparable<SWGObject> {
+public abstract class SWGObject extends BaselineObject implements Comparable<SWGObject>, Persistable {
 	
-	private static final long serialVersionUID = 1L;
-
-	private final Location location;
-	private final long objectId;
-	private final HashMap <String, SWGObject> slots; // HashMap used for null value support
-	private final Map<Long, SWGObject> containedObjects;
-	private final Map <String, String> attributes;
-	private final Map <ObjectDataAttribute, Object> dataAttributes;
-	private ContainerPermissions containerPermissions;
-	private transient Set <SWGObject> objectsAware;
-	private transient BuildoutArea buildoutArea;
-	private transient Player owner;
-	private List <List <String>> arrangement;
-
-	private ObjectClassification classification = ObjectClassification.GENERATED;
-	private GameObjectType gameObjectType = GameObjectType.GOT_NONE;
-	private SWGObject	parent	= null;
-	private StringId stringId = new StringId("", "");
-	private StringId detailStringId = new StringId("", "");
-	private String	template	= "";
-	private int		crc			= 0;
-	private String	objectName	= "";
-	private int		volume		= 0;
-	private float	complexity	= 1;
-	private int     containerType = 0;
-	private double	loadRange	= 0;
-	private int		areaId		= -1;
-
-	private int     slotArrangement = -1;
+	private final long 							objectId;
+	private final Location 						location		= new Location(0, 0, 0, null);
+	private final Set<SWGObject>				containedObjects= new HashSet<>();
+	private final Map <String, String>			attributes		= new LinkedHashMap<>();
+	private final Set <SWGObject>				objectsAware	= new HashSet<>();
+	private final Set <SWGObject>				customAware		= new HashSet<>();
+	private final HashMap <String, SWGObject>	slots			= new HashMap<>(); // HashMap used for null value support
+	private final Map <ObjectDataAttribute, Object> dataAttributes = new HashMap<>();
+	private final AtomicInteger					updateCounter	= new AtomicInteger(1);
+	
+	private ObjectClassification		classification	= ObjectClassification.GENERATED;
+	private GameObjectType				gameObjectType	= GameObjectType.GOT_NONE;
+	private ContainerPermissionsType	permissions		= ContainerPermissionsType.DEFAULT;
+	private List <List <String>>		arrangement		= new ArrayList<>();
+	private BuildoutArea				buildoutArea	= null;
+	private Player						owner			= null;
+	
+	private SWGObject	parent			= null;
+	private StringId 	stringId		= new StringId("", "");
+	private StringId 	detailStringId	= new StringId("", "");
+	private String		template		= "";
+	private int			crc				= 0;
+	private String		objectName		= "";
+	private int			volume			= 0;
+	private float		complexity		= 1;
+	private int     	containerType	= 0;
+	private double		loadRange		= 0;
+	private int			areaId			= -1;
+	private int     	slotArrangement	= -1;
 	
 	public SWGObject() {
 		this(0, null);
@@ -108,81 +108,50 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	public SWGObject(long objectId, BaselineType objectType) {
 		super(objectType);
 		this.objectId = objectId;
-		this.location = new Location();
-		this.objectsAware = new HashSet<SWGObject>();
-		this.slots = new HashMap<>();
-		this.containedObjects = Collections.synchronizedMap(new HashMap<Long, SWGObject>());
-		this.attributes = new LinkedHashMap<>();
-		this.dataAttributes = new Hashtable<>();
-		this.containerPermissions = new DefaultPermissions();
 	}
 	
-	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
-		areaId = -1;
-		ois.defaultReadObject();
-		objectsAware = new HashSet<>();
-		buildoutArea = null;
-		owner = null;
-	}
-
 	/**
 	 * Adds the specified object to this object and places it in the appropriate slot if needed
 	 * @param object Object to add to this container, which will either be put into the appropriate slot(s) or become a contained object
 	 */
-	public boolean addObject(SWGObject object) {
-		// If the arrangement is -1, then this object will be a contained object
-		int arrangementId = getArrangementId(object);
-		if (arrangementId == -1) {
+	public void addObject(SWGObject object) {
+		object.setSlotArrangement(getArrangementId(object));
+		if (object.getSlotArrangement() == -1) {
 			synchronized (containedObjects) {
-				containedObjects.put(object.getObjectId(), object);
+				containedObjects.add(object);
 			}
 		} else {
-			// Not a child object, so time to check the slots!
-
-			// Check to make sure this object is able to go into a slot in the parent
-			List<String> requiredSlots = object.getArrangement().get(arrangementId - 4);
-			// Note that some objects don't have a descriptor, meaning it has no slots
-			
-			// Add object to the slot
-			for (String requiredSlot : requiredSlots) {
+			for (String requiredSlot : object.getArrangement().get(object.getSlotArrangement() - 4)) {
 				setSlot(requiredSlot, object);
 			}
 		}
-		
 		object.parent = this;
-		object.slotArrangement = arrangementId;
 		synchronized (object.objectsAware) {
-			object.objectsAware.clear();
+			for (SWGObject obj : new ArrayList<>(object.objectsAware)) {
+				object.awarenessOutOfRange(obj, false);
+			}
 		}
-		return true;
 	}
-
+	
 	/**
 	 * Removes the specified object from this current object.
 	 * @param object Object to remove
 	 */
-	public void removeObject(SWGObject object) {
-		synchronized (object.objectsAware) {
-			object.objectsAware.clear();
-			object.objectsAware.addAll(getObjectsAware());
-			object.objectsAware.remove(object);
-		}
-		// This object is a container object, so remove it from the container
+	protected void removeObject(SWGObject object) {
 		if (object.getSlotArrangement() == -1) {
 			synchronized (containedObjects) {
-				containedObjects.remove(object.objectId);
+				containedObjects.remove(object);
 			}
 		} else {
-			for (String slot : (slotArrangement == -1 ?
-					object.getArrangement().get(0) : object.getArrangement().get(slotArrangement - 4))) {
-				setSlot(slot, null);
+			for (String requiredSlot : object.getArrangement().get(object.getSlotArrangement() - 4)) {
+				setSlot(requiredSlot, null);
 			}
 		}
 		
 		object.parent = null;
 		object.slotArrangement = -1;
 	}
-
+	
 	/**
 	 * Moves this object to the passed container if the requester has the MOVE permission for the container
 	 * @param requester Object that is requesting to move the object, used for permission checking
@@ -190,35 +159,24 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	 * @return {@link ContainerResult}
 	 */
 	public ContainerResult moveToContainer(SWGObject requester, SWGObject container) {
-		// Check if the requester has MOVE permissions for the current container of the object
 		ContainerResult result = moveToContainerChecks(requester, container);
 		if (result != ContainerResult.SUCCESS)
 			return result;
 		
-		// Get a pre-parent-removal list of the observers so we can send create/destroy/update messages
-		Set<SWGObject> oldObservers = getObservers();
-		Player prevOwner = (getParent() != null) ? getParent().getOwner() : null;
-		if (prevOwner != null)
-			oldObservers.add(prevOwner.getCreatureObject());
-		
-		// Remove this object from the old parent if one exists
-		if (parent != null) {
+		Set<SWGObject> oldObservers = getObserversAndParent();
+		SWGObject parent = this.parent;
+		if (parent != null)
 			parent.removeObject(this);
-		}
 		
-		Player newOwner = null;
 		if (container != null) {
-			if (!container.addObject(this))
-				Log.e("SWGObject", "Failed adding " + this + " to " + container);
-			newOwner = container.getOwner();
-		}
+			int arrangement = container.getArrangementId(this);
+			if (arrangement != -1)
+				container.handleSlotReplacement(parent, this, arrangement);
+			container.addObject(this);
+		} else
+			recreateWorldAwareness(parent);
 		
-		// Observer notification
-		Set<SWGObject> containerObservers = getObservers();
-		if (newOwner != null)
-			containerObservers.add(newOwner.getCreatureObject());
-		sendUpdatedContainment(oldObservers, containerObservers);
-
+		sendUpdatedContainment(oldObservers, getObserversAndParent());
 		return ContainerResult.SUCCESS;
 	}
 
@@ -232,128 +190,64 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	private ContainerResult moveToContainerChecks(SWGObject requester, SWGObject container) {
-		if(!hasPermission(requester, ContainerPermissions.Permission.MOVE)) {
+		if (requester == null)
+			return ContainerResult.SUCCESS;
+		if (!permissions.canMove(requester, this)) {
+			Log.w("SWGObject", "No permission 'MOVE' for requestor %s with object %s", requester, this);
 			return ContainerResult.NO_PERMISSION;
 		}
 		if (container == null)
 			return ContainerResult.SUCCESS;
 		
 		// Check if the requester has MOVE permissions to the destination container
-		if (!container.hasPermission(requester, ContainerPermissions.Permission.MOVE)) {
-			Log.w("SWGObject", "No permission 'MOVE' for requestor %s with object %s", requester, this);
+		if (!permissions.canMove(requester, container)) {
+			Log.w("SWGObject", "No permission 'MOVE' for requestor %s with container %s", requester, this);
 			return ContainerResult.NO_PERMISSION;
 		}
 		
 		// Check if object can fit into container or slots
 		int arrangementId = container.getArrangementId(this);
 		if (arrangementId == -1) {
-			// Item is going to go into the container, so check to see if it'll fit
 			if (container.getMaxContainerSize() <= container.getContainedObjects().size() && container.getMaxContainerSize() > 0) {
 				Log.w("SWGObject", "Unable to add object to container! Container Full. Max Size: %d", container.getMaxContainerSize());
 				return ContainerResult.CONTAINER_FULL;
 			}
-		} else {
-			// Item is going into slot(s)
-			Map<String, SWGObject> containerSlots = container.getSlots();
-			for (String slotName : getArrangement().get(arrangementId - 4)) {
-				SWGObject equippedItem = containerSlots.get(slotName);
-				if (equippedItem != null) {
-					equippedItem.moveToContainer(requester, container.getSlottedObject("inventory"));
-				}
-			}
 		}
 		return ContainerResult.SUCCESS;
 	}
-
-	/**
-	 * Checks if the passed object has all of the passed permissions
-	 * @param object Requester to view this container
-	 * @param permissions Permissions to check for
-	 * @return
-	 */
-	public boolean hasPermission(SWGObject object, ContainerPermissions.Permission... permissions) {
-		if (object == null)
-			return true;
-		for (ContainerPermissions.Permission permission : permissions) {
-			switch(permission) {
-				case VIEW:
-					if (!containerPermissions.canView(object, this))
-						return false;
-					break;
-				case MOVE:
-					if (!containerPermissions.canMove(object, this))
-						return false;
-					break;
-				case REMOVE:
-					if (!containerPermissions.canRemove(object, this))
-						return false;
-					break;
-				case ADD:
-					if (!containerPermissions.canAdd(object, this))
-						return false;
-					break;
-				case ENTER:
-					if (!containerPermissions.canEnter(object, this))
-						return false;
-					break;
-			}
+	
+	private Set<SWGObject> getObserversAndParent() {
+		Set<SWGObject> observers = getObservers();
+		Player prevOwner = (getParent() != null) ? getParent().getOwner() : null;
+		if (prevOwner != null)
+			observers.add(prevOwner.getCreatureObject());
+		return observers;
+	}
+	
+	private void recreateWorldAwareness(SWGObject oldParent) {
+		for (SWGObject obj : oldParent.getObjectsAware()) {
+			awarenessInRange(obj, false);
 		}
+	}
+	
+	protected void handleSlotReplacement(SWGObject oldParent, SWGObject obj, int arrangement) {
+		for (String slot : obj.getArrangement().get(arrangement-4)) {
+			SWGObject slotObj = getSlottedObject(slot);
+			if (slotObj != null)
+				slotObj.moveToContainer(oldParent);
+		}
+	}
+	
+	public boolean isVisible(SWGObject target) {
+		if (target == null)
+			return true;
+		if (!permissions.canView(target, this))
+			return false;
+		if (getParent() != null)
+			return getParent().isVisible(target);
 		return true;
 	}
-
-	/**
-	 * Creates a new permission group for this object with the given permissions for that group
-	 * @param group Name of the permission group
-	 * @param permissions Permissions for the group
-	 */
-	public void addPermissions(String group, ContainerPermissions.Permission... permissions) {
-		containerPermissions.addPermissions(group, permissions);
-	}
-
-	/**
-	 * Removes the stated permissions from the group.
-	 * @param group Name of the permission group
-	 * @param permissions Permissions to remove
-	 */
-	public void removePermissions(String group, ContainerPermissions.Permission... permissions) {
-		containerPermissions.removePermissions(group, permissions);
-	}
-
-	/**
-	 * Creates a new permission group specific to the permission requester that has the defined permissions. The name of the
-	 * new group for this object will be the objectId of this object plus the objectId of the requester.
-	 * <br>This is the same as calling addPermissions(String.valueOf(permissionRequester.getObjectId() + getObjectId()), permissions)
-	 * with the added benefit of adding the group to the permissionRequester's joined container groups
-	 * @param permissionRequester The object that should be given unique permissions to this object
-	 * @param permissions Permissions that the permissionRequester will have for this object
-	 */
-	public void addPermissions(SWGObject permissionRequester, ContainerPermissions.Permission... permissions) {
-		addPermissions(String.valueOf(permissionRequester.getObjectId() + getObjectId()), permissions);
-		permissionRequester.joinPermissionGroup(String.valueOf(getObjectId() + permissionRequester.getObjectId()));
-	}
-
-	/**
-	 * Removes all the unique permissions for the permissionRequester from this object.
-	 * @param permissionRequester The object that should no longer have unique permissions to this object
-	 */
-	public void removePermissions(SWGObject permissionRequester) {
-		String group = String.valueOf(permissionRequester.getObjectId() + getObjectId());
-		removePermissions(group);
-		permissionRequester.containerPermissions.getJoinedGroups().remove(group);
-	}
-
-	/**
-	 * Assigns this object to a permission group
-	 * @param group
-	 */
-	public void joinPermissionGroup(String group) {
-		containerPermissions.getJoinedGroups().add(group);
-	}
-
-	public void setContainerPermissions(ContainerPermissions permissions) {
-		this.containerPermissions = permissions;
-	}
-
+	
 	public void addAttribute(String attribute, String value) {
 		attributes.put(attribute, value);
 	}
@@ -370,24 +264,13 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 
 	/**
-	 * Gets the object in the container with the specified objectId
-	 * @param objectId of the {@link SWGObject} to retrieve
-	 * @return {@link SWGObject} with the specified objectId
-	 */
-	public SWGObject getContainedObject(long objectId) {
-		synchronized (containedObjects) {
-			return containedObjects.get(objectId);
-		}
-	}
-
-	/**
 	 * Gets a list of all the objects in the current container. This should only be used for viewing the objects
 	 * in the current container.
 	 * @return An unmodifiable {@link Collection} of {@link SWGObject}'s in the container
 	 */
 	public Collection<SWGObject> getContainedObjects() {
 		synchronized (containedObjects) {
-			return new ArrayList<>(containedObjects.values());
+			return new ArrayList<>(containedObjects);
 		}
 	}
 
@@ -477,7 +360,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			return owner;
 
 		if (getParent() != null)
-			return getParent().getOwner();	// Ziggy: Player owner is found recursively
+			return getParent().getOwner();
 		
 		return null;
 	}
@@ -525,6 +408,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		while (parent != null) {
 			Location l = parent.location;
 			loc.translateLocation(l); // Have to access privately to avoid copies
+			loc.setTerrain(l.getTerrain());
 			parent = parent.getParent();
 		}
 		return loc;
@@ -629,6 +513,14 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		this.gameObjectType = gameObjectType;
 	}
 	
+	public ContainerPermissionsType getContainerPermissions() {
+		return permissions;
+	}
+	
+	public void setContainerPermissions(ContainerPermissionsType permissions) {
+		this.permissions = permissions;
+	}
+
 	public boolean isBuildout() {
 		return classification == ObjectClassification.BUILDOUT;
 	}
@@ -648,9 +540,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	public void setLoadRange(double range) {
 		this.loadRange = range;
 	}
-
-	public ContainerPermissions getContainerPermissions() { return containerPermissions; }
-
+	
 	/**
 	 * Gets the arrangementId for the {@link SWGObject} for the current instance
 	 * @param object
@@ -711,8 +601,8 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	public void createObject(Player target, boolean ignoreSnapshotChecks) {
-		if (!hasPermission(target.getCreatureObject(), ContainerPermissions.Permission.VIEW)) {
-			// Log.i("SWGObject", target.getCreatureObject() + " doesn't have permission to view " + this + " -- skipping packet sending");
+		if (!isVisible(target.getCreatureObject())) {
+//			Log.i("SWGObject", target.getCreatureObject() + " doesn't have permission to view " + this + " -- skipping packet sending");
 			return;
 		}
 
@@ -731,14 +621,9 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	public void clearAware() {
-		clearAware(true);
-	}
-	
-	public void clearAware(boolean updateSelf) {
 		Set<SWGObject> objects = getObjectsAware();
 		for (SWGObject o : objects) {
-			o.awarenessOutOfRange(this, true);
-			awarenessOutOfRange(o, updateSelf);
+			awarenessOutOfRange(o, true);
 		}
 	}
 	
@@ -753,6 +638,9 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		synchronized (objectsAware) {
 			aware = new HashSet<>(objectsAware);
 		}
+		synchronized (customAware) {
+			aware.addAll(customAware);
+		}
 		if (parent != null) {
 			aware.addAll(parent.getObjectsAware());
 			aware.add(getSuperParent());
@@ -760,38 +648,67 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		return aware;
 	}
 	
-	private boolean isAware(SWGObject obj) {
-		if (equals(obj))
-			return true;
-		synchronized (objectsAware) {
-			if (objectsAware.contains(obj))
-				return true;
+	public void addCustomAware(SWGObject aware) {
+		internalAddCustomAware(aware, true);
+		aware.internalAddCustomAware(this, true);
+	}
+	
+	public void removeCustomAware(SWGObject aware) {
+		internalRemoveCustomAware(aware, true);
+		aware.internalRemoveCustomAware(this, true);
+	}
+	
+	private void internalAddCustomAware(SWGObject aware, boolean sendUpdates) {
+		boolean changed = false;
+		synchronized (customAware) {
+			changed = customAware.add(aware);
 		}
-		if (parent != null)
-			return parent.isAware(obj);
-		return false;
+		if (changed && sendUpdates && aware.getOwner() != null)
+			createObject(aware.getOwner());
+	}
+	
+	private void internalRemoveCustomAware(SWGObject aware, boolean sendUpdates) {
+		boolean changed = false;
+		synchronized (customAware) {
+			changed = customAware.remove(aware);
+		}
+		if (changed && sendUpdates && aware.getOwner() != null)
+			destroyObject(aware.getOwner());
+	}
+	
+	public void clearCustomAware(boolean sendUpdates) {
+		Set<SWGObject> copy;
+		synchronized (customAware) {
+			copy = new HashSet<>(customAware);
+		}
+		for (SWGObject aware : copy) {
+			internalRemoveCustomAware(aware, sendUpdates);
+			aware.internalRemoveCustomAware(this, sendUpdates);
+		}
 	}
 	
 	public Set<SWGObject> getObservers() {
 		Player owner = getOwner();
 		SWGObject parent = getParent();
 		if (parent == null)
-			return getObservers(owner, true);
+			return getObservers(owner, this, true);
 		while (parent.getParent() != null)
 			parent = parent.getParent();
-		return parent.getObservers(owner, true);
+		return parent.getObservers(owner, this, true);
 	}
 	
-	private Set<SWGObject> getObservers(Player owner, boolean initial) {
+	private Set<SWGObject> getObservers(Player owner, SWGObject original, boolean initial) {
 		Set<SWGObject> nearby;
 		synchronized (containedObjects) {
-			nearby = new HashSet<>(containedObjects.values());
+			nearby = new HashSet<>(containedObjects);
 		}
 		if (initial) {
 			nearby.addAll(getObjectsAware());
 		}
 		Set<SWGObject> observers = new HashSet<>();
 		for (SWGObject aware : nearby) {
+			if (!aware.isVisible(original))
+				continue;
 			if (aware instanceof CreatureObject) {
 				Player awareOwner = aware.getOwner();
 				if (awareOwner == null || awareOwner.equals(owner))
@@ -801,7 +718,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 				if (((CreatureObject) aware).isLoggedInPlayer())
 					observers.add(aware);
 			} else
-				observers.addAll(aware.getObservers(owner, false));
+				observers.addAll(aware.getObservers(owner, original, false));
 		}
 		return observers;
 	}
@@ -857,21 +774,29 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		for (SWGObject o : outOfRange) {
 			if (!withinRange.contains(o)) {
 				awarenessOutOfRange(o, true);
-				o.awarenessOutOfRange(this, true);
 			}
 		}
 		for (SWGObject o : withinRange) {
 			if (!outOfRange.contains(o)) {
 				awarenessInRange(o, true);
-				o.awarenessInRange(this, true);
 			}
 		}
 	}
 	
-	protected void awarenessOutOfRange(SWGObject o, boolean sendDestroy) {
-		boolean success = isAware(o);
+	private void awarenessOutOfRange(SWGObject o, boolean sendDestroy) {
+		internalAwarenessOutOfRange(o, sendDestroy);
+		o.internalAwarenessOutOfRange(this, sendDestroy);
+	}
+	
+	private void awarenessInRange(SWGObject o, boolean sendCreate) {
+		internalAwarenessInRange(o, sendCreate);
+		o.internalAwarenessInRange(this, sendCreate);
+	}
+	
+	private void internalAwarenessOutOfRange(SWGObject o, boolean sendDestroy) {
+		boolean success = true;
 		synchronized (objectsAware) {
-			success = objectsAware.remove(o) && success;
+			success = objectsAware.remove(o);
 		}
 		if (success && sendDestroy) {
 			Player owner = getOwner();
@@ -880,10 +805,10 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		}
 	}
 	
-	protected void awarenessInRange(SWGObject o, boolean sendCreate) {
-		boolean success = !isAware(o);
+	private void internalAwarenessInRange(SWGObject o, boolean sendCreate) {
+		boolean success = true;
 		synchronized (objectsAware) {
-			success = objectsAware.add(o) && success;
+			success = objectsAware.add(o);
 		}
 		if (success && sendCreate) {
 			Player owner = getOwner();
@@ -892,39 +817,29 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		}
 	}
 	
-	public void sendDataTransforms(DataTransform dTransform) {
-		Location loc = dTransform.getLocation();
-		float speed = dTransform.getSpeed();
-/*		Even with these speed calculations, observer clients still have stuttering for movements, live only sent UTM's to observers or bouncing back the player
-		that is moving. The only work around to this seems to be to send a UTM to the client to force multiple DTM's to be sent back to the server for fluid movements.
-		if (x != loc.getX() && y != loc.getY() && z != loc.getZ())
-			speed = (float) loc.getSpeed(x, 0, z, MathUtils.calculateDeltaTime(lastMovementTimestamp, dTransform.getTimestamp()));*/
-		sendDataTransforms(loc, dTransform.getMovementAngle(), speed, dTransform.getLookAtYaw(), dTransform.isUseLookAtYaw(), dTransform.getUpdateCounter());
+	public void sendDataTransforms(DataTransform dt) {
+		UpdateTransformMessage transform = new UpdateTransformMessage();
+		transform.setObjectId(getObjectId());
+		transform.setX((short) (dt.getLocation().getX() * 4 + 0.5));
+		transform.setY((short) (dt.getLocation().getY() * 4 + 0.5));
+		transform.setZ((short) (dt.getLocation().getZ() * 4 + 0.5));
+		transform.setUpdateCounter(updateCounter.incrementAndGet());
+		transform.setDirection(dt.getMovementAngle());
+		transform.setSpeed((byte) (dt.getSpeed()+0.5));
+		transform.setLookAtYaw((byte) (dt.getLookAtYaw() * 16));
+		transform.setUseLookAtYaw(dt.isUseLookAtYaw());
+		sendObservers(transform);
 	}
 
 	public void sendParentDataTransforms(DataTransformWithParent ptm) {
 		UpdateTransformWithParentMessage transform = new UpdateTransformWithParentMessage(ptm.getCellId(), getObjectId());
 		transform.setLocation(ptm.getLocation());
-		transform.setUpdateCounter(ptm.getCounter() + 1);
+		transform.setUpdateCounter(updateCounter.incrementAndGet());
 		transform.setDirection(ptm.getMovementAngle());
 		transform.setSpeed((byte) ptm.getSpeed());
 		transform.setLookDirection((byte) (ptm.getLookAtYaw() * 16));
 		transform.setUseLookDirection(ptm.isUseLookAtYaw());
-		sendObserversAndSelf(transform);
-	}
-
-	public void sendDataTransforms(Location loc, byte direction, double speed, float lookAtYaw, boolean useLookAtYaw, int updates) {
-		UpdateTransformMessage transform = new UpdateTransformMessage();
-		transform.setObjectId(getObjectId()); // (short) (xPosition * 4 + 0.5)
-		transform.setX((short) (loc.getX() * 4));
-		transform.setY((short) (loc.getY() * 4));
-		transform.setZ((short) (loc.getZ() * 4));
-		transform.setUpdateCounter(updates + 1);
-		transform.setDirection(direction);
-		transform.setSpeed((byte) speed);
-		transform.setLookAtYaw((byte) (lookAtYaw * 16));
-		transform.setUseLookAtYaw(useLookAtYaw);
-		sendObserversAndSelf(transform);
+		sendObservers(transform);
 	}
 	
 	protected void createChildrenObjects(Player target) {
@@ -951,7 +866,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		
 		// Now create the contained objects
 		synchronized (containedObjects) {
-			for (SWGObject containedObject : containedObjects.values()) {
+			for (SWGObject containedObject : containedObjects) {
 				if (containedObject != null && !sentObjects.contains(containedObject)) {
 					if (containedObject instanceof CreatureObject && ((CreatureObject) containedObject).isLoggedOutPlayer())
 						continue; // If it's a player, but that's logged out
@@ -975,16 +890,12 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 
 	@Override
 	public String toString() {
-		return "SWGObject[ID=" + objectId + " NAME=" + objectName + " TEMPLATE=" + template + "]";
+		return String.format("SWGObject[%d '%s' %s]", objectId, objectName, template.replace("object/", ""));
 	}
 	
 	@Override
 	public int compareTo(SWGObject obj) {
-		if (getObjectId() < obj.getObjectId())
-			return -1;
-		if (getObjectId() == obj.getObjectId())
-			return 0;
-		return 1;
+		return Long.compare(objectId, obj.getObjectId());
 	}
 	
 	@Override
@@ -1046,6 +957,51 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	 * 
 	 * Only sent if they are defined (can still be empty if defined).
 	 */
+	
+	@Override
+	public void save(NetBufferStream stream) {
+		stream.addByte(0);
+		location.save(stream);
+		stream.addBoolean(parent != null && parent.getClassification() != ObjectClassification.GENERATED);
+		if (parent != null && parent.getClassification() != ObjectClassification.GENERATED)
+			SWGObjectFactory.save(ObjectCreator.createObjectFromTemplate(parent.getObjectId(), parent.getTemplate()), stream);
+		stream.addAscii(permissions.name());
+		stream.addAscii(classification.name());
+		stream.addUnicode(objectName);
+		stream.addInt(volume);
+		stream.addFloat(complexity);
+		stream.addFloat((float) loadRange);
+		synchronized (attributes) {
+			stream.addMap(attributes, (e) -> {
+				stream.addAscii(e.getKey());
+				stream.addAscii(e.getValue());
+			});
+		}
+		Set<SWGObject> contained;
+		synchronized (containedObjects) {
+			contained = new HashSet<>(containedObjects);
+		}
+		synchronized (slots) {
+			contained.addAll(slots.values());
+			contained.remove(null);
+		}
+		stream.addList(contained, (c) -> SWGObjectFactory.save(c, stream));
+	}
+	
+	public void read(NetBufferStream stream) {
+		stream.getByte();
+		location.read(stream);
+		if (stream.getBoolean())
+			parent = SWGObjectFactory.create(stream);
+		permissions = ContainerPermissionsType.valueOf(stream.getAscii());
+		classification = ObjectClassification.valueOf(stream.getAscii());
+		objectName = stream.getUnicode();
+		volume = stream.getInt();
+		complexity = stream.getFloat();
+		loadRange = stream.getFloat();
+		stream.getList((i) -> attributes.put(stream.getAscii(), stream.getAscii()));
+		stream.getList((i) -> SWGObjectFactory.create(stream).moveToContainer(this));
+	}
 	
 	public enum ObjectClassification {
 		GENERATED,

@@ -29,17 +29,17 @@ package resources.encodables;
 
 import network.packets.Packet;
 
-import java.io.Serializable;
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.charset.Charset;
 
+import resources.network.NetBufferStream;
+import resources.persistable.Persistable;
 import resources.server_info.Log;
 
-public class ProsePackage implements OutOfBandData, Serializable {
-	private static final long serialVersionUID = 1L;
-
+public class ProsePackage implements OutOfBandData {
+	
 	private StringId base = new StringId("", "");
 
 	private Prose actor = new Prose();
@@ -228,6 +228,30 @@ public class ProsePackage implements OutOfBandData, Serializable {
 		df			= Packet.getInt(data);
 		grammarFlag	= Packet.getBoolean(data);
 	}
+	
+	@Override
+	public void save(NetBufferStream stream) {
+		stream.addByte(0);
+		base.save(stream);
+		actor.save(stream);
+		target.save(stream);
+		other.save(stream);
+		stream.addBoolean(grammarFlag);
+		stream.addInt(di);
+		stream.addFloat(df);
+	}
+	
+	@Override
+	public void read(NetBufferStream stream) {
+		stream.getByte();
+		base.read(stream);
+		actor.read(stream);
+		target.read(stream);
+		other.read(stream);
+		grammarFlag = stream.getBoolean();
+		di = stream.getInt();
+		df = stream.getFloat();
+	}
 
 	@Override
 	public OutOfBandPackage.Type getOobType() {
@@ -247,10 +271,8 @@ public class ProsePackage implements OutOfBandData, Serializable {
 				"]";
 	}
 
-	private static class Prose implements Encodable, Serializable {
-
-		private static final long	serialVersionUID	= 1L;
-
+	private static class Prose implements Encodable, Persistable {
+		
 		private long objectId;
 		private StringId stringId;
 		private String text;
@@ -293,6 +315,22 @@ public class ProsePackage implements OutOfBandData, Serializable {
 			objectId 	= Packet.getLong(data);
 			stringId	= Packet.getEncodable(data, StringId.class);
 			text		= Packet.getUnicode(data);
+		}
+		
+		@Override
+		public void save(NetBufferStream stream) {
+			stream.addByte(0);
+			stringId.save(stream);
+			stream.addLong(objectId);
+			stream.addUnicode(text);
+		}
+		
+		@Override
+		public void read(NetBufferStream stream) {
+			stream.getByte();
+			stringId.read(stream);
+			objectId = stream.getLong();
+			text = stream.getUnicode();
 		}
 
 		@Override

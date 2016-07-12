@@ -311,7 +311,10 @@ public class TravelService extends Service {
 			}
 			for (TravelGroup gt : travel.values())
 				gt.getPointsForTerrain(pointsForPlanet, nearest, to);
+			boolean existed = pointsForPlanet.remove(nearest);
 			Collections.sort(pointsForPlanet);
+			if (existed)
+				pointsForPlanet.add(0, nearest); // Yes ... adding it to the beginning of the list because I hate the client
 			
 			player.sendPacket(new PlanetTravelPointListResponse(req.getPlanetName(), pointsForPlanet, getAdditionalCosts(objectLocation, pointsForPlanet)));
 		}
@@ -555,7 +558,7 @@ public class TravelService extends Service {
 	}
 	
 	private boolean isTicketUsable(SWGObject ticket) {
-		Location worldLoc = ticket.getOwner().getCreatureObject().getWorldLocation();
+		Location worldLoc = ticket.getWorldLocation();
 		TravelPoint nearest = getNearestTravelPoint(worldLoc);
 		String departurePoint = ticket.getAttribute("@obj_attr_n:travel_departure_point");
 		String departurePlanet = ticket.getAttribute("@obj_attr_n:travel_departure_planet");

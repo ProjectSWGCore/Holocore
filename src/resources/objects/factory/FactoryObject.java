@@ -28,14 +28,25 @@
 package resources.objects.factory;
 
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
+import resources.network.NetBufferStream;
 import resources.objects.tangible.TangibleObject;
 
 public class FactoryObject extends TangibleObject {
 	
-	private static final long serialVersionUID = 1L;
-	
 	public FactoryObject(long objectId) {
 		super(objectId, BaselineType.FCYT);
+	}
+	
+	@Override
+	public void save(NetBufferStream stream) {
+		super.save(stream);
+		stream.addByte(0);
+	}
+	
+	@Override
+	public void read(NetBufferStream stream) {
+		super.read(stream);
+		stream.getByte();
 	}
 	
 }

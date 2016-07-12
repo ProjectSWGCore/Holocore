@@ -30,15 +30,15 @@ package resources.encodables.player;
 import network.packets.Packet;
 import resources.encodables.Encodable;
 import resources.encodables.OutOfBandPackage;
+import resources.network.NetBufferStream;
+import resources.persistable.Persistable;
 import utilities.Encoder;
 
-import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
-public class Mail implements Encodable, Serializable {
-	private static final long serialVersionUID = 1L;
-
+public class Mail implements Encodable, Persistable {
+	
 	private int id;
 	private String sender;
 	private long receiverId;
@@ -123,6 +123,47 @@ public class Mail implements Encodable, Serializable {
 		subject				= Packet.getUnicode(data);
 		outOfBandPackage	= Packet.getEncodable(data, OutOfBandPackage.class);
 	}
+	
+	@Override
+	public void save(NetBufferStream stream) {
+		stream.addByte(0);
+		stream.addByte(status);
+		stream.addInt(id);
+		stream.addInt(timestamp);
+		stream.addLong(receiverId);
+		stream.addUnicode(sender);
+		stream.addUnicode(subject);
+		stream.addUnicode(message);
+		stream.addBoolean(outOfBandPackage != null);
+		if (outOfBandPackage != null)
+			outOfBandPackage.save(stream);
+	}
+	
+	@Override
+	public void read(NetBufferStream stream) {
+		stream.getByte();
+		status = stream.getByte();
+		id = stream.getInt();
+		timestamp = stream.getInt();
+		receiverId = stream.getLong();
+		sender = stream.getUnicode();
+		subject = stream.getUnicode();
+		message = stream.getUnicode();
+		if (stream.getBoolean()) {
+			outOfBandPackage = new OutOfBandPackage();
+			outOfBandPackage.read(stream);
+		}
+	}
+	
+	public int hashCode() {
+		return id;
+	}
+	
+	public boolean equals(Object o) {
+		if (!(o instanceof Mail))
+			return false;
+		return ((Mail) o).id == id;
+	}
 
 	public byte[] encodeHeader() {
 		ByteBuffer bb = ByteBuffer.allocate(12 + subject.length() * 2).order(ByteOrder.LITTLE_ENDIAN);
@@ -130,5 +171,15 @@ public class Mail implements Encodable, Serializable {
 		bb.put(Encoder.encodeUnicode(subject));
 		bb.putInt(0);
 		return bb.array();
+	}
+	
+	public static Mail create(NetBufferStream stream) {
+		Mail m = new Mail("", "", "", 0);
+		m.read(stream);
+		return m;
+	}
+	
+	public static void saveMail(Mail m, NetBufferStream stream) {
+		m.save(stream);
 	}
 }

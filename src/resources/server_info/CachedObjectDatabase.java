@@ -27,55 +27,42 @@
 ***********************************************************************************/
 package resources.server_info;
 
-import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
+import java.util.HashSet;
+import java.util.Set;
 
-public class CachedObjectDatabase<V extends Serializable> extends ObjectDatabase<V> {
+import resources.persistable.InputPersistenceStream;
+import resources.persistable.InputPersistenceStream.PersistableCreator;
+import resources.persistable.OutputPersistenceStream;
+import resources.persistable.OutputPersistenceStream.PersistableSaver;
+import resources.persistable.Persistable;
+
+public class CachedObjectDatabase<V extends Persistable> extends ObjectDatabase<V> {
 	
-	private final Map <Long, V> objects;
+	private final PersistableCreator<V> creator;
+	private final PersistableSaver<V> saver;
+	private final Set <V> objects;
 	private boolean loaded;
 	
-	public CachedObjectDatabase(String filename) {
+	public CachedObjectDatabase(String filename, PersistableCreator<V> creator, PersistableSaver<V> saver) {
 		super(filename);
-		objects = new HashMap<Long, V>();
+		this.creator = creator;
+		this.saver = saver;
+		objects = new HashSet<>();
 		loaded = false;
 	}
 	
-	public synchronized V put(String key, V value) {
-		return put(hash(key), value);
-	}
-	
-	public synchronized V put(long key, V value) {
+	public synchronized boolean add(V value) {
 		synchronized (objects) {
-			return objects.put(key, value);
+			return objects.add(value);
 		}
 	}
 	
-	public synchronized V get(String key) {
-		return get(hash(key));
-	}
-	
-	public synchronized V get(long key) {
+	public synchronized boolean remove(V obj) {
 		synchronized (objects) {
-			return objects.get(key);
-		}
-	}
-	
-	public synchronized V remove(String key) {
-		return get(hash(key));
-	}
-	
-	public synchronized V remove(long key) {
-		synchronized (objects) {
-			return objects.remove(key);
+			return objects.remove(obj);
 		}
 	}
 	
@@ -85,14 +72,10 @@ public class CachedObjectDatabase<V extends Serializable> extends ObjectDatabase
 		}
 	}
 	
-	public synchronized boolean contains(long key) {
+	public synchronized boolean contains(V obj) {
 		synchronized (objects) {
-			return objects.containsKey(key);
+			return objects.contains(obj);
 		}
-	}
-	
-	public synchronized boolean contains(String key) {
-		return contains(hash(key));
 	}
 	
 	public synchronized boolean save() {
@@ -100,90 +83,65 @@ public class CachedObjectDatabase<V extends Serializable> extends ObjectDatabase
 			Log.e("CachedObjectDatabase", "Not saving '" + getFile() + "', file not loaded yet!");
 			return false;
 		}
-		ObjectOutputStream oos = null;
-		try {
-			oos = new ObjectOutputStream(new FileOutputStream(getFile()));
+		try (OutputPersistenceStream os = new OutputPersistenceStream(new FileOutputStream(getFile()))) {
 			synchronized (objects) {
-				for (Entry <Long, V> e : objects.entrySet()) {
-					oos.writeLong(e.getKey());
-					oos.writeObject(e.getValue());
-				}
+				for (V obj : objects)
+					os.write(obj, saver);
 			}
-			oos.close();
 		} catch (IOException e) {
 			Log.e("CachedObjectDatabase", "Error while saving file. IOException: " + e.getMessage());
-			e.printStackTrace();
+			Log.e("CachedObjectDatabase", e);
 			return false;
-		} finally {
-			if (oos != null) {
-				try {
-					oos.close();
-				} catch (Exception e) {
-					Log.e("CachedObjectDatabase", "Failed to close stream while saving! " + e.getMessage());
-					e.printStackTrace();
-				}
-			}
 		}
 		return true;
-	}
-	
-	public synchronized void clearCache() {
-		synchronized (objects) {
-			objects.clear();
-			loaded = false;
-		}
 	}
 	
 	public synchronized boolean load() {
 		if (!fileExists()) {
 			Log.e("CachedObjectDatabase", "load() - file '%s' does not exist!", getFile());
+			loaded = true;
 			return false;
 		}
-		ObjectInputStream ois = null;
-		try {
-			ois = new ObjectInputStream(new FileInputStream(getFile()));
+		try (InputPersistenceStream is = new InputPersistenceStream(new FileInputStream(getFile()))) {
 			synchronized (objects) {
-				while (ois.available() >= 8) {
-					long key = ois.readLong();
-					@SuppressWarnings("unchecked")
-					V val = (V) ois.readObject();
-					objects.put(key, val);
-				}
+				while (is.available() > 0)
+					objects.add(is.read(creator));
+				loaded = true;
 			}
-			loaded = true;
-		} catch (EOFException e) {
-			loaded = true;
-		} catch (IOException | ClassNotFoundException | ClassCastException e) {
-			Log.e("CachedObjectDatabase", "load() - unable to load with error: %s - %s", e.getClass().getSimpleName(), e.getMessage());
+			if (is.available() > 0) {
+				loaded = false;
+				clearObjects();
+				return false;
+			}
+		} catch (Exception e) {
+			Log.e("CachedObjectDatabase", "Error while loading file. %s: %s", e.getClass().getSimpleName(), e.getMessage());
+			Log.e("CachedObjectDatabase", e);
+			clearObjects();
 			return false;
-		} finally {
-			if (ois != null) {
-				try {
-					ois.close();
-				} catch (Exception e) {
-					Log.e("CachedObjectDatabase", "Failed to close stream when loading! " + e.getMessage());
-					Log.e("CachedObjectDatabase", e);
-				}
-			}
 		}
 		return true;
 	}
 	
+	public synchronized void clearObjects() {
+		synchronized (objects) {
+			objects.clear();
+		}
+	}
+	
 	public synchronized void traverse(Traverser<V> traverser) {
 		synchronized (objects) {
-			for (V obj : objects.values())
+			for (V obj : objects)
 				traverser.process(obj);
 		}
 	}
 	
-	private static final long hash(String string) {
-		long h = 1125899906842597L;
-		int len = string.length();
-		
-		for (int i = 0; i < len; i++) {
-			h = 31*h + string.charAt(i);
+	public synchronized void traverseInterruptable(InterruptableTraverser<V> traverser) {
+		synchronized (objects) {
+			for (V obj : objects) {
+				if (!traverser.process(obj))
+					return;
+			}
 		}
-		return h;
 	}
 	
 }

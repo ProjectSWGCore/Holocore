@@ -191,32 +191,32 @@ public final class FactionService extends Service {
 	}
 	
 	private void handleFlagChange(TangibleObject object) {
-//		Player objOwner = object.getOwner();
-//		for (SWGObject o : object.getObservers()) {
-//			if (!(o instanceof TangibleObject))
-//				continue;
-//			TangibleObject observer = (TangibleObject) o;
-//			Player obsOwner = observer.getOwner();
-//			int pvpBitmask = 0;
-//			
-//			// They CAN be enemies if they're not from the same faction and neither of them are neutral
-//			if (object.getPvpFaction() != observer.getPvpFaction() && observer.getPvpFaction() != PvpFaction.NEUTRAL) {
-//				if (object.getPvpStatus() == PvpStatus.SPECIALFORCES && observer.getPvpStatus() == PvpStatus.SPECIALFORCES) {
-//					pvpBitmask |= PvpFlag.AGGRESSIVE.getBitmask() | PvpFlag.ATTACKABLE.getBitmask();
-//				}
-//			}
-//			UpdatePvpStatusMessage objectPacket = createPvpStatusMessage(object, observer, object.getPvpFlags() | pvpBitmask);
-//			UpdatePvpStatusMessage targetPacket = createPvpStatusMessage(object, observer, observer.getPvpFlags() | pvpBitmask);
-//			if (objOwner != null)
-//				objOwner.sendPacket(objectPacket, targetPacket);
-//			if (obsOwner != null)
-//				obsOwner.sendPacket(objectPacket);
-//		}
+		Player objOwner = object.getOwner();
+		for (SWGObject o : object.getObservers()) {
+			if (!(o instanceof TangibleObject))
+				continue;
+			TangibleObject observer = (TangibleObject) o;
+			Player obsOwner = observer.getOwner();
+			int pvpBitmask = 0;
+			
+			// They CAN be enemies if they're not from the same faction and neither of them are neutral
+			if (object.getPvpFaction() != observer.getPvpFaction() && observer.getPvpFaction() != PvpFaction.NEUTRAL) {
+				if (object.getPvpStatus() == PvpStatus.SPECIALFORCES && observer.getPvpStatus() == PvpStatus.SPECIALFORCES) {
+					pvpBitmask |= PvpFlag.AGGRESSIVE.getBitmask() | PvpFlag.ATTACKABLE.getBitmask();
+				}
+			}
+			UpdatePvpStatusMessage objectPacket = createPvpStatusMessage(object, observer, object.getPvpFlags() | pvpBitmask);
+			UpdatePvpStatusMessage targetPacket = createPvpStatusMessage(object, observer, observer.getPvpFlags() | pvpBitmask);
+			if (objOwner != null)
+				objOwner.sendPacket(objectPacket, targetPacket);
+			if (obsOwner != null)
+				obsOwner.sendPacket(objectPacket);
+		}
 	}
 	
-//	private UpdatePvpStatusMessage createPvpStatusMessage(TangibleObject object, TangibleObject observer, int flags) {
-//		Set<PvpFlag> flagSet = PvpFlag.getFlags(object.getPvpFlags());
-//		return new UpdatePvpStatusMessage(object.getPvpFaction(), object.getObjectId(), flagSet.toArray(new PvpFlag[flagSet.size()]));
-//	}
+	private UpdatePvpStatusMessage createPvpStatusMessage(TangibleObject object, TangibleObject observer, int flags) {
+		Set<PvpFlag> flagSet = PvpFlag.getFlags(object.getPvpFlags());
+		return new UpdatePvpStatusMessage(object.getPvpFaction(), object.getObjectId(), flagSet.toArray(new PvpFlag[flagSet.size()]));
+	}
 	
 }

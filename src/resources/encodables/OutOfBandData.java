@@ -27,10 +27,12 @@
 
 package resources.encodables;
 
+import resources.persistable.Persistable;
+
 /**
  * @author Waverunner
  */
-public interface OutOfBandData extends Encodable{
+public interface OutOfBandData extends Encodable, Persistable {
 	OutOfBandPackage.Type getOobType();
 	int getOobPosition();
 }

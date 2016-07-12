@@ -27,19 +27,20 @@
  ***********************************************************************************/
 package resources.objects.manufacture;
 
+import java.util.Map.Entry;
+
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.collections.SWGMap;
 import resources.common.CRC;
 import resources.encodables.StringId;
 import resources.network.BaselineBuilder;
 import resources.network.NetBuffer;
+import resources.network.NetBufferStream;
 import resources.objects.intangible.IntangibleObject;
 import resources.player.Player;
 import resources.server_info.CrcDatabase;
 
 public class ManufactureSchematicObject extends IntangibleObject {
-	
-	private static final long serialVersionUID = 1L;
 	
 	private SWGMap<StringId, Float> attributes	= new SWGMap<>(3, 5);
 	private int itemsPerContainer				= 0;
@@ -156,6 +157,44 @@ public class ManufactureSchematicObject extends IntangibleObject {
 		}
 		crafting = buffer.getBoolean();
 		schematicChangedSignal = buffer.getByte();
+	}
+	
+	@Override
+	public void save(NetBufferStream stream) {
+		super.save(stream);
+		stream.addByte(0);
+		stream.addInt(itemsPerContainer);
+		stream.addFloat(manufactureTime);
+		stream.addArray(appearanceData);
+		stream.addArray(customAppearance);
+		stream.addAscii(draftSchematicTemplate);
+		stream.addBoolean(crafting);
+		stream.addByte(schematicChangedSignal);
+		synchronized (attributes) {
+			stream.addInt(attributes.size());
+			for (Entry<StringId, Float> e : attributes.entrySet()) {
+				e.getKey().save(stream);
+				stream.addFloat(e.getValue());
+			}
+		}
+	}
+	
+	@Override
+	public void read(NetBufferStream stream) {
+		super.read(stream);
+		stream.getByte();
+		itemsPerContainer = stream.getInt();
+		manufactureTime = stream.getFloat();
+		appearanceData = stream.getArray();
+		customAppearance = stream.getArray();
+		draftSchematicTemplate = stream.getAscii();
+		crafting = stream.getBoolean();
+		schematicChangedSignal = stream.getByte();
+		for (int i = 0; i < stream.getInt(); i++) {
+			StringId id = new StringId();
+			id.read(stream);
+			attributes.put(id, stream.getFloat());
+		}
 	}
 	
 }

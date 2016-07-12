@@ -129,8 +129,10 @@ public class IntentManager {
 		synchronized (intentRegistrations) {
 			receivers = intentRegistrations.get(i.getType());
 		}
-		if (receivers == null)
+		if (receivers == null) {
+			i.markAsComplete();
 			return;
+		}
 		for (IntentReceiver r : receivers) {
 			broadcast(r, i);
 		}
