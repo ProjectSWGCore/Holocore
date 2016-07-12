@@ -219,7 +219,7 @@ dat_imp_prison_shed4	DATHOMIR	2665668	military_base_shed_imperial_style_01.iff	D
 dat_imp_prison_shed5	DATHOMIR	2665675	military_base_shed_imperial_style_01.iff	Dathomir - Imp Prison / Shed 5	6	-6352	120	959
 dat_imp_weapons_research_facility	DATHOMIR	-397724143535268219	bunker_imperial_weapons_research_facility_01.iff	Dathomir - Imp Weapons Research Facility	22	-5936	5	1807
 dat_kwi_temple	DATHOMIR	-408983141677901100	wod_kwi_temple.iff	Dathomir - Kwi Temple	2	5230	125	220
-dat_ns_cave	DATHOMIR	3695701	dathomir_nsister_cave.iff	Dathomir - NS Cave	11	-1175	117	6245
+dat_ns_cave	DATHOMIR	3695701	dathomir_nsister_cave.iff	Dathomir - Nightspider Cult Cave	11	-1175	117	6245
 dat_ns_forced_labor_camp_slave_mine	DATHOMIR	8575574	nightsister_slave_mine_sd_cave.iff	Dathomir - NS Forced Labor Camp / Slave mine	11	2528	109	-1589
 dat_ns_rancor_cave	DATHOMIR	4115618	dathomir_nsister_rancor_cave.iff	Dathomir - NS Rancor Cave	11	-4009	115	-12
 dat_ns_stronghold	DATHOMIR	189372	night_sister_stronghold.iff	Dathomir - NS Stronghold	12	-4086	131	-136
@@ -309,7 +309,7 @@ end_bf_data_imp	ENDOR	-422493940937091268	military_imperial_field_hospital.iff	E
 end_bf_data_reb	ENDOR	-422493940599543108	military_rebel_field_hospital.iff	Endor - BF Data Runner / Reb	9	-6553	7	-7361
 end_dwb	ENDOR	5996314	bunker_allum_mine.iff	Endor - DWB	65	-4662	12	4326
 end_itp_merc_bunker	ENDOR	-436004740165838874	itp_emperor_merc_bunker.iff	Endor - ITP / Merc Bunker	49	3650	301	7478
-end_jina_cave	ENDOR	6015488	endor_jinda_cave.iff	Endor - Jinda Cave	29	-1713	29	53
+end_jinda_cave	ENDOR	6015488	endor_jinda_cave.iff	Endor - Jinda Cave	29	-1713	29	53
 end_korga_cave	ENDOR	733359	endor_korga_cave.iff	Endor - Korga Cave	11	2244	38	3553
 end_marauder_orphans_cave	ENDOR	733396	endor_marauder_orphans_cave.iff	Endor - Marauder Orphans Cave	11	-6926	20	689
 end_mummer_bunker	ENDOR	-426716066483093325	corellia_chirq_elite_council_01.iff	Endor - Mummer Bunker	22	-5212	294	6971
