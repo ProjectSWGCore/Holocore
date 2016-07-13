@@ -126,11 +126,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			}
 		}
 		object.parent = this;
-		synchronized (object.objectsAware) {
-			for (SWGObject obj : new ArrayList<>(object.objectsAware)) {
-				object.awarenessOutOfRange(obj, false);
-			}
-		}
 	}
 	
 	/**
@@ -173,10 +168,16 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			if (arrangement != -1)
 				container.handleSlotReplacement(parent, this, arrangement);
 			container.addObject(this);
-		} else
-			recreateWorldAwareness(parent);
+			if (parent == null)
+				updateObjectAwareness(new HashSet<>(), false);
+		} else if (parent != null) {
+			updateObjectAwareness(parent.getObjectsAware(), false);
+		}
 		
-		sendUpdatedContainment(oldObservers, getObserversAndParent());
+		oldObservers.retainAll(getObserversAndParent());
+		long newId = (container != null) ? container.getObjectId() : 0;
+		for (SWGObject update : oldObservers)
+			update.getOwner().sendPacket(new UpdateContainmentMessage(objectId, newId, slotArrangement));
 		return ContainerResult.SUCCESS;
 	}
 
@@ -214,20 +215,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			}
 		}
 		return ContainerResult.SUCCESS;
-	}
-	
-	private Set<SWGObject> getObserversAndParent() {
-		Set<SWGObject> observers = getObservers();
-		Player prevOwner = (getParent() != null) ? getParent().getOwner() : null;
-		if (prevOwner != null)
-			observers.add(prevOwner.getCreatureObject());
-		return observers;
-	}
-	
-	private void recreateWorldAwareness(SWGObject oldParent) {
-		for (SWGObject obj : oldParent.getObjectsAware()) {
-			awarenessInRange(obj, false);
-		}
 	}
 	
 	protected void handleSlotReplacement(SWGObject oldParent, SWGObject obj, int arrangement) {
@@ -596,7 +583,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		target.sendPacket(destroy);
 	}
 	
-	public void createObject(Player target) {
+	private void createObject(Player target) {
 		createObject(target, false);
 	}
 	
@@ -616,15 +603,13 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			target.sendPacket(new SceneEndBaselines(getObjectId()));
 	}
 	
-	public void destroyObject(Player target) {
-		sendSceneDestroyObject(target);
+	private void destroyObject(Player target) {
+		if (!isSnapshot())
+			sendSceneDestroyObject(target);
 	}
 	
 	public void clearAware() {
-		Set<SWGObject> objects = getObjectsAware();
-		for (SWGObject o : objects) {
-			awarenessOutOfRange(o, true);
-		}
+		updateObjectAwareness(new HashSet<>());
 	}
 	
 	public void resetAwareness() {
@@ -687,6 +672,14 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		}
 	}
 	
+	public Set<SWGObject> getObserversAndParent() {
+		Set<SWGObject> observers = getObservers();
+		Player parentOwner = (getParent() != null) ? getParent().getOwner() : null;
+		if (parentOwner != null)
+			observers.add(parentOwner.getCreatureObject());
+		return observers;
+	}
+	
 	public Set<SWGObject> getObservers() {
 		Player owner = getOwner();
 		SWGObject parent = getParent();
@@ -697,30 +690,50 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		return parent.getObservers(owner, this, true);
 	}
 	
-	private Set<SWGObject> getObservers(Player owner, SWGObject original, boolean initial) {
-		Set<SWGObject> nearby;
-		synchronized (containedObjects) {
-			nearby = new HashSet<>(containedObjects);
-		}
-		if (initial) {
-			nearby.addAll(getObjectsAware());
-		}
+	private Set<SWGObject> getObservers(boolean useAware) {
+		return getObservers(getOwner(), this, useAware);
+	}
+	
+	/**
+	 * Gets all observers within the tree. Called from the head node of the tree to search. In
+	 * addition to the contained objects, it also searches aware objects if useAware is true
+	 * 
+	 * @param owner the original owner that should be ignored from the search
+	 * @param original the original object that should be ignored from the search
+	 * @param useAware TRUE if aware objects should be searched
+	 * @return a set with unique SWGObjects that have unique player owners
+	 */
+	private Set<SWGObject> getObservers(Player owner, SWGObject original, boolean useAware) {
 		Set<SWGObject> observers = new HashSet<>();
+		synchronized (containedObjects) {
+			addObserversToSet(containedObjects, observers, owner, original);
+		}
+		if (useAware) {
+			addObserversToSet(getObjectsAware(), observers, owner, original);
+		}
+		return observers;
+	}
+	
+	private void addObserversToSet(Collection<SWGObject> nearby, Set<SWGObject> observers, Player owner, SWGObject original) {
 		for (SWGObject aware : nearby) {
 			if (!aware.isVisible(original))
 				continue;
-			if (aware instanceof CreatureObject) {
-				Player awareOwner = aware.getOwner();
-				if (awareOwner == null || awareOwner.equals(owner))
-					continue;
-				if (awareOwner.getPlayerState() != PlayerState.ZONED_IN)
-					continue;
-				if (((CreatureObject) aware).isLoggedInPlayer())
-					observers.add(aware);
-			} else
+			if (checkAwareIsObserver(aware, owner, original))
+				observers.add(aware);
+			else
 				observers.addAll(aware.getObservers(owner, original, false));
 		}
-		return observers;
+	}
+	
+	private boolean checkAwareIsObserver(SWGObject aware, Player owner, SWGObject original) {
+		if (!(aware instanceof CreatureObject))
+			return false;
+		Player awareOwner = aware.getOwner();
+		if (awareOwner == null || awareOwner.equals(owner))
+			return false;
+		if (awareOwner.getPlayerState() != PlayerState.ZONED_IN)
+			return false;
+		return ((CreatureObject) aware).isLoggedInPlayer();
 	}
 	
 	public void sendObserversAndSelf(Packet ... packets) {
@@ -750,71 +763,60 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			target.sendPacket(createBaseline9(target));
 		}
 	}
-
-	private void sendUpdatedContainment(Set<SWGObject> oldObservers, Set<SWGObject> newObservers) {
-		long newId = (parent == null) ? 0 : parent.getObjectId();
-		for (SWGObject swgObject : oldObservers) {
-			if (newObservers.contains(swgObject))
-				swgObject.getOwner().sendPacket(new UpdateContainmentMessage(objectId, newId, slotArrangement));
-			else
-				destroyObject(swgObject.getOwner());
-		}
-		
-		for (SWGObject swgObject : newObservers) {
-			if (!oldObservers.contains(swgObject))
-				createObject(swgObject.getOwner());
-		}
-	}
 	
 	public void updateObjectAwareness(Set <SWGObject> withinRange) {
-		Set <SWGObject> outOfRange;
+		updateObjectAwareness(withinRange, true);
+	}
+	
+	public void updateObjectAwareness(Set <SWGObject> withinRange, boolean sendUpdate) {
+		Set<SWGObject> oldAware;
 		synchronized (objectsAware) {
-			outOfRange = new HashSet<>(objectsAware);
+			oldAware = new HashSet<>(objectsAware);
 		}
-		for (SWGObject o : outOfRange) {
-			if (!withinRange.contains(o)) {
-				awarenessOutOfRange(o, true);
-			}
+		for (SWGObject obj : withinRange) {
+			if (!oldAware.contains(obj))
+				obj.awarenessCreate(this, sendUpdate);
 		}
-		for (SWGObject o : withinRange) {
-			if (!outOfRange.contains(o)) {
-				awarenessInRange(o, true);
-			}
+		for (SWGObject obj : oldAware) {
+			if (!withinRange.contains(obj))
+				obj.awarenessDestroy(this, sendUpdate);
 		}
 	}
 	
-	private void awarenessOutOfRange(SWGObject o, boolean sendDestroy) {
-		internalAwarenessOutOfRange(o, sendDestroy);
-		o.internalAwarenessOutOfRange(this, sendDestroy);
+	private void awarenessCreate(SWGObject obj, boolean sendUpdate) {
+		internalAwarenessCreate(obj, sendUpdate);
+		obj.internalAwarenessCreate(this, sendUpdate);
 	}
 	
-	private void awarenessInRange(SWGObject o, boolean sendCreate) {
-		internalAwarenessInRange(o, sendCreate);
-		o.internalAwarenessInRange(this, sendCreate);
+	private void awarenessDestroy(SWGObject obj, boolean sendUpdate) {
+		internalAwarenessDestroy(obj, sendUpdate);
+		obj.internalAwarenessDestroy(this, sendUpdate);
 	}
 	
-	private void internalAwarenessOutOfRange(SWGObject o, boolean sendDestroy) {
-		boolean success = true;
+	private void internalAwarenessCreate(SWGObject obj, boolean sendUpdate) {
 		synchronized (objectsAware) {
-			success = objectsAware.remove(o);
+			if (!objectsAware.add(obj))
+				return;
 		}
-		if (success && sendDestroy) {
-			Player owner = getOwner();
-			if (owner != null)
-				o.destroyObject(owner);
-		}
+		if (!sendUpdate)
+			return;
+		if (getOwner() != null)
+			obj.createObject(getOwner());
+		for (SWGObject create : getObservers(false))
+			obj.createObject(create.getOwner());
 	}
 	
-	private void internalAwarenessInRange(SWGObject o, boolean sendCreate) {
-		boolean success = true;
+	private void internalAwarenessDestroy(SWGObject obj, boolean sendUpdate) {
 		synchronized (objectsAware) {
-			success = objectsAware.add(o);
+			if (!objectsAware.remove(obj))
+				return;
 		}
-		if (success && sendCreate) {
-			Player owner = getOwner();
-			if (owner != null)
-				o.createObject(owner);
-		}
+		if (!sendUpdate)
+			return;
+		if (getOwner() != null)
+			obj.destroyObject(getOwner());
+		for (SWGObject destroy : getObservers(false))
+			obj.destroyObject(destroy.getOwner());
 	}
 	
 	public void sendDataTransforms(DataTransform dt) {
