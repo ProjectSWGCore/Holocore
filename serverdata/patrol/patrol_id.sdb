@@ -1,3 +1,3 @@
-patrol_id	waypoint_id	comment
+patrol_id	waypoints	comment
 INTEGER PRIMARY KEY	INTEGER	TEXT
 1	1;2;3;4;5;0	Test patrol route
