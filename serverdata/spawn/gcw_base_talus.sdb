@@ -1,0 +1,80 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	creature_name	creature_id	spawn_category	spawn_area	amount	behaviour	mood	equipment_id	patrol_id	quest_id	loot_id	max_spawn_time	min_spawn_time	float_radius
+INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGER NOT NULL	REAL	REAL	REAL	REAL	INTEGER	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL	INTEGER NOT NULL	INTEGER
+3500003	TALUS	tal_world	GCW_IMPERIAL	0	-4945.71	66.00	-3129.45	90	1	Imperial Banner	object/tangible/gcw/flip_banner_onpole_imperial.iff	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500004	TALUS	tal_world	GCW_IMPERIAL	0	-4945.71	66.00	-3118.90	90	1	Imperial Banner	object/tangible/gcw/flip_banner_onpole_imperial.iff	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500005	TALUS	tal_world	GCW_IMPERIAL	0	-4914.48	66.00	-3077.85	45	1	Imperial Banner	object/tangible/gcw/flip_banner_onpole_imperial.iff	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500006	TALUS	tal_world	GCW_IMPERIAL	0	-4912.88	66.00	-3117.80	0	1	Imperial Banner	object/tangible/gcw/flip_banner_onpole_imperial.iff	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500007	TALUS	tal_world	GCW_IMPERIAL	0	-4907.66	66.00	-3117.80	0	1	Imperial Banner	object/tangible/gcw/flip_banner_onpole_imperial.iff	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500008	TALUS	tal_world	GCW_IMPERIAL	0	-4932.47	66.00	-3143.47	-45	1	Imperial Banner	object/tangible/gcw/flip_banner_onpole_imperial.iff	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500009	TALUS	tal_world	GCW_IMPERIAL	0	-4951.29	66.00	-3082.89	45	1	Imperial Banner	object/tangible/gcw/flip_banner_onpole_imperial.iff	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500010	TALUS	tal_gcw_base_bunker	GCW_IMPERIAL	5	8.23	-6.74	-4.38	90	1	Imperial Banner	object/tangible/gcw/flip_banner_onpole_imperial.iff	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500011	TALUS	tal_gcw_base_bunker	GCW_IMPERIAL	7	0.25	-13.75	-7.18	90	1	Imperial Banner	object/tangible/gcw/flip_banner_onpole_imperial.iff	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500012	TALUS	tal_gcw_base_bunker	GCW_IMPERIAL	7	0.25	-13.75	-0.60	90	1	Imperial Banner	object/tangible/gcw/flip_banner_onpole_imperial.iff	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500013	TALUS	tal_gcw_base_bunker	GCW_IMPERIAL	8	-5.84	-13.75	14.89		1	Imperial Banner	object/tangible/gcw/flip_banner_onpole_imperial.iff	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500014	TALUS	tal_gcw_base_bunker	GCW_IMPERIAL	8	8.34	-13.75	14.89		1	Imperial Banner	object/tangible/gcw/flip_banner_onpole_imperial.iff	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500015	TALUS	tal_gcw_base_bunker	GCW_IMPERIAL	9	15.48	-13.75	16.15		1	Imperial Banner	object/tangible/gcw/flip_banner_onpole_imperial.iff	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500016	TALUS	tal_gcw_base_bunker	GCW_IMPERIAL	10	19.96	-11.50	-22.28		1	Imperial Banner	object/tangible/gcw/flip_banner_onpole_imperial.iff	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500017	TALUS	tal_gcw_base_bunker	GCW_IMPERIAL	10	11.06	-11.50	-22.28		1	Imperial Banner	object/tangible/gcw/flip_banner_onpole_imperial.iff	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500018	TALUS	tal_gcw_base_bunker	GCW_IMPERIAL	10	18.30	-13.80	-13.70	-18	1	an Imperial stormtrooper	11955	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500019	TALUS	tal_gcw_base_bunker	GCW_IMPERIAL	9	16.30	-13.80	4.50	-22	1	an Imperial stormtrooper	11955	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500020	TALUS	tal_gcw_base_bunker	GCW_IMPERIAL	9	16.30	-13.80	13.30	-111	1	an Imperial stormtrooper	11955	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500021	TALUS	tal_gcw_base_bunker	GCW_IMPERIAL	8	4.70	-13.80	9.70	-180	1	an Imperial stormtrooper	11955	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500022	TALUS	tal_gcw_base_bunker	GCW_IMPERIAL	8	-1.20	-13.80	9.70	-180	1	an Imperial stormtrooper	11955	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500023	TALUS	tal_gcw_base_bunker	GCW_IMPERIAL	7	-5.40	-13.70	1.90	129	1	an Imperial stormtrooper	11955	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500024	TALUS	tal_gcw_base_bunker	GCW_IMPERIAL	7	-3.50	13.70	-8.60	-180	1	an Imperial stormtrooper	11955	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500025	TALUS	tal_gcw_base_bunker	GCW_IMPERIAL	5	2.50	-6.80	-9.20	0	1	an Imperial stormtrooper	11955	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500026	TALUS	tal_world	GCW_IMPERIAL	0	-4945.30	66.00	-3127.30	90	1	an Imperial stormtrooper	11955	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500027	TALUS	tal_world	GCW_IMPERIAL	0	-4936.50	66.00	-3115.40	128	1	an Imperial stormtrooper	11955	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500028	TALUS	tal_world	GCW_IMPERIAL	0	-4930.80	66.00	-3112.00	128	1	an Imperial stormtrooper	11955	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500029	TALUS	tal_world	GCW_IMPERIAL	0	-4912.30	70.00	-3041.40	-133	1	an Imperial stormtrooper	11955	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500030	TALUS	tal_world	GCW_IMPERIAL	0	-4955.50	66.00	-3079.00	35	1	an Imperial stormtrooper	11955	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500031	TALUS	tal_world	GCW_IMPERIAL	0	-4929.40	66.00	-3077.60	163	1	an Imperial stormtrooper	11955	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500032	TALUS	tal_world	GCW_IMPERIAL	0	-4914.60	66.00	-3117.70	-11	1	an Imperial stormtrooper	11955	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500033	TALUS	tal_world	GCW_IMPERIAL	0	-4926.80	66.00	-3140.10	-32	1	an Imperial stormtrooper	11955	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500034	TALUS	tal_world	GCW_IMPERIAL	0	-4934.50	66.00	-3131.20	70	1	an Imperial stormtrooper	11955	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500035	TALUS	tal_world	GCW_IMPERIAL	0	-4919.70	66.00	-3099.70	-18	1	an Imperial stormtrooper	11955	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500036	TALUS	tal_world	GCW_IMPERIAL	0	-4970.90	66.00	-3090.50	-75	1	an Imperial stormtrooper	11955	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500037	TALUS	tal_world	GCW_IMPERIAL	0	-4970.20	66.00	-3135.50	-35	1	an Imperial stormtrooper	11955	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500038	TALUS	tal_world	GCW_IMPERIAL	0	-4957.30	66.00	-3166.10	54	1	an Imperial stormtrooper	11955	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500039	TALUS	tal_gcw_base_bunker	GCW_IMPERIAL	10	12.10	-13.80	-15.30	15	1	Imperial Logistics Officer	12136	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500040	TALUS	tal_world	GCW_REBEL	0	-4945.71	66.00	-3129.45	90	1	Rebel Banner	object/tangible/gcw/flip_banner_onpole_rebel.iff	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500041	TALUS	tal_world	GCW_REBEL	0	-4945.71	66.00	-3118.90	90	1	Rebel Banner	object/tangible/gcw/flip_banner_onpole_rebel.iff	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500042	TALUS	tal_world	GCW_REBEL	0	-4914.48	66.00	-3077.85	45	1	Rebel Banner	object/tangible/gcw/flip_banner_onpole_rebel.iff	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500043	TALUS	tal_world	GCW_REBEL	0	-4912.88	66.00	-3117.80	0	1	Rebel Banner	object/tangible/gcw/flip_banner_onpole_rebel.iff	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500044	TALUS	tal_world	GCW_REBEL	0	-4907.66	66.00	-3117.80	0	1	Rebel Banner	object/tangible/gcw/flip_banner_onpole_rebel.iff	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500045	TALUS	tal_world	GCW_REBEL	0	-4932.47	66.00	-3143.47	-45	1	Rebel Banner	object/tangible/gcw/flip_banner_onpole_rebel.iff	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500046	TALUS	tal_world	GCW_REBEL	0	-4951.29	66.00	-3082.89	45	1	Rebel Banner	object/tangible/gcw/flip_banner_onpole_rebel.iff	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500047	TALUS	tal_gcw_base_bunker	GCW_REBEL	5	8.23	-6.74	-4.38	90	1	Rebel Banner	object/tangible/gcw/flip_banner_onpole_rebel.iff	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500048	TALUS	tal_gcw_base_bunker	GCW_REBEL	7	0.25	-13.75	-7.18	90	1	Rebel Banner	object/tangible/gcw/flip_banner_onpole_rebel.iff	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500049	TALUS	tal_gcw_base_bunker	GCW_REBEL	7	0.25	-13.75	-0.60	90	1	Rebel Banner	object/tangible/gcw/flip_banner_onpole_rebel.iff	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500050	TALUS	tal_gcw_base_bunker	GCW_REBEL	8	-5.84	-13.75	14.89		1	Rebel Banner	object/tangible/gcw/flip_banner_onpole_rebel.iff	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500051	TALUS	tal_gcw_base_bunker	GCW_REBEL	8	8.34	-13.75	14.89		1	Rebel Banner	object/tangible/gcw/flip_banner_onpole_rebel.iff	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500052	TALUS	tal_gcw_base_bunker	GCW_REBEL	9	15.48	-13.75	16.15		1	Rebel Banner	object/tangible/gcw/flip_banner_onpole_rebel.iff	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500053	TALUS	tal_gcw_base_bunker	GCW_REBEL	10	19.96	-11.50	-22.28		1	Rebel Banner	object/tangible/gcw/flip_banner_onpole_rebel.iff	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500054	TALUS	tal_gcw_base_bunker	GCW_REBEL	10	11.06	-11.50	-22.28		1	Rebel Banner	object/tangible/gcw/flip_banner_onpole_rebel.iff	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500055	TALUS	tal_gcw_base_bunker	GCW_REBEL	10	18.30	-13.80	-13.70	-18	1	a Rebel commando	11894	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500056	TALUS	tal_gcw_base_bunker	GCW_REBEL	9	16.30	-13.80	4.50	-22	1	a Rebel commando	11894	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500057	TALUS	tal_gcw_base_bunker	GCW_REBEL	9	16.30	-13.80	13.30	-111	1	a Rebel commando	11894	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500058	TALUS	tal_gcw_base_bunker	GCW_REBEL	8	4.70	-13.80	9.70	-180	1	a Rebel commando	11894	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500059	TALUS	tal_gcw_base_bunker	GCW_REBEL	8	-1.20	-13.80	9.70	-180	1	a Rebel commando	11894	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500060	TALUS	tal_gcw_base_bunker	GCW_REBEL	7	-5.40	-13.70	1.90	129	1	a Rebel commando	11894	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500061	TALUS	tal_gcw_base_bunker	GCW_REBEL	7	-3.50	13.70	-8.60	-180	1	a Rebel commando	11894	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500062	TALUS	tal_gcw_base_bunker	GCW_REBEL	5	2.50	-6.80	-9.20	0	1	a Rebel commando	11894	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500063	TALUS	tal_world	GCW_REBEL	0	-4945.30	66.00	-3127.30	90	1	a Rebel commando	11894	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500064	TALUS	tal_world	GCW_REBEL	0	-4936.50	66.00	-3115.40	128	1	a Rebel commando	11894	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500065	TALUS	tal_world	GCW_REBEL	0	-4930.80	66.00	-3112.00	128	1	a Rebel commando	11894	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500066	TALUS	tal_world	GCW_REBEL	0	-4912.30	70.00	-3041.40	-133	1	a Rebel commando	11894	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500067	TALUS	tal_world	GCW_REBEL	0	-4955.50	66.00	-3079.00	35	1	a Rebel commando	11894	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500068	TALUS	tal_world	GCW_REBEL	0	-4929.40	66.00	-3077.60	163	1	a Rebel commando	11894	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500069	TALUS	tal_world	GCW_REBEL	0	-4914.60	66.00	-3117.70	-11	1	a Rebel commando	11894	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500070	TALUS	tal_world	GCW_REBEL	0	-4926.80	66.00	-3140.10	-32	1	a Rebel commando	11894	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500071	TALUS	tal_world	GCW_REBEL	0	-4934.50	66.00	-3131.20	70	1	a Rebel commando	11894	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500072	TALUS	tal_world	GCW_REBEL	0	-4919.70	66.00	-3099.70	-18	1	a Rebel commando	11894	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500073	TALUS	tal_world	GCW_REBEL	0	-4970.90	66.00	-3090.50	-75	1	a Rebel commando	11894	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500074	TALUS	tal_world	GCW_REBEL	0	-4970.20	66.00	-3135.50	-35	1	a Rebel commando	11894	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500075	TALUS	tal_world	GCW_REBEL	0	-4957.30	66.00	-3166.10	54	1	a Rebel commando	11894	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500076	TALUS	tal_gcw_base_bunker	GCW_REBEL	10	12.10	-13.80	-15.30	15	1	Rebel Logistics Officer	12139	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500077	CORELLIA	cor_world	AREA	0	-4948.06	66.00	-3149.07	-92	1	Control Terminal	object/tangible/gcw/static_base/control_terminal.iff	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500078	CORELLIA	cor_world	AREA	0	-4957.30	66.00	-3104.74	-90	1	Control Terminal	object/tangible/gcw/static_base/control_terminal.iff	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500079	CORELLIA	cor_world	AREA	0	-4905.68	66.00	-3106.47	-90	1	Control Terminal	object/tangible/gcw/static_base/control_terminal.iff	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500080	CORELLIA	tal_gcw_base_bunker	AREA	10	15.33	-11.50	-22.02	0	1	Control Terminal	object/tangible/gcw/static_base/control_terminal.iff	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
