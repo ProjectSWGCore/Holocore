@@ -151,7 +151,6 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 	private void changeLeader(GroupMember member) {
 		if (groupMembers.size() > 0) {
 			synchronized (groupMembers) {
-				//GroupMember previous = groupMembers.set(0, member);
 				// TODO: need to account for group member order of joining
 				Collections.swap(groupMembers, 0, groupMembers.indexOf(member));
 			}
