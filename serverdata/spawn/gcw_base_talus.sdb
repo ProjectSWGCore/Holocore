@@ -74,3 +74,7 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 3500074	TALUS	tal_world	GCW_REBEL	0	-4970.20	66.00	-3135.50	-35	1	a Rebel commando	11894	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
 3500075	TALUS	tal_world	GCW_REBEL	0	-4957.30	66.00	-3166.10	54	1	a Rebel commando	11894	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
 3500076	TALUS	tal_gcw_base_bunker	GCW_REBEL	10	12.10	-13.80	-15.30	15	1	Rebel Logistics Officer	12139	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500077	CORELLIA	cor_world	AREA	0	-4948.06	66.00	-3149.07	-92	1	Control Terminal	object/tangible/gcw/static_base/control_terminal.iff	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500078	CORELLIA	cor_world	AREA	0	-4957.30	66.00	-3104.74	-90	1	Control Terminal	object/tangible/gcw/static_base/control_terminal.iff	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500079	CORELLIA	cor_world	AREA	0	-4905.68	66.00	-3106.47	-90	1	Control Terminal	object/tangible/gcw/static_base/control_terminal.iff	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0
+3500080	CORELLIA	tal_gcw_base_bunker	AREA	10	15.33	-11.50	-22.02	0	1	Control Terminal	object/tangible/gcw/static_base/control_terminal.iff	GCW Base	Talus	1	STOP	idle	0	0	0	0	360	300	0

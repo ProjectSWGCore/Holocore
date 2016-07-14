@@ -72,3 +72,7 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 3300072	CORELLIA	cor_world	GCW_REBEL	0	4782.00	95.00	-5246.20	0	1	a Rebel commando	11894	GCW Base	Corellia	1	STOP	idle	0	0	0	0	360	300	0
 3300073	CORELLIA	cor_world	GCW_REBEL	0	4782.00	95.00	-5229.70	180	1	a Rebel commando	11894	GCW Base	Corellia	1	STOP	idle	0	0	0	0	360	300	0
 3300074	CORELLIA	cor_gcw_base_warehouse	GCW_REBEL	9	-5.20	-13.80	-12.90	17	1	Rebel Logistics Officer	12137	GCW Base	Corellia	1	STOP	idle	0	0	0	0	360	300	0
+3300075	CORELLIA	cor_world	AREA	0	4801.50	95.00	-5207.00	-45	1	Control Terminal	object/tangible/gcw/static_base/control_terminal.iff	GCW Base	Corellia	1	STOP	idle	0	0	0	0	360	300	0
+3300076	CORELLIA	cor_world	AREA	0	4816.02	95.00	-5231.13	90	1	Control Terminal	object/tangible/gcw/static_base/control_terminal.iff	GCW Base	Corellia	1	STOP	idle	0	0	0	0	360	300	0
+3300077	CORELLIA	cor_world	AREA	0	4736.00	95.00	-5259.90	55	1	Control Terminal	object/tangible/gcw/static_base/control_terminal.iff	GCW Base	Corellia	1	STOP	idle	0	0	0	0	360	300	0
+3300078	CORELLIA	cor_gcw_base_warehouse	AREA	9	-2.40	-13.80	-18.00	0	1	Control Terminal	object/tangible/gcw/static_base/control_terminal.iff	GCW Base	Corellia	1	STOP	idle	0	0	0	0	360	300	0
