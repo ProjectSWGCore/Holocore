@@ -1,0 +1,96 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	creature_name	creature_id	spawn_category	spawn_area	amount	behaviour	mood	equipment_id	patrol_id	quest_id	loot_id	max_spawn_time	min_spawn_time	float_radius
+INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGER NOT NULL	REAL	REAL	REAL	REAL	INTEGER	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL	INTEGER NOT NULL	INTEGER
+3400003	NABOO	nab_world	GCW_IMPERIAL	0	1000.50	298.00	-1484.08	0	1	Imperial Banner	object/tangible/gcw/flip_banner_onpole_imperial.iff	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400004	NABOO	nab_world	GCW_IMPERIAL	0	1007.04	298.00	-1484.08	0	1	Imperial Banner	object/tangible/gcw/flip_banner_onpole_imperial.iff	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400005	NABOO	nab_world	GCW_IMPERIAL	0	1008.62	298.00	-1497.34	45	1	Imperial Banner	object/tangible/gcw/flip_banner_onpole_imperial.iff	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400006	NABOO	nab_world	GCW_IMPERIAL	0	994.71	298.00	-1505.54	90	1	Imperial Banner	object/tangible/gcw/flip_banner_onpole_imperial.iff	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400007	NABOO	nab_world	GCW_IMPERIAL	0	994.71	298.00	-1512.19	90	1	Imperial Banner	object/tangible/gcw/flip_banner_onpole_imperial.iff	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400008	NABOO	nab_world	GCW_IMPERIAL	0	964.64	298.00	-1492.90	90	1	Imperial Banner	object/tangible/gcw/flip_banner_onpole_imperial.iff	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400009	NABOO	nab_world	GCW_IMPERIAL	0	956.14	298.00	-1519.80	0	1	Imperial Banner	object/tangible/gcw/flip_banner_onpole_imperial.iff	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400010	NABOO	nab_gcw_base	GCW_IMPERIAL	6	14.43	-12.00	36.67	0	1	Imperial Banner	object/tangible/gcw/flip_banner_onpole_imperial.iff	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400011	NABOO	nab_gcw_base	GCW_IMPERIAL	9	58.37	-12.00	61.63	90	1	Imperial Banner	object/tangible/gcw/flip_banner_onpole_imperial.iff	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400012	NABOO	nab_gcw_base	GCW_IMPERIAL	9	58.37	-12.00	56.00	90	1	Imperial Banner	object/tangible/gcw/flip_banner_onpole_imperial.iff	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400013	NABOO	nab_gcw_base	GCW_IMPERIAL	10	3.55	-12.00	51.21	0	1	Imperial Banner	object/tangible/gcw/flip_banner_onpole_imperial.iff	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400014	NABOO	nab_gcw_base	GCW_IMPERIAL	14	25.23	-12.00	99.01	90	1	Imperial Banner	object/tangible/gcw/flip_banner_onpole_imperial.iff	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400015	NABOO	nab_gcw_base	GCW_IMPERIAL	16	-18.25	-12.00	98.93	90	1	Imperial Banner	object/tangible/gcw/flip_banner_onpole_imperial.iff	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400016	NABOO	nab_gcw_base	GCW_IMPERIAL	19	47.51	-20.00	103.37	0	1	Imperial Banner	object/tangible/gcw/flip_banner_onpole_imperial.iff	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400017	NABOO	nab_gcw_base	GCW_IMPERIAL	21	55.13	-20.00	142.97	90	1	Imperial Banner	object/tangible/gcw/flip_banner_onpole_imperial.iff	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400018	NABOO	nab_gcw_base	GCW_IMPERIAL	21	39.92	-20.00	142.97	90	1	Imperial Banner	object/tangible/gcw/flip_banner_onpole_imperial.iff	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400019	NABOO	nab_gcw_base	GCW_IMPERIAL	23	83.60	-20.00	151.10	-90	1	an Imperial stormtrooper	11955	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400020	NABOO	nab_gcw_base	GCW_IMPERIAL	24	102.90	-20.00	154.10	-104	1	an Imperial stormtrooper	11955	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400021	NABOO	nab_gcw_base	GCW_IMPERIAL	23	83.30	-20.00	130.90	0	1	an Imperial stormtrooper	11955	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400022	NABOO	nab_gcw_base	GCW_IMPERIAL	28	64.40	-20.00	130.80	90	1	an Imperial stormtrooper	11955	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400023	NABOO	nab_gcw_base	GCW_IMPERIAL	25	101.60	-20.00	127.00	-68	1	an Imperial stormtrooper	11955	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400024	NABOO	nab_gcw_base	GCW_IMPERIAL	23	78.50	-20.00	111.00	90	1	an Imperial stormtrooper	11955	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400025	NABOO	nab_gcw_base	GCW_IMPERIAL	26	101.50	-20.00	116.00	-112	1	an Imperial stormtrooper	11955	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400026	NABOO	nab_gcw_base	GCW_IMPERIAL	21	51.60	-20.00	141.30	180	1	an Imperial stormtrooper	11955	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400027	NABOO	nab_gcw_base	GCW_IMPERIAL	21	42.60	-20.00	141.30	180	1	an Imperial stormtrooper	11955	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400028	NABOO	nab_gcw_base	GCW_IMPERIAL	19	46.80	-20.00	106.40	-56	1	an Imperial stormtrooper	11955	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400029	NABOO	nab_gcw_base	GCW_IMPERIAL	16	-10.60	-12.00	96.20	71	1	an Imperial stormtrooper	11955	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400030	NABOO	nab_gcw_base	GCW_IMPERIAL	16	-10.30	-12.00	102.10	107	1	an Imperial stormtrooper	11955	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400031	NABOO	nab_gcw_base	GCW_IMPERIAL	14	17.50	-12.00	94.90	-66	1	an Imperial stormtrooper	11955	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400032	NABOO	nab_gcw_base	GCW_IMPERIAL	15	7.80	-12.00	115.30	-152	1	an Imperial stormtrooper	11955	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400033	NABOO	nab_gcw_base	GCW_IMPERIAL	15	-0.10	-12.00	115.00	158	1	an Imperial stormtrooper	11955	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400034	NABOO	nab_gcw_base	GCW_IMPERIAL	10	-3.70	-12.00	59.20	90	1	an Imperial stormtrooper	11955	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400035	NABOO	nab_gcw_base	GCW_IMPERIAL	10	-0.90	-12.00	70.60	116	1	an Imperial stormtrooper	11955	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400036	NABOO	nab_gcw_base	GCW_IMPERIAL	9	40.30	-12.00	53.40	-65	1	an Imperial stormtrooper	11955	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400037	NABOO	nab_gcw_base	GCW_IMPERIAL	9	40.30	-12.00	63.00	-101	1	an Imperial stormtrooper	11955	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400038	NABOO	nab_gcw_base	GCW_IMPERIAL	6	17.40	-12.00	33.30	-117	1	an Imperial stormtrooper	11955	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400039	NABOO	nab_world	GCW_IMPERIAL	0	998.60	298.00	-1485.80	-180	1	an Imperial stormtrooper	11955	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400040	NABOO	nab_world	GCW_IMPERIAL	0	1006.90	298.00	-1494.90	-135	1	an Imperial stormtrooper	11955	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400041	NABOO	nab_world	GCW_IMPERIAL	0	962.90	298.00	-1490.50	90	1	an Imperial stormtrooper	11955	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400042	NABOO	nab_world	GCW_IMPERIAL	0	953.40	298.00	-1521.20	0	1	an Imperial stormtrooper	11955	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400043	NABOO	nab_world	GCW_IMPERIAL	0	1002.00	298.00	-1505.10	172	1	an Imperial stormtrooper	11955	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400044	NABOO	nab_world	GCW_IMPERIAL	0	1008.00	298.00	-1526.80	125	1	an Imperial stormtrooper	11955	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400045	NABOO	nab_world	GCW_IMPERIAL	0	978.90	298.00	-1487.30	179	1	an Imperial stormtrooper	11955	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400046	NABOO	nab_world	GCW_IMPERIAL	0	947.80	298.00	-1497.70	131	1	an Imperial stormtrooper	11955	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400047	NABOO	nab_gcw_base	GCW_IMPERIAL	27	67.10	-20.00	110.80	90	1	Imperial Logistics Officer	12135	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400048	NABOO	nab_world	GCW_REBEL	0	1000.50	298.00	-1484.08	0	1	Rebel Banner	object/tangible/gcw/flip_banner_onpole_rebel.iff	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400049	NABOO	nab_world	GCW_REBEL	0	1007.04	298.00	-1484.08	0	1	Rebel Banner	object/tangible/gcw/flip_banner_onpole_rebel.iff	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400050	NABOO	nab_world	GCW_REBEL	0	1008.62	298.00	-1497.34	45	1	Rebel Banner	object/tangible/gcw/flip_banner_onpole_rebel.iff	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400051	NABOO	nab_world	GCW_REBEL	0	994.71	298.00	-1505.54	90	1	Rebel Banner	object/tangible/gcw/flip_banner_onpole_rebel.iff	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400052	NABOO	nab_world	GCW_REBEL	0	994.71	298.00	-1512.19	90	1	Rebel Banner	object/tangible/gcw/flip_banner_onpole_rebel.iff	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400053	NABOO	nab_world	GCW_REBEL	0	964.64	298.00	-1492.90	90	1	Rebel Banner	object/tangible/gcw/flip_banner_onpole_rebel.iff	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400054	NABOO	nab_world	GCW_REBEL	0	956.14	298.00	-1519.80	0	1	Rebel Banner	object/tangible/gcw/flip_banner_onpole_rebel.iff	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400055	NABOO	nab_gcw_base	GCW_REBEL	6	14.43	-12.00	36.67	0	1	Rebel Banner	object/tangible/gcw/flip_banner_onpole_rebel.iff	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400056	NABOO	nab_gcw_base	GCW_REBEL	9	58.37	-12.00	61.63	90	1	Rebel Banner	object/tangible/gcw/flip_banner_onpole_rebel.iff	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400057	NABOO	nab_gcw_base	GCW_REBEL	9	58.37	-12.00	56.00	90	1	Rebel Banner	object/tangible/gcw/flip_banner_onpole_rebel.iff	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400058	NABOO	nab_gcw_base	GCW_REBEL	10	3.55	-12.00	51.21	0	1	Rebel Banner	object/tangible/gcw/flip_banner_onpole_rebel.iff	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400059	NABOO	nab_gcw_base	GCW_REBEL	14	25.23	-12.00	99.01	90	1	Rebel Banner	object/tangible/gcw/flip_banner_onpole_rebel.iff	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400060	NABOO	nab_gcw_base	GCW_REBEL	16	-18.25	-12.00	98.93	90	1	Rebel Banner	object/tangible/gcw/flip_banner_onpole_rebel.iff	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400061	NABOO	nab_gcw_base	GCW_REBEL	19	47.51	-20.00	103.37	0	1	Rebel Banner	object/tangible/gcw/flip_banner_onpole_rebel.iff	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400062	NABOO	nab_gcw_base	GCW_REBEL	21	55.13	-20.00	142.97	90	1	Rebel Banner	object/tangible/gcw/flip_banner_onpole_rebel.iff	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400063	NABOO	nab_gcw_base	GCW_REBEL	21	39.92	-20.00	142.97	90	1	Rebel Banner	object/tangible/gcw/flip_banner_onpole_rebel.iff	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400064	NABOO	nab_gcw_base	GCW_REBEL	23	83.60	-20.00	151.10	-90	1	a Rebel commando	11894	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400065	NABOO	nab_gcw_base	GCW_REBEL	24	102.90	-20.00	154.10	-104	1	a Rebel commando	11894	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400066	NABOO	nab_gcw_base	GCW_REBEL	23	83.30	-20.00	130.90	0	1	a Rebel commando	11894	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400067	NABOO	nab_gcw_base	GCW_REBEL	28	64.40	-20.00	130.80	90	1	a Rebel commando	11894	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400068	NABOO	nab_gcw_base	GCW_REBEL	25	101.60	-20.00	127.00	-68	1	a Rebel commando	11894	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400069	NABOO	nab_gcw_base	GCW_REBEL	23	78.50	-20.00	111.00	90	1	a Rebel commando	11894	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400070	NABOO	nab_gcw_base	GCW_REBEL	26	101.50	-20.00	116.00	-112	1	a Rebel commando	11894	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400071	NABOO	nab_gcw_base	GCW_REBEL	21	51.60	-20.00	141.30	180	1	a Rebel commando	11894	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400072	NABOO	nab_gcw_base	GCW_REBEL	21	42.60	-20.00	141.30	180	1	a Rebel commando	11894	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400073	NABOO	nab_gcw_base	GCW_REBEL	19	46.80	-20.00	106.40	-56	1	a Rebel commando	11894	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400074	NABOO	nab_gcw_base	GCW_REBEL	16	-10.60	-12.00	96.20	71	1	a Rebel commando	11894	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400075	NABOO	nab_gcw_base	GCW_REBEL	16	-10.30	-12.00	102.10	107	1	a Rebel commando	11894	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400076	NABOO	nab_gcw_base	GCW_REBEL	14	17.50	-12.00	94.90	-66	1	a Rebel commando	11894	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400077	NABOO	nab_gcw_base	GCW_REBEL	15	7.80	-12.00	115.30	-152	1	a Rebel commando	11894	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400078	NABOO	nab_gcw_base	GCW_REBEL	15	-0.10	-12.00	115.00	158	1	a Rebel commando	11894	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400079	NABOO	nab_gcw_base	GCW_REBEL	10	-3.70	-12.00	59.20	90	1	a Rebel commando	11894	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400080	NABOO	nab_gcw_base	GCW_REBEL	10	-0.90	-12.00	70.60	116	1	a Rebel commando	11894	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400081	NABOO	nab_gcw_base	GCW_REBEL	9	40.30	-12.00	53.40	-65	1	a Rebel commando	11894	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400082	NABOO	nab_gcw_base	GCW_REBEL	9	40.30	-12.00	63.00	-101	1	a Rebel commando	11894	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400083	NABOO	nab_gcw_base	GCW_REBEL	6	17.40	-12.00	33.30	-117	1	a Rebel commando	11894	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400084	NABOO	nab_world	GCW_REBEL	0	998.60	298.00	-1485.80	-180	1	a Rebel commando	11894	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400085	NABOO	nab_world	GCW_REBEL	0	1006.90	298.00	-1494.90	-135	1	a Rebel commando	11894	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400086	NABOO	nab_world	GCW_REBEL	0	962.90	298.00	-1490.50	90	1	a Rebel commando	11894	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400087	NABOO	nab_world	GCW_REBEL	0	953.40	298.00	-1521.20	0	1	a Rebel commando	11894	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400088	NABOO	nab_world	GCW_REBEL	0	1002.00	298.00	-1505.10	172	1	a Rebel commando	11894	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400089	NABOO	nab_world	GCW_REBEL	0	1008.00	298.00	-1526.80	125	1	a Rebel commando	11894	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400090	NABOO	nab_world	GCW_REBEL	0	978.90	298.00	-1487.30	179	1	a Rebel commando	11894	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400091	NABOO	nab_world	GCW_REBEL	0	947.80	298.00	-1497.70	131	1	a Rebel commando	11894	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400092	NABOO	nab_gcw_base	GCW_REBEL	27	67.10	-20.00	110.80	90	1	Rebel Logistics Officer	12138	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400093	NABOO	nab_world	AREA	0	996.70	298.00	-1521.08	-90	1	Control Terminal	object/tangible/gcw/static_base/control_terminal.iff	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400094	NABOO	nab_world	AREA	0	962.12	298.00	-1497.05	-180	1	Control Terminal	object/tangible/gcw/static_base/control_terminal.iff	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400095	NABOO	nab_gcw_base	AREA	9	60.00	-12.00	59.02	-90	1	Control Terminal	object/tangible/gcw/static_base/control_terminal.iff	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0
+3400096	NABOO	nab_gcw_base	AREA	21	54.08	-20.00	158.71	-180	1	Control Terminal	object/tangible/gcw/static_base/control_terminal.iff	gcw	Static - Weapons Development Facility	1	STOP	idle	0	0	0	0	360	300	0

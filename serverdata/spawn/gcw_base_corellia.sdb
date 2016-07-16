@@ -1,0 +1,78 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	creature_name	creature_id	spawn_category	spawn_area	amount	behaviour	mood	equipment_id	patrol_id	quest_id	loot_id	max_spawn_time	min_spawn_time	float_radius
+INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGER NOT NULL	REAL	REAL	REAL	REAL	INTEGER	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL	INTEGER NOT NULL	INTEGER
+3300003	CORELLIA	cor_world	GCW_IMPERIAL	0	4758.83	95.00	-5243.16	90	1	Imperial Banner	object/tangible/gcw/flip_banner_onpole_imperial.iff	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300004	CORELLIA	cor_world	GCW_IMPERIAL	0	4758.78	95.00	-5236.62	90	1	Imperial Banner	object/tangible/gcw/flip_banner_onpole_imperial.iff	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300005	CORELLIA	cor_world	GCW_IMPERIAL	0	4773.01	95.00	-5214.47	0	1	Imperial Banner	object/tangible/gcw/flip_banner_onpole_imperial.iff	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300006	CORELLIA	cor_world	GCW_IMPERIAL	0	4779.72	95.00	-5214.53	0	1	Imperial Banner	object/tangible/gcw/flip_banner_onpole_imperial.iff	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300007	CORELLIA	cor_world	GCW_IMPERIAL	0	4796.89	95.00	-5210.06	45	1	Imperial Banner	object/tangible/gcw/flip_banner_onpole_imperial.iff	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300008	CORELLIA	cor_world	GCW_IMPERIAL	0	4806.02	95.00	-5259.69	90	1	Imperial Banner	object/tangible/gcw/flip_banner_onpole_imperial.iff	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300009	CORELLIA	cor_world	GCW_IMPERIAL	0	4808.63	95.00	-5282.77	-45	1	Imperial Banner	object/tangible/gcw/flip_banner_onpole_imperial.iff	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300010	CORELLIA	cor_world	GCW_IMPERIAL	0	4756.84	95.00	-5205.76	-45	1	Imperial Banner	object/tangible/gcw/flip_banner_onpole_imperial.iff	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300011	CORELLIA	cor_gcw_base_warehouse	GCW_IMPERIAL	5	-7.10	-6.75	-9.48	0	1	Imperial Banner	object/tangible/gcw/flip_banner_onpole_imperial.iff	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300012	CORELLIA	cor_gcw_base_warehouse	GCW_IMPERIAL	6	-2.40	-6.77	-12.00	0	1	Imperial Banner	object/tangible/gcw/flip_banner_onpole_imperial.iff	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300013	CORELLIA	cor_gcw_base_warehouse	GCW_IMPERIAL	6	3.00	-6.77	-12.02	0	1	Imperial Banner	object/tangible/gcw/flip_banner_onpole_imperial.iff	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300014	CORELLIA	cor_gcw_base_warehouse	GCW_IMPERIAL	7	8.11	-6.75	0.51	0	1	Imperial Banner	object/tangible/gcw/flip_banner_onpole_imperial.iff	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300015	CORELLIA	cor_gcw_base_warehouse	GCW_IMPERIAL	9	-5.04	-13.75	-17.18	0	1	Imperial Banner	object/tangible/gcw/flip_banner_onpole_imperial.iff	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300016	CORELLIA	cor_gcw_base_warehouse	GCW_IMPERIAL	9	0.03	-13.75	-17.18	0	1	Imperial Banner	object/tangible/gcw/flip_banner_onpole_imperial.iff	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300017	CORELLIA	cor_gcw_base_warehouse	GCW_IMPERIAL	9	-6.20	-13.80	-0.90	90	1	an Imperial stormtrooper	11955	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300018	CORELLIA	cor_gcw_base_warehouse	GCW_IMPERIAL	9	0.70	-13.80	-1.00	-90	1	an Imperial stormtrooper	11955	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300019	CORELLIA	cor_gcw_base_warehouse	GCW_IMPERIAL	9	0.90	-13.80	-12.80	-90	1	an Imperial stormtrooper	11955	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300020	CORELLIA	cor_gcw_base_warehouse	GCW_IMPERIAL	7	2.50	-6.80	-2.10	90	1	an Imperial stormtrooper	11955	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300021	CORELLIA	cor_gcw_base_warehouse	GCW_IMPERIAL	7	8.60	-6.80	-1.90	-90	1	an Imperial stormtrooper	11955	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300022	CORELLIA	cor_gcw_base_warehouse	GCW_IMPERIAL	6	3.10	-6.80	-17.60	0	1	an Imperial stormtrooper	11955	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300023	CORELLIA	cor_gcw_base_warehouse	GCW_IMPERIAL	6	0.40	-6.80	-17.10	0	1	an Imperial stormtrooper	11955	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300024	CORELLIA	cor_gcw_base_warehouse	GCW_IMPERIAL	5	-0.50	-6.80	-6.50	-90	1	an Imperial stormtrooper	11955	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300025	CORELLIA	cor_world	GCW_IMPERIAL	0	4761.80	95.00	-5244.00	90	1	an Imperial stormtrooper	11955	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300026	CORELLIA	cor_world	GCW_IMPERIAL	0	4761.80	95.00	-5236.40	90	1	an Imperial stormtrooper	11955	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300027	CORELLIA	cor_world	GCW_IMPERIAL	0	4770.60	95.00	-5215.90	-180	1	an Imperial stormtrooper	11955	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300028	CORELLIA	cor_world	GCW_IMPERIAL	0	4782.70	95.00	-5215.90	-180	1	an Imperial stormtrooper	11955	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300029	CORELLIA	cor_world	GCW_IMPERIAL	0	4792.60	95.00	-5206.80	-135	1	an Imperial stormtrooper	11955	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300030	CORELLIA	cor_world	GCW_IMPERIAL	0	4805.10	95.00	-5253.90	-90	1	an Imperial stormtrooper	11955	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300031	CORELLIA	cor_world	GCW_IMPERIAL	0	4800.80	95.00	-5278.70	-45	1	an Imperial stormtrooper	11955	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300032	CORELLIA	cor_world	GCW_IMPERIAL	0	4812.50	99.00	-5285.00	-135	1	an Imperial stormtrooper	11955	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300033	CORELLIA	cor_world	GCW_IMPERIAL	0	4766.70	95.00	-5274.20	30	1	an Imperial stormtrooper	11955	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300034	CORELLIA	cor_world	GCW_IMPERIAL	0	4752.70	95.00	-5209.00	135	1	an Imperial stormtrooper	11955	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300035	CORELLIA	cor_world	GCW_IMPERIAL	0	4818.80	95.00	-5210.80	-140	1	an Imperial stormtrooper	11955	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300036	CORELLIA	cor_world	GCW_IMPERIAL	0	4782.00	95.00	-5246.20	0	1	an Imperial stormtrooper	11955	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300037	CORELLIA	cor_world	GCW_IMPERIAL	0	4782.00	95.00	-5229.70	180	1	an Imperial stormtrooper	11955	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300038	CORELLIA	cor_gcw_base_warehouse	GCW_IMPERIAL	9	-5.20	-13.80	-12.90	17	1	Imperial Logistics Officer	12134	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300039	CORELLIA	cor_world	GCW_REBEL	0	4758.83	95.00	-5243.16	90	1	Rebel Banner	object/tangible/gcw/flip_banner_onpole_rebel.iff	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300040	CORELLIA	cor_world	GCW_REBEL	0	4758.78	95.00	-5236.62	90	1	Rebel Banner	object/tangible/gcw/flip_banner_onpole_rebel.iff	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300041	CORELLIA	cor_world	GCW_REBEL	0	4773.01	95.00	-5214.47	0	1	Rebel Banner	object/tangible/gcw/flip_banner_onpole_rebel.iff	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300042	CORELLIA	cor_world	GCW_REBEL	0	4779.72	95.00	-5214.53	0	1	Rebel Banner	object/tangible/gcw/flip_banner_onpole_rebel.iff	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300043	CORELLIA	cor_world	GCW_REBEL	0	4796.89	95.00	-5210.06	45	1	Rebel Banner	object/tangible/gcw/flip_banner_onpole_rebel.iff	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300044	CORELLIA	cor_world	GCW_REBEL	0	4806.02	95.00	-5259.69	90	1	Rebel Banner	object/tangible/gcw/flip_banner_onpole_rebel.iff	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300045	CORELLIA	cor_world	GCW_REBEL	0	4808.63	95.00	-5282.77	-45	1	Rebel Banner	object/tangible/gcw/flip_banner_onpole_rebel.iff	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300046	CORELLIA	cor_world	GCW_REBEL	0	4756.84	95.00	-5205.76	-45	1	Rebel Banner	object/tangible/gcw/flip_banner_onpole_rebel.iff	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300047	CORELLIA	cor_gcw_base_warehouse	GCW_REBEL	5	-7.10	-6.75	-9.48	0	1	Rebel Banner	object/tangible/gcw/flip_banner_onpole_rebel.iff	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300048	CORELLIA	cor_gcw_base_warehouse	GCW_REBEL	6	-2.40	-6.77	-12.00	0	1	Rebel Banner	object/tangible/gcw/flip_banner_onpole_rebel.iff	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300049	CORELLIA	cor_gcw_base_warehouse	GCW_REBEL	6	3.00	-6.77	-12.02	0	1	Rebel Banner	object/tangible/gcw/flip_banner_onpole_rebel.iff	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300050	CORELLIA	cor_gcw_base_warehouse	GCW_REBEL	7	8.11	-6.75	0.51	0	1	Rebel Banner	object/tangible/gcw/flip_banner_onpole_rebel.iff	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300051	CORELLIA	cor_gcw_base_warehouse	GCW_REBEL	9	-5.04	-13.75	-17.18	0	1	Rebel Banner	object/tangible/gcw/flip_banner_onpole_rebel.iff	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300052	CORELLIA	cor_gcw_base_warehouse	GCW_REBEL	9	0.03	-13.75	-17.18	0	1	Rebel Banner	object/tangible/gcw/flip_banner_onpole_rebel.iff	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300053	CORELLIA	cor_gcw_base_warehouse	GCW_REBEL	9	-6.20	-13.80	-0.90	90	1	a Rebel commando	11894	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300054	CORELLIA	cor_gcw_base_warehouse	GCW_REBEL	9	0.70	-13.80	-1.00	-90	1	a Rebel commando	11894	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300055	CORELLIA	cor_gcw_base_warehouse	GCW_REBEL	9	0.90	-13.80	-12.80	-90	1	a Rebel commando	11894	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300056	CORELLIA	cor_gcw_base_warehouse	GCW_REBEL	7	2.50	-6.80	-2.10	90	1	a Rebel commando	11894	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300057	CORELLIA	cor_gcw_base_warehouse	GCW_REBEL	7	8.60	-6.80	-1.90	-90	1	a Rebel commando	11894	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300058	CORELLIA	cor_gcw_base_warehouse	GCW_REBEL	6	3.10	-6.80	-17.60	0	1	a Rebel commando	11894	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300059	CORELLIA	cor_gcw_base_warehouse	GCW_REBEL	6	0.40	-6.80	-17.10	0	1	a Rebel commando	11894	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300060	CORELLIA	cor_gcw_base_warehouse	GCW_REBEL	5	-0.50	-6.80	-6.50	-90	1	a Rebel commando	11894	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300061	CORELLIA	cor_world	GCW_REBEL	0	4761.80	95.00	-5244.00	90	1	a Rebel commando	11894	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300062	CORELLIA	cor_world	GCW_REBEL	0	4761.80	95.00	-5236.40	90	1	a Rebel commando	11894	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300063	CORELLIA	cor_world	GCW_REBEL	0	4770.60	95.00	-5215.90	-180	1	a Rebel commando	11894	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300064	CORELLIA	cor_world	GCW_REBEL	0	4782.70	95.00	-5215.90	-180	1	a Rebel commando	11894	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300065	CORELLIA	cor_world	GCW_REBEL	0	4792.60	95.00	-5206.80	-135	1	a Rebel commando	11894	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300066	CORELLIA	cor_world	GCW_REBEL	0	4805.10	95.00	-5253.90	-90	1	a Rebel commando	11894	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300067	CORELLIA	cor_world	GCW_REBEL	0	4800.80	95.00	-5278.70	-45	1	a Rebel commando	11894	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300068	CORELLIA	cor_world	GCW_REBEL	0	4812.50	99.00	-5285.00	-135	1	a Rebel commando	11894	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300069	CORELLIA	cor_world	GCW_REBEL	0	4766.70	95.00	-5274.20	30	1	a Rebel commando	11894	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300070	CORELLIA	cor_world	GCW_REBEL	0	4752.70	95.00	-5209.00	135	1	a Rebel commando	11894	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300071	CORELLIA	cor_world	GCW_REBEL	0	4818.80	95.00	-5210.80	-140	1	a Rebel commando	11894	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300072	CORELLIA	cor_world	GCW_REBEL	0	4782.00	95.00	-5246.20	0	1	a Rebel commando	11894	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300073	CORELLIA	cor_world	GCW_REBEL	0	4782.00	95.00	-5229.70	180	1	a Rebel commando	11894	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300074	CORELLIA	cor_gcw_base_warehouse	GCW_REBEL	9	-5.20	-13.80	-12.90	17	1	Rebel Logistics Officer	12137	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300075	CORELLIA	cor_world	AREA	0	4801.50	95.00	-5207.00	-45	1	Control Terminal	object/tangible/gcw/static_base/control_terminal.iff	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300076	CORELLIA	cor_world	AREA	0	4816.02	95.00	-5231.13	90	1	Control Terminal	object/tangible/gcw/static_base/control_terminal.iff	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300077	CORELLIA	cor_world	AREA	0	4736.00	95.00	-5259.90	55	1	Control Terminal	object/tangible/gcw/static_base/control_terminal.iff	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300078	CORELLIA	cor_gcw_base_warehouse	AREA	9	-2.40	-13.80	-18.00	0	1	Control Terminal	object/tangible/gcw/static_base/control_terminal.iff	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
