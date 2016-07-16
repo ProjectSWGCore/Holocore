@@ -168,10 +168,12 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			if (arrangement != -1)
 				container.handleSlotReplacement(parent, this, arrangement);
 			container.addObject(this);
-			if (parent == null)
-				updateObjectAwareness(new HashSet<>(), false);
-		} else if (parent != null) {
-			updateObjectAwareness(parent.getObjectsAware(), false);
+			if (parent == null) { // World -> Parent
+				updateObjectAwareness(container.getObjectsAware(), false, true); // Create/Destroy
+				updateObjectAwareness(new HashSet<>(), true, false); // Clear Aware
+			}
+		} else if (parent != null) { // Parent -> World
+			updateObjectAwareness(parent.getObjectsAware(), true, true); // Create/Destroy & Aware
 		}
 		
 		oldObservers.retainAll(getObserversAndParent());
@@ -765,38 +767,40 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	public void updateObjectAwareness(Set <SWGObject> withinRange) {
-		updateObjectAwareness(withinRange, true);
+		updateObjectAwareness(withinRange, true, true);
 	}
 	
-	public void updateObjectAwareness(Set <SWGObject> withinRange, boolean sendUpdate) {
+	public void updateObjectAwareness(Set <SWGObject> withinRange, boolean updateAware, boolean sendUpdate) {
 		Set<SWGObject> oldAware;
 		synchronized (objectsAware) {
 			oldAware = new HashSet<>(objectsAware);
 		}
 		for (SWGObject obj : withinRange) {
 			if (!oldAware.contains(obj))
-				obj.awarenessCreate(this, sendUpdate);
+				obj.awarenessCreate(this, updateAware, sendUpdate);
 		}
 		for (SWGObject obj : oldAware) {
 			if (!withinRange.contains(obj))
-				obj.awarenessDestroy(this, sendUpdate);
+				obj.awarenessDestroy(this, updateAware, sendUpdate);
 		}
 	}
 	
-	private void awarenessCreate(SWGObject obj, boolean sendUpdate) {
-		internalAwarenessCreate(obj, sendUpdate);
-		obj.internalAwarenessCreate(this, sendUpdate);
+	private void awarenessCreate(SWGObject obj, boolean updateAware, boolean sendUpdate) {
+		internalAwarenessCreate(obj, updateAware, sendUpdate);
+		obj.internalAwarenessCreate(this, updateAware, sendUpdate);
 	}
 	
-	private void awarenessDestroy(SWGObject obj, boolean sendUpdate) {
-		internalAwarenessDestroy(obj, sendUpdate);
-		obj.internalAwarenessDestroy(this, sendUpdate);
+	private void awarenessDestroy(SWGObject obj, boolean updateAware, boolean sendUpdate) {
+		internalAwarenessDestroy(obj, updateAware, sendUpdate);
+		obj.internalAwarenessDestroy(this, updateAware, sendUpdate);
 	}
 	
-	private void internalAwarenessCreate(SWGObject obj, boolean sendUpdate) {
-		synchronized (objectsAware) {
-			if (!objectsAware.add(obj))
-				return;
+	private void internalAwarenessCreate(SWGObject obj, boolean updateAware, boolean sendUpdate) {
+		if (updateAware) {
+			synchronized (objectsAware) {
+				if (!objectsAware.add(obj))
+					return;
+			}
 		}
 		if (!sendUpdate)
 			return;
@@ -806,10 +810,12 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			obj.createObject(create.getOwner());
 	}
 	
-	private void internalAwarenessDestroy(SWGObject obj, boolean sendUpdate) {
-		synchronized (objectsAware) {
-			if (!objectsAware.remove(obj))
-				return;
+	private void internalAwarenessDestroy(SWGObject obj, boolean updateAware, boolean sendUpdate) {
+		if (updateAware) {
+			synchronized (objectsAware) {
+				if (!objectsAware.remove(obj))
+					return;
+			}
 		}
 		if (!sendUpdate)
 			return;
