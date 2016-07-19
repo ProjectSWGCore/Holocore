@@ -27,11 +27,11 @@
  ***********************************************************************************/
 package services.objects;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.List;
@@ -50,6 +50,7 @@ import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.SWGObject.ObjectClassification;
+import resources.objects.building.BuildingObject;
 import resources.objects.cell.CellObject;
 import resources.server_info.CrcDatabase;
 import resources.server_info.Log;
@@ -64,6 +65,9 @@ public class ClientBuildoutService extends Service {
 			+ "objects.radius, objects.cell_index "
 			+ "FROM objects "
 			+ "ORDER BY buildout_id ASC";
+	private static final String GET_ADDITIONAL_OBJECTS_SQL = "SELECT terrain, template, x, y, z, heading, cell_id, radius, building_name "
+			+ "FROM additional_buildouts WHERE active = 1";
+	private static final String GET_BUILDING_INFO_SQL = "SELECT object_id FROM buildings WHERE building_id = ?";
 	
 	private final BuildoutAreaGrid areaGrid;
 	private final Map<Integer, BuildoutArea> areasById;
@@ -136,7 +140,24 @@ public class ClientBuildoutService extends Service {
 				}
 			}
 		}
-		return Collections.unmodifiableCollection(objects.values());
+		List<SWGObject> ret = new ArrayList<>(objects.values());
+		ret.addAll(getAdditionalObjects());
+		return ret;
+	}
+	
+	private Collection<SWGObject> getAdditionalObjects() throws SQLException {
+		Map<Long, SWGObject> objects = new Hashtable<>();
+		try (CrcDatabase strings = new CrcDatabase()) {
+			try (RelationalServerData data = RelationalServerFactory.getServerData("buildout/additional_buildouts.db", "additional_buildouts")) {
+				try (ResultSet set = data.executeQuery(GET_ADDITIONAL_OBJECTS_SQL)) {
+					set.setFetchSize(4*1024);
+					while (set.next()) {
+						createAdditionalObject(objects, set);
+					}
+				}
+			}
+		}
+		return new ArrayList<>(objects.values());
 	}
 	
 	private void createObject(Map<Long, SWGObject> objects, BuildoutArea area, ObjectInformation info) throws SQLException {
@@ -145,11 +166,45 @@ public class ClientBuildoutService extends Service {
 		l.setTerrain(area.getTerrain());
 		obj.setLocation(l);
 		obj.setClassification(info.isSnapshot() ? ObjectClassification.SNAPSHOT : ObjectClassification.BUILDOUT);
-		obj.setBuildoutArea(area);
 		obj.setLoadRange(info.getRadius());
 		checkCell(obj, info.getCell());
 		checkChild(objects, obj, info.getContainer());
 		objects.put(obj.getObjectId(), obj);
+	}
+	
+	private void createAdditionalObject(Map<Long, SWGObject> objects, ResultSet set) throws SQLException {
+		try {
+			SWGObject obj = ObjectCreator.createObjectFromTemplate(set.getString("template"));
+			Location l = new Location();
+			l.setX(set.getFloat("x"));
+			l.setY(set.getFloat("y"));
+			l.setZ(set.getFloat("z"));
+			l.setTerrain(Terrain.getTerrainFromName(set.getString("terrain")));
+			l.setHeading(set.getFloat("heading"));
+			obj.setLocation(l);
+			obj.setClassification(ObjectClassification.BUILDOUT);
+			obj.setLoadRange(set.getFloat("radius"));
+			checkParent(objects, obj, set.getString("building_name"), set.getInt("cell_id"));
+			objects.put(obj.getObjectId(), obj);
+		} catch (NullPointerException e) {
+			Log.e(this, "File: %s", set.getString("template"));
+		}
+	}
+	
+	private void checkParent(Map<Long, SWGObject> objects, SWGObject obj, String buildingName, int cellId) throws SQLException {
+		try (RelationalServerData data = RelationalServerFactory.getServerData("building/building.db", "buildings")) {
+			try (PreparedStatement statement = data.prepareStatement(GET_BUILDING_INFO_SQL)) {
+				statement.setString(1, buildingName);
+				try (ResultSet set = statement.executeQuery()) {
+					if (!set.next())
+						return;
+					SWGObject buildingUncasted = objects.get(set.getLong("object_id"));
+					if (!(buildingUncasted instanceof BuildingObject))
+						return;
+					obj.moveToContainer(((BuildingObject) buildingUncasted).getCellByNumber(cellId));
+				}
+			}
+		}
 	}
 	
 	private void checkCell(SWGObject obj, int cell) {
