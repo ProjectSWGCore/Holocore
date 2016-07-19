@@ -1,0 +1,20 @@
+gcw_base_object_id	terrain	imp_template	reb_template	x	y	z	heading	building_name	cell_id	radius	comment
+INTEGER PRIMARY KEY	TEXT	TEXT	TEXT	REAL	REAL	REAL	REAL	TEXT	TEXT	REAL	TEXT
+10003	CORELLIA	object/tangible/gcw/flip_banner_onpole_imperial.iff	object/tangible/gcw/flip_banner_onpole_rebel.iff	4758.83	95.00	-5243.16	90	cor_world	0	256	Banner
+10004	CORELLIA	object/tangible/gcw/flip_banner_onpole_imperial.iff	object/tangible/gcw/flip_banner_onpole_rebel.iff	4758.78	95.00	-5236.62	90	cor_world	0	256	Banner
+10005	CORELLIA	object/tangible/gcw/flip_banner_onpole_imperial.iff	object/tangible/gcw/flip_banner_onpole_rebel.iff	4773.01	95.00	-5214.47	0	cor_world	0	256	Banner
+10006	CORELLIA	object/tangible/gcw/flip_banner_onpole_imperial.iff	object/tangible/gcw/flip_banner_onpole_rebel.iff	4779.72	95.00	-5214.53	0	cor_world	0	256	Banner
+10007	CORELLIA	object/tangible/gcw/flip_banner_onpole_imperial.iff	object/tangible/gcw/flip_banner_onpole_rebel.iff	4796.89	95.00	-5210.06	45	cor_world	0	256	Banner
+10008	CORELLIA	object/tangible/gcw/flip_banner_onpole_imperial.iff	object/tangible/gcw/flip_banner_onpole_rebel.iff	4806.02	95.00	-5259.69	90	cor_world	0	256	Banner
+10009	CORELLIA	object/tangible/gcw/flip_banner_onpole_imperial.iff	object/tangible/gcw/flip_banner_onpole_rebel.iff	4808.63	95.00	-5282.77	-45	cor_world	0	256	Banner
+10010	CORELLIA	object/tangible/gcw/flip_banner_onpole_imperial.iff	object/tangible/gcw/flip_banner_onpole_rebel.iff	4756.84	95.00	-5205.76	-45	cor_world	0	256	Banner
+10011	CORELLIA	object/tangible/gcw/flip_banner_onpole_imperial.iff	object/tangible/gcw/flip_banner_onpole_rebel.iff	-7.10	-6.75	-9.48	0	cor_gcw_base_warehouse	5	256	Banner
+10012	CORELLIA	object/tangible/gcw/flip_banner_onpole_imperial.iff	object/tangible/gcw/flip_banner_onpole_rebel.iff	-2.40	-6.77	-12.00	0	cor_gcw_base_warehouse	6	256	Banner
+10013	CORELLIA	object/tangible/gcw/flip_banner_onpole_imperial.iff	object/tangible/gcw/flip_banner_onpole_rebel.iff	3.00	-6.77	-12.02	0	cor_gcw_base_warehouse	6	256	Banner
+10014	CORELLIA	object/tangible/gcw/flip_banner_onpole_imperial.iff	object/tangible/gcw/flip_banner_onpole_rebel.iff	8.11	-6.75	0.51	0	cor_gcw_base_warehouse	7	256	Banner
+10015	CORELLIA	object/tangible/gcw/flip_banner_onpole_imperial.iff	object/tangible/gcw/flip_banner_onpole_rebel.iff	-5.04	-13.75	-17.18	0	cor_gcw_base_warehouse	9	256	Banner
+10016	CORELLIA	object/tangible/gcw/flip_banner_onpole_imperial.iff	object/tangible/gcw/flip_banner_onpole_rebel.iff	0.03	-13.75	-17.18	0	cor_gcw_base_warehouse	9	256	Banner
+10017	CORELLIA	object/tangible/gcw/static_base/control_terminal.iff	object/tangible/gcw/static_base/control_terminal.iff	4801.50	95.00	-5207.00	-45	cor_world	0	256	Control Terminal
+10018	CORELLIA	object/tangible/gcw/static_base/control_terminal.iff	object/tangible/gcw/static_base/control_terminal.iff	4816.02	95.00	-5231.13	90	cor_world	0	256	Control Terminal
+10019	CORELLIA	object/tangible/gcw/static_base/control_terminal.iff	object/tangible/gcw/static_base/control_terminal.iff	4736.00	95.00	-5259.90	55	cor_world	0	256	Control Terminal
+10020	CORELLIA	object/tangible/gcw/static_base/control_terminal.iff	object/tangible/gcw/static_base/control_terminal.iff	-2.40	-13.80	-18.00	0	cor_gcw_base_warehouse	9	256	Control Terminal
