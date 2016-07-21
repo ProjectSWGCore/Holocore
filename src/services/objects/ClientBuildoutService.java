@@ -141,18 +141,18 @@ public class ClientBuildoutService extends Service {
 			}
 		}
 		List<SWGObject> ret = new ArrayList<>(objects.values());
-		ret.addAll(getAdditionalObjects());
+		ret.addAll(getAdditionalObjects(objects));
 		return ret;
 	}
 	
-	private Collection<SWGObject> getAdditionalObjects() throws SQLException {
+	private Collection<SWGObject> getAdditionalObjects(Map<Long, SWGObject> buildouts) throws SQLException {
 		Map<Long, SWGObject> objects = new Hashtable<>();
 		try (CrcDatabase strings = new CrcDatabase()) {
 			try (RelationalServerData data = RelationalServerFactory.getServerData("buildout/additional_buildouts.db", "additional_buildouts")) {
 				try (ResultSet set = data.executeQuery(GET_ADDITIONAL_OBJECTS_SQL)) {
 					set.setFetchSize(4*1024);
 					while (set.next()) {
-						createAdditionalObject(objects, set);
+						createAdditionalObject(objects, buildouts, set);
 					}
 				}
 			}
@@ -172,7 +172,7 @@ public class ClientBuildoutService extends Service {
 		objects.put(obj.getObjectId(), obj);
 	}
 	
-	private void createAdditionalObject(Map<Long, SWGObject> objects, ResultSet set) throws SQLException {
+	private void createAdditionalObject(Map<Long, SWGObject> objects, Map<Long, SWGObject> buildouts, ResultSet set) throws SQLException {
 		try {
 			SWGObject obj = ObjectCreator.createObjectFromTemplate(set.getString("template"));
 			Location l = new Location();
@@ -184,7 +184,7 @@ public class ClientBuildoutService extends Service {
 			obj.setLocation(l);
 			obj.setClassification(ObjectClassification.BUILDOUT);
 			obj.setLoadRange(set.getFloat("radius"));
-			checkParent(objects, obj, set.getString("building_name"), set.getInt("cell_id"));
+			checkParent(buildouts, obj, set.getString("building_name"), set.getInt("cell_id"));
 			objects.put(obj.getObjectId(), obj);
 		} catch (NullPointerException e) {
 			Log.e(this, "File: %s", set.getString("template"));
@@ -196,12 +196,25 @@ public class ClientBuildoutService extends Service {
 			try (PreparedStatement statement = data.prepareStatement(GET_BUILDING_INFO_SQL)) {
 				statement.setString(1, buildingName);
 				try (ResultSet set = statement.executeQuery()) {
-					if (!set.next())
+					if (!set.next()) {
+						Log.e(this, "Unknown building name: %s", buildingName);
 						return;
+					}
 					SWGObject buildingUncasted = objects.get(set.getLong("object_id"));
-					if (!(buildingUncasted instanceof BuildingObject))
+					if (buildingUncasted == null) {
+						Log.e(this, "Building not found in map: %s / %d", buildingName, set.getLong("object_id"));
 						return;
-					obj.moveToContainer(((BuildingObject) buildingUncasted).getCellByNumber(cellId));
+					}
+					if (!(buildingUncasted instanceof BuildingObject)) {
+						Log.e(this, "Building is not an instance of BuildingObject: %s", buildingName);
+						return;
+					}
+					CellObject cell = ((BuildingObject) buildingUncasted).getCellByNumber(cellId);
+					if (cell == null) {
+						Log.e(this, "Cell is not found! Building: %s Cell: %d", buildingName, cellId);
+						return;
+					}
+					obj.moveToContainer(cell);
 				}
 			}
 		}
