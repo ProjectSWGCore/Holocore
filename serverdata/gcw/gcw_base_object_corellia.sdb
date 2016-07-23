@@ -14,7 +14,3 @@ INTEGER PRIMARY KEY	TEXT	TEXT	TEXT	REAL	REAL	REAL	REAL	TEXT	TEXT	REAL	TEXT
 10014	CORELLIA	object/tangible/gcw/flip_banner_onpole_imperial.iff	object/tangible/gcw/flip_banner_onpole_rebel.iff	8.11	-6.75	0.51	0	cor_gcw_base_warehouse	7	256	Banner
 10015	CORELLIA	object/tangible/gcw/flip_banner_onpole_imperial.iff	object/tangible/gcw/flip_banner_onpole_rebel.iff	-5.04	-13.75	-17.18	0	cor_gcw_base_warehouse	9	256	Banner
 10016	CORELLIA	object/tangible/gcw/flip_banner_onpole_imperial.iff	object/tangible/gcw/flip_banner_onpole_rebel.iff	0.03	-13.75	-17.18	0	cor_gcw_base_warehouse	9	256	Banner
-10017	CORELLIA	object/tangible/gcw/static_base/control_terminal.iff	object/tangible/gcw/static_base/control_terminal.iff	4801.50	95.00	-5207.00	-45	cor_world	0	256	Control Terminal
-10018	CORELLIA	object/tangible/gcw/static_base/control_terminal.iff	object/tangible/gcw/static_base/control_terminal.iff	4816.02	95.00	-5231.13	90	cor_world	0	256	Control Terminal
-10019	CORELLIA	object/tangible/gcw/static_base/control_terminal.iff	object/tangible/gcw/static_base/control_terminal.iff	4736.00	95.00	-5259.90	55	cor_world	0	256	Control Terminal
-10020	CORELLIA	object/tangible/gcw/static_base/control_terminal.iff	object/tangible/gcw/static_base/control_terminal.iff	-2.40	-13.80	-18.00	0	cor_gcw_base_warehouse	9	256	Control Terminal

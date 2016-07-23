@@ -15,7 +15,3 @@ INTEGER PRIMARY KEY	TEXT	TEXT	TEXT	REAL	REAL	REAL	REAL	TEXT	TEXT	REAL	TEXT
 30015	TALUS	object/tangible/gcw/flip_banner_onpole_imperial.iff	object/tangible/gcw/flip_banner_onpole_rebel.iff	15.48	-13.75	16.15	0	tal_gcw_base_bunker	9	256	Banner
 30016	TALUS	object/tangible/gcw/flip_banner_onpole_imperial.iff	object/tangible/gcw/flip_banner_onpole_rebel.iff	19.96	-11.50	-22.28	0	tal_gcw_base_bunker	10	256	Banner
 30017	TALUS	object/tangible/gcw/flip_banner_onpole_imperial.iff	object/tangible/gcw/flip_banner_onpole_rebel.iff	11.06	-11.50	-22.28	0	tal_gcw_base_bunker	10	256	Banner
-30018	TALUS	object/tangible/gcw/static_base/control_terminal.iff	object/tangible/gcw/static_base/control_terminal.iff	-4948.06	66.00	-3149.07	-92	cor_world	0	256	Control Terminal
-30019	TALUS	object/tangible/gcw/static_base/control_terminal.iff	object/tangible/gcw/static_base/control_terminal.iff	-4957.30	66.00	-3104.74	-90	cor_world	0	256	Control Terminal
-30020	TALUS	object/tangible/gcw/static_base/control_terminal.iff	object/tangible/gcw/static_base/control_terminal.iff	-4905.68	66.00	-3106.47	-90	cor_world	0	256	Control Terminal
-30021	TALUS	object/tangible/gcw/static_base/control_terminal.iff	object/tangible/gcw/static_base/control_terminal.iff	15.33	-11.50	-22.02	0	tal_gcw_base_bunker	10	256	Control Terminal
