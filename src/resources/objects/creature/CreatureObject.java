@@ -806,10 +806,12 @@ public class CreatureObject extends TangibleObject {
 	protected void sendFinalBaselinePackets(Player target) {
 		super.sendFinalBaselinePackets(target);
 		
-		target.sendPacket(new UpdatePostureMessage(posture.getId(), getObjectId()));
-		
-		Set<PvpFlag> flags = PvpFlag.getFlags(getPvpFlags());
-		target.sendPacket(new UpdatePvpStatusMessage(getPvpFaction(), getObjectId(), flags.toArray(new PvpFlag[flags.size()])));
+		if (isGenerated()) {
+			target.sendPacket(new UpdatePostureMessage(posture.getId(), getObjectId()));
+			
+			Set<PvpFlag> flags = PvpFlag.getFlags(getPvpFlags());
+			target.sendPacket(new UpdatePvpStatusMessage(getPvpFaction(), getObjectId(), flags.toArray(new PvpFlag[flags.size()])));
+		}
 	}
 	
 	public void createBaseline1(Player target, BaselineBuilder bb) {
@@ -859,7 +861,7 @@ public class CreatureObject extends TangibleObject {
 		bankBalance = buffer.getInt();
 		cashBalance = buffer.getInt();
 		baseAttributes = buffer.getSwgList(1, 2, Integer.class);
-		skills = buffer.getSwgSet(1, 2, StringType.ASCII);
+		skills = buffer.getSwgSet(1, 3, StringType.ASCII);
 	}
 	
 	protected void parseBaseline3(NetBuffer buffer) {

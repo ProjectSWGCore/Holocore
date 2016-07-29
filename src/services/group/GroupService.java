@@ -280,9 +280,9 @@ public class GroupService extends Service {
 		}
 		if (target.getInviterData().getId() != 0) {
 			if (target.getInviterData().getId() != inviter.getCreatureObject().getGroupId())
-				sendSystemMessage(inviter, "considering_other_group");
+				sendSystemMessage(inviter, "considering_other_group", "TT", target.getObjectId());
 			else
-				sendSystemMessage(inviter, "considering_your_group");
+				sendSystemMessage(inviter, "considering_your_group", "TT", target.getObjectId());
 		}
 		
 		return true;

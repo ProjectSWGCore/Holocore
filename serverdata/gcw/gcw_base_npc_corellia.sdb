@@ -1,0 +1,24 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	imp_creature_name	imp_creature_id	reb_creature_name	reb_creature_id	spawn_category	spawn_area	amount	behaviour	mood	equipment_id	patrol_id	quest_id	loot_id	max_spawn_time	min_spawn_time	float_radius
+INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGER NOT NULL	REAL	REAL	REAL	REAL	INTEGER	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL	INTEGER NOT NULL	INTEGER
+3300003	CORELLIA	cor_gcw_base_warehouse	AREA	9	-6.20	-13.80	-0.90	90	1	an Imperial stormtrooper	11955	a Rebel commando	11894	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300004	CORELLIA	cor_gcw_base_warehouse	AREA	9	0.70	-13.80	-1.00	-90	1	an Imperial stormtrooper	11955	a Rebel commando	11894	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300005	CORELLIA	cor_gcw_base_warehouse	AREA	9	0.90	-13.80	-12.80	-90	1	an Imperial stormtrooper	11955	a Rebel commando	11894	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300006	CORELLIA	cor_gcw_base_warehouse	AREA	7	2.50	-6.80	-2.10	90	1	an Imperial stormtrooper	11955	a Rebel commando	11894	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300007	CORELLIA	cor_gcw_base_warehouse	AREA	7	8.60	-6.80	-1.90	-90	1	an Imperial stormtrooper	11955	a Rebel commando	11894	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300008	CORELLIA	cor_gcw_base_warehouse	AREA	6	3.10	-6.80	-17.60	0	1	an Imperial stormtrooper	11955	a Rebel commando	11894	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300009	CORELLIA	cor_gcw_base_warehouse	AREA	6	0.40	-6.80	-17.10	0	1	an Imperial stormtrooper	11955	a Rebel commando	11894	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300010	CORELLIA	cor_gcw_base_warehouse	AREA	5	-0.50	-6.80	-6.50	-90	1	an Imperial stormtrooper	11955	a Rebel commando	11894	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300011	CORELLIA	cor_world	AREA	0	4761.80	95.00	-5244.00	90	1	an Imperial stormtrooper	11955	a Rebel commando	11894	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300012	CORELLIA	cor_world	AREA	0	4761.80	95.00	-5236.40	90	1	an Imperial stormtrooper	11955	a Rebel commando	11894	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300013	CORELLIA	cor_world	AREA	0	4770.60	95.00	-5215.90	-180	1	an Imperial stormtrooper	11955	a Rebel commando	11894	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300014	CORELLIA	cor_world	AREA	0	4782.70	95.00	-5215.90	-180	1	an Imperial stormtrooper	11955	a Rebel commando	11894	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300015	CORELLIA	cor_world	AREA	0	4792.60	95.00	-5206.80	-135	1	an Imperial stormtrooper	11955	a Rebel commando	11894	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300016	CORELLIA	cor_world	AREA	0	4805.10	95.00	-5253.90	-90	1	an Imperial stormtrooper	11955	a Rebel commando	11894	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300017	CORELLIA	cor_world	AREA	0	4800.80	95.00	-5278.70	-45	1	an Imperial stormtrooper	11955	a Rebel commando	11894	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300018	CORELLIA	cor_world	AREA	0	4812.50	99.00	-5285.00	-135	1	an Imperial stormtrooper	11955	a Rebel commando	11894	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300019	CORELLIA	cor_world	AREA	0	4766.70	95.00	-5274.20	30	1	an Imperial stormtrooper	11955	a Rebel commando	11894	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300020	CORELLIA	cor_world	AREA	0	4752.70	95.00	-5209.00	135	1	an Imperial stormtrooper	11955	a Rebel commando	11894	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300021	CORELLIA	cor_world	AREA	0	4818.80	95.00	-5210.80	-140	1	an Imperial stormtrooper	11955	a Rebel commando	11894	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300022	CORELLIA	cor_world	AREA	0	4782.00	95.00	-5246.20	0	1	an Imperial stormtrooper	11955	a Rebel commando	11894	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300023	CORELLIA	cor_world	AREA	0	4782.00	95.00	-5229.70	180	1	an Imperial stormtrooper	11955	a Rebel commando	11894	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
+3300024	CORELLIA	cor_gcw_base_warehouse	AREA	9	-5.20	-13.80	-12.90	17	1	Imperial Logistics Officer	12134	Rebel Logistics Officer	12137	gcw	Static - Tactical Training Facility	1	STOP	idle	0	0	0	0	360	300	0
