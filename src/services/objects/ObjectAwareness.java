@@ -64,6 +64,7 @@ public class ObjectAwareness extends Service {
 	
 	private static final double AWARE_RANGE = 1024;
 	private static final int DEFAULT_LOAD_RANGE = (int) square(200); // Squared for speed
+	private static final Location GONE_LOCATION = new Location(0, 0, 0, null);
 	
 	private final Map <Terrain, QuadTree <SWGObject>> quadTree;
 	private final Map<Long, Location> locations;
@@ -125,12 +126,6 @@ public class ObjectAwareness extends Service {
 			case PE_ZONE_IN_SERVER:
 				creature.resetAwareness();
 				moveToLocation(creature, creature.getParent(), creature.getLocation());
-				if (creature.getParent() != null) {
-					for (SWGObject observer : creature.getObservers())
-						creature.createObject(observer.getOwner());
-					for (SWGObject object : creature.getObjectsAware())
-						object.createObject(creature.getOwner());
-				}
 				p.sendPacket(new CmdSceneReady());
 				break;
 			default:
@@ -151,7 +146,11 @@ public class ObjectAwareness extends Service {
 	}
 	
 	private void handleDestroyObjectIntent(DestroyObjectIntent doi) {
-		moveToLocation(doi.getObject(), null);
+		SWGObject obj = doi.getObject();
+		obj.setLocation(GONE_LOCATION);
+		obj.moveToContainer(null);
+		obj.clearAware();
+		obj.clearCustomAware(true);
 	}
 	
 	private void processObjectTeleportIntent(ObjectTeleportIntent oti) {
@@ -317,7 +316,7 @@ public class ObjectAwareness extends Service {
 	 * Removes the specified object from the awareness quadtree
 	 * @param object the object to remove
 	 */
-	private void remove(SWGObject object) {
+	private boolean remove(SWGObject object) {
 		Location l;
 		if (isInMap(object)) {
 			synchronized (locations) {
@@ -327,10 +326,10 @@ public class ObjectAwareness extends Service {
 			l = object.getLocation();
 		}
 		if (l == null)
-			return;
+			return false;
 		QuadTree <SWGObject> tree = getTree(l);
 		synchronized (tree) {
-			tree.remove(l.getX(), l.getZ(), object);
+			return tree.remove(l.getX(), l.getZ(), object);
 		}
 	}
 	
