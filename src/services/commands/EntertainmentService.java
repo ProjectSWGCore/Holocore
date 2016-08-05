@@ -28,15 +28,24 @@
 package services.commands;
 
 import intents.DanceIntent;
+import intents.PlayerEventIntent;
 import intents.chat.ChatBroadcastIntent;
+import intents.experience.ExperienceIntent;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 import resources.Posture;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.creature.CreatureObject;
+import resources.server_info.Log;
 
 /**
  *
@@ -44,11 +53,21 @@ import resources.objects.creature.CreatureObject;
  */
 public class EntertainmentService extends Service {
 
+	// TODO: Investigate the precise rate
+	// TODO: No XP gains after level 90.. or does ExperienceManager handle that?
+	// TODO: when performing, make NPCs in a radius of x look towards the player (?) and clap. When they stop, turn back (?) and stop clapping
+	private static final byte XP_CYCLE_RATE = 10;
+	
 	private final Map<String, Integer> danceMap;	// dance performanceNames mapped to danceId
+	private final Map<CreatureObject, Future<?>> performerMap;
+	private final ScheduledExecutorService executorService;
 
 	public EntertainmentService() {
 		danceMap = new HashMap<>();
+		performerMap = new HashMap<>();	// TODO synchronize access?
+		executorService = Executors.newSingleThreadScheduledExecutor();
 		registerForIntent(DanceIntent.TYPE);
+		registerForIntent(PlayerEventIntent.TYPE);
 	}
 
 	@Override
@@ -57,7 +76,8 @@ public class EntertainmentService extends Service {
 
 		for (int i = 0; i < performanceTable.getRowCount(); i++) {
 			String requiredDance = (String) performanceTable.getCell(i, 4);
-
+			
+			// Load the dances only. Music is currently unsupported.
 			if (!requiredDance.isEmpty()) {
 				danceMap.put((String) performanceTable.getCell(i, 0), (int) performanceTable.getCell(i, 5));	// performanceName, danceVisualId
 			}
@@ -67,10 +87,19 @@ public class EntertainmentService extends Service {
 	}
 
 	@Override
+	public boolean terminate() {
+		executorService.shutdownNow();
+		return super.terminate();
+	}
+	
+	@Override
 	public void onIntentReceived(Intent i) {
 		switch (i.getType()) {
 			case DanceIntent.TYPE:
 				handleDanceIntent((DanceIntent) i);
+				break;
+			case PlayerEventIntent.TYPE:
+				handlePlayerEventIntent((PlayerEventIntent) i);
 				break;
 		}
 	}
@@ -100,12 +129,62 @@ public class EntertainmentService extends Service {
 			stopDancing(dancer);
 		}
 	}
+	
+	private void handlePlayerEventIntent(PlayerEventIntent i) {
+		switch(i.getEvent()) {
+			case PE_LOGGED_OUT:
+				// Don't keep giving them XP if they log out
+				cancelExperienceTask(i.getPlayer().getCreatureObject());
+				break;
+			case PE_ZONE_IN_SERVER: 
+				// We need to check if they're dancing in order to start giving them XP
+				CreatureObject creature = i.getPlayer().getCreatureObject();
+				
+				if(creature.isPerforming()) {
+					scheduleExperienceTask(creature);
+				}
+				
+				break;
+		}
+	}
 
+	
+	/**
+	 * Checks if the {@code CreatureObject} is a Novice Entertainer.
+	 * @param performer
+	 * @return true if {@code performer} is a Novice Entertainer and false if not
+	 */
+	private boolean isEntertainer(CreatureObject performer) {
+		return performer.hasSkill("class_entertainer_phase1_novice");	// First entertainer skillbox
+	}
+	
+	private void scheduleExperienceTask(CreatureObject performer) {
+		Log.d(this, "Scheduled %s to receive XP every %d seconds", performer, XP_CYCLE_RATE);
+		synchronized(performerMap) {
+			performerMap.put(performer, executorService.scheduleAtFixedRate(new EntertainerExperience(performer), XP_CYCLE_RATE, XP_CYCLE_RATE, TimeUnit.SECONDS));
+		}
+	}
+	
+	private void cancelExperienceTask(CreatureObject performer) {
+		Log.d(this, "%s no longer receives XP every %d seconds", performer, XP_CYCLE_RATE);
+		synchronized (performerMap) {
+			Future<?> future = performerMap.remove(performer);
+
+			// TODO null check?
+			// TODO use return result?
+			future.cancel(false);	// Running tasks are allowed to finish.
+		}
+	}
+	
 	private void startDancing(CreatureObject dancer, String danceId) {
+		if(isEntertainer(dancer))
+			scheduleExperienceTask(dancer);
+		
 		dancer.setAnimation(danceId);
 		dancer.setPerformanceId(0);	// 0 - anything else will make it look like we're playing music
 		dancer.setPerforming(true);
 		dancer.setPosture(Posture.SKILL_ANIMATING);
+		
 		new ChatBroadcastIntent(dancer.getOwner(), "@performance:dance_start_self").broadcast();
 	}
 
@@ -115,10 +194,30 @@ public class EntertainmentService extends Service {
 			dancer.setPosture(Posture.UPRIGHT);
 			dancer.setPerformanceCounter(0);
 			dancer.setAnimation("");
+			
+			if(isEntertainer(dancer))
+				cancelExperienceTask(dancer);
+			
 			new ChatBroadcastIntent(dancer.getOwner(), "@performance:dance_stop_self").broadcast();
 		} else {
 			new ChatBroadcastIntent(dancer.getOwner(), "@performance:dance_not_performing").broadcast();
 		}
 	}
 
+	private class EntertainerExperience implements Runnable {
+
+		private final CreatureObject performer;
+		
+		private EntertainerExperience(CreatureObject performer) {
+			this.performer = performer;
+		}
+		
+		@Override
+		public void run() {
+			int xpGained = 123;	// TODO: This depends on the performance!
+			new ExperienceIntent(performer, "entertainer", xpGained).broadcast();
+		}
+		
+	}
+	
 }
