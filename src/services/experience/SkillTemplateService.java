@@ -99,7 +99,7 @@ public final class SkillTemplateService extends Service {
 				if (templates == null) {
 					Log.w(this, "%s tried to level up to %d with invalid profession %s", creatureObject, level, profession);
 				} else {
-					int skillIndex = ((level <= 10) ? ((level - 1) / 3) : ((((level - 10) / 4)) + 3));
+					int skillIndex = (level <= 10) ? ((level - 1) / 3) : (((level - 10) / 4) + 3);
 
 					String skillName = templates[skillIndex];
 					new SkillBoxGrantedIntent(skillName, creatureObject).broadcast();
