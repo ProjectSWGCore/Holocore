@@ -31,13 +31,11 @@ import intents.DanceIntent;
 import intents.PlayerEventIntent;
 import intents.chat.ChatBroadcastIntent;
 import intents.experience.ExperienceIntent;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import resources.Posture;
 import resources.client_info.ClientFactory;
@@ -56,6 +54,7 @@ public class EntertainmentService extends Service {
 	// TODO: Investigate the precise rate
 	// TODO: No XP gains after level 90.. or does ExperienceManager handle that?
 	// TODO: when performing, make NPCs in a radius of x look towards the player (?) and clap. When they stop, turn back (?) and stop clapping
+	// TODO: look into issues when logging in/out while dancing
 	private static final byte XP_CYCLE_RATE = 10;
 	
 	private final Map<String, Integer> danceMap;	// dance performanceNames mapped to danceId
@@ -134,11 +133,16 @@ public class EntertainmentService extends Service {
 		switch(i.getEvent()) {
 			case PE_LOGGED_OUT:
 				// Don't keep giving them XP if they log out
-				cancelExperienceTask(i.getPlayer().getCreatureObject());
+				CreatureObject creature = i.getPlayer().getCreatureObject();
+				
+				if(creature.isPerforming()) {
+					cancelExperienceTask(creature);
+				}
+				
 				break;
 			case PE_ZONE_IN_SERVER: 
 				// We need to check if they're dancing in order to start giving them XP
-				CreatureObject creature = i.getPlayer().getCreatureObject();
+				creature = i.getPlayer().getCreatureObject();
 				
 				if(creature.isPerforming()) {
 					scheduleExperienceTask(creature);
