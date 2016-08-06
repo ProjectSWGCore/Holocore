@@ -51,10 +51,7 @@ import resources.server_info.Log;
  */
 public class EntertainmentService extends Service {
 
-	// TODO: Investigate the precise rate
-	// TODO: No XP gains after level 90.. or does ExperienceManager handle that?
 	// TODO: when performing, make NPCs in a radius of x look towards the player (?) and clap. When they stop, turn back (?) and stop clapping
-	// TODO: look into issues when logging in/out while dancing
 	private static final byte XP_CYCLE_RATE = 10;
 	
 	private final Map<String, Integer> danceMap;	// dance performanceNames mapped to danceId
