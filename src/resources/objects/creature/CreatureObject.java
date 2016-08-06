@@ -781,7 +781,7 @@ public class CreatureObject extends TangibleObject {
 	
 	@Override
 	public int hashCode() {
-		return (super.hashCode() * 7 + posture.getId()) * 13 + race.toString().hashCode();
+		return super.hashCode() * 20 + race.toString().hashCode();
 	}
 	
 	public void sendBaselines(Player target) {
