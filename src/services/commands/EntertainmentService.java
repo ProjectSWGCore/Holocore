@@ -173,7 +173,7 @@ public class EntertainmentService extends Service {
 		Log.d(this, "%s no longer receives XP every %d seconds", performer, XP_CYCLE_RATE);
 		synchronized (performerMap) {
 			Future<?> future = performerMap.remove(performer);
-
+			
 			// TODO null check?
 			// TODO use return result?
 			future.cancel(false);	// Running tasks are allowed to finish.
@@ -181,13 +181,14 @@ public class EntertainmentService extends Service {
 	}
 	
 	private void startDancing(CreatureObject dancer, String danceId) {
-		if(isEntertainer(dancer))
-			scheduleExperienceTask(dancer);
-		
 		dancer.setAnimation(danceId);
 		dancer.setPerformanceId(0);	// 0 - anything else will make it look like we're playing music
 		dancer.setPerforming(true);
 		dancer.setPosture(Posture.SKILL_ANIMATING);
+		
+		// Only entertainers get XP
+		if(isEntertainer(dancer))
+			scheduleExperienceTask(dancer);
 		
 		new ChatBroadcastIntent(dancer.getOwner(), "@performance:dance_start_self").broadcast();
 	}
@@ -199,6 +200,7 @@ public class EntertainmentService extends Service {
 			dancer.setPerformanceCounter(0);
 			dancer.setAnimation("");
 			
+			// Non-entertainers don't receive XP - ignore them
 			if(isEntertainer(dancer))
 				cancelExperienceTask(dancer);
 			
