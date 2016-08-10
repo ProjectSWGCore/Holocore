@@ -33,6 +33,7 @@ import intents.network.CloseConnectionIntent;
 import intents.object.DestroyObjectIntent;
 import intents.object.ObjectCreatedIntent;
 import intents.object.ObjectTeleportIntent;
+import intents.object.CreateStaticItemIntent;
 import intents.player.DeleteCharacterIntent;
 import resources.Location;
 import resources.Terrain;
@@ -125,7 +126,7 @@ public class QaToolCmdCallback implements ICmdCallback {
 	}
 	
 	private void displayItemCreator(Player creator) {
-		SuiInputBox inputBox = new SuiInputBox(SuiButtons.OK_CANCEL, "Item Creator", "Enter the template of the item you wish to create");
+		SuiInputBox inputBox = new SuiInputBox(SuiButtons.OK_CANCEL, "Item Creator", "Enter the name of the item you wish to create");
 		inputBox.addOkButtonCallback("handleCreateItem", (player, actor, event, parameters) -> handleCreateItem(player, SuiInputBox.getEnteredText(parameters)));
 		inputBox.addCancelButtonCallback("displayMainWindow", (player, actor, event, parameters) -> displayMainWindow(player));
 		inputBox.display(creator);
@@ -133,25 +134,17 @@ public class QaToolCmdCallback implements ICmdCallback {
 	
 	/* Handlers */
 	
-	private void handleCreateItem(Player player, String template) {
-		SWGObject object = ObjectCreator.createObjectFromTemplate(template);
-		if (object == null) {
-			sendSystemMessage(player, "Failed to create object with template \'" + template + "\'");
-			return;
-		}
-		new ObjectCreatedIntent(object).broadcast();
-		
-		SWGObject creature = player.getCreatureObject();
+	private void handleCreateItem(Player player, String itemName) {
+		CreatureObject creature = player.getCreatureObject();
 		if (creature == null)
 			return;
 		
 		SWGObject inventory = creature.getSlottedObject("inventory");
 		if (inventory == null)
 			return;
-		
-		object.moveToContainer(inventory);
-		sendSystemMessage(player, "Object has been created and placed in your inventory");
-		Log.i("QA", "%s created item from template %s", player, template);
+
+		Log.i("QA", "%s attempted to create item %s", player, itemName);
+		new CreateStaticItemIntent(inventory, itemName).broadcast();
 	}
 	
 	private void forceDelete(final ObjectManager objManager, final Player player, final SWGObject target) {
