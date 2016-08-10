@@ -28,6 +28,7 @@
 package resources.commands.callbacks;
 
 import intents.chat.ChatBroadcastIntent;
+import intents.experience.ExperienceIntent;
 import intents.network.CloseConnectionIntent;
 import intents.object.DestroyObjectIntent;
 import intents.object.ObjectCreatedIntent;
@@ -96,6 +97,12 @@ public class QaToolCmdCallback implements ICmdCallback {
 					break;
 				case "details":
 					Scripts.invoke("commands/helper/qatool/details", "sendDetails", player, target, args.split(" "));
+					break;
+				case "xp":
+					if(command.length == 3)
+						grantXp(player, command[1], command[2]);
+					else
+						sendSystemMessage(player, "QATool XP: Expected format: /qatool xp <xpType> <xpGained>");
 					break;
 				default:
 					displayMainWindow(player);
@@ -250,6 +257,17 @@ public class QaToolCmdCallback implements ICmdCallback {
 	private void displayHelp(Player player) {
 		String prompt = "The following are acceptable arguments that can be used as shortcuts to the various QA tools:\n" + "item <template> -- Generates a new item and adds it to your inventory, not providing template parameter will display Item Creator window\n" + "help -- Displays this window\n";
 		createMessageBox(player, "QA Tool - Help", prompt);
+	}
+	
+	private void grantXp(Player player, String xpType, String xpGainedArg) {
+		try {
+			int xpGained = Integer.valueOf(xpGainedArg);
+			new ExperienceIntent(player.getCreatureObject(), xpType, xpGained).broadcast();
+			Log.i("QA", "XP command: %s gave themselves %d %s XP", player.getUsername(), xpGained, xpType);
+		} catch (NumberFormatException e) {
+			sendSystemMessage(player, String.format("XP command: %s is not a number", xpGainedArg));
+			Log.e("QA", "XP command: %s gave a non-numerical XP gained argument of %s", player.getUsername(), xpGainedArg);
+		}
 	}
 	
 	/* Utility Methods */

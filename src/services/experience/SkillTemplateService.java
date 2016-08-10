@@ -29,14 +29,23 @@ package services.experience;
 
 import intents.experience.LevelChangedIntent;
 import intents.experience.SkillBoxGrantedIntent;
+import java.awt.Color;
 import java.util.HashMap;
 import java.util.Map;
+import network.packets.swg.zone.PlayClientEffectObjectMessage;
+import network.packets.swg.zone.PlayMusicMessage;
+import network.packets.swg.zone.object_controller.ShowFlyText;
+import network.packets.swg.zone.object_controller.ShowFlyText.Scale;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
+import resources.common.RGB;
 import resources.control.Intent;
 import resources.control.Service;
+import resources.encodables.OutOfBandPackage;
+import resources.encodables.StringId;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
+import resources.player.Player;
 import resources.server_info.Log;
 
 /**
@@ -77,8 +86,10 @@ public final class SkillTemplateService extends Service {
 		short oldLevel = i.getPreviousLevel();
 		short newLevel = i.getNewLevel();
 		CreatureObject creatureObject = i.getCreatureObject();
+		Player player = creatureObject.getOwner();
+		long objectId = creatureObject.getObjectId();
 		
-		for (int level = oldLevel; level <= newLevel; level++) {
+		for (int level = oldLevel + 1; level <= newLevel; level++) {
 			// Skills are only awarded every third or fourth level
 			if ((level == 4 || level == 7 || level == 10) || ((level > 10) && (((level - 10) % 4) == 0))) {
 				PlayerObject playerObject = creatureObject.getPlayerObject();
@@ -88,17 +99,22 @@ public final class SkillTemplateService extends Service {
 				if (templates == null) {
 					Log.w(this, "%s tried to level up to %d with invalid profession %s", creatureObject, level, profession);
 				} else {
-					int skillIndex = ((level <= 10) ? ((level - 1) / 3) : ((((level - 10) / 4)) + 3));
+					int skillIndex = (level <= 10) ? ((level - 1) / 3) : (((level - 10) / 4) + 3);
 
 					String skillName = templates[skillIndex];
 					new SkillBoxGrantedIntent(skillName, creatureObject).broadcast();
 					playerObject.setProfWheelPosition(skillName);
+					
 					// TODO roadmap reward items
-					// TODO flytext object.showFlyText(OutOfBand.ProsePackage("@cbt_spam:skill_up"), 2.5f, new RGB(154, 205, 50), 0, true);
-					// TODO client effect clienteffect/skill_granted.cef
-					// TODO audio sound/music_acq_bountyhunter.snd
+					
+					creatureObject.sendObserversAndSelf(new PlayClientEffectObjectMessage("clienteffect/skill_granted.cef", "", objectId));
+					sendPacket(player, new ShowFlyText(objectId, new StringId("cbt_spam", "skill_up"), Scale.LARGEST, new RGB(Color.GREEN)));
+					sendPacket(player, new PlayMusicMessage(0, "sound/music_acq_bountyhunter.snd", 1, false));
+					Log.d(this, "Level %d has skill %s - %s received it", level, skillName, creatureObject);
 				}
 			} else {
+				creatureObject.sendObserversAndSelf(new PlayClientEffectObjectMessage("clienteffect/level_granted.cef", "", objectId));
+				sendPacket(player, new ShowFlyText(objectId, new StringId("cbt_spam", "level_up"), Scale.LARGEST, new RGB(Color.BLUE)));
 				Log.d(this, "Level %d has no skillbox - %s is rewarded nothing", level, creatureObject);
 			}
 		}
