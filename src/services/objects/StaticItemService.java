@@ -415,17 +415,17 @@ public final class StaticItemService extends Service {
 				case "RIFLE": category = WeaponType.RIFLE; break;
 				case "CARBINE": category = WeaponType.CARBINE; break;
 				case "PISTOL": category = WeaponType.PISTOL; break;
-				// Category num 3 is a pre-NGE artifact for pre-NGE heavy weapons
-				case "1HAND_MELEE": category = WeaponType.ONE_HANDED_MELEE; break;
-				case "2HAND_MELEE": category = WeaponType.TWO_HANDED_MELEE; break;
+				case "HEAVY": category = WeaponType.HEAVY; break; // pre-NGE artifact for pre-NGE heavy weapons
+				case "ONE_HANDED_MELEE": category = WeaponType.ONE_HANDED_MELEE; break;
+				case "TWO_HANDED_MELEE": category = WeaponType.TWO_HANDED_MELEE; break;
 				case "UNARMED": category = WeaponType.UNARMED; break;
-				case "POLEARM": category = WeaponType.POLEARM_MELEE; break;
+				case "POLEARM_MELEE": category = WeaponType.POLEARM_MELEE; break;
 				case "THROWN": category = WeaponType.THROWN; break;
-				case "1HAND_LIGHTSABER": category = WeaponType.ONE_HANDED_SABER; break;
-				case "2HAND_LIGHTSABER": category = WeaponType.TWO_HANDED_SABER; break;
-				// TODO lightsaber polearm 11?
-				case "HEAVY": category = WeaponType.HEAVY_WEAPON; break;	// Free targeting
-				// TODO directional heavies? Flamethrowers, ie
+				case "ONE_HANDED_SABER": category = WeaponType.ONE_HANDED_SABER; break;
+				case "TWO_HANDED_SABER": category = WeaponType.TWO_HANDED_SABER; break;
+				case "POLEARM_SABER": category = WeaponType.POLEARM_SABER; break;
+				case "DIRECTIONAL_TARGET_WEAPON": category = WeaponType.DIRECTIONAL_TARGET_WEAPON; break;	// Free targeting
+				case "LIGHT_RIFLE": category = WeaponType.LIGHT_RIFLE; break;
 				default:
 					// TODO log the fact that the weapon type isn't recognised.
 					// We return false here. That way, we don't store the
