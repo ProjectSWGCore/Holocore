@@ -31,6 +31,7 @@ import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.combat.DamageType;
 import resources.network.BaselineBuilder;
 import resources.network.NetBuffer;
+import resources.network.NetBufferStream;
 import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
 
@@ -170,6 +171,33 @@ public class WeaponObject extends TangibleObject {
 	public void parseBaseline6(NetBuffer buffer) {
 		super.parseBaseline6(buffer);
 		type = WeaponType.getWeaponType(buffer.getInt());
+	}
+
+	@Override
+	public void save(NetBufferStream stream) {
+		stream.addByte(1);
+		stream.addAscii(damageType.name());
+		stream.addAscii(elementalType.name());
+		stream.addInt(elementalValue);
+		stream.addFloat(attackSpeed);
+		stream.addFloat(maxRange);
+		stream.addAscii(type.name());
+	}
+
+	@Override
+	public void read(NetBufferStream stream) {
+		super.read(stream);
+		switch(stream.getByte()) {
+			case 1:
+				damageType = DamageType.valueOf(stream.getAscii());
+				elementalType = DamageType.valueOf(stream.getAscii());
+				elementalValue = stream.getInt();
+			default:
+				attackSpeed = stream.getFloat();
+				maxRange = stream.getFloat();
+				type = WeaponType.valueOf(stream.getAscii());
+				break;
+		}
 	}
 	
 }
