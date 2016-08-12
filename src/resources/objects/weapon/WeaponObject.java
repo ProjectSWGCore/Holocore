@@ -177,7 +177,7 @@ public class WeaponObject extends TangibleObject {
 	public void save(NetBufferStream stream) {
 		stream.addByte(1);
 		stream.addAscii(damageType.name());
-		stream.addAscii(elementalType.name());
+		stream.addAscii(elementalType != null ? elementalType.name() : "");
 		stream.addInt(elementalValue);
 		stream.addFloat(attackSpeed);
 		stream.addFloat(maxRange);
@@ -190,7 +190,12 @@ public class WeaponObject extends TangibleObject {
 		switch(stream.getByte()) {
 			case 1:
 				damageType = DamageType.valueOf(stream.getAscii());
-				elementalType = DamageType.valueOf(stream.getAscii());
+				String elementalTypeName = stream.getAscii();
+				
+				// A weapon doesn't necessarily have an elemental type
+				if(!elementalTypeName.isEmpty())
+					elementalType = DamageType.valueOf(elementalTypeName);
+				
 				elementalValue = stream.getInt();
 			default:
 				attackSpeed = stream.getFloat();
