@@ -175,6 +175,7 @@ public class WeaponObject extends TangibleObject {
 
 	@Override
 	public void save(NetBufferStream stream) {
+		super.save(stream);
 		stream.addByte(1);
 		stream.addAscii(damageType.name());
 		stream.addAscii(elementalType != null ? elementalType.name() : "");
