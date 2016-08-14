@@ -40,6 +40,7 @@ import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
+import resources.radial.RadialItem;
 import resources.server_info.ItemDatabase;
 import resources.server_info.RelationalServerData;
 import resources.server_info.RelationalServerFactory;
@@ -79,6 +80,10 @@ public class UniformBoxService extends Service {
 	private void processUseUniformBox(RadialSelectionIntent rsi) {
 		if (!rsi.getTarget().getTemplate().equals(UNIFORM_BOX_IFF))
 			return;
+		
+		if(!rsi.getSelection().equals(RadialItem.ITEM_USE)) {
+			return;
+		}
 		
 		CreatureObject creature = rsi.getPlayer().getCreatureObject();
 		SWGObject inventory = creature.getSlottedObject("inventory");
