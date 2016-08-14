@@ -78,7 +78,7 @@ public class UniformBoxService extends Service {
 	}
 	
 	private void processUseUniformBox(RadialSelectionIntent rsi) {
-		if (!rsi.getTarget().getTemplate().equals(UNIFORM_BOX_IFF) || !rsi.getSelection().equals(RadialItem.ITEM_USE))
+		if (!rsi.getTarget().getTemplate().equals(UNIFORM_BOX_IFF) && !rsi.getSelection().equals(RadialItem.ITEM_USE))
 			return;
 		
 		CreatureObject creature = rsi.getPlayer().getCreatureObject();
