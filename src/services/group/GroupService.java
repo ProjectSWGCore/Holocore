@@ -352,9 +352,16 @@ public class GroupService extends Service {
 		}
 
 		CreatureObject senderCreo = sender.getCreatureObject();
-		
+		long senderGroupId = senderCreo.getGroupId();
+
+		// Leader's current group and invited group do not match
+		if (senderGroupId != groupId && groupId != -1) {
+			sendInviterNotLeaderMessage(player, sender);
+			return;
+		}
+
 		// Group doesn't exist yet
-		if (senderCreo.getGroupId() == 0) {
+		if (senderGroupId == 0) {
 
 			group = createGroup(sender);
 
@@ -372,8 +379,7 @@ public class GroupService extends Service {
 			group = getGroup(senderCreo.getGroupId());
 
 			if (group.getLeaderId() != sender.getCreatureObject().getObjectId()) {
-				sendSystemMessage(player, "join_inviter_not_leader", sender.getCreatureObject().getObjectId());
-				creo.updateGroupInviteData(null, 0, "");
+			    sendInviterNotLeaderMessage(player, sender);
 				return;
 			}
 
@@ -500,6 +506,11 @@ public class GroupService extends Service {
 				ChatAvatar.getSystemAvatar(galaxy), null, ChatRoomUpdateIntent.UpdateType.CREATE).broadcast();
 
 		return group;
+	}
+
+	private void sendInviterNotLeaderMessage(Player invitedPlayer, Player sender) {
+		sendSystemMessage(invitedPlayer, "join_inviter_not_leader", "TT", sender.getCharacterName());
+		invitedPlayer.getCreatureObject().updateGroupInviteData(null, 0, "");
 	}
 
 	private void sendGroupSystemMessage(GroupObject group, String id) {
