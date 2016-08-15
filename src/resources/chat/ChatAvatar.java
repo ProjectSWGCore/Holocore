@@ -36,6 +36,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.nio.ByteBuffer;
 import java.util.Locale;
+import services.CoreManager;
 
 /**
  * @author Waverunner
@@ -175,7 +176,7 @@ public class ChatAvatar implements Encodable, Persistable {
 	}
 
 	public static ChatAvatar getFromPlayer(Player player) {
-		return new ChatAvatar(player.getNetworkId(), player.getCharacterName().split(" ")[0].toLowerCase(Locale.US), player.getGalaxyName());
+		return new ChatAvatar(player.getNetworkId(), player.getCharacterName().split(" ")[0].toLowerCase(Locale.US), CoreManager.getGalaxy().getName());
 	}
 
 	public static ChatAvatar getSystemAvatar(String galaxy) {
