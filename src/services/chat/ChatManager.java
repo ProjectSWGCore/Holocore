@@ -174,7 +174,7 @@ public class ChatManager extends Manager {
 		switch (i.getRequestType()) {
 			case TARGET_STATUS: {
 				Player player = i.getPlayer();
-				sendTargetAvatarStatus(player, new ChatAvatar(0, i.getTarget(), player.getGalaxyName()));
+				sendTargetAvatarStatus(player, new ChatAvatar(0, i.getTarget(), CoreManager.getGalaxy().getName()));
 				break;
 			}
 			case FRIEND_ADD_TARGET:
@@ -362,7 +362,7 @@ public class ChatManager extends Manager {
 	private void updateChatAvatarStatus(Player player, boolean online) {
 		PlayerManager playerManager = player.getPlayerManager();
 		ChatAvatar avatar = ChatAvatar.getFromPlayer(player);
-		String galaxy = player.getGalaxyName();
+		String galaxy = CoreManager.getGalaxy().getName();
 
 		if (online) {
 			PlayerObject playerObject = player.getPlayerObject();
