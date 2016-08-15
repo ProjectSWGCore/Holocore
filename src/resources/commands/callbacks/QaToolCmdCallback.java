@@ -171,29 +171,19 @@ public class QaToolCmdCallback implements ICmdCallback {
 		String[] nameParts = name.split(" ");
 		String loc = "";
 		if (nameParts.length >= 2) {
-			switch (nameParts.length) {
-				case 2:
-					name = nameParts[0];
-					loc = nameParts[1];
-					break;
-				case 3:
-					name = nameParts[0] + " " + nameParts[1];
-					loc = nameParts[2];
-					break;
-				default:
-					sendSystemMessage(player, "Invalid arguments! Expected <playername> [opt]<terrain>");
-					break;
-			}
+			name = nameParts[0];
+			loc = nameParts[1];
+		} else {
+			sendSystemMessage(player, "Invalid arguments! Expected <playername> [opt]<terrain>");
 		}
 		name = name.trim();
 		recoverPlayer(objManager, playerManager, player, name, loc);
 	}
 	
 	private void recoverPlayer(ObjectManager objManager, PlayerManager playerManager, Player player, String name, String loc) {
-		long id = playerManager.getCharacterIdByName(name);
+		long id = playerManager.getPlayerByCreatureFirstName(name).getCreatureObject().getObjectId();
 		if (id == 0) {
 			sendSystemMessage(player, "Could not find player by name: '" + name + "'");
-			sendSystemMessage(player, "Make sure it is the full name (case insensitive) and try again");
 			return;
 		}
 		SWGObject recoveree = objManager.getObjectById(id);
