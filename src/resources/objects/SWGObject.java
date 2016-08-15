@@ -804,8 +804,12 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		}
 		if (!sendUpdate)
 			return;
-		if (getOwner() != null)
-			obj.createObject(getOwner());
+		Player owner = getOwner();
+		if (owner != null && !owner.equals(obj.getOwner())) {
+			// Don't resend character baselines to the player every time they reenter awareness!
+			obj.createObject(owner);
+		}
+		
 		for (SWGObject create : getObservers(false))
 			obj.createObject(create.getOwner());
 	}
@@ -819,8 +823,11 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		}
 		if (!sendUpdate)
 			return;
-		if (getOwner() != null)
+		Player owner = getOwner();
+		if (owner != null && !owner.equals(obj.getOwner())) {
+			// Don't destroy the character of a player that's just left a building
 			obj.destroyObject(getOwner());
+		}
 		for (SWGObject destroy : getObservers(false))
 			obj.destroyObject(destroy.getOwner());
 	}
