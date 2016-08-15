@@ -1,0 +1,18 @@
+gcw_base_object_id	terrain	imp_template	reb_template	x	y	z	heading	building_name	cell_id	radius	comment
+INTEGER PRIMARY KEY	TEXT	TEXT	TEXT	REAL	REAL	REAL	REAL	TEXT	TEXT	REAL	TEXT
+20003	NABOO	object/tangible/gcw/flip_banner_onpole_imperial.iff	object/tangible/gcw/flip_banner_onpole_rebel.iff	1000.50	298.00	-1484.08	0	nab_world	0	256	Banner
+20004	NABOO	object/tangible/gcw/flip_banner_onpole_imperial.iff	object/tangible/gcw/flip_banner_onpole_rebel.iff	1007.04	298.00	-1484.08	0	nab_world	0	256	Banner
+20005	NABOO	object/tangible/gcw/flip_banner_onpole_imperial.iff	object/tangible/gcw/flip_banner_onpole_rebel.iff	1008.62	298.00	-1497.34	45	nab_world	0	256	Banner
+20006	NABOO	object/tangible/gcw/flip_banner_onpole_imperial.iff	object/tangible/gcw/flip_banner_onpole_rebel.iff	994.71	298.00	-1505.54	90	nab_world	0	256	Banner
+20007	NABOO	object/tangible/gcw/flip_banner_onpole_imperial.iff	object/tangible/gcw/flip_banner_onpole_rebel.iff	994.71	298.00	-1512.19	90	nab_world	0	256	Banner
+20008	NABOO	object/tangible/gcw/flip_banner_onpole_imperial.iff	object/tangible/gcw/flip_banner_onpole_rebel.iff	964.64	298.00	-1492.90	90	nab_world	0	256	Banner
+20009	NABOO	object/tangible/gcw/flip_banner_onpole_imperial.iff	object/tangible/gcw/flip_banner_onpole_rebel.iff	956.14	298.00	-1519.80	0	nab_world	0	256	Banner
+20010	NABOO	object/tangible/gcw/flip_banner_onpole_imperial.iff	object/tangible/gcw/flip_banner_onpole_rebel.iff	14.43	-12.00	36.67	0	nab_gcw_base	6	256	Banner
+20011	NABOO	object/tangible/gcw/flip_banner_onpole_imperial.iff	object/tangible/gcw/flip_banner_onpole_rebel.iff	58.37	-12.00	61.63	90	nab_gcw_base	9	256	Banner
+20012	NABOO	object/tangible/gcw/flip_banner_onpole_imperial.iff	object/tangible/gcw/flip_banner_onpole_rebel.iff	58.37	-12.00	56.00	90	nab_gcw_base	9	256	Banner
+20013	NABOO	object/tangible/gcw/flip_banner_onpole_imperial.iff	object/tangible/gcw/flip_banner_onpole_rebel.iff	3.55	-12.00	51.21	0	nab_gcw_base	10	256	Banner
+20014	NABOO	object/tangible/gcw/flip_banner_onpole_imperial.iff	object/tangible/gcw/flip_banner_onpole_rebel.iff	25.23	-12.00	99.01	90	nab_gcw_base	14	256	Banner
+20015	NABOO	object/tangible/gcw/flip_banner_onpole_imperial.iff	object/tangible/gcw/flip_banner_onpole_rebel.iff	-18.25	-12.00	98.93	90	nab_gcw_base	16	256	Banner
+20016	NABOO	object/tangible/gcw/flip_banner_onpole_imperial.iff	object/tangible/gcw/flip_banner_onpole_rebel.iff	47.51	-20.00	103.37	0	nab_gcw_base	19	256	Banner
+20017	NABOO	object/tangible/gcw/flip_banner_onpole_imperial.iff	object/tangible/gcw/flip_banner_onpole_rebel.iff	55.13	-20.00	142.97	90	nab_gcw_base	21	256	Banner
+20018	NABOO	object/tangible/gcw/flip_banner_onpole_imperial.iff	object/tangible/gcw/flip_banner_onpole_rebel.iff	39.92	-20.00	142.97	90	nab_gcw_base	21	256	Banner

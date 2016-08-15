@@ -267,7 +267,7 @@ public class SWGList<E> extends ArrayList<E> implements Encodable, Serializable 
 		clearDeltaQueue();
 		ByteBuffer buffer;
 		synchronized (data) {
-			updateCount.set(data.size()+1);
+			updateCount.addAndGet(data.size());
 			
 			buffer = ByteBuffer.allocate(11 + dataSize).order(ByteOrder.LITTLE_ENDIAN);
 			buffer.putInt(data.size() + 1);

@@ -311,7 +311,10 @@ public class TravelService extends Service {
 			}
 			for (TravelGroup gt : travel.values())
 				gt.getPointsForTerrain(pointsForPlanet, nearest, to);
+			boolean existed = pointsForPlanet.remove(nearest);
 			Collections.sort(pointsForPlanet);
+			if (existed)
+				pointsForPlanet.add(0, nearest); // Yes ... adding it to the beginning of the list because I hate the client
 			
 			player.sendPacket(new PlanetTravelPointListResponse(req.getPlanetName(), pointsForPlanet, getAdditionalCosts(objectLocation, pointsForPlanet)));
 		}

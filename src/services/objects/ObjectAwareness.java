@@ -30,6 +30,7 @@ package services.objects;
 import intents.PlayerEventIntent;
 import intents.RequestZoneInIntent;
 import intents.network.GalacticPacketIntent;
+import intents.object.DestroyObjectIntent;
 import intents.object.MoveObjectIntent;
 import intents.object.ObjectCreatedIntent;
 import intents.object.ObjectTeleportIntent;
@@ -63,6 +64,7 @@ public class ObjectAwareness extends Service {
 	
 	private static final double AWARE_RANGE = 1024;
 	private static final int DEFAULT_LOAD_RANGE = (int) square(200); // Squared for speed
+	private static final Location GONE_LOCATION = new Location(0, 0, 0, null);
 	
 	private final Map <Terrain, QuadTree <SWGObject>> quadTree;
 	private final Map<Long, Location> locations;
@@ -72,6 +74,7 @@ public class ObjectAwareness extends Service {
 		locations = new HashMap<>();
 		registerForIntent(PlayerEventIntent.TYPE);
 		registerForIntent(ObjectCreatedIntent.TYPE);
+		registerForIntent(DestroyObjectIntent.TYPE);
 		registerForIntent(ObjectTeleportIntent.TYPE);
 		registerForIntent(GalacticPacketIntent.TYPE);
 		registerForIntent(MoveObjectIntent.TYPE);
@@ -88,6 +91,10 @@ public class ObjectAwareness extends Service {
 			case ObjectCreatedIntent.TYPE:
 				if (i instanceof ObjectCreatedIntent)
 					handleObjectCreatedIntent((ObjectCreatedIntent) i);
+				break;
+			case DestroyObjectIntent.TYPE:
+				if (i instanceof DestroyObjectIntent)
+					handleDestroyObjectIntent((DestroyObjectIntent) i);
 				break;
 			case ObjectTeleportIntent.TYPE:
 				if (i instanceof ObjectTeleportIntent)
@@ -113,23 +120,12 @@ public class ObjectAwareness extends Service {
 			return;
 		switch (pei.getEvent()) {
 			case PE_DISAPPEAR:
-				remove(creature);
-				for (SWGObject obj : creature.getObservers())
-					creature.destroyObject(obj.getOwner());
-				creature.clearAware();
+				moveToLocation(creature, creature.getParent(), null);
 				creature.setOwner(null);
 				break;
 			case PE_ZONE_IN_SERVER:
 				creature.resetAwareness();
-				add(creature);
-				update(creature);
-				if (creature.getParent() != null && creature.getOwner() != null) {
-					for (SWGObject observer : creature.getObservers())
-						creature.createObject(observer.getOwner());
-					for (SWGObject object : creature.getObjectsAware()) {
-						object.createObject(creature.getOwner());
-					}
-				}
+				moveToLocation(creature, creature.getParent(), creature.getLocation());
 				p.sendPacket(new CmdSceneReady());
 				break;
 			default:
@@ -137,10 +133,24 @@ public class ObjectAwareness extends Service {
 		}
 	}
 	
+	private void loadQuadTree() {
+		for (Terrain t : Terrain.values()) {
+			quadTree.put(t, new QuadTree<SWGObject>(16, -8192, -8192, 8192, 8192));
+		}
+	}
+	
 	private void handleObjectCreatedIntent(ObjectCreatedIntent oci) {
 		SWGObject object = oci.getObject();
-		add(object);
-		update(object);
+		if (isInAwareness(object))
+			moveToLocation(object, object.getLocation());
+	}
+	
+	private void handleDestroyObjectIntent(DestroyObjectIntent doi) {
+		SWGObject obj = doi.getObject();
+		obj.setLocation(GONE_LOCATION);
+		obj.moveToContainer(null);
+		obj.clearAware();
+		obj.clearCustomAware(true);
 	}
 	
 	private void processObjectTeleportIntent(ObjectTeleportIntent oti) {
@@ -148,11 +158,10 @@ public class ObjectAwareness extends Service {
 		Player owner = object.getOwner();
 		object.setLocation(oti.getNewLocation());
 		if (oti.getParent() != null) {
-			move(object, oti.getParent(), oti.getNewLocation());
+			moveToLocation(object, oti.getParent(), null);
 		} else {
-			move(object, oti.getNewLocation(), false);
+			moveToLocation(object, null);
 		}
-		object.clearAware();
 		if (object instanceof CreatureObject && ((CreatureObject) object).isLoggedInPlayer())
 			new RequestZoneInIntent(owner, (CreatureObject) object, false).broadcast();
 	}
@@ -186,7 +195,7 @@ public class ObjectAwareness extends Service {
 		BuildoutArea area = obj.getBuildoutArea();
 		if (area != null)
 			newLocation = area.adjustLocation(newLocation);
-		move(obj, newLocation, true);
+		moveToLocation(obj, newLocation);
 		if (area != null)
 			newLocation = area.readjustLocation(newLocation);
 		DataTransform transform = new DataTransform(obj.getObjectId());
@@ -201,11 +210,10 @@ public class ObjectAwareness extends Service {
 	
 	private void processMoveObjectIntentParent(MoveObjectIntent i) {
 		SWGObject obj = i.getObject();
-		Location newLocation = i.getNewLocation();
-		move(obj, i.getParent(), newLocation);
+		moveToLocation(obj, i.getParent(), i.getNewLocation());
 		DataTransformWithParent transform = new DataTransformWithParent(obj.getObjectId());
 		transform.setTimestamp((int) ProjectSWG.getGalacticTime());
-		transform.setLocation(newLocation);
+		transform.setLocation(i.getNewLocation());
 		transform.setLookAtYaw(0);
 		transform.setUseLookAtYaw(false);
 		transform.setSpeed((float) i.getSpeed());
@@ -222,7 +230,7 @@ public class ObjectAwareness extends Service {
 		if (area != null)
 			newLocation = area.adjustLocation(newLocation);
 		new PlayerTransformedIntent(obj, obj.getParent(), null, obj.getLocation(), newLocation).broadcast();
-		move(obj, newLocation, true);
+		moveToLocation(obj, newLocation);
 		if (area != null)
 			newLocation = area.readjustLocation(newLocation);
 		obj.sendDataTransforms(transform);
@@ -237,7 +245,7 @@ public class ObjectAwareness extends Service {
 		}
 		moveObjectSpeedChecks(obj, parent, newLocation);
 		new PlayerTransformedIntent((CreatureObject) obj, obj.getParent(), parent, obj.getLocation(), newLocation).broadcast();
-		move(obj, parent, newLocation);
+		moveToLocation(obj, parent, newLocation);
 		obj.sendParentDataTransforms(transformWithParent);
 	}
 	
@@ -267,38 +275,31 @@ public class ObjectAwareness extends Service {
 		}
 	}
 	
-	private void loadQuadTree() {
-		for (Terrain t : Terrain.values()) {
-			quadTree.put(t, new QuadTree<SWGObject>(16, -8192, -8192, 8192, 8192));
+	private void moveToLocation(SWGObject object, Location l) {
+		moveToLocation(object, null, l);
+	}
+	
+	private void moveToLocation(SWGObject object, SWGObject parent, Location l) {
+		remove(object);
+		if (parent != object.getParent())
+			object.moveToContainer(parent);
+		
+		if (l != null) {
+			object.setLocation(l);
+			if (isInAwareness(object)) {
+				add(object);
+				update(object);
+			}
+		} else {
+			object.clearAware();
 		}
-	}
-	
-	private boolean isInAwareness(SWGObject object) {
-		if (object instanceof CreatureObject && ((CreatureObject) object).isLoggedOutPlayer())
-			return false;
-		if (object.getTerrain() == null)
-			return false;
-		return object.getParent() == null && object instanceof TangibleObject;
-	}
-	
-	private boolean isInMap(SWGObject object) {
-		return object.getClassification() == ObjectClassification.GENERATED;
-	}
-	
-	private double invertNormalizedValue(double x) {
-		if (x < 0)
-			return -1 - x;
-		return 1-x;
 	}
 	
 	/**
 	 * Adds the specified object to the awareness quadtree
 	 * @param object the object to add
 	 */
-	public void add(SWGObject object) {
-		if (!isInAwareness(object))
-			return;
-		remove(object);
+	private void add(SWGObject object) {
 		Location l = object.getLocation();
 		if (isInMap(object)) {
 			synchronized (locations) {
@@ -315,7 +316,7 @@ public class ObjectAwareness extends Service {
 	 * Removes the specified object from the awareness quadtree
 	 * @param object the object to remove
 	 */
-	public void remove(SWGObject object) {
+	private boolean remove(SWGObject object) {
 		Location l;
 		if (isInMap(object)) {
 			synchronized (locations) {
@@ -325,50 +326,11 @@ public class ObjectAwareness extends Service {
 			l = object.getLocation();
 		}
 		if (l == null)
-			return;
+			return false;
 		QuadTree <SWGObject> tree = getTree(l);
 		synchronized (tree) {
-			tree.remove(l.getX(), l.getZ(), object);
+			return tree.remove(l.getX(), l.getZ(), object);
 		}
-	}
-	
-	/**
-	 * This function is used for moving objects within the world, which
-	 * includes moving from a cell to the world.
-	 * @param object the object to move
-	 * @param nLocation the new location
-	 * @param update boolean on whether or not to update the object's awareness
-	 */
-	private void move(SWGObject object, Location nLocation, boolean update) {
-		if (object.getParent() != null) {
-			object.moveToContainer(null);
-		} else {
-			remove(object); // World to World
-		}
-		object.setLocation(nLocation);
-		add(object);
-		if (update)
-			update(object);
-	}
-	
-	/**
-	 * This function is used for moving objects to or within containers,
-	 * probably a cell. This handles the logic for removing the object from the
-	 * previous cell and adding it to the new one, if necessary.
-	 * @param object the object to move
-	 * @param nParent the new parent the object will be in
-	 * @param nLocation the new location relative to the parent
-	 * @param update boolean on whether or not to update the object's awareness
-	 */
-	private void move(SWGObject object, SWGObject nParent, Location nLocation) {
-		SWGObject parent = object.getParent();
-		if (parent == null) {
-			remove(object); // Moving from world to cell
-		}
-		if (nParent != parent) { // Intentional. Just in case the ID matches or one is null
-			object.moveToContainer(nParent);
-		}
-		object.setLocation(nLocation);
 	}
 	
 	/**
@@ -377,7 +339,7 @@ public class ObjectAwareness extends Service {
 	 * @param obj the object to update
 	 */
 	private void update(SWGObject obj) {
-		if (!obj.isGenerated() || !isInAwareness(obj))
+		if (!obj.isGenerated())
 			return;
 		Location l = obj.getWorldLocation();
 		Set <SWGObject> objectAware = new HashSet<SWGObject>();
@@ -402,11 +364,27 @@ public class ObjectAwareness extends Service {
 			return false;
 		if (inRange instanceof CreatureObject && ((CreatureObject) inRange).isLoggedOutPlayer())
 			return false;
-		if (inRange.getParent() != null)
-			return false;
 		int distSquared = distanceSquared(objLoc, inRange.getWorldLocation());
 		int loadSquared = (int) (square(inRange.getLoadRange()) + 0.5);
 		return (loadSquared != 0 || distSquared <= DEFAULT_LOAD_RANGE) && (loadSquared == 0 || distSquared <= loadSquared);
+	}
+	
+	private boolean isInAwareness(SWGObject object) {
+		if (object instanceof CreatureObject && ((CreatureObject) object).isLoggedOutPlayer())
+			return false;
+		if (object.getTerrain() == null)
+			return false;
+		return object.getParent() == null && object instanceof TangibleObject;
+	}
+	
+	private boolean isInMap(SWGObject object) {
+		return object.getClassification() == ObjectClassification.GENERATED;
+	}
+	
+	private double invertNormalizedValue(double x) {
+		if (x < 0)
+			return -1 - x;
+		return 1-x;
 	}
 	
 	private int distanceSquared(Location l1, Location l2) {
