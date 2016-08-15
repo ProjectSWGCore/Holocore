@@ -45,8 +45,8 @@ public class RequestBiographyCmdCallback implements ICmdCallback {
 	public void execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
 		CreatureObject creatureObject = player.getCreatureObject();
 		if(target != null) {
-			if(creatureObject.isPlayer()) {
-				player.sendPacket(new BiographyUpdate(creatureObject.getObjectId(), target.getObjectId(), creatureObject.getPlayerObject().getBiography()));
+			if(target instanceof CreatureObject && ((CreatureObject) target).isPlayer()) {
+				player.sendPacket(new BiographyUpdate(creatureObject.getObjectId(), target.getObjectId(), ((CreatureObject) target).getPlayerObject().getBiography()));
 			} else {
 				Log.w("RequestBiographyCmdCallback", "%s tried to request biography of NPC %s", creatureObject, target);
 			}
