@@ -28,10 +28,12 @@
 package resources.commands.callbacks;
 
 import intents.chat.ChatBroadcastIntent;
+import intents.experience.ExperienceIntent;
 import intents.network.CloseConnectionIntent;
 import intents.object.DestroyObjectIntent;
 import intents.object.ObjectCreatedIntent;
 import intents.object.ObjectTeleportIntent;
+import intents.object.CreateStaticItemIntent;
 import intents.player.DeleteCharacterIntent;
 import resources.Location;
 import resources.Terrain;
@@ -97,6 +99,12 @@ public class QaToolCmdCallback implements ICmdCallback {
 				case "details":
 					Scripts.invoke("commands/helper/qatool/details", "sendDetails", player, target, args.split(" "));
 					break;
+				case "xp":
+					if(command.length == 3)
+						grantXp(player, command[1], command[2]);
+					else
+						sendSystemMessage(player, "QATool XP: Expected format: /qatool xp <xpType> <xpGained>");
+					break;
 				default:
 					displayMainWindow(player);
 					break;
@@ -118,7 +126,7 @@ public class QaToolCmdCallback implements ICmdCallback {
 	}
 	
 	private void displayItemCreator(Player creator) {
-		SuiInputBox inputBox = new SuiInputBox(SuiButtons.OK_CANCEL, "Item Creator", "Enter the template of the item you wish to create");
+		SuiInputBox inputBox = new SuiInputBox(SuiButtons.OK_CANCEL, "Item Creator", "Enter the name of the item you wish to create");
 		inputBox.addOkButtonCallback("handleCreateItem", (player, actor, event, parameters) -> handleCreateItem(player, SuiInputBox.getEnteredText(parameters)));
 		inputBox.addCancelButtonCallback("displayMainWindow", (player, actor, event, parameters) -> displayMainWindow(player));
 		inputBox.display(creator);
@@ -126,25 +134,17 @@ public class QaToolCmdCallback implements ICmdCallback {
 	
 	/* Handlers */
 	
-	private void handleCreateItem(Player player, String template) {
-		SWGObject object = ObjectCreator.createObjectFromTemplate(template);
-		if (object == null) {
-			sendSystemMessage(player, "Failed to create object with template \'" + template + "\'");
-			return;
-		}
-		new ObjectCreatedIntent(object).broadcast();
-		
-		SWGObject creature = player.getCreatureObject();
+	private void handleCreateItem(Player player, String itemName) {
+		CreatureObject creature = player.getCreatureObject();
 		if (creature == null)
 			return;
 		
 		SWGObject inventory = creature.getSlottedObject("inventory");
 		if (inventory == null)
 			return;
-		
-		object.moveToContainer(inventory);
-		sendSystemMessage(player, "Object has been created and placed in your inventory");
-		Log.i("QA", "%s created item from template %s", player, template);
+
+		Log.i("QA", "%s attempted to create item %s", player, itemName);
+		new CreateStaticItemIntent(inventory, itemName).broadcast();
 	}
 	
 	private void forceDelete(final ObjectManager objManager, final Player player, final SWGObject target) {
@@ -250,6 +250,17 @@ public class QaToolCmdCallback implements ICmdCallback {
 	private void displayHelp(Player player) {
 		String prompt = "The following are acceptable arguments that can be used as shortcuts to the various QA tools:\n" + "item <template> -- Generates a new item and adds it to your inventory, not providing template parameter will display Item Creator window\n" + "help -- Displays this window\n";
 		createMessageBox(player, "QA Tool - Help", prompt);
+	}
+	
+	private void grantXp(Player player, String xpType, String xpGainedArg) {
+		try {
+			int xpGained = Integer.valueOf(xpGainedArg);
+			new ExperienceIntent(player.getCreatureObject(), xpType, xpGained).broadcast();
+			Log.i("QA", "XP command: %s gave themselves %d %s XP", player.getUsername(), xpGained, xpType);
+		} catch (NumberFormatException e) {
+			sendSystemMessage(player, String.format("XP command: %s is not a number", xpGainedArg));
+			Log.e("QA", "XP command: %s gave a non-numerical XP gained argument of %s", player.getUsername(), xpGainedArg);
+		}
 	}
 	
 	/* Utility Methods */

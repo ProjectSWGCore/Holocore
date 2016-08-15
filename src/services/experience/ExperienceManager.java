@@ -29,12 +29,19 @@ package services.experience;
 
 import intents.experience.ExperienceIntent;
 import intents.experience.LevelChangedIntent;
+import java.awt.Color;
 import java.util.HashMap;
 import java.util.Map;
+import network.packets.swg.zone.object_controller.ShowFlyText;
+import network.packets.swg.zone.object_controller.ShowFlyText.Scale;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
+import resources.common.RGB;
 import resources.control.Intent;
 import resources.control.Manager;
+import resources.encodables.OutOfBandPackage;
+import resources.encodables.ProsePackage;
+import resources.encodables.StringId;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
 import resources.server_info.Log;
@@ -119,7 +126,10 @@ public final class ExperienceManager extends Manager {
 		playerObject.setExperiencePoints(xpType, newXpTotal);
 		creatureObject.setTotalLevelXp(newXpTotal);
 		Log.d(this, "%s gained %d %s XP", creatureObject, xpGained, xpType);
-		// TODO show +XP flytext
+		
+		// Show flytext above the creature that received XP, but only to them
+		creatureObject.sendSelf(new ShowFlyText(creatureObject.getObjectId(), new OutOfBandPackage(new ProsePackage(new StringId("base_player", "prose_flytext_xp"), "DI", xpGained)), Scale.MEDIUM, new RGB(Color.magenta)));
+		
 		return newXpTotal;
 	}
 	

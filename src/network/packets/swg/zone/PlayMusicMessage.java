@@ -25,44 +25,53 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package resources.radial;
+package network.packets.swg.zone;
 
-import java.util.ArrayList;
-import java.util.List;
+import network.packets.swg.SWGPacket;
 
-public class RadialOption {
+import java.nio.ByteBuffer;
+
+public class PlayMusicMessage extends SWGPacket {
+	public static final int CRC = getCrc("PlayMusicMessage");
 	
-	private RadialItem item;
-	private List<RadialOption> children;
-	private String overriddenText;
+	private long objectId;
+	private String soundFile;
+	private int repititions;	// playType?
+	private boolean loop;
 	
-	public RadialOption() {
-		this.children = new ArrayList<>();
+	/**
+	 * 
+	 * @param objectId is the ID for the object where this sound originates from.
+	 * Use an object ID of 0 if the sound doesn't originate from anywhere.
+	 * @param soundFile is the full path to the .snd file to play
+	 * @param repititions TODO
+	 * @param loop can be set to true if this sound should keep looping (TODO ?)
+	 */
+	public PlayMusicMessage(long objectId, String soundFile, int repititions, boolean loop) {
+		this.objectId = objectId;
+		this.soundFile = soundFile;
+		this.repititions = repititions;
+		this.loop = loop;
 	}
-	
-	public RadialOption(RadialItem item) {
-		this.item = item;
-		this.children = new ArrayList<>();
-	}
-	
-	public void setItem(RadialItem item) { this.item = item; }
-	public void addChild(RadialOption option) { this.children.add(option); }
-	public void addChild(RadialItem item) { addChild(new RadialOption(item)); }
-	public void addChildWithOverriddenText(RadialItem item, String overridenText) {
-		addChild(item);
-		setOverriddenText(overriddenText);
-	}
-	public void setOverriddenText(String overridenText) { this.overriddenText = overridenText; }
-	
-	public int getId() { return item.getId(); }
-	public int getOptionType() { return item.getOptionType(); }
-	public String getText() { return overriddenText != null ? overriddenText : item.getText(); }
-	
-	public List<RadialOption> getChildren() { return children; }
 	
 	@Override
-	public String toString() { 
-		return String.format("ID=%d Option=%d Text=%s", getId(), getOptionType(), getText()); 
+	public void decode(ByteBuffer data) {
+		super.decode(data, CRC);
+		soundFile = getAscii(data);
+		objectId = getLong(data);
+		repititions = getInt(data);
+		loop = getBoolean(data);
 	}
 	
+	@Override
+	public ByteBuffer encode() {
+		ByteBuffer data = ByteBuffer.allocate(21 + soundFile.length());
+		addShort(data, 5);
+		addInt(  data, CRC);
+		addAscii(data, soundFile);
+		addLong(data, objectId);
+		addInt(data, repititions);
+		addBoolean(data, loop);
+		return data;
+	}
 }

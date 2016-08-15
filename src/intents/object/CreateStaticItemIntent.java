@@ -25,44 +25,34 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package resources.radial;
+package intents.object;
 
-import java.util.ArrayList;
-import java.util.List;
+import resources.control.Intent;
+import resources.objects.SWGObject;
 
-public class RadialOption {
+/**
+ *
+ * @author mads
+ */
+public final class CreateStaticItemIntent extends Intent {
 	
-	private RadialItem item;
-	private List<RadialOption> children;
-	private String overriddenText;
+	public static final String TYPE = "CreateStaticItemIntent";
 	
-	public RadialOption() {
-		this.children = new ArrayList<>();
+	private final SWGObject container;
+	private final String[] itemNames;
+	
+	public CreateStaticItemIntent(SWGObject container, String... itemNames) {
+		super(TYPE);
+		this.container = container;
+		this.itemNames = itemNames;
 	}
-	
-	public RadialOption(RadialItem item) {
-		this.item = item;
-		this.children = new ArrayList<>();
+
+	public SWGObject getContainer() {
+		return container;
 	}
-	
-	public void setItem(RadialItem item) { this.item = item; }
-	public void addChild(RadialOption option) { this.children.add(option); }
-	public void addChild(RadialItem item) { addChild(new RadialOption(item)); }
-	public void addChildWithOverriddenText(RadialItem item, String overridenText) {
-		addChild(item);
-		setOverriddenText(overriddenText);
-	}
-	public void setOverriddenText(String overridenText) { this.overriddenText = overridenText; }
-	
-	public int getId() { return item.getId(); }
-	public int getOptionType() { return item.getOptionType(); }
-	public String getText() { return overriddenText != null ? overriddenText : item.getText(); }
-	
-	public List<RadialOption> getChildren() { return children; }
-	
-	@Override
-	public String toString() { 
-		return String.format("ID=%d Option=%d Text=%s", getId(), getOptionType(), getText()); 
+
+	public String[] getItemNames() {
+		return itemNames;
 	}
 	
 }

@@ -874,7 +874,7 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 2200874	TATOOINE	tat_hutt_cave	AREA	5	61.84	-56.37	-171.98	0	1	Jabba's assassin	12843	dungeon	Hutt Cave	3	FLOAT	idle	0	0	0	0	300	120	6
 2200875	TATOOINE	tat_hutt_cave	AREA	6	-11.38	-64.60	-200.22	0	1	Jabba's compound guard	12844	dungeon	Hutt Cave	3	FLOAT	idle	0	0	0	0	300	120	6
 2200876	TATOOINE	tat_hutt_cave	AREA	6	-37.25	-66.93	-179.69	0	1	Jabba's assassin	12843	dungeon	Hutt Cave	3	FLOAT	idle	0	0	0	0	300	120	6
-2200877	TATOOINE	tat_hutt_cave	AREA	7	-14.56	-65.66	-213.56	0		Jabba's compound guard	12844	dungeon	Hutt Cave	3	FLOAT	idle	0	0	0	0	300	120	6
+2200877	TATOOINE	tat_hutt_cave	AREA	7	-14.56	-65.66	-213.56	0	1	Jabba's compound guard	12844	dungeon	Hutt Cave	3	FLOAT	idle	0	0	0	0	300	120	6
 2200878	TATOOINE	tat_hutt_cave	AREA	7	-23.99	-64.76	-250.65	0	1	Jabba's compound guard	12844	dungeon	Hutt Cave	3	FLOAT	idle	0	0	0	0	300	120	6
 2200879	TATOOINE	tat_hutt_cave	AREA	7	-6.06	-64.68	-238.99	0	1	Jabba's compound guard	12844	dungeon	Hutt Cave	3	FLOAT	idle	0	0	0	0	300	120	6
 2200880	TATOOINE	tat_hutt_cave	AREA	8	-90.75	-70.35	-124.40	0	1	Jabba's compound guard	12844	dungeon	Hutt Cave	3	FLOAT	idle	0	0	0	0	300	120	6
@@ -1680,3 +1680,4 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 2201680	TATOOINE	tat_world	AREA	0	919.86	0.76	3825.38	0	1	Tusken Follower	16463	poi	Old Mos Espa Arena Track	2	FLOAT	idle	0	0	0	0	300	120	4
 2201681	TATOOINE	tat_world	AREA	0	930.01	0.92	3819.76	0	1	Tusken Follower	16463	poi	Old Mos Espa Arena Track	2	FLOAT	idle	0	0	0	0	300	120	4
 2201682	TATOOINE	tat_world	AREA	0	938.35	0.88	3828.66	0	1	Tusken Follower	16463	poi	Old Mos Espa Arena Track	2	FLOAT	idle	0	0	0	0	300	120	4
+2201683	TATOOINE	tat_world	AREA	0	3519.20	4.00	-4800.20	0	1	Protocol Droid	12882	city	Mos Eisley	1	PATROL	idle	0	0	0	0	300	120	0

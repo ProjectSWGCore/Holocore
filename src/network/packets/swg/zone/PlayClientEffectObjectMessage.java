@@ -25,44 +25,42 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package resources.radial;
+package network.packets.swg.zone;
 
-import java.util.ArrayList;
-import java.util.List;
+import network.packets.swg.SWGPacket;
 
-public class RadialOption {
+import java.nio.ByteBuffer;
+
+public class PlayClientEffectObjectMessage extends SWGPacket {
+	public static final int CRC = getCrc("PlayClientEffectObjectMessage");
 	
-	private RadialItem item;
-	private List<RadialOption> children;
-	private String overriddenText;
-	
-	public RadialOption() {
-		this.children = new ArrayList<>();
+	private String effectFile;
+	private String effectLocation;
+	private long objectId;
+
+	public PlayClientEffectObjectMessage(String effectFile, String effectLocation, long objectId) {
+		this.effectFile = effectFile;
+		this.effectLocation = effectLocation;
+		this.objectId = objectId;
 	}
-	
-	public RadialOption(RadialItem item) {
-		this.item = item;
-		this.children = new ArrayList<>();
-	}
-	
-	public void setItem(RadialItem item) { this.item = item; }
-	public void addChild(RadialOption option) { this.children.add(option); }
-	public void addChild(RadialItem item) { addChild(new RadialOption(item)); }
-	public void addChildWithOverriddenText(RadialItem item, String overridenText) {
-		addChild(item);
-		setOverriddenText(overriddenText);
-	}
-	public void setOverriddenText(String overridenText) { this.overriddenText = overridenText; }
-	
-	public int getId() { return item.getId(); }
-	public int getOptionType() { return item.getOptionType(); }
-	public String getText() { return overriddenText != null ? overriddenText : item.getText(); }
-	
-	public List<RadialOption> getChildren() { return children; }
 	
 	@Override
-	public String toString() { 
-		return String.format("ID=%d Option=%d Text=%s", getId(), getOptionType(), getText()); 
+	public void decode(ByteBuffer data) {
+		super.decode(data, CRC);
+		effectFile = getAscii(data);
+		effectLocation = getAscii(data);
+		objectId = getLong(data);
 	}
 	
+	@Override
+	public ByteBuffer encode() {
+		ByteBuffer data = ByteBuffer.allocate(20 + effectFile.length() + effectLocation.length());
+		addShort(data, 3);
+		addInt(  data, CRC);
+		addAscii(data, effectFile);
+		addAscii(data, effectLocation);
+		addLong(data, objectId);
+		addAscii(data, "");	// TODO not sure what this is
+		return data;
+	}
 }
