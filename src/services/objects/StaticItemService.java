@@ -116,10 +116,17 @@ public final class StaticItemService extends Service {
 					
 					switch(type) {
 						case "armor": objectAttributes = new ArmorAttributes(itemName, iffTemplate); break;
+						case "collection":	// TODO implement
+						case "consumable":	// TODO implement
+						case "costume":	// TODO implement
+						case "dna":	// TODO implement
+						case "grant":	// TODO implement
+						case "item":	// TODO implement
+						case "object":	// TODO implement
+						case "schematic":	// TODO implement
+						case "storyteller":	// TODO implement
 						case "weapon": objectAttributes = new WeaponAttributes(itemName, iffTemplate); break;
-						case "object":
-						case "storyteller":
-						case "item": continue;	// TODO implement. Ignore object, item and storyteller for now.
+						case "wearable": continue;	// TODO implement
 						default: Log.e(this, "Item %s was not loaded because the specified type %s is unknown", itemName, type); continue;
 					}
 					
