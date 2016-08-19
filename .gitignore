@@ -5,8 +5,7 @@
 /serverdata/**/*.iff
 /serverdata/**/*.db
 /target
-/cfg/features.cfg
-/cfg/network.cfg
+/cfg/*.cfg
 packets.txt
 log.txt
 /target/
