@@ -327,7 +327,6 @@ public final class StaticItemService extends Service {
 				
 				for(String modString : modStrings) {
 					String category;
-					System.out.println("parsing " + modString);
 					String[] splitValues = modString.split("=");	// Name and value are separated by "="
 					String modName = splitValues[0];
 					String modValue = splitValues[1];
