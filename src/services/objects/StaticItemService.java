@@ -427,8 +427,12 @@ public final class StaticItemService extends Service {
 	private static final class WeaponAttributes extends WearableAttributes {
 		
 		private WeaponType category;
-		private String weaponCategory;
+		private DamageType damageTypeEnum;
+		private DamageType elementalTypeEnum;
 		private String damageType;
+		private String weaponCategory;
+		private String damageTypeString;
+		private String elementalType;
 		private float attackSpeed;
 		private float minRange;
 		private float maxRange;
@@ -443,6 +447,18 @@ public final class StaticItemService extends Service {
 		
 		public WeaponAttributes(String itemName, String iffTemplate) {
 			super(itemName, iffTemplate);
+		}
+		
+		private DamageType getDamageTypeForName(String damageTypeName) {
+			switch(damageTypeName) {
+				case "kinetic": return DamageType.KINETIC;
+				case "energy": return DamageType.ENERGY;
+				case "heat": return DamageType.ELEMENTAL_HEAT;
+				case "cold": return DamageType.ELEMENTAL_COLD;
+				case "acid": return DamageType.ELEMENTAL_ACID;
+				case "electricity": return DamageType.ELEMENTAL_ELECTRICAL;
+				default: return null;	// TODO Unknown DamageType... now what?
+			}
 		}
 		
 		@Override
@@ -473,7 +489,9 @@ public final class StaticItemService extends Service {
 			}
 			
 			weaponCategory = "@obj_attr_n:wpn_category_" + String.valueOf(category.getNum());
-			damageType = "@obj_attr_n:" + resultSet.getString("damage_type");
+			damageType = resultSet.getString("damage_type");
+			damageTypeEnum = getDamageTypeForName(damageType);
+			damageTypeString = "@obj_attr_n:" + damageType;
 			attackSpeed = resultSet.getFloat("attack_speed") / 100;
 			
 			minRange = resultSet.getFloat("min_range_distance");
@@ -485,10 +503,11 @@ public final class StaticItemService extends Service {
 			damageString = String.format("%d-%d", minDamage, maxDamage);
 			
 			// TODO all weapons don't have elemental damage - account for this!
-			String elementalType = resultSet.getString("elemental_type");
+			elementalType = resultSet.getString("elemental_type");
 			// TODO ElementalType enum, which can be set in WeaponObject?
-			elementalWeapon = !elementalType.isEmpty();
+			elementalWeapon = !elementalType.equalsIgnoreCase("none");
 			if(elementalWeapon) {
+				elementalTypeEnum = getDamageTypeForName(elementalType);
 				elementalTypeString = "@obj_attr_n:elemental_" + elementalType;
 				elementalDamage = resultSet.getShort("elemental_damage");
 			}
@@ -500,7 +519,7 @@ public final class StaticItemService extends Service {
 		@Override
 		protected void applyTypeAttributes(SWGObject object) {
 			super.applyTypeAttributes(object);
-			object.addAttribute("cat_wpn_damage.wpn_damage_type", damageType);
+			object.addAttribute("cat_wpn_damage.wpn_damage_type", damageTypeString);
 			object.addAttribute("cat_wpn_damage.wpn_category", weaponCategory);
 			object.addAttribute("cat_wpn_damage.wpn_attack_speed", String.valueOf(attackSpeed));
 			object.addAttribute("cat_wpn_damage.damage", damageString);
@@ -516,6 +535,9 @@ public final class StaticItemService extends Service {
 			weapon.setAttackSpeed(attackSpeed);
 			weapon.setMinRange(minRange);
 			weapon.setMaxRange(maxRange);
+			weapon.setDamageType(damageTypeEnum);
+//			if(elementalWeapon)
+				weapon.setElementalType(elementalTypeEnum);
 		}
 	}
 	
