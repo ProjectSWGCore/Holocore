@@ -144,7 +144,7 @@ public class QaToolCmdCallback implements ICmdCallback {
 			return;
 
 		Log.i("QA", "%s attempted to create item %s", player, itemName);
-		new CreateStaticItemIntent(inventory, itemName).broadcast();
+		new CreateStaticItemIntent(creature, inventory, itemName).broadcast();
 	}
 	
 	private void forceDelete(final ObjectManager objManager, final Player player, final SWGObject target) {
