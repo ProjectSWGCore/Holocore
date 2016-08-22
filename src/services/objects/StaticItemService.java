@@ -302,7 +302,7 @@ public final class StaticItemService extends Service {
 		@Override
 		protected boolean loadTypeAttributes(ResultSet resultSet) throws SQLException {
 			requiredProfession = resultSet.getString("required_profession");
-			if(requiredProfession.equals("none")) {
+			if(requiredProfession.equals("-")) {
 				// Ziggy: This value is not defined in any String Table File.
 				requiredProfession = "None";
 			} else {
@@ -311,7 +311,7 @@ public final class StaticItemService extends Service {
 			
 			requiredFaction = resultSet.getString("required_faction");
 			
-			if(requiredFaction.equals("none")) {
+			if(requiredFaction.equals("-")) {
 				// Ziggy: This value is not defined in any String Table File.
 				requiredFaction = "None";
 			} else {
