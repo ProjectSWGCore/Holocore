@@ -211,7 +211,6 @@ public final class StaticItemService extends Service {
 		private int volume;
 		private String requiredLevel;
 		// TODO bio-link
-		// TODO buff to give. Seen on consumables and wearables: worn_item_buff, buff_name? Seen as "Effect Name:"
 		private final String itemName;
 		private final String iffTemplate;
 		
@@ -512,11 +511,8 @@ public final class StaticItemService extends Service {
 			maxDamage = resultSet.getInt("max_damage");
 			damageString = String.format("%d-%d", minDamage, maxDamage);
 			
-			// TODO all weapons don't have elemental damage - account for this!
 			elementalType = resultSet.getString("elemental_type");
-			// TODO ElementalType enum, which can be set in WeaponObject?
-			elementalWeapon = !elementalType.equalsIgnoreCase("none");
-			if(elementalWeapon) {
+			if(!elementalType.equalsIgnoreCase("none")) {
 				elementalTypeEnum = getDamageTypeForName(elementalType);
 				elementalTypeString = "@obj_attr_n:elemental_" + elementalType;
 				elementalDamage = resultSet.getShort("elemental_damage");
@@ -546,8 +542,7 @@ public final class StaticItemService extends Service {
 			weapon.setMinRange(minRange);
 			weapon.setMaxRange(maxRange);
 			weapon.setDamageType(damageTypeEnum);
-//			if(elementalWeapon)
-				weapon.setElementalType(elementalTypeEnum);
+			weapon.setElementalType(elementalTypeEnum);
 		}
 	}
 	
