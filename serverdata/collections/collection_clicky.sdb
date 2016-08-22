@@ -1,0 +1,507 @@
+slotName	collectionName	object_id	iff_template	terrain	x	y
+TEXT PRIMARY KEY	TEXT	INTEGER	TEXT	TEXT	REAL	REAL
+col_stage_controller_01	col_stage_controller	610444678	object/tangible/collection/col_stage_controller_01.iff	TATOOINE	3371	-4608
+col_stage_controller_02	col_stage_controller	610444679	object/tangible/collection/col_stage_controller_02.iff	TATOOINE	3408	-4580
+col_stage_controller_03	col_stage_controller	610444680	object/tangible/collection/col_stage_controller_03.iff	TATOOINE	3381	-4612
+itv_01_01	col_itv_01	610444676	object/tangible/collection/col_jalopy_crate_01.iff	TATOOINE	3568	-4813
+itv_01_02	col_itv_01	610444675	object/tangible/collection/col_jalopy_crate_02.iff	TATOOINE	-1324	-3572
+itv_01_03	col_itv_01	610444585	object/tangible/collection/col_jalopy_crate_03.iff	NABOO	5243	6660
+itv_01_04	col_itv_01	610444477	object/tangible/collection/col_jalopy_crate_04.iff	CORELLIA	-103	-4739
+itv_01_05	col_itv_01	610444677	object/tangible/collection/col_jalopy_crate_05.iff	TATOOINE	-2877	2097
+itv_01_06	col_itv_01	610444650	object/tangible/collection/col_jalopy_crate_06.iff	TALUS	295	-2919
+itv_01_07	col_itv_01	610444651	object/tangible/collection/col_jalopy_crate_07.iff	TALUS	4474	5313
+itv_01_08	col_itv_01	610444586	object/tangible/collection/col_jalopy_crate_08.iff	NABOO	-4771	4190
+betrayer_01	col_rare_melee_01	4606564	object/tangible/collection/rare_melee_blade_betrayer.iff	CORELLIA	3334	5359
+blk_mtl_gaderiffi_01	col_rare_melee_01	-237564881734988813	object/tangible/collection/rare_melee_blk_mtl_gaderiffi.iff	TATOOINE	4065	-4823
+blksn_razor_01	col_rare_melee_01	4888555	object/tangible/collection/rare_melee_blksn_razor.iff	TATOOINE	6436	-1102
+blksn_stun_stick_01	col_rare_melee_01	-293859876213774209	object/tangible/collection/rare_melee_blksn_stun_stick.iff	NABOO	2446	-3897
+bloodshot_ripper_01	col_rare_melee_01	0	object/tangible/collection/rare_melee_bloodshot_ripper.iff	TATOOINE	10	-221
+gamorrean_axe_01	col_rare_melee_01	4888631	object/tangible/collection/rare_melee_gamorrean_axe.iff	TATOOINE	5252	478
+hammer_miner_01	col_rare_melee_01	4656394	object/tangible/collection/rare_melee_hammer_miner.iff	NABOO	4620	-1418
+hk_lance_01	col_rare_melee_01	4887974	object/tangible/collection/rare_melee_hk_lance.iff	TATOOINE	-1247	-3509
+kaminoan_staff_01	col_rare_melee_01	4657125	object/tangible/collection/rare_melee_kaminoan_staff.iff	NABOO	4849	-4616
+bladestick_01	col_rare_melee_01	4608437	object/tangible/collection/rare_melee_kashyyyk_blade_stick.iff	CORELLIA	-276	-4733
+lance_runaway_01	col_rare_melee_01	-227713257095974877	object/tangible/collection/rare_melee_lance_runaway.iff	TATOOINE	-5886	-6224
+nyenthioris_01	col_rare_melee_01	-297800526656163762	object/tangible/collection/rare_melee_nyenthioris.iff	NABOO	5175	6638
+tulrus_sword_01	col_rare_melee_01	4607006	object/tangible/collection/rare_melee_tulrus_sword.iff	CORELLIA	6861	-5783
+xandank_lance_01	col_rare_melee_01	4607384	object/tangible/collection/rare_melee_xandank_lance.iff	CORELLIA	-3257	3104
+grooved_sword_01	col_rare_melee_01	-285697103220720676	object/tangible/collection/rare_melee_grooved_2h_sword.iff	NABOO	-4927	4229
+or5_sword_01	col_rare_melee_02	4777287	object/tangible/collection/rare_melee_or5_sword.iff	LOK	490	5074
+rydels_sword_01	col_rare_melee_02	-492018261185805354	object/tangible/collection/rare_melee_rydels_sword.iff	LOK	3604	2171
+task_master_sword_01	col_rare_melee_02	-313000174622852717	object/tangible/collection/rare_melee_task_master_sword.iff	RORI	-5254	-2256
+underworld_blade_01	col_rare_melee_02	4795548	object/tangible/collection/rare_melee_underworld_blade.iff	RORI	-6042	-1817
+urnsoris_soulleecher_01	col_rare_melee_02	-316096399774221029	object/tangible/collection/rare_melee_urnsoris_soulleecher.iff	RORI	-2089	3255
+xris_acid_sword_01	col_rare_melee_02	-353532571606419424	object/tangible/collection/rare_melee_xris_acid_sword.iff	TALUS	4301	1004
+sinew_wrapped_knife_01	col_rare_melee_02	4867906	object/tangible/collection/rare_melee_sinew_wrapped_knife.iff	RORI	-4527	-1408
+blacksun_executioners_hack_01	col_rare_melee_02	4685700	object/tangible/collection/rare_melee_blacksun_executioners_hack.iff	ENDOR	-4746	4212
+cy_m_sword_01	col_rare_melee_02	4795577	object/tangible/collection/rare_melee_cy_m_sword.iff	RORI	3662	5602
+darstaiis_sickle_01	col_rare_melee_02	4795710	object/tangible/collection/rare_melee_darstaiis_sickle.iff	RORI	-1953	-4569
+doom_bringer_01	col_rare_melee_02	4796027	object/tangible/collection/rare_melee_doom_bringer.iff	RORI	-5382	5075
+engineer_sword_01	col_rare_melee_02	4777476	object/tangible/collection/rare_melee_engineer_sword.iff	LOK	6651	4058
+forward_commander_knuckler_01	col_rare_melee_02	-491455310790372981	object/tangible/collection/rare_melee_forward_commander_knuckler.iff	LOK	3830	-539
+hk_47_knuckler_01	col_rare_melee_02	4777533	object/tangible/collection/rare_melee_hk_47_knuckler.iff	LOK	3270	-4856
+malevolent_lance_01	col_rare_melee_02	4867921	object/tangible/collection/rare_melee_malevolent_lance.iff	RORI	2147	-5649
+nightsister_energy_lance_01	col_rare_melee_02	4548418	object/tangible/collection/rare_melee_nightsister_energy_lance.iff	DATHOMIR	-4082	-144
+mustafarian_modified_2h_sword_01	col_rare_melee_03	4636973	object/tangible/collection/rare_melee_mustafarian_modified_2h_obsidian_sword.iff	YAVIN4	-804	-2048
+nk_executer_01	col_rare_melee_03	0	object/tangible/collection/rare_melee_nk_executer.iff	ENDOR	667	4972
+two_hand_kashyyyk_sword_01	col_rare_melee_03	327441967	object/tangible/collection/rare_melee_2h_kashyyyk_sword.iff	DATHOMIR	-45	-1617
+two_hand_tulrus_sword_01	col_rare_melee_03	0	object/tangible/collection/rare_melee_2h_tulrus_sword.iff	MUSTAFAR		
+white_thranta_katana_01	col_rare_melee_03	-432627039807940662	object/tangible/collection/rare_melee_white_thranta_katana.iff	ENDOR	1917	-1958
+wke_toothpick_01	col_rare_melee_03	4548486	object/tangible/collection/rare_melee_wke_toothpick.iff	DATHOMIR	-3972	246
+caller_storms_01	col_rare_melee_03	-400820368409688753	object/tangible/collection/rare_melee_caller_storms.iff	DATHOMIR	-2659	7354
+champion_sword_01	col_rare_melee_03	-466404038498321247	object/tangible/collection/rare_melee_champion_sword.iff	YAVIN4	5074	5501
+corsec_sword_01	col_rare_melee_03	4608914	object/tangible/collection/rare_melee_corsec_sword.iff	CORELLIA	5213	1577
+knuckles_katarn_01	col_rare_melee_03	4686294	object/tangible/collection/rare_melee_knuckles_katarn.iff	ENDOR	3194	-3506
+necrosis_nightblade_01	col_rare_melee_03	4686324	object/tangible/collection/rare_melee_necrosis_nightblade.iff	ENDOR	-7080	543
+obsidian_lance_01	col_rare_melee_03	4777534	object/tangible/collection/rare_melee_obsidian_lance.iff	LOK	-2816	-710
+oppressor_polearm_01	col_rare_melee_03	0	object/tangible/collection/rare_melee_oppressor_polearm.iff	MUSTAFAR		
+pestilence_01	col_rare_melee_03	4686561	object/tangible/collection/rare_melee_pestilence.iff	ENDOR	-1746	162
+poisonspike_01	col_rare_melee_03	-408983143271014595	object/tangible/collection/rare_melee_poisonspike.iff	DATHOMIR	5673	1902
+strike_assault_lance_01	col_rare_melee_04	-56576470588231449	object/tangible/collection/rare_melee_strike_assault_lance.iff	KASHYYYK_MAIN	337	-200
+trando_hunters_lance_01	col_rare_melee_04	-56576470985308825	object/tangible/collection/rare_melee_trando_hunters_lance.iff	KASHYYYK_MAIN	-127	864
+white_thranta_lance_01	col_rare_melee_04	4705448	object/tangible/collection/rare_melee_white_thranta_lance.iff	DANTOOINE	-567	-3976
+wke_heartlance_01	col_rare_melee_04	0	object/tangible/collection/rare_melee_wke_heartlance.iff	KASHYYYK_RYATT_TRAIL 5		
+katana_runaway_01	col_rare_melee_04	-367887795739783448	object/tangible/collection/rare_melee_katana_runaway.iff	DANTOOINE	-6805	6025
+lifeblood_cleaver_01	col_rare_melee_04	0	object/tangible/collection/rare_melee_lifeblood_cleaver.iff	MUSTAFAR		
+malevolent_heavy_sword_01	col_rare_melee_04	0	object/tangible/collection/rare_melee_malevolent_heavy_sword.iff	MUSTAFAR		
+eventide_smasher_01	col_rare_melee_04	-366761895056063606	object/tangible/collection/rare_melee_eventide_smasher.iff	DANTOOINE	-7034	-3352
+hk_47_sword_01	col_rare_melee_04	0	object/tangible/collection/rare_melee_hk_47_sword.iff	MUSTAFAR		
+malevolent_obsidian_sword_01	col_rare_melee_04	0	object/tangible/collection/rare_melee_malevolent_obsidian_sword.iff	MUSTAFAR		
+sayormi_heartstriker_01	col_rare_melee_04	0	object/tangible/collection/rare_melee_sayormi_heartstriker.iff	KASHYYYK_DEAD_FOREST		
+valarian_knuckler_01	col_rare_melee_04	4706005	object/tangible/collection/rare_melee_valarian_knuckler.iff	DANTOOINE	1630	-6352
+white_thranta_knuckler_01	col_rare_melee_04	4706034	object/tangible/collection/rare_melee_white_thranta_knuckler.iff	DANTOOINE	-6332	7467
+blackfalcon_01	col_rare_pistol_01	4889778	object/tangible/collection/rare_pistol_blackfalcon.iff	TATOOINE	-174	-5298
+blackhand_01	col_rare_pistol_01	4610432	object/tangible/collection/rare_pistol_blackhand.iff	CORELLIA	-329	-4464
+dragoneye_01	col_rare_pistol_01	4891019	object/tangible/collection/rare_pistol_dragoneye.iff	TATOOINE	-5122	-6526
+coynite_01	col_rare_pistol_01	4867966	object/tangible/collection/rare_pistol_coynite.iff	TALUS	1806	-878
+d18_liquidator_01	col_rare_pistol_01	4611173	object/tangible/collection/rare_pistol_d18_liquidator.iff	CORELLIA	-5517	-6169
+deathrain_01	col_rare_pistol_01	4868020	object/tangible/collection/rare_pistol_deathrain.iff	TALUS	5772	4751
+dl44_dosh_special_01	col_rare_pistol_01	4777791	object/tangible/collection/rare_pistol_dl44_dosh_special.iff	LOK	436	5118
+geonosian_sonic_blaster_01	col_rare_pistol_01	4637929	object/tangible/collection/rare_pistol_geonosian_sonic_blaster.iff	YAVIN4	-6229	-146
+grooved_dl44_01	col_rare_pistol_01	-483855485043683833	object/tangible/collection/rare_pistol_grooved_dl44.iff	LOK	-3837	-3737
+ion_relic_01	col_rare_pistol_01	-296674626113622562	object/tangible/collection/rare_pistol_ion_relic.iff	NABOO	5855	-1882
+ion_stunner_01	col_rare_pistol_02	-56576470433722832	object/tangible/collection/rare_pistol_ion_stunner.iff	KASHYYYK_MAIN	152	164
+jawa_ion_01	col_rare_pistol_02	-433189989860989452	object/tangible/collection/rare_pistol_jawa_ion.iff	ENDOR	273	3828
+kashyyyk_stalker_01	col_rare_pistol_02	4637871	object/tangible/collection/rare_pistol_kashyyyk_stalker.iff	YAVIN4	-6964	-5651
+kyd21_01	col_rare_pistol_02	4892082	object/tangible/collection/rare_pistol_kyd21.iff	TATOOINE	-1125	-3589
+liquidsilver_l7_01	col_rare_pistol_02	-299207900865526538	object/tangible/collection/rare_pistol_liquidsilver_l7.iff	NABOO	6465	-1304
+modified_de10_01	col_rare_pistol_02	4614207	object/tangible/collection/rare_pistol_modified_de10.iff	CORELLIA	3389	5447
+modified_republic_blaster_01	col_rare_pistol_02	-292452502202112274	object/tangible/collection/rare_pistol_modified_republic_blaster.iff	NABOO	1262	2674
+mustafarian_modified_disruptor_01	col_rare_pistol_02	4796076	object/tangible/collection/rare_pistol_mustafarian_modified_disruptor.iff	RORI	748	-4714
+oppressor_01	col_rare_pistol_02	4612071	object/tangible/collection/rare_pistol_oppressor.iff	CORELLIA	924	3986
+or5_de10_01	col_rare_pistol_02	4796165	object/tangible/collection/rare_pistol_or5_de10.iff	RORI	7330	351
+perfectly_calibrated_01	col_rare_pistol_02	4612042	object/tangible/collection/rare_pistol_perfectly_calibrated.iff	CORELLIA	-5145	-6371
+precise_dl44_01	col_rare_pistol_03	4638506	object/tangible/collection/rare_pistol_precise_dl44.iff	YAVIN4	-334	4838
+quicktrigger_countermand_01	col_rare_pistol_03	0	object/tangible/collection/rare_pistol_quicktrigger_countermand.iff	MUSTAFAR		
+red_hydra_01	col_rare_pistol_03	4686592	object/tangible/collection/rare_pistol_red_hydra.iff	ENDOR	-4635	4030
+rhiss_mark20_01	col_rare_pistol_03	4637928	object/tangible/collection/rare_pistol_rhiss_mark20.iff	YAVIN4	-6424	-384
+sr_combat_01	col_rare_pistol_03	4638832	object/tangible/collection/rare_pistol_sr_combat.iff	YAVIN4	600	-685
+taskmaster_flechette_01	col_rare_pistol_03	0	object/tangible/collection/rare_pistol_taskmaster_flechette.iff	MUSTAFAR		
+tchotchee_01	col_rare_pistol_03	-243757330441020266	object/tangible/collection/rare_pistol_tchotchee.iff	TATOOINE	7499	4490
+trando_suppressor_01	col_rare_pistol_03	0	object/tangible/collection/rare_pistol_trando_suppressor.iff	MUSTAFAR		
+silencer_01	col_rare_pistol_03	0	object/tangible/collection/rare_pistol_silencer.iff	MUSTAFAR		
+ur_g8_01	col_rare_pistol_03	0	object/tangible/collection/rare_pistol_ur_g8.iff	MUSTAFAR		
+vexa_flechette_01	col_rare_pistol_03	0	object/tangible/collection/rare_pistol_vexa_flechette.iff	KASHYYYK_DEAD_FOREST		
+white_thranta_01	col_rare_pistol_03	610444681	object/tangible/collection/rare_pistol_white_thranta.iff	TATOOINE	3385	-4602
+ak_prime_01	col_rare_rifle_01	-56576471782632928	object/tangible/collection/rare_rifle_ak_prime.iff	KASHYYYK_MAIN	130	218
+cy_m_ink_01	col_rare_rifle_01	-229965057701901438	object/tangible/collection/rare_rifle_cy_m_ink.iff	TATOOINE	-5723	6480
+commander_ld1_01	col_rare_rifle_01	-436849164849342093	object/tangible/collection/rare_rifle_commander_ld1.iff	ENDOR	6077	-2436
+corsec_e11_01	col_rare_rifle_01	-269653029582514343	object/tangible/collection/rare_rifle_corsec_e11.iff	CORELLIA	5663	-1559
+covert_retaliation_01	col_rare_rifle_01	-56576471685697574	object/tangible/collection/rare_rifle_covert_retaliation.iff	KASHYYYK_MAIN	601	732
+coynite_disruptor_01	col_rare_rifle_01	0	object/tangible/collection/rare_rifle_coynite_disruptor.iff	MUSTAFAR		
+darklighter_sg_82_01	col_rare_rifle_01	4893600	object/tangible/collection/rare_rifle_darklighter_sg_82.iff	TATOOINE	3435	-4721
+darksting_assassin_01	col_rare_rifle_01	4868044	object/tangible/collection/rare_rifle_darksting_assassin.iff	TALUS	1298	1416
+dawnsorrow_01	col_rare_rifle_02	-351562246124818797	object/tangible/collection/rare_rifle_dawnsorrow.iff	TALUS	2334	2932
+dc_15_01	col_rare_rifle_02	-235313082517124038	object/tangible/collection/rare_rifle_dc_15.iff	TATOOINE	66	-5373
+disruptor_01	col_rare_rifle_02	-255016329377742724	object/tangible/collection/rare_rifle_disruptor.iff	CORELLIA	-6830	2203
+doom_bringer_dp_23_01	col_rare_rifle_02	-397724142472463499	object/tangible/collection/rare_rifle_doom_bringer_dp_23.iff	DATHOMIR	-4447	577
+ld1_01	col_rare_rifle_02	-374924670944682484	object/tangible/collection/rare_rifle_ld1.iff	DANTOOINE	-925	6909
+ewok_crossbow_01	col_rare_rifle_02	4686591	object/tangible/collection/rare_rifle_ewok_crossbow.iff	ENDOR	2188	3588
+fallann_hyper_rifle_01	col_rare_rifle_02	4607461	object/tangible/collection/rare_rifle_fallann_hyper_rifle.iff	CORELLIA	-2741	3005
+hk_47_disruptor_01	col_rare_rifle_02	-267964177862920803	object/tangible/collection/rare_rifle_hk_47_disruptor.iff	CORELLIA	3252	5467
+lithitanium_rifle_01	col_rare_rifle_03	4706063	object/tangible/collection/rare_rifle_lithitanium_rifle.iff	DANTOOINE	4227	4961
+nullifier_01	col_rare_rifle_03	0	object/tangible/collection/rare_rifle_nullifier.iff	MUSTAFAR		
+naktra_crystal_01	col_rare_rifle_03	-236720455971074626	object/tangible/collection/rare_rifle_naktra_crystal.iff	TATOOINE	1224	6031
+proton_rifle_01	col_rare_rifle_03	4548487	object/tangible/collection/rare_rifle_proton.iff	DATHOMIR	-2087	3133
+taskmaster_gauss_01	col_rare_rifle_03	0	object/tangible/collection/rare_rifle_taskmaster_gauss.iff	MUSTAFAR		
+tusken_king_01	col_rare_rifle_03	-434597366186439501	object/tangible/collection/rare_rifle_tusken_king.iff	ENDOR	2605	-4013
+trando_laser_01	col_rare_rifle_03	-435160315091704474	object/tangible/collection/rare_rifle_trando_laser.iff	ENDOR	4011	71
+vershyi_sharpshooter_01	col_rare_rifle_03	0	object/tangible/collection/rare_rifle_vershyi_sharpshooter.iff	TATOOINE		
+blackscale_hall_sweeper_01	col_rare_carbine_01	4706092	object/tangible/collection/rare_carbine_blackscale_hall_sweeper.iff	DANTOOINE	7263	-4140
+corestrike_rancor_sweeper_01	col_rare_carbine_01	-56576471994951418	object/tangible/collection/rare_carbine_corestrike_rancor.iff	KASHYYYK_MAIN	128	812
+coynite_sfor_republic_sweeper_01	col_rare_carbine_01	0	object/tangible/collection/rare_carbine_coynite_sfor_republic.iff	KASHYYYK_MAIN		
+crusader_m_x3_01	col_rare_carbine_01	-348747496749122327	object/tangible/collection/rare_carbine_crusader_m_x3.iff	TALUS	1557	-876
+cy_m_01	col_rare_carbine_01	4706605	object/tangible/collection/rare_carbine_cy_m.iff	DANTOOINE	-596	2487
+darklighter_e11_01	col_rare_carbine_01	-237283406056409304	object/tangible/collection/rare_carbine_darklighter_e11.iff	TATOOINE	3390	-6587
+exemplar_mark_01	col_rare_carbine_01	0	object/tangible/collection/rare_carbine_exemplar_mark_01.iff	KASHYYYK_RYATT_TRAIL 1+2		
+firestar_10_k_01	col_rare_carbine_01	-483855486207366939	object/tangible/collection/rare_carbine_firestar_10_k.iff	LOK	-3769	-3467
+forward_commander_01	col_rare_carbine_01	-370984020937049144	object/tangible/collection/rare_carbine_forward_commander.iff	DANTOOINE	-3882	-5705
+grievance_striker_01	col_rare_carbine_01	-349591922678691310	object/tangible/collection/rare_carbine_grievance_striker.iff	TALUS	1637	5432
+hk_47_01	col_rare_carbine_01	0	object/tangible/collection/rare_carbine_hk_47.iff	MUSTAFAR		
+hair_trigger_01	col_rare_carbine_02	4547183	object/tangible/collection/rare_carbine_hair_trigger.iff	DATHOMIR	578	3033
+kalranoos_01	col_rare_carbine_02	-342273572768696378	object/tangible/collection/rare_carbine_kalranoos.iff	TALUS	-5135	3706
+kubaza_01	col_rare_carbine_02	0	object/tangible/collection/rare_carbine_kubaza.iff	MUSTAFAR		
+malevolent_bowcaster_01	col_rare_carbine_02	0	object/tangible/collection/rare_carbine_malevolent_bowcaster.iff	MUSTAFAR		
+modified_x1_01	col_rare_carbine_02	0	object/tangible/collection/rare_carbine_modified_x1.iff	KASHYYYK_RYATT_TRAIL 1+2		
+mustafarian_modified_sfor_republic_01	col_rare_carbine_02	0	object/tangible/collection/rare_carbine_mustafarian_modified_sfor_republic.iff	MUSTAFAR		
+nym_slugthrower_01	col_rare_carbine_02	4778181	object/tangible/collection/rare_carbine_nym_slugthrower.iff	LOK	476	4750
+or_5_e5_01	col_rare_carbine_02	0	object/tangible/collection/rare_carbine_or_5_e5.iff	MUSTAFAR - Uplink Cave		
+proton_01	col_rare_carbine_02	0	object/tangible/collection/rare_carbine_proton.iff	KASHYYYK_RYATT_TRAIL 4		
+sfor_01	col_rare_carbine_02	0	object/tangible/collection/rare_carbine_sfor.iff	MUSTAFAR		
+specops_bola_01	col_rare_carbine_02	4612682	object/tangible/collection/rare_carbine_specops_bola.iff	CORELLIA	-3694	3060
+white_thranta_e11_01	col_rare_carbine_02	-56576471524422137	object/tangible/collection/rare_carbine_white_thranta_e11.iff	KASHYYYK_MAIN	313	118
+corellian_destroyer_01	col_rare_heavy_01	4612695	object/tangible/collection/rare_heavy_corellian_destroyer.iff	CORELLIA	6710	-5781
+ak_prime_rocket_01	col_rare_heavy_01	0	object/tangible/collection/rare_heavy_ak_prime_rocket.iff	MUSTAFAR		
+crusader_m_xx_01	col_rare_heavy_01	-317785250356695759	object/tangible/collection/rare_heavy_crusader_m_xx.iff	RORI	-992	-310
+devastator_lava_cannon_01	col_rare_heavy_01	0	object/tangible/collection/rare_heavy_devastator_lava_cannon.iff	MUSTAFAR		
+republic_flame_thrower_01	col_rare_heavy_01	0	object/tangible/collection/rare_heavy_republic_flame_thrower.iff	MUSTAFAR		
+lava_cannon_01	col_rare_heavy_01	0	object/tangible/collection/rare_heavy_lava_cannon.iff	MUSTAFAR		
+malevolent_flamethrower_01	col_rare_heavy_01	0	object/tangible/collection/rare_heavy_malevolent_flamethrower.iff	MUSTAFAR		
+oppressor_flame_thrower_01	col_rare_heavy_01	0	object/tangible/collection/rare_heavy_oppressor_flame_thrower.iff	MUSTAFAR		
+the_void_01	col_rare_heavy_01	0	object/tangible/collection/rare_heavy_void.iff	KASHYYYK_RYATT_TRAIL 5		
+devastator_acid_launcher_01	col_rare_heavy_01	0	object/tangible/collection/rare_heavy_devastator_acid_launcher.iff	MUSTAFAR - Sher Kar Cave		
+shock_trooper_left_bicep	col_shock_trooper_armor	1177407	object/tangible/collection/shock_trooper_left_bicep.iff	TALUS	4909	-6053
+shock_trooper_right_bicep	col_shock_trooper_armor	-462181913125353950	object/tangible/collection/shock_trooper_right_bicep.iff	YAVIN4	3997	-6224
+shock_trooper_boots	col_shock_trooper_armor	-283445302376340318	object/tangible/collection/shock_trooper_boots.iff	NABOO	-6589	5982
+shock_trooper_left_bracer	col_shock_trooper_armor	1095693	object/tangible/collection/shock_trooper_left_bracer.iff	TATOOINE	-1130	-3911
+shock_trooper_right_bracer	col_shock_trooper_armor	1095998	object/tangible/collection/shock_trooper_right_bracer.iff	TATOOINE	-5312	2649
+shock_trooper_chest	col_shock_trooper_armor	1054547	object/tangible/collection/shock_trooper_chest.iff	LOK	-2024	-3089
+shock_trooper_gloves	col_shock_trooper_armor	-395190869104186279	object/tangible/collection/shock_trooper_gloves.iff	DATHOMIR	-6314	-534
+shock_trooper_helmet	col_shock_trooper_armor	-374643194503407406	object/tangible/collection/shock_trooper_helmet.iff	DANTOOINE	-217	4876
+shock_trooper_leggings	col_shock_trooper_armor	-313000174127899630	object/tangible/collection/shock_trooper_leggings.iff	RORI	-5127	-2284
+shock_trooper_belt	col_shock_trooper_armor	-343680946771256351	object/tangible/collection/shock_trooper_belt.iff	TALUS	-2442	-2210
+storm_trooper_left_bicep	col_storm_trooper_armor	-369013695689449767	object/tangible/collection/storm_trooper_left_bicep.iff	DANTOOINE	-4226	-2445
+storm_trooper_right_bicep	col_storm_trooper_armor	9746470	object/tangible/collection/storm_trooper_right_bicep.iff	DATHOMIR	-6385	931
+storm_trooper_boots	col_storm_trooper_armor	-238972255637536591	object/tangible/collection/storm_trooper_boots.iff	TATOOINE	-3979	2504
+storm_trooper_left_bracer	col_storm_trooper_armor	1179103	object/tangible/collection/storm_trooper_left_bracer.iff	TALUS	-2164	2296
+storm_trooper_right_bracer	col_storm_trooper_armor	-460493063972050716	object/tangible/collection/storm_trooper_right_bracer.iff	YAVIN4	1607	-3547
+storm_trooper_chest	col_storm_trooper_armor	7325541	object/tangible/collection/storm_trooper_chest.iff	RORI	-1157	4530
+storm_trooper_gloves	col_storm_trooper_armor	-286541526799026143	object/tangible/collection/storm_trooper_gloves.iff	NABOO	-2724	-7262
+storm_trooper_helmet	col_storm_trooper_armor	-286260051881209511	object/tangible/collection/storm_trooper_helmet.iff	NABOO	-5045	6665
+storm_trooper_leggings	col_storm_trooper_armor	7326070	object/tangible/collection/storm_trooper_leggings.iff	YAVIN4	-5546	-5618
+storm_trooper_belt	col_storm_trooper_armor	-377739418836331868	object/tangible/collection/storm_trooper_belt.iff	DANTOOINE	3852	-5926
+scout_trooper_left_bicep	col_scout_trooper_armor	1109498	object/tangible/collection/scout_trooper_left_bicep.iff	CORELLIA	-5535	-2682
+scout_trooper_right_bicep	col_scout_trooper_armor	-435723265954054821	object/tangible/collection/scout_trooper_right_bicep.iff	ENDOR	2302	5853
+scout_trooper_boots	col_scout_trooper_armor	1109935	object/tangible/collection/scout_trooper_boots.iff	CORELLIA	4613	-5810
+scout_trooper_left_bracer	col_scout_trooper_armor	1110113	object/tangible/collection/scout_trooper_left_bracer.iff	CORELLIA	-2975	2902
+scout_trooper_right_bracer	col_scout_trooper_armor	7147359	object/tangible/collection/scout_trooper_right_bracer.iff	NABOO	-6555	-3295
+scout_trooper_chest	col_scout_trooper_armor	1097533	object/tangible/collection/scout_trooper_chest.iff	TATOOINE	-2898	2275
+scout_trooper_gloves	col_scout_trooper_armor	1179110	object/tangible/collection/scout_trooper_gloves.iff	TALUS	-2440	3658
+scout_trooper_helmet	col_scout_trooper_armor	-455707988970041079	object/tangible/collection/scout_trooper_helmet.iff	YAVIN4	-3188	-3133
+scout_trooper_leggings	col_scout_trooper_armor	-494833009372843985	object/tangible/collection/scout_trooper_leggings.iff	LOK	4964	6996
+scout_trooper_belt	col_scout_trooper_armor	-326510973902235988	object/tangible/collection/scout_trooper_belt.iff	RORI	6538	-4757
+rebel_assault_left_bicep	col_rebel_assault_armor	-382524494036969619	object/tangible/collection/rebel_assault_left_bicep.iff	DANTOOINE	6863	-2227
+rebel_assault_right_bicep	col_rebel_assault_armor	-435441789763737933	object/tangible/collection/rebel_assault_right_bicep.iff	ENDOR	3998	2991
+rebel_assault_boots	col_rebel_assault_armor	-314126076006565007	object/tangible/collection/rebel_assault_boots.iff	RORI	-5356	5043
+rebel_assault_left_bracer	col_rebel_assault_armor	-254734854150828840	object/tangible/collection/rebel_assault_left_bracer.iff	CORELLIA	-7147	1133
+rebel_assault_right_bracer	col_rebel_assault_armor	-350717821638852482	object/tangible/collection/rebel_assault_right_bracer.iff	TALUS	3112	-4038
+rebel_assault_chest	col_rebel_assault_armor	-451767339266016721	object/tangible/collection/rebel_assault_chest.iff	YAVIN4	-7464	380
+rebel_assault_gloves	col_rebel_assault_armor	-235313082601515004	object/tangible/collection/rebel_assault_gloves.iff	TATOOINE	54	-5353
+rebel_assault_helmet	col_rebel_assault_armor	-465841086719765008	object/tangible/collection/rebel_assault_helmet.iff	YAVIN4	4370	975
+rebel_assault_leggings	col_rebel_assault_armor	-298363475625121999	object/tangible/collection/rebel_assault_leggings.iff	NABOO	6343	-6974
+rebel_battle_left_bicep	col_rebel_battle_armor	-396879718763296971	object/tangible/collection/rebel_battle_left_bicep.iff	DATHOMIR	-4702	-4769
+rebel_battle_right_bicep	col_rebel_battle_armor	-321725898794038966	object/tangible/collection/rebel_battle_right_bicep.iff	RORI	3703	-6476
+rebel_battle_boots	col_rebel_battle_armor	-255297803937833789	object/tangible/collection/rebel_battle_boots.iff	CORELLIA	-6507	5908
+rebel_battle_left_bracer	col_rebel_battle_armor	-367887796275095782	object/tangible/collection/rebel_battle_left_bracer.iff	DANTOOINE	-6630	5475
+rebel_battle_right_bracer	col_rebel_battle_armor	-231653906142294465	object/tangible/collection/rebel_battle_right_bracer.iff	TATOOINE	-2927	2573
+rebel_battle_chest	col_rebel_battle_armor	-451485864237435339	object/tangible/collection/rebel_battle_chest.iff	YAVIN4	-6944	-108
+rebel_battle_gloves	col_rebel_battle_armor	1099330	object/tangible/collection/rebel_battle_gloves.iff	TATOOINE	1196	3248
+rebel_battle_helmet	col_rebel_battle_armor	1110114	object/tangible/collection/rebel_battle_helmet.iff	CORELLIA	4109	-1256
+rebel_battle_leggings	col_rebel_battle_armor	-452611763626731806	object/tangible/collection/rebel_battle_leggings.iff	YAVIN4	-7460	7038
+rebel_marine_left_bicep	col_rebel_marine_armor	-478788936817252513	object/tangible/collection/rebel_marine_left_bicep.iff	LOK	-7492	-7089
+rebel_marine_right_bicep	col_rebel_marine_armor	-325103599214276160	object/tangible/collection/rebel_marine_right_bicep.iff	RORI	5220	1024
+rebel_marine_boots	col_rebel_marine_armor	-482448110708870283	object/tangible/collection/rebel_marine_boots.iff	LOK	-4757	3517
+rebel_marine_left_bracer	col_rebel_marine_armor	-343680947371073436	object/tangible/collection/rebel_marine_left_bracer.iff	TALUS	-3361	-3812
+rebel_marine_right_bracer	col_rebel_marine_armor	-402227742254144656	object/tangible/collection/rebel_marine_right_bracer.iff	DATHOMIR	-50	85
+rebel_marine_chest	col_rebel_marine_armor	-264867954754257535	object/tangible/collection/rebel_marine_chest.iff	CORELLIA	1881	-224
+rebel_marine_gloves	col_rebel_marine_armor	-377739419287234544	object/tangible/collection/rebel_marine_gloves.iff	DANTOOINE	4070	-5123
+rebel_marine_helmet	col_rebel_marine_armor	-285697102922524660	object/tangible/collection/rebel_marine_helmet.iff	NABOO	-6078	5943
+rebel_marine_leggings	col_rebel_marine_armor	-313844599858661195	object/tangible/collection/rebel_marine_leggings.iff	RORI	-5510	2099
+bubbling_rock_01	col_rock_bubbling	-299402107314031600	object/tangible/collection/rock_bubbling_01.iff	TATOOINE	-5219	2789
+bubbling_rock_02	col_rock_bubbling	-293015452784912977	object/tangible/collection/rock_bubbling_02.iff	NABOO	424	6973
+bubbling_rock_03	col_rock_bubbling	-261771729077527157	object/tangible/collection/rock_bubbling_03.iff	CORELLIA	-1761	-5596
+bubbling_rock_04	col_rock_bubbling	-372109919443073277	object/tangible/collection/rock_bubbling_04.iff	DANTOOINE	-3352	3449
+bubbling_rock_05	col_rock_bubbling	-405323968372418082	object/tangible/collection/rock_bubbling_05.iff	DATHOMIR	953	6930
+bubbling_rock_06	col_rock_bubbling	-432345564372168032	object/tangible/collection/rock_bubbling_06.iff	ENDOR	596	-3859
+bubbling_rock_07	col_rock_bubbling	-491736784752775753	object/tangible/collection/rock_bubbling_07.iff	LOK	2112	1935
+bubbling_rock_08	col_rock_bubbling	-323696224059429232	object/tangible/collection/rock_bubbling_08.iff	RORI	2524	7256
+bubbling_rock_09	col_rock_bubbling	-345651273334357188	object/tangible/collection/rock_bubbling_09.iff	TALUS	-1755	-4928
+bubbling_rock_10	col_rock_bubbling	-459648639039299184	object/tangible/collection/rock_bubbling_10.iff	YAVIN4	-1935	7142
+steaming_rock_01	col_rock_steaming	-370984019318733672	object/tangible/collection/rock_steaming_01.iff	DANTOOINE	-3381	-4730
+steaming_rock_02	col_rock_steaming	-403635117848810420	object/tangible/collection/rock_steaming_02.iff	DATHOMIR	682	-4724
+steaming_rock_03	col_rock_steaming	-435441791059357496	object/tangible/collection/rock_steaming_03.iff	ENDOR	2381	2175
+steaming_rock_04	col_rock_steaming	-493988584137768112	object/tangible/collection/rock_steaming_04.iff	LOK	5065	409
+steaming_rock_05	col_rock_steaming	-281756453388652696	object/tangible/collection/rock_steaming_05.iff	NABOO	-7377	-7241
+steaming_rock_06	col_rock_steaming	-327918348309808825	object/tangible/collection/rock_steaming_06.iff	RORI	6791	2999
+steaming_rock_07	col_rock_steaming	-255860755253269190	object/tangible/collection/rock_steaming_07.iff	CORELLIA	-7398	7513
+steaming_rock_08	col_rock_steaming	-226024406853397380	object/tangible/collection/rock_steaming_08.iff	TATOOINE	-7165	-2413
+steaming_rock_09	col_rock_steaming	-460774538795037508	object/tangible/collection/rock_steaming_09.iff	YAVIN4	952	-1466
+steaming_rock_10	col_rock_steaming	-356065846355622292	object/tangible/collection/rock_steaming_10.iff	TALUS	7542	883
+glowing_rock_01	col_rock_glowing	-407857242758086721	object/tangible/collection/rock_glowing_01.iff	DATHOMIR	5201	-6904
+glowing_rock_02	col_rock_glowing	-430093764917083319	object/tangible/collection/rock_glowing_02.iff	ENDOR	-1237	-2960
+glowing_rock_03	col_rock_glowing	-485825811431291444	object/tangible/collection/rock_glowing_03.iff	LOK	-785	-4974
+glowing_rock_04	col_rock_glowing	-310748376079534244	object/tangible/collection/rock_glowing_04.iff	RORI	-6959	-3125
+glowing_rock_05	col_rock_glowing	-453456187860468368	object/tangible/collection/rock_glowing_05.iff	YAVIN4	-4210	-3898
+glowing_rock_06	col_rock_glowing	-378583845481164230	object/tangible/collection/rock_glowing_06.iff	DANTOOINE	3066	1210
+glowing_rock_07	col_rock_glowing	-240379630975004887	object/tangible/collection/rock_glowing_07.iff	TATOOINE	5932	-3819
+glowing_rock_08	col_rock_glowing	-269653028408448953	object/tangible/collection/rock_glowing_08.iff	CORELLIA	5668	-1569
+glowing_rock_09	col_rock_glowing	-296956102224374201	object/tangible/collection/rock_glowing_09.iff	NABOO	6116	71
+glowing_rock_10	col_rock_glowing	-352406672659162406	object/tangible/collection/rock_glowing_10.iff	TALUS	4789	-6242
+burning_rock_01	col_rock_burning	-353814047808953777	object/tangible/collection/rock_burning_01.iff	TALUS	4309	2562
+burning_rock_02	col_rock_burning	-480196311949487927	object/tangible/collection/rock_burning_02.iff	LOK	-6293	4084
+burning_rock_03	col_rock_burning	-379146794526745779	object/tangible/collection/rock_burning_03.iff	DANTOOINE	2910	4514
+burning_rock_04	col_rock_burning	-433471466199600883	object/tangible/collection/rock_burning_04.iff	ENDOR	405	6108
+burning_rock_05	col_rock_burning	-318066724102800452	object/tangible/collection/rock_burning_05.iff	RORI	-1495	1688
+burning_rock_06	col_rock_burning	-466404037785331645	object/tangible/collection/rock_burning_06.iff	YAVIN4	6076	5439
+burning_rock_07	col_rock_burning	-243475856853362424	object/tangible/collection/rock_burning_07.iff	TATOOINE	7036	2509
+burning_rock_08	col_rock_burning	-297237576955146047	object/tangible/collection/rock_burning_08.iff	NABOO	5867	3056
+burning_rock_09	col_rock_burning	-254734855516861810	object/tangible/collection/rock_burning_09.iff	CORELLIA	-7165	136
+burning_rock_10	col_rock_burning	-406449866884607916	object/tangible/collection/rock_burning_10.iff	DATHOMIR	2547	-1675
+force_shui_painting_01	force_shui_01	496440932	object/tangible/collection/col_force_shui_painting_01.iff	RORI	-5050	-2273
+force_shui_painting_02	force_shui_01	546457763	object/tangible/collection/col_force_shui_painting_02.iff	TATOOINE	-1141	-3605
+force_shui_painting_03	force_shui_01	497442568	object/tangible/collection/col_force_shui_painting_03.iff	ENDOR	-867	1558
+force_shui_painting_04	force_shui_01	494441990	object/tangible/collection/col_force_shui_painting_04.iff	DATHOMIR	-45	-1616
+force_shui_painting_05	force_shui_01	525454240	object/tangible/collection/col_force_shui_painting_05.iff	CORELLIA	-5514	-2690
+force_shui_table_01	force_shui_02	500444722	object/tangible/collection/col_force_shui_table_01.iff	TALUS	4324	5184
+force_shui_table_02	force_shui_02	491454246	object/tangible/collection/col_force_shui_table_02.iff	NABOO	-5513	-45
+force_shui_table_03	force_shui_02	495440008	object/tangible/collection/col_force_shui_table_03.iff	YAVIN4	-6880	-5660
+force_shui_table_04	force_shui_02	490439887	object/tangible/collection/col_force_shui_table_04.iff	DANTOOINE	1593	-6361
+force_shui_table_05	force_shui_02	493439929	object/tangible/collection/col_force_shui_table_05.iff	LOK	529	5088
+icon_nyms_steal_mined_ore_1	nyms_steal_mined_ore	0	object/tangible/collection/ore_collectible.iff	LOK		
+icon_nyms_steal_mined_ore_2	nyms_steal_mined_ore	0	object/tangible/collection/ore_collectible.iff	LOK		
+icon_nyms_steal_mined_ore_8	nyms_steal_mined_ore	0	object/tangible/collection/ore_collectible.iff	LOK		
+icon_nyms_steal_mined_ore_7	nyms_steal_mined_ore	0	object/tangible/collection/ore_collectible.iff	LOK		
+icon_nyms_steal_mined_ore_3	nyms_steal_mined_ore	0	object/tangible/collection/ore_collectible.iff	LOK		
+icon_nyms_steal_mined_ore_6	nyms_steal_mined_ore	0	object/tangible/collection/ore_collectible.iff	LOK		
+icon_nyms_steal_mined_ore_9	nyms_steal_mined_ore	0	object/tangible/collection/ore_collectible.iff	LOK		
+icon_nyms_steal_mined_ore_4	nyms_steal_mined_ore	0	object/tangible/collection/ore_collectible.iff	LOK		
+icon_nyms_steal_mined_ore_5	nyms_steal_mined_ore	0	object/tangible/collection/ore_collectible.iff	LOK		
+icon_nyms_steal_mined_ore_10	nyms_steal_mined_ore	0	object/tangible/collection/ore_collectible.iff	LOK		
+icon_nyms_steal_lab_data_1	nyms_steal_lab_data	0	object/tangible/terminal/systems_control_terminal.iff	LOK		
+icon_nyms_steal_lab_data_2	nyms_steal_lab_data	0	object/tangible/terminal/systems_control_terminal.iff	LOK		
+icon_nyms_steal_lab_data_3	nyms_steal_lab_data	0	object/tangible/terminal/systems_control_terminal.iff	LOK		
+icon_nyms_steal_lab_data_4	nyms_steal_lab_data	0	object/tangible/terminal/systems_control_terminal.iff	LOK		
+icon_nyms_steal_lab_data_5	nyms_steal_lab_data	0	object/tangible/terminal/systems_control_terminal.iff	LOK		
+icon_nyms_steal_lab_data_6	nyms_steal_lab_data	0	object/tangible/terminal/systems_control_terminal.iff	LOK		
+icon_nyms_steal_lab_data_7	nyms_steal_lab_data	0	object/tangible/terminal/systems_control_terminal.iff	LOK		
+icon_nyms_steal_lab_data_8	nyms_steal_lab_data	0	object/tangible/terminal/systems_control_terminal.iff	LOK		
+icon_nyms_steal_lab_data_9	nyms_steal_lab_data	0	object/tangible/terminal/systems_control_terminal.iff	LOK		
+icon_nyms_steal_lab_data_10	nyms_steal_lab_data	0	object/tangible/terminal/systems_control_terminal.iff	LOK		
+icon_nyms_surveillance_device_01	nyms_surveillance_device	0	object/tangible/furniture/nym_themepark/collection/armoire_s01.iff	LOK		
+icon_nyms_surveillance_device_02	nyms_surveillance_device	0	object/tangible/furniture/nym_themepark/collection/frn_all_data_terminal_free_s2.iff	LOK		
+icon_nyms_surveillance_device_03	nyms_surveillance_device	0	object/tangible/furniture/nym_themepark/collection/frn_all_lamp_free_s04.iff	LOK		
+icon_nyms_surveillance_device_04	nyms_surveillance_device	0	object/tangible/furniture/nym_themepark/collection/frn_all_meatlump_grill_s02.iff	LOK		
+icon_nyms_surveillance_device_05	nyms_surveillance_device	0	object/tangible/furniture/nym_themepark/collection/frn_all_plant_potted_lg_s4.iff	LOK		
+icon_nyms_surveillance_device_06	nyms_surveillance_device	0	object/tangible/furniture/nym_themepark/collection/frn_all_plant_potted_lg_s3.iff	LOK		
+icon_nyms_surveillance_device_07	nyms_surveillance_device	0	object/tangible/furniture/nym_themepark/collection/frn_all_plant_potted_lg_s2.iff	LOK		
+icon_nyms_surveillance_device_08	nyms_surveillance_device	0	object/tangible/furniture/nym_themepark/collection/frn_all_plant_potted_lg_s1.iff	LOK		
+icon_nyms_surveillance_device_09	nyms_surveillance_device	0	object/tangible/furniture/nym_themepark/collection/table_work_bench.iff	LOK		
+icon_nyms_surveillance_device_10	nyms_surveillance_device	0	object/tangible/terminal/terminal_nym_cave.iff	LOK		
+dust_durni_01	col_dust_durni_01	-536772782629763506	object/tangible/collection/col_dust_durni_01.iff	DUNGEON1 - Nova Orion	-5567	67
+dust_durni_02	col_dust_durni_01	-536772780723801738	object/tangible/collection/col_dust_durni_02.iff	DUNGEON1 - Nova Orion	-5551	154
+dust_durni_03	col_dust_durni_01	-536772780703689566	object/tangible/collection/col_dust_durni_03.iff	DUNGEON1 - Nova Orion	-5550	218
+dust_durni_04	col_dust_durni_01	-536772781931238749	object/tangible/collection/col_dust_durni_04.iff	DUNGEON1 - Nova Orion	-5542	128
+dust_durni_05	col_dust_durni_01	-536772780714551757	object/tangible/collection/col_dust_durni_05.iff	DUNGEON1 - Nova Orion	-5455	115
+dust_durni_06	col_dust_durni_01	-536772780648749138	object/tangible/collection/col_dust_durni_06.iff	DUNGEON1 - Nova Orion	-5610	143
+dust_durni_07	col_dust_durni_01	-536772782161840034	object/tangible/collection/col_dust_durni_07.iff	DUNGEON1 - Nova Orion	-5463	104
+dust_durni_08	col_dust_durni_01	-536772781014766406	object/tangible/collection/col_dust_durni_08.iff	DUNGEON1 - Nova Orion	-5501	214
+dust_durni_09	col_dust_durni_01	-536772780862694422	object/tangible/collection/col_dust_durni_09.iff	DUNGEON1 - Nova Orion	-5602	163
+dust_durni_10	col_dust_durni_01	-536772781364170295	object/tangible/collection/col_dust_durni_10.iff	DUNGEON1 - Nova Orion	-5612	158
+hanging_light_01	col_hanging_light_01	7268212	object/tangible/collection/hanging_light_01.iff	TATOOINE	141	-5360
+hanging_light_02	col_hanging_light_01	7146982	object/tangible/collection/hanging_light_02.iff	NABOO	-5512	-53
+hanging_light_03	col_hanging_light_01	7325540	object/tangible/collection/hanging_light_03.iff	RORI	-1165	4520
+hanging_light_04	col_hanging_light_01	-404761018390516133	object/tangible/collection/hanging_light_04.iff	DATHOMIR	736	2937
+hanging_light_05	col_hanging_light_01	7076283	object/tangible/collection/hanging_light_05.iff	DANTOOINE	-602	2475
+hanging_light_06	col_hanging_light_01	-487233185260331527	object/tangible/collection/hanging_light_06.iff	LOK	-56	2733
+hanging_light_07	col_hanging_light_01	-430938191113483968	object/tangible/collection/hanging_light_07.iff	ENDOR	-205	3511
+hanging_light_08	col_hanging_light_01	0	object/tangible/collection/hanging_light_08.iff	YAVIN4	-6399	-338
+hanging_light_09	col_hanging_light_01	7125593	object/tangible/collection/hanging_light_09.iff	TALUS	20	-898
+hanging_light_10	col_hanging_light_01	7036077	object/tangible/collection/hanging_light_10.iff	CORELLIA	-6503	6054
+hanging_light_02_01	col_hanging_light_02	509457808	object/tangible/collection/hanging_light_02_01.iff	TATOOINE	3458	-4814
+hanging_light_02_02	col_hanging_light_02	525454241	object/tangible/collection/hanging_light_02_02.iff	CORELLIA	6741	-5791
+hanging_light_02_03	col_hanging_light_02	516454223	object/tangible/collection/hanging_light_02_03.iff	NABOO	4959	6737
+hanging_light_02_04	col_hanging_light_02	516454247	object/tangible/collection/hanging_light_02_04.iff	NABOO	4871	-4653
+hanging_light_02_05	col_hanging_light_02	509457948	object/tangible/collection/hanging_light_02_05.iff	TATOOINE	3787	2394
+hanging_light_02_06	col_hanging_light_02	521439722	object/tangible/collection/hanging_light_02_06.iff	LOK	471	5055
+hanging_light_02_07	col_hanging_light_02	514454263	object/tangible/collection/hanging_light_02_07.iff	CORELLIA	-327	-4474
+hanging_light_02_08	col_hanging_light_02	-285697102443428677	object/tangible/collection/hanging_light_02_08.iff	NABOO	-5205	4211
+hanging_light_02_09	col_hanging_light_02	509457901	object/tangible/collection/hanging_light_02_09.iff	TATOOINE	-2997	2205
+hanging_light_02_10	col_hanging_light_02	514454336	object/tangible/collection/hanging_light_02_10.iff	CORELLIA	-5249	-2528
+dwartii_statue_sistros	col_dwartii_statue	-544372604989548102	object/tangible/collection/dwartii_statue_sistros.iff	DUNGEON1 - Heroic ISD	-7243	6632
+dwartii_statue_faya	col_dwartii_statue	-536772781783295593	object/tangible/collection/dwartii_statue_faya.iff	DUNGEON1 - Nova Orion	-5533	133
+dwartii_statue_yanjon	col_dwartii_statue	-544372605328434893	object/tangible/collection/dwartii_statue_yanjon.iff	DUNGEON1 - Heroic ISD	-7236	6438
+dwartii_statue_braata	col_dwartii_statue	-544372606790049720	object/tangible/collection/dwartii_statue_braata.iff	DUNGEON1 - Heroic ISD	-7237	6211
+piranha_beetle	col_beetle	553439963	object/tangible/collection/beetle_piranha.iff	YAVIN4	-3084	-3072
+borer_beetle	col_beetle	-395472344345606098	object/tangible/collection/beetle_borer.iff	DATHOMIR	-6453	898
+young_cave_beetle	col_beetle	499457763	object/tangible/collection/beetle_young_cave.iff	TATOOINE	-3959	6270
+flame_beetle	col_beetle	0	object/tangible/collection/beetle_flame.iff	MUSTAFAR		
+ground_beetle	col_beetle	-256142229697027660	object/tangible/collection/beetle_ground.iff	CORELLIA	-5417	-6271
+junk_beetle	col_beetle	-366761896055242965	object/tangible/collection/beetle_junk.iff	DANTOOINE	-7070	-3332
+family_flower_01	family_story_flower	-296674625809101419	object/tangible/collection/col_family_story_flower_01.iff	NABOO	4989	-1560
+family_flower_02	family_story_flower	-489766461407870660	object/tangible/collection/col_family_story_flower_02.iff	LOK	377	5156
+family_flower_03	family_story_flower	-261771729887480028	object/tangible/collection/col_family_story_flower_03.iff	NABOO	-139	-4473
+family_flower_04	family_story_flower	-348184547947640619	object/tangible/collection/col_family_story_flower_04.iff	TALUS	637	-2978
+family_flower_05	family_story_flower	-436849165631537589	object/tangible/collection/col_family_story_flower_05.iff	ENDOR	4546	-2403
+family_grave_01	family_story_grave	-319755575469175810	object/tangible/collection/col_family_story_grave_01.iff	RORI	723	-3251
+family_grave_02	family_story_grave	-456552413068589641	object/tangible/collection/col_family_story_grave_02.iff	YAVIN4	-2466	2170
+family_grave_03	family_story_grave	-373517294924246510	object/tangible/collection/col_family_story_grave_03.iff	DANTOOINE	-1449	-3257
+family_grave_04	family_story_grave	-397161194154268836	object/tangible/collection/col_family_story_grave_04.iff	DATHOMIR	-5001	-3477
+family_grave_05	family_story_grave	-231090956147499864	object/tangible/collection/col_family_story_grave_05.iff	TATOOINE	-3538	-1129
+dancing_droid_01	col_dancing_droid_01	-225742932869132155	object/tangible/collection/dancing_droid_01.iff	TATOOINE	-6247	5950
+dancing_droid_02	col_dancing_droid_01	-265712379350630136	object/tangible/collection/dancing_droid_02.iff	CORELLIA	1773	4668
+dancing_droid_03	col_dancing_droid_01	-300333800757533337	object/tangible/collection/dancing_droid_03.iff	NABOO	6669	7185
+dancing_droid_04	col_dancing_droid_01	-483574010453100100	object/tangible/collection/dancing_droid_04.iff	LOK	-3890	-4496
+dancing_droid_05	col_dancing_droid_01	-369013695108483756	object/tangible/collection/dancing_droid_05.iff	DANTOOINE	-4198	-2427
+dancing_droid_06	col_dancing_droid_01	-401946268819610584	object/tangible/collection/dancing_droid_06.iff	DATHOMIR	-115	-1593
+dancing_droid_07	col_dancing_droid_01	-319755574771670676	object/tangible/collection/dancing_droid_07.iff	RORI	774	-2088
+dancing_droid_08	col_dancing_droid_01	-459085687644447368	object/tangible/collection/dancing_droid_08.iff	YAVIN4	-232	4817
+dancing_droid_09	col_dancing_droid_01	-434597364467323380	object/tangible/collection/dancing_droid_09.iff	ENDOR	3165	-3497
+dancing_droid_10	col_dancing_droid_01	-352688146980739251	object/tangible/collection/dancing_droid_10.iff	TALUS	4847	-4717
+ent_fan_01	col_entertainer_fan_01	-408420192916904805	object/tangible/collection/col_ent_fan_01.iff	DATHOMIR	5344	-4070
+ent_fan_02	col_entertainer_fan_01	605442523	object/tangible/collection/col_ent_fan_02.iff	ENDOR	-868	1555
+ent_fan_03	col_entertainer_fan_01	610444468	object/tangible/collection/col_ent_fan_03.iff	TALUS	4328	5164
+ent_fan_04	col_entertainer_fan_01	602454217	object/tangible/collection/col_ent_fan_04.iff	CORELLIA	3215	5327
+ent_fan_05	col_entertainer_fan_01	609457649	object/tangible/collection/col_ent_fan_05.iff	TATOOINE	-5184	-6550
+ent_fan_06	col_entertainer_fan_01	601454200	object/tangible/collection/col_ent_fan_06.iff	NABOO	4891	-4621
+ent_instrument_01	col_entertainer_instrument_01	600439794	object/tangible/collection/col_ent_instrument_01.iff	LOK	490	5054
+ent_instrument_02	col_entertainer_instrument_01	609457625	object/tangible/collection/col_ent_instrument_02.iff	TATOOINE	3425	-4836
+ent_instrument_03	col_entertainer_instrument_01	609457601	object/tangible/collection/col_ent_instrument_03.iff	TATOOINE	133	-5347
+ent_instrument_04	col_entertainer_instrument_01	608439986	object/tangible/collection/col_ent_instrument_04.iff	YAVIN4	-6875	-5668
+ent_instrument_05	col_entertainer_instrument_01	604440840	object/tangible/collection/col_ent_instrument_05.iff	RORI	-5261	-2319
+ent_instrument_06	col_entertainer_instrument_01	607441947	object/tangible/collection/col_ent_instrument_06.iff	DATHOMIR	-120	-1577
+col_gcw_insurgency_corellia_imperial	col_gcw_insurgency_imperial	0	object/tangible/collection/col_gcw_static_base_corellia.iff	CORELLIA		
+col_gcw_insurgency_naboo_imperial	col_gcw_insurgency_imperial	0	object/tangible/collection/col_gcw_static_base_naboo.iff	NABOO		
+col_gcw_insurgency_talus_imperial	col_gcw_insurgency_imperial	0	object/tangible/collection/col_gcw_static_base_talus.iff	TALUS		
+col_gcw_insurgency_corellia_rebel	col_gcw_insurgency_rebel	0	object/tangible/collection/col_gcw_static_base_corellia.iff	CORELLIA		
+col_gcw_insurgency_naboo_rebel	col_gcw_insurgency_rebel	0	object/tangible/collection/col_gcw_static_base_naboo.iff	NABOO		
+col_gcw_insurgency_talus_rebel	col_gcw_insurgency_rebel	0	object/tangible/collection/col_gcw_static_base_talus.iff	TALUS		
+datapad_01	col_datapad_01	-395753818639789263	object/tangible/collection/datapad_01.iff	DATHOMIR	-7013	3940
+datapad_02	col_datapad_01	-480196311275202461	object/tangible/collection/datapad_02.iff	LOK	-6229	3390
+datapad_03	col_datapad_01	-262897628976449359	object/tangible/collection/datapad_03.iff	CORELLIA	-1421	1986
+datapad_04	col_datapad_01	-237564880926883490	object/tangible/collection/datapad_04.iff	TATOOINE	3411	-5467
+datapad_05	col_datapad_01	-379709744787385435	object/tangible/collection/datapad_05.iff	DANTOOINE	4507	-6485
+datapad_06	col_datapad_01	-340584723891275325	object/tangible/collection/datapad_06.iff	TALUS	-6684	7268
+datapad_07	col_datapad_01	-456552413256526638	object/tangible/collection/datapad_07.iff	YAVIN4	-3183	3344
+datapad_08	col_datapad_01	7677074	object/tangible/collection/datapad_08.iff	NABOO	4936	-4928
+datapad_09	col_datapad_01	-436849165215735387	object/tangible/collection/datapad_09.iff	ENDOR	6109	-2450
+datapad_10	col_datapad_01	-322851799252967395	object/tangible/collection/datapad_10.iff	RORI	3593	349
+com_link_01	col_com_link_01	-452611764401616894	object/tangible/collection/com_link_01.iff	YAVIN4	-7048	7357
+com_link_02	col_com_link_01	-394627918906588861	object/tangible/collection/com_link_02.iff	DATHOMIR	-6232	-6088
+com_link_03	col_com_link_01	-430938190900576025	object/tangible/collection/com_link_03.iff	ENDOR	-1166	2951
+com_link_04	col_com_link_01	-340866198377705034	object/tangible/collection/com_link_04.iff	TALUS	-5816	-6395
+com_link_05	col_com_link_01	-230528007284254233	object/tangible/collection/com_link_05.iff	TATOOINE	-3721	-4752
+com_link_06	col_com_link_01	-263179104204397513	object/tangible/collection/com_link_06.iff	CORELLIA	-1913	3995
+com_link_07	col_com_link_01	-378020895234586861	object/tangible/collection/com_link_07.iff	DANTOOINE	2523	-2862
+com_link_08	col_com_link_01	-326510974313560831	object/tangible/collection/com_link_08.iff	RORI	7055	-5276
+com_link_09	col_com_link_01	-496240384746093984	object/tangible/collection/com_link_09.iff	LOK	6191	908
+com_link_10	col_com_link_01	-288230376589627086	object/tangible/collection/com_link_10.iff	NABOO	-3978	4389
+publish_com_link_component_01	col_publish_com_link_component_01	-237564881412243079	object/tangible/collection/publish_gift_comlink_component_01.iff	TATOOINE	3394	-4795
+publish_com_link_component_02	col_publish_com_link_component_01	-237564881058385884	object/tangible/collection/publish_gift_comlink_component_02.iff	TATOOINE	3354	-4839
+publish_com_link_component_03	col_publish_com_link_component_01	-237564882278610441	object/tangible/collection/publish_gift_comlink_component_03.iff	TATOOINE	3332	-4818
+publish_com_link_component_04	col_publish_com_link_component_01	-237564881393958366	object/tangible/collection/publish_gift_comlink_component_04.iff	TATOOINE	3358	-4779
+publish_com_link_component_05	col_publish_com_link_component_01	-237564880742632012	object/tangible/collection/publish_gift_comlink_component_05.iff	TATOOINE	3267	-4853
+publish_com_link_component_06	col_publish_com_link_component_01	-237564882437639417	object/tangible/collection/publish_gift_comlink_component_06.iff	TATOOINE	3309	-4913
+publish_com_link_component_07	col_publish_com_link_component_01	-237564881451509462	object/tangible/collection/publish_gift_comlink_component_07.iff	TATOOINE	3174	-5034
+publish_com_link_component_08	col_publish_com_link_component_01	-237564880609323118	object/tangible/collection/publish_gift_comlink_component_08.iff	TATOOINE	3163	-5013
+publish_com_link_component_09	col_publish_com_link_component_01	-237564880616605179	object/tangible/collection/publish_gift_comlink_component_09.iff	TATOOINE	3187	-5051
+publish_com_link_component_10	col_publish_com_link_component_01	-237564881241088422	object/tangible/collection/publish_gift_comlink_component_10.iff	TATOOINE	3145	-5039
+flower_01	col_flower_01	1110695	object/tangible/collection/flower_01.iff	CORELLIA	-5162	-6375
+flower_02	col_flower_01	-459648638782715658	object/tangible/collection/flower_02.iff	YAVIN4	-1589	6768
+flower_03	col_flower_01	-297800526965564547	object/tangible/collection/flower_03.iff	NABOO	5009	6819
+flower_04	col_flower_01	-436849164350344348	object/tangible/collection/flower_04.iff	ENDOR	4555	-2465
+flower_05	col_flower_01	-285134151894205821	object/tangible/collection/flower_05.iff	NABOO	-5638	172
+flower_06	col_flower_01	1100615	object/tangible/collection/flower_06.iff	TATOOINE	1541	3385
+flower_07	col_flower_01	7327516	object/tangible/collection/flower_07.iff	RORI	-4998	-2283
+flower_08	col_flower_01	1112729	object/tangible/collection/flower_08.iff	CORELLIA	-5046	-2225
+flower_09	col_flower_01	-379146794100181180	object/tangible/collection/flower_09.iff	DANTOOINE	3214	6001
+flower_10	col_flower_01	-231653906555284998	object/tangible/collection/flower_10.iff	TATOOINE	-2894	2432
+flower_11	col_flower_01	-376332044483970029	object/tangible/collection/flower_11.iff	DANTOOINE	1554	1755
+flower_12	col_flower_01	-399412993825643173	object/tangible/collection/flower_12.iff	DATHOMIR	-2419	-3113
+flower_13	col_flower_01	-395472343439289457	object/tangible/collection/flower_13.iff	DATHOMIR	-7119	1179
+flower_14	col_flower_01	-432064090262921390	object/tangible/collection/flower_14.iff	ENDOR	1982	-5289
+flower_15	col_flower_01	-481885160997840368	object/tangible/collection/flower_15.iff	LOK	-4882	-1050
+flower_16	col_flower_01	-318911148812473178	object/tangible/collection/flower_16.iff	RORI	-1705	6145
+flower_17	col_flower_01	-349028972689201129	object/tangible/collection/flower_17.iff	TALUS	1715	1620
+flower_18	col_flower_01	-345088322246362171	object/tangible/collection/flower_18.iff	TALUS	-3165	6821
+flower_19	col_flower_01	0	object/tangible/collection/flower_19.iff	LOK	2965	-4524
+flower_20	col_flower_01	-454300613415430852	object/tangible/collection/flower_20.iff	YAVIN4	-4338	3972
+plant_01	col_plant_01	1101532	object/tangible/collection/plant_01.iff	TATOOINE	-2890	2118
+plant_02	col_plant_01	-432908515919422042	object/tangible/collection/plant_02.iff	ENDOR	78	13
+plant_03	col_plant_01	9588475	object/tangible/collection/plant_03.iff	NABOO	-5529	-60
+plant_04	col_plant_01	-452330288194558733	object/tangible/collection/plant_04.iff	YAVIN4	-7086	4409
+plant_05	col_plant_01	1066804	object/tangible/collection/plant_05.iff	DATHOMIR	159	4483
+plant_06	col_plant_01	1112730	object/tangible/collection/plant_06.iff	CORELLIA	6871	-5776
+plant_07	col_plant_01	-256142229305242849	object/tangible/collection/plant_07.iff	CORELLIA	-5542	-6178
+plant_08	col_plant_01	1102713	object/tangible/collection/plant_08.iff	TATOOINE	-1341	-3616
+plant_09	col_plant_01	9587846	object/tangible/collection/plant_09.iff	NABOO	1407	2812
+plant_10	col_plant_01	7076556	object/tangible/collection/plant_10.iff	DANTOOINE	-6796	5524
+plant_11	col_plant_01	-402790692541919539	object/tangible/collection/plant_11.iff	DATHOMIR	-825	4189
+plant_12	col_plant_01	-434034415270195431	object/tangible/collection/plant_12.iff	ENDOR	4037	-7672
+plant_13	col_plant_01	-493144159630816605	object/tangible/collection/plant_13.iff	LOK	5064	-5136
+plant_14	col_plant_01	-368732220353669142	object/tangible/collection/plant_14.iff	DANTOOINE	-5978	-4579
+plant_15	col_plant_01	-488077611249949671	object/tangible/collection/plant_15.iff	LOK	1556	-6423
+plant_16	col_plant_01	7328121	object/tangible/collection/plant_16.iff	RORI	-5108	-2223
+plant_17	col_plant_01	-348184547621496819	object/tangible/collection/plant_17.iff	TALUS	568	-2974
+plant_18	col_plant_01	-453737663524176828	object/tangible/collection/plant_18.iff	YAVIN4	-5519	-1256
+plant_19	col_plant_01	-351562247416484003	object/tangible/collection/plant_19.iff	TALUS	3883	3396
+plant_20	col_plant_01	7328122	object/tangible/collection/plant_20.iff	RORI	-5555	-5667
+camera_01	col_camp_alpha_01	-396598243052108698	object/tangible/collection/deathtrooper_alpha_camera_01.iff	DATHOMIR	-5911	-6667
+datadisk_letter_01	col_camp_alpha_01	-396598243315232427	object/tangible/collection/deathtrooper_alpha_datadisk_letter_01.iff	DATHOMIR	-5912	-6668
+broken_rifle_01	col_camp_alpha_01	-396598242957857255	object/tangible/collection/deathtrooper_alpha_broken_rifle_01.iff	DATHOMIR	-5917	-6658
+torn_shirt_01	col_camp_alpha_01	-396598243609392116	object/tangible/collection/deathtrooper_alpha_torn_shirt_01.iff	DATHOMIR	-5917	-6679
+stuffed_bantha_01	col_camp_alpha_01	-396598242587996722	object/tangible/collection/deathtrooper_alpha_stuffed_bantha_01.iff	DATHOMIR	-5915	-6676
+signal_flare_01	col_camp_alpha_01	-396598243340634719	object/tangible/collection/deathtrooper_alpha_signal_flare_01.iff	DATHOMIR	-5915	-6662
+bloody_knife_01	col_camp_alpha_01	-396598242733904491	object/tangible/collection/deathtrooper_alpha_bloody_knife_01.iff	DATHOMIR	-5917	-6657
+cracked_helmet_01	col_camp_alpha_01	-396598242245420912	object/tangible/collection/deathtrooper_alpha_cracked_helmet_01.iff	DATHOMIR	-5937	-6664
+movement_sensor_01	col_camp_alpha_01	-396598242814854938	object/tangible/collection/deathtrooper_alpha_movement_sensor_01.iff	DATHOMIR	-5938	-6667
+radio_antenna_01	col_camp_alpha_01	-396598242302570154	object/tangible/collection/deathtrooper_alpha_radio_antenna_01.iff	DATHOMIR	-5931	-6681
+bracelet_01	col_camp_beta_01	-394346442514896080	object/tangible/collection/deathtrooper_beta_bracelet_01.iff	DATHOMIR	-6277	-7524
+pistol_01	col_camp_beta_01	-394346444350465308	object/tangible/collection/deathtrooper_beta_damaged_pistol_01.iff	DATHOMIR	-6282	-7523
+id_card_01	col_camp_beta_01	-394346443322538714	object/tangible/collection/deathtrooper_beta_id_card_01.iff	DATHOMIR	-6289	-7516
+survival_kit	col_camp_beta_01	-394346443952685437	object/tangible/collection/deathtrooper_beta_survival_kit_01.iff	DATHOMIR	-6284	-7521
+flash_light_01	col_camp_beta_01	-394346444382915575	object/tangible/collection/deathtrooper_beta_flash_light_01.iff	DATHOMIR	-6291	-7516
+batteries_01	col_camp_beta_01	-394346443587782973	object/tangible/collection/deathtrooper_beta_batteries_01.iff	DATHOMIR	-6294	-7515
+broken_radio_01	col_camp_beta_01	-394346443611136879	object/tangible/collection/deathtrooper_beta_broken_radio_01.iff	DATHOMIR	-6279	-7518
+medical_kit_01	col_camp_beta_01	-394346444124628038	object/tangible/collection/deathtrooper_beta_medical_kit_01.iff	DATHOMIR	-6298	-7521
+emergency_rations_01	col_camp_beta_01	-394346444494295097	object/tangible/collection/deathtrooper_beta_emergency_rations_01.iff	DATHOMIR	-6277	-7521
+cracked_storm_armor_01	col_camp_beta_01	-394346443990967354	object/tangible/collection/deathtrooper_beta_cracked_s_armor_01.iff	DATHOMIR	-6274	-7528
+unused_shuttle_ticket_01	col_camp_gamma_01	-394346443299503864	object/tangible/collection/deathtrooper_gamma_shuttle_ticket01.iff	DATHOMIR	-6811	-6474
+radar_beacon_01	col_camp_gamma_01	-394346444078399731	object/tangible/collection/deathtrooper_gamma_radar_beacon_01.iff	DATHOMIR	-6815	-6447
+datadisk_diary_01	col_camp_gamma_01	-394346442550010078	object/tangible/collection/deathtrooper_gamma_datadisk_diary_01.iff	DATHOMIR	-6819	-6431
+bloody_jacket_01	col_camp_gamma_01	-394346442566096509	object/tangible/collection/deathtrooper_gamma_bloody_jacket_01.iff	DATHOMIR	-6791	-6439
+holo_recording_rod_01	col_camp_gamma_01	-394346444180029473	object/tangible/collection/deathtrooper_gamma_recording_rod_01.iff	DATHOMIR	-6807	-6460
+used_med_kit_01	col_camp_gamma_01	-394346443677879351	object/tangible/collection/deathtrooper_gamma_used_med_kit_01.iff	DATHOMIR	-6853	-6473
+depleted_energy_cartridge_01	col_camp_gamma_01	-394346444458788891	object/tangible/collection/deathtrooper_gamma_energy_cartridge_01.iff	DATHOMIR	-6842	-6469
+cargo_pockets_01	col_camp_gamma_01	-394346442404917237	object/tangible/collection/deathtrooper_gamma_cargo_pockets_01.iff	DATHOMIR	-6831	-6453
+cooking_utensils_01	col_camp_gamma_01	-394346443478249000	object/tangible/collection/deathtrooper_gamma_cookling_utensils_01.iff	DATHOMIR	-6817	-6432
+ambush_detector_01	col_camp_gamma_01	-394346444496160659	object/tangible/collection/deathtrooper_gamma_ambush_detector_01.iff	DATHOMIR	-6802	-6451
+scout_pistol_01	col_camp_delta_01	-394346442722061116	object/tangible/collection/deathtrooper_delta_scout_pistol_01.iff	DATHOMIR	-7157	-6927
+basket_01	col_camp_delta_01	-394346443928355326	object/tangible/collection/deathtrooper_delta_basket_01.iff	DATHOMIR	-7154	-6934
+pet_cage_01	col_camp_delta_01	-394346443683084596	object/tangible/collection/deathtrooper_delta_pet_cage_01.iff	DATHOMIR	-7149	-6923
+dmg_vibro_sword_01	col_camp_delta_01	-394346444188795334	object/tangible/collection/deathtrooper_delta_vibro_sword_01.iff	DATHOMIR	-7128	-6919
+skeleton_01	col_camp_delta_01	-394346442868652478	object/tangible/collection/deathtrooper_delta_skeleton_01.iff	DATHOMIR	-7165	-6906
+ammo_canister_01	col_camp_delta_01	-394346444125167479	object/tangible/collection/deathtrooper_delta_ammo_canister_01.iff	DATHOMIR	-7136	-6930
+camping_cot_01	col_camp_delta_01	-394346443189711598	object/tangible/collection/deathtrooper_delta_camping_cot_01.iff	DATHOMIR	-7164	-6915
+signal_scanner_01	col_camp_delta_01	-394346444002192231	object/tangible/collection/deathtrooper_delta_signal_scanner_01.iff	DATHOMIR	-7150	-6917
+power_converter_01	col_camp_delta_01	-394346443608695186	object/tangible/collection/deathtrooper_delta_power_converter_01.iff	DATHOMIR	-7149	-6945
+medical_scanner_01	col_camp_delta_01	-394346443517086547	object/tangible/collection/deathtrooper_delta_medical_scanner_01.iff	DATHOMIR	-7164	-6917
+holodisk_01	col_camp_epsilon_01	-394346444181343801	object/tangible/collection/deathtrooper_epsilon_holodisk_01.iff	DATHOMIR	-7410	-7328
+backpack_01	col_camp_epsilon_01	-394346444059073903	object/tangible/collection/deathtrooper_epsilon_backpack_01.iff	DATHOMIR	-7458	-7333
+computer_toolkit_01	col_camp_epsilon_01	-394346442480864554	object/tangible/collection/deathtrooper_epsilon_computer_toolkit_01.iff	DATHOMIR	-7419	-7336
+medical_console_01	col_camp_epsilon_01	-394346442459543682	object/tangible/collection/deathtrooper_epsilon_medical_console_01.iff	DATHOMIR	-7443	-7336
+used_antidote_kit_01	col_camp_epsilon_01	-394346444103289315	object/tangible/collection/deathtrooper_epsilon_antidote_kit_01.iff	DATHOMIR	-7456	-7312
+medical_analysis_tool_01	col_camp_epsilon_01	-394346444092042285	object/tangible/collection/deathtrooper_epsilon_medical_tool_01.iff	DATHOMIR	-7450	-7320
+carbine_01	col_camp_epsilon_01	-394346444074958231	object/tangible/collection/deathtrooper_epsilon_carbine_01.iff	DATHOMIR	-7415	-7313
+locator_beacon_01	col_camp_epsilon_01	-394346443571578130	object/tangible/collection/deathtrooper_epsilon_locator_beacon_01.iff	DATHOMIR	-7447	-7355
+radio_01	col_camp_epsilon_01	-394346442699390274	object/tangible/collection/deathtrooper_epsilon_radio_01.iff	DATHOMIR	-7452	-7331
+camp_fire_01	col_camp_epsilon_01	-394346443694587550	object/tangible/collection/deathtrooper_epsilon_camp_fire_01.iff	DATHOMIR	-7426	-7340
+cracked_datapad_01	col_camp_research_01	-394346444218869228	object/tangible/collection/deathtrooper_research_cracked_datapad_01.iff	DATHOMIR	-7372	-7352
+frequency_scanner_01	col_camp_research_01	-394346444403722178	object/tangible/collection/deathtrooper_research_frequency_scanner_01.iff	DATHOMIR	-7535	-7454
+personal_locator_01	col_camp_research_01	-394346443600699840	object/tangible/collection/deathtrooper_research_personal_locator_01.iff	DATHOMIR	-7506	-7412
+medical_canister_01	col_camp_research_01	-394346443036461944	object/tangible/collection/deathtrooper_research_medical_canister_01.iff	DATHOMIR	-7373	-7470
+patients_records_01	col_camp_research_01	-394346443644683428	object/tangible/collection/deathtrooper_research_patient_records_01.iff	DATHOMIR	-7390	-7551
+supply_crate_01	col_camp_research_01	-394346443711418618	object/tangible/collection/deathtrooper_research_supply_crate_01.iff	DATHOMIR	-7493	-7467
+emergency_generator_01	col_camp_research_01	-394346444426267885	object/tangible/collection/deathtrooper_research_emergency_generator_01.iff	DATHOMIR	-7279	-7576
+auto_syringe_01	col_camp_research_01	-394346443484136177	object/tangible/collection/deathtrooper_research_auto_syringe_01.iff	DATHOMIR	-7269	-7445
+stuffed_stardestroyer_01	col_camp_research_01	-394346444377464929	object/tangible/collection/deathtrooper_research_stuffed_stardestroyer_01.iff	DATHOMIR	-7430	-7507
+broken_laser_rifle_01	col_camp_research_01	-394346442629400583	object/tangible/collection/deathtrooper_research_broken_laser_rifle_01.iff	DATHOMIR	-7318	-7519
