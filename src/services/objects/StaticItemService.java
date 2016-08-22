@@ -116,6 +116,8 @@ public final class StaticItemService extends Service {
 					
 					switch(type) {
 						case "armor": objectAttributes = new ArmorAttributes(itemName, iffTemplate); break;
+						case "weapon": objectAttributes = new WeaponAttributes(itemName, iffTemplate); break;
+						case "wearable": objectAttributes = new WearableAttributes(itemName, iffTemplate);	break;
 						case "collection":	// TODO implement
 						case "consumable":	// TODO implement
 						case "costume":	// TODO implement
@@ -124,9 +126,7 @@ public final class StaticItemService extends Service {
 						case "item":	// TODO implement
 						case "object":	// TODO implement
 						case "schematic":	// TODO implement
-						case "storyteller":	// TODO implement
-						case "weapon": objectAttributes = new WeaponAttributes(itemName, iffTemplate); break;
-						case "wearable": continue;	// TODO implement
+						case "storyteller": continue;	// TODO implement
 						default: Log.e(this, "Item %s was not loaded because the specified type %s is unknown", itemName, type); continue;
 					}
 					
@@ -291,6 +291,7 @@ public final class StaticItemService extends Service {
 		private final Map<String, String> mods;	// skillmods/statmods
 		private String requiredProfession;
 		private String requiredFaction;
+		private String buffName;
 		// TODO species restriction
 		// TODO customisation variables, ie. for colours
 		
@@ -341,6 +342,12 @@ public final class StaticItemService extends Service {
 				}
 			}
 			
+			String buffNameCell = resultSet.getString("buff_name");
+			
+			if(!buffNameCell.equals("-")) {
+				buffName = "@ui_buff:" + buffNameCell;
+			}
+			
 			return true;
 		}
 
@@ -356,6 +363,8 @@ public final class StaticItemService extends Service {
 				
 				object.addAttribute(modString, modValue);
 			}
+			
+			object.addAttribute("effect", buffName);
 		}
 		
 	}
@@ -444,6 +453,7 @@ public final class StaticItemService extends Service {
 		private String elementalTypeString;
 		private short elementalDamage;
 		// special_attack_cost: Pre-NGE artifact? (SAC)
+		// TODO proc_effect
 		
 		public WeaponAttributes(String itemName, String iffTemplate) {
 			super(itemName, iffTemplate);
