@@ -288,7 +288,7 @@ public final class StaticItemService extends Service {
 	
 	private static class WearableAttributes extends ObjectAttributes {
 
-		// TODO skillmods/statmods
+		private final Map<String, String> mods;	// skillmods/statmods
 		private String requiredProfession;
 		private String requiredFaction;
 		// TODO species restriction
@@ -296,6 +296,7 @@ public final class StaticItemService extends Service {
 		
 		public WearableAttributes(String itemName, String iffTemplate) {
 			super(itemName, iffTemplate);
+			mods = new HashMap<>();
 		}
 
 		@Override
@@ -317,6 +318,30 @@ public final class StaticItemService extends Service {
 				requiredFaction = "@pvp_factions:" + requiredFaction;
 			}
 			
+			// Load mods
+			String modsString = resultSet.getString("skill_mods");
+			
+			// If this wearable is supposed to have mods, then load 'em!
+			if(!modsString.equals("-")) {	// An empty cell is "-"
+				String[] modStrings = modsString.split(",");	// The mods strings are comma-separated
+				
+				for(String modString : modStrings) {
+					String category;
+					System.out.println("parsing " + modString);
+					String[] splitValues = modString.split("=");	// Name and value are separated by "="
+					String modName = splitValues[0];
+					String modValue = splitValues[1];
+					
+					if(modName.endsWith("_modified")) {	// Common statmods end with "_modified"
+						category = "cat_stat_mod_bonus";
+					} else {	// If not, it's a skillmod
+						category = "cat_skill_mod_bonus";
+					}
+					
+					mods.put(category + "." + modName, modValue);
+				}
+			}
+			
 			return true;
 		}
 
@@ -324,6 +349,14 @@ public final class StaticItemService extends Service {
 		protected void applyTypeAttributes(SWGObject object) {
 			object.addAttribute("class_required", requiredProfession);
 			object.addAttribute("faction_restriction", requiredFaction);
+			
+			// Apply the mods!
+			for(Map.Entry<String, String> modEntry : mods.entrySet()) {
+				String modString = modEntry.getKey();
+				String modValue = modEntry.getValue();
+				
+				object.addAttribute(modString, modValue);
+			}
 		}
 		
 	}
