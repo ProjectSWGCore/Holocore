@@ -338,7 +338,7 @@ public final class StaticItemService extends Service {
 						category = "cat_skill_mod_bonus";
 					}
 					
-					mods.put(category + "." + modName, modValue);
+					mods.put(category + ".@stat_n:" + modName, modValue);
 				}
 			}
 			
