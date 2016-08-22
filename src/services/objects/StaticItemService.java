@@ -363,7 +363,8 @@ public final class StaticItemService extends Service {
 				object.addAttribute(modString, modValue);
 			}
 			
-			object.addAttribute("effect", buffName);
+			if(buffName != null)	// Not every wearable has an effect!
+				object.addAttribute("effect", buffName);
 		}
 		
 	}
@@ -448,11 +449,10 @@ public final class StaticItemService extends Service {
 		private int minDamage;
 		private int maxDamage;
 		private String damageString;
-		private boolean elementalWeapon;
 		private String elementalTypeString;
 		private short elementalDamage;
+		private String procEffect;
 		// special_attack_cost: Pre-NGE artifact? (SAC)
-		// TODO proc_effect
 		
 		public WeaponAttributes(String itemName, String iffTemplate) {
 			super(itemName, iffTemplate);
@@ -517,6 +517,13 @@ public final class StaticItemService extends Service {
 				elementalTypeString = "@obj_attr_n:elemental_" + elementalType;
 				elementalDamage = resultSet.getShort("elemental_damage");
 			}
+			
+			String procEffectString = resultSet.getString("proc_effect");
+			
+			if(!procEffectString.equals("-")) {
+				procEffect = "@ui_buff:" + procEffectString;
+			}
+			
 			// TODO calculate DPS
 			
 			return true;
@@ -529,8 +536,13 @@ public final class StaticItemService extends Service {
 			object.addAttribute("cat_wpn_damage.wpn_category", weaponCategory);
 			object.addAttribute("cat_wpn_damage.wpn_attack_speed", String.valueOf(attackSpeed));
 			object.addAttribute("cat_wpn_damage.damage", damageString);
-			object.addAttribute("cat_wpn_damage.wpn_elemental_type", elementalTypeString);
-			object.addAttribute("cat_wpn_damage.wpn_elemental_value", String.valueOf(elementalDamage));
+			if(elementalType != null) {	// Not all weapons have elemental damage.
+				object.addAttribute("cat_wpn_damage.wpn_elemental_type", elementalTypeString);
+				object.addAttribute("cat_wpn_damage.wpn_elemental_value", String.valueOf(elementalDamage));
+			}
+			
+			if(procEffect != null)	// Not all weapons have a proc effect
+				object.addAttribute("proc_name", procEffect);
 			// TODO set DPS
 			
 			object.addAttribute("cat_wpn_other.wpn_range", rangeString);
