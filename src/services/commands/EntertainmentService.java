@@ -132,6 +132,9 @@ public class EntertainmentService extends Service {
 				// Don't keep giving them XP if they log out
 				CreatureObject creature = i.getPlayer().getCreatureObject();
 				
+				if(creature == null)
+					return;
+				
 				if(creature.getPosture().equals(Posture.SKILL_ANIMATING)) {
 					cancelExperienceTask(creature);
 				}
