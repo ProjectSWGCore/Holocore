@@ -27,6 +27,7 @@
 ***********************************************************************************/
 package services.objects;
 
+import intents.chat.ChatBroadcastIntent;
 import intents.object.ObjectCreatedIntent;
 import intents.object.CreateStaticItemIntent;
 import intents.server.ConfigChangedIntent;
@@ -164,6 +165,13 @@ public final class StaticItemService extends Service {
 	private void handleSpawnItemIntent(CreateStaticItemIntent i) {
 		SWGObject container = i.getContainer();
 		String[] itemNames = i.getItemNames();
+		SWGObject requester = i.getRequester();
+		
+		// If adding these items to the container would exceed the max capacity...
+		if(container.getVolume() + itemNames.length > container.getMaxContainerSize()) {
+			new ChatBroadcastIntent(i.getRequester().getOwner(), "@system_msg:give_item_failure").broadcast();
+			return;
+		}
 		
 		if(itemNames.length > 0) {
 			for(String itemName : itemNames) {
@@ -176,9 +184,17 @@ public final class StaticItemService extends Service {
 					if(object != null) {
 						// Global attributes and type-specific attributes are applied
 						objectAttributes.applyAttributes(object);
-						object.moveToContainer(container);
+						
+						switch(object.moveToContainer(container)) {
+							case SUCCESS:
+								Log.i(this, "Successfully spawned %s into container %s", itemName, container);
+								break;
+							case CONTAINER_FULL:
+								new ChatBroadcastIntent(i.getRequester().getOwner(), "@system_msg:give_item_failure").broadcast();
+								break;
+						}
 						new ObjectCreatedIntent(object).broadcast();
-						Log.i(this, "Successfully spawned %s into container %s", itemName, container);
+						
 					} else {
 						Log.w(this, "%s could not be loaded because IFF template %s is invalid", itemName, iffTemplate);
 					}
@@ -186,6 +202,7 @@ public final class StaticItemService extends Service {
 					Log.e(this, "%s could not be spawned because the item name is unknown", itemName);
 				}
 			}
+			new ChatBroadcastIntent(i.getRequester().getOwner(), "@system_msg:give_item_success").broadcast();
 		} else {
 			Log.w(this, "No item names were specified in SpawnItemIntent - no objects were spawned into container %s", container);
 		}
