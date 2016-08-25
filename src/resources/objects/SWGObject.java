@@ -981,7 +981,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	@Override
 	public void save(NetBufferStream stream) {
-		stream.addByte(0);
+		stream.addByte(1);
 		location.save(stream);
 		stream.addBoolean(parent != null && parent.getClassification() != ObjectClassification.GENERATED);
 		if (parent != null && parent.getClassification() != ObjectClassification.GENERATED)
@@ -1010,10 +1010,42 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	public void read(NetBufferStream stream) {
-		stream.getByte();
+		switch(stream.getByte()) {
+			case 1:
+				readVersion1(stream);
+				break;
+			case 0:
+				readVersion0(stream);
+				break;
+		}
+		
+	}
+	
+	private void readVersion0(NetBufferStream stream) {
 		location.read(stream);
-		if (stream.getBoolean())
+		if (stream.getBoolean()) {
 			parent = SWGObjectFactory.create(stream);
+		}
+		permissions = ContainerPermissionsType.valueOf(stream.getAscii());
+		classification = ObjectClassification.valueOf(stream.getAscii());
+		objectName = stream.getUnicode();
+		stream.getInt();	// Incorrect volume in version 0!
+		complexity = stream.getFloat();
+		loadRange = stream.getFloat();
+		stream.getList((i) -> attributes.put(stream.getAscii(), stream.getAscii()));
+		stream.getList((i) -> SWGObjectFactory.create(stream).moveToContainer(this));
+		
+		// After creating the children, we calculate the correct volume...
+		for(SWGObject containedObject : containedObjects) {
+			volume += containedObject.getVolume() + 1;
+		}
+	}
+	
+	private void readVersion1(NetBufferStream stream) {
+		location.read(stream);
+		if (stream.getBoolean()) {
+			parent = SWGObjectFactory.create(stream);
+		}
 		permissions = ContainerPermissionsType.valueOf(stream.getAscii());
 		classification = ObjectClassification.valueOf(stream.getAscii());
 		objectName = stream.getUnicode();
