@@ -127,20 +127,22 @@ public class EntertainmentService extends Service {
 	}
 	
 	private void handlePlayerEventIntent(PlayerEventIntent i) {
+		CreatureObject creature = i.getPlayer().getCreatureObject();
+		
+		// Null creatures or non-entertainers are ignored!
+		if(creature == null || !isEntertainer(creature))
+			return;
+		
 		switch(i.getEvent()) {
 			case PE_LOGGED_OUT:
 				// Don't keep giving them XP if they log out
-				CreatureObject creature = i.getPlayer().getCreatureObject();
-				
-				if(creature != null && creature.getPosture().equals(Posture.SKILL_ANIMATING)) {
+				if(creature.getPosture().equals(Posture.SKILL_ANIMATING)) {
 					cancelExperienceTask(creature);
 				}
 				
 				break;
 			case PE_ZONE_IN_SERVER: 
 				// We need to check if they're dancing in order to start giving them XP
-				creature = i.getPlayer().getCreatureObject();
-				
 				if(creature.getPosture().equals(Posture.SKILL_ANIMATING)) {
 					scheduleExperienceTask(creature);
 				}
