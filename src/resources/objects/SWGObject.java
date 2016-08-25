@@ -119,6 +119,9 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		if (object.getSlotArrangement() == -1) {
 			synchronized (containedObjects) {
 				containedObjects.add(object);
+				
+				// We need to adjust the volume of our container accordingly!
+				setVolume(getVolume() + object.getVolume() + 1);
 			}
 		} else {
 			for (String requiredSlot : object.getArrangement().get(object.getSlotArrangement() - 4)) {
@@ -136,6 +139,9 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		if (object.getSlotArrangement() == -1) {
 			synchronized (containedObjects) {
 				containedObjects.remove(object);
+				
+				// We need to adjust the volume of our container accordingly!
+				setVolume(getVolume() - object.getVolume() - 1);
 			}
 		} else {
 			for (String requiredSlot : object.getArrangement().get(object.getSlotArrangement() - 4)) {
