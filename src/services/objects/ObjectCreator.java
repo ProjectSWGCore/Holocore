@@ -56,16 +56,23 @@ import resources.objects.staticobject.StaticObject;
 import resources.objects.tangible.TangibleObject;
 import resources.objects.waypoint.WaypointObject;
 import resources.objects.weapon.WeaponObject;
+import resources.server_info.Log;
 
 public final class ObjectCreator {
 	
 	private static final Object OBJECT_ID_MUTEX = new Object();
-	private static long maxObjectId = 1;
+	private static long nextObjectId = 1;
 	
-	public static void updateMaxObjectId(long objectId) {
+	private static void updateMaxObjectId(long objectId) {
 		synchronized (OBJECT_ID_MUTEX) {
-			if (objectId > maxObjectId)
-				maxObjectId = objectId;
+			if (objectId >= nextObjectId)
+				nextObjectId = objectId+1;
+		}
+	}
+	
+	private static long getNextObjectId() {
+		synchronized (OBJECT_ID_MUTEX) {
+			return nextObjectId++;
 		}
 	}
 	
@@ -75,6 +82,8 @@ public final class ObjectCreator {
 		if (!template.endsWith(".iff"))
 			return null;
 		ObjectData attributes = (ObjectData) ClientFactory.getInfoFromFile(ClientFactory.formatToSharedFile(template), true);
+		if(attributes == null)
+			return null;
 		GameObjectType type = GameObjectType.getTypeFromId((Integer) attributes.getAttribute(ObjectDataAttribute.GAME_OBJECT_TYPE));
 		SWGObject obj = createObjectFromType(objectId, template, type);
 		if (obj == null)
@@ -89,7 +98,7 @@ public final class ObjectCreator {
 	public static <T extends SWGObject> T createObjectFromTemplate(long objectId, String template, Class <T> c) {
 		T obj;
 		try {
-			obj = c.getConstructor(Integer.TYPE).newInstance(objectId);
+			obj = c.getConstructor(Long.TYPE).newInstance(objectId);
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
 			e.printStackTrace();
 			obj = null;
@@ -105,19 +114,11 @@ public final class ObjectCreator {
 	}
 	
 	public static SWGObject createObjectFromTemplate(String template) {
-		long id = 0;
-		synchronized (OBJECT_ID_MUTEX) {
-			id = maxObjectId++;
-		}
-		return createObjectFromTemplate(id, template);
+		return createObjectFromTemplate(getNextObjectId(), template);
 	}
 	
 	public static <T extends SWGObject> T createObjectFromTemplate(String template, Class <T> c) {
-		long id = 0;
-		synchronized (OBJECT_ID_MUTEX) {
-			id = maxObjectId++;
-		}
-		return createObjectFromTemplate(id, template, c);
+		return createObjectFromTemplate(getNextObjectId(), template, c);
 	}
 	
 	private static SWGObject createObjectFromType(long objectId, String template, GameObjectType got) {
@@ -187,14 +188,16 @@ public final class ObjectCreator {
 			case "tangible":				return new TangibleObject(objectId);
 			case "waypoint":				return new WaypointObject(objectId);
 			case "weapon":					return new WeaponObject(objectId);
-			default:						System.err.println("Unknown type: " + type); return null;
+			default:						Log.e("ObjectCreator", "Unknown type: " + type); return null;
 		}
 	}
 	
 	private static void handlePostCreation(SWGObject object, ObjectData attributes) {
 		addObjectAttributes(object, attributes);
 		createObjectSlots(object);
-		object.setGameObjectType(GameObjectType.getTypeFromId((Integer) object.getDataAttribute(ObjectDataAttribute.GAME_OBJECT_TYPE)));
+		Object got = object.getDataAttribute(ObjectDataAttribute.GAME_OBJECT_TYPE);
+		if (got != null)
+			object.setGameObjectType(GameObjectType.getTypeFromId((Integer) got));
 	}
 
 	private static void addObjectAttributes(SWGObject obj, ObjectData attributes) {
@@ -211,7 +214,6 @@ public final class ObjectCreator {
 		switch (key) {
 			case OBJECT_NAME: object.setStringId(value.toString()); break;
 			case DETAILED_DESCRIPTION: object.setDetailStringId(value.toString()); break;
-			case CONTAINER_VOLUME_LIMIT: object.setVolume((Integer) value); break;
 			case CONTAINER_TYPE: object.setContainerType((Integer) value); break;
 			default: break;
 		}

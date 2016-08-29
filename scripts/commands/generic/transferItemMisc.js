@@ -1,24 +1,28 @@
 function executeCommand(galacticManager, player, target, args) {
 	var actor = player.getCreatureObject();
-	var inventory;
-	var oldContainer = target.getParent();
+
+	if(actor === null || target === null || actor === target) {
+		return;
+	}
+	
 	var newContainer = galacticManager.getObjectManager().getObjectById(args.split(" ")[1]);
-
-	if(actor == null || target == null) {
-		return;
-	}
+	var ContainerResult = Java.type("resources.containers.ContainerResult");
 	
-	inventory = actor.getSlottedObject("inventory");
+	var containerResult = target.moveToContainer(actor, newContainer);
 	
-	if(inventory == null) {
-		return;
+	switch (containerResult) {
+		case ContainerResult.SUCCESS:
+			break;
+		case ContainerResult.CONTAINER_FULL:
+			// TODO container03_prose if container is named
+			intentFactory.sendSystemMessage(player, "@container_error_message:container03");
+			break;
+		case ContainerResult.NO_PERMISSION:
+			// TODO container08_prose if container is named
+			intentFactory.sendSystemMessage(player, "@container_error_message:container08");
+			break;
+		default:
+			print("Unhandled ContainerResult " + containerResult + " in transferItemMisc!");
+			break;
 	}
-	
-	result = target.moveToContainer(actor, newContainer); // Move item from the old container to the new container
-	if (actor.getEquipmentList().contains(target)) {
-		actor.removeEquipment(target);
-	} else if (newContainer == actor) {
-		actor.addEquipment(target);
-	}
-
 }

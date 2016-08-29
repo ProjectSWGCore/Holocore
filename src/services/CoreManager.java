@@ -32,6 +32,8 @@ import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -44,6 +46,7 @@ import intents.network.InboundPacketIntent;
 import intents.network.OutboundPacketIntent;
 import intents.server.ServerManagementIntent;
 import intents.server.ServerStatusIntent;
+import java.time.OffsetTime;
 import resources.Galaxy;
 import resources.Galaxy.GalaxyStatus;
 import resources.config.ConfigFile;
@@ -59,7 +62,8 @@ import utilities.CrcDatabaseGenerator;
 import utilities.ThreadUtilities;
 
 public class CoreManager extends Manager {
-	
+
+	private static final DateFormat LOG_FORMAT = new SimpleDateFormat("dd-MM-yy HH:mm:ss.SSS");
 	private static final Galaxy GALAXY = new Galaxy();
 	private static final int GALAXY_ID = 1;
 	
@@ -158,13 +162,21 @@ public class CoreManager extends Manager {
 	private void handleInboundPacketIntent(InboundPacketIntent i) {
 		if (!packetDebug)
 			return;
-		packetStream.println("IN "+i.getNetworkId()+":\t"+createExtendedPacketInformation(i.getPacket()));
+		printPacketStream(true, i.getNetworkId(), createExtendedPacketInformation(i.getPacket()));
 	}
 	
 	private void handleOutboundPacketIntent(OutboundPacketIntent i) {
 		if (!packetDebug)
 			return;
-		packetStream.println("OUT "+i.getNetworkId()+":\t"+createExtendedPacketInformation(i.getPacket()));
+		printPacketStream(false, i.getNetworkId(), createExtendedPacketInformation(i.getPacket()));
+	}
+	
+	private void printPacketStream(boolean in, long networkId, String str) {
+		String date;
+		synchronized (LOG_FORMAT) {
+			date = LOG_FORMAT.format(System.currentTimeMillis());
+		}
+		packetStream.printf("%s %s %d:\t%s%n", date, in?"IN ":"OUT", networkId, str);
 	}
 	
 	private String createExtendedPacketInformation(Packet p) {
@@ -190,7 +202,7 @@ public class CoreManager extends Manager {
 	}
 	
 	private void initiateShutdownSequence(ServerManagementIntent i) {
-		System.out.println("Beginning server shutdown sequence...");
+		Log.i(this, "Beginning server shutdown sequence...");
 		long time = i.getTime();
 		TimeUnit timeUnit = i.getTimeUnit();
 		
@@ -250,7 +262,7 @@ public class CoreManager extends Manager {
 		GALAXY.setName(c.getString("GALAXY-NAME", "Holocore"));
 		GALAXY.setAddress("");
 		GALAXY.setPopulation(0);
-		GALAXY.setTimeZone(c.getInt("GALAXY-TIMEZONE", -6));
+		GALAXY.setZoneOffset(OffsetTime.now().getOffset());
 		GALAXY.setZonePort(0);
 		GALAXY.setPingPort(0);
 		GALAXY.setStatus(GalaxyStatus.DOWN);

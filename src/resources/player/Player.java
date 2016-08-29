@@ -32,6 +32,7 @@ import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
+import resources.server_info.Log;
 import services.player.PlayerManager;
 
 public class Player implements Comparable<Player> {
@@ -46,6 +47,7 @@ public class Player implements Comparable<Player> {
 	private byte [] sessionToken	= new byte[0];
 	private int connectionId		= 0;
 	private AccessLevel accessLevel	= AccessLevel.PLAYER;
+	private PlayerServer server		= PlayerServer.NONE;
 	
 	private String galaxyName		= "";
 	private CreatureObject creatureObject= null;
@@ -76,6 +78,10 @@ public class Player implements Comparable<Player> {
 		this.state = state;
 	}
 	
+	public void setPlayerServer(PlayerServer server) {
+		this.server = server;
+	}
+	
 	public void setUsername(String username) {
 		this.username = username;
 	}
@@ -102,6 +108,8 @@ public class Player implements Comparable<Player> {
 	
 	public void setCreatureObject(CreatureObject obj) {
 		this.creatureObject = obj;
+		if (obj != null && obj.getOwner() != this)
+			obj.setOwner(this);
 	}
 	
 	public void updateLastPacketTimestamp() {
@@ -114,6 +122,10 @@ public class Player implements Comparable<Player> {
 	
 	public PlayerState getPlayerState() {
 		return state;
+	}
+	
+	public PlayerServer getPlayerServer() {
+		return server;
 	}
 	
 	public String getUsername() {
@@ -166,7 +178,7 @@ public class Player implements Comparable<Player> {
 	public void sendPacket(Packet ... packets) {
 		if (playerManager != null)
 			playerManager.sendPacket(this, packets);
-		else System.err.println("Couldn't send packet due to playerManager being null.");
+		else Log.e("Player", "Couldn't send packet due to playerManager being null.");
 	}
 	
 	@Override
@@ -209,6 +221,12 @@ public class Player implements Comparable<Player> {
 		if (creatureObject == null)
 			return getUserId();
 		return Long.valueOf(creatureObject.getObjectId()).hashCode() ^ getUserId();
+	}
+	
+	public static enum PlayerServer {
+		NONE,
+		LOGIN,
+		ZONE
 	}
 	
 }

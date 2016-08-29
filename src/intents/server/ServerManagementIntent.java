@@ -33,7 +33,7 @@ import resources.control.Intent;
 import resources.player.Player;
 
 public class ServerManagementIntent extends Intent {
-	public static final String TYPE = "PlayerEventIntent";
+	public static final String TYPE = "ServerManagementIntent";
 	
 	private Player player;
 	private String target;

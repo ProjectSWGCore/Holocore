@@ -102,35 +102,63 @@ public class UpdateTransformWithParentMessage extends SWGPacket {
 		addBoolean(bb, useLookDirection);
 		return bb;
 	}
-
+	
 	public void setCellId(long cellId) {
 		this.cellId = cellId;
 	}
-
+	
 	public void setObjectId(long objectId) {
 		this.objectId = objectId;
 	}
-
+	
 	public void setUpdateCounter(int updateCounter) {
 		this.updateCounter = updateCounter;
 	}
-
+	
 	public void setSpeed(byte speed) {
 		this.speed = speed;
 	}
-
+	
 	public void setDirection(byte direction) {
 		this.direction = direction;
 	}
-
+	
 	public void setLookDirection(byte lookDirection) {
 		this.lookDirection = lookDirection;
 	}
-
+	
 	public void setUseLookDirection(boolean useLookDirection) {
 		this.useLookDirection = useLookDirection;
 	}
-
+	
+	public long getCellId() {
+		return cellId;
+	}
+	
+	public long getObjectId() {
+		return objectId;
+	}
+	
+	public int getUpdateCounter() {
+		return updateCounter;
+	}
+	
+	public byte getSpeed() {
+		return speed;
+	}
+	
+	public byte getDirection() {
+		return direction;
+	}
+	
+	public byte getLookDirection() {
+		return lookDirection;
+	}
+	
+	public boolean isUseLookDirection() {
+		return useLookDirection;
+	}
+	
 	public void setLocation(Location location) {
 		this.x = (short) (location.getX() * 8 + 0.5);
 		this.y = (short) (location.getY() * 8 + 0.5);

@@ -94,7 +94,7 @@ public abstract class RelationalDatabase implements Closeable {
 			metaData = connection.getMetaData();
 			online = true;
 		} catch (SQLException e) {
-			System.err.println("Failed to initialize relational database! " + e.getClass().getSimpleName() + " - " + e.getMessage());
+			Log.e("RelationalDatabase", "Failed to initialize relational database! %s - %s", e.getClass().getSimpleName(), e.getMessage());
 			online = false;
 		}
 	}
@@ -105,7 +105,7 @@ public abstract class RelationalDatabase implements Closeable {
 			metaData = connection.getMetaData();
 			online = true;
 		} catch (SQLException e) {
-			System.err.println("Failed to initialize relational database! " + e.getClass().getSimpleName() + " - " + e.getMessage());
+			Log.e("RelationalDatabase", "Failed to initialize relational database! %s - %s", e.getClass().getSimpleName(), e.getMessage());
 			online = false;
 		}
 	}
@@ -131,7 +131,7 @@ public abstract class RelationalDatabase implements Closeable {
 	
 	public PreparedStatement prepareStatement(String sql) {
 		if (connection == null) {
-			System.err.println("Cannot prepare statement! Connection is null");
+			Log.e("RelationalDatabase", "Cannot prepare statement! Connection is null");
 			return null;
 		}
 		try {

@@ -30,10 +30,14 @@ package services.galaxy;
 import resources.control.Manager;
 import services.commands.BuffService;
 import services.collections.CollectionBadgeManager;
+import services.combat.CombatService;
 import services.commands.CommandService;
+import services.commands.EntertainmentService;
+import services.experience.ExperienceManager;
 import services.faction.FactionService;
 import services.galaxy.terminals.TerminalService;
 import services.sui.SuiService;
+import services.group.GroupService;
 
 public class GameManager extends Manager {
 
@@ -44,9 +48,12 @@ public class GameManager extends Manager {
 	private final EnvironmentService weatherService;
 	private final TerminalService terminalManager;
 	private final FactionService factionService;
-//	private final GroupService groupService;
+	private final GroupService groupService;
+	private final SkillModService skillModService;
+	private final EntertainmentService entertainmentService;
+	private final CombatService combatService;
+	private final ExperienceManager experienceManager;
 	private final BuffService buffService;
-    private final SkillModService skillModService;
 
 	public GameManager() {
 		commandService = new CommandService();
@@ -56,9 +63,12 @@ public class GameManager extends Manager {
 		weatherService = new EnvironmentService();
 		terminalManager = new TerminalService();
 		factionService = new FactionService();
-//		groupService = new GroupService();
-		buffService = new BuffService();
+		groupService = new GroupService();
 		skillModService = new SkillModService();
+		entertainmentService = new EntertainmentService();
+		combatService = new CombatService();
+		experienceManager = new ExperienceManager();
+		buffService = new BuffService();
 
 		addChildService(commandService);
 		addChildService(connectionService);
@@ -67,8 +77,11 @@ public class GameManager extends Manager {
 		addChildService(weatherService);
 		addChildService(terminalManager);
 		addChildService(factionService);
-//		addChildService(groupService);
-		addChildService(buffService);
+		addChildService(groupService);
 		addChildService(skillModService);
+		addChildService(entertainmentService);
+		addChildService(combatService);
+		addChildService(experienceManager);
+		addChildService(buffService);
 	}
 }

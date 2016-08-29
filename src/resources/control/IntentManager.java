@@ -36,6 +36,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
 
+import resources.server_info.Log;
 import utilities.ThreadUtilities;
 
 
@@ -128,8 +129,10 @@ public class IntentManager {
 		synchronized (intentRegistrations) {
 			receivers = intentRegistrations.get(i.getType());
 		}
-		if (receivers == null)
+		if (receivers == null) {
+			i.markAsComplete();
 			return;
+		}
 		for (IntentReceiver r : receivers) {
 			broadcast(r, i);
 		}
@@ -140,8 +143,8 @@ public class IntentManager {
 		try {
 			r.onIntentReceived(i);
 		} catch (Exception e) {
-			System.err.println("Fatal Exception while processing intent: " + i);
-			e.printStackTrace();
+			Log.e("IntentManager", "Fatal Exception while processing intent: " + i);
+			Log.e("IntentManager", e);
 		}
 	}
 	

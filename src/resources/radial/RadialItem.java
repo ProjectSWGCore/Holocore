@@ -1,3 +1,30 @@
+/************************************************************************************
+ * Copyright (c) 2015 /// Project SWG /// www.projectswg.com                        *
+ *                                                                                  *
+ * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on           *
+ * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies.  *
+ * Our goal is to create an emulator which will provide a server for players to     *
+ * continue playing a game similar to the one they used to play. We are basing      *
+ * it on the final publish of the game prior to end-game events.                    *
+ *                                                                                  *
+ * This file is part of Holocore.                                                   *
+ *                                                                                  *
+ * -------------------------------------------------------------------------------- *
+ *                                                                                  *
+ * Holocore is free software: you can redistribute it and/or modify                 *
+ * it under the terms of the GNU Affero General Public License as                   *
+ * published by the Free Software Foundation, either version 3 of the               *
+ * License, or (at your option) any later version.                                  *
+ *                                                                                  *
+ * Holocore is distributed in the hope that it will be useful,                      *
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of                   *
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                    *
+ * GNU Affero General Public License for more details.                              *
+ *                                                                                  *
+ * You should have received a copy of the GNU Affero General Public License         *
+ * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
+ *                                                                                  *
+ ***********************************************************************************/
 package resources.radial;
 
 import java.util.Hashtable;
@@ -319,14 +346,7 @@ public enum RadialItem {
 	BIO_LINK													(""),
 	LANDMINE_DISARM												(""),
 	LANDMINE_REVERSE_TRIGGER									(""),
-	REWARD_TRADE_IN												(""),
-	BANK_TRANSFER												("@sui:bank_credits"),
-	BANK_ITEMS													("@sui:bank_items"),
-	BANK_WITHDRAW_ALL											("@sui:bank_withdrawall"),
-	BANK_DEPOSIT_ALL											("@sui:bank_depositall"),
-	BANK_RESERVE												("@sui:bank_galactic_reserve"),
-	BANK_RESERVE_WITHDRAW										("@sui:bank_galactic_reserve_withdraw"),
-	BANK_RESERVE_DEPOSIT										("@sui:bank_galactic_reserve_deposit");
+	REWARD_TRADE_IN												("");
 	
 	private static final Map<Integer, RadialItem> INT_TO_ITEM = new Hashtable<>(values().length);
 	private int id;

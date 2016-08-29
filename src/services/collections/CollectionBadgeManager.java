@@ -43,13 +43,13 @@ import utilities.IntentFactory;
 
 public class CollectionBadgeManager extends Manager {
 	
-	//TODO 
-	//research rewards
-	//clearon complete
-	//track server first
-	//research categories
-	//music
-	//fix to appropriate message ex: kill_merek_activation_01
+	// TODO grant item rewards and/or schematics
+	// TODO grant XP
+	// TODO clearon complete (repeatable)
+	// TODO track server first
+	// TODO research categories
+	// TODO music + sound/utinni.snd
+	// TODO fix to appropriate message ex: kill_merek_activation_01
 	
 	private final ExplorationBadgeService explorationBadgeService;
 	

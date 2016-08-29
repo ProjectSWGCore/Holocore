@@ -31,7 +31,6 @@ package services.objects;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Collection;
 
 import intents.object.DestroyObjectIntent;
 import intents.object.ObjectCreatedIntent;
@@ -41,6 +40,7 @@ import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
+import resources.radial.RadialItem;
 import resources.server_info.ItemDatabase;
 import resources.server_info.RelationalServerData;
 import resources.server_info.RelationalServerFactory;
@@ -49,7 +49,7 @@ public class UniformBoxService extends Service {
 	//TODO: Display loot box
 	
 	private static final String [] UNIFORM_COLUMNS = {"boots", "pants", "belt", "gloves", "shirt", "vest", "hat", "necklace", "robe", "weapon"};
-	private static final String GET_UNIFORMBOX_SQL = "SELECT * FROM npe_uniformbox where profession = ? AND race = ? AND (gender = ? OR gender = 3)";
+	private static final String GET_UNIFORMBOX_SQL = "SELECT * FROM npe_uniformbox where profession = ? AND race = ?";
 	private static final String UNIFORM_BOX_IFF = "object/tangible/npe/shared_npe_uniform_box.iff";
 	
 	private RelationalServerData uniformBoxDatabase;
@@ -81,20 +81,23 @@ public class UniformBoxService extends Service {
 		if (!rsi.getTarget().getTemplate().equals(UNIFORM_BOX_IFF))
 			return;
 		
+		if(!rsi.getSelection().equals(RadialItem.ITEM_USE)) {
+			return;
+		}
+		
 		CreatureObject creature = rsi.getPlayer().getCreatureObject();
 		SWGObject inventory = creature.getSlottedObject("inventory");
 		String profession = creature.getPlayerObject().getProfession();
 		
-		destroyUniformBox(creature);
-		handleCreateItems(inventory, profession.substring(0, profession.lastIndexOf('_')), creature.getRace());
+		new DestroyObjectIntent(rsi.getTarget()).broadcast();
+		handleCreateItems(inventory, profession, creature.getRace());
 	}
 	
 	private void handleCreateItems(SWGObject inventory, String profession, Race race) {
 		synchronized (getUniformBoxStatement) {
 			try {
 				getUniformBoxStatement.setString(1, profession);
-				getUniformBoxStatement.setString(2, race.getSpecies());
-				getUniformBoxStatement.setInt(3, race.isMale() ? 1 : 2);
+				getUniformBoxStatement.setString(2, race.name());
 				
 				try (ResultSet set = getUniformBoxStatement.executeQuery()) {
 					if (set.next())
@@ -129,13 +132,4 @@ public class UniformBoxService extends Service {
 		return template;
 	}
 	
-	private void destroyUniformBox(CreatureObject creature){
-		Collection<SWGObject> items = creature.getItemsByTemplate("inventory", UNIFORM_BOX_IFF);
-		
-		for (SWGObject item : items){
-			if (item.getTemplate().equals(UNIFORM_BOX_IFF)){
-				new DestroyObjectIntent(item).broadcast();
-			}
-		}
-	}
 }

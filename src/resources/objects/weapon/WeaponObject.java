@@ -28,8 +28,10 @@
 package resources.objects.weapon;
 
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
+import resources.combat.DamageType;
 import resources.network.BaselineBuilder;
 import resources.network.NetBuffer;
+import resources.network.NetBufferStream;
 import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
 
@@ -37,9 +39,16 @@ public class WeaponObject extends TangibleObject {
 	
 	private static final long serialVersionUID = 1L;
 	
+	// WEAO03
 	private float attackSpeed = 0.5f;
+	private int accuracy;
+	private float minRange = 0f;
 	private float maxRange = 5f;
-	private int type = WeaponType.UNARMED;
+	private DamageType damageType = DamageType.KINETIC;
+	private DamageType elementalType;
+	private int elementalValue;
+	// WEAO06
+	private WeaponType type = WeaponType.UNARMED;
 	
 	public WeaponObject(long objectId) {
 		super(objectId, BaselineType.WEAO);
@@ -61,12 +70,52 @@ public class WeaponObject extends TangibleObject {
 	public void setMaxRange(float maxRange) {
 		this.maxRange = maxRange;
 	}
+
+	public int getAccuracy() {
+		return accuracy;
+	}
+
+	public void setAccuracy(int accuracy) {
+		this.accuracy = accuracy;
+	}
+
+	public float getMinRange() {
+		return minRange;
+	}
+
+	public void setMinRange(float minRange) {
+		this.minRange = minRange;
+	}
+
+	public DamageType getDamageType() {
+		return damageType;
+	}
+
+	public void setDamageType(DamageType damageType) {
+		this.damageType = damageType;
+	}
+
+	public DamageType getElementalType() {
+		return elementalType;
+	}
+
+	public void setElementalType(DamageType elementalType) {
+		this.elementalType = elementalType;
+	}
+
+	public int getElementalValue() {
+		return elementalValue;
+	}
+
+	public void setElementalValue(int elementalValue) {
+		this.elementalValue = elementalValue;
+	}
 	
-	public int getType() {
+	public WeaponType getType() {
 		return type;
 	}
 	
-	public void setType(int type) {
+	public void setType(WeaponType type) {
 		this.type = type;
 	}
 	
@@ -83,19 +132,19 @@ public class WeaponObject extends TangibleObject {
 	
 	@Override
 	public int hashCode() {
-		return super.hashCode() * 7 + type;
+		return super.hashCode() * 7 + type.getNum();
 	}
 	
 	public void createBaseline3(Player target, BaselineBuilder bb) {
 		super.createBaseline3(target, bb);
 		
 		bb.addFloat(attackSpeed);
-		bb.addInt(0); // accuracy (pre-nge)
-		bb.addInt(0); // minRange
+		bb.addInt(accuracy); // pre-NGE
+		bb.addFloat(minRange);
 		bb.addFloat(maxRange);
-		bb.addInt(1); // damageType
-		bb.addInt(0); // elementalType
-		bb.addInt(0); // elementalValue
+		bb.addInt(damageType.getNum());
+		bb.addInt(elementalType == null ? 0 : elementalType.getNum());
+		bb.addInt(elementalValue); // elementalValue
 		
 		bb.incrementOperandCount(7);
 	}
@@ -103,7 +152,7 @@ public class WeaponObject extends TangibleObject {
 	public void createBaseline6(Player target, BaselineBuilder bb) {
 		super.createBaseline6(target, bb);
 
-		bb.addInt(type);
+		bb.addInt(type.getNum());
 		
 		bb.incrementOperandCount(1);
 	}
@@ -121,7 +170,40 @@ public class WeaponObject extends TangibleObject {
 	
 	public void parseBaseline6(NetBuffer buffer) {
 		super.parseBaseline6(buffer);
-		type = buffer.getInt();
+		type = WeaponType.getWeaponType(buffer.getInt());
+	}
+
+	@Override
+	public void save(NetBufferStream stream) {
+		super.save(stream);
+		stream.addByte(1);
+		stream.addAscii(damageType.name());
+		stream.addAscii(elementalType != null ? elementalType.name() : "");
+		stream.addInt(elementalValue);
+		stream.addFloat(attackSpeed);
+		stream.addFloat(maxRange);
+		stream.addAscii(type.name());
+	}
+
+	@Override
+	public void read(NetBufferStream stream) {
+		super.read(stream);
+		switch(stream.getByte()) {
+			case 1:
+				damageType = DamageType.valueOf(stream.getAscii());
+				String elementalTypeName = stream.getAscii();
+				
+				// A weapon doesn't necessarily have an elemental type
+				if(!elementalTypeName.isEmpty())
+					elementalType = DamageType.valueOf(elementalTypeName);
+				
+				elementalValue = stream.getInt();
+			default:
+				attackSpeed = stream.getFloat();
+				maxRange = stream.getFloat();
+				type = WeaponType.valueOf(stream.getAscii());
+				break;
+		}
 	}
 	
 }

@@ -24,25 +24,25 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>
  ******************************************************************************/
-
 package resources.chat;
 
 import network.packets.Packet;
 import resources.encodables.Encodable;
+import resources.network.NetBufferStream;
+import resources.persistable.Persistable;
 import resources.player.Player;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.util.Locale;
+import services.CoreManager;
 
 /**
  * @author Waverunner
  */
-public class ChatAvatar implements Encodable, Serializable {
-	private static final long serialVersionUID = 1L;
-
+public class ChatAvatar implements Encodable, Persistable {
+	
 	private long networkId;
 	private String name;
 	private String game = "SWG";
@@ -133,7 +133,21 @@ public class ChatAvatar implements Encodable, Serializable {
 		galaxy 	= Packet.getAscii(data);
 		name 	= Packet.getAscii(data).toLowerCase(Locale.US);
 	}
-
+	
+	@Override
+	public void save(NetBufferStream stream) {
+		stream.addByte(0);
+		stream.addAscii(galaxy);
+		stream.addAscii(name);
+	}
+	
+	@Override
+	public void read(NetBufferStream stream) {
+		stream.getByte();
+		galaxy = stream.getAscii();
+		name = stream.getAscii();
+	}
+	
 	@Override
 	public String toString() {
 		return "ChatAvatar[networkId=" + networkId +
@@ -162,7 +176,7 @@ public class ChatAvatar implements Encodable, Serializable {
 	}
 
 	public static ChatAvatar getFromPlayer(Player player) {
-		return new ChatAvatar(player.getNetworkId(), player.getCharacterName().split(" ")[0].toLowerCase(Locale.US), player.getGalaxyName());
+		return new ChatAvatar(player.getNetworkId(), player.getCharacterName().split(" ")[0].toLowerCase(Locale.US), CoreManager.getGalaxy().getName());
 	}
 
 	public static ChatAvatar getSystemAvatar(String galaxy) {

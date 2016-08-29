@@ -42,6 +42,7 @@ import resources.client_info.visitors.SlotArrangementData;
 import resources.client_info.visitors.SlotDefinitionData;
 import resources.client_info.visitors.SlotDescriptorData;
 import resources.client_info.visitors.WorldSnapshotData;
+import resources.server_info.Log;
 
 public class ClientFactory extends DataFactory {
 	
@@ -134,7 +135,7 @@ public class ClientFactory extends DataFactory {
 	protected ClientData createDataObject(String type) {
 		String c = typeMap.get(type);
 		if (c == null) {
-			System.err.println("Don't know what class to use for " + type);
+			Log.e("ClientFactory", "Don't know what class to use for " + type);
 			return null;
 		}
 		
@@ -150,7 +151,7 @@ public class ClientFactory extends DataFactory {
 			case "SlotArrangementData": return new SlotArrangementData();
 			case "WorldSnapshotData": return new WorldSnapshotData();
 			case "PortalLayoutData": return new PortalLayoutData();
-			default: System.err.println("Unimplemented typeMap value: " + c); return null;
+			default: Log.e("ClientFactory", "Unimplemented typeMap value: " + c); return null;
 		}
 	}
 

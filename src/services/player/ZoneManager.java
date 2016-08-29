@@ -37,11 +37,11 @@ import network.packets.Packet;
 import network.packets.swg.login.AccountFeatureBits;
 import network.packets.swg.login.ClientIdMsg;
 import network.packets.swg.login.ClientPermissionsMessage;
+import network.packets.swg.login.ConnectionServerLagResponse;
 import network.packets.swg.zone.CmdSceneReady;
-import network.packets.swg.zone.GalaxyLoopTimesResponse;
 import network.packets.swg.zone.HeartBeat;
+import network.packets.swg.zone.LagRequest;
 import network.packets.swg.zone.ParametersMessage;
-import network.packets.swg.zone.RequestGalaxyLoopTimes;
 import network.packets.swg.zone.SetWaypointColor;
 import network.packets.swg.zone.ShowBackpack;
 import network.packets.swg.zone.ShowHelmet;
@@ -73,6 +73,7 @@ import resources.player.Player;
 import resources.player.PlayerEvent;
 import resources.player.PlayerFlags;
 import resources.player.PlayerState;
+import resources.player.Player.PlayerServer;
 import resources.server_info.Log;
 
 import java.io.File;
@@ -115,8 +116,6 @@ public class ZoneManager extends Manager {
 		characterCreationService.handlePacket(intent, player, networkId, p);
 		if (p instanceof ClientIdMsg)
 			handleClientIdMsg(player, (ClientIdMsg) p);
-		if (p instanceof RequestGalaxyLoopTimes)
-			handleGalaxyLoopTimesRequest(player, (RequestGalaxyLoopTimes) p);
 		if (p instanceof CmdSceneReady)
 			handleCmdSceneReady(player, (CmdSceneReady) p);
 		if (p instanceof SetWaypointColor)
@@ -125,16 +124,21 @@ public class ZoneManager extends Manager {
 			handleShowBackpack(player, (ShowBackpack) p);
 		if(p instanceof ShowHelmet)
 			handleShowHelmet(player, (ShowHelmet) p);
+		if (p instanceof LagRequest && player.getPlayerServer() == PlayerServer.ZONE)
+			handleLagRequest(player);
 	}
 	
 	public boolean characterExistsForName(String name) {
 		return characterCreationService.characterExistsForName(name);
 	}
 	
+	private void handleLagRequest(Player player) {
+		player.sendPacket(new ConnectionServerLagResponse());
+	}
+	
 	private void zoneInPlayer(Player player, CreatureObject creature, boolean firstZone) {
 		PlayerObject playerObj = creature.getPlayerObject();
 		player.setPlayerState(PlayerState.ZONING_IN);
-		player.setCreatureObject(creature);
 		creature.setOwner(player);
 		
 		if (firstZone)
@@ -143,7 +147,6 @@ public class ZoneManager extends Manager {
 		if (firstZone)
 			playerObj.setStartPlayTime((int) System.currentTimeMillis());
 		initPlayerBeforeZoneIn(player, creature, playerObj);
-		System.out.printf("[%s] %s is zoning in%n", player.getUsername(), player.getCharacterName());
 		Log.i("ObjectManager", "Zoning in %s with character %s", player.getUsername(), player.getCharacterName());
 		if (firstZone) {
 			new PlayerEventIntent(player, PlayerEvent.PE_FIRST_ZONE).broadcast();
@@ -154,7 +157,7 @@ public class ZoneManager extends Manager {
 	}
 	
 	private void startScene(CreatureObject object, Location newLocation) {
-		long time = (long) (ProjectSWG.getCoreTime() / 1E3);
+		long time = ProjectSWG.getGalacticTime();
 		Race race = ((CreatureObject)object).getRace();
 		boolean ignoreSnapshots = newLocation.getTerrain() == Terrain.DEV_AREA;
 		sendPacket(object.getOwner(), new CmdStartScene(ignoreSnapshots, object.getObjectId(), race, newLocation, time, (int)(System.currentTimeMillis()/1E3)));
@@ -191,7 +194,7 @@ public class ZoneManager extends Manager {
 				e.printStackTrace();
 			}
 		} catch (IOException e) {
-			System.err.println("ZoneManager: Failed to open "+repoDir+" to read commit history");
+			Log.e(this, "Failed to open %s to read commit history", repoDir);
 			// An exception is thrown if bash isn't installed.
 			// https://www.eclipse.org/forums/index.php/t/1031740/
 		}
@@ -219,6 +222,7 @@ public class ZoneManager extends Manager {
 	private void initPlayerBeforeZoneIn(Player player, CreatureObject creatureObj, PlayerObject playerObj) {
 		creatureObj.setMoodId(CreatureMood.NONE.getMood());
 		playerObj.clearFlagBitmask(PlayerFlags.LD);	// Ziggy: Clear the LD flag in case it wasn't already.
+		creatureObj.clearCustomAware(false);
 	}
 	
 	private void handleShowBackpack(Player player, ShowBackpack p) {
@@ -244,7 +248,7 @@ public class ZoneManager extends Manager {
 			case "yellow": waypoint.setColor(WaypointColor.YELLOW); break;
 			case "purple": waypoint.setColor(WaypointColor.PURPLE); break;
 			case "white": waypoint.setColor(WaypointColor.WHITE); break;
-			default: System.err.println("Don't know color " + p.getColor());
+			default: Log.e(this, "Don't know color %s", p.getColor()); break;
 		}
 		
 		ghost.updateWaypoint(waypoint);
@@ -253,20 +257,15 @@ public class ZoneManager extends Manager {
 	private void handleCmdSceneReady(Player player, CmdSceneReady p) {
 		new PlayerEventIntent(player, PlayerEvent.PE_ZONE_IN_SERVER).broadcast();
 		player.setPlayerState(PlayerState.ZONED_IN);
-		System.out.println("[" + player.getUsername() +"] " + player.getCharacterName() + " zoned in");
 		Log.i("ZoneService", "%s with character %s zoned in from %s:%d", player.getUsername(), player.getCharacterName(), p.getAddress(), p.getPort());
 	}
 	
 	private void handleClientIdMsg(Player player, ClientIdMsg clientId) {
-		System.out.println("[" + player.getUsername() + "] Connected to the zone server. IP: " + clientId.getAddress() + ":" + clientId.getPort());
 		Log.i("ZoneService", "%s connected to the zone server from %s:%d", player.getUsername(), clientId.getAddress(), clientId.getPort());
+		player.setPlayerServer(PlayerServer.ZONE);
 		sendPacket(player.getNetworkId(), new HeartBeat());
 		sendPacket(player.getNetworkId(), new AccountFeatureBits());
 		sendPacket(player.getNetworkId(), new ClientPermissionsMessage());
-	}
-	
-	private void handleGalaxyLoopTimesRequest(Player player, RequestGalaxyLoopTimes req) {
-		sendPacket(player, new GalaxyLoopTimesResponse(ProjectSWG.getCoreTime()/1000));
 	}
 	
 }

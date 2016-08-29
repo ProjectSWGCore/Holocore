@@ -55,6 +55,7 @@ import resources.player.Player;
 import resources.player.PlayerState;
 import resources.server_info.RelationalServerData;
 import resources.server_info.RelationalServerFactory;
+import services.CoreManager;
 import services.player.PlayerManager;
 
 import java.sql.PreparedStatement;
@@ -173,7 +174,7 @@ public class ChatManager extends Manager {
 		switch (i.getRequestType()) {
 			case TARGET_STATUS: {
 				Player player = i.getPlayer();
-				sendTargetAvatarStatus(player, new ChatAvatar(0, i.getTarget(), player.getGalaxyName()));
+				sendTargetAvatarStatus(player, new ChatAvatar(0, i.getTarget(), CoreManager.getGalaxy().getName()));
 				break;
 			}
 			case FRIEND_ADD_TARGET:
@@ -214,7 +215,7 @@ public class ChatManager extends Manager {
 		if (ghost == null)
 			return;
 
-		if (!ghost.getFriendsList().contains(target)) {
+		if (!ghost.isFriend(target)) {
 			sendSystemMessage(player, "@cmnty:friend_not_found", target);
 			return;
 		}
@@ -237,7 +238,7 @@ public class ChatManager extends Manager {
 			return;
 		}
 
-		if (ghost.getFriendsList().contains(target)) {
+		if (ghost.isFriend(target)) {
 			sendSystemMessage(player, "@cmnty:friend_duplicate", target);
 			return;
 		}
@@ -250,10 +251,7 @@ public class ChatManager extends Manager {
 		ghost.addFriend(target);
 		sendSystemMessage(player, "@cmnty:friend_added", target);
 
-		Player targetPlayer = player.getPlayerManager().getPlayerByCreatureFirstName(target);
-
-		if (targetPlayer != null && targetPlayer.getPlayerState() == PlayerState.ZONED_IN)
-			player.sendPacket(new ChatFriendsListUpdate(new ChatAvatar(0, target, targetPlayer.getGalaxyName()), true));
+		player.sendPacket(new ChatFriendsListUpdate(new ChatAvatar(0, target, CoreManager.getGalaxy().getName()), true));
 	}
 
 	/* Ignore List */
@@ -364,7 +362,7 @@ public class ChatManager extends Manager {
 	private void updateChatAvatarStatus(Player player, boolean online) {
 		PlayerManager playerManager = player.getPlayerManager();
 		ChatAvatar avatar = ChatAvatar.getFromPlayer(player);
-		String galaxy = player.getGalaxyName();
+		String galaxy = CoreManager.getGalaxy().getName();
 
 		if (online) {
 			PlayerObject playerObject = player.getPlayerObject();

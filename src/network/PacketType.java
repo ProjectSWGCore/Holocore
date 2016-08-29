@@ -27,7 +27,11 @@
 ***********************************************************************************/
 package network;
 
+import network.packets.swg.zone.StopClientEffectObjectByLabelMessage;
 import network.packets.swg.*;
+import network.packets.swg.holo.HoloConnectionStarted;
+import network.packets.swg.holo.HoloConnectionStopped;
+import network.packets.swg.holo.HoloSetProtocolVersion;
 import network.packets.swg.login.*;
 import network.packets.swg.login.creation.*;
 import network.packets.swg.zone.*;
@@ -49,10 +53,16 @@ import resources.server_info.Log;
 
 public enum PacketType {
 
+	// Holocore
+	HOLO_SET_PROTOCOL_VERSION					(HoloSetProtocolVersion.CRC, HoloSetProtocolVersion.class),
+	HOLO_CONNECTION_STARTED						(HoloConnectionStarted.CRC,	HoloConnectionStarted.class),
+	HOLO_CONNECTION_STOPPED						(HoloConnectionStopped.CRC,	HoloConnectionStopped.class),
+	
 	// Both
 	SERVER_UNIX_EPOCH_TIME						(ServerUnixEpochTime.CRC, 	ServerUnixEpochTime.class),
 	SERVER_ID									(ServerId.CRC, 				ServerId.class),
 	SERVER_STRING								(ServerString.CRC, 			ServerString.class),
+	LAG_REQUEST									(LagRequest.CRC,			LagRequest.class),
 
 	// Login
 	CLIENT_ID_MSG								(ClientIdMsg.CRC, 				ClientIdMsg.class),
@@ -62,6 +72,7 @@ public enum PacketType {
 	REQUEST_EXTENDED_CLUSTERS					(RequestExtendedClusters.CRC, 	RequestExtendedClusters.class),
 	OFFLINE_SERVERS_MESSAGE     				(OfflineServersMessage.CRC, 	OfflineServersMessage.class),
 	SERVER_NOW_EPOCH_TIME						(ServerNowEpochTime.CRC,		ServerNowEpochTime.class),
+	GAME_SERVER_LAG_RESPONSE					(GameServerLagResponse.CRC,		GameServerLagResponse.class),
 
 		// Post-Login
 		LOGIN_CLIENT_ID							(LoginClientId.CRC, 			LoginClientId.class),
@@ -87,6 +98,7 @@ public enum PacketType {
 		DELETE_CHARACTER_REQUEST				(DeleteCharacterRequest.CRC, 	DeleteCharacterRequest.class),
 
 	// Zone
+	CONNECTION_SERVER_LAG_RESPONSE				(ConnectionServerLagResponse.CRC,	ConnectionServerLagResponse.class),
 	COMMAND_QUEUE_ENQUEUE						(0x00000116, 						CommandQueueEnqueue.class),
 	SELECT_CHARACTER							(SelectCharacter.CRC, 				SelectCharacter.class),
 	CMD_SCENE_READY								(CmdSceneReady.CRC, 				CmdSceneReady.class),
@@ -107,7 +119,10 @@ public enum PacketType {
 	SHOW_BACKPACK								(ShowBackpack.CRC, 					ShowBackpack.class),
 	SHOW_HELMET									(ShowHelmet.CRC, 					ShowHelmet.class),
 	SERVER_WEATHER_MESSAGE						(ServerWeatherMessage.CRC, 			ServerWeatherMessage.class),
-
+	PLAY_MUSIC_MESSAGE							(PlayMusicMessage.CRC,				PlayMusicMessage.class),
+	PLAY_CLIENT_EFFECT_OBJECT_MESSAGE			(PlayClientEffectObjectMessage.CRC, PlayClientEffectObjectMessage.class),
+	STOP_CLIENT_EFFECT_OBJECT_BY_LABEL			(StopClientEffectObjectByLabelMessage.CRC, 	StopClientEffectObjectByLabelMessage.class),
+	
 		// Chat
 		CHAT_CREATE_ROOM						(ChatCreateRoom.CRC,				ChatCreateRoom.class),
 		CHAT_DESTROY_ROOM						(ChatDestroyRoom.CRC,				ChatDestroyRoom.class),
@@ -162,8 +177,6 @@ public enum PacketType {
 		SPATIAL_CHAT							(0x000000f4, 								SpatialChat.class),
 		NEW_TICKET_ACTIVITY_RESPONSE_MESSAGE	(NewTicketActivityResponseMessage.CRC, 		NewTicketActivityResponseMessage.class),
 		ATTRIBUTE_LIST_MESSAGE					(AttributeListMessage.CRC, 					AttributeListMessage.class),
-		STOP_CLIENT_EFFECT_OBJECT_BY_LABEL		(StopClientEffectObjectByLabelMessage.CRC, 	StopClientEffectObjectByLabelMessage.class),
-		PLAY_CLIENT_EFFECT_OBJECT_MESSAGE		(PlayClientEffectObjectMessage.CRC,			PlayClientEffectObjectMessage.class),
 		OPENED_CONTAINER_MESSAGE				(ClientOpenContainerMessage.CRC, 			ClientOpenContainerMessage.class),
 
 		// Combat
@@ -230,16 +243,14 @@ public enum PacketType {
 
 	public static SWGPacket getForCrc(int crc) {
 		PacketType type = packetMap.get(crc);
-		if (type == null) {
-			Log.w("PacketType", "Unknown packet: %08X", crc);
+		if (type == null)
 			return null;
-		}
 		Class <? extends SWGPacket> c = type.c;
 		try {
 			return c.newInstance();
 		} catch (Exception e) {
-			System.err.printf("Packet: [%08X] %s%n", crc, c.getName());
-			e.printStackTrace();
+			Log.e("PacketType", "Packet: [%08X] %s", crc, c.getName());
+			Log.e("PacketType", e);
 		}
 		return null;
 	}

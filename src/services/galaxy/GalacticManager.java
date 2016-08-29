@@ -38,6 +38,7 @@ import resources.control.Intent;
 import resources.control.Manager;
 import services.CoreManager;
 import services.chat.ChatManager;
+import services.dev.DeveloperService;
 import services.galaxy.travel.TravelService;
 import services.objects.ObjectManager;
 import services.objects.UniformBoxService;
@@ -50,6 +51,7 @@ public class GalacticManager extends Manager {
 	private final GameManager gameManager;
 	private final ChatManager chatManager;
 	private final TravelService travelService;
+	private final DeveloperService developerService;
 	private final UniformBoxService uniformBox;
 	private final Map<Long, Intent> prevIntentMap;
 	
@@ -58,7 +60,8 @@ public class GalacticManager extends Manager {
 		playerManager = new PlayerManager();
 		gameManager = new GameManager();
 		chatManager = new ChatManager();
-		travelService = new TravelService(objectManager);
+		travelService = new TravelService();
+		developerService = new DeveloperService();
 		uniformBox = new UniformBoxService();
 		prevIntentMap = new Hashtable<>();
 		
@@ -67,6 +70,7 @@ public class GalacticManager extends Manager {
 		addChildService(gameManager);
 		addChildService(chatManager);
 		addChildService(travelService);
+		addChildService(developerService);
 		addChildService(uniformBox);
 		
 		registerForIntent(InboundPacketIntent.TYPE);
@@ -93,6 +97,10 @@ public class GalacticManager extends Manager {
 		} else if (i instanceof ConnectionClosedIntent) {
 			synchronized (prevIntentMap) {
 				prevIntentMap.remove(((ConnectionClosedIntent) i).getNetworkId());
+			}
+		} else if (i instanceof ConnectionOpenedIntent) {
+			synchronized (prevIntentMap) {
+				prevIntentMap.put(((ConnectionOpenedIntent) i).getNetworkId(), i);
 			}
 		}
 	}

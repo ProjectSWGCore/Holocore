@@ -38,7 +38,7 @@ import java.util.concurrent.TimeUnit;
 import intents.BuffIntent;
 import intents.PlayerEventIntent;
 import intents.SkillModIntent;
-import network.packets.swg.zone.spatial.PlayClientEffectObjectMessage;
+import network.packets.swg.zone.PlayClientEffectObjectMessage;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
 import resources.common.CRC;
@@ -258,7 +258,7 @@ public class BuffService extends Service {
 	}
 	
 	private void sendClientEffectMessage(CreatureObject target, String effectFileName, String hardPoint) {
-		target.sendObserversAndSelf(new PlayClientEffectObjectMessage(effectFileName, target.getObjectId(), hardPoint, ""));
+		target.sendObserversAndSelf(new PlayClientEffectObjectMessage(effectFileName, hardPoint, target.getObjectId()));
 	}
 	
 	private class BuffRemover implements Runnable {

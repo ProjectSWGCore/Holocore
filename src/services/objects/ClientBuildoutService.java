@@ -1,10 +1,37 @@
+/************************************************************************************
+ * Copyright (c) 2015 /// Project SWG /// www.projectswg.com                        *
+ *                                                                                  *
+ * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on           *
+ * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies.  *
+ * Our goal is to create an emulator which will provide a server for players to     *
+ * continue playing a game similar to the one they used to play. We are basing      *
+ * it on the final publish of the game prior to end-game events.                    *
+ *                                                                                  *
+ * This file is part of Holocore.                                                   *
+ *                                                                                  *
+ * -------------------------------------------------------------------------------- *
+ *                                                                                  *
+ * Holocore is free software: you can redistribute it and/or modify                 *
+ * it under the terms of the GNU Affero General Public License as                   *
+ * published by the Free Software Foundation, either version 3 of the               *
+ * License, or (at your option) any later version.                                  *
+ *                                                                                  *
+ * Holocore is distributed in the hope that it will be useful,                      *
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of                   *
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                    *
+ * GNU Affero General Public License for more details.                              *
+ *                                                                                  *
+ * You should have received a copy of the GNU Affero General Public License         *
+ * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
+ *                                                                                  *
+ ***********************************************************************************/
 package services.objects;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.List;
@@ -23,6 +50,7 @@ import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.SWGObject.ObjectClassification;
+import resources.objects.building.BuildingObject;
 import resources.objects.cell.CellObject;
 import resources.server_info.CrcDatabase;
 import resources.server_info.Log;
@@ -37,6 +65,9 @@ public class ClientBuildoutService extends Service {
 			+ "objects.radius, objects.cell_index "
 			+ "FROM objects "
 			+ "ORDER BY buildout_id ASC";
+	private static final String GET_ADDITIONAL_OBJECTS_SQL = "SELECT terrain, template, x, y, z, heading, cell_id, radius, building_name "
+			+ "FROM additional_buildouts WHERE active = 1";
+	private static final String GET_BUILDING_INFO_SQL = "SELECT object_id FROM buildings WHERE building_id = ?";
 	
 	private final BuildoutAreaGrid areaGrid;
 	private final Map<Integer, BuildoutArea> areasById;
@@ -68,7 +99,7 @@ public class ClientBuildoutService extends Service {
 	public Collection<SWGObject> loadClientObjects() {
 		Collection<SWGObject> objects;
 		long startLoad = System.nanoTime();
-		logInfo("Loading client objects...");
+		Log.i(this, "Loading client objects...");
 		try {
 			loadAreas(getEvents());
 			if (getConfig(ConfigFile.PRIMARY).getBoolean("LOAD-OBJECTS", true))
@@ -81,7 +112,7 @@ public class ClientBuildoutService extends Service {
 			Log.e(this, e);
 		}
 		double loadTime = (System.nanoTime() - startLoad) / 1E6;
-		logInfo("Finished loading %d client objects. Time: %fms", objects.size(), loadTime);
+		Log.i(this, "Finished loading %d client objects. Time: %fms", objects.size(), loadTime);
 		return objects;
 	}
 	
@@ -109,7 +140,24 @@ public class ClientBuildoutService extends Service {
 				}
 			}
 		}
-		return Collections.unmodifiableCollection(objects.values());
+		List<SWGObject> ret = new ArrayList<>(objects.values());
+		ret.addAll(getAdditionalObjects(objects));
+		return ret;
+	}
+	
+	private Collection<SWGObject> getAdditionalObjects(Map<Long, SWGObject> buildouts) throws SQLException {
+		Map<Long, SWGObject> objects = new Hashtable<>();
+		try (CrcDatabase strings = new CrcDatabase()) {
+			try (RelationalServerData data = RelationalServerFactory.getServerData("buildout/additional_buildouts.db", "additional_buildouts")) {
+				try (ResultSet set = data.executeQuery(GET_ADDITIONAL_OBJECTS_SQL)) {
+					set.setFetchSize(4*1024);
+					while (set.next()) {
+						createAdditionalObject(objects, buildouts, set);
+					}
+				}
+			}
+		}
+		return new ArrayList<>(objects.values());
 	}
 	
 	private void createObject(Map<Long, SWGObject> objects, BuildoutArea area, ObjectInformation info) throws SQLException {
@@ -118,11 +166,58 @@ public class ClientBuildoutService extends Service {
 		l.setTerrain(area.getTerrain());
 		obj.setLocation(l);
 		obj.setClassification(info.isSnapshot() ? ObjectClassification.SNAPSHOT : ObjectClassification.BUILDOUT);
-		obj.setBuildoutArea(area);
 		obj.setLoadRange(info.getRadius());
 		checkCell(obj, info.getCell());
 		checkChild(objects, obj, info.getContainer());
 		objects.put(obj.getObjectId(), obj);
+	}
+	
+	private void createAdditionalObject(Map<Long, SWGObject> objects, Map<Long, SWGObject> buildouts, ResultSet set) throws SQLException {
+		try {
+			SWGObject obj = ObjectCreator.createObjectFromTemplate(set.getString("template"));
+			Location l = new Location();
+			l.setX(set.getFloat("x"));
+			l.setY(set.getFloat("y"));
+			l.setZ(set.getFloat("z"));
+			l.setTerrain(Terrain.getTerrainFromName(set.getString("terrain")));
+			l.setHeading(set.getFloat("heading"));
+			obj.setLocation(l);
+			obj.setClassification(ObjectClassification.BUILDOUT);
+			obj.setLoadRange(set.getFloat("radius"));
+			checkParent(buildouts, obj, set.getString("building_name"), set.getInt("cell_id"));
+			objects.put(obj.getObjectId(), obj);
+		} catch (NullPointerException e) {
+			Log.e(this, "File: %s", set.getString("template"));
+		}
+	}
+	
+	private void checkParent(Map<Long, SWGObject> objects, SWGObject obj, String buildingName, int cellId) throws SQLException {
+		try (RelationalServerData data = RelationalServerFactory.getServerData("building/building.db", "buildings")) {
+			try (PreparedStatement statement = data.prepareStatement(GET_BUILDING_INFO_SQL)) {
+				statement.setString(1, buildingName);
+				try (ResultSet set = statement.executeQuery()) {
+					if (!set.next()) {
+						Log.e(this, "Unknown building name: %s", buildingName);
+						return;
+					}
+					SWGObject buildingUncasted = objects.get(set.getLong("object_id"));
+					if (buildingUncasted == null) {
+						Log.e(this, "Building not found in map: %s / %d", buildingName, set.getLong("object_id"));
+						return;
+					}
+					if (!(buildingUncasted instanceof BuildingObject)) {
+						Log.e(this, "Building is not an instance of BuildingObject: %s", buildingName);
+						return;
+					}
+					CellObject cell = ((BuildingObject) buildingUncasted).getCellByNumber(cellId);
+					if (cell == null) {
+						Log.e(this, "Cell is not found! Building: %s Cell: %d", buildingName, cellId);
+						return;
+					}
+					obj.moveToContainer(cell);
+				}
+			}
+		}
 	}
 	
 	private void checkCell(SWGObject obj, int cell) {
@@ -132,7 +227,7 @@ public class ClientBuildoutService extends Service {
 	
 	private void checkChild(Map<Long, SWGObject> objects, SWGObject obj, long container) {
 		if (container != 0)
-			objects.get(container).addObject(obj);
+			obj.moveToContainer(objects.get(container));
 	}
 	
 	private List<String> getEvents() {
@@ -190,8 +285,6 @@ public class ClientBuildoutService extends Service {
 	}
 	
 	private void setObjectArea(SWGObject obj) {
-		if (obj.getObjectId() == -507780858040143424L)
-			System.out.println("MENSIX " + obj.getParent());
 		if (obj.getParent() != null) {
 			obj.setBuildoutArea(null);
 			return;
@@ -201,10 +294,7 @@ public class ClientBuildoutService extends Service {
 		if (area == null || !isWithin(area, world.getTerrain(), world.getX(), world.getZ())) {
 			area = getAreaForObject(obj);
 			obj.setBuildoutArea(area);
-			if (obj.getObjectId() == -507780858040143424L)
-				System.out.println("       AREA: " + area);
-		} else if (obj.getObjectId() == -507780858040143424L)
-			System.out.println("       NOT SET");
+		}
 	}
 	
 	private BuildoutArea createArea(ResultSet set, AreaIndexes ind) throws SQLException {
@@ -230,11 +320,6 @@ public class ClientBuildoutService extends Service {
 	
 	private boolean isWithin(BuildoutArea area, Terrain t, double x, double z) {
 		return area.getTerrain() == t && x >= area.getX1() && x <= area.getX2() && z >= area.getZ1() && z <= area.getZ2();
-	}
-	
-	private void logInfo(String message, Object ... args) {
-		System.out.printf(getClass().getSimpleName() + ": " + message + "%n", args);
-		Log.i(this, message, args);
 	}
 	
 	private static class AreaIndexes {

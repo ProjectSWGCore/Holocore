@@ -1,7 +1,10 @@
 function getOptions(options, player, target) {
 	var use = new RadialOption(RadialItem.ITEM_USE);
-	var reserve = new RadialOption(RadialItem.BANK_RESERVE);
+	var reserve = new RadialOption(RadialItem.SERVER_MENU50);
 	var creature = player.getCreatureObject();
+    
+    reserve.setOverriddenText("@sui:bank_galactic_reserve");
+    
 	options.add(use);
 	options.add(new RadialOption(RadialItem.EXAMINE));
 	if (creature.getCurrentCity().equals("@corellia_region_names:coronet") ||
@@ -9,24 +12,24 @@ function getOptions(options, player, target) {
 		creature.getCurrentCity().equals("@tatooine_region_names:mos_eisley"))
 		options.add(reserve);
 	// Bank Transfer/Safety Deposit
-	use.addChild(RadialItem.BANK_TRANSFER);
-	use.addChild(RadialItem.BANK_ITEMS);
+	use.addChildWithOverriddenText(RadialItem.SERVER_MENU1, "@sui:bank_credits");
+	use.addChildWithOverriddenText(RadialItem.SERVER_MENU2, "@sui:bank_items");
 	// Withdraw/Deposit
 	if (creature.getBankBalance() > 0)
-		use.addChild(RadialItem.BANK_WITHDRAW_ALL);
+		use.addChildWithOverriddenText(RadialItem.SERVER_MENU4, "@sui:bank_withdrawall");
 	if (creature.getCashBalance() > 0)
-		use.addChild(RadialItem.BANK_DEPOSIT_ALL);
+		use.addChildWithOverriddenText(RadialItem.SERVER_MENU3, "@sui:bank_depositall");
 	// Galactic Reserve
 	if (creature.getBankBalance() >= 1E9 || creature.getCashBalance() >= 1E9)
-		reserve.addChild(RadialItem.BANK_RESERVE_DEPOSIT);
+		reserve.addChildWithOverriddenText(RadialItem.SERVER_MENU49, "@sui:bank_galactic_reserve_deposit");
 	if (creature.getReserveBalance() > 0)
-		reserve.addChild(RadialItem.BANK_RESERVE_WITHDRAW);
+		reserve.addChildWithOverriddenText(RadialItem.SERVER_MENU48, "@sui:bank_galactic_reserve_withdraw");
 }
 
 function handleSelection(player, target, selection) {
 	switch (selection) {
 		case RadialItem.ITEM_USE:
-		case RadialItem.BANK_TRANSFER: {
+		case RadialItem.SERVER_MENU1: {
 			creature = player.getCreatureObject();
 			window = new SuiWindow("Script.transfer", SuiButtons.OK_CANCEL, '@base_player:bank_title', '@base_player:bank_prompt');
 			window.setPropertyText('transaction.lblFrom', 'Cash');
@@ -43,13 +46,13 @@ function handleSelection(player, target, selection) {
 			window.display(player);
 			break;
 		}
-		case RadialItem.BANK_ITEMS: {
+		case RadialItem.SERVER_MENU2: {
 			creature = player.getCreatureObject();
 			var ClientOpenContainerMessage = Java.type("network.packets.swg.zone.ClientOpenContainerMessage");
 			player.sendPacket(new ClientOpenContainerMessage(creature.getSlottedObject("bank").getObjectId(), ""));
 			break;
 		}
-		case RadialItem.BANK_WITHDRAW_ALL: {
+		case RadialItem.SERVER_MENU4: {
 			creature = player.getCreatureObject();
 			amount = creature.getBankBalance();
 			creature.setCashBalance(creature.getCashBalance() + amount);
@@ -60,7 +63,7 @@ function handleSelection(player, target, selection) {
 				intentFactory.sendSystemMessage(player, '@error_message:bank_withdraw');
 			break;
 		}
-		case RadialItem.BANK_DEPOSIT_ALL: {
+		case RadialItem.SERVER_MENU3: {
 			creature = player.getCreatureObject();
 			amount = creature.getCashBalance();
 			creature.setBankBalance(amount + creature.getBankBalance());
@@ -71,7 +74,7 @@ function handleSelection(player, target, selection) {
 				intentFactory.sendSystemMessage(player, '@error_message:bank_deposit');
 			break;
 		}
-		case RadialItem.BANK_RESERVE_DEPOSIT: {
+		case RadialItem.SERVER_MENU49: {
 			creature = player.getCreatureObject();
 			if (!creature.canPerformGalacticReserveTransaction()) {
 				intentFactory.sendSystemMessage(player, "You have to wait to perform another Galactic Reserve transaction");
@@ -89,7 +92,7 @@ function handleSelection(player, target, selection) {
 			creature.updateLastGalacticReserveTime();
 			break;
 		}
-		case RadialItem.BANK_RESERVE_WITHDRAW: {
+		case RadialItem.SERVER_MENU48: {
 			creature = player.getCreatureObject();
 			if (!creature.canPerformGalacticReserveTransaction()) {
 				intentFactory.sendSystemMessage(player, "You have to wait to perform another Galactic Reserve transaction");

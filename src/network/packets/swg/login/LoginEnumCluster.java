@@ -28,6 +28,7 @@
 package network.packets.swg.login;
 
 import java.nio.ByteBuffer;
+import java.time.ZoneOffset;
 import java.util.List;
 import java.util.Vector;
 
@@ -59,7 +60,7 @@ public class LoginEnumCluster extends SWGPacket {
 			Galaxy g = new Galaxy();
 			g.setId(getInt(data));
 			g.setName(getAscii(data));
-			g.setTimeZone(getInt(data));
+			g.setZoneOffset(ZoneOffset.ofTotalSeconds(getInt(data)));
 			galaxies.add(g);
 		}
 		maxCharacters = getInt(data);
@@ -76,7 +77,7 @@ public class LoginEnumCluster extends SWGPacket {
 		for (Galaxy g : galaxies) {
 			addInt(  data, g.getId());
 			addAscii(data, g.getName());
-			addInt(  data, g.getTimeZone());
+			addInt(  data, g.getDistance());
 		}
 		addInt(data, maxCharacters);
 		return data;

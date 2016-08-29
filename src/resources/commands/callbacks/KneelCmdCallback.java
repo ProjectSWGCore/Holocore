@@ -39,12 +39,15 @@ public class KneelCmdCallback implements ICmdCallback {
 
 	@Override
 	public void execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
-		CreatureObject creature = player.getCreatureObject(); 
-		creature.setPosture(Posture.CROUCHED);
-		creature.setMovementScale(0);
-		creature.setTurnScale(0);
-		creature.sendObserversAndSelf(new PostureUpdate(creature.getObjectId(), Posture.CROUCHED));
-		
+		CreatureObject creature = player.getCreatureObject();
+		if (creature.isPerforming()) {
+			new intents.DanceIntent(player.getCreatureObject()).broadcast();
+		} else {
+			creature.setPosture(Posture.CROUCHED);
+			creature.setMovementScale(0);
+			creature.setTurnScale(0);
+			creature.sendObserversAndSelf(new PostureUpdate(creature.getObjectId(), Posture.CROUCHED));
+		}
 	}
 
 }
