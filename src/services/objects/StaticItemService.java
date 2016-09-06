@@ -553,7 +553,7 @@ public final class StaticItemService extends Service {
 			object.addAttribute("cat_wpn_damage.wpn_category", weaponCategory);
 			object.addAttribute("cat_wpn_damage.wpn_attack_speed", String.valueOf(attackSpeed));
 			object.addAttribute("cat_wpn_damage.damage", damageString);
-			if(elementalType != null) {	// Not all weapons have elemental damage.
+			if(elementalTypeString != null) {	// Not all weapons have elemental damage.
 				object.addAttribute("cat_wpn_damage.wpn_elemental_type", elementalTypeString);
 				object.addAttribute("cat_wpn_damage.wpn_elemental_value", String.valueOf(elementalDamage));
 			}
