@@ -124,8 +124,10 @@ public final class SkillService extends Service {
 	}
 	
 	private String [] splitCsv(String str) {
-		if (str.isEmpty() || str.indexOf(',') == -1)
+		if (str.isEmpty())
 			return new String[0];
+		else if (str.indexOf(',') == -1)
+			return new String[]{str};
 		return str.split(",");
 	}
 	
