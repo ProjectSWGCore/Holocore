@@ -43,6 +43,7 @@ import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.weapon.WeaponObject;
 import resources.objects.weapon.WeaponType;
+import resources.player.Player;
 import resources.server_info.Log;
 import resources.server_info.RelationalServerData;
 import resources.server_info.RelationalServerFactory;
@@ -165,11 +166,11 @@ public final class StaticItemService extends Service {
 	private void handleSpawnItemIntent(CreateStaticItemIntent i) {
 		SWGObject container = i.getContainer();
 		String[] itemNames = i.getItemNames();
-		SWGObject requester = i.getRequester();
+		Player requesterOwner = i.getRequester().getOwner();
 		
 		// If adding these items to the container would exceed the max capacity...
 		if(container.getVolume() + itemNames.length > container.getMaxContainerSize()) {
-			new ChatBroadcastIntent(i.getRequester().getOwner(), "@system_msg:give_item_failure").broadcast();
+			new ChatBroadcastIntent(requesterOwner, "@system_msg:give_item_failure").broadcast();
 			return;
 		}
 		
@@ -185,12 +186,13 @@ public final class StaticItemService extends Service {
 						// Global attributes and type-specific attributes are applied
 						objectAttributes.applyAttributes(object);
 						
-						switch(object.moveToContainer(container)) {
+						switch(object.moveToContainer(container)) {	// Server-generated object is added to the container
 							case SUCCESS:
-								Log.i(this, "Successfully spawned %s into container %s", itemName, container);
+								Log.i(this, "Successfully moved %s into container %s", itemName, container);
+								new ChatBroadcastIntent(requesterOwner, "@system_msg:give_item_success").broadcast();
 								break;
 							case CONTAINER_FULL:
-								new ChatBroadcastIntent(i.getRequester().getOwner(), "@system_msg:give_item_failure").broadcast();
+								new ChatBroadcastIntent(requesterOwner, "@system_msg:give_item_failure").broadcast();
 								break;
 						}
 						new ObjectCreatedIntent(object).broadcast();
@@ -199,12 +201,13 @@ public final class StaticItemService extends Service {
 						Log.w(this, "%s could not be loaded because IFF template %s is invalid", itemName, iffTemplate);
 					}
 				} else {
-					Log.e(this, "%s could not be spawned because the item name is unknown", itemName);
+					String errorMessage = String.format("%s could not be spawned because the item name is unknown", itemName);
+					Log.e(this, errorMessage);
+					new ChatBroadcastIntent(requesterOwner, errorMessage).broadcast();
 				}
 			}
-			new ChatBroadcastIntent(i.getRequester().getOwner(), "@system_msg:give_item_success").broadcast();
 		} else {
-			Log.w(this, "No item names were specified in SpawnItemIntent - no objects were spawned into container %s", container);
+			Log.w(this, "No item names were specified in CreateStaticItemIntent - no objects were spawned into container %s", container);
 		}
 	}
 	
