@@ -119,6 +119,9 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		if (object.getSlotArrangement() == -1) {
 			synchronized (containedObjects) {
 				containedObjects.add(object);
+				
+				// We need to adjust the volume of our container accordingly!
+				setVolume(getVolume() + object.getVolume() + 1);
 			}
 		} else {
 			for (String requiredSlot : object.getArrangement().get(object.getSlotArrangement() - 4)) {
@@ -136,6 +139,9 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		if (object.getSlotArrangement() == -1) {
 			synchronized (containedObjects) {
 				containedObjects.remove(object);
+				
+				// We need to adjust the volume of our container accordingly!
+				setVolume(getVolume() - object.getVolume() - 1);
 			}
 		} else {
 			for (String requiredSlot : object.getArrangement().get(object.getSlotArrangement() - 4)) {
@@ -975,7 +981,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	@Override
 	public void save(NetBufferStream stream) {
-		stream.addByte(0);
+		stream.addByte(1);
 		location.save(stream);
 		stream.addBoolean(parent != null && parent.getClassification() != ObjectClassification.GENERATED);
 		if (parent != null && parent.getClassification() != ObjectClassification.GENERATED)
@@ -983,7 +989,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		stream.addAscii(permissions.name());
 		stream.addAscii(classification.name());
 		stream.addUnicode(objectName);
-		stream.addInt(volume);
 		stream.addFloat(complexity);
 		stream.addFloat((float) loadRange);
 		synchronized (attributes) {
@@ -1004,14 +1009,38 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	public void read(NetBufferStream stream) {
-		stream.getByte();
+		switch(stream.getByte()) {
+			case 1:
+				readVersion1(stream);
+				break;
+			case 0:
+				readVersion0(stream);
+				break;
+		}
+	}
+	
+	private void readVersion1(NetBufferStream stream) {
 		location.read(stream);
 		if (stream.getBoolean())
 			parent = SWGObjectFactory.create(stream);
 		permissions = ContainerPermissionsType.valueOf(stream.getAscii());
 		classification = ObjectClassification.valueOf(stream.getAscii());
 		objectName = stream.getUnicode();
-		volume = stream.getInt();
+		complexity = stream.getFloat();
+		loadRange = stream.getFloat();
+		stream.getList((i) -> attributes.put(stream.getAscii(), stream.getAscii()));
+		stream.getList((i) -> SWGObjectFactory.create(stream).moveToContainer(this));
+	}
+	
+	private void readVersion0(NetBufferStream stream) {
+		location.read(stream);
+		if (stream.getBoolean())
+			parent = SWGObjectFactory.create(stream);
+		permissions = ContainerPermissionsType.valueOf(stream.getAscii());
+		classification = ObjectClassification.valueOf(stream.getAscii());
+		objectName = stream.getUnicode();
+		// Ignore the saved volume - this is now set automagically in addObject() and removeObject()
+		stream.getInt();
 		complexity = stream.getFloat();
 		loadRange = stream.getFloat();
 		stream.getList((i) -> attributes.put(stream.getAscii(), stream.getAscii()));
