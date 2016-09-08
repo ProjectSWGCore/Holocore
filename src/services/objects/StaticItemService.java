@@ -116,7 +116,7 @@ public final class StaticItemService extends Service {
 					
 					switch(type) {
 						case "armor": objectAttributes = new ArmorAttributes(itemName, iffTemplate); break;
-						case "collection":	// TODO implement
+						case "collection": objectAttributes = new CollectionAttributes(itemName, iffTemplate); break;
 						case "consumable":	// TODO implement
 						case "costume":	// TODO implement
 						case "dna":	// TODO implement
@@ -484,6 +484,30 @@ public final class StaticItemService extends Service {
 			weapon.setAttackSpeed(attackSpeed);
 			weapon.setMinRange(minRange);
 			weapon.setMaxRange(maxRange);
+		}
+	}
+
+	public static final class CollectionAttributes extends ObjectAttributes {
+
+		private String collectionName;
+		private String collectionSlotName;
+
+		public CollectionAttributes(String itemName, String iffTemplate) {
+			super(itemName, iffTemplate);
+		}
+
+		@Override
+		protected boolean loadTypeAttributes(ResultSet resultSet) throws SQLException {
+			collectionName = resultSet.getString("collection_name");
+			collectionSlotName = resultSet.getString("collection_slot_name");
+
+			return true;
+		}
+
+		@Override
+		protected void applyTypeAttributes(SWGObject object) {
+			object.addAttribute("collection_name", collectionName);
+			object.addAttribute("collection_slot_name", collectionSlotName);
 		}
 	}
 	

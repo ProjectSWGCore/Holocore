@@ -28,6 +28,7 @@
 package services.galaxy;
 
 import resources.control.Manager;
+import services.collections.ClickCollectionService;
 import services.collections.CollectionBadgeManager;
 import services.combat.CombatService;
 import services.commands.CommandService;
@@ -43,6 +44,7 @@ public class GameManager extends Manager {
 	private final CommandService commandService;
 	private final ConnectionService connectionService;
 	private final SuiService suiService;
+    private final ClickCollectionService clickCollectionService;
 	private final CollectionBadgeManager collectionBadgeManager;
 	private final EnvironmentService weatherService;
 	private final TerminalService terminalManager;
@@ -57,6 +59,7 @@ public class GameManager extends Manager {
 		commandService = new CommandService();
 		connectionService = new ConnectionService();
 		suiService = new SuiService();
+		clickCollectionService = new ClickCollectionService();
 		collectionBadgeManager = new CollectionBadgeManager();
 		weatherService = new EnvironmentService();
 		terminalManager = new TerminalService();
@@ -70,6 +73,7 @@ public class GameManager extends Manager {
 		addChildService(commandService);
 		addChildService(connectionService);
 		addChildService(suiService);
+		addChildService(clickCollectionService);
 		addChildService(collectionBadgeManager);
 		addChildService(weatherService);
 		addChildService(terminalManager);

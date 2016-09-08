@@ -103,13 +103,16 @@ public class RadialService extends Service {
 			Log.w("RadialService", "Requestor of target: %s does not have an owner! %s", target, requestor);
 			return;
 		}
-		synchronized (templatesRegistered) {
-			if (templatesRegistered.contains(target.getTemplate())) {
-				new RadialRequestIntent(player, target, request).broadcast();
-			} else {
-				sendResponse(player, target, request.getOptions(), request.getCounter());
-			}
-		}
+
+		new RadialRequestIntent(player, target, request).broadcast();
+		// TODO: remove comments (skyler)
+//		synchronized (templatesRegistered) {
+//			if (templatesRegistered.contains(target.getTemplate())) {
+//				new RadialRequestIntent(player, target, request).broadcast();
+//			} else {
+//				sendResponse(player, target, request.getOptions(), request.getCounter());
+//			}
+//		}
 	}
 	
 	private void onResponse(RadialResponseIntent response) {

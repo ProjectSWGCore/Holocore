@@ -32,10 +32,12 @@ package services.collections;
 import java.util.BitSet;
 
 import intents.GrantBadgeIntent;
+import intents.GrantClickyCollectionIntent;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
 import resources.control.Intent;
 import resources.control.Manager;
+import resources.objects.collections.ClickyCollection;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
 import resources.player.Player;
@@ -62,12 +64,15 @@ public class CollectionBadgeManager extends Manager {
 		addChildService(explorationBadgeService);
 		
 		registerForIntent(GrantBadgeIntent.TYPE);
+		registerForIntent(GrantClickyCollectionIntent.TYPE);
 	}
 	
 	@Override
 	public void onIntentReceived(Intent i) {
 		if (i instanceof GrantBadgeIntent) {
 			handleCollectionBadge(((GrantBadgeIntent) i).getCreature(),((GrantBadgeIntent) i).getCollectionBadgeName());
+		} else if (i instanceof GrantClickyCollectionIntent) {
+			handleCollectionBadge(((GrantClickyCollectionIntent) i).getCreature(), ((GrantClickyCollectionIntent) i).getCollection());
 		}
 	}
 	
@@ -107,9 +112,56 @@ public class CollectionBadgeManager extends Manager {
 		}
 	}
 
-	public void handleCollectionBadge(CreatureObject creature, String collectionBadgeName) {
+	public void handleCollectionBadge(CreatureObject creature, ClickyCollection collection) {
 		PlayerObject player = (PlayerObject) creature.getSlottedObject("ghost");
-		BadgeInformation badgeInformation = new BadgeInformation(player, collectionBadgeName);
+		BadgeInformation badgeInformation = new BadgeInformation(player, collection.getCollectionName());
+		int bookRow = 0;
+		int pageRow = 0;
+		int collectionRow = 0;
+		int slotRow = 0;
+
+		for (int row = 0; row < collectionTable.getRowCount(); row++) {
+			if (collectionTable.getCell(row, 2).toString().equals(collection.getCollectionName())) {
+			    collectionRow = row;
+			} else if (collectionTable.getCell(row, 3).toString().equals(collection.getSlotName())) {
+			    slotRow = row;
+                break;
+			}
+		}
+
+		// Backtrack up to get the book and page name
+		boolean pageRowFound = false;
+		boolean bookRowFound = false;
+
+		for (int row = collectionRow; row > 0; row--) {
+			if (!pageRowFound && collectionTable.getCell(row, 0).toString().isEmpty() && collectionTable.getCell(row, 2).toString().isEmpty() && !collectionTable.getCell(row, 1).toString().isEmpty()) {
+				pageRowFound = true;
+				pageRow = row;
+			}
+			else if (!bookRowFound && collectionTable.getCell(row, 1).toString().isEmpty() && !collectionTable.getCell(row, 0).toString().isEmpty()) {
+				bookRowFound = true;
+				bookRow = row;
+			}
+		}
+
+		// TODO: using the above row numbers, get all of the information required for BadgeInformation
+		badgeInformation.setBookName(collectionTable.getCell(bookRow, 0).toString());
+		badgeInformation.setPageName(collectionTable.getCell(pageRow, 1).toString());
+		badgeInformation.setCollectionName(collectionTable.getCell(collectionRow, 2).toString());
+		badgeInformation.setIsHidden((boolean)collectionTable.getCell(slotRow, 26));
+		badgeInformation.setBeginSlotId((int)collectionTable.getCell(slotRow, 4));
+		badgeInformation.setEndSlotId((int)collectionTable.getCell(slotRow, 5));
+		badgeInformation.setMaxSlotValue((int)collectionTable.getCell(slotRow, 6));
+		badgeInformation.setPreReqSlotName(collectionTable.getCell(slotRow, 18).toString());
+		badgeInformation.setSlotName(collectionTable.getCell(slotRow, 3).toString());
+
+		// Give badge
+		grantBadge(player, getBeginSlotID(badgeInformation.slotName), badgeInformation.collectionBadgeName, false, badgeInformation.slotName);
+	}
+
+	public void handleCollectionBadge(CreatureObject creature, String collectionName) {
+		PlayerObject player = (PlayerObject) creature.getSlottedObject("ghost");
+		BadgeInformation badgeInformation = new BadgeInformation(player, collectionName);
 
 		for (int row = 0; row < collectionTable.getRowCount(); row++) {
 			if (!collectionTable.getCell(row, 0).toString().isEmpty()){
@@ -127,7 +179,7 @@ public class CollectionBadgeManager extends Manager {
 				badgeInformation.setSlotName(collectionTable.getCell(row, 3).toString());
 			}
 		}
-		
+
 		checkBadgeBookCount(player, "badge_book", badgeInformation.bookBadgeCount);
 		checkExplorerBadgeCount(player, "bdg_explore", badgeInformation.pageBadgeCount);
 	}	
