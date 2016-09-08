@@ -28,6 +28,7 @@
 package services.commands;
 
 import intents.DanceIntent;
+import intents.FlourishIntent;
 import intents.PlayerEventIntent;
 import intents.chat.ChatBroadcastIntent;
 import intents.experience.ExperienceIntent;
@@ -37,12 +38,14 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import network.packets.swg.zone.object_controller.Animation;
 import resources.Posture;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.creature.CreatureObject;
+import resources.player.Player;
 import resources.server_info.Log;
 
 /**
@@ -64,6 +67,7 @@ public class EntertainmentService extends Service {
 		executorService = Executors.newSingleThreadScheduledExecutor();
 		registerForIntent(DanceIntent.TYPE);
 		registerForIntent(PlayerEventIntent.TYPE);
+		registerForIntent(FlourishIntent.TYPE);
 	}
 
 	@Override
@@ -97,6 +101,8 @@ public class EntertainmentService extends Service {
 			case PlayerEventIntent.TYPE:
 				handlePlayerEventIntent((PlayerEventIntent) i);
 				break;
+			case FlourishIntent.TYPE:
+				handleFlourishIntent((FlourishIntent) i);
 		}
 	}
 
@@ -151,6 +157,14 @@ public class EntertainmentService extends Service {
 		}
 	}
 
+	private void handleFlourishIntent(FlourishIntent i) {
+		Player performer = i.getPerformer();
+		CreatureObject performerObject = performer.getCreatureObject();
+		
+		// Send the flourish animation to the owner of the creature and owners of creatures observing
+		performerObject.sendObserversAndSelf(new Animation(performerObject.getObjectId(), i.getFlourishName()));
+		new ChatBroadcastIntent(performer, "@performance:flourish_perform").broadcast();
+	}
 	
 	/**
 	 * Checks if the {@code CreatureObject} is a Novice Entertainer.
