@@ -51,7 +51,7 @@ public class FlourishCmdCallback implements ICmdCallback  {
 		try {
 			int flourishNumber = Integer.parseInt(args);
 
-			if(flourishNumber < 0 || flourishNumber > 9) {
+			if(flourishNumber < 1 || flourishNumber > 9) {
 				new ChatBroadcastIntent(player, "@performance:flourish_not_valid").broadcast();
 			} else if(flourishNumber == 9) {
 				new FlourishIntent(player, "mistake").broadcast();
