@@ -64,7 +64,7 @@ public class EntertainmentService extends Service {
 	private static final byte XP_CYCLE_RATE = 10;
 	
 	private final Map<String, PerformanceData> performanceMap;	// performance names mapped to performance data
-	private final Map<CreatureObject, Performance> performerMap;
+	private final Map<Long, Performance> performerMap;
 	private final Map<String, String> danceMap;	// Maps performance ID to performance name
 	private final ScheduledExecutorService executorService;
 
@@ -174,6 +174,20 @@ public class EntertainmentService extends Service {
 				}
 				
 				break;
+			case PE_DISAPPEAR:
+				// If a spectator disappears, they need to stop watching and be removed from the audience
+				long performerId = creature.getPerformanceListenTarget();
+				
+				if(performerId != 0 && performerMap.get(performerId).removeSpectator(creature)) {
+					stopWatching(creature);
+				}
+				
+				// If a performer disappears, the audience needs to be cleared
+				if(creature.isPerforming()) {
+					performerMap.get(creature.getObjectId()).clearSpectators();
+				}
+				
+				break;
 		}
 	}
 
@@ -198,18 +212,22 @@ public class EntertainmentService extends Service {
 			Player actorOwner = actor.getOwner();
 			
 			if(!isEntertainer(creature)) {
-				// We can't watch non-entetainers - do nothing
+				// We can't watch non-entertainers - do nothing
 				return;
 			}
 			
 			if(creature.isPlayer()) {
 				if(creature.isPerforming()) {
-					Performance performance = performerMap.get(creature);
+					Performance performance = performerMap.get(creature.getObjectId());
 					
-					if(performance.addSpectator(actor)) {
-						actor.setMoodAnimation("entertained");
-						new ChatBroadcastIntent(actorOwner, new ProsePackage(new StringId("performance", "dance_watch_self"), "TT", creature.getName())).broadcast();
-						actor.setPerformanceListenTarget(target.getObjectId());
+					if(i.isStartWatch()) {
+						if(performance.addSpectator(actor)) {
+							startWatching(actor, creature);
+						}
+					} else {
+						if(performance.removeSpectator(actor)) {
+							stopWatching(actor);
+						}
 					}
 				} else {
 					// While this is a valid target for watching, the target is currently not performing.
@@ -235,14 +253,14 @@ public class EntertainmentService extends Service {
 		Log.d(this, "Scheduled %s to receive XP every %d seconds", performer, XP_CYCLE_RATE);
 		synchronized(performerMap) {
 			Future<?> future = executorService.scheduleAtFixedRate(new EntertainerExperience(performer), XP_CYCLE_RATE, XP_CYCLE_RATE, TimeUnit.SECONDS);
-			performerMap.put(performer, new Performance(future, performanceName));
+			performerMap.put(performer.getObjectId(), new Performance(future, performanceName));
 		}
 	}
 	
 	private void cancelExperienceTask(CreatureObject performer) {
 		Log.d(this, "%s no longer receives XP every %d seconds", performer, XP_CYCLE_RATE);
 		synchronized (performerMap) {
-			Performance performance = performerMap.remove(performer);
+			Performance performance = performerMap.remove(performer.getObjectId());
 			
 			if(performance == null) {
 				Log.e(this, "Couldn't cancel experience task for %s because they weren't found in performerMap", performer);
@@ -277,9 +295,11 @@ public class EntertainmentService extends Service {
 			dancer.setPerformanceCounter(0);
 			dancer.setAnimation("");
 			
-			// Non-entertainers don't receive XP - ignore them
-			if(isEntertainer(dancer))
+			// Non-entertainers don't receive XP and have no audience - ignore them
+			if(isEntertainer(dancer)) {
 				cancelExperienceTask(dancer);
+				performerMap.get(dancer.getObjectId()).clearSpectators();
+			}
 			
 			new ChatBroadcastIntent(dancer.getOwner(), "@performance:dance_stop_self").broadcast();
 		} else {
@@ -287,6 +307,17 @@ public class EntertainmentService extends Service {
 		}
 	}
 
+	private void startWatching(CreatureObject actor, CreatureObject creature) {
+		actor.setMoodAnimation("entertained");
+		new ChatBroadcastIntent(actor.getOwner(), new ProsePackage(new StringId("performance", "dance_watch_self"), "TT", creature.getName())).broadcast();
+		actor.setPerformanceListenTarget(creature.getObjectId());
+	}
+	private void stopWatching(CreatureObject actor) {
+		actor.setMoodAnimation("");
+		new ChatBroadcastIntent(actor.getOwner(), "@performance:dance_watch_stop_self").broadcast();
+		actor.setPerformanceListenTarget(0);
+	}
+	
 	private class Performance {
 		private final Future<?> future;
 		private final String performanceName;
@@ -312,6 +343,11 @@ public class EntertainmentService extends Service {
 		
 		public boolean removeSpectator(CreatureObject spectator) {
 			return audience.remove(spectator);
+		}
+		
+		public void clearSpectators() {
+			audience.forEach(spectator -> stopWatching(spectator));
+			audience.clear();
 		}
 		
 	}
@@ -348,7 +384,7 @@ public class EntertainmentService extends Service {
 		
 		@Override
 		public void run() {
-			Performance performance = performerMap.get(performer);
+			Performance performance = performerMap.get(performer.getObjectId());
 			
 			if(performance == null) {
 				Log.e("EntertainerExperience", "Performer %s wasn't in performermap", performer);
