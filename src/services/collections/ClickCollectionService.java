@@ -81,8 +81,6 @@ public class ClickCollectionService extends Service {
             String iff = ((RadialSelectionIntent) i).getTarget().getTemplate();
             if (isCollectionItem(iff)) {
                 new GrantClickyCollectionIntent(((RadialSelectionIntent) i).getPlayer().getCreatureObject(), getCollectionDetails(iff)).broadcast();
-//                new GrantBadgeIntent(((RadialSelectionIntent) i).getPlayer().getCreatureObject(), getCollectionDetails(iff)).broadcast();
-                System.out.println("dat collection item");
             }
         }
     }

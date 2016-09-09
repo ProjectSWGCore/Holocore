@@ -115,6 +115,7 @@ public class CollectionBadgeManager extends Manager {
 	public void handleCollectionBadge(CreatureObject creature, ClickyCollection collection) {
 		PlayerObject player = (PlayerObject) creature.getSlottedObject("ghost");
 		BadgeInformation badgeInformation = new BadgeInformation(player, collection.getCollectionName());
+
 		int bookRow = 0;
 		int pageRow = 0;
 		int collectionRow = 0;
@@ -144,7 +145,6 @@ public class CollectionBadgeManager extends Manager {
 			}
 		}
 
-		// TODO: using the above row numbers, get all of the information required for BadgeInformation
 		badgeInformation.setBookName(collectionTable.getCell(bookRow, 0).toString());
 		badgeInformation.setPageName(collectionTable.getCell(pageRow, 1).toString());
 		badgeInformation.setCollectionName(collectionTable.getCell(collectionRow, 2).toString());
@@ -155,7 +155,11 @@ public class CollectionBadgeManager extends Manager {
 		badgeInformation.setPreReqSlotName(collectionTable.getCell(slotRow, 18).toString());
 		badgeInformation.setSlotName(collectionTable.getCell(slotRow, 3).toString());
 
-		// Give badge
+		if (hasBadge(player, badgeInformation.beginSlotId)) {
+			sendSystemMessage(creature.getOwner(), "@collection:already_have_slot");
+			return;
+		}
+
 		grantBadge(player, getBeginSlotID(badgeInformation.slotName), badgeInformation.collectionBadgeName, false, badgeInformation.slotName);
 	}
 
