@@ -30,10 +30,13 @@ package services.commands;
 import intents.DanceIntent;
 import intents.FlourishIntent;
 import intents.PlayerEventIntent;
+import intents.WatchIntent;
 import intents.chat.ChatBroadcastIntent;
 import intents.experience.ExperienceIntent;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
@@ -44,6 +47,9 @@ import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
 import resources.control.Intent;
 import resources.control.Service;
+import resources.encodables.ProsePackage;
+import resources.encodables.StringId;
+import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
 import resources.server_info.Log;
@@ -70,6 +76,7 @@ public class EntertainmentService extends Service {
 		registerForIntent(DanceIntent.TYPE);
 		registerForIntent(PlayerEventIntent.TYPE);
 		registerForIntent(FlourishIntent.TYPE);
+		registerForIntent(WatchIntent.TYPE);
 	}
 
 	@Override
@@ -112,6 +119,9 @@ public class EntertainmentService extends Service {
 				break;
 			case FlourishIntent.TYPE:
 				handleFlourishIntent((FlourishIntent) i);
+				break;
+			case WatchIntent.TYPE:
+				handleWatchIntent((WatchIntent) i);
 				break;
 		}
 	}
@@ -177,6 +187,39 @@ public class EntertainmentService extends Service {
 		// Send the flourish animation to the owner of the creature and owners of creatures observing
 		performerObject.sendObserversAndSelf(new Animation(performerObject.getObjectId(), i.getFlourishName()));
 		new ChatBroadcastIntent(performer, "@performance:flourish_perform").broadcast();
+	}
+	
+	private void handleWatchIntent(WatchIntent i) {
+		SWGObject target = i.getTarget();
+		
+		if(target instanceof CreatureObject) {
+			CreatureObject actor = i.getActor();
+			CreatureObject creature = (CreatureObject) target;
+			Player actorOwner = actor.getOwner();
+			
+			if(!isEntertainer(creature)) {
+				// We can't watch non-entetainers - do nothing
+				return;
+			}
+			
+			if(creature.isPlayer()) {
+				if(creature.isPerforming()) {
+					Performance performance = performerMap.get(creature);
+					
+					if(performance.addSpectator(actor)) {
+						actor.setMoodAnimation("entertained");
+						new ChatBroadcastIntent(actorOwner, new ProsePackage(new StringId("performance", "dance_watch_self"), "TT", creature.getName())).broadcast();
+						actor.setPerformanceListenTarget(target.getObjectId());
+					}
+				} else {
+					// While this is a valid target for watching, the target is currently not performing.
+					new ChatBroadcastIntent(actorOwner, new ProsePackage(new StringId("performance", "dance_watch_not_dancing"), "TT", creature.getName())).broadcast();
+				}
+			} else {
+				// You can't watch NPCs, regardless of whether they're dancing or not
+				new ChatBroadcastIntent(actorOwner, "@performance:dance_watch_npc").broadcast();
+			}
+		}
 	}
 	
 	/**
@@ -247,10 +290,12 @@ public class EntertainmentService extends Service {
 	private class Performance {
 		private final Future<?> future;
 		private final String performanceName;
+		private final Set<CreatureObject> audience;
 
 		public Performance(Future<?> future, String performanceName) {
 			this.future = future;
 			this.performanceName = performanceName;
+			audience = new HashSet<>();
 		}
 
 		public Future<?> getFuture() {
@@ -259,6 +304,14 @@ public class EntertainmentService extends Service {
 
 		public String getPerformanceName() {
 			return performanceName;
+		}
+		
+		public boolean addSpectator(CreatureObject spectator) {
+			return audience.add(spectator);
+		}
+		
+		public boolean removeSpectator(CreatureObject spectator) {
+			return audience.remove(spectator);
 		}
 		
 	}
