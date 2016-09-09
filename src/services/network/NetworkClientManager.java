@@ -33,6 +33,7 @@ import intents.network.InboundPacketIntent;
 import intents.network.OutboundPacketIntent;
 
 import java.io.IOException;
+import java.net.BindException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
@@ -106,6 +107,8 @@ public class NetworkClientManager extends Manager implements TCPCallback, Packet
 			tcpServer.setCallback(this);
 		} catch (IOException e) {
 			e.printStackTrace();
+			if (e instanceof BindException)
+				Log.e(this, "Failed to bind to " + getBindPort());
 			return false;
 		}
 		return super.start();
