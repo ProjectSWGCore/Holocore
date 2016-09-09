@@ -112,6 +112,7 @@ public class EntertainmentService extends Service {
 				break;
 			case FlourishIntent.TYPE:
 				handleFlourishIntent((FlourishIntent) i);
+				break;
 		}
 	}
 
