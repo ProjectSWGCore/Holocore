@@ -313,6 +313,7 @@ public class CommandService extends Service {
 		registerCallback("goto", GotoCmdCallback.class);
 		registerCallback("startDance", StartDanceCallback.class);
 		registerCallback("requestBiography", RequestBiographyCmdCallback.class);
+		registerCallback("flourish", FlourishCmdCallback.class);
 	}
 	
 	private void clearCommands() {
