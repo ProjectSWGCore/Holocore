@@ -29,6 +29,7 @@ package intents.chat;
 
 import resources.chat.ChatAvatar;
 import resources.control.Intent;
+import resources.player.Player;
 
 /**
  * @author Waverunner
@@ -43,6 +44,7 @@ public class ChatRoomUpdateIntent extends Intent {
 	private String message;
 	private UpdateType updateType;
 	private boolean isPublic;
+	private Player player;
 
 	public ChatRoomUpdateIntent(String path, String title, String target, ChatAvatar avatar, String message, UpdateType updateType) {
 		super(TYPE);
@@ -67,6 +69,11 @@ public class ChatRoomUpdateIntent extends Intent {
 		this(path, null, null, avatar, null, updateType);
 	}
 
+	public ChatRoomUpdateIntent(Player player, String path, String title, String target, String message, UpdateType updateType) {
+		this(path, title, target, ChatAvatar.getFromPlayer(player), message, updateType);
+		this.player = player;
+	}
+	
 	public String getPath() {
 		return path;
 	}
@@ -95,6 +102,10 @@ public class ChatRoomUpdateIntent extends Intent {
 		return isPublic;
 	}
 
+	public Player getPlayer() {
+		return player;
+	}
+	
 	public enum UpdateType {
 		CREATE,
 		DESTROY,

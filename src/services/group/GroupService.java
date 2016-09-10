@@ -55,6 +55,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import resources.objects.group.LootRule;
+import services.CoreManager;
 import utilities.ThreadUtilities;
 
 /**
@@ -230,6 +231,8 @@ public class GroupService extends Service {
 		
 		this.sendSystemMessage(playerCreo.getOwner(), "removed");
 		group.removeMember(playerCreo);
+		new ChatRoomUpdateIntent(getGroupChatPath(group.getObjectId(), CoreManager.getGalaxy().getName()), String.valueOf(group.getObjectId()), null,
+				ChatAvatar.getFromPlayer(playerCreo.getOwner()), null, ChatRoomUpdateIntent.UpdateType.LEAVE).broadcast();
 	}
 	
 	private void handleGroupInvite(Player player, CreatureObject target) {
@@ -373,7 +376,8 @@ public class GroupService extends Service {
 
 			sendSystemMessage(sender, "formed_self", "TT", senderCreo.getObjectId());
 
-			// TODO: Join group chat room
+			new ChatRoomUpdateIntent(getGroupChatPath(group.getObjectId(), CoreManager.getGalaxy().getName()), String.valueOf(group.getObjectId()), null,
+				ChatAvatar.getFromPlayer(senderCreo.getOwner()), null, ChatRoomUpdateIntent.UpdateType.JOIN).broadcast();
 		} else {
 			// Group already exists
 			group = getGroup(senderCreo.getGroupId());
@@ -393,7 +397,9 @@ public class GroupService extends Service {
 		sendSystemMessage(player, "joined_self");
 		group.addMember(creo);
 		creo.updateGroupInviteData(null, 0, "");
-		// TODO: Join group chat room
+		
+		new ChatRoomUpdateIntent(getGroupChatPath(group.getObjectId(), CoreManager.getGalaxy().getName()), String.valueOf(group.getObjectId()), null,
+				ChatAvatar.getFromPlayer(player), null, ChatRoomUpdateIntent.UpdateType.JOIN).broadcast();
 	}
 	
 	private void handleGroupDecline(Player invitee) {

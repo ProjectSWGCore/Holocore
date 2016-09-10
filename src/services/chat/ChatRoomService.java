@@ -90,6 +90,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import resources.encodables.OutOfBandPackage;
 
 /**
  * @author Waverunner
@@ -235,6 +236,9 @@ public class ChatRoomService extends Service {
 		switch(i.getUpdateType()) {
 			case CREATE: createRoom(i.getAvatar(), i.isPublic(), i.getPath(), i.getTitle()); break;
 			case DESTROY: notifyDestroyRoom(i.getAvatar(), i.getPath(), 0); break;
+			case JOIN: enterChatChannel(i.getPlayer(), i.getPath()); break;
+			case LEAVE: leaveChatChannel(i.getPlayer(), i.getPath()); break;
+			case SEND_MESSAGE: sendMessageToRoom(i.getPlayer(), getRoom(i.getPath()), 0, i.getMessage(), new OutOfBandPackage());  break;
 			default: break;
 		}
 	}
@@ -512,18 +516,22 @@ public class ChatRoomService extends Service {
 	}
 
 	private void handleChatSendToRoom(Player player, ChatSendToRoom p) {
-		ChatResult result = ChatResult.SUCCESS;
-
 		ChatRoom room = getRoom(p.getRoomId());
+		sendMessageToRoom(player, room, p.getSequence(), p.getMessage(), p.getOutOfBandPackage());
+	}
+	
+	private void sendMessageToRoom(Player player, ChatRoom room, int sequence, String message, OutOfBandPackage outOfBandPackage) {
+		ChatResult result = ChatResult.SUCCESS;
+		
 		if (room == null)
 			result = ChatResult.ROOM_INVALID_ID;
 
 		if (result != ChatResult.SUCCESS) {
-			player.sendPacket(new ChatOnSendRoomMessage(result.getCode(), p.getSequence()));
+			player.sendPacket(new ChatOnSendRoomMessage(result.getCode(), sequence));
 			return;
 		}
 
-		if (!incrementMessageCounter(player.getNetworkId(), room.getId(), p.getSequence()))
+		if (!incrementMessageCounter(player.getNetworkId(), room.getId(), sequence))
 			return;
 
 		ChatAvatar avatar = ChatAvatar.getFromPlayer(player);
@@ -532,11 +540,11 @@ public class ChatRoomService extends Service {
 
 		// TODO: Check length of messages -- Result 16 is used for too long message
 
-		player.sendPacket(new ChatOnSendRoomMessage(result.getCode(), p.getSequence()));
+		player.sendPacket(new ChatOnSendRoomMessage(result.getCode(), sequence));
 
 		if (result == ChatResult.SUCCESS) {
-			room.sendMessage(avatar, p.getMessage(), p.getOutOfBandPackage(), player.getPlayerManager());
-			logChat(player.getCreatureObject().getObjectId(), player.getCharacterName(), room.getId()+"/"+room.getPath(), p.getMessage());
+			room.sendMessage(avatar, message, outOfBandPackage, player.getPlayerManager());
+			logChat(player.getCreatureObject().getObjectId(), player.getCharacterName(), room.getId()+"/"+room.getPath(), message);
 		}
 	}
 
@@ -618,6 +626,7 @@ public class ChatRoomService extends Service {
 		}
 
 		ChatResult result = room.canJoinRoom(avatar);
+		
 		if (result != ChatResult.SUCCESS && player.getAccessLevel() != AccessLevel.PLAYER) {
 			sendOnEnteredChatRoom(player, avatar, result, room.getId(), sequence);
 			return;
