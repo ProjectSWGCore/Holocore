@@ -155,21 +155,20 @@ public class EntertainmentService extends Service {
 	private void handlePlayerEventIntent(PlayerEventIntent i) {
 		CreatureObject creature = i.getPlayer().getCreatureObject();
 		
-		// Null creatures or non-entertainers are ignored!
-		if(creature == null || !isEntertainer(creature))
+		if(creature == null)
 			return;
 		
 		switch(i.getEvent()) {
 			case PE_LOGGED_OUT:
 				// Don't keep giving them XP if they log out
-				if(creature.getPosture().equals(Posture.SKILL_ANIMATING)) {
+				if(isEntertainer(creature) && creature.getPosture().equals(Posture.SKILL_ANIMATING)) {
 					cancelExperienceTask(creature);
 				}
 				
 				break;
 			case PE_ZONE_IN_SERVER: 
 				// We need to check if they're dancing in order to start giving them XP
-				if(creature.getPosture().equals(Posture.SKILL_ANIMATING)) {
+				if(isEntertainer(creature) && creature.getPosture().equals(Posture.SKILL_ANIMATING)) {
 					scheduleExperienceTask(creature, danceMap.get(creature.getAnimation().replace("dance_", "")));
 				}
 				
@@ -179,12 +178,14 @@ public class EntertainmentService extends Service {
 				long performerId = creature.getPerformanceListenTarget();
 				
 				if(performerId != 0 && performerMap.get(performerId).removeSpectator(creature)) {
-					stopWatching(creature);
+					stopWatching(creature, false);
 				}
 				
 				// If a performer disappears, the audience needs to be cleared
-				if(creature.isPerforming()) {
+				// They're also removed from the map of active performers.
+				if(isEntertainer(creature) && creature.isPerforming()) {
 					performerMap.get(creature.getObjectId()).clearSpectators();
+					performerMap.remove(creature.getObjectId());
 				}
 				
 				break;
@@ -226,7 +227,7 @@ public class EntertainmentService extends Service {
 						}
 					} else {
 						if(performance.removeSpectator(actor)) {
-							stopWatching(actor);
+							stopWatching(actor, true);
 						}
 					}
 				} else {
@@ -252,15 +253,23 @@ public class EntertainmentService extends Service {
 	private void scheduleExperienceTask(CreatureObject performer, String performanceName) {
 		Log.d(this, "Scheduled %s to receive XP every %d seconds", performer, XP_CYCLE_RATE);
 		synchronized(performerMap) {
+			long performerId = performer.getObjectId();
 			Future<?> future = executorService.scheduleAtFixedRate(new EntertainerExperience(performer), XP_CYCLE_RATE, XP_CYCLE_RATE, TimeUnit.SECONDS);
-			performerMap.put(performer.getObjectId(), new Performance(future, performanceName));
+			
+			// If they went LD but came back before disappearing
+			if(performerMap.containsKey(performerId)) {
+				Performance performance = performerMap.get(performerId);
+				performance.setFuture(future);
+			} else {
+				performerMap.put(performer.getObjectId(), new Performance(future, performanceName));
+			}
 		}
 	}
 	
 	private void cancelExperienceTask(CreatureObject performer) {
 		Log.d(this, "%s no longer receives XP every %d seconds", performer, XP_CYCLE_RATE);
 		synchronized (performerMap) {
-			Performance performance = performerMap.remove(performer.getObjectId());
+			Performance performance = performerMap.get(performer.getObjectId());
 			
 			if(performance == null) {
 				Log.e(this, "Couldn't cancel experience task for %s because they weren't found in performerMap", performer);
@@ -312,14 +321,15 @@ public class EntertainmentService extends Service {
 		new ChatBroadcastIntent(actor.getOwner(), new ProsePackage(new StringId("performance", "dance_watch_self"), "TT", creature.getName())).broadcast();
 		actor.setPerformanceListenTarget(creature.getObjectId());
 	}
-	private void stopWatching(CreatureObject actor) {
+	private void stopWatching(CreatureObject actor, boolean displaySystemMessage) {
 		actor.setMoodAnimation("");
-		new ChatBroadcastIntent(actor.getOwner(), "@performance:dance_watch_stop_self").broadcast();
+		if(displaySystemMessage)
+			new ChatBroadcastIntent(actor.getOwner(), "@performance:dance_watch_stop_self").broadcast();
 		actor.setPerformanceListenTarget(0);
 	}
 	
 	private class Performance {
-		private final Future<?> future;
+		private Future<?> future;
 		private final String performanceName;
 		private final Set<CreatureObject> audience;
 
@@ -331,6 +341,10 @@ public class EntertainmentService extends Service {
 
 		public Future<?> getFuture() {
 			return future;
+		}
+
+		public void setFuture(Future<?> future) {
+			this.future = future;
 		}
 
 		public String getPerformanceName() {
@@ -346,7 +360,7 @@ public class EntertainmentService extends Service {
 		}
 		
 		public void clearSpectators() {
-			audience.forEach(spectator -> stopWatching(spectator));
+			audience.forEach(spectator -> stopWatching(spectator, true));
 			audience.clear();
 		}
 		
