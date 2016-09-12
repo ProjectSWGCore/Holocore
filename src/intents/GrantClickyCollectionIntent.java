@@ -27,6 +27,7 @@
 package intents;
 
 import resources.control.Intent;
+import resources.objects.SWGObject;
 import resources.objects.collections.CollectionItem;
 import resources.objects.creature.CreatureObject;
 
@@ -37,16 +38,22 @@ public class GrantClickyCollectionIntent extends Intent {
     public static final String TYPE = "GrantClickyCollectionIntent";
 
     private CreatureObject creature;
+    private SWGObject inventoryItem;
     private CollectionItem collection;
 
-    public GrantClickyCollectionIntent(CreatureObject creature, CollectionItem collection) {
+    public GrantClickyCollectionIntent(CreatureObject creature, SWGObject inventoryItem, CollectionItem collection) {
         super(TYPE);
         this.creature = creature;
+        this.inventoryItem = inventoryItem;
         this.collection = collection;
     }
 
     public CreatureObject getCreature() {
         return creature;
+    }
+
+    public SWGObject getInventoryItem() {
+        return inventoryItem;
     }
 
     public CollectionItem getCollection() {

@@ -94,7 +94,7 @@ public class ClickCollectionService extends Service {
             boolean isClicky = isClickyCollectionItem(iff);
 
             if (isClicky || isConsumeCollectionItem(itemName, iff)) {
-                new GrantClickyCollectionIntent(((RadialSelectionIntent) i).getPlayer().getCreatureObject(), getCollectionDetails(iff, isClicky)).broadcast();
+                new GrantClickyCollectionIntent(((RadialSelectionIntent) i).getPlayer().getCreatureObject(), ((RadialSelectionIntent) i).getTarget(), getCollectionDetails(iff, isClicky)).broadcast();
             }
         }
     }

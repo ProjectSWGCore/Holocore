@@ -33,10 +33,13 @@ import java.util.BitSet;
 
 import intents.GrantBadgeIntent;
 import intents.GrantClickyCollectionIntent;
+import intents.object.DestroyObjectIntent;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
 import resources.control.Intent;
 import resources.control.Manager;
+import resources.objects.SWGObject;
+import resources.objects.collections.ClickyCollectionItem;
 import resources.objects.collections.CollectionItem;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
@@ -72,7 +75,7 @@ public class CollectionBadgeManager extends Manager {
 		if (i instanceof GrantBadgeIntent) {
 			handleCollectionBadge(((GrantBadgeIntent) i).getCreature(),((GrantBadgeIntent) i).getCollectionBadgeName());
 		} else if (i instanceof GrantClickyCollectionIntent) {
-			handleCollectionBadge(((GrantClickyCollectionIntent) i).getCreature(), ((GrantClickyCollectionIntent) i).getCollection());
+			handleCollectionBadge(((GrantClickyCollectionIntent) i).getCreature(), ((GrantClickyCollectionIntent) i).getInventoryItem(), ((GrantClickyCollectionIntent) i).getCollection());
 		}
 	}
 	
@@ -112,7 +115,7 @@ public class CollectionBadgeManager extends Manager {
 		}
 	}
 
-	public void handleCollectionBadge(CreatureObject creature, CollectionItem collection) {
+	public void handleCollectionBadge(CreatureObject creature, SWGObject inventoryItem, CollectionItem collection) {
 		PlayerObject player = (PlayerObject) creature.getSlottedObject("ghost");
 		BadgeInformation badgeInformation = new BadgeInformation(player, collection.getCollectionName());
 
@@ -162,6 +165,9 @@ public class CollectionBadgeManager extends Manager {
 		}
 
 		grantBadge(player, getBeginSlotID(badgeInformation.slotName), badgeInformation.collectionBadgeName, false, badgeInformation.slotName);
+
+		if (!(collection instanceof ClickyCollectionItem))
+			new DestroyObjectIntent(inventoryItem).broadcast();
 		// TODO: play the sound for getting the collection item, stored in badgeInformation.music
 	}
 
