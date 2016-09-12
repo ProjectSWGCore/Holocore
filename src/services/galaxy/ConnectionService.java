@@ -245,7 +245,9 @@ public class ConnectionService extends Service {
 		else
 			removeFromLists(p);
 		p.setPlayerState(PlayerState.DISCONNECTED);
-		new PlayerEventIntent(p, PlayerEvent.PE_DISAPPEAR).broadcast();
+		Intent i = new PlayerEventIntent(p, PlayerEvent.PE_DISAPPEAR);
+		new PlayerEventIntent(p, PlayerEvent.PE_DESTROYED).broadcastAfterIntent(i);
+		i.broadcast();
 	}
 	
 	private void disconnect(Player player, DisconnectReason reason) {

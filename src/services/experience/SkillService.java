@@ -135,7 +135,7 @@ public final class SkillService extends Service {
 		String skillName = intent.getSkillName();
 		CreatureObject target = intent.getTarget();
 		SkillData skillData = skillDataMap.get(skillName);
-		String[] requiredSkills = skillData.requiredSkills;
+		String[] requiredSkills = skillData.getRequiredSkills();
 		
 		for(String requiredSkill : requiredSkills) {
 			if(!target.hasSkill(requiredSkill)) {
@@ -146,7 +146,7 @@ public final class SkillService extends Service {
 		
 		target.addSkill(skillName);
 		
-		for(String commandName : skillData.commands) {
+		for(String commandName : skillData.getCommands()) {
 			target.addAbility(commandName);
 		}
 		
