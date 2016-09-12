@@ -75,7 +75,11 @@ public class CollectionBadgeManager extends Manager {
 		if (i instanceof GrantBadgeIntent) {
 			handleCollectionBadge(((GrantBadgeIntent) i).getCreature(),((GrantBadgeIntent) i).getCollectionBadgeName());
 		} else if (i instanceof GrantClickyCollectionIntent) {
-			handleCollectionBadge(((GrantClickyCollectionIntent) i).getCreature(), ((GrantClickyCollectionIntent) i).getInventoryItem(), ((GrantClickyCollectionIntent) i).getCollection());
+			CreatureObject creo = ((GrantClickyCollectionIntent) i).getCreature();
+			SWGObject inventoryItem = ((GrantClickyCollectionIntent) i).getInventoryItem();
+			CollectionItem collection = ((GrantClickyCollectionIntent) i).getCollection();
+
+			handleCollectionBadge(creo, inventoryItem, collection);
 		}
 	}
 	
@@ -119,45 +123,18 @@ public class CollectionBadgeManager extends Manager {
 		PlayerObject player = (PlayerObject) creature.getSlottedObject("ghost");
 		BadgeInformation badgeInformation = new BadgeInformation(player, collection.getCollectionName());
 
-		int bookRow = 0;
-		int pageRow = 0;
-		int collectionRow = 0;
-		int slotRow = 0;
+		CollectionRowData rows = getCollectionRows(collection);
 
-		for (int row = 0; row < collectionTable.getRowCount(); row++) {
-			if (collectionTable.getCell(row, 2).toString().equals(collection.getCollectionName())) {
-			    collectionRow = row;
-			} else if (collectionTable.getCell(row, 3).toString().equals(collection.getSlotName())) {
-			    slotRow = row;
-                break;
-			}
-		}
-
-		// Backtrack up to get the book and page name
-		boolean pageRowFound = false;
-		boolean bookRowFound = false;
-
-		for (int row = collectionRow; row > 0; row--) {
-			if (!pageRowFound && collectionTable.getCell(row, 0).toString().isEmpty() && collectionTable.getCell(row, 2).toString().isEmpty() && !collectionTable.getCell(row, 1).toString().isEmpty()) {
-				pageRowFound = true;
-				pageRow = row;
-			}
-			else if (!bookRowFound && collectionTable.getCell(row, 1).toString().isEmpty() && !collectionTable.getCell(row, 0).toString().isEmpty()) {
-				bookRowFound = true;
-				bookRow = row;
-			}
-		}
-
-		badgeInformation.setBookName(collectionTable.getCell(bookRow, 0).toString());
-		badgeInformation.setPageName(collectionTable.getCell(pageRow, 1).toString());
-		badgeInformation.setCollectionName(collectionTable.getCell(collectionRow, 2).toString());
-		badgeInformation.setIsHidden((boolean)collectionTable.getCell(slotRow, 26));
-		badgeInformation.setBeginSlotId((int)collectionTable.getCell(slotRow, 4));
-		badgeInformation.setEndSlotId((int)collectionTable.getCell(slotRow, 5));
-		badgeInformation.setMaxSlotValue((int)collectionTable.getCell(slotRow, 6));
-		badgeInformation.setPreReqSlotName(collectionTable.getCell(slotRow, 18).toString());
-		badgeInformation.setSlotName(collectionTable.getCell(slotRow, 3).toString());
-		badgeInformation.setMusic(collectionTable.getCell(slotRow, 24).toString());
+		badgeInformation.setBookName(collectionTable.getCell(rows.bookRow, 0).toString());
+		badgeInformation.setPageName(collectionTable.getCell(rows.pageRow, 1).toString());
+		badgeInformation.setCollectionName(collectionTable.getCell(rows.collectionRow, 2).toString());
+		badgeInformation.setIsHidden((boolean)collectionTable.getCell(rows.slotRow, 26));
+		badgeInformation.setBeginSlotId((int)collectionTable.getCell(rows.slotRow, 4));
+		badgeInformation.setEndSlotId((int)collectionTable.getCell(rows.slotRow, 5));
+		badgeInformation.setMaxSlotValue((int)collectionTable.getCell(rows.slotRow, 6));
+		badgeInformation.setPreReqSlotName(collectionTable.getCell(rows.slotRow, 18).toString());
+		badgeInformation.setSlotName(collectionTable.getCell(rows.slotRow, 3).toString());
+		badgeInformation.setMusic(collectionTable.getCell(rows.slotRow, 24).toString());
 
 		if (hasBadge(player, badgeInformation.beginSlotId)) {
 			sendSystemMessage(creature.getOwner(), "@collection:already_have_slot");
@@ -168,6 +145,7 @@ public class CollectionBadgeManager extends Manager {
 
 		if (!(collection instanceof ClickyCollectionItem))
 			new DestroyObjectIntent(inventoryItem).broadcast();
+
 		// TODO: play the sound for getting the collection item, stored in badgeInformation.music
 	}
 
@@ -260,7 +238,37 @@ public class CollectionBadgeManager extends Manager {
 			}
 		}
 		return -1;
-	}		
+	}
+
+	private CollectionRowData getCollectionRows(CollectionItem collection) {
+		CollectionRowData rows = new CollectionRowData();
+
+		for (int row = 0; row < collectionTable.getRowCount(); row++) {
+			if (collectionTable.getCell(row, 2).toString().equals(collection.getCollectionName())) {
+				rows.collectionRow = row;
+			} else if (collectionTable.getCell(row, 3).toString().equals(collection.getSlotName())) {
+				rows.slotRow = row;
+				break;
+			}
+		}
+
+		// Backtrack up to get the book and page name
+		boolean pageRowFound = false;
+		boolean bookRowFound = false;
+
+		for (int row = rows.collectionRow; row > 0; row--) {
+			if (!pageRowFound && collectionTable.getCell(row, 0).toString().isEmpty() && collectionTable.getCell(row, 2).toString().isEmpty() && !collectionTable.getCell(row, 1).toString().isEmpty()) {
+				pageRowFound = true;
+				rows.pageRow = row;
+			}
+			else if (!bookRowFound && collectionTable.getCell(row, 1).toString().isEmpty() && !collectionTable.getCell(row, 0).toString().isEmpty()) {
+				bookRowFound = true;
+				rows.bookRow = row;
+			}
+		}
+
+		return rows;
+	}
 	
 	private void handleMessage(PlayerObject player, boolean collectionComplete, String collectionName, boolean hidden, String slotName){
 		Player thisplayer = player.getOwner();
@@ -397,6 +405,43 @@ public class CollectionBadgeManager extends Manager {
 
 		public void setMusic(String music) {
 			this.music = music;
+		}
+	}
+
+	private class CollectionRowData {
+		private int bookRow;
+		private int pageRow;
+		private int collectionRow;
+		private int slotRow;
+
+		public CollectionRowData() {
+			bookRow = 0;
+			pageRow = 0;
+			collectionRow = 0;
+			slotRow = 0;
+		}
+
+		public CollectionRowData(int bookRow, int pageRow, int collectionRow, int slotRow) {
+			this.bookRow = bookRow;
+			this.pageRow = pageRow;
+			this.collectionRow = collectionRow;
+			this.slotRow = slotRow;
+		}
+
+		public int getBookRow() {
+			return bookRow;
+		}
+
+		public int getPageRow() {
+			return pageRow;
+		}
+
+		public int getCollectionRow() {
+			return collectionRow;
+		}
+
+		public int getSlotRow() {
+			return slotRow;
 		}
 	}
 }

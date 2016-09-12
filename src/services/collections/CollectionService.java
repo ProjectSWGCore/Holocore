@@ -49,7 +49,7 @@ import java.util.List;
 /**
  * Created by skylerlehan on 8/21/16.
  */
-public class ClickCollectionService extends Service {
+public class CollectionService extends Service {
 
     private static final String GET_CLICKY_COLLECTION_ITEMS_SQL = "SELECT iff_template FROM collection_clicky";
     private static final String GET_CONSUME_COLLECTION_ITEMS_SQL = "SELECT item_name, iff_template FROM collection";
@@ -59,7 +59,7 @@ public class ClickCollectionService extends Service {
     private List<String> clickyCollectionItems = new ArrayList<String>();
     private List<ConsumeCollection> consumeCollectionItems = new ArrayList<>();
 
-    public ClickCollectionService() {
+    public CollectionService() {
 
         try {
             createClickyDatabaseConnection();

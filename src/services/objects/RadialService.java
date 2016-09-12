@@ -105,14 +105,6 @@ public class RadialService extends Service {
 		}
 
 		new RadialRequestIntent(player, target, request).broadcast();
-		// TODO: remove comments (skyler)
-//		synchronized (templatesRegistered) {
-//			if (templatesRegistered.contains(target.getTemplate())) {
-//				new RadialRequestIntent(player, target, request).broadcast();
-//			} else {
-//				sendResponse(player, target, request.getOptions(), request.getCounter());
-//			}
-//		}
 	}
 	
 	private void onResponse(RadialResponseIntent response) {
