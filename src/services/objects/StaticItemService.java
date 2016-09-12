@@ -121,12 +121,8 @@ public final class StaticItemService extends Service {
 					ObjectAttributes objectAttributes;
 
 					switch (type) {
-						case "armor":
-							objectAttributes = new ArmorAttributes(itemName, iffTemplate);
-							break;
-						case "collection":
-							objectAttributes = new CollectionAttributes(itemName, iffTemplate);
-							break;
+						case "armor": objectAttributes = new ArmorAttributes(itemName, iffTemplate); break;
+						case "collection": objectAttributes = new CollectionAttributes(itemName, iffTemplate); break;
 						case "consumable":    // TODO implement
 						case "costume":    // TODO implement
 						case "dna":    // TODO implement
@@ -135,14 +131,9 @@ public final class StaticItemService extends Service {
 						case "object":    // TODO implement
 						case "schematic":    // TODO implement
 						case "storyteller":    // TODO implement
-						case "weapon":
-							objectAttributes = new WeaponAttributes(itemName, iffTemplate);
-							break;
-						case "wearable":
-							continue;    // TODO implement
-						default:
-							Log.e(this, "Item %s was not loaded because the specified type %s is unknown", itemName, type);
-							continue;
+						case "weapon": objectAttributes = new WeaponAttributes(itemName, iffTemplate); break;
+						case "wearable": continue;    // TODO implement
+						default: Log.e(this, "Item %s was not loaded because the specified type %s is unknown", itemName, type); continue;
 					}
 
 					try {
@@ -438,48 +429,20 @@ public final class StaticItemService extends Service {
 			String weaponType = resultSet.getString("weapon_type");
 
 			switch (weaponType) {
-				case "RIFLE":
-					category = WeaponType.RIFLE;
-					break;
-				case "CARBINE":
-					category = WeaponType.CARBINE;
-					break;
-				case "PISTOL":
-					category = WeaponType.PISTOL;
-					break;
-				case "HEAVY":
-					category = WeaponType.HEAVY;
-					break; // pre-NGE artifact for pre-NGE heavy weapons
-				case "ONE_HANDED_MELEE":
-					category = WeaponType.ONE_HANDED_MELEE;
-					break;
-				case "TWO_HANDED_MELEE":
-					category = WeaponType.TWO_HANDED_MELEE;
-					break;
-				case "UNARMED":
-					category = WeaponType.UNARMED;
-					break;
-				case "POLEARM_MELEE":
-					category = WeaponType.POLEARM_MELEE;
-					break;
-				case "THROWN":
-					category = WeaponType.THROWN;
-					break;
-				case "ONE_HANDED_SABER":
-					category = WeaponType.ONE_HANDED_SABER;
-					break;
-				case "TWO_HANDED_SABER":
-					category = WeaponType.TWO_HANDED_SABER;
-					break;
-				case "POLEARM_SABER":
-					category = WeaponType.POLEARM_SABER;
-					break;
-				case "DIRECTIONAL_TARGET_WEAPON":
-					category = WeaponType.DIRECTIONAL_TARGET_WEAPON;
-					break;    // Free targeting
-				case "LIGHT_RIFLE":
-					category = WeaponType.LIGHT_RIFLE;
-					break;
+				case "RIFLE": category = WeaponType.RIFLE; break;
+				case "CARBINE": category = WeaponType.CARBINE; break;
+				case "PISTOL": category = WeaponType.PISTOL; break;
+				case "HEAVY": category = WeaponType.HEAVY; break; // pre-NGE artifact for pre-NGE heavy weapons
+				case "ONE_HANDED_MELEE": category = WeaponType.ONE_HANDED_MELEE; break;
+				case "TWO_HANDED_MELEE": category = WeaponType.TWO_HANDED_MELEE; break;
+				case "UNARMED": category = WeaponType.UNARMED; break;
+				case "POLEARM_MELEE": category = WeaponType.POLEARM_MELEE; break;
+				case "THROWN": category = WeaponType.THROWN; break;
+				case "ONE_HANDED_SABER": category = WeaponType.ONE_HANDED_SABER; break;
+				case "TWO_HANDED_SABER": category = WeaponType.TWO_HANDED_SABER; break;
+				case "POLEARM_SABER": category = WeaponType.POLEARM_SABER; break;
+				case "DIRECTIONAL_TARGET_WEAPON": category = WeaponType.DIRECTIONAL_TARGET_WEAPON; break;    // Free targeting
+				case "LIGHT_RIFLE": category = WeaponType.LIGHT_RIFLE; break;
 				default:
 					// TODO log the fact that the weapon type isn't recognised.
 					// We return false here. That way, we don't store the

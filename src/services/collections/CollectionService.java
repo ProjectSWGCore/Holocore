@@ -153,7 +153,7 @@ public class CollectionService extends Service {
 			Log.e(this, e);
 		}
 
-		try  {
+		try {
 			synchronized (getConsumeCollectionItemsStatement) {
 				getConsumeCollectionItemsStatement.setString(1, cleanedIff);
 				ResultSet set = getConsumeCollectionItemsStatement.executeQuery();
