@@ -121,6 +121,8 @@ public class ObjectAwareness extends Service {
 		switch (pei.getEvent()) {
 			case PE_DISAPPEAR:
 				moveToLocation(creature, creature.getParent(), null);
+				break;
+			case PE_DESTROYED:
 				creature.setOwner(null);
 				break;
 			case PE_ZONE_IN_SERVER:

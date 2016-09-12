@@ -1,4 +1,4 @@
-/************************************************************************************
+/***********************************************************************************
  * Copyright (c) 2015 /// Project SWG /// www.projectswg.com                        *
  *                                                                                  *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on           *
@@ -25,45 +25,32 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
  ***********************************************************************************/
-package utilities;
+package resources.objects.collections;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
+/**
+ * Created by Yakattak on 9/8/16.
+ */
+public class ClickyCollectionItem extends CollectionItem {
+	private String terrain;
+	private double x;
+	private double y;
 
-public class ScheduledUtilities {
-	
-	private static final Object mutex = new Object();
-	private static ScheduledExecutorService executor;
-	
-	private ScheduledUtilities() {
-		
+	public ClickyCollectionItem(String slotName, String collectionName, int objectId, String iffTemplate, String terrain, double x, double y) {
+		super(slotName, collectionName, iffTemplate);
+		this.terrain = terrain;
+		this.x = x;
+		this.y = y;
 	}
-	
-	private static ScheduledExecutorService getScheduler() {
-		synchronized (mutex) {
-			if (executor == null) {
-				int processors = Runtime.getRuntime().availableProcessors();
-				executor = Executors.newScheduledThreadPool(processors, ThreadUtilities.newThreadFactory("scheduled-utilities-%d"));
-				Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-					executor.shutdown();
-				}));
-			}
-			return executor;
-		}
+
+	public String getTerrain() {
+		return terrain;
 	}
-	
-	public static ScheduledFuture<?> scheduleAtFixedRate(Runnable r, long initialDelay, long period, TimeUnit unit) {
-		return getScheduler().scheduleAtFixedRate(r, initialDelay, period, unit);
+
+	public double getX() {
+		return x;
 	}
-	
-	public static ScheduledFuture<?> scheduleWithFixedDelay(Runnable r, long initialDelay, long delay, TimeUnit unit) {
-		return getScheduler().scheduleWithFixedDelay(r, initialDelay, delay, unit);
+
+	public double getY() {
+		return y;
 	}
-	
-	public static ScheduledFuture<?> run(Runnable r, long delay, TimeUnit unit) {
-		return getScheduler().schedule(r, delay, unit);
-	}
-	
 }
