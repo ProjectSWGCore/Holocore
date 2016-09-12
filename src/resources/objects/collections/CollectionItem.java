@@ -31,25 +31,25 @@ package resources.objects.collections;
  * Created by skylerlehan on 9/11/16.
  */
 public class CollectionItem {
-    protected String slotName;
-    protected String collectionName;
-    protected String iffTemplate;
+	private String slotName;
+	private String collectionName;
+	private String iffTemplate;
 
-    public CollectionItem(String slotName, String collectionName, String iffTemplate) {
-        this.slotName = slotName;
-        this.collectionName = collectionName;
-        this.iffTemplate = iffTemplate;
-    }
+	public CollectionItem(String slotName, String collectionName, String iffTemplate) {
+		this.slotName = slotName;
+		this.collectionName = collectionName;
+		this.iffTemplate = iffTemplate;
+	}
 
-    public String getSlotName() {
-        return slotName;
-    }
+	public String getSlotName() {
+		return slotName;
+	}
 
-    public String getCollectionName() {
-        return collectionName;
-    }
+	public String getCollectionName() {
+		return collectionName;
+	}
 
-    public String getIffTemplate() {
-        return iffTemplate;
-    }
+	public String getIffTemplate() {
+		return iffTemplate;
+	}
 }

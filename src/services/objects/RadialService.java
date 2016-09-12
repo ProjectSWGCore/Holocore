@@ -53,17 +53,17 @@ import resources.server_info.Log;
 import services.galaxy.GalacticManager;
 
 public class RadialService extends Service {
-	
+
 	private final Set<String> templatesRegistered;
-	
+
 	public RadialService() {
 		templatesRegistered = new HashSet<>();
-		
+
 		registerForIntent(GalacticPacketIntent.TYPE);
 		registerForIntent(RadialResponseIntent.TYPE);
 		registerForIntent(RadialRegisterIntent.TYPE);
 	}
-	
+
 	@Override
 	public void onIntentReceived(Intent i) {
 		if (i instanceof GalacticPacketIntent) {
@@ -88,7 +88,7 @@ public class RadialService extends Service {
 			}
 		}
 	}
-	
+
 	private void onRequest(ObjectManager objectManager, ObjectMenuRequest request) {
 		SWGObject requestor = objectManager.getObjectById(request.getRequestorId());
 		SWGObject target = objectManager.getObjectById(request.getTargetId());
@@ -106,12 +106,12 @@ public class RadialService extends Service {
 
 		new RadialRequestIntent(player, target, request).broadcast();
 	}
-	
+
 	private void onResponse(RadialResponseIntent response) {
 		Player player = response.getPlayer();
 		sendResponse(player, response.getTarget(), response.getOptions(), response.getCounter());
 	}
-	
+
 	private void onSelection(GalacticManager galacticManager, long networkId, ObjectMenuSelect select) {
 		Player player = galacticManager.getPlayerManager().getPlayerFromNetworkId(networkId);
 		SWGObject target = galacticManager.getObjectManager().getObjectById(select.getObjectId());
@@ -130,7 +130,7 @@ public class RadialService extends Service {
 		}
 		new RadialSelectionIntent(player, target, selection).broadcast();
 	}
-	
+
 	private void onObjectClicked(ObjectManager objectManager, IntendedTarget it) {
 		SWGObject requestor = objectManager.getObjectById(it.getObjectId());
 		SWGObject target = objectManager.getObjectById(it.getTargetId());
@@ -151,7 +151,7 @@ public class RadialService extends Service {
 			}
 		}
 	}
-	
+
 	private void sendResponse(Player player, SWGObject target, List<RadialOption> options, int counter) {
 		ObjectMenuResponse menuResponse = new ObjectMenuResponse(player.getCreatureObject().getObjectId());
 		menuResponse.setTargetId(target.getObjectId());
@@ -160,5 +160,5 @@ public class RadialService extends Service {
 		menuResponse.setCounter(counter);
 		player.sendPacket(menuResponse);
 	}
-	
+
 }

@@ -31,26 +31,26 @@ package resources.objects.collections;
  * Created by Yakattak on 9/8/16.
  */
 public class ClickyCollectionItem extends CollectionItem {
-    private String terrain;
-    private double x;
-    private double y;
+	private String terrain;
+	private double x;
+	private double y;
 
-    public ClickyCollectionItem(String slotName, String collectionName, int objectId, String iffTemplate, String terrain, double x, double y) {
-        super(slotName, collectionName, iffTemplate);
-        this.terrain = terrain;
-        this.x = x;
-        this.y = y;
-    }
+	public ClickyCollectionItem(String slotName, String collectionName, int objectId, String iffTemplate, String terrain, double x, double y) {
+		super(slotName, collectionName, iffTemplate);
+		this.terrain = terrain;
+		this.x = x;
+		this.y = y;
+	}
 
-    public String getTerrain() {
-        return terrain;
-    }
+	public String getTerrain() {
+		return terrain;
+	}
 
-    public double getX() {
-        return x;
-    }
+	public double getX() {
+		return x;
+	}
 
-    public double getY() {
-        return y;
-    }
+	public double getY() {
+		return y;
+	}
 }
