@@ -60,8 +60,13 @@ public class ClickCollectionService extends Service {
     private List<ConsumeCollection> consumeCollectionItems = new ArrayList<>();
 
     public ClickCollectionService() {
-        createClickyDatabaseConnection();
-        createConsumeDatabaseConnection();
+
+        try {
+            createClickyDatabaseConnection();
+            createConsumeDatabaseConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         registerClickyCollectionItems();
         registerConsumeCollectionItems();
