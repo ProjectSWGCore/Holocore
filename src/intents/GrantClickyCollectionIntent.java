@@ -27,7 +27,7 @@
 package intents;
 
 import resources.control.Intent;
-import resources.objects.collections.ClickyCollection;
+import resources.objects.collections.CollectionItem;
 import resources.objects.creature.CreatureObject;
 
 /**
@@ -37,9 +37,9 @@ public class GrantClickyCollectionIntent extends Intent {
     public static final String TYPE = "GrantClickyCollectionIntent";
 
     private CreatureObject creature;
-    private ClickyCollection collection;
+    private CollectionItem collection;
 
-    public GrantClickyCollectionIntent(CreatureObject creature, ClickyCollection collection) {
+    public GrantClickyCollectionIntent(CreatureObject creature, CollectionItem collection) {
         super(TYPE);
         this.creature = creature;
         this.collection = collection;
@@ -49,7 +49,7 @@ public class GrantClickyCollectionIntent extends Intent {
         return creature;
     }
 
-    public ClickyCollection getCollection() {
+    public CollectionItem getCollection() {
         return collection;
     }
 }

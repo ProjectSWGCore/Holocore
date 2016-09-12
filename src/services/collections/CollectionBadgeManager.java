@@ -37,7 +37,7 @@ import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
 import resources.control.Intent;
 import resources.control.Manager;
-import resources.objects.collections.ClickyCollection;
+import resources.objects.collections.CollectionItem;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
 import resources.player.Player;
@@ -112,7 +112,7 @@ public class CollectionBadgeManager extends Manager {
 		}
 	}
 
-	public void handleCollectionBadge(CreatureObject creature, ClickyCollection collection) {
+	public void handleCollectionBadge(CreatureObject creature, CollectionItem collection) {
 		PlayerObject player = (PlayerObject) creature.getSlottedObject("ghost");
 		BadgeInformation badgeInformation = new BadgeInformation(player, collection.getCollectionName());
 
@@ -154,6 +154,7 @@ public class CollectionBadgeManager extends Manager {
 		badgeInformation.setMaxSlotValue((int)collectionTable.getCell(slotRow, 6));
 		badgeInformation.setPreReqSlotName(collectionTable.getCell(slotRow, 18).toString());
 		badgeInformation.setSlotName(collectionTable.getCell(slotRow, 3).toString());
+		badgeInformation.setMusic(collectionTable.getCell(slotRow, 24).toString());
 
 		if (hasBadge(player, badgeInformation.beginSlotId)) {
 			sendSystemMessage(creature.getOwner(), "@collection:already_have_slot");
@@ -161,6 +162,7 @@ public class CollectionBadgeManager extends Manager {
 		}
 
 		grantBadge(player, getBeginSlotID(badgeInformation.slotName), badgeInformation.collectionBadgeName, false, badgeInformation.slotName);
+		// TODO: play the sound for getting the collection item, stored in badgeInformation.music
 	}
 
 	public void handleCollectionBadge(CreatureObject creature, String collectionName) {
@@ -326,7 +328,8 @@ public class CollectionBadgeManager extends Manager {
 		private int maxSlotValue = -1;
 		private boolean isHidden = false;
 		private String preReqSlotName = ""; 
-		
+		private String music = "";
+
 		BadgeInformation(PlayerObject player, String collectionBadgeName){
 			this.player = player;
 			this.collectionBadgeName = collectionBadgeName;
@@ -385,5 +388,9 @@ public class CollectionBadgeManager extends Manager {
 		public void setPreReqSlotName(String preReqSlotName) {
 			this.preReqSlotName = preReqSlotName;
 		}
-	}		
+
+		public void setMusic(String music) {
+			this.music = music;
+		}
+	}
 }

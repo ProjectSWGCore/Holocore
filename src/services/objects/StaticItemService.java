@@ -498,8 +498,8 @@ public final class StaticItemService extends Service {
 
 		@Override
 		protected boolean loadTypeAttributes(ResultSet resultSet) throws SQLException {
-			collectionName = resultSet.getString("collection_name");
-			collectionSlotName = resultSet.getString("collection_slot_name");
+			collectionName = "@collection_n:" + resultSet.getString("collection_name");
+			collectionSlotName = "@collection_n:" + resultSet.getString("collection_slot_name");
 
 			return true;
 		}
@@ -507,7 +507,6 @@ public final class StaticItemService extends Service {
 		@Override
 		protected void applyTypeAttributes(SWGObject object) {
 			object.addAttribute("collection_name", collectionName);
-			object.addAttribute("collection_slot_name", collectionSlotName);
 		}
 	}
 	

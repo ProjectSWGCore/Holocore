@@ -33,7 +33,8 @@ import intents.radial.RadialResponseIntent;
 import intents.radial.RadialSelectionIntent;
 import resources.control.Intent;
 import resources.control.Service;
-import resources.objects.collections.ClickyCollection;
+import resources.objects.collections.ClickyCollectionItem;
+import resources.objects.collections.CollectionItem;
 import resources.radial.RadialOption;
 import resources.radial.Radials;
 import resources.server_info.RelationalServerData;
@@ -50,17 +51,20 @@ import java.util.List;
  */
 public class ClickCollectionService extends Service {
 
-    private static final String GET_COLLECTION_ITEMS_SQL = "SELECT iff_template FROM collection_clicky";
+    private static final String GET_CLICKY_COLLECTION_ITEMS_SQL = "SELECT iff_template FROM collection_clicky";
+    private static final String GET_CONSUME_COLLECTION_ITEMS_SQL = "SELECT item_name, iff_template FROM collection";
 
-    private RelationalServerData database;
-    private List<String> collectionItems = new ArrayList<String>();
+    private RelationalServerData clickyDatabase;
+    private RelationalServerData consumeDatabase;
+    private List<String> clickyCollectionItems = new ArrayList<String>();
+    private List<ConsumeCollection> consumeCollectionItems = new ArrayList<>();
 
     public ClickCollectionService() {
-        database = RelationalServerFactory.getServerData("collections/collection_clicky.db", "collection_clicky");
-        if (database == null)
-            throw new main.ProjectSWG.CoreException("Database collection_consume failed to load");
+        createClickyDatabaseConnection();
+        createConsumeDatabaseConnection();
 
-        registerCollectionItems();
+        registerClickyCollectionItems();
+        registerConsumeCollectionItems();
 
         registerForIntent(RadialRequestIntent.TYPE);
         registerForIntent(RadialSelectionIntent.TYPE);
@@ -70,7 +74,9 @@ public class ClickCollectionService extends Service {
     public void onIntentReceived(Intent i) {
         if (i instanceof RadialRequestIntent) {
             String iff = ((RadialRequestIntent) i).getTarget().getTemplate();
-            if (isCollectionItem(iff)) {
+            String itemName = ((RadialRequestIntent) i).getTarget().getStringId().getKey();
+
+            if (isClickyCollectionItem(iff) || isConsumeCollectionItem(itemName, iff)) {
                 RadialRequestIntent rri = (RadialRequestIntent) i;
                 List<RadialOption> options = new ArrayList<RadialOption>(rri.getRequest().getOptions());
                 options.addAll(Radials.getRadialOptions("collection/world_item", rri.getPlayer(), rri.getTarget()));
@@ -79,64 +85,146 @@ public class ClickCollectionService extends Service {
         }
         else if (i instanceof RadialSelectionIntent) {
             String iff = ((RadialSelectionIntent) i).getTarget().getTemplate();
-            if (isCollectionItem(iff)) {
-                new GrantClickyCollectionIntent(((RadialSelectionIntent) i).getPlayer().getCreatureObject(), getCollectionDetails(iff)).broadcast();
+            String itemName = ((RadialSelectionIntent) i).getTarget().getStringId().getKey();
+            boolean isClicky = isClickyCollectionItem(iff);
+
+            if (isClicky || isConsumeCollectionItem(itemName, iff)) {
+                new GrantClickyCollectionIntent(((RadialSelectionIntent) i).getPlayer().getCreatureObject(), getCollectionDetails(iff, isClicky)).broadcast();
             }
         }
     }
 
-    private void registerCollectionItems() {
-        try (ResultSet set = database.executeQuery(GET_COLLECTION_ITEMS_SQL)) {
+    private void registerClickyCollectionItems() {
+        try (ResultSet set = clickyDatabase.executeQuery(GET_CLICKY_COLLECTION_ITEMS_SQL)) {
             while (set.next()) {
                 String iff = set.getString("iff_template");
-                if (!collectionItems.contains(iff)) {
-                    collectionItems.add(iff);
+                if (!clickyCollectionItems.contains(iff)) {
+                    clickyCollectionItems.add(iff);
                 }
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
 
-        database.close();
+        clickyDatabase.close();
     }
 
-    private ClickyCollection getCollectionDetails(String iff) {
+    private void registerConsumeCollectionItems() {
+        try (ResultSet set = consumeDatabase.executeQuery(GET_CONSUME_COLLECTION_ITEMS_SQL)) {
+            while (set.next()) {
+                ConsumeCollection collection = new ConsumeCollection(set.getString("item_name"), set.getString("iff_template"));
+                if (!consumeCollectionItems.contains(collection)) {
+                    consumeCollectionItems.add(collection);
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        consumeDatabase.close();
+    }
+
+    private CollectionItem getCollectionDetails(String iff, boolean isClicky) {
+        if (isClicky)
+            return getClickyCollectionDetails(iff);
+        else
+            return getCollectionDetails(iff);
+    }
+
+    private CollectionItem getCollectionDetails(String iff) {
         String cleanedIff = cleanIff(iff);
-        ClickyCollection collection = null;
+        CollectionItem collection = null;
 
         try {
-            createDatabaseConnection();
+            createConsumeDatabaseConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        try (PreparedStatement prepStatement = database.prepareStatement("SELECT * FROM collection_clicky WHERE iff_template=?")) {
+        try (PreparedStatement prepStatement = consumeDatabase.prepareStatement("SELECT * FROM collection WHERE iff_template=?")) {
             prepStatement.setString(1, cleanedIff);
             ResultSet set = prepStatement.executeQuery();
 
             while (set.next()) {
-                collection = new ClickyCollection(set.getString("slotName"), set.getString("collectionName"), set.getInt("object_id"), set.getString("iff_template"), set.getString("terrain"), set.getDouble("x"), set.getDouble("y"));
+                collection = new CollectionItem(set.getString("collection_slot_name"), set.getString("collection_name"), set.getString("iff_template"));
             }
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         return collection;
     }
 
-    private boolean isCollectionItem(String iff) {
+    private ClickyCollectionItem getClickyCollectionDetails(String iff) {
+        String cleanedIff = cleanIff(iff);
+        ClickyCollectionItem collection = null;
+
+        try {
+            createClickyDatabaseConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try (PreparedStatement prepStatement = clickyDatabase.prepareStatement("SELECT * FROM collection_clicky WHERE iff_template=?")) {
+            prepStatement.setString(1, cleanedIff);
+            ResultSet set = prepStatement.executeQuery();
+
+            while (set.next()) {
+                collection = new ClickyCollectionItem(set.getString("slotName"), set.getString("collectionName"), set.getInt("object_id"), set.getString("iff_template"), set.getString("terrain"), set.getDouble("x"), set.getDouble("y"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return collection;
+    }
+
+    private boolean isClickyCollectionItem(String iff) {
         String cleanedIff = iff.replace("shared_", "");
-        return collectionItems.contains(cleanedIff);
+        return clickyCollectionItems.contains(cleanedIff);
+    }
+
+    private boolean isConsumeCollectionItem(String itemName, String iffTemplate) {
+        ConsumeCollection collection = new ConsumeCollection(itemName, iffTemplate);
+        return isConsumeCollectionItem(collection);
+    }
+
+    private boolean isConsumeCollectionItem(ConsumeCollection collection) {
+        collection.iffTemplate = collection.iffTemplate.replace("shared_", "");
+        return consumeCollectionItems.contains(collection);
     }
 
     private String cleanIff(String iff) {
         return iff.replace("shared_", "");
     }
 
-    private void createDatabaseConnection() throws SQLException {
-        database = RelationalServerFactory.getServerData("collections/collection_clicky.db", "collection_clicky");
-        if (database == null)
-            throw new main.ProjectSWG.CoreException("Database collection_consume failed to load");
+    private void createConsumeDatabaseConnection() throws SQLException {
+        consumeDatabase = RelationalServerFactory.getServerData("items/collection.db", "collection");
+        if (consumeDatabase == null)
+            throw new main.ProjectSWG.CoreException("Database collection failed to load");
+    }
+
+    private void createClickyDatabaseConnection() throws SQLException {
+        clickyDatabase = RelationalServerFactory.getServerData("collections/collection_clicky.db", "collection_clicky");
+        if (clickyDatabase == null)
+            throw new main.ProjectSWG.CoreException("Database collection_clicky failed to load");
+    }
+
+    private class ConsumeCollection {
+        private String itemName;
+        private String iffTemplate;
+
+        public ConsumeCollection(String itemName, String iffTemplate) {
+            this.itemName = itemName;
+            this.iffTemplate = iffTemplate;
+        }
+
+        public boolean equals(Object o) {
+            if (o instanceof ConsumeCollection)
+                return itemName.equals(((ConsumeCollection)o).itemName) && iffTemplate.equals(((ConsumeCollection)o).iffTemplate);
+            else
+                return false;
+        }
     }
 }

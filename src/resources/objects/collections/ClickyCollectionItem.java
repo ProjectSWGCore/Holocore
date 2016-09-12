@@ -1,4 +1,3 @@
-package resources.objects.collections;
 /***********************************************************************************
  * Copyright (c) 2015 /// Project SWG /// www.projectswg.com                        *
  *                                                                                  *
@@ -26,43 +25,21 @@ package resources.objects.collections;
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
  ***********************************************************************************/
+package resources.objects.collections;
 
 /**
  * Created by Yakattak on 9/8/16.
  */
-public class ClickyCollection {
-    private String slotName;
-    private String collectionName;
-    private int objectId;
-    private String iffTemplate;
+public class ClickyCollectionItem extends CollectionItem {
     private String terrain;
     private double x;
     private double y;
 
-    public ClickyCollection(String slotName, String collectionName, int objectId, String iffTemplate, String terrain, double x, double y) {
-        this.slotName = slotName;
-        this.collectionName = collectionName;
-        this.objectId = objectId;
-        this.iffTemplate = iffTemplate;
+    public ClickyCollectionItem(String slotName, String collectionName, int objectId, String iffTemplate, String terrain, double x, double y) {
+        super(slotName, collectionName, iffTemplate);
         this.terrain = terrain;
         this.x = x;
         this.y = y;
-    }
-
-    public String getSlotName() {
-        return slotName;
-    }
-
-    public String getCollectionName() {
-        return collectionName;
-    }
-
-    public int getObjectId() {
-        return objectId;
-    }
-
-    public String getIffTemplate() {
-        return iffTemplate;
     }
 
     public String getTerrain() {
