@@ -119,15 +119,23 @@ public class EntertainmentService extends Service {
 	private void handleDanceIntent(DanceIntent i) {
 		CreatureObject dancer = i.getCreatureObject();
 		String danceName = i.getDanceName();
-
+		
 		if (i.isStartDance()) {
 			// This intent wants the creature to start dancing
-			if (dancer.isPerforming()) {
+			// If we're changing dance, allow them to do so
+			boolean changeDance = i.isChangeDance();
+			
+			if (!changeDance && dancer.isPerforming()) {
 				new ChatBroadcastIntent(dancer.getOwner(), "@performance:already_performing_self").broadcast();
 			} else if (performanceMap.containsKey(danceName)) {
 				// The dance name is valid.
 				if (dancer.hasAbility("startDance+" + danceName)) {
-					startDancing(dancer, danceName);
+					
+					if(changeDance) {	// If they're changing dance, we just need to change their animation.
+						changeDance(dancer, danceName);
+					} else {	// Otherwise, they should begin performing now
+						startDancing(dancer, danceName);
+					}
 				} else {
 					// This creature doesn't have the ability to perform this dance.
 					new ChatBroadcastIntent(dancer.getOwner(), "@performance:dance_lack_skill_self").broadcast();
@@ -171,7 +179,6 @@ public class EntertainmentService extends Service {
 		Player performer = i.getPerformer();
 		CreatureObject performerObject = performer.getCreatureObject();
 		
-		// TODO performance counter check
 		performerObject.setPerformanceCounter(performerObject.getPerformanceCounter() + 1);
 		
 		// Send the flourish animation to the owner of the creature and owners of creatures observing
@@ -243,10 +250,15 @@ public class EntertainmentService extends Service {
 			new ChatBroadcastIntent(dancer.getOwner(), "@performance:dance_not_performing").broadcast();
 		}
 	}
+	
+	private void changeDance(CreatureObject dancer, String newPerformanceName) {
+		performerMap.get(dancer).setPerformanceName(newPerformanceName);
+		dancer.setAnimation("dance_" + performanceMap.get(newPerformanceName).getPerformanceId());
+	}
 
 	private class Performance {
 		private final Future<?> future;
-		private final String performanceName;
+		private String performanceName;
 
 		public Performance(Future<?> future, String performanceName) {
 			this.future = future;
@@ -259,6 +271,10 @@ public class EntertainmentService extends Service {
 
 		public String getPerformanceName() {
 			return performanceName;
+		}
+
+		public void setPerformanceName(String performanceName) {
+			this.performanceName = performanceName;
 		}
 		
 	}
