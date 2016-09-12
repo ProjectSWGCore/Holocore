@@ -34,6 +34,7 @@ import java.util.BitSet;
 import intents.GrantBadgeIntent;
 import intents.GrantClickyCollectionIntent;
 import intents.object.DestroyObjectIntent;
+import network.packets.swg.zone.PlayMusicMessage;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
 import resources.control.Intent;
@@ -53,7 +54,7 @@ public class CollectionBadgeManager extends Manager {
 	// TODO clearon complete (repeatable)
 	// TODO track server first
 	// TODO research categories
-	// TODO music + sound/utinni.snd
+	// TODO play music file stored in collection.iff column "music"
 	// TODO fix to appropriate message ex: kill_merek_activation_01
 
 	private final ExplorationBadgeService explorationBadgeService;
@@ -274,8 +275,10 @@ public class CollectionBadgeManager extends Manager {
 
 		if (hidden) {
 			sendSystemMessage(thisplayer, "@collection:player_hidden_slot_added", "TO", "@collection_n:" + collectionName);
+			sendPacket(thisplayer, new PlayMusicMessage(0, "sound/utinni.snd", 1, false));
 		} else {
 			sendSystemMessage(thisplayer, "@collection:player_slot_added", "TU", "@collection_n:" + slotName, "TO", "@collection_n:" + collectionName);
+			sendPacket(thisplayer, new PlayMusicMessage(0, "sound/utinni.snd", 1, false));
 		}
 		if (collectionComplete) {
 			sendSystemMessage(thisplayer, "@collection:player_collection_complete", "TO", "@collection_n:" + collectionName);
