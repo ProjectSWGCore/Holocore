@@ -358,7 +358,7 @@ public class EntertainmentService extends Service {
 	}
 	
 	private void changeDance(CreatureObject dancer, String newPerformanceName) {
-		performerMap.get(dancer).setPerformanceName(newPerformanceName);
+		performerMap.get(dancer.getObjectId()).setPerformanceName(newPerformanceName);
 		dancer.setAnimation("dance_" + performanceMap.get(newPerformanceName).getPerformanceId());
 	}
 
