@@ -279,7 +279,7 @@ public class EntertainmentService extends Service {
 				if(performance.removeSpectator(movedPlayer)) {
 					stopWatching(movedPlayer, true);
 				} else {
-					Log.w(this, "%s ran out of range of %, but couldn't stop watching because they weren't watching in the first place", movedPlayer, performer);
+					Log.w(this, "%s ran out of range of %s, but couldn't stop watching because they weren't watching in the first place", movedPlayer, performer);
 				}
 			}
 		}
