@@ -1,6 +1,6 @@
+
 /************************************************************************************
  * Copyright (c) 2015 /// Project SWG /// www.projectswg.com                        *
- *                                                                                  *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on           *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies.  *
  * Our goal is to create an emulator which will provide a server for players to     *
@@ -24,46 +24,33 @@
  * You should have received a copy of the GNU Affero General Public License         *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
- ***********************************************************************************/
-package utilities;
+ ************************************************************************************/
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
+package resources.objects.collections;
 
-public class ScheduledUtilities {
-	
-	private static final Object mutex = new Object();
-	private static ScheduledExecutorService executor;
-	
-	private ScheduledUtilities() {
-		
+/**
+ * Created by skylerlehan on 9/11/16.
+ */
+public class CollectionItem {
+	private String slotName;
+	private String collectionName;
+	private String iffTemplate;
+
+	public CollectionItem(String slotName, String collectionName, String iffTemplate) {
+		this.slotName = slotName;
+		this.collectionName = collectionName;
+		this.iffTemplate = iffTemplate;
 	}
-	
-	private static ScheduledExecutorService getScheduler() {
-		synchronized (mutex) {
-			if (executor == null) {
-				int processors = Runtime.getRuntime().availableProcessors();
-				executor = Executors.newScheduledThreadPool(processors, ThreadUtilities.newThreadFactory("scheduled-utilities-%d"));
-				Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-					executor.shutdown();
-				}));
-			}
-			return executor;
-		}
+
+	public String getSlotName() {
+		return slotName;
 	}
-	
-	public static ScheduledFuture<?> scheduleAtFixedRate(Runnable r, long initialDelay, long period, TimeUnit unit) {
-		return getScheduler().scheduleAtFixedRate(r, initialDelay, period, unit);
+
+	public String getCollectionName() {
+		return collectionName;
 	}
-	
-	public static ScheduledFuture<?> scheduleWithFixedDelay(Runnable r, long initialDelay, long delay, TimeUnit unit) {
-		return getScheduler().scheduleWithFixedDelay(r, initialDelay, delay, unit);
+
+	public String getIffTemplate() {
+		return iffTemplate;
 	}
-	
-	public static ScheduledFuture<?> run(Runnable r, long delay, TimeUnit unit) {
-		return getScheduler().schedule(r, delay, unit);
-	}
-	
 }

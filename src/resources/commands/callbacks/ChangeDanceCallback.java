@@ -28,59 +28,23 @@
  */
 package resources.commands.callbacks;
 
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
-import resources.commands.ICmdCallback;
+import intents.chat.ChatBroadcastIntent;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
-import resources.sui.SuiButtons;
-import resources.sui.SuiEvent;
-import resources.sui.SuiListBox;
 import services.galaxy.GalacticManager;
 
-public class StartDanceCallback implements ICmdCallback {
-	
-	private static final String ABILITY_NAME_PREFIX = "startDance+";
+public class ChangeDanceCallback extends StartDanceCallback {
 	
 	@Override
 	public void execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
-		handleCommand(galacticManager, player, target, args, false);
-	}
-	
-	protected void handleCommand(GalacticManager galacticManager, Player player, SWGObject target, String args, boolean changeDance) {
-		CreatureObject creatureObject = player.getCreatureObject();
+		CreatureObject actor = player.getCreatureObject();
 		
-		// Not sure if args can ever actually be null. Better safe than sorry.
-		if (args == null || args.isEmpty()) {
-			// If no args are given, then bring up the SUI window for dance selection.
-			SuiListBox listBox = new SuiListBox(SuiButtons.OK_CANCEL, "@performance:select_dance", "@performance:available_dances");
-			Set<String> abilityNames = creatureObject.getAbilityNames();
-
-			for (String abilityName : abilityNames) {
-				if (abilityName.startsWith(ABILITY_NAME_PREFIX)) {
-					String displayName = abilityName.replace(ABILITY_NAME_PREFIX, "");
-					String firstCharacter = displayName.substring(0, 1);
-					String otherCharacters = displayName.substring(1, displayName.length());
-
-					listBox.addListItem(firstCharacter.toUpperCase(Locale.ENGLISH) + otherCharacters);
-				}
-			}
-
-			listBox.addOkButtonCallback("handleSelectedItem", new resources.sui.ISuiCallback() {
-				@Override
-				public void handleEvent(Player player, SWGObject actor, SuiEvent event, Map<String, String> parameters) {
-					int selection = SuiListBox.getSelectedRow(parameters);
-					String selectedDanceName = listBox.getListItem(selection).getName().toLowerCase(Locale.ENGLISH);
-
-					new intents.DanceIntent(selectedDanceName, player.getCreatureObject(), changeDance).broadcast();
-				}
-			});
-
-			listBox.display(player);
+		if(actor.isPerforming()) {	// They need to be dancing in the first place!
+			super.handleCommand(galacticManager, player, target, args, true);
 		} else {
-			new intents.DanceIntent(args, player.getCreatureObject(), changeDance).broadcast();
+			new ChatBroadcastIntent(player, "@performance:dance_must_be_performing_self").broadcast();
 		}
 	}
+	
 }
