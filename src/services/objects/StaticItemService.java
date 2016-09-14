@@ -126,7 +126,7 @@ public final class StaticItemService extends Service {
 						case "armor": objectAttributes = new ArmorAttributes(itemName, iffTemplate); break;
 						case "weapon": objectAttributes = new WeaponAttributes(itemName, iffTemplate); break;
 						case "wearable": objectAttributes = new WearableAttributes(itemName, iffTemplate);	break;
-						case "collection":	// TODO implement
+						case "collection": objectAttributes = new CollectionAttributes(itemName, iffTemplate); break;
 						case "consumable":	// TODO implement
 						case "costume":	// TODO implement
 						case "dna":	// TODO implement
