@@ -33,6 +33,7 @@ import intents.PlayerEventIntent;
 import intents.WatchIntent;
 import intents.chat.ChatBroadcastIntent;
 import intents.experience.ExperienceIntent;
+import intents.player.PlayerTransformedIntent;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -42,6 +43,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import network.packets.swg.zone.object_controller.Animation;
+import resources.Location;
 import resources.Posture;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
@@ -62,6 +64,7 @@ public class EntertainmentService extends Service {
 
 	// TODO: when performing, make NPCs in a radius of x look towards the player (?) and clap. When they stop, turn back (?) and stop clapping
 	private static final byte XP_CYCLE_RATE = 10;
+	private static final byte WATCH_RADIUS = 20;
 	
 	private final Map<String, PerformanceData> performanceMap;	// performance names mapped to performance data
 	private final Map<Long, Performance> performerMap;
@@ -77,6 +80,7 @@ public class EntertainmentService extends Service {
 		registerForIntent(PlayerEventIntent.TYPE);
 		registerForIntent(FlourishIntent.TYPE);
 		registerForIntent(WatchIntent.TYPE);
+		registerForIntent(PlayerTransformedIntent.TYPE);
 	}
 
 	@Override
@@ -122,6 +126,9 @@ public class EntertainmentService extends Service {
 				break;
 			case WatchIntent.TYPE:
 				handleWatchIntent((WatchIntent) i);
+				break;
+			case PlayerTransformedIntent.TYPE:
+				handleTransformIntent((PlayerTransformedIntent) i);
 				break;
 		}
 	}
@@ -241,6 +248,33 @@ public class EntertainmentService extends Service {
 		}
 	}
 	
+	private void handleTransformIntent(PlayerTransformedIntent i) {
+		CreatureObject movedPlayer = i.getPlayer();
+		long performanceListenTarget = movedPlayer.getPerformanceListenTarget();
+		
+		if(performanceListenTarget != 0) {
+			// They're watching a performer!
+			
+			Performance performance = performerMap.get(performanceListenTarget);
+			
+			if(performance == null) {
+				Log.e(this, "Couldn't perform range check on %s, because there was no performer with object ID %d", movedPlayer, performanceListenTarget);
+				return;
+			}
+			
+			CreatureObject performer = performance.getPerformer();
+			
+			Location performerLocation = performer.getWorldLocation();
+			Location movedPlayerLocation = i.getPlayer().getWorldLocation();	// Ziggy: The newLocation in PlayerTransformedIntent isn't the world location, which is what we need here
+			
+			if(!movedPlayerLocation.isWithinDistance(performerLocation, WATCH_RADIUS)) {
+				// They moved out of the defined range! Make them stop watching
+				stopWatching(movedPlayer, true);
+			}
+		}
+		
+	}
+	
 	/**
 	 * Checks if the {@code CreatureObject} is a Novice Entertainer.
 	 * @param performer
@@ -261,7 +295,7 @@ public class EntertainmentService extends Service {
 				Performance performance = performerMap.get(performerId);
 				performance.setFuture(future);
 			} else {
-				performerMap.put(performer.getObjectId(), new Performance(future, performanceName));
+				performerMap.put(performer.getObjectId(), new Performance(performer, future, performanceName));
 			}
 		}
 	}
@@ -329,14 +363,20 @@ public class EntertainmentService extends Service {
 	}
 	
 	private class Performance {
+		private final CreatureObject performer;
 		private Future<?> future;
 		private final String performanceName;
 		private final Set<CreatureObject> audience;
 
-		public Performance(Future<?> future, String performanceName) {
+		public Performance(CreatureObject performer, Future<?> future, String performanceName) {
+			this.performer = performer;
 			this.future = future;
 			this.performanceName = performanceName;
 			audience = new HashSet<>();
+		}
+
+		public CreatureObject getPerformer() {
+			return performer;
 		}
 
 		public Future<?> getFuture() {
