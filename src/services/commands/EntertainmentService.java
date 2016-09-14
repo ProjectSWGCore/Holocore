@@ -276,7 +276,11 @@ public class EntertainmentService extends Service {
 			
 			if(!movedPlayerLocation.isWithinDistance(performerLocation, WATCH_RADIUS)) {
 				// They moved out of the defined range! Make them stop watching
-				stopWatching(movedPlayer, true);
+				if(performance.removeSpectator(movedPlayer)) {
+					stopWatching(movedPlayer, true);
+				} else {
+					Log.w(this, "%s ran out of range of %s, but couldn't stop watching because they weren't watching in the first place", movedPlayer, performer);
+				}
 			}
 		}
 		
