@@ -215,7 +215,6 @@ public final class StaticItemService extends Service {
 		private boolean unique;
 		private String conditionString;
 		private int volume;
-		private String requiredLevel;
 		// TODO bio-link
 		// TODO buff to give. Seen on consumables and wearables: worn_item_buff, buff_name? Seen as "Effect Name:"
 		private final String itemName;
@@ -243,7 +242,6 @@ public final class StaticItemService extends Service {
 			int hitPoints = resultSet.getInt("hit_points");
 			conditionString = String.format("%d/%d", hitPoints, hitPoints);
 			volume = resultSet.getInt("volume");
-			requiredLevel = String.valueOf(resultSet.getShort("required_level"));
 
 			// load type-specific attributes
 			return loadTypeAttributes(resultSet);
@@ -274,8 +272,7 @@ public final class StaticItemService extends Service {
 				object.addAttribute("unique", "1");
 			object.addAttribute("condition", conditionString);
 			object.addAttribute("volume", String.valueOf(volume));
-			object.addAttribute("required_combat_level", requiredLevel);
-
+			
 			// apply type-specific attributes
 			applyTypeAttributes(object);
 		}
@@ -300,6 +297,7 @@ public final class StaticItemService extends Service {
 
 		// TODO skillmods/statmods
 		private String requiredProfession;
+		private String requiredLevel;
 		private String requiredFaction;
 		// TODO species restriction
 		// TODO customisation variables, ie. for colours
@@ -310,6 +308,7 @@ public final class StaticItemService extends Service {
 
 		@Override
 		protected boolean loadTypeAttributes(ResultSet resultSet) throws SQLException {
+			requiredLevel = String.valueOf(resultSet.getShort("required_level"));
 			requiredProfession = resultSet.getString("required_profession");
 			if (requiredProfession.equals("none")) {
 				// Ziggy: This value is not defined in any String Table File.
@@ -317,7 +316,6 @@ public final class StaticItemService extends Service {
 			} else {
 				requiredProfession = "@ui_roadmap:title_" + requiredProfession;
 			}
-
 			requiredFaction = resultSet.getString("required_faction");
 
 			if (requiredFaction.equals("none")) {
@@ -333,6 +331,7 @@ public final class StaticItemService extends Service {
 		@Override
 		protected void applyTypeAttributes(SWGObject object) {
 			object.addAttribute("class_required", requiredProfession);
+			object.addAttribute("required_combat_level", requiredLevel);
 			object.addAttribute("faction_restriction", requiredFaction);
 		}
 
@@ -340,6 +339,7 @@ public final class StaticItemService extends Service {
 
 	private static final class ArmorAttributes extends WearableAttributes {
 
+		private String requiredLevel;
 		private String armorCategory;
 		private String kinetic, energy, elementals;
 		private float protectionWeight;
@@ -355,7 +355,7 @@ public final class StaticItemService extends Service {
 			if (!wearableAttributesLoaded) {
 				return false;
 			}
-
+			requiredLevel = String.valueOf(resultSet.getShort("required_level"));
 			String armorType = resultSet.getString("armor_category");
 			protectionWeight = resultSet.getFloat("protection");
 
@@ -387,6 +387,7 @@ public final class StaticItemService extends Service {
 		@Override
 		protected void applyTypeAttributes(SWGObject object) {
 			super.applyTypeAttributes(object);
+			object.addAttribute("required_combat_level", requiredLevel);
 			object.addAttribute("armor_category", armorCategory);
 			object.addAttribute("cat_armor_standard_protection.kinetic", kinetic);
 			object.addAttribute("cat_armor_standard_protection.energy", energy);
@@ -404,6 +405,7 @@ public final class StaticItemService extends Service {
 
 	private static final class WeaponAttributes extends WearableAttributes {
 
+		private String requiredLevel;
 		private WeaponType category;
 		private String weaponCategory;
 		private String damageType;
@@ -450,6 +452,7 @@ public final class StaticItemService extends Service {
 					return false;
 			}
 
+			requiredLevel = String.valueOf(resultSet.getShort("required_level"));
 			weaponCategory = "@obj_attr_n:wpn_category_" + String.valueOf(category.getNum());
 			damageType = "@obj_attr_n:" + resultSet.getString("damage_type");
 			attackSpeed = resultSet.getFloat("attack_speed") / 100;
@@ -478,6 +481,7 @@ public final class StaticItemService extends Service {
 		@Override
 		protected void applyTypeAttributes(SWGObject object) {
 			super.applyTypeAttributes(object);
+			object.addAttribute("required_combat_level", requiredLevel);
 			object.addAttribute("cat_wpn_damage.wpn_damage_type", damageType);
 			object.addAttribute("cat_wpn_damage.wpn_category", weaponCategory);
 			object.addAttribute("cat_wpn_damage.wpn_attack_speed", String.valueOf(attackSpeed));
