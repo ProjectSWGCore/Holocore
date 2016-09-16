@@ -12,6 +12,7 @@ function executeCommand(galacticManager, player, target, args) {
 	
 	switch (containerResult) {
 		case ContainerResult.SUCCESS:
+			actor.setEquippedWeapon(target);
 			break;
 		case ContainerResult.CONTAINER_FULL:
 			// TODO container03_prose if container is named

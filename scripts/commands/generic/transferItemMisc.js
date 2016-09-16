@@ -7,11 +7,16 @@ function executeCommand(galacticManager, player, target, args) {
 	
 	var newContainer = galacticManager.getObjectManager().getObjectById(args.split(" ")[1]);
 	var ContainerResult = Java.type("resources.containers.ContainerResult");
+	var WeaponObject = Java.type("resources.objects.weapon.WeaponObject");
 	
 	var containerResult = target.moveToContainer(actor, newContainer);
 	
 	switch (containerResult) {
 		case ContainerResult.SUCCESS:
+			if(target instanceof WeaponObject) {
+				// They just unequipped a weapon. The equipped weapon must now be set to the default weapon.
+				actor.setEquippedWeapon(null);
+			}
 			break;
 		case ContainerResult.CONTAINER_FULL:
 			// TODO container03_prose if container is named
