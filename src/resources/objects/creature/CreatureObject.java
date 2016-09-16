@@ -780,11 +780,7 @@ public class CreatureObject extends TangibleObject {
 				// If they're both players, both of them might be special force
 				if (thisCreature.isPlayer() && otherCreature.isPlayer()) {
 					// They are enemies if they're both players and members of the special force!
-					if (getPvpStatus() == PvpStatus.SPECIALFORCES && otherObject.getPvpStatus() == PvpStatus.SPECIALFORCES) {
-						return true;
-					} else {	// Two players where at least one isn't SF does not make them enemies
-						return false;
-					}
+					return getPvpStatus() == PvpStatus.SPECIALFORCES && otherObject.getPvpStatus() == PvpStatus.SPECIALFORCES;
 				}
 			}
 		}
