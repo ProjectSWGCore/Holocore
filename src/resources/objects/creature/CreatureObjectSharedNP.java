@@ -346,10 +346,28 @@ class CreatureObjectSharedNP implements Persistable {
 		}
 	}
 	
-	public void modifyHealth(int mod, SWGObject target) {
+	public int modifyHealth(int mod, SWGObject target) {
 		synchronized(attributes) {
-			attributes.set(0, getHealth() + mod);
-			attributes.sendDeltaMessage(target);
+			int oldHealth = getHealth();
+			int newHealthValue = oldHealth + mod;
+			int maxHealth = getMaxHealth();
+			
+			// We can't go above max health
+			if(newHealthValue > maxHealth) {
+				newHealthValue = maxHealth;
+			} else if(newHealthValue < 0) {	// We also can't go below 0 health
+				newHealthValue = 0;
+			}
+			
+			int difference = newHealthValue - oldHealth;
+			
+			// We don't send deltas unnecessarily
+			if(difference != 0) {
+				attributes.set(0, newHealthValue);
+				attributes.sendDeltaMessage(target);
+			}
+
+			return difference;
 		}
 	}
 	
@@ -367,10 +385,28 @@ class CreatureObjectSharedNP implements Persistable {
 		}
 	}
 	
-	public void modifyAction(int mod, SWGObject target) {
+	public int modifyAction(int mod, SWGObject target) {
 		synchronized(attributes) {
-			attributes.set(2, getAction() + mod);
-			attributes.sendDeltaMessage(target);
+			int oldAction = getAction();
+			int newActionValue = oldAction + mod;
+			int maxAction = getMaxAction();
+			
+			// We can't go above max action
+			if(newActionValue > maxAction) {
+				newActionValue = maxAction;
+			} else if(newActionValue < 0) {	// We also can't go below 0 action
+				newActionValue = 0;
+			}
+			
+			int difference = newActionValue - oldAction;
+			
+			// We don't send deltas unnecessarily
+			if(difference != 0) {
+				attributes.set(2, newActionValue);
+				attributes.sendDeltaMessage(target);
+			}
+
+			return difference;
 		}
 	}
 	
@@ -388,10 +424,28 @@ class CreatureObjectSharedNP implements Persistable {
 		}
 	}
 	
-	public void modifyMind(int mod, SWGObject target) {
+	public int modifyMind(int mod, SWGObject target) {
 		synchronized(attributes) {
-			attributes.set(4, getMind() + mod);
-			attributes.sendDeltaMessage(target);
+			int oldMindValue = getMind();
+			int newMindValue = oldMindValue + mod;
+			int maxMind = getMaxMind();
+			
+			// We can't go above max mind
+			if(newMindValue > maxMind) {
+				newMindValue = maxMind;
+			} else if(newMindValue < 0) {	// We also can't go below 0 mind
+				newMindValue = 0;
+			}
+			
+			int difference = newMindValue - oldMindValue;
+			
+			// We don't send deltas unnecessarily
+			if(difference != 0) {
+				attributes.set(4, newMindValue);
+				attributes.sendDeltaMessage(target);
+			}
+
+			return difference;
 		}
 	}
 	
