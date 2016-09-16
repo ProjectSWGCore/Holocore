@@ -36,6 +36,7 @@ import network.packets.swg.zone.UpdatePvpStatusMessage;
 import network.packets.swg.zone.chat.ChatSystemMessage;
 import network.packets.swg.zone.chat.ChatSystemMessage.SystemChatType;
 import intents.FactionIntent;
+import intents.PlayerEventIntent;
 import resources.PvpFaction;
 import resources.PvpFlag;
 import resources.PvpStatus;
@@ -62,20 +63,8 @@ public final class FactionService extends Service {
 	
 	@Override
 	public void onIntentReceived(Intent i) {
-		if(i instanceof FactionIntent) {
-			FactionIntent fi = (FactionIntent) i;
-			
-			switch(fi.getUpdateType()) {
-				case FACTIONUPDATE:
-					handleTypeChange(fi);
-					break;
-				case STATUSUPDATE:
-					handleStatusChange(fi);
-					break;
-				case FLAGUPDATE:
-					handleFlagChange(fi.getTarget());
-					break;
-			}
+		switch(i.getType()) {
+			case FactionIntent.TYPE: handleFactionIntent((FactionIntent) i); break;
 		}
 	}
 	
@@ -92,6 +81,20 @@ public final class FactionService extends Service {
 			success = false;
 		}
 		return super.terminate() && success;
+	}
+	
+	private void handleFactionIntent(FactionIntent i) {
+		switch (i.getUpdateType()) {
+			case FACTIONUPDATE:
+				handleTypeChange(i);
+				break;
+			case STATUSUPDATE:
+				handleStatusChange(i);
+				break;
+			case FLAGUPDATE:
+				handleFlagChange(i.getTarget());
+				break;
+		}
 	}
 	
 	private void sendSystemMessage(TangibleObject target, String message) {
@@ -218,11 +221,8 @@ public final class FactionService extends Service {
 	private int getPvpBitmask(TangibleObject object1, TangibleObject object2) {
 		int pvpBitmask = 0;
 
-		// They CAN be enemies if they're not from the same faction and neither of them are neutral
-		if (object1.getPvpFaction() != object2.getPvpFaction() && object2.getPvpFaction() != PvpFaction.NEUTRAL) {
-			if (object1.getPvpStatus() == PvpStatus.SPECIALFORCES && object2.getPvpStatus() == PvpStatus.SPECIALFORCES) {
-				pvpBitmask |= PvpFlag.AGGRESSIVE.getBitmask() | PvpFlag.ATTACKABLE.getBitmask();
-			}
+		if(object1.isEnemy(object2)) {
+			pvpBitmask |= PvpFlag.AGGRESSIVE.getBitmask() | PvpFlag.ATTACKABLE.getBitmask();
 		}
 		
 		return pvpBitmask;

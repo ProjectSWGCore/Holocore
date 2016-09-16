@@ -237,6 +237,20 @@ public class TangibleObject extends SWGObject {
 		defenders.sendDeltaMessage(this);
 	}
 	
+	public boolean isEnemy(TangibleObject otherObject) {
+		// They CAN be enemies if they're not from the same faction and neither of them are neutral
+		PvpFaction otherFaction = otherObject.getPvpFaction();
+		
+		if (otherFaction != PvpFaction.NEUTRAL && getPvpFaction() != otherFaction) {
+			if (getPvpStatus() != PvpStatus.ONLEAVE && otherObject.getPvpStatus() != PvpStatus.ONLEAVE) {
+				// Both objects are not players. In this case, both just need to be combatants.
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
 	@Override
 	public boolean equals(Object o) {
 		return super.equals(o);

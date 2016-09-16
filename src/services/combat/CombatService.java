@@ -40,6 +40,7 @@ import network.packets.swg.zone.object_controller.ShowFlyText;
 import network.packets.swg.zone.object_controller.ShowFlyText.Scale;
 import network.packets.swg.zone.object_controller.combat.CombatAction;
 import intents.chat.ChatCommandIntent;
+import resources.PvpFaction;
 import resources.PvpFlag;
 import resources.combat.AttackInfoLight;
 import resources.combat.AttackType;
@@ -53,6 +54,7 @@ import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
+import resources.objects.creature.CreatureState;
 import resources.objects.tangible.TangibleObject;
 import resources.objects.weapon.WeaponObject;
 import resources.server_info.Log;
@@ -221,8 +223,14 @@ public class CombatService extends Service {
 			return CombatStatus.NO_WEAPON;
 		if (!(target instanceof TangibleObject))
 			return CombatStatus.INVALID_TARGET;
-		if ((((TangibleObject) target).getPvpFlags() & PvpFlag.ATTACKABLE.getBitmask()) == 0)
+		TangibleObject tangibleTarget = (TangibleObject) target;
+		if(tangibleTarget.getPvpFaction() != PvpFaction.NEUTRAL) {
+			if(!tangibleTarget.isEnemy(source)) {
+				return CombatStatus.INVALID_TARGET;
+			}
+		} else if ((tangibleTarget.getPvpFlags() & PvpFlag.ATTACKABLE.getBitmask()) == 0)
 			return CombatStatus.INVALID_TARGET;
+		
 		CombatStatus status;
 		switch (c.getAttackType()) {
 			case AREA:
