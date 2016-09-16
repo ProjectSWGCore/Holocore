@@ -6,7 +6,7 @@ function executeCommand(galacticManager, player, target, args) {
 	
 	var groupObjectId = player.getCreatureObject().getGroupId();
 	
-	if(groupObjectId === 0) {
+	if(groupObjectId == 0) {
 		// If their group object ID is 0, they're ungrouped. Ungrouped players can't send group messages.
 		return;
 	}
@@ -19,5 +19,5 @@ function executeCommand(galacticManager, player, target, args) {
 	var UpdateType = Java.type("intents.chat.ChatRoomUpdateIntent.UpdateType");
 	
 	new ChatRoomUpdateIntent(player, groupChatPath, groupObjectId, null,
-					args, UpdateType.SEND_MESSAGE).broadcast();
+					args, UpdateType.SEND_MESSAGE, false).broadcast();
 }

@@ -375,9 +375,7 @@ public class GroupService extends Service {
 			}
 
 			sendSystemMessage(sender, "formed_self", "TT", senderCreo.getObjectId());
-
-			new ChatRoomUpdateIntent(getGroupChatPath(group.getObjectId(), CoreManager.getGalaxy().getName()), String.valueOf(group.getObjectId()), null,
-				ChatAvatar.getFromPlayer(senderCreo.getOwner()), null, ChatRoomUpdateIntent.UpdateType.JOIN).broadcast();
+			new ChatRoomUpdateIntent(senderCreo.getOwner(), getGroupChatPath(group.getObjectId(), CoreManager.getGalaxy().getName()), String.valueOf(group.getObjectId()), null, null, ChatRoomUpdateIntent.UpdateType.JOIN, true).broadcast();
 		} else {
 			// Group already exists
 			group = getGroup(senderCreo.getGroupId());
@@ -398,8 +396,7 @@ public class GroupService extends Service {
 		group.addMember(creo);
 		creo.updateGroupInviteData(null, 0, "");
 		
-		new ChatRoomUpdateIntent(getGroupChatPath(group.getObjectId(), CoreManager.getGalaxy().getName()), String.valueOf(group.getObjectId()), null,
-				ChatAvatar.getFromPlayer(player), null, ChatRoomUpdateIntent.UpdateType.JOIN).broadcast();
+		new ChatRoomUpdateIntent(player, getGroupChatPath(group.getObjectId(), CoreManager.getGalaxy().getName()), String.valueOf(group.getObjectId()), null, null, ChatRoomUpdateIntent.UpdateType.JOIN, true).broadcast();
 	}
 	
 	private void handleGroupDecline(Player invitee) {
@@ -481,9 +478,9 @@ public class GroupService extends Service {
 	}
 
 	private void destroyGroup(GroupObject group, Player player) {
-		String galaxy = player.getGalaxyName();
+		String galaxy = CoreManager.getGalaxy().getName();
 		new ChatRoomUpdateIntent(getGroupChatPath(group.getObjectId(), galaxy), String.valueOf(group.getObjectId()), null,
-				ChatAvatar.getSystemAvatar(galaxy), null, ChatRoomUpdateIntent.UpdateType.DESTROY).broadcast();
+				ChatAvatar.getFromPlayer(player), null, ChatRoomUpdateIntent.UpdateType.DESTROY).broadcast();
 
 		Map<String, Long> members = group.getGroupMembers();
 		PlayerManager playerManager = player.getPlayerManager();
@@ -507,9 +504,8 @@ public class GroupService extends Service {
 
 		new ObjectCreatedIntent(group).broadcast();
 
-		String galaxy = player.getGalaxyName();
-		new ChatRoomUpdateIntent(getGroupChatPath(group.getObjectId(), galaxy), String.valueOf(group.getObjectId()), null,
-				ChatAvatar.getSystemAvatar(galaxy), null, ChatRoomUpdateIntent.UpdateType.CREATE).broadcast();
+		String galaxy = CoreManager.getGalaxy().getName();
+		new ChatRoomUpdateIntent(ChatAvatar.getFromPlayer(player), getGroupChatPath(group.getObjectId(), galaxy), String.valueOf(group.getObjectId()), false).broadcast();
 
 		return group;
 	}
