@@ -525,8 +525,7 @@ public class ChatRoomService extends Service {
 		
 		if (room == null)
 			result = ChatResult.ROOM_INVALID_ID;
-		System.out.println("Room result: " + result);
-		System.out.println("player: " + player);
+		
 		if (result != ChatResult.SUCCESS) {
 			player.sendPacket(new ChatOnSendRoomMessage(result.getCode(), sequence));
 			return;
@@ -627,7 +626,7 @@ public class ChatRoomService extends Service {
 		}
 
 		ChatResult result = room.canJoinRoom(avatar, ignoreInvitation);
-		System.out.println(player + " canJoinRoom: " + result);
+		
 		if (result != ChatResult.SUCCESS && player.getAccessLevel() != AccessLevel.PLAYER) {
 			sendOnEnteredChatRoom(player, avatar, result, room.getId(), sequence);
 			return;
