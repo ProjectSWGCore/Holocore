@@ -40,6 +40,7 @@ import network.packets.swg.zone.object_controller.ShowFlyText;
 import network.packets.swg.zone.object_controller.ShowFlyText.Scale;
 import network.packets.swg.zone.object_controller.combat.CombatAction;
 import intents.chat.ChatCommandIntent;
+import java.util.Iterator;
 import resources.PvpFaction;
 import resources.PvpFlag;
 import resources.combat.AttackInfoLight;
@@ -54,7 +55,6 @@ import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
-import resources.objects.creature.CreatureState;
 import resources.objects.tangible.TangibleObject;
 import resources.objects.weapon.WeaponObject;
 import resources.server_info.Log;
@@ -65,10 +65,14 @@ public class CombatService extends Service {
 	
 	private ScheduledExecutorService executor;
 	
-	private Map<Long, CombatCreature> inCombat;
+	private final Map<Long, CombatCreature> inCombat;
+	private final Set<CreatureObject> regeneratingHealthCreatures;	// Only allowed outside of combat
+	private final Set<CreatureObject> regeneratingActionCreatures;	// Always allowed
 	
 	public CombatService() {
 		inCombat = new HashMap<>();
+		regeneratingHealthCreatures = new HashSet<>();
+		regeneratingActionCreatures = new HashSet<>();
 	}
 	
 	@Override
@@ -81,6 +85,7 @@ public class CombatService extends Service {
 	@Override
 	public boolean start() {
 		executor.scheduleAtFixedRate(() -> periodicChecks(), 0, 5, TimeUnit.SECONDS);
+		executor.scheduleAtFixedRate(() -> periodicRegeneration(), 1, 1, TimeUnit.SECONDS);
 		return super.start();
 	}
 	
@@ -121,6 +126,57 @@ public class CombatService extends Service {
 			inCombat.remove(combat.getCreature().getObjectId());
 		}
 		exitCombat(combat.getCreature());
+	}
+	
+	private void periodicRegeneration() {
+		synchronized (regeneratingActionCreatures) {
+			Iterator<CreatureObject> iterator = regeneratingActionCreatures.iterator();
+
+			while (iterator.hasNext()) {
+				regenerationActionTick(iterator.next(), iterator);
+			}
+		}
+
+		synchronized (regeneratingHealthCreatures) {
+			Iterator<CreatureObject> iterator = regeneratingHealthCreatures.iterator();
+
+			while (iterator.hasNext()) {
+				regenerationHealthTick(iterator.next(), iterator);
+			}
+		}
+	}
+	
+	private void regenerationActionTick(CreatureObject creatureObject, Iterator<CreatureObject> iterator) {
+		if(creatureObject.getAction() < creatureObject.getMaxAction()) {
+			int modification = 13;
+			int level = creatureObject.getLevel();
+			
+			if(level > 1) {
+				modification += 4 * level;
+			}
+			
+			
+			if(creatureObject.modifyAction(modification) == 0) {
+				// Their action didn't change, meaning they're maxed out
+				iterator.remove();
+			}
+		}
+	}
+	
+	private void regenerationHealthTick(CreatureObject creatureObject, Iterator<CreatureObject> iterator) {
+		if(creatureObject.getHealth() < creatureObject.getMaxHealth()) {
+			int modification = 40;
+			int level = creatureObject.getLevel();
+			
+			if(level > 1) {
+				modification += 4 * level;
+			}
+			
+			if(creatureObject.modifyHealth(modification) == 0) {
+				// Their health didn't change, meaning they're maxed out
+				iterator.remove();
+			}
+		}
 	}
 	
 	private void processChatCommand(ChatCommandIntent cci) {
@@ -194,11 +250,21 @@ public class CombatService extends Service {
 	
 	private void enterCombat(CreatureObject creature) {
 		creature.setInCombat(true);
+		
+		// If this creature is currently regenerating health, they should stop doing so now
+		synchronized(regeneratingHealthCreatures) {
+			regeneratingHealthCreatures.remove(creature);
+		}
 	}
 	
 	private void exitCombat(CreatureObject creature) {
 		creature.setInCombat(false);
 		creature.clearDefenders();
+		
+		// Once out of combat, we can regenerate health.
+		synchronized(regeneratingHealthCreatures) {
+			regeneratingHealthCreatures.add(creature);
+		}
 	}
 	
 	private boolean handleStatus(CreatureObject source, CombatStatus status) {
