@@ -547,7 +547,7 @@ class CreatureObjectSharedNP implements Persistable {
 	
 	@Override
 	public void save(NetBufferStream stream) {
-		stream.addByte(0);
+		stream.addByte(1);
 		stream.addShort(level);
 		stream.addInt(levelHealthGranted);
 		stream.addAscii(animation);
@@ -565,9 +565,6 @@ class CreatureObjectSharedNP implements Persistable {
 		stream.addBoolean(equippedWeapon != null);
 		if (equippedWeapon != null)
 			SWGObjectFactory.save(equippedWeapon, stream);
-		synchronized (attributes) {
-			stream.addList(attributes, (i) -> stream.addInt(i));
-		}
 		synchronized (maxAttributes) {
 			stream.addList(maxAttributes, (i) -> stream.addInt(i));
 		}
@@ -575,7 +572,13 @@ class CreatureObjectSharedNP implements Persistable {
 	
 	@Override
 	public void read(NetBufferStream stream) {
-		stream.getByte();
+		switch(stream.getByte()) {
+			case 0: readVersion0(stream); break;
+			case 1: readVersion1(stream); break;
+		}
+	}
+	
+	private void readVersion0(NetBufferStream stream) {
 		level = stream.getShort();
 		levelHealthGranted = stream.getInt();
 		animation = stream.getAscii();
@@ -594,6 +597,30 @@ class CreatureObjectSharedNP implements Persistable {
 			equippedWeapon = (WeaponObject) SWGObjectFactory.create(stream);
 		stream.getList((i) -> attributes.set(i, stream.getInt()));
 		stream.getList((i) -> maxAttributes.set(i, stream.getInt()));
+	}
+	
+	private void readVersion1(NetBufferStream stream) {
+		level = stream.getShort();
+		levelHealthGranted = stream.getInt();
+		animation = stream.getAscii();
+		moodAnimation = stream.getAscii();
+		guildId = stream.getInt();
+		lookAtTargetId = stream.getLong();
+		intendedTargetId = stream.getLong();
+		moodId = stream.getByte();
+		costume = stream.getAscii();
+		visible = stream.getBoolean();
+		shownOnRadar = stream.getBoolean();
+		beast = stream.getBoolean();
+		difficulty = CreatureDifficulty.valueOf(stream.getAscii());
+		hologramColour = HologramColour.valueOf(stream.getAscii());
+		if (stream.getBoolean())
+			equippedWeapon = (WeaponObject) SWGObjectFactory.create(stream);
+		stream.getList((i) -> {
+			int maxAttribute = stream.getInt();
+			maxAttributes.set(i, maxAttribute);
+			attributes.set(i, maxAttribute);
+		});
 	}
 	
 }
