@@ -65,12 +65,6 @@ public class TransferItemCallback implements ICmdCallback {
 		SWGObject oldContainer = target.getParent();
 		boolean weapon = target instanceof WeaponObject;
 
-		// You can't equip or unequip non-weapon equipment whilst in combat
-		if (!weapon && actor.isInCombat() && oldContainer.equals(actor)) {
-			// TODO transfer error
-			return;
-		}
-
 		try {
 			SWGObject newContainer = galacticManager.getObjectManager().getObjectById(Long.valueOf(args.split(" ")[1]));
 
@@ -92,6 +86,12 @@ public class TransferItemCallback implements ICmdCallback {
 				return;
 			}
 
+			// You can't equip or unequip non-weapon equipment whilst in combat
+			if (!weapon && actor.isInCombat() && (newContainer.equals(actor) || oldContainer.equals(actor))) {
+				new ChatBroadcastIntent(player, "@base_player:not_while_in_combat").broadcast();
+				return;
+			}
+
 			// A wearable container cannot be the child of a wearable container
 			if (newContainer.getContainerType() == 2 && target.getContainerType() == 2) {
 				new ChatBroadcastIntent(player, "@container_error_message:container12").broadcast();
@@ -100,7 +100,7 @@ public class TransferItemCallback implements ICmdCallback {
 
 			// If armour, they must have the "wear_all_armor" ability
 			if (target.getAttribute("armor_category") != null && !actor.hasAbility("wear_all_armor")) {
-				// TODO transfer error
+				new ChatBroadcastIntent(player, "@base_player:level_too_low").broadcast();
 				return;
 			}
 
