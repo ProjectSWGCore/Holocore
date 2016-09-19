@@ -160,6 +160,9 @@ public class CombatService extends Service {
 				// Their action didn't change, meaning they're maxed out
 				iterator.remove();
 			}
+		} else {
+			// Maxed out - remove 'em
+			iterator.remove();
 		}
 	}
 	
@@ -176,6 +179,9 @@ public class CombatService extends Service {
 				// Their health didn't change, meaning they're maxed out
 				iterator.remove();
 			}
+		} else {
+			// Maxed out - remove 'em
+			iterator.remove();
 		}
 	}
 	
