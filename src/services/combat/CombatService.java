@@ -41,6 +41,7 @@ import network.packets.swg.zone.object_controller.ShowFlyText.Scale;
 import network.packets.swg.zone.object_controller.combat.CombatAction;
 import intents.chat.ChatCommandIntent;
 import java.util.Iterator;
+import resources.Posture;
 import resources.PvpFaction;
 import resources.PvpFlag;
 import resources.combat.AttackInfoLight;
@@ -249,7 +250,7 @@ public class CombatService extends Service {
 		target.addDefender(source);
 		// Note: This will not kill anyone
 		if (target.getHealth() <= info.getDamage())
-			target.setHealth(target.getMaxHealth());
+			doCreatureDeath(target, source);
 		else
 			target.modifyHealth(-info.getDamage());
 	}
@@ -271,6 +272,36 @@ public class CombatService extends Service {
 		synchronized(regeneratingHealthCreatures) {
 			regeneratingHealthCreatures.add(creature);
 		}
+	}
+	
+	private void doCreatureDeath(CreatureObject killedCreature, CreatureObject killer) {
+		killedCreature.setHealth(0);
+		exitCombat(killedCreature);
+		
+		// Let's check if the killer needs to remain in-combat...
+		if(!killer.hasDefenders()) {
+			// They have no active targets they're in combat with, make 'em exit combat
+			exitCombat(killer);
+		}
+		
+		// We need to handle this differently, depending on whether killedCreature is a player or not
+		if(killedCreature.isPlayer()) {
+			// TODO account for AI deathblowing players..?
+			// If it's a player, they need to be incapacitated
+			incapacitatePlayer(killedCreature, killer);
+		} else {
+			// This is just a plain ol' NPC. Die!
+			killCreature(killedCreature, killer);
+		}
+	}
+	
+	private void incapacitatePlayer(CreatureObject incapacitatedPlayer, CreatureObject incapacitator) {
+		incapacitatedPlayer.setPosture(Posture.INCAPACITATED);
+		incapacitatedPlayer.setCounter(15);	// Do we need to count down this?
+	}
+	
+	private void killCreature(CreatureObject killedCreature, CreatureObject killer) {
+		killedCreature.setPosture(Posture.DEAD);
 	}
 	
 	private boolean handleStatus(CreatureObject source, CombatStatus status) {
