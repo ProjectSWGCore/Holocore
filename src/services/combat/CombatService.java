@@ -304,6 +304,10 @@ public class CombatService extends Service {
 			exitCombat(killer);
 		}
 		
+		// The creature should not be able to move or turn.
+		killedCreature.setTurnScale(0);
+		killedCreature.setMovementScale(0);
+		
 		// We need to handle this differently, depending on whether killedCreature is a player or not
 		if(killedCreature.isPlayer()) {
 			// TODO account for AI deathblowing players..?
@@ -332,8 +336,12 @@ public class CombatService extends Service {
 		
 		revivedCreature.setPosture(Posture.UPRIGHT);
 		
+		// The creature is now able to turn around and move
+		revivedCreature.setTurnScale(1);
+		revivedCreature.setMovementScale(1);
+		
 		// Give 'em a percentage of their health and schedule them for HAM regeneration.
-		revivedCreature.setHealth((int) (revivedCreature.getBaseHealth() * 0.1));	// Restores 10% health
+		revivedCreature.setHealth((int) (revivedCreature.getBaseHealth() * 0.1));	// Restores 10% health of their base health
 		synchronized(regeneratingHealthCreatures) {
 			regeneratingHealthCreatures.add(revivedCreature);
 		}
