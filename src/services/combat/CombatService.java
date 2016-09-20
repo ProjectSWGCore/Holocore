@@ -269,20 +269,38 @@ public class CombatService extends Service {
 		creature.setInCombat(false);
 		creature.clearDefenders();
 		
-		// Once out of combat, we can regenerate health.
-		synchronized(regeneratingHealthCreatures) {
-			regeneratingHealthCreatures.add(creature);
+		// Once out of combat, we can regenerate health - unless we're dead or incapacitated!
+		switch(creature.getPosture()) {
+			case DEAD:
+			case INCAPACITATED:
+				// We can't regenerate HAM if we're incapcitated or dead
+				synchronized (regeneratingActionCreatures) {
+					regeneratingActionCreatures.remove(creature);
+				}
+
+				synchronized (regeneratingHealthCreatures) {
+					regeneratingHealthCreatures.remove(creature);
+				}
+				break;
+			default:
+				synchronized (regeneratingActionCreatures) {
+					regeneratingActionCreatures.add(creature);
+				}
+				
+				synchronized (regeneratingHealthCreatures) {
+					regeneratingHealthCreatures.add(creature);
+				}
+				break;
 		}
 	}
 	
 	private void doCreatureDeath(CreatureObject killedCreature, CreatureObject killer) {
 		killedCreature.setHealth(0);
-		exitCombat(killedCreature);
 		killer.removeDefender(killedCreature);
 		
 		// Let's check if the killer needs to remain in-combat...
 		if(!killer.hasDefenders()) {
-			// They have no active targets they're in combat with, make 'em exit combat
+			// They have no active targets they're in combat with, make them exit combat
 			exitCombat(killer);
 		}
 		
@@ -290,19 +308,35 @@ public class CombatService extends Service {
 		if(killedCreature.isPlayer()) {
 			// TODO account for AI deathblowing players..?
 			// If it's a player, they need to be incapacitated
-			incapacitatePlayer(killedCreature, killer);
+			incapacitatePlayer(killedCreature);
 		} else {
 			// This is just a plain ol' NPC. Die!
-			killCreature(killedCreature, killer);
+			killCreature(killedCreature);
 		}
+		
+		exitCombat(killedCreature);
 	}
 	
-	private void incapacitatePlayer(CreatureObject incapacitatedPlayer, CreatureObject incapacitator) {
+	private void incapacitatePlayer(CreatureObject incapacitatedPlayer) {
+		int incapacitationCounter = 15;
 		incapacitatedPlayer.setPosture(Posture.INCAPACITATED);
-		incapacitatedPlayer.setCounter(15);	// Do we need to count down this?
+		incapacitatedPlayer.setCounter(incapacitationCounter);
+		
+		// Once the incapacitation counter expires, revive them.
+		executor.schedule(() -> revivePlayer(incapacitatedPlayer), incapacitationCounter, TimeUnit.SECONDS);
 	}
 	
-	private void killCreature(CreatureObject killedCreature, CreatureObject killer) {
+	private void revivePlayer(CreatureObject deadPlayer) {
+		deadPlayer.setCounter(0);
+		deadPlayer.setPosture(Posture.UPRIGHT);
+		
+		// Give 'em a percentage of their health and schedule them for HAM regeneration.
+		// TODO give them a bit of health
+		regeneratingHealthCreatures.add(deadPlayer);
+		regeneratingActionCreatures.add(deadPlayer);
+	}
+	
+	private void killCreature(CreatureObject killedCreature) {
 		killedCreature.setPosture(Posture.DEAD);
 	}
 	
