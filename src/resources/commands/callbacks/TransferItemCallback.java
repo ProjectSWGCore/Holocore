@@ -85,9 +85,11 @@ public class TransferItemCallback implements ICmdCallback {
 				new ChatBroadcastIntent(player, "@container_error_message:container11").broadcast();
 				return;
 			}
-
+			
+			SWGObject appearanceInventory = actor.getSlottedObject("appearance_inventory");
+			
 			// You can't equip or unequip non-weapon equipment whilst in combat
-			if (!weapon && actor.isInCombat() && (newContainer.equals(actor) || oldContainer.equals(actor))) {
+			if (!weapon && actor.isInCombat() && ((newContainer.equals(actor) || oldContainer.equals(actor)) || (newContainer.equals(appearanceInventory) || oldContainer.equals(appearanceInventory)))) {
 				new ChatBroadcastIntent(player, "@base_player:not_while_in_combat").broadcast();
 				return;
 			}
@@ -105,7 +107,7 @@ public class TransferItemCallback implements ICmdCallback {
 			}
 
 			// Only empty containers can be Appearance Equipped
-			if (newContainer.equals(actor.getSlottedObject("appearance_inventory"))) {
+			if (newContainer.equals(appearanceInventory)) {
 				if(targetGameObjectType == GameObjectType.GOT_MISC_CONTAINER_WEARABLE && !target.getContainedObjects().isEmpty()) {
 					// Don't be fooled - the message below contains no prose keys
 					new ChatBroadcastIntent(player, "@container_error_message:container33_prose").broadcast();
