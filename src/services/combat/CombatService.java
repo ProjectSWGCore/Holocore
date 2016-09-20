@@ -323,17 +323,19 @@ public class CombatService extends Service {
 		incapacitatedPlayer.setCounter(incapacitationCounter);
 		
 		// Once the incapacitation counter expires, revive them.
-		executor.schedule(() -> revivePlayer(incapacitatedPlayer), incapacitationCounter, TimeUnit.SECONDS);
+		executor.schedule(() -> reviveCreature(incapacitatedPlayer), incapacitationCounter, TimeUnit.SECONDS);
 	}
 	
-	private void revivePlayer(CreatureObject deadPlayer) {
-		deadPlayer.setCounter(0);
-		deadPlayer.setPosture(Posture.UPRIGHT);
+	private void reviveCreature(CreatureObject revivedCreature) {
+		if(revivedCreature.isPlayer())
+			revivedCreature.setCounter(0);
+		
+		revivedCreature.setPosture(Posture.UPRIGHT);
 		
 		// Give 'em a percentage of their health and schedule them for HAM regeneration.
-		// TODO give them a bit of health
-		regeneratingHealthCreatures.add(deadPlayer);
-		regeneratingActionCreatures.add(deadPlayer);
+		revivedCreature.setHealth((int) (revivedCreature.getBaseHealth() * 0.1));	// Restores 10% health
+		regeneratingHealthCreatures.add(revivedCreature);
+		regeneratingActionCreatures.add(revivedCreature);
 	}
 	
 	private void killCreature(CreatureObject killedCreature) {
