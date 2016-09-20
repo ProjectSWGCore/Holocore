@@ -40,6 +40,7 @@ import network.packets.swg.zone.object_controller.ShowFlyText;
 import network.packets.swg.zone.object_controller.ShowFlyText.Scale;
 import network.packets.swg.zone.object_controller.combat.CombatAction;
 import intents.chat.ChatCommandIntent;
+import intents.combat.CreatureKilledIntent;
 import java.util.Iterator;
 import resources.Posture;
 import resources.PvpFaction;
@@ -353,6 +354,7 @@ public class CombatService extends Service {
 	
 	private void killCreature(CreatureObject killedCreature) {
 		killedCreature.setPosture(Posture.DEAD);
+		new CreatureKilledIntent(killedCreature).broadcast();
 	}
 	
 	private boolean handleStatus(CreatureObject source, CombatStatus status) {
