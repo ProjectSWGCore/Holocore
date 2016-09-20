@@ -248,6 +248,7 @@ public class CombatService extends Service {
 		if (!target.isInCombat())
 			enterCombat(target);
 		target.addDefender(source);
+		source.addDefender(target);
 		// Note: This will not kill anyone
 		if (target.getHealth() <= info.getDamage())
 			doCreatureDeath(target, source);
