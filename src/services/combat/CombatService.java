@@ -327,6 +327,8 @@ public class CombatService extends Service {
 		incapacitatedPlayer.setPosture(Posture.INCAPACITATED);
 		incapacitatedPlayer.setCounter(incapacitationCounter);
 		
+		Log.i(this, "%s was incapacitated", incapacitatedPlayer);
+		
 		// Once the incapacitation counter expires, revive them.
 		executor.schedule(() -> reviveCreature(incapacitatedPlayer), incapacitationCounter, TimeUnit.SECONDS);
 	}
@@ -350,10 +352,13 @@ public class CombatService extends Service {
 		synchronized(regeneratingActionCreatures) {
 			regeneratingActionCreatures.add(revivedCreature);
 		}
+		
+		Log.i(this, "% was revived", revivedCreature);
 	}
 	
 	private void killCreature(CreatureObject killedCreature) {
 		killedCreature.setPosture(Posture.DEAD);
+		Log.i(this, "%s was killed", killedCreature);
 		new CreatureKilledIntent(killedCreature).broadcast();
 	}
 	
