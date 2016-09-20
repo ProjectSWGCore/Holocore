@@ -278,6 +278,7 @@ public class CombatService extends Service {
 	private void doCreatureDeath(CreatureObject killedCreature, CreatureObject killer) {
 		killedCreature.setHealth(0);
 		exitCombat(killedCreature);
+		killer.removeDefender(killedCreature);
 		
 		// Let's check if the killer needs to remain in-combat...
 		if(!killer.hasDefenders()) {
