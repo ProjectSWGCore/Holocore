@@ -334,8 +334,13 @@ public class CombatService extends Service {
 		
 		// Give 'em a percentage of their health and schedule them for HAM regeneration.
 		revivedCreature.setHealth((int) (revivedCreature.getBaseHealth() * 0.1));	// Restores 10% health
-		regeneratingHealthCreatures.add(revivedCreature);
-		regeneratingActionCreatures.add(revivedCreature);
+		synchronized(regeneratingHealthCreatures) {
+			regeneratingHealthCreatures.add(revivedCreature);
+		}
+		
+		synchronized(regeneratingActionCreatures) {
+			regeneratingActionCreatures.add(revivedCreature);
+		}
 	}
 	
 	private void killCreature(CreatureObject killedCreature) {
