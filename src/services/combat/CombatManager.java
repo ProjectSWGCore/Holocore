@@ -65,12 +65,12 @@ import utilities.ThreadUtilities;
 
 public class CombatManager extends Manager {
 
-	private ScheduledExecutorService executor;
 	private final Map<Long, CombatCreature> inCombat;
 	private final Set<CreatureObject> regeneratingHealthCreatures;	// Only allowed outside of combat
 	private final Set<CreatureObject> regeneratingActionCreatures;	// Always allowed
+	private final CorpseService corpseService;
 	
-	private CorpseService corpseService;
+	private ScheduledExecutorService executor;
 	
 	public CombatManager() {
 		inCombat = new HashMap<>();
