@@ -27,7 +27,6 @@
 ***********************************************************************************/
 package services.spawn;
 
-import intents.combat.CreatureKilledIntent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
