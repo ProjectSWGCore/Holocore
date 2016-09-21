@@ -27,6 +27,7 @@
  ***********************************************************************************/
 package services.combat;
 
+import intents.PlayerEventIntent;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -36,6 +37,8 @@ import intents.object.DestroyObjectIntent;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.creature.CreatureObject;
+import resources.player.Player;
+import resources.server_info.Log;
 import utilities.ThreadUtilities;
 
 /**
@@ -43,7 +46,7 @@ import utilities.ThreadUtilities;
  * they've died. It also lets players clone at a cloning facility.
  * @author mads
  */
-public class CorpseService extends Service {
+public final class CorpseService extends Service {
 	
 	private final ScheduledExecutorService executor;
 	
@@ -62,6 +65,7 @@ public class CorpseService extends Service {
 	public void onIntentReceived(Intent i) {
 		switch(i.getType()) {
 			case CreatureKilledIntent.TYPE: handleCreatureKilledIntent((CreatureKilledIntent) i); break;
+			case PlayerEventIntent.TYPE: handlePlayerEventIntent((PlayerEventIntent) i); break;
 		}
 	}
 	
@@ -74,8 +78,30 @@ public class CorpseService extends Service {
 			// TODO after 30 minutes, force them to clone at the nearest cloning facility
 		} else {
 			// Schedule corpse for removal
-			executor.schedule(() -> new DestroyObjectIntent(killedCreature).broadcast(), 60, TimeUnit.SECONDS);
+			executor.schedule(() -> removeCorpse(killedCreature), 60, TimeUnit.SECONDS);
 		}
+	}
+	
+	private void handlePlayerEventIntent(PlayerEventIntent i) {
+		switch(i.getEvent()) {
+			case PE_DISAPPEAR: handleDisappearedPlayer(i.getPlayer()); break;
+		}
+	}
+	
+	private void handleDisappearedPlayer(Player player) {
+		CreatureObject disappearedCreature = player.getCreatureObject();
+		
+		switch(disappearedCreature.getPosture()) {
+			case DEAD:
+				// If a player is dead when they disappear, we force them to clone
+				// TODO force clone
+				break;
+		}
+	}
+	
+	private void removeCorpse(CreatureObject creatureCorpse) {
+		new DestroyObjectIntent(creatureCorpse).broadcast();
+		Log.i(this, "Corpse of NPC %s was removed from the world", creatureCorpse);
 	}
 	
 }
