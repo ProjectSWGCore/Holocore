@@ -60,6 +60,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import resources.commands.CombatQueue;
+import resources.commands.DefaultPriority;
 
 
 public class CommandService extends Service {
@@ -67,11 +69,13 @@ public class CommandService extends Service {
 	private final Map <Integer, Command>			commands;			// NOTE: CRC's are all lowercased for commands!
 	private final Map <String, Integer>				commandCrcLookup;
 	private final Map <String, List<Command>>		commandByScript;
+	private final Map <Player, CombatQueue>		combatQueueMap;
 	
 	public CommandService() {
 		commands = new HashMap<>();
 		commandCrcLookup = new HashMap<>();
 		commandByScript = new HashMap<>();
+		combatQueueMap = new HashMap<>();
 		
 		registerForIntent(GalacticPacketIntent.TYPE);
 	}
@@ -81,7 +85,13 @@ public class CommandService extends Service {
 		loadBaseCommands();
 		loadCombatCommands();
 		registerCallbacks();
+		
 		return super.initialize();
+	}
+
+	@Override
+	public boolean terminate() {
+		return super.terminate();
 	}
 	
 	@Override
@@ -99,7 +109,7 @@ public class CommandService extends Service {
 		}
 	}
 	
-	private void handleCommandRequest(Player player, GalacticManager galacticManager, CommandQueueEnqueue request) {
+	private void handleCommandRequest(final Player player, final GalacticManager galacticManager, final CommandQueueEnqueue request) {
 		if (!commandExists(request.getCommandCrc())) {
 			if (request.getCommandCrc() != 0)
 				Log.e("CommandService", "Invalid command crc: %x", request.getCommandCrc());
@@ -107,15 +117,32 @@ public class CommandService extends Service {
 		}
 		
 		Command command = getCommand(request.getCommandCrc());
-		String [] arguments = request.getArguments().split(" ");
-		SWGObject target = null;
-		if (request.getTargetId() != 0) {
-			target = galacticManager.getObjectManager().getObjectById(request.getTargetId());
+		long targetId = request.getTargetId();
+		final SWGObject target = targetId != 0 ? galacticManager.getObjectManager().getObjectById(targetId) : null;
+		
+		if (command.isAddToCombatQueue()) {
+			// Schedule for later execution
+			CombatQueue combatQueue = combatQueueMap.get(player);
+			
+			if (combatQueue == null) {
+				combatQueue = new CombatQueue((queuedCommand) -> doCommand(galacticManager, player, queuedCommand, target, request));
+			}
+			
+			if (!combatQueue.offer(command)) {
+				Log.e(this, "Unable to enqueue command %s from %s because the queue is full", command.getName(), player.getCreatureObject());
+			}
+		} else {
+			// Execute it now
+			doCommand(galacticManager, player, command, target, request);
 		}
-		
-		executeCommand(galacticManager, player, command, target, request.getArguments());
+	}
+	
+	private void doCommand(GalacticManager galacticManager, Player player, Command command, SWGObject target, CommandQueueEnqueue request) {
+		String argumentString = request.getArguments();
+		String [] arguments = argumentString.split(" ");
+		executeCommand(galacticManager, player, command, target, argumentString);
 		new ChatCommandIntent(player.getCreatureObject(), target, command, arguments).broadcast();
-		
+
 		CommandQueueDequeue dequeue = new CommandQueueDequeue(player.getCreatureObject().getObjectId());
 		dequeue.setCounter(request.getCounter());
 		dequeue.setAction(0);
@@ -186,13 +213,15 @@ public class CommandService extends Service {
 			
 			Command command = new Command((String) cmdRow[0]);
 			command.setCrc(CRC.getCrc(command.getName().toLowerCase(Locale.ENGLISH)));
+			command.setDefaultPriority(DefaultPriority.getDefaultPriority((int) cmdRow[1]));
 			command.setScriptHook((String) cmdRow[2]);
 			command.setCppHook((String)cmdRow[4]);
 			command.setDefaultTime((float) cmdRow[6]);
 			command.setCharacterAbility((String) cmdRow[7]);
 			command.setCombatCommand(false);
+			command.setAddToCombatQueue((boolean) cmdRow[82]);
 			
-			if(godLevel >= 0){
+			if(godLevel >= 0){ 
 				command.setGodLevel((int) cmdRow[godLevel]);
 			}
 			
