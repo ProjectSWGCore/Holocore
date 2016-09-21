@@ -80,9 +80,10 @@ public final class CorpseService extends Service {
 			// TODO show cloning system message
 			// TODO show cloning SUI window, with all possible facilities to clone at
 			// TODO after 30 minutes, close the SUI window and force them to clone at the nearest cloning facility
+			// TODO if the SUI window is closed by the player, make sure it reappears
 		} else {
 			// This is a NPC - schedule corpse for deletion
-			executor.schedule(() -> deleteCorpse(killedCreature), 60, TimeUnit.SECONDS);
+			executor.schedule(() -> deleteCorpse(killedCreature), 120, TimeUnit.SECONDS);
 		}
 	}
 	
@@ -98,6 +99,7 @@ public final class CorpseService extends Service {
 		switch(disappearedCreature.getPosture()) {
 			case DEAD:
 				// If a player is dead when they disappear, we force them to clone at the nearest facility
+				// TODO cancel currently scheduled forced clone
 				// TODO force clone
 				break;
 		}
