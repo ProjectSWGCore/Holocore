@@ -30,12 +30,17 @@ package services.experience;
 import intents.experience.LevelChangedIntent;
 import intents.experience.SkillBoxGrantedIntent;
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import intents.object.CreateStaticItemIntent;
+import intents.object.ObjectCreatedIntent;
 import network.packets.swg.zone.PlayClientEffectObjectMessage;
 import network.packets.swg.zone.PlayMusicMessage;
 import network.packets.swg.zone.object_controller.ShowFlyText;
 import network.packets.swg.zone.object_controller.ShowFlyText.Scale;
+import resources.Race;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
 import resources.common.RGB;
@@ -43,10 +48,13 @@ import resources.control.Intent;
 import resources.control.Service;
 import resources.encodables.OutOfBandPackage;
 import resources.encodables.StringId;
+import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
 import resources.player.Player;
+import resources.rewards.RoadmapReward;
 import resources.server_info.Log;
+import services.objects.ObjectCreator;
 
 /**
  * This is a service that listens for {@link LevelChangedIntent} and grants
@@ -56,7 +64,9 @@ import resources.server_info.Log;
 public final class SkillTemplateService extends Service {
 	
 	private final Map<String, String[]> skillTemplates;
-	
+	private static Map<String, RoadmapReward> rewards = new HashMap<>();
+	private DatatableData rewardsTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/roadmap/item_rewards.iff");
+
 	SkillTemplateService() {
 		skillTemplates = new HashMap<>();
 		registerForIntent(LevelChangedIntent.TYPE);
@@ -72,6 +82,9 @@ public final class SkillTemplateService extends Service {
 			
 			skillTemplates.put(profession, templates);
 		}
+
+		loadRewardItemsIff();
+
 		return super.initialize();
 	}
 
@@ -105,8 +118,8 @@ public final class SkillTemplateService extends Service {
 					new SkillBoxGrantedIntent(skillName, creatureObject).broadcast();
 					playerObject.setProfWheelPosition(skillName);
 					
-					// TODO roadmap reward items
-					
+					giveRewardItems(creatureObject, skillName);
+
 					creatureObject.sendObserversAndSelf(new PlayClientEffectObjectMessage("clienteffect/skill_granted.cef", "", objectId));
 					sendPacket(player, new ShowFlyText(objectId, new StringId("cbt_spam", "skill_up"), Scale.LARGEST, new RGB(Color.GREEN)));
 					sendPacket(player, new PlayMusicMessage(0, "sound/music_acq_bountyhunter.snd", 1, false));
@@ -117,6 +130,46 @@ public final class SkillTemplateService extends Service {
 				sendPacket(player, new ShowFlyText(objectId, new StringId("cbt_spam", "level_up"), Scale.LARGEST, new RGB(Color.BLUE)));
 				Log.d(this, "Level %d has no skillbox - %s is rewarded nothing", level, creatureObject);
 			}
+		}
+	}
+
+	private void giveRewardItems(CreatureObject creatureObject, String skillName) {
+		RoadmapReward reward = rewards.get(skillName);
+		ArrayList<String> items;
+		Race characterRace = creatureObject.getRace();
+		String species = characterRace.getSpecies().toUpperCase();
+
+		if (reward.isUniversalReward())
+			items = reward.getDefaultRewardItems();
+		else if (species.equals("ITHORIAN"))
+			items = reward.getIthorianRewardItems();
+		else if (species.equals("WOOKIEE"))
+			items = reward.getWookieRewardItems();
+		else
+			items = reward.getDefaultRewardItems();
+
+		for (String item : items) {
+			SWGObject inventory = creatureObject.getSlottedObject("inventory");
+
+			if (item.contains(".iff")) {
+				SWGObject nonStaticItem = ObjectCreator.createObjectFromTemplate(ClientFactory.formatToSharedFile(item));
+				new ObjectCreatedIntent(nonStaticItem).broadcast();
+			} else
+				new CreateStaticItemIntent(creatureObject, inventory, item).broadcast();
+		}
+	}
+
+	private void loadRewardItemsIff() {
+		for (int row = 0; row < rewardsTable.getRowCount(); row++) {
+			String roadmapTemplate = rewardsTable.getCell(row, 0).toString();
+			String roadmapSkillName = rewardsTable.getCell(row, 1).toString();
+			String appearanceName = rewardsTable.getCell(row, 2).toString();
+			String stringId = rewardsTable.getCell(row, 3).toString();
+			String itemDefault = rewardsTable.getCell(row, 4).toString();
+			String itemWookiee = rewardsTable.getCell(row, 5).toString();
+			String itemIthorian = rewardsTable.getCell(row, 6).toString();
+
+			rewards.put(roadmapSkillName, new RoadmapReward(roadmapTemplate, roadmapSkillName, appearanceName, stringId, itemDefault, itemWookiee, itemIthorian));
 		}
 	}
 }
