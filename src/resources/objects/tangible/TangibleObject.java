@@ -60,6 +60,7 @@ public class TangibleObject extends SWGObject {
 	private boolean	visibleGmOnly	= true;
 	private byte []	objectEffects	= new byte[0];
 	private int     optionFlags     = 0;
+	private int		counter			= 0;
 	
 	private SWGSet<Long>	defenders	= new SWGSet<>(6, 3);
 	
@@ -237,6 +238,19 @@ public class TangibleObject extends SWGObject {
 		defenders.sendDeltaMessage(this);
 	}
 	
+	public boolean hasDefenders() {
+		return !defenders.isEmpty();
+	}
+
+	public int getCounter() {
+		return counter;
+	}
+
+	public void setCounter(int counter) {
+		this.counter = counter;
+		sendDelta(3, 9, counter);
+	}
+	
 	public boolean isEnemy(TangibleObject otherObject) {
 		// They CAN be enemies if they're not from the same faction and neither of them are neutral
 		PvpFaction otherFaction = otherObject.getPvpFaction();
@@ -271,7 +285,7 @@ public class TangibleObject extends SWGObject {
 		bb.addInt(0); // Component customization (Set, Integer) - 7
 			bb.addInt(0);
 		bb.addInt(optionFlags); // 8
-		bb.addInt(0); // Generic Counter -- use count and incap timer - 9
+		bb.addInt(counter); // Generic Counter -- use count and incap timer - 9
 		bb.addInt(condition); // 10
 		bb.addInt(maxHitPoints); // maxHitPoints - 11
 		bb.addBoolean(visibleGmOnly); // isVisible - 12
