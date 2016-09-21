@@ -78,7 +78,7 @@ public final class CorpseService extends Service {
 			// TODO after 30 minutes, force them to clone at the nearest cloning facility
 		} else {
 			// Schedule corpse for removal
-			executor.schedule(() -> removeCorpse(killedCreature), 60, TimeUnit.SECONDS);
+			executor.schedule(() -> deleteCorpse(killedCreature), 60, TimeUnit.SECONDS);
 		}
 	}
 	
@@ -99,7 +99,7 @@ public final class CorpseService extends Service {
 		}
 	}
 	
-	private void removeCorpse(CreatureObject creatureCorpse) {
+	private void deleteCorpse(CreatureObject creatureCorpse) {
 		new DestroyObjectIntent(creatureCorpse).broadcast();
 		Log.i(this, "Corpse of NPC %s was removed from the world", creatureCorpse);
 	}
