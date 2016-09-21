@@ -83,7 +83,7 @@ public final class SpawnerService extends Service {
 		spawnerMap = new HashMap<>();
 		
 		registerForIntent(ConfigChangedIntent.TYPE);
-		registerForIntent(CreatureKilledIntent.TYPE);
+		registerForIntent(DestroyObjectIntent.TYPE);
 	}
 	
 	@Override
@@ -98,7 +98,7 @@ public final class SpawnerService extends Service {
 	public void onIntentReceived(Intent i) {
 		switch(i.getType()) {
 			case ConfigChangedIntent.TYPE: handleConfigChangedIntent((ConfigChangedIntent) i); break;
-			case CreatureKilledIntent.TYPE: handleCreatureKilledIntent((CreatureKilledIntent) i); break;
+			case DestroyObjectIntent.TYPE: handleDestroyObjectIntent((DestroyObjectIntent) i); break;
 		}
 	}
 
@@ -126,11 +126,11 @@ public final class SpawnerService extends Service {
 		}
 	}
 	
-	private void handleCreatureKilledIntent(CreatureKilledIntent i) {
-		CreatureObject killedCreature = i.getKilledCreature();
+	private void handleDestroyObjectIntent(DestroyObjectIntent i) {
+		SWGObject destroyedObject = i.getObject();
 		
-		if(killedCreature instanceof DefaultAIObject) {
-			DefaultAIObject killedAIObject = (DefaultAIObject) killedCreature;
+		if(destroyedObject instanceof DefaultAIObject) {
+			DefaultAIObject killedAIObject = (DefaultAIObject) destroyedObject;
 			
 			Spawner spawner = spawnerMap.remove(killedAIObject);
 			
