@@ -34,8 +34,7 @@ import resources.objects.custom.AIBehavior;
 
 public final class Spawner {
 
-	private static final Random RANDOM = new Random();
-	
+	private final Random random;
 	private final SWGObject spawnerObject;
 	private String creatureName;
 	private String[] iffTemplates;
@@ -51,6 +50,7 @@ public final class Spawner {
 	private String flagString;
 
 	public Spawner(SWGObject spawnerObject) {
+		random = new Random();
 		this.spawnerObject = spawnerObject;
 	}
 
@@ -61,7 +61,7 @@ public final class Spawner {
 	 * {@code maxRespawnDelay}
 	 */
 	public int getRespawnDelay() {
-		return RANDOM.nextInt((maxRespawnDelay - minRespawnDelay) + 1) + minRespawnDelay;
+		return random.nextInt((maxRespawnDelay - minRespawnDelay) + 1) + minRespawnDelay;
 	}
 	
 	/**
@@ -69,7 +69,7 @@ public final class Spawner {
 	 * @return 
 	 */
 	public String getRandomIffTemplate() {
-		return iffTemplates[RANDOM.nextInt(iffTemplates.length)];
+		return iffTemplates[random.nextInt(iffTemplates.length)];
 	}
 	
 	public SWGObject getSpawnerObject() {

@@ -139,8 +139,6 @@ public final class SpawnerService extends Service {
 				return;
 			}
 			
-			// TODO should some creatures not respawn?
-			
 			executorService.schedule(() -> spawnNPC(spawner), spawner.getRespawnDelay(), TimeUnit.SECONDS);
 		}
 	}

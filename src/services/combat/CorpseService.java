@@ -27,7 +27,6 @@
  ***********************************************************************************/
 package services.combat;
 
-import intents.PlayerEventIntent;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -37,7 +36,6 @@ import intents.object.DestroyObjectIntent;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.creature.CreatureObject;
-import resources.player.Player;
 import resources.server_info.Log;
 import utilities.ThreadUtilities;
 
