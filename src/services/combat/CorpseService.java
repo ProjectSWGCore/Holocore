@@ -49,14 +49,10 @@ import utilities.ThreadUtilities;
 public final class CorpseService extends Service {
 	
 	private final ScheduledExecutorService executor;
-	// TODO Map terrain to all cloning facilities for that terrain
-	// TODO cloning facilities with factional restrictions
 	
 	public CorpseService() {
 		executor = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("corpse-service"));
 		registerForIntent(CreatureKilledIntent.TYPE);
-		// TODO register for PlayerEventIntent
-		// TODO register for ObjectCreatedIntent
 	}
 	
 	@Override
@@ -69,7 +65,6 @@ public final class CorpseService extends Service {
 	public void onIntentReceived(Intent i) {
 		switch(i.getType()) {
 			case CreatureKilledIntent.TYPE: handleCreatureKilledIntent((CreatureKilledIntent) i); break;
-			case PlayerEventIntent.TYPE: handlePlayerEventIntent((PlayerEventIntent) i); break;
 		}
 	}
 	
@@ -84,24 +79,6 @@ public final class CorpseService extends Service {
 		} else {
 			// This is a NPC - schedule corpse for deletion
 			executor.schedule(() -> deleteCorpse(killedCreature), 120, TimeUnit.SECONDS);
-		}
-	}
-	
-	private void handlePlayerEventIntent(PlayerEventIntent i) {
-		switch(i.getEvent()) {
-			case PE_DISAPPEAR: handleDisappearedPlayer(i.getPlayer()); break;
-		}
-	}
-	
-	private void handleDisappearedPlayer(Player player) {
-		CreatureObject disappearedCreature = player.getCreatureObject();
-		
-		switch(disappearedCreature.getPosture()) {
-			case DEAD:
-				// If a player is dead when they disappear, we force them to clone at the nearest facility
-				// TODO cancel currently scheduled forced clone
-				// TODO force clone
-				break;
 		}
 	}
 	
