@@ -49,10 +49,14 @@ import utilities.ThreadUtilities;
 public final class CorpseService extends Service {
 	
 	private final ScheduledExecutorService executor;
+	// TODO Map terrain to all cloning facilities for that terrain
+	// TODO cloning facilities with factional restrictions
 	
 	public CorpseService() {
 		executor = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("corpse-service"));
 		registerForIntent(CreatureKilledIntent.TYPE);
+		// TODO register for PlayerEventIntent
+		// TODO register for ObjectCreatedIntent
 	}
 	
 	@Override
@@ -75,9 +79,9 @@ public final class CorpseService extends Service {
 		if(killedCreature.isPlayer()) {
 			// TODO show cloning system message
 			// TODO show cloning SUI window, with all possible facilities to clone at
-			// TODO after 30 minutes, force them to clone at the nearest cloning facility
+			// TODO after 30 minutes, close the SUI window and force them to clone at the nearest cloning facility
 		} else {
-			// Schedule corpse for removal
+			// This is a NPC - schedule corpse for deletion
 			executor.schedule(() -> deleteCorpse(killedCreature), 60, TimeUnit.SECONDS);
 		}
 	}
@@ -93,15 +97,23 @@ public final class CorpseService extends Service {
 		
 		switch(disappearedCreature.getPosture()) {
 			case DEAD:
-				// If a player is dead when they disappear, we force them to clone
+				// If a player is dead when they disappear, we force them to clone at the nearest facility
 				// TODO force clone
 				break;
 		}
 	}
 	
+	/**
+	 * Only used for NPCs!
+	 * @param creatureCorpse non-player creature to delete from the world
+	 */
 	private void deleteCorpse(CreatureObject creatureCorpse) {
-		new DestroyObjectIntent(creatureCorpse).broadcast();
-		Log.i(this, "Corpse of NPC %s was removed from the world", creatureCorpse);
+		if(creatureCorpse.isPlayer()) {
+			Log.e(this, "Cannot delete the corpse of a player!", creatureCorpse);
+		} else {
+			new DestroyObjectIntent(creatureCorpse).broadcast();
+			Log.i(this, "Corpse of NPC %s was deleted from the world", creatureCorpse);
+		}
 	}
 	
 }
