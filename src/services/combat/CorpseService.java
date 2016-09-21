@@ -54,14 +54,7 @@ public class CorpseService extends Service {
 	
 	@Override
 	public boolean terminate() {
-		if (executor != null) {
-			executor.shutdownNow();
-			try {
-				executor.awaitTermination(3, TimeUnit.SECONDS);
-			} catch (InterruptedException e) {
-				
-			}
-		}
+		executor.shutdown();
 		return super.terminate();
 	}
 	
