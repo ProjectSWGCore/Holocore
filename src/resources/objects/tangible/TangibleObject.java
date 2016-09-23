@@ -66,7 +66,8 @@ public class TangibleObject extends SWGObject {
 	private SWGMap<String, String> effectsMap	= new SWGMap<>(6, 7);
 	
 	public TangibleObject(long objectId) {
-		super(objectId, BaselineType.TANO);
+		this(objectId, BaselineType.TANO);
+		addOptionFlags(OptionFlag.INVULNERABLE);
 	}
 	
 	public TangibleObject(long objectId, BaselineType objectType) {
