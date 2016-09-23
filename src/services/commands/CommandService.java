@@ -31,6 +31,7 @@ import intents.PlayerEventIntent;
 import intents.chat.ChatBroadcastIntent;
 import intents.chat.ChatCommandIntent;
 import intents.network.GalacticPacketIntent;
+import intents.player.PlayerTransformedIntent;
 import network.packets.Packet;
 import network.packets.swg.zone.object_controller.CommandQueueDequeue;
 import network.packets.swg.zone.object_controller.CommandQueueEnqueue;
@@ -69,6 +70,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import resources.commands.DefaultPriority;
+import resources.objects.creature.CreatureObject;
 import utilities.ThreadUtilities;
 
 
@@ -89,6 +91,7 @@ public class CommandService extends Service {
 		
 		registerForIntent(GalacticPacketIntent.TYPE);
 		registerForIntent(PlayerEventIntent.TYPE);
+		registerForIntent(PlayerTransformedIntent.TYPE);
 	}
 	
 	@Override
@@ -113,6 +116,7 @@ public class CommandService extends Service {
 		switch(i.getType()) {
 			case GalacticPacketIntent.TYPE: handleGalacticPacketIntent((GalacticPacketIntent) i); break;
 			case PlayerEventIntent.TYPE: handlePlayerEventIntent((PlayerEventIntent) i); break;
+			case PlayerTransformedIntent.TYPE: handlePlayerTransformedIntent((PlayerTransformedIntent) i); break;
 		}
 	}
 	
@@ -137,6 +141,24 @@ public class CommandService extends Service {
 					combatQueueMap.remove(i.getPlayer());
 				}
 				break;
+		}
+	}
+	
+	private void handlePlayerTransformedIntent(PlayerTransformedIntent i) {
+		synchronized (combatQueueMap) {
+			CreatureObject creature = i.getPlayer();
+			
+			if(creature.isPerforming()) {
+				// A performer can transform while dancing...
+				return;
+			}
+			
+			Player player = creature.getOwner();
+			Queue<QueuedCommand> combatQueue = combatQueueMap.get(player);
+			
+			if(combatQueue != null) {
+				combatQueue.clear();
+			}
 		}
 	}
 	
