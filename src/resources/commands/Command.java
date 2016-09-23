@@ -27,7 +27,7 @@
 ***********************************************************************************/
 package resources.commands;
 
-public class Command implements Comparable<Command> {
+public class Command {
 	
 	private int crc;
 	
@@ -126,10 +126,5 @@ public class Command implements Comparable<Command> {
 	@Override
 	public String toString() {
 		return name + ":" + crc;
-	}
-
-	@Override
-	public int compareTo(Command o) {
-		return defaultPriority.compareTo(o.getDefaultPriority());
 	}
 }
