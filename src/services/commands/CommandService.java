@@ -179,7 +179,7 @@ public class CommandService extends Service {
 				Queue<QueuedCommand> combatQueue = combatQueueMap.get(player);
 
 				if (combatQueue == null) {
-					combatQueue = new PriorityQueue<>();	// Has natural ordering. Command implements Comparable for this purpose.
+					combatQueue = new PriorityQueue<>();	// Has natural ordering. QueuedCommand implements Comparable for this purpose.
 					combatQueueMap.put(player, combatQueue);
 				}
 
