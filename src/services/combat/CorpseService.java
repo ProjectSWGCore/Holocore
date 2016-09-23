@@ -25,63 +25,72 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
  ***********************************************************************************/
-package services.galaxy;
+package services.combat;
 
-import resources.control.Manager;
-import services.collections.CollectionService;
-import services.collections.CollectionBadgeManager;
-import services.combat.CombatManager;
-import services.commands.CommandService;
-import services.commands.EntertainmentService;
-import services.experience.ExperienceManager;
-import services.faction.FactionService;
-import services.galaxy.terminals.TerminalService;
-import services.sui.SuiService;
-import services.group.GroupService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
-public class GameManager extends Manager {
+import intents.combat.CreatureKilledIntent;
+import intents.object.DestroyObjectIntent;
+import resources.control.Intent;
+import resources.control.Service;
+import resources.objects.creature.CreatureObject;
+import resources.server_info.Log;
+import utilities.ThreadUtilities;
 
-	private final CommandService commandService;
-	private final ConnectionService connectionService;
-	private final SuiService suiService;
-	private final CollectionService collectionService;
-	private final CollectionBadgeManager collectionBadgeManager;
-	private final EnvironmentService weatherService;
-	private final TerminalService terminalManager;
-	private final FactionService factionService;
-	private final GroupService groupService;
-	private final SkillModService skillModService;
-	private final EntertainmentService entertainmentService;
-	private final CombatManager combatManager;
-	private final ExperienceManager experienceManager;
-
-	public GameManager() {
-		commandService = new CommandService();
-		connectionService = new ConnectionService();
-		suiService = new SuiService();
-		collectionService = new CollectionService();
-		collectionBadgeManager = new CollectionBadgeManager();
-		weatherService = new EnvironmentService();
-		terminalManager = new TerminalService();
-		factionService = new FactionService();
-		groupService = new GroupService();
-		skillModService = new SkillModService();
-		entertainmentService = new EntertainmentService();
-		combatManager = new CombatManager();
-		experienceManager = new ExperienceManager();
-
-		addChildService(commandService);
-		addChildService(connectionService);
-		addChildService(suiService);
-		addChildService(collectionService);
-		addChildService(collectionBadgeManager);
-		addChildService(weatherService);
-		addChildService(terminalManager);
-		addChildService(factionService);
-		addChildService(groupService);
-		addChildService(skillModService);
-		addChildService(entertainmentService);
-		addChildService(combatManager);
-		addChildService(experienceManager);
+/**
+ * The {@code CorpseService} removes corpses from the world a while after
+ * they've died. It also lets players clone at a cloning facility.
+ * @author mads
+ */
+public final class CorpseService extends Service {
+	
+	private final ScheduledExecutorService executor;
+	
+	public CorpseService() {
+		executor = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("corpse-service"));
+		registerForIntent(CreatureKilledIntent.TYPE);
 	}
+	
+	@Override
+	public boolean terminate() {
+		executor.shutdown();
+		return super.terminate();
+	}
+	
+	@Override
+	public void onIntentReceived(Intent i) {
+		switch(i.getType()) {
+			case CreatureKilledIntent.TYPE: handleCreatureKilledIntent((CreatureKilledIntent) i); break;
+		}
+	}
+	
+	private void handleCreatureKilledIntent(CreatureKilledIntent i) {
+		CreatureObject killedCreature = i.getKilledCreature();
+		
+		if(killedCreature.isPlayer()) {
+			// TODO show cloning system message
+			// TODO show cloning SUI window, with all possible facilities to clone at
+			// TODO after 30 minutes, close the SUI window and force them to clone at the nearest cloning facility
+			// TODO if the SUI window is closed by the player, make sure it reappears
+		} else {
+			// This is a NPC - schedule corpse for deletion
+			executor.schedule(() -> deleteCorpse(killedCreature), 120, TimeUnit.SECONDS);
+		}
+	}
+	
+	/**
+	 * Only used for NPCs!
+	 * @param creatureCorpse non-player creature to delete from the world
+	 */
+	private void deleteCorpse(CreatureObject creatureCorpse) {
+		if(creatureCorpse.isPlayer()) {
+			Log.e(this, "Cannot delete the corpse of a player!", creatureCorpse);
+		} else {
+			new DestroyObjectIntent(creatureCorpse).broadcast();
+			Log.i(this, "Corpse of NPC %s was deleted from the world", creatureCorpse);
+		}
+	}
+	
 }

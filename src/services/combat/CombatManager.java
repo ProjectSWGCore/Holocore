@@ -54,7 +54,7 @@ import resources.commands.CombatCommand;
 import resources.common.CRC;
 import resources.common.RGB;
 import resources.control.Intent;
-import resources.control.Service;
+import resources.control.Manager;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.tangible.TangibleObject;
@@ -63,18 +63,22 @@ import resources.server_info.Log;
 import utilities.Scripts;
 import utilities.ThreadUtilities;
 
-public class CombatService extends Service {
-	
-	private ScheduledExecutorService executor;
-	
+public class CombatManager extends Manager {
+
 	private final Map<Long, CombatCreature> inCombat;
 	private final Set<CreatureObject> regeneratingHealthCreatures;	// Only allowed outside of combat
 	private final Set<CreatureObject> regeneratingActionCreatures;	// Always allowed
+	private final CorpseService corpseService;
 	
-	public CombatService() {
+	private ScheduledExecutorService executor;
+	
+	public CombatManager() {
 		inCombat = new HashMap<>();
 		regeneratingHealthCreatures = new HashSet<>();
 		regeneratingActionCreatures = new HashSet<>();
+		
+		corpseService = new CorpseService();
+		addChildService(corpseService);
 	}
 	
 	@Override
