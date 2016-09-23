@@ -162,7 +162,7 @@ public class CommandService extends Service {
 		}
 	}
 	
-	private void handleCommandRequest(final Player player, final GalacticManager galacticManager, final CommandQueueEnqueue request) {
+	private void handleCommandRequest(Player player, GalacticManager galacticManager, CommandQueueEnqueue request) {
 		if (!commandExists(request.getCommandCrc())) {
 			if (request.getCommandCrc() != 0)
 				Log.e("CommandService", "Invalid command crc: %x", request.getCommandCrc());
