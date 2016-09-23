@@ -85,7 +85,7 @@ public class CommandService extends Service {
 		commandCrcLookup = new HashMap<>();
 		commandByScript = new HashMap<>();
 		combatQueueMap = new HashMap<>();
-		executorService = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("combat-queues"));
+		executorService = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("command-service"));
 		
 		registerForIntent(GalacticPacketIntent.TYPE);
 		registerForIntent(PlayerEventIntent.TYPE);
