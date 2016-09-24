@@ -38,6 +38,7 @@ public class RoadmapReward {
 	private String itemDefault;
 	private String itemWookiee;
 	private String itemIthorian;
+	private boolean hasItems;
 	private boolean isUniversalReward; // This means the reward is for Wookiees, Ithorians and everything else
 
 	private String[] defaultRewardItems;
@@ -84,6 +85,10 @@ public class RoadmapReward {
 		return itemIthorian;
 	}
 
+	public boolean hasItems() {
+		return hasItems;
+	}
+
 	public boolean isUniversalReward() {
 		return isUniversalReward;
 	}
@@ -106,5 +111,6 @@ public class RoadmapReward {
 		ithorianRewardItems = itemIthorian.split(",");
 
 		isUniversalReward = !itemDefault.isEmpty() && (itemWookiee.isEmpty() && itemIthorian.isEmpty());
+		hasItems = !itemDefault.isEmpty() && !itemWookiee.isEmpty() && !itemIthorian.isEmpty();
 	}
 }

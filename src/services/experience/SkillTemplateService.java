@@ -115,7 +115,7 @@ public final class SkillTemplateService extends Service {
 					String skillName = templates[skillIndex];
 					new SkillBoxGrantedIntent(skillName, creatureObject).broadcast();
 					playerObject.setProfWheelPosition(skillName);
-					
+
 					giveRewardItems(creatureObject, skillName);
 
 					creatureObject.sendObserversAndSelf(new PlayClientEffectObjectMessage("clienteffect/skill_granted.cef", "", objectId));
@@ -137,27 +137,29 @@ public final class SkillTemplateService extends Service {
 		String species = characterRace.getSpecies().toUpperCase();
 		String[] items;
 
-		if (reward.isUniversalReward())
-			items = reward.getDefaultRewardItems();
-		else if (species.equals("ITHORIAN"))
-			items = reward.getIthorianRewardItems();
-		else if (species.equals("WOOKIEE"))
-			items = reward.getWookieeRewardItems();
-		else
-			items = reward.getDefaultRewardItems();
+		if (reward.hasItems() || reward.isUniversalReward()) {
+			if (reward.isUniversalReward())
+				items = reward.getDefaultRewardItems();
+			else if (species.equals("ITHORIAN"))
+				items = reward.getIthorianRewardItems();
+			else if (species.equals("WOOKIEE"))
+				items = reward.getWookieeRewardItems();
+			else
+				items = reward.getDefaultRewardItems();
 
-		for (String item : items) {
-			SWGObject inventory = creatureObject.getSlottedObject("inventory");
+			for (String item : items) {
+				SWGObject inventory = creatureObject.getSlottedObject("inventory");
 
-			if (item.endsWith(".iff")) {
-				SWGObject nonStaticItem = ObjectCreator.createObjectFromTemplate(ClientFactory.formatToSharedFile(item));
+				if (item.endsWith(".iff")) {
+					SWGObject nonStaticItem = ObjectCreator.createObjectFromTemplate(ClientFactory.formatToSharedFile(item));
 
-				if (nonStaticItem != null) {
-					nonStaticItem.moveToContainer(inventory);
-				}
-				new ObjectCreatedIntent(nonStaticItem).broadcast();
-			} else
-				new CreateStaticItemIntent(creatureObject, inventory, item).broadcast();
+					if (nonStaticItem != null) {
+						nonStaticItem.moveToContainer(inventory);
+					}
+					new ObjectCreatedIntent(nonStaticItem).broadcast();
+				} else
+					new CreateStaticItemIntent(creatureObject, inventory, item).broadcast();
+			}
 		}
 	}
 
