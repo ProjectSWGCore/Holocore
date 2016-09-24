@@ -30,7 +30,6 @@ package services.experience;
 import intents.experience.LevelChangedIntent;
 import intents.experience.SkillBoxGrantedIntent;
 import java.awt.Color;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,7 +45,6 @@ import resources.client_info.visitors.DatatableData;
 import resources.common.RGB;
 import resources.control.Intent;
 import resources.control.Service;
-import resources.encodables.OutOfBandPackage;
 import resources.encodables.StringId;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
@@ -64,7 +62,7 @@ import services.objects.ObjectCreator;
 public final class SkillTemplateService extends Service {
 	
 	private final Map<String, String[]> skillTemplates;
-	private static Map<String, RoadmapReward> rewards = new HashMap<>();
+	private Map<String, RoadmapReward> rewards = new HashMap<>();
 	private DatatableData rewardsTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/roadmap/item_rewards.iff");
 
 	SkillTemplateService() {
@@ -135,24 +133,28 @@ public final class SkillTemplateService extends Service {
 
 	private void giveRewardItems(CreatureObject creatureObject, String skillName) {
 		RoadmapReward reward = rewards.get(skillName);
-		ArrayList<String> items;
 		Race characterRace = creatureObject.getRace();
 		String species = characterRace.getSpecies().toUpperCase();
+		String[] items;
 
 		if (reward.isUniversalReward())
 			items = reward.getDefaultRewardItems();
 		else if (species.equals("ITHORIAN"))
 			items = reward.getIthorianRewardItems();
 		else if (species.equals("WOOKIEE"))
-			items = reward.getWookieRewardItems();
+			items = reward.getWookieeRewardItems();
 		else
 			items = reward.getDefaultRewardItems();
 
 		for (String item : items) {
 			SWGObject inventory = creatureObject.getSlottedObject("inventory");
 
-			if (item.contains(".iff")) {
+			if (item.endsWith(".iff")) {
 				SWGObject nonStaticItem = ObjectCreator.createObjectFromTemplate(ClientFactory.formatToSharedFile(item));
+
+				if (nonStaticItem != null) {
+					nonStaticItem.moveToContainer(inventory);
+				}
 				new ObjectCreatedIntent(nonStaticItem).broadcast();
 			} else
 				new CreateStaticItemIntent(creatureObject, inventory, item).broadcast();

@@ -27,9 +27,6 @@
 
 package resources.rewards;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 /**
  * Created by skylerlehan on 9/15/16.
  */
@@ -43,9 +40,9 @@ public class RoadmapReward {
 	private String itemIthorian;
 	private boolean isUniversalReward; // This means the reward is for Wookiees, Ithorians and everything else
 
-	private ArrayList<String> defaultRewardItems = new ArrayList<>();
-	private ArrayList<String> wookieRewardItems = new ArrayList<>();
-	private ArrayList<String> ithorianRewardItems = new ArrayList<>();
+	private String[] defaultRewardItems;
+	private String[] wookieeRewardItems;
+	private String[] ithorianRewardItems;
 
 	public RoadmapReward(String roadmapTemplate, String roadmapSkillName, String appearanceName, String stringId, String itemDefault, String itemWookiee, String itemIthorian) {
 		this.roadmapTemplate = roadmapTemplate;
@@ -91,26 +88,23 @@ public class RoadmapReward {
 		return isUniversalReward;
 	}
 
-	public ArrayList<String> getDefaultRewardItems() {
+	public String[] getDefaultRewardItems() {
 		return defaultRewardItems;
 	}
 
-	public ArrayList<String> getWookieRewardItems() {
-		return wookieRewardItems;
+	public String[] getWookieeRewardItems() {
+		return wookieeRewardItems;
 	}
 
-	public ArrayList<String> getIthorianRewardItems() {
+	public String[] getIthorianRewardItems() {
 		return ithorianRewardItems;
 	}
 
 	private void parseItems() {
-		if (!itemDefault.isEmpty())
-			defaultRewardItems = new ArrayList<String>(Arrays.asList(itemDefault.split(",")));
-		if (!itemWookiee.isEmpty())
-			wookieRewardItems = new ArrayList<String>(Arrays.asList(itemWookiee.split(",")));
-		if (!itemIthorian.isEmpty())
-			ithorianRewardItems = new ArrayList<String>(Arrays.asList(itemIthorian.split(",")));
+		defaultRewardItems = itemDefault.split(",");
+		wookieeRewardItems = itemWookiee.split(",");
+		ithorianRewardItems = itemIthorian.split(",");
 
-		isUniversalReward = !defaultRewardItems.isEmpty() && (wookieRewardItems.isEmpty() && ithorianRewardItems.isEmpty());
+		isUniversalReward = !itemDefault.isEmpty() && (itemWookiee.isEmpty() && itemIthorian.isEmpty());
 	}
 }
