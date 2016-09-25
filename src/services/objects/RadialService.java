@@ -35,11 +35,9 @@ import resources.control.Intent;
 import resources.control.Service;
 import network.packets.Packet;
 import network.packets.swg.zone.ObjectMenuSelect;
-import network.packets.swg.zone.object_controller.IntendedTarget;
 import network.packets.swg.zone.object_controller.ObjectMenuRequest;
 import network.packets.swg.zone.object_controller.ObjectMenuResponse;
 import intents.network.GalacticPacketIntent;
-import intents.radial.ObjectClickedIntent;
 import intents.radial.RadialRegisterIntent;
 import intents.radial.RadialRequestIntent;
 import intents.radial.RadialResponseIntent;
@@ -73,8 +71,6 @@ public class RadialService extends Service {
 				onRequest(gpi.getObjectManager(), (ObjectMenuRequest) p);
 			} else if (p instanceof ObjectMenuSelect) {
 				onSelection(gpi.getGalacticManager(), gpi.getNetworkId(), (ObjectMenuSelect) p);
-			} else if (p instanceof IntendedTarget) {
-				onObjectClicked(gpi.getObjectManager(), (IntendedTarget) p);
 			}
 		} else if (i instanceof RadialResponseIntent) {
 			onResponse((RadialResponseIntent) i);
@@ -129,27 +125,6 @@ public class RadialService extends Service {
 			return;
 		}
 		new RadialSelectionIntent(player, target, selection).broadcast();
-	}
-
-	private void onObjectClicked(ObjectManager objectManager, IntendedTarget it) {
-		SWGObject requestor = objectManager.getObjectById(it.getObjectId());
-		SWGObject target = objectManager.getObjectById(it.getTargetId());
-		if (target == null)
-			return;
-		if (!(requestor instanceof CreatureObject)) {
-			Log.w("RadialService", "Requestor of target: %s is not a creature object! %s", target, requestor);
-			return;
-		}
-		Player player = requestor.getOwner();
-		if (player == null) {
-			Log.w("RadialService", "Requestor of target: %s does not have an owner! %s", target, requestor);
-			return;
-		}
-		synchronized (templatesRegistered) {
-			if (templatesRegistered.contains(target.getTemplate())) {
-				new ObjectClickedIntent((CreatureObject) requestor, target).broadcast();
-			}
-		}
 	}
 
 	private void sendResponse(Player player, SWGObject target, List<RadialOption> options, int counter) {

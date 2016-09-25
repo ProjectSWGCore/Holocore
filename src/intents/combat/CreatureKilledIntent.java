@@ -25,40 +25,24 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package intents.object;
+package intents.combat;
 
 import resources.control.Intent;
-import resources.objects.SWGObject;
+import resources.objects.creature.CreatureObject;
 
-/**
- *
- * @author mads
- */
-public final class CreateStaticItemIntent extends Intent {
+public class CreatureKilledIntent extends Intent {
+
+	public static final String TYPE = "CreatureKilledIntent";
 	
-	public static final String TYPE = "CreateStaticItemIntent";
-	
-	private final SWGObject requester;
-	private final SWGObject container;
-	private final String[] itemNames;
-	
-	public CreateStaticItemIntent(SWGObject requester, SWGObject container, String... itemNames) {
+	private final CreatureObject killedCreature;
+
+	public CreatureKilledIntent(CreatureObject killedCreature) {
 		super(TYPE);
-		this.requester = requester;
-		this.container = container;
-		this.itemNames = itemNames;
+		this.killedCreature = killedCreature;
 	}
 
-	public SWGObject getContainer() {
-		return container;
-	}
-
-	public String[] getItemNames() {
-		return itemNames;
-	}
-
-	public SWGObject getRequester() {
-		return requester;
+	public CreatureObject getKilledCreature() {
+		return killedCreature;
 	}
 	
 }

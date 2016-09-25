@@ -27,6 +27,7 @@
  ***********************************************************************************/
 package services.objects;
 
+import intents.chat.ChatBroadcastIntent;
 import intents.object.ObjectCreatedIntent;
 import intents.object.CreateStaticItemIntent;
 import intents.server.ConfigChangedIntent;
@@ -44,6 +45,7 @@ import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.weapon.WeaponObject;
 import resources.objects.weapon.WeaponType;
+import resources.player.Player;
 import resources.server_info.Log;
 import resources.server_info.RelationalServerData;
 import resources.server_info.RelationalServerFactory;
@@ -122,17 +124,17 @@ public final class StaticItemService extends Service {
 
 					switch (type) {
 						case "armor": objectAttributes = new ArmorAttributes(itemName, iffTemplate); break;
-						case "collection": objectAttributes = new CollectionAttributes(itemName, iffTemplate); break;
-						case "consumable":    // TODO implement
-						case "costume":    // TODO implement
-						case "dna":    // TODO implement
-						case "grant":    // TODO implement
-						case "item":    // TODO implement
-						case "object":    // TODO implement
-						case "schematic":    // TODO implement
-						case "storyteller":    // TODO implement
 						case "weapon": objectAttributes = new WeaponAttributes(itemName, iffTemplate); break;
-						case "wearable": continue;    // TODO implement
+						case "wearable": objectAttributes = new WearableAttributes(itemName, iffTemplate);	break;
+						case "collection": objectAttributes = new CollectionAttributes(itemName, iffTemplate); break;
+						case "consumable":	// TODO implement
+						case "costume":	// TODO implement
+						case "dna":	// TODO implement
+						case "grant":	// TODO implement
+						case "item":	// TODO implement
+						case "object":	// TODO implement
+						case "schematic":	// TODO implement
+						case "storyteller": continue;	// TODO implement
 						default: Log.e(this, "Item %s was not loaded because the specified type %s is unknown", itemName, type); continue;
 					}
 
@@ -170,9 +172,16 @@ public final class StaticItemService extends Service {
 	private void handleSpawnItemIntent(CreateStaticItemIntent i) {
 		SWGObject container = i.getContainer();
 		String[] itemNames = i.getItemNames();
-
-		if (itemNames.length > 0) {
-			for (String itemName : itemNames) {
+		Player requesterOwner = i.getRequester().getOwner();
+		
+		// If adding these items to the container would exceed the max capacity...
+		if(container.getVolume() + itemNames.length > container.getMaxContainerSize()) {
+			new ChatBroadcastIntent(requesterOwner, "@system_msg:give_item_failure").broadcast();
+			return;
+		}
+		
+		if(itemNames.length > 0) {
+			for(String itemName : itemNames) {
 				ObjectAttributes objectAttributes = objectAttributesMap.get(itemName);
 
 				if (objectAttributes != null) {
@@ -182,18 +191,29 @@ public final class StaticItemService extends Service {
 					if (object != null) {
 						// Global attributes and type-specific attributes are applied
 						objectAttributes.applyAttributes(object);
-						object.moveToContainer(container);
+						
+						switch(object.moveToContainer(container)) {	// Server-generated object is added to the container
+							case SUCCESS:
+								Log.i(this, "Successfully moved %s into container %s", itemName, container);
+								new ChatBroadcastIntent(requesterOwner, "@system_msg:give_item_success").broadcast();
+								break;
+							case CONTAINER_FULL:
+								new ChatBroadcastIntent(requesterOwner, "@system_msg:give_item_failure").broadcast();
+								break;
+						}
 						new ObjectCreatedIntent(object).broadcast();
-						Log.i(this, "Successfully spawned %s into container %s", itemName, container);
+						
 					} else {
 						Log.w(this, "%s could not be loaded because IFF template %s is invalid", itemName, iffTemplate);
 					}
 				} else {
-					Log.e(this, "%s could not be spawned because the item name is unknown", itemName);
+					String errorMessage = String.format("%s could not be spawned because the item name is unknown", itemName);
+					Log.e(this, errorMessage);
+					new ChatBroadcastIntent(requesterOwner, errorMessage).broadcast();
 				}
 			}
 		} else {
-			Log.w(this, "No item names were specified in SpawnItemIntent - no objects were spawned into container %s", container);
+			Log.w(this, "No item names were specified in CreateStaticItemIntent - no objects were spawned into container %s", container);
 		}
 	}
 
@@ -217,7 +237,6 @@ public final class StaticItemService extends Service {
 		private int volume;
 		private String requiredLevel;
 		// TODO bio-link
-		// TODO buff to give. Seen on consumables and wearables: worn_item_buff, buff_name? Seen as "Effect Name:"
 		private final String itemName;
 		private final String iffTemplate;
 
@@ -298,20 +317,22 @@ public final class StaticItemService extends Service {
 
 	private static class WearableAttributes extends ObjectAttributes {
 
-		// TODO skillmods/statmods
+		private final Map<String, String> mods;	// skillmods/statmods
 		private String requiredProfession;
 		private String requiredFaction;
+		private String buffName;
 		// TODO species restriction
 		// TODO customisation variables, ie. for colours
 
 		public WearableAttributes(String itemName, String iffTemplate) {
 			super(itemName, iffTemplate);
+			mods = new HashMap<>();
 		}
 
 		@Override
 		protected boolean loadTypeAttributes(ResultSet resultSet) throws SQLException {
 			requiredProfession = resultSet.getString("required_profession");
-			if (requiredProfession.equals("none")) {
+			if (requiredProfession.equals("-")) {
 				// Ziggy: This value is not defined in any String Table File.
 				requiredProfession = "None";
 			} else {
@@ -320,11 +341,40 @@ public final class StaticItemService extends Service {
 
 			requiredFaction = resultSet.getString("required_faction");
 
-			if (requiredFaction.equals("none")) {
+			if (requiredFaction.equals("-")) {
 				// Ziggy: This value is not defined in any String Table File.
 				requiredFaction = "None";
 			} else {
 				requiredFaction = "@pvp_factions:" + requiredFaction;
+			}
+			
+			// Load mods
+			String modsString = resultSet.getString("skill_mods");
+			
+			// If this wearable is supposed to have mods, then load 'em!
+			if(!modsString.equals("-")) {	// An empty cell is "-"
+				String[] modStrings = modsString.split(",");	// The mods strings are comma-separated
+				
+				for(String modString : modStrings) {
+					String category;
+					String[] splitValues = modString.split("=");	// Name and value are separated by "="
+					String modName = splitValues[0];
+					String modValue = splitValues[1];
+					
+					if(modName.endsWith("_modified")) {	// Common statmods end with "_modified"
+						category = "cat_stat_mod_bonus";
+					} else {	// If not, it's a skillmod
+						category = "cat_skill_mod_bonus";
+					}
+					
+					mods.put(category + ".@stat_n:" + modName, modValue);
+				}
+			}
+			
+			String buffNameCell = resultSet.getString("buff_name");
+			
+			if(!buffNameCell.equals("-")) {
+				buffName = "@ui_buff:" + buffNameCell;
 			}
 
 			return true;
@@ -334,6 +384,13 @@ public final class StaticItemService extends Service {
 		protected void applyTypeAttributes(SWGObject object) {
 			object.addAttribute("class_required", requiredProfession);
 			object.addAttribute("faction_restriction", requiredFaction);
+			
+			// Apply the mods!
+			for(Map.Entry<String, String> modEntry : mods.entrySet())
+				object.addAttribute(modEntry.getKey(), modEntry.getValue());
+			
+			if(buffName != null)	// Not every wearable has an effect!
+				object.addAttribute("effect", buffName);
 		}
 
 	}
@@ -405,8 +462,12 @@ public final class StaticItemService extends Service {
 	private static final class WeaponAttributes extends WearableAttributes {
 
 		private WeaponType category;
-		private String weaponCategory;
+		private DamageType damageTypeEnum;
+		private DamageType elementalTypeEnum;
 		private String damageType;
+		private String weaponCategory;
+		private String damageTypeString;
+		private String elementalType;
 		private float attackSpeed;
 		private float minRange;
 		private float maxRange;
@@ -414,13 +475,27 @@ public final class StaticItemService extends Service {
 		private int minDamage;
 		private int maxDamage;
 		private String damageString;
-		private boolean elementalWeapon;
 		private String elementalTypeString;
 		private short elementalDamage;
+		private String procEffect;
 		// special_attack_cost: Pre-NGE artifact? (SAC)
 
 		public WeaponAttributes(String itemName, String iffTemplate) {
 			super(itemName, iffTemplate);
+		}
+		
+		private DamageType getDamageTypeForName(String damageTypeName) {
+			switch(damageTypeName) {
+				case "kinetic": return DamageType.KINETIC;
+				case "energy": return DamageType.ENERGY;
+				case "heat": return DamageType.ELEMENTAL_HEAT;
+				case "cold": return DamageType.ELEMENTAL_COLD;
+				case "acid": return DamageType.ELEMENTAL_ACID;
+				case "electricity": return DamageType.ELEMENTAL_ELECTRICAL;
+				default:
+					Log.e("StaticItemService", "Unknown damage type %s", damageTypeName);
+					return null;	// TODO Unknown DamageType... now what?
+			}
 		}
 
 		@Override
@@ -451,7 +526,9 @@ public final class StaticItemService extends Service {
 			}
 
 			weaponCategory = "@obj_attr_n:wpn_category_" + String.valueOf(category.getNum());
-			damageType = "@obj_attr_n:" + resultSet.getString("damage_type");
+			damageType = resultSet.getString("damage_type");
+			damageTypeEnum = getDamageTypeForName(damageType);
+			damageTypeString = "@obj_attr_n:" + damageType;
 			attackSpeed = resultSet.getFloat("attack_speed") / 100;
 
 			minRange = resultSet.getFloat("min_range_distance");
@@ -461,15 +538,20 @@ public final class StaticItemService extends Service {
 			minDamage = resultSet.getInt("min_damage");
 			maxDamage = resultSet.getInt("max_damage");
 			damageString = String.format("%d-%d", minDamage, maxDamage);
-
-			// TODO all weapons don't have elemental damage - account for this!
-			String elementalType = resultSet.getString("elemental_type");
-			// TODO ElementalType enum, which can be set in WeaponObject?
-			elementalWeapon = !elementalType.isEmpty();
-			if (elementalWeapon) {
+			
+			elementalType = resultSet.getString("elemental_type");
+			if(!elementalType.equalsIgnoreCase("none")) {
+				elementalTypeEnum = getDamageTypeForName(elementalType);
 				elementalTypeString = "@obj_attr_n:elemental_" + elementalType;
 				elementalDamage = resultSet.getShort("elemental_damage");
 			}
+			
+			String procEffectString = resultSet.getString("proc_effect");
+			
+			if(!procEffectString.equals("-")) {
+				procEffect = "@ui_buff:" + procEffectString;
+			}
+			
 			// TODO calculate DPS
 
 			return true;
@@ -478,12 +560,17 @@ public final class StaticItemService extends Service {
 		@Override
 		protected void applyTypeAttributes(SWGObject object) {
 			super.applyTypeAttributes(object);
-			object.addAttribute("cat_wpn_damage.wpn_damage_type", damageType);
+			object.addAttribute("cat_wpn_damage.wpn_damage_type", damageTypeString);
 			object.addAttribute("cat_wpn_damage.wpn_category", weaponCategory);
 			object.addAttribute("cat_wpn_damage.wpn_attack_speed", String.valueOf(attackSpeed));
 			object.addAttribute("cat_wpn_damage.damage", damageString);
-			object.addAttribute("cat_wpn_damage.wpn_elemental_type", elementalTypeString);
-			object.addAttribute("cat_wpn_damage.wpn_elemental_value", String.valueOf(elementalDamage));
+			if(elementalTypeString != null) {	// Not all weapons have elemental damage.
+				object.addAttribute("cat_wpn_damage.wpn_elemental_type", elementalTypeString);
+				object.addAttribute("cat_wpn_damage.wpn_elemental_value", String.valueOf(elementalDamage));
+			}
+			
+			if(procEffect != null)	// Not all weapons have a proc effect
+				object.addAttribute("proc_name", procEffect);
 			// TODO set DPS
 
 			object.addAttribute("cat_wpn_other.wpn_range", rangeString);
@@ -494,6 +581,8 @@ public final class StaticItemService extends Service {
 			weapon.setAttackSpeed(attackSpeed);
 			weapon.setMinRange(minRange);
 			weapon.setMaxRange(maxRange);
+			weapon.setDamageType(damageTypeEnum);
+			weapon.setElementalType(elementalTypeEnum);
 		}
 	}
 

@@ -40,6 +40,10 @@ import network.packets.swg.zone.object_controller.ShowFlyText;
 import network.packets.swg.zone.object_controller.ShowFlyText.Scale;
 import network.packets.swg.zone.object_controller.combat.CombatAction;
 import intents.chat.ChatCommandIntent;
+import intents.combat.CreatureKilledIntent;
+import java.util.Iterator;
+import resources.Posture;
+import resources.PvpFaction;
 import resources.PvpFlag;
 import resources.combat.AttackInfoLight;
 import resources.combat.AttackType;
@@ -50,7 +54,7 @@ import resources.commands.CombatCommand;
 import resources.common.CRC;
 import resources.common.RGB;
 import resources.control.Intent;
-import resources.control.Service;
+import resources.control.Manager;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.tangible.TangibleObject;
@@ -59,14 +63,22 @@ import resources.server_info.Log;
 import utilities.Scripts;
 import utilities.ThreadUtilities;
 
-public class CombatService extends Service {
+public class CombatManager extends Manager {
+
+	private final Map<Long, CombatCreature> inCombat;
+	private final Set<CreatureObject> regeneratingHealthCreatures;	// Only allowed outside of combat
+	private final Set<CreatureObject> regeneratingActionCreatures;	// Always allowed
+	private final CorpseService corpseService;
 	
 	private ScheduledExecutorService executor;
 	
-	private Map<Long, CombatCreature> inCombat;
-	
-	public CombatService() {
+	public CombatManager() {
 		inCombat = new HashMap<>();
+		regeneratingHealthCreatures = new HashSet<>();
+		regeneratingActionCreatures = new HashSet<>();
+		
+		corpseService = new CorpseService();
+		addChildService(corpseService);
 	}
 	
 	@Override
@@ -79,6 +91,7 @@ public class CombatService extends Service {
 	@Override
 	public boolean start() {
 		executor.scheduleAtFixedRate(() -> periodicChecks(), 0, 5, TimeUnit.SECONDS);
+		executor.scheduleAtFixedRate(() -> periodicRegeneration(), 1, 1, TimeUnit.SECONDS);
 		return super.start();
 	}
 	
@@ -119,6 +132,63 @@ public class CombatService extends Service {
 			inCombat.remove(combat.getCreature().getObjectId());
 		}
 		exitCombat(combat.getCreature());
+	}
+	
+	private void periodicRegeneration() {
+		synchronized (regeneratingActionCreatures) {
+			Iterator<CreatureObject> iterator = regeneratingActionCreatures.iterator();
+
+			while (iterator.hasNext()) {
+				regenerationActionTick(iterator.next(), iterator);
+			}
+		}
+
+		synchronized (regeneratingHealthCreatures) {
+			Iterator<CreatureObject> iterator = regeneratingHealthCreatures.iterator();
+
+			while (iterator.hasNext()) {
+				regenerationHealthTick(iterator.next(), iterator);
+			}
+		}
+	}
+	
+	private void regenerationActionTick(CreatureObject creatureObject, Iterator<CreatureObject> iterator) {
+		if(creatureObject.getAction() < creatureObject.getMaxAction()) {
+			int modification = 13;
+			int level = creatureObject.getLevel();
+			
+			if(level > 1) {
+				modification += 4 * level;
+			}
+			
+			
+			if(creatureObject.modifyAction(modification) == 0) {
+				// Their action didn't change, meaning they're maxed out
+				iterator.remove();
+			}
+		} else {
+			// Maxed out - remove 'em
+			iterator.remove();
+		}
+	}
+	
+	private void regenerationHealthTick(CreatureObject creatureObject, Iterator<CreatureObject> iterator) {
+		if(creatureObject.getHealth() < creatureObject.getMaxHealth()) {
+			int modification = 40;
+			int level = creatureObject.getLevel();
+			
+			if(level > 1) {
+				modification += 4 * level;
+			}
+			
+			if(creatureObject.modifyHealth(modification) == 0) {
+				// Their health didn't change, meaning they're maxed out
+				iterator.remove();
+			}
+		} else {
+			// Maxed out - remove 'em
+			iterator.remove();
+		}
 	}
 	
 	private void processChatCommand(ChatCommandIntent cci) {
@@ -183,20 +253,117 @@ public class CombatService extends Service {
 		if (!target.isInCombat())
 			enterCombat(target);
 		target.addDefender(source);
+		source.addDefender(target);
 		// Note: This will not kill anyone
 		if (target.getHealth() <= info.getDamage())
-			target.setHealth(target.getMaxHealth());
+			doCreatureDeath(target, source);
 		else
 			target.modifyHealth(-info.getDamage());
 	}
 	
 	private void enterCombat(CreatureObject creature) {
 		creature.setInCombat(true);
+		
+		// If this creature is currently regenerating health, they should stop doing so now
+		synchronized(regeneratingHealthCreatures) {
+			regeneratingHealthCreatures.remove(creature);
+		}
 	}
 	
 	private void exitCombat(CreatureObject creature) {
 		creature.setInCombat(false);
 		creature.clearDefenders();
+		
+		// Once out of combat, we can regenerate health - unless we're dead or incapacitated!
+		switch(creature.getPosture()) {
+			case DEAD:
+			case INCAPACITATED:
+				// We can't regenerate HAM if we're incapcitated or dead
+				synchronized (regeneratingActionCreatures) {
+					regeneratingActionCreatures.remove(creature);
+				}
+
+				synchronized (regeneratingHealthCreatures) {
+					regeneratingHealthCreatures.remove(creature);
+				}
+				break;
+			default:
+				synchronized (regeneratingActionCreatures) {
+					regeneratingActionCreatures.add(creature);
+				}
+				
+				synchronized (regeneratingHealthCreatures) {
+					regeneratingHealthCreatures.add(creature);
+				}
+				break;
+		}
+	}
+	
+	private void doCreatureDeath(CreatureObject killedCreature, CreatureObject killer) {
+		killedCreature.setHealth(0);
+		killer.removeDefender(killedCreature);
+		
+		// Let's check if the killer needs to remain in-combat...
+		if(!killer.hasDefenders()) {
+			// They have no active targets they're in combat with, make them exit combat
+			exitCombat(killer);
+		}
+		
+		// The creature should not be able to move or turn.
+		killedCreature.setTurnScale(0);
+		killedCreature.setMovementScale(0);
+		
+		// We need to handle this differently, depending on whether killedCreature is a player or not
+		if(killedCreature.isPlayer()) {
+			// TODO account for AI deathblowing players..?
+			// If it's a player, they need to be incapacitated
+			incapacitatePlayer(killedCreature);
+		} else {
+			// This is just a plain ol' NPC. Die!
+			killCreature(killedCreature);
+		}
+		
+		exitCombat(killedCreature);
+	}
+	
+	private void incapacitatePlayer(CreatureObject incapacitatedPlayer) {
+		int incapacitationCounter = 15;
+		incapacitatedPlayer.setPosture(Posture.INCAPACITATED);
+		incapacitatedPlayer.setCounter(incapacitationCounter);
+		
+		Log.i(this, "%s was incapacitated", incapacitatedPlayer);
+		
+		// Once the incapacitation counter expires, revive them.
+		executor.schedule(() -> reviveCreature(incapacitatedPlayer), incapacitationCounter, TimeUnit.SECONDS);
+	}
+	
+	private void reviveCreature(CreatureObject revivedCreature) {
+		if(revivedCreature.isPlayer())
+			revivedCreature.setCounter(0);
+		
+		revivedCreature.setPosture(Posture.UPRIGHT);
+		
+		// The creature is now able to turn around and move
+		revivedCreature.setTurnScale(1);
+		revivedCreature.setMovementScale(1);
+		
+		// Give 'em a percentage of their health and schedule them for HAM regeneration.
+		revivedCreature.setHealth((int) (revivedCreature.getBaseHealth() * 0.1));	// Restores 10% health of their base health
+		synchronized(regeneratingHealthCreatures) {
+			regeneratingHealthCreatures.add(revivedCreature);
+		}
+		
+		synchronized(regeneratingActionCreatures) {
+			regeneratingActionCreatures.add(revivedCreature);
+		}
+		
+		Log.i(this, "% was revived", revivedCreature);
+	}
+	
+	private void killCreature(CreatureObject killedCreature) {
+		killedCreature.setPosture(Posture.DEAD);
+		Log.i(this, "%s was killed", killedCreature);
+		new CreatureKilledIntent(killedCreature).broadcast();
 	}
 	
 	private boolean handleStatus(CreatureObject source, CombatStatus status) {
@@ -221,8 +388,14 @@ public class CombatService extends Service {
 			return CombatStatus.NO_WEAPON;
 		if (!(target instanceof TangibleObject))
 			return CombatStatus.INVALID_TARGET;
-		if ((((TangibleObject) target).getPvpFlags() & PvpFlag.ATTACKABLE.getBitmask()) == 0)
+		TangibleObject tangibleTarget = (TangibleObject) target;
+		if(tangibleTarget.getPvpFaction() != PvpFaction.NEUTRAL) {
+			if(!tangibleTarget.isEnemy(source)) {
+				return CombatStatus.INVALID_TARGET;
+			}
+		} else if ((tangibleTarget.getPvpFlags() & PvpFlag.ATTACKABLE.getBitmask()) == 0)
 			return CombatStatus.INVALID_TARGET;
+		
 		CombatStatus status;
 		switch (c.getAttackType()) {
 			case AREA:
