@@ -37,6 +37,7 @@ import intents.object.DestroyObjectIntent;
 import intents.radial.RadialSelectionIntent;
 import java.util.ArrayList;
 import java.util.Collection;
+import network.packets.swg.zone.object_controller.ShowLootBox;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.SWGObject;
@@ -45,6 +46,7 @@ import resources.player.Player;
 import resources.radial.RadialItem;
 import resources.server_info.RelationalServerData;
 import resources.server_info.RelationalServerFactory;
+import services.objects.StaticItemService.ObjectCreationHandler;
 
 public class UniformBoxService extends Service {
 	//TODO: Display loot box
@@ -120,7 +122,25 @@ public class UniformBoxService extends Service {
 				staticItems.add(item);
 		}
 		
-		new CreateStaticItemIntent(creature, inventory, staticItems.toArray(new String[staticItems.size()])).broadcast();
+		new CreateStaticItemIntent(creature, inventory, new ObjectCreationHandler() {
+			@Override
+			public void success(SWGObject[] createdObjects) {
+				int objectCount = createdObjects.length;
+				long[] objectIds = new long[objectCount];
+				
+				for(int i = 0; i < objectCount; i++) {
+					objectIds[i] = createdObjects[i].getObjectId();
+				}
+				
+				creature.sendSelf(new ShowLootBox(creature.getObjectId(), objectIds));
+			}
+
+			@Override
+			public void containerFull() {
+				
+			}
+			
+		}, staticItems.toArray(new String[staticItems.size()])).broadcast();
 	}
 	
 }

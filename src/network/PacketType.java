@@ -120,6 +120,8 @@ public enum PacketType {
 	SERVER_WEATHER_MESSAGE						(ServerWeatherMessage.CRC, 			ServerWeatherMessage.class),
 	PLAY_MUSIC_MESSAGE							(PlayMusicMessage.CRC,				PlayMusicMessage.class),
 	PLAY_CLIENT_EFFECT_OBJECT_MESSAGE			(PlayClientEffectObjectMessage.CRC, PlayClientEffectObjectMessage.class),
+	CHANGE_ROLE_ICON_CHOICE						(ChangeRoleIconChoice.CRC,			ChangeRoleIconChoice.class),
+	SHOW_LOOT_BOX								(ShowLootBox.CRC,					ShowLootBox.class),
 	
 		// Chat
 		CHAT_CREATE_ROOM						(ChatCreateRoom.CRC,				ChatCreateRoom.class),

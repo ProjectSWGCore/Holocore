@@ -62,6 +62,7 @@ import utilities.Scripts;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
+import services.objects.StaticItemService.ObjectCreationHandler;
 
 /**
  * Created by Waverunner on 8/19/2015
@@ -144,7 +145,17 @@ public class QaToolCmdCallback implements ICmdCallback {
 			return;
 
 		Log.i("QA", "%s attempted to create item %s", player, itemName);
-		new CreateStaticItemIntent(creature, inventory, itemName).broadcast();
+		new CreateStaticItemIntent(creature, inventory, new ObjectCreationHandler() {
+			@Override
+			public void success(SWGObject[] createdObjects) {
+				new ChatBroadcastIntent(player, "@system_msg:give_item_success").broadcast();
+			}
+
+			@Override
+			public void containerFull() {
+				new ChatBroadcastIntent(player, "@system_msg:give_item_failure").broadcast();
+			}
+		}, itemName).broadcast();
 	}
 	
 	private void forceDelete(final ObjectManager objManager, final Player player, final SWGObject target) {

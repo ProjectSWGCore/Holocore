@@ -173,15 +173,21 @@ public final class StaticItemService extends Service {
 		SWGObject container = i.getContainer();
 		String[] itemNames = i.getItemNames();
 		Player requesterOwner = i.getRequester().getOwner();
+		ObjectCreationHandler objectCreationHandler = i.getObjectCreationHandler();
 		
 		// If adding these items to the container would exceed the max capacity...
 		if(container.getVolume() + itemNames.length > container.getMaxContainerSize()) {
-			new ChatBroadcastIntent(requesterOwner, "@system_msg:give_item_failure").broadcast();
+			objectCreationHandler.containerFull();
 			return;
 		}
 		
-		if(itemNames.length > 0) {
-			for(String itemName : itemNames) {
+		int itemCount = itemNames.length;
+		
+		if(itemCount > 0) {
+			SWGObject[] createdObjects = new SWGObject[itemCount];
+			
+			for(int j = 0; j < itemCount; j++) {
+				String itemName = itemNames[j];
 				ObjectAttributes objectAttributes = objectAttributesMap.get(itemName);
 
 				if (objectAttributes != null) {
@@ -195,10 +201,7 @@ public final class StaticItemService extends Service {
 						switch(object.moveToContainer(container)) {	// Server-generated object is added to the container
 							case SUCCESS:
 								Log.i(this, "Successfully moved %s into container %s", itemName, container);
-								new ChatBroadcastIntent(requesterOwner, "@system_msg:give_item_success").broadcast();
-								break;
-							case CONTAINER_FULL:
-								new ChatBroadcastIntent(requesterOwner, "@system_msg:give_item_failure").broadcast();
+								createdObjects[j] = object;
 								break;
 						}
 						new ObjectCreatedIntent(object).broadcast();
@@ -212,6 +215,8 @@ public final class StaticItemService extends Service {
 					new ChatBroadcastIntent(requesterOwner, errorMessage).broadcast();
 				}
 			}
+			
+			objectCreationHandler.success(createdObjects);
 		} else {
 			Log.w(this, "No item names were specified in CreateStaticItemIntent - no objects were spawned into container %s", container);
 		}
@@ -619,4 +624,8 @@ public final class StaticItemService extends Service {
 	// TODO schematic_type
 	// TODO schematic_use
 
+	public interface ObjectCreationHandler {
+		void success(SWGObject[] createdObjects);
+		void containerFull();
+	}
 }
