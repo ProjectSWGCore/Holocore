@@ -346,10 +346,28 @@ class CreatureObjectSharedNP implements Persistable {
 		}
 	}
 	
-	public void modifyHealth(int mod, SWGObject target) {
+	public int modifyHealth(int mod, SWGObject target) {
 		synchronized(attributes) {
-			attributes.set(0, getHealth() + mod);
-			attributes.sendDeltaMessage(target);
+			int oldHealth = getHealth();
+			int newHealthValue = oldHealth + mod;
+			int maxHealth = getMaxHealth();
+			
+			// We can't go above max health
+			if(newHealthValue > maxHealth) {
+				newHealthValue = maxHealth;
+			} else if(newHealthValue < 0) {	// We also can't go below 0 health
+				newHealthValue = 0;
+			}
+			
+			int difference = newHealthValue - oldHealth;
+			
+			// We don't send deltas unnecessarily
+			if(difference != 0) {
+				attributes.set(0, newHealthValue);
+				attributes.sendDeltaMessage(target);
+			}
+
+			return difference;
 		}
 	}
 	
@@ -367,10 +385,28 @@ class CreatureObjectSharedNP implements Persistable {
 		}
 	}
 	
-	public void modifyAction(int mod, SWGObject target) {
+	public int modifyAction(int mod, SWGObject target) {
 		synchronized(attributes) {
-			attributes.set(2, getAction() + mod);
-			attributes.sendDeltaMessage(target);
+			int oldAction = getAction();
+			int newActionValue = oldAction + mod;
+			int maxAction = getMaxAction();
+			
+			// We can't go above max action
+			if(newActionValue > maxAction) {
+				newActionValue = maxAction;
+			} else if(newActionValue < 0) {	// We also can't go below 0 action
+				newActionValue = 0;
+			}
+			
+			int difference = newActionValue - oldAction;
+			
+			// We don't send deltas unnecessarily
+			if(difference != 0) {
+				attributes.set(2, newActionValue);
+				attributes.sendDeltaMessage(target);
+			}
+
+			return difference;
 		}
 	}
 	
@@ -388,10 +424,28 @@ class CreatureObjectSharedNP implements Persistable {
 		}
 	}
 	
-	public void modifyMind(int mod, SWGObject target) {
+	public int modifyMind(int mod, SWGObject target) {
 		synchronized(attributes) {
-			attributes.set(4, getMind() + mod);
-			attributes.sendDeltaMessage(target);
+			int oldMindValue = getMind();
+			int newMindValue = oldMindValue + mod;
+			int maxMind = getMaxMind();
+			
+			// We can't go above max mind
+			if(newMindValue > maxMind) {
+				newMindValue = maxMind;
+			} else if(newMindValue < 0) {	// We also can't go below 0 mind
+				newMindValue = 0;
+			}
+			
+			int difference = newMindValue - oldMindValue;
+			
+			// We don't send deltas unnecessarily
+			if(difference != 0) {
+				attributes.set(4, newMindValue);
+				attributes.sendDeltaMessage(target);
+			}
+
+			return difference;
 		}
 	}
 	
@@ -493,7 +547,7 @@ class CreatureObjectSharedNP implements Persistable {
 	
 	@Override
 	public void save(NetBufferStream stream) {
-		stream.addByte(0);
+		stream.addByte(1);
 		stream.addShort(level);
 		stream.addInt(levelHealthGranted);
 		stream.addAscii(animation);
@@ -511,9 +565,6 @@ class CreatureObjectSharedNP implements Persistable {
 		stream.addBoolean(equippedWeapon != null);
 		if (equippedWeapon != null)
 			SWGObjectFactory.save(equippedWeapon, stream);
-		synchronized (attributes) {
-			stream.addList(attributes, (i) -> stream.addInt(i));
-		}
 		synchronized (maxAttributes) {
 			stream.addList(maxAttributes, (i) -> stream.addInt(i));
 		}
@@ -521,7 +572,13 @@ class CreatureObjectSharedNP implements Persistable {
 	
 	@Override
 	public void read(NetBufferStream stream) {
-		stream.getByte();
+		switch(stream.getByte()) {
+			case 0: readVersion0(stream); break;
+			case 1: readVersion1(stream); break;
+		}
+	}
+	
+	private void readVersion0(NetBufferStream stream) {
 		level = stream.getShort();
 		levelHealthGranted = stream.getInt();
 		animation = stream.getAscii();
@@ -540,6 +597,30 @@ class CreatureObjectSharedNP implements Persistable {
 			equippedWeapon = (WeaponObject) SWGObjectFactory.create(stream);
 		stream.getList((i) -> attributes.set(i, stream.getInt()));
 		stream.getList((i) -> maxAttributes.set(i, stream.getInt()));
+	}
+	
+	private void readVersion1(NetBufferStream stream) {
+		level = stream.getShort();
+		levelHealthGranted = stream.getInt();
+		animation = stream.getAscii();
+		moodAnimation = stream.getAscii();
+		guildId = stream.getInt();
+		lookAtTargetId = stream.getLong();
+		intendedTargetId = stream.getLong();
+		moodId = stream.getByte();
+		costume = stream.getAscii();
+		visible = stream.getBoolean();
+		shownOnRadar = stream.getBoolean();
+		beast = stream.getBoolean();
+		difficulty = CreatureDifficulty.valueOf(stream.getAscii());
+		hologramColour = HologramColour.valueOf(stream.getAscii());
+		if (stream.getBoolean())
+			equippedWeapon = (WeaponObject) SWGObjectFactory.create(stream);
+		stream.getList((i) -> {
+			int maxAttribute = stream.getInt();
+			maxAttributes.set(i, maxAttribute);
+			attributes.set(i, maxAttribute);
+		});
 	}
 	
 }

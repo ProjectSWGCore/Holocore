@@ -25,45 +25,24 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package resources.radial;
+package intents.combat;
 
-import java.util.ArrayList;
-import java.util.List;
+import resources.control.Intent;
+import resources.objects.creature.CreatureObject;
 
-public class RadialOption {
+public class CreatureKilledIntent extends Intent {
+
+	public static final String TYPE = "CreatureKilledIntent";
 	
-	private RadialItem item;
-	private List<RadialOption> children;
-	private String overriddenText;
-	
-	public RadialOption() {
-		this.children = new ArrayList<>();
+	private final CreatureObject killedCreature;
+
+	public CreatureKilledIntent(CreatureObject killedCreature) {
+		super(TYPE);
+		this.killedCreature = killedCreature;
 	}
-	
-	public RadialOption(RadialItem item) {
-		this.item = item;
-		this.children = new ArrayList<>();
-	}
-	
-	public void setItem(RadialItem item) { this.item = item; }
-	public void addChild(RadialOption option) { this.children.add(option); }
-	public void addChild(RadialItem item) { addChild(new RadialOption(item)); }
-	public void addChildWithOverriddenText(RadialItem item, String overriddenText) {
-		RadialOption childOption = new RadialOption(item);
-		childOption.setOverriddenText(overriddenText);
-		addChild(childOption);
-	}
-	public void setOverriddenText(String overridenText) { this.overriddenText = overridenText; }
-	
-	public int getId() { return item.getId(); }
-	public int getOptionType() { return item.getOptionType(); }
-	public String getText() { return overriddenText != null ? overriddenText : item.getText(); }
-	
-	public List<RadialOption> getChildren() { return children; }
-	
-	@Override
-	public String toString() { 
-		return String.format("ID=%d Option=%d Text=%s", getId(), getOptionType(), getText()); 
+
+	public CreatureObject getKilledCreature() {
+		return killedCreature;
 	}
 	
 }

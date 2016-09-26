@@ -27,6 +27,7 @@
 ***********************************************************************************/
 package services.experience;
 
+import intents.GrantBadgeIntent;
 import intents.experience.LevelChangedIntent;
 import intents.experience.SkillBoxGrantedIntent;
 import java.awt.Color;
@@ -116,6 +117,9 @@ public final class SkillTemplateService extends Service {
 					new SkillBoxGrantedIntent(skillName, creatureObject).broadcast();
 					playerObject.setProfWheelPosition(skillName);
 
+					// Grants a mastery collection badge, IF they qualify.
+					grantMasteryBadge(creatureObject, profession, skillName);
+
 					giveRewardItems(creatureObject, skillName);
 
 					creatureObject.sendObserversAndSelf(new PlayClientEffectObjectMessage("clienteffect/skill_granted.cef", "", objectId));
@@ -176,4 +180,59 @@ public final class SkillTemplateService extends Service {
 			rewards.put(roadmapSkillName, new RoadmapReward(roadmapTemplate, roadmapSkillName, appearanceName, stringId, itemDefault, itemWookiee, itemIthorian));
 		}
 	}
+	
+	private void grantMasteryBadge(CreatureObject creature, String profession, String skillName) {
+		if (skillName.endsWith("_phase4_master")) {
+			if (profession.startsWith("trader_0")) {
+				// All traders become Master Merchants and Master Artisans
+				new GrantBadgeIntent(creature, "new_prof_crafting_merchant_master").broadcast();
+				new GrantBadgeIntent(creature, "new_prof_crafting_artisan_master").broadcast();
+			}
+
+			switch (profession) {
+				case "bounty_hunter_1a":
+					new GrantBadgeIntent(creature, "new_prof_bountyhunter_master").broadcast();
+					break;
+				case "commando_1a":
+					new GrantBadgeIntent(creature, "new_prof_commando_master").broadcast();
+					break;
+				case "entertainer_1a":
+					new GrantBadgeIntent(creature, "new_prof_social_entertainer_master").broadcast();
+					break;
+				case "force_sensitive_1a":
+					new GrantBadgeIntent(creature, "new_prof_jedi_master").broadcast();
+					break;
+				case "medic_1a":
+					new GrantBadgeIntent(creature, "new_prof_medic_master").broadcast();
+					break;
+				case "officer_1a":
+					new GrantBadgeIntent(creature, "new_prof_officer_master").broadcast();
+					break;
+				case "smuggler_1a":
+					new GrantBadgeIntent(creature, "new_prof_smuggler_master").broadcast();
+					break;
+				case "spy_1a":
+					new GrantBadgeIntent(creature, "new_prof_spy_master").broadcast();
+					break;
+				case "trader_0a":
+					new GrantBadgeIntent(creature, "new_prof_crafting_chef_master").broadcast();
+					new GrantBadgeIntent(creature, "new_prof_crafting_tailor_master").broadcast();
+					break;
+				case "trader_0b":
+					new GrantBadgeIntent(creature, "new_prof_crafting_architect_master").broadcast();
+					break;
+				case "trader_0c":
+					new GrantBadgeIntent(creature, "new_prof_crafting_armorsmith_master").broadcast();
+					new GrantBadgeIntent(creature, "new_prof_crafting_weaponsmith_master").broadcast();
+					break;
+				case "trader_0d":
+					new GrantBadgeIntent(creature, "new_prof_crafting_droidengineer_master").broadcast();
+					break;
+				default:
+					Log.e(this, "%s could not be granted a mastery badge because their profession %s is unrecognised", creature, profession);
+					break;
+			}
+		}
+	}
+	
 }

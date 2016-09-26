@@ -315,6 +315,9 @@ public class CommandService extends Service {
 		registerCallback("requestBiography", RequestBiographyCmdCallback.class);
 		registerCallback("flourish", FlourishCmdCallback.class);
 		registerCallback("changeDance", ChangeDanceCallback.class);
+		registerCallback("transferItemMisc", TransferItemCallback.class);
+		registerCallback("transferItemArmor", TransferItemCallback.class);
+		registerCallback("transferItemWeapon", TransferItemCallback.class);
 	}
 	
 	private void clearCommands() {

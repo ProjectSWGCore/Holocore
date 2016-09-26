@@ -67,6 +67,7 @@ import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
 import resources.objects.tangible.TangibleObject;
 import resources.objects.weapon.WeaponObject;
+import resources.objects.weapon.WeaponType;
 import resources.player.AccessLevel;
 import resources.player.Player;
 import resources.player.PlayerEvent;
@@ -402,9 +403,11 @@ public class CharacterCreationService extends Service {
 		creatureObj.setVolume(0x000F4240);
 		
 		WeaponObject defWeapon = (WeaponObject) createInventoryObject(objManager, creatureObj, "object/weapon/melee/unarmed/shared_unarmed_default_player.iff");
-		creatureObj.setDefaultWeapon(defWeapon);
 		defWeapon.setMaxRange(5);
+		defWeapon.setType(WeaponType.UNARMED);
+		defWeapon.setAttackSpeed(1);
 		creatureObj.setEquippedWeapon(defWeapon);
+		defWeapon.moveToContainer(creatureObj);	// Occupies the default_weapon slot
 		createInventoryObject(objManager, creatureObj, "object/tangible/inventory/shared_character_inventory.iff");
 		createInventoryObject(objManager, creatureObj, "object/tangible/datapad/shared_character_datapad.iff");
 		createInventoryObject(objManager, creatureObj, "object/tangible/inventory/shared_appearance_inventory.iff");

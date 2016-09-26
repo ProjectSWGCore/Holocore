@@ -484,12 +484,12 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	public int getMaxContainerSize() {
-		Object volume = dataAttributes.get(ObjectDataAttribute.CONTAINER_VOLUME_LIMIT);
-		if (volume == null) {
+		Object maxContents = dataAttributes.get(ObjectDataAttribute.CONTAINER_VOLUME_LIMIT);
+		if (maxContents == null) {
 			Log.w("SWGObject", "Volume is null!");
 			return 0;
 		}
-		return (Integer) volume;
+		return (Integer) maxContents;
 	}
 	
 	public void setClassification(ObjectClassification classification) {
