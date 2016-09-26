@@ -110,7 +110,7 @@ public class RoadmapReward {
 		wookieeRewardItems = itemWookiee.split(",");
 		ithorianRewardItems = itemIthorian.split(",");
 
-		isUniversalReward = !itemDefault.isEmpty() && (itemWookiee.isEmpty() && itemIthorian.isEmpty());
+		isUniversalReward = !itemDefault.isEmpty() && itemWookiee.isEmpty() && itemIthorian.isEmpty();
 		hasItems = !itemDefault.isEmpty() && !itemWookiee.isEmpty() && !itemIthorian.isEmpty();
 	}
 }

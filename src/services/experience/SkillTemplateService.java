@@ -63,11 +63,13 @@ import services.objects.ObjectCreator;
 public final class SkillTemplateService extends Service {
 	
 	private final Map<String, String[]> skillTemplates;
-	private Map<String, RoadmapReward> rewards = new HashMap<>();
-	private DatatableData rewardsTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/roadmap/item_rewards.iff");
+	private Map<String, RoadmapReward> rewards;
+	private DatatableData rewardsTable;
 
-	SkillTemplateService() {
+	public SkillTemplateService() {
 		skillTemplates = new HashMap<>();
+		rewards = new HashMap<>();
+		rewardsTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/roadmap/item_rewards.iff");
 		registerForIntent(LevelChangedIntent.TYPE);
 	}
 
@@ -139,6 +141,7 @@ public final class SkillTemplateService extends Service {
 		RoadmapReward reward = rewards.get(skillName);
 		Race characterRace = creatureObject.getRace();
 		String species = characterRace.getSpecies().toUpperCase();
+		SWGObject inventory = creatureObject.getSlottedObject("inventory");
 		String[] items;
 
 		if (reward.hasItems() || reward.isUniversalReward()) {
@@ -152,8 +155,6 @@ public final class SkillTemplateService extends Service {
 				items = reward.getDefaultRewardItems();
 
 			for (String item : items) {
-				SWGObject inventory = creatureObject.getSlottedObject("inventory");
-
 				if (item.endsWith(".iff")) {
 					SWGObject nonStaticItem = ObjectCreator.createObjectFromTemplate(ClientFactory.formatToSharedFile(item));
 
