@@ -48,9 +48,10 @@ public class RadialOption {
 	public void setItem(RadialItem item) { this.item = item; }
 	public void addChild(RadialOption option) { this.children.add(option); }
 	public void addChild(RadialItem item) { addChild(new RadialOption(item)); }
-	public void addChildWithOverriddenText(RadialItem item, String overridenText) {
-		addChild(item);
-		setOverriddenText(overriddenText);
+	public void addChildWithOverriddenText(RadialItem item, String overriddenText) {
+		RadialOption childOption = new RadialOption(item);
+		childOption.setOverriddenText(overriddenText);
+		addChild(childOption);
 	}
 	public void setOverriddenText(String overridenText) { this.overriddenText = overridenText; }
 	
