@@ -58,6 +58,7 @@ import utilities.Scripts;
 import services.galaxy.GalacticManager;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -66,6 +67,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -80,6 +82,7 @@ public class CommandService extends Service {
 	private final Map <String, Integer>				commandCrcLookup;
 	private final Map <String, List<Command>>		commandByScript;
 	private final Map <Player, Queue<QueuedCommand>>		combatQueueMap;
+	private final Map <Player, Set<String>>				cooldownMap;
 	private final ScheduledExecutorService executorService;
 	
 	public CommandService() {
@@ -87,6 +90,7 @@ public class CommandService extends Service {
 		commandCrcLookup = new HashMap<>();
 		commandByScript = new HashMap<>();
 		combatQueueMap = new HashMap<>();
+		cooldownMap = new HashMap<>();
 		executorService = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("command-service"));
 		
 		registerForIntent(GalacticPacketIntent.TYPE);
@@ -213,17 +217,66 @@ public class CommandService extends Service {
 	}
 	
 	private void doCommand(GalacticManager galacticManager, Player player, Command command, SWGObject target, CommandQueueEnqueue request) {
+		// TODO implement locomotion and state checks up here. See action and error in CommandQueueDequeue!
+		
+		// Let's check if this ability is on cooldown
+		String cooldownGroup = command.getCooldownGroup();
+		String cooldownGroup2 = command.getCooldownGroup2();
+		
+		synchronized (cooldownMap) {
+			Set<String> cooldowns = cooldownMap.get(player);
+
+			if (cooldowns == null) {
+				// This is the first time they're using a cooldown command
+				cooldowns = new HashSet<>();
+				cooldownMap.put(player, cooldowns);
+			} else if (cooldowns.contains(cooldownGroup) || cooldowns.contains(cooldownGroup2)) {
+				// This ability is currently on cooldown
+				// TODO system message?
+				sendCommandDequeue(player, command, request, 0, 0);
+				return;
+			}
+		}
+		
+		sendCommandDequeue(player, command, request, 0, 0);
+		
 		String argumentString = request.getArguments();
-		String [] arguments = argumentString.split(" ");
+		String[] arguments = argumentString.split(" ");
 		executeCommand(galacticManager, player, command, target, argumentString);
 		new ChatCommandIntent(player.getCreatureObject(), target, command, arguments).broadcast();
 
+		startCooldownGroup(player, cooldownGroup, command.getCooldownTime());
+		startCooldownGroup(player, cooldownGroup2, command.getCooldownTime2());
+	}
+	
+	private void sendCommandDequeue(Player player, Command command, CommandQueueEnqueue request, int action, int error) {
 		CommandQueueDequeue dequeue = new CommandQueueDequeue(player.getCreatureObject().getObjectId());
 		dequeue.setCounter(request.getCounter());
-		dequeue.setAction(0);
-		dequeue.setError(0);
-		dequeue.setTimer(0);
+		dequeue.setAction(action);
+		dequeue.setError(error);
+		dequeue.setTimer(command.getExecuteTime());
 		player.sendPacket(dequeue);
+	}
+	
+	private void startCooldownGroup(Player player, String cooldownGroup, float cooldownTime) {
+		if(!cooldownGroup.isEmpty()) {
+			synchronized(cooldownMap) {
+				if(cooldownMap.get(player).add(cooldownGroup)) {
+					// TODO send CommandTimer obj controller to player here? What of custom cooldown times?
+					
+					executorService.schedule(() -> {
+						synchronized (cooldownMap) {
+							if (!cooldownMap.get(player).remove(cooldownGroup)) {
+								Log.e(this, "%s doesn't have cooldown group %s", player, cooldownGroup);
+							}
+						}
+					}, (long) (cooldownTime * 1000), TimeUnit.MILLISECONDS);
+				} else {
+					// This cooldown group is already on cooldown!
+					Log.w(this, "%s tried to use cooldown group %s before cooldown expired", player, cooldownGroup);
+				}
+			}
+		}
 	}
 	
 	private void executeCommand(GalacticManager galacticManager, Player player, Command command, SWGObject target, String args) {
@@ -283,6 +336,11 @@ public class CommandService extends Service {
 		DatatableData baseCommands = (DatatableData) ClientFactory.getInfoFromFile("datatables/command/"+table+".iff");
 
 		int godLevel = baseCommands.getColumnFromName("godLevel");
+		int cooldownGroup = baseCommands.getColumnFromName("cooldownGroup");
+		int cooldownGroup2 = baseCommands.getColumnFromName("cooldownGroup2");
+		int cooldownTime = baseCommands.getColumnFromName("cooldownTime");
+		int cooldownTime2 = baseCommands.getColumnFromName("cooldownTime2");
+
 		for (int row = 0; row < baseCommands.getRowCount(); row++) {
 			Object [] cmdRow = baseCommands.getRow(row);
 			
@@ -294,6 +352,10 @@ public class CommandService extends Service {
 			command.setDefaultTime((float) cmdRow[6]);
 			command.setCharacterAbility((String) cmdRow[7]);
 			command.setCombatCommand(false);
+			command.setCooldownGroup((String) cmdRow[cooldownGroup]);
+			command.setCooldownGroup2((String) cmdRow[cooldownGroup2]);
+			command.setCooldownTime((float) cmdRow[cooldownTime]);
+			command.setCooldownTime2((float) cmdRow[cooldownTime2]);
 			
 			try {
 				Object addToCombatQueue = cmdRow[82];
@@ -322,6 +384,10 @@ public class CommandService extends Service {
 		cc.setCharacterAbility(c.getCharacterAbility());
 		cc.setGodLevel(c.getGodLevel());
 		cc.setCombatCommand(true);
+		cc.setCooldownGroup(c.getCooldownGroup());
+		cc.setCooldownGroup2(c.getCooldownGroup2());
+		cc.setCooldownTime(c.getCooldownTime());
+		cc.setCooldownTime2(c.getCooldownTime2());
 		return cc;
 	}
 	
