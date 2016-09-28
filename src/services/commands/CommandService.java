@@ -27,9 +27,11 @@
 ***********************************************************************************/
 package services.commands;
 
+import intents.PlayerEventIntent;
 import intents.chat.ChatBroadcastIntent;
 import intents.chat.ChatCommandIntent;
 import intents.network.GalacticPacketIntent;
+import intents.player.PlayerTransformedIntent;
 import network.packets.Packet;
 import network.packets.swg.zone.object_controller.CommandQueueDequeue;
 import network.packets.swg.zone.object_controller.CommandQueueEnqueue;
@@ -56,10 +58,20 @@ import utilities.Scripts;
 import services.galaxy.GalacticManager;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.PriorityQueue;
+import java.util.Queue;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import resources.commands.DefaultPriority;
+import resources.objects.creature.CreatureObject;
+import utilities.ThreadUtilities;
 
 
 public class CommandService extends Service {
@@ -67,13 +79,19 @@ public class CommandService extends Service {
 	private final Map <Integer, Command>			commands;			// NOTE: CRC's are all lowercased for commands!
 	private final Map <String, Integer>				commandCrcLookup;
 	private final Map <String, List<Command>>		commandByScript;
+	private final Map <Player, Queue<QueuedCommand>>		combatQueueMap;
+	private final ScheduledExecutorService executorService;
 	
 	public CommandService() {
 		commands = new HashMap<>();
 		commandCrcLookup = new HashMap<>();
 		commandByScript = new HashMap<>();
+		combatQueueMap = new HashMap<>();
+		executorService = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("command-service"));
 		
 		registerForIntent(GalacticPacketIntent.TYPE);
+		registerForIntent(PlayerEventIntent.TYPE);
+		registerForIntent(PlayerTransformedIntent.TYPE);
 	}
 	
 	@Override
@@ -81,20 +99,65 @@ public class CommandService extends Service {
 		loadBaseCommands();
 		loadCombatCommands();
 		registerCallbacks();
+		
+		executorService.scheduleAtFixedRate(() -> pollQueues(), 1, 1, TimeUnit.SECONDS);
+		
 		return super.initialize();
+	}
+
+	@Override
+	public boolean terminate() {
+		executorService.shutdown();
+		return super.terminate();
 	}
 	
 	@Override
 	public void onIntentReceived(Intent i) {
-		if (i instanceof GalacticPacketIntent) {
-			GalacticPacketIntent gpi = (GalacticPacketIntent) i;
-			Packet p = gpi.getPacket();
-			Player player = gpi.getPlayerManager().getPlayerFromNetworkId(gpi.getNetworkId());
-			if (player != null) {
-				if (p instanceof CommandQueueEnqueue) {
-					CommandQueueEnqueue controller = (CommandQueueEnqueue) p;
-					handleCommandRequest(player, gpi.getGalacticManager(), controller);
+		switch(i.getType()) {
+			case GalacticPacketIntent.TYPE: handleGalacticPacketIntent((GalacticPacketIntent) i); break;
+			case PlayerEventIntent.TYPE: handlePlayerEventIntent((PlayerEventIntent) i); break;
+			case PlayerTransformedIntent.TYPE: handlePlayerTransformedIntent((PlayerTransformedIntent) i); break;
+		}
+	}
+	
+	private void handleGalacticPacketIntent(GalacticPacketIntent i) {
+		GalacticPacketIntent gpi = (GalacticPacketIntent) i;
+		Packet p = gpi.getPacket();
+		Player player = gpi.getPlayerManager().getPlayerFromNetworkId(gpi.getNetworkId());
+		if (player != null) {
+			if (p instanceof CommandQueueEnqueue) {
+				CommandQueueEnqueue controller = (CommandQueueEnqueue) p;
+				handleCommandRequest(player, gpi.getGalacticManager(), controller);
+			}
+		}
+	}
+	
+	private void handlePlayerEventIntent(PlayerEventIntent i) {
+		switch(i.getEvent()) {
+			case PE_LOGGED_OUT:
+				synchronized (combatQueueMap) {
+					// No reason to keep their combat queue in the map if they log out
+					// This also prevents queued commands from executing after the player logs out
+					combatQueueMap.remove(i.getPlayer());
 				}
+				break;
+		}
+	}
+	
+	private void handlePlayerTransformedIntent(PlayerTransformedIntent i) {
+		synchronized (combatQueueMap) {
+			CreatureObject creature = i.getPlayer();
+			
+			if(creature.isPerforming()) {
+				// A performer can transform while dancing...
+				return;
+			}
+			
+			Player player = creature.getOwner();
+			Queue<QueuedCommand> combatQueue = combatQueueMap.get(player);
+			
+			if(combatQueue != null) {
+				combatQueue.clear();
 			}
 		}
 	}
@@ -107,15 +170,54 @@ public class CommandService extends Service {
 		}
 		
 		Command command = getCommand(request.getCommandCrc());
-		String [] arguments = request.getArguments().split(" ");
-		SWGObject target = null;
-		if (request.getTargetId() != 0) {
-			target = galacticManager.getObjectManager().getObjectById(request.getTargetId());
+		long targetId = request.getTargetId();
+		final SWGObject target = targetId != 0 ? galacticManager.getObjectManager().getObjectById(targetId) : null;
+		
+		if (command.isAddToCombatQueue()) {
+			// Schedule for later execution
+			synchronized (combatQueueMap) {
+				Queue<QueuedCommand> combatQueue = combatQueueMap.get(player);
+
+				if (combatQueue == null) {
+					combatQueue = new PriorityQueue<>();	// Has natural ordering. QueuedCommand implements Comparable for this purpose.
+					combatQueueMap.put(player, combatQueue);
+				}
+
+				if (!combatQueue.offer(new QueuedCommand(command, galacticManager, target, request))) {
+					// Ziggy: Shouldn't happen, unless the Queue implementation is changed
+					Log.e(this, "Unable to enqueue command %s from %s because the combat queue is full", command.getName(), player.getCreatureObject());
+				}
+			}
+		} else {
+			// Execute it now
+			doCommand(galacticManager, player, command, target, request);
 		}
-		
-		executeCommand(galacticManager, player, command, target, request.getArguments());
+	}
+	
+	private void pollQueues() {
+		// Takes the head of each queue and executes the command
+		synchronized (combatQueueMap) {
+			Iterator<Entry<Player, Queue<QueuedCommand>>> iterator = combatQueueMap.entrySet().iterator();
+			
+			while(iterator.hasNext()) {
+				Entry<Player, Queue<QueuedCommand>> entry = iterator.next();
+				Player player = entry.getKey();
+				Queue<QueuedCommand> combatQueue = entry.getValue();
+				QueuedCommand queueHead = combatQueue.poll();
+				
+				if (queueHead != null) { // Can be null if the combat queue is empty
+					doCommand(queueHead.getGalacticManager(), player, queueHead.getCommand(), queueHead.getTarget(), queueHead.getRequest());
+				}
+			}
+		}
+	}
+	
+	private void doCommand(GalacticManager galacticManager, Player player, Command command, SWGObject target, CommandQueueEnqueue request) {
+		String argumentString = request.getArguments();
+		String [] arguments = argumentString.split(" ");
+		executeCommand(galacticManager, player, command, target, argumentString);
 		new ChatCommandIntent(player.getCreatureObject(), target, command, arguments).broadcast();
-		
+
 		CommandQueueDequeue dequeue = new CommandQueueDequeue(player.getCreatureObject().getObjectId());
 		dequeue.setCounter(request.getCounter());
 		dequeue.setAction(0);
@@ -186,13 +288,24 @@ public class CommandService extends Service {
 			
 			Command command = new Command((String) cmdRow[0]);
 			command.setCrc(CRC.getCrc(command.getName().toLowerCase(Locale.ENGLISH)));
+			command.setDefaultPriority(DefaultPriority.getDefaultPriority((int) cmdRow[1]));
 			command.setScriptHook((String) cmdRow[2]);
 			command.setCppHook((String)cmdRow[4]);
 			command.setDefaultTime((float) cmdRow[6]);
 			command.setCharacterAbility((String) cmdRow[7]);
 			command.setCombatCommand(false);
 			
-			if(godLevel >= 0){
+			try {
+				Object addToCombatQueue = cmdRow[82];
+
+				// Ziggy: Sometimes this column contains a String... uwot SOE?
+				if(addToCombatQueue instanceof Boolean)
+					command.setAddToCombatQueue((Boolean) addToCombatQueue);
+			} catch (ArrayIndexOutOfBoundsException e) {
+				// Sometimes, this column just doesn't seem to exist.
+			}
+			
+			if(godLevel >= 0){ 
 				command.setGodLevel((int) cmdRow[godLevel]);
 			}
 			
@@ -374,5 +487,42 @@ public class CommandService extends Service {
 			commands.add(command);
 		}
 		return true;
+	}
+	
+	private class QueuedCommand implements Comparable<QueuedCommand> {
+
+		private final Command command;
+		private final GalacticManager galacticManager;
+		private final SWGObject target;
+		private final CommandQueueEnqueue request;
+
+		public QueuedCommand(Command command, GalacticManager galacticManager, SWGObject target, CommandQueueEnqueue request) {
+			this.command = command;
+			this.galacticManager = galacticManager;
+			this.target = target;
+			this.request = request;
+		}
+		
+		@Override
+		public int compareTo(QueuedCommand o) {
+			return command.getDefaultPriority().compareTo(o.getCommand().getDefaultPriority());
+		}
+
+		public Command getCommand() {
+			return command;
+		}
+
+		public GalacticManager getGalacticManager() {
+			return galacticManager;
+		}
+
+		public SWGObject getTarget() {
+			return target;
+		}
+
+		public CommandQueueEnqueue getRequest() {
+			return request;
+		}
+		
 	}
 }
