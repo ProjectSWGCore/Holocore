@@ -295,14 +295,14 @@ public class CommandService extends Service {
 			command.setCharacterAbility((String) cmdRow[7]);
 			command.setCombatCommand(false);
 			
-			try {
+			// Ziggy: The amount of columns in the table seems to change for each row
+			if(cmdRow.length >= 83) {
 				Object addToCombatQueue = cmdRow[82];
 
 				// Ziggy: Sometimes this column contains a String... uwot SOE?
-				if(addToCombatQueue instanceof Boolean)
+				if(addToCombatQueue instanceof Boolean) {
 					command.setAddToCombatQueue((Boolean) addToCombatQueue);
-			} catch (ArrayIndexOutOfBoundsException e) {
-				// Sometimes, this column just doesn't seem to exist.
+				}
 			}
 			
 			if(godLevel >= 0){ 
@@ -486,7 +486,7 @@ public class CommandService extends Service {
 		return true;
 	}
 	
-	private class QueuedCommand implements Comparable<QueuedCommand> {
+	private static class QueuedCommand implements Comparable<QueuedCommand> {
 
 		private final Command command;
 		private final GalacticManager galacticManager;
