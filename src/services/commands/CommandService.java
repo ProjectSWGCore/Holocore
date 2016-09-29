@@ -71,6 +71,7 @@ import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import network.packets.swg.zone.object_controller.CommandTimer;
 import resources.commands.DefaultPriority;
 import resources.objects.creature.CreatureObject;
 import utilities.ThreadUtilities;
@@ -232,7 +233,6 @@ public class CommandService extends Service {
 				cooldownMap.put(player, cooldowns);
 			} else if (cooldowns.contains(cooldownGroup) || cooldowns.contains(cooldownGroup2)) {
 				// This ability is currently on cooldown
-				// TODO system message?
 				sendCommandDequeue(player, command, request, 0, 0);
 				return;
 			}
@@ -244,9 +244,11 @@ public class CommandService extends Service {
 		String[] arguments = argumentString.split(" ");
 		executeCommand(galacticManager, player, command, target, argumentString);
 		new ChatCommandIntent(player.getCreatureObject(), target, command, arguments).broadcast();
-
-		startCooldownGroup(player, cooldownGroup, command.getCooldownTime());
-		startCooldownGroup(player, cooldownGroup2, command.getCooldownTime2());
+		
+		// TODO custom cooldown times. Scripts might be a good idea.
+		
+		startCooldownGroup(player, request.getCounter(), command.getCrc(), cooldownGroup, command.getCooldownTime());
+		startCooldownGroup(player, request.getCounter(), command.getCrc(), cooldownGroup2, command.getCooldownTime2());
 	}
 	
 	private void sendCommandDequeue(Player player, Command command, CommandQueueEnqueue request, int action, int error) {
@@ -258,23 +260,30 @@ public class CommandService extends Service {
 		player.sendPacket(dequeue);
 	}
 	
-	private void startCooldownGroup(Player player, String cooldownGroup, float cooldownTime) {
+	private void startCooldownGroup(Player player, int sequenceId, int commandNameCrc, String cooldownGroup, float cooldownTime) {
 		if(!cooldownGroup.isEmpty()) {
 			synchronized(cooldownMap) {
 				if(cooldownMap.get(player).add(cooldownGroup)) {
-					// TODO send CommandTimer obj controller to player here? What of custom cooldown times?
+					CommandTimer commandTimer = new CommandTimer(player.getCreatureObject().getObjectId());
+					commandTimer.setCooldownGroupCrc(CRC.getCrc(cooldownGroup));
+					commandTimer.setCooldownMax(cooldownTime);
+					commandTimer.setCommandNameCrc(commandNameCrc);
+					commandTimer.setSequenceId(sequenceId);
+					player.sendPacket(commandTimer);
 					
-					executorService.schedule(() -> {
-						synchronized (cooldownMap) {
-							if (!cooldownMap.get(player).remove(cooldownGroup)) {
-								Log.e(this, "%s doesn't have cooldown group %s", player, cooldownGroup);
-							}
-						}
-					}, (long) (cooldownTime * 1000), TimeUnit.MILLISECONDS);
+					executorService.schedule(() -> removeCooldown(player, cooldownGroup), (long) (cooldownTime * 1000), TimeUnit.MILLISECONDS);
 				} else {
 					// This cooldown group is already on cooldown!
 					Log.w(this, "%s tried to use cooldown group %s before cooldown expired", player, cooldownGroup);
 				}
+			}
+		}
+	}
+	
+	private void removeCooldown(Player player, String cooldownGroup) {
+		synchronized (cooldownMap) {
+			if (!cooldownMap.get(player).remove(cooldownGroup)) {
+				Log.e(this, "%s doesn't have cooldown group %s", player, cooldownGroup);
 			}
 		}
 	}
