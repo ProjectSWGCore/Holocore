@@ -32,7 +32,7 @@ public class Command {
 	private int crc;
 	
 	private String name;
-	// defaultPriority
+	private DefaultPriority defaultPriority;
 	private String scriptHook;
 
 	// fail
@@ -54,6 +54,7 @@ public class Command {
 	private int godLevel;
 	// display group
 	private boolean combatCommand;
+	private boolean addToCombatQueue;
 	private int validWeapon;
 	private int invalidWeapon;
 	private String cooldownGroup;
@@ -74,6 +75,8 @@ public class Command {
 	public void setCrc(int crc) { this.crc = crc; }
 	public String getName() { return name; }
 	public void setName(String name) { this.name = name; }
+	public DefaultPriority getDefaultPriority() { return defaultPriority; }
+	public void setDefaultPriority(DefaultPriority defaultPriority) { this.defaultPriority = defaultPriority; }
 	public String getScriptHook() { return scriptHook; }
 	public void setScriptHook(String scriptHook) { this.scriptHook = scriptHook; }
 	public String getCppHook() { return cppHook; }
@@ -97,6 +100,8 @@ public class Command {
 	public void setGodLevel(int godLevel) { this.godLevel = godLevel; }
 	public boolean isCombatCommand() { return combatCommand; }
 	public void setCombatCommand(boolean combatCommand) { this.combatCommand = combatCommand; }
+	public boolean isAddToCombatQueue() { return addToCombatQueue; }
+	public void setAddToCombatQueue(boolean addToCombatQueue) { this.addToCombatQueue = addToCombatQueue; }
 	public int getValidWeapon() { return validWeapon; }
 	public void setValidWeapon(int validWeapon) { this.validWeapon = validWeapon; }
 	public int getInvalidWeapon() { return invalidWeapon; }
