@@ -220,6 +220,8 @@ public class CommandService extends Service {
 	private void doCommand(GalacticManager galacticManager, Player player, Command command, SWGObject target, CommandQueueEnqueue request) {
 		// TODO implement locomotion and state checks up here. See action and error in CommandQueueDequeue!
 		
+		// TODO target and targetType checks
+		
 		// Let's check if this ability is on cooldown
 		String cooldownGroup = command.getCooldownGroup();
 		String cooldownGroup2 = command.getCooldownGroup2();
