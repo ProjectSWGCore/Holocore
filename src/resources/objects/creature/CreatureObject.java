@@ -29,6 +29,7 @@ package resources.objects.creature;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Set;
 
 import network.packets.swg.zone.UpdatePostureMessage;
@@ -81,6 +82,7 @@ public class CreatureObject extends TangibleObject {
 	public CreatureObject(long objectId) {
 		super(objectId, BaselineType.CREO);
 		initBaseAttributes();
+		setPrefLoadRange(200);
 	}
 	
 	@Override
@@ -125,7 +127,7 @@ public class CreatureObject extends TangibleObject {
 	
 	public void addSkill(String skillName) {
 		synchronized(skills) {
-			if(skills.add(skillName)) {
+			if (skills.add(skillName)) {
 				skills.sendDeltaMessage(this);
 			}
 		}
@@ -135,8 +137,8 @@ public class CreatureObject extends TangibleObject {
 		return skills.contains(skillName);
 	}
 	
-	public SWGSet<String> getSkills() {
-		return skills;
+	public Set<String> getSkills() {
+		return Collections.unmodifiableSet(skills);
 	}
 	
 	public int getCashBalance() {

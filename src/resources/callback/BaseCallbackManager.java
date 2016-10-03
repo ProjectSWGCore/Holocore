@@ -25,122 +25,82 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package network.packets.swg.zone.object_controller;
+package resources.callback;
 
-import resources.Location;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.RejectedExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 
-import java.nio.ByteBuffer;
+import utilities.ThreadUtilities;
 
-/**
- * @author Waverunner
- */
-public class DataTransformWithParent extends ObjectController {
-	public static final int CRC = 0x00F1;
-
-	private int timestamp;
-	private int counter;
-	private long cellId;
-	private Location l;
-	private float speed;
-	private float lookAtYaw;
-	private boolean useLookAtYaw;
-
-	public DataTransformWithParent(long objectId) {
-		super(objectId, CRC);
-	}
-
-	public DataTransformWithParent(ByteBuffer data) {
-		super(CRC);
-		decode(data);
-	}
-
-	@Override
-	public void decode(ByteBuffer data) {
-		decodeHeader(data);
-		timestamp = getInt(data); // Timestamp
-		counter = getInt(data);
-		cellId = getLong(data);
-		l = getEncodable(data, Location.class);
-		speed = getFloat(data);
-		lookAtYaw = getFloat(data);
-		useLookAtYaw = getBoolean(data);
-	}
-
-	@Override
-	public ByteBuffer encode() {
-		return null;
+class BaseCallbackManager {
+	
+	private final Object executorMutex;
+	private final String name;
+	private final int threadCount;
+	private final AtomicBoolean shutdown;
+	private ExecutorService executor;
+	
+	public BaseCallbackManager(String name) {
+		this(name, 1);
 	}
 	
-	public void setUpdateCounter(int counter) {
-		this.counter = counter;
+	public BaseCallbackManager(String name, int threadCount) {
+		this.executorMutex = new Object();
+		this.name = name;
+		this.threadCount = threadCount;
+		this.shutdown = new AtomicBoolean(false);
+		this.executor = null;
 	}
-
-	public void setTimestamp(int timestamp) {
-		this.timestamp = timestamp;
-	}
-
-	public void setCellId(long cellId) {
-		this.cellId = cellId;
-	}
-
-	public void setLocation(Location l) {
-		this.l = l;
-	}
-
-	public void setSpeed(float speed) {
-		this.speed = speed;
-	}
-
-	public void setLookAtYaw(float lookAtYaw) {
-		this.lookAtYaw = lookAtYaw;
-	}
-
-	public void setUseLookAtYaw(boolean useLookAtYaw) {
-		this.useLookAtYaw = useLookAtYaw;
-	}
-
-	public int getUpdateCounter() {
-		return counter;
-	}
-
-	public long getCellId() {
-		return cellId;
-	}
-
-	public Location getLocation() {
-		return l;
-	}
-
-	public float getSpeed() {
-		return speed;
-	}
-
-	public float getLookAtYaw() {
-		return lookAtYaw;
-	}
-
-	public boolean isUseLookAtYaw() {
-		return useLookAtYaw;
-	}
-
-	public int getTimestamp() {
-		return timestamp;
-	}
-
-	public byte getMovementAngle() {
-		byte movementAngle = (byte) 0.0f;
-		double wOrient = l.getOrientationW();
-		double yOrient = l.getOrientationY();
-		double sq = Math.sqrt(1 - (wOrient*wOrient));
-
-		if (sq != 0) {
-			if (l.getOrientationW() > 0 && l.getOrientationY() < 0) {
-				wOrient *= -1;
-				yOrient *= -1;
-			}
-			movementAngle = (byte) ((yOrient / sq) * (2 * Math.acos(wOrient) / 0.06283f));
+	
+	public void start() {
+		synchronized (executorMutex) {
+			if (executor != null && !shutdown.get())
+				executor.shutdown();
+			shutdown.set(false);
+			if (threadCount <= 1)
+				executor = Executors.newSingleThreadExecutor(ThreadUtilities.newThreadFactory(name+"-callback-manager"));
+			else
+				executor = Executors.newFixedThreadPool(threadCount, ThreadUtilities.newThreadFactory(name+"-callback-manager-%d"));
 		}
-
-		return movementAngle;
 	}
+	
+	public void stop() {
+		synchronized (executorMutex) {
+			executor.shutdown();
+			shutdown.set(true);
+		}
+	}
+	
+	public boolean awaitTermination(long timeout, TimeUnit unit) {
+		synchronized (executorMutex) {
+			if (executor == null)
+				return true;
+			if (!shutdown.get())
+				throw new IllegalStateException("Cannot wait for termination when never stopped!");
+			try {
+				return executor.awaitTermination(timeout, unit);
+			} catch (InterruptedException e) {
+				return false;
+			}
+		}
+	}
+	
+	protected boolean call(Runnable r) {
+		synchronized (executorMutex) {
+			if (executor == null)
+				throw new IllegalStateException("Manager has not been started!");
+			if (shutdown.get())
+				return false;
+			try {
+				executor.execute(r);
+				return true;
+			} catch (RejectedExecutionException e) {
+				return false;
+			}
+		}
+	}
+	
 }

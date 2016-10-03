@@ -341,7 +341,7 @@ public class TangibleObject extends SWGObject {
 	protected void sendBaselines(Player target) {
 		super.sendBaselines(target);
 		
-		new FactionIntent(this, FactionIntentType.FLAGUPDATE).broadcast();
+//		new FactionIntent(this, FactionIntentType.FLAGUPDATE).broadcast();
 	}
 	
 	@Override

@@ -36,13 +36,11 @@ import network.packets.swg.zone.UpdatePvpStatusMessage;
 import network.packets.swg.zone.chat.ChatSystemMessage;
 import network.packets.swg.zone.chat.ChatSystemMessage.SystemChatType;
 import intents.FactionIntent;
-import intents.PlayerEventIntent;
 import resources.PvpFaction;
 import resources.PvpFlag;
 import resources.PvpStatus;
 import resources.control.Intent;
 import resources.control.Service;
-import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
@@ -195,21 +193,13 @@ public final class FactionService extends Service {
 	
 	private void handleFlagChange(TangibleObject object) {
 		Player objOwner = object.getOwner();
-		
-		for (SWGObject o : object.getObservers()) {
-			if (!(o instanceof TangibleObject))
-				continue;
-			TangibleObject observer = (TangibleObject) o;
-			Player obsOwner = observer.getOwner();
-
+		for (Player obsOwner : object.getObservers()) {
+			TangibleObject observer = obsOwner.getCreatureObject();
 			int pvpBitmask = getPvpBitmask(object, observer);
 			
-			if (objOwner != null)
-				// Send the PvP information about this observer to the owner
+			if (objOwner != null) // Send the PvP information about this observer to the owner
 				objOwner.sendPacket(createPvpStatusMessage(observer, observer.getPvpFlags() | pvpBitmask));
-			if (obsOwner != null)
-				// Send the pvp information about the owner to this observer
-				obsOwner.sendPacket(createPvpStatusMessage(object, object.getPvpFlags() | pvpBitmask));
+			obsOwner.sendPacket(createPvpStatusMessage(object, object.getPvpFlags() | pvpBitmask));
 		}
 	}
 	

@@ -319,7 +319,6 @@ public class CharacterCreationService extends Service {
 		
 		playerObj.setAdminTag(player.getAccessLevel());
 		new ObjectCreatedIntent(creatureObj).broadcast();
-		new SkillBoxGrantedIntent(create.getStartingPhase(), creatureObj).broadcast();
 		return creatureObj;
 	}
 	
@@ -399,8 +398,9 @@ public class CharacterCreationService extends Service {
 		creatureObj.setHeight(create.getHeight());
 		creatureObj.setName(create.getName());
 		creatureObj.setPvpFlags(PvpFlag.PLAYER);
-		creatureObj.getSkills().add("species_" + creatureObj.getRace().getSpecies());
 		creatureObj.setVolume(0x000F4240);
+		new SkillBoxGrantedIntent(create.getStartingPhase(), creatureObj).broadcast();
+		new SkillBoxGrantedIntent("species_" + creatureObj.getRace().getSpecies(), creatureObj).broadcast();
 		
 		WeaponObject defWeapon = (WeaponObject) createInventoryObject(objManager, creatureObj, "object/weapon/melee/unarmed/shared_unarmed_default_player.iff");
 		defWeapon.setMaxRange(5);
@@ -413,9 +413,6 @@ public class CharacterCreationService extends Service {
 		createInventoryObject(objManager, creatureObj, "object/tangible/inventory/shared_appearance_inventory.iff");
 		createInventoryObject(objManager, creatureObj, "object/tangible/bank/shared_character_bank.iff");
 		createInventoryObject(objManager, creatureObj, "object/tangible/mission_bag/shared_mission_bag.iff");
-		
-		// Any character can perform the basic dance.
-		creatureObj.addAbility("startDance+basic");
 	}
 	
 	private void setPlayerObjectValues(PlayerObject playerObj, ClientCreateCharacter create) {
