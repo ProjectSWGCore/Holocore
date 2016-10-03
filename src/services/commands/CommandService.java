@@ -274,9 +274,6 @@ public class CommandService extends Service {
 					player.sendPacket(commandTimer);
 					
 					executorService.schedule(() -> removeCooldown(player, cooldownGroup), (long) (cooldownTime * 1000), TimeUnit.MILLISECONDS);
-				} else {
-					// This cooldown group is already on cooldown!
-					Log.w(this, "%s tried to use cooldown group %s before cooldown expired", player, cooldownGroup);
 				}
 			}
 		}
