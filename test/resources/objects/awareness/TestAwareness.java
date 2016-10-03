@@ -27,9 +27,12 @@
  ***********************************************************************************/
 package resources.objects.awareness;
 
+import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
+
+import utilities.CrcDatabaseGenerator;
 
 @RunWith(Suite.class)
 @SuiteClasses({
@@ -39,5 +42,10 @@ import org.junit.runners.Suite.SuiteClasses;
 	TestAwarenessHandler.class
 })
 public class TestAwareness {
+	
+	@BeforeClass
+	public static void setupCrcDatabase() {
+		CrcDatabaseGenerator.generate(false);
+	}
 	
 }
