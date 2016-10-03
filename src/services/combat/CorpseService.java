@@ -113,8 +113,8 @@ public final class CorpseService extends Service {
 					int tubeCount = set.getInt("tubes");
 					TubeData[] tubeData = new TubeData[tubeCount];
 					
-					for(int i = 0; i < tubeCount; i++) {
-						String tubeName = String.format("tube%d", i + 1);
+					for(int i = 1; i <= tubeCount; i++) {
+						String tubeName = "tube" + i;
 						tubeData[i] = new TubeData(set.getFloat(tubeName + "_x"), set.getFloat(tubeName + "_z"), set.getFloat(tubeName + "_heading"));
 					}
 					
@@ -142,8 +142,6 @@ public final class CorpseService extends Service {
 			new ChatBroadcastIntent(killedCreatureOwner, new ProsePackage(new StringId("base_player", "prose_victim_dead"), "TT", i.getKillerCreature().getName())).broadcast();
 			// TODO periodically remind the deathblown player that their timer is expiring. How often?
 				// TODO after 30 minutes, close the SUI window and force them to clone at the nearest cloning facility
-			SuiListBox window = new SuiListBox(SuiButtons.OK, "@base_player:revive_title", "@base_player:clone_prompt_header");
-
 			Collection<BuildingObject> facilitiesInTerrain = new ArrayList<>();
 
 			// Loop over clone facilities
@@ -155,6 +153,7 @@ public final class CorpseService extends Service {
 			}
 
 			if (facilitiesInTerrain.isEmpty()) {
+				SuiListBox window = new SuiListBox(SuiButtons.OK, "@base_player:revive_title", "@base_player:clone_prompt_header");
 				// Add options to SUI window
 				for (BuildingObject cloningFacility : facilitiesInTerrain) {
 					FacilityData facilityData = facilityDataMap.get(cloningFacility.getTemplate());
