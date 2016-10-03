@@ -207,11 +207,17 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 	}
 	
 	private void moveObject(SWGObject obj, Location requestedLocation) {
-		awarenessHandler.moveObject(obj, requestedLocation);
+		if (requestedLocation == null)
+			awarenessHandler.disappearObject(obj, true, true);
+		else
+			awarenessHandler.moveObject(obj, requestedLocation);
 	}
 	
 	private void moveObject(SWGObject obj, SWGObject parent, Location requestedLocation) {
-		awarenessHandler.moveObject(obj, parent, requestedLocation);
+		if (requestedLocation == null)
+			awarenessHandler.disappearObject(obj, true, true);
+		else
+			awarenessHandler.moveObject(obj, parent, requestedLocation);
 	}
 	
 	private void moveObjectWithTransform(SWGObject obj, Location requestedLocation, double speed, int update) {
