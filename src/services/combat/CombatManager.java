@@ -27,6 +27,7 @@
  ***********************************************************************************/
 package services.combat;
 
+import intents.chat.ChatBroadcastIntent;
 import java.awt.Color;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -57,6 +58,8 @@ import resources.common.CRC;
 import resources.common.RGB;
 import resources.control.Intent;
 import resources.control.Manager;
+import resources.encodables.ProsePackage;
+import resources.encodables.StringId;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.tangible.TangibleObject;
@@ -324,7 +327,7 @@ public class CombatManager extends Manager {
 		if(killedCreature.isPlayer()) {
 			// TODO account for AI deathblowing players..?
 			// If it's a player, they need to be incapacitated
-			incapacitatePlayer(killedCreature);
+			incapacitatePlayer(killer, killedCreature);
 		} else {
 			// This is just a plain ol' NPC. Die!
 			killCreature(killer, killedCreature);
@@ -333,7 +336,7 @@ public class CombatManager extends Manager {
 		exitCombat(killedCreature);
 	}
 	
-	private void incapacitatePlayer(CreatureObject incapacitatedPlayer) {
+	private void incapacitatePlayer(CreatureObject incapacitator, CreatureObject incapacitatedPlayer) {
 		int incapacitationCounter = 15;
 		incapacitatedPlayer.setPosture(Posture.INCAPACITATED);
 		incapacitatedPlayer.setCounter(incapacitationCounter);
@@ -344,6 +347,9 @@ public class CombatManager extends Manager {
 		synchronized(incapacitatedCreatures) {
 			incapacitatedCreatures.put(incapacitatedPlayer, executor.schedule(() -> expireIncapacitation(incapacitatedPlayer), incapacitationCounter, TimeUnit.SECONDS));
 		}
+		
+		new ChatBroadcastIntent(incapacitator.getOwner(), new ProsePackage(new StringId("base_player", "prose_target_incap"), "TT", incapacitatedPlayer.getName())).broadcast();
+		new ChatBroadcastIntent(incapacitatedPlayer.getOwner(), new ProsePackage(new StringId("base_player", "prose_victim_incap"), "TT", incapacitator.getName())).broadcast();
 	}
 	
 	private void expireIncapacitation(CreatureObject incapacitatedPlayer) {
