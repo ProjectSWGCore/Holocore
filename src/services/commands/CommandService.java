@@ -83,7 +83,7 @@ public class CommandService extends Service {
 	private final Map <String, Integer>				commandCrcLookup;
 	private final Map <String, List<Command>>		commandByScript;
 	private final Map <Player, Queue<QueuedCommand>>		combatQueueMap;
-	private final Map <Player, Set<String>>				cooldownMap;
+	private final Map <CreatureObject, Set<String>>			cooldownMap;
 	private final ScheduledExecutorService executorService;
 	
 	public CommandService() {
@@ -218,6 +218,7 @@ public class CommandService extends Service {
 	}
 	
 	private void doCommand(GalacticManager galacticManager, Player player, Command command, SWGObject target, CommandQueueEnqueue request) {
+		CreatureObject creature = player.getCreatureObject();
 		// TODO implement locomotion and state checks up here. See action and error in CommandQueueDequeue!
 		
 		// TODO target and targetType checks
@@ -227,12 +228,12 @@ public class CommandService extends Service {
 		String cooldownGroup2 = command.getCooldownGroup2();
 		
 		synchronized (cooldownMap) {
-			Set<String> cooldowns = cooldownMap.get(player);
+			Set<String> cooldowns = cooldownMap.get(creature);
 
 			if (cooldowns == null) {
 				// This is the first time they're using a cooldown command
 				cooldowns = new HashSet<>();
-				cooldownMap.put(player, cooldowns);
+				cooldownMap.put(creature, cooldowns);
 			} else if (cooldowns.contains(cooldownGroup) || cooldowns.contains(cooldownGroup2)) {
 				// This ability is currently on cooldown
 				sendCommandDequeue(player, command, request, 0, 0);
@@ -245,12 +246,12 @@ public class CommandService extends Service {
 		String argumentString = request.getArguments();
 		String[] arguments = argumentString.split(" ");
 		executeCommand(galacticManager, player, command, target, argumentString);
-		new ChatCommandIntent(player.getCreatureObject(), target, command, arguments).broadcast();
+		new ChatCommandIntent(creature, target, command, arguments).broadcast();
 		
 		// TODO custom cooldown times. Scripts might be a good idea.
 		
-		startCooldownGroup(player, request.getCounter(), command.getCrc(), cooldownGroup, command.getCooldownTime());
-		startCooldownGroup(player, request.getCounter(), command.getCrc(), cooldownGroup2, command.getCooldownTime2());
+		startCooldownGroup(creature, request.getCounter(), command.getCrc(), cooldownGroup, command.getCooldownTime());
+		startCooldownGroup(creature, request.getCounter(), command.getCrc(), cooldownGroup2, command.getCooldownTime2());
 	}
 	
 	private void sendCommandDequeue(Player player, Command command, CommandQueueEnqueue request, int action, int error) {
@@ -262,27 +263,30 @@ public class CommandService extends Service {
 		player.sendPacket(dequeue);
 	}
 	
-	private void startCooldownGroup(Player player, int sequenceId, int commandNameCrc, String cooldownGroup, float cooldownTime) {
+	private void startCooldownGroup(CreatureObject creature, int sequenceId, int commandNameCrc, String cooldownGroup, float cooldownTime) {
 		if(!cooldownGroup.isEmpty()) {
 			synchronized(cooldownMap) {
-				if(cooldownMap.get(player).add(cooldownGroup)) {
-					CommandTimer commandTimer = new CommandTimer(player.getCreatureObject().getObjectId());
+				if(cooldownMap.get(creature).add(cooldownGroup)) {
+					CommandTimer commandTimer = new CommandTimer(creature.getObjectId());
 					commandTimer.setCooldownGroupCrc(CRC.getCrc(cooldownGroup));
 					commandTimer.setCooldownMax(cooldownTime);
 					commandTimer.setCommandNameCrc(commandNameCrc);
 					commandTimer.setSequenceId(sequenceId);
-					player.sendPacket(commandTimer);
+					creature.sendSelf(commandTimer);
 					
-					executorService.schedule(() -> removeCooldown(player, cooldownGroup), (long) (cooldownTime * 1000), TimeUnit.MILLISECONDS);
+					executorService.schedule(() -> removeCooldown(creature, cooldownGroup), (long) (cooldownTime * 1000), TimeUnit.MILLISECONDS);
 				}
 			}
 		}
 	}
 	
-	private void removeCooldown(Player player, String cooldownGroup) {
+	private void removeCooldown(CreatureObject creature, String cooldownGroup) {
 		synchronized (cooldownMap) {
-			if (!cooldownMap.get(player).remove(cooldownGroup)) {
-				Log.e(this, "%s doesn't have cooldown group %s", player, cooldownGroup);
+			Set<String> cooldownGroups = cooldownMap.get(creature);
+			if (cooldownGroups.remove(cooldownGroup)) {
+				
+			} else {
+				Log.w(this, "%s doesn't have cooldown group %s!", creature, cooldownGroup);
 			}
 		}
 	}
