@@ -131,7 +131,7 @@ public final class StaticItemService extends Service {
 						case "costume":	// TODO implement
 						case "dna":	// TODO implement
 						case "grant":	// TODO implement
-						case "item":	// TODO implement
+						case "item": objectAttributes = new ItemAttributes(itemName, iffTemplate); break;
 						case "object":	// TODO implement
 						case "schematic":	// TODO implement
 						case "storyteller": continue;	// TODO implement
@@ -317,7 +317,7 @@ public final class StaticItemService extends Service {
 
 	private static class WearableAttributes extends ObjectAttributes {
 
-		private final Map<String, String> mods;	// skillmods/statmods
+		private Map<String, String> mods;	// skillmods/statmods
 		private String requiredProfession;
 		private String requiredFaction;
 		private String buffName;
@@ -352,25 +352,8 @@ public final class StaticItemService extends Service {
 			String modsString = resultSet.getString("skill_mods");
 			
 			// If this wearable is supposed to have mods, then load 'em!
-			if(!modsString.equals("-")) {	// An empty cell is "-"
-				String[] modStrings = modsString.split(",");	// The mods strings are comma-separated
-				
-				for(String modString : modStrings) {
-					String category;
-					String[] splitValues = modString.split("=");	// Name and value are separated by "="
-					String modName = splitValues[0];
-					String modValue = splitValues[1];
-					
-					if(modName.endsWith("_modified")) {	// Common statmods end with "_modified"
-						category = "cat_stat_mod_bonus";
-					} else {	// If not, it's a skillmod
-						category = "cat_skill_mod_bonus";
-					}
-					
-					mods.put(category + ".@stat_n:" + modName, modValue);
-				}
-			}
-			
+			mods = parseSkillMods(modsString);
+
 			String buffNameCell = resultSet.getString("buff_name");
 			
 			if(!buffNameCell.equals("-")) {
@@ -609,6 +592,35 @@ public final class StaticItemService extends Service {
 		}
 	}
 
+	public static class ItemAttributes extends ObjectAttributes {
+		private Map<String, String> skillMods;
+		private int value;
+		private int charges;
+
+		public ItemAttributes(String itemName, String iffTemplate) {
+			super(itemName, iffTemplate);
+			skillMods = new HashMap<>();
+		}
+
+		@Override
+		protected boolean loadTypeAttributes(ResultSet resultSet) throws SQLException {
+			value = resultSet.getInt("value");
+			charges = resultSet.getInt("charges");
+			skillMods = parseSkillMods(resultSet.getString("skill_mods"));
+
+			return true;
+		}
+
+		@Override
+		protected void applyTypeAttributes(SWGObject object) {
+			if (charges != 0)
+				object.addAttribute("charges", Integer.toString(charges));
+
+			for (Map.Entry<String, String> modEntry : skillMods.entrySet())
+				object.addAttribute(modEntry.getKey(), modEntry.getValue());
+		}
+	}
+
 	// TODO ConsumableAttributes extending ObjectAttributes
 	// int uses
 	// healingPower, if specified.
@@ -619,4 +631,28 @@ public final class StaticItemService extends Service {
 	// TODO schematic_type
 	// TODO schematic_use
 
+	private static Map<String, String> parseSkillMods(String modsString) {
+		Map<String, String> mods = new HashMap<>();	// skillmods/statmods
+
+		if(!modsString.equals("-")) {	// An empty cell is "-"
+			String[] modStrings = modsString.split(",");	// The mods strings are comma-separated
+
+			for(String modString : modStrings) {
+				String category;
+				String[] splitValues = modString.split("=");	// Name and value are separated by "="
+				String modName = splitValues[0];
+				String modValue = splitValues[1];
+
+				if(modName.endsWith("_modified")) {	// Common statmods end with "_modified"
+					category = "cat_stat_mod_bonus";
+				} else {	// If not, it's a skillmod
+					category = "cat_skill_mod_bonus";
+				}
+
+				mods.put(category + ".@stat_n:" + modName, modValue);
+			}
+		}
+
+		return mods;
+	}
 }
