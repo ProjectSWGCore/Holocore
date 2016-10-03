@@ -58,6 +58,7 @@ import utilities.Scripts;
 import services.galaxy.GalacticManager;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -66,9 +67,11 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import network.packets.swg.zone.object_controller.CommandTimer;
 import resources.commands.DefaultPriority;
 import resources.objects.creature.CreatureObject;
 import utilities.ThreadUtilities;
@@ -80,6 +83,7 @@ public class CommandService extends Service {
 	private final Map <String, Integer>				commandCrcLookup;
 	private final Map <String, List<Command>>		commandByScript;
 	private final Map <Player, Queue<QueuedCommand>>		combatQueueMap;
+	private final Map <CreatureObject, Set<String>>			cooldownMap;
 	private final ScheduledExecutorService executorService;
 	
 	public CommandService() {
@@ -87,6 +91,7 @@ public class CommandService extends Service {
 		commandCrcLookup = new HashMap<>();
 		commandByScript = new HashMap<>();
 		combatQueueMap = new HashMap<>();
+		cooldownMap = new HashMap<>();
 		executorService = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("command-service"));
 		
 		registerForIntent(GalacticPacketIntent.TYPE);
@@ -213,17 +218,77 @@ public class CommandService extends Service {
 	}
 	
 	private void doCommand(GalacticManager galacticManager, Player player, Command command, SWGObject target, CommandQueueEnqueue request) {
-		String argumentString = request.getArguments();
-		String [] arguments = argumentString.split(" ");
-		executeCommand(galacticManager, player, command, target, argumentString);
-		new ChatCommandIntent(player.getCreatureObject(), target, command, arguments).broadcast();
+		CreatureObject creature = player.getCreatureObject();
+		// TODO implement locomotion and state checks up here. See action and error in CommandQueueDequeue!
+		
+		// TODO target and targetType checks
+		
+		// Let's check if this ability is on cooldown
+		String cooldownGroup = command.getCooldownGroup();
+		String cooldownGroup2 = command.getCooldownGroup2();
+		
+		synchronized (cooldownMap) {
+			Set<String> cooldowns = cooldownMap.get(creature);
 
+			if (cooldowns == null) {
+				// This is the first time they're using a cooldown command
+				cooldowns = new HashSet<>();
+				cooldownMap.put(creature, cooldowns);
+			} else if (cooldowns.contains(cooldownGroup) || cooldowns.contains(cooldownGroup2)) {
+				// This ability is currently on cooldown
+				sendCommandDequeue(player, command, request, 0, 0);
+				return;
+			}
+		}
+		
+		sendCommandDequeue(player, command, request, 0, 0);
+		
+		String argumentString = request.getArguments();
+		String[] arguments = argumentString.split(" ");
+		executeCommand(galacticManager, player, command, target, argumentString);
+		new ChatCommandIntent(creature, target, command, arguments).broadcast();
+		
+		// TODO custom cooldown times. Scripts might be a good idea.
+		
+		startCooldownGroup(creature, request.getCounter(), command.getCrc(), cooldownGroup, command.getCooldownTime());
+		startCooldownGroup(creature, request.getCounter(), command.getCrc(), cooldownGroup2, command.getCooldownTime2());
+	}
+	
+	private void sendCommandDequeue(Player player, Command command, CommandQueueEnqueue request, int action, int error) {
 		CommandQueueDequeue dequeue = new CommandQueueDequeue(player.getCreatureObject().getObjectId());
 		dequeue.setCounter(request.getCounter());
-		dequeue.setAction(0);
-		dequeue.setError(0);
-		dequeue.setTimer(0);
+		dequeue.setAction(action);
+		dequeue.setError(error);
+		dequeue.setTimer(command.getExecuteTime());
 		player.sendPacket(dequeue);
+	}
+	
+	private void startCooldownGroup(CreatureObject creature, int sequenceId, int commandNameCrc, String cooldownGroup, float cooldownTime) {
+		if(!cooldownGroup.isEmpty()) {
+			synchronized(cooldownMap) {
+				if(cooldownMap.get(creature).add(cooldownGroup)) {
+					CommandTimer commandTimer = new CommandTimer(creature.getObjectId());
+					commandTimer.setCooldownGroupCrc(CRC.getCrc(cooldownGroup));
+					commandTimer.setCooldownMax(cooldownTime);
+					commandTimer.setCommandNameCrc(commandNameCrc);
+					commandTimer.setSequenceId(sequenceId);
+					creature.sendSelf(commandTimer);
+					
+					executorService.schedule(() -> removeCooldown(creature, cooldownGroup), (long) (cooldownTime * 1000), TimeUnit.MILLISECONDS);
+				}
+			}
+		}
+	}
+	
+	private void removeCooldown(CreatureObject creature, String cooldownGroup) {
+		synchronized (cooldownMap) {
+			Set<String> cooldownGroups = cooldownMap.get(creature);
+			if (cooldownGroups.remove(cooldownGroup)) {
+				
+			} else {
+				Log.w(this, "%s doesn't have cooldown group %s!", creature, cooldownGroup);
+			}
+		}
 	}
 	
 	private void executeCommand(GalacticManager galacticManager, Player player, Command command, SWGObject target, String args) {
@@ -283,6 +348,11 @@ public class CommandService extends Service {
 		DatatableData baseCommands = (DatatableData) ClientFactory.getInfoFromFile("datatables/command/"+table+".iff");
 
 		int godLevel = baseCommands.getColumnFromName("godLevel");
+		int cooldownGroup = baseCommands.getColumnFromName("cooldownGroup");
+		int cooldownGroup2 = baseCommands.getColumnFromName("cooldownGroup2");
+		int cooldownTime = baseCommands.getColumnFromName("cooldownTime");
+		int cooldownTime2 = baseCommands.getColumnFromName("cooldownTime2");
+
 		for (int row = 0; row < baseCommands.getRowCount(); row++) {
 			Object [] cmdRow = baseCommands.getRow(row);
 			
@@ -294,6 +364,10 @@ public class CommandService extends Service {
 			command.setDefaultTime((float) cmdRow[6]);
 			command.setCharacterAbility((String) cmdRow[7]);
 			command.setCombatCommand(false);
+			command.setCooldownGroup((String) cmdRow[cooldownGroup]);
+			command.setCooldownGroup2((String) cmdRow[cooldownGroup2]);
+			command.setCooldownTime((float) cmdRow[cooldownTime]);
+			command.setCooldownTime2((float) cmdRow[cooldownTime2]);
 			
 			// Ziggy: The amount of columns in the table seems to change for each row
 			if(cmdRow.length >= 83) {
@@ -322,6 +396,10 @@ public class CommandService extends Service {
 		cc.setCharacterAbility(c.getCharacterAbility());
 		cc.setGodLevel(c.getGodLevel());
 		cc.setCombatCommand(true);
+		cc.setCooldownGroup(c.getCooldownGroup());
+		cc.setCooldownGroup2(c.getCooldownGroup2());
+		cc.setCooldownTime(c.getCooldownTime());
+		cc.setCooldownTime2(c.getCooldownTime2());
 		return cc;
 	}
 	
