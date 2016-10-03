@@ -383,36 +383,33 @@ public class CombatManager extends Manager {
 	}
 	
 	private void procesDeathblow(DeathblowIntent i) {
-		if(i.isRequest()) {
-			CreatureObject killerCreature = i.getKillerCreature();
-			CreatureObject killedCreature = i.getKilledCreature();
-			
-			// Only players may deathblow eachother
-			if(killerCreature.isPlayer() && killedCreature.isPlayer()) {
-				// They must be enemies
-				if(killedCreature.isEnemy(killerCreature)) {
-					// The target of the deathblow must be incapacitated!
-					if(killedCreature.getPosture() == Posture.INCAPACITATED) {
-						// If this happens, they obviously can't get back up
-						synchronized (incapacitatedCreatures) {
-							Future<?> incapacitationTimer = incapacitatedCreatures.remove(killedCreature);
-							
-							if(incapacitationTimer != null) {
-								if(incapacitationTimer.cancel(false)) {	// If the task is running, let them get back up
-									killCreature(killerCreature, killedCreature);
-									new DeathblowIntent(false, killerCreature, killedCreature).broadcast();
-									Log.i(this, "%s was deathblown by %s", killedCreature, killerCreature);
-								}
-							} else {
-								// Can't happen with the current code, but in case it's ever refactored...
-								Log.e(this, "Incapacitation timer for player %s being deathblown unexpectedly didn't exist!", "");
+		CreatureObject killerCreature = i.getKillerCreature();
+		CreatureObject killedCreature = i.getKilledCreature();
+
+		// Only players may deathblow eachother
+		if (killerCreature.isPlayer() && killedCreature.isPlayer()) {
+			// They must be enemies
+			if (killedCreature.isEnemy(killerCreature)) {
+				// The target of the deathblow must be incapacitated!
+				if (killedCreature.getPosture() == Posture.INCAPACITATED) {
+					// If this happens, they obviously can't get back up
+					synchronized (incapacitatedCreatures) {
+						Future<?> incapacitationTimer = incapacitatedCreatures.remove(killedCreature);
+
+						if (incapacitationTimer != null) {
+							if (incapacitationTimer.cancel(false)) {	// If the task is running, let them get back up
+								killCreature(killerCreature, killedCreature);
+								Log.i(this, "%s was deathblown by %s", killedCreature, killerCreature);
 							}
+						} else {
+							// Can't happen with the current code, but in case it's ever refactored...
+							Log.e(this, "Incapacitation timer for player %s being deathblown unexpectedly didn't exist!", "");
 						}
 					}
 				}
-			} else {
-				Log.i(this, "%s tried to deathblow NPC %s", killerCreature, killedCreature);
 			}
+		} else {
+			Log.i(this, "%s tried to deathblow NPC %s", killerCreature, killedCreature);
 		}
 	}
 	

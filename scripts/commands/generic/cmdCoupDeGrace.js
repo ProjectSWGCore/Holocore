@@ -1,4 +1,4 @@
 function executeCommand(galacticManager, player, target, args) {
 	var DeathblowIntent = Java.type("intents.combat.DeathblowIntent");
-	new DeathblowIntent(true, player.getCreatureObject(), target).broadcast();
+	new DeathblowIntent(player.getCreatureObject(), target).broadcast();
 }
