@@ -30,17 +30,30 @@ package intents.combat;
 import resources.control.Intent;
 import resources.objects.creature.CreatureObject;
 
-public class CreatureKilledIntent extends Intent {
+public class DeathblowIntent extends Intent {
 
-	public static final String TYPE = "CreatureKilledIntent";
+	public static final String TYPE = "DeathblowIntent";
 	
+	private final boolean request;
 	private final CreatureObject killerCreature;
 	private final CreatureObject killedCreature;
 
-	public CreatureKilledIntent(CreatureObject killerCreature, CreatureObject killedCreature) {
+	/**
+	 * 
+	 * @param request is {@code true} if a deathblow is being requested and
+	 * {@code false} if the deathblow has happened
+	 * @param killerCreature {@code CreatureObject} that's deathblowing
+	 * @param killedCreature {@code CreatureObject} that's being deathblown
+	 */
+	public DeathblowIntent(boolean request, CreatureObject killerCreature, CreatureObject killedCreature) {
 		super(TYPE);
+		this.request = request;
 		this.killerCreature = killerCreature;
 		this.killedCreature = killedCreature;
+	}
+
+	public boolean isRequest() {
+		return request;
 	}
 
 	public CreatureObject getKillerCreature() {
