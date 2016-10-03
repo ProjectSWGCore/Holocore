@@ -27,15 +27,17 @@
 ***********************************************************************************/
 package resources.player;
 
+import network.OutboundPacketService;
 import network.packets.Packet;
 import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
-import resources.server_info.Log;
 import services.player.PlayerManager;
 
 public class Player implements Comparable<Player> {
+	
+	private static final OutboundPacketService outboundPacketService = new OutboundPacketService();
 	
 	private Service playerManager;
 	
@@ -176,9 +178,7 @@ public class Player implements Comparable<Player> {
 	}
 	
 	public void sendPacket(Packet ... packets) {
-		if (playerManager != null)
-			playerManager.sendPacket(this, packets);
-		else Log.e("Player", "Couldn't send packet due to playerManager being null.");
+		outboundPacketService.send(networkId, packets);
 	}
 	
 	@Override

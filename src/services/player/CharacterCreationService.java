@@ -175,7 +175,7 @@ public class CharacterCreationService extends Service {
 			}
 		}
 		response.setRandomName(randomName);
-		sendPacket(player.getNetworkId(), response);
+		player.sendPacket(response);
 	}
 	
 	private void handleApproveNameRequest(PlayerManager playerMgr, Player player, ClientVerifyAndLockNameRequest request) {
@@ -191,7 +191,7 @@ public class CharacterCreationService extends Service {
 				err = ErrorMessage.NAME_DECLINED_IN_USE;
 			}
 		}
-		sendPacket(player.getNetworkId(), new ClientVerifyAndLockNameResponse(name, err));
+		player.sendPacket(new ClientVerifyAndLockNameResponse(name, err));
 	}
 	
 	private void handleCharCreation(ObjectManager objManager, Player player, ClientCreateCharacter create) {
@@ -217,7 +217,7 @@ public class CharacterCreationService extends Service {
 		} else if (createCharacterInDb(creature, create.getName(), player)) {
 			creationRestriction.createdCharacter(player);
 			Log.i("ZoneService", "%s created character %s from %s:%d", player.getUsername(), create.getName(), create.getAddress(), create.getPort());
-			sendPacket(player, new CreateCharacterSuccess(creature.getObjectId()));
+			player.sendPacket(new CreateCharacterSuccess(creature.getObjectId()));
 			new PlayerEventIntent(player, PlayerEvent.PE_CREATE_CHARACTER).broadcast();
 			return ErrorMessage.NAME_APPROVED;
 		} else {
@@ -246,7 +246,7 @@ public class CharacterCreationService extends Service {
 				break;
 		}
 		Log.e("ZoneService", "Failed to create character %s for user %s with error %s and reason %s from %s:%d", create.getName(), player.getUsername(), err, reason, create.getAddress(), create.getPort());
-		sendPacket(player, new CreateCharacterFailure(reason));
+		player.sendPacket(new CreateCharacterFailure(reason));
 	}
 	
 	private boolean createCharacterInDb(CreatureObject creature, String name, Player player) {

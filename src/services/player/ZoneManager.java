@@ -160,7 +160,7 @@ public class ZoneManager extends Manager {
 		long time = ProjectSWG.getGalacticTime();
 		Race race = ((CreatureObject)object).getRace();
 		boolean ignoreSnapshots = newLocation.getTerrain() == Terrain.DEV_AREA;
-		sendPacket(object.getOwner(), new CmdStartScene(ignoreSnapshots, object.getObjectId(), race, newLocation, time, (int)(System.currentTimeMillis()/1E3)));
+		object.getOwner().sendPacket(new CmdStartScene(ignoreSnapshots, object.getObjectId(), race, newLocation, time, (int)(System.currentTimeMillis()/1E3)));
 		recursiveCreateObject(object, object.getOwner());
 	}
 	
@@ -212,11 +212,11 @@ public class ZoneManager extends Manager {
 	}
 	
 	private void sendZonePackets(Player player, CreatureObject creature) {
-		sendPacket(player, new HeartBeat());
-		sendPacket(player, new ChatServerStatus(true));
-		sendPacket(player, new VoiceChatStatus());
-		sendPacket(player, new ParametersMessage());
-		sendPacket(player, new ChatOnConnectAvatar());
+		player.sendPacket(new HeartBeat());
+		player.sendPacket(new ChatServerStatus(true));
+		player.sendPacket(new VoiceChatStatus());
+		player.sendPacket(new ParametersMessage());
+		player.sendPacket(new ChatOnConnectAvatar());
 	}
 	
 	private void initPlayerBeforeZoneIn(Player player, CreatureObject creatureObj, PlayerObject playerObj) {
@@ -263,9 +263,9 @@ public class ZoneManager extends Manager {
 	private void handleClientIdMsg(Player player, ClientIdMsg clientId) {
 		Log.i("ZoneService", "%s connected to the zone server from %s:%d", player.getUsername(), clientId.getAddress(), clientId.getPort());
 		player.setPlayerServer(PlayerServer.ZONE);
-		sendPacket(player.getNetworkId(), new HeartBeat());
-		sendPacket(player.getNetworkId(), new AccountFeatureBits());
-		sendPacket(player.getNetworkId(), new ClientPermissionsMessage());
+		player.sendPacket(new HeartBeat());
+		player.sendPacket(new AccountFeatureBits());
+		player.sendPacket(new ClientPermissionsMessage());
 	}
 	
 }
