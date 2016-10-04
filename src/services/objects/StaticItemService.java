@@ -134,7 +134,7 @@ public final class StaticItemService extends Service {
 						case "item": objectAttributes = new ItemAttributes(itemName, iffTemplate); break;
 						case "object":	// TODO implement
 						case "schematic":	// TODO implement
-						case "storyteller": continue;	// TODO implement
+						case "storyteller": objectAttributes = new StorytellerAttributes(itemName, iffTemplate); break;
 						default: Log.e(this, "Item %s was not loaded because the specified type %s is unknown", itemName, type); continue;
 					}
 
@@ -621,6 +621,21 @@ public final class StaticItemService extends Service {
 		}
 	}
 
+	public static class StorytellerAttributes extends ObjectAttributes {
+		public StorytellerAttributes(String itemName, String iffTemplate) {
+			super(itemName, iffTemplate);
+		}
+
+		@Override
+		protected boolean loadTypeAttributes(ResultSet resultSet) throws SQLException {
+			return true;
+		}
+
+		@Override
+		protected void applyTypeAttributes(SWGObject object) {
+
+		}
+	}
 	// TODO ConsumableAttributes extending ObjectAttributes
 	// int uses
 	// healingPower, if specified.
