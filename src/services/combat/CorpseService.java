@@ -27,6 +27,7 @@
  ***********************************************************************************/
 package services.combat;
 
+import intents.FactionIntent;
 import intents.chat.ChatBroadcastIntent;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -39,13 +40,16 @@ import intents.object.ObjectTeleportIntent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.stream.Collectors;
 import resources.Location;
 import resources.Posture;
+import resources.PvpFaction;
+import resources.Terrain;
+import resources.client_info.ClientFactory;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.encodables.ProsePackage;
@@ -61,6 +65,7 @@ import resources.server_info.RelationalServerFactory;
 import resources.sui.SuiButtons;
 import resources.sui.SuiEvent;
 import resources.sui.SuiListBox;
+import resources.sui.SuiWindow;
 import utilities.ThreadUtilities;
 
 /**
@@ -70,14 +75,18 @@ import utilities.ThreadUtilities;
  */
 public final class CorpseService extends Service {
 	
+	private static final byte CLONE_TIMER = 30;	// Amount of minutes before a player is forced to clone
+	
 	private final ScheduledExecutorService executor;
 	private final Map<String, FacilityData> facilityDataMap;
+	private final Map<CloneMapping, CloneMapping> cloneMapping;	// Needed for dungeons that have no cloning facilities
 	private final List<BuildingObject> cloningFacilities;
 	private final Random random;
 	
 	public CorpseService() {
 		executor = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("corpse-service"));
 		facilityDataMap = new HashMap<>();
+		cloneMapping = new HashMap<>();
 		cloningFacilities = new ArrayList<>();
 		random = new Random();
 		
@@ -96,7 +105,7 @@ public final class CorpseService extends Service {
 	
 	@Override
 	public void onIntentReceived(Intent i) {
-		switch(i.getType()) {
+		switch (i.getType()) {
 			case CreatureKilledIntent.TYPE: handleCreatureKilledIntent((CreatureKilledIntent) i); break;
 			case ObjectCreatedIntent.TYPE: handleObjectCreatedIntent((ObjectCreatedIntent) i); break;
 			case DestroyObjectIntent.TYPE: handleDestroyObjectIntent((DestroyObjectIntent) i); break;
@@ -107,21 +116,47 @@ public final class CorpseService extends Service {
 		long startTime = System.currentTimeMillis();
 		Log.i(this, "Loading cloning facility data...");
 		
-		try (RelationalDatabase spawnerDatabase = RelationalServerFactory.getServerData("player/cloning_respawn.db", "cloning_respawn")) {
+		try (RelationalDatabase spawnerDatabase = RelationalServerFactory.getServerData("cloning/cloning_mapping.db", "cloning_mapping")) {
+			try (ResultSet set = spawnerDatabase.executeQuery("SELECT * FROM cloning_mapping")) {
+				while (set.next()) {
+					String terrainName;
+					String areaName;
+					String targetTerrainName;
+					String targetAreaName;
+				}
+			} catch (SQLException e) {
+				Log.e(this, e);
+			}
+		}
+		
+		try (RelationalDatabase spawnerDatabase = RelationalServerFactory.getServerData("cloning/cloning_respawn.db", "cloning_respawn")) {
 			try (ResultSet set = spawnerDatabase.executeQuery("SELECT * FROM cloning_respawn")) {
 				while (set.next()) {
 					int tubeCount = set.getInt("tubes");
 					TubeData[] tubeData = new TubeData[tubeCount];
 					
-					for(int i = 1; i <= tubeCount; i++) {
+					for (int i = 1; i <= tubeCount; i++) {
 						String tubeName = "tube" + i;
-						tubeData[i] = new TubeData(set.getFloat(tubeName + "_x"), set.getFloat(tubeName + "_z"), set.getFloat(tubeName + "_heading"));
+						tubeData[i-1] = new TubeData(set.getFloat(tubeName + "_x"), set.getFloat(tubeName + "_z"), set.getFloat(tubeName + "_heading"));
 					}
 					
-					FacilityData facilityData = new FacilityData(set.getFloat("x"), set.getFloat("y"), set.getFloat("z"), set.getString("cell"), FacilityType.valueOf(set.getString("clone_type")), set.getString("stf_name"), tubeData);
+					String stfCellValue = set.getString("stf_name");
+					String stfName = stfCellValue.equals("-") ? null : stfCellValue;
+					PvpFaction factionRestriction = null;
+					
+					switch(stfCellValue) {
+						case "FACTION_REBEL":
+							factionRestriction = PvpFaction.REBEL;
+							break;
+						case "FACTION_IMPERIAL":
+							factionRestriction = PvpFaction.IMPERIAL;
+							break;
+					}
+					
+					FacilityData facilityData = new FacilityData(factionRestriction, set.getFloat("x"), set.getFloat("y"), set.getFloat("z"), set.getString("cell"), FacilityType.valueOf(set.getString("clone_type")), stfName, set.getInt("heading"), tubeData);
 					String objectTemplate = set.getString("structure");
 					
-					if(facilityDataMap.put(objectTemplate, facilityData) != null) {
+					if (facilityDataMap.put(ClientFactory.formatToSharedFile(objectTemplate), facilityData) != null) {
 						// Duplicates are not allowed!
 						Log.e(this, "Duplicate entry for %s in row %d. Replacing previous entry with new", objectTemplate, set.getRow());
 					}
@@ -135,80 +170,68 @@ public final class CorpseService extends Service {
 	}
 	
 	private void handleCreatureKilledIntent(CreatureKilledIntent i) {
-		CreatureObject killedCreature = i.getKilledCreature();
+		CreatureObject corpse = i.getKilledCreature();
 		
-		if(killedCreature.isPlayer()) {
-			Player killedCreatureOwner = killedCreature.getOwner();
-			new ChatBroadcastIntent(killedCreatureOwner, new ProsePackage(new StringId("base_player", "prose_victim_dead"), "TT", i.getKillerCreature().getName())).broadcast();
-			// TODO periodically remind the deathblown player that their timer is expiring. How often?
-				// TODO after 30 minutes, close the SUI window and force them to clone at the nearest cloning facility
-			Collection<BuildingObject> facilitiesInTerrain = new ArrayList<>();
-
-			// Loop over clone facilities
-			for (BuildingObject cloningFacility : cloningFacilities) {
-				// A player can only clone into facilities in the same terrain as they're in themselves
-				if (cloningFacility.getLocation().getTerrain() == killedCreature.getLocation().getTerrain()) {
-					facilitiesInTerrain.add(cloningFacility);
-				}
-			}
-
-			if (facilitiesInTerrain.isEmpty()) {
-				SuiListBox window = new SuiListBox(SuiButtons.OK, "@base_player:revive_title", "@base_player:clone_prompt_header");
+		if(corpse.isPlayer()) {
+			Player corpseOwner = corpse.getOwner();
+			new ChatBroadcastIntent(corpseOwner, new ProsePackage(new StringId("base_player", "prose_victim_dead"), "TT", i.getKillerCreature().getName())).broadcast();
+			new ChatBroadcastIntent(corpseOwner, new ProsePackage(new StringId("base_player", "revive_exp_msg"), "TT", CLONE_TIMER + " minutes.")).broadcast();
+			
+			Terrain destinationTerrain = corpse.getTerrain();	// TODO get from terrainMapping
+			List<BuildingObject> availableFacilities = getAvailableFacilities(corpse, destinationTerrain);
+			
+			if (!availableFacilities.isEmpty()) {
+				SuiListBox suiWindow = new SuiListBox(SuiButtons.OK, "@base_player:revive_title", "@base_player:clone_prompt_header");
 				// Add options to SUI window
-				for (BuildingObject cloningFacility : facilitiesInTerrain) {
+				for (BuildingObject cloningFacility : availableFacilities) {
 					FacilityData facilityData = facilityDataMap.get(cloningFacility.getTemplate());
 
-					// TODO not all facilities use this
-					window.addListItem(facilityData.getStfName());
+					String stfName = facilityData.getStfName();
+					
+					if(stfName != null) {
+						suiWindow.addListItem(stfName);
+					} else {
+						suiWindow.addListItem(cloningFacility.getCurrentCity());
+					}
 				}
 
-				// TODO put below into a method pls
-				window.addCallback("handleFacilityChoice", (Player player, SWGObject actor, SuiEvent event, Map<String, String> parameters) -> {
+				suiWindow.addCallback("handleFacilityChoice", (Player player, SWGObject actor, SuiEvent event, Map<String, String> parameters) -> {
 					int selectionIndex = SuiListBox.getSelectedRow(parameters);
 
-					if (event != SuiEvent.OK_PRESSED || selectionIndex + 1 > cloningFacilities.size() || selectionIndex < 0) {
-						window.display(player);
+					if (event != SuiEvent.OK_PRESSED || selectionIndex + 1 > availableFacilities.size() || selectionIndex < 0) {
+						suiWindow.display(player);
 						return;
 					}
 
-					synchronized (cloningFacilities) {
-						BuildingObject selectedFacility = cloningFacilities.get(selectionIndex);
-
-						FacilityData facilityData = facilityDataMap.get(selectedFacility.getTemplate());
-
-						if (facilityData != null) {
-							CreatureObject creature = player.getCreatureObject();
-							String cellName = facilityData.getCell();
-							CellObject cellObject = selectedFacility.getCellByName(cellName);
-
-							if (cellObject != null) {
-								TubeData[] tubeData = facilityData.getTubeData();
-
-								TubeData randomData = tubeData[random.nextInt(tubeData.length)];
-								Location tubeLocation = new Location(randomData.getTubeX(), 0, randomData.getTubeZ(), selectedFacility.getLocation().getTerrain());
-
-								new ObjectTeleportIntent(creature, cellObject, tubeLocation).broadcast();
-
-								creature.setPosture(Posture.UPRIGHT);
-							} else {
-								Log.e(this, "Cell %s was invalid for cloning facility %s", cellName, selectedFacility);
-								// TODO system message to player
-							}
-							// TODO NGE: cloning debuff
-						} else {
-							Log.e(this, "%s could not clone at facility %s because the object template is not in cloning_respawn.sdb", actor, selectedFacility);
-							// TODO system message to player
-						}
+					switch(clone(corpse, availableFacilities.get(selectionIndex))) {
+						case INVALID_SELECTION:
+							// TODO system message
+							suiWindow.display(player);
+							break;
+						case INVALID_CELL:
+							// TODO system message
+							suiWindow.display(player);
+							break;
+						case TEMPLATE_MISSING:
+							// TODO system message
+							suiWindow.display(player);
+							break;
+						case SUCCESS:
+							// TODO do anything special here? If not, delete case
+							break;
 					}
 				});
 
-				window.display(killedCreatureOwner);
-			} else {
+				suiWindow.display(corpseOwner);
 				
+				executor.schedule(() -> expireCloneTimer(corpse, availableFacilities, suiWindow), CLONE_TIMER, TimeUnit.MINUTES);
+			} else {
+				// TODO no cloners available! Wat do?
+				Log.e(this, "No cloning facility is available for terrain %s - %s has nowhere to properly clone", destinationTerrain, corpse);
 			}
 		} else {
 			// This is a NPC - schedule corpse for deletion
-			executor.schedule(() -> deleteCorpse(killedCreature), 120, TimeUnit.SECONDS);
+			executor.schedule(() -> deleteCorpse(corpse), 120, TimeUnit.SECONDS);
 		}
 	}
 	
@@ -217,11 +240,8 @@ public final class CorpseService extends Service {
 		if(createdObject instanceof BuildingObject) {
 			BuildingObject createdBuilding = (BuildingObject) createdObject;
 			String objectTemplate = createdBuilding.getTemplate();
-
-			FacilityData facilityData = facilityDataMap.get(objectTemplate);
-
-			// If null, this object template isn't in cloning_respawn, which is fine
-			if(facilityData != null) {
+			
+			if(facilityDataMap.containsKey(objectTemplate)) {
 				synchronized(cloningFacilities) {
 					cloningFacilities.add(createdBuilding);
 				}
@@ -252,21 +272,138 @@ public final class CorpseService extends Service {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param corpse
+	 * @return a sorted list of {@code BuildingObject}, ordered by distance
+	 * to {@code corpse}. Order is reversed, so the closest facility is
+	 * first.
+	 */
+	private List<BuildingObject> getAvailableFacilities(CreatureObject corpse, Terrain destinationTerrain) {
+		
+		synchronized (cloningFacilities) {
+			Location corpseLocation = corpse.getWorldLocation();
+			return cloningFacilities.stream()
+					.filter(facilityObject -> isValidTerrain(facilityObject, destinationTerrain) && isFactionAllowed(facilityObject, corpse))
+					.sorted((facility, otherFacility) -> Double.compare(corpseLocation.distanceTo(facility.getLocation()), corpseLocation.distanceTo(otherFacility.getLocation())))
+					.collect(Collectors.toList());
+			
+		}
+	}
+	
+	private boolean isValidTerrain(BuildingObject cloningFacility, Terrain destinationTerrain)  {
+		return cloningFacility.getTerrain() == destinationTerrain;
+	}
+	
+	private boolean isFactionAllowed(BuildingObject cloningFacility, CreatureObject corpse) {
+		FacilityData facilityData = facilityDataMap.get(cloningFacility.getTemplate());
+		PvpFaction factionRestriction = facilityData.getFactionRestriction();
+		
+		return factionRestriction == null || factionRestriction == corpse.getPvpFaction();
+	}
+	
+	private CloneResult clone(CreatureObject cloneRequestor, BuildingObject selectedFacility) {
+		Location facilityLocation = selectedFacility.getLocation();
+		FacilityData facilityData = facilityDataMap.get(selectedFacility.getTemplate());
+
+		if (facilityData != null) {
+			String cellName = facilityData.getCell();
+			CellObject cellObject = selectedFacility.getCellByName(cellName);
+
+			if (cellObject != null) {
+				// TODO They should go on leave upon cloning
+//				if(creature.getPvpFaction() != PvpFaction.NEUTRAL)
+//					new FactionIntent(creature, PvpStatus.ONLEAVE).broadcast();
+
+				TubeData[] tubeData = facilityData.getTubeData();
+
+				int tubeCount = tubeData.length;
+
+				Location cloneLocation;
+
+				if (tubeCount > 0) {
+					TubeData randomData = tubeData[random.nextInt(tubeCount)];
+					cloneLocation = new Location(randomData.getTubeX(), 0, randomData.getTubeZ(), facilityLocation.getTerrain());
+					cloneLocation.setOrientation(facilityLocation.getOrientationX(), facilityLocation.getOrientationY(), facilityLocation.getOrientationZ(), facilityLocation.getOrientationW());
+
+					// The creature should point towards the entrance/exit of the tube
+					cloneLocation.rotateHeading(randomData.getTubeHeading());
+				} else {
+					cloneLocation = new Location(facilityData.getX(), facilityData.getY(), facilityData.getZ(), facilityLocation.getTerrain());
+					cloneLocation.rotateHeading(facilityData.getHeading());
+				}
+
+				new ObjectTeleportIntent(cloneRequestor, cellObject, cloneLocation).broadcast();
+				cloneRequestor.setPosture(Posture.UPRIGHT);
+				cloneRequestor.setTurnScale(1);
+				cloneRequestor.setMovementScale(1);
+				cloneRequestor.setHealth(cloneRequestor.getMaxHealth());
+				
+				// TODO NGE: cloning debuff
+				
+				return CloneResult.SUCCESS;
+			} else {
+				Log.e(this, "Cell %s was invalid for cloning facility %s", cellName, selectedFacility);
+				return CloneResult.INVALID_CELL;
+			}
+		} else {
+			Log.e(this, "%s could not clone at facility %s because the object template is not in cloning_respawn.sdb", cloneRequestor, selectedFacility);
+			return CloneResult.TEMPLATE_MISSING;
+		}
+	}
+	
+	/**
+	 * Picks the closest cloning facility and clones {@code cloneRequestor}
+	 * there. If an error occurs upon attempting to clone, it will pick the next
+	 * facility until no errors occur. If allAlso closes the cloning SUI window.
+	 * @param cloneRequestor
+	 * @param facilitiesInTerrain list of {@code BuildingObject} that represent
+	 * in-game cloning facilities
+	 * @return {@code true} if forceful cloning was succesful and {@code false}
+	 * if {@code cloneRequestor} cannot be cloned at any of the given facilities
+	 * in {@code facilitiesInTerrain}
+	 */
+	private boolean forceClone(CreatureObject cloneRequestor, List<BuildingObject> facilitiesInTerrain) {
+		for (BuildingObject facility : facilitiesInTerrain) {
+			if (clone(cloneRequestor, facility) == CloneResult.SUCCESS) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	private void expireCloneTimer(CreatureObject corpse, List<BuildingObject> facilitiesInTerrain, SuiWindow suiWindow) {
+		Player corpseOwner = corpse.getOwner();
+		
+		new ChatBroadcastIntent(corpseOwner, "@base_player:revive_expired").broadcast();
+		suiWindow.close(corpseOwner);
+		forceClone(corpse, facilitiesInTerrain);
+	}
+	
 	private static class FacilityData {
+		private final PvpFaction factionRestriction;
 		private final float x, y, z;
 		private final String cell;
 		private final FacilityType facilityType;
 		private final String stfName;
+		private final int heading;
 		private final TubeData[] tubeData;
 
-		public FacilityData(float x, float y, float z, String cell, FacilityType facilityType, String stfName, TubeData[] tubeData) {
+		public FacilityData(PvpFaction factionRestriction, float x, float y, float z, String cell, FacilityType facilityType, String stfName, int tubeHeading, TubeData[] tubeData) {
+			this.factionRestriction = factionRestriction;
 			this.x = x;
 			this.y = y;
 			this.z = z;
 			this.cell = cell;
 			this.facilityType = facilityType;
 			this.stfName = stfName;
+			this.heading = tubeHeading;
 			this.tubeData = tubeData;
+		}
+
+		public PvpFaction getFactionRestriction() {
+			return factionRestriction;
 		}
 
 		public float getX() {
@@ -293,6 +430,10 @@ public final class CorpseService extends Service {
 			return stfName;
 		}
 
+		public int getHeading() {
+			return heading;
+		}
+
 		public TubeData[] getTubeData() {
 			return tubeData;
 		}
@@ -302,6 +443,7 @@ public final class CorpseService extends Service {
 		STANDARD,
 		RESTRICTED,
 		PLAYER_CITY,
+		CAMP,
 		PRIVATE_INSTANCE,
 		FACTION_IMPERIAL,
 		FACTION_REBEL,
@@ -331,4 +473,7 @@ public final class CorpseService extends Service {
 		}
 	}
 	
+	private static enum CloneResult {
+		INVALID_SELECTION, TEMPLATE_MISSING, INVALID_CELL, SUCCESS
+	}
 }

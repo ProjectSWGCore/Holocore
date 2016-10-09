@@ -71,7 +71,6 @@ public class CreatureObject extends TangibleObject {
 	private long 	ownerId					= 0;
 	private int 	battleFatigue			= 0;
 	private long 	statesBitmask			= 0;
-	private String	currentCity				= "";
 	private long	lastTransform			= 0;
 	
 	private SWGSet<String>		skills				= new SWGSet<String>(1, 3, StringType.ASCII);
@@ -225,10 +224,6 @@ public class CreatureObject extends TangibleObject {
 	
 	public CreatureDifficulty getDifficulty() {
 		return creo6.getDifficulty();
-	}
-	
-	public String getCurrentCity() {
-		return currentCity;
 	}
 	
 	public double getTimeSinceLastTransform() {
@@ -407,10 +402,6 @@ public class CreatureObject extends TangibleObject {
 	public void setDifficulty(CreatureDifficulty difficulty) {
 		creo6.setDifficulty(difficulty);
 		sendDelta(6, 26, difficulty.getDifficulty());
-	}
-	
-	public void setCurrentCity(String currentCity) {
-		this.currentCity = currentCity;
 	}
 	
 	public void updateLastTransformTime() {

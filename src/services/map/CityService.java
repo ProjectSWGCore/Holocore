@@ -34,12 +34,15 @@ import java.util.Locale;
 
 import intents.PlayerEventIntent;
 import intents.network.GalacticPacketIntent;
+import intents.object.ObjectCreatedIntent;
 import network.packets.Packet;
 import network.packets.swg.zone.object_controller.DataTransform;
 import resources.Location;
 import resources.control.Intent;
 import resources.control.Service;
+import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
+import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
 import resources.player.PlayerEvent;
 import resources.server_info.Log;
@@ -61,38 +64,59 @@ public class CityService extends Service {
 		
 		registerForIntent(GalacticPacketIntent.TYPE);
 		registerForIntent(PlayerEventIntent.TYPE);
+		registerForIntent(ObjectCreatedIntent.TYPE);
 	}
 	
 	@Override
 	public void onIntentReceived(Intent i) {
-		if (i instanceof GalacticPacketIntent) {
-			GalacticPacketIntent gpi = (GalacticPacketIntent) i;
-			Packet p = gpi.getPacket();
-			if (p instanceof DataTransform) {
-				Player player = gpi.getPlayerManager().getPlayerFromNetworkId(gpi.getNetworkId());
-				if (player == null) {
-					Log.e("CityService", "Player is null in GalacticPacketIntent:DataTransform!");
-					return;
-				}
-				CreatureObject creature = player.getCreatureObject();
-				if (creature == null) {
-					Log.e("CityService", "Creature is null in GalacticPacketIntent:DataTransform!");
-					return;
-				}
-				DataTransform transform = (DataTransform) p;
-				Location loc = transform.getLocation();
-				performLocationUpdate(creature, (int) (loc.getX() + 0.5), (int) (loc.getZ() + 0.5));
+		switch(i.getType()) {
+			case GalacticPacketIntent.TYPE: handleGalacticPacketIntent((GalacticPacketIntent) i); break;
+			case PlayerEventIntent.TYPE: handlePlayerEventIntent((PlayerEventIntent) i); break;
+			case ObjectCreatedIntent.TYPE: handleObjectCreatedIntent((ObjectCreatedIntent) i); break;
+		}
+	}
+	
+	private void handleGalacticPacketIntent(GalacticPacketIntent i) {
+		GalacticPacketIntent gpi = (GalacticPacketIntent) i;
+		Packet p = gpi.getPacket();
+		if (p instanceof DataTransform) {
+			Player player = gpi.getPlayerManager().getPlayerFromNetworkId(gpi.getNetworkId());
+			if (player == null) {
+				Log.e("CityService", "Player is null in GalacticPacketIntent:DataTransform!");
+				return;
 			}
-		} else if (i instanceof PlayerEventIntent) {
-			Player player = ((PlayerEventIntent) i).getPlayer();
 			CreatureObject creature = player.getCreatureObject();
-			if (((PlayerEventIntent) i).getEvent() == PlayerEvent.PE_ZONE_IN_CLIENT) {
-				performLocationUpdate(creature, (int) (creature.getX()+0.5), (int) (creature.getZ()+0.5));
+			if (creature == null) {
+				Log.e("CityService", "Creature is null in GalacticPacketIntent:DataTransform!");
+				return;
+			}
+			DataTransform transform = (DataTransform) p;
+			Location loc = transform.getLocation();
+			performLocationUpdate(creature, (int) (loc.getX() + 0.5), (int) (loc.getZ() + 0.5));
+		}
+	}
+	
+	private void handlePlayerEventIntent(PlayerEventIntent i) {
+		Player player = ((PlayerEventIntent) i).getPlayer();
+		CreatureObject creature = player.getCreatureObject();
+		if (((PlayerEventIntent) i).getEvent() == PlayerEvent.PE_ZONE_IN_CLIENT) {
+			performLocationUpdate(creature, (int) (creature.getX() + 0.5), (int) (creature.getZ() + 0.5));
+		}
+	}
+	
+	private void handleObjectCreatedIntent(ObjectCreatedIntent i) {
+		SWGObject object = i.getObject();
+		
+		if(object instanceof TangibleObject) {
+			TangibleObject tangibleObject = (TangibleObject) object;
+			
+			if(object.getTerrain() != null) {
+				performLocationUpdate(tangibleObject, (int) (tangibleObject.getX() + 0.5), (int) (tangibleObject.getZ() + 0.5));
 			}
 		}
 	}
 	
-	private void performLocationUpdate(CreatureObject object, int locX, int locZ) {
+	private void performLocationUpdate(TangibleObject object, int locX, int locZ) {
 		String terrain = object.getTerrain().getName().toLowerCase(Locale.US);
 		synchronized (spawnDatabase) {
 			ResultSet set = null;
