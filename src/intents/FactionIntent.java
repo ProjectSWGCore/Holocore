@@ -28,6 +28,7 @@
 package intents;
 
 import resources.PvpFaction;
+import resources.PvpStatus;
 import resources.control.Intent;
 import resources.objects.tangible.TangibleObject;
 
@@ -37,6 +38,7 @@ public class FactionIntent extends Intent {
 	private TangibleObject target;
 	private PvpFaction newFaction;
 	private FactionIntentType updateType;
+	private PvpStatus newStatus;
 	
 	private FactionIntent(TangibleObject target) {
 		super(TYPE);
@@ -53,6 +55,11 @@ public class FactionIntent extends Intent {
 		this.newFaction = newFaction;
 	}
 	
+	public FactionIntent(TangibleObject target, PvpStatus newStatus) {
+		this(target, FactionIntentType.STATUSUPDATE);
+		this.newStatus = newStatus;
+	}
+	
 	public TangibleObject getTarget() {
 		return target;
 	}
@@ -64,9 +71,14 @@ public class FactionIntent extends Intent {
 	public FactionIntentType getUpdateType() {
 		return updateType;
 	}
+
+	public PvpStatus getNewStatus() {
+		return newStatus;
+	}
 	
 	public enum FactionIntentType {
 		FLAGUPDATE,
+		SWITCHUPDATE,
 		STATUSUPDATE,
 		FACTIONUPDATE // Is automatically set in the correct constructor, don't use manually.
 	}

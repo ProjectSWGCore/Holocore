@@ -37,6 +37,9 @@ import network.packets.swg.zone.chat.ChatSystemMessage;
 import network.packets.swg.zone.chat.ChatSystemMessage.SystemChatType;
 import intents.FactionIntent;
 import intents.PlayerEventIntent;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.Future;
 import resources.PvpFaction;
 import resources.PvpFlag;
 import resources.PvpStatus;
@@ -46,10 +49,12 @@ import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
+import utilities.ThreadUtilities;
 
 public final class FactionService extends Service {
 
 	private ScheduledExecutorService executor;
+	private Map<TangibleObject, Future<?>> statusChangers;
 	
 	public FactionService() {
 		registerForIntent(FactionIntent.TYPE);
@@ -57,7 +62,8 @@ public final class FactionService extends Service {
 	
 	@Override
 	public boolean initialize() {
-		executor = Executors.newSingleThreadScheduledExecutor();
+		statusChangers = new HashMap<>();
+		executor = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("faction-service"));
 		return super.initialize();
 	}
 	
@@ -70,23 +76,20 @@ public final class FactionService extends Service {
 	
 	@Override
 	public boolean terminate() {
-		boolean success = true;
-		try {
-			if (executor != null) {
-				executor.shutdownNow();
-				success = executor.awaitTermination(5, TimeUnit.SECONDS);
-			}
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-			success = false;
+		if (executor != null) {
+			executor.shutdownNow().forEach(runnable -> runnable.run());
 		}
-		return super.terminate() && success;
+			
+		return super.terminate();
 	}
 	
 	private void handleFactionIntent(FactionIntent i) {
 		switch (i.getUpdateType()) {
 			case FACTIONUPDATE:
 				handleTypeChange(i);
+				break;
+			case SWITCHUPDATE:
+				handleSwitchChange(i);
 				break;
 			case STATUSUPDATE:
 				handleStatusChange(i);
@@ -161,7 +164,7 @@ public final class FactionService extends Service {
 		}
 	}
 	
-	private void handleStatusChange(FactionIntent fi) {
+	private void handleSwitchChange(FactionIntent fi) {
 		final PvpFlag pvpFlag;
 		final TangibleObject target = fi.getTarget();
 		final PvpStatus currentStatus = target.getPvpStatus();
@@ -191,6 +194,27 @@ public final class FactionService extends Service {
 				}
 			}, getDelay(currentStatus, targetStatus), TimeUnit.SECONDS);
 		}
+	}
+	
+	private void handleStatusChange(FactionIntent fi) {
+		// If they're currently going OVERT or COVERT, we need to handle it accordingly
+		// Forces them into the given PvpStatus!
+		TangibleObject target = fi.getTarget();
+		PvpStatus oldStatus = target.getPvpStatus();
+		PvpStatus newStatus = fi.getNewStatus();
+		
+		// No reason to send deltas and all that if the status isn't effectively changing
+		if(oldStatus == newStatus)
+			return;
+		
+		// Let's clear PvP flags in case they were in the middle of going covert/overt
+		Future<?> future = statusChangers.get(target);
+		future.cancel(true);
+		
+		target.setPvpStatus(newStatus);
+		target.getOwner().sendPacket(new ChatSystemMessage(
+				SystemChatType.SCREEN_AND_CHAT,
+				getCompletionMessage(oldStatus, newStatus)));
 	}
 	
 	private void handleFlagChange(TangibleObject object) {
