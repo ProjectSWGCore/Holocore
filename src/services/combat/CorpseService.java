@@ -246,16 +246,25 @@ public final class CorpseService extends Service {
 	}
 	
 	private void handlePlayerEventIntent(PlayerEventIntent i) {
-		if(i.getEvent() != PlayerEvent.PE_FIRST_ZONE) {
-			return;
-		}
-		
-		CreatureObject creature = i.getPlayer().getCreatureObject();
-		
-		if(creature.getPosture() == Posture.DEAD && !reviveTimers.containsKey(creature)) {
-			// They're dead but they have no active revive timer.
-			// In this case, they died and the application was shut down and started back up.
-			scheduleCloneTimer(creature);
+		switch(i.getEvent()) {
+			case PE_DISAPPEAR:
+				CreatureObject creature = i.getPlayer().getCreatureObject();
+				Future<?> reviveTimer = reviveTimers.remove(creature);
+				
+				if (reviveTimer != null) {
+					// They had an active timer when they disappeared
+					reviveTimer.cancel(false);
+				}
+				break;
+			case PE_FIRST_ZONE:
+				creature = i.getPlayer().getCreatureObject();
+
+				if (creature.getPosture() == Posture.DEAD && !reviveTimers.containsKey(creature)) {
+					// They're dead but they have no active revive timer.
+					// In this case, they didn't clone before the application was shut down and started back up.
+					scheduleCloneTimer(creature);
+				}
+				break;
 		}
 	}
 	
