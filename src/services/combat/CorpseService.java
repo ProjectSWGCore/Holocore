@@ -375,48 +375,48 @@ public final class CorpseService extends Service {
 		Location facilityLocation = selectedFacility.getLocation();
 		FacilityData facilityData = facilityDataMap.get(selectedFacility.getTemplate());
 
-		if (facilityData != null) {
-			String cellName = facilityData.getCell();
-			CellObject cellObject = selectedFacility.getCellByName(cellName);
-
-			if (cellObject != null) {
-				// They should go on leave upon cloning
-				if(corpse.getPvpFaction() != PvpFaction.NEUTRAL)
-					new FactionIntent(corpse, PvpStatus.ONLEAVE).broadcast();
-
-				TubeData[] tubeData = facilityData.getTubeData();
-				int tubeCount = tubeData.length;
-				Location cloneLocation;
-
-				if (tubeCount > 0) {
-					TubeData randomData = tubeData[random.nextInt(tubeCount)];
-					cloneLocation = new Location(randomData.getTubeX(), 0, randomData.getTubeZ(), facilityLocation.getTerrain());
-					cloneLocation.setOrientation(facilityLocation.getOrientationX(), facilityLocation.getOrientationY(), facilityLocation.getOrientationZ(), facilityLocation.getOrientationW());
-
-					// The creature should point towards the entrance/exit of the tube
-					cloneLocation.rotateHeading(randomData.getTubeHeading());
-				} else {
-					cloneLocation = new Location(facilityData.getX(), facilityData.getY(), facilityData.getZ(), facilityLocation.getTerrain());
-					cloneLocation.rotateHeading(facilityData.getHeading());
-				}
-
-				new ObjectTeleportIntent(corpse, cellObject, cloneLocation).broadcast();
-				corpse.setPosture(Posture.UPRIGHT);
-				corpse.setTurnScale(1);
-				corpse.setMovementScale(1);
-				corpse.setHealth(corpse.getMaxHealth());
-				
-				// TODO NGE: cloning debuff
-				
-				return CloneResult.SUCCESS;
-			} else {
-				Log.e(this, "Cell %s was invalid for cloning facility %s", cellName, selectedFacility);
-				return CloneResult.INVALID_CELL;
-			}
-		} else {
+		if (facilityData == null) {
 			Log.e(this, "%s could not clone at facility %s because the object template is not in cloning_respawn.sdb", corpse, selectedFacility);
 			return CloneResult.TEMPLATE_MISSING;
 		}
+
+		String cellName = facilityData.getCell();
+		CellObject cellObject = selectedFacility.getCellByName(cellName);
+
+		if (cellObject == null) {
+			Log.e(this, "Cell %s was invalid for cloning facility %s", cellName, selectedFacility);
+			return CloneResult.INVALID_CELL;
+		}
+		
+			// They should go on leave upon cloning
+			if (corpse.getPvpFaction() != PvpFaction.NEUTRAL) {
+				new FactionIntent(corpse, PvpStatus.ONLEAVE).broadcast();
+		}
+
+		TubeData[] tubeData = facilityData.getTubeData();
+		int tubeCount = tubeData.length;
+		Location cloneLocation;
+
+		if (tubeCount > 0) {
+			TubeData randomData = tubeData[random.nextInt(tubeCount)];
+			cloneLocation = new Location(randomData.getTubeX(), 0, randomData.getTubeZ(), facilityLocation.getTerrain());
+			cloneLocation.setOrientation(facilityLocation.getOrientationX(), facilityLocation.getOrientationY(), facilityLocation.getOrientationZ(), facilityLocation.getOrientationW());
+
+			// The creature should point towards the entrance/exit of the tube
+			cloneLocation.rotateHeading(randomData.getTubeHeading());
+		} else {
+			cloneLocation = new Location(facilityData.getX(), facilityData.getY(), facilityData.getZ(), facilityLocation.getTerrain());
+			cloneLocation.rotateHeading(facilityData.getHeading());
+		}
+
+		new ObjectTeleportIntent(corpse, cellObject, cloneLocation).broadcast();
+		corpse.setPosture(Posture.UPRIGHT);
+		corpse.setTurnScale(1);
+		corpse.setMovementScale(1);
+		corpse.setHealth(corpse.getMaxHealth());
+
+		// TODO NGE: cloning debuff
+		return CloneResult.SUCCESS;
 	}
 	
 	/**
