@@ -25,55 +25,32 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
  ***********************************************************************************/
-package resources.server_info;
+package resources.objects.collections;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+/**
+ * Created by Yakattak on 9/8/16.
+ */
+public class ClickyCollectionItem extends CollectionItem {
+	private String terrain;
+	private double x;
+	private double y;
 
-import resources.client_info.ClientFactory;
-
-public class ItemDatabase implements AutoCloseable{
-	private static final String GET_IFF_TEMPLATE_SQL = "SELECT iff_template FROM master_item where item_name = ?";
-	
-	private RelationalServerData database;
-	private PreparedStatement getIffTemplateStatement;
-	
-	public ItemDatabase() {
-		database = RelationalServerFactory.getServerData("items/master_item.db", "master_item");
-		if (database == null)
-			throw new main.ProjectSWG.CoreException("Database master_item failed to load");
-		
-		getIffTemplateStatement = database.prepareStatement(GET_IFF_TEMPLATE_SQL);
-	}
-	
-	
-	@Override
-	public void close() throws Exception {
-		try {
-			getIffTemplateStatement.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		database.close();
-	}
-	
-	public String getIffTemplate(String item_name){
-
-		synchronized (getIffTemplateStatement) {
-			try{
-				getIffTemplateStatement.setString(1, item_name);
-
-				try (ResultSet set = getIffTemplateStatement.executeQuery()) {
-					if (set.next()){
-						return ClientFactory.formatToSharedFile(set.getString(set.findColumn("iff_template")));
-					}
-				}
-			}catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		return "";		
+	public ClickyCollectionItem(String slotName, String collectionName, int objectId, String iffTemplate, String terrain, double x, double y) {
+		super(slotName, collectionName, iffTemplate);
+		this.terrain = terrain;
+		this.x = x;
+		this.y = y;
 	}
 
+	public String getTerrain() {
+		return terrain;
+	}
+
+	public double getX() {
+		return x;
+	}
+
+	public double getY() {
+		return y;
+	}
 }

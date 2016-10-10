@@ -25,39 +25,72 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
  ***********************************************************************************/
-package intents.radial;
+package services.combat;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
+import intents.combat.CreatureKilledIntent;
+import intents.object.DestroyObjectIntent;
 import resources.control.Intent;
-import resources.objects.SWGObject;
+import resources.control.Service;
 import resources.objects.creature.CreatureObject;
+import resources.server_info.Log;
+import utilities.ThreadUtilities;
 
-public class ObjectClickedIntent extends Intent {
+/**
+ * The {@code CorpseService} removes corpses from the world a while after
+ * they've died. It also lets players clone at a cloning facility.
+ * @author mads
+ */
+public final class CorpseService extends Service {
 	
-	public static final String TYPE = "ObjectClickedIntent";
+	private final ScheduledExecutorService executor;
 	
-	private CreatureObject requestor;
-	private SWGObject target;
-	
-	public ObjectClickedIntent(CreatureObject requestor, SWGObject target) {
-		super(TYPE);
-		setRequestor(requestor);
-		setTarget(target);
+	public CorpseService() {
+		executor = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("corpse-service"));
+		registerForIntent(CreatureKilledIntent.TYPE);
 	}
 	
-	public void setRequestor(CreatureObject requestor) {
-		this.requestor = requestor;
+	@Override
+	public boolean terminate() {
+		executor.shutdown();
+		return super.terminate();
 	}
 	
-	public void setTarget(SWGObject target) {
-		this.target = target;
+	@Override
+	public void onIntentReceived(Intent i) {
+		switch(i.getType()) {
+			case CreatureKilledIntent.TYPE: handleCreatureKilledIntent((CreatureKilledIntent) i); break;
+		}
 	}
 	
-	public CreatureObject getRequestor() {
-		return requestor;
+	private void handleCreatureKilledIntent(CreatureKilledIntent i) {
+		CreatureObject killedCreature = i.getKilledCreature();
+		
+		if(killedCreature.isPlayer()) {
+			// TODO show cloning system message
+			// TODO show cloning SUI window, with all possible facilities to clone at
+			// TODO after 30 minutes, close the SUI window and force them to clone at the nearest cloning facility
+			// TODO if the SUI window is closed by the player, make sure it reappears
+		} else {
+			// This is a NPC - schedule corpse for deletion
+			executor.schedule(() -> deleteCorpse(killedCreature), 120, TimeUnit.SECONDS);
+		}
 	}
 	
-	public SWGObject getTarget() {
-		return target;
+	/**
+	 * Only used for NPCs!
+	 * @param creatureCorpse non-player creature to delete from the world
+	 */
+	private void deleteCorpse(CreatureObject creatureCorpse) {
+		if(creatureCorpse.isPlayer()) {
+			Log.e(this, "Cannot delete the corpse of a player!", creatureCorpse);
+		} else {
+			new DestroyObjectIntent(creatureCorpse).broadcast();
+			Log.i(this, "Corpse of NPC %s was deleted from the world", creatureCorpse);
+		}
 	}
 	
 }

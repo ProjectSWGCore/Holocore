@@ -36,6 +36,7 @@ import network.packets.swg.zone.UpdatePvpStatusMessage;
 import network.packets.swg.zone.chat.ChatSystemMessage;
 import network.packets.swg.zone.chat.ChatSystemMessage.SystemChatType;
 import intents.FactionIntent;
+import intents.PlayerEventIntent;
 import resources.PvpFaction;
 import resources.PvpFlag;
 import resources.PvpStatus;
@@ -62,20 +63,8 @@ public final class FactionService extends Service {
 	
 	@Override
 	public void onIntentReceived(Intent i) {
-		if(i instanceof FactionIntent) {
-			FactionIntent fi = (FactionIntent) i;
-			
-			switch(fi.getUpdateType()) {
-				case FACTIONUPDATE:
-					handleTypeChange(fi);
-					break;
-				case STATUSUPDATE:
-					handleStatusChange(fi);
-					break;
-				case FLAGUPDATE:
-					handleFlagChange(fi.getTarget());
-					break;
-			}
+		switch(i.getType()) {
+			case FactionIntent.TYPE: handleFactionIntent((FactionIntent) i); break;
 		}
 	}
 	
@@ -92,6 +81,20 @@ public final class FactionService extends Service {
 			success = false;
 		}
 		return super.terminate() && success;
+	}
+	
+	private void handleFactionIntent(FactionIntent i) {
+		switch (i.getUpdateType()) {
+			case FACTIONUPDATE:
+				handleTypeChange(i);
+				break;
+			case STATUSUPDATE:
+				handleStatusChange(i);
+				break;
+			case FLAGUPDATE:
+				handleFlagChange(i.getTarget());
+				break;
+		}
 	}
 	
 	private void sendSystemMessage(TangibleObject target, String message) {
@@ -192,31 +195,37 @@ public final class FactionService extends Service {
 	
 	private void handleFlagChange(TangibleObject object) {
 		Player objOwner = object.getOwner();
+		
 		for (SWGObject o : object.getObservers()) {
 			if (!(o instanceof TangibleObject))
 				continue;
 			TangibleObject observer = (TangibleObject) o;
 			Player obsOwner = observer.getOwner();
-			int pvpBitmask = 0;
+
+			int pvpBitmask = getPvpBitmask(object, observer);
 			
-			// They CAN be enemies if they're not from the same faction and neither of them are neutral
-			if (object.getPvpFaction() != observer.getPvpFaction() && observer.getPvpFaction() != PvpFaction.NEUTRAL) {
-				if (object.getPvpStatus() == PvpStatus.SPECIALFORCES && observer.getPvpStatus() == PvpStatus.SPECIALFORCES) {
-					pvpBitmask |= PvpFlag.AGGRESSIVE.getBitmask() | PvpFlag.ATTACKABLE.getBitmask();
-				}
-			}
-			UpdatePvpStatusMessage objectPacket = createPvpStatusMessage(object, observer, object.getPvpFlags() | pvpBitmask);
-			UpdatePvpStatusMessage targetPacket = createPvpStatusMessage(object, observer, observer.getPvpFlags() | pvpBitmask);
 			if (objOwner != null)
-				objOwner.sendPacket(objectPacket, targetPacket);
+				// Send the PvP information about this observer to the owner
+				objOwner.sendPacket(createPvpStatusMessage(observer, observer.getPvpFlags() | pvpBitmask));
 			if (obsOwner != null)
-				obsOwner.sendPacket(objectPacket);
+				// Send the pvp information about the owner to this observer
+				obsOwner.sendPacket(createPvpStatusMessage(object, object.getPvpFlags() | pvpBitmask));
 		}
 	}
 	
-	private UpdatePvpStatusMessage createPvpStatusMessage(TangibleObject object, TangibleObject observer, int flags) {
-		Set<PvpFlag> flagSet = PvpFlag.getFlags(object.getPvpFlags());
+	private UpdatePvpStatusMessage createPvpStatusMessage(TangibleObject object, int flags) {
+		Set<PvpFlag> flagSet = PvpFlag.getFlags(flags);
 		return new UpdatePvpStatusMessage(object.getPvpFaction(), object.getObjectId(), flagSet.toArray(new PvpFlag[flagSet.size()]));
+	}
+	
+	private int getPvpBitmask(TangibleObject object1, TangibleObject object2) {
+		int pvpBitmask = 0;
+
+		if(object1.isEnemy(object2)) {
+			pvpBitmask |= PvpFlag.AGGRESSIVE.getBitmask() | PvpFlag.ATTACKABLE.getBitmask();
+		}
+		
+		return pvpBitmask;
 	}
 	
 }

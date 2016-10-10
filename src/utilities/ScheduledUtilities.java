@@ -54,8 +54,16 @@ public class ScheduledUtilities {
 		}
 	}
 	
-	public static ScheduledFuture<?> scheduleAtFixedRate(Runnable r, long initialDelay, long delay, TimeUnit unit) {
-		return getScheduler().scheduleAtFixedRate(r, initialDelay, delay, unit);
+	public static ScheduledFuture<?> scheduleAtFixedRate(Runnable r, long initialDelay, long period, TimeUnit unit) {
+		return getScheduler().scheduleAtFixedRate(r, initialDelay, period, unit);
+	}
+	
+	public static ScheduledFuture<?> scheduleWithFixedDelay(Runnable r, long initialDelay, long delay, TimeUnit unit) {
+		return getScheduler().scheduleWithFixedDelay(r, initialDelay, delay, unit);
+	}
+	
+	public static ScheduledFuture<?> run(Runnable r, long delay, TimeUnit unit) {
+		return getScheduler().schedule(r, delay, unit);
 	}
 	
 }

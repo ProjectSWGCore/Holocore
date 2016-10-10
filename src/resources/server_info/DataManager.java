@@ -123,7 +123,7 @@ public class DataManager implements IntentReceiver {
 		String db = c.getString("LOCAL-DB", "nge");
 		String user = c.getString("LOCAL-USER", "nge");
 		String pass = c.getString("LOCAL-PASS", "nge");
-		localDatabase = new PostgresqlDatabase("192.168.1.87", db, user, pass);
+		localDatabase = new PostgresqlDatabase("localhost", db, user, pass);
 	}
 
 	/**

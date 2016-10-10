@@ -63,11 +63,6 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 		lootRule = LootRule.RANDOM;
 	}
 
-	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
-		ois.defaultReadObject();
-		pickupPointTimer = new PickupPointTimer();
-	}
-
 	@Override
 	public void createBaseline6(Player target, BaselineBuilder bb) {
 		super.createBaseline6(target, bb); // BASE06 -- 2 variables

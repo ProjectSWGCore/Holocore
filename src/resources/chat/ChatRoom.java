@@ -160,14 +160,14 @@ public class ChatRoom implements Encodable, Persistable {
 		return banned;
 	}
 
-	public ChatResult canJoinRoom(ChatAvatar avatar) {
+	public ChatResult canJoinRoom(ChatAvatar avatar, boolean ignoreInvitation) {
 		if (banned.contains(avatar))
 			return ChatResult.ROOM_AVATAR_BANNED;
 
 		if (members.contains(avatar))
 			return ChatResult.ROOM_ALREADY_JOINED;
 
-		if (isPublic() || invited.contains(avatar) || moderators.contains(avatar))
+		if (isPublic() || ignoreInvitation || invited.contains(avatar) || moderators.contains(avatar))
 			return ChatResult.SUCCESS;
 
 		return ChatResult.ROOM_AVATAR_NO_PERMISSION;

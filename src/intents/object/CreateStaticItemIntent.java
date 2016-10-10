@@ -38,11 +38,13 @@ public final class CreateStaticItemIntent extends Intent {
 	
 	public static final String TYPE = "CreateStaticItemIntent";
 	
+	private final SWGObject requester;
 	private final SWGObject container;
 	private final String[] itemNames;
 	
-	public CreateStaticItemIntent(SWGObject container, String... itemNames) {
+	public CreateStaticItemIntent(SWGObject requester, SWGObject container, String... itemNames) {
 		super(TYPE);
+		this.requester = requester;
 		this.container = container;
 		this.itemNames = itemNames;
 	}
@@ -53,6 +55,10 @@ public final class CreateStaticItemIntent extends Intent {
 
 	public String[] getItemNames() {
 		return itemNames;
+	}
+
+	public SWGObject getRequester() {
+		return requester;
 	}
 	
 }

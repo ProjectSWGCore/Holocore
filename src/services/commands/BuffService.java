@@ -38,6 +38,7 @@ import java.util.concurrent.TimeUnit;
 import intents.BuffIntent;
 import intents.PlayerEventIntent;
 import intents.SkillModIntent;
+import main.ProjectSWG;
 import network.packets.swg.zone.PlayClientEffectObjectMessage;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
@@ -47,6 +48,7 @@ import resources.control.Service;
 import resources.objects.creature.Buff;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
+import utilities.ThreadUtilities;
 
 public class BuffService extends Service {
 	
@@ -58,7 +60,7 @@ public class BuffService extends Service {
 	// BuffData that has REMOVE_ON_RESPEC = 1
 	
 	// TODO group buffs
-		// TODO remove group buff(s) when distance between receiver and caster is 100m
+		// TODO remove group buff(s) from receiver when distance between receiver and caster is 100m
 		// is it possible to somehow determine if a buff is a group buff?
 	// TODO decay buffs on deathblow
 	
@@ -68,7 +70,6 @@ public class BuffService extends Service {
 	
 //	private static final byte GROUP_BUFF_RANGE = 100;	
 	
-	private DatatableData buffTable;
 	private final DelayQueue<BuffDelayed> buffRemoval;
 	private final ExecutorService executor;
 	private boolean stopBuffRemover;
@@ -79,7 +80,7 @@ public class BuffService extends Service {
 		registerForIntent(PlayerEventIntent.TYPE);
 		
 		buffRemoval = new DelayQueue<>();
-		executor = Executors.newSingleThreadScheduledExecutor();
+		executor = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("buff-service"));
 		dataMap = new HashMap<>();
 	}
 	
@@ -104,7 +105,7 @@ public class BuffService extends Service {
 				}
 				
 				break;
-			case PlayerEventIntent.TYPE: handleObjectCreation((PlayerEventIntent) i); break;
+			case PlayerEventIntent.TYPE: handlePlayerEventIntent((PlayerEventIntent) i); break;
 		}
 	}
 	
@@ -117,7 +118,7 @@ public class BuffService extends Service {
 	}
 	
 	private void loadBuffs() {
-		buffTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/buff/buff.iff");
+		DatatableData buffTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/buff/buff.iff");
 		
 		for(int row = 0; row < buffTable.getRowCount(); row++) {
 			dataMap.put(new CRC((String) buffTable.getCell(row, 0)), new BuffData(
@@ -140,19 +141,17 @@ public class BuffService extends Service {
 		} 
 	}
 	
-	private void handleObjectCreation(PlayerEventIntent pei) {
+	private void handlePlayerEventIntent(PlayerEventIntent pei) {
 		CreatureObject creature = pei.getPlayer().getCreatureObject();
 		
 		switch(pei.getEvent()) {
 			case PE_FIRST_ZONE: handleFirstZone(creature); break;
-			case PE_DISAPPEAR: break;
+			case PE_DISAPPEAR: break;	// TODO stop managing their buffs if they disappear
 		}
 	}
 	
 	private void handleFirstZone(CreatureObject creature) {
-		Map<CRC, Buff> buffs = creature.getBuffs();
-		
-		buffs.forEach((crc, buff) -> manageBuff(buff, crc, creature));
+		creature.getBuffs().forEach((crc, buff) -> manageBuff(buff, crc, creature));
 	}
 	
 	private void handleBuffIntentAdd(BuffIntent bi) {
@@ -164,6 +163,11 @@ public class BuffService extends Service {
 		
 		if(buffData == null)
 			return;
+		
+		// The client-side timer hinges on the playTime of the PlayerObject.
+		// We therefore must update it to current time, so the timer starts from full duration
+		receiver.getPlayerObject().updatePlayTime();
+		
         // TODO stack counts upon add/remove probably need to be defined on a per-buff basis due to skillmod influence.
 		int stackCount = 1;
         int buffDuration = (int) buffData.getDefaultDuration();
@@ -294,7 +298,7 @@ public class BuffService extends Service {
 
 		@Override
 		public long getDelay(TimeUnit timeUnit) {
-			return timeUnit.convert(buff.getEndTime() - owner.getPlayTime(), TimeUnit.MILLISECONDS);
+			return timeUnit.convert(buff.getEndTime() - System.currentTimeMillis() / 1000, TimeUnit.MILLISECONDS);
 		}
 		
 	}

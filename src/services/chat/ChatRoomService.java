@@ -90,6 +90,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import resources.encodables.OutOfBandPackage;
 
 /**
  * @author Waverunner
@@ -235,6 +236,9 @@ public class ChatRoomService extends Service {
 		switch(i.getUpdateType()) {
 			case CREATE: createRoom(i.getAvatar(), i.isPublic(), i.getPath(), i.getTitle()); break;
 			case DESTROY: notifyDestroyRoom(i.getAvatar(), i.getPath(), 0); break;
+			case JOIN: enterChatChannel(i.getPlayer(), i.getPath(), i.isIgnoreInvitation()); break;
+			case LEAVE: leaveChatChannel(i.getPlayer(), i.getPath()); break;
+			case SEND_MESSAGE: sendMessageToRoom(i.getPlayer(), getRoom(i.getPath()), 0, i.getMessage(), new OutOfBandPackage());  break;
 			default: break;
 		}
 	}
@@ -512,18 +516,22 @@ public class ChatRoomService extends Service {
 	}
 
 	private void handleChatSendToRoom(Player player, ChatSendToRoom p) {
-		ChatResult result = ChatResult.SUCCESS;
-
 		ChatRoom room = getRoom(p.getRoomId());
+		sendMessageToRoom(player, room, p.getSequence(), p.getMessage(), p.getOutOfBandPackage());
+	}
+	
+	private void sendMessageToRoom(Player player, ChatRoom room, int sequence, String message, OutOfBandPackage outOfBandPackage) {
+		ChatResult result = ChatResult.SUCCESS;
+		
 		if (room == null)
 			result = ChatResult.ROOM_INVALID_ID;
-
+		
 		if (result != ChatResult.SUCCESS) {
-			player.sendPacket(new ChatOnSendRoomMessage(result.getCode(), p.getSequence()));
+			player.sendPacket(new ChatOnSendRoomMessage(result.getCode(), sequence));
 			return;
 		}
 
-		if (!incrementMessageCounter(player.getNetworkId(), room.getId(), p.getSequence()))
+		if (!incrementMessageCounter(player.getNetworkId(), room.getId(), sequence))
 			return;
 
 		ChatAvatar avatar = ChatAvatar.getFromPlayer(player);
@@ -532,11 +540,11 @@ public class ChatRoomService extends Service {
 
 		// TODO: Check length of messages -- Result 16 is used for too long message
 
-		player.sendPacket(new ChatOnSendRoomMessage(result.getCode(), p.getSequence()));
+		player.sendPacket(new ChatOnSendRoomMessage(result.getCode(), sequence));
 
 		if (result == ChatResult.SUCCESS) {
-			room.sendMessage(avatar, p.getMessage(), p.getOutOfBandPackage(), player.getPlayerManager());
-			logChat(player.getCreatureObject().getObjectId(), player.getCharacterName(), room.getId()+"/"+room.getPath(), p.getMessage());
+			room.sendMessage(avatar, message, outOfBandPackage, player.getPlayerManager());
+			logChat(player.getCreatureObject().getObjectId(), player.getCharacterName(), room.getId()+"/"+room.getPath(), message);
 		}
 	}
 
@@ -570,7 +578,7 @@ public class ChatRoomService extends Service {
 
 	public void enterChatChannels(Player player, List<String> channels) {
 		for (String s : channels) {
-			enterChatChannel(player, s);
+			enterChatChannel(player, s, false);
 		}
 	}
 
@@ -599,8 +607,8 @@ public class ChatRoomService extends Service {
 		if (getRoom(planetPath + "Planet") == null)
 			return;
 
-		enterChatChannel(player, planetPath + "Planet");
-		enterChatChannel(player, planetPath + "system");
+		enterChatChannel(player, planetPath + "Planet", false);
+		enterChatChannel(player, planetPath + "system", false);
 	}
 
 	/**
@@ -608,7 +616,7 @@ public class ChatRoomService extends Service {
 	 * @param player Player joining the chat channel
 	 * @param room Chat room to enter
 	 */
-	public void enterChatChannel(Player player, ChatRoom room, int sequence) {
+	public void enterChatChannel(Player player, ChatRoom room, int sequence, boolean ignoreInvitation) {
 		ChatAvatar avatar = ChatAvatar.getFromPlayer(player);
 
 		PlayerObject ghost = player.getPlayerObject();
@@ -617,7 +625,8 @@ public class ChatRoomService extends Service {
 			return;
 		}
 
-		ChatResult result = room.canJoinRoom(avatar);
+		ChatResult result = room.canJoinRoom(avatar, ignoreInvitation);
+		
 		if (result != ChatResult.SUCCESS && player.getAccessLevel() != AccessLevel.PLAYER) {
 			sendOnEnteredChatRoom(player, avatar, result, room.getId(), sequence);
 			return;
@@ -648,13 +657,13 @@ public class ChatRoomService extends Service {
 			sendOnEnteredChatRoom(player, ChatAvatar.getFromPlayer(player), ChatResult.NONE, id, sequence);
 			return;
 		}
-		enterChatChannel(player, room, sequence);
+		enterChatChannel(player, room, sequence, false);
 	}
 
-	public void enterChatChannel(Player player, String path) {
+	public void enterChatChannel(Player player, String path, boolean ignoreInvitation) {
 		for (ChatRoom room : roomMap.values()) {
 			if (room.getPath().equals(path)) {
-				enterChatChannel(player, room, 0);
+				enterChatChannel(player, room, 0, ignoreInvitation);
 				return;
 			}
 		}

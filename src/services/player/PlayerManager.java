@@ -236,7 +236,7 @@ public class PlayerManager extends Manager {
 	
 	private void onPlayerEventIntent(PlayerEventIntent pei) {
 		synchronized (players) {
-			if (pei.getEvent() == PlayerEvent.PE_DISAPPEAR) {
+			if (pei.getEvent() == PlayerEvent.PE_DESTROYED) {
 				Player p = pei.getPlayer();
 				if (p.getPlayerState() == PlayerState.DISCONNECTED) {
 					players.remove(p.getNetworkId());
