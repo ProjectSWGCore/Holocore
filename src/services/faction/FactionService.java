@@ -77,6 +77,7 @@ public final class FactionService extends Service {
 	@Override
 	public boolean terminate() {
 		if (executor != null) {
+			// If some were in the middle of switching, finish the switches immediately
 			executor.shutdownNow().forEach(runnable -> runnable.run());
 		}
 			
@@ -183,22 +184,19 @@ public final class FactionService extends Service {
 			
 			target.setPvpFlags(pvpFlag);
 			sendSystemMessage(target, getBeginMessage(currentStatus, targetStatus));
-			executor.schedule(new Runnable() {
+			statusChangers.put(target, executor.schedule(new Runnable() {
 				@Override
-				public void run() {	
-					target.setPvpStatus(targetStatus);
-					target.getOwner().sendPacket(new ChatSystemMessage(
-							SystemChatType.SCREEN_AND_CHAT,
-							getCompletionMessage(currentStatus, targetStatus)));
+				public void run() {
+					statusChangers.remove(target);
+					changeStatus(target, currentStatus, targetStatus);
 					target.clearPvpFlags(pvpFlag);
 				}
-			}, getDelay(currentStatus, targetStatus), TimeUnit.SECONDS);
+			}, getDelay(currentStatus, targetStatus), TimeUnit.SECONDS));
 		}
 	}
 	
+	// Forces the target into the given PvpStatus
 	private void handleStatusChange(FactionIntent fi) {
-		// If they're currently going OVERT or COVERT, we need to handle it accordingly
-		// Forces them into the given PvpStatus!
 		TangibleObject target = fi.getTarget();
 		PvpStatus oldStatus = target.getPvpStatus();
 		PvpStatus newStatus = fi.getNewStatus();
@@ -208,13 +206,22 @@ public final class FactionService extends Service {
 			return;
 		
 		// Let's clear PvP flags in case they were in the middle of going covert/overt
-		Future<?> future = statusChangers.get(target);
-		future.cancel(true);
-		
-		target.setPvpStatus(newStatus);
-		target.getOwner().sendPacket(new ChatSystemMessage(
-				SystemChatType.SCREEN_AND_CHAT,
-				getCompletionMessage(oldStatus, newStatus)));
+		Future<?> future = statusChangers.remove(target);
+		if (future != null) {
+			if (future.cancel(false)) {
+				target.clearPvpFlags(PvpFlag.GOING_COVERT, PvpFlag.GOING_OVERT);
+			} else if (target.getPvpStatus() == newStatus) {
+				// They were in the middle of switching status when we wanted to force a new one on them
+				// Let's see if their newly selected status equals the one we want to force
+				
+			} else {
+				// Their new status does not equal the one we want - apply the new one
+				changeStatus(target, oldStatus, newStatus);
+			}
+		} else {
+			// They're not currently waiting to switch to a new status - change now
+			changeStatus(target, oldStatus, newStatus);
+		}
 	}
 	
 	private void handleFlagChange(TangibleObject object) {
@@ -235,6 +242,13 @@ public final class FactionService extends Service {
 				// Send the pvp information about the owner to this observer
 				obsOwner.sendPacket(createPvpStatusMessage(object, object.getPvpFlags() | pvpBitmask));
 		}
+	}
+	
+	private void changeStatus(TangibleObject object, PvpStatus oldStatus, PvpStatus newStatus) {
+		object.setPvpStatus(newStatus);
+		object.getOwner().sendPacket(new ChatSystemMessage(
+				SystemChatType.SCREEN_AND_CHAT,
+				getCompletionMessage(oldStatus, newStatus)));
 	}
 	
 	private UpdatePvpStatusMessage createPvpStatusMessage(TangibleObject object, int flags) {
