@@ -126,14 +126,21 @@ public final class CorpseService extends Service {
 		long startTime = System.currentTimeMillis();
 		Log.i(this, "Loading cloning facility data...");
 		
+		loadCloneMappings();
+		loadRespawnData();
+		
+		Log.i(this, "Finished loading cloning facility data for %d object templates. Time: %dms", facilityDataMap.size(), System.currentTimeMillis() - startTime);
+	}
+	
+	private void loadCloneMappings() {
 		try (RelationalDatabase mappingDatabase = RelationalServerFactory.getServerData("cloning/clone_mapping.db", "clone_mapping")) {
 			try (ResultSet set = mappingDatabase.executeQuery("SELECT * FROM clone_mapping")) {
 				while (set.next()) {
 					String scene = null;
-					
+
 					try {
 						String sourceBuildoutArea = set.getString("area");
-						
+
 						if (sourceBuildoutArea.equals("-")) {
 							sourceBuildoutArea = null;
 						}
@@ -158,23 +165,25 @@ public final class CorpseService extends Service {
 				Log.e(this, e);
 			}
 		}
-		
+	}
+
+	private void loadRespawnData() {
 		try (RelationalDatabase respawnDatabase = RelationalServerFactory.getServerData("cloning/cloning_respawn.db", "cloning_respawn")) {
 			try (ResultSet set = respawnDatabase.executeQuery("SELECT * FROM cloning_respawn")) {
 				while (set.next()) {
 					int tubeCount = set.getInt("tubes");
 					TubeData[] tubeData = new TubeData[tubeCount];
-					
+
 					for (int i = 1; i <= tubeCount; i++) {
 						String tubeName = "tube" + i;
-						tubeData[i-1] = new TubeData(set.getFloat(tubeName + "_x"), set.getFloat(tubeName + "_z"), set.getFloat(tubeName + "_heading"));
+						tubeData[i - 1] = new TubeData(set.getFloat(tubeName + "_x"), set.getFloat(tubeName + "_z"), set.getFloat(tubeName + "_heading"));
 					}
-					
+
 					String stfCellValue = set.getString("stf_name");
 					String stfName = stfCellValue.equals("-") ? null : stfCellValue;
 					PvpFaction factionRestriction = null;
-					
-					switch(stfCellValue) {
+
+					switch (stfCellValue) {
 						case "FACTION_REBEL":
 							factionRestriction = PvpFaction.REBEL;
 							break;
@@ -182,10 +191,10 @@ public final class CorpseService extends Service {
 							factionRestriction = PvpFaction.IMPERIAL;
 							break;
 					}
-					
+
 					FacilityData facilityData = new FacilityData(factionRestriction, set.getFloat("x"), set.getFloat("y"), set.getFloat("z"), set.getString("cell"), FacilityType.valueOf(set.getString("clone_type")), stfName, set.getInt("heading"), tubeData);
 					String objectTemplate = set.getString("structure");
-					
+
 					if (facilityDataMap.put(ClientFactory.formatToSharedFile(objectTemplate), facilityData) != null) {
 						// Duplicates are not allowed!
 						Log.e(this, "Duplicate entry for %s in row %d. Replacing previous entry with new", objectTemplate, set.getRow());
@@ -195,8 +204,6 @@ public final class CorpseService extends Service {
 				Log.e(this, e);
 			}
 		}
-		
-		Log.i(this, "Finished loading cloning facility data for %d object templates. Time: %dms", facilityDataMap.size(), System.currentTimeMillis() - startTime);
 	}
 	
 	private void handleCreatureKilledIntent(CreatureKilledIntent i) {
