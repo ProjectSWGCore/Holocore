@@ -31,13 +31,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.DelayQueue;
 import java.util.concurrent.Delayed;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import intents.BuffIntent;
 import intents.PlayerEventIntent;
 import intents.SkillModIntent;
+import java.util.concurrent.ScheduledExecutorService;
 import network.packets.swg.zone.PlayClientEffectObjectMessage;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
@@ -69,7 +69,7 @@ public class BuffService extends Service {
 	
 //	private static final byte GROUP_BUFF_RANGE = 100;	
 	
-	private final ExecutorService executor;
+	private final ScheduledExecutorService executor;
 	private final Map<CreatureObject, DelayQueue<BuffDelayed>> buffRemoval;
 	private final Map<CRC, BuffData> dataMap;
 	
@@ -93,7 +93,8 @@ public class BuffService extends Service {
 
 	@Override
 	public boolean start() {
-		executor.execute(() -> buffRemoval.values().forEach(buffQueue -> checkBuffQueue(buffQueue)));
+		// Polls buff queues every second
+		executor.scheduleAtFixedRate(() -> buffRemoval.values().forEach(buffQueue -> checkBuffQueue(buffQueue)), 0, 1, TimeUnit.SECONDS);
 		
 		return super.start();
 	}
