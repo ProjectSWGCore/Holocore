@@ -125,14 +125,15 @@ public class CombatXpService extends Service {
 	
 	private void handleCreatureKilledIntent(CreatureKilledIntent i) {
 		CreatureObject killer = i.getKiller();
+		GroupObject group = groupObjects.get(killer.getGroupId());
 		
-		// Entertainers gain no combat XP!
-		if (isEntertainer(killer)) {
+		// Ungrouped entertainer
+		if (group == null && isEntertainer(killer)) {
 			return;
 		}
 		
 		CreatureObject corpse = i.getCorpse();
-		GroupObject group = groupObjects.get(corpse.getGroupId());
+		
 		short killerLevel = group != null ? group.getLevel() : killer.getLevel();
 		short corpseLevel = corpse.getLevel();
 		int experienceGained;
