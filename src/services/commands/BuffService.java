@@ -178,8 +178,10 @@ public class BuffService extends Service {
 	private void addBuff(CRC buffCrc, CreatureObject receiver, CreatureObject buffer) {
 		BuffData buffData = dataMap.get(buffCrc);
 		
-		if(buffData == null)
+		if(buffData == null) {
+			Log.e(this, "Could not add %s to %s - buff data for it does not exist", receiver, buffCrc);
 			return;
+		}
 		
 		// The client-side timer hinges on the playTime of the PlayerObject.
 		// We therefore must update it to current time, so the timer starts from full duration
@@ -224,10 +226,10 @@ public class BuffService extends Service {
 	}
 	
 	private void removeBuff(CreatureObject creature, CRC buffCrc, boolean expired) {
-		// Get the BuffData for this buff name.
 		BuffData buffData = dataMap.get(buffCrc);
 		
 		if(buffData == null) {
+			Log.e(this, "Could not remove %s from %s - buff data for it does not exist", creature, buffCrc);
 			return;
 		}
 		
