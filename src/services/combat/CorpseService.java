@@ -28,6 +28,7 @@
 package services.combat;
 
 import intents.FactionIntent;
+import intents.PlayerEventIntent;
 import intents.chat.ChatBroadcastIntent;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -45,6 +46,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 import main.ProjectSWG.CoreException;
 import resources.Location;
@@ -62,6 +64,7 @@ import resources.objects.building.BuildingObject;
 import resources.objects.cell.CellObject;
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
+import resources.player.PlayerEvent;
 import resources.server_info.Log;
 import resources.server_info.RelationalDatabase;
 import resources.server_info.RelationalServerFactory;
@@ -81,6 +84,7 @@ public final class CorpseService extends Service {
 	private static final byte CLONE_TIMER = 30;	// Amount of minutes before a player is forced to clone
 	
 	private final ScheduledExecutorService executor;
+	private final Map<CreatureObject, Future<?>> reviveTimers;
 	private final Map<String, FacilityData> facilityDataMap;
 	private final Map<CloneMapping, CloneMapping> cloneMappings;	// Needed for dungeons that have no cloning facilities
 	private final List<BuildingObject> cloningFacilities;
@@ -88,6 +92,7 @@ public final class CorpseService extends Service {
 	
 	public CorpseService() {
 		executor = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("corpse-service"));
+		reviveTimers = new HashMap<>();
 		facilityDataMap = new HashMap<>();
 		cloneMappings = new HashMap<>();
 		cloningFacilities = new ArrayList<>();
@@ -96,6 +101,7 @@ public final class CorpseService extends Service {
 		registerForIntent(CreatureKilledIntent.TYPE);
 		registerForIntent(ObjectCreatedIntent.TYPE);
 		registerForIntent(DestroyObjectIntent.TYPE);
+		registerForIntent(PlayerEventIntent.TYPE);
 		
 		loadFacilityData();
 	}
@@ -112,6 +118,7 @@ public final class CorpseService extends Service {
 			case CreatureKilledIntent.TYPE: handleCreatureKilledIntent((CreatureKilledIntent) i); break;
 			case ObjectCreatedIntent.TYPE: handleObjectCreatedIntent((ObjectCreatedIntent) i); break;
 			case DestroyObjectIntent.TYPE: handleDestroyObjectIntent((DestroyObjectIntent) i); break;
+			case PlayerEventIntent.TYPE: handlePlayerEventIntent((PlayerEventIntent) i); break;
 		}
 	}
 	
@@ -200,67 +207,7 @@ public final class CorpseService extends Service {
 			new ChatBroadcastIntent(corpseOwner, new ProsePackage(new StringId("base_player", "prose_victim_dead"), "TT", i.getKillerCreature().getName())).broadcast();
 			new ChatBroadcastIntent(corpseOwner, new ProsePackage(new StringId("base_player", "revive_exp_msg"), "TT", CLONE_TIMER + " minutes.")).broadcast();
 			
-			Terrain corpseTerrain = corpse.getTerrain();
-			CloneMapping cloneMapping = new CloneMapping(corpseTerrain, corpse.getBuildoutArea().getName());
-			CloneMapping destinationMapping = cloneMappings.get(cloneMapping);
-			
-			List<BuildingObject> availableFacilities;
-			
-			if(destinationMapping != null) {
-				availableFacilities = getAvailableFacilities(corpse, destinationMapping);
-			} else {
-				availableFacilities = getAvailableFacilities(corpse, cloneMapping);
-			}
-			
-			if (!availableFacilities.isEmpty()) {
-				SuiListBox suiWindow = new SuiListBox(SuiButtons.OK, "@base_player:revive_title", "@base_player:clone_prompt_header");
-				// Add options to SUI window
-				for (BuildingObject cloningFacility : availableFacilities) {
-					FacilityData facilityData = facilityDataMap.get(cloningFacility.getTemplate());
-
-					String stfName = facilityData.getStfName();
-					
-					if(stfName != null) {
-						suiWindow.addListItem(stfName);
-					} else {
-						suiWindow.addListItem(cloningFacility.getCurrentCity());
-					}
-				}
-
-				suiWindow.addCallback("handleFacilityChoice", (Player player, SWGObject actor, SuiEvent event, Map<String, String> parameters) -> {
-					int selectionIndex = SuiListBox.getSelectedRow(parameters);
-
-					if (event != SuiEvent.OK_PRESSED || selectionIndex + 1 > availableFacilities.size() || selectionIndex < 0) {
-						suiWindow.display(player);
-						return;
-					}
-
-					switch(clone(corpse, availableFacilities.get(selectionIndex))) {
-						case INVALID_SELECTION:
-							// TODO system message
-							suiWindow.display(player);
-							break;
-						case INVALID_CELL:
-							// TODO system message
-							suiWindow.display(player);
-							break;
-						case TEMPLATE_MISSING:
-							// TODO system message
-							suiWindow.display(player);
-							break;
-						case SUCCESS:
-							// TODO do anything special here? If not, delete case
-							break;
-					}
-				});
-
-				suiWindow.display(corpseOwner);
-				
-				executor.schedule(() -> expireCloneTimer(corpse, availableFacilities, suiWindow), CLONE_TIMER, TimeUnit.MINUTES);
-			} else {
-				// TODO no cloners available! Wat do?
-				Log.e(this, "No cloning facility is available for terrain %s - %s has nowhere to properly clone", corpseTerrain, corpse);
-			}
+			scheduleCloneTimer(corpse);
 		} else {
 			// This is a NPC - schedule corpse for deletion
 			executor.schedule(() -> deleteCorpse(corpse), 120, TimeUnit.SECONDS);
@@ -288,6 +235,80 @@ public final class CorpseService extends Service {
 			if(destroyedObject instanceof BuildingObject && cloningFacilities.remove((BuildingObject) destroyedObject)) {
 				Log.d(this, "Cloning facility %s was destroyed", destroyedObject);
 			}
+		}
+	}
+	
+	private void handlePlayerEventIntent(PlayerEventIntent i) {
+		if(i.getEvent() != PlayerEvent.PE_FIRST_ZONE) {
+			return;
+		}
+		
+		CreatureObject creature = i.getPlayer().getCreatureObject();
+		
+		if(creature.getPosture() == Posture.DEAD && !reviveTimers.containsKey(creature)) {
+			// They're dead but they have no active revive timer.
+			// In this case, they died and the application was shut down and started back up.
+			scheduleCloneTimer(creature);
+		}
+	}
+	
+	private void scheduleCloneTimer(CreatureObject corpse) {
+		Terrain corpseTerrain = corpse.getTerrain();
+		CloneMapping cloneMapping = new CloneMapping(corpseTerrain, corpse.getBuildoutArea().getName());
+		CloneMapping destinationMapping = cloneMappings.get(cloneMapping);
+		List<BuildingObject> availableFacilities;
+			
+		if (destinationMapping != null) {
+			availableFacilities = getAvailableFacilities(corpse, destinationMapping);
+		} else {
+			availableFacilities = getAvailableFacilities(corpse, cloneMapping);
+		}
+
+		if (!availableFacilities.isEmpty()) {
+			SuiListBox suiWindow = new SuiListBox(SuiButtons.OK, "@base_player:revive_title", "@base_player:clone_prompt_header");
+			// Add options to SUI window
+			for (BuildingObject cloningFacility : availableFacilities) {
+				FacilityData facilityData = facilityDataMap.get(cloningFacility.getTemplate());
+
+				String stfName = facilityData.getStfName();
+
+				if (stfName != null) {
+					suiWindow.addListItem(stfName);
+				} else {
+					suiWindow.addListItem(cloningFacility.getCurrentCity());
+				}
+			}
+
+			suiWindow.addCallback("handleFacilityChoice", (Player player, SWGObject actor, SuiEvent event, Map<String, String> parameters) -> {
+				int selectionIndex = SuiListBox.getSelectedRow(parameters);
+
+				if (event != SuiEvent.OK_PRESSED || selectionIndex + 1 > availableFacilities.size() || selectionIndex < 0) {
+					suiWindow.display(player);
+					return;
+				}
+
+				switch (clone(corpse, availableFacilities.get(selectionIndex))) {
+					case INVALID_SELECTION:
+						// TODO system message
+						suiWindow.display(player);
+						break;
+					case INVALID_CELL:
+						// TODO system message
+						suiWindow.display(player);
+						break;
+					case TEMPLATE_MISSING:
+						// TODO system message
+						suiWindow.display(player);
+						break;
+				}
+			});
+
+			suiWindow.display(corpse.getOwner());
+
+			executor.schedule(() -> expireCloneTimer(corpse, availableFacilities, suiWindow), CLONE_TIMER, TimeUnit.MINUTES);
+		} else {
+			// TODO no cloners available at all! Wat do?
+			Log.e(this, "No cloning facility is available for terrain %s - %s has nowhere to properly clone", corpseTerrain, corpse);
 		}
 	}
 	
@@ -357,9 +378,7 @@ public final class CorpseService extends Service {
 					new FactionIntent(corpse, PvpStatus.ONLEAVE).broadcast();
 
 				TubeData[] tubeData = facilityData.getTubeData();
-
 				int tubeCount = tubeData.length;
-
 				Location cloneLocation;
 
 				if (tubeCount > 0) {
@@ -415,11 +434,15 @@ public final class CorpseService extends Service {
 	}
 	
 	private void expireCloneTimer(CreatureObject corpse, List<BuildingObject> facilitiesInTerrain, SuiWindow suiWindow) {
-		Player corpseOwner = corpse.getOwner();
+		if(reviveTimers.remove(corpse) != null) {
+			Player corpseOwner = corpse.getOwner();
 		
-		new ChatBroadcastIntent(corpseOwner, "@base_player:revive_expired").broadcast();
-		suiWindow.close(corpseOwner);
-		forceClone(corpse, facilitiesInTerrain);
+			new ChatBroadcastIntent(corpseOwner, "@base_player:revive_expired").broadcast();
+			suiWindow.close(corpseOwner);
+			forceClone(corpse, facilitiesInTerrain);
+		} else {
+			Log.w(this, "Could not expire timer for %s because none was active", corpse);
+		}
 	}
 	
 	private static class FacilityData {
