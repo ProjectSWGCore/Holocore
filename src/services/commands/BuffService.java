@@ -38,7 +38,6 @@ import java.util.concurrent.TimeUnit;
 import intents.BuffIntent;
 import intents.PlayerEventIntent;
 import intents.SkillModIntent;
-import main.ProjectSWG;
 import network.packets.swg.zone.PlayClientEffectObjectMessage;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
@@ -47,7 +46,7 @@ import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.creature.Buff;
 import resources.objects.creature.CreatureObject;
-import resources.objects.player.PlayerObject;
+import resources.server_info.Log;
 import utilities.ThreadUtilities;
 
 public class BuffService extends Service {
@@ -70,26 +69,33 @@ public class BuffService extends Service {
 	
 //	private static final byte GROUP_BUFF_RANGE = 100;	
 	
-	private final DelayQueue<BuffDelayed> buffRemoval;
+	private final Map<CreatureObject, DelayQueue<BuffDelayed>> buffRemoval;
 	private final ExecutorService executor;
-	private boolean stopBuffRemover;
 	private final Map<CRC, BuffData> dataMap;
 	
 	public BuffService() {
 		registerForIntent(BuffIntent.TYPE);
 		registerForIntent(PlayerEventIntent.TYPE);
 		
-		buffRemoval = new DelayQueue<>();
+		buffRemoval = new HashMap<>();
 		executor = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("buff-service"));
 		dataMap = new HashMap<>();
 	}
 	
 	@Override
 	public boolean initialize() {
+		long startTime = System.currentTimeMillis();
+		Log.i(this, "Loading buffs...");
 		loadBuffs();
-		
-		executor.execute(new BuffRemover());
+		Log.i(this, "Finished loading buffs in %dms", System.currentTimeMillis() - startTime);
 		return super.initialize();
+	}
+
+	@Override
+	public boolean start() {
+		executor.execute(() -> buffRemoval.values().forEach(buffQueue -> checkBuffQueue(buffQueue)));
+		
+		return super.start();
 	}
 	
 	@Override
@@ -110,11 +116,18 @@ public class BuffService extends Service {
 	}
 	
 	@Override
-	public boolean terminate() {
-		stopBuffRemover = true;
+	public boolean stop() {
 		executor.shutdown();
 		
-		return super.terminate();
+		return super.stop();
+	}
+	
+	private void checkBuffQueue(DelayQueue<BuffDelayed> buffQueue) {
+		BuffDelayed buffToRemove = buffQueue.poll();
+		
+		if (buffToRemove != null) {
+			removeBuff(buffToRemove.creature, buffToRemove.buffCrc, true);
+		}
 	}
 	
 	private void loadBuffs() {
@@ -146,12 +159,16 @@ public class BuffService extends Service {
 		
 		switch(pei.getEvent()) {
 			case PE_FIRST_ZONE: handleFirstZone(creature); break;
-			case PE_DISAPPEAR: break;	// TODO stop managing their buffs if they disappear
+			case PE_DISAPPEAR: handleDisappear(creature); break;	
 		}
 	}
 	
 	private void handleFirstZone(CreatureObject creature) {
 		creature.getBuffs().forEach((crc, buff) -> manageBuff(buff, crc, creature));
+	}
+	
+	private void handleDisappear(CreatureObject creature) {
+		buffRemoval.remove(creature);
 	}
 	
 	private void handleBuffIntentAdd(BuffIntent bi) {
@@ -194,7 +211,15 @@ public class BuffService extends Service {
 			removeBuff(creature, buffCrc, true);
 		} else if(buff.getDuration() >= 0) {
 			// If this buff doesn't last forever or hasn't expired, we'll schedule it for removal in the future
-			buffRemoval.put(new BuffDelayed(buff, buffCrc, creature));
+			DelayQueue<BuffDelayed> buffQueue = buffRemoval.get(creature);
+			
+			if(buffQueue == null) {
+				buffQueue = new DelayQueue<>();
+				
+				buffRemoval.put(creature, buffQueue);
+			}
+			
+			buffQueue.add(new BuffDelayed(buff, buffCrc, creature));
 		}
 	}
 	
@@ -265,30 +290,16 @@ public class BuffService extends Service {
 		target.sendObserversAndSelf(new PlayClientEffectObjectMessage(effectFileName, hardPoint, target.getObjectId()));
 	}
 	
-	private class BuffRemover implements Runnable {
-		@Override
-		public void run() {
-			while(!stopBuffRemover) {
-				BuffDelayed buffToRemove = buffRemoval.poll();
-				
-				if(buffToRemove != null)
-					removeBuff(buffToRemove.creature, buffToRemove.buffCrc, true);
-			}
-		}
-	}
-	
 	private class BuffDelayed implements Delayed {
 		
 		private final Buff buff;
 		private final CRC buffCrc;
-		private final PlayerObject owner;
 		private final CreatureObject creature;
 		
 		private BuffDelayed(Buff buff, CRC buffCrc, CreatureObject creature) {
 			this.buff = buff;
 			this.buffCrc = buffCrc;
 			this.creature = creature;
-			owner = creature.getPlayerObject();
 		}
 		
 		@Override
@@ -299,6 +310,18 @@ public class BuffService extends Service {
 		@Override
 		public long getDelay(TimeUnit timeUnit) {
 			return timeUnit.convert(buff.getEndTime() - System.currentTimeMillis() / 1000, TimeUnit.MILLISECONDS);
+		}
+
+		public Buff getBuff() {
+			return buff;
+		}
+
+		public CRC getBuffCrc() {
+			return buffCrc;
+		}
+
+		public CreatureObject getCreature() {
+			return creature;
 		}
 		
 	}
