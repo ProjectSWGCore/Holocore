@@ -376,40 +376,44 @@ public class CombatManager extends Manager {
 		Log.i(this, "% was revived", revivedCreature);
 	}
 	
-	private void killCreature(CreatureObject killerCreature, CreatureObject killedCreature) {
-		killedCreature.setPosture(Posture.DEAD);
-		Log.i(this, "%s was killed", killedCreature);
-		new CreatureKilledIntent(killerCreature, killedCreature).broadcast();
+	private void killCreature(CreatureObject killer, CreatureObject corpse) {
+		corpse.setPosture(Posture.DEAD);
+		Log.i(this, "%s was killed", corpse);
+		new CreatureKilledIntent(killer, corpse).broadcast();
 	}
 	
 	private void procesDeathblow(DeathblowIntent i) {
-		CreatureObject killerCreature = i.getKillerCreature();
-		CreatureObject killedCreature = i.getKilledCreature();
+		CreatureObject killer = i.getKiller();
+		CreatureObject corpse = i.getCorpse();
 
-		// Only players may deathblow eachother
-		if (killerCreature.isPlayer() && killedCreature.isPlayer()) {
-			// They must be enemies
-			if (killedCreature.isEnemy(killerCreature)) {
-				// The target of the deathblow must be incapacitated!
-				if (killedCreature.getPosture() == Posture.INCAPACITATED) {
-					// If this happens, they obviously can't get back up
-					synchronized (incapacitatedCreatures) {
-						Future<?> incapacitationTimer = incapacitatedCreatures.remove(killedCreature);
+		// Only deathblowing players is allowed!
+		if (!corpse.isPlayer()) {
+			return;
+		}
+		
+		// They must be enemies
+		if (!corpse.isEnemy(killer)) {
+			return;
+		}
+		
+		// The target of the deathblow must be incapacitated!
+		if (corpse.getPosture() != Posture.INCAPACITATED) {
+			return;
+		}
+		
+		// If they're deathblown while incapacitated, their incapacitation expiration timer should cancel
+		synchronized (incapacitatedCreatures) {
+			Future<?> incapacitationTimer = incapacitatedCreatures.remove(corpse);
 
-						if (incapacitationTimer != null) {
-							if (incapacitationTimer.cancel(false)) {	// If the task is running, let them get back up
-								killCreature(killerCreature, killedCreature);
-								Log.i(this, "%s was deathblown by %s", killedCreature, killerCreature);
-							}
-						} else {
-							// Can't happen with the current code, but in case it's ever refactored...
-							Log.e(this, "Incapacitation timer for player %s being deathblown unexpectedly didn't exist!", "");
-						}
-					}
+			if (incapacitationTimer != null) {
+				if (incapacitationTimer.cancel(false)) {	// If the task is running, let them get back up
+					killCreature(killer, corpse);
+					Log.i(this, "%s was deathblown by %s", corpse, killer);
 				}
+			} else {
+				// Can't happen with the current code, but in case it's ever refactored...
+				Log.e(this, "Incapacitation timer for player %s being deathblown unexpectedly didn't exist!", "");
 			}
-		} else {
-			Log.i(this, "%s tried to deathblow NPC %s", killerCreature, killedCreature);
 		}
 	}
 	

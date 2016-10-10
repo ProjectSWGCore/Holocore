@@ -34,21 +34,21 @@ public class CreatureKilledIntent extends Intent {
 
 	public static final String TYPE = "CreatureKilledIntent";
 	
-	private final CreatureObject killerCreature;
-	private final CreatureObject killedCreature;
+	private final CreatureObject killer;
+	private final CreatureObject corpse;
 
-	public CreatureKilledIntent(CreatureObject killerCreature, CreatureObject killedCreature) {
+	public CreatureKilledIntent(CreatureObject killer, CreatureObject corpse) {
 		super(TYPE);
-		this.killerCreature = killerCreature;
-		this.killedCreature = killedCreature;
+		this.killer = killer;
+		this.corpse = corpse;
 	}
 
-	public CreatureObject getKillerCreature() {
-		return killerCreature;
+	public CreatureObject getKiller() {
+		return killer;
 	}
 
-	public CreatureObject getKilledCreature() {
-		return killedCreature;
+	public CreatureObject getCorpse() {
+		return corpse;
 	}
-	
+
 }
