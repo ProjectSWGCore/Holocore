@@ -69,8 +69,8 @@ public class BuffService extends Service {
 	
 //	private static final byte GROUP_BUFF_RANGE = 100;	
 	
-	private final Map<CreatureObject, DelayQueue<BuffDelayed>> buffRemoval;
 	private final ExecutorService executor;
+	private final Map<CreatureObject, DelayQueue<BuffDelayed>> buffRemoval;
 	private final Map<CRC, BuffData> dataMap;
 	
 	public BuffService() {
@@ -78,8 +78,8 @@ public class BuffService extends Service {
 		registerForIntent(PlayerEventIntent.TYPE);
 		
 		buffRemoval = new HashMap<>();
-		executor = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("buff-service"));
 		dataMap = new HashMap<>();
+		executor = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("buff-service"));
 	}
 	
 	@Override
@@ -126,7 +126,7 @@ public class BuffService extends Service {
 		BuffDelayed buffToRemove = buffQueue.poll();
 		
 		if (buffToRemove != null) {
-			removeBuff(buffToRemove.creature, buffToRemove.buffCrc, true);
+			removeBuff(buffToRemove.getCreature(), buffToRemove.getBuffCrc(), true);
 		}
 	}
 	
