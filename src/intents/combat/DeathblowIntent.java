@@ -34,25 +34,25 @@ public class DeathblowIntent extends Intent {
 
 	public static final String TYPE = "DeathblowIntent";
 	
-	private final CreatureObject killerCreature;
-	private final CreatureObject killedCreature;
+	private final CreatureObject killer;
+	private final CreatureObject corpse;
 
 	/**
-	 * @param killerCreature {@code CreatureObject} that's deathblowing
-	 * @param killedCreature {@code CreatureObject} that's being deathblown
+	 * @param killer {@code CreatureObject} that's deathblowing
+	 * @param corpse {@code CreatureObject} that's being deathblown
 	 */
-	public DeathblowIntent(CreatureObject killerCreature, CreatureObject killedCreature) {
+	public DeathblowIntent(CreatureObject killer, CreatureObject corpse) {
 		super(TYPE);
-		this.killerCreature = killerCreature;
-		this.killedCreature = killedCreature;
+		this.killer = killer;
+		this.corpse = corpse;
 	}
 
-	public CreatureObject getKillerCreature() {
-		return killerCreature;
+	public CreatureObject getKiller() {
+		return killer;
 	}
 
-	public CreatureObject getKilledCreature() {
-		return killedCreature;
+	public CreatureObject getCorpse() {
+		return corpse;
 	}
 	
 }

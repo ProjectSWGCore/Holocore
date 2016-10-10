@@ -207,11 +207,11 @@ public final class CorpseService extends Service {
 	}
 	
 	private void handleCreatureKilledIntent(CreatureKilledIntent i) {
-		CreatureObject corpse = i.getKilledCreature();
+		CreatureObject corpse = i.getCorpse();
 		
 		if(corpse.isPlayer()) {
 			Player corpseOwner = corpse.getOwner();
-			new ChatBroadcastIntent(corpseOwner, new ProsePackage(new StringId("base_player", "prose_victim_dead"), "TT", i.getKillerCreature().getName())).broadcast();
+			new ChatBroadcastIntent(corpseOwner, new ProsePackage(new StringId("base_player", "prose_victim_dead"), "TT", i.getKiller().getName())).broadcast();
 			new ChatBroadcastIntent(corpseOwner, new ProsePackage(new StringId("base_player", "revive_exp_msg"), "TT", CLONE_TIMER + " minutes.")).broadcast();
 			
 			scheduleCloneTimer(corpse);
