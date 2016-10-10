@@ -127,43 +127,63 @@ public class CombatXpService extends Service {
 		CreatureObject killer = i.getKiller();
 		
 		// Entertainers gain no combat XP!
-		if(killer.hasSkill("class_entertainer_phase1_novice")) {
+		if (isEntertainer(killer)) {
 			return;
 		}
 		
 		CreatureObject corpse = i.getCorpse();
 		GroupObject group = groupObjects.get(corpse.getGroupId());
-		short effectiveLevel = group != null ? group.getLevel() : corpse.getLevel();
-		
-		XpData xpForLevel = this.xpData.get(effectiveLevel);
-		
-		if(xpForLevel == null) {
-			Log.e(this, "%s received no XP: No XP data was found for level %d!", killer, effectiveLevel);
-			return;
-		}
-		
+		short killerLevel = group != null ? group.getLevel() : killer.getLevel();
+		short corpseLevel = corpse.getLevel();
 		int experienceGained;
-		CreatureDifficulty creatureDifficulty = corpse.getDifficulty();
 		
-		switch(creatureDifficulty) {
-			case BOSS: experienceGained = xpForLevel.getBossXp(); break;
-			case ELITE: experienceGained = xpForLevel.getEliteXp(); break;
-			case NORMAL: experienceGained = xpForLevel.getXp(); break;
-			default:
-				Log.e(this, "%s received no XP: Unsupported creature difficulty %s of corpse %s", creatureDifficulty);
+		// If the difference between killer and corpse is 10 or above, they only gain 1 xp
+		if (killerLevel - corpseLevel >= 10) {
+			experienceGained = 1;
+		} else {
+		
+			XpData xpForLevel = this.xpData.get(corpseLevel);
+
+			if (xpForLevel == null) {
+				Log.e(this, "%s received no XP: No XP data was found for level %d!", killer, corpseLevel);
 				return;
+			}
+
+			CreatureDifficulty creatureDifficulty = corpse.getDifficulty();
+
+			switch (creatureDifficulty) {
+				case BOSS: experienceGained = xpForLevel.getBossXp(); break;
+				case ELITE: experienceGained = xpForLevel.getEliteXp(); break;
+				case NORMAL: experienceGained = xpForLevel.getXp(); break;
+				default:
+					Log.e(this, "%s received no XP: Unsupported creature difficulty %s of corpse %s", creatureDifficulty);
+					return;
+			}
+
+			if (experienceGained == 0) {
+				Log.w(this, "%s received no XP: XP for creature difficulty %s at level %d was %d", killer, creatureDifficulty, killerLevel, experienceGained);
+				return;
+			}
 		}
 		
-		if(experienceGained == 0) {
-			Log.w(this, "%s received no XP: XP for creature difficulty %s at level %d was %d", killer, creatureDifficulty, effectiveLevel, experienceGained);
-			return;
-		}
-		
-		if(group == null) {
+		if (group == null) {
 			new ExperienceIntent(killer, "combat", experienceGained).broadcast();
 		} else {
-			group.getGroupMemberObjects().forEach(groupMember -> new ExperienceIntent(groupMember, "combat", experienceGained).broadcast());
+			group.getGroupMemberObjects().stream()
+					.filter(groupMember -> !isEntertainer(groupMember) && isMemberEligible(corpse, groupMember))
+					.forEach(eligibleMember -> new ExperienceIntent(eligibleMember, "combat", experienceGained).broadcast());
 		}
+	}
+	
+	private boolean isEntertainer(CreatureObject creature) {
+		return creature.hasSkill("class_entertainer_phase1_novice");
+	}
+	
+	/**
+	 * @return true if {@code groupMember} is an observer of {@code corpse}
+	 */
+	private boolean isMemberEligible(CreatureObject corpse, CreatureObject groupMember) {
+		return corpse.getObservers().contains(groupMember);
 	}
 	
 	private class XpData {
