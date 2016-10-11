@@ -67,16 +67,16 @@ public final class CorpseService extends Service {
 	}
 	
 	private void handleCreatureKilledIntent(CreatureKilledIntent i) {
-		CreatureObject killedCreature = i.getKilledCreature();
+		CreatureObject corpse = i.getCorpse();
 		
-		if(killedCreature.isPlayer()) {
+		if(corpse.isPlayer()) {
 			// TODO show cloning system message
 			// TODO show cloning SUI window, with all possible facilities to clone at
 			// TODO after 30 minutes, close the SUI window and force them to clone at the nearest cloning facility
 			// TODO if the SUI window is closed by the player, make sure it reappears
 		} else {
 			// This is a NPC - schedule corpse for deletion
-			executor.schedule(() -> deleteCorpse(killedCreature), 120, TimeUnit.SECONDS);
+			executor.schedule(() -> deleteCorpse(corpse), 120, TimeUnit.SECONDS);
 		}
 	}
 	

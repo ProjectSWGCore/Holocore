@@ -30,14 +30,18 @@ package intents.combat;
 import resources.control.Intent;
 import resources.objects.creature.CreatureObject;
 
-public class CreatureKilledIntent extends Intent {
+public class DeathblowIntent extends Intent {
 
-	public static final String TYPE = "CreatureKilledIntent";
+	public static final String TYPE = "DeathblowIntent";
 	
 	private final CreatureObject killer;
 	private final CreatureObject corpse;
 
-	public CreatureKilledIntent(CreatureObject killer, CreatureObject corpse) {
+	/**
+	 * @param killer {@code CreatureObject} that's deathblowing
+	 * @param corpse {@code CreatureObject} that's being deathblown
+	 */
+	public DeathblowIntent(CreatureObject killer, CreatureObject corpse) {
 		super(TYPE);
 		this.killer = killer;
 		this.corpse = corpse;
@@ -50,5 +54,5 @@ public class CreatureKilledIntent extends Intent {
 	public CreatureObject getCorpse() {
 		return corpse;
 	}
-
+	
 }
