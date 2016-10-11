@@ -124,6 +124,13 @@ public class CombatXpService extends Service {
 	}
 	
 	private void handleCreatureKilledIntent(CreatureKilledIntent i) {
+		CreatureObject corpse = i.getCorpse();
+		
+		// You don't gain XP by PvP'ing
+		if(corpse.isPlayer()) {
+			return;
+		}
+		
 		CreatureObject killer = i.getKiller();
 		GroupObject group = groupObjects.get(killer.getGroupId());
 		
@@ -131,8 +138,6 @@ public class CombatXpService extends Service {
 		if (group == null && isEntertainer(killer)) {
 			return;
 		}
-		
-		CreatureObject corpse = i.getCorpse();
 		
 		short killerLevel = group != null ? group.getLevel() : killer.getLevel();
 		short corpseLevel = corpse.getLevel();
