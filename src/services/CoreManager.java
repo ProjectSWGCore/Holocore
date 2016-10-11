@@ -59,6 +59,7 @@ import resources.server_info.Log.LogLevel;
 import services.admin.OnlineInterfaceService;
 import services.galaxy.GalacticManager;
 import utilities.CrcDatabaseGenerator;
+import utilities.ScheduledUtilities;
 import utilities.ThreadUtilities;
 
 public class CoreManager extends Manager {
@@ -133,6 +134,7 @@ public class CoreManager extends Manager {
 	@Override
 	public boolean terminate() {
 		shutdownService.shutdownNow();
+		ScheduledUtilities.shutdown();
 		return super.terminate();
 	}
 	

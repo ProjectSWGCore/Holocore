@@ -46,6 +46,7 @@ import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
+import utilities.ThreadUtilities;
 
 public final class FactionService extends Service {
 
@@ -57,7 +58,7 @@ public final class FactionService extends Service {
 	
 	@Override
 	public boolean initialize() {
-		executor = Executors.newSingleThreadScheduledExecutor();
+		executor = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("faction-service"));
 		return super.initialize();
 	}
 	
