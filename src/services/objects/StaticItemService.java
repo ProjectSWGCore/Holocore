@@ -461,6 +461,7 @@ public final class StaticItemService extends Service {
 		private String elementalTypeString;
 		private short elementalDamage;
 		private String procEffect;
+		private String dps;
 		// special_attack_cost: Pre-NGE artifact? (SAC)
 
 		public WeaponAttributes(String itemName, String iffTemplate) {
@@ -499,10 +500,11 @@ public final class StaticItemService extends Service {
 				case "ONE_HANDED_SABER": category = WeaponType.ONE_HANDED_SABER; break;
 				case "TWO_HANDED_SABER": category = WeaponType.TWO_HANDED_SABER; break;
 				case "POLEARM_SABER": category = WeaponType.POLEARM_SABER; break;
-				case "DIRECTIONAL_TARGET_WEAPON": category = WeaponType.DIRECTIONAL_TARGET_WEAPON; break;    // Free targeting
+				case "GROUND_TARGETTING": category = WeaponType.HEAVY_WEAPON; break;
+				case "DIRECTIONAL_TARGET_WEAPON": category = WeaponType.DIRECTIONAL_TARGET_WEAPON; break;
 				case "LIGHT_RIFLE": category = WeaponType.LIGHT_RIFLE; break;
 				default:
-					// TODO log the fact that the weapon type isn't recognised.
+					Log.e(this, "Unrecognised weapon type %s at row %d", weaponType, resultSet.getRow());
 					// We return false here. That way, we don't store the
 					// itemName in the Map and the item can never be spawned.
 					return false;
@@ -535,7 +537,7 @@ public final class StaticItemService extends Service {
 				procEffect = "@ui_buff:" + procEffectString;
 			}
 			
-			// TODO calculate DPS
+			dps = resultSet.getString("actual_dps");
 
 			return true;
 		}
@@ -551,6 +553,8 @@ public final class StaticItemService extends Service {
 				object.addAttribute("cat_wpn_damage.wpn_elemental_type", elementalTypeString);
 				object.addAttribute("cat_wpn_damage.wpn_elemental_value", String.valueOf(elementalDamage));
 			}
+			
+			object.addAttribute("cat_wpn_damage.weapon_dps", dps);
 			
 			if(procEffect != null)	// Not all weapons have a proc effect
 				object.addAttribute("proc_name", procEffect);
