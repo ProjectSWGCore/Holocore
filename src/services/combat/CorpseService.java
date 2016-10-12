@@ -64,7 +64,6 @@ import resources.objects.building.BuildingObject;
 import resources.objects.cell.CellObject;
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
-import resources.player.PlayerEvent;
 import resources.server_info.Log;
 import resources.server_info.RelationalDatabase;
 import resources.server_info.RelationalServerFactory;
@@ -281,51 +280,51 @@ public final class CorpseService extends Service {
 		}
 
 		if (!availableFacilities.isEmpty()) {
-			SuiListBox suiWindow = new SuiListBox(SuiButtons.OK, "@base_player:revive_title", "@base_player:clone_prompt_header");
-			// Add options to SUI window
-			for (BuildingObject cloningFacility : availableFacilities) {
-				FacilityData facilityData = facilityDataMap.get(cloningFacility.getTemplate());
+			SuiWindow cloningWindow = createSuiWindow(availableFacilities, corpse);
 
-				String stfName = facilityData.getStfName();
-
-				if (stfName != null) {
-					suiWindow.addListItem(stfName);
-				} else {
-					suiWindow.addListItem(cloningFacility.getCurrentCity());
-				}
-			}
-
-			suiWindow.addCallback("handleFacilityChoice", (Player player, SWGObject actor, SuiEvent event, Map<String, String> parameters) -> {
-				int selectionIndex = SuiListBox.getSelectedRow(parameters);
-
-				if (event != SuiEvent.OK_PRESSED || selectionIndex + 1 > availableFacilities.size() || selectionIndex < 0) {
-					suiWindow.display(player);
-					return;
-				}
-
-				switch (clone(corpse, availableFacilities.get(selectionIndex))) {
-					case INVALID_SELECTION:
-						// TODO system message
-						suiWindow.display(player);
-						break;
-					case INVALID_CELL:
-						// TODO system message
-						suiWindow.display(player);
-						break;
-					case TEMPLATE_MISSING:
-						// TODO system message
-						suiWindow.display(player);
-						break;
-				}
-			});
-
-			suiWindow.display(corpse.getOwner());
-
-			executor.schedule(() -> expireCloneTimer(corpse, availableFacilities, suiWindow), CLONE_TIMER, TimeUnit.MINUTES);
+			cloningWindow.display(corpse.getOwner());
+			executor.schedule(() -> expireCloneTimer(corpse, availableFacilities, cloningWindow), CLONE_TIMER, TimeUnit.MINUTES);
 		} else {
 			// TODO no cloners available at all! Wat do?
 			Log.e(this, "No cloning facility is available for terrain %s - %s has nowhere to properly clone", corpseTerrain, corpse);
 		}
+	}
+	
+	private SuiWindow createSuiWindow(List<BuildingObject> availableFacilities, CreatureObject corpse) {
+		SuiListBox suiWindow = new SuiListBox(SuiButtons.OK, "@base_player:revive_title", "@base_player:clone_prompt_header");
+		
+		for (BuildingObject cloningFacility : availableFacilities) {
+			FacilityData facilityData = facilityDataMap.get(cloningFacility.getTemplate());
+			String stfName = facilityData.getStfName();
+
+			suiWindow.addListItem(stfName != null ? stfName : cloningFacility.getCurrentCity());
+		}
+
+		suiWindow.addCallback("handleFacilityChoice", (Player player, SWGObject actor, SuiEvent event, Map<String, String> parameters) -> {
+			int selectionIndex = SuiListBox.getSelectedRow(parameters);
+
+			if (event != SuiEvent.OK_PRESSED || selectionIndex + 1 > availableFacilities.size() || selectionIndex < 0) {
+				suiWindow.display(player);
+				return;
+			}
+
+			switch (clone(corpse, availableFacilities.get(selectionIndex))) {
+				case INVALID_SELECTION:
+					// TODO system message
+					suiWindow.display(player);
+					break;
+				case INVALID_CELL:
+					// TODO system message
+					suiWindow.display(player);
+					break;
+				case TEMPLATE_MISSING:
+					// TODO system message
+					suiWindow.display(player);
+					break;
+			}
+		});
+
+		return suiWindow;
 	}
 	
 	/**
@@ -381,7 +380,6 @@ public final class CorpseService extends Service {
 	}
 	
 	private CloneResult clone(CreatureObject corpse, BuildingObject selectedFacility) {
-		Location facilityLocation = selectedFacility.getLocation();
 		FacilityData facilityData = facilityDataMap.get(selectedFacility.getTemplate());
 
 		if (facilityData == null) {
@@ -397,35 +395,40 @@ public final class CorpseService extends Service {
 			return CloneResult.INVALID_CELL;
 		}
 		
-			// They should go on leave upon cloning
-			if (corpse.getPvpFaction() != PvpFaction.NEUTRAL) {
-				new FactionIntent(corpse, PvpStatus.ONLEAVE).broadcast();
-		}
-
+		teleport(corpse, cellObject, getCloneLocation(facilityData, selectedFacility));
+		return CloneResult.SUCCESS;
+	}
+	
+	private Location getCloneLocation(FacilityData facilityData, BuildingObject selectedFacility) {
+		Location cloneLocation;
+		Location facilityLocation = selectedFacility.getLocation();
 		TubeData[] tubeData = facilityData.getTubeData();
 		int tubeCount = tubeData.length;
-		Location cloneLocation;
 
 		if (tubeCount > 0) {
 			TubeData randomData = tubeData[random.nextInt(tubeCount)];
 			cloneLocation = new Location(randomData.getTubeX(), 0, randomData.getTubeZ(), facilityLocation.getTerrain());
 			cloneLocation.setOrientation(facilityLocation.getOrientationX(), facilityLocation.getOrientationY(), facilityLocation.getOrientationZ(), facilityLocation.getOrientationW());
-
-			// The creature should point towards the entrance/exit of the tube
 			cloneLocation.rotateHeading(randomData.getTubeHeading());
 		} else {
 			cloneLocation = new Location(facilityData.getX(), facilityData.getY(), facilityData.getZ(), facilityLocation.getTerrain());
 			cloneLocation.rotateHeading(facilityData.getHeading());
 		}
-
+		
+		return cloneLocation;
+	}
+	
+	private void teleport(CreatureObject corpse, CellObject cellObject, Location cloneLocation) {
+		if (corpse.getPvpFaction() != PvpFaction.NEUTRAL) {
+			new FactionIntent(corpse, PvpStatus.ONLEAVE).broadcast();
+		}
+		
 		new ObjectTeleportIntent(corpse, cellObject, cloneLocation).broadcast();
 		corpse.setPosture(Posture.UPRIGHT);
 		corpse.setTurnScale(1);
 		corpse.setMovementScale(1);
 		corpse.setHealth(corpse.getMaxHealth());
-
 		// TODO NGE: cloning debuff
-		return CloneResult.SUCCESS;
 	}
 	
 	/**
