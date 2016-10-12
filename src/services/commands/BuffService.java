@@ -53,8 +53,6 @@ public class BuffService extends Service {
 	
 	// TODO buff slots
 	
-	// TODO skillmod divisors in SkillmodService
-	
 	// TODO remove buffs on respec. Listen for respec intent and remove buffs with
 	// BuffData that has REMOVE_ON_RESPEC = 1
 	
@@ -62,10 +60,6 @@ public class BuffService extends Service {
 		// TODO remove group buff(s) from receiver when distance between receiver and caster is 100m
 		// is it possible to somehow determine if a buff is a group buff?
 	// TODO decay buffs on deathblow
-	
-	// TODO debuffs vs buffs
-	
-	// TODO test buff stacks
 	
 //	private static final byte GROUP_BUFF_RANGE = 100;	
 	
@@ -94,7 +88,7 @@ public class BuffService extends Service {
 	@Override
 	public boolean start() {
 		// Polls buff queues every second
-		executor.scheduleAtFixedRate(() -> buffRemoval.values().forEach(buffQueue -> checkBuffQueue(buffQueue)), 0, 1, TimeUnit.SECONDS);
+		executor.scheduleAtFixedRate(() -> buffRemoval.values().forEach(buffQueue -> checkBuffQueue(buffQueue)), 1, 1, TimeUnit.SECONDS);
 		
 		return super.start();
 	}
