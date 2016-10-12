@@ -563,7 +563,6 @@ public final class StaticItemService extends Service {
 			object.addAttribute("cat_wpn_other.wpn_range", rangeString);
 			// Ziggy: Special Action Cost would go under cat_wpn_other as well, but it's a pre-NGE artifact.
 
-			// TODO set all WeaponObject properties
 			WeaponObject weapon = (WeaponObject) object;
 			weapon.setType(category);
 			weapon.setAttackSpeed(attackSpeed);
