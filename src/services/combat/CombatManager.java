@@ -507,7 +507,7 @@ public class CombatManager extends Manager {
 		int minDamage = weapon.getMinDamage();
 		int weaponDamage = random.nextInt((weapon.getMaxDamage() - minDamage) + 1) + minDamage;
 		
-		// TODO multiply with weaponPercentAdd from CombatCommand
+		weaponDamage *= command.getPercentAddFromWeapon();
 		
 		info.setDamage(abilityDamage + weaponDamage);
 	}

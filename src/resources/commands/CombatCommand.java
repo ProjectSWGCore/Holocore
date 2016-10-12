@@ -48,6 +48,7 @@ public class CombatCommand extends Command {
 	private boolean ignoreDistance;
 	private boolean pvpOnly;
 	private int attackRolls;
+	private float percentAddFromWeapon;
 	
 	public CombatCommand(String name) {
 		super(name);
@@ -145,6 +146,14 @@ public class CombatCommand extends Command {
 	
 	public void setAnimations(WeaponType type, String [] animations) {
 		this.animations.put(type, animations);
+	}
+
+	public float getPercentAddFromWeapon() {
+		return percentAddFromWeapon;
+	}
+
+	public void setPercentAddFromWeapon(float percentAddFromWeapon) {
+		this.percentAddFromWeapon = percentAddFromWeapon;
 	}
 	
 }
