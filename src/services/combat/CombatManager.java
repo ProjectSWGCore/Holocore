@@ -72,6 +72,7 @@ public class CombatManager extends Manager {
 	private final Set<CreatureObject> regeneratingActionCreatures;	// Always allowed
 	private final Map<CreatureObject, Future<?>> incapacitatedCreatures;
 	private final CorpseService corpseService;
+	private final CombatXpService combatXpService;
 	
 	private ScheduledExecutorService executor;
 	
@@ -83,7 +84,9 @@ public class CombatManager extends Manager {
 		incapacitatedCreatures = new HashMap<>();
 		
 		corpseService = new CorpseService();
+		combatXpService = new CombatXpService();
 		addChildService(corpseService);
+		addChildService(combatXpService);
 	}
 	
 	@Override
