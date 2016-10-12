@@ -102,16 +102,7 @@ public class BuffService extends Service {
 	@Override
 	public void onIntentReceived(Intent i) {
 		switch(i.getType()) {
-			case BuffIntent.TYPE:
-				BuffIntent bi = (BuffIntent) i;
-				
-				if(bi.isRemove()) {
-					handleBuffIntentRemove(bi);
-				} else {
-					handleBuffIntentAdd(bi);
-				}
-				
-				break;
+			case BuffIntent.TYPE: handleBuffIntent((BuffIntent) i); break;
 			case PlayerEventIntent.TYPE: handlePlayerEventIntent((PlayerEventIntent) i); break;
 		}
 	}
@@ -153,6 +144,14 @@ public class BuffService extends Service {
 					(String) buffTable.getCell(row, 18)	// Callback
 			));
 		} 
+	}
+	
+	private void handleBuffIntent(BuffIntent i) {
+		if (i.isRemove()) {
+			handleBuffIntentRemove(i);
+		} else {
+			handleBuffIntentAdd(i);
+		}
 	}
 	
 	private void handlePlayerEventIntent(PlayerEventIntent pei) {
