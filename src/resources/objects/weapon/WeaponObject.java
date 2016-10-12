@@ -27,19 +27,13 @@
 ***********************************************************************************/
 package resources.objects.weapon;
 
-import intents.chat.PersistentMessageIntent;
-import intents.object.DestroyObjectIntent;
-import main.ProjectSWG.CoreException;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.combat.DamageType;
-import resources.encodables.player.Mail;
 import resources.network.BaselineBuilder;
 import resources.network.NetBuffer;
 import resources.network.NetBufferStream;
-import resources.objects.creature.CreatureObject;
 import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
-import services.CoreManager;
 
 public class WeaponObject extends TangibleObject {
 	
@@ -198,7 +192,7 @@ public class WeaponObject extends TangibleObject {
 	@Override
 	public void save(NetBufferStream stream) {
 		super.save(stream);
-		stream.addByte(2);
+		stream.addByte(0);
 		stream.addInt(minDamage);
 		stream.addInt(maxDamage);
 		stream.addAscii(damageType.name());
@@ -212,23 +206,21 @@ public class WeaponObject extends TangibleObject {
 	@Override
 	public void read(NetBufferStream stream) {
 		super.read(stream);
-		switch(stream.getByte()) {
-			case 0:
-				minDamage = stream.getInt();
-				maxDamage = stream.getInt();
-				damageType = DamageType.valueOf(stream.getAscii());
-				String elementalTypeName = stream.getAscii();
-				
-				// A weapon doesn't necessarily have an elemental type
-				if(!elementalTypeName.isEmpty())
-					elementalType = DamageType.valueOf(elementalTypeName);
-				
-				elementalValue = stream.getInt();
-				attackSpeed = stream.getFloat();
-				maxRange = stream.getFloat();
-				type = WeaponType.valueOf(stream.getAscii());
-				break;
+		stream.getByte();
+		minDamage = stream.getInt();
+		maxDamage = stream.getInt();
+		damageType = DamageType.valueOf(stream.getAscii());
+		String elementalTypeName = stream.getAscii();
+
+		// A weapon doesn't necessarily have an elemental type
+		if (!elementalTypeName.isEmpty()) {
+			elementalType = DamageType.valueOf(elementalTypeName);
 		}
+
+		elementalValue = stream.getInt();
+		attackSpeed = stream.getFloat();
+		maxRange = stream.getFloat();
+		type = WeaponType.valueOf(stream.getAscii());
 	}
 	
 }
