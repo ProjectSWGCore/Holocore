@@ -148,9 +148,9 @@ public class BuffService extends Service {
 	
 	private void handleBuffIntent(BuffIntent i) {
 		if (i.isRemove()) {
-			handleBuffIntentRemove(i);
+			removeBuff(i.getReceiver(), new CRC(i.getBuffName()), false);
 		} else {
-			handleBuffIntentAdd(i);
+			addBuff(new CRC(i.getBuffName()), i.getReceiver(), i.getBuffer());
 		}
 	}
 	
@@ -169,10 +169,6 @@ public class BuffService extends Service {
 	
 	private void handleDisappear(CreatureObject creature) {
 		buffRemoval.remove(creature);
-	}
-	
-	private void handleBuffIntentAdd(BuffIntent bi) {
-		addBuff(new CRC(bi.getBuffName()), bi.getReceiver(), bi.getBuffer());
 	}
 	
 	private void addBuff(CRC buffCrc, CreatureObject receiver, CreatureObject buffer) {
@@ -201,10 +197,6 @@ public class BuffService extends Service {
 		
 		if(!effectFileName.isEmpty())
 			sendClientEffectMessage(receiver, effectFileName, buffData.getParticleHardPoint());
-	}
-	
-	private void handleBuffIntentRemove(BuffIntent bi) {
-		removeBuff(bi.getReceiver(), new CRC(bi.getBuffName()), false);
 	}
 	
 	private void manageBuff(Buff buff, CRC buffCrc, CreatureObject creature) {
