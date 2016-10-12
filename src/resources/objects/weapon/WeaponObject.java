@@ -27,18 +27,24 @@
 ***********************************************************************************/
 package resources.objects.weapon;
 
+import intents.chat.PersistentMessageIntent;
+import intents.object.DestroyObjectIntent;
+import main.ProjectSWG.CoreException;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.combat.DamageType;
+import resources.encodables.player.Mail;
 import resources.network.BaselineBuilder;
 import resources.network.NetBuffer;
 import resources.network.NetBufferStream;
+import resources.objects.creature.CreatureObject;
 import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
+import services.CoreManager;
 
 public class WeaponObject extends TangibleObject {
 	
-	private static final long serialVersionUID = 1L;
-	
+	private int minDamage;
+	private int maxDamage;
 	// WEAO03
 	private float attackSpeed = 0.5f;
 	private int accuracy;
@@ -118,6 +124,22 @@ public class WeaponObject extends TangibleObject {
 	public void setType(WeaponType type) {
 		this.type = type;
 	}
+
+	public int getMinDamage() {
+		return minDamage;
+	}
+
+	public void setMinDamage(int minDamage) {
+		this.minDamage = minDamage;
+	}
+
+	public int getMaxDamage() {
+		return maxDamage;
+	}
+
+	public void setMaxDamage(int maxDamage) {
+		this.maxDamage = maxDamage;
+	}
 	
 	@Override
 	public boolean equals(Object o) {
@@ -176,7 +198,9 @@ public class WeaponObject extends TangibleObject {
 	@Override
 	public void save(NetBufferStream stream) {
 		super.save(stream);
-		stream.addByte(1);
+		stream.addByte(2);
+		stream.addInt(minDamage);
+		stream.addInt(maxDamage);
 		stream.addAscii(damageType.name());
 		stream.addAscii(elementalType != null ? elementalType.name() : "");
 		stream.addInt(elementalValue);
@@ -189,7 +213,9 @@ public class WeaponObject extends TangibleObject {
 	public void read(NetBufferStream stream) {
 		super.read(stream);
 		switch(stream.getByte()) {
-			case 1:
+			case 0:
+				minDamage = stream.getInt();
+				maxDamage = stream.getInt();
 				damageType = DamageType.valueOf(stream.getAscii());
 				String elementalTypeName = stream.getAscii();
 				
@@ -198,7 +224,6 @@ public class WeaponObject extends TangibleObject {
 					elementalType = DamageType.valueOf(elementalTypeName);
 				
 				elementalValue = stream.getInt();
-			default:
 				attackSpeed = stream.getFloat();
 				maxRange = stream.getFloat();
 				type = WeaponType.valueOf(stream.getAscii());
