@@ -271,14 +271,8 @@ public final class CorpseService extends Service {
 		Terrain corpseTerrain = corpse.getTerrain();
 		CloneMapping cloneMapping = new CloneMapping(corpseTerrain, corpse.getBuildoutArea().getName());
 		CloneMapping destinationMapping = cloneMappings.get(cloneMapping);
-		List<BuildingObject> availableFacilities;
+		List<BuildingObject> availableFacilities = getAvailableFacilities(corpse, destinationMapping != null ? destinationMapping : cloneMapping);
 			
-		if (destinationMapping != null) {
-			availableFacilities = getAvailableFacilities(corpse, destinationMapping);
-		} else {
-			availableFacilities = getAvailableFacilities(corpse, cloneMapping);
-		}
-
 		if (!availableFacilities.isEmpty()) {
 			SuiWindow cloningWindow = createSuiWindow(availableFacilities, corpse);
 
