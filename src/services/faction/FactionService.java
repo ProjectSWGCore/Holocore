@@ -53,18 +53,14 @@ import utilities.ThreadUtilities;
 
 public final class FactionService extends Service {
 
-	private ScheduledExecutorService executor;
-	private Map<TangibleObject, Future<?>> statusChangers;
+	private final ScheduledExecutorService executor;
+	private final Map<TangibleObject, Future<?>> statusChangers;
 	
 	public FactionService() {
-		registerForIntent(FactionIntent.TYPE);
-	}
-	
-	@Override
-	public boolean initialize() {
 		statusChangers = new HashMap<>();
 		executor = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("faction-service"));
-		return super.initialize();
+		
+		registerForIntent(FactionIntent.TYPE);
 	}
 	
 	@Override
@@ -76,10 +72,8 @@ public final class FactionService extends Service {
 	
 	@Override
 	public boolean terminate() {
-		if (executor != null) {
-			// If some were in the middle of switching, finish the switches immediately
-			executor.shutdownNow().forEach(runnable -> runnable.run());
-		}
+		// If some were in the middle of switching, finish the switches immediately
+		executor.shutdownNow().forEach(runnable -> runnable.run());
 			
 		return super.terminate();
 	}
@@ -216,11 +210,11 @@ public final class FactionService extends Service {
 				
 			} else {
 				// Their new status does not equal the one we want - apply the new one
-				changeStatus(target, oldStatus, newStatus);
+				target.setPvpStatus(newStatus);
 			}
 		} else {
 			// They're not currently waiting to switch to a new status - change now
-			changeStatus(target, oldStatus, newStatus);
+			target.setPvpStatus(newStatus);
 		}
 	}
 	
