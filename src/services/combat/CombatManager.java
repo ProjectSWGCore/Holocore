@@ -44,6 +44,7 @@ import intents.chat.ChatCommandIntent;
 import intents.combat.CreatureKilledIntent;
 import intents.combat.DeathblowIntent;
 import java.util.Iterator;
+import java.util.Random;
 import java.util.concurrent.Future;
 import resources.Posture;
 import resources.PvpFaction;
@@ -74,7 +75,9 @@ public class CombatManager extends Manager {
 	private final Set<CreatureObject> regeneratingHealthCreatures;	// Only allowed outside of combat
 	private final Set<CreatureObject> regeneratingActionCreatures;	// Always allowed
 	private final Map<CreatureObject, Future<?>> incapacitatedCreatures;
+	private final Random random;
 	private final CorpseService corpseService;
+	private final CombatXpService combatXpService;
 	
 	private ScheduledExecutorService executor;
 	
@@ -84,9 +87,12 @@ public class CombatManager extends Manager {
 		regeneratingHealthCreatures = new HashSet<>();
 		regeneratingActionCreatures = new HashSet<>();
 		incapacitatedCreatures = new HashMap<>();
+		random = new Random();
 		
 		corpseService = new CorpseService();
+		combatXpService = new CombatXpService();
 		addChildService(corpseService);
+		addChildService(combatXpService);
 	}
 	
 	@Override
@@ -264,7 +270,9 @@ public class CombatManager extends Manager {
 			enterCombat(target);
 		target.addDefender(source);
 		source.addDefender(target);
-		// Note: This will not kill anyone
+		
+		addWeaponDamage(source, command, info);
+		
 		if (target.getHealth() <= info.getDamage())
 			doCreatureDeath(target, source);
 		else
@@ -497,6 +505,17 @@ public class CombatManager extends Manager {
 	
 	private CombatStatus canPerformArea(CreatureObject source, CombatCommand c) {
 		return CombatStatus.SUCCESS;
+	}
+	
+	private void addWeaponDamage(CreatureObject source, CombatCommand command, AttackInfoLight info) {
+		int abilityDamage = info.getDamage();
+		WeaponObject weapon = source.getEquippedWeapon();
+		int minDamage = weapon.getMinDamage();
+		int weaponDamage = random.nextInt((weapon.getMaxDamage() - minDamage) + 1) + minDamage;
+		
+		weaponDamage *= command.getPercentAddFromWeapon();
+		
+		info.setDamage(abilityDamage + weaponDamage);
 	}
 	
 	private void showFlyText(TangibleObject obj, String text, Scale scale, Color c, ShowFlyText.Flag ... flags) {

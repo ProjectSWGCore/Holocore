@@ -46,9 +46,6 @@ public class ScheduledUtilities {
 			if (executor == null) {
 				int processors = Runtime.getRuntime().availableProcessors();
 				executor = Executors.newScheduledThreadPool(processors, ThreadUtilities.newThreadFactory("scheduled-utilities-%d"));
-				Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-					executor.shutdown();
-				}));
 			}
 			return executor;
 		}
@@ -64,6 +61,14 @@ public class ScheduledUtilities {
 	
 	public static ScheduledFuture<?> run(Runnable r, long delay, TimeUnit unit) {
 		return getScheduler().schedule(r, delay, unit);
+	}
+	
+	public static void shutdown() {
+		synchronized (mutex) {
+			if (executor != null) {
+				executor.shutdown();
+			}
+		}
 	}
 	
 }
