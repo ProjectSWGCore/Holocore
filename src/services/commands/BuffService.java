@@ -184,7 +184,6 @@ public class BuffService extends Service {
 		
 		sendSkillModIntent(buffData, receiver, false);
 		receiver.addBuff(buffCrc, buff);
-		
 		manageBuff(buff, buffCrc, receiver);
 		
 		String effectFileName = buffData.getEffectFileName();
@@ -203,7 +202,6 @@ public class BuffService extends Service {
 			
 			if(buffQueue == null) {
 				buffQueue = new DelayQueue<>();
-				
 				buffRemoval.put(creature, buffQueue);
 			}
 			
@@ -278,7 +276,7 @@ public class BuffService extends Service {
 		target.sendObserversAndSelf(new PlayClientEffectObjectMessage(effectFileName, hardPoint, target.getObjectId()));
 	}
 	
-	private class BuffDelayed implements Delayed {
+	private static class BuffDelayed implements Delayed {
 		
 		private final Buff buff;
 		private final CRC buffCrc;
@@ -325,7 +323,7 @@ public class BuffService extends Service {
 	 * With many {@code Buff} instances in play, this will result in a noticeable
 	 * memory usage reduction.
 	 */
-	private class BuffData {
+	private static class BuffData {
 		private final int maxStackCount;
 		private final String effect1Name;
 		private final float effect1Value;
