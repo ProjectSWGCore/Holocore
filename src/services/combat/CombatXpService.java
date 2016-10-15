@@ -161,11 +161,10 @@ public class CombatXpService extends Service {
 	}
 	
 	private int calculateXpGain(CreatureObject killer, CreatureObject corpse, short killerLevel) {
-		int experienceGained;
 		short corpseLevel = corpse.getLevel();
 		// If the difference between killer and corpse is 10 or above, they only gain 1 xp
 		if (killerLevel - corpseLevel >= 10) {
-			experienceGained = 1;
+			return 1;
 		} else {
 			XpData xpForLevel = this.xpData.get(corpseLevel);
 
@@ -178,21 +177,16 @@ public class CombatXpService extends Service {
 
 			switch (creatureDifficulty) {
 				case BOSS:
-					experienceGained = xpForLevel.getBossXp();
-					break;
+					return xpForLevel.getBossXp();
 				case ELITE:
-					experienceGained = xpForLevel.getEliteXp();
-					break;
+					return xpForLevel.getEliteXp();
 				case NORMAL:
-					experienceGained = xpForLevel.getXp();
-					break;
+					return xpForLevel.getXp();
 				default:
 					Log.e(this, "%s received no XP: Unsupported creature difficulty %s of corpse %s", killer, creatureDifficulty, corpse);
 					return 0;
 			}
 		}
-		
-		return experienceGained;
 	}
 	
 	/**
