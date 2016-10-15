@@ -36,7 +36,7 @@ import network.packets.swg.zone.UpdatePvpStatusMessage;
 import network.packets.swg.zone.chat.ChatSystemMessage;
 import network.packets.swg.zone.chat.ChatSystemMessage.SystemChatType;
 import intents.FactionIntent;
-import intents.PlayerEventIntent;
+import intents.chat.ChatBroadcastIntent;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Future;
@@ -148,14 +148,8 @@ public final class FactionService extends Service {
 		handleFlagChange(target);		// We don't want to remain attackable if we leave our current faction.
 		
 		if(target instanceof CreatureObject) {
-			int rank;
-			
-			if(newFaction != PvpFaction.NEUTRAL)
-				rank = 1;		// We're given rank 1 upon joining a PvP faction
-			else
-				rank = 0;		// Neutrals have no ranks
-			
-			((CreatureObject) target).setFactionRank((byte) rank);
+			// We're given rank 1 upon joining a PvP faction
+			((CreatureObject) target).setFactionRank((byte) (newFaction != PvpFaction.NEUTRAL ? 1 : 0));
 		}
 	}
 	
@@ -182,7 +176,7 @@ public final class FactionService extends Service {
 				@Override
 				public void run() {
 					statusChangers.remove(target);
-					changeStatus(target, currentStatus, targetStatus);
+					changeStatusWithMessage(target, targetStatus, getCompletionMessage(currentStatus, targetStatus));
 					target.clearPvpFlags(pvpFlag);
 				}
 			}, getDelay(currentStatus, targetStatus), TimeUnit.SECONDS));
@@ -238,11 +232,18 @@ public final class FactionService extends Service {
 		}
 	}
 	
-	private void changeStatus(TangibleObject object, PvpStatus oldStatus, PvpStatus newStatus) {
+	private void timedStatusChange() {
+		
+	}
+	
+	private void changeStatus(TangibleObject object, PvpStatus newStatus) {
 		object.setPvpStatus(newStatus);
-		object.getOwner().sendPacket(new ChatSystemMessage(
-				SystemChatType.SCREEN_AND_CHAT,
-				getCompletionMessage(oldStatus, newStatus)));
+		handleFlagChange(object);
+	}
+	
+	private void changeStatusWithMessage(TangibleObject object, PvpStatus newStatus, String systemMessage) {
+		changeStatus(object, newStatus);
+		new ChatBroadcastIntent(object.getOwner(), systemMessage).broadcast();
 	}
 	
 	private UpdatePvpStatusMessage createPvpStatusMessage(TangibleObject object, int flags) {
