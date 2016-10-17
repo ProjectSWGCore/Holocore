@@ -182,6 +182,7 @@ public final class CorpseService extends Service {
 	
 	private void handleObjectCreatedIntent(ObjectCreatedIntent i) {
 		SWGObject createdObject = i.getObject();
+		
 		if(createdObject instanceof BuildingObject) {
 			BuildingObject createdBuilding = (BuildingObject) createdObject;
 			String objectTemplate = createdBuilding.getTemplate();
@@ -237,7 +238,6 @@ public final class CorpseService extends Service {
 			cloningWindow.display(corpse.getOwner());
 			executor.schedule(() -> expireCloneTimer(corpse, availableFacilities, cloningWindow), CLONE_TIMER, TimeUnit.MINUTES);
 		} else {
-			// TODO no cloners available at all! Wat do?
 			Log.e(this, "No cloning facility is available for terrain %s - %s has nowhere to properly clone", corpseTerrain, corpse);
 		}
 	}
@@ -260,19 +260,8 @@ public final class CorpseService extends Service {
 				return;
 			}
 
-			switch (clone(corpse, availableFacilities.get(selectionIndex))) {
-				case INVALID_SELECTION:
-					// TODO system message
-					suiWindow.display(player);
-					break;
-				case INVALID_CELL:
-					// TODO system message
-					suiWindow.display(player);
-					break;
-				case TEMPLATE_MISSING:
-					// TODO system message
-					suiWindow.display(player);
-					break;
+			if (clone(corpse, availableFacilities.get(selectionIndex)) != CloneResult.SUCCESS) {
+				suiWindow.display(player);
 			}
 		});
 
@@ -300,7 +289,6 @@ public final class CorpseService extends Service {
 	 * first.
 	 */
 	private List<BuildingObject> getAvailableFacilities(CreatureObject corpse) {
-		
 		synchronized (cloningFacilities) {
 			Location corpseLocation = corpse.getWorldLocation();
 			return cloningFacilities.stream()
