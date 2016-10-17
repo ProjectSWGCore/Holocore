@@ -147,7 +147,7 @@ public final class FactionService extends Service {
 		
 		if(target instanceof CreatureObject && ((CreatureObject) target).getPvpFaction() != PvpFaction.NEUTRAL) {
 			// We're given rank 1 upon joining a non-neutral faction
-			((CreatureObject) target).setFactionRank(1);
+			((CreatureObject) target).setFactionRank((byte) 1);
 		}
 	}
 	
