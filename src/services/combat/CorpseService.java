@@ -123,7 +123,7 @@ public final class CorpseService extends Service {
 		Log.i(this, "Loading cloning facility data...");
 		
 		loadRespawnData();
-		Log.i(this, "Finished loading cloning facility data for %d object templates. Time: %dms", facilityDataMap.size(), (System.nanoTime() - startTime) / 1E6);
+		Log.i(this, "Finished loading cloning facility data for %d object templates. Time: %fms", facilityDataMap.size(), (System.nanoTime() - startTime) / 1E6);
 	}
 
 	private void loadRespawnData() {
