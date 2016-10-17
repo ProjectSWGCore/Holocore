@@ -220,7 +220,9 @@ public final class CorpseService extends Service {
 					reviveTimer.cancel(false);
 				}
 				break;
-			} case PE_FIRST_ZONE: {
+			}
+			
+			case PE_FIRST_ZONE: {
 				CreatureObject creature = i.getPlayer().getCreatureObject();
 
 				if (creature.getPosture() == Posture.DEAD && !reviveTimers.containsKey(creature)) {
