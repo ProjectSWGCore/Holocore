@@ -195,14 +195,11 @@ public final class FactionService extends Service {
 		
 		// Let's clear PvP flags in case they were in the middle of going covert/overt
 		Future<?> future = statusChangers.remove(target);
+		
 		if (future != null) {
 			if (future.cancel(false)) {
 				target.clearPvpFlags(PvpFlag.GOING_COVERT, PvpFlag.GOING_OVERT);
-			} else if (target.getPvpStatus() == newStatus) {
-				// They were in the middle of switching status when we wanted to force a new one on them
-				// Let's see if their newly selected status equals the one we want to force
-				
-			} else {
+			} else if (target.getPvpStatus() != newStatus) {
 				// Their new status does not equal the one we want - apply the new one
 				target.setPvpStatus(newStatus);
 			}
