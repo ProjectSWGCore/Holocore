@@ -43,12 +43,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.Future;
 import java.util.stream.Collectors;
-import main.ProjectSWG.CoreException;
 import resources.Location;
 import resources.Posture;
 import resources.PvpFaction;
@@ -85,7 +83,6 @@ public final class CorpseService extends Service {
 	private final ScheduledExecutorService executor;
 	private final Map<CreatureObject, Future<?>> reviveTimers;
 	private final Map<String, FacilityData> facilityDataMap;
-	private final Map<CloneMapping, CloneMapping> cloneMappings;	// Needed for dungeons that have no cloning facilities
 	private final List<BuildingObject> cloningFacilities;
 	private final Random random;
 	
@@ -93,7 +90,6 @@ public final class CorpseService extends Service {
 		executor = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("corpse-service"));
 		reviveTimers = new HashMap<>();
 		facilityDataMap = new HashMap<>();
-		cloneMappings = new HashMap<>();
 		cloningFacilities = new ArrayList<>();
 		random = new Random();
 		
@@ -125,45 +121,9 @@ public final class CorpseService extends Service {
 		long startTime = System.currentTimeMillis();
 		Log.i(this, "Loading cloning facility data...");
 		
-		loadCloneMappings();
 		loadRespawnData();
 		
 		Log.i(this, "Finished loading cloning facility data for %d object templates. Time: %dms", facilityDataMap.size(), System.currentTimeMillis() - startTime);
-	}
-	
-	private void loadCloneMappings() {
-		try (RelationalDatabase mappingDatabase = RelationalServerFactory.getServerData("cloning/clone_mapping.db", "clone_mapping")) {
-			try (ResultSet set = mappingDatabase.executeQuery("SELECT * FROM clone_mapping")) {
-				while (set.next()) {
-					String scene = null;
-
-					try {
-						String sourceBuildoutArea = set.getString("area");
-
-						if (sourceBuildoutArea.equals("-")) {
-							sourceBuildoutArea = null;
-						}
-
-						scene = set.getString("scene").toUpperCase(Locale.ENGLISH);
-						CloneMapping sourceDestination = new CloneMapping(Terrain.valueOf(scene), sourceBuildoutArea);
-
-						String targetBuildoutArea = set.getString("clone_area");
-						if (targetBuildoutArea.equals("-")) {
-							targetBuildoutArea = null;
-						}
-
-						scene = set.getString("clone_scene").toUpperCase(Locale.ENGLISH);
-						CloneMapping targetDestination = new CloneMapping(Terrain.valueOf(scene), targetBuildoutArea);
-
-						cloneMappings.put(sourceDestination, targetDestination);
-					} catch (IllegalArgumentException e) {
-						throw new CoreException(String.format("Scene %s in row %d is invalid, as no terrain with that name exists - please correct!", scene, set.getRow()));
-					}
-				}
-			} catch (SQLException e) {
-				Log.e(this, e);
-			}
-		}
 	}
 
 	private void loadRespawnData() {
@@ -269,9 +229,7 @@ public final class CorpseService extends Service {
 	
 	private void scheduleCloneTimer(CreatureObject corpse) {
 		Terrain corpseTerrain = corpse.getTerrain();
-		CloneMapping cloneMapping = new CloneMapping(corpseTerrain, corpse.getBuildoutArea().getName());
-		CloneMapping destinationMapping = cloneMappings.get(cloneMapping);
-		List<BuildingObject> availableFacilities = getAvailableFacilities(corpse, destinationMapping != null ? destinationMapping : cloneMapping);
+		List<BuildingObject> availableFacilities = getAvailableFacilities(corpse);
 			
 		if (!availableFacilities.isEmpty()) {
 			SuiWindow cloningWindow = createSuiWindow(availableFacilities, corpse);
@@ -341,29 +299,21 @@ public final class CorpseService extends Service {
 	 * to {@code corpse}. Order is reversed, so the closest facility is
 	 * first.
 	 */
-	private List<BuildingObject> getAvailableFacilities(CreatureObject corpse, CloneMapping destinationMapping) {
+	private List<BuildingObject> getAvailableFacilities(CreatureObject corpse) {
 		
 		synchronized (cloningFacilities) {
 			Location corpseLocation = corpse.getWorldLocation();
 			return cloningFacilities.stream()
-					.filter(facilityObject -> isValidTerrain(facilityObject, destinationMapping) && isFactionAllowed(facilityObject, corpse))
+					.filter(facilityObject -> isValidTerrain(facilityObject, corpse) && isFactionAllowed(facilityObject, corpse))
 					.sorted((facility, otherFacility) -> Double.compare(corpseLocation.distanceTo(facility.getLocation()), corpseLocation.distanceTo(otherFacility.getLocation())))
 					.collect(Collectors.toList());
 			
 		}
 	}
 	
-	// TODO needs to account for instancing!
-	private boolean isValidTerrain(BuildingObject cloningFacility, CloneMapping destinationMapping)  {
-		String destinationBuildoutArea = destinationMapping.getBuildoutAreaName();
-		Terrain destinationTerrain = destinationMapping.getTerrain();
-		boolean available = true;
-		
-		if(destinationBuildoutArea != null) {
-			available = destinationBuildoutArea.equals(cloningFacility.getBuildoutArea().getName());
-		}
-		
-		return available && cloningFacility.getTerrain() == destinationTerrain;
+	// TODO below doesn't apply to a a player that died in a heroic. Cloning on Dathomir should be possible if you die during the Axkva Min heroic.
+	private boolean isValidTerrain(BuildingObject cloningFacility, CreatureObject corpse)  {
+		return cloningFacility.getTerrain() == corpse.getTerrain();
 	}
 	
 	private boolean isFactionAllowed(BuildingObject cloningFacility, CreatureObject corpse) {
@@ -554,22 +504,4 @@ public final class CorpseService extends Service {
 		INVALID_SELECTION, TEMPLATE_MISSING, INVALID_CELL, SUCCESS
 	}
 	
-	private static class CloneMapping {
-		private final Terrain terrain;
-		private final String buildoutAreaName;
-
-		public CloneMapping(Terrain terrain, String buildoutAreaName) {
-			this.terrain = terrain;
-			this.buildoutAreaName = buildoutAreaName;
-		}
-
-		public Terrain getTerrain() {
-			return terrain;
-		}
-
-		public String getBuildoutAreaName() {
-			return buildoutAreaName;
-		}
-		
-	}
 }
