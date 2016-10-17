@@ -78,6 +78,7 @@ import utilities.ThreadUtilities;
  */
 public final class CorpseService extends Service {
 	
+	private static final String DB_QUERY = "SELECT * FROM cloning_respawn";
 	private static final byte CLONE_TIMER = 30;	// Amount of minutes before a player is forced to clone
 	
 	private final ScheduledExecutorService executor;
@@ -118,17 +119,16 @@ public final class CorpseService extends Service {
 	}
 	
 	private void loadFacilityData() {
-		long startTime = System.currentTimeMillis();
+		long startTime = System.nanoTime();
 		Log.i(this, "Loading cloning facility data...");
 		
 		loadRespawnData();
-		
-		Log.i(this, "Finished loading cloning facility data for %d object templates. Time: %dms", facilityDataMap.size(), System.currentTimeMillis() - startTime);
+		Log.i(this, "Finished loading cloning facility data for %d object templates. Time: %dms", facilityDataMap.size(), (System.nanoTime() - startTime) / 1E6);
 	}
 
 	private void loadRespawnData() {
 		try (RelationalDatabase respawnDatabase = RelationalServerFactory.getServerData("cloning/cloning_respawn.db", "cloning_respawn")) {
-			try (ResultSet set = respawnDatabase.executeQuery("SELECT * FROM cloning_respawn")) {
+			try (ResultSet set = respawnDatabase.executeQuery(DB_QUERY)) {
 				while (set.next()) {
 					int tubeCount = set.getInt("tubes");
 					TubeData[] tubeData = new TubeData[tubeCount];
@@ -183,14 +183,16 @@ public final class CorpseService extends Service {
 	private void handleObjectCreatedIntent(ObjectCreatedIntent i) {
 		SWGObject createdObject = i.getObject();
 		
-		if(createdObject instanceof BuildingObject) {
-			BuildingObject createdBuilding = (BuildingObject) createdObject;
-			String objectTemplate = createdBuilding.getTemplate();
-			
-			if(facilityDataMap.containsKey(objectTemplate)) {
-				synchronized(cloningFacilities) {
-					cloningFacilities.add(createdBuilding);
-				}
+		if(!(createdObject instanceof BuildingObject)) {
+			return;
+		}
+		
+		BuildingObject createdBuilding = (BuildingObject) createdObject;
+		String objectTemplate = createdBuilding.getTemplate();
+		
+		if(facilityDataMap.containsKey(objectTemplate)) {
+			synchronized(cloningFacilities) {
+				cloningFacilities.add(createdBuilding);
 			}
 		}
 	}
@@ -199,15 +201,17 @@ public final class CorpseService extends Service {
 		synchronized(cloningFacilities) {
 			SWGObject destroyedObject = i.getObject();
 			
-			if(destroyedObject instanceof BuildingObject && cloningFacilities.remove((BuildingObject) destroyedObject)) {
-				Log.d(this, "Cloning facility %s was destroyed", destroyedObject);
+			if(!(destroyedObject instanceof BuildingObject)) {
+				return;
 			}
+			
+			cloningFacilities.remove((BuildingObject) destroyedObject);
 		}
 	}
 	
 	private void handlePlayerEventIntent(PlayerEventIntent i) {
 		switch(i.getEvent()) {
-			case PE_DISAPPEAR:
+			case PE_DISAPPEAR: {
 				CreatureObject creature = i.getPlayer().getCreatureObject();
 				Future<?> reviveTimer = reviveTimers.remove(creature);
 				
@@ -216,8 +220,8 @@ public final class CorpseService extends Service {
 					reviveTimer.cancel(false);
 				}
 				break;
-			case PE_FIRST_ZONE:
-				creature = i.getPlayer().getCreatureObject();
+			} case PE_FIRST_ZONE: {
+				CreatureObject creature = i.getPlayer().getCreatureObject();
 
 				if (creature.getPosture() == Posture.DEAD && !reviveTimers.containsKey(creature)) {
 					// They're dead but they have no active revive timer.
@@ -225,6 +229,7 @@ public final class CorpseService extends Service {
 					scheduleCloneTimer(creature);
 				}
 				break;
+			}
 		}
 	}
 	
@@ -255,12 +260,12 @@ public final class CorpseService extends Service {
 		suiWindow.addCallback("handleFacilityChoice", (Player player, SWGObject actor, SuiEvent event, Map<String, String> parameters) -> {
 			int selectionIndex = SuiListBox.getSelectedRow(parameters);
 
-			if (event != SuiEvent.OK_PRESSED || selectionIndex + 1 > availableFacilities.size() || selectionIndex < 0) {
+			if (event != SuiEvent.OK_PRESSED || selectionIndex >= availableFacilities.size() || selectionIndex < 0) {
 				suiWindow.display(player);
 				return;
 			}
 
-			if (clone(corpse, availableFacilities.get(selectionIndex)) != CloneResult.SUCCESS) {
+			if (reviveCorpse(corpse, availableFacilities.get(selectionIndex)) != CloneResult.SUCCESS) {
 				suiWindow.display(player);
 			}
 		});
@@ -311,7 +316,7 @@ public final class CorpseService extends Service {
 		return factionRestriction == null || factionRestriction == corpse.getPvpFaction();
 	}
 	
-	private CloneResult clone(CreatureObject corpse, BuildingObject selectedFacility) {
+	private CloneResult reviveCorpse(CreatureObject corpse, BuildingObject selectedFacility) {
 		FacilityData facilityData = facilityDataMap.get(selectedFacility.getTemplate());
 
 		if (facilityData == null) {
@@ -376,7 +381,7 @@ public final class CorpseService extends Service {
 	 */
 	private boolean forceClone(CreatureObject cloneRequestor, List<BuildingObject> facilitiesInTerrain) {
 		for (BuildingObject facility : facilitiesInTerrain) {
-			if (clone(cloneRequestor, facility) == CloneResult.SUCCESS) {
+			if (reviveCorpse(cloneRequestor, facility) == CloneResult.SUCCESS) {
 				return true;
 			}
 		}

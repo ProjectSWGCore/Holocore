@@ -107,13 +107,11 @@ public class CityService extends Service {
 	private void handleObjectCreatedIntent(ObjectCreatedIntent i) {
 		SWGObject object = i.getObject();
 		
-		if(object instanceof TangibleObject) {
-			TangibleObject tangibleObject = (TangibleObject) object;
-			
-			if(object.getTerrain() != null) {
-				performLocationUpdate(tangibleObject, (int) (tangibleObject.getX() + 0.5), (int) (tangibleObject.getZ() + 0.5));
-			}
+		if(!(object instanceof TangibleObject) || object.getTerrain() == null) {
+			return;
 		}
+		
+		performLocationUpdate((TangibleObject) object, (int) (object.getX() + 0.5), (int) (object.getZ() + 0.5));
 	}
 	
 	private void performLocationUpdate(TangibleObject object, int locX, int locZ) {
