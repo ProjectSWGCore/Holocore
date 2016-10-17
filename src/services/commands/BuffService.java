@@ -51,17 +51,10 @@ import utilities.ThreadUtilities;
 
 public class BuffService extends Service {
 	
-	// TODO buff slots
-	
-	// TODO remove buffs on respec. Listen for respec intent and remove buffs with
-	// BuffData that has REMOVE_ON_RESPEC = 1
-	
-	// TODO group buffs
-		// TODO remove group buff(s) from receiver when distance between receiver and caster is 100m
-		// is it possible to somehow determine if a buff is a group buff?
+	// TODO buff slots A, B, C and D
+	// TODO remove buffs on respec. Listen for respec event and remove buffs with BuffData where REMOVE_ON_RESPEC == 1
+	// TODO remove group buff(s) from receiver when distance between caster and receiver is 100m. Perform same check upon zoning in
 	// TODO decay buffs on deathblow
-	
-//	private static final byte GROUP_BUFF_RANGE = 100;	
 	
 	private final ScheduledExecutorService executor;
 	private final Map<CreatureObject, DelayQueue<BuffDelayed>> buffRemoval;
@@ -179,7 +172,7 @@ public class BuffService extends Service {
 		
         // TODO stack counts upon add/remove probably need to be defined on a per-buff basis due to skillmod influence.
 		int stackCount = 1;
-        int buffDuration = (int) buffData.getDefaultDuration();
+		int buffDuration = (int) buffData.getDefaultDuration();
 		Buff buff = new Buff(receiver.getPlayerObject().getPlayTime() + buffDuration, buffData.getEffect1Value(), buffDuration, buffer.getObjectId(), stackCount);
 		
 		sendSkillModIntent(buffData, receiver, false);
@@ -213,7 +206,7 @@ public class BuffService extends Service {
 		BuffData buffData = dataMap.get(buffCrc);
 		
 		if(buffData == null) {
-			Log.e(this, "Could not remove %s from %s - buff data for it does not exist", creature, buffCrc);
+			Log.e(this, "Could not remove %s from %s - buff data for it does not exist", buffCrc, creature);
 			return;
 		}
 		
@@ -234,7 +227,6 @@ public class BuffService extends Service {
 			// Remove the buff from the creature
 			creature.removeBuff(buffCrc);
 			
-			// Check if the callback is a buff
 			String callback = buffData.getCallback();
 			
 			if(callback.isEmpty())
