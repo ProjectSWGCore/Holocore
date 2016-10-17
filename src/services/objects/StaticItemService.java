@@ -313,6 +313,8 @@ public final class StaticItemService extends Service {
 			return iffTemplate;
 		}
 
+		public final String getRequiredLevel() { return requiredLevel; }
+
 	}
 
 	private static class WearableAttributes extends ObjectAttributes {
@@ -367,6 +369,7 @@ public final class StaticItemService extends Service {
 		protected void applyTypeAttributes(SWGObject object) {
 			object.addAttribute("class_required", requiredProfession);
 			object.addAttribute("faction_restriction", requiredFaction);
+			object.addAttribute("required_level", getRequiredLevel());
 			
 			// Apply the mods!
 			for(Map.Entry<String, String> modEntry : mods.entrySet())
