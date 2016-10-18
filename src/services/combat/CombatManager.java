@@ -27,6 +27,7 @@
  ***********************************************************************************/
 package services.combat;
 
+import intents.BuffIntent;
 import intents.chat.ChatBroadcastIntent;
 import java.awt.Color;
 import java.util.HashMap;
@@ -356,6 +357,7 @@ public class CombatManager extends Manager {
 			incapacitatedCreatures.put(incapacitatedPlayer, executor.schedule(() -> expireIncapacitation(incapacitatedPlayer), incapacitationCounter, TimeUnit.SECONDS));
 		}
 		
+		new BuffIntent("incapWeaken", incapacitator, incapacitatedPlayer, false).broadcast();
 		new ChatBroadcastIntent(incapacitator.getOwner(), new ProsePackage(new StringId("base_player", "prose_target_incap"), "TT", incapacitatedPlayer.getName())).broadcast();
 		new ChatBroadcastIntent(incapacitatedPlayer.getOwner(), new ProsePackage(new StringId("base_player", "prose_victim_incap"), "TT", incapacitator.getName())).broadcast();
 	}
@@ -392,7 +394,7 @@ public class CombatManager extends Manager {
 	
 	private void killCreature(CreatureObject killer, CreatureObject corpse) {
 		corpse.setPosture(Posture.DEAD);
-		Log.i(this, "%s was killed", corpse);
+		Log.i(this, "%s was killed by %s", corpse, killer);
 		new CreatureKilledIntent(killer, corpse).broadcast();
 	}
 	
@@ -422,7 +424,6 @@ public class CombatManager extends Manager {
 			if (incapacitationTimer != null) {
 				if (incapacitationTimer.cancel(false)) {	// If the task is running, let them get back up
 					killCreature(killer, corpse);
-					Log.i(this, "%s was deathblown by %s", corpse, killer);
 				}
 			} else {
 				// Can't happen with the current code, but in case it's ever refactored...

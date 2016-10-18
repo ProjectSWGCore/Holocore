@@ -54,7 +54,7 @@ public class BuffService extends Service {
 	// TODO buff slots A, B, C and D
 	// TODO remove buffs on respec. Listen for respec event and remove buffs with BuffData where REMOVE_ON_RESPEC == 1
 	// TODO remove group buff(s) from receiver when distance between caster and receiver is 100m. Perform same check upon zoning in
-	// TODO decay buffs on deathblow
+	// TODO decay buffs on deathblow buffs with BuffData where DECAY_ON_PVP_DEATH == 1
 	
 	private final ScheduledExecutorService executor;
 	private final Map<CreatureObject, DelayQueue<BuffDelayed>> buffRemoval;
@@ -155,7 +155,9 @@ public class BuffService extends Service {
 	}
 	
 	private void handleDisappear(CreatureObject creature) {
-		buffRemoval.remove(creature);
+		synchronized(buffRemoval) {
+			buffRemoval.remove(creature);
+		}
 	}
 	
 	private void addBuff(CRC buffCrc, CreatureObject receiver, CreatureObject buffer) {
@@ -191,14 +193,16 @@ public class BuffService extends Service {
 			removeBuff(creature, buffCrc, true);
 		} else if(buff.getDuration() >= 0) {
 			// If this buff doesn't last forever or hasn't expired, we'll schedule it for removal in the future
-			DelayQueue<BuffDelayed> buffQueue = buffRemoval.get(creature);
-			
-			if(buffQueue == null) {
-				buffQueue = new DelayQueue<>();
-				buffRemoval.put(creature, buffQueue);
+			synchronized (buffRemoval) {
+				DelayQueue<BuffDelayed> buffQueue = buffRemoval.get(creature);
+
+				if(buffQueue == null) {
+					buffQueue = new DelayQueue<>();
+					buffRemoval.put(creature, buffQueue);
+				}
+
+				buffQueue.add(new BuffDelayed(buff, buffCrc, creature));
 			}
-			
-			buffQueue.add(new BuffDelayed(buff, buffCrc, creature));
 		}
 	}
 	
