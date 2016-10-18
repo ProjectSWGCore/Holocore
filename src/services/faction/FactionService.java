@@ -231,6 +231,7 @@ public final class FactionService extends Service {
 		
 		new ChatBroadcastIntent(target.getOwner(), getCompletionMessage(oldStatus, newStatus)).broadcast();
 		target.clearPvpFlags(pvpFlag);
+		changeStatus(target, newStatus);
 	}
 	
 	private void changeStatus(TangibleObject target, PvpStatus newStatus) {
