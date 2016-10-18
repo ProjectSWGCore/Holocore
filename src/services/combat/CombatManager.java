@@ -346,7 +346,7 @@ public class CombatManager extends Manager {
 	}
 	
 	private void incapacitatePlayer(CreatureObject incapacitator, CreatureObject incapacitatedPlayer) {
-		int incapacitationCounter = 15;
+		int incapacitationCounter = 10;
 		incapacitatedPlayer.setPosture(Posture.INCAPACITATED);
 		incapacitatedPlayer.setCounter(incapacitationCounter);
 		
