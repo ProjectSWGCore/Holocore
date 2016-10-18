@@ -415,6 +415,7 @@ public class CommandService extends Service {
 		int pvpOnly = combatCommands.getColumnFromName("pvp_only");
 		int attackRolls = combatCommands.getColumnFromName("attack_rolls");
 		int animDefault = combatCommands.getColumnFromName("animDefault");
+		int percentAddFromWeapon = combatCommands.getColumnFromName("percentAddFromWeapon");
 		// animDefault	anim_unarmed	anim_onehandmelee	anim_twohandmelee	anim_polearm
 		// anim_pistol	anim_lightRifle	anim_carbine	anim_rifle	anim_heavyweapon
 		// anim_thrown	anim_onehandlightsaber	anim_twohandlightsaber	anim_polearmlightsaber
@@ -436,6 +437,7 @@ public class CommandService extends Service {
 			cc.setPvpOnly(((int) cmdRow[pvpOnly]) != 0);
 			cc.setAttackRolls((int) cmdRow[attackRolls]);
 			cc.setDefaultAnimation(getAnimationList((String) cmdRow[animDefault]));
+			cc.setPercentAddFromWeapon((float) cmdRow[percentAddFromWeapon]);
 			cc.setAnimations(WeaponType.UNARMED, getAnimationList((String) cmdRow[animDefault+1]));
 			cc.setAnimations(WeaponType.ONE_HANDED_MELEE, getAnimationList((String) cmdRow[animDefault+2]));
 			cc.setAnimations(WeaponType.TWO_HANDED_MELEE, getAnimationList((String) cmdRow[animDefault+3]));

@@ -61,6 +61,7 @@ public class TangibleObject extends SWGObject {
 	private byte []	objectEffects	= new byte[0];
 	private int     optionFlags     = 0;
 	private int		counter			= 0;
+	private String	currentCity				= "";
 	
 	private SWGSet<Long>	defenders	= new SWGSet<>(6, 3);
 	
@@ -264,6 +265,14 @@ public class TangibleObject extends SWGObject {
 		}
 		
 		return false;
+	}
+
+	public String getCurrentCity() {
+		return currentCity;
+	}
+
+	public void setCurrentCity(String currentCity) {
+		this.currentCity = currentCity;
 	}
 	
 	@Override

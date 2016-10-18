@@ -27,6 +27,7 @@
  ***********************************************************************************/
 package services.combat;
 
+import intents.chat.ChatBroadcastIntent;
 import java.awt.Color;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -41,7 +42,10 @@ import network.packets.swg.zone.object_controller.ShowFlyText.Scale;
 import network.packets.swg.zone.object_controller.combat.CombatAction;
 import intents.chat.ChatCommandIntent;
 import intents.combat.CreatureKilledIntent;
+import intents.combat.DeathblowIntent;
 import java.util.Iterator;
+import java.util.Random;
+import java.util.concurrent.Future;
 import resources.Posture;
 import resources.PvpFaction;
 import resources.PvpFlag;
@@ -55,6 +59,8 @@ import resources.common.CRC;
 import resources.common.RGB;
 import resources.control.Intent;
 import resources.control.Manager;
+import resources.encodables.ProsePackage;
+import resources.encodables.StringId;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.tangible.TangibleObject;
@@ -68,17 +74,25 @@ public class CombatManager extends Manager {
 	private final Map<Long, CombatCreature> inCombat;
 	private final Set<CreatureObject> regeneratingHealthCreatures;	// Only allowed outside of combat
 	private final Set<CreatureObject> regeneratingActionCreatures;	// Always allowed
+	private final Map<CreatureObject, Future<?>> incapacitatedCreatures;
+	private final Random random;
 	private final CorpseService corpseService;
+	private final CombatXpService combatXpService;
 	
 	private ScheduledExecutorService executor;
 	
 	public CombatManager() {
+		registerForIntent(DeathblowIntent.TYPE);
 		inCombat = new HashMap<>();
 		regeneratingHealthCreatures = new HashSet<>();
 		regeneratingActionCreatures = new HashSet<>();
+		incapacitatedCreatures = new HashMap<>();
+		random = new Random();
 		
 		corpseService = new CorpseService();
+		combatXpService = new CombatXpService();
 		addChildService(corpseService);
+		addChildService(combatXpService);
 	}
 	
 	@Override
@@ -110,8 +124,10 @@ public class CombatManager extends Manager {
 	
 	@Override
 	public void onIntentReceived(Intent i) {
-		if (i instanceof ChatCommandIntent)
-			processChatCommand((ChatCommandIntent) i);
+		switch(i.getType()) {
+			case ChatCommandIntent.TYPE: processChatCommand((ChatCommandIntent) i); break;
+			case DeathblowIntent.TYPE: procesDeathblow((DeathblowIntent) i); break;
+		}
 	}
 	
 	private void periodicChecks() {
@@ -254,7 +270,9 @@ public class CombatManager extends Manager {
 			enterCombat(target);
 		target.addDefender(source);
 		source.addDefender(target);
-		// Note: This will not kill anyone
+		
+		addWeaponDamage(source, command, info);
+		
 		if (target.getHealth() <= info.getDamage())
 			doCreatureDeath(target, source);
 		else
@@ -317,16 +335,16 @@ public class CombatManager extends Manager {
 		if(killedCreature.isPlayer()) {
 			// TODO account for AI deathblowing players..?
 			// If it's a player, they need to be incapacitated
-			incapacitatePlayer(killedCreature);
+			incapacitatePlayer(killer, killedCreature);
 		} else {
 			// This is just a plain ol' NPC. Die!
-			killCreature(killedCreature);
+			killCreature(killer, killedCreature);
 		}
 		
 		exitCombat(killedCreature);
 	}
 	
-	private void incapacitatePlayer(CreatureObject incapacitatedPlayer) {
+	private void incapacitatePlayer(CreatureObject incapacitator, CreatureObject incapacitatedPlayer) {
 		int incapacitationCounter = 15;
 		incapacitatedPlayer.setPosture(Posture.INCAPACITATED);
 		incapacitatedPlayer.setCounter(incapacitationCounter);
@@ -334,7 +352,19 @@ public class CombatManager extends Manager {
 		Log.i(this, "%s was incapacitated", incapacitatedPlayer);
 		
 		// Once the incapacitation counter expires, revive them.
-		executor.schedule(() -> reviveCreature(incapacitatedPlayer), incapacitationCounter, TimeUnit.SECONDS);
+		synchronized(incapacitatedCreatures) {
+			incapacitatedCreatures.put(incapacitatedPlayer, executor.schedule(() -> expireIncapacitation(incapacitatedPlayer), incapacitationCounter, TimeUnit.SECONDS));
+		}
+		
+		new ChatBroadcastIntent(incapacitator.getOwner(), new ProsePackage(new StringId("base_player", "prose_target_incap"), "TT", incapacitatedPlayer.getName())).broadcast();
+		new ChatBroadcastIntent(incapacitatedPlayer.getOwner(), new ProsePackage(new StringId("base_player", "prose_victim_incap"), "TT", incapacitator.getName())).broadcast();
+	}
+	
+	private void expireIncapacitation(CreatureObject incapacitatedPlayer) {
+		synchronized(incapacitatedCreatures) {
+			incapacitatedCreatures.remove(incapacitatedPlayer);
+			reviveCreature(incapacitatedPlayer);
+		}
 	}
 	
 	private void reviveCreature(CreatureObject revivedCreature) {
@@ -360,10 +390,45 @@ public class CombatManager extends Manager {
 		Log.i(this, "% was revived", revivedCreature);
 	}
 	
-	private void killCreature(CreatureObject killedCreature) {
-		killedCreature.setPosture(Posture.DEAD);
-		Log.i(this, "%s was killed", killedCreature);
-		new CreatureKilledIntent(killedCreature).broadcast();
+	private void killCreature(CreatureObject killer, CreatureObject corpse) {
+		corpse.setPosture(Posture.DEAD);
+		Log.i(this, "%s was killed", corpse);
+		new CreatureKilledIntent(killer, corpse).broadcast();
+	}
+	
+	private void procesDeathblow(DeathblowIntent i) {
+		CreatureObject killer = i.getKiller();
+		CreatureObject corpse = i.getCorpse();
+
+		// Only deathblowing players is allowed!
+		if (!corpse.isPlayer()) {
+			return;
+		}
+		
+		// They must be enemies
+		if (!corpse.isEnemy(killer)) {
+			return;
+		}
+		
+		// The target of the deathblow must be incapacitated!
+		if (corpse.getPosture() != Posture.INCAPACITATED) {
+			return;
+		}
+		
+		// If they're deathblown while incapacitated, their incapacitation expiration timer should cancel
+		synchronized (incapacitatedCreatures) {
+			Future<?> incapacitationTimer = incapacitatedCreatures.remove(corpse);
+
+			if (incapacitationTimer != null) {
+				if (incapacitationTimer.cancel(false)) {	// If the task is running, let them get back up
+					killCreature(killer, corpse);
+					Log.i(this, "%s was deathblown by %s", corpse, killer);
+				}
+			} else {
+				// Can't happen with the current code, but in case it's ever refactored...
+				Log.e(this, "Incapacitation timer for player %s being deathblown unexpectedly didn't exist!", "");
+			}
+		}
 	}
 	
 	private boolean handleStatus(CreatureObject source, CombatStatus status) {
@@ -395,6 +460,16 @@ public class CombatManager extends Manager {
 			}
 		} else if ((tangibleTarget.getPvpFlags() & PvpFlag.ATTACKABLE.getBitmask()) == 0)
 			return CombatStatus.INVALID_TARGET;
+		
+		if(target instanceof CreatureObject) {
+			CreatureObject creature = (CreatureObject) target;
+			
+			switch(creature.getPosture()) {
+				case DEAD:
+				case INCAPACITATED:
+					return CombatStatus.INVALID_TARGET;
+			}
+		}
 		
 		CombatStatus status;
 		switch (c.getAttackType()) {
@@ -430,6 +505,17 @@ public class CombatManager extends Manager {
 	
 	private CombatStatus canPerformArea(CreatureObject source, CombatCommand c) {
 		return CombatStatus.SUCCESS;
+	}
+	
+	private void addWeaponDamage(CreatureObject source, CombatCommand command, AttackInfoLight info) {
+		int abilityDamage = info.getDamage();
+		WeaponObject weapon = source.getEquippedWeapon();
+		int minDamage = weapon.getMinDamage();
+		int weaponDamage = random.nextInt((weapon.getMaxDamage() - minDamage) + 1) + minDamage;
+		
+		weaponDamage *= command.getPercentAddFromWeapon();
+		
+		info.setDamage(abilityDamage + weaponDamage);
 	}
 	
 	private void showFlyText(TangibleObject obj, String text, Scale scale, Color c, ShowFlyText.Flag ... flags) {
