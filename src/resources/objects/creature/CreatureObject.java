@@ -595,40 +595,21 @@ public class CreatureObject extends TangibleObject {
 	}
 	
 	public void addBuff(CRC buffCrc, Buff buff) {
-		SWGMap<CRC, Buff> buffs = creo6.getBuffs();
-		if(!buffs.containsKey(buffCrc)) {
-			buffs.put(buffCrc, buff);
-			buffs.sendDeltaMessage(this);
-		}
+		creo6.addBuff(buffCrc, buff, this);
 	}
 	
 	public void removeBuff(CRC buffCrc) {
-		SWGMap<CRC, Buff> buffs = creo6.getBuffs();
-		// If a value was associated with the key, then send a delta.
-		if(buffs.containsKey(buffCrc)) {
-			buffs.remove(buffCrc);
-			buffs.sendDeltaMessage(this);
-		}
+		creo6.removeBuff(buffCrc, this);
 	}
 	
 	public Buff getBuffByCrc(CRC buffCrc) {
-		return creo6.getBuffs().get(buffCrc);
+		return creo6.getBuffByCrc(buffCrc);
 	}
 	
 	public void adjustBuffStackCount(CRC buffCrc, int adjustment) {
-		SWGMap<CRC, Buff> buffs = creo6.getBuffs();
-		Buff buff = buffs.get(buffCrc);
-		buff.adjustStackCount(adjustment);	// Adjust the stack count
-		// TODO reset time remaining?
-		buffs.update(buffCrc, this);	// Send deltas for this key.
+		creo6.adjustBuffStackCount(buffCrc, adjustment, this);
 	}
 	
-	/**
-	 * @return a copy of the buffs map. Removing and adding entries in this
-	 * map will not affect the internal {@code SWGMap}. Do not edit the
-	 * {@code Buff} values in the belief that deltas will be sent because
-	 * they won't - this is incorrect usage.
-	 */
 	public Map<CRC, Buff> getBuffs() {
 		return new HashMap<>(creo6.getBuffs());
 	}

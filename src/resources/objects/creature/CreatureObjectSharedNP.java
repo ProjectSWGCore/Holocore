@@ -27,6 +27,8 @@
  ***********************************************************************************/
 package resources.objects.creature;
 
+import java.util.HashMap;
+import java.util.Map;
 import resources.HologramColour;
 import resources.collections.SWGList;
 import resources.collections.SWGMap;
@@ -456,8 +458,49 @@ class CreatureObjectSharedNP implements Persistable {
 		}
 	}
 
-	public SWGMap<CRC, Buff> getBuffs() {
-		return buffs;
+	/**
+	 * @return a copy of the buffs map. Removing and adding entries in this
+	 * map will not affect the internal {@code SWGMap}. Do not edit the
+	 * {@code Buff} values in the belief that deltas will be sent because
+	 * they won't - this is incorrect usage.
+	 */
+	public Map<CRC, Buff> getBuffs() {
+		synchronized (buffs) {
+			return new HashMap<>(buffs);
+		}
+	}
+
+	public void addBuff(CRC buffCrc, Buff buff, SWGObject target) {
+		synchronized (buffs) {
+			if(!buffs.containsKey(buffCrc)) {
+				buffs.put(buffCrc, buff);
+				buffs.sendDeltaMessage(target);
+			}
+		}
+	}
+	
+	public void removeBuff(CRC buffCrc, SWGObject target) {
+		synchronized (buffs) {
+			if(buffs.containsKey(buffCrc)) {
+				buffs.remove(buffCrc);
+				buffs.sendDeltaMessage(target);
+			}
+		}
+	}
+	
+	public Buff getBuffByCrc(CRC buffCrc) {
+		synchronized (buffs) {
+			return buffs.get(buffCrc);
+		}
+	}
+	
+	public void adjustBuffStackCount(CRC buffCrc, int adjustment, SWGObject target) {
+		synchronized (buffs) {
+			Buff buff = buffs.get(buffCrc);
+			buff.adjustStackCount(adjustment);	// Adjust the stack count
+			// TODO reset time remaining
+			buffs.update(buffCrc, target);	// Send deltas for this key.
+		}
 	}
 	
 	private void initMaxAttributes() {
