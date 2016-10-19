@@ -72,6 +72,8 @@ import utilities.ThreadUtilities;
 
 public class CombatManager extends Manager {
 
+	private static final byte INCAP_TIMER = 10;	// Amount of seconds to be incapacitated
+	
 	private final Map<Long, CombatCreature> inCombat;
 	private final Set<CreatureObject> regeneratingHealthCreatures;	// Only allowed outside of combat
 	private final Set<CreatureObject> regeneratingActionCreatures;	// Always allowed
@@ -318,9 +320,9 @@ public class CombatManager extends Manager {
 		}
 	}
 	
-	private void doCreatureDeath(CreatureObject killedCreature, CreatureObject killer) {
-		killedCreature.setHealth(0);
-		killer.removeDefender(killedCreature);
+	private void doCreatureDeath(CreatureObject corpse, CreatureObject killer) {
+		corpse.setHealth(0);
+		killer.removeDefender(corpse);
 		
 		// Let's check if the killer needs to remain in-combat...
 		if(!killer.hasDefenders()) {
@@ -329,37 +331,39 @@ public class CombatManager extends Manager {
 		}
 		
 		// The creature should not be able to move or turn.
-		killedCreature.setTurnScale(0);
-		killedCreature.setMovementScale(0);
+		corpse.setTurnScale(0);
+		corpse.setMovementScale(0);
 		
 		// We need to handle this differently, depending on whether killedCreature is a player or not
-		if(killedCreature.isPlayer()) {
-			// TODO account for AI deathblowing players..?
-			// If it's a player, they need to be incapacitated
-			incapacitatePlayer(killer, killedCreature);
+		if(corpse.isPlayer()) {
+			if (corpse.getBuffByCrc(new CRC("incapweaken")) != null) {
+				// Kill this sucka immediately
+				killCreature(killer, corpse);
+			} else {
+				incapacitatePlayer(killer, corpse);
+			}
 		} else {
 			// This is just a plain ol' NPC. Die!
-			killCreature(killer, killedCreature);
+			killCreature(killer, corpse);
 		}
 		
-		exitCombat(killedCreature);
+		exitCombat(corpse);
 	}
 	
-	private void incapacitatePlayer(CreatureObject incapacitator, CreatureObject incapacitatedPlayer) {
-		int incapacitationCounter = 10;
-		incapacitatedPlayer.setPosture(Posture.INCAPACITATED);
-		incapacitatedPlayer.setCounter(incapacitationCounter);
+	private void incapacitatePlayer(CreatureObject incapacitator, CreatureObject incapacitated) {
+		incapacitated.setPosture(Posture.INCAPACITATED);
+		incapacitated.setCounter(INCAP_TIMER);
 		
-		Log.i(this, "%s was incapacitated", incapacitatedPlayer);
+		Log.i(this, "%s was incapacitated", incapacitated);
 		
 		// Once the incapacitation counter expires, revive them.
 		synchronized(incapacitatedCreatures) {
-			incapacitatedCreatures.put(incapacitatedPlayer, executor.schedule(() -> expireIncapacitation(incapacitatedPlayer), incapacitationCounter, TimeUnit.SECONDS));
+			incapacitatedCreatures.put(incapacitated, executor.schedule(() -> expireIncapacitation(incapacitated), INCAP_TIMER, TimeUnit.SECONDS));
 		}
 		
-		new BuffIntent("incapWeaken", incapacitator, incapacitatedPlayer, false).broadcast();
-		new ChatBroadcastIntent(incapacitator.getOwner(), new ProsePackage(new StringId("base_player", "prose_target_incap"), "TT", incapacitatedPlayer.getName())).broadcast();
-		new ChatBroadcastIntent(incapacitatedPlayer.getOwner(), new ProsePackage(new StringId("base_player", "prose_victim_incap"), "TT", incapacitator.getName())).broadcast();
+		new BuffIntent("incapWeaken", incapacitator, incapacitated, false).broadcast();
+		new ChatBroadcastIntent(incapacitator.getOwner(), new ProsePackage(new StringId("base_player", "prose_target_incap"), "TT", incapacitated.getName())).broadcast();
+		new ChatBroadcastIntent(incapacitated.getOwner(), new ProsePackage(new StringId("base_player", "prose_victim_incap"), "TT", incapacitator.getName())).broadcast();
 	}
 	
 	private void expireIncapacitation(CreatureObject incapacitatedPlayer) {

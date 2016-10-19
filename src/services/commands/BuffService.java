@@ -37,6 +37,7 @@ import java.util.concurrent.TimeUnit;
 import intents.BuffIntent;
 import intents.PlayerEventIntent;
 import intents.SkillModIntent;
+import java.util.Locale;
 import java.util.concurrent.ScheduledExecutorService;
 import network.packets.swg.zone.PlayClientEffectObjectMessage;
 import resources.client_info.ClientFactory;
@@ -58,7 +59,7 @@ public class BuffService extends Service {
 	
 	private final ScheduledExecutorService executor;
 	private final Map<CreatureObject, DelayQueue<BuffDelayed>> buffRemoval;
-	private final Map<CRC, BuffData> dataMap;
+	private final Map<CRC, BuffData> dataMap;	// All CRCs are lower-cased buff names!
 	
 	public BuffService() {
 		registerForIntent(BuffIntent.TYPE);
@@ -113,7 +114,7 @@ public class BuffService extends Service {
 		DatatableData buffTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/buff/buff.iff");
 		
 		for(int row = 0; row < buffTable.getRowCount(); row++) {
-			dataMap.put(new CRC((String) buffTable.getCell(row, 0)), new BuffData(
+			dataMap.put(new CRC(((String) buffTable.getCell(row, 0)).toLowerCase(Locale.ENGLISH)), new BuffData(
 					(int) buffTable.getCell(row, 28),	// max stacks
 					(String) buffTable.getCell(row, 7),	// effect1
 					(float) buffTable.getCell(row, 8),	// value1
@@ -134,10 +135,12 @@ public class BuffService extends Service {
 	}
 	
 	private void handleBuffIntent(BuffIntent i) {
+		CRC buffCrc = new CRC(i.getBuffName().toLowerCase(Locale.ENGLISH));
+		
 		if (i.isRemove()) {
-			removeBuff(i.getReceiver(), new CRC(i.getBuffName()), false);
+			removeBuff(i.getReceiver(), buffCrc, false);
 		} else {
-			addBuff(new CRC(i.getBuffName()), i.getReceiver(), i.getBuffer());
+			addBuff(buffCrc, i.getReceiver(), i.getBuffer());
 		}
 	}
 	
@@ -164,7 +167,7 @@ public class BuffService extends Service {
 		BuffData buffData = dataMap.get(buffCrc);
 		
 		if(buffData == null) {
-			Log.e(this, "Could not add %s to %s - buff data for it does not exist", receiver, buffCrc);
+			Log.e(this, "Could not add %s to %s - buff data for it does not exist", buffCrc, receiver);
 			return;
 		}
 		

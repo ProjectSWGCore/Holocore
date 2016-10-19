@@ -368,7 +368,10 @@ public final class CorpseService extends Service {
 		corpse.setTurnScale(1);
 		corpse.setMovementScale(1);
 		corpse.setHealth(corpse.getMaxHealth());
-		new BuffIntent("incapWeaken", corpse, corpse, true).broadcastAfterIntent(new BuffIntent("cloning_sickness", corpse, corpse, false));
+		
+		BuffIntent cloningSickness = new BuffIntent("cloning_sickness", corpse, corpse, false);
+		new BuffIntent("incapweaken", corpse, corpse, true).broadcastAfterIntent(cloningSickness);
+		cloningSickness.broadcast();
 	}
 	
 	/**
