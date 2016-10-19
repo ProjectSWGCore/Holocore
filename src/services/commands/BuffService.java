@@ -39,6 +39,7 @@ import intents.PlayerEventIntent;
 import intents.SkillModIntent;
 import java.util.Locale;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.stream.Stream;
 import network.packets.swg.zone.PlayClientEffectObjectMessage;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
@@ -52,7 +53,7 @@ import utilities.ThreadUtilities;
 
 public class BuffService extends Service {
 	
-	// TODO buff groups and prioritisation
+	// TODO allow removal of non-debuffs by right-clicking them
 	// TODO remove buffs on respec. Listen for respec event and remove buffs with BuffData where REMOVE_ON_RESPEC == 1
 	// TODO remove group buff(s) from receiver when distance between caster and receiver is 100m. Perform same check upon zoning in
 	// TODO on deathblow, decay buffs with BuffData where DECAY_ON_PVP_DEATH == 1
@@ -113,23 +114,43 @@ public class BuffService extends Service {
 	private void loadBuffs() {
 		DatatableData buffTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/buff/buff.iff");
 		
+		int group1 = buffTable.getColumnFromName("group1");
+		int priority = buffTable.getColumnFromName("priority");
+		int maxStacks = buffTable.getColumnFromName("max_stacks");
+		int effect1Param = buffTable.getColumnFromName("effect1_param");
+		int effect1Value = buffTable.getColumnFromName("effect1_value");
+		int effect2Param = buffTable.getColumnFromName("effect2_param");
+		int effect2Value = buffTable.getColumnFromName("effect2_value");
+		int effect3Param = buffTable.getColumnFromName("effect3_param");
+		int effect3Value = buffTable.getColumnFromName("effect3_value");
+		int effect4Param = buffTable.getColumnFromName("effect4_param");
+		int effect4Value = buffTable.getColumnFromName("effect4_value");
+		int effect5Param = buffTable.getColumnFromName("effect5_param");
+		int effect5Value = buffTable.getColumnFromName("effect5_value");
+		int duration = buffTable.getColumnFromName("duration");
+		int particle = buffTable.getColumnFromName("particle");
+		int particleHardpoint = buffTable.getColumnFromName("particle_hardpoint");
+		int callback = buffTable.getColumnFromName("callback");
+		
 		for(int row = 0; row < buffTable.getRowCount(); row++) {
 			dataMap.put(new CRC(((String) buffTable.getCell(row, 0)).toLowerCase(Locale.ENGLISH)), new BuffData(
-					(int) buffTable.getCell(row, 28),	// max stacks
-					(String) buffTable.getCell(row, 7),	// effect1
-					(float) buffTable.getCell(row, 8),	// value1
-					(String) buffTable.getCell(row, 9),	// effect2
-					(float) buffTable.getCell(row, 10),	// value2
-					(String) buffTable.getCell(row, 11),	// effect3
-					(float) buffTable.getCell(row, 12),	// value3
-					(String) buffTable.getCell(row, 13),	// effect4
-					(float) buffTable.getCell(row, 14),	// value4
-					(String) buffTable.getCell(row, 15),	// effect5
-					(float) buffTable.getCell(row, 16),	// value5
-					(float) buffTable.getCell(row, 6),	// default duration
-					(String) buffTable.getCell(row, 19),	// particle effect
-					(String) buffTable.getCell(row, 20),	// particle hardpoint
-					(String) buffTable.getCell(row, 18)	// Callback
+					(String) buffTable.getCell(row, group1),
+					(int) buffTable.getCell(row, priority),
+					(int) buffTable.getCell(row, maxStacks),
+					(String) buffTable.getCell(row, effect1Param),
+					(float) buffTable.getCell(row, effect1Value),
+					(String) buffTable.getCell(row, effect2Param),
+					(float) buffTable.getCell(row, effect2Value),
+					(String) buffTable.getCell(row, effect3Param),
+					(float) buffTable.getCell(row, effect3Value),
+					(String) buffTable.getCell(row, effect4Param),
+					(float) buffTable.getCell(row, effect4Value),
+					(String) buffTable.getCell(row, effect5Param),
+					(float) buffTable.getCell(row, effect5Value),
+					(float) buffTable.getCell(row, duration),
+					(String) buffTable.getCell(row, particle),
+					(String) buffTable.getCell(row, particleHardpoint),
+					(String) buffTable.getCell(row, callback)
 			));
 		} 
 	}
@@ -166,9 +187,23 @@ public class BuffService extends Service {
 	private void addBuff(CRC buffCrc, CreatureObject receiver, CreatureObject buffer) {
 		BuffData buffData = dataMap.get(buffCrc);
 		
-		if(buffData == null) {
+		if (buffData == null) {
 			Log.e(this, "Could not add %s to %s - buff data for it does not exist", buffCrc, receiver);
 			return;
+		}
+		
+		String groupName = buffData.getGroupName();
+		
+		if (!groupName.isEmpty()) {
+			// Let's see if they have any buffs in this group already
+			Stream<CRC> buffCrcStream = receiver.getBuffs().keySet().stream().filter(candidate -> checkGroup(groupName, candidate, buffData));
+			
+			// If not, let's just stop here. No reason to increase network traffic with effects and deltas.
+			if(buffCrcStream.count() <= 0) {
+				return;
+			}
+			
+			buffCrcStream.forEach(crc -> removeBuff(receiver, crc, false));
 		}
 		
 		// The client-side timer hinges on the playTime of the PlayerObject.
@@ -186,12 +221,18 @@ public class BuffService extends Service {
 		
 		String effectFileName = buffData.getEffectFileName();
 		
-		if(!effectFileName.isEmpty())
+		if (!effectFileName.isEmpty())
 			receiver.sendObserversAndSelf(new PlayClientEffectObjectMessage(effectFileName, buffData.getParticleHardPoint(), receiver.getObjectId()));
 	}
 	
+	private boolean checkGroup(String groupName, CRC candidate, BuffData existingBuffData) {
+		BuffData candidateData = dataMap.get(candidate);
+		
+		return candidateData.getGroupName().equals(groupName) && candidateData.getGroupPriority() >= existingBuffData.getGroupPriority();
+	}
+	
 	private void manageBuff(Buff buff, CRC buffCrc, CreatureObject creature) {
-		if(buff.getEndTime() <= 0) {
+		if (buff.getEndTime() <= 0) {
 			// If this buff has less than or 0 seconds left, then remove it.
 			removeBuff(creature, buffCrc, true);
 		} else if(buff.getDuration() >= 0) {
@@ -212,7 +253,7 @@ public class BuffService extends Service {
 	private void removeBuff(CreatureObject creature, CRC buffCrc, boolean expired) {
 		BuffData buffData = dataMap.get(buffCrc);
 		
-		if(buffData == null) {
+		if (buffData == null) {
 			Log.e(this, "Could not remove %s from %s - buff data for it does not exist", buffCrc, creature);
 			return;
 		}
@@ -220,7 +261,7 @@ public class BuffService extends Service {
 		Buff buff = creature.getBuffByCrc(buffCrc);
 		
 		// Check if this buff can be stacked
-		if(buffData.getMaxStackCount() > 1 && !expired) {
+		if (buffData.getMaxStackCount() > 1 && !expired) {
 			// Check if this buff has been stacked
 			if(buff.getStackCount() > 1) {				
 				// If it has, reduce the stack count and reset the duration.
@@ -259,15 +300,15 @@ public class BuffService extends Service {
 		
 		int valueFactor = remove ? -1 : 1;
 		
-		if(!effect1Name.isEmpty())
+		if (!effect1Name.isEmpty())
 			new SkillModIntent(effect1Name, 0, (int) buffData.getEffect1Value() * valueFactor, creature).broadcast();
-		if(!effect2Name.isEmpty())
+		if (!effect2Name.isEmpty())
 			new SkillModIntent(effect2Name, 0, (int) buffData.getEffect2Value() * valueFactor, creature).broadcast();
-		if(!effect3Name.isEmpty())
+		if (!effect3Name.isEmpty())
 			new SkillModIntent(effect3Name, 0, (int) buffData.getEffect3Value() * valueFactor, creature).broadcast();
-		if(!effect4Name.isEmpty())
+		if (!effect4Name.isEmpty())
 			new SkillModIntent(effect4Name, 0, (int) buffData.getEffect4Value() * valueFactor, creature).broadcast();
-		if(!effect5Name.isEmpty())
+		if (!effect5Name.isEmpty())
 			new SkillModIntent(effect5Name, 0, (int) buffData.getEffect5Value() * valueFactor, creature).broadcast();
 	}
 	
@@ -319,6 +360,9 @@ public class BuffService extends Service {
 	 * memory usage reduction.
 	 */
 	private static class BuffData {
+		
+		private final String groupName;
+		private final int groupPriority;
 		private final int maxStackCount;
 		private final String effect1Name;
 		private final float effect1Value;
@@ -335,7 +379,9 @@ public class BuffService extends Service {
 		private final String particleHardPoint;
 		private final String callback;
 		
-		private BuffData(int maxStackCount, String effect1Name, float effect1Value, String effect2Name, float effect2Value, String effect3Name, float effect3Value, String effect4Name, float effect4Value, String effect5Name, float effect5Value, float defaultDuration, String effectFileName, String particleHardPoint, String callback) {
+		private BuffData(String groupName, int groupPriority, int maxStackCount, String effect1Name, float effect1Value, String effect2Name, float effect2Value, String effect3Name, float effect3Value, String effect4Name, float effect4Value, String effect5Name, float effect5Value, float defaultDuration, String effectFileName, String particleHardPoint, String callback) {
+			this.groupName = groupName;
+			this.groupPriority = groupPriority;
 			this.maxStackCount = maxStackCount;
 			this.effect1Name = effect1Name;
 			this.effect1Value = effect1Value;
@@ -351,6 +397,14 @@ public class BuffService extends Service {
 			this.effectFileName = effectFileName;
 			this.particleHardPoint = particleHardPoint;
 			this.callback = callback;
+		}
+
+		public String getGroupName() {
+			return groupName;
+		}
+
+		public int getGroupPriority() {
+			return groupPriority;
 		}
 
 		private int getMaxStackCount() {
