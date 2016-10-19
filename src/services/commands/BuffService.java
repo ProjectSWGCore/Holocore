@@ -114,23 +114,23 @@ public class BuffService extends Service {
 	private void loadBuffs() {
 		DatatableData buffTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/buff/buff.iff");
 		
-		int group1 = buffTable.getColumnFromName("group1");
-		int priority = buffTable.getColumnFromName("priority");
-		int maxStacks = buffTable.getColumnFromName("max_stacks");
-		int effect1Param = buffTable.getColumnFromName("effect1_param");
-		int effect1Value = buffTable.getColumnFromName("effect1_value");
-		int effect2Param = buffTable.getColumnFromName("effect2_param");
-		int effect2Value = buffTable.getColumnFromName("effect2_value");
-		int effect3Param = buffTable.getColumnFromName("effect3_param");
-		int effect3Value = buffTable.getColumnFromName("effect3_value");
-		int effect4Param = buffTable.getColumnFromName("effect4_param");
-		int effect4Value = buffTable.getColumnFromName("effect4_value");
-		int effect5Param = buffTable.getColumnFromName("effect5_param");
-		int effect5Value = buffTable.getColumnFromName("effect5_value");
-		int duration = buffTable.getColumnFromName("duration");
-		int particle = buffTable.getColumnFromName("particle");
-		int particleHardpoint = buffTable.getColumnFromName("particle_hardpoint");
-		int callback = buffTable.getColumnFromName("callback");
+		int group1 = buffTable.getColumnFromName("GROUP1");
+		int priority = buffTable.getColumnFromName("PRIORITY");
+		int maxStacks = buffTable.getColumnFromName("MAX_STACKS");
+		int effect1Param = buffTable.getColumnFromName("EFFECT1_PARAM");
+		int effect1Value = buffTable.getColumnFromName("EFFECT1_VALUE");
+		int effect2Param = buffTable.getColumnFromName("EFFECT2_PARAM");
+		int effect2Value = buffTable.getColumnFromName("EFFECT2_VALUE");
+		int effect3Param = buffTable.getColumnFromName("EFFECT3_PARAM");
+		int effect3Value = buffTable.getColumnFromName("EFFECT3_VALUE");
+		int effect4Param = buffTable.getColumnFromName("EFFECT4_PARAM");
+		int effect4Value = buffTable.getColumnFromName("EFFECT4_VALUE");
+		int effect5Param = buffTable.getColumnFromName("EFFECT5_PARAM");
+		int effect5Value = buffTable.getColumnFromName("EFFECT5_VALUE");
+		int duration = buffTable.getColumnFromName("DURATION");
+		int particle = buffTable.getColumnFromName("PARTICLE");
+		int particleHardpoint = buffTable.getColumnFromName("PARTICLE_HARDPOINT");
+		int callback = buffTable.getColumnFromName("CALLBACK");
 		
 		for(int row = 0; row < buffTable.getRowCount(); row++) {
 			dataMap.put(new CRC(((String) buffTable.getCell(row, 0)).toLowerCase(Locale.ENGLISH)), new BuffData(
