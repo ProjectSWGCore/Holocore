@@ -193,19 +193,21 @@ public class BuffService extends Service {
 		}
 		
 		String groupName = buffData.getGroupName();
+
+		// Let's see if they have any buffs in this group already
+		Stream<CRC> buffsToRemove = receiver.getBuffs().keySet().stream().filter(candidate -> checkGroup(groupName, candidate, buffData));
+		long groupBuffCount = buffsToRemove.count();
 		
-		if (!groupName.isEmpty()) {
-			// Let's see if they have any buffs in this group already
-			Stream<CRC> buffCrcStream = receiver.getBuffs().keySet().stream().filter(candidate -> checkGroup(groupName, candidate, buffData));
-			
-			// If not, let's just stop here. No reason to increase network traffic with effects and deltas.
-			if(buffCrcStream.count() <= 0) {
-				return;
-			}
-			
-			buffCrcStream.forEach(crc -> removeBuff(receiver, crc, false));
+		// If not, let's just stop here
+		if (groupBuffCount <= 0) {
+			return;
+		} else if (groupBuffCount > 1) {
+			// Only one buff per group should be possible
+			Log.e(this, "%s had multiple buffs from the same group %s!", receiver, groupName);
 		}
-		
+
+		buffsToRemove.forEach(crc -> removeBuff(receiver, crc, false));
+
 		// The client-side timer hinges on the playTime of the PlayerObject.
 		// We therefore must update it to current time, so the timer starts from full duration
 		receiver.getPlayerObject().updatePlayTime();
