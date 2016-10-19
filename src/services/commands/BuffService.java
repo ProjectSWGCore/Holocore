@@ -52,10 +52,10 @@ import utilities.ThreadUtilities;
 
 public class BuffService extends Service {
 	
-	// TODO buff slots A, B, C and D
+	// TODO buff groups and prioritisation
 	// TODO remove buffs on respec. Listen for respec event and remove buffs with BuffData where REMOVE_ON_RESPEC == 1
 	// TODO remove group buff(s) from receiver when distance between caster and receiver is 100m. Perform same check upon zoning in
-	// TODO decay buffs on deathblow buffs with BuffData where DECAY_ON_PVP_DEATH == 1
+	// TODO on deathblow, decay buffs with BuffData where DECAY_ON_PVP_DEATH == 1
 	
 	private final ScheduledExecutorService executor;
 	private final Map<CreatureObject, DelayQueue<BuffDelayed>> buffRemoval;
@@ -236,10 +236,10 @@ public class BuffService extends Service {
 			
 			String callback = buffData.getCallback();
 			
-			if(callback.isEmpty())
+			if(callback.equals("none"))
 				return;
 			
-			CRC callbackCrc = new CRC(callback);
+			CRC callbackCrc = new CRC(callback.toLowerCase(Locale.ENGLISH));
 			if(dataMap.containsKey(callbackCrc)) {
 				// Apply the callback buff
 				addBuff(callbackCrc, creature, creature);

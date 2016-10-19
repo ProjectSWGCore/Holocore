@@ -90,10 +90,6 @@ public class PlayerObject extends IntangibleObject {
 		sendDelta(3, 7, title, StringType.ASCII);
 	}
 	
-    /**
-     * Calling this method will update the playTime field.
-     * @return the amount of time this PlayerObject has played.
-     */
 	public int getPlayTime() {
 		return play3.getPlayTime();
 	}
@@ -103,7 +99,7 @@ public class PlayerObject extends IntangibleObject {
 		play3.setPlayTime(playTime);
 		sendDelta(3, 9, playTime);
 	}
-    
+
 	public int getGcwPoints() {
 		return play3.getGcwPoints();
 	}

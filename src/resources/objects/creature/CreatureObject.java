@@ -33,6 +33,7 @@ import java.util.Set;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import network.packets.swg.zone.UpdatePostureMessage;
@@ -62,9 +63,6 @@ import utilities.Encoder.StringType;
 
 public class CreatureObject extends TangibleObject {
 	
-	private static final long serialVersionUID = 3L;
-	
-	private transient GroupInviterData inviterData	= new GroupInviterData(0, null, "", 0);
 	private transient long lastReserveOperation		= 0;
 	
 	private final CreatureObjectClientServerNP	creo4 = new CreatureObjectClientServerNP();
@@ -600,6 +598,10 @@ public class CreatureObject extends TangibleObject {
 	
 	public void removeBuff(CRC buffCrc) {
 		creo6.removeBuff(buffCrc, this);
+	}
+	
+	public boolean hasBuff(String buffName) {
+		return getBuffByCrc(new CRC(buffName.toLowerCase(Locale.ENGLISH))) != null;
 	}
 	
 	public Buff getBuffByCrc(CRC buffCrc) {

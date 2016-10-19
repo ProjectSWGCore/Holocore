@@ -27,7 +27,6 @@
 ***********************************************************************************/
 package network;
 
-import network.packets.swg.zone.StopClientEffectObjectByLabelMessage;
 import network.packets.swg.*;
 import network.packets.swg.holo.HoloConnectionStarted;
 import network.packets.swg.holo.HoloConnectionStopped;

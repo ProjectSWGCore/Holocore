@@ -336,7 +336,7 @@ public class CombatManager extends Manager {
 		
 		// We need to handle this differently, depending on whether killedCreature is a player or not
 		if(corpse.isPlayer()) {
-			if (corpse.getBuffByCrc(new CRC("incapweaken")) != null) {
+			if (corpse.hasBuff("incapWeaken")) {
 				// Kill this sucka immediately
 				killCreature(killer, corpse);
 			} else {
