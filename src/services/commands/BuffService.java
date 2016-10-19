@@ -72,10 +72,10 @@ public class BuffService extends Service {
 	
 	@Override
 	public boolean initialize() {
-		long startTime = System.currentTimeMillis();
+		long startTime = System.nanoTime();
 		Log.i(this, "Loading buffs...");
 		loadBuffs();
-		Log.i(this, "Finished loading buffs in %dms", System.currentTimeMillis() - startTime);
+		Log.i(this, "Finished loading %d buffs in %fms", dataMap.size(), (System.nanoTime() - startTime) / 1E6);
 		return super.initialize();
 	}
 
@@ -187,7 +187,7 @@ public class BuffService extends Service {
 		String effectFileName = buffData.getEffectFileName();
 		
 		if(!effectFileName.isEmpty())
-			sendClientEffectMessage(receiver, effectFileName, buffData.getParticleHardPoint());
+			receiver.sendObserversAndSelf(new PlayClientEffectObjectMessage(effectFileName, buffData.getParticleHardPoint(), receiver.getObjectId()));
 	}
 	
 	private void manageBuff(Buff buff, CRC buffCrc, CreatureObject creature) {
@@ -269,10 +269,6 @@ public class BuffService extends Service {
 			new SkillModIntent(effect4Name, 0, (int) buffData.getEffect4Value() * valueFactor, creature).broadcast();
 		if(!effect5Name.isEmpty())
 			new SkillModIntent(effect5Name, 0, (int) buffData.getEffect5Value() * valueFactor, creature).broadcast();
-	}
-	
-	private void sendClientEffectMessage(CreatureObject target, String effectFileName, String hardPoint) {
-		target.sendObserversAndSelf(new PlayClientEffectObjectMessage(effectFileName, hardPoint, target.getObjectId()));
 	}
 	
 	private static class BuffDelayed implements Delayed {
