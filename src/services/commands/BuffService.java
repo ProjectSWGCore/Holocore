@@ -38,6 +38,7 @@ import intents.BuffIntent;
 import intents.PlayerEventIntent;
 import intents.SkillModIntent;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.stream.Stream;
 import network.packets.swg.zone.PlayClientEffectObjectMessage;
@@ -184,53 +185,56 @@ public class BuffService extends Service {
 		}
 	}
 	
-	private void addBuff(CRC buffCrc, CreatureObject receiver, CreatureObject buffer) {
-		BuffData buffData = dataMap.get(buffCrc);
+	private void addBuff(CRC newCrc, CreatureObject receiver, CreatureObject buffer) {
+		BuffData buffData = dataMap.get(newCrc);
 		
 		if (buffData == null) {
-			Log.e(this, "Could not add %s to %s - buff data for it does not exist", buffCrc, receiver);
+			Log.e(this, "Could not add %s to %s - buff data does not exist", newCrc, receiver);
 			return;
 		}
 		
 		String groupName = buffData.getGroupName();
-
-		// Let's see if they have any buffs in this group already
-		Stream<CRC> buffsToRemove = receiver.getBuffs().keySet().stream().filter(candidate -> checkGroup(groupName, candidate, buffData));
-		long groupBuffCount = buffsToRemove.count();
-		
-		// If not, let's just stop here
-		if (groupBuffCount <= 0) {
-			return;
-		} else if (groupBuffCount > 1) {
-			// Only one buff per group should be possible
-			Log.e(this, "%s had multiple buffs from the same group %s!", receiver, groupName);
-		}
-
-		buffsToRemove.forEach(crc -> removeBuff(receiver, crc, false));
-
-		// The client-side timer hinges on the playTime of the PlayerObject.
-		// We therefore must update it to current time, so the timer starts from full duration
+		Optional<CRC> groupBuff = receiver.getBuffs().keySet().stream().filter(candidate -> groupName.equals(dataMap.get(candidate).groupName)).findFirst();
 		receiver.getPlayerObject().updatePlayTime();
+		int playTime = receiver.getPlayerObject().getPlayTime();
 		
-        // TODO stack counts upon add/remove probably need to be defined on a per-buff basis due to skillmod influence.
-		int stackCount = 1;
-		int buffDuration = (int) buffData.getDefaultDuration();
-		Buff buff = new Buff(receiver.getPlayerObject().getPlayTime() + buffDuration, buffData.getEffect1Value(), buffDuration, buffer.getObjectId(), stackCount);
-		
-		sendSkillModIntent(buffData, receiver, false);
-		receiver.addBuff(buffCrc, buff);
-		manageBuff(buff, buffCrc, receiver);
-		
-		String effectFileName = buffData.getEffectFileName();
-		
-		if (!effectFileName.isEmpty())
-			receiver.sendObserversAndSelf(new PlayClientEffectObjectMessage(effectFileName, buffData.getParticleHardPoint(), receiver.getObjectId()));
+		if (groupBuff.isPresent()) {	// They already have a buff of this group
+			CRC oldCrc = groupBuff.get();
+			
+			if (oldCrc.equals(newCrc)) {
+				if (buffData.getMaxStackCount() > 1) {
+					// TODO buffs can, based on skillmods, adjust with different values
+					receiver.adjustBuffStackCount(newCrc, 1);
+					// TODO stackable buffs increase the skillmods they give by the amount of stacks
+					sendSkillModIntent(buffData, receiver, false);
+				}
+				
+				// We reset the duration
+				receiver.setBuffDuration(newCrc, playTime, (int) buffData.getDefaultDuration());
+			} else if (dataMap.get(oldCrc).getGroupPriority() >= buffData.getGroupPriority()) {
+				removeBuff(receiver, newCrc, true);
+				applyBuff(receiver, buffer, buffData, playTime, newCrc);
+			}
+		} else {	// They had no buff from this group already
+			applyBuff(receiver, buffer, buffData, playTime, newCrc);
+		}
 	}
 	
-	private boolean checkGroup(String groupName, CRC candidate, BuffData existingBuffData) {
-		BuffData candidateData = dataMap.get(candidate);
-		
-		return candidateData.getGroupName().equals(groupName) && candidateData.getGroupPriority() >= existingBuffData.getGroupPriority();
+	private void applyBuff(CreatureObject receiver, CreatureObject buffer, BuffData buffData, int playTime, CRC crc) {
+		// TODO stack counts upon add/remove need to be defined on a per-buff basis due to skillmod influence. Scripts might not be a bad idea.
+		int stackCount = 1;
+		int buffDuration = (int) buffData.getDefaultDuration();
+		Buff buff = new Buff(playTime + buffDuration, buffData.getEffect1Value(), buffDuration, buffer.getObjectId(), stackCount);
+
+		sendSkillModIntent(buffData, receiver, false);
+		receiver.addBuff(crc, buff);
+		manageBuff(buff, crc, receiver);
+
+		String effectFileName = buffData.getEffectFileName();
+
+		if (!effectFileName.isEmpty()) {
+			receiver.sendObserversAndSelf(new PlayClientEffectObjectMessage(effectFileName, buffData.getParticleHardPoint(), receiver.getObjectId()));
+		}
 	}
 	
 	private void manageBuff(Buff buff, CRC buffCrc, CreatureObject creature) {
@@ -263,13 +267,9 @@ public class BuffService extends Service {
 		Buff buff = creature.getBuffByCrc(buffCrc);
 		
 		// Check if this buff can be stacked
-		if (buffData.getMaxStackCount() > 1 && !expired) {
-			// Check if this buff has been stacked
-			if(buff.getStackCount() > 1) {				
-				// If it has, reduce the stack count and reset the duration.
-				// TODO NGE: buffs can, based on skillmods, adjust with different values
-				creature.adjustBuffStackCount(buffCrc, -1);
-			}
+		if (buffData.getMaxStackCount() > 1 && !expired && buff.getStackCount() > 1) {
+			// TODO NGE: buffs can, based on skillmods, adjust with different values
+			creature.adjustBuffStackCount(buffCrc, -1);
 		} else {
 			// Remove skillmods
 			sendSkillModIntent(buffData, creature, true);

@@ -497,9 +497,17 @@ class CreatureObjectSharedNP implements Persistable {
 	public void adjustBuffStackCount(CRC buffCrc, int adjustment, SWGObject target) {
 		synchronized (buffs) {
 			Buff buff = buffs.get(buffCrc);
-			buff.adjustStackCount(adjustment);	// Adjust the stack count
-			// TODO reset time remaining
-			buffs.update(buffCrc, target);	// Send deltas for this key.
+			buff.adjustStackCount(adjustment);
+			buffs.update(buffCrc, target);
+		}
+	}
+	
+	public void setBuffDuration(CRC buffCrc, int playTime, int duration, SWGObject target) {
+		synchronized (buffs) {
+			Buff buff = buffs.get(buffCrc);
+			buff.setEndTime(playTime + duration);
+			buff.setDuration(duration);
+			buffs.update(buffCrc, target);
 		}
 	}
 	

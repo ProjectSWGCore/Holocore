@@ -612,6 +612,10 @@ public class CreatureObject extends TangibleObject {
 		creo6.adjustBuffStackCount(buffCrc, adjustment, this);
 	}
 	
+	public void setBuffDuration(CRC buffCrc, int playTime, int duration) {
+		creo6.setBuffDuration(buffCrc, playTime, duration, this);
+	}
+	
 	public Map<CRC, Buff> getBuffs() {
 		return new HashMap<>(creo6.getBuffs());
 	}
