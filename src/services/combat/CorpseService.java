@@ -238,14 +238,17 @@ public final class CorpseService extends Service {
 	private void scheduleCloneTimer(CreatureObject corpse) {
 		Terrain corpseTerrain = corpse.getTerrain();
 		List<BuildingObject> availableFacilities = getAvailableFacilities(corpse);
-			
-		if (!availableFacilities.isEmpty()) {
-			SuiWindow cloningWindow = createSuiWindow(availableFacilities, corpse);
-
-			cloningWindow.display(corpse.getOwner());
-			executor.schedule(() -> expireCloneTimer(corpse, availableFacilities, cloningWindow), CLONE_TIMER, TimeUnit.MINUTES);
-		} else {
+		
+		if (availableFacilities.isEmpty()) {
 			Log.e(this, "No cloning facility is available for terrain %s - %s has nowhere to properly clone", corpseTerrain, corpse);
+			return;
+		}
+
+		SuiWindow cloningWindow = createSuiWindow(availableFacilities, corpse);
+
+		cloningWindow.display(corpse.getOwner());
+		synchronized (reviveTimers) {
+			reviveTimers.put(corpse, executor.schedule(() -> expireCloneTimer(corpse, availableFacilities, cloningWindow), CLONE_TIMER, TimeUnit.MINUTES));
 		}
 	}
 	
