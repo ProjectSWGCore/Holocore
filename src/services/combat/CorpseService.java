@@ -337,6 +337,15 @@ public final class CorpseService extends Service {
 			return CloneResult.INVALID_CELL;
 		}
 		
+		// Cancel the forced cloning timer
+		synchronized (reviveTimers) {
+			Future<?> timer = reviveTimers.remove(corpse);
+			
+			if (timer != null) {
+				timer.cancel(false);
+			}
+		}
+		
 		teleport(corpse, cellObject, getCloneLocation(facilityData, selectedFacility));
 		return CloneResult.SUCCESS;
 	}
