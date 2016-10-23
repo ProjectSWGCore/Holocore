@@ -49,6 +49,7 @@ public class CombatCommand extends Command {
 	private boolean pvpOnly;
 	private int attackRolls;
 	private float percentAddFromWeapon;
+	private int addedDamage;
 	
 	public CombatCommand(String name) {
 		super(name);
@@ -154,6 +155,14 @@ public class CombatCommand extends Command {
 
 	public void setPercentAddFromWeapon(float percentAddFromWeapon) {
 		this.percentAddFromWeapon = percentAddFromWeapon;
+	}
+
+	public int getAddedDamage() {
+		return addedDamage;
+	}
+	
+	public void setAddedDamage(int addedDamage) {
+		this.addedDamage = addedDamage;
 	}
 	
 }

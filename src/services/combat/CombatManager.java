@@ -50,7 +50,6 @@ import java.util.concurrent.Future;
 import resources.Posture;
 import resources.PvpFaction;
 import resources.PvpFlag;
-import resources.combat.AttackInfoLight;
 import resources.combat.AttackType;
 import resources.combat.CombatStatus;
 import resources.combat.HitLocation;
@@ -217,22 +216,12 @@ public class CombatManager extends Manager {
 		CombatStatus status = canPerform(cci.getSource(), cci.getTarget(), c);
 		if (!handleStatus(cci.getSource(), status))
 			return;
-		Object res = Scripts.invoke("commands/combat/"+c.getName(), "doCombat", cci.getSource(), cci.getTarget(), c);
-		if (res == null) {
-			handleStatus(cci.getSource(), CombatStatus.UNKNOWN);
-			return;
-		}
+		
 		updateCombatList(cci.getSource());
 		if (cci.getTarget() instanceof CreatureObject)
 			updateCombatList((CreatureObject) cci.getTarget());
-		if (res instanceof Number)
-			doCombat(cci.getSource(), cci.getTarget(), new AttackInfoLight(((Number) res).intValue()), c);
-		else if (res instanceof AttackInfoLight)
-			doCombat(cci.getSource(), cci.getTarget(), (AttackInfoLight) res, c);
-		else {
-			Log.w(this, "Unknown return from combat script: " + res);
-			return;
-		}
+		
+		doCombat(cci.getSource(), cci.getTarget(), c);
 	}
 	
 	private void updateCombatList(CreatureObject creature) {
@@ -249,7 +238,7 @@ public class CombatManager extends Manager {
 		combat.updateLastCombat();
 	}
 	
-	private void doCombat(CreatureObject source, SWGObject target, AttackInfoLight info, CombatCommand command) {
+	private void doCombat(CreatureObject source, SWGObject target, CombatCommand command) {
 		CombatAction action = new CombatAction(source.getObjectId());
 		String anim = command.getRandomAnimation(source.getEquippedWeapon().getType());
 		action.setActionCrc(CRC.getCrc(anim));
@@ -258,15 +247,25 @@ public class CombatManager extends Manager {
 		action.setCommandCrc(command.getCrc());
 		action.setTrail(TrailLocation.WEAPON);
 		action.setUseLocation(false);
-		if (target instanceof CreatureObject) {
-			if (command.getAttackType() == AttackType.SINGLE_TARGET)
-				doCombatSingle(source, (CreatureObject) target, info, command);
-			action.addDefender((CreatureObject) target, true, (byte) 0, HitLocation.HIT_LOCATION_BODY, (short) info.getDamage());
+		
+		for(int i = 0; i < command.getAttackRolls(); i++) {
+			int damage = 0;
+
+			damage += calculateWeaponDamage(source, command);
+			damage += command.getAddedDamage();
+			addSelfBuff(source, command);
+
+			if (target instanceof CreatureObject) {
+				if (command.getAttackType() == AttackType.SINGLE_TARGET)
+					doCombatSingle(source, (CreatureObject) target, damage, command);
+				action.addDefender((CreatureObject) target, true, (byte) 0, HitLocation.HIT_LOCATION_BODY, (short) damage);
+			}
 		}
+		
 		source.sendObserversAndSelf(action);
 	}
 	
-	private void doCombatSingle(CreatureObject source, CreatureObject target, AttackInfoLight info, CombatCommand command) {
+	private void doCombatSingle(CreatureObject source, CreatureObject target, int damage, CombatCommand command) {
 		if (!source.isInCombat())
 			enterCombat(source);
 		if (!target.isInCombat())
@@ -274,12 +273,20 @@ public class CombatManager extends Manager {
 		target.addDefender(source);
 		source.addDefender(target);
 		
-		addWeaponDamage(source, command, info);
+		addTargetBuff(source, command);
 		
-		if (target.getHealth() <= info.getDamage())
+		if (target.getHealth() <= damage)
 			doCreatureDeath(target, source);
 		else
-			target.modifyHealth(-info.getDamage());
+			target.modifyHealth(-damage);
+	}
+	
+	private void addTargetBuff(CreatureObject target, CombatCommand command) {
+		
+	}
+	
+	private void addSelfBuff(CreatureObject creature, CombatCommand command) {
+		
 	}
 	
 	private void enterCombat(CreatureObject creature) {
@@ -491,10 +498,7 @@ public class CombatManager extends Manager {
 		}
 		if (status != CombatStatus.SUCCESS)
 			return status;
-		status = Scripts.invoke("commands/combat/"+c.getName(), "canPerform", source, target, c);
-		if (status == null) {
-			return CombatStatus.UNKNOWN;
-		}
+		
 		return status;
 	}
 	
@@ -512,15 +516,12 @@ public class CombatManager extends Manager {
 		return CombatStatus.SUCCESS;
 	}
 	
-	private void addWeaponDamage(CreatureObject source, CombatCommand command, AttackInfoLight info) {
-		int abilityDamage = info.getDamage();
+	private int calculateWeaponDamage(CreatureObject source, CombatCommand command) {
 		WeaponObject weapon = source.getEquippedWeapon();
 		int minDamage = weapon.getMinDamage();
 		int weaponDamage = random.nextInt((weapon.getMaxDamage() - minDamage) + 1) + minDamage;
 		
-		weaponDamage *= command.getPercentAddFromWeapon();
-		
-		info.setDamage(abilityDamage + weaponDamage);
+		return (int) (weaponDamage * command.getPercentAddFromWeapon());
 	}
 	
 	private void showFlyText(TangibleObject obj, String text, Scale scale, Color c, ShowFlyText.Flag ... flags) {
