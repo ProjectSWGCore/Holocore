@@ -130,6 +130,7 @@ public class BuffService extends Service {
 		int duration = buffTable.getColumnFromName("DURATION");
 		int particle = buffTable.getColumnFromName("PARTICLE");
 		int particleHardpoint = buffTable.getColumnFromName("PARTICLE_HARDPOINT");
+		int stanceParticle = buffTable.getColumnFromName("STANCE_PARTICLE");
 		int callback = buffTable.getColumnFromName("CALLBACK");
 		
 		for(int row = 0; row < buffTable.getRowCount(); row++) {
@@ -150,6 +151,7 @@ public class BuffService extends Service {
 					(float) buffTable.getCell(row, duration),
 					(String) buffTable.getCell(row, particle),
 					(String) buffTable.getCell(row, particleHardpoint),
+					(String) buffTable.getCell(row, stanceParticle),
 					(String) buffTable.getCell(row, callback)
 			));
 		} 
@@ -235,10 +237,13 @@ public class BuffService extends Service {
 		receiver.addBuff(crc, buff);
 		manageBuff(buff, crc, receiver);
 
-		String effectFileName = buffData.getEffectFileName();
-
+		sendObjectEffect(buffData.getEffectFileName(), receiver, buffData.getParticleHardPoint());
+		sendObjectEffect(buffData.getStanceParticle(), receiver, buffData.getParticleHardPoint());
+	}
+	
+	private void sendObjectEffect(String effectFileName, CreatureObject receiver, String hardPoint) {
 		if (!effectFileName.isEmpty()) {
-			receiver.sendObserversAndSelf(new PlayClientEffectObjectMessage(effectFileName, buffData.getParticleHardPoint(), receiver.getObjectId()));
+			receiver.sendObserversAndSelf(new PlayClientEffectObjectMessage(effectFileName, hardPoint, receiver.getObjectId()));
 		}
 	}
 	
@@ -378,9 +383,10 @@ public class BuffService extends Service {
 		private final float defaultDuration;
 		private final String effectFileName;
 		private final String particleHardPoint;
+		private final String stanceParticle;
 		private final String callback;
 		
-		private BuffData(String groupName, int groupPriority, int maxStackCount, String effect1Name, float effect1Value, String effect2Name, float effect2Value, String effect3Name, float effect3Value, String effect4Name, float effect4Value, String effect5Name, float effect5Value, float defaultDuration, String effectFileName, String particleHardPoint, String callback) {
+		private BuffData(String groupName, int groupPriority, int maxStackCount, String effect1Name, float effect1Value, String effect2Name, float effect2Value, String effect3Name, float effect3Value, String effect4Name, float effect4Value, String effect5Name, float effect5Value, float defaultDuration, String effectFileName, String particleHardPoint, String stanceParticle, String callback) {
 			this.groupName = groupName;
 			this.groupPriority = groupPriority;
 			this.maxStackCount = maxStackCount;
@@ -397,6 +403,7 @@ public class BuffService extends Service {
 			this.defaultDuration = defaultDuration;
 			this.effectFileName = effectFileName;
 			this.particleHardPoint = particleHardPoint;
+			this.stanceParticle = stanceParticle;
 			this.callback = callback;
 		}
 
@@ -462,6 +469,10 @@ public class BuffService extends Service {
 
 		private String getParticleHardPoint() {
 			return particleHardPoint;
+		}
+
+		public String getStanceParticle() {
+			return stanceParticle;
 		}
 
 		public String getCallback() {
