@@ -479,12 +479,19 @@ class CreatureObjectSharedNP implements Persistable {
 		}
 	}
 	
-	public void removeBuff(CRC buffCrc, SWGObject target) {
+	public Buff removeBuff(CRC buffCrc, SWGObject target) {
 		synchronized (buffs) {
 			if(buffs.containsKey(buffCrc)) {
-				buffs.remove(buffCrc);
-				buffs.sendDeltaMessage(target);
+				Buff removedBuff = buffs.remove(buffCrc);
+				
+				if(removedBuff != null) {
+					buffs.sendDeltaMessage(target);
+				}
+				
+				return removedBuff;
 			}
+			
+			return null;
 		}
 	}
 	

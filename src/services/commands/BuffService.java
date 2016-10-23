@@ -40,7 +40,6 @@ import intents.SkillModIntent;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.stream.Stream;
 import network.packets.swg.zone.PlayClientEffectObjectMessage;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
@@ -202,11 +201,17 @@ public class BuffService extends Service {
 			CRC oldCrc = groupBuff.get();
 			
 			if (oldCrc.equals(newCrc)) {
-				if (buffData.getMaxStackCount() > 1) {
+				int maxStackCount = buffData.getMaxStackCount();
+				
+				if (maxStackCount > 1) {
 					// TODO buffs can, based on skillmods, adjust with different values
-					receiver.adjustBuffStackCount(newCrc, 1);
-					// TODO stackable buffs increase the skillmods they give by the amount of stacks
-					sendSkillModIntent(buffData, receiver, false);
+					int addedStacks = 1;
+					int currentStacks = receiver.getBuffByCrc(oldCrc).getStackCount();
+					
+					if (addedStacks + currentStacks <= maxStackCount) {
+						receiver.adjustBuffStackCount(oldCrc, addedStacks);
+						checkSkillMods(buffData, receiver, addedStacks);
+					}
 				}
 				
 				// We reset the duration
@@ -226,7 +231,7 @@ public class BuffService extends Service {
 		int buffDuration = (int) buffData.getDefaultDuration();
 		Buff buff = new Buff(playTime + buffDuration, buffData.getEffect1Value(), buffDuration, buffer.getObjectId(), stackCount);
 
-		sendSkillModIntent(buffData, receiver, false);
+		checkSkillMods(buffData, receiver, 1);
 		receiver.addBuff(crc, buff);
 		manageBuff(buff, crc, receiver);
 
@@ -266,16 +271,17 @@ public class BuffService extends Service {
 		
 		Buff buff = creature.getBuffByCrc(buffCrc);
 		
-		// Check if this buff can be stacked
 		if (buffData.getMaxStackCount() > 1 && !expired && buff.getStackCount() > 1) {
-			// TODO NGE: buffs can, based on skillmods, adjust with different values
 			creature.adjustBuffStackCount(buffCrc, -1);
 		} else {
-			// Remove skillmods
-			sendSkillModIntent(buffData, creature, true);
+			Buff removedBuff = creature.removeBuff(buffCrc);
 			
-			// Remove the buff from the creature
-			creature.removeBuff(buffCrc);
+			if (removedBuff == null) {
+				return;
+			}
+			
+			// Remove skillmods
+			checkSkillMods(buffData, creature, -removedBuff.getStackCount());
 			
 			String callback = buffData.getCallback();
 			
@@ -283,6 +289,7 @@ public class BuffService extends Service {
 				return;
 			
 			CRC callbackCrc = new CRC(callback.toLowerCase(Locale.ENGLISH));
+			
 			if(dataMap.containsKey(callbackCrc)) {
 				// Apply the callback buff
 				addBuff(callbackCrc, creature, creature);
@@ -293,25 +300,17 @@ public class BuffService extends Service {
 		}
 	}
 	
-	private void sendSkillModIntent(BuffData buffData, CreatureObject creature, boolean remove) {
-		String effect1Name = buffData.getEffect1Name();
-		String effect2Name = buffData.getEffect2Name();
-		String effect3Name = buffData.getEffect3Name();
-		String effect4Name = buffData.getEffect4Name();
-		String effect5Name = buffData.getEffect5Name();
-		
-		int valueFactor = remove ? -1 : 1;
-		
-		if (!effect1Name.isEmpty())
-			new SkillModIntent(effect1Name, 0, (int) buffData.getEffect1Value() * valueFactor, creature).broadcast();
-		if (!effect2Name.isEmpty())
-			new SkillModIntent(effect2Name, 0, (int) buffData.getEffect2Value() * valueFactor, creature).broadcast();
-		if (!effect3Name.isEmpty())
-			new SkillModIntent(effect3Name, 0, (int) buffData.getEffect3Value() * valueFactor, creature).broadcast();
-		if (!effect4Name.isEmpty())
-			new SkillModIntent(effect4Name, 0, (int) buffData.getEffect4Value() * valueFactor, creature).broadcast();
-		if (!effect5Name.isEmpty())
-			new SkillModIntent(effect5Name, 0, (int) buffData.getEffect5Value() * valueFactor, creature).broadcast();
+	private void checkSkillMods(BuffData buffData, CreatureObject creature, int valueFactor) {
+		sendSkillModIntent(creature, buffData.getEffect1Name(), buffData.getEffect1Value(), valueFactor);
+		sendSkillModIntent(creature, buffData.getEffect2Name(), buffData.getEffect2Value(), valueFactor);
+		sendSkillModIntent(creature, buffData.getEffect3Name(), buffData.getEffect3Value(), valueFactor);
+		sendSkillModIntent(creature, buffData.getEffect4Name(), buffData.getEffect4Value(), valueFactor);
+		sendSkillModIntent(creature, buffData.getEffect5Name(), buffData.getEffect5Value(), valueFactor);
+	}
+	
+	private void sendSkillModIntent(CreatureObject creature, String effectName, float effectValue, int valueFactor) {
+		if (!effectName.isEmpty())
+			new SkillModIntent(effectName, 0, (int) effectValue * valueFactor, creature).broadcast();
 	}
 	
 	private static class BuffDelayed implements Delayed {

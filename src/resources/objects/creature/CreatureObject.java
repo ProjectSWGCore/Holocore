@@ -30,8 +30,6 @@ package resources.objects.creature;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Set;
-import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -46,7 +44,6 @@ import resources.PvpFlag;
 import resources.PvpStatus;
 import resources.Race;
 import resources.collections.SWGList;
-import resources.collections.SWGMap;
 import resources.collections.SWGSet;
 import resources.common.CRC;
 import resources.network.BaselineBuilder;
@@ -596,8 +593,8 @@ public class CreatureObject extends TangibleObject {
 		creo6.addBuff(buffCrc, buff, this);
 	}
 	
-	public void removeBuff(CRC buffCrc) {
-		creo6.removeBuff(buffCrc, this);
+	public Buff removeBuff(CRC buffCrc) {
+		return creo6.removeBuff(buffCrc, this);
 	}
 	
 	public boolean hasBuff(String buffName) {
