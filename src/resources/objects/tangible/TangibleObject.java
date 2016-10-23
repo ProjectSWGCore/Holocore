@@ -257,14 +257,12 @@ public class TangibleObject extends SWGObject {
 		// They CAN be enemies if they're not from the same faction and neither of them are neutral
 		PvpFaction otherFaction = otherObject.getPvpFaction();
 		
-		if (otherFaction != PvpFaction.NEUTRAL && getPvpFaction() != otherFaction) {
-			if (getPvpStatus() != PvpStatus.ONLEAVE && otherObject.getPvpStatus() != PvpStatus.ONLEAVE) {
-				// Both objects are not players. In this case, both just need to be combatants.
-				return true;
-			}
+		if (hasPvpFlag(PvpFlag.ATTACKABLE) || otherObject.hasPvpFlag(PvpFlag.ATTACKABLE)) {
+			return true;
+		} else {
+			return otherFaction != PvpFaction.NEUTRAL && getPvpFaction() != otherFaction
+					&& getPvpStatus() != PvpStatus.ONLEAVE && otherObject.getPvpStatus() != PvpStatus.ONLEAVE;
 		}
-		
-		return false;
 	}
 
 	public String getCurrentCity() {

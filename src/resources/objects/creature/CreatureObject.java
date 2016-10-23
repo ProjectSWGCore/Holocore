@@ -794,20 +794,16 @@ public class CreatureObject extends TangibleObject {
 	public boolean isEnemy(TangibleObject otherObject) {
 		boolean enemy = super.isEnemy(otherObject);
 		
-		if(enemy) {
-			// If these are both creatures, there's a chance both of them are players!
-			if (this instanceof CreatureObject && otherObject instanceof CreatureObject) {
-				CreatureObject thisCreature = (CreatureObject) this;
-				CreatureObject otherCreature = (CreatureObject) otherObject;
+		if (enemy && otherObject instanceof CreatureObject) {
+			PvpStatus ourStatus = getPvpStatus();
+			PvpStatus theirStatus = otherObject.getPvpStatus();
 
-				// If they're both players, both of them might be special force
-				if (thisCreature.isPlayer() && otherCreature.isPlayer()) {
-					// They are enemies if they're both players and members of the special force!
-					return getPvpStatus() == PvpStatus.SPECIALFORCES && otherObject.getPvpStatus() == PvpStatus.SPECIALFORCES;
-				}
+			if (isPlayer() && ((CreatureObject) otherObject).isPlayer()) {
+				// They are enemies if both players are SF
+				return ourStatus == PvpStatus.SPECIALFORCES && theirStatus == PvpStatus.SPECIALFORCES;
 			}
 		}
-		
+
 		return enemy;
 	}
 	

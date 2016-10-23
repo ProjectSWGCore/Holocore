@@ -50,6 +50,8 @@ public class CombatCommand extends Command {
 	private int attackRolls;
 	private float percentAddFromWeapon;
 	private int addedDamage;
+	private String buffNameTarget;
+	private String buffNameSelf;
 	
 	public CombatCommand(String name) {
 		super(name);
@@ -164,5 +166,21 @@ public class CombatCommand extends Command {
 	public void setAddedDamage(int addedDamage) {
 		this.addedDamage = addedDamage;
 	}
-	
+
+	public String getBuffNameTarget() {
+		return buffNameTarget;
+	}
+
+	public void setBuffNameTarget(String buffNameTarget) {
+		this.buffNameTarget = buffNameTarget;
+	}
+
+	public String getBuffNameSelf() {
+		return buffNameSelf;
+	}
+
+	public void setBuffNameSelf(String buffNameSelf) {
+		this.buffNameSelf = buffNameSelf;
+	}
+
 }

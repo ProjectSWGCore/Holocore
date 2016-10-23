@@ -239,6 +239,9 @@ public class CombatManager extends Manager {
 	}
 	
 	private void doCombat(CreatureObject source, SWGObject target, CombatCommand command) {
+		// TODO HitType checking. This will for instance prevent buff commands from behaving as a single target combat command
+		addBuff(source, source, command.getBuffNameSelf());	// Add self buff if present
+		
 		CombatAction action = new CombatAction(source.getObjectId());
 		String anim = command.getRandomAnimation(source.getEquippedWeapon().getType());
 		action.setActionCrc(CRC.getCrc(anim));
@@ -253,7 +256,6 @@ public class CombatManager extends Manager {
 
 			damage += calculateWeaponDamage(source, command);
 			damage += command.getAddedDamage();
-			addSelfBuff(source, command);
 
 			if (target instanceof CreatureObject) {
 				if (command.getAttackType() == AttackType.SINGLE_TARGET)
@@ -273,20 +275,12 @@ public class CombatManager extends Manager {
 		target.addDefender(source);
 		source.addDefender(target);
 		
-		addTargetBuff(source, command);
+		addBuff(source, target, command.getBuffNameTarget());	// Add target buff
 		
 		if (target.getHealth() <= damage)
 			doCreatureDeath(target, source);
 		else
 			target.modifyHealth(-damage);
-	}
-	
-	private void addTargetBuff(CreatureObject target, CombatCommand command) {
-		
-	}
-	
-	private void addSelfBuff(CreatureObject creature, CombatCommand command) {
-		
 	}
 	
 	private void enterCombat(CreatureObject creature) {
@@ -463,57 +457,56 @@ public class CombatManager extends Manager {
 	private CombatStatus canPerform(CreatureObject source, SWGObject target, CombatCommand c) {
 		if (source.getEquippedWeapon() == null)
 			return CombatStatus.NO_WEAPON;
+		
+		if (target == null || source.equals(target))
+			return CombatStatus.SUCCESS;
+		
 		if (!(target instanceof TangibleObject))
 			return CombatStatus.INVALID_TARGET;
+		
 		TangibleObject tangibleTarget = (TangibleObject) target;
-		if(tangibleTarget.getPvpFaction() != PvpFaction.NEUTRAL) {
-			if(!tangibleTarget.isEnemy(source)) {
-				return CombatStatus.INVALID_TARGET;
-			}
-		} else if ((tangibleTarget.getPvpFlags() & PvpFlag.ATTACKABLE.getBitmask()) == 0)
+
+		if (!tangibleTarget.isEnemy(source)) {
 			return CombatStatus.INVALID_TARGET;
+		}
 		
 		if(target instanceof CreatureObject) {
-			CreatureObject creature = (CreatureObject) target;
-			
-			switch(creature.getPosture()) {
+			switch(((CreatureObject) target).getPosture()) {
 				case DEAD:
 				case INCAPACITATED:
 					return CombatStatus.INVALID_TARGET;
 			}
 		}
 		
-		CombatStatus status;
 		switch (c.getAttackType()) {
 			case AREA:
 			case TARGET_AREA:
-				status = canPerformArea(source, c);
-				break;
+				return canPerformArea(source, c);
 			case SINGLE_TARGET:
-				status = canPerformSingle(source, target, c);
-				break;
+				return canPerformSingle(source, target, c);
 			default:
-				status = CombatStatus.UNKNOWN;
-				break;
+				return CombatStatus.UNKNOWN;
 		}
-		if (status != CombatStatus.SUCCESS)
-			return status;
-		
-		return status;
 	}
 	
 	private CombatStatus canPerformSingle(CreatureObject source, SWGObject target, CombatCommand c) {
-		if (target == null || !(target instanceof CreatureObject))
+		if (target == null || !(target instanceof TangibleObject))
 			return CombatStatus.NO_TARGET;
+		
 		WeaponObject weapon = source.getEquippedWeapon();
 		double dist = source.getLocation().distanceTo(target.getLocation());
-		if (dist > weapon.getMaxRange() || (dist > c.getMaxRange() && c.getMaxRange() > 0))
+		float commandRange = c.getMaxRange();
+		float range = commandRange > 0 ? commandRange : weapon.getMaxRange();
+		
+		if (dist > range)
 			return CombatStatus.TOO_FAR;
+		
 		return CombatStatus.SUCCESS;
 	}
 	
 	private CombatStatus canPerformArea(CreatureObject source, CombatCommand c) {
-		return CombatStatus.SUCCESS;
+		// TODO implement AoE
+		return CombatStatus.UNKNOWN;
 	}
 	
 	private int calculateWeaponDamage(CreatureObject source, CombatCommand command) {
@@ -522,6 +515,14 @@ public class CombatManager extends Manager {
 		int weaponDamage = random.nextInt((weapon.getMaxDamage() - minDamage) + 1) + minDamage;
 		
 		return (int) (weaponDamage * command.getPercentAddFromWeapon());
+	}
+	
+	private void addBuff(CreatureObject caster, CreatureObject receiver, String buffName) {
+		if (buffName.isEmpty()) {
+			return;
+		}
+		
+		new BuffIntent(buffName, caster, receiver, false).broadcast();
 	}
 	
 	private void showFlyText(TangibleObject obj, String text, Scale scale, Color c, ShowFlyText.Flag ... flags) {
