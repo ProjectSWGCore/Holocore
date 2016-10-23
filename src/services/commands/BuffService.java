@@ -196,8 +196,12 @@ public class BuffService extends Service {
 		
 		String groupName = buffData.getGroupName();
 		Optional<CRC> groupBuff = receiver.getBuffs().keySet().stream().filter(candidate -> groupName.equals(dataMap.get(candidate).groupName)).findFirst();
-		receiver.getPlayerObject().updatePlayTime();
-		int playTime = receiver.getPlayerObject().getPlayTime();
+		int playTime = 0;
+		
+		if(receiver.isPlayer()) {
+			receiver.getPlayerObject().updatePlayTime();
+			playTime = receiver.getPlayerObject().getPlayTime();
+		}
 		
 		if (groupBuff.isPresent()) {	// They already have a buff of this group
 			CRC oldCrc = groupBuff.get();
@@ -249,7 +253,6 @@ public class BuffService extends Service {
 	
 	private void manageBuff(Buff buff, CRC buffCrc, CreatureObject creature) {
 		if (buff.getEndTime() <= 0) {
-			// If this buff has less than or 0 seconds left, then remove it.
 			removeBuff(creature, buffCrc, true);
 		} else if(buff.getDuration() >= 0) {
 			// If this buff doesn't last forever or hasn't expired, we'll schedule it for removal in the future
