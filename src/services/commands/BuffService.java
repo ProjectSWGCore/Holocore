@@ -252,7 +252,6 @@ public class BuffService extends Service {
 	}
 	
 	private void manageBuff(Buff buff, CRC buffCrc, CreatureObject creature) {
-		System.out.println("default duration on buff: " + dataMap.get(buffCrc).getDefaultDuration());
 		if (dataMap.get(buffCrc).getDefaultDuration() > -1 && buff.getEndTime() <= 0) {
 			removeBuff(creature, buffCrc, true);
 		} else if(buff.getDuration() >= 0) {
