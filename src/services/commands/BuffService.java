@@ -53,7 +53,7 @@ import utilities.ThreadUtilities;
 
 public class BuffService extends Service {
 	
-	// TODO allow removal of non-debuffs by right-clicking them
+	// TODO allow removal of buffs with BuffData where PLAYER_REMOVABLE == 1
 	// TODO remove buffs on respec. Listen for respec event and remove buffs with BuffData where REMOVE_ON_RESPEC == 1
 	// TODO remove group buff(s) from receiver when distance between caster and receiver is 100m. Perform same check upon zoning in
 	// TODO on deathblow, decay buffs with BuffData where DECAY_ON_PVP_DEATH == 1
@@ -222,8 +222,8 @@ public class BuffService extends Service {
 				
 				// We reset the duration
 				receiver.setBuffDuration(newCrc, playTime, (int) buffData.getDefaultDuration());
-			} else if (dataMap.get(oldCrc).getGroupPriority() >= buffData.getGroupPriority()) {
-				removeBuff(receiver, newCrc, true);
+			} else if (buffData.getGroupPriority() >= dataMap.get(oldCrc).getGroupPriority()) {
+				removeBuff(receiver, oldCrc, true);
 				applyBuff(receiver, buffer, buffData, playTime, newCrc);
 			}
 		} else {	// They had no buff from this group already
@@ -252,7 +252,8 @@ public class BuffService extends Service {
 	}
 	
 	private void manageBuff(Buff buff, CRC buffCrc, CreatureObject creature) {
-		if (buff.getEndTime() <= 0) {
+		System.out.println("default duration on buff: " + dataMap.get(buffCrc).getDefaultDuration());
+		if (dataMap.get(buffCrc).getDefaultDuration() > -1 && buff.getEndTime() <= 0) {
 			removeBuff(creature, buffCrc, true);
 		} else if(buff.getDuration() >= 0) {
 			// If this buff doesn't last forever or hasn't expired, we'll schedule it for removal in the future
