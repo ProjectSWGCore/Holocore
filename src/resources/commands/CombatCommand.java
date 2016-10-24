@@ -32,6 +32,7 @@ import java.util.Map;
 
 import resources.combat.AttackType;
 import resources.combat.DamageType;
+import resources.combat.HitType;
 import resources.combat.ValidTarget;
 import resources.objects.weapon.WeaponType;
 
@@ -52,6 +53,7 @@ public class CombatCommand extends Command {
 	private int addedDamage;
 	private String buffNameTarget;
 	private String buffNameSelf;
+	private HitType hitType;
 	
 	public CombatCommand(String name) {
 		super(name);
@@ -181,6 +183,14 @@ public class CombatCommand extends Command {
 
 	public void setBuffNameSelf(String buffNameSelf) {
 		this.buffNameSelf = buffNameSelf;
+	}
+
+	public HitType getHitType() {
+		return hitType;
+	}
+
+	public void setHitType(HitType hitType) {
+		this.hitType = hitType;
 	}
 
 }

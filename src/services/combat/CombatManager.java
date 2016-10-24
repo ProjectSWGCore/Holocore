@@ -209,19 +209,19 @@ public class CombatManager extends Manager {
 		}
 	}
 	
-	private void processChatCommand(ChatCommandIntent cci) {
-		if (!cci.getCommand().isCombatCommand() || !(cci.getCommand() instanceof CombatCommand))
+	private void processChatCommand(ChatCommandIntent intent) {
+		if (!intent.getCommand().isCombatCommand() || !(intent.getCommand() instanceof CombatCommand))
 			return;
-		CombatCommand c = (CombatCommand) cci.getCommand();
-		CombatStatus status = canPerform(cci.getSource(), cci.getTarget(), c);
-		if (!handleStatus(cci.getSource(), status))
-			return;
+		CombatCommand c = (CombatCommand) intent.getCommand();
+		CreatureObject source = intent.getSource();
+		SWGObject target = intent.getTarget();
 		
-		updateCombatList(cci.getSource());
-		if (cci.getTarget() instanceof CreatureObject)
-			updateCombatList((CreatureObject) cci.getTarget());
-		
-		doCombat(cci.getSource(), cci.getTarget(), c);
+		// TODO implement support for remaining HitTypes
+		switch (c.getHitType()) {
+			case ATTACK: handleAttack(source, target, c); break;
+			case BUFF: handleBuff(source, target, c); break;
+			default: handleStatus(source, CombatStatus.UNKNOWN); break;
+		}
 	}
 	
 	private void updateCombatList(CreatureObject creature) {
@@ -238,9 +238,11 @@ public class CombatManager extends Manager {
 		combat.updateLastCombat();
 	}
 	
-	private void doCombat(CreatureObject source, SWGObject target, CombatCommand command) {
-		// TODO HitType checking. This will for instance prevent buff commands from behaving as a single target combat command
-		addBuff(source, source, command.getBuffNameSelf());	// Add self buff if present
+	private void handleAttack(CreatureObject source, SWGObject target, CombatCommand command) {
+		CombatStatus status = canPerform(source, target, command);
+		
+		if (!handleStatus(source, status))
+			return;
 		
 		CombatAction action = new CombatAction(source.getObjectId());
 		String anim = command.getRandomAnimation(source.getEquippedWeapon().getType());
@@ -267,7 +269,19 @@ public class CombatManager extends Manager {
 		source.sendObserversAndSelf(action);
 	}
 	
+	private void handleBuff(CreatureObject source, SWGObject target, CombatCommand combatCommand) {
+		addBuff(source, source, combatCommand.getBuffNameSelf());
+		
+		// Only CreatureObjects have buffs
+		if(target instanceof CreatureObject)
+			addBuff(source, (CreatureObject) target, combatCommand.getBuffNameTarget());
+	}
+	
 	private void doCombatSingle(CreatureObject source, CreatureObject target, int damage, CombatCommand command) {
+		updateCombatList(source);
+		if (target instanceof CreatureObject)
+			updateCombatList((CreatureObject) target);
+		
 		if (!source.isInCombat())
 			enterCombat(source);
 		if (!target.isInCombat())
@@ -448,8 +462,7 @@ public class CombatManager extends Manager {
 				showFlyText(source, "@combat_effects:range_too_far", Scale.MEDIUM, Color.CYAN, ShowFlyText.Flag.PRIVATE);
 				return false;
 			default:
-				showFlyText(source, "@combat_effects:cant_attack_fly", Scale.MEDIUM, Color.WHITE, ShowFlyText.Flag.PRIVATE);
-				Log.e(this, "Character unable to attack. Player: %s  Reason: %s", source.getName(), status);
+				showFlyText(source, "@combat_effects:action_failed", Scale.MEDIUM, Color.WHITE, ShowFlyText.Flag.PRIVATE);
 				return false;
 		}
 	}

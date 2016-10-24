@@ -72,6 +72,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import network.packets.swg.zone.object_controller.CommandTimer;
+import resources.combat.HitType;
 import resources.commands.DefaultPriority;
 import resources.objects.creature.CreatureObject;
 import utilities.ThreadUtilities;
@@ -421,6 +422,7 @@ public class CommandService extends Service {
 		int buffNameTarget = combatCommands.getColumnFromName("buffNameTarget");
 		int buffNameSelf = combatCommands.getColumnFromName("buffNameSelf");
 		int maxRange = combatCommands.getColumnFromName("maxRange");
+		int hitType = combatCommands.getColumnFromName("hitType");
 		// animDefault	anim_unarmed	anim_onehandmelee	anim_twohandmelee	anim_polearm
 		// anim_pistol	anim_lightRifle	anim_carbine	anim_rifle	anim_heavyweapon
 		// anim_thrown	anim_onehandlightsaber	anim_twohandlightsaber	anim_polearmlightsaber
@@ -447,6 +449,7 @@ public class CommandService extends Service {
 			cc.setBuffNameTarget((String) cmdRow[buffNameTarget]);
 			cc.setBuffNameSelf((String) cmdRow[buffNameSelf]);
 			cc.setMaxRange((float) cmdRow[maxRange]);
+			cc.setHitType(HitType.getHitType((Integer) cmdRow[hitType]));
 			cc.setAnimations(WeaponType.UNARMED, getAnimationList((String) cmdRow[animDefault+1]));
 			cc.setAnimations(WeaponType.ONE_HANDED_MELEE, getAnimationList((String) cmdRow[animDefault+2]));
 			cc.setAnimations(WeaponType.TWO_HANDED_MELEE, getAnimationList((String) cmdRow[animDefault+3]));
