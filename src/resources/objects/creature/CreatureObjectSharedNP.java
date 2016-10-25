@@ -27,10 +27,7 @@
  ***********************************************************************************/
 package resources.objects.creature;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Optional;
 import java.util.function.BiConsumer;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
@@ -604,7 +601,7 @@ class CreatureObjectSharedNP implements Persistable {
 	
 	@Override
 	public void save(NetBufferStream stream) {
-		stream.addByte(1);
+		stream.addByte(2);
 		stream.addShort(level);
 		stream.addInt(levelHealthGranted);
 		stream.addAscii(animation);
@@ -625,6 +622,12 @@ class CreatureObjectSharedNP implements Persistable {
 		synchronized (maxAttributes) {
 			stream.addList(maxAttributes, (i) -> stream.addInt(i));
 		}
+		synchronized (buffs) {
+			stream.addMap(buffs, (e) -> {
+				e.getKey().save(stream);
+				e.getValue().save(stream);
+			});
+		}
 	}
 	
 	@Override
@@ -632,6 +635,7 @@ class CreatureObjectSharedNP implements Persistable {
 		switch(stream.getByte()) {
 			case 0: readVersion0(stream); break;
 			case 1: readVersion1(stream); break;
+			case 2: readVersion2(stream); break;
 		}
 	}
 	
@@ -677,6 +681,18 @@ class CreatureObjectSharedNP implements Persistable {
 			int maxAttribute = stream.getInt();
 			maxAttributes.set(i, maxAttribute);
 			attributes.set(i, maxAttribute);
+		});
+	}
+	
+	private void readVersion2(NetBufferStream stream) {
+		readVersion1(stream);
+		stream.getList((i) -> {
+			CRC crc = new CRC();
+			Buff buff = new Buff();
+			
+			crc.read(stream);
+			buff.read(stream);
+			buffs.put(crc, buff);
 		});
 	}
 	

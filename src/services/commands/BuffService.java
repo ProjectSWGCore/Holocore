@@ -192,22 +192,25 @@ public class BuffService extends Service {
 		}
 		
 		synchronized (monitored) {
-			// TODO remove buffs where REMOVE_ON_DEATH == 1
-			
-			if (corpse.isPlayer()) {
+			if (i.getKiller().isPlayer()) {
+				// PvP death - decay durations of certain buffs
 				corpse.getBuffEntries(buffEntry -> isBuffDecayable(buffEntry))
 						.forEach(buffEntry -> decayDuration(corpse, buffEntry));
+			} else {
+				// PvE death - remove certain buffs
+				corpse.getBuffEntries(buffEntry -> isRemovedOnDeath(buffEntry.getKey()))
+					.forEach(buffEntry -> decayDuration(corpse, buffEntry));
 			}
 		}
 	}
 	
 	private void handleDisappear(CreatureObject creature) {
 		synchronized (monitored) {
-			monitored.remove(creature);
-			
-			// Buffs that aren't persistable should be removed at this point
-			creature.getBuffEntries(buffEntry -> isBuffPersistent(buffEntry.getKey()))
-					.forEach(buffEntry ->  removeBuff(creature, buffEntry.getKey(), true));
+			if (monitored.remove(creature)) {
+				// Buffs that aren't persistable should be removed at this point
+				creature.getBuffEntries(buffEntry -> isBuffPersistent(buffEntry.getKey()))
+						.forEach(buffEntry ->  removeBuff(creature, buffEntry.getKey(), true));
+			}
 		}
 	}
 	
@@ -217,11 +220,16 @@ public class BuffService extends Service {
 	
 	private boolean isBuffDecayable(Entry<CRC, Buff> buffEntry) {
 		// DECAY_ON_PVP_DEATH == 1
-		return !isBuffExpired(buffEntry.getValue()) /*&& dataMap.get(buffEntry.getKey()).isDecayable()*/;
+		return !isBuffExpired(buffEntry.getValue()) /*&& dataMap.get(buffEntry.getKey()).isPvpDeathDecay()*/;
 	}
 	
 	private boolean isBuffPersistent(CRC crc) {
-//		IS_PERSISTENT == 0
+//		IS_PERSISTENT == 1
+		return false;
+	}
+	
+	private boolean isRemovedOnDeath(CRC crc) {
+		// REMOVE_ON_DEATH == 1
 		return false;
 	}
 	
@@ -324,7 +332,7 @@ public class BuffService extends Service {
 			Log.e(this, "Could not remove %s from %s - buff data for it does not exist", buffCrc, creature);
 			return;
 		}
-		
+		System.out.println("removeBuff called");
 		Optional<Entry<CRC, Buff>> optionalEntry = creature.getBuffEntries(buffEntry -> buffEntry.getKey().equals(buffCrc)).findAny();
 		
 		if (!optionalEntry.isPresent()) {
