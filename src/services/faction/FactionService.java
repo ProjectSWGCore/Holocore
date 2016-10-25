@@ -71,11 +71,11 @@ public final class FactionService extends Service {
 	}
 	
 	@Override
-	public boolean terminate() {
+	public boolean stop() {
 		// If some were in the middle of switching, finish the switches immediately
 		executor.shutdownNow().forEach(runnable -> runnable.run());
 			
-		return super.terminate();
+		return super.stop();
 	}
 	
 	private void handleFactionIntent(FactionIntent i) {
@@ -248,7 +248,7 @@ public final class FactionService extends Service {
 		int pvpBitmask = 0;
 
 		if(target.isEnemy(observer)) {
-			pvpBitmask |= PvpFlag.AGGRESSIVE.getBitmask() | PvpFlag.ATTACKABLE.getBitmask();
+			pvpBitmask |= PvpFlag.AGGRESSIVE.getBitmask() | PvpFlag.ATTACKABLE.getBitmask() | PvpFlag.ENEMY.getBitmask();
 		}
 		
 		return pvpBitmask;
