@@ -249,7 +249,6 @@ public class TCPServer {
 						callbackExecutor.execute(() -> callback.onIncomingConnection(sc.socket()));
 				}
 			} catch (IOException e) {
-				e.printStackTrace();
 			}
 		}
 		
