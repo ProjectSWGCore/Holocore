@@ -29,16 +29,18 @@ package services.commands;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.DelayQueue;
-import java.util.concurrent.Delayed;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import intents.BuffIntent;
 import intents.PlayerEventIntent;
 import intents.SkillModIntent;
+import intents.combat.CreatureKilledIntent;
+import java.util.HashSet;
 import java.util.Locale;
+import java.util.Map.Entry;
 import java.util.Optional;
+import java.util.Set;
 import java.util.concurrent.ScheduledExecutorService;
 import network.packets.swg.zone.PlayClientEffectObjectMessage;
 import resources.client_info.ClientFactory;
@@ -56,17 +58,16 @@ public class BuffService extends Service {
 	// TODO allow removal of buffs with BuffData where PLAYER_REMOVABLE == 1
 	// TODO remove buffs on respec. Listen for respec event and remove buffs with BuffData where REMOVE_ON_RESPEC == 1
 	// TODO remove group buff(s) from receiver when distance between caster and receiver is 100m. Perform same check upon zoning in
-	// TODO on deathblow, decay buffs with BuffData where DECAY_ON_PVP_DEATH == 1
 	
 	private final ScheduledExecutorService executor;
-	private final Map<CreatureObject, DelayQueue<BuffDelayed>> buffRemoval;
+	private final Set<CreatureObject> monitored;
 	private final Map<CRC, BuffData> dataMap;	// All CRCs are lower-cased buff names!
 	
 	public BuffService() {
 		registerForIntent(BuffIntent.TYPE);
 		registerForIntent(PlayerEventIntent.TYPE);
 		
-		buffRemoval = new HashMap<>();
+		monitored = new HashSet<>();
 		dataMap = new HashMap<>();
 		executor = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("buff-service"));
 	}
@@ -82,8 +83,9 @@ public class BuffService extends Service {
 
 	@Override
 	public boolean start() {
-		// Polls buff queues every second
-		executor.scheduleAtFixedRate(() -> buffRemoval.values().forEach(buffQueue -> checkBuffQueue(buffQueue)), 1, 1, TimeUnit.SECONDS);
+		synchronized (monitored) {
+			executor.scheduleAtFixedRate(() -> monitored.parallelStream().forEach(creature -> checkBuffTimers(creature)), 1, 1, TimeUnit.SECONDS);
+		}
 		
 		return super.start();
 	}
@@ -93,6 +95,7 @@ public class BuffService extends Service {
 		switch(i.getType()) {
 			case BuffIntent.TYPE: handleBuffIntent((BuffIntent) i); break;
 			case PlayerEventIntent.TYPE: handlePlayerEventIntent((PlayerEventIntent) i); break;
+			case CreatureKilledIntent.TYPE: handleCreatureKilledIntent((CreatureKilledIntent) i); break;
 		}
 	}
 	
@@ -103,12 +106,9 @@ public class BuffService extends Service {
 		return super.stop();
 	}
 	
-	private void checkBuffQueue(DelayQueue<BuffDelayed> buffQueue) {
-		BuffDelayed buffToRemove = buffQueue.poll();
-		
-		if (buffToRemove != null) {
-			removeBuff(buffToRemove.getCreature(), buffToRemove.getBuffCrc(), true);
-		}
+	private void checkBuffTimers(CreatureObject creature) {
+		creature.getBuffEntries(buffEntry -> isBuffExpired(buffEntry.getValue()))
+				.forEach(buffEntry -> removeBuff(creature, buffEntry.getKey(), true));
 	}
 	
 	private void loadBuffs() {
@@ -177,13 +177,67 @@ public class BuffService extends Service {
 	}
 	
 	private void handleFirstZone(CreatureObject creature) {
-		creature.getBuffs().forEach((crc, buff) -> manageBuff(buff, crc, creature));
+		if (hasBuffs(creature)) {
+			synchronized (monitored) {
+				monitored.add(creature);
+			}
+		}
+	}
+	
+	private void handleCreatureKilledIntent(CreatureKilledIntent i) {
+		CreatureObject corpse = i.getCorpse();
+		
+		if (!monitored.contains(corpse)) {
+			return;
+		}
+		
+		synchronized (monitored) {
+			// TODO remove buffs where REMOVE_ON_DEATH == 1
+			
+			if (corpse.isPlayer()) {
+				corpse.getBuffEntries(buffEntry -> isBuffDecayable(buffEntry))
+						.forEach(buffEntry -> decayDuration(corpse, buffEntry));
+			}
+		}
 	}
 	
 	private void handleDisappear(CreatureObject creature) {
-		synchronized(buffRemoval) {
-			buffRemoval.remove(creature);
+		synchronized (monitored) {
+			monitored.remove(creature);
+			
+			// Buffs that aren't persistable should be removed at this point
+			creature.getBuffEntries(buffEntry -> isBuffPersistent(buffEntry.getKey()))
+					.forEach(buffEntry ->  removeBuff(creature, buffEntry.getKey(), true));
 		}
+	}
+	
+	private boolean isBuffExpired(Buff buff) {
+		return buff.getDuration() >= 0 && System.currentTimeMillis() / 1000 >= buff.getEndTime();
+	}
+	
+	private boolean isBuffDecayable(Entry<CRC, Buff> buffEntry) {
+		// DECAY_ON_PVP_DEATH == 1
+		return !isBuffExpired(buffEntry.getValue()) /*&& dataMap.get(buffEntry.getKey()).isDecayable()*/;
+	}
+	
+	private boolean isBuffPersistent(CRC crc) {
+//		IS_PERSISTENT == 0
+		return false;
+	}
+	
+	private boolean hasBuffs(CreatureObject creature) {
+		return creature.getBuffEntries(buffEntry -> true).count() > 0;
+	}
+	
+	private void decayDuration(CreatureObject creature, Entry<CRC, Buff> buffEntry) {
+		int currentDuration = buffEntry.getValue().getDuration();
+		int newDuration = (int) (currentDuration * 0.10);	// Duration decays with 10%
+		
+		creature.setBuffDuration(buffEntry.getKey(), creature.getPlayerObject().getPlayTime(), newDuration);
+	}
+	
+	private int calculatePlayTime(CreatureObject creature) {
+		return creature.isPlayer() ? creature.getPlayerObject().getPlayTime() : 0;
 	}
 	
 	private void addBuff(CRC newCrc, CreatureObject receiver, CreatureObject buffer) {
@@ -195,39 +249,52 @@ public class BuffService extends Service {
 		}
 		
 		String groupName = buffData.getGroupName();
-		Optional<CRC> groupBuff = receiver.getBuffs().keySet().stream().filter(candidate -> groupName.equals(dataMap.get(candidate).groupName)).findFirst();
-		int playTime = 0;
+		Optional<Entry<CRC, Buff>> groupBuff = receiver.getBuffEntries(buffEntry -> groupName.equals(dataMap.get(buffEntry.getKey()).getGroupName())).findAny();
 		
-		if(receiver.isPlayer()) {
+		if (receiver.isPlayer()) {
 			receiver.getPlayerObject().updatePlayTime();
-			playTime = receiver.getPlayerObject().getPlayTime();
 		}
 		
-		if (groupBuff.isPresent()) {	// They already have a buff of this group
-			CRC oldCrc = groupBuff.get();
+		int playTime = calculatePlayTime(receiver);
+		
+		if (groupBuff.isPresent()) {
+			Entry<CRC, Buff> buffEntry = groupBuff.get();
+			CRC oldCrc = buffEntry.getKey();
 			
 			if (oldCrc.equals(newCrc)) {
-				int maxStackCount = buffData.getMaxStackCount();
-				
-				if (maxStackCount > 1) {
-					// TODO buffs can, based on skillmods, adjust with different values
-					int addedStacks = 1;
-					int currentStacks = receiver.getBuffByCrc(oldCrc).getStackCount();
-					
-					if (addedStacks + currentStacks <= maxStackCount) {
-						receiver.adjustBuffStackCount(oldCrc, addedStacks);
-						checkSkillMods(buffData, receiver, addedStacks);
-					}
-				}
-				
-				// We reset the duration
-				receiver.setBuffDuration(newCrc, playTime, (int) buffData.getDefaultDuration());
+				// TODO skillmods influencing stack increment
+				checkStackCount(receiver, buffData, buffEntry, playTime, 1);
 			} else if (buffData.getGroupPriority() >= dataMap.get(oldCrc).getGroupPriority()) {
 				removeBuff(receiver, oldCrc, true);
 				applyBuff(receiver, buffer, buffData, playTime, newCrc);
 			}
-		} else {	// They had no buff from this group already
+		} else {
 			applyBuff(receiver, buffer, buffData, playTime, newCrc);
+		}
+	}
+	
+	private void checkStackCount(CreatureObject receiver, BuffData buffData, Entry<CRC, Buff> buffEntry, int playTime, int stackMod) {
+		// If it's the same buff, we need to check for stacks
+		int maxStackCount = buffData.getMaxStackCount();
+
+		if (maxStackCount < 2) {
+			return;
+		}
+
+		int currentStacks = buffEntry.getValue().getStackCount();
+
+		if (stackMod + currentStacks > maxStackCount) {
+			stackMod = maxStackCount;
+		}
+
+		CRC crc = buffEntry.getKey();
+		
+		receiver.adjustBuffStackCount(crc, stackMod);
+		checkSkillMods(buffData, receiver, stackMod);
+
+		// If the stack count was incremented, also renew the duration
+		if (stackMod > 0) {
+			receiver.setBuffDuration(crc, playTime, (int) buffData.getDefaultDuration());
 		}
 	}
 	
@@ -239,33 +306,14 @@ public class BuffService extends Service {
 
 		checkSkillMods(buffData, receiver, 1);
 		receiver.addBuff(crc, buff);
-		manageBuff(buff, crc, receiver);
-
-		sendObjectEffect(buffData.getEffectFileName(), receiver, buffData.getParticleHardPoint());
-		sendObjectEffect(buffData.getStanceParticle(), receiver, buffData.getParticleHardPoint());
+		
+		sendParticleEffect(buffData.getEffectFileName(), receiver, buffData.getParticleHardPoint());
+		sendParticleEffect(buffData.getStanceParticle(), receiver, buffData.getParticleHardPoint());
 	}
 	
-	private void sendObjectEffect(String effectFileName, CreatureObject receiver, String hardPoint) {
+	private void sendParticleEffect(String effectFileName, CreatureObject receiver, String hardPoint) {
 		if (!effectFileName.isEmpty()) {
 			receiver.sendObserversAndSelf(new PlayClientEffectObjectMessage(effectFileName, hardPoint, receiver.getObjectId()));
-		}
-	}
-	
-	private void manageBuff(Buff buff, CRC buffCrc, CreatureObject creature) {
-		if (dataMap.get(buffCrc).getDefaultDuration() > -1 && buff.getEndTime() <= 0) {
-			removeBuff(creature, buffCrc, true);
-		} else if(buff.getDuration() >= 0) {
-			// If this buff doesn't last forever or hasn't expired, we'll schedule it for removal in the future
-			synchronized (buffRemoval) {
-				DelayQueue<BuffDelayed> buffQueue = buffRemoval.get(creature);
-
-				if(buffQueue == null) {
-					buffQueue = new DelayQueue<>();
-					buffRemoval.put(creature, buffQueue);
-				}
-
-				buffQueue.add(new BuffDelayed(buff, buffCrc, creature));
-			}
 		}
 	}
 	
@@ -277,10 +325,20 @@ public class BuffService extends Service {
 			return;
 		}
 		
-		Buff buff = creature.getBuffByCrc(buffCrc);
+		Optional<Entry<CRC, Buff>> optionalEntry = creature.getBuffEntries(buffEntry -> buffEntry.getKey().equals(buffCrc)).findAny();
 		
-		if (buffData.getMaxStackCount() > 1 && !expired && buff.getStackCount() > 1) {
-			creature.adjustBuffStackCount(buffCrc, -1);
+		if (!optionalEntry.isPresent()) {
+			// It's hard for us to remove a buff that the creature doesn't have...
+			return;
+		}
+		
+		Entry<CRC, Buff> buffEntry = optionalEntry.get();
+		Buff buff = buffEntry.getValue();
+		int maxStackCount = buffData.getMaxStackCount();
+		int currentStacks = buff.getStackCount();
+		
+		if (maxStackCount > 1 && !expired && currentStacks > 1) {
+			checkStackCount(creature, buffData, buffEntry, calculatePlayTime(creature), maxStackCount);
 		} else {
 			Buff removedBuff = creature.removeBuff(buffCrc);
 			
@@ -298,12 +356,19 @@ public class BuffService extends Service {
 			
 			CRC callbackCrc = new CRC(callback.toLowerCase(Locale.ENGLISH));
 			
-			if(dataMap.containsKey(callbackCrc)) {
+			if (dataMap.containsKey(callbackCrc)) {
 				// Apply the callback buff
 				addBuff(callbackCrc, creature, creature);
 			} else {
 				// Call the callback command script
 				// TODO
+			}
+			
+			// If they have no more expirable buffs, we can stop monitoring them
+			if (hasBuffs(creature)) {
+				synchronized (monitored) {
+					monitored.remove(creature);
+				}
 			}
 		}
 	}
@@ -319,42 +384,6 @@ public class BuffService extends Service {
 	private void sendSkillModIntent(CreatureObject creature, String effectName, float effectValue, int valueFactor) {
 		if (!effectName.isEmpty())
 			new SkillModIntent(effectName, 0, (int) effectValue * valueFactor, creature).broadcast();
-	}
-	
-	private static class BuffDelayed implements Delayed {
-		
-		private final Buff buff;
-		private final CRC buffCrc;
-		private final CreatureObject creature;
-		
-		private BuffDelayed(Buff buff, CRC buffCrc, CreatureObject creature) {
-			this.buff = buff;
-			this.buffCrc = buffCrc;
-			this.creature = creature;
-		}
-		
-		@Override
-		public int compareTo(Delayed o) {
-			return Integer.compare(buff.getEndTime(), ((BuffDelayed) o).buff.getEndTime());
-		}
-
-		@Override
-		public long getDelay(TimeUnit timeUnit) {
-			return timeUnit.convert(buff.getEndTime() - System.currentTimeMillis() / 1000, TimeUnit.MILLISECONDS);
-		}
-
-		public Buff getBuff() {
-			return buff;
-		}
-
-		public CRC getBuffCrc() {
-			return buffCrc;
-		}
-
-		public CreatureObject getCreature() {
-			return creature;
-		}
-		
 	}
 	
 	/**

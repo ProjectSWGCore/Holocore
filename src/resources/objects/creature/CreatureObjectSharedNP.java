@@ -29,6 +29,11 @@ package resources.objects.creature;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Optional;
+import java.util.function.BiConsumer;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 import resources.HologramColour;
 import resources.collections.SWGList;
 import resources.collections.SWGMap;
@@ -457,20 +462,14 @@ class CreatureObjectSharedNP implements Persistable {
 			maxAttributes.sendDeltaMessage(target);
 		}
 	}
-
-	/**
-	 * @return a copy of the buffs map. Removing and adding entries in this
-	 * map will not affect the internal {@code SWGMap}. Do not edit the
-	 * {@code Buff} values in the belief that deltas will be sent because
-	 * they won't - this is incorrect usage.
-	 */
-	public Map<CRC, Buff> getBuffs() {
+	
+	public void forEachBuff(BiConsumer<CRC, Buff> action) {
 		synchronized (buffs) {
-			return new HashMap<>(buffs);
+			buffs.forEach(action);
 		}
 	}
 
-	public void addBuff(CRC buffCrc, Buff buff, SWGObject target) {
+	public void putBuff(CRC buffCrc, Buff buff, SWGObject target) {
 		synchronized (buffs) {
 			if(!buffs.containsKey(buffCrc)) {
 				buffs.put(buffCrc, buff);
@@ -481,30 +480,26 @@ class CreatureObjectSharedNP implements Persistable {
 	
 	public Buff removeBuff(CRC buffCrc, SWGObject target) {
 		synchronized (buffs) {
-			if(buffs.containsKey(buffCrc)) {
-				Buff removedBuff = buffs.remove(buffCrc);
-				
-				if(removedBuff != null) {
-					buffs.sendDeltaMessage(target);
-				}
-				
-				return removedBuff;
+			Buff removedBuff = buffs.remove(buffCrc);
+			
+			if (removedBuff != null) {
+				buffs.sendDeltaMessage(target);
 			}
 			
-			return null;
+			return removedBuff;
 		}
 	}
 	
-	public Buff getBuffByCrc(CRC buffCrc) {
+	public Stream<Entry<CRC, Buff>> getBuffEntries(Predicate<Entry<CRC, Buff>> predicate) {
 		synchronized (buffs) {
-			return buffs.get(buffCrc);
+			return buffs.entrySet().stream()
+					.filter(predicate);
 		}
 	}
 	
 	public void adjustBuffStackCount(CRC buffCrc, int adjustment, SWGObject target) {
 		synchronized (buffs) {
-			Buff buff = buffs.get(buffCrc);
-			buff.adjustStackCount(adjustment);
+			buffs.get(buffCrc).adjustStackCount(adjustment);
 			buffs.update(buffCrc, target);
 		}
 	}

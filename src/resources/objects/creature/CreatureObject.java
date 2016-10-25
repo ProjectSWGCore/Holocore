@@ -30,9 +30,11 @@ package resources.objects.creature;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Set;
-import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.function.BiConsumer;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 import network.packets.swg.zone.UpdatePostureMessage;
 import network.packets.swg.zone.UpdatePvpStatusMessage;
@@ -100,6 +102,7 @@ public class CreatureObject extends TangibleObject {
 		removeEquipment(obj);
 	}
 	
+	@Override
 	protected void handleSlotReplacement(SWGObject oldParent, SWGObject obj, int arrangement) {
 		SWGObject inventory = getSlottedObject("inventory");
 		for (String slot : obj.getArrangement().get(arrangement-4)) {
@@ -590,7 +593,7 @@ public class CreatureObject extends TangibleObject {
 	}
 	
 	public void addBuff(CRC buffCrc, Buff buff) {
-		creo6.addBuff(buffCrc, buff, this);
+		creo6.putBuff(buffCrc, buff, this);
 	}
 	
 	public Buff removeBuff(CRC buffCrc) {
@@ -598,11 +601,11 @@ public class CreatureObject extends TangibleObject {
 	}
 	
 	public boolean hasBuff(String buffName) {
-		return getBuffByCrc(new CRC(buffName.toLowerCase(Locale.ENGLISH))) != null;
+		return getBuffEntries(buffEntry -> new CRC(buffName.toLowerCase(Locale.ENGLISH)).equals(buffEntry.getKey())).count() > 0;
 	}
 	
-	public Buff getBuffByCrc(CRC buffCrc) {
-		return creo6.getBuffByCrc(buffCrc);
+	public Stream<Map.Entry<CRC, Buff>> getBuffEntries(Predicate<Map.Entry<CRC, Buff>> predicate) {
+		return creo6.getBuffEntries(predicate);
 	}
 	
 	public void adjustBuffStackCount(CRC buffCrc, int adjustment) {
@@ -613,8 +616,8 @@ public class CreatureObject extends TangibleObject {
 		creo6.setBuffDuration(buffCrc, playTime, duration, this);
 	}
 	
-	public Map<CRC, Buff> getBuffs() {
-		return new HashMap<>(creo6.getBuffs());
+	public void forEachBuff(BiConsumer<CRC, Buff> action) {
+		creo6.forEachBuff(action);
 	}
 	
 	public boolean isVisible() {

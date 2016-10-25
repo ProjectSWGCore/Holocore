@@ -239,9 +239,7 @@ public class CombatManager extends Manager {
 	}
 	
 	private void handleAttack(CreatureObject source, SWGObject target, CombatCommand command) {
-		CombatStatus status = canPerform(source, target, command);
-		
-		if (!handleStatus(source, status))
+		if (!handleStatus(source, canPerform(source, target, command)))
 			return;
 		
 		CombatAction action = new CombatAction(source.getObjectId());
@@ -339,9 +337,7 @@ public class CombatManager extends Manager {
 		corpse.setHealth(0);
 		killer.removeDefender(corpse);
 		
-		// Let's check if the killer needs to remain in-combat...
 		if(!killer.hasDefenders()) {
-			// They have no active targets they're in combat with, make them exit combat
 			exitCombat(killer);
 		}
 		
@@ -349,16 +345,13 @@ public class CombatManager extends Manager {
 		corpse.setTurnScale(0);
 		corpse.setMovementScale(0);
 		
-		// We need to handle this differently, depending on whether killedCreature is a player or not
 		if(corpse.isPlayer()) {
 			if (corpse.hasBuff("incapWeaken")) {
-				// Kill this sucka immediately
 				killCreature(killer, corpse);
 			} else {
 				incapacitatePlayer(killer, corpse);
 			}
 		} else {
-			// This is just a plain ol' NPC. Die!
 			killCreature(killer, corpse);
 		}
 		

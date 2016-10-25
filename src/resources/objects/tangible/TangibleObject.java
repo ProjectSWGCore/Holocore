@@ -259,9 +259,10 @@ public class TangibleObject extends SWGObject {
 		
 		if (hasPvpFlag(PvpFlag.ATTACKABLE) || otherObject.hasPvpFlag(PvpFlag.ATTACKABLE)) {
 			return true;
+		} else if (otherFaction != PvpFaction.NEUTRAL && getPvpFaction() != otherFaction) {
+			return getPvpStatus() != PvpStatus.ONLEAVE && otherObject.getPvpStatus() != PvpStatus.ONLEAVE;
 		} else {
-			return otherFaction != PvpFaction.NEUTRAL && getPvpFaction() != otherFaction
-					&& getPvpStatus() != PvpStatus.ONLEAVE && otherObject.getPvpStatus() != PvpStatus.ONLEAVE;
+			return false;
 		}
 	}
 

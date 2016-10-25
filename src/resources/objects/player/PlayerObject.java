@@ -95,7 +95,10 @@ public class PlayerObject extends IntangibleObject {
 	}
 
 	public void updatePlayTime() {
-		int playTime = (int) (System.currentTimeMillis() / 1000);
+		int currentTime = (int) (System.currentTimeMillis() / 1000);
+		int oldPlayTime = getPlayTime();
+		int playTime = oldPlayTime + (currentTime - oldPlayTime);
+		
 		play3.setPlayTime(playTime);
 		sendDelta(3, 9, playTime);
 	}
