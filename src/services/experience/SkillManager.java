@@ -151,11 +151,11 @@ public final class SkillManager extends Manager {
 		
 		target.addSkill(skillName);
 		
-		// TODO expertise abilities?
-		
 		for(String commandName : skillData.getCommands()) {
 			target.addAbility(commandName);
 		}
+		
+		// TODO based on their level, they may have unlocked new marks of EXPERTISE abilities!
 		
 		skillData.getSkillMods().forEach((skillModName, skillModValue) -> new SkillModIntent(skillModName, 0, skillModValue, target).broadcast());
 		

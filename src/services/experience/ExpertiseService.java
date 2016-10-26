@@ -64,6 +64,7 @@ public final class ExpertiseService extends Service {
 		pointsForLevel = new HashMap<>();
 		
 		registerForIntent(GalacticPacketIntent.TYPE);
+		// TODO watch LevelChangedIntent. We need to grant ability commands if they have the correct skill. Scripts? SDB is preferable tbh
 	}
 
 	@Override
