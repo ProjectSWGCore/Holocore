@@ -263,7 +263,7 @@ public class BuffService extends Service {
 		BuffData buffData = dataMap.get(newCrc);
 		
 		if (buffData == null) {
-			Log.e(this, "Could not add %s to %s - buff data does not exist", newCrc, receiver);
+			Log.e(this, "Could not add %s to %s - unrecognised buff name", newCrc, receiver);
 			return;
 		}
 		
@@ -281,8 +281,13 @@ public class BuffService extends Service {
 			CRC oldCrc = buffEntry.getKey();
 			
 			if (oldCrc.equals(newCrc)) {
-				// TODO skillmods influencing stack increment
-				checkStackCount(receiver, buffData, buffEntry, playTime, 1);
+				// TODO if buff duration -1, remove the buff
+				if (buffData.getDefaultDuration() == -1) {
+					removeBuff(receiver, oldCrc, true);
+				} else {
+					// TODO skillmods influencing stack increment
+					checkStackCount(receiver, buffData, buffEntry, playTime, 1);
+				}
 			} else if (buffData.getGroupPriority() >= dataMap.get(oldCrc).getGroupPriority()) {
 				removeBuff(receiver, oldCrc, true);
 				applyBuff(receiver, buffer, buffData, playTime, newCrc);
@@ -365,7 +370,7 @@ public class BuffService extends Service {
 			}
 			
 			checkSkillMods(buffData, creature, -removedBuff.getStackCount());
-			checkCallback(buffData, creature);
+			checkCallback(buffCrc, buffData, creature);
 			
 			// If they have no more expirable buffs, we can stop monitoring them
 			if (hasBuffs(creature)) {
@@ -376,7 +381,7 @@ public class BuffService extends Service {
 		}
 	}
 	
-	private void checkCallback(BuffData buffData, CreatureObject creature) {
+	private void checkCallback(CRC crc, BuffData buffData, CreatureObject creature) {
 		String callback = buffData.getCallback();
 
 		if (callback.equals("none")) {
@@ -391,13 +396,13 @@ public class BuffService extends Service {
 			try {
 				Scripts.invoke("buffs/callback" + callback, callback, creature);
 			} catch (FileNotFoundException ex) {
-				Log.w(this, "Callback script %s doesn't exist", callback);
+				Log.w(this, "Callback script %s doesn't exist - buff %s won't behave as expected", callback, crc);
 			}
 		}
 	}
 	
 	private void checkSkillMods(BuffData buffData, CreatureObject creature, int valueFactor) {
-		// TODO Check effect1name == "group". If yes, every group member within 100m range (maybe just awareness range?) recive the buff.
+		// TODO Check effect1name == "group". If yes, every group member within 100m range (maybe just the ones aware of the buffer) receive the buff.
 		// TODO once outside range, buff needs removal
 		sendSkillModIntent(creature, buffData.getEffect1Name(), buffData.getEffect1Value(), valueFactor);
 		sendSkillModIntent(creature, buffData.getEffect2Name(), buffData.getEffect2Value(), valueFactor);
