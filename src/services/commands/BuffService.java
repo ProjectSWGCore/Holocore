@@ -281,7 +281,6 @@ public class BuffService extends Service {
 			CRC oldCrc = buffEntry.getKey();
 			
 			if (oldCrc.equals(newCrc)) {
-				// TODO if buff duration -1, remove the buff
 				if (buffData.getDefaultDuration() == -1) {
 					removeBuff(receiver, oldCrc, true);
 				} else {
