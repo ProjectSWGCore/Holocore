@@ -27,6 +27,7 @@
 ***********************************************************************************/
 package services.experience;
 
+import intents.SkillModIntent;
 import intents.experience.SkillBoxGrantedIntent;
 import intents.network.GalacticPacketIntent;
 import java.util.HashMap;
@@ -38,6 +39,7 @@ import network.packets.swg.zone.object_controller.ChangeRoleIconChoice;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
 import resources.control.Intent;
+import resources.control.Manager;
 import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
@@ -48,15 +50,18 @@ import resources.server_info.Log;
  *
  * @author Mads
  */
-public final class SkillService extends Service {
+public final class SkillManager extends Manager {
 	
 	// Maps icon index to qualifying skill.
 	private final Map<Integer, Set<String>> roleIconMap;
 	private final Map<String, SkillData> skillDataMap;
 	
-	public SkillService() {
+	public SkillManager() {
 		roleIconMap = new HashMap<>();
 		skillDataMap = new HashMap<>();
+		
+		addChildService(new ExpertiseService());
+		
 		registerForIntent(SkillBoxGrantedIntent.TYPE);
 		registerForIntent(GalacticPacketIntent.TYPE);
 	}
@@ -146,11 +151,13 @@ public final class SkillService extends Service {
 		
 		target.addSkill(skillName);
 		
+		// TODO expertise abilities?
+		
 		for(String commandName : skillData.getCommands()) {
 			target.addAbility(commandName);
 		}
 		
-//		skillData.skillMods.forEach((skillModName, skillModValue) -> new SkillModIntent(skillModName, 0, skillModValue, target).broadcast());
+		skillData.getSkillMods().forEach((skillModName, skillModValue) -> new SkillModIntent(skillModName, 0, skillModValue, target).broadcast());
 		
 		// Ziggy: These are disabled for now, since we don't have the structs in place for it.
 //		for(String schematic : skillData.schematics) {

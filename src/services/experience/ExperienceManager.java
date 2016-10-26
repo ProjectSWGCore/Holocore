@@ -53,18 +53,18 @@ import resources.server_info.Log;
  */
 public final class ExperienceManager extends Manager {
 	
-	private SkillService skillService;
+	private SkillManager skillManager;
 	private SkillTemplateService skillTemplateService;
 	private final Map<Short, Integer> levelXpMap;
 	
 	public ExperienceManager() {
-		skillService = new SkillService();
+		skillManager = new SkillManager();
 		skillTemplateService = new SkillTemplateService();
 		levelXpMap = new HashMap<>();
 		
 		registerForIntent(ExperienceIntent.TYPE);
 		
-		addChildService(skillService);
+		addChildService(skillManager);
 		addChildService(skillTemplateService);
 	}
 
