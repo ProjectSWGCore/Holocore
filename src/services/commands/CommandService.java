@@ -32,6 +32,7 @@ import intents.chat.ChatBroadcastIntent;
 import intents.chat.ChatCommandIntent;
 import intents.network.GalacticPacketIntent;
 import intents.player.PlayerTransformedIntent;
+import java.io.FileNotFoundException;
 import network.packets.Packet;
 import network.packets.swg.zone.object_controller.CommandQueueDequeue;
 import network.packets.swg.zone.object_controller.CommandQueueEnqueue;
@@ -71,6 +72,8 @@ import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import network.packets.swg.zone.object_controller.CommandTimer;
 import resources.combat.HitType;
 import resources.commands.DefaultPriority;
@@ -329,7 +332,10 @@ public class CommandService extends Service {
 			}
 		}
 		else
-			Scripts.invoke("commands/generic/" + command.getDefaultScriptCallback(), "executeCommand", galacticManager, player, target, args);
+			try {
+				Scripts.invoke("commands/generic/" + command.getDefaultScriptCallback(), "executeCommand", galacticManager, player, target, args);
+			} catch (FileNotFoundException ex) {
+			}
 	}
 	
 	private void loadBaseCommands() {

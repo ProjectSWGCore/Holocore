@@ -36,12 +36,15 @@ import intents.BuffIntent;
 import intents.PlayerEventIntent;
 import intents.SkillModIntent;
 import intents.combat.CreatureKilledIntent;
+import java.io.FileNotFoundException;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import network.packets.swg.zone.PlayClientEffectObjectMessage;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
@@ -51,13 +54,14 @@ import resources.control.Service;
 import resources.objects.creature.Buff;
 import resources.objects.creature.CreatureObject;
 import resources.server_info.Log;
+import utilities.Scripts;
 import utilities.ThreadUtilities;
 
 public class BuffService extends Service {
 	
 	// TODO allow removal of buffs with BuffData where PLAYER_REMOVABLE == 1
 	// TODO remove buffs on respec. Listen for respec event and remove buffs with BuffData where REMOVE_ON_RESPEC == 1
-	// TODO remove group buff(s) from receiver when distance between caster and receiver is 100m. Perform same check upon zoning in
+	// TODO remove group buff(s) from receiver when distance between caster and receiver is 100m. Perform same check upon zoning in. Skillmod1 effect name is "group"
 	
 	private final ScheduledExecutorService executor;
 	private final Set<CreatureObject> monitored;
@@ -199,8 +203,7 @@ public class BuffService extends Service {
 			if (!monitored.contains(corpse)) {
 				return;
 			}
-		
-		
+			
 			if (i.getKiller().isPlayer()) {
 				// PvP death - decay durations of certain buffs
 				corpse.getBuffEntries(buffEntry -> isBuffDecayable(buffEntry))
@@ -208,7 +211,7 @@ public class BuffService extends Service {
 			} else {
 				// PvE death - remove certain buffs
 				corpse.getBuffEntries(buffEntry -> isBuffRemovedOnDeath(buffEntry.getKey()))
-					.forEach(buffEntry -> decayDuration(corpse, buffEntry));
+					.forEach(buffEntry -> removeBuff(corpse, buffEntry.getKey(), true));
 			}
 		}
 	}
@@ -340,11 +343,10 @@ public class BuffService extends Service {
 			Log.e(this, "Could not remove %s from %s - buff data for it does not exist", buffCrc, creature);
 			return;
 		}
-		System.out.println("removeBuff called");
+		
 		Optional<Entry<CRC, Buff>> optionalEntry = creature.getBuffEntries(buffEntry -> buffEntry.getKey().equals(buffCrc)).findAny();
 		
 		if (!optionalEntry.isPresent()) {
-			// It's hard for us to remove a buff that the creature doesn't have...
 			return;
 		}
 		
@@ -362,23 +364,8 @@ public class BuffService extends Service {
 				return;
 			}
 			
-			// Remove skillmods
 			checkSkillMods(buffData, creature, -removedBuff.getStackCount());
-			
-			String callback = buffData.getCallback();
-			
-			if(callback.equals("none"))
-				return;
-			
-			CRC callbackCrc = new CRC(callback.toLowerCase(Locale.ENGLISH));
-			
-			if (dataMap.containsKey(callbackCrc)) {
-				// Apply the callback buff
-				addBuff(callbackCrc, creature, creature);
-			} else {
-				// Call the callback command script
-				// TODO
-			}
+			checkCallback(buffData, creature);
 			
 			// If they have no more expirable buffs, we can stop monitoring them
 			if (hasBuffs(creature)) {
@@ -389,7 +376,29 @@ public class BuffService extends Service {
 		}
 	}
 	
+	private void checkCallback(BuffData buffData, CreatureObject creature) {
+		String callback = buffData.getCallback();
+
+		if (callback.equals("none")) {
+			return;
+		}
+
+		CRC callbackCrc = new CRC(callback.toLowerCase(Locale.ENGLISH));
+
+		if (dataMap.containsKey(callbackCrc)) {
+			addBuff(callbackCrc, creature, creature);
+		} else {
+			try {
+				Scripts.invoke("buffs/callback" + callback, callback, creature);
+			} catch (FileNotFoundException ex) {
+				Log.w(this, "Callback script %s doesn't exist", callback);
+			}
+		}
+	}
+	
 	private void checkSkillMods(BuffData buffData, CreatureObject creature, int valueFactor) {
+		// TODO Check effect1name == "group". If yes, every group member within 100m range (maybe just awareness range?) recive the buff.
+		// TODO once outside range, buff needs removal
 		sendSkillModIntent(creature, buffData.getEffect1Name(), buffData.getEffect1Value(), valueFactor);
 		sendSkillModIntent(creature, buffData.getEffect2Name(), buffData.getEffect2Value(), valueFactor);
 		sendSkillModIntent(creature, buffData.getEffect3Name(), buffData.getEffect3Value(), valueFactor);

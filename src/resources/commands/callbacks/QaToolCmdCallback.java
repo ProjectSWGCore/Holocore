@@ -35,6 +35,7 @@ import intents.object.ObjectCreatedIntent;
 import intents.object.ObjectTeleportIntent;
 import intents.object.CreateStaticItemIntent;
 import intents.player.DeleteCharacterIntent;
+import java.io.FileNotFoundException;
 import resources.Location;
 import resources.Terrain;
 import resources.commands.ICmdCallback;
@@ -62,6 +63,8 @@ import utilities.Scripts;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by Waverunner on 8/19/2015
@@ -97,7 +100,11 @@ public class QaToolCmdCallback implements ICmdCallback {
 					recoverPlayer(galacticManager.getObjectManager(), galacticManager.getPlayerManager(), player, args.substring(args.indexOf(' ') + 1));
 					break;
 				case "details":
-					Scripts.invoke("commands/helper/qatool/details", "sendDetails", player, target, args.split(" "));
+					try {
+						Scripts.invoke("commands/helper/qatool/details", "sendDetails", player, target, args.split(" "));
+					} catch (FileNotFoundException ex) {
+						Log.e("QATool", "sendDetails qatool script not found!");
+					}
 					break;
 				case "xp":
 					if(command.length == 3)
