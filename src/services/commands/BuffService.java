@@ -133,6 +133,7 @@ public class BuffService extends Service {
 		int stanceParticle = buffTable.getColumnFromName("STANCE_PARTICLE");
 		int callback = buffTable.getColumnFromName("CALLBACK");
 		int persistent = buffTable.getColumnFromName("IS_PERSISTENT");
+		int removeOnDeath = buffTable.getColumnFromName("REMOVE_ON_DEATH");
 		
 		for(int row = 0; row < buffTable.getRowCount(); row++) {
 			dataMap.put(new CRC(((String) buffTable.getCell(row, 0)).toLowerCase(Locale.ENGLISH)), new BuffData(
@@ -154,7 +155,8 @@ public class BuffService extends Service {
 					(String) buffTable.getCell(row, particleHardpoint),
 					(String) buffTable.getCell(row, stanceParticle),
 					(String) buffTable.getCell(row, callback),
-					(int) buffTable.getCell(row, persistent) == 1
+					(int) buffTable.getCell(row, persistent) == 1,
+					(int) buffTable.getCell(row, removeOnDeath) == 1
 			));
 		} 
 	}
@@ -203,7 +205,7 @@ public class BuffService extends Service {
 						.forEach(buffEntry -> decayDuration(corpse, buffEntry));
 			} else {
 				// PvE death - remove certain buffs
-				corpse.getBuffEntries(buffEntry -> isRemovedOnDeath(buffEntry.getKey()))
+				corpse.getBuffEntries(buffEntry -> isBuffRemovedOnDeath(buffEntry.getKey()))
 					.forEach(buffEntry -> decayDuration(corpse, buffEntry));
 			}
 		}
@@ -232,9 +234,8 @@ public class BuffService extends Service {
 		return dataMap.get(crc).isPersistent();
 	}
 	
-	private boolean isRemovedOnDeath(CRC crc) {
-		// REMOVE_ON_DEATH == 1
-		return false;
+	private boolean isBuffRemovedOnDeath(CRC crc) {
+		return dataMap.get(crc).isRemovedOnDeath();
 	}
 	
 	private boolean hasBuffs(CreatureObject creature) {
@@ -430,8 +431,9 @@ public class BuffService extends Service {
 		private final String stanceParticle;
 		private final String callback;
 		private final boolean persistent;
+		private final boolean removedOnDeath;
 		
-		private BuffData(String groupName, int groupPriority, int maxStackCount, String effect1Name, float effect1Value, String effect2Name, float effect2Value, String effect3Name, float effect3Value, String effect4Name, float effect4Value, String effect5Name, float effect5Value, float defaultDuration, String effectFileName, String particleHardPoint, String stanceParticle, String callback, boolean persistent) {
+		private BuffData(String groupName, int groupPriority, int maxStackCount, String effect1Name, float effect1Value, String effect2Name, float effect2Value, String effect3Name, float effect3Value, String effect4Name, float effect4Value, String effect5Name, float effect5Value, float defaultDuration, String effectFileName, String particleHardPoint, String stanceParticle, String callback, boolean persistent, boolean removedOnDeath) {
 			this.groupName = groupName;
 			this.groupPriority = groupPriority;
 			this.maxStackCount = maxStackCount;
@@ -451,6 +453,7 @@ public class BuffService extends Service {
 			this.stanceParticle = stanceParticle;
 			this.callback = callback;
 			this.persistent = persistent;
+			this.removedOnDeath = removedOnDeath;
 		}
 
 		public String getGroupName() {
@@ -527,6 +530,10 @@ public class BuffService extends Service {
 
 		public boolean isPersistent() {
 			return persistent;
+		}
+
+		public boolean isRemovedOnDeath() {
+			return removedOnDeath;
 		}
 		
 	}
