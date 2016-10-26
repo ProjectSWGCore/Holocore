@@ -77,7 +77,7 @@ public class Scripts {
 		try {
 			ENGINE.eval(new InputStreamReader(new FileInputStream(SCRIPTS + script + EXTENSION), StandardCharsets.UTF_8));
 			return (T) INVOCABLE.invokeFunction(function, args);
-		} catch (Throwable t) {
+		} catch (ScriptException | NoSuchMethodException t) {
 			Log.e("Scripts", "Error invoking script: " + script + "  with function: " + function);
 			Log.e("Scripts", "    Args: " + Arrays.toString(args));
 			Log.e("Scripts", t);
