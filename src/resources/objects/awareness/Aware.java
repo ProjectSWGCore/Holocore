@@ -91,7 +91,6 @@ class Aware {
 	}
 	
 	public Set<SWGObject> getAware() {
-//		Set<SWGObject> aware = new AwarenessSet(awareness.size());
 		Set<SWGObject> aware = new HashSet<>(awareness.size());
 		synchronized (awareness) {
 			for (Aware a : awareness) {

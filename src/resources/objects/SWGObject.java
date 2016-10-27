@@ -54,6 +54,7 @@ import resources.player.Player;
 import resources.server_info.Log;
 import services.CoreManager;
 import services.objects.ObjectCreator;
+import utilities.AwarenessUtilities;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -182,10 +183,9 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			container.addObject(this);
 		}
 		
-		oldObservers.retainAll(getObserversAndParent());
 		long newId = (container != null) ? container.getObjectId() : 0;
-		for (Player update : oldObservers)
-			update.sendPacket(new UpdateContainmentMessage(objectId, newId, slotArrangement));
+		UpdateContainmentMessage update = new UpdateContainmentMessage(getObjectId(), newId, getSlotArrangement());
+		AwarenessUtilities.callForNewObserver(oldObservers, getObserversAndParent(), (observer) -> observer.sendPacket(update));
 		return ContainerResult.SUCCESS;
 	}
 
@@ -288,6 +288,8 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 
 	public void setOwner(Player player) {
+		if (owner == player)
+			return;
 		if (owner != null)
 			owner.setCreatureObject(null);
 		this.owner = player;
@@ -624,8 +626,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	private final void sendSceneCreateObject(Player target) {
-		if (target == null)
-			return;
 		SceneCreateObjectByCrc create = new SceneCreateObjectByCrc();
 		create.setObjectId(objectId);
 		create.setLocation(buildoutArea == null ? location : buildoutArea.adjustLocation(location));
@@ -636,25 +636,31 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	private final void sendSceneDestroyObject(Player target) {
-		if (target == null)
-			return;
 		SceneDestroyObject destroy = new SceneDestroyObject();
 		destroy.setObjectId(objectId);
 		target.sendPacket(destroy);
 	}
 	
-	public void createObject(Player target) {
+	public void createObject(SWGObject target) {
 		createObject(target, false);
 	}
 	
-	public void createObject(Player target, boolean ignoreSnapshotChecks) {
+	public void createObject(SWGObject target, boolean ignoreSnapshotChecks) {
 		if (target == null)
 			return;
-		if (!isVisible(target.getCreatureObject())) {
-			Log.i("SWGObject", target.getCreatureObject() + " doesn't have permission to view " + this + " -- skipping packet sending");
+		if (!target.isVisible(this)) {
+			Log.w(this, target + " doesn't have permission to view " + this + " -- skipping packet sending");
 			return;
 		}
-
+		Set<Player> observers = target.getAwareness().getChildObservers();
+		if (target.getOwner() != null)
+			observers.add(target.getOwner());
+		for (Player observer : observers) {
+			createObject(observer, ignoreSnapshotChecks);
+		}
+	}
+	
+	public void createObject(Player target, boolean ignoreSnapshotChecks) {
 		if (!isSnapshot() || ignoreSnapshotChecks) {
 			sendSceneCreateObject(target);
 			sendBaselines(target);
@@ -665,22 +671,28 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			target.sendPacket(new SceneEndBaselines(getObjectId()));
 	}
 	
-	public void destroyObject(Player target) {
-		if (!isSnapshot() && target != null)
-			sendSceneDestroyObject(target);
+	public void destroyObject(SWGObject target) {
+		if (isSnapshot() || target == null)
+			return;
+		Set<Player> observers = target.getAwareness().getChildObservers();
+		if (target.getOwner() != null)
+			observers.add(target.getOwner());
+		for (Player observer : observers) {
+			sendSceneDestroyObject(observer);
+		}
 	}
 	
 	public void addObjectAware(SWGObject aware) {
 		if (awareness.addObjectAware(aware.getAwareness())) {
-			createObject(aware.getOwner());
-			aware.createObject(getOwner());
+			createObject(aware);
+			aware.createObject(this);
 		}
 	}
 	
 	public void removeObjectAware(SWGObject aware) {
 		if (awareness.removeObjectAware(aware.getAwareness())) {
-			destroyObject(aware.getOwner());
-			aware.destroyObject(getOwner());
+			destroyObject(aware);
+			aware.destroyObject(this);
 		}
 	}
 	
@@ -689,13 +701,11 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	public void clearObjectsAware() {
-		Set<Player> observers = awareness.getObjectObservers();
+		Set<SWGObject> aware = awareness.getObjectsAware();
 		awareness.clearObjectsAware();
-		Player owner = getOwner();
-		for (Player p : observers) {
-			destroyObject(p);
-			if (owner != null)
-				((SWGObject) p.getCreatureObject()).destroyObject(owner);
+		for (SWGObject obj : aware) {
+			destroyObject(obj);
+			obj.destroyObject(this);
 		}
 	}
 	
@@ -709,15 +719,15 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	public void addCustomAware(SWGObject aware) {
 		if (awareness.addCustomAware(aware.getAwareness())) {
-			createObject(aware.getOwner());
-			aware.createObject(getOwner());
+			createObject(aware);
+			aware.createObject(this);
 		}
 	}
 	
 	public void removeCustomAware(SWGObject aware) {
 		if (awareness.removeCustomAware(aware.getAwareness())) {
-			destroyObject(aware.getOwner());
-			aware.destroyObject(getOwner());
+			destroyObject(aware);
+			aware.destroyObject(this);
 		}
 	}
 	
@@ -726,14 +736,13 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	public void clearCustomAware(boolean sendUpdates) {
-		Set<Player> observers = sendUpdates ? awareness.getCustomObservers() : null;
+		Set<SWGObject> aware = sendUpdates ? awareness.getCustomAware() : null;
 		awareness.clearCustomAware();
 		if (!sendUpdates)
 			return;
-		Player owner = getOwner();
-		for (Player p : observers) {
-			destroyObject(p);
-			((SWGObject) p.getCreatureObject()).destroyObject(owner);
+		for (SWGObject obj : aware) {
+			destroyObject(obj);
+			obj.destroyObject(this);
 		}
 	}
 	
@@ -786,7 +795,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		createChildrenObjects(target, false);
 	}
 	
-	protected void createChildrenObjects(Player target, boolean ignoreSnapshotChecks) {
+	private void createChildrenObjects(Player target, boolean ignoreSnapshotChecks) {
 		synchronized (slots) {
 			if (slots.size() == 0 && containedObjects.size() == 0)
 				return;

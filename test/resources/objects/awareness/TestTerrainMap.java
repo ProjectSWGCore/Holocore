@@ -81,7 +81,7 @@ public class TestTerrainMap {
 			objB.setLocation(new Location(5, 0, 5, Terrain.TATOOINE));
 			objB.moveToContainer(cell);
 			map.moveToParent(objB, cell); // 0 - Within Range, 0 - Successful Move
-			callback.waitAndTest(2, 0, 2, 0, 1000);
+			callback.waitAndTest(1, 0, 2, 0, 1000);
 		} finally {
 			map.stop();
 		}

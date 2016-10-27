@@ -35,12 +35,15 @@ import intents.object.MoveObjectIntent;
 import intents.object.ObjectCreatedIntent;
 import intents.object.ObjectTeleportIntent;
 import intents.player.PlayerTransformedIntent;
-
+import main.ProjectSWG;
 import network.packets.Packet;
 import network.packets.swg.zone.CmdSceneReady;
+import network.packets.swg.zone.insertion.CmdStartScene;
 import network.packets.swg.zone.object_controller.DataTransform;
 import network.packets.swg.zone.object_controller.DataTransformWithParent;
 import resources.Location;
+import resources.Race;
+import resources.Terrain;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.SWGObject;
@@ -139,12 +142,20 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 			case PE_DESTROYED:
 				creature.setOwner(null);
 				break;
+			case PE_ZONE_IN_CLIENT:
+				startScene(creature);
+				break;
 			case PE_ZONE_IN_SERVER:
 				creature.resetAwareness();
 				if (creature.getParent() == null)
 					moveObject(creature, creature.getLocation());
-				else
+				else {
+					for (SWGObject obj : creature.getSuperParent().getObjectsAware()) {
+						obj.createObject(creature);
+						creature.createObject(obj);
+					}
 					moveObject(creature, creature.getParent(), creature.getLocation());
+				}
 				p.sendPacket(new CmdSceneReady());
 				break;
 			default:
@@ -168,11 +179,8 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 		SWGObject object = oti.getObject();
 		Player owner = object.getOwner();
 		object.setLocation(oti.getNewLocation());
-		if (oti.getParent() != null) {
-			moveObject(object, oti.getParent(), null);
-		} else {
-			moveObject(object, null);
-		}
+		if (oti.getParent() != object.getParent())
+			object.moveToContainer(oti.getParent());
 		if (object instanceof CreatureObject && ((CreatureObject) object).isLoggedInPlayer())
 			new RequestZoneInIntent(owner, (CreatureObject) object, false).broadcast();
 	}
@@ -200,10 +208,28 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 	}
 	
 	private void processMoveObjectIntent(MoveObjectIntent i) {
-		if (i.getParent() != null)
+		if (i.getParent() == null)
 			moveObjectWithTransform(i.getObject(), i.getNewLocation(), i.getSpeed(), i.getUpdateCounter());
 		else
 			moveObjectWithTransform(i.getObject(), i.getParent(), i.getNewLocation(), i.getSpeed(), i.getUpdateCounter());
+	}
+	
+	private void startScene(SWGObject obj) {
+		Location loc = obj.getWorldLocation();
+		long time = ProjectSWG.getGalacticTime();
+		Race race = ((CreatureObject) obj).getRace();
+		boolean ignoreSnapshots = loc.getTerrain() == Terrain.DEV_AREA;
+		Player owner = obj.getOwner();
+		owner.sendPacket(new CmdStartScene(ignoreSnapshots, obj.getObjectId(), race, loc, time, (int)(System.currentTimeMillis()/1E3)));
+		recursiveCreateObject(obj, owner);
+	}
+	
+	private void recursiveCreateObject(SWGObject obj, Player owner) {
+		SWGObject parent = obj.getParent();
+		if (parent != null)
+			recursiveCreateObject(parent, owner);
+		else
+			obj.createObject(owner, true);
 	}
 	
 	private void moveObject(SWGObject obj, Location requestedLocation) {

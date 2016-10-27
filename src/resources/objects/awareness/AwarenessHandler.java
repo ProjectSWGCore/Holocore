@@ -38,6 +38,7 @@ import resources.objects.SWGObject;
 import resources.objects.awareness.TerrainMap.TerrainMapCallback;
 import resources.player.Player;
 import resources.server_info.Log;
+import utilities.AwarenessUtilities;
 
 public class AwarenessHandler {
 	
@@ -96,16 +97,16 @@ public class AwarenessHandler {
 		if (obj.getParent() != parent)
 			obj.moveToContainer(parent);
 		// Remove from previous awareness
-		TerrainMap oldTerrain = getTerrainMap(obj);
-		if (oldTerrain != null)
-			oldTerrain.removeWithoutUpdate(obj);
+		TerrainMap oldMap = getTerrainMap(requestedLocation.getTerrain());
+		if (oldMap != null)
+			oldMap.removeWithoutUpdate(obj);
 		// Update location
 		obj.setLocation(requestedLocation);
 		// Update awareness
 		TerrainMap map = getTerrainMap(parent);
 		if (map != null) {
 			map.moveToParent(obj, parent);
-			handleUpdateAwarenessManual(obj, oldAware, oldObservers, obj.getObjectsAware(), obj.getObservers());
+			AwarenessUtilities.handleUpdateAwarenessManual(obj, oldAware, oldObservers, obj.getObjectsAware(), obj.getObservers());
 		} else if (!requestedLocation.equals(GONE_LOCATION)) {
 			Log.e(this, "Unknown terrain: %s", requestedLocation.getTerrain());
 		}
@@ -117,29 +118,6 @@ public class AwarenessHandler {
 			obj.clearObjectsAware();
 		if (disappearCustom)
 			obj.clearCustomAware(true);
-	}
-	
-	private void handleUpdateAwarenessManual(SWGObject obj, Set<SWGObject> oldAware, Set<Player> oldObservers, Set<SWGObject> newAware, Set<Player> newObservers) {
-		// Create obj for all new observers
-		for (Player nowObserver : newObservers) {
-			if (!oldObservers.remove(nowObserver))
-				obj.createObject(nowObserver);
-		}
-		// Destroy obj for all old observers
-		for (Player oldObserver : oldObservers)
-			obj.destroyObject(oldObserver);
-		
-		Player owner = obj.getOwner();
-		if (owner == null)
-			return;
-		// Create new aware objects for obj
-		for (SWGObject nowAware : newAware) {
-			if (!oldAware.remove(nowAware))
-				nowAware.createObject(owner);
-		}
-		// Destroy old aware objects for obj
-		for (SWGObject old : oldAware)
-			old.destroyObject(owner);
 	}
 	
 	private TerrainMap getTerrainMap(SWGObject object) {

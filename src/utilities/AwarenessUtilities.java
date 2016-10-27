@@ -25,23 +25,71 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
  ***********************************************************************************/
-package network;
+package utilities;
 
-import intents.network.OutboundPacketIntent;
-import utilities.IntentChain;
-import network.packets.Packet;
+import java.util.Set;
 
-public class OutboundPacketService {
+import resources.objects.SWGObject;
+import resources.player.Player;
+
+public class AwarenessUtilities {
 	
-	private final IntentChain chain = new IntentChain();
-	
-	public void send(long networkId, Packet ... packets) {
-		for (Packet packet : packets)
-			send(networkId, packet);
+	public static void handleUpdateAwarenessManual(SWGObject obj, Set<SWGObject> oldAware, Set<Player> oldObservers, Set<SWGObject> newAware, Set<Player> newObservers) {
+		callForNewObserver(oldObservers, newObservers, (observer) -> obj.createObject(observer.getCreatureObject()));
+		callForOldObserver(oldObservers, newObservers, (observer) -> obj.destroyObject(observer.getCreatureObject()));
+		
+		callForNewAware(oldAware, newAware, (aware) -> aware.createObject(obj));
+		callForOldAware(oldAware, newAware, (aware) -> aware.destroyObject(obj));
 	}
 	
-	public void send(long networkId, Packet packet) {
-		chain.broadcastAfter(new OutboundPacketIntent(packet, networkId));
+	public static void callForNewObserver(Set<Player> oldObservers, Set<Player> newObservers, ObserverBasedRunnable r) {
+		for (Player newObserver : newObservers) {
+			if (!oldObservers.contains(newObserver))
+				r.run(newObserver);
+		}
+	}
+	
+	public static void callForOldObserver(Set<Player> oldObservers, Set<Player> newObservers, ObserverBasedRunnable r) {
+		for (Player oldObserver : oldObservers) {
+			if (!newObservers.contains(oldObserver))
+				r.run(oldObserver);
+		}
+	}
+	
+	public static void callForSameObserver(Set<Player> oldObservers, Set<Player> newObservers, ObserverBasedRunnable r) {
+		for (Player newObserver : newObservers) {
+			if (oldObservers.contains(newObserver))
+				r.run(newObserver);
+		}
+	}
+	
+	public static void callForNewAware(Set<SWGObject> oldAware, Set<SWGObject> newAware, AwareBasedRunnable r) {
+		for (SWGObject aware : newAware) {
+			if (!oldAware.contains(aware))
+				r.run(aware);
+		}
+	}
+	
+	public static void callForOldAware(Set<SWGObject> oldAware, Set<SWGObject> newAware, AwareBasedRunnable r) {
+		for (SWGObject aware : oldAware) {
+			if (!newAware.contains(aware))
+				r.run(aware);
+		}
+	}
+	
+	public static void callForSameAware(Set<SWGObject> oldAware, Set<SWGObject> newAware, AwareBasedRunnable r) {
+		for (SWGObject aware : newAware) {
+			if (oldAware.contains(aware))
+				r.run(aware);
+		}
+	}
+	
+	public interface AwareBasedRunnable {
+		void run(SWGObject aware);
+	}
+	
+	public interface ObserverBasedRunnable {
+		void run(Player owner);
 	}
 	
 }

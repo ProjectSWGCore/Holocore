@@ -36,7 +36,9 @@ import resources.Location;
 import resources.Terrain;
 import resources.callback.CallbackManager;
 import resources.objects.SWGObject;
+import resources.objects.creature.CreatureObject;
 import resources.server_info.Log;
+import utilities.AwarenessUtilities;
 
 public class TerrainMap {
 	
@@ -87,11 +89,7 @@ public class TerrainMap {
 	}
 	
 	public void moveToParent(SWGObject obj, SWGObject parent) {
-		SWGObject superParent = obj.getSuperParent();
-		if (superParent != null) {
-			superParent.removeObjectAware(obj); // Just in case
-			update(superParent);
-		}
+		obj.resetAwareness();
 	}
 	
 	public void removeWithoutUpdate(SWGObject obj) {
@@ -127,16 +125,10 @@ public class TerrainMap {
 	}
 	
 	private void update(SWGObject obj) {
-		Set<SWGObject> aware = getNearbyAware(obj);
 		Set<SWGObject> prevAware = obj.getObjectsAware();
-		for (SWGObject inRange : aware) {
-			if (!prevAware.remove(inRange)) {
-				callbackManager.callOnEach((call) -> call.onWithinRange(obj, inRange));
-			}
-		}
-		for (SWGObject outRange : prevAware) {
-			callbackManager.callOnEach((call) -> call.onOutOfRange(obj, outRange));
-		}
+		Set<SWGObject> aware = getNearbyAware(obj);
+		AwarenessUtilities.callForNewAware(prevAware, aware, (inRange)  -> callbackManager.callOnEach((call) -> call.onWithinRange(obj, inRange)));
+		AwarenessUtilities.callForOldAware(prevAware, aware, (outRange) -> callbackManager.callOnEach((call) -> call.onOutOfRange(obj, outRange)));
 	}
 	
 	private Set<SWGObject> getNearbyAware(SWGObject obj) {
@@ -154,7 +146,11 @@ public class TerrainMap {
 	}
 	
 	private boolean isInAwareness(SWGObject obj) {
-		return obj.getParent() == null;
+		if (obj.getParent() != null)
+			return false;
+		if (!(obj instanceof CreatureObject))
+			return true;
+		return ((CreatureObject) obj).isLoggedInPlayer() || !((CreatureObject) obj).isPlayer();
 	}
 	
 	private TerrainMapChunk getChunk(double x, double z) {

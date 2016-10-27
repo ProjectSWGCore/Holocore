@@ -28,12 +28,9 @@
 package resources.objects.awareness;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
-
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -49,20 +46,45 @@ import services.objects.ClientBuildoutService;
 public class TestAwarenessHandler {
 	
 	private static final Location CREATURE_LOCATION = new Location(3618, 5, -4801, Terrain.TATOOINE);
+	private static final Location CREATURE2_LOCATION = new Location(3650, 5, -4800, Terrain.TATOOINE);
 	
-	private List<SWGObject> eisleyObjects = new ArrayList<>();
+	private static final List<SWGObject> EISLEY_OBJECTS = new ArrayList<>(2524);
+	private static final List<SWGObject> WITHIN_RANGE = new ArrayList<>(537);
 	
-	@Before
-	public void initTatooine() {
+	private static final GenericCreatureObject CREATURE2 = new GenericCreatureObject(2);
+	private static final GenericCreatureObject CREATURE3 = new GenericCreatureObject(3);
+	
+	@BeforeClass
+	public static void initTatooine() {
 		ClientBuildoutService buildoutService = new ClientBuildoutService();
-		Collection<SWGObject> allObjects = buildoutService.loadClientObjectsByArea(843); // mos eisley's area id
-		eisleyObjects = allObjects.stream().filter((obj) -> {
-			return obj.getTerrain() == Terrain.TATOOINE && obj.getParent() == null;
-		}).collect(Collectors.toList());
-		allObjects = buildoutService.loadClientObjectsByArea(-59); // general tatooine's area id
-		eisleyObjects.addAll(allObjects.stream().filter((obj) -> {
-			return obj.getTerrain() == Terrain.TATOOINE && obj.getParent() == null && CREATURE_LOCATION.isWithinFlatDistance(obj.getLocation(), 1024*Math.sqrt(2));
-		}).collect(Collectors.toList()));
+		double loadDistance = 1024*1.414; // 1024 * sqrt(2)
+		for (SWGObject obj : buildoutService.loadClientObjectsByArea(843)) { // mos eisley's area id
+			initObject(obj, loadDistance);
+		}
+		for (SWGObject obj : buildoutService.loadClientObjectsByArea(-59)) { // general tatooine's area id
+			initObject(obj, loadDistance);
+		}
+		CREATURE2.setLocation(CREATURE2_LOCATION);
+		initObject(CREATURE2, loadDistance);
+		CREATURE3.setLocation(CREATURE2_LOCATION);
+		CREATURE3.setHasOwner(false);
+		initObject(CREATURE3, loadDistance);
+	}
+	
+	private static void initObject(SWGObject obj, double loadDistance) {
+		if (obj.getParent() == null && CREATURE_LOCATION.isWithinFlatDistance(obj.getLocation(), loadDistance)) {
+			EISLEY_OBJECTS.add(obj);
+			if (isValidWithinRange(obj, CREATURE_LOCATION, Math.max(obj.getLoadRange(), 200)))
+				WITHIN_RANGE.add(obj);
+		}
+	}
+	
+	private static boolean isValidWithinRange(SWGObject inRange, Location objLocation, double range) {
+		if (inRange instanceof CreatureObject && ((CreatureObject) inRange).isLoggedOutPlayer())
+			return false;
+		if (!inRange.getWorldLocation().isWithinFlatDistance(objLocation, Math.max(range, inRange.getLoadRange())))
+			return false;
+		return true;
 	}
 	
 	@Test
@@ -70,39 +92,28 @@ public class TestAwarenessHandler {
 		MapCallbackRealistic callback = new MapCallbackRealistic();
 		AwarenessHandler awareness = new AwarenessHandler(callback);
 		GenericCreatureObject creature = new GenericCreatureObject(1);
-		List<SWGObject> withinRange = new ArrayList<>();
-		for (SWGObject obj : eisleyObjects) {
-			awareness.moveObject(obj, obj.getLocation());
-			if (isValidWithinRange(creature, obj, CREATURE_LOCATION, Math.max(obj.getLoadRange(), creature.getLoadRange())))
-				withinRange.add(obj);
-		}
-		callback.waitFor(0, 0, eisleyObjects.size(), 0, 1000);
-		callback.set(0, 0, 0, 0);
+		initAwareness(awareness, callback);
 		awareness.moveObject(creature, CREATURE_LOCATION);
-		callback.waitAndTest(withinRange.size(), 0, 1, 0, 1000);
+		callback.waitAndTest(WITHIN_RANGE.size(), 0, 1, 0, 1000);
 		callback.set(0, 0, 0, 0);
 		awareness.moveObject(creature, CREATURE_LOCATION);
 		callback.waitAndTest(0, 0, 1, 0, 1000);
 	}
 	
 	@Test
-	public void testMoveAway() throws InterruptedException {
+	public void testMoveAwayBack() throws InterruptedException {
 		MapCallbackRealistic callback = new MapCallbackRealistic();
 		AwarenessHandler awareness = new AwarenessHandler(callback);
+		initAwareness(awareness, callback);
 		GenericCreatureObject creature = new GenericCreatureObject(1);
-		List<SWGObject> withinRange = new ArrayList<>();
-		for (SWGObject obj : eisleyObjects) {
-			awareness.moveObject(obj, obj.getLocation());
-			if (isValidWithinRange(creature, obj, CREATURE_LOCATION, Math.max(obj.getLoadRange(), creature.getLoadRange())))
-				withinRange.add(obj);
-		}
-		callback.waitFor(0, 0, eisleyObjects.size(), 0, 1000);
-		callback.set(0, 0, 0, 0);
 		awareness.moveObject(creature, CREATURE_LOCATION);
-		callback.waitAndTest(withinRange.size(), 0, 1, 0, 1000);
+		callback.waitAndTest(WITHIN_RANGE.size(), 0, 1, 0, 1000);
 		callback.set(0, 0, 0, 0);
 		awareness.moveObject(creature, new Location(0, 0, 0, Terrain.TATOOINE));
-		callback.waitAndTest(0, withinRange.size(), 1, 0, 1000);
+		callback.waitAndTest(0, WITHIN_RANGE.size(), 1, 0, 1000);
+		callback.set(0, 0, 0, 0);
+		awareness.moveObject(creature, CREATURE_LOCATION);
+		callback.waitAndTest(WITHIN_RANGE.size(), 0, 1, 0, 1000);
 	}
 	
 	@Test
@@ -110,34 +121,27 @@ public class TestAwarenessHandler {
 		MapCallbackRealistic callback = new MapCallbackRealistic();
 		AwarenessHandler awareness = new AwarenessHandler(callback);
 		GenericCreatureObject creature = new GenericCreatureObject(1);
-		List<SWGObject> withinRange = new ArrayList<>();
 		BuildingObject starport = null;
-		for (SWGObject obj : eisleyObjects) {
-			awareness.moveObject(obj, obj.getLocation());
-			if (isValidWithinRange(creature, obj, CREATURE_LOCATION, Math.max(obj.getLoadRange(), creature.getLoadRange()))) {
-				withinRange.add(obj);
-				if (obj instanceof BuildingObject && obj.getTemplate().contains("starport"))
-					starport = (BuildingObject) obj;
-			}
+		for (SWGObject obj : WITHIN_RANGE) {
+			if (obj instanceof BuildingObject && obj.getTemplate().contains("starport"))
+				starport = (BuildingObject) obj;
 		}
 		Assert.assertNotNull("Starport is null!", starport);
-		callback.waitFor(0, 0, eisleyObjects.size(), 0, 1000);
-		callback.set(0, 0, 0, 0);
+		initAwareness(awareness, callback);
 		awareness.moveObject(creature, CREATURE_LOCATION);
-		callback.waitAndTest(withinRange.size(), 0, 1, 0, 1000);
+		callback.waitAndTest(WITHIN_RANGE.size(), 0, 1, 0, 1000);
 		callback.set(0, 0, 0, 0);
 		awareness.moveObject(creature, starport.getCellByNumber(1), new Location(0, 0, 0, Terrain.TATOOINE));
-		callback.waitAndTest(0, 0, 0, 0, 1000);
+		awareness.moveObject(CREATURE2, CREATURE2_LOCATION);
+		callback.waitAndTest(0, 0, 1, 0, 1000);
 	}
 	
-	private boolean isValidWithinRange(SWGObject obj, SWGObject inRange, Location objLocation, double range) {
-		if (obj.equals(inRange))
-			return false;
-		if (inRange instanceof CreatureObject && ((CreatureObject) inRange).isLoggedOutPlayer())
-			return false;
-		if (!inRange.getWorldLocation().isWithinFlatDistance(objLocation, Math.max(range, inRange.getLoadRange())))
-			return false;
-		return true;
+	private void initAwareness(AwarenessHandler awareness, MapCallback callback) {
+		for (SWGObject obj : EISLEY_OBJECTS) {
+			awareness.moveObject(obj, obj.getLocation());
+		}
+		callback.waitFor(0, 0, EISLEY_OBJECTS.size(), 0, 1000);
+		callback.set(0, 0, 0, 0);
 	}
 	
 	private static class MapCallbackRealistic extends MapCallback {
