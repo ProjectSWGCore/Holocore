@@ -29,7 +29,6 @@ package services.experience;
 
 import intents.experience.GrantSkillIntent;
 import intents.network.GalacticPacketIntent;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -172,8 +171,13 @@ public final class ExpertiseService extends Service {
 					
 				new GrantSkillIntent(requestedSkill, creatureObject).broadcast();
 				// TODO based on their level, they may have unlocked new marks of the abilities given by this expertise skill
+				grantExtraAbilities(creatureObject.getLevel(), requestedSkill);
 			}
 		}
+	}
+	
+	private void grantExtraAbilities(short level, String expertiseSkill) {
+		
 	}
 	
 	private String formatProfession(String profession) {
