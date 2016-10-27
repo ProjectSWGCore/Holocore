@@ -1,0 +1,9 @@
+name	standardItemCost	staticItemCost
+TEXT	INTEGER	FLOAT
+GOT_armor	1	0.2
+GOT_weapon	5	1.0
+GOT_clothing	10	2.0
+GOT_tool	10	2.0
+GOT_cybernetic	10	2.0
+GOT_jewelry	10	2.0
+object/weapon/ranged/pistol/pistol_cdef.iff	2	1.0

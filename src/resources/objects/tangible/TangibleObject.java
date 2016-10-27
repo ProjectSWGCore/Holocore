@@ -61,6 +61,7 @@ public class TangibleObject extends SWGObject {
 	private byte []	objectEffects	= new byte[0];
 	private int     optionFlags     = 0;
 	private int		counter			= 0;
+	private String	currentCity				= "";
 	
 	private SWGSet<Long>	defenders	= new SWGSet<>(6, 3);
 	
@@ -253,17 +254,30 @@ public class TangibleObject extends SWGObject {
 	}
 	
 	public boolean isEnemy(TangibleObject otherObject) {
-		// They CAN be enemies if they're not from the same faction and neither of them are neutral
-		PvpFaction otherFaction = otherObject.getPvpFaction();
-		
-		if (otherFaction != PvpFaction.NEUTRAL && getPvpFaction() != otherFaction) {
-			if (getPvpStatus() != PvpStatus.ONLEAVE && otherObject.getPvpStatus() != PvpStatus.ONLEAVE) {
-				// Both objects are not players. In this case, both just need to be combatants.
-				return true;
-			}
+		if (otherObject.hasOptionFlags(OptionFlag.INVULNERABLE)) {
+			return false;
 		}
 		
-		return false;
+		if (otherObject.hasPvpFlag(PvpFlag.ATTACKABLE)) {
+			return true;
+		}
+		
+		if (otherObject instanceof CreatureObject && ((CreatureObject) otherObject).isPlayer()) {
+			return false;
+		} 
+		
+		PvpFaction otherFaction = otherObject.getPvpFaction();
+		
+		return otherFaction != PvpFaction.NEUTRAL && getPvpFaction() != otherFaction
+				&& getPvpStatus() != PvpStatus.ONLEAVE && otherObject.getPvpStatus() != PvpStatus.ONLEAVE;
+	}
+
+	public String getCurrentCity() {
+		return currentCity;
+	}
+
+	public void setCurrentCity(String currentCity) {
+		this.currentCity = currentCity;
 	}
 	
 	@Override

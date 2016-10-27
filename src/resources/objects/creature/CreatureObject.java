@@ -31,6 +31,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
+import java.util.Locale;
+import java.util.Map;
+import java.util.function.BiConsumer;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 import network.packets.swg.zone.UpdatePostureMessage;
 import network.packets.swg.zone.UpdatePvpStatusMessage;
@@ -38,11 +43,13 @@ import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import network.packets.swg.zone.object_controller.PostureUpdate;
 import resources.HologramColour;
 import resources.Posture;
+import resources.PvpFaction;
 import resources.PvpFlag;
 import resources.PvpStatus;
 import resources.Race;
 import resources.collections.SWGList;
 import resources.collections.SWGSet;
+import resources.common.CRC;
 import resources.network.BaselineBuilder;
 import resources.network.NetBuffer;
 import resources.network.NetBufferStream;
@@ -72,7 +79,6 @@ public class CreatureObject extends TangibleObject {
 	private long 	ownerId					= 0;
 	private int 	battleFatigue			= 0;
 	private long 	statesBitmask			= 0;
-	private String	currentCity				= "";
 	private long	lastTransform			= 0;
 	
 	private SWGSet<String>		skills				= new SWGSet<String>(1, 3, StringType.ASCII);
@@ -99,6 +105,7 @@ public class CreatureObject extends TangibleObject {
 		removeEquipment(obj);
 	}
 	
+	@Override
 	protected void handleSlotReplacement(SWGObject oldParent, SWGObject obj, int arrangement) {
 		SWGObject inventory = getSlottedObject("inventory");
 		for (String slot : obj.getArrangement().get(arrangement-4)) {
@@ -227,10 +234,6 @@ public class CreatureObject extends TangibleObject {
 	
 	public CreatureDifficulty getDifficulty() {
 		return creo6.getDifficulty();
-	}
-	
-	public String getCurrentCity() {
-		return currentCity;
 	}
 	
 	public double getTimeSinceLastTransform() {
@@ -411,10 +414,6 @@ public class CreatureObject extends TangibleObject {
 		sendDelta(6, 26, difficulty.getDifficulty());
 	}
 	
-	public void setCurrentCity(String currentCity) {
-		this.currentCity = currentCity;
-	}
-	
 	public void updateLastTransformTime() {
 		lastTransform = System.nanoTime();
 	}
@@ -588,12 +587,40 @@ public class CreatureObject extends TangibleObject {
 		sendDelta(3, 18, statesBitmask);
 	}
 
-	public void adjustSkillmod(String skillModName, int base, int modifier) {
+	public synchronized void adjustSkillmod(String skillModName, int base, int modifier) {
 		creo4.adjustSkillmod(skillModName, base, modifier, this);
 	}
 	
 	public int getSkillModValue(String skillModName) {
 		return creo4.getSkillModValue(skillModName);
+	}
+	
+	public void addBuff(CRC buffCrc, Buff buff) {
+		creo6.putBuff(buffCrc, buff, this);
+	}
+	
+	public Buff removeBuff(CRC buffCrc) {
+		return creo6.removeBuff(buffCrc, this);
+	}
+	
+	public boolean hasBuff(String buffName) {
+		return getBuffEntries(buffEntry -> new CRC(buffName.toLowerCase(Locale.ENGLISH)).equals(buffEntry.getKey())).count() > 0;
+	}
+	
+	public Stream<Map.Entry<CRC, Buff>> getBuffEntries(Predicate<Map.Entry<CRC, Buff>> predicate) {
+		return creo6.getBuffEntries(predicate);
+	}
+	
+	public void adjustBuffStackCount(CRC buffCrc, int adjustment) {
+		creo6.adjustBuffStackCount(buffCrc, adjustment, this);
+	}
+	
+	public void setBuffDuration(CRC buffCrc, int playTime, int duration) {
+		creo6.setBuffDuration(buffCrc, playTime, duration, this);
+	}
+	
+	public void forEachBuff(BiConsumer<CRC, Buff> action) {
+		creo6.forEachBuff(action);
 	}
 	
 	public boolean isVisible() {
@@ -771,23 +798,15 @@ public class CreatureObject extends TangibleObject {
 
 	@Override
 	public boolean isEnemy(TangibleObject otherObject) {
-		boolean enemy = super.isEnemy(otherObject);
+		boolean tangibleEnemy = super.isEnemy(otherObject);
 		
-		if(enemy) {
-			// If these are both creatures, there's a chance both of them are players!
-			if (this instanceof CreatureObject && otherObject instanceof CreatureObject) {
-				CreatureObject thisCreature = (CreatureObject) this;
-				CreatureObject otherCreature = (CreatureObject) otherObject;
-
-				// If they're both players, both of them might be special force
-				if (thisCreature.isPlayer() && otherCreature.isPlayer()) {
-					// They are enemies if they're both players and members of the special force!
-					return getPvpStatus() == PvpStatus.SPECIALFORCES && otherObject.getPvpStatus() == PvpStatus.SPECIALFORCES;
-				}
-			}
+		if (tangibleEnemy || !(otherObject instanceof CreatureObject)) {
+			return tangibleEnemy;
 		}
 		
-		return enemy;
+		return isPlayer() && ((CreatureObject) otherObject).isPlayer()
+				&& getPvpStatus() == PvpStatus.SPECIALFORCES
+				&& otherObject.getPvpStatus() == PvpStatus.SPECIALFORCES;
 	}
 	
 	@Override

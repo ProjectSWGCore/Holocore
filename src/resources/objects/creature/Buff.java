@@ -27,14 +27,13 @@
  ***********************************************************************************/
 package resources.objects.creature;
 
-import java.io.Serializable;
 import java.nio.ByteBuffer;
 import resources.encodables.Encodable;
 import resources.network.NetBuffer;
+import resources.network.NetBufferStream;
+import resources.persistable.Persistable;
 
-public class Buff implements Encodable, Serializable {
-	
-	private static final long serialVersionUID = 1;
+public class Buff implements Encodable, Persistable {
 	
 	private int endTime;
 	private float value;
@@ -72,6 +71,24 @@ public class Buff implements Encodable, Serializable {
 		data.addLong(bufferId);
 		data.addInt(stackCount);
 		return data.array();
+	}
+	
+	@Override
+	public void save(NetBufferStream stream) {
+		stream.addInt(endTime);
+		stream.addFloat(value);
+		stream.addInt(duration);
+		stream.addLong(bufferId);
+		stream.addInt(stackCount);
+	}
+
+	@Override
+	public void read(NetBufferStream stream) {
+		endTime = stream.getInt();
+		value = stream.getFloat();
+		duration = stream.getInt();
+		bufferId = stream.getLong();
+		stackCount = stream.getInt();
 	}
 	
 	public int getEndTime() {
@@ -122,5 +139,5 @@ public class Buff implements Encodable, Serializable {
 	public String toString() {
 		return String.format("Buff[End=%d Value=%f Duration=%d Buffer=%d StackCount=%d]", endTime, value, duration, bufferId, stackCount);
 	}
-	
+
 }

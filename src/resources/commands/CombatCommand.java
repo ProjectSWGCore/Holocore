@@ -32,6 +32,7 @@ import java.util.Map;
 
 import resources.combat.AttackType;
 import resources.combat.DamageType;
+import resources.combat.HitType;
 import resources.combat.ValidTarget;
 import resources.objects.weapon.WeaponType;
 
@@ -48,6 +49,11 @@ public class CombatCommand extends Command {
 	private boolean ignoreDistance;
 	private boolean pvpOnly;
 	private int attackRolls;
+	private float percentAddFromWeapon;
+	private int addedDamage;
+	private String buffNameTarget;
+	private String buffNameSelf;
+	private HitType hitType;
 	
 	public CombatCommand(String name) {
 		super(name);
@@ -146,5 +152,45 @@ public class CombatCommand extends Command {
 	public void setAnimations(WeaponType type, String [] animations) {
 		this.animations.put(type, animations);
 	}
+
+	public float getPercentAddFromWeapon() {
+		return percentAddFromWeapon;
+	}
+
+	public void setPercentAddFromWeapon(float percentAddFromWeapon) {
+		this.percentAddFromWeapon = percentAddFromWeapon;
+	}
+
+	public int getAddedDamage() {
+		return addedDamage;
+	}
 	
+	public void setAddedDamage(int addedDamage) {
+		this.addedDamage = addedDamage;
+	}
+
+	public String getBuffNameTarget() {
+		return buffNameTarget;
+	}
+
+	public void setBuffNameTarget(String buffNameTarget) {
+		this.buffNameTarget = buffNameTarget;
+	}
+
+	public String getBuffNameSelf() {
+		return buffNameSelf;
+	}
+
+	public void setBuffNameSelf(String buffNameSelf) {
+		this.buffNameSelf = buffNameSelf;
+	}
+
+	public HitType getHitType() {
+		return hitType;
+	}
+
+	public void setHitType(HitType hitType) {
+		this.hitType = hitType;
+	}
+
 }

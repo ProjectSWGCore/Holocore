@@ -406,6 +406,8 @@ public class CharacterCreationService extends Service {
 		defWeapon.setMaxRange(5);
 		defWeapon.setType(WeaponType.UNARMED);
 		defWeapon.setAttackSpeed(1);
+		defWeapon.setMinDamage(50);
+		defWeapon.setMaxDamage(100);
 		creatureObj.setEquippedWeapon(defWeapon);
 		defWeapon.moveToContainer(creatureObj);	// Occupies the default_weapon slot
 		createInventoryObject(objManager, creatureObj, "object/tangible/inventory/shared_character_inventory.iff");

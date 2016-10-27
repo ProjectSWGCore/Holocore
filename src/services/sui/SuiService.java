@@ -29,6 +29,7 @@ package services.sui;
 
 import intents.network.GalacticPacketIntent;
 import intents.sui.SuiWindowIntent;
+import java.io.FileNotFoundException;
 import network.packets.Packet;
 import network.packets.swg.SWGPacket;
 import network.packets.swg.zone.server_ui.SuiCreatePageMessage;
@@ -49,6 +50,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class SuiService extends Service {
 
@@ -149,7 +152,11 @@ public class SuiService extends Service {
 
 		if (window.hasCallbackFunction(callback)) {
 			String script = window.getCallbackScript(callback);
-			Scripts.invoke(script, callback, player, player.getCreatureObject(), event, parameters);
+			try {
+				Scripts.invoke(script, callback, player, player.getCreatureObject(), event, parameters);
+			} catch (FileNotFoundException ex) {
+				Log.e(this, "Callback script %s not found", script);
+			}
 		} else if (window.hasJavaCallback(callback)) {
 			ISuiCallback suiCallback = window.getJavaCallback(callback);
 			suiCallback.handleEvent(player, player.getCreatureObject(), event, parameters);
