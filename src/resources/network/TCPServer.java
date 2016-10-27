@@ -33,6 +33,7 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
 import java.nio.ByteBuffer;
+import java.nio.channels.AsynchronousCloseException;
 import java.nio.channels.ClosedByInterruptException;
 import java.nio.channels.ClosedChannelException;
 import java.nio.channels.SelectableChannel;
@@ -248,7 +249,10 @@ public class TCPServer {
 					if (callback != null)
 						callbackExecutor.execute(() -> callback.onIncomingConnection(sc.socket()));
 				}
+			} catch (AsynchronousCloseException e) {
+				
 			} catch (IOException e) {
+				Log.a(this, e);
 			}
 		}
 		
