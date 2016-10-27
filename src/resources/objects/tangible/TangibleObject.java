@@ -254,16 +254,22 @@ public class TangibleObject extends SWGObject {
 	}
 	
 	public boolean isEnemy(TangibleObject otherObject) {
-		// They CAN be enemies if they're not from the same faction and neither of them are neutral
-		PvpFaction otherFaction = otherObject.getPvpFaction();
-		
-		if (hasPvpFlag(PvpFlag.ATTACKABLE) || otherObject.hasPvpFlag(PvpFlag.ATTACKABLE)) {
-			return true;
-		} else if (otherFaction != PvpFaction.NEUTRAL && getPvpFaction() != otherFaction) {
-			return getPvpStatus() != PvpStatus.ONLEAVE && otherObject.getPvpStatus() != PvpStatus.ONLEAVE;
-		} else {
+		if (otherObject.hasOptionFlags(OptionFlag.INVULNERABLE)) {
 			return false;
 		}
+		
+		if (otherObject.hasPvpFlag(PvpFlag.ATTACKABLE)) {
+			return true;
+		}
+		
+		if (otherObject instanceof CreatureObject && ((CreatureObject) otherObject).isPlayer()) {
+			return false;
+		} 
+		
+		PvpFaction otherFaction = otherObject.getPvpFaction();
+		
+		return otherFaction != PvpFaction.NEUTRAL && getPvpFaction() != otherFaction
+				&& getPvpStatus() != PvpStatus.ONLEAVE && otherObject.getPvpStatus() != PvpStatus.ONLEAVE;
 	}
 
 	public String getCurrentCity() {
