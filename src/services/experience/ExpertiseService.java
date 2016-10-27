@@ -185,7 +185,8 @@ public final class ExpertiseService extends Service {
 				if (expertiseRank > 1 && !hasRank(tree, expertiseRank - 1, creatureObject)) {
 					// Ranked expertise requires investment in the previous rank
 					// If they have no expertise of a rank that's lower than this one, then reject them
-					// We don't need to check parent skills, since SkillManager already does that
+					// We don't need to check parent skill names, since SkillManager already does that - rank value will do
+					Log.i(this, "%s attempted to train expertise skill %s without having trained the parent skill");
 					continue;
 				}
 					
