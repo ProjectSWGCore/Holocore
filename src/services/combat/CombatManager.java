@@ -473,9 +473,7 @@ public class CombatManager extends Manager {
 		if (!(target instanceof TangibleObject))
 			return CombatStatus.INVALID_TARGET;
 		
-		TangibleObject tangibleTarget = (TangibleObject) target;
-
-		if (!tangibleTarget.isEnemy(source)) {
+		if (!source.isEnemy((TangibleObject) target)) {
 			return CombatStatus.INVALID_TARGET;
 		}
 		
