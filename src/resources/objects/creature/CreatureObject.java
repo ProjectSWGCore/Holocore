@@ -795,19 +795,19 @@ public class CreatureObject extends TangibleObject {
 
 	@Override
 	public boolean isEnemy(TangibleObject otherObject) {
-		boolean enemy = super.isEnemy(otherObject);
-		
-		if (enemy && otherObject instanceof CreatureObject) {
-			PvpStatus ourStatus = getPvpStatus();
-			PvpStatus theirStatus = otherObject.getPvpStatus();
-
-			if (isPlayer() && ((CreatureObject) otherObject).isPlayer()) {
-				// They are enemies if both players are SF
-				return ourStatus == PvpStatus.SPECIALFORCES && theirStatus == PvpStatus.SPECIALFORCES;
-			}
+		if (!super.isEnemy(otherObject)) {
+			return false;
 		}
-
-		return enemy;
+		
+		if (!(otherObject instanceof CreatureObject)) {
+			return false;
+		}
+		
+		if (!isPlayer() || !((CreatureObject) otherObject).isPlayer()) {
+			return false;
+		}
+		
+		return getPvpStatus() == PvpStatus.SPECIALFORCES && otherObject.getPvpStatus() == PvpStatus.SPECIALFORCES;
 	}
 	
 	@Override
