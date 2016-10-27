@@ -27,6 +27,7 @@
  ***********************************************************************************/
 package services.combat;
 
+import intents.BuffIntent;
 import intents.chat.ChatBroadcastIntent;
 import java.awt.Color;
 import java.util.HashMap;
@@ -49,7 +50,6 @@ import java.util.concurrent.Future;
 import resources.Posture;
 import resources.PvpFaction;
 import resources.PvpFlag;
-import resources.combat.AttackInfoLight;
 import resources.combat.AttackType;
 import resources.combat.CombatStatus;
 import resources.combat.HitLocation;
@@ -71,6 +71,8 @@ import utilities.ThreadUtilities;
 
 public class CombatManager extends Manager {
 
+	private static final byte INCAP_TIMER = 10;	// Amount of seconds to be incapacitated
+	
 	private final Map<Long, CombatCreature> inCombat;
 	private final Set<CreatureObject> regeneratingHealthCreatures;	// Only allowed outside of combat
 	private final Set<CreatureObject> regeneratingActionCreatures;	// Always allowed
@@ -207,28 +209,18 @@ public class CombatManager extends Manager {
 		}
 	}
 	
-	private void processChatCommand(ChatCommandIntent cci) {
-		if (!cci.getCommand().isCombatCommand() || !(cci.getCommand() instanceof CombatCommand))
+	private void processChatCommand(ChatCommandIntent intent) {
+		if (!intent.getCommand().isCombatCommand() || !(intent.getCommand() instanceof CombatCommand))
 			return;
-		CombatCommand c = (CombatCommand) cci.getCommand();
-		CombatStatus status = canPerform(cci.getSource(), cci.getTarget(), c);
-		if (!handleStatus(cci.getSource(), status))
-			return;
-		Object res = Scripts.invoke("commands/combat/"+c.getName(), "doCombat", cci.getSource(), cci.getTarget(), c);
-		if (res == null) {
-			handleStatus(cci.getSource(), CombatStatus.UNKNOWN);
-			return;
-		}
-		updateCombatList(cci.getSource());
-		if (cci.getTarget() instanceof CreatureObject)
-			updateCombatList((CreatureObject) cci.getTarget());
-		if (res instanceof Number)
-			doCombat(cci.getSource(), cci.getTarget(), new AttackInfoLight(((Number) res).intValue()), c);
-		else if (res instanceof AttackInfoLight)
-			doCombat(cci.getSource(), cci.getTarget(), (AttackInfoLight) res, c);
-		else {
-			Log.w(this, "Unknown return from combat script: " + res);
-			return;
+		CombatCommand c = (CombatCommand) intent.getCommand();
+		CreatureObject source = intent.getSource();
+		SWGObject target = intent.getTarget();
+		
+		// TODO implement support for remaining HitTypes
+		switch (c.getHitType()) {
+			case ATTACK: handleAttack(source, target, c); break;
+			case BUFF: handleBuff(source, target, c); break;
+			default: handleStatus(source, CombatStatus.UNKNOWN); break;
 		}
 	}
 	
@@ -246,7 +238,10 @@ public class CombatManager extends Manager {
 		combat.updateLastCombat();
 	}
 	
-	private void doCombat(CreatureObject source, SWGObject target, AttackInfoLight info, CombatCommand command) {
+	private void handleAttack(CreatureObject source, SWGObject target, CombatCommand command) {
+		if (!handleStatus(source, canPerform(source, target, command)))
+			return;
+		
 		CombatAction action = new CombatAction(source.getObjectId());
 		String anim = command.getRandomAnimation(source.getEquippedWeapon().getType());
 		action.setActionCrc(CRC.getCrc(anim));
@@ -255,15 +250,36 @@ public class CombatManager extends Manager {
 		action.setCommandCrc(command.getCrc());
 		action.setTrail(TrailLocation.WEAPON);
 		action.setUseLocation(false);
-		if (target instanceof CreatureObject) {
-			if (command.getAttackType() == AttackType.SINGLE_TARGET)
-				doCombatSingle(source, (CreatureObject) target, info, command);
-			action.addDefender((CreatureObject) target, true, (byte) 0, HitLocation.HIT_LOCATION_BODY, (short) info.getDamage());
+		
+		for(int i = 0; i < command.getAttackRolls(); i++) {
+			int damage = 0;
+
+			damage += calculateWeaponDamage(source, command);
+			damage += command.getAddedDamage();
+
+			if (target instanceof CreatureObject) {
+				if (command.getAttackType() == AttackType.SINGLE_TARGET)
+					doCombatSingle(source, (CreatureObject) target, damage, command);
+				action.addDefender((CreatureObject) target, true, (byte) 0, HitLocation.HIT_LOCATION_BODY, (short) damage);
+			}
 		}
+		
 		source.sendObserversAndSelf(action);
 	}
 	
-	private void doCombatSingle(CreatureObject source, CreatureObject target, AttackInfoLight info, CombatCommand command) {
+	private void handleBuff(CreatureObject source, SWGObject target, CombatCommand combatCommand) {
+		addBuff(source, source, combatCommand.getBuffNameSelf());
+		
+		// Only CreatureObjects have buffs
+		if(target instanceof CreatureObject)
+			addBuff(source, (CreatureObject) target, combatCommand.getBuffNameTarget());
+	}
+	
+	private void doCombatSingle(CreatureObject source, CreatureObject target, int damage, CombatCommand command) {
+		updateCombatList(source);
+		if (target instanceof CreatureObject)
+			updateCombatList((CreatureObject) target);
+		
 		if (!source.isInCombat())
 			enterCombat(source);
 		if (!target.isInCombat())
@@ -271,12 +287,12 @@ public class CombatManager extends Manager {
 		target.addDefender(source);
 		source.addDefender(target);
 		
-		addWeaponDamage(source, command, info);
+		addBuff(source, target, command.getBuffNameTarget());	// Add target buff
 		
-		if (target.getHealth() <= info.getDamage())
+		if (target.getHealth() <= damage)
 			doCreatureDeath(target, source);
 		else
-			target.modifyHealth(-info.getDamage());
+			target.modifyHealth(-damage);
 	}
 	
 	private void enterCombat(CreatureObject creature) {
@@ -317,47 +333,45 @@ public class CombatManager extends Manager {
 		}
 	}
 	
-	private void doCreatureDeath(CreatureObject killedCreature, CreatureObject killer) {
-		killedCreature.setHealth(0);
-		killer.removeDefender(killedCreature);
+	private void doCreatureDeath(CreatureObject corpse, CreatureObject killer) {
+		corpse.setHealth(0);
+		killer.removeDefender(corpse);
 		
-		// Let's check if the killer needs to remain in-combat...
 		if(!killer.hasDefenders()) {
-			// They have no active targets they're in combat with, make them exit combat
 			exitCombat(killer);
 		}
 		
 		// The creature should not be able to move or turn.
-		killedCreature.setTurnScale(0);
-		killedCreature.setMovementScale(0);
+		corpse.setTurnScale(0);
+		corpse.setMovementScale(0);
 		
-		// We need to handle this differently, depending on whether killedCreature is a player or not
-		if(killedCreature.isPlayer()) {
-			// TODO account for AI deathblowing players..?
-			// If it's a player, they need to be incapacitated
-			incapacitatePlayer(killer, killedCreature);
+		if(corpse.isPlayer()) {
+			if (corpse.hasBuff("incapWeaken")) {
+				killCreature(killer, corpse);
+			} else {
+				incapacitatePlayer(killer, corpse);
+			}
 		} else {
-			// This is just a plain ol' NPC. Die!
-			killCreature(killer, killedCreature);
+			killCreature(killer, corpse);
 		}
 		
-		exitCombat(killedCreature);
+		exitCombat(corpse);
 	}
 	
-	private void incapacitatePlayer(CreatureObject incapacitator, CreatureObject incapacitatedPlayer) {
-		int incapacitationCounter = 15;
-		incapacitatedPlayer.setPosture(Posture.INCAPACITATED);
-		incapacitatedPlayer.setCounter(incapacitationCounter);
+	private void incapacitatePlayer(CreatureObject incapacitator, CreatureObject incapacitated) {
+		incapacitated.setPosture(Posture.INCAPACITATED);
+		incapacitated.setCounter(INCAP_TIMER);
 		
-		Log.i(this, "%s was incapacitated", incapacitatedPlayer);
+		Log.i(this, "%s was incapacitated", incapacitated);
 		
 		// Once the incapacitation counter expires, revive them.
 		synchronized(incapacitatedCreatures) {
-			incapacitatedCreatures.put(incapacitatedPlayer, executor.schedule(() -> expireIncapacitation(incapacitatedPlayer), incapacitationCounter, TimeUnit.SECONDS));
+			incapacitatedCreatures.put(incapacitated, executor.schedule(() -> expireIncapacitation(incapacitated), INCAP_TIMER, TimeUnit.SECONDS));
 		}
 		
-		new ChatBroadcastIntent(incapacitator.getOwner(), new ProsePackage(new StringId("base_player", "prose_target_incap"), "TT", incapacitatedPlayer.getName())).broadcast();
-		new ChatBroadcastIntent(incapacitatedPlayer.getOwner(), new ProsePackage(new StringId("base_player", "prose_victim_incap"), "TT", incapacitator.getName())).broadcast();
+		new BuffIntent("incapWeaken", incapacitator, incapacitated, false).broadcast();
+		new ChatBroadcastIntent(incapacitator.getOwner(), new ProsePackage(new StringId("base_player", "prose_target_incap"), "TT", incapacitated.getName())).broadcast();
+		new ChatBroadcastIntent(incapacitated.getOwner(), new ProsePackage(new StringId("base_player", "prose_victim_incap"), "TT", incapacitator.getName())).broadcast();
 	}
 	
 	private void expireIncapacitation(CreatureObject incapacitatedPlayer) {
@@ -392,7 +406,7 @@ public class CombatManager extends Manager {
 	
 	private void killCreature(CreatureObject killer, CreatureObject corpse) {
 		corpse.setPosture(Posture.DEAD);
-		Log.i(this, "%s was killed", corpse);
+		Log.i(this, "%s was killed by %s", corpse, killer);
 		new CreatureKilledIntent(killer, corpse).broadcast();
 	}
 	
@@ -422,7 +436,6 @@ public class CombatManager extends Manager {
 			if (incapacitationTimer != null) {
 				if (incapacitationTimer.cancel(false)) {	// If the task is running, let them get back up
 					killCreature(killer, corpse);
-					Log.i(this, "%s was deathblown by %s", corpse, killer);
 				}
 			} else {
 				// Can't happen with the current code, but in case it's ever refactored...
@@ -442,8 +455,7 @@ public class CombatManager extends Manager {
 				showFlyText(source, "@combat_effects:range_too_far", Scale.MEDIUM, Color.CYAN, ShowFlyText.Flag.PRIVATE);
 				return false;
 			default:
-				showFlyText(source, "@combat_effects:cant_attack_fly", Scale.MEDIUM, Color.WHITE, ShowFlyText.Flag.PRIVATE);
-				Log.e(this, "Character unable to attack. Player: %s  Reason: %s", source.getName(), status);
+				showFlyText(source, "@combat_effects:action_failed", Scale.MEDIUM, Color.WHITE, ShowFlyText.Flag.PRIVATE);
 				return false;
 		}
 	}
@@ -451,71 +463,72 @@ public class CombatManager extends Manager {
 	private CombatStatus canPerform(CreatureObject source, SWGObject target, CombatCommand c) {
 		if (source.getEquippedWeapon() == null)
 			return CombatStatus.NO_WEAPON;
+		
+		if (target == null || source.equals(target))
+			return CombatStatus.SUCCESS;
+		
 		if (!(target instanceof TangibleObject))
 			return CombatStatus.INVALID_TARGET;
+		
 		TangibleObject tangibleTarget = (TangibleObject) target;
-		if(tangibleTarget.getPvpFaction() != PvpFaction.NEUTRAL) {
-			if(!tangibleTarget.isEnemy(source)) {
-				return CombatStatus.INVALID_TARGET;
-			}
-		} else if ((tangibleTarget.getPvpFlags() & PvpFlag.ATTACKABLE.getBitmask()) == 0)
+
+		if (!tangibleTarget.isEnemy(source)) {
 			return CombatStatus.INVALID_TARGET;
+		}
 		
 		if(target instanceof CreatureObject) {
-			CreatureObject creature = (CreatureObject) target;
-			
-			switch(creature.getPosture()) {
+			switch(((CreatureObject) target).getPosture()) {
 				case DEAD:
 				case INCAPACITATED:
 					return CombatStatus.INVALID_TARGET;
 			}
 		}
 		
-		CombatStatus status;
 		switch (c.getAttackType()) {
 			case AREA:
 			case TARGET_AREA:
-				status = canPerformArea(source, c);
-				break;
+				return canPerformArea(source, c);
 			case SINGLE_TARGET:
-				status = canPerformSingle(source, target, c);
-				break;
+				return canPerformSingle(source, target, c);
 			default:
-				status = CombatStatus.UNKNOWN;
-				break;
+				return CombatStatus.UNKNOWN;
 		}
-		if (status != CombatStatus.SUCCESS)
-			return status;
-		status = Scripts.invoke("commands/combat/"+c.getName(), "canPerform", source, target, c);
-		if (status == null) {
-			return CombatStatus.UNKNOWN;
-		}
-		return status;
 	}
 	
 	private CombatStatus canPerformSingle(CreatureObject source, SWGObject target, CombatCommand c) {
-		if (target == null || !(target instanceof CreatureObject))
+		if (target == null || !(target instanceof TangibleObject))
 			return CombatStatus.NO_TARGET;
+		
 		WeaponObject weapon = source.getEquippedWeapon();
 		double dist = source.getLocation().distanceTo(target.getLocation());
-		if (dist > weapon.getMaxRange() || (dist > c.getMaxRange() && c.getMaxRange() > 0))
+		float commandRange = c.getMaxRange();
+		float range = commandRange > 0 ? commandRange : weapon.getMaxRange();
+		
+		if (dist > range)
 			return CombatStatus.TOO_FAR;
+		
 		return CombatStatus.SUCCESS;
 	}
 	
 	private CombatStatus canPerformArea(CreatureObject source, CombatCommand c) {
-		return CombatStatus.SUCCESS;
+		// TODO implement AoE
+		return CombatStatus.UNKNOWN;
 	}
 	
-	private void addWeaponDamage(CreatureObject source, CombatCommand command, AttackInfoLight info) {
-		int abilityDamage = info.getDamage();
+	private int calculateWeaponDamage(CreatureObject source, CombatCommand command) {
 		WeaponObject weapon = source.getEquippedWeapon();
 		int minDamage = weapon.getMinDamage();
 		int weaponDamage = random.nextInt((weapon.getMaxDamage() - minDamage) + 1) + minDamage;
 		
-		weaponDamage *= command.getPercentAddFromWeapon();
+		return (int) (weaponDamage * command.getPercentAddFromWeapon());
+	}
+	
+	private void addBuff(CreatureObject caster, CreatureObject receiver, String buffName) {
+		if (buffName.isEmpty()) {
+			return;
+		}
 		
-		info.setDamage(abilityDamage + weaponDamage);
+		new BuffIntent(buffName, caster, receiver, false).broadcast();
 	}
 	
 	private void showFlyText(TangibleObject obj, String text, Scale scale, Color c, ShowFlyText.Flag ... flags) {

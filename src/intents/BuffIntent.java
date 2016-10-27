@@ -25,47 +25,41 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package network.packets.swg.zone.spatial;
+package intents;
 
-import network.packets.swg.SWGPacket;
+import resources.control.Intent;
+import resources.objects.creature.CreatureObject;
 
-import java.nio.ByteBuffer;
+public class BuffIntent extends Intent {
 
-public class StopClientEffectObjectByLabelMessage extends SWGPacket {
-	public static final int CRC = getCrc("StopClientEffectObjectByLabelMessage");
+	public static final String TYPE = "BuffIntent";
 	
-	private long objectId;
-	private String effect;
+	private final String buffName;
+	private final CreatureObject buffer, receiver;
+	private final boolean remove;
 	
-	public StopClientEffectObjectByLabelMessage() {
-		
-	}
-	
-	public StopClientEffectObjectByLabelMessage(long objectId, String effect) {
-		this.objectId = objectId;
-		this.effect = effect;
-	}
-	
-	public StopClientEffectObjectByLabelMessage(ByteBuffer data) {
-		decode(data);
-	}
-	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
-			return;
-		objectId = getLong(data);
-		effect = getAscii(data);
-		getByte(data);
-	}
-	
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(6);
-		addShort(data, 4);
-		addInt  (data, CRC);
-		addLong (data, objectId);
-		addAscii(data, effect);
-		addByte (data, 1);
-		return data;
+	public BuffIntent(String buffName, CreatureObject buffer, CreatureObject receiver, boolean remove) {
+		super(TYPE);
+		this.buffName = buffName;
+		this.buffer = buffer;
+		this.receiver = receiver;
+		this.remove = remove;
 	}
 
+	public CreatureObject getReceiver() {
+		return receiver;
+	}
+
+	public CreatureObject getBuffer() {
+		return buffer;
+	}
+
+	public String getBuffName() {
+		return buffName;
+	}
+
+	public boolean isRemove() {
+		return remove;
+	}
+	
 }

@@ -32,6 +32,7 @@ import intents.chat.ChatBroadcastIntent;
 import intents.chat.ChatCommandIntent;
 import intents.network.GalacticPacketIntent;
 import intents.player.PlayerTransformedIntent;
+import java.io.FileNotFoundException;
 import network.packets.Packet;
 import network.packets.swg.zone.object_controller.CommandQueueDequeue;
 import network.packets.swg.zone.object_controller.CommandQueueEnqueue;
@@ -71,7 +72,10 @@ import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import network.packets.swg.zone.object_controller.CommandTimer;
+import resources.combat.HitType;
 import resources.commands.DefaultPriority;
 import resources.objects.creature.CreatureObject;
 import utilities.ThreadUtilities;
@@ -328,7 +332,10 @@ public class CommandService extends Service {
 			}
 		}
 		else
-			Scripts.invoke("commands/generic/" + command.getDefaultScriptCallback(), "executeCommand", galacticManager, player, target, args);
+			try {
+				Scripts.invoke("commands/generic/" + command.getDefaultScriptCallback(), "executeCommand", galacticManager, player, target, args);
+			} catch (FileNotFoundException ex) {
+			}
 	}
 	
 	private void loadBaseCommands() {
@@ -400,6 +407,7 @@ public class CommandService extends Service {
 		cc.setCooldownGroup2(c.getCooldownGroup2());
 		cc.setCooldownTime(c.getCooldownTime());
 		cc.setCooldownTime2(c.getCooldownTime2());
+		cc.setMaxRange(c.getMaxRange());
 		return cc;
 	}
 	
@@ -416,6 +424,11 @@ public class CommandService extends Service {
 		int attackRolls = combatCommands.getColumnFromName("attack_rolls");
 		int animDefault = combatCommands.getColumnFromName("animDefault");
 		int percentAddFromWeapon = combatCommands.getColumnFromName("percentAddFromWeapon");
+		int addedDamage = combatCommands.getColumnFromName("addedDamage");
+		int buffNameTarget = combatCommands.getColumnFromName("buffNameTarget");
+		int buffNameSelf = combatCommands.getColumnFromName("buffNameSelf");
+		int maxRange = combatCommands.getColumnFromName("maxRange");
+		int hitType = combatCommands.getColumnFromName("hitType");
 		// animDefault	anim_unarmed	anim_onehandmelee	anim_twohandmelee	anim_polearm
 		// anim_pistol	anim_lightRifle	anim_carbine	anim_rifle	anim_heavyweapon
 		// anim_thrown	anim_onehandlightsaber	anim_twohandlightsaber	anim_polearmlightsaber
@@ -438,6 +451,11 @@ public class CommandService extends Service {
 			cc.setAttackRolls((int) cmdRow[attackRolls]);
 			cc.setDefaultAnimation(getAnimationList((String) cmdRow[animDefault]));
 			cc.setPercentAddFromWeapon((float) cmdRow[percentAddFromWeapon]);
+			cc.setAddedDamage((int) cmdRow[addedDamage]);
+			cc.setBuffNameTarget((String) cmdRow[buffNameTarget]);
+			cc.setBuffNameSelf((String) cmdRow[buffNameSelf]);
+			cc.setMaxRange((float) cmdRow[maxRange]);
+			cc.setHitType(HitType.getHitType((Integer) cmdRow[hitType]));
 			cc.setAnimations(WeaponType.UNARMED, getAnimationList((String) cmdRow[animDefault+1]));
 			cc.setAnimations(WeaponType.ONE_HANDED_MELEE, getAnimationList((String) cmdRow[animDefault+2]));
 			cc.setAnimations(WeaponType.TWO_HANDED_MELEE, getAnimationList((String) cmdRow[animDefault+3]));

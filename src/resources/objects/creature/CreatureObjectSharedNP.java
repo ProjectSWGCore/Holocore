@@ -27,6 +27,10 @@
  ***********************************************************************************/
 package resources.objects.creature;
 
+import java.util.Map.Entry;
+import java.util.function.BiConsumer;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 import resources.HologramColour;
 import resources.collections.SWGList;
 import resources.collections.SWGMap;
@@ -456,6 +460,56 @@ class CreatureObjectSharedNP implements Persistable {
 		}
 	}
 	
+	public void forEachBuff(BiConsumer<CRC, Buff> action) {
+		synchronized (buffs) {
+			buffs.forEach(action);
+		}
+	}
+
+	public void putBuff(CRC buffCrc, Buff buff, SWGObject target) {
+		synchronized (buffs) {
+			if(!buffs.containsKey(buffCrc)) {
+				buffs.put(buffCrc, buff);
+				buffs.sendDeltaMessage(target);
+			}
+		}
+	}
+	
+	public Buff removeBuff(CRC buffCrc, SWGObject target) {
+		synchronized (buffs) {
+			Buff removedBuff = buffs.remove(buffCrc);
+			
+			if (removedBuff != null) {
+				buffs.sendDeltaMessage(target);
+			}
+			
+			return removedBuff;
+		}
+	}
+	
+	public Stream<Entry<CRC, Buff>> getBuffEntries(Predicate<Entry<CRC, Buff>> predicate) {
+		synchronized (buffs) {
+			return buffs.entrySet().stream()
+					.filter(predicate);
+		}
+	}
+	
+	public void adjustBuffStackCount(CRC buffCrc, int adjustment, SWGObject target) {
+		synchronized (buffs) {
+			buffs.get(buffCrc).adjustStackCount(adjustment);
+			buffs.update(buffCrc, target);
+		}
+	}
+	
+	public void setBuffDuration(CRC buffCrc, int playTime, int duration, SWGObject target) {
+		synchronized (buffs) {
+			Buff buff = buffs.get(buffCrc);
+			buff.setEndTime(playTime + duration);
+			buff.setDuration(duration);
+			buffs.update(buffCrc, target);
+		}
+	}
+	
 	private void initMaxAttributes() {
 		maxAttributes.add(0, 1000); // Health
 		maxAttributes.add(1, 0);
@@ -547,7 +601,7 @@ class CreatureObjectSharedNP implements Persistable {
 	
 	@Override
 	public void save(NetBufferStream stream) {
-		stream.addByte(1);
+		stream.addByte(2);
 		stream.addShort(level);
 		stream.addInt(levelHealthGranted);
 		stream.addAscii(animation);
@@ -568,6 +622,12 @@ class CreatureObjectSharedNP implements Persistable {
 		synchronized (maxAttributes) {
 			stream.addList(maxAttributes, (i) -> stream.addInt(i));
 		}
+		synchronized (buffs) {
+			stream.addMap(buffs, (e) -> {
+				e.getKey().save(stream);
+				e.getValue().save(stream);
+			});
+		}
 	}
 	
 	@Override
@@ -575,6 +635,7 @@ class CreatureObjectSharedNP implements Persistable {
 		switch(stream.getByte()) {
 			case 0: readVersion0(stream); break;
 			case 1: readVersion1(stream); break;
+			case 2: readVersion2(stream); break;
 		}
 	}
 	
@@ -620,6 +681,18 @@ class CreatureObjectSharedNP implements Persistable {
 			int maxAttribute = stream.getInt();
 			maxAttributes.set(i, maxAttribute);
 			attributes.set(i, maxAttribute);
+		});
+	}
+	
+	private void readVersion2(NetBufferStream stream) {
+		readVersion1(stream);
+		stream.getList((i) -> {
+			CRC crc = new CRC();
+			Buff buff = new Buff();
+			
+			crc.read(stream);
+			buff.read(stream);
+			buffs.put(crc, buff);
 		});
 	}
 	

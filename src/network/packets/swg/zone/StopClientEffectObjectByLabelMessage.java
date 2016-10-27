@@ -25,64 +25,51 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package utilities;
+package network.packets.swg.zone;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
+import network.packets.swg.SWGPacket;
 
-import javax.script.Invocable;
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
+import java.nio.ByteBuffer;
 
-import resources.server_info.Log;
-
-public class Scripts {
-
-	private static final String SCRIPTS = "scripts/";
-	private static final String EXTENSION = ".js";
-	private static final ScriptEngine ENGINE = new ScriptEngineManager().getEngineByName("nashorn");
-	private static final Invocable INVOCABLE = (Invocable) ENGINE;
+public class StopClientEffectObjectByLabelMessage extends SWGPacket {
+	public static final int CRC = getCrc("StopClientEffectObjectByLabelMessage");
 	
-	static {
-		ENGINE.put("intentFactory", new IntentFactory());
-		try {
-			ENGINE.eval("var RadialOption = Java.type('resources.radial.RadialOption')");
-			ENGINE.eval("var RadialItem = Java.type('resources.radial.RadialItem')");
-			ENGINE.eval("var Log = Java.type('resources.server_info.Log')");
-			ENGINE.eval("var SuiWindow = Java.type('resources.sui.SuiWindow')");
-			ENGINE.eval("var SuiButtons = Java.type('resources.sui.SuiButtons')");
-			ENGINE.eval("var SuiEvent = Java.type('resources.sui.SuiEvent')");
-		} catch (ScriptException e) {
-			e.printStackTrace();
-		}
+	private long objectId;
+	private String label;
+	private boolean softStop;
+	
+	public StopClientEffectObjectByLabelMessage() {
+		
 	}
 	
-	// Prevents instantiation.
-	private Scripts() {}
-	
-	/**
-	 * @param script name of the script, relative to the scripts folder.
-	 * @param function name of the specific function within the script.
-	 * @param args to pass to the function.
-	 * @return whatever the function returns. If the function doesn't have a return statement, this method returns {@code null}.
-	 * If an exception occurs, {@code null} is returned.
-	 * @throws java.io.FileNotFoundException if the script file wasn't found
-	 */
-	@SuppressWarnings("unchecked")
-	public static <T> T invoke(String script, String function, Object... args) throws FileNotFoundException {
-		try {
-			ENGINE.eval(new InputStreamReader(new FileInputStream(SCRIPTS + script + EXTENSION), StandardCharsets.UTF_8));
-			return (T) INVOCABLE.invokeFunction(function, args);
-		} catch (ScriptException | NoSuchMethodException t) {
-			Log.e("Scripts", "Error invoking script: " + script + "  with function: " + function);
-			Log.e("Scripts", "    Args: " + Arrays.toString(args));
-			Log.e("Scripts", t);
-			return null;
-		}
+	public StopClientEffectObjectByLabelMessage(long objectId, String label, boolean softStop) {
+		this.objectId = objectId;
+		this.label = label;
+		this.softStop = softStop;
 	}
 	
+	public StopClientEffectObjectByLabelMessage(ByteBuffer data) {
+		decode(data);
+	}
+	
+	@Override
+	public void decode(ByteBuffer data) {
+		if (!super.decode(data, CRC))
+			return;
+		objectId = getLong(data);
+		label = getAscii(data);
+		softStop = getBoolean(data);
+	}
+	
+	@Override
+	public ByteBuffer encode() {
+		ByteBuffer data = ByteBuffer.allocate(Short.BYTES * 2 + Integer.BYTES + Long.BYTES + Byte.BYTES + label.length());
+		addShort(data, 4);
+		addInt  (data, CRC);
+		addLong (data, objectId);
+		addAscii(data, label);
+		addBoolean(data, softStop);
+		return data;
+	}
+
 }
