@@ -34,14 +34,14 @@ import resources.objects.creature.CreatureObject;
  *
  * @author Mads
  */
-public final class SkillBoxGrantedIntent extends Intent {
+public final class GrantSkillIntent extends Intent {
 	
 	public static final String TYPE = "SkillBoxGrantedIntent";
 	
 	private String skillName;
 	private CreatureObject target;
 	
-	public SkillBoxGrantedIntent(String skillName, CreatureObject target) {
+	public GrantSkillIntent(String skillName, CreatureObject target) {
 		super(TYPE);
 		this.skillName = skillName;
 		this.target = target;

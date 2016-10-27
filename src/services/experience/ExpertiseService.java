@@ -27,12 +27,10 @@
 ***********************************************************************************/
 package services.experience;
 
-import intents.experience.SkillBoxGrantedIntent;
+import intents.experience.GrantSkillIntent;
 import intents.network.GalacticPacketIntent;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -64,7 +62,7 @@ public final class ExpertiseService extends Service {
 		pointsForLevel = new HashMap<>();
 		
 		registerForIntent(GalacticPacketIntent.TYPE);
-		// TODO watch LevelChangedIntent. We need to grant ability commands if they have the correct skill. Scripts? SDB is preferable tbh
+		// TODO watch LevelChangedIntent. We need to grant ability commands if they have the correct skill. Algorithm if possible, SDB otherwise
 	}
 
 	@Override
@@ -114,7 +112,7 @@ public final class ExpertiseService extends Service {
 			
 			expertiseSkills.put(skillName, treeId);
 			
-			String requiredProfession = (String) expertiseTable.getCell(i, 7);
+			String requiredProfession = formatProfession((String) expertiseTable.getCell(i, 7));
 			int tier = (int) expertiseTable.getCell(i, 2);
 			int rank = (int) expertiseTable.getCell(i, 4);
 			
@@ -122,7 +120,7 @@ public final class ExpertiseService extends Service {
 		}
 		
 		// No reason to keep track of trees that have nothing in them
-		Set<Entry<Integer, Collection<Expertise>>> set = trees.entrySet().stream()
+		Set<Entry<Integer, Map<String, Expertise>>> set = trees.entrySet().stream()
 				.filter(entry -> entry.getValue().isEmpty())
 				.collect(Collectors.toSet());
 		set.forEach(entry -> trees.remove(entry.getKey()));
@@ -161,27 +159,30 @@ public final class ExpertiseService extends Service {
 				
 				PlayerObject playerObject = creatureObject.getPlayerObject();
 				String profession = playerObject.getProfession();
-				String formattedProfession;
-				
-				switch (profession) {
-					case "trader_0a": formattedProfession = "trader_dom"; break;
-					case "trader_0b": formattedProfession = "trader_struct"; break;
-					case "trader_0c": formattedProfession = "trader_mun"; break;
-					case "trader_0d": formattedProfession = "trader_eng"; break;
-					default: formattedProfession = profession.replace("_1a", ""); break;
-				}
-				
 				Expertise expertise = trees.get(treeId).get(requestedSkill);
+				
+				if (!expertise.getRequiredProfession().equals(profession)) {
+					return;
+				}
 				
 				
 				// TODO run various checks first!
-					// Profession
 					// Required points for the given expertise in the tree (see tiers)
 					// Ranked expertise requires the parent expertise + investment in the lower ranks
 					
-				new SkillBoxGrantedIntent(requestedSkill, creatureObject).broadcast();
+				new GrantSkillIntent(requestedSkill, creatureObject).broadcast();
 				// TODO based on their level, they may have unlocked new marks of the abilities given by this expertise skill
 			}
+		}
+	}
+	
+	private String formatProfession(String profession) {
+		switch (profession) {
+			case "trader_0a": return "trader_dom";
+			case "trader_0b": return "trader_struct";
+			case "trader_0c": return "trader_mun";
+			case "trader_0d": return"trader_eng";
+			default: return profession.replace("_1a", "");
 		}
 	}
 	

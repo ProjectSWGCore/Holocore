@@ -28,7 +28,7 @@
 package services.experience;
 
 import intents.SkillModIntent;
-import intents.experience.SkillBoxGrantedIntent;
+import intents.experience.GrantSkillIntent;
 import intents.network.GalacticPacketIntent;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -61,16 +61,16 @@ public final class SkillManager extends Manager {
 		
 		addChildService(new ExpertiseService());
 		
-		registerForIntent(SkillBoxGrantedIntent.TYPE);
+		registerForIntent(GrantSkillIntent.TYPE);
 		registerForIntent(GalacticPacketIntent.TYPE);
 	}
 
 	@Override
 	public void onIntentReceived(Intent i) {
 		switch(i.getType()) {
-			case SkillBoxGrantedIntent.TYPE:
-				if (i instanceof SkillBoxGrantedIntent)
-					handleSkillAddIntent((SkillBoxGrantedIntent) i);
+			case GrantSkillIntent.TYPE:
+				if (i instanceof GrantSkillIntent)
+					handleGrantSkillIntent((GrantSkillIntent) i);
 				break;
 			case GalacticPacketIntent.TYPE:
 				if (i instanceof GalacticPacketIntent)
@@ -135,7 +135,7 @@ public final class SkillManager extends Manager {
 		return str.split(",");
 	}
 	
-	private void handleSkillAddIntent(SkillBoxGrantedIntent intent) {
+	private void handleGrantSkillIntent(GrantSkillIntent intent) {
 		String skillName = intent.getSkillName();
 		CreatureObject target = intent.getTarget();
 		SkillData skillData = skillDataMap.get(skillName);

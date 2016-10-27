@@ -29,7 +29,7 @@ package services.player;
 
 import intents.GalacticIntent;
 import intents.PlayerEventIntent;
-import intents.experience.SkillBoxGrantedIntent;
+import intents.experience.GrantSkillIntent;
 import intents.object.DestroyObjectIntent;
 import intents.object.ObjectCreatedIntent;
 
@@ -319,7 +319,7 @@ public class CharacterCreationService extends Service {
 		
 		playerObj.setAdminTag(player.getAccessLevel());
 		new ObjectCreatedIntent(creatureObj).broadcast();
-		new SkillBoxGrantedIntent(create.getStartingPhase(), creatureObj).broadcast();
+		new GrantSkillIntent(create.getStartingPhase(), creatureObj).broadcast();
 		return creatureObj;
 	}
 	

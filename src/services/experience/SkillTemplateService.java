@@ -29,7 +29,7 @@ package services.experience;
 
 import intents.GrantBadgeIntent;
 import intents.experience.LevelChangedIntent;
-import intents.experience.SkillBoxGrantedIntent;
+import intents.experience.GrantSkillIntent;
 import java.awt.Color;
 import java.util.HashMap;
 import java.util.Map;
@@ -119,7 +119,7 @@ public final class SkillTemplateService extends Service {
 				int skillIndex = (level <= 10) ? ((level - 1) / 3) : (((level - 10) / 4) + 3);
 
 				String skillName = templates[skillIndex];
-				new SkillBoxGrantedIntent(skillName, creatureObject).broadcast();
+				new GrantSkillIntent(skillName, creatureObject).broadcast();
 				playerObject.setProfWheelPosition(skillName);
 
 				// Grants a mastery collection badge, IF they qualify.
