@@ -119,7 +119,7 @@ public final class SkillTemplateService extends Service {
 				int skillIndex = (level <= 10) ? ((level - 1) / 3) : (((level - 10) / 4) + 3);
 
 				String skillName = templates[skillIndex];
-				new GrantSkillIntent(skillName, creatureObject).broadcast();
+				new GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, skillName, creatureObject, true).broadcast();
 				playerObject.setProfWheelPosition(skillName);
 
 				// Grants a mastery collection badge, IF they qualify.

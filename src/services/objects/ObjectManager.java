@@ -128,9 +128,6 @@ public class ObjectManager extends Manager {
 	}
 	
 	private void loadObject(SWGObject obj) {
-		if (obj instanceof CreatureObject && ((CreatureObject) obj).isPlayer())
-			Scripts.invoke("objects/load_creature", "onLoad", obj);
-		
 		updateBuildoutParent(obj);
 		addChildrenObjects(obj);
 	}

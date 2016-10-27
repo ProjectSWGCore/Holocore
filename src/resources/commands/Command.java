@@ -50,7 +50,7 @@ public class Command {
 	private boolean callOnTarget;
 	// command group
 	// disabled
-	private int maxRange;
+	private float maxRange;
 	private int godLevel;
 	// display group
 	private boolean combatCommand;
@@ -94,8 +94,8 @@ public class Command {
 	public void setTargetType(int targetType) { this.targetType = targetType; }
 	public boolean isCallOnTarget() { return callOnTarget; }
 	public void setCallOnTarget(boolean callOnTarget) { this.callOnTarget = callOnTarget; }
-	public int getMaxRange() { return maxRange; }
-	public void setMaxRange(int maxRange) { this.maxRange = maxRange; }
+	public float getMaxRange() { return maxRange; }
+	public void setMaxRange(float maxRange) { this.maxRange = maxRange; }
 	public int getGodLevel() { return godLevel; }
 	public void setGodLevel(int godLevel) { this.godLevel = godLevel; }
 	public boolean isCombatCommand() { return combatCommand; }

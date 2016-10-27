@@ -61,7 +61,7 @@ public final class ExpertiseService extends Service {
 		pointsForLevel = new HashMap<>();
 		
 		registerForIntent(GalacticPacketIntent.TYPE);
-		// TODO watch LevelChangedIntent. We need to grant ability commands if they have the correct skill. Algorithm if possible, SDB otherwise
+		// TODO watch LevelChangedIntent? We need to grant ability commands if they have the correct skill. Algorithm if possible, SDB otherwise
 	}
 
 	@Override
@@ -147,72 +147,90 @@ public final class ExpertiseService extends Service {
 			ExpertiseRequestMessage expertiseRequestMessage = (ExpertiseRequestMessage) packet;
 			Player player = gpi.getPlayerManager().getPlayerFromNetworkId(gpi.getNetworkId());
 			CreatureObject creatureObject = player.getCreatureObject();
+			String[] requestedSkills = expertiseRequestMessage.getRequestedSkills();
 			
-			for (String requestedSkill : expertiseRequestMessage.getRequestedSkills()) {
+			// You can't invest more points than available, ya cheat!
+			if (requestedSkills.length > getAvailablePoints(creatureObject)) {
+				Log.i(this, "%s attempted to invest more expertise points than available", creatureObject);
+				return;
+			}
+			
+			for (String requestedSkill : requestedSkills) {
 				// TODO do anything with clearAllExpertisesFirst?
 				Integer treeId = expertiseSkills.get(requestedSkill);
 				
 				if (treeId == null) {
-					return;
+					continue;
 				}
 				
 				PlayerObject playerObject = creatureObject.getPlayerObject();
 				String profession = playerObject.getProfession();
-				Expertise expertise = trees.get(treeId).get(requestedSkill);
+				Map<String, Expertise> tree = trees.get(treeId);
+				Expertise expertise = tree.get(requestedSkill);
 				
 				if (!expertise.getRequiredProfession().equals(profession)) {
-					return;
+					Log.i(this, "%s attempted to train expertise skill %s as the wrong profession", creatureObject, requestedSkill);
+					continue;
 				}
 				
+				int requiredTreePoints = (expertise.getTier() - 1) * 4;
 				
-				// TODO run various checks first!
-					// Required points for the given expertise in the tree (see tiers)
-					// Ranked expertise requires the parent expertise + investment in the lower ranks
+				if (requiredTreePoints > getPointsInTree(tree, creatureObject)) {
+					Log.i(this, "%s attempted to train expertise skill %s without having unlocked the tier of the tree", creatureObject, requestedSkill);
+					continue;
+				}
+				
+				int expertiseRank = expertise.getRank();
+				
+				if (expertiseRank > 1 && !hasRank(tree, expertiseRank - 1, creatureObject)) {
+					// Ranked expertise requires investment in the previous rank
+					// If they have no expertise of a rank that's lower than this one, then reject them
+					// We don't need to check parent skills, since SkillManager already does that
+					continue;
+				}
 					
-				new GrantSkillIntent(requestedSkill, creatureObject).broadcast();
-				// TODO based on their level, they may have unlocked new marks of the abilities given by this expertise skill
-				grantExtraAbilities(creatureObject.getLevel(), requestedSkill);
+				new GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, requestedSkill, creatureObject, false).broadcast();
 			}
 		}
 	}
 	
 	private void grantExtraAbilities(short level, String expertiseSkill) {
-		
+		// based on their level, they may have unlocked new marks of the abilities given by this expertise skill
 	}
 	
 	private String formatProfession(String profession) {
 		switch (profession) {
-			case "trader_0a": return "trader_dom";
-			case "trader_0b": return "trader_struct";
-			case "trader_0c": return "trader_mun";
-			case "trader_0d": return"trader_eng";
-			default: return profession.replace("_1a", "");
+			case "trader_dom": return "trader_0a";
+			case "trader_struct": return "trader_0b";
+			case "trader_mun": return "trader_0c";
+			case "trader_eng": return "trader_0d";
+			default: return profession + "_1a";
 		}
 	}
 	
 	private int getAvailablePoints(CreatureObject creatureObject) {
-		int level = creatureObject.getLevel();
+		int levelPoints = pointsForLevel.get((int) creatureObject.getLevel());
+		int spentPoints = (int) creatureObject.getSkills().stream()
+				.filter(skill -> skill.startsWith("expertise_"))
+				.count();
 		
-		if (level < 10) {
-			return 0;
-		}
-		
-		int availablePoints = 0;
-		
-		
-		// TODO factor in the amount of points we've spent already! Check skills Set
-		
-		return availablePoints;
+		return levelPoints - spentPoints;
+	}
+	
+	private boolean hasRank(Map<String, Expertise> tree, int rank, CreatureObject creatureObject) {
+		return tree.entrySet().stream()
+				.filter(entry -> creatureObject.getSkills().contains(entry.getKey()))
+				.anyMatch(entry -> entry.getValue().getRank() == rank);
 	}
 	
 	/**
 	 * 
-	 * @param treeId
+	 * @param tree
 	 * @param creatureObject
 	 * @return the amount of expertise points invested in a given expertise tree
 	 */
-	private long getPointsInTree(int treeId, CreatureObject creatureObject) {
-		return trees.get(treeId).keySet().stream()
+	private long getPointsInTree(Map<String, Expertise> tree, CreatureObject creatureObject) {
+		return tree.keySet().stream()
 				.filter(creatureObject.getSkills()::contains)
 				.count();
 	}

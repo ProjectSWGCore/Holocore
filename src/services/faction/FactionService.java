@@ -248,7 +248,7 @@ public final class FactionService extends Service {
 		int pvpBitmask = 0;
 
 		if(target.isEnemy(observer)) {
-			pvpBitmask |= PvpFlag.AGGRESSIVE.getBitmask() | PvpFlag.ATTACKABLE.getBitmask();
+			pvpBitmask |= PvpFlag.AGGRESSIVE.getBitmask() | PvpFlag.ATTACKABLE.getBitmask() | PvpFlag.ENEMY.getBitmask();
 		}
 		
 		return pvpBitmask;

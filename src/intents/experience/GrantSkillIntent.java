@@ -36,15 +36,23 @@ import resources.objects.creature.CreatureObject;
  */
 public final class GrantSkillIntent extends Intent {
 	
-	public static final String TYPE = "SkillBoxGrantedIntent";
+	public static final String TYPE = "GrantSkillIntent";
 	
-	private String skillName;
-	private CreatureObject target;
+	private final IntentType intentType;
+	private final String skillName;
+	private final CreatureObject target;
+	private final boolean grantRequiredSkills;
 	
-	public GrantSkillIntent(String skillName, CreatureObject target) {
+	public GrantSkillIntent(IntentType type, String skillName, CreatureObject target, boolean grantRequiredSkills) {
 		super(TYPE);
+		this.intentType = type;
 		this.skillName = skillName;
 		this.target = target;
+		this.grantRequiredSkills = grantRequiredSkills;
+	}
+
+	public IntentType getIntentType() {
+		return intentType;
 	}
 
 	public String getSkillName() {
@@ -53,6 +61,14 @@ public final class GrantSkillIntent extends Intent {
 
 	public CreatureObject getTarget() {
 		return target;
+	}
+
+	public boolean isGrantRequiredSkills() {
+		return grantRequiredSkills;
+	}
+	
+	public static enum IntentType {
+		GRANT, GIVEN
 	}
 	
 }

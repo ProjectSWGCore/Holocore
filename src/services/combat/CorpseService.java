@@ -27,6 +27,7 @@
  ***********************************************************************************/
 package services.combat;
 
+import intents.BuffIntent;
 import intents.FactionIntent;
 import intents.PlayerEventIntent;
 import intents.chat.ChatBroadcastIntent;
@@ -47,6 +48,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.Future;
 import java.util.stream.Collectors;
+import network.packets.swg.zone.PlayClientEffectObjectMessage;
 import resources.Location;
 import resources.Posture;
 import resources.PvpFaction;
@@ -379,7 +381,11 @@ public final class CorpseService extends Service {
 		corpse.setTurnScale(1);
 		corpse.setMovementScale(1);
 		corpse.setHealth(corpse.getMaxHealth());
-		// TODO NGE: cloning debuff
+		corpse.sendObserversAndSelf(new PlayClientEffectObjectMessage("clienteffect/player_clone_compile.cef", "", corpse.getObjectId()));
+		
+		BuffIntent cloningSickness = new BuffIntent("cloning_sickness", corpse, corpse, false);
+		new BuffIntent("incapweaken", corpse, corpse, true).broadcastAfterIntent(cloningSickness);
+		cloningSickness.broadcast();
 	}
 	
 	/**
