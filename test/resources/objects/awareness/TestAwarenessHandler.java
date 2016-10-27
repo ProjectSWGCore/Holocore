@@ -29,6 +29,7 @@ package resources.objects.awareness;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -137,10 +138,11 @@ public class TestAwarenessHandler {
 	}
 	
 	private void initAwareness(AwarenessHandler awareness, MapCallback callback) {
+		callback.set(0, 0, 0, 0);
 		for (SWGObject obj : EISLEY_OBJECTS) {
 			awareness.moveObject(obj, obj.getLocation());
 		}
-		callback.waitFor(0, 0, EISLEY_OBJECTS.size(), 0, 1000);
+		callback.waitFor(0, 0, EISLEY_OBJECTS.size(), 0, 2000);
 		callback.set(0, 0, 0, 0);
 	}
 	
