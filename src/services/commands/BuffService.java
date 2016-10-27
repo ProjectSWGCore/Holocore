@@ -43,8 +43,6 @@ import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import network.packets.swg.zone.PlayClientEffectObjectMessage;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
@@ -183,6 +181,8 @@ public class BuffService extends Service {
 		switch(pei.getEvent()) {
 			case PE_FIRST_ZONE: handleFirstZone(creature); break;
 			case PE_DISAPPEAR: handleDisappear(creature); break;	
+			default:
+				break;
 		}
 	}
 	

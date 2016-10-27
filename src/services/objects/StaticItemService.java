@@ -200,6 +200,8 @@ public final class StaticItemService extends Service {
 							case CONTAINER_FULL:
 								new ChatBroadcastIntent(requesterOwner, "@system_msg:give_item_failure").broadcast();
 								break;
+							default:
+								break;
 						}
 						new ObjectCreatedIntent(object).broadcast();
 						

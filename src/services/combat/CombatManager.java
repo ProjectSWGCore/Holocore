@@ -48,8 +48,6 @@ import java.util.Iterator;
 import java.util.Random;
 import java.util.concurrent.Future;
 import resources.Posture;
-import resources.PvpFaction;
-import resources.PvpFlag;
 import resources.combat.AttackType;
 import resources.combat.CombatStatus;
 import resources.combat.HitLocation;
@@ -66,7 +64,6 @@ import resources.objects.creature.CreatureObject;
 import resources.objects.tangible.TangibleObject;
 import resources.objects.weapon.WeaponObject;
 import resources.server_info.Log;
-import utilities.Scripts;
 import utilities.ThreadUtilities;
 
 public class CombatManager extends Manager {
@@ -482,6 +479,8 @@ public class CombatManager extends Manager {
 				case DEAD:
 				case INCAPACITATED:
 					return CombatStatus.INVALID_TARGET;
+				default:
+					break;
 			}
 		}
 		

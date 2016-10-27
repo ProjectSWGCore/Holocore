@@ -30,9 +30,6 @@ package resources.radial;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import resources.objects.SWGObject;
 import resources.player.Player;
 import resources.server_info.Log;

@@ -72,8 +72,6 @@ import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import network.packets.swg.zone.object_controller.CommandTimer;
 import resources.combat.HitType;
 import resources.commands.DefaultPriority;
@@ -149,6 +147,8 @@ public class CommandService extends Service {
 					// This also prevents queued commands from executing after the player logs out
 					combatQueueMap.remove(i.getPlayer());
 				}
+				break;
+			default:
 				break;
 		}
 	}
