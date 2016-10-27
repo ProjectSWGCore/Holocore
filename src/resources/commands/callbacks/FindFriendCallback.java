@@ -73,7 +73,7 @@ public class FindFriendCallback implements ICmdCallback {
 			return;
 		}
 
-		Location location = friend.getCreatureObject().getLocation();
+		Location location = friend.getCreatureObject().getWorldLocation();
 
 		WaypointObject waypoint = null;
 		for (Map.Entry<Long, WaypointObject> entry : ghost.getWaypoints().entrySet()) {
