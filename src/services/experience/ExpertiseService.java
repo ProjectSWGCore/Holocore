@@ -28,12 +28,11 @@
 package services.experience;
 
 import intents.experience.GrantSkillIntent;
+import intents.experience.LevelChangedIntent;
 import intents.network.GalacticPacketIntent;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.stream.Collectors;
 import network.packets.Packet;
 import network.packets.swg.zone.ExpertiseRequestMessage;
 import resources.client_info.ClientFactory;
@@ -51,9 +50,9 @@ import resources.server_info.Log;
  */
 public final class ExpertiseService extends Service {
 	
-	private final Map<String, Integer> expertiseSkills;
-	private final Map<Integer, Map<String, Expertise>> trees;
-	private final Map<Integer, Integer> pointsForLevel;
+	private final Map<String, Integer> expertiseSkills;	// Expertise skill to tree ID
+	private final Map<Integer, Map<String, Expertise>> trees;	// Tree ID to tree
+	private final Map<Integer, Integer> pointsForLevel;	// Level to points available
 	
 	public ExpertiseService() {
 		trees = new HashMap<>();
@@ -61,6 +60,7 @@ public final class ExpertiseService extends Service {
 		pointsForLevel = new HashMap<>();
 		
 		registerForIntent(GalacticPacketIntent.TYPE);
+		registerForIntent(LevelChangedIntent.TYPE);
 		// TODO watch LevelChangedIntent? We need to grant ability commands if they have the correct skill. Algorithm if possible, SDB otherwise
 	}
 
@@ -68,6 +68,7 @@ public final class ExpertiseService extends Service {
 	public void onIntentReceived(Intent i) {
 		switch(i.getType()) {
 			case GalacticPacketIntent.TYPE: handleGalacticPacket((GalacticPacketIntent) i); break;
+			case LevelChangedIntent.TYPE: handleLevelChangedIntent((LevelChangedIntent) i); break;
 		}
 	}
 	
@@ -113,16 +114,9 @@ public final class ExpertiseService extends Service {
 			
 			String requiredProfession = formatProfession((String) expertiseTable.getCell(i, 7));
 			int tier = (int) expertiseTable.getCell(i, 2);
-			int rank = (int) expertiseTable.getCell(i, 4);
 			
-			expertise.put(skillName, new Expertise(requiredProfession, tier, rank));
+			expertise.put(skillName, new Expertise(requiredProfession, tier));
 		}
-		
-		// No reason to keep track of trees that have nothing in them
-		Set<Entry<Integer, Map<String, Expertise>>> set = trees.entrySet().stream()
-				.filter(entry -> entry.getValue().isEmpty())
-				.collect(Collectors.toSet());
-		set.forEach(entry -> trees.remove(entry.getKey()));
 		
 		Log.i(this, "Finished loading %d expertise skills in %fms", rowCount, (System.nanoTime() - startTime) / 1E6);
 		
@@ -149,12 +143,6 @@ public final class ExpertiseService extends Service {
 			CreatureObject creatureObject = player.getCreatureObject();
 			String[] requestedSkills = expertiseRequestMessage.getRequestedSkills();
 			
-			// You can't invest more points than available, ya cheat!
-			if (requestedSkills.length > getAvailablePoints(creatureObject)) {
-				Log.i(this, "%s attempted to invest more expertise points than available", creatureObject);
-				return;
-			}
-			
 			for (String requestedSkill : requestedSkills) {
 				// TODO do anything with clearAllExpertisesFirst?
 				Integer treeId = expertiseSkills.get(requestedSkill);
@@ -173,6 +161,8 @@ public final class ExpertiseService extends Service {
 					continue;
 				}
 				
+				
+				// TODO below actually works, but the GrantSkillIntent isn't necessarily processed yet. As such, the return value of getPointsInTree() varies
 				int requiredTreePoints = (expertise.getTier() - 1) * 4;
 				
 				if (requiredTreePoints > getPointsInTree(tree, creatureObject)) {
@@ -180,18 +170,14 @@ public final class ExpertiseService extends Service {
 					continue;
 				}
 				
-				int expertiseRank = expertise.getRank();
-				
-				if (expertiseRank > 1 && !hasRank(tree, expertiseRank - 1, creatureObject)) {
-					// Ranked expertise requires investment in the previous rank
-					// If they have no expertise of a rank that's lower than this one, then reject them
-					// We don't need to check parent skill names, since SkillManager already does that - rank value will do
-					Log.i(this, "%s attempted to train expertise skill %s without having trained the parent skill");
-					continue;
-				}
-					
 				new GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, requestedSkill, creatureObject, false).broadcast();
 			}
+		}
+	}
+	
+	private void handleLevelChangedIntent(LevelChangedIntent i) {
+		if (i.getNewLevel() >= 10) {
+			i.getCreatureObject().addSkill("expertise");
 		}
 	}
 	
@@ -218,12 +204,6 @@ public final class ExpertiseService extends Service {
 		return levelPoints - spentPoints;
 	}
 	
-	private boolean hasRank(Map<String, Expertise> tree, int rank, CreatureObject creatureObject) {
-		return tree.entrySet().stream()
-				.filter(entry -> creatureObject.getSkills().contains(entry.getKey()))
-				.anyMatch(entry -> entry.getValue().getRank() == rank);
-	}
-	
 	/**
 	 * 
 	 * @param tree
@@ -239,12 +219,11 @@ public final class ExpertiseService extends Service {
 	private static class Expertise {
 		
 		private final String requiredProfession;
-		private final int tier, rank;
+		private final int tier;
 
-		public Expertise(String requiredProfession, int tier, int rank) {
+		public Expertise(String requiredProfession, int tier) {
 			this.requiredProfession = requiredProfession;
 			this.tier = tier;
-			this.rank = rank;
 		}
 
 		public String getRequiredProfession() {
@@ -255,10 +234,6 @@ public final class ExpertiseService extends Service {
 			return tier;
 		}
 
-		public int getRank() {
-			return rank;
-		}
-		
 	}
 	
 }

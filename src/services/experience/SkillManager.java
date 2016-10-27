@@ -114,7 +114,7 @@ public final class SkillManager extends Manager {
 			}
 			
 			SkillData skillData = new SkillData(
-					splitCsv((String) skillsTable.getCell(i, 11)),	// required skills
+					(String) skillsTable.getCell(i, 1),				// parent skill
 					(String) skillsTable.getCell(i, 12),			// xp type
 					(int) skillsTable.getCell(i, 13),				// xp cost
 					splitCsv((String) skillsTable.getCell(i, 21)),	// commands
@@ -142,17 +142,15 @@ public final class SkillManager extends Manager {
 		String skillName = intent.getSkillName();
 		CreatureObject target = intent.getTarget();
 		SkillData skillData = skillDataMap.get(skillName);
-		String[] requiredSkills = skillData.getRequiredSkills();
+		String parentSkillName = skillData.getParentSkill();
 		
-		for (String requiredSkill : requiredSkills) {
-			if (intent.isGrantRequiredSkills()) {
-				grantSkill(skillData, requiredSkill, target);
-			} else if (!target.hasSkill(requiredSkill)) {
-				Log.w(this, "%s lacks required skill %s before being granted skill %s", target, requiredSkill, skillName);
-				return;
-			}
+		if (intent.isGrantRequiredSkills()) {
+			grantParentSkills(skillData, parentSkillName, target);
+		} else if (!target.hasSkill(parentSkillName)) {
+			Log.w(this, "%s lacks required skill %s before being granted skill %s", target, parentSkillName, skillName);
+			return;
 		}
-		
+
 		grantSkill(skillData, skillName, target);
 	}
 	
@@ -167,8 +165,20 @@ public final class SkillManager extends Manager {
 		}
 	}
 	
+	private void grantParentSkills(SkillData skillData, String parentSkill, CreatureObject target) {
+		if (skillData == null || parentSkill.isEmpty()) {
+			return;
+		}
+		
+		grantSkill(skillData, parentSkill, target);
+		String grandParentSkill = skillData.getParentSkill();
+		grantParentSkills(skillDataMap.get(grandParentSkill), grandParentSkill, target);
+	}
+	
 	private void grantSkill(SkillData skillData, String skillName, CreatureObject target) {
-		target.addSkill(skillName);
+		if (!target.addSkill(skillName)) {
+			return;
+		}
 		
 		for(String commandName : skillData.getCommands()) {
 			target.addAbility(commandName);
@@ -182,7 +192,6 @@ public final class SkillManager extends Manager {
 //		}
 
 		new GrantSkillIntent(GrantSkillIntent.IntentType.GIVEN, skillName, target, false).broadcast();
-		Log.i(this, "%s was given skill %s", target, skillName);
 	}
 	
 	private void changeRoleIcon(CreatureObject creature, int chosenIcon) {
@@ -208,15 +217,15 @@ public final class SkillManager extends Manager {
 	
 	@SuppressWarnings("unused")
 	private static class SkillData {
-		private String[] requiredSkills;
+		private String parentSkill;
 		private String xpType;
 		private int xpCost;
 		private String[] commands;
 		private Map<String, Integer> skillMods;
 		private String[] schematics;
 
-		public SkillData(String[] requiredSkills, String xpType, int xpCost, String[] commands, Map<String, Integer> skillMods, String[] schematics) {
-			this.requiredSkills = requiredSkills;
+		public SkillData(String parentSkill, String xpType, int xpCost, String[] commands, Map<String, Integer> skillMods, String[] schematics) {
+			this.parentSkill = parentSkill;
 			this.xpType = xpType;
 			this.xpCost = xpCost;
 			this.commands = commands;
@@ -224,7 +233,7 @@ public final class SkillManager extends Manager {
 			this.schematics = schematics;
 		}
 
-		public String[] getRequiredSkills() { return requiredSkills; }
+		public String getParentSkill() { return parentSkill; }
 		public String getXpType() { return xpType; }
 		public int getXpCost() { return xpCost; }
 		public String[] getCommands() { return commands; }

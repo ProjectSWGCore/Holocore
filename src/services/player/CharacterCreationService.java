@@ -319,7 +319,7 @@ public class CharacterCreationService extends Service {
 		
 		playerObj.setAdminTag(player.getAccessLevel());
 		new ObjectCreatedIntent(creatureObj).broadcast();
-		new GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, create.getStartingPhase(), creatureObj, false).broadcast();
+		new GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, create.getStartingPhase(), creatureObj, true).broadcast();
 		return creatureObj;
 	}
 	
