@@ -454,6 +454,9 @@ public class CombatManager extends Manager {
 			case TOO_FAR:
 				showFlyText(source, "@combat_effects:range_too_far", Scale.MEDIUM, Color.CYAN, ShowFlyText.Flag.PRIVATE);
 				return false;
+			case INVALID_TARGET:
+				showFlyText(source, "@combat_effects:target_invalid_fly", Scale.MEDIUM, Color.CYAN, ShowFlyText.Flag.PRIVATE);
+				return false;
 			default:
 				showFlyText(source, "@combat_effects:action_failed", Scale.MEDIUM, Color.WHITE, ShowFlyText.Flag.PRIVATE);
 				return false;
