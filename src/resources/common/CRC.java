@@ -149,11 +149,8 @@ public class CRC implements Encodable, Persistable {
 		if (getClass() != obj.getClass()) {
 			return false;
 		}
-		final CRC other = (CRC) obj;
-		if (this.crc != other.crc) {
-			return false;
-		}
-		return true;
+		
+		return crc == ((CRC) obj).crc;
 	}
 	
 	public static int getCrc(String input) {
