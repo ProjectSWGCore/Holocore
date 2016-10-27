@@ -31,7 +31,6 @@ import intents.chat.ChatBroadcastIntent;
 import intents.experience.ExperienceIntent;
 import intents.network.CloseConnectionIntent;
 import intents.object.DestroyObjectIntent;
-import intents.object.ObjectCreatedIntent;
 import intents.object.ObjectTeleportIntent;
 import intents.object.CreateStaticItemIntent;
 import intents.player.DeleteCharacterIntent;
@@ -55,7 +54,6 @@ import resources.sui.SuiInputBox;
 import resources.sui.SuiListBox;
 import resources.sui.SuiMessageBox;
 import services.galaxy.GalacticManager;
-import services.objects.ObjectCreator;
 import services.objects.ObjectManager;
 import services.player.PlayerManager;
 import utilities.Scripts;
@@ -63,8 +61,6 @@ import utilities.Scripts;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Created by Waverunner on 8/19/2015
