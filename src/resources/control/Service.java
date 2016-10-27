@@ -100,7 +100,7 @@ public abstract class Service implements IntentReceiver {
 	 * Registers for the specified intent string
 	 * @param type the intent string
 	 */
-	public void registerForIntent(String type) {
+	protected final void registerForIntent(String type) {
 		IntentManager.getInstance().registerForIntent(type, this);
 	}
 	
@@ -108,13 +108,14 @@ public abstract class Service implements IntentReceiver {
 	 * Unregisters for the specified intent string
 	 * @param type the intent string
 	 */
-	public void unregisterForIntent(String type) {
+	protected final void unregisterForIntent(String type) {
 		IntentManager.getInstance().unregisterForIntent(type, this);
 	}
 	
 	/**
 	 * Callback when an intent is received from the system
 	 */
+	@Override
 	public void onIntentReceived(Intent i) {
 		Log.w(this, "Warning: " + getClass().getSimpleName() + " did not override onIntentReceived");
 	}

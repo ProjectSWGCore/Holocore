@@ -25,31 +25,38 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
  ***********************************************************************************/
-package utilities;
+package resources.combat;
 
-import resources.control.Service;
-import resources.objects.creature.CreatureObject;
-import resources.player.Player;
-import resources.server_info.Log;
+import java.util.HashMap;
+import java.util.Map;
 
-public class DebugUtilities {
+public enum HitType {
+	ATTACK								(-1),
+	BUFF								(0),
+	DEBUFF								(4),
+	HEAL									(5),
+	DELAY_ATTACK						(6),
+	REVIVE								(7);
 	
-	public static void printPlayerCharacterDebug(Service service, Player p, String identifyingText) {
-		CreatureObject c = p.getCreatureObject();
-		boolean hasGhost = c.hasSlot("ghost");
-		Log.d(service, "[%s]  PLAY=%s/%d  CREO=%s/%d  hasGhost=%b", identifyingText, p.getUsername(), p.getUserId(), c.getName(), c.getObjectId(), hasGhost);
-	}
+	private static final Map<Integer, HitType> HIT_TYPES = new HashMap<>();
 	
-	public static void printPlayerCharacterDebug(Service service, CreatureObject c, String identifyingText) {
-		Player p = c.getOwner();
-		String username = "null";
-		int id = 0;
-		if (p != null) {
-			username = p.getUsername();
-			id = p.getUserId();
+	static {
+		for(HitType hitType : values()) {
+			HIT_TYPES.put(hitType.getNum(), hitType);
 		}
-		boolean hasGhost = c.hasSlot("ghost");
-		Log.d(service, "[%s]  PLAY=%s/%d  CREO=%s/%d  hasGhost=%b", identifyingText, username, id, c.getName(), c.getObjectId(), hasGhost);
 	}
 	
+	private final int num;
+	
+	HitType(int num) {
+		this.num = num;
+	}
+	
+	public int getNum() {
+		return num;
+	}
+	
+	public static HitType getHitType(int num) {
+		return HIT_TYPES.getOrDefault(num, ATTACK);
+	}
 }

@@ -39,7 +39,6 @@ import resources.sui.SuiEvent;
 import resources.sui.SuiInputBox;
 import resources.sui.SuiListBox;
 import resources.sui.SuiMessageBox;
-import utilities.Scripts;
 import services.galaxy.GalacticManager;
 
 import java.util.Map;
@@ -50,10 +49,6 @@ public class ServerCmdCallback implements ICmdCallback {
 
 	@Override
 	public void execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
-		if (args.startsWith("debug")) {
-			debug(galacticManager, player, target, args);
-			return;
-		}
 		SuiListBox listBox = new SuiListBox(SuiButtons.OK_CANCEL, "Server Management", "Select the management function you wish to perform from the list.");
 		
 		listBox.addListItem("Kick Player");
@@ -64,10 +59,6 @@ public class ServerCmdCallback implements ICmdCallback {
 
 		listBox.addOkButtonCallback("handleSelectedItem", new ServerSuiCallback());
 		listBox.display(player);
-	}
-	
-	private void debug(GalacticManager galacticManager, Player player, SWGObject target, String args) {
-		Scripts.invoke("commands/generic/debug", "executeCommand", galacticManager, player, target, args);
 	}
 	
 	private static class ServerSuiCallback implements ISuiCallback {

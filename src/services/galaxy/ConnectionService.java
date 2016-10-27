@@ -260,11 +260,7 @@ public class ConnectionService extends Service {
 		if (playerObject == null)
 			return;
 		
-		int currentTime = playerObject.getPlayTime();
-		int startTime = playerObject.getStartPlayTime();
-		int deltaTime = (int) ((System.currentTimeMillis()) - startTime);
-		int newTotalTime = currentTime + (int) TimeUnit.MILLISECONDS.toSeconds(deltaTime);
-		playerObject.setPlayTime(newTotalTime);
+		playerObject.updatePlayTime();
 	}
 	
 	private static class DisappearPlayer {
