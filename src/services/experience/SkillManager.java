@@ -136,18 +136,39 @@ public final class SkillManager extends Manager {
 	}
 	
 	private void handleGrantSkillIntent(GrantSkillIntent intent) {
+		if (intent.getIntentType() == GrantSkillIntent.IntentType.GIVEN) {
+			return;
+		}
+		
 		String skillName = intent.getSkillName();
 		CreatureObject target = intent.getTarget();
 		SkillData skillData = skillDataMap.get(skillName);
 		String[] requiredSkills = skillData.getRequiredSkills();
 		
-		for(String requiredSkill : requiredSkills) {
-			if(!target.hasSkill(requiredSkill)) {
+		for (String requiredSkill : requiredSkills) {
+			if (intent.isGrantRequiredSkills()) {
+				grantSkill(skillData, requiredSkill, target);
+			} else if (!target.hasSkill(requiredSkill)) {
 				Log.w(this, "%s lacks required skill %s before being granted skill %s", target, requiredSkill, skillName);
 				return;
 			}
 		}
 		
+		grantSkill(skillData, skillName, target);
+	}
+	
+	private void handleGalacticPacket(GalacticPacketIntent gpi) {
+		Packet packet = gpi.getPacket();
+		if (packet instanceof ChangeRoleIconChoice) {
+			ChangeRoleIconChoice iconChoice = (ChangeRoleIconChoice) packet;
+			int chosenIcon = iconChoice.getIconChoice();
+			CreatureObject creatureObject = gpi.getPlayerManager().getPlayerFromNetworkId(gpi.getNetworkId()).getCreatureObject();
+			
+			changeRoleIcon(creatureObject, chosenIcon);
+		}
+	}
+	
+	private void grantSkill(SkillData skillData, String skillName, CreatureObject target) {
 		target.addSkill(skillName);
 		
 		for(String commandName : skillData.getCommands()) {
@@ -160,24 +181,9 @@ public final class SkillManager extends Manager {
 //		for(String schematic : skillData.schematics) {
 			// Add schematic to PlayerObject
 //		}
-		
+
+		new GrantSkillIntent(GrantSkillIntent.IntentType.GIVEN, skillName, target, false).broadcast();
 		Log.i(this, "%s was given skill %s", target, skillName);
-	}
-	
-	private void handleGalacticPacket(GalacticPacketIntent gpi) {
-		Packet packet = gpi.getPacket();
-		if (packet instanceof ChangeRoleIconChoice) {
-			ChangeRoleIconChoice iconChoice = (ChangeRoleIconChoice) packet;
-			
-			int chosenIcon = iconChoice.getIconChoice();
-			SWGObject object = gpi.getObjectManager().getObjectById(iconChoice.getObjectId());
-			
-			if(object instanceof CreatureObject) {
-				changeRoleIcon((CreatureObject) object, chosenIcon);
-			} else {
-				Log.e(this, "Could not alter role icon for object %s because it's not a CreatureObject", object);
-			}
-		}
 	}
 	
 	private void changeRoleIcon(CreatureObject creature, int chosenIcon) {
