@@ -40,7 +40,6 @@ import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
 import resources.control.Intent;
 import resources.control.Manager;
-import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
@@ -154,8 +153,6 @@ public final class SkillManager extends Manager {
 		for(String commandName : skillData.getCommands()) {
 			target.addAbility(commandName);
 		}
-		
-		// TODO based on their level, they may have unlocked new marks of EXPERTISE abilities!
 		
 		skillData.getSkillMods().forEach((skillModName, skillModValue) -> new SkillModIntent(skillModName, 0, skillModValue, target).broadcast());
 		

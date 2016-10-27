@@ -55,7 +55,7 @@ import resources.server_info.Log;
 public final class ExpertiseService extends Service {
 	
 	private final Map<String, Integer> expertiseSkills;
-	private final Map<Integer, Collection<Expertise>> trees;
+	private final Map<Integer, Map<String, Expertise>> trees;
 	private final Map<Integer, Integer> pointsForLevel;
 	
 	public ExpertiseService() {
@@ -89,7 +89,7 @@ public final class ExpertiseService extends Service {
 		
 		for (int i = 0; i < rowCount; i++) {
 			int treeId = (int) expertiseTable.getCell(i, 0);
-			trees.put(treeId, new ArrayList<>());
+			trees.put(treeId, new HashMap<>());
 		}
 		
 		Log.i(this, "Finished loading %d expertise trees in %fms", rowCount, (System.nanoTime() - startTime) / 1E6);
@@ -105,7 +105,7 @@ public final class ExpertiseService extends Service {
 			String skillName = (String) expertiseTable.getCell(i, 0);
 			int treeId = (int) expertiseTable.getCell(i, 1);
 			
-			Collection<Expertise> expertise = trees.get(treeId);
+			Map<String, Expertise> expertise = trees.get(treeId);
 			
 			if (expertise == null) {
 				Log.e(this, "Expertise %s refers to unknown tree with ID %d", skillName, treeId);
@@ -118,7 +118,7 @@ public final class ExpertiseService extends Service {
 			int tier = (int) expertiseTable.getCell(i, 2);
 			int rank = (int) expertiseTable.getCell(i, 4);
 			
-			expertise.add(new Expertise(skillName, requiredProfession, tier, rank));
+			expertise.put(skillName, new Expertise(requiredProfession, tier, rank));
 		}
 		
 		// No reason to keep track of trees that have nothing in them
@@ -171,12 +171,16 @@ public final class ExpertiseService extends Service {
 					default: formattedProfession = profession.replace("_1a", ""); break;
 				}
 				
+				Expertise expertise = trees.get(treeId).get(requestedSkill);
+				
+				
 				// TODO run various checks first!
 					// Profession
 					// Required points for the given expertise in the tree (see tiers)
 					// Ranked expertise requires the parent expertise + investment in the lower ranks
 					
 				new SkillBoxGrantedIntent(requestedSkill, creatureObject).broadcast();
+				// TODO based on their level, they may have unlocked new marks of the abilities given by this expertise skill
 			}
 		}
 	}
@@ -203,26 +207,20 @@ public final class ExpertiseService extends Service {
 	 * @return the amount of expertise points invested in a given expertise tree
 	 */
 	private long getPointsInTree(int treeId, CreatureObject creatureObject) {
-		return trees.get(treeId).stream()
-				.filter(expertise -> creatureObject.getSkills().contains(expertise.getName()))
+		return trees.get(treeId).keySet().stream()
+				.filter(creatureObject.getSkills()::contains)
 				.count();
 	}
 	
 	private static class Expertise {
 		
-		private final String name;
 		private final String requiredProfession;
 		private final int tier, rank;
 
-		public Expertise(String name, String requiredProfession, int tier, int rank) {
-			this.name = name;
+		public Expertise(String requiredProfession, int tier, int rank) {
 			this.requiredProfession = requiredProfession;
 			this.tier = tier;
 			this.rank = rank;
-		}
-
-		public String getName() {
-			return name;
 		}
 
 		public String getRequiredProfession() {
