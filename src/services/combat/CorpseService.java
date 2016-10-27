@@ -34,6 +34,7 @@ import intents.chat.ChatBroadcastIntent;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import network.packets.swg.zone.PlayClientEffectObjectMessage;
 
 import intents.combat.CreatureKilledIntent;
 import intents.object.DestroyObjectIntent;
