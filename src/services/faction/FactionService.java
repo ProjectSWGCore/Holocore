@@ -71,11 +71,11 @@ public final class FactionService extends Service {
 	}
 	
 	@Override
-	public boolean stop() {
+	public boolean terminate() {
 		// If some were in the middle of switching, finish the switches immediately
 		executor.shutdownNow().forEach(runnable -> runnable.run());
 			
-		return super.stop();
+		return super.terminate();
 	}
 	
 	private void handleFactionIntent(FactionIntent i) {
