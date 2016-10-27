@@ -262,6 +262,10 @@ public class TangibleObject extends SWGObject {
 			return true;
 		}
 		
+		if (otherObject instanceof CreatureObject && ((CreatureObject) otherObject).isPlayer()) {
+			return false;
+		} 
+		
 		PvpFaction otherFaction = otherObject.getPvpFaction();
 		
 		return otherFaction != PvpFaction.NEUTRAL && getPvpFaction() != otherFaction
