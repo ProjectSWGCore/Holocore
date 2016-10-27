@@ -104,10 +104,10 @@ public class BuffService extends Service {
 	}
 	
 	@Override
-	public boolean stop() {
+	public boolean terminate() {
 		executor.shutdown();
 		
-		return super.stop();
+		return super.terminate();
 	}
 	
 	private void checkBuffTimers(CreatureObject creature) {
