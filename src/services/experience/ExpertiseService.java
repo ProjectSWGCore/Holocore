@@ -194,7 +194,7 @@ public final class ExpertiseService extends Service {
 		String[] requestedSkills = expertiseRequestMessage.getRequestedSkills();
 
 		for (String requestedSkill : requestedSkills) {
-			if (getAvailablePoints(creatureObject) < 0) {
+			if (getAvailablePoints(creatureObject) < 1) {
 				Log.i(this, "%s attempted to spend more expertise points than available to them", creatureObject);
 				return;
 			}
@@ -225,7 +225,7 @@ public final class ExpertiseService extends Service {
 			
 			Intent intent = new GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, requestedSkill, creatureObject, false);
 			intent.broadcast();
-			while(!intent.isComplete());	// Block until the GrantSkillIntent has been processed
+			while (!intent.isComplete());	// Block until the GrantSkillIntent has been processed
 		}
 		
 		checkExtraAbilities(creatureObject);
@@ -265,7 +265,6 @@ public final class ExpertiseService extends Service {
 		int requiredLevel = baseRequirement + abilityIndex * levelDifference;
 		
 		// TODO what if requiredLevel goes above the maximum level possible for a player?
-		System.out.println("required level: " + requiredLevel);
 		return level >= requiredLevel;
 	}
 	
