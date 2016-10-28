@@ -37,6 +37,7 @@ import network.packets.swg.zone.object_controller.ShowFlyText.Scale;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
 import resources.common.RGB;
+import resources.config.ConfigFile;
 import resources.control.Intent;
 import resources.control.Manager;
 import resources.encodables.OutOfBandPackage;
@@ -53,14 +54,16 @@ import resources.server_info.Log;
  */
 public final class ExperienceManager extends Manager {
 	
-	private SkillManager skillManager;
-	private SkillTemplateService skillTemplateService;
+	private final SkillManager skillManager;
+	private final SkillTemplateService skillTemplateService;
 	private final Map<Short, Integer> levelXpMap;
+	private final double xpMultiplier;
 	
 	public ExperienceManager() {
 		skillManager = new SkillManager();
 		skillTemplateService = new SkillTemplateService();
 		levelXpMap = new HashMap<>();
+		xpMultiplier = getConfig(ConfigFile.FEATURES).getDouble("XP-MULTIPLIER", 1);
 		
 		registerForIntent(ExperienceIntent.TYPE);
 		
@@ -122,6 +125,8 @@ public final class ExperienceManager extends Manager {
 		} else {	// They already have this kind of XP - add gained to current
 			newXpTotal = currentXp + xpGained;
 		}
+		
+		newXpTotal *= xpMultiplier;
 		
 		playerObject.setExperiencePoints(xpType, newXpTotal);
 		creatureObject.setTotalLevelXp(newXpTotal);
