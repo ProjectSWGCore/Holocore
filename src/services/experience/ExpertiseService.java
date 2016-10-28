@@ -30,7 +30,6 @@ package services.experience;
 import intents.experience.GrantSkillIntent;
 import intents.experience.LevelChangedIntent;
 import intents.network.GalacticPacketIntent;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import network.packets.Packet;
@@ -61,7 +60,6 @@ public final class ExpertiseService extends Service {
 		
 		registerForIntent(GalacticPacketIntent.TYPE);
 		registerForIntent(LevelChangedIntent.TYPE);
-		// TODO watch LevelChangedIntent? We need to grant ability commands if they have the correct skill. Algorithm if possible, SDB otherwise
 	}
 
 	@Override
@@ -69,6 +67,7 @@ public final class ExpertiseService extends Service {
 		switch(i.getType()) {
 			case GalacticPacketIntent.TYPE: handleGalacticPacket((GalacticPacketIntent) i); break;
 			case LevelChangedIntent.TYPE: handleLevelChangedIntent((LevelChangedIntent) i); break;
+			case GrantSkillIntent.TYPE: handleGrantSkillIntent((GrantSkillIntent) i); break;
 		}
 	}
 	
@@ -137,52 +136,79 @@ public final class ExpertiseService extends Service {
 	
 	private void handleGalacticPacket(GalacticPacketIntent gpi) {
 		Packet packet = gpi.getPacket();
-		if (packet instanceof ExpertiseRequestMessage) {
-			ExpertiseRequestMessage expertiseRequestMessage = (ExpertiseRequestMessage) packet;
-			Player player = gpi.getPlayerManager().getPlayerFromNetworkId(gpi.getNetworkId());
-			CreatureObject creatureObject = player.getCreatureObject();
-			String[] requestedSkills = expertiseRequestMessage.getRequestedSkills();
-			
-			for (String requestedSkill : requestedSkills) {
-				// TODO do anything with clearAllExpertisesFirst?
-				Integer treeId = expertiseSkills.get(requestedSkill);
-				
-				if (treeId == null) {
-					continue;
-				}
-				
-				PlayerObject playerObject = creatureObject.getPlayerObject();
-				String profession = playerObject.getProfession();
-				Map<String, Expertise> tree = trees.get(treeId);
-				Expertise expertise = tree.get(requestedSkill);
-				
-				if (!expertise.getRequiredProfession().equals(profession)) {
-					Log.i(this, "%s attempted to train expertise skill %s as the wrong profession", creatureObject, requestedSkill);
-					continue;
-				}
-				
-				
-				// TODO below actually works, but the GrantSkillIntent isn't necessarily processed yet. As such, the return value of getPointsInTree() varies
-				int requiredTreePoints = (expertise.getTier() - 1) * 4;
-				
-				if (requiredTreePoints > getPointsInTree(tree, creatureObject)) {
-					Log.i(this, "%s attempted to train expertise skill %s without having unlocked the tier of the tree", creatureObject, requestedSkill);
-					continue;
-				}
-				
-				new GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, requestedSkill, creatureObject, false).broadcast();
+		
+		if (!(packet instanceof ExpertiseRequestMessage)) {
+			return;
+		}
+		
+		ExpertiseRequestMessage expertiseRequestMessage = (ExpertiseRequestMessage) packet;
+		Player player = gpi.getPlayerManager().getPlayerFromNetworkId(gpi.getNetworkId());
+		CreatureObject creatureObject = player.getCreatureObject();
+		String[] requestedSkills = expertiseRequestMessage.getRequestedSkills();
+
+		for (String requestedSkill : requestedSkills) {
+			if (getAvailablePoints(creatureObject) < 0) {
+				Log.i(this, "%s attempted to spend more expertise points than available to them", creatureObject);
+				return;
 			}
+
+			// TODO do anything with clearAllExpertisesFirst?
+			Integer treeId = expertiseSkills.get(requestedSkill);
+
+			if (treeId == null) {
+				continue;
+			}
+
+			PlayerObject playerObject = creatureObject.getPlayerObject();
+			String profession = playerObject.getProfession();
+			Map<String, Expertise> tree = trees.get(treeId);
+			Expertise expertise = tree.get(requestedSkill);
+
+			if (!expertise.getRequiredProfession().equals(profession)) {
+				Log.i(this, "%s attempted to train expertise skill %s as the wrong profession", creatureObject, requestedSkill);
+				continue;
+			}
+
+			// TODO below actually works, but the GrantSkillIntent from the previous iteration hasn't necessarily been processed yet! This can cause the check below to fail
+			int requiredTreePoints = (expertise.getTier() - 1) * 4;
+
+			if (requiredTreePoints > getPointsInTree(tree, creatureObject)) {
+				Log.i(this, "%s attempted to train expertise skill %s without having unlocked the tier of the tree", creatureObject, requestedSkill);
+				continue;
+			}
+			
+			Intent intent = new GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, requestedSkill, creatureObject, false);
+			intent.broadcast();
+			while(!intent.isComplete());	// Block until the GrantSkillIntent has been processed
 		}
 	}
 	
 	private void handleLevelChangedIntent(LevelChangedIntent i) {
-		if (i.getNewLevel() >= 10) {
-			i.getCreatureObject().addSkill("expertise");
+		int newLevel = i.getNewLevel();
+		CreatureObject creatureObject = i.getCreatureObject();
+		
+		if (newLevel >= 10) {
+			// If we don't add the expertise root skill, the creature can't learn child skills
+			creatureObject.addSkill("expertise");
 		}
+		
+		grantExtraAbilities(creatureObject);
 	}
 	
-	private void grantExtraAbilities(short level, String expertiseSkill) {
+	private void handleGrantSkillIntent(GrantSkillIntent i) {
+		if (i.getIntentType() != GrantSkillIntent.IntentType.GIVEN) {
+			return;
+		}
+		
+		grantExtraAbilities(i.getTarget());
+	}
+	
+	private void grantExtraAbilities(CreatureObject creatureObject) {
 		// based on their level, they may have unlocked new marks of the abilities given by this expertise skill
+		// TODO We need to grant ability commands if they have the correct skill. Algorithm if possible, SDB otherwise
+		
+		// Loop over expertise skills
+			// For each expertise skill, check if this level unlocks ability marks
 	}
 	
 	private String formatProfession(String profession) {

@@ -61,7 +61,12 @@ public final class ExpertiseRequestMessage extends SWGPacket {
 	
 	@Override
 	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(10);
+		int skillNamesLength = 0;
+		
+		for (String skillName : requestedSkills)
+			skillNamesLength += 2 + skillName.length();
+		
+		ByteBuffer data = ByteBuffer.allocate(11 + skillNamesLength);
 		addShort(data, 3);
 		addInt(data, CRC);
 		addInt(data, requestedSkills.length);
@@ -69,6 +74,8 @@ public final class ExpertiseRequestMessage extends SWGPacket {
 		for (String requestedSkill : requestedSkills) {
 			addAscii(data, requestedSkill);
 		}
+		
+		addBoolean(data, clearAllExpertisesFirst);
 		
 		return data;
 	}

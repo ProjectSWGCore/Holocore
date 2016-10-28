@@ -30,10 +30,12 @@ package services.experience;
 import intents.SkillModIntent;
 import intents.experience.GrantSkillIntent;
 import intents.network.GalacticPacketIntent;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 import network.packets.Packet;
 import network.packets.swg.zone.object_controller.ChangeRoleIconChoice;
 import resources.client_info.ClientFactory;
@@ -114,6 +116,7 @@ public final class SkillManager extends Manager {
 			}
 			
 			SkillData skillData = new SkillData(
+					splitCsv((String) skillsTable.getCell(i, 10)),	// required skills
 					(String) skillsTable.getCell(i, 1),				// parent skill
 					(String) skillsTable.getCell(i, 12),			// xp type
 					(int) skillsTable.getCell(i, 13),				// xp cost
@@ -146,8 +149,9 @@ public final class SkillManager extends Manager {
 		
 		if (intent.isGrantRequiredSkills()) {
 			grantParentSkills(skillData, parentSkillName, target);
-		} else if (!target.hasSkill(parentSkillName)) {
-			Log.w(this, "%s lacks required skill %s before being granted skill %s", target, parentSkillName, skillName);
+			grantRequiredSkills(skillData, target);
+		} else if (!target.hasSkill(parentSkillName) || !hasRequiredSkills(skillData, target)) {
+			Log.i(this, "%s lacks required skill %s before being granted skill %s", target, parentSkillName, skillName);
 			return;
 		}
 
@@ -165,6 +169,16 @@ public final class SkillManager extends Manager {
 		}
 	}
 	
+	private boolean hasRequiredSkills(SkillData skillData, CreatureObject creatureObject) {
+		String[] requiredSkills = skillData.getRequiredSkills();
+		
+		if (requiredSkills == null) {
+			return true;
+		}
+		
+		return creatureObject.getSkills().containsAll(Arrays.stream(requiredSkills).collect(Collectors.toSet()));
+	}
+	
 	private void grantParentSkills(SkillData skillData, String parentSkill, CreatureObject target) {
 		if (skillData == null || parentSkill.isEmpty()) {
 			return;
@@ -173,6 +187,17 @@ public final class SkillManager extends Manager {
 		grantSkill(skillData, parentSkill, target);
 		String grandParentSkill = skillData.getParentSkill();
 		grantParentSkills(skillDataMap.get(grandParentSkill), grandParentSkill, target);
+	}
+	
+	private void grantRequiredSkills(SkillData skillData, CreatureObject target) {
+		String[] requiredSkills = skillData.getRequiredSkills();
+		
+		if (requiredSkills == null) {
+			return;
+		}
+		
+		for (String requiredSkill : requiredSkills)
+			target.addSkill(requiredSkill);
 	}
 	
 	private void grantSkill(SkillData skillData, String skillName, CreatureObject target) {
@@ -217,6 +242,7 @@ public final class SkillManager extends Manager {
 	
 	@SuppressWarnings("unused")
 	private static class SkillData {
+		private String[] requiredSkills;
 		private String parentSkill;
 		private String xpType;
 		private int xpCost;
@@ -224,7 +250,7 @@ public final class SkillManager extends Manager {
 		private Map<String, Integer> skillMods;
 		private String[] schematics;
 
-		public SkillData(String parentSkill, String xpType, int xpCost, String[] commands, Map<String, Integer> skillMods, String[] schematics) {
+		public SkillData(String[] requiredSkills, String parentSkill, String xpType, int xpCost, String[] commands, Map<String, Integer> skillMods, String[] schematics) {
 			this.parentSkill = parentSkill;
 			this.xpType = xpType;
 			this.xpCost = xpCost;
@@ -233,6 +259,7 @@ public final class SkillManager extends Manager {
 			this.schematics = schematics;
 		}
 
+		public String[] getRequiredSkills() { return requiredSkills; }
 		public String getParentSkill() { return parentSkill; }
 		public String getXpType() { return xpType; }
 		public int getXpCost() { return xpCost; }
