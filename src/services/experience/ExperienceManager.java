@@ -120,13 +120,13 @@ public final class ExperienceManager extends Manager {
 		Integer currentXp = playerObject.getExperiencePoints(xpType);
 		int newXpTotal;
 		
+		xpGained *= xpMultiplier;
+		
 		if (currentXp == null) {	// They don't have this type of XP already
 			newXpTotal = xpGained;
 		} else {	// They already have this kind of XP - add gained to current
 			newXpTotal = currentXp + xpGained;
 		}
-		
-		newXpTotal *= xpMultiplier;
 		
 		playerObject.setExperiencePoints(xpType, newXpTotal);
 		creatureObject.setTotalLevelXp(newXpTotal);
