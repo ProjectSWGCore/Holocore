@@ -30,10 +30,17 @@ package services.experience;
 import intents.experience.GrantSkillIntent;
 import intents.experience.LevelChangedIntent;
 import intents.network.GalacticPacketIntent;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import network.packets.Packet;
 import network.packets.swg.zone.ExpertiseRequestMessage;
+import resources.Location;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
 import resources.control.Intent;
@@ -42,6 +49,8 @@ import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
 import resources.player.Player;
 import resources.server_info.Log;
+import resources.server_info.RelationalDatabase;
+import resources.server_info.RelationalServerFactory;
 
 /**
  *
@@ -49,13 +58,17 @@ import resources.server_info.Log;
  */
 public final class ExpertiseService extends Service {
 	
+	private static final String EXPERTISE_ABILITIES_QUERY = "SELECT * FROM expertise_abilities";
+	
 	private final Map<String, Integer> expertiseSkills;	// Expertise skill to tree ID
 	private final Map<Integer, Map<String, Expertise>> trees;	// Tree ID to tree
+	private final Map<String, Collection<String[]>> expertiseAbilities;	// Expertise skill to abilities
 	private final Map<Integer, Integer> pointsForLevel;	// Level to points available
 	
 	public ExpertiseService() {
 		trees = new HashMap<>();
 		expertiseSkills = new HashMap<>();
+		expertiseAbilities = new HashMap<>();
 		pointsForLevel = new HashMap<>();
 		
 		registerForIntent(GalacticPacketIntent.TYPE);
@@ -75,7 +88,7 @@ public final class ExpertiseService extends Service {
 	public boolean initialize() {
 		loadTrees();
 		loadPointsForLevel();
-		return super.initialize() && loadExpertise();
+		return super.initialize() && loadExpertise() && loadAbilities();
 	}
 	
 	private void loadTrees() {
@@ -118,6 +131,40 @@ public final class ExpertiseService extends Service {
 		}
 		
 		Log.i(this, "Finished loading %d expertise skills in %fms", rowCount, (System.nanoTime() - startTime) / 1E6);
+		
+		return true;
+	}
+	
+	private boolean loadAbilities() {
+		Log.i(this, "Loading expertise abilities...");
+		long startTime = System.nanoTime();
+		int abilityCount = 0;
+		
+		try (RelationalDatabase abilityDatabase = RelationalServerFactory.getServerData("player/expertise_abilities.db", "expertise_abilities")) {
+			try (ResultSet set = abilityDatabase.executeQuery(EXPERTISE_ABILITIES_QUERY)) {
+				while (set.next()) {
+					String skill = set.getString("skill");
+					String[] chains = set.getString("chains").split("\\|");
+					
+					Collection<String[]> abilityChains = new ArrayList<>();
+					
+					for (int i = 0; i < chains.length; i++) {
+						String chain = chains[i];
+						String[] abilities = chain.split(";");
+						
+						abilityChains.add(abilities);
+						abilityCount += abilities.length;
+					}
+					
+					expertiseAbilities.put(skill, abilityChains);
+				}
+			} catch (SQLException e) {
+				Log.e(this, e);
+				return false;
+			}
+		}
+		
+		Log.i(this, "Finished loading %d expertise abilities in %fms", abilityCount, (System.nanoTime() - startTime) / 1E6);
 		
 		return true;
 	}
@@ -169,7 +216,6 @@ public final class ExpertiseService extends Service {
 				continue;
 			}
 
-			// TODO below actually works, but the GrantSkillIntent from the previous iteration hasn't necessarily been processed yet! This can cause the check below to fail
 			int requiredTreePoints = (expertise.getTier() - 1) * 4;
 
 			if (requiredTreePoints > getPointsInTree(tree, creatureObject)) {
@@ -181,6 +227,8 @@ public final class ExpertiseService extends Service {
 			intent.broadcast();
 			while(!intent.isComplete());	// Block until the GrantSkillIntent has been processed
 		}
+		
+		checkExtraAbilities(creatureObject);
 	}
 	
 	private void handleLevelChangedIntent(LevelChangedIntent i) {
@@ -192,23 +240,45 @@ public final class ExpertiseService extends Service {
 			creatureObject.addSkill("expertise");
 		}
 		
-		grantExtraAbilities(creatureObject);
+		checkExtraAbilities(creatureObject);
 	}
 	
 	private void handleGrantSkillIntent(GrantSkillIntent i) {
-		if (i.getIntentType() != GrantSkillIntent.IntentType.GIVEN) {
+		if (i.getIntentType() == GrantSkillIntent.IntentType.GIVEN) {
 			return;
 		}
 		
-		grantExtraAbilities(i.getTarget());
+		// Let's check if this is an expertise skill that gives them additional commands
+		checkExtraAbilities(i.getTarget());
 	}
 	
-	private void grantExtraAbilities(CreatureObject creatureObject) {
-		// based on their level, they may have unlocked new marks of the abilities given by this expertise skill
-		// TODO We need to grant ability commands if they have the correct skill. Algorithm if possible, SDB otherwise
+	private void checkExtraAbilities(CreatureObject creatureObject) {
+		creatureObject.getSkills().stream()
+				.filter(expertiseAbilities::containsKey)	// We only want to check skills that give additional abilities
+				.forEach(expertise -> grantExtraAbilities(creatureObject, expertise));
+	}
+	
+	private boolean isQualified(CreatureObject creatureObject, int abilityIndex) {
+		int baseRequirement = 18;
+		int levelDifference = 12;	// Amount of levels between each ability
+		int level = creatureObject.getLevel();
+		int requiredLevel = baseRequirement + abilityIndex * levelDifference;
 		
-		// Loop over expertise skills
-			// For each expertise skill, check if this level unlocks ability marks
+		// TODO what if requiredLevel goes above the maximum level possible for a player?
+		System.out.println("required level: " + requiredLevel);
+		return level >= requiredLevel;
+	}
+	
+	private void grantExtraAbilities(CreatureObject creatureObject, String expertise) {
+		expertiseAbilities.get(expertise).forEach(chain -> {
+			for (int abilityIndex = 1; abilityIndex <= chain.length; abilityIndex++) {
+				String ability = chain[abilityIndex - 1];
+				
+				if (isQualified(creatureObject, abilityIndex) && !creatureObject.hasAbility(ability)) {
+					creatureObject.addAbility(ability);
+				}
+			}
+		});
 	}
 	
 	private String formatProfession(String profession) {
