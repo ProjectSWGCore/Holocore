@@ -72,8 +72,6 @@ import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import network.packets.swg.zone.object_controller.CommandTimer;
 import resources.combat.HitType;
 import resources.commands.DefaultPriority;
@@ -182,7 +180,7 @@ public class CommandService extends Service {
 		long targetId = request.getTargetId();
 		final SWGObject target = targetId != 0 ? galacticManager.getObjectManager().getObjectById(targetId) : null;
 		
-		if (command.isAddToCombatQueue()) {
+		if (!command.getCooldownGroup().equals("defaultCooldownGroup") && command.isAddToCombatQueue()) {
 			// Schedule for later execution
 			synchronized (combatQueueMap) {
 				Queue<QueuedCommand> combatQueue = combatQueueMap.get(player);
@@ -268,7 +266,7 @@ public class CommandService extends Service {
 	}
 	
 	private void startCooldownGroup(CreatureObject creature, int sequenceId, int commandNameCrc, String cooldownGroup, float cooldownTime) {
-		if(!cooldownGroup.isEmpty()) {
+		if(!cooldownGroup.isEmpty() && !cooldownGroup.equals("defaultCooldownGroup")) {
 			synchronized(cooldownMap) {
 				if(cooldownMap.get(creature).add(cooldownGroup)) {
 					CommandTimer commandTimer = new CommandTimer(creature.getObjectId());
