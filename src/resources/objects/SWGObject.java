@@ -661,14 +661,16 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	public void createObject(Player target, boolean ignoreSnapshotChecks) {
-		if (!isSnapshot() || ignoreSnapshotChecks) {
+		boolean send = !isSnapshot() || ignoreSnapshotChecks;
+		if (send) {
 			sendSceneCreateObject(target);
 			sendBaselines(target);
 		}
 		createChildrenObjects(target, ignoreSnapshotChecks);
-		sendFinalBaselinePackets(target);
-		if (!isSnapshot() || ignoreSnapshotChecks)
+		if (send) {
+			sendFinalBaselinePackets(target);
 			target.sendPacket(new SceneEndBaselines(getObjectId()));
+		}
 	}
 	
 	public void destroyObject(SWGObject target) {

@@ -146,16 +146,6 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 				startScene(creature);
 				break;
 			case PE_ZONE_IN_SERVER:
-				creature.resetAwareness();
-				if (creature.getParent() == null)
-					moveObject(creature, creature.getLocation());
-				else {
-					for (SWGObject obj : creature.getSuperParent().getObjectsAware()) {
-						obj.createObject(creature);
-						creature.createObject(obj);
-					}
-					moveObject(creature, creature.getParent(), creature.getLocation());
-				}
 				p.sendPacket(new CmdSceneReady());
 				break;
 			default:
@@ -214,14 +204,21 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 			moveObjectWithTransform(i.getObject(), i.getParent(), i.getNewLocation(), i.getSpeed(), i.getUpdateCounter());
 	}
 	
-	private void startScene(SWGObject obj) {
-		Location loc = obj.getWorldLocation();
+	private void startScene(CreatureObject creature) {
+		Location loc = creature.getWorldLocation();
 		long time = ProjectSWG.getGalacticTime();
-		Race race = ((CreatureObject) obj).getRace();
+		Race race = ((CreatureObject) creature).getRace();
 		boolean ignoreSnapshots = loc.getTerrain() == Terrain.DEV_AREA;
-		Player owner = obj.getOwner();
-		owner.sendPacket(new CmdStartScene(ignoreSnapshots, obj.getObjectId(), race, loc, time, (int)(System.currentTimeMillis()/1E3)));
-		recursiveCreateObject(obj, owner);
+		Player owner = creature.getOwner();
+		creature.resetAwareness();
+		owner.sendPacket(new CmdStartScene(ignoreSnapshots, creature.getObjectId(), race, loc, time, (int)(System.currentTimeMillis()/1E3)));
+		recursiveCreateObject(creature, owner);
+		if (creature.getParent() != null) {
+			for (SWGObject obj : creature.getSuperParent().getObjectsAware()) {
+				obj.createObject(creature);
+				creature.createObject(obj);
+			}
+		}
 	}
 	
 	private void recursiveCreateObject(SWGObject obj, Player owner) {
