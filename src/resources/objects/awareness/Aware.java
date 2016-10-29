@@ -158,7 +158,7 @@ class Aware {
 			if (!aware.isVisible(original))
 				continue;
 			if (isObserver(aware, owner, original))
-				observers.add(aware.getOwner());
+				observers.add(aware.getOwnerShallow());
 			else
 				addObserversToSet(aware.getContainedObjects(), observers, owner, original);
 		}

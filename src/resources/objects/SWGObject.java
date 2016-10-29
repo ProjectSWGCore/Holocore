@@ -183,9 +183,12 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			container.addObject(this);
 		}
 		
+		Set<Player> newObservers = getObserversAndParent();
 		long newId = (container != null) ? container.getObjectId() : 0;
 		UpdateContainmentMessage update = new UpdateContainmentMessage(getObjectId(), newId, getSlotArrangement());
-		AwarenessUtilities.callForNewObserver(oldObservers, getObserversAndParent(), (observer) -> observer.sendPacket(update));
+		AwarenessUtilities.callForSameObserver(oldObservers, newObservers, (observer) -> observer.sendPacket(update));
+		AwarenessUtilities.callForNewObserver(oldObservers, newObservers, (observer) -> createObject(observer, false));
+		AwarenessUtilities.callForOldObserver(oldObservers, newObservers, (observer) -> destroyObject(observer));
 		return ContainerResult.SUCCESS;
 	}
 
@@ -366,6 +369,10 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			return getParent().getOwner();
 		
 		return null;
+	}
+	
+	public Player getOwnerShallow() {
+		return owner;
 	}
 	
 	public SWGObject getParent() {
@@ -653,8 +660,8 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			return;
 		}
 		Set<Player> observers = target.getAwareness().getChildObservers();
-		if (target.getOwner() != null)
-			observers.add(target.getOwner());
+		if (target.getOwnerShallow() != null)
+			observers.add(target.getOwnerShallow());
 		for (Player observer : observers) {
 			createObject(observer, ignoreSnapshotChecks);
 		}
@@ -677,11 +684,15 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		if (isSnapshot() || target == null)
 			return;
 		Set<Player> observers = target.getAwareness().getChildObservers();
-		if (target.getOwner() != null)
-			observers.add(target.getOwner());
+		if (target.getOwnerShallow() != null)
+			observers.add(target.getOwnerShallow());
 		for (Player observer : observers) {
-			sendSceneDestroyObject(observer);
+			destroyObject(observer);
 		}
+	}
+	
+	public void destroyObject(Player target) {
+		sendSceneDestroyObject(target);
 	}
 	
 	public void addObjectAware(SWGObject aware) {
