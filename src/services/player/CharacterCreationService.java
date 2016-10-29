@@ -29,7 +29,7 @@ package services.player;
 
 import intents.GalacticIntent;
 import intents.PlayerEventIntent;
-import intents.experience.SkillBoxGrantedIntent;
+import intents.experience.GrantSkillIntent;
 import intents.object.DestroyObjectIntent;
 import intents.object.ObjectCreatedIntent;
 
@@ -399,8 +399,8 @@ public class CharacterCreationService extends Service {
 		creatureObj.setName(create.getName());
 		creatureObj.setPvpFlags(PvpFlag.PLAYER);
 		creatureObj.setVolume(0x000F4240);
-		new SkillBoxGrantedIntent(create.getStartingPhase(), creatureObj).broadcast();
-		new SkillBoxGrantedIntent("species_" + creatureObj.getRace().getSpecies(), creatureObj).broadcast();
+		new GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, create.getStartingPhase(), creatureObj, true).broadcast();
+		new GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, "species_" + creatureObj.getRace().getSpecies(), creatureObj, true).broadcast();
 		
 		WeaponObject defWeapon = (WeaponObject) createInventoryObject(objManager, creatureObj, "object/weapon/melee/unarmed/shared_unarmed_default_player.iff");
 		defWeapon.setMaxRange(5);

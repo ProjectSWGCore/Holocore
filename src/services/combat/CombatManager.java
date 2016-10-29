@@ -80,6 +80,11 @@ public class CombatManager extends Manager {
 	
 	private ScheduledExecutorService executor;
 	
+	// TODO upon first combat, cache skillmod-related calculations
+	// TODO upon receiving SkillModIntent, the relevant calculation(s) must be updated
+	// TODO remove calculations if they haven't been accessed for a while?
+	// TODO remove calculations if the creature disappears
+	
 	public CombatManager() {
 		registerForIntent(DeathblowIntent.TYPE);
 		inCombat = new HashMap<>();

@@ -150,7 +150,7 @@ public abstract class Manager extends Service {
 	 * in an easy way.
 	 * @param s the service to add as a child.
 	 */
-	public void addChildService(Service s) {
+	protected final void addChildService(Service s) {
 		if (s == null)
 			throw new NullPointerException("Child service cannot be null!");
 		synchronized (children) {
@@ -162,7 +162,7 @@ public abstract class Manager extends Service {
 	 * Removes the service from the list of children
 	 * @param s the service to remove
 	 */
-	public void removeChildService(Service s) {
+	protected final void removeChildService(Service s) {
 		if (s == null)
 			return;
 		synchronized (children) {

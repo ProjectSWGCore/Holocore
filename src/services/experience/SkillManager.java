@@ -27,21 +27,23 @@
 ***********************************************************************************/
 package services.experience;
 
-import intents.experience.SkillBoxGrantedIntent;
+import intents.SkillModIntent;
+import intents.experience.GrantSkillIntent;
 import intents.network.GalacticPacketIntent;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import java.util.stream.Collectors;
 import network.packets.Packet;
 import network.packets.swg.zone.object_controller.ChangeRoleIconChoice;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
 import resources.control.Intent;
-import resources.control.Service;
-import resources.objects.SWGObject;
+import resources.control.Manager;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
 import resources.server_info.Log;
@@ -50,25 +52,28 @@ import resources.server_info.Log;
  *
  * @author Mads
  */
-public final class SkillService extends Service {
+public final class SkillManager extends Manager {
 	
 	// Maps icon index to qualifying skill.
 	private final Map<Integer, Set<String>> roleIconMap;
 	private final Map<String, SkillData> skillDataMap;
 	
-	public SkillService() {
+	public SkillManager() {
 		roleIconMap = new HashMap<>();
 		skillDataMap = new HashMap<>();
-		registerForIntent(SkillBoxGrantedIntent.TYPE);
+		
+		addChildService(new ExpertiseService());
+		
+		registerForIntent(GrantSkillIntent.TYPE);
 		registerForIntent(GalacticPacketIntent.TYPE);
 	}
 
 	@Override
 	public void onIntentReceived(Intent i) {
 		switch(i.getType()) {
-			case SkillBoxGrantedIntent.TYPE:
-				if (i instanceof SkillBoxGrantedIntent)
-					handleSkillAddIntent((SkillBoxGrantedIntent) i);
+			case GrantSkillIntent.TYPE:
+				if (i instanceof GrantSkillIntent)
+					handleGrantSkillIntent((GrantSkillIntent) i);
 				break;
 			case GalacticPacketIntent.TYPE:
 				if (i instanceof GalacticPacketIntent)
@@ -113,7 +118,8 @@ public final class SkillService extends Service {
 			}
 			
 			SkillData skillData = new SkillData(
-					splitCsv((String) skillsTable.getCell(i, 11)),	// required skills
+					splitCsv((String) skillsTable.getCell(i, 10)),	// required skills
+					(String) skillsTable.getCell(i, 1),				// parent skill
 					(String) skillsTable.getCell(i, 12),			// xp type
 					(int) skillsTable.getCell(i, 13),				// xp cost
 					splitCsv((String) skillsTable.getCell(i, 21)),	// commands
@@ -133,49 +139,86 @@ public final class SkillService extends Service {
 		return str.split(",");
 	}
 	
-	private void handleSkillAddIntent(SkillBoxGrantedIntent intent) {
+	private void handleGrantSkillIntent(GrantSkillIntent intent) {
+		if (intent.getIntentType() == GrantSkillIntent.IntentType.GIVEN) {
+			return;
+		}
+		
 		String skillName = intent.getSkillName();
 		CreatureObject target = intent.getTarget();
 		SkillData skillData = skillDataMap.get(skillName);
-		String[] requiredSkills = skillData.getRequiredSkills();
+		String parentSkillName = skillData.getParentSkill();
 		
-		for(String requiredSkill : requiredSkills) {
-			if(!target.hasSkill(requiredSkill)) {
-				Log.w(this, "%s lacks required skill %s before being granted skill %s", target, requiredSkill, skillName);
-				return;
-			}
+		if (intent.isGrantRequiredSkills()) {
+			grantParentSkills(skillData, parentSkillName, target);
+			grantRequiredSkills(skillData, target);
+		} else if (!target.hasSkill(parentSkillName) || !hasRequiredSkills(skillData, target)) {
+			Log.i(this, "%s lacks required skill %s before being granted skill %s", target, parentSkillName, skillName);
+			return;
 		}
-		
-		target.addSkill(skillName);
-		
-		for(String commandName : skillData.getCommands()) {
-			target.addAbility(commandName);
-		}
-		
-//		skillData.skillMods.forEach((skillModName, skillModValue) -> new SkillModIntent(skillModName, 0, skillModValue, target).broadcast());
-		
-		// Ziggy: These are disabled for now, since we don't have the structs in place for it.
-//		for(String schematic : skillData.schematics) {
-			// Add schematic to PlayerObject
-//		}
-		
-		Log.i(this, "%s was given skill %s", target, skillName);
+
+		grantSkill(skillData, skillName, target);
 	}
 	
 	private void handleGalacticPacket(GalacticPacketIntent gpi) {
 		Packet packet = gpi.getPacket();
 		if (packet instanceof ChangeRoleIconChoice) {
 			ChangeRoleIconChoice iconChoice = (ChangeRoleIconChoice) packet;
-			
 			int chosenIcon = iconChoice.getIconChoice();
-			SWGObject object = gpi.getObjectManager().getObjectById(iconChoice.getObjectId());
+			CreatureObject creatureObject = gpi.getPlayerManager().getPlayerFromNetworkId(gpi.getNetworkId()).getCreatureObject();
 			
-			if(object instanceof CreatureObject) {
-				changeRoleIcon((CreatureObject) object, chosenIcon);
-			} else {
-				Log.e(this, "Could not alter role icon for object %s because it's not a CreatureObject", object);
-			}
+			changeRoleIcon(creatureObject, chosenIcon);
 		}
+	}
+	
+	private boolean hasRequiredSkills(SkillData skillData, CreatureObject creatureObject) {
+		String[] requiredSkills = skillData.getRequiredSkills();
+		
+		if (requiredSkills == null) {
+			return true;
+		}
+		
+		return creatureObject.getSkills().containsAll(Arrays.stream(requiredSkills).collect(Collectors.toSet()));
+	}
+	
+	private void grantParentSkills(SkillData skillData, String parentSkill, CreatureObject target) {
+		if (skillData == null || parentSkill.isEmpty()) {
+			return;
+		}
+		
+		grantSkill(skillData, parentSkill, target);
+		String grandParentSkill = skillData.getParentSkill();
+		grantParentSkills(skillDataMap.get(grandParentSkill), grandParentSkill, target);
+	}
+	
+	private void grantRequiredSkills(SkillData skillData, CreatureObject target) {
+		String[] requiredSkills = skillData.getRequiredSkills();
+		
+		if (requiredSkills == null) {
+			return;
+		}
+		
+		for (String requiredSkill : requiredSkills)
+			target.addSkill(requiredSkill);
+	}
+	
+	private void grantSkill(SkillData skillData, String skillName, CreatureObject target) {
+		if (!target.addSkill(skillName)) {
+			return;
+		}
+		
+		for(String commandName : skillData.getCommands()) {
+			target.addAbility(commandName);
+		}
+		
+		skillData.getSkillMods().forEach((skillModName, skillModValue) -> new SkillModIntent(skillModName, 0, skillModValue, target).broadcast());
+		
+		// Ziggy: These are disabled for now, since we don't have the structs in place for it.
+//		for(String schematic : skillData.schematics) {
+			// Add schematic to PlayerObject
+//		}
+
+		new GrantSkillIntent(GrantSkillIntent.IntentType.GIVEN, skillName, target, false).broadcast();
 	}
 	
 	private void changeRoleIcon(CreatureObject creature, int chosenIcon) {
@@ -199,17 +242,17 @@ public final class SkillService extends Service {
 		}
 	}
 	
-	@SuppressWarnings("unused")
 	private static class SkillData {
 		private String[] requiredSkills;
-		private String xpType;
-		private int xpCost;
-		private String[] commands;
-		private Map<String, Integer> skillMods;
-		private String[] schematics;
+		private final String parentSkill;
+		private final String xpType;
+		private final int xpCost;
+		private final String[] commands;
+		private final Map<String, Integer> skillMods;
+		private final String[] schematics;
 
-		public SkillData(String[] requiredSkills, String xpType, int xpCost, String[] commands, Map<String, Integer> skillMods, String[] schematics) {
-			this.requiredSkills = requiredSkills;
+		public SkillData(String[] requiredSkills, String parentSkill, String xpType, int xpCost, String[] commands, Map<String, Integer> skillMods, String[] schematics) {
+			this.parentSkill = parentSkill;
 			this.xpType = xpType;
 			this.xpCost = xpCost;
 			this.commands = commands;
@@ -218,6 +261,7 @@ public final class SkillService extends Service {
 		}
 
 		public String[] getRequiredSkills() { return requiredSkills; }
+		public String getParentSkill() { return parentSkill; }
 		public String getXpType() { return xpType; }
 		public int getXpCost() { return xpCost; }
 		public String[] getCommands() { return commands; }
