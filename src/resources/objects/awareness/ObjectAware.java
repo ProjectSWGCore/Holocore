@@ -25,36 +25,108 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
  ***********************************************************************************/
-package resources.radial;
+package resources.objects.awareness;
 
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
+
 import resources.objects.SWGObject;
 import resources.player.Player;
-import resources.server_info.Log;
-import utilities.Scripts;
 
-public class Radials {
+public class ObjectAware {
 	
-	private static final String SCRIPT_PREFIX = "radial/";
+	private final SWGObject object;
+	private final Aware objectsAware;
+	private final Aware customAware;
 	
-	public static List<RadialOption> getRadialOptions(String script, Player player, SWGObject target, Object ... args) {
-		List<RadialOption> options = new ArrayList<>();
-		try {
-			Scripts.invoke(SCRIPT_PREFIX + script, "getOptions", options, player, target, args);
-		} catch (FileNotFoundException ex) {
-			Log.w("Radials", "Couldn't retrieve radial options from %s for object %s because the script couldn't be found", SCRIPT_PREFIX + script, target);
-		}
-		return options;
+	public ObjectAware(SWGObject obj) {
+		this.object = obj;
+		this.objectsAware = new Aware(obj);
+		this.customAware = new Aware(obj);
 	}
 	
-	public static void handleSelection(String script, Player player, SWGObject target, RadialItem selection, Object ... args) {
-		try {
-			Scripts.invoke(SCRIPT_PREFIX + script, "handleSelection", player, target, selection, args);
-		} catch (FileNotFoundException ex) {
-			Log.w("Radials", "Can't handle selection %s on object %s because the script couldn't be found");
+	public void setParent(ObjectAware parent) {
+		if (parent == null) {
+			objectsAware.setParent(null);
+			customAware.setParent(null);
+		} else {
+			objectsAware.setParent(parent.getRawObjectsAware());
+			customAware.setParent(parent.getRawCustomAware());
 		}
+	}
+	
+	public boolean addObjectAware(ObjectAware aware) {
+		return objectsAware.add(aware.getRawObjectsAware());
+	}
+	
+	public boolean removeObjectAware(ObjectAware aware) {
+		return objectsAware.remove(aware.getRawObjectsAware());
+	}
+	
+	public boolean addCustomAware(ObjectAware aware) {
+		return customAware.add(aware.getRawCustomAware());
+	}
+	
+	public boolean removeCustomAware(ObjectAware aware) {
+		return customAware.remove(aware.getRawCustomAware());
+	}
+	
+	public boolean isObjectAware(SWGObject aware) {
+		return objectsAware.contains(aware);
+	}
+	
+	public boolean isCustomAware(SWGObject aware) {
+		return customAware.contains(aware);
+	}
+	
+	public void clearObjectsAware() {
+		objectsAware.clear();
+	}
+	
+	public void clearCustomAware() {
+		customAware.clear();
+	}
+	
+	public Set<SWGObject> getAware() {
+		Set<SWGObject> aware = objectsAware.getAware();
+		aware.addAll(customAware.getAware());
+		return aware;
+	}
+	
+	public Set<Player> getObservers() {
+		Set<Player> observers = objectsAware.getObservers();
+		observers.addAll(customAware.getObservers());
+		return observers;
+	}
+	
+	public Set<Player> getChildObservers() {
+		Set<Player> observers = new HashSet<>();
+		Aware.addObserversToSet(object.getContainedObjects(), observers, object.getOwner(), object);
+		return observers;
+	}
+	
+	public Set<SWGObject> getObjectsAware() {
+		return objectsAware.getAware();
+	}
+	
+	public Set<SWGObject> getCustomAware() {
+		return customAware.getAware();
+	}
+	
+	public Set<Player> getObjectObservers() {
+		return objectsAware.getObservers();
+	}
+	
+	public Set<Player> getCustomObservers() {
+		return customAware.getObservers();
+	}
+	
+	private Aware getRawObjectsAware() {
+		return objectsAware;
+	}
+	
+	private Aware getRawCustomAware() {
+		return customAware;
 	}
 	
 }

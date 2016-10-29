@@ -181,6 +181,8 @@ public class BuffService extends Service {
 		switch(pei.getEvent()) {
 			case PE_FIRST_ZONE: handleFirstZone(creature); break;
 			case PE_DISAPPEAR: handleDisappear(creature); break;	
+			default:
+				break;
 		}
 	}
 	

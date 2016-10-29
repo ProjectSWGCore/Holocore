@@ -25,36 +25,60 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
  ***********************************************************************************/
-package resources.radial;
+package resources.objects.awareness;
 
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
+import resources.Location;
 import resources.objects.SWGObject;
-import resources.player.Player;
-import resources.server_info.Log;
-import utilities.Scripts;
+import resources.objects.creature.CreatureObject;
 
-public class Radials {
+class SpeedCheckHandler {
 	
-	private static final String SCRIPT_PREFIX = "radial/";
-	
-	public static List<RadialOption> getRadialOptions(String script, Player player, SWGObject target, Object ... args) {
-		List<RadialOption> options = new ArrayList<>();
-		try {
-			Scripts.invoke(SCRIPT_PREFIX + script, "getOptions", options, player, target, args);
-		} catch (FileNotFoundException ex) {
-			Log.w("Radials", "Couldn't retrieve radial options from %s for object %s because the script couldn't be found", SCRIPT_PREFIX + script, target);
-		}
-		return options;
+	public SpeedCheckHandler() {
+		
 	}
 	
-	public static void handleSelection(String script, Player player, SWGObject target, RadialItem selection, Object ... args) {
-		try {
-			Scripts.invoke(SCRIPT_PREFIX + script, "handleSelection", player, target, selection, args);
-		} catch (FileNotFoundException ex) {
-			Log.w("Radials", "Can't handle selection %s on object %s because the script couldn't be found");
+	public void moveObjectSpeedChecks(CreatureObject obj, Location requestedLocation) {
+		double time = ((CreatureObject) obj).getTimeSinceLastTransform() / 1000;
+		obj.updateLastTransformTime();
+		Location l = obj.getWorldLocation();
+		if (isSpeeding(obj, l, requestedLocation, time)) {
+			double angle = getMovementAngle(l, requestedLocation);
+			requestedLocation.setX(l.getX()+obj.getMovementScale()*7.3*time*Math.cos(angle));
+			requestedLocation.setZ(l.getZ()+obj.getMovementScale()*7.3*time*Math.sin(angle));
 		}
+	}
+	
+	public void moveObjectSpeedChecks(CreatureObject obj, SWGObject parent, Location requestedLocation) {
+		double time = ((CreatureObject) obj).getTimeSinceLastTransform() / 1000;
+		obj.updateLastTransformTime();
+		Location l = obj.getWorldLocation();
+		Location requestedWorld = new Location(requestedLocation.getX(), 0, requestedLocation.getZ(), parent.getTerrain());
+		requestedWorld.translateLocation(parent.getWorldLocation());
+		if (isSpeeding(obj, l, requestedWorld, time)) {
+			double angle = getMovementAngle(l, requestedWorld);
+			requestedLocation.setX(requestedLocation.getX()+obj.getMovementScale()*7.3*time*invertNormalizedValue(Math.cos(angle)));
+			requestedLocation.setZ(requestedLocation.getZ()+obj.getMovementScale()*7.3*time*invertNormalizedValue(Math.sin(angle)));
+		}
+	}
+	
+	private boolean isSpeeding(CreatureObject obj, Location nWorld, Location newLocation, double time) {
+		return Math.sqrt(square(nWorld.getX()-nWorld.getX()) + square(nWorld.getZ()-newLocation.getZ())) / time > obj.getMovementScale()*7.3;
+	}
+	
+	private double getMovementAngle(Location oldLocation, Location newLocation) {
+		if (newLocation.getX() == oldLocation.getX())
+			return Math.PI;
+		return Math.atan2(newLocation.getZ()-oldLocation.getZ(), newLocation.getX()-oldLocation.getX()) + Math.PI;
+	}
+	
+	private double invertNormalizedValue(double x) {
+		if (x < 0)
+			return -1 - x;
+		return 1-x;
+	}
+	
+	private double square(double x) {
+		return x * x;
 	}
 	
 }

@@ -25,33 +25,65 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package resources.objects.group;
+package resources.callback;
 
-/**
- *
- * @author skylerlehan
- */
-public enum LootRule {
-	FREE_FOR_ALL (0),
-	MASTER_LOOTER (1),
-	LOTTERY (2),
-	RANDOM (3);
-	
-	private static final LootRule[] VALUES = values();
+import java.util.ArrayList;
+import java.util.List;
 
-	private int id;
+public class CallbackManager<T> extends BaseCallbackManager {
 	
-	LootRule(int id) {
-		this.id = id;
+	private final List<T> callbacks;
+	
+	public CallbackManager(String name) {
+		this(name, 1);
 	}
 	
-	public int getId() {
-		return id;
+	public CallbackManager(String name, int threadCount) {
+		super(name, threadCount);
+		this.callbacks = new ArrayList<>();
 	}
 	
-	public static LootRule fromId(int id) {
-		if (id < 0 || id >= VALUES.length)
-			return FREE_FOR_ALL;
-		return VALUES[id];
+	public void addCallback(T callback) {
+		synchronized (callbacks) {
+			callbacks.add(callback);
+		}
+	}
+	
+	public void removeCallback(T callback) {
+		synchronized (callbacks) {
+			callbacks.remove(callback);
+		}
+	}
+	
+	public void setCallback(T callback) {
+		synchronized (callbacks) {
+			callbacks.clear();
+			callbacks.add(callback);
+		}
+	}
+	
+	public void clearCallbacks() {
+		synchronized (callbacks) {
+			callbacks.clear();
+		}
+	}
+	
+	public boolean callOnEach(CallCallback<T> call) {
+		synchronized (callbacks) {
+			return call(() -> {
+				for (T callback : callbacks) {
+					try {
+						call.run(callback);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			});
+		}
+	}
+	
+	
+	public interface CallCallback<T> {
+		void run(T callback);
 	}
 }

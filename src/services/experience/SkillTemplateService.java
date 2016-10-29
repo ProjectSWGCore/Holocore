@@ -132,11 +132,11 @@ public final class SkillTemplateService extends Service {
 		
 		if (skillUp) {
 			creatureObject.sendObserversAndSelf(new PlayClientEffectObjectMessage("clienteffect/skill_granted.cef", "", objectId));
-			sendPacket(player, new ShowFlyText(objectId, new StringId("cbt_spam", "skill_up"), Scale.LARGEST, new RGB(Color.GREEN)));
-			sendPacket(player, new PlayMusicMessage(0, "sound/music_acq_bountyhunter.snd", 1, false));
+			player.sendPacket(new ShowFlyText(objectId, new StringId("cbt_spam", "skill_up"), Scale.LARGEST, new RGB(Color.GREEN)));
+			player.sendPacket(new PlayMusicMessage(0, "sound/music_acq_bountyhunter.snd", 1, false));
 		} else {
 			creatureObject.sendObserversAndSelf(new PlayClientEffectObjectMessage("clienteffect/level_granted.cef", "", objectId));
-			sendPacket(player, new ShowFlyText(objectId, new StringId("cbt_spam", "level_up"), Scale.LARGEST, new RGB(Color.BLUE)));
+			player.sendPacket(new ShowFlyText(objectId, new StringId("cbt_spam", "level_up"), Scale.LARGEST, new RGB(Color.BLUE)));
 		}
 	}
 

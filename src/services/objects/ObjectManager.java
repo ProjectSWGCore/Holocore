@@ -57,7 +57,6 @@ import services.map.MapManager;
 import services.player.PlayerManager;
 import services.spawn.SpawnerService;
 import services.spawn.StaticService;
-import utilities.Scripts;
 
 public class ObjectManager extends Manager {
 	
@@ -180,7 +179,6 @@ public class ObjectManager extends Manager {
 	@Override
 	public boolean terminate() {
 		synchronized (database) {
-			database.traverse((obj) -> obj.setOwner(null));
 			database.close();
 		}
 		return super.terminate();

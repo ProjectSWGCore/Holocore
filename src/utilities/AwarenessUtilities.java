@@ -25,36 +25,71 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
  ***********************************************************************************/
-package resources.radial;
+package utilities;
 
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
+
 import resources.objects.SWGObject;
 import resources.player.Player;
-import resources.server_info.Log;
-import utilities.Scripts;
 
-public class Radials {
+public class AwarenessUtilities {
 	
-	private static final String SCRIPT_PREFIX = "radial/";
-	
-	public static List<RadialOption> getRadialOptions(String script, Player player, SWGObject target, Object ... args) {
-		List<RadialOption> options = new ArrayList<>();
-		try {
-			Scripts.invoke(SCRIPT_PREFIX + script, "getOptions", options, player, target, args);
-		} catch (FileNotFoundException ex) {
-			Log.w("Radials", "Couldn't retrieve radial options from %s for object %s because the script couldn't be found", SCRIPT_PREFIX + script, target);
-		}
-		return options;
+	public static void handleUpdateAwarenessManual(SWGObject obj, Set<SWGObject> oldAware, Set<Player> oldObservers, Set<SWGObject> newAware, Set<Player> newObservers) {
+		callForNewObserver(oldObservers, newObservers, (observer) -> obj.createObject(observer.getCreatureObject()));
+		callForOldObserver(oldObservers, newObservers, (observer) -> obj.destroyObject(observer.getCreatureObject()));
+		
+		callForNewAware(oldAware, newAware, (aware) -> aware.createObject(obj));
+		callForOldAware(oldAware, newAware, (aware) -> aware.destroyObject(obj));
 	}
 	
-	public static void handleSelection(String script, Player player, SWGObject target, RadialItem selection, Object ... args) {
-		try {
-			Scripts.invoke(SCRIPT_PREFIX + script, "handleSelection", player, target, selection, args);
-		} catch (FileNotFoundException ex) {
-			Log.w("Radials", "Can't handle selection %s on object %s because the script couldn't be found");
+	public static void callForNewObserver(Set<Player> oldObservers, Set<Player> newObservers, ObserverBasedRunnable r) {
+		for (Player newObserver : newObservers) {
+			if (!oldObservers.contains(newObserver))
+				r.run(newObserver);
 		}
+	}
+	
+	public static void callForOldObserver(Set<Player> oldObservers, Set<Player> newObservers, ObserverBasedRunnable r) {
+		for (Player oldObserver : oldObservers) {
+			if (!newObservers.contains(oldObserver))
+				r.run(oldObserver);
+		}
+	}
+	
+	public static void callForSameObserver(Set<Player> oldObservers, Set<Player> newObservers, ObserverBasedRunnable r) {
+		for (Player newObserver : newObservers) {
+			if (oldObservers.contains(newObserver))
+				r.run(newObserver);
+		}
+	}
+	
+	public static void callForNewAware(Set<SWGObject> oldAware, Set<SWGObject> newAware, AwareBasedRunnable r) {
+		for (SWGObject aware : newAware) {
+			if (!oldAware.contains(aware))
+				r.run(aware);
+		}
+	}
+	
+	public static void callForOldAware(Set<SWGObject> oldAware, Set<SWGObject> newAware, AwareBasedRunnable r) {
+		for (SWGObject aware : oldAware) {
+			if (!newAware.contains(aware))
+				r.run(aware);
+		}
+	}
+	
+	public static void callForSameAware(Set<SWGObject> oldAware, Set<SWGObject> newAware, AwareBasedRunnable r) {
+		for (SWGObject aware : newAware) {
+			if (oldAware.contains(aware))
+				r.run(aware);
+		}
+	}
+	
+	public interface AwareBasedRunnable {
+		void run(SWGObject aware);
+	}
+	
+	public interface ObserverBasedRunnable {
+		void run(Player owner);
 	}
 	
 }

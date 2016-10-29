@@ -148,6 +148,8 @@ public class CommandService extends Service {
 					combatQueueMap.remove(i.getPlayer());
 				}
 				break;
+			default:
+				break;
 		}
 	}
 	

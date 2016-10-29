@@ -484,6 +484,8 @@ public class CombatManager extends Manager {
 				case DEAD:
 				case INCAPACITATED:
 					return CombatStatus.INVALID_TARGET;
+				default:
+					break;
 			}
 		}
 		

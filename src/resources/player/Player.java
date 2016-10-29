@@ -27,16 +27,18 @@
 ***********************************************************************************/
 package resources.player;
 
+import intents.network.OutboundPacketIntent;
 import network.packets.Packet;
 import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
-import resources.server_info.Log;
 import services.player.PlayerManager;
+import utilities.IntentChain;
 
 public class Player implements Comparable<Player> {
 	
+	private final IntentChain packetChain;
 	private Service playerManager;
 	
 	private long networkId;
@@ -54,10 +56,11 @@ public class Player implements Comparable<Player> {
 	private long lastInboundMessage	= 0;
 	
 	public Player() {
-		this.playerManager = null;
+		this(null, 0);
 	}
 	
 	public Player(Service playerManager, long networkId) {
+		this.packetChain = new IntentChain();
 		this.playerManager = playerManager;
 		setNetworkId(networkId);
 	}
@@ -110,6 +113,8 @@ public class Player implements Comparable<Player> {
 		this.creatureObject = obj;
 		if (obj != null && obj.getOwner() != this)
 			obj.setOwner(this);
+		if (obj == null)
+			packetChain.reset();
 	}
 	
 	public void updateLastPacketTimestamp() {
@@ -176,17 +181,16 @@ public class Player implements Comparable<Player> {
 	}
 	
 	public void sendPacket(Packet ... packets) {
-		if (playerManager != null)
-			playerManager.sendPacket(this, packets);
-		else Log.e("Player", "Couldn't send packet due to playerManager being null.");
+		for (Packet p : packets) {
+			packetChain.broadcastAfter(new OutboundPacketIntent(p, networkId));
+		}
 	}
 	
 	@Override
 	public String toString() {
 		String str = "Player[";
-		str += "ID=" + userId + " / " + getCreatureObject().getObjectId();
-		str += " NAME=" + username + " / " + getCreatureObject().getName();
-		str += " LEVEL=" + accessLevel;
+		str += "ID=" + userId + " / " + (creatureObject==null?"null":creatureObject.getObjectId());
+		str += " NAME=" + username + " / " + (creatureObject==null?"null":creatureObject.getName());
 		str += " STATE=" + state;
 		return str + "]";
 	}

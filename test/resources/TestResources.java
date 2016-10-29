@@ -35,6 +35,7 @@ import resources.collections.SWGListTest;
 import resources.collections.TestSWGBitSet;
 import resources.collections.TestSWGFlag;
 import resources.network.TestLittleEndianDataOutputStream;
+import resources.objects.awareness.TestAwareness;
 import resources.objects.quadtree.TestQuadTree;
 import resources.persistable.TestPersistable;
 import resources.services.TestConfig;
@@ -49,7 +50,8 @@ import resources.services.TestConfig;
 	TestPersistable.class,
 	TestConfig.class,
 	TestQuaternion.class,
-	TestLittleEndianDataOutputStream.class
+	TestLittleEndianDataOutputStream.class,
+	TestAwareness.class
 })
 public class TestResources {
 	

@@ -200,6 +200,8 @@ public final class StaticItemService extends Service {
 							case CONTAINER_FULL:
 								new ChatBroadcastIntent(requesterOwner, "@system_msg:give_item_failure").broadcast();
 								break;
+							default:
+								break;
 						}
 						new ObjectCreatedIntent(object).broadcast();
 						
@@ -235,7 +237,6 @@ public final class StaticItemService extends Service {
 		private boolean unique;
 		private String conditionString;
 		private int volume;
-		private String requiredLevel;
 		// TODO bio-link
 		private final String itemName;
 		private final String iffTemplate;
@@ -262,7 +263,6 @@ public final class StaticItemService extends Service {
 			int hitPoints = resultSet.getInt("hit_points");
 			conditionString = String.format("%d/%d", hitPoints, hitPoints);
 			volume = resultSet.getInt("volume");
-			requiredLevel = String.valueOf(resultSet.getShort("required_level"));
 
 			// load type-specific attributes
 			return loadTypeAttributes(resultSet);
@@ -293,8 +293,7 @@ public final class StaticItemService extends Service {
 				object.addAttribute("unique", "1");
 			object.addAttribute("condition", conditionString);
 			object.addAttribute("volume", String.valueOf(volume));
-			object.addAttribute("required_combat_level", requiredLevel);
-
+			
 			// apply type-specific attributes
 			applyTypeAttributes(object);
 		}
@@ -319,6 +318,7 @@ public final class StaticItemService extends Service {
 
 		private Map<String, String> mods;	// skillmods/statmods
 		private String requiredProfession;
+		private String requiredLevel;
 		private String requiredFaction;
 		private String buffName;
 		// TODO species restriction
@@ -331,6 +331,7 @@ public final class StaticItemService extends Service {
 
 		@Override
 		protected boolean loadTypeAttributes(ResultSet resultSet) throws SQLException {
+			requiredLevel = String.valueOf(resultSet.getShort("required_level"));
 			requiredProfession = resultSet.getString("required_profession");
 			if (requiredProfession.equals("-")) {
 				// Ziggy: This value is not defined in any String Table File.
@@ -338,7 +339,6 @@ public final class StaticItemService extends Service {
 			} else {
 				requiredProfession = "@ui_roadmap:title_" + requiredProfession;
 			}
-
 			requiredFaction = resultSet.getString("required_faction");
 
 			if (requiredFaction.equals("-")) {
@@ -366,6 +366,7 @@ public final class StaticItemService extends Service {
 		@Override
 		protected void applyTypeAttributes(SWGObject object) {
 			object.addAttribute("class_required", requiredProfession);
+			object.addAttribute("required_combat_level", requiredLevel);
 			object.addAttribute("faction_restriction", requiredFaction);
 			
 			// Apply the mods!
@@ -380,6 +381,7 @@ public final class StaticItemService extends Service {
 
 	private static final class ArmorAttributes extends WearableAttributes {
 
+		private String requiredLevel;
 		private String armorCategory;
 		private String kinetic, energy, elementals;
 		private float protectionWeight;
@@ -395,7 +397,7 @@ public final class StaticItemService extends Service {
 			if (!wearableAttributesLoaded) {
 				return false;
 			}
-
+			requiredLevel = String.valueOf(resultSet.getShort("required_level"));
 			String armorType = resultSet.getString("armor_category");
 			protectionWeight = resultSet.getFloat("protection");
 
@@ -427,6 +429,7 @@ public final class StaticItemService extends Service {
 		@Override
 		protected void applyTypeAttributes(SWGObject object) {
 			super.applyTypeAttributes(object);
+			object.addAttribute("required_combat_level", requiredLevel);
 			object.addAttribute("armor_category", armorCategory);
 			object.addAttribute("cat_armor_standard_protection.kinetic", kinetic);
 			object.addAttribute("cat_armor_standard_protection.energy", energy);
@@ -444,6 +447,7 @@ public final class StaticItemService extends Service {
 
 	private static final class WeaponAttributes extends WearableAttributes {
 
+		private String requiredLevel;
 		private WeaponType category;
 		private DamageType damageTypeEnum;
 		private DamageType elementalTypeEnum;
@@ -510,6 +514,7 @@ public final class StaticItemService extends Service {
 					return false;
 			}
 
+			requiredLevel = String.valueOf(resultSet.getShort("required_level"));
 			weaponCategory = "@obj_attr_n:wpn_category_" + String.valueOf(category.getNum());
 			damageType = resultSet.getString("damage_type");
 			damageTypeEnum = getDamageTypeForName(damageType);

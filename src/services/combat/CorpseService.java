@@ -235,6 +235,8 @@ public final class CorpseService extends Service {
 				}
 				break;
 			}
+			default:
+				break;
 		}
 	}
 	

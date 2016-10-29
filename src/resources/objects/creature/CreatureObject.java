@@ -29,6 +29,7 @@ package resources.objects.creature;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Set;
 import java.util.Locale;
 import java.util.Map;
@@ -42,7 +43,6 @@ import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import network.packets.swg.zone.object_controller.PostureUpdate;
 import resources.HologramColour;
 import resources.Posture;
-import resources.PvpFaction;
 import resources.PvpFlag;
 import resources.PvpStatus;
 import resources.Race;
@@ -87,6 +87,7 @@ public class CreatureObject extends TangibleObject {
 	public CreatureObject(long objectId) {
 		super(objectId, BaselineType.CREO);
 		initBaseAttributes();
+		setPrefLoadRange(200);
 	}
 	
 	@Override
@@ -132,7 +133,7 @@ public class CreatureObject extends TangibleObject {
 	
 	public boolean addSkill(String skillName) {
 		synchronized(skills) {
-			if(skills.add(skillName)) {
+			if (skills.add(skillName)) {
 				skills.sendDeltaMessage(this);
 				return true;
 			}
@@ -145,8 +146,8 @@ public class CreatureObject extends TangibleObject {
 		return skills.contains(skillName);
 	}
 	
-	public SWGSet<String> getSkills() {
-		return skills;
+	public Set<String> getSkills() {
+		return Collections.unmodifiableSet(skills);
 	}
 	
 	public int getCashBalance() {

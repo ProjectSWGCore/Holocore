@@ -138,7 +138,7 @@ public class LoginService extends Service {
 			Log.i("LoginService", "Deleted character %s for user %s", ((CreatureObject)obj).getName(), player.getUsername());
 		} else
 			Log.w("LoginService", "Could not delete character! Character: ID: " + request.getPlayerId() + " / " + obj);
-		sendPacket(player, new DeleteCharacterResponse(success));
+		player.sendPacket(new DeleteCharacterResponse(success));
 	}
 	
 	private void handleLogin(Player player, LoginClientId id) {
@@ -177,7 +177,7 @@ public class LoginService extends Service {
 		Log.i("LoginService", "%s cannot login due to invalid version code: %s, expected %s from %s:%d", player.getUsername(), id.getVersion(), REQUIRED_VERSION, id.getAddress(), id.getPort());
 		String type = "Login Failed!";
 		String message = "Invalid Client Version Code: " + id.getVersion();
-		sendPacket(player.getNetworkId(), new ErrorMessage(type, message, false));
+		player.sendPacket(new ErrorMessage(type, message, false));
 		player.setPlayerState(PlayerState.DISCONNECTED);
 		new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_FAIL_INVALID_VERSION_CODE).broadcast();
 	}
@@ -206,7 +206,7 @@ public class LoginService extends Service {
 	private void onLoginBanned(Player player, LoginClientId id) {
 		String type = "Login Failed!";
 		String message = "Sorry, you're banned!";
-		sendPacket(player.getNetworkId(), new ErrorMessage(type, message, false));
+		player.sendPacket(new ErrorMessage(type, message, false));
 		Log.i("LoginService", "%s cannot login due to a ban, from %s:%d", player.getUsername(), id.getAddress(), id.getPort());
 		player.setPlayerState(PlayerState.DISCONNECTED);
 		new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_FAIL_BANNED).broadcast();
@@ -215,8 +215,8 @@ public class LoginService extends Service {
 	private void onInvalidUserPass(Player player, LoginClientId id, ResultSet set) throws SQLException {
 		String type = "Login Failed!";
 		String message = getUserPassError(set, id.getUsername(), id.getPassword());
-		sendPacket(player, new ErrorMessage(type, message, false));
-		sendPacket(player, new LoginIncorrectClientId(getServerString(), REQUIRED_VERSION));
+		player.sendPacket(new ErrorMessage(type, message, false));
+		player.sendPacket(new LoginIncorrectClientId(getServerString(), REQUIRED_VERSION));
 		Log.i("LoginService", "%s cannot login due to invalid user/pass from %s:%d", id.getUsername(), id.getAddress(), id.getPort());
 		player.setPlayerState(PlayerState.DISCONNECTED);
 		new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_FAIL_INVALID_USER_PASS).broadcast();
@@ -225,7 +225,7 @@ public class LoginService extends Service {
 	private void onLoginServerError(Player player, LoginClientId id) {
 		String type = "Login Failed!";
 		String message = "Server Error.";
-		sendPacket(player.getNetworkId(), new ErrorMessage(type, message, false));
+		player.sendPacket(new ErrorMessage(type, message, false));
 		player.setPlayerState(PlayerState.DISCONNECTED);
 		Log.e("LoginService", "%s cannot login due to server error, from %s:%d", id.getUsername(), id.getAddress(), id.getPort());
 		new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_FAIL_SERVER_ERROR).broadcast();
@@ -242,12 +242,12 @@ public class LoginService extends Service {
 			clusterStatus.addGalaxy(g);
 		}
 		cluster.setMaxCharacters(getConfig(ConfigFile.PRIMARY).getInt("GALAXY-MAX-CHARACTERS", 2));
-		sendPacket(p.getNetworkId(), new ServerNowEpochTime((int)(System.currentTimeMillis()/1E3)));
-		sendPacket(p.getNetworkId(), token);
-		sendPacket(p.getNetworkId(), cluster);
-		sendPacket(p.getNetworkId(), new CharacterCreationDisabled());
-		sendPacket(p.getNetworkId(), new EnumerateCharacterId(characters));
-		sendPacket(p.getNetworkId(), clusterStatus);
+		p.sendPacket(new ServerNowEpochTime((int)(System.currentTimeMillis()/1E3)));
+		p.sendPacket(token);
+		p.sendPacket(cluster);
+		p.sendPacket(new CharacterCreationDisabled());
+		p.sendPacket(new EnumerateCharacterId(characters));
+		p.sendPacket(clusterStatus);
 		p.setPlayerState(PlayerState.LOGGED_IN);
 	}
 	

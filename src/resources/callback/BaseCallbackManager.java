@@ -25,33 +25,82 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package resources.objects.group;
+package resources.callback;
 
-/**
- *
- * @author skylerlehan
- */
-public enum LootRule {
-	FREE_FOR_ALL (0),
-	MASTER_LOOTER (1),
-	LOTTERY (2),
-	RANDOM (3);
-	
-	private static final LootRule[] VALUES = values();
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.RejectedExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 
-	private int id;
+import utilities.ThreadUtilities;
+
+class BaseCallbackManager {
 	
-	LootRule(int id) {
-		this.id = id;
+	private final Object executorMutex;
+	private final String name;
+	private final int threadCount;
+	private final AtomicBoolean shutdown;
+	private ExecutorService executor;
+	
+	public BaseCallbackManager(String name) {
+		this(name, 1);
 	}
 	
-	public int getId() {
-		return id;
+	public BaseCallbackManager(String name, int threadCount) {
+		this.executorMutex = new Object();
+		this.name = name;
+		this.threadCount = threadCount;
+		this.shutdown = new AtomicBoolean(false);
+		this.executor = null;
 	}
 	
-	public static LootRule fromId(int id) {
-		if (id < 0 || id >= VALUES.length)
-			return FREE_FOR_ALL;
-		return VALUES[id];
+	public void start() {
+		synchronized (executorMutex) {
+			if (executor != null && !shutdown.get())
+				executor.shutdown();
+			shutdown.set(false);
+			if (threadCount <= 1)
+				executor = Executors.newSingleThreadExecutor(ThreadUtilities.newThreadFactory(name+"-callback-manager"));
+			else
+				executor = Executors.newFixedThreadPool(threadCount, ThreadUtilities.newThreadFactory(name+"-callback-manager-%d"));
+		}
 	}
+	
+	public void stop() {
+		synchronized (executorMutex) {
+			executor.shutdown();
+			shutdown.set(true);
+		}
+	}
+	
+	public boolean awaitTermination(long timeout, TimeUnit unit) {
+		synchronized (executorMutex) {
+			if (executor == null)
+				return true;
+			if (!shutdown.get())
+				throw new IllegalStateException("Cannot wait for termination when never stopped!");
+			try {
+				return executor.awaitTermination(timeout, unit);
+			} catch (InterruptedException e) {
+				return false;
+			}
+		}
+	}
+	
+	protected boolean call(Runnable r) {
+		synchronized (executorMutex) {
+			if (executor == null)
+				throw new IllegalStateException("Manager has not been started!");
+			if (shutdown.get())
+				return false;
+			try {
+				executor.execute(r);
+				return true;
+			} catch (RejectedExecutionException e) {
+				return false;
+			}
+		}
+	}
+	
 }

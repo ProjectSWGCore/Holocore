@@ -175,7 +175,7 @@ public class CharacterCreationService extends Service {
 			}
 		}
 		response.setRandomName(randomName);
-		sendPacket(player.getNetworkId(), response);
+		player.sendPacket(response);
 	}
 	
 	private void handleApproveNameRequest(PlayerManager playerMgr, Player player, ClientVerifyAndLockNameRequest request) {
@@ -191,7 +191,7 @@ public class CharacterCreationService extends Service {
 				err = ErrorMessage.NAME_DECLINED_IN_USE;
 			}
 		}
-		sendPacket(player.getNetworkId(), new ClientVerifyAndLockNameResponse(name, err));
+		player.sendPacket(new ClientVerifyAndLockNameResponse(name, err));
 	}
 	
 	private void handleCharCreation(ObjectManager objManager, Player player, ClientCreateCharacter create) {
@@ -217,7 +217,7 @@ public class CharacterCreationService extends Service {
 		} else if (createCharacterInDb(creature, create.getName(), player)) {
 			creationRestriction.createdCharacter(player);
 			Log.i("ZoneService", "%s created character %s from %s:%d", player.getUsername(), create.getName(), create.getAddress(), create.getPort());
-			sendPacket(player, new CreateCharacterSuccess(creature.getObjectId()));
+			player.sendPacket(new CreateCharacterSuccess(creature.getObjectId()));
 			new PlayerEventIntent(player, PlayerEvent.PE_CREATE_CHARACTER).broadcast();
 			return ErrorMessage.NAME_APPROVED;
 		} else {
@@ -246,7 +246,7 @@ public class CharacterCreationService extends Service {
 				break;
 		}
 		Log.e("ZoneService", "Failed to create character %s for user %s with error %s and reason %s from %s:%d", create.getName(), player.getUsername(), err, reason, create.getAddress(), create.getPort());
-		sendPacket(player, new CreateCharacterFailure(reason));
+		player.sendPacket(new CreateCharacterFailure(reason));
 	}
 	
 	private boolean createCharacterInDb(CreatureObject creature, String name, Player player) {
@@ -319,7 +319,6 @@ public class CharacterCreationService extends Service {
 		
 		playerObj.setAdminTag(player.getAccessLevel());
 		new ObjectCreatedIntent(creatureObj).broadcast();
-		new GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, create.getStartingPhase(), creatureObj, true).broadcast();
 		return creatureObj;
 	}
 	
@@ -399,8 +398,9 @@ public class CharacterCreationService extends Service {
 		creatureObj.setHeight(create.getHeight());
 		creatureObj.setName(create.getName());
 		creatureObj.setPvpFlags(PvpFlag.PLAYER);
-		creatureObj.getSkills().add("species_" + creatureObj.getRace().getSpecies());
 		creatureObj.setVolume(0x000F4240);
+		new GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, create.getStartingPhase(), creatureObj, true).broadcast();
+		new GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, "species_" + creatureObj.getRace().getSpecies(), creatureObj, true).broadcast();
 		
 		WeaponObject defWeapon = (WeaponObject) createInventoryObject(objManager, creatureObj, "object/weapon/melee/unarmed/shared_unarmed_default_player.iff");
 		defWeapon.setMaxRange(5);
@@ -415,9 +415,6 @@ public class CharacterCreationService extends Service {
 		createInventoryObject(objManager, creatureObj, "object/tangible/inventory/shared_appearance_inventory.iff");
 		createInventoryObject(objManager, creatureObj, "object/tangible/bank/shared_character_bank.iff");
 		createInventoryObject(objManager, creatureObj, "object/tangible/mission_bag/shared_mission_bag.iff");
-		
-		// Any character can perform the basic dance.
-		creatureObj.addAbility("startDance+basic");
 	}
 	
 	private void setPlayerObjectValues(PlayerObject playerObj, ClientCreateCharacter create) {

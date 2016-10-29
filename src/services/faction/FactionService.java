@@ -45,7 +45,6 @@ import resources.PvpFlag;
 import resources.PvpStatus;
 import resources.control.Intent;
 import resources.control.Service;
-import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
@@ -207,20 +206,15 @@ public final class FactionService extends Service {
 	private void handleFlagChange(TangibleObject target) {
 		Player objOwner = target.getOwner();
 		
-		for (SWGObject o : target.getObservers()) {
-			if (!(o instanceof TangibleObject))
-				continue;
-			TangibleObject observer = (TangibleObject) o;
-			Player obsOwner = observer.getOwner();
+		for (Player observerOwner : target.getObservers()) {
+			TangibleObject observer = observerOwner.getCreatureObject();
 
 			int pvpBitmask = getPvpBitmask(target, observer);
 			
-			if (objOwner != null)
-				// Send the PvP information about this observer to the owner
+			if (objOwner != null) // Send the PvP information about this observer to the owner
 				objOwner.sendPacket(createPvpStatusMessage(observer, observer.getPvpFlags() | pvpBitmask));
-			if (obsOwner != null)
-				// Send the pvp information about the owner to this observer
-				obsOwner.sendPacket(createPvpStatusMessage(target, target.getPvpFlags() | pvpBitmask));
+			// Send the pvp information about the owner to this observer
+			observerOwner.sendPacket(createPvpStatusMessage(target, target.getPvpFlags() | pvpBitmask));
 		}
 	}
 	
