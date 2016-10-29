@@ -240,15 +240,14 @@ public final class SkillManager extends Manager {
 		}
 	}
 	
-	@SuppressWarnings("unused")
 	private static class SkillData {
 		private String[] requiredSkills;
-		private String parentSkill;
-		private String xpType;
-		private int xpCost;
-		private String[] commands;
-		private Map<String, Integer> skillMods;
-		private String[] schematics;
+		private final String parentSkill;
+		private final String xpType;
+		private final int xpCost;
+		private final String[] commands;
+		private final Map<String, Integer> skillMods;
+		private final String[] schematics;
 
 		public SkillData(String[] requiredSkills, String parentSkill, String xpType, int xpCost, String[] commands, Map<String, Integer> skillMods, String[] schematics) {
 			this.parentSkill = parentSkill;

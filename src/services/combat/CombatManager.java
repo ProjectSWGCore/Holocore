@@ -48,8 +48,6 @@ import java.util.Iterator;
 import java.util.Random;
 import java.util.concurrent.Future;
 import resources.Posture;
-import resources.PvpFaction;
-import resources.PvpFlag;
 import resources.combat.AttackType;
 import resources.combat.CombatStatus;
 import resources.combat.HitLocation;
@@ -66,7 +64,6 @@ import resources.objects.creature.CreatureObject;
 import resources.objects.tangible.TangibleObject;
 import resources.objects.weapon.WeaponObject;
 import resources.server_info.Log;
-import utilities.Scripts;
 import utilities.ThreadUtilities;
 
 public class CombatManager extends Manager {
@@ -82,6 +79,11 @@ public class CombatManager extends Manager {
 	private final CombatXpService combatXpService;
 	
 	private ScheduledExecutorService executor;
+	
+	// TODO upon first combat, cache skillmod-related calculations
+	// TODO upon receiving SkillModIntent, the relevant calculation(s) must be updated
+	// TODO remove calculations if they haven't been accessed for a while?
+	// TODO remove calculations if the creature disappears
 	
 	public CombatManager() {
 		registerForIntent(DeathblowIntent.TYPE);

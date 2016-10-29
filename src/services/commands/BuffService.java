@@ -43,8 +43,6 @@ import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import network.packets.swg.zone.PlayClientEffectObjectMessage;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
@@ -299,8 +297,11 @@ public class BuffService extends Service {
 	private void checkStackCount(CreatureObject receiver, BuffData buffData, Entry<CRC, Buff> buffEntry, int playTime, int stackMod) {
 		// If it's the same buff, we need to check for stacks
 		int maxStackCount = buffData.getMaxStackCount();
-
+		CRC crc = buffEntry.getKey();
+		
 		if (maxStackCount < 2) {
+			removeBuff(receiver, crc, true);
+			applyBuff(receiver, receiver, buffData, playTime, crc);
 			return;
 		}
 
@@ -310,8 +311,6 @@ public class BuffService extends Service {
 			stackMod = maxStackCount;
 		}
 
-		CRC crc = buffEntry.getKey();
-		
 		receiver.adjustBuffStackCount(crc, stackMod);
 		checkSkillMods(buffData, receiver, stackMod);
 
