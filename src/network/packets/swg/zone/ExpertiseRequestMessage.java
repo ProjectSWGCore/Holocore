@@ -25,34 +25,67 @@
 * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
 *                                                                                  *
 ***********************************************************************************/
-package intents.experience;
+package network.packets.swg.zone;
 
-import resources.control.Intent;
-import resources.objects.creature.CreatureObject;
+import network.packets.swg.SWGPacket;
 
-/**
- *
- * @author Mads
- */
-public final class SkillBoxGrantedIntent extends Intent {
+import java.nio.ByteBuffer;
+
+public final class ExpertiseRequestMessage extends SWGPacket {
 	
-	public static final String TYPE = "SkillBoxGrantedIntent";
+	public static final int CRC = getCrc("ExpertiseRequestMessage");
 	
-	private String skillName;
-	private CreatureObject target;
+	private String[] requestedSkills;
+	private boolean clearAllExpertisesFirst;
 	
-	public SkillBoxGrantedIntent(String skillName, CreatureObject target) {
-		super(TYPE);
-		this.skillName = skillName;
-		this.target = target;
-	}
-
-	public String getSkillName() {
-		return skillName;
-	}
-
-	public CreatureObject getTarget() {
-		return target;
+	public ExpertiseRequestMessage() {
+		
 	}
 	
+	public ExpertiseRequestMessage(ByteBuffer data) {
+		decode(data);
+	}
+	
+	@Override
+	public void decode(ByteBuffer data) {
+		if (!super.decode(data, CRC))
+			return;
+		requestedSkills = new String[getInt(data)];
+		
+		for (int i = 0; i < requestedSkills.length; i++) {
+			requestedSkills[i] = getAscii(data);
+		}
+		
+		clearAllExpertisesFirst = getBoolean(data);
+	}
+	
+	@Override
+	public ByteBuffer encode() {
+		int skillNamesLength = 0;
+		
+		for (String skillName : requestedSkills)
+			skillNamesLength += 2 + skillName.length();
+		
+		ByteBuffer data = ByteBuffer.allocate(11 + skillNamesLength);
+		addShort(data, 3);
+		addInt(data, CRC);
+		addInt(data, requestedSkills.length);
+		
+		for (String requestedSkill : requestedSkills) {
+			addAscii(data, requestedSkill);
+		}
+		
+		addBoolean(data, clearAllExpertisesFirst);
+		
+		return data;
+	}
+
+	public String[] getRequestedSkills() {
+		return requestedSkills;
+	}
+
+	public boolean isClearAllExpertisesFirst() {
+		return clearAllExpertisesFirst;
+	}
+
 }

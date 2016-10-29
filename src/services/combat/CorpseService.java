@@ -49,6 +49,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.Future;
 import java.util.stream.Collectors;
+import network.packets.swg.zone.PlayClientEffectObjectMessage;
 import resources.Location;
 import resources.Posture;
 import resources.PvpFaction;

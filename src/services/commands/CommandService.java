@@ -182,7 +182,7 @@ public class CommandService extends Service {
 		long targetId = request.getTargetId();
 		final SWGObject target = targetId != 0 ? galacticManager.getObjectManager().getObjectById(targetId) : null;
 		
-		if (command.isAddToCombatQueue()) {
+		if (!command.getCooldownGroup().equals("defaultCooldownGroup") && command.isAddToCombatQueue()) {
 			// Schedule for later execution
 			synchronized (combatQueueMap) {
 				Queue<QueuedCommand> combatQueue = combatQueueMap.get(player);
@@ -268,7 +268,7 @@ public class CommandService extends Service {
 	}
 	
 	private void startCooldownGroup(CreatureObject creature, int sequenceId, int commandNameCrc, String cooldownGroup, float cooldownTime) {
-		if(!cooldownGroup.isEmpty()) {
+		if(!cooldownGroup.isEmpty() && !cooldownGroup.equals("defaultCooldownGroup")) {
 			synchronized(cooldownMap) {
 				if(cooldownMap.get(creature).add(cooldownGroup)) {
 					CommandTimer commandTimer = new CommandTimer(creature.getObjectId());

@@ -37,6 +37,7 @@ import network.packets.swg.zone.object_controller.ShowFlyText.Scale;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
 import resources.common.RGB;
+import resources.config.ConfigFile;
 import resources.control.Intent;
 import resources.control.Manager;
 import resources.encodables.OutOfBandPackage;
@@ -53,18 +54,20 @@ import resources.server_info.Log;
  */
 public final class ExperienceManager extends Manager {
 	
-	private SkillService skillService;
-	private SkillTemplateService skillTemplateService;
+	private final SkillManager skillManager;
+	private final SkillTemplateService skillTemplateService;
 	private final Map<Short, Integer> levelXpMap;
+	private final double xpMultiplier;
 	
 	public ExperienceManager() {
-		skillService = new SkillService();
+		skillManager = new SkillManager();
 		skillTemplateService = new SkillTemplateService();
 		levelXpMap = new HashMap<>();
+		xpMultiplier = getConfig(ConfigFile.FEATURES).getDouble("XP-MULTIPLIER", 1);
 		
 		registerForIntent(ExperienceIntent.TYPE);
 		
-		addChildService(skillService);
+		addChildService(skillManager);
 		addChildService(skillTemplateService);
 	}
 
@@ -100,11 +103,11 @@ public final class ExperienceManager extends Manager {
 			
 			// At this point, we check if their level should be adjusted.
 			short oldLevel = creatureObject.getLevel();
-			attemptLevelUp(creatureObject, i.getXpType(), newXpTotal);
-			short newLevel = creatureObject.getLevel();
+			short newLevel = attemptLevelUp(creatureObject.getLevel(), creatureObject, newXpTotal);
 			
 			if (oldLevel < newLevel) {	// If we've leveled up at least once
 				new LevelChangedIntent(creatureObject, oldLevel, newLevel).broadcast();
+				creatureObject.setLevel(newLevel);
 				adjustHealth(creatureObject, newLevel);
 				adjustAction(creatureObject, newLevel);
 				// TODO NGE: system message health and action differences. @spam:level_up_stat_gain_#
@@ -116,6 +119,8 @@ public final class ExperienceManager extends Manager {
 	private int awardExperience(CreatureObject creatureObject, PlayerObject playerObject, String xpType, int xpGained) {
 		Integer currentXp = playerObject.getExperiencePoints(xpType);
 		int newXpTotal;
+		
+		xpGained *= xpMultiplier;
 		
 		if (currentXp == null) {	// They don't have this type of XP already
 			newXpTotal = xpGained;
@@ -133,22 +138,21 @@ public final class ExperienceManager extends Manager {
 		return newXpTotal;
 	}
 	
-	private void attemptLevelUp(CreatureObject creatureObject, String xpType, int newXpTotal) {
-		short currentLevel = creatureObject.getLevel();
-
-		if (currentLevel != getMaxLevel()) {
-			short nextLevel = (short) (currentLevel + 1);
-			Integer xpNextLevel = levelXpMap.get(nextLevel);
-			
-			if (xpNextLevel != null) {
-				if (newXpTotal >= xpNextLevel) {
-					creatureObject.setLevel(nextLevel);
-					
-					// Recursively attempt to level up again, in case we've gained enough XP to level up multiple times.
-					attemptLevelUp(creatureObject, xpType, newXpTotal);
-				}
-			}
+	private short attemptLevelUp(short currentLevel, CreatureObject creatureObject, int newXpTotal) {
+		if (currentLevel >= getMaxLevel()) {
+			return currentLevel;
 		}
+		
+		short nextLevel = (short) (currentLevel + 1);
+		Integer xpNextLevel = levelXpMap.get(nextLevel);
+
+		if (xpNextLevel == null) {
+			Log.e(this, "%s couldn't level up to %d because there's no XP requirement", creatureObject, nextLevel);
+			return currentLevel;
+		}
+
+		// Recursively attempt to level up again, in case we've gained enough XP to level up multiple times.
+		return newXpTotal >= xpNextLevel ? attemptLevelUp(nextLevel, creatureObject, newXpTotal) : currentLevel;
 	}
 	
 	private void adjustHealth(CreatureObject creatureObject, short newLevel) {

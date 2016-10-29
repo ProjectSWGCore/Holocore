@@ -299,8 +299,11 @@ public class BuffService extends Service {
 	private void checkStackCount(CreatureObject receiver, BuffData buffData, Entry<CRC, Buff> buffEntry, int playTime, int stackMod) {
 		// If it's the same buff, we need to check for stacks
 		int maxStackCount = buffData.getMaxStackCount();
-
+		CRC crc = buffEntry.getKey();
+		
 		if (maxStackCount < 2) {
+			removeBuff(receiver, crc, true);
+			applyBuff(receiver, receiver, buffData, playTime, crc);
 			return;
 		}
 
@@ -310,8 +313,6 @@ public class BuffService extends Service {
 			stackMod = maxStackCount;
 		}
 
-		CRC crc = buffEntry.getKey();
-		
 		receiver.adjustBuffStackCount(crc, stackMod);
 		checkSkillMods(buffData, receiver, stackMod);
 
