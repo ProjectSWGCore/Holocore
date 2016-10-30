@@ -37,13 +37,19 @@ import network.packets.swg.zone.UpdateTransformWithParentMessage;
 public class DataTransformHandler {
 	
 	private final SpeedCheckHandler speedCheckHandler;
+	private boolean speedCheckEnabled;
 	
 	public DataTransformHandler() {
 		speedCheckHandler = new SpeedCheckHandler();
+		speedCheckEnabled = true;
+	}
+	
+	public void setSpeedCheck(boolean enabled) {
+		this.speedCheckEnabled = enabled;
 	}
 	
 	public boolean handleMove(SWGObject obj, Location requestedLocation, double speed, int update) {
-		if (obj instanceof CreatureObject && ((CreatureObject) obj).isLoggedInPlayer())
+		if (speedCheckEnabled && obj instanceof CreatureObject && ((CreatureObject) obj).isLoggedInPlayer())
 			speedCheckHandler.moveObjectSpeedChecks((CreatureObject) obj, requestedLocation);
 		BuildoutArea area = obj.getBuildoutArea();
 		if (area != null)
@@ -53,7 +59,7 @@ public class DataTransformHandler {
 	}
 	
 	public boolean handleMove(SWGObject obj, SWGObject parent, Location requestedLocation, double speed, int update) {
-		if (obj instanceof CreatureObject && ((CreatureObject) obj).isLoggedInPlayer())
+		if (speedCheckEnabled && obj instanceof CreatureObject && ((CreatureObject) obj).isLoggedInPlayer())
 			speedCheckHandler.moveObjectSpeedChecks((CreatureObject) obj, parent, requestedLocation);
 		obj.sendObservers(createTransform(obj, parent.getObjectId(), requestedLocation, speed, update));
 		return true;

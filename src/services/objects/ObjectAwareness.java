@@ -35,6 +35,7 @@ import intents.object.MoveObjectIntent;
 import intents.object.ObjectCreatedIntent;
 import intents.object.ObjectTeleportIntent;
 import intents.player.PlayerTransformedIntent;
+import intents.server.ConfigChangedIntent;
 import main.ProjectSWG;
 import network.packets.Packet;
 import network.packets.swg.zone.CmdSceneReady;
@@ -44,6 +45,7 @@ import network.packets.swg.zone.object_controller.DataTransformWithParent;
 import resources.Location;
 import resources.Race;
 import resources.Terrain;
+import resources.config.ConfigFile;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.SWGObject;
@@ -62,6 +64,7 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 	public ObjectAwareness() {
 		awarenessHandler = new AwarenessHandler(this);
 		dataTransformHandler = new DataTransformHandler();
+		dataTransformHandler.setSpeedCheck(getConfig(ConfigFile.FEATURES).getBoolean("SPEED-HACK-CHECK", true));
 		
 		registerForIntent(PlayerEventIntent.TYPE);
 		registerForIntent(ObjectCreatedIntent.TYPE);
@@ -69,6 +72,7 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 		registerForIntent(ObjectTeleportIntent.TYPE);
 		registerForIntent(GalacticPacketIntent.TYPE);
 		registerForIntent(MoveObjectIntent.TYPE);
+		registerForIntent(ConfigChangedIntent.TYPE);
 	}
 	
 	@Override
@@ -104,6 +108,9 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 				if (i instanceof MoveObjectIntent)
 					processMoveObjectIntent((MoveObjectIntent) i);
 				break;
+			case ConfigChangedIntent.TYPE:
+				if (i instanceof ConfigChangedIntent)
+					processConfigChangedIntent((ConfigChangedIntent) i);
 			default:
 				break;
 		}
@@ -203,6 +210,11 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 			moveObjectWithTransform(i.getObject(), i.getNewLocation(), i.getSpeed(), i.getUpdateCounter());
 		else
 			moveObjectWithTransform(i.getObject(), i.getParent(), i.getNewLocation(), i.getSpeed(), i.getUpdateCounter());
+	}
+	
+	private void processConfigChangedIntent(ConfigChangedIntent i) {
+		if (i.getChangedConfig() == ConfigFile.FEATURES && i.getKey().equals("SPEED-HACK-CHECK"))
+			dataTransformHandler.setSpeedCheck(Boolean.parseBoolean(i.getNewValue()));
 	}
 	
 	private void startScene(CreatureObject creature) {
