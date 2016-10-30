@@ -111,7 +111,7 @@ public final class SpawnerService extends Service {
 	private void handleConfigChangedIntent(ConfigChangedIntent i) {
 		String newValue, oldValue;
 		
-		if (i.getChangedConfig().equals(ConfigFile.FEATURES)) {
+		if (i.getChangedConfig().equals(ConfigFile.FEATURES) && i.getKey().equals("SPAWN-EGGS-ENABLED")) {
 			newValue = i.getNewValue();
 			oldValue = i.getOldValue();
 
