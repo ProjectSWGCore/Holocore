@@ -317,6 +317,10 @@ public class Location implements Encodable, Persistable {
 	 * @return the distance between {@code this} and destination, which is ALWAYS positive.
 	 */
 	public double distanceTo(Location destination) {
-		return Math.sqrt(square(destination.getX() - getX()) + square(destination.getY() - getY()) + square(destination.getZ() - getZ()));
+		return distanceTo(destination.getX(), destination.getY(), destination.getZ());
+	}
+	
+	public double distanceTo(double dstX, double dstY, double dstZ) {
+		return Math.sqrt(square(dstX - getX()) + square(dstY - getY()) + square(dstZ - getZ()));
 	}
 }
