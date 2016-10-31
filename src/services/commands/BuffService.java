@@ -250,8 +250,13 @@ public class BuffService extends Service {
 		return dataMap.get(crc).isRemovedOnDeath();
 	}
 	
+	private boolean isBuffInfinite(BuffData buffData) {
+		return buffData.getDefaultDuration() < 0;
+	}
+	
 	private boolean hasBuffs(CreatureObject creature) {
-		return creature.getBuffEntries(buffEntry -> true).count() > 0;
+		return creature.getBuffEntries(buffEntry -> !isBuffInfinite(dataMap.get(buffEntry.getKey())))
+				.count() > 0;
 	}
 	
 	private void decayDuration(CreatureObject creature, Entry<CRC, Buff> buffEntry) {
@@ -287,7 +292,7 @@ public class BuffService extends Service {
 			CRC oldCrc = buffEntry.getKey();
 			
 			if (oldCrc.equals(newCrc)) {
-				if (buffData.getDefaultDuration() == -1) {
+				if (isBuffInfinite(buffData)) {
 					removeBuff(receiver, oldCrc, true);
 				} else {
 					// TODO skillmods influencing stack increment
