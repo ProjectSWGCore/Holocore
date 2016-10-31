@@ -133,7 +133,7 @@ public class ConnectionService extends Service {
 				CoreManager.getGalaxy().incrementPopulationCount();
 				clearPlayerFlag(pei.getPlayer(), pei.getEvent(), PlayerFlags.LD);
 				break;
-			case PE_LOGGED_OUT:
+			case PE_LOGGED_OUT: {
 				Player p = pei.getPlayer();
 				synchronized (zonedInPlayers) {
 					if (!zonedInPlayers.contains(p)) {
@@ -148,6 +148,7 @@ public class ConnectionService extends Service {
 				setPlayerFlag(p, pei.getEvent(), PlayerFlags.LD);
 				logOut(p, true);
 				break;
+			}
 			default:
 				break;
 		}
