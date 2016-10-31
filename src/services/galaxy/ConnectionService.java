@@ -138,7 +138,7 @@ public class ConnectionService extends Service {
 				synchronized (zonedInPlayers) {
 					if (!zonedInPlayers.contains(p)) {
 						// No reason to set flags, log out and disappear
-						// characters that were never zoned in to begin with
+						// characters that aren't zoned in
 						return;
 					}
 				}
