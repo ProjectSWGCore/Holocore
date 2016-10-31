@@ -312,9 +312,6 @@ public final class StaticItemService extends Service {
 		public final String getIffTemplate() {
 			return iffTemplate;
 		}
-
-		public final String getRequiredLevel() { return requiredLevel; }
-
 	}
 
 	private static class WearableAttributes extends ObjectAttributes {
@@ -349,15 +346,15 @@ public final class StaticItemService extends Service {
 			} else {
 				requiredFaction = "@pvp_factions:" + requiredFaction;
 			}
-			
+
 			// Load mods
 			String modsString = resultSet.getString("skill_mods");
-			
+
 			// If this wearable is supposed to have mods, then load 'em!
 			mods = parseSkillMods(modsString);
 
 			String buffNameCell = resultSet.getString("buff_name");
-			
+
 			if(!buffNameCell.equals("-")) {
 				buffName = "@ui_buff:" + buffNameCell;
 			}
@@ -369,8 +366,7 @@ public final class StaticItemService extends Service {
 		protected void applyTypeAttributes(SWGObject object) {
 			object.addAttribute("class_required", requiredProfession);
 			object.addAttribute("faction_restriction", requiredFaction);
-			object.addAttribute("required_level", getRequiredLevel());
-			
+
 			// Apply the mods!
 			for(Map.Entry<String, String> modEntry : mods.entrySet())
 				object.addAttribute(modEntry.getKey(), modEntry.getValue());
