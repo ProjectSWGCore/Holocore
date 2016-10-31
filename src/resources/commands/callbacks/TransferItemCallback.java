@@ -119,7 +119,7 @@ public class TransferItemCallback implements ICmdCallback {
 			String reqLevelStr = target.getAttribute("required_combat_level");
 
 			if (reqLevelStr != null) {
-				short reqLevel = Short.parseShort(target.getAttribute(reqLevelStr));
+				short reqLevel = Short.parseShort(reqLevelStr);
 				if (actor.getLevel() < reqLevel) {
 					new ChatBroadcastIntent(player, "@base_player:level_too_low").broadcast();
 					return;
