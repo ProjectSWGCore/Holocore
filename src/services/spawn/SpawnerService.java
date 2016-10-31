@@ -42,6 +42,7 @@ import resources.Location;
 import resources.PvpFlag;
 import resources.Terrain;
 import resources.config.ConfigFile;
+import resources.containers.ContainerPermissionsType;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.building.BuildingObject;
@@ -203,6 +204,7 @@ public final class SpawnerService extends Service {
 		
 		SpawnerType spawnerType = SpawnerType.valueOf(set.getString("spawner_type"));
 		SWGObject egg = ObjectCreator.createObjectFromTemplate(spawnerType.getObjectTemplate());
+		egg.setContainerPermissions(ContainerPermissionsType.ADMIN);
 		egg.setLocation(loc);
 		egg.moveToContainer(parent);
 		new ObjectCreatedIntent(egg).broadcast();

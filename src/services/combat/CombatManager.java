@@ -218,6 +218,9 @@ public class CombatManager extends Manager {
 		CreatureObject source = intent.getSource();
 		SWGObject target = intent.getTarget();
 		
+		// Regardless of HitType, the command might have action cost
+		addActionCost(source, c);
+		
 		// TODO implement support for remaining HitTypes
 		switch (c.getHitType()) {
 			case ATTACK: handleAttack(source, target, c); break;
@@ -518,6 +521,20 @@ public class CombatManager extends Manager {
 	private CombatStatus canPerformArea(CreatureObject source, CombatCommand c) {
 		// TODO implement AoE
 		return CombatStatus.UNKNOWN;
+	}
+	
+	private void addActionCost(CreatureObject source, CombatCommand command) {
+		double actionCost = command.getActionCost();
+		int currentAction = source.getAction();
+		
+		if (actionCost <= 0 || actionCost > currentAction) {
+			return;
+		}
+		
+		synchronized (regeneratingActionCreatures) {
+			source.setAction((int) (currentAction - actionCost));
+			regeneratingActionCreatures.add(source);
+		}
 	}
 	
 	private int calculateWeaponDamage(CreatureObject source, CombatCommand command) {
