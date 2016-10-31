@@ -116,8 +116,8 @@ public class TransferItemCallback implements ICmdCallback {
 			}
 
 			// Check the players level, if they're too low of a level, don't allow them to wear it
-			short reqlevel = Short.parseShort(target.getAttribute("required_level"));
-			if (actor.getLevel() < Short.parseShort(target.getAttribute("required_level"))) {
+			short reqlevel = Short.parseShort(target.getAttribute("required_combat_level"));
+			if (actor.getLevel() < Short.parseShort(target.getAttribute("required_combat_level"))) {
 				new ChatBroadcastIntent(player, "@base_player:level_too_low").broadcast();
 				return;
 			}
