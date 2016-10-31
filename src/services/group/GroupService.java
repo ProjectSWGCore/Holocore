@@ -45,11 +45,8 @@ import services.player.PlayerManager;
 import utilities.IntentFactory;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
@@ -65,7 +62,7 @@ public class GroupService extends Service {
 	
 	private final ScheduledExecutorService logoutService;
 	private final Map<Long, GroupObject> groups;
-	private Map<CreatureObject, Future> logoffTimers;
+	private Map<CreatureObject, Future<?>> logoffTimers;
 
 	public GroupService() {
 		logoutService = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("group-logout-timer"));
@@ -181,7 +178,7 @@ public class GroupService extends Service {
 		// Create a timer with the GroupMember player owns as the key
 		// and a timer set to fire and remove that member as the value
 		CreatureObject playerCreo = player.getCreatureObject();
-		Future future = logoutService.schedule(new LogOffTask(this, playerCreo), 4, TimeUnit.MINUTES);
+		Future<?> future = logoutService.schedule(new LogOffTask(this, playerCreo), 4, TimeUnit.MINUTES);
 		
 		synchronized (this.logoffTimers) {
 			this.logoffTimers.put(playerCreo, future);
@@ -309,8 +306,6 @@ public class GroupService extends Service {
 	}
 	
 	private void handleGroupUninvite(Player player, CreatureObject target) {
-		CreatureObject playerCreo = player.getCreatureObject();
-		
 		if (target == null) {
 			sendSystemMessage(player, "uninvite_no_target_self");
 			return;
@@ -318,9 +313,6 @@ public class GroupService extends Service {
 		
 		Player targetOwner = target.getOwner();
 		String targetName = targetOwner.getCharacterName();
-		
-		if (targetOwner == null)
-			return;
 		
 		if (target.getInviterData() == null) {
 			sendSystemMessage(player, "uninvite_not_invited", "TT", targetName);

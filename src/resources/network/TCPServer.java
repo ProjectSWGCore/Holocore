@@ -33,6 +33,8 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
 import java.nio.ByteBuffer;
+import java.nio.channels.AsynchronousCloseException;
+import java.nio.channels.ClosedByInterruptException;
 import java.nio.channels.ClosedChannelException;
 import java.nio.channels.SelectableChannel;
 import java.nio.channels.SelectionKey;
@@ -126,6 +128,7 @@ public class TCPServer {
 	
 	public boolean close() {
 		listener.stop();
+		callbackExecutor.shutdown();
 		try {
 			if (channel != null)
 				channel.close();
@@ -246,8 +249,10 @@ public class TCPServer {
 					if (callback != null)
 						callbackExecutor.execute(() -> callback.onIncomingConnection(sc.socket()));
 				}
+			} catch (AsynchronousCloseException e) {
+				
 			} catch (IOException e) {
-				e.printStackTrace();
+				Log.a(this, e);
 			}
 		}
 		
@@ -267,6 +272,10 @@ public class TCPServer {
 						callbackExecutor.execute(() -> callback.onIncomingData(s.socket(), smaller.array()));
 					return true;
 				}
+			} catch (ClosedByInterruptException e) {
+				key.cancel();
+				disconnect(s);
+				stop();
 			} catch (IOException e) {
 				if (e.getMessage() != null && e.getMessage().toLowerCase(Locale.US).contains("connection reset"))
 					Log.e("TCPServer", "Connection Reset with %s", s.socket().getRemoteSocketAddress());

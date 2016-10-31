@@ -377,7 +377,6 @@ public class TravelService extends Service {
 		
 		grantTickets(purchaser, nearestPoint, destinationPoint, roundTrip);
 		handlePurchaseFinish(purchaserOwner, purchaser, ticketPrice, newCashBalance, newBankBalance);
-
 	}
 	
 	private void handlePurchaseFinish(Player purchaserOwner, CreatureObject purchaser, int ticketPrice, long newCashBalance, long newBankBalance) {

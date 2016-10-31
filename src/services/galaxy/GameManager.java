@@ -28,6 +28,7 @@
 package services.galaxy;
 
 import resources.control.Manager;
+import services.commands.BuffService;
 import services.collections.CollectionService;
 import services.collections.CollectionBadgeManager;
 import services.combat.CombatManager;
@@ -54,6 +55,7 @@ public class GameManager extends Manager {
 	private final EntertainmentService entertainmentService;
 	private final CombatManager combatManager;
 	private final ExperienceManager experienceManager;
+	private final BuffService buffService;
 
 	public GameManager() {
 		commandService = new CommandService();
@@ -69,6 +71,7 @@ public class GameManager extends Manager {
 		entertainmentService = new EntertainmentService();
 		combatManager = new CombatManager();
 		experienceManager = new ExperienceManager();
+		buffService = new BuffService();
 
 		addChildService(commandService);
 		addChildService(connectionService);
@@ -83,5 +86,6 @@ public class GameManager extends Manager {
 		addChildService(entertainmentService);
 		addChildService(combatManager);
 		addChildService(experienceManager);
+		addChildService(buffService);
 	}
 }

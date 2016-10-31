@@ -275,10 +275,10 @@ public class CollectionBadgeManager extends Manager {
 
 		if (hidden) {
 			sendSystemMessage(thisplayer, "@collection:player_hidden_slot_added", "TO", "@collection_n:" + collectionName);
-			sendPacket(thisplayer, new PlayMusicMessage(0, "sound/utinni.snd", 1, false));
+			thisplayer.sendPacket(new PlayMusicMessage(0, "sound/utinni.snd", 1, false));
 		} else {
 			sendSystemMessage(thisplayer, "@collection:player_slot_added", "TU", "@collection_n:" + slotName, "TO", "@collection_n:" + collectionName);
-			sendPacket(thisplayer, new PlayMusicMessage(0, "sound/utinni.snd", 1, false));
+			thisplayer.sendPacket(new PlayMusicMessage(0, "sound/utinni.snd", 1, false));
 		}
 		if (collectionComplete) {
 			sendSystemMessage(thisplayer, "@collection:player_collection_complete", "TO", "@collection_n:" + collectionName);

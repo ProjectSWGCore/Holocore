@@ -29,7 +29,7 @@ package services.experience;
 
 import intents.GrantBadgeIntent;
 import intents.experience.LevelChangedIntent;
-import intents.experience.SkillBoxGrantedIntent;
+import intents.experience.GrantSkillIntent;
 import java.awt.Color;
 import java.util.HashMap;
 import java.util.Map;
@@ -102,6 +102,7 @@ public final class SkillTemplateService extends Service {
 		CreatureObject creatureObject = i.getCreatureObject();
 		Player player = creatureObject.getOwner();
 		long objectId = creatureObject.getObjectId();
+		boolean skillUp = false;
 		
 		for (int level = oldLevel + 1; level <= newLevel; level++) {
 			// Skills are only awarded every third or fourth level
@@ -112,28 +113,30 @@ public final class SkillTemplateService extends Service {
 
 				if (templates == null) {
 					Log.w(this, "%s tried to level up to %d with invalid profession %s", creatureObject, level, profession);
-				} else {
-					int skillIndex = (level <= 10) ? ((level - 1) / 3) : (((level - 10) / 4) + 3);
-
-					String skillName = templates[skillIndex];
-					new SkillBoxGrantedIntent(skillName, creatureObject).broadcast();
-					playerObject.setProfWheelPosition(skillName);
-
-					// Grants a mastery collection badge, IF they qualify.
-					grantMasteryBadge(creatureObject, profession, skillName);
-
-					giveRewardItems(creatureObject, skillName);
-
-					creatureObject.sendObserversAndSelf(new PlayClientEffectObjectMessage("clienteffect/skill_granted.cef", "", objectId));
-					sendPacket(player, new ShowFlyText(objectId, new StringId("cbt_spam", "skill_up"), Scale.LARGEST, new RGB(Color.GREEN)));
-					sendPacket(player, new PlayMusicMessage(0, "sound/music_acq_bountyhunter.snd", 1, false));
-					Log.d(this, "Level %d has skill %s - %s received it", level, skillName, creatureObject);
+					return;
 				}
-			} else {
-				creatureObject.sendObserversAndSelf(new PlayClientEffectObjectMessage("clienteffect/level_granted.cef", "", objectId));
-				sendPacket(player, new ShowFlyText(objectId, new StringId("cbt_spam", "level_up"), Scale.LARGEST, new RGB(Color.BLUE)));
-				Log.d(this, "Level %d has no skillbox - %s is rewarded nothing", level, creatureObject);
+				
+				int skillIndex = (level <= 10) ? ((level - 1) / 3) : (((level - 10) / 4) + 3);
+
+				String skillName = templates[skillIndex];
+				new GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, skillName, creatureObject, true).broadcast();
+				playerObject.setProfWheelPosition(skillName);
+
+				// Grants a mastery collection badge, IF they qualify.
+				grantMasteryBadge(creatureObject, profession, skillName);
+				giveRewardItems(creatureObject, skillName);
+				
+				skillUp = true;
 			}
+		}
+		
+		if (skillUp) {
+			creatureObject.sendObserversAndSelf(new PlayClientEffectObjectMessage("clienteffect/skill_granted.cef", "", objectId));
+			player.sendPacket(new ShowFlyText(objectId, new StringId("cbt_spam", "skill_up"), Scale.LARGEST, new RGB(Color.GREEN)));
+			player.sendPacket(new PlayMusicMessage(0, "sound/music_acq_bountyhunter.snd", 1, false));
+		} else {
+			creatureObject.sendObserversAndSelf(new PlayClientEffectObjectMessage("clienteffect/level_granted.cef", "", objectId));
+			player.sendPacket(new ShowFlyText(objectId, new StringId("cbt_spam", "level_up"), Scale.LARGEST, new RGB(Color.BLUE)));
 		}
 	}
 

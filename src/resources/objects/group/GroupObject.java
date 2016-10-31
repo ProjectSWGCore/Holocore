@@ -37,8 +37,6 @@ import resources.objects.creature.CreatureObject;
 import resources.player.Player;
 import utilities.Encoder;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.util.Collections;

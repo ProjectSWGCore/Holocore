@@ -107,6 +107,10 @@ public class Location implements Encodable, Persistable {
 		return square(getX()-x) + square(getY()-y) + square(getZ()-z) <= square(radius);
 	}
 	
+	public boolean isWithinFlatDistance(Location l, double radius) {
+		return isWithinFlatDistance(l.point, radius);
+	}
+	
 	public boolean isWithinFlatDistance(Point3D target, double radius){
 		return square(getX() - target.getX()) + square(getZ() - target.getZ()) <= square(radius);
 	}

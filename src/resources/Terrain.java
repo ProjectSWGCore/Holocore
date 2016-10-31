@@ -148,6 +148,10 @@ public enum Terrain {
 		return l;
 	}
 	
+	public static int getTerrainCount() {
+		return CRC_TO_TERRAIN.size();
+	}
+	
 	public static String getNameFromCrc(int crc) {
 		String name = CRC_TO_NAME.get(crc);
 		if (name == null)
