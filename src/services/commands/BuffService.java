@@ -38,6 +38,7 @@ import intents.SkillModIntent;
 import intents.combat.CreatureKilledIntent;
 import java.io.FileNotFoundException;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map.Entry;
 import java.util.Optional;
@@ -85,10 +86,8 @@ public class BuffService extends Service {
 
 	@Override
 	public boolean start() {
-		synchronized (monitored) {
-			executor.scheduleAtFixedRate(() -> monitored.parallelStream().forEach(creature -> checkBuffTimers(creature)), 1, 1, TimeUnit.SECONDS);
-		}
-		
+		executor.scheduleAtFixedRate(() -> checkBuffTimers(), 1, 1, TimeUnit.SECONDS);
+
 		return super.start();
 	}
 	
@@ -108,9 +107,18 @@ public class BuffService extends Service {
 		return super.terminate();
 	}
 	
-	private void checkBuffTimers(CreatureObject creature) {
-		creature.getBuffEntries(buffEntry -> isBuffExpired(buffEntry.getValue()))
-				.forEach(buffEntry -> removeBuff(creature, buffEntry.getKey(), true));
+	private void checkBuffTimers() {
+		synchronized (monitored) {
+			monitored.forEach(creature -> {
+				Iterator<Entry<CRC, Buff>> iterator = creature.getBuffEntries(buffEntry -> isBuffExpired(buffEntry.getValue())).iterator();
+
+				while (iterator.hasNext()) {
+					Entry<CRC, Buff> entry = iterator.next();
+
+					removeBuff(creature, entry.getKey(), true);
+				}
+			});
+		}
 	}
 	
 	private void loadBuffs() {
@@ -189,9 +197,7 @@ public class BuffService extends Service {
 	private void handleFirstZone(CreatureObject creature) {
 		if (hasBuffs(creature)) {
 			synchronized (monitored) {
-				if (!monitored.add(creature)) {
-					Log.w(this, "Redundant addition %s to monitored creatures", creature);
-				}
+				monitored.add(creature);
 			}
 		}
 	}
@@ -333,6 +339,10 @@ public class BuffService extends Service {
 		
 		sendParticleEffect(buffData.getEffectFileName(), receiver, buffData.getParticleHardPoint());
 		sendParticleEffect(buffData.getStanceParticle(), receiver, buffData.getParticleHardPoint());
+		
+		synchronized (monitored) {
+			monitored.add(receiver);
+		}
 	}
 	
 	private void sendParticleEffect(String effectFileName, CreatureObject receiver, String hardPoint) {
@@ -373,7 +383,7 @@ public class BuffService extends Service {
 			checkCallback(buffCrc, buffData, creature);
 			
 			// If they have no more expirable buffs, we can stop monitoring them
-			if (hasBuffs(creature)) {
+			if (!hasBuffs(creature)) {
 				synchronized (monitored) {
 					monitored.remove(creature);
 				}
