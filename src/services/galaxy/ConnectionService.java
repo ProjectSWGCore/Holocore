@@ -133,12 +133,22 @@ public class ConnectionService extends Service {
 				CoreManager.getGalaxy().incrementPopulationCount();
 				clearPlayerFlag(pei.getPlayer(), pei.getEvent(), PlayerFlags.LD);
 				break;
-			case PE_LOGGED_OUT:
-				if (pei.getPlayer().getPlayerServer() != PlayerServer.ZONE)
+			case PE_LOGGED_OUT: {
+				Player p = pei.getPlayer();
+				synchronized (zonedInPlayers) {
+					if (!zonedInPlayers.contains(p)) {
+						// No reason to set flags, log out and disappear
+						// characters that aren't zoned in
+						return;
+					}
+				}
+				
+				if (p.getPlayerServer() != PlayerServer.ZONE)
 					CoreManager.getGalaxy().decrementPopulationCount();
-				setPlayerFlag(pei.getPlayer(), pei.getEvent(), PlayerFlags.LD);
-				logOut(pei.getPlayer(), true);
+				setPlayerFlag(p, pei.getEvent(), PlayerFlags.LD);
+				logOut(p, true);
 				break;
+			}
 			default:
 				break;
 		}
