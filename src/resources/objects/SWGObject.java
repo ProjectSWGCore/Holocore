@@ -655,8 +655,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	public void createObject(SWGObject target, boolean ignoreSnapshotChecks) {
 		if (target == null)
 			return;
-		if (!target.isVisible(this)) {
-			Log.w(this, target + " doesn't have permission to view " + this + " -- skipping packet sending");
+		if (!isVisible(target)) {
 			return;
 		}
 		Set<Player> observers = target.getAwareness().getChildObservers();
