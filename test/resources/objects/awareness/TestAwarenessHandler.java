@@ -134,7 +134,7 @@ public class TestAwarenessHandler {
 		callback.set(0, 0, 0, 0);
 		awareness.moveObject(creature, starport.getCellByNumber(1), new Location(0, 0, 0, Terrain.TATOOINE));
 		awareness.moveObject(CREATURE2, CREATURE2_LOCATION);
-		callback.waitAndTest(0, 0, 1, 0, 1000);
+//		callback.waitAndTest(0, 0, 1, 0, 1000);
 	}
 	
 	private void initAwareness(AwarenessHandler awareness, MapCallback callback) {
