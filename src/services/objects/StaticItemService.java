@@ -131,10 +131,10 @@ public final class StaticItemService extends Service {
 						case "costume":	// TODO implement
 						case "dna":	// TODO implement
 						case "grant":	// TODO implement
-						case "item":	// TODO implement
+						case "item": objectAttributes = new ItemAttributes(itemName, iffTemplate); break;
 						case "object":	// TODO implement
 						case "schematic":	// TODO implement
-						case "storyteller": continue;	// TODO implement
+						case "storyteller": objectAttributes = new StorytellerAttributes(itemName, iffTemplate); break;
 						default: Log.e(this, "Item %s was not loaded because the specified type %s is unknown", itemName, type); continue;
 					}
 
@@ -203,6 +203,8 @@ public final class StaticItemService extends Service {
 								Log.i(this, "Successfully moved %s into container %s", itemName, container);
 								createdObjects[j] = object;
 								break;
+							default:
+								break;
 						}
 						new ObjectCreatedIntent(object).broadcast();
 						
@@ -240,7 +242,6 @@ public final class StaticItemService extends Service {
 		private boolean unique;
 		private String conditionString;
 		private int volume;
-		private String requiredLevel;
 		// TODO bio-link
 		private final String itemName;
 		private final String iffTemplate;
@@ -267,7 +268,6 @@ public final class StaticItemService extends Service {
 			int hitPoints = resultSet.getInt("hit_points");
 			conditionString = String.format("%d/%d", hitPoints, hitPoints);
 			volume = resultSet.getInt("volume");
-			requiredLevel = String.valueOf(resultSet.getShort("required_level"));
 
 			// load type-specific attributes
 			return loadTypeAttributes(resultSet);
@@ -298,8 +298,7 @@ public final class StaticItemService extends Service {
 				object.addAttribute("unique", "1");
 			object.addAttribute("condition", conditionString);
 			object.addAttribute("volume", String.valueOf(volume));
-			object.addAttribute("required_combat_level", requiredLevel);
-
+			
 			// apply type-specific attributes
 			applyTypeAttributes(object);
 		}
@@ -317,13 +316,13 @@ public final class StaticItemService extends Service {
 		public final String getIffTemplate() {
 			return iffTemplate;
 		}
-
 	}
 
 	private static class WearableAttributes extends ObjectAttributes {
 
-		private final Map<String, String> mods;	// skillmods/statmods
+		private Map<String, String> mods;	// skillmods/statmods
 		private String requiredProfession;
+		private String requiredLevel;
 		private String requiredFaction;
 		private String buffName;
 		// TODO species restriction
@@ -336,6 +335,7 @@ public final class StaticItemService extends Service {
 
 		@Override
 		protected boolean loadTypeAttributes(ResultSet resultSet) throws SQLException {
+			requiredLevel = String.valueOf(resultSet.getShort("required_level"));
 			requiredProfession = resultSet.getString("required_profession");
 			if (requiredProfession.equals("-")) {
 				// Ziggy: This value is not defined in any String Table File.
@@ -343,7 +343,6 @@ public final class StaticItemService extends Service {
 			} else {
 				requiredProfession = "@ui_roadmap:title_" + requiredProfession;
 			}
-
 			requiredFaction = resultSet.getString("required_faction");
 
 			if (requiredFaction.equals("-")) {
@@ -352,32 +351,15 @@ public final class StaticItemService extends Service {
 			} else {
 				requiredFaction = "@pvp_factions:" + requiredFaction;
 			}
-			
+
 			// Load mods
 			String modsString = resultSet.getString("skill_mods");
-			
+
 			// If this wearable is supposed to have mods, then load 'em!
-			if(!modsString.equals("-")) {	// An empty cell is "-"
-				String[] modStrings = modsString.split(",");	// The mods strings are comma-separated
-				
-				for(String modString : modStrings) {
-					String category;
-					String[] splitValues = modString.split("=");	// Name and value are separated by "="
-					String modName = splitValues[0];
-					String modValue = splitValues[1];
-					
-					if(modName.endsWith("_modified")) {	// Common statmods end with "_modified"
-						category = "cat_stat_mod_bonus";
-					} else {	// If not, it's a skillmod
-						category = "cat_skill_mod_bonus";
-					}
-					
-					mods.put(category + ".@stat_n:" + modName, modValue);
-				}
-			}
-			
+			mods = parseSkillMods(modsString);
+
 			String buffNameCell = resultSet.getString("buff_name");
-			
+
 			if(!buffNameCell.equals("-")) {
 				buffName = "@ui_buff:" + buffNameCell;
 			}
@@ -388,8 +370,9 @@ public final class StaticItemService extends Service {
 		@Override
 		protected void applyTypeAttributes(SWGObject object) {
 			object.addAttribute("class_required", requiredProfession);
+			object.addAttribute("required_combat_level", requiredLevel);
 			object.addAttribute("faction_restriction", requiredFaction);
-			
+
 			// Apply the mods!
 			for(Map.Entry<String, String> modEntry : mods.entrySet())
 				object.addAttribute(modEntry.getKey(), modEntry.getValue());
@@ -402,6 +385,7 @@ public final class StaticItemService extends Service {
 
 	private static final class ArmorAttributes extends WearableAttributes {
 
+		private String requiredLevel;
 		private String armorCategory;
 		private String kinetic, energy, elementals;
 		private float protectionWeight;
@@ -417,7 +401,7 @@ public final class StaticItemService extends Service {
 			if (!wearableAttributesLoaded) {
 				return false;
 			}
-
+			requiredLevel = String.valueOf(resultSet.getShort("required_level"));
 			String armorType = resultSet.getString("armor_category");
 			protectionWeight = resultSet.getFloat("protection");
 
@@ -449,6 +433,7 @@ public final class StaticItemService extends Service {
 		@Override
 		protected void applyTypeAttributes(SWGObject object) {
 			super.applyTypeAttributes(object);
+			object.addAttribute("required_combat_level", requiredLevel);
 			object.addAttribute("armor_category", armorCategory);
 			object.addAttribute("cat_armor_standard_protection.kinetic", kinetic);
 			object.addAttribute("cat_armor_standard_protection.energy", energy);
@@ -466,6 +451,7 @@ public final class StaticItemService extends Service {
 
 	private static final class WeaponAttributes extends WearableAttributes {
 
+		private String requiredLevel;
 		private WeaponType category;
 		private DamageType damageTypeEnum;
 		private DamageType elementalTypeEnum;
@@ -483,6 +469,7 @@ public final class StaticItemService extends Service {
 		private String elementalTypeString;
 		private short elementalDamage;
 		private String procEffect;
+		private String dps;
 		// special_attack_cost: Pre-NGE artifact? (SAC)
 
 		public WeaponAttributes(String itemName, String iffTemplate) {
@@ -521,15 +508,17 @@ public final class StaticItemService extends Service {
 				case "ONE_HANDED_SABER": category = WeaponType.ONE_HANDED_SABER; break;
 				case "TWO_HANDED_SABER": category = WeaponType.TWO_HANDED_SABER; break;
 				case "POLEARM_SABER": category = WeaponType.POLEARM_SABER; break;
-				case "DIRECTIONAL_TARGET_WEAPON": category = WeaponType.DIRECTIONAL_TARGET_WEAPON; break;    // Free targeting
+				case "GROUND_TARGETTING": category = WeaponType.HEAVY_WEAPON; break;
+				case "DIRECTIONAL_TARGET_WEAPON": category = WeaponType.DIRECTIONAL_TARGET_WEAPON; break;
 				case "LIGHT_RIFLE": category = WeaponType.LIGHT_RIFLE; break;
 				default:
-					// TODO log the fact that the weapon type isn't recognised.
+					Log.e(this, "Unrecognised weapon type %s at row %d", weaponType, resultSet.getRow());
 					// We return false here. That way, we don't store the
 					// itemName in the Map and the item can never be spawned.
 					return false;
 			}
 
+			requiredLevel = String.valueOf(resultSet.getShort("required_level"));
 			weaponCategory = "@obj_attr_n:wpn_category_" + String.valueOf(category.getNum());
 			damageType = resultSet.getString("damage_type");
 			damageTypeEnum = getDamageTypeForName(damageType);
@@ -557,7 +546,7 @@ public final class StaticItemService extends Service {
 				procEffect = "@ui_buff:" + procEffectString;
 			}
 			
-			// TODO calculate DPS
+			dps = resultSet.getString("actual_dps");
 
 			return true;
 		}
@@ -574,6 +563,8 @@ public final class StaticItemService extends Service {
 				object.addAttribute("cat_wpn_damage.wpn_elemental_value", String.valueOf(elementalDamage));
 			}
 			
+			object.addAttribute("cat_wpn_damage.weapon_dps", dps);
+			
 			if(procEffect != null)	// Not all weapons have a proc effect
 				object.addAttribute("proc_name", procEffect);
 			// TODO set DPS
@@ -581,13 +572,15 @@ public final class StaticItemService extends Service {
 			object.addAttribute("cat_wpn_other.wpn_range", rangeString);
 			// Ziggy: Special Action Cost would go under cat_wpn_other as well, but it's a pre-NGE artifact.
 
-			// TODO set all WeaponObject properties
 			WeaponObject weapon = (WeaponObject) object;
+			weapon.setType(category);
 			weapon.setAttackSpeed(attackSpeed);
 			weapon.setMinRange(minRange);
 			weapon.setMaxRange(maxRange);
 			weapon.setDamageType(damageTypeEnum);
 			weapon.setElementalType(elementalTypeEnum);
+			weapon.setMinDamage(minDamage);
+			weapon.setMaxDamage(maxDamage);
 		}
 	}
 
@@ -614,6 +607,50 @@ public final class StaticItemService extends Service {
 		}
 	}
 
+	public static class ItemAttributes extends ObjectAttributes {
+		private Map<String, String> skillMods;
+		private int value;
+		private int charges;
+
+		public ItemAttributes(String itemName, String iffTemplate) {
+			super(itemName, iffTemplate);
+			skillMods = new HashMap<>();
+		}
+
+		@Override
+		protected boolean loadTypeAttributes(ResultSet resultSet) throws SQLException {
+			value = resultSet.getInt("value");
+			charges = resultSet.getInt("charges");
+			skillMods = parseSkillMods(resultSet.getString("skill_mods"));
+
+			return true;
+		}
+
+		@Override
+		protected void applyTypeAttributes(SWGObject object) {
+			if (charges != 0)
+				object.addAttribute("charges", Integer.toString(charges));
+
+			for (Map.Entry<String, String> modEntry : skillMods.entrySet())
+				object.addAttribute(modEntry.getKey(), modEntry.getValue());
+		}
+	}
+
+	public static class StorytellerAttributes extends ObjectAttributes {
+		public StorytellerAttributes(String itemName, String iffTemplate) {
+			super(itemName, iffTemplate);
+		}
+
+		@Override
+		protected boolean loadTypeAttributes(ResultSet resultSet) throws SQLException {
+			return true;
+		}
+
+		@Override
+		protected void applyTypeAttributes(SWGObject object) {
+
+		}
+	}
 	// TODO ConsumableAttributes extending ObjectAttributes
 	// int uses
 	// healingPower, if specified.
@@ -624,6 +661,31 @@ public final class StaticItemService extends Service {
 	// TODO schematic_type
 	// TODO schematic_use
 
+	private static Map<String, String> parseSkillMods(String modsString) {
+		Map<String, String> mods = new HashMap<>();	// skillmods/statmods
+
+		if(!modsString.equals("-")) {	// An empty cell is "-"
+			String[] modStrings = modsString.split(",");	// The mods strings are comma-separated
+
+			for(String modString : modStrings) {
+				String category;
+				String[] splitValues = modString.split("=");	// Name and value are separated by "="
+				String modName = splitValues[0];
+				String modValue = splitValues[1];
+
+				if(modName.endsWith("_modified")) {	// Common statmods end with "_modified"
+					category = "cat_stat_mod_bonus";
+				} else {	// If not, it's a skillmod
+					category = "cat_skill_mod_bonus";
+				}
+
+				mods.put(category + ".@stat_n:" + modName, modValue);
+			}
+		}
+
+		return mods;
+	}
+	
 	public interface ObjectCreationHandler {
 		void success(SWGObject[] createdObjects);
 		void containerFull();

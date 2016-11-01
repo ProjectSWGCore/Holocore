@@ -37,8 +37,6 @@ import resources.objects.creature.CreatureObject;
 import resources.player.Player;
 import utilities.Encoder;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.util.Collections;
@@ -61,11 +59,6 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 		super(objectId, Baseline.BaselineType.GRUP);
 		pickupPointTimer = new PickupPointTimer();
 		lootRule = LootRule.RANDOM;
-	}
-
-	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
-		ois.defaultReadObject();
-		pickupPointTimer = new PickupPointTimer();
 	}
 
 	@Override

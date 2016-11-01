@@ -245,7 +245,10 @@ public class SWGSet<E> extends HashSet<E> implements Encodable, Serializable {
 			
 			buffer.putInt(data.size());
 			buffer.putInt(updateCount.get());
-			data.forEach(buffer::put);
+			data.forEach(storedBuffer -> {
+				buffer.put(storedBuffer);
+				storedBuffer.flip();
+				});
 		}
 		
 		return buffer.array();

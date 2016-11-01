@@ -202,7 +202,8 @@ public class EntertainmentService extends Service {
 					performerMap.get(creature.getObjectId()).clearSpectators();
 					performerMap.remove(creature.getObjectId());
 				}
-				
+				break;
+			default:
 				break;
 		}
 	}

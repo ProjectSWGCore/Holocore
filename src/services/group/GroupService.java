@@ -45,16 +45,14 @@ import services.player.PlayerManager;
 import utilities.IntentFactory;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import resources.objects.group.LootRule;
+import services.CoreManager;
 import utilities.ThreadUtilities;
 
 /**
@@ -64,7 +62,7 @@ public class GroupService extends Service {
 	
 	private final ScheduledExecutorService logoutService;
 	private final Map<Long, GroupObject> groups;
-	private Map<CreatureObject, Future> logoffTimers;
+	private Map<CreatureObject, Future<?>> logoffTimers;
 
 	public GroupService() {
 		logoutService = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("group-logout-timer"));
@@ -180,7 +178,7 @@ public class GroupService extends Service {
 		// Create a timer with the GroupMember player owns as the key
 		// and a timer set to fire and remove that member as the value
 		CreatureObject playerCreo = player.getCreatureObject();
-		Future future = logoutService.schedule(new LogOffTask(this, playerCreo), 4, TimeUnit.MINUTES);
+		Future<?> future = logoutService.schedule(new LogOffTask(this, playerCreo), 4, TimeUnit.MINUTES);
 		
 		synchronized (this.logoffTimers) {
 			this.logoffTimers.put(playerCreo, future);
@@ -230,6 +228,8 @@ public class GroupService extends Service {
 		
 		this.sendSystemMessage(playerCreo.getOwner(), "removed");
 		group.removeMember(playerCreo);
+		new ChatRoomUpdateIntent(getGroupChatPath(group.getObjectId(), CoreManager.getGalaxy().getName()), String.valueOf(group.getObjectId()), null,
+				ChatAvatar.getFromPlayer(playerCreo.getOwner()), null, ChatRoomUpdateIntent.UpdateType.LEAVE).broadcast();
 	}
 	
 	private void handleGroupInvite(Player player, CreatureObject target) {
@@ -306,8 +306,6 @@ public class GroupService extends Service {
 	}
 	
 	private void handleGroupUninvite(Player player, CreatureObject target) {
-		CreatureObject playerCreo = player.getCreatureObject();
-		
 		if (target == null) {
 			sendSystemMessage(player, "uninvite_no_target_self");
 			return;
@@ -315,9 +313,6 @@ public class GroupService extends Service {
 		
 		Player targetOwner = target.getOwner();
 		String targetName = targetOwner.getCharacterName();
-		
-		if (targetOwner == null)
-			return;
 		
 		if (target.getInviterData() == null) {
 			sendSystemMessage(player, "uninvite_not_invited", "TT", targetName);
@@ -372,8 +367,7 @@ public class GroupService extends Service {
 			}
 
 			sendSystemMessage(sender, "formed_self", "TT", senderCreo.getObjectId());
-
-			// TODO: Join group chat room
+			new ChatRoomUpdateIntent(senderCreo.getOwner(), getGroupChatPath(group.getObjectId(), CoreManager.getGalaxy().getName()), String.valueOf(group.getObjectId()), null, null, ChatRoomUpdateIntent.UpdateType.JOIN, true).broadcast();
 		} else {
 			// Group already exists
 			group = getGroup(senderCreo.getGroupId());
@@ -393,7 +387,8 @@ public class GroupService extends Service {
 		sendSystemMessage(player, "joined_self");
 		group.addMember(creo);
 		creo.updateGroupInviteData(null, 0, "");
-		// TODO: Join group chat room
+		
+		new ChatRoomUpdateIntent(player, getGroupChatPath(group.getObjectId(), CoreManager.getGalaxy().getName()), String.valueOf(group.getObjectId()), null, null, ChatRoomUpdateIntent.UpdateType.JOIN, true).broadcast();
 	}
 	
 	private void handleGroupDecline(Player invitee) {
@@ -475,9 +470,9 @@ public class GroupService extends Service {
 	}
 
 	private void destroyGroup(GroupObject group, Player player) {
-		String galaxy = player.getGalaxyName();
+		String galaxy = CoreManager.getGalaxy().getName();
 		new ChatRoomUpdateIntent(getGroupChatPath(group.getObjectId(), galaxy), String.valueOf(group.getObjectId()), null,
-				ChatAvatar.getSystemAvatar(galaxy), null, ChatRoomUpdateIntent.UpdateType.DESTROY).broadcast();
+				ChatAvatar.getFromPlayer(player), null, ChatRoomUpdateIntent.UpdateType.DESTROY).broadcast();
 
 		Map<String, Long> members = group.getGroupMembers();
 		PlayerManager playerManager = player.getPlayerManager();
@@ -501,9 +496,8 @@ public class GroupService extends Service {
 
 		new ObjectCreatedIntent(group).broadcast();
 
-		String galaxy = player.getGalaxyName();
-		new ChatRoomUpdateIntent(getGroupChatPath(group.getObjectId(), galaxy), String.valueOf(group.getObjectId()), null,
-				ChatAvatar.getSystemAvatar(galaxy), null, ChatRoomUpdateIntent.UpdateType.CREATE).broadcast();
+		String galaxy = CoreManager.getGalaxy().getName();
+		new ChatRoomUpdateIntent(ChatAvatar.getFromPlayer(player), getGroupChatPath(group.getObjectId(), galaxy), String.valueOf(group.getObjectId()), false).broadcast();
 
 		return group;
 	}

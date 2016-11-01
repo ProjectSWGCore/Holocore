@@ -32,7 +32,6 @@ import intents.PlayerEventIntent;
 import intents.RequestZoneInIntent;
 import intents.chat.ChatBroadcastIntent;
 import intents.network.GalacticPacketIntent;
-import main.ProjectSWG;
 import network.packets.Packet;
 import network.packets.swg.login.AccountFeatureBits;
 import network.packets.swg.login.ClientIdMsg;
@@ -49,21 +48,15 @@ import network.packets.swg.zone.chat.ChatOnConnectAvatar;
 import network.packets.swg.zone.chat.ChatSystemMessage;
 import network.packets.swg.zone.chat.VoiceChatStatus;
 import network.packets.swg.zone.insertion.ChatServerStatus;
-import network.packets.swg.zone.insertion.CmdStartScene;
-
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 
-import resources.Location;
-import resources.Race;
-import resources.Terrain;
 import resources.config.ConfigFile;
 import resources.control.Intent;
 import resources.control.Manager;
-import resources.objects.SWGObject;
 import resources.objects.creature.CreatureMood;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
@@ -140,36 +133,17 @@ public class ZoneManager extends Manager {
 		PlayerObject playerObj = creature.getPlayerObject();
 		player.setPlayerState(PlayerState.ZONING_IN);
 		creature.setOwner(player);
-		
-		if (firstZone)
-			sendZonePackets(player, creature);
-		startScene(creature, creature.getWorldLocation());
-		if (firstZone)
-			playerObj.setStartPlayTime((int) System.currentTimeMillis());
 		initPlayerBeforeZoneIn(player, creature, playerObj);
 		Log.i("ObjectManager", "Zoning in %s with character %s", player.getUsername(), player.getCharacterName());
+		
 		if (firstZone) {
-			new PlayerEventIntent(player, PlayerEvent.PE_FIRST_ZONE).broadcast();
+			sendZonePackets(player, creature);
+			playerObj.setStartPlayTime((int) System.currentTimeMillis());
 			sendCommitHistory(player);
 			sendMessageOfTheDay(player);
+			new PlayerEventIntent(player, PlayerEvent.PE_FIRST_ZONE).broadcast();
 		}
 		new PlayerEventIntent(player, PlayerEvent.PE_ZONE_IN_CLIENT).broadcast();
-	}
-	
-	private void startScene(CreatureObject object, Location newLocation) {
-		long time = ProjectSWG.getGalacticTime();
-		Race race = ((CreatureObject)object).getRace();
-		boolean ignoreSnapshots = newLocation.getTerrain() == Terrain.DEV_AREA;
-		sendPacket(object.getOwner(), new CmdStartScene(ignoreSnapshots, object.getObjectId(), race, newLocation, time, (int)(System.currentTimeMillis()/1E3)));
-		recursiveCreateObject(object, object.getOwner());
-	}
-	
-	private void recursiveCreateObject(SWGObject obj, Player p) {
-		SWGObject parent = obj.getParent();
-		if (parent != null)
-			recursiveCreateObject(parent, p);
-		else
-			obj.createObject(p, true);
 	}
 	
 	private void loadCommitHistory() {
@@ -212,11 +186,11 @@ public class ZoneManager extends Manager {
 	}
 	
 	private void sendZonePackets(Player player, CreatureObject creature) {
-		sendPacket(player, new HeartBeat());
-		sendPacket(player, new ChatServerStatus(true));
-		sendPacket(player, new VoiceChatStatus());
-		sendPacket(player, new ParametersMessage());
-		sendPacket(player, new ChatOnConnectAvatar());
+		player.sendPacket(new HeartBeat());
+		player.sendPacket(new ChatServerStatus(true));
+		player.sendPacket(new VoiceChatStatus());
+		player.sendPacket(new ParametersMessage());
+		player.sendPacket(new ChatOnConnectAvatar());
 	}
 	
 	private void initPlayerBeforeZoneIn(Player player, CreatureObject creatureObj, PlayerObject playerObj) {
@@ -263,9 +237,9 @@ public class ZoneManager extends Manager {
 	private void handleClientIdMsg(Player player, ClientIdMsg clientId) {
 		Log.i("ZoneService", "%s connected to the zone server from %s:%d", player.getUsername(), clientId.getAddress(), clientId.getPort());
 		player.setPlayerServer(PlayerServer.ZONE);
-		sendPacket(player.getNetworkId(), new HeartBeat());
-		sendPacket(player.getNetworkId(), new AccountFeatureBits());
-		sendPacket(player.getNetworkId(), new ClientPermissionsMessage());
+		player.sendPacket(new HeartBeat());
+		player.sendPacket(new AccountFeatureBits());
+		player.sendPacket(new ClientPermissionsMessage());
 	}
 	
 }

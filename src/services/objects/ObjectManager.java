@@ -57,7 +57,6 @@ import services.map.MapManager;
 import services.player.PlayerManager;
 import services.spawn.SpawnerService;
 import services.spawn.StaticService;
-import utilities.Scripts;
 
 public class ObjectManager extends Manager {
 	
@@ -128,9 +127,6 @@ public class ObjectManager extends Manager {
 	}
 	
 	private void loadObject(SWGObject obj) {
-		if (obj instanceof CreatureObject && ((CreatureObject) obj).isPlayer())
-			Scripts.invoke("objects/load_creature", "onLoad", obj);
-		
 		updateBuildoutParent(obj);
 		addChildrenObjects(obj);
 	}
@@ -183,7 +179,6 @@ public class ObjectManager extends Manager {
 	@Override
 	public boolean terminate() {
 		synchronized (database) {
-			database.traverse((obj) -> obj.setOwner(null));
 			database.close();
 		}
 		return super.terminate();

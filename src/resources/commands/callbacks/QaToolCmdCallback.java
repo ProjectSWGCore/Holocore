@@ -31,10 +31,10 @@ import intents.chat.ChatBroadcastIntent;
 import intents.experience.ExperienceIntent;
 import intents.network.CloseConnectionIntent;
 import intents.object.DestroyObjectIntent;
-import intents.object.ObjectCreatedIntent;
 import intents.object.ObjectTeleportIntent;
 import intents.object.CreateStaticItemIntent;
 import intents.player.DeleteCharacterIntent;
+import java.io.FileNotFoundException;
 import resources.Location;
 import resources.Terrain;
 import resources.commands.ICmdCallback;
@@ -54,7 +54,6 @@ import resources.sui.SuiInputBox;
 import resources.sui.SuiListBox;
 import resources.sui.SuiMessageBox;
 import services.galaxy.GalacticManager;
-import services.objects.ObjectCreator;
 import services.objects.ObjectManager;
 import services.player.PlayerManager;
 import utilities.Scripts;
@@ -98,7 +97,11 @@ public class QaToolCmdCallback implements ICmdCallback {
 					recoverPlayer(galacticManager.getObjectManager(), galacticManager.getPlayerManager(), player, args.substring(args.indexOf(' ') + 1));
 					break;
 				case "details":
-					Scripts.invoke("commands/helper/qatool/details", "sendDetails", player, target, args.split(" "));
+					try {
+						Scripts.invoke("commands/helper/qatool/details", "sendDetails", player, target, args.split(" "));
+					} catch (FileNotFoundException ex) {
+						Log.e("QATool", "sendDetails qatool script not found!");
+					}
 					break;
 				case "xp":
 					if(command.length == 3)

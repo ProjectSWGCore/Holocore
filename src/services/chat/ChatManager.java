@@ -321,14 +321,10 @@ public class ChatManager extends Manager {
 		String senderName = ChatAvatar.getFromPlayer(sender).getName();
 
 		// Notify observers of the chat message
-		for (SWGObject aware : actor.getObservers()) {
-			Player owner = aware.getOwner();
-			if (owner == null)
-				continue;
-
+		for (Player owner : actor.getObservers()) {
 			PlayerObject awareGhost = owner.getPlayerObject();
 			if (!awareGhost.isIgnored(senderName))
-				aware.getOwner().sendPacket(new SpatialChat(aware.getObjectId(), message));
+				owner.sendPacket(new SpatialChat(owner.getCreatureObject().getObjectId(), message));
 		}
 	}
 	
