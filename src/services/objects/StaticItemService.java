@@ -205,8 +205,6 @@ public final class StaticItemService extends Service {
 								break;
 							default:
 								break;
-							default:
-								break;
 						}
 						new ObjectCreatedIntent(object).broadcast();
 						
