@@ -1,0 +1,376 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	creature_name	creature_id	spawn_category	spawn_area	amount	behaviour	mood	equipment_id	patrol_id	quest_id	loot_id	max_spawn_time	min_spawn_time	float_radius
+INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGER NOT NULL	REAL	REAL	REAL	REAL	INTEGER	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL	INTEGER NOT NULL	INTEGER
+5200003	TATOOINE	tat_world	AREA	0	123.60	52.00	-5368.00	-142	1	a Rebel guard	reb_guard_25_h_att_n	Presence Imperial	Anchorhead	1	STOP	idle	0	0	0	0	300	120	0
+5200004	TATOOINE	tat_world	AREA	0	135.10	52.00	-5374.90	83	1	a Rebel guard	reb_guard_25_h_att_n	Presence Imperial	Anchorhead	1	STOP	idle	0	0	0	0	300	120	0
+5200005	TATOOINE	tat_world	AREA	0	151.00	52.00	-5316.00	55	1	a Rebel guard	reb_guard_25_h_att_n	Presence Imperial	Anchorhead	1	STOP	idle	0	0	0	0	300	120	0
+5200006	TATOOINE	tat_world	AREA	0	159.00	52.00	-5320.00	-13	1	a Rebel guard	reb_guard_25_h_att_n	Presence Imperial	Anchorhead	1	STOP	idle	0	0	0	0	300	120	0
+5200007	TATOOINE	tat_world	AREA	0	31.00	51.00	-5337.00	-90	1	a Rebel guard	reb_guard_25_h_att_n	Presence Imperial	Anchorhead	1	STOP	idle	0	0	0	0	300	120	0
+5200008	TATOOINE	tat_world	AREA	0	76.50	52.00	-5361.10	-88	1	a Rebel guard	reb_guard_25_h_att_n	Presence Imperial	Anchorhead	1	STOP	idle	0	0	0	0	300	120	0
+5200009	TATOOINE	tat_world	AREA	0	89.90	52.00	-5393.80	-47	1	a Rebel guard	reb_guard_25_h_att_n	Presence Imperial	Anchorhead	1	STOP	idle	0	0	0	0	300	120	0
+5200010	TATOOINE	tat_world	AREA	0	31.40	51.00	-5350.30	-75	1	a Rebel guard captain	reb_guard_captain_25_h_att_n	Presence Imperial	Anchorhead	1	STOP	idle	0	0	0	0	300	120	0
+5200011	TATOOINE	tat_world	AREA	0	125.50	52.00	-5416.00	-81	1	a Rebel security guard	reb_security_guard_15_h_att_n	Presence Imperial	Anchorhead	1	STOP	idle	0	0	0	0	300	120	0
+5200012	TATOOINE	tat_world	AREA	0	55.20	52.60	-5332.50	-176	1	a Rebel security guard	reb_security_guard_15_h_att_n	Presence Imperial	Anchorhead	1	STOP	idle	0	0	0	0	300	120	0
+5200013	TATOOINE	tat_world	AREA	0	77.00	52.00	-5372.00	-17	1	a Rebel security guard	reb_security_guard_15_h_att_n	Presence Imperial	Anchorhead	1	PATROL	idle	0	999	0	0	300	120	0
+5200014	TATOOINE	tat_world	AREA	0	81.00	52.00	-5333.00	83	1	a Rebel security guard	reb_security_guard_15_h_att_n	Presence Imperial	Anchorhead	1	PATROL	idle	0	999	0	0	300	120	0
+5200015	TATOOINE	tat_world	AREA	0	-1130.90	12.20	-3611.60	125	1	an exogen class dark trooper	crackdown_dark_trooper_exogen_64_d_att_n	Presence Imperial	Bestine	1	STOP	idle	0	0	0	0	300	120	0
+5200016	TATOOINE	tat_world	AREA	0	-1133.20	12.20	-3614.60	125	1	an exogen class dark trooper	crackdown_dark_trooper_exogen_64_d_att_n	Presence Imperial	Bestine	1	STOP	idle	0	0	0	0	300	120	0
+5200017	TATOOINE	tat_world	AREA	0	-1097.00	12.00	-3525.30	121	1	an Imperial command security guard	crackdown_imp_command_security_guard_15_h_att_n	Presence Imperial	Bestine	1	STOP	idle	0	0	0	0	300	120	0
+5200018	TATOOINE	tat_world	AREA	0	-1105.80	12.00	-3573.10	168	1	an Imperial command security guard	crackdown_imp_command_security_guard_15_h_att_n	Presence Imperial	Bestine	1	PATROL	idle	0	999	0	0	300	120	0
+5200019	TATOOINE	tat_world	AREA	0	-1278.50	12.50	-3643.10	165	1	an Imperial command security guard	crackdown_imp_command_security_guard_15_h_att_n	Presence Imperial	Bestine	1	STOP	idle	0	0	0	0	300	120	0
+5200020	TATOOINE	tat_world	AREA	0	-1291.60	12.00	-3509.60	-125	1	an Imperial command security guard	crackdown_imp_command_security_guard_15_h_att_n	Presence Imperial	Bestine	1	PATROL	idle	0	999	0	0	300	120	0
+5200021	TATOOINE	tat_world	AREA	0	-1413.00	10.00	-3780.90	-87	1	an Imperial medic	imp_medic_16_h_att_n	Presence Imperial	Bestine	1	STOP	idle	0	0	0	0	300	120	0
+5200022	TATOOINE	tat_world	AREA	0	-1016.90	12.00	-3741.20	97	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Imperial	Bestine	1	STOP	idle	0	0	0	0	300	120	0
+5200023	TATOOINE	tat_world	AREA	0	-1018.30	12.00	-3736.20	-88	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Imperial	Bestine	1	STOP	idle	0	0	0	0	300	120	0
+5200024	TATOOINE	tat_world	AREA	0	-1083.60	12.00	-3594.20	169	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Imperial	Bestine	1	STOP	idle	0	0	0	0	300	120	0
+5200025	TATOOINE	tat_world	AREA	0	-1089.80	12.00	-3704.20	116	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Imperial	Bestine	1	STOP	idle	0	0	0	0	300	120	0
+5200026	TATOOINE	tat_world	AREA	0	-1093.60	12.00	-3648.60	48	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Imperial	Bestine	1	PATROL	idle	0	999	0	0	300	120	0
+5200027	TATOOINE	tat_world	AREA	0	-1169.80	12.00	-3692.10	-125	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Imperial	Bestine	1	STOP	idle	0	0	0	0	300	120	0
+5200028	TATOOINE	tat_world	AREA	0	-1181.30	12.00	-3537.90	-162	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Imperial	Bestine	1	STOP	idle	0	0	0	0	300	120	0
+5200029	TATOOINE	tat_world	AREA	0	-1275.60	12.00	-3479.90	0	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Imperial	Bestine	1	STOP	idle	0	0	0	0	300	120	0
+5200030	TATOOINE	tat_world	AREA	0	-1283.80	12.00	-3480.40	0	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Imperial	Bestine	1	STOP	idle	0	0	0	0	300	120	0
+5200031	TATOOINE	tat_world	AREA	0	-981.00	12.00	-3792.10	133	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Imperial	Bestine	1	STOP	idle	0	0	0	0	300	120	0
+5200032	TATOOINE	tat_world	AREA	0	-983.80	12.00	-3746.50	116	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Imperial	Bestine	1	STOP	idle	0	0	0	0	300	120	0
+5200033	TATOOINE	tat_world	AREA	0	-1292.80	12.00	-3585.50	133	1	an Imperial storm commando	imp_commando_storm_29_h_att_n	Presence Imperial	Bestine	1	STOP	idle	0	0	0	0	300	120	0
+5200034	TATOOINE	tat_world	AREA	0	-1415.60	10.00	-3775.20	0	1	an Imperial storm commando	imp_commando_storm_29_h_att_n	Presence Imperial	Bestine	1	PATROL	idle	0	999	0	0	300	120	0
+5200035	TATOOINE	tat_world	AREA	0	-1414.50	10.00	-3780.30	105	1	an Imperial stormmedic	imp_stormmedic_25_25_h_att_n	Presence Imperial	Bestine	1	STOP	idle	0	0	0	0	300	120	0
+5200036	TATOOINE	tat_world	AREA	0	-1093.70	14.00	-3660.20	41	1	an Imperial stormsniper	imp_stormsniper_25_h_att_n	Presence Imperial	Bestine	1	STOP	idle	0	0	0	0	300	120	0
+5200037	TATOOINE	tat_world	AREA	0	3288.12	5.00	-4842.11	-36	1	a Mos Eisley police officer	mos_eisley_police_officer_13_h_att_n	Presence Imperial	Mos Eisley	1	PATROL	idle	0	999	0	0	300	120	0
+5200038	TATOOINE	tat_world	AREA	0	3288.68	5.00	-4636.09	124	1	a Mos Eisley police officer	mos_eisley_police_officer_13_h_att_n	Presence Imperial	Mos Eisley	1	PATROL	idle	0	999	0	0	300	120	0
+5200039	TATOOINE	tat_world	AREA	0	3304.54	5.00	-4602.49	122	1	a Mos Eisley police officer	mos_eisley_police_officer_13_h_att_n	Presence Imperial	Mos Eisley	1	PATROL	idle	0	999	0	0	300	120	0
+5200040	TATOOINE	tat_world	AREA	0	3318.30	5.00	-4613.00	30	1	a Mos Eisley police officer	mos_eisley_police_officer_13_h_att_n	Presence Imperial	Mos Eisley	1	PATROL	idle	0	999	0	0	300	120	0
+5200041	TATOOINE	tat_world	AREA	0	3360.18	5.00	-4742.17	-150	1	a Mos Eisley police officer	mos_eisley_police_officer_13_h_att_n	Presence Imperial	Mos Eisley	1	PATROL	idle	0	999	0	0	300	120	0
+5200042	TATOOINE	tat_world	AREA	0	3427.14	5.00	-4952.92	56	1	a Mos Eisley police officer	mos_eisley_police_officer_13_h_att_n	Presence Imperial	Mos Eisley	1	PATROL	idle	0	999	0	0	300	120	0
+5200043	TATOOINE	tat_world	AREA	0	3538.04	5.12	-4806.46	-73	1	a Mos Eisley police officer	mos_eisley_police_officer_13_h_att_n	Presence Imperial	Mos Eisley	1	PATROL	idle	0	999	0	0	300	120	0
+5200044	TATOOINE	tat_world	AREA	0	3482.52	7.50	-4683.05	129	1	an elite sand trooper	imp_sand_trooper_elite_45_h_att_n	Presence Imperial	Mos Eisley	1	STOP	idle	0	0	0	0	300	120	0
+5200045	TATOOINE	tat_world	AREA	0	3496.81	5.52	-4923.13	-7	1	an elite sand trooper	imp_sand_trooper_elite_45_h_att_n	Presence Imperial	Mos Eisley	1	STOP	idle	0	0	0	0	300	120	0
+5200046	TATOOINE	tat_world	AREA	0	3427.46	7.50	-4728.61	-146	1	an Imperial comm op	imp_comm_op_14_h_att_n	Presence Imperial	Mos Eisley	1	STOP	idle	0	0	0	0	300	120	0
+5200047	TATOOINE	tat_world	AREA	0	3278.49	5.00	-4676.19	-56	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Imperial	Mos Eisley	1	STOP	idle	0	0	0	0	300	120	0
+5200048	TATOOINE	tat_world	AREA	0	3279.95	5.00	-4835.74	54	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Imperial	Mos Eisley	1	STOP	idle	0	0	0	0	300	120	0
+5200049	TATOOINE	tat_world	AREA	0	3288.68	5.00	-4636.09	124	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Imperial	Mos Eisley	1	STOP	idle	0	0	0	0	300	120	0
+5200050	TATOOINE	tat_world	AREA	0	3290.16	5.00	-4695.84	126	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Imperial	Mos Eisley	1	STOP	idle	0	0	0	0	300	120	0
+5200051	TATOOINE	tat_world	AREA	0	3304.54	5.00	-4602.49	122	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Imperial	Mos Eisley	1	STOP	idle	0	0	0	0	300	120	0
+5200052	TATOOINE	tat_world	AREA	0	3322.23	5.00	-4623.57	28	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Imperial	Mos Eisley	1	STOP	idle	0	0	0	0	300	120	0
+5200053	TATOOINE	tat_world	AREA	0	3360.18	5.00	-4742.17	-150	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Imperial	Mos Eisley	1	STOP	idle	0	0	0	0	300	120	0
+5200054	TATOOINE	tat_world	AREA	0	3417.99	5.00	-4974.46	-50	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Imperial	Mos Eisley	1	STOP	idle	0	0	0	0	300	120	0
+5200055	TATOOINE	tat_world	AREA	0	3427.14	5.00	-4952.92	56	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Imperial	Mos Eisley	1	STOP	idle	0	0	0	0	300	120	0
+5200056	TATOOINE	tat_world	AREA	0	3516.17	5.00	-4879.70	154	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Imperial	Mos Eisley	1	STOP	idle	0	0	0	0	300	120	0
+5200057	TATOOINE	tat_world	AREA	0	3538.04	5.12	-4806.46	-73	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Imperial	Mos Eisley	1	STOP	idle	0	0	0	0	300	120	0
+5200058	TATOOINE	tat_world	AREA	0	3288.12	5.00	-4842.11	36	1	an Imperial scout trooper	imp_scout_trooper_23_h_att_n	Presence Imperial	Mos Eisley	1	STOP	idle	0	0	0	0	300	120	0
+5200059	TATOOINE	tat_world	AREA	0	3356.79	7.50	-4711.31	125	1	an Imperial scout trooper	imp_scout_trooper_23_h_att_n	Presence Imperial	Mos Eisley	1	STOP	idle	0	0	0	0	300	120	0
+5200060	TATOOINE	tat_world	AREA	0	3585.84	5.00	-4719.95	-88	1	an Imperial scout trooper	imp_scout_trooper_23_h_att_n	Presence Imperial	Mos Eisley	1	STOP	idle	0	0	0	0	300	120	0
+5200061	TATOOINE	tat_world	AREA	0	1209.90	7.00	2970.60	-68	1	a Mos Eisley police officer	mos_eisley_police_officer_13_h_att_n	Presence Imperial	Mos Entha	1	PATROL	idle	0	999	0	0	300	120	0
+5200062	TATOOINE	tat_world	AREA	0	1254.90	4.00	3258.10	-96	1	a Mos Eisley police officer	mos_eisley_police_officer_13_h_att_n	Presence Imperial	Mos Entha	1	PATROL	idle	0	999	0	0	300	120	0
+5200063	TATOOINE	tat_world	AREA	0	1344.70	7.00	3080.50	50	1	a Mos Eisley police officer	mos_eisley_police_officer_13_h_att_n	Presence Imperial	Mos Entha	1	PATROL	idle	0	999	0	0	300	120	0
+5200064	TATOOINE	tat_world	AREA	0	1470.60	7.00	3249.80	93	1	a Mos Eisley police officer	mos_eisley_police_officer_13_h_att_n	Presence Imperial	Mos Entha	1	PATROL	idle	0	999	0	0	300	120	0
+5200065	TATOOINE	tat_world	AREA	0	1482.80	7.00	3247.20	-66	1	a Mos Eisley police officer	mos_eisley_police_officer_13_h_att_n	Presence Imperial	Mos Entha	1	PATROL	idle	0	999	0	0	300	120	0
+5200066	TATOOINE	tat_world	AREA	0	1486.90	7.00	3061.40	161	1	a Mos Eisley police officer	mos_eisley_police_officer_13_h_att_n	Presence Imperial	Mos Entha	1	PATROL	idle	0	999	0	0	300	120	0
+5200067	TATOOINE	tat_world	AREA	0	1492.90	7.00	3441.90	98	1	a Mos Eisley police officer	mos_eisley_police_officer_13_h_att_n	Presence Imperial	Mos Entha	1	PATROL	idle	0	999	0	0	300	120	0
+5200068	TATOOINE	tat_world	AREA	0	1568.50	11.00	3246.90	-84	1	a Mos Eisley police officer	mos_eisley_police_officer_13_h_att_n	Presence Imperial	Mos Entha	1	PATROL	idle	0	999	0	0	300	120	0
+5200069	TATOOINE	tat_world	AREA	0	1632.00	7.00	3119.40	81	1	a Mos Eisley police officer	mos_eisley_police_officer_13_h_att_n	Presence Imperial	Mos Entha	1	PATROL	idle	0	999	0	0	300	120	0
+5200070	TATOOINE	tat_world	AREA	0	1660.10	7.00	3127.50	-111	1	a Mos Eisley police officer	mos_eisley_police_officer_13_h_att_n	Presence Imperial	Mos Entha	1	PATROL	idle	0	999	0	0	300	120	0
+5200071	TATOOINE	tat_world	AREA	0	1747.00	7.00	3159.80	-176	1	a Mos Eisley police officer	mos_eisley_police_officer_13_h_att_n	Presence Imperial	Mos Entha	1	PATROL	idle	0	999	0	0	300	120	0
+5200072	TATOOINE	tat_world	AREA	0	1376.60	7.00	3267.50	133	1	an elite sand trooper	imp_sand_trooper_elite_45_h_att_n	Presence Imperial	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200073	TATOOINE	tat_world	AREA	0	1618.90	11.00	3241.70	86	1	an elite sand trooper	imp_sand_trooper_elite_45_h_att_n	Presence Imperial	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200074	TATOOINE	tat_world	AREA	0	1502.50	7.00	3156.90	-1	1	an Imperial exterminator	imp_exterminator_28_h_att_n	Presence Imperial	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200075	TATOOINE	tat_world	AREA	0	1593.30	7.00	3020.20	82	1	an Imperial exterminator	imp_exterminator_28_h_att_n	Presence Imperial	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200076	TATOOINE	tat_world	AREA	0	1181.30	7.00	3087.90	-79	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Imperial	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200077	TATOOINE	tat_world	AREA	0	1264.00	7.00	3159.30	-82	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Imperial	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200078	TATOOINE	tat_world	AREA	0	1272.70	7.00	3255.90	87	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Imperial	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200079	TATOOINE	tat_world	AREA	0	1286.30	7.70	2954.70	42	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Imperial	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200080	TATOOINE	tat_world	AREA	0	1333.60	7.00	3490.00	93	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Imperial	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200081	TATOOINE	tat_world	AREA	0	1380.40	9.50	3012.40	-179	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Imperial	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200082	TATOOINE	tat_world	AREA	0	1431.60	9.50	3372.50	-179	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Imperial	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200083	TATOOINE	tat_world	AREA	0	1444.60	7.00	3106.90	90	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Imperial	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200084	TATOOINE	tat_world	AREA	0	1508.10	7.00	3127.90	174	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Imperial	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200085	TATOOINE	tat_world	AREA	0	1557.70	9.50	3045.70	173	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Imperial	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200086	TATOOINE	tat_world	AREA	0	1637.20	7.00	2980.30	-179	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Imperial	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200087	TATOOINE	tat_world	AREA	0	1663.00	7.00	3109.80	147	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Imperial	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200088	TATOOINE	tat_world	AREA	0	1688.80	7.00	3125.20	-2	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Imperial	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200089	TATOOINE	tat_world	AREA	0	1715.30	7.00	3147.10	176	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Imperial	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200090	TATOOINE	tat_world	AREA	0	1738.60	7.60	3191.10	178	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Imperial	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200091	TATOOINE	tat_world	AREA	0	1759.60	7.00	3186.10	78	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Imperial	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200092	TATOOINE	tat_world	AREA	0	1455.20	7.00	3232.50	-172	1	an Imperial scout trooper	imp_scout_trooper_23_h_att_n	Presence Imperial	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200093	TATOOINE	tat_world	AREA	0	1487.20	7.00	3240.80	-42	1	an Imperial scout trooper	imp_scout_trooper_23_h_att_n	Presence Imperial	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200094	TATOOINE	tat_world	AREA	0	1538.70	10.90	3219.90	-94	1	an Imperial sharpshooter	imp_sharpshooter_17_h_att_n	Presence Imperial	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200095	TATOOINE	tat_world	AREA	0	1282.40	7.00	3133.10	28	1	an Imperial storm commando	imp_commando_storm_29_h_att_n	Presence Imperial	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200096	TATOOINE	tat_world	AREA	0	1289.20	7.00	3128.00	26	1	an Imperial storm commando	imp_commando_storm_29_h_att_n	Presence Imperial	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200097	TATOOINE	tat_world	AREA	0	1320.90	9.50	3382.90	90	1	an Imperial storm commando	imp_commando_storm_29_h_att_n	Presence Imperial	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200098	TATOOINE	tat_world	AREA	0	1400.20	7.00	3090.20	0	1	an Imperial stormcaptain	imp_stealth_operative_100_h_inv_n	Presence Imperial	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200099	TATOOINE	tat_world	AREA	0	1256.00	7.70	2954.30	-54	1	an Imperial stormrifle	imp_stormrifle_25_h_att_n	Presence Imperial	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200100	TATOOINE	tat_world	AREA	0	1399.40	7.00	3094.30	178	1	an Imperial stormtrooper	imp_stormtrooper_25_h_att_n	Presence Imperial	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200101	TATOOINE	tat_world	AREA	0	1401.00	7.00	3094.30	176	1	an Imperial stormtrooper	imp_stormtrooper_25_h_att_n	Presence Imperial	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200102	TATOOINE	tat_mosespa_barracks	AREA	3	0.00	0.00	-4.00	2	1	an Imperial master sergeant	imp_master_sergeant_18_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200103	TATOOINE	tat_mosespa_barracks	AREA	4	4.00	0.00	1.50	-90	1	an Imperial stormmedic	imp_stormmedic_25_25_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200104	TATOOINE	tat_mosespa_barracks	AREA	6	-4.00	0.00	-3.00	96	1	an Imperial sergeant	imp_sergeant_16_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200105	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	2	0.00	0.00	3.50	4	1	an Imperial sergeant	imp_sergeant_16_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200106	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	5	1.00	-6.00	-6.00	115	1	an Imperial stormsniper	imp_stormsniper_25_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200107	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	5	7.00	-6.00	-7.00	-12	1	an Imperial stormsniper	imp_stormsniper_25_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200108	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	7	-5.00	-13.00	-12.00	25	1	an Imperial captain	imp_captain_21_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200109	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	7	-6.00	-13.00	-4.00	58	1	an Imperial specialist	imp_specialist_13_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200110	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	7	-6.00	-13.00	6.00	148	1	an Imperial stormtrooper	imp_stormtrooper_25_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200111	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	8	6.00	-13.00	11.00	-175	1	an Imperial medic	imp_medic_16_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200112	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	8	-4.00	-13.00	13.00	157	1	an Imperial sharpshooter	imp_sharpshooter_17_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200113	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	9	13.00	-13.00	2.00	17	1	an Imperial stormtrooper	imp_stormtrooper_25_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200114	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	9	17.00	-13.00	12.00	-88	1	an Imperial stormtrooper	imp_stormtrooper_25_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200115	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	10	10.00	-11.00	-20.00	20	1	an Imperial colonel	imp_colonel_23_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200116	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	10	15.00	-11.00	-21.00	-1	1	an Imperial comm op	imp_comm_op_14_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200117	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	10	20.00	-11.00	-21.00	-20	1	an Imperial command security guard	crackdown_imp_command_security_guard_15_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200118	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	10	13.00	-13.00	-16.00	18	1	an Imperial stormtrooper squad leader	imp_stormtrooper_squad_leader_27_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200119	TATOOINE	tat_mosespa_officer_shed	AREA	3	0.00	0.00	-4.50	0	1	an Imperial warrant officer, 2nd class	imp_warrant_officer_2nd_18_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200120	TATOOINE	tat_mosespa_officer_shed	AREA	5	4.00	0.00	-2.00	-108	1	an Imperial captain	imp_captain_21_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200121	TATOOINE	tat_world	AREA	0	-2994.00	5.00	2547.00	-11	1	an AT-ST	crackdown_atst_80_d_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200122	TATOOINE	tat_world	AREA	0	-2919.00	5.00	2107.00	-63	1	an Imperial 1st lieutenant	imp_1st_lieutenant_20_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200123	TATOOINE	tat_world	AREA	0	-2804.00	5.00	1963.00	42	1	an Imperial bombardier	imp_bombardier_25_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200124	TATOOINE	tat_world	AREA	0	-2714.00	5.00	2229.00	30	1	an Imperial captain	imp_captain_21_h_att_n	Presence Imperial	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+5200125	TATOOINE	tat_world	AREA	0	-2781.00	5.00	2288.00	64	1	an Imperial corporal	crackdown_imp_corporal_16_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200126	TATOOINE	tat_world	AREA	0	-2922.00	5.00	2056.00	-15	1	an Imperial corporal	crackdown_imp_corporal_16_h_att_n	Presence Imperial	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+5200127	TATOOINE	tat_world	AREA	0	-2937.00	5.00	2098.00	91	1	an Imperial corporal	crackdown_imp_corporal_16_h_att_n	Presence Imperial	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+5200128	TATOOINE	tat_world	AREA	0	-3077.00	5.00	2177.00	48	1	an Imperial corporal	crackdown_imp_corporal_16_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200129	TATOOINE	tat_world	AREA	0	-3013.00	5.00	2293.00	-130	1	an Imperial master sergeant	imp_master_sergeant_18_h_att_n	Presence Imperial	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+5200130	TATOOINE	tat_world	AREA	0	-2699.00	5.00	2269.00	134	1	an Imperial medic	imp_medic_16_h_att_n	Presence Imperial	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+5200131	TATOOINE	tat_world	AREA	0	-2921.00	5.00	2149.00	-65	1	an Imperial medic	imp_medic_16_h_att_n	Presence Imperial	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+5200132	TATOOINE	tat_world	AREA	0	-3155.00	5.00	2127.00	-35	1	an Imperial medic	imp_medic_16_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200133	TATOOINE	tat_world	AREA	0	-2785.00	5.00	2339.00	-132	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Imperial	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+5200134	TATOOINE	tat_world	AREA	0	-2797.00	5.00	2311.00	46	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Imperial	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+5200135	TATOOINE	tat_world	AREA	0	-2803.00	5.00	2322.00	4	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200136	TATOOINE	tat_world	AREA	0	-2871.00	5.00	2285.00	159	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200137	TATOOINE	tat_world	AREA	0	-2878.00	5.00	2262.00	-88	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Imperial	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+5200138	TATOOINE	tat_world	AREA	0	-2881.00	5.00	2215.00	170	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200139	TATOOINE	tat_world	AREA	0	-2942.00	5.00	2459.00	129	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Imperial	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+5200140	TATOOINE	tat_world	AREA	0	-2979.00	5.00	2327.00	-53	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200141	TATOOINE	tat_world	AREA	0	-2984.00	5.00	2352.00	-150	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200142	TATOOINE	tat_world	AREA	0	-3002.00	5.00	2322.00	34	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200143	TATOOINE	tat_world	AREA	0	-3008.00	5.00	2343.00	136	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200144	TATOOINE	tat_world	AREA	0	-2766.00	5.00	2306.00	-123	1	an Imperial sergeant	imp_sergeant_16_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200145	TATOOINE	tat_world	AREA	0	-2854.00	5.00	2308.00	-12	1	an Imperial sergeant	imp_sergeant_16_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200146	TATOOINE	tat_world	AREA	0	-2875.00	5.00	1991.00	-125	1	an Imperial sergeant	imp_sergeant_16_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200147	TATOOINE	tat_world	AREA	0	-2922.00	5.00	2515.00	-167	1	an Imperial sergeant	imp_sergeant_16_h_att_n	Presence Imperial	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+5200148	TATOOINE	tat_world	AREA	0	-2943.00	5.00	2510.00	28	1	an Imperial sergeant	imp_sergeant_16_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200149	TATOOINE	tat_world	AREA	0	-2965.00	5.00	2426.00	85	1	an Imperial sergeant	imp_sergeant_16_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200150	TATOOINE	tat_world	AREA	0	-3021.00	5.00	2290.00	50	1	an Imperial sergeant	imp_sergeant_16_h_att_n	Presence Imperial	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+5200151	TATOOINE	tat_world	AREA	0	-3064.00	5.00	2156.00	166	1	an Imperial sergeant	imp_sergeant_16_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200152	TATOOINE	tat_world	AREA	0	-3072.00	5.00	2125.00	-7	1	an Imperial sergeant	imp_sergeant_16_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200153	TATOOINE	tat_world	AREA	0	-2906.00	5.00	2455.00	-7	1	an Imperial stormcaptain	imp_stealth_operative_100_h_inv_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200154	TATOOINE	tat_world	AREA	0	-2923.00	5.00	2405.00	23	1	an Imperial stormmedic	imp_stormmedic_25_25_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200155	TATOOINE	tat_world	AREA	0	-2711.00	5.00	2027.00	144	1	an Imperial stormrifle	imp_stormrifle_25_h_att_n	Presence Imperial	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+5200156	TATOOINE	tat_world	AREA	0	-2716.00	5.00	2014.00	84	1	an Imperial stormrifle	imp_stormrifle_25_h_att_n	Presence Imperial	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+5200157	TATOOINE	tat_world	AREA	0	-2861.00	5.00	2468.00	132	1	an Imperial stormrifle	imp_stormrifle_25_h_att_n	Presence Imperial	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+5200158	TATOOINE	tat_world	AREA	0	-2753.00	5.00	2214.00	35	1	an Imperial stormsniper	imp_stormsniper_25_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200159	TATOOINE	tat_world	AREA	0	-2755.00	5.00	2029.00	140	1	an Imperial stormsniper	imp_stormsniper_25_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200160	TATOOINE	tat_world	AREA	0	-2893.00	5.00	1991.00	170	1	an Imperial stormsniper	imp_stormsniper_25_h_att_n	Presence Imperial	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+5200161	TATOOINE	tat_world	AREA	0	-2956.00	5.00	2415.00	36	1	an Imperial stormsniper	imp_stormsniper_25_h_att_n	Presence Imperial	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+5200162	TATOOINE	tat_world	AREA	0	-3030.00	5.00	2130.00	101	1	an Imperial stormsniper	imp_stormsniper_25_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200163	TATOOINE	tat_world	AREA	0	-3060.00	5.00	2122.00	-66	1	an Imperial stormsniper	imp_stormsniper_25_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200164	TATOOINE	tat_world	AREA	0	-2683.00	5.00	2274.00	178	1	an Imperial stormtrooper	imp_stormtrooper_25_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200165	TATOOINE	tat_world	AREA	0	-2741.00	5.00	2258.00	96	1	an Imperial stormtrooper	imp_stormtrooper_25_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200166	TATOOINE	tat_world	AREA	0	-2774.00	5.00	2206.00	64	1	an Imperial stormtrooper	imp_stormtrooper_25_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200167	TATOOINE	tat_world	AREA	0	-2900.00	5.00	2144.00	9	1	an Imperial stormtrooper	imp_stormtrooper_25_h_att_n	Presence Imperial	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+5200168	TATOOINE	tat_world	AREA	0	-2904.00	5.00	2120.00	-43	1	an Imperial stormtrooper	imp_stormtrooper_25_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200169	TATOOINE	tat_world	AREA	0	-2914.00	5.00	2417.00	-34	1	an Imperial stormtrooper	imp_stormtrooper_25_h_att_n	Presence Imperial	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+5200170	TATOOINE	tat_world	AREA	0	-2949.00	5.00	1964.00	14	1	an Imperial stormtrooper	imp_stormtrooper_25_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200171	TATOOINE	tat_world	AREA	0	-2958.00	5.00	1982.00	86	1	an Imperial stormtrooper	imp_stormtrooper_25_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200172	TATOOINE	tat_world	AREA	0	-2959.00	5.00	2041.00	63	1	an Imperial stormtrooper	imp_stormtrooper_25_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200173	TATOOINE	tat_world	AREA	0	-2973.00	5.00	2570.00	-55	1	an Imperial stormtrooper	imp_stormtrooper_25_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200174	TATOOINE	tat_world	AREA	0	-2979.00	5.00	2493.00	154	1	an Imperial stormtrooper	imp_stormtrooper_25_h_att_n	Presence Imperial	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200175	TATOOINE	tat_world	AREA	0	-3093.00	5.00	2162.00	-61	1	an Imperial stormtrooper	imp_stormtrooper_25_h_att_n	Presence Imperial	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+5200176	TATOOINE	tat_world	AREA	0	-3099.00	5.00	2132.00	135	1	an Imperial stormtrooper	imp_stormtrooper_25_h_att_n	Presence Imperial	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+5200177	TATOOINE	tat_world	AREA	0	-3101.00	5.00	2158.00	-42	1	an Imperial stormtrooper	imp_stormtrooper_25_h_att_n	Presence Imperial	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+5200178	TATOOINE	tat_world	AREA	0	-3117.00	5.00	2143.00	-146	1	an Imperial stormtrooper	imp_stormtrooper_25_h_att_n	Presence Imperial	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+5200179	TATOOINE	tat_world	AREA	0	-2776.00	5.00	1987.00	83	1	an Imperial stormtrooper squad leader	imp_stormtrooper_squad_leader_27_h_att_n	Presence Imperial	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+5200180	TATOOINE	tat_world	AREA	0	3750.00	6.10	2380.40	-32	1	a Mos Eisley police officer	mos_eisley_police_officer_13_h_att_n	Presence Imperial	Mos Taike	1	PATROL	idle	0	999	0	0	300	120	0
+5200181	TATOOINE	tat_world	AREA	0	3829.70	19.30	2351.70	-68	1	a Mos Eisley police officer	mos_eisley_police_officer_13_h_att_n	Presence Imperial	Mos Taike	1	PATROL	idle	0	999	0	0	300	120	0
+5200182	TATOOINE	tat_world	AREA	0	3888.20	33.00	2350.00	-92	1	a Mos Eisley police officer	mos_eisley_police_officer_13_h_att_n	Presence Imperial	Mos Taike	1	STOP	idle	0	0	0	0	300	120	0
+5200183	TATOOINE	tat_world	AREA	0	3909.90	33.00	2342.20	96	1	a Mos Eisley police officer	mos_eisley_police_officer_13_h_att_n	Presence Imperial	Mos Taike	1	PATROL	idle	0	999	0	0	300	120	0
+5200184	TATOOINE	tat_world	AREA	0	3927.40	47.00	2294.70	-24	1	a Mos Eisley police officer	mos_eisley_police_officer_13_h_att_n	Presence Imperial	Mos Taike	1	PATROL	idle	0	999	0	0	300	120	0
+5200185	TATOOINE	tat_world	AREA	0	3757.80	8.30	2343.70	-38	1	an elite sand trooper	imp_sand_trooper_elite_45_h_att_n	Presence Imperial	Mos Taike	1	STOP	idle	0	0	0	0	300	120	0
+5200186	TATOOINE	tat_world	AREA	0	3856.30	27.50	2325.30	-63	1	an elite sand trooper	imp_sand_trooper_elite_45_h_att_n	Presence Imperial	Mos Taike	1	STOP	idle	0	0	0	0	300	120	0
+5200187	TATOOINE	tat_world	AREA	0	3760.80	6.50	2373.70	-97	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Imperial	Mos Taike	1	STOP	idle	0	0	0	0	300	120	0
+5200188	TATOOINE	tat_world	AREA	0	3786.10	11.60	2378.40	177	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Imperial	Mos Taike	1	STOP	idle	0	0	0	0	300	120	0
+5200189	TATOOINE	tat_world	AREA	0	3951.40	53.50	2265.10	-106	1	an Imperial stormtrooper squad leader	imp_stormtrooper_squad_leader_27_h_att_n	Presence Imperial	Mos Taike	1	STOP	idle	0	0	0	0	300	120	0
+5200190	TATOOINE	tat_world	AREA	0	123.60	52.00	-5368.00	-142	1	a Rebel guard	reb_guard_25_h_att_n	Presence Rebel	Anchorhead	1	STOP	idle	0	0	0	0	300	120	0
+5200191	TATOOINE	tat_world	AREA	0	135.10	52.00	-5374.90	83	1	a Rebel guard	reb_guard_25_h_att_n	Presence Rebel	Anchorhead	1	STOP	idle	0	0	0	0	300	120	0
+5200192	TATOOINE	tat_world	AREA	0	151.00	52.00	-5316.00	55	1	a Rebel guard	reb_guard_25_h_att_n	Presence Rebel	Anchorhead	1	STOP	idle	0	0	0	0	300	120	0
+5200193	TATOOINE	tat_world	AREA	0	159.00	52.00	-5320.00	-13	1	a Rebel guard	reb_guard_25_h_att_n	Presence Rebel	Anchorhead	1	STOP	idle	0	0	0	0	300	120	0
+5200194	TATOOINE	tat_world	AREA	0	31.00	51.00	-5337.00	-90	1	a Rebel guard	reb_guard_25_h_att_n	Presence Rebel	Anchorhead	1	STOP	idle	0	0	0	0	300	120	0
+5200195	TATOOINE	tat_world	AREA	0	76.50	52.00	-5361.10	-88	1	a Rebel guard	reb_guard_25_h_att_n	Presence Rebel	Anchorhead	1	STOP	idle	0	0	0	0	300	120	0
+5200196	TATOOINE	tat_world	AREA	0	89.90	52.00	-5393.80	-47	1	a Rebel guard	reb_guard_25_h_att_n	Presence Rebel	Anchorhead	1	STOP	idle	0	0	0	0	300	120	0
+5200197	TATOOINE	tat_world	AREA	0	31.40	51.00	-5350.30	-75	1	a Rebel guard captain	reb_guard_captain_25_h_att_n	Presence Rebel	Anchorhead	1	STOP	idle	0	0	0	0	300	120	0
+5200198	TATOOINE	tat_world	AREA	0	125.50	52.00	-5416.00	-81	1	a Rebel security guard	reb_security_guard_15_h_att_n	Presence Rebel	Anchorhead	1	STOP	idle	0	0	0	0	300	120	0
+5200199	TATOOINE	tat_world	AREA	0	55.20	52.60	-5332.50	-176	1	a Rebel security guard	reb_security_guard_15_h_att_n	Presence Rebel	Anchorhead	1	STOP	idle	0	0	0	0	300	120	0
+5200200	TATOOINE	tat_world	AREA	0	77.00	52.00	-5372.00	-17	1	a Rebel security guard	reb_security_guard_15_h_att_n	Presence Rebel	Anchorhead	1	PATROL	idle	0	999	0	0	300	120	0
+5200201	TATOOINE	tat_world	AREA	0	81.00	52.00	-5333.00	83	1	a Rebel security guard	reb_security_guard_15_h_att_n	Presence Rebel	Anchorhead	1	PATROL	idle	0	999	0	0	300	120	0
+5200202	TATOOINE	tat_world	AREA	0	-1018.30	12.00	-3736.20	-88	1	a Rebel guard	reb_guard_25_h_att_n	Presence Rebel	Bestine	1	STOP	idle	0	0	0	0	300	120	0
+5200203	TATOOINE	tat_world	AREA	0	-1083.60	12.00	-3594.20	169	1	a Rebel guard	reb_guard_25_h_att_n	Presence Rebel	Bestine	1	STOP	idle	0	0	0	0	300	120	0
+5200204	TATOOINE	tat_world	AREA	0	-1093.60	12.00	-3648.60	48	1	a Rebel guard	reb_guard_25_h_att_n	Presence Rebel	Bestine	1	PATROL	idle	0	999	0	0	300	120	0
+5200205	TATOOINE	tat_world	AREA	0	-1093.70	14.00	-3660.20	41	1	a Rebel guard	reb_guard_25_h_att_n	Presence Rebel	Bestine	1	STOP	idle	0	0	0	0	300	120	0
+5200206	TATOOINE	tat_world	AREA	0	-1105.80	12.00	-3573.10	168	1	a Rebel guard	reb_guard_25_h_att_n	Presence Rebel	Bestine	1	PATROL	idle	0	999	0	0	300	120	0
+5200207	TATOOINE	tat_world	AREA	0	-1130.90	12.20	-3611.60	125	1	a Rebel guard	reb_guard_25_h_att_n	Presence Rebel	Bestine	1	STOP	idle	0	0	0	0	300	120	0
+5200208	TATOOINE	tat_world	AREA	0	-1133.20	12.20	-3614.60	125	1	a Rebel guard	reb_guard_25_h_att_n	Presence Rebel	Bestine	1	STOP	idle	0	0	0	0	300	120	0
+5200209	TATOOINE	tat_world	AREA	0	-1181.30	12.00	-3537.90	-162	1	a Rebel guard	reb_guard_25_h_att_n	Presence Rebel	Bestine	1	STOP	idle	0	0	0	0	300	120	0
+5200210	TATOOINE	tat_world	AREA	0	-1278.50	12.50	-3643.10	165	1	a Rebel guard	reb_guard_25_h_att_n	Presence Rebel	Bestine	1	STOP	idle	0	0	0	0	300	120	0
+5200211	TATOOINE	tat_world	AREA	0	-1291.60	12.00	-3509.60	-125	1	a Rebel guard	reb_guard_25_h_att_n	Presence Rebel	Bestine	1	PATROL	idle	0	999	0	0	300	120	0
+5200212	TATOOINE	tat_world	AREA	0	-1292.80	12.00	-3585.50	133	1	a Rebel guard	reb_guard_25_h_att_n	Presence Rebel	Bestine	1	STOP	idle	0	0	0	0	300	120	0
+5200213	TATOOINE	tat_world	AREA	0	-1414.50	10.00	-3780.30	105	1	a Rebel guard	reb_guard_25_h_att_n	Presence Rebel	Bestine	1	STOP	idle	0	0	0	0	300	120	0
+5200214	TATOOINE	tat_world	AREA	0	-983.80	12.00	-3746.50	116	1	a Rebel guard	reb_guard_25_h_att_n	Presence Rebel	Bestine	1	STOP	idle	0	0	0	0	300	120	0
+5200215	TATOOINE	tat_world	AREA	0	-1089.80	12.00	-3704.20	116	1	a Rebel guard captain	reb_guard_captain_25_h_att_n	Presence Rebel	Bestine	1	STOP	idle	0	0	0	0	300	120	0
+5200216	TATOOINE	tat_world	AREA	0	-1413.00	10.00	-3780.90	-87	1	a Rebel guard captain	reb_guard_captain_25_h_att_n	Presence Rebel	Bestine	1	STOP	idle	0	0	0	0	300	120	0
+5200217	TATOOINE	tat_world	AREA	0	-1097.00	12.00	-3525.30	121	1	a Rebel liberator	reb_liberator_28_h_att_n	Presence Rebel	Bestine	1	STOP	idle	0	0	0	0	300	120	0
+5200218	TATOOINE	tat_world	AREA	0	-1275.60	12.00	-3479.90	0	1	a Rebel liberator	reb_liberator_28_h_att_n	Presence Rebel	Bestine	1	STOP	idle	0	0	0	0	300	120	0
+5200219	TATOOINE	tat_world	AREA	0	-1415.60	10.00	-3775.20	0	1	a Rebel liberator	reb_liberator_28_h_att_n	Presence Rebel	Bestine	1	PATROL	idle	0	999	0	0	300	120	0
+5200220	TATOOINE	tat_world	AREA	0	-1016.90	12.00	-3741.20	97	1	a Rebel security guard	reb_security_guard_15_h_att_n	Presence Rebel	Bestine	1	STOP	idle	0	0	0	0	300	120	0
+5200221	TATOOINE	tat_world	AREA	0	-1169.80	12.00	-3692.10	-125	1	a Rebel security guard	reb_security_guard_15_h_att_n	Presence Rebel	Bestine	1	STOP	idle	0	0	0	0	300	120	0
+5200222	TATOOINE	tat_world	AREA	0	-981.00	12.00	-3792.10	133	1	a Rebel security guard	reb_security_guard_15_h_att_n	Presence Rebel	Bestine	1	STOP	idle	0	0	0	0	300	120	0
+5200223	TATOOINE	tat_world	AREA	0	-1283.80	12.00	-3480.40	0	1	an elite Rebel sand rat	reb_sand_rat_elite_45_h_att_n	Presence Rebel	Bestine	1	STOP	idle	0	0	0	0	300	120	0
+5200224	TATOOINE	tat_world	AREA	0	3288.12	5.00	-4842.11	-36	1	a Mos Eisley police officer	mos_eisley_police_officer_13_h_att_n	Presence Rebel	Mos Eisley	1	PATROL	idle	0	999	0	0	300	120	0
+5200225	TATOOINE	tat_world	AREA	0	3288.68	5.00	-4636.09	124	1	a Mos Eisley police officer	mos_eisley_police_officer_13_h_att_n	Presence Rebel	Mos Eisley	1	PATROL	idle	0	999	0	0	300	120	0
+5200226	TATOOINE	tat_world	AREA	0	3304.54	5.00	-4602.49	122	1	a Mos Eisley police officer	mos_eisley_police_officer_13_h_att_n	Presence Rebel	Mos Eisley	1	PATROL	idle	0	999	0	0	300	120	0
+5200227	TATOOINE	tat_world	AREA	0	3318.30	5.00	-4613.00	30	1	a Mos Eisley police officer	mos_eisley_police_officer_13_h_att_n	Presence Rebel	Mos Eisley	1	PATROL	idle	0	999	0	0	300	120	0
+5200228	TATOOINE	tat_world	AREA	0	3360.18	5.00	-4742.17	-150	1	a Mos Eisley police officer	mos_eisley_police_officer_13_h_att_n	Presence Rebel	Mos Eisley	1	PATROL	idle	0	999	0	0	300	120	0
+5200229	TATOOINE	tat_world	AREA	0	3427.14	5.00	-4952.92	56	1	a Mos Eisley police officer	mos_eisley_police_officer_13_h_att_n	Presence Rebel	Mos Eisley	1	PATROL	idle	0	999	0	0	300	120	0
+5200230	TATOOINE	tat_world	AREA	0	3538.04	5.12	-4806.46	-73	1	a Mos Eisley police officer	mos_eisley_police_officer_13_h_att_n	Presence Rebel	Mos Eisley	1	PATROL	idle	0	999	0	0	300	120	0
+5200231	TATOOINE	tat_world	AREA	0	3278.49	5.00	-4676.19	-56	1	a Rebel guard	reb_guard_25_h_att_n	Presence Rebel	Mos Eisley	1	STOP	idle	0	0	0	0	300	120	0
+5200232	TATOOINE	tat_world	AREA	0	3279.95	5.00	-4835.74	54	1	a Rebel guard	reb_guard_25_h_att_n	Presence Rebel	Mos Eisley	1	STOP	idle	0	0	0	0	300	120	0
+5200233	TATOOINE	tat_world	AREA	0	3288.68	5.00	-4636.09	124	1	a Rebel guard	reb_guard_25_h_att_n	Presence Rebel	Mos Eisley	1	STOP	idle	0	0	0	0	300	120	0
+5200234	TATOOINE	tat_world	AREA	0	3304.54	5.00	-4602.49	122	1	a Rebel guard	reb_guard_25_h_att_n	Presence Rebel	Mos Eisley	1	STOP	idle	0	0	0	0	300	120	0
+5200235	TATOOINE	tat_world	AREA	0	3360.18	5.00	-4742.17	-150	1	a Rebel guard	reb_guard_25_h_att_n	Presence Rebel	Mos Eisley	1	STOP	idle	0	0	0	0	300	120	0
+5200236	TATOOINE	tat_world	AREA	0	3417.99	5.00	-4974.46	-50	1	a Rebel guard	reb_guard_25_h_att_n	Presence Rebel	Mos Eisley	1	STOP	idle	0	0	0	0	300	120	0
+5200237	TATOOINE	tat_world	AREA	0	3427.14	5.00	-4952.92	56	1	a Rebel guard	reb_guard_25_h_att_n	Presence Rebel	Mos Eisley	1	STOP	idle	0	0	0	0	300	120	0
+5200238	TATOOINE	tat_world	AREA	0	3482.52	7.50	-4683.05	129	1	a Rebel guard	reb_guard_25_h_att_n	Presence Rebel	Mos Eisley	1	STOP	idle	0	0	0	0	300	120	0
+5200239	TATOOINE	tat_world	AREA	0	3516.17	5.00	-4879.70	154	1	a Rebel guard	reb_guard_25_h_att_n	Presence Rebel	Mos Eisley	1	STOP	idle	0	0	0	0	300	120	0
+5200240	TATOOINE	tat_world	AREA	0	3585.84	5.00	-4719.95	-88	1	a Rebel guard	reb_guard_25_h_att_n	Presence Rebel	Mos Eisley	1	STOP	idle	0	0	0	0	300	120	0
+5200241	TATOOINE	tat_world	AREA	0	3496.81	5.52	-4923.13	-7	1	a Rebel guard captain	reb_guard_captain_25_h_att_n	Presence Rebel	Mos Eisley	1	STOP	idle	0	0	0	0	300	120	0
+5200242	TATOOINE	tat_world	AREA	0	3288.12	5.00	-4842.11	36	1	a Rebel liberator	reb_liberator_28_h_att_n	Presence Rebel	Mos Eisley	1	STOP	idle	0	0	0	0	300	120	0
+5200243	TATOOINE	tat_world	AREA	0	3427.46	7.50	-4728.61	-146	1	a Rebel liberator	reb_liberator_28_h_att_n	Presence Rebel	Mos Eisley	1	STOP	idle	0	0	0	0	300	120	0
+5200244	TATOOINE	tat_world	AREA	0	3290.16	5.00	-4695.84	126	1	a Rebel security guard	reb_security_guard_15_h_att_n	Presence Rebel	Mos Eisley	1	STOP	idle	0	0	0	0	300	120	0
+5200245	TATOOINE	tat_world	AREA	0	3322.23	5.00	-4623.57	28	1	a Rebel security guard	reb_security_guard_15_h_att_n	Presence Rebel	Mos Eisley	1	STOP	idle	0	0	0	0	300	120	0
+5200246	TATOOINE	tat_world	AREA	0	3538.04	5.12	-4806.46	-73	1	a Rebel security guard	reb_security_guard_15_h_att_n	Presence Rebel	Mos Eisley	1	STOP	idle	0	0	0	0	300	120	0
+5200247	TATOOINE	tat_world	AREA	0	3356.79	7.50	-4711.31	125	1	an elite Rebel sand rat	reb_sand_rat_elite_45_h_att_n	Presence Rebel	Mos Eisley	1	STOP	idle	0	0	0	0	300	120	0
+5200248	TATOOINE	tat_world	AREA	0	1399.40	7.00	3094.30	178	1	a frightened Rebel recruit	reb_recruit_frightened_14_h_att_n	Presence Rebel	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200249	TATOOINE	tat_world	AREA	0	1401.00	7.00	3094.30	176	1	a frightened Rebel recruit	reb_recruit_frightened_14_h_att_n	Presence Rebel	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200250	TATOOINE	tat_world	AREA	0	1209.90	7.00	2970.60	-68	1	a Mos Eisley police officer	mos_eisley_police_officer_13_h_att_n	Presence Rebel	Mos Entha	1	PATROL	idle	0	999	0	0	300	120	0
+5200251	TATOOINE	tat_world	AREA	0	1254.90	4.00	3258.10	-96	1	a Mos Eisley police officer	mos_eisley_police_officer_13_h_att_n	Presence Rebel	Mos Entha	1	PATROL	idle	0	999	0	0	300	120	0
+5200252	TATOOINE	tat_world	AREA	0	1344.70	7.00	3080.50	50	1	a Mos Eisley police officer	mos_eisley_police_officer_13_h_att_n	Presence Rebel	Mos Entha	1	PATROL	idle	0	999	0	0	300	120	0
+5200253	TATOOINE	tat_world	AREA	0	1470.60	7.00	3249.80	93	1	a Mos Eisley police officer	mos_eisley_police_officer_13_h_att_n	Presence Rebel	Mos Entha	1	PATROL	idle	0	999	0	0	300	120	0
+5200254	TATOOINE	tat_world	AREA	0	1482.80	7.00	3247.20	-66	1	a Mos Eisley police officer	mos_eisley_police_officer_13_h_att_n	Presence Rebel	Mos Entha	1	PATROL	idle	0	999	0	0	300	120	0
+5200255	TATOOINE	tat_world	AREA	0	1486.90	7.00	3061.40	161	1	a Mos Eisley police officer	mos_eisley_police_officer_13_h_att_n	Presence Rebel	Mos Entha	1	PATROL	idle	0	999	0	0	300	120	0
+5200256	TATOOINE	tat_world	AREA	0	1492.90	7.00	3441.90	98	1	a Mos Eisley police officer	mos_eisley_police_officer_13_h_att_n	Presence Rebel	Mos Entha	1	PATROL	idle	0	999	0	0	300	120	0
+5200257	TATOOINE	tat_world	AREA	0	1568.50	11.00	3246.90	-84	1	a Mos Eisley police officer	mos_eisley_police_officer_13_h_att_n	Presence Rebel	Mos Entha	1	PATROL	idle	0	999	0	0	300	120	0
+5200258	TATOOINE	tat_world	AREA	0	1632.00	7.00	3119.40	81	1	a Mos Eisley police officer	mos_eisley_police_officer_13_h_att_n	Presence Rebel	Mos Entha	1	PATROL	idle	0	999	0	0	300	120	0
+5200259	TATOOINE	tat_world	AREA	0	1660.10	7.00	3127.50	-111	1	a Mos Eisley police officer	mos_eisley_police_officer_13_h_att_n	Presence Rebel	Mos Entha	1	PATROL	idle	0	999	0	0	300	120	0
+5200260	TATOOINE	tat_world	AREA	0	1747.00	7.00	3159.80	-176	1	a Mos Eisley police officer	mos_eisley_police_officer_13_h_att_n	Presence Rebel	Mos Entha	1	PATROL	idle	0	999	0	0	300	120	0
+5200261	TATOOINE	tat_world	AREA	0	1256.00	7.70	2954.30	-54	1	a Rebel commando	reb_commando_29_h_att_n	Presence Rebel	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200262	TATOOINE	tat_world	AREA	0	1320.90	9.50	3382.90	90	1	a Rebel commando	reb_commando_29_h_att_n	Presence Rebel	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200263	TATOOINE	tat_world	AREA	0	1455.20	7.00	3232.50	-172	1	a Rebel guard	reb_guard_25_h_att_n	Presence Rebel	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200264	TATOOINE	tat_world	AREA	0	1487.20	7.00	3240.80	-42	1	a Rebel guard	reb_guard_25_h_att_n	Presence Rebel	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200265	TATOOINE	tat_world	AREA	0	1557.70	9.50	3045.70	173	1	a Rebel guard	reb_guard_25_h_att_n	Presence Rebel	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200266	TATOOINE	tat_world	AREA	0	1618.90	11.00	3241.70	86	1	a Rebel guard	reb_guard_25_h_att_n	Presence Rebel	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200267	TATOOINE	tat_world	AREA	0	1637.20	7.00	2980.30	-179	1	a Rebel guard	reb_guard_25_h_att_n	Presence Rebel	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200268	TATOOINE	tat_world	AREA	0	1663.00	7.00	3109.80	147	1	a Rebel guard	reb_guard_25_h_att_n	Presence Rebel	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200269	TATOOINE	tat_world	AREA	0	1688.80	7.00	3125.20	-2	1	a Rebel guard	reb_guard_25_h_att_n	Presence Rebel	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200270	TATOOINE	tat_world	AREA	0	1759.60	7.00	3186.10	78	1	a Rebel guard	reb_guard_25_h_att_n	Presence Rebel	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200271	TATOOINE	tat_world	AREA	0	1376.60	7.00	3267.50	133	1	a Rebel guard captain	reb_guard_captain_25_h_att_n	Presence Rebel	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200272	TATOOINE	tat_world	AREA	0	1593.30	7.00	3020.20	82	1	a Rebel guard captain	reb_guard_captain_25_h_att_n	Presence Rebel	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200273	TATOOINE	tat_world	AREA	0	1502.50	7.00	3156.90	-1	1	a Rebel liberator	reb_liberator_28_h_att_n	Presence Rebel	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200274	TATOOINE	tat_world	AREA	0	1715.30	7.00	3147.10	176	1	a Rebel liberator	reb_liberator_28_h_att_n	Presence Rebel	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200275	TATOOINE	tat_world	AREA	0	1738.60	7.60	3191.10	178	1	a Rebel liberator	reb_liberator_28_h_att_n	Presence Rebel	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200276	TATOOINE	tat_world	AREA	0	1181.30	7.00	3087.90	-79	1	a Rebel security guard	reb_security_guard_15_h_att_n	Presence Rebel	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200277	TATOOINE	tat_world	AREA	0	1264.00	7.00	3159.30	-82	1	a Rebel security guard	reb_security_guard_15_h_att_n	Presence Rebel	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200278	TATOOINE	tat_world	AREA	0	1272.70	7.00	3255.90	87	1	a Rebel security guard	reb_security_guard_15_h_att_n	Presence Rebel	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200279	TATOOINE	tat_world	AREA	0	1286.30	7.70	2954.70	42	1	a Rebel security guard	reb_security_guard_15_h_att_n	Presence Rebel	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200280	TATOOINE	tat_world	AREA	0	1431.60	9.50	3372.50	-179	1	a Rebel security guard	reb_security_guard_15_h_att_n	Presence Rebel	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200281	TATOOINE	tat_world	AREA	0	1508.10	7.00	3127.90	174	1	a Rebel sharpshooter	reb_sharpshooter_17_h_att_n	Presence Rebel	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200282	TATOOINE	tat_world	AREA	0	1538.70	10.90	3219.90	-94	1	a Rebel sharpshooter	reb_sharpshooter_17_h_att_n	Presence Rebel	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200283	TATOOINE	tat_world	AREA	0	1282.40	7.00	3133.10	28	1	a Rebel soldier	reb_soldier_25_h_att_n	Presence Rebel	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200284	TATOOINE	tat_world	AREA	0	1289.20	7.00	3128.00	26	1	a Rebel soldier	reb_soldier_25_h_att_n	Presence Rebel	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200285	TATOOINE	tat_world	AREA	0	1400.20	7.00	3090.20	0	1	a washedout Rebel officer	reb_officer_washedout_16_h_att_n	Presence Rebel	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200286	TATOOINE	tat_world	AREA	0	1380.40	9.50	3012.40	-179	1	an elite Rebel sand rat	reb_sand_rat_elite_45_h_att_n	Presence Rebel	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200287	TATOOINE	tat_world	AREA	0	1444.60	7.00	3106.90	90	1	an elite Rebel sand rat	reb_sand_rat_elite_45_h_att_n	Presence Rebel	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200288	TATOOINE	tat_world	AREA	0	1333.60	7.00	3490.00	93	1	an Imperial sand trooper	imp_sand_trooper_25_h_att_n	Presence Rebel	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+5200289	TATOOINE	tat_mosespa_barracks	AREA	3	0.00	0.00	-4.00	2	1	a battle worn Rebel officer	reb_officer_battle_worn_18_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200290	TATOOINE	tat_mosespa_barracks	AREA	4	4.00	0.00	1.50	-90	1	a Rebel medic	reb_medic_16_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200291	TATOOINE	tat_mosespa_barracks	AREA	6	-4.00	0.00	-3.00	96	1	a washedout Rebel officer	reb_officer_washedout_16_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200292	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	2	0.00	0.00	3.50	4	1	a washedout Rebel officer	reb_officer_washedout_16_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200293	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	5	1.00	-6.00	-6.00	115	1	a fresh Rebel rifleman	reb_rifleman_fresh_25_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200294	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	5	7.00	-6.00	-7.00	-12	1	a fresh Rebel rifleman	reb_rifleman_fresh_25_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200295	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	7	-5.00	-13.00	-12.00	25	1	a Rebel Captain	reb_army_captain_21_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200296	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	7	-6.00	-13.00	6.00	148	1	a Rebel soldier	reb_soldier_25_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200297	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	7	-6.00	-13.00	-4.00	58	1	an inexperienced Rebel cadet	reb_cadet_inexperienced_29_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200298	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	8	6.00	-13.00	11.00	-175	1	a Rebel medic	reb_medic_16_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200299	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	8	-4.00	-13.00	13.00	157	1	a Rebel sharpshooter	reb_sharpshooter_17_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200300	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	9	13.00	-13.00	2.00	17	1	a Rebel soldier	reb_soldier_25_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200301	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	9	17.00	-13.00	12.00	-88	1	a Rebel soldier	reb_soldier_25_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200302	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	10	10.00	-11.00	-20.00	20	1	a Rebel colonel	reb_colonel_23_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200303	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	10	15.00	-11.00	-21.00	-1	1	a Rebel comm op	reb_comm_op_14_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200304	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	10	20.00	-11.00	-21.00	-20	1	a Rebel security guard	reb_security_guard_15_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200305	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	10	13.00	-13.00	-16.00	18	1	a Rebel squad leader	reb_squad_leader_27_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200306	TATOOINE	tat_mosespa_officer_shed	AREA	3	0.00	0.00	-4.50	0	1	a Rebel warrant officer	reb_officer_warrant_18_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200307	TATOOINE	tat_mosespa_officer_shed	AREA	5	4.00	0.00	-2.00	-108	1	a Rebel Captain	reb_army_captain_21_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200308	TATOOINE	tat_world	AREA	0	-3013.00	5.00	2293.00	-130	1	a battle worn Rebel officer	reb_officer_battle_worn_18_h_att_n	Presence Rebel	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+5200309	TATOOINE	tat_world	AREA	0	-2919.00	5.00	2107.00	-63	1	a fatigued Rebel officer	reb_fatigued_officer_20_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200310	TATOOINE	tat_world	AREA	0	-2711.00	5.00	2027.00	144	1	a fresh Rebel rifleman	reb_rifleman_fresh_25_h_att_n	Presence Rebel	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+5200311	TATOOINE	tat_world	AREA	0	-2716.00	5.00	2014.00	84	1	a fresh Rebel rifleman	reb_rifleman_fresh_25_h_att_n	Presence Rebel	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+5200312	TATOOINE	tat_world	AREA	0	-2755.00	5.00	2029.00	140	1	a fresh Rebel rifleman	reb_rifleman_fresh_25_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200313	TATOOINE	tat_world	AREA	0	-2956.00	5.00	2415.00	36	1	a frightened Rebel recruit	reb_recruit_frightened_14_h_att_n	Presence Rebel	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+5200314	TATOOINE	tat_world	AREA	0	-2714.00	5.00	2229.00	30	1	a Rebel Captain	reb_army_captain_21_h_att_n	Presence Rebel	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+5200315	TATOOINE	tat_world	AREA	0	-2781.00	5.00	2288.00	64	1	a Rebel corporal	reb_corporal_16_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200316	TATOOINE	tat_world	AREA	0	-2922.00	5.00	2056.00	-15	1	a Rebel corporal	reb_corporal_16_h_att_n	Presence Rebel	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+5200317	TATOOINE	tat_world	AREA	0	-2937.00	5.00	2098.00	91	1	a Rebel corporal	reb_corporal_16_h_att_n	Presence Rebel	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+5200318	TATOOINE	tat_world	AREA	0	-3077.00	5.00	2177.00	48	1	a Rebel corporal	reb_corporal_16_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200319	TATOOINE	tat_world	AREA	0	-2804.00	5.00	1963.00	42	1	a Rebel grenadier	reb_grenadier_25_25_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200320	TATOOINE	tat_world	AREA	0	-2861.00	5.00	2468.00	132	1	a Rebel liberator	reb_liberator_28_h_att_n	Presence Rebel	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+5200321	TATOOINE	tat_world	AREA	0	-2906.00	5.00	2455.00	-7	1	a Rebel liberator	reb_liberator_28_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200322	TATOOINE	tat_world	AREA	0	-2699.00	5.00	2269.00	134	1	a Rebel medic	reb_medic_16_h_att_n	Presence Rebel	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+5200323	TATOOINE	tat_world	AREA	0	-2921.00	5.00	2149.00	-65	1	a Rebel medic	reb_medic_16_h_att_n	Presence Rebel	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+5200324	TATOOINE	tat_world	AREA	0	-2923.00	5.00	2405.00	23	1	a Rebel medic	reb_medic_16_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200325	TATOOINE	tat_world	AREA	0	-3155.00	5.00	2127.00	-35	1	a Rebel medic	reb_medic_16_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200326	TATOOINE	tat_world	AREA	0	-2753.00	5.00	2214.00	35	1	a Rebel sharpshooter	reb_sharpshooter_17_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200327	TATOOINE	tat_world	AREA	0	-2893.00	5.00	1991.00	170	1	a Rebel sharpshooter	reb_sharpshooter_17_h_att_n	Presence Rebel	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+5200328	TATOOINE	tat_world	AREA	0	-3030.00	5.00	2130.00	101	1	a Rebel sharpshooter	reb_sharpshooter_17_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200329	TATOOINE	tat_world	AREA	0	-3060.00	5.00	2122.00	-66	1	a Rebel sharpshooter	reb_sharpshooter_17_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200330	TATOOINE	tat_world	AREA	0	-2683.00	5.00	2274.00	178	1	a Rebel soldier	reb_soldier_25_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200331	TATOOINE	tat_world	AREA	0	-2741.00	5.00	2258.00	96	1	a Rebel soldier	reb_soldier_25_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200332	TATOOINE	tat_world	AREA	0	-2774.00	5.00	2206.00	64	1	a Rebel soldier	reb_soldier_25_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200333	TATOOINE	tat_world	AREA	0	-2900.00	5.00	2144.00	9	1	a Rebel soldier	reb_soldier_25_h_att_n	Presence Rebel	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+5200334	TATOOINE	tat_world	AREA	0	-2904.00	5.00	2120.00	-43	1	a Rebel soldier	reb_soldier_25_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200335	TATOOINE	tat_world	AREA	0	-2914.00	5.00	2417.00	-34	1	a Rebel soldier	reb_soldier_25_h_att_n	Presence Rebel	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+5200336	TATOOINE	tat_world	AREA	0	-2949.00	5.00	1964.00	14	1	a Rebel soldier	reb_soldier_25_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200337	TATOOINE	tat_world	AREA	0	-2958.00	5.00	1982.00	86	1	a Rebel soldier	reb_soldier_25_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200338	TATOOINE	tat_world	AREA	0	-2959.00	5.00	2041.00	63	1	a Rebel soldier	reb_soldier_25_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200339	TATOOINE	tat_world	AREA	0	-2973.00	5.00	2570.00	-55	1	a Rebel soldier	reb_soldier_25_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200340	TATOOINE	tat_world	AREA	0	-2979.00	5.00	2493.00	154	1	a Rebel soldier	reb_soldier_25_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200341	TATOOINE	tat_world	AREA	0	-2994.00	5.00	2547.00	-11	1	a Rebel soldier	reb_soldier_25_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200342	TATOOINE	tat_world	AREA	0	-3093.00	5.00	2162.00	-61	1	a Rebel soldier	reb_soldier_25_h_att_n	Presence Rebel	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+5200343	TATOOINE	tat_world	AREA	0	-3099.00	5.00	2132.00	135	1	a Rebel soldier	reb_soldier_25_h_att_n	Presence Rebel	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+5200344	TATOOINE	tat_world	AREA	0	-3101.00	5.00	2158.00	-42	1	a Rebel soldier	reb_soldier_25_h_att_n	Presence Rebel	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+5200345	TATOOINE	tat_world	AREA	0	-3117.00	5.00	2143.00	-146	1	a Rebel soldier	reb_soldier_25_h_att_n	Presence Rebel	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+5200346	TATOOINE	tat_world	AREA	0	-2776.00	5.00	1987.00	83	1	a Rebel squad leader	reb_squad_leader_27_h_att_n	Presence Rebel	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+5200347	TATOOINE	tat_world	AREA	0	-2766.00	5.00	2306.00	-123	1	a washedout Rebel officer	reb_officer_washedout_16_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200348	TATOOINE	tat_world	AREA	0	-2854.00	5.00	2308.00	-12	1	a washedout Rebel officer	reb_officer_washedout_16_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200349	TATOOINE	tat_world	AREA	0	-2875.00	5.00	1991.00	-125	1	a washedout Rebel officer	reb_officer_washedout_16_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200350	TATOOINE	tat_world	AREA	0	-2922.00	5.00	2515.00	-167	1	a washedout Rebel officer	reb_officer_washedout_16_h_att_n	Presence Rebel	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+5200351	TATOOINE	tat_world	AREA	0	-2943.00	5.00	2510.00	28	1	a washedout Rebel officer	reb_officer_washedout_16_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200352	TATOOINE	tat_world	AREA	0	-2965.00	5.00	2426.00	85	1	a washedout Rebel officer	reb_officer_washedout_16_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200353	TATOOINE	tat_world	AREA	0	-3021.00	5.00	2290.00	50	1	a washedout Rebel officer	reb_officer_washedout_16_h_att_n	Presence Rebel	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+5200354	TATOOINE	tat_world	AREA	0	-3064.00	5.00	2156.00	166	1	a washedout Rebel officer	reb_officer_washedout_16_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200355	TATOOINE	tat_world	AREA	0	-3072.00	5.00	2125.00	-7	1	a washedout Rebel officer	reb_officer_washedout_16_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200356	TATOOINE	tat_world	AREA	0	-2785.00	5.00	2339.00	-132	1	an elite Rebel sand rat	reb_sand_rat_elite_45_h_att_n	Presence Rebel	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+5200357	TATOOINE	tat_world	AREA	0	-2797.00	5.00	2311.00	46	1	an elite Rebel sand rat	reb_sand_rat_elite_45_h_att_n	Presence Rebel	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+5200358	TATOOINE	tat_world	AREA	0	-2803.00	5.00	2322.00	4	1	an elite Rebel sand rat	reb_sand_rat_elite_45_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200359	TATOOINE	tat_world	AREA	0	-2871.00	5.00	2285.00	159	1	an elite Rebel sand rat	reb_sand_rat_elite_45_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200360	TATOOINE	tat_world	AREA	0	-2878.00	5.00	2262.00	-88	1	an elite Rebel sand rat	reb_sand_rat_elite_45_h_att_n	Presence Rebel	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+5200361	TATOOINE	tat_world	AREA	0	-2881.00	5.00	2215.00	170	1	an elite Rebel sand rat	reb_sand_rat_elite_45_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200362	TATOOINE	tat_world	AREA	0	-2942.00	5.00	2459.00	129	1	an elite Rebel sand rat	reb_sand_rat_elite_45_h_att_n	Presence Rebel	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+5200363	TATOOINE	tat_world	AREA	0	-2979.00	5.00	2327.00	-53	1	an elite Rebel sand rat	reb_sand_rat_elite_45_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200364	TATOOINE	tat_world	AREA	0	-2984.00	5.00	2352.00	-150	1	an elite Rebel sand rat	reb_sand_rat_elite_45_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200365	TATOOINE	tat_world	AREA	0	-3002.00	5.00	2322.00	34	1	an elite Rebel sand rat	reb_sand_rat_elite_45_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200366	TATOOINE	tat_world	AREA	0	-3008.00	5.00	2343.00	136	1	an elite Rebel sand rat	reb_sand_rat_elite_45_h_att_n	Presence Rebel	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+5200367	TATOOINE	tat_world	AREA	0	3757.80	8.30	2343.70	-38	1	a fresh Rebel rifleman	reb_rifleman_fresh_25_h_att_n	Presence Rebel	Mos Taike	1	STOP	idle	0	0	0	0	300	120	0
+5200368	TATOOINE	tat_world	AREA	0	3856.30	27.50	2325.30	-63	1	a fresh Rebel rifleman	reb_rifleman_fresh_25_h_att_n	Presence Rebel	Mos Taike	1	STOP	idle	0	0	0	0	300	120	0
+5200369	TATOOINE	tat_world	AREA	0	3750.00	6.10	2380.40	-32	1	a Mos Eisley police officer	mos_eisley_police_officer_13_h_att_n	Presence Rebel	Mos Taike	1	PATROL	idle	0	999	0	0	300	120	0
+5200370	TATOOINE	tat_world	AREA	0	3829.70	19.30	2351.70	-68	1	a Mos Eisley police officer	mos_eisley_police_officer_13_h_att_n	Presence Rebel	Mos Taike	1	PATROL	idle	0	999	0	0	300	120	0
+5200371	TATOOINE	tat_world	AREA	0	3888.20	33.00	2350.00	-92	1	a Mos Eisley police officer	mos_eisley_police_officer_13_h_att_n	Presence Rebel	Mos Taike	1	STOP	idle	0	0	0	0	300	120	0
+5200372	TATOOINE	tat_world	AREA	0	3909.90	33.00	2342.20	96	1	a Mos Eisley police officer	mos_eisley_police_officer_13_h_att_n	Presence Rebel	Mos Taike	1	PATROL	idle	0	999	0	0	300	120	0
+5200373	TATOOINE	tat_world	AREA	0	3927.40	47.00	2294.70	-24	1	a Mos Eisley police officer	mos_eisley_police_officer_13_h_att_n	Presence Rebel	Mos Taike	1	PATROL	idle	0	999	0	0	300	120	0
+5200374	TATOOINE	tat_world	AREA	0	3760.80	6.50	2373.70	-97	1	a Rebel soldier	reb_soldier_25_h_att_n	Presence Rebel	Mos Taike	1	STOP	idle	0	0	0	0	300	120	0
+5200375	TATOOINE	tat_world	AREA	0	3786.10	11.60	2378.40	177	1	a Rebel soldier	reb_soldier_25_h_att_n	Presence Rebel	Mos Taike	1	STOP	idle	0	0	0	0	300	120	0
+5200376	TATOOINE	tat_world	AREA	0	3951.40	53.50	2265.10	-106	1	a Rebel squad leader	reb_squad_leader_27_h_att_n	Presence Rebel	Mos Taike	1	STOP	idle	0	0	0	0	300	120	0
