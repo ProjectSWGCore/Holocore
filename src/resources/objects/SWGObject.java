@@ -655,9 +655,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	public void createObject(SWGObject target, boolean ignoreSnapshotChecks) {
 		if (target == null)
 			return;
-		if (!isVisible(target)) {
-			return;
-		}
 		Set<Player> observers = target.getAwareness().getChildObservers();
 		if (target.getOwnerShallow() != null)
 			observers.add(target.getOwnerShallow());
@@ -667,6 +664,10 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	public void createObject(Player target, boolean ignoreSnapshotChecks) {
+		if (!isVisible(target.getCreatureObject())) {
+			return;
+		}
+		
 		boolean send = !isSnapshot() || ignoreSnapshotChecks;
 		if (send) {
 			sendSceneCreateObject(target);
