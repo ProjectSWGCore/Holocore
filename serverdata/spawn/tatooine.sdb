@@ -1211,470 +1211,469 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 901211	TATOOINE	tat_world	AREA	0	3092.53	0.22	-4397.44	0	1	a water thief	water_thief_5_h_agg_n	city	Mos Eisley	1	GUARD	idle	0	0	0	0	300	120	0
 901212	TATOOINE	tat_world	AREA	0	3094.44	8.51	-4351.80	0	1	a water thief	water_thief_5_h_agg_n	city	Mos Eisley	1	GUARD	idle	0	0	0	0	300	120	0
 901213	TATOOINE	tat_world	AREA	0	3117.97	1.57	-4381.00	0	1	a water thief	water_thief_5_h_agg_n	city	Mos Eisley	1	GUARD	idle	0	0	0	0	300	120	0
-901214	TATOOINE	tat_world	AREA	0	3519.20	4.00	-4800.20	0	1	Protocol Droid	protocol_droid_jawa_fort_100_d_inv_n	city	Mos Eisley	1	PATROL	idle	0	0	0	0	300	120	0
-901215	TATOOINE	tat_world	AREA	0	2837.46	41.75	-4838.16	0	1	an error-prone battle droid	som_battlefield_hk77_squad_leader_80_d_agg_e	city	Mos Eisley	1	GUARD	idle	0	0	0	0	300	120	0
-901216	TATOOINE	tat_world	AREA	0	2840.07	41.39	-4804.57	0	1	an error-prone battle droid	som_battlefield_hk77_squad_leader_80_d_agg_e	city	Mos Eisley	1	GUARD	idle	0	0	0	0	300	120	0
-901217	TATOOINE	tat_world	AREA	0	2863.97	38.87	-4848.79	0	1	an error-prone battle droid	som_battlefield_hk77_squad_leader_80_d_agg_e	city	Mos Eisley	1	GUARD	idle	0	0	0	0	300	120	0
-901218	TATOOINE	tat_world	AREA	0	2866.79	33.05	-4881.06	0	1	an error-prone battle droid	som_battlefield_hk77_squad_leader_80_d_agg_e	city	Mos Eisley	1	GUARD	idle	0	0	0	0	300	120	0
-901219	TATOOINE	tat_world	AREA	0	2870.48	34.51	-4778.94	0	1	an error-prone battle droid	som_battlefield_hk77_squad_leader_80_d_agg_e	city	Mos Eisley	1	GUARD	idle	0	0	0	0	300	120	0
-901220	TATOOINE	tat_world	AREA	0	2870.79	39.09	-4816.73	0	1	an error-prone battle droid	som_battlefield_hk77_squad_leader_80_d_agg_e	city	Mos Eisley	1	GUARD	idle	0	0	0	0	300	120	0
-901221	TATOOINE	tat_world	AREA	0	2888.90	38.56	-4814.63	0	1	an error-prone battle droid	som_battlefield_hk77_squad_leader_80_d_agg_e	city	Mos Eisley	1	GUARD	idle	0	0	0	0	300	120	0
-901222	TATOOINE	tat_world	AREA	0	2891.80	38.79	-4791.32	0	1	an error-prone battle droid	som_battlefield_hk77_squad_leader_80_d_agg_e	city	Mos Eisley	1	GUARD	idle	0	0	0	0	300	120	0
-901223	TATOOINE	tat_world	AREA	0	2924.98	36.16	-4802.26	0	1	an error-prone battle droid	som_battlefield_hk77_squad_leader_80_d_agg_e	city	Mos Eisley	1	GUARD	idle	0	0	0	0	300	120	0
-901224	TATOOINE	tat_world	AREA	0	1521.00	7.00	3259.00	177	1	Kolka Zteht	kolka_zteht_100_h_inv_n	city	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
-901225	TATOOINE	tat_world	AREA	0	1539.52	7.00	3105.38	0	1	Galuf Cardaan	commando_reward_100_h_inv_n	city	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
-901226	TATOOINE	tat_world	AREA	0	1187.85	7.00	2996.69	-162	1	a commoner	commoner_100_h_inv_n	city	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
-901227	TATOOINE	tat_world	AREA	0	1271.84	7.00	2971.41	-6	1	a commoner	commoner_100_h_inv_n	city	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
-901228	TATOOINE	tat_world	AREA	0	1282.79	7.00	3052.74	-107	1	Mos Entha Shipping Master	shipping_master_mosentha_100_h_inv_n	city	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
-901229	TATOOINE	tat_world	AREA	0	1529.61	7.00	3313.08	95	1	Sarlis Beni	profession_spy_2_tatooine_sarlis_100_h_inv_n	city	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
-901230	TATOOINE	tat_world	AREA	0	1536.87	7.00	3051.99	154	1	Sarlin	smuggler_fence_sarlin_100_h_inv_n	city	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
-901231	TATOOINE	tat_world	AREA	0	1514.00	7.00	3313.00	-92	1	Wren	smuggler_fence_wren_100_h_inv_n	city	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
-901232	TATOOINE	tat_world	AREA	0	1283.42	7.00	3154.62	141	1	Tweego	tatooine_tweego_100_h_inv_n	city	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
-901233	TATOOINE	tat_world	AREA	0	1124.11	6.97	2982.60	71	1	RC-1Z	som_8t88_1_d_att_n	city	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
-901234	TATOOINE	tat_world	AREA	0	1353.48	7.00	3051.41	-41	1	RC-2X	som_battlefield_ak1a_hammer_82_d_agg_b	city	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
-901235	TATOOINE	tat_world	AREA	0	1702.92	7.00	3076.48	57	1	RC-3T	som_battlefield_ak3_reaper_82_d_agg_b	city	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
-901236	TATOOINE	tat_world	AREA	0	1351.03	11.00	3108.34	46	1	An'Kwee	som_battlefield_forward_comm_mki_84_d_agg_b	city	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
-901237	TATOOINE	tat_world	AREA	0	1328.70	7.00	3265.39	176	1	Draknus	som_battlefield_hk77_assault_soldier_80_d_agg_e	city	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
-901238	TATOOINE	tat_world	AREA	0	-2379.48	88.51	1849.94	0	1	an Elite Dune Lizzard	lizard_dune_elite_18_c_agg_e	city	Mos Espa	1	GUARD	idle	0	0	0	0	300	120	0
-901239	TATOOINE	tat_world	AREA	0	-2409.24	56.66	1845.40	0	1	an Elite Dune Lizzard	lizard_dune_elite_18_c_agg_e	city	Mos Espa	1	GUARD	idle	0	0	0	0	300	120	0
-901240	TATOOINE	tat_world	AREA	0	-2418.00	22.93	1908.00	0	1	an Elite Dune Lizzard	lizard_dune_elite_18_c_agg_e	city	Mos Espa	1	GUARD	idle	0	0	0	0	300	120	0
-901241	TATOOINE	tat_world	AREA	0	-2488.84	8.87	2091.49	0	1	a mound mite	mite_mound_4_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	300	120	6
-901242	TATOOINE	tat_world	AREA	0	-2543.46	7.66	2546.22	0	1	a mound mite	mite_mound_4_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	300	120	6
-901243	TATOOINE	tat_world	AREA	0	-2572.27	7.36	1800.51	0	1	a mound mite	mite_mound_4_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	300	120	6
-901244	TATOOINE	tat_world	AREA	0	-2634.00	14.53	2698.76	0	1	a mound mite	mite_mound_4_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	300	120	6
-901245	TATOOINE	tat_world	AREA	0	-2760.97	6.22	1650.09	0	1	a mound mite	mite_mound_4_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	300	120	6
-901246	TATOOINE	tat_world	AREA	0	-2763.38	6.10	2752.71	0	1	a mound mite	mite_mound_4_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	300	120	6
-901247	TATOOINE	tat_world	AREA	0	-2912.18	5.12	2829.86	0	1	a mound mite	mite_mound_4_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	90	60	6
-901248	TATOOINE	tat_world	AREA	0	-3035.05	11.47	1651.13	0	1	a mound mite	mite_mound_4_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	90	60	6
-901249	TATOOINE	tat_world	AREA	0	-3074.37	6.70	2856.13	0	1	a mound mite	mite_mound_4_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	90	60	6
-901250	TATOOINE	tat_world	AREA	0	-3208.30	7.84	2757.09	0	1	a mound mite	mite_mound_4_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	90	60	6
-901251	TATOOINE	tat_world	AREA	0	-3225.02	13.16	1761.17	0	1	a mound mite	mite_mound_4_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	90	60	6
-901252	TATOOINE	tat_world	AREA	0	-2667.41	5.00	2490.64	0	1	a greater Tatooinian mynock	mynock_greater_tatooinian_18_c_agg_n	city	Mos Espa	1	GUARD	idle	0	0	0	0	300	120	0
-901253	TATOOINE	tat_world	AREA	0	-2701.39	5.00	2516.31	0	1	a greater Tatooinian mynock	mynock_greater_tatooinian_18_c_agg_n	city	Mos Espa	1	GUARD	idle	0	0	0	0	300	120	0
-901254	TATOOINE	tat_world	AREA	0	-2723.58	5.00	2493.05	0	1	a greater Tatooinian mynock	mynock_greater_tatooinian_18_c_agg_n	city	Mos Espa	1	GUARD	idle	0	0	0	0	300	120	0
-901255	TATOOINE	tat_world	AREA	0	-2729.91	5.00	2456.94	0	1	a greater Tatooinian mynock	mynock_greater_tatooinian_18_c_agg_n	city	Mos Espa	1	GUARD	idle	0	0	0	0	300	120	0
-901256	TATOOINE	tat_world	AREA	0	-2743.81	5.31	2557.01	0	1	a greater Tatooinian mynock	mynock_greater_tatooinian_18_c_agg_n	city	Mos Espa	1	GUARD	idle	0	0	0	0	300	120	0
-901257	TATOOINE	tat_world	AREA	0	-2794.62	5.00	2508.54	0	1	a greater Tatooinian mynock	mynock_greater_tatooinian_18_c_agg_n	city	Mos Espa	1	GUARD	idle	0	0	0	0	300	120	0
-901258	TATOOINE	tat_world	AREA	0	-2473.74	7.03	2132.97	0	1	a womp rat	womprat_4_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	300	120	6
-901259	TATOOINE	tat_world	AREA	0	-2547.93	8.91	1819.24	0	1	a womp rat	womprat_4_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	300	120	6
-901260	TATOOINE	tat_world	AREA	0	-2561.20	10.14	2580.10	0	1	a womp rat	womprat_4_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	300	120	6
-901261	TATOOINE	tat_world	AREA	0	-2639.38	6.91	2679.92	0	1	a womp rat	womprat_4_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	300	120	6
-901262	TATOOINE	tat_world	AREA	0	-2800.39	9.99	1649.52	0	1	a womp rat	womprat_4_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	300	120	6
-901263	TATOOINE	tat_world	AREA	0	-2808.59	5.02	2765.92	0	1	a womp rat	womprat_4_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	300	120	6
-901264	TATOOINE	tat_world	AREA	0	-2940.36	5.30	2844.10	0	1	a womp rat	womprat_4_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	90	60	6
-901265	TATOOINE	tat_world	AREA	0	-3061.35	11.23	1651.79	0	1	a womp rat	womprat_4_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	90	60	6
-901266	TATOOINE	tat_world	AREA	0	-3120.41	5.87	2839.60	0	1	a womp rat	womprat_4_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	90	60	6
-901267	TATOOINE	tat_world	AREA	0	-3222.24	11.15	1793.39	0	1	a womp rat	womprat_4_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	90	60	6
-901268	TATOOINE	tat_world	AREA	0	-3242.33	9.06	2733.72	0	1	a womp rat	womprat_4_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	90	60	6
-901269	TATOOINE	tat_world	AREA	0	-2463.67	8.31	2100.39	0	1	a tempest rill	rill_tempest_8_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	300	120	6
-901270	TATOOINE	tat_world	AREA	0	-2531.05	9.30	2592.47	0	1	a tempest rill	rill_tempest_8_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	300	120	6
-901271	TATOOINE	tat_world	AREA	0	-2568.63	8.80	1825.13	0	1	a tempest rill	rill_tempest_8_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	300	120	6
-901272	TATOOINE	tat_world	AREA	0	-2609.47	11.70	2691.52	0	1	a tempest rill	rill_tempest_8_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	300	120	6
-901273	TATOOINE	tat_world	AREA	0	-2780.04	7.52	1625.98	0	1	a tempest rill	rill_tempest_8_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	300	120	6
-901274	TATOOINE	tat_world	AREA	0	-2780.17	6.46	2773.62	0	1	a tempest rill	rill_tempest_8_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	300	120	6
-901275	TATOOINE	tat_world	AREA	0	-2914.78	5.63	2853.26	0	1	a tempest rill	rill_tempest_8_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	90	60	6
-901276	TATOOINE	tat_world	AREA	0	-3049.01	7.89	1667.27	0	1	a tempest rill	rill_tempest_8_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	90	60	6
-901277	TATOOINE	tat_world	AREA	0	-3109.14	6.91	2870.83	0	1	a tempest rill	rill_tempest_8_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	90	60	6
-901278	TATOOINE	tat_world	AREA	0	-3207.38	9.50	1775.71	0	1	a tempest rill	rill_tempest_8_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	90	60	6
-901279	TATOOINE	tat_world	AREA	0	-3232.08	8.89	2754.94	0	1	a tempest rill	rill_tempest_8_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	90	60	6
-901280	TATOOINE	tat_world	AREA	0	-2911.00	5.00	2126.58	156	1	Anim Kahn (a Valarian pilot)	anim_kahn_100_h_inv_n	city	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
-901281	TATOOINE	tat_world	AREA	0	-3101.73	5.00	2184.57	118	1	Giaal Itotr	giaal_itotr_100_h_inv_n	city	Mos Espa	1	STOP	npc_sitting_chair	0	0	0	0	300	120	0
-901282	TATOOINE	tat_world	AREA	0	-2768.12	5.00	2110.43	104	1	Klepa Laeel	klepa_laeel_100_h_inv_n	city	Mos Espa	1	STOP	npc_sitting_chair	0	0	0	0	300	120	0
-901283	TATOOINE	tat_world	AREA	0	-2709.17	5.00	2180.03	0	1	a commoner	commoner_human_male_100_h_inv_n	city	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
-901284	TATOOINE	tat_world	AREA	0	-3056.43	7.50	2085.34	-38	1	Kav Goldor	feeder_tusken_militia_leader_100_h_inv_n	city	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
-901285	TATOOINE	tat_world	AREA	0	-2799.39	5.00	2259.96	-141	1	Srimaur	feeder_tusken_questgiver_100_h_inv_n	city	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
-901286	TATOOINE	tat_world	AREA	0	-3507.36	13.99	2058.06	0	1	a Jawa	jawa_16_h_att_n	city	Mos Espa	1	GUARD	idle	0	0	0	0	300	120	0
-901287	TATOOINE	tat_world	AREA	0	-3512.98	13.99	2058.01	0	1	a Jawa Avenger	jawa_avenger_18_h_att_n	city	Mos Espa	1	GUARD	idle	0	0	0	0	300	120	0
-901288	TATOOINE	tat_world	AREA	0	-2814.23	5.00	1939.70	-77	1	Kaeline Ungasan	kaeline_ungasan_100_h_inv_n	city	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
-901289	TATOOINE	tat_world	AREA	0	-2886.68	5.00	2493.45	-34	1	Kister Banai	kitster_banai_100_h_inv_n	city	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
-901290	TATOOINE	tat_world	AREA	0	-2978.04	5.00	2458.54	98	1	Mat Rags	mat_rags_100_h_inv_n	city	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
-901291	TATOOINE	tat_world	PATROL	0	-3123.44	5.00	2306.53	0	1	a Mos Espa security officer	mos_espa_police_officer_35_h_att_n	city	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
-901292	TATOOINE	tat_world	PATROL	0	-3124.05	5.00	2308.59	0	1	a Mos Espa security officer	mos_espa_police_officer_35_h_att_n	city	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
-901293	TATOOINE	tat_world	PATROL	0	-3127.28	5.00	2307.78	0	1	a Mos Espa security officer	mos_espa_police_officer_35_h_att_n	city	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
-901294	TATOOINE	tat_world	PATROL	0	-3142.22	5.00	2209.95	0	1	a Mos Espa security officer	mos_espa_police_officer_35_h_att_n	city	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
-901295	TATOOINE	tat_world	PATROL	0	-3144.34	5.00	2211.37	0	1	a Mos Espa security officer	mos_espa_police_officer_35_h_att_n	city	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
-901296	TATOOINE	tat_world	PATROL	0	-3147.51	5.00	2206.64	0	1	a Mos Espa security officer	mos_espa_police_officer_35_h_att_n	city	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
-901297	TATOOINE	tat_world	AREA	0	-2910.90	5.00	2124.30	95	1	Prost Roberts (an untrained pilot)	prost_roberts_100_h_inv_n	city	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
-901298	TATOOINE	tat_world	AREA	0	-2909.87	5.00	2122.35	12	1	Rel Keteris (a Hutt pilot)	rel_keteris_100_h_inv_n	city	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
-901299	TATOOINE	tat_world	AREA	0	-3085.52	5.00	2050.64	78	1	Caryn	smuggler_fence_caryn_100_h_inv_n	city	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
-901300	TATOOINE	tat_world	AREA	0	-3105.00	5.00	2314.00	82	1	Diala	smuggler_fence_diala_100_h_inv_n	city	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
-901301	TATOOINE	tat_world	AREA	0	-3041.38	5.00	2212.60	-37	1	Propti Xaroon	tatooine_propti_xaroon_100_h_inv_n	city	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
-901302	TATOOINE	tat_world	AREA	0	-2883.40	5.00	2581.22	0	1	Guz'Ordnak	tatooine_repo_buhba_16_h_agg_n	city	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
-901303	TATOOINE	tat_world	AREA	0	-2873.36	5.00	2591.36	-94	1	Eyleen	tatooine_repo_daezii_16_h_agg_n	city	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
-901304	TATOOINE	tat_world	AREA	0	-2879.00	5.00	2579.72	-43	1	Tiomvo	tatooine_repo_kleetuz_16_h_agg_n	city	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
-901305	TATOOINE	tat_world	AREA	0	-2878.69	5.00	2584.96	-40	1	Hilbrun	tatooine_repo_pah_16_h_agg_n	city	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
-901306	TATOOINE	tat_world	AREA	0	-2975.55	5.00	1910.64	0	1	Peggin Dulin	tatooine_watto_peggin_100_h_inv_n	city	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
-901307	TATOOINE	tat_world	AREA	0	-2980.00	5.00	2534.00	-57	1	Beast Trainer	trainer_beast_master_100_h_inv_n	city	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
-901308	TATOOINE	tat_world	AREA	0	-2866.54	5.00	1856.86	169	1	Syndil Na'Marr	watto_leg_syndil_100_h_inv_n	city	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
-901309	TATOOINE	tat_world	AREA	0	-3157.38	5.00	2197.87	0	1	a slum thief	watto_thieves_16_h_agg_n	city	Mos Espa	1	GUARD	idle	0	0	0	0	300	120	0
-901310	TATOOINE	tat_world	AREA	0	-3163.77	5.00	2154.74	0	1	a slum thief	watto_thieves_16_h_agg_n	city	Mos Espa	1	GUARD	idle	0	0	0	0	300	120	0
-901311	TATOOINE	tat_world	AREA	0	-3171.52	5.00	2170.10	0	1	a slum thief	watto_thieves_16_h_agg_n	city	Mos Espa	1	GUARD	idle	0	0	0	0	300	120	0
-901312	TATOOINE	tat_world	AREA	0	-3188.34	5.00	2187.88	0	1	a slum thief	watto_thieves_16_h_agg_n	city	Mos Espa	1	GUARD	idle	0	0	0	0	300	120	0
-901313	TATOOINE	tat_world	PATROL	0	-2729.66	5.00	2243.34	0	1	a thug	thug_100_h_inv_n	city	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
-901314	TATOOINE	tat_world	PATROL	0	-2744.71	5.00	2031.26	0	1	a thug	thug_100_h_inv_n	city	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
-901315	TATOOINE	tat_world	PATROL	0	-2801.48	5.00	2325.69	0	1	a thug	thug_100_h_inv_n	city	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
-901316	TATOOINE	tat_world	PATROL	0	-2859.00	5.00	2252.72	0	1	a thug	thug_100_h_inv_n	city	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
-901317	TATOOINE	tat_world	PATROL	0	-2912.16	5.00	2138.15	0	1	a thug	thug_100_h_inv_n	city	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
-901318	TATOOINE	tat_world	PATROL	0	-2918.43	5.00	2400.58	0	1	a thug	thug_100_h_inv_n	city	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
-901319	TATOOINE	tat_world	AREA	0	-2925.56	5.00	2014.03	0	1	a thug	thug_100_h_inv_n	city	Mos Espa	1	GUARD	idle	0	0	0	0	300	120	0
-901320	TATOOINE	tat_world	PATROL	0	-2958.01	5.00	2538.51	0	1	a thug	thug_100_h_inv_n	city	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
-901321	TATOOINE	tat_world	PATROL	0	-2996.41	5.00	2326.36	0	1	a thug	thug_100_h_inv_n	city	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
-901322	TATOOINE	tat_world	PATROL	0	-3065.09	5.00	2142.42	0	1	a thug	thug_100_h_inv_n	city	Mos Espa	3	PATROL	idle	0	999	0	0	300	120	0
-901323	TATOOINE	tat_world	PATROL	0	-2913.84	5.00	2115.85	0	1	an EG-6 power droid	eg6_power_droid_100_d_inv_n	city	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
-901324	TATOOINE	tat_world	PATROL	0	-2922.73	5.00	2430.36	0	1	an EG-6 power droid	eg6_power_droid_100_d_inv_n	city	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
-901325	TATOOINE	tat_world	PATROL	0	-2942.90	5.00	2179.05	0	1	an R3 unit	r3_droid_100_d_inv_n	city	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
-901326	TATOOINE	tat_world	PATROL	0	-2973.18	5.00	2112.63	0	1	an R3 unit	r3_droid_100_d_inv_n	city	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
-901327	TATOOINE	tat_world	PATROL	0	-2938.53	5.00	2197.92	0	1	an R4 unit	r4_droid_100_d_inv_n	city	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
-901328	TATOOINE	tat_world	PATROL	0	-2915.29	5.00	2450.70	0	1	an R5 unit	r5_droid_100_d_inv_n	city	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
-901329	TATOOINE	tat_world	AREA	0	3770.00	8.30	2345.00	0	1	Bren Kingal	bren_kingal_100_h_inv_n	city	Mos Taike	1	STOP	idle	0	0	0	0	300	120	0
-901330	TATOOINE	tat_world	AREA	0	3950.00	54.00	2280.00	-39	1	a commoner	commoner_100_h_inv_n	city	Mos Taike	1	STOP	idle	0	0	0	0	300	120	0
-901331	TATOOINE	tat_world	AREA	0	3775.01	9.11	2373.98	-178	1	Kerhi hi-Lak	kerhi_hilak_ice_cream_100_h_inv_n	city	Mos Taike	1	STOP	idle	0	0	0	0	300	120	0
-901332	TATOOINE	tat_world	AREA	0	3949.82	8.93	2417.74	-116	1	Meatlump Donk (Outpost Guard)	meatlump_outpost_guard_donk_65_h_att_n	city	Mos Taike	1	GUARD	idle	0	0	0	0	300	120	0
-901333	TATOOINE	tat_world	AREA	0	3976.65	10.55	2417.68	93	1	Meatlump Donk (Outpost Guard)	meatlump_outpost_guard_donk_65_h_att_n	city	Mos Taike	1	GUARD	idle	0	0	0	0	300	120	0
-901334	TATOOINE	tat_world	AREA	0	3960.05	10.90	2405.57	-162	1	Meatlump Dunder (Outpost Guard)	meatlump_outpost_guard_dunder_65_h_att_n	city	Mos Taike	1	GUARD	idle	0	0	0	0	300	120	0
-901335	TATOOINE	tat_world	AREA	0	3838.01	16.10	2334.56	-172	1	Kara	smuggler_fence_kara_100_h_inv_n	city	Mos Taike	1	STOP	idle	0	0	0	0	300	120	0
-901336	TATOOINE	tat_world	AREA	0	3796.77	11.67	2406.15	0	1	a wary pirate	spy_pirate_20_h_agg_n	city	Mos Taike	1	GUARD	idle	0	0	0	0	300	120	0
-901337	TATOOINE	tat_world	AREA	0	3797.51	12.06	2385.96	0	1	a wary pirate	spy_pirate_20_h_agg_n	city	Mos Taike	1	GUARD	idle	0	0	0	0	300	120	0
-901338	TATOOINE	tat_world	AREA	0	3809.44	13.99	2403.86	0	1	a wary pirate	spy_pirate_20_h_agg_n	city	Mos Taike	1	GUARD	idle	0	0	0	0	300	120	0
-901339	TATOOINE	tat_world	AREA	0	3818.27	15.96	2386.27	0	1	a wary pirate	spy_pirate_20_h_agg_n	city	Mos Taike	1	GUARD	idle	0	0	0	0	300	120	0
-901340	TATOOINE	tat_world	AREA	0	3820.80	16.37	2387.34	0	1	a wary pirate	spy_pirate_20_h_agg_n	city	Mos Taike	1	GUARD	idle	0	0	0	0	300	120	0
-901341	TATOOINE	tat_world	AREA	0	3823.38	15.45	2413.95	0	1	a wary pirate	spy_pirate_20_h_agg_n	city	Mos Taike	1	GUARD	idle	0	0	0	0	300	120	0
-901342	TATOOINE	tat_world	AREA	0	3808.42	14.31	2397.29	-33	1	Eyan McDermitt	spy_pirate_leader_100_h_inv_n	city	Mos Taike	1	STOP	idle	0	0	0	0	300	120	0
-901343	TATOOINE	tat_world	AREA	0	-5238.80	75.00	-6568.10	114	1	Boulo Siesi	boulo_siesi_100_h_inv_n	city	Wayfar	1	STOP	idle	0	0	0	0	300	120	0
-901344	TATOOINE	tat_world	AREA	0	-5095.00	75.00	-6527.80	-149	1	a commoner	commoner_100_h_inv_n	city	Wayfar	1	STOP	idle	0	0	0	0	300	120	0
-901345	TATOOINE	tat_world	AREA	0	-5120.00	75.00	-6594.70	-63	1	a commoner	commoner_100_h_inv_n	city	Wayfar	1	STOP	idle	0	0	0	0	300	120	0
-901346	TATOOINE	tat_world	AREA	0	-5128.70	75.00	-6542.40	-82	1	a commoner	commoner_100_h_inv_n	city	Wayfar	1	STOP	idle	0	0	0	0	300	120	0
-901347	TATOOINE	tat_world	AREA	0	-5176.30	75.00	-6612.10	0	1	a commoner	commoner_100_h_inv_n	city	Wayfar	1	STOP	idle	0	0	0	0	300	120	0
-901348	TATOOINE	tat_world	AREA	0	-5193.50	75.00	-6490.00	105	1	a commoner	commoner_100_h_inv_n	city	Wayfar	1	STOP	idle	0	0	0	0	300	120	0
-901349	TATOOINE	tat_world	AREA	0	-5213.60	75.00	-6474.20	0	1	a commoner	commoner_100_h_inv_n	city	Wayfar	1	STOP	idle	0	0	0	0	300	120	0
-901350	TATOOINE	tat_world	AREA	0	-5217.00	75.00	-6578.70	-52	1	a commoner	commoner_100_h_inv_n	city	Wayfar	1	STOP	idle	0	0	0	0	300	120	0
-901351	TATOOINE	tat_world	AREA	0	-5219.10	75.00	-6537.30	-4	1	a commoner	commoner_100_h_inv_n	city	Wayfar	1	STOP	npc_use_terminal_high	0	0	0	0	300	120	0
-901352	TATOOINE	tat_world	AREA	0	-5249.00	75.00	-6516.50	-40	1	a commoner	commoner_100_h_inv_n	city	Wayfar	1	STOP	idle	0	0	0	0	300	120	0
-901353	TATOOINE	tat_world	AREA	0	-5251.90	75.00	-6499.90	57	1	a commoner	commoner_100_h_inv_n	city	Wayfar	1	STOP	idle	0	0	0	0	300	120	0
-901354	TATOOINE	tat_world	AREA	0	-5263.30	75.00	-6516.50	-173	1	a commoner	commoner_100_h_inv_n	city	Wayfar	1	STOP	npc_use_terminal_high	0	0	0	0	300	120	0
-901355	TATOOINE	tat_world	AREA	0	-5269.40	75.00	-6562.60	115	1	a commoner	commoner_100_h_inv_n	city	Wayfar	1	STOP	idle	0	0	0	0	300	120	0
-901356	TATOOINE	tat_world	AREA	0	-5203.48	74.27	-6778.87	0	1	Meatlump Donk (Outpost Guard)	meatlump_outpost_guard_donk_65_h_att_n	city	Wayfar	1	GUARD	idle	0	0	0	0	300	120	0
-901357	TATOOINE	tat_world	AREA	0	-5217.07	71.99	-6795.03	0	1	Meatlump Dunder (Outpost Guard)	meatlump_outpost_guard_dunder_65_h_att_n	city	Wayfar	1	GUARD	idle	0	0	0	0	300	120	0
-901358	TATOOINE	tat_world	AREA	0	-5226.86	75.95	-6764.64	0	1	Meatlump Dunder (Outpost Guard)	meatlump_outpost_guard_dunder_65_h_att_n	city	Wayfar	1	GUARD	idle	0	0	0	0	300	120	0
-901359	TATOOINE	tat_world	AREA	0	-5127.11	75.00	-6577.50	118	1	Ozzmos Roberts	neut_title_grant_100_h_inv_n	city	Wayfar	1	STOP	idle	0	0	0	0	300	120	0
-901360	TATOOINE	tat_world	AREA	0	-5224.45	75.00	-6560.40	0	1	Romo Vax	romo_vax_100_h_inv_n	city	Wayfar	1	STOP	idle	0	0	0	0	300	120	0
-901361	TATOOINE	tat_world	AREA	0	-5185.00	75.00	-6458.00	129	1	Jalen	smuggler_fence_jalen_100_h_inv_n	city	Wayfar	1	STOP	idle	0	0	0	0	300	120	0
-901362	TATOOINE	tat_world	AREA	0	-5144.95	75.00	-6617.71	32	1	Porgryn	tatooine_porgryn_100_h_inv_n	city	Wayfar	1	STOP	idle	0	0	0	0	300	120	0
-901363	TATOOINE	tat_world	AREA	0	-5467.89	48.95	-6620.62	0	1	a Wayfar spy	tatooine_wayfar_spy_19_h_agg_n	city	Wayfar	1	GUARD	idle	0	0	0	0	300	120	0
-901364	TATOOINE	tat_world	AREA	0	-5472.44	45.58	-6585.63	0	1	a Wayfar spy	tatooine_wayfar_spy_19_h_agg_n	city	Wayfar	1	GUARD	idle	0	0	0	0	300	120	0
-901365	TATOOINE	tat_world	AREA	0	-5485.75	48.08	-6646.28	0	1	a Wayfar spy	tatooine_wayfar_spy_19_h_agg_n	city	Wayfar	1	GUARD	idle	0	0	0	0	300	120	0
-901366	TATOOINE	tat_world	AREA	0	-5501.27	42.98	-6626.84	0	1	a Wayfar spy	tatooine_wayfar_spy_19_h_agg_n	city	Wayfar	1	GUARD	idle	0	0	0	0	300	120	0
-901367	TATOOINE	tat_world	AREA	0	-5512.37	46.96	-6588.25	0	1	a Wayfar spy	tatooine_wayfar_spy_19_h_agg_n	city	Wayfar	1	GUARD	idle	0	0	0	0	300	120	0
-901368	TATOOINE	tat_world	AREA	0	-5516.14	48.04	-6649.05	0	1	a Wayfar spy	tatooine_wayfar_spy_19_h_agg_n	city	Wayfar	1	GUARD	idle	0	0	0	0	300	120	0
-901369	TATOOINE	tat_world	AREA	0	-5537.18	44.71	-6642.49	0	1	a Wayfar spy	tatooine_wayfar_spy_19_h_agg_n	city	Wayfar	1	GUARD	idle	0	0	0	0	300	120	0
-901370	TATOOINE	tat_world	AREA	0	-5543.10	38.36	-6616.68	0	1	a Wayfar spy	tatooine_wayfar_spy_19_h_agg_n	city	Wayfar	1	GUARD	idle	0	0	0	0	300	120	0
-901371	TATOOINE	tat_world	AREA	0	-5516.17	40.80	-6610.13	80	1	Dewall Paez (a Wayfar spy leader)	tatooine_wayfar_spy_leader_21_h_agg_n	city	Wayfar	1	STOP	idle	0	0	0	0	300	120	0
-901372	TATOOINE	tat_world	AREA	0	-5424.31	44.91	-6138.65	0	1	an Alkhara bandit	alkhara_bandit_15_h_att_n	dungeon	Alkhara Tower	1	GUARD	idle	0	0	0	0	300	120	0
-901373	TATOOINE	tat_world	AREA	0	-5430.66	37.35	-6113.18	0	1	an Alkhara bandit	alkhara_bandit_15_h_att_n	dungeon	Alkhara Tower	1	GUARD	idle	0	0	0	0	300	120	0
-901374	TATOOINE	tat_world	AREA	0	-5434.25	43.20	-6086.03	0	1	an Alkhara bandit	alkhara_bandit_15_h_att_n	dungeon	Alkhara Tower	1	GUARD	idle	0	0	0	0	300	120	0
-901375	TATOOINE	tat_world	AREA	0	-5444.39	41.23	-6131.12	0	1	an Alkhara bandit	alkhara_bandit_15_h_att_n	dungeon	Alkhara Tower	1	GUARD	idle	0	0	0	0	300	120	0
-901376	TATOOINE	tat_world	AREA	0	-5445.34	38.27	-6104.62	0	1	an Alkhara bandit	alkhara_bandit_15_h_att_n	dungeon	Alkhara Tower	1	GUARD	idle	0	0	0	0	300	120	0
-901377	TATOOINE	tat_world	AREA	0	-5459.78	38.86	-6105.30	0	1	an Alkhara bandit	alkhara_bandit_15_h_att_n	dungeon	Alkhara Tower	1	GUARD	idle	0	0	0	0	300	120	0
-901378	TATOOINE	tat_world	AREA	0	-5463.07	41.18	-6130.22	0	1	an Alkhara bandit	alkhara_bandit_15_h_att_n	dungeon	Alkhara Tower	1	GUARD	idle	0	0	0	0	300	120	0
-901379	TATOOINE	tat_world	AREA	0	-5473.93	39.59	-6115.12	0	1	an Alkhara bandit	alkhara_bandit_15_h_att_n	dungeon	Alkhara Tower	1	GUARD	idle	0	0	0	0	300	120	0
-901380	TATOOINE	tat_world	AREA	0	-5481.25	44.10	-6087.65	0	1	an Alkhara bandit	alkhara_bandit_15_h_att_n	dungeon	Alkhara Tower	1	GUARD	idle	0	0	0	0	300	120	0
-901381	TATOOINE	tat_world	AREA	0	-5417.33	41.61	-6044.50	0	1	a fringer	fringer_100_h_inv_n	dungeon	Alkhara Tower	3	FLOAT	idle	0	0	0	0	300	120	6
-901382	TATOOINE	tat_world	AREA	0	-3005.19	112.64	4486.41	0	1	a Hoverdale bandit	azure_hoverdale_bandit_83_h_agg_n	dungeon	Azure Cabal Hoverdale Cave	1	GUARD	idle	0	0	0	0	300	120	0
-901383	TATOOINE	tat_world	AREA	0	-3005.38	116.36	4507.77	0	1	a Hoverdale bandit	azure_hoverdale_bandit_83_h_agg_n	dungeon	Azure Cabal Hoverdale Cave	1	GUARD	idle	0	0	0	0	300	120	0
-901384	TATOOINE	tat_world	AREA	0	-3018.41	118.46	4526.83	0	1	a Hoverdale bandit	azure_hoverdale_bandit_83_h_agg_n	dungeon	Azure Cabal Hoverdale Cave	1	GUARD	idle	0	0	0	0	300	120	0
-901385	TATOOINE	tat_world	AREA	0	-3027.34	123.20	4501.64	0	1	a Hoverdale bandit	azure_hoverdale_bandit_83_h_agg_n	dungeon	Azure Cabal Hoverdale Cave	1	GUARD	idle	0	0	0	0	300	120	0
-901386	TATOOINE	tat_world	AREA	0	-3044.00	132.02	4537.64	0	1	a Hoverdale bandit	azure_hoverdale_bandit_83_h_agg_n	dungeon	Azure Cabal Hoverdale Cave	1	GUARD	idle	0	0	0	0	300	120	0
-901387	TATOOINE	tat_world	AREA	0	-304.10	48.20	-6940.30	36	1	Draci	draci_100_h_inv_n	dungeon	Darklighter Cave	1	STOP	idle	0	0	0	0	90	60	0
-901388	TATOOINE	tat_world	AREA	0	-6949.89	186.68	7071.89	0	1	a Tusken bantha	bantha_tusken_30_c_att_n	dungeon	Flatland Damprock	1	GUARD	idle	0	0	0	0	300	120	0
-901389	TATOOINE	tat_world	AREA	0	-7003.34	189.22	7080.75	0	1	a Tusken bantha	bantha_tusken_30_c_att_n	dungeon	Flatland Damprock	1	GUARD	idle	0	0	0	0	300	120	0
-901390	TATOOINE	tat_world	AREA	0	-6980.26	187.43	7081.17	0	1	Tusken Relic Guard	feeder_tusken_guard_85_h_agg_n	dungeon	Flatland Damprock	1	GUARD	idle	0	0	0	0	300	120	0
-901391	TATOOINE	tat_world	AREA	0	5098.37	22.59	595.03	0	1	Jabba's henchman	jabba_henchman_14_h_att_n	dungeon	Hutt Cave	3	FLOAT	idle	0	0	0	0	300	120	6
-901392	TATOOINE	tat_world	AREA	0	-5312.70	8.40	2662.60	0	1	Colonel Darkstone	imp_colonel_darkstone_100_h_inv_n	dungeon	Imperial Oasis	1	STOP	idle	0	0	0	0	300	120	0
-901393	TATOOINE	tat_world	AREA	0	-5357.00	5.40	2741.50	0	1	an Imperial colonel	fbase_imperial_colonel_100_h_inv_n	dungeon	Imperial Oasis	1	GUARD	idle	0	0	0	0	300	120	0
-901394	TATOOINE	tat_world	AREA	0	-5353.00	5.10	2750.00	0	1	Jubai Laetlii	spymaster_21_22_h_att_e	dungeon	Imperial Oasis	1	GUARD	idle	0	0	0	0	300	120	0
-901395	TATOOINE	tat_world	AREA	0	-5038.89	44.96	-6977.75	0	1	Romo Vax's henchman	tatooine_romo_vax_henchman_19_h_agg_n	dungeon	Romo Vax Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-901396	TATOOINE	tat_world	AREA	0	-5052.56	43.72	-6963.14	0	1	Romo Vax's henchman	tatooine_romo_vax_henchman_19_h_agg_n	dungeon	Romo Vax Bunker	1	STOP	idle	0	0	0	0	300	120	0
-901397	TATOOINE	tat_world	AREA	0	-5076.30	46.61	-6973.05	0	1	Romo Vax's henchman	tatooine_romo_vax_henchman_19_h_agg_n	dungeon	Romo Vax Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-901398	TATOOINE	tat_world	AREA	0	5676.19	180.00	-5767.41	0	1	a Jawa thief	jawa_thief_16_h_att_n	dungeon	Sand Slum Pirate Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-901399	TATOOINE	tat_world	AREA	0	5644.58	180.00	-5750.43	0	1	a sand slum pirate	quest_hero_of_tatooine_pirate_30_h_agg_n	dungeon	Sand Slum Pirate Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-901400	TATOOINE	tat_world	AREA	0	5651.06	179.98	-5726.82	0	1	a sand slum pirate	quest_hero_of_tatooine_pirate_30_h_agg_n	dungeon	Sand Slum Pirate Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-901401	TATOOINE	tat_world	AREA	0	5665.38	180.00	-5742.75	0	1	a sand slum pirate	quest_hero_of_tatooine_pirate_30_h_agg_n	dungeon	Sand Slum Pirate Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-901402	TATOOINE	tat_world	AREA	0	5666.89	180.00	-5704.34	0	1	a sand slum pirate	quest_hero_of_tatooine_pirate_30_h_agg_n	dungeon	Sand Slum Pirate Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-901403	TATOOINE	tat_world	AREA	0	5675.75	180.00	-5735.25	0	1	a sand slum pirate	quest_hero_of_tatooine_pirate_30_h_agg_n	dungeon	Sand Slum Pirate Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-901404	TATOOINE	tat_world	AREA	0	5680.57	180.00	-5725.54	0	1	a sand slum pirate	quest_hero_of_tatooine_pirate_30_h_agg_n	dungeon	Sand Slum Pirate Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-901405	TATOOINE	tat_world	AREA	0	5691.02	180.00	-5749.36	0	1	a sand slum pirate	quest_hero_of_tatooine_pirate_30_h_agg_n	dungeon	Sand Slum Pirate Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-901406	TATOOINE	tat_world	AREA	0	-6712.83	49.27	-5664.82	0	1	a thug	thug_100_h_inv_n	dungeon	Sand Splitters Cave	1	GUARD	idle	0	0	0	0	300	120	0
-901407	TATOOINE	tat_world	AREA	0	3914.62	83.20	-4304.40	0	1	a scavenger	scavenger_100_h_inv_n	dungeon	Scavenger Punk Camp	1	GUARD	idle	0	0	0	0	300	120	0
-901408	TATOOINE	tat_world	AREA	0	3921.71	89.56	-4322.13	0	1	a scavenger Punk	scavenger_punk_6_h_agg_n	dungeon	Scavenger Punk Camp	1	GUARD	idle	0	0	0	0	300	120	0
-901409	TATOOINE	tat_world	AREA	0	3943.46	85.14	-4333.32	0	1	a scavenger Punk	scavenger_punk_6_h_agg_n	dungeon	Scavenger Punk Camp	1	GUARD	idle	0	0	0	0	300	120	0
-901410	TATOOINE	tat_world	AREA	0	3963.05	83.05	-4315.42	0	1	a scavenger Punk	scavenger_punk_6_h_agg_n	dungeon	Scavenger Punk Camp	1	GUARD	idle	0	0	0	0	300	120	0
-901411	TATOOINE	tat_world	AREA	0	3910.61	89.59	-4318.07	0	1	a scavenger Thief	scavenger_thief_6_h_agg_n	dungeon	Scavenger Punk Camp	1	GUARD	idle	0	0	0	0	300	120	0
-901412	TATOOINE	tat_world	AREA	0	3931.36	92.08	-4341.56	0	1	a scavenger Thief	scavenger_thief_6_h_agg_n	dungeon	Scavenger Punk Camp	1	GUARD	idle	0	0	0	0	300	120	0
-901413	TATOOINE	tat_world	AREA	0	3963.05	82.05	-4327.85	0	1	a scavenger Thief	scavenger_thief_6_h_agg_n	dungeon	Scavenger Punk Camp	1	GUARD	idle	0	0	0	0	300	120	0
-901414	TATOOINE	tat_world	AREA	0	3930.35	83.37	-4311.12	0	1	a scavenger thug	scavenger_thug_6_h_agg_n	dungeon	Scavenger Punk Camp	1	GUARD	idle	0	0	0	0	300	120	0
-901415	TATOOINE	tat_world	AREA	0	3938.60	79.86	-4297.78	0	1	a scavenger thug	scavenger_thug_6_h_agg_n	dungeon	Scavenger Punk Camp	1	GUARD	idle	0	0	0	0	300	120	0
-901416	TATOOINE	tat_world	AREA	0	3952.32	81.33	-4336.24	0	1	a scavenger thug	scavenger_thug_6_h_agg_n	dungeon	Scavenger Punk Camp	1	GUARD	idle	0	0	0	0	300	120	0
-901417	TATOOINE	tat_world	AREA	0	3954.37	83.47	-4307.00	0	1	a scavenger thug	scavenger_thug_6_h_agg_n	dungeon	Scavenger Punk Camp	1	GUARD	idle	0	0	0	0	300	120	0
-901418	TATOOINE	tat_world	AREA	0	3943.82	85.97	-4316.98	0	1	a scavenger thug leader	scavenger_thug_elite_10_h_agg_e	dungeon	Scavenger Punk Camp	1	GUARD	idle	0	0	0	0	300	120	0
-901419	TATOOINE	tat_world	AREA	0	3933.89	85.02	-4328.16	0	1	an escaped criminal	tatooine_eisley_escaped_criminal_7_h_agg_n	dungeon	Scavenger Punk Camp	1	GUARD	idle	0	0	0	0	300	120	0
-901420	TATOOINE	tat_world	AREA	0	-4914.50	9.30	1272.30	0	1	a pirate	pirate_armsman_13_h_att_n	dungeon	Sennex Camp	3	FLOAT	idle	0	0	0	0	300	120	6
-901421	TATOOINE	tat_world	AREA	0	-4937.15	10.07	1264.48	0	1	a pirate leader	pirate_leader_17_h_att_n	dungeon	Sennex Camp	1	GUARD	idle	0	0	0	0	1800	1500	0
-901422	TATOOINE	tat_world	AREA	0	6547.73	102.95	-1323.07	0	1	a dune beetle	beetle_dune_9_c_att_n	dungeon	Sennex Cave	3	FLOAT	idle	0	0	0	0	300	120	6
-901423	TATOOINE	tat_world	AREA	1	-14.76	-4.95	-9.46	0	1	a Sennex lookout	sennex_lookout_17_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
-901424	TATOOINE	tat_world	AREA	1	13.32	-22.33	-6.40	0	1	a Sennex lookout	sennex_lookout_17_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
-901425	TATOOINE	tat_world	AREA	10	54.03	-48.74	-105.26	0	1	a cave beetle	beetle_cave_20_c_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
-901426	TATOOINE	tat_world	AREA	10	47.52	-51.84	-87.51	0	1	a rock beetle	beetle_rock_cave_19_c_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
-901427	TATOOINE	tat_world	AREA	10	49.36	-51.59	-82.10	0	1	a rock beetle	beetle_rock_cave_19_c_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
-901428	TATOOINE	tat_world	AREA	11	77.95	-46.36	-137.14	0	1	a cave beetle	beetle_cave_20_c_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
-901429	TATOOINE	tat_world	AREA	11	88.52	-46.52	-146.98	0	1	a cave beetle	beetle_cave_20_c_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
-901430	TATOOINE	tat_world	AREA	11	94.96	-46.60	-134.94	0	1	a cave beetle	beetle_cave_20_c_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
-901431	TATOOINE	tat_world	AREA	11	82.33	-46.58	-144.68	0	1	a large cave beetle	beetle_large_cave_21_c_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
-901432	TATOOINE	tat_world	AREA	2	22.12	-34.83	-24.04	0	1	a Sennex lookout	sennex_lookout_17_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
-901433	TATOOINE	tat_world	AREA	2	26.50	-37.71	-31.16	0	1	a Sennex lookout	sennex_lookout_17_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
-901434	TATOOINE	tat_world	AREA	2	46.28	-47.87	-59.26	0	1	a Sennex lookout	sennex_lookout_17_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
-901435	TATOOINE	tat_world	AREA	2	54.08	-68.23	-40.91	0	1	a Sennex slaver	sennex_slaver_18_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
-901436	TATOOINE	tat_world	AREA	2	26.43	-43.01	-66.94	0	1	a Sennex warder	sennex_warder_19_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
-901437	TATOOINE	tat_world	AREA	2	42.26	-46.47	-13.03	0	1	a Sennex warder	sennex_warder_19_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
-901438	TATOOINE	tat_world	AREA	2	49.99	-47.64	-10.40	0	1	a Sennex warder	sennex_warder_19_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
-901439	TATOOINE	tat_world	AREA	2	53.54	-48.81	-60.81	0	1	a Sennex warder	sennex_warder_19_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
-901440	TATOOINE	tat_world	AREA	2	54.50	-68.10	-36.63	0	1	a Sennex warder	sennex_warder_19_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
-901441	TATOOINE	tat_world	AREA	3	91.50	-67.45	-39.29	0	1	a Sennex slaver	sennex_slaver_18_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
-901442	TATOOINE	tat_world	AREA	3	92.94	-61.91	-14.63	0	1	a Sennex slaver	sennex_slaver_18_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
-901443	TATOOINE	tat_world	AREA	3	86.75	-61.16	-7.92	0	1	a Sennex warder	sennex_warder_19_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
-901444	TATOOINE	tat_world	AREA	4	64.28	-75.42	-63.10	0	1	a Sennex slaver	sennex_slaver_18_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
-901445	TATOOINE	tat_world	AREA	4	94.62	-75.68	-64.77	0	1	a Sennex slaver	sennex_slaver_18_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
-901446	TATOOINE	tat_world	AREA	4	96.00	-74.96	-60.34	0	1	a Sennex slaver	sennex_slaver_18_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
-901447	TATOOINE	tat_world	AREA	5	84.61	-46.37	-111.94	0	1	a cave beetle	beetle_cave_20_c_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
-901448	TATOOINE	tat_world	AREA	5	90.63	-46.59	-107.05	0	1	a large rock beetle	beetle_large_rock_19_c_att_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
-901449	TATOOINE	tat_world	AREA	6	54.92	-71.57	-113.89	0	1	a Sennex hunter	sennex_hunter_20_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
-901450	TATOOINE	tat_world	AREA	6	55.90	-77.03	-89.34	0	1	a Sennex hunter	sennex_hunter_20_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
-901451	TATOOINE	tat_world	AREA	7	94.76	-66.43	-126.37	0	1	a Sennex guard	sennex_guard_19_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
-901452	TATOOINE	tat_world	AREA	7	73.83	-66.30	-137.96	0	1	a Sennex hunter	sennex_hunter_20_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
-901453	TATOOINE	tat_world	AREA	7	78.58	-65.34	-142.07	0	1	a Sennex hunter	sennex_hunter_20_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
-901454	TATOOINE	tat_world	AREA	8	114.86	-66.46	-117.85	0	1	a Sennex guard	sennex_guard_19_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
-901455	TATOOINE	tat_world	AREA	8	116.12	-66.28	-95.32	0	1	a Sennex guard	sennex_guard_19_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
-901456	TATOOINE	tat_world	AREA	8	129.93	-66.71	-106.68	0	1	a Sennex guard	sennex_guard_19_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
-901457	TATOOINE	tat_world	AREA	8	143.50	-66.35	-97.41	0	1	a Sennex slavemaster	sennex_slavemaster_20_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
-901458	TATOOINE	tat_world	AREA	0	-4936.55	29.76	-5552.88	0	1	a mountain squill	squill_mountain_18_c_agg_n	dungeon	Spice Dealer Camp	3	FLOAT	idle	0	0	0	0	300	120	6
-901459	TATOOINE	tat_world	AREA	0	-1289.30	8.30	-316.00	0	1	an adolescent krayt dragon	krayt_dragon_adolescent_84_c_agg_b	dungeon	Tusken Bunker	1	FLOAT	idle	0	0	0	0	900	600	5
-901460	TATOOINE	tat_world	AREA	0	-1290.20	15.30	-376.00	0	1	an adolescent krayt dragon	krayt_dragon_adolescent_84_c_agg_b	dungeon	Tusken Bunker	1	FLOAT	idle	0	0	0	0	900	600	5
-901461	TATOOINE	tat_world	AREA	0	-1394.50	47.80	-398.50	0	1	an adolescent krayt dragon	krayt_dragon_adolescent_84_c_agg_b	dungeon	Tusken Bunker	1	FLOAT	idle	0	0	0	0	900	600	5
-901462	TATOOINE	tat_world	AREA	0	-1312.80	24.20	-427.50	0	1	an adolescent krayt dragon	krayt_dragon_adolescent_84_c_agg_b	dungeon	Tusken Bunker	1	FLOAT	idle	0	0	0	0	900	600	5
-901463	TATOOINE	tat_world	AREA	0	-1487.74	41.00	-186.64	0	1	a Tusken sniper	tusken_sniper_30_h_agg_n	dungeon	Tusken Bunker	3	FLOAT	idle	0	0	0	0	300	120	6
-901464	TATOOINE	tat_world	AREA	0	-1472.49	41.00	-192.42	0	1	a Tusken warrior	tusken_warrior_32_h_agg_n	dungeon	Tusken Bunker	3	FLOAT	idle	0	0	0	0	300	120	6
-901465	TATOOINE	tat_world	AREA	0	-5282.89	40.00	-4442.86	0	1	a Tusken bantha	bantha_tusken_30_c_att_n	dungeon	Tusken raid on settlement	1	GUARD	idle	0	0	0	0	300	120	0
-901466	TATOOINE	tat_world	AREA	0	-5340.42	40.00	-4452.43	0	1	a Tusken bantha	bantha_tusken_30_c_att_n	dungeon	Tusken raid on settlement	1	GUARD	idle	0	0	0	0	300	120	0
-901467	TATOOINE	tat_world	AREA	0	-5337.96	40.00	-4434.90	0	1	a Tusken captain	tusken_captain_33_h_agg_n	dungeon	Tusken raid on settlement	1	GUARD	idle	0	0	0	0	300	120	0
-901468	TATOOINE	tat_world	AREA	0	-5289.45	40.00	-4441.29	0	1	a Tusken raider	tusken_raider_30_h_agg_n	dungeon	Tusken raid on settlement	3	FLOAT	idle	0	0	0	0	300	120	6
-901469	TATOOINE	tat_world	AREA	0	-5318.30	40.00	-4427.29	0	1	a Tusken raider	tusken_raider_30_h_agg_n	dungeon	Tusken raid on settlement	2	FLOAT	idle	0	0	0	0	300	120	4
-901470	TATOOINE	tat_world	AREA	0	-5323.24	40.00	-4443.62	0	1	a Tusken raider	tusken_raider_30_h_agg_n	dungeon	Tusken raid on settlement	2	FLOAT	idle	0	0	0	0	300	120	4
-901471	TATOOINE	tat_world	AREA	0	-5332.04	40.00	-4455.94	0	1	a Tusken raider	tusken_raider_30_h_agg_n	dungeon	Tusken raid on settlement	2	FLOAT	idle	0	0	0	0	300	120	4
-901472	TATOOINE	tat_world	AREA	0	-5315.97	40.00	-4444.79	0	1	a Tusken sniper	tusken_sniper_30_h_agg_n	dungeon	Tusken raid on settlement	2	FLOAT	idle	0	0	0	0	300	120	4
-901473	TATOOINE	tat_world	AREA	0	3412.36	7.93	-5473.76	-67	1	Sleash	legacy_sleash_100_h_inv_n	dungeon	Vaigon Shinn Bunker	1	STOP	idle	0	0	0	0	300	120	0
-901474	TATOOINE	tat_world	AREA	0	3387.07	10.72	-5503.09	0	1	Shinn's guard	tatooine_shinn_guard_8_h_agg_n	dungeon	Vaigon Shinn Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-901475	TATOOINE	tat_world	AREA	0	3400.58	6.89	-5472.00	0	1	Shinn's guard	tatooine_shinn_guard_8_h_agg_n	dungeon	Vaigon Shinn Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-901476	TATOOINE	tat_world	AREA	0	3421.48	8.65	-5505.83	0	1	Shinn's guard	tatooine_shinn_guard_8_h_agg_n	dungeon	Vaigon Shinn Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-901477	TATOOINE	tat_world	AREA	0	3422.75	7.63	-5461.61	0	1	Shinn's guard	tatooine_shinn_guard_8_h_agg_n	dungeon	Vaigon Shinn Bunker	1	STOP	idle	0	0	0	0	300	120	0
-901478	TATOOINE	tat_world	AREA	0	3443.22	9.11	-5461.78	0	1	Shinn's guard	tatooine_shinn_guard_8_h_agg_n	dungeon	Vaigon Shinn Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-901479	TATOOINE	tat_world	AREA	0	3341.86	9.41	-5343.94	0	1	Shinn's mugger	tatooine_shinn_mugger_7_h_agg_n	dungeon	Vaigon Shinn Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-901480	TATOOINE	tat_world	AREA	0	3370.03	8.27	-5355.43	0	1	Shinn's mugger	tatooine_shinn_mugger_7_h_agg_n	dungeon	Vaigon Shinn Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-901481	TATOOINE	tat_world	AREA	0	3388.50	6.73	-5337.52	0	1	Shinn's mugger	tatooine_shinn_mugger_7_h_agg_n	dungeon	Vaigon Shinn Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-901482	TATOOINE	tat_world	AREA	0	3391.05	9.27	-5306.11	0	1	Shinn's mugger	tatooine_shinn_mugger_7_h_agg_n	dungeon	Vaigon Shinn Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-901483	TATOOINE	tat_world	AREA	0	3392.19	7.44	-5359.13	0	1	Shinn's mugger	tatooine_shinn_mugger_7_h_agg_n	dungeon	Vaigon Shinn Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-901484	TATOOINE	tat_world	AREA	0	-6233.05	36.84	-5929.44	0	1	Valarian's soldier	tatooine_valarian_soldier_18_h_agg_n	dungeon	Valarian Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-901485	TATOOINE	tat_world	AREA	0	-6233.84	37.25	-5947.28	0	1	Valarian's soldier	tatooine_valarian_soldier_18_h_agg_n	dungeon	Valarian Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-901486	TATOOINE	tat_world	AREA	0	-6256.15	39.05	-5913.32	0	1	Valarian's soldier	tatooine_valarian_soldier_18_h_agg_n	dungeon	Valarian Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-901487	TATOOINE	tat_world	AREA	0	-6260.20	43.14	-5894.80	0	1	Valarian's soldier	tatooine_valarian_soldier_18_h_agg_n	dungeon	Valarian Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-901488	TATOOINE	tat_world	AREA	0	-6270.54	35.38	-5953.54	0	1	Valarian's soldier	tatooine_valarian_soldier_18_h_agg_n	dungeon	Valarian Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-901489	TATOOINE	tat_world	AREA	0	-6273.99	39.29	-5915.43	0	1	Valarian's soldier	tatooine_valarian_soldier_18_h_agg_n	dungeon	Valarian Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-901490	TATOOINE	tat_world	AREA	0	-6278.41	35.88	-5933.67	0	1	Valarian's soldier	tatooine_valarian_soldier_18_h_agg_n	dungeon	Valarian Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-901491	TATOOINE	tat_world	PATROL	0	-1689.12	11.50	-3310.35	0	1	Valarian Depot Foreman	valarian_boss_depot_16_h_agg_n	dungeon	Valarian Depot	1	PATROL	idle	0	999	0	0	90	60	0
-901492	TATOOINE	tat_world	AREA	0	-1585.30	7.61	-3317.88	0	1	Valarian Depot Scout	valarian_scout_depot_12_h_agg_n	dungeon	Valarian Depot	3	FLOAT	idle	0	0	0	0	90	60	6
-901493	TATOOINE	tat_world	AREA	0	-1606.55	7.40	-3364.94	0	1	Valarian Depot Scout	valarian_scout_depot_12_h_agg_n	dungeon	Valarian Depot	3	FLOAT	idle	0	0	0	0	90	60	6
-901494	TATOOINE	tat_world	AREA	0	-1613.94	11.70	-3248.31	0	1	Valarian Depot Scout	valarian_scout_depot_12_h_agg_n	dungeon	Valarian Depot	3	FLOAT	idle	0	0	0	0	90	60	6
-901495	TATOOINE	tat_world	AREA	0	-1681.25	10.90	-3384.34	0	1	Valarian Depot Scout	valarian_scout_depot_12_h_agg_n	dungeon	Valarian Depot	3	FLOAT	idle	0	0	0	0	90	60	6
-901496	TATOOINE	tat_world	AREA	0	-1685.42	12.90	-3270.60	0	1	Valarian Depot Scout	valarian_scout_depot_12_h_agg_n	dungeon	Valarian Depot	3	FLOAT	idle	0	0	0	0	90	60	6
-901497	TATOOINE	tat_world	AREA	0	-1737.95	26.80	-3301.80	0	1	Valarian Depot Scout	valarian_scout_depot_12_h_agg_n	dungeon	Valarian Depot	3	FLOAT	idle	0	0	0	0	90	60	6
-901498	TATOOINE	tat_world	AREA	0	-1633.41	8.40	-3367.22	0	1	Valarian Depot Swooper	valarian_swooper_depot_13_h_agg_n	dungeon	Valarian Depot	3	FLOAT	idle	0	0	0	0	90	60	6
-901499	TATOOINE	tat_world	AREA	0	-1677.71	11.60	-3249.32	0	1	Valarian Depot Swooper	valarian_swooper_depot_13_h_agg_n	dungeon	Valarian Depot	3	FLOAT	idle	0	0	0	0	90	60	6
-901500	TATOOINE	tat_world	AREA	0	-1725.53	17.33	-3358.72	0	1	Valarian Depot Swooper	valarian_swooper_depot_13_h_agg_n	dungeon	Valarian Depot	3	FLOAT	idle	0	0	0	0	90	60	6
-901501	TATOOINE	tat_world	AREA	0	-1772.80	17.80	-3358.72	0	1	Valarian Depot Swooper	valarian_swooper_depot_13_h_agg_n	dungeon	Valarian Depot	3	FLOAT	idle	0	0	0	0	90	60	6
-901502	TATOOINE	tat_world	AREA	0	-1801.70	31.50	-3295.50	0	1	Valarian Shuttle Guard	valarian_swooper_shuttle_17_h_agg_n	dungeon	Valarian Depot	3	FLOAT	idle	0	0	0	0	90	60	6
-901503	TATOOINE	tat_world	AREA	0	-1693.81	11.80	-3310.70	0	1	Valarian Depot Guard	valarian_thief_depot_14_h_agg_n	dungeon	Valarian Depot	1	GUARD	idle	0	0	0	0	90	60	0
-901504	TATOOINE	tat_world	AREA	0	-1698.92	11.90	-3329.60	0	1	Valarian Depot Guard	valarian_thief_depot_14_h_agg_n	dungeon	Valarian Depot	2	FLOAT	idle	0	0	0	0	90	60	4
-901505	TATOOINE	tat_world	AREA	0	-1626.33	9.10	-3326.70	0	1	Valarian Depot Worker	valarian_thug_depot_14_h_agg_n	dungeon	Valarian Depot	2	FLOAT	idle	0	0	0	0	90	60	4
-901506	TATOOINE	tat_world	AREA	0	-1637.52	9.90	-3303.30	0	1	Valarian Depot Worker	valarian_thug_depot_14_h_agg_n	dungeon	Valarian Depot	2	FLOAT	idle	0	0	0	0	90	60	4
-901507	TATOOINE	tat_world	AREA	0	-1641.20	10.30	-3269.00	0	1	Valarian Depot Worker	valarian_thug_depot_14_h_agg_n	dungeon	Valarian Depot	2	FLOAT	idle	0	0	0	0	90	60	4
-901508	TATOOINE	tat_world	AREA	0	-1660.63	7.60	-3330.00	0	1	Valarian Depot Worker	valarian_thug_depot_14_h_agg_n	dungeon	Valarian Depot	2	FLOAT	idle	0	0	0	0	90	60	4
-901509	TATOOINE	tat_world	AREA	0	-1666.90	9.90	-3284.20	0	1	Valarian Depot Worker	valarian_thug_depot_14_h_agg_n	dungeon	Valarian Depot	2	FLOAT	idle	0	0	0	0	90	60	4
-901510	TATOOINE	tat_world	AREA	0	-1756.80	31.50	-3328.81	0	1	Valarian Shuttle Guard	valarian_thug_shuttle_20_h_agg_n	dungeon	Valarian Depot	3	FLOAT	idle	0	0	0	0	90	60	6
-901511	TATOOINE	tat_world	AREA	0	-1619.07	10.00	-3290.48	0	1	a CLL-8 binary load lifter	cll8_load_lifter_100_d_inv_n	dungeon	Valarian Depot	1	STOP	idle	0	0	0	0	300	120	0
-901512	TATOOINE	tat_world	AREA	0	-1666.72	9.75	-3276.34	0	1	a CLL-8 binary load lifter	cll8_load_lifter_100_d_inv_n	dungeon	Valarian Depot	1	GUARD	idle	0	0	0	0	300	120	0
-901513	TATOOINE	tat_world	PATROL	0	-1757.80	31.47	-3322.47	0	1	a CLL-8 binary load lifter	cll8_load_lifter_100_d_inv_n	dungeon	Valarian Depot	1	PATROL	idle	0	999	0	0	90	60	0
-901514	TATOOINE	tat_world	AREA	0	-1622.49	9.93	-3292.72	0	1	an EG-6 power droid	eg6_power_droid_100_d_inv_n	dungeon	Valarian Depot	1	GUARD	idle	0	0	0	0	300	120	0
-901515	TATOOINE	tat_world	AREA	0	-1675.91	9.76	-3290.75	0	80	an LE repair droid	le_repair_droid_100_d_inv_n	dungeon	Valarian Depot	1	STOP	idle	0	0	0	0	300	120	0
-901516	TATOOINE	tat_world	AREA	0	-1677.83	9.91	-3290.39	0	70	an R5 unit	r5_droid_4_d_att_n	dungeon	Valarian Depot	1	STOP	idle	0	0	0	0	300	120	0
-901517	TATOOINE	tat_world	AREA	0	-5371.27	64.78	-6897.22	107	1	Valarian's hacker	tatooine_valarian_hacker_19_h_agg_n	dungeon	Valarian Hackers Bunker	1	STOP	idle	0	0	0	0	300	120	0
-901518	TATOOINE	tat_world	AREA	0	-649.21	14.36	-6293.11	0	1	Valarian's Pod Racer	valarian_pod_racer_19_h_agg_n	dungeon	Valarian Podracer Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-901519	TATOOINE	tat_world	AREA	0	-652.90	15.05	-6267.96	0	1	Valarian's Pod Racer	valarian_pod_racer_19_h_agg_n	dungeon	Valarian Podracer Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-901520	TATOOINE	tat_world	AREA	0	-682.85	12.28	-6275.30	0	1	Valarian's Pod Racer	valarian_pod_racer_19_h_agg_n	dungeon	Valarian Podracer Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-901521	TATOOINE	tat_world	AREA	0	-685.37	11.45	-6293.95	0	1	Valarian's Pod Racer	valarian_pod_racer_19_h_agg_n	dungeon	Valarian Podracer Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-901522	TATOOINE	tat_world	AREA	0	-694.13	12.31	-6314.85	0	1	Valarian's Pod Racer	valarian_pod_racer_19_h_agg_n	dungeon	Valarian Podracer Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-901523	TATOOINE	tat_world	AREA	0	-705.87	12.09	-6269.47	0	1	Valarian's Pod Racer	valarian_pod_racer_19_h_agg_n	dungeon	Valarian Podracer Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-901524	TATOOINE	tat_world	AREA	0	-724.68	11.87	-6313.01	0	1	Valarian's Pod Racer	valarian_pod_racer_19_h_agg_n	dungeon	Valarian Podracer Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-901525	TATOOINE	tat_world	AREA	0	-727.61	10.67	-6282.57	0	1	Valarian's Pod Racer	valarian_pod_racer_19_h_agg_n	dungeon	Valarian Podracer Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-901526	TATOOINE	tat_world	AREA	0	-728.28	10.98	-6259.27	0	1	Valarian's Pod Racer	valarian_pod_racer_19_h_agg_n	dungeon	Valarian Podracer Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-901527	TATOOINE	tat_world	AREA	0	-3953.51	5.57	-3999.88	0	1	Valarian's command enforcer	tatooine_valarian_enforcer_19_h_agg_n	dungeon	Valarian Strategic Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-901528	TATOOINE	tat_world	AREA	0	-3920.97	7.10	-4028.88	0	1	Valarian's blood vandal	tatooine_valarian_vandal_18_h_agg_n	dungeon	Valarian Strategic Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-901529	TATOOINE	tat_world	AREA	0	-3937.41	5.36	-3984.48	0	1	Valarian's blood vandal	tatooine_valarian_vandal_18_h_agg_n	dungeon	Valarian Strategic Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-901530	TATOOINE	tat_world	AREA	0	-3952.27	6.82	-4015.71	0	1	Valarian's blood vandal	tatooine_valarian_vandal_18_h_agg_n	dungeon	Valarian Strategic Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-901531	TATOOINE	tat_world	AREA	0	-3953.98	6.71	-4021.11	0	1	Valarian's blood vandal	tatooine_valarian_vandal_18_h_agg_n	dungeon	Valarian Strategic Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-901532	TATOOINE	tat_world	AREA	0	3721.19	16.53	-4223.59	0	1	a White Thranta security guard	tatooine_opening_swooper_9_9_h_att_n	dungeon	White Thranta Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-901533	TATOOINE	tat_world	AREA	0	3731.63	15.95	-4185.20	0	1	a White Thranta security guard	tatooine_opening_swooper_9_9_h_att_n	dungeon	White Thranta Bunker	1	STOP	idle	0	0	0	0	300	120	0
-901534	TATOOINE	tat_world	AREA	0	3751.77	16.52	-4196.42	0	1	a White Thranta security guard	tatooine_opening_swooper_9_9_h_att_n	dungeon	White Thranta Bunker	1	GUARD	idle	0	0	0	0	300	120	0
-901535	TATOOINE	tat_world	AREA	0	-937.64	7.51	-4303.46	0	1	an Alkhara bandit	alkhara_bandit_15_h_att_n	outback	Alkhara Camp	1	GUARD	idle	0	0	0	0	300	120	0
-901536	TATOOINE	tat_world	AREA	0	-951.70	11.01	-4269.85	0	1	an Alkhara bandit	alkhara_bandit_15_h_att_n	outback	Alkhara Camp	1	GUARD	idle	0	0	0	0	300	120	0
-901537	TATOOINE	tat_world	AREA	0	-961.28	10.72	-4298.35	0	1	an Alkhara bandit	alkhara_bandit_15_h_att_n	outback	Alkhara Camp	1	GUARD	idle	0	0	0	0	300	120	0
-901538	TATOOINE	tat_world	AREA	0	-971.11	13.01	-4257.31	0	1	an Alkhara bandit	alkhara_bandit_15_h_att_n	outback	Alkhara Camp	1	GUARD	idle	0	0	0	0	300	120	0
-901539	TATOOINE	tat_world	AREA	0	-981.66	14.48	-4281.57	0	1	an Alkhara bandit	alkhara_bandit_15_h_att_n	outback	Alkhara Camp	1	GUARD	idle	0	0	0	0	300	120	0
-901540	TATOOINE	tat_world	AREA	0	-2129.26	6.58	674.39	0	1	a thief	thief_11_h_att_n	outback	Broken Engine	3	FLOAT	idle	0	0	0	0	300	120	6
-901541	TATOOINE	tat_world	AREA	0	-255.78	4.70	-6196.95	0	1	a Desert Demon	desert_demon_13_h_agg_n	outback	Broken Speeder	2	FLOAT	idle	0	0	0	0	300	120	4
-901542	TATOOINE	tat_world	AREA	0	6464.70	9.10	-2229.60	0	1	an elder zucca boar	boar_zucca_elder_8_c_att_n	outback	Broken walls	4	FLOAT	idle	0	0	0	0	900	600	8
-901543	TATOOINE	tat_world	AREA	0	-3734.98	8.63	-6811.96	0	1	a Weequay thug	weequay_thug_16_h_att_n	outback	Camp with Stones	3	FLOAT	idle	0	0	0	0	300	120	6
-901544	TATOOINE	tat_world	AREA	0	-3164.96	9.35	3630.87	0	1	a rancher	farmer_rancher_100_h_inv_n	outback	Lonely Flora Farm	3	FLOAT	idle	0	0	0	0	300	120	6
-901545	TATOOINE	tat_world	AREA	0	-3326.99	7.51	-3719.56	0	1	an assassin	assassin_100_h_inv_n	outback	Lonely Small Tent	1	GUARD	idle	0	0	0	0	300	120	0
-901546	TATOOINE	tat_world	AREA	0	-2602.40	9.10	-2299.00	0	1	a Dim-U abbot	dimu_abbot_4_h_att_n	outback	Lonely Tent	3	FLOAT	idle	0	0	0	0	300	120	6
-901547	TATOOINE	tat_world	AREA	0	-5135.00	146.50	4432.90	0	1	a grand krayt dragon	krayt_dragon_grand_88_c_agg_b	outback	Pillar Hills	2	FLOAT	idle	0	0	0	0	1800	1200	50
-901548	TATOOINE	tat_world	AREA	0	-3804.72	30.91	-4723.62	177	1	a Sand Crawler crewman	legacy_jawa_grunt_12_h_att_n	outback	Shot Sandcrawler	1	STOP	idle	0	0	0	0	300	120	0
-901549	TATOOINE	tat_world	AREA	0	-3806.60	29.00	-4715.60	0	1	Jawa Leader	legacy_jawa_leader_100_h_inv_n	outback	Shot Sandcrawler	1	GUARD	idle	0	0	0	0	300	120	0
-901550	TATOOINE	tat_world	AREA	0	-3753.03	13.81	-4747.73	0	1	a Tusken Outrider	tusken_raider_wildman_14_h_agg_n	outback	Shot Sandcrawler	1	GUARD	idle	0	0	0	0	300	120	0
-901551	TATOOINE	tat_world	AREA	0	-3811.19	29.24	-4719.59	-45	1	FA-2PO	legacy_fa2po_protocol_100_d_inv_n	outback	Shot Sandcrawler	1	STOP	idle	0	0	0	0	300	120	0
-901552	TATOOINE	tat_world	AREA	0	-4932.42	31.00	-5542.53	-148	1	Tyrok	jabbas_palace_tyrok_20_h_att_n	outback	Spice Dealer Camp	1	STOP	idle	0	0	0	0	300	120	0
-901553	TATOOINE	tat_world	AREA	0	-4331.11	22.92	-5027.13	0	1	Delrice Capreese	jabbas_palace_delrice_capreese_18_h_att_n	outback	Spice Tank	1	GUARD	idle	0	0	0	0	300	120	0
-901554	TATOOINE	tat_world	AREA	0	-5725.19	23.51	6484.34	0	1	a dewback	dewback_17_c_att_n	outback	Tatooine	3	FLOAT	idle	0	0	0	0	300	120	6
-901555	TATOOINE	tat_world	AREA	0	-4605.92	45.44	-4737.28	0	1	an Elite Dragonet	dragonet_elite_24_c_agg_e	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
-901556	TATOOINE	tat_world	AREA	0	-4624.03	39.83	-4707.07	0	1	an Elite Dragonet	dragonet_elite_24_c_agg_e	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
-901557	TATOOINE	tat_world	AREA	0	-4646.35	42.30	-4759.10	0	1	an Elite Dragonet	dragonet_elite_24_c_agg_e	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
-901558	TATOOINE	tat_world	AREA	0	-4674.09	28.26	-4689.19	0	1	an Elite Dragonet	dragonet_elite_24_c_agg_e	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
-901559	TATOOINE	tat_world	AREA	0	-4690.10	39.15	-4772.28	0	1	an Elite Dragonet	dragonet_elite_24_c_agg_e	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
-901560	TATOOINE	tat_world	AREA	0	-4698.76	27.91	-4732.04	0	1	an Elite Dragonet	dragonet_elite_24_c_agg_e	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
-901561	TATOOINE	tat_world	AREA	0	-6206.75	34.46	5060.16	0	1	a giant sand beetle	beetle_giant_sand_25_c_agg_n	outback	Tatooine	3	FLOAT	idle	0	0	0	0	1800	1500	6
-901562	TATOOINE	tat_world	AREA	0	-5812.10	345.03	1538.13	0	1	a greater desert womp rat	womprat_great_desert_12_c_agg_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
-901563	TATOOINE	tat_world	AREA	0	-5813.17	343.53	3132.34	0	1	a greater desert womp rat	womprat_great_desert_12_c_agg_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
-901564	TATOOINE	tat_world	AREA	0	3383.32	6.70	-6588.55	0	1	a grizzled dewback	dewback_grizzled_18_c_agg_n	outback	Tatooine	3	FLOAT	idle	0	0	0	0	1800	1500	6
-901565	TATOOINE	tat_world	AREA	0	6400.65	64.99	185.72	0	1	a mountain squill	squill_mountain_18_c_agg_n	outback	Tatooine	3	FLOAT	idle	0	0	0	0	1800	1500	6
-901566	TATOOINE	tat_world	AREA	0	-4821.32	26.39	6529.91	0	1	a Tusken bantha	bantha_tusken_30_c_att_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
-901567	TATOOINE	tat_world	AREA	0	7090.19	95.62	7118.49	0	1	an adolescent krayt dragon	krayt_dragon_adolescent_84_c_agg_b	outback	Tatooine	1	GUARD	idle	0	0	0	0	1800	1200	0
-901568	TATOOINE	tat_world	AREA	0	7070.65	96.90	7139.95	0	1	a grand krayt dragon	krayt_dragon_grand_88_c_agg_b	outback	Tatooine	1	GUARD	idle	0	0	0	0	1800	1200	0
-901569	TATOOINE	tat_world	AREA	0	-5830.54	353.67	1501.66	0	1	a wild bladeback boar	boar_bladeback_wild_40_c_att_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
-901570	TATOOINE	tat_world	AREA	0	-4690.96	30.69	5460.41	0	1	an Alkhara bandit	alkhara_bandit_15_h_att_n	outback	Tatooine	5	FLOAT	idle	0	0	0	0	300	120	10
-901571	TATOOINE	tat_world	AREA	0	-860.14	9.27	-1228.67	0	1	an Alkhara bandit	alkhara_bandit_15_h_att_n	outback	Tatooine	3	FLOAT	idle	0	0	0	0	300	120	6
-901572	TATOOINE	tat_world	AREA	0	7033.00	71.00	7052.00	0	1	a bounty hunter	bounty_hunter_23_h_att_n	outback	Tatooine	2	FLOAT	idle	0	0	0	0	1800	1500	4
-901573	TATOOINE	tat_world	AREA	0	-915.25	16.33	-6490.26	148	1	Dera Darklighter	dera_darklighter_100_h_inv_n	outback	Tatooine	1	STOP	idle	0	0	0	0	300	120	0
-901574	TATOOINE	tat_world	AREA	0	-6109.86	191.22	3971.77	0	1	a Desert Demon bodyguard	desert_demon_bodyguard_14_h_agg_n	outback	Tatooine	3	FLOAT	idle	0	0	0	0	300	120	6
-901575	TATOOINE	tat_world	AREA	0	-6110.19	190.25	3965.17	0	1	a Desert Demon leader	desert_demon_leader_14_h_agg_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
-901576	TATOOINE	tat_world	AREA	0	5453.05	27.12	2144.59	0	1	a Dim-U abbot	dimu_abbot_4_h_att_n	outback	Tatooine	3	FLOAT	idle	0	0	0	0	300	120	6
-901577	TATOOINE	tat_world	AREA	0	-7665.18	240.36	-7386.06	22	1	Eteto Topan	eteto_topan_ice_cream_100_h_inv_n	outback	Tatooine	1	STOP	idle	0	0	0	0	300	120	0
-901578	TATOOINE	tat_world	AREA	0	-7171.44	41.24	-2400.29	0	1	a rancher	farmer_rancher_100_h_inv_n	outback	Tatooine	3	FLOAT	idle	0	0	0	0	300	120	6
-901579	TATOOINE	tat_world	AREA	0	2201.12	0.00	-4458.39	0	1	a rancher	farmer_rancher_100_h_inv_n	outback	Tatooine	3	FLOAT	idle	0	0	0	0	300	120	6
-901580	TATOOINE	tat_world	AREA	0	-5467.28	30.00	-3885.61	0	1	a fringer	fringer_100_h_inv_n	outback	Tatooine	3	FLOAT	idle	0	0	0	0	1800	1500	6
-901581	TATOOINE	tat_world	AREA	0	624.00	78.00	3124.00	0	1	a Hutt assassin	hutt_assassin_22_h_att_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
-901582	TATOOINE	tat_world	AREA	0	637.00	78.00	3119.00	0	1	a Hutt assassin	hutt_assassin_22_h_att_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
-901583	TATOOINE	tat_world	AREA	0	660.00	78.00	3121.00	0	1	a Hutt assassin	hutt_assassin_22_h_att_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
-901584	TATOOINE	tat_world	AREA	0	5768.24	53.71	4008.83	0	1	a Jawa Avenger	jawa_avenger_18_h_att_n	outback	Tatooine	3	FLOAT	idle	0	0	0	0	300	120	6
-901585	TATOOINE	tat_world	AREA	0	5944.55	180.00	-3827.78	0	1	a Jawa engineer	jawa_engineer_16_h_att_n	outback	Tatooine	3	FLOAT	idle	0	0	0	0	300	120	6
-901586	TATOOINE	tat_world	AREA	0	5760.87	50.97	4000.88	0	1	a Jawa Protector	jawa_protector_17_h_att_n	outback	Tatooine	3	FLOAT	idle	0	0	0	0	300	120	6
-901587	TATOOINE	tat_world	AREA	0	-487.37	43.65	-7119.54	0	1	Jem Lavar	legacy_lavar_100_h_inv_n	outback	Tatooine	1	STOP	idle	0	0	0	0	300	120	0
-901588	TATOOINE	tat_world	AREA	0	987.30	12.59	2509.25	0	1	an Imperial Brigadier General	mission_imperial_brigadier_general_25_h_att_n	outback	Tatooine	1	STOP	idle	0	0	0	0	300	120	0
-901589	TATOOINE	tat_world	AREA	0	-6893.89	68.80	1514.35	0	1	a pathfinder	pathfinder_19_h_att_n	outback	Tatooine	3	FLOAT	idle	0	0	0	0	1800	1500	6
-901590	TATOOINE	tat_world	AREA	0	7023.75	109.33	2417.06	0	1	a moisture farmer	quest_hero_of_tatooine_farmer_100_h_inv_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
-901591	TATOOINE	tat_world	AREA	0	-5783.99	27.06	-560.96	0	1	a smuggler	smuggler_100_h_inv_n	outback	Tatooine	3	FLOAT	idle	0	0	0	0	300	120	6
-901592	TATOOINE	tat_world	AREA	0	-4880.16	94.77	2950.27	0	1	a spice fiend	spice_fiend_11_h_agg_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
-901593	TATOOINE	tat_world	AREA	0	5784.99	49.95	3992.93	0	1	a Tusken captain	tusken_captain_33_h_agg_n	outback	Tatooine	3	FLOAT	idle	0	0	0	0	300	120	6
-901594	TATOOINE	tat_world	AREA	0	-4825.23	26.65	6528.96	0	1	a Tusken chief	tusken_chief_34_h_agg_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
-901595	TATOOINE	tat_world	AREA	0	-4826.28	26.77	6532.40	0	1	a Tusken commoner	tusken_commoner_30_h_agg_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
-901596	TATOOINE	tat_world	AREA	0	5744.92	53.04	4011.30	0	1	a Tusken raider	tusken_raider_30_h_agg_n	outback	Tatooine	3	FLOAT	idle	0	0	0	0	300	120	6
-901597	TATOOINE	tat_world	AREA	0	5777.96	50.77	3982.87	0	1	a Tusken raider	tusken_raider_30_h_agg_n	outback	Tatooine	3	FLOAT	idle	0	0	0	0	300	120	6
-901598	TATOOINE	tat_world	AREA	0	-5576.42	322.59	1736.14	0	1	Tusken Follower	tusken_raider_18_h_agg_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
-901599	TATOOINE	tat_world	AREA	0	-5583.09	322.60	1728.11	0	1	Tusken Follower	tusken_raider_18_h_agg_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
-901600	TATOOINE	tat_world	AREA	0	-5824.03	343.53	3128.99	0	1	Tusken Follower	tusken_raider_18_h_agg_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
-901601	TATOOINE	tat_world	AREA	0	-7200.79	301.13	3802.65	0	1	Tusken Follower	tusken_raider_18_h_agg_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
-901602	TATOOINE	tat_world	AREA	0	-7211.65	301.13	3799.30	0	1	Tusken Follower	tusken_raider_18_h_agg_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
-901603	TATOOINE	tat_world	AREA	0	5779.83	50.46	4000.20	0	1	a Tusken warlord	tusken_warlord_33_h_agg_n	outback	Tatooine	3	FLOAT	idle	0	0	0	0	300	120	6
-901604	TATOOINE	tat_world	AREA	0	7032.76	90.06	2500.25	0	1	a Tusken warlord	tusken_warlord_33_h_agg_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
-901605	TATOOINE	tat_world	AREA	0	7054.37	92.70	2510.26	0	1	a Tusken warlord	tusken_warlord_33_h_agg_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
-901606	TATOOINE	tat_world	AREA	0	7016.89	96.15	2510.94	0	1	a Tusken warrior	tusken_warrior_32_h_agg_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
-901607	TATOOINE	tat_world	AREA	0	7028.78	97.88	2486.42	0	1	a Tusken warrior	tusken_warrior_32_h_agg_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
-901608	TATOOINE	tat_world	AREA	0	7047.34	98.11	2535.31	0	1	a Tusken warrior	tusken_warrior_32_h_agg_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
-901609	TATOOINE	tat_world	AREA	0	7051.31	93.04	2496.84	0	1	a Tusken warrior	tusken_warrior_32_h_agg_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
-901610	TATOOINE	tat_world	AREA	0	7030.00	89.27	2512.42	0	1	a Tusken Witch Doctor	tusken_witch_doctor_33_h_agg_e	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
-901611	TATOOINE	tat_world	AREA	0	-4466.80	32.98	5785.67	0	1	Valarian's assassin	valarian_assassin_15_h_agg_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
-901612	TATOOINE	tat_world	AREA	0	-5009.26	39.10	-6129.91	0	1	Valarian's thief	valarian_thief_13_h_agg_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
-901613	TATOOINE	tat_world	AREA	0	-5024.42	41.39	-6109.46	0	1	Valarian's thief	valarian_thief_13_h_agg_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
-901614	TATOOINE	tat_world	AREA	0	-5827.40	352.78	1517.93	0	1	a wounded miner	watto_body_miner_100_h_inv_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	1800	1500	0
-901615	TATOOINE	tat_world	AREA	0	-7217.39	309.79	3869.83	168	1	a downed pilot	watto_leg_pilot_100_h_inv_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
-901616	TATOOINE	tat_world	AREA	0	-4471.55	33.18	5781.62	0	1	an IG assassin droid	ig_assassin_droid_19_d_att_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	1800	1500	0
-901617	TATOOINE	tat_world	AREA	0	-1263.96	10.08	5463.37	87	1	an Alkhara bandit	alkhara_bandit_15_h_att_n	outback	Tent camp	3	FLOAT	idle	0	0	0	0	300	120	6
-901618	TATOOINE	tat_world	AREA	0	-3521.70	0.00	-4636.35	0	1	Valarian's smuggler	tatooine_valarian_smuggler_20_h_agg_n	outback	Valarian Smuggler Camp	1	GUARD	idle	0	0	0	0	300	120	0
-901619	TATOOINE	tat_world	AREA	0	-3522.87	1.04	-4620.20	0	1	Valarian's smuggler	tatooine_valarian_smuggler_20_h_agg_n	outback	Valarian Smuggler Camp	1	GUARD	idle	0	0	0	0	300	120	0
-901620	TATOOINE	tat_world	AREA	0	-4466.01	41.87	-4003.19	0	1	a wild zucca boar	boar_zucca_wild_19_c_att_n	outback	Wild Zucca Boar Spawn	5	FLOAT	idle	0	0	0	0	300	120	10
-901621	TATOOINE	tat_world	AREA	0	-4502.60	35.00	-2274.20	0	1	Tusken Follower	tusken_raider_21_h_agg_n	poi	Ben Kenobis House	2	FLOAT	idle	0	0	0	0	300	120	4
-901622	TATOOINE	tat_world	AREA	0	-4522.80	35.00	-2249.21	0	1	Tusken Priest	tusken_raider_worshiper_20_h_agg_n	poi	Ben Kenobis House	1	GUARD	idle	0	0	0	0	300	120	0
-901623	TATOOINE	tat_world	AREA	0	-3875.90	23.24	-4299.25	0	1	Valarian's smuggler	tatooine_valarian_smuggler_20_h_agg_n	poi	Escape Pod	1	GUARD	idle	0	0	0	0	300	120	0
-901624	TATOOINE	tat_world	AREA	0	-3885.23	22.31	-4280.11	0	1	Valarian's smuggler	tatooine_valarian_smuggler_20_h_agg_n	poi	Escape Pod	1	GUARD	idle	0	0	0	0	300	120	0
-901625	TATOOINE	tat_world	AREA	0	-3890.18	24.06	-4318.87	0	1	Valarian's smuggler	tatooine_valarian_smuggler_20_h_agg_n	poi	Escape Pod	1	GUARD	idle	0	0	0	0	300	120	0
-901626	TATOOINE	tat_world	AREA	0	-3904.42	19.81	-4268.03	0	1	Valarian's smuggler	tatooine_valarian_smuggler_20_h_agg_n	poi	Escape Pod	1	GUARD	idle	0	0	0	0	300	120	0
-901627	TATOOINE	tat_world	AREA	0	-3917.01	20.08	-4297.36	0	1	Valarian's smuggler	tatooine_valarian_smuggler_20_h_agg_n	poi	Escape Pod	1	GUARD	idle	0	0	0	0	300	120	0
-901628	TATOOINE	tat_world	AREA	0	-3925.93	18.60	-4270.59	0	1	Valarian's smuggler	tatooine_valarian_smuggler_20_h_agg_n	poi	Escape Pod	1	GUARD	idle	0	0	0	0	300	120	0
-901629	TATOOINE	tat_world	AREA	0	-3941.07	21.28	-4297.13	0	1	Valarian's smuggler	tatooine_valarian_smuggler_20_h_agg_n	poi	Escape Pod	1	GUARD	idle	0	0	0	0	300	120	0
-901630	TATOOINE	tat_world	AREA	0	-3946.50	21.41	-4278.91	0	1	Valarian's smuggler	tatooine_valarian_smuggler_20_h_agg_n	poi	Escape Pod	1	GUARD	idle	0	0	0	0	300	120	0
-901631	TATOOINE	tat_world	AREA	0	-3973.70	60.00	6310.95	0	1	a Tusken bantha	bantha_tusken_30_c_att_n	poi	Fort Tusken	1	GUARD	idle	0	0	0	0	300	120	0
-901632	TATOOINE	tat_world	AREA	0	-3990.99	60.00	6306.52	0	1	a Tusken captain	tusken_captain_33_h_agg_n	poi	Fort Tusken	1	GUARD	idle	0	0	0	0	300	120	0
-901633	TATOOINE	tat_world	AREA	0	-3971.41	22.00	6163.89	0	1	a Tusken raider	tusken_raider_30_h_agg_n	poi	Fort Tusken	1	GUARD	idle	0	0	0	0	300	120	0
-901634	TATOOINE	tat_world	AREA	0	-3976.98	60.00	6281.28	0	1	a Tusken raider	tusken_raider_30_h_agg_n	poi	Fort Tusken	1	GUARD	idle	0	0	0	0	300	120	0
-901635	TATOOINE	tat_world	AREA	0	-3979.63	60.00	6249.63	0	1	a Tusken raider	tusken_raider_30_h_agg_n	poi	Fort Tusken	1	GUARD	idle	0	0	0	0	300	120	0
-901636	TATOOINE	tat_world	AREA	0	-3986.20	60.00	6313.30	0	1	a Tusken raider	tusken_raider_30_h_agg_n	poi	Fort Tusken	1	GUARD	idle	0	0	0	0	300	120	0
-901637	TATOOINE	tat_world	AREA	0	-4009.36	60.00	6243.47	0	1	a Tusken raider	tusken_raider_30_h_agg_n	poi	Fort Tusken	1	GUARD	idle	0	0	0	0	300	120	0
-901638	TATOOINE	tat_world	AREA	0	-4020.62	60.00	6225.16	0	1	a Tusken raider	tusken_raider_30_h_agg_n	poi	Fort Tusken	1	GUARD	idle	0	0	0	0	300	120	0
-901639	TATOOINE	tat_world	AREA	0	-4006.72	68.51	6290.50	0	1	a Tusken sniper	tusken_sniper_30_h_agg_n	poi	Fort Tusken	1	GUARD	idle	0	0	0	0	300	120	0
-901640	TATOOINE	tat_world	AREA	0	-6109.88	24.84	-3360.46	0	1	a jundland eopie	eopie_jundland_21_c_att_n	poi	Great Pit of Carkoon	3	FLOAT	idle	0	0	0	0	300	120	6
-901641	TATOOINE	tat_world	AREA	0	-6112.28	27.22	-3374.95	0	1	a jundland eopie	eopie_jundland_21_c_att_n	poi	Great Pit of Carkoon	3	FLOAT	idle	0	0	0	0	300	120	6
-901642	TATOOINE	tat_world	AREA	0	-5880.49	50.47	-5932.83	0	1	an Elite Dune Lizzard	lizard_dune_elite_18_c_agg_e	poi	Jabbas Palace	1	GUARD	idle	0	0	0	0	300	120	0
-901643	TATOOINE	tat_world	AREA	0	-5891.39	49.52	-5967.41	0	1	an Elite Dune Lizzard	lizard_dune_elite_18_c_agg_e	poi	Jabbas Palace	1	GUARD	idle	0	0	0	0	300	120	0
-901644	TATOOINE	tat_world	AREA	0	-5927.21	49.47	-5931.22	0	1	an Elite Dune Lizzard	lizard_dune_elite_18_c_agg_e	poi	Jabbas Palace	1	GUARD	idle	0	0	0	0	300	120	0
-901645	TATOOINE	tat_world	AREA	0	-5936.96	51.73	-5974.32	0	1	an Elite Dune Lizzard	lizard_dune_elite_18_c_agg_e	poi	Jabbas Palace	1	GUARD	idle	0	0	0	0	300	120	0
-901646	TATOOINE	tat_world	AREA	0	-5969.66	53.20	-5960.45	0	1	an Elite Dune Lizzard	lizard_dune_elite_18_c_agg_e	poi	Jabbas Palace	1	GUARD	idle	0	0	0	0	300	120	0
-901647	TATOOINE	tat_world	AREA	0	-6178.00	90.00	-6381.60	53	1	Klaatu	klaatu_100_h_inv_n	poi	Jabbas Palace	1	STOP	idle	0	0	0	0	300	120	0
-901648	TATOOINE	tat_world	AREA	0	-5943.73	58.73	-6043.00	0	1	Gotan	smuggler_broker_gotan_100_h_inv_n	poi	Jabbas Palace	1	STOP	idle	0	0	0	0	300	120	0
-901649	TATOOINE	tat_world	AREA	0	-5858.00	90.00	-6193.00	48	1	Smuggler Pilot	smuggler_pilot_100_h_inv_n	poi	Jabbas Palace	1	STOP	idle	0	0	0	0	300	120	0
-901650	TATOOINE	tat_world	AREA	0	-6001.97	44.20	1852.10	0	1	a greater desert womp rat	womprat_great_desert_12_c_agg_n	poi	Jawa Traders	1	GUARD	idle	0	0	0	0	300	120	0
-901651	TATOOINE	tat_world	AREA	0	-6157.95	51.10	2029.82	0	1	a greater desert womp rat	womprat_great_desert_12_c_agg_n	poi	Jawa Traders	1	GUARD	idle	0	0	0	0	300	120	0
-901652	TATOOINE	tat_world	AREA	0	-6249.46	36.67	1961.83	0	1	a greater desert womp rat	womprat_great_desert_12_c_agg_n	poi	Jawa Traders	1	GUARD	idle	0	0	0	0	300	120	0
-901653	TATOOINE	tat_world	AREA	0	-6285.12	44.68	1918.76	0	1	a greater desert womp rat	womprat_great_desert_12_c_agg_n	poi	Jawa Traders	1	GUARD	idle	0	0	0	0	300	120	0
-901654	TATOOINE	tat_world	AREA	0	-6031.30	42.31	1948.73	0	1	a wild zucca boar	boar_zucca_wild_19_c_att_n	poi	Jawa Traders	1	GUARD	idle	0	0	0	0	300	120	0
-901655	TATOOINE	tat_world	AREA	0	-6398.04	295.01	2165.62	0	1	a wild zucca boar	boar_zucca_wild_19_c_att_n	poi	Jawa Traders	1	GUARD	idle	0	0	0	0	300	120	0
-901656	TATOOINE	tat_world	AREA	0	-6423.25	301.19	2157.23	0	1	a wild zucca boar	boar_zucca_wild_19_c_att_n	poi	Jawa Traders	1	GUARD	idle	0	0	0	0	300	120	0
-901657	TATOOINE	tat_world	AREA	0	-6076.67	52.56	2013.90	0	1	a wild bladeback boar	boar_bladeback_wild_40_c_att_n	poi	Jawa Traders	1	GUARD	idle	0	0	0	0	300	120	0
-901658	TATOOINE	tat_world	AREA	0	-6411.07	308.48	2155.44	0	1	a wild bladeback boar	boar_bladeback_wild_40_c_att_n	poi	Jawa Traders	1	GUARD	idle	0	0	0	0	1800	1500	0
-901659	TATOOINE	tat_world	AREA	0	-6205.45	23.63	1845.75	155	1	Acic Ugadie	acic_ugadie_100_h_inv_n	poi	Jawa Traders	1	STOP	idle	0	0	0	0	300	120	0
-901660	TATOOINE	tat_world	AREA	0	-6144.20	23.56	1872.19	-38	1	Opeute	opeute_100_h_inv_n	poi	Jawa Traders	1	STOP	npc_use_terminal_high	0	0	0	0	300	120	0
-901661	TATOOINE	tat_world	AREA	0	-6152.01	23.63	1812.08	-166	1	Ji'Ni Sil	tatooine_watto_jawa_100_h_inv_n	poi	Jawa Traders	1	STOP	idle	0	0	0	0	300	120	0
-901662	TATOOINE	tat_world	AREA	0	-5998.23	62.91	1805.95	0	1	Tusken Follower	tusken_raider_18_h_agg_n	poi	Jawa Traders	1	GUARD	idle	0	0	0	0	300	120	0
-901663	TATOOINE	tat_world	AREA	0	-6158.00	23.59	1836.00	-173	1	Protocol Droid	protocol_droid_jawa_fort_100_d_inv_n	poi	Jawa Traders	1	STOP	idle	0	0	0	0	300	120	0
-901664	TATOOINE	tat_world	AREA	0	-6152.08	23.63	1810.50	0	1	C4-ZX	som_decrepit_cww8_combat_droid_83_d_agg_b	poi	Jawa Traders	1	STOP	idle	0	0	0	0	300	120	0
-901665	TATOOINE	tat_world	AREA	0	7358.00	14.60	4486.60	0	1	a juvenile canyon krayt dragon	krayt_dragon_juvenile_canyon_82_c_agg_b	poi	Krayt Graveyard	3	FLOAT	idle	0	0	0	0	1200	900	50
-901666	TATOOINE	tat_world	AREA	0	6985.46	14.63	4368.01	0	1	a krayt dragon ancient	krayt_dragon_ancient_90_c_agg_b	poi	Krayt Graveyard	1	FLOAT	idle	0	0	0	0	1800	1200	30
-901667	TATOOINE	tat_world	AREA	0	7432.96	6.44	4561.59	0	1	a krayt dragon ancient	krayt_dragon_ancient_90_c_agg_b	poi	Krayt Graveyard	1	FLOAT	idle	0	0	0	0	1800	1200	30
-901668	TATOOINE	tat_world	AREA	0	7432.96	6.44	4561.59	0	1	a krayt dragon ancient	krayt_dragon_ancient_90_c_agg_b	poi	Krayt Graveyard	1	FLOAT	idle	0	0	0	0	1200	900	30
-901669	TATOOINE	tat_world	AREA	0	7484.33	8.10	4483.69	0	1	a krayt dragon ancient	krayt_dragon_ancient_90_c_agg_b	poi	Krayt Graveyard	1	FLOAT	idle	0	0	0	0	1200	900	30
-901670	TATOOINE	tat_world	AREA	0	7428.00	5.71	4528.97	0	1	a grand krayt dragon	krayt_dragon_grand_88_c_agg_b	poi	Krayt Graveyard	2	FLOAT	idle	0	0	0	0	1800	1200	30
-901671	TATOOINE	tat_world	AREA	0	7428.00	5.71	4528.97	0	1	a grand krayt dragon	krayt_dragon_grand_88_c_agg_b	poi	Krayt Graveyard	2	FLOAT	idle	0	0	0	0	1200	900	30
-901672	TATOOINE	tat_world	AREA	0	-2451.89	0.00	-5363.11	0	1	a greater desert womp rat	womprat_great_desert_12_c_agg_n	poi	Lars Homestead	2	FLOAT	idle	0	0	0	0	300	120	4
-901673	TATOOINE	tat_world	AREA	0	-2455.24	0.00	-5384.64	0	1	a greater desert womp rat	womprat_great_desert_12_c_agg_n	poi	Lars Homestead	2	FLOAT	idle	0	0	0	0	300	120	4
-901674	TATOOINE	tat_world	AREA	0	-2481.61	0.00	-5364.43	0	1	a greater desert womp rat	womprat_great_desert_12_c_agg_n	poi	Lars Homestead	2	FLOAT	idle	0	0	0	0	300	120	4
-901675	TATOOINE	tat_world	AREA	0	-2575.00	0.00	-5517.00	0	1	Zef Ando	legacy_zef_ando_100_h_inv_n	poi	Lars Homestead	1	STOP	idle	0	0	0	0	300	120	0
-901676	TATOOINE	tat_world	AREA	0	-2568.00	0.00	-5636.40	0	1	a modified Battle Droid	som_decrepit_colonel_or5_86_d_agg_b	poi	Lars Homestead	3	FLOAT	idle	0	0	0	0	90	60	6
-901677	TATOOINE	tat_world	AREA	0	919.86	0.76	3825.38	0	1	Tusken Follower	tusken_raider_18_h_agg_n	poi	Old Mos Espa Arena Track	2	FLOAT	idle	0	0	0	0	300	120	4
-901678	TATOOINE	tat_world	AREA	0	930.01	0.92	3819.76	0	1	Tusken Follower	tusken_raider_18_h_agg_n	poi	Old Mos Espa Arena Track	2	FLOAT	idle	0	0	0	0	300	120	4
-901679	TATOOINE	tat_world	AREA	0	938.35	0.88	3828.66	0	1	Tusken Follower	tusken_raider_18_h_agg_n	poi	Old Mos Espa Arena Track	2	FLOAT	idle	0	0	0	0	300	120	4
-901680	TATOOINE	tat_world	AREA	0	2380.24	2.00	4999.61	-91	1	Race Coordinator	race_coordinator_protocol_100_d_inv_n	poi	Old Mos Espa Arena Track	1	STOP	idle	0	0	0	0	300	120	0
+901214	TATOOINE	tat_world	AREA	0	2837.46	41.75	-4838.16	0	1	an error-prone battle droid	som_battlefield_hk77_squad_leader_80_d_agg_e	city	Mos Eisley	1	GUARD	idle	0	0	0	0	300	120	0
+901215	TATOOINE	tat_world	AREA	0	2840.07	41.39	-4804.57	0	1	an error-prone battle droid	som_battlefield_hk77_squad_leader_80_d_agg_e	city	Mos Eisley	1	GUARD	idle	0	0	0	0	300	120	0
+901216	TATOOINE	tat_world	AREA	0	2863.97	38.87	-4848.79	0	1	an error-prone battle droid	som_battlefield_hk77_squad_leader_80_d_agg_e	city	Mos Eisley	1	GUARD	idle	0	0	0	0	300	120	0
+901217	TATOOINE	tat_world	AREA	0	2866.79	33.05	-4881.06	0	1	an error-prone battle droid	som_battlefield_hk77_squad_leader_80_d_agg_e	city	Mos Eisley	1	GUARD	idle	0	0	0	0	300	120	0
+901218	TATOOINE	tat_world	AREA	0	2870.48	34.51	-4778.94	0	1	an error-prone battle droid	som_battlefield_hk77_squad_leader_80_d_agg_e	city	Mos Eisley	1	GUARD	idle	0	0	0	0	300	120	0
+901219	TATOOINE	tat_world	AREA	0	2870.79	39.09	-4816.73	0	1	an error-prone battle droid	som_battlefield_hk77_squad_leader_80_d_agg_e	city	Mos Eisley	1	GUARD	idle	0	0	0	0	300	120	0
+901220	TATOOINE	tat_world	AREA	0	2888.90	38.56	-4814.63	0	1	an error-prone battle droid	som_battlefield_hk77_squad_leader_80_d_agg_e	city	Mos Eisley	1	GUARD	idle	0	0	0	0	300	120	0
+901221	TATOOINE	tat_world	AREA	0	2891.80	38.79	-4791.32	0	1	an error-prone battle droid	som_battlefield_hk77_squad_leader_80_d_agg_e	city	Mos Eisley	1	GUARD	idle	0	0	0	0	300	120	0
+901222	TATOOINE	tat_world	AREA	0	2924.98	36.16	-4802.26	0	1	an error-prone battle droid	som_battlefield_hk77_squad_leader_80_d_agg_e	city	Mos Eisley	1	GUARD	idle	0	0	0	0	300	120	0
+901223	TATOOINE	tat_world	AREA	0	1521.00	7.00	3259.00	177	1	Kolka Zteht	kolka_zteht_100_h_inv_n	city	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+901224	TATOOINE	tat_world	AREA	0	1539.52	7.00	3105.38	0	1	Galuf Cardaan	commando_reward_100_h_inv_n	city	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+901225	TATOOINE	tat_world	AREA	0	1187.85	7.00	2996.69	-162	1	a commoner	commoner_100_h_inv_n	city	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+901226	TATOOINE	tat_world	AREA	0	1271.84	7.00	2971.41	-6	1	a commoner	commoner_100_h_inv_n	city	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+901227	TATOOINE	tat_world	AREA	0	1282.79	7.00	3052.74	-107	1	Mos Entha Shipping Master	shipping_master_mosentha_100_h_inv_n	city	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+901228	TATOOINE	tat_world	AREA	0	1529.61	7.00	3313.08	95	1	Sarlis Beni	profession_spy_2_tatooine_sarlis_100_h_inv_n	city	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+901229	TATOOINE	tat_world	AREA	0	1536.87	7.00	3051.99	154	1	Sarlin	smuggler_fence_sarlin_100_h_inv_n	city	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+901230	TATOOINE	tat_world	AREA	0	1514.00	7.00	3313.00	-92	1	Wren	smuggler_fence_wren_100_h_inv_n	city	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+901231	TATOOINE	tat_world	AREA	0	1283.42	7.00	3154.62	141	1	Tweego	tatooine_tweego_100_h_inv_n	city	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+901232	TATOOINE	tat_world	AREA	0	1124.11	6.97	2982.60	71	1	RC-1Z	som_8t88_1_d_att_n	city	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+901233	TATOOINE	tat_world	AREA	0	1353.48	7.00	3051.41	-41	1	RC-2X	som_battlefield_ak1a_hammer_82_d_agg_b	city	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+901234	TATOOINE	tat_world	AREA	0	1702.92	7.00	3076.48	57	1	RC-3T	som_battlefield_ak3_reaper_82_d_agg_b	city	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+901235	TATOOINE	tat_world	AREA	0	1351.03	11.00	3108.34	46	1	An'Kwee	som_battlefield_forward_comm_mki_84_d_agg_b	city	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+901236	TATOOINE	tat_world	AREA	0	1328.70	7.00	3265.39	176	1	Draknus	som_battlefield_hk77_assault_soldier_80_d_agg_e	city	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+901237	TATOOINE	tat_world	AREA	0	-2379.48	88.51	1849.94	0	1	an Elite Dune Lizzard	lizard_dune_elite_18_c_agg_e	city	Mos Espa	1	GUARD	idle	0	0	0	0	300	120	0
+901238	TATOOINE	tat_world	AREA	0	-2409.24	56.66	1845.40	0	1	an Elite Dune Lizzard	lizard_dune_elite_18_c_agg_e	city	Mos Espa	1	GUARD	idle	0	0	0	0	300	120	0
+901239	TATOOINE	tat_world	AREA	0	-2418.00	22.93	1908.00	0	1	an Elite Dune Lizzard	lizard_dune_elite_18_c_agg_e	city	Mos Espa	1	GUARD	idle	0	0	0	0	300	120	0
+901240	TATOOINE	tat_world	AREA	0	-2488.84	8.87	2091.49	0	1	a mound mite	mite_mound_4_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	300	120	6
+901241	TATOOINE	tat_world	AREA	0	-2543.46	7.66	2546.22	0	1	a mound mite	mite_mound_4_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	300	120	6
+901242	TATOOINE	tat_world	AREA	0	-2572.27	7.36	1800.51	0	1	a mound mite	mite_mound_4_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	300	120	6
+901243	TATOOINE	tat_world	AREA	0	-2634.00	14.53	2698.76	0	1	a mound mite	mite_mound_4_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	300	120	6
+901244	TATOOINE	tat_world	AREA	0	-2760.97	6.22	1650.09	0	1	a mound mite	mite_mound_4_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	300	120	6
+901245	TATOOINE	tat_world	AREA	0	-2763.38	6.10	2752.71	0	1	a mound mite	mite_mound_4_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	300	120	6
+901246	TATOOINE	tat_world	AREA	0	-2912.18	5.12	2829.86	0	1	a mound mite	mite_mound_4_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	90	60	6
+901247	TATOOINE	tat_world	AREA	0	-3035.05	11.47	1651.13	0	1	a mound mite	mite_mound_4_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	90	60	6
+901248	TATOOINE	tat_world	AREA	0	-3074.37	6.70	2856.13	0	1	a mound mite	mite_mound_4_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	90	60	6
+901249	TATOOINE	tat_world	AREA	0	-3208.30	7.84	2757.09	0	1	a mound mite	mite_mound_4_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	90	60	6
+901250	TATOOINE	tat_world	AREA	0	-3225.02	13.16	1761.17	0	1	a mound mite	mite_mound_4_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	90	60	6
+901251	TATOOINE	tat_world	AREA	0	-2667.41	5.00	2490.64	0	1	a greater Tatooinian mynock	mynock_greater_tatooinian_18_c_agg_n	city	Mos Espa	1	GUARD	idle	0	0	0	0	300	120	0
+901252	TATOOINE	tat_world	AREA	0	-2701.39	5.00	2516.31	0	1	a greater Tatooinian mynock	mynock_greater_tatooinian_18_c_agg_n	city	Mos Espa	1	GUARD	idle	0	0	0	0	300	120	0
+901253	TATOOINE	tat_world	AREA	0	-2723.58	5.00	2493.05	0	1	a greater Tatooinian mynock	mynock_greater_tatooinian_18_c_agg_n	city	Mos Espa	1	GUARD	idle	0	0	0	0	300	120	0
+901254	TATOOINE	tat_world	AREA	0	-2729.91	5.00	2456.94	0	1	a greater Tatooinian mynock	mynock_greater_tatooinian_18_c_agg_n	city	Mos Espa	1	GUARD	idle	0	0	0	0	300	120	0
+901255	TATOOINE	tat_world	AREA	0	-2743.81	5.31	2557.01	0	1	a greater Tatooinian mynock	mynock_greater_tatooinian_18_c_agg_n	city	Mos Espa	1	GUARD	idle	0	0	0	0	300	120	0
+901256	TATOOINE	tat_world	AREA	0	-2794.62	5.00	2508.54	0	1	a greater Tatooinian mynock	mynock_greater_tatooinian_18_c_agg_n	city	Mos Espa	1	GUARD	idle	0	0	0	0	300	120	0
+901257	TATOOINE	tat_world	AREA	0	-2473.74	7.03	2132.97	0	1	a womp rat	womprat_4_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	300	120	6
+901258	TATOOINE	tat_world	AREA	0	-2547.93	8.91	1819.24	0	1	a womp rat	womprat_4_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	300	120	6
+901259	TATOOINE	tat_world	AREA	0	-2561.20	10.14	2580.10	0	1	a womp rat	womprat_4_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	300	120	6
+901260	TATOOINE	tat_world	AREA	0	-2639.38	6.91	2679.92	0	1	a womp rat	womprat_4_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	300	120	6
+901261	TATOOINE	tat_world	AREA	0	-2800.39	9.99	1649.52	0	1	a womp rat	womprat_4_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	300	120	6
+901262	TATOOINE	tat_world	AREA	0	-2808.59	5.02	2765.92	0	1	a womp rat	womprat_4_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	300	120	6
+901263	TATOOINE	tat_world	AREA	0	-2940.36	5.30	2844.10	0	1	a womp rat	womprat_4_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	90	60	6
+901264	TATOOINE	tat_world	AREA	0	-3061.35	11.23	1651.79	0	1	a womp rat	womprat_4_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	90	60	6
+901265	TATOOINE	tat_world	AREA	0	-3120.41	5.87	2839.60	0	1	a womp rat	womprat_4_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	90	60	6
+901266	TATOOINE	tat_world	AREA	0	-3222.24	11.15	1793.39	0	1	a womp rat	womprat_4_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	90	60	6
+901267	TATOOINE	tat_world	AREA	0	-3242.33	9.06	2733.72	0	1	a womp rat	womprat_4_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	90	60	6
+901268	TATOOINE	tat_world	AREA	0	-2463.67	8.31	2100.39	0	1	a tempest rill	rill_tempest_8_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	300	120	6
+901269	TATOOINE	tat_world	AREA	0	-2531.05	9.30	2592.47	0	1	a tempest rill	rill_tempest_8_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	300	120	6
+901270	TATOOINE	tat_world	AREA	0	-2568.63	8.80	1825.13	0	1	a tempest rill	rill_tempest_8_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	300	120	6
+901271	TATOOINE	tat_world	AREA	0	-2609.47	11.70	2691.52	0	1	a tempest rill	rill_tempest_8_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	300	120	6
+901272	TATOOINE	tat_world	AREA	0	-2780.04	7.52	1625.98	0	1	a tempest rill	rill_tempest_8_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	300	120	6
+901273	TATOOINE	tat_world	AREA	0	-2780.17	6.46	2773.62	0	1	a tempest rill	rill_tempest_8_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	300	120	6
+901274	TATOOINE	tat_world	AREA	0	-2914.78	5.63	2853.26	0	1	a tempest rill	rill_tempest_8_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	90	60	6
+901275	TATOOINE	tat_world	AREA	0	-3049.01	7.89	1667.27	0	1	a tempest rill	rill_tempest_8_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	90	60	6
+901276	TATOOINE	tat_world	AREA	0	-3109.14	6.91	2870.83	0	1	a tempest rill	rill_tempest_8_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	90	60	6
+901277	TATOOINE	tat_world	AREA	0	-3207.38	9.50	1775.71	0	1	a tempest rill	rill_tempest_8_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	90	60	6
+901278	TATOOINE	tat_world	AREA	0	-3232.08	8.89	2754.94	0	1	a tempest rill	rill_tempest_8_c_att_n	city	Mos Espa	3	FLOAT	idle	0	0	0	0	90	60	6
+901279	TATOOINE	tat_world	AREA	0	-2911.00	5.00	2126.58	156	1	Anim Kahn (a Valarian pilot)	anim_kahn_100_h_inv_n	city	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+901280	TATOOINE	tat_world	AREA	0	-3101.73	5.00	2184.57	118	1	Giaal Itotr	giaal_itotr_100_h_inv_n	city	Mos Espa	1	STOP	npc_sitting_chair	0	0	0	0	300	120	0
+901281	TATOOINE	tat_world	AREA	0	-2768.12	5.00	2110.43	104	1	Klepa Laeel	klepa_laeel_100_h_inv_n	city	Mos Espa	1	STOP	npc_sitting_chair	0	0	0	0	300	120	0
+901282	TATOOINE	tat_world	AREA	0	-2709.17	5.00	2180.03	0	1	a commoner	commoner_human_male_100_h_inv_n	city	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+901283	TATOOINE	tat_world	AREA	0	-3056.43	7.50	2085.34	-38	1	Kav Goldor	feeder_tusken_militia_leader_100_h_inv_n	city	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+901284	TATOOINE	tat_world	AREA	0	-2799.39	5.00	2259.96	-141	1	Srimaur	feeder_tusken_questgiver_100_h_inv_n	city	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+901285	TATOOINE	tat_world	AREA	0	-3507.36	13.99	2058.06	0	1	a Jawa	jawa_16_h_att_n	city	Mos Espa	1	GUARD	idle	0	0	0	0	300	120	0
+901286	TATOOINE	tat_world	AREA	0	-3512.98	13.99	2058.01	0	1	a Jawa Avenger	jawa_avenger_18_h_att_n	city	Mos Espa	1	GUARD	idle	0	0	0	0	300	120	0
+901287	TATOOINE	tat_world	AREA	0	-2814.23	5.00	1939.70	-77	1	Kaeline Ungasan	kaeline_ungasan_100_h_inv_n	city	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+901288	TATOOINE	tat_world	AREA	0	-2886.68	5.00	2493.45	-34	1	Kister Banai	kitster_banai_100_h_inv_n	city	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+901289	TATOOINE	tat_world	AREA	0	-2978.04	5.00	2458.54	98	1	Mat Rags	mat_rags_100_h_inv_n	city	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+901290	TATOOINE	tat_world	PATROL	0	-3123.44	5.00	2306.53	0	1	a Mos Espa security officer	mos_espa_police_officer_35_h_att_n	city	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+901291	TATOOINE	tat_world	PATROL	0	-3124.05	5.00	2308.59	0	1	a Mos Espa security officer	mos_espa_police_officer_35_h_att_n	city	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+901292	TATOOINE	tat_world	PATROL	0	-3127.28	5.00	2307.78	0	1	a Mos Espa security officer	mos_espa_police_officer_35_h_att_n	city	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+901293	TATOOINE	tat_world	PATROL	0	-3142.22	5.00	2209.95	0	1	a Mos Espa security officer	mos_espa_police_officer_35_h_att_n	city	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+901294	TATOOINE	tat_world	PATROL	0	-3144.34	5.00	2211.37	0	1	a Mos Espa security officer	mos_espa_police_officer_35_h_att_n	city	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+901295	TATOOINE	tat_world	PATROL	0	-3147.51	5.00	2206.64	0	1	a Mos Espa security officer	mos_espa_police_officer_35_h_att_n	city	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+901296	TATOOINE	tat_world	AREA	0	-2910.90	5.00	2124.30	95	1	Prost Roberts (an untrained pilot)	prost_roberts_100_h_inv_n	city	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+901297	TATOOINE	tat_world	AREA	0	-2909.87	5.00	2122.35	12	1	Rel Keteris (a Hutt pilot)	rel_keteris_100_h_inv_n	city	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+901298	TATOOINE	tat_world	AREA	0	-3085.52	5.00	2050.64	78	1	Caryn	smuggler_fence_caryn_100_h_inv_n	city	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+901299	TATOOINE	tat_world	AREA	0	-3105.00	5.00	2314.00	82	1	Diala	smuggler_fence_diala_100_h_inv_n	city	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+901300	TATOOINE	tat_world	AREA	0	-3041.38	5.00	2212.60	-37	1	Propti Xaroon	tatooine_propti_xaroon_100_h_inv_n	city	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+901301	TATOOINE	tat_world	AREA	0	-2883.40	5.00	2581.22	0	1	Guz'Ordnak	tatooine_repo_buhba_16_h_agg_n	city	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+901302	TATOOINE	tat_world	AREA	0	-2873.36	5.00	2591.36	-94	1	Eyleen	tatooine_repo_daezii_16_h_agg_n	city	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+901303	TATOOINE	tat_world	AREA	0	-2879.00	5.00	2579.72	-43	1	Tiomvo	tatooine_repo_kleetuz_16_h_agg_n	city	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+901304	TATOOINE	tat_world	AREA	0	-2878.69	5.00	2584.96	-40	1	Hilbrun	tatooine_repo_pah_16_h_agg_n	city	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+901305	TATOOINE	tat_world	AREA	0	-2975.55	5.00	1910.64	0	1	Peggin Dulin	tatooine_watto_peggin_100_h_inv_n	city	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+901306	TATOOINE	tat_world	AREA	0	-2980.00	5.00	2534.00	-57	1	Beast Trainer	trainer_beast_master_100_h_inv_n	city	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+901307	TATOOINE	tat_world	AREA	0	-2866.54	5.00	1856.86	169	1	Syndil Na'Marr	watto_leg_syndil_100_h_inv_n	city	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
+901308	TATOOINE	tat_world	AREA	0	-3157.38	5.00	2197.87	0	1	a slum thief	watto_thieves_16_h_agg_n	city	Mos Espa	1	GUARD	idle	0	0	0	0	300	120	0
+901309	TATOOINE	tat_world	AREA	0	-3163.77	5.00	2154.74	0	1	a slum thief	watto_thieves_16_h_agg_n	city	Mos Espa	1	GUARD	idle	0	0	0	0	300	120	0
+901310	TATOOINE	tat_world	AREA	0	-3171.52	5.00	2170.10	0	1	a slum thief	watto_thieves_16_h_agg_n	city	Mos Espa	1	GUARD	idle	0	0	0	0	300	120	0
+901311	TATOOINE	tat_world	AREA	0	-3188.34	5.00	2187.88	0	1	a slum thief	watto_thieves_16_h_agg_n	city	Mos Espa	1	GUARD	idle	0	0	0	0	300	120	0
+901312	TATOOINE	tat_world	PATROL	0	-2729.66	5.00	2243.34	0	1	a thug	thug_100_h_inv_n	city	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+901313	TATOOINE	tat_world	PATROL	0	-2744.71	5.00	2031.26	0	1	a thug	thug_100_h_inv_n	city	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+901314	TATOOINE	tat_world	PATROL	0	-2801.48	5.00	2325.69	0	1	a thug	thug_100_h_inv_n	city	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+901315	TATOOINE	tat_world	PATROL	0	-2859.00	5.00	2252.72	0	1	a thug	thug_100_h_inv_n	city	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+901316	TATOOINE	tat_world	PATROL	0	-2912.16	5.00	2138.15	0	1	a thug	thug_100_h_inv_n	city	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+901317	TATOOINE	tat_world	PATROL	0	-2918.43	5.00	2400.58	0	1	a thug	thug_100_h_inv_n	city	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+901318	TATOOINE	tat_world	AREA	0	-2925.56	5.00	2014.03	0	1	a thug	thug_100_h_inv_n	city	Mos Espa	1	GUARD	idle	0	0	0	0	300	120	0
+901319	TATOOINE	tat_world	PATROL	0	-2958.01	5.00	2538.51	0	1	a thug	thug_100_h_inv_n	city	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+901320	TATOOINE	tat_world	PATROL	0	-2996.41	5.00	2326.36	0	1	a thug	thug_100_h_inv_n	city	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+901321	TATOOINE	tat_world	PATROL	0	-3065.09	5.00	2142.42	0	1	a thug	thug_100_h_inv_n	city	Mos Espa	3	PATROL	idle	0	999	0	0	300	120	0
+901322	TATOOINE	tat_world	PATROL	0	-2913.84	5.00	2115.85	0	1	an EG-6 power droid	eg6_power_droid_100_d_inv_n	city	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+901323	TATOOINE	tat_world	PATROL	0	-2922.73	5.00	2430.36	0	1	an EG-6 power droid	eg6_power_droid_100_d_inv_n	city	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+901324	TATOOINE	tat_world	PATROL	0	-2942.90	5.00	2179.05	0	1	an R3 unit	r3_droid_100_d_inv_n	city	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+901325	TATOOINE	tat_world	PATROL	0	-2973.18	5.00	2112.63	0	1	an R3 unit	r3_droid_100_d_inv_n	city	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+901326	TATOOINE	tat_world	PATROL	0	-2938.53	5.00	2197.92	0	1	an R4 unit	r4_droid_100_d_inv_n	city	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+901327	TATOOINE	tat_world	PATROL	0	-2915.29	5.00	2450.70	0	1	an R5 unit	r5_droid_100_d_inv_n	city	Mos Espa	1	PATROL	idle	0	999	0	0	300	120	0
+901328	TATOOINE	tat_world	AREA	0	3770.00	8.30	2345.00	0	1	Bren Kingal	bren_kingal_100_h_inv_n	city	Mos Taike	1	STOP	idle	0	0	0	0	300	120	0
+901329	TATOOINE	tat_world	AREA	0	3950.00	54.00	2280.00	-39	1	a commoner	commoner_100_h_inv_n	city	Mos Taike	1	STOP	idle	0	0	0	0	300	120	0
+901330	TATOOINE	tat_world	AREA	0	3775.01	9.11	2373.98	-178	1	Kerhi hi-Lak	kerhi_hilak_ice_cream_100_h_inv_n	city	Mos Taike	1	STOP	idle	0	0	0	0	300	120	0
+901331	TATOOINE	tat_world	AREA	0	3949.82	8.93	2417.74	-116	1	Meatlump Donk (Outpost Guard)	meatlump_outpost_guard_donk_65_h_att_n	city	Mos Taike	1	GUARD	idle	0	0	0	0	300	120	0
+901332	TATOOINE	tat_world	AREA	0	3976.65	10.55	2417.68	93	1	Meatlump Donk (Outpost Guard)	meatlump_outpost_guard_donk_65_h_att_n	city	Mos Taike	1	GUARD	idle	0	0	0	0	300	120	0
+901333	TATOOINE	tat_world	AREA	0	3960.05	10.90	2405.57	-162	1	Meatlump Dunder (Outpost Guard)	meatlump_outpost_guard_dunder_65_h_att_n	city	Mos Taike	1	GUARD	idle	0	0	0	0	300	120	0
+901334	TATOOINE	tat_world	AREA	0	3838.01	16.10	2334.56	-172	1	Kara	smuggler_fence_kara_100_h_inv_n	city	Mos Taike	1	STOP	idle	0	0	0	0	300	120	0
+901335	TATOOINE	tat_world	AREA	0	3796.77	11.67	2406.15	0	1	a wary pirate	spy_pirate_20_h_agg_n	city	Mos Taike	1	GUARD	idle	0	0	0	0	300	120	0
+901336	TATOOINE	tat_world	AREA	0	3797.51	12.06	2385.96	0	1	a wary pirate	spy_pirate_20_h_agg_n	city	Mos Taike	1	GUARD	idle	0	0	0	0	300	120	0
+901337	TATOOINE	tat_world	AREA	0	3809.44	13.99	2403.86	0	1	a wary pirate	spy_pirate_20_h_agg_n	city	Mos Taike	1	GUARD	idle	0	0	0	0	300	120	0
+901338	TATOOINE	tat_world	AREA	0	3818.27	15.96	2386.27	0	1	a wary pirate	spy_pirate_20_h_agg_n	city	Mos Taike	1	GUARD	idle	0	0	0	0	300	120	0
+901339	TATOOINE	tat_world	AREA	0	3820.80	16.37	2387.34	0	1	a wary pirate	spy_pirate_20_h_agg_n	city	Mos Taike	1	GUARD	idle	0	0	0	0	300	120	0
+901340	TATOOINE	tat_world	AREA	0	3823.38	15.45	2413.95	0	1	a wary pirate	spy_pirate_20_h_agg_n	city	Mos Taike	1	GUARD	idle	0	0	0	0	300	120	0
+901341	TATOOINE	tat_world	AREA	0	3808.42	14.31	2397.29	-33	1	Eyan McDermitt	spy_pirate_leader_100_h_inv_n	city	Mos Taike	1	STOP	idle	0	0	0	0	300	120	0
+901342	TATOOINE	tat_world	AREA	0	-5238.80	75.00	-6568.10	114	1	Boulo Siesi	boulo_siesi_100_h_inv_n	city	Wayfar	1	STOP	idle	0	0	0	0	300	120	0
+901343	TATOOINE	tat_world	AREA	0	-5095.00	75.00	-6527.80	-149	1	a commoner	commoner_100_h_inv_n	city	Wayfar	1	STOP	idle	0	0	0	0	300	120	0
+901344	TATOOINE	tat_world	AREA	0	-5120.00	75.00	-6594.70	-63	1	a commoner	commoner_100_h_inv_n	city	Wayfar	1	STOP	idle	0	0	0	0	300	120	0
+901345	TATOOINE	tat_world	AREA	0	-5128.70	75.00	-6542.40	-82	1	a commoner	commoner_100_h_inv_n	city	Wayfar	1	STOP	idle	0	0	0	0	300	120	0
+901346	TATOOINE	tat_world	AREA	0	-5176.30	75.00	-6612.10	0	1	a commoner	commoner_100_h_inv_n	city	Wayfar	1	STOP	idle	0	0	0	0	300	120	0
+901347	TATOOINE	tat_world	AREA	0	-5193.50	75.00	-6490.00	105	1	a commoner	commoner_100_h_inv_n	city	Wayfar	1	STOP	idle	0	0	0	0	300	120	0
+901348	TATOOINE	tat_world	AREA	0	-5213.60	75.00	-6474.20	0	1	a commoner	commoner_100_h_inv_n	city	Wayfar	1	STOP	idle	0	0	0	0	300	120	0
+901349	TATOOINE	tat_world	AREA	0	-5217.00	75.00	-6578.70	-52	1	a commoner	commoner_100_h_inv_n	city	Wayfar	1	STOP	idle	0	0	0	0	300	120	0
+901350	TATOOINE	tat_world	AREA	0	-5219.10	75.00	-6537.30	-4	1	a commoner	commoner_100_h_inv_n	city	Wayfar	1	STOP	npc_use_terminal_high	0	0	0	0	300	120	0
+901351	TATOOINE	tat_world	AREA	0	-5249.00	75.00	-6516.50	-40	1	a commoner	commoner_100_h_inv_n	city	Wayfar	1	STOP	idle	0	0	0	0	300	120	0
+901352	TATOOINE	tat_world	AREA	0	-5251.90	75.00	-6499.90	57	1	a commoner	commoner_100_h_inv_n	city	Wayfar	1	STOP	idle	0	0	0	0	300	120	0
+901353	TATOOINE	tat_world	AREA	0	-5263.30	75.00	-6516.50	-173	1	a commoner	commoner_100_h_inv_n	city	Wayfar	1	STOP	npc_use_terminal_high	0	0	0	0	300	120	0
+901354	TATOOINE	tat_world	AREA	0	-5269.40	75.00	-6562.60	115	1	a commoner	commoner_100_h_inv_n	city	Wayfar	1	STOP	idle	0	0	0	0	300	120	0
+901355	TATOOINE	tat_world	AREA	0	-5203.48	74.27	-6778.87	0	1	Meatlump Donk (Outpost Guard)	meatlump_outpost_guard_donk_65_h_att_n	city	Wayfar	1	GUARD	idle	0	0	0	0	300	120	0
+901356	TATOOINE	tat_world	AREA	0	-5217.07	71.99	-6795.03	0	1	Meatlump Dunder (Outpost Guard)	meatlump_outpost_guard_dunder_65_h_att_n	city	Wayfar	1	GUARD	idle	0	0	0	0	300	120	0
+901357	TATOOINE	tat_world	AREA	0	-5226.86	75.95	-6764.64	0	1	Meatlump Dunder (Outpost Guard)	meatlump_outpost_guard_dunder_65_h_att_n	city	Wayfar	1	GUARD	idle	0	0	0	0	300	120	0
+901358	TATOOINE	tat_world	AREA	0	-5127.11	75.00	-6577.50	118	1	Ozzmos Roberts	neut_title_grant_100_h_inv_n	city	Wayfar	1	STOP	idle	0	0	0	0	300	120	0
+901359	TATOOINE	tat_world	AREA	0	-5224.45	75.00	-6560.40	0	1	Romo Vax	romo_vax_100_h_inv_n	city	Wayfar	1	STOP	idle	0	0	0	0	300	120	0
+901360	TATOOINE	tat_world	AREA	0	-5185.00	75.00	-6458.00	129	1	Jalen	smuggler_fence_jalen_100_h_inv_n	city	Wayfar	1	STOP	idle	0	0	0	0	300	120	0
+901361	TATOOINE	tat_world	AREA	0	-5144.95	75.00	-6617.71	32	1	Porgryn	tatooine_porgryn_100_h_inv_n	city	Wayfar	1	STOP	idle	0	0	0	0	300	120	0
+901362	TATOOINE	tat_world	AREA	0	-5467.89	48.95	-6620.62	0	1	a Wayfar spy	tatooine_wayfar_spy_19_h_agg_n	city	Wayfar	1	GUARD	idle	0	0	0	0	300	120	0
+901363	TATOOINE	tat_world	AREA	0	-5472.44	45.58	-6585.63	0	1	a Wayfar spy	tatooine_wayfar_spy_19_h_agg_n	city	Wayfar	1	GUARD	idle	0	0	0	0	300	120	0
+901364	TATOOINE	tat_world	AREA	0	-5485.75	48.08	-6646.28	0	1	a Wayfar spy	tatooine_wayfar_spy_19_h_agg_n	city	Wayfar	1	GUARD	idle	0	0	0	0	300	120	0
+901365	TATOOINE	tat_world	AREA	0	-5501.27	42.98	-6626.84	0	1	a Wayfar spy	tatooine_wayfar_spy_19_h_agg_n	city	Wayfar	1	GUARD	idle	0	0	0	0	300	120	0
+901366	TATOOINE	tat_world	AREA	0	-5512.37	46.96	-6588.25	0	1	a Wayfar spy	tatooine_wayfar_spy_19_h_agg_n	city	Wayfar	1	GUARD	idle	0	0	0	0	300	120	0
+901367	TATOOINE	tat_world	AREA	0	-5516.14	48.04	-6649.05	0	1	a Wayfar spy	tatooine_wayfar_spy_19_h_agg_n	city	Wayfar	1	GUARD	idle	0	0	0	0	300	120	0
+901368	TATOOINE	tat_world	AREA	0	-5537.18	44.71	-6642.49	0	1	a Wayfar spy	tatooine_wayfar_spy_19_h_agg_n	city	Wayfar	1	GUARD	idle	0	0	0	0	300	120	0
+901369	TATOOINE	tat_world	AREA	0	-5543.10	38.36	-6616.68	0	1	a Wayfar spy	tatooine_wayfar_spy_19_h_agg_n	city	Wayfar	1	GUARD	idle	0	0	0	0	300	120	0
+901370	TATOOINE	tat_world	AREA	0	-5516.17	40.80	-6610.13	80	1	Dewall Paez (a Wayfar spy leader)	tatooine_wayfar_spy_leader_21_h_agg_n	city	Wayfar	1	STOP	idle	0	0	0	0	300	120	0
+901371	TATOOINE	tat_world	AREA	0	-5424.31	44.91	-6138.65	0	1	an Alkhara bandit	alkhara_bandit_15_h_att_n	dungeon	Alkhara Tower	1	GUARD	idle	0	0	0	0	300	120	0
+901372	TATOOINE	tat_world	AREA	0	-5430.66	37.35	-6113.18	0	1	an Alkhara bandit	alkhara_bandit_15_h_att_n	dungeon	Alkhara Tower	1	GUARD	idle	0	0	0	0	300	120	0
+901373	TATOOINE	tat_world	AREA	0	-5434.25	43.20	-6086.03	0	1	an Alkhara bandit	alkhara_bandit_15_h_att_n	dungeon	Alkhara Tower	1	GUARD	idle	0	0	0	0	300	120	0
+901374	TATOOINE	tat_world	AREA	0	-5444.39	41.23	-6131.12	0	1	an Alkhara bandit	alkhara_bandit_15_h_att_n	dungeon	Alkhara Tower	1	GUARD	idle	0	0	0	0	300	120	0
+901375	TATOOINE	tat_world	AREA	0	-5445.34	38.27	-6104.62	0	1	an Alkhara bandit	alkhara_bandit_15_h_att_n	dungeon	Alkhara Tower	1	GUARD	idle	0	0	0	0	300	120	0
+901376	TATOOINE	tat_world	AREA	0	-5459.78	38.86	-6105.30	0	1	an Alkhara bandit	alkhara_bandit_15_h_att_n	dungeon	Alkhara Tower	1	GUARD	idle	0	0	0	0	300	120	0
+901377	TATOOINE	tat_world	AREA	0	-5463.07	41.18	-6130.22	0	1	an Alkhara bandit	alkhara_bandit_15_h_att_n	dungeon	Alkhara Tower	1	GUARD	idle	0	0	0	0	300	120	0
+901378	TATOOINE	tat_world	AREA	0	-5473.93	39.59	-6115.12	0	1	an Alkhara bandit	alkhara_bandit_15_h_att_n	dungeon	Alkhara Tower	1	GUARD	idle	0	0	0	0	300	120	0
+901379	TATOOINE	tat_world	AREA	0	-5481.25	44.10	-6087.65	0	1	an Alkhara bandit	alkhara_bandit_15_h_att_n	dungeon	Alkhara Tower	1	GUARD	idle	0	0	0	0	300	120	0
+901380	TATOOINE	tat_world	AREA	0	-5417.33	41.61	-6044.50	0	1	a fringer	fringer_100_h_inv_n	dungeon	Alkhara Tower	3	FLOAT	idle	0	0	0	0	300	120	6
+901381	TATOOINE	tat_world	AREA	0	-3005.19	112.64	4486.41	0	1	a Hoverdale bandit	azure_hoverdale_bandit_83_h_agg_n	dungeon	Azure Cabal Hoverdale Cave	1	GUARD	idle	0	0	0	0	300	120	0
+901382	TATOOINE	tat_world	AREA	0	-3005.38	116.36	4507.77	0	1	a Hoverdale bandit	azure_hoverdale_bandit_83_h_agg_n	dungeon	Azure Cabal Hoverdale Cave	1	GUARD	idle	0	0	0	0	300	120	0
+901383	TATOOINE	tat_world	AREA	0	-3018.41	118.46	4526.83	0	1	a Hoverdale bandit	azure_hoverdale_bandit_83_h_agg_n	dungeon	Azure Cabal Hoverdale Cave	1	GUARD	idle	0	0	0	0	300	120	0
+901384	TATOOINE	tat_world	AREA	0	-3027.34	123.20	4501.64	0	1	a Hoverdale bandit	azure_hoverdale_bandit_83_h_agg_n	dungeon	Azure Cabal Hoverdale Cave	1	GUARD	idle	0	0	0	0	300	120	0
+901385	TATOOINE	tat_world	AREA	0	-3044.00	132.02	4537.64	0	1	a Hoverdale bandit	azure_hoverdale_bandit_83_h_agg_n	dungeon	Azure Cabal Hoverdale Cave	1	GUARD	idle	0	0	0	0	300	120	0
+901386	TATOOINE	tat_world	AREA	0	-304.10	48.20	-6940.30	36	1	Draci	draci_100_h_inv_n	dungeon	Darklighter Cave	1	STOP	idle	0	0	0	0	90	60	0
+901387	TATOOINE	tat_world	AREA	0	-6949.89	186.68	7071.89	0	1	a Tusken bantha	bantha_tusken_30_c_att_n	dungeon	Flatland Damprock	1	GUARD	idle	0	0	0	0	300	120	0
+901388	TATOOINE	tat_world	AREA	0	-7003.34	189.22	7080.75	0	1	a Tusken bantha	bantha_tusken_30_c_att_n	dungeon	Flatland Damprock	1	GUARD	idle	0	0	0	0	300	120	0
+901389	TATOOINE	tat_world	AREA	0	-6980.26	187.43	7081.17	0	1	Tusken Relic Guard	feeder_tusken_guard_85_h_agg_n	dungeon	Flatland Damprock	1	GUARD	idle	0	0	0	0	300	120	0
+901390	TATOOINE	tat_world	AREA	0	5098.37	22.59	595.03	0	1	Jabba's henchman	jabba_henchman_14_h_att_n	dungeon	Hutt Cave	3	FLOAT	idle	0	0	0	0	300	120	6
+901391	TATOOINE	tat_world	AREA	0	-5312.70	8.40	2662.60	0	1	Colonel Darkstone	imp_colonel_darkstone_100_h_inv_n	dungeon	Imperial Oasis	1	STOP	idle	0	0	0	0	300	120	0
+901392	TATOOINE	tat_world	AREA	0	-5357.00	5.40	2741.50	0	1	an Imperial colonel	fbase_imperial_colonel_100_h_inv_n	dungeon	Imperial Oasis	1	GUARD	idle	0	0	0	0	300	120	0
+901393	TATOOINE	tat_world	AREA	0	-5353.00	5.10	2750.00	0	1	Jubai Laetlii	spymaster_21_22_h_att_e	dungeon	Imperial Oasis	1	GUARD	idle	0	0	0	0	300	120	0
+901394	TATOOINE	tat_world	AREA	0	-5038.89	44.96	-6977.75	0	1	Romo Vax's henchman	tatooine_romo_vax_henchman_19_h_agg_n	dungeon	Romo Vax Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+901395	TATOOINE	tat_world	AREA	0	-5052.56	43.72	-6963.14	0	1	Romo Vax's henchman	tatooine_romo_vax_henchman_19_h_agg_n	dungeon	Romo Vax Bunker	1	STOP	idle	0	0	0	0	300	120	0
+901396	TATOOINE	tat_world	AREA	0	-5076.30	46.61	-6973.05	0	1	Romo Vax's henchman	tatooine_romo_vax_henchman_19_h_agg_n	dungeon	Romo Vax Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+901397	TATOOINE	tat_world	AREA	0	5676.19	180.00	-5767.41	0	1	a Jawa thief	jawa_thief_16_h_att_n	dungeon	Sand Slum Pirate Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+901398	TATOOINE	tat_world	AREA	0	5644.58	180.00	-5750.43	0	1	a sand slum pirate	quest_hero_of_tatooine_pirate_30_h_agg_n	dungeon	Sand Slum Pirate Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+901399	TATOOINE	tat_world	AREA	0	5651.06	179.98	-5726.82	0	1	a sand slum pirate	quest_hero_of_tatooine_pirate_30_h_agg_n	dungeon	Sand Slum Pirate Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+901400	TATOOINE	tat_world	AREA	0	5665.38	180.00	-5742.75	0	1	a sand slum pirate	quest_hero_of_tatooine_pirate_30_h_agg_n	dungeon	Sand Slum Pirate Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+901401	TATOOINE	tat_world	AREA	0	5666.89	180.00	-5704.34	0	1	a sand slum pirate	quest_hero_of_tatooine_pirate_30_h_agg_n	dungeon	Sand Slum Pirate Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+901402	TATOOINE	tat_world	AREA	0	5675.75	180.00	-5735.25	0	1	a sand slum pirate	quest_hero_of_tatooine_pirate_30_h_agg_n	dungeon	Sand Slum Pirate Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+901403	TATOOINE	tat_world	AREA	0	5680.57	180.00	-5725.54	0	1	a sand slum pirate	quest_hero_of_tatooine_pirate_30_h_agg_n	dungeon	Sand Slum Pirate Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+901404	TATOOINE	tat_world	AREA	0	5691.02	180.00	-5749.36	0	1	a sand slum pirate	quest_hero_of_tatooine_pirate_30_h_agg_n	dungeon	Sand Slum Pirate Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+901405	TATOOINE	tat_world	AREA	0	-6712.83	49.27	-5664.82	0	1	a thug	thug_100_h_inv_n	dungeon	Sand Splitters Cave	1	GUARD	idle	0	0	0	0	300	120	0
+901406	TATOOINE	tat_world	AREA	0	3914.62	83.20	-4304.40	0	1	a scavenger	scavenger_100_h_inv_n	dungeon	Scavenger Punk Camp	1	GUARD	idle	0	0	0	0	300	120	0
+901407	TATOOINE	tat_world	AREA	0	3921.71	89.56	-4322.13	0	1	a scavenger Punk	scavenger_punk_6_h_agg_n	dungeon	Scavenger Punk Camp	1	GUARD	idle	0	0	0	0	300	120	0
+901408	TATOOINE	tat_world	AREA	0	3943.46	85.14	-4333.32	0	1	a scavenger Punk	scavenger_punk_6_h_agg_n	dungeon	Scavenger Punk Camp	1	GUARD	idle	0	0	0	0	300	120	0
+901409	TATOOINE	tat_world	AREA	0	3963.05	83.05	-4315.42	0	1	a scavenger Punk	scavenger_punk_6_h_agg_n	dungeon	Scavenger Punk Camp	1	GUARD	idle	0	0	0	0	300	120	0
+901410	TATOOINE	tat_world	AREA	0	3910.61	89.59	-4318.07	0	1	a scavenger Thief	scavenger_thief_6_h_agg_n	dungeon	Scavenger Punk Camp	1	GUARD	idle	0	0	0	0	300	120	0
+901411	TATOOINE	tat_world	AREA	0	3931.36	92.08	-4341.56	0	1	a scavenger Thief	scavenger_thief_6_h_agg_n	dungeon	Scavenger Punk Camp	1	GUARD	idle	0	0	0	0	300	120	0
+901412	TATOOINE	tat_world	AREA	0	3963.05	82.05	-4327.85	0	1	a scavenger Thief	scavenger_thief_6_h_agg_n	dungeon	Scavenger Punk Camp	1	GUARD	idle	0	0	0	0	300	120	0
+901413	TATOOINE	tat_world	AREA	0	3930.35	83.37	-4311.12	0	1	a scavenger thug	scavenger_thug_6_h_agg_n	dungeon	Scavenger Punk Camp	1	GUARD	idle	0	0	0	0	300	120	0
+901414	TATOOINE	tat_world	AREA	0	3938.60	79.86	-4297.78	0	1	a scavenger thug	scavenger_thug_6_h_agg_n	dungeon	Scavenger Punk Camp	1	GUARD	idle	0	0	0	0	300	120	0
+901415	TATOOINE	tat_world	AREA	0	3952.32	81.33	-4336.24	0	1	a scavenger thug	scavenger_thug_6_h_agg_n	dungeon	Scavenger Punk Camp	1	GUARD	idle	0	0	0	0	300	120	0
+901416	TATOOINE	tat_world	AREA	0	3954.37	83.47	-4307.00	0	1	a scavenger thug	scavenger_thug_6_h_agg_n	dungeon	Scavenger Punk Camp	1	GUARD	idle	0	0	0	0	300	120	0
+901417	TATOOINE	tat_world	AREA	0	3943.82	85.97	-4316.98	0	1	a scavenger thug leader	scavenger_thug_elite_10_h_agg_e	dungeon	Scavenger Punk Camp	1	GUARD	idle	0	0	0	0	300	120	0
+901418	TATOOINE	tat_world	AREA	0	3933.89	85.02	-4328.16	0	1	an escaped criminal	tatooine_eisley_escaped_criminal_7_h_agg_n	dungeon	Scavenger Punk Camp	1	GUARD	idle	0	0	0	0	300	120	0
+901419	TATOOINE	tat_world	AREA	0	-4914.50	9.30	1272.30	0	1	a pirate	pirate_armsman_13_h_att_n	dungeon	Sennex Camp	3	FLOAT	idle	0	0	0	0	300	120	6
+901420	TATOOINE	tat_world	AREA	0	-4937.15	10.07	1264.48	0	1	a pirate leader	pirate_leader_17_h_att_n	dungeon	Sennex Camp	1	GUARD	idle	0	0	0	0	1800	1500	0
+901421	TATOOINE	tat_world	AREA	0	6547.73	102.95	-1323.07	0	1	a dune beetle	beetle_dune_9_c_att_n	dungeon	Sennex Cave	3	FLOAT	idle	0	0	0	0	300	120	6
+901422	TATOOINE	tat_world	AREA	1	-14.76	-4.95	-9.46	0	1	a Sennex lookout	sennex_lookout_17_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
+901423	TATOOINE	tat_world	AREA	1	13.32	-22.33	-6.40	0	1	a Sennex lookout	sennex_lookout_17_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
+901424	TATOOINE	tat_world	AREA	10	54.03	-48.74	-105.26	0	1	a cave beetle	beetle_cave_20_c_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
+901425	TATOOINE	tat_world	AREA	10	47.52	-51.84	-87.51	0	1	a rock beetle	beetle_rock_cave_19_c_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
+901426	TATOOINE	tat_world	AREA	10	49.36	-51.59	-82.10	0	1	a rock beetle	beetle_rock_cave_19_c_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
+901427	TATOOINE	tat_world	AREA	11	77.95	-46.36	-137.14	0	1	a cave beetle	beetle_cave_20_c_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
+901428	TATOOINE	tat_world	AREA	11	88.52	-46.52	-146.98	0	1	a cave beetle	beetle_cave_20_c_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
+901429	TATOOINE	tat_world	AREA	11	94.96	-46.60	-134.94	0	1	a cave beetle	beetle_cave_20_c_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
+901430	TATOOINE	tat_world	AREA	11	82.33	-46.58	-144.68	0	1	a large cave beetle	beetle_large_cave_21_c_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
+901431	TATOOINE	tat_world	AREA	2	22.12	-34.83	-24.04	0	1	a Sennex lookout	sennex_lookout_17_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
+901432	TATOOINE	tat_world	AREA	2	26.50	-37.71	-31.16	0	1	a Sennex lookout	sennex_lookout_17_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
+901433	TATOOINE	tat_world	AREA	2	46.28	-47.87	-59.26	0	1	a Sennex lookout	sennex_lookout_17_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
+901434	TATOOINE	tat_world	AREA	2	54.08	-68.23	-40.91	0	1	a Sennex slaver	sennex_slaver_18_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
+901435	TATOOINE	tat_world	AREA	2	26.43	-43.01	-66.94	0	1	a Sennex warder	sennex_warder_19_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
+901436	TATOOINE	tat_world	AREA	2	42.26	-46.47	-13.03	0	1	a Sennex warder	sennex_warder_19_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
+901437	TATOOINE	tat_world	AREA	2	49.99	-47.64	-10.40	0	1	a Sennex warder	sennex_warder_19_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
+901438	TATOOINE	tat_world	AREA	2	53.54	-48.81	-60.81	0	1	a Sennex warder	sennex_warder_19_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
+901439	TATOOINE	tat_world	AREA	2	54.50	-68.10	-36.63	0	1	a Sennex warder	sennex_warder_19_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
+901440	TATOOINE	tat_world	AREA	3	91.50	-67.45	-39.29	0	1	a Sennex slaver	sennex_slaver_18_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
+901441	TATOOINE	tat_world	AREA	3	92.94	-61.91	-14.63	0	1	a Sennex slaver	sennex_slaver_18_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
+901442	TATOOINE	tat_world	AREA	3	86.75	-61.16	-7.92	0	1	a Sennex warder	sennex_warder_19_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
+901443	TATOOINE	tat_world	AREA	4	64.28	-75.42	-63.10	0	1	a Sennex slaver	sennex_slaver_18_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
+901444	TATOOINE	tat_world	AREA	4	94.62	-75.68	-64.77	0	1	a Sennex slaver	sennex_slaver_18_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
+901445	TATOOINE	tat_world	AREA	4	96.00	-74.96	-60.34	0	1	a Sennex slaver	sennex_slaver_18_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
+901446	TATOOINE	tat_world	AREA	5	84.61	-46.37	-111.94	0	1	a cave beetle	beetle_cave_20_c_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
+901447	TATOOINE	tat_world	AREA	5	90.63	-46.59	-107.05	0	1	a large rock beetle	beetle_large_rock_19_c_att_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
+901448	TATOOINE	tat_world	AREA	6	54.92	-71.57	-113.89	0	1	a Sennex hunter	sennex_hunter_20_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
+901449	TATOOINE	tat_world	AREA	6	55.90	-77.03	-89.34	0	1	a Sennex hunter	sennex_hunter_20_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
+901450	TATOOINE	tat_world	AREA	7	94.76	-66.43	-126.37	0	1	a Sennex guard	sennex_guard_19_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
+901451	TATOOINE	tat_world	AREA	7	73.83	-66.30	-137.96	0	1	a Sennex hunter	sennex_hunter_20_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
+901452	TATOOINE	tat_world	AREA	7	78.58	-65.34	-142.07	0	1	a Sennex hunter	sennex_hunter_20_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
+901453	TATOOINE	tat_world	AREA	8	114.86	-66.46	-117.85	0	1	a Sennex guard	sennex_guard_19_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
+901454	TATOOINE	tat_world	AREA	8	116.12	-66.28	-95.32	0	1	a Sennex guard	sennex_guard_19_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
+901455	TATOOINE	tat_world	AREA	8	129.93	-66.71	-106.68	0	1	a Sennex guard	sennex_guard_19_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
+901456	TATOOINE	tat_world	AREA	8	143.50	-66.35	-97.41	0	1	a Sennex slavemaster	sennex_slavemaster_20_h_agg_n	dungeon	Sennex Cave	1	GUARD	idle	0	0	0	0	300	120	0
+901457	TATOOINE	tat_world	AREA	0	-4936.55	29.76	-5552.88	0	1	a mountain squill	squill_mountain_18_c_agg_n	dungeon	Spice Dealer Camp	3	FLOAT	idle	0	0	0	0	300	120	6
+901458	TATOOINE	tat_world	AREA	0	-1289.30	8.30	-316.00	0	1	an adolescent krayt dragon	krayt_dragon_adolescent_84_c_agg_b	dungeon	Tusken Bunker	1	FLOAT	idle	0	0	0	0	900	600	5
+901459	TATOOINE	tat_world	AREA	0	-1290.20	15.30	-376.00	0	1	an adolescent krayt dragon	krayt_dragon_adolescent_84_c_agg_b	dungeon	Tusken Bunker	1	FLOAT	idle	0	0	0	0	900	600	5
+901460	TATOOINE	tat_world	AREA	0	-1394.50	47.80	-398.50	0	1	an adolescent krayt dragon	krayt_dragon_adolescent_84_c_agg_b	dungeon	Tusken Bunker	1	FLOAT	idle	0	0	0	0	900	600	5
+901461	TATOOINE	tat_world	AREA	0	-1312.80	24.20	-427.50	0	1	an adolescent krayt dragon	krayt_dragon_adolescent_84_c_agg_b	dungeon	Tusken Bunker	1	FLOAT	idle	0	0	0	0	900	600	5
+901462	TATOOINE	tat_world	AREA	0	-1487.74	41.00	-186.64	0	1	a Tusken sniper	tusken_sniper_30_h_agg_n	dungeon	Tusken Bunker	3	FLOAT	idle	0	0	0	0	300	120	6
+901463	TATOOINE	tat_world	AREA	0	-1472.49	41.00	-192.42	0	1	a Tusken warrior	tusken_warrior_32_h_agg_n	dungeon	Tusken Bunker	3	FLOAT	idle	0	0	0	0	300	120	6
+901464	TATOOINE	tat_world	AREA	0	-5282.89	40.00	-4442.86	0	1	a Tusken bantha	bantha_tusken_30_c_att_n	dungeon	Tusken raid on settlement	1	GUARD	idle	0	0	0	0	300	120	0
+901465	TATOOINE	tat_world	AREA	0	-5340.42	40.00	-4452.43	0	1	a Tusken bantha	bantha_tusken_30_c_att_n	dungeon	Tusken raid on settlement	1	GUARD	idle	0	0	0	0	300	120	0
+901466	TATOOINE	tat_world	AREA	0	-5337.96	40.00	-4434.90	0	1	a Tusken captain	tusken_captain_33_h_agg_n	dungeon	Tusken raid on settlement	1	GUARD	idle	0	0	0	0	300	120	0
+901467	TATOOINE	tat_world	AREA	0	-5289.45	40.00	-4441.29	0	1	a Tusken raider	tusken_raider_30_h_agg_n	dungeon	Tusken raid on settlement	3	FLOAT	idle	0	0	0	0	300	120	6
+901468	TATOOINE	tat_world	AREA	0	-5318.30	40.00	-4427.29	0	1	a Tusken raider	tusken_raider_30_h_agg_n	dungeon	Tusken raid on settlement	2	FLOAT	idle	0	0	0	0	300	120	4
+901469	TATOOINE	tat_world	AREA	0	-5323.24	40.00	-4443.62	0	1	a Tusken raider	tusken_raider_30_h_agg_n	dungeon	Tusken raid on settlement	2	FLOAT	idle	0	0	0	0	300	120	4
+901470	TATOOINE	tat_world	AREA	0	-5332.04	40.00	-4455.94	0	1	a Tusken raider	tusken_raider_30_h_agg_n	dungeon	Tusken raid on settlement	2	FLOAT	idle	0	0	0	0	300	120	4
+901471	TATOOINE	tat_world	AREA	0	-5315.97	40.00	-4444.79	0	1	a Tusken sniper	tusken_sniper_30_h_agg_n	dungeon	Tusken raid on settlement	2	FLOAT	idle	0	0	0	0	300	120	4
+901472	TATOOINE	tat_world	AREA	0	3412.36	7.93	-5473.76	-67	1	Sleash	legacy_sleash_100_h_inv_n	dungeon	Vaigon Shinn Bunker	1	STOP	idle	0	0	0	0	300	120	0
+901473	TATOOINE	tat_world	AREA	0	3387.07	10.72	-5503.09	0	1	Shinn's guard	tatooine_shinn_guard_8_h_agg_n	dungeon	Vaigon Shinn Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+901474	TATOOINE	tat_world	AREA	0	3400.58	6.89	-5472.00	0	1	Shinn's guard	tatooine_shinn_guard_8_h_agg_n	dungeon	Vaigon Shinn Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+901475	TATOOINE	tat_world	AREA	0	3421.48	8.65	-5505.83	0	1	Shinn's guard	tatooine_shinn_guard_8_h_agg_n	dungeon	Vaigon Shinn Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+901476	TATOOINE	tat_world	AREA	0	3422.75	7.63	-5461.61	0	1	Shinn's guard	tatooine_shinn_guard_8_h_agg_n	dungeon	Vaigon Shinn Bunker	1	STOP	idle	0	0	0	0	300	120	0
+901477	TATOOINE	tat_world	AREA	0	3443.22	9.11	-5461.78	0	1	Shinn's guard	tatooine_shinn_guard_8_h_agg_n	dungeon	Vaigon Shinn Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+901478	TATOOINE	tat_world	AREA	0	3341.86	9.41	-5343.94	0	1	Shinn's mugger	tatooine_shinn_mugger_7_h_agg_n	dungeon	Vaigon Shinn Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+901479	TATOOINE	tat_world	AREA	0	3370.03	8.27	-5355.43	0	1	Shinn's mugger	tatooine_shinn_mugger_7_h_agg_n	dungeon	Vaigon Shinn Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+901480	TATOOINE	tat_world	AREA	0	3388.50	6.73	-5337.52	0	1	Shinn's mugger	tatooine_shinn_mugger_7_h_agg_n	dungeon	Vaigon Shinn Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+901481	TATOOINE	tat_world	AREA	0	3391.05	9.27	-5306.11	0	1	Shinn's mugger	tatooine_shinn_mugger_7_h_agg_n	dungeon	Vaigon Shinn Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+901482	TATOOINE	tat_world	AREA	0	3392.19	7.44	-5359.13	0	1	Shinn's mugger	tatooine_shinn_mugger_7_h_agg_n	dungeon	Vaigon Shinn Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+901483	TATOOINE	tat_world	AREA	0	-6233.05	36.84	-5929.44	0	1	Valarian's soldier	tatooine_valarian_soldier_18_h_agg_n	dungeon	Valarian Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+901484	TATOOINE	tat_world	AREA	0	-6233.84	37.25	-5947.28	0	1	Valarian's soldier	tatooine_valarian_soldier_18_h_agg_n	dungeon	Valarian Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+901485	TATOOINE	tat_world	AREA	0	-6256.15	39.05	-5913.32	0	1	Valarian's soldier	tatooine_valarian_soldier_18_h_agg_n	dungeon	Valarian Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+901486	TATOOINE	tat_world	AREA	0	-6260.20	43.14	-5894.80	0	1	Valarian's soldier	tatooine_valarian_soldier_18_h_agg_n	dungeon	Valarian Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+901487	TATOOINE	tat_world	AREA	0	-6270.54	35.38	-5953.54	0	1	Valarian's soldier	tatooine_valarian_soldier_18_h_agg_n	dungeon	Valarian Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+901488	TATOOINE	tat_world	AREA	0	-6273.99	39.29	-5915.43	0	1	Valarian's soldier	tatooine_valarian_soldier_18_h_agg_n	dungeon	Valarian Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+901489	TATOOINE	tat_world	AREA	0	-6278.41	35.88	-5933.67	0	1	Valarian's soldier	tatooine_valarian_soldier_18_h_agg_n	dungeon	Valarian Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+901490	TATOOINE	tat_world	PATROL	0	-1689.12	11.50	-3310.35	0	1	Valarian Depot Foreman	valarian_boss_depot_16_h_agg_n	dungeon	Valarian Depot	1	PATROL	idle	0	999	0	0	90	60	0
+901491	TATOOINE	tat_world	AREA	0	-1585.30	7.61	-3317.88	0	1	Valarian Depot Scout	valarian_scout_depot_12_h_agg_n	dungeon	Valarian Depot	3	FLOAT	idle	0	0	0	0	90	60	6
+901492	TATOOINE	tat_world	AREA	0	-1606.55	7.40	-3364.94	0	1	Valarian Depot Scout	valarian_scout_depot_12_h_agg_n	dungeon	Valarian Depot	3	FLOAT	idle	0	0	0	0	90	60	6
+901493	TATOOINE	tat_world	AREA	0	-1613.94	11.70	-3248.31	0	1	Valarian Depot Scout	valarian_scout_depot_12_h_agg_n	dungeon	Valarian Depot	3	FLOAT	idle	0	0	0	0	90	60	6
+901494	TATOOINE	tat_world	AREA	0	-1681.25	10.90	-3384.34	0	1	Valarian Depot Scout	valarian_scout_depot_12_h_agg_n	dungeon	Valarian Depot	3	FLOAT	idle	0	0	0	0	90	60	6
+901495	TATOOINE	tat_world	AREA	0	-1685.42	12.90	-3270.60	0	1	Valarian Depot Scout	valarian_scout_depot_12_h_agg_n	dungeon	Valarian Depot	3	FLOAT	idle	0	0	0	0	90	60	6
+901496	TATOOINE	tat_world	AREA	0	-1737.95	26.80	-3301.80	0	1	Valarian Depot Scout	valarian_scout_depot_12_h_agg_n	dungeon	Valarian Depot	3	FLOAT	idle	0	0	0	0	90	60	6
+901497	TATOOINE	tat_world	AREA	0	-1633.41	8.40	-3367.22	0	1	Valarian Depot Swooper	valarian_swooper_depot_13_h_agg_n	dungeon	Valarian Depot	3	FLOAT	idle	0	0	0	0	90	60	6
+901498	TATOOINE	tat_world	AREA	0	-1677.71	11.60	-3249.32	0	1	Valarian Depot Swooper	valarian_swooper_depot_13_h_agg_n	dungeon	Valarian Depot	3	FLOAT	idle	0	0	0	0	90	60	6
+901499	TATOOINE	tat_world	AREA	0	-1725.53	17.33	-3358.72	0	1	Valarian Depot Swooper	valarian_swooper_depot_13_h_agg_n	dungeon	Valarian Depot	3	FLOAT	idle	0	0	0	0	90	60	6
+901500	TATOOINE	tat_world	AREA	0	-1772.80	17.80	-3358.72	0	1	Valarian Depot Swooper	valarian_swooper_depot_13_h_agg_n	dungeon	Valarian Depot	3	FLOAT	idle	0	0	0	0	90	60	6
+901501	TATOOINE	tat_world	AREA	0	-1801.70	31.50	-3295.50	0	1	Valarian Shuttle Guard	valarian_swooper_shuttle_17_h_agg_n	dungeon	Valarian Depot	3	FLOAT	idle	0	0	0	0	90	60	6
+901502	TATOOINE	tat_world	AREA	0	-1693.81	11.80	-3310.70	0	1	Valarian Depot Guard	valarian_thief_depot_14_h_agg_n	dungeon	Valarian Depot	1	GUARD	idle	0	0	0	0	90	60	0
+901503	TATOOINE	tat_world	AREA	0	-1698.92	11.90	-3329.60	0	1	Valarian Depot Guard	valarian_thief_depot_14_h_agg_n	dungeon	Valarian Depot	2	FLOAT	idle	0	0	0	0	90	60	4
+901504	TATOOINE	tat_world	AREA	0	-1626.33	9.10	-3326.70	0	1	Valarian Depot Worker	valarian_thug_depot_14_h_agg_n	dungeon	Valarian Depot	2	FLOAT	idle	0	0	0	0	90	60	4
+901505	TATOOINE	tat_world	AREA	0	-1637.52	9.90	-3303.30	0	1	Valarian Depot Worker	valarian_thug_depot_14_h_agg_n	dungeon	Valarian Depot	2	FLOAT	idle	0	0	0	0	90	60	4
+901506	TATOOINE	tat_world	AREA	0	-1641.20	10.30	-3269.00	0	1	Valarian Depot Worker	valarian_thug_depot_14_h_agg_n	dungeon	Valarian Depot	2	FLOAT	idle	0	0	0	0	90	60	4
+901507	TATOOINE	tat_world	AREA	0	-1660.63	7.60	-3330.00	0	1	Valarian Depot Worker	valarian_thug_depot_14_h_agg_n	dungeon	Valarian Depot	2	FLOAT	idle	0	0	0	0	90	60	4
+901508	TATOOINE	tat_world	AREA	0	-1666.90	9.90	-3284.20	0	1	Valarian Depot Worker	valarian_thug_depot_14_h_agg_n	dungeon	Valarian Depot	2	FLOAT	idle	0	0	0	0	90	60	4
+901509	TATOOINE	tat_world	AREA	0	-1756.80	31.50	-3328.81	0	1	Valarian Shuttle Guard	valarian_thug_shuttle_20_h_agg_n	dungeon	Valarian Depot	3	FLOAT	idle	0	0	0	0	90	60	6
+901510	TATOOINE	tat_world	AREA	0	-1619.07	10.00	-3290.48	0	1	a CLL-8 binary load lifter	cll8_load_lifter_100_d_inv_n	dungeon	Valarian Depot	1	STOP	idle	0	0	0	0	300	120	0
+901511	TATOOINE	tat_world	AREA	0	-1666.72	9.75	-3276.34	0	1	a CLL-8 binary load lifter	cll8_load_lifter_100_d_inv_n	dungeon	Valarian Depot	1	GUARD	idle	0	0	0	0	300	120	0
+901512	TATOOINE	tat_world	PATROL	0	-1757.80	31.47	-3322.47	0	1	a CLL-8 binary load lifter	cll8_load_lifter_100_d_inv_n	dungeon	Valarian Depot	1	PATROL	idle	0	999	0	0	90	60	0
+901513	TATOOINE	tat_world	AREA	0	-1622.49	9.93	-3292.72	0	1	an EG-6 power droid	eg6_power_droid_100_d_inv_n	dungeon	Valarian Depot	1	GUARD	idle	0	0	0	0	300	120	0
+901514	TATOOINE	tat_world	AREA	0	-1675.91	9.76	-3290.75	0	80	an LE repair droid	le_repair_droid_100_d_inv_n	dungeon	Valarian Depot	1	STOP	idle	0	0	0	0	300	120	0
+901515	TATOOINE	tat_world	AREA	0	-1677.83	9.91	-3290.39	0	70	an R5 unit	r5_droid_4_d_att_n	dungeon	Valarian Depot	1	STOP	idle	0	0	0	0	300	120	0
+901516	TATOOINE	tat_world	AREA	0	-5371.27	64.78	-6897.22	107	1	Valarian's hacker	tatooine_valarian_hacker_19_h_agg_n	dungeon	Valarian Hackers Bunker	1	STOP	idle	0	0	0	0	300	120	0
+901517	TATOOINE	tat_world	AREA	0	-649.21	14.36	-6293.11	0	1	Valarian's Pod Racer	valarian_pod_racer_19_h_agg_n	dungeon	Valarian Podracer Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+901518	TATOOINE	tat_world	AREA	0	-652.90	15.05	-6267.96	0	1	Valarian's Pod Racer	valarian_pod_racer_19_h_agg_n	dungeon	Valarian Podracer Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+901519	TATOOINE	tat_world	AREA	0	-682.85	12.28	-6275.30	0	1	Valarian's Pod Racer	valarian_pod_racer_19_h_agg_n	dungeon	Valarian Podracer Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+901520	TATOOINE	tat_world	AREA	0	-685.37	11.45	-6293.95	0	1	Valarian's Pod Racer	valarian_pod_racer_19_h_agg_n	dungeon	Valarian Podracer Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+901521	TATOOINE	tat_world	AREA	0	-694.13	12.31	-6314.85	0	1	Valarian's Pod Racer	valarian_pod_racer_19_h_agg_n	dungeon	Valarian Podracer Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+901522	TATOOINE	tat_world	AREA	0	-705.87	12.09	-6269.47	0	1	Valarian's Pod Racer	valarian_pod_racer_19_h_agg_n	dungeon	Valarian Podracer Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+901523	TATOOINE	tat_world	AREA	0	-724.68	11.87	-6313.01	0	1	Valarian's Pod Racer	valarian_pod_racer_19_h_agg_n	dungeon	Valarian Podracer Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+901524	TATOOINE	tat_world	AREA	0	-727.61	10.67	-6282.57	0	1	Valarian's Pod Racer	valarian_pod_racer_19_h_agg_n	dungeon	Valarian Podracer Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+901525	TATOOINE	tat_world	AREA	0	-728.28	10.98	-6259.27	0	1	Valarian's Pod Racer	valarian_pod_racer_19_h_agg_n	dungeon	Valarian Podracer Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+901526	TATOOINE	tat_world	AREA	0	-3953.51	5.57	-3999.88	0	1	Valarian's command enforcer	tatooine_valarian_enforcer_19_h_agg_n	dungeon	Valarian Strategic Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+901527	TATOOINE	tat_world	AREA	0	-3920.97	7.10	-4028.88	0	1	Valarian's blood vandal	tatooine_valarian_vandal_18_h_agg_n	dungeon	Valarian Strategic Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+901528	TATOOINE	tat_world	AREA	0	-3937.41	5.36	-3984.48	0	1	Valarian's blood vandal	tatooine_valarian_vandal_18_h_agg_n	dungeon	Valarian Strategic Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+901529	TATOOINE	tat_world	AREA	0	-3952.27	6.82	-4015.71	0	1	Valarian's blood vandal	tatooine_valarian_vandal_18_h_agg_n	dungeon	Valarian Strategic Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+901530	TATOOINE	tat_world	AREA	0	-3953.98	6.71	-4021.11	0	1	Valarian's blood vandal	tatooine_valarian_vandal_18_h_agg_n	dungeon	Valarian Strategic Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+901531	TATOOINE	tat_world	AREA	0	3721.19	16.53	-4223.59	0	1	a White Thranta security guard	tatooine_opening_swooper_9_9_h_att_n	dungeon	White Thranta Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+901532	TATOOINE	tat_world	AREA	0	3731.63	15.95	-4185.20	0	1	a White Thranta security guard	tatooine_opening_swooper_9_9_h_att_n	dungeon	White Thranta Bunker	1	STOP	idle	0	0	0	0	300	120	0
+901533	TATOOINE	tat_world	AREA	0	3751.77	16.52	-4196.42	0	1	a White Thranta security guard	tatooine_opening_swooper_9_9_h_att_n	dungeon	White Thranta Bunker	1	GUARD	idle	0	0	0	0	300	120	0
+901534	TATOOINE	tat_world	AREA	0	-937.64	7.51	-4303.46	0	1	an Alkhara bandit	alkhara_bandit_15_h_att_n	outback	Alkhara Camp	1	GUARD	idle	0	0	0	0	300	120	0
+901535	TATOOINE	tat_world	AREA	0	-951.70	11.01	-4269.85	0	1	an Alkhara bandit	alkhara_bandit_15_h_att_n	outback	Alkhara Camp	1	GUARD	idle	0	0	0	0	300	120	0
+901536	TATOOINE	tat_world	AREA	0	-961.28	10.72	-4298.35	0	1	an Alkhara bandit	alkhara_bandit_15_h_att_n	outback	Alkhara Camp	1	GUARD	idle	0	0	0	0	300	120	0
+901537	TATOOINE	tat_world	AREA	0	-971.11	13.01	-4257.31	0	1	an Alkhara bandit	alkhara_bandit_15_h_att_n	outback	Alkhara Camp	1	GUARD	idle	0	0	0	0	300	120	0
+901538	TATOOINE	tat_world	AREA	0	-981.66	14.48	-4281.57	0	1	an Alkhara bandit	alkhara_bandit_15_h_att_n	outback	Alkhara Camp	1	GUARD	idle	0	0	0	0	300	120	0
+901539	TATOOINE	tat_world	AREA	0	-2129.26	6.58	674.39	0	1	a thief	thief_11_h_att_n	outback	Broken Engine	3	FLOAT	idle	0	0	0	0	300	120	6
+901540	TATOOINE	tat_world	AREA	0	-255.78	4.70	-6196.95	0	1	a Desert Demon	desert_demon_13_h_agg_n	outback	Broken Speeder	2	FLOAT	idle	0	0	0	0	300	120	4
+901541	TATOOINE	tat_world	AREA	0	6464.70	9.10	-2229.60	0	1	an elder zucca boar	boar_zucca_elder_8_c_att_n	outback	Broken walls	4	FLOAT	idle	0	0	0	0	900	600	8
+901542	TATOOINE	tat_world	AREA	0	-3734.98	8.63	-6811.96	0	1	a Weequay thug	weequay_thug_16_h_att_n	outback	Camp with Stones	3	FLOAT	idle	0	0	0	0	300	120	6
+901543	TATOOINE	tat_world	AREA	0	-3164.96	9.35	3630.87	0	1	a rancher	farmer_rancher_100_h_inv_n	outback	Lonely Flora Farm	3	FLOAT	idle	0	0	0	0	300	120	6
+901544	TATOOINE	tat_world	AREA	0	-3326.99	7.51	-3719.56	0	1	an assassin	assassin_100_h_inv_n	outback	Lonely Small Tent	1	GUARD	idle	0	0	0	0	300	120	0
+901545	TATOOINE	tat_world	AREA	0	-2602.40	9.10	-2299.00	0	1	a Dim-U abbot	dimu_abbot_4_h_att_n	outback	Lonely Tent	3	FLOAT	idle	0	0	0	0	300	120	6
+901546	TATOOINE	tat_world	AREA	0	-5135.00	146.50	4432.90	0	1	a grand krayt dragon	krayt_dragon_grand_88_c_agg_b	outback	Pillar Hills	2	FLOAT	idle	0	0	0	0	1800	1200	50
+901547	TATOOINE	tat_world	AREA	0	-3804.72	30.91	-4723.62	177	1	a Sand Crawler crewman	legacy_jawa_grunt_12_h_att_n	outback	Shot Sandcrawler	1	STOP	idle	0	0	0	0	300	120	0
+901548	TATOOINE	tat_world	AREA	0	-3806.60	29.00	-4715.60	0	1	Jawa Leader	legacy_jawa_leader_100_h_inv_n	outback	Shot Sandcrawler	1	GUARD	idle	0	0	0	0	300	120	0
+901549	TATOOINE	tat_world	AREA	0	-3753.03	13.81	-4747.73	0	1	a Tusken Outrider	tusken_raider_wildman_14_h_agg_n	outback	Shot Sandcrawler	1	GUARD	idle	0	0	0	0	300	120	0
+901550	TATOOINE	tat_world	AREA	0	-3811.19	29.24	-4719.59	-45	1	FA-2PO	legacy_fa2po_protocol_100_d_inv_n	outback	Shot Sandcrawler	1	STOP	idle	0	0	0	0	300	120	0
+901551	TATOOINE	tat_world	AREA	0	-4932.42	31.00	-5542.53	-148	1	Tyrok	jabbas_palace_tyrok_20_h_att_n	outback	Spice Dealer Camp	1	STOP	idle	0	0	0	0	300	120	0
+901552	TATOOINE	tat_world	AREA	0	-4331.11	22.92	-5027.13	0	1	Delrice Capreese	jabbas_palace_delrice_capreese_18_h_att_n	outback	Spice Tank	1	GUARD	idle	0	0	0	0	300	120	0
+901553	TATOOINE	tat_world	AREA	0	-5725.19	23.51	6484.34	0	1	a dewback	dewback_17_c_att_n	outback	Tatooine	3	FLOAT	idle	0	0	0	0	300	120	6
+901554	TATOOINE	tat_world	AREA	0	-4605.92	45.44	-4737.28	0	1	an Elite Dragonet	dragonet_elite_24_c_agg_e	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
+901555	TATOOINE	tat_world	AREA	0	-4624.03	39.83	-4707.07	0	1	an Elite Dragonet	dragonet_elite_24_c_agg_e	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
+901556	TATOOINE	tat_world	AREA	0	-4646.35	42.30	-4759.10	0	1	an Elite Dragonet	dragonet_elite_24_c_agg_e	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
+901557	TATOOINE	tat_world	AREA	0	-4674.09	28.26	-4689.19	0	1	an Elite Dragonet	dragonet_elite_24_c_agg_e	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
+901558	TATOOINE	tat_world	AREA	0	-4690.10	39.15	-4772.28	0	1	an Elite Dragonet	dragonet_elite_24_c_agg_e	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
+901559	TATOOINE	tat_world	AREA	0	-4698.76	27.91	-4732.04	0	1	an Elite Dragonet	dragonet_elite_24_c_agg_e	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
+901560	TATOOINE	tat_world	AREA	0	-6206.75	34.46	5060.16	0	1	a giant sand beetle	beetle_giant_sand_25_c_agg_n	outback	Tatooine	3	FLOAT	idle	0	0	0	0	1800	1500	6
+901561	TATOOINE	tat_world	AREA	0	-5812.10	345.03	1538.13	0	1	a greater desert womp rat	womprat_great_desert_12_c_agg_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
+901562	TATOOINE	tat_world	AREA	0	-5813.17	343.53	3132.34	0	1	a greater desert womp rat	womprat_great_desert_12_c_agg_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
+901563	TATOOINE	tat_world	AREA	0	3383.32	6.70	-6588.55	0	1	a grizzled dewback	dewback_grizzled_18_c_agg_n	outback	Tatooine	3	FLOAT	idle	0	0	0	0	1800	1500	6
+901564	TATOOINE	tat_world	AREA	0	6400.65	64.99	185.72	0	1	a mountain squill	squill_mountain_18_c_agg_n	outback	Tatooine	3	FLOAT	idle	0	0	0	0	1800	1500	6
+901565	TATOOINE	tat_world	AREA	0	-4821.32	26.39	6529.91	0	1	a Tusken bantha	bantha_tusken_30_c_att_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
+901566	TATOOINE	tat_world	AREA	0	7090.19	95.62	7118.49	0	1	an adolescent krayt dragon	krayt_dragon_adolescent_84_c_agg_b	outback	Tatooine	1	GUARD	idle	0	0	0	0	1800	1200	0
+901567	TATOOINE	tat_world	AREA	0	7070.65	96.90	7139.95	0	1	a grand krayt dragon	krayt_dragon_grand_88_c_agg_b	outback	Tatooine	1	GUARD	idle	0	0	0	0	1800	1200	0
+901568	TATOOINE	tat_world	AREA	0	-5830.54	353.67	1501.66	0	1	a wild bladeback boar	boar_bladeback_wild_40_c_att_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
+901569	TATOOINE	tat_world	AREA	0	-4690.96	30.69	5460.41	0	1	an Alkhara bandit	alkhara_bandit_15_h_att_n	outback	Tatooine	5	FLOAT	idle	0	0	0	0	300	120	10
+901570	TATOOINE	tat_world	AREA	0	-860.14	9.27	-1228.67	0	1	an Alkhara bandit	alkhara_bandit_15_h_att_n	outback	Tatooine	3	FLOAT	idle	0	0	0	0	300	120	6
+901571	TATOOINE	tat_world	AREA	0	7033.00	71.00	7052.00	0	1	a bounty hunter	bounty_hunter_23_h_att_n	outback	Tatooine	2	FLOAT	idle	0	0	0	0	1800	1500	4
+901572	TATOOINE	tat_world	AREA	0	-915.25	16.33	-6490.26	148	1	Dera Darklighter	dera_darklighter_100_h_inv_n	outback	Tatooine	1	STOP	idle	0	0	0	0	300	120	0
+901573	TATOOINE	tat_world	AREA	0	-6109.86	191.22	3971.77	0	1	a Desert Demon bodyguard	desert_demon_bodyguard_14_h_agg_n	outback	Tatooine	3	FLOAT	idle	0	0	0	0	300	120	6
+901574	TATOOINE	tat_world	AREA	0	-6110.19	190.25	3965.17	0	1	a Desert Demon leader	desert_demon_leader_14_h_agg_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
+901575	TATOOINE	tat_world	AREA	0	5453.05	27.12	2144.59	0	1	a Dim-U abbot	dimu_abbot_4_h_att_n	outback	Tatooine	3	FLOAT	idle	0	0	0	0	300	120	6
+901576	TATOOINE	tat_world	AREA	0	-7665.18	240.36	-7386.06	22	1	Eteto Topan	eteto_topan_ice_cream_100_h_inv_n	outback	Tatooine	1	STOP	idle	0	0	0	0	300	120	0
+901577	TATOOINE	tat_world	AREA	0	-7171.44	41.24	-2400.29	0	1	a rancher	farmer_rancher_100_h_inv_n	outback	Tatooine	3	FLOAT	idle	0	0	0	0	300	120	6
+901578	TATOOINE	tat_world	AREA	0	2201.12	0.00	-4458.39	0	1	a rancher	farmer_rancher_100_h_inv_n	outback	Tatooine	3	FLOAT	idle	0	0	0	0	300	120	6
+901579	TATOOINE	tat_world	AREA	0	-5467.28	30.00	-3885.61	0	1	a fringer	fringer_100_h_inv_n	outback	Tatooine	3	FLOAT	idle	0	0	0	0	1800	1500	6
+901580	TATOOINE	tat_world	AREA	0	624.00	78.00	3124.00	0	1	a Hutt assassin	hutt_assassin_22_h_att_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
+901581	TATOOINE	tat_world	AREA	0	637.00	78.00	3119.00	0	1	a Hutt assassin	hutt_assassin_22_h_att_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
+901582	TATOOINE	tat_world	AREA	0	660.00	78.00	3121.00	0	1	a Hutt assassin	hutt_assassin_22_h_att_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
+901583	TATOOINE	tat_world	AREA	0	5768.24	53.71	4008.83	0	1	a Jawa Avenger	jawa_avenger_18_h_att_n	outback	Tatooine	3	FLOAT	idle	0	0	0	0	300	120	6
+901584	TATOOINE	tat_world	AREA	0	5944.55	180.00	-3827.78	0	1	a Jawa engineer	jawa_engineer_16_h_att_n	outback	Tatooine	3	FLOAT	idle	0	0	0	0	300	120	6
+901585	TATOOINE	tat_world	AREA	0	5760.87	50.97	4000.88	0	1	a Jawa Protector	jawa_protector_17_h_att_n	outback	Tatooine	3	FLOAT	idle	0	0	0	0	300	120	6
+901586	TATOOINE	tat_world	AREA	0	-487.37	43.65	-7119.54	0	1	Jem Lavar	legacy_lavar_100_h_inv_n	outback	Tatooine	1	STOP	idle	0	0	0	0	300	120	0
+901587	TATOOINE	tat_world	AREA	0	987.30	12.59	2509.25	0	1	an Imperial Brigadier General	mission_imperial_brigadier_general_25_h_att_n	outback	Tatooine	1	STOP	idle	0	0	0	0	300	120	0
+901588	TATOOINE	tat_world	AREA	0	-6893.89	68.80	1514.35	0	1	a pathfinder	pathfinder_19_h_att_n	outback	Tatooine	3	FLOAT	idle	0	0	0	0	1800	1500	6
+901589	TATOOINE	tat_world	AREA	0	7023.75	109.33	2417.06	0	1	a moisture farmer	quest_hero_of_tatooine_farmer_100_h_inv_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
+901590	TATOOINE	tat_world	AREA	0	-5783.99	27.06	-560.96	0	1	a smuggler	smuggler_100_h_inv_n	outback	Tatooine	3	FLOAT	idle	0	0	0	0	300	120	6
+901591	TATOOINE	tat_world	AREA	0	-4880.16	94.77	2950.27	0	1	a spice fiend	spice_fiend_11_h_agg_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
+901592	TATOOINE	tat_world	AREA	0	5784.99	49.95	3992.93	0	1	a Tusken captain	tusken_captain_33_h_agg_n	outback	Tatooine	3	FLOAT	idle	0	0	0	0	300	120	6
+901593	TATOOINE	tat_world	AREA	0	-4825.23	26.65	6528.96	0	1	a Tusken chief	tusken_chief_34_h_agg_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
+901594	TATOOINE	tat_world	AREA	0	-4826.28	26.77	6532.40	0	1	a Tusken commoner	tusken_commoner_30_h_agg_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
+901595	TATOOINE	tat_world	AREA	0	5744.92	53.04	4011.30	0	1	a Tusken raider	tusken_raider_30_h_agg_n	outback	Tatooine	3	FLOAT	idle	0	0	0	0	300	120	6
+901596	TATOOINE	tat_world	AREA	0	5777.96	50.77	3982.87	0	1	a Tusken raider	tusken_raider_30_h_agg_n	outback	Tatooine	3	FLOAT	idle	0	0	0	0	300	120	6
+901597	TATOOINE	tat_world	AREA	0	-5576.42	322.59	1736.14	0	1	Tusken Follower	tusken_raider_18_h_agg_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
+901598	TATOOINE	tat_world	AREA	0	-5583.09	322.60	1728.11	0	1	Tusken Follower	tusken_raider_18_h_agg_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
+901599	TATOOINE	tat_world	AREA	0	-5824.03	343.53	3128.99	0	1	Tusken Follower	tusken_raider_18_h_agg_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
+901600	TATOOINE	tat_world	AREA	0	-7200.79	301.13	3802.65	0	1	Tusken Follower	tusken_raider_18_h_agg_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
+901601	TATOOINE	tat_world	AREA	0	-7211.65	301.13	3799.30	0	1	Tusken Follower	tusken_raider_18_h_agg_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
+901602	TATOOINE	tat_world	AREA	0	5779.83	50.46	4000.20	0	1	a Tusken warlord	tusken_warlord_33_h_agg_n	outback	Tatooine	3	FLOAT	idle	0	0	0	0	300	120	6
+901603	TATOOINE	tat_world	AREA	0	7032.76	90.06	2500.25	0	1	a Tusken warlord	tusken_warlord_33_h_agg_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
+901604	TATOOINE	tat_world	AREA	0	7054.37	92.70	2510.26	0	1	a Tusken warlord	tusken_warlord_33_h_agg_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
+901605	TATOOINE	tat_world	AREA	0	7016.89	96.15	2510.94	0	1	a Tusken warrior	tusken_warrior_32_h_agg_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
+901606	TATOOINE	tat_world	AREA	0	7028.78	97.88	2486.42	0	1	a Tusken warrior	tusken_warrior_32_h_agg_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
+901607	TATOOINE	tat_world	AREA	0	7047.34	98.11	2535.31	0	1	a Tusken warrior	tusken_warrior_32_h_agg_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
+901608	TATOOINE	tat_world	AREA	0	7051.31	93.04	2496.84	0	1	a Tusken warrior	tusken_warrior_32_h_agg_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
+901609	TATOOINE	tat_world	AREA	0	7030.00	89.27	2512.42	0	1	a Tusken Witch Doctor	tusken_witch_doctor_33_h_agg_e	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
+901610	TATOOINE	tat_world	AREA	0	-4466.80	32.98	5785.67	0	1	Valarian's assassin	valarian_assassin_15_h_agg_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
+901611	TATOOINE	tat_world	AREA	0	-5009.26	39.10	-6129.91	0	1	Valarian's thief	valarian_thief_13_h_agg_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
+901612	TATOOINE	tat_world	AREA	0	-5024.42	41.39	-6109.46	0	1	Valarian's thief	valarian_thief_13_h_agg_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
+901613	TATOOINE	tat_world	AREA	0	-5827.40	352.78	1517.93	0	1	a wounded miner	watto_body_miner_100_h_inv_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	1800	1500	0
+901614	TATOOINE	tat_world	AREA	0	-7217.39	309.79	3869.83	168	1	a downed pilot	watto_leg_pilot_100_h_inv_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	300	120	0
+901615	TATOOINE	tat_world	AREA	0	-4471.55	33.18	5781.62	0	1	an IG assassin droid	ig_assassin_droid_19_d_att_n	outback	Tatooine	1	GUARD	idle	0	0	0	0	1800	1500	0
+901616	TATOOINE	tat_world	AREA	0	-1263.96	10.08	5463.37	87	1	an Alkhara bandit	alkhara_bandit_15_h_att_n	outback	Tent camp	3	FLOAT	idle	0	0	0	0	300	120	6
+901617	TATOOINE	tat_world	AREA	0	-3521.70	0.00	-4636.35	0	1	Valarian's smuggler	tatooine_valarian_smuggler_20_h_agg_n	outback	Valarian Smuggler Camp	1	GUARD	idle	0	0	0	0	300	120	0
+901618	TATOOINE	tat_world	AREA	0	-3522.87	1.04	-4620.20	0	1	Valarian's smuggler	tatooine_valarian_smuggler_20_h_agg_n	outback	Valarian Smuggler Camp	1	GUARD	idle	0	0	0	0	300	120	0
+901619	TATOOINE	tat_world	AREA	0	-4466.01	41.87	-4003.19	0	1	a wild zucca boar	boar_zucca_wild_19_c_att_n	outback	Wild Zucca Boar Spawn	5	FLOAT	idle	0	0	0	0	300	120	10
+901620	TATOOINE	tat_world	AREA	0	-4502.60	35.00	-2274.20	0	1	Tusken Follower	tusken_raider_21_h_agg_n	poi	Ben Kenobis House	2	FLOAT	idle	0	0	0	0	300	120	4
+901621	TATOOINE	tat_world	AREA	0	-4522.80	35.00	-2249.21	0	1	Tusken Priest	tusken_raider_worshiper_20_h_agg_n	poi	Ben Kenobis House	1	GUARD	idle	0	0	0	0	300	120	0
+901622	TATOOINE	tat_world	AREA	0	-3875.90	23.24	-4299.25	0	1	Valarian's smuggler	tatooine_valarian_smuggler_20_h_agg_n	poi	Escape Pod	1	GUARD	idle	0	0	0	0	300	120	0
+901623	TATOOINE	tat_world	AREA	0	-3885.23	22.31	-4280.11	0	1	Valarian's smuggler	tatooine_valarian_smuggler_20_h_agg_n	poi	Escape Pod	1	GUARD	idle	0	0	0	0	300	120	0
+901624	TATOOINE	tat_world	AREA	0	-3890.18	24.06	-4318.87	0	1	Valarian's smuggler	tatooine_valarian_smuggler_20_h_agg_n	poi	Escape Pod	1	GUARD	idle	0	0	0	0	300	120	0
+901625	TATOOINE	tat_world	AREA	0	-3904.42	19.81	-4268.03	0	1	Valarian's smuggler	tatooine_valarian_smuggler_20_h_agg_n	poi	Escape Pod	1	GUARD	idle	0	0	0	0	300	120	0
+901626	TATOOINE	tat_world	AREA	0	-3917.01	20.08	-4297.36	0	1	Valarian's smuggler	tatooine_valarian_smuggler_20_h_agg_n	poi	Escape Pod	1	GUARD	idle	0	0	0	0	300	120	0
+901627	TATOOINE	tat_world	AREA	0	-3925.93	18.60	-4270.59	0	1	Valarian's smuggler	tatooine_valarian_smuggler_20_h_agg_n	poi	Escape Pod	1	GUARD	idle	0	0	0	0	300	120	0
+901628	TATOOINE	tat_world	AREA	0	-3941.07	21.28	-4297.13	0	1	Valarian's smuggler	tatooine_valarian_smuggler_20_h_agg_n	poi	Escape Pod	1	GUARD	idle	0	0	0	0	300	120	0
+901629	TATOOINE	tat_world	AREA	0	-3946.50	21.41	-4278.91	0	1	Valarian's smuggler	tatooine_valarian_smuggler_20_h_agg_n	poi	Escape Pod	1	GUARD	idle	0	0	0	0	300	120	0
+901630	TATOOINE	tat_world	AREA	0	-3973.70	60.00	6310.95	0	1	a Tusken bantha	bantha_tusken_30_c_att_n	poi	Fort Tusken	1	GUARD	idle	0	0	0	0	300	120	0
+901631	TATOOINE	tat_world	AREA	0	-3990.99	60.00	6306.52	0	1	a Tusken captain	tusken_captain_33_h_agg_n	poi	Fort Tusken	1	GUARD	idle	0	0	0	0	300	120	0
+901632	TATOOINE	tat_world	AREA	0	-3971.41	22.00	6163.89	0	1	a Tusken raider	tusken_raider_30_h_agg_n	poi	Fort Tusken	1	GUARD	idle	0	0	0	0	300	120	0
+901633	TATOOINE	tat_world	AREA	0	-3976.98	60.00	6281.28	0	1	a Tusken raider	tusken_raider_30_h_agg_n	poi	Fort Tusken	1	GUARD	idle	0	0	0	0	300	120	0
+901634	TATOOINE	tat_world	AREA	0	-3979.63	60.00	6249.63	0	1	a Tusken raider	tusken_raider_30_h_agg_n	poi	Fort Tusken	1	GUARD	idle	0	0	0	0	300	120	0
+901635	TATOOINE	tat_world	AREA	0	-3986.20	60.00	6313.30	0	1	a Tusken raider	tusken_raider_30_h_agg_n	poi	Fort Tusken	1	GUARD	idle	0	0	0	0	300	120	0
+901636	TATOOINE	tat_world	AREA	0	-4009.36	60.00	6243.47	0	1	a Tusken raider	tusken_raider_30_h_agg_n	poi	Fort Tusken	1	GUARD	idle	0	0	0	0	300	120	0
+901637	TATOOINE	tat_world	AREA	0	-4020.62	60.00	6225.16	0	1	a Tusken raider	tusken_raider_30_h_agg_n	poi	Fort Tusken	1	GUARD	idle	0	0	0	0	300	120	0
+901638	TATOOINE	tat_world	AREA	0	-4006.72	68.51	6290.50	0	1	a Tusken sniper	tusken_sniper_30_h_agg_n	poi	Fort Tusken	1	GUARD	idle	0	0	0	0	300	120	0
+901639	TATOOINE	tat_world	AREA	0	-6109.88	24.84	-3360.46	0	1	a jundland eopie	eopie_jundland_21_c_att_n	poi	Great Pit of Carkoon	3	FLOAT	idle	0	0	0	0	300	120	6
+901640	TATOOINE	tat_world	AREA	0	-6112.28	27.22	-3374.95	0	1	a jundland eopie	eopie_jundland_21_c_att_n	poi	Great Pit of Carkoon	3	FLOAT	idle	0	0	0	0	300	120	6
+901641	TATOOINE	tat_world	AREA	0	-5880.49	50.47	-5932.83	0	1	an Elite Dune Lizzard	lizard_dune_elite_18_c_agg_e	poi	Jabbas Palace	1	GUARD	idle	0	0	0	0	300	120	0
+901642	TATOOINE	tat_world	AREA	0	-5891.39	49.52	-5967.41	0	1	an Elite Dune Lizzard	lizard_dune_elite_18_c_agg_e	poi	Jabbas Palace	1	GUARD	idle	0	0	0	0	300	120	0
+901643	TATOOINE	tat_world	AREA	0	-5927.21	49.47	-5931.22	0	1	an Elite Dune Lizzard	lizard_dune_elite_18_c_agg_e	poi	Jabbas Palace	1	GUARD	idle	0	0	0	0	300	120	0
+901644	TATOOINE	tat_world	AREA	0	-5936.96	51.73	-5974.32	0	1	an Elite Dune Lizzard	lizard_dune_elite_18_c_agg_e	poi	Jabbas Palace	1	GUARD	idle	0	0	0	0	300	120	0
+901645	TATOOINE	tat_world	AREA	0	-5969.66	53.20	-5960.45	0	1	an Elite Dune Lizzard	lizard_dune_elite_18_c_agg_e	poi	Jabbas Palace	1	GUARD	idle	0	0	0	0	300	120	0
+901646	TATOOINE	tat_world	AREA	0	-6178.00	90.00	-6381.60	53	1	Klaatu	klaatu_100_h_inv_n	poi	Jabbas Palace	1	STOP	idle	0	0	0	0	300	120	0
+901647	TATOOINE	tat_world	AREA	0	-5943.73	58.73	-6043.00	0	1	Gotan	smuggler_broker_gotan_100_h_inv_n	poi	Jabbas Palace	1	STOP	idle	0	0	0	0	300	120	0
+901648	TATOOINE	tat_world	AREA	0	-5858.00	90.00	-6193.00	48	1	Smuggler Pilot	smuggler_pilot_100_h_inv_n	poi	Jabbas Palace	1	STOP	idle	0	0	0	0	300	120	0
+901649	TATOOINE	tat_world	AREA	0	-6001.97	44.20	1852.10	0	1	a greater desert womp rat	womprat_great_desert_12_c_agg_n	poi	Jawa Traders	1	GUARD	idle	0	0	0	0	300	120	0
+901650	TATOOINE	tat_world	AREA	0	-6157.95	51.10	2029.82	0	1	a greater desert womp rat	womprat_great_desert_12_c_agg_n	poi	Jawa Traders	1	GUARD	idle	0	0	0	0	300	120	0
+901651	TATOOINE	tat_world	AREA	0	-6249.46	36.67	1961.83	0	1	a greater desert womp rat	womprat_great_desert_12_c_agg_n	poi	Jawa Traders	1	GUARD	idle	0	0	0	0	300	120	0
+901652	TATOOINE	tat_world	AREA	0	-6285.12	44.68	1918.76	0	1	a greater desert womp rat	womprat_great_desert_12_c_agg_n	poi	Jawa Traders	1	GUARD	idle	0	0	0	0	300	120	0
+901653	TATOOINE	tat_world	AREA	0	-6031.30	42.31	1948.73	0	1	a wild zucca boar	boar_zucca_wild_19_c_att_n	poi	Jawa Traders	1	GUARD	idle	0	0	0	0	300	120	0
+901654	TATOOINE	tat_world	AREA	0	-6398.04	295.01	2165.62	0	1	a wild zucca boar	boar_zucca_wild_19_c_att_n	poi	Jawa Traders	1	GUARD	idle	0	0	0	0	300	120	0
+901655	TATOOINE	tat_world	AREA	0	-6423.25	301.19	2157.23	0	1	a wild zucca boar	boar_zucca_wild_19_c_att_n	poi	Jawa Traders	1	GUARD	idle	0	0	0	0	300	120	0
+901656	TATOOINE	tat_world	AREA	0	-6076.67	52.56	2013.90	0	1	a wild bladeback boar	boar_bladeback_wild_40_c_att_n	poi	Jawa Traders	1	GUARD	idle	0	0	0	0	300	120	0
+901657	TATOOINE	tat_world	AREA	0	-6411.07	308.48	2155.44	0	1	a wild bladeback boar	boar_bladeback_wild_40_c_att_n	poi	Jawa Traders	1	GUARD	idle	0	0	0	0	1800	1500	0
+901658	TATOOINE	tat_world	AREA	0	-6205.45	23.63	1845.75	155	1	Acic Ugadie	acic_ugadie_100_h_inv_n	poi	Jawa Traders	1	STOP	idle	0	0	0	0	300	120	0
+901659	TATOOINE	tat_world	AREA	0	-6144.20	23.56	1872.19	-38	1	Opeute	opeute_100_h_inv_n	poi	Jawa Traders	1	STOP	npc_use_terminal_high	0	0	0	0	300	120	0
+901660	TATOOINE	tat_world	AREA	0	-6152.01	23.63	1812.08	-166	1	Ji'Ni Sil	tatooine_watto_jawa_100_h_inv_n	poi	Jawa Traders	1	STOP	idle	0	0	0	0	300	120	0
+901661	TATOOINE	tat_world	AREA	0	-5998.23	62.91	1805.95	0	1	Tusken Follower	tusken_raider_18_h_agg_n	poi	Jawa Traders	1	GUARD	idle	0	0	0	0	300	120	0
+901662	TATOOINE	tat_world	AREA	0	-6158.00	23.59	1836.00	-173	1	Protocol Droid	protocol_droid_jawa_fort_100_d_inv_n	poi	Jawa Traders	1	STOP	idle	0	0	0	0	300	120	0
+901663	TATOOINE	tat_world	AREA	0	-6152.08	23.63	1810.50	0	1	C4-ZX	som_decrepit_cww8_combat_droid_83_d_agg_b	poi	Jawa Traders	1	STOP	idle	0	0	0	0	300	120	0
+901664	TATOOINE	tat_world	AREA	0	7358.00	14.60	4486.60	0	1	a juvenile canyon krayt dragon	krayt_dragon_juvenile_canyon_82_c_agg_b	poi	Krayt Graveyard	3	FLOAT	idle	0	0	0	0	1200	900	50
+901665	TATOOINE	tat_world	AREA	0	6985.46	14.63	4368.01	0	1	a krayt dragon ancient	krayt_dragon_ancient_90_c_agg_b	poi	Krayt Graveyard	1	FLOAT	idle	0	0	0	0	1800	1200	30
+901666	TATOOINE	tat_world	AREA	0	7432.96	6.44	4561.59	0	1	a krayt dragon ancient	krayt_dragon_ancient_90_c_agg_b	poi	Krayt Graveyard	1	FLOAT	idle	0	0	0	0	1800	1200	30
+901667	TATOOINE	tat_world	AREA	0	7432.96	6.44	4561.59	0	1	a krayt dragon ancient	krayt_dragon_ancient_90_c_agg_b	poi	Krayt Graveyard	1	FLOAT	idle	0	0	0	0	1200	900	30
+901668	TATOOINE	tat_world	AREA	0	7484.33	8.10	4483.69	0	1	a krayt dragon ancient	krayt_dragon_ancient_90_c_agg_b	poi	Krayt Graveyard	1	FLOAT	idle	0	0	0	0	1200	900	30
+901669	TATOOINE	tat_world	AREA	0	7428.00	5.71	4528.97	0	1	a grand krayt dragon	krayt_dragon_grand_88_c_agg_b	poi	Krayt Graveyard	2	FLOAT	idle	0	0	0	0	1800	1200	30
+901670	TATOOINE	tat_world	AREA	0	7428.00	5.71	4528.97	0	1	a grand krayt dragon	krayt_dragon_grand_88_c_agg_b	poi	Krayt Graveyard	2	FLOAT	idle	0	0	0	0	1200	900	30
+901671	TATOOINE	tat_world	AREA	0	-2451.89	0.00	-5363.11	0	1	a greater desert womp rat	womprat_great_desert_12_c_agg_n	poi	Lars Homestead	2	FLOAT	idle	0	0	0	0	300	120	4
+901672	TATOOINE	tat_world	AREA	0	-2455.24	0.00	-5384.64	0	1	a greater desert womp rat	womprat_great_desert_12_c_agg_n	poi	Lars Homestead	2	FLOAT	idle	0	0	0	0	300	120	4
+901673	TATOOINE	tat_world	AREA	0	-2481.61	0.00	-5364.43	0	1	a greater desert womp rat	womprat_great_desert_12_c_agg_n	poi	Lars Homestead	2	FLOAT	idle	0	0	0	0	300	120	4
+901674	TATOOINE	tat_world	AREA	0	-2575.00	0.00	-5517.00	0	1	Zef Ando	legacy_zef_ando_100_h_inv_n	poi	Lars Homestead	1	STOP	idle	0	0	0	0	300	120	0
+901675	TATOOINE	tat_world	AREA	0	-2568.00	0.00	-5636.40	0	1	a modified Battle Droid	som_decrepit_colonel_or5_86_d_agg_b	poi	Lars Homestead	3	FLOAT	idle	0	0	0	0	90	60	6
+901676	TATOOINE	tat_world	AREA	0	919.86	0.76	3825.38	0	1	Tusken Follower	tusken_raider_18_h_agg_n	poi	Old Mos Espa Arena Track	2	FLOAT	idle	0	0	0	0	300	120	4
+901677	TATOOINE	tat_world	AREA	0	930.01	0.92	3819.76	0	1	Tusken Follower	tusken_raider_18_h_agg_n	poi	Old Mos Espa Arena Track	2	FLOAT	idle	0	0	0	0	300	120	4
+901678	TATOOINE	tat_world	AREA	0	938.35	0.88	3828.66	0	1	Tusken Follower	tusken_raider_18_h_agg_n	poi	Old Mos Espa Arena Track	2	FLOAT	idle	0	0	0	0	300	120	4
+901679	TATOOINE	tat_world	AREA	0	2380.24	2.00	4999.61	-91	1	Race Coordinator	race_coordinator_protocol_100_d_inv_n	poi	Old Mos Espa Arena Track	1	STOP	idle	0	0	0	0	300	120	0

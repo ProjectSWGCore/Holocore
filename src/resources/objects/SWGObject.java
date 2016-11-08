@@ -94,7 +94,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	private float		complexity		= 1;
 	private int     	containerType	= 0;
 	private double		prefLoadRange	= 200;
-	private double		childRadius		= 0;
 	private int			areaId			= -1;
 	private int     	slotArrangement	= -1;
 	
@@ -127,7 +126,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		}
 		object.parent = this;
 		object.getAwareness().setParent(getAwareness());
-		updateChildRadius(object);
 	}
 	
 	/**
@@ -157,7 +155,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		object.parent = null;
 		object.getAwareness().setParent(null);
 		object.slotArrangement = -1;
-		updateChildRadius(null);
 	}
 	
 	/**
@@ -184,11 +181,15 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		}
 		
 		Set<Player> newObservers = getObserversAndParent();
+		if (oldObservers.contains(getOwner()))
+			Log.w(this, "Old Observers contains owner! %s", getOwner());
+		if (newObservers.contains(getOwner()))
+			Log.w(this, "New Observers contains owner! %s", getOwner());
 		long newId = (container != null) ? container.getObjectId() : 0;
 		UpdateContainmentMessage update = new UpdateContainmentMessage(getObjectId(), newId, getSlotArrangement());
 		AwarenessUtilities.callForSameObserver(oldObservers, newObservers, (observer) -> observer.sendPacket(update));
-		AwarenessUtilities.callForNewObserver(oldObservers, newObservers, (observer) -> createObject(observer, false));
-		AwarenessUtilities.callForOldObserver(oldObservers, newObservers, (observer) -> destroyObject(observer));
+//		AwarenessUtilities.callForNewObserver(oldObservers, newObservers, (observer) -> createObject(observer, false));
+//		AwarenessUtilities.callForOldObserver(oldObservers, newObservers, (observer) -> destroyObject(observer));
 		return ContainerResult.SUCCESS;
 	}
 
@@ -304,16 +305,10 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		if (l == null)
 			return;
 		location.mergeWith(l);
-		SWGObject parent = getParent();
-		if (parent != null)
-			parent.updateChildRadius(null);
 	}
 	
 	public void setLocation(double x, double y, double z) {
 		location.mergeLocation(x, y, z);
-		SWGObject parent = getParent();
-		if (parent != null)
-			parent.updateChildRadius(null);
 	}
 	
 	public void setStf(String stfFile, String stfKey) {
@@ -553,20 +548,23 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	public double getLoadRange() {
 		double bubble = getPrefLoadRange();
-		synchronized (containedObjects) {
-			for (SWGObject contained : containedObjects) {
-				double x = contained.location.getX();
-				double z = contained.location.getZ();
-				double dist = Math.sqrt(x*x+z*z) + contained.getLoadRange();
-				if (dist > bubble)
-					bubble = dist;
-			}
-		}
+		// Disabled for now - need more accurate cell data first
+//		synchronized (containedObjects) {
+//			for (SWGObject contained : containedObjects) {
+//				double x = contained.getX();
+//				double z = contained.getZ();
+//				double dist = Math.sqrt(x*x+z*z) + contained.getLoadRange();
+//				if (dist > 2000)
+//					Log.w(this, "Load range is too large! Distance=%.1f  X=%.1f Z=%.1f Contained=%.1f  Object=%s", dist, x, z, contained.getLoadRange(), this);
+//				if (dist > bubble)
+//					bubble = dist;
+//			}
+//		}
 		return bubble;
 	}
 	
 	public double getChildRadius() {
-		return childRadius;
+		return getLoadRange();
 	}
 	
 	public double getPrefLoadRange() {
@@ -612,26 +610,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		return (filledId != -1) ? filledId : -1;
 	}
 	
-	protected void updateChildRadius(SWGObject updated) {
-		if (updated == null) {
-			double maxDistance = 0;
-			synchronized (containedObjects) {
-				for (SWGObject contained : containedObjects) {
-					double dist = location.distanceTo(contained.location) + contained.getLoadRange();
-					if (dist > maxDistance)
-						maxDistance = dist;
-				}
-			}
-			childRadius = maxDistance;
-		} else {
-			double maxDistance = childRadius;
-			double dist = location.distanceTo(updated.location);
-			if (dist > maxDistance)
-				maxDistance = dist;
-			childRadius = maxDistance;
-		}
-	}
-	
 	private final void sendSceneCreateObject(Player target) {
 		SceneCreateObjectByCrc create = new SceneCreateObjectByCrc();
 		create.setObjectId(objectId);
@@ -655,9 +633,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	public void createObject(SWGObject target, boolean ignoreSnapshotChecks) {
 		if (target == null)
 			return;
-		if (!isVisible(target)) {
-			return;
-		}
 		Set<Player> observers = target.getAwareness().getChildObservers();
 		if (target.getOwnerShallow() != null)
 			observers.add(target.getOwnerShallow());
@@ -667,6 +642,10 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	public void createObject(Player target, boolean ignoreSnapshotChecks) {
+		if (!isVisible(target.getCreatureObject())) {
+			return;
+		}
+		
 		boolean send = !isSnapshot() || ignoreSnapshotChecks;
 		if (send) {
 			sendSceneCreateObject(target);
