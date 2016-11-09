@@ -78,7 +78,11 @@ public class BuildoutAreaGrid {
 	public BuildoutArea getBuildoutArea(Terrain t, double x, double z) {
 		BuildoutAreaNode node;
 		synchronized (grid) {
-			node = grid[getNodeIndex(z)][getNodeIndex(x)];
+			int zInd = getNodeIndex(z);
+			int xInd = getNodeIndex(x);
+			if (xInd < 0 || xInd >= grid.length || zInd < 0 || zInd >= grid.length)
+				return null;
+			node = grid[zInd][xInd];
 			if (node == null)
 				return null;
 		}

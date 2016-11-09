@@ -27,8 +27,8 @@
 ***********************************************************************************/
 package resources.control;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import resources.server_info.Log;
 
@@ -39,10 +39,10 @@ import resources.server_info.Log;
  */
 public abstract class Manager extends Service {
 	
-	private List <Service> children;
+	private final Set<Service> children;
 	
 	public Manager() {
-		children = new ArrayList<Service>();
+		children = new HashSet<>();
 	}
 	
 	/**
@@ -146,27 +146,23 @@ public abstract class Manager extends Service {
 	
 	/**
 	 * Adds a child to the manager's list of children. This creates a tree of
-	 * managers that allows information to propogate freely through the network
+	 * services that allows information to propogate freely through the network
 	 * in an easy way.
-	 * @param m the manager to add as a child.
+	 * @param s the service to add as a child.
 	 */
-	public void addChildService(Service s) {
+	protected final void addChildService(Service s) {
 		if (s == null)
 			throw new NullPointerException("Child service cannot be null!");
 		synchronized (children) {
-			for (Service child : children) {
-				if (s == child || s.equals(child))
-					return;
-			}
 			children.add(s);
 		}
 	}
 	
 	/**
-	 * Removes the sub-manager from the list of children
-	 * @param m the sub-manager to remove
+	 * Removes the service from the list of children
+	 * @param s the service to remove
 	 */
-	public void removeChildService(Service s) {
+	protected final void removeChildService(Service s) {
 		if (s == null)
 			return;
 		synchronized (children) {
@@ -175,12 +171,12 @@ public abstract class Manager extends Service {
 	}
 	
 	/**
-	 * Returns a copied ArrayList of the children of this manager
-	 * @return a copied ArrayList of the children of this manager
+	 * Returns a copied {@code Set] of the children of this manager
+	 * @return a copied {@code Set] of the children of this manager
 	 */
-	public List<Service> getManagerChildren() {
+	public Set<Service> getManagerChildren() {
 		synchronized (children) {
-			return new ArrayList<Service>(children);
+			return new HashSet<>(children);
 		}
 	}
 	

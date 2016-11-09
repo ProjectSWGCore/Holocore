@@ -57,7 +57,6 @@ import services.map.MapManager;
 import services.player.PlayerManager;
 import services.spawn.SpawnerService;
 import services.spawn.StaticService;
-import utilities.Scripts;
 
 public class ObjectManager extends Manager {
 	
@@ -67,6 +66,7 @@ public class ObjectManager extends Manager {
 	private final SpawnerService spawnerService;
 	private final RadialService radialService;
 	private final ClientBuildoutService clientBuildoutService;
+	private final StaticItemService staticItemService;
 
 	private final ObjectDatabase<SWGObject> database;
 	private final Map <Long, SWGObject> objectMap;
@@ -79,6 +79,7 @@ public class ObjectManager extends Manager {
 		spawnerService = new SpawnerService(this);
 		radialService = new RadialService();
 		clientBuildoutService = new ClientBuildoutService();
+		staticItemService = new StaticItemService();
 		
 		database = new CachedObjectDatabase<>("odb/objects.db", SWGObjectFactory::create, SWGObjectFactory::save);
 		objectMap = new Hashtable<>(16*1024);
@@ -90,6 +91,7 @@ public class ObjectManager extends Manager {
 		addChildService(radialService);
 		addChildService(spawnerService);
 		addChildService(clientBuildoutService);
+		addChildService(staticItemService);
 		
 		registerForIntent(GalacticPacketIntent.TYPE);
 		registerForIntent(ObjectTeleportIntent.TYPE);
@@ -125,9 +127,6 @@ public class ObjectManager extends Manager {
 	}
 	
 	private void loadObject(SWGObject obj) {
-		if (obj instanceof CreatureObject && ((CreatureObject) obj).isPlayer())
-			Scripts.invoke("objects/load_creature", "onLoad", obj);
-		
 		updateBuildoutParent(obj);
 		addChildrenObjects(obj);
 	}
@@ -180,7 +179,6 @@ public class ObjectManager extends Manager {
 	@Override
 	public boolean terminate() {
 		synchronized (database) {
-			database.traverse((obj) -> obj.setOwner(null));
 			database.close();
 		}
 		return super.terminate();

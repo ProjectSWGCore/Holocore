@@ -21,7 +21,7 @@ function executeCommand(galacticManager, player, target, args) {
 		}
 		intent.broadcast();
 	} else if (creature.getPvpFaction() != PvpFaction.NEUTRAL) {
-		intent = new FactionIntent(creature, FactionIntentType.STATUSUPDATE);
+		intent = new FactionIntent(creature, FactionIntentType.SWITCHUPDATE);
 		intent.broadcast();
 	} else {
 		creature.getOwner().sendPacket(new ChatSystemMessage(SystemChatType.SCREEN_AND_CHAT, "@faction_recruiter:not_aligned"));

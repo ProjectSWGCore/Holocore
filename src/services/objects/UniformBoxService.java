@@ -28,19 +28,21 @@
 package services.objects;
 
 
+import intents.object.CreateStaticItemIntent;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import intents.object.DestroyObjectIntent;
-import intents.object.ObjectCreatedIntent;
 import intents.radial.RadialSelectionIntent;
-import resources.Race;
+import java.util.ArrayList;
+import java.util.Collection;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
-import resources.server_info.ItemDatabase;
+import resources.player.Player;
+import resources.radial.RadialItem;
 import resources.server_info.RelationalServerData;
 import resources.server_info.RelationalServerFactory;
 
@@ -80,23 +82,28 @@ public class UniformBoxService extends Service {
 		if (!rsi.getTarget().getTemplate().equals(UNIFORM_BOX_IFF))
 			return;
 		
-		CreatureObject creature = rsi.getPlayer().getCreatureObject();
+		if(!rsi.getSelection().equals(RadialItem.ITEM_USE)) {
+			return;
+		}
+		
+		Player player = rsi.getPlayer();
+		CreatureObject creature = player.getCreatureObject();
 		SWGObject inventory = creature.getSlottedObject("inventory");
 		String profession = creature.getPlayerObject().getProfession();
 		
 		new DestroyObjectIntent(rsi.getTarget()).broadcast();
-		handleCreateItems(inventory, profession, creature.getRace());
+		handleCreateItems(inventory, profession, creature);
 	}
 	
-	private void handleCreateItems(SWGObject inventory, String profession, Race race) {
+	private void handleCreateItems(SWGObject inventory, String profession, CreatureObject creature) {
 		synchronized (getUniformBoxStatement) {
 			try {
 				getUniformBoxStatement.setString(1, profession);
-				getUniformBoxStatement.setString(2, race.name());
+				getUniformBoxStatement.setString(2, creature.getRace().name());
 				
 				try (ResultSet set = getUniformBoxStatement.executeQuery()) {
 					if (set.next())
-						createItems(set, inventory);
+						createItems(set, creature, inventory);
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -104,27 +111,16 @@ public class UniformBoxService extends Service {
 		}
 	}
 	
-	private void createItems(ResultSet set, SWGObject inventory) throws SQLException {
+	private void createItems(ResultSet set, CreatureObject creature, SWGObject inventory) throws SQLException {
+		Collection<String> staticItems = new ArrayList<>();
 		for (String uniformItem : UNIFORM_COLUMNS) {
 			String item = set.getString(uniformItem);
-			if (item.isEmpty())
-				continue;
 			
-			SWGObject object = ObjectCreator.createObjectFromTemplate(getItemIffTemplate(item));
-			object.moveToContainer(inventory);
-			new ObjectCreatedIntent(object).broadcast();
+			if (!item.isEmpty())
+				staticItems.add(item);
 		}
-	}
-	
-	private String getItemIffTemplate(String item_name){
-		String template = "";
 		
-		try (ItemDatabase db = new ItemDatabase()){
-			template = db.getIffTemplate(item_name);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return template;
+		new CreateStaticItemIntent(creature, inventory, staticItems.toArray(new String[staticItems.size()])).broadcast();
 	}
 	
 }

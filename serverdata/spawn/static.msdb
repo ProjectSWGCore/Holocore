@@ -1,15 +1,41 @@
 spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	creature_name	creature_id	spawn_category	spawn_area	amount	behaviour	mood	equipment_id	patrol_id	quest_id	loot_id	max_spawn_time	min_spawn_time	float_radius
-INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGER NOT NULL	REAL	REAL	REAL	REAL	INTEGER	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL	INTEGER NOT NULL	INTEGER
-area_51.sdb	FALSE																						
+TEXT PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGER NOT NULL	REAL	REAL	REAL	INTEGER	INTEGER	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL	INTEGER NOT NULL	INTEGER
 corellia.sdb	TRUE																						
 dantooine.sdb	TRUE																						
 dathomir.sdb	TRUE																						
-dungeon1.sdb	TRUE																						
+dungeon1_corvette.sdb	TRUE																						
+dungeon1_mtp_instance.sdb	FALSE																						
+dungeon1_nova_orion.sdb	TRUE																						
+dungeon1_npe_dungeon.sdb	FALSE																						
+dungeon1_npe_station.sdb	FALSE																						
 endor.sdb	TRUE																						
-kashyyyk.sdb	TRUE																						
+kashyyyk_dead_forest.sdb	TRUE																						
+kashyyyk_hunting.sdb	TRUE																						
+kashyyyk_main.sdb	TRUE																						
+kashyyyk_north_dungeons_arena.sdb	FALSE																						
+kashyyyk_north_dungeons_slaver.sdb	FALSE																						
+kashyyyk_pob_dungeons_avatar.sdb	FALSE																						
+kashyyyk_pob_dungeons_myyydril.sdb	FALSE																						
+kashyyyk_rryatt_trail_1_2.sdb	FALSE																						
+kashyyyk_rryatt_trail_3.sdb	FALSE																						
+kashyyyk_rryatt_trail_4.sdb	FALSE																						
+kashyyyk_rryatt_trail_5.sdb	FALSE																						
+kashyyyk_south_dungeons_bocctyyy.sdb	FALSE																						
+kashyyyk_south_dungeons_hracca.sdb	FALSE																						
 lok.sdb	TRUE																						
 naboo.sdb	TRUE																						
 rori.sdb	TRUE																						
 talus.sdb	TRUE																						
 tatooine.sdb	TRUE																						
 yavin4.sdb	TRUE																						
+event_empireday.sdb	FALSE																						
+event_halloween.sdb	TRUE																						
+event_lifeday.sdb	FALSE																						
+event_loveday.sdb	FALSE																						
+event_remembranceday.sdb	FALSE																						
+gcw_base_npc_corellia.sdb	TRUE																						
+gcw_base_npc_naboo.sdb	TRUE																						
+gcw_base_npc_talus.sdb	TRUE																						
+gcw_presence_corellia.sdb	TRUE																						
+gcw_presence_naboo.sdb	TRUE																						
+gcw_presence_tatooine.sdb	TRUE																						

@@ -377,7 +377,6 @@ public class TravelService extends Service {
 		
 		grantTickets(purchaser, nearestPoint, destinationPoint, roundTrip);
 		handlePurchaseFinish(purchaserOwner, purchaser, ticketPrice, newCashBalance, newBankBalance);
-
 	}
 	
 	private void handlePurchaseFinish(Player purchaserOwner, CreatureObject purchaser, int ticketPrice, long newCashBalance, long newBankBalance) {
@@ -427,10 +426,11 @@ public class TravelService extends Service {
 	}
 	
 	private void handleTicketUse(TicketUseIntent i) {
-		TravelPoint point = getNearestTravelPoint(i.getPlayer().getCreatureObject().getWorldLocation());
+		Player player = i.getPlayer();
+		TravelPoint point = getNearestTravelPoint(player.getCreatureObject().getWorldLocation());
 		TravelGroup travel = null;
 		if (point.getShuttle() == null) {
-			Log.w(this, "No travel point shuttle near player: %s", i.getPlayer().getCreatureObject().getWorldLocation());
+			Log.w(this, "No travel point shuttle near player: %s", player.getCreatureObject().getWorldLocation());
 			return;
 		}
 		travel = this.travel.get(point.getShuttle().getTemplate());
@@ -438,6 +438,17 @@ public class TravelService extends Service {
 			Log.e(this, "Travel point is null for shuttle: " + point.getShuttle());
 			return;
 		}
+		
+		Location worldLoc = player.getCreatureObject().getWorldLocation();
+		TravelPoint nearestPoint = getNearestTravelPoint(worldLoc);
+		double distanceToNearestPoint = worldLoc.distanceTo(nearestPoint.getCollector().getWorldLocation());
+		
+		if(distanceToNearestPoint > TICKET_USE_RADIUS) {
+			// They're too far away - tell them and do nothing afterwards.
+			new ChatBroadcastIntent(player, "@travel:boarding_too_far").broadcast();
+			return;
+		}
+		
 		switch (travel.getStatus()) {
 			case GROUNDED:
 				if (i.getTicket() == null)
@@ -446,13 +457,13 @@ public class TravelService extends Service {
 					handleTicketUseClick(i);
 				break;
 			case LANDING:
-				new ChatBroadcastIntent(i.getPlayer(), "@travel/travel:shuttle_begin_boarding").broadcast();
+				new ChatBroadcastIntent(player, "@travel/travel:shuttle_begin_boarding").broadcast();
 				break;
 			case LEAVING:
-				new ChatBroadcastIntent(i.getPlayer(), "@travel:shuttle_not_available").broadcast();
+				new ChatBroadcastIntent(player, "@travel:shuttle_not_available").broadcast();
 				break;
 			case AWAY:
-				new ChatBroadcastIntent(i.getPlayer(), new ProsePackage(new StringId("travel/travel", "shuttle_board_delay"), "DI", travel.getTimeRemaining())).broadcast();
+				new ChatBroadcastIntent(player, new ProsePackage(new StringId("travel/travel", "shuttle_board_delay"), "DI", travel.getTimeRemaining())).broadcast();
 				break;
 		}
 	}

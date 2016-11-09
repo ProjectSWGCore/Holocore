@@ -29,7 +29,13 @@ package resources.objects.creature;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Set;
+import java.util.Locale;
+import java.util.Map;
+import java.util.function.BiConsumer;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 import network.packets.swg.zone.UpdatePostureMessage;
 import network.packets.swg.zone.UpdatePvpStatusMessage;
@@ -38,9 +44,11 @@ import network.packets.swg.zone.object_controller.PostureUpdate;
 import resources.HologramColour;
 import resources.Posture;
 import resources.PvpFlag;
+import resources.PvpStatus;
 import resources.Race;
 import resources.collections.SWGList;
 import resources.collections.SWGSet;
+import resources.common.CRC;
 import resources.network.BaselineBuilder;
 import resources.network.NetBuffer;
 import resources.network.NetBufferStream;
@@ -66,12 +74,10 @@ public class CreatureObject extends TangibleObject {
 	private int		cashBalance				= 0;
 	private int		bankBalance				= 0;
 	private long	reserveBalance			= 0; // Galactic Reserve - capped at 3 billion
-	private WeaponObject defaultWeapon		= null;
 	private byte 	factionRank				= 0;
 	private long 	ownerId					= 0;
 	private int 	battleFatigue			= 0;
 	private long 	statesBitmask			= 0;
-	private String	currentCity				= "";
 	private long	lastTransform			= 0;
 	
 	private SWGSet<String>		skills				= new SWGSet<String>(1, 3, StringType.ASCII);
@@ -81,6 +87,7 @@ public class CreatureObject extends TangibleObject {
 	public CreatureObject(long objectId) {
 		super(objectId, BaselineType.CREO);
 		initBaseAttributes();
+		setPrefLoadRange(200);
 	}
 	
 	@Override
@@ -88,9 +95,6 @@ public class CreatureObject extends TangibleObject {
 		super.addObject(obj);
 		if (obj.getSlotArrangement() != -1 && !(obj instanceof PlayerObject)) {
 			addEquipment(obj);
-			if (obj instanceof WeaponObject && defaultWeapon != null && !obj.equals(defaultWeapon)) {
-				removeObject(defaultWeapon);
-			}
 		}
 	}
 	
@@ -98,11 +102,9 @@ public class CreatureObject extends TangibleObject {
 	public void removeObject(SWGObject obj) {
 		super.removeObject(obj);
 		removeEquipment(obj);
-		if (obj instanceof WeaponObject && defaultWeapon != null && !obj.equals(defaultWeapon)) {
-			addObject(defaultWeapon);
-		}
 	}
 	
+	@Override
 	protected void handleSlotReplacement(SWGObject oldParent, SWGObject obj, int arrangement) {
 		SWGObject inventory = getSlottedObject("inventory");
 		for (String slot : obj.getArrangement().get(arrangement-4)) {
@@ -129,11 +131,14 @@ public class CreatureObject extends TangibleObject {
 		creo6.removeAppearanceItem(obj, this);
 	}
 	
-	public void addSkill(String skillName) {
+	public boolean addSkill(String skillName) {
 		synchronized(skills) {
-			if(skills.add(skillName)) {
+			if (skills.add(skillName)) {
 				skills.sendDeltaMessage(this);
+				return true;
 			}
+			
+			return false;
 		}
 	}
 	
@@ -141,8 +146,8 @@ public class CreatureObject extends TangibleObject {
 		return skills.contains(skillName);
 	}
 	
-	public SWGSet<String> getSkills() {
-		return skills;
+	public Set<String> getSkills() {
+		return Collections.unmodifiableSet(skills);
 	}
 	
 	public int getCashBalance() {
@@ -231,10 +236,6 @@ public class CreatureObject extends TangibleObject {
 	
 	public CreatureDifficulty getDifficulty() {
 		return creo6.getDifficulty();
-	}
-	
-	public String getCurrentCity() {
-		return currentCity;
 	}
 	
 	public double getTimeSinceLastTransform() {
@@ -415,10 +416,6 @@ public class CreatureObject extends TangibleObject {
 		sendDelta(6, 26, difficulty.getDifficulty());
 	}
 	
-	public void setCurrentCity(String currentCity) {
-		this.currentCity = currentCity;
-	}
-	
 	public void updateLastTransformTime() {
 		lastTransform = System.nanoTime();
 	}
@@ -455,18 +452,17 @@ public class CreatureObject extends TangibleObject {
 	}
 
 	public void setEquippedWeapon(WeaponObject weapon) {
-		creo6.setEquippedWeapon(weapon);
-		sendDelta(6, 12, weapon.getObjectId());
+		WeaponObject equippedWeapon;
+		
+		if(weapon == null)
+			equippedWeapon = (WeaponObject) getSlottedObject("default_weapon");
+		else
+			equippedWeapon = weapon;
+		
+		creo6.setEquippedWeapon(equippedWeapon);
+		sendDelta(6, 12, equippedWeapon.getObjectId());
 	}
 
-	public WeaponObject getDefaultWeapon() {
-		return defaultWeapon;
-	}
-
-	public void setDefaultWeapon(WeaponObject defaultWeapon) {
-		this.defaultWeapon = defaultWeapon;
-	}
-	
 	public byte getMoodId() {
 		return creo6.getMoodId();
 	}
@@ -593,12 +589,40 @@ public class CreatureObject extends TangibleObject {
 		sendDelta(3, 18, statesBitmask);
 	}
 
-	public void adjustSkillmod(String skillModName, int base, int modifier) {
+	public synchronized void adjustSkillmod(String skillModName, int base, int modifier) {
 		creo4.adjustSkillmod(skillModName, base, modifier, this);
 	}
 	
 	public int getSkillModValue(String skillModName) {
 		return creo4.getSkillModValue(skillModName);
+	}
+	
+	public void addBuff(CRC buffCrc, Buff buff) {
+		creo6.putBuff(buffCrc, buff, this);
+	}
+	
+	public Buff removeBuff(CRC buffCrc) {
+		return creo6.removeBuff(buffCrc, this);
+	}
+	
+	public boolean hasBuff(String buffName) {
+		return getBuffEntries(buffEntry -> new CRC(buffName.toLowerCase(Locale.ENGLISH)).equals(buffEntry.getKey())).count() > 0;
+	}
+	
+	public Stream<Map.Entry<CRC, Buff>> getBuffEntries(Predicate<Map.Entry<CRC, Buff>> predicate) {
+		return creo6.getBuffEntries(predicate);
+	}
+	
+	public void adjustBuffStackCount(CRC buffCrc, int adjustment) {
+		creo6.adjustBuffStackCount(buffCrc, adjustment, this);
+	}
+	
+	public void setBuffDuration(CRC buffCrc, int playTime, int duration) {
+		creo6.setBuffDuration(buffCrc, playTime, duration, this);
+	}
+	
+	public void forEachBuff(BiConsumer<CRC, Buff> action) {
+		creo6.forEachBuff(action);
 	}
 	
 	public boolean isVisible() {
@@ -702,8 +726,8 @@ public class CreatureObject extends TangibleObject {
 		creo6.setHealth(health, this);
 	}
 	
-	public void modifyHealth(int mod) {
-		creo6.modifyHealth(mod, this);
+	public int modifyHealth(int mod) {
+		return creo6.modifyHealth(mod, this);
 	}
 	
 	public void setMaxHealth(int maxHealth) {
@@ -721,8 +745,8 @@ public class CreatureObject extends TangibleObject {
 		creo6.setAction(action, this);
 	}
 	
-	public void modifyAction(int mod) {
-		creo6.modifyAction(mod, this);
+	public int modifyAction(int mod) {
+		return creo6.modifyAction(mod, this);
 	}
 	
 	public void setMaxAction(int maxAction) {
@@ -733,8 +757,8 @@ public class CreatureObject extends TangibleObject {
 		creo6.setMind(mind, this);
 	}
 	
-	public void modifyMind(int mod) {
-		creo6.modifyMind(mod, this);
+	public int modifyMind(int mod) {
+		return creo6.modifyMind(mod, this);
 	}
 	
 	public void setMaxMind(int maxMind) {
@@ -773,6 +797,19 @@ public class CreatureObject extends TangibleObject {
 		}
 		return items;
 	}
+
+	@Override
+	public boolean isEnemy(TangibleObject otherObject) {
+		boolean tangibleEnemy = super.isEnemy(otherObject);
+		
+		if (tangibleEnemy || !(otherObject instanceof CreatureObject)) {
+			return tangibleEnemy;
+		}
+		
+		return isPlayer() && ((CreatureObject) otherObject).isPlayer()
+				&& getPvpStatus() == PvpStatus.SPECIALFORCES
+				&& otherObject.getPvpStatus() == PvpStatus.SPECIALFORCES;
+	}
 	
 	@Override
 	public boolean equals(Object obj) {
@@ -781,7 +818,7 @@ public class CreatureObject extends TangibleObject {
 	
 	@Override
 	public int hashCode() {
-		return (super.hashCode() * 7 + posture.getId()) * 13 + race.toString().hashCode();
+		return super.hashCode() * 20 + race.toString().hashCode();
 	}
 	
 	public void sendBaselines(Player target) {
@@ -806,10 +843,12 @@ public class CreatureObject extends TangibleObject {
 	protected void sendFinalBaselinePackets(Player target) {
 		super.sendFinalBaselinePackets(target);
 		
-		target.sendPacket(new UpdatePostureMessage(posture.getId(), getObjectId()));
-		
-		Set<PvpFlag> flags = PvpFlag.getFlags(getPvpFlags());
-		target.sendPacket(new UpdatePvpStatusMessage(getPvpFaction(), getObjectId(), flags.toArray(new PvpFlag[flags.size()])));
+		if (isGenerated()) {
+			target.sendPacket(new UpdatePostureMessage(posture.getId(), getObjectId()));
+			
+			Set<PvpFlag> flags = PvpFlag.getFlags(getPvpFlags());
+			target.sendPacket(new UpdatePvpStatusMessage(getPvpFaction(), getObjectId(), flags.toArray(new PvpFlag[flags.size()])));
+		}
 	}
 	
 	public void createBaseline1(Player target, BaselineBuilder bb) {
@@ -859,7 +898,7 @@ public class CreatureObject extends TangibleObject {
 		bankBalance = buffer.getInt();
 		cashBalance = buffer.getInt();
 		baseAttributes = buffer.getSwgList(1, 2, Integer.class);
-		skills = buffer.getSwgSet(1, 2, StringType.ASCII);
+		skills = buffer.getSwgSet(1, 3, StringType.ASCII);
 	}
 	
 	protected void parseBaseline3(NetBuffer buffer) {
@@ -891,7 +930,7 @@ public class CreatureObject extends TangibleObject {
 	@Override
 	public void save(NetBufferStream stream) {
 		super.save(stream);
-		stream.addByte(0);
+		stream.addByte(1);
 		creo4.save(stream);
 		creo6.save(stream);
 		stream.addAscii(posture.name());
@@ -904,9 +943,6 @@ public class CreatureObject extends TangibleObject {
 		stream.addLong(ownerId);
 		stream.addLong(statesBitmask);
 		stream.addByte(factionRank);
-		stream.addBoolean(defaultWeapon != null);
-		if (defaultWeapon != null)
-			SWGObjectFactory.save(defaultWeapon, stream);
 		synchronized (skills) {
 			stream.addList(skills, (s) -> stream.addAscii(s));
 		}
@@ -918,7 +954,14 @@ public class CreatureObject extends TangibleObject {
 	@Override
 	public void read(NetBufferStream stream) {
 		super.read(stream);
-		stream.getByte();
+		switch(stream.getByte()) {
+			case 0: readVersion0(stream); break;
+			case 1: readVersion1(stream); break;
+		}
+		
+	}
+	
+	private void readVersion0(NetBufferStream stream) {
 		creo4.read(stream);
 		creo6.read(stream);
 		posture = Posture.valueOf(stream.getAscii());
@@ -931,8 +974,27 @@ public class CreatureObject extends TangibleObject {
 		ownerId = stream.getLong();
 		statesBitmask = stream.getLong();
 		factionRank = stream.getByte();
-		if (stream.getBoolean())
-			defaultWeapon = (WeaponObject) SWGObjectFactory.create(stream);
+		if (stream.getBoolean()) {
+			SWGObject defaultWeapon = (WeaponObject) SWGObjectFactory.create(stream);
+			defaultWeapon.moveToContainer(this);	// The weapon will be moved into the default_weapon slot
+		}
+		stream.getList((i) -> skills.add(stream.getAscii()));
+		stream.getList((i) -> baseAttributes.set(i, stream.getInt()));
+	}
+	
+	private void readVersion1(NetBufferStream stream) {
+		creo4.read(stream);
+		creo6.read(stream);
+		posture = Posture.valueOf(stream.getAscii());
+		race = Race.valueOf(stream.getAscii());
+		height = stream.getFloat();
+		battleFatigue = stream.getInt();
+		cashBalance = stream.getInt();
+		bankBalance = stream.getInt();
+		reserveBalance = stream.getLong();
+		ownerId = stream.getLong();
+		statesBitmask = stream.getLong();
+		factionRank = stream.getByte();
 		stream.getList((i) -> skills.add(stream.getAscii()));
 		stream.getList((i) -> baseAttributes.set(i, stream.getInt()));
 	}

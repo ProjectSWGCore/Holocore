@@ -28,11 +28,13 @@
 package resources.commands.callbacks;
 
 import intents.chat.ChatBroadcastIntent;
+import intents.experience.ExperienceIntent;
 import intents.network.CloseConnectionIntent;
 import intents.object.DestroyObjectIntent;
-import intents.object.ObjectCreatedIntent;
 import intents.object.ObjectTeleportIntent;
+import intents.object.CreateStaticItemIntent;
 import intents.player.DeleteCharacterIntent;
+import java.io.FileNotFoundException;
 import resources.Location;
 import resources.Terrain;
 import resources.commands.ICmdCallback;
@@ -52,7 +54,6 @@ import resources.sui.SuiInputBox;
 import resources.sui.SuiListBox;
 import resources.sui.SuiMessageBox;
 import services.galaxy.GalacticManager;
-import services.objects.ObjectCreator;
 import services.objects.ObjectManager;
 import services.player.PlayerManager;
 import utilities.Scripts;
@@ -95,7 +96,17 @@ public class QaToolCmdCallback implements ICmdCallback {
 					recoverPlayer(galacticManager.getObjectManager(), galacticManager.getPlayerManager(), player, args.substring(args.indexOf(' ') + 1));
 					break;
 				case "details":
-					Scripts.invoke("commands/helper/qatool/details", "sendDetails", player, target, args.split(" "));
+					try {
+						Scripts.invoke("commands/helper/qatool/details", "sendDetails", player, target, args.split(" "));
+					} catch (FileNotFoundException ex) {
+						Log.e("QATool", "sendDetails qatool script not found!");
+					}
+					break;
+				case "xp":
+					if(command.length == 3)
+						grantXp(player, command[1], command[2]);
+					else
+						sendSystemMessage(player, "QATool XP: Expected format: /qatool xp <xpType> <xpGained>");
 					break;
 				default:
 					displayMainWindow(player);
@@ -118,7 +129,7 @@ public class QaToolCmdCallback implements ICmdCallback {
 	}
 	
 	private void displayItemCreator(Player creator) {
-		SuiInputBox inputBox = new SuiInputBox(SuiButtons.OK_CANCEL, "Item Creator", "Enter the template of the item you wish to create");
+		SuiInputBox inputBox = new SuiInputBox(SuiButtons.OK_CANCEL, "Item Creator", "Enter the name of the item you wish to create");
 		inputBox.addOkButtonCallback("handleCreateItem", (player, actor, event, parameters) -> handleCreateItem(player, SuiInputBox.getEnteredText(parameters)));
 		inputBox.addCancelButtonCallback("displayMainWindow", (player, actor, event, parameters) -> displayMainWindow(player));
 		inputBox.display(creator);
@@ -126,25 +137,17 @@ public class QaToolCmdCallback implements ICmdCallback {
 	
 	/* Handlers */
 	
-	private void handleCreateItem(Player player, String template) {
-		SWGObject object = ObjectCreator.createObjectFromTemplate(template);
-		if (object == null) {
-			sendSystemMessage(player, "Failed to create object with template \'" + template + "\'");
-			return;
-		}
-		new ObjectCreatedIntent(object).broadcast();
-		
-		SWGObject creature = player.getCreatureObject();
+	private void handleCreateItem(Player player, String itemName) {
+		CreatureObject creature = player.getCreatureObject();
 		if (creature == null)
 			return;
 		
 		SWGObject inventory = creature.getSlottedObject("inventory");
 		if (inventory == null)
 			return;
-		
-		object.moveToContainer(inventory);
-		sendSystemMessage(player, "Object has been created and placed in your inventory");
-		Log.i("QA", "%s created item from template %s", player, template);
+
+		Log.i("QA", "%s attempted to create item %s", player, itemName);
+		new CreateStaticItemIntent(creature, inventory, itemName).broadcast();
 	}
 	
 	private void forceDelete(final ObjectManager objManager, final Player player, final SWGObject target) {
@@ -171,29 +174,19 @@ public class QaToolCmdCallback implements ICmdCallback {
 		String[] nameParts = name.split(" ");
 		String loc = "";
 		if (nameParts.length >= 2) {
-			switch (nameParts.length) {
-				case 2:
-					name = nameParts[0];
-					loc = nameParts[1];
-					break;
-				case 3:
-					name = nameParts[0] + " " + nameParts[1];
-					loc = nameParts[2];
-					break;
-				default:
-					sendSystemMessage(player, "Invalid arguments! Expected <playername> [opt]<terrain>");
-					break;
-			}
+			name = nameParts[0];
+			loc = nameParts[1];
+		} else {
+			sendSystemMessage(player, "Invalid arguments! Expected <playername> [opt]<terrain>");
 		}
 		name = name.trim();
 		recoverPlayer(objManager, playerManager, player, name, loc);
 	}
 	
 	private void recoverPlayer(ObjectManager objManager, PlayerManager playerManager, Player player, String name, String loc) {
-		long id = playerManager.getCharacterIdByName(name);
+		long id = playerManager.getPlayerByCreatureFirstName(name).getCreatureObject().getObjectId();
 		if (id == 0) {
 			sendSystemMessage(player, "Could not find player by name: '" + name + "'");
-			sendSystemMessage(player, "Make sure it is the full name (case insensitive) and try again");
 			return;
 		}
 		SWGObject recoveree = objManager.getObjectById(id);
@@ -250,6 +243,17 @@ public class QaToolCmdCallback implements ICmdCallback {
 	private void displayHelp(Player player) {
 		String prompt = "The following are acceptable arguments that can be used as shortcuts to the various QA tools:\n" + "item <template> -- Generates a new item and adds it to your inventory, not providing template parameter will display Item Creator window\n" + "help -- Displays this window\n";
 		createMessageBox(player, "QA Tool - Help", prompt);
+	}
+	
+	private void grantXp(Player player, String xpType, String xpGainedArg) {
+		try {
+			int xpGained = Integer.valueOf(xpGainedArg);
+			new ExperienceIntent(player.getCreatureObject(), xpType, xpGained).broadcast();
+			Log.i("QA", "XP command: %s gave themselves %d %s XP", player.getUsername(), xpGained, xpType);
+		} catch (NumberFormatException e) {
+			sendSystemMessage(player, String.format("XP command: %s is not a number", xpGainedArg));
+			Log.e("QA", "XP command: %s gave a non-numerical XP gained argument of %s", player.getUsername(), xpGainedArg);
+		}
 	}
 	
 	/* Utility Methods */

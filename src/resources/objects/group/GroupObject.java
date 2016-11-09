@@ -37,10 +37,9 @@ import resources.objects.creature.CreatureObject;
 import resources.player.Player;
 import utilities.Encoder;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.nio.ByteBuffer;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -60,11 +59,6 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 		super(objectId, Baseline.BaselineType.GRUP);
 		pickupPointTimer = new PickupPointTimer();
 		lootRule = LootRule.RANDOM;
-	}
-
-	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
-		ois.defaultReadObject();
-		pickupPointTimer = new PickupPointTimer();
 	}
 
 	@Override
@@ -150,13 +144,15 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 	private void changeLeader(GroupMember member) {
 		if (groupMembers.size() > 0) {
 			synchronized (groupMembers) {
-				GroupMember previous = groupMembers.set(0, member);
+				// TODO: need to account for group member order of joining
+				Collections.swap(groupMembers, 0, groupMembers.indexOf(member));
 			}
 		} else {
 			this.addMember(member.getCreatureObject());
 		}
 		
 		this.leader = member.getId();
+
 		groupMembers.sendDeltaMessage(this);
 	}
 	

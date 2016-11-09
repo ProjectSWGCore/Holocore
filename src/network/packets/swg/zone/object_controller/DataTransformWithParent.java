@@ -99,7 +99,7 @@ public class DataTransformWithParent extends ObjectController {
 		this.useLookAtYaw = useLookAtYaw;
 	}
 
-	public int getCounter() {
+	public int getUpdateCounter() {
 		return counter;
 	}
 

@@ -60,13 +60,16 @@ public class TangibleObject extends SWGObject {
 	private boolean	visibleGmOnly	= true;
 	private byte []	objectEffects	= new byte[0];
 	private int     optionFlags     = 0;
+	private int		counter			= 0;
+	private String	currentCity				= "";
 	
 	private SWGSet<Long>	defenders	= new SWGSet<>(6, 3);
 	
 	private SWGMap<String, String> effectsMap	= new SWGMap<>(6, 7);
 	
 	public TangibleObject(long objectId) {
-		super(objectId, BaselineType.TANO);
+		this(objectId, BaselineType.TANO);
+		addOptionFlags(OptionFlag.INVULNERABLE);
 	}
 	
 	public TangibleObject(long objectId, BaselineType objectType) {
@@ -237,6 +240,46 @@ public class TangibleObject extends SWGObject {
 		defenders.sendDeltaMessage(this);
 	}
 	
+	public boolean hasDefenders() {
+		return !defenders.isEmpty();
+	}
+
+	public int getCounter() {
+		return counter;
+	}
+
+	public void setCounter(int counter) {
+		this.counter = counter;
+		sendDelta(3, 9, counter);
+	}
+	
+	public boolean isEnemy(TangibleObject otherObject) {
+		if (otherObject.hasOptionFlags(OptionFlag.INVULNERABLE)) {
+			return false;
+		}
+		
+		if (otherObject.hasPvpFlag(PvpFlag.ATTACKABLE)) {
+			return true;
+		}
+		
+		if (otherObject instanceof CreatureObject && ((CreatureObject) otherObject).isPlayer()) {
+			return false;
+		} 
+		
+		PvpFaction otherFaction = otherObject.getPvpFaction();
+		
+		return otherFaction != PvpFaction.NEUTRAL && getPvpFaction() != otherFaction
+				&& getPvpStatus() != PvpStatus.ONLEAVE && otherObject.getPvpStatus() != PvpStatus.ONLEAVE;
+	}
+
+	public String getCurrentCity() {
+		return currentCity;
+	}
+
+	public void setCurrentCity(String currentCity) {
+		this.currentCity = currentCity;
+	}
+	
 	@Override
 	public boolean equals(Object o) {
 		return super.equals(o);
@@ -257,7 +300,7 @@ public class TangibleObject extends SWGObject {
 		bb.addInt(0); // Component customization (Set, Integer) - 7
 			bb.addInt(0);
 		bb.addInt(optionFlags); // 8
-		bb.addInt(0); // Generic Counter -- use count and incap timer - 9
+		bb.addInt(counter); // Generic Counter -- use count and incap timer - 9
 		bb.addInt(condition); // 10
 		bb.addInt(maxHitPoints); // maxHitPoints - 11
 		bb.addBoolean(visibleGmOnly); // isVisible - 12
@@ -312,7 +355,7 @@ public class TangibleObject extends SWGObject {
 	protected void sendBaselines(Player target) {
 		super.sendBaselines(target);
 		
-		new FactionIntent(this, FactionIntentType.FLAGUPDATE).broadcast();
+//		new FactionIntent(this, FactionIntentType.FLAGUPDATE).broadcast();
 	}
 	
 	@Override
