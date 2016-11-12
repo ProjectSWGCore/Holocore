@@ -57,6 +57,14 @@ public class AwarenessHandler {
 		}
 	}
 	
+	public boolean isCallbacksDone() {
+		for (TerrainMap map : terrains.values()) {
+			if (!map.isCallbacksDone())
+				return false;
+		}
+		return true;
+	}
+	
 	private void loadTerrainMaps(TerrainMapCallback callback) {
 		for (Terrain t : Terrain.values()) {
 			TerrainMap map = new TerrainMap(t);
@@ -113,9 +121,13 @@ public class AwarenessHandler {
 	}
 	
 	public void disappearObject(SWGObject obj, boolean disappearObjects, boolean disappearCustom) {
-		moveObject(obj, GONE_LOCATION);
-		if (disappearObjects)
-			obj.clearObjectsAware();
+		TerrainMap map = getTerrainMap(obj);
+		if (map != null) {
+			if (disappearObjects)
+				map.removeFromMap(obj);
+			else
+				map.removeWithoutUpdate(obj);
+		}
 		if (disappearCustom)
 			obj.clearCustomAware(true);
 	}

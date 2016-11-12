@@ -78,6 +78,10 @@ public class TerrainMap {
 		callbackManager.setCallback(callback);
 	}
 	
+	public boolean isCallbacksDone() {
+		return callbackManager.isQueueEmpty();
+	}
+	
 	public void moveWithinMap(SWGObject obj, Location loc) {
 		obj.setLocation(loc);
 		if (isInAwareness(obj)) {
