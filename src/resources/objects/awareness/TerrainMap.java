@@ -94,12 +94,16 @@ public class TerrainMap {
 	}
 	
 	public void removeWithoutUpdate(SWGObject obj) {
-		remove(obj);
+		if (isInAwareness(obj)) {
+			remove(obj);
+		}
 	}
 	
 	public void removeFromMap(SWGObject obj) {
-		remove(obj);
-		update(obj);
+		if (isInAwareness(obj)) {
+			remove(obj);
+			update(obj);
+		}
 	}
 	
 	private void move(SWGObject obj) {
