@@ -78,6 +78,10 @@ public class TerrainMap {
 		callbackManager.setCallback(callback);
 	}
 	
+	public boolean isCallbacksDone() {
+		return callbackManager.isQueueEmpty();
+	}
+	
 	public void moveWithinMap(SWGObject obj, Location loc) {
 		obj.setLocation(loc);
 		if (isInAwareness(obj)) {
@@ -94,12 +98,16 @@ public class TerrainMap {
 	}
 	
 	public void removeWithoutUpdate(SWGObject obj) {
-		remove(obj);
+		if (isInAwareness(obj)) {
+			remove(obj);
+		}
 	}
 	
 	public void removeFromMap(SWGObject obj) {
-		remove(obj);
-		update(obj);
+		if (isInAwareness(obj)) {
+			remove(obj);
+			update(obj);
+		}
 	}
 	
 	private void move(SWGObject obj) {
