@@ -181,15 +181,15 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		}
 		
 		Set<Player> newObservers = getObserversAndParent();
-		if (oldObservers.contains(getOwner()))
-			Log.w(this, "Old Observers contains owner! %s", getOwner());
-		if (newObservers.contains(getOwner()))
-			Log.w(this, "New Observers contains owner! %s", getOwner());
 		long newId = (container != null) ? container.getObjectId() : 0;
 		UpdateContainmentMessage update = new UpdateContainmentMessage(getObjectId(), newId, getSlotArrangement());
-		AwarenessUtilities.callForSameObserver(oldObservers, newObservers, (observer) -> observer.sendPacket(update));
-//		AwarenessUtilities.callForNewObserver(oldObservers, newObservers, (observer) -> createObject(observer, false));
-//		AwarenessUtilities.callForOldObserver(oldObservers, newObservers, (observer) -> destroyObject(observer));
+		
+		if (oldObservers.isEmpty()) {
+			// Newly created object
+			AwarenessUtilities.callForNewObserver(oldObservers, newObservers, (observer) -> createObject(observer, false));
+		} else {
+			AwarenessUtilities.callForSameObserver(oldObservers, newObservers, (observer) -> observer.sendPacket(update));
+		}
 		return ContainerResult.SUCCESS;
 	}
 
