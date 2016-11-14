@@ -183,13 +183,9 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		Set<Player> newObservers = getObserversAndParent();
 		long newId = (container != null) ? container.getObjectId() : 0;
 		UpdateContainmentMessage update = new UpdateContainmentMessage(getObjectId(), newId, getSlotArrangement());
-		
-		if (oldObservers.isEmpty()) {
-			// Newly created object
-			AwarenessUtilities.callForNewObserver(oldObservers, newObservers, (observer) -> createObject(observer, false));
-		} else {
-			AwarenessUtilities.callForSameObserver(oldObservers, newObservers, (observer) -> observer.sendPacket(update));
-		}
+		AwarenessUtilities.callForSameObserver(oldObservers, newObservers, (observer) -> observer.sendPacket(update));
+		AwarenessUtilities.callForNewObserver(oldObservers, newObservers, (observer) -> createObject(observer, false));
+		AwarenessUtilities.callForOldObserver(oldObservers, newObservers, (observer) -> destroyObject(observer));
 		return ContainerResult.SUCCESS;
 	}
 
