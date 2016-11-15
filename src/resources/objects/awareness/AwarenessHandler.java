@@ -29,16 +29,12 @@ package resources.objects.awareness;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
-
 import resources.Location;
 import resources.Terrain;
 import resources.buildout.BuildoutArea;
 import resources.objects.SWGObject;
 import resources.objects.awareness.TerrainMap.TerrainMapCallback;
-import resources.player.Player;
 import resources.server_info.Log;
-import utilities.AwarenessUtilities;
 
 public class AwarenessHandler {
 	
@@ -100,8 +96,6 @@ public class AwarenessHandler {
 	}
 	
 	public void moveObject(SWGObject obj, SWGObject parent, Location requestedLocation) {
-		Set<SWGObject> oldAware = obj.getObjectsAware();
-		Set<Player> oldObservers = obj.getObservers();
 		if (obj.getParent() != parent)
 			obj.moveToContainer(parent);
 		// Remove from previous awareness
@@ -111,13 +105,7 @@ public class AwarenessHandler {
 		// Update location
 		obj.setLocation(requestedLocation);
 		// Update awareness
-		TerrainMap map = getTerrainMap(parent);
-		if (map != null) {
-			map.moveToParent(obj, parent);
-			AwarenessUtilities.handleUpdateAwarenessManual(obj, oldAware, oldObservers, obj.getObjectsAware(), obj.getObservers());
-		} else if (!requestedLocation.equals(GONE_LOCATION)) {
-			Log.e(this, "Unknown terrain: %s", requestedLocation.getTerrain());
-		}
+		obj.resetAwareness();
 	}
 	
 	public void disappearObject(SWGObject obj, boolean disappearObjects, boolean disappearCustom) {

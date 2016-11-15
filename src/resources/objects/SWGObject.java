@@ -55,6 +55,7 @@ import resources.server_info.Log;
 import services.CoreManager;
 import services.objects.ObjectCreator;
 import utilities.AwarenessUtilities;
+import intents.object.ContainerTransferIntent;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -186,6 +187,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		AwarenessUtilities.callForSameObserver(oldObservers, newObservers, (observer) -> observer.sendPacket(update));
 		AwarenessUtilities.callForNewObserver(oldObservers, newObservers, (observer) -> createObject(observer, false));
 		AwarenessUtilities.callForOldObserver(oldObservers, newObservers, (observer) -> destroyObject(observer));
+		new ContainerTransferIntent(this, container).broadcast();
 		return ContainerResult.SUCCESS;
 	}
 
