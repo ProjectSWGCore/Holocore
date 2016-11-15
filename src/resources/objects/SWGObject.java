@@ -897,7 +897,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	@Override
 	public void save(NetBufferStream stream) {
-		stream.addByte(1);
+		stream.addByte(2);
 		location.save(stream);
 		stream.addBoolean(parent != null && parent.getClassification() != ObjectClassification.GENERATED);
 		if (parent != null && parent.getClassification() != ObjectClassification.GENERATED)
@@ -905,6 +905,8 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		stream.addAscii(permissions.name());
 		stream.addAscii(classification.name());
 		stream.addUnicode(objectName);
+		stringId.save(stream);
+		detailStringId.save(stream);
 		stream.addFloat(complexity);
 		stream.addFloat((float) prefLoadRange);
 		synchronized (attributes) {
@@ -926,6 +928,9 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	public void read(NetBufferStream stream) {
 		switch(stream.getByte()) {
+			case 2:
+				readVersion2(stream);
+				break;
 			case 1:
 				readVersion1(stream);
 				break;
@@ -933,6 +938,21 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 				readVersion0(stream);
 				break;
 		}
+	}
+	
+	private void readVersion2(NetBufferStream stream) {
+		location.read(stream);
+		if (stream.getBoolean())
+			parent = SWGObjectFactory.create(stream);
+		permissions = ContainerPermissionsType.valueOf(stream.getAscii());
+		classification = ObjectClassification.valueOf(stream.getAscii());
+		objectName = stream.getUnicode();
+		stringId.read(stream);
+		detailStringId.read(stream);
+		complexity = stream.getFloat();
+		prefLoadRange = stream.getFloat();
+		stream.getList((i) -> attributes.put(stream.getAscii(), stream.getAscii()));
+		stream.getList((i) -> SWGObjectFactory.create(stream).moveToContainer(this));
 	}
 	
 	private void readVersion1(NetBufferStream stream) {
