@@ -81,7 +81,6 @@ public class TestTerrainMap {
 			map.moveWithinMap(objA, new Location(0, 0, 0, Terrain.TATOOINE)); // 1 - Within Range, 1 - Successful Move
 			objB.setLocation(new Location(5, 0, 5, Terrain.TATOOINE));
 			objB.moveToContainer(cell);
-			map.moveToParent(objB, cell); // 0 - Within Range, 0 - Successful Move
 			awaitCallbacks(map, 1000);
 			callback.testAssert(1, 0, 2, 0);
 		} finally {
