@@ -93,21 +93,13 @@ public class TerrainMap {
 		}
 	}
 	
-	public void moveToParent(SWGObject obj, SWGObject parent) {
-		obj.resetAwareness();
-	}
-	
 	public void removeWithoutUpdate(SWGObject obj) {
-		if (isInAwareness(obj)) {
-			remove(obj);
-		}
+		remove(obj);
 	}
 	
 	public void removeFromMap(SWGObject obj) {
-		if (isInAwareness(obj)) {
-			remove(obj);
-			update(obj);
-		}
+		remove(obj);
+		update(obj);
 	}
 	
 	private void move(SWGObject obj) {

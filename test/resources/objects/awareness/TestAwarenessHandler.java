@@ -29,7 +29,6 @@ package resources.objects.awareness;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -58,7 +57,7 @@ public class TestAwarenessHandler {
 	@BeforeClass
 	public static void initTatooine() {
 		ClientBuildoutService buildoutService = new ClientBuildoutService();
-		double loadDistance = 1024*1.414; // 1024 * sqrt(2)
+		double loadDistance = 1024*1.414*2; // 1024 * sqrt(2)
 		for (SWGObject obj : buildoutService.loadClientObjectsByArea(843)) { // mos eisley's area id
 			initObject(obj, loadDistance);
 		}
@@ -140,7 +139,8 @@ public class TestAwarenessHandler {
 		callback.set(0, 0, 0, 0);
 		awareness.moveObject(creature, starport.getCellByNumber(1), new Location(0, 0, 0, Terrain.TATOOINE));
 		awareness.moveObject(CREATURE2, CREATURE2_LOCATION);
-//		callback.waitAndTest(0, 0, 1, 0, 1000);
+		awaitCallbacks(awareness, 1000);
+		callback.testAssert(0, 0, 1, 0);
 	}
 	
 	private void initAwareness(AwarenessHandler awareness, MapCallback callback) {
@@ -148,7 +148,7 @@ public class TestAwarenessHandler {
 		for (SWGObject obj : EISLEY_OBJECTS) {
 			awareness.moveObject(obj, obj.getLocation());
 		}
-		awaitCallbacks(awareness, 1000);
+		awaitCallbacks(awareness, 3000);
 		callback.set(0, 0, 0, 0);
 	}
 	

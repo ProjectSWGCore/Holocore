@@ -184,6 +184,28 @@ public class Log {
 	}
 	
 	/**
+	 * Logs a stack trace to the server log file, formatted to display the log
+	 * severity as DEBUG as well as a custom tag
+	 * @param tag the object requesting this stack trace
+	 */
+	public static final void printStackTrace(Object tag) {
+		printStackTrace(tag.getClass().getSimpleName());
+	}
+	
+	/**
+	 * Logs a stack trace to the server log file, formatted to display the log
+	 * severity as DEBUG as well as a custom tag
+	 * @param tag the tag to use for the log
+	 */
+	public static final void printStackTrace(String tag) {
+		log(LogLevel.DEBUG, tag, "Stack Trace");
+		StackTraceElement [] elements = Thread.currentThread().getStackTrace();
+		for (int i = 2; i < elements.length; i++) {
+			log(LogLevel.DEBUG, tag, "    " + elements[i].toString());
+		}
+	}
+	
+	/**
 	 * Logs the string to the server log file, formatted to display the log
 	 * severity as INFO, as well as the time, tag and message.
 	 * @param tag the tag to use for the log
