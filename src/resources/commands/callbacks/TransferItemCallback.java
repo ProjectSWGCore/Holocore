@@ -167,13 +167,11 @@ public class TransferItemCallback implements ICmdCallback {
 
 	private static void sendNotEquippable(Player player) {
 		new ChatBroadcastIntent(player, "@system_msg:item_not_equippable").broadcast();
-		return;
 	}
 
 	private static boolean checkSpeciesRestriction(CreatureObject actor, SWGObject target) {
 		// Make sure the player can wear it based on their species
 		String actorSpecies = actor.getRace().getSpecies();
-		// TODO: make this parseBoolean and check if  each species can wear it
 		if (isSpecialSpecies(actorSpecies) && target.hasAttribute("species_restrictions.species_name")) {
 			String restrictedSpecies = target.getAttribute("species_restrictions.species_name").toLowerCase();
 
