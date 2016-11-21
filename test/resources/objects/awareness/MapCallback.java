@@ -33,32 +33,34 @@ import org.junit.Assert;
 
 import resources.objects.SWGObject;
 import resources.objects.awareness.TerrainMap.TerrainMapCallback;
+import resources.server_info.Log;
 
 class MapCallback implements TerrainMapCallback {
 	
-	private final BlockingCounter withinRange = new BlockingCounter();
-	private final BlockingCounter outOfRange = new BlockingCounter();
-	private final BlockingCounter successfulMove = new BlockingCounter();
-	private final BlockingCounter failedMove = new BlockingCounter();
+	private final AtomicInteger withinRange = new AtomicInteger(0);
+	private final AtomicInteger outOfRange = new AtomicInteger(0);
+	private final AtomicInteger successfulMove = new AtomicInteger(0);
+	private final AtomicInteger failedMove = new AtomicInteger(0);
 	
 	@Override
 	public void onWithinRange(SWGObject obj, SWGObject inRange) {
-		withinRange.increment();
+		withinRange.incrementAndGet();
 	}
 	
 	@Override
 	public void onOutOfRange(SWGObject obj, SWGObject outRange) {
-		outOfRange.increment();
+		outOfRange.incrementAndGet();
 	}
 	
 	@Override
 	public void onMoveSuccess(SWGObject obj) {
-		successfulMove.increment();
+		successfulMove.incrementAndGet();
 	}
 	
 	@Override
 	public void onMoveFailure(SWGObject obj) {
-		failedMove.increment();
+		failedMove.incrementAndGet();
+		Log.e(this, "Move failed!");
 	}
 	
 	public void set(int withinRange, int outOfRange, int successful, int failed) {
@@ -84,77 +86,24 @@ class MapCallback implements TerrainMapCallback {
 		return failedMove.get();
 	}
 	
-	public void waitAndTest(int withinRange, int outOfRange, int successful, int failed, long timeout) {
-		waitFor(withinRange, outOfRange, successful, failed, timeout);
-		testAssert(withinRange, outOfRange, successful, failed);
-	}
+//	public void waitAndTest(int withinRange, int outOfRange, int successful, int failed, long timeout) {
+//		waitFor(withinRange, outOfRange, successful, failed, timeout);
+//		testAssert(withinRange, outOfRange, successful, failed);
+//	}
 	
-	public void waitFor(int withinRange, int outOfRange, int successful, int failed, long timeout) {
-		long start = System.nanoTime();
-		this.withinRange.waitUntil(withinRange, timeout);
-		this.outOfRange.waitUntil(outOfRange, timeout-(long)((System.nanoTime()-start)/1E6));
-		this.successfulMove.waitUntil(successful, timeout-(long)((System.nanoTime()-start)/1E6));
-		this.failedMove.waitUntil(failed, timeout-(long)((System.nanoTime()-start)/1E6));
-	}
+//	public void waitFor(int withinRange, int outOfRange, int successful, int failed, long timeout) {
+//		long start = System.nanoTime();
+//		this.withinRange.waitUntil(withinRange, timeout);
+//		this.outOfRange.waitUntil(outOfRange, timeout-(long)((System.nanoTime()-start)/1E6));
+//		this.successfulMove.waitUntil(successful, timeout-(long)((System.nanoTime()-start)/1E6));
+//		this.failedMove.waitUntil(failed, timeout-(long)((System.nanoTime()-start)/1E6));
+//	}
 	
 	public void testAssert(int withinRange, int outOfRange, int successful, int failed) {
 		Assert.assertEquals("TEST-WITHIN-RANGE", withinRange, this.withinRange.get());
 		Assert.assertEquals("TEST-OUT-OF-RANGE", outOfRange, this.outOfRange.get());
 		Assert.assertEquals("TEST-SUCCESSFUL-MOVE", successful, this.successfulMove.get());
 		Assert.assertEquals("TEST-FAILED-MOVE", failed, this.failedMove.get());
-	}
-	
-	private static class BlockingCounter {
-		
-		private final Object mutex;
-		private final AtomicInteger integer;
-		
-		public BlockingCounter() {
-			mutex = new Object();
-			integer = new AtomicInteger(0);
-		}
-		
-		public boolean waitUntil(int value, long timeout) {
-			long start = System.nanoTime();
-			while (timeout > 0 && integer.get() < value && waitForChange(timeout)) {
-				timeout -= (long) ((System.nanoTime()-start)/1E6);
-				start = System.nanoTime();
-				if (integer.get() >= value)
-					return true;
-			}
-			return false;
-		}
-		
-		public boolean waitForChange(long timeout) {
-			synchronized (mutex) {
-				int initial = integer.get();
-				try {
-					mutex.wait(timeout);
-				} catch (InterruptedException e) {
-					return false;
-				}
-				return initial != integer.get();
-			}
-		}
-		
-		public void increment() {
-			integer.incrementAndGet();
-			synchronized (mutex) {
-				mutex.notifyAll();
-			}
-		}
-		
-		public int get() {
-			return integer.get();
-		}
-		
-		public void set(int i) {
-			integer.set(i);
-			synchronized (mutex) {
-				mutex.notifyAll();
-			}
-		}
-		
 	}
 	
 }

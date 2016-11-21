@@ -38,7 +38,7 @@ import java.util.List;
 /**
  * Created by Waverunner on 6/7/2015
  */
-public class SWGListTest {
+public class TestSWGList {
 
 	@Test
 	public void testAdd() throws Exception {
@@ -49,20 +49,14 @@ public class SWGListTest {
 		}
 
 		SWGList<String> swgList = new SWGList<>(3, 6, Encoder.StringType.ASCII);
-		long start = System.nanoTime();
 		Collections.addAll(swgList, strings);
-		long end = System.nanoTime();
 
 		Assert.assertArrayEquals(strings, swgList.toArray());
-		System.out.println("SWGList: Took "+ (end-start)/1E6 + "ms to add " + size + " elements");
 
 		List<String> list = new ArrayList<>();
-		long startList = System.nanoTime();
 		Collections.addAll(list, strings);
-		long endList = System.nanoTime();
 
 		Assert.assertArrayEquals(swgList.toArray(), list.toArray());
-		System.out.println("ArrayList: Took "+ (endList-startList)/1E6 + "ms to add " + size + " elements");
 	}
 
 	@Test
@@ -85,12 +79,7 @@ public class SWGListTest {
 
 		SWGList<String> swgList = new SWGList<>(3, 6, Encoder.StringType.ASCII);
 		Collections.addAll(swgList, strings);
-
-		long start = System.nanoTime();
 		swgList.encode();
-		long end = System.nanoTime();
-
-		System.out.println("SWGList: Took " + (end-start)/1E6 + "ms to encode data");
 
 	}
 }

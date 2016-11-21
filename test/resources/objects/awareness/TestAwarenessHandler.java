@@ -29,7 +29,6 @@ package resources.objects.awareness;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -58,7 +57,7 @@ public class TestAwarenessHandler {
 	@BeforeClass
 	public static void initTatooine() {
 		ClientBuildoutService buildoutService = new ClientBuildoutService();
-		double loadDistance = 1024*1.414; // 1024 * sqrt(2)
+		double loadDistance = 1024*1.414*2; // 1024 * sqrt(2)
 		for (SWGObject obj : buildoutService.loadClientObjectsByArea(843)) { // mos eisley's area id
 			initObject(obj, loadDistance);
 		}
@@ -95,10 +94,12 @@ public class TestAwarenessHandler {
 		GenericCreatureObject creature = new GenericCreatureObject(1);
 		initAwareness(awareness, callback);
 		awareness.moveObject(creature, CREATURE_LOCATION);
-		callback.waitAndTest(WITHIN_RANGE.size(), 0, 1, 0, 1000);
+		awaitCallbacks(awareness, 1000);
+		callback.testAssert(WITHIN_RANGE.size(), 0, 1, 0);
 		callback.set(0, 0, 0, 0);
 		awareness.moveObject(creature, CREATURE_LOCATION);
-		callback.waitAndTest(0, 0, 1, 0, 1000);
+		awaitCallbacks(awareness, 1000);
+		callback.testAssert(0, 0, 1, 0);
 	}
 	
 	@Test
@@ -108,13 +109,16 @@ public class TestAwarenessHandler {
 		initAwareness(awareness, callback);
 		GenericCreatureObject creature = new GenericCreatureObject(1);
 		awareness.moveObject(creature, CREATURE_LOCATION);
-		callback.waitAndTest(WITHIN_RANGE.size(), 0, 1, 0, 1000);
+		awaitCallbacks(awareness, 1000);
+		callback.testAssert(WITHIN_RANGE.size(), 0, 1, 0);
 		callback.set(0, 0, 0, 0);
 		awareness.moveObject(creature, new Location(0, 0, 0, Terrain.TATOOINE));
-		callback.waitAndTest(0, WITHIN_RANGE.size(), 1, 0, 1000);
+		awaitCallbacks(awareness, 1000);
+		callback.testAssert(0, WITHIN_RANGE.size(), 1, 0);
 		callback.set(0, 0, 0, 0);
 		awareness.moveObject(creature, CREATURE_LOCATION);
-		callback.waitAndTest(WITHIN_RANGE.size(), 0, 1, 0, 1000);
+		awaitCallbacks(awareness, 1000);
+		callback.testAssert(WITHIN_RANGE.size(), 0, 1, 0);
 	}
 	
 	@Test
@@ -130,11 +134,13 @@ public class TestAwarenessHandler {
 		Assert.assertNotNull("Starport is null!", starport);
 		initAwareness(awareness, callback);
 		awareness.moveObject(creature, CREATURE_LOCATION);
-		callback.waitAndTest(WITHIN_RANGE.size(), 0, 1, 0, 1000);
+		awaitCallbacks(awareness, 1000);
+		callback.testAssert(WITHIN_RANGE.size(), 0, 1, 0);
 		callback.set(0, 0, 0, 0);
 		awareness.moveObject(creature, starport.getCellByNumber(1), new Location(0, 0, 0, Terrain.TATOOINE));
 		awareness.moveObject(CREATURE2, CREATURE2_LOCATION);
-//		callback.waitAndTest(0, 0, 1, 0, 1000);
+		awaitCallbacks(awareness, 1000);
+		callback.testAssert(0, 0, 1, 0);
 	}
 	
 	private void initAwareness(AwarenessHandler awareness, MapCallback callback) {
@@ -142,8 +148,19 @@ public class TestAwarenessHandler {
 		for (SWGObject obj : EISLEY_OBJECTS) {
 			awareness.moveObject(obj, obj.getLocation());
 		}
-		callback.waitFor(0, 0, EISLEY_OBJECTS.size(), 0, 2000);
+		awaitCallbacks(awareness, 3000);
 		callback.set(0, 0, 0, 0);
+	}
+	
+	private void awaitCallbacks(AwarenessHandler awareness, long timeout) {
+		try {
+			while (!awareness.isCallbacksDone() && timeout > 0) {
+				Thread.sleep(1);
+				timeout--;
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private static class MapCallbackRealistic extends MapCallback {

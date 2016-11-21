@@ -29,10 +29,12 @@ package resources.callback;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class CallbackManager<T> extends BaseCallbackManager {
 	
 	private final List<T> callbacks;
+	private final AtomicInteger running;
 	
 	public CallbackManager(String name) {
 		this(name, 1);
@@ -41,6 +43,7 @@ public class CallbackManager<T> extends BaseCallbackManager {
 	public CallbackManager(String name, int threadCount) {
 		super(name, threadCount);
 		this.callbacks = new ArrayList<>();
+		this.running = new AtomicInteger(0);
 	}
 	
 	public void addCallback(T callback) {
@@ -68,8 +71,13 @@ public class CallbackManager<T> extends BaseCallbackManager {
 		}
 	}
 	
+	public boolean isQueueEmpty() {
+		return running.get() == 0;
+	}
+	
 	public boolean callOnEach(CallCallback<T> call) {
 		synchronized (callbacks) {
+			running.incrementAndGet();
 			return call(() -> {
 				for (T callback : callbacks) {
 					try {
@@ -78,6 +86,7 @@ public class CallbackManager<T> extends BaseCallbackManager {
 						e.printStackTrace();
 					}
 				}
+				running.decrementAndGet();
 			});
 		}
 	}

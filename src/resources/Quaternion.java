@@ -36,6 +36,7 @@ import java.nio.ByteBuffer;
 
 public class Quaternion implements Encodable, Persistable {
 	
+	private final double [][] rotationMatrix;
 	private double x;
 	private double y;
 	private double z;
@@ -50,6 +51,8 @@ public class Quaternion implements Encodable, Persistable {
 		this.y = y;
 		this.z = z;
 		this.w = w;
+		this.rotationMatrix = new double[3][3];
+		updateRotationMatrix();
 	}
 
 	public double getX() {
@@ -74,25 +77,30 @@ public class Quaternion implements Encodable, Persistable {
 
 	public void setX(double x) {
 		this.x = x;
+		updateRotationMatrix();
 	}
 
 	public void setY(double y) {
 		this.y = y;
+		updateRotationMatrix();
 	}
 
 	public void setZ(double z) {
 		this.z = z;
+		updateRotationMatrix();
 	}
 
 	public void setW(double w) {
 		this.w = w;
+		updateRotationMatrix();
 	}
 	
 	public void set(double x, double y, double z, double w) {
-		setX(x);
-		setY(y);
-		setZ(z);
-		setW(w);
+		this.x = x;
+		this.y = y;
+		this.z = z;
+		this.w = w;
+		updateRotationMatrix();
 	}
 	
 	public void set(Quaternion q) {
@@ -127,12 +135,20 @@ public class Quaternion implements Encodable, Persistable {
 		normalize();
 	}
 	
+	public void rotatePoint(Point3D p) {
+		double nX = rotationMatrix[0][0]*p.getX() + rotationMatrix[0][1]*p.getY() + rotationMatrix[0][2]*p.getZ();
+		double nY = rotationMatrix[1][0]*p.getX() + rotationMatrix[1][1]*p.getY() + rotationMatrix[1][2]*p.getZ();
+		double nZ = rotationMatrix[2][0]*p.getX() + rotationMatrix[2][1]*p.getY() + rotationMatrix[2][2]*p.getZ();
+		p.set(nX, nY, nZ);
+	}
+	
 	public void normalize() {
 		double mag = Math.sqrt(x * x + y * y + z * z + w * w);
 		x /= mag;
 		y /= mag;
 		z /= mag;
 		w /= mag;
+		updateRotationMatrix();
 	}
 
 	@Override
@@ -151,6 +167,7 @@ public class Quaternion implements Encodable, Persistable {
 		y = Packet.getFloat(data);
 		z = Packet.getFloat(data);
 		w = Packet.getFloat(data);
+		updateRotationMatrix();
 	}
 	
 	@Override
@@ -167,9 +184,38 @@ public class Quaternion implements Encodable, Persistable {
 		y = stream.getFloat();
 		z = stream.getFloat();
 		w = stream.getFloat();
+		updateRotationMatrix();
 	}
 
 	public String toString() {
 		return String.format("Quaternion[%.3f, %.3f, %.3f, %.3f]", x, y, z, w);
+	}
+	
+	private void updateRotationMatrix() {
+		double x2 = x * x;
+		double y2 = y * y;
+		double z2 = z * z;
+		double w2 = w * w;
+		updateRotationMatrixX(x2, y2, z2, w2);
+		updateRotationMatrixY(x2, y2, z2, w2);
+		updateRotationMatrixZ(x2, y2, z2, w2);
+	}
+	
+	private void updateRotationMatrixX(double x2, double y2, double z2, double w2) {
+		rotationMatrix[0][0] = x2 + w2 - y2 - z2;
+		rotationMatrix[0][1] = 2*y*x - 2*z*w;
+		rotationMatrix[0][2] = 2*y*w + 2*z*x;
+	}
+	
+	private void updateRotationMatrixY(double x2, double y2, double z2, double w2) {
+		rotationMatrix[1][0] = 2*x*y + 2*w*z;
+		rotationMatrix[1][1] = y2 - z2 + w2 - x2;
+		rotationMatrix[1][2] = 2*z*y - 2*x*w;
+	}
+	
+	private void updateRotationMatrixZ(double x2, double y2, double z2, double w2) {
+		rotationMatrix[2][0] = 2*x*z - 2*w*y;
+		rotationMatrix[2][1] = 2*y*z + 2*w*x;
+		rotationMatrix[2][2] = z2 + w2 - x2 - y2;
 	}
 }

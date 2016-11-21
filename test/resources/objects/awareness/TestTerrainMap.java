@@ -60,7 +60,8 @@ public class TestTerrainMap {
 			GenericCreatureObject objB = new GenericCreatureObject(2);
 			map.moveWithinMap(objA, new Location(0, 0, 0, Terrain.TATOOINE)); // 0 - Within Range, 1 - Successful Move
 			map.moveWithinMap(objB, new Location(5, 0, 5, Terrain.TATOOINE)); // 1 - Within Range, 1 - Successful Move
-			callback.waitAndTest(1, 0, 2, 0, 1000);
+			awaitCallbacks(map, 1000);
+			callback.testAssert(1, 0, 2, 0);
 		} finally {
 			map.stop();
 		}
@@ -80,8 +81,8 @@ public class TestTerrainMap {
 			map.moveWithinMap(objA, new Location(0, 0, 0, Terrain.TATOOINE)); // 1 - Within Range, 1 - Successful Move
 			objB.setLocation(new Location(5, 0, 5, Terrain.TATOOINE));
 			objB.moveToContainer(cell);
-			map.moveToParent(objB, cell); // 0 - Within Range, 0 - Successful Move
-			callback.waitAndTest(1, 0, 2, 0, 1000);
+			awaitCallbacks(map, 1000);
+			callback.testAssert(1, 0, 2, 0);
 		} finally {
 			map.stop();
 		}
@@ -96,9 +97,12 @@ public class TestTerrainMap {
 			map.start();
 			GenericCreatureObject objA = new GenericCreatureObject(1);
 			GenericCreatureObject objB = new GenericCreatureObject(2);
+			objA.setPrefLoadRange(200);
+			objB.setPrefLoadRange(200);
 			map.moveWithinMap(objA, new Location(5, 0, 5, Terrain.TATOOINE)); // 0 - Within Range, 1 - Successful Move
 			map.moveWithinMap(objB, new Location(-5, 0, -5, Terrain.TATOOINE)); // 1 - Within Range, 1 - Successful Move
-			callback.waitAndTest(1, 0, 2, 0, 1000);
+			awaitCallbacks(map, 1000);
+			callback.testAssert(1, 0, 2, 0);
 		} finally {
 			map.stop();
 		}
@@ -135,7 +139,7 @@ public class TestTerrainMap {
 				map.moveWithinMap(obj, obj.getLocation());
 			}
 			map.moveWithinMap(creature, creatureLocation);
-			callback.waitFor(0, 0, tatObjects.size()+1, 0, 1000);
+			awaitCallbacks(map, 1000);
 			Assert.assertEquals(0, withinRange.size());
 			Assert.assertTrue("TEST-ONLY-WITHIN-RANGE", onlyWithinRange.get());
 		} finally {
@@ -151,6 +155,17 @@ public class TestTerrainMap {
 		if (!inRange.getWorldLocation().isWithinFlatDistance(objLocation, Math.max(range, inRange.getLoadRange())))
 			return false;
 		return true;
+	}
+	
+	private void awaitCallbacks(TerrainMap map, long timeout) {
+		try {
+			while (!map.isCallbacksDone() && timeout > 0) {
+				Thread.sleep(1);
+				timeout--;
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 	
 }
