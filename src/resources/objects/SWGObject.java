@@ -481,6 +481,10 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	public String getAttribute(String attribute) {
 		return attributes.get(attribute);
 	}
+
+	public boolean hasAttribute(String attribute) {
+		return attributes.containsKey(attribute);
+	}
 	
 	public Map<String, String> getAttributes() {
 		return attributes;
