@@ -45,11 +45,6 @@ import services.galaxy.GalacticManager;
  * @author mads
  */
 public class TransferItemCallback implements ICmdCallback {
-	private static final String WEARABLE_WOOKIEE_ATTR = "race_wookiee";
-	private static final String WEARABLE_ITHORIAN_ATTR = "race_ithorian";
-	private static final String WEARABLE_RODIAN_ATTR = "race_rodian";
-	private static final String WEARABLE_TRANDOSHAN_ATTR = "race_trandoshan";
-
 	@Override
 	public void execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
 		// There must always be a target for transfer
@@ -132,33 +127,8 @@ public class TransferItemCallback implements ICmdCallback {
 			}
 
 			// Make sure the player can wear it based on their species
-			String actorSpecies = actor.getRace().getSpecies();
-			// TODO: make this parseBoolean and check if  each species can wear it
-			if (isSpecialSpecies(actorSpecies)) {
-				if (actorSpecies.equals("wookiee") && target.hasAttribute(WEARABLE_WOOKIEE_ATTR)) {
-					if (!Boolean.parseBoolean(target.getAttribute(WEARABLE_WOOKIEE_ATTR))) {
-						sendNotEquippable(actor.getOwner());
-					}
-				}
-
-				else if (actorSpecies.equals("ithorian") && target.hasAttribute(WEARABLE_ITHORIAN_ATTR)) {
-					if (!Boolean.parseBoolean(target.getAttribute(WEARABLE_ITHORIAN_ATTR))) {
-						sendNotEquippable(actor.getOwner());
-					}
-				}
-
-				else if (actorSpecies.equals("rodian") && target.hasAttribute(WEARABLE_RODIAN_ATTR)) {
-					if (!Boolean.parseBoolean(target.getAttribute(WEARABLE_RODIAN_ATTR))) {
-						sendNotEquippable(actor.getOwner());
-					}
-				}
-
-				else if (actorSpecies.equals("trandoshan") && target.hasAttribute(WEARABLE_TRANDOSHAN_ATTR)) {
-					if (!Boolean.parseBoolean(target.getAttribute(WEARABLE_TRANDOSHAN_ATTR))) {
-						sendNotEquippable(actor.getOwner());
-					}
-				}
-			}
+			if (!checkSpeciesRestriction(actor, target))
+				return;
 
 			switch (target.moveToContainer(actor, newContainer)) {
 				case SUCCESS:
@@ -198,5 +168,33 @@ public class TransferItemCallback implements ICmdCallback {
 	private static void sendNotEquippable(Player player) {
 		new ChatBroadcastIntent(player, "@system_msg:item_not_equippable").broadcast();
 		return;
+	}
+
+	private static boolean checkSpeciesRestriction(CreatureObject actor, SWGObject target) {
+		// Make sure the player can wear it based on their species
+		String actorSpecies = actor.getRace().getSpecies();
+		// TODO: make this parseBoolean and check if  each species can wear it
+		if (isSpecialSpecies(actorSpecies) && target.hasAttribute("species_restrictions.species_name")) {
+			String restrictedSpecies = target.getAttribute("species_restrictions.species_name").toLowerCase();
+
+			if (actorSpecies.equals("wookiee") && !restrictedSpecies.contains("wookiee")) {
+				sendNotEquippable(actor.getOwner());
+				return false;
+			}
+			else if (actorSpecies.equals("ithorian") && !restrictedSpecies.contains("ithorian")) {
+				sendNotEquippable(actor.getOwner());
+				return false;
+			}
+			else if (actorSpecies.equals("rodian") && !restrictedSpecies.contains("rodian")) {
+				sendNotEquippable(actor.getOwner());
+				return false;
+			}
+			else if (actorSpecies.equals("trandoshan") && !restrictedSpecies.contains("trandoshan")) {
+				sendNotEquippable(actor.getOwner());
+				return false;
+			}
+		}
+
+		return true;
 	}
 }
