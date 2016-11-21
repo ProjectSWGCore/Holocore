@@ -30,6 +30,7 @@ package services.objects;
 import intents.PlayerEventIntent;
 import intents.RequestZoneInIntent;
 import intents.network.GalacticPacketIntent;
+import intents.object.ContainerTransferIntent;
 import intents.object.DestroyObjectIntent;
 import intents.object.MoveObjectIntent;
 import intents.object.ObjectCreatedIntent;
@@ -73,6 +74,7 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 		registerForIntent(GalacticPacketIntent.TYPE);
 		registerForIntent(MoveObjectIntent.TYPE);
 		registerForIntent(ConfigChangedIntent.TYPE);
+		registerForIntent(ContainerTransferIntent.TYPE);
 	}
 	
 	@Override
@@ -111,6 +113,11 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 			case ConfigChangedIntent.TYPE:
 				if (i instanceof ConfigChangedIntent)
 					processConfigChangedIntent((ConfigChangedIntent) i);
+				break;
+			case ContainerTransferIntent.TYPE:
+				if (i instanceof ContainerTransferIntent)
+					processContainerTransferIntent((ContainerTransferIntent) i);
+				break;
 			default:
 				break;
 		}
@@ -217,6 +224,13 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 			dataTransformHandler.setSpeedCheck(Boolean.parseBoolean(i.getNewValue()));
 	}
 	
+	private void processContainerTransferIntent(ContainerTransferIntent i) {
+		if (i.getContainer() == null)
+			awarenessHandler.moveObject(i.getObject(), i.getObject().getLocation());
+		else
+			awarenessHandler.moveObject(i.getObject(), i.getContainer(), i.getObject().getLocation());
+	}
+	
 	private void startScene(CreatureObject creature) {
 		Location loc = creature.getWorldLocation();
 		long time = ProjectSWG.getGalacticTime();
@@ -225,7 +239,7 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 		Player owner = creature.getOwner();
 		creature.resetAwareness();
 		owner.sendPacket(new CmdStartScene(ignoreSnapshots, creature.getObjectId(), race, loc, time, (int)(System.currentTimeMillis()/1E3)));
-		recursiveCreateObject(creature, owner);
+		recursiveCreateObject(creature, creature.getOwner());
 		if (creature.getParent() != null) {
 			for (SWGObject obj : creature.getSuperParent().getObjectsAware()) {
 				obj.createObject(creature);
