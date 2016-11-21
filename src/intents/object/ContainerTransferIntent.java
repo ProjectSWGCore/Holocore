@@ -25,27 +25,42 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
  ***********************************************************************************/
-package resources.objects.awareness;
+package intents.object;
 
-import org.junit.BeforeClass;
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
+import resources.control.Intent;
+import resources.objects.SWGObject;
 
-import utilities.CrcDatabaseGenerator;
-
-@RunWith(Suite.class)
-@SuiteClasses({
-	TestAware.class,
-//	TestTerrainMapChunk.class,
-	TestTerrainMap.class,
-	TestAwarenessHandler.class
-})
-public class TestAwareness {
+public class ContainerTransferIntent extends Intent {
 	
-	@BeforeClass
-	public static void setupCrcDatabase() {
-		CrcDatabaseGenerator.generate(false);
+	public static final String TYPE = "ContainerTransferIntent";
+	
+	private SWGObject obj;
+	private SWGObject container;
+	
+	public ContainerTransferIntent() {
+		this(null, null);
+	}
+	
+	public ContainerTransferIntent(SWGObject obj, SWGObject container) {
+		super(TYPE);
+		setObject(obj);
+		setContainer(container);
+	}
+	
+	public SWGObject getObject() {
+		return obj;
+	}
+	
+	public void setObject(SWGObject obj) {
+		this.obj = obj;
+	}
+	
+	public SWGObject getContainer() {
+		return container;
+	}
+	
+	public void setContainer(SWGObject container) {
+		this.container = container;
 	}
 	
 }
