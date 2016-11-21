@@ -130,6 +130,13 @@ public class TransferItemCallback implements ICmdCallback {
 			if (!checkSpeciesRestriction(actor, target))
 				return;
 
+			// If the character doesn't have the right profession, reject it
+			if (target.hasAttribute("class_required")) {
+				String profession = actor.getPlayerObject().getProfession();
+				if (target.getAttribute("class_required").contains(profession)) {
+					return;
+				}
+			}
 			switch (target.moveToContainer(actor, newContainer)) {
 				case SUCCESS:
 					if (weapon) {
