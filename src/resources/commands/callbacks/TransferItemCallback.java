@@ -178,16 +178,13 @@ public class TransferItemCallback implements ICmdCallback {
 			if (actorSpecies.equals("wookiee") && !restrictedSpecies.contains("wookiee")) {
 				sendNotEquippable(actor.getOwner());
 				return false;
-			}
-			else if (actorSpecies.equals("ithorian") && !restrictedSpecies.contains("ithorian")) {
+			} else if (actorSpecies.equals("ithorian") && !restrictedSpecies.contains("ithorian")) {
 				sendNotEquippable(actor.getOwner());
 				return false;
-			}
-			else if (actorSpecies.equals("rodian") && !restrictedSpecies.contains("rodian")) {
+			} else if (actorSpecies.equals("rodian") && !restrictedSpecies.contains("rodian")) {
 				sendNotEquippable(actor.getOwner());
 				return false;
-			}
-			else if (actorSpecies.equals("trandoshan") && !restrictedSpecies.contains("trandoshan")) {
+			} else if (actorSpecies.equals("trandoshan") && !restrictedSpecies.contains("trandoshan")) {
 				sendNotEquippable(actor.getOwner());
 				return false;
 			}
