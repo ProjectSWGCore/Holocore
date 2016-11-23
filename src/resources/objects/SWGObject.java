@@ -546,18 +546,15 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	public double getLoadRange() {
 		double bubble = getPrefLoadRange();
-		// Disabled for now - need more accurate cell data first
-//		synchronized (containedObjects) {
-//			for (SWGObject contained : containedObjects) {
-//				double x = contained.getX();
-//				double z = contained.getZ();
-//				double dist = Math.sqrt(x*x+z*z) + contained.getLoadRange();
-//				if (dist > 2000)
-//					Log.w(this, "Load range is too large! Distance=%.1f  X=%.1f Z=%.1f Contained=%.1f  Object=%s", dist, x, z, contained.getLoadRange(), this);
-//				if (dist > bubble)
-//					bubble = dist;
-//			}
-//		}
+		synchronized (containedObjects) {
+			for (SWGObject contained : containedObjects) {
+				double x = contained.getX();
+				double z = contained.getZ();
+				double dist = Math.sqrt(x*x+z*z) + contained.getLoadRange();
+				if (dist > bubble)
+					bubble = dist;
+			}
+		}
 		return bubble;
 	}
 	
@@ -644,16 +641,11 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			return;
 		}
 		
-		boolean send = !isSnapshot() || ignoreSnapshotChecks;
-		if (send) {
-			sendSceneCreateObject(target);
-			sendBaselines(target);
-		}
+		sendSceneCreateObject(target);
+		sendBaselines(target);
 		createChildrenObjects(target, ignoreSnapshotChecks);
-		if (send) {
-			sendFinalBaselinePackets(target);
-			target.sendPacket(new SceneEndBaselines(getObjectId()));
-		}
+		sendFinalBaselinePackets(target);
+		target.sendPacket(new SceneEndBaselines(getObjectId()));
 	}
 	
 	public void destroyObject(SWGObject target) {
