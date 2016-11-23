@@ -25,13 +25,70 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
  ***********************************************************************************/
-package network;
+package services.network;
 
 import java.net.InetSocketAddress;
-import java.nio.ByteBuffer;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicLong;
 
-public interface PacketSender {
+import network.NetworkClient;
+
+class ClientManager {
 	
-	void sendPacket(InetSocketAddress sock, ByteBuffer data);
+	private final Map <InetSocketAddress, Long> sockets;
+	private final Map <Long, NetworkClient> clients;
+	private final AtomicLong networkIdCounter;
+	
+	public ClientManager() {
+		sockets = new HashMap<InetSocketAddress, Long>();
+		clients = new Hashtable<Long, NetworkClient>();
+		networkIdCounter = new AtomicLong(1);
+	}
+	
+	public NetworkClient createSession(InetSocketAddress addr) {
+		NetworkClient client = new NetworkClient(addr, networkIdCounter.incrementAndGet());
+		synchronized (clients) {
+			sockets.put(client.getAddress(), client.getNetworkId());
+			clients.put(client.getNetworkId(), client);
+		}
+		client.onSessionCreated();
+		return client;
+	}
+	
+	public NetworkClient destroySession(long networkId) {
+		NetworkClient client = getClient(networkId);
+		destroySession(client);
+		return client;
+	}
+	
+	public NetworkClient getClient(long networkId) {
+		synchronized (clients) {
+			return clients.get(networkId);
+		}
+	}
+	
+	public NetworkClient getClient(InetSocketAddress addr) {
+		return getClient(getNetworkId(addr));
+	}
+	
+	public long getNetworkId(InetSocketAddress addr) {
+		synchronized (clients) {
+			Long id = sockets.get(addr);
+			if (id == null)
+				return -1;
+			return id;
+		}
+	}
+	
+	private void destroySession(NetworkClient client) {
+		synchronized (clients) {
+			if (client == null)
+				return;
+			clients.remove(client.getNetworkId());
+		}
+		client.onSessionDestroyed();
+	}
 	
 }

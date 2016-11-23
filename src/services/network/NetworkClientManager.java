@@ -29,34 +29,15 @@ package services.network;
 
 import intents.network.CloseConnectionIntent;
 import intents.network.ConnectionClosedIntent;
-import intents.network.InboundPacketIntent;
-import intents.network.OutboundPacketIntent;
+import intents.network.ConnectionOpenedIntent;
 
 import java.io.IOException;
 import java.net.BindException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
-import java.nio.ByteBuffer;
-import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Queue;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicLong;
 
 import network.NetworkClient;
-import network.NetworkClient.ClientStatus;
-import network.PacketSender;
-import network.packets.Packet;
-import network.packets.swg.ErrorMessage;
-import network.packets.swg.holo.HoloConnectionStarted;
-import network.packets.swg.holo.HoloConnectionStopped;
-import network.packets.swg.holo.HoloPacket;
-import network.packets.swg.holo.HoloSetProtocolVersion;
 import network.packets.swg.holo.HoloConnectionStopped.ConnectionStoppedReason;
 import resources.config.ConfigFile;
 import resources.control.Intent;
@@ -65,38 +46,23 @@ import resources.network.DisconnectReason;
 import resources.network.TCPServer;
 import resources.network.TCPServer.TCPCallback;
 import resources.server_info.Log;
-import utilities.ThreadUtilities;
 
-public class NetworkClientManager extends Manager implements TCPCallback, PacketSender {
+public class NetworkClientManager extends Manager implements TCPCallback {
 	
-	private static final String PROTOCOL = "2016-04-13";
-	
-	private final Map <InetSocketAddress, Long> sockets;
-	private final Map <Long, NetworkClient> clients;
-	private final Queue<NetworkClient> inboundQueue;
-	private final Queue<NetworkClient> outboundQueue;
-	private final ExecutorService inboundProcessor;
-	private final ExecutorService outboundProcessor;
-	private final Runnable processBufferRunnable;
-	private final Runnable processOutboundRunnable;
-	private final AtomicLong networkIdCounter;
+	private final InboundNetworkManager inboundManager;
+	private final OutboundNetworkManager outboundManager;
+	private final ClientManager clientManager;
 	private final TCPServer tcpServer;
 	
 	public NetworkClientManager() {
-		final int threadCount = getConfig(ConfigFile.NETWORK).getInt("PACKET-THREAD-COUNT", 10);
-		sockets = new HashMap<InetSocketAddress, Long>();
-		clients = new Hashtable<Long, NetworkClient>();
-		inboundQueue = new LinkedList<>();
-		outboundQueue = new LinkedList<>();
-		networkIdCounter = new AtomicLong(1);
-		inboundProcessor = Executors.newFixedThreadPool(threadCount, ThreadUtilities.newThreadFactory("inbound-packet-processor-%d"));
-		outboundProcessor = Executors.newFixedThreadPool(threadCount, ThreadUtilities.newThreadFactory("outbound-packet-processor-%d"));
-		processBufferRunnable = () -> processBufferRunnable();
-		processOutboundRunnable = () -> processOutboundRunnable();
+		clientManager = new ClientManager();
 		tcpServer = new TCPServer(getBindPort(), getBufferSize());
+		inboundManager = new InboundNetworkManager(clientManager);
+		outboundManager = new OutboundNetworkManager(tcpServer, clientManager);
 		
-		registerForIntent(InboundPacketIntent.TYPE);
-		registerForIntent(OutboundPacketIntent.TYPE);
+		addChildService(inboundManager);
+		addChildService(outboundManager);
+		
 		registerForIntent(CloseConnectionIntent.TYPE);
 	}
 	
@@ -121,30 +87,8 @@ public class NetworkClientManager extends Manager implements TCPCallback, Packet
 	}
 	
 	@Override
-	public boolean terminate() {
-		inboundProcessor.shutdownNow();
-		outboundProcessor.shutdownNow();
-		boolean success = true;
-		try {
-			success = inboundProcessor.awaitTermination(5, TimeUnit.SECONDS);
-			success = outboundProcessor.awaitTermination(5, TimeUnit.SECONDS) && success;
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		return super.terminate() && success;
-	}
-	
-	@Override
 	public void onIntentReceived(Intent i) {
 		switch (i.getType()) {
-			case InboundPacketIntent.TYPE:
-				if (i instanceof InboundPacketIntent)
-					processInboundPacketIntent((InboundPacketIntent) i);
-				break;
-			case OutboundPacketIntent.TYPE:
-				if (i instanceof OutboundPacketIntent)
-					processOutboundPacketIntent((OutboundPacketIntent) i);
-				break;
 			case CloseConnectionIntent.TYPE:
 				if (i instanceof CloseConnectionIntent)
 					processCloseConnectionIntent((CloseConnectionIntent) i);
@@ -152,47 +96,10 @@ public class NetworkClientManager extends Manager implements TCPCallback, Packet
 		}
 	}
 	
-	private void processInboundPacketIntent(InboundPacketIntent i) {
-		if (!(i.getPacket() instanceof HoloPacket)) {
-			NetworkClient client = getClient(i.getNetworkId());
-			if (client != null && client.getStatus() != ClientStatus.CONNECTED) {
-				client.addToOutbound(new ErrorMessage("Network Manager", "Upgrade your launcher!", false));
-				client.processOutbound();
-				deleteSession(i.getNetworkId(), ConnectionStoppedReason.INVALID_PROTOCOL);
-			}
-			return;
-		}
-		HoloPacket packet = (HoloPacket) i.getPacket();
-		if (packet instanceof HoloSetProtocolVersion)
-			processSetProtocolVersion((HoloSetProtocolVersion) packet, i.getNetworkId());
-	}
-	
-	private void processOutboundPacketIntent(OutboundPacketIntent i) {
-		Packet p = i.getPacket();
-		if (p != null)
-			handleOutboundPacket(i.getNetworkId(), p);
-	}
-	
 	private void processCloseConnectionIntent(CloseConnectionIntent i) {
-		deleteSession(i.getNetworkId(), getHolocoreReason(i.getDisconnectReason()));
-	}
-	
-	private void processSetProtocolVersion(HoloSetProtocolVersion packet, long networkId) {
-		NetworkClient client = getClient(networkId);
-		if (client == null) {
-			Log.w(this, "NetworkClient not found for ID: %d!", networkId);
-			deleteSession(networkId, ConnectionStoppedReason.SERVER_ERROR);
-			return;
-		}
-		if (!packet.getProtocol().equals(PROTOCOL)) {
-			Log.w(this, "Incoming connection has incorrect protocol version! Expected: %s  Actual: %s", PROTOCOL, packet.getProtocol());
-			deleteSession(networkId, ConnectionStoppedReason.INVALID_PROTOCOL);
-			return;
-		}
-		client.onConnected();
-		Intent i = new OutboundPacketIntent(new HoloSetProtocolVersion(PROTOCOL), networkId);
-		i.broadcast();
-		new OutboundPacketIntent(new HoloConnectionStarted(), networkId).broadcastAfterIntent(i);
+		NetworkClient client = clientManager.getClient(i.getNetworkId());
+		if (client != null)
+			onSessionDisconnect(client.getAddress(), getHolocoreReason(i.getDisconnectReason()));
 	}
 	
 	private ConnectionStoppedReason getHolocoreReason(DisconnectReason reason) {
@@ -215,7 +122,7 @@ public class NetworkClientManager extends Manager implements TCPCallback, Packet
 	public void onIncomingConnection(Socket s) {
 		SocketAddress addr = s.getRemoteSocketAddress();
 		if (addr instanceof InetSocketAddress)
-			createSession(networkIdCounter.incrementAndGet(), (InetSocketAddress) addr);
+			onSessionConnect((InetSocketAddress) addr);
 		else if (addr != null)
 			Log.e(this, "Incoming connection has socket address of instance: %s", addr.getClass().getSimpleName());
 	}
@@ -223,7 +130,7 @@ public class NetworkClientManager extends Manager implements TCPCallback, Packet
 	@Override
 	public void onConnectionDisconnect(Socket s, SocketAddress addr) {
 		if (addr instanceof InetSocketAddress)
-			onSessionDisconnect((InetSocketAddress) addr);
+			onSessionDisconnect((InetSocketAddress) addr, ConnectionStoppedReason.APPLICATION);
 		else if (addr != null)
 			Log.e(this, "Connection Disconnected. Has socket address of instance: %s", addr.getClass().getSimpleName());
 	}
@@ -232,14 +139,9 @@ public class NetworkClientManager extends Manager implements TCPCallback, Packet
 	public void onIncomingData(Socket s, byte [] data) {
 		SocketAddress addr = s.getRemoteSocketAddress();
 		if (addr instanceof InetSocketAddress)
-			handleIncomingData((InetSocketAddress) addr, data);
+			onInboundData((InetSocketAddress) addr, data);
 		else if (addr != null)
 			Log.e(this, "Incoming data has socket address of instance: %s", addr.getClass().getSimpleName());
-	}
-	
-	@Override
-	public void sendPacket(InetSocketAddress sock, ByteBuffer data) {
-		tcpServer.send(sock, data);
 	}
 	
 	private int getBindPort() {
@@ -250,115 +152,27 @@ public class NetworkClientManager extends Manager implements TCPCallback, Packet
 		return getConfig(ConfigFile.NETWORK).getInt("BUFFER-SIZE", 4096);
 	}
 	
-	private void createSession(long networkId, InetSocketAddress address) {
-		NetworkClient client = new NetworkClient(address, networkId, this);
-		synchronized (clients) {
-			sockets.put(address, networkId);
-			clients.put(networkId, client);
-		}
+	private void onSessionConnect(InetSocketAddress addr) {
+		NetworkClient client = clientManager.createSession(addr);
+		inboundManager.onSessionCreated(client);
+		outboundManager.onSessionCreated(client);
+		new ConnectionOpenedIntent(client.getNetworkId()).broadcast();
 	}
 	
-	private void onSessionDisconnect(InetSocketAddress address) {
-		Long networkId;
-		synchronized (clients) {
-			networkId = sockets.get(address);
-		}
-		if (networkId != null) {
-			deleteSession(networkId, ConnectionStoppedReason.OTHER_SIDE_TERMINATED);
-			new ConnectionClosedIntent(networkId, DisconnectReason.OTHER_SIDE_TERMINATED).broadcast();
-		} else {
-			Log.w(this, "Network ID not found for " + address + "!");
-		}
+	private void onInboundData(InetSocketAddress addr, byte [] data) {
+		inboundManager.onInboundData(addr, data);
 	}
 	
-	private void deleteSession(long networkId, ConnectionStoppedReason reason) {
-		synchronized (clients) {
-			NetworkClient client = clients.remove(networkId);
-			if (client == null) {
-				Log.w(this, "No NetworkClient found for network id: " + networkId);
-				return;
-			}
-			client.addToOutbound(new HoloConnectionStopped(reason));
-			client.processOutbound();
-			tcpServer.disconnect(client.getAddress());
-			sockets.remove(client.getAddress());
-			synchronized (inboundQueue) {
-				inboundQueue.remove(client);
-			}
-			synchronized (outboundQueue) {
-				outboundQueue.remove(client);
-			}
-			client.onDisconnected();
-			client.close();
-		}
-	}
-	
-	private void handleOutboundPacket(long networkId, Packet p) {
-		NetworkClient client = getClient(networkId);
+	private void onSessionDisconnect(InetSocketAddress addr, ConnectionStoppedReason reason) {
+		NetworkClient client = clientManager.getClient(addr);
 		if (client != null) {
-			client.addToOutbound(p);
-			synchronized (outboundQueue) {
-				if (!outboundQueue.contains(client)) {
-					outboundQueue.add(client);
-					outboundProcessor.execute(processOutboundRunnable);
-				}
-			}
+			client.onDisconnected(reason);
+			client.onSessionDestroyed();
+			inboundManager.onSessionDestroyed(client);
+			outboundManager.onSessionDestroyed(client);
 		}
-	}
-	
-	private void handleIncomingData(InetSocketAddress addr, byte [] data) {
-		Long netId = sockets.get(addr);
-		if (netId == null) {
-			Log.w(this, "Unknown socket address! Address: %s", addr);
-			return;
-		}
-		NetworkClient client = getClient(netId);
-		if (client != null) {
-			client.addToBuffer(data);
-			synchronized (inboundQueue) {
-				if (!inboundQueue.contains(client)) {
-					inboundQueue.add(client);
-					inboundProcessor.execute(processBufferRunnable);
-				}
-			}
-		} else
-			Log.w(this, "Unknown connection! Network ID: %d  Address: %s", netId, addr);
-	}
-	
-	private NetworkClient getClient(long networkId) {
-		synchronized (clients) {
-			return clients.get(networkId);
-		}
-	}
-	
-	private void processBufferRunnable() {
-		try {
-			NetworkClient client;
-			synchronized (inboundQueue) {
-				client = inboundQueue.poll();
-				if (client == null)
-					return;
-			}
-			client.processInbound();
-		} catch (Exception e) {
-			e.printStackTrace();
-			Log.e(this, e);
-		}
-	}
-	
-	private void processOutboundRunnable() {
-		try {
-			NetworkClient client;
-			synchronized (outboundQueue) {
-				client = outboundQueue.poll();
-				if (client == null)
-					return;
-			}
-			client.processOutbound();
-		} catch (Exception e) {
-			e.printStackTrace();
-			Log.e(this, e);
-		}
+		tcpServer.disconnect(addr);
+		new ConnectionClosedIntent(client.getNetworkId(), reason).broadcast();
 	}
 	
 }

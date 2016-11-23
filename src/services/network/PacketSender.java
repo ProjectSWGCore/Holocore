@@ -25,13 +25,23 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
  ***********************************************************************************/
-package network;
+package services.network;
 
-import resources.network.ServerType;
-import resources.network.UDPServer.UDPPacket;
+import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
 
-public interface PacketReceiver {
+import resources.network.TCPServer;
+
+public class PacketSender {
 	
-	void receivePacket(ServerType type, UDPPacket packet);
+	private final TCPServer server;
+	
+	public PacketSender(TCPServer server) {
+		this.server = server;
+	}
+	
+	public void sendPacket(InetSocketAddress addr, ByteBuffer data) {
+		server.send(addr, data);
+	}
 	
 }

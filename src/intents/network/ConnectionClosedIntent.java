@@ -27,8 +27,8 @@
 ***********************************************************************************/
 package intents.network;
 
+import network.packets.swg.holo.HoloConnectionStopped.ConnectionStoppedReason;
 import resources.control.Intent;
-import resources.network.DisconnectReason;
 
 
 public class ConnectionClosedIntent extends Intent {
@@ -36,9 +36,9 @@ public class ConnectionClosedIntent extends Intent {
 	public static final String TYPE = "ConnectionClosedIntent";
 	
 	private long networkId;
-	private DisconnectReason reason;
+	private ConnectionStoppedReason reason;
 	
-	public ConnectionClosedIntent(long networkId, DisconnectReason reason) {
+	public ConnectionClosedIntent(long networkId, ConnectionStoppedReason reason) {
 		super(TYPE);
 		setNetworkId(networkId);
 		setReason(reason);
@@ -48,7 +48,7 @@ public class ConnectionClosedIntent extends Intent {
 		this.networkId = networkId;
 	}
 	
-	public void setReason(DisconnectReason reason) {
+	public void setReason(ConnectionStoppedReason reason) {
 		this.reason = reason;
 	}
 	
@@ -56,7 +56,7 @@ public class ConnectionClosedIntent extends Intent {
 		return networkId;
 	}
 	
-	public DisconnectReason getReason() {
+	public ConnectionStoppedReason getReason() {
 		return reason;
 	}
 	
