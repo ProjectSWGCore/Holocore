@@ -38,8 +38,6 @@ import resources.server_info.Log;
 
 public class AwarenessHandler {
 	
-	private static final Location GONE_LOCATION = new Location(0, 0, 0, null);
-	
 	private final Map<Terrain, TerrainMap> terrains;
 	
 	public AwarenessHandler(TerrainMapCallback callback) {
@@ -78,20 +76,17 @@ public class AwarenessHandler {
 		if (area != null)
 			requestedLocation = area.adjustLocation(requestedLocation);
 		// Remove from previous awareness
-		Terrain oldTerrain = obj.getTerrain();
-		Terrain newTerrain = requestedLocation.getTerrain();
-		if (oldTerrain != newTerrain && oldTerrain != null) {
-			obj.clearObjectsAware(); // Moving to GONE
-			TerrainMap oldTerrainMap = getTerrainMap(oldTerrain);
+		if (obj.getTerrain() != requestedLocation.getTerrain()) {
+			TerrainMap oldTerrainMap = getTerrainMap(obj.getTerrain());
 			if (oldTerrainMap != null)
-				oldTerrainMap.removeFromMap(obj);
+				oldTerrainMap.removeWithoutUpdate(obj);
 		}
 		// Add to new awareness
-		TerrainMap map = getTerrainMap(newTerrain);
+		TerrainMap map = getTerrainMap(requestedLocation.getTerrain());
 		if (map != null) {
 			map.moveWithinMap(obj, requestedLocation);
-		} else if (!requestedLocation.equals(GONE_LOCATION)) {
-			Log.e(this, "Unknown terrain: %s", newTerrain);
+		} else {
+			Log.e(this, "Unknown terrain: %s", requestedLocation.getTerrain());
 		}
 	}
 	
