@@ -191,6 +191,9 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 	private void processObjectTeleportIntent(ObjectTeleportIntent oti) {
 		SWGObject obj = oti.getObject();
 		Player owner = obj.getOwner();
+		for (Player observer : obj.getObservers()) {
+			obj.destroyObject(observer);
+		}
 		if (oti.getParent() != null)
 			moveObject(obj, oti.getParent(), oti.getNewLocation());
 		else
