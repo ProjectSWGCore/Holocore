@@ -104,7 +104,7 @@ public class ZoneManager extends Manager {
 				sendCommitHistory(player);
 				sendMessageOfTheDay(player);
 				break;
-			case PE_ZONE_IN_CLIENT:
+			case PE_ZONE_IN_SERVER:
 				player.getCreatureObject().setMoodId(CreatureMood.NONE.getMood());
 				player.getPlayerObject().clearFlagBitmask(PlayerFlags.LD);
 				break;
