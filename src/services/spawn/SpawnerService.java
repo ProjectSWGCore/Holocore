@@ -245,9 +245,6 @@ public final class SpawnerService extends Service {
 		SWGObject spawnerObjectParent = spawnerObject.getParent();
 		object.setLocation(spawnerObject.getLocation());
 		
-		if (spawnerObjectParent != null)
-			object.moveToContainer(spawnerObjectParent);
-		
 		object.setName(spawner.getCreatureName());
 		object.setLevel(spawner.getCombatLevel());
 		object.setDifficulty(spawner.getCreatureDifficulty());
@@ -265,6 +262,9 @@ public final class SpawnerService extends Service {
 		if (moodAnimation != null) {
 			object.setMoodAnimation(moodAnimation);
 		}
+		
+		if (spawnerObjectParent != null)
+			object.moveToContainer(spawnerObjectParent);
 		new ObjectCreatedIntent(object).broadcast();
 		return object;
 	}
