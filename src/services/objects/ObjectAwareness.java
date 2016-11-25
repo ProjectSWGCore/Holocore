@@ -152,8 +152,6 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 	
 	@Override
 	public void onMoveFailure(SWGObject obj) {
-		if (!(obj instanceof CreatureObject) || ((CreatureObject) obj).isLoggedInPlayer())
-			Log.e(this, "Move failure! %s", obj);
 		obj.clearObjectsAware();
 	}
 
