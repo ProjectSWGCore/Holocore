@@ -30,58 +30,73 @@ package resources.client_info.visitors.appearance;
 import java.util.ArrayList;
 import java.util.List;
 
-import resources.Point3D;
 import resources.client_info.ClientData;
 import resources.client_info.IffNode;
 import resources.client_info.SWGFile;
 
-public class AppearanceTemplateData extends ClientData {
+public class LodDistanceTable extends ClientData {
 	
-	private List<Point3D> radarPoints = new ArrayList<>();
+	private final List<Level> levels;
+	
+	public LodDistanceTable() {
+		levels = new ArrayList<>();
+	}
 	
 	@Override
 	public void readIff(SWGFile iff) {
-		readForms(iff, 0);
-	}
-	
-	private void readForms(SWGFile iff, int depth) {
-		IffNode form = null;
-		while ((form = iff.enterNextForm()) != null) {
-			switch (form.getTag()) {
-				case "RADR":
-					loadRadar(iff);
-					break;
-				default:
-					readForms(iff, depth+1);
-//					System.err.println("Unknown APT form: " + form.getTag());
-					break;
-			}
-			iff.exitForm();
+		IffNode node = iff.enterNextForm();
+		switch (node.getTag()) {
+			case "0000":
+				readForm0(iff);
+				break;
 		}
 	}
 	
-	private void loadRadar(SWGFile iff) {
+	public List<Level> getLevels() {
+		return levels;
+	}
+	
+	private void readForm0(SWGFile iff) {
 		IffNode node = iff.enterChunk("INFO");
-		boolean hasRadar = node.readInt() != 0;
-		if (hasRadar) {
-			iff.enterForm("IDTL");
-			iff.enterForm("0000");
-			IffNode chunk = iff.enterChunk("VERT");
-			List<Point3D> points = new ArrayList<>(chunk.remaining() / 12);
-			while (chunk.remaining() >= 12) {
-				points.add(chunk.readVector());
-			}
-			chunk = iff.enterChunk("INDX");
-			while (chunk.remaining() >= 4) {
-				radarPoints.add(new Point3D(points.get(chunk.readInt())));
-			}
-			iff.exitForm();
-			iff.exitForm();
+		int levelCount = node.readShort();
+		levels.clear();
+		for (int i = 0; i < levelCount; i++) {
+			Level level = new Level();
+			level.setMinDistance(node.readFloat());
+			level.setMaxDistance(node.readFloat());
+			levels.add(level);
 		}
 	}
 	
-	public List<Point3D> getRadarPoints() {
-		return radarPoints;
+	public static class Level {
+		
+		private float minDistance;
+		private float maxDistance;
+		
+		public Level() {
+			
+		}
+		
+		public float getMinDistance() {
+			return minDistance;
+		}
+		
+		public float getMaxDistance() {
+			return maxDistance;
+		}
+		
+		public void setMinDistance(float minDistance) {
+			this.minDistance = minDistance;
+		}
+		
+		public void setMaxDistance(float maxDistance) {
+			this.maxDistance = maxDistance;
+		}
+		
+		public String toString() {
+			return String.format("Level[min=%.3f max=%.3f]", minDistance, maxDistance);
+		}
+		
 	}
 	
 }

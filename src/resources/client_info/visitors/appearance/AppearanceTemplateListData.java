@@ -25,7 +25,7 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
  ***********************************************************************************/
-package resources.client_info.visitors;
+package resources.client_info.visitors.appearance;
 
 import resources.client_info.ClientData;
 import resources.client_info.IffNode;

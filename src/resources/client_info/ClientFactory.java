@@ -31,8 +31,6 @@ import java.lang.ref.SoftReference;
 import java.util.HashMap;
 import java.util.Map;
 
-import resources.client_info.visitors.AppearanceTemplateData;
-import resources.client_info.visitors.AppearanceTemplateListData;
 import resources.client_info.visitors.CrcStringTableData;
 import resources.client_info.visitors.DatatableData;
 import resources.client_info.visitors.ObjectData;
@@ -42,6 +40,9 @@ import resources.client_info.visitors.SlotArrangementData;
 import resources.client_info.visitors.SlotDefinitionData;
 import resources.client_info.visitors.SlotDescriptorData;
 import resources.client_info.visitors.WorldSnapshotData;
+import resources.client_info.visitors.appearance.AppearanceTemplateData;
+import resources.client_info.visitors.appearance.AppearanceTemplateListData;
+import resources.client_info.visitors.appearance.SkeletalAppearanceData;
 import resources.server_info.Log;
 
 public class ClientFactory extends DataFactory {
@@ -149,6 +150,7 @@ public class ClientFactory extends DataFactory {
 			case "SlotDescriptorData": return new SlotDescriptorData();
 			case "SlotDefinitionData": return new SlotDefinitionData();
 			case "SlotArrangementData": return new SlotArrangementData();
+			case "SkeletalAppearanceData": return new SkeletalAppearanceData();
 			case "WorldSnapshotData": return new WorldSnapshotData();
 			case "PortalLayoutData": return new PortalLayoutData();
 			default: Log.e("ClientFactory", "Unimplemented typeMap value: " + c); return null;
@@ -168,6 +170,7 @@ public class ClientFactory extends DataFactory {
 		typeMap.put("DTII", "DatatableData");
 		typeMap.put("PRFI", "ProfTemplateData");
 		typeMap.put("SLTD", "SlotDescriptorData");
+		typeMap.put("SMAT", "SkeletalAppearanceData");
 		typeMap.put("WSNP", "WorldSnapshotData");
 		typeMap.put("PRTO", "PortalLayoutData");
 		// Objects
