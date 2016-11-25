@@ -27,10 +27,55 @@
  ***********************************************************************************/
 package resources.client_info.visitors.appearance;
 
-import resources.client_info.ClientData;
+import java.util.ArrayList;
+import java.util.List;
 
-public class MeshGeneratorTemplateListData extends ClientData {
+import resources.client_info.ClientData;
+import resources.client_info.IffNode;
+import resources.client_info.SWGFile;
+
+public class LodMeshGeneratorTemplateData extends ClientData {
 	
+	private final List<String> names;
 	
+	private int lodCount;
+	
+	public LodMeshGeneratorTemplateData() {
+		names = new ArrayList<>();
+		lodCount = 0;
+	}
+	
+	@Override
+	public void readIff(SWGFile iff) {
+		IffNode node = iff.enterNextForm();
+		switch (node.getTag()) {
+			case "0000":
+				readForm0(iff);
+				break;
+			default:
+				System.err.println("Unknown LodMeshGeneratorTemplateData version: " + node.getTag());
+				break;
+		}
+	}
+	
+	public List<String> getNames() {
+		return names;
+	}
+
+	private void readForm0(SWGFile iff) {
+		readInfo(iff.enterChunk("INFO"));
+		readNames(iff);
+	}
+	
+	private void readInfo(IffNode node) {
+		lodCount = node.readShort();
+	}
+	
+	private void readNames(SWGFile iff) {
+		for (int i = 0; i < lodCount; i++) {
+			IffNode node = iff.enterChunk("NAME");
+			names.add(node.readString());
+		}
+	}
 	
 }
