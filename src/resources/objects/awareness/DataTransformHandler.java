@@ -42,35 +42,37 @@ public class DataTransformHandler {
 		
 	}
 	
-	public boolean handleMove(SWGObject obj, Location requestedLocation, double speed, int update) {
-		obj.sendObservers(createTransform(obj, requestedLocation, speed, update));
+	public boolean handleMove(SWGObject obj, double speed, int update) {
+		obj.sendObservers(createTransform(obj, speed, update));
 		return true;
 	}
 	
-	public boolean handleMove(SWGObject obj, SWGObject parent, Location requestedLocation, double speed, int update) {
-		obj.sendObservers(createTransform(obj, parent.getObjectId(), requestedLocation, speed, update));
+	public boolean handleMove(SWGObject obj, SWGObject parent, double speed, int update) {
+		obj.sendObservers(createTransform(obj, parent.getObjectId(), speed, update));
 		return true;
 	}
 	
-	private UpdateTransformMessage createTransform(SWGObject obj, Location requestedLocation, double speed, int update) {
+	private UpdateTransformMessage createTransform(SWGObject obj, double speed, int update) {
+		Location loc = obj.getBuildoutLocation();
 		UpdateTransformMessage transform = new UpdateTransformMessage();
 		transform.setObjectId(obj.getObjectId());
-		transform.setX((short) (requestedLocation.getX() * 4 + 0.5));
-		transform.setY((short) (requestedLocation.getY() * 4 + 0.5));
-		transform.setZ((short) (requestedLocation.getZ() * 4 + 0.5));
+		transform.setX((short) (loc.getX() * 4 + 0.5));
+		transform.setY((short) (loc.getY() * 4 + 0.5));
+		transform.setZ((short) (loc.getZ() * 4 + 0.5));
 		transform.setUpdateCounter(obj.getNextUpdateCount());
-		transform.setDirection(getMovementAngle(requestedLocation));
+		transform.setDirection(getMovementAngle(loc));
 		transform.setSpeed((byte) (speed+0.5));
 		transform.setLookAtYaw((byte) 0);
 		transform.setUseLookAtYaw(false);
 		return transform;
 	}
 	
-	private UpdateTransformWithParentMessage createTransform(SWGObject obj, long cellId, Location requestedLocation, double speed, int update) {
+	private UpdateTransformWithParentMessage createTransform(SWGObject obj, long cellId, double speed, int update) {
+		Location loc = obj.getLocation();
 		UpdateTransformWithParentMessage transform = new UpdateTransformWithParentMessage(cellId, obj.getObjectId());
-		transform.setLocation(requestedLocation);
+		transform.setLocation(loc);
 		transform.setUpdateCounter(obj.getNextUpdateCount());
-		transform.setDirection(getMovementAngle(requestedLocation));
+		transform.setDirection(getMovementAngle(loc));
 		transform.setSpeed((byte) (speed + 0.5));
 		transform.setLookDirection((byte) 0); // lookAtYaw * 16
 		transform.setUseLookDirection(false);
