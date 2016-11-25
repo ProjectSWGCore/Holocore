@@ -28,39 +28,26 @@
 package resources.objects.awareness;
 
 import resources.Location;
-import resources.buildout.BuildoutArea;
 import resources.objects.SWGObject;
-import resources.objects.creature.CreatureObject;
 import network.packets.swg.zone.UpdateTransformMessage;
 import network.packets.swg.zone.UpdateTransformWithParentMessage;
 
 public class DataTransformHandler {
 	
-	private final SpeedCheckHandler speedCheckHandler;
-	private boolean speedCheckEnabled;
-	
 	public DataTransformHandler() {
-		speedCheckHandler = new SpeedCheckHandler();
-		speedCheckEnabled = true;
+		
 	}
 	
 	public void setSpeedCheck(boolean enabled) {
-		this.speedCheckEnabled = enabled;
+		
 	}
 	
 	public boolean handleMove(SWGObject obj, Location requestedLocation, double speed, int update) {
-		if (speedCheckEnabled && obj instanceof CreatureObject && ((CreatureObject) obj).isLoggedInPlayer())
-			speedCheckHandler.moveObjectSpeedChecks((CreatureObject) obj, requestedLocation);
-		BuildoutArea area = obj.getBuildoutArea();
-		if (area != null)
-			requestedLocation = area.adjustLocation(requestedLocation);
 		obj.sendObservers(createTransform(obj, requestedLocation, speed, update));
 		return true;
 	}
 	
 	public boolean handleMove(SWGObject obj, SWGObject parent, Location requestedLocation, double speed, int update) {
-		if (speedCheckEnabled && obj instanceof CreatureObject && ((CreatureObject) obj).isLoggedInPlayer())
-			speedCheckHandler.moveObjectSpeedChecks((CreatureObject) obj, parent, requestedLocation);
 		obj.sendObservers(createTransform(obj, parent.getObjectId(), requestedLocation, speed, update));
 		return true;
 	}

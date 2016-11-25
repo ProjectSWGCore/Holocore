@@ -31,7 +31,6 @@ import java.util.HashMap;
 import java.util.Map;
 import resources.Location;
 import resources.Terrain;
-import resources.buildout.BuildoutArea;
 import resources.objects.SWGObject;
 import resources.objects.awareness.TerrainMap.TerrainMapCallback;
 import resources.server_info.Log;
@@ -69,19 +68,17 @@ public class AwarenessHandler {
 	}
 	
 	public void moveObject(SWGObject obj, Location requestedLocation) {
-		if (obj.getParent() != null)
-			obj.moveToContainer(null);
-		// Adjust to server coordinates
-		BuildoutArea area = obj.getBuildoutArea();
-		if (area != null)
-			requestedLocation = area.adjustLocation(requestedLocation);
 		// Remove from previous awareness
 		if (obj.getTerrain() != requestedLocation.getTerrain()) {
 			TerrainMap oldTerrainMap = getTerrainMap(obj.getTerrain());
 			if (oldTerrainMap != null)
 				oldTerrainMap.removeWithoutUpdate(obj);
 		}
-		// Add to new awareness
+		// Update location
+		obj.setLocation(requestedLocation);
+		if (obj.getParent() != null)
+			obj.moveToContainer(null);
+		// Update awareness
 		TerrainMap map = getTerrainMap(requestedLocation.getTerrain());
 		if (map != null) {
 			map.moveWithinMap(obj, requestedLocation);
@@ -91,8 +88,6 @@ public class AwarenessHandler {
 	}
 	
 	public void moveObject(SWGObject obj, SWGObject parent, Location requestedLocation) {
-		if (obj.getParent() != parent)
-			obj.moveToContainer(parent);
 		// Remove from previous awareness
 		TerrainMap oldMap = getTerrainMap(requestedLocation.getTerrain());
 		if (oldMap != null)
@@ -101,6 +96,8 @@ public class AwarenessHandler {
 		obj.setLocation(requestedLocation);
 		// Update awareness
 		obj.resetAwareness();
+		if (obj.getParent() != parent)
+			obj.moveToContainer(parent);
 	}
 	
 	public void disappearObject(SWGObject obj, boolean disappearObjects, boolean disappearCustom) {
