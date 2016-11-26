@@ -29,7 +29,6 @@ package services.player;
 
 import intents.GalacticIntent;
 import intents.PlayerEventIntent;
-import intents.RequestZoneInIntent;
 import intents.chat.ChatBroadcastIntent;
 import intents.network.GalacticPacketIntent;
 import network.packets.Packet;
@@ -37,17 +36,13 @@ import network.packets.swg.login.AccountFeatureBits;
 import network.packets.swg.login.ClientIdMsg;
 import network.packets.swg.login.ClientPermissionsMessage;
 import network.packets.swg.login.ConnectionServerLagResponse;
-import network.packets.swg.zone.CmdSceneReady;
 import network.packets.swg.zone.HeartBeat;
 import network.packets.swg.zone.LagRequest;
-import network.packets.swg.zone.ParametersMessage;
 import network.packets.swg.zone.SetWaypointColor;
 import network.packets.swg.zone.ShowBackpack;
 import network.packets.swg.zone.ShowHelmet;
-import network.packets.swg.zone.chat.ChatOnConnectAvatar;
 import network.packets.swg.zone.chat.ChatSystemMessage;
-import network.packets.swg.zone.chat.VoiceChatStatus;
-import network.packets.swg.zone.insertion.ChatServerStatus;
+
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.lib.Constants;
@@ -58,14 +53,12 @@ import resources.config.ConfigFile;
 import resources.control.Intent;
 import resources.control.Manager;
 import resources.objects.creature.CreatureMood;
-import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
 import resources.objects.waypoint.WaypointObject;
 import resources.objects.waypoint.WaypointObject.WaypointColor;
 import resources.player.Player;
 import resources.player.PlayerEvent;
 import resources.player.PlayerFlags;
-import resources.player.PlayerState;
 import resources.player.Player.PlayerServer;
 import resources.server_info.Log;
 
@@ -84,7 +77,7 @@ public class ZoneManager extends Manager {
 		
 		addChildService(characterCreationService);
 		
-		registerForIntent(RequestZoneInIntent.TYPE);
+		registerForIntent(PlayerEventIntent.TYPE);
 		registerForIntent(GalacticPacketIntent.TYPE);
 	}
 	
@@ -96,21 +89,34 @@ public class ZoneManager extends Manager {
 	
 	@Override
 	public void onIntentReceived(Intent i) {
-		if (i instanceof RequestZoneInIntent) {
-			RequestZoneInIntent zii = (RequestZoneInIntent) i;
-			zoneInPlayer(zii.getPlayer(), zii.getCreature(), zii.isFirstZone());
+		if (i instanceof PlayerEventIntent) {
+			handlePlayerEventIntent(((PlayerEventIntent) i).getPlayer(), ((PlayerEventIntent) i).getEvent());
 		} else if (i instanceof GalacticPacketIntent) {
 			GalacticPacketIntent gpi = (GalacticPacketIntent) i;
 			handlePacket(gpi, gpi.getPlayerManager().getPlayerFromNetworkId(gpi.getNetworkId()), gpi.getNetworkId(), gpi.getPacket());
 		}
 	}
 	
-	public void handlePacket(GalacticIntent intent, Player player, long networkId, Packet p) {
+	private void handlePlayerEventIntent(Player player, PlayerEvent event) {
+		switch (event) {
+			case PE_FIRST_ZONE:
+				player.getPlayerObject().setStartPlayTime((int) System.currentTimeMillis());
+				sendCommitHistory(player);
+				sendMessageOfTheDay(player);
+				break;
+			case PE_ZONE_IN_SERVER:
+				player.getCreatureObject().setMoodId(CreatureMood.NONE.getMood());
+				player.getPlayerObject().clearFlagBitmask(PlayerFlags.LD);
+				break;
+			default:
+				break;
+		}
+	}
+	
+	private void handlePacket(GalacticIntent intent, Player player, long networkId, Packet p) {
 		characterCreationService.handlePacket(intent, player, networkId, p);
 		if (p instanceof ClientIdMsg)
 			handleClientIdMsg(player, (ClientIdMsg) p);
-		if (p instanceof CmdSceneReady)
-			handleCmdSceneReady(player, (CmdSceneReady) p);
 		if (p instanceof SetWaypointColor)
 			handleSetWaypointColor(player, (SetWaypointColor) p);
 		if(p instanceof ShowBackpack)
@@ -127,23 +133,6 @@ public class ZoneManager extends Manager {
 	
 	private void handleLagRequest(Player player) {
 		player.sendPacket(new ConnectionServerLagResponse());
-	}
-	
-	private void zoneInPlayer(Player player, CreatureObject creature, boolean firstZone) {
-		PlayerObject playerObj = creature.getPlayerObject();
-		player.setPlayerState(PlayerState.ZONING_IN);
-		creature.setOwner(player);
-		initPlayerBeforeZoneIn(player, creature, playerObj);
-		Log.i("ObjectManager", "Zoning in %s with character %s", player.getUsername(), player.getCharacterName());
-		
-		if (firstZone) {
-			sendZonePackets(player, creature);
-			playerObj.setStartPlayTime((int) System.currentTimeMillis());
-			sendCommitHistory(player);
-			sendMessageOfTheDay(player);
-			new PlayerEventIntent(player, PlayerEvent.PE_FIRST_ZONE).broadcast();
-		}
-		new PlayerEventIntent(player, PlayerEvent.PE_ZONE_IN_CLIENT).broadcast();
 	}
 	
 	private void loadCommitHistory() {
@@ -185,20 +174,6 @@ public class ZoneManager extends Manager {
 			new ChatBroadcastIntent(player, message).broadcast();	// Send it
 	}
 	
-	private void sendZonePackets(Player player, CreatureObject creature) {
-		player.sendPacket(new HeartBeat());
-		player.sendPacket(new ChatServerStatus(true));
-		player.sendPacket(new VoiceChatStatus());
-		player.sendPacket(new ParametersMessage());
-		player.sendPacket(new ChatOnConnectAvatar());
-	}
-	
-	private void initPlayerBeforeZoneIn(Player player, CreatureObject creatureObj, PlayerObject playerObj) {
-		creatureObj.setMoodId(CreatureMood.NONE.getMood());
-		playerObj.clearFlagBitmask(PlayerFlags.LD);	// Ziggy: Clear the LD flag in case it wasn't already.
-		creatureObj.clearCustomAware(false);
-	}
-	
 	private void handleShowBackpack(Player player, ShowBackpack p) {
 		player.getPlayerObject().setShowBackpack(p.showingBackpack());
 	}
@@ -226,12 +201,6 @@ public class ZoneManager extends Manager {
 		}
 		
 		ghost.updateWaypoint(waypoint);
-	}
-	
-	private void handleCmdSceneReady(Player player, CmdSceneReady p) {
-		new PlayerEventIntent(player, PlayerEvent.PE_ZONE_IN_SERVER).broadcast();
-		player.setPlayerState(PlayerState.ZONED_IN);
-		Log.i("ZoneService", "%s with character %s zoned in from %s:%d", player.getUsername(), player.getCharacterName(), p.getAddress(), p.getPort());
 	}
 	
 	private void handleClientIdMsg(Player player, ClientIdMsg clientId) {
