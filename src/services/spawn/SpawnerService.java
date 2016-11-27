@@ -232,8 +232,9 @@ public final class SpawnerService extends Service {
 			spawner.setFloatRadius((Integer) set.getInt("float_radius"));
 		}
 		
+		int amount = set.getInt("amount");
 		
-		for (int i = 0; i < set.getInt("amount"); i++) {
+		for (int i = 0; i < amount; i++) {
 			spawnNPC(spawner);
 		}
 	}
