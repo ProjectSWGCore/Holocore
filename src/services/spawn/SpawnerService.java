@@ -146,7 +146,7 @@ public final class SpawnerService extends Service {
 	private void loadSpawners() {
 		long start = System.nanoTime();
 		int count = 0;
-		Log.i(this, "Loading NPCs...");
+		Log.i(this, "Loading spawners...");
 		try (RelationalDatabase spawnerDatabase = RelationalServerFactory.getServerData("spawn/static.db", "static", "building/buildings", "creatures/creatures", "creatures/npc_stats")) {
 			try (ResultSet set = spawnerDatabase.executeQuery(GET_ALL_SPAWNERS_SQL)) {
 				Location loc = new Location();
@@ -161,7 +161,7 @@ public final class SpawnerService extends Service {
 			}
 		}
 		double time = (System.nanoTime()-start)/1E6;
-		Log.i(this, "Finished loading %d NPCs. Time: %fms", count, time);
+		Log.i(this, "Finished loading %d spawners. Time: %fms", count, time);
 	}
 	
 	private void loadSpawner(ResultSet set, Location loc) throws SQLException {
