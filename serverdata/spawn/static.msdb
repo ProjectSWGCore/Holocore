@@ -7,7 +7,7 @@ dungeon1_corvette.sdb	TRUE
 dungeon1_mtp_instance.sdb	FALSE																						
 dungeon1_nova_orion.sdb	TRUE																						
 dungeon1_npe_dungeon.sdb	FALSE																						
-dungeon1_npe_station.sdb	FALSE																						
+dungeon1_npe_station.sdb	TRUE																						
 endor.sdb	TRUE																						
 kashyyyk_dead_forest.sdb	TRUE																						
 kashyyyk_hunting.sdb	TRUE																						
@@ -29,7 +29,7 @@ talus.sdb	TRUE
 tatooine.sdb	TRUE																						
 yavin4.sdb	TRUE																						
 event_empireday.sdb	FALSE																						
-event_halloween.sdb	TRUE																						
+event_halloween.sdb	FALSE																						
 event_lifeday.sdb	FALSE																						
 event_loveday.sdb	FALSE																						
 event_remembranceday.sdb	FALSE																						
