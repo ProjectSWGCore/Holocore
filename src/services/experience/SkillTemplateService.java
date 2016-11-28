@@ -36,6 +36,8 @@ import java.util.Map;
 
 import intents.object.CreateStaticItemIntent;
 import intents.object.ObjectCreatedIntent;
+import java.util.ArrayList;
+import java.util.Collection;
 import network.packets.swg.zone.PlayClientEffectObjectMessage;
 import network.packets.swg.zone.PlayMusicMessage;
 import network.packets.swg.zone.object_controller.ShowFlyText;
@@ -54,6 +56,7 @@ import resources.player.Player;
 import resources.rewards.RoadmapReward;
 import resources.server_info.Log;
 import services.objects.ObjectCreator;
+import services.objects.StaticItemService;
 
 /**
  * This is a service that listens for {@link LevelChangedIntent} and grants
@@ -157,6 +160,8 @@ public final class SkillTemplateService extends Service {
 			else
 				items = reward.getDefaultRewardItems();
 
+			Collection<String> staticItems = new ArrayList<>();
+			
 			for (String item : items) {
 				if (item.endsWith(".iff")) {
 					SWGObject nonStaticItem = ObjectCreator.createObjectFromTemplate(ClientFactory.formatToSharedFile(item));
@@ -165,9 +170,14 @@ public final class SkillTemplateService extends Service {
 						nonStaticItem.moveToContainer(inventory);
 					}
 					new ObjectCreatedIntent(nonStaticItem).broadcast();
-				} else
-					new CreateStaticItemIntent(creatureObject, inventory, item).broadcast();
+				} else {
+					staticItems.add(item);
+				}
 			}
+			
+			// No reason to broadcast this intent if we don't need new static items anyways
+			if (!staticItems.isEmpty())
+				new CreateStaticItemIntent(creatureObject, inventory, new StaticItemService.LootBoxHandler(creatureObject), staticItems.toArray(new String[staticItems.size()])).broadcast();
 		}
 	}
 

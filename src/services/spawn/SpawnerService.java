@@ -65,7 +65,7 @@ public final class SpawnerService extends Service {
 	
 	private static final String GET_ALL_SPAWNERS_SQL = "SELECT static.x, static.y, static.z, static.heading, " // static columns
 			+ "static.spawner_type, static.cell_id, static.active, static.mood, static.behaviour, static.float_radius, " // more static columns
-			+ "static.min_spawn_time, static.max_spawn_time, " // even more static columns
+			+ "static.min_spawn_time, static.max_spawn_time, static.amount, " // even more static columns
 			+ "buildings.object_id AS building_id, buildings.terrain_name AS building_terrain, " // building columns
 			+ "creatures.iff_template AS iff, creatures.creature_name, creatures.combat_level, creatures.difficulty, creatures.attackable, " // creature columns
 			+ "npc_stats.HP, npc_stats.Action, npc_stats.Boss_HP, npc_stats.Boss_Action, npc_stats.Elite_HP, npc_stats.Elite_Action "	// npc_stats columns
@@ -146,7 +146,7 @@ public final class SpawnerService extends Service {
 	private void loadSpawners() {
 		long start = System.nanoTime();
 		int count = 0;
-		Log.i(this, "Loading NPCs...");
+		Log.i(this, "Loading spawners...");
 		try (RelationalDatabase spawnerDatabase = RelationalServerFactory.getServerData("spawn/static.db", "static", "building/buildings", "creatures/creatures", "creatures/npc_stats")) {
 			try (ResultSet set = spawnerDatabase.executeQuery(GET_ALL_SPAWNERS_SQL)) {
 				Location loc = new Location();
@@ -161,7 +161,7 @@ public final class SpawnerService extends Service {
 			}
 		}
 		double time = (System.nanoTime()-start)/1E6;
-		Log.i(this, "Finished loading %d NPCs. Time: %fms", count, time);
+		Log.i(this, "Finished loading %d spawners. Time: %fms", count, time);
 	}
 	
 	private void loadSpawner(ResultSet set, Location loc) throws SQLException {
@@ -231,8 +231,12 @@ public final class SpawnerService extends Service {
 		if (aiBehavior == AIBehavior.FLOAT) {
 			spawner.setFloatRadius((Integer) set.getInt("float_radius"));
 		}
-
-		spawnNPC(spawner);
+		
+		int amount = set.getInt("amount");
+		
+		for (int i = 0; i < amount; i++) {
+			spawnNPC(spawner);
+		}
 	}
 	
 	private void spawnNPC(Spawner spawner) {
