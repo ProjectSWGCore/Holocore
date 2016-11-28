@@ -25,52 +25,29 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
  ***********************************************************************************/
-package resources.client_info.visitors;
+package resources.client_info.visitors.appearance;
 
 import resources.client_info.ClientData;
 import resources.client_info.IffNode;
 import resources.client_info.SWGFile;
 
-public class AppearanceTemplateListData extends ClientData {
-	
-	private String lodFile = null;
+public class AppearanceTemplateData extends ClientData {
 	
 	@Override
 	public void readIff(SWGFile iff) {
-		readForms(iff);
-	}
-	
-	private void readForms(SWGFile iff) {
-		IffNode form = null;
-		while ((form = iff.enterNextForm()) != null) {
-			switch (form.getTag()) {
-				case "0000":
-					readChunks(form);
-					break;
-				default:
-					System.err.println("Unknown APT form: " + form.getTag() + " in " + iff.getCurrentForm().getTag());
-					break;
-			}
-			iff.exitForm();
+		IffNode node = iff.enterNextForm();
+		switch (node.getTag()) {
+			case "0003":
+				readForm3(iff);
+				break;
+			default:
+				System.err.println("Unknown AppearanceTemplateData version: " + node.getTag());
+				break;
 		}
 	}
 	
-	private void readChunks(IffNode node) {
-		IffNode chunk = null;
-		while ((chunk = node.getNextUnreadChunk()) != null) {
-			switch (chunk.getTag()) {
-				case "NAME":
-					lodFile = chunk.readString();
-					break;
-				default:
-					System.err.println("Unknown APT chunk: " + chunk.getTag());
-					break;
-			}
-		}
-	}
-	
-	public String getAppearanceFile() {
-		return lodFile;
+	private void readForm3(SWGFile iff) {
+		
 	}
 	
 }

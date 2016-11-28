@@ -30,6 +30,7 @@ package services.objects;
 import intents.PlayerEventIntent;
 import intents.RequestZoneInIntent;
 import intents.network.GalacticPacketIntent;
+import intents.object.ContainerTransferIntent;
 import intents.object.DestroyObjectIntent;
 import intents.object.MoveObjectIntent;
 import intents.object.ObjectCreatedIntent;
@@ -39,6 +40,11 @@ import intents.server.ConfigChangedIntent;
 import main.ProjectSWG;
 import network.packets.Packet;
 import network.packets.swg.zone.CmdSceneReady;
+import network.packets.swg.zone.HeartBeat;
+import network.packets.swg.zone.ParametersMessage;
+import network.packets.swg.zone.chat.ChatOnConnectAvatar;
+import network.packets.swg.zone.chat.VoiceChatStatus;
+import network.packets.swg.zone.insertion.ChatServerStatus;
 import network.packets.swg.zone.insertion.CmdStartScene;
 import network.packets.swg.zone.object_controller.DataTransform;
 import network.packets.swg.zone.object_controller.DataTransformWithParent;
@@ -54,6 +60,8 @@ import resources.objects.awareness.DataTransformHandler;
 import resources.objects.awareness.TerrainMap.TerrainMapCallback;
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
+import resources.player.PlayerEvent;
+import resources.player.PlayerState;
 import resources.server_info.Log;
 
 public class ObjectAwareness extends Service implements TerrainMapCallback {
@@ -73,6 +81,8 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 		registerForIntent(GalacticPacketIntent.TYPE);
 		registerForIntent(MoveObjectIntent.TYPE);
 		registerForIntent(ConfigChangedIntent.TYPE);
+		registerForIntent(ContainerTransferIntent.TYPE);
+		registerForIntent(RequestZoneInIntent.TYPE);
 	}
 	
 	@Override
@@ -111,6 +121,15 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 			case ConfigChangedIntent.TYPE:
 				if (i instanceof ConfigChangedIntent)
 					processConfigChangedIntent((ConfigChangedIntent) i);
+				break;
+			case ContainerTransferIntent.TYPE:
+				if (i instanceof ContainerTransferIntent)
+					processContainerTransferIntent((ContainerTransferIntent) i);
+				break;
+			case RequestZoneInIntent.TYPE:
+				if (i instanceof RequestZoneInIntent)
+					handleZoneIn(((RequestZoneInIntent) i).getCreature(), ((RequestZoneInIntent) i).getPlayer(), ((RequestZoneInIntent) i).isFirstZone());
+				break;
 			default:
 				break;
 		}
@@ -133,8 +152,6 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 	
 	@Override
 	public void onMoveFailure(SWGObject obj) {
-		if (!(obj instanceof CreatureObject) || ((CreatureObject) obj).isLoggedInPlayer())
-			Log.e(this, "Move failure! %s", obj);
 		obj.clearObjectsAware();
 	}
 
@@ -150,12 +167,6 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 			case PE_DESTROYED:
 				creature.setOwner(null);
 				break;
-			case PE_ZONE_IN_CLIENT:
-				startScene(creature);
-				break;
-			case PE_ZONE_IN_SERVER:
-				p.sendPacket(new CmdSceneReady());
-				break;
 			default:
 				break;
 		}
@@ -165,6 +176,8 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 		SWGObject object = oci.getObject();
 		if (object.getParent() == null)
 			moveObject(object, object.getLocation());
+		else
+			moveObject(object, object.getParent(), object.getLocation());
 	}
 	
 	private void handleDestroyObjectIntent(DestroyObjectIntent doi) {
@@ -174,13 +187,17 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 	}
 	
 	private void processObjectTeleportIntent(ObjectTeleportIntent oti) {
-		SWGObject object = oti.getObject();
-		Player owner = object.getOwner();
-		object.setLocation(oti.getNewLocation());
-		if (oti.getParent() != object.getParent())
-			object.moveToContainer(oti.getParent());
-		if (object instanceof CreatureObject && ((CreatureObject) object).isLoggedInPlayer())
-			new RequestZoneInIntent(owner, (CreatureObject) object, false).broadcast();
+		SWGObject obj = oti.getObject();
+		Player owner = obj.getOwner();
+		for (Player observer : obj.getObservers()) {
+			obj.destroyObject(observer);
+		}
+		if (oti.getParent() != null)
+			moveObject(obj, oti.getParent(), oti.getNewLocation());
+		else
+			moveObject(obj, oti.getNewLocation());
+		if (obj instanceof CreatureObject && ((CreatureObject) obj).isLoggedInPlayer())
+			handleZoneIn((CreatureObject) obj, owner, false);
 	}
 	
 	private void processGalacticPacketIntent(GalacticPacketIntent i) {
@@ -202,6 +219,8 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 				requestedLocation.setTerrain(obj.getTerrain());
 				moveObjectWithTransform(obj, parent, requestedLocation, trans.getSpeed(), trans.getUpdateCounter());
 			}
+		} else if (packet instanceof CmdSceneReady) {
+			handleCmdSceneReady(i.getPlayerManager().getPlayerFromNetworkId(i.getNetworkId()), (CmdSceneReady) packet);
 		}
 	}
 	
@@ -217,6 +236,37 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 			dataTransformHandler.setSpeedCheck(Boolean.parseBoolean(i.getNewValue()));
 	}
 	
+	private void processContainerTransferIntent(ContainerTransferIntent i) {
+		if (i.getContainer() == null)
+			moveObject(i.getObject(), i.getObject().getLocation());
+		else
+			moveObject(i.getObject(), i.getContainer(), i.getObject().getLocation());
+	}
+	
+	private void handleZoneIn(CreatureObject creature, Player player, boolean firstZone) {
+		creature.setOwner(player);
+		player.setPlayerState(PlayerState.ZONING_IN);
+		Log.i(this, "Zoning in %s with character %s", player.getUsername(), player.getCharacterName());
+		if (firstZone)
+			startFirstZone(creature, player);
+		startZone(creature, player);
+	}
+	
+	private void startFirstZone(CreatureObject creature, Player player) {
+		player.sendPacket(new HeartBeat());
+		player.sendPacket(new ChatServerStatus(true));
+		player.sendPacket(new VoiceChatStatus());
+		player.sendPacket(new ParametersMessage());
+		player.sendPacket(new ChatOnConnectAvatar());
+		new PlayerEventIntent(player, PlayerEvent.PE_FIRST_ZONE).broadcast();
+	}
+	
+	private void startZone(CreatureObject creature, Player player) {
+		creature.clearCustomAware(false);
+		startScene(creature);
+		new PlayerEventIntent(player, PlayerEvent.PE_ZONE_IN_CLIENT).broadcast();
+	}
+	
 	private void startScene(CreatureObject creature) {
 		Location loc = creature.getWorldLocation();
 		long time = ProjectSWG.getGalacticTime();
@@ -225,13 +275,20 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 		Player owner = creature.getOwner();
 		creature.resetAwareness();
 		owner.sendPacket(new CmdStartScene(ignoreSnapshots, creature.getObjectId(), race, loc, time, (int)(System.currentTimeMillis()/1E3)));
-		recursiveCreateObject(creature, owner);
+		recursiveCreateObject(creature, creature.getOwner());
 		if (creature.getParent() != null) {
 			for (SWGObject obj : creature.getSuperParent().getObjectsAware()) {
 				obj.createObject(creature);
 				creature.createObject(obj);
 			}
 		}
+	}
+	
+	private void handleCmdSceneReady(Player player, CmdSceneReady p) {
+		player.setPlayerState(PlayerState.ZONED_IN);
+		Log.i("ZoneService", "%s with character %s zoned in from %s:%d", player.getUsername(), player.getCharacterName(), p.getAddress(), p.getPort());
+		new PlayerEventIntent(player, PlayerEvent.PE_ZONE_IN_SERVER).broadcast();
+		player.sendPacket(new CmdSceneReady());
 	}
 	
 	private void recursiveCreateObject(SWGObject obj, Player owner) {
@@ -243,33 +300,25 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 	}
 	
 	private void moveObject(SWGObject obj, Location requestedLocation) {
-		if (requestedLocation == null)
-			awarenessHandler.disappearObject(obj, true, true);
-		else
-			awarenessHandler.moveObject(obj, requestedLocation);
+		awarenessHandler.moveObject(obj, requestedLocation);
 	}
 	
 	private void moveObject(SWGObject obj, SWGObject parent, Location requestedLocation) {
-		if (requestedLocation == null)
-			awarenessHandler.disappearObject(obj, true, true);
-		else
-			awarenessHandler.moveObject(obj, parent, requestedLocation);
+		awarenessHandler.moveObject(obj, parent, requestedLocation);
 	}
 	
 	private void moveObjectWithTransform(SWGObject obj, Location requestedLocation, double speed, int update) {
-		if (!dataTransformHandler.handleMove(obj, requestedLocation, speed, update))
-			return;
+		moveObject(obj, requestedLocation);
+		dataTransformHandler.handleMove(obj, speed, update);
 		if (obj instanceof CreatureObject && ((CreatureObject) obj).isLoggedInPlayer())
 			new PlayerTransformedIntent((CreatureObject) obj, obj.getParent(), null, obj.getLocation(), requestedLocation).broadcast();
-		moveObject(obj, requestedLocation);
 	}
 	
 	private void moveObjectWithTransform(SWGObject obj, SWGObject parent, Location requestedLocation, double speed, int update) {
-		if (!dataTransformHandler.handleMove(obj, parent, requestedLocation, speed, update))
-			return;
+		moveObject(obj, parent, requestedLocation);
+		dataTransformHandler.handleMove(obj, parent, speed, update);
 		if (obj instanceof CreatureObject && ((CreatureObject) obj).isLoggedInPlayer())
 			new PlayerTransformedIntent((CreatureObject) obj, obj.getParent(), parent, obj.getLocation(), requestedLocation).broadcast();
-		moveObject(obj, parent, requestedLocation);
 	}
 	
 	private void disappearObject(SWGObject obj, boolean disappearObjects, boolean disappearCustom) {

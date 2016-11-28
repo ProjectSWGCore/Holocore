@@ -29,20 +29,13 @@ package resources.objects.awareness;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
-
 import resources.Location;
 import resources.Terrain;
-import resources.buildout.BuildoutArea;
 import resources.objects.SWGObject;
 import resources.objects.awareness.TerrainMap.TerrainMapCallback;
-import resources.player.Player;
 import resources.server_info.Log;
-import utilities.AwarenessUtilities;
 
 public class AwarenessHandler {
-	
-	private static final Location GONE_LOCATION = new Location(0, 0, 0, null);
 	
 	private final Map<Terrain, TerrainMap> terrains;
 	
@@ -57,6 +50,14 @@ public class AwarenessHandler {
 		}
 	}
 	
+	public boolean isCallbacksDone() {
+		for (TerrainMap map : terrains.values()) {
+			if (!map.isCallbacksDone())
+				return false;
+		}
+		return true;
+	}
+	
 	private void loadTerrainMaps(TerrainMapCallback callback) {
 		for (Terrain t : Terrain.values()) {
 			TerrainMap map = new TerrainMap(t);
@@ -67,35 +68,26 @@ public class AwarenessHandler {
 	}
 	
 	public void moveObject(SWGObject obj, Location requestedLocation) {
+		// Remove from previous awareness
+		if (obj.getTerrain() != requestedLocation.getTerrain()) {
+			TerrainMap oldTerrainMap = getTerrainMap(obj.getTerrain());
+			if (oldTerrainMap != null)
+				oldTerrainMap.removeWithoutUpdate(obj);
+		}
+		// Update location
+		obj.setLocation(requestedLocation);
 		if (obj.getParent() != null)
 			obj.moveToContainer(null);
-		// Adjust to server coordinates
-		BuildoutArea area = obj.getBuildoutArea();
-		if (area != null)
-			requestedLocation = area.adjustLocation(requestedLocation);
-		// Remove from previous awareness
-		Terrain oldTerrain = obj.getTerrain();
-		Terrain newTerrain = requestedLocation.getTerrain();
-		if (oldTerrain != newTerrain && oldTerrain != null) {
-			obj.clearObjectsAware(); // Moving to GONE
-			TerrainMap oldTerrainMap = getTerrainMap(oldTerrain);
-			if (oldTerrainMap != null)
-				oldTerrainMap.removeFromMap(obj);
-		}
-		// Add to new awareness
-		TerrainMap map = getTerrainMap(newTerrain);
+		// Update awareness
+		TerrainMap map = getTerrainMap(requestedLocation.getTerrain());
 		if (map != null) {
 			map.moveWithinMap(obj, requestedLocation);
-		} else if (!requestedLocation.equals(GONE_LOCATION)) {
-			Log.e(this, "Unknown terrain: %s", newTerrain);
+		} else {
+			Log.e(this, "Unknown terrain: %s", requestedLocation.getTerrain());
 		}
 	}
 	
 	public void moveObject(SWGObject obj, SWGObject parent, Location requestedLocation) {
-		Set<SWGObject> oldAware = obj.getObjectsAware();
-		Set<Player> oldObservers = obj.getObservers();
-		if (obj.getParent() != parent)
-			obj.moveToContainer(parent);
 		// Remove from previous awareness
 		TerrainMap oldMap = getTerrainMap(requestedLocation.getTerrain());
 		if (oldMap != null)
@@ -103,19 +95,19 @@ public class AwarenessHandler {
 		// Update location
 		obj.setLocation(requestedLocation);
 		// Update awareness
-		TerrainMap map = getTerrainMap(parent);
-		if (map != null) {
-			map.moveToParent(obj, parent);
-			AwarenessUtilities.handleUpdateAwarenessManual(obj, oldAware, oldObservers, obj.getObjectsAware(), obj.getObservers());
-		} else if (!requestedLocation.equals(GONE_LOCATION)) {
-			Log.e(this, "Unknown terrain: %s", requestedLocation.getTerrain());
-		}
+		obj.resetAwareness();
+		if (obj.getParent() != parent)
+			obj.moveToContainer(parent);
 	}
 	
 	public void disappearObject(SWGObject obj, boolean disappearObjects, boolean disappearCustom) {
-		moveObject(obj, GONE_LOCATION);
-		if (disappearObjects)
-			obj.clearObjectsAware();
+		TerrainMap map = getTerrainMap(obj);
+		if (map != null) {
+			if (disappearObjects)
+				map.removeFromMap(obj);
+			else
+				map.removeWithoutUpdate(obj);
+		}
 		if (disappearCustom)
 			obj.clearCustomAware(true);
 	}

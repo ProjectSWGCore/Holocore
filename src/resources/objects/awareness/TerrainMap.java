@@ -37,6 +37,7 @@ import resources.Terrain;
 import resources.callback.CallbackManager;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
+import resources.objects.waypoint.WaypointObject;
 import resources.server_info.Log;
 import utilities.AwarenessUtilities;
 
@@ -77,6 +78,10 @@ public class TerrainMap {
 		callbackManager.setCallback(callback);
 	}
 	
+	public boolean isCallbacksDone() {
+		return callbackManager.isQueueEmpty();
+	}
+	
 	public void moveWithinMap(SWGObject obj, Location loc) {
 		obj.setLocation(loc);
 		if (isInAwareness(obj)) {
@@ -88,17 +93,14 @@ public class TerrainMap {
 		}
 	}
 	
-	public void moveToParent(SWGObject obj, SWGObject parent) {
-		obj.resetAwareness();
-	}
-	
 	public void removeWithoutUpdate(SWGObject obj) {
 		remove(obj);
 	}
 	
 	public void removeFromMap(SWGObject obj) {
-		remove(obj);
-		update(obj);
+		if (remove(obj)) {
+			update(obj);
+		}
 	}
 	
 	private void move(SWGObject obj) {
@@ -118,10 +120,11 @@ public class TerrainMap {
 		objectChunk.put(obj.getObjectId(), chunk);
 	}
 	
-	private void remove(SWGObject obj) {
+	private boolean remove(SWGObject obj) {
 		TerrainMapChunk chunk = objectChunk.remove(obj.getObjectId());
 		if (chunk != null)
 			chunk.removeObject(obj);
+		return chunk != null;
 	}
 	
 	private void update(SWGObject obj) {
@@ -147,6 +150,8 @@ public class TerrainMap {
 	
 	private boolean isInAwareness(SWGObject obj) {
 		if (obj.getParent() != null)
+			return false;
+		if (obj instanceof WaypointObject)
 			return false;
 		if (!(obj instanceof CreatureObject))
 			return true;

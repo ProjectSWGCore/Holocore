@@ -37,7 +37,7 @@ import utilities.CrcDatabaseGenerator;
 @RunWith(Suite.class)
 @SuiteClasses({
 	TestAware.class,
-	TestTerrainMapChunk.class,
+//	TestTerrainMapChunk.class,
 	TestTerrainMap.class,
 	TestAwarenessHandler.class
 })

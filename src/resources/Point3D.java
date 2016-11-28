@@ -82,21 +82,20 @@ public class Point3D implements Encodable, Persistable {
 		setZ(z);
 	}
 	
-	public void rotateAround(double x, double y, double z, Quaternion rot) {
-		double oX = rot.getX();
-		double oY = rot.getY();
-		double oZ = rot.getZ();
-		double oW = rot.getW();
-		double oX2 = oX * oX;
-		double oY2 = oY * oY;
-		double oZ2 = oZ * oZ;
-		double oW2 = oW * oW;
-		double nX = x + oW2*getX() + 2*oY*oW*getZ() - 2*oZ*oW*getY() + oX2*getX() + 2*oY*oX*getY() + 2*oZ*oX*getZ() - oZ2*getX() - oY2*getX();
-		double nY = y + 2*oX*oY*getX() + oY2*getY() + 2*oZ*oY*getZ() + 2*oW*oZ*getX() - oZ2*getY() + oW2*getY() - 2*oX*oW*getZ() - oX2*getY();
-		double nZ = z + 2*oX*oZ*getX() + 2*oY*oZ*getY() + oZ2*getZ() - 2*oW*oY*getX() - oY2*getZ() + 2*oW*oX*getY() - oX2*getZ() + oW2*getZ();
-		set(nX, nY, nZ);
+	public void translate(Point3D p) {
+		translate(p.getX(), p.getY(), p.getZ());
 	}
-
+	
+	public void translate(double x, double y, double z) {
+		this.x += x;
+		this.y += y;
+		this.z += z;
+	}
+	
+	public void rotateAround(double x, double y, double z, Quaternion rot) {
+		rot.rotatePoint(this);
+		translate(x, y, z);
+	}
 
 	@Override
 	public byte[] encode() {

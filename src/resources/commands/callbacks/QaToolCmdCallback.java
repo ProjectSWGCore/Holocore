@@ -184,8 +184,11 @@ public class QaToolCmdCallback implements ICmdCallback {
 		String name = args;
 		String[] nameParts = name.split(" ");
 		String loc = "";
-		if (nameParts.length >= 2) {
+		if (nameParts.length == 2) {
 			name = nameParts[0];
+			loc = nameParts[1];
+		} else if (nameParts.length == 3) {
+			name = nameParts[0] + " " + nameParts[1];
 			loc = nameParts[1];
 		} else {
 			sendSystemMessage(player, "Invalid arguments! Expected <playername> [opt]<terrain>");
@@ -195,7 +198,7 @@ public class QaToolCmdCallback implements ICmdCallback {
 	}
 	
 	private void recoverPlayer(ObjectManager objManager, PlayerManager playerManager, Player player, String name, String loc) {
-		long id = playerManager.getPlayerByCreatureFirstName(name).getCreatureObject().getObjectId();
+		long id = playerManager.getCharacterIdByName(name);
 		if (id == 0) {
 			sendSystemMessage(player, "Could not find player by name: '" + name + "'");
 			return;
