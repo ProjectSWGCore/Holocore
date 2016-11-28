@@ -49,7 +49,6 @@ import resources.server_info.RelationalServerFactory;
 import services.objects.StaticItemService.ObjectCreationHandler;
 
 public class UniformBoxService extends Service {
-	//TODO: Display loot box
 	
 	private static final String [] UNIFORM_COLUMNS = {"boots", "pants", "belt", "gloves", "shirt", "vest", "hat", "necklace", "robe", "weapon"};
 	private static final String GET_UNIFORMBOX_SQL = "SELECT * FROM npe_uniformbox where profession = ? AND race = ?";
