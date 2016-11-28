@@ -47,8 +47,9 @@ import intents.combat.DeathblowIntent;
 import java.util.Iterator;
 import java.util.Random;
 import java.util.concurrent.Future;
+import network.packets.swg.zone.object_controller.combat.CombatSpam;
 import resources.Posture;
-import resources.combat.AttackType;
+import resources.combat.AttackInfo;
 import resources.combat.CombatStatus;
 import resources.combat.HitLocation;
 import resources.combat.TrailLocation;
@@ -247,29 +248,17 @@ public class CombatManager extends Manager {
 		if (!handleStatus(source, canPerform(source, target, command)))
 			return;
 		
-		CombatAction action = new CombatAction(source.getObjectId());
-		String anim = command.getRandomAnimation(source.getEquippedWeapon().getType());
-		action.setActionCrc(CRC.getCrc(anim));
-		action.setAttacker(source);
-		action.setClientEffectId((byte) 0);
-		action.setCommandCrc(command.getCrc());
-		action.setTrail(TrailLocation.WEAPON);
-		action.setUseLocation(false);
+		WeaponObject weapon = source.getEquippedWeapon();
 		
 		for(int i = 0; i < command.getAttackRolls(); i++) {
-			int damage = 0;
-
-			damage += calculateWeaponDamage(source, command);
-			damage += command.getAddedDamage();
-
+			AttackInfo info = new AttackInfo();
+			
 			if (target instanceof CreatureObject) {
-				if (command.getAttackType() == AttackType.SINGLE_TARGET)
-					doCombatSingle(source, (CreatureObject) target, damage, command);
-				action.addDefender((CreatureObject) target, true, (byte) 0, HitLocation.HIT_LOCATION_BODY, (short) damage);
+				switch (command.getAttackType()) {
+					case SINGLE_TARGET: doCombatSingle(source, (CreatureObject) target, info, weapon, command); break;
+				}
 			}
 		}
-		
-		source.sendObserversAndSelf(action);
 	}
 	
 	private void handleBuff(CreatureObject source, SWGObject target, CombatCommand combatCommand) {
@@ -280,24 +269,77 @@ public class CombatManager extends Manager {
 			addBuff(source, (CreatureObject) target, combatCommand.getBuffNameTarget());
 	}
 	
-	private void doCombatSingle(CreatureObject source, CreatureObject target, int damage, CombatCommand command) {
+	private void doCombatSingle(CreatureObject source, CreatureObject target, AttackInfo info, WeaponObject weapon, CombatCommand command) {
+		// TODO single target only defence rolls against target
+		// TODO single target only offence rolls for source
+		Set<CreatureObject> targets = new HashSet<>();
+		
+		targets.add(target);
+		
+		doCombat(source, targets, weapon, info, command);
+	}
+	
+	private void doCombat(CreatureObject source, Set<CreatureObject> targets, WeaponObject weapon, AttackInfo info, CombatCommand command) {
 		updateCombatList(source);
-		if (target instanceof CreatureObject)
-			updateCombatList((CreatureObject) target);
 		
-		if (!source.isInCombat())
-			enterCombat(source);
-		if (!target.isInCombat())
-			enterCombat(target);
-		target.addDefender(source);
-		source.addDefender(target);
+		CombatAction action = new CombatAction(source.getObjectId());
+		String anim = command.getRandomAnimation(weapon.getType());
+		action.setActionCrc(CRC.getCrc(anim));
+		action.setAttacker(source);
+		action.setClientEffectId((byte) 0);
+		action.setCommandCrc(command.getCrc());
+		action.setTrail(TrailLocation.WEAPON);
+		action.setUseLocation(false);
 		
-		addBuff(source, target, command.getBuffNameTarget());	// Add target buff
+		for (CreatureObject target : targets) {
+			if (target instanceof CreatureObject)
+				updateCombatList((CreatureObject) target);
 		
-		if (target.getHealth() <= damage)
-			doCreatureDeath(target, source);
-		else
-			target.modifyHealth(-damage);
+			if (!source.isInCombat())
+				enterCombat(source);
+			if (!target.isInCombat())
+				enterCombat(target);
+			target.addDefender(source);
+			source.addDefender(target);
+			
+			CombatSpam combatSpam = new CombatSpam(source.getObjectId());
+
+			combatSpam.setAttacker(source);
+			combatSpam.setDefender(target);
+			combatSpam.setInfo(info);
+			combatSpam.setAttackName(new StringId("cmd_n", command.getName()));
+			combatSpam.setWeapon(weapon.getObjectId());
+			
+			// Combat log message appears for both the attacker and the defender
+			source.sendSelf(combatSpam);
+			target.sendSelf(combatSpam);
+
+			if (!info.isSuccess()) {	// Single target negate, like dodge or parry!
+				return;
+			}
+			
+			int rawDamage = calculateWeaponDamage(source, weapon, command) + command.getAddedDamage();
+			
+			info.setRawDamage(rawDamage);
+			info.setFinalDamage(rawDamage);	// Final damage will be modified by armour and defensive rolls later
+			
+			// TODO block roll for defenders
+			// TODO Critical hit roll for attacker
+			// TODO armour
+			
+			addBuff(source, target, command.getBuffNameTarget());	// Add target buff
+			
+			int finalDamage = info.getFinalDamage();
+			
+			action.addDefender((CreatureObject) target, true, (byte) 0, HitLocation.HIT_LOCATION_BODY, (short) finalDamage);
+			
+			if (target.getHealth() <= finalDamage)
+				doCreatureDeath(target, source);
+			else
+				target.modifyHealth(-finalDamage);
+		}
+		
+		source.sendObserversAndSelf(action);
 	}
 	
 	private void enterCombat(CreatureObject creature) {
@@ -537,8 +579,7 @@ public class CombatManager extends Manager {
 		}
 	}
 	
-	private int calculateWeaponDamage(CreatureObject source, CombatCommand command) {
-		WeaponObject weapon = source.getEquippedWeapon();
+	private int calculateWeaponDamage(CreatureObject source, WeaponObject weapon, CombatCommand command) {
 		int minDamage = weapon.getMinDamage();
 		int weaponDamage = random.nextInt((weapon.getMaxDamage() - minDamage) + 1) + minDamage;
 		

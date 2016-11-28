@@ -179,6 +179,7 @@ public class CommandService extends Service {
 		}
 		
 		Command command = getCommand(request.getCommandCrc());
+		// TODO target and target type checks below. Work with Set<TangibleObject> targets from there
 		long targetId = request.getTargetId();
 		final SWGObject target = targetId != 0 ? galacticManager.getObjectManager().getObjectById(targetId) : null;
 		
@@ -362,9 +363,10 @@ public class CommandService extends Service {
 
 		for (int row = 0; row < baseCommands.getRowCount(); row++) {
 			Object [] cmdRow = baseCommands.getRow(row);
+			String commandName = ((String) cmdRow[0]).toLowerCase(Locale.ENGLISH);
+			Command command = new Command(commandName);
 			
-			Command command = new Command((String) cmdRow[0]);
-			command.setCrc(CRC.getCrc(command.getName().toLowerCase(Locale.ENGLISH)));
+			command.setCrc(CRC.getCrc(commandName));
 			command.setDefaultPriority(DefaultPriority.getDefaultPriority((int) cmdRow[1]));
 			command.setScriptHook((String) cmdRow[2]);
 			command.setCppHook((String)cmdRow[4]);
@@ -480,6 +482,7 @@ public class CommandService extends Service {
 	}
 	
 	private <T extends ICmdCallback> Command registerCallback(String command, Class<T> callback) {
+		command = command.toLowerCase(Locale.ENGLISH);
 		Command comand = getCommand(command);
 		registerCallback(comand, callback);
 		return comand;
