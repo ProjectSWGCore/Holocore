@@ -36,6 +36,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+import network.packets.swg.zone.object_controller.ShowLootBox;
 
 import resources.client_info.ClientFactory;
 import resources.combat.DamageType;
@@ -43,6 +44,7 @@ import resources.config.ConfigFile;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.SWGObject;
+import resources.objects.creature.CreatureObject;
 import resources.objects.weapon.WeaponObject;
 import resources.objects.weapon.WeaponType;
 import resources.player.Player;
@@ -686,8 +688,38 @@ public final class StaticItemService extends Service {
 		return mods;
 	}
 	
-	public interface ObjectCreationHandler {
-		void success(SWGObject[] createdObjects);
-		void containerFull();
+	public static abstract class ObjectCreationHandler {
+		public abstract void success(SWGObject[] createdObjects);
+		public abstract boolean isIgnoreVolume();
+		
+		public void containerFull() {
+			
+		}
+	}
+	
+	public static final class LootBoxHandler extends ObjectCreationHandler {
+
+		private final CreatureObject receiver;
+
+		public LootBoxHandler(CreatureObject receiver) {
+			this.receiver = receiver;
+		}
+		
+		@Override
+		public void success(SWGObject[] createdObjects) {
+			long[] objectIds = new long[createdObjects.length];
+
+			for (int i = 0; i < objectIds.length; i++) {
+				objectIds[i] = createdObjects[i].getObjectId();
+			}
+
+			receiver.sendSelf(new ShowLootBox(receiver.getObjectId(), objectIds));
+		}
+
+		@Override
+		public boolean isIgnoreVolume() {
+			return true;
+		}
+		
 	}
 }

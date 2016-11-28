@@ -38,13 +38,10 @@ import intents.object.CreateStaticItemIntent;
 import intents.object.ObjectCreatedIntent;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import network.packets.swg.zone.PlayClientEffectObjectMessage;
 import network.packets.swg.zone.PlayMusicMessage;
 import network.packets.swg.zone.object_controller.ShowFlyText;
 import network.packets.swg.zone.object_controller.ShowFlyText.Scale;
-import network.packets.swg.zone.object_controller.ShowLootBox;
 import resources.Race;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
@@ -59,7 +56,7 @@ import resources.player.Player;
 import resources.rewards.RoadmapReward;
 import resources.server_info.Log;
 import services.objects.ObjectCreator;
-import services.objects.StaticItemService.ObjectCreationHandler;
+import services.objects.StaticItemService;
 
 /**
  * This is a service that listens for {@link LevelChangedIntent} and grants
@@ -177,30 +174,10 @@ public final class SkillTemplateService extends Service {
 					staticItems.add(item);
 				}
 			}
-
-			new CreateStaticItemIntent(creatureObject, inventory, new ObjectCreationHandler() {
-				@Override
-				public void success(SWGObject[] createdObjects) {
-					long[] objectIds = new long[createdObjects.length];
-					
-					for (int i = 0; i < objectIds.length; i++) {
-						objectIds[i] = createdObjects[i].getObjectId();
-					}
-					
-					try {
-						Thread.sleep(200);
-						creatureObject.sendSelf(new ShowLootBox(creatureObject.getObjectId(), objectIds));
-					} catch (InterruptedException ex) {
-						
-					}
-				}
-
-				@Override
-				public void containerFull() {
-					// Uhh.... Yeah....
-				}
-
-			}, staticItems.toArray(new String[staticItems.size()])).broadcast();
+			
+			// No reason to broadcast this intent if we don't need new static items anyways
+			if (!staticItems.isEmpty())
+				new CreateStaticItemIntent(creatureObject, inventory, new StaticItemService.LootBoxHandler(creatureObject), staticItems.toArray(new String[staticItems.size()])).broadcast();
 		}
 	}
 

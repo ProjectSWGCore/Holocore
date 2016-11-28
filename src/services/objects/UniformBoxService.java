@@ -121,25 +121,7 @@ public class UniformBoxService extends Service {
 				staticItems.add(item);
 		}
 		
-		new CreateStaticItemIntent(creature, inventory, new ObjectCreationHandler() {
-			@Override
-			public void success(SWGObject[] createdObjects) {
-				int objectCount = createdObjects.length;
-				long[] objectIds = new long[objectCount];
-				
-				for(int i = 0; i < objectCount; i++) {
-					objectIds[i] = createdObjects[i].getObjectId();
-				}
-				
-				creature.sendSelf(new ShowLootBox(creature.getObjectId(), objectIds));
-			}
-
-			@Override
-			public void containerFull() {
-				
-			}
-			
-		}, staticItems.toArray(new String[staticItems.size()])).broadcast();
+		new CreateStaticItemIntent(creature, inventory, new StaticItemService.LootBoxHandler(creature), staticItems.toArray(new String[staticItems.size()])).broadcast();
 	}
 	
 }

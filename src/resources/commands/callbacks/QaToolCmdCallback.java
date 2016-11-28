@@ -158,6 +158,11 @@ public class QaToolCmdCallback implements ICmdCallback {
 			public void containerFull() {
 				new ChatBroadcastIntent(player, "@system_msg:give_item_failure").broadcast();
 			}
+
+			@Override
+			public boolean isIgnoreVolume() {
+				return false;
+			}
 		}, itemName).broadcast();
 	}
 	
