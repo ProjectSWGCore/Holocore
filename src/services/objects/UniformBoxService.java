@@ -37,7 +37,6 @@ import intents.object.DestroyObjectIntent;
 import intents.radial.RadialSelectionIntent;
 import java.util.ArrayList;
 import java.util.Collection;
-import network.packets.swg.zone.object_controller.ShowLootBox;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.SWGObject;
@@ -46,7 +45,6 @@ import resources.player.Player;
 import resources.radial.RadialItem;
 import resources.server_info.RelationalServerData;
 import resources.server_info.RelationalServerFactory;
-import services.objects.StaticItemService.ObjectCreationHandler;
 
 public class UniformBoxService extends Service {
 	
