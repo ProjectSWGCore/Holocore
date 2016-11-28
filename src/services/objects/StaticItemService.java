@@ -178,7 +178,7 @@ public final class StaticItemService extends Service {
 		ObjectCreationHandler objectCreationHandler = i.getObjectCreationHandler();
 		
 		// If adding these items to the container would exceed the max capacity...
-		if(container.getVolume() + itemNames.length > container.getMaxContainerSize()) {
+		if(!objectCreationHandler.isIgnoreVolume() && container.getVolume() + itemNames.length > container.getMaxContainerSize()) {
 			objectCreationHandler.containerFull();
 			return;
 		}
