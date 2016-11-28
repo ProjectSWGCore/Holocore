@@ -51,6 +51,7 @@ import network.packets.swg.zone.object_controller.combat.CombatSpam;
 import resources.Posture;
 import resources.combat.AttackInfo;
 import resources.combat.CombatStatus;
+import resources.combat.DamageType;
 import resources.combat.HitLocation;
 import resources.combat.TrailLocation;
 import resources.commands.CombatCommand;
@@ -272,6 +273,8 @@ public class CombatManager extends Manager {
 	private void doCombatSingle(CreatureObject source, CreatureObject target, AttackInfo info, WeaponObject weapon, CombatCommand command) {
 		// TODO single target only defence rolls against target
 		// TODO single target only offence rolls for source
+		
+		// TODO below logic should be in CommandService when target checks are implemented in there
 		Set<CreatureObject> targets = new HashSet<>();
 		
 		targets.add(target);
@@ -292,8 +295,7 @@ public class CombatManager extends Manager {
 		action.setUseLocation(false);
 		
 		for (CreatureObject target : targets) {
-			if (target instanceof CreatureObject)
-				updateCombatList((CreatureObject) target);
+			updateCombatList(target);
 		
 			if (!source.isInCombat())
 				enterCombat(source);
@@ -303,7 +305,6 @@ public class CombatManager extends Manager {
 			source.addDefender(target);
 			
 			CombatSpam combatSpam = new CombatSpam(source.getObjectId());
-
 			combatSpam.setAttacker(source);
 			combatSpam.setDefender(target);
 			combatSpam.setInfo(info);
@@ -318,16 +319,17 @@ public class CombatManager extends Manager {
 				return;
 			}
 			
+			addBuff(source, target, command.getBuffNameTarget());	// Add target buff
+			
 			int rawDamage = calculateWeaponDamage(source, weapon, command) + command.getAddedDamage();
 			
 			info.setRawDamage(rawDamage);
 			info.setFinalDamage(rawDamage);	// Final damage will be modified by armour and defensive rolls later
+			info.setDamageType(weapon.getDamageType());
 			
 			// TODO block roll for defenders
 			// TODO Critical hit roll for attacker
 			// TODO armour
-			
-			addBuff(source, target, command.getBuffNameTarget());	// Add target buff
 			
 			int finalDamage = info.getFinalDamage();
 			
