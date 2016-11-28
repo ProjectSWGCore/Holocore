@@ -106,7 +106,9 @@ class PlayerObjectShared implements Persistable {
 	}
 	
 	public byte[] getCollectionBadges() {
-		return collectionBadges.toByteArray();
+		synchronized (collectionBadges) {
+			return collectionBadges.toByteArray();
+		}
 	}
 	
 	public boolean isShowHelmet() {
@@ -166,9 +168,11 @@ class PlayerObjectShared implements Persistable {
 	}
 	
 	public void setCollectionBadges(byte [] collection, SWGObject target) {
-		this.collectionBadges.clear();
-		this.collectionBadges.or(BitSet.valueOf(collection));
-		collectionBadges.sendDeltaMessage(target);
+		synchronized (collectionBadges) {
+			this.collectionBadges.clear();
+			this.collectionBadges.or(BitSet.valueOf(collection));
+			collectionBadges.sendDeltaMessage(target);
+		}
 	}
 	
 	public void setShowHelmet(boolean showHelmet) {
