@@ -49,7 +49,7 @@ public class ShowLootBox extends ObjectController {
 	@Override
 	public void decode(ByteBuffer data) {
 		decodeHeader(data);
-		data.getInt();	// Background colour
+		
 		int itemCount = data.getInt();
 		items = new long[itemCount];
 		
@@ -60,10 +60,9 @@ public class ShowLootBox extends ObjectController {
 	
 	@Override
 	public ByteBuffer encode() {
-		NetBuffer data = NetBuffer.allocate(HEADER_LENGTH + Integer.BYTES * 2 + items.length * Long.BYTES);
+		NetBuffer data = NetBuffer.allocate(HEADER_LENGTH + Integer.BYTES + items.length * Long.BYTES);
 		encodeHeader(data.getBuffer());
 		
-		data.addInt(0);	// Determines background colour for the items
 		data.addInt(items.length);
 		
 		for(long objectId : items) {
