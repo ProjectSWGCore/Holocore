@@ -45,7 +45,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class GroupObject extends SWGObject { // Extends INTO or TANO?
 	private final SWGList<GroupMember> groupMembers = new SWGList<>(6, 2, Encoder.StringType.ASCII);
