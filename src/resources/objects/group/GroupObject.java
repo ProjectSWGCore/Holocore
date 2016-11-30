@@ -45,6 +45,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class GroupObject extends SWGObject { // Extends INTO or TANO?
 	private final SWGList<GroupMember> groupMembers = new SWGList<>(6, 2, Encoder.StringType.ASCII);
@@ -110,6 +111,19 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 			object.setGroupId(0);
 
 			groupMembers.sendDeltaMessage(this);
+			
+			// We need to recalculate the group level if someone leaves!
+			AtomicInteger newLevel = new AtomicInteger(1);
+			
+			groupMembers.forEach(groupMember -> {
+				short memberLevel = groupMember.getCreatureObject().getLevel();
+				
+				if (memberLevel > newLevel.get()) {
+					newLevel.set(memberLevel);
+				}
+			});
+			
+			setLevel((short) newLevel.get());
 		}
 	}
 
