@@ -113,17 +113,10 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 			groupMembers.sendDeltaMessage(this);
 			
 			// We need to recalculate the group level if someone leaves!
-			AtomicInteger newLevel = new AtomicInteger(1);
-			
-			groupMembers.forEach(groupMember -> {
-				short memberLevel = groupMember.getCreatureObject().getLevel();
-				
-				if (memberLevel > newLevel.get()) {
-					newLevel.set(memberLevel);
-				}
-			});
-			
-			setLevel((short) newLevel.get());
+			groupMembers.stream()
+					.map(groupMember -> groupMember.getCreatureObject().getLevel())
+					.max((level1, level2) -> Short.compare(level1, level2))
+					.ifPresent(newLevel -> setLevel(newLevel));
 		}
 	}
 
