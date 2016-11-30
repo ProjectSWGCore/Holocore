@@ -176,6 +176,7 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 
 	public void setLevel(short level) {
 		this.level = level;
+		sendDelta(6, level, 5);
 	}
 
 	public long getLootMaster() {
