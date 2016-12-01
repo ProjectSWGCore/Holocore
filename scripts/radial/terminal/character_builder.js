@@ -20,6 +20,12 @@ function handleSelection(player, target, selection) {
 }
 
 function handleCategorySelection(player, creature, eventType, parameters) {
+	var SuiEvent = Java.type("resources.sui.SuiEvent");
+	
+	if (eventType != SuiEvent.OK_PRESSED) {
+		return;
+	}
+	
 	var SuiListBox = Java.type("resources.sui.SuiListBox");
 	selection = SuiListBox.getSelectedRow(parameters);
 	
@@ -68,6 +74,12 @@ function handleArmour(player) {
 }
 
 function handleArmourSelection(player, creature, eventType, parameters) {
+	var SuiEvent = Java.type("resources.sui.SuiEvent");
+	
+	if (eventType != SuiEvent.OK_PRESSED) {
+		return;
+	}
+	
 	var SuiListBox = Java.type("resources.sui.SuiListBox");
 	selection = SuiListBox.getSelectedRow(parameters);
 	
@@ -397,6 +409,12 @@ function handleWeapons(player) {
 }
 
 function handleWeaponSelection(player, creature, eventType, parameters) {
+	var SuiEvent = Java.type("resources.sui.SuiEvent");
+	
+	if (eventType != SuiEvent.OK_PRESSED) {
+		return;
+	}
+	
 	var SuiListBox = Java.type("resources.sui.SuiListBox");
 	selection = SuiListBox.getSelectedRow(parameters);
 	
@@ -465,6 +483,12 @@ function handleWearables(player) {
 }
 
 function handleWearablesSelection(player, creature, eventType, parameters) {
+	var SuiEvent = Java.type("resources.sui.SuiEvent");
+	
+	if (eventType != SuiEvent.OK_PRESSED) {
+		return;
+	}
+	
 	var SuiListBox = Java.type("resources.sui.SuiListBox");
 	selection = SuiListBox.getSelectedRow(parameters);
 	
