@@ -438,6 +438,7 @@ public class CommandService extends Service {
 		int delayAttackInterval = combatCommands.getColumnFromName("delayAttackInterval");
 		int delayAttackLoops = combatCommands.getColumnFromName("delayAttackLoops");
 		int delayAttackEggPosition = combatCommands.getColumnFromName("delayAttackEggPosition");
+		int coneLength = combatCommands.getColumnFromName("coneLength");
 		// animDefault	anim_unarmed	anim_onehandmelee	anim_twohandmelee	anim_polearm
 		// anim_pistol	anim_lightRifle	anim_carbine	anim_rifle	anim_heavyweapon
 		// anim_thrown	anim_onehandlightsaber	anim_twohandlightsaber	anim_polearmlightsaber
@@ -471,6 +472,7 @@ public class CommandService extends Service {
 			cc.setDelayAttackInterval((float) cmdRow[delayAttackInterval]);
 			cc.setDelayAttackLoops((int) cmdRow[delayAttackLoops]);
 			cc.setEggPosition(DelayAttackEggPosition.getEggPosition((int) cmdRow[delayAttackEggPosition]));
+			cc.setConeLength((float) cmdRow[coneLength]);
 			cc.setAnimations(WeaponType.UNARMED, getAnimationList((String) cmdRow[animDefault+1]));
 			cc.setAnimations(WeaponType.ONE_HANDED_MELEE, getAnimationList((String) cmdRow[animDefault+2]));
 			cc.setAnimations(WeaponType.TWO_HANDED_MELEE, getAnimationList((String) cmdRow[animDefault+3]));

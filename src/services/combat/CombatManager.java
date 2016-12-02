@@ -49,6 +49,7 @@ import intents.object.ObjectCreatedIntent;
 import java.util.Iterator;
 import java.util.Random;
 import java.util.concurrent.Future;
+import java.util.stream.Collectors;
 import network.packets.swg.zone.PlayClientEffectObjectMessage;
 import network.packets.swg.zone.object_controller.combat.CombatSpam;
 import resources.Location;
@@ -67,6 +68,7 @@ import resources.encodables.ProsePackage;
 import resources.encodables.StringId;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
+import resources.objects.staticobject.StaticObject;
 import resources.objects.tangible.TangibleObject;
 import resources.objects.weapon.WeaponObject;
 import resources.server_info.Log;
@@ -230,7 +232,7 @@ public class CombatManager extends Manager {
 		
 		// TODO implement support for remaining HitTypes
 		switch (c.getHitType()) {
-			case ATTACK: handleAttack(source, target, c); break;
+			case ATTACK: handleAttack(source, target, null, c); break;
 			case BUFF: handleBuff(source, target, c); break;
 			case DELAY_ATTACK: handleDelayAttack(source, target, c, intent.getArguments()); break;
 			default: handleStatus(source, CombatStatus.UNKNOWN); break;
@@ -251,7 +253,7 @@ public class CombatManager extends Manager {
 		combat.updateLastCombat();
 	}
 	
-	private void handleAttack(CreatureObject source, SWGObject target, CombatCommand command) {
+	private void handleAttack(CreatureObject source, SWGObject target, SWGObject delayEgg, CombatCommand command) {
 		if (!handleStatus(source, canPerform(source, target, command)))
 			return;
 		
@@ -260,10 +262,10 @@ public class CombatManager extends Manager {
 		for(int i = 0; i < command.getAttackRolls(); i++) {
 			AttackInfo info = new AttackInfo();
 			
-			if (target instanceof CreatureObject) {
-				switch (command.getAttackType()) {
-					case SINGLE_TARGET: doCombatSingle(source, (CreatureObject) target, info, weapon, command); break;
-				}
+			switch (command.getAttackType()) {
+				case SINGLE_TARGET: doCombatSingle(source, target, info, weapon, command); break;
+				case AREA: doCombatArea(source, source, info, weapon, command, false); break;
+				case TARGET_AREA: doCombatArea(source, delayEgg != null ? delayEgg : target, info, weapon, command, true); break;		// Same as AREA, but the target is the destination for the AoE and  can take damage
 			}
 		}
 	}
@@ -315,7 +317,7 @@ public class CombatManager extends Manager {
 			delayEgg.sendObservers(new PlayClientEffectObjectMessage(delayAttackParticle, "", delayEgg.getObjectId()));
 		
 		// Handle the attack of this loop
-		handleAttack(source, target, combatCommand);
+		handleAttack(source, target, delayEgg, combatCommand);
 		
 		if (currentLoop < combatCommand.getDelayAttackLoops()) {
 			// Recursively schedule another loop if that wouldn't exceed the amount of loops we need to perform
@@ -326,14 +328,32 @@ public class CombatManager extends Manager {
 		}
 	}
 	
-	private void doCombatSingle(CreatureObject source, CreatureObject target, AttackInfo info, WeaponObject weapon, CombatCommand command) {
+	private void doCombatSingle(CreatureObject source, SWGObject target, AttackInfo info, WeaponObject weapon, CombatCommand command) {
 		// TODO single target only defence rolls against target
 		// TODO single target only offence rolls for source
 		
 		// TODO below logic should be in CommandService when target checks are implemented in there
 		Set<CreatureObject> targets = new HashSet<>();
 		
-		targets.add(target);
+		if (target instanceof CreatureObject)
+			targets.add((CreatureObject) target);
+		
+		doCombat(source, targets, weapon, info, command);
+	}
+	
+	private void doCombatArea(CreatureObject source, SWGObject origin, AttackInfo info, WeaponObject weapon, CombatCommand command, boolean includeOrigin) {
+		float aoeRange = command.getConeLength();
+		
+		Set<CreatureObject> targets = origin.getObjectsAware().stream()
+				.filter(target -> target instanceof CreatureObject)
+				.map(target -> (CreatureObject) target)
+				.filter(creature -> source.isAttackable(creature))
+				.filter(creature -> origin.getLocation().distanceTo(creature.getLocation()) <= aoeRange)
+				.collect(Collectors.toSet());
+		
+		// This way, mines or grenades won't try to harm themselves
+		if (includeOrigin && !(origin instanceof StaticObject) && !(origin instanceof WeaponObject))
+			targets.add((CreatureObject) origin);
 		
 		doCombat(source, targets, weapon, info, command);
 	}
@@ -619,8 +639,7 @@ public class CombatManager extends Manager {
 	}
 	
 	private CombatStatus canPerformArea(CreatureObject source, CombatCommand c) {
-		// TODO implement AoE
-		return CombatStatus.UNKNOWN;
+		return CombatStatus.SUCCESS;
 	}
 	
 	private void addActionCost(CreatureObject source, CombatCommand command) {
