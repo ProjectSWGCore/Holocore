@@ -43,6 +43,7 @@ import intents.network.GalacticPacketIntent;
 import network.packets.Packet;
 import network.packets.swg.ErrorMessage;
 import network.packets.swg.zone.insertion.SelectCharacter;
+import network.packets.swg.zone.object_controller.IntendedTarget;
 import resources.control.Intent;
 import resources.control.Manager;
 import resources.objects.SWGObject;
@@ -235,6 +236,14 @@ public class ObjectManager extends Manager {
 			PlayerManager pm = gpi.getPlayerManager();
 			long characterId = ((SelectCharacter) packet).getCharacterId();
 			zoneInCharacter(pm, gpi.getNetworkId(), characterId);
+		} else if (packet instanceof IntendedTarget) {
+			IntendedTarget intendedTarget = (IntendedTarget) packet;
+			Player player = gpi.getPlayerManager().getPlayerFromNetworkId(gpi.getNetworkId());
+			CreatureObject creatureObject = player.getCreatureObject();
+			long targetId = intendedTarget.getTargetId();
+			
+			creatureObject.setIntendedTargetId(targetId);
+			creatureObject.setLookAtTargetId(targetId);
 		}
 	}
 	
