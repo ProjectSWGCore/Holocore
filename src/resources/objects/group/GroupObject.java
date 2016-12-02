@@ -110,6 +110,12 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 			object.setGroupId(0);
 
 			groupMembers.sendDeltaMessage(this);
+			
+			// We need to recalculate the group level if someone leaves!
+			groupMembers.stream()
+					.map(groupMember -> groupMember.getCreatureObject().getLevel())
+					.max((level1, level2) -> Short.compare(level1, level2))
+					.ifPresent(newLevel -> setLevel(newLevel));
 		}
 	}
 
@@ -162,6 +168,7 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 
 	public void setLevel(short level) {
 		this.level = level;
+		sendDelta(6, level, 5);
 	}
 
 	public long getLootMaster() {

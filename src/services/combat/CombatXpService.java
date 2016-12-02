@@ -193,7 +193,7 @@ public class CombatXpService extends Service {
 	 * @return true if {@code groupMember} is an observer of {@code corpse}
 	 */
 	private boolean isMemberNearby(CreatureObject corpse, CreatureObject groupMember) {
-		return corpse.getObservers().contains(groupMember);
+		return corpse.getObservers().contains(groupMember.getOwner());
 	}
 	
 	private static class XpData {
