@@ -294,16 +294,25 @@ public class CombatManager extends Manager {
 		}
 		
 		// Spawn delay egg object
-		SWGObject delayEgg = ObjectCreator.createObjectFromTemplate(ClientFactory.formatToSharedFile(combatCommand.getDelayAttackEggTemplate()));
-		delayEgg.setLocation(eggLocation);
-		new ObjectCreatedIntent(delayEgg).broadcast();
+		String delayAttackEggTemplate = combatCommand.getDelayAttackEggTemplate();
+		
+		
+		SWGObject delayEgg = delayAttackEggTemplate.endsWith("generic_egg_small.iff") ? null : ObjectCreator.createObjectFromTemplate(ClientFactory.formatToSharedFile(delayAttackEggTemplate));
+		
+		if (delayEgg != null) {
+			delayEgg.setLocation(eggLocation);
+			new ObjectCreatedIntent(delayEgg).broadcast();
+		}
 		
 		executor.schedule(() -> delayEggLoop(delayEgg, source, target, combatCommand, 0), (int) combatCommand.getInitialDelayAttackInterval(), TimeUnit.SECONDS);
 	}
 	
 	private void delayEggLoop(final SWGObject delayEgg, final CreatureObject source, final SWGObject target, final CombatCommand combatCommand, final int currentLoop) {
-		// Show particle effect to everyone observing the delay egg
-		delayEgg.sendObservers(new PlayClientEffectObjectMessage(combatCommand.getDelayAttackParticle(), "", delayEgg.getObjectId()));
+		String delayAttackParticle = combatCommand.getDelayAttackParticle();
+		
+		// Show particle effect to everyone observing the delay egg, if one is defined
+		if (delayEgg != null && !delayAttackParticle.isEmpty())
+			delayEgg.sendObservers(new PlayClientEffectObjectMessage(delayAttackParticle, "", delayEgg.getObjectId()));
 		
 		// Handle the attack of this loop
 		handleAttack(source, target, combatCommand);
@@ -311,7 +320,7 @@ public class CombatManager extends Manager {
 		if (currentLoop < combatCommand.getDelayAttackLoops()) {
 			// Recursively schedule another loop if that wouldn't exceed the amount of loops we need to perform
 			executor.schedule(() -> delayEggLoop(delayEgg, source, target, combatCommand, currentLoop + 1), (int) combatCommand.getDelayAttackInterval(), TimeUnit.SECONDS);
-		} else {
+		} else if (delayEgg != null) {
 			// The delayed attack has ended - destroy the egg
 			new DestroyObjectIntent(delayEgg).broadcast();
 		}
