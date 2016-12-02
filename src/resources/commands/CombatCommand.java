@@ -61,6 +61,7 @@ public class CombatCommand extends Command {
 	private float delayAttackInterval;
 	private int delayAttackLoops;
 	private DelayAttackEggPosition eggPosition;
+	private float coneLength;
 	
 	public CombatCommand(String name) {
 		super(name);
@@ -246,6 +247,14 @@ public class CombatCommand extends Command {
 
 	public void setEggPosition(DelayAttackEggPosition eggPosition) {
 		this.eggPosition = eggPosition;
+	}
+
+	public float getConeLength() {
+		return coneLength;
+	}
+
+	public void setConeLength(float coneLength) {
+		this.coneLength = coneLength;
 	}
 
 }
