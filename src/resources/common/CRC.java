@@ -133,9 +133,7 @@ public class CRC implements Encodable, Persistable {
 
 	@Override
 	public int hashCode() {
-		int hash = 7;
-		hash = 89 * hash + this.crc;
-		return hash;
+		return this.crc;
 	}
 
 	@Override
