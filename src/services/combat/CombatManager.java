@@ -44,14 +44,18 @@ import network.packets.swg.zone.object_controller.combat.CombatAction;
 import intents.chat.ChatCommandIntent;
 import intents.combat.CreatureKilledIntent;
 import intents.combat.DeathblowIntent;
+import intents.object.DestroyObjectIntent;
+import intents.object.ObjectCreatedIntent;
 import java.util.Iterator;
 import java.util.Random;
 import java.util.concurrent.Future;
+import network.packets.swg.zone.PlayClientEffectObjectMessage;
 import network.packets.swg.zone.object_controller.combat.CombatSpam;
+import resources.Location;
 import resources.Posture;
+import resources.client_info.ClientFactory;
 import resources.combat.AttackInfo;
 import resources.combat.CombatStatus;
-import resources.combat.DamageType;
 import resources.combat.HitLocation;
 import resources.combat.TrailLocation;
 import resources.commands.CombatCommand;
@@ -66,6 +70,7 @@ import resources.objects.creature.CreatureObject;
 import resources.objects.tangible.TangibleObject;
 import resources.objects.weapon.WeaponObject;
 import resources.server_info.Log;
+import services.objects.ObjectCreator;
 import utilities.ThreadUtilities;
 
 public class CombatManager extends Manager {
@@ -227,6 +232,7 @@ public class CombatManager extends Manager {
 		switch (c.getHitType()) {
 			case ATTACK: handleAttack(source, target, c); break;
 			case BUFF: handleBuff(source, target, c); break;
+			case DELAY_ATTACK: handleDelayAttack(source, target, c, intent.getArguments()); break;
 			default: handleStatus(source, CombatStatus.UNKNOWN); break;
 		}
 	}
@@ -268,6 +274,47 @@ public class CombatManager extends Manager {
 		// Only CreatureObjects have buffs
 		if(target instanceof CreatureObject)
 			addBuff(source, (CreatureObject) target, combatCommand.getBuffNameTarget());
+	}
+	
+	private void handleDelayAttack(CreatureObject source, SWGObject target, CombatCommand combatCommand, String arguments[]) {
+		Location eggLocation;
+		
+		switch (combatCommand.getEggPosition()) {
+			case LOCATION: 
+				if (arguments[0].equals("a")) {
+					eggLocation = source.getLocation();
+				} else {
+					eggLocation = new Location(Float.parseFloat(arguments[0]), Float.parseFloat(arguments[1]), Float.parseFloat(arguments[2]), source.getTerrain());
+				}
+				
+				break;
+			default: Log.w(this, "Unrecognised delay egg position %s from command %s - defaulting to SELF", combatCommand.getEggPosition(), combatCommand.getName());
+			case SELF: eggLocation = source.getLocation(); break;
+			case TARGET: eggLocation = target.getLocation(); break;
+		}
+		
+		// Spawn delay egg object
+		SWGObject delayEgg = ObjectCreator.createObjectFromTemplate(ClientFactory.formatToSharedFile(combatCommand.getDelayAttackEggTemplate()));
+		delayEgg.setLocation(eggLocation);
+		new ObjectCreatedIntent(delayEgg).broadcast();
+		
+		executor.schedule(() -> delayEggLoop(delayEgg, source, target, combatCommand, 0), (int) combatCommand.getInitialDelayAttackInterval(), TimeUnit.SECONDS);
+	}
+	
+	private void delayEggLoop(final SWGObject delayEgg, final CreatureObject source, final SWGObject target, final CombatCommand combatCommand, final int currentLoop) {
+		// Show particle effect to everyone observing the delay egg
+		delayEgg.sendObservers(new PlayClientEffectObjectMessage(combatCommand.getDelayAttackParticle(), "", delayEgg.getObjectId()));
+		
+		// Handle the attack of this loop
+		handleAttack(source, target, combatCommand);
+		
+		if (currentLoop < combatCommand.getDelayAttackLoops()) {
+			// Recursively schedule another loop if that wouldn't exceed the amount of loops we need to perform
+			executor.schedule(() -> delayEggLoop(delayEgg, source, target, combatCommand, currentLoop + 1), (int) combatCommand.getDelayAttackInterval(), TimeUnit.SECONDS);
+		} else {
+			// The delayed attack has ended - destroy the egg
+			new DestroyObjectIntent(delayEgg).broadcast();
+		}
 	}
 	
 	private void doCombatSingle(CreatureObject source, CreatureObject target, AttackInfo info, WeaponObject weapon, CombatCommand command) {

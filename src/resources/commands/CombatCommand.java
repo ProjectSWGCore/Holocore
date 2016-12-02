@@ -32,6 +32,7 @@ import java.util.Map;
 
 import resources.combat.AttackType;
 import resources.combat.DamageType;
+import resources.combat.DelayAttackEggPosition;
 import resources.combat.HitType;
 import resources.combat.ValidTarget;
 import resources.objects.weapon.WeaponType;
@@ -54,6 +55,12 @@ public class CombatCommand extends Command {
 	private String buffNameTarget;
 	private String buffNameSelf;
 	private HitType hitType;
+	private String delayAttackEggTemplate;
+	private String delayAttackParticle;
+	private float initialDelayAttackInterval;
+	private float delayAttackInterval;
+	private int delayAttackLoops;
+	private DelayAttackEggPosition eggPosition;
 	
 	public CombatCommand(String name) {
 		super(name);
@@ -191,6 +198,54 @@ public class CombatCommand extends Command {
 
 	public void setHitType(HitType hitType) {
 		this.hitType = hitType;
+	}
+
+	public String getDelayAttackEggTemplate() {
+		return delayAttackEggTemplate;
+	}
+
+	public void setDelayAttackEggTemplate(String delayAttackEggTemplate) {
+		this.delayAttackEggTemplate = delayAttackEggTemplate;
+	}
+
+	public String getDelayAttackParticle() {
+		return delayAttackParticle;
+	}
+
+	public void setDelayAttackParticle(String delayAttackParticle) {
+		this.delayAttackParticle = delayAttackParticle;
+	}
+
+	public float getInitialDelayAttackInterval() {
+		return initialDelayAttackInterval;
+	}
+
+	public void setInitialDelayAttackInterval(float initialDelayAttackInterval) {
+		this.initialDelayAttackInterval = initialDelayAttackInterval;
+	}
+
+	public float getDelayAttackInterval() {
+		return delayAttackInterval;
+	}
+
+	public void setDelayAttackInterval(float delayAttackInterval) {
+		this.delayAttackInterval = delayAttackInterval;
+	}
+
+	public float getDelayAttackLoops() {
+		return delayAttackLoops;
+	}
+
+	public void setDelayAttackLoops(int delayAttackLoops) {
+		this.delayAttackLoops = delayAttackLoops;
+	}
+
+	public DelayAttackEggPosition getEggPosition() {
+		return eggPosition;
+	}
+
+	public void setEggPosition(DelayAttackEggPosition eggPosition) {
+		this.eggPosition = eggPosition;
 	}
 
 }
