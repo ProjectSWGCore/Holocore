@@ -146,7 +146,7 @@ public class CRC implements Encodable, Persistable {
 		if (obj == null) {
 			return false;
 		}
-		if (getClass() != obj.getClass()) {
+		if (!(obj instanceof CRC)) {
 			return false;
 		}
 		
