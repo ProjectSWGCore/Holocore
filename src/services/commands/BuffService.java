@@ -44,6 +44,8 @@ import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import network.packets.swg.zone.PlayClientEffectObjectMessage;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
@@ -109,14 +111,11 @@ public class BuffService extends Service {
 	
 	private void checkBuffTimers() {
 		synchronized (monitored) {
-			monitored.forEach(creature -> {
-				Iterator<Entry<CRC, Buff>> iterator = creature.getBuffEntries(buffEntry -> isBuffExpired(buffEntry.getValue())).iterator();
-
-				while (iterator.hasNext()) {
-					Entry<CRC, Buff> entry = iterator.next();
-
-					removeBuff(creature, entry.getKey(), true);
-				}
+			monitored.forEach((CreatureObject creature) -> {
+				Stream<Entry<CRC, Buff>> stream = creature.getBuffEntries(buffEntry -> isBuffExpired(buffEntry.getValue()));
+				Set<Entry<CRC, Buff>>  toRemove = stream.collect(Collectors.toSet());
+				
+				toRemove.forEach(buffEntry -> removeBuff(creature, buffEntry.getKey(), true));
 			});
 		}
 	}
@@ -195,7 +194,7 @@ public class BuffService extends Service {
 	}
 	
 	private void handleFirstZone(CreatureObject creature) {
-		if (hasBuffs(creature)) {
+		if (isBuffed(creature)) {
 			synchronized (monitored) {
 				monitored.add(creature);
 			}
@@ -254,7 +253,7 @@ public class BuffService extends Service {
 		return buffData.getDefaultDuration() < 0;
 	}
 	
-	private boolean hasBuffs(CreatureObject creature) {
+	private boolean isBuffed(CreatureObject creature) {
 		return creature.getBuffEntries(buffEntry -> !isBuffInfinite(dataMap.get(buffEntry.getKey())))
 				.count() > 0;
 	}
@@ -388,7 +387,7 @@ public class BuffService extends Service {
 			checkCallback(buffCrc, buffData, creature);
 			
 			// If they have no more expirable buffs, we can stop monitoring them
-			if (!hasBuffs(creature)) {
+			if (!isBuffed(creature)) {
 				synchronized (monitored) {
 					monitored.remove(creature);
 				}
