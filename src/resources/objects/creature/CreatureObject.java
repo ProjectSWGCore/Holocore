@@ -798,6 +798,12 @@ public class CreatureObject extends TangibleObject {
 		return items;
 	}
 
+	public boolean isAttackable(CreatureObject otherObject) {
+		Posture otherPosture = otherObject.getPosture();
+		
+		return isEnemy(otherObject) && otherPosture != Posture.INCAPACITATED && otherPosture != Posture.DEAD;
+	}
+	
 	@Override
 	public boolean isEnemy(TangibleObject otherObject) {
 		boolean tangibleEnemy = super.isEnemy(otherObject);

@@ -25,49 +25,35 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
  ***********************************************************************************/
-package services.dev;
+package resources.combat;
 
-import intents.object.ObjectCreatedIntent;
-import resources.Location;
-import resources.PvpFlag;
-import resources.Terrain;
-import resources.config.ConfigFile;
-import resources.control.Service;
-import resources.objects.SWGObject;
-import resources.objects.custom.DefaultAIObject;
-import resources.objects.tangible.TangibleObject;
-import services.objects.ObjectCreator;
+import java.util.HashMap;
+import java.util.Map;
 
-public class DeveloperService extends Service {
+public enum DelayAttackEggPosition {
+	LOCATION	(1),
+	TARGET		(2),
+	SELF		(3);
 	
-	public DeveloperService() {
-		
+	private static final Map<Integer, DelayAttackEggPosition> EGG_POSITIONS = new HashMap<>();
+	
+	static {
+		for(DelayAttackEggPosition eggPosition : values()) {
+			EGG_POSITIONS.put(eggPosition.getNum(), eggPosition);
+		}
 	}
 	
-	@Override
-	public boolean start() {
-		setupDeveloperArea();
-		
-		if (getConfig(ConfigFile.FEATURES).getBoolean("CHARACTER-BUILDER", false))
-			setupCharacterBuilders();
-		
-		return super.start();
+	private final int num;
+	
+	DelayAttackEggPosition(int num) {
+		this.num = num;
 	}
 	
-	private void setupDeveloperArea() {
-		DefaultAIObject dummy = spawnObject("object/mobile/shared_target_dummy_blacksun.iff", new Location(3500, 5, -4800, Terrain.DEV_AREA), DefaultAIObject.class);
-		dummy.setPvpFlags(PvpFlag.ATTACKABLE);
+	public int getNum() {
+		return num;
 	}
 	
-	private void setupCharacterBuilders() {
-		spawnObject("object/tangible/terminal/shared_terminal_character_builder.iff", new Location(3523, 4, -4802, Terrain.TATOOINE), TangibleObject.class);
+	public static DelayAttackEggPosition getEggPosition(int num) {
+		return EGG_POSITIONS.getOrDefault(num, SELF);
 	}
-	
-	private <T extends SWGObject> T spawnObject(String template, Location l, Class<T> c) {
-		T obj = ObjectCreator.createObjectFromTemplate(template, c);
-		obj.setLocation(l);
-		new ObjectCreatedIntent(obj).broadcast();
-		return obj;
-	}
-	
 }
