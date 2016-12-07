@@ -131,7 +131,7 @@ public class TransferItemCallback implements ICmdCallback {
 				return;
 
 			// If the character doesn't have the right profession, reject it
-			if (target.hasAttribute("class_required")) {
+			if (target.hasAttribute("class_required") && !target.getAttribute("class_required").equals("None")) {
 				String profession = cleanProfessionString(actor.getPlayerObject().getProfession());
 				if (!target.getAttribute("class_required").contains(profession)) {
 					new ChatBroadcastIntent(player, "@base_player:cannot_use_item").broadcast();
