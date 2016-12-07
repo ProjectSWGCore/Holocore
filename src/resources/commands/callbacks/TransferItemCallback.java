@@ -130,6 +130,14 @@ public class TransferItemCallback implements ICmdCallback {
 			if (!checkSpeciesRestriction(actor, target))
 				return;
 
+			// If the character doesn't have the right profession, reject it
+			if (target.hasAttribute("class_required")) {
+				String profession = cleanProfessionString(actor.getPlayerObject().getProfession());
+				if (!target.getAttribute("class_required").contains(profession)) {
+					new ChatBroadcastIntent(player, "@base_player:cannot_use_item").broadcast();
+					return;
+				}
+			}
 			switch (target.moveToContainer(actor, newContainer)) {
 				case SUCCESS:
 					if (weapon) {
@@ -166,7 +174,7 @@ public class TransferItemCallback implements ICmdCallback {
 	}
 
 	private static void sendNotEquippable(Player player) {
-		new ChatBroadcastIntent(player, "@system_msg:item_not_equippable").broadcast();
+		new ChatBroadcastIntent(player, "@base_player:cannot_use_item").broadcast();
 	}
 
 	private static boolean checkSpeciesRestriction(CreatureObject actor, SWGObject target) {
@@ -191,5 +199,9 @@ public class TransferItemCallback implements ICmdCallback {
 		}
 
 		return true;
+	}
+
+	private static String cleanProfessionString(String profession) {
+		return profession.substring(0, profession.lastIndexOf("_"));
 	}
 }
