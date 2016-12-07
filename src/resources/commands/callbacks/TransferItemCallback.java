@@ -29,6 +29,7 @@
 package resources.commands.callbacks;
 
 import intents.chat.ChatBroadcastIntent;
+import resources.Race;
 import resources.commands.ICmdCallback;
 import resources.objects.GameObjectType;
 import resources.objects.SWGObject;
@@ -44,7 +45,6 @@ import services.galaxy.GalacticManager;
  * @author mads
  */
 public class TransferItemCallback implements ICmdCallback {
-	
 	@Override
 	public void execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
 		// There must always be a target for transfer
@@ -125,7 +125,19 @@ public class TransferItemCallback implements ICmdCallback {
 					return;
 				}
 			}
-			
+
+			// Make sure the player can wear it based on their species
+			if (!checkSpeciesRestriction(actor, target))
+				return;
+
+			// If the character doesn't have the right profession, reject it
+			if (target.hasAttribute("class_required")) {
+				String profession = cleanProfessionString(actor.getPlayerObject().getProfession());
+				if (!target.getAttribute("class_required").contains(profession)) {
+					new ChatBroadcastIntent(player, "@base_player:cannot_use_item").broadcast();
+					return;
+				}
+			}
 			switch (target.moveToContainer(actor, newContainer)) {
 				case SUCCESS:
 					if (weapon) {
@@ -155,5 +167,41 @@ public class TransferItemCallback implements ICmdCallback {
 			// Lookup failed, their client gave us an object ID that couldn't be parsed to a long
 			new ChatBroadcastIntent(player, "@container_error_message:container15").broadcast();
 		}
+	}
+
+	private static boolean isSpecialSpecies(String species) {
+		return species.equals("trandoshan") || species.equals("wookiee") || species.equals("ithorian") || species.equals("rodian");
+	}
+
+	private static void sendNotEquippable(Player player) {
+		new ChatBroadcastIntent(player, "@base_player:cannot_use_item").broadcast();
+	}
+
+	private static boolean checkSpeciesRestriction(CreatureObject actor, SWGObject target) {
+		// Make sure the player can wear it based on their species
+		String actorSpecies = actor.getRace().getSpecies();
+		if (isSpecialSpecies(actorSpecies) && target.hasAttribute("species_restrictions.species_name")) {
+			String restrictedSpecies = target.getAttribute("species_restrictions.species_name").toLowerCase();
+
+			if (actorSpecies.equals("wookiee") && !restrictedSpecies.contains("wookiee")) {
+				sendNotEquippable(actor.getOwner());
+				return false;
+			} else if (actorSpecies.equals("ithorian") && !restrictedSpecies.contains("ithorian")) {
+				sendNotEquippable(actor.getOwner());
+				return false;
+			} else if (actorSpecies.equals("rodian") && !restrictedSpecies.contains("rodian")) {
+				sendNotEquippable(actor.getOwner());
+				return false;
+			} else if (actorSpecies.equals("trandoshan") && !restrictedSpecies.contains("trandoshan")) {
+				sendNotEquippable(actor.getOwner());
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	private static String cleanProfessionString(String profession) {
+		return profession.substring(0, profession.lastIndexOf("_"));
 	}
 }
