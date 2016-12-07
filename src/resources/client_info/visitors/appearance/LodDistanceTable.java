@@ -25,13 +25,78 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
  ***********************************************************************************/
-package network;
+package resources.client_info.visitors.appearance;
 
-import java.net.InetSocketAddress;
-import java.nio.ByteBuffer;
+import java.util.ArrayList;
+import java.util.List;
 
-public interface PacketSender {
+import resources.client_info.ClientData;
+import resources.client_info.IffNode;
+import resources.client_info.SWGFile;
+
+public class LodDistanceTable extends ClientData {
 	
-	void sendPacket(InetSocketAddress sock, ByteBuffer data);
+	private final List<Level> levels;
+	
+	public LodDistanceTable() {
+		levels = new ArrayList<>();
+	}
+	
+	@Override
+	public void readIff(SWGFile iff) {
+		IffNode node = iff.enterNextForm();
+		switch (node.getTag()) {
+			case "0000":
+				readForm0(iff);
+				break;
+		}
+	}
+	
+	public List<Level> getLevels() {
+		return levels;
+	}
+	
+	private void readForm0(SWGFile iff) {
+		IffNode node = iff.enterChunk("INFO");
+		int levelCount = node.readShort();
+		levels.clear();
+		for (int i = 0; i < levelCount; i++) {
+			Level level = new Level();
+			level.setMinDistance(node.readFloat());
+			level.setMaxDistance(node.readFloat());
+			levels.add(level);
+		}
+	}
+	
+	public static class Level {
+		
+		private float minDistance;
+		private float maxDistance;
+		
+		public Level() {
+			
+		}
+		
+		public float getMinDistance() {
+			return minDistance;
+		}
+		
+		public float getMaxDistance() {
+			return maxDistance;
+		}
+		
+		public void setMinDistance(float minDistance) {
+			this.minDistance = minDistance;
+		}
+		
+		public void setMaxDistance(float maxDistance) {
+			this.maxDistance = maxDistance;
+		}
+		
+		public String toString() {
+			return String.format("Level[min=%.3f max=%.3f]", minDistance, maxDistance);
+		}
+		
+	}
 	
 }

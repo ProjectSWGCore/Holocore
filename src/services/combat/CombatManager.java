@@ -44,11 +44,18 @@ import network.packets.swg.zone.object_controller.combat.CombatAction;
 import intents.chat.ChatCommandIntent;
 import intents.combat.CreatureKilledIntent;
 import intents.combat.DeathblowIntent;
+import intents.object.DestroyObjectIntent;
+import intents.object.ObjectCreatedIntent;
 import java.util.Iterator;
 import java.util.Random;
 import java.util.concurrent.Future;
+import java.util.stream.Collectors;
+import network.packets.swg.zone.PlayClientEffectObjectMessage;
+import network.packets.swg.zone.object_controller.combat.CombatSpam;
+import resources.Location;
 import resources.Posture;
-import resources.combat.AttackType;
+import resources.client_info.ClientFactory;
+import resources.combat.AttackInfo;
 import resources.combat.CombatStatus;
 import resources.combat.HitLocation;
 import resources.combat.TrailLocation;
@@ -61,9 +68,11 @@ import resources.encodables.ProsePackage;
 import resources.encodables.StringId;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
+import resources.objects.staticobject.StaticObject;
 import resources.objects.tangible.TangibleObject;
 import resources.objects.weapon.WeaponObject;
 import resources.server_info.Log;
+import services.objects.ObjectCreator;
 import utilities.ThreadUtilities;
 
 public class CombatManager extends Manager {
@@ -223,8 +232,9 @@ public class CombatManager extends Manager {
 		
 		// TODO implement support for remaining HitTypes
 		switch (c.getHitType()) {
-			case ATTACK: handleAttack(source, target, c); break;
+			case ATTACK: handleAttack(source, target, null, c); break;
 			case BUFF: handleBuff(source, target, c); break;
+			case DELAY_ATTACK: handleDelayAttack(source, target, c, intent.getArguments()); break;
 			default: handleStatus(source, CombatStatus.UNKNOWN); break;
 		}
 	}
@@ -243,33 +253,21 @@ public class CombatManager extends Manager {
 		combat.updateLastCombat();
 	}
 	
-	private void handleAttack(CreatureObject source, SWGObject target, CombatCommand command) {
+	private void handleAttack(CreatureObject source, SWGObject target, SWGObject delayEgg, CombatCommand command) {
 		if (!handleStatus(source, canPerform(source, target, command)))
 			return;
 		
-		CombatAction action = new CombatAction(source.getObjectId());
-		String anim = command.getRandomAnimation(source.getEquippedWeapon().getType());
-		action.setActionCrc(CRC.getCrc(anim));
-		action.setAttacker(source);
-		action.setClientEffectId((byte) 0);
-		action.setCommandCrc(command.getCrc());
-		action.setTrail(TrailLocation.WEAPON);
-		action.setUseLocation(false);
+		WeaponObject weapon = source.getEquippedWeapon();
 		
 		for(int i = 0; i < command.getAttackRolls(); i++) {
-			int damage = 0;
-
-			damage += calculateWeaponDamage(source, command);
-			damage += command.getAddedDamage();
-
-			if (target instanceof CreatureObject) {
-				if (command.getAttackType() == AttackType.SINGLE_TARGET)
-					doCombatSingle(source, (CreatureObject) target, damage, command);
-				action.addDefender((CreatureObject) target, true, (byte) 0, HitLocation.HIT_LOCATION_BODY, (short) damage);
+			AttackInfo info = new AttackInfo();
+			
+			switch (command.getAttackType()) {
+				case SINGLE_TARGET: doCombatSingle(source, target, info, weapon, command); break;
+				case AREA: doCombatArea(source, source, info, weapon, command, false); break;
+				case TARGET_AREA: doCombatArea(source, delayEgg != null ? delayEgg : target, info, weapon, command, true); break;		// Same as AREA, but the target is the destination for the AoE and  can take damage
 			}
 		}
-		
-		source.sendObserversAndSelf(action);
 	}
 	
 	private void handleBuff(CreatureObject source, SWGObject target, CombatCommand combatCommand) {
@@ -280,24 +278,146 @@ public class CombatManager extends Manager {
 			addBuff(source, (CreatureObject) target, combatCommand.getBuffNameTarget());
 	}
 	
-	private void doCombatSingle(CreatureObject source, CreatureObject target, int damage, CombatCommand command) {
-		updateCombatList(source);
+	private void handleDelayAttack(CreatureObject source, SWGObject target, CombatCommand combatCommand, String arguments[]) {
+		Location eggLocation;
+		
+		switch (combatCommand.getEggPosition()) {
+			case LOCATION: 
+				if (arguments[0].equals("a")) {
+					eggLocation = source.getLocation();
+				} else {
+					eggLocation = new Location(Float.parseFloat(arguments[0]), Float.parseFloat(arguments[1]), Float.parseFloat(arguments[2]), source.getTerrain());
+				}
+				
+				break;
+			default: Log.w(this, "Unrecognised delay egg position %s from command %s - defaulting to SELF", combatCommand.getEggPosition(), combatCommand.getName());
+			case SELF: eggLocation = source.getLocation(); break;
+			case TARGET: eggLocation = target.getLocation(); break;
+		}
+		
+		// Spawn delay egg object
+		String delayAttackEggTemplate = combatCommand.getDelayAttackEggTemplate();
+		
+		
+		SWGObject delayEgg = delayAttackEggTemplate.endsWith("generic_egg_small.iff") ? null : ObjectCreator.createObjectFromTemplate(ClientFactory.formatToSharedFile(delayAttackEggTemplate));
+		
+		if (delayEgg != null) {
+			delayEgg.setLocation(eggLocation);
+			new ObjectCreatedIntent(delayEgg).broadcast();
+		}
+		
+		executor.schedule(() -> delayEggLoop(delayEgg, source, target, combatCommand, 0), (int) combatCommand.getInitialDelayAttackInterval(), TimeUnit.SECONDS);
+	}
+	
+	private void delayEggLoop(final SWGObject delayEgg, final CreatureObject source, final SWGObject target, final CombatCommand combatCommand, final int currentLoop) {
+		String delayAttackParticle = combatCommand.getDelayAttackParticle();
+		
+		// Show particle effect to everyone observing the delay egg, if one is defined
+		if (delayEgg != null && !delayAttackParticle.isEmpty())
+			delayEgg.sendObservers(new PlayClientEffectObjectMessage(delayAttackParticle, "", delayEgg.getObjectId()));
+		
+		// Handle the attack of this loop
+		handleAttack(source, target, delayEgg, combatCommand);
+		
+		if (currentLoop < combatCommand.getDelayAttackLoops()) {
+			// Recursively schedule another loop if that wouldn't exceed the amount of loops we need to perform
+			executor.schedule(() -> delayEggLoop(delayEgg, source, target, combatCommand, currentLoop + 1), (int) combatCommand.getDelayAttackInterval(), TimeUnit.SECONDS);
+		} else if (delayEgg != null) {
+			// The delayed attack has ended - destroy the egg
+			new DestroyObjectIntent(delayEgg).broadcast();
+		}
+	}
+	
+	private void doCombatSingle(CreatureObject source, SWGObject target, AttackInfo info, WeaponObject weapon, CombatCommand command) {
+		// TODO single target only defence rolls against target
+		// TODO single target only offence rolls for source
+		
+		// TODO below logic should be in CommandService when target checks are implemented in there
+		Set<CreatureObject> targets = new HashSet<>();
+		
 		if (target instanceof CreatureObject)
-			updateCombatList((CreatureObject) target);
+			targets.add((CreatureObject) target);
 		
-		if (!source.isInCombat())
-			enterCombat(source);
-		if (!target.isInCombat())
-			enterCombat(target);
-		target.addDefender(source);
-		source.addDefender(target);
+		doCombat(source, targets, weapon, info, command);
+	}
+	
+	private void doCombatArea(CreatureObject source, SWGObject origin, AttackInfo info, WeaponObject weapon, CombatCommand command, boolean includeOrigin) {
+		float aoeRange = command.getConeLength();
 		
-		addBuff(source, target, command.getBuffNameTarget());	// Add target buff
+		Set<CreatureObject> targets = origin.getObjectsAware().stream()
+				.filter(target -> target instanceof CreatureObject)
+				.map(target -> (CreatureObject) target)
+				.filter(creature -> source.isAttackable(creature))
+				.filter(creature -> origin.getLocation().distanceTo(creature.getLocation()) <= aoeRange)
+				.collect(Collectors.toSet());
 		
-		if (target.getHealth() <= damage)
-			doCreatureDeath(target, source);
-		else
-			target.modifyHealth(-damage);
+		// This way, mines or grenades won't try to harm themselves
+		if (includeOrigin && !(origin instanceof StaticObject) && !(origin instanceof WeaponObject))
+			targets.add((CreatureObject) origin);
+		
+		doCombat(source, targets, weapon, info, command);
+	}
+	
+	private void doCombat(CreatureObject source, Set<CreatureObject> targets, WeaponObject weapon, AttackInfo info, CombatCommand command) {
+		updateCombatList(source);
+		
+		CombatAction action = new CombatAction(source.getObjectId());
+		String anim = command.getRandomAnimation(weapon.getType());
+		action.setActionCrc(CRC.getCrc(anim));
+		action.setAttacker(source);
+		action.setClientEffectId((byte) 0);
+		action.setCommandCrc(command.getCrc());
+		action.setTrail(TrailLocation.WEAPON);
+		action.setUseLocation(false);
+		
+		for (CreatureObject target : targets) {
+			updateCombatList(target);
+		
+			if (!source.isInCombat())
+				enterCombat(source);
+			if (!target.isInCombat())
+				enterCombat(target);
+			target.addDefender(source);
+			source.addDefender(target);
+			
+			CombatSpam combatSpam = new CombatSpam(source.getObjectId());
+			combatSpam.setAttacker(source);
+			combatSpam.setDefender(target);
+			combatSpam.setInfo(info);
+			combatSpam.setAttackName(new StringId("cmd_n", command.getName()));
+			combatSpam.setWeapon(weapon.getObjectId());
+			
+			// Combat log message appears for both the attacker and the defender
+			source.sendSelf(combatSpam);
+			target.sendSelf(combatSpam);
+
+			if (!info.isSuccess()) {	// Single target negate, like dodge or parry!
+				return;
+			}
+			
+			addBuff(source, target, command.getBuffNameTarget());	// Add target buff
+			
+			int rawDamage = calculateWeaponDamage(source, weapon, command) + command.getAddedDamage();
+			
+			info.setRawDamage(rawDamage);
+			info.setFinalDamage(rawDamage);	// Final damage will be modified by armour and defensive rolls later
+			info.setDamageType(weapon.getDamageType());
+			
+			// TODO block roll for defenders
+			// TODO Critical hit roll for attacker
+			// TODO armour
+			
+			int finalDamage = info.getFinalDamage();
+			
+			action.addDefender((CreatureObject) target, true, (byte) 0, HitLocation.HIT_LOCATION_BODY, (short) finalDamage);
+			
+			if (target.getHealth() <= finalDamage)
+				doCreatureDeath(target, source);
+			else
+				target.modifyHealth(-finalDamage);
+		}
+		
+		source.sendObserversAndSelf(action);
 	}
 	
 	private void enterCombat(CreatureObject creature) {
@@ -508,7 +628,7 @@ public class CombatManager extends Manager {
 			return CombatStatus.NO_TARGET;
 		
 		WeaponObject weapon = source.getEquippedWeapon();
-		double dist = source.getLocation().distanceTo(target.getWorldLocation());
+		double dist = source.getWorldLocation().distanceTo(target.getWorldLocation());
 		float commandRange = c.getMaxRange();
 		float range = commandRange > 0 ? commandRange : weapon.getMaxRange();
 		
@@ -519,8 +639,7 @@ public class CombatManager extends Manager {
 	}
 	
 	private CombatStatus canPerformArea(CreatureObject source, CombatCommand c) {
-		// TODO implement AoE
-		return CombatStatus.UNKNOWN;
+		return CombatStatus.SUCCESS;
 	}
 	
 	private void addActionCost(CreatureObject source, CombatCommand command) {
@@ -537,8 +656,7 @@ public class CombatManager extends Manager {
 		}
 	}
 	
-	private int calculateWeaponDamage(CreatureObject source, CombatCommand command) {
-		WeaponObject weapon = source.getEquippedWeapon();
+	private int calculateWeaponDamage(CreatureObject source, WeaponObject weapon, CombatCommand command) {
 		int minDamage = weapon.getMinDamage();
 		int weaponDamage = random.nextInt((weapon.getMaxDamage() - minDamage) + 1) + minDamage;
 		

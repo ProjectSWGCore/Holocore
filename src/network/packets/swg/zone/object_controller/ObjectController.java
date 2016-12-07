@@ -104,6 +104,7 @@ public abstract class ObjectController extends SWGPacket {
 			case 0x01DB: return new BiographyUpdate(data);
 			case 0x0448: return new CommandTimer(data);
 			case 0x044D: return new ChangeRoleIconChoice(data);
+			case 0x04BC: return new ShowLootBox(data);
 			case 0x04C5: return new IntendedTarget(data);
 		}
 		Log.w("ObjectController", "Unknown object controller: %08X", crc);

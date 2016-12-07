@@ -31,14 +31,11 @@ import java.util.HashMap;
 import java.util.Map;
 import resources.Location;
 import resources.Terrain;
-import resources.buildout.BuildoutArea;
 import resources.objects.SWGObject;
 import resources.objects.awareness.TerrainMap.TerrainMapCallback;
 import resources.server_info.Log;
 
 public class AwarenessHandler {
-	
-	private static final Location GONE_LOCATION = new Location(0, 0, 0, null);
 	
 	private final Map<Terrain, TerrainMap> terrains;
 	
@@ -71,33 +68,26 @@ public class AwarenessHandler {
 	}
 	
 	public void moveObject(SWGObject obj, Location requestedLocation) {
+		// Remove from previous awareness
+		if (obj.getTerrain() != requestedLocation.getTerrain()) {
+			TerrainMap oldTerrainMap = getTerrainMap(obj.getTerrain());
+			if (oldTerrainMap != null)
+				oldTerrainMap.removeWithoutUpdate(obj);
+		}
+		// Update location
+		obj.setLocation(requestedLocation);
 		if (obj.getParent() != null)
 			obj.moveToContainer(null);
-		// Adjust to server coordinates
-		BuildoutArea area = obj.getBuildoutArea();
-		if (area != null)
-			requestedLocation = area.adjustLocation(requestedLocation);
-		// Remove from previous awareness
-		Terrain oldTerrain = obj.getTerrain();
-		Terrain newTerrain = requestedLocation.getTerrain();
-		if (oldTerrain != newTerrain && oldTerrain != null) {
-			obj.clearObjectsAware(); // Moving to GONE
-			TerrainMap oldTerrainMap = getTerrainMap(oldTerrain);
-			if (oldTerrainMap != null)
-				oldTerrainMap.removeFromMap(obj);
-		}
-		// Add to new awareness
-		TerrainMap map = getTerrainMap(newTerrain);
+		// Update awareness
+		TerrainMap map = getTerrainMap(requestedLocation.getTerrain());
 		if (map != null) {
 			map.moveWithinMap(obj, requestedLocation);
-		} else if (!requestedLocation.equals(GONE_LOCATION)) {
-			Log.e(this, "Unknown terrain: %s", newTerrain);
+		} else {
+			Log.e(this, "Unknown terrain: %s", requestedLocation.getTerrain());
 		}
 	}
 	
 	public void moveObject(SWGObject obj, SWGObject parent, Location requestedLocation) {
-		if (obj.getParent() != parent)
-			obj.moveToContainer(parent);
 		// Remove from previous awareness
 		TerrainMap oldMap = getTerrainMap(requestedLocation.getTerrain());
 		if (oldMap != null)
@@ -106,6 +96,8 @@ public class AwarenessHandler {
 		obj.setLocation(requestedLocation);
 		// Update awareness
 		obj.resetAwareness();
+		if (obj.getParent() != parent)
+			obj.moveToContainer(parent);
 	}
 	
 	public void disappearObject(SWGObject obj, boolean disappearObjects, boolean disappearCustom) {

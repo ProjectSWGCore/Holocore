@@ -25,49 +25,57 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
  ***********************************************************************************/
-package services.dev;
+package resources.client_info.visitors.appearance;
 
-import intents.object.ObjectCreatedIntent;
-import resources.Location;
-import resources.PvpFlag;
-import resources.Terrain;
-import resources.config.ConfigFile;
-import resources.control.Service;
-import resources.objects.SWGObject;
-import resources.objects.custom.DefaultAIObject;
-import resources.objects.tangible.TangibleObject;
-import services.objects.ObjectCreator;
+import java.util.ArrayList;
+import java.util.List;
 
-public class DeveloperService extends Service {
+import resources.client_info.ClientData;
+import resources.client_info.IffNode;
+import resources.client_info.SWGFile;
+
+public class LodMeshGeneratorTemplateData extends ClientData {
 	
-	public DeveloperService() {
-		
+	private final List<String> names;
+	
+	private int lodCount;
+	
+	public LodMeshGeneratorTemplateData() {
+		names = new ArrayList<>();
+		lodCount = 0;
 	}
 	
 	@Override
-	public boolean start() {
-		setupDeveloperArea();
-		
-		if (getConfig(ConfigFile.FEATURES).getBoolean("CHARACTER-BUILDER", false))
-			setupCharacterBuilders();
-		
-		return super.start();
+	public void readIff(SWGFile iff) {
+		IffNode node = iff.enterNextForm();
+		switch (node.getTag()) {
+			case "0000":
+				readForm0(iff);
+				break;
+			default:
+				System.err.println("Unknown LodMeshGeneratorTemplateData version: " + node.getTag());
+				break;
+		}
 	}
 	
-	private void setupDeveloperArea() {
-		DefaultAIObject dummy = spawnObject("object/mobile/shared_target_dummy_blacksun.iff", new Location(3500, 5, -4800, Terrain.DEV_AREA), DefaultAIObject.class);
-		dummy.setPvpFlags(PvpFlag.ATTACKABLE);
+	public List<String> getNames() {
+		return names;
+	}
+
+	private void readForm0(SWGFile iff) {
+		readInfo(iff.enterChunk("INFO"));
+		readNames(iff);
 	}
 	
-	private void setupCharacterBuilders() {
-		spawnObject("object/tangible/terminal/shared_terminal_character_builder.iff", new Location(3523, 4, -4802, Terrain.TATOOINE), TangibleObject.class);
+	private void readInfo(IffNode node) {
+		lodCount = node.readShort();
 	}
 	
-	private <T extends SWGObject> T spawnObject(String template, Location l, Class<T> c) {
-		T obj = ObjectCreator.createObjectFromTemplate(template, c);
-		obj.setLocation(l);
-		new ObjectCreatedIntent(obj).broadcast();
-		return obj;
+	private void readNames(SWGFile iff) {
+		for (int i = 0; i < lodCount; i++) {
+			IffNode node = iff.enterChunk("NAME");
+			names.add(node.readString());
+		}
 	}
 	
 }

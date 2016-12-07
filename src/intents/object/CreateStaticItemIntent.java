@@ -29,6 +29,7 @@ package intents.object;
 
 import resources.control.Intent;
 import resources.objects.SWGObject;
+import services.objects.StaticItemService.ObjectCreationHandler;
 
 /**
  *
@@ -40,12 +41,14 @@ public final class CreateStaticItemIntent extends Intent {
 	
 	private final SWGObject requester;
 	private final SWGObject container;
+	private final ObjectCreationHandler objectCreationHandler;
 	private final String[] itemNames;
 	
-	public CreateStaticItemIntent(SWGObject requester, SWGObject container, String... itemNames) {
+	public CreateStaticItemIntent(SWGObject requester, SWGObject container, ObjectCreationHandler objectCreationHandler, String... itemNames) {
 		super(TYPE);
 		this.requester = requester;
 		this.container = container;
+		this.objectCreationHandler = objectCreationHandler;
 		this.itemNames = itemNames;
 	}
 
@@ -59,6 +62,10 @@ public final class CreateStaticItemIntent extends Intent {
 
 	public SWGObject getRequester() {
 		return requester;
+	}
+
+	public ObjectCreationHandler getObjectCreationHandler() {
+		return objectCreationHandler;
 	}
 	
 }

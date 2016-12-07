@@ -61,6 +61,7 @@ import utilities.Scripts;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
+import services.objects.StaticItemService.ObjectCreationHandler;
 
 /**
  * Created by Waverunner on 8/19/2015
@@ -147,7 +148,22 @@ public class QaToolCmdCallback implements ICmdCallback {
 			return;
 
 		Log.i("QA", "%s attempted to create item %s", player, itemName);
-		new CreateStaticItemIntent(creature, inventory, itemName).broadcast();
+		new CreateStaticItemIntent(creature, inventory, new ObjectCreationHandler() {
+			@Override
+			public void success(SWGObject[] createdObjects) {
+				new ChatBroadcastIntent(player, "@system_msg:give_item_success").broadcast();
+			}
+
+			@Override
+			public void containerFull() {
+				new ChatBroadcastIntent(player, "@system_msg:give_item_failure").broadcast();
+			}
+
+			@Override
+			public boolean isIgnoreVolume() {
+				return false;
+			}
+		}, itemName).broadcast();
 	}
 	
 	private void forceDelete(final ObjectManager objManager, final Player player, final SWGObject target) {
@@ -173,8 +189,11 @@ public class QaToolCmdCallback implements ICmdCallback {
 		String name = args;
 		String[] nameParts = name.split(" ");
 		String loc = "";
-		if (nameParts.length >= 2) {
+		if (nameParts.length == 2) {
 			name = nameParts[0];
+			loc = nameParts[1];
+		} else if (nameParts.length == 3) {
+			name = nameParts[0] + " " + nameParts[1];
 			loc = nameParts[1];
 		} else {
 			sendSystemMessage(player, "Invalid arguments! Expected <playername> [opt]<terrain>");
@@ -184,7 +203,7 @@ public class QaToolCmdCallback implements ICmdCallback {
 	}
 	
 	private void recoverPlayer(ObjectManager objManager, PlayerManager playerManager, Player player, String name, String loc) {
-		long id = playerManager.getPlayerByCreatureFirstName(name).getCreatureObject().getObjectId();
+		long id = playerManager.getCharacterIdByName(name);
 		if (id == 0) {
 			sendSystemMessage(player, "Could not find player by name: '" + name + "'");
 			return;

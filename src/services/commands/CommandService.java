@@ -73,6 +73,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import network.packets.swg.zone.object_controller.CommandTimer;
+import resources.combat.DelayAttackEggPosition;
 import resources.combat.HitType;
 import resources.commands.DefaultPriority;
 import resources.objects.creature.CreatureObject;
@@ -179,6 +180,7 @@ public class CommandService extends Service {
 		}
 		
 		Command command = getCommand(request.getCommandCrc());
+		// TODO target and target type checks below. Work with Set<TangibleObject> targets from there
 		long targetId = request.getTargetId();
 		final SWGObject target = targetId != 0 ? galacticManager.getObjectManager().getObjectById(targetId) : null;
 		
@@ -362,9 +364,10 @@ public class CommandService extends Service {
 
 		for (int row = 0; row < baseCommands.getRowCount(); row++) {
 			Object [] cmdRow = baseCommands.getRow(row);
+			String commandName = ((String) cmdRow[0]).toLowerCase(Locale.ENGLISH);
+			Command command = new Command(commandName);
 			
-			Command command = new Command((String) cmdRow[0]);
-			command.setCrc(CRC.getCrc(command.getName().toLowerCase(Locale.ENGLISH)));
+			command.setCrc(CRC.getCrc(commandName));
 			command.setDefaultPriority(DefaultPriority.getDefaultPriority((int) cmdRow[1]));
 			command.setScriptHook((String) cmdRow[2]);
 			command.setCppHook((String)cmdRow[4]);
@@ -429,6 +432,13 @@ public class CommandService extends Service {
 		int buffNameSelf = combatCommands.getColumnFromName("buffNameSelf");
 		int maxRange = combatCommands.getColumnFromName("maxRange");
 		int hitType = combatCommands.getColumnFromName("hitType");
+		int delayAttackEggTemplate = combatCommands.getColumnFromName("delayAttackEggTemplate");
+		int delayAttackParticle = combatCommands.getColumnFromName("delayAttackParticle");
+		int initialDelayAttackInterval = combatCommands.getColumnFromName("initialDelayAttackInterval");
+		int delayAttackInterval = combatCommands.getColumnFromName("delayAttackInterval");
+		int delayAttackLoops = combatCommands.getColumnFromName("delayAttackLoops");
+		int delayAttackEggPosition = combatCommands.getColumnFromName("delayAttackEggPosition");
+		int coneLength = combatCommands.getColumnFromName("coneLength");
 		// animDefault	anim_unarmed	anim_onehandmelee	anim_twohandmelee	anim_polearm
 		// anim_pistol	anim_lightRifle	anim_carbine	anim_rifle	anim_heavyweapon
 		// anim_thrown	anim_onehandlightsaber	anim_twohandlightsaber	anim_polearmlightsaber
@@ -456,6 +466,13 @@ public class CommandService extends Service {
 			cc.setBuffNameSelf((String) cmdRow[buffNameSelf]);
 			cc.setMaxRange((float) cmdRow[maxRange]);
 			cc.setHitType(HitType.getHitType((Integer) cmdRow[hitType]));
+			cc.setDelayAttackEggTemplate((String) cmdRow[delayAttackEggTemplate]);
+			cc.setDelayAttackParticle((String) cmdRow[delayAttackParticle]);
+			cc.setInitialDelayAttackInterval((float) cmdRow[initialDelayAttackInterval]);
+			cc.setDelayAttackInterval((float) cmdRow[delayAttackInterval]);
+			cc.setDelayAttackLoops((int) cmdRow[delayAttackLoops]);
+			cc.setEggPosition(DelayAttackEggPosition.getEggPosition((int) cmdRow[delayAttackEggPosition]));
+			cc.setConeLength((float) cmdRow[coneLength]);
 			cc.setAnimations(WeaponType.UNARMED, getAnimationList((String) cmdRow[animDefault+1]));
 			cc.setAnimations(WeaponType.ONE_HANDED_MELEE, getAnimationList((String) cmdRow[animDefault+2]));
 			cc.setAnimations(WeaponType.TWO_HANDED_MELEE, getAnimationList((String) cmdRow[animDefault+3]));
@@ -480,6 +497,7 @@ public class CommandService extends Service {
 	}
 	
 	private <T extends ICmdCallback> Command registerCallback(String command, Class<T> callback) {
+		command = command.toLowerCase(Locale.ENGLISH);
 		Command comand = getCommand(command);
 		registerCallback(comand, callback);
 		return comand;

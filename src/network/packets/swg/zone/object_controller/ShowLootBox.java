@@ -25,49 +25,52 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
  ***********************************************************************************/
-package services.dev;
+package network.packets.swg.zone.object_controller;
 
-import intents.object.ObjectCreatedIntent;
-import resources.Location;
-import resources.PvpFlag;
-import resources.Terrain;
-import resources.config.ConfigFile;
-import resources.control.Service;
-import resources.objects.SWGObject;
-import resources.objects.custom.DefaultAIObject;
-import resources.objects.tangible.TangibleObject;
-import services.objects.ObjectCreator;
+import java.nio.ByteBuffer;
+import resources.network.NetBuffer;
 
-public class DeveloperService extends Service {
+public class ShowLootBox extends ObjectController {
 	
-	public DeveloperService() {
-		
+	public static final int CRC = 0x04BC;
+	
+	private long[] items;
+
+	public ShowLootBox(long objectId, long[] items) {
+		super(objectId, CRC);
+		this.items = items;
+	}
+	
+	public ShowLootBox(ByteBuffer data) {
+		super(CRC);
+		decode(data);
 	}
 	
 	@Override
-	public boolean start() {
-		setupDeveloperArea();
+	public void decode(ByteBuffer data) {
+		decodeHeader(data);
 		
-		if (getConfig(ConfigFile.FEATURES).getBoolean("CHARACTER-BUILDER", false))
-			setupCharacterBuilders();
+		int itemCount = data.getInt();
+		items = new long[itemCount];
 		
-		return super.start();
+		for(int i = 0; i < itemCount; i++ ) {
+			items[i] = data.getLong();
+		}
 	}
 	
-	private void setupDeveloperArea() {
-		DefaultAIObject dummy = spawnObject("object/mobile/shared_target_dummy_blacksun.iff", new Location(3500, 5, -4800, Terrain.DEV_AREA), DefaultAIObject.class);
-		dummy.setPvpFlags(PvpFlag.ATTACKABLE);
+	@Override
+	public ByteBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(HEADER_LENGTH + Integer.BYTES + items.length * Long.BYTES);
+		encodeHeader(data.getBuffer());
+		
+		data.addInt(items.length);
+		
+		for(long objectId : items) {
+			data.addLong(objectId);
+		}
+		
+		return data.getBuffer();
 	}
-	
-	private void setupCharacterBuilders() {
-		spawnObject("object/tangible/terminal/shared_terminal_character_builder.iff", new Location(3523, 4, -4802, Terrain.TATOOINE), TangibleObject.class);
-	}
-	
-	private <T extends SWGObject> T spawnObject(String template, Location l, Class<T> c) {
-		T obj = ObjectCreator.createObjectFromTemplate(template, c);
-		obj.setLocation(l);
-		new ObjectCreatedIntent(obj).broadcast();
-		return obj;
-	}
-	
+
 }
+

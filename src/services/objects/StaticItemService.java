@@ -36,6 +36,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+import network.packets.swg.zone.object_controller.ShowLootBox;
 
 import resources.client_info.ClientFactory;
 import resources.combat.DamageType;
@@ -43,6 +44,7 @@ import resources.config.ConfigFile;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.SWGObject;
+import resources.objects.creature.CreatureObject;
 import resources.objects.weapon.WeaponObject;
 import resources.objects.weapon.WeaponType;
 import resources.player.Player;
@@ -173,15 +175,21 @@ public final class StaticItemService extends Service {
 		SWGObject container = i.getContainer();
 		String[] itemNames = i.getItemNames();
 		Player requesterOwner = i.getRequester().getOwner();
+		ObjectCreationHandler objectCreationHandler = i.getObjectCreationHandler();
 		
 		// If adding these items to the container would exceed the max capacity...
-		if(container.getVolume() + itemNames.length > container.getMaxContainerSize()) {
-			new ChatBroadcastIntent(requesterOwner, "@system_msg:give_item_failure").broadcast();
+		if(!objectCreationHandler.isIgnoreVolume() && container.getVolume() + itemNames.length > container.getMaxContainerSize()) {
+			objectCreationHandler.containerFull();
 			return;
 		}
 		
-		if(itemNames.length > 0) {
-			for(String itemName : itemNames) {
+		int itemCount = itemNames.length;
+		
+		if(itemCount > 0) {
+			SWGObject[] createdObjects = new SWGObject[itemCount];
+			
+			for(int j = 0; j < itemCount; j++) {
+				String itemName = itemNames[j];
 				ObjectAttributes objectAttributes = objectAttributesMap.get(itemName);
 
 				if (objectAttributes != null) {
@@ -195,10 +203,7 @@ public final class StaticItemService extends Service {
 						switch(object.moveToContainer(container)) {	// Server-generated object is added to the container
 							case SUCCESS:
 								Log.i(this, "Successfully moved %s into container %s", itemName, container);
-								new ChatBroadcastIntent(requesterOwner, "@system_msg:give_item_success").broadcast();
-								break;
-							case CONTAINER_FULL:
-								new ChatBroadcastIntent(requesterOwner, "@system_msg:give_item_failure").broadcast();
+								createdObjects[j] = object;
 								break;
 							default:
 								break;
@@ -214,6 +219,8 @@ public final class StaticItemService extends Service {
 					new ChatBroadcastIntent(requesterOwner, errorMessage).broadcast();
 				}
 			}
+			
+			objectCreationHandler.success(createdObjects);
 		} else {
 			Log.w(this, "No item names were specified in CreateStaticItemIntent - no objects were spawned into container %s", container);
 		}
@@ -320,7 +327,12 @@ public final class StaticItemService extends Service {
 		private String requiredLevel;
 		private String requiredFaction;
 		private String buffName;
-		// TODO species restriction
+		private boolean wearableByWookiees;
+		private boolean wearableByIthorians;
+		private boolean wearableByRodians;
+		private boolean wearableByTrandoshans;
+		private boolean wearableByRest;
+
 		// TODO customisation variables, ie. for colours
 
 		public WearableAttributes(String itemName, String iffTemplate) {
@@ -359,6 +371,13 @@ public final class StaticItemService extends Service {
 				buffName = "@ui_buff:" + buffNameCell;
 			}
 
+			// Load species restrictions, convert to boolean
+			wearableByWookiees = resultSet.getInt("race_wookiee") != 0;
+			wearableByIthorians = resultSet.getInt("race_ithorian") != 0;
+			wearableByRodians = resultSet.getInt("race_rodian") != 0;
+			wearableByTrandoshans = resultSet.getInt("race_trandoshan") != 0;
+			wearableByRest = resultSet.getInt("race_rest") != 0;
+
 			return true;
 		}
 
@@ -369,13 +388,33 @@ public final class StaticItemService extends Service {
 			object.addAttribute("faction_restriction", requiredFaction);
 
 			// Apply the mods!
-			for(Map.Entry<String, String> modEntry : mods.entrySet())
+			for (Map.Entry<String, String> modEntry : mods.entrySet())
 				object.addAttribute(modEntry.getKey(), modEntry.getValue());
-			
-			if(buffName != null)	// Not every wearable has an effect!
+
+			if (buffName != null)    // Not every wearable has an effect!
 				object.addAttribute("effect", buffName);
+
+			// Add the race restrictions only if there are any
+			if (!wearableByWookiees && !wearableByIthorians && !wearableByRodians && !wearableByTrandoshans && !wearableByRest)
+				object.addAttribute("species_restrictions.species_name", buildRaceRestrictionString());
 		}
 
+		private String buildRaceRestrictionString() {
+			String races = "";
+
+			if (wearableByWookiees)
+				races = races.concat("Wookiee ");
+			if (wearableByIthorians)
+				races = races.concat("Ithorian ");
+			if (wearableByRodians)
+				races = races.concat("Rodian ");
+			if (wearableByTrandoshans)
+				races = races.concat("Trandoshan ");
+			if (wearableByRest)
+				races = races.concat("MonCal Human Zabrak Bothan Sullustan Twi'lek ");
+
+			return races.substring(0, races.length() - 1);
+		}
 	}
 
 	private static final class ArmorAttributes extends WearableAttributes {
@@ -679,5 +718,40 @@ public final class StaticItemService extends Service {
 		}
 
 		return mods;
+	}
+	
+	public static abstract class ObjectCreationHandler {
+		public abstract void success(SWGObject[] createdObjects);
+		public abstract boolean isIgnoreVolume();
+		
+		public void containerFull() {
+			
+		}
+	}
+	
+	public static final class LootBoxHandler extends ObjectCreationHandler {
+
+		private final CreatureObject receiver;
+
+		public LootBoxHandler(CreatureObject receiver) {
+			this.receiver = receiver;
+		}
+		
+		@Override
+		public void success(SWGObject[] createdObjects) {
+			long[] objectIds = new long[createdObjects.length];
+
+			for (int i = 0; i < objectIds.length; i++) {
+				objectIds[i] = createdObjects[i].getObjectId();
+			}
+
+			receiver.sendSelf(new ShowLootBox(receiver.getObjectId(), objectIds));
+		}
+
+		@Override
+		public boolean isIgnoreVolume() {
+			return true;
+		}
+		
 	}
 }

@@ -31,8 +31,6 @@ import java.lang.ref.SoftReference;
 import java.util.HashMap;
 import java.util.Map;
 
-import resources.client_info.visitors.AppearanceTemplateData;
-import resources.client_info.visitors.AppearanceTemplateListData;
 import resources.client_info.visitors.CrcStringTableData;
 import resources.client_info.visitors.DatatableData;
 import resources.client_info.visitors.ObjectData;
@@ -42,6 +40,9 @@ import resources.client_info.visitors.SlotArrangementData;
 import resources.client_info.visitors.SlotDefinitionData;
 import resources.client_info.visitors.SlotDescriptorData;
 import resources.client_info.visitors.WorldSnapshotData;
+import resources.client_info.visitors.appearance.AppearanceTemplateData;
+import resources.client_info.visitors.appearance.LodMeshGeneratorTemplateData;
+import resources.client_info.visitors.appearance.SkeletalAppearanceData;
 import resources.server_info.Log;
 
 public class ClientFactory extends DataFactory {
@@ -141,35 +142,34 @@ public class ClientFactory extends DataFactory {
 		
 		switch (c) {
 			case "AppearanceTemplateData": return new AppearanceTemplateData();
-			case "AppearanceTemplateListData": return new AppearanceTemplateListData();
 			case "CrcStringTableData": return new CrcStringTableData();
 			case "DatatableData": return new DatatableData();
+			case "LodMeshGeneratorTemplateData": return new LodMeshGeneratorTemplateData();
 			case "ObjectData": return new ObjectData();
+			case "PortalLayoutData": return new PortalLayoutData();
 			case "ProfTemplateData": return new ProfTemplateData();
 			case "SlotDescriptorData": return new SlotDescriptorData();
 			case "SlotDefinitionData": return new SlotDefinitionData();
 			case "SlotArrangementData": return new SlotArrangementData();
+			case "SkeletalAppearanceData": return new SkeletalAppearanceData();
 			case "WorldSnapshotData": return new WorldSnapshotData();
-			case "PortalLayoutData": return new PortalLayoutData();
 			default: Log.e("ClientFactory", "Unimplemented typeMap value: " + c); return null;
 		}
 	}
 
 	// The typeMap is used for determining what DataObject class
 	private void populateTypeMap() {
-		typeMap.put("APT ", "AppearanceTemplateListData");
-		typeMap.put("DTLA", "AppearanceTemplateData");
-		typeMap.put("MESH", "AppearanceTemplateData");
-		typeMap.put("PEFT", "AppearanceTemplateData");
-		typeMap.put("CMPA", "AppearanceTemplateData");
-		typeMap.put("ARGD", "SlotArrangementData");
-		typeMap.put("0006", "SlotDefinitionData");
+		typeMap.put("APPR", "AppearanceTemplateData");
 		typeMap.put("CSTB", "CrcStringTableData");
 		typeMap.put("DTII", "DatatableData");
-		typeMap.put("PRFI", "ProfTemplateData");
-		typeMap.put("SLTD", "SlotDescriptorData");
-		typeMap.put("WSNP", "WorldSnapshotData");
+		typeMap.put("MLOD", "LodMeshGeneratorTemplateData");
 		typeMap.put("PRTO", "PortalLayoutData");
+		typeMap.put("PRFI", "ProfTemplateData");
+		typeMap.put("ARGD", "SlotArrangementData");
+		typeMap.put("0006", "SlotDefinitionData");
+		typeMap.put("SLTD", "SlotDescriptorData");
+		typeMap.put("SMAT", "SkeletalAppearanceData");
+		typeMap.put("WSNP", "WorldSnapshotData");
 		// Objects
 		typeMap.put("SBMK", "ObjectData"); // object/battlefield_marker
 		typeMap.put("SBOT", "ObjectData"); // object/building

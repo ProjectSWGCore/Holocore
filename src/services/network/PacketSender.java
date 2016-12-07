@@ -25,49 +25,23 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
  ***********************************************************************************/
-package services.dev;
+package services.network;
 
-import intents.object.ObjectCreatedIntent;
-import resources.Location;
-import resources.PvpFlag;
-import resources.Terrain;
-import resources.config.ConfigFile;
-import resources.control.Service;
-import resources.objects.SWGObject;
-import resources.objects.custom.DefaultAIObject;
-import resources.objects.tangible.TangibleObject;
-import services.objects.ObjectCreator;
+import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
 
-public class DeveloperService extends Service {
+import resources.network.TCPServer;
+
+public class PacketSender {
 	
-	public DeveloperService() {
-		
+	private final TCPServer server;
+	
+	public PacketSender(TCPServer server) {
+		this.server = server;
 	}
 	
-	@Override
-	public boolean start() {
-		setupDeveloperArea();
-		
-		if (getConfig(ConfigFile.FEATURES).getBoolean("CHARACTER-BUILDER", false))
-			setupCharacterBuilders();
-		
-		return super.start();
-	}
-	
-	private void setupDeveloperArea() {
-		DefaultAIObject dummy = spawnObject("object/mobile/shared_target_dummy_blacksun.iff", new Location(3500, 5, -4800, Terrain.DEV_AREA), DefaultAIObject.class);
-		dummy.setPvpFlags(PvpFlag.ATTACKABLE);
-	}
-	
-	private void setupCharacterBuilders() {
-		spawnObject("object/tangible/terminal/shared_terminal_character_builder.iff", new Location(3523, 4, -4802, Terrain.TATOOINE), TangibleObject.class);
-	}
-	
-	private <T extends SWGObject> T spawnObject(String template, Location l, Class<T> c) {
-		T obj = ObjectCreator.createObjectFromTemplate(template, c);
-		obj.setLocation(l);
-		new ObjectCreatedIntent(obj).broadcast();
-		return obj;
+	public void sendPacket(InetSocketAddress addr, ByteBuffer data) {
+		server.send(addr, data);
 	}
 	
 }

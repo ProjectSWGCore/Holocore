@@ -47,7 +47,6 @@ import resources.server_info.RelationalServerData;
 import resources.server_info.RelationalServerFactory;
 
 public class UniformBoxService extends Service {
-	//TODO: Display loot box
 	
 	private static final String [] UNIFORM_COLUMNS = {"boots", "pants", "belt", "gloves", "shirt", "vest", "hat", "necklace", "robe", "weapon"};
 	private static final String GET_UNIFORMBOX_SQL = "SELECT * FROM npe_uniformbox where profession = ? AND race = ?";
@@ -120,7 +119,7 @@ public class UniformBoxService extends Service {
 				staticItems.add(item);
 		}
 		
-		new CreateStaticItemIntent(creature, inventory, staticItems.toArray(new String[staticItems.size()])).broadcast();
+		new CreateStaticItemIntent(creature, inventory, new StaticItemService.LootBoxHandler(creature), staticItems.toArray(new String[staticItems.size()])).broadcast();
 	}
 	
 }
