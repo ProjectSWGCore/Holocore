@@ -395,7 +395,7 @@ public final class StaticItemService extends Service {
 				object.addAttribute("effect", buffName);
 
 			// Add the race restrictions only if there are any
-			if (!wearableByWookiees && !wearableByIthorians && !wearableByRodians && !wearableByTrandoshans && !wearableByRest)
+			if (!wearableByWookiees || !wearableByIthorians || !wearableByRodians || !wearableByTrandoshans || !wearableByRest)
 				object.addAttribute("species_restrictions.species_name", buildRaceRestrictionString());
 		}
 
