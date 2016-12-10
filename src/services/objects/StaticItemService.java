@@ -327,7 +327,12 @@ public final class StaticItemService extends Service {
 		private String requiredLevel;
 		private String requiredFaction;
 		private String buffName;
-		// TODO species restriction
+		private boolean wearableByWookiees;
+		private boolean wearableByIthorians;
+		private boolean wearableByRodians;
+		private boolean wearableByTrandoshans;
+		private boolean wearableByRest;
+
 		// TODO customisation variables, ie. for colours
 
 		public WearableAttributes(String itemName, String iffTemplate) {
@@ -366,6 +371,13 @@ public final class StaticItemService extends Service {
 				buffName = "@ui_buff:" + buffNameCell;
 			}
 
+			// Load species restrictions, convert to boolean
+			wearableByWookiees = resultSet.getInt("race_wookiee") != 0;
+			wearableByIthorians = resultSet.getInt("race_ithorian") != 0;
+			wearableByRodians = resultSet.getInt("race_rodian") != 0;
+			wearableByTrandoshans = resultSet.getInt("race_trandoshan") != 0;
+			wearableByRest = resultSet.getInt("race_rest") != 0;
+
 			return true;
 		}
 
@@ -373,16 +385,38 @@ public final class StaticItemService extends Service {
 		protected void applyTypeAttributes(SWGObject object) {
 			object.addAttribute("class_required", requiredProfession);
 			object.addAttribute("required_combat_level", requiredLevel);
-			object.addAttribute("faction_restriction", requiredFaction);
+
+			if (!requiredFaction.equals("None"))
+				object.addAttribute("faction_restriction", requiredFaction);
 
 			// Apply the mods!
-			for(Map.Entry<String, String> modEntry : mods.entrySet())
+			for (Map.Entry<String, String> modEntry : mods.entrySet())
 				object.addAttribute(modEntry.getKey(), modEntry.getValue());
-			
-			if(buffName != null)	// Not every wearable has an effect!
+
+			if (buffName != null)    // Not every wearable has an effect!
 				object.addAttribute("effect", buffName);
+
+			// Add the race restrictions only if there are any
+			if (!wearableByWookiees || !wearableByIthorians || !wearableByRodians || !wearableByTrandoshans || !wearableByRest)
+				object.addAttribute("species_restrictions.species_name", buildRaceRestrictionString());
 		}
 
+		private String buildRaceRestrictionString() {
+			String races = "";
+
+			if (wearableByWookiees)
+				races = races.concat("Wookiee ");
+			if (wearableByIthorians)
+				races = races.concat("Ithorian ");
+			if (wearableByRodians)
+				races = races.concat("Rodian ");
+			if (wearableByTrandoshans)
+				races = races.concat("Trandoshan ");
+			if (wearableByRest)
+				races = races.concat("MonCal Human Zabrak Bothan Sullustan Twi'lek ");
+
+			return races.substring(0, races.length() - 1);
+		}
 	}
 
 	private static final class ArmorAttributes extends WearableAttributes {

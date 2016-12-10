@@ -496,6 +496,10 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	public String getAttribute(String attribute) {
 		return attributes.get(attribute);
 	}
+
+	public boolean hasAttribute(String attribute) {
+		return attributes.containsKey(attribute);
+	}
 	
 	public Map<String, String> getAttributes() {
 		return attributes;
@@ -689,6 +693,8 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		if (awareness.addObjectAware(aware.getAwareness())) {
 			createObject(aware);
 			aware.createObject(this);
+			onObjectEnterAware(aware);
+			aware.onObjectEnterAware(this);
 		}
 	}
 	
@@ -696,7 +702,25 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		if (awareness.removeObjectAware(aware.getAwareness())) {
 			destroyObject(aware);
 			aware.destroyObject(this);
+			onObjectLeaveAware(aware);
+			aware.onObjectLeaveAware(this);
 		}
+	}
+	
+	/**
+	 * Called when an object enters this object's awareness
+	 * @param aware the object entering awareness
+	 */
+	protected void onObjectEnterAware(SWGObject aware) {
+		
+	}
+	
+	/**
+	 * Called when an object enters this object's awareness
+	 * @param aware the object entering awareness
+	 */
+	protected void onObjectLeaveAware(SWGObject aware) {
+		
 	}
 	
 	public boolean isObjectAware(SWGObject aware) {

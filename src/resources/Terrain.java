@@ -50,6 +50,7 @@ public enum Terrain {
 	ENDOR					("terrain/endor.trn"),
 	FLORATEST				("terrain/floratest.trn"),
 	GODCLIENT_TEST			("terrain/godclient_test.trn"),
+	GONE					("terrain/gone.trn"),
 	KASHYYYK_DEAD_FOREST	("terrain/kashyyyk_dead_forest.trn"),
 	KASHYYYK_HUNTING		("terrain/kashyyyk_hunting.trn"),
 	KASHYYYK_MAIN			("terrain/kashyyyk_main.trn"),
