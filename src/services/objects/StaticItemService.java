@@ -385,7 +385,9 @@ public final class StaticItemService extends Service {
 		protected void applyTypeAttributes(SWGObject object) {
 			object.addAttribute("class_required", requiredProfession);
 			object.addAttribute("required_combat_level", requiredLevel);
-			object.addAttribute("faction_restriction", requiredFaction);
+
+			if (!requiredFaction.equals("None"))
+				object.addAttribute("faction_restriction", requiredFaction);
 
 			// Apply the mods!
 			for (Map.Entry<String, String> modEntry : mods.entrySet())
@@ -395,7 +397,7 @@ public final class StaticItemService extends Service {
 				object.addAttribute("effect", buffName);
 
 			// Add the race restrictions only if there are any
-			if (!wearableByWookiees && !wearableByIthorians && !wearableByRodians && !wearableByTrandoshans && !wearableByRest)
+			if (!wearableByWookiees || !wearableByIthorians || !wearableByRodians || !wearableByTrandoshans || !wearableByRest)
 				object.addAttribute("species_restrictions.species_name", buildRaceRestrictionString());
 		}
 
