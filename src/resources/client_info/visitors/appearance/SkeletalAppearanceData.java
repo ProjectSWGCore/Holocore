@@ -27,18 +27,17 @@
  ***********************************************************************************/
 package resources.client_info.visitors.appearance;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import resources.client_info.ClientData;
+import resources.client_info.ClientFactory;
 import resources.client_info.IffNode;
 import resources.client_info.SWGFile;
 
 public class SkeletalAppearanceData extends ClientData {
 	
-	private final List<String> meshGenerators;
+	private final Map<String, LodMeshGeneratorTemplateData> meshGenerators;
 	private final Map<String, String> skeletonInfo;
 	private final Map<String, String> latxPairs;
 	
@@ -48,7 +47,7 @@ public class SkeletalAppearanceData extends ClientData {
 	private boolean createAnimationController;
 	
 	public SkeletalAppearanceData() {
-		meshGenerators = new ArrayList<>();
+		meshGenerators = new HashMap<>();
 		skeletonInfo = new HashMap<>();
 		latxPairs = new HashMap<>();
 		lodDistanceTable = null;
@@ -67,7 +66,7 @@ public class SkeletalAppearanceData extends ClientData {
 		}
 	}
 	
-	public List<String> getMeshGenerators() {
+	public Map<String, LodMeshGeneratorTemplateData> getMeshGenerators() {
 		return meshGenerators;
 	}
 	
@@ -108,7 +107,7 @@ public class SkeletalAppearanceData extends ClientData {
 	private void readMeshGenerator(IffNode node) {
 		for (int i = 0; i < meshGeneratorCount; i++) {
 			String name = node.readString();
-			meshGenerators.add(name); // Should load this file
+			meshGenerators.put(name, (LodMeshGeneratorTemplateData) ClientFactory.getInfoFromFile(name, false));
 		}
 	}
 	

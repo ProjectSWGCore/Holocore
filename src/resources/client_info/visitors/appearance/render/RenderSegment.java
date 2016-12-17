@@ -25,60 +25,60 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
  ***********************************************************************************/
-package resources.client_info.visitors.appearance;
+package resources.client_info.visitors.appearance.render;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
-import resources.client_info.ClientData;
-import resources.client_info.ClientFactory;
-import resources.client_info.IffNode;
-import resources.client_info.SWGFile;
 
-public class LodMeshGeneratorTemplateData extends ClientData {
+public class RenderSegment {
 	
-	private final Map<String, SkeletalMeshGeneratorTemplateData> generators;
+	private static final Vertex [] EMPTY_VERTICES = new Vertex[0];
+	private static final int [] EMPTY_INDICES = new int[0];
 	
-	private int lodCount;
+	private Vertex [] vertices;
+	private int [] indices;
+	private String textureFile;
 	
-	public LodMeshGeneratorTemplateData() {
-		generators = new HashMap<>();
-		lodCount = 0;
+	public RenderSegment() {
+		vertices = EMPTY_VERTICES;
+		indices = EMPTY_INDICES;
+		textureFile = "";
 	}
 	
-	@Override
-	public void readIff(SWGFile iff) {
-		IffNode node = iff.enterNextForm();
-		switch (node.getTag()) {
-			case "0000":
-				readForm0(iff);
-				break;
-			default:
-				System.err.println("Unknown LodMeshGeneratorTemplateData version: " + node.getTag());
-				break;
+	public void setVertices(Vertex [] vertices) {
+		this.vertices = vertices;
+	}
+	
+	public void setVertices(List <Vertex> vertices) {
+		this.vertices = new Vertex[vertices.size()];
+		this.vertices = vertices.toArray(this.vertices);
+	}
+	
+	public void setIndices(int [] indices) {
+		this.indices = indices;
+	}
+	
+	public void setIndices(List <Integer> indices) {
+		this.indices = new int[indices.size()];
+		for (int i = 0; i < indices.size(); ++i) {
+			this.indices[i] = indices.get(i);
 		}
-		iff.exitForm();
 	}
 	
-	public Map<String, SkeletalMeshGeneratorTemplateData> getGenerators() {
-		return generators;
-	}
-
-	private void readForm0(SWGFile iff) {
-		readInfo(iff.enterChunk("INFO"));
-		readNames(iff);
+	public void setTextureFile(String textureFile) {
+		this.textureFile = textureFile;
 	}
 	
-	private void readInfo(IffNode node) {
-		lodCount = node.readShort();
+	public Vertex [] getVertices() {
+		return vertices;
 	}
 	
-	private void readNames(SWGFile iff) {
-		for (int i = 0; i < lodCount; i++) {
-			IffNode node = iff.enterChunk("NAME");
-			String name = node.readString();
-			generators.put(name, (SkeletalMeshGeneratorTemplateData) ClientFactory.getInfoFromFile(name, false));
-		}
+	public int [] getIndices() {
+		return indices;
+	}
+	
+	public String getTextureFile() {
+		return textureFile;
 	}
 	
 }

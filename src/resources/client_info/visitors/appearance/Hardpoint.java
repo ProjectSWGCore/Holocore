@@ -27,58 +27,32 @@
  ***********************************************************************************/
 package resources.client_info.visitors.appearance;
 
-import java.util.HashMap;
-import java.util.Map;
+import resources.Point3D;
 
-import resources.client_info.ClientData;
-import resources.client_info.ClientFactory;
-import resources.client_info.IffNode;
-import resources.client_info.SWGFile;
-
-public class LodMeshGeneratorTemplateData extends ClientData {
+public class Hardpoint {
 	
-	private final Map<String, SkeletalMeshGeneratorTemplateData> generators;
+	private String name;
+	private Point3D translation;
 	
-	private int lodCount;
-	
-	public LodMeshGeneratorTemplateData() {
-		generators = new HashMap<>();
-		lodCount = 0;
+	public Hardpoint(String name, Point3D translation) {
+		this.name = name;
+		this.translation = translation;
 	}
 	
-	@Override
-	public void readIff(SWGFile iff) {
-		IffNode node = iff.enterNextForm();
-		switch (node.getTag()) {
-			case "0000":
-				readForm0(iff);
-				break;
-			default:
-				System.err.println("Unknown LodMeshGeneratorTemplateData version: " + node.getTag());
-				break;
-		}
-		iff.exitForm();
+	public String getName() {
+		return name;
 	}
 	
-	public Map<String, SkeletalMeshGeneratorTemplateData> getGenerators() {
-		return generators;
-	}
-
-	private void readForm0(SWGFile iff) {
-		readInfo(iff.enterChunk("INFO"));
-		readNames(iff);
+	public Point3D getTranslation() {
+		return translation;
 	}
 	
-	private void readInfo(IffNode node) {
-		lodCount = node.readShort();
+	public void setName(String name) {
+		this.name = name;
 	}
 	
-	private void readNames(SWGFile iff) {
-		for (int i = 0; i < lodCount; i++) {
-			IffNode node = iff.enterChunk("NAME");
-			String name = node.readString();
-			generators.put(name, (SkeletalMeshGeneratorTemplateData) ClientFactory.getInfoFromFile(name, false));
-		}
+	public void setTranslation(Point3D translation) {
+		this.translation = translation;
 	}
 	
 }

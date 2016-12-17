@@ -27,57 +27,57 @@
  ***********************************************************************************/
 package resources.client_info.visitors.appearance;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
+import resources.Point3D;
 import resources.client_info.ClientData;
-import resources.client_info.ClientFactory;
 import resources.client_info.IffNode;
 import resources.client_info.SWGFile;
 
-public class LodMeshGeneratorTemplateData extends ClientData {
+public class IndexedTriangleList extends ClientData {
 	
-	private final Map<String, SkeletalMeshGeneratorTemplateData> generators;
+	private final List<Point3D> points;
+	private final List<Integer> indices;
 	
-	private int lodCount;
-	
-	public LodMeshGeneratorTemplateData() {
-		generators = new HashMap<>();
-		lodCount = 0;
+	public IndexedTriangleList() {
+		points = new ArrayList<>();
+		indices = new ArrayList<>();
 	}
 	
 	@Override
 	public void readIff(SWGFile iff) {
+		iff.enterForm("IDTL");
 		IffNode node = iff.enterNextForm();
-		switch (node.getTag()) {
-			case "0000":
-				readForm0(iff);
-				break;
-			default:
-				System.err.println("Unknown LodMeshGeneratorTemplateData version: " + node.getTag());
-				break;
+		if (!node.getTag().equals("0000")) {
+			iff.exitForm();
+			return;
 		}
+		readForm0(iff);
+		iff.exitForm();
 		iff.exitForm();
 	}
 	
-	public Map<String, SkeletalMeshGeneratorTemplateData> getGenerators() {
-		return generators;
+	public List<Point3D> getPoints() {
+		return points;
 	}
-
+	
+	public List<Integer> getIndices() {
+		return indices;
+	}
+	
 	private void readForm0(SWGFile iff) {
-		readInfo(iff.enterChunk("INFO"));
-		readNames(iff);
-	}
-	
-	private void readInfo(IffNode node) {
-		lodCount = node.readShort();
-	}
-	
-	private void readNames(SWGFile iff) {
-		for (int i = 0; i < lodCount; i++) {
-			IffNode node = iff.enterChunk("NAME");
-			String name = node.readString();
-			generators.put(name, (SkeletalMeshGeneratorTemplateData) ClientFactory.getInfoFromFile(name, false));
+		IffNode node = iff.enterChunk("VERT");
+		int count = node.remaining() / 12;
+		points.clear();
+		for (int i = 0; i < count; i++) {
+			points.add(new Point3D(node.readFloat(), node.readFloat(), node.readFloat()));
+		}
+		node = iff.enterChunk("INDX");
+		count = node.remaining() / 4;
+		indices.clear();
+		for (int i = 0; i < count; i++) {
+			indices.add(node.readInt());
 		}
 	}
 	

@@ -27,11 +27,24 @@
  ***********************************************************************************/
 package resources.client_info.visitors.appearance;
 
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
+
+import resources.Point3D;
 import resources.client_info.ClientData;
 import resources.client_info.IffNode;
 import resources.client_info.SWGFile;
 
 public class AppearanceTemplateData extends ClientData {
+	
+	private final List<Hardpoint> hardpoints;
+	private String floor;
+	
+	public AppearanceTemplateData() {
+		hardpoints = new ArrayList<>();
+		floor = "";
+	}
 	
 	@Override
 	public void readIff(SWGFile iff) {
@@ -44,10 +57,49 @@ public class AppearanceTemplateData extends ClientData {
 				System.err.println("Unknown AppearanceTemplateData version: " + node.getTag());
 				break;
 		}
+		iff.exitForm();
+	}
+	
+	public List<Hardpoint> getHardpoints() {
+		return hardpoints;
+	}
+	
+	public String getFloor() {
+		return floor;
 	}
 	
 	private void readForm3(SWGFile iff) {
-		
+		readHardpoints(iff);
+		readFloor(iff);
+	}
+	
+	private void readHardpoints(SWGFile iff) {
+		IffNode node = iff.enterForm("HPTS");
+		IffNode hptChunk = null;
+		double [] translation = new double[3];
+		while ((hptChunk = node.getNextUnreadChunk()) != null) {
+			for (int y = 0; y < 3; y++) {
+				hptChunk.readFloat();
+				hptChunk.readFloat();
+				hptChunk.readFloat();
+				translation[y] = hptChunk.readFloat();
+			}
+			byte [] str = new byte[hptChunk.remaining()];
+			for (int i = 0; i < str.length; i++)
+				str[i] = hptChunk.readByte();
+			hardpoints.add(new Hardpoint(new String(str, StandardCharsets.UTF_8), new Point3D(translation[0], translation[1], translation[2])));
+		}
+		iff.exitForm();
+	}
+	
+	private void readFloor(SWGFile iff) {
+		iff.enterForm("FLOR");
+		IffNode node = iff.enterChunk("DATA");
+		if (node.readBoolean())
+			floor = node.readString();
+		else
+			floor = "";
+		iff.exitForm();
 	}
 	
 }
