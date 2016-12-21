@@ -59,6 +59,19 @@ public class IffNode {
 		this.tag = tag;
 		this.isForm = isForm;
 	}
+	
+	public void printTree() {
+		printTree(this, 0);
+	}
+	
+	private void printTree(IffNode node, int depth) {
+		for (int i = 0; i < depth; i++)
+			System.out.print("\t");
+		System.out.println(node.getTag()+":form="+node.isForm());
+		for (IffNode child : node.getChildren()) {
+			printTree(child, depth+1);
+		}
+	}
 
 	public void addChild(IffNode child) {
 		children.add(child);

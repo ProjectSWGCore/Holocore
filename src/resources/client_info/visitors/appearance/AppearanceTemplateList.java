@@ -27,23 +27,22 @@
  ***********************************************************************************/
 package resources.client_info.visitors.appearance;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 import resources.client_info.ClientData;
 import resources.client_info.ClientFactory;
 import resources.client_info.IffNode;
 import resources.client_info.SWGFile;
+import resources.client_info.visitors.appearance.render.RenderData;
+import resources.client_info.visitors.appearance.render.RenderableData;
+import resources.server_info.Log;
 
-public class LodMeshGeneratorTemplateData extends ClientData {
+public class AppearanceTemplateList extends ClientData implements RenderableData {
 	
-	private final Map<String, SkeletalMeshGeneratorTemplateData> generators;
+	private RenderableData subAppearance;
 	
-	private int lodCount;
-	
-	public LodMeshGeneratorTemplateData() {
-		generators = new HashMap<>();
-		lodCount = 0;
+	public AppearanceTemplateList() {
+		subAppearance = null;
 	}
 	
 	@Override
@@ -54,31 +53,39 @@ public class LodMeshGeneratorTemplateData extends ClientData {
 				readForm0(iff);
 				break;
 			default:
-				System.err.println("Unknown LodMeshGeneratorTemplateData version: " + node.getTag());
+				System.err.println("Unknown AppearanceTemplateData version: " + node.getTag());
 				break;
 		}
-		iff.exitForm();
 	}
 	
-	public Map<String, SkeletalMeshGeneratorTemplateData> getGenerators() {
-		return generators;
+	@Override
+	public List<RenderData> getAllRenderData() {
+		if (subAppearance == null)
+			return null;
+		return subAppearance.getAllRenderData();
 	}
-
+	
+	@Override
+	public RenderData getHighestRenderData() {
+		if (subAppearance == null)
+			return null;
+		return subAppearance.getHighestRenderData();
+	}
+	
+	@Override
+	public RenderData getProportionalRenderData(double percent) {
+		if (subAppearance == null)
+			return null;
+		return subAppearance.getProportionalRenderData(percent);
+	}
+	
 	private void readForm0(SWGFile iff) {
-		readInfo(iff.enterChunk("INFO"));
-		readNames(iff);
-	}
-	
-	private void readInfo(IffNode node) {
-		lodCount = node.readShort();
-	}
-	
-	private void readNames(SWGFile iff) {
-		for (int i = 0; i < lodCount; i++) {
-			IffNode node = iff.enterChunk("NAME");
-			String name = node.readString();
-			generators.put(name, (SkeletalMeshGeneratorTemplateData) ClientFactory.getInfoFromFile(name, false));
-		}
+		IffNode node = iff.enterChunk("NAME");
+		ClientData child = ClientFactory.getInfoFromFile(node.readString());
+		if (child instanceof RenderableData)
+			subAppearance = (RenderableData) child;
+		else
+			Log.e(this, "Sub-appearance does not implement RenderableData!");
 	}
 	
 }

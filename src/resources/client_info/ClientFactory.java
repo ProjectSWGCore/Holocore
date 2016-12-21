@@ -41,8 +41,16 @@ import resources.client_info.visitors.SlotDefinitionData;
 import resources.client_info.visitors.SlotDescriptorData;
 import resources.client_info.visitors.WorldSnapshotData;
 import resources.client_info.visitors.appearance.AppearanceTemplateData;
+import resources.client_info.visitors.appearance.AppearanceTemplateList;
+import resources.client_info.visitors.appearance.BasicSkeletonTemplate;
+import resources.client_info.visitors.appearance.DetailedAppearanceTemplateData;
 import resources.client_info.visitors.appearance.LodMeshGeneratorTemplateData;
+import resources.client_info.visitors.appearance.LodSkeletonTemplateData;
+import resources.client_info.visitors.appearance.MeshAppearanceTemplate;
 import resources.client_info.visitors.appearance.SkeletalAppearanceData;
+import resources.client_info.visitors.appearance.SkeletalMeshGeneratorTemplateData;
+import resources.client_info.visitors.shader.CustomizableShaderData;
+import resources.client_info.visitors.shader.StaticShaderData;
 import resources.server_info.Log;
 
 public class ClientFactory extends DataFactory {
@@ -141,10 +149,17 @@ public class ClientFactory extends DataFactory {
 		}
 		
 		switch (c) {
+			case "": return null; // Disabled clientdata
 			case "AppearanceTemplateData": return new AppearanceTemplateData();
+			case "AppearanceTemplateList": return new AppearanceTemplateList();
+			case "BasicSkeletonTemplate": return new BasicSkeletonTemplate();
 			case "CrcStringTableData": return new CrcStringTableData();
+			case "CustomizableShaderData": return new CustomizableShaderData();
 			case "DatatableData": return new DatatableData();
+			case "DetailedAppearanceTemplateData": return new DetailedAppearanceTemplateData();
 			case "LodMeshGeneratorTemplateData": return new LodMeshGeneratorTemplateData();
+			case "LodSkeletonTemplateData": return new LodSkeletonTemplateData();
+			case "MeshAppearanceTemplate": return new MeshAppearanceTemplate();
 			case "ObjectData": return new ObjectData();
 			case "PortalLayoutData": return new PortalLayoutData();
 			case "ProfTemplateData": return new ProfTemplateData();
@@ -152,6 +167,8 @@ public class ClientFactory extends DataFactory {
 			case "SlotDefinitionData": return new SlotDefinitionData();
 			case "SlotArrangementData": return new SlotArrangementData();
 			case "SkeletalAppearanceData": return new SkeletalAppearanceData();
+			case "SkeletalMeshGeneratorTemplateData": return new SkeletalMeshGeneratorTemplateData();
+			case "StaticShaderData": return new StaticShaderData();
 			case "WorldSnapshotData": return new WorldSnapshotData();
 			default: Log.e("ClientFactory", "Unimplemented typeMap value: " + c); return null;
 		}
@@ -159,17 +176,27 @@ public class ClientFactory extends DataFactory {
 
 	// The typeMap is used for determining what DataObject class
 	private void populateTypeMap() {
-		typeMap.put("APPR", "AppearanceTemplateData");
 		typeMap.put("CSTB", "CrcStringTableData");
 		typeMap.put("DTII", "DatatableData");
-		typeMap.put("MLOD", "LodMeshGeneratorTemplateData");
 		typeMap.put("PRTO", "PortalLayoutData");
 		typeMap.put("PRFI", "ProfTemplateData");
 		typeMap.put("ARGD", "SlotArrangementData");
 		typeMap.put("0006", "SlotDefinitionData");
 		typeMap.put("SLTD", "SlotDescriptorData");
-		typeMap.put("SMAT", "SkeletalAppearanceData");
 		typeMap.put("WSNP", "WorldSnapshotData");
+		// Appearance Related Data
+		boolean loadAppearanceData = false;
+		typeMap.put("APPR", !loadAppearanceData?"":"AppearanceTemplateData");
+		typeMap.put("APT ", !loadAppearanceData?"":"AppearanceTemplateList");
+		typeMap.put("CSHD", !loadAppearanceData?"":"CustomizableShaderData");
+		typeMap.put("DTLA", !loadAppearanceData?"":"DetailedAppearanceTemplateData");
+		typeMap.put("SKTM", !loadAppearanceData?"":"BasicSkeletonTemplate");
+		typeMap.put("MESH", !loadAppearanceData?"":"MeshAppearanceTemplate");
+		typeMap.put("MLOD", !loadAppearanceData?"":"LodMeshGeneratorTemplateData");
+		typeMap.put("SLOD", !loadAppearanceData?"":"LodSkeletonTemplateData");
+		typeMap.put("SMAT", !loadAppearanceData?"":"SkeletalAppearanceData");
+		typeMap.put("SKMG", !loadAppearanceData?"":"SkeletalMeshGeneratorTemplateData");
+		typeMap.put("SSHT", !loadAppearanceData?"":"StaticShaderData");
 		// Objects
 		typeMap.put("SBMK", "ObjectData"); // object/battlefield_marker
 		typeMap.put("SBOT", "ObjectData"); // object/building
