@@ -31,17 +31,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 import resources.client_info.ClientData;
-import resources.client_info.ClientFactory;
 import resources.client_info.IffNode;
 import resources.client_info.SWGFile;
 
-public class LodMeshGeneratorTemplateData extends ClientData {
+public class LodSkeletonTemplateData extends ClientData {
 	
 	private final Map<String, SkeletalMeshGeneratorTemplateData> generators;
 	
 	private int lodCount;
 	
-	public LodMeshGeneratorTemplateData() {
+	public LodSkeletonTemplateData() {
 		generators = new HashMap<>();
 		lodCount = 0;
 	}
@@ -60,25 +59,18 @@ public class LodMeshGeneratorTemplateData extends ClientData {
 		iff.exitForm();
 	}
 	
-	public Map<String, SkeletalMeshGeneratorTemplateData> getGenerators() {
-		return generators;
-	}
-
 	private void readForm0(SWGFile iff) {
 		readInfo(iff.enterChunk("INFO"));
-		readNames(iff);
+		for (int i = 0; i < lodCount; i++) {
+			iff.enterNextForm();
+			BasicSkeletonTemplate list = new BasicSkeletonTemplate();
+			list.readIff(iff);
+			iff.exitForm();
+		}
 	}
 	
 	private void readInfo(IffNode node) {
 		lodCount = node.readShort();
-	}
-	
-	private void readNames(SWGFile iff) {
-		for (int i = 0; i < lodCount; i++) {
-			IffNode node = iff.enterChunk("NAME");
-			String name = node.readString();
-			generators.put(name, (SkeletalMeshGeneratorTemplateData) ClientFactory.getInfoFromFile(name, false));
-		}
 	}
 	
 }

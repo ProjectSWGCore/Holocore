@@ -25,25 +25,17 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
  ***********************************************************************************/
-package resources.client_info.visitors.appearance;
+package resources.client_info.visitors.shader;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import resources.client_info.ClientData;
-import resources.client_info.ClientFactory;
 import resources.client_info.IffNode;
 import resources.client_info.SWGFile;
 
-public class LodMeshGeneratorTemplateData extends ClientData {
+public class CustomizableShaderData extends ShaderData {
 	
-	private final Map<String, SkeletalMeshGeneratorTemplateData> generators;
+	private String ddsFile;
 	
-	private int lodCount;
-	
-	public LodMeshGeneratorTemplateData() {
-		generators = new HashMap<>();
-		lodCount = 0;
+	public CustomizableShaderData() {
+		ddsFile = "";
 	}
 	
 	@Override
@@ -53,32 +45,40 @@ public class LodMeshGeneratorTemplateData extends ClientData {
 			case "0000":
 				readForm0(iff);
 				break;
+			case "0001":
+				readForm1(iff);
+				break;
 			default:
-				System.err.println("Unknown LodMeshGeneratorTemplateData version: " + node.getTag());
+				System.err.println("Unknown CustomizableShaderData version: " + node.getTag());
 				break;
 		}
 		iff.exitForm();
 	}
 	
-	public Map<String, SkeletalMeshGeneratorTemplateData> getGenerators() {
-		return generators;
+	@Override
+	public String getTextureFile() {
+		return ddsFile;
 	}
-
+	
 	private void readForm0(SWGFile iff) {
-		readInfo(iff.enterChunk("INFO"));
-		readNames(iff);
-	}
-	
-	private void readInfo(IffNode node) {
-		lodCount = node.readShort();
-	}
-	
-	private void readNames(SWGFile iff) {
-		for (int i = 0; i < lodCount; i++) {
-			IffNode node = iff.enterChunk("NAME");
-			String name = node.readString();
-			generators.put(name, (SkeletalMeshGeneratorTemplateData) ClientFactory.getInfoFromFile(name, false));
+		iff.enterForm("TXMS");
+		while (iff.enterForm("TXM ") != null) {
+			iff.enterForm("0001");
+			IffNode nameChunk = iff.enterChunk("NAME");
+			IffNode dataChunk = iff.enterChunk("DATA");
+			if (dataChunk.readInt() == 'M'*256*256*256+'A'*256*256+'I'*256+'N')
+				ddsFile = nameChunk.readString();
+			iff.exitForm();
+			iff.exitForm();
 		}
+	}
+	
+	private void readForm1(SWGFile iff) {
+		StaticShaderData staticData = new StaticShaderData();
+		iff.enterForm("SSHT");
+		staticData.readIff(iff);
+		iff.exitForm();
+		ddsFile = staticData.getTextureFile();
 	}
 	
 }

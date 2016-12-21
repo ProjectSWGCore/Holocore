@@ -27,58 +27,112 @@
  ***********************************************************************************/
 package resources.client_info.visitors.appearance;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
+import resources.Quaternion;
 import resources.client_info.ClientData;
-import resources.client_info.ClientFactory;
 import resources.client_info.IffNode;
 import resources.client_info.SWGFile;
 
-public class LodMeshGeneratorTemplateData extends ClientData {
+public class BasicSkeletonTemplate extends ClientData {
 	
-	private final Map<String, SkeletalMeshGeneratorTemplateData> generators;
+	private final List<Joint> joints;
+	private int jointCount;
 	
-	private int lodCount;
-	
-	public LodMeshGeneratorTemplateData() {
-		generators = new HashMap<>();
-		lodCount = 0;
+	public BasicSkeletonTemplate() {
+		joints = new ArrayList<>();
+		jointCount = 0;
 	}
 	
-	@Override
 	public void readIff(SWGFile iff) {
 		IffNode node = iff.enterNextForm();
 		switch (node.getTag()) {
-			case "0000":
-				readForm0(iff);
+			case "0002":
+				readForm2(iff);
 				break;
 			default:
-				System.err.println("Unknown LodMeshGeneratorTemplateData version: " + node.getTag());
+				System.err.println("Unknown BasicSkeletonTemplate version: " + node.getTag());
 				break;
 		}
 		iff.exitForm();
 	}
 	
-	public Map<String, SkeletalMeshGeneratorTemplateData> getGenerators() {
-		return generators;
+	public List<Joint> getJoints() {
+		return joints;
 	}
-
-	private void readForm0(SWGFile iff) {
+	
+	private void readForm2(SWGFile iff) {
 		readInfo(iff.enterChunk("INFO"));
-		readNames(iff);
+		readNames(iff.enterChunk("NAME"));
+		readParents(iff.enterChunk("PRNT"));
+		readPreMultiply(iff.enterChunk("RPRE"));
+		readPostMultiply(iff.enterChunk("RPST"));
 	}
 	
 	private void readInfo(IffNode node) {
-		lodCount = node.readShort();
+		jointCount = node.readInt();
 	}
 	
-	private void readNames(SWGFile iff) {
-		for (int i = 0; i < lodCount; i++) {
-			IffNode node = iff.enterChunk("NAME");
-			String name = node.readString();
-			generators.put(name, (SkeletalMeshGeneratorTemplateData) ClientFactory.getInfoFromFile(name, false));
+	private void readNames(IffNode node) {
+		joints.clear();
+		for (int i = 0; i < jointCount; i++) {
+			joints.add(new Joint(node.readString()));
 		}
+	}
+	
+	private void readParents(IffNode node) {
+		for (int i = 0; i < jointCount; i++) {
+			int parent = node.readInt();
+			if (parent == -1)
+				continue;
+			joints.get(i).setParent(joints.get(parent));
+		}
+	}
+	
+	private void readPreMultiply(IffNode node) {
+		for (Joint j : joints) {
+			j.setPreMultiply(readQuaternion(node));
+		}
+	}
+	
+	private void readPostMultiply(IffNode node) {
+		for (Joint j : joints) {
+			j.setPostMultiply(readQuaternion(node));
+		}
+	}
+	
+	private Quaternion readQuaternion(IffNode node) {
+		float w = node.readFloat();
+		float x = node.readFloat();
+		float y = node.readFloat();
+		float z = node.readFloat();
+		return new Quaternion(x, y, z, w);
+	}
+	
+	public static class Joint {
+		
+		private final String name;
+		private Joint parent;
+		private Quaternion preMultiply;
+		private Quaternion postMultiply;
+		
+		public Joint(String name) {
+			this.name = name;
+			this.parent = null;
+		}
+		
+		public String getName() { return name; }
+		public Joint getParent() { return parent; }
+		public Quaternion getPreMultiply() { return preMultiply; }
+		public Quaternion getPostMultiply() { return postMultiply; }
+		
+		public void setParent(Joint parent) { this.parent = parent; }
+		public void setPreMultiply(Quaternion preMultiply) { this.preMultiply = preMultiply; }
+		public void setPostMultiply(Quaternion postMultiply) { this.postMultiply = postMultiply; }
+		
+		public String toString() { return String.format("Joint[name=%s]", name); }
+		
 	}
 	
 }

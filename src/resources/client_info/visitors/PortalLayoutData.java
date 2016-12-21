@@ -29,8 +29,13 @@ package resources.client_info.visitors;
 
 import resources.Point3D;
 import resources.client_info.ClientData;
+import resources.client_info.ClientFactory;
 import resources.client_info.IffNode;
 import resources.client_info.SWGFile;
+import resources.client_info.visitors.appearance.render.RenderData;
+import resources.client_info.visitors.appearance.render.RenderSegment;
+import resources.client_info.visitors.appearance.render.RenderableData;
+import resources.client_info.visitors.appearance.render.RenderableDataChild;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -39,7 +44,7 @@ import java.util.List;
 /**
  * @author Waverunner
  */
-public class PortalLayoutData extends ClientData {
+public class PortalLayoutData extends ClientData implements RenderableData {
 
 	private List<Cell> cells = new LinkedList<>();
 	private List<Point3D> radarPoints = new ArrayList<>();
@@ -63,7 +68,52 @@ public class PortalLayoutData extends ClientData {
 			default: System.err.println("Do not know how to handle POB version type " + version + " in file " + iff.getFileName());
 		}
 	}
-
+	
+	@Override
+	public List<RenderData> getAllRenderData() {
+		List<RenderData> render = new ArrayList<>();
+		render.add(getHighestRenderData());
+		for (Cell cell : cells) {
+			if (cell.isSingleRenderData())
+				render.add(cell.getRenderData());
+			else
+				render.addAll(cell.getRenderDataList());
+		}
+		return render;
+	}
+	
+	@Override
+	public RenderData getHighestRenderData() {
+		RenderData ret = new RenderData();
+		for (Cell cell : cells) {
+			if (cell.isSingleRenderData())
+				mergeAll(cell.getRenderData(), ret);
+			else
+				mergeAll(cell.getHighestRenderData(), ret);
+		}
+		return ret;
+	}
+	
+	@Override
+	public RenderData getProportionalRenderData(double percent) {
+		RenderData ret = new RenderData();
+		for (Cell cell : cells) {
+			if (cell.isSingleRenderData())
+				mergeAll(cell.getRenderData(), ret);
+			else
+				mergeAll(cell.getProportionalRenderData(percent), ret);
+		}
+		return ret;
+	}
+	
+	private void mergeAll(RenderData src, RenderData dst) {
+		if (src == null)
+			return;
+		for (RenderSegment segment : src.getSegments()) {
+			dst.addSegment(segment);
+		}
+	}
+	
 	private void readVersion3(SWGFile iff) {
 		IffNode data = iff.enterChunk("DATA");
 		int portalCount = data.readInt();
@@ -149,8 +199,14 @@ public class PortalLayoutData extends ClientData {
 		
 		private String name;
 		private String appearance;
+		private List<RenderData> renderDataList;
+		private RenderData renderData;
+		private boolean isSingleRenderData;
 		
 		public Cell(SWGFile iff) {
+			renderDataList = new ArrayList<>();
+			renderData = new RenderData();
+			isSingleRenderData = true;
 			readIff(iff);
 		}
 
@@ -172,11 +228,40 @@ public class PortalLayoutData extends ClientData {
 			iff.exitForm();
 		}
 		
+		public RenderData getRenderData() {
+			return renderData;
+		}
+		
+		public boolean isSingleRenderData() {
+			return isSingleRenderData;
+		}
+		
+		public List<RenderData> getRenderDataList() {
+			return renderDataList;
+		}
+		
+		public RenderData getHighestRenderData() {
+			return renderDataList.isEmpty() ? null : renderDataList.get(renderDataList.size()-1);
+		}
+		
+		public RenderData getProportionalRenderData(double percent) {
+			return renderDataList.isEmpty() ? null : renderDataList.get((int) Math.min(renderDataList.size()-1, percent*renderDataList.size()+0.5));
+		}
+		
 		private void readVersion3(SWGFile iff) {
 			IffNode dataChunk = iff.enterChunk("DATA");
 			dataChunk.readInt(); // cellPortals
 			dataChunk.readBoolean(); // canSeeParentCell
 			appearance = dataChunk.readString();
+			ClientData data = ClientFactory.getInfoFromFile(appearance);
+			if (data instanceof RenderableDataChild) {
+				renderData = ((RenderableDataChild) data).getRenderData();
+				isSingleRenderData = true;
+			} else if (data instanceof RenderableData) {
+				renderDataList.clear();
+				renderDataList.addAll(((RenderableData) data).getAllRenderData());
+				isSingleRenderData = false;
+			}
 		}
 		
 		private void readVersion5(SWGFile iff) {
@@ -185,8 +270,17 @@ public class PortalLayoutData extends ClientData {
 			dataChunk.readBoolean(); // canSeeParentCell
 			name = dataChunk.readString();
 			appearance = dataChunk.readString();
+			ClientData data = ClientFactory.getInfoFromFile(appearance);
+			if (data instanceof RenderableDataChild) {
+				renderData = ((RenderableDataChild) data).getRenderData();
+				isSingleRenderData = true;
+			} else if (data instanceof RenderableData) {
+				renderDataList.clear();
+				renderDataList.addAll(((RenderableData) data).getAllRenderData());
+				isSingleRenderData = false;
+			}
 		}
-
+		
 		public String getName() {
 			return name;
 		}
