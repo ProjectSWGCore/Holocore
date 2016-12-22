@@ -30,7 +30,7 @@ tatooine.sdb	TRUE
 yavin4.sdb	TRUE																						
 event_empireday.sdb	FALSE																						
 event_halloween.sdb	FALSE																						
-event_lifeday.sdb	FALSE																						
+event_lifeday.sdb	TRUE																						
 event_loveday.sdb	FALSE																						
 event_remembranceday.sdb	FALSE																						
 gcw_base_npc_corellia.sdb	TRUE																						
