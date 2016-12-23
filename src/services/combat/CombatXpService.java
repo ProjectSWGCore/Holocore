@@ -143,7 +143,6 @@ public class CombatXpService extends Service {
 		int experienceGained = calculateXpGain(killer, corpse, killerLevel);
 		
 		if (experienceGained <= 0) {
-			Log.w(this, "%s received no XP: XP for creature difficulty %s at level %d was %d", killer, corpse.getDifficulty(), killerLevel, experienceGained);
 			return;
 		}
 		
