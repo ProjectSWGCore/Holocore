@@ -261,11 +261,11 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 		player.sendPacket(new VoiceChatStatus());
 		player.sendPacket(new ParametersMessage());
 		player.sendPacket(new ChatOnConnectAvatar());
+		creature.clearCustomAware(false);
 		new PlayerEventIntent(player, PlayerEvent.PE_FIRST_ZONE).broadcast();
 	}
 	
 	private void startZone(CreatureObject creature, Player player) {
-		creature.clearCustomAware(false);
 		startScene(creature);
 		new PlayerEventIntent(player, PlayerEvent.PE_ZONE_IN_CLIENT).broadcast();
 	}
