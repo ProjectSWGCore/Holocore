@@ -34,20 +34,16 @@ import resources.server_info.Log;
 import utilities.Encoder;
 import utilities.Encoder.StringType;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import network.packets.Packet;
 
-public class SWGMap<K, V> extends HashMap<K, V> implements Encodable, Serializable {
-	
-	private static final long serialVersionUID = 2L;
+public class SWGMap<K, V> extends ConcurrentHashMap<K, V> implements Encodable {
 	
 	private final int view;
 	private final int updateType;
@@ -74,20 +70,6 @@ public class SWGMap<K, V> extends HashMap<K, V> implements Encodable, Serializab
 		this.data = new HashMap<>();
 		this.deltaSize = 0;
 		this.dataSize = 0;
-	}
-	
-	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
-		ois.defaultReadObject();
-		updateMutex = new Object();
-		updateCount = new AtomicInteger(0);
-		deltas = new HashMap<>();
-		data = new HashMap<>();
-		deltaSize = 0;
-		dataSize = 0;
-		for (Entry<K, V> e : entrySet()) {
-			addData(e.getKey(), e.getValue(), (byte) 0);
-		}
-		clearDeltaQueue();
 	}
 	
 	public void resetUpdateCount() {
