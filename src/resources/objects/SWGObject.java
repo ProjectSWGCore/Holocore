@@ -65,6 +65,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class SWGObject extends BaselineObject implements Comparable<SWGObject>, Persistable {
@@ -73,7 +74,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	private final Location 						location		= new Location(0, 0, 0, null);
 	private final Location						buildoutLocation= new Location(0, 0, 0, null);
 	private final Set<SWGObject>				containedObjects= new HashSet<>();
-	private final HashMap <String, SWGObject>	slots			= new HashMap<>(); // HashMap used for null value support
+	private final Map <String, SWGObject>	slots			= new ConcurrentHashMap<>(); // HashMap used for null value support
 	private final transient Map <String, String>				attributes		= new LinkedHashMap<>();
 	private final transient ObjectAware							awareness		= new ObjectAware(this);
 	private final transient Map <ObjectDataAttribute, Object>	dataAttributes	= new HashMap<>();
@@ -824,7 +825,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	private void createChildrenObjects(Player target, boolean ignoreSnapshotChecks) {
 		synchronized (slots) {
-			if (slots.size() == 0 && containedObjects.size() == 0)
+			if (slots.isEmpty() && containedObjects.isEmpty())
 				return;
 		}
 
