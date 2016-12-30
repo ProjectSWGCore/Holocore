@@ -53,6 +53,7 @@ import resources.persistable.SWGObjectFactory;
 import resources.player.Player;
 import resources.server_info.Log;
 import resources.server_info.SynchronizedHashMap;
+import resources.server_info.SynchronizedHashSet;
 import services.CoreManager;
 import services.objects.ObjectCreator;
 import utilities.AwarenessUtilities;
@@ -73,11 +74,11 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	private final long 							objectId;
 	private final Location 						location		= new Location(0, 0, 0, null);
 	private final Location						buildoutLocation= new Location(0, 0, 0, null);
-	private final Set<SWGObject>				containedObjects= new HashSet<>();
-	private final Map <String, SWGObject>	slots			= new SynchronizedHashMap<>();
+	private final Set<SWGObject>				containedObjects= new SynchronizedHashSet<>();
+	private final Map <String, SWGObject>		slots			= new SynchronizedHashMap<>();
 	private final transient Map <String, String>				attributes		= new LinkedHashMap<>();
 	private final transient ObjectAware							awareness		= new ObjectAware(this);
-	private final transient Map <ObjectDataAttribute, Object>	dataAttributes	= new HashMap<>();
+	private final transient Map <ObjectDataAttribute, Object>	dataAttributes	= new SynchronizedHashMap<>();
 	private final transient AtomicInteger						updateCounter	= new AtomicInteger(1);
 	
 	private ObjectClassification		classification	= ObjectClassification.GENERATED;

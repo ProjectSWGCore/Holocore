@@ -28,76 +28,100 @@
 package resources.server_info;
 
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
+import java.util.Spliterator;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 
-public class SynchronizedHashMap<K, V> implements Map<K, V> {
+public class SynchronizedHashSet<E> implements Set<E> {
 	
-	private final HashMap<K, V> map;
+	private final HashSet<E> set;
 	
-	public SynchronizedHashMap() {
-		map = new HashMap<>();
+	public SynchronizedHashSet() {
+		set = new HashSet<>();
 	}
 	
-	public synchronized int hashCode() {
-		return map.hashCode();
-	}
-	
-	public synchronized String toString() {
-		return map.toString();
+	public synchronized void forEach(Consumer<? super E> action) {
+		set.forEach(action);
 	}
 	
 	public synchronized int size() {
-		return map.size();
+		return set.size();
 	}
 	
 	public synchronized boolean isEmpty() {
-		return map.isEmpty();
+		return set.isEmpty();
 	}
 	
-	public synchronized V get(Object key) {
-		return map.get(key);
+	public synchronized boolean contains(Object o) {
+		return set.contains(o);
 	}
 	
-	public synchronized boolean containsKey(Object key) {
-		return map.containsKey(key);
+	public synchronized Iterator<E> iterator() {
+		return set.iterator();
 	}
 	
-	public synchronized V put(K key, V value) {
-		return map.put(key, value);
+	public synchronized Object[] toArray() {
+		return set.toArray();
 	}
 	
-	public synchronized void putAll(Map<? extends K, ? extends V> m) {
-		map.putAll(m);
+	public synchronized <T> T[] toArray(T[] a) {
+		return set.toArray(a);
 	}
 	
-	public synchronized V remove(Object key) {
-		return map.remove(key);
+	public synchronized boolean add(E e) {
+		return set.add(e);
+	}
+	
+	public synchronized boolean remove(Object o) {
+		return set.remove(o);
+	}
+	
+	public synchronized boolean containsAll(Collection<?> c) {
+		return set.containsAll(c);
+	}
+	
+	public synchronized boolean addAll(Collection<? extends E> c) {
+		return set.addAll(c);
+	}
+	
+	public synchronized boolean retainAll(Collection<?> c) {
+		return set.retainAll(c);
+	}
+	
+	public synchronized boolean removeAll(Collection<?> c) {
+		return set.removeAll(c);
 	}
 	
 	public synchronized void clear() {
-		map.clear();
+		set.clear();
 	}
 	
-	public synchronized boolean containsValue(Object value) {
-		return map.containsValue(value);
+	public synchronized boolean equals(Object o) {
+		return set.equals(o);
 	}
 	
-	public synchronized Set<K> keySet() {
-		return map.keySet();
+	public synchronized int hashCode() {
+		return set.hashCode();
 	}
 	
-	public synchronized Collection<V> values() {
-		return map.values();
+	public synchronized Spliterator<E> spliterator() {
+		return set.spliterator();
 	}
 	
-	public synchronized Set<java.util.Map.Entry<K, V>> entrySet() {
-		return map.entrySet();
+	public synchronized boolean removeIf(Predicate<? super E> filter) {
+		return set.removeIf(filter);
 	}
 	
-	public synchronized V replace(K key, V value) {
-		return map.replace(key, value);
+	public synchronized Stream<E> stream() {
+		return set.stream();
+	}
+	
+	public synchronized Stream<E> parallelStream() {
+		return set.parallelStream();
 	}
 	
 }
