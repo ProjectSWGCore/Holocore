@@ -31,30 +31,28 @@ import resources.encodables.Encodable;
 import resources.network.NetBuffer;
 import resources.objects.SWGObject;
 import resources.server_info.Log;
+import resources.server_info.SynchronizedMap;
 import utilities.Encoder;
 import utilities.Encoder.StringType;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import network.packets.Packet;
 
-public class SWGMap<K, V> extends ConcurrentHashMap<K, V> implements Encodable {
+public class SWGMap<K, V> extends SynchronizedMap<K, V> implements Encodable {
 	
 	private final int view;
 	private final int updateType;
 	private final StringType strType;
+	private final AtomicInteger updateCount;
+	private final Map<Object, byte[]> deltas;
+	private final Map<Object, byte[]> data;
 	
-	private transient Object updateMutex;
-	private transient AtomicInteger updateCount;
-	private transient Map<Object, byte[]> deltas;
-	private transient Map<Object, byte[]> data;
-	private transient int deltaSize;
-	private transient int dataSize;
+	private int deltaSize;
+	private int dataSize;
 	
 	public SWGMap(int view, int updateType) {
 		this(view, updateType, StringType.UNSPECIFIED);
@@ -64,10 +62,9 @@ public class SWGMap<K, V> extends ConcurrentHashMap<K, V> implements Encodable {
 		this.view = view;
 		this.updateType = updateType;
 		this.strType = strType;
-		this.updateMutex = new Object();
 		this.updateCount = new AtomicInteger(0);
-		this.deltas = new HashMap<>();
-		this.data = new HashMap<>();
+		this.deltas = new SynchronizedMap<>();
+		this.data = new SynchronizedMap<>();
 		this.deltaSize = 0;
 		this.dataSize = 0;
 	}
@@ -83,10 +80,7 @@ public class SWGMap<K, V> extends ConcurrentHashMap<K, V> implements Encodable {
 	
 	@Override
 	public V put(K key, V value) {
-		V old;
-		synchronized (updateMutex) {
-			old = super.put(key, value);
-		}
+		V old = super.put(key, value);
 		updateCount.incrementAndGet();
 		if (old != null) {
 			removeData(key);
@@ -98,10 +92,7 @@ public class SWGMap<K, V> extends ConcurrentHashMap<K, V> implements Encodable {
 	
 	@Override
 	public V remove(Object key) {
-		V old;
-		synchronized (updateMutex) {
-			old = super.remove(key);
-		}
+		V old = super.remove(key);
 		updateCount.incrementAndGet();
 		removeData(key);
 		

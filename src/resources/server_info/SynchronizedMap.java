@@ -32,12 +32,16 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class SynchronizedHashMap<K, V> implements Map<K, V> {
+public class SynchronizedMap<K, V> implements Map<K, V> {
 	
-	private final HashMap<K, V> map;
+	private final Map<K, V> map;
 	
-	public SynchronizedHashMap() {
-		map = new HashMap<>();
+	public SynchronizedMap() {
+		this.map = new HashMap<>();
+	}
+	
+	public SynchronizedMap(Map<K, V> map) {
+		this.map = map;
 	}
 	
 	public synchronized int hashCode() {

@@ -52,8 +52,8 @@ import resources.persistable.Persistable;
 import resources.persistable.SWGObjectFactory;
 import resources.player.Player;
 import resources.server_info.Log;
-import resources.server_info.SynchronizedHashMap;
-import resources.server_info.SynchronizedHashSet;
+import resources.server_info.SynchronizedMap;
+import resources.server_info.SynchronizedSet;
 import services.CoreManager;
 import services.objects.ObjectCreator;
 import utilities.AwarenessUtilities;
@@ -71,15 +71,15 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class SWGObject extends BaselineObject implements Comparable<SWGObject>, Persistable {
 	
-	private final long 							objectId;
-	private final Location 						location		= new Location(0, 0, 0, null);
-	private final Location						buildoutLocation= new Location(0, 0, 0, null);
-	private final Set<SWGObject>				containedObjects= new SynchronizedHashSet<>();
-	private final Map <String, SWGObject>		slots			= new SynchronizedHashMap<>();
-	private final transient Map <String, String>				attributes		= new LinkedHashMap<>();
-	private final transient ObjectAware							awareness		= new ObjectAware(this);
-	private final transient Map <ObjectDataAttribute, Object>	dataAttributes	= new SynchronizedHashMap<>();
-	private final transient AtomicInteger						updateCounter	= new AtomicInteger(1);
+	private final long 								objectId;
+	private final Location 							location		= new Location(0, 0, 0, null);
+	private final Location							buildoutLocation= new Location(0, 0, 0, null);
+	private final Set<SWGObject>					containedObjects= new SynchronizedSet<>();
+	private final Map <String, SWGObject>			slots			= new SynchronizedMap<>();
+	private final Map <String, String>				attributes		= new SynchronizedMap<>(new LinkedHashMap<>());
+	private final ObjectAware						awareness		= new ObjectAware(this);
+	private final Map <ObjectDataAttribute, Object>	dataAttributes	= new SynchronizedMap<>();
+	private final AtomicInteger						updateCounter	= new AtomicInteger(1);
 	
 	private ObjectClassification		classification	= ObjectClassification.GENERATED;
 	private GameObjectType				gameObjectType	= GameObjectType.GOT_NONE;

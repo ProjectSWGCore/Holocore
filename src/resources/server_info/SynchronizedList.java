@@ -27,101 +27,156 @@
  ***********************************************************************************/
 package resources.server_info;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
+import java.util.Comparator;
 import java.util.Iterator;
-import java.util.Set;
+import java.util.List;
+import java.util.ListIterator;
 import java.util.Spliterator;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
+import java.util.function.UnaryOperator;
 import java.util.stream.Stream;
 
-public class SynchronizedHashSet<E> implements Set<E> {
+public class SynchronizedList<E> implements List<E> {
 	
-	private final HashSet<E> set;
+	private final List<E> list;
 	
-	public SynchronizedHashSet() {
-		set = new HashSet<>();
+	public SynchronizedList() {
+		this.list = new ArrayList<>();
 	}
 	
+	public SynchronizedList(List<E> list) {
+		this.list = list;
+	}
+
 	public synchronized void forEach(Consumer<? super E> action) {
-		set.forEach(action);
+		list.forEach(action);
 	}
-	
+
 	public synchronized int size() {
-		return set.size();
+		return list.size();
 	}
-	
+
 	public synchronized boolean isEmpty() {
-		return set.isEmpty();
+		return list.isEmpty();
 	}
-	
+
 	public synchronized boolean contains(Object o) {
-		return set.contains(o);
+		return list.contains(o);
 	}
-	
+
 	public synchronized Iterator<E> iterator() {
-		return set.iterator();
+		return list.iterator();
 	}
-	
+
 	public synchronized Object[] toArray() {
-		return set.toArray();
+		return list.toArray();
 	}
-	
+
 	public synchronized <T> T[] toArray(T[] a) {
-		return set.toArray(a);
+		return list.toArray(a);
 	}
-	
+
 	public synchronized boolean add(E e) {
-		return set.add(e);
+		return list.add(e);
 	}
-	
+
 	public synchronized boolean remove(Object o) {
-		return set.remove(o);
+		return list.remove(o);
 	}
-	
+
 	public synchronized boolean containsAll(Collection<?> c) {
-		return set.containsAll(c);
+		return list.containsAll(c);
 	}
-	
+
 	public synchronized boolean addAll(Collection<? extends E> c) {
-		return set.addAll(c);
+		return list.addAll(c);
 	}
-	
-	public synchronized boolean retainAll(Collection<?> c) {
-		return set.retainAll(c);
+
+	public synchronized boolean addAll(int index, Collection<? extends E> c) {
+		return list.addAll(index, c);
 	}
-	
+
 	public synchronized boolean removeAll(Collection<?> c) {
-		return set.removeAll(c);
+		return list.removeAll(c);
 	}
-	
-	public synchronized void clear() {
-		set.clear();
+
+	public synchronized boolean retainAll(Collection<?> c) {
+		return list.retainAll(c);
 	}
-	
-	public synchronized boolean equals(Object o) {
-		return set.equals(o);
+
+	public synchronized void replaceAll(UnaryOperator<E> operator) {
+		list.replaceAll(operator);
 	}
-	
-	public synchronized int hashCode() {
-		return set.hashCode();
-	}
-	
-	public synchronized Spliterator<E> spliterator() {
-		return set.spliterator();
-	}
-	
+
 	public synchronized boolean removeIf(Predicate<? super E> filter) {
-		return set.removeIf(filter);
+		return list.removeIf(filter);
 	}
-	
+
+	public synchronized void sort(Comparator<? super E> c) {
+		list.sort(c);
+	}
+
+	public synchronized void clear() {
+		list.clear();
+	}
+
+	public synchronized boolean equals(Object o) {
+		return list.equals(o);
+	}
+
+	public synchronized int hashCode() {
+		return list.hashCode();
+	}
+
+	public synchronized E get(int index) {
+		return list.get(index);
+	}
+
+	public synchronized E set(int index, E element) {
+		return list.set(index, element);
+	}
+
+	public synchronized void add(int index, E element) {
+		list.add(index, element);
+	}
+
 	public synchronized Stream<E> stream() {
-		return set.stream();
+		return list.stream();
 	}
-	
+
+	public synchronized E remove(int index) {
+		return list.remove(index);
+	}
+
 	public synchronized Stream<E> parallelStream() {
-		return set.parallelStream();
+		return list.parallelStream();
+	}
+
+	public synchronized int indexOf(Object o) {
+		return list.indexOf(o);
+	}
+
+	public synchronized int lastIndexOf(Object o) {
+		return list.lastIndexOf(o);
+	}
+
+	public synchronized ListIterator<E> listIterator() {
+		return list.listIterator();
+	}
+
+	public synchronized ListIterator<E> listIterator(int index) {
+		return list.listIterator(index);
+	}
+
+	public synchronized List<E> subList(int fromIndex, int toIndex) {
+		return list.subList(fromIndex, toIndex);
+	}
+
+	public synchronized Spliterator<E> spliterator() {
+		return list.spliterator();
 	}
 	
 }
