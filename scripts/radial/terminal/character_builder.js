@@ -49,6 +49,8 @@ function handleArmour(player) {
 	var SuiListBox = Java.type("resources.sui.SuiListBox");
 	listBox = new SuiListBox(SuiButtons.OK_CANCEL, "Character Builder Terminal", "Select a set of armour to receive.");
 
+	listBox.addListItem("R.I.S. Armour");
+	listBox.addListItem("Mandalorian Armour");
 	listBox.addListItem("Bone Armour");
 	listBox.addListItem("Chitin Armour");
 	listBox.addListItem("Padded Armour");
@@ -84,27 +86,57 @@ function handleArmourSelection(player, creature, eventType, parameters) {
 	selection = SuiListBox.getSelectedRow(parameters);
 	
 	switch(selection) {
-		case 0: handleBoneArmour(player); break;
-		case 1: handleChitinArmour(player); break;
-		case 2: handlePaddedArmour(player); break;
-		case 3: handleUbeseArmour(player); break;	
-		case 4: handleIthoriandefenderArmour(player); break;
-		case 5: handleWookieeblackmtnArmour(player); break;
-		case 6: handleDeathtrooperArmour(player); break;
-		case 7: handleBattlemarineArmour(player); break;
-		case 8: handleBattlewornimpscoutArmour(player); break;
-		case 9: handleBattlewornimpshockArmour(player); break;
-		case 10: handleBattlewornimpstormArmour(player); break;
-		case 11: handleBlackcrusaderimpArmour(player); break;		
-		case 12: handleWhitepvpspecopsimpArmour(player); break;
-		case 13: handleSnowtrooperArmour(player); break;		
-		case 14: handleBattlewornrebassaultArmour(player); break;
-		case 15: handleBattlewornrebbattleArmour(player); break;
-		case 16: handleBattlewornrebmarineArmour(player); break;
-		case 17: handleBattlewornrebspecforceArmour(player); break;
-		case 18: handleBlackcrusaderrebArmour(player); break;
-		case 19: handleAlliancecoldArmour(player); break;
+		case 0: handleRisArmour(player); break;
+		case 1: handleMandoArmour(player); break;
+		case 2: handleBoneArmour(player); break;
+		case 3: handleChitinArmour(player); break;
+		case 4: handlePaddedArmour(player); break;
+		case 5: handleUbeseArmour(player); break;	
+		case 6: handleIthoriandefenderArmour(player); break;
+		case 7: handleWookieeblackmtnArmour(player); break;
+		case 8: handleDeathtrooperArmour(player); break;
+		case 9: handleBattlemarineArmour(player); break;
+		case 10: handleBattlewornimpscoutArmour(player); break;
+		case 11: handleBattlewornimpshockArmour(player); break;
+		case 12: handleBattlewornimpstormArmour(player); break;
+		case 13: handleBlackcrusaderimpArmour(player); break;		
+		case 14: handleWhitepvpspecopsimpArmour(player); break;
+		case 15: handleSnowtrooperArmour(player); break;		
+		case 16: handleBattlewornrebassaultArmour(player); break;
+		case 17: handleBattlewornrebbattleArmour(player); break;
+		case 18: handleBattlewornrebmarineArmour(player); break;
+		case 19: handleBattlewornrebspecforceArmour(player); break;
+		case 20: handleBlackcrusaderrebArmour(player); break;
+		case 21: handleAlliancecoldArmour(player); break;
 	}
+}
+
+function handleRisArmour(player) {
+	spawnItems(player, [
+		"armor_ris_bicep_l",
+		"armor_ris_bicep_r",
+		"armor_ris_boots",
+		"armor_ris_bracer_l",
+		"armor_ris_bracer_r",
+		"armor_ris_chest_plate",
+		"armor_ris_gloves",
+		"armor_ris_helmet",
+		"armor_ris_leggings"
+			]);
+}
+
+function handleMandoArmour(player) {
+	spawnItems(player, [
+		"armor_mandalorian_bicep_l",
+		"armor_mandalorian_bicep_r",
+		"armor_mandalorian_bracer_l",
+		"armor_mandalorian_bracer_r",
+		"armor_mandalorian_chest_plate",
+		"armor_mandalorian_gloves",
+		"armor_mandalorian_helmet",
+		"armor_mandalorian_leggings",
+		"armor_mandalorian_shoes"
+			]);
 }
 
 function handleBoneArmour(player) {
