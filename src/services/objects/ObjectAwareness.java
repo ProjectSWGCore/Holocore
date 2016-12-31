@@ -186,10 +186,12 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 	
 	private void handleObjectCreatedIntent(ObjectCreatedIntent oci) {
 		SWGObject object = oci.getObject();
-		if (object.getParent() == null)
-			moveObject(object, object.getLocation());
-		else
+		if (object.getParent() == null) {
+			if (object.getTerrain() != null)
+				moveObject(object, object.getLocation());
+		} else {
 			moveObject(object, object.getParent(), object.getLocation());
+		}
 	}
 	
 	private void handleDestroyObjectIntent(DestroyObjectIntent doi) {
@@ -249,11 +251,12 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 	
 	private void processContainerTransferIntent(ContainerTransferIntent i) {
 		Assert.notNull(i.getObject());
-		Assert.notNull(i.getObject().getTerrain());
-		if (i.getContainer() == null)
-			moveObject(i.getObject(), i.getObject().getLocation());
-		else
+		if (i.getContainer() == null) {
+			if (i.getObject().getTerrain() != null)
+				moveObject(i.getObject(), i.getObject().getLocation());
+		} else {
 			moveObject(i.getObject(), i.getContainer(), i.getObject().getLocation());
+		}
 	}
 	
 	private void handleZoneIn(CreatureObject creature, Player player, boolean firstZone) {
@@ -316,6 +319,7 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 	}
 	
 	private void moveObject(SWGObject obj, Location requestedLocation) {
+		Assert.notNull(requestedLocation.getTerrain());
 		awarenessHandler.moveObject(obj, requestedLocation);
 	}
 	

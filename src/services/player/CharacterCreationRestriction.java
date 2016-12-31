@@ -106,12 +106,10 @@ public class CharacterCreationRestriction {
 		
 		public boolean isAbleToCreate() {
 			synchronized (lastCreations) {
-				Log.d("CharacterCreationRestriction", "Size: %d  Period: %d", lastCreations.size(), creationsPerPeriod);
 				if (lastCreations.size() < creationsPerPeriod)
 					return true;
 				if (creationsPerPeriod == 0)
 					return true;
-				Log.d("CharacterCreationRestriction", "Last: %d  Within: %b", lastCreations.getLast(), isWithinPeriod(lastCreations.getLast().longValue()));
 				return !isWithinPeriod(lastCreations.getLast().longValue());
 			}
 		}
@@ -125,9 +123,8 @@ public class CharacterCreationRestriction {
 				final long time = now();
 				if (hackSuccess) {
 					final String state = Arrays.toString(lastCreations.toArray(new Long[lastCreations.size()]));
-					Log.e("CharacterCreationRestriction", "Character created when not allowed! Current time/state: %s/%s", time, state);
+					Log.e(this, "Character created when not allowed! Current time/state: %s/%s", time, state);
 				}
-				Log.d("CharacterCreationRestriction", "HitMax: %b  HackSuccess: %b", hitMax, hackSuccess);
 				if (hitMax)
 					lastCreations.pollLast();
 				lastCreations.addFirst(time);
