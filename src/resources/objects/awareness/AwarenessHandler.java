@@ -29,8 +29,10 @@ package resources.objects.awareness;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import resources.Location;
 import resources.Terrain;
+import resources.control.Assert;
 import resources.objects.SWGObject;
 import resources.objects.awareness.TerrainMap.TerrainMapCallback;
 import resources.server_info.Log;
@@ -102,12 +104,11 @@ public class AwarenessHandler {
 	
 	public void disappearObject(SWGObject obj, boolean disappearObjects, boolean disappearCustom) {
 		TerrainMap map = getTerrainMap(obj);
-		if (map != null) {
-			if (disappearObjects)
-				map.removeFromMap(obj);
-			else
-				map.removeWithoutUpdate(obj);
-		}
+		Assert.notNull(map);
+		if (disappearObjects)
+			map.removeFromMap(obj);
+		else
+			map.removeWithoutUpdate(obj);
 		if (disappearCustom)
 			obj.clearCustomAware(true);
 	}
