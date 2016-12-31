@@ -248,6 +248,8 @@ public class ConnectionService extends Service {
 	}
 	
 	private void disappear(Player p, boolean newConnection, DisconnectReason reason) {
+		if (p.getCreatureObject() == null)
+			return;
 		Log.i("ConnectionService", "Disappeared %s with character %s with reason %s", p.getUsername(), p.getCharacterName(), reason);
 		
 		if (newConnection) // Attempting to re-zone
