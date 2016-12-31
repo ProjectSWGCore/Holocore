@@ -48,17 +48,17 @@ public class Assert {
 	
 	public static void isNull(Object o) {
 		if (debug() && o != null)
-			handle(new AssertionError());
+			handle(new AssertionException());
 	}
 	
 	public static void test(boolean expr) {
 		if (debug() && !expr)
-			handle(new AssertionError());
+			handle(new AssertionException());
 	}
 	
 	public static void fail() {
 		if (debug())
-			handle(new AssertionError());
+			handle(new AssertionException());
 	}
 	
 	private static void handle(RuntimeException e) {
@@ -74,25 +74,22 @@ public class Assert {
 		}
 	}
 	
-	private static void handle(Error e) {
-		AssertLevel level = Assert.level;
-		switch (level) {
-			case WARN:
-				warn(e);
-				break;
-			case ASSERT:
-				throw e;
-			default:
-				break;
-		}
+	private static void warn(Exception e) {
+		StackTraceElement [] elements = e.getStackTrace();
+		if (elements.length <= 1)
+			Log.e("Assert", e);
+		else
+			Log.e(elements[elements.length-2].getClassName(), e);
 	}
 	
-	private static void warn(Throwable t) {
-		StackTraceElement [] elements = t.getStackTrace();
-		if (elements.length <= 1)
-			Log.e("Assert", t);
-		else
-			Log.e(elements[elements.length-2].getClassName(), t);
+	private static class AssertionException extends RuntimeException {
+		
+		private static final long serialVersionUID = 1L;
+		
+		public AssertionException() {
+			super("");
+		}
+		
 	}
 	
 	public enum AssertLevel {
