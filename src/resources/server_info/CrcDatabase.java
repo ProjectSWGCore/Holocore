@@ -63,7 +63,7 @@ public class CrcDatabase implements AutoCloseable {
 			insertCrcStatement.close();
 			getStringStatement.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		}
 		database.close();
 	}
@@ -77,7 +77,7 @@ public class CrcDatabase implements AutoCloseable {
 					}
 				}
 			} catch (SQLException e) {
-				e.printStackTrace();
+				Log.e(this, e);
 			}
 		}
 	}
@@ -96,7 +96,7 @@ public class CrcDatabase implements AutoCloseable {
 			try {
 				insertCrcStatement.executeBatch();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				Log.e(this, e);
 			}
 		}
 	}
@@ -129,7 +129,7 @@ public class CrcDatabase implements AutoCloseable {
 				else
 					insertCrcStatement.addBatch();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				Log.e(this, e);
 			}
 		}
 	}
@@ -143,7 +143,7 @@ public class CrcDatabase implements AutoCloseable {
 						return set.getString(1);
 				}
 			} catch (SQLException e) {
-				e.printStackTrace();
+				Log.e(this, e);
 			}
 		}
 		return null;

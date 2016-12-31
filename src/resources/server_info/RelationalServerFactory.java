@@ -73,7 +73,7 @@ public class RelationalServerFactory {
 				return true;
 			data.close();
 		} catch (Exception e) {
-			e.printStackTrace();
+			Log.e(this, e);
 			data.close();
 		}
 		return false;
@@ -92,7 +92,7 @@ public class RelationalServerFactory {
 					executeCommand(data, command);
 				return data;
 			} catch (Exception e) {
-				e.printStackTrace();
+				Log.e(this, e);
 			}
 			data.close();
 			return null;
@@ -127,7 +127,7 @@ public class RelationalServerFactory {
 			try (ResultSet set = data.executeQuery(command)) {
 				
 			} catch (SQLException e) {
-				e.printStackTrace();
+				Log.e(this, e);
 			}
 		} else {
 			data.updateQuery(command);

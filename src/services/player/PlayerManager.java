@@ -45,6 +45,7 @@ import resources.control.Manager;
 import resources.player.Player;
 import resources.player.PlayerEvent;
 import resources.player.PlayerState;
+import resources.server_info.Log;
 
 public class PlayerManager extends Manager {
 	
@@ -125,7 +126,7 @@ public class PlayerManager extends Manager {
 				id = result.getLong("id");
 			result.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		}
 		
 		return id;

@@ -53,6 +53,7 @@ import resources.objects.SWGObject;
 import resources.objects.player.PlayerObject;
 import resources.player.Player;
 import resources.player.PlayerState;
+import resources.server_info.Log;
 import resources.server_info.RelationalServerData;
 import resources.server_info.RelationalServerFactory;
 import services.CoreManager;
@@ -461,7 +462,7 @@ public class ChatManager extends Manager {
 				insertChatLog.executeUpdate();
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		}
 	}
 	

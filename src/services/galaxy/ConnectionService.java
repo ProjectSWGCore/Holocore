@@ -102,7 +102,7 @@ public class ConnectionService extends Service {
 		try {
 			success = updateService.awaitTermination(5, TimeUnit.SECONDS);
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		}
 		return super.terminate() && success;
 	}

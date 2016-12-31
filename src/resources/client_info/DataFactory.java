@@ -53,7 +53,7 @@ public abstract class DataFactory {
 		try {
 			swgFile.read(file);
 		} catch (IOException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		}
 
 		ClientData clientData = createDataObject(swgFile.getType());
@@ -75,7 +75,7 @@ public abstract class DataFactory {
 		try {
 			swgFile.save(save);
 		} catch (IOException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		}
 
 		return save;

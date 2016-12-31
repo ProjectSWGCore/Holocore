@@ -28,6 +28,7 @@
 package utilities.namegen;
 
 import resources.Race;
+import resources.server_info.Log;
 import resources.zone.NameFilter;
 
 import java.io.BufferedReader;
@@ -208,7 +209,7 @@ public class SWGNameGenerator {
 			
 			return (rule != null);
 		} catch (IOException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		}
 		
 		return (rule != null);
@@ -222,7 +223,7 @@ public class SWGNameGenerator {
 		try {
 			success = populateRule(rule, reader);
 		} catch (IOException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		}
 		
 		return (success ? rule : null);

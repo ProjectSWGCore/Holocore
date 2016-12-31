@@ -49,6 +49,7 @@ import resources.services.TestConfig;
 	TestQuadTree.class,
 	TestPersistable.class,
 	TestConfig.class,
+	TestPoint3D.class,
 	TestQuaternion.class,
 	TestLittleEndianDataOutputStream.class,
 	TestAwareness.class

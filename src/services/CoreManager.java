@@ -239,7 +239,7 @@ public class CoreManager extends Manager {
 			try {
 				return new PrintStream(new FileOutputStream("packets.txt", false), true, StandardCharsets.US_ASCII.name());
 			} catch (UnsupportedEncodingException | FileNotFoundException e) {
-				e.printStackTrace();
+				Log.e(this, e);
 				Log.e(this, e);
 			}
 		}

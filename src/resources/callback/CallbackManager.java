@@ -31,6 +31,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import resources.server_info.Log;
+
 public class CallbackManager<T> extends BaseCallbackManager {
 	
 	private final List<T> callbacks;
@@ -83,7 +85,7 @@ public class CallbackManager<T> extends BaseCallbackManager {
 					try {
 						call.run(callback);
 					} catch (Exception e) {
-						e.printStackTrace();
+						Log.e(this, e);
 					}
 				}
 				running.decrementAndGet();

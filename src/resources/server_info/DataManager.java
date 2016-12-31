@@ -87,7 +87,7 @@ public class DataManager implements IntentReceiver {
 				watcher.start();
 				watchers.add(watcher);
 			} catch (IOException e) {
-				e.printStackTrace();
+				Log.e(this, e);
 			}
 		}
 	}
@@ -103,13 +103,13 @@ public class DataManager implements IntentReceiver {
 					Log.e(getClass().getSimpleName(), "Failed to create parent directories for ODB: " + file.getCanonicalPath());
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		}
 		try {
 			if (!file.createNewFile())
 				Log.e(getClass().getSimpleName(), "Failed to create new ODB: " + file.getCanonicalPath());
 		} catch (IOException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		}
 		return file.exists();
 	}

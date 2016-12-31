@@ -41,6 +41,7 @@ import resources.config.ConfigFile;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.network.TCPServer;
+import resources.server_info.Log;
 import utilities.ThreadUtilities;
 
 public class OutboundNetworkManager extends Service {
@@ -83,7 +84,7 @@ public class OutboundNetworkManager extends Service {
 		try {
 			outboundProcessor.awaitTermination(3, TimeUnit.SECONDS);
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		}
 		return super.terminate();
 	}
@@ -122,7 +123,7 @@ public class OutboundNetworkManager extends Service {
 						if (outboundQueue.isEmpty())
 							outboundQueue.wait();
 					} catch (InterruptedException e) {
-						e.printStackTrace();
+						Log.e(this, e);
 					}
 					client = outboundQueue.pollFirst();
 				}
@@ -131,7 +132,7 @@ public class OutboundNetworkManager extends Service {
 				client.processOutbound();
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		}
 	}
 	

@@ -112,7 +112,7 @@ public class TCPServer {
 					callbackExecutor.execute(() -> callback.onConnectionDisconnect(s, sock));
 				return true;
 			} catch (IOException e) {
-				e.printStackTrace();
+				Log.e(this, e);
 				return false;
 			}
 		}
@@ -134,7 +134,7 @@ public class TCPServer {
 				channel.close();
 			return true;
 		} catch (IOException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		}
 		return false;
 	}
@@ -198,7 +198,7 @@ public class TCPServer {
 						selector.select();
 						processSelectionKeys(selector);
 					} catch (Exception e) {
-						e.printStackTrace();
+						Log.e(this, e);
 						try {
 							Thread.sleep(100);
 						} catch (InterruptedException e1) {
@@ -207,7 +207,7 @@ public class TCPServer {
 					}
 				}
 			} catch (IOException e) {
-				e.printStackTrace();
+				Log.e(this, e);
 			}
 		}
 		

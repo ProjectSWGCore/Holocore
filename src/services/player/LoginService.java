@@ -167,7 +167,7 @@ public class LoginService extends Service {
 						onInvalidUserPass(player, id, null);
 				}
 			} catch (SQLException e) {
-				e.printStackTrace();
+				Log.e(this, e);
 				onLoginServerError(player, id);
 			}
 		}
@@ -320,7 +320,7 @@ public class LoginService extends Service {
 				deleteCharacter.setLong(1, obj.getObjectId());
 				return deleteCharacter.executeUpdate() > 0;
 			} catch (SQLException e) {
-				e.printStackTrace();
+				Log.e(this, e);
 			}
 			return false;
 		}

@@ -27,6 +27,8 @@
 ***********************************************************************************/
 package resources.control;
 
+import resources.server_info.Log;
+
 public class Assert {
 	
 	private static volatile AssertLevel level = AssertLevel.ASSERT;
@@ -44,6 +46,11 @@ public class Assert {
 			handle(new NullPointerException());
 	}
 	
+	public static void isNull(Object o) {
+		if (debug() && o != null)
+			handle(new AssertionError());
+	}
+	
 	public static void test(boolean expr) {
 		if (debug() && !expr)
 			handle(new AssertionError());
@@ -58,7 +65,7 @@ public class Assert {
 		AssertLevel level = Assert.level;
 		switch (level) {
 			case WARN:
-				e.printStackTrace();
+				warn(e);
 				break;
 			case ASSERT:
 				throw e;
@@ -71,13 +78,21 @@ public class Assert {
 		AssertLevel level = Assert.level;
 		switch (level) {
 			case WARN:
-				e.printStackTrace();
+				warn(e);
 				break;
 			case ASSERT:
 				throw e;
 			default:
 				break;
 		}
+	}
+	
+	private static void warn(Throwable t) {
+		StackTraceElement [] elements = t.getStackTrace();
+		if (elements.length <= 1)
+			Log.e("Assert", t);
+		else
+			Log.e(elements[elements.length-2].getClassName(), t);
 	}
 	
 	public enum AssertLevel {

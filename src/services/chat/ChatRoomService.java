@@ -868,7 +868,7 @@ public class ChatRoomService extends Service {
 				insertChatLog.executeUpdate();
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		}
 	}
 

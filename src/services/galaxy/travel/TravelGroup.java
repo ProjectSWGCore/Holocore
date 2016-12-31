@@ -39,6 +39,7 @@ import resources.Posture;
 import resources.Terrain;
 import resources.TravelPoint;
 import resources.objects.creature.CreatureObject;
+import resources.server_info.Log;
 
 public class TravelGroup implements Runnable {
 	
@@ -161,7 +162,7 @@ public class TravelGroup implements Runnable {
 		} catch (InterruptedException e) {
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		}
 	}
 	

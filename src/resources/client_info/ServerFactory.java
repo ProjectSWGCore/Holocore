@@ -159,7 +159,7 @@ public final class ServerFactory extends DataFactory {
 			}
 
 		} catch (IOException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		}
 
 		data.setColumnNames(columnNames);
@@ -190,7 +190,7 @@ public final class ServerFactory extends DataFactory {
 				}
 			} catch (NumberFormatException e) {
 				Log.e("ServerFactory:createDatableRow", "Cannot format string %s to a number", val);
-				e.printStackTrace();
+				Log.e(this, e);
 			}
 
 		}

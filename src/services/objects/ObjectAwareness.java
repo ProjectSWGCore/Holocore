@@ -52,6 +52,7 @@ import resources.Location;
 import resources.Race;
 import resources.Terrain;
 import resources.config.ConfigFile;
+import resources.control.Assert;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.SWGObject;
@@ -139,11 +140,19 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 	
 	@Override
 	public void onWithinRange(SWGObject obj, SWGObject inRange) {
+		Assert.notNull(obj);
+		Assert.notNull(inRange);
+		Assert.isNull(obj.getParent());
+		Assert.isNull(inRange.getParent());
+		Assert.notNull(obj.getTerrain());
+		Assert.notNull(inRange.getTerrain());
 		obj.addObjectAware(inRange);
 	}
 	
 	@Override
 	public void onOutOfRange(SWGObject obj, SWGObject outRange) {
+		Assert.notNull(obj);
+		Assert.notNull(outRange);
 		obj.removeObjectAware(outRange);
 	}
 	
@@ -154,19 +163,20 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 	
 	@Override
 	public void onMoveFailure(SWGObject obj) {
+		Assert.notNull(obj);
 		obj.clearObjectsAware();
 	}
 
 	private void handlePlayerEventIntent(PlayerEventIntent pei) {
 		Player p = pei.getPlayer();
 		CreatureObject creature = p.getCreatureObject();
-		if (creature == null)
-			return;
 		switch (pei.getEvent()) {
 			case PE_DISAPPEAR:
+				Assert.notNull(creature);
 				disappearObject(creature, true, true);
 				break;
 			case PE_DESTROYED:
+				Assert.notNull(creature);
 				creature.setOwner(null);
 				break;
 			default:
@@ -208,20 +218,18 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 		if (packet instanceof DataTransform) {
 			DataTransform trans = (DataTransform) packet;
 			SWGObject obj = i.getObjectManager().getObjectById(trans.getObjectId());
-			if (obj instanceof CreatureObject) {
-				Location requestedLocation = new Location(trans.getLocation());
-				requestedLocation.setTerrain(obj.getTerrain());
-				moveObjectWithTransform(obj, requestedLocation, trans.getSpeed(), trans.getUpdateCounter());
-			}
+			Assert.test(obj instanceof CreatureObject);
+			Location requestedLocation = new Location(trans.getLocation());
+			requestedLocation.setTerrain(obj.getTerrain());
+			moveObjectWithTransform(obj, requestedLocation, trans.getSpeed(), trans.getUpdateCounter());
 		} else if (packet instanceof DataTransformWithParent) {
 			DataTransformWithParent trans = (DataTransformWithParent) packet;
 			SWGObject obj = i.getObjectManager().getObjectById(trans.getObjectId());
 			SWGObject parent = i.getObjectManager().getObjectById(trans.getCellId());
-			if (obj instanceof CreatureObject) {
-				Location requestedLocation = new Location(trans.getLocation());
-				requestedLocation.setTerrain(obj.getTerrain());
-				moveObjectWithTransform(obj, parent, requestedLocation, trans.getSpeed(), trans.getUpdateCounter());
-			}
+			Assert.test(obj instanceof CreatureObject);
+			Location requestedLocation = new Location(trans.getLocation());
+			requestedLocation.setTerrain(obj.getTerrain());
+			moveObjectWithTransform(obj, parent, requestedLocation, trans.getSpeed(), trans.getUpdateCounter());
 		} else if (packet instanceof CmdSceneReady) {
 			handleCmdSceneReady(i.getPlayerManager().getPlayerFromNetworkId(i.getNetworkId()), (CmdSceneReady) packet);
 		}
@@ -240,6 +248,8 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 	}
 	
 	private void processContainerTransferIntent(ContainerTransferIntent i) {
+		Assert.notNull(i.getObject());
+		Assert.notNull(i.getObject().getTerrain());
 		if (i.getContainer() == null)
 			moveObject(i.getObject(), i.getObject().getLocation());
 		else
@@ -248,11 +258,13 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 	
 	private void handleZoneIn(CreatureObject creature, Player player, boolean firstZone) {
 		creature.setOwner(player);
+		Assert.test(player.getPlayerState() == PlayerState.LOGGED_IN);
 		player.setPlayerState(PlayerState.ZONING_IN);
 		Log.i(this, "Zoning in %s with character %s", player.getUsername(), player.getCharacterName());
 		if (firstZone)
 			startFirstZone(creature, player);
 		startZone(creature, player);
+		Assert.notNull(creature.getTerrain());
 	}
 	
 	private void startFirstZone(CreatureObject creature, Player player) {
@@ -288,6 +300,7 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 	}
 	
 	private void handleCmdSceneReady(Player player, CmdSceneReady p) {
+		Assert.test(player.getPlayerState() == PlayerState.ZONING_IN);
 		player.setPlayerState(PlayerState.ZONED_IN);
 		Log.i("ZoneService", "%s with character %s zoned in from %s:%d", player.getUsername(), player.getCharacterName(), p.getAddress(), p.getPort());
 		new PlayerEventIntent(player, PlayerEvent.PE_ZONE_IN_SERVER).broadcast();

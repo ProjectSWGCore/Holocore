@@ -230,7 +230,7 @@ public class HttpSocket implements Closeable {
 				return null;
 			return new String(data, 0, read);
 		} catch (IOException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		}
 		return null;
 	}
@@ -268,7 +268,7 @@ public class HttpSocket implements Closeable {
 		try {
 			return new BufferedReader(new InputStreamReader(socket.getInputStream(), ASCII));
 		} catch (IOException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 			return null;
 		}
 	}
@@ -277,7 +277,7 @@ public class HttpSocket implements Closeable {
 		try {
 			return new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(), ASCII));
 		} catch (IOException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 			return null;
 		}
 	}
@@ -286,7 +286,7 @@ public class HttpSocket implements Closeable {
 		try {
 			return socket.getOutputStream();
 		} catch (IOException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 			return null;
 		}
 	}

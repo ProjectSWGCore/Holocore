@@ -35,14 +35,15 @@ import java.util.Map.Entry;
 
 import intents.GrantBadgeIntent;
 import intents.player.PlayerTransformedIntent;
-import java.util.Locale;
 
+import java.util.Locale;
 import java.util.TreeMap;
 
 import resources.Point3D;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.creature.CreatureObject;
+import resources.server_info.Log;
 import resources.server_info.RelationalServerData;
 import resources.server_info.RelationalServerFactory;
 
@@ -100,7 +101,7 @@ public class ExplorationBadgeService extends Service {
 					explorationLocations.get(planet).put(badgeName, new ExplorationRegion(new Point3D(x, 0, y), range));
 				}
 			}catch (SQLException e) {
-				e.printStackTrace();
+				Log.e(this, e);
 			}			
 		}
 	}	

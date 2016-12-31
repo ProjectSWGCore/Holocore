@@ -30,6 +30,7 @@ package services.network;
 import java.util.ArrayDeque;
 import java.util.Queue;
 
+import resources.server_info.Log;
 import network.packets.Packet;
 import network.packets.swg.ErrorMessage;
 import network.packets.swg.holo.HoloConnectionStarted;
@@ -126,7 +127,7 @@ public class HolocoreSessionManager {
 			if (callback != null)
 				callback.onSessionStatusChanged(oldStatus, newStatus);
 		} catch (Exception e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		}
 	}
 	

@@ -76,7 +76,7 @@ public class GotoCmdCallback implements ICmdCallback  {
 				Terrain t = Terrain.getTerrainFromName(set.getString("terrain_name"));
 				return teleportToGoto(objManager, obj, set.getLong("object_id"), cell, new Location(0, 0, 0, t));
 			} catch (SQLException e) {
-				e.printStackTrace();
+				Log.e(this, e);
 				return "Exception thrown. Failed to teleport: ["+e.getErrorCode()+"] " + e.getMessage();
 			}
 		}

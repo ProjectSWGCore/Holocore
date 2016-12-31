@@ -154,7 +154,7 @@ public class ZoneManager extends Manager {
 						commitHistory += "\n";
 				}
 			} catch (GitAPIException e) {
-				e.printStackTrace();
+				Log.e(this, e);
 			}
 		} catch (IOException e) {
 			Log.e(this, "Failed to open %s to read commit history", repoDir);

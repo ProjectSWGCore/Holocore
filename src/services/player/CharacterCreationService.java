@@ -151,14 +151,14 @@ public class CharacterCreationService extends Service {
 				}
 				return false;
 			} catch (SQLException e) {
-				e.printStackTrace();
+				Log.e(this, e);
 				return false;
 			} finally {
 				try {
 					if (set != null)
 						set.close();
 				} catch (SQLException e) {
-					e.printStackTrace();
+					Log.e(this, e);
 				}
 			}
 		}
@@ -260,7 +260,7 @@ public class CharacterCreationService extends Service {
 				createCharacter.setInt(4, player.getUserId());
 				return createCharacter.executeUpdate() == 1;
 			} catch (SQLException e) {
-				e.printStackTrace();
+				Log.e(this, e);
 				return false;
 			}
 		}
@@ -275,7 +275,7 @@ public class CharacterCreationService extends Service {
 						return set.getInt("count");
 				}
 			} catch (SQLException e) {
-				e.printStackTrace();
+				Log.e(this, e);
 			}
 		}
 		return 0;

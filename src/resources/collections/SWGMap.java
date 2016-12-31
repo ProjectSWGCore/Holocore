@@ -151,7 +151,7 @@ public class SWGMap<K, V> extends SynchronizedMap<K, V> implements Encodable {
 				put((K) buffer.getString(keyType), (V) buffer.getString(valType));
 			}
 		} catch (ClassCastException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		}
 		clearDeltaQueue();
 	}
@@ -173,7 +173,7 @@ public class SWGMap<K, V> extends SynchronizedMap<K, V> implements Encodable {
 					Log.e("SWGMap", "Unable to parse: key=%s  value=%s", key, value);
 			}
 		} catch (ClassCastException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		}
 		clearDeltaQueue();
 	}

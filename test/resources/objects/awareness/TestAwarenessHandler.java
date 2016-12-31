@@ -29,6 +29,7 @@ package resources.objects.awareness;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -40,6 +41,7 @@ import resources.Terrain;
 import resources.objects.SWGObject;
 import resources.objects.building.BuildingObject;
 import resources.objects.creature.CreatureObject;
+import resources.server_info.Log;
 import services.objects.ClientBuildoutService;
 
 @RunWith(JUnit4.class)
@@ -138,6 +140,8 @@ public class TestAwarenessHandler {
 		callback.testAssert(WITHIN_RANGE.size(), 0, 1, 0);
 		callback.set(0, 0, 0, 0);
 		awareness.moveObject(creature, starport.getCellByNumber(1), new Location(0, 0, 0, Terrain.TATOOINE));
+		awaitCallbacks(awareness, 1000);
+		callback.testAssert(0, 0, 0, 0);
 		awareness.moveObject(CREATURE2, CREATURE2_LOCATION);
 		awaitCallbacks(awareness, 1000);
 		callback.testAssert(0, 0, 1, 0);
@@ -159,7 +163,7 @@ public class TestAwarenessHandler {
 				timeout--;
 			}
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		}
 	}
 	

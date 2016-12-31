@@ -41,6 +41,7 @@ import resources.client_info.ClientFactory;
 import resources.client_info.visitors.CrcStringTableData;
 import resources.client_info.visitors.DatatableData;
 import resources.server_info.CrcDatabase;
+import resources.server_info.Log;
 
 public class CrcDatabaseGenerator {
 	
@@ -95,7 +96,7 @@ public class CrcDatabaseGenerator {
 				}
 			});
 		} catch (IOException e) {
-			e.printStackTrace();
+			Log.e("CrcDatabaseGenerator", e);
 		}
 	}
 	

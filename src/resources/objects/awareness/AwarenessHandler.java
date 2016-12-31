@@ -95,9 +95,9 @@ public class AwarenessHandler {
 		// Update location
 		obj.setLocation(requestedLocation);
 		// Update awareness
-		obj.resetAwareness();
 		if (obj.getParent() != parent)
 			obj.moveToContainer(parent);
+		obj.resetAwareness();
 	}
 	
 	public void disappearObject(SWGObject obj, boolean disappearObjects, boolean disappearCustom) {
