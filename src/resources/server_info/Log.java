@@ -158,7 +158,7 @@ public class Log {
 	 * @param args the string format arguments, if specified
 	 */
 	public static final void v(Object tag, String message, Object ... args) {
-		log(LogLevel.VERBOSE, tag.getClass().getSimpleName(), message, args);
+		log(LogLevel.VERBOSE, toString(tag), message, args);
 	}
 	
 	/**
@@ -180,29 +180,7 @@ public class Log {
 	 * @param args the string format arguments, if specified
 	 */
 	public static final void d(Object tag, String message, Object ... args) {
-		log(LogLevel.DEBUG, tag.getClass().getSimpleName(), message, args);
-	}
-	
-	/**
-	 * Logs a stack trace to the server log file, formatted to display the log
-	 * severity as DEBUG as well as a custom tag
-	 * @param tag the object requesting this stack trace
-	 */
-	public static final void printStackTrace(Object tag) {
-		printStackTrace(tag.getClass().getSimpleName());
-	}
-	
-	/**
-	 * Logs a stack trace to the server log file, formatted to display the log
-	 * severity as DEBUG as well as a custom tag
-	 * @param tag the tag to use for the log
-	 */
-	public static final void printStackTrace(String tag) {
-		log(LogLevel.DEBUG, tag, "Stack Trace");
-		StackTraceElement [] elements = Thread.currentThread().getStackTrace();
-		for (int i = 2; i < elements.length; i++) {
-			log(LogLevel.DEBUG, tag, "    " + elements[i].toString());
-		}
+		log(LogLevel.DEBUG, toString(tag), message, args);
 	}
 	
 	/**
@@ -224,7 +202,7 @@ public class Log {
 	 * @param args the string format arguments, if specified
 	 */
 	public static final void i(Object tag, String message, Object ... args) {
-		log(LogLevel.INFO, tag.getClass().getSimpleName(), message, args);
+		log(LogLevel.INFO, toString(tag), message, args);
 	}
 	
 	/**
@@ -246,7 +224,7 @@ public class Log {
 	 * @param args the string format arguments, if specified
 	 */
 	public static final void w(Object tag, String message, Object ... args) {
-		log(LogLevel.WARN, tag.getClass().getSimpleName(), message, args);
+		log(LogLevel.WARN, toString(tag), message, args);
 	}
 	
 	/**
@@ -266,7 +244,7 @@ public class Log {
 	 * @param exception the exception to print
 	 */
 	public static final void w(Object tag, Throwable exception) {
-		printException(LogLevel.WARN, tag.getClass().getSimpleName(), exception);
+		printException(LogLevel.WARN, toString(tag), exception);
 	}
 	
 	/**
@@ -288,7 +266,7 @@ public class Log {
 	 * @param args the string format arguments, if specified
 	 */
 	public static final void e(Object tag, String message, Object ... args) {
-		log(LogLevel.ERROR, tag.getClass().getSimpleName(), message, args);
+		log(LogLevel.ERROR, toString(tag), message, args);
 	}
 	
 	/**
@@ -308,7 +286,7 @@ public class Log {
 	 * @param exception the exception to print
 	 */
 	public static final void e(Object tag, Throwable exception) {
-		printException(LogLevel.ERROR, tag.getClass().getSimpleName(), exception);
+		printException(LogLevel.ERROR, toString(tag), exception);
 	}
 	
 	/**
@@ -330,7 +308,7 @@ public class Log {
 	 * @param args the string format arguments, if specified
 	 */
 	public static final void a(Object tag, String message, Object ... args) {
-		log(LogLevel.ASSERT, tag.getClass().getSimpleName(), message, args);
+		log(LogLevel.ASSERT, toString(tag), message, args);
 	}
 	
 	/**
@@ -350,7 +328,7 @@ public class Log {
 	 * @param exception the exception to print
 	 */
 	public static final void a(Object tag, Throwable exception) {
-		printException(LogLevel.ASSERT, tag.getClass().getSimpleName(), exception);
+		printException(LogLevel.ASSERT, toString(tag), exception);
 	}
 	
 	private static final void printException(LogLevel level, String tag, Throwable exception) {
@@ -361,6 +339,10 @@ public class Log {
 				log(level, tag, "    " + e.toString());
 			}
 		}
+	}
+	
+	private static final String toString(Object o) {
+		return o.getClass().getName();
 	}
 	
 	public static enum LogLevel {
