@@ -51,6 +51,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import resources.control.Assert;
 import resources.objects.group.LootRule;
 import services.CoreManager;
 import utilities.ThreadUtilities;
@@ -358,7 +359,7 @@ public class GroupService extends Service {
 		// Group doesn't exist yet
 		if (senderGroupId == 0) {
 
-			group = createGroup(sender);
+			group = createGroup(sender, player);
 
 			if (group == null) {
 				Log.e("GroupService", "Failed to create group from sender %s for %s", sender, player);
@@ -483,12 +484,11 @@ public class GroupService extends Service {
 		// TODO: Object destroy intent
 	}
 
-	private GroupObject createGroup(Player player) {
+	private GroupObject createGroup(Player leader, Player member) {
 		GroupObject group = (GroupObject) ObjectCreator.createObjectFromTemplate("object/group/shared_group_object.iff");
-		if (group == null)
-			return null;
-
-		group.setLeader(player.getCreatureObject());
+		
+		Assert.notNull(group);
+		group.formGroup(leader.getCreatureObject(), member.getCreatureObject());
 		
 		synchronized (groups) {
 			groups.put(group.getObjectId(), group);
@@ -497,7 +497,7 @@ public class GroupService extends Service {
 		new ObjectCreatedIntent(group).broadcast();
 
 		String galaxy = CoreManager.getGalaxy().getName();
-		new ChatRoomUpdateIntent(ChatAvatar.getFromPlayer(player), getGroupChatPath(group.getObjectId(), galaxy), String.valueOf(group.getObjectId()), false).broadcast();
+		new ChatRoomUpdateIntent(ChatAvatar.getFromPlayer(leader), getGroupChatPath(group.getObjectId(), galaxy), String.valueOf(group.getObjectId()), false).broadcast();
 
 		return group;
 	}
