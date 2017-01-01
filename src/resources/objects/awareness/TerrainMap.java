@@ -99,6 +99,10 @@ public class TerrainMap {
 	}
 	
 	public void removeFromMap(SWGObject obj) {
+		if (obj.getParent() != null )
+			// Objects with parents aren't in awareness
+			return;
+		
 		if (remove(obj)) {
 			update(obj);
 		} else {
