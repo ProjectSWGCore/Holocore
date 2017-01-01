@@ -31,7 +31,6 @@ import intents.PlayerEventIntent;
 import intents.network.CloseConnectionIntent;
 import intents.network.ForceDisconnectIntent;
 import intents.network.GalacticPacketIntent;
-import intents.player.ZonePlayerSwapIntent;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -87,7 +86,6 @@ public class ConnectionService extends Service {
 		registerForIntent(PlayerEventIntent.TYPE);
 		registerForIntent(GalacticPacketIntent.TYPE);
 		registerForIntent(ForceDisconnectIntent.TYPE);
-		registerForIntent(ZonePlayerSwapIntent.TYPE);
 	}
 	
 	@Override
@@ -115,8 +113,6 @@ public class ConnectionService extends Service {
 			onGalacticPacketIntent((GalacticPacketIntent) i);
 		else if (i instanceof ForceDisconnectIntent)
 			onForceDisconnectIntent((ForceDisconnectIntent) i);
-		else if (i instanceof ZonePlayerSwapIntent)
-			onZonePlayerSwapIntent((ZonePlayerSwapIntent) i);
 	}
 	
 	private void onPlayerEventIntent(PlayerEventIntent pei) {
@@ -168,20 +164,6 @@ public class ConnectionService extends Service {
 		disconnect(fdi.getPlayer(), fdi.getDisconnectReason());
 		if (fdi.getDisappearImmediately())
 			disappear(fdi.getPlayer(), fdi.getDisappearImmediately(), fdi.getDisconnectReason());
-	}
-	
-	private void onZonePlayerSwapIntent(ZonePlayerSwapIntent zpsi) {
-		Player before = zpsi.getBeforePlayer();
-		Player after = zpsi.getAfterPlayer();
-		CreatureObject creature = zpsi.getCreature();
-		removeFromLists(before);
-		updatePlayTime(before);
-		Log.i("ConnectionService", "Logged out %s with character %s", before.getUsername(), before.getCharacterName());
-		new PlayerEventIntent(before, PlayerEvent.PE_LOGGED_OUT).broadcast();
-		Log.i("ConnectionService", "Disconnected %s with character %s and reason: %s", before.getUsername(), before.getCharacterName(), DisconnectReason.NEW_CONNECTION_ATTEMPT);
-		new CloseConnectionIntent(before.getNetworkId(), DisconnectReason.NEW_CONNECTION_ATTEMPT).broadcast();
-		before.setPlayerState(PlayerState.DISCONNECTED);
-		creature.setOwner(after);
 	}
 	
 	private void removeFromLists(Player player) {
