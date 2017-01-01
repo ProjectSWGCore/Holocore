@@ -60,6 +60,7 @@ import resources.Galaxy;
 import resources.Race;
 import resources.common.BCrypt;
 import resources.config.ConfigFile;
+import resources.control.Assert;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.SWGObject;
@@ -142,10 +143,8 @@ public class LoginService extends Service {
 	}
 	
 	private void handleLogin(Player player, LoginClientId id) {
-		if (player.getPlayerState() != PlayerState.CONNECTED && player.getPlayerState() != PlayerState.LOGGED_IN) {
-			Log.w(this, "Player cannot login when " + player.getPlayerState());
-			return;
-		}
+		Assert.notNull(player);
+		Assert.test(player.getPlayerState() == PlayerState.CONNECTED);
 		player.setPlayerState(PlayerState.LOGGING_IN);
 		player.setPlayerServer(PlayerServer.LOGIN);
 		final boolean doClientCheck = getConfig(ConfigFile.NETWORK).getBoolean("LOGIN-VERSION-CHECKS", true);
