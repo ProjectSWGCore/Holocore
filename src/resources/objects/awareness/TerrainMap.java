@@ -35,6 +35,7 @@ import java.util.Set;
 import resources.Location;
 import resources.Terrain;
 import resources.callback.CallbackManager;
+import resources.control.Assert;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.waypoint.WaypointObject;
@@ -100,6 +101,7 @@ public class TerrainMap {
 	public void removeFromMap(SWGObject obj) {
 		if (remove(obj)) {
 			update(obj);
+			Assert.test(isInAwareness(obj));
 		}
 	}
 	
