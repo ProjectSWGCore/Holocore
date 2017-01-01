@@ -28,7 +28,6 @@
 package resources.player;
 
 import intents.network.OutboundPacketIntent;
-import java.util.concurrent.atomic.AtomicReference;
 import network.packets.Packet;
 import resources.control.Service;
 import resources.objects.SWGObject;
@@ -43,7 +42,7 @@ public class Player implements Comparable<Player> {
 	private Service playerManager;
 	
 	private long networkId;
-	private AtomicReference<PlayerState> state		= new AtomicReference<>(PlayerState.DISCONNECTED);
+	private volatile PlayerState state		= PlayerState.DISCONNECTED;
 	
 	private String username			= "";
 	private int userId				= 0;
@@ -79,7 +78,7 @@ public class Player implements Comparable<Player> {
 	}
 	
 	public void setPlayerState(PlayerState state) {
-		this.state.set(state);
+		this.state = state;
 	}
 	
 	public void setPlayerServer(PlayerServer server) {
@@ -127,7 +126,7 @@ public class Player implements Comparable<Player> {
 	}
 	
 	public PlayerState getPlayerState() {
-		return state.get();
+		return state;
 	}
 	
 	public PlayerServer getPlayerServer() {

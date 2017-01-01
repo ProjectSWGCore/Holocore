@@ -28,8 +28,6 @@
 package services.network;
 
 import intents.network.CloseConnectionIntent;
-import intents.network.ConnectionClosedIntent;
-import intents.network.ConnectionOpenedIntent;
 
 import java.io.IOException;
 import java.net.BindException;
@@ -154,9 +152,9 @@ public class NetworkClientManager extends Manager implements TCPCallback {
 	
 	private void onSessionConnect(InetSocketAddress addr) {
 		NetworkClient client = clientManager.createSession(addr);
+		client.onConnected();
 		inboundManager.onSessionCreated(client);
 		outboundManager.onSessionCreated(client);
-		new ConnectionOpenedIntent(client.getNetworkId()).broadcast();
 	}
 	
 	private void onInboundData(InetSocketAddress addr, byte [] data) {
@@ -170,9 +168,9 @@ public class NetworkClientManager extends Manager implements TCPCallback {
 			client.onSessionDestroyed();
 			inboundManager.onSessionDestroyed(client);
 			outboundManager.onSessionDestroyed(client);
+			client.onDisconnected(reason);
 		}
 		tcpServer.disconnect(addr);
-		new ConnectionClosedIntent(client.getNetworkId(), reason).broadcast();
 	}
 	
 }
