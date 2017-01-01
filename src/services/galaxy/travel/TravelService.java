@@ -412,7 +412,6 @@ public class TravelService extends Service {
 	private void grantTicket(TravelPoint departure, TravelPoint destination, SWGObject receiver) {
 		// Create the ticket object
 		SWGObject ticket = ObjectCreator.createObjectFromTemplate("object/tangible/travel/travel_ticket/base/shared_base_travel_ticket.iff");
-		new ObjectCreatedIntent(ticket).broadcast();
 		
 		// Departure attributes
 		ticket.addAttribute("@obj_attr_n:travel_departure_planet", "@planet_n:" + departure.getLocation().getTerrain().getName());
@@ -423,6 +422,7 @@ public class TravelService extends Service {
 		ticket.addAttribute("@obj_attr_n:travel_arrival_point", destination.getName());
 		
 		ticket.moveToContainer(receiver.getSlottedObject("inventory"));
+		new ObjectCreatedIntent(ticket).broadcast();
 	}
 	
 	private void handleTicketUse(TicketUseIntent i) {
