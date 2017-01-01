@@ -35,6 +35,7 @@ import java.util.Set;
 import resources.Location;
 import resources.Terrain;
 import resources.callback.CallbackManager;
+import resources.control.Assert;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.waypoint.WaypointObject;
@@ -100,6 +101,8 @@ public class TerrainMap {
 	public void removeFromMap(SWGObject obj) {
 		if (remove(obj)) {
 			update(obj);
+		} else {
+			Assert.fail();
 		}
 	}
 	
@@ -136,6 +139,8 @@ public class TerrainMap {
 	
 	private Set<SWGObject> getNearbyAware(SWGObject obj) {
 		Set<SWGObject> aware = new HashSet<>();
+		if (objectChunk.get(obj.getObjectId()) == null)
+			return aware;
 		int startX = Math.max(calculateIndex(obj.getX()) - 1, 0);
 		int startZ = Math.max(calculateIndex(obj.getZ()) - 1, 0);
 		int endX = Math.min(startX+3, CHUNK_COUNT_ACROSS);

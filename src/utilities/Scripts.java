@@ -57,7 +57,7 @@ public class Scripts {
 			ENGINE.eval("var SuiButtons = Java.type('resources.sui.SuiButtons')");
 			ENGINE.eval("var SuiEvent = Java.type('resources.sui.SuiEvent')");
 		} catch (ScriptException e) {
-			e.printStackTrace();
+			Log.e("Scripts", e);
 		}
 	}
 	

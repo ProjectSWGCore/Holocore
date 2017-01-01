@@ -142,9 +142,9 @@ public class IntentManager {
 	private void broadcast(IntentReceiver r, Intent i) {
 		try {
 			r.onIntentReceived(i);
-		} catch (Exception e) {
+		} catch (Throwable t) {
 			Log.e("IntentManager", "Fatal Exception while processing intent: " + i);
-			Log.e("IntentManager", e);
+			Log.e("IntentManager", t);
 		}
 	}
 	

@@ -111,7 +111,7 @@ public class BuildingObject extends TangibleObject {
 			cell.setNumber(i+1);
 			cell.setLocation(new Location(0, 0, 0, getTerrain()));
 			populateCellData(cell, portalLayoutData.getCells().get(i+1));
-			super.addObject(cell);
+			cell.moveToContainer(this);
 			new ObjectCreatedIntent(cell).broadcast();
 		}
 	}

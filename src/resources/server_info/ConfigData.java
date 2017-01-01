@@ -91,7 +91,7 @@ class ConfigData {
 					line = reader.readLine();
 				}
 			} catch (IOException e) {
-				e.printStackTrace();
+				Log.e(this, e);
 				return null;
 			} finally {
 				if (reader != null) {
@@ -122,7 +122,7 @@ class ConfigData {
 				}
 				return true;
 			} catch (IOException e) {
-				e.printStackTrace();
+				Log.e(this, e);
 				return false;
 			} finally {
 				if (writer != null) {

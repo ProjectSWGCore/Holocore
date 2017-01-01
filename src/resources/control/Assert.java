@@ -27,6 +27,8 @@
 ***********************************************************************************/
 package resources.control;
 
+import resources.server_info.Log;
+
 public class Assert {
 	
 	private static volatile AssertLevel level = AssertLevel.ASSERT;
@@ -44,21 +46,26 @@ public class Assert {
 			handle(new NullPointerException());
 	}
 	
+	public static void isNull(Object o) {
+		if (debug() && o != null)
+			handle(new AssertionException());
+	}
+	
 	public static void test(boolean expr) {
 		if (debug() && !expr)
-			handle(new AssertionError());
+			handle(new AssertionException());
 	}
 	
 	public static void fail() {
 		if (debug())
-			handle(new AssertionError());
+			handle(new AssertionException());
 	}
 	
 	private static void handle(RuntimeException e) {
 		AssertLevel level = Assert.level;
 		switch (level) {
 			case WARN:
-				e.printStackTrace();
+				warn(e);
 				break;
 			case ASSERT:
 				throw e;
@@ -67,17 +74,22 @@ public class Assert {
 		}
 	}
 	
-	private static void handle(Error e) {
-		AssertLevel level = Assert.level;
-		switch (level) {
-			case WARN:
-				e.printStackTrace();
-				break;
-			case ASSERT:
-				throw e;
-			default:
-				break;
+	private static void warn(Exception e) {
+		StackTraceElement [] elements = e.getStackTrace();
+		if (elements.length <= 1)
+			Log.e("Assert", e);
+		else
+			Log.e(elements[elements.length-2].getClassName(), e);
+	}
+	
+	private static class AssertionException extends RuntimeException {
+		
+		private static final long serialVersionUID = 1L;
+		
+		public AssertionException() {
+			super("");
 		}
+		
 	}
 	
 	public enum AssertLevel {

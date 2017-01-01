@@ -79,7 +79,7 @@ public class HttpServer {
 			serverSocket = createSocket();
 			startAcceptThread(serverSocket, secure);
 		} catch (IOException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		}
 	}
 	
@@ -96,7 +96,7 @@ public class HttpServer {
 			try {
 				executor.awaitTermination(1, TimeUnit.SECONDS);
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				Log.e(this, e);
 			}
 		}
 	}
@@ -145,7 +145,7 @@ public class HttpServer {
 			try {
 				socket.close();
 			} catch (IOException e) {
-				e.printStackTrace();
+				Log.e(this, e);
 			}
 			synchronized (currentConnections) {
 				currentConnections.decrementAndGet();
@@ -177,7 +177,7 @@ public class HttpServer {
 			} catch (SocketException e) {
 				if (serverSocket.isClosed())
 					break;
-				e.printStackTrace();
+				Log.e(this, e);
 			} catch (Throwable t) {
 				t.printStackTrace();
 			}

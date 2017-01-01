@@ -12,16 +12,16 @@
  * -------------------------------------------------------------------------------- *
  *                                                                                  *
  * Holocore is free software: you can redistribute it and/or modify                 *
- * it under the terms of the GNU Affero General Public License as                   *
+ * it under the terms of the GNU Affero General public synchronized License as                   *
  * published by the Free Software Foundation, either version 3 of the               *
  * License, or (at your option) any later version.                                  *
  *                                                                                  *
  * Holocore is distributed in the hope that it will be useful,                      *
  * but WITHOUT ANY WARRANTY; without even the implied warranty of                   *
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                    *
- * GNU Affero General Public License for more details.                              *
+ * GNU Affero General public synchronized License for more details.                              *
  *                                                                                  *
- * You should have received a copy of the GNU Affero General Public License         *
+ * You should have received a copy of the GNU Affero General public synchronized License         *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
  ***********************************************************************************/
@@ -32,102 +32,76 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class SynchronizedHashMap<K, V> implements Map<K, V> {
+public class SynchronizedMap<K, V> implements Map<K, V> {
 	
-	private final HashMap<K, V> map;
+	private final Map<K, V> map;
 	
-	public SynchronizedHashMap() {
-		map = new HashMap<>();
+	public SynchronizedMap() {
+		this.map = new HashMap<>();
 	}
 	
-	public int hashCode() {
-		synchronized (map) {
-			return map.hashCode();
-		}
+	public SynchronizedMap(Map<K, V> map) {
+		this.map = map;
 	}
 	
-	public String toString() {
-		synchronized (map) {
-			return map.toString();
-		}
+	public synchronized int hashCode() {
+		return map.hashCode();
 	}
 	
-	public int size() {
-		synchronized (map) {
-			return map.size();
-		}
+	public synchronized String toString() {
+		return map.toString();
 	}
 	
-	public boolean isEmpty() {
-		synchronized (map) {
-			return map.isEmpty();
-		}
+	public synchronized int size() {
+		return map.size();
 	}
 	
-	public V get(Object key) {
-		synchronized (map) {
-			return map.get(key);
-		}
+	public synchronized boolean isEmpty() {
+		return map.isEmpty();
 	}
 	
-	public boolean containsKey(Object key) {
-		synchronized (map) {
-			return map.containsKey(key);
-		}
+	public synchronized V get(Object key) {
+		return map.get(key);
 	}
 	
-	public V put(K key, V value) {
-		synchronized (map) {
-			return map.put(key, value);
-		}
+	public synchronized boolean containsKey(Object key) {
+		return map.containsKey(key);
 	}
 	
-	public void putAll(Map<? extends K, ? extends V> m) {
-		synchronized (map) {
-			map.putAll(m);
-		}
+	public synchronized V put(K key, V value) {
+		return map.put(key, value);
 	}
 	
-	public V remove(Object key) {
-		synchronized (map) {
-			return map.remove(key);
-		}
+	public synchronized void putAll(Map<? extends K, ? extends V> m) {
+		map.putAll(m);
 	}
 	
-	public void clear() {
-		synchronized (map) {
-			map.clear();
-		}
+	public synchronized V remove(Object key) {
+		return map.remove(key);
 	}
 	
-	public boolean containsValue(Object value) {
-		synchronized (map) {
-			return map.containsValue(value);
-		}
+	public synchronized void clear() {
+		map.clear();
 	}
 	
-	public Set<K> keySet() {
-		synchronized (map) {
-			return map.keySet();
-		}
+	public synchronized boolean containsValue(Object value) {
+		return map.containsValue(value);
 	}
 	
-	public Collection<V> values() {
-		synchronized (map) {
-			return map.values();
-		}
+	public synchronized Set<K> keySet() {
+		return map.keySet();
 	}
 	
-	public Set<java.util.Map.Entry<K, V>> entrySet() {
-		synchronized (map) {
-			return map.entrySet();
-		}
+	public synchronized Collection<V> values() {
+		return map.values();
 	}
 	
-	public V replace(K key, V value) {
-		synchronized (map) {
-			return map.replace(key, value);
-		}
+	public synchronized Set<java.util.Map.Entry<K, V>> entrySet() {
+		return map.entrySet();
+	}
+	
+	public synchronized V replace(K key, V value) {
+		return map.replace(key, value);
 	}
 	
 }

@@ -125,7 +125,7 @@ public final class ConfigWatcher {
 			try {
 				watcher.close();
 			} catch (Exception e) {
-				e.printStackTrace();
+				Log.e(this, e);
 			}
 		});
 	}

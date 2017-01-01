@@ -70,7 +70,7 @@ public class HttpsServer extends HttpServer {
 			sslServerSocketFactory = (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
 			return true;
 		} catch (Exception e) {
-			e.printStackTrace();
+			Log.e(this, e);
 			return false;
 		}
 	}

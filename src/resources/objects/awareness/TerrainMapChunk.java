@@ -28,6 +28,7 @@
 package resources.objects.awareness;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -81,7 +82,13 @@ class TerrainMapChunk {
 		synchronized (objects) {
 			List<SWGObject> withinRange = new LinkedList<>();
 			Location objLocation = obj.getWorldLocation();
-			for (SWGObject test : objects) {
+			Iterator<SWGObject> it = objects.iterator();
+			while (it.hasNext()) {
+				SWGObject test = it.next();
+				if (test.getParent() != null) {
+					it.remove();
+					continue;
+				}
 				if (isValidWithinRange(obj, test, objLocation, loadRange))
 					withinRange.add(test);
 			}

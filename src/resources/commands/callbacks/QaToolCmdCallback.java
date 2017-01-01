@@ -225,7 +225,7 @@ public class QaToolCmdCallback implements ICmdCallback {
 					return "No such location found: " + loc;
 				return teleportToRecovery(objManager, obj, loc, set);
 			} catch (SQLException e) {
-				e.printStackTrace();
+				Log.e(this, e);
 				return "Exception thrown. Failed to teleport: [" + e.getErrorCode() + "] " + e.getMessage();
 			}
 		}

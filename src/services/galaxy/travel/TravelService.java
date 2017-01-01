@@ -221,7 +221,7 @@ public class TravelService extends Service {
 					}
 				} catch (SQLException e) {
 					Log.e("TravelService", String.format("Failed to load a travel point for %s. %s", planetName, e.getLocalizedMessage()));
-					e.printStackTrace();
+					Log.e(this, e);
 					success = false;
 				}
 			}

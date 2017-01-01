@@ -478,15 +478,15 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 900478	TATOOINE	tat_world	AREA	0	3092.53	0.22	-4397.44	0	1	a water thief	water_thief_5_h_agg_n	City	Mos Eisley	1	GUARD	idle	0	0	0	0	300	120	0
 900479	TATOOINE	tat_world	AREA	0	3094.44	8.51	-4351.80	0	1	a water thief	water_thief_5_h_agg_n	City	Mos Eisley	1	GUARD	idle	0	0	0	0	300	120	0
 900480	TATOOINE	tat_world	AREA	0	3117.97	1.57	-4381.00	0	1	a water thief	water_thief_5_h_agg_n	City	Mos Eisley	1	GUARD	idle	0	0	0	0	300	120	0
-900481	TATOOINE	tat_world	AREA	0	2837.46	41.75	-4838.16	0	1	an error-prone battle droid	som_battlefield_hk77_squad_leader_80_d_agg_e	City	Mos Eisley	1	GUARD	idle	0	0	0	0	300	120	0
-900482	TATOOINE	tat_world	AREA	0	2840.07	41.39	-4804.57	0	1	an error-prone battle droid	som_battlefield_hk77_squad_leader_80_d_agg_e	City	Mos Eisley	1	GUARD	idle	0	0	0	0	300	120	0
-900483	TATOOINE	tat_world	AREA	0	2863.97	38.87	-4848.79	0	1	an error-prone battle droid	som_battlefield_hk77_squad_leader_80_d_agg_e	City	Mos Eisley	1	GUARD	idle	0	0	0	0	300	120	0
-900484	TATOOINE	tat_world	AREA	0	2866.79	33.05	-4881.06	0	1	an error-prone battle droid	som_battlefield_hk77_squad_leader_80_d_agg_e	City	Mos Eisley	1	GUARD	idle	0	0	0	0	300	120	0
-900485	TATOOINE	tat_world	AREA	0	2870.48	34.51	-4778.94	0	1	an error-prone battle droid	som_battlefield_hk77_squad_leader_80_d_agg_e	City	Mos Eisley	1	GUARD	idle	0	0	0	0	300	120	0
-900486	TATOOINE	tat_world	AREA	0	2870.79	39.09	-4816.73	0	1	an error-prone battle droid	som_battlefield_hk77_squad_leader_80_d_agg_e	City	Mos Eisley	1	GUARD	idle	0	0	0	0	300	120	0
-900487	TATOOINE	tat_world	AREA	0	2888.90	38.56	-4814.63	0	1	an error-prone battle droid	som_battlefield_hk77_squad_leader_80_d_agg_e	City	Mos Eisley	1	GUARD	idle	0	0	0	0	300	120	0
-900488	TATOOINE	tat_world	AREA	0	2891.80	38.79	-4791.32	0	1	an error-prone battle droid	som_battlefield_hk77_squad_leader_80_d_agg_e	City	Mos Eisley	1	GUARD	idle	0	0	0	0	300	120	0
-900489	TATOOINE	tat_world	AREA	0	2924.98	36.16	-4802.26	0	1	an error-prone battle droid	som_battlefield_hk77_squad_leader_80_d_agg_e	City	Mos Eisley	1	GUARD	idle	0	0	0	0	300	120	0
+900481	TATOOINE	tat_world	AREA	0	2837.46	41.75	-4838.16	0	1	an error-prone battle droid	tatooine_error_prone_droid_6_d_agg_n	City	Mos Eisley	1	GUARD	idle	0	0	0	0	300	120	0
+900482	TATOOINE	tat_world	AREA	0	2840.07	41.39	-4804.57	0	1	an error-prone battle droid	tatooine_error_prone_droid_6_d_agg_n	City	Mos Eisley	1	GUARD	idle	0	0	0	0	300	120	0
+900483	TATOOINE	tat_world	AREA	0	2863.97	38.87	-4848.79	0	1	an error-prone battle droid	tatooine_error_prone_droid_6_d_agg_n	City	Mos Eisley	1	GUARD	idle	0	0	0	0	300	120	0
+900484	TATOOINE	tat_world	AREA	0	2866.79	33.05	-4881.06	0	1	an error-prone battle droid	tatooine_error_prone_droid_6_d_agg_n	City	Mos Eisley	1	GUARD	idle	0	0	0	0	300	120	0
+900485	TATOOINE	tat_world	AREA	0	2870.48	34.51	-4778.94	0	1	an error-prone battle droid	tatooine_error_prone_droid_6_d_agg_n	City	Mos Eisley	1	GUARD	idle	0	0	0	0	300	120	0
+900486	TATOOINE	tat_world	AREA	0	2870.79	39.09	-4816.73	0	1	an error-prone battle droid	tatooine_error_prone_droid_6_d_agg_n	City	Mos Eisley	1	GUARD	idle	0	0	0	0	300	120	0
+900487	TATOOINE	tat_world	AREA	0	2888.90	38.56	-4814.63	0	1	an error-prone battle droid	tatooine_error_prone_droid_6_d_agg_n	City	Mos Eisley	1	GUARD	idle	0	0	0	0	300	120	0
+900488	TATOOINE	tat_world	AREA	0	2891.80	38.79	-4791.32	0	1	an error-prone battle droid	tatooine_error_prone_droid_6_d_agg_n	City	Mos Eisley	1	GUARD	idle	0	0	0	0	300	120	0
+900489	TATOOINE	tat_world	AREA	0	2924.98	36.16	-4802.26	0	1	an error-prone battle droid	tatooine_error_prone_droid_6_d_agg_n	City	Mos Eisley	1	GUARD	idle	0	0	0	0	300	120	0
 900490	TATOOINE	tat_mosentha_hospital	AREA	10	26.80	7.30	0.20	-91	1	Aboo Aramflahad (Cybernetic Specialist)	cybernetic_specialist_tatooine_100_h_inv_n	City	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
 900491	TATOOINE	tat_mosentha_starport	AREA	4	2.53	0.64	67.74	119	1	Chassis Dealer	chassis_dealer_v_100_h_inv_n	City	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
 900492	TATOOINE	tat_world	AREA	0	1521.00	7.00	3259.00	177	1	Kolka Zteht	kolka_zteht_100_h_inv_n	City	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
@@ -498,11 +498,11 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 900498	TATOOINE	tat_world	AREA	0	1536.87	7.00	3051.99	154	1	Sarlin	smuggler_fence_sarlin_100_h_inv_n	City	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
 900499	TATOOINE	tat_world	AREA	0	1514.00	7.00	3313.00	-92	1	Wren	smuggler_fence_wren_100_h_inv_n	City	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
 900500	TATOOINE	tat_world	AREA	0	1283.42	7.00	3154.62	141	1	Tweego	tatooine_tweego_100_h_inv_n	City	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
-900501	TATOOINE	tat_world	AREA	0	1124.11	6.97	2982.60	71	1	RC-1Z	som_8t88_1_d_att_n	City	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
-900502	TATOOINE	tat_world	AREA	0	1353.48	7.00	3051.41	-41	1	RC-2X	som_battlefield_ak1a_hammer_82_d_agg_b	City	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
-900503	TATOOINE	tat_world	AREA	0	1702.92	7.00	3076.48	57	1	RC-3T	som_battlefield_ak3_reaper_82_d_agg_b	City	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
-900504	TATOOINE	tat_world	AREA	0	1351.03	11.00	3108.34	46	1	An'Kwee	som_battlefield_forward_comm_mki_84_d_agg_b	City	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
-900505	TATOOINE	tat_world	AREA	0	1328.70	7.00	3265.39	176	1	Draknus	som_battlefield_hk77_assault_soldier_80_d_agg_e	City	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+900501	TATOOINE	tat_world	AREA	0	1124.11	6.97	2982.60	71	1	RC-1Z	tatooine_entha_podracers_racedroid1_rc1z_100_d_inv_n	City	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+900502	TATOOINE	tat_world	AREA	0	1353.48	7.00	3051.41	-41	1	RC-2X	tatooine_entha_podracers_racedroid2_rc2x_100_d_inv_n	City	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+900503	TATOOINE	tat_world	AREA	0	1702.92	7.00	3076.48	57	1	RC-3T	tatooine_entha_podracers_racedroid3_rc3t_100_d_inv_n	City	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+900504	TATOOINE	tat_world	AREA	0	1351.03	11.00	3108.34	46	1	An'Kwee	tatooine_entha_watto_ankwee_100_d_inv_n	City	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
+900505	TATOOINE	tat_world	AREA	0	1328.70	7.00	3265.39	176	1	Draknus	tatooine_entha_watto_draknus_100_d_inv_n	City	Mos Entha	1	STOP	idle	0	0	0	0	300	120	0
 900506	TATOOINE	tat_mosespa_cantina	AREA	13	-29.74	-0.52	8.24	33	1	Commander Da'la Socuna (Rebel Pilot Trainer)	reb_commander_dala_socuna_100_h_inv_n	City	Mos Espa	1	STOP	idle	0	0	0	0	300	120	0
 900507	TATOOINE	tat_mosespa_cantina	AREA	2	29.96	0.10	-8.26	50	1	a patron	patron_100_h_inv_n	City	Mos Espa	1	STOP	npc_sitting_chair	0	0	0	0	300	120	0
 900508	TATOOINE	tat_mosespa_cantina	AREA	3	14.83	-0.89	4.86	51	1	a patron	patron_100_h_inv_n	City	Mos Espa	1	STOP	npc_sitting_chair	0	0	0	0	300	120	0
@@ -1660,7 +1660,7 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 901660	TATOOINE	tat_world	AREA	0	-6152.01	23.63	1812.08	-166	1	Ji'Ni Sil	tatooine_watto_jawa_100_h_inv_n	POI	Jawa Traders	1	STOP	idle	0	0	0	0	300	120	0
 901661	TATOOINE	tat_world	AREA	0	-5998.23	62.91	1805.95	0	1	Tusken Follower	tusken_raider_18_h_agg_n	POI	Jawa Traders	1	GUARD	idle	0	0	0	0	300	120	0
 901662	TATOOINE	tat_world	AREA	0	-6158.00	23.59	1836.00	-173	1	Protocol Droid	protocol_droid_jawa_fort_100_d_inv_n	POI	Jawa Traders	1	STOP	idle	0	0	0	0	300	120	0
-901663	TATOOINE	tat_world	AREA	0	-6152.08	23.63	1810.50	0	1	C4-ZX	som_decrepit_cww8_combat_droid_83_d_agg_b	POI	Jawa Traders	1	STOP	idle	0	0	0	0	300	120	0
+901663	TATOOINE	tat_world	AREA	0	-6152.08	23.63	1810.50	0	1	C4-ZX	tatooine_watto_jawa_droid_c4zx_100_d_inv_n	POI	Jawa Traders	1	STOP	idle	0	0	0	0	300	120	0
 901664	TATOOINE	tat_world	AREA	0	7358.00	14.60	4486.60	0	1	a juvenile canyon krayt dragon	krayt_dragon_juvenile_canyon_82_c_agg_b	POI	Krayt Graveyard	3	FLOAT	idle	0	0	0	0	1200	900	50
 901665	TATOOINE	tat_world	AREA	0	6985.46	14.63	4368.01	0	1	a krayt dragon ancient	krayt_dragon_ancient_90_c_agg_b	POI	Krayt Graveyard	1	FLOAT	idle	0	0	0	0	1800	1200	30
 901666	TATOOINE	tat_world	AREA	0	7432.96	6.44	4561.59	0	1	a krayt dragon ancient	krayt_dragon_ancient_90_c_agg_b	POI	Krayt Graveyard	1	FLOAT	idle	0	0	0	0	1800	1200	30
@@ -1672,7 +1672,7 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 901672	TATOOINE	tat_world	AREA	0	-2455.24	0.00	-5384.64	0	1	a greater desert womp rat	womprat_great_desert_12_c_agg_n	POI	Lars Homestead	2	FLOAT	idle	0	0	0	0	300	120	4
 901673	TATOOINE	tat_world	AREA	0	-2481.61	0.00	-5364.43	0	1	a greater desert womp rat	womprat_great_desert_12_c_agg_n	POI	Lars Homestead	2	FLOAT	idle	0	0	0	0	300	120	4
 901674	TATOOINE	tat_world	AREA	0	-2575.00	0.00	-5517.00	0	1	Zef Ando	legacy_zef_ando_100_h_inv_n	POI	Lars Homestead	1	STOP	idle	0	0	0	0	300	120	0
-901675	TATOOINE	tat_world	AREA	0	-2568.00	0.00	-5636.40	0	1	a modified Battle Droid	som_decrepit_colonel_or5_86_d_agg_b	POI	Lars Homestead	3	FLOAT	idle	0	0	0	0	90	60	6
+901675	TATOOINE	tat_world	AREA	0	-2568.00	0.00	-5636.40	0	1	a modified Battle Droid	tatooine_lin_demolitionmech_16_d_agg_n	POI	Lars Homestead	3	FLOAT	idle	0	0	0	0	90	60	6
 901676	TATOOINE	tat_world	AREA	0	919.86	0.76	3825.38	0	1	Tusken Follower	tusken_raider_18_h_agg_n	POI	Old Mos Espa Arena Track	2	FLOAT	idle	0	0	0	0	300	120	4
 901677	TATOOINE	tat_world	AREA	0	930.01	0.92	3819.76	0	1	Tusken Follower	tusken_raider_18_h_agg_n	POI	Old Mos Espa Arena Track	2	FLOAT	idle	0	0	0	0	300	120	4
 901678	TATOOINE	tat_world	AREA	0	938.35	0.88	3828.66	0	1	Tusken Follower	tusken_raider_18_h_agg_n	POI	Old Mos Espa Arena Track	2	FLOAT	idle	0	0	0	0	300	120	4

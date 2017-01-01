@@ -38,6 +38,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import resources.server_info.Log;
+
 public class NameFilter {
 	
 	private static final char [] ALLOWED = new char[] {' ', '-', '\''};
@@ -85,10 +87,10 @@ public class NameFilter {
 			}
 			return true;
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 			return false;
 		} catch (IOException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 			return false;
 		}
 	}

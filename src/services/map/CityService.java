@@ -131,13 +131,13 @@ public class CityService extends Service {
 					}
 				}
 			} catch (SQLException e) {
-				e.printStackTrace();
+				Log.e(this, e);
 			} finally {
 				try {
 					if (set != null)
 						set.close();
 				} catch (SQLException e) {
-					e.printStackTrace();
+					Log.e(this, e);
 				}
 			}
 		}

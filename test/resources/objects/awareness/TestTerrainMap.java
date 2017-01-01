@@ -164,7 +164,7 @@ public class TestTerrainMap {
 				timeout--;
 			}
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		}
 	}
 	

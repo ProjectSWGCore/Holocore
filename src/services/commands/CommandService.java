@@ -330,7 +330,7 @@ public class CommandService extends Service {
 			try {
 				command.getJavaCallback().newInstance().execute(galacticManager, player, target, args);
 			} catch (InstantiationException | IllegalAccessException e) {
-				e.printStackTrace();
+				Log.e(this, e);
 			}
 		}
 		else
@@ -508,7 +508,7 @@ public class CommandService extends Service {
 			if (callback.getConstructor() == null)
 				throw new IllegalArgumentException("Incorrectly registered callback class. Class must extend ICmdCallback and have an empty constructor: " + callback.getName());
 		} catch (NoSuchMethodException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		}
 		command.setJavaCallback(callback);
 

@@ -108,7 +108,7 @@ public class StaticService extends Service {
 					}
 				}
 			} catch (SQLException e) {
-				e.printStackTrace();
+				Log.e(this, e);
 			}
 		}
 		return objects;

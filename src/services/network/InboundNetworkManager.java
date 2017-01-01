@@ -38,6 +38,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import network.NetworkClient;
 import resources.config.ConfigFile;
 import resources.control.Service;
+import resources.server_info.Log;
 import utilities.ThreadUtilities;
 
 public class InboundNetworkManager extends Service {
@@ -74,7 +75,7 @@ public class InboundNetworkManager extends Service {
 		try {
 			inboundProcessor.awaitTermination(3, TimeUnit.SECONDS);
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		}
 		return super.terminate();
 	}
@@ -107,7 +108,7 @@ public class InboundNetworkManager extends Service {
 						if (inboundQueue.isEmpty())
 							inboundQueue.wait();
 					} catch (InterruptedException e) {
-						e.printStackTrace();
+						Log.e(this, e);
 					}
 					client = inboundQueue.pollFirst();
 				}
@@ -116,7 +117,7 @@ public class InboundNetworkManager extends Service {
 				client.processInbound();
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		}
 	}
 	
