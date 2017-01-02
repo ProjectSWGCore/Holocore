@@ -39,6 +39,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import network.packets.Packet;
 import network.packets.swg.ErrorMessage;
@@ -92,7 +93,7 @@ public class LoginService extends Service {
 	public boolean initialize() {
 		RelationalDatabase local = getLocalDatabase();
 		getUser = local.prepareStatement("SELECT * FROM users WHERE LOWER(username) = LOWER(?)");
-		getCharacter = local.prepareStatement("SELECT id FROM characters WHERE name = ?");
+		getCharacter = local.prepareStatement("SELECT id FROM characters WHERE LOWER(name) = ?");
 		getCharacters = local.prepareStatement("SELECT * FROM characters WHERE userid = ?");
 		deleteCharacter = local.prepareStatement("DELETE FROM characters WHERE id = ?");
 		return super.initialize();
@@ -110,7 +111,8 @@ public class LoginService extends Service {
 	
 	public long getCharacterId(String name) {
 		Assert.notNull(name);
-		Assert.test(!name.trim().isEmpty());
+		name = name.trim().toLowerCase(Locale.US);
+		Assert.test(!name.isEmpty());
 		synchronized (getCharacter) {
 			try {
 				getCharacter.setString(1, name);
