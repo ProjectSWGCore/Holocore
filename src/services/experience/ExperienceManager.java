@@ -46,8 +46,6 @@ import resources.encodables.StringId;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
 import resources.server_info.Log;
-import resources.sui.SuiButtons;
-import resources.sui.SuiMessageBox;
 
 /**
  * The {@code ExperienceManager} listens for {@link ExperienceIntent} and
