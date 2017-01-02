@@ -31,6 +31,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.function.BiConsumer;
+
 import network.packets.Packet;
 import intents.NotifyPlayersPacketIntent;
 import intents.PlayerEventIntent;
@@ -44,6 +45,7 @@ import resources.player.Player;
 import resources.player.PlayerEvent;
 import resources.player.PlayerState;
 import resources.server_info.SynchronizedMap;
+import services.CoreManager;
 
 public class PlayerManager extends Manager {
 	
@@ -225,6 +227,7 @@ public class PlayerManager extends Manager {
 	
 	private void onConnectionOpenedIntent(ConnectionOpenedIntent coi) {
 		Player p = new Player(this, coi.getNetworkId());
+		p.setGalaxyName(CoreManager.getGalaxy().getName());
 		Assert.isNull(players.put(coi.getNetworkId(), p));
 		p.setPlayerState(PlayerState.CONNECTED);
 		new PlayerEventIntent(p, PlayerEvent.PE_CONNECTED).broadcast();
