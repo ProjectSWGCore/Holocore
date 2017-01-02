@@ -81,6 +81,16 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 		bb.incrementOperandCount(9);
 	}
 
+	public void formGroup(CreatureObject leader, CreatureObject member) {
+		this.leader = leader.getObjectId();
+		groupMembers.add(new GroupMember(leader));
+		
+		calculateLevel();
+		addMember(member);
+		updateMember(leader);
+		leader.setGroupId(getObjectId());
+	}
+	
 	public void addMember(CreatureObject object) {
 		groupMembers.add(new GroupMember(object));
 
@@ -108,14 +118,8 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 
 			groupMembers.remove(member);
 			object.setGroupId(0);
-
 			groupMembers.sendDeltaMessage(this);
-			
-			// We need to recalculate the group level if someone leaves!
-			groupMembers.stream()
-					.map(groupMember -> groupMember.getCreatureObject().getLevel())
-					.max((level1, level2) -> Short.compare(level1, level2))
-					.ifPresent(newLevel -> setLevel(newLevel));
+			calculateLevel();
 		}
 	}
 
@@ -141,25 +145,27 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 		this.changeLeader(member);
 	}
 
-	public void setLeader(GroupMember member) {
+	private void setLeader(GroupMember member) {
 		this.leader = member.getId();
 		
 		this.changeLeader(member);
 	}
 	
 	private void changeLeader(GroupMember member) {
-		if (groupMembers.size() > 0) {
-			synchronized (groupMembers) {
-				// TODO: need to account for group member order of joining
-				Collections.swap(groupMembers, 0, groupMembers.indexOf(member));
-			}
-		} else {
-			this.addMember(member.getCreatureObject());
-		}
+		// TODO: need to account for group member order of joining
+		Collections.swap(groupMembers, 0, groupMembers.indexOf(member));
 		
 		this.leader = member.getId();
 
 		groupMembers.sendDeltaMessage(this);
+	}
+	
+	private void calculateLevel() {
+		// We need to recalculate the group level if someone leaves!
+		groupMembers.stream()
+				.map(groupMember -> groupMember.getCreatureObject().getLevel())
+				.max((level1, level2) -> Short.compare(level1, level2))
+				.ifPresent(newLevel -> setLevel(newLevel));
 	}
 	
 	public short getLevel() {

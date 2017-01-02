@@ -60,6 +60,7 @@ import resources.Galaxy;
 import resources.Race;
 import resources.common.BCrypt;
 import resources.config.ConfigFile;
+import resources.control.Assert;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.SWGObject;
@@ -142,10 +143,9 @@ public class LoginService extends Service {
 	}
 	
 	private void handleLogin(Player player, LoginClientId id) {
-		if (player.getPlayerState() != PlayerState.CONNECTED && player.getPlayerState() != PlayerState.LOGGED_IN) {
-			Log.w(this, "Player cannot login when " + player.getPlayerState());
-			return;
-		}
+		Assert.notNull(player);
+		Assert.test(player.getPlayerState() == PlayerState.CONNECTED);
+		player.setPlayerState(PlayerState.LOGGING_IN);
 		player.setPlayerServer(PlayerServer.LOGIN);
 		final boolean doClientCheck = getConfig(ConfigFile.NETWORK).getBoolean("LOGIN-VERSION-CHECKS", true);
 		if (!id.getVersion().equals(REQUIRED_VERSION) && doClientCheck) {
@@ -189,7 +189,6 @@ public class LoginService extends Service {
 		byte [] sessionToken = new byte[tokenLength];
 		random.nextBytes(sessionToken);
 		player.setSessionToken(sessionToken);
-		player.setPlayerState(PlayerState.LOGGING_IN);
 		switch(user.getString("access_level")) {
 			case "player": player.setAccessLevel(AccessLevel.PLAYER); break;
 			case "warden": player.setAccessLevel(AccessLevel.WARDEN); break;
@@ -198,6 +197,7 @@ public class LoginService extends Service {
 			case "dev": player.setAccessLevel(AccessLevel.DEV); break;
 			default: player.setAccessLevel(AccessLevel.PLAYER); break;
 		}
+		player.setPlayerState(PlayerState.LOGGED_IN);
 		sendLoginSuccessPacket(player);
 		Log.i("LoginService", "%s connected to the login server from %s:%d", player.getUsername(), id.getAddress(), id.getPort());
 		new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_SUCCESS).broadcast();
@@ -248,7 +248,6 @@ public class LoginService extends Service {
 		p.sendPacket(new CharacterCreationDisabled());
 		p.sendPacket(new EnumerateCharacterId(characters));
 		p.sendPacket(clusterStatus);
-		p.setPlayerState(PlayerState.LOGGED_IN);
 	}
 	
 	private boolean isUserValid(ResultSet set, String password) throws SQLException {

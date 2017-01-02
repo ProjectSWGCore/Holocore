@@ -101,8 +101,7 @@ public class TerrainMap {
 	public void removeFromMap(SWGObject obj) {
 		if (remove(obj)) {
 			update(obj);
-		} else {
-			Assert.fail();
+			Assert.test(isInAwareness(obj));
 		}
 	}
 	

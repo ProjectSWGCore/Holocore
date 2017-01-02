@@ -42,7 +42,7 @@ public class Player implements Comparable<Player> {
 	private Service playerManager;
 	
 	private long networkId;
-	private PlayerState state		= PlayerState.DISCONNECTED;
+	private volatile PlayerState state		= PlayerState.DISCONNECTED;
 	
 	private String username			= "";
 	private int userId				= 0;

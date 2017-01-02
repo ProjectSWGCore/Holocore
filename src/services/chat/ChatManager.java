@@ -34,7 +34,6 @@ import intents.chat.ChatBroadcastIntent;
 import intents.chat.PersistentMessageIntent;
 import intents.chat.SpatialChatIntent;
 import intents.network.GalacticPacketIntent;
-import intents.player.ZonePlayerSwapIntent;
 import intents.server.ServerStatusIntent;
 import network.packets.Packet;
 import network.packets.swg.SWGPacket;
@@ -86,7 +85,6 @@ public class ChatManager extends Manager {
 		registerForIntent(ChatBroadcastIntent.TYPE);
 		registerForIntent(ServerStatusIntent.TYPE);
 		registerForIntent(ChatAvatarRequestIntent.TYPE);
-		registerForIntent(ZonePlayerSwapIntent.TYPE);
 	}
 	
 	public void onIntentReceived(Intent i) {
