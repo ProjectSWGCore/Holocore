@@ -168,13 +168,14 @@ public final class SpawnerService extends Service {
 		String creatureName = set.getString("creature_name");
 		int minRespawnDelay = set.getInt("min_spawn_time");
 		int maxRespawnDelay = set.getInt("max_spawn_time");
+		Terrain terrain = Terrain.valueOf(set.getString("building_terrain"));
 		
 		if (minRespawnDelay > maxRespawnDelay) {
-			Log.w(this, "%s at row %d has a minimum respawn time larger than the maximum respawn time - skipping", creatureName, set.getRow());
+			Log.w(this, "%s on %s at row %d has a minimum respawn time larger than the maximum respawn time - skipping", creatureName, terrain, set.getRow());
 			return;
 		}
 		
-		loc.setTerrain(Terrain.valueOf(set.getString("building_terrain")));
+		loc.setTerrain(terrain);
 		loc.setPosition(set.getFloat("x"), set.getFloat("y"), set.getFloat("z"));
 		loc.setHeading(set.getFloat("heading"));
 		int cellId = set.getInt("cell_id");
