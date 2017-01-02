@@ -51,6 +51,8 @@ import resources.player.Player;
 import resources.server_info.Log;
 import resources.server_info.RelationalDatabase;
 import resources.server_info.RelationalServerFactory;
+import resources.sui.SuiButtons;
+import resources.sui.SuiMessageBox;
 
 /**
  *
@@ -234,12 +236,16 @@ public final class ExpertiseService extends Service {
 	private void handleLevelChangedIntent(LevelChangedIntent i) {
 		int newLevel = i.getNewLevel();
 		CreatureObject creatureObject = i.getCreatureObject();
-		
-		if (newLevel >= 10) {
+		PlayerObject playerObject = creatureObject.getPlayerObject();
+		short oldLevel = i.getPreviousLevel();
+						
+		if (oldLevel < 10 && newLevel >= 10) {
+			SuiMessageBox window = new SuiMessageBox(SuiButtons.OK, "@expertise_d:sui_expertise_introduction_title",	"@expertise_d:sui_expertise_introduction_body");
+			window.display(playerObject.getOwner());
 			// If we don't add the expertise root skill, the creature can't learn child skills
 			creatureObject.addSkill("expertise");
 		}
-		
+
 		checkExtraAbilities(creatureObject);
 	}
 	
