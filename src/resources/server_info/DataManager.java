@@ -35,6 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import main.ProjectSWG.CoreException;
 
 import resources.config.ConfigFile;
 import resources.control.Intent;
@@ -63,8 +64,11 @@ public class DataManager implements IntentReceiver {
 		initializeDatabases();
 		if (getConfig(ConfigFile.PRIMARY).getBoolean(ENABLE_LOGGING, true))
 			Log.start();
-		initialized = localDatabase.isOnline()
-				&& localDatabase.isTable("users");
+		initialized = localDatabase.isOnline();
+		
+		if (!localDatabase.isTable("users") || !localDatabase.isTable("characters")) {
+			throw new CoreException("The database is missing a table!");
+		}
 	}
 	
 	private synchronized void shutdown() {
