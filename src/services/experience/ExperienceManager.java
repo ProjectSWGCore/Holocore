@@ -109,7 +109,7 @@ public final class ExperienceManager extends Manager {
 				new LevelChangedIntent(creatureObject, oldLevel, newLevel).broadcast();
 				creatureObject.setLevel(newLevel);
 				adjustHealth(creatureObject, newLevel);
-				adjustAction(creatureObject, newLevel);	
+				adjustAction(creatureObject, newLevel);
 				// TODO NGE: system message health and action differences. @spam:level_up_stat_gain_#
 				Log.i(this, "%s leveled from %d to %d", creatureObject, oldLevel, newLevel);
 			}
