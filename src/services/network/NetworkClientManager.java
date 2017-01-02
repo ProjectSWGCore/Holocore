@@ -168,7 +168,6 @@ public class NetworkClientManager extends Manager implements TCPCallback {
 			client.onSessionDestroyed();
 			inboundManager.onSessionDestroyed(client);
 			outboundManager.onSessionDestroyed(client);
-			client.onDisconnected(reason);
 		}
 		tcpServer.disconnect(addr);
 	}

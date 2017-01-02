@@ -27,6 +27,7 @@
 ***********************************************************************************/
 package network;
 
+import intents.network.ConnectionClosedIntent;
 import intents.network.ConnectionOpenedIntent;
 import intents.network.InboundPacketIntent;
 
@@ -90,6 +91,7 @@ public class NetworkClient {
 	}
 	
 	public void onDisconnected(ConnectionStoppedReason reason) {
+		intentChain.broadcastAfter(new ConnectionClosedIntent(networkId, reason));
 		sendPacket(new HoloConnectionStopped(reason));
 		flushOutbound();
 	}
