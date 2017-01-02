@@ -165,6 +165,15 @@ public final class SpawnerService extends Service {
 	}
 	
 	private void loadSpawner(ResultSet set, Location loc) throws SQLException {
+		String creatureName = set.getString("creature_name");
+		int minRespawnDelay = set.getInt("min_spawn_time");
+		int maxRespawnDelay = set.getInt("max_spawn_time");
+		
+		if (minRespawnDelay > maxRespawnDelay) {
+			Log.w(this, "%s at row %d has a minimum respawn time larger than the maximum respawn time - skipping", creatureName, set.getRow());
+			return;
+		}
+		
 		loc.setTerrain(Terrain.valueOf(set.getString("building_terrain")));
 		loc.setPosition(set.getFloat("x"), set.getFloat("y"), set.getFloat("z"));
 		loc.setHeading(set.getFloat("heading"));
@@ -178,7 +187,6 @@ public final class SpawnerService extends Service {
 		}
 		
 		String difficultyChar = set.getString("difficulty");
-		String creatureName = set.getString("creature_name");
 		CreatureDifficulty difficulty;
 		int maxHealth = 0;
 		int maxAction = 0;
@@ -212,8 +220,8 @@ public final class SpawnerService extends Service {
 		Spawner spawner = new Spawner(egg);
 		spawner.setIffTemplates(set.getString("iff").split(";"));
 		spawner.setCreatureName(set.getString("creature_name"));
-		spawner.setMinRespawnDelay(set.getInt("min_spawn_time"));
-		spawner.setMaxRespawnDelay(set.getInt("max_spawn_time"));
+		spawner.setMinRespawnDelay(minRespawnDelay);
+		spawner.setMaxRespawnDelay(maxRespawnDelay);
 		spawner.setMaxHealth(maxHealth);
 		spawner.setMaxAction(maxAction);
 		spawner.setCreatureDifficulty(difficulty);
