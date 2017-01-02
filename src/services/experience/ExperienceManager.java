@@ -46,6 +46,8 @@ import resources.encodables.StringId;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
 import resources.server_info.Log;
+import resources.sui.SuiButtons;
+import resources.sui.SuiMessageBox;
 
 /**
  * The {@code ExperienceManager} listens for {@link ExperienceIntent} and
@@ -110,6 +112,13 @@ public final class ExperienceManager extends Manager {
 				creatureObject.setLevel(newLevel);
 				adjustHealth(creatureObject, newLevel);
 				adjustAction(creatureObject, newLevel);
+								
+				if (oldLevel < 10 && newLevel >= 10) {
+					SuiMessageBox window = new SuiMessageBox(SuiButtons.OK, "@expertise_d:sui_expertise_introduction_title",	"@expertise_d:sui_expertise_introduction_body");
+					window.display(playerObject.getOwner());					
+					
+				}
+								
 				// TODO NGE: system message health and action differences. @spam:level_up_stat_gain_#
 				Log.i(this, "%s leveled from %d to %d", creatureObject, oldLevel, newLevel);
 			}
