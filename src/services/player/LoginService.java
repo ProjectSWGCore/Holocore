@@ -92,7 +92,7 @@ public class LoginService extends Service {
 	public boolean initialize() {
 		RelationalDatabase local = getLocalDatabase();
 		getUser = local.prepareStatement("SELECT * FROM users WHERE LOWER(username) = LOWER(?)");
-		getCharacter = local.prepareStatement("SELECT id FROM characters WHERE userid = ?");
+		getCharacter = local.prepareStatement("SELECT id FROM characters WHERE name = ?");
 		getCharacters = local.prepareStatement("SELECT * FROM characters WHERE userid = ?");
 		deleteCharacter = local.prepareStatement("DELETE FROM characters WHERE id = ?");
 		return super.initialize();
