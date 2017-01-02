@@ -68,6 +68,7 @@ import resources.chat.ChatResult;
 import resources.chat.ChatRoom;
 import resources.client_info.ServerFactory;
 import resources.client_info.visitors.DatatableData;
+import resources.control.Assert;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.player.PlayerObject;
@@ -90,6 +91,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
 import resources.encodables.OutOfBandPackage;
 
 /**
@@ -604,9 +606,9 @@ public class ChatRoomService extends Service {
 
 		// Enter the new zone-only chat channels
 		String planetPath = "SWG." + player.getGalaxyName() + "." + terrain.getName() + ".";
-		if (getRoom(planetPath + "Planet") == null)
-			return;
-
+		Assert.notNull(getRoom(planetPath + "Planet"));
+		Assert.notNull(getRoom(planetPath + "system"));
+		
 		enterChatChannel(player, planetPath + "Planet", false);
 		enterChatChannel(player, planetPath + "system", false);
 	}
