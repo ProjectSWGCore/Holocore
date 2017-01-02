@@ -111,14 +111,7 @@ public final class ExperienceManager extends Manager {
 				new LevelChangedIntent(creatureObject, oldLevel, newLevel).broadcast();
 				creatureObject.setLevel(newLevel);
 				adjustHealth(creatureObject, newLevel);
-				adjustAction(creatureObject, newLevel);
-								
-				if (oldLevel < 10 && newLevel >= 10) {
-					SuiMessageBox window = new SuiMessageBox(SuiButtons.OK, "@expertise_d:sui_expertise_introduction_title",	"@expertise_d:sui_expertise_introduction_body");
-					window.display(playerObject.getOwner());					
-					
-				}
-								
+				adjustAction(creatureObject, newLevel);														
 				// TODO NGE: system message health and action differences. @spam:level_up_stat_gain_#
 				Log.i(this, "%s leveled from %d to %d", creatureObject, oldLevel, newLevel);
 			}
