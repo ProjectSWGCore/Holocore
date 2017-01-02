@@ -39,7 +39,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import network.packets.Packet;
 import network.packets.swg.ErrorMessage;
@@ -77,16 +76,14 @@ import services.CoreManager;
 public class LoginService extends Service {
 	
 	private static final String REQUIRED_VERSION = "20111130-15:46";
+	private static final byte [] SESSION_TOKEN = new byte[24];
 	
-	private Random random;
 	private PreparedStatement getUser;
 	private PreparedStatement getCharacter;
 	private PreparedStatement getCharacters;
 	private PreparedStatement deleteCharacter;
 	
 	public LoginService() {
-		random = new Random();
-		
 		registerForIntent(DeleteCharacterIntent.TYPE);
 		registerForIntent(GalacticPacketIntent.TYPE);
 	}
@@ -95,7 +92,7 @@ public class LoginService extends Service {
 	public boolean initialize() {
 		RelationalDatabase local = getLocalDatabase();
 		getUser = local.prepareStatement("SELECT * FROM users WHERE LOWER(username) = LOWER(?)");
-		getCharacter = local.prepareStatement("SELECT * FROM characters WHERE LOWER(name) = LOWER(?)");
+		getCharacter = local.prepareStatement("SELECT id FROM characters WHERE userid = ?");
 		getCharacters = local.prepareStatement("SELECT * FROM characters WHERE userid = ?");
 		deleteCharacter = local.prepareStatement("DELETE FROM characters WHERE id = ?");
 		return super.initialize();
@@ -107,17 +104,41 @@ public class LoginService extends Service {
 			deleteCharacter(((DeleteCharacterIntent) i).getCreature());
 		} else if (i instanceof GalacticPacketIntent) {
 			GalacticPacketIntent gpi = (GalacticPacketIntent) i;
-			handlePacket(gpi, gpi.getPlayerManager().getPlayerFromNetworkId(gpi.getNetworkId()), gpi.getPacket());
+			handlePacket(gpi, gpi.getPacket());
 		}
 	}
 	
-	public void handlePacket(GalacticIntent intent, Player player, Packet p) {
-		if (p instanceof LoginClientId)
-			handleLogin(player, (LoginClientId) p);
-		if (p instanceof DeleteCharacterRequest)
-			handleCharDeletion(intent, player, (DeleteCharacterRequest) p);
-		if (p instanceof LagRequest && player.getPlayerServer() == PlayerServer.LOGIN)
-			handleLagRequest(player);
+	public long getCharacterId(String name) {
+		Assert.notNull(name);
+		Assert.test(!name.trim().isEmpty());
+		synchronized (getCharacter) {
+			try {
+				getCharacter.setString(1, name);
+				try (ResultSet set = getCharacter.executeQuery()) {
+					if (set.next())
+						return set.getLong("id");
+				}
+			} catch (SQLException e) {
+				Log.e(this, e);
+			}
+		}
+		return 0;
+	}
+	
+	private void handlePacket(GalacticPacketIntent gpi, Packet p) {
+		if (p instanceof LoginClientId) {
+			handleLogin(getPlayer(gpi.getPlayerManager(), gpi.getNetworkId()), (LoginClientId) p);
+		} else if (p instanceof DeleteCharacterRequest) {
+			handleCharDeletion(gpi, getPlayer(gpi.getPlayerManager(), gpi.getNetworkId()), (DeleteCharacterRequest) p);
+		} else if (p instanceof LagRequest) {
+			Player player = getPlayer(gpi.getPlayerManager(), gpi.getNetworkId());
+			if (player.getPlayerServer() == PlayerServer.LOGIN)
+				handleLagRequest(player);
+		}
+	}
+	
+	private Player getPlayer(PlayerManager playerManager, long networkId) {
+		return playerManager.getPlayerFromNetworkId(networkId);
 	}
 	
 	private String getServerString() {
@@ -133,18 +154,20 @@ public class LoginService extends Service {
 	
 	private void handleCharDeletion(GalacticIntent intent, Player player, DeleteCharacterRequest request) {
 		SWGObject obj = intent.getObjectManager().getObjectById(request.getPlayerId());
-		boolean success = false;
-		if (obj != null && obj instanceof CreatureObject) {
-			success = deleteCharacter(obj);
-			Log.i("LoginService", "Deleted character %s for user %s", ((CreatureObject)obj).getName(), player.getUsername());
-		} else
-			Log.w("LoginService", "Could not delete character! Character: ID: " + request.getPlayerId() + " / " + obj);
+		boolean success = obj != null && deleteCharacter(obj);
+		if (success) {
+			new DestroyObjectIntent(obj).broadcast();
+			Log.i(this, "Deleted character %s for user %s", ((CreatureObject)obj).getName(), player.getUsername());
+		} else {
+			Log.e(this, "Could not delete character! Character: ID: " + request.getPlayerId() + " / " + obj);
+		}
 		player.sendPacket(new DeleteCharacterResponse(success));
 	}
 	
 	private void handleLogin(Player player, LoginClientId id) {
 		Assert.notNull(player);
 		Assert.test(player.getPlayerState() == PlayerState.CONNECTED);
+		Assert.test(player.getPlayerServer() == PlayerServer.NONE);
 		player.setPlayerState(PlayerState.LOGGING_IN);
 		player.setPlayerServer(PlayerServer.LOGIN);
 		final boolean doClientCheck = getConfig(ConfigFile.NETWORK).getBoolean("LOGIN-VERSION-CHECKS", true);
@@ -174,7 +197,7 @@ public class LoginService extends Service {
 	}
 	
 	private void onLoginClientVersionError(Player player, LoginClientId id) {
-		Log.i("LoginService", "%s cannot login due to invalid version code: %s, expected %s from %s:%d", player.getUsername(), id.getVersion(), REQUIRED_VERSION, id.getAddress(), id.getPort());
+		Log.i(this, "%s cannot login due to invalid version code: %s, expected %s from %s:%d", player.getUsername(), id.getVersion(), REQUIRED_VERSION, id.getAddress(), id.getPort());
 		String type = "Login Failed!";
 		String message = "Invalid Client Version Code: " + id.getVersion();
 		player.sendPacket(new ErrorMessage(type, message, false));
@@ -185,10 +208,6 @@ public class LoginService extends Service {
 	private void onSuccessfulLogin(ResultSet user, Player player, LoginClientId id) throws SQLException {
 		player.setUsername(user.getString("username"));
 		player.setUserId(user.getInt("id"));
-		int tokenLength = getConfig(ConfigFile.NETWORK).getInt("SESSION-TOKEN-LENGTH", 24);
-		byte [] sessionToken = new byte[tokenLength];
-		random.nextBytes(sessionToken);
-		player.setSessionToken(sessionToken);
 		switch(user.getString("access_level")) {
 			case "player": player.setAccessLevel(AccessLevel.PLAYER); break;
 			case "warden": player.setAccessLevel(AccessLevel.WARDEN); break;
@@ -199,7 +218,7 @@ public class LoginService extends Service {
 		}
 		player.setPlayerState(PlayerState.LOGGED_IN);
 		sendLoginSuccessPacket(player);
-		Log.i("LoginService", "%s connected to the login server from %s:%d", player.getUsername(), id.getAddress(), id.getPort());
+		Log.i(this, "%s connected to the login server from %s:%d", player.getUsername(), id.getAddress(), id.getPort());
 		new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_SUCCESS).broadcast();
 	}
 	
@@ -207,7 +226,7 @@ public class LoginService extends Service {
 		String type = "Login Failed!";
 		String message = "Sorry, you're banned!";
 		player.sendPacket(new ErrorMessage(type, message, false));
-		Log.i("LoginService", "%s cannot login due to a ban, from %s:%d", player.getUsername(), id.getAddress(), id.getPort());
+		Log.i(this, "%s cannot login due to a ban, from %s:%d", player.getUsername(), id.getAddress(), id.getPort());
 		player.setPlayerState(PlayerState.DISCONNECTED);
 		new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_FAIL_BANNED).broadcast();
 	}
@@ -217,7 +236,7 @@ public class LoginService extends Service {
 		String message = getUserPassError(set, id.getUsername(), id.getPassword());
 		player.sendPacket(new ErrorMessage(type, message, false));
 		player.sendPacket(new LoginIncorrectClientId(getServerString(), REQUIRED_VERSION));
-		Log.i("LoginService", "%s cannot login due to invalid user/pass from %s:%d", id.getUsername(), id.getAddress(), id.getPort());
+		Log.i(this, "%s cannot login due to invalid user/pass from %s:%d", id.getUsername(), id.getAddress(), id.getPort());
 		player.setPlayerState(PlayerState.DISCONNECTED);
 		new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_FAIL_INVALID_USER_PASS).broadcast();
 	}
@@ -227,27 +246,27 @@ public class LoginService extends Service {
 		String message = "Server Error.";
 		player.sendPacket(new ErrorMessage(type, message, false));
 		player.setPlayerState(PlayerState.DISCONNECTED);
-		Log.e("LoginService", "%s cannot login due to server error, from %s:%d", id.getUsername(), id.getAddress(), id.getPort());
+		Log.e(this, "%s cannot login due to server error, from %s:%d", id.getUsername(), id.getAddress(), id.getPort());
 		new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_FAIL_SERVER_ERROR).broadcast();
 	}
 	
-	private void sendLoginSuccessPacket(Player p) throws SQLException {
-		LoginClientToken token = new LoginClientToken(p.getSessionToken(), p.getUserId(), p.getUsername());
+	private void sendLoginSuccessPacket(Player player) throws SQLException {
+		LoginClientToken token = new LoginClientToken(SESSION_TOKEN, player.getUserId(), player.getUsername());
 		LoginEnumCluster cluster = new LoginEnumCluster();
 		LoginClusterStatus clusterStatus = new LoginClusterStatus();
-		List <Galaxy> galaxies = getGalaxies(p);
-		SWGCharacter [] characters = getCharacters(p.getUserId());
+		List <Galaxy> galaxies = getGalaxies(player);
+		SWGCharacter [] characters = getCharacters(player.getUserId());
 		for (Galaxy g : galaxies) {
 			cluster.addGalaxy(g);
 			clusterStatus.addGalaxy(g);
 		}
 		cluster.setMaxCharacters(getConfig(ConfigFile.PRIMARY).getInt("GALAXY-MAX-CHARACTERS", 2));
-		p.sendPacket(new ServerNowEpochTime((int)(System.currentTimeMillis()/1E3)));
-		p.sendPacket(token);
-		p.sendPacket(cluster);
-		p.sendPacket(new CharacterCreationDisabled());
-		p.sendPacket(new EnumerateCharacterId(characters));
-		p.sendPacket(clusterStatus);
+		player.sendPacket(new ServerNowEpochTime((int)(System.currentTimeMillis()/1E3)));
+		player.sendPacket(token);
+		player.sendPacket(cluster);
+		player.sendPacket(new CharacterCreationDisabled());
+		player.sendPacket(new EnumerateCharacterId(characters));
+		player.sendPacket(clusterStatus);
 	}
 	
 	private boolean isUserValid(ResultSet set, String password) throws SQLException {
@@ -279,13 +298,6 @@ public class LoginService extends Service {
 		return "Invalid password";
 	}
 	
-	public ResultSet getCharacter(String character) throws SQLException {
-		synchronized (getCharacter) {
-			getCharacter.setString(1, character);
-			return getCharacter.executeQuery();
-		}
-	}
-	
 	private List <Galaxy> getGalaxies(Player p) throws SQLException {
 		List<Galaxy> galaxies = new ArrayList<>();
 		galaxies.add(CoreManager.getGalaxy());
@@ -293,27 +305,25 @@ public class LoginService extends Service {
 	}
 	
 	private SWGCharacter [] getCharacters(int userId) throws SQLException {
-		getCharacters.setInt(1, userId);
-		ResultSet set = getCharacters.executeQuery();
-		List <SWGCharacter> characters = new ArrayList<>();
-		try {
-			while (set.next()) {
-				SWGCharacter c = new SWGCharacter();
-				c.setId(set.getInt("id"));
-				c.setName(set.getString("name"));
-				c.setGalaxyId(CoreManager.getGalaxyId());
-				c.setRaceCrc(Race.getRaceByFile(set.getString("race")).getCrc());
-				c.setType(1); // 1 = Normal (2 = Jedi, 3 = Spectral)
-				characters.add(c);
+		synchronized (getCharacters) {
+			getCharacters.setInt(1, userId);
+			List <SWGCharacter> characters = new ArrayList<>();
+			try (ResultSet set = getCharacters.executeQuery()) {
+				while (set.next()) {
+					SWGCharacter c = new SWGCharacter();
+					c.setId(set.getInt("id"));
+					c.setName(set.getString("name"));
+					c.setGalaxyId(CoreManager.getGalaxyId());
+					c.setRaceCrc(Race.getRaceByFile(set.getString("race")).getCrc());
+					c.setType(1); // 1 = Normal (2 = Jedi, 3 = Spectral)
+					characters.add(c);
+				}
 			}
-		} finally {
-			set.close();
+			return characters.toArray(new SWGCharacter[characters.size()]);
 		}
-		return characters.toArray(new SWGCharacter[characters.size()]);
 	}
 	
 	private boolean deleteCharacter(SWGObject obj) {
-		new DestroyObjectIntent(obj).broadcast();
 		synchronized (deleteCharacter) {
 			try {
 				deleteCharacter.setLong(1, obj.getObjectId());

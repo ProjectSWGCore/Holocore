@@ -46,7 +46,6 @@ public class Player implements Comparable<Player> {
 	
 	private String username			= "";
 	private int userId				= 0;
-	private byte [] sessionToken	= new byte[0];
 	private int connectionId		= 0;
 	private AccessLevel accessLevel	= AccessLevel.PLAYER;
 	private PlayerServer server		= PlayerServer.NONE;
@@ -97,10 +96,6 @@ public class Player implements Comparable<Player> {
 		this.connectionId = connId;
 	}
 	
-	public void setSessionToken(byte [] sessionToken) {
-		this.sessionToken = sessionToken;
-	}
-	
 	public void setAccessLevel(AccessLevel accessLevel) {
 		this.accessLevel = accessLevel;
 	}
@@ -149,10 +144,6 @@ public class Player implements Comparable<Player> {
 	
 	public int getConnectionId() {
 		return connectionId;
-	}
-	
-	public byte [] getSessionToken() {
-		return sessionToken;
 	}
 	
 	public AccessLevel getAccessLevel() {
