@@ -163,21 +163,18 @@ public class GroupService extends Service {
 	}
 	
 	private void handleGroupInvite(Player player, CreatureObject target) {
-		if (target == null) {
+		CreatureObject creature = player.getCreatureObject();
+		Assert.notNull(creature);
+		if (target == null || !target.isPlayer() || creature.equals(target)) {
 			sendSystemMessage(player, "invite_no_target_self");
 			return;
 		}
-		CreatureObject creature = player.getCreatureObject();
-		Assert.notNull(creature);
-		if (creature.equals(target))
-			return;
-		long groupId = creature.getGroupId();
-		
 		if (target.getGroupId() != 0) {
 			sendSystemMessage(player, "already_grouped", "TT", target.getObjectId());
 			return;
 		}
 		
+		long groupId = creature.getGroupId();
 		if (groupId != 0) {
 			GroupObject group = getGroup(groupId);
 			Assert.notNull(group);
@@ -294,13 +291,6 @@ public class GroupService extends Service {
 		
 		GroupObject group = getGroup(creature.getGroupId());
 		Assert.notNull(group);
-		/*
-		 * Loot Rule to System Message:
-		 * RANDOM = leader_only
-		 * FREE_FOR_ALL = leader_only_free4all
-		 * LOTTERY = leader_only_lottery
-		 * MASTER_LOOTER = leader_only_master
-		 */
 	}
 	
 	private void handleKick(Player leader, CreatureObject kickedCreature) {
