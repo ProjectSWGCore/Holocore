@@ -404,6 +404,8 @@ public class GroupService extends Service {
 		sendSystemMessage(groupLeader, "invite_leader", "TT", invitee.getObjectId());
 		
 		// Set the invite data to the current group ID
+		if (groupId == 0)
+			groupId = -1; // Client wants -1 to create the GUI box
 		invitee.updateGroupInviteData(groupLeader, groupId, groupLeader.getCharacterName());
 	}
 	
