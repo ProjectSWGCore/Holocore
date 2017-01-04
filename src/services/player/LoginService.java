@@ -39,6 +39,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import network.packets.Packet;
 import network.packets.swg.ErrorMessage;
@@ -92,7 +93,7 @@ public class LoginService extends Service {
 	public boolean initialize() {
 		RelationalDatabase local = getLocalDatabase();
 		getUser = local.prepareStatement("SELECT * FROM users WHERE LOWER(username) = LOWER(?)");
-		getCharacter = local.prepareStatement("SELECT id FROM characters WHERE userid = ?");
+		getCharacter = local.prepareStatement("SELECT id FROM characters WHERE LOWER(name) = ?");
 		getCharacters = local.prepareStatement("SELECT * FROM characters WHERE userid = ?");
 		deleteCharacter = local.prepareStatement("DELETE FROM characters WHERE id = ?");
 		return super.initialize();
@@ -110,7 +111,8 @@ public class LoginService extends Service {
 	
 	public long getCharacterId(String name) {
 		Assert.notNull(name);
-		Assert.test(!name.trim().isEmpty());
+		name = name.trim().toLowerCase(Locale.US);
+		Assert.test(!name.isEmpty());
 		synchronized (getCharacter) {
 			try {
 				getCharacter.setString(1, name);
@@ -166,6 +168,10 @@ public class LoginService extends Service {
 	
 	private void handleLogin(Player player, LoginClientId id) {
 		Assert.notNull(player);
+		if (player.getPlayerState() == PlayerState.LOGGED_IN) { // Client occasionally sends multiple login requests
+			sendLoginSuccessPacket(player);
+			return;
+		}
 		Assert.test(player.getPlayerState() == PlayerState.CONNECTED);
 		Assert.test(player.getPlayerServer() == PlayerServer.NONE);
 		player.setPlayerState(PlayerState.LOGGING_IN);
@@ -250,7 +256,7 @@ public class LoginService extends Service {
 		new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_FAIL_SERVER_ERROR).broadcast();
 	}
 	
-	private void sendLoginSuccessPacket(Player player) throws SQLException {
+	private void sendLoginSuccessPacket(Player player) {
 		LoginClientToken token = new LoginClientToken(SESSION_TOKEN, player.getUserId(), player.getUsername());
 		LoginEnumCluster cluster = new LoginEnumCluster();
 		LoginClusterStatus clusterStatus = new LoginClusterStatus();
@@ -298,29 +304,33 @@ public class LoginService extends Service {
 		return "Invalid password";
 	}
 	
-	private List <Galaxy> getGalaxies(Player p) throws SQLException {
+	private List <Galaxy> getGalaxies(Player p) {
 		List<Galaxy> galaxies = new ArrayList<>();
 		galaxies.add(CoreManager.getGalaxy());
 		return galaxies;
 	}
 	
-	private SWGCharacter [] getCharacters(int userId) throws SQLException {
+	private SWGCharacter [] getCharacters(int userId) {
+		List <SWGCharacter> characters = new ArrayList<>();
 		synchronized (getCharacters) {
-			getCharacters.setInt(1, userId);
-			List <SWGCharacter> characters = new ArrayList<>();
-			try (ResultSet set = getCharacters.executeQuery()) {
-				while (set.next()) {
-					SWGCharacter c = new SWGCharacter();
-					c.setId(set.getInt("id"));
-					c.setName(set.getString("name"));
-					c.setGalaxyId(CoreManager.getGalaxyId());
-					c.setRaceCrc(Race.getRaceByFile(set.getString("race")).getCrc());
-					c.setType(1); // 1 = Normal (2 = Jedi, 3 = Spectral)
-					characters.add(c);
+			try {
+				getCharacters.setInt(1, userId);
+				try (ResultSet set = getCharacters.executeQuery()) {
+					while (set.next()) {
+						SWGCharacter c = new SWGCharacter();
+						c.setId(set.getInt("id"));
+						c.setName(set.getString("name"));
+						c.setGalaxyId(CoreManager.getGalaxyId());
+						c.setRaceCrc(Race.getRaceByFile(set.getString("race")).getCrc());
+						c.setType(1); // 1 = Normal (2 = Jedi, 3 = Spectral)
+						characters.add(c);
+					}
 				}
+			} catch (SQLException e) {
+				Log.e(this, e);
 			}
-			return characters.toArray(new SWGCharacter[characters.size()]);
 		}
+		return characters.toArray(new SWGCharacter[characters.size()]);
 	}
 	
 	private boolean deleteCharacter(SWGObject obj) {

@@ -81,11 +81,13 @@ public class AwarenessHandler {
 		if (obj.getParent() != null)
 			obj.moveToContainer(null);
 		// Update awareness
-		TerrainMap map = getTerrainMap(requestedLocation.getTerrain());
-		if (map != null) {
-			map.moveWithinMap(obj, requestedLocation);
-		} else {
-			Log.e(this, "Unknown terrain: %s", requestedLocation.getTerrain());
+		if (obj.getTerrain() != Terrain.GONE) {
+			TerrainMap map = getTerrainMap(requestedLocation.getTerrain());
+			if (map != null) {
+				map.moveWithinMap(obj, requestedLocation);
+			} else {
+				Log.e(this, "Unknown terrain: %s", requestedLocation.getTerrain());
+			}
 		}
 	}
 	
@@ -103,12 +105,14 @@ public class AwarenessHandler {
 	}
 	
 	public void disappearObject(SWGObject obj, boolean disappearObjects, boolean disappearCustom) {
-		TerrainMap map = getTerrainMap(obj);
-		Assert.notNull(map);
-		if (disappearObjects)
-			map.removeFromMap(obj);
-		else
-			map.removeWithoutUpdate(obj);
+		if (obj.getTerrain() != Terrain.GONE) {
+			TerrainMap map = getTerrainMap(obj);
+			Assert.notNull(map);
+			if (disappearObjects)
+				map.removeFromMap(obj);
+			else
+				map.removeWithoutUpdate(obj);
+		}
 		if (disappearCustom)
 			obj.clearCustomAware(true);
 	}

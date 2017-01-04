@@ -76,6 +76,11 @@ public class ChatRoomUpdateIntent extends Intent {
 		this.ignoreInvitation = ignoreInvitation;
 	}
 	
+	public ChatRoomUpdateIntent(Player player, String path, UpdateType updateType) {
+		this(ChatAvatar.getFromPlayer(player), path, updateType);
+		this.player = player;
+	}
+	
 	public String getPath() {
 		return path;
 	}

@@ -24,13 +24,14 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>
  ******************************************************************************/
-
 package services.group;
 
 import intents.GroupEventIntent;
 import intents.PlayerEventIntent;
 import intents.chat.ChatBroadcastIntent;
 import intents.chat.ChatRoomUpdateIntent;
+import intents.chat.ChatRoomUpdateIntent.UpdateType;
+import intents.object.DestroyObjectIntent;
 import intents.object.ObjectCreatedIntent;
 import resources.chat.ChatAvatar;
 import resources.control.Intent;
@@ -39,49 +40,29 @@ import resources.encodables.ProsePackage;
 import resources.objects.creature.CreatureObject;
 import resources.objects.group.GroupObject;
 import resources.player.Player;
-import resources.server_info.Log;
+import resources.player.Player.PlayerServer;
+import resources.server_info.SynchronizedMap;
 import services.objects.ObjectCreator;
-import services.player.PlayerManager;
 import utilities.IntentFactory;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-import resources.control.Assert;
-import resources.objects.group.LootRule;
-import services.CoreManager;
-import utilities.ThreadUtilities;
 
-/**
- * Created by Waverunner on 10/4/2015
- */
+import resources.control.Assert;
+
 public class GroupService extends Service {
 	
-	private final ScheduledExecutorService logoutService;
 	private final Map<Long, GroupObject> groups;
-	private Map<CreatureObject, Future<?>> logoffTimers;
-
+	
 	public GroupService() {
-		logoutService = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("group-logout-timer"));
-		logoffTimers = new HashMap<>();
-		groups = new HashMap<>();
+		groups = new SynchronizedMap<>();
 		registerForIntent(GroupEventIntent.TYPE);
 		registerForIntent(PlayerEventIntent.TYPE);
 	}
 	
 	@Override
-	public boolean start() {
-		return super.start();
-	}
-
-	@Override
 	public void onIntentReceived(Intent i) {
-		String type = i.getType();
-		switch(type) {
+		switch (i.getType()) {
 			case GroupEventIntent.TYPE:
 				if (i instanceof GroupEventIntent)
 					handleGroupEventIntent((GroupEventIntent) i);
@@ -90,10 +71,9 @@ public class GroupService extends Service {
 				if (i instanceof PlayerEventIntent)
 					handlePlayerEventIntent((PlayerEventIntent) i);
 				break;
-			default: break;
 		}
 	}
-
+	
 	private void handleGroupEventIntent(GroupEventIntent intent) {
 		switch (intent.getEventType()) {
 			case GROUP_INVITE:
@@ -109,7 +89,7 @@ public class GroupService extends Service {
 				handleGroupDecline(intent.getPlayer());
 				break;
 			case GROUP_DISBAND:
-				handleGroupDisband(intent.getPlayer(), intent.getTarget());
+				handleGroupDisband(intent.getPlayer());
 				break;
 			case GROUP_LEAVE:
 				handleGroupLeave(intent.getPlayer());
@@ -125,26 +105,25 @@ public class GroupService extends Service {
 				break;
 		}
 	}
-
+	
 	private void handlePlayerEventIntent(PlayerEventIntent intent) {
-		switch(intent.getEvent()) {
+		switch (intent.getEvent()) {
 			case PE_FIRST_ZONE:
 				handleMemberRezoned(intent.getPlayer());
 				break;
-			case PE_LOGGED_OUT:
-				handleMemberLoggedOff(intent.getPlayer());
+			case PE_DISAPPEAR:
+				handleMemberDisappeared(intent.getPlayer());
 				break;
-			default: break;
+			default:
+				break;
 		}
 	}
-
+	
 	private void handleMemberRezoned(Player player) {
 		CreatureObject creatureObject = player.getCreatureObject();
-		long groupId = creatureObject.getGroupId();
-
-		if (groupId == 0)
+		if (creatureObject.getGroupId() == 0)
 			return;
-
+		
 		GroupObject groupObject = getGroup(creatureObject.getGroupId());
 		
 		if (groupObject == null) {
@@ -152,57 +131,25 @@ public class GroupService extends Service {
 			creatureObject.setGroupId(0);
 			return;
 		}
-
-		// Tell group to remove that player from the log off timer
-		unmarkPlayerForLogoff(creatureObject);
+		
 		groupObject.updateMember(creatureObject);
 	}
-
-	private void handleMemberLoggedOff(Player player) {
-		if (player == null)
-			return;
+	
+	private void handleMemberDisappeared(Player player) {
+		CreatureObject creature = player.getCreatureObject();
+		Assert.notNull(creature);
+		if (creature.getGroupId() == 0)
+			return; // Ignore anyone without a group
 		
-		CreatureObject playerCreo = player.getCreatureObject();
-		
-		if (playerCreo == null)
-			return;
-		
-		GroupObject group = getGroup(playerCreo.getGroupId());
-		
-		if (group == null)
-			return;
-		
-		markPlayerForLogoff(player);
+		removePlayerFromGroup(creature);
 	}
 	
-	public void markPlayerForLogoff(Player player) {
-		// Create a timer with the GroupMember player owns as the key
-		// and a timer set to fire and remove that member as the value
-		CreatureObject playerCreo = player.getCreatureObject();
-		Future<?> future = logoutService.schedule(new LogOffTask(this, playerCreo), 4, TimeUnit.MINUTES);
-		
-		synchronized (this.logoffTimers) {
-			this.logoffTimers.put(playerCreo, future);
-		}
-	}
-	
-	public void unmarkPlayerForLogoff(CreatureObject playerCreo) {
-		if (playerCreo.getGroupId() == 0)
-			return;
-		
-		this.removeTimer(playerCreo);
-	}
-	
-	private void handleGroupDisband(Player player, CreatureObject target) {
+	private void handleGroupDisband(Player player) {
 		CreatureObject creo = player.getCreatureObject();
-
-		if (creo == null)
-			return;
-
+		Assert.notNull(creo);
 		GroupObject group = getGroup(creo.getGroupId());
-		if (group == null)
-			return;
-
+		Assert.notNull(group);
+		
 		if (group.getLeaderId() != creo.getObjectId()) {
 			sendSystemMessage(player, "must_be_leader");
 			return;
@@ -210,63 +157,32 @@ public class GroupService extends Service {
 		
 		destroyGroup(group, player);
 	}
-
+	
 	private void handleGroupLeave(Player player) {
-		this.removePlayerFromGroup(player.getCreatureObject());
-	}
-
-	private void removePlayerFromGroup(CreatureObject playerCreo) {
-		GroupObject group = getGroup(playerCreo.getGroupId());
-		
-		if (group == null)
-			return;
-		
-		// Check size of the group, if it only has two members, destroy the group
-		if (group.getGroupMembers().size() == 2) {
-			destroyGroup(group, group.getLeaderPlayer());
-			return;
-		}
-		
-		this.sendSystemMessage(playerCreo.getOwner(), "removed");
-		group.removeMember(playerCreo);
-		new ChatRoomUpdateIntent(getGroupChatPath(group.getObjectId(), CoreManager.getGalaxy().getName()), String.valueOf(group.getObjectId()), null,
-				ChatAvatar.getFromPlayer(playerCreo.getOwner()), null, ChatRoomUpdateIntent.UpdateType.LEAVE).broadcast();
+		removePlayerFromGroup(player.getCreatureObject());
 	}
 	
 	private void handleGroupInvite(Player player, CreatureObject target) {
-		CreatureObject playerCreo = player.getCreatureObject();
-
-		if (target == null) {
+		CreatureObject creature = player.getCreatureObject();
+		Assert.notNull(creature);
+		if (target == null || !target.isPlayer() || creature.equals(target)) {
 			sendSystemMessage(player, "invite_no_target_self");
 			return;
 		}
-		
-		Player targetOwner = target.getOwner();
-		if (targetOwner == null)
-			return;
-		
-		if (player.equals(targetOwner))
-			return;
-		
-		long groupId = playerCreo.getGroupId();
-		long inviterId = playerCreo.getObjectId();
-
 		if (target.getGroupId() != 0) {
 			sendSystemMessage(player, "already_grouped", "TT", target.getObjectId());
 			return;
 		}
 		
+		long groupId = creature.getGroupId();
 		if (groupId != 0) {
 			GroupObject group = getGroup(groupId);
+			Assert.notNull(group);
 			
 			if (!handleInviteToExistingGroup(player, target, group))
 				return;
-			
-			// Otherwise, just send the invite as normal
-			this.sendInvite(player, target, inviterId, groupId);
-
-		} else
-			this.sendInvite(player, target, inviterId);
+		}
+		sendInvite(player, target, groupId);
 	}
 	
 	private boolean handleInviteToExistingGroup(Player inviter, CreatureObject target, GroupObject group) {
@@ -274,36 +190,21 @@ public class GroupService extends Service {
 			sendSystemMessage(inviter, "must_be_leader");
 			return false;
 		}
-
+		
 		if (group.isFull()) {
 			sendSystemMessage(inviter, "full");
 			return false;
 		}
-		if (target.getInviterData().getId() != 0) {
+		
+		if (target.getInviterData().getId() != -1) {
 			if (target.getInviterData().getId() != inviter.getCreatureObject().getGroupId())
 				sendSystemMessage(inviter, "considering_other_group", "TT", target.getObjectId());
 			else
 				sendSystemMessage(inviter, "considering_your_group", "TT", target.getObjectId());
+			return false;
 		}
 		
 		return true;
-	}
-	
-	private void sendInvite(Player groupLeader, CreatureObject invitee, long inviterId, long groupId) {
-		sendSystemMessage(invitee.getOwner(), "invite_target", "TT", inviterId);
-		sendSystemMessage(groupLeader, "invite_leader", "TT", invitee.getObjectId());
-		
-		// Set the invite data to the current group ID
-		invitee.updateGroupInviteData(groupLeader, groupId, groupLeader.getCharacterName());
-	}
-
-
-	private void sendInvite(Player groupLeader, CreatureObject invitee, long inviterId) {
-		sendSystemMessage(invitee.getOwner(), "invite_target", "TT", inviterId);
-		sendSystemMessage(groupLeader, "invite_leader", "TT", invitee.getObjectId());
-		
-		// Set the invite data to -1 to mark a new group to be formed
-		invitee.updateGroupInviteData(groupLeader, -1, groupLeader.getCharacterName());
 	}
 	
 	private void handleGroupUninvite(Player player, CreatureObject target) {
@@ -313,6 +214,7 @@ public class GroupService extends Service {
 		}
 		
 		Player targetOwner = target.getOwner();
+		Assert.notNull(targetOwner);
 		String targetName = targetOwner.getCharacterName();
 		
 		if (target.getInviterData() == null) {
@@ -322,94 +224,52 @@ public class GroupService extends Service {
 		
 		sendSystemMessage(player, "uninvite_self", "TT", targetName);
 		sendSystemMessage(targetOwner, "uninvite_target", "TT", player.getCharacterName());
-		target.updateGroupInviteData(null, 0, "");
+		clearInviteData(target);
 	}
 	
 	private void handleGroupJoin(Player player) {
-		GroupObject group = null;
-		CreatureObject creo = player.getCreatureObject();
-
-		GroupInviterData invitation = creo.getInviterData();
-
-		long groupId = invitation.getId();
-
-		if (groupId == 0) {
-			sendSystemMessage(player, "must_be_invited");
-			return;
-		}
-
-		Player sender = invitation.getSender();
-
-		if (sender == null) {
-			// Inviter logged out, invitation is no good
-			sendSystemMessage(player, "must_be_invited");
-			creo.updateGroupInviteData(null, 0, "");
-			return;
-		}
-
-		CreatureObject senderCreo = sender.getCreatureObject();
-		long senderGroupId = senderCreo.getGroupId();
-
-		// Leader's current group and invited group do not match
-		if (senderGroupId != groupId && groupId != -1) {
-			sendInviterNotLeaderMessage(player, sender);
-			return;
-		}
-
-		// Group doesn't exist yet
-		if (senderGroupId == 0) {
-
-			group = createGroup(sender, player);
-
-			if (group == null) {
-				Log.e("GroupService", "Failed to create group from sender %s for %s", sender, player);
-				creo.updateGroupInviteData(null, 0, "");
+		CreatureObject creature = player.getCreatureObject();
+		try {
+			Player sender = creature.getInviterData().getSender();
+			if (sender == null || sender.getPlayerServer() != PlayerServer.ZONE) { // Inviter logged out, invitation is no good
+				sendSystemMessage(player, "must_be_invited");
 				return;
 			}
-
-			sendSystemMessage(sender, "formed_self", "TT", senderCreo.getObjectId());
-			new ChatRoomUpdateIntent(senderCreo.getOwner(), getGroupChatPath(group.getObjectId(), CoreManager.getGalaxy().getName()), String.valueOf(group.getObjectId()), null, null, ChatRoomUpdateIntent.UpdateType.JOIN, true).broadcast();
-		} else {
-			// Group already exists
-			group = getGroup(senderCreo.getGroupId());
-
-			if (group.getLeaderId() != sender.getCreatureObject().getObjectId()) {
-			    sendInviterNotLeaderMessage(player, sender);
-				return;
+			
+			long groupId = creature.getInviterData().getId();
+			if (groupId == -1) {
+				groupId = sender.getCreatureObject().getGroupId();
+				if (groupId == 0)
+					groupId = -1; // Client wants -1 for default
 			}
-
-			if (group.isFull()) {
-				sendSystemMessage(player, "join_full");
-				creo.updateGroupInviteData(null, 0, "");
-				return;
+			if (groupId == -1) { // Group doesn't exist yet
+				createGroup(sender, player);
+			} else { // Group already exists
+				joinGroup(sender.getCreatureObject(), creature, groupId);
 			}
+		} finally {
+			clearInviteData(creature);
 		}
-		
-		sendSystemMessage(player, "joined_self");
-		group.addMember(creo);
-		creo.updateGroupInviteData(null, 0, "");
-		
-		new ChatRoomUpdateIntent(player, getGroupChatPath(group.getObjectId(), CoreManager.getGalaxy().getName()), String.valueOf(group.getObjectId()), null, null, ChatRoomUpdateIntent.UpdateType.JOIN, true).broadcast();
 	}
 	
 	private void handleGroupDecline(Player invitee) {
-		CreatureObject creo = invitee.getCreatureObject();
-		GroupInviterData invitation = creo.getInviterData();
+		CreatureObject creature = invitee.getCreatureObject();
+		GroupInviterData invitation = creature.getInviterData();
 		
 		sendSystemMessage(invitee, "decline_self", "TT", invitation.getSender().getCharacterName());
 		sendSystemMessage(invitation.getSender(), "decline_leader", "TT", invitee.getCharacterName());
 		
-		creo.updateGroupInviteData(null, 0, "");
+		clearInviteData(creature);
 	}
 	
 	private void handleMakeLeader(Player currentLeader, CreatureObject newLeader) {
-		CreatureObject currentLeaderCreo = currentLeader.getCreatureObject();
+		CreatureObject currentLeaderCreature = currentLeader.getCreatureObject();
+		Assert.notNull(currentLeaderCreature);
+		Assert.test(newLeader.getGroupId() != 0);
 		GroupObject group = getGroup(newLeader.getGroupId());
+		Assert.notNull(group);
 		
-		if (group == null)
-			return;
-		
-		if (group.getLeaderId() != currentLeaderCreo.getObjectId()) {
+		if (group.getLeaderId() != currentLeaderCreature.getObjectId()) {
 			sendSystemMessage(currentLeader, "must_be_leader");
 			return;
 		}
@@ -423,147 +283,157 @@ public class GroupService extends Service {
 	}
 	
 	private void handleMakeMasterLooter(Player player, CreatureObject target) {
-		CreatureObject playerCreo = player.getCreatureObject();
-		if (playerCreo.getGroupId() == 0) {
+		CreatureObject creature = player.getCreatureObject();
+		if (creature.getGroupId() == 0) {
 			sendSystemMessage(player, "group_only");
 			return;
 		}
 		
-		GroupObject group = getGroup(playerCreo.getGroupId());
-		
-		if (group.getLeaderId() != playerCreo.getObjectId()) {
-			LootRule lootRule = group.getLootRule();
-		}
+		GroupObject group = getGroup(creature.getGroupId());
+		Assert.notNull(group);
 	}
 	
-	private void sendNonLeaderLootMessage(Player player, int lootRule) {
-		switch (LootRule.fromId(lootRule)) {
-			case RANDOM:
-				sendSystemMessage(player, "leader_only");
-				break;
-			case FREE_FOR_ALL:
-				sendSystemMessage(player, "leader_only_free4all");
-				break;
-			case LOTTERY:
-				sendSystemMessage(player, "leader_only_lottery");
-				break;
-			case MASTER_LOOTER:
-				sendSystemMessage(player, "leader_only_master");
-				break;
-			default:
-				break;
-		}
-	}
-	
-	private void handleKick(Player leader, CreatureObject kickedCreo) {
-		GroupObject group = getGroup(kickedCreo.getGroupId());
-		
-		if (group == null)
+	private void handleKick(Player leader, CreatureObject kickedCreature) {
+		Assert.notNull(kickedCreature);
+		CreatureObject leaderCreature = leader.getCreatureObject();
+		Assert.notNull(leaderCreature);
+		long groupId = leaderCreature.getGroupId();
+		if (groupId == 0) { // Requester is not in a group
+			sendSystemMessage(leader, "group_only");
 			return;
-
-		// Make sure leader is truly the leader
-		if (group.getLeaderId() != leader.getCreatureObject().getObjectId()) {
+		}
+		if (kickedCreature.getGroupId() != groupId) { // Requester and Kicked are not in same group
 			sendSystemMessage(leader, "must_be_leader");
 			return;
 		}
 		
-		this.removePlayerFromGroup(kickedCreo);
-	}
-
-	private void destroyGroup(GroupObject group, Player player) {
-		String galaxy = CoreManager.getGalaxy().getName();
-		new ChatRoomUpdateIntent(getGroupChatPath(group.getObjectId(), galaxy), String.valueOf(group.getObjectId()), null,
-				ChatAvatar.getFromPlayer(player), null, ChatRoomUpdateIntent.UpdateType.DESTROY).broadcast();
-
-		Map<String, Long> members = group.getGroupMembers();
-		PlayerManager playerManager = player.getPlayerManager();
-
-		sendGroupSystemMessage(group, "disbanded");
-		group.disbandGroup();
-
-		// TODO: Object destroy intent
-	}
-
-	private GroupObject createGroup(Player leader, Player member) {
-		GroupObject group = (GroupObject) ObjectCreator.createObjectFromTemplate("object/group/shared_group_object.iff");
-		
+		GroupObject group = getGroup(groupId);
 		Assert.notNull(group);
+		if (group.getLeaderId() != leaderCreature.getObjectId()) { // Requester is not leader of group
+			sendSystemMessage(leader, "must_be_leader");
+			return;
+		}
+		
+		removePlayerFromGroup(kickedCreature);
+	}
+	
+	private void createGroup(Player leader, Player member) {
+		GroupObject group = (GroupObject) ObjectCreator.createObjectFromTemplate("object/group/shared_group_object.iff");
+		Assert.notNull(group);
+		groups.put(group.getObjectId(), group);
+		
 		group.formGroup(leader.getCreatureObject(), member.getCreatureObject());
 		
-		synchronized (groups) {
-			groups.put(group.getObjectId(), group);
-		}
-
 		new ObjectCreatedIntent(group).broadcast();
-
-		String galaxy = CoreManager.getGalaxy().getName();
+		
+		String galaxy = leader.getGalaxyName();
 		new ChatRoomUpdateIntent(ChatAvatar.getFromPlayer(leader), getGroupChatPath(group.getObjectId(), galaxy), String.valueOf(group.getObjectId()), false).broadcast();
-
-		return group;
+		sendSystemMessage(leader, "formed_self", "TT", leader.getCreatureObject().getObjectId());
+		onJoinGroup(member.getCreatureObject(), group);
 	}
-
-	private void sendInviterNotLeaderMessage(Player invitedPlayer, Player sender) {
-		sendSystemMessage(invitedPlayer, "join_inviter_not_leader", "TT", sender.getCharacterName());
-		invitedPlayer.getCreatureObject().updateGroupInviteData(null, 0, "");
+	
+	private void destroyGroup(GroupObject group, Player player) {
+		String galaxy = player.getGalaxyName();
+		new ChatRoomUpdateIntent(getGroupChatPath(group.getObjectId(), galaxy), String.valueOf(group.getObjectId()), null, ChatAvatar.getFromPlayer(player), null, ChatRoomUpdateIntent.UpdateType.DESTROY).broadcast();
+		
+		sendGroupSystemMessage(group, "disbanded");
+		group.disbandGroup();
+		new DestroyObjectIntent(group).broadcast();
 	}
-
+	
+	private void joinGroup(CreatureObject inviter, CreatureObject creature, long groupId) {
+		Player player = creature.getOwner();
+		Assert.notNull(player);
+		GroupObject group = getGroup(groupId);
+		Assert.notNull(group);
+		
+		if (group.getLeaderId() != inviter.getObjectId()) {
+			sendSystemMessage(player, "join_inviter_not_leader", "TT", inviter.getName());
+			return;
+		}
+		if (group.isFull()) {
+			sendSystemMessage(player, "join_full");
+			return;
+		}
+		
+		group.addMember(creature);
+		onJoinGroup(creature, group);
+	}
+	
+	private void onJoinGroup(CreatureObject creature, GroupObject group) {
+		Player player = creature.getOwner();
+		Assert.notNull(player);
+		sendSystemMessage(player, "joined_self");
+		updateChatRoom(player, group, UpdateType.JOIN);
+	}
+	
+	private void removePlayerFromGroup(CreatureObject creature) {
+		Assert.notNull(creature);
+		Assert.test(creature.getGroupId() != 0);
+		GroupObject group = getGroup(creature.getGroupId());
+		Assert.notNull(group);
+		
+		// Check size of the group, if it only has two members, destroy the group
+		if (group.getGroupMembers().size() == 2) {
+			destroyGroup(group, group.getLeaderPlayer());
+			return;
+		}
+		
+		sendSystemMessage(creature.getOwner(), "removed");
+		group.removeMember(creature);
+		updateChatRoom(creature.getOwner(), group, UpdateType.LEAVE);
+	}
+	
+	private void updateChatRoom(Player player, GroupObject group, UpdateType updateType) {
+		new ChatRoomUpdateIntent(player, getGroupChatPath(group.getObjectId(), player.getGalaxyName()), updateType).broadcast();
+	}
+	
+	private void clearInviteData(CreatureObject creature) {
+		creature.updateGroupInviteData(null, 0, "");
+	}
+	
+	private void sendInvite(Player groupLeader, CreatureObject invitee, long groupId) {
+		sendSystemMessage(invitee.getOwner(), "invite_target", "TT", invitee.getName());
+		sendSystemMessage(groupLeader, "invite_leader", "TT", groupLeader.getCharacterName());
+		
+		// Set the invite data to the current group ID
+		if (groupId == 0)
+			groupId = -1; // Client wants -1 for default
+		invitee.updateGroupInviteData(groupLeader, groupId, groupLeader.getCharacterName());
+	}
+	
 	private void sendGroupSystemMessage(GroupObject group, String id) {
 		Set<CreatureObject> members = group.getGroupMemberObjects();
 		
 		for (CreatureObject member : members) {
-			if (member.getOwner() != null)
-				sendSystemMessage(member.getOwner(), id);
+			Assert.notNull(member.getOwner());
+			sendSystemMessage(member.getOwner(), id);
 		}
 	}
-
-	private void sendGroupSystemMessage(GroupObject group, String id, Object ... objects) {
+	
+	private void sendGroupSystemMessage(GroupObject group, String id, Object... objects) {
 		Set<CreatureObject> members = group.getGroupMemberObjects();
 		
 		for (CreatureObject member : members) {
-			// If there is no owner, (probably logged off), do not send the message
-			if (member.getOwner() != null)
-				sendSystemMessage(member.getOwner(), id, objects);
-
+			Assert.notNull(member.getOwner());
+			sendSystemMessage(member.getOwner(), id, objects);
 		}
 	}
-
+	
 	private String getGroupChatPath(long groupId, String galaxy) {
-		String groupIdString = String.valueOf(groupId);
-		return "SWG." + galaxy + ".group." + groupIdString + ".GroupChat";
+		return "SWG." + galaxy + ".group." + groupId + ".GroupChat";
 	}
+	
 	private GroupObject getGroup(long groupId) {
 		return groups.get(groupId);
 	}
-
+	
 	private void sendSystemMessage(Player target, String id) {
 		new ChatBroadcastIntent(target, new ProsePackage("group", id)).broadcast();
 	}
-
-	private void sendSystemMessage(Player target, String id, Object ... objects) {
+	
+	private void sendSystemMessage(Player target, String id, Object... objects) {
 		IntentFactory.sendSystemMessage(target, "@group:" + id, objects);
 	}
 	
-	private void removeTimer(CreatureObject groupMember) {
-		synchronized (this.logoffTimers) {
-			this.logoffTimers.remove(groupMember).cancel(true);
-		}
-	}
-
-	private class LogOffTask implements Runnable {
-		private CreatureObject loggedMember;
-
-		public LogOffTask(GroupService groupService, CreatureObject member) {
-			this.loggedMember = member;
-		}
-
-		@Override
-		public void run() {
-			synchronized (GroupService.this) {
-				GroupService.this.removePlayerFromGroup(loggedMember);
-				GroupService.this.removeTimer(loggedMember);
-			}
-		}
-	}
 }
-
-

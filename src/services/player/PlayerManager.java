@@ -44,6 +44,7 @@ import resources.control.Manager;
 import resources.player.Player;
 import resources.player.PlayerEvent;
 import resources.player.PlayerState;
+import resources.player.Player.PlayerServer;
 import resources.server_info.SynchronizedMap;
 import services.CoreManager;
 
@@ -237,6 +238,7 @@ public class PlayerManager extends Manager {
 		Player p = players.remove(cci.getNetworkId());
 		Assert.notNull(p);
 		p.setPlayerState(PlayerState.DISCONNECTED);
+		p.setPlayerServer(PlayerServer.NONE);
 		new PlayerEventIntent(p, PlayerEvent.PE_LOGGED_OUT).broadcast();
 	}
 }

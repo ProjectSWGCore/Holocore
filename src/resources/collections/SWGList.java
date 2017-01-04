@@ -29,6 +29,7 @@ package resources.collections;
 
 import network.packets.Packet;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
+import resources.control.Assert;
 import resources.encodables.Encodable;
 import resources.network.NetBuffer;
 import resources.objects.SWGObject;
@@ -251,7 +252,7 @@ public class SWGList<E> extends SynchronizedList<E> implements Encodable {
 	}
 	
 	public void sendDeltaMessage(SWGObject target) {
-		if (deltas.size() == 0)
+		if (deltas.isEmpty())
 			return;
 		
 		target.sendDelta(view, updateType, getDeltaData());
@@ -291,10 +292,7 @@ public class SWGList<E> extends SynchronizedList<E> implements Encodable {
 	
 	private void addObjectData(int index, E obj, byte update) {
 		byte[] encodedData = Encoder.encode(obj, strType);
-		if (encodedData == null) {
-			Log.e(toString(), "Tried to encode an object that could not be encoded properly. Object: " + obj);
-			return;
-		}
+		Assert.notNull(encodedData);
 		
 		synchronized (data) {
 			dataSize += encodedData.length;

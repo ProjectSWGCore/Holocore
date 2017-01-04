@@ -261,7 +261,8 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 	
 	private void handleZoneIn(CreatureObject creature, Player player, boolean firstZone) {
 		creature.setOwner(player);
-		Assert.test(player.getPlayerState() == PlayerState.LOGGED_IN);
+		// Fresh login or teleport/travel
+		Assert.test(player.getPlayerState() == PlayerState.LOGGED_IN || player.getPlayerState() == PlayerState.ZONED_IN);
 		player.setPlayerState(PlayerState.ZONING_IN);
 		Log.i(this, "Zoning in %s with character %s", player.getUsername(), player.getCharacterName());
 		if (firstZone)
