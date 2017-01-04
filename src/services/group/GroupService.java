@@ -182,7 +182,7 @@ public class GroupService extends Service {
 			if (!handleInviteToExistingGroup(player, target, group))
 				return;
 		}
-		sendInvite(player, target, creature.getObjectId(), groupId);
+		sendInvite(player, target, groupId);
 	}
 	
 	private boolean handleInviteToExistingGroup(Player inviter, CreatureObject target, GroupObject group) {
@@ -392,9 +392,9 @@ public class GroupService extends Service {
 		creature.updateGroupInviteData(null, 0, "");
 	}
 	
-	private void sendInvite(Player groupLeader, CreatureObject invitee, long inviterId, long groupId) {
-		sendSystemMessage(invitee.getOwner(), "invite_target", "TT", inviterId);
-		sendSystemMessage(groupLeader, "invite_leader", "TT", invitee.getObjectId());
+	private void sendInvite(Player groupLeader, CreatureObject invitee, long groupId) {
+		sendSystemMessage(invitee.getOwner(), "invite_target", "TT", invitee.getName());
+		sendSystemMessage(groupLeader, "invite_leader", "TT", groupLeader.getCharacterName());
 		
 		// Set the invite data to the current group ID
 		if (groupId == 0)
