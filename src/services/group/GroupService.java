@@ -199,7 +199,7 @@ public class GroupService extends Service {
 			return false;
 		}
 		
-		if (target.getInviterData().getId() != 0) {
+		if (target.getInviterData().getId() != -1) {
 			if (target.getInviterData().getId() != inviter.getCreatureObject().getGroupId())
 				sendSystemMessage(inviter, "considering_other_group", "TT", target.getObjectId());
 			else
@@ -240,9 +240,12 @@ public class GroupService extends Service {
 			}
 			
 			long groupId = creature.getInviterData().getId();
-			if (groupId == 0)
+			if (groupId == -1) {
 				groupId = sender.getCreatureObject().getGroupId();
-			if (groupId == 0) { // Group doesn't exist yet
+				if (groupId == 0)
+					groupId = -1; // Client wants -1 for default
+			}
+			if (groupId == -1) { // Group doesn't exist yet
 				createGroup(sender, player);
 			} else { // Group already exists
 				joinGroup(sender.getCreatureObject(), creature, groupId);
@@ -405,7 +408,7 @@ public class GroupService extends Service {
 		
 		// Set the invite data to the current group ID
 		if (groupId == 0)
-			groupId = -1; // Client wants -1 to create the GUI box
+			groupId = -1; // Client wants -1 for default
 		invitee.updateGroupInviteData(groupLeader, groupId, groupLeader.getCharacterName());
 	}
 	
