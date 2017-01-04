@@ -36,12 +36,13 @@ import utilities.Encoder;
 import utilities.Encoder.StringType;
 
 public class DeltaBuilder {
-	private SWGObject object;
-	private BaselineType type;
-	private int num;
-	private int updateType;
-	private byte[] data;
-
+	
+	private final SWGObject object;
+	private final BaselineType type;
+	private final int num;
+	private final int updateType;
+	private final byte[] data;
+	
 	public DeltaBuilder(SWGObject object, BaselineType type, int num, int updateType, Object change) {
 		this.object = object;
 		this.type = type;
@@ -58,31 +59,15 @@ public class DeltaBuilder {
 		this.updateType = updateType;
 	}
 	
-	public void sendTo(Player target) {
-		target.sendPacket(getBuiltMessage());
-	}
-	
 	public void send() {
 		DeltasMessage message = getBuiltMessage();
 		Player owner = object.getOwner();
-		boolean sendSelf = owner != null;
-		if (owner == null || owner.getPlayerState() != PlayerState.ZONED_IN)
-			sendSelf = false;
-		switch(num) {
-			case 3:
-			case 6:
-				if (sendSelf)
-					object.sendObserversAndSelf(message);
-				else
-					object.sendObservers(message);
-				break;
-			default:
-				if (sendSelf)
-					object.sendSelf(message);
-				break;
-		}
+		if (owner != null && owner.getPlayerState() == PlayerState.ZONED_IN)
+			owner.sendPacket(message);
+		if (num == 3 || num == 6) // Shared Objects
+			object.sendObservers(message);
 	}
-
+	
 	public DeltasMessage getBuiltMessage() {
 		DeltasMessage delta = new DeltasMessage();
 		delta.setId(object.getObjectId());
@@ -92,4 +77,5 @@ public class DeltaBuilder {
 		delta.setData(data);
 		return delta;
 	}
+	
 }
