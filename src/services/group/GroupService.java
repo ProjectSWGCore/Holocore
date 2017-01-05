@@ -196,7 +196,7 @@ public class GroupService extends Service {
 			return false;
 		}
 		
-		if (target.getInviterData().getId() != -1) {
+		if (target.getInviterData().getId() != 0) {
 			if (target.getInviterData().getId() != inviter.getCreatureObject().getGroupId())
 				sendSystemMessage(inviter, "considering_other_group", "TT", target.getObjectId());
 			else
@@ -393,8 +393,8 @@ public class GroupService extends Service {
 	}
 	
 	private void sendInvite(Player groupLeader, CreatureObject invitee, long groupId) {
-		sendSystemMessage(invitee.getOwner(), "invite_target", "TT", invitee.getName());
-		sendSystemMessage(groupLeader, "invite_leader", "TT", groupLeader.getCharacterName());
+		sendSystemMessage(invitee.getOwner(), "invite_target", "TT", groupLeader.getCharacterName());
+		sendSystemMessage(groupLeader, "invite_leader", "TT", invitee.getName());
 		
 		// Set the invite data to the current group ID
 		if (groupId == 0)

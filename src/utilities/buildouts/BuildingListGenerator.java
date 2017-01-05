@@ -44,7 +44,7 @@ public class BuildingListGenerator {
 	
 	public static void main(String [] args) throws IOException {
 		ClientBuildoutService buildouts = new ClientBuildoutService();
-		Collection<SWGObject> objects = buildouts.loadClientObjects();
+		Collection<SWGObject> objects = buildouts.loadClientObjects().values();
 		System.out.println("Organizing data...");
 		List<BuildingObject> buildings = new ArrayList<>();
 		SdbGenerator gen = new SdbGenerator(new File("buildings.sdb"));
