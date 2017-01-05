@@ -126,7 +126,7 @@ public class ClientBuildoutService extends Service {
 	}
 	
 	private Map<Long, SWGObject> loadObjects() throws SQLException {
-		Map<Long, SWGObject> objects = new HashMap<>(112660);
+		Map<Long, SWGObject> objects = new Hashtable<>(112660);
 		try (CrcDatabase strings = new CrcDatabase()) {
 			strings.loadStrings();
 			try (BuildoutLoader loader = new BuildoutLoader(areasById, objects, strings, new File("serverdata/buildout/objects.sdb"))) {
@@ -144,7 +144,7 @@ public class ClientBuildoutService extends Service {
 	}
 	
 	private Map<Long, SWGObject> loadObjects(int areaId) throws SQLException {
-		Map<Long, SWGObject> objects = new HashMap<>(112660);
+		Map<Long, SWGObject> objects = new Hashtable<>();
 		try (CrcDatabase strings = new CrcDatabase()) {
 			strings.loadStrings();
 			try (BuildoutLoader loader = new BuildoutLoader(areasById, objects, strings, new File("serverdata/buildout/objects.sdb"))) {
