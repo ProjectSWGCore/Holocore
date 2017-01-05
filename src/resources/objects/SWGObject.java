@@ -306,17 +306,8 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	public void setLocation(Location l) {
-		if (l == null)
-			return;
 		synchronized (location) {
 			buildoutLocation.mergeWith(l);
-			updateBuildoutLocation();
-		}
-	}
-	
-	public void setLocation(double x, double y, double z) {
-		synchronized (location) {
-			buildoutLocation.mergeLocation(x, y, z);
 			updateBuildoutLocation();
 		}
 	}
