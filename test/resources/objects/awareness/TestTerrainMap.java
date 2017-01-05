@@ -111,7 +111,7 @@ public class TestTerrainMap {
 	@Test
 	public void testTatooine() {
 		ClientBuildoutService buildoutService = new ClientBuildoutService();
-		Collection<SWGObject> allObjects = buildoutService.loadClientObjectsByArea(843); // mos eisley's area id
+		Collection<SWGObject> allObjects = buildoutService.loadClientObjectsByArea(843).values(); // mos eisley's area id
 		List<SWGObject> tatObjects = allObjects.stream().filter((obj) -> {
 			return obj.getTerrain() == Terrain.TATOOINE && obj.getParent() == null;
 		}).collect(Collectors.toList());

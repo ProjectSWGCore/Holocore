@@ -60,10 +60,10 @@ public class TestAwarenessHandler {
 	public static void initTatooine() {
 		ClientBuildoutService buildoutService = new ClientBuildoutService();
 		double loadDistance = 1024*1.414*2; // 1024 * sqrt(2)
-		for (SWGObject obj : buildoutService.loadClientObjectsByArea(843)) { // mos eisley's area id
+		for (SWGObject obj : buildoutService.loadClientObjectsByArea(843).values()) { // mos eisley's area id
 			initObject(obj, loadDistance);
 		}
-		for (SWGObject obj : buildoutService.loadClientObjectsByArea(-59)) { // general tatooine's area id
+		for (SWGObject obj : buildoutService.loadClientObjectsByArea(-59).values()) { // general tatooine's area id
 			initObject(obj, loadDistance);
 		}
 		CREATURE2.setLocation(CREATURE2_LOCATION);

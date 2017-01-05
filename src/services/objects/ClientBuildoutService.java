@@ -36,9 +36,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Locale;
@@ -97,8 +95,8 @@ public class ClientBuildoutService extends Service {
 		}
 	}
 	
-	public Collection<SWGObject> loadClientObjects() {
-		Collection<SWGObject> objects;
+	public Map<Long, SWGObject> loadClientObjects() {
+		Map<Long, SWGObject> objects;
 		long startLoad = System.nanoTime();
 		Log.i(this, "Loading client objects...");
 		try {
@@ -106,9 +104,9 @@ public class ClientBuildoutService extends Service {
 			if (getConfig(ConfigFile.PRIMARY).getBoolean("LOAD-OBJECTS", true))
 				objects = loadObjects();
 			else
-				objects = new HashSet<>();
+				objects = new HashMap<>();
 		} catch (SQLException e) {
-			objects = new HashSet<>();
+			objects = new HashMap<>();
 			Log.e(this, e);
 		}
 		double loadTime = (System.nanoTime() - startLoad) / 1E6;
@@ -116,67 +114,70 @@ public class ClientBuildoutService extends Service {
 		return objects;
 	}
 	
-	public Collection<SWGObject> loadClientObjectsByArea(int areaId) {
+	public Map<Long, SWGObject> loadClientObjectsByArea(int areaId) {
 		try {
 			if (areasById.isEmpty())
 				loadAreas(new ArrayList<>());
 			return loadObjects(areaId);
 		} catch (SQLException e) {
 			Log.e(this, e);
-			return new ArrayList<>();
+			return new HashMap<>();
 		}
 	}
 	
-	private Collection<SWGObject> loadObjects() throws SQLException {
+	private Map<Long, SWGObject> loadObjects() throws SQLException {
 		Map<Long, SWGObject> objects = new HashMap<>(112660);
 		try (CrcDatabase strings = new CrcDatabase()) {
 			strings.loadStrings();
 			try (BuildoutLoader loader = new BuildoutLoader(areasById, objects, strings, new File("serverdata/buildout/objects.sdb"))) {
+				SWGObject obj;
 				while (loader.loadNextEntry()) {
 					if (!loader.isValidNextEntry())
 						continue;
-					SWGObject obj = loader.createObject();
-					objects.put(obj.getObjectId(), obj);
+					obj = loader.createObject();
+					new ObjectCreatedIntent(obj).broadcast();
 				}
 			}
 		}
-		List<SWGObject> ret = new ArrayList<>(objects.values());
-		ret.addAll(getAdditionalObjects(objects));
-		return ret;
+		objects.putAll(getAdditionalObjects(objects));
+		return objects;
 	}
 	
-	private Collection<SWGObject> loadObjects(int areaId) throws SQLException {
+	private Map<Long, SWGObject> loadObjects(int areaId) throws SQLException {
 		Map<Long, SWGObject> objects = new HashMap<>(112660);
 		try (CrcDatabase strings = new CrcDatabase()) {
 			strings.loadStrings();
 			try (BuildoutLoader loader = new BuildoutLoader(areasById, objects, strings, new File("serverdata/buildout/objects.sdb"))) {
+				SWGObject obj;
 				while (loader.loadNextEntry()) {
 					if (!loader.isAreaId(areaId))
 						continue;
-					SWGObject obj = loader.createObject();
-					objects.put(obj.getObjectId(), obj);
+					obj = loader.createObject();
+					new ObjectCreatedIntent(obj).broadcast();
 				}
 			}
 		}
-		return new ArrayList<>(objects.values());
+		return objects;
 	}
 	
-	private Collection<SWGObject> getAdditionalObjects(Map<Long, SWGObject> buildouts) throws SQLException {
+	private Map<Long, SWGObject> getAdditionalObjects(Map<Long, SWGObject> buildouts) throws SQLException {
 		Map<Long, SWGObject> objects = new Hashtable<>();
 		try (CrcDatabase strings = new CrcDatabase()) {
 			try (RelationalServerData data = RelationalServerFactory.getServerData("buildout/additional_buildouts.db", "additional_buildouts")) {
 				try (ResultSet set = data.executeQuery(GET_ADDITIONAL_OBJECTS_SQL)) {
 					set.setFetchSize(4*1024);
+					SWGObject obj;
 					while (set.next()) {
-						createAdditionalObject(objects, buildouts, set);
+						obj = createAdditionalObject(objects, buildouts, set);
+						new ObjectCreatedIntent(obj).broadcast();
 					}
 				}
 			}
 		}
-		return new ArrayList<>(objects.values());
+		return objects;
 	}
 	
-	private void createAdditionalObject(Map<Long, SWGObject> objects, Map<Long, SWGObject> buildouts, ResultSet set) throws SQLException {
+	private SWGObject createAdditionalObject(Map<Long, SWGObject> objects, Map<Long, SWGObject> buildouts, ResultSet set) throws SQLException {
 		try {
 			SWGObject obj = ObjectCreator.createObjectFromTemplate(set.getString("template"));
 			Location l = new Location();
@@ -190,8 +191,10 @@ public class ClientBuildoutService extends Service {
 			obj.setPrefLoadRange(set.getFloat("radius"));
 			checkParent(buildouts, obj, set.getString("building_name"), set.getInt("cell_id"));
 			objects.put(obj.getObjectId(), obj);
+			return obj;
 		} catch (NullPointerException e) {
 			Log.e(this, "File: %s", set.getString("template"));
+			return null;
 		}
 	}
 	
@@ -371,6 +374,7 @@ public class ClientBuildoutService extends Service {
 			setObjectLocation(obj);
 			setCellNumber(obj);
 			setContainer(obj);
+			objects.put(obj.getObjectId(), obj);
 			return obj;
 		}
 		

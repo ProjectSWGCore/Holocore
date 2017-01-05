@@ -27,7 +27,6 @@
 ***********************************************************************************/
 package services.objects;
 
-import java.util.Collection;
 import java.util.Hashtable;
 import java.util.Map;
 import java.util.concurrent.Executors;
@@ -102,13 +101,11 @@ public class ObjectManager extends Manager {
 	
 	@Override
 	public boolean initialize() {
-		Collection<SWGObject> buildouts = clientBuildoutService.loadClientObjects();
+		synchronized (objectMap) {
+			objectMap.putAll(clientBuildoutService.loadClientObjects());
+		}
 		if (!loadObjects())
 			return false;
-		for (SWGObject obj : buildouts) {
-			putObject(obj);
-			new ObjectCreatedIntent(obj).broadcast();
-		}
 		synchronized (database) {
 			database.traverse((obj) -> loadObject(obj));
 		}
