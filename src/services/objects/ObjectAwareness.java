@@ -229,6 +229,10 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 			SWGObject obj = i.getObjectManager().getObjectById(trans.getObjectId());
 			SWGObject parent = i.getObjectManager().getObjectById(trans.getCellId());
 			Assert.test(obj instanceof CreatureObject);
+			if (parent == null) {
+				Log.w(this, "Unknown data transform parent! Obj: %d/%s  Parent: %d", trans.getObjectId(), obj, trans.getCellId());
+				return;
+			}
 			Location requestedLocation = new Location(trans.getLocation());
 			requestedLocation.setTerrain(obj.getTerrain());
 			moveObjectWithTransform(obj, parent, requestedLocation, trans.getSpeed(), trans.getUpdateCounter());
