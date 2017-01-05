@@ -27,11 +27,17 @@
  ***********************************************************************************/
 package services.objects;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.List;
@@ -60,17 +66,6 @@ import resources.server_info.RelationalServerFactory;
 public class ClientBuildoutService extends Service {
 	
 	private static final String GET_BUILDOUT_AREAS = "SELECT * FROM areas ORDER BY area_name ASC, event ASC";
-	private static final String GET_CLIENT_OBJECTS_SQL = "SELECT objects.id, objects.snapshot, objects.area_id, objects.template_crc, objects.container_id, "
-			+ "objects.x, objects.y, objects.z, objects.orientation_x, objects.orientation_y, objects.orientation_z, objects.orientation_w, "
-			+ "objects.radius, objects.cell_index "
-			+ "FROM objects "
-			+ "ORDER BY buildout_id ASC";
-	private static final String GET_CLIENT_OBJECTS_BY_AREA_SQL = "SELECT objects.id, objects.snapshot, objects.area_id, objects.template_crc, objects.container_id, "
-			+ "objects.x, objects.y, objects.z, objects.orientation_x, objects.orientation_y, objects.orientation_z, objects.orientation_w, "
-			+ "objects.radius, objects.cell_index "
-			+ "FROM objects "
-			+ "WHERE objects.area_id = ? "
-			+ "ORDER BY buildout_id ASC";
 	private static final String GET_ADDITIONAL_OBJECTS_SQL = "SELECT terrain, template, x, y, z, heading, cell_id, radius, building_name "
 			+ "FROM additional_buildouts WHERE active = 1";
 	private static final String GET_BUILDING_INFO_SQL = "SELECT object_id FROM buildings WHERE building_id = ?";
@@ -133,11 +128,15 @@ public class ClientBuildoutService extends Service {
 	}
 	
 	private Collection<SWGObject> loadObjects() throws SQLException {
-		Map<Long, SWGObject> objects = new Hashtable<>();
+		Map<Long, SWGObject> objects = new HashMap<>(112660);
 		try (CrcDatabase strings = new CrcDatabase()) {
-			try (RelationalServerData data = RelationalServerFactory.getServerData("buildout/buildouts.db", "objects")) {
-				try (ResultSet set = data.executeQuery(GET_CLIENT_OBJECTS_SQL)) {
-					readAllObjects(objects, strings, set);
+			strings.loadStrings();
+			try (BuildoutLoader loader = new BuildoutLoader(areasById, objects, strings, new File("serverdata/buildout/objects.sdb"))) {
+				while (loader.loadNextEntry()) {
+					if (!loader.isValidNextEntry())
+						continue;
+					SWGObject obj = loader.createObject();
+					objects.put(obj.getObjectId(), obj);
 				}
 			}
 		}
@@ -147,36 +146,19 @@ public class ClientBuildoutService extends Service {
 	}
 	
 	private Collection<SWGObject> loadObjects(int areaId) throws SQLException {
-		Map<Long, SWGObject> objects = new Hashtable<>();
+		Map<Long, SWGObject> objects = new HashMap<>(112660);
 		try (CrcDatabase strings = new CrcDatabase()) {
-			try (RelationalServerData data = RelationalServerFactory.getServerData("buildout/buildouts.db", "objects")) {
-				PreparedStatement ps = data.prepareStatement(GET_CLIENT_OBJECTS_BY_AREA_SQL);
-				ps.setInt(1, areaId);
-				try (ResultSet set = ps.executeQuery()) {
-					readAllObjects(objects, strings, set);
+			strings.loadStrings();
+			try (BuildoutLoader loader = new BuildoutLoader(areasById, objects, strings, new File("serverdata/buildout/objects.sdb"))) {
+				while (loader.loadNextEntry()) {
+					if (!loader.isAreaId(areaId))
+						continue;
+					SWGObject obj = loader.createObject();
+					objects.put(obj.getObjectId(), obj);
 				}
 			}
 		}
 		return new ArrayList<>(objects.values());
-	}
-	
-	private void readAllObjects(Map<Long, SWGObject> objects, CrcDatabase strings, ResultSet set) throws SQLException {
-		set.setFetchSize(4*1024);
-		BuildoutArea area = null;
-		ObjectInformation info = new ObjectInformation(set);
-		int prevAreaId = Integer.MAX_VALUE;
-		int areaId = 0;
-		while (set.next()) {
-			areaId = info.getAreaIdNoLoad();
-			if (prevAreaId != areaId) {
-				area = areasById.get(areaId);
-				prevAreaId = areaId;
-			}
-			if (area == null)
-				continue;
-			info.load(strings);
-			createObject(objects, area, info);
-		}
 	}
 	
 	private Collection<SWGObject> getAdditionalObjects(Map<Long, SWGObject> buildouts) throws SQLException {
@@ -192,18 +174,6 @@ public class ClientBuildoutService extends Service {
 			}
 		}
 		return new ArrayList<>(objects.values());
-	}
-	
-	private void createObject(Map<Long, SWGObject> objects, BuildoutArea area, ObjectInformation info) throws SQLException {
-		SWGObject obj = ObjectCreator.createObjectFromTemplate(info.getId(), info.getTemplate());
-		Location l = info.getLocation();
-		l.setTerrain(area.getTerrain());
-		obj.setLocation(l);
-		obj.setClassification(info.isSnapshot() ? ObjectClassification.SNAPSHOT : ObjectClassification.BUILDOUT);
-		obj.setPrefLoadRange(info.getRadius());
-		checkCell(obj, info.getCell());
-		checkChild(objects, obj, info.getContainer());
-		objects.put(obj.getObjectId(), obj);
 	}
 	
 	private void createAdditionalObject(Map<Long, SWGObject> objects, Map<Long, SWGObject> buildouts, ResultSet set) throws SQLException {
@@ -255,16 +225,6 @@ public class ClientBuildoutService extends Service {
 				}
 			}
 		}
-	}
-	
-	private void checkCell(SWGObject obj, int cell) {
-		if (cell != 0 && obj instanceof CellObject)
-			((CellObject) obj).setNumber(cell);
-	}
-	
-	private void checkChild(Map<Long, SWGObject> objects, SWGObject obj, long container) {
-		if (container != 0)
-			obj.moveToContainer(objects.get(container));
 	}
 	
 	private List<String> getEvents() {
@@ -359,6 +319,178 @@ public class ClientBuildoutService extends Service {
 		return area.getTerrain() == t && x >= area.getX1() && x <= area.getX2() && z >= area.getZ1() && z <= area.getZ2();
 	}
 	
+	private static class BuildoutLoader implements AutoCloseable {
+		
+		private final Map<Integer, BuildoutArea> areas;
+		private final Map<Long, SWGObject> objects;
+		private final CrcDatabase strings;
+		private final SdbLoader loader;
+		private final Location location;
+		private final ObjectCreationData creationData;
+		private BuildoutArea previousArea;
+		private String line;
+		
+		public BuildoutLoader(Map<Integer, BuildoutArea> areas, Map<Long, SWGObject> objects, CrcDatabase strings, File file) {
+			this.areas = areas;
+			this.objects = objects;
+			this.strings = strings;
+			this.loader = new SdbLoader(file);
+			this.location = new Location();
+			this.creationData = new ObjectCreationData();
+			this.previousArea = areas.values().iterator().next();
+			this.line = "";
+			loader.loadNextLine(); // Skip column names
+			loader.loadNextLine(); // Skip data types
+		}
+		
+		public void close() {
+			loader.close();
+		}
+		
+		public boolean loadNextEntry() {
+			line = loader.loadNextLine();
+			if (line != null) {
+				parse();
+				return true;
+			}
+			return false;
+		}
+		
+		public boolean isAreaId(int areaId) {
+			return creationData.areaId == areaId;
+		}
+		
+		public boolean isValidNextEntry() {
+			return areas.containsKey(creationData.areaId);
+		}
+		
+		public SWGObject createObject() {
+			SWGObject obj = ObjectCreator.createObjectFromTemplate(creationData.id, strings.getString(creationData.templateCrc));
+			obj.setClassification(creationData.snapshot ? ObjectClassification.SNAPSHOT : ObjectClassification.BUILDOUT);
+			obj.setPrefLoadRange(creationData.radius);
+			setObjectLocation(obj);
+			setCellNumber(obj);
+			setContainer(obj);
+			return obj;
+		}
+		
+		private void setObjectLocation(SWGObject obj) {
+			location.setPosition(creationData.x, creationData.y, creationData.z);
+			location.setOrientation(creationData.orientationX, creationData.orientationY, creationData.orientationZ, creationData.orientationW);
+			if (previousArea.getId() != creationData.areaId)
+				location.setTerrain(areas.get(creationData.areaId).getTerrain());
+			obj.setLocation(location);
+		}
+		
+		private void setCellNumber(SWGObject obj) {
+			if (creationData.cellIndex != 0)
+				((CellObject) obj).setNumber(creationData.cellIndex);
+		}
+		
+		private void setContainer(SWGObject obj) {
+			if (creationData.containerId != 0)
+				obj.moveToContainer(objects.get(creationData.containerId));
+		}
+		
+		private void parse() {
+			int prevIndex = 0;
+			int nextIndex = 0;
+			for (int i = 0; i < 15; i++) { // 14 expected variables
+				nextIndex = line.indexOf('\t', prevIndex);
+				parseValue(getNextValue(prevIndex, nextIndex), i);
+				prevIndex = nextIndex+1;
+			}
+		}
+		
+		private void parseValue(Number n, int index) {
+			switch (index) {
+				case 1: creationData.id = n.longValue(); break;
+				case 2: creationData.snapshot = n.longValue() != 0; break;
+				case 3: creationData.areaId = n.intValue(); break;
+				case 4: creationData.templateCrc = n.intValue(); break;
+				case 5: creationData.containerId = n.longValue(); break;
+				case 6: creationData.x = n.doubleValue(); break;
+				case 7: creationData.y = n.doubleValue(); break;
+				case 8: creationData.z = n.doubleValue(); break;
+				case 9: creationData.orientationX = n.doubleValue(); break;
+				case 10: creationData.orientationY = n.doubleValue(); break;
+				case 11: creationData.orientationZ = n.doubleValue(); break;
+				case 12: creationData.orientationW = n.doubleValue(); break;
+				case 13: creationData.radius = n.doubleValue(); break;
+				case 14: creationData.cellIndex = n.intValue(); break;
+			}
+		}
+		
+		private Number getNextValue(int prevIndex, int nextIndex) {
+			if (nextIndex == -1)
+				return parse(line.substring(prevIndex));
+			else
+				return parse(line.substring(prevIndex, nextIndex));
+		}
+		
+		private Number parse(String str) {
+			if (str.indexOf('.') == -1)
+				return Long.valueOf(str);
+			return Double.valueOf(str);
+		}
+		
+	}
+	
+	private static class ObjectCreationData {
+		
+		public long id;
+		public boolean snapshot;
+		public int areaId;
+		public int templateCrc;
+		public long containerId;
+		public double x;
+		public double y;
+		public double z;
+		public double orientationX;
+		public double orientationY;
+		public double orientationZ;
+		public double orientationW;
+		public double radius;
+		public int cellIndex;
+		
+	}
+	
+	private static class SdbLoader implements AutoCloseable {
+		
+		private final BufferedReader reader;
+		
+		public SdbLoader(File file) {
+			BufferedReader br = null;
+			try {
+				br = new BufferedReader(new FileReader(file));
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+				br = null;
+			}
+			this.reader = br;
+		}
+		
+		public void close() {
+			if (reader != null) {
+				try {
+					reader.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		public String loadNextLine() {
+			try {
+				return reader.readLine();
+			} catch (IOException e) {
+				e.printStackTrace();
+				return null;
+			}
+		}
+		
+	}
+	
 	private static class AreaIndexes {
 		
 		private int id;
@@ -381,84 +513,6 @@ public class ClientBuildoutService extends Service {
 			adjust = set.findColumn("adjust_coordinates");
 			transX = set.findColumn("translate_x");
 			transZ = set.findColumn("translate_z");
-		}
-		
-	}
-	
-	private static class ObjectInformation {
-		
-		private final ColumnIndexes index;
-		private final ResultSet set;
-		private final Location l;
-		private long id;
-		private boolean snapshot;
-		private String template;
-		private float radius;
-		private long container;
-		private int cell;
-		
-		public ObjectInformation(ResultSet set) throws SQLException {
-			this.set = set;
-			index = new ColumnIndexes(set);
-			l = new Location();
-		}
-		
-		public void load(CrcDatabase strings) throws SQLException {
-			id = set.getLong(index.idInd);
-			snapshot = set.getBoolean(index.snapInd);
-			template = strings.getString(set.getInt(index.crcInd));
-			l.setPosition(set.getDouble(index.xInd), set.getDouble(index.yInd), set.getDouble(index.zInd));
-			l.setOrientation(set.getDouble(index.oxInd), set.getDouble(index.oyInd), set.getDouble(index.ozInd), set.getDouble(index.owInd));
-			radius = set.getInt(index.radiusInd);
-			container = set.getLong(index.contInd);
-			cell = set.getInt(index.cellInd);
-		}
-		
-		public int getAreaIdNoLoad() throws SQLException {
-			return set.getInt(index.areaInd);
-		}
-		
-		public long getId() { return id; }
-		public boolean isSnapshot() { return snapshot; }
-		public String getTemplate() { return template; }
-		public Location getLocation() { return l; }
-		public double getRadius() { return radius; }
-		public long getContainer() { return container; }
-		public int getCell() { return cell; }
-	}
-	
-	private static class ColumnIndexes {
-		
-		public final int idInd;
-		public final int snapInd;
-		public final int crcInd;
-		public final int areaInd;
-		public final int xInd;
-		public final int yInd;
-		public final int zInd;
-		public final int oxInd;
-		public final int oyInd;
-		public final int ozInd;
-		public final int owInd;
-		public final int radiusInd;
-		public final int contInd;
-		public final int cellInd;
-		
-		public ColumnIndexes(ResultSet set) throws SQLException {
-			idInd = set.findColumn("id");
-			snapInd = set.findColumn("snapshot");
-			crcInd = set.findColumn("template_crc");
-			areaInd = set.findColumn("area_id");
-			xInd = set.findColumn("x");
-			yInd = set.findColumn("y");
-			zInd = set.findColumn("z");
-			oxInd = set.findColumn("orientation_x");
-			oyInd = set.findColumn("orientation_y");
-			ozInd = set.findColumn("orientation_z");
-			owInd = set.findColumn("orientation_w");
-			radiusInd = set.findColumn("radius");
-			contInd = set.findColumn("container_id");
-			cellInd = set.findColumn("cell_index");
 		}
 		
 	}
