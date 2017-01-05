@@ -109,6 +109,11 @@ public class ObjectManager extends Manager {
 		synchronized (database) {
 			database.traverse((obj) -> loadObject(obj));
 		}
+		synchronized (objectMap) {
+			for (SWGObject obj : objectMap.values()) {
+				new ObjectCreatedIntent(obj).broadcast();
+			}
+		}
 		return super.initialize();
 	}
 	
@@ -140,7 +145,7 @@ public class ObjectManager extends Manager {
 	}
 	
 	private void addChildrenObjects(SWGObject obj) {
-		new ObjectCreatedIntent(obj).broadcast();
+		putObject(obj);
 		for (SWGObject child : obj.getSlots().values()) {
 			if (child != null)
 				addChildrenObjects(child);

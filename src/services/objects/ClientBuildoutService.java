@@ -126,20 +126,18 @@ public class ClientBuildoutService extends Service {
 	}
 	
 	private Map<Long, SWGObject> loadObjects() throws SQLException {
-		Map<Long, SWGObject> objects = new Hashtable<>(112660);
+		Map<Long, SWGObject> objects = new Hashtable<>(115000);
 		try (CrcDatabase strings = new CrcDatabase()) {
 			strings.loadStrings();
 			try (BuildoutLoader loader = new BuildoutLoader(areasById, objects, strings, new File("serverdata/buildout/objects.sdb"))) {
-				SWGObject obj;
 				while (loader.loadNextEntry()) {
 					if (!loader.isValidNextEntry())
 						continue;
-					obj = loader.createObject();
-					new ObjectCreatedIntent(obj).broadcast();
+					loader.createObject();
 				}
 			}
+			addAdditionalObjects(strings, objects);
 		}
-		objects.putAll(getAdditionalObjects(objects));
 		return objects;
 	}
 	
@@ -148,36 +146,28 @@ public class ClientBuildoutService extends Service {
 		try (CrcDatabase strings = new CrcDatabase()) {
 			strings.loadStrings();
 			try (BuildoutLoader loader = new BuildoutLoader(areasById, objects, strings, new File("serverdata/buildout/objects.sdb"))) {
-				SWGObject obj;
 				while (loader.loadNextEntry()) {
 					if (!loader.isAreaId(areaId))
 						continue;
-					obj = loader.createObject();
-					new ObjectCreatedIntent(obj).broadcast();
+					loader.createObject();
 				}
 			}
 		}
 		return objects;
 	}
 	
-	private Map<Long, SWGObject> getAdditionalObjects(Map<Long, SWGObject> buildouts) throws SQLException {
-		Map<Long, SWGObject> objects = new Hashtable<>();
-		try (CrcDatabase strings = new CrcDatabase()) {
-			try (RelationalServerData data = RelationalServerFactory.getServerData("buildout/additional_buildouts.db", "additional_buildouts")) {
-				try (ResultSet set = data.executeQuery(GET_ADDITIONAL_OBJECTS_SQL)) {
-					set.setFetchSize(4*1024);
-					SWGObject obj;
-					while (set.next()) {
-						obj = createAdditionalObject(objects, buildouts, set);
-						new ObjectCreatedIntent(obj).broadcast();
-					}
+	private void addAdditionalObjects(CrcDatabase strings, Map<Long, SWGObject> buildouts) throws SQLException {
+		try (RelationalServerData data = RelationalServerFactory.getServerData("buildout/additional_buildouts.db", "additional_buildouts")) {
+			try (ResultSet set = data.executeQuery(GET_ADDITIONAL_OBJECTS_SQL)) {
+				set.setFetchSize(4*1024);
+				while (set.next()) {
+					createAdditionalObject(buildouts, set);
 				}
 			}
 		}
-		return objects;
 	}
 	
-	private SWGObject createAdditionalObject(Map<Long, SWGObject> objects, Map<Long, SWGObject> buildouts, ResultSet set) throws SQLException {
+	private void createAdditionalObject(Map<Long, SWGObject> buildouts, ResultSet set) throws SQLException {
 		try {
 			SWGObject obj = ObjectCreator.createObjectFromTemplate(set.getString("template"));
 			Location l = new Location();
@@ -190,11 +180,9 @@ public class ClientBuildoutService extends Service {
 			obj.setClassification(ObjectClassification.BUILDOUT);
 			obj.setPrefLoadRange(set.getFloat("radius"));
 			checkParent(buildouts, obj, set.getString("building_name"), set.getInt("cell_id"));
-			objects.put(obj.getObjectId(), obj);
-			return obj;
+			buildouts.put(obj.getObjectId(), obj);
 		} catch (NullPointerException e) {
 			Log.e(this, "File: %s", set.getString("template"));
-			return null;
 		}
 	}
 	
@@ -367,7 +355,7 @@ public class ClientBuildoutService extends Service {
 			return areas.containsKey(creationData.areaId);
 		}
 		
-		public SWGObject createObject() {
+		public void createObject() {
 			SWGObject obj = ObjectCreator.createObjectFromTemplate(creationData.id, strings.getString(creationData.templateCrc));
 			obj.setClassification(creationData.snapshot ? ObjectClassification.SNAPSHOT : ObjectClassification.BUILDOUT);
 			obj.setPrefLoadRange(creationData.radius);
@@ -375,7 +363,6 @@ public class ClientBuildoutService extends Service {
 			setCellNumber(obj);
 			setContainer(obj);
 			objects.put(obj.getObjectId(), obj);
-			return obj;
 		}
 		
 		private void setObjectLocation(SWGObject obj) {
