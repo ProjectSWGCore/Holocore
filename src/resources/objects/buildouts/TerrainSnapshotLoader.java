@@ -39,6 +39,7 @@ import resources.client_info.visitors.WorldSnapshotData;
 import resources.client_info.visitors.WorldSnapshotData.Node;
 import resources.objects.SWGObject;
 import resources.objects.SWGObject.ObjectClassification;
+import resources.objects.building.BuildingObject;
 import resources.objects.cell.CellObject;
 import resources.server_info.Log;
 import services.objects.ObjectCreator;
@@ -100,6 +101,10 @@ public class TerrainSnapshotLoader {
 		objectTable.put(object.getObjectId(), object);
 		if (containerId != 0) {
 			SWGObject container = objectTable.get(containerId);
+			if (!(object instanceof CellObject) && container instanceof BuildingObject) {
+				Log.w(this, "Not adding: %s to %s - invalid type for BuildingObject", object, container);
+				return;
+			}
 			object.moveToContainer(container);
 			if (container == null)
 				Log.e("TerrainSnapshotLoader", "Failed to load object: " + object.getTemplate());
