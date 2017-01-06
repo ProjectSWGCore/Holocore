@@ -7,7 +7,7 @@ public class MissionListRequest extends ObjectController{
 	public static final int CRC = 0x00F5;
 
 	private long terminalId;
-	private int tickCount;	
+	private byte tickCount;	
 	
 	public MissionListRequest(ByteBuffer data) {
 		super(CRC);
@@ -21,11 +21,11 @@ public class MissionListRequest extends ObjectController{
 		this.terminalId = terminalId;
 	}
 
-	public int getTickCount() {
+	public byte getTickCount() {
 		return tickCount;
 	}
 
-	public void setTickCount(int tickCount) {
+	public void setTickCount(byte tickCount) {
 		this.tickCount = tickCount;
 	}
 
