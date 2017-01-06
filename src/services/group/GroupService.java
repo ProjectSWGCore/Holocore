@@ -339,6 +339,7 @@ public class GroupService extends Service {
 		sendGroupSystemMessage(group, "disbanded");
 		group.disbandGroup();
 		new DestroyObjectIntent(group).broadcast();
+		Assert.notNull(groups.remove(group.getObjectId()));
 	}
 	
 	private void joinGroup(CreatureObject inviter, CreatureObject creature, long groupId) {
@@ -374,7 +375,7 @@ public class GroupService extends Service {
 		Assert.notNull(group);
 		
 		// Check size of the group, if it only has two members, destroy the group
-		if (group.getGroupMembers().size() == 2) {
+		if (group.getGroupMembers().size() <= 2) {
 			destroyGroup(group, group.getLeaderPlayer());
 			return;
 		}
