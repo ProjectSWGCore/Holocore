@@ -57,7 +57,6 @@ import services.map.MapManager;
 import services.player.PlayerManager;
 import services.spawn.SpawnerService;
 import services.spawn.StaticService;
-import utilities.IntentChain;
 
 public class ObjectManager extends Manager {
 	

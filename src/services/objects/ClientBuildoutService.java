@@ -361,7 +361,8 @@ public class ClientBuildoutService extends Service {
 			obj.setPrefLoadRange(creationData.radius);
 			setObjectLocation(obj);
 			setCellNumber(obj);
-			setContainer(obj);
+			if (obj instanceof BuildingObject)
+				((BuildingObject) obj).populateCells();
 			objects.put(obj.getObjectId(), obj);
 		}
 		
@@ -374,13 +375,11 @@ public class ClientBuildoutService extends Service {
 		}
 		
 		private void setCellNumber(SWGObject obj) {
-			if (creationData.cellIndex != 0)
-				((CellObject) obj).setNumber(creationData.cellIndex);
-		}
-		
-		private void setContainer(SWGObject obj) {
-			if (creationData.containerId != 0)
-				obj.moveToContainer(objects.get(creationData.containerId));
+			if (creationData.cellIndex != 0) {
+				BuildingObject building = (BuildingObject) objects.get(creationData.containerId);
+				CellObject cell = building.getCellByNumber(creationData.cellIndex);
+				obj.moveToContainer(cell);
+			}
 		}
 		
 		private void parse() {
