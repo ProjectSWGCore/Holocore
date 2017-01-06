@@ -159,7 +159,7 @@ public class LoginService extends Service {
 		boolean success = obj != null && deleteCharacter(obj);
 		if (success) {
 			new DestroyObjectIntent(obj).broadcast();
-			Log.i(this, "Deleted character %s for user %s", ((CreatureObject)obj).getName(), player.getUsername());
+			Log.i(this, "Deleted character %s for user %s", ((CreatureObject)obj).getObjectName(), player.getUsername());
 		} else {
 			Log.e(this, "Could not delete character! Character: ID: " + request.getPlayerId() + " / " + obj);
 		}

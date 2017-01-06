@@ -130,7 +130,7 @@ public class TestTerrainMap {
 		map.setCallback(callback);
 		try {
 			map.start();
-			creature.setName("testTatooine");
+			creature.setObjectName("testTatooine");
 			Location creatureLocation = new Location(3500, 5, -4800, Terrain.TATOOINE);
 			for (SWGObject obj : tatObjects) {
 				double range = Math.min(1024*Math.sqrt(2), Math.max(obj.getLoadRange(), creature.getLoadRange()));

@@ -276,7 +276,7 @@ public class GroupObject extends SWGObject {
 		
 		@Override
 		public byte[] encode() {
-			String name = creature.getName();
+			String name = creature.getObjectName();
 			ByteBuffer bb = ByteBuffer.allocate(10 + name.length());
 			Packet.addLong(bb, creature.getObjectId());
 			Packet.addAscii(bb, name);
@@ -297,7 +297,7 @@ public class GroupObject extends SWGObject {
 		}
 		
 		public String getName() {
-			return creature.getName();
+			return creature.getObjectName();
 		}
 		
 		@Override

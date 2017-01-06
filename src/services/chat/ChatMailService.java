@@ -187,7 +187,7 @@ public class ChatMailService extends Service {
 			sendPersistentMessage(recipient, mail, MailFlagType.HEADER_ONLY, galaxy);
 			SWGObject sendObj = sender.getCreatureObject();
 			SWGObject recvObj = recipient.getCreatureObject();
-			logChat(sendObj.getObjectId(), sendObj.getName(), recvObj.getObjectId(), recvObj.getName(), mail.getSubject(), mail.getMessage());
+			logChat(sendObj.getObjectId(), sendObj.getObjectName(), recvObj.getObjectId(), recvObj.getObjectName(), mail.getSubject(), mail.getMessage());
 		}
 	}
 	

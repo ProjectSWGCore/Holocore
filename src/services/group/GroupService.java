@@ -278,7 +278,7 @@ public class GroupService extends Service {
 			return;
 		
 		// Set the group leader to newLeader
-		sendGroupSystemMessage(group, "new_leader", "TU", newLeader.getName());
+		sendGroupSystemMessage(group, "new_leader", "TU", newLeader.getObjectName());
 		group.setLeader(newLeader);
 	}
 	
@@ -348,7 +348,7 @@ public class GroupService extends Service {
 		Assert.notNull(group);
 		
 		if (group.getLeaderId() != inviter.getObjectId()) {
-			sendSystemMessage(player, "join_inviter_not_leader", "TT", inviter.getName());
+			sendSystemMessage(player, "join_inviter_not_leader", "TT", inviter.getObjectName());
 			return;
 		}
 		if (group.isFull()) {
@@ -394,7 +394,7 @@ public class GroupService extends Service {
 	
 	private void sendInvite(Player groupLeader, CreatureObject invitee, long groupId) {
 		sendSystemMessage(invitee.getOwner(), "invite_target", "TT", groupLeader.getCharacterName());
-		sendSystemMessage(groupLeader, "invite_leader", "TT", invitee.getName());
+		sendSystemMessage(groupLeader, "invite_leader", "TT", invitee.getObjectName());
 		
 		// Set the invite data to the current group ID
 		if (groupId == 0)

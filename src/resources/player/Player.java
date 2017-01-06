@@ -119,7 +119,7 @@ public class Player implements Comparable<Player> {
 	
 	public String getCharacterName() {
 		if (creatureObject != null)
-			return creatureObject.getName();
+			return creatureObject.getObjectName();
 		return "";
 	}
 	
@@ -162,7 +162,7 @@ public class Player implements Comparable<Player> {
 	public String toString() {
 		String str = "Player[";
 		str += "ID=" + userId + " / " + (creatureObject==null?"null":creatureObject.getObjectId());
-		str += " NAME=" + username + " / " + (creatureObject==null?"null":creatureObject.getName());
+		str += " NAME=" + username + " / " + (creatureObject==null?"null":creatureObject.getObjectName());
 		str += " STATE=" + state;
 		return str + "]";
 	}

@@ -170,7 +170,7 @@ public class QaToolCmdCallback implements ICmdCallback {
 		SuiMessageBox inputBox = new SuiMessageBox(SuiButtons.OK_CANCEL, "Force Delete?", "Are you sure you want to delete this object?");
 		inputBox.addOkButtonCallback("handleDeleteObject", (caller, actor, event, parameters) -> {
 			if (target instanceof CreatureObject && ((CreatureObject) target).isPlayer()) {
-				Log.i("QA", "[%s] Requested deletion of character: %s", player.getUsername(), target.getName());
+				Log.i("QA", "[%s] Requested deletion of character: %s", player.getUsername(), target.getObjectName());
 				new DeleteCharacterIntent((CreatureObject) target).broadcast();
 				Player owner = target.getOwner();
 				if (owner != null)
@@ -239,7 +239,7 @@ public class QaToolCmdCallback implements ICmdCallback {
 			new ObjectTeleportIntent(obj, l).broadcast();
 		else
 			return teleportToRecoveryBuilding(objManager, obj, set.getLong("object_id"), set.getString("cell"), l);
-		return "Sucessfully teleported " + obj.getName() + " to " + loc;
+		return "Sucessfully teleported " + obj.getObjectName() + " to " + loc;
 	}
 	
 	private String teleportToRecoveryBuilding(ObjectManager objManager, SWGObject obj, long buildingId, String cellName, Location l) {
@@ -256,7 +256,7 @@ public class QaToolCmdCallback implements ICmdCallback {
 			return err;
 		}
 		new ObjectTeleportIntent(obj, cell, l).broadcast();
-		return "Successfully teleported " + obj.getName() + " to " + buildingId + "/" + cellName + " " + l;
+		return "Successfully teleported " + obj.getObjectName() + " to " + buildingId + "/" + cellName + " " + l;
 	}
 	
 	private void displayHelp(Player player) {

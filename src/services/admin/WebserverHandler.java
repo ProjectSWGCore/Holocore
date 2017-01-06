@@ -320,7 +320,7 @@ class WebserverHandler {
 		StringBuilder str = new StringBuilder("");
 		Location world = creature.getWorldLocation();
 		str.append(String.format("  Object ID: %s<br />", creature.getObjectId()));
-		str.append(String.format("       Name: %s<br />", creature.getName()));
+		str.append(String.format("       Name: %s<br />", creature.getObjectName()));
 		str.append(String.format("<b>World:</b><br />"));
 		str.append(addLocationData(world));
 		if (creature.getParent() != null) {

@@ -258,7 +258,7 @@ public final class SpawnerService extends Service {
 		SWGObject spawnerObjectParent = spawnerObject.getParent();
 		object.setLocation(spawnerObject.getLocation());
 		
-		object.setName(spawner.getCreatureName());
+		object.setObjectName(spawner.getCreatureName());
 		object.setLevel(spawner.getCombatLevel());
 		object.setDifficulty(spawner.getCreatureDifficulty());
 		object.setMaxHealth(spawner.getMaxHealth());
@@ -295,7 +295,7 @@ public final class SpawnerService extends Service {
 				creature.addOptionFlags(OptionFlag.INVULNERABLE);
 				break;
 			default:
-				Log.w(this, "An unknown attackable type of %s was specified for %s", flagString, creature.getName());
+				Log.w(this, "An unknown attackable type of %s was specified for %s", flagString, creature.getObjectName());
 				break;
 		}
 	}

@@ -333,7 +333,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		this.crc = CRC.getCrc(template);
 	}
 	
-	public void setName(String name) {
+	public void setObjectName(String name) {
 		this.objectName = name;
 	}
 	
@@ -450,7 +450,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		return location.getTerrain();
 	}
 	
-	public String getName() {
+	public String getObjectName() {
 		return objectName;
 	}
 	

@@ -147,7 +147,7 @@ public class CharacterCreation {
 		creatureObj.setRace(Race.getRaceByFile(create.getRace()));
 		creatureObj.setAppearanceData(create.getCharCustomization());
 		creatureObj.setHeight(create.getHeight());
-		creatureObj.setName(create.getName());
+		creatureObj.setObjectName(create.getName());
 		creatureObj.setPvpFlags(PvpFlag.PLAYER);
 		creatureObj.setVolume(0x000F4240);
 		new GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, create.getStartingPhase(), creatureObj, true).broadcast();

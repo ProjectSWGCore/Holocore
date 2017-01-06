@@ -516,7 +516,7 @@ public class TravelService extends Service {
 			new ChatBroadcastIntent(player, "@travel:wrong_shuttle").broadcast();
 		} else if (distanceToNearestPoint <= TICKET_USE_RADIUS) {
 			// They can use their ticket if they're within range.
-			Log.i(this, "%s/%s is traveling from %s to %s", player.getUsername(), traveler.getName(), nearestPoint.getName(), getDestinationPoint(ticket).getName());
+			Log.i(this, "%s/%s is traveling from %s to %s", player.getUsername(), traveler.getObjectName(), nearestPoint.getName(), getDestinationPoint(ticket).getName());
 			teleportAndDestroyTicket(getDestinationPoint(ticket), ticket, traveler);
 		} else {
 			new ChatBroadcastIntent(player, "@travel:boarding_too_far").broadcast();

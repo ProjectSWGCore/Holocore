@@ -96,7 +96,7 @@ public class GotoCmdCallback implements ICmdCallback  {
 			return err;
 		}
 		new ObjectTeleportIntent(obj, cell, l).broadcast();
-		return "Successfully teleported "+obj.getName()+" to "+buildingId;
+		return "Successfully teleported "+obj.getObjectName()+" to "+buildingId;
 	}
 	
 }
