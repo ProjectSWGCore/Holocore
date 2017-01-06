@@ -47,6 +47,7 @@ import resources.network.NetBuffer;
 import resources.network.NetBufferStream;
 import resources.objects.awareness.ObjectAware;
 import resources.objects.building.BuildingObject;
+import resources.objects.cell.CellObject;
 import resources.objects.creature.CreatureObject;
 import resources.persistable.Persistable;
 import resources.persistable.SWGObjectFactory;
@@ -926,12 +927,21 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	@Override
 	public void save(NetBufferStream stream) {
-		stream.addByte(3);
+		stream.addByte(4);
 		location.save(stream);
 		buildoutLocation.save(stream);
-		stream.addBoolean(parent != null && parent.getClassification() != ObjectClassification.GENERATED);
-		if (parent != null && parent.getClassification() != ObjectClassification.GENERATED)
-			SWGObjectFactory.save(ObjectCreator.createObjectFromTemplate(parent.getObjectId(), parent.getTemplate()), stream);
+		boolean hasParent = parent != null;
+		boolean hasGrandparent = hasParent && parent.getParent() instanceof BuildingObject && parent instanceof CellObject;
+		stream.addBoolean(hasParent);
+		if (hasParent) {
+			SWGObject written = parent;
+			if (hasGrandparent)
+				written = parent.getParent();
+			SWGObjectFactory.save(ObjectCreator.createObjectFromTemplate(written.getObjectId(), written.getTemplate()), stream);
+			stream.addBoolean(hasGrandparent);
+			if (hasGrandparent)
+				stream.addInt(((CellObject) parent).getNumber());
+		}
 		stream.addAscii(permissions.name());
 		stream.addAscii(classification.name());
 		stream.addUnicode(objectName);
@@ -958,6 +968,9 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	public void read(NetBufferStream stream) {
 		switch(stream.getByte()) {
+			case 4:
+				readVersion4(stream);
+				break;
 			case 3:
 				readVersion3(stream);
 				break;
@@ -971,6 +984,29 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 				readVersion0(stream);
 				break;
 		}
+	}
+	
+	private void readVersion4(NetBufferStream stream) {
+		location.read(stream);
+		buildoutLocation.read(stream);
+		if (stream.getBoolean()) {
+			parent = SWGObjectFactory.create(stream);
+			if (stream.getBoolean()) {
+				CellObject cell = (CellObject) ObjectCreator.createObjectFromTemplate("object/cell/shared_cell.iff");
+				cell.setNumber(stream.getInt());
+				parent.addObject(cell);
+				parent = cell;
+			}
+		}
+		permissions = ContainerPermissionsType.valueOf(stream.getAscii());
+		classification = ObjectClassification.valueOf(stream.getAscii());
+		objectName = stream.getUnicode();
+		stringId.read(stream);
+		detailStringId.read(stream);
+		complexity = stream.getFloat();
+		prefLoadRange = stream.getFloat();
+		stream.getList((i) -> attributes.put(stream.getAscii(), stream.getAscii()));
+		stream.getList((i) -> SWGObjectFactory.create(stream).moveToContainer(this));
 	}
 	
 	private void readVersion3(NetBufferStream stream) {

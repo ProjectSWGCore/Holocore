@@ -46,6 +46,8 @@ import network.packets.swg.zone.object_controller.IntendedTarget;
 import resources.control.Intent;
 import resources.control.Manager;
 import resources.objects.SWGObject;
+import resources.objects.building.BuildingObject;
+import resources.objects.cell.CellObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.custom.AIObject;
 import resources.persistable.SWGObjectFactory;
@@ -136,6 +138,10 @@ public class ObjectManager extends Manager {
 		if (obj.getParent() != null) {
 			long id = obj.getParent().getObjectId();
 			SWGObject parent = getObjectById(id);
+			if (obj.getParent() instanceof CellObject && obj.getParent().getParent() != null) {
+				BuildingObject building = (BuildingObject) obj.getParent().getParent();
+				parent = ((BuildingObject) getObjectById(building.getObjectId())).getCellByNumber(((CellObject) obj.getParent()).getNumber());
+			}
 			obj.moveToContainer(parent);
 			if (parent == null)
 				Log.e("ObjectManager", "Parent for %s is null! ParentID: %d", obj, id);
