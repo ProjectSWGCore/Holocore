@@ -108,7 +108,7 @@ public class GroupService extends Service {
 	
 	private void handlePlayerEventIntent(PlayerEventIntent intent) {
 		switch (intent.getEvent()) {
-			case PE_FIRST_ZONE:
+			case PE_ZONE_IN_SERVER:
 				handleMemberRezoned(intent.getPlayer());
 				break;
 			case PE_DISAPPEAR:
