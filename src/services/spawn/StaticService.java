@@ -39,6 +39,7 @@ import java.util.List;
 import java.util.Map;
 
 import resources.Location;
+import resources.control.Assert;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.SWGObject;
@@ -142,13 +143,12 @@ public class StaticService extends Service {
 		}
 		
 		private SWGObject createObjectInParent(SWGObject parent) {
-			if (parent == null)
-				return null;
+			Assert.notNull(parent);
 			Location loc = new Location(x, y, z, parent.getTerrain());
 			loc.setHeading(heading);
 			SWGObject obj = ObjectCreator.createObjectFromTemplate(iff);
 			obj.setLocation(loc);
-			obj.moveToContainer(parent);
+			parent.addObject(obj);
 			new ObjectCreatedIntent(obj).broadcast();
 			return obj;
 		}
