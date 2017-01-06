@@ -57,6 +57,7 @@ import services.map.MapManager;
 import services.player.PlayerManager;
 import services.spawn.SpawnerService;
 import services.spawn.StaticService;
+import utilities.IntentChain;
 
 public class ObjectManager extends Manager {
 	
@@ -110,9 +111,7 @@ public class ObjectManager extends Manager {
 			database.traverse((obj) -> loadObject(obj));
 		}
 		synchronized (objectMap) {
-			for (SWGObject obj : objectMap.values()) {
-				new ObjectCreatedIntent(obj).broadcast();
-			}
+			objectMap.forEach((id, obj) -> new ObjectCreatedIntent(obj).broadcast());
 		}
 		return super.initialize();
 	}
