@@ -80,7 +80,7 @@ public class BuildingObject extends TangibleObject {
 		synchronized (idToCell) {
 			Assert.isNull(idToCell.get(cell.getNumber()));
 			idToCell.put(cell.getNumber(), cell);
-			nameToCell.put(cell.getName(), cell); // Can be multiple cells with the same name
+			nameToCell.put(cell.getCellName(), cell); // Can be multiple cells with the same name
 		}
 	}
 	
