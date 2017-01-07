@@ -280,6 +280,7 @@ public class CombatManager extends Manager {
 	
 	private void handleDelayAttack(CreatureObject source, SWGObject target, CombatCommand combatCommand, String arguments[]) {
 		Location eggLocation;
+		SWGObject eggParent = null;
 		
 		switch (combatCommand.getEggPosition()) {
 			case LOCATION: 
@@ -291,8 +292,14 @@ public class CombatManager extends Manager {
 				
 				break;
 			default: Log.w(this, "Unrecognised delay egg position %s from command %s - defaulting to SELF", combatCommand.getEggPosition(), combatCommand.getName());
-			case SELF: eggLocation = source.getLocation(); break;
-			case TARGET: eggLocation = target.getLocation(); break;
+			case SELF:
+				eggLocation = source.getLocation();
+				eggParent = source.getParent();
+				break;
+			case TARGET:
+				eggLocation = target.getLocation();
+				eggParent = target.getParent();
+				break;
 		}
 		
 		// Spawn delay egg object
@@ -303,10 +310,11 @@ public class CombatManager extends Manager {
 		
 		if (delayEgg != null) {
 			delayEgg.setLocation(eggLocation);
+			delayEgg.moveToContainer(eggParent);
 			new ObjectCreatedIntent(delayEgg).broadcast();
 		}
 		
-		executor.schedule(() -> delayEggLoop(delayEgg, source, target, combatCommand, 0), (int) combatCommand.getInitialDelayAttackInterval(), TimeUnit.SECONDS);
+		executor.schedule(() -> delayEggLoop(delayEgg, source, target, combatCommand, 0), (long) combatCommand.getInitialDelayAttackInterval(), TimeUnit.SECONDS);
 	}
 	
 	private void delayEggLoop(final SWGObject delayEgg, final CreatureObject source, final SWGObject target, final CombatCommand combatCommand, final int currentLoop) {
@@ -321,7 +329,7 @@ public class CombatManager extends Manager {
 		
 		if (currentLoop < combatCommand.getDelayAttackLoops()) {
 			// Recursively schedule another loop if that wouldn't exceed the amount of loops we need to perform
-			executor.schedule(() -> delayEggLoop(delayEgg, source, target, combatCommand, currentLoop + 1), (int) combatCommand.getDelayAttackInterval(), TimeUnit.SECONDS);
+			executor.schedule(() -> delayEggLoop(delayEgg, source, target, combatCommand, currentLoop + 1), (long) combatCommand.getDelayAttackInterval(), TimeUnit.SECONDS);
 		} else if (delayEgg != null) {
 			// The delayed attack has ended - destroy the egg
 			new DestroyObjectIntent(delayEgg).broadcast();
