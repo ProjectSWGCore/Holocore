@@ -58,8 +58,8 @@ public class TerrainMap {
 		callbackManager = new CallbackManager<>("terrain-map-"+t.name(), 1);
 		chunks = new TerrainMapChunk[CHUNK_COUNT_ACROSS][CHUNK_COUNT_ACROSS];
 		objectChunk = new SynchronizedMap<>();
-		for (int z = 0; z < chunks.length; z++) {
-			for (int x = 0; x < chunks[z].length; x++) {
+		for (int z = 0; z < CHUNK_COUNT_ACROSS; z++) {
+			for (int x = 0; x < CHUNK_COUNT_ACROSS; x++) {
 				double chunkStartX = MIN_X+x*CHUNK_WIDTH;
 				double chunkStartZ = MIN_Z+z*CHUNK_WIDTH;
 				chunks[z][x] = new TerrainMapChunk(chunkStartX, chunkStartZ, chunkStartX+CHUNK_WIDTH, chunkStartZ+CHUNK_WIDTH);
@@ -106,20 +106,24 @@ public class TerrainMap {
 	}
 	
 	private void move(SWGObject obj) {
-		TerrainMapChunk chunk = objectChunk.get(obj.getObjectId());
-		if (chunk != null) {
-			if (!chunk.isWithinBounds(obj))
-				chunk.removeObject(obj);
-			else
+		synchronized (objectChunk) {
+			TerrainMapChunk chunk = objectChunk.get(obj.getObjectId());
+			if (chunk != null) {
+				if (!chunk.isWithinBounds(obj))
+					chunk.removeObject(obj);
+				else
+					return;
+			}
+			TerrainMapChunk oldChunk = chunk;
+			chunk = getChunk(obj.getX(), obj.getZ());
+			Assert.test(oldChunk != chunk || chunk == null);
+			if (chunk == null) {
+				Log.e("TerrainMap", "Null Chunk! Location: (%.3f, %.3f) Object: %s", obj.getX(), obj.getZ(), obj);
 				return;
+			}
+			chunk.addObject(obj);
+			objectChunk.put(obj.getObjectId(), chunk);
 		}
-		chunk = getChunk(obj.getX(), obj.getZ());
-		if (chunk == null) {
-			Log.e("TerrainMap", "Null Chunk! Location: (%.3f, %.3f) Object: %s", obj.getX(), obj.getZ(), obj);
-			return;
-		}
-		chunk.addObject(obj);
-		objectChunk.put(obj.getObjectId(), chunk);
 	}
 	
 	private boolean remove(SWGObject obj) {
