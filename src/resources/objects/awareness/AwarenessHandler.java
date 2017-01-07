@@ -37,7 +37,7 @@ import resources.objects.SWGObject;
 import resources.objects.awareness.TerrainMap.TerrainMapCallback;
 import resources.server_info.Log;
 
-public class AwarenessHandler {
+public class AwarenessHandler implements AutoCloseable {
 	
 	private final Map<Terrain, TerrainMap> terrains;
 	
@@ -92,8 +92,9 @@ public class AwarenessHandler {
 	}
 	
 	public void moveObject(SWGObject obj, SWGObject parent, Location requestedLocation) {
+		Assert.notNull(parent);
 		// Remove from previous awareness
-		TerrainMap oldMap = getTerrainMap(requestedLocation.getTerrain());
+		TerrainMap oldMap = getTerrainMap(obj.getTerrain());
 		if (oldMap != null)
 			oldMap.removeWithoutUpdate(obj);
 		// Update location

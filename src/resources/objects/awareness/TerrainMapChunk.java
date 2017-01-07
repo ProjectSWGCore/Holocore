@@ -27,15 +27,16 @@
  ***********************************************************************************/
 package resources.objects.awareness;
 
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
 import resources.Location;
+import resources.control.Assert;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
+import resources.server_info.SynchronizedSet;
 
 class TerrainMapChunk {
 	
@@ -46,7 +47,7 @@ class TerrainMapChunk {
 	private final double maxZ;
 	
 	public TerrainMapChunk(double minX, double minZ, double maxX, double maxZ) {
-		objects = new HashSet<>(); // There will be some expanding and shrinking
+		objects = new SynchronizedSet<>(); // There will be some expanding and shrinking
 		this.minX = minX;
 		this.minZ = minZ;
 		this.maxX = maxX;
@@ -55,13 +56,13 @@ class TerrainMapChunk {
 	
 	public void addObject(SWGObject obj) {
 		synchronized (objects) {
-			objects.add(obj);
+			Assert.test(objects.add(obj));
 		}
 	}
 	
 	public void removeObject(SWGObject obj) {
 		synchronized (objects) {
-			objects.remove(obj);
+			Assert.test(objects.remove(obj));
 		}
 	}
 	

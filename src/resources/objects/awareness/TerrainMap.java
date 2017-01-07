@@ -27,7 +27,6 @@
  ***********************************************************************************/
 package resources.objects.awareness;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -40,6 +39,7 @@ import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.waypoint.WaypointObject;
 import resources.server_info.Log;
+import resources.server_info.SynchronizedMap;
 import utilities.AwarenessUtilities;
 
 public class TerrainMap {
@@ -57,7 +57,7 @@ public class TerrainMap {
 	public TerrainMap(Terrain t) {
 		callbackManager = new CallbackManager<>("terrain-map-"+t.name(), 1);
 		chunks = new TerrainMapChunk[CHUNK_COUNT_ACROSS][CHUNK_COUNT_ACROSS];
-		objectChunk = new HashMap<>();
+		objectChunk = new SynchronizedMap<>();
 		for (int z = 0; z < chunks.length; z++) {
 			for (int x = 0; x < chunks[z].length; x++) {
 				double chunkStartX = MIN_X+x*CHUNK_WIDTH;
