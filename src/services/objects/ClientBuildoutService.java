@@ -64,6 +64,7 @@ import resources.server_info.RelationalServerFactory;
 public class ClientBuildoutService extends Service {
 	
 	private static final String GET_BUILDOUT_AREAS = "SELECT * FROM areas ORDER BY area_name ASC, event ASC";
+	private static final String GET_BUILDOUT_AREA = "SELECT * FROM areas WHERE id = ?";
 	private static final String GET_ADDITIONAL_OBJECTS_SQL = "SELECT terrain, template, x, y, z, heading, cell_id, radius, building_name "
 			+ "FROM additional_buildouts WHERE active = 1";
 	private static final String GET_BUILDING_INFO_SQL = "SELECT object_id FROM buildings WHERE building_id = ?";
@@ -116,8 +117,14 @@ public class ClientBuildoutService extends Service {
 	
 	public Map<Long, SWGObject> loadClientObjectsByArea(int areaId) {
 		try {
-			if (areasById.isEmpty())
-				loadAreas(new ArrayList<>());
+			try (RelationalServerData data = RelationalServerFactory.getServerData("buildout/areas.db", "areas")) {
+				PreparedStatement ps = data.prepareStatement(GET_BUILDOUT_AREA);
+				ps.setInt(1, areaId);
+				try (ResultSet set = ps.executeQuery()) {
+					if (set.next())
+						loadArea(createArea(set, new AreaIndexes(set)));
+				}
+			}
 			return loadObjects(areaId);
 		} catch (SQLException e) {
 			Log.e(this, e);
@@ -326,9 +333,9 @@ public class ClientBuildoutService extends Service {
 			this.objects = objects;
 			this.strings = strings;
 			this.loader = new SdbLoader(file);
-			this.location = new Location();
 			this.creationData = new ObjectCreationData();
 			this.previousArea = areas.values().iterator().next();
+			this.location = new Location(0, 0, 0, previousArea.getTerrain());
 			this.line = "";
 			loader.loadNextLine(); // Skip column names
 			loader.loadNextLine(); // Skip data types
