@@ -59,13 +59,15 @@ public class TestAwarenessHandler {
 	@BeforeClass
 	public static void initTatooine() {
 		ClientBuildoutService buildoutService = new ClientBuildoutService();
+		buildoutService.initialize();
 		double loadDistance = 1024*1.414*2; // 1024 * sqrt(2)
 		for (SWGObject obj : buildoutService.loadClientObjectsByArea(843).values()) { // mos eisley's area id
 			initObject(obj, loadDistance);
 		}
-		for (SWGObject obj : buildoutService.loadClientObjectsByArea(-59).values()) { // general tatooine's area id
+		for (SWGObject obj : buildoutService.loadClientObjectsByArea(-60).values()) { // general tatooine's area id
 			initObject(obj, loadDistance);
 		}
+		buildoutService.terminate();
 		CREATURE2.setLocation(CREATURE2_LOCATION);
 		initObject(CREATURE2, loadDistance);
 		CREATURE3.setLocation(CREATURE2_LOCATION);
@@ -92,59 +94,63 @@ public class TestAwarenessHandler {
 	@Test
 	public void testMoveSameAwareness() throws InterruptedException {
 		MapCallbackRealistic callback = new MapCallbackRealistic();
-		AwarenessHandler awareness = new AwarenessHandler(callback);
-		GenericCreatureObject creature = new GenericCreatureObject(1);
-		initAwareness(awareness, callback);
-		awareness.moveObject(creature, CREATURE_LOCATION);
-		awaitCallbacks(awareness, 1000);
-		callback.testAssert(WITHIN_RANGE.size(), 0, 1, 0);
-		callback.set(0, 0, 0, 0);
-		awareness.moveObject(creature, CREATURE_LOCATION);
-		awaitCallbacks(awareness, 1000);
-		callback.testAssert(0, 0, 1, 0);
+		try (AwarenessHandler awareness = new AwarenessHandler(callback)) {
+			GenericCreatureObject creature = new GenericCreatureObject(1);
+			initAwareness(awareness, callback);
+			awareness.moveObject(creature, CREATURE_LOCATION);
+			awaitCallbacks(awareness);
+			callback.testAssert(WITHIN_RANGE.size(), 0, 1, 0);
+			callback.set(0, 0, 0, 0);
+			awareness.moveObject(creature, CREATURE_LOCATION);
+			awaitCallbacks(awareness);
+			callback.testAssert(0, 0, 1, 0);
+		}
 	}
 	
 	@Test
 	public void testMoveAwayBack() throws InterruptedException {
 		MapCallbackRealistic callback = new MapCallbackRealistic();
-		AwarenessHandler awareness = new AwarenessHandler(callback);
-		initAwareness(awareness, callback);
-		GenericCreatureObject creature = new GenericCreatureObject(1);
-		awareness.moveObject(creature, CREATURE_LOCATION);
-		awaitCallbacks(awareness, 1000);
-		callback.testAssert(WITHIN_RANGE.size(), 0, 1, 0);
-		callback.set(0, 0, 0, 0);
-		awareness.moveObject(creature, new Location(0, 0, 0, Terrain.TATOOINE));
-		awaitCallbacks(awareness, 1000);
-		callback.testAssert(0, WITHIN_RANGE.size(), 1, 0);
-		callback.set(0, 0, 0, 0);
-		awareness.moveObject(creature, CREATURE_LOCATION);
-		awaitCallbacks(awareness, 1000);
-		callback.testAssert(WITHIN_RANGE.size(), 0, 1, 0);
+		try (AwarenessHandler awareness = new AwarenessHandler(callback)) {
+			initAwareness(awareness, callback);
+			GenericCreatureObject creature = new GenericCreatureObject(1);
+			awareness.moveObject(creature, CREATURE_LOCATION);
+			awaitCallbacks(awareness);
+			callback.testAssert(WITHIN_RANGE.size(), 0, 1, 0);
+			callback.set(0, 0, 0, 0);
+			awareness.moveObject(creature, new Location(0, 0, 0, Terrain.TATOOINE));
+			awaitCallbacks(awareness);
+			callback.testAssert(0, WITHIN_RANGE.size(), 1, 0);
+			callback.set(0, 0, 0, 0);
+			awareness.moveObject(creature, CREATURE_LOCATION);
+			awaitCallbacks(awareness);
+			callback.testAssert(WITHIN_RANGE.size(), 0, 1, 0);
+		}
 	}
 	
 	@Test
 	public void testMoveIntoStarport() throws InterruptedException {
 		MapCallbackRealistic callback = new MapCallbackRealistic();
-		AwarenessHandler awareness = new AwarenessHandler(callback);
-		GenericCreatureObject creature = new GenericCreatureObject(1);
-		BuildingObject starport = null;
-		for (SWGObject obj : WITHIN_RANGE) {
-			if (obj instanceof BuildingObject && obj.getTemplate().contains("starport"))
-				starport = (BuildingObject) obj;
+		try (AwarenessHandler awareness = new AwarenessHandler(callback)) {
+			GenericCreatureObject creature = new GenericCreatureObject(1);
+			BuildingObject starport = null;
+			for (SWGObject obj : WITHIN_RANGE) {
+				if (obj instanceof BuildingObject && obj.getTemplate().contains("starport"))
+					starport = (BuildingObject) obj;
+			}
+			Assert.assertNotNull("Starport is null!", starport);
+			initAwareness(awareness, callback);
+			awareness.moveObject(creature, CREATURE_LOCATION);
+			awaitCallbacks(awareness);
+			callback.testAssert(WITHIN_RANGE.size(), 0, 1, 0);
+			callback.set(0, 0, 0, 0);
+			awareness.moveObject(creature, CREATURE_LOCATION);
+			awaitCallbacks(awareness);
+			callback.testAssert(0, 0, 1, 0);
+			callback.set(0, 0, 0, 0);
+			awareness.moveObject(creature, starport.getCellByNumber(1), new Location(0, 0, 0, Terrain.TATOOINE));
+			awaitCallbacks(awareness);
+			callback.testAssert(0, 0, 0, 0);
 		}
-		Assert.assertNotNull("Starport is null!", starport);
-		initAwareness(awareness, callback);
-		awareness.moveObject(creature, CREATURE_LOCATION);
-		awaitCallbacks(awareness, 1000);
-		callback.testAssert(WITHIN_RANGE.size(), 0, 1, 0);
-		callback.set(0, 0, 0, 0);
-		awareness.moveObject(creature, starport.getCellByNumber(1), new Location(0, 0, 0, Terrain.TATOOINE));
-		awaitCallbacks(awareness, 1000);
-		callback.testAssert(0, 0, 0, 0);
-		awareness.moveObject(CREATURE2, CREATURE2_LOCATION);
-		awaitCallbacks(awareness, 1000);
-		callback.testAssert(0, 0, 1, 0);
 	}
 	
 	private void initAwareness(AwarenessHandler awareness, MapCallback callback) {
@@ -152,12 +158,13 @@ public class TestAwarenessHandler {
 		for (SWGObject obj : EISLEY_OBJECTS) {
 			awareness.moveObject(obj, obj.getLocation());
 		}
-		awaitCallbacks(awareness, 3000);
+		awaitCallbacks(awareness);
 		callback.set(0, 0, 0, 0);
 	}
 	
-	private void awaitCallbacks(AwarenessHandler awareness, long timeout) {
+	private void awaitCallbacks(AwarenessHandler awareness) {
 		try {
+			long timeout = 5000;
 			while (!awareness.isCallbacksDone() && timeout > 0) {
 				Thread.sleep(1);
 				timeout--;
