@@ -49,6 +49,7 @@ import resources.Race;
 import resources.collections.SWGList;
 import resources.collections.SWGSet;
 import resources.common.CRC;
+import resources.control.Assert;
 import resources.network.BaselineBuilder;
 import resources.network.NetBuffer;
 import resources.network.NetBufferStream;
@@ -133,12 +134,9 @@ public class CreatureObject extends TangibleObject {
 	
 	public boolean addSkill(String skillName) {
 		synchronized(skills) {
-			if (skills.add(skillName)) {
-				skills.sendDeltaMessage(this);
-				return true;
-			}
-			
-			return false;
+			Assert.test(skills.add(skillName));
+			skills.sendDeltaMessage(this);
+			return true;
 		}
 	}
 	
@@ -699,8 +697,8 @@ public class CreatureObject extends TangibleObject {
 		}
 	}
 
-	public void addAbility(String abilityName) {
-		creo4.addAbility(abilityName, this);
+	public void addAbility(String ... abilities) {
+		creo4.addAbility(this, abilities);
 	}
 	
 	public void removeAbility(String abilityName) {

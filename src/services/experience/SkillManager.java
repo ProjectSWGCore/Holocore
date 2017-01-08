@@ -36,12 +36,13 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-
 import java.util.stream.Collectors;
+
 import network.packets.Packet;
 import network.packets.swg.zone.object_controller.ChangeRoleIconChoice;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
+import resources.control.Assert;
 import resources.control.Intent;
 import resources.control.Manager;
 import resources.objects.creature.CreatureObject;
@@ -203,13 +204,9 @@ public final class SkillManager extends Manager {
 	}
 	
 	private void grantSkill(SkillData skillData, String skillName, CreatureObject target) {
-		if (!target.addSkill(skillName)) {
-			return;
-		}
+		Assert.test(target.addSkill(skillName));
 		
-		for(String commandName : skillData.getCommands()) {
-			target.addAbility(commandName);
-		}
+		target.addAbility(skillData.getCommands());
 		
 		skillData.getSkillMods().forEach((skillModName, skillModValue) -> new SkillModIntent(skillModName, 0, skillModValue, target).broadcast());
 		
