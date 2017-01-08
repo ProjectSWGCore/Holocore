@@ -31,13 +31,10 @@ import intents.SkillModIntent;
 import intents.experience.GrantSkillIntent;
 import intents.network.GalacticPacketIntent;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
-
 import network.packets.Packet;
 import network.packets.swg.zone.object_controller.ChangeRoleIconChoice;
 import resources.client_info.ClientFactory;
@@ -46,7 +43,6 @@ import resources.control.Assert;
 import resources.control.Intent;
 import resources.control.Manager;
 import resources.objects.creature.CreatureObject;
-import resources.objects.player.PlayerObject;
 import resources.server_info.Log;
 
 /**
@@ -210,23 +206,19 @@ public final class SkillManager extends Manager {
 	
 	private void changeRoleIcon(CreatureObject creature, int chosenIcon) {
 		Set<String> qualifyingSkills = roleIconMap.get(chosenIcon);
-		
-		if (qualifyingSkills != null) {
-			for (String qualifyingSkill : qualifyingSkills) {
-				if (creature.hasSkill(qualifyingSkill)) {
-					PlayerObject playerObject = creature.getPlayerObject();
-
-					if(playerObject != null) {
-						playerObject.setProfessionIcon(chosenIcon);
-						break;
-					} else {
-						Log.e(this, "Could not alter role icon for PlayerObject of %s because it has none attached" , creature);
-					}
-				}
-			}
-		} else {
+		if (qualifyingSkills == null) {
 			Log.w(this, "%s tried to use undefined role icon %d", creature, chosenIcon);
+			return;
 		}
+		Assert.notNull(creature.getPlayerObject());
+		
+		for (String qualifyingSkill : qualifyingSkills) {
+			if (creature.hasSkill(qualifyingSkill)) {
+				creature.getPlayerObject().setProfessionIcon(chosenIcon);
+				return;
+			}
+		}
+		Log.e(this, "%s could not be given role icon %d - does not have qualifying skill! Qualifying: %s", creature, chosenIcon, qualifyingSkills);
 	}
 	
 	private static class SkillData {
