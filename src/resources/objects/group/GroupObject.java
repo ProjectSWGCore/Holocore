@@ -233,7 +233,6 @@ public class GroupObject extends SWGObject {
 	private void removeGroupMembers(CreatureObject ... creatures) {
 		for (CreatureObject creature : creatures) {
 			Assert.test(creature.getGroupId() == getObjectId());
-			Assert.test(isCustomAware(creature));
 			GroupMember member = memberMap.remove(creature.getObjectId());
 			Assert.notNull(member);
 			creature.setGroupId(0);
