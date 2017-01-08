@@ -195,7 +195,7 @@ public final class SpawnerService extends Service {
 			SWGObject building = objectManager.getObjectById(buildingId);
 			
 			if (!(building instanceof BuildingObject)) {
-				Log.w(this, "Skipping spawner with ID on terrain %s - building_id %d didn't reference a BuildingObject!", spawnId, terrain, buildingId);
+				Log.w(this, "Skipping spawner with ID %d on terrain %s - building_id %d didn't reference a BuildingObject!", spawnId, terrain, buildingId);
 				return;
 			}
 			
