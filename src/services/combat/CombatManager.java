@@ -283,7 +283,7 @@ public class CombatManager extends Manager {
 		
 		switch (combatCommand.getEggPosition()) {
 			case LOCATION: 
-				if (arguments[0].equals("a")) {
+				if (arguments[0].equals("a") || arguments[0].equals("c")) {	// is "c" in free-targeting mode
 					eggLocation = source.getLocation();
 				} else {
 					eggLocation = new Location(Float.parseFloat(arguments[0]), Float.parseFloat(arguments[1]), Float.parseFloat(arguments[2]), source.getTerrain());
