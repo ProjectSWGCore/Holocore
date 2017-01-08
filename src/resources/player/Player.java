@@ -40,6 +40,7 @@ public class Player implements Comparable<Player> {
 	
 	private final IntentChain packetChain;
 	private final Service playerManager;
+	private final Object sendingLock;
 	private final long networkId;
 	
 	private String			username			= "";
@@ -58,6 +59,7 @@ public class Player implements Comparable<Player> {
 	public Player(Service playerManager, long networkId) {
 		this.packetChain = new IntentChain();
 		this.playerManager = playerManager;
+		this.sendingLock = new Object();
 		this.networkId = networkId;
 	}
 
@@ -152,9 +154,15 @@ public class Player implements Comparable<Player> {
 		return (System.nanoTime()-lastInboundMessage)/1E6;
 	}
 	
+	public Object getSendingLock() {
+		return sendingLock;
+	}
+	
 	public void sendPacket(Packet ... packets) {
-		for (Packet p : packets) {
-			packetChain.broadcastAfter(new OutboundPacketIntent(p, networkId));
+		synchronized (getSendingLock()) {
+			for (Packet p : packets) {
+				packetChain.broadcastAfter(new OutboundPacketIntent(p, networkId));
+			}
 		}
 	}
 	

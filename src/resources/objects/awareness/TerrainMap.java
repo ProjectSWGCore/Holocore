@@ -40,7 +40,6 @@ import resources.objects.creature.CreatureObject;
 import resources.objects.waypoint.WaypointObject;
 import resources.server_info.Log;
 import resources.server_info.SynchronizedMap;
-import utilities.AwarenessUtilities;
 
 public class TerrainMap {
 	
@@ -136,8 +135,16 @@ public class TerrainMap {
 	private void update(SWGObject obj) {
 		Set<SWGObject> prevAware = obj.getObjectsAware();
 		Set<SWGObject> aware = getNearbyAware(obj);
-		AwarenessUtilities.callForNewAware(prevAware, aware, (inRange)  -> callbackManager.callOnEach((call) -> call.onWithinRange(obj, inRange)));
-		AwarenessUtilities.callForOldAware(prevAware, aware, (outRange) -> callbackManager.callOnEach((call) -> call.onOutOfRange(obj, outRange)));
+		callbackManager.callOnEach(call -> {
+			for (SWGObject n : aware) {
+				if (!prevAware.contains(n))
+					call.onWithinRange(obj, n);
+			}
+			for (SWGObject p : prevAware) {
+				if (!aware.contains(p))
+					call.onOutOfRange(obj, p);
+			}
+		});
 	}
 	
 	private Set<SWGObject> getNearbyAware(SWGObject obj) {

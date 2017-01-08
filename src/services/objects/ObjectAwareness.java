@@ -171,6 +171,11 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 		Player p = pei.getPlayer();
 		CreatureObject creature = p.getCreatureObject();
 		switch (pei.getEvent()) {
+			case PE_ZONE_IN_CLIENT:
+				Assert.notNull(creature);
+				if (creature.getParent() == null)
+					moveObject(creature, creature.getLocation());
+				break;
 			case PE_DISAPPEAR:
 				Assert.notNull(creature);
 				disappearObject(creature, true, true);
@@ -320,7 +325,7 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 		if (parent != null)
 			recursiveCreateObject(parent, owner);
 		else
-			obj.createObject(owner, true);
+			obj.createObject(owner);
 	}
 	
 	private void moveObject(SWGObject obj, Location requestedLocation) {

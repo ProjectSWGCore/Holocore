@@ -40,6 +40,7 @@ import resources.client_info.visitors.ObjectData.ObjectDataAttribute;
 import resources.common.CRC;
 import resources.containers.ContainerPermissionsType;
 import resources.containers.ContainerResult;
+import resources.control.Assert;
 import resources.encodables.StringId;
 import resources.network.BaselineBuilder;
 import resources.network.BaselineObject;
@@ -192,7 +193,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		long newId = (container != null) ? container.getObjectId() : 0;
 		UpdateContainmentMessage update = new UpdateContainmentMessage(getObjectId(), newId, getSlotArrangement());
 		AwarenessUtilities.callForSameObserver(oldObservers, newObservers, (observer) -> observer.sendPacket(update));
-		AwarenessUtilities.callForNewObserver(oldObservers, newObservers, (observer) -> createObject(observer, false));
+		AwarenessUtilities.callForNewObserver(oldObservers, newObservers, (observer) -> createObject(observer));
 		AwarenessUtilities.callForOldObserver(oldObservers, newObservers, (observer) -> destroyObject(observer));
 		new ContainerTransferIntent(this, container).broadcast();
 		return ContainerResult.SUCCESS;
@@ -636,45 +637,38 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	private final void sendSceneDestroyObject(Player target) {
-		SceneDestroyObject destroy = new SceneDestroyObject();
-		destroy.setObjectId(objectId);
-		target.sendPacket(destroy);
+		target.sendPacket(new SceneDestroyObject(objectId));
 	}
 	
 	public void createObject(SWGObject target) {
-		createObject(target, false);
-	}
-	
-	public void createObject(SWGObject target, boolean ignoreSnapshotChecks) {
-		if (target == null)
-			return;
-		Set<Player> observers = target.getAwareness().getChildObservers();
+		Assert.notNull(target);
 		if (target.getOwnerShallow() != null)
-			observers.add(target.getOwnerShallow());
-		for (Player observer : observers) {
-			createObject(observer, ignoreSnapshotChecks);
+			createObject(target.getOwnerShallow());
+		for (Player observer : target.getAwareness().getChildObservers()) {
+			createObject(observer);
 		}
 	}
 	
-	public void createObject(Player target, boolean ignoreSnapshotChecks) {
+	public void createObject(Player target) {
+		Assert.notNull(target);
 		if (!isVisible(target.getCreatureObject())) {
 			return;
 		}
 		
-		sendSceneCreateObject(target);
-		sendBaselines(target);
-		createChildrenObjects(target, ignoreSnapshotChecks);
-		sendFinalBaselinePackets(target);
-		target.sendPacket(new SceneEndBaselines(getObjectId()));
+		synchronized (target.getSendingLock()) {
+			sendSceneCreateObject(target);
+			sendBaselines(target);
+			createChildrenObjects(target);
+			sendFinalBaselinePackets(target);
+			target.sendPacket(new SceneEndBaselines(getObjectId()));
+		}
 	}
 	
 	public void destroyObject(SWGObject target) {
-		if (isSnapshot() || target == null)
-			return;
-		Set<Player> observers = target.getAwareness().getChildObservers();
+		Assert.notNull(target);
 		if (target.getOwnerShallow() != null)
-			observers.add(target.getOwnerShallow());
-		for (Player observer : observers) {
+			destroyObject(target.getOwnerShallow());
+		for (Player observer : target.getAwareness().getChildObservers()) {
 			destroyObject(observer);
 		}
 	}
@@ -812,33 +806,21 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		}
 	}
 	
-	protected void createChildrenObjects(Player target) {
-		createChildrenObjects(target, false);
-	}
-	
-	private void createChildrenObjects(Player target, boolean ignoreSnapshotChecks) {
-		synchronized (slots) {
-			if (slots.isEmpty() && containedObjects.isEmpty())
-				return;
-		}
-
-		// First create the objects in the slots
+	private void createChildrenObjects(Player target) {
 		synchronized (slots) {
 			for (SWGObject slotObject : slots.values()) {
 				if (slotObject != null) {
-					slotObject.createObject(target, ignoreSnapshotChecks);
+					slotObject.createObject(target);
 				}
 			}
 		}
 		
-		// Now create the contained objects
 		synchronized (containedObjects) {
 			for (SWGObject containedObject : containedObjects) {
-				if (containedObject != null) {
-					if (containedObject instanceof CreatureObject && ((CreatureObject) containedObject).isLoggedOutPlayer())
-						continue; // If it's a player, but that's logged out
-					containedObject.createObject(target, ignoreSnapshotChecks);
-				}
+				Assert.notNull(containedObject);
+				if (containedObject instanceof CreatureObject && ((CreatureObject) containedObject).isLoggedOutPlayer())
+					continue; // If it's a player, but that's logged out
+				containedObject.createObject(target);
 			}
 		}
 	}
