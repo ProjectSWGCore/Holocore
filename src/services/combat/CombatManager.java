@@ -283,9 +283,10 @@ public class CombatManager extends Manager {
 		
 		switch (combatCommand.getEggPosition()) {
 			case LOCATION: 
-				if (arguments[0].equals("a")) {
+				if (arguments[0].equals("a") || arguments[0].equals("c")) {	// With a heavy weapon in free-targeting mode, it's "c"
 					eggLocation = source.getLocation();
 				} else {
+					// TODO validation on the given location
 					eggLocation = new Location(Float.parseFloat(arguments[0]), Float.parseFloat(arguments[1]), Float.parseFloat(arguments[2]), source.getTerrain());
 				}
 				
@@ -306,7 +307,7 @@ public class CombatManager extends Manager {
 			new ObjectCreatedIntent(delayEgg).broadcast();
 		}
 		
-		executor.schedule(() -> delayEggLoop(delayEgg, source, target, combatCommand, 0), (int) combatCommand.getInitialDelayAttackInterval(), TimeUnit.SECONDS);
+		executor.schedule(() -> delayEggLoop(delayEgg, source, target, combatCommand, 0), (long) combatCommand.getInitialDelayAttackInterval(), TimeUnit.SECONDS);
 	}
 	
 	private void delayEggLoop(final SWGObject delayEgg, final CreatureObject source, final SWGObject target, final CombatCommand combatCommand, final int currentLoop) {
@@ -321,7 +322,7 @@ public class CombatManager extends Manager {
 		
 		if (currentLoop < combatCommand.getDelayAttackLoops()) {
 			// Recursively schedule another loop if that wouldn't exceed the amount of loops we need to perform
-			executor.schedule(() -> delayEggLoop(delayEgg, source, target, combatCommand, currentLoop + 1), (int) combatCommand.getDelayAttackInterval(), TimeUnit.SECONDS);
+			executor.schedule(() -> delayEggLoop(delayEgg, source, target, combatCommand, currentLoop + 1), (long) combatCommand.getDelayAttackInterval(), TimeUnit.SECONDS);
 		} else if (delayEgg != null) {
 			// The delayed attack has ended - destroy the egg
 			new DestroyObjectIntent(delayEgg).broadcast();
@@ -387,11 +388,8 @@ public class CombatManager extends Manager {
 			combatSpam.setAttackName(new StringId("cmd_n", command.getName()));
 			combatSpam.setWeapon(weapon.getObjectId());
 			
-			// Combat log message appears for both the attacker and the defender
-			source.sendSelf(combatSpam);
-			target.sendSelf(combatSpam);
-
 			if (!info.isSuccess()) {	// Single target negate, like dodge or parry!
+				source.sendObserversAndSelf(combatSpam);
 				return;
 			}
 			
@@ -409,7 +407,8 @@ public class CombatManager extends Manager {
 			
 			int finalDamage = info.getFinalDamage();
 			
-			action.addDefender((CreatureObject) target, true, (byte) 0, HitLocation.HIT_LOCATION_BODY, (short) finalDamage);
+			source.sendObserversAndSelf(combatSpam);
+			action.addDefender(target, true, (byte) 0, HitLocation.HIT_LOCATION_BODY, (short) finalDamage);
 			
 			if (target.getHealth() <= finalDamage)
 				doCreatureDeath(target, source);
