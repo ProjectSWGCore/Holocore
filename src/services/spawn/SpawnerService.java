@@ -191,7 +191,7 @@ public final class SpawnerService extends Service {
 			return;
 		}
 		
-		if (buildingId > 0) {
+		if (buildingId != 0) {
 			SWGObject building = objectManager.getObjectById(buildingId);
 			
 			if (!(building instanceof BuildingObject)) {
