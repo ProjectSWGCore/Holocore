@@ -25,44 +25,32 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
  ***********************************************************************************/
-package services.network;
-
-import intents.network.OutboundPacketIntent;
+package intents.network;
 
 import network.NetworkClient;
-import resources.control.Assert;
 import resources.control.Intent;
-import resources.control.Service;
-import resources.network.TCPServer;
 
-public class OutboundNetworkManager extends Service {
+public class InboundPacketPendingIntent extends Intent {
 	
-	private final ClientManager clientManager;
-	private final PacketSender sender;
+	public static final String TYPE = "InboundPacketPendingIntent";
 	
-	public OutboundNetworkManager(TCPServer server, ClientManager clientManager) {
-		this.sender = new PacketSender(server);
-		this.clientManager = clientManager;
-		
-		registerForIntent(OutboundPacketIntent.TYPE);
+	private NetworkClient client;
+	
+	public InboundPacketPendingIntent() {
+		this(null);
 	}
 	
-	@Override
-	public void onIntentReceived(Intent i) {
-		if (i instanceof OutboundPacketIntent) {
-			OutboundPacketIntent opi = (OutboundPacketIntent) i;
-			NetworkClient client = clientManager.getClient(opi.getNetworkId());
-			Assert.notNull(client);
-			client.addToOutbound(opi.getPacket());
-		}
+	public InboundPacketPendingIntent(NetworkClient client) {
+		super(TYPE);
+		setClient(client);
 	}
 	
-	public void onSessionCreated(NetworkClient client) {
-		client.setPacketSender(sender);
+	public NetworkClient getClient() {
+		return client;
 	}
 	
-	public void onSessionDestroyed(NetworkClient client) {
-		
+	public void setClient(NetworkClient client) {
+		this.client = client;
 	}
 	
 }

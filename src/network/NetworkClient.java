@@ -33,11 +33,6 @@ import intents.network.InboundPacketIntent;
 
 import java.io.EOFException;
 import java.net.InetSocketAddress;
-import java.util.ArrayDeque;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
-
 import resources.network.NetBufferStream;
 import resources.server_info.Log;
 import services.network.HolocoreSessionManager;
@@ -56,26 +51,27 @@ public class NetworkClient {
 	private final IntentChain intentChain = new IntentChain();
 	private final InetSocketAddress address;
 	private final long networkId;
-	private final Queue<Packet> outboundQueue;
 	private final NetBufferStream buffer;
 	private final HolocoreSessionManager sessionManager;
 	private final NetworkProtocol protocol;
+	private final Object inboundMutex;
+	private final Object outboundMutex;
 	private PacketSender sender;
 	
 	public NetworkClient(InetSocketAddress address, long networkId) {
 		this.address = address;
 		this.networkId = networkId;
-		this.outboundQueue = new ArrayDeque<>();
 		this.buffer = new NetBufferStream(DEFAULT_BUFFER);
 		this.sessionManager = new HolocoreSessionManager();
 		this.protocol = new NetworkProtocol();
+		this.inboundMutex = new Object();
+		this.outboundMutex = new Object();
 		this.sender = null;
 	}
 	
 	public void close() {
 		buffer.reset();
 		intentChain.reset();
-		outboundQueue.clear();
 	}
 	
 	public InetSocketAddress getAddress() {
@@ -108,62 +104,52 @@ public class NetworkClient {
 		this.sender = sender;
 	}
 	
-	public void processOutbound() {
-		synchronized (outboundQueue) {
-			Packet p;
-			while (!outboundQueue.isEmpty()) {
-				p = outboundQueue.poll();
-				if (p == null)
-					break;
-				if (!processOutbound(p)) {
-					outboundQueue.clear();
-					return;
+	public void processInbound() {
+		synchronized (inboundMutex) {
+			try {
+				while (processNextPacket()) {
+					
 				}
+			} catch (EOFException e) {
+				Log.e(this, "Read error: " + e.getMessage());
 			}
 		}
-	}
-	
-	public boolean processInbound() {
-		List <Packet> packets;
-		synchronized (buffer) {
-			packets = processPackets();
-			buffer.compact();
-		}
-		for (Packet p : packets) {
-			p.setAddress(address.getAddress());
-			p.setPort(address.getPort());
-			if (!processInbound(p)) {
-				return false;
-			}
-		}
-		return packets.size() > 0;
 	}
 	
 	public void addToOutbound(Packet packet) {
-		synchronized (outboundQueue) {
-			outboundQueue.add(packet);
+		synchronized (outboundMutex) {
+			ResponseAction action = sessionManager.onOutbound(packet);
+			if (action != ResponseAction.CONTINUE) {
+				flushOutbound();
+				return;
+			}
+			sendPacket(packet);
 		}
 	}
 	
-	public void addToBuffer(byte [] data) {
+	public boolean addToBuffer(byte [] data) {
 		synchronized (buffer) {
 			buffer.write(data);
+			return protocol.canDecode(buffer);
 		}
 	}
 	
-	private List<Packet> processPackets() {
-		List <Packet> packets = new LinkedList<>();
-		Packet p = null;
-		try {
-			while (buffer.hasRemaining()) {
-				p = protocol.decode(buffer);
-				if (p != null)
-					packets.add(p);
-			}
-		} catch (EOFException e) {
-			Log.e(this, "EOFException: " + e.getMessage());
+	private boolean processNextPacket() throws EOFException {
+		Packet p;
+		synchronized (buffer) {
+			if (!protocol.canDecode(buffer))
+				return false;
+			p = protocol.decode(buffer);
 		}
-		return packets;
+		if (p == null)
+			return true;
+		p.setAddress(address.getAddress());
+		p.setPort(address.getPort());
+		if (!processInbound(p)) {
+			flushOutbound();
+			return false;
+		}
+		return true;
 	}
 	
 	private boolean processInbound(Packet p) {
@@ -174,17 +160,6 @@ public class NetworkClient {
 		if (action == ResponseAction.SHUT_DOWN)
 			return true;
 		intentChain.broadcastAfter(new InboundPacketIntent(p, networkId));
-		return true;
-	}
-	
-	private boolean processOutbound(Packet p) {
-		ResponseAction action = sessionManager.onOutbound(p);
-		flushOutbound();
-		if (action == ResponseAction.IGNORE)
-			return true;
-		if (action == ResponseAction.SHUT_DOWN)
-			return true;
-		sendPacket(p);
 		return true;
 	}
 	

@@ -31,8 +31,8 @@ import java.io.EOFException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
+import resources.control.Assert;
 import resources.network.NetBufferStream;
-import resources.server_info.Log;
 import network.PacketType;
 import network.encryption.Compression;
 import network.packets.Packet;
@@ -52,6 +52,21 @@ public class NetworkProtocol {
 			encoded = compress;
 		}
 		return preparePacket(encoded, compressed, decompressedLength);
+	}
+	
+	public boolean canDecode(NetBufferStream buffer) {
+		if (buffer.remaining() < 5)
+			return false;
+		buffer.mark();
+		try {
+			buffer.getByte();
+			int length = buffer.getShort();
+			Assert.test(length >= 0);
+			buffer.getShort();
+			return buffer.remaining() >= length;
+		} finally {
+			buffer.rewind();
+		}
 	}
 	
 	public Packet decode(NetBufferStream buffer) throws EOFException {
@@ -96,11 +111,9 @@ public class NetworkProtocol {
 		return data;
 	}
 	
-	private SWGPacket processSWG(byte [] data) {
-		if (data.length < 6) {
-			Log.e("NetworkClient", "Length too small: " + data.length);
-			return null;
-		}
+	private SWGPacket processSWG(byte [] data) throws EOFException {
+		if (data.length < 6)
+			throw new EOFException("Length too small: " + data.length);
 		ByteBuffer buffer = ByteBuffer.wrap(data).order(ByteOrder.LITTLE_ENDIAN);
 		int crc = buffer.getInt(2);
 		if (crc == 0x80CE5E46)
