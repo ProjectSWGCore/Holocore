@@ -203,18 +203,14 @@ public class QaToolCmdCallback implements ICmdCallback {
 	}
 	
 	private void recoverPlayer(ObjectManager objManager, PlayerManager playerManager, Player player, String name, String loc) {
-		long id = playerManager.getCharacterIdByName(name);
-		if (id == 0) {
-			sendSystemMessage(player, "Could not find player by name: '" + name + "'");
-			return;
-		}
-		SWGObject recoveree = objManager.getObjectById(id);
+		Player recoveree = playerManager.getPlayerByCreatureFirstName(name);
+		
 		if (recoveree == null) {
-			sendSystemMessage(player, "Could not find player by name: " + name);
-			sendSystemMessage(player, "Internal Error. Recoveree is null! ID: " + id);
+			sendSystemMessage(player, "Could not find player by first name: '" + name + "'");
 			return;
 		}
-		sendSystemMessage(player, teleportToRecoveryLocation(objManager, recoveree, loc));
+		
+		sendSystemMessage(player, teleportToRecoveryLocation(objManager, recoveree.getCreatureObject(), loc));
 	}
 	
 	private String teleportToRecoveryLocation(ObjectManager objManager, SWGObject obj, String loc) {
