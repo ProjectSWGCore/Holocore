@@ -132,11 +132,11 @@ public class CreatureObject extends TangibleObject {
 		creo6.removeAppearanceItem(obj, this);
 	}
 	
-	public boolean addSkill(String skillName) {
-		synchronized(skills) {
-			Assert.test(skills.add(skillName));
+	public void addSkill(String ... skillList) {
+		synchronized (skills) {
+			for (String skillName : skillList)
+				Assert.test(skills.add(skillName));
 			skills.sendDeltaMessage(this);
-			return true;
 		}
 	}
 	

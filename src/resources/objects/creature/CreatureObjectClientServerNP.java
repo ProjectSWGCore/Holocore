@@ -191,15 +191,16 @@ class CreatureObjectClientServerNP implements Persistable {
 		}
 	}
 	
-	public void addAbility(SWGObject target, String ... abilities) {
-		synchronized (this.abilities) {
-			for (String abilityName : abilities) {
-				if (hasAbility(abilityName))
-					this.abilities.put(abilityName, this.abilities.get(abilityName) + 1);
+	public void addAbility(SWGObject target, String ... abilityList) {
+		synchronized (abilities) {
+			for (String abilityName : abilityList) {
+				Integer count = abilities.get(abilityName);
+				if (count != null)
+					abilities.put(abilityName, count + 1);
 				else
-					this.abilities.put(abilityName, 1);
+					abilities.put(abilityName, 1);
 			}
-			this.abilities.sendDeltaMessage(target);
+			abilities.sendDeltaMessage(target);
 		}
 	}
 	
