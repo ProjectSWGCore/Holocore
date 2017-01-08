@@ -92,7 +92,7 @@ public class ZoneManager extends Manager {
 			handlePlayerEventIntent(((PlayerEventIntent) i).getPlayer(), ((PlayerEventIntent) i).getEvent());
 		} else if (i instanceof GalacticPacketIntent) {
 			GalacticPacketIntent gpi = (GalacticPacketIntent) i;
-			handlePacket(gpi, gpi.getPlayerManager().getPlayerFromNetworkId(gpi.getNetworkId()), gpi.getNetworkId(), gpi.getPacket());
+			handlePacket(gpi, gpi.getPlayer(), gpi.getPacket());
 		}
 	}
 	
@@ -111,8 +111,8 @@ public class ZoneManager extends Manager {
 		}
 	}
 	
-	private void handlePacket(GalacticIntent intent, Player player, long networkId, Packet p) {
-		characterCreationService.handlePacket(intent, player, networkId, p);
+	private void handlePacket(GalacticIntent intent, Player player, Packet p) {
+		characterCreationService.handlePacket(intent, player, p);
 		if (p instanceof ClientIdMsg)
 			handleClientIdMsg(player, (ClientIdMsg) p);
 		if (p instanceof SetWaypointColor)

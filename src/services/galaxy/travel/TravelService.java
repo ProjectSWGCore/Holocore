@@ -300,7 +300,7 @@ public class TravelService extends Service {
 		
 		if (p instanceof PlanetTravelPointListRequest) {
 			PlanetTravelPointListRequest req = (PlanetTravelPointListRequest) p;
-			Player player = i.getPlayerManager().getPlayerFromNetworkId(i.getNetworkId());
+			Player player = i.getPlayer();
 			Location objectLocation = player.getCreatureObject().getWorldLocation();
 			TravelPoint nearest = getNearestTravelPoint(objectLocation);
 			List<TravelPoint> pointsForPlanet = new ArrayList<>();

@@ -43,7 +43,6 @@ import resources.PvpFlag;
 import resources.Terrain;
 import resources.config.ConfigFile;
 import resources.containers.ContainerPermissionsType;
-import resources.control.Assert;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.building.BuildingObject;

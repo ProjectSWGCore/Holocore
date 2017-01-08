@@ -114,7 +114,7 @@ public class CharacterCreationService extends Service {
 		return super.start();
 	}
 	
-	public void handlePacket(GalacticIntent intent, Player player, long networkId, Packet p) {
+	public void handlePacket(GalacticIntent intent, Player player, Packet p) {
 		if (p instanceof RandomNameRequest)
 			handleRandomNameRequest(player, (RandomNameRequest) p);
 		if (p instanceof ClientVerifyAndLockNameRequest)

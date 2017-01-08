@@ -130,9 +130,6 @@ public class ChatMailService extends Service {
 	}
 	
 	private void processPacket(GalacticPacketIntent intent) {
-		Player player = intent.getPlayerManager().getPlayerFromNetworkId(intent.getNetworkId());
-		if (player == null)
-			return;
 		Packet p = intent.getPacket();
 		if (!(p instanceof SWGPacket))
 			return;
@@ -142,11 +139,11 @@ public class ChatMailService extends Service {
 			/* Mails */
 			case CHAT_PERSISTENT_MESSAGE_TO_SERVER:
 				if (p instanceof ChatPersistentMessageToServer)
-					handleSendPersistentMessage(intent.getPlayerManager(), player, galaxyName, (ChatPersistentMessageToServer) p);
+					handleSendPersistentMessage(intent.getPlayerManager(), intent.getPlayer(), galaxyName, (ChatPersistentMessageToServer) p);
 				break;
 			case CHAT_REQUEST_PERSISTENT_MESSAGE:
 				if (p instanceof ChatRequestPersistentMessage)
-					handlePersistentMessageRequest(player, galaxyName, (ChatRequestPersistentMessage) p);
+					handlePersistentMessageRequest(intent.getPlayer(), galaxyName, (ChatRequestPersistentMessage) p);
 				break;
 			case CHAT_DELETE_PERSISTENT_MESSAGE:
 				if (p instanceof ChatDeletePersistentMessage)

@@ -157,13 +157,9 @@ public class ChatRoomService extends Service {
 	}
 
 	private void processPacket(GalacticPacketIntent intent) {
-		Player player = intent.getPlayerManager().getPlayerFromNetworkId(intent.getNetworkId());
-		if (player == null)
-			return;
-
 		Packet p = intent.getPacket();
 		if (p instanceof SWGPacket)
-			processSwgPacket(player, (SWGPacket) p);
+			processSwgPacket(intent.getPlayer(), (SWGPacket) p);
 	}
 
 	private void processSwgPacket(Player player, SWGPacket p) {

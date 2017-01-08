@@ -129,18 +129,14 @@ public class LoginService extends Service {
 	
 	private void handlePacket(GalacticPacketIntent gpi, Packet p) {
 		if (p instanceof LoginClientId) {
-			handleLogin(getPlayer(gpi.getPlayerManager(), gpi.getNetworkId()), (LoginClientId) p);
+			handleLogin(gpi.getPlayer(), (LoginClientId) p);
 		} else if (p instanceof DeleteCharacterRequest) {
-			handleCharDeletion(gpi, getPlayer(gpi.getPlayerManager(), gpi.getNetworkId()), (DeleteCharacterRequest) p);
+			handleCharDeletion(gpi, gpi.getPlayer(), (DeleteCharacterRequest) p);
 		} else if (p instanceof LagRequest) {
-			Player player = getPlayer(gpi.getPlayerManager(), gpi.getNetworkId());
+			Player player = gpi.getPlayer();
 			if (player.getPlayerServer() == PlayerServer.LOGIN)
 				handleLagRequest(player);
 		}
-	}
-	
-	private Player getPlayer(PlayerManager playerManager, long networkId) {
-		return playerManager.getPlayerFromNetworkId(networkId);
 	}
 	
 	private String getServerString() {

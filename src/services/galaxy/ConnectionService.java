@@ -116,8 +116,7 @@ public class ConnectionService extends Service {
 	}
 	
 	private void onGalacticPacketIntent(GalacticPacketIntent gpi) {
-		Player p = gpi.getPlayerManager().getPlayerFromNetworkId(gpi.getNetworkId());
-		Assert.notNull(p);
+		Player p = gpi.getPlayer();
 		p.updateLastPacketTimestamp();
 		if (gpi.getPacket() instanceof HeartBeat)
 			p.sendPacket(gpi.getPacket());

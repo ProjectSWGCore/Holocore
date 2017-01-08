@@ -80,12 +80,7 @@ public class CityService extends Service {
 		GalacticPacketIntent gpi = (GalacticPacketIntent) i;
 		Packet p = gpi.getPacket();
 		if (p instanceof DataTransform) {
-			Player player = gpi.getPlayerManager().getPlayerFromNetworkId(gpi.getNetworkId());
-			if (player == null) {
-				Log.e("CityService", "Player is null in GalacticPacketIntent:DataTransform!");
-				return;
-			}
-			CreatureObject creature = player.getCreatureObject();
+			CreatureObject creature = gpi.getPlayer().getCreatureObject();
 			if (creature == null) {
 				Log.e("CityService", "Creature is null in GalacticPacketIntent:DataTransform!");
 				return;

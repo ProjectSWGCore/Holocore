@@ -64,7 +64,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Set;
 import java.util.concurrent.BlockingQueue;
@@ -132,12 +131,9 @@ public class CommandService extends Service {
 	private void handleGalacticPacketIntent(GalacticPacketIntent i) {
 		GalacticPacketIntent gpi = (GalacticPacketIntent) i;
 		Packet p = gpi.getPacket();
-		Player player = gpi.getPlayerManager().getPlayerFromNetworkId(gpi.getNetworkId());
-		if (player != null) {
-			if (p instanceof CommandQueueEnqueue) {
-				CommandQueueEnqueue controller = (CommandQueueEnqueue) p;
-				handleCommandRequest(player, gpi.getGalacticManager(), controller);
-			}
+		if (p instanceof CommandQueueEnqueue) {
+			CommandQueueEnqueue controller = (CommandQueueEnqueue) p;
+			handleCommandRequest(gpi.getPlayer(), gpi.getGalacticManager(), controller);
 		}
 	}
 	

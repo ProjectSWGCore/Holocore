@@ -241,11 +241,10 @@ public class ObjectManager extends Manager {
 		if (packet instanceof SelectCharacter) {
 			PlayerManager pm = gpi.getPlayerManager();
 			long characterId = ((SelectCharacter) packet).getCharacterId();
-			zoneInCharacter(pm, gpi.getNetworkId(), characterId);
+			zoneInCharacter(pm, gpi.getPlayer(), characterId);
 		} else if (packet instanceof IntendedTarget) {
 			IntendedTarget intendedTarget = (IntendedTarget) packet;
-			Player player = gpi.getPlayerManager().getPlayerFromNetworkId(gpi.getNetworkId());
-			CreatureObject creatureObject = player.getCreatureObject();
+			CreatureObject creatureObject = gpi.getPlayer().getCreatureObject();
 			long targetId = intendedTarget.getTargetId();
 			
 			creatureObject.setIntendedTargetId(targetId);
@@ -288,12 +287,7 @@ public class ObjectManager extends Manager {
 		return object;
 	}
 	
-	private void zoneInCharacter(PlayerManager playerManager, long netId, long characterId) {
-		Player player = playerManager.getPlayerFromNetworkId(netId);
-		if (player == null) {
-			Log.e("ObjectManager", "Unable to zone in null player '%d'", netId);
-			return;
-		}
+	private void zoneInCharacter(PlayerManager playerManager, Player player, long characterId) {
 		SWGObject creatureObj = getObjectById(characterId);
 		if (creatureObj == null) {
 			Log.e("ObjectManager", "Failed to start zone - CreatureObject could not be fetched from database [Character: %d  User: %s]", characterId, player.getUsername());

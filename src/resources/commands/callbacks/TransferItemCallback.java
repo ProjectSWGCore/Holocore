@@ -29,7 +29,6 @@
 package resources.commands.callbacks;
 
 import intents.chat.ChatBroadcastIntent;
-import resources.Race;
 import resources.commands.ICmdCallback;
 import resources.control.Assert;
 import resources.objects.GameObjectType;

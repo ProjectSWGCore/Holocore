@@ -266,6 +266,7 @@ public class CombatManager extends Manager {
 				case SINGLE_TARGET: doCombatSingle(source, target, info, weapon, command); break;
 				case AREA: doCombatArea(source, source, info, weapon, command, false); break;
 				case TARGET_AREA: doCombatArea(source, delayEgg != null ? delayEgg : target, info, weapon, command, true); break;		// Same as AREA, but the target is the destination for the AoE and  can take damage
+				default: break;
 			}
 		}
 	}

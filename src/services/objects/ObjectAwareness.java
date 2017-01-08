@@ -237,7 +237,7 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 			requestedLocation.setTerrain(obj.getTerrain());
 			moveObjectWithTransform(obj, parent, requestedLocation, trans.getSpeed(), trans.getUpdateCounter());
 		} else if (packet instanceof CmdSceneReady) {
-			handleCmdSceneReady(i.getPlayerManager().getPlayerFromNetworkId(i.getNetworkId()), (CmdSceneReady) packet);
+			handleCmdSceneReady(i.getPlayer(), (CmdSceneReady) packet);
 		}
 	}
 	

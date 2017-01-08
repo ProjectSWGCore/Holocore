@@ -165,7 +165,7 @@ public final class SkillManager extends Manager {
 		if (packet instanceof ChangeRoleIconChoice) {
 			ChangeRoleIconChoice iconChoice = (ChangeRoleIconChoice) packet;
 			int chosenIcon = iconChoice.getIconChoice();
-			CreatureObject creatureObject = gpi.getPlayerManager().getPlayerFromNetworkId(gpi.getNetworkId()).getCreatureObject();
+			CreatureObject creatureObject = gpi.getPlayer().getCreatureObject();
 			
 			changeRoleIcon(creatureObject, chosenIcon);
 		}

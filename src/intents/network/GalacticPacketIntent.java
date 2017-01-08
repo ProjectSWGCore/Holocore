@@ -27,6 +27,7 @@
 ***********************************************************************************/
 package intents.network;
 
+import resources.player.Player;
 import intents.GalacticIntent;
 import network.packets.Packet;
 
@@ -35,34 +36,28 @@ public class GalacticPacketIntent extends GalacticIntent {
 	public static final String TYPE = "GalacticPacketIntent";
 	
 	private Packet packet;
-	private long networkId;
+	private Player player;
 	
-	public GalacticPacketIntent(InboundPacketIntent i) {
+	public GalacticPacketIntent(Packet packet, Player player) {
 		super(TYPE);
-		setPacket(i.getPacket());
-		setNetworkId(i.getNetworkId());
-	}
-	
-	public GalacticPacketIntent(Packet p, long networkId) {
-		super(TYPE);
-		setPacket(p);
-		setNetworkId(networkId);
-	}
-
-	public void setPacket(Packet p) {
-		this.packet = p;
-	}
-	
-	public void setNetworkId(long networkId) {
-		this.networkId = networkId;
+		setPacket(packet);
+		setPlayer(player);
 	}
 	
 	public Packet getPacket() {
 		return packet;
 	}
 	
-	public long getNetworkId() {
-		return networkId;
+	public Player getPlayer() {
+		return player;
+	}
+	
+	public void setPacket(Packet packet) {
+		this.packet = packet;
+	}
+	
+	public void setPlayer(Player player) {
+		this.player = player;
 	}
 	
 }

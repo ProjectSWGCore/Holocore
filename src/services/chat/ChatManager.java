@@ -113,9 +113,6 @@ public class ChatManager extends Manager {
 	}
 
 	private void processPacket(GalacticPacketIntent intent) {
-		Player player = intent.getPlayerManager().getPlayerFromNetworkId(intent.getNetworkId());
-		if (player == null)
-			return;
 		Packet p = intent.getPacket();
 		if (!(p instanceof SWGPacket))
 			return;
@@ -123,7 +120,7 @@ public class ChatManager extends Manager {
 		switch (swg.getPacketType()) {
 			case CHAT_INSTANT_MESSAGE_TO_CHARACTER:
 				if (p instanceof ChatInstantMessageToCharacter)
-					handleInstantMessage(intent.getPlayerManager(), player, (ChatInstantMessageToCharacter) p);
+					handleInstantMessage(intent.getPlayerManager(), intent.getPlayer(), (ChatInstantMessageToCharacter) p);
 				break;
 			default:
 				break;

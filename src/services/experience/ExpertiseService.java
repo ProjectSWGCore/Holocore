@@ -35,19 +35,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 import network.packets.Packet;
 import network.packets.swg.zone.ExpertiseRequestMessage;
-import resources.Location;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
-import resources.player.Player;
 import resources.server_info.Log;
 import resources.server_info.RelationalDatabase;
 import resources.server_info.RelationalServerFactory;
@@ -191,8 +187,7 @@ public final class ExpertiseService extends Service {
 		}
 		
 		ExpertiseRequestMessage expertiseRequestMessage = (ExpertiseRequestMessage) packet;
-		Player player = gpi.getPlayerManager().getPlayerFromNetworkId(gpi.getNetworkId());
-		CreatureObject creatureObject = player.getCreatureObject();
+		CreatureObject creatureObject = gpi.getPlayer().getCreatureObject();
 		String[] requestedSkills = expertiseRequestMessage.getRequestedSkills();
 
 		for (String requestedSkill : requestedSkills) {
