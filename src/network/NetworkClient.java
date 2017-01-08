@@ -33,6 +33,8 @@ import intents.network.InboundPacketIntent;
 
 import java.io.EOFException;
 import java.net.InetSocketAddress;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 import resources.network.NetBufferStream;
 import resources.server_info.Log;
 import services.network.HolocoreSessionManager;
@@ -54,8 +56,8 @@ public class NetworkClient {
 	private final NetBufferStream buffer;
 	private final HolocoreSessionManager sessionManager;
 	private final NetworkProtocol protocol;
-	private final Object inboundMutex;
 	private final Object outboundMutex;
+	private final Lock inboundSemaphore;
 	private PacketSender sender;
 	
 	public NetworkClient(InetSocketAddress address, long networkId) {
@@ -64,8 +66,8 @@ public class NetworkClient {
 		this.buffer = new NetBufferStream(DEFAULT_BUFFER);
 		this.sessionManager = new HolocoreSessionManager();
 		this.protocol = new NetworkProtocol();
-		this.inboundMutex = new Object();
 		this.outboundMutex = new Object();
+		this.inboundSemaphore = new ReentrantLock(true);
 		this.sender = null;
 	}
 	
@@ -105,14 +107,16 @@ public class NetworkClient {
 	}
 	
 	public void processInbound() {
-		synchronized (inboundMutex) {
-			try {
-				while (processNextPacket()) {
-					
-				}
-			} catch (EOFException e) {
-				Log.e(this, "Read error: " + e.getMessage());
+		if (!inboundSemaphore.tryLock())
+			return;
+		try {
+			while (processNextPacket()) {
+				
 			}
+		} catch (EOFException e) {
+			Log.e(this, "Read error: " + e.getMessage());
+		} finally {
+			inboundSemaphore.unlock();
 		}
 	}
 	
