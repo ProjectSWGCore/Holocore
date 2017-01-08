@@ -28,19 +28,16 @@
 package services.galaxy;
 
 import intents.PlayerEventIntent;
-import intents.network.CloseConnectionIntent;
-import intents.network.ForceDisconnectIntent;
 import intents.network.GalacticPacketIntent;
 
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import network.packets.swg.zone.HeartBeat;
+import resources.control.Assert;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.network.DisconnectReason;
@@ -49,9 +46,8 @@ import resources.objects.player.PlayerObject;
 import resources.player.Player;
 import resources.player.PlayerEvent;
 import resources.player.PlayerFlags;
-import resources.player.PlayerState;
-import resources.player.Player.PlayerServer;
 import resources.server_info.Log;
+import resources.server_info.SynchronizedSet;
 import services.CoreManager;
 import utilities.ThreadUtilities;
 
@@ -66,18 +62,16 @@ public class ConnectionService extends Service {
 	
 	public ConnectionService() {
 		updateService = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("conn-update-service"));
-		zonedInPlayers = new LinkedHashSet<Player>();
-		disappearPlayers = new HashSet<DisappearPlayer>();
-		disappearRunnable = new Runnable() {
-			public void run() {
-				synchronized (disappearPlayers) {
-					Iterator<DisappearPlayer> iter = disappearPlayers.iterator();
-					while (iter.hasNext()) {
-						DisappearPlayer p = iter.next();
-						if ((System.nanoTime()-p.getTime())/1E6 >= DISAPPEAR_THRESHOLD) {
-							disappear(p.getPlayer(), false, DisconnectReason.APPLICATION);
-							iter.remove();
-						}
+		zonedInPlayers = new SynchronizedSet<>();
+		disappearPlayers = new SynchronizedSet<>();
+		disappearRunnable = () -> {
+			synchronized (disappearPlayers) {
+				Iterator<DisappearPlayer> iter = disappearPlayers.iterator();
+				while (iter.hasNext()) {
+					DisappearPlayer p = iter.next();
+					if ((System.nanoTime()-p.getTime())/1E6 >= DISAPPEAR_THRESHOLD) {
+						disappear(p.getPlayer(), false, DisconnectReason.APPLICATION);
+						iter.remove();
 					}
 				}
 			}
@@ -85,12 +79,6 @@ public class ConnectionService extends Service {
 		
 		registerForIntent(PlayerEventIntent.TYPE);
 		registerForIntent(GalacticPacketIntent.TYPE);
-		registerForIntent(ForceDisconnectIntent.TYPE);
-	}
-	
-	@Override
-	public boolean start() {
-		return super.start();
 	}
 	
 	@Override
@@ -111,40 +99,17 @@ public class ConnectionService extends Service {
 			onPlayerEventIntent((PlayerEventIntent) i);
 		else if (i instanceof GalacticPacketIntent)
 			onGalacticPacketIntent((GalacticPacketIntent) i);
-		else if (i instanceof ForceDisconnectIntent)
-			onForceDisconnectIntent((ForceDisconnectIntent) i);
 	}
 	
 	private void onPlayerEventIntent(PlayerEventIntent pei) {
+		Player p = pei.getPlayer();
 		switch (pei.getEvent()) {
-			case PE_FIRST_ZONE: {
-				Player p = pei.getPlayer();
-				removeFromLists(p);
-				synchronized (zonedInPlayers) {
-					zonedInPlayers.add(p);
-				}
+			case PE_FIRST_ZONE:
+				zoneIn(p);
 				break;
-			}
-			case PE_ZONE_IN_SERVER:
-				CoreManager.getGalaxy().incrementPopulationCount();
-				clearPlayerFlag(pei.getPlayer(), pei.getEvent(), PlayerFlags.LD);
+			case PE_LOGGED_OUT:
+				logOut(p);
 				break;
-			case PE_LOGGED_OUT: {
-				Player p = pei.getPlayer();
-				synchronized (zonedInPlayers) {
-					if (!zonedInPlayers.contains(p)) {
-						// No reason to set flags, log out and disappear
-						// characters that aren't zoned in
-						return;
-					}
-				}
-				
-				if (p.getPlayerServer() != PlayerServer.ZONE)
-					CoreManager.getGalaxy().decrementPopulationCount();
-				setPlayerFlag(p, pei.getEvent(), PlayerFlags.LD);
-				logOut(p, true);
-				break;
-			}
 			default:
 				break;
 		}
@@ -152,27 +117,68 @@ public class ConnectionService extends Service {
 	
 	private void onGalacticPacketIntent(GalacticPacketIntent gpi) {
 		Player p = gpi.getPlayerManager().getPlayerFromNetworkId(gpi.getNetworkId());
-		if (p != null) {
-			p.updateLastPacketTimestamp();
-			if (gpi.getPacket() instanceof HeartBeat)
-				p.sendPacket(gpi.getPacket());
-		}
+		Assert.notNull(p);
+		p.updateLastPacketTimestamp();
+		if (gpi.getPacket() instanceof HeartBeat)
+			p.sendPacket(gpi.getPacket());
 	}
 	
-	private void onForceDisconnectIntent(ForceDisconnectIntent fdi) {
-		logOut(fdi.getPlayer(), !fdi.getDisappearImmediately());
-		disconnect(fdi.getPlayer(), fdi.getDisconnectReason());
-		if (fdi.getDisappearImmediately())
-			disappear(fdi.getPlayer(), fdi.getDisappearImmediately(), fdi.getDisconnectReason());
+	private void setPlayerFlag(Player p, PlayerFlags flag) {
+		PlayerObject player = p.getPlayerObject();
+		if (player == null)
+			return;
+		player.setFlagBitmask(flag);
 	}
 	
-	private void removeFromLists(Player player) {
-		synchronized (zonedInPlayers) {
-			zonedInPlayers.remove(player);
-		}
-		removeFromDisappear(player);
+	private void clearPlayerFlag(Player p, PlayerFlags flag) {
+		PlayerObject player = p.getPlayerObject();
+		if (player == null)
+			return;
+		player.clearFlagBitmask(flag);
 	}
-
+	
+	private void zoneIn(Player p) {
+		CoreManager.getGalaxy().incrementPopulationCount();
+		clearPlayerFlag(p, PlayerFlags.LD);
+		removeFromDisappear(p);
+		Assert.test(zonedInPlayers.add(p));
+	}
+	
+	private void logOut(Player p) {
+		if (!zonedInPlayers.remove(p))
+			return;
+		Log.i("ConnectionService", "Logged out %s with character %s", p.getUsername(), p.getCharacterName());
+		CoreManager.getGalaxy().decrementPopulationCount();
+		setPlayerFlag(p, PlayerFlags.LD);
+		removeFromDisappear(p);
+		updatePlayTime(p);
+		addToDisappear(p);
+	}
+	
+	private void disappear(Player p, boolean newConnection, DisconnectReason reason) {
+		if (p.getCreatureObject() == null)
+			return;
+		Log.i("ConnectionService", "Disappeared %s with character %s with reason %s", p.getUsername(), p.getCharacterName(), reason);
+		
+		removeFromDisappear(p);
+		Intent i = new PlayerEventIntent(p, PlayerEvent.PE_DISAPPEAR);
+		new PlayerEventIntent(p, PlayerEvent.PE_DESTROYED).broadcastAfterIntent(i);
+		i.broadcast();
+	}
+	
+	private void updatePlayTime(Player p) {
+		PlayerObject playerObject = p.getPlayerObject();
+		if (playerObject == null)
+			return;
+		
+		playerObject.updatePlayTime();
+	}
+	
+	private void addToDisappear(Player p) {
+		disappearPlayers.add(new DisappearPlayer(System.nanoTime(), p));
+		updateService.schedule(disappearRunnable, (long) DISAPPEAR_THRESHOLD + 100, TimeUnit.MILLISECONDS);
+	}
+	
 	private void removeFromDisappear(Player player) {
 		synchronized (disappearPlayers) {
 			Iterator <DisappearPlayer> disappearIterator = disappearPlayers.iterator();
@@ -185,76 +191,6 @@ public class ConnectionService extends Service {
 				}
 			}
 		}
-	}
-	
-	private void setPlayerFlag(Player p, PlayerEvent event, PlayerFlags flag) {
-		PlayerObject player = getPlayerObject(p, event);
-		if (player == null)
-			return;
-		player.setFlagBitmask(flag);
-	}
-	
-	private void clearPlayerFlag(Player p, PlayerEvent event, PlayerFlags flag) {
-		PlayerObject player = getPlayerObject(p, event);
-		if (player == null)
-			return;
-		player.clearFlagBitmask(flag);
-	}
-	
-	private PlayerObject getPlayerObject(Player p, PlayerEvent event) {
-		if (p.getPlayerServer() != PlayerServer.ZONE)
-			return null;
-		CreatureObject creature = p.getCreatureObject();
-		if (creature == null) {
-			Log.e("ConnectionService", "Unable to set player flags for user: %s on event: %s - CreatureObject is null", p.getUsername(), event);
-			return null;
-		}
-		PlayerObject player = creature.getPlayerObject();
-		if (player == null) {
-			Log.e("ConnectionService", "Unable to set player flags for user: %s on event: %s - PlayerObject is null", p.getUsername(), event);
-			return null;
-		}
-		return player;
-	}
-	
-	private void logOut(Player p, boolean addToDisappear) {
-		Log.i("ConnectionService", "Logged out %s with character %s", p.getUsername(), p.getCharacterName());
-		removeFromLists(p);
-		updatePlayTime(p);
-		if (addToDisappear) {
-			synchronized (disappearPlayers) {
-				disappearPlayers.add(new DisappearPlayer(System.nanoTime(), p));
-			}
-			updateService.schedule(disappearRunnable, (long) DISAPPEAR_THRESHOLD + 100, TimeUnit.MILLISECONDS);
-		}
-	}
-	
-	private void disappear(Player p, boolean newConnection, DisconnectReason reason) {
-		if (p.getCreatureObject() == null)
-			return;
-		Log.i("ConnectionService", "Disappeared %s with character %s with reason %s", p.getUsername(), p.getCharacterName(), reason);
-		
-		if (newConnection) // Attempting to re-zone
-			removeFromDisappear(p);
-		else
-			removeFromLists(p);
-		p.setPlayerState(PlayerState.DISCONNECTED);
-		Intent i = new PlayerEventIntent(p, PlayerEvent.PE_DISAPPEAR);
-		new PlayerEventIntent(p, PlayerEvent.PE_DESTROYED).broadcastAfterIntent(i);
-		i.broadcast();
-	}
-	
-	private void disconnect(Player player, DisconnectReason reason) {
-		Log.i("ConnectionService", "Disconnected %s with character %s with reason %s", player.getUsername(), player.getCharacterName(), reason);
-		new CloseConnectionIntent(player.getNetworkId(), reason).broadcast();
-	}
-	
-	private void updatePlayTime(Player p) {
-		PlayerObject playerObject = p.getPlayerObject();
-		if (playerObject == null)
-			return;
-		
-		playerObject.updatePlayTime();
 	}
 	
 	private static class DisappearPlayer {

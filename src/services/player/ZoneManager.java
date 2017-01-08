@@ -58,7 +58,6 @@ import resources.objects.waypoint.WaypointObject;
 import resources.objects.waypoint.WaypointObject.WaypointColor;
 import resources.player.Player;
 import resources.player.PlayerEvent;
-import resources.player.PlayerFlags;
 import resources.player.Player.PlayerServer;
 import resources.server_info.Log;
 
@@ -106,7 +105,6 @@ public class ZoneManager extends Manager {
 				break;
 			case PE_ZONE_IN_SERVER:
 				player.getCreatureObject().setMoodId(CreatureMood.NONE.getMood());
-				player.getPlayerObject().clearFlagBitmask(PlayerFlags.LD);
 				break;
 			default:
 				break;
