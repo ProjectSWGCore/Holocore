@@ -10,6 +10,10 @@ function executeCommand(galacticManager, player, target, args) {
 	if (farAwayTarget) {
 		new GroupEventIntent(GroupEventType.GROUP_INVITE, player, farAwayTarget.getCreatureObject()).broadcast();
 	} else {
-		new GroupEventIntent(GroupEventType.GROUP_INVITE, player, target).broadcast();
+		if (target instanceof Java.type("resources.objects.creature.CreatureObject")) {
+			new GroupEventIntent(GroupEventType.GROUP_INVITE, player, target).broadcast();
+		} else {
+			intentFactory.sendSystemMessage(player, "@group:invite_no_target_self");
+		}
 	}
 }
