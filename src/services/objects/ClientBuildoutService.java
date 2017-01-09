@@ -50,7 +50,6 @@ import resources.buildout.BuildoutArea;
 import resources.buildout.BuildoutArea.BuildoutAreaBuilder;
 import resources.buildout.BuildoutAreaGrid;
 import resources.config.ConfigFile;
-import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.SWGObject.ObjectClassification;
@@ -76,24 +75,8 @@ public class ClientBuildoutService extends Service {
 		areaGrid = new BuildoutAreaGrid();
 		areasById = new Hashtable<>(1000); // Number of buildout areas
 		
-		registerForIntent(PlayerTransformedIntent.TYPE);
-		registerForIntent(ObjectCreatedIntent.TYPE);
-	}
-	
-	@Override
-	public void onIntentReceived(Intent i) {
-		switch (i.getType()) {
-			case PlayerTransformedIntent.TYPE:
-				if (i instanceof PlayerTransformedIntent)
-					handlePlayerTransform((PlayerTransformedIntent) i);
-				break;
-			case ObjectCreatedIntent.TYPE:
-				if (i instanceof ObjectCreatedIntent)
-					handleObjectCreated((ObjectCreatedIntent) i);
-				break;
-			default:
-				break;
-		}
+		registerForIntent(PlayerTransformedIntent.class, pti -> handlePlayerTransform(pti));
+		registerForIntent(ObjectCreatedIntent.class, oci -> handleObjectCreated(oci));
 	}
 	
 	public Map<Long, SWGObject> loadClientObjects() {

@@ -55,7 +55,6 @@ import resources.PvpFaction;
 import resources.PvpStatus;
 import resources.Terrain;
 import resources.client_info.ClientFactory;
-import resources.control.Intent;
 import resources.control.Service;
 import resources.encodables.ProsePackage;
 import resources.encodables.StringId;
@@ -96,10 +95,10 @@ public final class CorpseService extends Service {
 		cloningFacilities = new ArrayList<>();
 		random = new Random();
 		
-		registerForIntent(CreatureKilledIntent.TYPE);
-		registerForIntent(ObjectCreatedIntent.TYPE);
-		registerForIntent(DestroyObjectIntent.TYPE);
-		registerForIntent(PlayerEventIntent.TYPE);
+		registerForIntent(CreatureKilledIntent.class, cki -> handleCreatureKilledIntent(cki));
+		registerForIntent(ObjectCreatedIntent.class, oci -> handleObjectCreatedIntent(oci));
+		registerForIntent(DestroyObjectIntent.class, doi -> handleDestroyObjectIntent(doi));
+		registerForIntent(PlayerEventIntent.class, pei -> handlePlayerEventIntent(pei));
 		
 		loadFacilityData();
 	}
@@ -108,16 +107,6 @@ public final class CorpseService extends Service {
 	public boolean terminate() {
 		executor.shutdown();
 		return super.terminate();
-	}
-	
-	@Override
-	public void onIntentReceived(Intent i) {
-		switch (i.getType()) {
-			case CreatureKilledIntent.TYPE: handleCreatureKilledIntent((CreatureKilledIntent) i); break;
-			case ObjectCreatedIntent.TYPE: handleObjectCreatedIntent((ObjectCreatedIntent) i); break;
-			case DestroyObjectIntent.TYPE: handleDestroyObjectIntent((DestroyObjectIntent) i); break;
-			case PlayerEventIntent.TYPE: handlePlayerEventIntent((PlayerEventIntent) i); break;
-		}
 	}
 	
 	private void loadFacilityData() {

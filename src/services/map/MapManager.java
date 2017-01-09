@@ -36,7 +36,6 @@ import network.packets.swg.zone.spatial.GetMapLocationsResponseMessage;
 import resources.client_info.ClientFactory;
 import resources.client_info.ServerFactory;
 import resources.client_info.visitors.DatatableData;
-import resources.control.Intent;
 import resources.control.Manager;
 import resources.objects.SWGObject;
 import resources.player.Player;
@@ -80,30 +79,14 @@ public class MapManager extends Manager {
 		
 		addChildService(cityService);
 		
-		registerForIntent(GalacticPacketIntent.TYPE);
-		registerForIntent(ObjectCreatedIntent.TYPE);
+		registerForIntent(GalacticPacketIntent.class, gpi -> processPacket(gpi));
+		registerForIntent(ObjectCreatedIntent.class, oci -> addMapLocation(oci.getObject(), MapType.STATIC));
 	}
 
 	@Override
 	public boolean initialize() {
 		loadStaticCityPoints();
 		return super.initialize();
-	}
-
-	@Override
-	public void onIntentReceived(Intent i) {
-		switch (i.getType()) {
-			case GalacticPacketIntent.TYPE:
-				if (i instanceof GalacticPacketIntent)
-					processPacket((GalacticPacketIntent) i);
-				break;
-			case ObjectCreatedIntent.TYPE:
-				if (i instanceof ObjectCreatedIntent)
-					addMapLocation(((ObjectCreatedIntent) i).getObject(), MapType.STATIC);
-				break;
-			default:
-				break;
-		}
 	}
 
 	private void processPacket(GalacticPacketIntent intent) {

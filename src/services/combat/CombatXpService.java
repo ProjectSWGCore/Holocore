@@ -35,7 +35,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
-import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureDifficulty;
@@ -58,29 +57,19 @@ public class CombatXpService extends Service {
 		xpData = new HashMap<>();
 		groupObjects = new HashMap<>();
 	}
-
-	@Override
-	public void onIntentReceived(Intent i) {
-		switch(i.getType()) {
-			case ObjectCreatedIntent.TYPE: handleObjectCreatedIntent((ObjectCreatedIntent) i); break;
-			case DestroyObjectIntent.TYPE: handleDestroyObjectIntent((DestroyObjectIntent) i); break;
-			case CreatureKilledIntent.TYPE: handleCreatureKilledIntent((CreatureKilledIntent) i); break;
-		}
-	}
-
+	
 	@Override
 	public boolean initialize() {
 		loadXpData();
-		
 		return super.initialize();
 	}
 
 	@Override
 	public boolean start() {
 		// The objects we care about are only created/destroyed at this point anyways.
-		registerForIntent(ObjectCreatedIntent.TYPE);
-		registerForIntent(DestroyObjectIntent.TYPE);
-		registerForIntent(CreatureKilledIntent.TYPE);
+		registerForIntent(ObjectCreatedIntent.class, oci -> handleObjectCreatedIntent(oci));
+		registerForIntent(DestroyObjectIntent.class, doi -> handleDestroyObjectIntent(doi));
+		registerForIntent(CreatureKilledIntent.class, cki -> handleCreatureKilledIntent(cki));
 		
 		return super.start();
 	}

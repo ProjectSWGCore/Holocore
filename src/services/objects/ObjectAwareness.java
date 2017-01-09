@@ -29,6 +29,7 @@ package services.objects;
 
 import intents.PlayerEventIntent;
 import intents.RequestZoneInIntent;
+import intents.network.CloseConnectionIntent;
 import intents.network.GalacticPacketIntent;
 import intents.object.ContainerTransferIntent;
 import intents.object.DestroyObjectIntent;
@@ -53,8 +54,8 @@ import resources.Race;
 import resources.Terrain;
 import resources.config.ConfigFile;
 import resources.control.Assert;
-import resources.control.Intent;
 import resources.control.Service;
+import resources.network.DisconnectReason;
 import resources.objects.SWGObject;
 import resources.objects.awareness.AwarenessHandler;
 import resources.objects.awareness.DataTransformHandler;
@@ -77,65 +78,21 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 		dataTransformHandler = new DataTransformHandler();
 		dataTransformHandler.setSpeedCheck(getConfig(ConfigFile.FEATURES).getBoolean("SPEED-HACK-CHECK", true));
 		
-		registerForIntent(PlayerEventIntent.TYPE);
-		registerForIntent(ObjectCreatedIntent.TYPE);
-		registerForIntent(DestroyObjectIntent.TYPE);
-		registerForIntent(ObjectTeleportIntent.TYPE);
-		registerForIntent(GalacticPacketIntent.TYPE);
-		registerForIntent(MoveObjectIntent.TYPE);
-		registerForIntent(ConfigChangedIntent.TYPE);
-		registerForIntent(ContainerTransferIntent.TYPE);
-		registerForIntent(RequestZoneInIntent.TYPE);
+		registerForIntent(PlayerEventIntent.class, pei -> handlePlayerEventIntent(pei));
+		registerForIntent(ObjectCreatedIntent.class, oci -> handleObjectCreatedIntent(oci));
+		registerForIntent(DestroyObjectIntent.class, doi -> handleDestroyObjectIntent(doi));
+		registerForIntent(ObjectTeleportIntent.class, oti -> processObjectTeleportIntent(oti));
+		registerForIntent(GalacticPacketIntent.class, gpi -> processGalacticPacketIntent(gpi));
+		registerForIntent(MoveObjectIntent.class, moi -> processMoveObjectIntent(moi));
+		registerForIntent(ConfigChangedIntent.class, cci -> processConfigChangedIntent(cci));
+		registerForIntent(ContainerTransferIntent.class, cti -> processContainerTransferIntent(cti));
+		registerForIntent(RequestZoneInIntent.class, rzii -> handleZoneIn(rzii.getCreature(), rzii.getPlayer(), rzii.isFirstZone()));
 	}
 	
 	@Override
 	public boolean terminate() {
 		awarenessHandler.close();
 		return super.terminate();
-	}
-	
-	@Override
-	public void onIntentReceived(Intent i) {
-		switch (i.getType()) {
-			case PlayerEventIntent.TYPE:
-				if (i instanceof PlayerEventIntent)
-					handlePlayerEventIntent((PlayerEventIntent) i);
-				break;
-			case ObjectCreatedIntent.TYPE:
-				if (i instanceof ObjectCreatedIntent)
-					handleObjectCreatedIntent((ObjectCreatedIntent) i);
-				break;
-			case DestroyObjectIntent.TYPE:
-				if (i instanceof DestroyObjectIntent)
-					handleDestroyObjectIntent((DestroyObjectIntent) i);
-				break;
-			case ObjectTeleportIntent.TYPE:
-				if (i instanceof ObjectTeleportIntent)
-					processObjectTeleportIntent((ObjectTeleportIntent) i);
-				break;
-			case GalacticPacketIntent.TYPE:
-				if (i instanceof GalacticPacketIntent)
-					processGalacticPacketIntent((GalacticPacketIntent) i);
-				break;
-			case MoveObjectIntent.TYPE:
-				if (i instanceof MoveObjectIntent)
-					processMoveObjectIntent((MoveObjectIntent) i);
-				break;
-			case ConfigChangedIntent.TYPE:
-				if (i instanceof ConfigChangedIntent)
-					processConfigChangedIntent((ConfigChangedIntent) i);
-				break;
-			case ContainerTransferIntent.TYPE:
-				if (i instanceof ContainerTransferIntent)
-					processContainerTransferIntent((ContainerTransferIntent) i);
-				break;
-			case RequestZoneInIntent.TYPE:
-				if (i instanceof RequestZoneInIntent)
-					handleZoneIn(((RequestZoneInIntent) i).getCreature(), ((RequestZoneInIntent) i).getPlayer(), ((RequestZoneInIntent) i).isFirstZone());
-				break;
-			default:
-				break;
-		}
 	}
 	
 	@Override
@@ -271,7 +228,10 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 	private void handleZoneIn(CreatureObject creature, Player player, boolean firstZone) {
 		creature.setOwner(player);
 		// Fresh login or teleport/travel
-		Assert.test(player.getPlayerState() == PlayerState.LOGGED_IN || player.getPlayerState() == PlayerState.ZONED_IN);
+		if (player.getPlayerState() != PlayerState.LOGGED_IN && player.getPlayerState() != PlayerState.ZONED_IN) {
+			new CloseConnectionIntent(player.getNetworkId(), DisconnectReason.APPLICATION).broadcast();
+			return;
+		}
 		player.setPlayerState(PlayerState.ZONING_IN);
 		Log.i(this, "Zoning in %s with character %s", player.getUsername(), player.getCharacterName());
 		if (firstZone)

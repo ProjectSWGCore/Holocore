@@ -56,7 +56,6 @@ import resources.TravelPoint;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
 import resources.config.ConfigFile;
-import resources.control.Intent;
 import resources.control.Service;
 import resources.encodables.ProsePackage;
 import resources.encodables.StringId;
@@ -110,11 +109,11 @@ public class TravelService extends Service {
 		loadAllowedRoutesAndPrices();
 		loadTravelPoints();
 		
-		registerForIntent(TravelPointSelectionIntent.TYPE);
-		registerForIntent(GalacticPacketIntent.TYPE);
-		registerForIntent(TicketPurchaseIntent.TYPE);
-		registerForIntent(TicketUseIntent.TYPE);
-		registerForIntent(ObjectCreatedIntent.TYPE);
+		registerForIntent(TravelPointSelectionIntent.class, tpsi -> handlePointSelection(tpsi));
+		registerForIntent(GalacticPacketIntent.class, gpi -> handleTravelPointRequest(gpi));
+		registerForIntent(TicketPurchaseIntent.class, tpi -> handleTicketPurchase(tpi));
+		registerForIntent(TicketUseIntent.class, tui -> handleTicketUse(tui));
+		registerForIntent(ObjectCreatedIntent.class, oci -> handleObjectCreation(oci));
 	}
 	
 	@Override
@@ -132,32 +131,6 @@ public class TravelService extends Service {
 			executor.shutdownNow();
 		
 		return super.stop();
-	}
-	
-	@Override
-	public void onIntentReceived(Intent i) {
-		switch(i.getType()) {
-			case TravelPointSelectionIntent.TYPE:
-				if (i instanceof TravelPointSelectionIntent)
-					handlePointSelection((TravelPointSelectionIntent) i);
-				break;
-			case GalacticPacketIntent.TYPE:
-				if (i instanceof GalacticPacketIntent)
-					handleTravelPointRequest((GalacticPacketIntent) i);
-				break;
-			case TicketPurchaseIntent.TYPE:
-				if (i instanceof TicketPurchaseIntent)
-					handleTicketPurchase((TicketPurchaseIntent) i);
-				break;
-			case TicketUseIntent.TYPE:
-				if (i instanceof TicketUseIntent)
-					handleTicketUse((TicketUseIntent) i);
-				break;
-			case ObjectCreatedIntent.TYPE:
-				if (i instanceof ObjectCreatedIntent)
-					handleObjectCreation((ObjectCreatedIntent) i);
-				break;
-		}
 	}
 	
 	private void createGalaxyTravel(String template, long landTime) {

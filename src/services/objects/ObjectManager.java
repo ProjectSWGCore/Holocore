@@ -36,14 +36,12 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import intents.object.DestroyObjectIntent;
 import intents.object.ObjectCreatedIntent;
-import intents.object.ObjectTeleportIntent;
 import intents.RequestZoneInIntent;
 import intents.network.GalacticPacketIntent;
 import network.packets.Packet;
 import network.packets.swg.ErrorMessage;
 import network.packets.swg.zone.insertion.SelectCharacter;
 import network.packets.swg.zone.object_controller.IntendedTarget;
-import resources.control.Intent;
 import resources.control.Manager;
 import resources.objects.SWGObject;
 import resources.objects.building.BuildingObject;
@@ -95,10 +93,9 @@ public class ObjectManager extends Manager {
 		addChildService(clientBuildoutService);
 		addChildService(staticItemService);
 		
-		registerForIntent(GalacticPacketIntent.TYPE);
-		registerForIntent(ObjectTeleportIntent.TYPE);
-		registerForIntent(ObjectCreatedIntent.TYPE);
-		registerForIntent(DestroyObjectIntent.TYPE);
+		registerForIntent(GalacticPacketIntent.class, gpi -> processGalacticPacketIntent(gpi));
+		registerForIntent(ObjectCreatedIntent.class, oci -> processObjectCreatedIntent(oci));
+		registerForIntent(DestroyObjectIntent.class, doi -> processDestroyObjectIntent(doi));
 	}
 	
 	@Override
@@ -189,24 +186,6 @@ public class ObjectManager extends Manager {
 			database.close();
 		}
 		return super.terminate();
-	}
-	
-	@Override
-	public void onIntentReceived(Intent i) {
-		switch (i.getType()) {
-			case GalacticPacketIntent.TYPE:
-				if (i instanceof GalacticPacketIntent)
-					processGalacticPacketIntent((GalacticPacketIntent) i);
-				break;
-			case ObjectCreatedIntent.TYPE:
-				if (i instanceof ObjectCreatedIntent)
-					processObjectCreatedIntent((ObjectCreatedIntent) i);
-				break;
-			case DestroyObjectIntent.TYPE:
-				if (i instanceof DestroyObjectIntent)
-					processDestroyObjectIntent((DestroyObjectIntent) i);
-				break;
-		}
 	}
 	
 	private void processObjectCreatedIntent(ObjectCreatedIntent intent) {

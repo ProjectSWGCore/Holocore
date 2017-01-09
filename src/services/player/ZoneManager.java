@@ -50,7 +50,6 @@ import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 
 import resources.config.ConfigFile;
-import resources.control.Intent;
 import resources.control.Manager;
 import resources.objects.creature.CreatureMood;
 import resources.objects.player.PlayerObject;
@@ -76,24 +75,14 @@ public class ZoneManager extends Manager {
 		
 		addChildService(characterCreationService);
 		
-		registerForIntent(PlayerEventIntent.TYPE);
-		registerForIntent(GalacticPacketIntent.TYPE);
+		registerForIntent(PlayerEventIntent.class, pei -> handlePlayerEventIntent(pei.getPlayer(), pei.getEvent()));
+		registerForIntent(GalacticPacketIntent.class, gpi -> handlePacket(gpi, gpi.getPlayer(), gpi.getPacket()));
 	}
 	
 	@Override
 	public boolean initialize() {
 		loadCommitHistory();
 		return super.initialize();
-	}
-	
-	@Override
-	public void onIntentReceived(Intent i) {
-		if (i instanceof PlayerEventIntent) {
-			handlePlayerEventIntent(((PlayerEventIntent) i).getPlayer(), ((PlayerEventIntent) i).getEvent());
-		} else if (i instanceof GalacticPacketIntent) {
-			GalacticPacketIntent gpi = (GalacticPacketIntent) i;
-			handlePacket(gpi, gpi.getPlayer(), gpi.getPacket());
-		}
 	}
 	
 	private void handlePlayerEventIntent(Player player, PlayerEvent event) {

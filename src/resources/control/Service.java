@@ -27,6 +27,8 @@
 ***********************************************************************************/
 package resources.control;
 
+import java.util.function.Consumer;
+
 import resources.config.ConfigFile;
 import resources.server_info.Config;
 import resources.server_info.DataManager;
@@ -96,6 +98,16 @@ public abstract class Service implements IntentReceiver {
 	 */
 	protected final void registerForIntent(String type) {
 		IntentManager.getInstance().registerForIntent(type, this);
+	}
+	
+	@SuppressWarnings("unchecked")
+	protected final <T extends Intent> void registerForIntent(Class<T> c, Consumer<T> consumer) {
+		try {
+			String type = (String) c.getDeclaredField("TYPE").get(null);
+			IntentManager.getInstance().registerForIntent(type, (i) -> consumer.accept((T) i));
+		} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**

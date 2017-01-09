@@ -61,7 +61,6 @@ import resources.Race;
 import resources.common.BCrypt;
 import resources.config.ConfigFile;
 import resources.control.Assert;
-import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
@@ -85,8 +84,8 @@ public class LoginService extends Service {
 	private PreparedStatement deleteCharacter;
 	
 	public LoginService() {
-		registerForIntent(DeleteCharacterIntent.TYPE);
-		registerForIntent(GalacticPacketIntent.TYPE);
+		registerForIntent(DeleteCharacterIntent.class, dci -> deleteCharacter(dci.getCreature()));
+		registerForIntent(GalacticPacketIntent.class, gpi -> handlePacket(gpi, gpi.getPacket()));
 	}
 	
 	@Override
@@ -97,16 +96,6 @@ public class LoginService extends Service {
 		getCharacters = local.prepareStatement("SELECT * FROM characters WHERE userid = ?");
 		deleteCharacter = local.prepareStatement("DELETE FROM characters WHERE id = ?");
 		return super.initialize();
-	}
-	
-	@Override
-	public void onIntentReceived(Intent i) {
-		if (i instanceof DeleteCharacterIntent) {
-			deleteCharacter(((DeleteCharacterIntent) i).getCreature());
-		} else if (i instanceof GalacticPacketIntent) {
-			GalacticPacketIntent gpi = (GalacticPacketIntent) i;
-			handlePacket(gpi, gpi.getPacket());
-		}
 	}
 	
 	public long getCharacterId(String name) {
