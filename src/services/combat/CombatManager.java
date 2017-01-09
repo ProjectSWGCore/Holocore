@@ -291,6 +291,7 @@ public class CombatManager extends Manager {
 					eggLocation = new Location(Float.parseFloat(arguments[0]), Float.parseFloat(arguments[1]), Float.parseFloat(arguments[2]), source.getTerrain());
 				}
 				
+				eggParent = source.getParent();
 				break;
 			default: Log.w(this, "Unrecognised delay egg position %s from command %s - defaulting to SELF", combatCommand.getEggPosition(), combatCommand.getName());
 			case SELF:
