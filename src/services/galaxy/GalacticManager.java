@@ -96,9 +96,11 @@ public class GalacticManager extends Manager {
 			g.setGalacticManager(this);
 			prevIntentMap.get(player.getNetworkId()).broadcastAfter(g);
 		} else if (i instanceof ConnectionClosedIntent) {
-			prevIntentMap.remove(((ConnectionClosedIntent) i).getNetworkId());
+			prevIntentMap.remove(((ConnectionClosedIntent) i).getNetworkId()).reset();
 		} else if (i instanceof ConnectionOpenedIntent) {
-			prevIntentMap.put(((ConnectionOpenedIntent) i).getNetworkId(), new IntentChain());
+			IntentChain chain = new IntentChain();
+			chain.waitUntilComplete(i);
+			prevIntentMap.put(((ConnectionOpenedIntent) i).getNetworkId(), chain);
 		}
 	}
 	

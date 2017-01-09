@@ -35,6 +35,8 @@ import java.io.EOFException;
 import java.net.InetSocketAddress;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+
+import resources.control.Assert;
 import resources.network.NetBufferStream;
 import resources.server_info.Log;
 import services.network.HolocoreSessionManager;
@@ -58,6 +60,8 @@ public class NetworkClient {
 	private final NetworkProtocol protocol;
 	private final Object outboundMutex;
 	private final Lock inboundSemaphore;
+	private final Object stateMutex;
+	private State state;
 	private PacketSender sender;
 	
 	public NetworkClient(InetSocketAddress address, long networkId) {
@@ -68,6 +72,8 @@ public class NetworkClient {
 		this.protocol = new NetworkProtocol();
 		this.outboundMutex = new Object();
 		this.inboundSemaphore = new ReentrantLock(true);
+		this.stateMutex = new Object();
+		this.state = State.DISCONNECTED;
 		this.sender = null;
 	}
 	
@@ -85,10 +91,16 @@ public class NetworkClient {
 	}
 	
 	public void onConnected() {
+		if (getState() != State.DISCONNECTED)
+			return;
+		setState(State.CONNECTED);
 		intentChain.broadcastAfter(new ConnectionOpenedIntent(networkId));
 	}
 	
 	public void onDisconnected(ConnectionStoppedReason reason) {
+		if (getState() != State.CONNECTED)
+			return;
+		setState(State.CLOSED);
 		intentChain.broadcastAfter(new ConnectionClosedIntent(networkId, reason));
 		sendPacket(new HoloConnectionStopped(reason));
 		flushOutbound();
@@ -110,6 +122,8 @@ public class NetworkClient {
 		if (!inboundSemaphore.tryLock())
 			return;
 		try {
+			if (getState() != State.CONNECTED)
+				return;
 			while (processNextPacket()) {
 				
 			}
@@ -121,6 +135,8 @@ public class NetworkClient {
 	}
 	
 	public void addToOutbound(Packet packet) {
+		if (getState() != State.CONNECTED)
+			return;
 		synchronized (outboundMutex) {
 			ResponseAction action = sessionManager.onOutbound(packet);
 			if (action != ResponseAction.CONTINUE) {
@@ -181,8 +197,31 @@ public class NetworkClient {
 		sender.sendPacket(address, protocol.encode(p));
 	}
 	
+	private State getState() {
+		synchronized (stateMutex) {
+			return state;
+		}
+	}
+	
+	private void setState(State state) {
+		synchronized (stateMutex) {
+			Assert.test(state != State.DISCONNECTED);
+			if (state == State.CONNECTED)
+				Assert.test(this.state == State.DISCONNECTED);
+			if (state == State.CLOSED)
+				Assert.test(this.state == State.CONNECTED);
+			this.state = state;
+		}
+	}
+	
 	public String toString() {
 		return "NetworkClient["+address+"]";
+	}
+	
+	private enum State {
+		DISCONNECTED,
+		CONNECTED,
+		CLOSED
 	}
 	
 }

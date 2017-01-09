@@ -45,6 +45,12 @@ public class IntentChain {
 		}
 	}
 	
+	public void waitUntilComplete(Intent i) {
+		synchronized (mutex) {
+			this.i = i;
+		}
+	}
+	
 	public void broadcastAfter(Intent i) {
 		synchronized (mutex) {
 			i.broadcastAfterIntent(this.i);
