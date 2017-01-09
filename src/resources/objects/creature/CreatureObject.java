@@ -620,10 +620,6 @@ public class CreatureObject extends TangibleObject {
 		creo6.setBuffDuration(buffCrc, playTime, duration, this);
 	}
 	
-	public void forEachBuff(BiConsumer<CRC, Buff> action) {
-		creo6.forEachBuff(action);
-	}
-	
 	public boolean isVisible() {
 		return creo6.isVisible();
 	}
