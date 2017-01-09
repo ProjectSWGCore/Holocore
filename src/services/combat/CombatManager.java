@@ -397,9 +397,8 @@ public class CombatManager extends Manager {
 			combatSpam.setAttackName(new StringId("cmd_n", command.getName()));
 			combatSpam.setWeapon(weapon.getObjectId());
 			
-			// Combat log message appears for both the attacker and the defender
-			source.sendSelf(combatSpam);
-			target.sendSelf(combatSpam);
+			// Combat log message appears for the target and every observer
+			target.sendObserversAndSelf(combatSpam);
 
 			if (!info.isSuccess()) {	// Single target negate, like dodge or parry!
 				return;
