@@ -231,6 +231,7 @@ public final class SkillManager extends Manager {
 		private final String[] schematics;
 
 		public SkillData(String[] requiredSkills, String parentSkill, String xpType, int xpCost, String[] commands, Map<String, Integer> skillMods, String[] schematics) {
+			this.requiredSkills = requiredSkills;
 			this.parentSkill = parentSkill;
 			this.xpType = xpType;
 			this.xpCost = xpCost;
