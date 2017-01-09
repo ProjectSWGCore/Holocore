@@ -27,12 +27,11 @@
  ***********************************************************************************/
 package resources.objects.awareness;
 
-import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-import resources.Location;
 import resources.control.Assert;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
@@ -55,21 +54,15 @@ class TerrainMapChunk {
 	}
 	
 	public void addObject(SWGObject obj) {
-		synchronized (objects) {
-			Assert.test(objects.add(obj));
-		}
+		Assert.test(objects.add(obj));
 	}
 	
 	public void removeObject(SWGObject obj) {
-		synchronized (objects) {
-			Assert.test(objects.remove(obj));
-		}
+		Assert.test(objects.remove(obj));
 	}
 	
 	public boolean containsObject(SWGObject obj) {
-		synchronized (objects) {
-			return objects.contains(obj);
-		}
+		return objects.contains(obj);
 	}
 	
 	public boolean isWithinBounds(SWGObject obj) {
@@ -79,32 +72,37 @@ class TerrainMapChunk {
 	}
 	
 	public List<SWGObject> getWithinAwareness(SWGObject obj) {
+		List<SWGObject> withinRange = new ArrayList<>(objects.size() / 8);
+		getWithinAwareness(obj, withinRange);
+		return withinRange;
+	}
+	
+	public void getWithinAwareness(SWGObject obj, Collection<SWGObject> withinRange) {
 		double loadRange = obj.getLoadRange();
 		synchronized (objects) {
-			List<SWGObject> withinRange = new LinkedList<>();
-			Location objLocation = obj.getWorldLocation();
-			Iterator<SWGObject> it = objects.iterator();
-			while (it.hasNext()) {
-				SWGObject test = it.next();
-				if (test.getParent() != null) {
-					it.remove();
-					continue;
-				}
-				if (isValidWithinRange(obj, test, objLocation, loadRange))
+			for (SWGObject test : objects) {
+				if (isValidWithinRange(obj, test, loadRange))
 					withinRange.add(test);
 			}
-			return withinRange;
 		}
 	}
 	
-	private boolean isValidWithinRange(SWGObject obj, SWGObject inRange, Location objLocation, double range) {
+	private boolean isValidWithinRange(SWGObject obj, SWGObject inRange, double range) {
 		if (obj.equals(inRange))
 			return false;
 		if (inRange instanceof CreatureObject && ((CreatureObject) inRange).isLoggedOutPlayer())
 			return false;
-		if (!inRange.getWorldLocation().isWithinFlatDistance(objLocation, Math.max(range, inRange.getLoadRange())))
+		if (!isWithinRange(obj, inRange, range))
 			return false;
 		return true;
+	}
+	
+	private boolean isWithinRange(SWGObject a, SWGObject b, double range) {
+		return square(a.getX()-b.getX()) + square(a.getZ()-b.getZ()) <= square(Math.max(b.getLoadRange(), range));
+	}
+	
+	private double square(double x) {
+		return x * x;
 	}
 	
 }

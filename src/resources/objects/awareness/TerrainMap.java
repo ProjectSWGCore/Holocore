@@ -28,7 +28,6 @@
 package resources.objects.awareness;
 
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 import resources.Location;
@@ -39,7 +38,6 @@ import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.waypoint.WaypointObject;
 import resources.server_info.Log;
-import resources.server_info.SynchronizedMap;
 
 public class TerrainMap {
 	
@@ -51,12 +49,10 @@ public class TerrainMap {
 	
 	private final CallbackManager<TerrainMapCallback> callbackManager;
 	private final TerrainMapChunk [][] chunks;
-	private final Map<Long, TerrainMapChunk> objectChunk;
 	
 	public TerrainMap(Terrain t) {
 		callbackManager = new CallbackManager<>("terrain-map-"+t.name(), 1);
 		chunks = new TerrainMapChunk[CHUNK_COUNT_ACROSS][CHUNK_COUNT_ACROSS];
-		objectChunk = new SynchronizedMap<>();
 		for (int z = 0; z < CHUNK_COUNT_ACROSS; z++) {
 			for (int x = 0; x < CHUNK_COUNT_ACROSS; x++) {
 				double chunkStartX = MIN_X+x*CHUNK_WIDTH;
@@ -105,28 +101,21 @@ public class TerrainMap {
 	}
 	
 	private void move(SWGObject obj) {
-		synchronized (objectChunk) {
-			TerrainMapChunk chunk = objectChunk.get(obj.getObjectId());
-			if (chunk != null) {
-				if (!chunk.isWithinBounds(obj))
-					chunk.removeObject(obj);
-				else
-					return;
-			}
-			TerrainMapChunk oldChunk = chunk;
-			chunk = getChunk(obj.getX(), obj.getZ());
-			Assert.test(oldChunk != chunk || chunk == null);
-			if (chunk == null) {
-				Log.e("TerrainMap", "Null Chunk! Location: (%.3f, %.3f) Object: %s", obj.getX(), obj.getZ(), obj);
-				return;
-			}
-			chunk.addObject(obj);
-			objectChunk.put(obj.getObjectId(), chunk);
+		TerrainMapChunk chunk = getChunk(obj.getX(), obj.getZ());
+		TerrainMapChunk current = obj.getAwareness().setTerrainMapChunk(chunk);
+		if (chunk == null) {
+			Log.e("TerrainMap", "Null Chunk! Location: (%.3f, %.3f) Object: %s", obj.getX(), obj.getZ(), obj);
+			return;
 		}
+		if (current == chunk)
+			return; // Ignore if it doesn't change
+		if (current != null)
+			current.removeObject(obj);
+		chunk.addObject(obj);
 	}
 	
 	private boolean remove(SWGObject obj) {
-		TerrainMapChunk chunk = objectChunk.remove(obj.getObjectId());
+		TerrainMapChunk chunk = obj.getAwareness().setTerrainMapChunk(null);
 		if (chunk != null)
 			chunk.removeObject(obj);
 		return chunk != null;
@@ -149,18 +138,22 @@ public class TerrainMap {
 	
 	private Set<SWGObject> getNearbyAware(SWGObject obj) {
 		Set<SWGObject> aware = new HashSet<>();
-		if (objectChunk.get(obj.getObjectId()) == null)
+		if (obj.getAwareness().getTerrainMapChunk() == null)
 			return aware;
-		int startX = Math.max(calculateIndex(obj.getX()) - 1, 0);
-		int startZ = Math.max(calculateIndex(obj.getZ()) - 1, 0);
-		int endX = Math.min(startX+3, CHUNK_COUNT_ACROSS);
-		int endZ = Math.min(startZ+3, CHUNK_COUNT_ACROSS);
-		for (int z = startZ; z < endZ; z++) {
-			for (int x = startX; x < endX; x++) {
-				aware.addAll(chunks[z][x].getWithinAwareness(obj));
+		int sX = calculateIndex(obj.getX())-1;
+		int sZ = calculateIndex(obj.getZ())-1;
+		for (int z = sZ; z < sZ+2; ++z) {
+			for (int x = sX; x < sX+2; ++x) {
+				getWithinAwareness(x, z, obj, aware);
 			}
 		}
 		return aware;
+	}
+	
+	private void getWithinAwareness(int x, int z, SWGObject obj, Set<SWGObject> aware) {
+		if (x < 0 || z < 0 || x >= CHUNK_COUNT_ACROSS || z >= CHUNK_COUNT_ACROSS)
+			return;
+		chunks[z][x].getWithinAwareness(obj, aware);
 	}
 	
 	private boolean isInAwareness(SWGObject obj) {

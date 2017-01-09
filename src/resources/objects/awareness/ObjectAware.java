@@ -38,11 +38,29 @@ public class ObjectAware {
 	private final SWGObject object;
 	private final Aware objectsAware;
 	private final Aware customAware;
+	private final Object chunkMutex;
+	private TerrainMapChunk chunk;
 	
 	public ObjectAware(SWGObject obj) {
 		this.object = obj;
 		this.objectsAware = new Aware(obj);
 		this.customAware = new Aware(obj);
+		this.chunkMutex = new Object();
+		this.chunk = null;
+	}
+	
+	protected TerrainMapChunk setTerrainMapChunk(TerrainMapChunk chunk) {
+		synchronized (chunkMutex) {
+			TerrainMapChunk old = this.chunk;
+			this.chunk = chunk;
+			return old;
+		}
+	}
+	
+	protected TerrainMapChunk getTerrainMapChunk() {
+		synchronized (chunkMutex) {
+			return chunk;
+		}
 	}
 	
 	public void setParent(ObjectAware parent) {
