@@ -142,8 +142,8 @@ public class TerrainMap {
 			return aware;
 		int sX = calculateIndex(obj.getX())-1;
 		int sZ = calculateIndex(obj.getZ())-1;
-		for (int z = sZ; z < sZ+2; ++z) {
-			for (int x = sX; x < sX+2; ++x) {
+		for (int z = sZ; z <= sZ+2; ++z) {
+			for (int x = sX; x <= sX+2; ++x) {
 				getWithinAwareness(x, z, obj, aware);
 			}
 		}
