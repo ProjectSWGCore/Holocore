@@ -1,0 +1,67 @@
+elevator_id	template	cell_id	min_y	height	max_y
+TEXT	TEXT	REAL	REAL	REAL	REAL
+cor_hospital_a	object/building/corellia/shared_hospital_corellia.iff	13	0.5	7	14.5
+cor_hospital_b	object/building/corellia/shared_hospital_corellia.iff	14	0.5	7	14.5
+cor_meatlump_1	object/building/content/meatlump/shared_meatlump_hideout_main.iff	26	-36		-28
+cor_meatlump_2	object/building/content/meatlump/shared_meatlump_hideout_main.iff	34	-60		-36
+cor_meatlump_3	object/building/content/meatlump/shared_meatlump_hideout_main.iff	35	-60		-36
+cor_meatlump_4	object/building/content/meatlump/shared_meatlump_hideout_main.iff	36	-60		-36
+cor_murmur_1	object/building/general/shared_bunker_corellia_murmurs_lab.iff	11	-20		-12
+cor_murmur_2	object/building/general/shared_bunker_corellia_murmurs_lab.iff	36	-50		-20
+cor_slavers_1	object/building/general/shared_bunker_corellian_slavers_01.iff	26	-36		-28
+cor_slavers_2	object/building/general/shared_bunker_corellian_slavers_01.iff	34	-60		-36
+cor_slavers_3	object/building/general/shared_bunker_corellian_slavers_01.iff	35	-60		-36
+cor_slavers_4	object/building/general/shared_bunker_corellian_slavers_01.iff	36	-60		-36
+corv_imp_1	object/building/general/shared_space_dungeon_corellian_corvette_imperial.iff	18	0		12
+corv_imp_2	object/building/general/shared_space_dungeon_corellian_corvette_imperial.iff	19	0		12
+corv_imp_3	object/building/general/shared_space_dungeon_corellian_corvette_imperial.iff	56	-24		-12
+corv_imp_4	object/building/general/shared_space_dungeon_corellian_corvette_imperial.iff	57	-12		0
+corv_neutral_1	object/building/general/shared_space_dungeon_corellian_corvette.iff	18	0		12
+corv_neutral_2	object/building/general/shared_space_dungeon_corellian_corvette.iff	19	0		12
+corv_neutral_3	object/building/general/shared_space_dungeon_corellian_corvette.iff	56	-24		-12
+corv_neutral_4	object/building/general/shared_space_dungeon_corellian_corvette.iff	57	-12		0
+corv_reb_1	object/building/general/shared_space_dungeon_corellian_corvette_rebel.iff	18	0		12
+corv_reb_2	object/building/general/shared_space_dungeon_corellian_corvette_rebel.iff	19	0		12
+corv_reb_3	object/building/general/shared_space_dungeon_corellian_corvette_rebel.iff	56	-24		-12
+corv_reb_4	object/building/general/shared_space_dungeon_corellian_corvette_rebel.iff	57	-12		0
+dan_generals_bunker	object/building/content/rebel_theme_park/shared_bunker_dantooine_generals_bunker.iff	11	-20		-12
+dan_warren_1	object/building/general/shared_bunker_warren.iff	15	-28		-20
+dan_warren_2	object/building/general/shared_bunker_warren.iff	22	-28		-20
+dan_warren_3	object/building/general/shared_bunker_warren.iff	35	-52		-28
+dan_warren_4	object/building/general/shared_bunker_warren.iff	36	-52		-28
+dan_warren_6	object/building/general/shared_bunker_warren.iff	61	-84		-60
+dan_warren_7	object/building/general/shared_bunker_warren.iff	79	-84		-60
+end_merc_1	object/building/content/imperial_theme_park/shared_itp_emperor_merc_bunker.iff	11	-20		-12
+end_merc_2	object/building/content/imperial_theme_park/shared_itp_emperor_merc_bunker.iff	36	-50		-20
+guild_cor	object/building/corellia/shared_association_hall_civilian_corellia.iff	9	-9.0		2.2
+guild_gen	object/building/general/shared_association_hall_civilian_general.iff	9	-9.0		2.2
+guild_nab	object/building/naboo/shared_association_hall_civilian_naboo.iff	9	-9.0		2.2
+guild_player_cor	object/building/player/shared_player_guildhall_corellia_style_01.iff	9	-9.0		2.2
+guild_player_gen	object/building/player/shared_player_guildhall_generic_style_01.iff	9	-9.0		2.2
+guild_player_nab	object/building/player/shared_player_guildhall_naboo_style_01.iff	9	-9.0		2.2
+guild_player_tat	object/building/player/shared_player_guildhall_tatooine_style_01.iff	9	-9.0		2.2
+guild_tat	object/building/tatooine/shared_association_hall_civilian_tatooine.iff	9	-9.0		2.2
+isd_1	object/building/general/space_dungeon_star_destroyer.iff	39	173.8		192.3
+isd_2	object/building/general/space_dungeon_star_destroyer.iff	40	140.6		170.6
+isd_3	object/building/general/space_dungeon_star_destroyer.iff	48	170.6		453.4
+lucky_1	object/building/tatooine/shared_lucky_despot.iff	28	0		9
+lucky_2	object/building/tatooine/shared_lucky_despot.iff	29	0		9
+lucky_3	object/building/tatooine/shared_lucky_despot.iff	30	0		9
+lucky_4	object/building/tatooine/shared_lucky_despot.iff	31	7		15
+must_bunker	object/building/player/shared_player_house_mustafar_lg.iff	999	-33	-26	0.47
+nab_gcw_1	object/building/general/shared_naboo_gcw_bunker_01.iff	11	-20		-12
+nab_gcw_2	object/building/general/shared_naboo_gcw_bunker_01.iff	36	-50		-20
+nab_hospital_a	object/building/naboo/shared_hospital_naboo.iff	13	0.5	7	14.5
+nab_hospital_b	object/building/naboo/shared_hospital_naboo.iff	14	0.5	7	14.5
+nova	object/building/content/nova_orion_station/shared_chapter_8_space_station.iff	27	-31	-1	29
+npe_station	object/building/general/shared_npe_space_station.iff	27	-31	-1	29
+retreat_back	object/building/naboo/shared_emperors_retreat.iff	14	-9.8		0.2
+retreat_emp	object/building/naboo/shared_emperors_retreat.iff	6	0.6		20
+spire_emp	object/building/player/player_house_tcg_emperors_spire.iff	999	1.69		26.7
+spire_reb	object/building/player/player_house_tcg_rebel_spire.iff	999	1.59		25.1
+tal_gene_1	object/building/general/shared_bunker_genetech_syndicate_01.iff	11	-20		-12
+tal_gene_2	object/building/general/shared_bunker_genetech_syndicate_01.iff	36	-50		-20
+tal_hege_1	object/building/general/shared_laminasteel_augmented_group_base.iff	11	-20		-12
+tal_hege_2	object/building/general/shared_laminasteel_augmented_group_base.iff	36	-50		-20
+tat_hospital_a	object/building/tatooine/shared_hospital_tatooine.iff	13	0.5	7	14.5
+tat_hospital_b	object/building/tatooine/shared_hospital_tatooine.iff	14	0.5	7	14.5
