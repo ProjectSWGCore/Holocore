@@ -107,7 +107,6 @@ object/building/tatooine/shared_guild_theater_tatooine_style_01.iff	guild_theate
 object/building/corellia/shared_guild_university_corellia_style_01.iff	guild_university_cor	FALSE
 object/building/naboo/shared_guild_university_naboo_style_01.iff	guild_university_nab	FALSE
 object/building/tatooine/shared_guild_university_tatooine_style_01.iff	guild_university_tat	FALSE
-object/building/corellia/shared_hospital_corellia.iff	hospital_cor_1	FALSE
 object/building/corellia/shared_hospital_corellia_s02.iff	hospital_cor_2	FALSE
 object/building/naboo/shared_hospital_naboo_style01.iff	hospital_nab_1	FALSE
 object/building/naboo/shared_hospital_naboo_style02.iff	hospital_nab_2	FALSE
