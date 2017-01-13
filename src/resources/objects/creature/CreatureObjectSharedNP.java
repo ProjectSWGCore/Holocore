@@ -29,7 +29,6 @@ package resources.objects.creature;
 
 import java.util.HashMap;
 import java.util.Map.Entry;
-import java.util.function.BiConsumer;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 import resources.HologramColour;
