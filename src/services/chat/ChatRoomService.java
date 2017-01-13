@@ -218,7 +218,7 @@ public class ChatRoomService extends Service {
 			return;
 
 		switch (intent.getEvent()) {
-			case PE_ZONE_IN_CLIENT:
+			case PE_ZONE_IN_SERVER:
 				enterPlanetaryChatChannels(player);
 				break;
 			case PE_FIRST_ZONE:
@@ -587,7 +587,7 @@ public class ChatRoomService extends Service {
 
 		// Leave old zone-only chat channels
 		String planetEndPath = ".Planet";
-		for (String channel : ghost.getJoinedChannels()) {
+		for (String channel : new ArrayList<>(ghost.getJoinedChannels())) {
 			if (channel.endsWith(planetEndPath)) {
 				leaveChatChannel(player, channel);
 			} else {
