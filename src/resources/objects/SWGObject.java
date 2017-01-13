@@ -170,6 +170,8 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	 * @return {@link ContainerResult}
 	 */
 	public ContainerResult moveToContainer(SWGObject requester, SWGObject container) {
+		if (parent == container) // One could be null, and this is specifically an instance-based check
+			return ContainerResult.SUCCESS;
 		ContainerResult result = moveToContainerChecks(requester, container);
 		if (result != ContainerResult.SUCCESS)
 			return result;

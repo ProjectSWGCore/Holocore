@@ -37,13 +37,11 @@ public class RequestZoneInIntent extends Intent {
 	
 	private Player player;
 	private CreatureObject creature;
-	private boolean firstZone;
 	
-	public RequestZoneInIntent(Player player, CreatureObject creature, boolean firstZone) {
+	public RequestZoneInIntent(Player player, CreatureObject creature) {
 		super(TYPE);
 		setPlayer(player);
 		setCreature(creature);
-		setFirstZone(firstZone);
 	}
 	
 	public void setPlayer(Player player) {
@@ -54,20 +52,12 @@ public class RequestZoneInIntent extends Intent {
 		this.creature = creature;
 	}
 	
-	public void setFirstZone(boolean firstZone) {
-		this.firstZone = firstZone;
-	}
-	
 	public Player getPlayer() {
 		return player;
 	}
 	
 	public CreatureObject getCreature() {
 		return creature;
-	}
-	
-	public boolean isFirstZone() {
-		return firstZone;
 	}
 	
 }
