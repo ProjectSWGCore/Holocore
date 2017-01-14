@@ -44,7 +44,10 @@ public class MessageQueueHarvesterResourceData extends ObjectController {
 
 	@Override
 	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + 29 + resourceId.length + resourceName.length + resourceType.length + resourceDensity.length);
+		int len = HEADER_LENGTH + 12;
+		for (int i = 0; i < resourceListSize; i++)
+		    len += 17 + resourceName[i].length() * 2 + resourceType[i].length() * 2;
+		ByteBuffer data = ByteBuffer.allocate(len);
 		encodeHeader(data);
 		addLong(data, harvesterId);
 		addInt(data, resourceListSize);

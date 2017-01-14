@@ -28,7 +28,7 @@ public class MessageQueueCraftExperiment extends ObjectController {
 		decodeHeader(data);
 		actionCounter = getByte(data);
 		statCount = getInt(data);
-		for(int i = 0; i <= statCount; i++){
+		for(int i = 0; i < statCount; i++){
 			statExperimentationAmount[i] = getInt(data);
 			spentPoints[i] = getInt(data);
 		}		
@@ -36,21 +36,21 @@ public class MessageQueueCraftExperiment extends ObjectController {
 
 	@Override
 	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + 13);
+		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + 5 + statCount * 8);
 		encodeHeader(data);
 		addByte(data, actionCounter);
 		addInt(data, statCount);
-		for(int i = 0; i <= statCount; i++){
+		for(int i = 0; i < statCount; i++){
 			addInt(data, statExperimentationAmount[i]);
 			addInt(data, spentPoints[i]);
 		}
 		return data;
 	}
 	
-	public byte getactionCounter() {
+	public byte getActionCounter() {
 		return actionCounter;
 	}
-	public void setactionCounter(byte actionCounter) {
+	public void setActionCounter(byte actionCounter) {
 		this.actionCounter = actionCounter;
 	}
 	public int getStatCount() {

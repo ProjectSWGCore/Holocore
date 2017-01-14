@@ -10,10 +10,8 @@ public class MessageQueueCraftCustomization extends ObjectController {
 	private byte appearenceTemplate;
 	private int itemAmount;
 	private byte count;
-	int[] property;
-	int[] value;
-	
-	
+	private int[] property;
+	private int[] value;
 	
 	public MessageQueueCraftCustomization(String itemName, byte appearenceTemplate, int itemAmount, byte count, int[] property, int[] value) {
 		super(CRC);
@@ -38,7 +36,7 @@ public class MessageQueueCraftCustomization extends ObjectController {
 		itemAmount = getInt(data);
 		count = getByte(data);
 		
-		for(int i = 1; i <= count; i++){
+		for(int i = 0; i < count; i++){
 			property[i] = getInt(data);
 			value[i] = getInt(data);
 		}		
@@ -46,14 +44,14 @@ public class MessageQueueCraftCustomization extends ObjectController {
 
 	@Override
 	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + 18 + itemName.length() + property.length + value.length);
+		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + 10 + itemName.length()*2 + count * 8);
 		encodeHeader(data);
 		addUnicode(data, itemName);
 		addByte(data, appearenceTemplate);
 		addInt(data, itemAmount);
 		addByte(data, count);
 		
-		for(int i = 1; i <= count; i++){
+		for(int i = 0; i < count; i++){
 			addInt(data, property[i] );
 			addInt(data, value[i]);
 		}

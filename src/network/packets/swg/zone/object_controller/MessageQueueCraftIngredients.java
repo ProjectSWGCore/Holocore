@@ -28,7 +28,7 @@ public class MessageQueueCraftIngredients extends ObjectController {
 	public void decode(ByteBuffer data) {
 		decodeHeader(data);
 		count = getInt(data);
-		for(int i = 0; i <= count; i++){
+		for(int i = 0; i < count; i++){
 			resourceName[i] = getUnicode(data);
 			type[i] = getByte(data);
 			quantity[i] = getInt(data);
@@ -37,10 +37,13 @@ public class MessageQueueCraftIngredients extends ObjectController {
 
 	@Override
 	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + 13 + resourceName.length + type.length + quantity.length);
+		 int len = 4;
+		for (int i = 0; i < count; i++)
+		    len += 9 + resourceName[i].length();
+		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + 4 + len);
 		encodeHeader(data);
 		addInt(data, count);
-		for(int i = 0; i <= count; i++){
+		for(int i = 0; i < count; i++){
 			addUnicode(data, resourceName[i] );
 			addByte(data, type[i]);
 			addInt(data, quantity[i]);

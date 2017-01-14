@@ -6,12 +6,12 @@ public class MessageQueueCraftRequestSession extends ObjectController{
 
 	private final static int CRC = 0x010F;
 	
-	private long stationId;
+	private long sessionId; //wants to create a session for this particular craftingsession
 	private int sequenceId;
 	
-	public MessageQueueCraftRequestSession(long stationId, int sequenceId) {
+	public MessageQueueCraftRequestSession(long sessionId, int sequenceId) {
 		super(CRC);
-		this.stationId = stationId;
+		this.sessionId = sessionId;
 		this.sequenceId = sequenceId;
 	}
 		
@@ -23,25 +23,25 @@ public class MessageQueueCraftRequestSession extends ObjectController{
 	@Override
 	public void decode(ByteBuffer data) {
 		decodeHeader(data);
-		stationId = getLong(data);
+		sessionId = getLong(data);
 		sequenceId = getInt(data);		
 	}
 
 	@Override
 	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + 13);
+		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + 12);
 		encodeHeader(data);
-		addLong(data, stationId);
+		addLong(data, sessionId);
 		addInt(data, sequenceId);
 		return data;
 	}
 
-	public long getStationId() {
-		return stationId;
+	public long getSessionId() {
+		return sessionId;
 	}
 
-	public void setStationId(long stationId) {
-		this.stationId = stationId;
+	public void setSessionId(long sessionId) {
+		this.sessionId = sessionId;
 	}
 
 	public int getSequenceId() {
