@@ -11,16 +11,16 @@ public class MessageQueueDraftSchematics extends ObjectController {
 	private int schematicsCounter;
 	private int schematicsId;
 	private int schematicsCrc;
-	private byte[] subcategory;
+	private byte [][] schematicSubcategories = new byte[schematicsCounter][4];
 
-	public MessageQueueDraftSchematics(long toolId, long craftingStationId, int schematicsCounter, int schematicsId, int schematicsCrc, byte[] subcategory) {
-		super(CRC);
+	public MessageQueueDraftSchematics(long toolId, long craftingStationId, int schematicsCounter, int schematicsId, int schematicsCrc, byte[][] schematicSubcategories) {
+		super();
 		this.toolId = toolId;
 		this.craftingStationId = craftingStationId;
 		this.schematicsCounter = schematicsCounter;
 		this.schematicsId = schematicsId;
 		this.schematicsCrc = schematicsCrc;
-		System.arraycopy(subcategory, 0, this.subcategory, 0, 4);
+		System.arraycopy(schematicSubcategories, 0, this.schematicSubcategories, 0, 4);
 	}
 
 	public MessageQueueDraftSchematics(ByteBuffer data) {
@@ -37,13 +37,13 @@ public class MessageQueueDraftSchematics extends ObjectController {
 		for(int i = 0; i < schematicsCounter; i++){
 			schematicsId = getInt(data);
 			schematicsCrc = getInt(data);
-			subcategory = getArray(data);
+			schematicSubcategories[i] = getArray(data);
 		}		
 	}
 
 	@Override
 	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + 20 + schematicsCounter * 12);
+		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + 20 + schematicsCounter * 12 + schematicSubcategories.length);
 		encodeHeader(data);
 		addLong(data, toolId);
 		addLong(data, craftingStationId);
@@ -51,7 +51,7 @@ public class MessageQueueDraftSchematics extends ObjectController {
 		for(int i = 0; i< schematicsCounter; i++){
 			addInt(data, schematicsId);
 			addInt(data, schematicsCrc);
-			addData(data, subcategory);
+			addData(data, schematicSubcategories[i]);
 		}
 		return data;
 	}
@@ -96,11 +96,11 @@ public class MessageQueueDraftSchematics extends ObjectController {
 		this.schematicsCrc = schematicsCrc;
 	}
 
-	public byte[] getSubcategory() {
-		return subcategory;
+	public byte[][] getSchematicSubcategories() {
+		return schematicSubcategories;
 	}
 
-	public void setSubcategory(byte[] subcategory) {
-		this.subcategory = subcategory;
+	public void setSchematicSubcategories(byte[][] schematicSubcategories) {
+		this.schematicSubcategories = schematicSubcategories;
 	}
 }
