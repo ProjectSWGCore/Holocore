@@ -9,11 +9,11 @@ public class MessageQueueDraftSchematics extends ObjectController {
 	private long toolId;
 	private long craftingStationId;
 	private int schematicsCounter;
-	private int schematicsId;
-	private int schematicsCrc;
+	private int[] schematicsId;
+	private int[] schematicsCrc;
 	private byte [][] schematicSubcategories = new byte[schematicsCounter][4];
 
-	public MessageQueueDraftSchematics(long toolId, long craftingStationId, int schematicsCounter, int schematicsId, int schematicsCrc, byte[][] schematicSubcategories) {
+	public MessageQueueDraftSchematics(long toolId, long craftingStationId, int schematicsCounter, int[] schematicsId, int[] schematicsCrc, byte[][] schematicSubcategories) {
 		super();
 		this.toolId = toolId;
 		this.craftingStationId = craftingStationId;
@@ -35,8 +35,8 @@ public class MessageQueueDraftSchematics extends ObjectController {
 		craftingStationId = getLong(data);
 		schematicsCounter = getInt(data);
 		for(int i = 0; i < schematicsCounter; i++){
-			schematicsId = getInt(data);
-			schematicsCrc = getInt(data);
+			schematicsId[i] = getInt(data);
+			schematicsCrc[i] = getInt(data);
 			schematicSubcategories[i] = getArray(data);
 		}		
 	}
@@ -49,8 +49,8 @@ public class MessageQueueDraftSchematics extends ObjectController {
 		addLong(data, craftingStationId);
 		addInt(data, schematicsCounter);
 		for(int i = 0; i< schematicsCounter; i++){
-			addInt(data, schematicsId);
-			addInt(data, schematicsCrc);
+			addInt(data, schematicsId[i]);
+			addInt(data, schematicsCrc[i]);
 			addData(data, schematicSubcategories[i]);
 		}
 		return data;
@@ -80,19 +80,19 @@ public class MessageQueueDraftSchematics extends ObjectController {
 		this.schematicsCounter = schematicsCounter;
 	}
 
-	public int getSchematicsId() {
+	public int[] getSchematicsId() {
 		return schematicsId;
 	}
 
-	public void setSchematicsId(int schematicsId) {
+	public void setSchematicsId(int[] schematicsId) {
 		this.schematicsId = schematicsId;
 	}
 
-	public int getSchematicsCrc() {
+	public int[] getSchematicsCrc() {
 		return schematicsCrc;
 	}
 
-	public void setSchematicsCrc(int schematicsCrc) {
+	public void setSchematicsCrc(int[] schematicsCrc) {
 		this.schematicsCrc = schematicsCrc;
 	}
 
