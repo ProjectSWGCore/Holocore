@@ -33,7 +33,6 @@ import java.util.Collections;
 import java.util.Set;
 import java.util.Locale;
 import java.util.Map;
-import java.util.function.BiConsumer;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
@@ -131,14 +130,13 @@ public class CreatureObject extends TangibleObject {
 		creo6.removeAppearanceItem(obj, this);
 	}
 	
-	public boolean addSkill(String skillName) {
-		synchronized(skills) {
-			if (skills.add(skillName)) {
+	public void addSkill(String ... skillList) {
+		synchronized (skills) {
+			boolean delta = false;
+			for (String skillName : skillList)
+				delta |= skills.add(skillName);
+			if (delta)
 				skills.sendDeltaMessage(this);
-				return true;
-			}
-			
-			return false;
 		}
 	}
 	
@@ -621,10 +619,6 @@ public class CreatureObject extends TangibleObject {
 		creo6.setBuffDuration(buffCrc, playTime, duration, this);
 	}
 	
-	public void forEachBuff(BiConsumer<CRC, Buff> action) {
-		creo6.forEachBuff(action);
-	}
-	
 	public boolean isVisible() {
 		return creo6.isVisible();
 	}
@@ -699,8 +693,8 @@ public class CreatureObject extends TangibleObject {
 		}
 	}
 
-	public void addAbility(String abilityName) {
-		creo4.addAbility(abilityName, this);
+	public void addAbility(String ... abilities) {
+		creo4.addAbility(this, abilities);
 	}
 	
 	public void removeAbility(String abilityName) {

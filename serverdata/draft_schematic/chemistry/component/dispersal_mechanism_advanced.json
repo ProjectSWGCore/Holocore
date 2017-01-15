@@ -1,0 +1,70 @@
+{
+    "parent": "object/draft_schematic/chemistry/base_chemistry_schematic.iff",
+    "itemsPerContainer": 50,
+    "craftedObjectTemplate": "object/tangible/component/chemistry/dispersal_mechanism_advanced.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_chemical_ingredients_n",
+                "delivery_medium"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_chemical_ingredients_n",
+                                "delivery_medium"
+                            ],
+                            "ingredient": "petrochem_fuel_liquid_type2",
+                            "count": 25
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_chemical_ingredients_n",
+                "body_shell"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_chemical_ingredients_n",
+                                "body_shell"
+                            ],
+                            "ingredient": "fiberplast_yavin4",
+                            "count": 25
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.chemistry.component.crafting_component_dot_chemistry"
+    ],
+    "complexity": 15,
+    "sharedTemplate": "object/draft_schematic/chemistry/component/shared_dispersal_mechanism_advanced.iff",
+    "volume": 2
+}

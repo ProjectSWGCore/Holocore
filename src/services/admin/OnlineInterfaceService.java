@@ -123,7 +123,7 @@ public class OnlineInterfaceService extends Service implements HttpServerCallbac
 			try {
 				executor.awaitTermination(1, TimeUnit.SECONDS);
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				Log.e(this, e);
 			}
 		}
 		return super.stop();
@@ -160,7 +160,7 @@ public class OnlineInterfaceService extends Service implements HttpServerCallbac
 			}
 			handler.handleRequest(socket, request);
 		} catch (IOException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		}
 	}
 	
@@ -218,7 +218,7 @@ public class OnlineInterfaceService extends Service implements HttpServerCallbac
 					}
 				}
 			} catch (SQLException e) {
-				e.printStackTrace();
+				Log.e(this, e);
 			}
 		}
 	}

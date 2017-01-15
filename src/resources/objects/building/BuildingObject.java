@@ -32,93 +32,96 @@ import resources.Location;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.PortalLayoutData;
 import resources.client_info.visitors.ObjectData.ObjectDataAttribute;
+import resources.control.Assert;
 import resources.network.NetBufferStream;
 import resources.objects.SWGObject;
 import resources.objects.cell.CellObject;
 import resources.objects.tangible.TangibleObject;
+import resources.server_info.SynchronizedMap;
 import services.objects.ObjectCreator;
 import intents.object.ObjectCreatedIntent;
 
-import java.util.Collections;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class BuildingObject extends TangibleObject {
 	
+	private final Map<String, CellObject> nameToCell;
+	private final Map<Integer, CellObject> idToCell;
+	
 	public BuildingObject(long objectId) {
 		super(objectId, BaselineType.BUIO);
+		nameToCell = new SynchronizedMap<>();
+		idToCell = new SynchronizedMap<>();
 	}
 	
 	public CellObject getCellByName(String cellName) {
-		for (SWGObject cont : getContainedObjects()) {
-			if (cont instanceof CellObject) {
-				if (((CellObject) cont).getCellName().equals(cellName)) {
-					return (CellObject) cont;
-				}
-			}
-		}
-		return null;
+		return nameToCell.get(cellName);
 	}
 	
 	public CellObject getCellByNumber(int cellNumber) {
-		for (SWGObject cont : getContainedObjects()) {
-			if (cont instanceof CellObject) {
-				if (((CellObject) cont).getNumber() == cellNumber) {
-					return (CellObject) cont;
-				}
-			}
-		}
-		return null;
+		return idToCell.get(cellNumber);
 	}
-
+	
 	public List<CellObject> getCells() {
-		List<CellObject> cells = new LinkedList<>();
-		for (SWGObject object : getContainedObjects()) {
-			if (object instanceof CellObject)
-				cells.add((CellObject) object);
-		}
-		return Collections.unmodifiableList(cells);
+		return new ArrayList<>(idToCell.values());
 	}
-
+	
 	@Override
 	public void addObject(SWGObject object) {
 		super.addObject(object);
-		if (!(object instanceof CellObject))
-			return;
-
-		String portalFile = (String) getDataAttribute(ObjectDataAttribute.PORTAL_LAYOUT_FILENAME);
-		if (portalFile == null || portalFile.isEmpty())
-			return;
-
-		PortalLayoutData portalLayoutData = (PortalLayoutData) ClientFactory.getInfoFromFile(portalFile, true);
-		if (portalLayoutData == null || portalLayoutData.getCells() == null || portalLayoutData.getCells().size() == 0)
-			return;
-
-		populateCellData((CellObject) object, portalLayoutData.getCells().get(((CellObject) object).getNumber()));
+		Assert.test(object instanceof CellObject);
+		
+		CellObject cell = (CellObject) object;
+		Assert.test(cell.getNumber() > 0);
+		Assert.test(cell.getNumber() < getCellCount());
+		cell.setCellName(getCellName(cell.getNumber()));
+		synchronized (idToCell) {
+			Assert.isNull(idToCell.get(cell.getNumber()));
+			idToCell.put(cell.getNumber(), cell);
+			nameToCell.put(cell.getCellName(), cell); // Can be multiple cells with the same name
+		}
 	}
 	
 	public void populateCells() {
-		String portalFile = (String) getDataAttribute(ObjectDataAttribute.PORTAL_LAYOUT_FILENAME);
-		if (portalFile == null || portalFile.isEmpty())
-			return;
-		
-		PortalLayoutData portalLayoutData = (PortalLayoutData) ClientFactory.getInfoFromFile(portalFile, true);
-		if (portalLayoutData == null || portalLayoutData.getCells() == null || portalLayoutData.getCells().size() == 0)
-			return;
-		
-		for (int i = 0; i < portalLayoutData.getCells().size() - 1; i++) {
-			CellObject cell = (CellObject) ObjectCreator.createObjectFromTemplate("object/cell/shared_cell.iff");
-			cell.setNumber(i+1);
-			cell.setLocation(new Location(0, 0, 0, getTerrain()));
-			populateCellData(cell, portalLayoutData.getCells().get(i+1));
-			super.addObject(cell);
-			new ObjectCreatedIntent(cell).broadcast();
+		int cells = getCellCount();
+		synchronized (idToCell) {
+			for (int i = 1; i < cells; i++) { // 0 is world
+				if (idToCell.get(i) != null)
+					continue;
+				CellObject cell = (CellObject) ObjectCreator.createObjectFromTemplate("object/cell/shared_cell.iff");
+				Assert.notNull(cell);
+				cell.setNumber(i);
+				cell.setLocation(new Location(0, 0, 0, getTerrain()));
+				addObject(cell);
+				new ObjectCreatedIntent(cell).broadcast();
+			}
 		}
 	}
-
-	private void populateCellData(CellObject cellObject, PortalLayoutData.Cell cellData) {
-		cellObject.setCellName(cellData.getName());
-//		System.out.println(cellObject + " cell name " + cellObject.getCellName());
+	
+	private int getCellCount() {
+		PortalLayoutData data = getPortalLayoutData();
+		if (data == null)
+			return 0;
+		return data.getCells().size();
+	}
+	
+	private String getCellName(int cell) {
+		PortalLayoutData data = getPortalLayoutData();
+		if (data == null)
+			return "";
+		return data.getCells().get(cell).getName();
+	}
+	
+	private PortalLayoutData getPortalLayoutData() {
+		String portalFile = (String) getDataAttribute(ObjectDataAttribute.PORTAL_LAYOUT_FILENAME);
+		if (portalFile == null || portalFile.isEmpty())
+			return null;
+		
+		PortalLayoutData portalLayoutData = (PortalLayoutData) ClientFactory.getInfoFromFile(portalFile, true);
+		Assert.test(portalLayoutData != null && portalLayoutData.getCells() != null && portalLayoutData.getCells().size() > 0);
+		return portalLayoutData;
 	}
 	
 	@Override
@@ -132,4 +135,5 @@ public class BuildingObject extends TangibleObject {
 		super.read(stream);
 		stream.getByte();
 	}
+	
 }

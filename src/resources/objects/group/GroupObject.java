@@ -24,49 +24,52 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>
  ******************************************************************************/
-
 package resources.objects.group;
 
 import network.packets.Packet;
 import network.packets.swg.zone.baselines.Baseline;
+import resources.Location;
+import resources.Terrain;
 import resources.collections.SWGList;
+import resources.control.Assert;
 import resources.encodables.Encodable;
 import resources.network.BaselineBuilder;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
+import resources.server_info.SynchronizedMap;
 import utilities.Encoder;
 
-import java.io.Serializable;
 import java.nio.ByteBuffer;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Consumer;
 
-public class GroupObject extends SWGObject { // Extends INTO or TANO?
-	private final SWGList<GroupMember> groupMembers = new SWGList<>(6, 2, Encoder.StringType.ASCII);
-	private long leader;
-	private short level;
-	private long lootMaster;
-	private LootRule lootRule;
-
-	private transient PickupPointTimer pickupPointTimer;
-
+public class GroupObject extends SWGObject {
+	
+	private final SWGList<GroupMember>	groupMembers		= new SWGList<>(6, 2, Encoder.StringType.ASCII);
+	private final Map<Long, GroupMember>memberMap			= new SynchronizedMap<>();
+	private final PickupPointTimer		pickupPointTimer	= new PickupPointTimer();
+	
+	private CreatureObject	leader		= null;
+	private LootRule		lootRule	= LootRule.RANDOM;
+	private short			level		= 0;
+	private long			lootMaster	= 0;
+	
 	public GroupObject(long objectId) {
 		super(objectId, Baseline.BaselineType.GRUP);
-		pickupPointTimer = new PickupPointTimer();
-		lootRule = LootRule.RANDOM;
+		setLocation(new Location(0, 0, 0, Terrain.GONE));
 	}
-
+	
 	@Override
 	public void createBaseline6(Player target, BaselineBuilder bb) {
 		super.createBaseline6(target, bb); // BASE06 -- 2 variables
 		bb.addObject(groupMembers); // 2 -- NOTE: First person is the leader
 		bb.addInt(0); // formationmembers // 3
-			bb.addInt(0); // updateCount
+		bb.addInt(0); // updateCount
 		bb.addAscii(""); // groupName // 4
 		bb.addShort(level); // 5
 		bb.addInt(0); // formationNameCrc // 6
@@ -74,118 +77,86 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 		bb.addInt(lootRule.getId()); // 8
 		bb.addObject(pickupPointTimer); // 9
 		bb.addAscii(""); // PickupPoint planetName // 10
-			bb.addFloat(0); // x
-			bb.addFloat(0); // y
-			bb.addFloat(0); // z
-
+		bb.addFloat(0); // x
+		bb.addFloat(0); // y
+		bb.addFloat(0); // z
+		
 		bb.incrementOperandCount(9);
 	}
-
-	public void addMember(CreatureObject object) {
-		groupMembers.add(new GroupMember(object));
-
-		groupMembers.sendDeltaMessage(this);
-
-		addCustomAware(object);
-		object.setGroupId(getObjectId());
-
-		if (object.getLevel() > level)
-			setLevel((short) object.getLevel());
+	
+	public void formGroup(CreatureObject leader, CreatureObject member) {
+		if (this.leader != null)
+			throw new IllegalStateException("Group already formed!");
+		this.leader = leader;
+		addGroupMembers(leader, member);
 	}
-
-	public void removeMember(CreatureObject object) {
-		GroupMember member = new GroupMember(object);
-		synchronized (groupMembers) {
-
-			if (this.leader == object.getObjectId() && this.groupMembers.size() > 2) {
-				this.setLeader(this.groupMembers.get(2));
-			}
-			
-			if (this.groupMembers.size() == 2) {
-				this.disbandGroup();
-				return;
-			}
-
-			groupMembers.remove(member);
-			object.setGroupId(0);
-
-			groupMembers.sendDeltaMessage(this);
-			
-			// We need to recalculate the group level if someone leaves!
-			groupMembers.stream()
-					.map(groupMember -> groupMember.getCreatureObject().getLevel())
-					.max((level1, level2) -> Short.compare(level1, level2))
-					.ifPresent(newLevel -> setLevel(newLevel));
+	
+	public void addMember(CreatureObject creature) {
+		addGroupMembers(creature);
+		calculateLevel();
+	}
+	
+	public void removeMember(CreatureObject creature) {
+		if (leader.equals(creature) && size() >= 2) {
+			setLeader(groupMembers.get(1));
 		}
+		removeGroupMembers(creature);
+		calculateLevel();
 	}
-
+	
+	public int size() {
+		return groupMembers.size();
+	}
+	
+	public boolean isFull() {
+		return size() >= 8;
+	}
+	
 	public void updateMember(CreatureObject object) {
-		if (groupMembers.contains(new GroupMember(object))) // make sure GroupMember implements hashCode and equals
+		if (memberMap.containsKey(object.getObjectId()))
 			addCustomAware(object);
 		else
 			removeCustomAware(object);
 	}
-
+	
 	public long getLeaderId() {
-		return leader;
+		return leader.getObjectId();
 	}
-
+	
 	public Player getLeaderPlayer() {
-		return this.groupMembers.get(0).playerCreo.getOwner();
+		return leader.getOwner();
 	}
 	
 	public void setLeader(CreatureObject object) {
-		this.leader = object.getObjectId();
-
-		GroupMember member = new GroupMember(object);
-		this.changeLeader(member);
-	}
-
-	public void setLeader(GroupMember member) {
-		this.leader = member.getId();
-		
-		this.changeLeader(member);
-	}
-	
-	private void changeLeader(GroupMember member) {
-		if (groupMembers.size() > 0) {
-			synchronized (groupMembers) {
-				// TODO: need to account for group member order of joining
-				Collections.swap(groupMembers, 0, groupMembers.indexOf(member));
-			}
-		} else {
-			this.addMember(member.getCreatureObject());
-		}
-		
-		this.leader = member.getId();
-
-		groupMembers.sendDeltaMessage(this);
+		Assert.notNull(object);
+		GroupMember member = memberMap.get(object.getObjectId());
+		Assert.notNull(member);
+		setLeader(member);
 	}
 	
 	public short getLevel() {
 		return level;
 	}
-
-	public void setLevel(short level) {
-		this.level = level;
-		sendDelta(6, level, 5);
-	}
-
+	
 	public long getLootMaster() {
 		return lootMaster;
 	}
-
-	public void setLootMaster(long lootMaster) {
-		this.lootMaster = lootMaster;
-	}
-
+	
 	public LootRule getLootRule() {
 		return lootRule;
 	}
-
+	
+	public void setLevel(short level) {
+		this.level = level;
+		sendDelta(6, 5, level);
+	}
+	
+	public void setLootMaster(long lootMaster) {
+		this.lootMaster = lootMaster;
+	}
+	
 	public void setLootRule(int lootRule) {
-		this.lootRule = LootRule.fromId(lootRule);
-		sendLootRuleDelta(lootRule);
+		setLootRule(LootRule.fromId(lootRule));
 	}
 	
 	public void setLootRule(LootRule lootRule) {
@@ -197,137 +168,148 @@ public class GroupObject extends SWGObject { // Extends INTO or TANO?
 		sendDelta(6, 8, lootRule);
 	}
 	
-	public boolean isFull() { 
-		return groupMembers.size() == 8;
-	}
-
 	public Map<String, Long> getGroupMembers() {
 		Map<String, Long> members = new HashMap<>();
-
-		synchronized (groupMembers) {
-			for (GroupMember groupMember : groupMembers) {
-				members.put(groupMember.getName(), groupMember.getId());
-			}
-		}
-
+		iterateGroup(member -> members.put(member.getName(), member.getId()));
 		return members;
 	}
 	
 	public Set<CreatureObject> getGroupMemberObjects() {
 		Set<CreatureObject> memberObjects = new HashSet<>();
-		
-		synchronized (groupMembers) {
-			for (GroupMember groupMember : groupMembers)
-				memberObjects.add(groupMember.playerCreo);
-		}
-		
+		iterateGroup(member -> memberObjects.add(member.getCreature()));
 		return memberObjects;
 	}
 	
-	private GroupMember getGroupMember(Player player) {
-		synchronized(groupMembers) {
+	public void disbandGroup() {
+		CreatureObject [] creatures;
+		synchronized (groupMembers) {
+			creatures = new CreatureObject[size()];
+			int i = 0;
 			for (GroupMember member : groupMembers) {
-				if (member.getId() == player.getUserId()) {
-					return member;
-				}
+				creatures[i++] = member.getCreature();
 			}
 		}
-		
-		return null;
+		removeGroupMembers(creatures);
 	}
 	
-	public void disbandGroup() {
+	private void setLeader(GroupMember member) {
+		Assert.notNull(member);
+		this.leader = member.getCreature();
 		synchronized (groupMembers) {
-			
-			Iterator<GroupMember> iter = this.groupMembers.iterator();
-
-			while (iter.hasNext()) {
-				GroupMember grpMember = iter.next();
-				iter.remove();
-				grpMember.getCreatureObject().setGroupId(0);
-				removeCustomAware(grpMember.playerCreo);
-			}
+			Assert.test(groupMembers.contains(member));
+			int swapIndex = groupMembers.indexOf(member);
+			GroupMember tmp = groupMembers.get(0);
+			groupMembers.set(0, member);
+			groupMembers.set(swapIndex, tmp);
+			groupMembers.sendDeltaMessage(this);
 		}
-
+	}
+	
+	private void calculateLevel() {
+		AtomicInteger newLevel = new AtomicInteger(0);
+		iterateGroup(member -> newLevel.set(Math.max(newLevel.get(), member.getCreature().getLevel())));
+		setLevel((short) newLevel.get());
+	}
+	
+	private void iterateGroup(Consumer<GroupMember> consumer) {
+		synchronized (groupMembers) {
+			groupMembers.forEach(consumer);
+		}
+	}
+	
+	private void addGroupMembers(CreatureObject ... creatures) {
+		for (CreatureObject creature : creatures) {
+			Assert.test(!isCustomAware(creature));
+			Assert.test(creature.getGroupId() == 0);
+			GroupMember member = new GroupMember(creature);
+			Assert.isNull(memberMap.put(creature.getObjectId(), member));
+			addCustomAware(creature);
+			groupMembers.add(member);
+			creature.setGroupId(getObjectId());
+		}
 		groupMembers.sendDeltaMessage(this);
 	}
 	
-	private static class PickupPointTimer implements Serializable, Encodable {
-		private static final long serialVersionUID = 1L;
-
-		public int start;
-		public int end;
-
+	private void removeGroupMembers(CreatureObject ... creatures) {
+		for (CreatureObject creature : creatures) {
+			Assert.test(creature.getGroupId() == getObjectId());
+			GroupMember member = memberMap.remove(creature.getObjectId());
+			Assert.notNull(member);
+			creature.setGroupId(0);
+			groupMembers.remove(member);
+			removeCustomAware(creature);
+		}
+		groupMembers.sendDeltaMessage(this);
+	}
+	
+	private static class PickupPointTimer implements Encodable {
+		
+		private int start;
+		private int end;
+		
+		public PickupPointTimer() {
+			start = 0;
+			end = 0;
+		}
+		
 		@Override
 		public byte[] encode() {
 			return ByteBuffer.allocate(8).putInt(start).putInt(end).array();
 		}
-
+		
 		@Override
 		public void decode(ByteBuffer data) {
 			start = Packet.getInt(data);
 			end = Packet.getInt(data);
 		}
-	}
-
-	private static class GroupMember implements Serializable, Encodable {
-		private static final long serialVersionUID = 1L;
-
-		private long id;
-		private String name;
-		private CreatureObject playerCreo;
 		
-		public GroupMember(CreatureObject creo) {
-			
-			this.id = creo.getObjectId();
-			this.name = creo.getName();
-			this.playerCreo = creo;
+	}
+	
+	private static class GroupMember implements Encodable {
+		
+		private CreatureObject creature;
+		
+		public GroupMember(CreatureObject creature) {
+			this.creature = creature;
 		}
-
+		
 		@Override
 		public byte[] encode() {
+			String name = creature.getObjectName();
 			ByteBuffer bb = ByteBuffer.allocate(10 + name.length());
-			Packet.addLong(bb, id);
+			Packet.addLong(bb, creature.getObjectId());
 			Packet.addAscii(bb, name);
 			return bb.array();
 		}
-
+		
 		@Override
 		public void decode(ByteBuffer data) {
-			id = Packet.getLong(data);
-			name = Packet.getAscii(data);
+			
 		}
 
 		public long getId() {
-			return id;
+			return creature.getObjectId();
 		}
 		
-		public CreatureObject getCreatureObject() {
-			return playerCreo;
+		public CreatureObject getCreature() {
+			return creature;
 		}
-
+		
 		public String getName() {
-			return name;
+			return creature.getObjectName();
 		}
-
+		
 		@Override
 		public boolean equals(Object o) {
-			if (this == o)
-				return true;
-			if (o == null || !(o instanceof GroupMember))
+			if (!(o instanceof GroupMember))
 				return false;
-
-			GroupMember that = (GroupMember) o;
-
-			return id == that.id && name.equals(that.name);
-
+			
+			return creature.equals(((GroupMember) o).getCreature());
 		}
-
+		
 		@Override
 		public int hashCode() {
-			int result = (int) (id ^ (id >>> 32));
-			result = 31 * result + name.hashCode();
-			return result;
+			return creature.hashCode();
 		}
 	}
 }

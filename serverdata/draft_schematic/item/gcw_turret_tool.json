@@ -1,0 +1,97 @@
+{
+    "parent": "object/draft_schematic/item/base_item_schematic.iff",
+    "itemsPerContainer": 0,
+    "craftedObjectTemplate": "object/tangible/gcw/crafting_quest/gcw_turret_tool.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "gcw_firing_mechanism"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_templateGeneric",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "gcw_firing_mechanism"
+                            ],
+                            "ingredient": "object/tangible/gcw/crafting_quest/gcw_rapid_firing_mech.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "gcw_casing"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_templateGeneric",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "gcw_casing"
+                            ],
+                            "ingredient": "object/tangible/gcw/crafting_quest/gcw_heat_absorbent_casing.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": true,
+            "name": [
+                "craft_item_ingredients_n",
+                "gcw_material_enhancers"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_templateGeneric",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "gcw_material_enhancers"
+                            ],
+                            "ingredient": "object/tangible/gcw/crafting_quest/gcw_material_enhancers.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.item.crafting_gcw_turret"
+    ],
+    "complexity": 5,
+    "sharedTemplate": "object/draft_schematic/item/shared_gcw_turret_tool.iff",
+    "volume": 1
+}

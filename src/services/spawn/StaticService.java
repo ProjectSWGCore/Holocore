@@ -39,7 +39,7 @@ import java.util.List;
 import java.util.Map;
 
 import resources.Location;
-import resources.control.Intent;
+import resources.control.Assert;
 import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.building.BuildingObject;
@@ -67,17 +67,7 @@ public class StaticService extends Service {
 		getSupportingStatement = spawnDatabase.prepareStatement(GET_SUPPORTING_SQL);
 		spawnableObjects = new HashMap<>();
 		
-		registerForIntent(ObjectCreatedIntent.TYPE);
-	}
-	
-	@Override
-	public void onIntentReceived(Intent i) {
-		switch (i.getType()) {
-			case ObjectCreatedIntent.TYPE:
-				if (i instanceof ObjectCreatedIntent)
-					createSupportingObjects(((ObjectCreatedIntent) i).getObject());
-				break;
-		}
+		registerForIntent(ObjectCreatedIntent.class, oci -> createSupportingObjects(oci.getObject()));
 	}
 	
 	private void createSupportingObjects(SWGObject object) {
@@ -108,7 +98,7 @@ public class StaticService extends Service {
 					}
 				}
 			} catch (SQLException e) {
-				e.printStackTrace();
+				Log.e(this, e);
 			}
 		}
 		return objects;
@@ -142,8 +132,7 @@ public class StaticService extends Service {
 		}
 		
 		private SWGObject createObjectInParent(SWGObject parent) {
-			if (parent == null)
-				return null;
+			Assert.notNull(parent);
 			Location loc = new Location(x, y, z, parent.getTerrain());
 			loc.setHeading(heading);
 			SWGObject obj = ObjectCreator.createObjectFromTemplate(iff);

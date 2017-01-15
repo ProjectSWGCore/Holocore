@@ -27,8 +27,8 @@
  ***********************************************************************************/
 package resources.objects.creature;
 
+import java.util.HashMap;
 import java.util.Map.Entry;
-import java.util.function.BiConsumer;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 import resources.HologramColour;
@@ -460,54 +460,38 @@ class CreatureObjectSharedNP implements Persistable {
 		}
 	}
 	
-	public void forEachBuff(BiConsumer<CRC, Buff> action) {
-		synchronized (buffs) {
-			buffs.forEach(action);
-		}
-	}
-
 	public void putBuff(CRC buffCrc, Buff buff, SWGObject target) {
-		synchronized (buffs) {
-			if(!buffs.containsKey(buffCrc)) {
-				buffs.put(buffCrc, buff);
-				buffs.sendDeltaMessage(target);
-			}
+		if(!buffs.containsKey(buffCrc)) {
+			buffs.put(buffCrc, buff);
+			buffs.sendDeltaMessage(target);
 		}
 	}
 	
 	public Buff removeBuff(CRC buffCrc, SWGObject target) {
-		synchronized (buffs) {
-			Buff removedBuff = buffs.remove(buffCrc);
+		Buff removedBuff = buffs.remove(buffCrc);
 			
-			if (removedBuff != null) {
-				buffs.sendDeltaMessage(target);
-			}
-			
-			return removedBuff;
+		if (removedBuff != null) {
+			buffs.sendDeltaMessage(target);
 		}
+			
+		return removedBuff;
 	}
 	
 	public Stream<Entry<CRC, Buff>> getBuffEntries(Predicate<Entry<CRC, Buff>> predicate) {
-		synchronized (buffs) {
-			return buffs.entrySet().stream()
-					.filter(predicate);
-		}
+		return new HashMap<>(buffs).entrySet().stream()
+				.filter(predicate);
 	}
 	
 	public void adjustBuffStackCount(CRC buffCrc, int adjustment, SWGObject target) {
-		synchronized (buffs) {
-			buffs.get(buffCrc).adjustStackCount(adjustment);
-			buffs.update(buffCrc, target);
-		}
+		buffs.get(buffCrc).adjustStackCount(adjustment);
+		buffs.update(buffCrc, target);
 	}
 	
 	public void setBuffDuration(CRC buffCrc, int playTime, int duration, SWGObject target) {
-		synchronized (buffs) {
-			Buff buff = buffs.get(buffCrc);
-			buff.setEndTime(playTime + duration);
-			buff.setDuration(duration);
-			buffs.update(buffCrc, target);
-		}
+		Buff buff = buffs.get(buffCrc);
+		buff.setEndTime(playTime + duration);
+		buff.setDuration(duration);
+		buffs.update(buffCrc, target);
 	}
 	
 	private void initMaxAttributes() {

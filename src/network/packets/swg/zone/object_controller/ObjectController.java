@@ -106,6 +106,8 @@ public abstract class ObjectController extends SWGPacket {
 			case 0x044D: return new ChangeRoleIconChoice(data);
 			case 0x04BC: return new ShowLootBox(data);
 			case 0x04C5: return new IntendedTarget(data);
+			case 0x00F5: return new MissionListRequest(data);
+			case 0x041C: return new JTLTerminalSharedMessage(data);
 		}
 		Log.w("ObjectController", "Unknown object controller: %08X", crc);
 		return new GenericObjectController(crc, data);

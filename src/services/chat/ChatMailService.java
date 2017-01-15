@@ -54,6 +54,7 @@ import resources.objects.SWGObject;
 import resources.objects.player.PlayerObject;
 import resources.player.Player;
 import resources.server_info.CachedObjectDatabase;
+import resources.server_info.Log;
 import resources.server_info.ObjectDatabase;
 import resources.server_info.RelationalServerData;
 import resources.server_info.RelationalServerFactory;
@@ -129,9 +130,6 @@ public class ChatMailService extends Service {
 	}
 	
 	private void processPacket(GalacticPacketIntent intent) {
-		Player player = intent.getPlayerManager().getPlayerFromNetworkId(intent.getNetworkId());
-		if (player == null)
-			return;
 		Packet p = intent.getPacket();
 		if (!(p instanceof SWGPacket))
 			return;
@@ -141,11 +139,11 @@ public class ChatMailService extends Service {
 			/* Mails */
 			case CHAT_PERSISTENT_MESSAGE_TO_SERVER:
 				if (p instanceof ChatPersistentMessageToServer)
-					handleSendPersistentMessage(intent.getPlayerManager(), player, galaxyName, (ChatPersistentMessageToServer) p);
+					handleSendPersistentMessage(intent.getPlayerManager(), intent.getPlayer(), galaxyName, (ChatPersistentMessageToServer) p);
 				break;
 			case CHAT_REQUEST_PERSISTENT_MESSAGE:
 				if (p instanceof ChatRequestPersistentMessage)
-					handlePersistentMessageRequest(player, galaxyName, (ChatRequestPersistentMessage) p);
+					handlePersistentMessageRequest(intent.getPlayer(), galaxyName, (ChatRequestPersistentMessage) p);
 				break;
 			case CHAT_DELETE_PERSISTENT_MESSAGE:
 				if (p instanceof ChatDeletePersistentMessage)
@@ -186,7 +184,7 @@ public class ChatMailService extends Service {
 			sendPersistentMessage(recipient, mail, MailFlagType.HEADER_ONLY, galaxy);
 			SWGObject sendObj = sender.getCreatureObject();
 			SWGObject recvObj = recipient.getCreatureObject();
-			logChat(sendObj.getObjectId(), sendObj.getName(), recvObj.getObjectId(), recvObj.getName(), mail.getSubject(), mail.getMessage());
+			logChat(sendObj.getObjectId(), sendObj.getObjectName(), recvObj.getObjectId(), recvObj.getObjectName(), mail.getSubject(), mail.getMessage());
 		}
 	}
 	
@@ -294,7 +292,7 @@ public class ChatMailService extends Service {
 				insertChatLog.executeUpdate();
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		}
 	}
 

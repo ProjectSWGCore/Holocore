@@ -29,63 +29,22 @@ package services.network;
 
 import intents.network.OutboundPacketIntent;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicBoolean;
-
 import network.NetworkClient;
-import resources.config.ConfigFile;
+import resources.control.Assert;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.network.TCPServer;
-import utilities.ThreadUtilities;
 
 public class OutboundNetworkManager extends Service {
 	
 	private final ClientManager clientManager;
-	private final Deque<NetworkClient> outboundQueue;
-	private final ExecutorService outboundProcessor;
 	private final PacketSender sender;
-	private final AtomicBoolean running;
-	private final int threadCount;
 	
 	public OutboundNetworkManager(TCPServer server, ClientManager clientManager) {
 		this.sender = new PacketSender(server);
 		this.clientManager = clientManager;
-		threadCount = getConfig(ConfigFile.NETWORK).getInt("PACKET-THREAD-COUNT", 10);
-		outboundQueue = new ArrayDeque<>();
-		outboundProcessor = Executors.newFixedThreadPool(threadCount, ThreadUtilities.newThreadFactory("outbound-packet-processor-%d"));
-		this.running = new AtomicBoolean(false);
 		
 		registerForIntent(OutboundPacketIntent.TYPE);
-	}
-	
-	@Override
-	public boolean initialize() {
-		running.set(true);
-		Runnable processBufferRunnable = () -> processOutboundRunnable();
-		for (int i = 0; i < threadCount; i++) {
-			outboundProcessor.execute(processBufferRunnable);
-		}
-		return super.initialize();
-	}
-	
-	@Override
-	public boolean terminate() {
-		running.set(false);
-		synchronized (outboundQueue) {
-			outboundQueue.notifyAll();
-		}
-		outboundProcessor.shutdown();
-		try {
-			outboundProcessor.awaitTermination(3, TimeUnit.SECONDS);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		return super.terminate();
 	}
 	
 	@Override
@@ -93,13 +52,8 @@ public class OutboundNetworkManager extends Service {
 		if (i instanceof OutboundPacketIntent) {
 			OutboundPacketIntent opi = (OutboundPacketIntent) i;
 			NetworkClient client = clientManager.getClient(opi.getNetworkId());
-			if (client == null)
-				return;
+			Assert.notNull(client);
 			client.addToOutbound(opi.getPacket());
-			synchronized (outboundQueue) {
-				outboundQueue.addLast(client);
-				outboundQueue.notify();
-			}
 		}
 	}
 	
@@ -108,31 +62,7 @@ public class OutboundNetworkManager extends Service {
 	}
 	
 	public void onSessionDestroyed(NetworkClient client) {
-		synchronized (outboundQueue) {
-			outboundQueue.remove(client);
-		}
-	}
-	
-	private void processOutboundRunnable() {
-		try {
-			while (running.get()) {
-				NetworkClient client = null;
-				synchronized (outboundQueue) {
-					try {
-						if (outboundQueue.isEmpty())
-							outboundQueue.wait();
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					client = outboundQueue.pollFirst();
-				}
-				if (client == null)
-					continue;
-				client.processOutbound();
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		
 	}
 	
 }

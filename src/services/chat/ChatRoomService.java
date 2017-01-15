@@ -68,6 +68,7 @@ import resources.chat.ChatResult;
 import resources.chat.ChatRoom;
 import resources.client_info.ServerFactory;
 import resources.client_info.visitors.DatatableData;
+import resources.control.Assert;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.player.PlayerObject;
@@ -90,6 +91,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
 import resources.encodables.OutOfBandPackage;
 
 /**
@@ -155,13 +157,9 @@ public class ChatRoomService extends Service {
 	}
 
 	private void processPacket(GalacticPacketIntent intent) {
-		Player player = intent.getPlayerManager().getPlayerFromNetworkId(intent.getNetworkId());
-		if (player == null)
-			return;
-
 		Packet p = intent.getPacket();
 		if (p instanceof SWGPacket)
-			processSwgPacket(player, (SWGPacket) p);
+			processSwgPacket(intent.getPlayer(), (SWGPacket) p);
 	}
 
 	private void processSwgPacket(Player player, SWGPacket p) {
@@ -220,7 +218,7 @@ public class ChatRoomService extends Service {
 			return;
 
 		switch (intent.getEvent()) {
-			case PE_ZONE_IN_CLIENT:
+			case PE_ZONE_IN_SERVER:
 				enterPlanetaryChatChannels(player);
 				break;
 			case PE_FIRST_ZONE:
@@ -589,7 +587,7 @@ public class ChatRoomService extends Service {
 
 		// Leave old zone-only chat channels
 		String planetEndPath = ".Planet";
-		for (String channel : ghost.getJoinedChannels()) {
+		for (String channel : new ArrayList<>(ghost.getJoinedChannels())) {
 			if (channel.endsWith(planetEndPath)) {
 				leaveChatChannel(player, channel);
 			} else {
@@ -604,9 +602,9 @@ public class ChatRoomService extends Service {
 
 		// Enter the new zone-only chat channels
 		String planetPath = "SWG." + player.getGalaxyName() + "." + terrain.getName() + ".";
-		if (getRoom(planetPath + "Planet") == null)
-			return;
-
+		Assert.notNull(getRoom(planetPath + "Planet"));
+		Assert.notNull(getRoom(planetPath + "system"));
+		
 		enterChatChannel(player, planetPath + "Planet", false);
 		enterChatChannel(player, planetPath + "system", false);
 	}
@@ -868,7 +866,7 @@ public class ChatRoomService extends Service {
 				insertChatLog.executeUpdate();
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		}
 	}
 

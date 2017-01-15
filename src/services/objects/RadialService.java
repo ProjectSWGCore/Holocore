@@ -70,7 +70,7 @@ public class RadialService extends Service {
 			if (p instanceof ObjectMenuRequest) {
 				onRequest(gpi.getObjectManager(), (ObjectMenuRequest) p);
 			} else if (p instanceof ObjectMenuSelect) {
-				onSelection(gpi.getGalacticManager(), gpi.getNetworkId(), (ObjectMenuSelect) p);
+				onSelection(gpi.getGalacticManager(), gpi.getPlayer(), (ObjectMenuSelect) p);
 			}
 		} else if (i instanceof RadialResponseIntent) {
 			onResponse((RadialResponseIntent) i);
@@ -108,8 +108,7 @@ public class RadialService extends Service {
 		sendResponse(player, response.getTarget(), response.getOptions(), response.getCounter());
 	}
 
-	private void onSelection(GalacticManager galacticManager, long networkId, ObjectMenuSelect select) {
-		Player player = galacticManager.getPlayerManager().getPlayerFromNetworkId(networkId);
+	private void onSelection(GalacticManager galacticManager, Player player, ObjectMenuSelect select) {
 		SWGObject target = galacticManager.getObjectManager().getObjectById(select.getObjectId());
 		if (target == null) {
 			Log.e("RadialService", "Selection target [%d] does not exist!", select.getObjectId());

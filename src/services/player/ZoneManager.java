@@ -50,7 +50,6 @@ import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 
 import resources.config.ConfigFile;
-import resources.control.Intent;
 import resources.control.Manager;
 import resources.objects.creature.CreatureMood;
 import resources.objects.player.PlayerObject;
@@ -58,7 +57,6 @@ import resources.objects.waypoint.WaypointObject;
 import resources.objects.waypoint.WaypointObject.WaypointColor;
 import resources.player.Player;
 import resources.player.PlayerEvent;
-import resources.player.PlayerFlags;
 import resources.player.Player.PlayerServer;
 import resources.server_info.Log;
 
@@ -77,24 +75,14 @@ public class ZoneManager extends Manager {
 		
 		addChildService(characterCreationService);
 		
-		registerForIntent(PlayerEventIntent.TYPE);
-		registerForIntent(GalacticPacketIntent.TYPE);
+		registerForIntent(PlayerEventIntent.class, pei -> handlePlayerEventIntent(pei.getPlayer(), pei.getEvent()));
+		registerForIntent(GalacticPacketIntent.class, gpi -> handlePacket(gpi, gpi.getPlayer(), gpi.getPacket()));
 	}
 	
 	@Override
 	public boolean initialize() {
 		loadCommitHistory();
 		return super.initialize();
-	}
-	
-	@Override
-	public void onIntentReceived(Intent i) {
-		if (i instanceof PlayerEventIntent) {
-			handlePlayerEventIntent(((PlayerEventIntent) i).getPlayer(), ((PlayerEventIntent) i).getEvent());
-		} else if (i instanceof GalacticPacketIntent) {
-			GalacticPacketIntent gpi = (GalacticPacketIntent) i;
-			handlePacket(gpi, gpi.getPlayerManager().getPlayerFromNetworkId(gpi.getNetworkId()), gpi.getNetworkId(), gpi.getPacket());
-		}
 	}
 	
 	private void handlePlayerEventIntent(Player player, PlayerEvent event) {
@@ -106,15 +94,14 @@ public class ZoneManager extends Manager {
 				break;
 			case PE_ZONE_IN_SERVER:
 				player.getCreatureObject().setMoodId(CreatureMood.NONE.getMood());
-				player.getPlayerObject().clearFlagBitmask(PlayerFlags.LD);
 				break;
 			default:
 				break;
 		}
 	}
 	
-	private void handlePacket(GalacticIntent intent, Player player, long networkId, Packet p) {
-		characterCreationService.handlePacket(intent, player, networkId, p);
+	private void handlePacket(GalacticIntent intent, Player player, Packet p) {
+		characterCreationService.handlePacket(intent, player, p);
 		if (p instanceof ClientIdMsg)
 			handleClientIdMsg(player, (ClientIdMsg) p);
 		if (p instanceof SetWaypointColor)
@@ -154,7 +141,7 @@ public class ZoneManager extends Manager {
 						commitHistory += "\n";
 				}
 			} catch (GitAPIException e) {
-				e.printStackTrace();
+				Log.e(this, e);
 			}
 		} catch (IOException e) {
 			Log.e(this, "Failed to open %s to read commit history", repoDir);

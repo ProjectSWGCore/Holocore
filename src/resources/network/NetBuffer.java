@@ -36,6 +36,7 @@ import resources.collections.SWGList;
 import resources.collections.SWGMap;
 import resources.collections.SWGSet;
 import resources.encodables.Encodable;
+import resources.server_info.Log;
 import utilities.Encoder.StringType;
 
 
@@ -240,7 +241,7 @@ public class NetBuffer {
 				instance = type.newInstance();
 				((Encodable) instance).decode(data);
 			} catch (InstantiationException | IllegalAccessException e) {
-				e.printStackTrace();
+				Log.e(this, e);
 			}
 
 			return instance;
@@ -263,7 +264,7 @@ public class NetBuffer {
 			instance = type.newInstance();
 			instance.decode(data);
 		} catch (InstantiationException | IllegalAccessException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		}
 
 		return instance;

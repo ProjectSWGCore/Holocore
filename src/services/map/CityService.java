@@ -27,18 +27,19 @@
  ***********************************************************************************/
 package services.map;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Locale;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import intents.PlayerEventIntent;
 import intents.network.GalacticPacketIntent;
 import intents.object.ObjectCreatedIntent;
 import network.packets.Packet;
 import network.packets.swg.zone.object_controller.DataTransform;
-import resources.Location;
-import resources.control.Intent;
+import resources.Terrain;
 import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
@@ -46,33 +47,36 @@ import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
 import resources.player.PlayerEvent;
 import resources.server_info.Log;
-import resources.server_info.RelationalServerData;
+import resources.server_info.RelationalDatabase;
 import resources.server_info.RelationalServerFactory;
 
 public class CityService extends Service {
 	
-	private static final String GET_ALL_CITIES_FROM_TERRAIN = "SELECT * FROM cities WHERE terrain = ?";
-
-	private final RelationalServerData spawnDatabase;
-	private final PreparedStatement getAllCitiesStatement;
+	private static final String GET_ALL_CITIES = "SELECT * FROM cities";
+	
+	private final Map<Terrain, List<City>> cities;
 	
 	public CityService() {
-		spawnDatabase = RelationalServerFactory.getServerData("map/cities.db", "cities");
-		if (spawnDatabase == null)
-			throw new main.ProjectSWG.CoreException("Unable to load sdb files for StaticService");
-		getAllCitiesStatement = spawnDatabase.prepareStatement(GET_ALL_CITIES_FROM_TERRAIN);
+		cities = new HashMap<>();
+		loadCities();
 		
-		registerForIntent(GalacticPacketIntent.TYPE);
-		registerForIntent(PlayerEventIntent.TYPE);
-		registerForIntent(ObjectCreatedIntent.TYPE);
+		registerForIntent(GalacticPacketIntent.class, gpi -> handleGalacticPacketIntent(gpi));
+		registerForIntent(PlayerEventIntent.class, pei -> handlePlayerEventIntent(pei));
+		registerForIntent(ObjectCreatedIntent.class, oci -> handleObjectCreatedIntent(oci));
 	}
 	
-	@Override
-	public void onIntentReceived(Intent i) {
-		switch(i.getType()) {
-			case GalacticPacketIntent.TYPE: handleGalacticPacketIntent((GalacticPacketIntent) i); break;
-			case PlayerEventIntent.TYPE: handlePlayerEventIntent((PlayerEventIntent) i); break;
-			case ObjectCreatedIntent.TYPE: handleObjectCreatedIntent((ObjectCreatedIntent) i); break;
+	private void loadCities() {
+		cities.clear();
+		try (RelationalDatabase db = RelationalServerFactory.getServerData("map/cities.db", "cities")) {
+			try (ResultSet set = db.executeQuery(GET_ALL_CITIES)) {
+				Terrain t = Terrain.getTerrainFromName(set.getString("terrain"));
+				List<City> list = cities.get(t);
+				if (list == null)
+					cities.put(t, list = new ArrayList<>());
+				list.add(new City(set.getString("city"), set.getInt("x"), set.getInt("z"), set.getInt("radius")));
+			}
+		} catch (SQLException e) {
+			Log.e(this, e);
 		}
 	}
 	
@@ -80,19 +84,7 @@ public class CityService extends Service {
 		GalacticPacketIntent gpi = (GalacticPacketIntent) i;
 		Packet p = gpi.getPacket();
 		if (p instanceof DataTransform) {
-			Player player = gpi.getPlayerManager().getPlayerFromNetworkId(gpi.getNetworkId());
-			if (player == null) {
-				Log.e("CityService", "Player is null in GalacticPacketIntent:DataTransform!");
-				return;
-			}
-			CreatureObject creature = player.getCreatureObject();
-			if (creature == null) {
-				Log.e("CityService", "Creature is null in GalacticPacketIntent:DataTransform!");
-				return;
-			}
-			DataTransform transform = (DataTransform) p;
-			Location loc = transform.getLocation();
-			performLocationUpdate(creature, (int) (loc.getX() + 0.5), (int) (loc.getZ() + 0.5));
+			performLocationUpdate(gpi.getPlayer().getCreatureObject());
 		}
 	}
 	
@@ -100,7 +92,7 @@ public class CityService extends Service {
 		Player player = ((PlayerEventIntent) i).getPlayer();
 		CreatureObject creature = player.getCreatureObject();
 		if (((PlayerEventIntent) i).getEvent() == PlayerEvent.PE_ZONE_IN_CLIENT) {
-			performLocationUpdate(creature, (int) (creature.getX() + 0.5), (int) (creature.getZ() + 0.5));
+			performLocationUpdate(creature);
 		}
 	}
 	
@@ -111,45 +103,48 @@ public class CityService extends Service {
 			return;
 		}
 		
-		performLocationUpdate((TangibleObject) object, (int) (object.getX() + 0.5), (int) (object.getZ() + 0.5));
+		performLocationUpdate((TangibleObject) object);
 	}
 	
-	private void performLocationUpdate(TangibleObject object, int locX, int locZ) {
-		String terrain = object.getTerrain().getName().toLowerCase(Locale.US);
-		synchronized (spawnDatabase) {
-			ResultSet set = null;
-			try {
-				getAllCitiesStatement.setString(1, terrain);
-				set = getAllCitiesStatement.executeQuery();
-				while (set.next()) {
-					int x = set.getInt("x");
-					int z = set.getInt("z");
-					int radius = set.getInt("radius");
-					if (distance(locX, locZ, x, z) <= radius) {
-						object.setCurrentCity(set.getString("city"));
-						return;
-					}
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} finally {
-				try {
-					if (set != null)
-						set.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
+	private void performLocationUpdate(TangibleObject object) {
+		List<City> list = cities.get(object.getTerrain());
+		if (list == null)
+			return; // No cities on that planet
+		for (City city : list) {
+			if (city.isWithinRange(object)) {
+				object.setCurrentCity(city.getName());
+				return;
 			}
 		}
 		object.setCurrentCity("");
 	}
 	
-	private double distance(int x1, int z1, int x2, int z2) {
-		return Math.sqrt(square(x1-x2) + square(z1-z2));
-	}
-	
-	private int square(int x) {
-		return x * x;
+	private static class City {
+		
+		private String name;
+		private int x;
+		private int z;
+		private int radius;
+		
+		public City(String name, int x, int z, int radius) {
+			this.name = name;
+			this.x = x;
+			this.z = z;
+			this.radius = radius;
+		}
+		
+		public String getName() {
+			return name;
+		}
+		
+		public boolean isWithinRange(SWGObject obj) {
+			return Math.sqrt(square((int) obj.getX()-x) + square((int) obj.getZ()-z)) <= radius;
+		}
+		
+		private int square(int x) {
+			return x * x;
+		}
+		
 	}
 	
 }

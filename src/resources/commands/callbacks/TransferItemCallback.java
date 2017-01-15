@@ -29,8 +29,8 @@
 package resources.commands.callbacks;
 
 import intents.chat.ChatBroadcastIntent;
-import resources.Race;
 import resources.commands.ICmdCallback;
+import resources.control.Assert;
 import resources.objects.GameObjectType;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
@@ -88,6 +88,9 @@ public class TransferItemCallback implements ICmdCallback {
 			
 			SWGObject appearanceInventory = actor.getSlottedObject("appearance_inventory");
 			
+			Assert.notNull(appearanceInventory);
+			
+			// TODO move check to CommandService. There's an in-combat boolean column in the command table!
 			// You can't equip or unequip non-weapon equipment whilst in combat
 			if (!weapon && actor.isInCombat() && ((newContainer.equals(actor) || oldContainer.equals(actor)) || (newContainer.equals(appearanceInventory) || oldContainer.equals(appearanceInventory)))) {
 				new ChatBroadcastIntent(player, "@base_player:not_while_in_combat").broadcast();
@@ -97,6 +100,15 @@ public class TransferItemCallback implements ICmdCallback {
 			// A container can only be the child of another container if the other container has a larger volume
 			if (newContainer.getContainerType() == 2 && target.getContainerType() == 2 && target.getMaxContainerSize()>= newContainer.getMaxContainerSize()) {
 				new ChatBroadcastIntent(player, "@container_error_message:container12").broadcast();
+				return;
+			}
+			
+			// We can't transfer an item into an appearance-equipped container!
+			SWGObject containerParent = newContainer.getParent();
+			
+			if (containerParent != null && containerParent.equals(appearanceInventory)) {
+				// Don't be fooled - the message below contains no prose keys
+				new ChatBroadcastIntent(player, "@container_error_message:container34_prose").broadcast();
 				return;
 			}
 

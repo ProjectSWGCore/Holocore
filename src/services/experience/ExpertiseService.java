@@ -35,22 +35,20 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 import network.packets.Packet;
 import network.packets.swg.zone.ExpertiseRequestMessage;
-import resources.Location;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
-import resources.player.Player;
 import resources.server_info.Log;
 import resources.server_info.RelationalDatabase;
 import resources.server_info.RelationalServerFactory;
+import resources.sui.SuiButtons;
+import resources.sui.SuiMessageBox;
 
 /**
  *
@@ -189,8 +187,7 @@ public final class ExpertiseService extends Service {
 		}
 		
 		ExpertiseRequestMessage expertiseRequestMessage = (ExpertiseRequestMessage) packet;
-		Player player = gpi.getPlayerManager().getPlayerFromNetworkId(gpi.getNetworkId());
-		CreatureObject creatureObject = player.getCreatureObject();
+		CreatureObject creatureObject = gpi.getPlayer().getCreatureObject();
 		String[] requestedSkills = expertiseRequestMessage.getRequestedSkills();
 
 		for (String requestedSkill : requestedSkills) {
@@ -234,12 +231,16 @@ public final class ExpertiseService extends Service {
 	private void handleLevelChangedIntent(LevelChangedIntent i) {
 		int newLevel = i.getNewLevel();
 		CreatureObject creatureObject = i.getCreatureObject();
-		
-		if (newLevel >= 10) {
+		PlayerObject playerObject = creatureObject.getPlayerObject();
+		short oldLevel = i.getPreviousLevel();
+						
+		if (oldLevel < 10 && newLevel >= 10) {
+			SuiMessageBox window = new SuiMessageBox(SuiButtons.OK, "@expertise_d:sui_expertise_introduction_title",	"@expertise_d:sui_expertise_introduction_body");
+			window.display(playerObject.getOwner());
 			// If we don't add the expertise root skill, the creature can't learn child skills
 			creatureObject.addSkill("expertise");
 		}
-		
+
 		checkExtraAbilities(creatureObject);
 	}
 	

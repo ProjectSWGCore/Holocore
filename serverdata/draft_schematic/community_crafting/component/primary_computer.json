@@ -1,0 +1,127 @@
+{
+    "parent": "object/draft_schematic/base/base_draft_schematic.iff",
+    "category": "CT_miscMission",
+    "itemsPerContainer": 0,
+    "craftedObjectTemplate": "object/tangible/component/structure/primary_computer.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "community_crafting_n",
+                "raw_materials"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_templateGeneric",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "item_n",
+                                "rudic"
+                            ],
+                            "ingredient": "object/tangible/loot/quest/rudic.iff",
+                            "count": 4
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "community_crafting_n",
+                "energy"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_templateGeneric",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "item_n",
+                                "ardanium_ii"
+                            ],
+                            "ingredient": "object/tangible/loot/quest/ardanium_ii.iff",
+                            "count": 3
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "community_crafting_n",
+                "energy_backup"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_templateGeneric",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "item_n",
+                                "wind_crystal"
+                            ],
+                            "ingredient": "object/tangible/loot/quest/wind_crystal.iff",
+                            "count": 3
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": true,
+            "name": [
+                "community_crafting_n",
+                "refactor"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_schematic",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "primary_computer"
+                            ],
+                            "ingredient": "object/draft_schematic/community_crafting/component/primary_computer.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": "-17",
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.community_crafting.component.primary_computer"
+    ],
+    "complexity": 20,
+    "sharedTemplate": "object/draft_schematic/community_crafting/component/shared_primary_computer.iff",
+    "objvars": {
+        "crafting.refactor": "0.1"
+    }
+}

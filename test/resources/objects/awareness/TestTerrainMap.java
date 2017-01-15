@@ -111,7 +111,7 @@ public class TestTerrainMap {
 	@Test
 	public void testTatooine() {
 		ClientBuildoutService buildoutService = new ClientBuildoutService();
-		Collection<SWGObject> allObjects = buildoutService.loadClientObjectsByArea(843); // mos eisley's area id
+		Collection<SWGObject> allObjects = buildoutService.loadClientObjectsByArea(843).values(); // mos eisley's area id
 		List<SWGObject> tatObjects = allObjects.stream().filter((obj) -> {
 			return obj.getTerrain() == Terrain.TATOOINE && obj.getParent() == null;
 		}).collect(Collectors.toList());
@@ -130,7 +130,7 @@ public class TestTerrainMap {
 		map.setCallback(callback);
 		try {
 			map.start();
-			creature.setName("testTatooine");
+			creature.setObjectName("testTatooine");
 			Location creatureLocation = new Location(3500, 5, -4800, Terrain.TATOOINE);
 			for (SWGObject obj : tatObjects) {
 				double range = Math.min(1024*Math.sqrt(2), Math.max(obj.getLoadRange(), creature.getLoadRange()));
@@ -164,7 +164,7 @@ public class TestTerrainMap {
 				timeout--;
 			}
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		}
 	}
 	

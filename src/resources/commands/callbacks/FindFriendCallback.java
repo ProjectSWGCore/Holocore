@@ -79,7 +79,7 @@ public class FindFriendCallback implements ICmdCallback {
 		WaypointObject waypoint = null;
 		for (Map.Entry<Long, WaypointObject> entry : ghost.getWaypoints().entrySet()) {
 			WaypointObject waypointEntry = entry.getValue();
-			if (waypointEntry == null || !waypointEntry.getName().equals(friendName))
+			if (waypointEntry == null || !waypointEntry.getObjectName().equals(friendName))
 				continue;
 
 			waypoint = waypointEntry;

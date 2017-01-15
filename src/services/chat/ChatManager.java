@@ -34,7 +34,6 @@ import intents.chat.ChatBroadcastIntent;
 import intents.chat.PersistentMessageIntent;
 import intents.chat.SpatialChatIntent;
 import intents.network.GalacticPacketIntent;
-import intents.player.ZonePlayerSwapIntent;
 import intents.server.ServerStatusIntent;
 import network.packets.Packet;
 import network.packets.swg.SWGPacket;
@@ -53,6 +52,7 @@ import resources.objects.SWGObject;
 import resources.objects.player.PlayerObject;
 import resources.player.Player;
 import resources.player.PlayerState;
+import resources.server_info.Log;
 import resources.server_info.RelationalServerData;
 import resources.server_info.RelationalServerFactory;
 import services.CoreManager;
@@ -85,7 +85,6 @@ public class ChatManager extends Manager {
 		registerForIntent(ChatBroadcastIntent.TYPE);
 		registerForIntent(ServerStatusIntent.TYPE);
 		registerForIntent(ChatAvatarRequestIntent.TYPE);
-		registerForIntent(ZonePlayerSwapIntent.TYPE);
 	}
 	
 	public void onIntentReceived(Intent i) {
@@ -114,9 +113,6 @@ public class ChatManager extends Manager {
 	}
 
 	private void processPacket(GalacticPacketIntent intent) {
-		Player player = intent.getPlayerManager().getPlayerFromNetworkId(intent.getNetworkId());
-		if (player == null)
-			return;
 		Packet p = intent.getPacket();
 		if (!(p instanceof SWGPacket))
 			return;
@@ -124,7 +120,7 @@ public class ChatManager extends Manager {
 		switch (swg.getPacketType()) {
 			case CHAT_INSTANT_MESSAGE_TO_CHARACTER:
 				if (p instanceof ChatInstantMessageToCharacter)
-					handleInstantMessage(intent.getPlayerManager(), player, (ChatInstantMessageToCharacter) p);
+					handleInstantMessage(intent.getPlayerManager(), intent.getPlayer(), (ChatInstantMessageToCharacter) p);
 				break;
 			default:
 				break;
@@ -461,7 +457,7 @@ public class ChatManager extends Manager {
 				insertChatLog.executeUpdate();
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		}
 	}
 	

@@ -27,7 +27,6 @@
 ***********************************************************************************/
 package services.objects;
 
-import java.util.Collection;
 import java.util.Hashtable;
 import java.util.Map;
 import java.util.concurrent.Executors;
@@ -37,16 +36,16 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import intents.object.DestroyObjectIntent;
 import intents.object.ObjectCreatedIntent;
-import intents.object.ObjectTeleportIntent;
 import intents.RequestZoneInIntent;
 import intents.network.GalacticPacketIntent;
 import network.packets.Packet;
 import network.packets.swg.ErrorMessage;
 import network.packets.swg.zone.insertion.SelectCharacter;
 import network.packets.swg.zone.object_controller.IntendedTarget;
-import resources.control.Intent;
 import resources.control.Manager;
 import resources.objects.SWGObject;
+import resources.objects.building.BuildingObject;
+import resources.objects.cell.CellObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.custom.AIObject;
 import resources.persistable.SWGObjectFactory;
@@ -94,23 +93,23 @@ public class ObjectManager extends Manager {
 		addChildService(clientBuildoutService);
 		addChildService(staticItemService);
 		
-		registerForIntent(GalacticPacketIntent.TYPE);
-		registerForIntent(ObjectTeleportIntent.TYPE);
-		registerForIntent(ObjectCreatedIntent.TYPE);
-		registerForIntent(DestroyObjectIntent.TYPE);
+		registerForIntent(GalacticPacketIntent.class, gpi -> processGalacticPacketIntent(gpi));
+		registerForIntent(ObjectCreatedIntent.class, oci -> processObjectCreatedIntent(oci));
+		registerForIntent(DestroyObjectIntent.class, doi -> processDestroyObjectIntent(doi));
 	}
 	
 	@Override
 	public boolean initialize() {
-		Collection<SWGObject> buildouts = clientBuildoutService.loadClientObjects();
+		synchronized (objectMap) {
+			objectMap.putAll(clientBuildoutService.loadClientObjects());
+		}
 		if (!loadObjects())
 			return false;
-		for (SWGObject obj : buildouts) {
-			putObject(obj);
-			new ObjectCreatedIntent(obj).broadcast();
-		}
 		synchronized (database) {
 			database.traverse((obj) -> loadObject(obj));
+		}
+		synchronized (objectMap) {
+			objectMap.forEach((id, obj) -> new ObjectCreatedIntent(obj).broadcast());
 		}
 		return super.initialize();
 	}
@@ -136,6 +135,10 @@ public class ObjectManager extends Manager {
 		if (obj.getParent() != null) {
 			long id = obj.getParent().getObjectId();
 			SWGObject parent = getObjectById(id);
+			if (obj.getParent() instanceof CellObject && obj.getParent().getParent() != null) {
+				BuildingObject building = (BuildingObject) obj.getParent().getParent();
+				parent = ((BuildingObject) getObjectById(building.getObjectId())).getCellByNumber(((CellObject) obj.getParent()).getNumber());
+			}
 			obj.moveToContainer(parent);
 			if (parent == null)
 				Log.e("ObjectManager", "Parent for %s is null! ParentID: %d", obj, id);
@@ -143,7 +146,7 @@ public class ObjectManager extends Manager {
 	}
 	
 	private void addChildrenObjects(SWGObject obj) {
-		new ObjectCreatedIntent(obj).broadcast();
+		putObject(obj);
 		for (SWGObject child : obj.getSlots().values()) {
 			if (child != null)
 				addChildrenObjects(child);
@@ -185,24 +188,6 @@ public class ObjectManager extends Manager {
 		return super.terminate();
 	}
 	
-	@Override
-	public void onIntentReceived(Intent i) {
-		switch (i.getType()) {
-			case GalacticPacketIntent.TYPE:
-				if (i instanceof GalacticPacketIntent)
-					processGalacticPacketIntent((GalacticPacketIntent) i);
-				break;
-			case ObjectCreatedIntent.TYPE:
-				if (i instanceof ObjectCreatedIntent)
-					processObjectCreatedIntent((ObjectCreatedIntent) i);
-				break;
-			case DestroyObjectIntent.TYPE:
-				if (i instanceof DestroyObjectIntent)
-					processDestroyObjectIntent((DestroyObjectIntent) i);
-				break;
-		}
-	}
-	
 	private void processObjectCreatedIntent(ObjectCreatedIntent intent) {
 		SWGObject obj = intent.getObject();
 		putObject(obj);
@@ -235,11 +220,10 @@ public class ObjectManager extends Manager {
 		if (packet instanceof SelectCharacter) {
 			PlayerManager pm = gpi.getPlayerManager();
 			long characterId = ((SelectCharacter) packet).getCharacterId();
-			zoneInCharacter(pm, gpi.getNetworkId(), characterId);
+			zoneInCharacter(pm, gpi.getPlayer(), characterId);
 		} else if (packet instanceof IntendedTarget) {
 			IntendedTarget intendedTarget = (IntendedTarget) packet;
-			Player player = gpi.getPlayerManager().getPlayerFromNetworkId(gpi.getNetworkId());
-			CreatureObject creatureObject = player.getCreatureObject();
+			CreatureObject creatureObject = gpi.getPlayer().getCreatureObject();
 			long targetId = intendedTarget.getTargetId();
 			
 			creatureObject.setIntendedTargetId(targetId);
@@ -282,12 +266,7 @@ public class ObjectManager extends Manager {
 		return object;
 	}
 	
-	private void zoneInCharacter(PlayerManager playerManager, long netId, long characterId) {
-		Player player = playerManager.getPlayerFromNetworkId(netId);
-		if (player == null) {
-			Log.e("ObjectManager", "Unable to zone in null player '%d'", netId);
-			return;
-		}
+	private void zoneInCharacter(PlayerManager playerManager, Player player, long characterId) {
 		SWGObject creatureObj = getObjectById(characterId);
 		if (creatureObj == null) {
 			Log.e("ObjectManager", "Failed to start zone - CreatureObject could not be fetched from database [Character: %d  User: %s]", characterId, player.getUsername());
@@ -304,7 +283,7 @@ public class ObjectManager extends Manager {
 			sendClientFatal(player, "Failed to zone", "There has been an internal server error: Null Ghost.\nPlease delete your character and create a new one", 10, TimeUnit.SECONDS);
 			return;
 		}
-		new RequestZoneInIntent(player, (CreatureObject) creatureObj, true).broadcast();
+		new RequestZoneInIntent(player, (CreatureObject) creatureObj).broadcast();
 	}
 	
 	private void sendClientFatal(Player player, String title, String message, long timeToRead, TimeUnit time) {

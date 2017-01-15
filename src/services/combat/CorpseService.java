@@ -49,14 +49,12 @@ import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.Future;
 import java.util.stream.Collectors;
-import network.packets.swg.zone.PlayClientEffectObjectMessage;
 import resources.Location;
 import resources.Posture;
 import resources.PvpFaction;
 import resources.PvpStatus;
 import resources.Terrain;
 import resources.client_info.ClientFactory;
-import resources.control.Intent;
 import resources.control.Service;
 import resources.encodables.ProsePackage;
 import resources.encodables.StringId;
@@ -97,10 +95,10 @@ public final class CorpseService extends Service {
 		cloningFacilities = new ArrayList<>();
 		random = new Random();
 		
-		registerForIntent(CreatureKilledIntent.TYPE);
-		registerForIntent(ObjectCreatedIntent.TYPE);
-		registerForIntent(DestroyObjectIntent.TYPE);
-		registerForIntent(PlayerEventIntent.TYPE);
+		registerForIntent(CreatureKilledIntent.class, cki -> handleCreatureKilledIntent(cki));
+		registerForIntent(ObjectCreatedIntent.class, oci -> handleObjectCreatedIntent(oci));
+		registerForIntent(DestroyObjectIntent.class, doi -> handleDestroyObjectIntent(doi));
+		registerForIntent(PlayerEventIntent.class, pei -> handlePlayerEventIntent(pei));
 		
 		loadFacilityData();
 	}
@@ -109,16 +107,6 @@ public final class CorpseService extends Service {
 	public boolean terminate() {
 		executor.shutdown();
 		return super.terminate();
-	}
-	
-	@Override
-	public void onIntentReceived(Intent i) {
-		switch (i.getType()) {
-			case CreatureKilledIntent.TYPE: handleCreatureKilledIntent((CreatureKilledIntent) i); break;
-			case ObjectCreatedIntent.TYPE: handleObjectCreatedIntent((ObjectCreatedIntent) i); break;
-			case DestroyObjectIntent.TYPE: handleDestroyObjectIntent((DestroyObjectIntent) i); break;
-			case PlayerEventIntent.TYPE: handlePlayerEventIntent((PlayerEventIntent) i); break;
-		}
 	}
 	
 	private void loadFacilityData() {
@@ -173,7 +161,7 @@ public final class CorpseService extends Service {
 		
 		if(corpse.isPlayer()) {
 			Player corpseOwner = corpse.getOwner();
-			new ChatBroadcastIntent(corpseOwner, new ProsePackage(new StringId("base_player", "prose_victim_dead"), "TT", i.getKiller().getName())).broadcast();
+			new ChatBroadcastIntent(corpseOwner, new ProsePackage(new StringId("base_player", "prose_victim_dead"), "TT", i.getKiller().getObjectName())).broadcast();
 			new ChatBroadcastIntent(corpseOwner, new ProsePackage(new StringId("base_player", "revive_exp_msg"), "TT", CLONE_TIMER + " minutes.")).broadcast();
 			
 			scheduleCloneTimer(corpse);

@@ -247,7 +247,7 @@ public class EntertainmentService extends Service {
 					}
 				} else {
 					// While this is a valid target for watching, the target is currently not performing.
-					new ChatBroadcastIntent(actorOwner, new ProsePackage(new StringId("performance", "dance_watch_not_dancing"), "TT", creature.getName())).broadcast();
+					new ChatBroadcastIntent(actorOwner, new ProsePackage(new StringId("performance", "dance_watch_not_dancing"), "TT", creature.getObjectName())).broadcast();
 				}
 			} else {
 				// You can't watch NPCs, regardless of whether they're dancing or not
@@ -369,7 +369,7 @@ public class EntertainmentService extends Service {
 
 	private void startWatching(CreatureObject actor, CreatureObject creature) {
 		actor.setMoodAnimation("entertained");
-		new ChatBroadcastIntent(actor.getOwner(), new ProsePackage(new StringId("performance", "dance_watch_self"), "TT", creature.getName())).broadcast();
+		new ChatBroadcastIntent(actor.getOwner(), new ProsePackage(new StringId("performance", "dance_watch_self"), "TT", creature.getObjectName())).broadcast();
 		actor.setPerformanceListenTarget(creature.getObjectId());
 	}
 	private void stopWatching(CreatureObject actor, boolean displaySystemMessage) {

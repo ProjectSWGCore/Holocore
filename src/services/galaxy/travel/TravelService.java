@@ -56,7 +56,6 @@ import resources.TravelPoint;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
 import resources.config.ConfigFile;
-import resources.control.Intent;
 import resources.control.Service;
 import resources.encodables.ProsePackage;
 import resources.encodables.StringId;
@@ -110,11 +109,11 @@ public class TravelService extends Service {
 		loadAllowedRoutesAndPrices();
 		loadTravelPoints();
 		
-		registerForIntent(TravelPointSelectionIntent.TYPE);
-		registerForIntent(GalacticPacketIntent.TYPE);
-		registerForIntent(TicketPurchaseIntent.TYPE);
-		registerForIntent(TicketUseIntent.TYPE);
-		registerForIntent(ObjectCreatedIntent.TYPE);
+		registerForIntent(TravelPointSelectionIntent.class, tpsi -> handlePointSelection(tpsi));
+		registerForIntent(GalacticPacketIntent.class, gpi -> handleTravelPointRequest(gpi));
+		registerForIntent(TicketPurchaseIntent.class, tpi -> handleTicketPurchase(tpi));
+		registerForIntent(TicketUseIntent.class, tui -> handleTicketUse(tui));
+		registerForIntent(ObjectCreatedIntent.class, oci -> handleObjectCreation(oci));
 	}
 	
 	@Override
@@ -132,32 +131,6 @@ public class TravelService extends Service {
 			executor.shutdownNow();
 		
 		return super.stop();
-	}
-	
-	@Override
-	public void onIntentReceived(Intent i) {
-		switch(i.getType()) {
-			case TravelPointSelectionIntent.TYPE:
-				if (i instanceof TravelPointSelectionIntent)
-					handlePointSelection((TravelPointSelectionIntent) i);
-				break;
-			case GalacticPacketIntent.TYPE:
-				if (i instanceof GalacticPacketIntent)
-					handleTravelPointRequest((GalacticPacketIntent) i);
-				break;
-			case TicketPurchaseIntent.TYPE:
-				if (i instanceof TicketPurchaseIntent)
-					handleTicketPurchase((TicketPurchaseIntent) i);
-				break;
-			case TicketUseIntent.TYPE:
-				if (i instanceof TicketUseIntent)
-					handleTicketUse((TicketUseIntent) i);
-				break;
-			case ObjectCreatedIntent.TYPE:
-				if (i instanceof ObjectCreatedIntent)
-					handleObjectCreation((ObjectCreatedIntent) i);
-				break;
-		}
 	}
 	
 	private void createGalaxyTravel(String template, long landTime) {
@@ -221,7 +194,7 @@ public class TravelService extends Service {
 					}
 				} catch (SQLException e) {
 					Log.e("TravelService", String.format("Failed to load a travel point for %s. %s", planetName, e.getLocalizedMessage()));
-					e.printStackTrace();
+					Log.e(this, e);
 					success = false;
 				}
 			}
@@ -300,7 +273,7 @@ public class TravelService extends Service {
 		
 		if (p instanceof PlanetTravelPointListRequest) {
 			PlanetTravelPointListRequest req = (PlanetTravelPointListRequest) p;
-			Player player = i.getPlayerManager().getPlayerFromNetworkId(i.getNetworkId());
+			Player player = i.getPlayer();
 			Location objectLocation = player.getCreatureObject().getWorldLocation();
 			TravelPoint nearest = getNearestTravelPoint(objectLocation);
 			List<TravelPoint> pointsForPlanet = new ArrayList<>();
@@ -412,7 +385,6 @@ public class TravelService extends Service {
 	private void grantTicket(TravelPoint departure, TravelPoint destination, SWGObject receiver) {
 		// Create the ticket object
 		SWGObject ticket = ObjectCreator.createObjectFromTemplate("object/tangible/travel/travel_ticket/base/shared_base_travel_ticket.iff");
-		new ObjectCreatedIntent(ticket).broadcast();
 		
 		// Departure attributes
 		ticket.addAttribute("@obj_attr_n:travel_departure_planet", "@planet_n:" + departure.getLocation().getTerrain().getName());
@@ -423,6 +395,7 @@ public class TravelService extends Service {
 		ticket.addAttribute("@obj_attr_n:travel_arrival_point", destination.getName());
 		
 		ticket.moveToContainer(receiver.getSlottedObject("inventory"));
+		new ObjectCreatedIntent(ticket).broadcast();
 	}
 	
 	private void handleTicketUse(TicketUseIntent i) {
@@ -516,7 +489,7 @@ public class TravelService extends Service {
 			new ChatBroadcastIntent(player, "@travel:wrong_shuttle").broadcast();
 		} else if (distanceToNearestPoint <= TICKET_USE_RADIUS) {
 			// They can use their ticket if they're within range.
-			Log.i(this, "%s/%s is traveling from %s to %s", player.getUsername(), traveler.getName(), nearestPoint.getName(), getDestinationPoint(ticket).getName());
+			Log.i(this, "%s/%s is traveling from %s to %s", player.getUsername(), traveler.getObjectName(), nearestPoint.getName(), getDestinationPoint(ticket).getName());
 			teleportAndDestroyTicket(getDestinationPoint(ticket), ticket, traveler);
 		} else {
 			new ChatBroadcastIntent(player, "@travel:boarding_too_far").broadcast();

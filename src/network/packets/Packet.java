@@ -303,7 +303,7 @@ public class Packet {
 				list.add(instance);
 			}
 		} catch (InstantiationException | IllegalAccessException e) {
-			e.printStackTrace();
+			Log.e("Packet", e);
 		}
 
 		if (size != list.size())
@@ -317,7 +317,7 @@ public class Packet {
 			instance = type.newInstance();
 			instance.decode(bb);
 		} catch (InstantiationException | IllegalAccessException e) {
-			e.printStackTrace();
+			Log.e("Packet", e);
 		}
 
 		return instance;

@@ -35,6 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import main.ProjectSWG.CoreException;
 
 import resources.config.ConfigFile;
 import resources.control.Intent;
@@ -63,8 +64,11 @@ public class DataManager implements IntentReceiver {
 		initializeDatabases();
 		if (getConfig(ConfigFile.PRIMARY).getBoolean(ENABLE_LOGGING, true))
 			Log.start();
-		initialized = localDatabase.isOnline()
-				&& localDatabase.isTable("users");
+		initialized = localDatabase.isOnline();
+		
+		if (!localDatabase.isTable("users") || !localDatabase.isTable("characters")) {
+			throw new CoreException("The database is missing a table!");
+		}
 	}
 	
 	private synchronized void shutdown() {
@@ -87,7 +91,7 @@ public class DataManager implements IntentReceiver {
 				watcher.start();
 				watchers.add(watcher);
 			} catch (IOException e) {
-				e.printStackTrace();
+				Log.e(this, e);
 			}
 		}
 	}
@@ -103,13 +107,13 @@ public class DataManager implements IntentReceiver {
 					Log.e(getClass().getSimpleName(), "Failed to create parent directories for ODB: " + file.getCanonicalPath());
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		}
 		try {
 			if (!file.createNewFile())
 				Log.e(getClass().getSimpleName(), "Failed to create new ODB: " + file.getCanonicalPath());
 		} catch (IOException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		}
 		return file.exists();
 	}

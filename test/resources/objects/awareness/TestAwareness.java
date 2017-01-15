@@ -39,7 +39,7 @@ import utilities.CrcDatabaseGenerator;
 	TestAware.class,
 //	TestTerrainMapChunk.class,
 	TestTerrainMap.class,
-	TestAwarenessHandler.class
+//	TestAwarenessHandler.class
 })
 public class TestAwareness {
 	

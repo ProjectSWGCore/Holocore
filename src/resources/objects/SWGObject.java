@@ -40,6 +40,7 @@ import resources.client_info.visitors.ObjectData.ObjectDataAttribute;
 import resources.common.CRC;
 import resources.containers.ContainerPermissionsType;
 import resources.containers.ContainerResult;
+import resources.control.Assert;
 import resources.encodables.StringId;
 import resources.network.BaselineBuilder;
 import resources.network.BaselineObject;
@@ -47,11 +48,14 @@ import resources.network.NetBuffer;
 import resources.network.NetBufferStream;
 import resources.objects.awareness.ObjectAware;
 import resources.objects.building.BuildingObject;
+import resources.objects.cell.CellObject;
 import resources.objects.creature.CreatureObject;
 import resources.persistable.Persistable;
 import resources.persistable.SWGObjectFactory;
 import resources.player.Player;
 import resources.server_info.Log;
+import resources.server_info.SynchronizedMap;
+import resources.server_info.SynchronizedSet;
 import services.CoreManager;
 import services.objects.ObjectCreator;
 import utilities.AwarenessUtilities;
@@ -69,15 +73,15 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class SWGObject extends BaselineObject implements Comparable<SWGObject>, Persistable {
 	
-	private final long 							objectId;
-	private final Location 						location		= new Location(0, 0, 0, null);
-	private final Location						buildoutLocation= new Location(0, 0, 0, null);
-	private final Set<SWGObject>				containedObjects= new HashSet<>();
-	private final HashMap <String, SWGObject>	slots			= new HashMap<>(); // HashMap used for null value support
-	private final transient Map <String, String>				attributes		= new LinkedHashMap<>();
-	private final transient ObjectAware							awareness		= new ObjectAware(this);
-	private final transient Map <ObjectDataAttribute, Object>	dataAttributes	= new HashMap<>();
-	private final transient AtomicInteger						updateCounter	= new AtomicInteger(1);
+	private final long 								objectId;
+	private final Location 							location		= new Location(0, 0, 0, null);
+	private final Location							buildoutLocation= new Location(0, 0, 0, null);
+	private final Set<SWGObject>					containedObjects= new SynchronizedSet<>();
+	private final Map <String, SWGObject>			slots			= new SynchronizedMap<>();
+	private final Map <String, String>				attributes		= new SynchronizedMap<>(new LinkedHashMap<>());
+	private final ObjectAware						awareness		= new ObjectAware(this);
+	private final Map <ObjectDataAttribute, Object>	dataAttributes	= new SynchronizedMap<>();
+	private final AtomicInteger						updateCounter	= new AtomicInteger(1);
 	
 	private ObjectClassification		classification	= ObjectClassification.GENERATED;
 	private GameObjectType				gameObjectType	= GameObjectType.GOT_NONE;
@@ -166,6 +170,8 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	 * @return {@link ContainerResult}
 	 */
 	public ContainerResult moveToContainer(SWGObject requester, SWGObject container) {
+		if (parent == container) // One could be null, and this is specifically an instance-based check
+			return ContainerResult.SUCCESS;
 		ContainerResult result = moveToContainerChecks(requester, container);
 		if (result != ContainerResult.SUCCESS)
 			return result;
@@ -189,7 +195,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		long newId = (container != null) ? container.getObjectId() : 0;
 		UpdateContainmentMessage update = new UpdateContainmentMessage(getObjectId(), newId, getSlotArrangement());
 		AwarenessUtilities.callForSameObserver(oldObservers, newObservers, (observer) -> observer.sendPacket(update));
-		AwarenessUtilities.callForNewObserver(oldObservers, newObservers, (observer) -> createObject(observer, false));
+		AwarenessUtilities.callForNewObserver(oldObservers, newObservers, (observer) -> createObject(observer));
 		AwarenessUtilities.callForOldObserver(oldObservers, newObservers, (observer) -> destroyObject(observer));
 		new ContainerTransferIntent(this, container).broadcast();
 		return ContainerResult.SUCCESS;
@@ -304,17 +310,8 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	public void setLocation(Location l) {
-		if (l == null)
-			return;
 		synchronized (location) {
 			buildoutLocation.mergeWith(l);
-			updateBuildoutLocation();
-		}
-	}
-	
-	public void setLocation(double x, double y, double z) {
-		synchronized (location) {
-			buildoutLocation.mergeLocation(x, y, z);
 			updateBuildoutLocation();
 		}
 	}
@@ -340,7 +337,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		this.crc = CRC.getCrc(template);
 	}
 	
-	public void setName(String name) {
+	public void setObjectName(String name) {
 		this.objectName = name;
 	}
 	
@@ -457,7 +454,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		return location.getTerrain();
 	}
 	
-	public String getName() {
+	public String getObjectName() {
 		return objectName;
 	}
 	
@@ -642,45 +639,38 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	private final void sendSceneDestroyObject(Player target) {
-		SceneDestroyObject destroy = new SceneDestroyObject();
-		destroy.setObjectId(objectId);
-		target.sendPacket(destroy);
+		target.sendPacket(new SceneDestroyObject(objectId));
 	}
 	
 	public void createObject(SWGObject target) {
-		createObject(target, false);
-	}
-	
-	public void createObject(SWGObject target, boolean ignoreSnapshotChecks) {
-		if (target == null)
-			return;
-		Set<Player> observers = target.getAwareness().getChildObservers();
+		Assert.notNull(target);
 		if (target.getOwnerShallow() != null)
-			observers.add(target.getOwnerShallow());
-		for (Player observer : observers) {
-			createObject(observer, ignoreSnapshotChecks);
+			createObject(target.getOwnerShallow());
+		for (Player observer : target.getAwareness().getChildObservers()) {
+			createObject(observer);
 		}
 	}
 	
-	public void createObject(Player target, boolean ignoreSnapshotChecks) {
+	public void createObject(Player target) {
+		Assert.notNull(target);
 		if (!isVisible(target.getCreatureObject())) {
 			return;
 		}
 		
-		sendSceneCreateObject(target);
-		sendBaselines(target);
-		createChildrenObjects(target, ignoreSnapshotChecks);
-		sendFinalBaselinePackets(target);
-		target.sendPacket(new SceneEndBaselines(getObjectId()));
+		synchronized (target.getSendingLock()) {
+			sendSceneCreateObject(target);
+			sendBaselines(target);
+			createChildrenObjects(target);
+			sendFinalBaselinePackets(target);
+			target.sendPacket(new SceneEndBaselines(getObjectId()));
+		}
 	}
 	
 	public void destroyObject(SWGObject target) {
-		if (isSnapshot() || target == null)
-			return;
-		Set<Player> observers = target.getAwareness().getChildObservers();
+		Assert.notNull(target);
 		if (target.getOwnerShallow() != null)
-			observers.add(target.getOwnerShallow());
-		for (Player observer : observers) {
+			destroyObject(target.getOwnerShallow());
+		for (Player observer : target.getAwareness().getChildObservers()) {
 			destroyObject(observer);
 		}
 	}
@@ -818,33 +808,21 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		}
 	}
 	
-	protected void createChildrenObjects(Player target) {
-		createChildrenObjects(target, false);
-	}
-	
-	private void createChildrenObjects(Player target, boolean ignoreSnapshotChecks) {
-		synchronized (slots) {
-			if (slots.size() == 0 && containedObjects.size() == 0)
-				return;
-		}
-
-		// First create the objects in the slots
+	private void createChildrenObjects(Player target) {
 		synchronized (slots) {
 			for (SWGObject slotObject : slots.values()) {
 				if (slotObject != null) {
-					slotObject.createObject(target, ignoreSnapshotChecks);
+					slotObject.createObject(target);
 				}
 			}
 		}
 		
-		// Now create the contained objects
 		synchronized (containedObjects) {
 			for (SWGObject containedObject : containedObjects) {
-				if (containedObject != null) {
-					if (containedObject instanceof CreatureObject && ((CreatureObject) containedObject).isLoggedOutPlayer())
-						continue; // If it's a player, but that's logged out
-					containedObject.createObject(target, ignoreSnapshotChecks);
-				}
+				Assert.notNull(containedObject);
+				if (containedObject instanceof CreatureObject && ((CreatureObject) containedObject).isLoggedOutPlayer())
+					continue; // If it's a player, but that's logged out
+				containedObject.createObject(target);
 			}
 		}
 	}
@@ -933,12 +911,21 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	@Override
 	public void save(NetBufferStream stream) {
-		stream.addByte(3);
+		stream.addByte(4);
 		location.save(stream);
 		buildoutLocation.save(stream);
-		stream.addBoolean(parent != null && parent.getClassification() != ObjectClassification.GENERATED);
-		if (parent != null && parent.getClassification() != ObjectClassification.GENERATED)
-			SWGObjectFactory.save(ObjectCreator.createObjectFromTemplate(parent.getObjectId(), parent.getTemplate()), stream);
+		boolean hasParent = parent != null;
+		boolean hasGrandparent = hasParent && parent.getParent() instanceof BuildingObject && parent instanceof CellObject;
+		stream.addBoolean(hasParent);
+		if (hasParent) {
+			SWGObject written = parent;
+			if (hasGrandparent)
+				written = parent.getParent();
+			SWGObjectFactory.save(ObjectCreator.createObjectFromTemplate(written.getObjectId(), written.getTemplate()), stream);
+			stream.addBoolean(hasGrandparent);
+			if (hasGrandparent)
+				stream.addInt(((CellObject) parent).getNumber());
+		}
 		stream.addAscii(permissions.name());
 		stream.addAscii(classification.name());
 		stream.addUnicode(objectName);
@@ -965,6 +952,9 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	public void read(NetBufferStream stream) {
 		switch(stream.getByte()) {
+			case 4:
+				readVersion4(stream);
+				break;
 			case 3:
 				readVersion3(stream);
 				break;
@@ -978,6 +968,29 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 				readVersion0(stream);
 				break;
 		}
+	}
+	
+	private void readVersion4(NetBufferStream stream) {
+		location.read(stream);
+		buildoutLocation.read(stream);
+		if (stream.getBoolean()) {
+			parent = SWGObjectFactory.create(stream);
+			if (stream.getBoolean()) {
+				CellObject cell = (CellObject) ObjectCreator.createObjectFromTemplate("object/cell/shared_cell.iff");
+				cell.setNumber(stream.getInt());
+				parent.addObject(cell);
+				parent = cell;
+			}
+		}
+		permissions = ContainerPermissionsType.valueOf(stream.getAscii());
+		classification = ObjectClassification.valueOf(stream.getAscii());
+		objectName = stream.getUnicode();
+		stringId.read(stream);
+		detailStringId.read(stream);
+		complexity = stream.getFloat();
+		prefLoadRange = stream.getFloat();
+		stream.getList((i) -> attributes.put(stream.getAscii(), stream.getAscii()));
+		stream.getList((i) -> SWGObjectFactory.create(stream).moveToContainer(this));
 	}
 	
 	private void readVersion3(NetBufferStream stream) {

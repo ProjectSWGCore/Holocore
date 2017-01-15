@@ -100,7 +100,7 @@ public final class ObjectCreator {
 		try {
 			obj = c.getConstructor(Long.TYPE).newInstance(objectId);
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
-			e.printStackTrace();
+			Log.e("ObjectCreator", e);
 			obj = null;
 		}
 		if (obj == null)

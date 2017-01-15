@@ -387,11 +387,12 @@ public class PlayerObject extends IntangibleObject {
 		this.startPlayTime = startPlayTime;
 	}
 	
-	public void createChildrenObjects(Player target) {
+	@Override
+	public void sendFinalBaselinePackets(Player target) {
+		super.sendFinalBaselinePackets(target);
 		SWGObject parent = getParent();
 		if (parent != null && parent instanceof CreatureObject)
 			target.sendPacket(new UpdatePostureMessage(((CreatureObject)parent).getPosture().getId(), getObjectId()));
-		super.createChildrenObjects(target);
 	}
 	
 	public void createBaseline3(Player target, BaselineBuilder bb) {

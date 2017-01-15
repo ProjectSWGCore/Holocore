@@ -39,21 +39,18 @@ import utilities.IntentChain;
 public class Player implements Comparable<Player> {
 	
 	private final IntentChain packetChain;
-	private Service playerManager;
+	private final Service playerManager;
+	private final Object sendingLock;
+	private final long networkId;
 	
-	private long networkId;
-	private PlayerState state		= PlayerState.DISCONNECTED;
-	
-	private String username			= "";
-	private int userId				= 0;
-	private byte [] sessionToken	= new byte[0];
-	private int connectionId		= 0;
-	private AccessLevel accessLevel	= AccessLevel.PLAYER;
-	private PlayerServer server		= PlayerServer.NONE;
-	
-	private String galaxyName		= "";
-	private CreatureObject creatureObject= null;
-	private long lastInboundMessage	= 0;
+	private String			username			= "";
+	private String			galaxyName			= "";
+	private AccessLevel		accessLevel			= AccessLevel.PLAYER;
+	private PlayerServer	server				= PlayerServer.NONE;
+	private PlayerState		state				= PlayerState.DISCONNECTED;
+	private CreatureObject	creatureObject		= null;
+	private long			lastInboundMessage	= 0;
+	private int				userId				= 0;
 	
 	public Player() {
 		this(null, 0);
@@ -62,19 +59,12 @@ public class Player implements Comparable<Player> {
 	public Player(Service playerManager, long networkId) {
 		this.packetChain = new IntentChain();
 		this.playerManager = playerManager;
-		setNetworkId(networkId);
+		this.sendingLock = new Object();
+		this.networkId = networkId;
 	}
 
 	public PlayerManager getPlayerManager() {
 		return (PlayerManager) playerManager;
-	}
-
-	public void setPlayerManager(Service playerManager) {
-		this.playerManager = playerManager;
-	}
-
-	public void setNetworkId(long networkId) {
-		this.networkId = networkId;
 	}
 	
 	public void setPlayerState(PlayerState state) {
@@ -91,14 +81,6 @@ public class Player implements Comparable<Player> {
 	
 	public void setUserId(int userId) {
 		this.userId = userId;
-	}
-	
-	public void setConnectionId(int connId) {
-		this.connectionId = connId;
-	}
-	
-	public void setSessionToken(byte [] sessionToken) {
-		this.sessionToken = sessionToken;
 	}
 	
 	public void setAccessLevel(AccessLevel accessLevel) {
@@ -139,20 +121,12 @@ public class Player implements Comparable<Player> {
 	
 	public String getCharacterName() {
 		if (creatureObject != null)
-			return creatureObject.getName();
+			return creatureObject.getObjectName();
 		return "";
 	}
 	
 	public int getUserId() {
 		return userId;
-	}
-	
-	public int getConnectionId() {
-		return connectionId;
-	}
-	
-	public byte [] getSessionToken() {
-		return sessionToken;
 	}
 	
 	public AccessLevel getAccessLevel() {
@@ -180,9 +154,15 @@ public class Player implements Comparable<Player> {
 		return (System.nanoTime()-lastInboundMessage)/1E6;
 	}
 	
+	public Object getSendingLock() {
+		return sendingLock;
+	}
+	
 	public void sendPacket(Packet ... packets) {
-		for (Packet p : packets) {
-			packetChain.broadcastAfter(new OutboundPacketIntent(p, networkId));
+		synchronized (getSendingLock()) {
+			for (Packet p : packets) {
+				packetChain.broadcastAfter(new OutboundPacketIntent(p, networkId));
+			}
 		}
 	}
 	
@@ -190,7 +170,7 @@ public class Player implements Comparable<Player> {
 	public String toString() {
 		String str = "Player[";
 		str += "ID=" + userId + " / " + (creatureObject==null?"null":creatureObject.getObjectId());
-		str += " NAME=" + username + " / " + (creatureObject==null?"null":creatureObject.getName());
+		str += " NAME=" + username + " / " + (creatureObject==null?"null":creatureObject.getObjectName());
 		str += " STATE=" + state;
 		return str + "]";
 	}

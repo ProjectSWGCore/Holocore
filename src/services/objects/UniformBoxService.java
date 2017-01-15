@@ -29,20 +29,24 @@ package services.objects;
 
 
 import intents.object.CreateStaticItemIntent;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import intents.object.DestroyObjectIntent;
 import intents.radial.RadialSelectionIntent;
+
 import java.util.ArrayList;
 import java.util.Collection;
+
 import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
 import resources.radial.RadialItem;
+import resources.server_info.Log;
 import resources.server_info.RelationalServerData;
 import resources.server_info.RelationalServerFactory;
 
@@ -105,7 +109,7 @@ public class UniformBoxService extends Service {
 						createItems(set, creature, inventory);
 				}
 			} catch (SQLException e) {
-				e.printStackTrace();
+				Log.e(this, e);
 			}
 		}
 	}

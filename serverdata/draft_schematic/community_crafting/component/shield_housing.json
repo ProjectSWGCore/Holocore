@@ -1,0 +1,70 @@
+{
+    "parent": "object/draft_schematic/base/base_draft_schematic.iff",
+    "category": "CT_miscMission",
+    "itemsPerContainer": 0,
+    "craftedObjectTemplate": "object/tangible/component/structure/shield_housing.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "community_crafting_n",
+                "shell"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_templateGeneric",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "item_n",
+                                "endrine"
+                            ],
+                            "ingredient": "object/tangible/loot/quest/endrine.iff",
+                            "count": 6
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "community_crafting_n",
+                "reinforcement"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_templateGeneric",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "item_n",
+                                "rudic"
+                            ],
+                            "ingredient": "object/tangible/loot/quest/rudic.iff",
+                            "count": 4
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.community_crafting.component.shield_housing"
+    ],
+    "complexity": 10,
+    "sharedTemplate": "object/draft_schematic/community_crafting/component/shared_shield_housing.iff"
+}

@@ -38,14 +38,12 @@ import intents.SkillModIntent;
 import intents.combat.CreatureKilledIntent;
 import java.io.FileNotFoundException;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import network.packets.swg.zone.PlayClientEffectObjectMessage;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
@@ -112,10 +110,10 @@ public class BuffService extends Service {
 	private void checkBuffTimers() {
 		synchronized (monitored) {
 			monitored.forEach((CreatureObject creature) -> {
-				Stream<Entry<CRC, Buff>> stream = creature.getBuffEntries(buffEntry -> isBuffExpired(buffEntry.getValue()));
-				Set<Entry<CRC, Buff>>  toRemove = stream.collect(Collectors.toSet());
-				
-				toRemove.forEach(buffEntry -> removeBuff(creature, buffEntry.getKey(), true));
+				creature.getBuffEntries(buffEntry -> isBuffExpired(buffEntry.getValue()))
+						.map(entry -> entry.getKey())
+						.collect(Collectors.toSet())
+						.forEach(buff -> removeBuff(creature, buff, true));
 			});
 		}
 	}
@@ -216,7 +214,9 @@ public class BuffService extends Service {
 			} else {
 				// PvE death - remove certain buffs
 				corpse.getBuffEntries(buffEntry -> isBuffRemovedOnDeath(buffEntry.getKey()))
-					.forEach(buffEntry -> removeBuff(corpse, buffEntry.getKey(), true));
+					.map(entry -> entry.getKey())
+					.collect(Collectors.toSet())
+					.forEach(buff -> removeBuff(corpse, buff, true));
 			}
 		}
 	}
@@ -226,7 +226,9 @@ public class BuffService extends Service {
 			if (monitored.remove(creature)) {
 				// Buffs that aren't persistable should be removed at this point
 				creature.getBuffEntries(buffEntry -> !isBuffPersistent(buffEntry.getKey()))
-						.forEach(buffEntry ->  removeBuff(creature, buffEntry.getKey(), true));
+						.map(entry -> entry.getKey())
+						.collect(Collectors.toSet())
+						.forEach(buff -> removeBuff(creature, buff, true));
 			}
 		}
 	}

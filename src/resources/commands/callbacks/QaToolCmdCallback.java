@@ -170,7 +170,7 @@ public class QaToolCmdCallback implements ICmdCallback {
 		SuiMessageBox inputBox = new SuiMessageBox(SuiButtons.OK_CANCEL, "Force Delete?", "Are you sure you want to delete this object?");
 		inputBox.addOkButtonCallback("handleDeleteObject", (caller, actor, event, parameters) -> {
 			if (target instanceof CreatureObject && ((CreatureObject) target).isPlayer()) {
-				Log.i("QA", "[%s] Requested deletion of character: %s", player.getUsername(), target.getName());
+				Log.i("QA", "[%s] Requested deletion of character: %s", player.getUsername(), target.getObjectName());
 				new DeleteCharacterIntent((CreatureObject) target).broadcast();
 				Player owner = target.getOwner();
 				if (owner != null)
@@ -203,18 +203,14 @@ public class QaToolCmdCallback implements ICmdCallback {
 	}
 	
 	private void recoverPlayer(ObjectManager objManager, PlayerManager playerManager, Player player, String name, String loc) {
-		long id = playerManager.getCharacterIdByName(name);
-		if (id == 0) {
-			sendSystemMessage(player, "Could not find player by name: '" + name + "'");
-			return;
-		}
-		SWGObject recoveree = objManager.getObjectById(id);
+		Player recoveree = playerManager.getPlayerByCreatureFirstName(name);
+		
 		if (recoveree == null) {
-			sendSystemMessage(player, "Could not find player by name: " + name);
-			sendSystemMessage(player, "Internal Error. Recoveree is null! ID: " + id);
+			sendSystemMessage(player, "Could not find player by first name: '" + name + "'");
 			return;
 		}
-		sendSystemMessage(player, teleportToRecoveryLocation(objManager, recoveree, loc));
+		
+		sendSystemMessage(player, teleportToRecoveryLocation(objManager, recoveree.getCreatureObject(), loc));
 	}
 	
 	private String teleportToRecoveryLocation(ObjectManager objManager, SWGObject obj, String loc) {
@@ -225,7 +221,7 @@ public class QaToolCmdCallback implements ICmdCallback {
 					return "No such location found: " + loc;
 				return teleportToRecovery(objManager, obj, loc, set);
 			} catch (SQLException e) {
-				e.printStackTrace();
+				Log.e(this, e);
 				return "Exception thrown. Failed to teleport: [" + e.getErrorCode() + "] " + e.getMessage();
 			}
 		}
@@ -239,7 +235,7 @@ public class QaToolCmdCallback implements ICmdCallback {
 			new ObjectTeleportIntent(obj, l).broadcast();
 		else
 			return teleportToRecoveryBuilding(objManager, obj, set.getLong("object_id"), set.getString("cell"), l);
-		return "Sucessfully teleported " + obj.getName() + " to " + loc;
+		return "Sucessfully teleported " + obj.getObjectName() + " to " + loc;
 	}
 	
 	private String teleportToRecoveryBuilding(ObjectManager objManager, SWGObject obj, long buildingId, String cellName, Location l) {
@@ -256,7 +252,7 @@ public class QaToolCmdCallback implements ICmdCallback {
 			return err;
 		}
 		new ObjectTeleportIntent(obj, cell, l).broadcast();
-		return "Successfully teleported " + obj.getName() + " to " + buildingId + "/" + cellName + " " + l;
+		return "Successfully teleported " + obj.getObjectName() + " to " + buildingId + "/" + cellName + " " + l;
 	}
 	
 	private void displayHelp(Player player) {

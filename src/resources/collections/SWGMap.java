@@ -31,34 +31,28 @@ import resources.encodables.Encodable;
 import resources.network.NetBuffer;
 import resources.objects.SWGObject;
 import resources.server_info.Log;
+import resources.server_info.SynchronizedMap;
 import utilities.Encoder;
 import utilities.Encoder.StringType;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import network.packets.Packet;
 
-public class SWGMap<K, V> extends HashMap<K, V> implements Encodable, Serializable {
-	
-	private static final long serialVersionUID = 2L;
+public class SWGMap<K, V> extends SynchronizedMap<K, V> implements Encodable {
 	
 	private final int view;
 	private final int updateType;
 	private final StringType strType;
+	private final AtomicInteger updateCount;
+	private final Map<Object, byte[]> deltas;
+	private final Map<Object, byte[]> data;
 	
-	private transient Object updateMutex;
-	private transient AtomicInteger updateCount;
-	private transient Map<Object, byte[]> deltas;
-	private transient Map<Object, byte[]> data;
-	private transient int deltaSize;
-	private transient int dataSize;
+	private int deltaSize;
+	private int dataSize;
 	
 	public SWGMap(int view, int updateType) {
 		this(view, updateType, StringType.UNSPECIFIED);
@@ -68,26 +62,11 @@ public class SWGMap<K, V> extends HashMap<K, V> implements Encodable, Serializab
 		this.view = view;
 		this.updateType = updateType;
 		this.strType = strType;
-		this.updateMutex = new Object();
 		this.updateCount = new AtomicInteger(0);
-		this.deltas = new HashMap<>();
-		this.data = new HashMap<>();
+		this.deltas = new SynchronizedMap<>();
+		this.data = new SynchronizedMap<>();
 		this.deltaSize = 0;
 		this.dataSize = 0;
-	}
-	
-	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
-		ois.defaultReadObject();
-		updateMutex = new Object();
-		updateCount = new AtomicInteger(0);
-		deltas = new HashMap<>();
-		data = new HashMap<>();
-		deltaSize = 0;
-		dataSize = 0;
-		for (Entry<K, V> e : entrySet()) {
-			addData(e.getKey(), e.getValue(), (byte) 0);
-		}
-		clearDeltaQueue();
 	}
 	
 	public void resetUpdateCount() {
@@ -101,10 +80,7 @@ public class SWGMap<K, V> extends HashMap<K, V> implements Encodable, Serializab
 	
 	@Override
 	public V put(K key, V value) {
-		V old;
-		synchronized (updateMutex) {
-			old = super.put(key, value);
-		}
+		V old = super.put(key, value);
 		updateCount.incrementAndGet();
 		if (old != null) {
 			removeData(key);
@@ -116,10 +92,7 @@ public class SWGMap<K, V> extends HashMap<K, V> implements Encodable, Serializab
 	
 	@Override
 	public V remove(Object key) {
-		V old;
-		synchronized (updateMutex) {
-			old = super.remove(key);
-		}
+		V old = super.remove(key);
 		updateCount.incrementAndGet();
 		removeData(key);
 		
@@ -178,7 +151,7 @@ public class SWGMap<K, V> extends HashMap<K, V> implements Encodable, Serializab
 				put((K) buffer.getString(keyType), (V) buffer.getString(valType));
 			}
 		} catch (ClassCastException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		}
 		clearDeltaQueue();
 	}
@@ -200,7 +173,7 @@ public class SWGMap<K, V> extends HashMap<K, V> implements Encodable, Serializab
 					Log.e("SWGMap", "Unable to parse: key=%s  value=%s", key, value);
 			}
 		} catch (ClassCastException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		}
 		clearDeltaQueue();
 	}

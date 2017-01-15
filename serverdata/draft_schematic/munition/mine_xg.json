@@ -1,0 +1,148 @@
+{
+    "parent": "object/draft_schematic/munition/base_munition.iff",
+    "itemsPerContainer": 25,
+    "craftedObjectTemplate": "object/weapon/mine/wp_mine_xg.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_munition_ingredients_n",
+                "weapon_casing"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_munition_ingredients_n",
+                                "weapon_casing"
+                            ],
+                            "ingredient": "metal",
+                            "count": 8
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_munition_ingredients_n",
+                "load_bearing_frame"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_munition_ingredients_n",
+                                "load_bearing_frame"
+                            ],
+                            "ingredient": "steel",
+                            "count": 3
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_munition_ingredients_n",
+                "activation_panel"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_munition_ingredients_n",
+                                "activation_panel"
+                            ],
+                            "ingredient": "chemical",
+                            "count": 2
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_munition_ingredients_n",
+                "warhead_assembly"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_munition_ingredients_n",
+                                "warhead_assembly"
+                            ],
+                            "ingredient": "object/tangible/component/munition/warhead_light.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_munition_ingredients_n",
+                "warhead_fusing"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_munition_ingredients_n",
+                                "warhead_fusing"
+                            ],
+                            "ingredient": "object/tangible/component/munition/warhead_fusing_mechanism.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "manufactureScripts": [
+        "systems.crafting.munition.specific_item.crafting_mine_munition"
+    ],
+    "complexity": 20,
+    "sharedTemplate": "object/draft_schematic/munition/shared_mine_xg.iff",
+    "volume": 2
+}

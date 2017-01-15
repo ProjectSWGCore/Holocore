@@ -31,21 +31,18 @@ import intents.SkillModIntent;
 import intents.experience.GrantSkillIntent;
 import intents.network.GalacticPacketIntent;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-
-import java.util.stream.Collectors;
 import network.packets.Packet;
 import network.packets.swg.zone.object_controller.ChangeRoleIconChoice;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
+import resources.control.Assert;
 import resources.control.Intent;
 import resources.control.Manager;
 import resources.objects.creature.CreatureObject;
-import resources.objects.player.PlayerObject;
 import resources.server_info.Log;
 
 /**
@@ -140,7 +137,7 @@ public final class SkillManager extends Manager {
 	}
 	
 	private void handleGrantSkillIntent(GrantSkillIntent intent) {
-		if (intent.getIntentType() == GrantSkillIntent.IntentType.GIVEN) {
+		if (intent.getIntentType() != GrantSkillIntent.IntentType.GRANT) {
 			return;
 		}
 		
@@ -156,7 +153,7 @@ public final class SkillManager extends Manager {
 			Log.i(this, "%s lacks required skill %s before being granted skill %s", target, parentSkillName, skillName);
 			return;
 		}
-
+		
 		grantSkill(skillData, skillName, target);
 	}
 	
@@ -164,25 +161,24 @@ public final class SkillManager extends Manager {
 		Packet packet = gpi.getPacket();
 		if (packet instanceof ChangeRoleIconChoice) {
 			ChangeRoleIconChoice iconChoice = (ChangeRoleIconChoice) packet;
-			int chosenIcon = iconChoice.getIconChoice();
-			CreatureObject creatureObject = gpi.getPlayerManager().getPlayerFromNetworkId(gpi.getNetworkId()).getCreatureObject();
-			
-			changeRoleIcon(creatureObject, chosenIcon);
+			changeRoleIcon(gpi.getPlayer().getCreatureObject(), iconChoice.getIconChoice());
 		}
 	}
 	
 	private boolean hasRequiredSkills(SkillData skillData, CreatureObject creatureObject) {
 		String[] requiredSkills = skillData.getRequiredSkills();
-		
-		if (requiredSkills == null) {
+		if (requiredSkills == null)
 			return true;
-		}
 		
-		return creatureObject.getSkills().containsAll(Arrays.stream(requiredSkills).collect(Collectors.toSet()));
+		for (String required : requiredSkills) {
+			if (!creatureObject.hasSkill(required))
+				return false;
+		}
+		return true;
 	}
 	
 	private void grantParentSkills(SkillData skillData, String parentSkill, CreatureObject target) {
-		if (skillData == null || parentSkill.isEmpty()) {
+		if (skillData == null || parentSkill.isEmpty() || target.hasSkill(parentSkill)) {
 			return;
 		}
 		
@@ -193,53 +189,36 @@ public final class SkillManager extends Manager {
 	
 	private void grantRequiredSkills(SkillData skillData, CreatureObject target) {
 		String[] requiredSkills = skillData.getRequiredSkills();
-		
-		if (requiredSkills == null) {
+		if (requiredSkills == null)
 			return;
-		}
 		
-		for (String requiredSkill : requiredSkills)
-			target.addSkill(requiredSkill);
+		target.addSkill(requiredSkills);
 	}
 	
 	private void grantSkill(SkillData skillData, String skillName, CreatureObject target) {
-		if (!target.addSkill(skillName)) {
-			return;
-		}
-		
-		for(String commandName : skillData.getCommands()) {
-			target.addAbility(commandName);
-		}
+		target.addSkill(skillName);
+		target.addAbility(skillData.getCommands());
 		
 		skillData.getSkillMods().forEach((skillModName, skillModValue) -> new SkillModIntent(skillModName, 0, skillModValue, target).broadcast());
 		
-		// Ziggy: These are disabled for now, since we don't have the structs in place for it.
-//		for(String schematic : skillData.schematics) {
-			// Add schematic to PlayerObject
-//		}
-
 		new GrantSkillIntent(GrantSkillIntent.IntentType.GIVEN, skillName, target, false).broadcast();
 	}
 	
 	private void changeRoleIcon(CreatureObject creature, int chosenIcon) {
 		Set<String> qualifyingSkills = roleIconMap.get(chosenIcon);
-		
-		if (qualifyingSkills != null) {
-			for(String qualifyingSkill : qualifyingSkills) {
-				if (creature.hasSkill(qualifyingSkill)) {
-					PlayerObject playerObject = creature.getPlayerObject();
-
-					if(playerObject != null) {
-						playerObject.setProfessionIcon(chosenIcon);
-						break;
-					} else {
-						Log.e(this, "Could not alter role icon for PlayerObject of %s because it has none attached" , creature);
-					}
-				}
-			}
-		} else {
+		if (qualifyingSkills == null) {
 			Log.w(this, "%s tried to use undefined role icon %d", creature, chosenIcon);
+			return;
 		}
+		Assert.notNull(creature.getPlayerObject());
+		
+		for (String qualifyingSkill : qualifyingSkills) {
+			if (creature.hasSkill(qualifyingSkill)) {
+				creature.getPlayerObject().setProfessionIcon(chosenIcon);
+				return;
+			}
+		}
+		Log.e(this, "%s could not be given role icon %d - does not have qualifying skill! Qualifying: %s", creature, chosenIcon, qualifyingSkills);
 	}
 	
 	private static class SkillData {
@@ -252,6 +231,7 @@ public final class SkillManager extends Manager {
 		private final String[] schematics;
 
 		public SkillData(String[] requiredSkills, String parentSkill, String xpType, int xpCost, String[] commands, Map<String, Integer> skillMods, String[] schematics) {
+			this.requiredSkills = requiredSkills;
 			this.parentSkill = parentSkill;
 			this.xpType = xpType;
 			this.xpCost = xpCost;

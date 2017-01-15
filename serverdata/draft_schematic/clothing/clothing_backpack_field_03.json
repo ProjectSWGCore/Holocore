@@ -1,0 +1,125 @@
+{
+    "parent": "object/draft_schematic/clothing/base_clothing_schematic.iff",
+    "itemsPerContainer": 25,
+    "craftedObjectTemplate": "object/tangible/wearables/backpack/backpack_s03.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_clothing_ingredients_n",
+                "primary_pocket"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_clothing_ingredients_n",
+                                "primary_pocket"
+                            ],
+                            "ingredient": "fiberplast",
+                            "count": 20
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_clothing_ingredients_n",
+                "secondary_pocket"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_clothing_ingredients_n",
+                                "secondary_pocket"
+                            ],
+                            "ingredient": "hide",
+                            "count": 10
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_clothing_ingredients_n",
+                "strap_pad"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_clothing_ingredients_n",
+                                "strap_pad"
+                            ],
+                            "ingredient": "hide",
+                            "count": 10
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_clothing_ingredients_n",
+                "strap_adjustment"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_clothing_ingredients_n",
+                                "strap_adjustment"
+                            ],
+                            "ingredient": "metal",
+                            "count": 5
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "destroyIngredients": true,
+    "manufactureScripts": [
+        "systems.crafting.clothing.skill.crafting_clothing_tailor_novice"
+    ],
+    "complexity": 23,
+    "sharedTemplate": "object/draft_schematic/clothing/shared_clothing_backpack_field_03.iff",
+    "volume": 2
+}
