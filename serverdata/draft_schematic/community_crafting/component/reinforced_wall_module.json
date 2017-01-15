@@ -1,0 +1,100 @@
+{
+    "parent": "object/draft_schematic/base/base_draft_schematic.iff",
+    "category": "CT_miscMission",
+    "itemsPerContainer": 0,
+    "craftedObjectTemplate": "object/tangible/component/structure/reinforced_wall_module.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "community_crafting_n",
+                "foundation"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_templateGeneric",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "item_n",
+                                "endrine"
+                            ],
+                            "ingredient": "object/tangible/loot/quest/endrine.iff",
+                            "count": 10
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "community_crafting_n",
+                "support"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_templateGeneric",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "item_n",
+                                "rudic"
+                            ],
+                            "ingredient": "object/tangible/loot/quest/rudic.iff",
+                            "count": 10
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": true,
+            "name": [
+                "community_crafting_n",
+                "refactor"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_schematic",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "community_crafting_n",
+                                "reinforced_wall_module"
+                            ],
+                            "ingredient": "object/draft_schematic/community_crafting/component/reinforced_wall_module.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.community_crafting.component.reinforced_wall_module"
+    ],
+    "complexity": 5,
+    "sharedTemplate": "object/draft_schematic/community_crafting/component/shared_reinforced_wall_module.iff",
+    "objvars": {
+        "crafting.refactor": "0.2"
+    }
+}

@@ -1,0 +1,94 @@
+{
+    "parent": "object/draft_schematic/munition/base_munition_enhancer.iff",
+    "itemsPerContainer": 25,
+    "craftedObjectTemplate": "object/tangible/component/munition/enhanced_charge_shaping.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_munition_ingredients_n",
+                "charge_composition_spacer_cap"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_munition_ingredients_n",
+                                "charge_composition_spacer_cap"
+                            ],
+                            "ingredient": "metal_nonferrous",
+                            "count": 8
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_munition_ingredients_n",
+                "charge_spacer"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_munition_ingredients_n",
+                                "charge_spacer"
+                            ],
+                            "ingredient": "aluminum",
+                            "count": 10
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_munition_ingredients_n",
+                "charge_spacer_mount"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_munition_ingredients_n",
+                                "charge_spacer_mount"
+                            ],
+                            "ingredient": "steel",
+                            "count": 5
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "manufactureScripts": [
+        "systems.crafting.munition.specific_item.crafting_component_munition"
+    ],
+    "complexity": 5,
+    "sharedTemplate": "object/draft_schematic/munition/component/shared_enhanced_charge_shaping.iff",
+    "volume": 1
+}

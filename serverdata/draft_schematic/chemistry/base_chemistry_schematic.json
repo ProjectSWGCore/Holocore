@@ -1,0 +1,13 @@
+{
+    "parent": "object/draft_schematic/base/base_draft_schematic.iff",
+    "category": "CT_chemical",
+    "destroyIngredients": true,
+    "crateObjectTemplate": "object/factory/factory_crate_chemicals.iff",
+    "xpPoints": [
+        {
+            "type": "XP_craftingMedicine",
+            "level": 0,
+            "value": 0
+        }
+    ]
+}
