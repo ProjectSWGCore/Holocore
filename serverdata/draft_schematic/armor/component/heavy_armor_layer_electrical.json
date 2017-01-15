@@ -1,0 +1,96 @@
+{
+    "itemsPerContainer": 100,
+    "craftedObjectTemplate": "object/tangible/component/armor/heavy_armor_layer_electrical.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_armor_ingredients_n",
+                "armor_layer_frame"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_weapon_ingredients_n",
+                                "armor_layer_frame"
+                            ],
+                            "ingredient": "metal",
+                            "count": 6
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_armor_ingredients_n",
+                "primary_insulator_micro_layer"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_weapon_ingredients_n",
+                                "primary_insulator_micro_layer"
+                            ],
+                            "ingredient": "chemical",
+                            "count": 14
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_armor_ingredients_n",
+                "secondary_insulator_microsheath"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_weapon_ingredients_n",
+                                "secondary_insulator_microsheath"
+                            ],
+                            "ingredient": "ore",
+                            "count": 9
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.armor.component.crafting_armor_layer_component"
+    ],
+    "complexity": 19,
+    "sharedTemplate": "object/draft_schematic/armor/component/shared_armor_layer_electrical.iff",
+    "volume": 2
+}

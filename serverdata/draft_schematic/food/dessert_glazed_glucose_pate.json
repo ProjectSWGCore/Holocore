@@ -1,0 +1,123 @@
+{
+    "itemsPerContainer": 25,
+    "craftedObjectTemplate": "object/tangible/food/crafted/dessert_glazed_glucose_pate.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_food_ingredients_n",
+                "pastebread"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_food_ingredients_n",
+                                "pastebread"
+                            ],
+                            "ingredient": "object/tangible/food/crafted/dessert_pastebread.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_food_ingredients_n",
+                "heady_meat"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_food_ingredients_n",
+                                "heady_meat"
+                            ],
+                            "ingredient": "meat_domesticated",
+                            "count": 10
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_food_ingredients_n",
+                "biter_fruit"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_food_ingredients_n",
+                                "biter_fruit"
+                            ],
+                            "ingredient": "fruit_fruits",
+                            "count": 10
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_food_ingredients_n",
+                "glaze"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_food_ingredients_n",
+                                "glaze"
+                            ],
+                            "ingredient": "object/tangible/component/food/ingredient_carbosyrup.iff",
+                            "count": 3
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.food.crafted_items.crafting_chef_meal_food"
+    ],
+    "complexity": 21,
+    "sharedTemplate": "object/draft_schematic/food/shared_dessert_glazed_glucose_pate.iff",
+    "volume": 1
+}

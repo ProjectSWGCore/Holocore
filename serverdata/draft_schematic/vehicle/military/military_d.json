@@ -1,0 +1,231 @@
+{
+    "itemsPerContainer": 50,
+    "craftedObjectTemplate": "object/vehicle/fill_me_in.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_vehicle_ingredients_n",
+                "vehicle_body"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_vehicle_ingredients_n",
+                                "vehicle_body"
+                            ],
+                            "ingredient": "steel_thoranium",
+                            "count": 800
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_vehicle_ingredients_n",
+                "structural_frame"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_vehicle_ingredients_n",
+                                "structural_frame"
+                            ],
+                            "ingredient": "object/tangible/component/vehicle/structral_frame.iff",
+                            "count": 8
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": true,
+            "name": [
+                "craft_vehicle_ingredients_n",
+                "hull_upgrade"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_vehicle_ingredients_n",
+                                "hull_upgrade"
+                            ],
+                            "ingredient": "object/tangible/component/vehicle/base_hull_upgrade.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": true,
+            "name": [
+                "craft_vehicle_ingredients_n",
+                "hull_upgrade_2"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_vehicle_ingredients_n",
+                                "hull_upgrade_2"
+                            ],
+                            "ingredient": "object/tangible/component/vehicle/base_hull_upgrade.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": true,
+            "name": [
+                "craft_vehicle_ingredients_n",
+                "hull_upgrade_heavy"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_vehicle_ingredients_n",
+                                "hull_upgrade_heavy"
+                            ],
+                            "ingredient": "object/tangible/component/vehicle/base_hull_upgrade_heavy.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": true,
+            "name": [
+                "craft_vehicle_ingredients_n",
+                "weapon_upgrade"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_vehicle_ingredients_n",
+                                "weapon_upgrade"
+                            ],
+                            "ingredient": "object/tangible/component/vehicle/base_weapon_upgrade.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": true,
+            "name": [
+                "craft_vehicle_ingredients_n",
+                "weapon_upgrade_2"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_vehicle_ingredients_n",
+                                "weapon_upgrade_2"
+                            ],
+                            "ingredient": "object/tangible/component/vehicle/base_weapon_upgrade.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": true,
+            "name": [
+                "craft_vehicle_ingredients_n",
+                "weapon_upgrade_heavy"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_vehicle_ingredients_n",
+                                "weapon_upgrade_heavy"
+                            ],
+                            "ingredient": "object/tangible/component/vehicle/base_weapon_upgrade.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.armor.component.crafting_armor_layer_component"
+    ],
+    "complexity": 50,
+    "sharedTemplate": "object/draft_schematic/vehicle/military/shared_miliary_d.iff",
+    "volume": 1
+}

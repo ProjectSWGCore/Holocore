@@ -1,0 +1,158 @@
+{
+    "itemsPerContainer": 0,
+    "category": "CT_space",
+    "craftedObjectTemplate": "object/tangible/ship/crafted/engine/eng_mk4.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "engine_housing"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "engine_housing"
+                            ],
+                            "ingredient": "steel",
+                            "count": 625
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "engine_core"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "engine_core"
+                            ],
+                            "ingredient": "radioactive",
+                            "count": 625
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": true,
+            "name": [
+                "craft_item_ingredients_n",
+                "engine_upgrade"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_templateGeneric",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "engine_upgrade"
+                            ],
+                            "ingredient": "object/tangible/ship/crafted/engine/base_engine_subcomponent_mk4.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "fuel_mixing_chamber"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "fuel_mixing_chamber"
+                            ],
+                            "ingredient": "iron",
+                            "count": 625
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "engine_nozzles"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "engine_nozzles"
+                            ],
+                            "ingredient": "aluminum",
+                            "count": 625
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.space.engine.crafting_basic_engine"
+    ],
+    "xpPoints": [
+        {
+            "type": "XP_shipwright",
+            "level": 0,
+            "value": 0
+        }
+    ],
+    "complexity": 32,
+    "sharedTemplate": "object/draft_schematic/space/engine/shared_eng_mk4.iff",
+    "volume": 1
+}

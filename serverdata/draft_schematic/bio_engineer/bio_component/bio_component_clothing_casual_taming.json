@@ -1,0 +1,97 @@
+{
+    "itemsPerContainer": 25,
+    "craftedObjectTemplate": "object/tangible/component/bio/bio_component_clothing_casual_taming.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_tissue_ingredients_n",
+                "protein_base"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_tissue_ingredients_n",
+                                "protein_base"
+                            ],
+                            "ingredient": "creature_food",
+                            "count": 20
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_tissue_ingredients_n",
+                "bioactive_fluid"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_tissue_ingredients_n",
+                                "bioactive_fluid"
+                            ],
+                            "ingredient": "milk",
+                            "count": 25
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_tissue_ingredients_n",
+                "resonating_material"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_tissue_ingredients_n",
+                                "resonating_material"
+                            ],
+                            "ingredient": "bone",
+                            "count": 25
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "destroyIngredients": true,
+    "manufactureScripts": [
+        "systems.crafting.bio_engineer.bio_component.crafting_bio_component"
+    ],
+    "complexity": 20,
+    "sharedTemplate": "object/draft_schematic/bio_engineer/bio_component/shared_bio_component_clothing_casual_taming.iff",
+    "volume": 1
+}

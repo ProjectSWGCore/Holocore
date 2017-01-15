@@ -1,0 +1,104 @@
+{
+    "itemsPerContainer": 0,
+    "category": "CT_reverseEngineering",
+    "craftedObjectTemplate": "object/tangible/space/mission_objects/interdiction_terminal.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "power_coil"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "power_coil"
+                            ],
+                            "ingredient": "copper",
+                            "count": 80
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "generator_fuel"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "generator_fuel"
+                            ],
+                            "ingredient": "radioactive",
+                            "count": 40
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "interd_reactor"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "interd_reactor"
+                            ],
+                            "ingredient": "object/tangible/ship/crafted/reactor/fusion_reactor_mk1.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.space.reverse_engineering.crafting_basic_analysis_tool"
+    ],
+    "xpPoints": [
+        {
+            "type": "XP_shipwright",
+            "level": 0,
+            "value": 0
+        }
+    ],
+    "complexity": 11,
+    "sharedTemplate": "object/draft_schematic/space/reverse_engineering/shared_interdiction_generator.iff",
+    "volume": 1
+}

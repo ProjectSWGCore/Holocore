@@ -1,0 +1,96 @@
+{
+    "itemsPerContainer": 0,
+    "craftedObjectTemplate": "object/tangible/collection/reward/holocron_pedestal_reward_sith.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_furniture_ingredients_n",
+                "holocron_pedestal_frame"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_furniture_ingredients_n",
+                                "holocron_pedestal_frame"
+                            ],
+                            "ingredient": "wood",
+                            "count": 175
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_furniture_ingredients_n",
+                "holocron_pedestal_surface"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_furniture_ingredients_n",
+                                "holocron_pedestal_surface"
+                            ],
+                            "ingredient": "steel",
+                            "count": 225
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_furniture_ingredients_n",
+                "holocron_pedestal_accents"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_furniture_ingredients_n",
+                                "holocron_pedestal_accents"
+                            ],
+                            "ingredient": "copper",
+                            "count": 75
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.item.specific_item.crafting_collection_all"
+    ],
+    "complexity": 30,
+    "sharedTemplate": "object/draft_schematic/furniture/shared_furniture_collection_holocron_pedestal_sith.iff",
+    "volume": 1
+}

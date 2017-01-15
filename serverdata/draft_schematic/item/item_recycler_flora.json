@@ -1,0 +1,177 @@
+{
+    "itemsPerContainer": 0,
+    "craftedObjectTemplate": "object/tangible/recycler/flora_recycler.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "agitator_motor"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_templateGeneric",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "agitator_motor"
+                            ],
+                            "ingredient": "object/tangible/loot/simple_kit/motor_small_red.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "feed_tubes"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_templateGeneric",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "feed_tubes"
+                            ],
+                            "ingredient": "object/tangible/loot/simple_kit/feed_tubes.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "chemical_tubing"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "chemical_tubing"
+                            ],
+                            "ingredient": "fiberplast",
+                            "count": 50
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "processor_attachments"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_templateGeneric",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "processor_attachments"
+                            ],
+                            "ingredient": "object/tangible/loot/simple_kit/processor_attachments.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "spinning_blades"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_templateGeneric",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "spinning_blades"
+                            ],
+                            "ingredient": "object/tangible/loot/simple_kit/spinning_blade.iff",
+                            "count": 4
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "end_result_bowl"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "end_result_bowl"
+                            ],
+                            "ingredient": "metal",
+                            "count": 50
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.item.specific_item.crafting_recycler"
+    ],
+    "complexity": 12,
+    "sharedTemplate": "object/draft_schematic/item/shared_item_recycler_flora.iff",
+    "volume": 1
+}

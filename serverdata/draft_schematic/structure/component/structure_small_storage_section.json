@@ -1,0 +1,69 @@
+{
+    "itemsPerContainer": 100,
+    "craftedObjectTemplate": "object/tangible/component/structure/structure_small_storage_section.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_structure_ingredients_n",
+                "storage_unit_frame"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_structure_ingredients_n",
+                                "storage_unit_frame"
+                            ],
+                            "ingredient": "steel",
+                            "count": 50
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_structure_ingredients_n",
+                "storage_unit"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_structure_ingredients_n",
+                                "storage_unit"
+                            ],
+                            "ingredient": "metal",
+                            "count": 80
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.structure.specific_item.crafting_structure_component"
+    ],
+    "complexity": 5,
+    "sharedTemplate": "object/draft_schematic/structure/component/shared_structure_small_storage_section.iff",
+    "volume": 2
+}

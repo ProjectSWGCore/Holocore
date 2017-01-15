@@ -1,0 +1,131 @@
+{
+    "category": "CT_weapon",
+    "itemsPerContainer": 50,
+    "craftedObjectTemplate": "object/tangible/component/weapon/new_weapon_comp_reinforcement_core_advanced.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_weapon_ingredients_n",
+                "reinforcement_base"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_weapon_ingredients_n",
+                                "reinforcement_base"
+                            ],
+                            "ingredient": "petrochem_inert_polymer",
+                            "count": 35
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_weapon_ingredients_n",
+                "reinforcement_material"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_weapon_ingredients_n",
+                                "reinforcement_material"
+                            ],
+                            "ingredient": "copper_diatium",
+                            "count": 20
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_weapon_ingredients_n",
+                "lining"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_weapon_ingredients_n",
+                                "lining"
+                            ],
+                            "ingredient": "ore_carbonate_ostrine",
+                            "count": 20
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_weapon_ingredients_n",
+                "reinforcement_attachment"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_weapon_ingredients_n",
+                                "reinforcement_attachment"
+                            ],
+                            "ingredient": "aluminum_phrik",
+                            "count": 38
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.weapon.core.crafting_comp_reinforcement_core"
+    ],
+    "complexity": 42,
+    "volume": 1,
+    "sharedTemplate": "object/draft_schematic/weapon/component/shared_new_weapon_comp_reinforcement_core_advanced.iff",
+    "xpPoints": [
+        {
+            "type": "XP_craftingWeapons",
+            "level": 0,
+            "value": 0
+        }
+    ]
+}

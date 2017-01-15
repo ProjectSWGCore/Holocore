@@ -1,0 +1,123 @@
+{
+    "itemsPerContainer": 1,
+    "craftedObjectTemplate": "object/tangible/component/structure/foundation_military_heavy.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_structure_ingredients_n",
+                "load_bearing_structure_and_shell"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_structure_ingredients_n",
+                                "load_bearing_structure_and_shell"
+                            ],
+                            "ingredient": "metal",
+                            "count": 54000
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_structure_ingredients_n",
+                "foundation_and_hardening"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_structure_ingredients_n",
+                                "foundation_and_hardening"
+                            ],
+                            "ingredient": "ore",
+                            "count": 135000
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_structure_ingredients_n",
+                "armor_plating_attachment_and_structural_reinforcement"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_structure_ingredients_n",
+                                "armor_plating_attachment_and_structural_reinforcement"
+                            ],
+                            "ingredient": "metal",
+                            "count": 540
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_structure_ingredients_n",
+                "armor_plating"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_structure_ingredients_n",
+                                "armor_plating"
+                            ],
+                            "ingredient": "object/tangible/component/armor/armor_module_heavy.iff",
+                            "count": 100
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.structure.specific_item.crafting_structure_component"
+    ],
+    "complexity": 20,
+    "sharedTemplate": "object/draft_schematic/structure/component/shared_foundation_military_heavy.iff",
+    "volume": 6
+}

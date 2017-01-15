@@ -1,0 +1,150 @@
+{
+    "itemsPerContainer": 10,
+    "craftedObjectTemplate": "object/tangible/item/crafted_structure_customization_kit.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "kit_structure"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "kit_structure"
+                            ],
+                            "ingredient": "metal",
+                            "count": 60
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "dye_base"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "dye_base"
+                            ],
+                            "ingredient": "gemstone",
+                            "count": 30
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "dye_pigment"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "dye_pigment"
+                            ],
+                            "ingredient": "vegetable_fungi",
+                            "count": 110
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "kit_circuit"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "kit_circuit"
+                            ],
+                            "ingredient": "object/tangible/component/item/electronics_memory_module.iff",
+                            "count": 2
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "electronic_control_unit"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "electronic_control_unit"
+                            ],
+                            "ingredient": "object/tangible/component/item/electronic_control_unit_advanced.iff",
+                            "count": 2
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.furniture.specific_item.structure_customization_kit"
+    ],
+    "complexity": 30,
+    "sharedTemplate": "object/draft_schematic/furniture/shared_furniture_structure_customization_kit.iff",
+    "volume": 1
+}

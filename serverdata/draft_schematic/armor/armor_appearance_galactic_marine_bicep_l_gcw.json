@@ -1,0 +1,243 @@
+{
+    "category": "CT_armor",
+    "itemsPerContainer": 0,
+    "craftedObjectTemplate": "object/tangible/wearables/armor/galactic_marine/armor_galactic_marine_bicep_l_gcw.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_armor_ingredients_n",
+                "appearance_fragments"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_armor_ingredients_n",
+                                "appearance_fragments"
+                            ],
+                            "ingredient": "petrochem_inert_polymer",
+                            "count": 50
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_armor_ingredients_n",
+                "armor_core_frame"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_armor_ingredients_n",
+                                "armor_core_frame"
+                            ],
+                            "ingredient": "steel",
+                            "count": 50
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_armor_ingredients_n",
+                "armor_core"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_armor_ingredients_n",
+                                "armor_core"
+                            ],
+                            "ingredient": "object/tangible/component/armor/armor_core_assault.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_armor_ingredients_n",
+                "load_bearing_harness"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_armor_ingredients_n",
+                                "load_bearing_harness"
+                            ],
+                            "ingredient": "object/tangible/component/clothing/fiberplast_panel.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_armor_ingredients_n",
+                "reinforcement"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_armor_ingredients_n",
+                                "reinforcement"
+                            ],
+                            "ingredient": "object/tangible/component/clothing/reinforced_fiber_panels.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": true,
+            "name": [
+                "craft_armor_ingredients_n",
+                "enhancement_cartridge"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_armor_ingredients_n",
+                                "enhancement_cartridge"
+                            ],
+                            "ingredient": "object/tangible/component/armor/bio_cartridge.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": true,
+            "name": [
+                "craft_armor_ingredients_n",
+                "appearance_enhancement_one"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_armor_ingredients_n",
+                                "appearance_enhancement_one"
+                            ],
+                            "ingredient": "object/tangible/component/armor/armor_appearance_enhancement_base.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": true,
+            "name": [
+                "craft_armor_ingredients_n",
+                "appearance_enhancement_two"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_armor_ingredients_n",
+                                "appearance_enhancement_two"
+                            ],
+                            "ingredient": "object/tangible/component/armor/armor_appearance_enhancement_base_two.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.armor.component.crafting_new_armor_factional_final"
+    ],
+    "complexity": 15,
+    "volume": 3,
+    "objvars": {
+        "conditionMultiplier": "1.85",
+        "crafting.no_critical_fail": 1
+    },
+    "sharedTemplate": "object/draft_schematic/armor/shared_armor_appearance_galactic_marine_bicep_l_gcw.iff",
+    "xpPoints": [
+        {
+            "type": "XP_craftingClothingArmor",
+            "level": 0,
+            "value": 0
+        }
+    ]
+}

@@ -1,0 +1,106 @@
+{
+    "category": "CT_armor",
+    "itemsPerContainer": 25,
+    "craftedObjectTemplate": "object/tangible/wearables/armor/ubese/armor_ubese_shirt.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_armor_ingredients_n",
+                "auxilary_coverage"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_armor_ingredients_n",
+                                "auxilary_coverage"
+                            ],
+                            "ingredient": "iron",
+                            "count": 20
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_armor_ingredients_n",
+                "body"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_armor_ingredients_n",
+                                "body"
+                            ],
+                            "ingredient": "steel",
+                            "count": 30
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_armor_ingredients_n",
+                "liner"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_armor_ingredients_n",
+                                "liner"
+                            ],
+                            "ingredient": "fiberplast",
+                            "count": 10
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.armor.crafting_armor_nostats"
+    ],
+    "complexity": 30,
+    "volume": 1,
+    "objvars": [
+    ],
+    "sharedTemplate": "object/draft_schematic/armor/shared_armor_appearance_ubese_shirt.iff",
+    "xpPoints": [
+        {
+            "type": "XP_craftingClothingArmor",
+            "level": 0,
+            "value": 0
+        }
+    ]
+}

@@ -1,0 +1,96 @@
+{
+    "itemsPerContainer": 50,
+    "craftedObjectTemplate": "object/tangible/component/droid/repair/power_supply_redundant.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_droid_ingredients_n",
+                "power_supply_housing"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_droid_ingredients_n",
+                                "power_supply_housing"
+                            ],
+                            "ingredient": "metal",
+                            "count": 5
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_droid_ingredients_n",
+                "reactive_energy_core"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_droid_ingredients_n",
+                                "reactive_energy_core"
+                            ],
+                            "ingredient": "fuel_petrochem_liquid",
+                            "count": 5
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_droid_ingredients_n",
+                "reaction_catalyst"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_droid_ingredients_n",
+                                "reaction_catalyst"
+                            ],
+                            "ingredient": "gas",
+                            "count": 5
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.droid.crafted_items.crafting_droid_wound_repair_comp_power"
+    ],
+    "complexity": 10,
+    "sharedTemplate": "object/draft_schematic/droid/component/shared_power_supply_redundant.iff",
+    "volume": 1
+}

@@ -1,0 +1,15 @@
+{
+    "category": "CT_weapon",
+    "craftedObjectTemplate": "",
+    "crateObjectTemplate": "object/factory/base/base_factory.iff",
+    "slots": [
+    ],
+    "skillCommands": [
+    ],
+    "destroyIngredients": true,
+    "manufactureScripts": [
+    ],
+    "itemsPerContainer": 10,
+    "manufactureTime": "8.0",
+    "prototypeTime": "2.0"
+}

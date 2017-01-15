@@ -1,0 +1,77 @@
+{
+    "itemsPerContainer": 25,
+    "category": "CT_space",
+    "craftedObjectTemplate": "object/tangible/ship/crafted/capacitor/quick_recharge_battery_mk4.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "battery_casing"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "battery_casing"
+                            ],
+                            "ingredient": "steel",
+                            "count": 1000
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "enhanced_battery_core"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "enhanced_battery_core"
+                            ],
+                            "ingredient": "copper_borocarbitic",
+                            "count": 250
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.space.capacitor.crafting_quick_recharge_battery"
+    ],
+    "xpPoints": [
+        {
+            "type": "XP_shipwright",
+            "level": 0,
+            "value": 0
+        }
+    ],
+    "complexity": 30,
+    "sharedTemplate": "object/draft_schematic/space/capacitor/shared_quick_recharge_battery_mk4.iff",
+    "volume": 1
+}

@@ -1,0 +1,103 @@
+{
+    "itemsPerContainer": 25,
+    "craftedObjectTemplate": "object/tangible/component/food/container_barrel.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_food_ingredients_n",
+                "barrel_body"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_food_ingredients_n",
+                                "barrel_body"
+                            ],
+                            "ingredient": "metal_nonferrous",
+                            "count": 300
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_food_ingredients_n",
+                "coolant_control"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_food_ingredients_n",
+                                "coolant_control"
+                            ],
+                            "ingredient": "object/tangible/component/item/electronic_control_unit.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_food_ingredients_n",
+                "power_conditioner"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_food_ingredients_n",
+                                "power_conditioner"
+                            ],
+                            "ingredient": "object/tangible/component/item/electronic_power_conditioner.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.food.crafting_artisan_drink_container"
+    ],
+    "complexity": 15,
+    "sharedTemplate": "object/draft_schematic/food/component/shared_container_barrel.iff",
+    "xpPoints": [
+        {
+            "type": "XP_crafting",
+            "level": 0,
+            "value": 0
+        }
+    ],
+    "volume": 1
+}

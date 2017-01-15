@@ -1,0 +1,150 @@
+{
+    "itemsPerContainer": 50,
+    "craftedObjectTemplate": "object/tangible/component/structure/ore_mining_unit.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_structure_ingredients_n",
+                "bore_head"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_structure_ingredients_n",
+                                "bore_head"
+                            ],
+                            "ingredient": "steel",
+                            "count": 100
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_structure_ingredients_n",
+                "bore_positioning_arm"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_structure_ingredients_n",
+                                "bore_positioning_arm"
+                            ],
+                            "ingredient": "steel",
+                            "count": 150
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_structure_ingredients_n",
+                "ore_transport_auger_and_conveyors"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_structure_ingredients_n",
+                                "ore_transport_auger_and_conveyors"
+                            ],
+                            "ingredient": "metal",
+                            "count": 150
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_structure_ingredients_n",
+                "load_bearing_joints_and_fittings"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_structure_ingredients_n",
+                                "load_bearing_joints_and_fittings"
+                            ],
+                            "ingredient": "steel",
+                            "count": 120
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_structure_ingredients_n",
+                "charge_and_thermal_regulation_medium"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_structure_ingredients_n",
+                                "charge_and_thermal_regulation_medium"
+                            ],
+                            "ingredient": "gas_inert",
+                            "count": 75
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.structure.specific_item.crafting_mining_unit"
+    ],
+    "complexity": 12,
+    "sharedTemplate": "object/draft_schematic/structure/component/shared_structure_ore_mining_unit.iff",
+    "volume": 1
+}

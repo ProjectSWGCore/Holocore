@@ -1,0 +1,69 @@
+{
+    "itemsPerContainer": 50,
+    "craftedObjectTemplate": "object/tangible/component/chemistry/biologic_effect_controller_advanced.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_chemical_ingredients_n",
+                "organic_element"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_chemical_ingredients_n",
+                                "organic_element"
+                            ],
+                            "ingredient": "wheat_wild_lok",
+                            "count": 18
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_chemical_ingredients_n",
+                "inorganic_element"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_chemical_ingredients_n",
+                                "inorganic_element"
+                            ],
+                            "ingredient": "fiberplast_tatooine",
+                            "count": 18
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.chemistry.component.crafting_component_chemistry_basic_medic"
+    ],
+    "complexity": 15,
+    "sharedTemplate": "object/draft_schematic/chemistry/component/shared_biologic_effect_controller_advanced.iff",
+    "volume": 2
+}

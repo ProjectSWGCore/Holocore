@@ -1,0 +1,123 @@
+{
+    "itemsPerContainer": 0,
+    "craftedObjectTemplate": "object/tangible/loot/misc/heroic_exar_kun_torture_table.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_furniture_ingredients_n",
+                "frame"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_furniture_ingredients_n",
+                                "frame"
+                            ],
+                            "ingredient": "steel",
+                            "count": 150
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_furniture_ingredients_n",
+                "spikes"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_furniture_ingredients_n",
+                                "spikes"
+                            ],
+                            "ingredient": "steel",
+                            "count": 250
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_furniture_ingredients_n",
+                "base"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_furniture_ingredients_n",
+                                "base"
+                            ],
+                            "ingredient": "iron",
+                            "count": 75
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_furniture_ingredients_n",
+                "fasteners"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_furniture_ingredients_n",
+                                "fasteners"
+                            ],
+                            "ingredient": "iron",
+                            "count": 82
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.furniture.specific_item.furniture_item"
+    ],
+    "complexity": 28,
+    "sharedTemplate": "object/draft_schematic/furniture/shared_furniture_heroic_exar_kun_torture_table.iff",
+    "volume": 1
+}

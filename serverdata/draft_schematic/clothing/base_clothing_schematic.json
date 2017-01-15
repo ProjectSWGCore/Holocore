@@ -1,0 +1,12 @@
+{
+    "category": "CT_clothing",
+    "destroyIngredients": true,
+    "crateObjectTemplate": "object/factory/factory_crate_clothing.iff",
+    "xpPoints": [
+        {
+            "type": "XP_craftingClothing",
+            "level": 0,
+            "value": 0
+        }
+    ]
+}

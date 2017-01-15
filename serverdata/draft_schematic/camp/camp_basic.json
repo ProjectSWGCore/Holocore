@@ -1,0 +1,96 @@
+{
+    "itemsPerContainer": 10,
+    "craftedObjectTemplate": "object/tangible/deed/camp_deed/camp_basic_deed.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "shelter_canvas"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "shelter_canvas"
+                            ],
+                            "ingredient": "hide",
+                            "count": 200
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "shelter_structure"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "shelter_structure"
+                            ],
+                            "ingredient": "metal_nonferrous",
+                            "count": 150
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": true,
+            "name": [
+                "craft_item_ingredients_n",
+                "camp_module"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "camp_module"
+                            ],
+                            "ingredient": "object/tangible/component/camp/camp_module_base.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.camp.crafting_camp"
+    ],
+    "complexity": 5,
+    "sharedTemplate": "object/draft_schematic/camp/shared_camp_basic.iff",
+    "volume": 1
+}

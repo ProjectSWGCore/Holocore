@@ -1,0 +1,96 @@
+{
+    "itemsPerContainer": 10,
+    "craftedObjectTemplate": "object/tangible/furniture/all/frn_diner_bar.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_furniture_ingredients_n",
+                "frame"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_furniture_ingredients_n",
+                                "frame"
+                            ],
+                            "ingredient": "metal",
+                            "count": 100
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_furniture_ingredients_n",
+                "paneling"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_furniture_ingredients_n",
+                                "paneling"
+                            ],
+                            "ingredient": "wood",
+                            "count": 220
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_furniture_ingredients_n",
+                "supports"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_furniture_ingredients_n",
+                                "supports"
+                            ],
+                            "ingredient": "steel",
+                            "count": 30
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.furniture.specific_item.furniture_item"
+    ],
+    "complexity": 15,
+    "sharedTemplate": "object/draft_schematic/furniture/shared_furniture_diner_bar.iff",
+    "volume": 1
+}

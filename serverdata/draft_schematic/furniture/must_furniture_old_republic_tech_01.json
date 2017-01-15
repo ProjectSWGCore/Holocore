@@ -1,0 +1,96 @@
+{
+    "itemsPerContainer": 0,
+    "craftedObjectTemplate": "object/tangible/loot/mustafar/old_republic_tech_01.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_furniture_ingredients_n",
+                "base"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_furniture_ingredients_n",
+                                "base"
+                            ],
+                            "ingredient": "steel",
+                            "count": 120
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_furniture_ingredients_n",
+                "circuit_boards"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_furniture_ingredients_n",
+                                "circuit_boards"
+                            ],
+                            "ingredient": "copper",
+                            "count": 100
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "wiring"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "wiring"
+                            ],
+                            "ingredient": "copper",
+                            "count": 30
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.furniture.specific_item.furniture_item"
+    ],
+    "complexity": 18,
+    "sharedTemplate": "object/draft_schematic/furniture/shared_must_furniture_old_republic_tech_01.iff",
+    "volume": 1
+}

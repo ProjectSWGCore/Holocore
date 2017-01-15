@@ -1,0 +1,96 @@
+{
+    "itemsPerContainer": 0,
+    "craftedObjectTemplate": "object/tangible/collection/reward/potted_flower_reward_01.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_furniture_ingredients_n",
+                "pot"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_furniture_ingredients_n",
+                                "pot"
+                            ],
+                            "ingredient": "mineral",
+                            "count": 40
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_furniture_ingredients_n",
+                "tree"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_furniture_ingredients_n",
+                                "tree"
+                            ],
+                            "ingredient": "wood_deciduous_yavin4",
+                            "count": 40
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_furniture_ingredients_n",
+                "greenery"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_furniture_ingredients_n",
+                                "greenery"
+                            ],
+                            "ingredient": "chemical",
+                            "count": 40
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.furniture.specific_item.furniture_item"
+    ],
+    "complexity": 30,
+    "sharedTemplate": "object/draft_schematic/furniture/shared_furniture_flowers_collection_potted_s01.iff",
+    "volume": 1
+}

@@ -1,0 +1,123 @@
+{
+    "itemsPerContainer": 50,
+    "craftedObjectTemplate": "object/tangible/component/vehicle/weapon_link.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_vehicle_ingredients_n",
+                "component_frame"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_vehicle_ingredients_n",
+                                "component_frame"
+                            ],
+                            "ingredient": "aluminum_phrik",
+                            "count": 400
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_vehicle_ingredients_n",
+                "component_body"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_vehicle_ingredients_n",
+                                "component_body"
+                            ],
+                            "ingredient": "metal",
+                            "count": 200
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_vehicle_ingredients_n",
+                "weapon_mount1"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_vehicle_ingredients_n",
+                                "reactor"
+                            ],
+                            "ingredient": "object/tangible/component/vehicle/base/base_veh_weapon.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_vehicle_ingredients_n",
+                "weapon_mount2"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_vehicle_ingredients_n",
+                                "reactor"
+                            ],
+                            "ingredient": "object/tangible/component/vehicle/base/base_veh_weapon.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.armor.component.crafting_armor_layer_component"
+    ],
+    "complexity": 15,
+    "sharedTemplate": "object/draft_schematic/vehicle/component/shared_weapon_link.iff",
+    "volume": 1
+}

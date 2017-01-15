@@ -1,0 +1,123 @@
+{
+    "itemsPerContainer": 25,
+    "craftedObjectTemplate": "object/tangible/component/droid/armor_module_4.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_droid_ingredients_n",
+                "module_frame"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_droid_ingredients_n",
+                                "module_frame"
+                            ],
+                            "ingredient": "steel_duralloy",
+                            "count": 55
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_droid_ingredients_n",
+                "armor_filler"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_droid_ingredients_n",
+                                "armor_filler"
+                            ],
+                            "ingredient": "metal_ferrous",
+                            "count": 12
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_droid_ingredients_n",
+                "stress_resist_plate"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_droid_ingredients_n",
+                                "stress_resist_plate"
+                            ],
+                            "ingredient": "metal_nonferrous",
+                            "count": 15
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_droid_ingredients_n",
+                "fracture_capture_medium"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_droid_ingredients_n",
+                                "fracture_capture_medium"
+                            ],
+                            "ingredient": "fiberplast",
+                            "count": 10
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.droid.crafted_items.crafting_droid_armor_components"
+    ],
+    "complexity": 22,
+    "sharedTemplate": "object/draft_schematic/droid/component/shared_armor_module_4.iff",
+    "volume": 2
+}

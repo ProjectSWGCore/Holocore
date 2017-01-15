@@ -1,0 +1,126 @@
+{
+    "itemsPerContainer": 0,
+    "craftedObjectTemplate": "object/tangible/holiday/empire_day/e11_gas_cartridge_crate.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "cartridge_enclosures"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "cartridge_enclosures"
+                            ],
+                            "ingredient": "object/tangible/holiday/empire_day/component/e11_cartridge_enclosures.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "condensed_gas"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "condensed_gas"
+                            ],
+                            "ingredient": "object/tangible/holiday/empire_day/component/e11_condensed_reactive_gasses.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "cartidge_valves"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "cartidge_valves"
+                            ],
+                            "ingredient": "object/tangible/holiday/empire_day/component/e11_cartridge_valves.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "cartridge_grips"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "cartridge_grips"
+                            ],
+                            "ingredient": "object/tangible/holiday/empire_day/component/e11_cartridge_grips.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.item.specific_item.crafting_station_item"
+    ],
+    "complexity": 5,
+    "sharedTemplate": "object/draft_schematic/item/shared_item_event_empire_day_e11_cartridges.iff",
+    "objvars": {
+        "crafting.no_critical_fail": 1
+    },
+    "volume": 1
+}

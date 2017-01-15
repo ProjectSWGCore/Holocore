@@ -1,0 +1,77 @@
+{
+    "itemsPerContainer": 25,
+    "category": "CT_space",
+    "craftedObjectTemplate": "object/tangible/ship/crafted/shields/shield_energy_saver_kit_mk1.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "casing"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "casing"
+                            ],
+                            "ingredient": "steel",
+                            "count": 75
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "energy_saving_mechanism"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "energy_saving_mechanism"
+                            ],
+                            "ingredient": "fiberplast_gravitonic",
+                            "count": 25
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.space.shields.crafting_shield_energy_saver_kit"
+    ],
+    "xpPoints": [
+        {
+            "type": "XP_shipwright",
+            "level": 0,
+            "value": 0
+        }
+    ],
+    "complexity": 19,
+    "sharedTemplate": "object/draft_schematic/space/shields/shared_shield_energy_saver_kit_mk1.iff",
+    "volume": 1
+}

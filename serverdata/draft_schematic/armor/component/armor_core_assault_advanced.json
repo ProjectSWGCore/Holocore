@@ -1,0 +1,297 @@
+{
+    "category": "CT_armor",
+    "itemsPerContainer": 100,
+    "craftedObjectTemplate": "object/tangible/component/armor/armor_core_assault_advanced.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_armor_ingredients_n",
+                "padding"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_armor_ingredients_n",
+                                "padding"
+                            ],
+                            "ingredient": "hide_wooly_dantooine",
+                            "count": 22
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_armor_ingredients_n",
+                "liner"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_armor_ingredients_n",
+                                "liner"
+                            ],
+                            "ingredient": "fiberplast_dathomir",
+                            "count": 45
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_armor_ingredients_n",
+                "insulation_medium"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_armor_ingredients_n",
+                                "insulation_medium"
+                            ],
+                            "ingredient": "ore_intrusive",
+                            "count": 45
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_armor_ingredients_n",
+                "body"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_armor_ingredients_n",
+                                "body"
+                            ],
+                            "ingredient": "iron_kammris",
+                            "count": 40
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_armor_ingredients_n",
+                "binding_and_reinforcement"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_armor_ingredients_n",
+                                "binding_and_reinforcement"
+                            ],
+                            "ingredient": "copper_mythra",
+                            "count": 40
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_armor_ingredients_n",
+                "auxilary_coverage"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_armor_ingredients_n",
+                                "auxilary_coverage"
+                            ],
+                            "ingredient": "gemstone_armophous",
+                            "count": 35
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_armor_ingredients_n",
+                "armor_segment"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_armor_ingredients_n",
+                                "armor_segment"
+                            ],
+                            "ingredient": "object/tangible/component/armor/armor_segment_assault.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_armor_ingredients_n",
+                "armor_segment_2"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_armor_ingredients_n",
+                                "armor_segment_2"
+                            ],
+                            "ingredient": "object/tangible/component/armor/armor_segment_assault.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_armor_ingredients_n",
+                "armor_segment_3"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_armor_ingredients_n",
+                                "armor_segment_3"
+                            ],
+                            "ingredient": "object/tangible/component/armor/armor_segment_assault.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": true,
+            "name": [
+                "craft_armor_ingredients_n",
+                "core_enhancement"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_armor_ingredients_n",
+                                "core_enhancement"
+                            ],
+                            "ingredient": "object/tangible/component/armor/armor_core_enhancement_assault.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.armor.component.crafting_new_armor_core"
+    ],
+    "complexity": 23,
+    "volume": 1,
+    "objvars": {
+        "armorLevel": "AL_advanced",
+        "armorCategory": "AC_assault"
+    },
+    "sharedTemplate": "object/draft_schematic/armor/component/shared_armor_core_assault_advanced.iff",
+    "xpPoints": [
+        {
+            "type": "XP_craftingClothingArmor",
+            "level": 0,
+            "value": 0
+        }
+    ]
+}

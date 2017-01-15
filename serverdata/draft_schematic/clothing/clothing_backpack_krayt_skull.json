@@ -1,0 +1,124 @@
+{
+    "itemsPerContainer": 0,
+    "craftedObjectTemplate": "object/tangible/wearables/backpack/backpack_krayt_skull.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_clothing_ingredients_n",
+                "primary_pocket"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_clothing_ingredients_n",
+                                "primary_pocket"
+                            ],
+                            "ingredient": "fiberplast",
+                            "count": 50
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_clothing_ingredients_n",
+                "secondary_pocket"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_clothing_ingredients_n",
+                                "secondary_pocket"
+                            ],
+                            "ingredient": "petrochem_inert_polymer",
+                            "count": 10
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_clothing_ingredients_n",
+                "strap_pad"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_clothing_ingredients_n",
+                                "strap_pad"
+                            ],
+                            "ingredient": "hide",
+                            "count": 5
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_clothing_ingredients_n",
+                "strap_adjustment"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_clothing_ingredients_n",
+                                "strap_adjustment"
+                            ],
+                            "ingredient": "metal",
+                            "count": 5
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "destroyIngredients": true,
+    "manufactureScripts": [
+        "systems.crafting.clothing.skill.crafting_clothing_artisan_novice"
+    ],
+    "complexity": 17,
+    "sharedTemplate": "object/draft_schematic/clothing/shared_clothing_backpack_krayt_skull.iff",
+    "volume": 2
+}

@@ -1,0 +1,150 @@
+{
+    "itemsPerContainer": 50,
+    "craftedObjectTemplate": "object/tangible/medicine/crafted/medpack_cure_poison_area_b.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_chemical_ingredients_n",
+                "organic_element"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_chemical_ingredients_n",
+                                "organic_element"
+                            ],
+                            "ingredient": "meat",
+                            "count": 20
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_chemical_ingredients_n",
+                "inorganic_element"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_clothing_ingredients_n",
+                                "inorganic_element"
+                            ],
+                            "ingredient": "gas_inert",
+                            "count": 20
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_chemical_ingredients_n",
+                "delivery_medium"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_chemical_ingredients_n",
+                                "delivery_medium"
+                            ],
+                            "ingredient": "object/tangible/component/chemistry/liquid_delivery_suspension_advanced.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_chemical_ingredients_n",
+                "dispersal_mechanism"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_chemical_ingredients_n",
+                                "dispersal_mechanism"
+                            ],
+                            "ingredient": "object/tangible/component/chemistry/dispersal_mechanism.iff",
+                            "count": 3
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_chemical_ingredients_n",
+                "drug_strength_compound"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_chemical_ingredients_n",
+                                "drug_strength_compound"
+                            ],
+                            "ingredient": "object/tangible/component/chemistry/biologic_effect_controller_advanced.iff",
+                            "count": 2
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.chemistry.crafted_items.crafting_medpack_cure_poison_area_chemistry"
+    ],
+    "complexity": 20,
+    "sharedTemplate": "object/draft_schematic/chemistry/shared_medpack_cure_poison_area_b.iff",
+    "volume": 3
+}

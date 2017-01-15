@@ -1,0 +1,204 @@
+{
+    "itemsPerContainer": 50,
+    "craftedObjectTemplate": "object/tangible/component/structure/power_core_unit.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_structure_ingredients_n",
+                "sub_assembly_frame"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_structure_ingredients_n",
+                                "sub_assembly_frame"
+                            ],
+                            "ingredient": "steel",
+                            "count": 75
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_structure_ingredients_n",
+                "micro_turbine_and_charge_accumulator"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_structure_ingredients_n",
+                                "micro_turbine_and_charge_accumulator"
+                            ],
+                            "ingredient": "metal_nonferrous",
+                            "count": 450
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_structure_ingredients_n",
+                "shock_and_vibration_isolation_assembly"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_structure_ingredients_n",
+                                "shock_and_vibration_isolation_assembly"
+                            ],
+                            "ingredient": "ore_carbonate",
+                            "count": 280
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_structure_ingredients_n",
+                "thermal_insulator_and_charge_leakage_preventor"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_structure_ingredients_n",
+                                "thermal_insulator_and_charge_leakage_preventor"
+                            ],
+                            "ingredient": "ore",
+                            "count": 120
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_structure_ingredients_n",
+                "mini_turbo_generator"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_structure_ingredients_n",
+                                "mini_turbo_generator"
+                            ],
+                            "ingredient": "object/tangible/component/structure/generator_turbine.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_structure_ingredients_n",
+                "energy_flow_modulator_and_filter"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_structure_ingredients_n",
+                                "energy_flow_modulator_and_filter"
+                            ],
+                            "ingredient": "object/tangible/component/item/electronic_power_conditioner.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_structure_ingredients_n",
+                "energy_distribution_net"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_structure_ingredients_n",
+                                "energy_distribution_net"
+                            ],
+                            "ingredient": "object/tangible/component/item/electronic_energy_distributor.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.structure.specific_item.crafting_structure_component"
+    ],
+    "complexity": 18,
+    "sharedTemplate": "object/draft_schematic/structure/component/shared_structure_power_core_unit.iff",
+    "volume": 10
+}

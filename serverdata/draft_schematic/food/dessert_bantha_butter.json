@@ -1,0 +1,69 @@
+{
+    "itemsPerContainer": 25,
+    "craftedObjectTemplate": "object/tangible/food/crafted/dessert_bantha_butter.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_food_ingredients_n",
+                "bantha_milk"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_food_ingredients_n",
+                                "bantha_milk"
+                            ],
+                            "ingredient": "milk",
+                            "count": 20
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_food_ingredients_n",
+                "fruit"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_food_ingredients_n",
+                                "fruit"
+                            ],
+                            "ingredient": "fruit",
+                            "count": 5
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.food.crafted_items.crafting_food_organic_chef"
+    ],
+    "complexity": 6,
+    "sharedTemplate": "object/draft_schematic/food/shared_dessert_bantha_butter.iff",
+    "volume": 1
+}

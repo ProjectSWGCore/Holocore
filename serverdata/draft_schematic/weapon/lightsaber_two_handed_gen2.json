@@ -1,0 +1,151 @@
+{
+    "category": "CT_lightsaber",
+    "itemsPerContainer": 0,
+    "craftedObjectTemplate": "object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_gen2.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_weapon_ingredients_n",
+                "emitter_shroud"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_weapon_ingredients_n",
+                                "emitter_shroud"
+                            ],
+                            "ingredient": "metal",
+                            "count": 25
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_weapon_ingredients_n",
+                "activator"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_weapon_ingredients_n",
+                                "activator"
+                            ],
+                            "ingredient": "metal_nonferrous",
+                            "count": 18
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_weapon_ingredients_n",
+                "handgrip"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_weapon_ingredients_n",
+                                "handgrip"
+                            ],
+                            "ingredient": "petrochem_inert",
+                            "count": 20
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_weapon_ingredients_n",
+                "power_field_insulator"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_weapon_ingredients_n",
+                                "power_field_insulator"
+                            ],
+                            "ingredient": "gas_inert_known",
+                            "count": 22
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_weapon_ingredients_n",
+                "energizers"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_weapon_ingredients_n",
+                                "energizers"
+                            ],
+                            "ingredient": "metal_nonferrous",
+                            "count": 20
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.weapon.lightsaber.crafting_melee_lightsaber_two_handed_gen2"
+    ],
+    "complexity": 8,
+    "volume": 1,
+    "sharedTemplate": "object/draft_schematic/weapon/shared_lightsaber_two_handed_gen2.iff"
+}

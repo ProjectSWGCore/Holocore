@@ -1,0 +1,150 @@
+{
+    "itemsPerContainer": 50,
+    "craftedObjectTemplate": "object/tangible/medicine/pet/droid_damage_kit_b.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_droid_ingredients_n",
+                "electronics_patch_assembly"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_droid_ingredients_n",
+                                "electronics_patch_assembly"
+                            ],
+                            "ingredient": "metal_nonferrous",
+                            "count": 25
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_droid_ingredients_n",
+                "electronic_sealant_light"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_droid_ingredients_n",
+                                "electronic_sealant_light"
+                            ],
+                            "ingredient": "fiberplast",
+                            "count": 20
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_droid_ingredients_n",
+                "diagnostic_circuit"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_droid_ingredients_n",
+                                "diagnostic_circuit"
+                            ],
+                            "ingredient": "object/tangible/component/droid/repair/diagnostic_circuit.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_droid_ingredients_n",
+                "capacitor_discharge_unit"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_droid_ingredients_n",
+                                "capacitor_discharge_unit"
+                            ],
+                            "ingredient": "object/tangible/component/droid/repair/capacitor_low_discharge.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_droid_ingredients_n",
+                "delivery_cartridge"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_droid_ingredients_n",
+                                "delivery_cartridge"
+                            ],
+                            "ingredient": "object/tangible/component/droid/repair/unit_delivery_cartridge.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.droid.crafted_items.crafting_droid_damage_repair"
+    ],
+    "complexity": 24,
+    "sharedTemplate": "object/draft_schematic/droid/shared_droid_damage_repair_kit_b.iff",
+    "volume": 1
+}

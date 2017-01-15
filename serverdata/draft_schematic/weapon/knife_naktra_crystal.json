@@ -1,0 +1,185 @@
+{
+    "category": "CT_weapon",
+    "itemsPerContainer": 25,
+    "craftedObjectTemplate": "object/weapon/melee/knife/ep3/knife_naktra_crystal.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_weapon_ingredients_n",
+                "sword_core_jacket"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_weapon_ingredients_n",
+                                "sword_core_jacket"
+                            ],
+                            "ingredient": "iron",
+                            "count": 42
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_weapon_ingredients_n",
+                "naktra_crystal1"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_templateGeneric",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_weapon_ingredients_n",
+                                "naktra_crystal1"
+                            ],
+                            "ingredient": "object/tangible/loot/quest/naktra_crystal.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_weapon_ingredients_n",
+                "naktra_crystal2"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_templateGeneric",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_weapon_ingredients_n",
+                                "naktra_crystal2"
+                            ],
+                            "ingredient": "object/tangible/loot/quest/naktra_crystal.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_weapon_ingredients_n",
+                "naktra_crystal3"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_templateGeneric",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_weapon_ingredients_n",
+                                "naktra_crystal3"
+                            ],
+                            "ingredient": "object/tangible/loot/quest/naktra_crystal.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_weapon_ingredients_n",
+                "grip"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_weapon_ingredients_n",
+                                "grip"
+                            ],
+                            "ingredient": "petrochem_inert_polymer",
+                            "count": 12
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_weapon_ingredients_n",
+                "jacketed_sword_core_advanced"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_weapon_ingredients_n",
+                                "jacketed_sword_core_advanced"
+                            ],
+                            "ingredient": "object/tangible/component/weapon/sword_core_advanced.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.weapon.crafting_melee_standard_weapon"
+    ],
+    "complexity": 34,
+    "volume": 3,
+    "sharedTemplate": "object/draft_schematic/weapon/shared_knife_naktra_crystal.iff",
+    "xpPoints": [
+        {
+            "type": "XP_craftingWeapons",
+            "level": 0,
+            "value": 0
+        }
+    ]
+}

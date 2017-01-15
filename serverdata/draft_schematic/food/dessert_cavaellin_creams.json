@@ -1,0 +1,123 @@
+{
+    "itemsPerContainer": 25,
+    "craftedObjectTemplate": "object/tangible/food/crafted/dessert_cavaellin_creams.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_food_ingredients_n",
+                "carbosyrup"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_food_ingredients_n",
+                                "carbosyrup"
+                            ],
+                            "ingredient": "object/tangible/component/food/ingredient_carbosyrup.iff",
+                            "count": 2
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_food_ingredients_n",
+                "fruit_flavor"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_food_ingredients_n",
+                                "fruit_flavor"
+                            ],
+                            "ingredient": "fruit_fruits",
+                            "count": 20
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_food_ingredients_n",
+                "water"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_food_ingredients_n",
+                                "water"
+                            ],
+                            "ingredient": "water",
+                            "count": 20
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": true,
+            "name": [
+                "craft_food_ingredients_n",
+                "additive"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_food_ingredients_n",
+                                "additive"
+                            ],
+                            "ingredient": "object/tangible/food/crafted/additive/additive_heavy.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.food.crafted_items.crafting_food_organic_water_chef"
+    ],
+    "complexity": 12,
+    "sharedTemplate": "object/draft_schematic/food/shared_dessert_cavaellin_creams.iff",
+    "volume": 1
+}

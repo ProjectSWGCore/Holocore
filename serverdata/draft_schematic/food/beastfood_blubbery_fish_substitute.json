@@ -1,0 +1,103 @@
+{
+    "itemsPerContainer": 0,
+    "craftedObjectTemplate": "object/tangible/food/crafted/beastfood_blubbery_fish_substitute.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_food_ingredients_n",
+                "protein_source"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_food_ingredients_n",
+                                "protein_source"
+                            ],
+                            "ingredient": "meat",
+                            "count": 25
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_food_ingredients_n",
+                "preservative_wrap"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_food_ingredients_n",
+                                "preservative_wrap"
+                            ],
+                            "ingredient": "hide",
+                            "count": 5
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_food_ingredients_n",
+                "stewing_water"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_food_ingredients_n",
+                                "stewing_water"
+                            ],
+                            "ingredient": "water",
+                            "count": 10
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.food.crafted_items.crafting_pet_food"
+    ],
+    "xpPoints": [
+        {
+            "type": "XP_crafting",
+            "level": 0,
+            "value": 0
+        }
+    ],
+    "complexity": 18,
+    "sharedTemplate": "object/draft_schematic/food/shared_beastfood_blubbery_fish_substitute.iff",
+    "volume": 1
+}

@@ -1,0 +1,231 @@
+{
+    "itemsPerContainer": 1,
+    "craftedObjectTemplate": "object/tangible/component/structure/weapon_mount_heavy_stabilization_unit.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_structure_ingredients_n",
+                "primary_load_bearing_truss"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_structure_ingredients_n",
+                                "primary_load_bearing_truss"
+                            ],
+                            "ingredient": "steel",
+                            "count": 1500
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_structure_ingredients_n",
+                "truss_pointing_mechanism"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_structure_ingredients_n",
+                                "truss_pointing_mechanism"
+                            ],
+                            "ingredient": "metal",
+                            "count": 3500
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_structure_ingredients_n",
+                "shock_and_vibration_isolation_assembly"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_structure_ingredients_n",
+                                "shock_and_vibration_isolation_assembly"
+                            ],
+                            "ingredient": "chemical",
+                            "count": 720
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_structure_ingredients_n",
+                "electro_mechanical_linkages"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_structure_ingredients_n",
+                                "electro_mechanical_linkages"
+                            ],
+                            "ingredient": "metal",
+                            "count": 50
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_structure_ingredients_n",
+                "sub_assembly_brackets"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_structure_ingredients_n",
+                                "sub_assembly_brackets"
+                            ],
+                            "ingredient": "metal",
+                            "count": 40
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_structure_ingredients_n",
+                "weapon_alignment_transponders"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_structure_ingredients_n",
+                                "weapon_alignment_transponders"
+                            ],
+                            "ingredient": "object/tangible/component/item/micro_sensor_suite.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_structure_ingredients_n",
+                "cradle_aiming_controller"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_structure_ingredients_n",
+                                "cradle_aiming_controller"
+                            ],
+                            "ingredient": "object/tangible/component/item/electronic_control_unit.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_structure_ingredients_n",
+                "cradle_control_unit_buffer_and_preprocessor_unit"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_structure_ingredients_n",
+                                "cradle_control_unit_buffer_and_preprocessor_unit"
+                            ],
+                            "ingredient": "object/tangible/component/item/electronics_gp_module.iff",
+                            "count": 6
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.structure.specific_item.crafting_structure_component"
+    ],
+    "complexity": 25,
+    "sharedTemplate": "object/draft_schematic/structure/component/shared_weapon_mount_heavy_stabilization_unit.iff",
+    "volume": 6
+}

@@ -1,0 +1,104 @@
+{
+    "itemsPerContainer": 25,
+    "category": "CT_space",
+    "craftedObjectTemplate": "object/tangible/ship/crafted/engine/engine_overhaul_mk1.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "casing"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "casing"
+                            ],
+                            "ingredient": "steel",
+                            "count": 300
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "engine_core"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "engine_core"
+                            ],
+                            "ingredient": "radioactive",
+                            "count": 50
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "engine_housing"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "engine_housing"
+                            ],
+                            "ingredient": "ore_siliclastic",
+                            "count": 250
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.space.engine.crafting_engine_overhaul"
+    ],
+    "xpPoints": [
+        {
+            "type": "XP_shipwright",
+            "level": 0,
+            "value": 0
+        }
+    ],
+    "complexity": 25,
+    "sharedTemplate": "object/draft_schematic/space/engine/shared_engine_overhaul_mk1.iff",
+    "volume": 1
+}

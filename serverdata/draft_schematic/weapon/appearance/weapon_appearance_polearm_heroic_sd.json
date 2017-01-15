@@ -1,0 +1,158 @@
+{
+    "category": "CT_weapon",
+    "itemsPerContainer": 0,
+    "craftedObjectTemplate": "object/weapon/melee/polearm/polearm_heroic_sd.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_weapon_ingredients_n",
+                "lance_shaft"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_weapon_ingredients_n",
+                                "lance_shaft"
+                            ],
+                            "ingredient": "steel_carbonite",
+                            "count": 120
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_weapon_ingredients_n",
+                "vibro_unit_and_power_cell_brackets"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_weapon_ingredients_n",
+                                "vibro_unit_and_power_cell_brackets"
+                            ],
+                            "ingredient": "copper_polysteel",
+                            "count": 60
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_weapon_ingredients_n",
+                "grip_unit"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_weapon_ingredients_n",
+                                "grip_unit"
+                            ],
+                            "ingredient": "petrochem_inert_polymer",
+                            "count": 28
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_weapon_ingredients_n",
+                "vibration_generator"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_weapon_ingredients_n",
+                                "vibration_generator"
+                            ],
+                            "ingredient": "object/tangible/component/weapon/vibro_unit_base.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_weapon_ingredients_n",
+                "weapon_core"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_weapon_ingredients_n",
+                                "weapon_core"
+                            ],
+                            "ingredient": "object/tangible/component/weapon/core/weapon_core_melee_base.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.weapon.core.crafting_new_weapon_final"
+    ],
+    "complexity": 40,
+    "volume": 1,
+    "sharedTemplate": "object/draft_schematic/weapon/appearance/shared_weapon_appearance_polearm_heroic_sd.iff",
+    "xpPoints": [
+        {
+            "type": "XP_craftingWeapons",
+            "level": 0,
+            "value": 0
+        }
+    ]
+}

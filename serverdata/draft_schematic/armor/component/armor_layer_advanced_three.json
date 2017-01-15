@@ -1,0 +1,161 @@
+{
+    "category": "CT_armor",
+    "itemsPerContainer": 100,
+    "craftedObjectTemplate": "object/tangible/component/armor/advanced_armor_layer_three.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_armor_ingredients_n",
+                "armor_layer_frame"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_armor_ingredients_n",
+                                "armor_layer_frame"
+                            ],
+                            "ingredient": "copper_borocarbitic",
+                            "count": 25
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_armor_ingredients_n",
+                "absorbtion_coating"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_armor_ingredients_n",
+                                "absorbtion_coating"
+                            ],
+                            "ingredient": "petrochem_inert_polymer",
+                            "count": 14
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_armor_ingredients_n",
+                "ablative_damage_absorbtion_medium"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_armor_ingredients_n",
+                                "ablative_damage_absorbtion_medium"
+                            ],
+                            "ingredient": "fiberplast_gravitonic",
+                            "count": 14
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_armor_ingredients_n",
+                "insulation_medium"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_armor_ingredients_n",
+                                "insulation_medium"
+                            ],
+                            "ingredient": "ore_intrusive_dylinium",
+                            "count": 16
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_armor_ingredients_n",
+                "second_tier_insulation_medium"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_armor_ingredients_n",
+                                "second_tier_insulation_medium"
+                            ],
+                            "ingredient": "aluminum_perovskitic",
+                            "count": 12
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.armor.component.crafting_new_armor_advanced_layer_1"
+    ],
+    "complexity": 32,
+    "volume": 1,
+    "objvars": {
+        "layer": 10
+    },
+    "sharedTemplate": "object/draft_schematic/armor/component/shared_armor_layer_advanced_three.iff",
+    "xpPoints": [
+        {
+            "type": "XP_craftingClothingArmor",
+            "level": 0,
+            "value": 0
+        }
+    ]
+}

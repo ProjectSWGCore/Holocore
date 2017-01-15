@@ -1,0 +1,228 @@
+{
+    "itemsPerContainer": 25,
+    "craftedObjectTemplate": "object/weapon/ranged/grenade/grenade_glop.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_munition_ingredients_n",
+                "body_shell"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_munition_ingredients_n",
+                                "body_shell"
+                            ],
+                            "ingredient": "metal",
+                            "count": 12
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_munition_ingredients_n",
+                "chem_jet_assembly"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_munition_ingredients_n",
+                                "chem_jet_assembly"
+                            ],
+                            "ingredient": "steel",
+                            "count": 6
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_munition_ingredients_n",
+                "shield_doors"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_munition_ingredients_n",
+                                "shield_doors"
+                            ],
+                            "ingredient": "metal_ferrous",
+                            "count": 8
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_munition_ingredients_n",
+                "gel_canister"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_munition_ingredients_n",
+                                "gel_canister"
+                            ],
+                            "ingredient": "petrochem_inert_polymer",
+                            "count": 5
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_munition_ingredients_n",
+                "warhead_assembly"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_munition_ingredients_n",
+                                "warhead_assembly"
+                            ],
+                            "ingredient": "object/tangible/component/munition/warhead_light.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_munition_ingredients_n",
+                "chemical_diffusion_assembly"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_munition_ingredients_n",
+                                "chemical_diffusion_assembly"
+                            ],
+                            "ingredient": "object/tangible/component/weapon/chemical_dispersion_mechanism.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_munition_ingredients_n",
+                "warhead_fusing"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_munition_ingredients_n",
+                                "warhead_fusing"
+                            ],
+                            "ingredient": "object/tangible/component/munition/warhead_fusing_mechanism.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": true,
+            "name": [
+                "craft_munition_ingredients_n",
+                "warhead_booster"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_munition_ingredients_n",
+                                "warhead_booster"
+                            ],
+                            "ingredient": "object/tangible/component/munition/enhanced_charge_composition.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "manufactureScripts": [
+        "systems.crafting.munition.specific_item.crafting_standard_munition"
+    ],
+    "complexity": 25,
+    "sharedTemplate": "object/draft_schematic/munition/shared_grenade_glop.iff",
+    "volume": 3
+}

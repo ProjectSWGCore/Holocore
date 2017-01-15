@@ -1,0 +1,74 @@
+{
+    "itemsPerContainer": 25,
+    "category": "CT_misc",
+    "craftedObjectTemplate": "object/tangible/scout/trap/trap_flash_bomb.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "device_housing"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "device_housing"
+                            ],
+                            "ingredient": "bone",
+                            "count": 20
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "device_interior"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "device_interior"
+                            ],
+                            "ingredient": "metal",
+                            "count": 15
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "manufactureScripts": [
+        "systems.crafting.item.specific_item.crafting_trap_item"
+    ],
+    "xpPoints": [
+        {
+            "type": "XP_craftingCamp",
+            "level": 0,
+            "value": 0
+        }
+    ],
+    "complexity": 14,
+    "sharedTemplate": "object/draft_schematic/scout/shared_item_trap_flash_bomb.iff",
+    "volume": 1
+}

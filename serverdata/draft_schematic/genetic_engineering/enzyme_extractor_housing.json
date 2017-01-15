@@ -1,0 +1,150 @@
+{
+    "itemsPerContainer": 25,
+    "craftedObjectTemplate": "object/tangible/component/genetic_engineering/enzyme_extractor_housing.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_weapon_ingredients_n",
+                "frame_assembly"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_weapon_ingredients_n",
+                                "frame_assembly"
+                            ],
+                            "ingredient": "iron_doonium",
+                            "count": 33
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_weapon_ingredients_n",
+                "receiver_assembly"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_weapon_ingredients_n",
+                                "receiver_assembly"
+                            ],
+                            "ingredient": "metal_ferrous",
+                            "count": 22
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_weapon_ingredients_n",
+                "grip_assembly"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_weapon_ingredients_n",
+                                "grip_assembly"
+                            ],
+                            "ingredient": "metal",
+                            "count": 10
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_weapon_ingredients_n",
+                "powerhandler_advanced"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_weapon_ingredients_n",
+                                "powerhandler_advanced"
+                            ],
+                            "ingredient": "object/tangible/component/weapon/blaster_power_handler_advanced.iff",
+                            "count": 2
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_weapon_ingredients_n",
+                "barrel_pistol_projectile_advanced"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_weapon_ingredients_n",
+                                "barrel_pistol_projectile_advanced"
+                            ],
+                            "ingredient": "object/tangible/component/weapon/projectile_pistol_barrel_advanced.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.chemistry.enzyme.crafting_ws_enzyme_units"
+    ],
+    "complexity": 34,
+    "sharedTemplate": "object/draft_schematic/genetic_engineering/shared_enzyme_extractor_housing.iff",
+    "volume": 1
+}

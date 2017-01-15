@@ -1,0 +1,49 @@
+{
+    "itemsPerContainer": 25,
+    "craftedObjectTemplate": "object/tangible/component/food/ingredient_ball_of_dough.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_food_ingredients_n",
+                "wheat"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_food_ingredients_n",
+                                "wheat"
+                            ],
+                            "ingredient": "wheat",
+                            "count": 10
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.food.crafted_items.crafting_food_organic_artisan"
+    ],
+    "complexity": 3,
+    "sharedTemplate": "object/draft_schematic/food/component/shared_ingredient_ball_of_dough.iff",
+    "xpPoints": [
+        {
+            "type": "XP_crafting",
+            "level": 0,
+            "value": 0
+        }
+    ],
+    "volume": 2
+}

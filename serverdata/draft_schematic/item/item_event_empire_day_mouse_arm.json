@@ -1,0 +1,126 @@
+{
+    "itemsPerContainer": 0,
+    "craftedObjectTemplate": "object/tangible/holiday/empire_day/improved_mouse_droid_arm_crate.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "servo_motor"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "servo_motor"
+                            ],
+                            "ingredient": "object/tangible/holiday/empire_day/component/mouse_servo_motor.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "translation_joint"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "translation_joint"
+                            ],
+                            "ingredient": "object/tangible/holiday/empire_day/component/mouse_translation_joint.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "ball_joint"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "ball_joint"
+                            ],
+                            "ingredient": "object/tangible/holiday/empire_day/component/mouse_ball_joint.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "manipulator_clamp_hand"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "manipulator_clamp_hand"
+                            ],
+                            "ingredient": "object/tangible/holiday/empire_day/component/mouse_manipulation_clamp_hand.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.item.specific_item.crafting_station_item"
+    ],
+    "complexity": 5,
+    "sharedTemplate": "object/draft_schematic/item/shared_item_event_empire_day_mouse_arm.iff",
+    "objvars": {
+        "crafting.no_critical_fail": 1
+    },
+    "volume": 1
+}

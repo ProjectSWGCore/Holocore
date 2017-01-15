@@ -1,0 +1,18 @@
+{
+    "category": "CT_furniture",
+    "crateObjectTemplate": "object/factory/factory_crate_furniture.iff",
+    "skillCommands": [
+        "unskilled"
+    ],
+    "destroyIngredients": true,
+    "manufactureScripts": [
+        "systems.crafting.furniture.specific_item.furniture_item"
+    ],
+    "xpPoints": [
+        {
+            "type": "XP_craftingStructure",
+            "level": 0,
+            "value": 0
+        }
+    ]
+}

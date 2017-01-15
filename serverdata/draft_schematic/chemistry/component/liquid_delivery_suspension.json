@@ -1,0 +1,69 @@
+{
+    "itemsPerContainer": 50,
+    "craftedObjectTemplate": "object/tangible/component/chemistry/liquid_delivery_suspension.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_chemical_ingredients_n",
+                "purified_organic_suspension"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_chemical_ingredients_n",
+                                "purified_organic_suspension"
+                            ],
+                            "ingredient": "organic",
+                            "count": 6
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_chemical_ingredients_n",
+                "suspension_base"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_chemical_ingredients_n",
+                                "suspension_base"
+                            ],
+                            "ingredient": "water",
+                            "count": 6
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.chemistry.component.crafting_component_chemistry_basic_medic"
+    ],
+    "complexity": 10,
+    "sharedTemplate": "object/draft_schematic/chemistry/component/shared_liquid_delivery_suspension.iff",
+    "volume": 2
+}

@@ -1,0 +1,177 @@
+{
+    "itemsPerContainer": 50,
+    "craftedObjectTemplate": "object/tangible/deed/vehicle_deed/basilisk_war_droid.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_vehicle_ingredients_n",
+                "plating_assembly"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_vehicle_ingredients_n",
+                                "plating_assembly"
+                            ],
+                            "ingredient": "steel_thoranium",
+                            "count": 375
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_vehicle_ingredients_n",
+                "stabilizor_subframe"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_vehicle_ingredients_n",
+                                "stabilizor_subframe"
+                            ],
+                            "ingredient": "steel_mustafar",
+                            "count": 1200
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_vehicle_ingredients_n",
+                "avionic_subassembly"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_vehicle_ingredients_n",
+                                "avionic_subassembly"
+                            ],
+                            "ingredient": "space_metal_obsidian",
+                            "count": 400
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_vehicle_ingredients_n",
+                "repulsor_assembly"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_vehicle_ingredients_n",
+                                "repulsor_assembly"
+                            ],
+                            "ingredient": "space_gem_crystal",
+                            "count": 500
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_vehicle_ingredients_n",
+                "cockpit_fitout"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_vehicle_ingredients_n",
+                                "cockpit_fitout"
+                            ],
+                            "ingredient": "petrochem_fuel_liquid_type5",
+                            "count": 350
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_vehicle_ingredients_n",
+                "structural_frame"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_vehicle_ingredients_n",
+                                "structural_frame"
+                            ],
+                            "ingredient": "iron_mustafar",
+                            "count": 1250
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.vehicle.crafted_item.crafting_vehicle_basilisk"
+    ],
+    "complexity": 25,
+    "sharedTemplate": "object/draft_schematic/vehicle/civilian/shared_basilisk_war_droid.iff",
+    "volume": 1
+}

@@ -1,0 +1,131 @@
+{
+    "category": "CT_weapon",
+    "itemsPerContainer": 25,
+    "craftedObjectTemplate": "object/weapon/melee/polearm/lance_avatar_wke_heartlance.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_weapon_ingredients_n",
+                "staff_shaft"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_weapon_ingredients_n",
+                                "staff_shaft"
+                            ],
+                            "ingredient": "metal",
+                            "count": 35
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_weapon_ingredients_n",
+                "vibro_unit_and_power_cell_brackets"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_weapon_ingredients_n",
+                                "vibro_unit_and_power_cell_brackets"
+                            ],
+                            "ingredient": "metal_ferrous",
+                            "count": 25
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_weapon_ingredients_n",
+                "power_circuits"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_weapon_ingredients_n",
+                                "power_circuits"
+                            ],
+                            "ingredient": "object/tangible/component/item/electronic_control_unit.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_weapon_ingredients_n",
+                "vibration_generator_advanced"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_weapon_ingredients_n",
+                                "vibration_generator_advanced"
+                            ],
+                            "ingredient": "object/tangible/component/weapon/vibro_unit_advanced.iff",
+                            "count": 2
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.weapon.crafting_melee_standard_weapon"
+    ],
+    "complexity": 34,
+    "volume": 5,
+    "sharedTemplate": "object/draft_schematic/weapon/shared_lance_avatar_wke_heartlance.iff",
+    "xpPoints": [
+        {
+            "type": "XP_craftingWeapons",
+            "level": 0,
+            "value": 0
+        }
+    ]
+}

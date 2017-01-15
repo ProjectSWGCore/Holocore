@@ -1,0 +1,204 @@
+{
+    "itemsPerContainer": 25,
+    "craftedObjectTemplate": "object/tangible/component/droid/personality_module_geek.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_droid_ingredients_n",
+                "module_frame"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_droid_ingredients_n",
+                                "module_frame"
+                            ],
+                            "ingredient": "copper",
+                            "count": 13
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_droid_ingredients_n",
+                "thermal_shielding"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_droid_ingredients_n",
+                                "thermal_shielding"
+                            ],
+                            "ingredient": "ore_siliclastic",
+                            "count": 6
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_droid_ingredients_n",
+                "data_smart_indexer"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_droid_ingredients_n",
+                                "data_smart_indexer"
+                            ],
+                            "ingredient": "object/tangible/component/item/electronics_gp_module.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_droid_ingredients_n",
+                "ancillary_heuristic_processor"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_droid_ingredients_n",
+                                "ancillary_heuristic_processor"
+                            ],
+                            "ingredient": "object/tangible/component/item/electronics_gp_module.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_droid_ingredients_n",
+                "primary_phrase_database"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_droid_ingredients_n",
+                                "primary_phrase_database"
+                            ],
+                            "ingredient": "object/tangible/component/item/electronics_memory_module.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_droid_ingredients_n",
+                "secondary_phrase_database"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_droid_ingredients_n",
+                                "secondary_phrase_database"
+                            ],
+                            "ingredient": "object/tangible/component/item/electronics_memory_module.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_droid_ingredients_n",
+                "phrase_index_tree"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_droid_ingredients_n",
+                                "phrase_index_tree"
+                            ],
+                            "ingredient": "object/tangible/component/item/electronics_memory_module.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.droid.crafted_items.crafting_droid_components"
+    ],
+    "complexity": 25,
+    "sharedTemplate": "object/draft_schematic/droid/component/shared_personality_module_geek.iff",
+    "volume": 2
+}

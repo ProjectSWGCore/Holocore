@@ -1,0 +1,50 @@
+{
+    "category": "CT_weapon",
+    "itemsPerContainer": 25,
+    "craftedObjectTemplate": "object/weapon/melee/polearm/lance_staff_wood_s1.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_weapon_ingredients_n",
+                "staff_shaft"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_weapon_ingredients_n",
+                                "staff_shaft"
+                            ],
+                            "ingredient": "wood",
+                            "count": 16
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.weapon.crafting_staff_artisan_weapon"
+    ],
+    "complexity": 8,
+    "volume": 3,
+    "sharedTemplate": "object/draft_schematic/weapon/shared_staff.iff",
+    "xpPoints": [
+        {
+            "type": "XP_crafting",
+            "level": 0,
+            "value": 0
+        }
+    ]
+}

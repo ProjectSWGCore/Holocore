@@ -1,0 +1,77 @@
+{
+    "itemsPerContainer": 25,
+    "category": "CT_space",
+    "craftedObjectTemplate": "object/tangible/ship/crafted/weapon/shield_effectiveness_intensifier_mk2.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "casing"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "casing"
+                            ],
+                            "ingredient": "steel",
+                            "count": 200
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "effectiveness_enhancer"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "effectiveness_enhancer"
+                            ],
+                            "ingredient": "radioactive_polymetric",
+                            "count": 50
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.space.weapon.crafting_shield_effectiveness_intensifier"
+    ],
+    "xpPoints": [
+        {
+            "type": "XP_shipwright",
+            "level": 0,
+            "value": 0
+        }
+    ],
+    "complexity": 23,
+    "sharedTemplate": "object/draft_schematic/space/weapon/shared_shield_effectiveness_intensifier_mk2.iff",
+    "volume": 1
+}

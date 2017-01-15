@@ -1,0 +1,69 @@
+{
+    "itemsPerContainer": 25,
+    "craftedObjectTemplate": "object/tangible/component/genetic_engineering/combiner_use_coolant.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "combiner_use_coolant_a"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "combiner_use_coolant_a"
+                            ],
+                            "ingredient": "steel",
+                            "count": 250
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "combiner_use_coolant_b"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "combiner_use_coolant_b"
+                            ],
+                            "ingredient": "gas",
+                            "count": 500
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.chemistry.enzyme.crafting_ws_enzyme_extractor"
+    ],
+    "complexity": 16,
+    "sharedTemplate": "object/draft_schematic/genetic_engineering/shared_combiner_use_coolant.iff",
+    "volume": 1
+}

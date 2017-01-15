@@ -1,0 +1,77 @@
+{
+    "itemsPerContainer": 25,
+    "category": "CT_space",
+    "craftedObjectTemplate": "object/tangible/ship/crafted/booster/heavy_fuel_cell_mk3.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "fuel_cell_core"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "fuel_cell_core"
+                            ],
+                            "ingredient": "steel",
+                            "count": 350
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "adv_fuel_cell_enhancer"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "adv_fuel_cell_enhancer"
+                            ],
+                            "ingredient": "gas_reactive_organometallic",
+                            "count": 150
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.space.booster.crafting_heavy_fuel_cell"
+    ],
+    "xpPoints": [
+        {
+            "type": "XP_shipwright",
+            "level": 0,
+            "value": 0
+        }
+    ],
+    "complexity": 27,
+    "sharedTemplate": "object/draft_schematic/space/booster/shared_heavy_fuel_cell_mk3.iff",
+    "volume": 1
+}

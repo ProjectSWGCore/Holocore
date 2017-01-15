@@ -1,0 +1,231 @@
+{
+    "itemsPerContainer": 0,
+    "craftedObjectTemplate": "object/tangible/deed/vehicle_deed/jetpack_deed.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_vehicle_ingredients_n",
+                "vehicle_body"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_vehicle_ingredients_n",
+                                "vehicle_body"
+                            ],
+                            "ingredient": "metal_nonferrous",
+                            "count": 1125
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_vehicle_ingredients_n",
+                "structural_frame"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_vehicle_ingredients_n",
+                                "structural_frame"
+                            ],
+                            "ingredient": "metal_ferrous",
+                            "count": 3125
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "encased_ducted_fan"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "encased_ducted_fan"
+                            ],
+                            "ingredient": "object/tangible/loot/dungeon/death_watch_bunker/ducted_fan.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "fuel_dispersion_unit"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "fuel_dispersion_unit"
+                            ],
+                            "ingredient": "object/tangible/loot/dungeon/death_watch_bunker/fuel_dispersion_unit.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "fuel_injector_tank"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "fuel_injector_tank"
+                            ],
+                            "ingredient": "object/tangible/loot/dungeon/death_watch_bunker/fuel_injector_tank.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "fuel_injector_tank_2"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "fuel_injector_tank_2"
+                            ],
+                            "ingredient": "object/tangible/loot/dungeon/death_watch_bunker/fuel_injector_tank.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "jetpack_base"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "jetpack_base"
+                            ],
+                            "ingredient": "object/tangible/loot/dungeon/death_watch_bunker/jetpack_base.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "allum_hardening_compound"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_templateGeneric",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "allum_hardening_compound"
+                            ],
+                            "ingredient": "object/tangible/loot/dungeon/death_watch_bunker/mining_drill_reward.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.vehicle.crafted_item.crafting_artisan_vehicle"
+    ],
+    "complexity": 25,
+    "sharedTemplate": "object/draft_schematic/vehicle/civilian/shared_jetpack.iff",
+    "volume": 1
+}

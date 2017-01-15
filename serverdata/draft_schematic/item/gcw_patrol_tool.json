@@ -1,0 +1,96 @@
+{
+    "itemsPerContainer": 0,
+    "craftedObjectTemplate": "object/tangible/gcw/crafting_quest/gcw_patrol_tool.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "gcw_beacon"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_templateGeneric",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "gcw_beacon"
+                            ],
+                            "ingredient": "object/tangible/gcw/crafting_quest/gcw_landing_beacon.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "gcw_amplifier"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_templateGeneric",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "gcw_amplifier"
+                            ],
+                            "ingredient": "object/tangible/gcw/crafting_quest/gcw_signal_amplifier.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": true,
+            "name": [
+                "craft_item_ingredients_n",
+                "gcw_manufacturing_booster"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_templateGeneric",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "gcw_manufacturing_booster"
+                            ],
+                            "ingredient": "object/tangible/gcw/crafting_quest/gcw_manufacturing_boosters.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.item.crafting_gcw_patrol"
+    ],
+    "complexity": 5,
+    "sharedTemplate": "object/draft_schematic/item/shared_gcw_patrol_tool.iff",
+    "volume": 1
+}

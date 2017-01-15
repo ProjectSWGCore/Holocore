@@ -1,0 +1,123 @@
+{
+    "itemsPerContainer": 50,
+    "craftedObjectTemplate": "object/tangible/component/vehicle/laser_cannon.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_vehicle_ingredients_n",
+                "component_frame"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_vehicle_ingredients_n",
+                                "component_frame"
+                            ],
+                            "ingredient": "copper",
+                            "count": 250
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_vehicle_ingredients_n",
+                "component_body"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_vehicle_ingredients_n",
+                                "component_body"
+                            ],
+                            "ingredient": "aluminum",
+                            "count": 150
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_vehicle_ingredients_n",
+                "beam_focus"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_vehicle_ingredients_n",
+                                "beam_focus"
+                            ],
+                            "ingredient": "gemstone",
+                            "count": 100
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_vehicle_ingredients_n",
+                "power_handler"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_vehicle_ingredients_n",
+                                "power_handler"
+                            ],
+                            "ingredient": "object/tangible/component/vehicle/hvy_blaster_power_handler.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.armor.component.crafting_armor_layer_component"
+    ],
+    "complexity": 20,
+    "sharedTemplate": "object/draft_schematic/vehicle/component/shared_laser_cannon.iff",
+    "volume": 1
+}

@@ -1,0 +1,103 @@
+{
+    "itemsPerContainer": 0,
+    "craftedObjectTemplate": "object/tangible/medicine/channelled_stimpack/stimpack_a.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_chemical_ingredients_n",
+                "organic_element"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_chemical_ingredients_n",
+                                "organic_element"
+                            ],
+                            "ingredient": "organic",
+                            "count": 250
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_chemical_ingredients_n",
+                "inorganic_element"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_chemical_ingredients_n",
+                                "inorganic_element"
+                            ],
+                            "ingredient": "inorganic",
+                            "count": 250
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "stimpack_charge_loader"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "stimpack_charge_loader"
+                            ],
+                            "ingredient": "object/tangible/component/chemistry/stimpack_charge_loader.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.chemistry.crafted_items.crafting_stimpack_chemistry"
+    ],
+    "xpPoints": [
+        {
+            "type": "XP_crafting",
+            "level": 0,
+            "value": 0
+        }
+    ],
+    "complexity": 10,
+    "sharedTemplate": "object/draft_schematic/chemistry/shared_stimpack_tier_1.iff",
+    "volume": 1
+}

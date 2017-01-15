@@ -1,0 +1,161 @@
+{
+    "category": "CT_armor",
+    "itemsPerContainer": 100,
+    "craftedObjectTemplate": "object/tangible/component/armor/new_armor_segment_test.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_armor_ingredients_n",
+                "armor_segment_frame"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_armor_ingredients_n",
+                                "armor_segment_frame"
+                            ],
+                            "ingredient": "metal",
+                            "count": 25
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": true,
+            "name": [
+                "craft_armor_ingredients_n",
+                "armor_layer1"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_armor_ingredients_n",
+                                "armor_layer1"
+                            ],
+                            "ingredient": "object/tangible/component/armor/new_armor_layer_test.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": true,
+            "name": [
+                "craft_armor_ingredients_n",
+                "armor_layer2"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_armor_ingredients_n",
+                                "armor_layer2"
+                            ],
+                            "ingredient": "object/tangible/component/armor/new_armor_layer_test.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": true,
+            "name": [
+                "craft_armor_ingredients_n",
+                "armor_layer3"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_armor_ingredients_n",
+                                "armor_layer3"
+                            ],
+                            "ingredient": "object/tangible/component/armor/new_armor_layer_test.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": true,
+            "name": [
+                "craft_armor_ingredients_n",
+                "armor_layer4"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_armor_ingredients_n",
+                                "armor_layer4"
+                            ],
+                            "ingredient": "object/tangible/component/armor/new_armor_layer_test.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.armor.component.crafting_new_armor_segment"
+    ],
+    "complexity": 10,
+    "volume": 1,
+    "objvars": {
+        "crafting.no_critical_fail": 1
+    },
+    "sharedTemplate": "object/draft_schematic/armor/component/shared_test_an_armor_segment.iff",
+    "xpPoints": [
+        {
+            "type": "XP_craftingClothingArmor",
+            "level": 0,
+            "value": 0
+        }
+    ]
+}

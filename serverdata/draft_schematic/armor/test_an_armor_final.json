@@ -1,0 +1,81 @@
+{
+    "category": "CT_armor",
+    "itemsPerContainer": 25,
+    "craftedObjectTemplate": "object/tangible/wearables/armor/new_armor_final_test.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_armor_ingredients_n",
+                "armor_segment_frame"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_armor_ingredients_n",
+                                "armor_segment_frame"
+                            ],
+                            "ingredient": "metal",
+                            "count": 25
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_armor_ingredients_n",
+                "new_armor_core"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_armor_ingredients_n",
+                                "new_armor_core"
+                            ],
+                            "ingredient": "object/tangible/component/armor/new_armor_core_test.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.armor.component.crafting_new_armor_final"
+    ],
+    "complexity": 10,
+    "volume": 1,
+    "objvars": {
+        "conditionMultiplier": "69.00",
+        "crafting.no_critical_fail": 1
+    },
+    "sharedTemplate": "object/draft_schematic/armor/shared_test_an_armor_final.iff",
+    "xpPoints": [
+        {
+            "type": "XP_craftingClothingArmor",
+            "level": 0,
+            "value": 0
+        }
+    ]
+}

@@ -1,0 +1,69 @@
+{
+    "itemsPerContainer": 100,
+    "craftedObjectTemplate": "object/tangible/component/camp/camp_module_cloning_tube.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "tube_housing"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "tube_housing"
+                            ],
+                            "ingredient": "aluminum",
+                            "count": 150
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "bacta_supply"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "bacta_supply"
+                            ],
+                            "ingredient": "petrochem_inert",
+                            "count": 100
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.camp.crafting_camp_module"
+    ],
+    "complexity": 15,
+    "sharedTemplate": "object/draft_schematic/camp/modules/shared_cloning_tube_module.iff",
+    "volume": 1
+}

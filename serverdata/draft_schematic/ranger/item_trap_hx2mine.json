@@ -1,0 +1,101 @@
+{
+    "itemsPerContainer": 25,
+    "category": "CT_weapon",
+    "craftedObjectTemplate": "object/tangible/scout/trap/trap_ap_hx2mine.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "explosive_compound"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "explosive_compound"
+                            ],
+                            "ingredient": "fuel_petrochem_solid",
+                            "count": 25
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "trap_housing"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "trap_housing"
+                            ],
+                            "ingredient": "aluminum",
+                            "count": 15
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "trigger_connector"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "trigger_connector"
+                            ],
+                            "ingredient": "energy",
+                            "count": 30
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "manufactureScripts": [
+        "systems.crafting.item.specific_item.crafting_ap_trap_item"
+    ],
+    "xpPoints": [
+        {
+            "type": "XP_craftingCamp",
+            "level": 0,
+            "value": 0
+        }
+    ],
+    "complexity": 12,
+    "sharedTemplate": "object/draft_schematic/ranger/shared_item_trap_hx2mine.iff",
+    "volume": 1
+}

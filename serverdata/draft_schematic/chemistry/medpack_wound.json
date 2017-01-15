@@ -1,0 +1,96 @@
+{
+    "itemsPerContainer": 50,
+    "craftedObjectTemplate": "object/tangible/medicine/medpack_damage.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_chemical_ingredients_n",
+                "body"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_clothing_ingredients_n",
+                                "body"
+                            ],
+                            "ingredient": "hide",
+                            "count": 30
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_chemical_ingredients_n",
+                "binding_and_hardware"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_clothing_ingredients_n",
+                                "binding_and_hardware"
+                            ],
+                            "ingredient": "petrochem_inert_polymer",
+                            "count": 12
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_chemical_ingredients_n",
+                "colorizable_cloth_panel"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_chemical_ingredients_n",
+                                "colorizable_cloth_panel"
+                            ],
+                            "ingredient": "object/tangible/component/clothing/color_panels.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.chemistry.crafted_items.crafting_medpack_damage_chemistry"
+    ],
+    "complexity": 50,
+    "sharedTemplate": "object/draft_schematic/chemistry/shared_medpack_wound.iff",
+    "volume": 6
+}

@@ -1,0 +1,15 @@
+{
+    "category": "CT_weapon",
+    "crateObjectTemplate": "object/factory/factory_crate_weapon.iff",
+    "skillCommands": [
+        "unskilled"
+    ],
+    "destroyIngredients": true,
+    "xpPoints": [
+        {
+            "type": "XP_craftingWeapons",
+            "level": 0,
+            "value": 0
+        }
+    ]
+}

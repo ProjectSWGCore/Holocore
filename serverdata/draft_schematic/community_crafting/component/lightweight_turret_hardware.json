@@ -1,0 +1,42 @@
+{
+    "category": "CT_miscMission",
+    "itemsPerContainer": 0,
+    "craftedObjectTemplate": "object/tangible/component/structure/lightweight_turret_hardware.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "item_n",
+                "endrine"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_templateGeneric",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "item_n",
+                                "endrine"
+                            ],
+                            "ingredient": "object/tangible/loot/quest/endrine.iff",
+                            "count": 5
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.community_crafting.component.lightweight_turret_hardware"
+    ],
+    "complexity": 10,
+    "sharedTemplate": "object/draft_schematic/community_crafting/component/shared_lightweight_turret_hardware.iff"
+}

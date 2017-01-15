@@ -1,0 +1,96 @@
+{
+    "itemsPerContainer": 100,
+    "craftedObjectTemplate": "object/tangible/component/genetic_engineering/centrifuge_use_tray.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "centrifuge_use_tray_a"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "centrifuge_use_tray_a"
+                            ],
+                            "ingredient": "steel",
+                            "count": 425
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "centrifuge_use_tray_sub_filter"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "centrifuge_use_tray_sub_filter"
+                            ],
+                            "ingredient": "object/tangible/component/genetic_engineering/centrifuge_use_filter.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_item_ingredients_n",
+                "centrifuge_use_tray_sub_mixture"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_item_ingredients_n",
+                                "centrifuge_use_tray_sub_mixture"
+                            ],
+                            "ingredient": "object/tangible/component/genetic_engineering/centrifuge_use_mixture.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.chemistry.enzyme.crafting_struct_enzyme_units"
+    ],
+    "complexity": 16,
+    "sharedTemplate": "object/draft_schematic/genetic_engineering/shared_centrifuge_use_tray.iff",
+    "volume": 1
+}

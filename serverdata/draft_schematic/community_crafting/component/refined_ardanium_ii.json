@@ -1,0 +1,42 @@
+{
+    "category": "CT_miscMission",
+    "itemsPerContainer": 0,
+    "craftedObjectTemplate": "object/tangible/component/structure/refined_ardanium_ii.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "community_crafting_n",
+                "raw_materials"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_templateGeneric",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "item_n",
+                                "ardanium_ii"
+                            ],
+                            "ingredient": "object/tangible/loot/quest/ardanium_ii.iff",
+                            "count": 20
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.community_crafting.component.refined_ardanium_ii"
+    ],
+    "complexity": 15,
+    "sharedTemplate": "object/draft_schematic/community_crafting/component/shared_refined_ardanium_ii.iff"
+}

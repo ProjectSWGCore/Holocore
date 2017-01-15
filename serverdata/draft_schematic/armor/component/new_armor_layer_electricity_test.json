@@ -1,0 +1,44 @@
+{
+    "itemsPerContainer": 100,
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_armor_ingredients_n",
+                "armor_layer_frame"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_weapon_ingredients_n",
+                                "armor_layer_frame"
+                            ],
+                            "ingredient": "metal",
+                            "count": 25
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.armor.component.crafting_new_armor_layer_electricity"
+    ],
+    "objvars": {
+        "layer": 2
+    },
+    "complexity": 10,
+    "sharedTemplate": "object/draft_schematic/armor/component/shared_new_armor_layer_electricity_test.iff",
+    "volume": 1
+}
