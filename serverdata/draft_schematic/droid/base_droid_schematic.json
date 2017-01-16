@@ -1,0 +1,13 @@
+{
+    "parent": "object/draft_schematic/base/base_draft_schematic.iff",
+    "category": "CT_droid",
+    "destroyIngredients": true,
+    "crateObjectTemplate": "object/factory/factory_crate_electronics.iff",
+    "xpPoints": [
+        {
+            "type": "XP_craftingDroid",
+            "level": 0,
+            "value": 0
+        }
+    ]
+}

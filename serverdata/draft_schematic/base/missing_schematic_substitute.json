@@ -1,0 +1,4 @@
+{
+    "parent": "object/draft_schematic/base/base_draft_schematic.iff",
+    "sharedTemplate": "object/draft_schematic/base/shared_missing_schematic_substitute.iff"
+}
