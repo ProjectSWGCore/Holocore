@@ -59,7 +59,7 @@ public class CraftingSessionEnded extends ObjectController{
 
 	@Override
 	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + 9);
+		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + 13);
 		encodeHeader(data);
 		addLong(data, playerId);
 		addInt(data, sessionId);
