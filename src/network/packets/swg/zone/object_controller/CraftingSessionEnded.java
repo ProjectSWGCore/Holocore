@@ -29,105 +29,65 @@ package network.packets.swg.zone.object_controller;
 
 import java.nio.ByteBuffer;
 
-public class MessageQueueDraftSchematics extends ObjectController {
-
-	private final static int CRC = 0x0102;
+public class CraftingSessionEnded extends ObjectController{
 	
-	private long toolId;
-	private long craftingStationId;
-	private int schematicsCounter;
-	private int[] schematicsId;
-	private int[] schematicsCrc;
-	private byte [][] schematicSubcategories = new byte[schematicsCounter][4];
-
-	public MessageQueueDraftSchematics(long toolId, long craftingStationId, int schematicsCounter, int[] schematicsId, int[] schematicsCrc, byte[][] schematicSubcategories) {
-		super();
-		this.toolId = toolId;
-		this.craftingStationId = craftingStationId;
-		this.schematicsCounter = schematicsCounter;
-		this.schematicsId = schematicsId;
-		this.schematicsCrc = schematicsCrc;
-		System.arraycopy(schematicSubcategories, 0, this.schematicSubcategories, 0, 4);
+	public static final int CRC = 0x01C2;
+	
+	private long playerId; //crafterId
+	private int sessionId; //sessionId, must be 0 after the Craftingsession
+	private byte count; //Itemcount created in that Session
+	
+	public CraftingSessionEnded(long playerId, int sessionId, byte count) {
+		super(CRC);
+		this.playerId = playerId;
+		this.sessionId = sessionId;
+		this.count = count;
 	}
-
-	public MessageQueueDraftSchematics(ByteBuffer data) {
+	
+	public CraftingSessionEnded(ByteBuffer data) {
 		super(CRC);
 		decode(data);
 	}
-	
+
 	@Override
 	public void decode(ByteBuffer data) {
 		decodeHeader(data);
-		toolId = getLong(data);
-		craftingStationId = getLong(data);
-		schematicsCounter = getInt(data);
-		for(int i = 0; i < schematicsCounter; i++){
-			schematicsId[i] = getInt(data);
-			schematicsCrc[i] = getInt(data);
-			schematicSubcategories[i] = getArray(data);
-		}		
+		playerId = getLong(data);
+		sessionId = getInt(data);
+		count = getByte(data);
 	}
 
 	@Override
 	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + 20 + schematicsCounter * 12 + schematicSubcategories.length);
+		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + 13);
 		encodeHeader(data);
-		addLong(data, toolId);
-		addLong(data, craftingStationId);
-		addInt(data, schematicsCounter);
-		for(int i = 0; i< schematicsCounter; i++){
-			addInt(data, schematicsId[i]);
-			addInt(data, schematicsCrc[i]);
-			addData(data, schematicSubcategories[i]);
-		}
+		addLong(data, playerId);
+		addInt(data, sessionId);
+		addByte(data, count);
 		return data;
 	}
 
-	public long getToolId() {
-		return toolId;
+	public long getPlayerId() {
+		return playerId;
 	}
 
-	public void setToolId(long toolId) {
-		this.toolId = toolId;
+	public void setPlayerId(long playerId) {
+		this.playerId = playerId;
 	}
 
-	public long getCraftingStationId() {
-		return craftingStationId;
+	public int getSessionId() {
+		return sessionId;
 	}
 
-	public void setCraftingStationId(long craftingStationId) {
-		this.craftingStationId = craftingStationId;
+	public void setSessionId(int sessionId) {
+		this.sessionId = sessionId;
 	}
 
-	public int getSchematicsCounter() {
-		return schematicsCounter;
+	public byte getCount() {
+		return count;
 	}
 
-	public void setSchematicsCounter(int schematicsCounter) {
-		this.schematicsCounter = schematicsCounter;
-	}
-
-	public int[] getSchematicsId() {
-		return schematicsId;
-	}
-
-	public void setSchematicsId(int[] schematicsId) {
-		this.schematicsId = schematicsId;
-	}
-
-	public int[] getSchematicsCrc() {
-		return schematicsCrc;
-	}
-
-	public void setSchematicsCrc(int[] schematicsCrc) {
-		this.schematicsCrc = schematicsCrc;
-	}
-
-	public byte[][] getSchematicSubcategories() {
-		return schematicSubcategories;
-	}
-
-	public void setSchematicSubcategories(byte[][] schematicSubcategories) {
-		this.schematicSubcategories = schematicSubcategories;
+	public void setCount(byte count) {
+		this.count = count;
 	}
 }
