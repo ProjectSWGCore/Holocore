@@ -29,20 +29,18 @@ package resources.collections;
 
 import network.packets.Packet;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
+import resources.control.Assert;
 import resources.encodables.Encodable;
 import resources.network.NetBuffer;
 import resources.objects.SWGObject;
 import resources.server_info.Log;
+import resources.server_info.SynchronizedList;
 import utilities.Encoder;
 import utilities.Encoder.StringType;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.AbstractList;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -53,20 +51,17 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @param <E> Element that implements {@link Encodable} in order for data to be sent, or a basic
  *            type.
  */
-public class SWGList<E> extends ArrayList<E> implements Encodable, Serializable {
-	
-	private static final long serialVersionUID = 2L;
+public class SWGList<E> extends SynchronizedList<E> implements Encodable {
 	
 	private final StringType strType;
 	private final int view;
 	private final int updateType;
+	private final AtomicInteger updateCount;
+	private final List<byte[]> deltas;
+	private final List<byte[]> data;
 	
-	private transient Object updateMutex = new Object();
-	private transient AtomicInteger updateCount;
-	private transient List<byte[]> deltas;
-	private transient List<byte[]> data;
-	private transient int deltaSize;
-	private transient int dataSize;
+	private int deltaSize;
+	private int dataSize;
 	
 	/**
 	 * Creates a new {@link SWGList} for the defined baseline with the given view and update. Note
@@ -97,26 +92,11 @@ public class SWGList<E> extends ArrayList<E> implements Encodable, Serializable 
 		this.view = view;
 		this.updateType = updateType;
 		this.strType = strType;
-		this.data = new ArrayList<>();
 		this.dataSize = 0;
-		this.updateMutex = new Object();
 		this.updateCount = new AtomicInteger(0);
+		this.deltas = new SynchronizedList<>(new LinkedList<>());
+		this.data = new SynchronizedList<>();
 		this.deltaSize = 0;
-		this.deltas = new LinkedList<>();
-	}
-	
-	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
-		ois.defaultReadObject();
-		updateMutex = new Object();
-		updateCount = new AtomicInteger(0);
-		data = new ArrayList<>();
-		dataSize = 0;
-		deltas = new LinkedList<>();
-		deltaSize = 0;
-		for (E e : this) {
-			addObjectData(data.size(), e, (byte) 1);
-		}
-		clearDeltaQueue();
 	}
 	
 	public void resetUpdateCount() {
@@ -131,9 +111,7 @@ public class SWGList<E> extends ArrayList<E> implements Encodable, Serializable 
 	
 	@Override
 	public void add(int index, E e) {
-		synchronized (updateMutex) {
-			super.add(index, e);
-		}
+		super.add(index, e);
 		updateCount.incrementAndGet();
 		addObjectData(index, e, (byte) 1);
 	}
@@ -141,10 +119,7 @@ public class SWGList<E> extends ArrayList<E> implements Encodable, Serializable 
 	@Override
 	public E set(int index, E element) {
 		// Sends a "change" delta
-		E previous;
-		synchronized (updateMutex) {
-			previous = super.set(index, element);
-		}
+		E previous = super.set(index, element);
 		if (previous != null) {
 			removeData(index);
 		}
@@ -165,11 +140,7 @@ public class SWGList<E> extends ArrayList<E> implements Encodable, Serializable 
 	
 	@Override
 	public E remove(int index) {
-		E element;
-		
-		synchronized (updateMutex) {
-			element = super.remove(index);
-		}
+		E element = super.remove(index);
 		if (element != null) {
 			updateCount.incrementAndGet();
 			removeObjectData(index);
@@ -180,9 +151,7 @@ public class SWGList<E> extends ArrayList<E> implements Encodable, Serializable 
 	
 	@Override
 	public E get(int index) {
-		synchronized (updateMutex) {
-			return super.get(index);
-		}
+		return super.get(index);
 	}
 	
 	/**
@@ -267,7 +236,7 @@ public class SWGList<E> extends ArrayList<E> implements Encodable, Serializable 
 		clearDeltaQueue();
 		ByteBuffer buffer;
 		synchronized (data) {
-			updateCount.set(data.size()+1);
+			updateCount.addAndGet(data.size());
 			
 			buffer = ByteBuffer.allocate(11 + dataSize).order(ByteOrder.LITTLE_ENDIAN);
 			buffer.putInt(data.size() + 1);
@@ -283,7 +252,7 @@ public class SWGList<E> extends ArrayList<E> implements Encodable, Serializable 
 	}
 	
 	public void sendDeltaMessage(SWGObject target) {
-		if (deltas.size() == 0)
+		if (deltas.isEmpty())
 			return;
 		
 		target.sendDelta(view, updateType, getDeltaData());
@@ -323,10 +292,7 @@ public class SWGList<E> extends ArrayList<E> implements Encodable, Serializable 
 	
 	private void addObjectData(int index, E obj, byte update) {
 		byte[] encodedData = Encoder.encode(obj, strType);
-		if (encodedData == null) {
-			Log.e(toString(), "Tried to encode an object that could not be encoded properly. Object: " + obj);
-			return;
-		}
+		Assert.notNull(encodedData);
 		
 		synchronized (data) {
 			dataSize += encodedData.length;

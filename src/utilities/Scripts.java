@@ -57,7 +57,7 @@ public class Scripts {
 			ENGINE.eval("var SuiButtons = Java.type('resources.sui.SuiButtons')");
 			ENGINE.eval("var SuiEvent = Java.type('resources.sui.SuiEvent')");
 		} catch (ScriptException e) {
-			e.printStackTrace();
+			Log.e("Scripts", e);
 		}
 	}
 	
@@ -70,17 +70,14 @@ public class Scripts {
 	 * @param args to pass to the function.
 	 * @return whatever the function returns. If the function doesn't have a return statement, this method returns {@code null}.
 	 * If an exception occurs, {@code null} is returned.
+	 * @throws java.io.FileNotFoundException if the script file wasn't found
 	 */
 	@SuppressWarnings("unchecked")
-	public static <T> T invoke(String script, String function, Object... args) {
+	public static <T> T invoke(String script, String function, Object... args) throws FileNotFoundException {
 		try {
 			ENGINE.eval(new InputStreamReader(new FileInputStream(SCRIPTS + script + EXTENSION), StandardCharsets.UTF_8));
 			return (T) INVOCABLE.invokeFunction(function, args);
-		} catch (FileNotFoundException e) {
-			// No need to print anything, this is a common error.
-			// Returning null is all that's necessary
-			return null;
-		} catch (Throwable t) {
+		} catch (ScriptException | NoSuchMethodException t) {
 			Log.e("Scripts", "Error invoking script: " + script + "  with function: " + function);
 			Log.e("Scripts", "    Args: " + Arrays.toString(args));
 			Log.e("Scripts", t);

@@ -27,7 +27,6 @@
  ***********************************************************************************/
 package services.galaxy.terminals;
 
-import intents.radial.ObjectClickedIntent;
 import intents.radial.RadialRegisterIntent;
 import intents.radial.RadialRequestIntent;
 import intents.radial.RadialResponseIntent;
@@ -43,7 +42,6 @@ import java.util.Set;
 
 import resources.control.Intent;
 import resources.control.Service;
-import resources.radial.RadialItem;
 import resources.radial.RadialOption;
 import resources.radial.Radials;
 import resources.server_info.Log;
@@ -71,7 +69,6 @@ public class TerminalService extends Service {
 		
 		registerForIntent(RadialRequestIntent.TYPE);
 		registerForIntent(RadialSelectionIntent.TYPE);
-		registerForIntent(ObjectClickedIntent.TYPE);
 	}
 	
 	@Override
@@ -84,7 +81,7 @@ public class TerminalService extends Service {
 					templates.add(set.getString("iff"));
 				}
 			} catch (SQLException e) {
-				e.printStackTrace();
+				Log.e(this, e);
 			}
 		}
 		return super.initialize();
@@ -125,19 +122,6 @@ public class TerminalService extends Service {
 					Radials.handleSelection(script, rsi.getPlayer(), rsi.getTarget(), rsi.getSelection());
 				}
 				break;
-			case ObjectClickedIntent.TYPE:
-				if (i instanceof ObjectClickedIntent) {
-					ObjectClickedIntent oci = (ObjectClickedIntent) i;
-					String script = lookupScript(oci.getTarget().getTemplate());
-					if (script == null)
-						return;
-					List<RadialOption> options = Radials.getRadialOptions(script, oci.getRequestor().getOwner(), oci.getTarget());
-					if (options.isEmpty())
-						return;
-					RadialItem item = RadialItem.getFromId(options.get(0).getId());
-					Radials.handleSelection(script, oci.getRequestor().getOwner(), oci.getTarget(), item);
-				}
-				break;
 		}
 	}
 	
@@ -154,13 +138,13 @@ public class TerminalService extends Service {
 				else
 					Log.e("TerminalService", "Cannot find script for template: " + iff);
 			} catch (SQLException e) {
-				e.printStackTrace();
+				Log.e(this, e);
 			} finally {
 				if (set != null) {
 					try {
 						set.close();
 					} catch (SQLException e) {
-						e.printStackTrace();
+						Log.e(this, e);
 					}
 				}
 			}

@@ -36,8 +36,6 @@ import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
-import resources.control.Service;
-
 public class Log {
 	
 	private static final DateFormat LOG_FORMAT = new SimpleDateFormat("dd-MM-yy HH:mm:ss.SSS");
@@ -154,13 +152,13 @@ public class Log {
 	
 	/**
 	 * Logs the string to the server log file, formatted to display the log
-	 * severity as VERBOSE, as well as the time, service name and message.
-	 * @param service the service outputting this log info
+	 * severity as VERBOSE, as well as the time, class name and message.
+	 * @param tag the object outputting this log info
 	 * @param message the format string for the log
 	 * @param args the string format arguments, if specified
 	 */
-	public static final void v(Service service, String message, Object ... args) {
-		log(LogLevel.VERBOSE, service.getClass().getSimpleName(), message, args);
+	public static final void v(Object tag, String message, Object ... args) {
+		log(LogLevel.VERBOSE, toString(tag), message, args);
 	}
 	
 	/**
@@ -177,12 +175,12 @@ public class Log {
 	/**
 	 * Logs the string to the server log file, formatted to display the log
 	 * severity as DEBUG, as well as the time, tag and message.
-	 * @param service the service outputting this log info
+	 * @param tag the object outputting this log info
 	 * @param message the format string for the log
 	 * @param args the string format arguments, if specified
 	 */
-	public static final void d(Service service, String message, Object ... args) {
-		log(LogLevel.DEBUG, service.getClass().getSimpleName(), message, args);
+	public static final void d(Object tag, String message, Object ... args) {
+		log(LogLevel.DEBUG, toString(tag), message, args);
 	}
 	
 	/**
@@ -198,13 +196,13 @@ public class Log {
 	
 	/**
 	 * Logs the string to the server log file, formatted to display the log
-	 * severity as INFO, as well as the time, service name and message.
-	 * @param service the service outputting this log info
+	 * severity as INFO, as well as the time, class name and message.
+	 * @param tag the object outputting this log info
 	 * @param message the format string for the log
 	 * @param args the string format arguments, if specified
 	 */
-	public static final void i(Service service, String message, Object ... args) {
-		log(LogLevel.INFO, service.getClass().getSimpleName(), message, args);
+	public static final void i(Object tag, String message, Object ... args) {
+		log(LogLevel.INFO, toString(tag), message, args);
 	}
 	
 	/**
@@ -221,12 +219,12 @@ public class Log {
 	/**
 	 * Logs the string to the server log file, formatted to display the log
 	 * severity as WARN, as well as the time, tag and message.
-	 * @param service the service outputting this log info
+	 * @param tag the object outputting this log info
 	 * @param message the format string for the log
 	 * @param args the string format arguments, if specified
 	 */
-	public static final void w(Service service, String message, Object ... args) {
-		log(LogLevel.WARN, service.getClass().getSimpleName(), message, args);
+	public static final void w(Object tag, String message, Object ... args) {
+		log(LogLevel.WARN, toString(tag), message, args);
 	}
 	
 	/**
@@ -242,11 +240,11 @@ public class Log {
 	/**
 	 * Logs the exception to the server log file, formatted to display the log
 	 * severity as WARN, as well as the time, and tag.
-	 * @param service the service outputting this log info
+	 * @param tag the object outputting this log info
 	 * @param exception the exception to print
 	 */
-	public static final void w(Service service, Throwable exception) {
-		printException(LogLevel.WARN, service.getClass().getSimpleName(), exception);
+	public static final void w(Object tag, Throwable exception) {
+		printException(LogLevel.WARN, toString(tag), exception);
 	}
 	
 	/**
@@ -263,12 +261,12 @@ public class Log {
 	/**
 	 * Logs the string to the server log file, formatted to display the log
 	 * severity as ERROR, as well as the time, tag and message.
-	 * @param service the service outputting this log info
+	 * @param tag the object outputting this log info
 	 * @param message the format string for the log
 	 * @param args the string format arguments, if specified
 	 */
-	public static final void e(Service service, String message, Object ... args) {
-		log(LogLevel.ERROR, service.getClass().getSimpleName(), message, args);
+	public static final void e(Object tag, String message, Object ... args) {
+		log(LogLevel.ERROR, toString(tag), message, args);
 	}
 	
 	/**
@@ -284,11 +282,11 @@ public class Log {
 	/**
 	 * Logs the exception to the server log file, formatted to display the log
 	 * severity as ERROR, as well as the time, and tag.
-	 * @param service the service outputting this log info
+	 * @param tag the object outputting this log info
 	 * @param exception the exception to print
 	 */
-	public static final void e(Service service, Throwable exception) {
-		printException(LogLevel.ERROR, service.getClass().getSimpleName(), exception);
+	public static final void e(Object tag, Throwable exception) {
+		printException(LogLevel.ERROR, toString(tag), exception);
 	}
 	
 	/**
@@ -305,12 +303,12 @@ public class Log {
 	/**
 	 * Logs the string to the server log file, formatted to display the log
 	 * severity as ASSERT, as well as the time, tag and message.
-	 * @param service the service outputting this log info
+	 * @param tag the object outputting this log info
 	 * @param str the format string for the log
 	 * @param args the string format arguments, if specified
 	 */
-	public static final void a(Service service, String message, Object ... args) {
-		log(LogLevel.ASSERT, service.getClass().getSimpleName(), message, args);
+	public static final void a(Object tag, String message, Object ... args) {
+		log(LogLevel.ASSERT, toString(tag), message, args);
 	}
 	
 	/**
@@ -326,11 +324,11 @@ public class Log {
 	/**
 	 * Logs the exception to the server log file, formatted to display the log
 	 * severity as ASSERT, as well as the time, and tag.
-	 * @param service the service outputting this log info
+	 * @param tag the class outputting this log info
 	 * @param exception the exception to print
 	 */
-	public static final void a(Service service, Throwable exception) {
-		printException(LogLevel.ASSERT, service.getClass().getSimpleName(), exception);
+	public static final void a(Object tag, Throwable exception) {
+		printException(LogLevel.ASSERT, toString(tag), exception);
 	}
 	
 	private static final void printException(LogLevel level, String tag, Throwable exception) {
@@ -341,6 +339,10 @@ public class Log {
 				log(level, tag, "    " + e.toString());
 			}
 		}
+	}
+	
+	private static final String toString(Object o) {
+		return o.getClass().getName();
 	}
 	
 	public static enum LogLevel {

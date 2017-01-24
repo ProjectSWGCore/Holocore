@@ -31,8 +31,6 @@ import java.lang.ref.SoftReference;
 import java.util.HashMap;
 import java.util.Map;
 
-import resources.client_info.visitors.AppearanceTemplateData;
-import resources.client_info.visitors.AppearanceTemplateListData;
 import resources.client_info.visitors.CrcStringTableData;
 import resources.client_info.visitors.DatatableData;
 import resources.client_info.visitors.ObjectData;
@@ -42,6 +40,17 @@ import resources.client_info.visitors.SlotArrangementData;
 import resources.client_info.visitors.SlotDefinitionData;
 import resources.client_info.visitors.SlotDescriptorData;
 import resources.client_info.visitors.WorldSnapshotData;
+import resources.client_info.visitors.appearance.AppearanceTemplateData;
+import resources.client_info.visitors.appearance.AppearanceTemplateList;
+import resources.client_info.visitors.appearance.BasicSkeletonTemplate;
+import resources.client_info.visitors.appearance.DetailedAppearanceTemplateData;
+import resources.client_info.visitors.appearance.LodMeshGeneratorTemplateData;
+import resources.client_info.visitors.appearance.LodSkeletonTemplateData;
+import resources.client_info.visitors.appearance.MeshAppearanceTemplate;
+import resources.client_info.visitors.appearance.SkeletalAppearanceData;
+import resources.client_info.visitors.appearance.SkeletalMeshGeneratorTemplateData;
+import resources.client_info.visitors.shader.CustomizableShaderData;
+import resources.client_info.visitors.shader.StaticShaderData;
 import resources.server_info.Log;
 
 public class ClientFactory extends DataFactory {
@@ -140,36 +149,54 @@ public class ClientFactory extends DataFactory {
 		}
 		
 		switch (c) {
+			case "": return null; // Disabled clientdata
 			case "AppearanceTemplateData": return new AppearanceTemplateData();
-			case "AppearanceTemplateListData": return new AppearanceTemplateListData();
+			case "AppearanceTemplateList": return new AppearanceTemplateList();
+			case "BasicSkeletonTemplate": return new BasicSkeletonTemplate();
 			case "CrcStringTableData": return new CrcStringTableData();
+			case "CustomizableShaderData": return new CustomizableShaderData();
 			case "DatatableData": return new DatatableData();
+			case "DetailedAppearanceTemplateData": return new DetailedAppearanceTemplateData();
+			case "LodMeshGeneratorTemplateData": return new LodMeshGeneratorTemplateData();
+			case "LodSkeletonTemplateData": return new LodSkeletonTemplateData();
+			case "MeshAppearanceTemplate": return new MeshAppearanceTemplate();
 			case "ObjectData": return new ObjectData();
+			case "PortalLayoutData": return new PortalLayoutData();
 			case "ProfTemplateData": return new ProfTemplateData();
 			case "SlotDescriptorData": return new SlotDescriptorData();
 			case "SlotDefinitionData": return new SlotDefinitionData();
 			case "SlotArrangementData": return new SlotArrangementData();
+			case "SkeletalAppearanceData": return new SkeletalAppearanceData();
+			case "SkeletalMeshGeneratorTemplateData": return new SkeletalMeshGeneratorTemplateData();
+			case "StaticShaderData": return new StaticShaderData();
 			case "WorldSnapshotData": return new WorldSnapshotData();
-			case "PortalLayoutData": return new PortalLayoutData();
 			default: Log.e("ClientFactory", "Unimplemented typeMap value: " + c); return null;
 		}
 	}
 
 	// The typeMap is used for determining what DataObject class
 	private void populateTypeMap() {
-		typeMap.put("APT ", "AppearanceTemplateListData");
-		typeMap.put("DTLA", "AppearanceTemplateData");
-		typeMap.put("MESH", "AppearanceTemplateData");
-		typeMap.put("PEFT", "AppearanceTemplateData");
-		typeMap.put("CMPA", "AppearanceTemplateData");
-		typeMap.put("ARGD", "SlotArrangementData");
-		typeMap.put("0006", "SlotDefinitionData");
 		typeMap.put("CSTB", "CrcStringTableData");
 		typeMap.put("DTII", "DatatableData");
+		typeMap.put("PRTO", "PortalLayoutData");
 		typeMap.put("PRFI", "ProfTemplateData");
+		typeMap.put("ARGD", "SlotArrangementData");
+		typeMap.put("0006", "SlotDefinitionData");
 		typeMap.put("SLTD", "SlotDescriptorData");
 		typeMap.put("WSNP", "WorldSnapshotData");
-		typeMap.put("PRTO", "PortalLayoutData");
+		// Appearance Related Data
+		boolean loadAppearanceData = false;
+		typeMap.put("APPR", !loadAppearanceData?"":"AppearanceTemplateData");
+		typeMap.put("APT ", !loadAppearanceData?"":"AppearanceTemplateList");
+		typeMap.put("CSHD", !loadAppearanceData?"":"CustomizableShaderData");
+		typeMap.put("DTLA", !loadAppearanceData?"":"DetailedAppearanceTemplateData");
+		typeMap.put("SKTM", !loadAppearanceData?"":"BasicSkeletonTemplate");
+		typeMap.put("MESH", !loadAppearanceData?"":"MeshAppearanceTemplate");
+		typeMap.put("MLOD", !loadAppearanceData?"":"LodMeshGeneratorTemplateData");
+		typeMap.put("SLOD", !loadAppearanceData?"":"LodSkeletonTemplateData");
+		typeMap.put("SMAT", !loadAppearanceData?"":"SkeletalAppearanceData");
+		typeMap.put("SKMG", !loadAppearanceData?"":"SkeletalMeshGeneratorTemplateData");
+		typeMap.put("SSHT", !loadAppearanceData?"":"StaticShaderData");
 		// Objects
 		typeMap.put("SBMK", "ObjectData"); // object/battlefield_marker
 		typeMap.put("SBOT", "ObjectData"); // object/building

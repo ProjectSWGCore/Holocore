@@ -31,6 +31,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.io.UnsupportedEncodingException;
 
+import resources.server_info.Log;
+
 public class MD5 {
 	
 	public static String digest(String text) {
@@ -40,9 +42,9 @@ public class MD5 {
 			md.update(text.getBytes("iso-8859-1"), 0, text.length());
 			result = convertToHex(md.digest());
 		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
+			Log.e("MD5", e);
 		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
+			Log.e("MD5", e);
 		}
 		return result;
 	}

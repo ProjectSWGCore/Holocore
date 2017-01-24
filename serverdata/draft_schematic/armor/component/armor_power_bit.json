@@ -1,0 +1,78 @@
+{
+    "parent": "object/draft_schematic/armor/base_armor_schematic.iff",
+    "category": "CT_armor",
+    "itemsPerContainer": 0,
+    "craftedObjectTemplate": "object/tangible/component/armor/power_bit.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_armor_ingredients_n",
+                "power_bit_modifier"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_armor_ingredients_n",
+                                "power_bit_modifier"
+                            ],
+                            "ingredient": "object/tangible/component/reverse_engineering/modifier_bit.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_armor_ingredients_n",
+                "power_bit_value"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_armor_ingredients_n",
+                                "power_bit_value"
+                            ],
+                            "ingredient": "object/tangible/component/reverse_engineering/base_power_bit.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "manufactureScripts": [
+        "systems.crafting.armor.component.crafting_comp_power_bit"
+    ],
+    "complexity": 21,
+    "volume": 1,
+    "sharedTemplate": "object/draft_schematic/armor/component/shared_armor_power_bit.iff",
+    "xpPoints": [
+        {
+            "type": "XP_craftingClothingArmor",
+            "level": 0,
+            "value": 0
+        }
+    ]
+}

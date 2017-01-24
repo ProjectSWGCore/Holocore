@@ -100,7 +100,7 @@ public final class ObjectCreator {
 		try {
 			obj = c.getConstructor(Long.TYPE).newInstance(objectId);
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
-			e.printStackTrace();
+			Log.e("ObjectCreator", e);
 			obj = null;
 		}
 		if (obj == null)
@@ -214,7 +214,6 @@ public final class ObjectCreator {
 		switch (key) {
 			case OBJECT_NAME: object.setStringId(value.toString()); break;
 			case DETAILED_DESCRIPTION: object.setDetailStringId(value.toString()); break;
-			case CONTAINER_VOLUME_LIMIT: object.setVolume((Integer) value); break;
 			case CONTAINER_TYPE: object.setContainerType((Integer) value); break;
 			default: break;
 		}

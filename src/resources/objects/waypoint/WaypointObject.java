@@ -50,7 +50,7 @@ public class WaypointObject extends IntangibleObject implements OutOfBandData {
 		super(objectId, BaselineType.WAYP);
 	}
 
-	public String getName() {
+	public String getObjectName() {
 		return name;
 	}
 

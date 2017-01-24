@@ -36,6 +36,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 import resources.server_info.Config;
+import resources.server_info.Log;
 
 @RunWith(JUnit4.class)
 public class TestConfig {
@@ -48,7 +49,7 @@ public class TestConfig {
 			try {
 				Assert.assertTrue(file.createNewFile());
 			} catch (IOException e) {
-				e.printStackTrace();
+				Log.e(this, e);
 			}
 		}
 		Config c = new Config(file);

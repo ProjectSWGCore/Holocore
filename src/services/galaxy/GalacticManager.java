@@ -27,15 +27,17 @@
 ***********************************************************************************/
 package services.galaxy;
 
-import java.util.Hashtable;
 import java.util.Map;
 
 import intents.network.ConnectionClosedIntent;
 import intents.network.ConnectionOpenedIntent;
 import intents.network.GalacticPacketIntent;
 import intents.network.InboundPacketIntent;
+import resources.control.Assert;
 import resources.control.Intent;
 import resources.control.Manager;
+import resources.player.Player;
+import resources.server_info.SynchronizedMap;
 import services.CoreManager;
 import services.chat.ChatManager;
 import services.dev.DeveloperService;
@@ -43,6 +45,7 @@ import services.galaxy.travel.TravelService;
 import services.objects.ObjectManager;
 import services.objects.UniformBoxService;
 import services.player.PlayerManager;
+import utilities.IntentChain;
 
 public class GalacticManager extends Manager {
 	
@@ -53,7 +56,7 @@ public class GalacticManager extends Manager {
 	private final TravelService travelService;
 	private final DeveloperService developerService;
 	private final UniformBoxService uniformBox;
-	private final Map<Long, Intent> prevIntentMap;
+	private final Map<Long, IntentChain> prevIntentMap;
 	
 	public GalacticManager() {
 		objectManager = new ObjectManager();
@@ -63,7 +66,7 @@ public class GalacticManager extends Manager {
 		travelService = new TravelService();
 		developerService = new DeveloperService();
 		uniformBox = new UniformBoxService();
-		prevIntentMap = new Hashtable<>();
+		prevIntentMap = new SynchronizedMap<>();
 		
 		addChildService(objectManager);
 		addChildService(playerManager);
@@ -87,21 +90,17 @@ public class GalacticManager extends Manager {
 	@Override
 	public void onIntentReceived(Intent i) {
 		if (i instanceof InboundPacketIntent) {
-			long networkId = ((InboundPacketIntent) i).getNetworkId();
-			GalacticPacketIntent g = new GalacticPacketIntent((InboundPacketIntent) i);
+			Player player = playerManager.getPlayerFromNetworkId(((InboundPacketIntent) i).getNetworkId());
+			Assert.notNull(player);
+			GalacticPacketIntent g = new GalacticPacketIntent(((InboundPacketIntent) i).getPacket(), player);
 			g.setGalacticManager(this);
-			synchronized (prevIntentMap) {
-				g.broadcastAfterIntent(prevIntentMap.get(networkId));
-				prevIntentMap.put(networkId, g);
-			}
+			prevIntentMap.get(player.getNetworkId()).broadcastAfter(g);
 		} else if (i instanceof ConnectionClosedIntent) {
-			synchronized (prevIntentMap) {
-				prevIntentMap.remove(((ConnectionClosedIntent) i).getNetworkId());
-			}
+			prevIntentMap.remove(((ConnectionClosedIntent) i).getNetworkId()).reset();
 		} else if (i instanceof ConnectionOpenedIntent) {
-			synchronized (prevIntentMap) {
-				prevIntentMap.put(((ConnectionOpenedIntent) i).getNetworkId(), i);
-			}
+			IntentChain chain = new IntentChain();
+			chain.waitUntilComplete(i);
+			prevIntentMap.put(((ConnectionOpenedIntent) i).getNetworkId(), chain);
 		}
 	}
 	

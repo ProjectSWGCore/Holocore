@@ -31,9 +31,11 @@ import intents.object.ObjectCreatedIntent;
 import resources.Location;
 import resources.PvpFlag;
 import resources.Terrain;
+import resources.config.ConfigFile;
 import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.custom.DefaultAIObject;
+import resources.objects.tangible.TangibleObject;
 import services.objects.ObjectCreator;
 
 public class DeveloperService extends Service {
@@ -45,12 +47,26 @@ public class DeveloperService extends Service {
 	@Override
 	public boolean start() {
 		setupDeveloperArea();
+		
+		if (getConfig(ConfigFile.FEATURES).getBoolean("CHARACTER-BUILDER", false))
+			setupCharacterBuilders();
+		
 		return super.start();
 	}
 	
 	private void setupDeveloperArea() {
 		DefaultAIObject dummy = spawnObject("object/mobile/shared_target_dummy_blacksun.iff", new Location(3500, 5, -4800, Terrain.DEV_AREA), DefaultAIObject.class);
 		dummy.setPvpFlags(PvpFlag.ATTACKABLE);
+	}
+	
+	private void setupCharacterBuilders() {
+		spawnObject("object/tangible/terminal/shared_terminal_character_builder.iff", new Location(-5786, 510, -6554, Terrain.DATHOMIR), TangibleObject.class);
+		spawnObject("object/tangible/terminal/shared_terminal_character_builder.iff", new Location(-4683, 13, 4326, Terrain.ENDOR), TangibleObject.class);
+		spawnObject("object/tangible/terminal/shared_terminal_character_builder.iff", new Location(-6439, 41, -3265, Terrain.NABOO), TangibleObject.class);
+		spawnObject("object/tangible/terminal/shared_terminal_character_builder.iff", new Location(-3941, 60, 6318, Terrain.TATOOINE), TangibleObject.class);
+		spawnObject("object/tangible/terminal/shared_terminal_character_builder.iff", new Location(7380, 123, 4298, Terrain.TATOOINE), TangibleObject.class);
+		spawnObject("object/tangible/terminal/shared_terminal_character_builder.iff", new Location(3523, 4, -4802, Terrain.TATOOINE), TangibleObject.class);
+		spawnObject("object/tangible/terminal/shared_terminal_character_builder.iff", new Location(58, 153, -78, Terrain.TATOOINE), TangibleObject.class);
 	}
 	
 	private <T extends SWGObject> T spawnObject(String template, Location l, Class<T> c) {

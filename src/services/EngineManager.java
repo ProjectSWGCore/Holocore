@@ -88,7 +88,7 @@ public class EngineManager extends Manager {
 		try {
 			ServerFactory.getInstance().updateServerIffs();
 		} catch (IOException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		}
 	}
 }

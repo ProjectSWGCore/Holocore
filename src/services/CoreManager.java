@@ -59,6 +59,7 @@ import resources.server_info.Log.LogLevel;
 import services.admin.OnlineInterfaceService;
 import services.galaxy.GalacticManager;
 import utilities.CrcDatabaseGenerator;
+import utilities.ScheduledUtilities;
 import utilities.ThreadUtilities;
 
 public class CoreManager extends Manager {
@@ -133,6 +134,7 @@ public class CoreManager extends Manager {
 	@Override
 	public boolean terminate() {
 		shutdownService.shutdownNow();
+		ScheduledUtilities.shutdown();
 		return super.terminate();
 	}
 	
@@ -237,7 +239,7 @@ public class CoreManager extends Manager {
 			try {
 				return new PrintStream(new FileOutputStream("packets.txt", false), true, StandardCharsets.US_ASCII.name());
 			} catch (UnsupportedEncodingException | FileNotFoundException e) {
-				e.printStackTrace();
+				Log.e(this, e);
 				Log.e(this, e);
 			}
 		}

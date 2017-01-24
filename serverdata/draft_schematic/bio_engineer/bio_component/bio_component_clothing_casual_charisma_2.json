@@ -1,0 +1,125 @@
+{
+    "parent": "object/draft_schematic/bio_engineer/bio_component/base_bio_component_schematic.iff",
+    "itemsPerContainer": 25,
+    "craftedObjectTemplate": "object/tangible/component/bio/bio_component_clothing_casual_charisma_2.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_tissue_ingredients_n",
+                "protein_base"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_tissue_ingredients_n",
+                                "protein_base"
+                            ],
+                            "ingredient": "creature_food",
+                            "count": 20
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_tissue_ingredients_n",
+                "preservative_compound"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_tissue_ingredients_n",
+                                "preservative_compound"
+                            ],
+                            "ingredient": "creature_structural",
+                            "count": 20
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_tissue_ingredients_n",
+                "psychoactive_agent"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_tissue_ingredients_n",
+                                "psychoactive_agent"
+                            ],
+                            "ingredient": "seafood",
+                            "count": 15
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_tissue_ingredients_n",
+                "pheromone_additives"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_tissue_ingredients_n",
+                                "pheromone_additives"
+                            ],
+                            "ingredient": "meat_wild",
+                            "count": 15
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "destroyIngredients": true,
+    "manufactureScripts": [
+        "systems.crafting.bio_engineer.bio_component.crafting_bio_component"
+    ],
+    "complexity": 23,
+    "sharedTemplate": "object/draft_schematic/bio_engineer/bio_component/shared_bio_component_clothing_casual_charisma_2.iff",
+    "volume": 1
+}

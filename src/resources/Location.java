@@ -107,6 +107,10 @@ public class Location implements Encodable, Persistable {
 		return square(getX()-x) + square(getY()-y) + square(getZ()-z) <= square(radius);
 	}
 	
+	public boolean isWithinFlatDistance(Location l, double radius) {
+		return isWithinFlatDistance(l.point, radius);
+	}
+	
 	public boolean isWithinFlatDistance(Point3D target, double radius){
 		return square(getX() - target.getX()) + square(getZ() - target.getZ()) <= square(radius);
 	}
@@ -155,58 +159,31 @@ public class Location implements Encodable, Persistable {
 		orientation.rotateDegrees(angle, axisX, axisY, axisZ);
 	}
 	
-	public boolean mergeWith(Location l) {
-		boolean changed = false;
-		if (terrain == null || terrain != l.getTerrain()) {
+	public void mergeWith(Location l) {
+		if (terrain == null || terrain != l.getTerrain())
 			terrain = l.getTerrain();
-			changed = true;
-		}
-		changed = mergeLocation(l.getX(), l.getY(), l.getZ()) || true;
-		changed = mergeOrientation(l) || true;
-		return changed;
+		mergeLocation(l.getX(), l.getY(), l.getZ());
+		mergeOrientation(l);
 	}
 	
-	public boolean mergeLocation(double lX, double lY, double lZ) {
-		boolean changed = false;
-		if (Double.isNaN(getX()) || !isEqual(getX(), lX)) {
-			setX(lX);
-			changed = true;
-		}
-		if (Double.isNaN(getY()) || !isEqual(getY(), lY)) {
-			setY(lY);
-			changed = true;
-		}
-		if (Double.isNaN(getZ()) || !isEqual(getZ(), lZ)) {
-			setZ(lZ);
-			changed = true;
-		}
-		return changed;
+	public void mergeLocation(double lX, double lY, double lZ) {
+		if (!isEqual(getX(), lX))
+			point.setX(lX);
+		if (!isEqual(getY(), lY))
+			point.setY(lY);
+		if (!isEqual(getZ(), lZ))
+			point.setZ(lZ);
 	}
 	
-	private boolean mergeOrientation(Location l) {
-		double oX = getOrientationX();
-		double oY = getOrientationY();
-		double oZ = getOrientationZ();
-		double oW = getOrientationW();
-		boolean changed = false;
-		if (!Double.isNaN(l.getOrientationX()) && (Double.isNaN(oX) || !isEqual(oX, l.getOrientationX()))) {
-			oX = l.getOrientationX();
-			changed = true;
-		}
-		if (!Double.isNaN(l.getOrientationY()) && (Double.isNaN(oY) || !isEqual(oY, l.getOrientationY()))) {
-			oY = l.getOrientationY();
-			changed = true;
-		}
-		if (!Double.isNaN(l.getOrientationZ()) && (Double.isNaN(oZ) || !isEqual(oZ, l.getOrientationZ()))) {
-			oZ = l.getOrientationZ();
-			changed = true;
-		}
-		if (!Double.isNaN(l.getOrientationW()) && (Double.isNaN(oW) || !isEqual(oW,  l.getOrientationW()))) {
-			oW = l.getOrientationW();
-			changed = true;
-		}
-		orientation.set(oX, oY, oZ, oW);
-		return changed;
+	private void mergeOrientation(Location l) {
+		if (!isEqual(getOrientationX(), l.getOrientationX()))
+			orientation.setX(l.getOrientationX());
+		if (!isEqual(getOrientationY(), l.getOrientationY()))
+			orientation.setY(l.getOrientationY());
+		if (!isEqual(getOrientationZ(), l.getOrientationZ()))
+			orientation.setZ(l.getOrientationZ());
+		if (!isEqual(getOrientationW(),  l.getOrientationW()))
+			orientation.setW(l.getOrientationW());
 	}
 	
 	public double getSpeed(Location l, double deltaTime) {
@@ -313,6 +290,10 @@ public class Location implements Encodable, Persistable {
 	 * @return the distance between {@code this} and destination, which is ALWAYS positive.
 	 */
 	public double distanceTo(Location destination) {
-		return Math.sqrt(square(destination.getX() - getX()) + square(destination.getY() - getY()) + square(destination.getZ() - getZ()));
+		return distanceTo(destination.getX(), destination.getY(), destination.getZ());
+	}
+	
+	public double distanceTo(double dstX, double dstY, double dstZ) {
+		return Math.sqrt(square(dstX - getX()) + square(dstY - getY()) + square(dstZ - getZ()));
 	}
 }

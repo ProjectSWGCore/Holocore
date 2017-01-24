@@ -33,12 +33,11 @@ import resources.encodables.Encodable;
 import resources.network.NetBuffer;
 import resources.objects.SWGObject;
 import resources.server_info.Log;
+import resources.server_info.SynchronizedList;
+import resources.server_info.SynchronizedSet;
 import utilities.Encoder;
 import utilities.Encoder.StringType;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.AbstractSet;
@@ -48,20 +47,17 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class SWGSet<E> extends HashSet<E> implements Encodable, Serializable {
-	
-	private static final long serialVersionUID = 2L;
+public class SWGSet<E> extends SynchronizedSet<E> implements Encodable {
 	
 	private final int view;
 	private final int updateType;
 	private final Encoder.StringType strType;
+	private final AtomicInteger updateCount;
+	private final List<byte[]> deltas;
+	private final Set<ByteBuffer> data;
 	
-	private transient Object updateMutex;
-	private transient AtomicInteger updateCount;
-	private transient List<byte[]> deltas;
-	private transient Set<ByteBuffer> data;
-	private transient int deltaSize;
-	private transient int dataSize;
+	private int deltaSize;
+	private int dataSize;
 	
 	/**
 	 * Creates a new {@link SWGSet} for the defined baseline with the given view and update. Note
@@ -91,26 +87,11 @@ public class SWGSet<E> extends HashSet<E> implements Encodable, Serializable {
 		this.view = view;
 		this.updateType = updateType;
 		this.strType = strType;
-		this.data = new HashSet<>();
 		this.dataSize = 0;
-		this.updateMutex = new Object();
 		this.updateCount = new AtomicInteger(0);
-		this.deltas = new LinkedList<>();
+		this.deltas = new SynchronizedList<>(new LinkedList<>());
+		this.data = new SynchronizedSet<>();
 		this.deltaSize = 0;
-	}
-	
-	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
-		ois.defaultReadObject();
-		updateMutex = new Object();
-		updateCount = new AtomicInteger(0);
-		data = new HashSet<>();
-		dataSize = 0;
-		deltas = new LinkedList<>();
-		deltaSize = 0;
-		for (E e : this) {
-			addObjectData(e, (byte) 1);
-		}
-		clearDeltaQueue();
 	}
 	
 	public void resetUpdateCount() {
@@ -119,10 +100,8 @@ public class SWGSet<E> extends HashSet<E> implements Encodable, Serializable {
 	
 	@Override
 	public boolean add(E e) {
-		synchronized (updateMutex) {
-			if (!super.add(e))
-				return false;
-		}
+		if (!super.add(e))
+			return false;
 		updateCount.incrementAndGet();
 		addObjectData(e, (byte) 1);
 		return true;
@@ -130,10 +109,8 @@ public class SWGSet<E> extends HashSet<E> implements Encodable, Serializable {
 	
 	@Override
 	public boolean remove(Object o) {
-		synchronized (updateMutex) {
-			if (!super.remove(o))
-				return false;
-		}
+		if (!super.remove(o))
+			return false;
 		updateCount.incrementAndGet();
 		removeObjectData(o, (byte) 0);
 		return true;
@@ -141,9 +118,7 @@ public class SWGSet<E> extends HashSet<E> implements Encodable, Serializable {
 	
 	@Override
 	public void clear() {
-		synchronized (updateMutex) {
-			super.clear();
-		}
+		super.clear();
 		updateCount.incrementAndGet();
 		clearAllObjectData();
 	}
@@ -245,7 +220,10 @@ public class SWGSet<E> extends HashSet<E> implements Encodable, Serializable {
 			
 			buffer.putInt(data.size());
 			buffer.putInt(updateCount.get());
-			data.forEach(buffer::put);
+			data.forEach(storedBuffer -> {
+				buffer.put(storedBuffer);
+				storedBuffer.flip();
+				});
 		}
 		
 		return buffer.array();

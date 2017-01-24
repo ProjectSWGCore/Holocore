@@ -33,22 +33,20 @@ import intents.network.InboundPacketIntent;
 
 import java.io.EOFException;
 import java.net.InetSocketAddress;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
-import resources.network.DisconnectReason;
+import resources.control.Assert;
 import resources.network.NetBufferStream;
 import resources.server_info.Log;
+import services.network.HolocoreSessionManager;
+import services.network.NetworkProtocol;
+import services.network.PacketSender;
+import services.network.HolocoreSessionManager.ResponseAction;
 import utilities.IntentChain;
-import network.encryption.Compression;
 import network.packets.Packet;
-import network.packets.swg.ErrorMessage;
-import network.packets.swg.SWGPacket;
-import network.packets.swg.holo.HoloPacket;
-import network.packets.swg.zone.object_controller.ObjectController;
+import network.packets.swg.holo.HoloConnectionStopped;
+import network.packets.swg.holo.HoloConnectionStopped.ConnectionStoppedReason;
 
 public class NetworkClient {
 	
@@ -57,25 +55,31 @@ public class NetworkClient {
 	private final IntentChain intentChain = new IntentChain();
 	private final InetSocketAddress address;
 	private final long networkId;
-	private final PacketSender packetSender;
-	private final Queue<Packet> outboundQueue;
 	private final NetBufferStream buffer;
-	private ClientStatus status;
+	private final HolocoreSessionManager sessionManager;
+	private final NetworkProtocol protocol;
+	private final Object outboundMutex;
+	private final Lock inboundSemaphore;
+	private final Object stateMutex;
+	private State state;
+	private PacketSender sender;
 	
-	public NetworkClient(InetSocketAddress address, long networkId, PacketSender packetSender) {
+	public NetworkClient(InetSocketAddress address, long networkId) {
 		this.address = address;
 		this.networkId = networkId;
-		this.packetSender = packetSender;
-		this.outboundQueue = new LinkedList<>();
 		this.buffer = new NetBufferStream(DEFAULT_BUFFER);
-		this.status = ClientStatus.DISCONNECTED;
+		this.sessionManager = new HolocoreSessionManager();
+		this.protocol = new NetworkProtocol();
+		this.outboundMutex = new Object();
+		this.inboundSemaphore = new ReentrantLock(true);
+		this.stateMutex = new Object();
+		this.state = State.DISCONNECTED;
+		this.sender = null;
 	}
 	
 	public void close() {
 		buffer.reset();
 		intentChain.reset();
-		outboundQueue.clear();
-		status = ClientStatus.DISCONNECTED;
 	}
 	
 	public InetSocketAddress getAddress() {
@@ -87,161 +91,137 @@ public class NetworkClient {
 	}
 	
 	public void onConnected() {
-		status = ClientStatus.CONNECTED;
+		if (getState() != State.DISCONNECTED)
+			return;
+		setState(State.CONNECTED);
 		intentChain.broadcastAfter(new ConnectionOpenedIntent(networkId));
 	}
 	
-	public void onConnecting() {
-		status = ClientStatus.CONNECTING;
+	public void onDisconnected(ConnectionStoppedReason reason) {
+		if (getState() != State.CONNECTED)
+			return;
+		setState(State.CLOSED);
+		intentChain.broadcastAfter(new ConnectionClosedIntent(networkId, reason));
+		sendPacket(new HoloConnectionStopped(reason));
+		flushOutbound();
 	}
 	
-	public void onDisconnected() {
-		status = ClientStatus.DISCONNECTED;
+	public void onSessionCreated() {
+		sessionManager.onSessionCreated();
 	}
 	
-	public ClientStatus getStatus() {
-		return status;
+	public void onSessionDestroyed() {
+		sessionManager.onSessionDestroyed();
 	}
 	
-	public void processOutbound() {
-		synchronized (outboundQueue) {
-			Packet p;
-			while (!outboundQueue.isEmpty()) {
-				p = outboundQueue.poll();
-				if (p == null)
-					break;
-				sendPacket(p);
+	public void setPacketSender(PacketSender sender) {
+		this.sender = sender;
+	}
+	
+	public void processInbound() {
+		if (!inboundSemaphore.tryLock())
+			return;
+		try {
+			if (getState() != State.CONNECTED)
+				return;
+			while (processNextPacket()) {
+				
 			}
+		} catch (EOFException e) {
+			Log.e(this, "Read error: " + e.getMessage());
+		} finally {
+			inboundSemaphore.unlock();
 		}
 	}
 	
 	public void addToOutbound(Packet packet) {
-		synchronized (outboundQueue) {
-			outboundQueue.add(packet);
+		if (getState() != State.CONNECTED)
+			return;
+		synchronized (outboundMutex) {
+			ResponseAction action = sessionManager.onOutbound(packet);
+			if (action != ResponseAction.CONTINUE) {
+				flushOutbound();
+				return;
+			}
+			sendPacket(packet);
 		}
 	}
 	
-	public void addToBuffer(byte [] data) {
+	public boolean addToBuffer(byte [] data) {
 		synchronized (buffer) {
 			buffer.write(data);
+			return protocol.canDecode(buffer);
 		}
 	}
 	
-	public boolean processInbound() {
-		List <Packet> packets;
+	private boolean processNextPacket() throws EOFException {
+		Packet p;
 		synchronized (buffer) {
-			packets = processPackets();
-			buffer.compact();
+			if (!protocol.canDecode(buffer))
+				return false;
+			p = protocol.decode(buffer);
 		}
-		for (Packet p : packets) {
-			p.setAddress(address.getAddress());
-			p.setPort(address.getPort());
-			if (status != ClientStatus.CONNECTED && !(p instanceof HoloPacket)) {
-				addToOutbound(new ErrorMessage("Network Manager", "Upgrade your launcher!", false));
-				processOutbound();
-				new ConnectionClosedIntent(networkId, DisconnectReason.CONNECTION_REFUSED).broadcast();
-				break;
-			}
-			intentChain.broadcastAfter(new InboundPacketIntent(p, networkId));
+		if (p == null)
+			return true;
+		p.setAddress(address.getAddress());
+		p.setPort(address.getPort());
+		if (!processInbound(p)) {
+			flushOutbound();
+			return false;
 		}
-		return packets.size() > 0;
+		return true;
 	}
 	
-	private List<Packet> processPackets() {
-		List <Packet> packets = new LinkedList<>();
-		Packet p = null;
-		try {
-			while (buffer.hasRemaining()) {
-				p = processPacket();
-				if (p != null)
-					packets.add(p);
-			}
-		} catch (EOFException e) {
-			Log.e("NetworkClient", "EOFException: " + e.getMessage());
-		}
-		return packets;
+	private boolean processInbound(Packet p) {
+		ResponseAction action = sessionManager.onInbound(p);
+		flushOutbound();
+		if (action == ResponseAction.IGNORE)
+			return true;
+		if (action == ResponseAction.SHUT_DOWN)
+			return true;
+		intentChain.broadcastAfter(new InboundPacketIntent(p, networkId));
+		return true;
 	}
 	
-	private Packet processPacket() throws EOFException {
-		if (buffer.remaining() < 5)
-			throw new EOFException("Not enough remaining data for header! Remaining: " + buffer.remaining());
-		byte bitfield = buffer.getByte();
-		boolean compressed = (bitfield & 0x01) != 0;
-		int length = buffer.getShort();
-		int decompressedLength = buffer.getShort();
-		if (buffer.remaining() < length) {
-			buffer.position(buffer.position() - 5);
-			throw new EOFException("Not enough remaining data! Remaining: " + buffer.remaining() + "  Length: " + length);
-		}
-		byte [] pData = buffer.getArray(length);
-		if (compressed) {
-			pData = Compression.decompress(pData, decompressedLength);
-		}
-		return processSWG(pData);
-	}
-	
-	private SWGPacket processSWG(byte [] data) {
-		if (data.length < 6) {
-			Log.e("NetworkClient", "Length too small: " + data.length);
-			return null;
-		}
-		ByteBuffer buffer = ByteBuffer.wrap(data).order(ByteOrder.LITTLE_ENDIAN);
-		int crc = buffer.getInt(2);
-		if (crc == 0x80CE5E46)
-			return ObjectController.decodeController(buffer);
-		else {
-			SWGPacket packet = PacketType.getForCrc(crc);
-			if (packet != null)
-				packet.decode(buffer);
-			return packet;
+	private void flushOutbound() {
+		for (Packet out : sessionManager.getOutbound()) {
+			sendPacket(out);
 		}
 	}
 	
 	private void sendPacket(Packet p) {
-		ByteBuffer encoded = p.encode();
-		encoded.position(0);
-		int decompressedLength = encoded.remaining();
-		boolean compressed = decompressedLength >= 50;
-		if (compressed) {
-			ByteBuffer compress = compress(encoded);
-			compressed = compress != encoded;
-			encoded = compress;
+		if (sender == null) {
+			Log.w(this, "Unable to send packet %s - sender is null!");
+			return;
 		}
-		sendPacket(encoded, compressed, decompressedLength);
+		sender.sendPacket(address, protocol.encode(p));
 	}
 	
-	private ByteBuffer compress(ByteBuffer data) {
-		ByteBuffer compressedBuffer = ByteBuffer.allocate(Compression.getMaxCompressedLength(data.remaining()));
-		int length = Compression.compress(data.array(), compressedBuffer.array());
-		compressedBuffer.position(0);
-		compressedBuffer.limit(length);
-		if (length >= data.remaining())
-			return data;
-		else
-			return compressedBuffer;
+	private State getState() {
+		synchronized (stateMutex) {
+			return state;
+		}
 	}
 	
-	private void sendPacket(ByteBuffer packet, boolean compressed, int rawLength) {
-		ByteBuffer data = ByteBuffer.allocate(packet.remaining() + 5).order(ByteOrder.LITTLE_ENDIAN);
-		byte bitmask = 0;
-		bitmask |= (compressed?1:0) << 0; // Compressed
-		bitmask |= 1 << 1; // SWG
-		data.put(bitmask);
-		data.putShort((short) packet.remaining());
-		data.putShort((short) rawLength);
-		data.put(packet);
-		data.flip();
-		packetSender.sendPacket(address, data);
+	private void setState(State state) {
+		synchronized (stateMutex) {
+			Assert.test(state != State.DISCONNECTED);
+			if (state == State.CONNECTED)
+				Assert.test(this.state == State.DISCONNECTED);
+			if (state == State.CLOSED)
+				Assert.test(this.state == State.CONNECTED);
+			this.state = state;
+		}
 	}
 	
 	public String toString() {
 		return "NetworkClient["+address+"]";
 	}
 	
-	public enum ClientStatus {
+	private enum State {
 		DISCONNECTED,
-		CONNECTING,
-		CONNECTED
+		CONNECTED,
+		CLOSED
 	}
 	
 }

@@ -27,51 +27,44 @@
 ***********************************************************************************/
 package resources.player;
 
+import intents.network.OutboundPacketIntent;
 import network.packets.Packet;
 import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
-import resources.server_info.Log;
 import services.player.PlayerManager;
+import utilities.IntentChain;
 
 public class Player implements Comparable<Player> {
 	
-	private Service playerManager;
+	private final IntentChain packetChain;
+	private final Service playerManager;
+	private final Object sendingLock;
+	private final long networkId;
 	
-	private long networkId;
-	private PlayerState state		= PlayerState.DISCONNECTED;
-	
-	private String username			= "";
-	private int userId				= 0;
-	private byte [] sessionToken	= new byte[0];
-	private int connectionId		= 0;
-	private AccessLevel accessLevel	= AccessLevel.PLAYER;
-	private PlayerServer server		= PlayerServer.NONE;
-	
-	private String galaxyName		= "";
-	private CreatureObject creatureObject= null;
-	private long lastInboundMessage	= 0;
+	private String			username			= "";
+	private String			galaxyName			= "";
+	private AccessLevel		accessLevel			= AccessLevel.PLAYER;
+	private PlayerServer	server				= PlayerServer.NONE;
+	private PlayerState		state				= PlayerState.DISCONNECTED;
+	private CreatureObject	creatureObject		= null;
+	private long			lastInboundMessage	= 0;
+	private int				userId				= 0;
 	
 	public Player() {
-		this.playerManager = null;
+		this(null, 0);
 	}
 	
 	public Player(Service playerManager, long networkId) {
+		this.packetChain = new IntentChain();
 		this.playerManager = playerManager;
-		setNetworkId(networkId);
+		this.sendingLock = new Object();
+		this.networkId = networkId;
 	}
 
 	public PlayerManager getPlayerManager() {
 		return (PlayerManager) playerManager;
-	}
-
-	public void setPlayerManager(Service playerManager) {
-		this.playerManager = playerManager;
-	}
-
-	public void setNetworkId(long networkId) {
-		this.networkId = networkId;
 	}
 	
 	public void setPlayerState(PlayerState state) {
@@ -90,14 +83,6 @@ public class Player implements Comparable<Player> {
 		this.userId = userId;
 	}
 	
-	public void setConnectionId(int connId) {
-		this.connectionId = connId;
-	}
-	
-	public void setSessionToken(byte [] sessionToken) {
-		this.sessionToken = sessionToken;
-	}
-	
 	public void setAccessLevel(AccessLevel accessLevel) {
 		this.accessLevel = accessLevel;
 	}
@@ -110,6 +95,8 @@ public class Player implements Comparable<Player> {
 		this.creatureObject = obj;
 		if (obj != null && obj.getOwner() != this)
 			obj.setOwner(this);
+		if (obj == null)
+			packetChain.reset();
 	}
 	
 	public void updateLastPacketTimestamp() {
@@ -134,20 +121,12 @@ public class Player implements Comparable<Player> {
 	
 	public String getCharacterName() {
 		if (creatureObject != null)
-			return creatureObject.getName();
+			return creatureObject.getObjectName();
 		return "";
 	}
 	
 	public int getUserId() {
 		return userId;
-	}
-	
-	public int getConnectionId() {
-		return connectionId;
-	}
-	
-	public byte [] getSessionToken() {
-		return sessionToken;
 	}
 	
 	public AccessLevel getAccessLevel() {
@@ -175,18 +154,23 @@ public class Player implements Comparable<Player> {
 		return (System.nanoTime()-lastInboundMessage)/1E6;
 	}
 	
+	public Object getSendingLock() {
+		return sendingLock;
+	}
+	
 	public void sendPacket(Packet ... packets) {
-		if (playerManager != null)
-			playerManager.sendPacket(this, packets);
-		else Log.e("Player", "Couldn't send packet due to playerManager being null.");
+		synchronized (getSendingLock()) {
+			for (Packet p : packets) {
+				packetChain.broadcastAfter(new OutboundPacketIntent(p, networkId));
+			}
+		}
 	}
 	
 	@Override
 	public String toString() {
 		String str = "Player[";
-		str += "ID=" + userId + " / " + getCreatureObject().getObjectId();
-		str += " NAME=" + username + " / " + getCreatureObject().getName();
-		str += " LEVEL=" + accessLevel;
+		str += "ID=" + userId + " / " + (creatureObject==null?"null":creatureObject.getObjectId());
+		str += " NAME=" + username + " / " + (creatureObject==null?"null":creatureObject.getObjectName());
 		str += " STATE=" + state;
 		return str + "]";
 	}

@@ -1,0 +1,13 @@
+{
+    "parent": "object/draft_schematic/base/base_draft_schematic.iff",
+    "destroyIngredients": true,
+    "category": "CT_space",
+    "crateObjectTemplate": "object/factory/factory_crate_electronics.iff",
+    "xpPoints": [
+        {
+            "type": "XP_crafting",
+            "level": 0,
+            "value": 0
+        }
+    ]
+}

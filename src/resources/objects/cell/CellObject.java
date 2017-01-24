@@ -124,8 +124,9 @@ public class CellObject extends SWGObject {
 	@Override
 	public void save(NetBufferStream stream) {
 		super.save(stream);
-		stream.addByte(0);
+		stream.addByte(1);
 		stream.addBoolean(isPublic);
+		stream.addInt(number);
 		stream.addAscii(label);
 		stream.addFloat((float) labelX);
 		stream.addFloat((float) labelZ);
@@ -134,8 +135,10 @@ public class CellObject extends SWGObject {
 	@Override
 	public void read(NetBufferStream stream) {
 		super.read(stream);
-		stream.getByte();
+		int ver = stream.getByte();
 		isPublic = stream.getBoolean();
+		if (ver >= 1)
+			number = stream.getInt();
 		label = stream.getAscii();
 		labelX = stream.getFloat();
 		labelZ = stream.getFloat();

@@ -1,15 +1,26 @@
 id	terrain	building_id	cell	x	y	z	radius
 TEXT PRIMARY KEY	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	REAL NOT NULL	REAL NOT NULL	REAL NOT NULL	REAL NOT NULL
-tat_moseisley	tatooine			3525	4	-4807	5
-tat_starport	tatooine	tat_moseisley_starport	foyer4	0	0	64	5
-nab_theed	naboo			-5496	6	4369	5
 cor_coronet	corellia			-145	28	-4720	5
-lok_nym	lok			420	7	5267	5
-dat_aurillia	dathomir			5304	78	-4135	5
-tal_dearic	talus			336	6	-2930	5
-ror_restuss	rori			5289	80	6131	5
 dan_miningoutpost	dantooine			-614	3	2527	5
-kas_kachirho	kashyyyk_hunting			244	41	466	5
+dat_aurillia	dathomir			5304	78	-4135	5
+dat_quarantine	dathomir			-5786	510	-6554	2
+end_dwb	endor			-4683	13	4326	5
+kas_kachirho	kashyyyk_main			-572	18	-110	5
+kas_etyyy	kashyyyk_hunting			244	41	466	5
+lok_nym	lok			420	7	5267	5
+nab_theed	naboo			-5496	6	4369	5
+nab_weapon_facility	naboo			-6439	41	-3265	5
+ror_restuss	rori			5289	80	6131	5
+tal_dearic	talus			336	6	-2930	5
+tal_detain	talus			4969	450	-5994	5
+tat_fort_tusken	tatooine			-3941	59	6318	5
+tat_jabbas_palace	tatooine			-5844	90	-6182	5
+tat_krayt_graveyard	tatooine			7380	122	4298	5
+tat_moseisley	tatooine			3525	4	-4807	5
+tat_squill_cave	tatooine			57	152	-79	5
+tat_starport	tatooine	tat_moseisley_starport	foyer4	0	0	64	5
+yav_light	yavin4			-5575	87	4901	5
+yav_dark	yavin4			5089	80	302	5
 tansarii	dungeon1	du1_npe_dungeon	hangarbay1	76.70	0.80	55.70	5
 heroic_ek	dungeon1	du1_heroic_ek	r1	-11.70	0.20	-116.50	5
 heroic_isd	dungeon1	du1_heroic_isd	mainhangar	0.10	172.30	326.30	5

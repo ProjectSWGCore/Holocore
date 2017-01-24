@@ -111,7 +111,7 @@ public class OutOfBandPackage implements Encodable, Persistable {
 	
 	@Override
 	public void save(NetBufferStream stream) {
-		stream.addList(packages, (p) -> p.save(stream));
+		stream.addList(packages, (p) -> OutOfBandFactory.save(p, stream));
 	}
 	
 	@Override

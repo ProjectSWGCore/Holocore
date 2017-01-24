@@ -27,11 +27,9 @@
 ***********************************************************************************/
 package resources.control;
 
-import network.OutboundPacketService;
-import network.packets.Packet;
+import java.util.function.Consumer;
+
 import resources.config.ConfigFile;
-import resources.player.Player;
-import resources.player.PlayerState;
 import resources.server_info.Config;
 import resources.server_info.DataManager;
 import resources.server_info.Log;
@@ -42,8 +40,6 @@ import resources.server_info.RelationalDatabase;
  * A Service is a class that does a specific job for the application
  */
 public abstract class Service implements IntentReceiver {
-	
-	private static final OutboundPacketService outboundPacketService = new OutboundPacketService();
 	
 	public Service() {
 		IntentManager.getInstance().initialize();
@@ -100,45 +96,34 @@ public abstract class Service implements IntentReceiver {
 	 * Registers for the specified intent string
 	 * @param type the intent string
 	 */
-	public void registerForIntent(String type) {
+	protected final void registerForIntent(String type) {
 		IntentManager.getInstance().registerForIntent(type, this);
+	}
+	
+	@SuppressWarnings("unchecked")
+	protected final <T extends Intent> void registerForIntent(Class<T> c, Consumer<T> consumer) {
+		try {
+			String type = (String) c.getDeclaredField("TYPE").get(null);
+			IntentManager.getInstance().registerForIntent(type, (i) -> consumer.accept((T) i));
+		} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
 	 * Unregisters for the specified intent string
 	 * @param type the intent string
 	 */
-	public void unregisterForIntent(String type) {
+	protected final void unregisterForIntent(String type) {
 		IntentManager.getInstance().unregisterForIntent(type, this);
 	}
 	
 	/**
 	 * Callback when an intent is received from the system
 	 */
+	@Override
 	public void onIntentReceived(Intent i) {
 		Log.w(this, "Warning: " + getClass().getSimpleName() + " did not override onIntentReceived");
-	}
-	
-	/**
-	 * Stores the packet(s) in a buffer until flushPackets() is called.
-	 * flushPackets() is called every couple milliseconds.
-	 * @param player the player to send the packet(s) to
-	 * @param packets the packet(s) to send
-	 */
-	public void sendPacket(Player player, Packet ... packets) {
-		if (player.getPlayerState() == PlayerState.DISCONNECTED)
-			return;
-		sendPacket(player.getNetworkId(), packets);
-	}
-	
-	/**
-	 * Stores the packet(s) in a buffer until flushPackets() is called.
-	 * flushPackets() is called every couple milliseconds if you forget.
-	 * @param networkId the network id to send the packet(s) to
-	 * @param packets the packet(s) to send
-	 */
-	public void sendPacket(final long networkId, final Packet ... packets) {
-		outboundPacketService.send(networkId, packets);
 	}
 	
 	/**

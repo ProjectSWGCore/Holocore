@@ -32,6 +32,7 @@ import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.encodables.Encodable;
 import resources.objects.SWGObject;
 import resources.player.Player;
+import resources.server_info.Log;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -99,7 +100,7 @@ public class BaselineBuilder {
 		try {
 			dataStream.write(str.getBytes(ASCII));
 		} catch (IOException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		}
 	}
 	
@@ -108,7 +109,7 @@ public class BaselineBuilder {
 		try {
 			dataStream.write(str.getBytes(UNICODE));
 		} catch (IOException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		}
 	}
 	
@@ -116,7 +117,7 @@ public class BaselineBuilder {
 		try {
 			dataStream.writeByte(b);
 		} catch (IOException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		}
 	}
 	
@@ -124,7 +125,7 @@ public class BaselineBuilder {
 		try {
 			dataStream.writeShort(s);
 		} catch (IOException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		}
 	}
 	
@@ -132,7 +133,7 @@ public class BaselineBuilder {
 		try {
 			dataStream.writeInt(i);
 		} catch (IOException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		}
 	}
 	
@@ -140,7 +141,7 @@ public class BaselineBuilder {
 		try {
 			dataStream.writeLong(l);
 		} catch (IOException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		}
 	}
 	
@@ -148,7 +149,7 @@ public class BaselineBuilder {
 		try {
 			dataStream.writeFloat(f);
 		} catch (IOException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		}
 	}
 	
@@ -157,7 +158,7 @@ public class BaselineBuilder {
 		try {
 			dataStream.write(array);
 		} catch (IOException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		}
 	}
 	

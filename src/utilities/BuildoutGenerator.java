@@ -70,9 +70,10 @@ public class BuildoutGenerator {
 		File areas = new File("serverdata/buildout/areas.sdb");
 		File objects = new File("serverdata/buildout/objects.sdb");
 		gen.createBuildoutSdb(areas, objects);
+		System.exit(0);
 	}
 	
-	public BuildoutGenerator() {
+	public BuildoutGenerator() { // 118114
 		areas = new ArrayList<>();
 		fallbackAreas = new ArrayList<>(Terrain.values().length);
 		int areaId = -1;
@@ -175,6 +176,8 @@ public class BuildoutGenerator {
 			});
 			long buildoutId = 0;
 			for (SWGObject obj : objects) {
+				if (obj instanceof CellObject)
+					continue;
 				writeObject(gen, obj, buildoutId++);
 				while (percent / 100.0 * objects.size() <= objNum) {
 					System.out.print(".");
@@ -275,10 +278,12 @@ public class BuildoutGenerator {
 		long id = object.getObjectId();
 		int crc = CRC.getCrc(object.getTemplate());
 		long container = (object.getParent() != null) ? object.getParent().getObjectId() : 0;
+		if (object.getParent() instanceof CellObject)
+			container = object.getParent().getParent().getObjectId();
 		Location l = object.getLocation();
 		Quaternion q = l.getOrientation();
 		double radius = object.getLoadRange();
-		int cellIndex = (object instanceof CellObject) ? ((CellObject) object).getNumber() : 0;
+		int cellIndex = (object.getParent() instanceof CellObject) ? ((CellObject) object.getParent()).getNumber() : 0;
 		int snapshot = object.isSnapshot() ? 1 : 0;
 		float x = (float) l.getX(), y = (float) l.getY(), z = (float) l.getZ();
 		float oX = (float) q.getX(), oY = (float) q.getY(), oZ = (float) q.getZ(), oW = (float) q.getW();

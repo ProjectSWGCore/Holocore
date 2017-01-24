@@ -130,6 +130,26 @@ public class CRC implements Encodable, Persistable {
 	public String toString() {
 		return str;
 	}
+
+	@Override
+	public int hashCode() {
+		return this.crc;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof CRC)) {
+			return false;
+		}
+		
+		return crc == ((CRC) obj).crc;
+	}
 	
 	public static int getCrc(String input) {
 		return getCrc(input.getBytes(StandardCharsets.UTF_8));

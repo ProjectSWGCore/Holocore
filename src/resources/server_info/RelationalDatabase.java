@@ -48,7 +48,7 @@ public abstract class RelationalDatabase implements Closeable {
 			Class.forName(jdbcClass);
 			initialize(url);
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 			online = false;
 		}
 	}
@@ -58,7 +58,7 @@ public abstract class RelationalDatabase implements Closeable {
 			Class.forName(jdbcClass);
 			initialize(url, user, pass);
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 			online = false;
 		}
 	}
@@ -70,7 +70,7 @@ public abstract class RelationalDatabase implements Closeable {
 				url += "?" + params;
 			initialize(url, user, pass);
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 			online = false;
 		}
 	}
@@ -83,7 +83,7 @@ public abstract class RelationalDatabase implements Closeable {
 				url += "?" + params;
 			initialize(url, user, pass);
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 			online = false;
 		}
 	}
@@ -115,7 +115,7 @@ public abstract class RelationalDatabase implements Closeable {
 			connection.close();
 			online = false;
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		}
 	}
 	
@@ -137,7 +137,7 @@ public abstract class RelationalDatabase implements Closeable {
 		try {
 			return connection.prepareStatement(sql);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 			return null;
 		}
 	}
@@ -156,7 +156,7 @@ public abstract class RelationalDatabase implements Closeable {
 			}
 			return s.getResultSet();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 			if (s != null) {
 				try { s.close(); } catch (SQLException ex) { }
 			}
@@ -172,7 +172,7 @@ public abstract class RelationalDatabase implements Closeable {
 				return s.executeUpdate(query);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 			return 0;
 		}
 	}

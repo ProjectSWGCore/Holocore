@@ -24,55 +24,45 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>
  ******************************************************************************/
-
 package services.group;
 
 import intents.GroupEventIntent;
-import intents.NotifyPlayersPacketIntent;
 import intents.PlayerEventIntent;
+import intents.chat.ChatBroadcastIntent;
 import intents.chat.ChatRoomUpdateIntent;
+import intents.chat.ChatRoomUpdateIntent.UpdateType;
+import intents.object.DestroyObjectIntent;
 import intents.object.ObjectCreatedIntent;
-import network.packets.swg.zone.chat.ChatSystemMessage;
 import resources.chat.ChatAvatar;
 import resources.control.Intent;
 import resources.control.Service;
-import resources.encodables.OutOfBandPackage;
 import resources.encodables.ProsePackage;
-import resources.encodables.StringId;
 import resources.objects.creature.CreatureObject;
 import resources.objects.group.GroupObject;
 import resources.player.Player;
-import resources.server_info.Log;
+import resources.player.Player.PlayerServer;
+import resources.server_info.SynchronizedMap;
 import services.objects.ObjectCreator;
-import services.player.PlayerManager;
 import utilities.IntentFactory;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
-/**
- * Created by Waverunner on 10/4/2015
- */
+import resources.control.Assert;
+
 public class GroupService extends Service {
 	
-	private final Map<Long, GroupObject> groups = new HashMap<>();
+	private final Map<Long, GroupObject> groups;
 	
 	public GroupService() {
+		groups = new SynchronizedMap<>();
 		registerForIntent(GroupEventIntent.TYPE);
 		registerForIntent(PlayerEventIntent.TYPE);
 	}
 	
 	@Override
-	public boolean start() {
-		return super.start();
-	}
-
-	@Override
 	public void onIntentReceived(Intent i) {
-		String type = i.getType();
-		switch(type) {
+		switch (i.getType()) {
 			case GroupEventIntent.TYPE:
 				if (i instanceof GroupEventIntent)
 					handleGroupEventIntent((GroupEventIntent) i);
@@ -81,260 +71,370 @@ public class GroupService extends Service {
 				if (i instanceof PlayerEventIntent)
 					handlePlayerEventIntent((PlayerEventIntent) i);
 				break;
-			default: break;
 		}
 	}
-
+	
 	private void handleGroupEventIntent(GroupEventIntent intent) {
-		switch(intent.getEventType()) {
+		switch (intent.getEventType()) {
 			case GROUP_INVITE:
 				handleGroupInvite(intent.getPlayer(), intent.getTarget());
+				break;
+			case GROUP_UNINVITE:
+				handleGroupUninvite(intent.getPlayer(), intent.getTarget());
 				break;
 			case GROUP_JOIN:
 				handleGroupJoin(intent.getPlayer());
 				break;
+			case GROUP_DECLINE:
+				handleGroupDecline(intent.getPlayer());
+				break;
 			case GROUP_DISBAND:
-				handleGroupDisband(intent.getPlayer(), intent.getTarget());
+				handleGroupDisband(intent.getPlayer());
+				break;
+			case GROUP_LEAVE:
+				handleGroupLeave(intent.getPlayer());
+				break;
+			case GROUP_MAKE_LEADER:
+				handleMakeLeader(intent.getPlayer(), intent.getTarget());
+				break;
+			case GROUP_KICK:
+				handleKick(intent.getPlayer(), intent.getTarget());
+				break;
+			case GROUP_MAKE_MASTER_LOOTER:
+				handleMakeMasterLooter(intent.getPlayer(), intent.getTarget());
 				break;
 		}
 	}
-
+	
 	private void handlePlayerEventIntent(PlayerEventIntent intent) {
-		switch(intent.getEvent()) {
-			case PE_FIRST_ZONE:
+		switch (intent.getEvent()) {
+			case PE_ZONE_IN_SERVER:
 				handleMemberRezoned(intent.getPlayer());
 				break;
-			default: break;
+			case PE_DISAPPEAR:
+				handleMemberDisappeared(intent.getPlayer());
+				break;
+			default:
+				break;
 		}
 	}
-
+	
 	private void handleMemberRezoned(Player player) {
 		CreatureObject creatureObject = player.getCreatureObject();
-		long groupId = creatureObject.getGroupId();
-
-		if (groupId == 0)
+		if (creatureObject.getGroupId() == 0)
 			return;
-
+		
 		GroupObject groupObject = getGroup(creatureObject.getGroupId());
+		
 		if (groupObject == null) {
 			// Group was destroyed while logged out
 			creatureObject.setGroupId(0);
 			return;
 		}
-
+		
 		groupObject.updateMember(creatureObject);
 	}
-
-	private void handleGroupDisband(Player player, CreatureObject target) {
+	
+	private void handleMemberDisappeared(Player player) {
+		CreatureObject creature = player.getCreatureObject();
+		Assert.notNull(creature);
+		if (creature.getGroupId() == 0)
+			return; // Ignore anyone without a group
+		
+		removePlayerFromGroup(creature);
+	}
+	
+	private void handleGroupDisband(Player player) {
 		CreatureObject creo = player.getCreatureObject();
-
-		if (creo == null)
-			return;
-
+		Assert.notNull(creo);
 		GroupObject group = getGroup(creo.getGroupId());
-		if (group == null)
-			return;
-
-		if (group.getLeader() != creo.getObjectId()) {
+		Assert.notNull(group);
+		
+		if (group.getLeaderId() != creo.getObjectId()) {
 			sendSystemMessage(player, "must_be_leader");
 			return;
 		}
-
-		// Disband Group
-		if (target == null) {
-			destroyGroup(group, player);
-		} else {
-			// Kick player
-			group.removeMember(target);
-
-			sendGroupSystemMessage(group, "other_left_prose", "TU", target.getObjectId());
-			sendSystemMessage(target.getOwner(), "removed");
-
-			// TODO: Leave group chat room
-		}
+		
+		destroyGroup(group, player);
 	}
-
+	
+	private void handleGroupLeave(Player player) {
+		removePlayerFromGroup(player.getCreatureObject());
+	}
+	
 	private void handleGroupInvite(Player player, CreatureObject target) {
-		CreatureObject playerCreo = player.getCreatureObject();
-
-		Player targetOwner = target.getOwner();
-		if (targetOwner == null)
+		CreatureObject creature = player.getCreatureObject();
+		Assert.notNull(creature);
+		if (target == null || !target.isPlayer() || creature.equals(target)) {
+			sendSystemMessage(player, "invite_no_target_self");
 			return;
-
-		long groupId = playerCreo.getGroupId();
-		long inviterId = playerCreo.getObjectId();
-		long targetId = target.getObjectId();
-
+		}
+		if (target.getGroupId() != 0) {
+			sendSystemMessage(player, "already_grouped", "TT", target.getObjectId());
+			return;
+		}
+		
+		long groupId = creature.getGroupId();
 		if (groupId != 0) {
 			GroupObject group = getGroup(groupId);
-
-			if (group.getLeader() != inviterId) {
-				sendSystemMessage(player, "must_be_leader");
+			Assert.notNull(group);
+			
+			if (!handleInviteToExistingGroup(player, target, group))
 				return;
-			}
-
-			if (target.getGroupId() != 0) {
-				sendSystemMessage(player, "already_grouped", "TT", targetId);
-				return;
-			}
-
-			if (target.getInviterData().getId() != 0 ) {
-				if(target.getInviterData().getId() != groupId)
-					sendSystemMessage(player, "considering_other_group");
-				else
-					sendSystemMessage(player, "considering_your_group");
-			}
-		} else {
-			sendSystemMessage(targetOwner, "invite_target", "TT", inviterId);
-			sendSystemMessage(player, "invite_leader", "TT", targetId);
-
-			target.updateGroupInviteData(player, -1, player.getCharacterName());
 		}
+		sendInvite(player, target, groupId);
 	}
-
+	
+	private boolean handleInviteToExistingGroup(Player inviter, CreatureObject target, GroupObject group) {
+		if (group.getLeaderId() != inviter.getCreatureObject().getObjectId()) {
+			sendSystemMessage(inviter, "must_be_leader");
+			return false;
+		}
+		
+		if (group.isFull()) {
+			sendSystemMessage(inviter, "full");
+			return false;
+		}
+		
+		if (target.getInviterData().getId() != 0) {
+			if (target.getInviterData().getId() != inviter.getCreatureObject().getGroupId())
+				sendSystemMessage(inviter, "considering_other_group", "TT", target.getObjectId());
+			else
+				sendSystemMessage(inviter, "considering_your_group", "TT", target.getObjectId());
+			return false;
+		}
+		
+		return true;
+	}
+	
+	private void handleGroupUninvite(Player player, CreatureObject target) {
+		if (target == null) {
+			sendSystemMessage(player, "uninvite_no_target_self");
+			return;
+		}
+		
+		Player targetOwner = target.getOwner();
+		Assert.notNull(targetOwner);
+		String targetName = targetOwner.getCharacterName();
+		
+		if (target.getInviterData() == null) {
+			sendSystemMessage(player, "uninvite_not_invited", "TT", targetName);
+			return;
+		}
+		
+		sendSystemMessage(player, "uninvite_self", "TT", targetName);
+		sendSystemMessage(targetOwner, "uninvite_target", "TT", player.getCharacterName());
+		clearInviteData(target);
+	}
+	
 	private void handleGroupJoin(Player player) {
-		CreatureObject creo = player.getCreatureObject();
-
-		GroupInviterData invitation = creo.getInviterData();
-
-		long groupId = invitation.getId();
-
-		if (groupId == 0) {
-			sendSystemMessage(player, "must_be_invited");
-			return;
-		}
-
-		GroupObject group = getGroup(groupId);
-
-		Player sender = invitation.getSender();
-
-		if (invitation.getSender() == null) {
-			// Inviter logged out, invitation is no good
-			sendSystemMessage(player, "must_be_invited");
-			creo.updateGroupInviteData(null, 0, "");
-			return;
-		}
-
-		// Group doesn't exist yet
-		if (group == null) {
-
-			group = createGroup(sender);
-
-			if (group == null) {
-				Log.e("GroupService", "Failed to create group from sender %s for %s", sender, player);
-				creo.updateGroupInviteData(null, 0, "");
+		CreatureObject creature = player.getCreatureObject();
+		try {
+			Player sender = creature.getInviterData().getSender();
+			if (sender == null || sender.getPlayerServer() != PlayerServer.ZONE) { // Inviter logged out, invitation is no good
+				sendSystemMessage(player, "must_be_invited");
 				return;
 			}
-
-			group.addMember(sender.getCreatureObject());
-
-			sendSystemMessage(sender, "formed_self", "TT", sender.getCreatureObject().getObjectId());
-
-			// TODO: Join group chat room
-		} else {
-			// Group already exists
-
-			if (group.getLeader() != sender.getCreatureObject().getObjectId()) {
-				sendSystemMessage(player, "join_inviter_not_leader", sender.getCreatureObject().getObjectId());
-				creo.updateGroupInviteData(null, 0, "");
-				return;
+			
+			long groupId = creature.getInviterData().getId();
+			if (groupId == -1) {
+				groupId = sender.getCreatureObject().getGroupId();
+				if (groupId == 0)
+					groupId = -1; // Client wants -1 for default
 			}
-
-			if (group.getGroupMembers().size() == 8) {
-				sendSystemMessage(player, "join_full");
-				creo.updateGroupInviteData(null, 0, "");
-				return;
+			if (groupId == -1) { // Group doesn't exist yet
+				createGroup(sender, player);
+			} else { // Group already exists
+				joinGroup(sender.getCreatureObject(), creature, groupId);
 			}
+		} finally {
+			clearInviteData(creature);
 		}
-		sendGroupSystemMessage(group, "other_joined_prose", "TU", creo.getObjectId());
-		group.addMember(creo);
-		sendSystemMessage(player, "joined_self");
-		creo.updateGroupInviteData(null, 0, "");
-		// TODO: Join group chat room
 	}
-
+	
+	private void handleGroupDecline(Player invitee) {
+		CreatureObject creature = invitee.getCreatureObject();
+		GroupInviterData invitation = creature.getInviterData();
+		
+		sendSystemMessage(invitee, "decline_self", "TT", invitation.getSender().getCharacterName());
+		sendSystemMessage(invitation.getSender(), "decline_leader", "TT", invitee.getCharacterName());
+		
+		clearInviteData(creature);
+	}
+	
+	private void handleMakeLeader(Player currentLeader, CreatureObject newLeader) {
+		CreatureObject currentLeaderCreature = currentLeader.getCreatureObject();
+		Assert.notNull(currentLeaderCreature);
+		Assert.test(newLeader.getGroupId() != 0);
+		GroupObject group = getGroup(newLeader.getGroupId());
+		Assert.notNull(group);
+		
+		if (group.getLeaderId() != currentLeaderCreature.getObjectId()) {
+			sendSystemMessage(currentLeader, "must_be_leader");
+			return;
+		}
+		
+		if (group.getLeaderId() == newLeader.getObjectId())
+			return;
+		
+		// Set the group leader to newLeader
+		sendGroupSystemMessage(group, "new_leader", "TU", newLeader.getObjectName());
+		group.setLeader(newLeader);
+	}
+	
+	private void handleMakeMasterLooter(Player player, CreatureObject target) {
+		CreatureObject creature = player.getCreatureObject();
+		if (creature.getGroupId() == 0) {
+			sendSystemMessage(player, "group_only");
+			return;
+		}
+		
+		GroupObject group = getGroup(creature.getGroupId());
+		Assert.notNull(group);
+	}
+	
+	private void handleKick(Player leader, CreatureObject kickedCreature) {
+		Assert.notNull(kickedCreature);
+		CreatureObject leaderCreature = leader.getCreatureObject();
+		Assert.notNull(leaderCreature);
+		long groupId = leaderCreature.getGroupId();
+		if (groupId == 0) { // Requester is not in a group
+			sendSystemMessage(leader, "group_only");
+			return;
+		}
+		if (kickedCreature.getGroupId() != groupId) { // Requester and Kicked are not in same group
+			sendSystemMessage(leader, "must_be_leader");
+			return;
+		}
+		
+		GroupObject group = getGroup(groupId);
+		Assert.notNull(group);
+		if (group.getLeaderId() != leaderCreature.getObjectId()) { // Requester is not leader of group
+			sendSystemMessage(leader, "must_be_leader");
+			return;
+		}
+		
+		removePlayerFromGroup(kickedCreature);
+	}
+	
+	private void createGroup(Player leader, Player member) {
+		GroupObject group = (GroupObject) ObjectCreator.createObjectFromTemplate("object/group/shared_group_object.iff");
+		Assert.notNull(group);
+		groups.put(group.getObjectId(), group);
+		
+		group.formGroup(leader.getCreatureObject(), member.getCreatureObject());
+		
+		new ObjectCreatedIntent(group).broadcast();
+		
+		String galaxy = leader.getGalaxyName();
+		new ChatRoomUpdateIntent(ChatAvatar.getFromPlayer(leader), getGroupChatPath(group.getObjectId(), galaxy), String.valueOf(group.getObjectId()), false).broadcast();
+		sendSystemMessage(leader, "formed_self", "TT", leader.getCreatureObject().getObjectId());
+		onJoinGroup(member.getCreatureObject(), group);
+	}
+	
 	private void destroyGroup(GroupObject group, Player player) {
 		String galaxy = player.getGalaxyName();
-		new ChatRoomUpdateIntent(getGroupChatPath(group.getObjectId(), galaxy), String.valueOf(group.getObjectId()), null,
-				ChatAvatar.getSystemAvatar(galaxy), null, ChatRoomUpdateIntent.UpdateType.DESTROY).broadcast();
-
-		Map<String, Long> members = group.getGroupMembers();
-		PlayerManager playerManager = player.getPlayerManager();
-
+		new ChatRoomUpdateIntent(getGroupChatPath(group.getObjectId(), galaxy), String.valueOf(group.getObjectId()), null, ChatAvatar.getFromPlayer(player), null, ChatRoomUpdateIntent.UpdateType.DESTROY).broadcast();
+		
 		sendGroupSystemMessage(group, "disbanded");
-
-		for (String name : members.keySet()) {
-			Player memPlayer = playerManager.getPlayerByCreatureName(name);
-			if (memPlayer == null)
-				continue;
-
-			CreatureObject memCreo = memPlayer.getCreatureObject();
-			if (memCreo == null)
-				continue;
-
-			group.removeMember(memCreo);
+		group.disbandGroup();
+		new DestroyObjectIntent(group).broadcast();
+		Assert.notNull(groups.remove(group.getObjectId()));
+	}
+	
+	private void joinGroup(CreatureObject inviter, CreatureObject creature, long groupId) {
+		Player player = creature.getOwner();
+		Assert.notNull(player);
+		GroupObject group = getGroup(groupId);
+		Assert.notNull(group);
+		
+		if (group.getLeaderId() != inviter.getObjectId()) {
+			sendSystemMessage(player, "join_inviter_not_leader", "TT", inviter.getObjectName());
+			return;
 		}
-
-		// TODO: Object destroy intent
+		if (group.isFull()) {
+			sendSystemMessage(player, "join_full");
+			return;
+		}
+		
+		group.addMember(creature);
+		onJoinGroup(creature, group);
 	}
-
-	private GroupObject createGroup(Player player) {
-		GroupObject group = (GroupObject) ObjectCreator.createObjectFromTemplate("object/group/shared_group_object.iff");
-		if (group == null)
-			return null;
-
-		group.setLeader(player.getCreatureObject());
-
-		groups.put(group.getObjectId(), group);
-
-		new ObjectCreatedIntent(group).broadcast();
-
-		String galaxy = player.getGalaxyName();
-		new ChatRoomUpdateIntent(getGroupChatPath(group.getObjectId(), galaxy), String.valueOf(group.getObjectId()), null,
-				ChatAvatar.getSystemAvatar(galaxy), null, ChatRoomUpdateIntent.UpdateType.CREATE).broadcast();
-
-		return group;
+	
+	private void onJoinGroup(CreatureObject creature, GroupObject group) {
+		Player player = creature.getOwner();
+		Assert.notNull(player);
+		sendSystemMessage(player, "joined_self");
+		updateChatRoom(player, group, UpdateType.JOIN);
 	}
-
+	
+	private void removePlayerFromGroup(CreatureObject creature) {
+		Assert.notNull(creature);
+		Assert.test(creature.getGroupId() != 0);
+		GroupObject group = getGroup(creature.getGroupId());
+		Assert.notNull(group);
+		
+		// Check size of the group, if it only has two members, destroy the group
+		if (group.getGroupMembers().size() <= 2) {
+			destroyGroup(group, group.getLeaderPlayer());
+			return;
+		}
+		
+		sendSystemMessage(creature.getOwner(), "removed");
+		group.removeMember(creature);
+		updateChatRoom(creature.getOwner(), group, UpdateType.LEAVE);
+	}
+	
+	private void updateChatRoom(Player player, GroupObject group, UpdateType updateType) {
+		new ChatRoomUpdateIntent(player, getGroupChatPath(group.getObjectId(), player.getGalaxyName()), updateType).broadcast();
+	}
+	
+	private void clearInviteData(CreatureObject creature) {
+		creature.updateGroupInviteData(null, 0, "");
+	}
+	
+	private void sendInvite(Player groupLeader, CreatureObject invitee, long groupId) {
+		sendSystemMessage(invitee.getOwner(), "invite_target", "TT", groupLeader.getCharacterName());
+		sendSystemMessage(groupLeader, "invite_leader", "TT", invitee.getObjectName());
+		
+		// Set the invite data to the current group ID
+		if (groupId == 0)
+			groupId = -1; // Client wants -1 for default
+		invitee.updateGroupInviteData(groupLeader, groupId, groupLeader.getCharacterName());
+	}
+	
 	private void sendGroupSystemMessage(GroupObject group, String id) {
-		Map<String, Long> members = group.getGroupMembers();
-
-		List<Long> ids = new ArrayList<>(members.values());
-
-		new NotifyPlayersPacketIntent(new ChatSystemMessage(ChatSystemMessage.SystemChatType.SCREEN_AND_CHAT, "@group:" + id), ids).broadcast();
+		Set<CreatureObject> members = group.getGroupMemberObjects();
+		
+		for (CreatureObject member : members) {
+			Assert.notNull(member.getOwner());
+			sendSystemMessage(member.getOwner(), id);
+		}
 	}
-
-	private void sendGroupSystemMessage(GroupObject group, String id, Object ... objects) {
-		Map<String, Long> members = group.getGroupMembers();
-
-		List<Long> ids = new ArrayList<>(members.values());
-
-		if (objects.length % 2 != 0)
-			Log.e("ProsePackage", "Sent a ProsePackage chat message with an uneven number of object arguments for StringId %s", "@group:" + id);
-		Object [] prose = new Object[objects.length + 2];
-		prose[0] = "StringId";
-		prose[1] = new StringId("@group:" + id);
-		System.arraycopy(objects, 0, prose, 2, objects.length);
-
-		new NotifyPlayersPacketIntent(
-				new ChatSystemMessage(ChatSystemMessage.SystemChatType.SCREEN_AND_CHAT,
-						new OutOfBandPackage(new ProsePackage(prose))), ids).broadcast();
+	
+	private void sendGroupSystemMessage(GroupObject group, String id, Object... objects) {
+		Set<CreatureObject> members = group.getGroupMemberObjects();
+		
+		for (CreatureObject member : members) {
+			Assert.notNull(member.getOwner());
+			sendSystemMessage(member.getOwner(), id, objects);
+		}
 	}
-
+	
 	private String getGroupChatPath(long groupId, String galaxy) {
-		// SWG.serverName.group.GroupObjectId.GroupChat || title = groupid
-		String groupIdString = String.valueOf(groupId);
-		return "SWG." + galaxy + ".group." + groupIdString + ".GroupChat";
+		return "SWG." + galaxy + ".group." + groupId + ".GroupChat";
 	}
+	
 	private GroupObject getGroup(long groupId) {
 		return groups.get(groupId);
 	}
-
+	
 	private void sendSystemMessage(Player target, String id) {
-		target.sendPacket(new ChatSystemMessage(ChatSystemMessage.SystemChatType.SCREEN_AND_CHAT, id));
+		new ChatBroadcastIntent(target, new ProsePackage("group", id)).broadcast();
 	}
-
-	private void sendSystemMessage(Player target, String id, Object ... objects) {
+	
+	private void sendSystemMessage(Player target, String id, Object... objects) {
 		IntentFactory.sendSystemMessage(target, "@group:" + id, objects);
 	}
+	
 }

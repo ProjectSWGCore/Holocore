@@ -60,7 +60,7 @@ public abstract class ObjectDatabase<V extends Persistable> {
 		try {
 			createFilesAndDirectories();
 		} catch (IOException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		}
 	}
 	
@@ -77,7 +77,7 @@ public abstract class ObjectDatabase<V extends Persistable> {
 			if (!file.createNewFile())
 				Log.e(getClass().getSimpleName(), "Failed to create new ODB: " + file.getCanonicalPath());
 		} catch (IOException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		}
 	}
 	
@@ -86,7 +86,7 @@ public abstract class ObjectDatabase<V extends Persistable> {
 		try {
 			autosaveService.awaitTermination(1000, TimeUnit.MILLISECONDS);
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		}
 		save();
 	}

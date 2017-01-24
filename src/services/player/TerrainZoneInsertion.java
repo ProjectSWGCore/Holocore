@@ -32,6 +32,7 @@ import java.sql.SQLException;
 
 import resources.Location;
 import resources.Terrain;
+import resources.server_info.Log;
 import resources.server_info.RelationalServerData;
 import resources.server_info.RelationalServerFactory;
 
@@ -54,7 +55,7 @@ public class TerrainZoneInsertion {
 			Location l = generateRandomLocation(Terrain.getTerrainFromName(set.getString("terrain")), set.getDouble("x"), set.getDouble("y"), set.getDouble("z"), set.getDouble("radius"));
 			return new SpawnInformation(!building.isEmpty(), l, set.getLong("object_id"), set.getString("cell"));
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		}
 		return null;
 	}

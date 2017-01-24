@@ -31,25 +31,28 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import resources.collections.SWGListTest;
+import resources.collections.TestSWGList;
 import resources.collections.TestSWGBitSet;
 import resources.collections.TestSWGFlag;
 import resources.network.TestLittleEndianDataOutputStream;
+import resources.objects.awareness.TestAwareness;
 import resources.objects.quadtree.TestQuadTree;
 import resources.persistable.TestPersistable;
 import resources.services.TestConfig;
 
 @RunWith(Suite.class)
 @SuiteClasses({
-	SWGListTest.class,
+	TestSWGList.class,
 	TestSWGFlag.class,
 	TestSWGBitSet.class,
 	TestWeatherType.class,
 	TestQuadTree.class,
 	TestPersistable.class,
 	TestConfig.class,
+	TestPoint3D.class,
 	TestQuaternion.class,
-	TestLittleEndianDataOutputStream.class
+	TestLittleEndianDataOutputStream.class,
+	TestAwareness.class
 })
 public class TestResources {
 	

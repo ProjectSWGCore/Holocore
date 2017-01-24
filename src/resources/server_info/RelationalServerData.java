@@ -93,7 +93,7 @@ public class RelationalServerData extends RelationalDatabase {
 					return true;
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		}
 		return false;
 	}
@@ -211,13 +211,13 @@ public class RelationalServerData extends RelationalDatabase {
 				if (set.next())
 					return set.getLong("last_imported");
 			} catch (SQLException e) {
-				e.printStackTrace();
+				Log.e(this, e);
 			} finally {
 				if (set != null) {
 					try {
 						set.close();
 					} catch (SQLException e) {
-						e.printStackTrace();
+						Log.e(this, e);
 					}
 				}
 			}
@@ -233,7 +233,7 @@ public class RelationalServerData extends RelationalDatabase {
 				if (updateTableMetadata.executeUpdate() > 0)
 					return;
 			} catch (SQLException e) {
-				e.printStackTrace();
+				Log.e(this, e);
 				return;
 			}
 		}
@@ -243,7 +243,7 @@ public class RelationalServerData extends RelationalDatabase {
 				insertTableMetadata.setLong(2, lastImported);
 				insertTableMetadata.executeUpdate();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				Log.e(this, e);
 			}
 		}
 	}
@@ -257,9 +257,9 @@ public class RelationalServerData extends RelationalDatabase {
 				reader.readNormal();
 			return true;
 		} catch (IOException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Log.e(this, e);
 		} catch (IllegalArgumentException e) {
 			Log.e("RelationalServerData", "Invalid file format. Aborting read of %s! Message: %s", sdb, e.getMessage());
 		}
@@ -288,7 +288,7 @@ public class RelationalServerData extends RelationalDatabase {
 				try {
 					insert.close();
 				} catch (SQLException e) {
-					e.printStackTrace();
+					Log.e(this, e);
 				}
 			}
 		}

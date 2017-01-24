@@ -138,19 +138,29 @@ public class BuildoutArea implements Comparable<BuildoutArea> {
 	}
 	
 	public Location adjustLocation(Location l) {
-		if (!isAdjustCoordinates())
-			return l;
-		Location ret = new Location(l);
-		ret.translatePosition(-translationX, 0, -translationZ);
+		Location ret = new Location();
+		adjustLocation(l, ret);
 		return ret;
 	}
 	
-	public Location readjustLocation(Location l) {
+	public void adjustLocation(Location l, Location adjusted) {
+		adjusted.mergeWith(l);
 		if (!isAdjustCoordinates())
-			return l;
-		Location ret = new Location(l);
-		ret.translatePosition(translationX, 0, translationZ);
+			return;
+		adjusted.translatePosition(-translationX, 0, -translationZ);
+	}
+	
+	public Location readjustLocation(Location l) {
+		Location ret = new Location();
+		readjustLocation(l, ret);
 		return ret;
+	}
+	
+	public void readjustLocation(Location l, Location adjusted) {
+		adjusted.mergeWith(l);
+		if (!isAdjustCoordinates())
+			return;
+		adjusted.translatePosition(translationX, 0, translationZ);
 	}
 	
 	public String toString() {
