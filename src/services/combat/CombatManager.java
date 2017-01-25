@@ -86,6 +86,7 @@ public class CombatManager extends Manager {
 	private final Random random;
 	private final CorpseService corpseService;
 	private final CombatXpService combatXpService;
+	private final DuelPlayerService duelPlayerService;
 	
 	private ScheduledExecutorService executor;
 	
@@ -104,8 +105,10 @@ public class CombatManager extends Manager {
 		
 		corpseService = new CorpseService();
 		combatXpService = new CombatXpService();
+		duelPlayerService = new DuelPlayerService();
 		addChildService(corpseService);
 		addChildService(combatXpService);
+		addChildService(duelPlayerService);
 	}
 	
 	@Override
