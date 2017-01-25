@@ -49,29 +49,30 @@ public class DuelPlayerService extends Service {
 	private void handleDuel(CreatureObject requester, CreatureObject reciever) {
 		
 		if (duels.contains(reciever)) {
-			sendSystemMessage(requester, "You already challenged " + reciever + " to a duel");
+			sendSystemMessage(requester, "You already challenged " + reciever.getObjectName() + " to a duel");
 			return;
 		}
 		
-		if (!duels.contains(reciever)) {
+		if (!duels.contains(requester)) {
 			duels.add(reciever);
-			sendSystemMessage(requester, "You have challenged " + reciever.getObjectName() + " to a duel.");
-			sendSystemMessage(reciever, requester.getObjectName() + " has challenged you to a duel.");
+			sendSystemMessage(requester, "You challenge " + reciever.getObjectName() + " to a duel.");
+			sendSystemMessage(reciever, requester.getObjectName() + " challenges you to a duel.");
 		} else {
 			duels.add(reciever);
 			sendSystemMessage(requester, "You accept " + reciever.getObjectName() + "'s challenge.");
-			sendSystemMessage(reciever, requester.getObjectName() + " accept's your challenge.");
+			sendSystemMessage(reciever, requester.getObjectName() + " accepts your challenge.");
 			// TODO: Update each person's pvp status
 		}
 	}
 	
 	private void handleEndDuel(CreatureObject ender, CreatureObject enemy) {
 		if (!duels.contains(enemy)) {
-			sendSystemMessage(ender, "You are not in a duel with " + enemy.getObjectName());
+			sendSystemMessage(ender, "You are not currently dueling " + enemy.getObjectName() + ".");
 			return;
 		} else {
-			sendSystemMessage(ender, "You ended the duel with " + enemy.getObjectName());
-			sendSystemMessage(enemy, ender + " ended the duel");
+			sendSystemMessage(ender, "You end your duel with " + enemy.getObjectName() + ".");
+			sendSystemMessage(enemy, ender.getObjectName() + " ends your duel.");
+			duels.remove(ender);
 			duels.remove(enemy);
 			// TODO: Update each person's pvp status
 		}
@@ -80,7 +81,6 @@ public class DuelPlayerService extends Service {
 	private void handleDuelPlayerIntent(DuelPlayerIntent dpi) {
 		
 		if (dpi.getReciever() == null || !dpi.getReciever().isPlayer() || dpi.getSender().equals(dpi.getReciever())) {
-			sendSystemMessage(dpi.getSender(), "Your target is invalid.");
 			return;
 		}
 		
