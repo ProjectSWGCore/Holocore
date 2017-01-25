@@ -67,23 +67,22 @@ public class CollectionBadgeManager extends Manager {
 
 		addChildService(explorationBadgeService);
 
-		registerForIntent(GrantBadgeIntent.TYPE);
-		registerForIntent(GrantClickyCollectionIntent.TYPE);
+		registerForIntent(GrantBadgeIntent.class, gbi -> handleGrantBadgeIntent(gbi));
+		registerForIntent(GrantClickyCollectionIntent.class, gcci -> handleGrantClickyCollectionIntent(gcci));
 	}
 
-	@Override
-	public void onIntentReceived(Intent i) {
-		if (i instanceof GrantBadgeIntent) {
-			handleCollectionBadge(((GrantBadgeIntent) i).getCreature(), ((GrantBadgeIntent) i).getCollectionBadgeName());
-		} else if (i instanceof GrantClickyCollectionIntent) {
-			CreatureObject creo = ((GrantClickyCollectionIntent) i).getCreature();
-			SWGObject inventoryItem = ((GrantClickyCollectionIntent) i).getInventoryItem();
-			CollectionItem collection = ((GrantClickyCollectionIntent) i).getCollection();
+	private void handleGrantClickyCollectionIntent(GrantClickyCollectionIntent gcci){
+		CreatureObject creo = ((GrantClickyCollectionIntent) gcci).getCreature();
+		SWGObject inventoryItem = ((GrantClickyCollectionIntent) gcci).getInventoryItem();
+		CollectionItem collection = ((GrantClickyCollectionIntent) gcci).getCollection();
 
-			handleCollectionBadge(creo, inventoryItem, collection);
-		}
+		handleCollectionBadge(creo, inventoryItem, collection);
 	}
-
+	
+	private void handleGrantBadgeIntent(GrantBadgeIntent gbi){
+		handleCollectionBadge(gbi.getCreature(), gbi.getCollectionBadgeName());
+	}
+	
 	public void grantBadge(PlayerObject player, int beginSlotId, String collectionName, boolean isHidden, String slotName) {
 		BitSet collections = BitSet.valueOf(player.getCollectionBadges());
 
@@ -174,7 +173,9 @@ public class CollectionBadgeManager extends Manager {
 		checkBadgeBookCount(player, "badge_book", badgeInformation.bookBadgeCount);
 		checkExplorerBadgeCount(player, "bdg_explore", badgeInformation.pageBadgeCount);
 	}
+	
 
+	
 	private void checkBadgeBookCount(PlayerObject player, String collectionName, int badgeCount) {
 		String slotName = "";
 

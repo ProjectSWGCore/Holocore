@@ -79,33 +79,32 @@ public class CollectionService extends Service {
 		registerClickyCollectionItems();
 		registerConsumeCollectionItems();
 
-		registerForIntent(RadialRequestIntent.TYPE);
-		registerForIntent(RadialSelectionIntent.TYPE);
+		registerForIntent(RadialRequestIntent.class, rri -> handleRadialRequestIntent(rri));
+		registerForIntent(RadialSelectionIntent.class, rsi -> handleRadialSelectionIntent(rsi));
 	}
+	
+	private void handleRadialRequestIntent(RadialRequestIntent rri){
+		String iff =  rri.getTarget().getTemplate();
+		String itemName = rri.getTarget().getStringId().getKey();
 
-	@Override
-	public void onIntentReceived(Intent i) {
-		if (i instanceof RadialRequestIntent) {
-			String iff = ((RadialRequestIntent) i).getTarget().getTemplate();
-			String itemName = ((RadialRequestIntent) i).getTarget().getStringId().getKey();
-
-			if (isClickyCollectionItem(iff) || isConsumeCollectionItem(itemName, iff)) {
-				RadialRequestIntent rri = (RadialRequestIntent) i;
-				List<RadialOption> options = new ArrayList<RadialOption>(rri.getRequest().getOptions());
-				options.addAll(Radials.getRadialOptions("collection/world_item", rri.getPlayer(), rri.getTarget()));
-				new RadialResponseIntent(rri.getPlayer(), rri.getTarget(), options, rri.getRequest().getCounter()).broadcast();
-			}
-		} else if (i instanceof RadialSelectionIntent) {
-			String iff = ((RadialSelectionIntent) i).getTarget().getTemplate();
-			String itemName = ((RadialSelectionIntent) i).getTarget().getStringId().getKey();
-			boolean isClicky = isClickyCollectionItem(iff);
-
-			if (isClicky || isConsumeCollectionItem(itemName, iff)) {
-				new GrantClickyCollectionIntent(((RadialSelectionIntent) i).getPlayer().getCreatureObject(), ((RadialSelectionIntent) i).getTarget(), getCollectionDetails(iff, isClicky)).broadcast();
-			}
+		if (isClickyCollectionItem(iff) || isConsumeCollectionItem(itemName, iff)) {
+			RadialRequestIntent i = (RadialRequestIntent) rri;
+			List<RadialOption> options = new ArrayList<RadialOption>(i.getRequest().getOptions());
+			options.addAll(Radials.getRadialOptions("collection/world_item", i.getPlayer(), i.getTarget()));
+			new RadialResponseIntent(i.getPlayer(), i.getTarget(), options, i.getRequest().getCounter()).broadcast();
 		}
 	}
 
+	private void handleRadialSelectionIntent(RadialSelectionIntent rsi){
+		String iff = rsi.getTarget().getTemplate();
+		String itemName = rsi.getTarget().getStringId().getKey();
+		boolean isClicky = isClickyCollectionItem(iff);
+
+		if (isClicky || isConsumeCollectionItem(itemName, iff)) {
+			new GrantClickyCollectionIntent(rsi.getPlayer().getCreatureObject(), rsi.getTarget(), getCollectionDetails(iff, isClicky)).broadcast();
+		}
+	}
+	
 	private void registerClickyCollectionItems() {
 		try (ResultSet set = clickyDatabase.executeQuery(GET_CLICKY_COLLECTION_ITEMS_SQL)) {
 			while (set.next()) {

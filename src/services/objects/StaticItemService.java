@@ -27,21 +27,19 @@
  ***********************************************************************************/
 package services.objects;
 
-import intents.chat.ChatBroadcastIntent;
-import intents.object.ObjectCreatedIntent;
-import intents.object.CreateStaticItemIntent;
-import intents.server.ConfigChangedIntent;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
-import network.packets.swg.zone.object_controller.ShowLootBox;
 
+import intents.chat.ChatBroadcastIntent;
+import intents.object.CreateStaticItemIntent;
+import intents.object.ObjectCreatedIntent;
+import intents.server.ConfigChangedIntent;
+import network.packets.swg.zone.object_controller.ShowLootBox;
 import resources.client_info.ClientFactory;
 import resources.combat.DamageType;
 import resources.config.ConfigFile;
-import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
@@ -68,7 +66,8 @@ public final class StaticItemService extends Service {
 	StaticItemService() {
 		objectAttributesMap = new HashMap<>();
 
-		registerForIntent(ConfigChangedIntent.TYPE);
+		registerForIntent(CreateStaticItemIntent.class, csii -> handleCreateStaticItemIntent(csii));
+		registerForIntent(ConfigChangedIntent.class, cci -> handleConfigChangedIntent(cci));
 	}
 
 	@Override
@@ -83,25 +82,13 @@ public final class StaticItemService extends Service {
 		}
 	}
 
-	@Override
-	public void onIntentReceived(Intent i) {
-		switch (i.getType()) {
-			case CreateStaticItemIntent.TYPE:
-				handleSpawnItemIntent((CreateStaticItemIntent) i);
-				break;
-			case ConfigChangedIntent.TYPE:
-				handleConfigChangedIntent((ConfigChangedIntent) i);
-				break;
-		}
-	}
-
 	/**
 	 * Static items can be loaded/unloaded at runtime.
 	 */
-	private void handleConfigChangedIntent(ConfigChangedIntent i) {
-		if (i.getKey().equals(CONFIG_OPTION_NAME)) {
-			boolean oldValue = Boolean.valueOf(i.getOldValue());
-			boolean newValue = Boolean.valueOf(i.getNewValue());
+	private void handleConfigChangedIntent(ConfigChangedIntent cci) {
+		if (cci.getKey().equals(CONFIG_OPTION_NAME)) {
+			boolean oldValue = Boolean.valueOf(cci.getOldValue());
+			boolean newValue = Boolean.valueOf(cci.getNewValue());
 
 			if (newValue != oldValue) {    // If the value has changed
 				if (newValue) {    // If the new value is to enable static items
@@ -171,11 +158,11 @@ public final class StaticItemService extends Service {
 		Log.i(this, "Static items have been disabled");
 	}
 
-	private void handleSpawnItemIntent(CreateStaticItemIntent i) {
-		SWGObject container = i.getContainer();
-		String[] itemNames = i.getItemNames();
-		Player requesterOwner = i.getRequester().getOwner();
-		ObjectCreationHandler objectCreationHandler = i.getObjectCreationHandler();
+	private void handleCreateStaticItemIntent(CreateStaticItemIntent cssi) {
+		SWGObject container = cssi.getContainer();
+		String[] itemNames = cssi.getItemNames();
+		Player requesterOwner = cssi.getRequester().getOwner();
+		ObjectCreationHandler objectCreationHandler = cssi.getObjectCreationHandler();
 		
 		// If adding these items to the container would exceed the max capacity...
 		if(!objectCreationHandler.isIgnoreVolume() && container.getVolume() + itemNames.length > container.getMaxContainerSize()) {
