@@ -37,11 +37,13 @@ public class DuelPlayerIntent extends Intent {
 	
 	private CreatureObject sender;
 	private CreatureObject reciever;
+	private boolean ended;
 	
-	public DuelPlayerIntent(CreatureObject sender, CreatureObject reciever) {
+	public DuelPlayerIntent(CreatureObject sender, CreatureObject reciever, boolean ended) {
 		super(TYPE);
 		this.sender = sender;
 		this.reciever = reciever;
+		this.ended = ended;
 	}
 	
 	public CreatureObject getSender() {
@@ -50,5 +52,9 @@ public class DuelPlayerIntent extends Intent {
 	
 	public CreatureObject getReciever() {
 		return reciever;
+	}
+	
+	public boolean getEnded() {
+		return ended;
 	}
 }

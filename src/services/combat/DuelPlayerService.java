@@ -48,9 +48,8 @@ public class DuelPlayerService extends Service {
 	
 	private void handleDuel(CreatureObject requester, CreatureObject reciever) {
 		
-		if (reciever == null || !reciever.isPlayer() || requester.equals(reciever)) {
-			sendSystemMessage(requester, "Your target to duel is invalid.");
-			System.out.println("Your code works son!");
+		if (duels.contains(reciever)) {
+			sendSystemMessage(requester, "You already challenged " + reciever + " to a duel");
 			return;
 		}
 		
@@ -66,8 +65,31 @@ public class DuelPlayerService extends Service {
 		}
 	}
 	
+	private void handleEndDuel(CreatureObject ender, CreatureObject enemy) {
+		if (!duels.contains(enemy)) {
+			sendSystemMessage(ender, "You are not in a duel with " + enemy.getObjectName());
+			return;
+		} else {
+			sendSystemMessage(ender, "You ended the duel with " + enemy.getObjectName());
+			sendSystemMessage(enemy, ender + " ended the duel");
+			duels.remove(enemy);
+			// TODO: Update each person's pvp status
+		}
+	}
+	
 	private void handleDuelPlayerIntent(DuelPlayerIntent dpi) {
-		handleDuel(dpi.getSender(), dpi.getReciever());
+		
+		if (dpi.getReciever() == null || !dpi.getReciever().isPlayer() || dpi.getSender().equals(dpi.getReciever())) {
+			sendSystemMessage(dpi.getSender(), "Your target is invalid.");
+			return;
+		}
+		
+		if (dpi.getEnded()) {
+			handleEndDuel(dpi.getSender(), dpi.getReciever());
+		} else {
+			handleDuel(dpi.getSender(), dpi.getReciever());
+		}
+		
 	}
 	
 	private void sendSystemMessage(CreatureObject player, String message) {
