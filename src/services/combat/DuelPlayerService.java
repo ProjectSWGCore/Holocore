@@ -66,7 +66,9 @@ public class DuelPlayerService extends Service {
 	}
 	
 	private void handleCancelDuel(CreatureObject canceler, CreatureObject target) {
-		// TODO: Implement
+		sendSystemMessage(canceler, "You cancel your challenge to " + target.getObjectName() + ".");
+		sendSystemMessage(target, target.getObjectName() + " cancels his challenge.");
+		duels.remove(target);
 	}
 	
 	private void handleDeclineDuel(CreatureObject decliner, CreatureObject target) {
@@ -86,6 +88,8 @@ public class DuelPlayerService extends Service {
 	private void checkForEventTypeCorrection(DuelPlayerIntent dpi) {
 		if (dpi.getEventType() == DuelPlayerIntent.DuelEventType.REQUEST && duels.contains(dpi.getSender())) {
 			dpi.setDuelEventType(DuelPlayerIntent.DuelEventType.ACCEPT);
+		} else if (dpi.getEventType() == DuelPlayerIntent.DuelEventType.END && duels.contains(dpi.getReciever()) && !duels.contains(dpi.getSender())) {
+			dpi.setDuelEventType(DuelPlayerIntent.DuelEventType.CANCEL);
 		}
 	}
 	
