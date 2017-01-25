@@ -35,6 +35,8 @@ import intents.combat.DuelPlayerIntent;
 import resources.objects.creature.CreatureObject;
 import resources.server_info.SynchronizedList;
 import resources.control.Service;
+import resources.encodables.ProsePackage;
+import resources.encodables.StringId;
 
 public class DuelPlayerService extends Service {
 	
@@ -48,26 +50,26 @@ public class DuelPlayerService extends Service {
 	
 	private void handleAcceptDuel(CreatureObject accepter, CreatureObject target) {
 		duels.add(target);
-		sendSystemMessage(accepter, "You accept " + target.getObjectName() + "'s challenge.");
-		sendSystemMessage(target, accepter.getObjectName() + " accepts your challenge.");
+		sendSystemMessage(accepter, target, "accept_self");
+		sendSystemMessage(target, accepter, "accept_target");
 		// TODO: Update each person's pvp status
 	}
 	
 	private void handleEndDuel(CreatureObject ender, CreatureObject target) {
 		if (duels.contains(target)) {
-			sendSystemMessage(ender, "You end your duel with " + target.getObjectName() + ".");
-			sendSystemMessage(target, ender.getObjectName() + " ends your duel.");
+			sendSystemMessage(ender, target, "end_self");
+			sendSystemMessage(target, ender, "end_target");
 			duels.remove(ender);
 			duels.remove(target);
 			// TODO: Update each person's pvp status
 		} else {
-			sendSystemMessage(ender, "You are not dueling " + target.getObjectName() + ".");
+			sendSystemMessage(ender, target, "not_dueling");
 		}
 	}
 	
 	private void handleCancelDuel(CreatureObject canceler, CreatureObject target) {
-		sendSystemMessage(canceler, "You cancel your challenge to " + target.getObjectName() + ".");
-		sendSystemMessage(target, target.getObjectName() + " cancels his challenge.");
+		sendSystemMessage(canceler, target, "cancel_self");
+		sendSystemMessage(target, canceler, "cancel_target");
 		duels.remove(target);
 	}
 	
@@ -78,10 +80,10 @@ public class DuelPlayerService extends Service {
 	private void handleRequestDuel(CreatureObject requester, CreatureObject target) {
 		if (!duels.contains(requester)) {
 			duels.add(target);
-			sendSystemMessage(requester, "You challenge " + target.getObjectName() + " to a duel.");
-			sendSystemMessage(target, requester.getObjectName() + " challenges you to a duel.");
+			sendSystemMessage(requester, target, "challenge_self");
+			sendSystemMessage(target, requester, "challenge_target");
 		} else {
-			sendSystemMessage(requester, "You already challenged " + target.getObjectName() + " to a duel");
+			sendSystemMessage(requester, target, "already_challenged");
 		}
 	}
 	
@@ -123,7 +125,7 @@ public class DuelPlayerService extends Service {
 		return duels;
 	}
 	
-	private void sendSystemMessage(CreatureObject player, String message) {
-		new ChatBroadcastIntent(player.getOwner() , message).broadcast();
+	private void sendSystemMessage(CreatureObject playerToMessage, CreatureObject playerToMessageAbout, String message) {
+		new ChatBroadcastIntent(playerToMessage.getOwner() , new ProsePackage(new StringId("duel", message), "TT", playerToMessageAbout.getObjectName())).broadcast();
 	}
 }
