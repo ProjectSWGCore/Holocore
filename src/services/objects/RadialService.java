@@ -58,7 +58,7 @@ public class RadialService extends Service {
 
 		registerForIntent(GalacticPacketIntent.class, gpi -> handleGalacticPacketIntent(gpi));
 		registerForIntent(RadialResponseIntent.class, rri -> handleRadialResponseIntent(rri));
-		registerForIntent(RadialRegisterIntent.class, rrei -> handleRadialRegisterIntent(rrei));
+		registerForIntent(RadialRegisterIntent.class, rri -> handleRadialRegisterIntent(rri));
 	}
 
 	private void handleGalacticPacketIntent(GalacticPacketIntent gpi){
@@ -70,12 +70,12 @@ public class RadialService extends Service {
 		}
 	}
 	
-	private void handleRadialRegisterIntent(RadialRegisterIntent rrei){
+	private void handleRadialRegisterIntent(RadialRegisterIntent rri){
 		synchronized (templatesRegistered) {
-			if (rrei.isRegister()) {
-				templatesRegistered.addAll(rrei.getTemplates());
+			if (rri.isRegister()) {
+				templatesRegistered.addAll(rri.getTemplates());
 			} else {
-				templatesRegistered.removeAll(rrei.getTemplates());
+				templatesRegistered.removeAll(rri.getTemplates());
 			}
 		}
 	}
@@ -98,9 +98,9 @@ public class RadialService extends Service {
 		new RadialRequestIntent(player, target, request).broadcast();
 	}
 
-	private void handleRadialResponseIntent(RadialResponseIntent response) {
-		Player player = response.getPlayer();
-		sendResponse(player, response.getTarget(), response.getOptions(), response.getCounter());
+	private void handleRadialResponseIntent(RadialResponseIntent rri) {
+		Player player = rri.getPlayer();
+		sendResponse(player, rri.getTarget(), rri.getOptions(), rri.getCounter());
 	}
 
 	private void onSelection(GalacticManager galacticManager, Player player, ObjectMenuSelect select) {

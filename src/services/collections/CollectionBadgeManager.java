@@ -72,9 +72,9 @@ public class CollectionBadgeManager extends Manager {
 	}
 
 	private void handleGrantClickyCollectionIntent(GrantClickyCollectionIntent gcci){
-		CreatureObject creo = ((GrantClickyCollectionIntent) gcci).getCreature();
-		SWGObject inventoryItem = ((GrantClickyCollectionIntent) gcci).getInventoryItem();
-		CollectionItem collection = ((GrantClickyCollectionIntent) gcci).getCollection();
+		CreatureObject creo = gcci.getCreature();
+		SWGObject inventoryItem = gcci.getInventoryItem();
+		CollectionItem collection = gcci.getCollection();
 
 		handleCollectionBadge(creo, inventoryItem, collection);
 	}

@@ -158,11 +158,11 @@ public final class StaticItemService extends Service {
 		Log.i(this, "Static items have been disabled");
 	}
 
-	private void handleCreateStaticItemIntent(CreateStaticItemIntent cssi) {
-		SWGObject container = cssi.getContainer();
-		String[] itemNames = cssi.getItemNames();
-		Player requesterOwner = cssi.getRequester().getOwner();
-		ObjectCreationHandler objectCreationHandler = cssi.getObjectCreationHandler();
+	private void handleCreateStaticItemIntent(CreateStaticItemIntent csii) {
+		SWGObject container = csii.getContainer();
+		String[] itemNames = csii.getItemNames();
+		Player requesterOwner = csii.getRequester().getOwner();
+		ObjectCreationHandler objectCreationHandler = csii.getObjectCreationHandler();
 		
 		// If adding these items to the container would exceed the max capacity...
 		if(!objectCreationHandler.isIgnoreVolume() && container.getVolume() + itemNames.length > container.getMaxContainerSize()) {
