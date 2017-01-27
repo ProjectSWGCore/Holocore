@@ -41,13 +41,11 @@ public class InboundNetworkManager extends Service {
 	public InboundNetworkManager(ClientManager clientManager) {
 		this.clientManager = clientManager;
 		
-		registerForIntent(InboundPacketPendingIntent.TYPE);
+		registerForIntent(InboundPacketPendingIntent.class, ippi -> handleInboundPacketPendingIntent(ippi));
 	}
 	
-	@Override
-	public void onIntentReceived(Intent i) {
-		if (i instanceof InboundPacketPendingIntent)
-			handlePacketPending(((InboundPacketPendingIntent) i).getClient());
+	private void handleInboundPacketPendingIntent(InboundPacketPendingIntent ippi){
+		handlePacketPending(ippi.getClient());
 	}
 	
 	public void onInboundData(InetSocketAddress addr, byte [] data) {

@@ -44,17 +44,13 @@ public class OutboundNetworkManager extends Service {
 		this.sender = new PacketSender(server);
 		this.clientManager = clientManager;
 		
-		registerForIntent(OutboundPacketIntent.TYPE);
+		registerForIntent(OutboundPacketIntent.class, opi -> handleOutboundPacketIntent(opi));
 	}
 	
-	@Override
-	public void onIntentReceived(Intent i) {
-		if (i instanceof OutboundPacketIntent) {
-			OutboundPacketIntent opi = (OutboundPacketIntent) i;
-			NetworkClient client = clientManager.getClient(opi.getNetworkId());
-			Assert.notNull(client);
-			client.addToOutbound(opi.getPacket());
-		}
+	private void handleOutboundPacketIntent(OutboundPacketIntent opi){
+		NetworkClient client = clientManager.getClient(opi.getNetworkId());
+		Assert.notNull(client);
+		client.addToOutbound(opi.getPacket());
 	}
 	
 	public void onSessionCreated(NetworkClient client) {

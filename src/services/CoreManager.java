@@ -34,23 +34,22 @@ import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.OffsetTime;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import network.packets.Packet;
-import network.packets.swg.zone.baselines.Baseline;
-import network.packets.swg.zone.deltas.DeltasMessage;
-import network.packets.swg.zone.object_controller.ObjectController;
 import intents.network.InboundPacketIntent;
 import intents.network.OutboundPacketIntent;
 import intents.server.ServerManagementIntent;
 import intents.server.ServerStatusIntent;
-import java.time.OffsetTime;
+import network.packets.Packet;
+import network.packets.swg.zone.baselines.Baseline;
+import network.packets.swg.zone.deltas.DeltasMessage;
+import network.packets.swg.zone.object_controller.ObjectController;
 import resources.Galaxy;
 import resources.Galaxy.GalaxyStatus;
 import resources.config.ConfigFile;
-import resources.control.Intent;
 import resources.control.Manager;
 import resources.control.ServerStatus;
 import resources.server_info.Config;
@@ -95,9 +94,9 @@ public class CoreManager extends Manager {
 		addChildService(engineManager);
 		addChildService(galacticManager);
 		
-		registerForIntent(InboundPacketIntent.TYPE);
-		registerForIntent(OutboundPacketIntent.TYPE);
-		registerForIntent(ServerManagementIntent.TYPE);
+		registerForIntent(InboundPacketIntent.class, ipi -> handleInboundPacketIntent(ipi));
+		registerForIntent(OutboundPacketIntent.class, opi -> handleOutboundPacketIntent(opi));
+		registerForIntent(ServerManagementIntent.class, smi -> handleServerManagementIntent(smi));
 	}
 	
 	/**
@@ -138,39 +137,23 @@ public class CoreManager extends Manager {
 		return super.terminate();
 	}
 	
-	@Override
-	public void onIntentReceived(Intent i) {
-		switch (i.getType()) {
-			case ServerManagementIntent.TYPE:
-				if (i instanceof ServerManagementIntent)
-					handleServerManagementIntent((ServerManagementIntent) i);
-				break;
-			case InboundPacketIntent.TYPE:
-				handleInboundPacketIntent((InboundPacketIntent) i);
-				break;
-			case OutboundPacketIntent.TYPE:
-				handleOutboundPacketIntent((OutboundPacketIntent) i);
-				break;
-		}
-	}
-	
-	private void handleServerManagementIntent(ServerManagementIntent i) {
-		switch(i.getEvent()) {
-			case SHUTDOWN: initiateShutdownSequence(i);  break;
+	private void handleServerManagementIntent(ServerManagementIntent smi) {
+		switch(smi.getEvent()) {
+			case SHUTDOWN: initiateShutdownSequence(smi);  break;
 			default: break;
 		}
 	}
 	
-	private void handleInboundPacketIntent(InboundPacketIntent i) {
+	private void handleInboundPacketIntent(InboundPacketIntent ipi) {
 		if (!packetDebug)
 			return;
-		printPacketStream(true, i.getNetworkId(), createExtendedPacketInformation(i.getPacket()));
+		printPacketStream(true, ipi.getNetworkId(), createExtendedPacketInformation(ipi.getPacket()));
 	}
 	
-	private void handleOutboundPacketIntent(OutboundPacketIntent i) {
+	private void handleOutboundPacketIntent(OutboundPacketIntent opi) {
 		if (!packetDebug)
 			return;
-		printPacketStream(false, i.getNetworkId(), createExtendedPacketInformation(i.getPacket()));
+		printPacketStream(false, opi.getNetworkId(), createExtendedPacketInformation(opi.getPacket()));
 	}
 	
 	private void printPacketStream(boolean in, long networkId, String str) {

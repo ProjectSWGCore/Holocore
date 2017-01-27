@@ -27,18 +27,16 @@
 ***********************************************************************************/
 package services.network;
 
-import intents.network.CloseConnectionIntent;
-
 import java.io.IOException;
 import java.net.BindException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
 
+import intents.network.CloseConnectionIntent;
 import network.NetworkClient;
 import network.packets.swg.holo.HoloConnectionStopped.ConnectionStoppedReason;
 import resources.config.ConfigFile;
-import resources.control.Intent;
 import resources.control.Manager;
 import resources.network.DisconnectReason;
 import resources.network.TCPServer;
@@ -61,7 +59,7 @@ public class NetworkClientManager extends Manager implements TCPCallback {
 		addChildService(inboundManager);
 		addChildService(outboundManager);
 		
-		registerForIntent(CloseConnectionIntent.TYPE);
+		registerForIntent(CloseConnectionIntent.class, cci -> handleCloseConnectionIntent(cci));
 	}
 	
 	@Override
@@ -83,21 +81,11 @@ public class NetworkClientManager extends Manager implements TCPCallback {
 		tcpServer.close();
 		return super.stop();
 	}
-	
-	@Override
-	public void onIntentReceived(Intent i) {
-		switch (i.getType()) {
-			case CloseConnectionIntent.TYPE:
-				if (i instanceof CloseConnectionIntent)
-					processCloseConnectionIntent((CloseConnectionIntent) i);
-				break;
-		}
-	}
-	
-	private void processCloseConnectionIntent(CloseConnectionIntent i) {
-		NetworkClient client = clientManager.getClient(i.getNetworkId());
+		
+	private void handleCloseConnectionIntent(CloseConnectionIntent ccii) {
+		NetworkClient client = clientManager.getClient(ccii.getNetworkId());
 		if (client != null)
-			onSessionDisconnect(client.getAddress(), getHolocoreReason(i.getDisconnectReason()));
+			onSessionDisconnect(client.getAddress(), getHolocoreReason(ccii.getDisconnectReason()));
 	}
 	
 	private ConnectionStoppedReason getHolocoreReason(DisconnectReason reason) {
