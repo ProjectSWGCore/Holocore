@@ -27,15 +27,14 @@
 ***********************************************************************************/
 package services.galaxy;
 
-import intents.PlayerEventIntent;
-import intents.network.GalacticPacketIntent;
-
 import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import intents.PlayerEventIntent;
+import intents.network.GalacticPacketIntent;
 import network.packets.swg.zone.HeartBeat;
 import resources.control.Assert;
 import resources.control.Intent;
@@ -77,8 +76,8 @@ public class ConnectionService extends Service {
 			}
 		};
 		
-		registerForIntent(PlayerEventIntent.TYPE);
-		registerForIntent(GalacticPacketIntent.TYPE);
+		registerForIntent(PlayerEventIntent.class, pei -> handlePlayerEventIntent(pei));
+		registerForIntent(GalacticPacketIntent.class, gpi -> handleGalacticPacketIntent(gpi));
 	}
 	
 	@Override
@@ -93,15 +92,7 @@ public class ConnectionService extends Service {
 		return super.terminate() && success;
 	}
 	
-	@Override
-	public void onIntentReceived(Intent i) {
-		if (i instanceof PlayerEventIntent)
-			onPlayerEventIntent((PlayerEventIntent) i);
-		else if (i instanceof GalacticPacketIntent)
-			onGalacticPacketIntent((GalacticPacketIntent) i);
-	}
-	
-	private void onPlayerEventIntent(PlayerEventIntent pei) {
+	private void handlePlayerEventIntent(PlayerEventIntent pei) {
 		Player p = pei.getPlayer();
 		switch (pei.getEvent()) {
 			case PE_FIRST_ZONE:
@@ -115,7 +106,7 @@ public class ConnectionService extends Service {
 		}
 	}
 	
-	private void onGalacticPacketIntent(GalacticPacketIntent gpi) {
+	private void handleGalacticPacketIntent(GalacticPacketIntent gpi) {
 		Player p = gpi.getPlayer();
 		p.updateLastPacketTimestamp();
 		if (gpi.getPacket() instanceof HeartBeat)

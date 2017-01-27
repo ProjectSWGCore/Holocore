@@ -27,20 +27,19 @@
 ***********************************************************************************/
 package services.experience;
 
-import intents.SkillModIntent;
-import intents.experience.GrantSkillIntent;
-import intents.network.GalacticPacketIntent;
-
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+
+import intents.SkillModIntent;
+import intents.experience.GrantSkillIntent;
+import intents.network.GalacticPacketIntent;
 import network.packets.Packet;
 import network.packets.swg.zone.object_controller.ChangeRoleIconChoice;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
 import resources.control.Assert;
-import resources.control.Intent;
 import resources.control.Manager;
 import resources.objects.creature.CreatureObject;
 import resources.server_info.Log;
@@ -61,22 +60,8 @@ public final class SkillManager extends Manager {
 		
 		addChildService(new ExpertiseService());
 		
-		registerForIntent(GrantSkillIntent.TYPE);
-		registerForIntent(GalacticPacketIntent.TYPE);
-	}
-
-	@Override
-	public void onIntentReceived(Intent i) {
-		switch(i.getType()) {
-			case GrantSkillIntent.TYPE:
-				if (i instanceof GrantSkillIntent)
-					handleGrantSkillIntent((GrantSkillIntent) i);
-				break;
-			case GalacticPacketIntent.TYPE:
-				if (i instanceof GalacticPacketIntent)
-					handleGalacticPacket((GalacticPacketIntent) i);
-				break;
-		}
+		registerForIntent(GrantSkillIntent.class, gsi -> handleGrantSkillIntent(gsi));
+		registerForIntent(GalacticPacketIntent.class, gpi -> handleGalacticPacketIntent(gpi));
 	}
 	
 	@Override
@@ -136,17 +121,17 @@ public final class SkillManager extends Manager {
 		return str.split(",");
 	}
 	
-	private void handleGrantSkillIntent(GrantSkillIntent intent) {
-		if (intent.getIntentType() != GrantSkillIntent.IntentType.GRANT) {
+	private void handleGrantSkillIntent(GrantSkillIntent gsi) {
+		if (gsi.getIntentType() != GrantSkillIntent.IntentType.GRANT) {
 			return;
 		}
 		
-		String skillName = intent.getSkillName();
-		CreatureObject target = intent.getTarget();
+		String skillName = gsi.getSkillName();
+		CreatureObject target = gsi.getTarget();
 		SkillData skillData = skillDataMap.get(skillName);
 		String parentSkillName = skillData.getParentSkill();
 		
-		if (intent.isGrantRequiredSkills()) {
+		if (gsi.isGrantRequiredSkills()) {
 			grantParentSkills(skillData, parentSkillName, target);
 			grantRequiredSkills(skillData, target);
 		} else if (!target.hasSkill(parentSkillName) || !hasRequiredSkills(skillData, target)) {
@@ -157,7 +142,7 @@ public final class SkillManager extends Manager {
 		grantSkill(skillData, skillName, target);
 	}
 	
-	private void handleGalacticPacket(GalacticPacketIntent gpi) {
+	private void handleGalacticPacketIntent(GalacticPacketIntent gpi) {
 		Packet packet = gpi.getPacket();
 		if (packet instanceof ChangeRoleIconChoice) {
 			ChangeRoleIconChoice iconChoice = (ChangeRoleIconChoice) packet;
