@@ -27,30 +27,30 @@
  ***********************************************************************************/
 package services.combat;
 
-import intents.BuffIntent;
-import intents.chat.ChatBroadcastIntent;
 import java.awt.Color;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
-import network.packets.swg.zone.object_controller.ShowFlyText;
-import network.packets.swg.zone.object_controller.ShowFlyText.Scale;
-import network.packets.swg.zone.object_controller.combat.CombatAction;
+import intents.BuffIntent;
+import intents.chat.ChatBroadcastIntent;
 import intents.chat.ChatCommandIntent;
 import intents.combat.CreatureKilledIntent;
 import intents.combat.DeathblowIntent;
 import intents.object.DestroyObjectIntent;
 import intents.object.ObjectCreatedIntent;
-import java.util.Iterator;
-import java.util.Random;
-import java.util.concurrent.Future;
-import java.util.stream.Collectors;
 import network.packets.swg.zone.PlayClientEffectObjectMessage;
+import network.packets.swg.zone.object_controller.ShowFlyText;
+import network.packets.swg.zone.object_controller.ShowFlyText.Scale;
+import network.packets.swg.zone.object_controller.combat.CombatAction;
 import network.packets.swg.zone.object_controller.combat.CombatSpam;
 import resources.Location;
 import resources.Posture;
@@ -62,7 +62,6 @@ import resources.combat.TrailLocation;
 import resources.commands.CombatCommand;
 import resources.common.CRC;
 import resources.common.RGB;
-import resources.control.Intent;
 import resources.control.Manager;
 import resources.encodables.ProsePackage;
 import resources.encodables.StringId;
@@ -95,7 +94,8 @@ public class CombatManager extends Manager {
 	// TODO remove calculations if the creature disappears
 	
 	public CombatManager() {
-		registerForIntent(DeathblowIntent.TYPE);
+		registerForIntent(DeathblowIntent.class, di -> handleDeathblowIntent(di));
+		registerForIntent(ChatCommandIntent.class, cci -> handleChatCommandIntent(cci));
 		inCombat = new HashMap<>();
 		regeneratingHealthCreatures = new HashSet<>();
 		regeneratingActionCreatures = new HashSet<>();
@@ -133,14 +133,6 @@ public class CombatManager extends Manager {
 			}
 		}
 		return super.terminate();
-	}
-	
-	@Override
-	public void onIntentReceived(Intent i) {
-		switch(i.getType()) {
-			case ChatCommandIntent.TYPE: processChatCommand((ChatCommandIntent) i); break;
-			case DeathblowIntent.TYPE: procesDeathblow((DeathblowIntent) i); break;
-		}
 	}
 	
 	private void periodicChecks() {
@@ -220,12 +212,12 @@ public class CombatManager extends Manager {
 		}
 	}
 	
-	private void processChatCommand(ChatCommandIntent intent) {
-		if (!intent.getCommand().isCombatCommand() || !(intent.getCommand() instanceof CombatCommand))
+	private void handleChatCommandIntent(ChatCommandIntent cci) {
+		if (!cci.getCommand().isCombatCommand() || !(cci.getCommand() instanceof CombatCommand))
 			return;
-		CombatCommand c = (CombatCommand) intent.getCommand();
-		CreatureObject source = intent.getSource();
-		SWGObject target = intent.getTarget();
+		CombatCommand c = (CombatCommand) cci.getCommand();
+		CreatureObject source = cci.getSource();
+		SWGObject target = cci.getTarget();
 		
 		// Regardless of HitType, the command might have action cost
 		addActionCost(source, c);
@@ -234,7 +226,7 @@ public class CombatManager extends Manager {
 		switch (c.getHitType()) {
 			case ATTACK: handleAttack(source, target, null, c); break;
 			case BUFF: handleBuff(source, target, c); break;
-			case DELAY_ATTACK: handleDelayAttack(source, target, c, intent.getArguments()); break;
+			case DELAY_ATTACK: handleDelayAttack(source, target, c, cci.getArguments()); break;
 			default: handleStatus(source, CombatStatus.UNKNOWN); break;
 		}
 	}
@@ -544,9 +536,9 @@ public class CombatManager extends Manager {
 		new CreatureKilledIntent(killer, corpse).broadcast();
 	}
 	
-	private void procesDeathblow(DeathblowIntent i) {
-		CreatureObject killer = i.getKiller();
-		CreatureObject corpse = i.getCorpse();
+	private void handleDeathblowIntent(DeathblowIntent di) {
+		CreatureObject killer = di.getKiller();
+		CreatureObject corpse = di.getCorpse();
 
 		// Only deathblowing players is allowed!
 		if (!corpse.isPlayer()) {
