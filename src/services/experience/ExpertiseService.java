@@ -69,19 +69,11 @@ public final class ExpertiseService extends Service {
 		expertiseAbilities = new HashMap<>();
 		pointsForLevel = new HashMap<>();
 		
-		registerForIntent(GalacticPacketIntent.TYPE);
-		registerForIntent(LevelChangedIntent.TYPE);
+		registerForIntent(GalacticPacketIntent.class, gpi -> handleGalacticPacketIntent(gpi));
+		registerForIntent(LevelChangedIntent.class, lci -> handleLevelChangedIntent(lci));
+		registerForIntent(GrantSkillIntent.class, gsi -> handleGrantSkillIntent(gsi));
 	}
 
-	@Override
-	public void onIntentReceived(Intent i) {
-		switch(i.getType()) {
-			case GalacticPacketIntent.TYPE: handleGalacticPacket((GalacticPacketIntent) i); break;
-			case LevelChangedIntent.TYPE: handleLevelChangedIntent((LevelChangedIntent) i); break;
-			case GrantSkillIntent.TYPE: handleGrantSkillIntent((GrantSkillIntent) i); break;
-		}
-	}
-	
 	@Override
 	public boolean initialize() {
 		loadTrees();
@@ -179,7 +171,7 @@ public final class ExpertiseService extends Service {
 		}
 	}
 	
-	private void handleGalacticPacket(GalacticPacketIntent gpi) {
+	private void handleGalacticPacketIntent(GalacticPacketIntent gpi) {
 		Packet packet = gpi.getPacket();
 		
 		if (!(packet instanceof ExpertiseRequestMessage)) {
@@ -228,11 +220,11 @@ public final class ExpertiseService extends Service {
 		checkExtraAbilities(creatureObject);
 	}
 	
-	private void handleLevelChangedIntent(LevelChangedIntent i) {
-		int newLevel = i.getNewLevel();
-		CreatureObject creatureObject = i.getCreatureObject();
+	private void handleLevelChangedIntent(LevelChangedIntent lci) {
+		int newLevel = lci.getNewLevel();
+		CreatureObject creatureObject = lci.getCreatureObject();
 		PlayerObject playerObject = creatureObject.getPlayerObject();
-		short oldLevel = i.getPreviousLevel();
+		short oldLevel = lci.getPreviousLevel();
 						
 		if (oldLevel < 10 && newLevel >= 10) {
 			SuiMessageBox window = new SuiMessageBox(SuiButtons.OK, "@expertise_d:sui_expertise_introduction_title",	"@expertise_d:sui_expertise_introduction_body");
@@ -244,13 +236,13 @@ public final class ExpertiseService extends Service {
 		checkExtraAbilities(creatureObject);
 	}
 	
-	private void handleGrantSkillIntent(GrantSkillIntent i) {
-		if (i.getIntentType() == GrantSkillIntent.IntentType.GIVEN) {
+	private void handleGrantSkillIntent(GrantSkillIntent gsi) {
+		if (gsi.getIntentType() == GrantSkillIntent.IntentType.GIVEN) {
 			return;
 		}
 		
 		// Let's check if this is an expertise skill that gives them additional commands
-		checkExtraAbilities(i.getTarget());
+		checkExtraAbilities(gsi.getTarget());
 	}
 	
 	private void checkExtraAbilities(CreatureObject creatureObject) {
