@@ -91,15 +91,13 @@ public class NetworkClient {
 	}
 	
 	public void onConnected() {
-		if (getState() != State.DISCONNECTED)
-			return;
+		Assert.test(getState() == State.DISCONNECTED);
 		setState(State.CONNECTED);
 		intentChain.broadcastAfter(new ConnectionOpenedIntent(networkId));
 	}
 	
 	public void onDisconnected(ConnectionStoppedReason reason) {
-		if (getState() != State.CONNECTED)
-			return;
+		Assert.test(getState() == State.CONNECTED);
 		setState(State.CLOSED);
 		intentChain.broadcastAfter(new ConnectionClosedIntent(networkId, reason));
 		sendPacket(new HoloConnectionStopped(reason));
@@ -122,8 +120,7 @@ public class NetworkClient {
 		if (!inboundSemaphore.tryLock())
 			return;
 		try {
-			if (getState() != State.CONNECTED)
-				return;
+			Assert.test(getState() == State.CONNECTED);
 			while (processNextPacket()) {
 				
 			}
@@ -135,10 +132,10 @@ public class NetworkClient {
 	}
 	
 	public void addToOutbound(Packet packet) {
-		if (getState() != State.CONNECTED)
-			return;
+		Assert.test(getState() == State.CONNECTED);
 		synchronized (outboundMutex) {
 			ResponseAction action = sessionManager.onOutbound(packet);
+			Log.i(this, "Sending: %s to %s", packet, address);
 			if (action != ResponseAction.CONTINUE) {
 				flushOutbound();
 				return;
@@ -178,6 +175,7 @@ public class NetworkClient {
 			return true;
 		if (action == ResponseAction.SHUT_DOWN)
 			return true;
+		Log.d(this, "Inbound from %s: %s", address, p);
 		intentChain.broadcastAfter(new InboundPacketIntent(p, networkId));
 		return true;
 	}
