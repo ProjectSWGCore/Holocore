@@ -28,6 +28,6 @@
 	<classpathentry kind="lib" path="lib/org.eclipse.jgit-4.0.0.201506020755-rc3.jar"/>
 	<classpathentry kind="lib" path="lib/sqlite-jdbc-3.8.11.2.jar"/>
 	<classpathentry kind="lib" path="lib/postgresql-9.4.1207.jar"/>
-	<classpathentry kind="lib" path="lib/slf4j-nop-1.6.4.jar"/>
+	<classpathentry kind="lib" path="lib/jnr-unixsocket-0.15-jar-with-dependencies.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

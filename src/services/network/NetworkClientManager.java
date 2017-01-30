@@ -29,7 +29,6 @@ package services.network;
 
 import java.io.IOException;
 import java.net.BindException;
-import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
 
@@ -39,22 +38,25 @@ import network.packets.swg.holo.HoloConnectionStopped.ConnectionStoppedReason;
 import resources.config.ConfigFile;
 import resources.control.Manager;
 import resources.network.DisconnectReason;
+import resources.network.NetworkCallback;
 import resources.network.TCPServer;
-import resources.network.TCPServer.TCPCallback;
+import resources.network.UnixServer;
 import resources.server_info.Log;
 
-public class NetworkClientManager extends Manager implements TCPCallback {
+public class NetworkClientManager extends Manager implements NetworkCallback {
 	
 	private final InboundNetworkManager inboundManager;
 	private final OutboundNetworkManager outboundManager;
 	private final ClientManager clientManager;
 	private final TCPServer tcpServer;
+	private final UnixServer unixServer;
 	
 	public NetworkClientManager() {
 		clientManager = new ClientManager();
 		tcpServer = new TCPServer(getBindPort(), getBufferSize());
+		unixServer = new UnixServer(getBindPath(), getBufferSize());
 		inboundManager = new InboundNetworkManager(clientManager);
-		outboundManager = new OutboundNetworkManager(tcpServer, clientManager);
+		outboundManager = new OutboundNetworkManager(tcpServer, unixServer, clientManager);
 		
 		addChildService(inboundManager);
 		addChildService(outboundManager);
@@ -66,7 +68,9 @@ public class NetworkClientManager extends Manager implements TCPCallback {
 	public boolean start() {
 		try {
 			tcpServer.bind();
+			unixServer.bind();
 			tcpServer.setCallback(this);
+			unixServer.setCallback(this);
 		} catch (IOException e) {
 			Log.e(this, e);
 			if (e instanceof BindException)
@@ -79,6 +83,7 @@ public class NetworkClientManager extends Manager implements TCPCallback {
 	@Override
 	public boolean stop() {
 		tcpServer.close();
+		unixServer.close();
 		return super.stop();
 	}
 		
@@ -107,49 +112,47 @@ public class NetworkClientManager extends Manager implements TCPCallback {
 	@Override
 	public void onIncomingConnection(Socket s) {
 		SocketAddress addr = s.getRemoteSocketAddress();
-		if (addr instanceof InetSocketAddress)
-			onSessionConnect((InetSocketAddress) addr);
-		else if (addr != null)
-			Log.e(this, "Incoming connection has socket address of instance: %s", addr.getClass().getSimpleName());
+		onSessionConnect(addr);
 	}
 	
 	@Override
 	public void onConnectionDisconnect(Socket s, SocketAddress addr) {
-		if (addr instanceof InetSocketAddress)
-			onSessionDisconnect((InetSocketAddress) addr, ConnectionStoppedReason.APPLICATION);
-		else if (addr != null)
-			Log.e(this, "Connection Disconnected. Has socket address of instance: %s", addr.getClass().getSimpleName());
+		onSessionDisconnect(addr, ConnectionStoppedReason.APPLICATION);
 	}
 	
 	@Override
 	public void onIncomingData(Socket s, byte [] data) {
 		SocketAddress addr = s.getRemoteSocketAddress();
-		if (addr instanceof InetSocketAddress)
-			onInboundData((InetSocketAddress) addr, data);
-		else if (addr != null)
-			Log.e(this, "Incoming data has socket address of instance: %s", addr.getClass().getSimpleName());
+		onInboundData(addr, data);
 	}
 	
 	private int getBindPort() {
 		return getConfig(ConfigFile.NETWORK).getInt("BIND-PORT", 44463);
 	}
 	
+	private String getBindPath() {
+		return getConfig(ConfigFile.NETWORK).getString("BIND-PATH", "/tmp/holocore44463.sock");
+	}
+	
 	private int getBufferSize() {
 		return getConfig(ConfigFile.NETWORK).getInt("BUFFER-SIZE", 4096);
 	}
 	
-	private void onSessionConnect(InetSocketAddress addr) {
+	private void onSessionConnect(SocketAddress addr) {
+		Log.i(this, "NCM %s connected", addr);
 		NetworkClient client = clientManager.createSession(addr);
 		client.onConnected();
 		inboundManager.onSessionCreated(client);
 		outboundManager.onSessionCreated(client);
 	}
 	
-	private void onInboundData(InetSocketAddress addr, byte [] data) {
+	private void onInboundData(SocketAddress addr, byte [] data) {
+		Log.i(this, "NCM %s data: %d", addr, data.length);
 		inboundManager.onInboundData(addr, data);
 	}
 	
-	private void onSessionDisconnect(InetSocketAddress addr, ConnectionStoppedReason reason) {
+	private void onSessionDisconnect(SocketAddress addr, ConnectionStoppedReason reason) {
+		Log.i(this, "NCM %s disconnected", addr);
 		NetworkClient client = clientManager.getClient(addr);
 		if (client != null) {
 			client.onDisconnected(reason);

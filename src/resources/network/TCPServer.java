@@ -58,9 +58,9 @@ public class TCPServer {
 	private final InetAddress addr;
 	private final int port;
 	private final int bufferSize;
+	private final TCPListener listener;
 	private ServerSocketChannel channel;
-	private TCPCallback callback;
-	private TCPListener listener;
+	private NetworkCallback callback;
 	
 	public TCPServer(int port, int bufferSize) {
 		this(null, port, bufferSize);
@@ -72,8 +72,8 @@ public class TCPServer {
 		this.addr = addr;
 		this.port = port;
 		this.bufferSize = bufferSize;
+		this.listener = new TCPListener();
 		this.channel = null;
-		listener = new TCPListener();
 	}
 	
 	public void bind() throws IOException {
@@ -156,14 +156,8 @@ public class TCPServer {
 		return false;
 	}
 	
-	public void setCallback(TCPCallback callback) {
+	public void setCallback(NetworkCallback callback) {
 		this.callback = callback;
-	}
-	
-	public interface TCPCallback {
-		void onIncomingConnection(Socket s);
-		void onConnectionDisconnect(Socket s, SocketAddress addr);
-		void onIncomingData(Socket s, byte [] data);
 	}
 	
 	private class TCPListener implements Runnable {
@@ -240,6 +234,9 @@ public class TCPServer {
 					SocketChannel sc = channel.accept();
 					if (sc == null)
 						break;
+					sc.socket().setKeepAlive(true);
+					sc.socket().setPerformancePreferences(0, 1, 2);
+					sc.socket().setTrafficClass(0x10); // Low Delay bit
 					SocketChannel old = sockets.get(sc.getRemoteAddress());
 					if (old != null)
 						disconnect(old);

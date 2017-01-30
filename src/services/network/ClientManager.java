@@ -27,7 +27,7 @@
  ***********************************************************************************/
 package services.network;
 
-import java.net.InetSocketAddress;
+import java.net.SocketAddress;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
@@ -37,17 +37,17 @@ import network.NetworkClient;
 
 class ClientManager {
 	
-	private final Map <InetSocketAddress, Long> sockets;
+	private final Map <SocketAddress, Long> sockets;
 	private final Map <Long, NetworkClient> clients;
 	private final AtomicLong networkIdCounter;
 	
 	public ClientManager() {
-		sockets = new HashMap<InetSocketAddress, Long>();
-		clients = new Hashtable<Long, NetworkClient>();
+		sockets = new HashMap<>();
+		clients = new Hashtable<>();
 		networkIdCounter = new AtomicLong(1);
 	}
 	
-	public NetworkClient createSession(InetSocketAddress addr) {
+	public NetworkClient createSession(SocketAddress addr) {
 		NetworkClient client = new NetworkClient(addr, networkIdCounter.incrementAndGet());
 		synchronized (clients) {
 			sockets.put(client.getAddress(), client.getNetworkId());
@@ -69,11 +69,11 @@ class ClientManager {
 		}
 	}
 	
-	public NetworkClient getClient(InetSocketAddress addr) {
+	public NetworkClient getClient(SocketAddress addr) {
 		return getClient(getNetworkId(addr));
 	}
 	
-	public long getNetworkId(InetSocketAddress addr) {
+	public long getNetworkId(SocketAddress addr) {
 		synchronized (clients) {
 			Long id = sockets.get(addr);
 			if (id == null)

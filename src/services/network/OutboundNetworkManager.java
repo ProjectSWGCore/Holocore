@@ -28,20 +28,20 @@
 package services.network;
 
 import intents.network.OutboundPacketIntent;
-
 import network.NetworkClient;
 import resources.control.Assert;
 import resources.control.Intent;
 import resources.control.Service;
 import resources.network.TCPServer;
+import resources.network.UnixServer;
 
 public class OutboundNetworkManager extends Service {
 	
 	private final ClientManager clientManager;
 	private final PacketSender sender;
 	
-	public OutboundNetworkManager(TCPServer server, ClientManager clientManager) {
-		this.sender = new PacketSender(server);
+	public OutboundNetworkManager(TCPServer tcpServer, UnixServer unixServer, ClientManager clientManager) {
+		this.sender = new PacketSender(tcpServer, unixServer);
 		this.clientManager = clientManager;
 		
 		registerForIntent(OutboundPacketIntent.class, opi -> handleOutboundPacketIntent(opi));

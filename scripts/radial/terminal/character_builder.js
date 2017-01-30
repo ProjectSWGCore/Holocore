@@ -44,7 +44,7 @@ function spawnItems(player, items) {
 	var creature = player.getCreatureObject();
 	var inventory = creature.getSlottedObject("inventory");
 	
-	new CreateStaticItemIntent(creature, inventory, new StaticItemService.LootBoxHandler(creature), items).broadcast();
+	new CreateStaticItemIntent(creature, inventory, new StaticItemService.LootBoxHandler(creature), Java.to(items, "java.lang.String[]")).broadcast();
 }
 
 function handleArmor(player) {

@@ -191,7 +191,7 @@ public class ZoneManager extends Manager {
 	}
 	
 	private void handleClientIdMsg(Player player, ClientIdMsg clientId) {
-		Log.i("ZoneService", "%s connected to the zone server from %s:%d", player.getUsername(), clientId.getAddress(), clientId.getPort());
+		Log.i("ZoneService", "%s connected to the zone server from %s", player.getUsername(), clientId.getSocketAddress());
 		player.setPlayerServer(PlayerServer.ZONE);
 		player.sendPacket(new HeartBeat());
 		player.sendPacket(new AccountFeatureBits());

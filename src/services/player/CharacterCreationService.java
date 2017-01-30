@@ -189,7 +189,7 @@ public class CharacterCreationService extends Service {
 		Assert.notNull(creature.getPlayerObject());
 		Assert.test(creature.isPlayer());
 		Assert.test(creature.getObjectId() > 0);
-		Log.i(this, "%s created character %s from %s:%d", player.getUsername(), create.getName(), create.getAddress(), create.getPort());
+		Log.i(this, "%s created character %s from %s", player.getUsername(), create.getName(), create.getSocketAddress());
 		player.sendPacket(new CreateCharacterSuccess(creature.getObjectId()));
 		new PlayerEventIntent(player, PlayerEvent.PE_CREATE_CHARACTER).broadcast();
 	}
@@ -227,7 +227,7 @@ public class CharacterCreationService extends Service {
 		}
 		// Test for successful database insertion
 		if (!createCharacterInDb(creature, create.getName(), player)) {
-			Log.e(this, "Failed to create character %s for user %s with server error from %s:%d", create.getName(), player.getUsername(), create.getAddress(), create.getPort());
+			Log.e(this, "Failed to create character %s for user %s with server error from %s", create.getName(), player.getUsername(), create.getSocketAddress());
 			new DestroyObjectIntent(creature).broadcast();
 			sendCharCreationFailure(player, create, ErrorMessage.NAME_DECLINED_INTERNAL_ERROR);
 			return null;
@@ -254,7 +254,7 @@ public class CharacterCreationService extends Service {
 			default:
 				break;
 		}
-		Log.e("ZoneService", "Failed to create character %s for user %s with error %s and reason %s from %s:%d", create.getName(), player.getUsername(), err, reason, create.getAddress(), create.getPort());
+		Log.e("ZoneService", "Failed to create character %s for user %s with error %s and reason %s from %s", create.getName(), player.getUsername(), err, reason, create.getSocketAddress());
 		player.sendPacket(new CreateCharacterFailure(reason));
 	}
 	
