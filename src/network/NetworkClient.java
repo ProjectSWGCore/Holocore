@@ -117,10 +117,11 @@ public class NetworkClient {
 	}
 	
 	public void processInbound() {
+		if (getState() != State.CONNECTED)
+			return;
 		if (!inboundSemaphore.tryLock())
 			return;
 		try {
-			Assert.test(getState() == State.CONNECTED);
 			while (processNextPacket()) {
 				
 			}
@@ -132,10 +133,10 @@ public class NetworkClient {
 	}
 	
 	public void addToOutbound(Packet packet) {
-		Assert.test(getState() == State.CONNECTED);
+		if (getState() != State.CONNECTED)
+			return;
 		synchronized (outboundMutex) {
 			ResponseAction action = sessionManager.onOutbound(packet);
-			Log.i(this, "Sending: %s to %s", packet, address);
 			if (action != ResponseAction.CONTINUE) {
 				flushOutbound();
 				return;
@@ -175,7 +176,6 @@ public class NetworkClient {
 			return true;
 		if (action == ResponseAction.SHUT_DOWN)
 			return true;
-		Log.d(this, "Inbound from %s: %s", address, p);
 		intentChain.broadcastAfter(new InboundPacketIntent(p, networkId));
 		return true;
 	}

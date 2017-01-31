@@ -32,8 +32,8 @@ import java.net.SocketAddress;
 
 public interface NetworkCallback {
 	
-	void onIncomingConnection(Socket s);
+	void onIncomingConnection(Socket s, SocketAddress addr);
 	void onConnectionDisconnect(Socket s, SocketAddress addr);
-	void onIncomingData(Socket s, byte [] data);
+	void onIncomingData(Socket s, SocketAddress addr, byte [] data);
 	
 }

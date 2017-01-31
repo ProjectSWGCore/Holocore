@@ -31,32 +31,22 @@ import java.net.SocketAddress;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 
-import jnr.unixsocket.UnixSocketAddress;
 import resources.network.TCPServer;
-import resources.network.UnixServer;
 import resources.server_info.Log;
 
 public class PacketSender {
 	
 	private final TCPServer tcpServer;
-	private final UnixServer unixServer;
 	
-	public PacketSender(TCPServer server, UnixServer unixServer) {
+	public PacketSender(TCPServer server) {
 		this.tcpServer = server;
-		this.unixServer = unixServer;
 	}
 	
 	public void sendPacket(SocketAddress addr, ByteBuffer data) {
-		if (addr instanceof UnixSocketAddress)
-			sendPacket((UnixSocketAddress) addr, data);
-		else if (addr instanceof InetSocketAddress)
+		if (addr instanceof InetSocketAddress)
 			sendPacket((InetSocketAddress) addr, data);
 		else
 			Log.e(this, "Unknown socket address: %s", addr);
-	}
-	
-	public void sendPacket(UnixSocketAddress addr, ByteBuffer data) {
-		unixServer.send(addr, data);
 	}
 	
 	public void sendPacket(InetSocketAddress addr, ByteBuffer data) {

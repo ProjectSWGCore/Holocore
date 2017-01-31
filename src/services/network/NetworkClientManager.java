@@ -40,7 +40,6 @@ import resources.control.Manager;
 import resources.network.DisconnectReason;
 import resources.network.NetworkCallback;
 import resources.network.TCPServer;
-import resources.network.UnixServer;
 import resources.server_info.Log;
 
 public class NetworkClientManager extends Manager implements NetworkCallback {
@@ -49,14 +48,12 @@ public class NetworkClientManager extends Manager implements NetworkCallback {
 	private final OutboundNetworkManager outboundManager;
 	private final ClientManager clientManager;
 	private final TCPServer tcpServer;
-	private final UnixServer unixServer;
 	
 	public NetworkClientManager() {
 		clientManager = new ClientManager();
 		tcpServer = new TCPServer(getBindPort(), getBufferSize());
-		unixServer = new UnixServer(getBindPath(), getBufferSize());
 		inboundManager = new InboundNetworkManager(clientManager);
-		outboundManager = new OutboundNetworkManager(tcpServer, unixServer, clientManager);
+		outboundManager = new OutboundNetworkManager(tcpServer, clientManager);
 		
 		addChildService(inboundManager);
 		addChildService(outboundManager);
@@ -68,9 +65,7 @@ public class NetworkClientManager extends Manager implements NetworkCallback {
 	public boolean start() {
 		try {
 			tcpServer.bind();
-			unixServer.bind();
 			tcpServer.setCallback(this);
-			unixServer.setCallback(this);
 		} catch (IOException e) {
 			Log.e(this, e);
 			if (e instanceof BindException)
@@ -83,7 +78,6 @@ public class NetworkClientManager extends Manager implements NetworkCallback {
 	@Override
 	public boolean stop() {
 		tcpServer.close();
-		unixServer.close();
 		return super.stop();
 	}
 		
@@ -110,8 +104,7 @@ public class NetworkClientManager extends Manager implements NetworkCallback {
 	}
 	
 	@Override
-	public void onIncomingConnection(Socket s) {
-		SocketAddress addr = s.getRemoteSocketAddress();
+	public void onIncomingConnection(Socket s, SocketAddress addr) {
 		onSessionConnect(addr);
 	}
 	
@@ -121,8 +114,7 @@ public class NetworkClientManager extends Manager implements NetworkCallback {
 	}
 	
 	@Override
-	public void onIncomingData(Socket s, byte [] data) {
-		SocketAddress addr = s.getRemoteSocketAddress();
+	public void onIncomingData(Socket s, SocketAddress addr, byte [] data) {
 		onInboundData(addr, data);
 	}
 	
@@ -130,16 +122,11 @@ public class NetworkClientManager extends Manager implements NetworkCallback {
 		return getConfig(ConfigFile.NETWORK).getInt("BIND-PORT", 44463);
 	}
 	
-	private String getBindPath() {
-		return getConfig(ConfigFile.NETWORK).getString("BIND-PATH", "/tmp/holocore44463.sock");
-	}
-	
 	private int getBufferSize() {
 		return getConfig(ConfigFile.NETWORK).getInt("BUFFER-SIZE", 4096);
 	}
 	
 	private void onSessionConnect(SocketAddress addr) {
-		Log.i(this, "NCM %s connected", addr);
 		NetworkClient client = clientManager.createSession(addr);
 		client.onConnected();
 		inboundManager.onSessionCreated(client);
@@ -147,12 +134,10 @@ public class NetworkClientManager extends Manager implements NetworkCallback {
 	}
 	
 	private void onInboundData(SocketAddress addr, byte [] data) {
-		Log.i(this, "NCM %s data: %d", addr, data.length);
 		inboundManager.onInboundData(addr, data);
 	}
 	
 	private void onSessionDisconnect(SocketAddress addr, ConnectionStoppedReason reason) {
-		Log.i(this, "NCM %s disconnected", addr);
 		NetworkClient client = clientManager.getClient(addr);
 		if (client != null) {
 			client.onDisconnected(reason);

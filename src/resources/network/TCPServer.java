@@ -243,8 +243,10 @@ public class TCPServer {
 					sockets.put(sc.getRemoteAddress(), sc);
 					sc.configureBlocking(false);
 					sc.register(selector, SelectionKey.OP_READ);
-					if (callback != null)
-						callbackExecutor.execute(() -> callback.onIncomingConnection(sc.socket()));
+					if (callback != null) {
+						SocketAddress address = sc.getRemoteAddress();
+						callbackExecutor.execute(() -> callback.onIncomingConnection(sc.socket(), address));
+					}
 				}
 			} catch (AsynchronousCloseException e) {
 				
@@ -265,8 +267,10 @@ public class TCPServer {
 				} else if (n > 0) {
 					ByteBuffer smaller = ByteBuffer.allocate(n);
 					smaller.put(buffer);
-					if (callback != null)
-						callbackExecutor.execute(() -> callback.onIncomingData(s.socket(), smaller.array()));
+					if (callback != null) {
+						SocketAddress address = s.getRemoteAddress();
+						callbackExecutor.execute(() -> callback.onIncomingData(s.socket(), address, smaller.array()));
+					}
 					return true;
 				}
 			} catch (ClosedByInterruptException e) {
