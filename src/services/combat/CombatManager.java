@@ -94,8 +94,6 @@ public class CombatManager extends Manager {
 	// TODO remove calculations if the creature disappears
 	
 	public CombatManager() {
-		registerForIntent(DeathblowIntent.class, di -> handleDeathblowIntent(di));
-		registerForIntent(ChatCommandIntent.class, cci -> handleChatCommandIntent(cci));
 		inCombat = new HashMap<>();
 		regeneratingHealthCreatures = new HashSet<>();
 		regeneratingActionCreatures = new HashSet<>();
@@ -106,11 +104,13 @@ public class CombatManager extends Manager {
 		combatXpService = new CombatXpService();
 		addChildService(corpseService);
 		addChildService(combatXpService);
+		
+		registerForIntent(DeathblowIntent.class, di -> handleDeathblowIntent(di));
+		registerForIntent(ChatCommandIntent.class, cci -> handleChatCommandIntent(cci));
 	}
 	
 	@Override
 	public boolean initialize() {
-		registerForIntent(ChatCommandIntent.TYPE);
 		executor = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("combat-service"));
 		return super.initialize();
 	}
