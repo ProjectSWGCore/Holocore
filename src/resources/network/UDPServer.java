@@ -59,16 +59,19 @@ public class UDPServer {
 	}
 	
 	public UDPServer(int port, int packetSize) throws SocketException {
-		this(InetAddress.getLoopbackAddress(), port, packetSize);
+		this(null, port, packetSize);
 	}
 	
 	public UDPServer(InetAddress bindAddr, int port, int packetSize) throws SocketException {
 		this.callback = null;
 		this.packetSize = packetSize;
 		inbound = new LinkedBlockingQueue<UDPPacket>();
-		if (port > 0)
-			socket = new DatagramSocket(port, bindAddr);
-		else
+		if (port > 0) {
+			if (bindAddr == null)
+				socket = new DatagramSocket(port);
+			else
+				socket = new DatagramSocket(port, bindAddr);
+		} else
 			socket = new DatagramSocket();
 		this.port = socket.getLocalPort();
 		updater = new UDPUpdater();
@@ -101,13 +104,31 @@ public class UDPServer {
 	public void waitForPacket() {
 		synchronized (waitingForPacket) {
 			try {
-				while (inbound.size() == 0) {
+				while (inbound.isEmpty()) {
 					waitingForPacket.wait();
 				}
 			} catch (InterruptedException e) {
 				
 			}
 		}
+	}
+	
+	public boolean waitForPacket(long timeout) {
+		long start = System.nanoTime();
+		synchronized (waitingForPacket) {
+			try {
+				while (inbound.isEmpty()) {
+					long waitTime = (long) (timeout - (System.nanoTime() - start)/1E6 + 0.5);
+					if (waitTime <= 0)
+						return false;
+					waitingForPacket.wait(waitTime);
+				}
+				return true;
+			} catch (InterruptedException e) {
+				
+			}
+		}
+		return false;
 	}
 	
 	public boolean send(int port, InetAddress addr, byte [] data) {
@@ -170,6 +191,10 @@ public class UDPServer {
 		
 		public byte [] getData() {
 			return data;
+		}
+		
+		public int getLength() {
+			return data.length;
 		}
 	}
 	

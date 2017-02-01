@@ -29,18 +29,25 @@ package services.network;
 
 import java.io.IOException;
 import java.net.BindException;
+import java.net.InetAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
+import java.net.SocketException;
 
 import intents.network.CloseConnectionIntent;
+import main.ProjectSWG.CoreException;
 import network.NetworkClient;
 import network.packets.swg.holo.HoloConnectionStopped.ConnectionStoppedReason;
 import resources.config.ConfigFile;
 import resources.control.Manager;
 import resources.network.DisconnectReason;
+import resources.network.NetBuffer;
 import resources.network.NetworkCallback;
 import resources.network.TCPServer;
+import resources.network.UDPServer;
+import resources.network.UDPServer.UDPPacket;
 import resources.server_info.Log;
+import services.CoreManager;
 
 public class NetworkClientManager extends Manager implements NetworkCallback {
 	
@@ -48,10 +55,17 @@ public class NetworkClientManager extends Manager implements NetworkCallback {
 	private final OutboundNetworkManager outboundManager;
 	private final ClientManager clientManager;
 	private final TCPServer tcpServer;
+	private final UDPServer udpServer;
 	
 	public NetworkClientManager() {
 		clientManager = new ClientManager();
 		tcpServer = new TCPServer(getBindPort(), getBufferSize());
+		try {
+			udpServer = new UDPServer(getBindPort(), 1024);
+		} catch (SocketException e) {
+			throw new CoreException("Socket Exception on UDP bind: " + e);
+		}
+		udpServer.setCallback(packet -> onUdpPacket(packet));
 		inboundManager = new InboundNetworkManager(clientManager);
 		outboundManager = new OutboundNetworkManager(tcpServer, clientManager);
 		
@@ -79,6 +93,12 @@ public class NetworkClientManager extends Manager implements NetworkCallback {
 	public boolean stop() {
 		tcpServer.close();
 		return super.stop();
+	}
+	
+	@Override
+	public boolean terminate() {
+		udpServer.close();
+		return super.terminate();
 	}
 		
 	private void handleCloseConnectionIntent(CloseConnectionIntent ccii) {
@@ -124,6 +144,23 @@ public class NetworkClientManager extends Manager implements NetworkCallback {
 	
 	private int getBufferSize() {
 		return getConfig(ConfigFile.NETWORK).getInt("BUFFER-SIZE", 4096);
+	}
+	
+	private void onUdpPacket(UDPPacket packet) {
+		if (packet.getLength() <= 0)
+			return;
+		switch (packet.getData()[0]) {
+			case 1: sendState(packet.getAddress(), packet.getPort()); break;
+			default: break;
+		}
+	}
+	
+	private void sendState(InetAddress addr, int port) {
+		String status = CoreManager.getGalaxy().getStatus().name();
+		NetBuffer data = NetBuffer.allocate(3 + status.length());
+		data.addByte(1);
+		data.addAscii(status);
+		udpServer.send(port, addr, data.array());
 	}
 	
 	private void onSessionConnect(SocketAddress addr) {
