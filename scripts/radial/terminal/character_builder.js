@@ -634,8 +634,10 @@ function handleTravel(player) {
 	var SuiListBox = Java.type("resources.sui.SuiListBox");
 	listBox = new SuiListBox(SuiButtons.OK_CANCEL, "Character Builder Terminal", "Select a location you want to get teleported to.");
 	
+	listBox.addListItem("Dathomir - Nightsister Stronghold");
 	listBox.addListItem("Dathomir - Quarantine Zone");
 	listBox.addListItem("Endor - DWB");
+	listBox.addListItem("Lok - Droid Cave");
 	listBox.addListItem("Naboo - Weapon Development Facility");
 	listBox.addListItem("Tatooine - Fort Tusken");
 	listBox.addListItem("Tatooine - Krayt Graveyard");
@@ -657,14 +659,23 @@ function handleTravelSelection(player, creature, eventType, parameters) {
 	selection = SuiListBox.getSelectedRow(parameters);
 	
 	switch(selection) {
-		case 0: handleDatQz(player); break;
-		case 1: handleEndDwb(player); break;
-		case 2: handleNabWeaponFac(player); break;
-		case 3: handleTatFortTusken(player); break;
-		case 4: handleTatKraytGrave(player); break;
-		case 5: handleTatMosEisley(player); break;
-		case 6: handleTatSquillCave(player); break;
+		case 0: handleDatNS(player); break;
+		case 1: handleDatQz(player); break;
+		case 2: handleEndDwb(player); break;
+		case 3: handleLokDroid(player); break;
+		case 4: handleNabWeaponFac(player); break;
+		case 5: handleTatFortTusken(player); break;
+		case 6: handleTatKraytGrave(player); break;
+		case 7: handleTatMosEisley(player); break;
+		case 8: handleTatSquillCave(player); break;
 	}
+}
+
+function handleDatNS(player) {
+	var ObjectTeleportIntent = Java.type('intents.object.ObjectTeleportIntent');
+	var Location = Java.type('resources.Location');
+	var Terrain = Java.type('resources.Terrain');
+	new ObjectTeleportIntent(player.getCreatureObject(), new Location(-3989, 124, -10, Terrain.DATHOMIR)).broadcast();
 }
 
 function handleDatQz(player) {
@@ -679,6 +690,13 @@ function handleEndDwb(player) {
 	var Location = Java.type('resources.Location');
 	var Terrain = Java.type('resources.Terrain');
 	new ObjectTeleportIntent(player.getCreatureObject(), new Location(-4683, 13, 4326, Terrain.ENDOR)).broadcast();
+}
+
+function handleLokDroid(player) {
+	var ObjectTeleportIntent = Java.type('intents.object.ObjectTeleportIntent');
+	var Location = Java.type('resources.Location');
+	var Terrain = Java.type('resources.Terrain');
+	new ObjectTeleportIntent(player.getCreatureObject(), new Location(3331, 105, -4912, Terrain.LOK)).broadcast();
 }
 
 function handleNabWeaponFac(player) {
