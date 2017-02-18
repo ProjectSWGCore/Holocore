@@ -27,23 +27,22 @@
  ***********************************************************************************/
 package services.faction;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import intents.FactionIntent;
+import intents.chat.ChatBroadcastIntent;
 import network.packets.swg.zone.UpdatePvpStatusMessage;
 import network.packets.swg.zone.chat.ChatSystemMessage;
 import network.packets.swg.zone.chat.ChatSystemMessage.SystemChatType;
-import intents.FactionIntent;
-import intents.chat.ChatBroadcastIntent;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.Future;
 import resources.PvpFaction;
 import resources.PvpFlag;
 import resources.PvpStatus;
-import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.creature.CreatureObject;
 import resources.objects.tangible.TangibleObject;
@@ -59,14 +58,7 @@ public final class FactionService extends Service {
 		statusChangers = new HashMap<>();
 		executor = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("faction-service"));
 		
-		registerForIntent(FactionIntent.TYPE);
-	}
-	
-	@Override
-	public void onIntentReceived(Intent i) {
-		switch(i.getType()) {
-			case FactionIntent.TYPE: handleFactionIntent((FactionIntent) i); break;
-		}
+		registerForIntent(FactionIntent.class, fi -> handleFactionIntent(fi));
 	}
 	
 	@Override
@@ -77,19 +69,19 @@ public final class FactionService extends Service {
 		return super.terminate();
 	}
 	
-	private void handleFactionIntent(FactionIntent i) {
-		switch (i.getUpdateType()) {
+	private void handleFactionIntent(FactionIntent fi) {
+		switch (fi.getUpdateType()) {
 			case FACTIONUPDATE:
-				handleTypeChange(i);
+				handleTypeChange(fi);
 				break;
 			case SWITCHUPDATE:
-				handleSwitchChange(i);
+				handleSwitchChange(fi);
 				break;
 			case STATUSUPDATE:
-				handleStatusChange(i);
+				handleStatusChange(fi);
 				break;
 			case FLAGUPDATE:
-				handleFlagChange(i.getTarget());
+				handleFlagChange(fi.getTarget());
 				break;
 		}
 	}

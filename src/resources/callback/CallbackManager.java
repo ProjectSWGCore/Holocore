@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import resources.control.Assert;
 import resources.server_info.Log;
 
 public class CallbackManager<T> extends BaseCallbackManager {
@@ -74,22 +75,31 @@ public class CallbackManager<T> extends BaseCallbackManager {
 	}
 	
 	public boolean isQueueEmpty() {
+		Assert.test(running.get() >= 0);
 		return running.get() == 0;
 	}
 	
 	public boolean callOnEach(CallCallback<T> call) {
 		synchronized (callbacks) {
 			running.incrementAndGet();
-			return call(() -> {
-				for (T callback : callbacks) {
-					try {
-						call.run(callback);
-					} catch (Exception e) {
-						Log.e(this, e);
+			boolean ret = call(() -> {
+				try {
+					for (T callback : callbacks) {
+						try {
+							call.run(callback);
+						} catch (Throwable t) {
+							Log.e(this, t);
+						}
 					}
+				} catch (Throwable t) {
+					Log.e(this, t);
+				} finally {
+					running.decrementAndGet();
 				}
-				running.decrementAndGet();
 			});
+			if (!ret)
+				running.decrementAndGet();
+			return ret;
 		}
 	}
 	

@@ -1,0 +1,13 @@
+{
+    "parent": "object/draft_schematic/base/base_draft_schematic.iff",
+    "category": "CT_misc",
+    "destroyIngredients": true,
+    "crateObjectTemplate": "object/factory/factory_crate_installation.iff",
+    "xpPoints": [
+        {
+            "type": "XP_crafting",
+            "level": 0,
+            "value": 0
+        }
+    ]
+}

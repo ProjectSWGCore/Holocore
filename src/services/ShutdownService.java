@@ -27,10 +27,6 @@
 ***********************************************************************************/
 package services;
 
-import intents.chat.ChatBroadcastIntent;
-import intents.chat.ChatBroadcastIntent.BroadcastType;
-import intents.server.ServerStatusIntent;
-
 import java.util.Locale;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -38,7 +34,9 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
-import resources.control.Intent;
+import intents.chat.ChatBroadcastIntent;
+import intents.chat.ChatBroadcastIntent.BroadcastType;
+import intents.server.ServerStatusIntent;
 import resources.control.ServerStatus;
 import resources.control.Service;
 import utilities.ThreadUtilities;
@@ -60,7 +58,7 @@ public class ShutdownService extends Service {
 		timeRemaining = new AtomicLong();
 		shutdownExecutor = null;
 		
-		registerForIntent(ServerStatusIntent.TYPE);
+		registerForIntent(ServerStatusIntent.class, ssi -> handleServerStatusIntent(ssi));
 	}
 	
 	@Override
@@ -69,10 +67,7 @@ public class ShutdownService extends Service {
 		return super.terminate();
 	}
 	
-	public void onIntentReceived(Intent i) {
-		if (!(i instanceof ServerStatusIntent))
-			return;
-		ServerStatusIntent ssi = (ServerStatusIntent) i;
+	private void handleServerStatusIntent(ServerStatusIntent ssi){
 		if (ssi.getStatus() != ServerStatus.SHUTDOWN_REQUESTED)
 			return;
 		shutdown(ssi);

@@ -27,20 +27,15 @@
  ***********************************************************************************/
 package services.objects;
 
-
-import intents.object.CreateStaticItemIntent;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import intents.object.DestroyObjectIntent;
-import intents.radial.RadialSelectionIntent;
-
 import java.util.ArrayList;
 import java.util.Collection;
 
-import resources.control.Intent;
+import intents.object.CreateStaticItemIntent;
+import intents.object.DestroyObjectIntent;
+import intents.radial.RadialSelectionIntent;
 import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
@@ -66,13 +61,7 @@ public class UniformBoxService extends Service {
 		
 		getUniformBoxStatement = uniformBoxDatabase.prepareStatement(GET_UNIFORMBOX_SQL);
 		
-		registerForIntent(RadialSelectionIntent.TYPE);
-	}
-	
-	@Override
-	public void onIntentReceived(Intent i) {
-		if (i instanceof RadialSelectionIntent)
-			processUseUniformBox((RadialSelectionIntent) i);
+		registerForIntent(RadialSelectionIntent.class, rsi -> handleRadialSelectionIntent(rsi));
 	}
 	
 	@Override
@@ -81,7 +70,7 @@ public class UniformBoxService extends Service {
 		return super.terminate();
 	}
 	
-	private void processUseUniformBox(RadialSelectionIntent rsi) {
+	private void handleRadialSelectionIntent(RadialSelectionIntent rsi) {
 		if (!rsi.getTarget().getTemplate().equals(UNIFORM_BOX_IFF))
 			return;
 		

@@ -32,7 +32,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-import resources.control.Assert;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.server_info.SynchronizedSet;
@@ -54,11 +53,11 @@ class TerrainMapChunk {
 	}
 	
 	public void addObject(SWGObject obj) {
-		Assert.test(objects.add(obj));
+		objects.add(obj);
 	}
 	
 	public void removeObject(SWGObject obj) {
-		Assert.test(objects.remove(obj));
+		objects.remove(obj);
 	}
 	
 	public boolean containsObject(SWGObject obj) {

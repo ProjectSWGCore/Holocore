@@ -27,8 +27,6 @@
  ***********************************************************************************/
 package services.admin;
 
-import intents.PlayerEventIntent;
-
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
@@ -43,17 +41,17 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import intents.PlayerEventIntent;
 import resources.common.BCrypt;
 import resources.config.ConfigFile;
-import resources.control.Intent;
 import resources.control.Service;
 import resources.server_info.Config;
 import resources.server_info.Log;
 import services.admin.http.HttpServer;
 import services.admin.http.HttpServer.HttpServerCallback;
+import services.admin.http.HttpSession;
 import services.admin.http.HttpSocket;
 import services.admin.http.HttpSocket.HttpRequest;
-import services.admin.http.HttpSession;
 import services.admin.http.HttpsServer;
 import utilities.ThreadUtilities;
 
@@ -97,7 +95,7 @@ public class OnlineInterfaceService extends Service implements HttpServerCallbac
 			return false;
 		}
 		executor = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("ServerInterface-DataCollection"));
-		registerForIntent(PlayerEventIntent.TYPE);
+		registerForIntent(PlayerEventIntent.class, pei -> handlePlayerEventIntent(pei));
 		return super.initialize();
 	}
 	
@@ -164,22 +162,18 @@ public class OnlineInterfaceService extends Service implements HttpServerCallbac
 		}
 	}
 	
-	@Override
-	public void onIntentReceived(Intent i) {
-		if (i instanceof PlayerEventIntent) {
-			PlayerEventIntent pei = (PlayerEventIntent) i;
-			switch (pei.getEvent()) {
-				case PE_ZONE_IN_CLIENT:
-					data.addOnlinePlayer(pei.getPlayer());
-					break;
-				case PE_LOGGED_OUT:
-					data.removeOnlinePlayer(pei.getPlayer());
-					break;
-				default:
-					break;
-			}
-		}
-	}
+	private void handlePlayerEventIntent(PlayerEventIntent pei){
+		switch (pei.getEvent()) {
+			case PE_ZONE_IN_CLIENT:
+				data.addOnlinePlayer(pei.getPlayer());
+				break;
+			case PE_LOGGED_OUT:
+				data.removeOnlinePlayer(pei.getPlayer());
+				break;
+			default:
+				break;
+		}	
+	}	
 	
 	private void collectData() {
 		data.updateResourceUsage();

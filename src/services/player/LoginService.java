@@ -188,7 +188,7 @@ public class LoginService extends Service {
 	}
 	
 	private void onLoginClientVersionError(Player player, LoginClientId id) {
-		Log.i(this, "%s cannot login due to invalid version code: %s, expected %s from %s:%d", player.getUsername(), id.getVersion(), REQUIRED_VERSION, id.getAddress(), id.getPort());
+		Log.i(this, "%s cannot login due to invalid version code: %s, expected %s from %s", player.getUsername(), id.getVersion(), REQUIRED_VERSION, id.getSocketAddress());
 		String type = "Login Failed!";
 		String message = "Invalid Client Version Code: " + id.getVersion();
 		player.sendPacket(new ErrorMessage(type, message, false));
@@ -209,7 +209,7 @@ public class LoginService extends Service {
 		}
 		player.setPlayerState(PlayerState.LOGGED_IN);
 		sendLoginSuccessPacket(player);
-		Log.i(this, "%s connected to the login server from %s:%d", player.getUsername(), id.getAddress(), id.getPort());
+		Log.i(this, "%s connected to the login server from %s", player.getUsername(), id.getSocketAddress());
 		new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_SUCCESS).broadcast();
 	}
 	
@@ -217,7 +217,7 @@ public class LoginService extends Service {
 		String type = "Login Failed!";
 		String message = "Sorry, you're banned!";
 		player.sendPacket(new ErrorMessage(type, message, false));
-		Log.i(this, "%s cannot login due to a ban, from %s:%d", player.getUsername(), id.getAddress(), id.getPort());
+		Log.i(this, "%s cannot login due to a ban, from %s", player.getUsername(), id.getSocketAddress());
 		player.setPlayerState(PlayerState.DISCONNECTED);
 		new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_FAIL_BANNED).broadcast();
 	}
@@ -227,7 +227,7 @@ public class LoginService extends Service {
 		String message = getUserPassError(set, id.getUsername(), id.getPassword());
 		player.sendPacket(new ErrorMessage(type, message, false));
 		player.sendPacket(new LoginIncorrectClientId(getServerString(), REQUIRED_VERSION));
-		Log.i(this, "%s cannot login due to invalid user/pass from %s:%d", id.getUsername(), id.getAddress(), id.getPort());
+		Log.i(this, "%s cannot login due to invalid user/pass from %s", id.getUsername(), id.getSocketAddress());
 		player.setPlayerState(PlayerState.DISCONNECTED);
 		new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_FAIL_INVALID_USER_PASS).broadcast();
 	}
@@ -237,7 +237,7 @@ public class LoginService extends Service {
 		String message = "Server Error.";
 		player.sendPacket(new ErrorMessage(type, message, false));
 		player.setPlayerState(PlayerState.DISCONNECTED);
-		Log.e(this, "%s cannot login due to server error, from %s:%d", id.getUsername(), id.getAddress(), id.getPort());
+		Log.e(this, "%s cannot login due to server error, from %s", id.getUsername(), id.getSocketAddress());
 		new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_FAIL_SERVER_ERROR).broadcast();
 	}
 	

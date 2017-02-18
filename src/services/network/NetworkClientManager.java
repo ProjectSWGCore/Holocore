@@ -27,41 +27,52 @@
 ***********************************************************************************/
 package services.network;
 
-import intents.network.CloseConnectionIntent;
-
 import java.io.IOException;
 import java.net.BindException;
-import java.net.InetSocketAddress;
+import java.net.InetAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
+import java.net.SocketException;
 
+import intents.network.CloseConnectionIntent;
+import main.ProjectSWG.CoreException;
 import network.NetworkClient;
 import network.packets.swg.holo.HoloConnectionStopped.ConnectionStoppedReason;
 import resources.config.ConfigFile;
-import resources.control.Intent;
 import resources.control.Manager;
 import resources.network.DisconnectReason;
+import resources.network.NetBuffer;
+import resources.network.NetworkCallback;
 import resources.network.TCPServer;
-import resources.network.TCPServer.TCPCallback;
+import resources.network.UDPServer;
+import resources.network.UDPServer.UDPPacket;
 import resources.server_info.Log;
+import services.CoreManager;
 
-public class NetworkClientManager extends Manager implements TCPCallback {
+public class NetworkClientManager extends Manager implements NetworkCallback {
 	
 	private final InboundNetworkManager inboundManager;
 	private final OutboundNetworkManager outboundManager;
 	private final ClientManager clientManager;
 	private final TCPServer tcpServer;
+	private final UDPServer udpServer;
 	
 	public NetworkClientManager() {
 		clientManager = new ClientManager();
 		tcpServer = new TCPServer(getBindPort(), getBufferSize());
+		try {
+			udpServer = new UDPServer(getBindPort(), 1024);
+		} catch (SocketException e) {
+			throw new CoreException("Socket Exception on UDP bind: " + e);
+		}
+		udpServer.setCallback(packet -> onUdpPacket(packet));
 		inboundManager = new InboundNetworkManager(clientManager);
 		outboundManager = new OutboundNetworkManager(tcpServer, clientManager);
 		
 		addChildService(inboundManager);
 		addChildService(outboundManager);
 		
-		registerForIntent(CloseConnectionIntent.TYPE);
+		registerForIntent(CloseConnectionIntent.class, cci -> handleCloseConnectionIntent(cci));
 	}
 	
 	@Override
@@ -85,19 +96,15 @@ public class NetworkClientManager extends Manager implements TCPCallback {
 	}
 	
 	@Override
-	public void onIntentReceived(Intent i) {
-		switch (i.getType()) {
-			case CloseConnectionIntent.TYPE:
-				if (i instanceof CloseConnectionIntent)
-					processCloseConnectionIntent((CloseConnectionIntent) i);
-				break;
-		}
+	public boolean terminate() {
+		udpServer.close();
+		return super.terminate();
 	}
-	
-	private void processCloseConnectionIntent(CloseConnectionIntent i) {
-		NetworkClient client = clientManager.getClient(i.getNetworkId());
+		
+	private void handleCloseConnectionIntent(CloseConnectionIntent ccii) {
+		NetworkClient client = clientManager.getClient(ccii.getNetworkId());
 		if (client != null)
-			onSessionDisconnect(client.getAddress(), getHolocoreReason(i.getDisconnectReason()));
+			onSessionDisconnect(client.getAddress(), getHolocoreReason(ccii.getDisconnectReason()));
 	}
 	
 	private ConnectionStoppedReason getHolocoreReason(DisconnectReason reason) {
@@ -117,29 +124,18 @@ public class NetworkClientManager extends Manager implements TCPCallback {
 	}
 	
 	@Override
-	public void onIncomingConnection(Socket s) {
-		SocketAddress addr = s.getRemoteSocketAddress();
-		if (addr instanceof InetSocketAddress)
-			onSessionConnect((InetSocketAddress) addr);
-		else if (addr != null)
-			Log.e(this, "Incoming connection has socket address of instance: %s", addr.getClass().getSimpleName());
+	public void onIncomingConnection(Socket s, SocketAddress addr) {
+		onSessionConnect(addr);
 	}
 	
 	@Override
 	public void onConnectionDisconnect(Socket s, SocketAddress addr) {
-		if (addr instanceof InetSocketAddress)
-			onSessionDisconnect((InetSocketAddress) addr, ConnectionStoppedReason.APPLICATION);
-		else if (addr != null)
-			Log.e(this, "Connection Disconnected. Has socket address of instance: %s", addr.getClass().getSimpleName());
+		onSessionDisconnect(addr, ConnectionStoppedReason.APPLICATION);
 	}
 	
 	@Override
-	public void onIncomingData(Socket s, byte [] data) {
-		SocketAddress addr = s.getRemoteSocketAddress();
-		if (addr instanceof InetSocketAddress)
-			onInboundData((InetSocketAddress) addr, data);
-		else if (addr != null)
-			Log.e(this, "Incoming data has socket address of instance: %s", addr.getClass().getSimpleName());
+	public void onIncomingData(Socket s, SocketAddress addr, byte [] data) {
+		onInboundData(addr, data);
 	}
 	
 	private int getBindPort() {
@@ -150,18 +146,35 @@ public class NetworkClientManager extends Manager implements TCPCallback {
 		return getConfig(ConfigFile.NETWORK).getInt("BUFFER-SIZE", 4096);
 	}
 	
-	private void onSessionConnect(InetSocketAddress addr) {
+	private void onUdpPacket(UDPPacket packet) {
+		if (packet.getLength() <= 0)
+			return;
+		switch (packet.getData()[0]) {
+			case 1: sendState(packet.getAddress(), packet.getPort()); break;
+			default: break;
+		}
+	}
+	
+	private void sendState(InetAddress addr, int port) {
+		String status = CoreManager.getGalaxy().getStatus().name();
+		NetBuffer data = NetBuffer.allocate(3 + status.length());
+		data.addByte(1);
+		data.addAscii(status);
+		udpServer.send(port, addr, data.array());
+	}
+	
+	private void onSessionConnect(SocketAddress addr) {
 		NetworkClient client = clientManager.createSession(addr);
 		client.onConnected();
 		inboundManager.onSessionCreated(client);
 		outboundManager.onSessionCreated(client);
 	}
 	
-	private void onInboundData(InetSocketAddress addr, byte [] data) {
+	private void onInboundData(SocketAddress addr, byte [] data) {
 		inboundManager.onInboundData(addr, data);
 	}
 	
-	private void onSessionDisconnect(InetSocketAddress addr, ConnectionStoppedReason reason) {
+	private void onSessionDisconnect(SocketAddress addr, ConnectionStoppedReason reason) {
 		NetworkClient client = clientManager.getClient(addr);
 		if (client != null) {
 			client.onDisconnected(reason);

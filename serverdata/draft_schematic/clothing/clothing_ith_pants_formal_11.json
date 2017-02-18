@@ -1,0 +1,125 @@
+{
+    "parent": "object/draft_schematic/clothing/base_clothing_schematic.iff",
+    "itemsPerContainer": 25,
+    "craftedObjectTemplate": "object/tangible/wearables/ithorian/ith_pants_s11.iff",
+    "slots": [
+        {
+            "optional": false,
+            "name": [
+                "craft_clothing_ingredients_n",
+                "body"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_clothing_ingredients_n",
+                                "body"
+                            ],
+                            "ingredient": "object/tangible/component/clothing/synthetic_cloth.iff",
+                            "count": 2
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_clothing_ingredients_n",
+                "binding_and_reinforcement"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_resourceClass",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_clothing_ingredients_n",
+                                "binding_and_reinforcement"
+                            ],
+                            "ingredient": "petrochem_inert",
+                            "count": 40
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_clothing_ingredients_n",
+                "hardware"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_clothing_ingredients_n",
+                                "hardware"
+                            ],
+                            "ingredient": "object/tangible/component/clothing/metal_fasteners.iff",
+                            "count": 1
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        },
+        {
+            "optional": false,
+            "name": [
+                "craft_clothing_ingredients_n",
+                "lining"
+            ],
+            "options": [
+                {
+                    "ingredientType": "IT_template",
+                    "ingredients": [
+                        {
+                            "name": [
+                                "craft_clothing_ingredients_n",
+                                "lining"
+                            ],
+                            "ingredient": "object/tangible/component/clothing/synthetic_cloth.iff",
+                            "count": 2
+                        }
+                    ],
+                    "complexity": 0,
+                    "skillCommand": "unskilled"
+                }
+            ],
+            "optionalSkillCommand": "",
+            "complexity": 0,
+            "appearance": ""
+        }
+    ],
+    "skillCommands": [
+        "unskilled"
+    ],
+    "destroyIngredients": true,
+    "manufactureScripts": [
+        "systems.crafting.clothing.skill.crafting_clothing_tailor_novice"
+    ],
+    "complexity": 17,
+    "sharedTemplate": "object/draft_schematic/clothing/shared_clothing_ith_pants_formal_11.iff",
+    "volume": 3
+}

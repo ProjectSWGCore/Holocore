@@ -32,7 +32,7 @@ import intents.network.ConnectionOpenedIntent;
 import intents.network.InboundPacketIntent;
 
 import java.io.EOFException;
-import java.net.InetSocketAddress;
+import java.net.SocketAddress;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -53,7 +53,7 @@ public class NetworkClient {
 	private static final int DEFAULT_BUFFER = 128;
 	
 	private final IntentChain intentChain = new IntentChain();
-	private final InetSocketAddress address;
+	private final SocketAddress address;
 	private final long networkId;
 	private final NetBufferStream buffer;
 	private final HolocoreSessionManager sessionManager;
@@ -64,7 +64,7 @@ public class NetworkClient {
 	private State state;
 	private PacketSender sender;
 	
-	public NetworkClient(InetSocketAddress address, long networkId) {
+	public NetworkClient(SocketAddress address, long networkId) {
 		this.address = address;
 		this.networkId = networkId;
 		this.buffer = new NetBufferStream(DEFAULT_BUFFER);
@@ -82,7 +82,7 @@ public class NetworkClient {
 		intentChain.reset();
 	}
 	
-	public InetSocketAddress getAddress() {
+	public SocketAddress getAddress() {
 		return address;
 	}
 	
@@ -91,15 +91,13 @@ public class NetworkClient {
 	}
 	
 	public void onConnected() {
-		if (getState() != State.DISCONNECTED)
-			return;
+		Assert.test(getState() == State.DISCONNECTED);
 		setState(State.CONNECTED);
 		intentChain.broadcastAfter(new ConnectionOpenedIntent(networkId));
 	}
 	
 	public void onDisconnected(ConnectionStoppedReason reason) {
-		if (getState() != State.CONNECTED)
-			return;
+		Assert.test(getState() == State.CONNECTED);
 		setState(State.CLOSED);
 		intentChain.broadcastAfter(new ConnectionClosedIntent(networkId, reason));
 		sendPacket(new HoloConnectionStopped(reason));
@@ -119,11 +117,11 @@ public class NetworkClient {
 	}
 	
 	public void processInbound() {
+		if (getState() != State.CONNECTED)
+			return;
 		if (!inboundSemaphore.tryLock())
 			return;
 		try {
-			if (getState() != State.CONNECTED)
-				return;
 			while (processNextPacket()) {
 				
 			}
@@ -163,8 +161,7 @@ public class NetworkClient {
 		}
 		if (p == null)
 			return true;
-		p.setAddress(address.getAddress());
-		p.setPort(address.getPort());
+		p.setSocketAddress(address);
 		if (!processInbound(p)) {
 			flushOutbound();
 			return false;

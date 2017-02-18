@@ -283,7 +283,7 @@ public class ObjectManager extends Manager {
 			sendClientFatal(player, "Failed to zone", "There has been an internal server error: Null Ghost.\nPlease delete your character and create a new one", 10, TimeUnit.SECONDS);
 			return;
 		}
-		new RequestZoneInIntent(player, (CreatureObject) creatureObj, true).broadcast();
+		new RequestZoneInIntent(player, (CreatureObject) creatureObj).broadcast();
 	}
 	
 	private void sendClientFatal(Player player, String title, String message, long timeToRead, TimeUnit time) {

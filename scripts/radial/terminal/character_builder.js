@@ -9,9 +9,10 @@ function handleSelection(player, target, selection) {
 			var SuiListBox = Java.type("resources.sui.SuiListBox");
 			listBox = new SuiListBox(SuiButtons.OK_CANCEL, "Character Builder Terminal", "Select a category.");
 
-			listBox.addListItem("Armour");
+			listBox.addListItem("Armor");
 			listBox.addListItem("Weapons");
 			listBox.addListItem("Wearables");
+			listBox.addListItem("Travel");
 
 			listBox.addCallback("radial/terminal/character_builder", "handleCategorySelection");
 			listBox.display(player);
@@ -30,9 +31,10 @@ function handleCategorySelection(player, creature, eventType, parameters) {
 	selection = SuiListBox.getSelectedRow(parameters);
 	
 	switch(selection) {
-		case 0: handleArmour(player); break;
+		case 0: handleArmor(player); break;
 		case 1: handleWeapons(player); break;
 		case 2: handleWearables(player); break;
+		case 3: handleTravel(player); break;
 	}
 }
 
@@ -42,40 +44,43 @@ function spawnItems(player, items) {
 	var creature = player.getCreatureObject();
 	var inventory = creature.getSlottedObject("inventory");
 	
-	new CreateStaticItemIntent(creature, inventory, new StaticItemService.LootBoxHandler(creature), items).broadcast();
+	new CreateStaticItemIntent(creature, inventory, new StaticItemService.LootBoxHandler(creature), Java.to(items, "java.lang.String[]")).broadcast();
 }
 
-function handleArmour(player) {
+function handleArmor(player) {
 	var SuiListBox = Java.type("resources.sui.SuiListBox");
-	listBox = new SuiListBox(SuiButtons.OK_CANCEL, "Character Builder Terminal", "Select a set of armour to receive.");
+	listBox = new SuiListBox(SuiButtons.OK_CANCEL, "Character Builder Terminal", "Select a set of armor to receive.");
 
-	listBox.addListItem("R.I.S. Armour");
-	listBox.addListItem("Mandalorian Armour");
-	listBox.addListItem("Bone Armour");
-	listBox.addListItem("Chitin Armour");
-	listBox.addListItem("Padded Armour");
-	listBox.addListItem("Ubese Armour");
-	listBox.addListItem("Ithorian Defender Armour");
-	listBox.addListItem("Wookiee Black Mountain Armour");
-	listBox.addListItem("Deathtrooper Armour");
-	listBox.addListItem("Imperial - Galactic Marine Armour");
-	listBox.addListItem("Imperial - Scout trooper Armour");
-	listBox.addListItem("Imperial - Shock trooper Armour");
-	listBox.addListItem("Imperial - Stormtrooper Armour");
-	listBox.addListItem("Imperial - Black Crusader Armour");
-	listBox.addListItem("Imperial - White Spec Ops Armour");
-	listBox.addListItem("Imperial - Snow trooper Armour");
-	listBox.addListItem("Rebel - Assault Armour");
-	listBox.addListItem("Rebel - Battle Armour");
-	listBox.addListItem("Rebel - Marine Armour");
-	listBox.addListItem("Rebel - Spec Force Armour");
-	listBox.addListItem("Rebel - Black Crusader Armour");
-	listBox.addListItem("Rebel - Alliance Weather Cold Armour");
-	listBox.addCallback("radial/terminal/character_builder", "handleArmourSelection");
+	listBox.addListItem("R.I.S. Armor");
+	listBox.addListItem("Mandalorian Armor");
+	listBox.addListItem("Bone Armor");
+	listBox.addListItem("Chitin Armor");
+	listBox.addListItem("Padded Armor");
+	listBox.addListItem("Ubese Armor");
+	listBox.addListItem("Ithorian Defender Armor");
+	listBox.addListItem("Wookiee Black Mountain Armor");
+	listBox.addListItem("Deathtrooper Armor");
+	listBox.addListItem("Imperial - Galactic Marine Armor");
+	listBox.addListItem("Imperial - Scout trooper Armor");
+	listBox.addListItem("Imperial - Shock trooper Armor");
+	listBox.addListItem("Imperial - Stormtrooper Armor");
+	listBox.addListItem("Imperial - Black Crusader Armor");
+	listBox.addListItem("Imperial - Black Spec Ops Armor");
+	listBox.addListItem("Imperial - White Spec Ops Armor");
+	listBox.addListItem("Imperial - Snow trooper Armor");
+	listBox.addListItem("Imperial - Forest Camouflage Armor");
+	listBox.addListItem("Rebel - Forest Camouflage Armor");
+	listBox.addListItem("Rebel - Assault Armor");
+	listBox.addListItem("Rebel - Battle Armor");
+	listBox.addListItem("Rebel - Marine Armor");
+	listBox.addListItem("Rebel - Spec Force Armor");
+	listBox.addListItem("Rebel - Black Crusader Armor");
+	listBox.addListItem("Rebel - Alliance Weather Cold Armor");
+	listBox.addCallback("radial/terminal/character_builder", "handleArmorSelection");
 	listBox.display(player);
 }
 
-function handleArmourSelection(player, creature, eventType, parameters) {
+function handleArmorSelection(player, creature, eventType, parameters) {
 	var SuiEvent = Java.type("resources.sui.SuiEvent");
 	
 	if (eventType != SuiEvent.OK_PRESSED) {
@@ -86,32 +91,35 @@ function handleArmourSelection(player, creature, eventType, parameters) {
 	selection = SuiListBox.getSelectedRow(parameters);
 	
 	switch(selection) {
-		case 0: handleRisArmour(player); break;
-		case 1: handleMandoArmour(player); break;
-		case 2: handleBoneArmour(player); break;
-		case 3: handleChitinArmour(player); break;
-		case 4: handlePaddedArmour(player); break;
-		case 5: handleUbeseArmour(player); break;	
-		case 6: handleIthoriandefenderArmour(player); break;
-		case 7: handleWookieeblackmtnArmour(player); break;
-		case 8: handleDeathtrooperArmour(player); break;
-		case 9: handleBattlemarineArmour(player); break;
-		case 10: handleBattlewornimpscoutArmour(player); break;
-		case 11: handleBattlewornimpshockArmour(player); break;
-		case 12: handleBattlewornimpstormArmour(player); break;
-		case 13: handleBlackcrusaderimpArmour(player); break;		
-		case 14: handleWhitepvpspecopsimpArmour(player); break;
-		case 15: handleSnowtrooperArmour(player); break;		
-		case 16: handleBattlewornrebassaultArmour(player); break;
-		case 17: handleBattlewornrebbattleArmour(player); break;
-		case 18: handleBattlewornrebmarineArmour(player); break;
-		case 19: handleBattlewornrebspecforceArmour(player); break;
-		case 20: handleBlackcrusaderrebArmour(player); break;
-		case 21: handleAlliancecoldArmour(player); break;
+		case 0: handleRisArmor(player); break;
+		case 1: handleMandoArmor(player); break;
+		case 2: handleBoneArmor(player); break;
+		case 3: handleChitinArmor(player); break;
+		case 4: handlePaddedArmor(player); break;
+		case 5: handleUbeseArmor(player); break;	
+		case 6: handleIthoriandefenderArmor(player); break;
+		case 7: handleWookieeblackmtnArmor(player); break;
+		case 8: handleDeathtrooperArmor(player); break;
+		case 9: handleImpBattlemarineArmor(player); break;
+		case 10: handleImpBattlewornscoutArmor(player); break;
+		case 11: handleImpBattlewornshockArmor(player); break;
+		case 12: handleImpBattlewornstormArmor(player); break;
+		case 13: handleImpBlackcrusaderArmor(player); break;
+		case 14: handleImpBlackpvpspecopsArmor(player); break;
+		case 15: handleImpWhitepvpspecopsArmor(player); break;
+		case 16: handleImpSnowtrooperArmor(player); break;	
+		case 17: handleImpForestCamoArmor(player); break;
+		case 18: handleRebForestCamoArmor(player); break;
+		case 19: handleRebBattlewornassaultArmor(player); break;
+		case 20: handleRebBattlewornbattleArmor(player); break;
+		case 21: handleRebBattlewornmarineArmor(player); break;
+		case 22: handleRebBattlewornspecforceArmor(player); break;
+		case 23: handleRebBlackcrusaderArmor(player); break;
+		case 24: handleRebAlliancecoldArmor(player); break;
 	}
 }
 
-function handleRisArmour(player) {
+function handleRisArmor(player) {
 	spawnItems(player, [
 		"armor_ris_bicep_l",
 		"armor_ris_bicep_r",
@@ -125,7 +133,7 @@ function handleRisArmour(player) {
 			]);
 }
 
-function handleMandoArmour(player) {
+function handleMandoArmor(player) {
 	spawnItems(player, [
 		"armor_mandalorian_bicep_l",
 		"armor_mandalorian_bicep_r",
@@ -139,7 +147,7 @@ function handleMandoArmour(player) {
 			]);
 }
 
-function handleBoneArmour(player) {
+function handleBoneArmor(player) {
 	spawnItems(player, [
 		"armor_bone_bicep_l_02_01",
 		"armor_bone_bicep_r_02_01",
@@ -153,242 +161,7 @@ function handleBoneArmour(player) {
 			]);
 }
 
-function handleDeathtrooperArmour(player) {
-	spawnItems(player, [
-		"armor_deathtrooper_bicep_l_04_01",
-		"armor_deathtrooper_bicep_r_04_01",
-		"armor_deathtrooper_boots_04_01",
-		"armor_deathtrooper_bracer_l_04_01",
-		"armor_deathtrooper_bracer_r_04_01",
-		"armor_deathtrooper_chest_plate_04_01",
-		"armor_deathtrooper_gloves_04_01",
-		"armor_deathtrooper_helmet_04_01",
-		"armor_deathtrooper_leggings_04_01"
-			]);
-}
-
-function handleBattlemarineArmour(player) {
-	spawnItems(player, [
-		"armor_gcw_imperial_galactic_marine_bicep_l",
-		"armor_gcw_imperial_galactic_marine_bicep_r",
-		"armor_gcw_imperial_galactic_marine_boots",
-		"armor_gcw_imperial_galactic_marine_bracer_l",
-		"armor_gcw_imperial_galactic_marine_bracer_r",
-		"armor_gcw_imperial_galactic_marine_chest_plate",
-		"armor_gcw_imperial_galactic_marine_gloves",
-		"armor_gcw_imperial_galactic_marine_helmet",
-		"armor_gcw_imperial_galactic_marine_leggings"
-			]);
-}
-
-function handleBattlewornimpscoutArmour(player) {
-	spawnItems(player, [
-		"armor_gcw_imperial_scouttrooper_bicep_l",
-		"armor_gcw_imperial_scouttrooper_bicep_r",
-		"armor_gcw_imperial_scouttrooper_boots",
-		"armor_gcw_imperial_scouttrooper_bracer_l",
-		"armor_gcw_imperial_scouttrooper_bracer_r",
-		"armor_gcw_imperial_scouttrooper_chest_plate",
-		"armor_gcw_imperial_scouttrooper_gloves",
-		"armor_gcw_imperial_scouttrooper_helmet",
-		"armor_gcw_imperial_scouttrooper_leggings"
-			]);
-}
-
-function handleBattlewornimpshockArmour(player) {
-	spawnItems(player, [
-		"armor_gcw_imperial_shocktrooper_bicep_l",
-		"armor_gcw_imperial_shocktrooper_bicep_r",
-		"armor_gcw_imperial_shocktrooper_boots",
-		"armor_gcw_imperial_shocktrooper_bracer_l",
-		"armor_gcw_imperial_shocktrooper_bracer_r",
-		"armor_gcw_imperial_shocktrooper_chest_plate",
-		"armor_gcw_imperial_shocktrooper_gloves",
-		"armor_gcw_imperial_shocktrooper_helmet",
-		"armor_gcw_imperial_shocktrooper_leggings"
-			]);
-}
-
-function handleBattlewornimpstormArmour(player) {
-	spawnItems(player, [
-		"armor_gcw_imperial_stormtrooper_bicep_l",
-		"armor_gcw_imperial_stormtrooper_bicep_r",
-		"armor_gcw_imperial_stormtrooper_boots",
-		"armor_gcw_imperial_stormtrooper_bracer_l",
-		"armor_gcw_imperial_stormtrooper_bracer_r",
-		"armor_gcw_imperial_stormtrooper_chest_plate",
-		"armor_gcw_imperial_stormtrooper_gloves",
-		"armor_gcw_imperial_stormtrooper_helmet",
-		"armor_gcw_imperial_stormtrooper_leggings"
-			]);
-}
-
-function handleBattlewornrebassaultArmour(player) {
-	spawnItems(player, [
-		"armor_gcw_rebel_assault_bicep_l",
-		"armor_gcw_rebel_assault_bicep_r",
-		"armor_gcw_rebel_assault_boots",
-		"armor_gcw_rebel_assault_bracer_l",
-		"armor_gcw_rebel_assault_bracer_r",
-		"armor_gcw_rebel_assault_chest_plate",
-		"armor_gcw_rebel_assault_gloves",
-		"armor_gcw_rebel_assault_helmet",
-		"armor_gcw_rebel_assault_leggings"
-			]);
-}
-
-function handleBattlewornrebbattleArmour(player) {
-	spawnItems(player, [
-		"armor_gcw_rebel_battle_bicep_l",
-		"armor_gcw_rebel_battle_bicep_r",
-		"armor_gcw_rebel_battle_boots",
-		"armor_gcw_rebel_battle_bracer_l",
-		"armor_gcw_rebel_battle_bracer_r",
-		"armor_gcw_rebel_battle_chest_plate",
-		"armor_gcw_rebel_battle_gloves",
-		"armor_gcw_rebel_battle_helmet",
-		"armor_gcw_rebel_battle_leggings"
-			]);
-}
-
-function handleBattlewornrebmarineArmour(player) {
-	spawnItems(player, [
-		"armor_gcw_rebel_marine_bicep_l",
-		"armor_gcw_rebel_marine_bicep_r",
-		"armor_gcw_rebel_marine_boots",
-		"armor_gcw_rebel_marine_bracer_l",
-		"armor_gcw_rebel_marine_bracer_r",
-		"armor_gcw_rebel_marine_chest_plate",
-		"armor_gcw_rebel_marine_gloves",
-		"armor_gcw_rebel_marine_helmet",
-		"armor_gcw_rebel_marine_leggings"
-			]);
-}
-
-function handleBattlewornrebspecforceArmour(player) {
-	spawnItems(player, [
-		"armor_gcw_rebel_specforce_bicep_l",
-		"armor_gcw_rebel_specforce_bicep_r",
-		"armor_gcw_rebel_specforce_boots",
-		"armor_gcw_rebel_specforce_bracer_l",
-		"armor_gcw_rebel_specforce_bracer_r",
-		"armor_gcw_rebel_specforce_chest_plate",
-		"armor_gcw_rebel_specforce_gloves",
-		"armor_gcw_rebel_specforce_helmet",
-		"armor_gcw_rebel_specforce_leggings"
-			]);
-}
-
-function handleIthoriandefenderArmour(player) {
-	spawnItems(player, [
-		"armor_ithorian_defender_bicep_camo_l_04_01",
-		"armor_ithorian_defender_bicep_camo_r_04_01",
-		"armor_ithorian_defender_boots_camo_04_01",
-		"armor_ithorian_defender_bracer_camo_l_04_01",
-		"armor_ithorian_defender_bracer_camo_r_04_01",
-		"armor_ithorian_defender_chest_plate_camo_04_01",
-		"armor_ithorian_defender_gloves_camo_04_01",
-		"armor_ithorian_defender_helmet_camo_04_01",
-		"armor_ithorian_defender_leggings_camo_04_01"
-			]);
-}
-
-function handleWookieeblackmtnArmour(player) {
-	spawnItems(player, [
-		"armor_kashyyykian_black_mtn_bicep_camo_l_04_01",
-		"armor_kashyyykian_black_mtn_bicep_camo_r_04_01",
-		"armor_kashyyykian_black_mtn_bracer_camo_l_04_01",
-		"armor_kashyyykian_black_mtn_bracer_camo_r_04_01",
-		"armor_kashyyykian_black_mtn_chest_plate_camo_04_01",
-		"armor_kashyyykian_black_mtn_leggings_camo_04_01",
-			]);
-}
-
-function handleBlackcrusaderimpArmour(player) {
-	spawnItems(player, [
-		"armor_mandalorian_imperial_black_bicep_l_04_01",
-		"armor_mandalorian_imperial_black_bicep_r_04_01",
-		"armor_mandalorian_imperial_black_boots_04_01",
-		"armor_mandalorian_imperial_black_bracer_l_04_01",
-		"armor_mandalorian_imperial_black_bracer_r_04_01",
-		"armor_mandalorian_imperial_black_chest_plate_04_01",
-		"armor_mandalorian_imperial_black_gloves_04_01",
-		"armor_mandalorian_imperial_black_helmet_04_01",
-		"armor_mandalorian_imperial_black_leggings_04_01"
-			]);
-}
-
-function handleBlackcrusaderrebArmour(player) {
-	spawnItems(player, [
-		"armor_mandalorian_rebel_black_bicep_l_04_01",
-		"armor_mandalorian_rebel_black_bicep_r_04_01",
-		"armor_mandalorian_rebel_black_boots_04_01",
-		"armor_mandalorian_rebel_black_bracer_l_04_01",
-		"armor_mandalorian_rebel_black_bracer_r_04_01",
-		"armor_mandalorian_rebel_black_chest_plate_04_01",
-		"armor_mandalorian_rebel_black_gloves_04_01",
-		"armor_mandalorian_rebel_black_helmet_04_01",
-		"armor_mandalorian_rebel_black_leggings_04_01"
-			]);
-}
-
-function handleWhitepvpspecopsimpArmour(player) {
-	spawnItems(player, [
-		"armor_pvp_spec_ops_imperial_white_bicep_l_05_01",
-		"armor_pvp_spec_ops_imperial_white_bicep_r_05_01",
-		"armor_pvp_spec_ops_imperial_white_boots_05_01",
-		"armor_pvp_spec_ops_imperial_white_bracer_l_05_01",
-		"armor_pvp_spec_ops_imperial_white_bracer_r_05_01",
-		"armor_pvp_spec_ops_imperial_white_chest_plate_orange_pad_05_01",
-		"armor_pvp_spec_ops_imperial_white_gloves_05_01",
-		"armor_pvp_spec_ops_imperial_white_helmet_05_01",
-		"armor_pvp_spec_ops_imperial_white_leggings_05_01"
-			]);
-}
-
-function handleGreenpvpspecopsrebArmour(player) {
-	spawnItems(player, [
-		"armor_pvp_spec_ops_rebel_black_green_bicep_l_05_01",
-		"armor_pvp_spec_ops_rebel_black_green_bicep_r_05_01",
-		"armor_pvp_spec_ops_rebel_black_green_boots_05_01",
-		"armor_pvp_spec_ops_rebel_black_green_bracer_l_05_01",
-		"armor_pvp_spec_ops_rebel_black_green_bracer_r_05_01",
-		"armor_pvp_spec_ops_rebel_black_green_chest_plate_05_01",
-		"armor_pvp_spec_ops_rebel_black_green_gloves_05_01",
-		"armor_pvp_spec_ops_rebel_black_green_helmet_05_01",
-		"armor_pvp_spec_ops_rebel_black_green_leggings_05_01"
-			]);
-}
-
-function handleAlliancecoldArmour(player) {
-	spawnItems(player, [
-		"armor_rebel_snow_bicep_l",
-		"armor_rebel_snow_bicep_r",
-		"armor_rebel_snow_boots",
-		"armor_rebel_snow_bracer_l",
-		"armor_rebel_snow_bracer_r",
-		"armor_rebel_snow_chest_plate",
-		"armor_rebel_snow_gloves",
-		"armor_rebel_snow_helmet",
-		"armor_rebel_snow_leggings"
-			]);
-}
-
-function handleSnowtrooperArmour(player) {
-	spawnItems(player, [
-		"armor_snowtrooper_bicep_l",
-		"armor_snowtrooper_bicep_r",
-		"armor_snowtrooper_boots",
-		"armor_snowtrooper_bracer_l",
-		"armor_snowtrooper_bracer_r",
-		"armor_snowtrooper_chest_plate",
-		"armor_snowtrooper_gloves",
-		"armor_snowtrooper_helmet",
-		"armor_snowtrooper_leggings"
-			]);
-}
-
-function handleChitinArmour(player) {
+function handleChitinArmor(player) {
 	spawnItems(player, [
 		"armor_assault_sta_lvl80_bicep_l_02_01",
 		"armor_assault_sta_lvl80_bicep_r_02_01",
@@ -402,7 +175,7 @@ function handleChitinArmour(player) {
 			]);
 }
 
-function handlePaddedArmour(player) {
+function handlePaddedArmor(player) {
 	spawnItems(player, [
 		"armor_tow_battle_bicep_l_03_01",
 		"armor_tow_battle_bicep_r_03_01",
@@ -416,7 +189,7 @@ function handlePaddedArmour(player) {
 			]);
 }
 
-function handleUbeseArmour(player) {
+function handleUbeseArmor(player) {
 	spawnItems(player, [
 		"armor_recon_sta_lvl80_boots_02_01",
 		"armor_recon_sta_lvl80_bracer_l_02_01",
@@ -425,6 +198,283 @@ function handleUbeseArmour(player) {
 		"armor_recon_sta_lvl80_gloves_02_01",
 		"armor_recon_sta_lvl80_helmet_02_01",
 		"armor_recon_sta_lvl80_leggings_02_01"
+			]);
+}
+
+function handleIthoriandefenderArmor(player) {
+	spawnItems(player, [
+		"armor_ithorian_defender_bicep_camo_l_04_01",
+		"armor_ithorian_defender_bicep_camo_r_04_01",
+		"armor_ithorian_defender_boots_camo_04_01",
+		"armor_ithorian_defender_bracer_camo_l_04_01",
+		"armor_ithorian_defender_bracer_camo_r_04_01",
+		"armor_ithorian_defender_chest_plate_camo_04_01",
+		"armor_ithorian_defender_gloves_camo_04_01",
+		"armor_ithorian_defender_helmet_camo_04_01",
+		"armor_ithorian_defender_leggings_camo_04_01"
+			]);
+}
+
+function handleWookieeblackmtnArmor(player) {
+	spawnItems(player, [
+		"armor_kashyyykian_black_mtn_bicep_camo_l_04_01",
+		"armor_kashyyykian_black_mtn_bicep_camo_r_04_01",
+		"armor_kashyyykian_black_mtn_bracer_camo_l_04_01",
+		"armor_kashyyykian_black_mtn_bracer_camo_r_04_01",
+		"armor_kashyyykian_black_mtn_chest_plate_camo_04_01",
+		"armor_kashyyykian_black_mtn_leggings_camo_04_01",
+			]);
+}
+
+function handleDeathtrooperArmor(player) {
+	spawnItems(player, [
+		"armor_deathtrooper_bicep_l_04_01",
+		"armor_deathtrooper_bicep_r_04_01",
+		"armor_deathtrooper_boots_04_01",
+		"armor_deathtrooper_bracer_l_04_01",
+		"armor_deathtrooper_bracer_r_04_01",
+		"armor_deathtrooper_chest_plate_04_01",
+		"armor_deathtrooper_gloves_04_01",
+		"armor_deathtrooper_helmet_04_01",
+		"armor_deathtrooper_leggings_04_01"
+			]);
+}
+
+function handleImpBattlemarineArmor(player) {
+	spawnItems(player, [
+		"armor_gcw_imperial_galactic_marine_bicep_l",
+		"armor_gcw_imperial_galactic_marine_bicep_r",
+		"armor_gcw_imperial_galactic_marine_boots",
+		"armor_gcw_imperial_galactic_marine_bracer_l",
+		"armor_gcw_imperial_galactic_marine_bracer_r",
+		"armor_gcw_imperial_galactic_marine_chest_plate",
+		"armor_gcw_imperial_galactic_marine_gloves",
+		"armor_gcw_imperial_galactic_marine_helmet",
+		"armor_gcw_imperial_galactic_marine_leggings"
+			]);
+}
+
+function handleImpBattlewornscoutArmor(player) {
+	spawnItems(player, [
+		"armor_gcw_imperial_scouttrooper_bicep_l",
+		"armor_gcw_imperial_scouttrooper_bicep_r",
+		"armor_gcw_imperial_scouttrooper_boots",
+		"armor_gcw_imperial_scouttrooper_bracer_l",
+		"armor_gcw_imperial_scouttrooper_bracer_r",
+		"armor_gcw_imperial_scouttrooper_chest_plate",
+		"armor_gcw_imperial_scouttrooper_gloves",
+		"armor_gcw_imperial_scouttrooper_helmet",
+		"armor_gcw_imperial_scouttrooper_leggings"
+			]);
+}
+
+function handleImpBattlewornshockArmor(player) {
+	spawnItems(player, [
+		"armor_gcw_imperial_shocktrooper_bicep_l",
+		"armor_gcw_imperial_shocktrooper_bicep_r",
+		"armor_gcw_imperial_shocktrooper_boots",
+		"armor_gcw_imperial_shocktrooper_bracer_l",
+		"armor_gcw_imperial_shocktrooper_bracer_r",
+		"armor_gcw_imperial_shocktrooper_chest_plate",
+		"armor_gcw_imperial_shocktrooper_gloves",
+		"armor_gcw_imperial_shocktrooper_helmet",
+		"armor_gcw_imperial_shocktrooper_leggings"
+			]);
+}
+
+function handleImpBattlewornstormArmor(player) {
+	spawnItems(player, [
+		"armor_gcw_imperial_stormtrooper_bicep_l",
+		"armor_gcw_imperial_stormtrooper_bicep_r",
+		"armor_gcw_imperial_stormtrooper_boots",
+		"armor_gcw_imperial_stormtrooper_bracer_l",
+		"armor_gcw_imperial_stormtrooper_bracer_r",
+		"armor_gcw_imperial_stormtrooper_chest_plate",
+		"armor_gcw_imperial_stormtrooper_gloves",
+		"armor_gcw_imperial_stormtrooper_helmet",
+		"armor_gcw_imperial_stormtrooper_leggings"
+			]);
+}
+
+function handleRebBattlewornassaultArmor(player) {
+	spawnItems(player, [
+		"armor_gcw_rebel_assault_bicep_l",
+		"armor_gcw_rebel_assault_bicep_r",
+		"armor_gcw_rebel_assault_boots",
+		"armor_gcw_rebel_assault_bracer_l",
+		"armor_gcw_rebel_assault_bracer_r",
+		"armor_gcw_rebel_assault_chest_plate",
+		"armor_gcw_rebel_assault_gloves",
+		"armor_gcw_rebel_assault_helmet",
+		"armor_gcw_rebel_assault_leggings"
+			]);
+}
+
+function handleRebBattlewornbattleArmor(player) {
+	spawnItems(player, [
+		"armor_gcw_rebel_battle_bicep_l",
+		"armor_gcw_rebel_battle_bicep_r",
+		"armor_gcw_rebel_battle_boots",
+		"armor_gcw_rebel_battle_bracer_l",
+		"armor_gcw_rebel_battle_bracer_r",
+		"armor_gcw_rebel_battle_chest_plate",
+		"armor_gcw_rebel_battle_gloves",
+		"armor_gcw_rebel_battle_helmet",
+		"armor_gcw_rebel_battle_leggings"
+			]);
+}
+
+function handleRebBattlewornmarineArmor(player) {
+	spawnItems(player, [
+		"armor_gcw_rebel_marine_bicep_l",
+		"armor_gcw_rebel_marine_bicep_r",
+		"armor_gcw_rebel_marine_boots",
+		"armor_gcw_rebel_marine_bracer_l",
+		"armor_gcw_rebel_marine_bracer_r",
+		"armor_gcw_rebel_marine_chest_plate",
+		"armor_gcw_rebel_marine_gloves",
+		"armor_gcw_rebel_marine_helmet",
+		"armor_gcw_rebel_marine_leggings"
+			]);
+}
+
+function handleRebBattlewornspecforceArmor(player) {
+	spawnItems(player, [
+		"armor_gcw_rebel_specforce_bicep_l",
+		"armor_gcw_rebel_specforce_bicep_r",
+		"armor_gcw_rebel_specforce_boots",
+		"armor_gcw_rebel_specforce_bracer_l",
+		"armor_gcw_rebel_specforce_bracer_r",
+		"armor_gcw_rebel_specforce_chest_plate",
+		"armor_gcw_rebel_specforce_gloves",
+		"armor_gcw_rebel_specforce_helmet",
+		"armor_gcw_rebel_specforce_leggings"
+			]);
+}
+
+function handleImpBlackcrusaderArmor(player) {
+	spawnItems(player, [
+		"armor_mandalorian_imperial_black_bicep_l_04_01",
+		"armor_mandalorian_imperial_black_bicep_r_04_01",
+		"armor_mandalorian_imperial_black_boots_04_01",
+		"armor_mandalorian_imperial_black_bracer_l_04_01",
+		"armor_mandalorian_imperial_black_bracer_r_04_01",
+		"armor_mandalorian_imperial_black_chest_plate_04_01",
+		"armor_mandalorian_imperial_black_gloves_04_01",
+		"armor_mandalorian_imperial_black_helmet_04_01",
+		"armor_mandalorian_imperial_black_leggings_04_01"
+			]);
+}
+
+function handleRebBlackcrusaderArmor(player) {
+	spawnItems(player, [
+		"armor_mandalorian_rebel_black_bicep_l_04_01",
+		"armor_mandalorian_rebel_black_bicep_r_04_01",
+		"armor_mandalorian_rebel_black_boots_04_01",
+		"armor_mandalorian_rebel_black_bracer_l_04_01",
+		"armor_mandalorian_rebel_black_bracer_r_04_01",
+		"armor_mandalorian_rebel_black_chest_plate_04_01",
+		"armor_mandalorian_rebel_black_gloves_04_01",
+		"armor_mandalorian_rebel_black_helmet_04_01",
+		"armor_mandalorian_rebel_black_leggings_04_01"
+			]);
+}
+
+function handleImpBlackpvpspecopsArmor(player) {
+	spawnItems(player, [
+		"armor_pvp_spec_ops_imperial_black_bicep_l_05_01",
+		"armor_pvp_spec_ops_imperial_black_bicep_r_05_01",
+		"armor_pvp_spec_ops_imperial_black_boots_05_01",
+		"armor_pvp_spec_ops_imperial_black_bracer_l_05_01",
+		"armor_pvp_spec_ops_imperial_black_bracer_r_05_01",
+		"armor_pvp_spec_ops_imperial_black_chest_plate_orange_pad_05_01",
+		"armor_pvp_spec_ops_imperial_black_gloves_05_01",
+		"armor_pvp_spec_ops_imperial_black_helmet_05_01",
+		"armor_pvp_spec_ops_imperial_black_leggings_05_01"
+			]);
+}
+
+function handleImpWhitepvpspecopsArmor(player) {
+	spawnItems(player, [
+		"armor_pvp_spec_ops_imperial_white_bicep_l_05_01",
+		"armor_pvp_spec_ops_imperial_white_bicep_r_05_01",
+		"armor_pvp_spec_ops_imperial_white_boots_05_01",
+		"armor_pvp_spec_ops_imperial_white_bracer_l_05_01",
+		"armor_pvp_spec_ops_imperial_white_bracer_r_05_01",
+		"armor_pvp_spec_ops_imperial_white_chest_plate_orange_pad_05_01",
+		"armor_pvp_spec_ops_imperial_white_gloves_05_01",
+		"armor_pvp_spec_ops_imperial_white_helmet_05_01",
+		"armor_pvp_spec_ops_imperial_white_leggings_05_01"
+			]);
+}
+
+function handleImpSnowtrooperArmor(player) {
+	spawnItems(player, [
+		"armor_snowtrooper_bicep_l",
+		"armor_snowtrooper_bicep_r",
+		"armor_snowtrooper_boots",
+		"armor_snowtrooper_bracer_l",
+		"armor_snowtrooper_bracer_r",
+		"armor_snowtrooper_chest_plate",
+		"armor_snowtrooper_gloves",
+		"armor_snowtrooper_helmet",
+		"armor_snowtrooper_leggings"
+			]);
+}
+
+function handleImpForestCamoArmor(player) {
+	spawnItems(player, [
+		"armor_scouttrooper_bicep_camo_l_04_01",
+		"armor_scouttrooper_bicep_camo_r_04_01",
+		"armor_scouttrooper_boots_camo_04_01",
+		"armor_scouttrooper_bracer_camo_l_04_01",
+		"armor_scouttrooper_bracer_camo_r_04_01",
+		"armor_scouttrooper_chest_plate_camo_04_01",
+		"armor_scouttrooper_gloves_camo_04_01",
+		"armor_scouttrooper_helmet_camo_04_01",
+		"armor_scouttrooper_leggings_camo_04_01"
+			]);
+}
+
+function handleRebForestCamoArmor(player) {
+	spawnItems(player, [
+		"armor_rebel_assault_bicep_camo_l_04_01",
+		"armor_rebel_assault_bicep_camo_r_04_01",
+		"armor_rebel_assault_boots_camo_04_01",
+		"armor_rebel_assault_bracer_camo_l_04_01",
+		"armor_rebel_assault_bracer_camo_r_04_01",
+		"armor_rebel_assault_chest_plate_camo_04_01",
+		"armor_rebel_assault_gloves_camo_04_01",
+		"armor_rebel_assault_helmet_camo_04_01",
+		"armor_rebel_assault_leggings_camo_04_01"
+			]);
+}
+
+function handleRebGreenpvpspecopsArmor(player) {
+	spawnItems(player, [
+		"armor_pvp_spec_ops_rebel_black_green_bicep_l_05_01",
+		"armor_pvp_spec_ops_rebel_black_green_bicep_r_05_01",
+		"armor_pvp_spec_ops_rebel_black_green_boots_05_01",
+		"armor_pvp_spec_ops_rebel_black_green_bracer_l_05_01",
+		"armor_pvp_spec_ops_rebel_black_green_bracer_r_05_01",
+		"armor_pvp_spec_ops_rebel_black_green_chest_plate_05_01",
+		"armor_pvp_spec_ops_rebel_black_green_gloves_05_01",
+		"armor_pvp_spec_ops_rebel_black_green_helmet_05_01",
+		"armor_pvp_spec_ops_rebel_black_green_leggings_05_01"
+			]);
+}
+
+function handleRebAlliancecoldArmor(player) {
+	spawnItems(player, [
+		"armor_rebel_snow_bicep_l",
+		"armor_rebel_snow_bicep_r",
+		"armor_rebel_snow_boots",
+		"armor_rebel_snow_bracer_l",
+		"armor_rebel_snow_bracer_r",
+		"armor_rebel_snow_chest_plate",
+		"armor_rebel_snow_gloves",
+		"armor_rebel_snow_helmet",
+		"armor_rebel_snow_leggings"
 			]);
 }
 
@@ -485,6 +535,7 @@ function handleRanged(player) {
 		"weapon_tow_pistol_flechette_05_01",
 		"weapon_tow_carbine_05_01",
 		"weapon_tow_rifle_05_02",
+		"weapon_tow_rifle_lightning_cannon_04_01",
 		"weapon_tow_heavy_rocket_launcher_05_01",
 		"weapon_borvo_carbine_03_01",
 		"weapon_borvo_pistol_03_01",
@@ -496,6 +547,7 @@ function handleRanged(player) {
 		"weapon_pistol_drop_lvl40_02_01",
 		"weapon_rifle_drop_lvl40_02_01",
 		"weapon_gcw_heavy_pulse_cannon_03_01",
+		"weapon_heavy_pvp_general_reward_06_01",
 		"weapon_pistol_imperial_pvp_general_reward_06_01",
 		"weapon_rifle_imperial_pvp_general_reward_06_01",
 		"weapon_carbine_pvp_imperial_general_reward_06_01"
@@ -506,10 +558,30 @@ function handleWearables(player) {
 	var SuiListBox = Java.type("resources.sui.SuiListBox");
 	listBox = new SuiListBox(SuiButtons.OK_CANCEL, "Character Builder Terminal", "Select a wearable category to receive a weapon of that type.");
 	
-	listBox.addListItem("Backpack");
-	listBox.addListItem("Equipment");
-	listBox.addListItem("Jedi Robes");
-
+	listBox.addListItem("Backpacks");
+	listBox.addListItem("Bikinis");
+	listBox.addListItem("Bodysuits");
+	listBox.addListItem("Boots");
+	listBox.addListItem("Bustiers");
+	listBox.addListItem("Dress");
+	listBox.addListItem("Gloves");
+	listBox.addListItem("Goggles");
+	listBox.addListItem("Hats");
+	listBox.addListItem("Helmets");
+	listBox.addListItem("Jackets");
+	listBox.addListItem("Pants");
+	listBox.addListItem("Robes");
+	listBox.addListItem("Shirt");
+	listBox.addListItem("Shoes");
+	listBox.addListItem("Skirts");
+	listBox.addListItem("Vest");
+	listBox.addListItem("Ithorian equipment");
+	listBox.addListItem("Jedi equipment");
+	listBox.addListItem("Nightsister equipment");
+	listBox.addListItem("Tusken Raider equipment");
+	listBox.addListItem("Wookie equipment");
+	listBox.addListItem("TCG");
+	
 	listBox.addCallback("radial/terminal/character_builder", "handleWearablesSelection");
 	listBox.display(player);
 }
@@ -526,8 +598,28 @@ function handleWearablesSelection(player, creature, eventType, parameters) {
 	
 	switch(selection) {
 		case 0: handleBackpack(player); break;
-		case 1: handleEquipment(player); break;
-		case 2: handleRobe(player); break;
+		case 1: handleBikini(player); break;
+		case 2: handleBodysuit(player); break;
+		case 3: handleBoot(player); break;
+		case 4: handleBustier(player); break;
+		case 5: handleDress(player); break;
+		case 6: handleGlove(player); break;
+		case 7: handleGoggle(player); break;
+		case 8: handleHat(player); break;
+		case 9: handleHelmet(player); break;
+		case 10: handleJacket(player); break;
+		case 11: handlePant(player); break;
+		case 12: handleRobe(player); break;
+		case 13: handleShirt(player); break;
+		case 14: handleShoe(player); break;
+		case 15: handleSkirt(player); break;
+		case 16: handleVest(player); break;
+		case 17: handleIthorianEquipment(player); break;
+		case 18: handleJediEquipment(player); break;
+		case 19: handleNightsisterEquipment(player); break;
+		case 20: handleTuskenEquipment(player); break;
+		case 21: handleWookieeEquipment(player); break;
+		case 22: handleOther(player); break;
 	}
 }
 
@@ -542,7 +634,428 @@ function handleBackpack(player) {
 			]);
 }
 
-function handleEquipment(player) {
+function handleBikini(player) {
+	spawnItems(player, [
+		"item_clothing_bikini_01_01",
+		"item_clothing_bikini_01_02",
+		"item_clothing_bikini_01_03",
+		"item_clothing_bikini_01_04",
+		"item_clothing_bikini_leggings_01_01"
+			]);
+}
+
+function handleBodysuit(player) {
+	spawnItems(player, [
+		"item_clothing_bodysuit_at_at_01_01",
+		"item_clothing_bodysuit_bwing_01_01",
+		"item_clothing_bodysuit_tie_fighter_01_01",
+		"item_clothing_bodysuit_trando_slaver_01_01"
+			]);
+}
+
+function handleBoot(player) {
+	spawnItems(player, [
+		"item_clothing_boots_01_03",
+		"item_clothing_boots_01_04",
+		"item_clothing_boots_01_05",
+		"item_clothing_boots_01_12",
+		"item_clothing_boots_01_14",
+		"item_clothing_boots_01_15",
+		"item_clothing_boots_01_19",
+		"item_clothing_boots_01_21",
+		"item_clothing_boots_01_22",
+		"item_clothing_boots_01_24"
+			]);
+}
+
+function handleBustier(player) {
+	spawnItems(player, [
+		"item_clothing_bustier_01_01",
+		"item_clothing_bustier_01_02",
+		"item_clothing_bustier_01_03"
+			]);
+}
+
+function handleDress(player) {
+	spawnItems(player, [
+		"item_clothing_dress_01_05",
+		"item_clothing_dress_01_06",
+		"item_clothing_dress_01_07",
+		"item_clothing_dress_01_08",
+		"item_clothing_dress_01_09",
+		"item_clothing_dress_01_10",
+		"item_clothing_dress_01_11",
+		"item_clothing_dress_01_12",
+		"item_clothing_dress_01_13",
+		"item_clothing_dress_01_14",
+		"item_clothing_dress_01_15",
+		"item_clothing_dress_01_16",
+		"item_clothing_dress_01_18",
+		"item_clothing_dress_01_19",
+		"item_clothing_dress_01_23",
+		"item_clothing_dress_01_26",
+		"item_clothing_dress_01_27",
+		"item_clothing_dress_01_29",
+		"item_clothing_dress_01_30",
+		"item_clothing_dress_01_31",
+		"item_clothing_dress_01_32",
+		"item_clothing_dress_01_33",
+		"item_clothing_dress_01_34",
+		"item_clothing_dress_01_35"
+			]);
+}
+
+function handleGlove(player) {
+	spawnItems(player, [
+		"item_clothing_gloves_01_02",
+		"item_clothing_gloves_01_03",
+		"item_clothing_gloves_01_06",
+		"item_clothing_gloves_01_07",
+		"item_clothing_gloves_01_10",
+		"item_clothing_gloves_01_11",
+		"item_clothing_gloves_01_12",
+		"item_clothing_gloves_01_13",
+		"item_clothing_gloves_01_14"
+			]);
+}
+
+function handleGoggle(player) {
+	spawnItems(player, [
+		"item_clothing_goggles_anniversary_01_01",
+		"item_clothing_goggles_goggles_01_01",
+		"item_clothing_goggles_goggles_01_02",
+		"item_clothing_goggles_goggles_01_03",
+		"item_clothing_goggles_goggles_01_04",
+		"item_clothing_goggles_goggles_01_05",
+		"item_clothing_goggles_goggles_01_06"
+			]);
+}
+
+function handleHat(player) {
+	spawnItems(player, [
+		"item_clothing_hat_chef_01_01",
+		"item_clothing_hat_chef_01_02",
+		"item_clothing_hat_imp_01_01",
+		"item_clothing_hat_imp_01_02",
+		"item_clothing_hat_rebel_trooper_01_01",
+		"item_clothing_hat_01_02",
+		"item_clothing_hat_01_04",
+		"item_clothing_hat_01_10",
+		"item_clothing_hat_01_12",
+		"item_clothing_hat_01_13",
+		"item_clothing_hat_01_14",
+		"item_clothing_hat_twilek_01_01",
+		"item_clothing_hat_twilek_01_02",
+		"item_clothing_hat_twilek_01_03",
+		"item_clothing_hat_twilek_01_04",
+		"item_clothing_hat_twilek_01_05"
+			]);
+}
+
+function handleHelmet(player) {
+	spawnItems(player, [
+		"item_clothing_helmet_at_at_01_01",
+		"item_clothing_helmet_fighter_blacksun_01_01",
+		"item_clothing_helmet_fighter_imperial_01_01",
+		"item_clothing_helmet_fighter_privateer_01_01",
+		"item_clothing_helmet_fighter_rebel_01_01",
+		"item_clothing_helmet_tie_fighter_01_01"
+			]);
+}
+
+function handleJacket(player) {
+	spawnItems(player, [
+		"item_clothing_jacket_ace_imperial_01_01",
+		"item_clothing_jacket_ace_privateer_01_01",
+		"item_clothing_jacket_ace_rebel_01_01",
+		"item_clothing_jacket_gcw_imperial_01_01",
+		"item_clothing_jacket_gcw_rebel_01_01",
+		"item_clothing_jacket_01_02",
+		"item_clothing_jacket_01_03",
+		"item_clothing_jacket_01_04",
+		"item_clothing_jacket_01_05",
+		"item_clothing_jacket_01_06",
+		"item_clothing_jacket_01_07",
+		"item_clothing_jacket_01_08",
+		"item_clothing_jacket_01_09",
+		"item_clothing_jacket_01_10",
+		"item_clothing_jacket_01_11",
+		"item_clothing_jacket_01_12",
+		"item_clothing_jacket_01_13",
+		"item_clothing_jacket_01_14",
+		"item_clothing_jacket_01_15",
+		"item_clothing_jacket_01_16",
+		"item_clothing_jacket_01_17",
+		"item_clothing_jacket_01_18",
+		"item_clothing_jacket_01_19",
+		"item_clothing_jacket_01_20",
+		"item_clothing_jacket_01_21",
+		"item_clothing_jacket_01_22",
+		"item_clothing_jacket_01_23",
+		"item_clothing_jacket_01_24",
+		"item_clothing_jacket_01_25",
+		"item_clothing_jacket_01_26"
+			]);
+}
+
+function handlePant(player) {
+	spawnItems(player, [
+		"item_clothing_pants_01_01",
+		"item_clothing_pants_01_02",
+		"item_clothing_pants_01_03",
+		"item_clothing_pants_01_04",
+		"item_clothing_pants_01_05",
+		"item_clothing_pants_01_06",
+		"item_clothing_pants_01_07",
+		"item_clothing_pants_01_08",
+		"item_clothing_pants_01_09",
+		"item_clothing_pants_01_10",
+		"item_clothing_pants_01_11",
+		"item_clothing_pants_01_12",
+		"item_clothing_pants_01_13",
+		"item_clothing_pants_01_14",
+		"item_clothing_pants_01_15",
+		"item_clothing_pants_01_16",
+		"item_clothing_pants_01_17",
+		"item_clothing_pants_01_18",
+		"item_clothing_pants_01_21",
+		"item_clothing_pants_01_22",
+		"item_clothing_pants_01_24",
+		"item_clothing_pants_01_25",
+		"item_clothing_pants_01_26",
+		"item_clothing_pants_01_27",
+		"item_clothing_pants_01_28",
+		"item_clothing_pants_01_29",
+		"item_clothing_pants_01_30",
+		"item_clothing_pants_01_31",
+		"item_clothing_pants_01_32",
+		"item_clothing_pants_01_33"
+			]);
+}
+
+function handleRobe(player) {
+	spawnItems(player, [
+		"item_clothing_robe_exar_cultist_hood_down_01_01",
+		"item_clothing_robe_exar_cultist_hood_up_01_01",
+		"item_clothing_robe_prefect_talmont_01_01",
+		"item_clothing_robe_01_01",
+		"item_clothing_robe_01_04",
+		"item_clothing_robe_01_05",
+		"item_clothing_robe_01_12",
+		"item_clothing_robe_01_18",
+		"item_clothing_robe_01_27",
+		"item_clothing_robe_01_32",
+		"item_clothing_robe_01_33"
+			]);
+}
+
+function handleShirt(player) {
+	spawnItems(player, [
+		"item_clothing_shirt_01_03",
+		"item_clothing_shirt_01_04",
+		"item_clothing_shirt_01_05",
+		"item_clothing_shirt_01_07",
+		"item_clothing_shirt_01_08",
+		"item_clothing_shirt_01_09",
+		"item_clothing_shirt_01_10",
+		"item_clothing_shirt_01_11",
+		"item_clothing_shirt_01_12",
+		"item_clothing_shirt_01_13",
+		"item_clothing_shirt_01_14",
+		"item_clothing_shirt_01_15",
+		"item_clothing_shirt_01_16",
+		"item_clothing_shirt_01_24",
+		"item_clothing_shirt_01_26",
+		"item_clothing_shirt_01_27",
+		"item_clothing_shirt_01_28",
+		"item_clothing_shirt_01_30",
+		"item_clothing_shirt_01_32",
+		"item_clothing_shirt_01_34",
+		"item_clothing_shirt_01_38",
+		"item_clothing_shirt_01_42"
+			]);
+}
+
+function handleShoe(player) {
+	spawnItems(player, [
+		"item_clothing_shoes_01_01",
+		"item_clothing_shoes_01_02",
+		"item_clothing_shoes_01_03",
+		"item_clothing_shoes_01_07",
+		"item_clothing_shoes_01_08",
+		"item_clothing_shoes_01_09"
+			]);
+}
+
+function handleSkirt(player) {
+	spawnItems(player, [
+		"item_clothing_skirt_01_03",
+		"item_clothing_skirt_01_04",
+		"item_clothing_skirt_01_05",
+		"item_clothing_skirt_01_06",
+		"item_clothing_skirt_01_07",
+		"item_clothing_skirt_01_08",
+		"item_clothing_skirt_01_09",
+		"item_clothing_skirt_01_10",
+		"item_clothing_skirt_01_11",
+		"item_clothing_skirt_01_12",
+		"item_clothing_skirt_01_13",
+		"item_clothing_skirt_01_14"
+			]);
+}
+
+function handleVest(player) {
+	spawnItems(player, [
+		"item_clothing_vest_01_01",
+		"item_clothing_vest_01_02",
+		"item_clothing_vest_01_03",
+		"item_clothing_vest_01_04",
+		"item_clothing_vest_01_05",
+		"item_clothing_vest_01_06",
+		"item_clothing_vest_01_09",
+		"item_clothing_vest_01_10",
+		"item_clothing_vest_01_11",
+		"item_clothing_vest_01_15"
+			]);
+}
+
+function handleIthorianEquipment(player) {
+	spawnItems(player, [
+		"item_clothing_ithorian_apron_chef_jacket_01_01",
+		"item_clothing_ithorian_hat_chef_01_01",
+		"item_clothing_ithorian_hat_chef_01_02",
+		"item_clothing_ithorian_bodysuit_01_01",
+		"item_clothing_ithorian_bodysuit_01_02",
+		"item_clothing_ithorian_bodysuit_01_03",
+		"item_clothing_ithorian_bodysuit_01_04",
+		"item_clothing_ithorian_bodysuit_01_05",
+		"item_clothing_ithorian_bodysuit_01_06",
+		"item_clothing_ithorian_dress_01_02",
+		"item_clothing_ithorian_dress_01_03",
+		"item_clothing_ithorian_gloves_01_01",
+		"item_clothing_ithorian_gloves_01_02",
+		"item_clothing_ithorian_hat_01_01",
+		"item_clothing_ithorian_hat_01_02",
+		"item_clothing_ithorian_hat_01_03",
+		"item_clothing_ithorian_hat_01_04",
+		"item_clothing_ithorian_pants_01_01",
+		"item_clothing_ithorian_pants_01_02",
+		"item_clothing_ithorian_pants_01_03",
+		"item_clothing_ithorian_pants_01_04",
+		"item_clothing_ithorian_pants_01_05",
+		"item_clothing_ithorian_pants_01_06",
+		"item_clothing_ithorian_pants_01_07",
+		"item_clothing_ithorian_pants_01_08",
+		"item_clothing_ithorian_pants_01_09",
+		"item_clothing_ithorian_pants_01_10",
+		"item_clothing_ithorian_pants_01_11",
+		"item_clothing_ithorian_pants_01_12",
+		"item_clothing_ithorian_pants_01_13",
+		"item_clothing_ithorian_pants_01_14",
+		"item_clothing_ithorian_pants_01_15",
+		"item_clothing_ithorian_pants_01_16",
+		"item_clothing_ithorian_pants_01_17",
+		"item_clothing_ithorian_pants_01_18",
+		"item_clothing_ithorian_pants_01_19",
+		"item_clothing_ithorian_pants_01_20",
+		"item_clothing_ithorian_pants_01_21",
+		"item_clothing_ithorian_robe_01_02",
+		"item_clothing_ithorian_robe_01_03",
+		"item_clothing_ithorian_shirt_01_01",
+		"item_clothing_ithorian_shirt_01_02",
+		"item_clothing_ithorian_shirt_01_03",
+		"item_clothing_ithorian_shirt_01_04",
+		"item_clothing_ithorian_shirt_01_05",
+		"item_clothing_ithorian_shirt_01_06",
+		"item_clothing_ithorian_shirt_01_07",
+		"item_clothing_ithorian_shirt_01_08",
+		"item_clothing_ithorian_shirt_01_09",
+		"item_clothing_ithorian_shirt_01_10",
+		"item_clothing_ithorian_shirt_01_11",
+		"item_clothing_ithorian_shirt_01_12",
+		"item_clothing_ithorian_shirt_01_13",
+		"item_clothing_ithorian_shirt_01_14",
+		"item_clothing_ithorian_skirt_01_01",
+		"item_clothing_ithorian_skirt_01_02",
+		"item_clothing_ithorian_skirt_01_03",
+		"item_clothing_ithorian_vest_01_01",
+		"item_clothing_ithorian_vest_01_02"
+			]);
+}
+
+function handleJediEquipment(player) {
+	spawnItems(player, [
+		"item_gcw_imperial_cape_01",
+		"item_gcw_imperial_jacket_01",
+		"item_gcw_rebel_cape_01",
+		"item_gcw_rebel_jacket_01",
+		"item_jedi_robe_04_01",
+		"item_jedi_robe_04_02",
+		"item_jedi_robe_06_03",
+		"item_jedi_robe_06_04",
+		"item_jedi_robe_dark_04_04",
+		"item_jedi_robe_dark_04_05",
+		"item_jedi_robe_light_04_05"
+			]);
+}
+
+function handleNightsisterEquipment(player) {
+	spawnItems(player, [
+		"item_clothing_boots_nightsister_01_01",
+		"item_clothing_dress_nightsister_01_01",
+		"item_clothing_hat_nightsister_01_01",
+		"item_clothing_hat_nightsister_01_02",
+		"item_clothing_hat_nightsister_01_03",
+		"item_clothing_pants_nightsister_01_01",
+		"item_clothing_pants_nightsister_01_02",
+		"item_clothing_shirt_nightsister_01_01",
+		"item_clothing_shirt_nightsister_01_02",
+		"item_clothing_shirt_nightsister_01_03"
+			]);
+}
+
+function handleTuskenEquipment(player) {
+	spawnItems(player, [
+		"item_clothing_bandolier_tusken_01_01",
+		"item_clothing_bandolier_tusken_01_02",
+		"item_clothing_bandolier_tusken_01_03",
+		"item_clothing_boots_tusken_raider_01_01",
+		"item_clothing_gloves_tusken_raider_01_01",
+		"item_clothing_helmet_tusken_raider_01_01",
+		"item_clothing_helmet_tusken_raider_01_02",
+		"item_clothing_robe_tusken_raider_01_01",
+		"item_clothing_robe_tusken_raider_01_02"
+			]);
+}
+
+function handleWookieeEquipment(player) {
+	spawnItems(player, [
+		"item_clothing_wookiee_gloves_01_01",
+		"item_clothing_wookiee_gloves_01_02",
+		"item_clothing_wookiee_gloves_01_03",
+		"item_clothing_wookiee_gloves_01_04",
+		"item_clothing_wookiee_hat_01_01",
+		"item_clothing_wookiee_hood_01_01",
+		"item_clothing_wookiee_hood_01_02",
+		"item_clothing_wookiee_hood_01_03",
+		"item_clothing_wookiee_lifeday_robe_01_01",
+		"item_clothing_wookiee_lifeday_robe_01_02",
+		"item_clothing_wookiee_lifeday_robe_01_03",
+		"item_clothing_wookiee_shirt_01_01",
+		"item_clothing_wookiee_shirt_01_02",
+		"item_clothing_wookiee_shirt_01_03",
+		"item_clothing_wookiee_shirt_01_04",
+		"item_clothing_wookiee_shirt_01_05",
+		"item_clothing_wookiee_shoulder_pad_01_01",
+		"item_clothing_wookiee_shoulder_pad_01_02",
+		"item_clothing_wookiee_skirt_01_01",
+		"item_clothing_wookiee_skirt_01_02",
+		"item_clothing_wookiee_skirt_01_03",
+		"item_clothing_wookiee_skirt_01_04"
+			]);
+}
+
+function handleOther(player) {
 	spawnItems(player, [
 	    "item_lifeday_09_jacket_01",
 	    "item_pgc_chronicle_master_robe",
@@ -562,18 +1075,106 @@ function handleEquipment(player) {
 	    	]);
 }
 
-function handleRobe(player) {
-	spawnItems(player, [
-		"item_gcw_imperial_cape_01",
-		"item_gcw_imperial_jacket_01",
-		"item_gcw_rebel_cape_01",
-		"item_gcw_rebel_jacket_01",
-		"item_jedi_robe_04_01",
-		"item_jedi_robe_04_02",
-		"item_jedi_robe_06_03",
-		"item_jedi_robe_06_04",
-		"item_jedi_robe_dark_04_04",
-		"item_jedi_robe_dark_04_05",
-		"item_jedi_robe_light_04_05"
-			]);
+function handleTravel(player) {
+	var SuiListBox = Java.type("resources.sui.SuiListBox");
+	listBox = new SuiListBox(SuiButtons.OK_CANCEL, "Character Builder Terminal", "Select a location you want to get teleported to.");
+	
+	listBox.addListItem("Dathomir - Nightsister Stronghold");
+	listBox.addListItem("Dathomir - Quarantine Zone");
+	listBox.addListItem("Endor - DWB");
+	listBox.addListItem("Lok - Droid Cave");
+	listBox.addListItem("Naboo - Weapon Development Facility");
+	listBox.addListItem("Tatooine - Fort Tusken");
+	listBox.addListItem("Tatooine - Krayt Graveyard");
+	listBox.addListItem("Tatooine - Mos Eisley");
+	listBox.addListItem("Tatooine - Squill Cave");
+	
+	listBox.addCallback("radial/terminal/character_builder", "handleTravelSelection");
+	listBox.display(player);
+}
+
+function handleTravelSelection(player, creature, eventType, parameters) {
+	var SuiEvent = Java.type("resources.sui.SuiEvent");
+	
+	if (eventType != SuiEvent.OK_PRESSED) {
+		return;
+	}
+	
+	var SuiListBox = Java.type("resources.sui.SuiListBox");
+	selection = SuiListBox.getSelectedRow(parameters);
+	
+	switch(selection) {
+		case 0: handleDatNS(player); break;
+		case 1: handleDatQz(player); break;
+		case 2: handleEndDwb(player); break;
+		case 3: handleLokDroid(player); break;
+		case 4: handleNabWeaponFac(player); break;
+		case 5: handleTatFortTusken(player); break;
+		case 6: handleTatKraytGrave(player); break;
+		case 7: handleTatMosEisley(player); break;
+		case 8: handleTatSquillCave(player); break;
+	}
+}
+
+function handleDatNS(player) {
+	var ObjectTeleportIntent = Java.type('intents.object.ObjectTeleportIntent');
+	var Location = Java.type('resources.Location');
+	var Terrain = Java.type('resources.Terrain');
+	new ObjectTeleportIntent(player.getCreatureObject(), new Location(-3989, 124, -10, Terrain.DATHOMIR)).broadcast();
+}
+
+function handleDatQz(player) {
+	var ObjectTeleportIntent = Java.type('intents.object.ObjectTeleportIntent');
+	var Location = Java.type('resources.Location');
+	var Terrain = Java.type('resources.Terrain');
+	new ObjectTeleportIntent(player.getCreatureObject(), new Location(-5786, 510, -6554, Terrain.DATHOMIR)).broadcast();
+}
+
+function handleEndDwb(player) {
+	var ObjectTeleportIntent = Java.type('intents.object.ObjectTeleportIntent');
+	var Location = Java.type('resources.Location');
+	var Terrain = Java.type('resources.Terrain');
+	new ObjectTeleportIntent(player.getCreatureObject(), new Location(-4683, 13, 4326, Terrain.ENDOR)).broadcast();
+}
+
+function handleLokDroid(player) {
+	var ObjectTeleportIntent = Java.type('intents.object.ObjectTeleportIntent');
+	var Location = Java.type('resources.Location');
+	var Terrain = Java.type('resources.Terrain');
+	new ObjectTeleportIntent(player.getCreatureObject(), new Location(3331, 105, -4912, Terrain.LOK)).broadcast();
+}
+
+function handleNabWeaponFac(player) {
+	var ObjectTeleportIntent = Java.type('intents.object.ObjectTeleportIntent');
+	var Location = Java.type('resources.Location');
+	var Terrain = Java.type('resources.Terrain');
+	new ObjectTeleportIntent(player.getCreatureObject(), new Location(-6439, 41, -3265, Terrain.NABOO)).broadcast();
+}
+
+function handleTatFortTusken(player) {
+	var ObjectTeleportIntent = Java.type('intents.object.ObjectTeleportIntent');
+	var Location = Java.type('resources.Location');
+	var Terrain = Java.type('resources.Terrain');
+	new ObjectTeleportIntent(player.getCreatureObject(), new Location(-3941, 59, 6318, Terrain.TATOOINE)).broadcast();
+}
+
+function handleTatKraytGrave(player) {
+	var ObjectTeleportIntent = Java.type('intents.object.ObjectTeleportIntent');
+	var Location = Java.type('resources.Location');
+	var Terrain = Java.type('resources.Terrain');
+	new ObjectTeleportIntent(player.getCreatureObject(), new Location(7380, 122, 4298, Terrain.TATOOINE)).broadcast();
+}
+
+function handleTatMosEisley(player) {
+	var ObjectTeleportIntent = Java.type('intents.object.ObjectTeleportIntent');
+	var Location = Java.type('resources.Location');
+	var Terrain = Java.type('resources.Terrain');
+	new ObjectTeleportIntent(player.getCreatureObject(), new Location(3525, 4, -4807, Terrain.TATOOINE)).broadcast();
+}
+
+function handleTatSquillCave(player) {
+	var ObjectTeleportIntent = Java.type('intents.object.ObjectTeleportIntent');
+	var Location = Java.type('resources.Location');
+	var Terrain = Java.type('resources.Terrain');
+	new ObjectTeleportIntent(player.getCreatureObject(), new Location(57, 152, -79, Terrain.TATOOINE)).broadcast();
 }

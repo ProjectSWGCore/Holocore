@@ -32,19 +32,18 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
-import network.packets.Packet;
 import intents.NotifyPlayersPacketIntent;
 import intents.PlayerEventIntent;
 import intents.network.ConnectionClosedIntent;
 import intents.network.ConnectionOpenedIntent;
+import network.packets.Packet;
 import resources.Terrain;
 import resources.control.Assert;
-import resources.control.Intent;
 import resources.control.Manager;
 import resources.player.Player;
+import resources.player.Player.PlayerServer;
 import resources.player.PlayerEvent;
 import resources.player.PlayerState;
-import resources.player.Player.PlayerServer;
 import resources.server_info.SynchronizedMap;
 import services.CoreManager;
 
@@ -62,21 +61,11 @@ public class PlayerManager extends Manager {
 		addChildService(loginService);
 		addChildService(zoneService);
 		
-		registerForIntent(NotifyPlayersPacketIntent.TYPE);
-		registerForIntent(ConnectionOpenedIntent.TYPE);
-		registerForIntent(ConnectionClosedIntent.TYPE);
+		registerForIntent(NotifyPlayersPacketIntent.class, nppi -> handleNotifyPlayersPacketIntent(nppi));
+		registerForIntent(ConnectionOpenedIntent.class, coi -> handleConnectionOpenedIntent(coi));
+		registerForIntent(ConnectionClosedIntent.class, cci -> handleConnectionClosedIntent(cci));
 	}
-	
-	@Override
-	public void onIntentReceived(Intent i) {
-		if (i instanceof NotifyPlayersPacketIntent)
-			onNotifyPlayersPacketIntent((NotifyPlayersPacketIntent) i);
-		else if (i instanceof ConnectionOpenedIntent)
-			onConnectionOpenedIntent((ConnectionOpenedIntent) i);
-		else if (i instanceof ConnectionClosedIntent)
-			onConnectionClosedIntent((ConnectionClosedIntent) i);
-	}
-	
+
 	public boolean playerExists(String name) {
 		return zoneService.characterExistsForName(name);
 	}
@@ -206,7 +195,7 @@ public class PlayerManager extends Manager {
 		return players.get(networkId);
 	}
 	
-	private void onNotifyPlayersPacketIntent(NotifyPlayersPacketIntent nppi) {
+	private void handleNotifyPlayersPacketIntent(NotifyPlayersPacketIntent nppi) {
 		if (nppi.getNetworkIds() != null) {
 			if (nppi.getTerrain() != null)
 				notifyPlayersAtPlanet(nppi.getNetworkIds(), nppi.getCondition(), nppi.getTerrain(), nppi.getPacket());
@@ -226,7 +215,7 @@ public class PlayerManager extends Manager {
 		}
 	}
 	
-	private void onConnectionOpenedIntent(ConnectionOpenedIntent coi) {
+	private void handleConnectionOpenedIntent(ConnectionOpenedIntent coi) {
 		Player p = new Player(this, coi.getNetworkId());
 		p.setGalaxyName(CoreManager.getGalaxy().getName());
 		Assert.isNull(players.put(coi.getNetworkId(), p));
@@ -234,7 +223,7 @@ public class PlayerManager extends Manager {
 		new PlayerEventIntent(p, PlayerEvent.PE_CONNECTED).broadcast();
 	}
 	
-	private void onConnectionClosedIntent(ConnectionClosedIntent cci) {
+	private void handleConnectionClosedIntent(ConnectionClosedIntent cci) {
 		Player p = players.remove(cci.getNetworkId());
 		Assert.notNull(p);
 		p.setPlayerState(PlayerState.DISCONNECTED);

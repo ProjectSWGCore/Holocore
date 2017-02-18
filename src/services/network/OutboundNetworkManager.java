@@ -28,10 +28,8 @@
 package services.network;
 
 import intents.network.OutboundPacketIntent;
-
 import network.NetworkClient;
 import resources.control.Assert;
-import resources.control.Intent;
 import resources.control.Service;
 import resources.network.TCPServer;
 
@@ -40,21 +38,17 @@ public class OutboundNetworkManager extends Service {
 	private final ClientManager clientManager;
 	private final PacketSender sender;
 	
-	public OutboundNetworkManager(TCPServer server, ClientManager clientManager) {
-		this.sender = new PacketSender(server);
+	public OutboundNetworkManager(TCPServer tcpServer, ClientManager clientManager) {
+		this.sender = new PacketSender(tcpServer);
 		this.clientManager = clientManager;
 		
-		registerForIntent(OutboundPacketIntent.TYPE);
+		registerForIntent(OutboundPacketIntent.class, opi -> handleOutboundPacketIntent(opi));
 	}
 	
-	@Override
-	public void onIntentReceived(Intent i) {
-		if (i instanceof OutboundPacketIntent) {
-			OutboundPacketIntent opi = (OutboundPacketIntent) i;
-			NetworkClient client = clientManager.getClient(opi.getNetworkId());
-			Assert.notNull(client);
-			client.addToOutbound(opi.getPacket());
-		}
+	private void handleOutboundPacketIntent(OutboundPacketIntent opi){
+		NetworkClient client = clientManager.getClient(opi.getNetworkId());
+		Assert.notNull(client);
+		client.addToOutbound(opi.getPacket());
 	}
 	
 	public void onSessionCreated(NetworkClient client) {

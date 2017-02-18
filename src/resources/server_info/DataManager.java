@@ -66,8 +66,11 @@ public class DataManager implements IntentReceiver {
 			Log.start();
 		initialized = localDatabase.isOnline();
 		
-		if (!localDatabase.isTable("users") || !localDatabase.isTable("characters")) {
-			throw new CoreException("The database is missing a table!");
+		String[] datatables = {"users", "characters"};
+		
+		for (int i = 0; i < datatables.length - 1; i++) {
+			if (!localDatabase.isTable(datatables[i]))
+				throw new CoreException("The database is missing the table: " + datatables[i]);
 		}
 	}
 	
