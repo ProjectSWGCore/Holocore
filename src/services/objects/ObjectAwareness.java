@@ -254,7 +254,7 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 	private void handleCmdSceneReady(Player player, CmdSceneReady p) {
 		Assert.test(player.getPlayerState() == PlayerState.ZONING_IN);
 		player.setPlayerState(PlayerState.ZONED_IN);
-		Log.i("ZoneService", "%s with character %s zoned in from %s:%d", player.getUsername(), player.getCharacterName(), p.getAddress(), p.getPort());
+		Log.i("ZoneService", "%s with character %s zoned in from %s", player.getUsername(), player.getCharacterName(), p.getSocketAddress());
 		new PlayerEventIntent(player, PlayerEvent.PE_ZONE_IN_SERVER).broadcast();
 		player.sendPacket(new CmdSceneReady());
 	}

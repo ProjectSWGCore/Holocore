@@ -97,9 +97,9 @@ public class CommandService extends Service {
 		cooldownMap = new HashMap<>();
 		executorService = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("command-service"));
 		
-		registerForIntent(GalacticPacketIntent.TYPE);
-		registerForIntent(PlayerEventIntent.TYPE);
-		registerForIntent(PlayerTransformedIntent.TYPE);
+		registerForIntent(GalacticPacketIntent.class, gpi -> handleGalacticPacketIntent(gpi));
+		registerForIntent(PlayerEventIntent.class, pei -> handlePlayerEventIntent(pei));
+		registerForIntent(PlayerTransformedIntent.class, pti -> handlePlayerTransformedIntent(pti));
 	}
 	
 	@Override
@@ -119,17 +119,7 @@ public class CommandService extends Service {
 		return super.terminate();
 	}
 	
-	@Override
-	public void onIntentReceived(Intent i) {
-		switch(i.getType()) {
-			case GalacticPacketIntent.TYPE: handleGalacticPacketIntent((GalacticPacketIntent) i); break;
-			case PlayerEventIntent.TYPE: handlePlayerEventIntent((PlayerEventIntent) i); break;
-			case PlayerTransformedIntent.TYPE: handlePlayerTransformedIntent((PlayerTransformedIntent) i); break;
-		}
-	}
-	
-	private void handleGalacticPacketIntent(GalacticPacketIntent i) {
-		GalacticPacketIntent gpi = (GalacticPacketIntent) i;
+	private void handleGalacticPacketIntent(GalacticPacketIntent gpi) {
 		Packet p = gpi.getPacket();
 		if (p instanceof CommandQueueEnqueue) {
 			CommandQueueEnqueue controller = (CommandQueueEnqueue) p;
@@ -137,20 +127,20 @@ public class CommandService extends Service {
 		}
 	}
 	
-	private void handlePlayerEventIntent(PlayerEventIntent i) {
-		switch(i.getEvent()) {
+	private void handlePlayerEventIntent(PlayerEventIntent pei) {
+		switch(pei.getEvent()) {
 			case PE_LOGGED_OUT:
 				// No reason to keep their combat queue in the map if they log out
 				// This also prevents queued commands from executing after the player logs out
-				combatQueueMap.remove(i.getPlayer());
+				combatQueueMap.remove(pei.getPlayer());
 				break;
 			default:
 				break;
 		}
 	}
 	
-	private void handlePlayerTransformedIntent(PlayerTransformedIntent i) {
-		CreatureObject creature = i.getPlayer();
+	private void handlePlayerTransformedIntent(PlayerTransformedIntent pti) {
+		CreatureObject creature = pti.getPlayer();
 
 		if (creature.isPerforming()) {
 			// A performer can transform while dancing...

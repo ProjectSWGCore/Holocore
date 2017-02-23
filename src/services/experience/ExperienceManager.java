@@ -27,18 +27,18 @@
 ***********************************************************************************/
 package services.experience;
 
-import intents.experience.ExperienceIntent;
-import intents.experience.LevelChangedIntent;
 import java.awt.Color;
 import java.util.HashMap;
 import java.util.Map;
+
+import intents.experience.ExperienceIntent;
+import intents.experience.LevelChangedIntent;
 import network.packets.swg.zone.object_controller.ShowFlyText;
 import network.packets.swg.zone.object_controller.ShowFlyText.Scale;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
 import resources.common.RGB;
 import resources.config.ConfigFile;
-import resources.control.Intent;
 import resources.control.Manager;
 import resources.encodables.OutOfBandPackage;
 import resources.encodables.ProsePackage;
@@ -65,7 +65,7 @@ public final class ExperienceManager extends Manager {
 		levelXpMap = new HashMap<>();
 		xpMultiplier = getConfig(ConfigFile.FEATURES).getDouble("XP-MULTIPLIER", 1);
 		
-		registerForIntent(ExperienceIntent.TYPE);
+		registerForIntent(ExperienceIntent.class, ei -> handleExperienceIntent(ei));
 		
 		addChildService(skillManager);
 		addChildService(skillTemplateService);
@@ -85,21 +85,11 @@ public final class ExperienceManager extends Manager {
 		return super.initialize();
 	}
 	
-	@Override
-	public void onIntentReceived(Intent i) {
-		switch(i.getType()) {
-			case ExperienceIntent.TYPE:
-				if (i instanceof ExperienceIntent)
-					handleExperienceGainedIntent((ExperienceIntent) i);
-			break;
-		}
-	}
-	
-	private void handleExperienceGainedIntent(ExperienceIntent i) {
-		CreatureObject creatureObject = i.getCreatureObject();
+	private void handleExperienceIntent(ExperienceIntent ei) {
+		CreatureObject creatureObject = ei.getCreatureObject();
 		PlayerObject playerObject = creatureObject.getPlayerObject();
 		if (playerObject != null) {
-			int newXpTotal = awardExperience(creatureObject, playerObject, i.getXpType(), i.getExperienceGained());
+			int newXpTotal = awardExperience(creatureObject, playerObject, ei.getXpType(), ei.getExperienceGained());
 			
 			// At this point, we check if their level should be adjusted.
 			short oldLevel = creatureObject.getLevel();

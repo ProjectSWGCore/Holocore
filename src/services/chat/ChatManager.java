@@ -27,24 +27,29 @@
 ***********************************************************************************/
 package services.chat;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Locale;
+
 import intents.NotifyPlayersPacketIntent;
 import intents.PlayerEventIntent;
 import intents.chat.ChatAvatarRequestIntent;
 import intents.chat.ChatBroadcastIntent;
-import intents.chat.PersistentMessageIntent;
 import intents.chat.SpatialChatIntent;
 import intents.network.GalacticPacketIntent;
-import intents.server.ServerStatusIntent;
 import network.packets.Packet;
 import network.packets.swg.SWGPacket;
-import network.packets.swg.zone.chat.*;
+import network.packets.swg.zone.chat.ChatFriendsListUpdate;
+import network.packets.swg.zone.chat.ChatInstantMessageToCharacter;
+import network.packets.swg.zone.chat.ChatInstantMessageToClient;
+import network.packets.swg.zone.chat.ChatOnSendInstantMessage;
+import network.packets.swg.zone.chat.ChatSystemMessage;
 import network.packets.swg.zone.chat.ChatSystemMessage.SystemChatType;
 import network.packets.swg.zone.object_controller.SpatialChat;
 import resources.Terrain;
 import resources.chat.ChatAvatar;
 import resources.chat.ChatResult;
 import resources.collections.SWGList;
-import resources.control.Intent;
 import resources.control.Manager;
 import resources.encodables.OutOfBandPackage;
 import resources.encodables.ProsePackage;
@@ -57,10 +62,6 @@ import resources.server_info.RelationalServerData;
 import resources.server_info.RelationalServerFactory;
 import services.CoreManager;
 import services.player.PlayerManager;
-
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.Locale;
 
 public class ChatManager extends Manager {
 
@@ -78,61 +79,34 @@ public class ChatManager extends Manager {
 		addChildService(roomService);
 		addChildService(mailService);
 		
-		registerForIntent(GalacticPacketIntent.TYPE);
-		registerForIntent(SpatialChatIntent.TYPE);
-		registerForIntent(PersistentMessageIntent.TYPE);
-		registerForIntent(PlayerEventIntent.TYPE);
-		registerForIntent(ChatBroadcastIntent.TYPE);
-		registerForIntent(ServerStatusIntent.TYPE);
-		registerForIntent(ChatAvatarRequestIntent.TYPE);
+		registerForIntent(GalacticPacketIntent.class, gpi -> handleGalacticPacketIntent(gpi));
+		registerForIntent(SpatialChatIntent.class, spi -> handleSpatialChatIntent(spi));
+		registerForIntent(PlayerEventIntent.class, pei -> handlePlayerEventIntent(pei));
+		registerForIntent(ChatBroadcastIntent.class, cbi -> handleChatBroadcastIntent(cbi));
+		registerForIntent(ChatAvatarRequestIntent.class, cari -> handleChatAvatarRequestIntent(cari));
 	}
 	
-	public void onIntentReceived(Intent i) {
-		switch (i.getType()) {
-			case GalacticPacketIntent.TYPE:
-				if (i instanceof GalacticPacketIntent)
-					processPacket((GalacticPacketIntent) i);
-				break;
-			case SpatialChatIntent.TYPE:
-				if (i instanceof SpatialChatIntent)
-					handleSpatialChat((SpatialChatIntent) i);
-				break;
-			case PlayerEventIntent.TYPE:
-				if (i instanceof PlayerEventIntent)
-					handlePlayerEventIntent((PlayerEventIntent) i);
-				break;
-			case ChatBroadcastIntent.TYPE:
-				if (i instanceof ChatBroadcastIntent)
-					handleChatBroadcast((ChatBroadcastIntent) i);
-				break;
-			case ChatAvatarRequestIntent.TYPE:
-				if (i instanceof ChatAvatarRequestIntent)
-					handleChatAvatarStatusRequestIntent((ChatAvatarRequestIntent) i);
-				break;
-		}
-	}
-
-	private void processPacket(GalacticPacketIntent intent) {
-		Packet p = intent.getPacket();
+	private void handleGalacticPacketIntent(GalacticPacketIntent gpi) {
+		Packet p = gpi.getPacket();
 		if (!(p instanceof SWGPacket))
 			return;
 		SWGPacket swg = (SWGPacket) p;
 		switch (swg.getPacketType()) {
 			case CHAT_INSTANT_MESSAGE_TO_CHARACTER:
 				if (p instanceof ChatInstantMessageToCharacter)
-					handleInstantMessage(intent.getPlayerManager(), intent.getPlayer(), (ChatInstantMessageToCharacter) p);
+					handleInstantMessage(gpi.getPlayerManager(), gpi.getPlayer(), (ChatInstantMessageToCharacter) p);
 				break;
 			default:
 				break;
 		}
 	}
 
-	private void handlePlayerEventIntent(PlayerEventIntent intent) {
-		Player player = intent.getPlayer();
+	private void handlePlayerEventIntent(PlayerEventIntent pei) {
+		Player player = pei.getPlayer();
 		if (player == null)
 			return;
 
-		switch (intent.getEvent()) {
+		switch (pei.getEvent()) {
 			case PE_FIRST_ZONE:
 				updateChatAvatarStatus(player, true);
 				break;
@@ -145,51 +119,51 @@ public class ChatManager extends Manager {
 		}
 	}
 
-	private void handleChatBroadcast(ChatBroadcastIntent i) {
-		switch(i.getBroadcastType()) {
+	private void handleChatBroadcastIntent(ChatBroadcastIntent cbi) {
+		switch(cbi.getBroadcastType()) {
 			case AREA:
-				broadcastAreaMessage(i.getMessage(), i.getBroadcaster());
-				logChat(i.getBroadcaster(), ChatType.SYSTEM, ChatRange.LOCAL, i.getMessage());
+				broadcastAreaMessage(cbi.getMessage(), cbi.getBroadcaster());
+				logChat(cbi.getBroadcaster(), ChatType.SYSTEM, ChatRange.LOCAL, cbi.getMessage());
 				break;
 			case PLANET:
-				broadcastPlanetMessage(i.getMessage(), i.getTerrain());
-				logChat(i.getBroadcaster(), ChatType.SYSTEM, ChatRange.TERRAIN, i.getMessage());
+				broadcastPlanetMessage(cbi.getMessage(), cbi.getTerrain());
+				logChat(cbi.getBroadcaster(), ChatType.SYSTEM, ChatRange.TERRAIN, cbi.getMessage());
 				break;
 			case GALAXY:
-				broadcastGalaxyMessage(i.getMessage());
-				logChat(i.getBroadcaster(), ChatType.SYSTEM, ChatRange.GALAXY, i.getMessage());
+				broadcastGalaxyMessage(cbi.getMessage());
+				logChat(cbi.getBroadcaster(), ChatType.SYSTEM, ChatRange.GALAXY, cbi.getMessage());
 				break;
 			case PERSONAL:
-				broadcastPersonalMessage(i.getProse(), i.getBroadcaster(), i.getMessage());
-				logChat(i.getBroadcaster(), ChatType.SYSTEM, ChatRange.PERSONAL, i.getMessage());
+				broadcastPersonalMessage(cbi.getProse(), cbi.getBroadcaster(), cbi.getMessage());
+				logChat(cbi.getBroadcaster(), ChatType.SYSTEM, ChatRange.PERSONAL, cbi.getMessage());
 				break;
 		}
 	}
 
-	private void handleChatAvatarStatusRequestIntent(ChatAvatarRequestIntent i) {
-		switch (i.getRequestType()) {
+	private void handleChatAvatarRequestIntent(ChatAvatarRequestIntent cari) {
+		switch (cari.getRequestType()) {
 			case TARGET_STATUS: {
-				Player player = i.getPlayer();
-				sendTargetAvatarStatus(player, new ChatAvatar(0, i.getTarget(), CoreManager.getGalaxy().getName()));
+				Player player = cari.getPlayer();
+				sendTargetAvatarStatus(player, new ChatAvatar(0, cari.getTarget(), CoreManager.getGalaxy().getName()));
 				break;
 			}
 			case FRIEND_ADD_TARGET:
-				handleAddFriend(i.getPlayer(), i.getTarget());
+				handleAddFriend(cari.getPlayer(), cari.getTarget());
 				break;
 			case FRIEND_REMOVE_TARGET:
-				handleRemoveFriend(i.getPlayer(), i.getTarget());
+				handleRemoveFriend(cari.getPlayer(), cari.getTarget());
 				break;
 			case FRIEND_LIST:
-				handleRequestFriendList(i.getPlayer());
+				handleRequestFriendList(cari.getPlayer());
 				break;
 			case IGNORE_REMOVE_TARGET:
-				handleRemoveIgnored(i.getPlayer(), i.getTarget());
+				handleRemoveIgnored(cari.getPlayer(), cari.getTarget());
 				break;
 			case IGNORE_ADD_TARGET:
-				handleAddIgnored(i.getPlayer(), i.getTarget());
+				handleAddIgnored(cari.getPlayer(), cari.getTarget());
 				break;
 			case IGNORE_LIST:
-				handleRequestIgnoreList(i.getPlayer());
+				handleRequestIgnoreList(cari.getPlayer());
 				break;
 		}
 	}
@@ -305,14 +279,14 @@ public class ChatManager extends Manager {
 		new ChatBroadcastIntent(player, new ProsePackage("StringId", stringId, "TT", target)).broadcast();
 	}
 
-	private void handleSpatialChat(SpatialChatIntent i) {
-		Player sender = i.getPlayer();
+	private void handleSpatialChatIntent(SpatialChatIntent spi) {
+		Player sender = spi.getPlayer();
 		SWGObject actor = sender.getCreatureObject();
 		
 		// Send to self
-		SpatialChat message = new SpatialChat(actor.getObjectId(), actor.getObjectId(), 0, i.getMessage(), (short) i.getChatType(), (short) i.getMoodId());
+		SpatialChat message = new SpatialChat(actor.getObjectId(), actor.getObjectId(), 0, spi.getMessage(), (short) spi.getChatType(), (short) spi.getMoodId());
 		sender.sendPacket(message);
-		logChat(sender, ChatType.SPATIAL, ChatRange.LOCAL, i.getMessage());
+		logChat(sender, ChatType.SPATIAL, ChatRange.LOCAL, spi.getMessage());
 
 		String senderName = ChatAvatar.getFromPlayer(sender).getName();
 

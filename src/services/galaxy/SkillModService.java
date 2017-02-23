@@ -28,25 +28,13 @@
 package services.galaxy;
 
 import intents.SkillModIntent;
-import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.creature.CreatureObject;
 
 public class SkillModService extends Service {
 
 	public SkillModService() {
-		registerForIntent(SkillModIntent.TYPE);
-	}
-
-	@Override
-	public void onIntentReceived(Intent i) {
-		switch (i.getType()) {
-			case SkillModIntent.TYPE:
-				if (i instanceof SkillModIntent) {
-					handleSkillModIntent((SkillModIntent) i);
-				}
-				break;
-		}
+		registerForIntent(SkillModIntent.class, smi -> handleSkillModIntent(smi));
 	}
 
 	private void handleSkillModIntent(SkillModIntent smi) {
@@ -58,5 +46,4 @@ public class SkillModService extends Service {
 			creature.adjustSkillmod(skillModName, adjustBase, adjustModifier);
 		}
 	}
-
 }

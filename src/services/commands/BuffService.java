@@ -27,28 +27,27 @@
 ***********************************************************************************/
 package services.commands;
 
+import java.io.FileNotFoundException;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Optional;
+import java.util.Set;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 import intents.BuffIntent;
 import intents.PlayerEventIntent;
 import intents.SkillModIntent;
 import intents.combat.CreatureKilledIntent;
-import java.io.FileNotFoundException;
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Map.Entry;
-import java.util.Optional;
-import java.util.Set;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.stream.Collectors;
 import network.packets.swg.zone.PlayClientEffectObjectMessage;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
 import resources.common.CRC;
-import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.creature.Buff;
 import resources.objects.creature.CreatureObject;
@@ -67,8 +66,9 @@ public class BuffService extends Service {
 	private final Map<CRC, BuffData> dataMap;	// All CRCs are lower-cased buff names!
 	
 	public BuffService() {
-		registerForIntent(BuffIntent.TYPE);
-		registerForIntent(PlayerEventIntent.TYPE);
+		registerForIntent(BuffIntent.class, bi -> handleBuffIntent(bi));
+		registerForIntent(PlayerEventIntent.class, pei -> handlePlayerEventIntent(pei));
+		registerForIntent(CreatureKilledIntent.class, cki -> handleCreatureKilledIntent(cki));
 		
 		monitored = new HashSet<>();
 		dataMap = new HashMap<>();
@@ -89,15 +89,6 @@ public class BuffService extends Service {
 		executor.scheduleAtFixedRate(() -> checkBuffTimers(), 1, 1, TimeUnit.SECONDS);
 
 		return super.start();
-	}
-	
-	@Override
-	public void onIntentReceived(Intent i) {
-		switch(i.getType()) {
-			case BuffIntent.TYPE: handleBuffIntent((BuffIntent) i); break;
-			case PlayerEventIntent.TYPE: handlePlayerEventIntent((PlayerEventIntent) i); break;
-			case CreatureKilledIntent.TYPE: handleCreatureKilledIntent((CreatureKilledIntent) i); break;
-		}
 	}
 	
 	@Override
@@ -170,13 +161,13 @@ public class BuffService extends Service {
 		} 
 	}
 	
-	private void handleBuffIntent(BuffIntent i) {
-		CRC buffCrc = new CRC(i.getBuffName().toLowerCase(Locale.ENGLISH));
+	private void handleBuffIntent(BuffIntent bi) {
+		CRC buffCrc = new CRC(bi.getBuffName().toLowerCase(Locale.ENGLISH));
 		
-		if (i.isRemove()) {
-			removeBuff(i.getReceiver(), buffCrc, false);
+		if (bi.isRemove()) {
+			removeBuff(bi.getReceiver(), buffCrc, false);
 		} else {
-			addBuff(buffCrc, i.getReceiver(), i.getBuffer());
+			addBuff(buffCrc, bi.getReceiver(), bi.getBuffer());
 		}
 	}
 	
@@ -199,15 +190,15 @@ public class BuffService extends Service {
 		}
 	}
 	
-	private void handleCreatureKilledIntent(CreatureKilledIntent i) {
-		CreatureObject corpse = i.getCorpse();
+	private void handleCreatureKilledIntent(CreatureKilledIntent cki) {
+		CreatureObject corpse = cki.getCorpse();
 		
 		synchronized (monitored) {
 			if (!monitored.contains(corpse)) {
 				return;
 			}
 			
-			if (i.getKiller().isPlayer()) {
+			if (cki.getKiller().isPlayer()) {
 				// PvP death - decay durations of certain buffs
 				corpse.getBuffEntries(buffEntry -> isBuffDecayable(buffEntry))
 						.forEach(buffEntry -> decayDuration(corpse, buffEntry));

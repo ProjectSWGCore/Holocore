@@ -27,11 +27,6 @@
  ***********************************************************************************/
 package services.galaxy.terminals;
 
-import intents.radial.RadialRegisterIntent;
-import intents.radial.RadialRequestIntent;
-import intents.radial.RadialResponseIntent;
-import intents.radial.RadialSelectionIntent;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -40,7 +35,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import resources.control.Intent;
+import intents.radial.RadialRegisterIntent;
+import intents.radial.RadialRequestIntent;
+import intents.radial.RadialResponseIntent;
+import intents.radial.RadialSelectionIntent;
 import resources.control.Service;
 import resources.radial.RadialOption;
 import resources.radial.Radials;
@@ -67,8 +65,8 @@ public class TerminalService extends Service {
 		getAllTemplatesStatement = iffDatabase.prepareStatement(GET_ALL_TEMPLATES_SQL);
 		getScriptForIffStatement = iffDatabase.prepareStatement(GET_SCRIPT_FOR_IFF_SQL);
 		
-		registerForIntent(RadialRequestIntent.TYPE);
-		registerForIntent(RadialSelectionIntent.TYPE);
+		registerForIntent(RadialRequestIntent.class, rri -> handleRadialRequestIntent(rri));
+		registerForIntent(RadialSelectionIntent.class, rsi -> handleRadialSelectionIntent(rsi));
 	}
 	
 	@Override
@@ -99,30 +97,20 @@ public class TerminalService extends Service {
 		return super.stop();
 	}
 	
-	@Override
-	public void onIntentReceived(Intent i) {
-		switch (i.getType()) {
-			case RadialRequestIntent.TYPE:
-				if (i instanceof RadialRequestIntent) {
-					RadialRequestIntent rri = (RadialRequestIntent) i;
-					String script = lookupScript(rri.getTarget().getTemplate());
-					if (script == null)
-						return;
-					List<RadialOption> options = new ArrayList<RadialOption>(rri.getRequest().getOptions());
-					options.addAll(Radials.getRadialOptions(script, rri.getPlayer(), rri.getTarget()));
-					new RadialResponseIntent(rri.getPlayer(), rri.getTarget(), options, rri.getRequest().getCounter()).broadcast();
-				}
-				break;
-			case RadialSelectionIntent.TYPE:
-				if (i instanceof RadialSelectionIntent) {
-					RadialSelectionIntent rsi = (RadialSelectionIntent) i;
-					String script = lookupScript(rsi.getTarget().getTemplate());
-					if (script == null)
-						return;
-					Radials.handleSelection(script, rsi.getPlayer(), rsi.getTarget(), rsi.getSelection());
-				}
-				break;
-		}
+	private void handleRadialRequestIntent(RadialRequestIntent rri){
+		String script = lookupScript(rri.getTarget().getTemplate());
+		if (script == null)
+			return;
+		List<RadialOption> options = new ArrayList<RadialOption>(rri.getRequest().getOptions());
+		options.addAll(Radials.getRadialOptions(script, rri.getPlayer(), rri.getTarget()));
+		new RadialResponseIntent(rri.getPlayer(), rri.getTarget(), options, rri.getRequest().getCounter()).broadcast();
+	}
+	
+	private void handleRadialSelectionIntent(RadialSelectionIntent rsi){
+		String script = lookupScript(rsi.getTarget().getTemplate());
+		if (script == null)
+			return;
+		Radials.handleSelection(script, rsi.getPlayer(), rsi.getTarget(), rsi.getSelection());
 	}
 	
 	private String lookupScript(String iff) {

@@ -60,8 +60,10 @@ public class DeveloperService extends Service {
 	}
 	
 	private void setupCharacterBuilders() {
+		spawnObject("object/tangible/terminal/shared_terminal_character_builder.iff", new Location(-3989, 124, -10, Terrain.DATHOMIR), TangibleObject.class);
 		spawnObject("object/tangible/terminal/shared_terminal_character_builder.iff", new Location(-5786, 510, -6554, Terrain.DATHOMIR), TangibleObject.class);
 		spawnObject("object/tangible/terminal/shared_terminal_character_builder.iff", new Location(-4683, 13, 4326, Terrain.ENDOR), TangibleObject.class);
+		spawnObject("object/tangible/terminal/shared_terminal_character_builder.iff", new Location(3331, 105, -4912, Terrain.LOK), TangibleObject.class);
 		spawnObject("object/tangible/terminal/shared_terminal_character_builder.iff", new Location(-6439, 41, -3265, Terrain.NABOO), TangibleObject.class);
 		spawnObject("object/tangible/terminal/shared_terminal_character_builder.iff", new Location(-3941, 60, 6318, Terrain.TATOOINE), TangibleObject.class);
 		spawnObject("object/tangible/terminal/shared_terminal_character_builder.iff", new Location(7380, 123, 4298, Terrain.TATOOINE), TangibleObject.class);

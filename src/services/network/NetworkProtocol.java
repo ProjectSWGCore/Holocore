@@ -45,7 +45,7 @@ public class NetworkProtocol {
 		ByteBuffer encoded = p.encode();
 		encoded.position(0);
 		int decompressedLength = encoded.remaining();
-		boolean compressed = decompressedLength >= 50;
+		boolean compressed = false;
 		if (compressed) {
 			ByteBuffer compress = compress(encoded);
 			compressed = compress != encoded;

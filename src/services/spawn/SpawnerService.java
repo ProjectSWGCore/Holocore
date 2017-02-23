@@ -29,24 +29,23 @@ package services.spawn;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import intents.object.DestroyObjectIntent;
-import intents.object.ObjectCreatedIntent;
-import intents.server.ConfigChangedIntent;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+
+import intents.object.DestroyObjectIntent;
+import intents.object.ObjectCreatedIntent;
+import intents.server.ConfigChangedIntent;
 import resources.Location;
 import resources.PvpFlag;
 import resources.Terrain;
 import resources.config.ConfigFile;
 import resources.containers.ContainerPermissionsType;
-import resources.control.Intent;
 import resources.control.Service;
-import resources.objects.building.BuildingObject;
 import resources.objects.SWGObject;
+import resources.objects.building.BuildingObject;
 import resources.objects.creature.CreatureDifficulty;
 import resources.objects.creature.CreatureObject;
 import resources.objects.custom.AIBehavior;
@@ -55,8 +54,8 @@ import resources.objects.tangible.OptionFlag;
 import resources.server_info.Log;
 import resources.server_info.RelationalDatabase;
 import resources.server_info.RelationalServerFactory;
-import resources.spawn.SpawnerType;
 import resources.spawn.Spawner;
+import resources.spawn.SpawnerType;
 import services.objects.ObjectCreator;
 import services.objects.ObjectManager;
 import utilities.ThreadUtilities;
@@ -82,8 +81,8 @@ public final class SpawnerService extends Service {
 		executorService = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("spawner-service"));
 		spawnerMap = new HashMap<>();
 		
-		registerForIntent(ConfigChangedIntent.TYPE);
-		registerForIntent(DestroyObjectIntent.TYPE);
+		registerForIntent(ConfigChangedIntent.class, cci -> handleConfigChangedIntent(cci));
+		registerForIntent(DestroyObjectIntent.class, doi -> handleDestroyObjectIntent(doi));
 	}
 	
 	@Override
@@ -95,26 +94,18 @@ public final class SpawnerService extends Service {
 	}
 	
 	@Override
-	public void onIntentReceived(Intent i) {
-		switch(i.getType()) {
-			case ConfigChangedIntent.TYPE: handleConfigChangedIntent((ConfigChangedIntent) i); break;
-			case DestroyObjectIntent.TYPE: handleDestroyObjectIntent((DestroyObjectIntent) i); break;
-		}
-	}
-
-	@Override
 	public boolean terminate() {
 		executorService.shutdown();
 		
 		return super.terminate();
 	}
 	
-	private void handleConfigChangedIntent(ConfigChangedIntent i) {
+	private void handleConfigChangedIntent(ConfigChangedIntent cci) {
 		String newValue, oldValue;
 		
-		if (i.getChangedConfig().equals(ConfigFile.FEATURES) && i.getKey().equals("SPAWN-EGGS-ENABLED")) {
-			newValue = i.getNewValue();
-			oldValue = i.getOldValue();
+		if (cci.getChangedConfig().equals(ConfigFile.FEATURES) && cci.getKey().equals("SPAWN-EGGS-ENABLED")) {
+			newValue = cci.getNewValue();
+			oldValue = cci.getOldValue();
 
 			if (!newValue.equals(oldValue)) {
 				if (Boolean.valueOf(newValue) && spawnerMap.isEmpty()) { // If nothing's been spawned, create it.
@@ -126,8 +117,8 @@ public final class SpawnerService extends Service {
 		}
 	}
 	
-	private void handleDestroyObjectIntent(DestroyObjectIntent i) {
-		SWGObject destroyedObject = i.getObject();
+	private void handleDestroyObjectIntent(DestroyObjectIntent doi) {
+		SWGObject destroyedObject = doi.getObject();
 		
 		if(destroyedObject instanceof DefaultAIObject) {
 			DefaultAIObject killedAIObject = (DefaultAIObject) destroyedObject;

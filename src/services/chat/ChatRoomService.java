@@ -114,9 +114,9 @@ public class ChatRoomService extends Service {
 		insertChatLog = chatLogs.prepareStatement("INSERT INTO chat_log VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 		maxChatRoomId = 1;
 		
-		registerForIntent(ChatRoomUpdateIntent.TYPE);
-		registerForIntent(GalacticPacketIntent.TYPE);
-		registerForIntent(PlayerEventIntent.TYPE);
+		registerForIntent(ChatRoomUpdateIntent.class, crui -> handleChatRoomUpdateIntent(crui));
+		registerForIntent(GalacticPacketIntent.class, gpi -> handleGalacticPacketIntent(gpi));
+		registerForIntent(PlayerEventIntent.class, pei -> handlePlayerEventIntent(pei));
 	}
 
 	@Override
@@ -138,28 +138,10 @@ public class ChatRoomService extends Service {
 		return super.terminate();
 	}
 
-	@Override
-	public void onIntentReceived(Intent i) {
-		switch(i.getType()) {
-			case ChatRoomUpdateIntent.TYPE:
-				if (i instanceof ChatRoomUpdateIntent)
-					processChatRoomUpdateIntent((ChatRoomUpdateIntent) i);
-				break;
-			case GalacticPacketIntent.TYPE:
-				if (i instanceof GalacticPacketIntent)
-					processPacket((GalacticPacketIntent) i);
-				break;
-			case PlayerEventIntent.TYPE:
-				if (i instanceof PlayerEventIntent)
-					handlePlayerEventIntent((PlayerEventIntent) i);
-				break;
-		}
-	}
-
-	private void processPacket(GalacticPacketIntent intent) {
-		Packet p = intent.getPacket();
+	private void handleGalacticPacketIntent(GalacticPacketIntent gpi) {
+		Packet p = gpi.getPacket();
 		if (p instanceof SWGPacket)
-			processSwgPacket(intent.getPlayer(), (SWGPacket) p);
+			processSwgPacket(gpi.getPlayer(), (SWGPacket) p);
 	}
 
 	private void processSwgPacket(Player player, SWGPacket p) {
@@ -212,12 +194,12 @@ public class ChatRoomService extends Service {
 		}
 	}
 	
-	private void handlePlayerEventIntent(PlayerEventIntent intent) {
-		Player player = intent.getPlayer();
+	private void handlePlayerEventIntent(PlayerEventIntent pei) {
+		Player player = pei.getPlayer();
 		if (player == null)
 			return;
 
-		switch (intent.getEvent()) {
+		switch (pei.getEvent()) {
 			case PE_ZONE_IN_SERVER:
 				enterPlanetaryChatChannels(player);
 				break;
@@ -230,13 +212,13 @@ public class ChatRoomService extends Service {
 		}
 	}
 
-	private void processChatRoomUpdateIntent(ChatRoomUpdateIntent i) {
-		switch(i.getUpdateType()) {
-			case CREATE: createRoom(i.getAvatar(), i.isPublic(), i.getPath(), i.getTitle()); break;
-			case DESTROY: notifyDestroyRoom(i.getAvatar(), i.getPath(), 0); break;
-			case JOIN: enterChatChannel(i.getPlayer(), i.getPath(), i.isIgnoreInvitation()); break;
-			case LEAVE: leaveChatChannel(i.getPlayer(), i.getPath()); break;
-			case SEND_MESSAGE: sendMessageToRoom(i.getPlayer(), getRoom(i.getPath()), 0, i.getMessage(), new OutOfBandPackage());  break;
+	private void handleChatRoomUpdateIntent(ChatRoomUpdateIntent crui) {
+		switch(crui.getUpdateType()) {
+			case CREATE: createRoom(crui.getAvatar(), crui.isPublic(), crui.getPath(), crui.getTitle()); break;
+			case DESTROY: notifyDestroyRoom(crui.getAvatar(), crui.getPath(), 0); break;
+			case JOIN: enterChatChannel(crui.getPlayer(), crui.getPath(), crui.isIgnoreInvitation()); break;
+			case LEAVE: leaveChatChannel(crui.getPlayer(), crui.getPath()); break;
+			case SEND_MESSAGE: sendMessageToRoom(crui.getPlayer(), getRoom(crui.getPath()), 0, crui.getMessage(), new OutOfBandPackage());  break;
 			default: break;
 		}
 	}

@@ -34,7 +34,6 @@ import intents.network.ConnectionOpenedIntent;
 import intents.network.GalacticPacketIntent;
 import intents.network.InboundPacketIntent;
 import resources.control.Assert;
-import resources.control.Intent;
 import resources.control.Manager;
 import resources.player.Player;
 import resources.server_info.SynchronizedMap;
@@ -76,9 +75,9 @@ public class GalacticManager extends Manager {
 		addChildService(developerService);
 		addChildService(uniformBox);
 		
-		registerForIntent(InboundPacketIntent.TYPE);
-		registerForIntent(ConnectionOpenedIntent.TYPE);
-		registerForIntent(ConnectionClosedIntent.TYPE);
+		registerForIntent(InboundPacketIntent.class, ipi -> handleInboundPacketIntent(ipi));
+		registerForIntent(ConnectionOpenedIntent.class, coi -> handleConnectionOpenedIntent(coi));
+		registerForIntent(ConnectionClosedIntent.class, cci -> handleConnectionClosedIntent(cci));
 	}
 	
 	@Override
@@ -87,21 +86,22 @@ public class GalacticManager extends Manager {
 		return super.initialize();
 	}
 	
-	@Override
-	public void onIntentReceived(Intent i) {
-		if (i instanceof InboundPacketIntent) {
-			Player player = playerManager.getPlayerFromNetworkId(((InboundPacketIntent) i).getNetworkId());
-			Assert.notNull(player);
-			GalacticPacketIntent g = new GalacticPacketIntent(((InboundPacketIntent) i).getPacket(), player);
-			g.setGalacticManager(this);
-			prevIntentMap.get(player.getNetworkId()).broadcastAfter(g);
-		} else if (i instanceof ConnectionClosedIntent) {
-			prevIntentMap.remove(((ConnectionClosedIntent) i).getNetworkId()).reset();
-		} else if (i instanceof ConnectionOpenedIntent) {
-			IntentChain chain = new IntentChain();
-			chain.waitUntilComplete(i);
-			prevIntentMap.put(((ConnectionOpenedIntent) i).getNetworkId(), chain);
-		}
+	private void handleInboundPacketIntent(InboundPacketIntent ipi){
+		Player player = playerManager.getPlayerFromNetworkId(((InboundPacketIntent) ipi).getNetworkId());
+		Assert.notNull(player);
+		GalacticPacketIntent g = new GalacticPacketIntent(((InboundPacketIntent) ipi).getPacket(), player);
+		g.setGalacticManager(this);
+		prevIntentMap.get(player.getNetworkId()).broadcastAfter(g);
+	}
+	
+	private void handleConnectionOpenedIntent(ConnectionOpenedIntent coi){
+		IntentChain chain = new IntentChain();
+		chain.waitUntilComplete(coi);
+		prevIntentMap.put(((ConnectionOpenedIntent) coi).getNetworkId(), chain);
+	}
+	
+	private void handleConnectionClosedIntent(ConnectionClosedIntent cci){
+		prevIntentMap.remove(((ConnectionClosedIntent) cci).getNetworkId()).reset();
 	}
 	
 	public ObjectManager getObjectManager() {
