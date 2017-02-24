@@ -52,6 +52,7 @@ import resources.control.Service;
 import resources.objects.creature.Buff;
 import resources.objects.creature.CreatureObject;
 import resources.server_info.Log;
+import resources.server_info.StandardLog;
 import utilities.Scripts;
 import utilities.ThreadUtilities;
 
@@ -66,28 +67,27 @@ public class BuffService extends Service {
 	private final Map<CRC, BuffData> dataMap;	// All CRCs are lower-cased buff names!
 	
 	public BuffService() {
+		executor = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("buff-service"));
+		monitored = new HashSet<>();
+		dataMap = new HashMap<>();
+		
 		registerForIntent(BuffIntent.class, bi -> handleBuffIntent(bi));
 		registerForIntent(PlayerEventIntent.class, pei -> handlePlayerEventIntent(pei));
 		registerForIntent(CreatureKilledIntent.class, cki -> handleCreatureKilledIntent(cki));
-		
-		monitored = new HashSet<>();
-		dataMap = new HashMap<>();
-		executor = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("buff-service"));
 	}
 	
 	@Override
 	public boolean initialize() {
-		long startTime = System.nanoTime();
-		Log.i(this, "Loading buffs...");
+		long startTime = StandardLog.onStartLoad("buffs");
 		loadBuffs();
-		Log.i(this, "Finished loading %d buffs in %fms", dataMap.size(), (System.nanoTime() - startTime) / 1E6);
+		StandardLog.onEndLoad(dataMap.size(), "buffs", startTime);
 		return super.initialize();
 	}
-
+	
 	@Override
 	public boolean start() {
 		executor.scheduleAtFixedRate(() -> checkBuffTimers(), 1, 1, TimeUnit.SECONDS);
-
+		
 		return super.start();
 	}
 	
@@ -101,10 +101,7 @@ public class BuffService extends Service {
 	private void checkBuffTimers() {
 		synchronized (monitored) {
 			monitored.forEach((CreatureObject creature) -> {
-				creature.getBuffEntries(buffEntry -> isBuffExpired(buffEntry.getValue()))
-						.map(entry -> entry.getKey())
-						.collect(Collectors.toSet())
-						.forEach(buff -> removeBuff(creature, buff, true));
+				creature.getBuffEntries(buffEntry -> isBuffExpired(buffEntry.getValue())).map(entry -> entry.getKey()).collect(Collectors.toSet()).forEach(buff -> removeBuff(creature, buff, true));
 			});
 		}
 	}
@@ -134,31 +131,9 @@ public class BuffService extends Service {
 		int removeOnDeath = buffTable.getColumnFromName("REMOVE_ON_DEATH");
 		int decayOnPvpDeath = buffTable.getColumnFromName("DECAY_ON_PVP_DEATH");
 		
-		for(int row = 0; row < buffTable.getRowCount(); row++) {
-			dataMap.put(new CRC(((String) buffTable.getCell(row, 0)).toLowerCase(Locale.ENGLISH)), new BuffData(
-					(String) buffTable.getCell(row, group1),
-					(int) buffTable.getCell(row, priority),
-					(int) buffTable.getCell(row, maxStacks),
-					(String) buffTable.getCell(row, effect1Param),
-					(float) buffTable.getCell(row, effect1Value),
-					(String) buffTable.getCell(row, effect2Param),
-					(float) buffTable.getCell(row, effect2Value),
-					(String) buffTable.getCell(row, effect3Param),
-					(float) buffTable.getCell(row, effect3Value),
-					(String) buffTable.getCell(row, effect4Param),
-					(float) buffTable.getCell(row, effect4Value),
-					(String) buffTable.getCell(row, effect5Param),
-					(float) buffTable.getCell(row, effect5Value),
-					(float) buffTable.getCell(row, duration),
-					(String) buffTable.getCell(row, particle),
-					(String) buffTable.getCell(row, particleHardpoint),
-					(String) buffTable.getCell(row, stanceParticle),
-					(String) buffTable.getCell(row, callback),
-					(int) buffTable.getCell(row, persistent) == 1,
-					(int) buffTable.getCell(row, removeOnDeath) == 1,
-					(int) buffTable.getCell(row, decayOnPvpDeath) == 1
-			));
-		} 
+		for (int row = 0; row < buffTable.getRowCount(); row++) {
+			dataMap.put(new CRC(((String) buffTable.getCell(row, 0)).toLowerCase(Locale.ENGLISH)), new BuffData((String) buffTable.getCell(row, group1), (int) buffTable.getCell(row, priority), (int) buffTable.getCell(row, maxStacks), (String) buffTable.getCell(row, effect1Param), (float) buffTable.getCell(row, effect1Value), (String) buffTable.getCell(row, effect2Param), (float) buffTable.getCell(row, effect2Value), (String) buffTable.getCell(row, effect3Param), (float) buffTable.getCell(row, effect3Value), (String) buffTable.getCell(row, effect4Param), (float) buffTable.getCell(row, effect4Value), (String) buffTable.getCell(row, effect5Param), (float) buffTable.getCell(row, effect5Value), (float) buffTable.getCell(row, duration), (String) buffTable.getCell(row, particle), (String) buffTable.getCell(row, particleHardpoint), (String) buffTable.getCell(row, stanceParticle), (String) buffTable.getCell(row, callback), (int) buffTable.getCell(row, persistent) == 1, (int) buffTable.getCell(row, removeOnDeath) == 1, (int) buffTable.getCell(row, decayOnPvpDeath) == 1));
+		}
 	}
 	
 	private void handleBuffIntent(BuffIntent bi) {
@@ -174,9 +149,13 @@ public class BuffService extends Service {
 	private void handlePlayerEventIntent(PlayerEventIntent pei) {
 		CreatureObject creature = pei.getPlayer().getCreatureObject();
 		
-		switch(pei.getEvent()) {
-			case PE_FIRST_ZONE: handleFirstZone(creature); break;
-			case PE_DISAPPEAR: handleDisappear(creature); break;	
+		switch (pei.getEvent()) {
+			case PE_FIRST_ZONE:
+				handleFirstZone(creature);
+				break;
+			case PE_DISAPPEAR:
+				handleDisappear(creature);
+				break;
 			default:
 				break;
 		}
@@ -200,14 +179,10 @@ public class BuffService extends Service {
 			
 			if (cki.getKiller().isPlayer()) {
 				// PvP death - decay durations of certain buffs
-				corpse.getBuffEntries(buffEntry -> isBuffDecayable(buffEntry))
-						.forEach(buffEntry -> decayDuration(corpse, buffEntry));
+				corpse.getBuffEntries(buffEntry -> isBuffDecayable(buffEntry)).forEach(buffEntry -> decayDuration(corpse, buffEntry));
 			} else {
 				// PvE death - remove certain buffs
-				corpse.getBuffEntries(buffEntry -> isBuffRemovedOnDeath(buffEntry.getKey()))
-					.map(entry -> entry.getKey())
-					.collect(Collectors.toSet())
-					.forEach(buff -> removeBuff(corpse, buff, true));
+				corpse.getBuffEntries(buffEntry -> isBuffRemovedOnDeath(buffEntry.getKey())).map(entry -> entry.getKey()).collect(Collectors.toSet()).forEach(buff -> removeBuff(corpse, buff, true));
 			}
 		}
 	}
@@ -216,22 +191,17 @@ public class BuffService extends Service {
 		synchronized (monitored) {
 			if (monitored.remove(creature)) {
 				// Buffs that aren't persistable should be removed at this point
-				creature.getBuffEntries(buffEntry -> !isBuffPersistent(buffEntry.getKey()))
-						.map(entry -> entry.getKey())
-						.collect(Collectors.toSet())
-						.forEach(buff -> removeBuff(creature, buff, true));
+				creature.getBuffEntries(buffEntry -> !isBuffPersistent(buffEntry.getKey())).map(entry -> entry.getKey()).collect(Collectors.toSet()).forEach(buff -> removeBuff(creature, buff, true));
 			}
 		}
 	}
 	
 	private boolean isBuffExpired(Buff buff) {
-		return buff.getDuration() >= 0 &&
-				System.currentTimeMillis() / 1000 >= buff.getEndTime();
+		return buff.getDuration() >= 0 && System.currentTimeMillis() / 1000 >= buff.getEndTime();
 	}
 	
 	private boolean isBuffDecayable(Entry<CRC, Buff> buffEntry) {
-		return !isBuffExpired(buffEntry.getValue()) &&
-				dataMap.get(buffEntry.getKey()).isDecayOnPvpDeath();
+		return !isBuffExpired(buffEntry.getValue()) && dataMap.get(buffEntry.getKey()).isDecayOnPvpDeath();
 	}
 	
 	private boolean isBuffPersistent(CRC crc) {
@@ -247,8 +217,7 @@ public class BuffService extends Service {
 	}
 	
 	private boolean isBuffed(CreatureObject creature) {
-		return creature.getBuffEntries(buffEntry -> !isBuffInfinite(dataMap.get(buffEntry.getKey())))
-				.count() > 0;
+		return creature.getBuffEntries(buffEntry -> !isBuffInfinite(dataMap.get(buffEntry.getKey()))).count() > 0;
 	}
 	
 	private void decayDuration(CreatureObject creature, Entry<CRC, Buff> buffEntry) {
@@ -309,16 +278,16 @@ public class BuffService extends Service {
 			applyBuff(receiver, receiver, buffData, playTime, crc);
 			return;
 		}
-
+		
 		int currentStacks = buffEntry.getValue().getStackCount();
-
+		
 		if (stackMod + currentStacks > maxStackCount) {
 			stackMod = maxStackCount;
 		}
-
+		
 		receiver.adjustBuffStackCount(crc, stackMod);
 		checkSkillMods(buffData, receiver, stackMod);
-
+		
 		// If the stack count was incremented, also renew the duration
 		if (stackMod > 0) {
 			receiver.setBuffDuration(crc, playTime, (int) buffData.getDefaultDuration());
@@ -330,7 +299,7 @@ public class BuffService extends Service {
 		int stackCount = 1;
 		int buffDuration = (int) buffData.getDefaultDuration();
 		Buff buff = new Buff(playTime + buffDuration, buffData.getEffect1Value(), buffDuration, buffer.getObjectId(), stackCount);
-
+		
 		checkSkillMods(buffData, receiver, 1);
 		receiver.addBuff(crc, buff);
 		
@@ -390,13 +359,13 @@ public class BuffService extends Service {
 	
 	private void checkCallback(CRC crc, BuffData buffData, CreatureObject creature) {
 		String callback = buffData.getCallback();
-
+		
 		if (callback.equals("none")) {
 			return;
 		}
-
+		
 		CRC callbackCrc = new CRC(callback.toLowerCase(Locale.ENGLISH));
-
+		
 		if (dataMap.containsKey(callbackCrc)) {
 			addBuff(callbackCrc, creature, creature);
 		} else {
@@ -424,15 +393,7 @@ public class BuffService extends Service {
 	}
 	
 	/**
-	 * @author Mads
-	 * Each instance of this class holds the base information
-	 * for a specific buff name.
-	 * 
-	 * Example: Instead of each {@code Buff} instance storing the max amount of
-	 * times you can stack it, a shared class stores that information.
-	 * 
-	 * With many {@code Buff} instances in play, this will result in a noticeable
-	 * memory usage reduction.
+	 * @author Mads Each instance of this class holds the base information for a specific buff name. Example: Instead of each {@code Buff} instance storing the max amount of times you can stack it, a shared class stores that information. With many {@code Buff} instances in play, this will result in a noticeable memory usage reduction.
 	 */
 	private static class BuffData {
 		
@@ -481,87 +442,87 @@ public class BuffService extends Service {
 			this.removedOnDeath = removedOnDeath;
 			this.decayOnPvpDeath = decayOnPvpDeath;
 		}
-
+		
 		public String getGroupName() {
 			return groupName;
 		}
-
+		
 		public int getGroupPriority() {
 			return groupPriority;
 		}
-
+		
 		private int getMaxStackCount() {
 			return maxStackCount;
 		}
-
+		
 		private String getEffect1Name() {
 			return effect1Name;
 		}
-
+		
 		private float getEffect1Value() {
 			return effect1Value;
 		}
-
+		
 		private String getEffect2Name() {
 			return effect2Name;
 		}
-
+		
 		private float getEffect2Value() {
 			return effect2Value;
 		}
-
+		
 		private String getEffect3Name() {
 			return effect3Name;
 		}
-
+		
 		private float getEffect3Value() {
 			return effect3Value;
 		}
-
+		
 		private String getEffect4Name() {
 			return effect4Name;
 		}
-
+		
 		private float getEffect4Value() {
 			return effect4Value;
 		}
-
+		
 		private String getEffect5Name() {
 			return effect5Name;
 		}
-
+		
 		private float getEffect5Value() {
 			return effect5Value;
 		}
-
+		
 		private float getDefaultDuration() {
 			return defaultDuration;
 		}
-
+		
 		private String getEffectFileName() {
 			return effectFileName;
 		}
-
+		
 		private String getParticleHardPoint() {
 			return particleHardPoint;
 		}
-
+		
 		public String getStanceParticle() {
 			return stanceParticle;
 		}
-
+		
 		public String getCallback() {
 			return callback;
 		}
-
+		
 		public boolean isPersistent() {
 			return persistent;
 		}
-
+		
 		public boolean isRemovedOnDeath() {
 			return removedOnDeath;
 		}
-
+		
 		public boolean isDecayOnPvpDeath() {
 			return decayOnPvpDeath;
 		}

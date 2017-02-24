@@ -59,6 +59,7 @@ import resources.server_info.CrcDatabase;
 import resources.server_info.Log;
 import resources.server_info.RelationalServerData;
 import resources.server_info.RelationalServerFactory;
+import resources.server_info.StandardLog;
 
 public class ClientBuildoutService extends Service {
 	
@@ -81,8 +82,7 @@ public class ClientBuildoutService extends Service {
 	
 	public Map<Long, SWGObject> loadClientObjects() {
 		Map<Long, SWGObject> objects;
-		long startLoad = System.nanoTime();
-		Log.i(this, "Loading client objects...");
+		long startTime = StandardLog.onStartLoad("client objects");
 		try {
 			loadAreas(getEvents());
 			if (getConfig(ConfigFile.PRIMARY).getBoolean("LOAD-OBJECTS", true))
@@ -93,8 +93,7 @@ public class ClientBuildoutService extends Service {
 			objects = new HashMap<>();
 			Log.e(this, e);
 		}
-		double loadTime = (System.nanoTime() - startLoad) / 1E6;
-		Log.i(this, "Finished loading %d client objects. Time: %fms", objects.size(), loadTime);
+		StandardLog.onEndLoad(objects.size(), "client objects", startTime);
 		return objects;
 	}
 	

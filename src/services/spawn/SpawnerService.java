@@ -54,6 +54,7 @@ import resources.objects.tangible.OptionFlag;
 import resources.server_info.Log;
 import resources.server_info.RelationalDatabase;
 import resources.server_info.RelationalServerFactory;
+import resources.server_info.StandardLog;
 import resources.spawn.Spawner;
 import resources.spawn.SpawnerType;
 import services.objects.ObjectCreator;
@@ -135,8 +136,7 @@ public final class SpawnerService extends Service {
 	}
 	
 	private void loadSpawners() {
-		Log.i(this, "Loading spawners...");
-		long start = System.nanoTime();
+		long startTime = StandardLog.onStartLoad("spawners");
 		
 		try (RelationalDatabase spawnerDatabase = RelationalServerFactory.getServerData("spawn/static.db", "static", "building/buildings", "creatures/creatures", "creatures/npc_stats")) {
 			try (ResultSet set = spawnerDatabase.executeQuery(GET_ALL_SPAWNERS_SQL)) {
@@ -151,7 +151,7 @@ public final class SpawnerService extends Service {
 			}
 		}
 		
-		Log.i(this, "Created %d spawners. Time: %fms", spawnerMap.size(), (System.nanoTime()-start) / 1E6);
+		StandardLog.onEndLoad(spawnerMap.size(), "spawners", startTime);
 	}
 	
 	private void loadSpawner(ResultSet set, Location loc) throws SQLException {

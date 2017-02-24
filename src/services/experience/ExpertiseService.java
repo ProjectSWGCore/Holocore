@@ -30,12 +30,14 @@ package services.experience;
 import intents.experience.GrantSkillIntent;
 import intents.experience.LevelChangedIntent;
 import intents.network.GalacticPacketIntent;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+
 import network.packets.Packet;
 import network.packets.swg.zone.ExpertiseRequestMessage;
 import resources.client_info.ClientFactory;
@@ -47,6 +49,7 @@ import resources.objects.player.PlayerObject;
 import resources.server_info.Log;
 import resources.server_info.RelationalDatabase;
 import resources.server_info.RelationalServerFactory;
+import resources.server_info.StandardLog;
 import resources.sui.SuiButtons;
 import resources.sui.SuiMessageBox;
 
@@ -82,8 +85,7 @@ public final class ExpertiseService extends Service {
 	}
 	
 	private void loadTrees() {
-		Log.i(this, "Loading expertise trees...");
-		long startTime = System.nanoTime();
+		long startTime = StandardLog.onStartLoad("expertise trees");
 		DatatableData expertiseTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/expertise/expertise_trees.iff", false);
 		int rowCount = expertiseTable.getRowCount();
 		
@@ -91,13 +93,11 @@ public final class ExpertiseService extends Service {
 			int treeId = (int) expertiseTable.getCell(i, 0);
 			trees.put(treeId, new HashMap<>());
 		}
-		
-		Log.i(this, "Finished loading %d expertise trees in %fms", rowCount, (System.nanoTime() - startTime) / 1E6);
+		StandardLog.onEndLoad(rowCount, "expertise trees", startTime);
 	}
 	
 	private boolean loadExpertise() {
-		Log.i(this, "Loading expertise skills...");
-		long startTime = System.nanoTime();
+		long startTime = StandardLog.onStartLoad("expertise skills");
 		DatatableData expertiseTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/expertise/expertise.iff", false);
 		int rowCount = expertiseTable.getRowCount();
 		
@@ -119,15 +119,12 @@ public final class ExpertiseService extends Service {
 			
 			expertise.put(skillName, new Expertise(requiredProfession, tier));
 		}
-		
-		Log.i(this, "Finished loading %d expertise skills in %fms", rowCount, (System.nanoTime() - startTime) / 1E6);
-		
+		StandardLog.onEndLoad(rowCount, "expertise skills", startTime);
 		return true;
 	}
 	
 	private boolean loadAbilities() {
-		Log.i(this, "Loading expertise abilities...");
-		long startTime = System.nanoTime();
+		long startTime = StandardLog.onStartLoad("expertise abilities");
 		int abilityCount = 0;
 		
 		try (RelationalDatabase abilityDatabase = RelationalServerFactory.getServerData("player/expertise_abilities.db", "expertise_abilities")) {
@@ -153,9 +150,7 @@ public final class ExpertiseService extends Service {
 				return false;
 			}
 		}
-		
-		Log.i(this, "Finished loading %d expertise abilities in %fms", abilityCount, (System.nanoTime() - startTime) / 1E6);
-		
+		StandardLog.onEndLoad(abilityCount, "expertise abilities", startTime);
 		return true;
 	}
 	

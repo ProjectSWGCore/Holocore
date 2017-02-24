@@ -31,15 +31,17 @@ import intents.BuffIntent;
 import intents.FactionIntent;
 import intents.PlayerEventIntent;
 import intents.chat.ChatBroadcastIntent;
+
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import network.packets.swg.zone.PlayClientEffectObjectMessage;
 
+import network.packets.swg.zone.PlayClientEffectObjectMessage;
 import intents.combat.CreatureKilledIntent;
 import intents.object.DestroyObjectIntent;
 import intents.object.ObjectCreatedIntent;
 import intents.object.ObjectTeleportIntent;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -49,6 +51,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.Future;
 import java.util.stream.Collectors;
+
 import resources.Location;
 import resources.Posture;
 import resources.PvpFaction;
@@ -66,6 +69,7 @@ import resources.player.Player;
 import resources.server_info.Log;
 import resources.server_info.RelationalDatabase;
 import resources.server_info.RelationalServerFactory;
+import resources.server_info.StandardLog;
 import resources.sui.SuiButtons;
 import resources.sui.SuiEvent;
 import resources.sui.SuiListBox;
@@ -110,11 +114,9 @@ public final class CorpseService extends Service {
 	}
 	
 	private void loadFacilityData() {
-		long startTime = System.nanoTime();
-		Log.i(this, "Loading cloning facility data...");
-		
+		long startTime = StandardLog.onStartLoad("cloning facility data");
 		loadRespawnData();
-		Log.i(this, "Finished loading cloning facility data for %d object templates. Time: %fms", facilityDataMap.size(), (System.nanoTime() - startTime) / 1E6);
+		StandardLog.onEndLoad(facilityDataMap.size(), "cloning facility data", startTime);
 	}
 
 	private void loadRespawnData() {

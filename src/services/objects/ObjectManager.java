@@ -53,6 +53,7 @@ import resources.player.Player;
 import resources.server_info.CachedObjectDatabase;
 import resources.server_info.Log;
 import resources.server_info.ObjectDatabase;
+import resources.server_info.StandardLog;
 import services.map.MapManager;
 import services.player.PlayerManager;
 import services.spawn.SpawnerService;
@@ -115,14 +116,12 @@ public class ObjectManager extends Manager {
 	}
 	
 	private boolean loadObjects() {
-		long startLoad = System.nanoTime();
-		Log.i("ObjectManager", "Loading objects from ObjectDatabase...");
+		long startTime = StandardLog.onStartLoad("players");
 		synchronized (database) {
 			if (!database.load() && database.fileExists())
 				return false;
 		}
-		double loadTime = (System.nanoTime() - startLoad) / 1E6;
-		Log.i("ObjectManager", "Finished loading %d objects. Time: %fms", database.size(), loadTime);
+		StandardLog.onEndLoad(database.size(), "players", startTime);
 		return true;
 	}
 	

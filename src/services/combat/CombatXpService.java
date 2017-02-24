@@ -31,10 +31,12 @@ import intents.combat.CreatureKilledIntent;
 import intents.experience.ExperienceIntent;
 import intents.object.DestroyObjectIntent;
 import intents.object.ObjectCreatedIntent;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+
 import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureDifficulty;
@@ -43,6 +45,7 @@ import resources.objects.group.GroupObject;
 import resources.server_info.Log;
 import resources.server_info.RelationalDatabase;
 import resources.server_info.RelationalServerFactory;
+import resources.server_info.StandardLog;
 
 /**
  *
@@ -75,9 +78,7 @@ public class CombatXpService extends Service {
 	}
 	
 	private void loadXpData() {
-		long start = System.nanoTime();
-		
-		Log.i(this, "Loading combat XP rates...");
+		long startTime = StandardLog.onStartLoad("combat XP rates");
 		try (RelationalDatabase npcStats = RelationalServerFactory.getServerData("creatures/npc_stats.db", "npc_stats")) {
 			try (ResultSet set = npcStats.executeQuery("SELECT * FROM npc_stats")) {
 				while (set.next()) {
@@ -87,9 +88,7 @@ public class CombatXpService extends Service {
 				Log.e(this, e);
 			}
 		}
-		
-		double time = (System.nanoTime()-start)/1E6;
-		Log.i(this, "Finished loading %d combat XP rates. Time: %fms", xpData.size(), time);
+		StandardLog.onEndLoad(xpData.size(), "combat XP rates", startTime);
 	}
 	
 	private void handleObjectCreatedIntent(ObjectCreatedIntent i) {
