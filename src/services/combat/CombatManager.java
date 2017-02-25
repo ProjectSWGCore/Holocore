@@ -308,7 +308,7 @@ public class CombatManager extends Manager {
 			new ObjectCreatedIntent(delayEgg).broadcast();
 		}
 		
-		executor.schedule(() -> delayEggLoop(delayEgg, source, target, combatCommand, 0), (long) combatCommand.getInitialDelayAttackInterval(), TimeUnit.SECONDS);
+		executor.schedule(() -> delayEggLoop(delayEgg, source, target, combatCommand, 1), (long) combatCommand.getInitialDelayAttackInterval(), TimeUnit.SECONDS);
 	}
 	
 	private void delayEggLoop(final SWGObject delayEgg, final CreatureObject source, final SWGObject target, final CombatCommand combatCommand, final int currentLoop) {
