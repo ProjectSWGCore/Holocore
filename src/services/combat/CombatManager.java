@@ -388,11 +388,9 @@ public class CombatManager extends Manager {
 			combatSpam.setInfo(info);
 			combatSpam.setAttackName(new StringId("cmd_n", command.getName()));
 			combatSpam.setWeapon(weapon.getObjectId());
-			
-			// Combat log message appears for the target and every observer
-			target.sendObserversAndSelf(combatSpam);
 
 			if (!info.isSuccess()) {	// Single target negate, like dodge or parry!
+				target.sendObserversAndSelf(combatSpam);
 				return;
 			}
 			
@@ -408,9 +406,11 @@ public class CombatManager extends Manager {
 			// TODO Critical hit roll for attacker
 			// TODO armour
 			
+			target.sendObserversAndSelf(combatSpam);
+
 			int finalDamage = info.getFinalDamage();
 			
-			action.addDefender((CreatureObject) target, true, (byte) 0, HitLocation.HIT_LOCATION_BODY, (short) finalDamage);
+			action.addDefender(target, true, (byte) 0, HitLocation.HIT_LOCATION_BODY, (short) finalDamage);
 			
 			if (target.getHealth() <= finalDamage)
 				doCreatureDeath(target, source);
