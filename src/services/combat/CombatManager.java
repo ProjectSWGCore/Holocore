@@ -28,6 +28,7 @@
 package services.combat;
 
 import java.awt.Color;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -345,13 +346,8 @@ public class CombatManager extends Manager {
 	
 	private void doCombatArea(CreatureObject source, SWGObject origin, AttackInfo info, WeaponObject weapon, CombatCommand command, boolean includeOrigin) {
 		float aoeRange = command.getConeLength();
-		Set<SWGObject> objectsToCheck = new HashSet<>(origin.getObjectsAware());
 		SWGObject originParent = origin.getParent();
-
-		if (originParent != null) {
-			// If the explosive is inside a cell, we need to check all objects inside the cell
-			objectsToCheck.addAll(originParent.getContainedObjects());
-		}
+		Collection<SWGObject> objectsToCheck = originParent == null ? origin.getObjectsAware() : originParent.getContainedObjects();
 
 		// TODO line of sight checks between the explosive and each target
 		Set<CreatureObject> targets = objectsToCheck.stream()
