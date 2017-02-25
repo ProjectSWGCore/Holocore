@@ -345,8 +345,16 @@ public class CombatManager extends Manager {
 	
 	private void doCombatArea(CreatureObject source, SWGObject origin, AttackInfo info, WeaponObject weapon, CombatCommand command, boolean includeOrigin) {
 		float aoeRange = command.getConeLength();
-		
-		Set<CreatureObject> targets = origin.getObjectsAware().stream()
+		Set<SWGObject> objectsToCheck = new HashSet<>(origin.getObjectsAware());
+		SWGObject originParent = origin.getParent();
+
+		if (originParent != null) {
+			// If the explosive is inside a cell, we need to check all objects inside the cell
+			objectsToCheck.addAll(originParent.getContainedObjects());
+		}
+
+		// TODO line of sight checks between the explosive and each target
+		Set<CreatureObject> targets = objectsToCheck.stream()
 				.filter(target -> target instanceof CreatureObject)
 				.map(target -> (CreatureObject) target)
 				.filter(creature -> source.isAttackable(creature))
