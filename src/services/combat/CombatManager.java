@@ -28,6 +28,7 @@
 package services.combat;
 
 import java.awt.Color;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -345,8 +346,11 @@ public class CombatManager extends Manager {
 	
 	private void doCombatArea(CreatureObject source, SWGObject origin, AttackInfo info, WeaponObject weapon, CombatCommand command, boolean includeOrigin) {
 		float aoeRange = command.getConeLength();
-		
-		Set<CreatureObject> targets = origin.getObjectsAware().stream()
+		SWGObject originParent = origin.getParent();
+		Collection<SWGObject> objectsToCheck = originParent == null ? origin.getObjectsAware() : originParent.getContainedObjects();
+
+		// TODO line of sight checks between the explosive and each target
+		Set<CreatureObject> targets = objectsToCheck.stream()
 				.filter(target -> target instanceof CreatureObject)
 				.map(target -> (CreatureObject) target)
 				.filter(creature -> source.isAttackable(creature))
