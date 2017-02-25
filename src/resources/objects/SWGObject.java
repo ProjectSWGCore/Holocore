@@ -255,7 +255,16 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		return true;
 	}
 	
+	/**
+	 * Adds an attribute with the given value to this object. If the attribute exists, the old value is replaced with the new.
+	 * @param attribute attribute name
+	 * @param value new value for the attribute
+	 */
 	public void addAttribute(String attribute, String value) {
+		if (attribute == null || value == null) {
+			return;
+		}
+
 		attributes.put(attribute, value);
 	}
 
