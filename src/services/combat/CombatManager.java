@@ -28,6 +28,7 @@
 package services.combat;
 
 import java.awt.Color;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -308,7 +309,7 @@ public class CombatManager extends Manager {
 			new ObjectCreatedIntent(delayEgg).broadcast();
 		}
 		
-		executor.schedule(() -> delayEggLoop(delayEgg, source, target, combatCommand, 0), (long) combatCommand.getInitialDelayAttackInterval(), TimeUnit.SECONDS);
+		executor.schedule(() -> delayEggLoop(delayEgg, source, target, combatCommand, 1), (long) combatCommand.getInitialDelayAttackInterval(), TimeUnit.SECONDS);
 	}
 	
 	private void delayEggLoop(final SWGObject delayEgg, final CreatureObject source, final SWGObject target, final CombatCommand combatCommand, final int currentLoop) {
@@ -345,8 +346,11 @@ public class CombatManager extends Manager {
 	
 	private void doCombatArea(CreatureObject source, SWGObject origin, AttackInfo info, WeaponObject weapon, CombatCommand command, boolean includeOrigin) {
 		float aoeRange = command.getConeLength();
-		
-		Set<CreatureObject> targets = origin.getObjectsAware().stream()
+		SWGObject originParent = origin.getParent();
+		Collection<SWGObject> objectsToCheck = originParent == null ? origin.getObjectsAware() : originParent.getContainedObjects();
+
+		// TODO line of sight checks between the explosive and each target
+		Set<CreatureObject> targets = objectsToCheck.stream()
 				.filter(target -> target instanceof CreatureObject)
 				.map(target -> (CreatureObject) target)
 				.filter(creature -> source.isAttackable(creature))
@@ -388,11 +392,9 @@ public class CombatManager extends Manager {
 			combatSpam.setInfo(info);
 			combatSpam.setAttackName(new StringId("cmd_n", command.getName()));
 			combatSpam.setWeapon(weapon.getObjectId());
-			
-			// Combat log message appears for the target and every observer
-			target.sendObserversAndSelf(combatSpam);
 
 			if (!info.isSuccess()) {	// Single target negate, like dodge or parry!
+				target.sendObserversAndSelf(combatSpam);
 				return;
 			}
 			
@@ -408,9 +410,11 @@ public class CombatManager extends Manager {
 			// TODO Critical hit roll for attacker
 			// TODO armour
 			
+			target.sendObserversAndSelf(combatSpam);
+
 			int finalDamage = info.getFinalDamage();
 			
-			action.addDefender((CreatureObject) target, true, (byte) 0, HitLocation.HIT_LOCATION_BODY, (short) finalDamage);
+			action.addDefender(target, true, (byte) 0, HitLocation.HIT_LOCATION_BODY, (short) finalDamage);
 			
 			if (target.getHealth() <= finalDamage)
 				doCreatureDeath(target, source);
