@@ -35,6 +35,7 @@ import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class Log {
 	
@@ -42,13 +43,13 @@ public class Log {
 	private static final Log LOG = new Log("log.txt", LogLevel.VERBOSE);
 	
 	private final File file;
+	private final AtomicReference<LogLevel> level;
 	private BufferedWriter writer;
-	private LogLevel level;
 	private boolean open;
 	
 	private Log(String filename, LogLevel level) {
 		this.file = new File(filename);
-		this.level = level;
+		this.level = new AtomicReference<>();
 		open = false;
 	}
 	
@@ -73,11 +74,23 @@ public class Log {
 	}
 	
 	private synchronized void setLevel(LogLevel level) {
-		this.level = level;
+		this.level.set(level);
 	}
 	
 	private synchronized LogLevel getLevel() {
-		return level;
+		return level.get();
+	}
+	
+	private synchronized void logRaw(LogLevel level, String logStr) {
+		if (level.compareTo(LogLevel.WARN) >= 0)
+			System.err.println(logStr);
+		else
+			System.out.println(logStr);
+		try {
+			write(logStr);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	protected static final void start() {
@@ -116,27 +129,16 @@ public class Log {
 	 * @param args the string format arguments, if specified
 	 */
 	public static final void log(LogLevel level, String str, Object ... args) {
-		synchronized (LOG) {
-			if (LOG.getLevel().compareTo(level) > 0)
-				return;
-		}
+		if (LOG.getLevel().compareTo(level) > 0)
+			return;
 		String date;
 		synchronized (LOG_FORMAT) {
 			date = LOG_FORMAT.format(System.currentTimeMillis());
 		}
-		String logStr = String.format(str, args);
-		String log = String.format("%s %c/: %s", date, level.getChar(), logStr);
-		if (level.compareTo(LogLevel.WARN) >= 0)
-			System.err.println(date + " " + level.getChar() + ": " + logStr);
+		if (args.length == 0)
+			LOG.logRaw(level, date + ' ' + level.getChar() + ": " + str);
 		else
-			System.out.println(date + " " + level.getChar() + ": " + logStr);
-		synchronized (LOG) {
-			try {
-				LOG.write(log);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+			LOG.logRaw(level, date + ' ' + level.getChar() + ": " + String.format(str, args));
 	}
 	
 	/**
@@ -229,12 +231,13 @@ public class Log {
 	}
 	
 	private static final void printException(LogLevel level, Throwable exception) {
-		synchronized (LOG) {
-			log(level, "Exception in thread\"%s\" %s: %s", Thread.currentThread().getName(), exception.getClass().getName(), exception.getMessage());
-			log(level, "Caused by: %s: %s", exception.getClass(), exception.getMessage());
-			for (StackTraceElement e : exception.getStackTrace()) {
-				log(level, "    " + e.toString());
-			}
+		String header1 = String.format("Exception in thread \"%s\" %s: %s", Thread.currentThread().getName(), exception.getClass().getName(), exception.getMessage());
+		String header2 = String.format("Caused by: %s: %s", exception.getClass().getCanonicalName(), exception.getMessage());
+		StackTraceElement [] elements = exception.getStackTrace();
+		log(level, header1);
+		log(level, header2);
+		for (StackTraceElement e : elements) {
+			log(level, "    " + e.toString());
 		}
 	}
 	
