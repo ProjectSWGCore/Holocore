@@ -79,7 +79,7 @@ public class HttpServer {
 			serverSocket = createSocket();
 			startAcceptThread(serverSocket, secure);
 		} catch (IOException e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 	}
 	
@@ -96,7 +96,7 @@ public class HttpServer {
 			try {
 				executor.awaitTermination(1, TimeUnit.SECONDS);
 			} catch (InterruptedException e) {
-				Log.e(this, e);
+				Log.e(e);
 			}
 		}
 	}
@@ -145,7 +145,7 @@ public class HttpServer {
 			try {
 				socket.close();
 			} catch (IOException e) {
-				Log.e(this, e);
+				Log.e(e);
 			}
 			synchronized (currentConnections) {
 				currentConnections.decrementAndGet();
@@ -154,7 +154,7 @@ public class HttpServer {
 	}
 	
 	private void acceptThread(ServerSocket serverSocket, boolean secure) {
-		Log.i(TAG, "Now listening over HTTP%s. Address: %s:%d", secure?"S":"", serverSocket.getInetAddress(), serverSocket.getLocalPort());
+		Log.i("Now listening over HTTP%s. Address: %s:%d", secure?"S":"", serverSocket.getInetAddress(), serverSocket.getLocalPort());
 		while (serverSocket.isBound() && !serverSocket.isClosed()) {
 			try {
 				Socket socket = serverSocket.accept();
@@ -177,12 +177,12 @@ public class HttpServer {
 			} catch (SocketException e) {
 				if (serverSocket.isClosed())
 					break;
-				Log.e(this, e);
+				Log.e(e);
 			} catch (Throwable t) {
 				t.printStackTrace();
 			}
 		}
-		Log.i(TAG, "No longer listening over HTTP%s!", secure?"S":"");
+		Log.i("No longer listening over HTTP%s!", secure?"S":"");
 	}
 	
 	private void socketThread(HttpSocket socket) throws IOException {

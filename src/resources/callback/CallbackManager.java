@@ -88,11 +88,11 @@ public class CallbackManager<T> extends BaseCallbackManager {
 						try {
 							call.run(callback);
 						} catch (Throwable t) {
-							Log.e(this, t);
+							Log.e(t);
 						}
 					}
 				} catch (Throwable t) {
-					Log.e(this, t);
+					Log.e(t);
 				} finally {
 					running.decrementAndGet();
 				}

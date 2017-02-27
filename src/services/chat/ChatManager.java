@@ -431,7 +431,7 @@ public class ChatManager extends Manager {
 				insertChatLog.executeUpdate();
 			}
 		} catch (SQLException e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 	}
 	

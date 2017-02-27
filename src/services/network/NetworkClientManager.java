@@ -81,9 +81,9 @@ public class NetworkClientManager extends Manager implements NetworkCallback {
 			tcpServer.bind();
 			tcpServer.setCallback(this);
 		} catch (IOException e) {
-			Log.e(this, e);
+			Log.e(e);
 			if (e instanceof BindException)
-				Log.e(this, "Failed to bind to " + getBindPort());
+				Log.e("Failed to bind to " + getBindPort());
 			return false;
 		}
 		return super.start();

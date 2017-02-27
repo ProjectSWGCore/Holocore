@@ -112,7 +112,7 @@ public class TCPServer {
 					callbackExecutor.execute(() -> callback.onConnectionDisconnect(s, sock));
 				return true;
 			} catch (IOException e) {
-				Log.e(this, e);
+				Log.e(e);
 				return false;
 			}
 		}
@@ -134,7 +134,7 @@ public class TCPServer {
 				channel.close();
 			return true;
 		} catch (IOException e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 		return false;
 	}
@@ -149,7 +149,7 @@ public class TCPServer {
 					return true;
 				}
 			} catch (IOException e) {
-				Log.e("TCPServer", "Terminated connection with %s. Error: %s", sock.toString(), e.getMessage());
+				Log.e("Terminated connection with %s. Error: %s", sock.toString(), e.getMessage());
 				disconnect(sc);
 			}
 		}
@@ -192,7 +192,7 @@ public class TCPServer {
 						selector.select();
 						processSelectionKeys(selector);
 					} catch (Exception e) {
-						Log.e(this, e);
+						Log.e(e);
 						try {
 							Thread.sleep(100);
 						} catch (InterruptedException e1) {
@@ -201,7 +201,7 @@ public class TCPServer {
 					}
 				}
 			} catch (IOException e) {
-				Log.e(this, e);
+				Log.e(e);
 			}
 		}
 		
@@ -251,7 +251,7 @@ public class TCPServer {
 			} catch (AsynchronousCloseException e) {
 				
 			} catch (IOException e) {
-				Log.a(this, e);
+				Log.a(e);
 			}
 		}
 		
@@ -279,9 +279,9 @@ public class TCPServer {
 				stop();
 			} catch (IOException e) {
 				if (e.getMessage() != null && e.getMessage().toLowerCase(Locale.US).contains("connection reset"))
-					Log.e("TCPServer", "Connection Reset with %s", s.socket().getRemoteSocketAddress());
+					Log.e("Connection Reset with %s", s.socket().getRemoteSocketAddress());
 				else {
-					Log.e("TCPServer", e);
+					Log.e(e);
 				}
 				key.cancel();
 				disconnect(s);

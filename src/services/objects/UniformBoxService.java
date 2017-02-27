@@ -98,7 +98,7 @@ public class UniformBoxService extends Service {
 						createItems(set, creature, inventory);
 				}
 			} catch (SQLException e) {
-				Log.e(this, e);
+				Log.e(e);
 			}
 		}
 	}

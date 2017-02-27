@@ -95,7 +95,7 @@ public class ExplorationBadgeService extends Service {
 					explorationLocations.get(planet).put(badgeName, new ExplorationRegion(new Point3D(x, 0, y), range));
 				}
 			}catch (SQLException e) {
-				Log.e(this, e);
+				Log.e(e);
 			}			
 		}
 	}	

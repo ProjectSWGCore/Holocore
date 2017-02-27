@@ -123,7 +123,7 @@ public abstract class Service implements IntentReceiver {
 	 */
 	@Override
 	public void onIntentReceived(Intent i) {
-		Log.w(this, "Warning: " + getClass().getSimpleName() + " did not override onIntentReceived");
+		Log.w("Warning: " + getClass().getSimpleName() + " did not override onIntentReceived");
 	}
 	
 	/**

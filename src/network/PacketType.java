@@ -251,8 +251,8 @@ public enum PacketType {
 		try {
 			return c.newInstance();
 		} catch (Exception e) {
-			Log.e("PacketType", "Packet: [%08X] %s", crc, c.getName());
-			Log.e("PacketType", e);
+			Log.e("Packet: [%08X] %s", crc, c.getName());
+			Log.e(e);
 		}
 		return null;
 	}

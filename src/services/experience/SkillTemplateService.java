@@ -107,7 +107,7 @@ public final class SkillTemplateService extends Service {
 				String[] templates = skillTemplates.get(profession);
 
 				if (templates == null) {
-					Log.w(this, "%s tried to level up to %d with invalid profession %s", creatureObject, level, profession);
+					Log.w("%s tried to level up to %d with invalid profession %s", creatureObject, level, profession);
 					return;
 				}
 				
@@ -235,7 +235,7 @@ public final class SkillTemplateService extends Service {
 					new GrantBadgeIntent(creature, "new_prof_crafting_droidengineer_master").broadcast();
 					break;
 				default:
-					Log.e(this, "%s could not be granted a mastery badge because their profession %s is unrecognised", creature, profession);
+					Log.e("%s could not be granted a mastery badge because their profession %s is unrecognised", creature, profession);
 					break;
 			}
 		}

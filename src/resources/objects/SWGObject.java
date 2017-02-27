@@ -214,7 +214,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		if (requester == null)
 			return ContainerResult.SUCCESS;
 		if (!permissions.canMove(requester, this)) {
-			Log.w("SWGObject", "No permission 'MOVE' for requestor %s with object %s", requester, this);
+			Log.w("No permission 'MOVE' for requestor %s with object %s", requester, this);
 			return ContainerResult.NO_PERMISSION;
 		}
 		if (container == null)
@@ -222,7 +222,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		
 		// Check if the requester has MOVE permissions to the destination container
 		if (!permissions.canMove(requester, container)) {
-			Log.w("SWGObject", "No permission 'MOVE' for requestor %s with container %s", requester, this);
+			Log.w("No permission 'MOVE' for requestor %s with container %s", requester, this);
 			return ContainerResult.NO_PERMISSION;
 		}
 		
@@ -230,7 +230,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		int arrangementId = container.getArrangementId(this);
 		if (arrangementId == -1) {
 			if (container.getMaxContainerSize() <= container.getContainedObjects().size() && container.getMaxContainerSize() > 0) {
-				Log.w("SWGObject", "Unable to add object to container! Container Full. Max Size: %d", container.getMaxContainerSize());
+				Log.w("Unable to add object to container! Container Full. Max Size: %d", container.getMaxContainerSize());
 				return ContainerResult.CONTAINER_FULL;
 			}
 		}
@@ -521,7 +521,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	public int getMaxContainerSize() {
 		Object maxContents = dataAttributes.get(ObjectDataAttribute.CONTAINER_VOLUME_LIMIT);
 		if (maxContents == null) {
-			Log.w("SWGObject", "Volume is null!");
+			Log.w("Volume is null!");
 			return 0;
 		}
 		return (Integer) maxContents;

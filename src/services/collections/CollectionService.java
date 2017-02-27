@@ -70,7 +70,7 @@ public class CollectionService extends Service {
 			createClickyDatabaseConnection();
 			createConsumeDatabaseConnection();
 		} catch (SQLException e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 
 		getClickyCollectionItemsStatement = clickyDatabase.prepareStatement(GET_CLICKY_DETAILS_SQL);
@@ -114,7 +114,7 @@ public class CollectionService extends Service {
 				}
 			}
 		} catch (SQLException ex) {
-			Log.e(this, ex);
+			Log.e(ex);
 		}
 
 		//clickyDatabase.close();
@@ -129,7 +129,7 @@ public class CollectionService extends Service {
 				}
 			}
 		} catch (SQLException ex) {
-			Log.e(this, ex);
+			Log.e(ex);
 		}
 
 		//consumeDatabase.close();
@@ -149,7 +149,7 @@ public class CollectionService extends Service {
 		try {
 			createConsumeDatabaseConnection();
 		} catch (SQLException e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 
 		try {
@@ -162,7 +162,7 @@ public class CollectionService extends Service {
 				}
 			}
 		} catch (SQLException e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 
 		return collection;
@@ -175,7 +175,7 @@ public class CollectionService extends Service {
 		try {
 			createClickyDatabaseConnection();
 		} catch (SQLException e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 
 		try {
@@ -190,7 +190,7 @@ public class CollectionService extends Service {
 			}
 
 		} catch (SQLException e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 
 		return collection;

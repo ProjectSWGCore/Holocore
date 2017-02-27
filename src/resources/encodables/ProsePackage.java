@@ -114,13 +114,13 @@ public class ProsePackage implements OutOfBandData {
 		case "DI":
 			if (prose instanceof Integer)
 				setDI((Integer) prose);
-			else { Log.w("ProsePackage", "DI can only be a Integer!"); }
+			else { Log.w("DI can only be a Integer!"); }
 			break;
 			
 		case "DF":
 			if (prose instanceof Float)
 				setDF((Float) prose);
-			else { Log.w("ProsePackage", "DF can only be a Float!"); }
+			else { Log.w("DF can only be a Float!"); }
 			break;
 			
 		default: break;
@@ -132,8 +132,8 @@ public class ProsePackage implements OutOfBandData {
 		if (prose instanceof StringId) { base = (StringId) prose; }
 		else if (prose instanceof String) {
 			if (((String) prose).startsWith("@")) { base = new StringId((String) prose); }
-			else { Log.w("ProsePackage", "The base STF cannot be a custom string!"); }
-		} else { Log.w("ProsePackage", "The base STF must be either a Stf or a String! Received class: " + prose.getClass().getName()); }
+			else { Log.w("The base STF cannot be a custom string!"); }
+		} else { Log.w("The base STF must be either a Stf or a String! Received class: " + prose.getClass().getName()); }
 	}
 	
 	public void setTU(Object prose) {
@@ -149,7 +149,7 @@ public class ProsePackage implements OutOfBandData {
 		else if (prose instanceof BigInteger)
 			actor.setObjectId(((BigInteger) prose).longValue());
 		else
-			Log.w("ProsePackage", "Proses can only be Strings or Longs! Received class: " + prose.getClass().getName());
+			Log.w("Proses can only be Strings or Longs! Received class: " + prose.getClass().getName());
 	}
 	
 	public void setTT(Object prose) {
@@ -165,7 +165,7 @@ public class ProsePackage implements OutOfBandData {
 		else if (prose instanceof BigInteger)
 			target.setObjectId(((BigInteger) prose).longValue());
 		else
-			Log.w("ProsePackage", "Proses can only be Strings or Longs! Received class: " + prose.getClass().getName());
+			Log.w("Proses can only be Strings or Longs! Received class: " + prose.getClass().getName());
 	}
 	
 	public void setTO(Object prose) {
@@ -181,7 +181,7 @@ public class ProsePackage implements OutOfBandData {
 		else if (prose instanceof BigInteger)
 			other.setObjectId(((BigInteger) prose).longValue());
 		else
-			Log.w("ProsePackage", "Proses can only be Strings or Longs! Received class: " + prose.getClass().getName());
+			Log.w("Proses can only be Strings or Longs! Received class: " + prose.getClass().getName());
 	}
 	
 	public void setDI(Integer prose) {

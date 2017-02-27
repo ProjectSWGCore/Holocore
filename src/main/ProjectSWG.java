@@ -52,15 +52,15 @@ public class ProjectSWG {
 		try {
 			server.run();
 		} catch (CoreException e) {
-			Log.e("CoreManager", "Shutting down. Reason: " + e.getMessage());
-			Log.e("CoreManager", e);
+			Log.e("Shutting down. Reason: " + e.getMessage());
+			Log.e(e);
 		} catch (Exception e) {
-			Log.e("CoreManager", "Shutting down - unknown error.");
-			Log.e("CoreManager", e);
+			Log.e("Shutting down - unknown error.");
+			Log.e(e);
 		}
 		server.stop();
 		server.terminate();
-		Log.i("CoreManager", "Server shut down.");
+		Log.i("Server shut down.");
 	}
 	
 	/**
@@ -89,7 +89,7 @@ public class ProjectSWG {
 		long start = System.nanoTime();
 		manager = new CoreManager();
 		long end = System.nanoTime();
-		Log.i(manager, "Created new manager in %.3fms", (end-start)/1E6);
+		Log.i("Created new manager in %.3fms", (end-start)/1E6);
 		while (!shutdownRequested && !manager.isShutdownRequested()) {
 			initialize();
 			start();
@@ -100,7 +100,7 @@ public class ProjectSWG {
 				start = System.nanoTime();
 				manager = new CoreManager();
 				end = System.nanoTime();
-				Log.i(manager, "Created new manager in %.3fms", (end-start)/1E6);
+				Log.i("Created new manager in %.3fms", (end-start)/1E6);
 			}
 		}
 	}
@@ -118,17 +118,17 @@ public class ProjectSWG {
 	
 	private void initialize() {
 		setStatus(ServerStatus.INITIALIZING);
-		Log.i(manager, "Initializing...");
+		Log.i("Initializing...");
 		if (!manager.initialize())
 			throw new CoreException("Failed to initialize.");
-		Log.i(manager, "Initialized. Time: %.3fms", manager.getCoreTime());
+		Log.i("Initialized. Time: %.3fms", manager.getCoreTime());
 	}
 	
 	private void start() {
-		Log.i(manager, "Starting...");
+		Log.i("Starting...");
 		if (!manager.start())
 			throw new CoreException("Failed to start.");
-		Log.i(manager, "Started. Time: %.3fms", manager.getCoreTime());
+		Log.i("Started. Time: %.3fms", manager.getCoreTime());
 	}
 	
 	private void loop() {
@@ -145,32 +145,32 @@ public class ProjectSWG {
 	private void stop() {
 		if (manager == null || status == ServerStatus.OFFLINE)
 			return;
-		Log.i(manager, "Stopping...");
+		Log.i("Stopping...");
 		setStatus(ServerStatus.STOPPING);
 		if (!manager.stop()) {
-			Log.e(manager, "Failed to stop.");
+			Log.e("Failed to stop.");
 		}
 		long intentWait = System.nanoTime();
 		while (IntentManager.getIntentsQueued() > 0 && System.nanoTime()-intentWait < 3E9) {
 			try {
 				Thread.sleep(10);
 			} catch (InterruptedException e) {
-				Log.e(manager, "Failed to stop! Interrupted with %d intents remaining", IntentManager.getIntentsQueued());
+				Log.e("Failed to stop! Interrupted with %d intents remaining", IntentManager.getIntentsQueued());
 				break;
 			}
 		}
-		Log.i(manager, "Stopped. Time: %.3fms", manager.getCoreTime());
+		Log.i("Stopped. Time: %.3fms", manager.getCoreTime());
 	}
 	
 	private void terminate() {
 		if (manager == null || status == ServerStatus.OFFLINE)
 			return;
-		Log.i(manager, "Terminating...");
+		Log.i("Terminating...");
 		setStatus(ServerStatus.TERMINATING);
 		if (!manager.terminate())
 			throw new CoreException("Failed to terminate.");
 		setStatus(ServerStatus.OFFLINE);
-		Log.i(manager, "Terminated. Time: %.3fms", manager.getCoreTime());
+		Log.i("Terminated. Time: %.3fms", manager.getCoreTime());
 	}
 	
 	public static class CoreException extends RuntimeException {

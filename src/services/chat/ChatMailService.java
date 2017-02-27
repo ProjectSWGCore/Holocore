@@ -273,7 +273,7 @@ public class ChatMailService extends Service {
 				insertChatLog.executeUpdate();
 			}
 		} catch (SQLException e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 	}
 

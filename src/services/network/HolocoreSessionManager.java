@@ -127,7 +127,7 @@ public class HolocoreSessionManager {
 			if (callback != null)
 				callback.onSessionStatusChanged(oldStatus, newStatus);
 		} catch (Exception e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 	}
 	

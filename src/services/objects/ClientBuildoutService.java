@@ -91,7 +91,7 @@ public class ClientBuildoutService extends Service {
 				objects = new HashMap<>();
 		} catch (SQLException e) {
 			objects = new HashMap<>();
-			Log.e(this, e);
+			Log.e(e);
 		}
 		StandardLog.onEndLoad(objects.size(), "client objects", startTime);
 		return objects;
@@ -109,7 +109,7 @@ public class ClientBuildoutService extends Service {
 			}
 			return loadObjects(areaId);
 		} catch (SQLException e) {
-			Log.e(this, e);
+			Log.e(e);
 			return new HashMap<>();
 		}
 	}
@@ -171,7 +171,7 @@ public class ClientBuildoutService extends Service {
 			checkParent(buildouts, obj, set.getString("building_name"), set.getInt("cell_id"));
 			buildouts.put(obj.getObjectId(), obj);
 		} catch (NullPointerException e) {
-			Log.e(this, "File: %s", set.getString("template"));
+			Log.e("File: %s", set.getString("template"));
 		}
 	}
 	
@@ -181,7 +181,7 @@ public class ClientBuildoutService extends Service {
 				statement.setString(1, buildingName);
 				try (ResultSet set = statement.executeQuery()) {
 					if (!set.next()) {
-						Log.e(this, "Unknown building name: %s", buildingName);
+						Log.e("Unknown building name: %s", buildingName);
 						return;
 					}
 					long buildingId = set.getLong("object_id");
@@ -189,16 +189,16 @@ public class ClientBuildoutService extends Service {
 						return;
 					SWGObject buildingUncasted = objects.get(buildingId);
 					if (buildingUncasted == null) {
-						Log.e(this, "Building not found in map: %s / %d", buildingName, buildingId);
+						Log.e("Building not found in map: %s / %d", buildingName, buildingId);
 						return;
 					}
 					if (!(buildingUncasted instanceof BuildingObject)) {
-						Log.e(this, "Building is not an instance of BuildingObject: %s", buildingName);
+						Log.e("Building is not an instance of BuildingObject: %s", buildingName);
 						return;
 					}
 					CellObject cell = ((BuildingObject) buildingUncasted).getCellByNumber(cellId);
 					if (cell == null) {
-						Log.e(this, "Cell is not found! Building: %s Cell: %d", buildingName, cellId);
+						Log.e("Cell is not found! Building: %s Cell: %d", buildingName, cellId);
 						return;
 					}
 					obj.moveToContainer(cell);

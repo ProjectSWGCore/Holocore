@@ -79,7 +79,7 @@ public final class StaticItemService extends Service {
 			if (!loadStaticItems())
 				return false;
 		} else {
-			Log.i(this, "Static items have been disabled - none have been loaded");
+			Log.i("Static items have been disabled - none have been loaded");
 		}
 		return super.initialize();
 	}
@@ -111,7 +111,7 @@ public final class StaticItemService extends Service {
 					String type = resultSet.getString("type");
 					ObjectAttributes objectAttributes = createObjectAttributes(type, itemName, resultSet.getString("iff_template"));
 					if (objectAttributes == null) {
-						Log.e(this, "Item %s was not loaded because the specified type %s is unknown", itemName, type);
+						Log.e("Item %s was not loaded because the specified type %s is unknown", itemName, type);
 						continue;
 					}
 					
@@ -126,11 +126,11 @@ public final class StaticItemService extends Service {
 							objectAttributesMap.put(itemName, objectAttributes);
 						}
 					} catch (SQLException ex) {
-						Log.e(this, "Failed loading %s type attributes for item %s. Exception: %s", type, itemName, ex.getLocalizedMessage());
+						Log.e("Failed loading %s type attributes for item %s. Exception: %s", type, itemName, ex.getLocalizedMessage());
 					}
 				}
 			} catch (SQLException ex) {
-				Log.e(this, ex);
+				Log.e(ex);
 			}
 		}
 		
@@ -158,7 +158,7 @@ public final class StaticItemService extends Service {
 
 	private void unloadStaticItems() {
 		objectAttributesMap.clear();    // Clear the cache.
-		Log.i(this, "Static items have been disabled");
+		Log.i("Static items have been disabled");
 	}
 
 	private void handleCreateStaticItemIntent(CreateStaticItemIntent csii) {
@@ -192,7 +192,7 @@ public final class StaticItemService extends Service {
 						
 						switch(object.moveToContainer(container)) {	// Server-generated object is added to the container
 							case SUCCESS:
-								Log.i(this, "Successfully moved %s into container %s", itemName, container);
+								Log.i("Successfully moved %s into container %s", itemName, container);
 								createdObjects[j] = object;
 								break;
 							default:
@@ -201,18 +201,18 @@ public final class StaticItemService extends Service {
 						new ObjectCreatedIntent(object).broadcast();
 						
 					} else {
-						Log.w(this, "%s could not be loaded because IFF template %s is invalid", itemName, iffTemplate);
+						Log.w("%s could not be loaded because IFF template %s is invalid", itemName, iffTemplate);
 					}
 				} else {
 					String errorMessage = String.format("%s could not be spawned because the item name is unknown", itemName);
-					Log.e(this, errorMessage);
+					Log.e(errorMessage);
 					new ChatBroadcastIntent(requesterOwner, errorMessage).broadcast();
 				}
 			}
 			
 			objectCreationHandler.success(createdObjects);
 		} else {
-			Log.w(this, "No item names were specified in CreateStaticItemIntent - no objects were spawned into container %s", container);
+			Log.w("No item names were specified in CreateStaticItemIntent - no objects were spawned into container %s", container);
 		}
 	}
 
@@ -511,7 +511,7 @@ public final class StaticItemService extends Service {
 				case "acid": return DamageType.ELEMENTAL_ACID;
 				case "electricity": return DamageType.ELEMENTAL_ELECTRICAL;
 				default:
-					Log.e("StaticItemService", "Unknown damage type %s", damageTypeName);
+					Log.e("Unknown damage type %s", damageTypeName);
 					return null;	// TODO Unknown DamageType... now what?
 			}
 		}
@@ -538,7 +538,7 @@ public final class StaticItemService extends Service {
 				case "DIRECTIONAL_TARGET_WEAPON": category = WeaponType.DIRECTIONAL_TARGET_WEAPON; break;
 				case "LIGHT_RIFLE": category = WeaponType.LIGHT_RIFLE; break;
 				default:
-					Log.e(this, "Unrecognised weapon type %s at row %d", weaponType, resultSet.getRow());
+					Log.e("Unrecognised weapon type %s at row %d", weaponType, resultSet.getRow());
 					// We return false here. That way, we don't store the
 					// itemName in the Map and the item can never be spawned.
 					return false;

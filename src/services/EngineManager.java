@@ -77,7 +77,7 @@ public class EngineManager extends Manager {
 		for (File f : files) {
 			if (!f.isDirectory() && (f.getName().endsWith(".db") || f.getName().endsWith(".db.tmp"))) {
 				if (!f.delete()) {
-					Log.e("EngineManager", "Failed to delete ODB: %s", f);
+					Log.e("Failed to delete ODB: %s", f);
 				}
 			}
 		}
@@ -88,7 +88,7 @@ public class EngineManager extends Manager {
 		try {
 			ServerFactory.getInstance().updateServerIffs();
 		} catch (IOException e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 	}
 }

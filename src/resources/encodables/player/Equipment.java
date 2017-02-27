@@ -162,7 +162,7 @@ public class Equipment implements Encodable, Persistable {
 		weapon.parseBaseline(b6);
 		if (weapon instanceof TangibleObject)
 			return (TangibleObject) weapon;
-		Log.e("Equipment", "Unknown Equipment Type: " + weapon.getClass().getSimpleName());
+		Log.e("Unknown Equipment Type: " + weapon.getClass().getSimpleName());
 		return null;
 	}
 	

@@ -94,12 +94,12 @@ public class CharacterCreation {
 	private CreatureObject createCreatureBuilding(String template, SpawnInformation info) {
 		SWGObject parent = objManager.getObjectById(info.buildingId);
 		if (parent == null || !(parent instanceof BuildingObject)) {
-			Log.e(this, "Invalid parent! Either null or not a building: %s  BUID: %d", parent, info.buildingId);
+			Log.e("Invalid parent! Either null or not a building: %s  BUID: %d", parent, info.buildingId);
 			return null;
 		}
 		CellObject cell = ((BuildingObject) parent).getCellByName(info.cell);
 		if (cell == null) {
-			Log.e(this, "Invalid cell! Cell does not exist: %s  B-Template: %s  BUID: %d", info.cell, parent.getTemplate(), info.buildingId);
+			Log.e("Invalid cell! Cell does not exist: %s  B-Template: %s  BUID: %d", info.cell, parent.getTemplate(), info.buildingId);
 			return null;
 		}
 		SWGObject obj = ObjectCreator.createObjectFromTemplate(template);

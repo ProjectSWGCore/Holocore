@@ -85,7 +85,7 @@ public class CombatXpService extends Service {
 					xpData.put(set.getShort("Level"), new XpData(set.getInt("XP"), set.getInt("Elite_XP"), set.getInt("Boss_XP")));
 				}
 			} catch (SQLException e) {
-				Log.e(this, e);
+				Log.e(e);
 			}
 		}
 		StandardLog.onEndLoad(xpData.size(), "combat XP rates", startTime);
@@ -106,7 +106,7 @@ public class CombatXpService extends Service {
 		
 		synchronized (groupObjects) {
 			if(object instanceof GroupObject && groupObjects.remove(object.getObjectId()) == null) {
-				Log.w(this, "%s was expected to be in the GroupObject mapping but wasn't", object);
+				Log.w("%s was expected to be in the GroupObject mapping but wasn't", object);
 			}
 		}
 	}
@@ -158,7 +158,7 @@ public class CombatXpService extends Service {
 			XpData xpForLevel = this.xpData.get(corpseLevel);
 
 			if (xpForLevel == null) {
-				Log.e(this, "%s received no XP: No XP data was found for level %d!", killer, corpseLevel);
+				Log.e("%s received no XP: No XP data was found for level %d!", killer, corpseLevel);
 				return 0;
 			}
 
@@ -172,7 +172,7 @@ public class CombatXpService extends Service {
 				case NORMAL:
 					return xpForLevel.getXp();
 				default:
-					Log.e(this, "%s received no XP: Unsupported creature difficulty %s of corpse %s", killer, creatureDifficulty, corpse);
+					Log.e("%s received no XP: Unsupported creature difficulty %s of corpse %s", killer, creatureDifficulty, corpse);
 					return 0;
 			}
 		}

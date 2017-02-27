@@ -100,7 +100,7 @@ public final class ObjectCreator {
 		try {
 			obj = c.getConstructor(Long.TYPE).newInstance(objectId);
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
-			Log.e("ObjectCreator", e);
+			Log.e(e);
 			obj = null;
 		}
 		if (obj == null)
@@ -188,7 +188,7 @@ public final class ObjectCreator {
 			case "tangible":				return new TangibleObject(objectId);
 			case "waypoint":				return new WaypointObject(objectId);
 			case "weapon":					return new WeaponObject(objectId);
-			default:						Log.e("ObjectCreator", "Unknown type: " + type); return null;
+			default:						Log.e("Unknown type: " + type); return null;
 		}
 	}
 	

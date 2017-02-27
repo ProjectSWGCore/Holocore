@@ -141,10 +141,10 @@ public class ZoneManager extends Manager {
 						commitHistory += "\n";
 				}
 			} catch (GitAPIException e) {
-				Log.e(this, e);
+				Log.e(e);
 			}
 		} catch (IOException e) {
-			Log.e(this, "Failed to open %s to read commit history", repoDir);
+			Log.e("Failed to open %s to read commit history", repoDir);
 			// An exception is thrown if bash isn't installed.
 			// https://www.eclipse.org/forums/index.php/t/1031740/
 		}
@@ -184,14 +184,14 @@ public class ZoneManager extends Manager {
 			case "yellow": waypoint.setColor(WaypointColor.YELLOW); break;
 			case "purple": waypoint.setColor(WaypointColor.PURPLE); break;
 			case "white": waypoint.setColor(WaypointColor.WHITE); break;
-			default: Log.e(this, "Don't know color %s", p.getColor()); break;
+			default: Log.e("Don't know color %s", p.getColor()); break;
 		}
 		
 		ghost.updateWaypoint(waypoint);
 	}
 	
 	private void handleClientIdMsg(Player player, ClientIdMsg clientId) {
-		Log.i("ZoneService", "%s connected to the zone server from %s", player.getUsername(), clientId.getSocketAddress());
+		Log.i("%s connected to the zone server from %s", player.getUsername(), clientId.getSocketAddress());
 		player.setPlayerServer(PlayerServer.ZONE);
 		player.sendPacket(new HeartBeat());
 		player.sendPacket(new AccountFeatureBits());

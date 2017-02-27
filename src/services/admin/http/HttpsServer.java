@@ -70,7 +70,7 @@ public class HttpsServer extends HttpServer {
 			sslServerSocketFactory = (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
 			return true;
 		} catch (Exception e) {
-			Log.e(this, e);
+			Log.e(e);
 			return false;
 		}
 	}
@@ -83,8 +83,8 @@ public class HttpsServer extends HttpServer {
 		try {
 			return sslServerSocketFactory.createServerSocket(getBindPort(), 0, getBindAddress());
 		} catch (IOException e) {
-			Log.e("HttpsServer", "Failed to start HTTPS server!");
-			Log.e("HttpsServer", e);
+			Log.e("Failed to start HTTPS server!");
+			Log.e(e);
 		}
 		return null;
 	}

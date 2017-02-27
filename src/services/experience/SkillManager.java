@@ -135,7 +135,7 @@ public final class SkillManager extends Manager {
 			grantParentSkills(skillData, parentSkillName, target);
 			grantRequiredSkills(skillData, target);
 		} else if (!target.hasSkill(parentSkillName) || !hasRequiredSkills(skillData, target)) {
-			Log.i(this, "%s lacks required skill %s before being granted skill %s", target, parentSkillName, skillName);
+			Log.i("%s lacks required skill %s before being granted skill %s", target, parentSkillName, skillName);
 			return;
 		}
 		
@@ -192,7 +192,7 @@ public final class SkillManager extends Manager {
 	private void changeRoleIcon(CreatureObject creature, int chosenIcon) {
 		Set<String> qualifyingSkills = roleIconMap.get(chosenIcon);
 		if (qualifyingSkills == null) {
-			Log.w(this, "%s tried to use undefined role icon %d", creature, chosenIcon);
+			Log.w("%s tried to use undefined role icon %d", creature, chosenIcon);
 			return;
 		}
 		Assert.notNull(creature.getPlayerObject());
@@ -203,7 +203,7 @@ public final class SkillManager extends Manager {
 				return;
 			}
 		}
-		Log.e(this, "%s could not be given role icon %d - does not have qualifying skill! Qualifying: %s", creature, chosenIcon, qualifyingSkills);
+		Log.e("%s could not be given role icon %d - does not have qualifying skill! Qualifying: %s", creature, chosenIcon, qualifyingSkills);
 	}
 	
 	private static class SkillData {

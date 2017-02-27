@@ -70,7 +70,7 @@ public class BuildoutLoader {
 			}
 		}
 		System.err.println("Could not find buildouts for terrain: " + terrain);
-		Log.e("BuildoutLoader", "Could not find buildouts for terrain: %s", terrain);
+		Log.e("Could not find buildouts for terrain: %s", terrain);
 	}
 	
 	public Map <Long, SWGObject> getObjectTable() {

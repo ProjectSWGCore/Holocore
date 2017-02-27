@@ -162,7 +162,7 @@ public class TravelGroup implements Runnable {
 		} catch (InterruptedException e) {
 			
 		} catch (Exception e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 	}
 	

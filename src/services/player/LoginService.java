@@ -110,7 +110,7 @@ public class LoginService extends Service {
 						return set.getLong("id");
 				}
 			} catch (SQLException e) {
-				Log.e(this, e);
+				Log.e(e);
 			}
 		}
 		return 0;
@@ -144,9 +144,9 @@ public class LoginService extends Service {
 		boolean success = obj != null && deleteCharacter(obj);
 		if (success) {
 			new DestroyObjectIntent(obj).broadcast();
-			Log.i(this, "Deleted character %s for user %s", ((CreatureObject)obj).getObjectName(), player.getUsername());
+			Log.i("Deleted character %s for user %s", ((CreatureObject)obj).getObjectName(), player.getUsername());
 		} else {
-			Log.e(this, "Could not delete character! Character: ID: " + request.getPlayerId() + " / " + obj);
+			Log.e("Could not delete character! Character: ID: " + request.getPlayerId() + " / " + obj);
 		}
 		player.sendPacket(new DeleteCharacterResponse(success));
 	}
@@ -181,14 +181,14 @@ public class LoginService extends Service {
 						onInvalidUserPass(player, id, null);
 				}
 			} catch (SQLException e) {
-				Log.e(this, e);
+				Log.e(e);
 				onLoginServerError(player, id);
 			}
 		}
 	}
 	
 	private void onLoginClientVersionError(Player player, LoginClientId id) {
-		Log.i(this, "%s cannot login due to invalid version code: %s, expected %s from %s", player.getUsername(), id.getVersion(), REQUIRED_VERSION, id.getSocketAddress());
+		Log.i("%s cannot login due to invalid version code: %s, expected %s from %s", player.getUsername(), id.getVersion(), REQUIRED_VERSION, id.getSocketAddress());
 		String type = "Login Failed!";
 		String message = "Invalid Client Version Code: " + id.getVersion();
 		player.sendPacket(new ErrorMessage(type, message, false));
@@ -209,7 +209,7 @@ public class LoginService extends Service {
 		}
 		player.setPlayerState(PlayerState.LOGGED_IN);
 		sendLoginSuccessPacket(player);
-		Log.i(this, "%s connected to the login server from %s", player.getUsername(), id.getSocketAddress());
+		Log.i("%s connected to the login server from %s", player.getUsername(), id.getSocketAddress());
 		new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_SUCCESS).broadcast();
 	}
 	
@@ -217,7 +217,7 @@ public class LoginService extends Service {
 		String type = "Login Failed!";
 		String message = "Sorry, you're banned!";
 		player.sendPacket(new ErrorMessage(type, message, false));
-		Log.i(this, "%s cannot login due to a ban, from %s", player.getUsername(), id.getSocketAddress());
+		Log.i("%s cannot login due to a ban, from %s", player.getUsername(), id.getSocketAddress());
 		player.setPlayerState(PlayerState.DISCONNECTED);
 		new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_FAIL_BANNED).broadcast();
 	}
@@ -227,7 +227,7 @@ public class LoginService extends Service {
 		String message = getUserPassError(set, id.getUsername(), id.getPassword());
 		player.sendPacket(new ErrorMessage(type, message, false));
 		player.sendPacket(new LoginIncorrectClientId(getServerString(), REQUIRED_VERSION));
-		Log.i(this, "%s cannot login due to invalid user/pass from %s", id.getUsername(), id.getSocketAddress());
+		Log.i("%s cannot login due to invalid user/pass from %s", id.getUsername(), id.getSocketAddress());
 		player.setPlayerState(PlayerState.DISCONNECTED);
 		new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_FAIL_INVALID_USER_PASS).broadcast();
 	}
@@ -237,7 +237,7 @@ public class LoginService extends Service {
 		String message = "Server Error.";
 		player.sendPacket(new ErrorMessage(type, message, false));
 		player.setPlayerState(PlayerState.DISCONNECTED);
-		Log.e(this, "%s cannot login due to server error, from %s", id.getUsername(), id.getSocketAddress());
+		Log.e("%s cannot login due to server error, from %s", id.getUsername(), id.getSocketAddress());
 		new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_FAIL_SERVER_ERROR).broadcast();
 	}
 	
@@ -312,7 +312,7 @@ public class LoginService extends Service {
 					}
 				}
 			} catch (SQLException e) {
-				Log.e(this, e);
+				Log.e(e);
 			}
 		}
 		return characters.toArray(new SWGCharacter[characters.size()]);
@@ -324,7 +324,7 @@ public class LoginService extends Service {
 				deleteCharacter.setLong(1, obj.getObjectId());
 				return deleteCharacter.executeUpdate() > 0;
 			} catch (SQLException e) {
-				Log.e(this, e);
+				Log.e(e);
 			}
 			return false;
 		}

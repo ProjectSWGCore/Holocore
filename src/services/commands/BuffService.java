@@ -235,7 +235,7 @@ public class BuffService extends Service {
 		BuffData buffData = dataMap.get(newCrc);
 		
 		if (buffData == null) {
-			Log.e(this, "Could not add %s to %s - unrecognised buff name", newCrc, receiver);
+			Log.e("Could not add %s to %s - unrecognised buff name", newCrc, receiver);
 			return;
 		}
 		
@@ -321,7 +321,7 @@ public class BuffService extends Service {
 		BuffData buffData = dataMap.get(buffCrc);
 		
 		if (buffData == null) {
-			Log.e(this, "Could not remove %s from %s - buff data for it does not exist", buffCrc, creature);
+			Log.e("Could not remove %s from %s - buff data for it does not exist", buffCrc, creature);
 			return;
 		}
 		
@@ -372,7 +372,7 @@ public class BuffService extends Service {
 			try {
 				Scripts.invoke("buffs/callback" + callback, callback, creature);
 			} catch (FileNotFoundException ex) {
-				Log.w(this, "Callback script %s doesn't exist - buff %s won't behave as expected", callback, crc);
+				Log.w("Callback script %s doesn't exist - buff %s won't behave as expected", callback, crc);
 			}
 		}
 	}

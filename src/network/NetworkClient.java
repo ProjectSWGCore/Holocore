@@ -126,7 +126,7 @@ public class NetworkClient {
 				
 			}
 		} catch (EOFException e) {
-			Log.e(this, "Read error: " + e.getMessage());
+			Log.e("Read error: " + e.getMessage());
 		} finally {
 			inboundSemaphore.unlock();
 		}
@@ -188,7 +188,7 @@ public class NetworkClient {
 	
 	private void sendPacket(Packet p) {
 		if (sender == null) {
-			Log.w(this, "Unable to send packet %s - sender is null!");
+			Log.w("Unable to send packet %s - sender is null!");
 			return;
 		}
 		sender.sendPacket(address, protocol.encode(p));

@@ -144,7 +144,7 @@ public class DetailedAppearanceTemplateData extends ClientData implements Render
 			if (child instanceof RenderableDataChild)
 				children.add((RenderableDataChild) child);
 			else
-				Log.e(this, "Child does not implement RenderableDataChild!");
+				Log.e("Child does not implement RenderableDataChild!");
 		}
 	}
 	

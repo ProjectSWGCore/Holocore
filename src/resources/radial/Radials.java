@@ -44,7 +44,7 @@ public class Radials {
 		try {
 			Scripts.invoke(SCRIPT_PREFIX + script, "getOptions", options, player, target, args);
 		} catch (FileNotFoundException ex) {
-			Log.w("Radials", "Couldn't retrieve radial options from %s for object %s because the script couldn't be found", SCRIPT_PREFIX + script, target);
+			Log.w("Couldn't retrieve radial options from %s for object %s because the script couldn't be found", SCRIPT_PREFIX + script, target);
 		}
 		return options;
 	}
@@ -53,7 +53,7 @@ public class Radials {
 		try {
 			Scripts.invoke(SCRIPT_PREFIX + script, "handleSelection", player, target, selection, args);
 		} catch (FileNotFoundException ex) {
-			Log.w("Radials", "Can't handle selection %s on object %s because the script couldn't be found");
+			Log.w("Can't handle selection %s on object %s because the script couldn't be found");
 		}
 	}
 	

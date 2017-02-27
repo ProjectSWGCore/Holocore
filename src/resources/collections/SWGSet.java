@@ -135,7 +135,7 @@ public class SWGSet<E> extends SynchronizedSet<E> implements Encodable {
 	private void addObjectData(E obj, byte update) {
 		byte[] encodedData = Encoder.encode(obj, strType);
 		if (encodedData == null) {
-			Log.e("SWGSet", "Tried to encode an object that could not be encoded properly. Object: " + obj);
+			Log.e("Tried to encode an object that could not be encoded properly. Object: " + obj);
 			return;
 		}
 		
@@ -149,7 +149,7 @@ public class SWGSet<E> extends SynchronizedSet<E> implements Encodable {
 	private void removeObjectData(Object obj, byte update) {
 		byte[] encodedData = Encoder.encode(obj, strType);
 		if (encodedData == null) {
-			Log.e("SWGSet", "Tried to encode an object that could not be encoded properly. Object: " + obj);
+			Log.e("Tried to encode an object that could not be encoded properly. Object: " + obj);
 			return;
 		}
 		
@@ -268,7 +268,7 @@ public class SWGSet<E> extends SynchronizedSet<E> implements Encodable {
 					add(instance);
 				}
 			} catch (InstantiationException | IllegalAccessException e) {
-				Log.e("SWGList", e);
+				Log.e(e);
 				return false;
 			}
 		} else {

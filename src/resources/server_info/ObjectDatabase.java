@@ -60,7 +60,7 @@ public abstract class ObjectDatabase<V extends Persistable> {
 		try {
 			createFilesAndDirectories();
 		} catch (IOException e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 	}
 	
@@ -71,13 +71,13 @@ public abstract class ObjectDatabase<V extends Persistable> {
 		if (parentName != null && !parentName.isEmpty()) {
 			File parent = new File(file.getParent());
 			if (!parent.exists() && !parent.mkdirs())
-				Log.e(getClass().getSimpleName(), "Failed to create parent directories for ODB: " + file.getCanonicalPath());
+				Log.e("Failed to create parent directories for ODB: " + file.getCanonicalPath());
 		}
 		try {
 			if (!file.createNewFile())
-				Log.e(getClass().getSimpleName(), "Failed to create new ODB: " + file.getCanonicalPath());
+				Log.e("Failed to create new ODB: " + file.getCanonicalPath());
 		} catch (IOException e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 	}
 	
@@ -86,7 +86,7 @@ public abstract class ObjectDatabase<V extends Persistable> {
 		try {
 			autosaveService.awaitTermination(1000, TimeUnit.MILLISECONDS);
 		} catch (InterruptedException e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 		save();
 	}

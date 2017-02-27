@@ -79,7 +79,7 @@ public class TerminalService extends Service {
 					templates.add(set.getString("iff"));
 				}
 			} catch (SQLException e) {
-				Log.e(this, e);
+				Log.e(e);
 			}
 		}
 		return super.initialize();
@@ -124,15 +124,15 @@ public class TerminalService extends Service {
 				if (set.next())
 					return set.getString("script");
 				else
-					Log.e("TerminalService", "Cannot find script for template: " + iff);
+					Log.e("Cannot find script for template: " + iff);
 			} catch (SQLException e) {
-				Log.e(this, e);
+				Log.e(e);
 			} finally {
 				if (set != null) {
 					try {
 						set.close();
 					} catch (SQLException e) {
-						Log.e(this, e);
+						Log.e(e);
 					}
 				}
 			}

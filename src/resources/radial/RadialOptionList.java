@@ -76,7 +76,7 @@ public class RadialOptionList implements Encodable {
 			Packet.getUnicode(data); // text
 			RadialItem item = RadialItem.getFromId(radialType);
 			if (item == null) {
-				Log.e("ObjectMenuRequest", "No radial item found for: %04X");
+				Log.e("No radial item found for: %04X");
 				continue;
 			}
 			option.setItem(item);
@@ -86,7 +86,7 @@ public class RadialOptionList implements Encodable {
 			} else {
 				RadialOption parentOpt = optionMap.get(parent);
 				if (parentOpt == null) {
-					Log.e("ObjectMenuRequest", "Parent not found! Parent=%d  Option=%s", parent, option);
+					Log.e("Parent not found! Parent=%d  Option=%s", parent, option);
 				} else {
 					parentOpt.addChild(option);
 				}

@@ -57,7 +57,7 @@ public abstract class Manager extends Service {
 		synchronized (children) {
 			for (Service child : children) {
 				if (!child.initialize()) {
-					Log.e(this, child.getClass().getSimpleName() + " failed to initialize!");
+					Log.e(child.getClass().getSimpleName() + " failed to initialize!");
 					success = false;
 					break;
 				}
@@ -78,7 +78,7 @@ public abstract class Manager extends Service {
 		synchronized (children) {
 			for (Service child : children) {
 				if (!child.start()) {
-					Log.e(this, child.getClass().getSimpleName() + " failed to start!");
+					Log.e(child.getClass().getSimpleName() + " failed to start!");
 					success = false;
 					break;
 				}
@@ -102,7 +102,7 @@ public abstract class Manager extends Service {
 					break;
 				cSuccess = child.stop();
 				if (!cSuccess) {
-					Log.e(this, child.getClass().getSimpleName() + " failed to stop!");
+					Log.e(child.getClass().getSimpleName() + " failed to stop!");
 					success = false;
 				}
 			}

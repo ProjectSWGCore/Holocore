@@ -93,9 +93,9 @@ public class Assert {
 	private static void warn(Exception e) {
 		StackTraceElement [] elements = e.getStackTrace();
 		if (elements.length <= 1)
-			Log.e("Assert", e);
+			Log.e(e);
 		else
-			Log.e(elements[elements.length-2].getClassName(), e);
+			Log.e(e);
 	}
 	
 	private static class AssertionException extends RuntimeException {

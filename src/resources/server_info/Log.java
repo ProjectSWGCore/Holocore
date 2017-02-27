@@ -109,13 +109,13 @@ public class Log {
 	
 	/**
 	 * Logs the string to the server log file, formatted to display the log
-	 * severity, time, tag and message.
+	 * severity, time and message.
 	 * @param level the log level of this message between VERBOSE and ASSERT
 	 * @param tag the tag to use for the log
 	 * @param str the format string for the log
 	 * @param args the string format arguments, if specified
 	 */
-	public static final void log(LogLevel level, String tag, String str, Object ... args) {
+	public static final void log(LogLevel level, String str, Object ... args) {
 		synchronized (LOG) {
 			if (LOG.getLevel().compareTo(level) > 0)
 				return;
@@ -125,7 +125,7 @@ public class Log {
 			date = LOG_FORMAT.format(System.currentTimeMillis());
 		}
 		String logStr = String.format(str, args);
-		String log = String.format("%s %c/[%s]: %s", date, level.getChar(), tag, logStr);
+		String log = String.format("%s %c/: %s", date, level.getChar(), logStr);
 		if (level.compareTo(LogLevel.WARN) >= 0)
 			System.err.println(date + " " + level.getChar() + ": " + logStr);
 		else
@@ -141,208 +141,101 @@ public class Log {
 	
 	/**
 	 * Logs the string to the server log file, formatted to display the log
-	 * severity as VERBOSE, as well as the time, tag and message.
-	 * @param tag the tag to use for the log
+	 * severity as VERBOSE, as well as the time and message.
 	 * @param message the format string for the log
 	 * @param args the string format arguments, if specified
 	 */
-	public static final void v(String tag, String message, Object ... args) {
-		log(LogLevel.VERBOSE, tag, message, args);
+	public static final void v(String message, Object ... args) {
+		log(LogLevel.VERBOSE, message, args);
 	}
 	
 	/**
 	 * Logs the string to the server log file, formatted to display the log
-	 * severity as VERBOSE, as well as the time, class name and message.
-	 * @param tag the object outputting this log info
+	 * severity as DEBUG, as well as the time and message.
 	 * @param message the format string for the log
 	 * @param args the string format arguments, if specified
 	 */
-	public static final void v(Object tag, String message, Object ... args) {
-		log(LogLevel.VERBOSE, toString(tag), message, args);
+	public static final void d(String message, Object ... args) {
+		log(LogLevel.DEBUG, message, args);
 	}
 	
 	/**
 	 * Logs the string to the server log file, formatted to display the log
-	 * severity as DEBUG, as well as the time, tag and message.
-	 * @param tag the tag to use for the log
+	 * severity as INFO, as well as the time and message.
 	 * @param message the format string for the log
 	 * @param args the string format arguments, if specified
 	 */
-	public static final void d(String tag, String message, Object ... args) {
-		log(LogLevel.DEBUG, tag, message, args);
+	public static final void i(String message, Object ... args) {
+		log(LogLevel.INFO, message, args);
 	}
 	
 	/**
 	 * Logs the string to the server log file, formatted to display the log
-	 * severity as DEBUG, as well as the time, tag and message.
-	 * @param tag the object outputting this log info
+	 * severity as WARN, as well as the time and message.
 	 * @param message the format string for the log
 	 * @param args the string format arguments, if specified
 	 */
-	public static final void d(Object tag, String message, Object ... args) {
-		log(LogLevel.DEBUG, toString(tag), message, args);
+	public static final void w(String message, Object ... args) {
+		log(LogLevel.WARN, message, args);
 	}
 	
-	/**
-	 * Logs the string to the server log file, formatted to display the log
-	 * severity as INFO, as well as the time, tag and message.
-	 * @param tag the tag to use for the log
-	 * @param message the format string for the log
-	 * @param args the string format arguments, if specified
-	 */
-	public static final void i(String tag, String message, Object ... args) {
-		log(LogLevel.INFO, tag, message, args);
-	}
-	
-	/**
-	 * Logs the string to the server log file, formatted to display the log
-	 * severity as INFO, as well as the time, class name and message.
-	 * @param tag the object outputting this log info
-	 * @param message the format string for the log
-	 * @param args the string format arguments, if specified
-	 */
-	public static final void i(Object tag, String message, Object ... args) {
-		log(LogLevel.INFO, toString(tag), message, args);
-	}
-	
-	/**
-	 * Logs the string to the server log file, formatted to display the log
-	 * severity as WARN, as well as the time, tag and message.
-	 * @param tag the tag to use for the log
-	 * @param message the format string for the log
-	 * @param args the string format arguments, if specified
-	 */
-	public static final void w(String tag, String message, Object ... args) {
-		log(LogLevel.WARN, tag, message, args);
-	}
-	
-	/**
-	 * Logs the string to the server log file, formatted to display the log
-	 * severity as WARN, as well as the time, tag and message.
-	 * @param tag the object outputting this log info
-	 * @param message the format string for the log
-	 * @param args the string format arguments, if specified
-	 */
-	public static final void w(Object tag, String message, Object ... args) {
-		log(LogLevel.WARN, toString(tag), message, args);
-	}
 	
 	/**
 	 * Logs the exception to the server log file, formatted to display the log
 	 * severity as WARN, as well as the time, and tag.
-	 * @param tag the tag to use for the log
 	 * @param exception the exception to print
 	 */
-	public static final void w(String tag, Throwable exception) {
-		printException(LogLevel.WARN, tag, exception);
-	}
-	
-	/**
-	 * Logs the exception to the server log file, formatted to display the log
-	 * severity as WARN, as well as the time, and tag.
-	 * @param tag the object outputting this log info
-	 * @param exception the exception to print
-	 */
-	public static final void w(Object tag, Throwable exception) {
-		printException(LogLevel.WARN, toString(tag), exception);
+	public static final void w(Throwable exception) {
+		printException(LogLevel.WARN, exception);
 	}
 	
 	/**
 	 * Logs the string to the server log file, formatted to display the log
-	 * severity as ERROR, as well as the time, tag and message.
+	 * severity as ERROR, as well as the time and message.
 	 * @param tag the tag to use for the log
 	 * @param message the format string for the log
 	 * @param args the string format arguments, if specified
 	 */
-	public static final void e(String tag, String message, Object ... args) {
-		log(LogLevel.ERROR, tag, message, args);
-	}
-	
-	/**
-	 * Logs the string to the server log file, formatted to display the log
-	 * severity as ERROR, as well as the time, tag and message.
-	 * @param tag the object outputting this log info
-	 * @param message the format string for the log
-	 * @param args the string format arguments, if specified
-	 */
-	public static final void e(Object tag, String message, Object ... args) {
-		log(LogLevel.ERROR, toString(tag), message, args);
+	public static final void e(String message, Object ... args) {
+		log(LogLevel.ERROR, message, args);
 	}
 	
 	/**
 	 * Logs the exception to the server log file, formatted to display the log
 	 * severity as ERROR, as well as the time, and tag.
-	 * @param tag the tag to use for the log
 	 * @param exception the exception to print
 	 */
-	public static final void e(String tag, Throwable exception) {
-		printException(LogLevel.ERROR, tag, exception);
-	}
-	
-	/**
-	 * Logs the exception to the server log file, formatted to display the log
-	 * severity as ERROR, as well as the time, and tag.
-	 * @param tag the object outputting this log info
-	 * @param exception the exception to print
-	 */
-	public static final void e(Object tag, Throwable exception) {
-		printException(LogLevel.ERROR, toString(tag), exception);
+	public static final void e(Throwable exception) {
+		printException(LogLevel.ERROR, exception);
 	}
 	
 	/**
 	 * Logs the string to the server log file, formatted to display the log
-	 * severity as ASSERT, as well as the time, tag and message.
-	 * @param tag the tag to use for the log
+	 * severity as ASSERT, as well as the time and message.
 	 * @param message the format string for the log
 	 * @param args the string format arguments, if specified
 	 */
-	public static final void a(String tag, String message, Object ... args) {
-		log(LogLevel.ASSERT, tag, message, args);
-	}
-	
-	/**
-	 * Logs the string to the server log file, formatted to display the log
-	 * severity as ASSERT, as well as the time, tag and message.
-	 * @param tag the object outputting this log info
-	 * @param str the format string for the log
-	 * @param args the string format arguments, if specified
-	 */
-	public static final void a(Object tag, String message, Object ... args) {
-		log(LogLevel.ASSERT, toString(tag), message, args);
+	public static final void a(String message, Object ... args) {
+		log(LogLevel.ASSERT, message, args);
 	}
 	
 	/**
 	 * Logs the exception to the server log file, formatted to display the log
 	 * severity as ASSERT, as well as the time, and tag.
-	 * @param tag the tag to use for the log
 	 * @param exception the exception to print
 	 */
-	public static final void a(String tag, Throwable exception) {
-		printException(LogLevel.ASSERT, tag, exception);
+	public static final void a(Throwable exception) {
+		printException(LogLevel.ASSERT, exception);
 	}
 	
-	/**
-	 * Logs the exception to the server log file, formatted to display the log
-	 * severity as ASSERT, as well as the time, and tag.
-	 * @param tag the class outputting this log info
-	 * @param exception the exception to print
-	 */
-	public static final void a(Object tag, Throwable exception) {
-		printException(LogLevel.ASSERT, toString(tag), exception);
-	}
-	
-	private static final void printException(LogLevel level, String tag, Throwable exception) {
+	private static final void printException(LogLevel level, Throwable exception) {
 		synchronized (LOG) {
-			log(level, tag, "Exception in thread\"%s\" %s: %s", Thread.currentThread().getName(), exception.getClass().getName(), exception.getMessage());
-			log(level, tag, "Caused by: %s: %s", exception.getClass(), exception.getMessage());
+			log(level, "Exception in thread\"%s\" %s: %s", Thread.currentThread().getName(), exception.getClass().getName(), exception.getMessage());
+			log(level, "Caused by: %s: %s", exception.getClass(), exception.getMessage());
 			for (StackTraceElement e : exception.getStackTrace()) {
-				log(level, tag, "    " + e.toString());
+				log(level, "    " + e.toString());
 			}
 		}
-	}
-	
-	private static final String toString(Object o) {
-		return o.getClass().getName();
 	}
 	
 	public static enum LogLevel {

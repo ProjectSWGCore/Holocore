@@ -93,21 +93,21 @@ public class SuiService extends Service {
 	private void handleSuiEventNotification(Player player, SuiEventNotification p) {
 		List<SuiBaseWindow> activeWindows = windows.get(player.getNetworkId());
 		if (activeWindows == null || activeWindows.size() <= 0) {
-			Log.w("SuiService:SuiEventNotification", "There are no active windows for %s!", player);
+			Log.w("There are no active windows for %s!", player);
 			return;
 		}
 
 		SuiBaseWindow window = getWindowById(activeWindows, p.getWindowId());
 		
 		if (window == null) {
-			Log.w("SuiService:SuiEventNotification", "Received window ID %d that is not assigned to the player %s", p.getWindowId(), player);
+			Log.w("Received window ID %d that is not assigned to the player %s", p.getWindowId(), player);
 			return;
 		}
 
 		SuiComponent component = window.getSubscriptionByIndex(p.getEventIndex());
 
 		if (component == null) {
-			Log.w("SuiService:SuiEventNotification", "SuiWindow %s retrieved null subscription from supplied event index %d", window, p.getEventIndex());
+			Log.w("SuiWindow %s retrieved null subscription from supplied event index %d", window, p.getEventIndex());
 			return;
 		}
 
@@ -135,7 +135,7 @@ public class SuiService extends Service {
 			try {
 				Scripts.invoke(script, callback, player, player.getCreatureObject(), event, parameters);
 			} catch (FileNotFoundException ex) {
-				Log.e(this, "Callback script %s not found", script);
+				Log.e("Callback script %s not found", script);
 			}
 		} else if (window.hasJavaCallback(callback)) {
 			ISuiCallback suiCallback = window.getJavaCallback(callback);
@@ -169,12 +169,12 @@ public class SuiService extends Service {
 		List<SuiBaseWindow> activeWindows = windows.get(player.getNetworkId());
 
 		if (activeWindows == null) {
-			Log.w("SuiService:CloseWindow", "Tried to close window id %d for player %s but it doesn't exist in the active windows.", id, player);
+			Log.w("Tried to close window id %d for player %s but it doesn't exist in the active windows.", id, player);
 			return;
 		}
 
 		if (!activeWindows.remove(window)) {
-			Log.w("SuiService:CloseWindow", "Tried to close window id %d for player %s but it doesn't exist in the active windows.", id, player);
+			Log.w("Tried to close window id %d for player %s but it doesn't exist in the active windows.", id, player);
 			return;
 		}
 
@@ -185,7 +185,7 @@ public class SuiService extends Service {
 		List<SuiBaseWindow> activeWindows = windows.get(player.getNetworkId());
 		SuiBaseWindow window = activeWindows.get(windowId);
 		if (window == null) {
-			Log.w("SuiService:CloseWindow", "Cannot close window with id %d as it doesn't exist in player %s active windows", windowId, player);
+			Log.w("Cannot close window with id %d as it doesn't exist in player %s active windows", windowId, player);
 			return;
 		}
 

@@ -76,7 +76,7 @@ public class GotoCmdCallback implements ICmdCallback  {
 				Terrain t = Terrain.getTerrainFromName(set.getString("terrain_name"));
 				return teleportToGoto(objManager, obj, set.getLong("object_id"), cell, new Location(0, 0, 0, t));
 			} catch (SQLException e) {
-				Log.e(this, e);
+				Log.e(e);
 				return "Exception thrown. Failed to teleport: ["+e.getErrorCode()+"] " + e.getMessage();
 			}
 		}
@@ -86,13 +86,13 @@ public class GotoCmdCallback implements ICmdCallback  {
 		SWGObject parent = objManager.getObjectById(buildingId);
 		if (parent == null || !(parent instanceof BuildingObject)) {
 			String err = String.format("Invalid parent! Either null or not a building: %s  BUID: %d", parent, buildingId);
-			Log.e("CharacterCreationService", err);
+			Log.e(err);
 			return err;
 		}
 		CellObject cell = ((BuildingObject) parent).getCellByNumber(cellNumber);
 		if (cell == null) {
 			String err = String.format("Building does not have any cells! B-Template: %s  BUID: %d", parent.getTemplate(), buildingId);
-			Log.e("CharacterCreationService", err);
+			Log.e(err);
 			return err;
 		}
 		new ObjectTeleportIntent(obj, cell, l).broadcast();

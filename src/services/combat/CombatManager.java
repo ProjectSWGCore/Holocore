@@ -285,7 +285,7 @@ public class CombatManager extends Manager {
 				
 				eggParent = source.getParent();
 				break;
-			default: Log.w(this, "Unrecognised delay egg position %s from command %s - defaulting to SELF", combatCommand.getEggPosition(), combatCommand.getName());
+			default: Log.w("Unrecognised delay egg position %s from command %s - defaulting to SELF", combatCommand.getEggPosition(), combatCommand.getName());
 			case SELF:
 				eggLocation = source.getLocation();
 				eggParent = source.getParent();
@@ -488,7 +488,7 @@ public class CombatManager extends Manager {
 		incapacitated.setPosture(Posture.INCAPACITATED);
 		incapacitated.setCounter(INCAP_TIMER);
 		
-		Log.i(this, "%s was incapacitated", incapacitated);
+		Log.i("%s was incapacitated", incapacitated);
 		
 		// Once the incapacitation counter expires, revive them.
 		synchronized(incapacitatedCreatures) {
@@ -527,12 +527,12 @@ public class CombatManager extends Manager {
 			regeneratingActionCreatures.add(revivedCreature);
 		}
 		
-		Log.i(this, "% was revived", revivedCreature);
+		Log.i("% was revived", revivedCreature);
 	}
 	
 	private void killCreature(CreatureObject killer, CreatureObject corpse) {
 		corpse.setPosture(Posture.DEAD);
-		Log.i(this, "%s was killed by %s", corpse, killer);
+		Log.i("%s was killed by %s", corpse, killer);
 		new CreatureKilledIntent(killer, corpse).broadcast();
 	}
 	
@@ -565,7 +565,7 @@ public class CombatManager extends Manager {
 				}
 			} else {
 				// Can't happen with the current code, but in case it's ever refactored...
-				Log.e(this, "Incapacitation timer for player %s being deathblown unexpectedly didn't exist!", "");
+				Log.e("Incapacitation timer for player %s being deathblown unexpectedly didn't exist!", "");
 			}
 		}
 	}

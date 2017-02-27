@@ -30,12 +30,12 @@ package resources.server_info;
 public class StandardLog {
 	
 	public static long onStartLoad(String what) {
-		Log.i("LOAD", "Loading %s...", what);
+		Log.i("Loading %s...", what);
 		return System.nanoTime();
 	}
 	
 	public static void onEndLoad(int quantity, String what, long startTime) {
-		Log.i("LOAD", "Finished loading %d %s. Took %.3fms", quantity, what, (System.nanoTime() - startTime) / 1E6);
+		Log.i("Finished loading %d %s. Took %.3fms", quantity, what, (System.nanoTime() - startTime) / 1E6);
 	}
 	
 }

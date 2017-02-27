@@ -112,7 +112,7 @@ class TerrainBuildoutLoader {
 			SWGObject container = objectTable.get(containerId);
 			object.moveToContainer(container);
 			if (container == null)
-				Log.e("TerrainBuildoutLoader", "Failed to load object: " + object.getTemplate());
+				Log.e("Failed to load object: " + object.getTemplate());
 		} else {
 			List<SWGObject> list = objects.get(areaName);
 			if (list == null) {

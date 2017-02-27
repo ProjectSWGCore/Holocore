@@ -51,7 +51,7 @@ public class InboundNetworkManager extends Service {
 		if (client.addToBuffer(data))
 			new InboundPacketPendingIntent(client).broadcast();
 		else
-			Log.d(this, "Not enough to process. Waiting. Data: %s", Arrays.toString(data));
+			Log.d("Not enough to process. Waiting. Data: %s", Arrays.toString(data));
 	}
 	
 	public void onSessionCreated(NetworkClient client) {

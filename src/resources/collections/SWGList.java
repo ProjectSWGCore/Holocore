@@ -216,7 +216,7 @@ public class SWGList<E> extends SynchronizedList<E> implements Encodable {
 					add(instance);
 				}
 			} catch (InstantiationException | IllegalAccessException e) {
-				Log.e("SWGList", e);
+				Log.e(e);
 				return false;
 			}
 		} else {

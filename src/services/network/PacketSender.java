@@ -46,7 +46,7 @@ public class PacketSender {
 		if (addr instanceof InetSocketAddress)
 			sendPacket((InetSocketAddress) addr, data);
 		else
-			Log.e(this, "Unknown socket address: %s", addr);
+			Log.e("Unknown socket address: %s", addr);
 	}
 	
 	public void sendPacket(InetSocketAddress addr, ByteBuffer data) {

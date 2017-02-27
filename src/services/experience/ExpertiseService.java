@@ -108,7 +108,7 @@ public final class ExpertiseService extends Service {
 			Map<String, Expertise> expertise = trees.get(treeId);
 			
 			if (expertise == null) {
-				Log.e(this, "Expertise %s refers to unknown tree with ID %d", skillName, treeId);
+				Log.e("Expertise %s refers to unknown tree with ID %d", skillName, treeId);
 				return false;
 			}
 			
@@ -146,7 +146,7 @@ public final class ExpertiseService extends Service {
 					expertiseAbilities.put(skill, abilityChains);
 				}
 			} catch (SQLException e) {
-				Log.e(this, e);
+				Log.e(e);
 				return false;
 			}
 		}
@@ -179,7 +179,7 @@ public final class ExpertiseService extends Service {
 
 		for (String requestedSkill : requestedSkills) {
 			if (getAvailablePoints(creatureObject) < 1) {
-				Log.i(this, "%s attempted to spend more expertise points than available to them", creatureObject);
+				Log.i("%s attempted to spend more expertise points than available to them", creatureObject);
 				return;
 			}
 
@@ -196,14 +196,14 @@ public final class ExpertiseService extends Service {
 			Expertise expertise = tree.get(requestedSkill);
 
 			if (!expertise.getRequiredProfession().equals(profession)) {
-				Log.i(this, "%s attempted to train expertise skill %s as the wrong profession", creatureObject, requestedSkill);
+				Log.i("%s attempted to train expertise skill %s as the wrong profession", creatureObject, requestedSkill);
 				continue;
 			}
 
 			int requiredTreePoints = (expertise.getTier() - 1) * 4;
 
 			if (requiredTreePoints > getPointsInTree(tree, creatureObject)) {
-				Log.i(this, "%s attempted to train expertise skill %s without having unlocked the tier of the tree", creatureObject, requestedSkill);
+				Log.i("%s attempted to train expertise skill %s without having unlocked the tier of the tree", creatureObject, requestedSkill);
 				continue;
 			}
 			

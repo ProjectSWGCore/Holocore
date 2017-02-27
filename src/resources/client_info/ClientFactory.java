@@ -144,7 +144,7 @@ public class ClientFactory extends DataFactory {
 	protected ClientData createDataObject(String type) {
 		String c = typeMap.get(type);
 		if (c == null) {
-			Log.e("ClientFactory", "Don't know what class to use for " + type);
+			Log.e("Don't know what class to use for " + type);
 			return null;
 		}
 		
@@ -170,7 +170,7 @@ public class ClientFactory extends DataFactory {
 			case "SkeletalMeshGeneratorTemplateData": return new SkeletalMeshGeneratorTemplateData();
 			case "StaticShaderData": return new StaticShaderData();
 			case "WorldSnapshotData": return new WorldSnapshotData();
-			default: Log.e("ClientFactory", "Unimplemented typeMap value: " + c); return null;
+			default: Log.e("Unimplemented typeMap value: " + c); return null;
 		}
 	}
 

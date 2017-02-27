@@ -193,8 +193,8 @@ public class TravelService extends Service {
 						loadTravelPoint(set, travelPlanet);
 					}
 				} catch (SQLException e) {
-					Log.e("TravelService", String.format("Failed to load a travel point for %s. %s", planetName, e.getLocalizedMessage()));
-					Log.e(this, e);
+					Log.e(String.format("Failed to load a travel point for %s. %s", planetName, e.getLocalizedMessage()));
+					Log.e(e);
 					success = false;
 				}
 			}
@@ -279,7 +279,7 @@ public class TravelService extends Service {
 			List<TravelPoint> pointsForPlanet = new ArrayList<>();
 			Terrain to = Terrain.getTerrainFromName(req.getPlanetName());
 			if (to == null) {
-				Log.e(this, "Unknown terrain in PlanetTravelPointListRequest: %s", req.getPlanetName());
+				Log.e("Unknown terrain in PlanetTravelPointListRequest: %s", req.getPlanetName());
 				return;
 			}
 			for (TravelGroup gt : travel.values())
@@ -326,7 +326,7 @@ public class TravelService extends Service {
 		boolean roundTrip = i.isRoundTrip();
 		
 		if (nearestPoint == null || destinationPoint == null) {
-			Log.w(this, "Unable to purchase ticket! Nearest Point: %s  Destination Point: %s", nearestPoint, destinationPoint);
+			Log.w("Unable to purchase ticket! Nearest Point: %s  Destination Point: %s", nearestPoint, destinationPoint);
 			return;
 		}
 		
@@ -403,12 +403,12 @@ public class TravelService extends Service {
 		TravelPoint point = getNearestTravelPoint(player.getCreatureObject().getWorldLocation());
 		TravelGroup travel = null;
 		if (point.getShuttle() == null) {
-			Log.w(this, "No travel point shuttle near player: %s", player.getCreatureObject().getWorldLocation());
+			Log.w("No travel point shuttle near player: %s", player.getCreatureObject().getWorldLocation());
 			return;
 		}
 		travel = this.travel.get(point.getShuttle().getTemplate());
 		if (travel == null) {
-			Log.e(this, "Travel point is null for shuttle: " + point.getShuttle());
+			Log.e("Travel point is null for shuttle: " + point.getShuttle());
 			return;
 		}
 		
@@ -480,7 +480,7 @@ public class TravelService extends Service {
 		TravelPoint nearestPoint = getNearestTravelPoint(worldLoc);
 		double distanceToNearestPoint = worldLoc.distanceTo(nearestPoint.getCollector().getWorldLocation());
 		if (!isTicket(ticket)) {
-			Log.e(this, "%s attempted to use an object that isn't a ticket!", player);
+			Log.e("%s attempted to use an object that isn't a ticket!", player);
 		} else if (nearestPoint.getGroup().getStatus() != ShuttleStatus.GROUNDED) {
 			int time = nearestPoint.getGroup().getTimeRemaining();
 			new ChatBroadcastIntent(player, new ProsePackage(new StringId("travel/travel", "shuttle_board_delay"), "DI", time)).broadcast();
@@ -489,7 +489,7 @@ public class TravelService extends Service {
 			new ChatBroadcastIntent(player, "@travel:wrong_shuttle").broadcast();
 		} else if (distanceToNearestPoint <= TICKET_USE_RADIUS) {
 			// They can use their ticket if they're within range.
-			Log.i(this, "%s/%s is traveling from %s to %s", player.getUsername(), traveler.getObjectName(), nearestPoint.getName(), getDestinationPoint(ticket).getName());
+			Log.i("%s/%s is traveling from %s to %s", player.getUsername(), traveler.getObjectName(), nearestPoint.getName(), getDestinationPoint(ticket).getName());
 			teleportAndDestroyTicket(getDestinationPoint(ticket), ticket, traveler);
 		} else {
 			new ChatBroadcastIntent(player, "@travel:boarding_too_far").broadcast();
@@ -506,7 +506,7 @@ public class TravelService extends Service {
 			CreatureObject shuttle = (CreatureObject) object;
 			
 			if (pointForShuttle == null) {
-				Log.w(this, "No point for shuttle at location: " + object.getWorldLocation());
+				Log.w("No point for shuttle at location: " + object.getWorldLocation());
 				return;
 			}
 			// Assign the shuttle to the nearest travel point
@@ -519,7 +519,7 @@ public class TravelService extends Service {
 			TravelPoint pointForCollector = getNearestTravelPoint(object.getWorldLocation());
 			
 			if (pointForCollector == null) {
-				Log.w(this, "No point for collector at location: " + object.getWorldLocation());
+				Log.w("No point for collector at location: " + object.getWorldLocation());
 				return;
 			}
 			

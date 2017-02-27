@@ -55,7 +55,7 @@ public class TerrainZoneInsertion {
 			Location l = generateRandomLocation(Terrain.getTerrainFromName(set.getString("terrain")), set.getDouble("x"), set.getDouble("y"), set.getDouble("z"), set.getDouble("radius"));
 			return new SpawnInformation(!building.isEmpty(), l, set.getLong("object_id"), set.getString("cell"));
 		} catch (SQLException e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 		return null;
 	}

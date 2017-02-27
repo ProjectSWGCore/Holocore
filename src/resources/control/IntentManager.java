@@ -143,8 +143,8 @@ public class IntentManager {
 		try {
 			r.onIntentReceived(i);
 		} catch (Throwable t) {
-			Log.e("IntentManager", "Fatal Exception while processing intent: " + i);
-			Log.e("IntentManager", t);
+			Log.e("Fatal Exception while processing intent: " + i);
+			Log.e(t);
 		}
 	}
 	

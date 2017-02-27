@@ -187,7 +187,7 @@ public class CoreManager extends Manager {
 	}
 	
 	private void initiateShutdownSequence(ServerManagementIntent i) {
-		Log.i(this, "Beginning server shutdown sequence...");
+		Log.i("Beginning server shutdown sequence...");
 		long time = i.getTime();
 		TimeUnit timeUnit = i.getTimeUnit();
 		
@@ -222,15 +222,15 @@ public class CoreManager extends Manager {
 			try {
 				return new PrintStream(new FileOutputStream("packets.txt", false), true, StandardCharsets.US_ASCII.name());
 			} catch (UnsupportedEncodingException | FileNotFoundException e) {
-				Log.e(this, e);
-				Log.e(this, e);
+				Log.e(e);
+				Log.e(e);
 			}
 		}
 		return null;
 	}
 	
 	private void setupCrcDatabase() {
-		Log.i(this, "Generating CRCs...");
+		Log.i("Generating CRCs...");
 		CrcDatabaseGenerator.generate(false);
 	}
 	

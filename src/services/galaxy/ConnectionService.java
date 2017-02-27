@@ -87,7 +87,7 @@ public class ConnectionService extends Service {
 		try {
 			success = updateService.awaitTermination(5, TimeUnit.SECONDS);
 		} catch (InterruptedException e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 		return super.terminate() && success;
 	}
@@ -137,7 +137,7 @@ public class ConnectionService extends Service {
 	private void logOut(Player p) {
 		if (!zonedInPlayers.remove(p))
 			return;
-		Log.i("ConnectionService", "Logged out %s with character %s", p.getUsername(), p.getCharacterName());
+		Log.i("Logged out %s with character %s", p.getUsername(), p.getCharacterName());
 		CoreManager.getGalaxy().decrementPopulationCount();
 		setPlayerFlag(p, PlayerFlags.LD);
 		removeFromDisappear(p);
@@ -148,7 +148,7 @@ public class ConnectionService extends Service {
 	private void disappear(Player p, boolean newConnection, DisconnectReason reason) {
 		if (p.getCreatureObject() == null)
 			return;
-		Log.i("ConnectionService", "Disappeared %s with character %s with reason %s", p.getUsername(), p.getCharacterName(), reason);
+		Log.i("Disappeared %s with character %s with reason %s", p.getUsername(), p.getCharacterName(), reason);
 		
 		removeFromDisappear(p);
 		Intent i = new PlayerEventIntent(p, PlayerEvent.PE_DISAPPEAR);

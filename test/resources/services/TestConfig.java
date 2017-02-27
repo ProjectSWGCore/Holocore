@@ -49,7 +49,7 @@ public class TestConfig {
 			try {
 				Assert.assertTrue(file.createNewFile());
 			} catch (IOException e) {
-				Log.e(this, e);
+				Log.e(e);
 			}
 		}
 		Config c = new Config(file);

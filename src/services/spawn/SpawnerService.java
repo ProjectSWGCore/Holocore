@@ -127,7 +127,7 @@ public final class SpawnerService extends Service {
 			Spawner spawner = spawnerMap.remove(killedAIObject);
 			
 			if(spawner == null) {
-				Log.e(this, "Killed AI object %s has no linked Spawner - it cannot respawn!", killedAIObject);
+				Log.e("Killed AI object %s has no linked Spawner - it cannot respawn!", killedAIObject);
 				return;
 			}
 			
@@ -147,7 +147,7 @@ public final class SpawnerService extends Service {
 					}
 				}
 			} catch (SQLException e) {
-				Log.e(this, e);
+				Log.e(e);
 			}
 		}
 		
@@ -161,7 +161,7 @@ public final class SpawnerService extends Service {
 		int spawnId = set.getInt("spawn_id");
 		
 		if (minRespawnDelay > maxRespawnDelay) {
-			Log.e(this, "Spawner on %s at with ID %d has a minimum respawn time larger than the maximum respawn time", terrain, spawnId);
+			Log.e("Spawner on %s at with ID %d has a minimum respawn time larger than the maximum respawn time", terrain, spawnId);
 			return;
 		}
 		
@@ -174,10 +174,10 @@ public final class SpawnerService extends Service {
 		SWGObject cellObject = null;
 		
 		if (buildingId != 0 && cellId == 0) {
-			Log.e(this, "No cell ID specified for spawner with ID %d on terrain %s", spawnId, terrain);
+			Log.e("No cell ID specified for spawner with ID %d on terrain %s", spawnId, terrain);
 			return;
 		} else if (buildingId == 0 && cellId != 0) {
-			Log.w(this, "Unnecessary cell ID specified for spawner with ID %d on terrain %s", spawnId, terrain);
+			Log.w("Unnecessary cell ID specified for spawner with ID %d on terrain %s", spawnId, terrain);
 			return;
 		}
 		
@@ -185,14 +185,14 @@ public final class SpawnerService extends Service {
 			SWGObject building = objectManager.getObjectById(buildingId);
 			
 			if (!(building instanceof BuildingObject)) {
-				Log.w(this, "Skipping spawner with ID %d on terrain %s - building_id %d didn't reference a BuildingObject!", spawnId, terrain, buildingId);
+				Log.w("Skipping spawner with ID %d on terrain %s - building_id %d didn't reference a BuildingObject!", spawnId, terrain, buildingId);
 				return;
 			}
 			
 			cellObject = ((BuildingObject) building).getCellByNumber(cellId);
 			
 			if (cellObject == null) {
-				Log.e(this, "Spawner with ID %d on terrain %s - building %d didn't have cell ID %d!", spawnId, terrain, buildingId, cellId);
+				Log.e("Spawner with ID %d on terrain %s - building %d didn't have cell ID %d!", spawnId, terrain, buildingId, cellId);
 				return;
 			}
 		}
@@ -203,7 +203,7 @@ public final class SpawnerService extends Service {
 		int maxAction = 0;
 		
 		switch(difficultyChar) {
-			default: Log.w(this, "An unknown creature difficulty of %s was set for spawner with ID %d on terrain %s. Using default NORMAL", difficultyChar, spawnId, terrain);
+			default: Log.w("An unknown creature difficulty of %s was set for spawner with ID %d on terrain %s. Using default NORMAL", difficultyChar, spawnId, terrain);
 			case "N":
 				difficulty = CreatureDifficulty.NORMAL;
 				maxHealth = set.getInt("HP");
@@ -307,7 +307,7 @@ public final class SpawnerService extends Service {
 				creature.addOptionFlags(OptionFlag.INVULNERABLE);
 				break;
 			default:
-				Log.w(this, "An unknown attackable type of %s was specified for %s", flagString, creature.getObjectName());
+				Log.w("An unknown attackable type of %s was specified for %s", flagString, creature.getObjectName());
 				break;
 		}
 	}

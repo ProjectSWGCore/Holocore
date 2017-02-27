@@ -106,7 +106,7 @@ public final class IntentFactory {
 	 */
 	public static void sendSystemMessage(Player target, String stf, Object ... objects) {
 		if (objects.length % 2 != 0)
-			Log.e("ProsePackage", "Sent a ProsePackage chat message with an uneven number of object arguments for StringId %s", stf);
+			Log.e("Sent a ProsePackage chat message with an uneven number of object arguments for StringId %s", stf);
 		Object [] prose = new Object[objects.length + 2];
 		prose[0] = "StringId";
 		prose[1] = new StringId(stf);

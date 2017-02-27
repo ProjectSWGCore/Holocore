@@ -42,8 +42,8 @@ public class AdminTeleportCallback implements ICmdCallback {
 	public void execute(GalacticManager galacticManager, Player player, SWGObject target, String args) {
 		String [] cmd = args.split(" ");
 		if (cmd.length < 4) {
-			Log.e("AdminTeleportCallback", "Wrong Syntax. For teleporting yourself, command has to be: /teleport <planetname> <x> <y> <z>");
-			Log.e("AdminTeleportCallback", "For teleporting another player, command has to be: /teleport <charname> <planetname> <x> <y> <z>");
+			Log.e("Wrong Syntax. For teleporting yourself, command has to be: /teleport <planetname> <x> <y> <z>");
+			Log.e("For teleporting another player, command has to be: /teleport <charname> <planetname> <x> <y> <z>");
 			return;
 		}
 		double x, y, z;
@@ -55,7 +55,7 @@ public class AdminTeleportCallback implements ICmdCallback {
 			y = Double.parseDouble(cmd[cmdOffset+2]);
 			z = Double.parseDouble(cmd[cmdOffset+3]);
 		} catch (NumberFormatException e) {
-			Log.e("AdminTeleportCallback", "Wrong Syntax or Value. Please enter the command like this: /teleport <planetname> <x> <y> <z>");
+			Log.e("Wrong Syntax or Value. Please enter the command like this: /teleport <planetname> <x> <y> <z>");
 			return;
 		}
 		

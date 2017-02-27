@@ -651,7 +651,7 @@ public class ChatRoomService extends Service {
 		// This can happen if a channel was deleted while the player was offline
 		PlayerObject ghost = player.getPlayerObject();
 		if (ghost == null) {
-			Log.e(this, "Tried to join a room with a path that does not exist: " + path);
+			Log.e("Tried to join a room with a path that does not exist: " + path);
 			return;
 		}
 		ghost.removeJoinedChannel(path);
@@ -848,7 +848,7 @@ public class ChatRoomService extends Service {
 				insertChatLog.executeUpdate();
 			}
 		} catch (SQLException e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 	}
 

@@ -140,7 +140,7 @@ public class ObjectManager extends Manager {
 			}
 			obj.moveToContainer(parent);
 			if (parent == null)
-				Log.e("ObjectManager", "Parent for %s is null! ParentID: %d", obj, id);
+				Log.e("Parent for %s is null! ParentID: %d", obj, id);
 		}
 	}
 	
@@ -240,7 +240,7 @@ public class ObjectManager extends Manager {
 		synchronized (objectMap) {
 			SWGObject replaced = objectMap.put(object.getObjectId(), object);
 			if (replaced != null && replaced != object)
-				Log.e(this, "Replaced object in object map! Old: %s  New: %s", replaced, object);
+				Log.e("Replaced object in object map! Old: %s  New: %s", replaced, object);
 		}
 	}
 
@@ -268,17 +268,17 @@ public class ObjectManager extends Manager {
 	private void zoneInCharacter(PlayerManager playerManager, Player player, long characterId) {
 		SWGObject creatureObj = getObjectById(characterId);
 		if (creatureObj == null) {
-			Log.e("ObjectManager", "Failed to start zone - CreatureObject could not be fetched from database [Character: %d  User: %s]", characterId, player.getUsername());
+			Log.e("Failed to start zone - CreatureObject could not be fetched from database [Character: %d  User: %s]", characterId, player.getUsername());
 			sendClientFatal(player, "Failed to zone", "You were not found in the database\nTry relogging to fix this problem", 10, TimeUnit.SECONDS);
 			return;
 		}
 		if (!(creatureObj instanceof CreatureObject)) {
-			Log.e("ObjectManager", "Failed to start zone - Object is not a CreatureObject [Character: %d  User: %s]", characterId, player.getUsername());
+			Log.e("Failed to start zone - Object is not a CreatureObject [Character: %d  User: %s]", characterId, player.getUsername());
 			sendClientFatal(player, "Failed to zone", "There has been an internal server error: Not a Creature.\nPlease delete your character and create a new one", 10, TimeUnit.SECONDS);
 			return;
 		}
 		if (((CreatureObject) creatureObj).getPlayerObject() == null) {
-			Log.e("ObjectManager", "Failed to start zone - CreatureObject doesn't have a ghost [Character: %d  User: %s", characterId, player.getUsername());
+			Log.e("Failed to start zone - CreatureObject doesn't have a ghost [Character: %d  User: %s", characterId, player.getUsername());
 			sendClientFatal(player, "Failed to zone", "There has been an internal server error: Null Ghost.\nPlease delete your character and create a new one", 10, TimeUnit.SECONDS);
 			return;
 		}

@@ -104,7 +104,7 @@ public class CharacterCreationService extends Service {
 		nameGenerator.loadAllRules();
 		loadProfTemplates();
 		if (!nameFilter.load())
-			Log.e(this, "Failed to load name filter!");
+			Log.e("Failed to load name filter!");
 		return super.initialize();
 	}
 	
@@ -139,14 +139,14 @@ public class CharacterCreationService extends Service {
 				}
 				return false;
 			} catch (SQLException e) {
-				Log.e(this, e);
+				Log.e(e);
 				return false;
 			} finally {
 				try {
 					if (set != null)
 						set.close();
 				} catch (SQLException e) {
-					Log.e(this, e);
+					Log.e(e);
 				}
 			}
 		}
@@ -189,7 +189,7 @@ public class CharacterCreationService extends Service {
 		Assert.notNull(creature.getPlayerObject());
 		Assert.test(creature.isPlayer());
 		Assert.test(creature.getObjectId() > 0);
-		Log.i(this, "%s created character %s from %s", player.getUsername(), create.getName(), create.getSocketAddress());
+		Log.i("%s created character %s from %s", player.getUsername(), create.getName(), create.getSocketAddress());
 		player.sendPacket(new CreateCharacterSuccess(creature.getObjectId()));
 		new PlayerEventIntent(player, PlayerEvent.PE_CREATE_CHARACTER).broadcast();
 	}
@@ -215,7 +215,7 @@ public class CharacterCreationService extends Service {
 		// Test for successful creation
 		CreatureObject creature = createCharacter(objManager, player, create);
 		if (creature == null) {
-			Log.e(this, "Failed to create CreatureObject!");
+			Log.e("Failed to create CreatureObject!");
 			sendCharCreationFailure(player, create, ErrorMessage.NAME_DECLINED_INTERNAL_ERROR);
 			return null;
 		}
@@ -227,7 +227,7 @@ public class CharacterCreationService extends Service {
 		}
 		// Test for successful database insertion
 		if (!createCharacterInDb(creature, create.getName(), player)) {
-			Log.e(this, "Failed to create character %s for user %s with server error from %s", create.getName(), player.getUsername(), create.getSocketAddress());
+			Log.e("Failed to create character %s for user %s with server error from %s", create.getName(), player.getUsername(), create.getSocketAddress());
 			new DestroyObjectIntent(creature).broadcast();
 			sendCharCreationFailure(player, create, ErrorMessage.NAME_DECLINED_INTERNAL_ERROR);
 			return null;
@@ -254,7 +254,7 @@ public class CharacterCreationService extends Service {
 			default:
 				break;
 		}
-		Log.e("ZoneService", "Failed to create character %s for user %s with error %s and reason %s from %s", create.getName(), player.getUsername(), err, reason, create.getSocketAddress());
+		Log.e("Failed to create character %s for user %s with error %s and reason %s from %s", create.getName(), player.getUsername(), err, reason, create.getSocketAddress());
 		player.sendPacket(new CreateCharacterFailure(reason));
 	}
 	
@@ -269,7 +269,7 @@ public class CharacterCreationService extends Service {
 				createCharacter.setInt(4, player.getUserId());
 				return createCharacter.executeUpdate() == 1;
 			} catch (SQLException e) {
-				Log.e(this, e);
+				Log.e(e);
 				return false;
 			}
 		}
@@ -284,7 +284,7 @@ public class CharacterCreationService extends Service {
 						return set.getInt("count");
 				}
 			} catch (SQLException e) {
-				Log.e(this, e);
+				Log.e(e);
 			}
 		}
 		return 0;
@@ -317,7 +317,7 @@ public class CharacterCreationService extends Service {
 		String spawnLocation = getConfig(ConfigFile.PRIMARY).getString("PRIMARY-SPAWN-LOCATION", "tat_moseisley");
 		SpawnInformation info = insertion.generateSpawnLocation(spawnLocation);
 		if (info == null) {
-			Log.e("CharacterCreationService", "Failed to get spawn information for location: " + spawnLocation);
+			Log.e("Failed to get spawn information for location: " + spawnLocation);
 			return null;
 		}
 		CharacterCreation creation = new CharacterCreation(objManager, profTemplates.get(create.getClothes()), create);
@@ -341,7 +341,7 @@ public class CharacterCreationService extends Service {
 		synchronized (lockedNames) {
 			unlockName(player);
 			lockedNames.put(firstName, player);
-			Log.i("ZoneService", "Locked name %s for user %s", firstName, player.getUsername());
+			Log.i("Locked name %s for user %s", firstName, player.getUsername());
 		}
 		return true;
 	}
@@ -358,7 +358,7 @@ public class CharacterCreationService extends Service {
 			}
 			if (fName != null) {
 				if (lockedNames.remove(fName) != null)
-					Log.i("ZoneService", "Unlocked name %s for user %s", fName, player.getUsername());
+					Log.i("Unlocked name %s for user %s", fName, player.getUsername());
 			}
 		}
 	}
