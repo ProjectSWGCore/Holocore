@@ -201,10 +201,19 @@ public class DatatableData extends ClientData {
 	}
 	
 	public Object getCell(int row, String columnName) {
-		Integer column = nameToIndex.get(columnName);
-		if (column == null)
-			return null;
-		return getCell(row, column.intValue());
+		return getCell(row, nameToIndex.get(columnName).intValue());
+	}
+	
+	public String getString(int row, String columnName) {
+		return (String) getCell(row, nameToIndex.get(columnName).intValue());
+	}
+	
+	public float getFloat(int row, String columnName) {
+		return (float) getCell(row, nameToIndex.get(columnName).intValue());
+	}
+	
+	public int getInt(int row, String columnName) {
+		return (int) getCell(row, nameToIndex.get(columnName).intValue());
 	}
 	
 	public String getColumnName(int column) {
