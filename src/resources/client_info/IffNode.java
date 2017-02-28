@@ -154,7 +154,7 @@ public class IffNode {
 	public String readString() {
 		initBuffer();
 		String string = ByteUtilities.nextString(bb);
-		if (!string.isEmpty())
+		if (bb.hasRemaining())
 			bb.get();
 		return string;
 	}
