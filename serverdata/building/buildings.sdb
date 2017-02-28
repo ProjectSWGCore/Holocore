@@ -3,9 +3,11 @@ TEXT PRIMARY KEY	TEXT NOT NULL	INTEGER NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTE
 ad1_heroic_tusken_1	ADVENTURE1	-563231429879129061	tatooine_laserflit_bunker.iff	Adventure1 - Tusken Instance	10	-3782	5	3894
 ad1_heroic_tusken_2	ADVENTURE1	-563231429325558805	military_base_shed_rebel_style_01.iff	Adventure1 - Tusken Instance	6	-3091	5	4177
 ad1_heroic_tusken_3	ADVENTURE1	-563231428978316333	housing_tatt_style01_small.iff	Adventure1 - Tusken Instance	10	-4049	5	3498
+ad1_world	ADVENTURE1	0	empty	Adventure1 - World	0	0	0	0
 ad2_heroic_echo_1	ADVENTURE2	-591378928025475237	military_abandoned_police_station_rebel.iff	Adventure2 - Hoth Instance	12	-6078	-4	5662
 ad2_heroic_echo_base	ADVENTURE2	-591378927621027473	echo_base.iff	Adventure2 - Hoth Instance - Echo Base	40	-5006	32	5000
 ad2_heroic_echo_3	ADVENTURE2	-591378927302421357	military_outpost_guard_house_rebel.iff	Adventure2 - Hoth Instance	2	-6068	8	5662
+ad2_world	ADVENTURE2	0	empty	Adventure2 - World	0	0	0	0
 cor_afarathu_cave	CORELLIA	6035619	corellia_afarathu_cave.iff	Corellia - Afarathu Cave	11	-2523	28	2927
 cor_bela_asso_hall	CORELLIA	2365921	association_hall_civilian_corellia.iff	Corellia - Bela Vistal / Association Hall	17	6707	315	-5619
 cor_bela_cantina	CORELLIA	3375352	cantina_corellia.iff	Corellia - Bela Vistal / Cantina	15	6719	315	-5757
@@ -299,8 +301,8 @@ du1_heroic_isd	DUNGEON1	-544372605667357341	space_dungeon_star_destroyer.iff	Dun
 du1_heroic_ig88	DUNGEON1	-541557855450031756	ig88_factory_arena.iff	Dungeon1 - Heroic Instance - IG88	1	-6750	50	-5750
 du1_heroic_am	DUNGEON1	-538743105424195585	axkva_min_lair.iff	Dungeon1 - Heroic Instance - AM	2	-6750	50	-6750
 du1_npe_dungeon	DUNGEON1	-537054255563931649	npe_space_dungeon.iff	Dungeon1 - Tansarii Dungeon	44	-200	0	1290
-du1_nova_orion	DUNGEON1	-536772780644430992	chapter_8_space_station.iff	Dungeon1 - Tansarii Station	31	-5550	0	150
-du1_npe_station	DUNGEON1	-535083930726957057	npe_space_station.iff	Dungeon1 - Nova Orion	31	-150	0	150
+du1_nova_orion	DUNGEON1	-536772780644430992	chapter_8_space_station.iff	Dungeon1 - Nova Orion	31	-5550	0	150
+du1_npe_station	DUNGEON1	-535083930726957057	npe_space_station.iff	Dungeon1 - Tansarii Station	31	-150	0	150
 du1_world	DUNGEON1	0	empty	Dungeon1 - World	0	0	0	0
 end_bf_bunker_bunker	ENDOR	-424464266445617086	gcw_battlefield_base.iff	Endor - BF Bunker Assault / Bunker	10	-7065	379	7076
 end_bf_bunker_imp	ENDOR	-424464265497775194	military_imperial_field_hospital.iff	Endor - BF Bunker Assault / Imp	9	-7099	305	7281
