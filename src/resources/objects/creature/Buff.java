@@ -35,6 +35,7 @@ import resources.persistable.Persistable;
 
 public class Buff implements Encodable, Persistable {
 	
+	private int crc;
 	private int endTime;
 	private float value;
 	private int duration;
@@ -42,10 +43,11 @@ public class Buff implements Encodable, Persistable {
 	private int stackCount;
 	
 	public Buff() {
-		this(0, 0, 0, 0, 0);
+		this(0, 0, 0, 0, 0, 0);
 	}
 	
-	public Buff(int endTime, float value, int duration, long buffer, int stackCount) {
+	public Buff(int crc, int endTime, float value, int duration, long buffer, int stackCount) {
+		this.crc = crc;
 		this.endTime = endTime;
 		this.value = value;
 		this.duration = duration;
@@ -75,20 +77,40 @@ public class Buff implements Encodable, Persistable {
 	
 	@Override
 	public void save(NetBufferStream stream) {
+		stream.addByte(1);
+		stream.addInt(crc);
 		stream.addInt(endTime);
 		stream.addFloat(value);
 		stream.addInt(duration);
 		stream.addLong(bufferId);
 		stream.addInt(stackCount);
 	}
-
-	@Override
-	public void read(NetBufferStream stream) {
+	
+	public void readOld(NetBufferStream stream) {
 		endTime = stream.getInt();
 		value = stream.getFloat();
 		duration = stream.getInt();
 		bufferId = stream.getLong();
 		stackCount = stream.getInt();
+	}
+	
+	@Override
+	public void read(NetBufferStream stream) {
+		stream.getByte(); // version
+		crc = stream.getInt();
+		endTime = stream.getInt();
+		value = stream.getFloat();
+		duration = stream.getInt();
+		bufferId = stream.getLong();
+		stackCount = stream.getInt();
+	}
+	
+	public int getCrc() {
+		return crc;
+	}
+	
+	public void setCrc(int crc) {
+		this.crc = crc;
 	}
 	
 	public int getEndTime() {
@@ -138,6 +160,16 @@ public class Buff implements Encodable, Persistable {
 	@Override
 	public String toString() {
 		return String.format("Buff[End=%d Value=%f Duration=%d Buffer=%d StackCount=%d]", endTime, value, duration, bufferId, stackCount);
+	}
+	
+	public int hashCode() {
+		return crc;
+	}
+	
+	public boolean equals(Object o) {
+		if (!(o instanceof Buff))
+			return false;
+		return ((Buff) o).getCrc() == crc;
 	}
 
 }
