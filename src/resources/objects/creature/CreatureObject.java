@@ -41,6 +41,7 @@ import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import network.packets.swg.zone.object_controller.PostureUpdate;
 import resources.HologramColour;
 import resources.Posture;
+import resources.PvpFaction;
 import resources.PvpFlag;
 import resources.PvpStatus;
 import resources.Race;
@@ -806,6 +807,9 @@ public class CreatureObject extends TangibleObject {
 		}
 		
 		return isPlayer() && ((CreatureObject) otherObject).isPlayer()
+				&& getPvpFaction() != PvpFaction.NEUTRAL
+				&& otherObject.getPvpFaction() != PvpFaction.NEUTRAL
+				&& getPvpFaction() != otherObject.getPvpFaction()
 				&& getPvpStatus() == PvpStatus.SPECIALFORCES
 				&& otherObject.getPvpStatus() == PvpStatus.SPECIALFORCES;
 	}
