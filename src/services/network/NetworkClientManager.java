@@ -66,7 +66,11 @@ public class NetworkClientManager extends Manager {
 		} catch (SocketException e) {
 			throw new CoreException("Socket Exception on UDP bind: " + e);
 		}
-		adminServer = new TCPServer(InetAddress.getLoopbackAddress(), CoreManager.getGalaxy().getAdminServerPort(), 1024);
+		int adminServerPort = CoreManager.getGalaxy().getAdminServerPort();
+		if (adminServerPort <= 0)
+			adminServer = null;
+		else
+			adminServer = new TCPServer(InetAddress.getLoopbackAddress(), adminServerPort, 1024);
 		udpServer.setCallback(packet -> onUdpPacket(packet));
 		inboundManager = new InboundNetworkManager(clientManager);
 		outboundManager = new OutboundNetworkManager(tcpServer, clientManager);
