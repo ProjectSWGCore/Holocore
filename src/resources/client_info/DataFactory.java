@@ -29,6 +29,7 @@ package resources.client_info;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.channels.ClosedChannelException;
 
 import resources.server_info.Log;
 
@@ -53,6 +54,8 @@ public abstract class DataFactory {
 		try {
 			swgFile.read(file);
 		} catch (IOException e) {
+			if (e instanceof ClosedChannelException)
+				return null;
 			Log.e(e);
 		}
 

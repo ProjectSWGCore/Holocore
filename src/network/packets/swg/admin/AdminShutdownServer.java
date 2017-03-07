@@ -25,36 +25,46 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
  ***********************************************************************************/
-package services.network;
+package network.packets.swg.admin;
 
-import intents.network.OutboundPacketIntent;
-import network.NetworkClient;
-import resources.control.Assert;
-import resources.control.Service;
-import resources.network.TCPServer;
+import java.nio.ByteBuffer;
 
-public class OutboundNetworkManager extends Service {
+public class AdminShutdownServer extends AdminPacket {
 	
-	private final ClientManager clientManager;
+	public static final int CRC = resources.common.CRC.getCrc("AdminShutdownServer");
 	
-	public OutboundNetworkManager(TCPServer tcpServer, ClientManager clientManager) {
-		this.clientManager = clientManager;
-		
-		registerForIntent(OutboundPacketIntent.class, opi -> handleOutboundPacketIntent(opi));
-	}
+	private int shutdownTime;
 	
-	private void handleOutboundPacketIntent(OutboundPacketIntent opi){
-		NetworkClient client = clientManager.getClient(opi.getNetworkId());
-		Assert.notNull(client);
-		client.addToOutbound(opi.getPacket());
-	}
-	
-	public void onSessionCreated(NetworkClient client) {
+	public AdminShutdownServer() {
 		
 	}
 	
-	public void onSessionDestroyed(NetworkClient client) {
-		
+	public AdminShutdownServer(int shutdownTime) {
+		setShutdownTime(shutdownTime);
+	}
+	
+	@Override
+	public void decode(ByteBuffer data) {
+		if (!super.decode(data, CRC))
+			return;
+		shutdownTime = getShort(data);
+	}
+	
+	@Override
+	public ByteBuffer encode() {
+		ByteBuffer data = ByteBuffer.allocate(8);
+		addShort(data, 1);
+		addInt(data, CRC);
+		addShort(data, shutdownTime);
+		return data;
+	}
+	
+	public int getShutdownTime() {
+		return shutdownTime;
+	}
+	
+	public void setShutdownTime(int shutdownTime) {
+		this.shutdownTime = shutdownTime;
 	}
 	
 }

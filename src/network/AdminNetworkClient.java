@@ -25,36 +25,25 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
  ***********************************************************************************/
-package services.network;
+package network;
 
-import intents.network.OutboundPacketIntent;
-import network.NetworkClient;
-import resources.control.Assert;
-import resources.control.Service;
-import resources.network.TCPServer;
+import java.net.SocketAddress;
 
-public class OutboundNetworkManager extends Service {
-	
-	private final ClientManager clientManager;
-	
-	public OutboundNetworkManager(TCPServer tcpServer, ClientManager clientManager) {
-		this.clientManager = clientManager;
-		
-		registerForIntent(OutboundPacketIntent.class, opi -> handleOutboundPacketIntent(opi));
+import services.network.PacketSender;
+import network.packets.Packet;
+
+public class AdminNetworkClient extends NetworkClient {
+
+	public AdminNetworkClient(SocketAddress address, long networkId, PacketSender sender) {
+		super(address, networkId, sender);
 	}
 	
-	private void handleOutboundPacketIntent(OutboundPacketIntent opi){
-		NetworkClient client = clientManager.getClient(opi.getNetworkId());
-		Assert.notNull(client);
-		client.addToOutbound(opi.getPacket());
+	protected boolean isInboundAllowed(Packet p) {
+		return true;
 	}
 	
-	public void onSessionCreated(NetworkClient client) {
-		
-	}
-	
-	public void onSessionDestroyed(NetworkClient client) {
-		
+	protected boolean isOutboundAllowed(Packet p) {
+		return true;
 	}
 	
 }

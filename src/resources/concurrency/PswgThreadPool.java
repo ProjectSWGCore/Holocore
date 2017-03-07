@@ -41,12 +41,18 @@ public class PswgThreadPool {
 	private final int nThreads;
 	private final ThreadFactory threadFactory;
 	private ExecutorService executor;
+	private volatile boolean waitForTermination;
 	
 	public PswgThreadPool(int nThreads, String nameFormat) {
 		this.running = new AtomicBoolean(false);
 		this.nThreads = nThreads;
 		this.threadFactory = new CustomThreadFactory(nameFormat);
 		this.executor = null;
+		this.waitForTermination = false;
+	}
+	
+	public void setWaitForTermination(boolean wait) {
+		this.waitForTermination = wait;
 	}
 	
 	public void start() {
@@ -56,11 +62,15 @@ public class PswgThreadPool {
 	
 	public void stop() {
 		Assert.test(running.getAndSet(false));
-		executor.shutdownNow();
+		if (waitForTermination)
+			executor.shutdownNow();
+		else
+			executor.shutdown();
 	}
 	
-	public void execute(Runnable runnable) {
-		Assert.test(running.get());
+	public boolean execute(Runnable runnable) {
+		if (!running.get())
+			return false;
 		executor.execute(() -> {
 			try {
 				runnable.run();
@@ -68,6 +78,7 @@ public class PswgThreadPool {
 				t.printStackTrace();
 			}
 		});
+		return true;
 	}
 	
 	public boolean awaitTermination(long time) {

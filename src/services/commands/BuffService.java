@@ -91,9 +91,9 @@ public class BuffService extends Service {
 	}
 	
 	@Override
-	public boolean terminate() {
+	public boolean stop() {
 		timerCheckThread.stop();
-		return super.terminate();
+		return super.stop();
 	}
 	
 	private void checkBuffTimers() {

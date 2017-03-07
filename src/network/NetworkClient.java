@@ -45,6 +45,7 @@ import services.network.PacketSender;
 import services.network.HolocoreSessionManager.ResponseAction;
 import utilities.IntentChain;
 import network.packets.Packet;
+import network.packets.swg.admin.AdminPacket;
 import network.packets.swg.holo.HoloConnectionStopped;
 import network.packets.swg.holo.HoloConnectionStopped.ConnectionStoppedReason;
 
@@ -61,10 +62,10 @@ public class NetworkClient {
 	private final Object outboundMutex;
 	private final Lock inboundSemaphore;
 	private final Object stateMutex;
+	private final PacketSender sender;
 	private State state;
-	private PacketSender sender;
 	
-	public NetworkClient(SocketAddress address, long networkId) {
+	public NetworkClient(SocketAddress address, long networkId, PacketSender sender) {
 		this.address = address;
 		this.networkId = networkId;
 		this.buffer = new NetBufferStream(DEFAULT_BUFFER);
@@ -73,8 +74,8 @@ public class NetworkClient {
 		this.outboundMutex = new Object();
 		this.inboundSemaphore = new ReentrantLock(true);
 		this.stateMutex = new Object();
+		this.sender = sender;
 		this.state = State.DISCONNECTED;
-		this.sender = null;
 	}
 	
 	public void close() {
@@ -112,10 +113,6 @@ public class NetworkClient {
 		sessionManager.onSessionDestroyed();
 	}
 	
-	public void setPacketSender(PacketSender sender) {
-		this.sender = sender;
-	}
-	
 	public void processInbound() {
 		if (getState() != State.CONNECTED)
 			return;
@@ -141,6 +138,8 @@ public class NetworkClient {
 				flushOutbound();
 				return;
 			}
+			if (isOutboundAllowed(packet))
+				return;
 			sendPacket(packet);
 		}
 	}
@@ -150,6 +149,14 @@ public class NetworkClient {
 			buffer.write(data);
 			return protocol.canDecode(buffer);
 		}
+	}
+	
+	protected boolean isInboundAllowed(Packet p) {
+		return !(p instanceof AdminPacket);
+	}
+	
+	protected boolean isOutboundAllowed(Packet p) {
+		return !(p instanceof AdminPacket);
 	}
 	
 	private boolean processNextPacket() throws EOFException {
@@ -175,6 +182,8 @@ public class NetworkClient {
 		if (action == ResponseAction.IGNORE)
 			return true;
 		if (action == ResponseAction.SHUT_DOWN)
+			return true;
+		if (!isInboundAllowed(p))
 			return true;
 		intentChain.broadcastAfter(new InboundPacketIntent(p, networkId));
 		return true;

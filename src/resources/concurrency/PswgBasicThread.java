@@ -58,7 +58,7 @@ public class PswgBasicThread extends PswgThreadPool {
 	}
 	
 	@Override
-	public void execute(Runnable runnable) {
+	public boolean execute(Runnable runnable) {
 		throw new UnsupportedOperationException("Runnable is defined in the constructor!");
 	}
 	

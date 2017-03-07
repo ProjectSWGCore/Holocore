@@ -42,7 +42,7 @@ import resources.server_info.RelationalDatabase;
 public abstract class Service implements IntentReceiver {
 	
 	public Service() {
-		IntentManager.getInstance().initialize();
+		
 	}
 	
 	/**
@@ -80,7 +80,6 @@ public abstract class Service implements IntentReceiver {
 	 */
 	public boolean terminate() {
 		DataManager.terminate();
-		IntentManager.getInstance().terminate();
 		return true;
 	}
 	

@@ -54,7 +54,7 @@ public final class EnvironmentService extends Service {
 	private final WeatherType[] weatherTypes;
 	private final Map<Terrain, WeatherType> weatherForTerrain;
 	private final Random random;
-
+	
 	private ScheduledExecutorService executor;
 	
 	public EnvironmentService() {
@@ -83,7 +83,7 @@ public final class EnvironmentService extends Service {
 	}
 	
 	@Override
-	public boolean stop() {
+	public boolean terminate() {
 		try {
 			if (executor != null) {
 				executor.shutdownNow();
@@ -92,7 +92,7 @@ public final class EnvironmentService extends Service {
 		} catch (InterruptedException e) {
 			
 		}
-		return super.stop();
+		return super.terminate();
 	}
 	
 	private void handlePlayerEventIntent(PlayerEventIntent pei){

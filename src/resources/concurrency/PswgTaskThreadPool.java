@@ -49,7 +49,7 @@ public class PswgTaskThreadPool<T> extends PswgThreadPool {
 	}
 	
 	@Override
-	public void execute(Runnable runnable) {
+	public boolean execute(Runnable runnable) {
 		throw new UnsupportedOperationException("Runnable are posted automatically by addTask!");
 	}
 	
@@ -58,6 +58,12 @@ public class PswgTaskThreadPool<T> extends PswgThreadPool {
 			tasks.add(t);
 		}
 		super.execute(runner);
+	}
+	
+	public int getTasks() {
+		synchronized (tasks) {
+			return tasks.size();
+		}
 	}
 	
 	public interface TaskExecutor<T> {

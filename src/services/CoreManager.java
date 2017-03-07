@@ -44,6 +44,7 @@ import intents.network.OutboundPacketIntent;
 import intents.server.ServerManagementIntent;
 import intents.server.ServerStatusIntent;
 import network.packets.Packet;
+import network.packets.swg.admin.AdminShutdownServer;
 import network.packets.swg.zone.baselines.Baseline;
 import network.packets.swg.zone.deltas.DeltasMessage;
 import network.packets.swg.zone.object_controller.ObjectController;
@@ -77,11 +78,14 @@ public class CoreManager extends Manager {
 	private long startTime;
 	private boolean shutdownRequested;
 	
-	public CoreManager() {
+	public CoreManager(int adminServerPort) {
 		Config c = getConfig(ConfigFile.PRIMARY);
 		Log.setLogLevel(LogLevel.valueOf(c.getString("LOG-LEVEL", LogLevel.DEBUG.name())));
 		setupGalaxy(c);
 		setupCrcDatabase();
+		if (adminServerPort <= 0)
+			adminServerPort = -1;
+		getGalaxy().setAdminServerPort(adminServerPort);
 		packetStream = setupPrintStream(c);
 		packetDebug = packetStream != null;
 		shutdownService = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("core-shutdown-service"));
@@ -139,12 +143,14 @@ public class CoreManager extends Manager {
 	
 	private void handleServerManagementIntent(ServerManagementIntent smi) {
 		switch(smi.getEvent()) {
-			case SHUTDOWN: initiateShutdownSequence(smi);  break;
+			case SHUTDOWN: initiateShutdownSequence(smi.getTime(), smi.getTimeUnit());  break;
 			default: break;
 		}
 	}
 	
 	private void handleInboundPacketIntent(InboundPacketIntent ipi) {
+		if (ipi.getPacket() instanceof AdminShutdownServer)
+			initiateShutdownSequence(((AdminShutdownServer) ipi.getPacket()).getShutdownTime(), TimeUnit.SECONDS);
 		if (!packetDebug)
 			return;
 		printPacketStream(true, ipi.getNetworkId(), createExtendedPacketInformation(ipi.getPacket()));
@@ -186,10 +192,8 @@ public class CoreManager extends Manager {
 		return "ObjectController:0x"+Integer.toHexString(c.getControllerCrc())+"  ID="+c.getObjectId();
 	}
 	
-	private void initiateShutdownSequence(ServerManagementIntent i) {
+	private void initiateShutdownSequence(long time, TimeUnit unit) {
 		Log.i("Beginning server shutdown sequence...");
-		long time = i.getTime();
-		TimeUnit timeUnit = i.getTimeUnit();
 		
 		shutdownService.schedule(
 				new Runnable() {
@@ -200,9 +204,9 @@ public class CoreManager extends Manager {
 					// Ziggy: Give the broadcast method extra time to complete.
 					// If we don't, the final broadcast won't be displayed.
 				},
-				TimeUnit.NANOSECONDS.convert(time, timeUnit) + TimeUnit.NANOSECONDS.convert(1, TimeUnit.SECONDS), TimeUnit.NANOSECONDS);
+				TimeUnit.NANOSECONDS.convert(time, unit) + TimeUnit.NANOSECONDS.convert(1, TimeUnit.SECONDS), TimeUnit.NANOSECONDS);
 
-		new ServerStatusIntent(ServerStatus.SHUTDOWN_REQUESTED, time, i.getTimeUnit()).broadcast();
+		new ServerStatusIntent(ServerStatus.SHUTDOWN_REQUESTED, time, unit).broadcast();
 	}
 	
 	public GalaxyStatus getGalaxyStatus() {

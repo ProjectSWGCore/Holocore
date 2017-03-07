@@ -25,36 +25,10 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
  ***********************************************************************************/
-package services.network;
+package network.packets.swg.admin;
 
-import intents.network.OutboundPacketIntent;
-import network.NetworkClient;
-import resources.control.Assert;
-import resources.control.Service;
-import resources.network.TCPServer;
+import network.packets.swg.holo.HoloPacket;
 
-public class OutboundNetworkManager extends Service {
-	
-	private final ClientManager clientManager;
-	
-	public OutboundNetworkManager(TCPServer tcpServer, ClientManager clientManager) {
-		this.clientManager = clientManager;
-		
-		registerForIntent(OutboundPacketIntent.class, opi -> handleOutboundPacketIntent(opi));
-	}
-	
-	private void handleOutboundPacketIntent(OutboundPacketIntent opi){
-		NetworkClient client = clientManager.getClient(opi.getNetworkId());
-		Assert.notNull(client);
-		client.addToOutbound(opi.getPacket());
-	}
-	
-	public void onSessionCreated(NetworkClient client) {
-		
-	}
-	
-	public void onSessionDestroyed(NetworkClient client) {
-		
-	}
+public abstract class AdminPacket extends HoloPacket {
 	
 }

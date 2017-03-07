@@ -53,6 +53,7 @@ public class Galaxy {
 	private int maxCharacters = 0;
 	private int onlinePlayerLimit = 0;
 	private int onlineFreeTrialLimit = 0;
+	private int adminServerPort = 0;
 	private boolean recommended = true;
 	
 	public Galaxy() {
@@ -70,6 +71,7 @@ public class Galaxy {
 	public synchronized int    getMaxCharacters()        { return maxCharacters; }
 	public synchronized int    getOnlinePlayerLimit()    { return onlinePlayerLimit; }
 	public synchronized int    getOnlineFreeTrialLimit() { return onlineFreeTrialLimit; }
+	public synchronized int	   getAdminServerPort()      { return adminServerPort; }
 	public synchronized boolean isRecommended()          { return recommended; }
 	
 	public synchronized int getPopulationStatus() {
@@ -100,6 +102,7 @@ public class Galaxy {
 	public synchronized void setMaxCharacters(int max)        { this.maxCharacters = max; }
 	public synchronized void setOnlinePlayerLimit(int max)    { this.onlinePlayerLimit = max; }
 	public synchronized void setOnlineFreeTrialLimit(int max) { this.onlineFreeTrialLimit = max; }
+	public synchronized void setAdminServerPort(int port)     { this.adminServerPort = port; }
 	public synchronized void setRecommended(boolean r)        { this.recommended = r; }
 	public synchronized void incrementPopulationCount()       { population++; }
 	public synchronized void decrementPopulationCount()       { population--; }
