@@ -85,9 +85,11 @@ public class NetworkClientManager extends Manager {
 	public boolean start() {
 		try {
 			tcpServer.bind();
-			adminServer.bind();
+			if (adminServer != null) {
+				adminServer.bind();
+				adminServer.setCallback(new AdminNetworkCallback());
+			}
 			tcpServer.setCallback(new StandardNetworkCallback());
-			adminServer.setCallback(new AdminNetworkCallback());
 		} catch (IOException e) {
 			Log.e(e);
 			if (e instanceof BindException)
@@ -100,7 +102,9 @@ public class NetworkClientManager extends Manager {
 	@Override
 	public boolean stop() {
 		tcpServer.close();
-		adminServer.close();
+		if (adminServer != null) {
+			adminServer.close();
+		}
 		return super.stop();
 	}
 	
@@ -150,7 +154,7 @@ public class NetworkClientManager extends Manager {
 		private final PacketSender sender;
 		
 		public StandardNetworkCallback() {
-			this.sender = new PacketSender(adminServer);
+			this.sender = new PacketSender(tcpServer);
 		}
 		
 		@Override
