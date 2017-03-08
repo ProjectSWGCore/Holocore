@@ -138,7 +138,7 @@ public class NetworkClient {
 				flushOutbound();
 				return;
 			}
-			if (isOutboundAllowed(packet))
+			if (!isOutboundAllowed(packet))
 				return;
 			sendPacket(packet);
 		}
