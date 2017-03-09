@@ -65,11 +65,12 @@ import services.objects.StaticItemService;
 public final class SkillTemplateService extends Service {
 	
 	private final Map<String, String[]> skillTemplates;
+	private final Map<String, RoadmapReward> rewards;
 	private final Map<String, String[]> badgeNames;
-	private Map<String, RoadmapReward> rewards;
 
 	public SkillTemplateService() {
 		skillTemplates = new HashMap<>();
+		rewards = new HashMap<>();
 		
 		badgeNames = new HashMap<>();
 		badgeNames.put("bounty_hunter_1a", 	new String[]{"new_prof_bountyhunter_master"});
@@ -100,8 +101,7 @@ public final class SkillTemplateService extends Service {
 			skillTemplates.put(profession, templates);
 		}
 
-		DatatableData rewardsTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/roadmap/item_rewards.iff");
-		rewards = loadRewardItemsIff(rewardsTable);
+		loadRewardItemsIff();
 
 		return super.initialize();
 	}
@@ -144,14 +144,11 @@ public final class SkillTemplateService extends Service {
 		String flyText;
 		RGB flyTextColor;
 		
-		if (skillUp)
-		{
+		if (skillUp) {
 			effectFile = "clienteffect/skill_granted.cef";
 			flyText = "skill_up";
 			flyTextColor = new RGB(Color.GREEN);
-		}
-		else
-		{
+		} else {
 			effectFile = "clienteffect/level_granted.cef";
 			flyText = "level_up";
 			flyTextColor = new RGB(Color.BLUE);
@@ -160,7 +157,8 @@ public final class SkillTemplateService extends Service {
 		creatureObject.sendObserversAndSelf(new PlayClientEffectObjectMessage(effectFile, "", objectId));
 		player.sendPacket(new ShowFlyText(objectId, new StringId("cbt_spam", flyText), Scale.LARGEST, flyTextColor));
 		
-		if (skillUp) player.sendPacket(new PlayMusicMessage(0, "sound/music_acq_bountyhunter.snd", 1, false));
+		if (skillUp)
+			player.sendPacket(new PlayMusicMessage(0, "sound/music_acq_bountyhunter.snd", 1, false));
 	}
 
 	private void giveRewardItems(CreatureObject creatureObject, String skillName) {
@@ -201,8 +199,8 @@ public final class SkillTemplateService extends Service {
 		}
 	}
 
-	private HashMap<String, RoadmapReward> loadRewardItemsIff(DatatableData rewardsTable) {
-		HashMap<String, RoadmapReward> rewards = new HashMap<>();
+	private void loadRewardItemsIff() {
+		DatatableData rewardsTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/roadmap/item_rewards.iff");
 		
 		for (int row = 0; row < rewardsTable.getRowCount(); row++) {
 			String roadmapTemplate = rewardsTable.getCell(row, 0).toString();
@@ -215,25 +213,25 @@ public final class SkillTemplateService extends Service {
 
 			rewards.put(roadmapSkillName, new RoadmapReward(roadmapTemplate, roadmapSkillName, appearanceName, stringId, itemDefault, itemWookiee, itemIthorian));
 		}
-		
-		return rewards;
 	}
 	
 	private void grantMasteryBadge(CreatureObject creature, String profession, String skillName) {
 		Log.d("grantMasteryBadge - skillName: %s", skillName);
-		if (skillName.endsWith("_phase4_master")) {
-			if (badgeNames.containsKey(profession)) {
-				String[] badgeList = badgeNames.get(profession);
-				for (String badgeName : badgeList)
-				{
-					new GrantBadgeIntent(creature, badgeName).broadcast();
-					Log.d("granting badge %s to %s", badgeName, creature);
-				}
-			}
-			else
-			{
-				Log.e("%s could not be granted a mastery badge because their profession %s is unrecognised", creature, profession);
-			}
+		
+		if (!skillName.endsWith("_phase4_master")) {
+			return;
+		}
+		
+		String[] badges = badgeNames.get(profession);
+		
+		if (badges == null) {
+			Log.e("%s could not be granted a mastery badge because their profession %s is unrecognised", creature, profession);
+			return;
+		}
+		
+		for (String badgeName : badges) {
+			new GrantBadgeIntent(creature, badgeName).broadcast();
+			Log.i("Granting badge %s to %s", badgeName, creature);
 		}
 	}
 	
