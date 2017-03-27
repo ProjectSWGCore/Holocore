@@ -71,6 +71,7 @@ import resources.player.Player.PlayerServer;
 import resources.server_info.Config;
 import resources.server_info.Log;
 import resources.server_info.RelationalDatabase;
+import resources.server_info.RelationalServerFactory;
 import services.CoreManager;
 
 public class LoginService extends Service {
@@ -90,11 +91,11 @@ public class LoginService extends Service {
 	
 	@Override
 	public boolean initialize() {
-		RelationalDatabase local = getLocalDatabase();
+		RelationalDatabase local = RelationalServerFactory.getServerDatabase("login/login.db");
 		getUser = local.prepareStatement("SELECT * FROM users WHERE LOWER(username) = LOWER(?)");
-		getCharacter = local.prepareStatement("SELECT id FROM characters WHERE LOWER(name) = ?");
-		getCharacters = local.prepareStatement("SELECT * FROM characters WHERE userid = ?");
-		deleteCharacter = local.prepareStatement("DELETE FROM characters WHERE id = ?");
+		getCharacter = local.prepareStatement("SELECT id FROM players WHERE LOWER(name) = ?");
+		getCharacters = local.prepareStatement("SELECT * FROM players WHERE userid = ?");
+		deleteCharacter = local.prepareStatement("DELETE FROM players WHERE id = ?");
 		return super.initialize();
 	}
 	
