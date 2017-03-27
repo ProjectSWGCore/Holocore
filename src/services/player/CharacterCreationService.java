@@ -292,7 +292,7 @@ public class CharacterCreationService extends Service {
 				getCharacterCount.setInt(1, userId);
 				try (ResultSet set = getCharacterCount.executeQuery()) {
 					if (set.next())
-						return set.getInt("count");
+						return set.getInt(1);
 				}
 			} catch (SQLException e) {
 				Log.e(e);
