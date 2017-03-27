@@ -79,6 +79,7 @@ public class LoginService extends Service {
 	private static final String REQUIRED_VERSION = "20111130-15:46";
 	private static final byte [] SESSION_TOKEN = new byte[24];
 	
+	private RelationalDatabase database;
 	private PreparedStatement getUser;
 	private PreparedStatement getCharacter;
 	private PreparedStatement getCharacters;
@@ -91,12 +92,18 @@ public class LoginService extends Service {
 	
 	@Override
 	public boolean initialize() {
-		RelationalDatabase local = RelationalServerFactory.getServerDatabase("login/login.db");
-		getUser = local.prepareStatement("SELECT * FROM users WHERE LOWER(username) = LOWER(?)");
-		getCharacter = local.prepareStatement("SELECT id FROM players WHERE LOWER(name) = ?");
-		getCharacters = local.prepareStatement("SELECT * FROM players WHERE userid = ?");
-		deleteCharacter = local.prepareStatement("DELETE FROM players WHERE id = ?");
+		database = RelationalServerFactory.getServerDatabase("login/login.db");
+		getUser = database.prepareStatement("SELECT * FROM users WHERE LOWER(username) = LOWER(?)");
+		getCharacter = database.prepareStatement("SELECT id FROM players WHERE LOWER(name) = ?");
+		getCharacters = database.prepareStatement("SELECT * FROM players WHERE userid = ?");
+		deleteCharacter = database.prepareStatement("DELETE FROM players WHERE id = ?");
 		return super.initialize();
+	}
+	
+	@Override
+	public boolean terminate() {
+		database.close();
+		return super.terminate();
 	}
 	
 	public long getCharacterId(String name) {

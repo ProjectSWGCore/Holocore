@@ -30,6 +30,7 @@ package services.player;
 import intents.GalacticIntent;
 import intents.PlayerEventIntent;
 import intents.object.DestroyObjectIntent;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -61,6 +62,8 @@ import resources.player.Player;
 import resources.player.PlayerEvent;
 import resources.player.PlayerState;
 import resources.server_info.Log;
+import resources.server_info.RelationalDatabase;
+import resources.server_info.RelationalServerFactory;
 import resources.zone.NameFilter;
 import services.objects.ObjectManager;
 import services.player.TerrainZoneInsertion.SpawnInformation;
@@ -81,6 +84,7 @@ public class CharacterCreationService extends Service {
 	private final CharacterCreationRestriction creationRestriction;
 	private final TerrainZoneInsertion insertion;
 	
+	private RelationalDatabase database;
 	private PreparedStatement createCharacter;
 	private PreparedStatement getCharacter;
 	private PreparedStatement getLikeCharacterName;
@@ -97,10 +101,11 @@ public class CharacterCreationService extends Service {
 	
 	@Override
 	public boolean initialize() {
-		createCharacter = getLocalDatabase().prepareStatement(CREATE_CHARACTER_SQL);
-		getCharacter = getLocalDatabase().prepareStatement(GET_CHARACTER_SQL);
-		getLikeCharacterName = getLocalDatabase().prepareStatement(GET_LIKE_CHARACTER_SQL);
-		getCharacterCount = getLocalDatabase().prepareStatement(GET_CHARACTER_COUNT_SQL);
+		database = RelationalServerFactory.getServerDatabase("login/login.db");
+		createCharacter = database.prepareStatement(CREATE_CHARACTER_SQL);
+		getCharacter = database.prepareStatement(GET_CHARACTER_SQL);
+		getLikeCharacterName = database.prepareStatement(GET_LIKE_CHARACTER_SQL);
+		getCharacterCount = database.prepareStatement(GET_CHARACTER_COUNT_SQL);
 		nameGenerator.loadAllRules();
 		loadProfTemplates();
 		if (!nameFilter.load())
@@ -112,6 +117,12 @@ public class CharacterCreationService extends Service {
 	public boolean start() {
 		creationRestriction.setCreationsPerPeriod(getConfig(ConfigFile.PRIMARY).getInt("GALAXY-MAX-CHARACTERS-PER-PERIOD", 2));
 		return super.start();
+	}
+	
+	@Override
+	public boolean terminate() {
+		database.close();
+		return super.terminate();
 	}
 	
 	public void handlePacket(GalacticIntent intent, Player player, Packet p) {
