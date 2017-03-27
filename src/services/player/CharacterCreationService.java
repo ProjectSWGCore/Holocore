@@ -69,10 +69,10 @@ import utilities.namegen.SWGNameGenerator;
 
 public class CharacterCreationService extends Service {
 	
-	private static final String CREATE_CHARACTER_SQL = "INSERT INTO characters (id, name, race, userId) VALUES (?, ?, ?, ?)";
-	private static final String GET_CHARACTER_SQL = "SELECT * FROM characters WHERE name == ?";
-	private static final String GET_LIKE_CHARACTER_SQL = "SELECT name FROM characters WHERE name ilike ?"; // NOTE: ilike is not SQL standard. It is an extension for postgres only.
-	private static final String GET_CHARACTER_COUNT_SQL = "SELECT count(*) FROM characters WHERE userId = ?";
+	private static final String CREATE_CHARACTER_SQL = "INSERT INTO players (id, name, race, userId) VALUES (?, ?, ?, ?)";
+	private static final String GET_CHARACTER_SQL = "SELECT * FROM players WHERE name == ?";
+	private static final String GET_LIKE_CHARACTER_SQL = "SELECT name FROM players WHERE LOWER(name) LIKE ?";
+	private static final String GET_CHARACTER_COUNT_SQL = "SELECT count(*) FROM players WHERE userId = ?";
 	
 	private final Map <String, Player> lockedNames;
 	private final Map <String, ProfTemplateData> profTemplates;
@@ -127,7 +127,7 @@ public class CharacterCreationService extends Service {
 		synchronized (getCharacter) {
 			ResultSet set = null;
 			try {
-				String nameSplitStr[] = name.split(" ");
+				String nameSplitStr[] = name.toLowerCase(Locale.US).split(" ");
 				String charExistsPrepStmtStr = nameSplitStr[0] + "%"; //Only the first name should be unique.
 				getLikeCharacterName.setString(1, charExistsPrepStmtStr);
 				set = getLikeCharacterName.executeQuery();
