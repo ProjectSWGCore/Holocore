@@ -68,7 +68,7 @@ public class EngineManager extends Manager {
 	
 	private void wipeCharacterDatabase() {
 		try (RelationalDatabase database = RelationalServerFactory.getServerDatabase("login/login.db")) {
-			database.executeQuery("DELETE FROM characters");
+			database.executeQuery("DELETE FROM players");
 		}
 	}
 	
