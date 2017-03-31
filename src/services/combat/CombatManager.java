@@ -199,7 +199,7 @@ public class CombatManager extends Manager {
 			int modification = 40;
 			int level = creatureObject.getLevel();
 			
-			if(level > 1) {
+			if (level > 1) {
 				modification += 4 * level;
 			}
 			

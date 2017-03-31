@@ -35,7 +35,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import main.ProjectSWG.CoreException;
 
 import resources.config.ConfigFile;
 import resources.control.Intent;
@@ -50,7 +49,6 @@ public class DataManager implements IntentReceiver {
 
 	private Map<ConfigFile, Config> config;
 	private List<ConfigWatcher> watchers;
-	private RelationalDatabase localDatabase;
 	private boolean initialized;
 
 	private DataManager() {
@@ -61,17 +59,9 @@ public class DataManager implements IntentReceiver {
 
 	private synchronized void initialize() {
 		initializeConfig();
-		initializeDatabases();
 		if (getConfig(ConfigFile.PRIMARY).getBoolean(ENABLE_LOGGING, true))
 			Log.start();
-		initialized = localDatabase.isOnline();
-		
-		String[] datatables = {"users", "characters"};
-		
-		for (int i = 0; i < datatables.length - 1; i++) {
-			if (!localDatabase.isTable(datatables[i]))
-				throw new CoreException("The database is missing the table: " + datatables[i]);
-		}
+		initialized = true;
 	}
 	
 	private synchronized void shutdown() {
@@ -121,18 +111,6 @@ public class DataManager implements IntentReceiver {
 		return file.exists();
 	}
 
-	private synchronized void initializeDatabases() {
-		Config c = getConfig(ConfigFile.PRIMARY);
-		initializeLocalDatabase(c);
-	}
-
-	private synchronized void initializeLocalDatabase(Config c) {
-		String db = c.getString("LOCAL-DB", "nge");
-		String user = c.getString("LOCAL-USER", "nge");
-		String pass = c.getString("LOCAL-PASS", "nge");
-		localDatabase = new PostgresqlDatabase("localhost", db, user, pass);
-	}
-
 	/**
 	 * Gets the config object associated with a certain file, or NULL if the
 	 * file failed to load on startup
@@ -147,15 +125,6 @@ public class DataManager implements IntentReceiver {
 		if (c == null)
 			return new Config(file.getFilename());
 		return c;
-	}
-
-	/**
-	 * Gets the relational database associated with the local postgres database
-	 * 
-	 * @return the database for the local postgres database
-	 */
-	public synchronized final RelationalDatabase getLocalDatabase() {
-		return localDatabase;
 	}
 
 	public synchronized final boolean isInitialized() {

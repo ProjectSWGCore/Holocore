@@ -32,24 +32,30 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class Log {
 	
-	private static final DateFormat LOG_FORMAT = new SimpleDateFormat("dd-MM-yy HH:mm:ss.SSS");
-	private static final Log LOG = new Log("log.txt", LogLevel.VERBOSE);
+	private static Log INSTANCE = null;
 	
+	private final Lock logLock;
+	private final DateFormat timeFormat;
 	private final File file;
 	private final AtomicReference<LogLevel> level;
 	private BufferedWriter writer;
 	private boolean open;
 	
 	private Log(String filename, LogLevel level) {
+		this.logLock = new ReentrantLock(true);
+		this.timeFormat = new SimpleDateFormat("dd-MM-yy HH:mm:ss.SSS");
 		this.file = new File(filename);
-		this.level = new AtomicReference<>();
+		this.level = new AtomicReference<>(level);
 		open = false;
 	}
 	
@@ -82,10 +88,13 @@ public class Log {
 	}
 	
 	private synchronized void logRaw(LogLevel level, String logStr) {
+		PrintStream stream;
 		if (level.compareTo(LogLevel.WARN) >= 0)
-			System.err.println(logStr);
+			stream = System.err;
 		else
-			System.out.println(logStr);
+			stream = System.out;
+		stream.println(logStr);
+		stream.flush();
 		try {
 			write(logStr);
 		} catch (IOException e) {
@@ -93,9 +102,36 @@ public class Log {
 		}
 	}
 	
+	private void logImplementation(LogLevel level, String str, Object ... args) {
+		if (getLevel().compareTo(level) > 0)
+			return;
+		String date;
+		synchronized (timeFormat) {
+			date = timeFormat.format(System.currentTimeMillis());
+		}
+		if (args.length == 0)
+			logRaw(level, date + ' ' + level.getChar() + ": " + str);
+		else
+			logRaw(level, date + ' ' + level.getChar() + ": " + String.format(str, args));
+	}
+	
+	private void lock() {
+		logLock.lock();
+	}
+	
+	private void unlock() {
+		logLock.unlock();
+	}
+	
+	private static synchronized final Log getInstance() {
+		if (INSTANCE == null)
+			INSTANCE = new Log("log.txt", LogLevel.VERBOSE);
+		return INSTANCE;
+	}
+	
 	protected static final void start() {
 		try {
-			LOG.open();
+			getInstance().open();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -103,7 +139,7 @@ public class Log {
 	
 	protected static final void stop() {
 		try {
-			LOG.close();
+			getInstance().close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -115,9 +151,7 @@ public class Log {
 	 * @param level the minimum log level, inclusively. Default is VERBOSE
 	 */
 	public static final void setLogLevel(LogLevel level) {
-		synchronized (LOG) {
-			LOG.setLevel(level);
-		}
+		getInstance().setLevel(level);
 	}
 	
 	/**
@@ -129,16 +163,12 @@ public class Log {
 	 * @param args the string format arguments, if specified
 	 */
 	public static final void log(LogLevel level, String str, Object ... args) {
-		if (LOG.getLevel().compareTo(level) > 0)
-			return;
-		String date;
-		synchronized (LOG_FORMAT) {
-			date = LOG_FORMAT.format(System.currentTimeMillis());
+		try {
+			getInstance().lock();
+			getInstance().logImplementation(level, str, args);
+		} finally {
+			getInstance().unlock();
 		}
-		if (args.length == 0)
-			LOG.logRaw(level, date + ' ' + level.getChar() + ": " + str);
-		else
-			LOG.logRaw(level, date + ' ' + level.getChar() + ": " + String.format(str, args));
 	}
 	
 	/**
@@ -231,13 +261,19 @@ public class Log {
 	}
 	
 	private static final void printException(LogLevel level, Throwable exception) {
-		String header1 = String.format("Exception in thread \"%s\" %s: %s", Thread.currentThread().getName(), exception.getClass().getName(), exception.getMessage());
-		String header2 = String.format("Caused by: %s: %s", exception.getClass().getCanonicalName(), exception.getMessage());
-		StackTraceElement [] elements = exception.getStackTrace();
-		log(level, header1);
-		log(level, header2);
-		for (StackTraceElement e : elements) {
-			log(level, "    " + e.toString());
+		Log instance = getInstance();
+		try {
+			String header1 = String.format("Exception in thread \"%s\" %s: %s", Thread.currentThread().getName(), exception.getClass().getName(), exception.getMessage());
+			String header2 = String.format("Caused by: %s: %s", exception.getClass().getCanonicalName(), exception.getMessage());
+			StackTraceElement [] elements = exception.getStackTrace();
+			instance.lock();
+			instance.logImplementation(level, header1);
+			instance.logImplementation(level, header2);
+			for (StackTraceElement e : elements) {
+				instance.logImplementation(level, "    " + e.toString());
+			}
+		} finally {
+			instance.unlock();
 		}
 	}
 	

@@ -47,6 +47,8 @@ import resources.config.ConfigFile;
 import resources.control.Service;
 import resources.server_info.Config;
 import resources.server_info.Log;
+import resources.server_info.RelationalDatabase;
+import resources.server_info.RelationalServerFactory;
 import services.admin.http.HttpServer;
 import services.admin.http.HttpServer.HttpServerCallback;
 import services.admin.http.HttpSession;
@@ -57,13 +59,13 @@ import utilities.ThreadUtilities;
 
 public class OnlineInterfaceService extends Service implements HttpServerCallback {
 	
-	private static final String TAG = "OnlineInterfaceService";
 	private static final String GET_USER_SQL = "SELECT password, banned FROM users WHERE LOWER(username) = LOWER(?)";
 	
 	private final WebserverData data;
 	private final WebserverHandler handler;
 	private final Runnable dataCollectionRunnable;
-	private final PreparedStatement getUser;
+	private RelationalDatabase database;
+	private PreparedStatement getUser;
 	private ScheduledExecutorService executor;
 	private HttpsServer httpsServer;
 	private HttpServer httpServer;
@@ -73,12 +75,13 @@ public class OnlineInterfaceService extends Service implements HttpServerCallbac
 		data = new WebserverData();
 		handler = new WebserverHandler(data);
 		dataCollectionRunnable = () -> collectData();
-		getUser = getLocalDatabase().prepareStatement(GET_USER_SQL);
 		authorized = false;
 	}
 	
 	@Override
 	public boolean initialize() {
+		database = RelationalServerFactory.getServerDatabase("login/login.db");
+		getUser = database.prepareStatement(GET_USER_SQL);
 		Config network = getConfig(ConfigFile.NETWORK);
 		authorized = !network.getString("HTTPS-KEYSTORE-PASSWORD", "").isEmpty();
 		if (!authorized)
@@ -125,6 +128,12 @@ public class OnlineInterfaceService extends Service implements HttpServerCallbac
 			}
 		}
 		return super.stop();
+	}
+	
+	@Override
+	public boolean terminate() {
+		database.close();
+		return super.terminate();
 	}
 	
 	@Override

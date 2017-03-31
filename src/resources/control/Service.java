@@ -33,7 +33,6 @@ import resources.config.ConfigFile;
 import resources.server_info.Config;
 import resources.server_info.DataManager;
 import resources.server_info.Log;
-import resources.server_info.RelationalDatabase;
 
 
 /**
@@ -134,14 +133,6 @@ public abstract class Service implements IntentReceiver {
 	 */
 	public synchronized final Config getConfig(ConfigFile file) {
 		return DataManager.getInstance().getConfig(file);
-	}
-	
-	/**
-	 * Gets the relational database associated with the local postgres database
-	 * @return the database for the local postgres database
-	 */
-	public synchronized final RelationalDatabase getLocalDatabase() {
-		return DataManager.getInstance().getLocalDatabase();
 	}
 	
 }
