@@ -812,10 +812,6 @@ public class CreatureObject extends TangibleObject {
 		return sentDuels;
 	}
 	
-	public boolean isInADuelWithPlayer(CreatureObject otherPlayer) {
-		return true;
-	}
-	
 	@Override
 	public boolean isEnemy(TangibleObject otherObject) {
 		boolean tangibleEnemy = super.isEnemy(otherObject);
