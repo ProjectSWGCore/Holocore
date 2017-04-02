@@ -30,7 +30,6 @@ package services.combat;
 
 import intents.chat.ChatBroadcastIntent;
 import intents.combat.DuelPlayerIntent;
-import intents.combat.DuelPlayerIntent.DuelEventType;
 import resources.objects.creature.CreatureObject;
 import resources.control.Service;
 import resources.encodables.ProsePackage;
