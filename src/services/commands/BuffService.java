@@ -311,7 +311,9 @@ public class BuffService extends Service {
 		sendParticleEffect(buffData.getEffectFileName(), receiver, buffData.getParticleHardPoint());
 		sendParticleEffect(buffData.getStanceParticle(), receiver, buffData.getParticleHardPoint());
 		
-		monitored.add(receiver);
+		synchronized (monitored) {
+			monitored.add(receiver);
+		}
 	}
 	
 	private void sendParticleEffect(String effectFileName, CreatureObject receiver, String hardPoint) {
