@@ -993,8 +993,21 @@ function handleJediEquipment(player) {
 		"item_jedi_robe_04_02",
 		"item_jedi_robe_06_03",
 		"item_jedi_robe_06_04",
+		"item_jedi_robe_dark_03_01",
+		"item_jedi_robe_dark_03_02",
+		"item_jedi_robe_dark_03_03",
+		"item_jedi_robe_dark_04_01",
+		"item_jedi_robe_dark_04_02",
+		"item_jedi_robe_dark_04_03",
 		"item_jedi_robe_dark_04_04",
 		"item_jedi_robe_dark_04_05",
+		"item_jedi_robe_light_03_01",
+		"item_jedi_robe_light_03_02",
+		"item_jedi_robe_light_03_03",
+		"item_jedi_robe_light_04_01",
+		"item_jedi_robe_light_04_02",
+		"item_jedi_robe_light_04_03",
+		"item_jedi_robe_light_04_04",
 		"item_jedi_robe_light_04_05"
 			]);
 }
