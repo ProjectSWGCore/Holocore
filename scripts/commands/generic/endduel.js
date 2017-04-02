@@ -4,8 +4,8 @@ function executeCommand(galacticManager, player, target, args) {
 	var DuelEventType = Java.type("intents.combat.DuelPlayerIntent.DuelEventType");
 	
 	if (player.getCreatureObject().sentDuelRequestToPlayer(target)) {
-			new DuelPlayerIntent(player.getCreatureObject(), target, DuelEventType.CANCEL).broadcast();
+		new DuelPlayerIntent(player.getCreatureObject(), target, DuelEventType.CANCEL).broadcast();
 	} else {
-			new DuelPlayerIntent(player.getCreatureObject(), target, DuelEventType.END).broadcast();
+		new DuelPlayerIntent(player.getCreatureObject(), target, DuelEventType.END).broadcast();
 	}
 }
