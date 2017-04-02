@@ -824,6 +824,9 @@ public class CreatureObject extends TangibleObject {
 			return tangibleEnemy;
 		}
 		
+		if (activeDuels.contains(otherObject))
+			return true;
+		
 		return isPlayer() && ((CreatureObject) otherObject).isPlayer()
 				&& getPvpFaction() != PvpFaction.NEUTRAL
 				&& otherObject.getPvpFaction() != PvpFaction.NEUTRAL
