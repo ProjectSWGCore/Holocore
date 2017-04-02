@@ -808,6 +808,10 @@ public class CreatureObject extends TangibleObject {
 		return sentDuels.contains(player);
 	}
 	
+	public boolean isInDuelWithPlayer(CreatureObject player) {
+		return activeDuels.contains(player);
+	}
+	
 	public List<CreatureObject> getActiveDuels() {
 		return activeDuels;
 	}
