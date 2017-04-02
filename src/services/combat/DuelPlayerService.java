@@ -31,6 +31,7 @@ package services.combat;
 import intents.chat.ChatBroadcastIntent;
 import intents.combat.DuelPlayerIntent;
 import resources.objects.creature.CreatureObject;
+import resources.PvpFlag;
 import resources.control.Service;
 import resources.encodables.ProsePackage;
 import resources.encodables.StringId;
@@ -49,13 +50,16 @@ public class DuelPlayerService extends Service {
 		target.getActiveDuels().add(accepter);
 		sendSystemMessage(accepter, target, "accept_self");
 		sendSystemMessage(target, accepter, "accept_target");
-		// TODO: Update each person's pvp status
+		accepter.setPvpFlags(PvpFlag.DUEL);
+		target.setPvpFlags(PvpFlag.DUEL);
 	}
 	
 	private void handleEndDuel(CreatureObject ender, CreatureObject target) {
 		if (ender.getActiveDuels().contains(target)) {
 			sendSystemMessage(ender, target, "end_self");
 			sendSystemMessage(target, ender, "end_target");
+			ender.clearPvpFlags(PvpFlag.DUEL);
+			target.clearPvpFlags(PvpFlag.DUEL);
 			ender.getActiveDuels().remove(target);
 			target.getActiveDuels().remove(ender);
 			
