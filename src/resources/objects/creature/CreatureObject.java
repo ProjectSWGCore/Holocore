@@ -30,6 +30,7 @@ package resources.objects.creature;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 import java.util.Locale;
 import java.util.function.Predicate;
@@ -57,6 +58,7 @@ import resources.objects.tangible.TangibleObject;
 import resources.objects.weapon.WeaponObject;
 import resources.persistable.SWGObjectFactory;
 import resources.player.Player;
+import resources.server_info.SynchronizedList;
 import services.group.GroupInviterData;
 import utilities.Encoder.StringType;
 
@@ -82,6 +84,10 @@ public class CreatureObject extends TangibleObject {
 	private SWGSet<String>		skills				= new SWGSet<String>(1, 3, StringType.ASCII);
 	
 	private SWGList<Integer>	baseAttributes		= new SWGList<Integer>(1, 2);
+	
+	private List<CreatureObject> activeDuels		= new SynchronizedList<CreatureObject>();
+	
+	private List<CreatureObject> sentDuels		= new SynchronizedList<CreatureObject>();
 	
 	public CreatureObject(long objectId) {
 		super(objectId, BaselineType.CREO);
@@ -796,6 +802,18 @@ public class CreatureObject extends TangibleObject {
 		Posture otherPosture = otherObject.getPosture();
 		
 		return isEnemy(otherObject) && otherPosture != Posture.INCAPACITATED && otherPosture != Posture.DEAD;
+	}
+	
+	public List<CreatureObject> getActiveDuels() {
+		return activeDuels;
+	}
+	
+	public List<CreatureObject> getSentDuels() {
+		return sentDuels;
+	}
+	
+	public boolean isInADuelWithPlayer(CreatureObject otherPlayer) {
+		return true;
 	}
 	
 	@Override

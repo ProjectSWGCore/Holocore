@@ -28,49 +28,52 @@
 
 package services.combat;
 
-import java.util.List;
-
 import intents.chat.ChatBroadcastIntent;
 import intents.combat.DuelPlayerIntent;
+import intents.combat.DuelPlayerIntent.DuelEventType;
 import resources.objects.creature.CreatureObject;
-import resources.server_info.SynchronizedList;
 import resources.control.Service;
 import resources.encodables.ProsePackage;
 import resources.encodables.StringId;
 
 public class DuelPlayerService extends Service {
-	
-	private final List<CreatureObject> duels;
-	
 	public DuelPlayerService() {
-		duels = new SynchronizedList<>();
-		
 		registerForIntent(DuelPlayerIntent.class, dpi -> handleDuelPlayerIntent(dpi));
 	}
 	
 	private void handleAcceptDuel(CreatureObject accepter, CreatureObject target) {
-		duels.add(target);
+		if (accepter.getActiveDuels().contains(target)) {
+			sendSystemMessage(accepter, target, "already_dueling");
+			return;
+		}
+		accepter.getActiveDuels().add(target);
+		target.getActiveDuels().add(accepter);
 		sendSystemMessage(accepter, target, "accept_self");
 		sendSystemMessage(target, accepter, "accept_target");
 		// TODO: Update each person's pvp status
 	}
 	
 	private void handleEndDuel(CreatureObject ender, CreatureObject target) {
-		if (duels.contains(target)) {
+		if (ender.getActiveDuels().contains(target)) {
 			sendSystemMessage(ender, target, "end_self");
 			sendSystemMessage(target, ender, "end_target");
-			duels.remove(ender);
-			duels.remove(target);
-			// TODO: Update each person's pvp status
+			ender.getActiveDuels().remove(target);
+			target.getActiveDuels().remove(ender);
+			
+			if (ender.getSentDuels().contains(target)) {
+				ender.getSentDuels().remove(target);
+			} else {
+				target.getSentDuels().remove(ender);
+			}
 		} else {
 			sendSystemMessage(ender, target, "not_dueling");
 		}
 	}
 	
 	private void handleCancelDuel(CreatureObject canceler, CreatureObject target) {
+		canceler.getSentDuels().remove(target);
 		sendSystemMessage(canceler, target, "cancel_self");
 		sendSystemMessage(target, canceler, "cancel_target");
-		duels.remove(target);
 	}
 	
 	private void handleDeclineDuel(CreatureObject decliner, CreatureObject target) {
@@ -78,21 +81,24 @@ public class DuelPlayerService extends Service {
 	}
 	
 	private void handleRequestDuel(CreatureObject requester, CreatureObject target) {
-		if (!duels.contains(requester)) {
-			duels.add(target);
+		if (!requester.getSentDuels().contains(target)) {
+			requester.getSentDuels().add(target);
 			sendSystemMessage(requester, target, "challenge_self");
 			sendSystemMessage(target, requester, "challenge_target");
+		} else if (requester.getActiveDuels().contains(target)) {
+			sendSystemMessage(requester, target, "already_dueling");
 		} else {
 			sendSystemMessage(requester, target, "already_challenged");
 		}
 	}
 	
-	private void checkForEventTypeCorrection(DuelPlayerIntent dpi) {
-		if (dpi.getEventType() == DuelPlayerIntent.DuelEventType.REQUEST && duels.contains(dpi.getSender())) {
-			dpi.setDuelEventType(DuelPlayerIntent.DuelEventType.ACCEPT);
-		} else if (dpi.getEventType() == DuelPlayerIntent.DuelEventType.END && duels.contains(dpi.getReciever()) && !duels.contains(dpi.getSender())) {
-			dpi.setDuelEventType(DuelPlayerIntent.DuelEventType.CANCEL);
+	private DuelEventType getTrueEventType(DuelPlayerIntent dpi) {
+		if (dpi.getEventType() == DuelEventType.END && dpi.getSender().getSentDuels().contains(dpi.getReciever())) {
+			return DuelEventType.CANCEL;
+		} else if (dpi.getEventType() == DuelEventType.REQUEST && dpi.getReciever().getSentDuels().contains(dpi.getSender())) {
+			return DuelEventType.ACCEPT;
 		}
+		return dpi.getEventType();
 	}
 	
 	private void handleDuelPlayerIntent(DuelPlayerIntent dpi) {
@@ -100,9 +106,7 @@ public class DuelPlayerService extends Service {
 			return;
 		}
 		
-		checkForEventTypeCorrection(dpi);
-		
-		switch (dpi.getEventType()) {
+		switch (getTrueEventType(dpi)) {
 			case ACCEPT:
 				handleAcceptDuel(dpi.getSender(), dpi.getReciever());
 				break;
@@ -119,10 +123,6 @@ public class DuelPlayerService extends Service {
 				handleRequestDuel(dpi.getSender(), dpi.getReciever());
 				break;
 		}
-	}
-	
-	public List<CreatureObject> getDuelsList() {
-		return duels;
 	}
 	
 	private void sendSystemMessage(CreatureObject playerToMessage, CreatureObject playerToMessageAbout, String message) {
