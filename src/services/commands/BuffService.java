@@ -256,13 +256,10 @@ public class BuffService extends Service {
 	}
 	
 	private void updateAllBuffs(CreatureObject creature, Stream<Buff> buffStream) {
-		Log.d("updating all buffs for creature %s", creature.getObjectName());
 		buffStream.forEach(buff -> updateBuffEndTime(creature, buff));
 	}
 	
 	private void updateBuffEndTime(CreatureObject creature, Buff buff) {
-		Log.d("updating buff %s for creature %s", getBuff(buff).getName(), creature.getObjectName());
-		
 		int oldEndTime = buff.getEndTime();
 		int playTime = creature.getPlayerObject().getPlayTime();
 		long currentTime = System.currentTimeMillis() / 1000;
