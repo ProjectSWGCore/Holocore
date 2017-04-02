@@ -135,8 +135,8 @@ public class BuffService extends Service {
 		if (isCreatureBuffed(creature)) {
 			synchronized (monitored) {
 				monitored.add(creature);
-				updateAllBuffs(creature, creature.getBuffEntries(buff -> !isBuffInfinite(buff)));
 			}
+			updateAllBuffs(creature, creature.getBuffEntries(buff -> !isBuffInfinite(getBuff(buff))));
 		}
 	}
 	
@@ -175,16 +175,12 @@ public class BuffService extends Service {
 		return getBuff(buff).isRemovedOnDeath();
 	}
 	
-	private boolean isBuffInfinite(Buff buff) {
-		return isBuffInfinite(getBuff(buff));
-	}
-	
 	private boolean isBuffInfinite(BuffData buffData) {
 		return buffData.getDefaultDuration() < 0;
 	}
 	
 	private boolean isCreatureBuffed(CreatureObject creature) {
-		return creature.getBuffEntries(buff -> !isBuffInfinite(buff)).count() > 0;
+		return creature.getBuffEntries(buff -> !isBuffInfinite(getBuff(buff))).count() > 0;
 	}
 	
 	private void decayDuration(CreatureObject creature, Buff buff) {
@@ -239,7 +235,7 @@ public class BuffService extends Service {
 		
 		Buff buff = optionalEntry.get();
 		if (buffData.getMaxStackCount() > 1 && !expired && buff.getStackCount() > 1) {
-			checkStackCount(creature, buff, (int)(System.currentTimeMillis()), buffData.getMaxStackCount());
+			checkStackCount(creature, buff, (int)(System.currentTimeMillis() / 1000), buffData.getMaxStackCount());
 		} else {
 			Buff removedBuff = creature.removeBuff(new CRC(buff.getCrc()));
 			Assert.notNull(removedBuff, "Buff must exist if being removed");
