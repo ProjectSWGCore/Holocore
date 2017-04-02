@@ -27,17 +27,17 @@
 ***********************************************************************************/
 package services.experience;
 
-import intents.GrantBadgeIntent;
-import intents.experience.LevelChangedIntent;
-import intents.experience.GrantSkillIntent;
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import intents.GrantBadgeIntent;
+import intents.experience.GrantSkillIntent;
+import intents.experience.LevelChangedIntent;
 import intents.object.CreateStaticItemIntent;
 import intents.object.ObjectCreatedIntent;
-import java.util.ArrayList;
-import java.util.Collection;
 import network.packets.swg.zone.PlayClientEffectObjectMessage;
 import network.packets.swg.zone.PlayMusicMessage;
 import network.packets.swg.zone.object_controller.ShowFlyText;
@@ -46,7 +46,6 @@ import resources.Race;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
 import resources.common.RGB;
-import resources.control.Intent;
 import resources.control.Service;
 import resources.encodables.StringId;
 import resources.objects.SWGObject;
@@ -66,14 +65,29 @@ import services.objects.StaticItemService;
 public final class SkillTemplateService extends Service {
 	
 	private final Map<String, String[]> skillTemplates;
-	private Map<String, RoadmapReward> rewards;
-	private DatatableData rewardsTable;
+	private final Map<String, RoadmapReward> rewards;
+	private final Map<String, String[]> badgeNames;
 
 	public SkillTemplateService() {
 		skillTemplates = new HashMap<>();
 		rewards = new HashMap<>();
-		rewardsTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/roadmap/item_rewards.iff");
-		registerForIntent(LevelChangedIntent.TYPE);
+		
+		badgeNames = new HashMap<>();
+		badgeNames.put("bounty_hunter_1a", 	new String[]{"new_prof_bountyhunter_master"});
+		badgeNames.put("commando_1a", 		new String[]{"new_prof_commando_master"});
+		badgeNames.put("entertainer_1a",	new String[]{"new_prof_social_entertainer_master"});
+		badgeNames.put("force_sensitive_1a",new String[]{"new_prof_jedi_master"});
+		badgeNames.put("medic_1a", 			new String[]{"new_prof_medic_master"});
+		badgeNames.put("officer_1a", 		new String[]{"new_prof_officer_master"});
+		badgeNames.put("smuggler_1a", 		new String[]{"new_prof_smuggler_master"});
+		badgeNames.put("spy_1a", 			new String[]{"new_prof_spy_master"});
+		// All traders become Master Merchants and Master Artisans
+		badgeNames.put("trader_0a", 		new String[]{"new_prof_crafting_merchant_master", "new_prof_crafting_artisan_master", "new_prof_crafting_chef_master", "new_prof_crafting_tailor_master"});
+		badgeNames.put("trader_0b", 		new String[]{"new_prof_crafting_merchant_master", "new_prof_crafting_artisan_master", "new_prof_crafting_architect_master"});
+		badgeNames.put("trader_0c", 		new String[]{"new_prof_crafting_merchant_master", "new_prof_crafting_artisan_master", "new_prof_crafting_armorsmith_master", "new_prof_crafting_weaponsmith_master"});
+		badgeNames.put("trader_0d", 		new String[]{"new_prof_crafting_merchant_master", "new_prof_crafting_artisan_master", "new_prof_crafting_droidengineer_master"});
+		
+		registerForIntent(LevelChangedIntent.class, lci -> handleLevelChangedIntent(lci));
 	}
 
 	@Override
@@ -92,17 +106,10 @@ public final class SkillTemplateService extends Service {
 		return super.initialize();
 	}
 
-	@Override
-	public void onIntentReceived(Intent i) {
-		switch(i.getType()) {
-			case LevelChangedIntent.TYPE: handleLevelChangedIntent((LevelChangedIntent) i); break;
-		}
-	}
-	
-	private void handleLevelChangedIntent(LevelChangedIntent i) {
-		short oldLevel = i.getPreviousLevel();
-		short newLevel = i.getNewLevel();
-		CreatureObject creatureObject = i.getCreatureObject();
+	private void handleLevelChangedIntent(LevelChangedIntent lci) {
+		short oldLevel = lci.getPreviousLevel();
+		short newLevel = lci.getNewLevel();
+		CreatureObject creatureObject = lci.getCreatureObject();
 		Player player = creatureObject.getOwner();
 		long objectId = creatureObject.getObjectId();
 		boolean skillUp = false;
@@ -115,7 +122,7 @@ public final class SkillTemplateService extends Service {
 				String[] templates = skillTemplates.get(profession);
 
 				if (templates == null) {
-					Log.w(this, "%s tried to level up to %d with invalid profession %s", creatureObject, level, profession);
+					Log.w("%s tried to level up to %d with invalid profession %s", creatureObject, level, profession);
 					return;
 				}
 				
@@ -133,14 +140,25 @@ public final class SkillTemplateService extends Service {
 			}
 		}
 		
+		String effectFile;
+		String flyText;
+		RGB flyTextColor;
+		
 		if (skillUp) {
-			creatureObject.sendObserversAndSelf(new PlayClientEffectObjectMessage("clienteffect/skill_granted.cef", "", objectId));
-			player.sendPacket(new ShowFlyText(objectId, new StringId("cbt_spam", "skill_up"), Scale.LARGEST, new RGB(Color.GREEN)));
-			player.sendPacket(new PlayMusicMessage(0, "sound/music_acq_bountyhunter.snd", 1, false));
+			effectFile = "clienteffect/skill_granted.cef";
+			flyText = "skill_up";
+			flyTextColor = new RGB(Color.GREEN);
 		} else {
-			creatureObject.sendObserversAndSelf(new PlayClientEffectObjectMessage("clienteffect/level_granted.cef", "", objectId));
-			player.sendPacket(new ShowFlyText(objectId, new StringId("cbt_spam", "level_up"), Scale.LARGEST, new RGB(Color.BLUE)));
+			effectFile = "clienteffect/level_granted.cef";
+			flyText = "level_up";
+			flyTextColor = new RGB(Color.BLUE);
 		}
+		
+		creatureObject.sendObserversAndSelf(new PlayClientEffectObjectMessage(effectFile, "", objectId));
+		player.sendPacket(new ShowFlyText(objectId, new StringId("cbt_spam", flyText), Scale.LARGEST, flyTextColor));
+		
+		if (skillUp)
+			player.sendPacket(new PlayMusicMessage(0, "sound/music_acq_bountyhunter.snd", 1, false));
 	}
 
 	private void giveRewardItems(CreatureObject creatureObject, String skillName) {
@@ -182,6 +200,8 @@ public final class SkillTemplateService extends Service {
 	}
 
 	private void loadRewardItemsIff() {
+		DatatableData rewardsTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/roadmap/item_rewards.iff");
+		
 		for (int row = 0; row < rewardsTable.getRowCount(); row++) {
 			String roadmapTemplate = rewardsTable.getCell(row, 0).toString();
 			String roadmapSkillName = rewardsTable.getCell(row, 1).toString();
@@ -196,56 +216,22 @@ public final class SkillTemplateService extends Service {
 	}
 	
 	private void grantMasteryBadge(CreatureObject creature, String profession, String skillName) {
-		if (skillName.endsWith("_phase4_master")) {
-			if (profession.startsWith("trader_0")) {
-				// All traders become Master Merchants and Master Artisans
-				new GrantBadgeIntent(creature, "new_prof_crafting_merchant_master").broadcast();
-				new GrantBadgeIntent(creature, "new_prof_crafting_artisan_master").broadcast();
-			}
-
-			switch (profession) {
-				case "bounty_hunter_1a":
-					new GrantBadgeIntent(creature, "new_prof_bountyhunter_master").broadcast();
-					break;
-				case "commando_1a":
-					new GrantBadgeIntent(creature, "new_prof_commando_master").broadcast();
-					break;
-				case "entertainer_1a":
-					new GrantBadgeIntent(creature, "new_prof_social_entertainer_master").broadcast();
-					break;
-				case "force_sensitive_1a":
-					new GrantBadgeIntent(creature, "new_prof_jedi_master").broadcast();
-					break;
-				case "medic_1a":
-					new GrantBadgeIntent(creature, "new_prof_medic_master").broadcast();
-					break;
-				case "officer_1a":
-					new GrantBadgeIntent(creature, "new_prof_officer_master").broadcast();
-					break;
-				case "smuggler_1a":
-					new GrantBadgeIntent(creature, "new_prof_smuggler_master").broadcast();
-					break;
-				case "spy_1a":
-					new GrantBadgeIntent(creature, "new_prof_spy_master").broadcast();
-					break;
-				case "trader_0a":
-					new GrantBadgeIntent(creature, "new_prof_crafting_chef_master").broadcast();
-					new GrantBadgeIntent(creature, "new_prof_crafting_tailor_master").broadcast();
-					break;
-				case "trader_0b":
-					new GrantBadgeIntent(creature, "new_prof_crafting_architect_master").broadcast();
-					break;
-				case "trader_0c":
-					new GrantBadgeIntent(creature, "new_prof_crafting_armorsmith_master").broadcast();
-					new GrantBadgeIntent(creature, "new_prof_crafting_weaponsmith_master").broadcast();
-					break;
-				case "trader_0d":
-					new GrantBadgeIntent(creature, "new_prof_crafting_droidengineer_master").broadcast();
-					break;
-				default:
-					Log.e(this, "%s could not be granted a mastery badge because their profession %s is unrecognised", creature, profession);
-					break;
-			}
+		Log.d("grantMasteryBadge - skillName: %s", skillName);
+		
+		if (!skillName.endsWith("_phase4_master")) {
+			return;
+		}
+		
+		String[] badges = badgeNames.get(profession);
+		
+		if (badges == null) {
+			Log.e("%s could not be granted a mastery badge because their profession %s is unrecognised", creature, profession);
+			return;
+		}
+		
+		for (String badgeName : badges) {
+			new GrantBadgeIntent(creature, badgeName).broadcast();
+			Log.i("Granting badge %s to %s", badgeName, creature);
 		}
 	}
 	

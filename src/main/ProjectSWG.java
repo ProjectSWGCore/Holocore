@@ -27,6 +27,13 @@
 ***********************************************************************************/
 package main;
 
+import java.lang.Thread.State;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.stream.Collectors;
+
 import intents.server.ServerStatusIntent;
 import resources.Galaxy.GalaxyStatus;
 import resources.control.IntentManager;
@@ -41,26 +48,32 @@ public class ProjectSWG {
 	private CoreManager manager;
 	private boolean shutdownRequested;
 	private ServerStatus status;
+	private ServerInitStatus initStatus;
+	private int adminServerPort;
 	
 	public static final void main(String [] args) {
 		server = new ProjectSWG();
-		Runtime.getRuntime().addShutdownHook(new Thread() {
-			public void run() {
-				server.forceShutdown();
-			}
-		});
+		AtomicBoolean forcingShutdown = new AtomicBoolean(false);
+		Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+			forcingShutdown.set(true);
+			server.forceShutdown();
+		}, "main-shutdown-hook"));
 		try {
-			server.run();
-		} catch (CoreException e) {
-			Log.e("CoreManager", "Shutting down. Reason: " + e.getMessage());
-			Log.e("CoreManager", e);
-		} catch (Exception e) {
-			Log.e("CoreManager", "Shutting down - unknown error.");
-			Log.e("CoreManager", e);
+			startupIntentManager();
+			server.run(args);
+		} catch (Throwable t) {
+			Log.e(t);
 		}
-		server.stop();
-		server.terminate();
-		Log.i("CoreManager", "Server shut down.");
+		try {
+			server.stop();
+			server.terminate();
+		} finally {
+			shutdownIntentManager();
+			printFinalPswgState();
+			Log.i("Server shut down.");
+			if (!forcingShutdown.get())
+				System.exit(0);
+		}
 	}
 	
 	/**
@@ -80,16 +93,38 @@ public class ProjectSWG {
 		return (long) (System.currentTimeMillis()/1E3 - 1309996800L); // Date is 07/07/2011 GMT
 	}
 	
+	private static void startupIntentManager() {
+		IntentManager.getInstance().initialize();
+	}
+	
+	private static void shutdownIntentManager() {
+		IntentManager.getInstance().terminate();
+	}
+	
+	private static void printFinalPswgState() {
+		List<Thread> threads = Thread.getAllStackTraces().keySet().stream()
+				.filter(t -> !t.isDaemon() && t.getState() != State.TERMINATED)
+				.sorted((a, b) -> a.getName().compareTo(b.getName()))
+				.collect(Collectors.toList());
+		Log.i("Final PSWG State:");
+		Log.i("    Threads: %d", threads.size());
+		for (Thread thread : threads) {
+			Log.i("        Thread: %s", thread.getName());
+		}
+	}
+	
 	private ProjectSWG() {
 		mainThread = Thread.currentThread();
 		shutdownRequested = false;
+		initStatus = ServerInitStatus.INITIALIZED;
 	}
 	
-	private void run() {
+	private void run(String [] args) {
+		setupParameters(args);
 		long start = System.nanoTime();
-		manager = new CoreManager();
+		manager = new CoreManager(adminServerPort);
 		long end = System.nanoTime();
-		Log.i(manager, "Created new manager in %.3fms", (end-start)/1E6);
+		Log.i("Created new manager in %.3fms", (end-start)/1E6);
 		while (!shutdownRequested && !manager.isShutdownRequested()) {
 			initialize();
 			start();
@@ -98,11 +133,47 @@ public class ProjectSWG {
 			terminate();
 			if (!shutdownRequested && !manager.isShutdownRequested()) {
 				start = System.nanoTime();
-				manager = new CoreManager();
+				manager = new CoreManager(adminServerPort);
 				end = System.nanoTime();
-				Log.i(manager, "Created new manager in %.3fms", (end-start)/1E6);
+				Log.i("Created new manager in %.3fms", (end-start)/1E6);
 			}
 		}
+	}
+	
+	private void setupParameters(String [] args) {
+		Map<String, String> params = getParameters(args);
+		this.adminServerPort = safeParseInt(params.get("-adminServerPort"), -1);
+	}
+	
+	private int safeParseInt(String str, int def) {
+		if (str == null)
+			return def;
+		try {
+			return Integer.parseInt(str);
+		} catch (NumberFormatException e) {
+			return def;
+		}
+	}
+	
+	private Map<String, String> getParameters(String [] args) {
+		Map<String, String> params = new HashMap<>();
+		for (int i = 0; i < args.length; i++) {
+			String arg = args[i];
+			String nextArg = (i+1 < args.length) ? args[i+1] : null;
+			if (arg.indexOf('=') != -1) {
+				String [] parts = arg.split("=", 2);
+				if (parts.length < 2)
+					params.put(parts[0], null);
+				else
+					params.put(parts[0], parts[1]);
+			} else if (arg.equalsIgnoreCase("-adminServerPort") && nextArg != null) {
+				params.put(arg, nextArg);
+				i++;
+			} else {
+				params.put(arg, null);
+			}
+		}
+		return params;
 	}
 	
 	private void setStatus(ServerStatus status) {
@@ -118,17 +189,19 @@ public class ProjectSWG {
 	
 	private void initialize() {
 		setStatus(ServerStatus.INITIALIZING);
-		Log.i(manager, "Initializing...");
+		Log.i("Initializing...");
 		if (!manager.initialize())
 			throw new CoreException("Failed to initialize.");
-		Log.i(manager, "Initialized. Time: %.3fms", manager.getCoreTime());
+		Log.i("Initialized. Time: %.3fms", manager.getCoreTime());
+		initStatus = ServerInitStatus.INITIALIZED;
 	}
 	
 	private void start() {
-		Log.i(manager, "Starting...");
+		Log.i("Starting...");
 		if (!manager.start())
 			throw new CoreException("Failed to start.");
-		Log.i(manager, "Started. Time: %.3fms", manager.getCoreTime());
+		Log.i("Started. Time: %.3fms", manager.getCoreTime());
+		initStatus = ServerInitStatus.STARTED;
 	}
 	
 	private void loop() {
@@ -143,34 +216,37 @@ public class ProjectSWG {
 	}
 	
 	private void stop() {
-		if (manager == null || status == ServerStatus.OFFLINE)
+		if (manager == null || status == ServerStatus.OFFLINE || initStatus != ServerInitStatus.STARTED)
 			return;
-		Log.i(manager, "Stopping...");
+		Log.i("Stopping...");
 		setStatus(ServerStatus.STOPPING);
+		initStatus = ServerInitStatus.STOPPED;
 		if (!manager.stop()) {
-			Log.e(manager, "Failed to stop.");
+			Log.e("Failed to stop.");
+			return;
 		}
-		long intentWait = System.nanoTime();
-		while (IntentManager.getIntentsQueued() > 0 && System.nanoTime()-intentWait < 3E9) {
-			try {
-				Thread.sleep(10);
-			} catch (InterruptedException e) {
-				Log.e(manager, "Failed to stop! Interrupted with %d intents remaining", IntentManager.getIntentsQueued());
-				break;
-			}
-		}
-		Log.i(manager, "Stopped. Time: %.3fms", manager.getCoreTime());
+		Log.i("Stopped. Time: %.3fms", manager.getCoreTime());
 	}
 	
 	private void terminate() {
 		if (manager == null || status == ServerStatus.OFFLINE)
 			return;
-		Log.i(manager, "Terminating...");
+		if (initStatus != ServerInitStatus.NONE && initStatus != ServerInitStatus.INITIALIZED && initStatus != ServerInitStatus.STOPPED)
+			return;
+		Log.i("Terminating...");
 		setStatus(ServerStatus.TERMINATING);
 		if (!manager.terminate())
 			throw new CoreException("Failed to terminate.");
 		setStatus(ServerStatus.OFFLINE);
-		Log.i(manager, "Terminated. Time: %.3fms", manager.getCoreTime());
+		Log.i("Terminated. Time: %.3fms", manager.getCoreTime());
+	}
+	
+	private enum ServerInitStatus {
+		NONE,
+		INITIALIZED,
+		STARTED,
+		STOPPED,
+		TERMINATED
 	}
 	
 	public static class CoreException extends RuntimeException {

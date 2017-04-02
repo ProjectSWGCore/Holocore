@@ -30,17 +30,14 @@ package services.collections;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.TreeMap;
 
 import intents.GrantBadgeIntent;
 import intents.player.PlayerTransformedIntent;
-
-import java.util.Locale;
-import java.util.TreeMap;
-
 import resources.Point3D;
-import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.creature.CreatureObject;
 import resources.server_info.Log;
@@ -54,16 +51,13 @@ public class ExplorationBadgeService extends Service {
 	
 	public ExplorationBadgeService(){
 		registerExplorationBadge();
-		registerForIntent(PlayerTransformedIntent.TYPE);
+		registerForIntent(PlayerTransformedIntent.class, pti -> handlePlayerTransformedIntent(pti));
 	}
-	
-	@Override
-	public void onIntentReceived(Intent i) {
-		if (i instanceof PlayerTransformedIntent) {
-			String badgeName = checkExplorationRegions(((PlayerTransformedIntent) i).getPlayer());
-			if (badgeName != null){
-				new GrantBadgeIntent(((PlayerTransformedIntent) i).getPlayer(), badgeName).broadcast();
-			}
+		
+	private void handlePlayerTransformedIntent(PlayerTransformedIntent pti){
+		String badgeName = checkExplorationRegions(pti.getPlayer());
+		if (badgeName != null){
+			new GrantBadgeIntent(pti.getPlayer(), badgeName).broadcast();
 		}
 	}
 	
@@ -101,7 +95,7 @@ public class ExplorationBadgeService extends Service {
 					explorationLocations.get(planet).put(badgeName, new ExplorationRegion(new Point3D(x, 0, y), range));
 				}
 			}catch (SQLException e) {
-				Log.e(this, e);
+				Log.e(e);
 			}			
 		}
 	}	

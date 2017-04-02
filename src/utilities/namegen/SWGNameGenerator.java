@@ -209,7 +209,7 @@ public class SWGNameGenerator {
 			
 			return (rule != null);
 		} catch (IOException e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 		
 		return (rule != null);
@@ -223,7 +223,7 @@ public class SWGNameGenerator {
 		try {
 			success = populateRule(rule, reader);
 		} catch (IOException e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 		
 		return (success ? rule : null);

@@ -47,7 +47,6 @@ import network.packets.swg.zone.chat.ChatPersistentMessageToClient;
 import network.packets.swg.zone.chat.ChatPersistentMessageToServer;
 import network.packets.swg.zone.chat.ChatRequestPersistentMessage;
 import resources.chat.ChatResult;
-import resources.control.Intent;
 import resources.control.Service;
 import resources.encodables.player.Mail;
 import resources.objects.SWGObject;
@@ -76,9 +75,9 @@ public class ChatMailService extends Service {
 		insertChatLog = chatLogs.prepareStatement("INSERT INTO chat_log VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 		maxMailId = 1;
 		
-		registerForIntent(GalacticPacketIntent.TYPE);
-		registerForIntent(PersistentMessageIntent.TYPE);
-		registerForIntent(PlayerEventIntent.TYPE);
+		registerForIntent(GalacticPacketIntent.class, gpi -> handleGalacticPacketIntent(gpi));
+		registerForIntent(PersistentMessageIntent.class, pmi -> handlePersistentMessageIntent(pmi));
+		registerForIntent(PlayerEventIntent.class, pei -> handlePlayerEventIntent(pei));
 	}
 	
 	@Override
@@ -97,30 +96,12 @@ public class ChatMailService extends Service {
 		return super.terminate();
 	}
 	
-	@Override
-	public void onIntentReceived(Intent i) {
-		switch (i.getType()) {
-			case GalacticPacketIntent.TYPE:
-				if (i instanceof GalacticPacketIntent)
-					processPacket((GalacticPacketIntent) i);
-				break;
-			case PersistentMessageIntent.TYPE:
-				if (i instanceof PersistentMessageIntent)
-					handlePersistentMessageIntent((PersistentMessageIntent) i);
-				break;
-			case PlayerEventIntent.TYPE:
-				if (i instanceof PlayerEventIntent)
-					handlePlayerEventIntent((PlayerEventIntent) i);
-				break;
-		}
-	}
-	
-	private void handlePlayerEventIntent(PlayerEventIntent intent) {
-		Player player = intent.getPlayer();
+	private void handlePlayerEventIntent(PlayerEventIntent pei) {
+		Player player = pei.getPlayer();
 		if (player == null)
 			return;
 
-		switch (intent.getEvent()) {
+		switch (pei.getEvent()) {
 			case PE_FIRST_ZONE:
 				sendPersistentMessageHeaders(player);
 				break;
@@ -129,8 +110,8 @@ public class ChatMailService extends Service {
 		}
 	}
 	
-	private void processPacket(GalacticPacketIntent intent) {
-		Packet p = intent.getPacket();
+	private void handleGalacticPacketIntent(GalacticPacketIntent gpi){ 
+		Packet p = gpi.getPacket();
 		if (!(p instanceof SWGPacket))
 			return;
 		SWGPacket swg = (SWGPacket) p;
@@ -139,11 +120,11 @@ public class ChatMailService extends Service {
 			/* Mails */
 			case CHAT_PERSISTENT_MESSAGE_TO_SERVER:
 				if (p instanceof ChatPersistentMessageToServer)
-					handleSendPersistentMessage(intent.getPlayerManager(), intent.getPlayer(), galaxyName, (ChatPersistentMessageToServer) p);
+					handleSendPersistentMessage(gpi.getPlayerManager(), gpi.getPlayer(), galaxyName, (ChatPersistentMessageToServer) p);
 				break;
 			case CHAT_REQUEST_PERSISTENT_MESSAGE:
 				if (p instanceof ChatRequestPersistentMessage)
-					handlePersistentMessageRequest(intent.getPlayer(), galaxyName, (ChatRequestPersistentMessage) p);
+					handlePersistentMessageRequest(gpi.getPlayer(), galaxyName, (ChatRequestPersistentMessage) p);
 				break;
 			case CHAT_DELETE_PERSISTENT_MESSAGE:
 				if (p instanceof ChatDeletePersistentMessage)
@@ -188,23 +169,23 @@ public class ChatMailService extends Service {
 		}
 	}
 	
-	private void handlePersistentMessageIntent(PersistentMessageIntent intent) {
-		if (intent.getReceiver() == null)
+	private void handlePersistentMessageIntent(PersistentMessageIntent pmi) {
+		if (pmi.getReceiver() == null)
 			return;
 		
-		Player recipient = intent.getReceiver().getOwner();
+		Player recipient = pmi.getReceiver().getOwner();
 		
 		if (recipient == null)
 			return;
 		
-		Mail mail = intent.getMail();
+		Mail mail = pmi.getMail();
 		mail.setId(maxMailId);
 		maxMailId++;
 		mail.setTimestamp((int) (new Date().getTime() / 1000));
 		
 		mails.add(mail);
 		
-		sendPersistentMessage(recipient, mail, MailFlagType.HEADER_ONLY, intent.getGalaxy());
+		sendPersistentMessage(recipient, mail, MailFlagType.HEADER_ONLY, pmi.getGalaxy());
 	}
 	
 	private void handlePersistentMessageRequest(Player player, String galaxy, ChatRequestPersistentMessage request) {
@@ -292,7 +273,7 @@ public class ChatMailService extends Service {
 				insertChatLog.executeUpdate();
 			}
 		} catch (SQLException e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 	}
 

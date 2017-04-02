@@ -31,17 +31,16 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import resources.control.Intent;
-import resources.control.Service;
-import network.packets.Packet;
-import network.packets.swg.zone.ObjectMenuSelect;
-import network.packets.swg.zone.object_controller.ObjectMenuRequest;
-import network.packets.swg.zone.object_controller.ObjectMenuResponse;
 import intents.network.GalacticPacketIntent;
 import intents.radial.RadialRegisterIntent;
 import intents.radial.RadialRequestIntent;
 import intents.radial.RadialResponseIntent;
 import intents.radial.RadialSelectionIntent;
+import network.packets.Packet;
+import network.packets.swg.zone.ObjectMenuSelect;
+import network.packets.swg.zone.object_controller.ObjectMenuRequest;
+import network.packets.swg.zone.object_controller.ObjectMenuResponse;
+import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
@@ -57,70 +56,66 @@ public class RadialService extends Service {
 	public RadialService() {
 		templatesRegistered = new HashSet<>();
 
-		registerForIntent(GalacticPacketIntent.TYPE);
-		registerForIntent(RadialResponseIntent.TYPE);
-		registerForIntent(RadialRegisterIntent.TYPE);
+		registerForIntent(GalacticPacketIntent.class, gpi -> handleGalacticPacketIntent(gpi));
+		registerForIntent(RadialResponseIntent.class, rri -> handleRadialResponseIntent(rri));
+		registerForIntent(RadialRegisterIntent.class, rri -> handleRadialRegisterIntent(rri));
 	}
 
-	@Override
-	public void onIntentReceived(Intent i) {
-		if (i instanceof GalacticPacketIntent) {
-			GalacticPacketIntent gpi = (GalacticPacketIntent) i;
-			Packet p = gpi.getPacket();
-			if (p instanceof ObjectMenuRequest) {
-				onRequest(gpi.getObjectManager(), (ObjectMenuRequest) p);
-			} else if (p instanceof ObjectMenuSelect) {
-				onSelection(gpi.getGalacticManager(), gpi.getPlayer(), (ObjectMenuSelect) p);
-			}
-		} else if (i instanceof RadialResponseIntent) {
-			onResponse((RadialResponseIntent) i);
-		} else if (i instanceof RadialRegisterIntent) {
-			synchronized (templatesRegistered) {
-				if (((RadialRegisterIntent) i).isRegister()) {
-					templatesRegistered.addAll(((RadialRegisterIntent) i).getTemplates());
-				} else {
-					templatesRegistered.removeAll(((RadialRegisterIntent) i).getTemplates());
-				}
+	private void handleGalacticPacketIntent(GalacticPacketIntent gpi){
+		Packet p = gpi.getPacket();
+		if (p instanceof ObjectMenuRequest) {
+			onRequest(gpi.getObjectManager(), (ObjectMenuRequest) p);
+		} else if (p instanceof ObjectMenuSelect) {
+			onSelection(gpi.getGalacticManager(), gpi.getPlayer(), (ObjectMenuSelect) p);
+		}
+	}
+	
+	private void handleRadialRegisterIntent(RadialRegisterIntent rri){
+		synchronized (templatesRegistered) {
+			if (rri.isRegister()) {
+				templatesRegistered.addAll(rri.getTemplates());
+			} else {
+				templatesRegistered.removeAll(rri.getTemplates());
 			}
 		}
 	}
-
+	
 	private void onRequest(ObjectManager objectManager, ObjectMenuRequest request) {
 		SWGObject requestor = objectManager.getObjectById(request.getRequestorId());
 		SWGObject target = objectManager.getObjectById(request.getTargetId());
 		if (target == null)
 			return;
 		if (!(requestor instanceof CreatureObject)) {
-			Log.w("RadialService", "Requestor of target: %s is not a creature object! %s", target, requestor);
+			Log.w("Requestor of target: %s is not a creature object! %s", target, requestor);
 			return;
 		}
 		Player player = requestor.getOwner();
 		if (player == null) {
-			Log.w("RadialService", "Requestor of target: %s does not have an owner! %s", target, requestor);
+			Log.w("Requestor of target: %s does not have an owner! %s", target, requestor);
 			return;
 		}
 
 		new RadialRequestIntent(player, target, request).broadcast();
 	}
 
-	private void onResponse(RadialResponseIntent response) {
-		Player player = response.getPlayer();
-		sendResponse(player, response.getTarget(), response.getOptions(), response.getCounter());
+	private void handleRadialResponseIntent(RadialResponseIntent rri) {
+		Player player = rri.getPlayer();
+		sendResponse(player, rri.getTarget(), rri.getOptions(), rri.getCounter());
 	}
 
 	private void onSelection(GalacticManager galacticManager, Player player, ObjectMenuSelect select) {
 		SWGObject target = galacticManager.getObjectManager().getObjectById(select.getObjectId());
 		if (target == null) {
-			Log.e("RadialService", "Selection target [%d] does not exist!", select.getObjectId());
+			Log.e("Selection target [%d] does not exist!", select.getObjectId());
 			return;
 		}
 		if (player == null) {
-			Log.e("RadialService", "Selection requestor does not exist! Target: [%d] %s", target.getObjectId(), target.getTemplate());
+			Log.e("Selection requestor does not exist! Target: [%d] %s", target.getObjectId(), target.getTemplate());
 			return;
 		}
 		RadialItem selection = RadialItem.getFromId(select.getSelection());
 		if (selection == null) {
-			Log.e("RadialService", "RadialItem does not exist with selection id: %d", select.getSelection());
+			Log.e("RadialItem does not exist with selection id: %d", select.getSelection());
 			return;
 		}
 		new RadialSelectionIntent(player, target, selection).broadcast();

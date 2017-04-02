@@ -58,9 +58,9 @@ public class TCPServer {
 	private final InetAddress addr;
 	private final int port;
 	private final int bufferSize;
+	private final TCPListener listener;
 	private ServerSocketChannel channel;
-	private TCPCallback callback;
-	private TCPListener listener;
+	private NetworkCallback callback;
 	
 	public TCPServer(int port, int bufferSize) {
 		this(null, port, bufferSize);
@@ -72,8 +72,8 @@ public class TCPServer {
 		this.addr = addr;
 		this.port = port;
 		this.bufferSize = bufferSize;
+		this.listener = new TCPListener();
 		this.channel = null;
-		listener = new TCPListener();
 	}
 	
 	public void bind() throws IOException {
@@ -112,7 +112,7 @@ public class TCPServer {
 					callbackExecutor.execute(() -> callback.onConnectionDisconnect(s, sock));
 				return true;
 			} catch (IOException e) {
-				Log.e(this, e);
+				Log.e(e);
 				return false;
 			}
 		}
@@ -134,7 +134,7 @@ public class TCPServer {
 				channel.close();
 			return true;
 		} catch (IOException e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 		return false;
 	}
@@ -149,21 +149,15 @@ public class TCPServer {
 					return true;
 				}
 			} catch (IOException e) {
-				Log.e("TCPServer", "Terminated connection with %s. Error: %s", sock.toString(), e.getMessage());
+				Log.e("Terminated connection with %s. Error: %s", sock.toString(), e.getMessage());
 				disconnect(sc);
 			}
 		}
 		return false;
 	}
 	
-	public void setCallback(TCPCallback callback) {
+	public void setCallback(NetworkCallback callback) {
 		this.callback = callback;
-	}
-	
-	public interface TCPCallback {
-		void onIncomingConnection(Socket s);
-		void onConnectionDisconnect(Socket s, SocketAddress addr);
-		void onIncomingData(Socket s, byte [] data);
 	}
 	
 	private class TCPListener implements Runnable {
@@ -198,7 +192,7 @@ public class TCPServer {
 						selector.select();
 						processSelectionKeys(selector);
 					} catch (Exception e) {
-						Log.e(this, e);
+						Log.e(e);
 						try {
 							Thread.sleep(100);
 						} catch (InterruptedException e1) {
@@ -207,7 +201,7 @@ public class TCPServer {
 					}
 				}
 			} catch (IOException e) {
-				Log.e(this, e);
+				Log.e(e);
 			}
 		}
 		
@@ -240,19 +234,24 @@ public class TCPServer {
 					SocketChannel sc = channel.accept();
 					if (sc == null)
 						break;
+					sc.socket().setKeepAlive(true);
+					sc.socket().setPerformancePreferences(0, 1, 2);
+					sc.socket().setTrafficClass(0x10); // Low Delay bit
 					SocketChannel old = sockets.get(sc.getRemoteAddress());
 					if (old != null)
 						disconnect(old);
 					sockets.put(sc.getRemoteAddress(), sc);
 					sc.configureBlocking(false);
 					sc.register(selector, SelectionKey.OP_READ);
-					if (callback != null)
-						callbackExecutor.execute(() -> callback.onIncomingConnection(sc.socket()));
+					if (callback != null) {
+						SocketAddress address = sc.getRemoteAddress();
+						callbackExecutor.execute(() -> callback.onIncomingConnection(sc.socket(), address));
+					}
 				}
 			} catch (AsynchronousCloseException e) {
 				
 			} catch (IOException e) {
-				Log.a(this, e);
+				Log.a(e);
 			}
 		}
 		
@@ -268,8 +267,10 @@ public class TCPServer {
 				} else if (n > 0) {
 					ByteBuffer smaller = ByteBuffer.allocate(n);
 					smaller.put(buffer);
-					if (callback != null)
-						callbackExecutor.execute(() -> callback.onIncomingData(s.socket(), smaller.array()));
+					if (callback != null) {
+						SocketAddress address = s.getRemoteAddress();
+						callbackExecutor.execute(() -> callback.onIncomingData(s.socket(), address, smaller.array()));
+					}
 					return true;
 				}
 			} catch (ClosedByInterruptException e) {
@@ -278,9 +279,9 @@ public class TCPServer {
 				stop();
 			} catch (IOException e) {
 				if (e.getMessage() != null && e.getMessage().toLowerCase(Locale.US).contains("connection reset"))
-					Log.e("TCPServer", "Connection Reset with %s", s.socket().getRemoteSocketAddress());
+					Log.e("Connection Reset with %s", s.socket().getRemoteSocketAddress());
 				else {
-					Log.e("TCPServer", e);
+					Log.e(e);
 				}
 				key.cancel();
 				disconnect(s);

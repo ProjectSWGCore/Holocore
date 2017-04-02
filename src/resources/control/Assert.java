@@ -42,23 +42,39 @@ public class Assert {
 	}
 	
 	public static void notNull(Object o) {
+		notNull(o, "");
+	}
+	
+	public static void notNull(Object o, String message) {
 		if (debug() && o == null)
-			handle(new NullPointerException());
+			handle(new NullPointerException(message));
 	}
 	
 	public static void isNull(Object o) {
+		isNull(o, "");
+	}
+	
+	public static void isNull(Object o, String message) {
 		if (debug() && o != null)
-			handle(new AssertionException());
+			handle(new AssertionException(message));
 	}
 	
 	public static void test(boolean expr) {
+		test(expr, "");
+	}
+	
+	public static void test(boolean expr, String message) {
 		if (debug() && !expr)
-			handle(new AssertionException());
+			handle(new AssertionException(message));
 	}
 	
 	public static void fail() {
+		fail("");
+	}
+	
+	public static void fail(String message) {
 		if (debug())
-			handle(new AssertionException());
+			handle(new AssertionException(message));
 	}
 	
 	private static void handle(RuntimeException e) {
@@ -77,17 +93,17 @@ public class Assert {
 	private static void warn(Exception e) {
 		StackTraceElement [] elements = e.getStackTrace();
 		if (elements.length <= 1)
-			Log.e("Assert", e);
+			Log.e(e);
 		else
-			Log.e(elements[elements.length-2].getClassName(), e);
+			Log.e(e);
 	}
 	
 	private static class AssertionException extends RuntimeException {
 		
 		private static final long serialVersionUID = 1L;
 		
-		public AssertionException() {
-			super("");
+		public AssertionException(String message) {
+			super(message);
 		}
 		
 	}

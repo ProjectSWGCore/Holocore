@@ -28,6 +28,7 @@
 package resources.client_info;
 
 import resources.client_info.visitors.DatatableData;
+import resources.client_info.visitors.DatatableData.ColumnType;
 import resources.server_info.Log;
 
 import java.io.File;
@@ -40,7 +41,6 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 
 
 /**
@@ -76,12 +76,12 @@ public final class ServerFactory extends DataFactory {
 
 					if (!iff.exists()) {
 						convertSdf(path, name);
-						Log.i("ServerFactory", "Created Server Datatable: %s", name);
+						Log.i("Created Server Datatable: %s", name);
 					} else {
 						File sif = path.toFile();
 						if (sif.lastModified() > iff.lastModified()) {
 							convertSdf(path, name);
-							Log.i("ServerFactory", "Updated Server Datatable: %s", name);
+							Log.i("Updated Server Datatable: %s", name);
 						}
 					}
 				}
@@ -105,7 +105,7 @@ public final class ServerFactory extends DataFactory {
 
 		DatatableData data = (DatatableData) createDataObject(swgFile);
 
-		String[] columnTypes = null;
+		ColumnType[] columnTypes = null;
 		String[] columnNames = null;
 		Object[][] table = null;
 
@@ -131,15 +131,14 @@ public final class ServerFactory extends DataFactory {
 					columnNames = row.split("\t");
 					itr.remove();
 				} else if (lineNum == 1) {
-					columnTypes = row.split("\t");
-					for (int i = 0; i < columnTypes.length; i++) {
-						String columnType = columnTypes[i];
+					String [] rawTypes = row.split("\t");
+					columnTypes = new ColumnType[rawTypes.length];
+					for (int i = 0; i < rawTypes.length; i++) {
+						String columnType = rawTypes[i];
+						columnTypes[i] = ColumnType.getForChar(columnType);
 						if (columnType.contains("[")) {
-							String[] split = columnType.split("\\[");
-							columnTypes[i] = split[0].toLowerCase(Locale.US);
-							defaultValues.add(split[1].replace("]", ""));
+							defaultValues.add(columnType.split("\\[")[1].replace("]", ""));
 						} else {
-							columnTypes[i] = columnType.toLowerCase(Locale.US);
 							defaultValues.add("");
 						}
 					}
@@ -148,7 +147,7 @@ public final class ServerFactory extends DataFactory {
 			}
 
 			if (columnNames == null || columnTypes == null) {
-				Log.e("ServerFactory", "Failed to convert sdf " + sif.getFileName());
+				Log.e("Failed to convert sdf " + sif.getFileName());
 				return;
 			}
 
@@ -159,7 +158,7 @@ public final class ServerFactory extends DataFactory {
 			}
 
 		} catch (IOException e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 
 		data.setColumnNames(columnNames);
@@ -169,11 +168,11 @@ public final class ServerFactory extends DataFactory {
 		writeFile(swgFile, data);
 	}
 
-	private void createDatatableRow(int rowNum, String line, String[] columnTypes, Object[][] table, List<String> defValues) {
+	private void createDatatableRow(int rowNum, String line, ColumnType[] columnTypes, Object[][] table, List<String> defValues) {
 		String[] values = line.split("\t", -1);
 
 		for (int t = 0; t < columnTypes.length; t++) {
-			String type = columnTypes[t];
+			ColumnType type = columnTypes[t];
 			String val = values[t];
 
 			if (val.isEmpty() && !defValues.get(t).isEmpty())
@@ -181,16 +180,16 @@ public final class ServerFactory extends DataFactory {
 
 			try {
 				switch(type) {
-					case "b": table[rowNum][t] = Boolean.valueOf(val); break;
-					case "h":
-					case "i": table[rowNum][t] = Integer.valueOf(val); break;
-					case "f": table[rowNum][t] = Float.valueOf(val); break;
-					case "s": table[rowNum][t] = val; break;
-					default: Log.e("ServerFactory", "Don't know how to parse type " + type); break;
+					case BOOLEAN:	table[rowNum][t] = Boolean.valueOf(val); break;
+					case CRC:
+					case INTEGER:	table[rowNum][t] = Integer.valueOf(val); break;
+					case FLOAT:		table[rowNum][t] = Float.valueOf(val); break;
+					case STRING:	table[rowNum][t] = val; break;
+					default: Log.e("Don't know how to parse type " + type); break;
 				}
 			} catch (NumberFormatException e) {
-				Log.e("ServerFactory:createDatableRow", "Cannot format string %s to a number", val);
-				Log.e(this, e);
+				Log.e("Cannot format string %s to a number", val);
+				Log.e(e);
 			}
 
 		}

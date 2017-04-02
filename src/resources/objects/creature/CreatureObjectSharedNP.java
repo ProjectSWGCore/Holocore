@@ -27,14 +27,16 @@
  ***********************************************************************************/
 package resources.objects.creature;
 
-import java.util.HashMap;
-import java.util.Map.Entry;
+import java.util.ArrayList;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
+
 import resources.HologramColour;
 import resources.collections.SWGList;
 import resources.collections.SWGMap;
 import resources.common.CRC;
+import resources.control.Assert;
 import resources.encodables.player.Equipment;
 import resources.network.BaselineBuilder;
 import resources.network.NetBuffer;
@@ -460,38 +462,52 @@ class CreatureObjectSharedNP implements Persistable {
 		}
 	}
 	
-	public void putBuff(CRC buffCrc, Buff buff, SWGObject target) {
-		if(!buffs.containsKey(buffCrc)) {
-			buffs.put(buffCrc, buff);
-			buffs.sendDeltaMessage(target);
+	public void putBuff(Buff buff, SWGObject target) {
+		synchronized (buffs) {
+			CRC crc = new CRC(buff.getCrc());
+			if (!buffs.containsKey(crc)) {
+				buffs.put(crc, buff);
+				buffs.sendDeltaMessage(target);
+			}
 		}
 	}
 	
 	public Buff removeBuff(CRC buffCrc, SWGObject target) {
-		Buff removedBuff = buffs.remove(buffCrc);
+		synchronized (buffs) {
+			Buff removedBuff = buffs.remove(buffCrc);
+			if (removedBuff != null)
+				buffs.sendDeltaMessage(target);
 			
-		if (removedBuff != null) {
-			buffs.sendDeltaMessage(target);
+			return removedBuff;
 		}
-			
-		return removedBuff;
 	}
 	
-	public Stream<Entry<CRC, Buff>> getBuffEntries(Predicate<Entry<CRC, Buff>> predicate) {
-		return new HashMap<>(buffs).entrySet().stream()
-				.filter(predicate);
+	public Stream<Buff> getBuffEntries(Predicate<Buff> predicate) {
+		synchronized (buffs) {
+			return new ArrayList<>(buffs.values()).stream().filter(predicate);
+		}
 	}
 	
 	public void adjustBuffStackCount(CRC buffCrc, int adjustment, SWGObject target) {
-		buffs.get(buffCrc).adjustStackCount(adjustment);
-		buffs.update(buffCrc, target);
+		safeModifyBuff(buffCrc, target, buff -> {
+			buff.adjustStackCount(adjustment);
+		});
 	}
 	
 	public void setBuffDuration(CRC buffCrc, int playTime, int duration, SWGObject target) {
-		Buff buff = buffs.get(buffCrc);
-		buff.setEndTime(playTime + duration);
-		buff.setDuration(duration);
-		buffs.update(buffCrc, target);
+		safeModifyBuff(buffCrc, target, buff -> {
+			buff.setEndTime(playTime + duration);
+			buff.setDuration(duration);
+		});
+	}
+	
+	private void safeModifyBuff(CRC buffCrc, SWGObject target, Consumer<Buff> operation) {
+		synchronized (buffs) {
+			Buff buff = buffs.get(buffCrc);
+			Assert.notNull(buff);
+			operation.accept(buff);
+			buffs.update(buffCrc, target);
+		}
 	}
 	
 	private void initMaxAttributes() {
@@ -585,7 +601,7 @@ class CreatureObjectSharedNP implements Persistable {
 	
 	@Override
 	public void save(NetBufferStream stream) {
-		stream.addByte(2);
+		stream.addByte(3);
 		stream.addShort(level);
 		stream.addInt(levelHealthGranted);
 		stream.addAscii(animation);
@@ -608,7 +624,6 @@ class CreatureObjectSharedNP implements Persistable {
 		}
 		synchronized (buffs) {
 			stream.addMap(buffs, (e) -> {
-				e.getKey().save(stream);
 				e.getValue().save(stream);
 			});
 		}
@@ -620,6 +635,7 @@ class CreatureObjectSharedNP implements Persistable {
 			case 0: readVersion0(stream); break;
 			case 1: readVersion1(stream); break;
 			case 2: readVersion2(stream); break;
+			case 3: readVersion3(stream); break;
 		}
 	}
 	
@@ -675,8 +691,19 @@ class CreatureObjectSharedNP implements Persistable {
 			Buff buff = new Buff();
 			
 			crc.read(stream);
-			buff.read(stream);
+			buff.readOld(stream); // old buff persistence did not have version byte
+			buff.setCrc(crc.getCrc());
 			buffs.put(crc, buff);
+		});
+	}
+	
+	private void readVersion3(NetBufferStream stream) {
+		readVersion1(stream);
+		stream.getList((i) -> {
+			Buff buff = new Buff();
+			
+			buff.read(stream);
+			buffs.put(new CRC(buff.getCrc()), buff);
 		});
 	}
 	

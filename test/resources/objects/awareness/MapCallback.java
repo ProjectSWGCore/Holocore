@@ -60,7 +60,7 @@ class MapCallback implements TerrainMapCallback {
 	@Override
 	public void onMoveFailure(SWGObject obj) {
 		failedMove.incrementAndGet();
-		Log.e(this, "Move failed!");
+		Log.e("Move failed!");
 	}
 	
 	public void set(int withinRange, int outOfRange, int successful, int failed) {

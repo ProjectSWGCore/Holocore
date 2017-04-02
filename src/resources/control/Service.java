@@ -33,7 +33,6 @@ import resources.config.ConfigFile;
 import resources.server_info.Config;
 import resources.server_info.DataManager;
 import resources.server_info.Log;
-import resources.server_info.RelationalDatabase;
 
 
 /**
@@ -42,7 +41,7 @@ import resources.server_info.RelationalDatabase;
 public abstract class Service implements IntentReceiver {
 	
 	public Service() {
-		IntentManager.getInstance().initialize();
+		
 	}
 	
 	/**
@@ -80,7 +79,6 @@ public abstract class Service implements IntentReceiver {
 	 */
 	public boolean terminate() {
 		DataManager.terminate();
-		IntentManager.getInstance().terminate();
 		return true;
 	}
 	
@@ -123,7 +121,7 @@ public abstract class Service implements IntentReceiver {
 	 */
 	@Override
 	public void onIntentReceived(Intent i) {
-		Log.w(this, "Warning: " + getClass().getSimpleName() + " did not override onIntentReceived");
+		Log.w("Warning: " + getClass().getSimpleName() + " did not override onIntentReceived");
 	}
 	
 	/**
@@ -135,14 +133,6 @@ public abstract class Service implements IntentReceiver {
 	 */
 	public synchronized final Config getConfig(ConfigFile file) {
 		return DataManager.getInstance().getConfig(file);
-	}
-	
-	/**
-	 * Gets the relational database associated with the local postgres database
-	 * @return the database for the local postgres database
-	 */
-	public synchronized final RelationalDatabase getLocalDatabase() {
-		return DataManager.getInstance().getLocalDatabase();
 	}
 	
 }

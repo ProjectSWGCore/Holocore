@@ -27,29 +27,28 @@
 ***********************************************************************************/
 package services.sui;
 
-import intents.network.GalacticPacketIntent;
-import intents.sui.SuiWindowIntent;
 import java.io.FileNotFoundException;
-import network.packets.Packet;
-import network.packets.swg.SWGPacket;
-import network.packets.swg.zone.server_ui.SuiCreatePageMessage;
-import network.packets.swg.zone.server_ui.SuiEventNotification;
-import network.packets.swg.zone.server_ui.SuiForceClosePage;
-import resources.control.Intent;
-import resources.control.Service;
-import resources.player.Player;
-import resources.server_info.Log;
-import resources.sui.ISuiCallback;
-import resources.sui.SuiComponent;
-import resources.sui.SuiEvent;
-import resources.sui.SuiBaseWindow;
-import utilities.Scripts;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
+import intents.network.GalacticPacketIntent;
+import intents.sui.SuiWindowIntent;
+import network.packets.Packet;
+import network.packets.swg.SWGPacket;
+import network.packets.swg.zone.server_ui.SuiCreatePageMessage;
+import network.packets.swg.zone.server_ui.SuiEventNotification;
+import network.packets.swg.zone.server_ui.SuiForceClosePage;
+import resources.control.Service;
+import resources.player.Player;
+import resources.server_info.Log;
+import resources.sui.ISuiCallback;
+import resources.sui.SuiBaseWindow;
+import resources.sui.SuiComponent;
+import resources.sui.SuiEvent;
+import utilities.Scripts;
 
 public class SuiService extends Service {
 
@@ -58,28 +57,14 @@ public class SuiService extends Service {
 	public SuiService() {
 		windows = new ConcurrentHashMap<>();
 		
-		registerForIntent(GalacticPacketIntent.TYPE);
-		registerForIntent(SuiWindowIntent.TYPE);
+		registerForIntent(GalacticPacketIntent.class, gpi -> handleGalacticPacketIntent(gpi));
+		registerForIntent(SuiWindowIntent.class, swi -> handleSuiWindowIntent(swi));
 	}
 	
-	@Override
-	public void onIntentReceived(Intent i) {
-		switch (i.getType()) {
-			case GalacticPacketIntent.TYPE:
-				if (i instanceof GalacticPacketIntent)
-					processPacket((GalacticPacketIntent) i);
-				break;
-			case SuiWindowIntent.TYPE:
-				if (i instanceof SuiWindowIntent)
-					handleSuiWindowIntent((SuiWindowIntent) i);
-				break;
-		}
-	}
-	
-	private void processPacket(GalacticPacketIntent intent) {
-		Packet p = intent.getPacket();
+	private void handleGalacticPacketIntent(GalacticPacketIntent gpi) {
+		Packet p = gpi.getPacket();
 		if (p instanceof SWGPacket)
-			processSwgPacket(intent.getPlayer(), (SWGPacket) p);
+			processSwgPacket(gpi.getPlayer(), (SWGPacket) p);
 	}
 	
 	private void processSwgPacket(Player player, SWGPacket p) {
@@ -93,13 +78,13 @@ public class SuiService extends Service {
 		}
 	}
 	
-	private void handleSuiWindowIntent(SuiWindowIntent i) {
-		switch(i.getEvent()) {
-			case NEW: displayWindow(i.getPlayer(), i.getWindow()); break;
+	private void handleSuiWindowIntent(SuiWindowIntent swi) {
+		switch(swi.getEvent()) {
+			case NEW: displayWindow(swi.getPlayer(), swi.getWindow()); break;
 			case CLOSE: {
-				SuiBaseWindow window = i.getWindow();
-				if (window != null) closeWindow(i.getPlayer(), i.getWindow());
-				else closeWindow(i.getPlayer(), i.getWindowId());
+				SuiBaseWindow window = swi.getWindow();
+				if (window != null) closeWindow(swi.getPlayer(), swi.getWindow());
+				else closeWindow(swi.getPlayer(), swi.getWindowId());
 			} break;
 			default: break;
 		}
@@ -108,21 +93,21 @@ public class SuiService extends Service {
 	private void handleSuiEventNotification(Player player, SuiEventNotification p) {
 		List<SuiBaseWindow> activeWindows = windows.get(player.getNetworkId());
 		if (activeWindows == null || activeWindows.size() <= 0) {
-			Log.w("SuiService:SuiEventNotification", "There are no active windows for %s!", player);
+			Log.w("There are no active windows for %s!", player);
 			return;
 		}
 
 		SuiBaseWindow window = getWindowById(activeWindows, p.getWindowId());
 		
 		if (window == null) {
-			Log.w("SuiService:SuiEventNotification", "Received window ID %d that is not assigned to the player %s", p.getWindowId(), player);
+			Log.w("Received window ID %d that is not assigned to the player %s", p.getWindowId(), player);
 			return;
 		}
 
 		SuiComponent component = window.getSubscriptionByIndex(p.getEventIndex());
 
 		if (component == null) {
-			Log.w("SuiService:SuiEventNotification", "SuiWindow %s retrieved null subscription from supplied event index %d", window, p.getEventIndex());
+			Log.w("SuiWindow %s retrieved null subscription from supplied event index %d", window, p.getEventIndex());
 			return;
 		}
 
@@ -150,7 +135,7 @@ public class SuiService extends Service {
 			try {
 				Scripts.invoke(script, callback, player, player.getCreatureObject(), event, parameters);
 			} catch (FileNotFoundException ex) {
-				Log.e(this, "Callback script %s not found", script);
+				Log.e("Callback script %s not found", script);
 			}
 		} else if (window.hasJavaCallback(callback)) {
 			ISuiCallback suiCallback = window.getJavaCallback(callback);
@@ -184,12 +169,12 @@ public class SuiService extends Service {
 		List<SuiBaseWindow> activeWindows = windows.get(player.getNetworkId());
 
 		if (activeWindows == null) {
-			Log.w("SuiService:CloseWindow", "Tried to close window id %d for player %s but it doesn't exist in the active windows.", id, player);
+			Log.w("Tried to close window id %d for player %s but it doesn't exist in the active windows.", id, player);
 			return;
 		}
 
 		if (!activeWindows.remove(window)) {
-			Log.w("SuiService:CloseWindow", "Tried to close window id %d for player %s but it doesn't exist in the active windows.", id, player);
+			Log.w("Tried to close window id %d for player %s but it doesn't exist in the active windows.", id, player);
 			return;
 		}
 
@@ -200,7 +185,7 @@ public class SuiService extends Service {
 		List<SuiBaseWindow> activeWindows = windows.get(player.getNetworkId());
 		SuiBaseWindow window = activeWindows.get(windowId);
 		if (window == null) {
-			Log.w("SuiService:CloseWindow", "Cannot close window with id %d as it doesn't exist in player %s active windows", windowId, player);
+			Log.w("Cannot close window with id %d as it doesn't exist in player %s active windows", windowId, player);
 			return;
 		}
 

@@ -80,7 +80,7 @@ public class CachedObjectDatabase<V extends Persistable> extends ObjectDatabase<
 	
 	public synchronized boolean save() {
 		if (!loaded) {
-			Log.e("CachedObjectDatabase", "Not saving '" + getFile() + "', file not loaded yet!");
+			Log.e("Not saving '" + getFile() + "', file not loaded yet!");
 			return false;
 		}
 		try (OutputPersistenceStream os = new OutputPersistenceStream(new FileOutputStream(getFile()))) {
@@ -89,8 +89,8 @@ public class CachedObjectDatabase<V extends Persistable> extends ObjectDatabase<
 					os.write(obj, saver);
 			}
 		} catch (IOException e) {
-			Log.e("CachedObjectDatabase", "Error while saving file. IOException: " + e.getMessage());
-			Log.e("CachedObjectDatabase", e);
+			Log.e("Error while saving file. IOException: " + e.getMessage());
+			Log.e(e);
 			return false;
 		}
 		return true;
@@ -98,7 +98,7 @@ public class CachedObjectDatabase<V extends Persistable> extends ObjectDatabase<
 	
 	public synchronized boolean load() {
 		if (!fileExists()) {
-			Log.e("CachedObjectDatabase", "load() - file '%s' does not exist!", getFile());
+			Log.e("load() - file '%s' does not exist!", getFile());
 			loaded = true;
 			return false;
 		}
@@ -114,8 +114,8 @@ public class CachedObjectDatabase<V extends Persistable> extends ObjectDatabase<
 				return false;
 			}
 		} catch (Exception e) {
-			Log.e("CachedObjectDatabase", "Error while loading file. %s: %s", e.getClass().getSimpleName(), e.getMessage());
-			Log.e("CachedObjectDatabase", e);
+			Log.e("Error while loading file. %s: %s", e.getClass().getSimpleName(), e.getMessage());
+			Log.e(e);
 			clearObjects();
 			return false;
 		}

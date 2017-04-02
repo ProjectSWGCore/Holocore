@@ -27,30 +27,31 @@
  ***********************************************************************************/
 package services.combat;
 
-import intents.BuffIntent;
-import intents.chat.ChatBroadcastIntent;
 import java.awt.Color;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
-import network.packets.swg.zone.object_controller.ShowFlyText;
-import network.packets.swg.zone.object_controller.ShowFlyText.Scale;
-import network.packets.swg.zone.object_controller.combat.CombatAction;
+import intents.BuffIntent;
+import intents.chat.ChatBroadcastIntent;
 import intents.chat.ChatCommandIntent;
 import intents.combat.CreatureKilledIntent;
 import intents.combat.DeathblowIntent;
 import intents.object.DestroyObjectIntent;
 import intents.object.ObjectCreatedIntent;
-import java.util.Iterator;
-import java.util.Random;
-import java.util.concurrent.Future;
-import java.util.stream.Collectors;
 import network.packets.swg.zone.PlayClientEffectObjectMessage;
+import network.packets.swg.zone.object_controller.ShowFlyText;
+import network.packets.swg.zone.object_controller.ShowFlyText.Scale;
+import network.packets.swg.zone.object_controller.combat.CombatAction;
 import network.packets.swg.zone.object_controller.combat.CombatSpam;
 import resources.Location;
 import resources.Posture;
@@ -62,7 +63,6 @@ import resources.combat.TrailLocation;
 import resources.commands.CombatCommand;
 import resources.common.CRC;
 import resources.common.RGB;
-import resources.control.Intent;
 import resources.control.Manager;
 import resources.encodables.ProsePackage;
 import resources.encodables.StringId;
@@ -86,7 +86,6 @@ public class CombatManager extends Manager {
 	private final Random random;
 	private final CorpseService corpseService;
 	private final CombatXpService combatXpService;
-	private final DuelPlayerService duelPlayerService;
 	
 	private ScheduledExecutorService executor;
 	
@@ -96,7 +95,6 @@ public class CombatManager extends Manager {
 	// TODO remove calculations if the creature disappears
 	
 	public CombatManager() {
-		registerForIntent(DeathblowIntent.TYPE);
 		inCombat = new HashMap<>();
 		regeneratingHealthCreatures = new HashSet<>();
 		regeneratingActionCreatures = new HashSet<>();
@@ -105,15 +103,15 @@ public class CombatManager extends Manager {
 		
 		corpseService = new CorpseService();
 		combatXpService = new CombatXpService();
-		duelPlayerService = new DuelPlayerService();
 		addChildService(corpseService);
 		addChildService(combatXpService);
-		addChildService(duelPlayerService);
+		
+		registerForIntent(DeathblowIntent.class, di -> handleDeathblowIntent(di));
+		registerForIntent(ChatCommandIntent.class, cci -> handleChatCommandIntent(cci));
 	}
 	
 	@Override
 	public boolean initialize() {
-		registerForIntent(ChatCommandIntent.TYPE);
 		executor = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("combat-service"));
 		return super.initialize();
 	}
@@ -136,14 +134,6 @@ public class CombatManager extends Manager {
 			}
 		}
 		return super.terminate();
-	}
-	
-	@Override
-	public void onIntentReceived(Intent i) {
-		switch(i.getType()) {
-			case ChatCommandIntent.TYPE: processChatCommand((ChatCommandIntent) i); break;
-			case DeathblowIntent.TYPE: procesDeathblow((DeathblowIntent) i); break;
-		}
 	}
 	
 	private void periodicChecks() {
@@ -209,7 +199,7 @@ public class CombatManager extends Manager {
 			int modification = 40;
 			int level = creatureObject.getLevel();
 			
-			if(level > 1) {
+			if (level > 1) {
 				modification += 4 * level;
 			}
 			
@@ -223,12 +213,12 @@ public class CombatManager extends Manager {
 		}
 	}
 	
-	private void processChatCommand(ChatCommandIntent intent) {
-		if (!intent.getCommand().isCombatCommand() || !(intent.getCommand() instanceof CombatCommand))
+	private void handleChatCommandIntent(ChatCommandIntent cci) {
+		if (!cci.getCommand().isCombatCommand() || !(cci.getCommand() instanceof CombatCommand))
 			return;
-		CombatCommand c = (CombatCommand) intent.getCommand();
-		CreatureObject source = intent.getSource();
-		SWGObject target = intent.getTarget();
+		CombatCommand c = (CombatCommand) cci.getCommand();
+		CreatureObject source = cci.getSource();
+		SWGObject target = cci.getTarget();
 		
 		// Regardless of HitType, the command might have action cost
 		addActionCost(source, c);
@@ -237,7 +227,7 @@ public class CombatManager extends Manager {
 		switch (c.getHitType()) {
 			case ATTACK: handleAttack(source, target, null, c); break;
 			case BUFF: handleBuff(source, target, c); break;
-			case DELAY_ATTACK: handleDelayAttack(source, target, c, intent.getArguments()); break;
+			case DELAY_ATTACK: handleDelayAttack(source, target, c, cci.getArguments()); break;
 			default: handleStatus(source, CombatStatus.UNKNOWN); break;
 		}
 	}
@@ -296,7 +286,7 @@ public class CombatManager extends Manager {
 				
 				eggParent = source.getParent();
 				break;
-			default: Log.w(this, "Unrecognised delay egg position %s from command %s - defaulting to SELF", combatCommand.getEggPosition(), combatCommand.getName());
+			default: Log.w("Unrecognised delay egg position %s from command %s - defaulting to SELF", combatCommand.getEggPosition(), combatCommand.getName());
 			case SELF:
 				eggLocation = source.getLocation();
 				eggParent = source.getParent();
@@ -319,7 +309,7 @@ public class CombatManager extends Manager {
 			new ObjectCreatedIntent(delayEgg).broadcast();
 		}
 		
-		executor.schedule(() -> delayEggLoop(delayEgg, source, target, combatCommand, 0), (long) combatCommand.getInitialDelayAttackInterval(), TimeUnit.SECONDS);
+		executor.schedule(() -> delayEggLoop(delayEgg, source, target, combatCommand, 1), (long) combatCommand.getInitialDelayAttackInterval(), TimeUnit.SECONDS);
 	}
 	
 	private void delayEggLoop(final SWGObject delayEgg, final CreatureObject source, final SWGObject target, final CombatCommand combatCommand, final int currentLoop) {
@@ -356,8 +346,11 @@ public class CombatManager extends Manager {
 	
 	private void doCombatArea(CreatureObject source, SWGObject origin, AttackInfo info, WeaponObject weapon, CombatCommand command, boolean includeOrigin) {
 		float aoeRange = command.getConeLength();
-		
-		Set<CreatureObject> targets = origin.getObjectsAware().stream()
+		SWGObject originParent = origin.getParent();
+		Collection<SWGObject> objectsToCheck = originParent == null ? origin.getObjectsAware() : originParent.getContainedObjects();
+
+		// TODO line of sight checks between the explosive and each target
+		Set<CreatureObject> targets = objectsToCheck.stream()
 				.filter(target -> target instanceof CreatureObject)
 				.map(target -> (CreatureObject) target)
 				.filter(creature -> source.isAttackable(creature))
@@ -399,11 +392,9 @@ public class CombatManager extends Manager {
 			combatSpam.setInfo(info);
 			combatSpam.setAttackName(new StringId("cmd_n", command.getName()));
 			combatSpam.setWeapon(weapon.getObjectId());
-			
-			// Combat log message appears for the target and every observer
-			target.sendObserversAndSelf(combatSpam);
 
 			if (!info.isSuccess()) {	// Single target negate, like dodge or parry!
+				target.sendObserversAndSelf(combatSpam);
 				return;
 			}
 			
@@ -419,9 +410,11 @@ public class CombatManager extends Manager {
 			// TODO Critical hit roll for attacker
 			// TODO armour
 			
+			target.sendObserversAndSelf(combatSpam);
+
 			int finalDamage = info.getFinalDamage();
 			
-			action.addDefender((CreatureObject) target, true, (byte) 0, HitLocation.HIT_LOCATION_BODY, (short) finalDamage);
+			action.addDefender(target, true, (byte) 0, HitLocation.HIT_LOCATION_BODY, (short) finalDamage);
 			
 			if (target.getHealth() <= finalDamage)
 				doCreatureDeath(target, source);
@@ -499,7 +492,7 @@ public class CombatManager extends Manager {
 		incapacitated.setPosture(Posture.INCAPACITATED);
 		incapacitated.setCounter(INCAP_TIMER);
 		
-		Log.i(this, "%s was incapacitated", incapacitated);
+		Log.i("%s was incapacitated", incapacitated);
 		
 		// Once the incapacitation counter expires, revive them.
 		synchronized(incapacitatedCreatures) {
@@ -538,18 +531,18 @@ public class CombatManager extends Manager {
 			regeneratingActionCreatures.add(revivedCreature);
 		}
 		
-		Log.i(this, "% was revived", revivedCreature);
+		Log.i("% was revived", revivedCreature);
 	}
 	
 	private void killCreature(CreatureObject killer, CreatureObject corpse) {
 		corpse.setPosture(Posture.DEAD);
-		Log.i(this, "%s was killed by %s", corpse, killer);
+		Log.i("%s was killed by %s", corpse, killer);
 		new CreatureKilledIntent(killer, corpse).broadcast();
 	}
 	
-	private void procesDeathblow(DeathblowIntent i) {
-		CreatureObject killer = i.getKiller();
-		CreatureObject corpse = i.getCorpse();
+	private void handleDeathblowIntent(DeathblowIntent di) {
+		CreatureObject killer = di.getKiller();
+		CreatureObject corpse = di.getCorpse();
 
 		// Only deathblowing players is allowed!
 		if (!corpse.isPlayer()) {
@@ -576,7 +569,7 @@ public class CombatManager extends Manager {
 				}
 			} else {
 				// Can't happen with the current code, but in case it's ever refactored...
-				Log.e(this, "Incapacitation timer for player %s being deathblown unexpectedly didn't exist!", "");
+				Log.e("Incapacitation timer for player %s being deathblown unexpectedly didn't exist!", "");
 			}
 		}
 	}

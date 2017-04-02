@@ -31,15 +31,17 @@ import intents.BuffIntent;
 import intents.FactionIntent;
 import intents.PlayerEventIntent;
 import intents.chat.ChatBroadcastIntent;
+
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import network.packets.swg.zone.PlayClientEffectObjectMessage;
 
+import network.packets.swg.zone.PlayClientEffectObjectMessage;
 import intents.combat.CreatureKilledIntent;
 import intents.object.DestroyObjectIntent;
 import intents.object.ObjectCreatedIntent;
 import intents.object.ObjectTeleportIntent;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -49,6 +51,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.Future;
 import java.util.stream.Collectors;
+
 import resources.Location;
 import resources.Posture;
 import resources.PvpFaction;
@@ -66,6 +69,7 @@ import resources.player.Player;
 import resources.server_info.Log;
 import resources.server_info.RelationalDatabase;
 import resources.server_info.RelationalServerFactory;
+import resources.server_info.StandardLog;
 import resources.sui.SuiButtons;
 import resources.sui.SuiEvent;
 import resources.sui.SuiListBox;
@@ -110,11 +114,9 @@ public final class CorpseService extends Service {
 	}
 	
 	private void loadFacilityData() {
-		long startTime = System.nanoTime();
-		Log.i(this, "Loading cloning facility data...");
-		
+		long startTime = StandardLog.onStartLoad("cloning facility data");
 		loadRespawnData();
-		Log.i(this, "Finished loading cloning facility data for %d object templates. Time: %fms", facilityDataMap.size(), (System.nanoTime() - startTime) / 1E6);
+		StandardLog.onEndLoad(facilityDataMap.size(), "cloning facility data", startTime);
 	}
 
 	private void loadRespawnData() {
@@ -147,11 +149,11 @@ public final class CorpseService extends Service {
 
 					if (facilityDataMap.put(ClientFactory.formatToSharedFile(objectTemplate), facilityData) != null) {
 						// Duplicates are not allowed!
-						Log.e(this, "Duplicate entry for %s in row %d. Replacing previous entry with new", objectTemplate, set.getRow());
+						Log.e("Duplicate entry for %s in row %d. Replacing previous entry with new", objectTemplate, set.getRow());
 					}
 				}
 			} catch (SQLException e) {
-				Log.e(this, e);
+				Log.e(e);
 			}
 		}
 	}
@@ -233,7 +235,7 @@ public final class CorpseService extends Service {
 		List<BuildingObject> availableFacilities = getAvailableFacilities(corpse);
 		
 		if (availableFacilities.isEmpty()) {
-			Log.e(this, "No cloning facility is available for terrain %s - %s has nowhere to properly clone", corpseTerrain, corpse);
+			Log.e("No cloning facility is available for terrain %s - %s has nowhere to properly clone", corpseTerrain, corpse);
 			return;
 		}
 
@@ -277,10 +279,10 @@ public final class CorpseService extends Service {
 	 */
 	private void deleteCorpse(CreatureObject creatureCorpse) {
 		if(creatureCorpse.isPlayer()) {
-			Log.e(this, "Cannot delete the corpse of a player!", creatureCorpse);
+			Log.e("Cannot delete the corpse of a player!", creatureCorpse);
 		} else {
 			new DestroyObjectIntent(creatureCorpse).broadcast();
-			Log.i(this, "Corpse of NPC %s was deleted from the world", creatureCorpse);
+			Log.i("Corpse of NPC %s was deleted from the world", creatureCorpse);
 		}
 	}
 	
@@ -318,7 +320,7 @@ public final class CorpseService extends Service {
 		FacilityData facilityData = facilityDataMap.get(selectedFacility.getTemplate());
 
 		if (facilityData == null) {
-			Log.e(this, "%s could not clone at facility %s because the object template is not in cloning_respawn.sdb", corpse, selectedFacility);
+			Log.e("%s could not clone at facility %s because the object template is not in cloning_respawn.sdb", corpse, selectedFacility);
 			return CloneResult.TEMPLATE_MISSING;
 		}
 
@@ -326,7 +328,7 @@ public final class CorpseService extends Service {
 		CellObject cellObject = selectedFacility.getCellByName(cellName);
 
 		if (cellObject == null) {
-			Log.e(this, "Cell %s was invalid for cloning facility %s", cellName, selectedFacility);
+			Log.e("Cell %s was invalid for cloning facility %s", cellName, selectedFacility);
 			return CloneResult.INVALID_CELL;
 		}
 		
@@ -408,7 +410,7 @@ public final class CorpseService extends Service {
 			suiWindow.close(corpseOwner);
 			forceClone(corpse, facilitiesInTerrain);
 		} else {
-			Log.w(this, "Could not expire timer for %s because none was active", corpse);
+			Log.w("Could not expire timer for %s because none was active", corpse);
 		}
 	}
 	

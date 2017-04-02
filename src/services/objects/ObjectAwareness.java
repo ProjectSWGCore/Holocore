@@ -200,12 +200,12 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 		boolean firstZone = state == PlayerState.LOGGED_IN;
 		player.setPlayerState(PlayerState.ZONING_IN);
 		if (parent == null) {
-			Log.i(this, "Zoning in %s with character %s to %s %s", player.getUsername(), player.getCharacterName(), loc.getPosition(), loc.getTerrain());
+			Log.i("Zoning in %s with character %s to %s %s", player.getUsername(), player.getCharacterName(), loc.getPosition(), loc.getTerrain());
 		} else {
 			Assert.notNull(parent.getParent()); // Character must be in a cell, inside a building
 			SWGObject superParent = parent.getSuperParent();
 			Point3D world = superParent.getLocation().getPosition();
-			Log.i(this, "Zoning in %s with character %s at %s in %s/%s %s", player.getUsername(), player.getCharacterName(), loc.getPosition(), superParent, world, superParent.getTerrain());
+			Log.i("Zoning in %s with character %s at %s in %s/%s %s", player.getUsername(), player.getCharacterName(), loc.getPosition(), superParent, world, superParent.getTerrain());
 		}
 		resetAwarenessOnZone(creature, firstZone);
 		creature.setLocation(loc);
@@ -254,7 +254,7 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 	private void handleCmdSceneReady(Player player, CmdSceneReady p) {
 		Assert.test(player.getPlayerState() == PlayerState.ZONING_IN);
 		player.setPlayerState(PlayerState.ZONED_IN);
-		Log.i("ZoneService", "%s with character %s zoned in from %s:%d", player.getUsername(), player.getCharacterName(), p.getAddress(), p.getPort());
+		Log.i("%s with character %s zoned in from %s", player.getUsername(), player.getCharacterName(), p.getSocketAddress());
 		new PlayerEventIntent(player, PlayerEvent.PE_ZONE_IN_SERVER).broadcast();
 		player.sendPacket(new CmdSceneReady());
 	}
@@ -280,7 +280,7 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 		SWGObject parent = objectManager.getObjectById(dt.getCellId());
 		Assert.test(obj instanceof CreatureObject);
 		if (parent == null) {
-			Log.w(this, "Unknown data transform parent! Obj: %d/%s  Parent: %d", dt.getObjectId(), obj, dt.getCellId());
+			Log.w("Unknown data transform parent! Obj: %d/%s  Parent: %d", dt.getObjectId(), obj, dt.getCellId());
 			return;
 		}
 		Location requestedLocation = new Location(dt.getLocation());

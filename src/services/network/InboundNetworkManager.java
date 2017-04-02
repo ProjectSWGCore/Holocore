@@ -29,10 +29,12 @@ package services.network;
 
 import intents.network.InboundPacketPendingIntent;
 
-import java.net.InetSocketAddress;
+import java.net.SocketAddress;
+import java.util.Arrays;
+
 import network.NetworkClient;
-import resources.control.Intent;
 import resources.control.Service;
+import resources.server_info.Log;
 
 public class InboundNetworkManager extends Service {
 	
@@ -41,19 +43,15 @@ public class InboundNetworkManager extends Service {
 	public InboundNetworkManager(ClientManager clientManager) {
 		this.clientManager = clientManager;
 		
-		registerForIntent(InboundPacketPendingIntent.TYPE);
+		registerForIntent(InboundPacketPendingIntent.class, ippi -> handleInboundPacketPendingIntent(ippi));
 	}
 	
-	@Override
-	public void onIntentReceived(Intent i) {
-		if (i instanceof InboundPacketPendingIntent)
-			handlePacketPending(((InboundPacketPendingIntent) i).getClient());
-	}
-	
-	public void onInboundData(InetSocketAddress addr, byte [] data) {
+	public void onInboundData(SocketAddress addr, byte [] data) {
 		NetworkClient client = clientManager.getClient(addr);
 		if (client.addToBuffer(data))
 			new InboundPacketPendingIntent(client).broadcast();
+		else
+			Log.d("Not enough to process. Waiting. Data: %s", Arrays.toString(data));
 	}
 	
 	public void onSessionCreated(NetworkClient client) {
@@ -64,8 +62,8 @@ public class InboundNetworkManager extends Service {
 		
 	}
 	
-	private void handlePacketPending(NetworkClient client) {
-		client.processInbound();
+	private void handleInboundPacketPendingIntent(InboundPacketPendingIntent ippi){
+		ippi.getClient().processInbound();
 	}
 	
 }

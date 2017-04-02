@@ -65,7 +65,7 @@ public class Encoder {
 			} else if (object instanceof String){
 				throw new UnsupportedOperationException("You must specify a String type!");
 			} else {
-				Log.e("Encoder", "Do not know how to encode instance type " + object.getClass().getName());
+				Log.e("Do not know how to encode instance type " + object.getClass().getName());
 			}
 		}
 		return null;

@@ -48,7 +48,7 @@ public abstract class RelationalDatabase implements Closeable {
 			Class.forName(jdbcClass);
 			initialize(url);
 		} catch (ClassNotFoundException e) {
-			Log.e(this, e);
+			Log.e(e);
 			online = false;
 		}
 	}
@@ -58,7 +58,7 @@ public abstract class RelationalDatabase implements Closeable {
 			Class.forName(jdbcClass);
 			initialize(url, user, pass);
 		} catch (ClassNotFoundException e) {
-			Log.e(this, e);
+			Log.e(e);
 			online = false;
 		}
 	}
@@ -70,7 +70,7 @@ public abstract class RelationalDatabase implements Closeable {
 				url += "?" + params;
 			initialize(url, user, pass);
 		} catch (ClassNotFoundException e) {
-			Log.e(this, e);
+			Log.e(e);
 			online = false;
 		}
 	}
@@ -83,7 +83,7 @@ public abstract class RelationalDatabase implements Closeable {
 				url += "?" + params;
 			initialize(url, user, pass);
 		} catch (ClassNotFoundException e) {
-			Log.e(this, e);
+			Log.e(e);
 			online = false;
 		}
 	}
@@ -94,7 +94,7 @@ public abstract class RelationalDatabase implements Closeable {
 			metaData = connection.getMetaData();
 			online = true;
 		} catch (SQLException e) {
-			Log.e("RelationalDatabase", "Failed to initialize relational database! %s - %s", e.getClass().getSimpleName(), e.getMessage());
+			Log.e("Failed to initialize relational database! %s - %s", e.getClass().getSimpleName(), e.getMessage());
 			online = false;
 		}
 	}
@@ -105,7 +105,7 @@ public abstract class RelationalDatabase implements Closeable {
 			metaData = connection.getMetaData();
 			online = true;
 		} catch (SQLException e) {
-			Log.e("RelationalDatabase", "Failed to initialize relational database! %s - %s", e.getClass().getSimpleName(), e.getMessage());
+			Log.e("Failed to initialize relational database! %s - %s", e.getClass().getSimpleName(), e.getMessage());
 			online = false;
 		}
 	}
@@ -115,7 +115,7 @@ public abstract class RelationalDatabase implements Closeable {
 			connection.close();
 			online = false;
 		} catch (SQLException e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 	}
 	
@@ -131,13 +131,13 @@ public abstract class RelationalDatabase implements Closeable {
 	
 	public PreparedStatement prepareStatement(String sql) {
 		if (connection == null) {
-			Log.e("RelationalDatabase", "Cannot prepare statement! Connection is null");
+			Log.e("Cannot prepare statement! Connection is null");
 			return null;
 		}
 		try {
 			return connection.prepareStatement(sql);
 		} catch (SQLException e) {
-			Log.e(this, e);
+			Log.e(e);
 			return null;
 		}
 	}
@@ -156,7 +156,7 @@ public abstract class RelationalDatabase implements Closeable {
 			}
 			return s.getResultSet();
 		} catch (SQLException e) {
-			Log.e(this, e);
+			Log.e(e);
 			if (s != null) {
 				try { s.close(); } catch (SQLException ex) { }
 			}
@@ -172,7 +172,7 @@ public abstract class RelationalDatabase implements Closeable {
 				return s.executeUpdate(query);
 			}
 		} catch (SQLException e) {
-			Log.e(this, e);
+			Log.e(e);
 			return 0;
 		}
 	}

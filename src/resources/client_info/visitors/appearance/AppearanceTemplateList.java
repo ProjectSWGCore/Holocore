@@ -85,7 +85,7 @@ public class AppearanceTemplateList extends ClientData implements RenderableData
 		if (child instanceof RenderableData)
 			subAppearance = (RenderableData) child;
 		else
-			Log.e(this, "Sub-appearance does not implement RenderableData!");
+			Log.e("Sub-appearance does not implement RenderableData!");
 	}
 	
 }

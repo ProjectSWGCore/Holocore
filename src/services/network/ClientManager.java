@@ -27,33 +27,36 @@
  ***********************************************************************************/
 package services.network;
 
-import java.net.InetSocketAddress;
+import java.net.SocketAddress;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
+import network.AdminNetworkClient;
 import network.NetworkClient;
 
 class ClientManager {
 	
-	private final Map <InetSocketAddress, Long> sockets;
+	private final Map <SocketAddress, Long> sockets;
 	private final Map <Long, NetworkClient> clients;
 	private final AtomicLong networkIdCounter;
 	
 	public ClientManager() {
-		sockets = new HashMap<InetSocketAddress, Long>();
-		clients = new Hashtable<Long, NetworkClient>();
+		sockets = new HashMap<>();
+		clients = new Hashtable<>();
 		networkIdCounter = new AtomicLong(1);
 	}
 	
-	public NetworkClient createSession(InetSocketAddress addr) {
-		NetworkClient client = new NetworkClient(addr, networkIdCounter.incrementAndGet());
-		synchronized (clients) {
-			sockets.put(client.getAddress(), client.getNetworkId());
-			clients.put(client.getNetworkId(), client);
-		}
-		client.onSessionCreated();
+	public NetworkClient createAdminSession(SocketAddress addr, PacketSender sender) {
+		NetworkClient client = new AdminNetworkClient(addr, networkIdCounter.incrementAndGet(), sender);
+		registerClient(client);
+		return client;
+	}
+	
+	public NetworkClient createSession(SocketAddress addr, PacketSender sender) {
+		NetworkClient client = new NetworkClient(addr, networkIdCounter.incrementAndGet(), sender);
+		registerClient(client);
 		return client;
 	}
 	
@@ -69,17 +72,25 @@ class ClientManager {
 		}
 	}
 	
-	public NetworkClient getClient(InetSocketAddress addr) {
+	public NetworkClient getClient(SocketAddress addr) {
 		return getClient(getNetworkId(addr));
 	}
 	
-	public long getNetworkId(InetSocketAddress addr) {
+	public long getNetworkId(SocketAddress addr) {
 		synchronized (clients) {
 			Long id = sockets.get(addr);
 			if (id == null)
 				return -1;
 			return id;
 		}
+	}
+	
+	private void registerClient(NetworkClient client) {
+		synchronized (clients) {
+			sockets.put(client.getAddress(), client.getNetworkId());
+			clients.put(client.getNetworkId(), client);
+		}
+		client.onSessionCreated();
 	}
 	
 	private void destroySession(NetworkClient client) {

@@ -61,7 +61,7 @@ public abstract class ObjectController extends SWGPacket {
 			return;
 		update = getInt(data);
 		if (getInt(data) != controllerCrc)
-			Log.e(getClass().getSimpleName(), "Attempting to process invalid controller");
+			Log.e("Attempting to process invalid controller");
 		objectId = getLong(data);
 		getInt(data);
 		return;
@@ -109,7 +109,7 @@ public abstract class ObjectController extends SWGPacket {
 			case 0x00F5: return new MissionListRequest(data);
 			case 0x041C: return new JTLTerminalSharedMessage(data);
 		}
-		Log.w("ObjectController", "Unknown object controller: %08X", crc);
+		Log.w("Unknown object controller: %08X", crc);
 		return new GenericObjectController(crc, data);
 	}
 	

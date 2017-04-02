@@ -107,10 +107,10 @@ public class HttpSocket implements Closeable {
 				if (i.intValue() > 0) {
 					String bodyStr = readBytes(i.intValue());
 					if (bodyStr == null)
-						Log.e("HttpSocket", "Failed to read data in %s request: %s - returned null", req.length==0?"null":req[0], req.length<2?"null":req[1]);
+						Log.e("Failed to read data in %s request: %s - returned null", req.length==0?"null":req[0], req.length<2?"null":req[1]);
 					else {
 						if (bodyStr.length() != i.intValue())
-							Log.w("HttpSocket", "Failed to read all data in %s request: %s", req.length==0?"null":req[0], req.length<2?"null":req[1]);
+							Log.w("Failed to read all data in %s request: %s", req.length==0?"null":req[0], req.length<2?"null":req[1]);
 						body.append(bodyStr);
 					}
 				}
@@ -230,7 +230,7 @@ public class HttpSocket implements Closeable {
 				return null;
 			return new String(data, 0, read);
 		} catch (IOException e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 		return null;
 	}
@@ -268,7 +268,7 @@ public class HttpSocket implements Closeable {
 		try {
 			return new BufferedReader(new InputStreamReader(socket.getInputStream(), ASCII));
 		} catch (IOException e) {
-			Log.e(this, e);
+			Log.e(e);
 			return null;
 		}
 	}
@@ -277,7 +277,7 @@ public class HttpSocket implements Closeable {
 		try {
 			return new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(), ASCII));
 		} catch (IOException e) {
-			Log.e(this, e);
+			Log.e(e);
 			return null;
 		}
 	}
@@ -286,7 +286,7 @@ public class HttpSocket implements Closeable {
 		try {
 			return socket.getOutputStream();
 		} catch (IOException e) {
-			Log.e(this, e);
+			Log.e(e);
 			return null;
 		}
 	}

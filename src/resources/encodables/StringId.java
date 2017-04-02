@@ -49,7 +49,7 @@ public class StringId implements OutOfBandData, Persistable {
 	
 	public StringId(String stf) {
 		if (!stf.contains(":")) {
-			Log.e("Stf", "Invalid stf format! Expected a semi-colon for " + stf);
+			Log.e("Invalid stf format! Expected a semi-colon for " + stf);
 			return;
 		}
 		

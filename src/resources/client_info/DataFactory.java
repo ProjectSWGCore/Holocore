@@ -29,6 +29,7 @@ package resources.client_info;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.channels.ClosedChannelException;
 
 import resources.server_info.Log;
 
@@ -39,12 +40,12 @@ public abstract class DataFactory {
 
 	protected ClientData readFile(String filename) {
 		if (filename == null || filename.isEmpty()) {
-			Log.e("DataFactory", "File cannot be null or empty!");
+			Log.e("File cannot be null or empty!");
 			return null;
 		}
 		File file = new File(getFolder() + filename);
 		if (!file.isFile()) {
-			Log.e("DataFactory", "Not a file: " + file);
+			Log.e("Not a file: " + file);
 			return null;
 		}
 
@@ -53,7 +54,9 @@ public abstract class DataFactory {
 		try {
 			swgFile.read(file);
 		} catch (IOException e) {
-			Log.e(this, e);
+			if (e instanceof ClosedChannelException)
+				return null;
+			Log.e(e);
 		}
 
 		ClientData clientData = createDataObject(swgFile.getType());
@@ -66,7 +69,7 @@ public abstract class DataFactory {
 
 	protected File writeFile(SWGFile swgFile, ClientData data) {
 		if (swgFile == null || data == null) {
-			Log.e("DataFactory", "File or data objects cannot be null or empty!");
+			Log.e("File or data objects cannot be null or empty!");
 			return null;
 		}
 
@@ -75,7 +78,7 @@ public abstract class DataFactory {
 		try {
 			swgFile.save(save);
 		} catch (IOException e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 
 		return save;

@@ -27,18 +27,18 @@
 ***********************************************************************************/
 package services.experience;
 
-import intents.experience.ExperienceIntent;
-import intents.experience.LevelChangedIntent;
 import java.awt.Color;
 import java.util.HashMap;
 import java.util.Map;
+
+import intents.experience.ExperienceIntent;
+import intents.experience.LevelChangedIntent;
 import network.packets.swg.zone.object_controller.ShowFlyText;
 import network.packets.swg.zone.object_controller.ShowFlyText.Scale;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
 import resources.common.RGB;
 import resources.config.ConfigFile;
-import resources.control.Intent;
 import resources.control.Manager;
 import resources.encodables.OutOfBandPackage;
 import resources.encodables.ProsePackage;
@@ -65,7 +65,7 @@ public final class ExperienceManager extends Manager {
 		levelXpMap = new HashMap<>();
 		xpMultiplier = getConfig(ConfigFile.FEATURES).getDouble("XP-MULTIPLIER", 1);
 		
-		registerForIntent(ExperienceIntent.TYPE);
+		registerForIntent(ExperienceIntent.class, ei -> handleExperienceIntent(ei));
 		
 		addChildService(skillManager);
 		addChildService(skillTemplateService);
@@ -85,21 +85,11 @@ public final class ExperienceManager extends Manager {
 		return super.initialize();
 	}
 	
-	@Override
-	public void onIntentReceived(Intent i) {
-		switch(i.getType()) {
-			case ExperienceIntent.TYPE:
-				if (i instanceof ExperienceIntent)
-					handleExperienceGainedIntent((ExperienceIntent) i);
-			break;
-		}
-	}
-	
-	private void handleExperienceGainedIntent(ExperienceIntent i) {
-		CreatureObject creatureObject = i.getCreatureObject();
+	private void handleExperienceIntent(ExperienceIntent ei) {
+		CreatureObject creatureObject = ei.getCreatureObject();
 		PlayerObject playerObject = creatureObject.getPlayerObject();
 		if (playerObject != null) {
-			int newXpTotal = awardExperience(creatureObject, playerObject, i.getXpType(), i.getExperienceGained());
+			int newXpTotal = awardExperience(creatureObject, playerObject, ei.getXpType(), ei.getExperienceGained());
 			
 			// At this point, we check if their level should be adjusted.
 			short oldLevel = creatureObject.getLevel();
@@ -111,7 +101,7 @@ public final class ExperienceManager extends Manager {
 				adjustHealth(creatureObject, newLevel);
 				adjustAction(creatureObject, newLevel);
 				// TODO NGE: system message health and action differences. @spam:level_up_stat_gain_#
-				Log.i(this, "%s leveled from %d to %d", creatureObject, oldLevel, newLevel);
+				Log.i("%s leveled from %d to %d", creatureObject, oldLevel, newLevel);
 			}
 		}
 	}
@@ -130,7 +120,7 @@ public final class ExperienceManager extends Manager {
 		
 		playerObject.setExperiencePoints(xpType, newXpTotal);
 		creatureObject.setTotalLevelXp(newXpTotal);
-		Log.d(this, "%s gained %d %s XP", creatureObject, xpGained, xpType);
+		Log.d("%s gained %d %s XP", creatureObject, xpGained, xpType);
 		
 		// Show flytext above the creature that received XP, but only to them
 		creatureObject.sendSelf(new ShowFlyText(creatureObject.getObjectId(), new OutOfBandPackage(new ProsePackage(new StringId("base_player", "prose_flytext_xp"), "DI", xpGained)), Scale.MEDIUM, new RGB(Color.magenta)));
@@ -147,7 +137,7 @@ public final class ExperienceManager extends Manager {
 		Integer xpNextLevel = levelXpMap.get(nextLevel);
 
 		if (xpNextLevel == null) {
-			Log.e(this, "%s couldn't level up to %d because there's no XP requirement", creatureObject, nextLevel);
+			Log.e("%s couldn't level up to %d because there's no XP requirement", creatureObject, nextLevel);
 			return currentLevel;
 		}
 

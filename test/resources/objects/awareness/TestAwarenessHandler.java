@@ -170,7 +170,7 @@ public class TestAwarenessHandler {
 				timeout--;
 			}
 		} catch (InterruptedException e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 	}
 	

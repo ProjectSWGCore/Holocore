@@ -96,7 +96,7 @@ public class CrcDatabaseGenerator {
 				}
 			});
 		} catch (IOException e) {
-			Log.e("CrcDatabaseGenerator", e);
+			Log.e(e);
 		}
 	}
 	

@@ -35,6 +35,8 @@ import resources.config.ConfigFile;
 import resources.control.Manager;
 import resources.server_info.Config;
 import resources.server_info.Log;
+import resources.server_info.RelationalDatabase;
+import resources.server_info.RelationalServerFactory;
 import services.network.NetworkManager;
 
 public class EngineManager extends Manager {
@@ -65,7 +67,9 @@ public class EngineManager extends Manager {
 	}
 	
 	private void wipeCharacterDatabase() {
-		getLocalDatabase().executeQuery("DELETE FROM characters");
+		try (RelationalDatabase database = RelationalServerFactory.getServerDatabase("login/login.db")) {
+			database.executeQuery("DELETE FROM players");
+		}
 	}
 	
 	private void wipeOdbFiles() {
@@ -77,7 +81,7 @@ public class EngineManager extends Manager {
 		for (File f : files) {
 			if (!f.isDirectory() && (f.getName().endsWith(".db") || f.getName().endsWith(".db.tmp"))) {
 				if (!f.delete()) {
-					Log.e("EngineManager", "Failed to delete ODB: %s", f);
+					Log.e("Failed to delete ODB: %s", f);
 				}
 			}
 		}
@@ -88,7 +92,7 @@ public class EngineManager extends Manager {
 		try {
 			ServerFactory.getInstance().updateServerIffs();
 		} catch (IOException e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 	}
 }

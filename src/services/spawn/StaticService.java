@@ -98,7 +98,7 @@ public class StaticService extends Service {
 					}
 				}
 			} catch (SQLException e) {
-				Log.e(this, e);
+				Log.e(e);
 			}
 		}
 		return objects;
@@ -128,7 +128,7 @@ public class StaticService extends Service {
 			else if (building instanceof BuildingObject)
 				createObjectInParent(((BuildingObject) building).getCellByName(cell));
 			else
-				Log.e("StaticService", "Parent object with cell specified is not a BuildingObject!");
+				Log.e("Parent object with cell specified is not a BuildingObject!");
 		}
 		
 		private SWGObject createObjectInParent(SWGObject parent) {

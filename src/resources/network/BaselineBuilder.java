@@ -100,7 +100,7 @@ public class BaselineBuilder {
 		try {
 			dataStream.write(str.getBytes(ASCII));
 		} catch (IOException e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 	}
 	
@@ -109,7 +109,7 @@ public class BaselineBuilder {
 		try {
 			dataStream.write(str.getBytes(UNICODE));
 		} catch (IOException e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 	}
 	
@@ -117,7 +117,7 @@ public class BaselineBuilder {
 		try {
 			dataStream.writeByte(b);
 		} catch (IOException e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 	}
 	
@@ -125,7 +125,7 @@ public class BaselineBuilder {
 		try {
 			dataStream.writeShort(s);
 		} catch (IOException e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 	}
 	
@@ -133,7 +133,7 @@ public class BaselineBuilder {
 		try {
 			dataStream.writeInt(i);
 		} catch (IOException e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 	}
 	
@@ -141,7 +141,7 @@ public class BaselineBuilder {
 		try {
 			dataStream.writeLong(l);
 		} catch (IOException e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 	}
 	
@@ -149,7 +149,7 @@ public class BaselineBuilder {
 		try {
 			dataStream.writeFloat(f);
 		} catch (IOException e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 	}
 	
@@ -158,7 +158,7 @@ public class BaselineBuilder {
 		try {
 			dataStream.write(array);
 		} catch (IOException e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 	}
 	

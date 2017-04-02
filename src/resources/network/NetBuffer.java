@@ -241,7 +241,7 @@ public class NetBuffer {
 				instance = type.newInstance();
 				((Encodable) instance).decode(data);
 			} catch (InstantiationException | IllegalAccessException e) {
-				Log.e(this, e);
+				Log.e(e);
 			}
 
 			return instance;
@@ -264,7 +264,7 @@ public class NetBuffer {
 			instance = type.newInstance();
 			instance.decode(data);
 		} catch (InstantiationException | IllegalAccessException e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 
 		return instance;

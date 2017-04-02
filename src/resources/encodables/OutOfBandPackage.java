@@ -139,7 +139,7 @@ public class OutOfBandPackage implements Encodable, Persistable {
 				packages.add(stringId);
 				break;
 			default:
-				Log.e("OutOfBandPackage", "Tried to decode an unsupported OutOfBandData Type: " + type);
+				Log.e("Tried to decode an unsupported OutOfBandData Type: " + type);
 				break;
 		}
 	}

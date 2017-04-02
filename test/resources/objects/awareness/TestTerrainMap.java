@@ -122,7 +122,7 @@ public class TestTerrainMap {
 		MapCallback callback = new MapCallback() {
 			public void onWithinRange(SWGObject obj, SWGObject inRange) {
 				if (obj.equals(creature) && !withinRange.remove(inRange)) {
-					Log.e(this, "Not in list: %s", inRange);
+					Log.e("Not in list: %s", inRange);
 					onlyWithinRange.set(false);
 				}
 			}
@@ -164,7 +164,7 @@ public class TestTerrainMap {
 				timeout--;
 			}
 		} catch (InterruptedException e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 	}
 	

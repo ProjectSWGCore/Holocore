@@ -151,7 +151,7 @@ public class SWGMap<K, V> extends SynchronizedMap<K, V> implements Encodable {
 				put((K) buffer.getString(keyType), (V) buffer.getString(valType));
 			}
 		} catch (ClassCastException e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 		clearDeltaQueue();
 	}
@@ -170,10 +170,10 @@ public class SWGMap<K, V> extends SynchronizedMap<K, V> implements Encodable {
 				if (value != null && vType.isAssignableFrom(value.getClass()))
 					put((K) key, (V) value);
 				else
-					Log.e("SWGMap", "Unable to parse: key=%s  value=%s", key, value);
+					Log.e("Unable to parse: key=%s  value=%s", key, value);
 			}
 		} catch (ClassCastException e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 		clearDeltaQueue();
 	}
@@ -189,18 +189,18 @@ public class SWGMap<K, V> extends SynchronizedMap<K, V> implements Encodable {
 			buffer.getByte();
 			Object key = buffer.getGeneric(kType);
 			if (key == null) {
-				Log.e("SWGMap", "Failed to decode: " + kType.getSimpleName());
+				Log.e("Failed to decode: " + kType.getSimpleName());
 				break;
 			}
 			Object value = buffer.getGeneric(vType);
 			if (value == null) {
-				Log.e("SWGMap", "Failed to decode: " + vType.getSimpleName());
+				Log.e("Failed to decode: " + vType.getSimpleName());
 				break;
 			}
 			if (kType.isAssignableFrom(key.getClass()) && vType.isAssignableFrom(value.getClass()))
 				put((K) key, (V) value);
 			else
-				Log.e("SWGMap", "Failed to insert key=" + key + "  value=" + value);
+				Log.e("Failed to insert key=" + key + "  value=" + value);
 		}
 		clearDeltaQueue();
 	}

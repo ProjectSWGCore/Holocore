@@ -34,15 +34,14 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import intents.NotifyPlayersPacketIntent;
+import intents.PlayerEventIntent;
 import main.ProjectSWG;
 import network.packets.swg.SWGPacket;
 import network.packets.swg.zone.ServerTimeMessage;
 import network.packets.swg.zone.ServerWeatherMessage;
-import intents.NotifyPlayersPacketIntent;
-import intents.PlayerEventIntent;
 import resources.Terrain;
 import resources.WeatherType;
-import resources.control.Intent;
 import resources.control.Service;
 import resources.player.Player;
 import resources.player.PlayerEvent;
@@ -55,7 +54,7 @@ public final class EnvironmentService extends Service {
 	private final WeatherType[] weatherTypes;
 	private final Map<Terrain, WeatherType> weatherForTerrain;
 	private final Random random;
-
+	
 	private ScheduledExecutorService executor;
 	
 	public EnvironmentService() {
@@ -64,7 +63,7 @@ public final class EnvironmentService extends Service {
 		weatherForTerrain = new HashMap<>();
 		weatherTypes = WeatherType.values();
 		random = new Random();
-		registerForIntent(PlayerEventIntent.TYPE);
+		registerForIntent(PlayerEventIntent.class, pei -> handlePlayerEventIntent(pei));
 	}
 	
 	@Override
@@ -84,7 +83,7 @@ public final class EnvironmentService extends Service {
 	}
 	
 	@Override
-	public boolean stop() {
+	public boolean terminate() {
 		try {
 			if (executor != null) {
 				executor.shutdownNow();
@@ -93,20 +92,14 @@ public final class EnvironmentService extends Service {
 		} catch (InterruptedException e) {
 			
 		}
-		return super.stop();
+		return super.terminate();
 	}
 	
-	@Override
-	public void onIntentReceived(Intent i) {
-		if(i.getType().equals(PlayerEventIntent.TYPE))
-			if (i instanceof PlayerEventIntent) {
-				PlayerEventIntent pei = (PlayerEventIntent) i;
-				
-				if(pei.getEvent().equals(PlayerEvent.PE_ZONE_IN_CLIENT))
-					handleZoneIn(pei);
-				}
+	private void handlePlayerEventIntent(PlayerEventIntent pei){
+		if(pei.getEvent().equals(PlayerEvent.PE_ZONE_IN_CLIENT))
+			handleZoneIn(pei);
 	}
-	
+
 	private void handleZoneIn(PlayerEventIntent pei) {
 		Player p = pei.getPlayer();
 		Terrain t = p.getCreatureObject().getTerrain();

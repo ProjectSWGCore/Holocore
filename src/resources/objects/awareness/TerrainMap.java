@@ -104,7 +104,7 @@ public class TerrainMap {
 		TerrainMapChunk chunk = getChunk(obj.getX(), obj.getZ());
 		TerrainMapChunk current = obj.getAwareness().setTerrainMapChunk(chunk);
 		if (chunk == null) {
-			Log.e("TerrainMap", "Null Chunk! Location: (%.3f, %.3f) Object: %s", obj.getX(), obj.getZ(), obj);
+			Log.e("Null Chunk! Location: (%.3f, %.3f) Object: %s", obj.getX(), obj.getZ(), obj);
 			return;
 		}
 		if (current == chunk)

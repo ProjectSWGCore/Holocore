@@ -76,7 +76,7 @@ public class CityService extends Service {
 				list.add(new City(set.getString("city"), set.getInt("x"), set.getInt("z"), set.getInt("radius")));
 			}
 		} catch (SQLException e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 	}
 	

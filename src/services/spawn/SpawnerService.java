@@ -29,24 +29,23 @@ package services.spawn;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import intents.object.DestroyObjectIntent;
-import intents.object.ObjectCreatedIntent;
-import intents.server.ConfigChangedIntent;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+
+import intents.object.DestroyObjectIntent;
+import intents.object.ObjectCreatedIntent;
+import intents.server.ConfigChangedIntent;
 import resources.Location;
 import resources.PvpFlag;
 import resources.Terrain;
 import resources.config.ConfigFile;
 import resources.containers.ContainerPermissionsType;
-import resources.control.Intent;
 import resources.control.Service;
-import resources.objects.building.BuildingObject;
 import resources.objects.SWGObject;
+import resources.objects.building.BuildingObject;
 import resources.objects.creature.CreatureDifficulty;
 import resources.objects.creature.CreatureObject;
 import resources.objects.custom.AIBehavior;
@@ -55,8 +54,9 @@ import resources.objects.tangible.OptionFlag;
 import resources.server_info.Log;
 import resources.server_info.RelationalDatabase;
 import resources.server_info.RelationalServerFactory;
-import resources.spawn.SpawnerType;
+import resources.server_info.StandardLog;
 import resources.spawn.Spawner;
+import resources.spawn.SpawnerType;
 import services.objects.ObjectCreator;
 import services.objects.ObjectManager;
 import utilities.ThreadUtilities;
@@ -82,8 +82,8 @@ public final class SpawnerService extends Service {
 		executorService = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("spawner-service"));
 		spawnerMap = new HashMap<>();
 		
-		registerForIntent(ConfigChangedIntent.TYPE);
-		registerForIntent(DestroyObjectIntent.TYPE);
+		registerForIntent(ConfigChangedIntent.class, cci -> handleConfigChangedIntent(cci));
+		registerForIntent(DestroyObjectIntent.class, doi -> handleDestroyObjectIntent(doi));
 	}
 	
 	@Override
@@ -95,26 +95,18 @@ public final class SpawnerService extends Service {
 	}
 	
 	@Override
-	public void onIntentReceived(Intent i) {
-		switch(i.getType()) {
-			case ConfigChangedIntent.TYPE: handleConfigChangedIntent((ConfigChangedIntent) i); break;
-			case DestroyObjectIntent.TYPE: handleDestroyObjectIntent((DestroyObjectIntent) i); break;
-		}
-	}
-
-	@Override
 	public boolean terminate() {
 		executorService.shutdown();
 		
 		return super.terminate();
 	}
 	
-	private void handleConfigChangedIntent(ConfigChangedIntent i) {
+	private void handleConfigChangedIntent(ConfigChangedIntent cci) {
 		String newValue, oldValue;
 		
-		if (i.getChangedConfig().equals(ConfigFile.FEATURES) && i.getKey().equals("SPAWN-EGGS-ENABLED")) {
-			newValue = i.getNewValue();
-			oldValue = i.getOldValue();
+		if (cci.getChangedConfig().equals(ConfigFile.FEATURES) && cci.getKey().equals("SPAWN-EGGS-ENABLED")) {
+			newValue = cci.getNewValue();
+			oldValue = cci.getOldValue();
 
 			if (!newValue.equals(oldValue)) {
 				if (Boolean.valueOf(newValue) && spawnerMap.isEmpty()) { // If nothing's been spawned, create it.
@@ -126,8 +118,8 @@ public final class SpawnerService extends Service {
 		}
 	}
 	
-	private void handleDestroyObjectIntent(DestroyObjectIntent i) {
-		SWGObject destroyedObject = i.getObject();
+	private void handleDestroyObjectIntent(DestroyObjectIntent doi) {
+		SWGObject destroyedObject = doi.getObject();
 		
 		if(destroyedObject instanceof DefaultAIObject) {
 			DefaultAIObject killedAIObject = (DefaultAIObject) destroyedObject;
@@ -135,7 +127,7 @@ public final class SpawnerService extends Service {
 			Spawner spawner = spawnerMap.remove(killedAIObject);
 			
 			if(spawner == null) {
-				Log.e(this, "Killed AI object %s has no linked Spawner - it cannot respawn!", killedAIObject);
+				Log.e("Killed AI object %s has no linked Spawner - it cannot respawn!", killedAIObject);
 				return;
 			}
 			
@@ -144,8 +136,7 @@ public final class SpawnerService extends Service {
 	}
 	
 	private void loadSpawners() {
-		Log.i(this, "Loading spawners...");
-		long start = System.nanoTime();
+		long startTime = StandardLog.onStartLoad("spawners");
 		
 		try (RelationalDatabase spawnerDatabase = RelationalServerFactory.getServerData("spawn/static.db", "static", "building/buildings", "creatures/creatures", "creatures/npc_stats")) {
 			try (ResultSet set = spawnerDatabase.executeQuery(GET_ALL_SPAWNERS_SQL)) {
@@ -156,11 +147,11 @@ public final class SpawnerService extends Service {
 					}
 				}
 			} catch (SQLException e) {
-				Log.e(this, e);
+				Log.e(e);
 			}
 		}
 		
-		Log.i(this, "Created %d spawners. Time: %fms", spawnerMap.size(), (System.nanoTime()-start) / 1E6);
+		StandardLog.onEndLoad(spawnerMap.size(), "spawners", startTime);
 	}
 	
 	private void loadSpawner(ResultSet set, Location loc) throws SQLException {
@@ -170,7 +161,7 @@ public final class SpawnerService extends Service {
 		int spawnId = set.getInt("spawn_id");
 		
 		if (minRespawnDelay > maxRespawnDelay) {
-			Log.e(this, "Spawner on %s at with ID %d has a minimum respawn time larger than the maximum respawn time", terrain, spawnId);
+			Log.e("Spawner on %s at with ID %d has a minimum respawn time larger than the maximum respawn time", terrain, spawnId);
 			return;
 		}
 		
@@ -183,10 +174,10 @@ public final class SpawnerService extends Service {
 		SWGObject cellObject = null;
 		
 		if (buildingId != 0 && cellId == 0) {
-			Log.e(this, "No cell ID specified for spawner with ID %d on terrain %s", spawnId, terrain);
+			Log.e("No cell ID specified for spawner with ID %d on terrain %s", spawnId, terrain);
 			return;
 		} else if (buildingId == 0 && cellId != 0) {
-			Log.w(this, "Unnecessary cell ID specified for spawner with ID %d on terrain %s", spawnId, terrain);
+			Log.w("Unnecessary cell ID specified for spawner with ID %d on terrain %s", spawnId, terrain);
 			return;
 		}
 		
@@ -194,14 +185,14 @@ public final class SpawnerService extends Service {
 			SWGObject building = objectManager.getObjectById(buildingId);
 			
 			if (!(building instanceof BuildingObject)) {
-				Log.w(this, "Skipping spawner with ID %d on terrain %s - building_id %d didn't reference a BuildingObject!", spawnId, terrain, buildingId);
+				Log.w("Skipping spawner with ID %d on terrain %s - building_id %d didn't reference a BuildingObject!", spawnId, terrain, buildingId);
 				return;
 			}
 			
 			cellObject = ((BuildingObject) building).getCellByNumber(cellId);
 			
 			if (cellObject == null) {
-				Log.e(this, "Spawner with ID %d on terrain %s - building %d didn't have cell ID %d!", spawnId, terrain, buildingId, cellId);
+				Log.e("Spawner with ID %d on terrain %s - building %d didn't have cell ID %d!", spawnId, terrain, buildingId, cellId);
 				return;
 			}
 		}
@@ -212,7 +203,7 @@ public final class SpawnerService extends Service {
 		int maxAction = 0;
 		
 		switch(difficultyChar) {
-			default: Log.w(this, "An unknown creature difficulty of %s was set for spawner with ID %d on terrain %s. Using default NORMAL", difficultyChar, spawnId, terrain);
+			default: Log.w("An unknown creature difficulty of %s was set for spawner with ID %d on terrain %s. Using default NORMAL", difficultyChar, spawnId, terrain);
 			case "N":
 				difficulty = CreatureDifficulty.NORMAL;
 				maxHealth = set.getInt("HP");
@@ -316,7 +307,7 @@ public final class SpawnerService extends Service {
 				creature.addOptionFlags(OptionFlag.INVULNERABLE);
 				break;
 			default:
-				Log.w(this, "An unknown attackable type of %s was specified for %s", flagString, creature.getObjectName());
+				Log.w("An unknown attackable type of %s was specified for %s", flagString, creature.getObjectName());
 				break;
 		}
 	}

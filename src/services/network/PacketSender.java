@@ -27,21 +27,30 @@
  ***********************************************************************************/
 package services.network;
 
+import java.net.SocketAddress;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 
 import resources.network.TCPServer;
+import resources.server_info.Log;
 
 public class PacketSender {
 	
-	private final TCPServer server;
+	private final TCPServer tcpServer;
 	
 	public PacketSender(TCPServer server) {
-		this.server = server;
+		this.tcpServer = server;
+	}
+	
+	public void sendPacket(SocketAddress addr, ByteBuffer data) {
+		if (addr instanceof InetSocketAddress)
+			sendPacket((InetSocketAddress) addr, data);
+		else
+			Log.e("Unknown socket address: %s", addr);
 	}
 	
 	public void sendPacket(InetSocketAddress addr, ByteBuffer data) {
-		server.send(addr, data);
+		tcpServer.send(addr, data);
 	}
 	
 }

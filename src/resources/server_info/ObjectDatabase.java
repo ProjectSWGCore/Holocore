@@ -29,17 +29,15 @@ package resources.server_info;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import resources.concurrency.PswgBasicScheduledThread;
 import resources.persistable.Persistable;
-import utilities.ThreadUtilities;
 
 public abstract class ObjectDatabase<V extends Persistable> {
 	
 	private final File file;
-	private final ScheduledExecutorService autosaveService;
+	private final PswgBasicScheduledThread autosaveThread;
 	
 	public ObjectDatabase(String filename) {
 		this(filename, TimeUnit.MINUTES.toMillis(5));
@@ -54,13 +52,12 @@ public abstract class ObjectDatabase<V extends Persistable> {
 		this.file = new File(filename);
 		if (autosaveInterval < 60000)
 			autosaveInterval = 60000;
-		this.autosaveService = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("odb-autosave-"+file.getName()));
-		// Setup
-		autosaveService.scheduleAtFixedRate(() -> save(), autosaveInterval, autosaveInterval, TimeUnit.MILLISECONDS);
+		this.autosaveThread = new PswgBasicScheduledThread("odb-autosave-"+file.getName(), () -> save());
+		this.autosaveThread.startWithFixedDelay(autosaveInterval, autosaveInterval);
 		try {
 			createFilesAndDirectories();
 		} catch (IOException e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 	}
 	
@@ -71,23 +68,19 @@ public abstract class ObjectDatabase<V extends Persistable> {
 		if (parentName != null && !parentName.isEmpty()) {
 			File parent = new File(file.getParent());
 			if (!parent.exists() && !parent.mkdirs())
-				Log.e(getClass().getSimpleName(), "Failed to create parent directories for ODB: " + file.getCanonicalPath());
+				Log.e("Failed to create parent directories for ODB: " + file.getCanonicalPath());
 		}
 		try {
 			if (!file.createNewFile())
-				Log.e(getClass().getSimpleName(), "Failed to create new ODB: " + file.getCanonicalPath());
+				Log.e("Failed to create new ODB: " + file.getCanonicalPath());
 		} catch (IOException e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 	}
 	
 	public final void close() {
-		autosaveService.shutdownNow();
-		try {
-			autosaveService.awaitTermination(1000, TimeUnit.MILLISECONDS);
-		} catch (InterruptedException e) {
-			Log.e(this, e);
-		}
+		autosaveThread.stop();
+		autosaveThread.awaitTermination(1000);
 		save();
 	}
 	

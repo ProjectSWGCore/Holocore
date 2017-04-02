@@ -32,7 +32,7 @@ import resources.encodables.Encodable;
 import resources.server_info.Log;
 import utilities.Encoder;
 
-import java.net.InetAddress;
+import java.net.SocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.charset.Charset;
@@ -42,39 +42,34 @@ import java.util.List;
 
 
 public class Packet {
+	
 	public static final Charset ascii   = Charset.forName("UTF-8");
 	public static final Charset unicode = Charset.forName("UTF-16LE");
-	private InetAddress       address;
-	private ByteBuffer        data;
-	private int               port = 0;
-	private int               opcode;
+	
+	private SocketAddress socketAddress;
+	private ByteBuffer    data;
+	private int           opcode;
 	
 	public Packet() {
+		socketAddress = null;
 		data = ByteBuffer.allocate(2);
+		opcode = 0;
 	}
 	
 	public Packet(ByteBuffer data) {
 		decode(data);
 	}
 	
-	public void setAddress(InetAddress address) {
-		this.address = address;
-	}
-	
-	public InetAddress getAddress() {
-		return address;
-	}
-	
-	public void setPort(int port) {
-		this.port = port;
-	}
-	
-	public int getPort() {
-		return port;
+	public void setSocketAddress(SocketAddress socketAddress) {
+		this.socketAddress = socketAddress;
 	}
 	
 	public void setOpcode(int opcode) {
 		this.opcode = opcode;
+	}
+	
+	public SocketAddress getSocketAddress() {
+		return socketAddress;
 	}
 	
 	public int getOpcode() {
@@ -108,7 +103,7 @@ public class Packet {
 				break;
 			case UNICODE: for (String s : list) { addUnicode(bb, s); }
 				break;
-			default: Log.e("Packet", "Cannot encode StringType " + type);
+			default: Log.e("Cannot encode StringType " + type);
 				break;
 		}
 	}
@@ -288,7 +283,7 @@ public class Packet {
 		int size = getInt(bb);
 
 		if (size < 0) {
-			Log.e("Packet", "Read list with size less than zero!");
+			Log.e("Read list with size less than zero!");
 			return null;
 		} else if (size == 0) {
 			return new ArrayList<>();
@@ -303,11 +298,11 @@ public class Packet {
 				list.add(instance);
 			}
 		} catch (InstantiationException | IllegalAccessException e) {
-			Log.e("Packet", e);
+			Log.e(e);
 		}
 
 		if (size != list.size())
-			Log.e("Packet", "Expected list size %d but only have %d elements in the list", size, list.size());
+			Log.e("Expected list size %d but only have %d elements in the list", size, list.size());
 		return list;
 	}
 
@@ -317,7 +312,7 @@ public class Packet {
 			instance = type.newInstance();
 			instance.decode(bb);
 		} catch (InstantiationException | IllegalAccessException e) {
-			Log.e("Packet", e);
+			Log.e(e);
 		}
 
 		return instance;
@@ -327,7 +322,7 @@ public class Packet {
 		int size = getInt(bb);
 
 		if (size < 0) {
-			Log.e("Packet", "Read list with size less than zero!");
+			Log.e("Read list with size less than zero!");
 			return null;
 		} else if (size == 0) {
 			return new ArrayList<>();
@@ -340,7 +335,7 @@ public class Packet {
 				break;
 			case UNICODE: for (int i = 0; i < size; i++) { list.add(getUnicode(bb)); }
 				break;
-			default: Log.e("Packet", "Do not know how to read list of StringType " + type);
+			default: Log.e("Do not know how to read list of StringType " + type);
 				break;
 		}
 

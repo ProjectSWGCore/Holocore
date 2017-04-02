@@ -60,7 +60,7 @@ public class SWGPacket extends Packet {
 		setSWGOpcode(getInt(data));
 		if (getSWGOpcode() == crc)
 			return true;
-		Log.w(getClass().getSimpleName(), "SWG Opcode does not match actual! Expected: 0x%08X  Actual: 0x%08X", crc, getSWGOpcode());
+		Log.w("SWG Opcode does not match actual! Expected: 0x%08X  Actual: 0x%08X", crc, getSWGOpcode());
 		return false;
 	}
 	

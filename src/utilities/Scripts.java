@@ -57,7 +57,7 @@ public class Scripts {
 			ENGINE.eval("var SuiButtons = Java.type('resources.sui.SuiButtons')");
 			ENGINE.eval("var SuiEvent = Java.type('resources.sui.SuiEvent')");
 		} catch (ScriptException e) {
-			Log.e("Scripts", e);
+			Log.e(e);
 		}
 	}
 	
@@ -78,9 +78,9 @@ public class Scripts {
 			ENGINE.eval(new InputStreamReader(new FileInputStream(SCRIPTS + script + EXTENSION), StandardCharsets.UTF_8));
 			return (T) INVOCABLE.invokeFunction(function, args);
 		} catch (ScriptException | NoSuchMethodException t) {
-			Log.e("Scripts", "Error invoking script: " + script + "  with function: " + function);
-			Log.e("Scripts", "    Args: " + Arrays.toString(args));
-			Log.e("Scripts", t);
+			Log.e("Error invoking script: " + script + "  with function: " + function);
+			Log.e("    Args: " + Arrays.toString(args));
+			Log.e(t);
 			return null;
 		}
 	}

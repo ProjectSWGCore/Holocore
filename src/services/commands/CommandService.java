@@ -97,9 +97,9 @@ public class CommandService extends Service {
 		cooldownMap = new HashMap<>();
 		executorService = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("command-service"));
 		
-		registerForIntent(GalacticPacketIntent.TYPE);
-		registerForIntent(PlayerEventIntent.TYPE);
-		registerForIntent(PlayerTransformedIntent.TYPE);
+		registerForIntent(GalacticPacketIntent.class, gpi -> handleGalacticPacketIntent(gpi));
+		registerForIntent(PlayerEventIntent.class, pei -> handlePlayerEventIntent(pei));
+		registerForIntent(PlayerTransformedIntent.class, pti -> handlePlayerTransformedIntent(pti));
 	}
 	
 	@Override
@@ -119,17 +119,7 @@ public class CommandService extends Service {
 		return super.terminate();
 	}
 	
-	@Override
-	public void onIntentReceived(Intent i) {
-		switch(i.getType()) {
-			case GalacticPacketIntent.TYPE: handleGalacticPacketIntent((GalacticPacketIntent) i); break;
-			case PlayerEventIntent.TYPE: handlePlayerEventIntent((PlayerEventIntent) i); break;
-			case PlayerTransformedIntent.TYPE: handlePlayerTransformedIntent((PlayerTransformedIntent) i); break;
-		}
-	}
-	
-	private void handleGalacticPacketIntent(GalacticPacketIntent i) {
-		GalacticPacketIntent gpi = (GalacticPacketIntent) i;
+	private void handleGalacticPacketIntent(GalacticPacketIntent gpi) {
 		Packet p = gpi.getPacket();
 		if (p instanceof CommandQueueEnqueue) {
 			CommandQueueEnqueue controller = (CommandQueueEnqueue) p;
@@ -137,20 +127,20 @@ public class CommandService extends Service {
 		}
 	}
 	
-	private void handlePlayerEventIntent(PlayerEventIntent i) {
-		switch(i.getEvent()) {
+	private void handlePlayerEventIntent(PlayerEventIntent pei) {
+		switch(pei.getEvent()) {
 			case PE_LOGGED_OUT:
 				// No reason to keep their combat queue in the map if they log out
 				// This also prevents queued commands from executing after the player logs out
-				combatQueueMap.remove(i.getPlayer());
+				combatQueueMap.remove(pei.getPlayer());
 				break;
 			default:
 				break;
 		}
 	}
 	
-	private void handlePlayerTransformedIntent(PlayerTransformedIntent i) {
-		CreatureObject creature = i.getPlayer();
+	private void handlePlayerTransformedIntent(PlayerTransformedIntent pti) {
+		CreatureObject creature = pti.getPlayer();
 
 		if (creature.isPerforming()) {
 			// A performer can transform while dancing...
@@ -168,7 +158,7 @@ public class CommandService extends Service {
 	private void handleCommandRequest(Player player, GalacticManager galacticManager, CommandQueueEnqueue request) {
 		if (!commandExists(request.getCommandCrc())) {
 			if (request.getCommandCrc() != 0)
-				Log.e("CommandService", "Invalid command crc: %x", request.getCommandCrc());
+				Log.e("Invalid command crc: %x", request.getCommandCrc());
 			return;
 		}
 		
@@ -188,7 +178,7 @@ public class CommandService extends Service {
 
 			if (!combatQueue.offer(new QueuedCommand(command, galacticManager, target, request))) {
 				// Ziggy: Shouldn't happen, unless the Queue implementation is changed
-				Log.e(this, "Unable to enqueue command %s from %s because the combat queue is full", command.getName(), player.getCreatureObject());
+				Log.e("Unable to enqueue command %s from %s because the combat queue is full", command.getName(), player.getCreatureObject());
 			}
 		} else {
 			// Execute it now
@@ -276,21 +266,21 @@ public class CommandService extends Service {
 			if (cooldownGroups.remove(cooldownGroup)) {
 				
 			} else {
-				Log.w(this, "%s doesn't have cooldown group %s!", creature, cooldownGroup);
+				Log.w("%s doesn't have cooldown group %s!", creature, cooldownGroup);
 			}
 		}
 	}
 	
 	private void executeCommand(GalacticManager galacticManager, Player player, Command command, SWGObject target, String args) {
 		if (player.getCreatureObject() == null) {
-			Log.e("CommandService", "No creature object associated with the player '%s'!", player.getUsername());
+			Log.e("No creature object associated with the player '%s'!", player.getUsername());
 			return;
 		}
 
 		if(player.getAccessLevel().getValue() < command.getGodLevel()) {
 			String commandAccessLevel = AccessLevel.getFromValue(command.getGodLevel()).toString();
 			String playerAccessLevel = player.getAccessLevel().toString();
-			Log.i("CommandService", "[%s] attempted to use the command \"%s\", but did not have the minimum access level. Access Level Required: %s, Player Access Level: %s",
+			Log.i("[%s] attempted to use the command \"%s\", but did not have the minimum access level. Access Level Required: %s, Player Access Level: %s",
 					player.getCharacterName(), command.getName(), commandAccessLevel, playerAccessLevel);
 			String errorProseString1 = "use that command";
 			new ChatBroadcastIntent(player, new ProsePackage("StringId", new StringId("cmd_err", "state_must_have_prose"), "TO", errorProseString1, "TU", commandAccessLevel)).broadcast();
@@ -298,7 +288,7 @@ public class CommandService extends Service {
 		}
 
 		if(!command.getCharacterAbility().isEmpty() && !player.getCreatureObject().hasAbility(command.getCharacterAbility())){
-			Log.i("CommandService", "[%s] attempted to use the command \"%s\", but did not have the required ability. Ability Required: %s",
+			Log.i("[%s] attempted to use the command \"%s\", but did not have the required ability. Ability Required: %s",
 					player.getCharacterName(), command.getName(), command.getCharacterAbility());
 			String errorProseString = String.format("use the %s command", command.getName());
 			new ChatBroadcastIntent(player, new ProsePackage("StringId", new StringId("cmd_err", "ability_prose"), "TO", errorProseString)).broadcast();
@@ -314,7 +304,7 @@ public class CommandService extends Service {
 			try {
 				command.getJavaCallback().newInstance().execute(galacticManager, player, target, args);
 			} catch (InstantiationException | IllegalAccessException e) {
-				Log.e(this, e);
+				Log.e(e);
 			}
 		}
 		else
@@ -492,7 +482,7 @@ public class CommandService extends Service {
 			if (callback.getConstructor() == null)
 				throw new IllegalArgumentException("Incorrectly registered callback class. Class must extend ICmdCallback and have an empty constructor: " + callback.getName());
 		} catch (NoSuchMethodException e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 		command.setJavaCallback(callback);
 

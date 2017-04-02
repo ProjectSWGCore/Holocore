@@ -27,8 +27,6 @@
  ***********************************************************************************/
 package services.admin;
 
-import intents.PlayerEventIntent;
-
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
@@ -43,29 +41,31 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import intents.PlayerEventIntent;
 import resources.common.BCrypt;
 import resources.config.ConfigFile;
-import resources.control.Intent;
 import resources.control.Service;
 import resources.server_info.Config;
 import resources.server_info.Log;
+import resources.server_info.RelationalDatabase;
+import resources.server_info.RelationalServerFactory;
 import services.admin.http.HttpServer;
 import services.admin.http.HttpServer.HttpServerCallback;
+import services.admin.http.HttpSession;
 import services.admin.http.HttpSocket;
 import services.admin.http.HttpSocket.HttpRequest;
-import services.admin.http.HttpSession;
 import services.admin.http.HttpsServer;
 import utilities.ThreadUtilities;
 
 public class OnlineInterfaceService extends Service implements HttpServerCallback {
 	
-	private static final String TAG = "OnlineInterfaceService";
 	private static final String GET_USER_SQL = "SELECT password, banned FROM users WHERE LOWER(username) = LOWER(?)";
 	
 	private final WebserverData data;
 	private final WebserverHandler handler;
 	private final Runnable dataCollectionRunnable;
-	private final PreparedStatement getUser;
+	private RelationalDatabase database;
+	private PreparedStatement getUser;
 	private ScheduledExecutorService executor;
 	private HttpsServer httpsServer;
 	private HttpServer httpServer;
@@ -75,12 +75,13 @@ public class OnlineInterfaceService extends Service implements HttpServerCallbac
 		data = new WebserverData();
 		handler = new WebserverHandler(data);
 		dataCollectionRunnable = () -> collectData();
-		getUser = getLocalDatabase().prepareStatement(GET_USER_SQL);
 		authorized = false;
 	}
 	
 	@Override
 	public boolean initialize() {
+		database = RelationalServerFactory.getServerDatabase("login/login.db");
+		getUser = database.prepareStatement(GET_USER_SQL);
 		Config network = getConfig(ConfigFile.NETWORK);
 		authorized = !network.getString("HTTPS-KEYSTORE-PASSWORD", "").isEmpty();
 		if (!authorized)
@@ -90,14 +91,14 @@ public class OnlineInterfaceService extends Service implements HttpServerCallbac
 		httpServer.setMaxConnections(network.getInt("HTTP-MAX-CONNECTIONS", 2));
 		httpsServer.setMaxConnections(network.getInt("HTTPS-MAX-CONNECTIONS", 5));
 		if (!httpsServer.initialize(network)) {
-			Log.e(this, "Failed to initialize HTTPS server! Incorrect password?");
+			Log.e("Failed to initialize HTTPS server! Incorrect password?");
 			httpServer.stop();
 			httpsServer.stop();
 			super.initialize();
 			return false;
 		}
 		executor = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("ServerInterface-DataCollection"));
-		registerForIntent(PlayerEventIntent.TYPE);
+		registerForIntent(PlayerEventIntent.class, pei -> handlePlayerEventIntent(pei));
 		return super.initialize();
 	}
 	
@@ -109,7 +110,7 @@ public class OnlineInterfaceService extends Service implements HttpServerCallbac
 			httpServer.start();
 			httpsServer.start();
 			executor.scheduleAtFixedRate(dataCollectionRunnable, 0, 1, TimeUnit.SECONDS);
-			Log.i(this, "Web server is now online.");
+			Log.i("Web server is now online.");
 		}
 		return super.start();
 	}
@@ -123,15 +124,21 @@ public class OnlineInterfaceService extends Service implements HttpServerCallbac
 			try {
 				executor.awaitTermination(1, TimeUnit.SECONDS);
 			} catch (InterruptedException e) {
-				Log.e(this, e);
+				Log.e(e);
 			}
 		}
 		return super.stop();
 	}
 	
 	@Override
+	public boolean terminate() {
+		database.close();
+		return super.terminate();
+	}
+	
+	@Override
 	public void onSocketCreated(HttpSocket socket) {
-		Log.i(TAG, "Received connection from: %s:%d  [%s]", socket.getInetAddress(), socket.getPort(), socket.isSecure() ? "secure" : "insecure");
+		Log.i("Received connection from: %s:%d  [%s]", socket.getInetAddress(), socket.getPort(), socket.isSecure() ? "secure" : "insecure");
 	}
 	
 	@Override
@@ -154,32 +161,28 @@ public class OnlineInterfaceService extends Service implements HttpServerCallbac
 				try {
 					socket.redirect(new URL(request.getURI().getPath()).toString());
 				} catch (MalformedURLException e) {
-					Log.w(this, "Malformed URL: " + request.getURI().getPath());
+					Log.w("Malformed URL: " + request.getURI().getPath());
 				}
 				return;
 			}
 			handler.handleRequest(socket, request);
 		} catch (IOException e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 	}
 	
-	@Override
-	public void onIntentReceived(Intent i) {
-		if (i instanceof PlayerEventIntent) {
-			PlayerEventIntent pei = (PlayerEventIntent) i;
-			switch (pei.getEvent()) {
-				case PE_ZONE_IN_CLIENT:
-					data.addOnlinePlayer(pei.getPlayer());
-					break;
-				case PE_LOGGED_OUT:
-					data.removeOnlinePlayer(pei.getPlayer());
-					break;
-				default:
-					break;
-			}
-		}
-	}
+	private void handlePlayerEventIntent(PlayerEventIntent pei){
+		switch (pei.getEvent()) {
+			case PE_ZONE_IN_CLIENT:
+				data.addOnlinePlayer(pei.getPlayer());
+				break;
+			case PE_LOGGED_OUT:
+				data.removeOnlinePlayer(pei.getPlayer());
+				break;
+			default:
+				break;
+		}	
+	}	
 	
 	private void collectData() {
 		data.updateResourceUsage();
@@ -194,7 +197,7 @@ public class OnlineInterfaceService extends Service implements HttpServerCallbac
 			if (c.containsKey(secondTry))
 				return InetAddress.getByName(c.getString(secondTry, "127.0.0.1"));
 		} catch (UnknownHostException e) {
-			Log.e(this, "Unknown host for IP: " + t);
+			Log.e("Unknown host for IP: " + t);
 		}
 		return null;
 	}
@@ -212,13 +215,13 @@ public class OnlineInterfaceService extends Service implements HttpServerCallbac
 					session.setAuthenticated(cursor.next() && isUserValid(cursor, password));
 					if (session.isAuthenticated()) {
 						if (!prevAuthenticated)
-							Log.i(TAG, "[%s] Successfully logged in to online interface", username);
+							Log.i("[%s] Successfully logged in to online interface", username);
 					} else {
-						Log.w(TAG, "[%s] Failed to login to online interface. Incorrect user/pass", username);
+						Log.w("[%s] Failed to login to online interface. Incorrect user/pass", username);
 					}
 				}
 			} catch (SQLException e) {
-				Log.e(this, e);
+				Log.e(e);
 			}
 		}
 	}

@@ -91,7 +91,7 @@ public class SuiBaseWindow implements Encodable {
 	protected void subscribeToEvent(int event, String widgetSource, String callback) {
 		SuiComponent component = getSubscriptionForEvent(event, widgetSource);
 		if (component != null) {
-			Log.i("SuiWindow", "Added event callback %d to %s when the event is already subscribed to, replacing callback to %s", event, widgetSource, callback);
+			Log.i("Added event callback %d to %s when the event is already subscribed to, replacing callback to %s", event, widgetSource, callback);
 			component.getNarrowParams().set(2, callback);
 		} else {
 			component = new SuiComponent(SuiComponent.Type.SUBSCRIBE_TO_EVENT, widgetSource);

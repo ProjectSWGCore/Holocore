@@ -32,7 +32,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
 import java.util.Locale;
-import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
@@ -42,6 +41,7 @@ import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import network.packets.swg.zone.object_controller.PostureUpdate;
 import resources.HologramColour;
 import resources.Posture;
+import resources.PvpFaction;
 import resources.PvpFlag;
 import resources.PvpStatus;
 import resources.Race;
@@ -595,8 +595,8 @@ public class CreatureObject extends TangibleObject {
 		return creo4.getSkillModValue(skillModName);
 	}
 	
-	public void addBuff(CRC buffCrc, Buff buff) {
-		creo6.putBuff(buffCrc, buff, this);
+	public void addBuff(Buff buff) {
+		creo6.putBuff(buff, this);
 	}
 	
 	public Buff removeBuff(CRC buffCrc) {
@@ -604,10 +604,10 @@ public class CreatureObject extends TangibleObject {
 	}
 	
 	public boolean hasBuff(String buffName) {
-		return getBuffEntries(buffEntry -> new CRC(buffName.toLowerCase(Locale.ENGLISH)).equals(buffEntry.getKey())).count() > 0;
+		return getBuffEntries(buff -> CRC.getCrc(buffName.toLowerCase(Locale.ENGLISH)) == buff.getCrc()).count() > 0;
 	}
 	
-	public Stream<Map.Entry<CRC, Buff>> getBuffEntries(Predicate<Map.Entry<CRC, Buff>> predicate) {
+	public Stream<Buff> getBuffEntries(Predicate<Buff> predicate) {
 		return creo6.getBuffEntries(predicate);
 	}
 	
@@ -807,6 +807,9 @@ public class CreatureObject extends TangibleObject {
 		}
 		
 		return isPlayer() && ((CreatureObject) otherObject).isPlayer()
+				&& getPvpFaction() != PvpFaction.NEUTRAL
+				&& otherObject.getPvpFaction() != PvpFaction.NEUTRAL
+				&& getPvpFaction() != otherObject.getPvpFaction()
 				&& getPvpStatus() == PvpStatus.SPECIALFORCES
 				&& otherObject.getPvpStatus() == PvpStatus.SPECIALFORCES;
 	}

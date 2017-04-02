@@ -87,10 +87,10 @@ public class NameFilter {
 			}
 			return true;
 		} catch (FileNotFoundException e) {
-			Log.e(this, e);
+			Log.e(e);
 			return false;
 		} catch (IOException e) {
-			Log.e(this, e);
+			Log.e(e);
 			return false;
 		}
 	}

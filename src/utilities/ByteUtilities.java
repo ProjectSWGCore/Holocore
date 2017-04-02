@@ -88,7 +88,7 @@ public class ByteUtilities {
 	
 	public static String nextString(ByteBuffer data) {
 		byte [] bData = data.array();
-		StringBuilder str = new StringBuilder();
+		StringBuilder str = new StringBuilder("");
 		for (int i = data.position(); i < bData.length && bData[i] >= ' ' && bData[i] <= '~'; i++)
 			str.append((char) data.get());
 		return str.toString();

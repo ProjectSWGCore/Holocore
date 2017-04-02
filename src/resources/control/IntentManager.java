@@ -30,66 +30,47 @@ package resources.control;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Queue;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.RejectedExecutionException;
+import java.util.concurrent.atomic.AtomicBoolean;
 
+import resources.concurrency.PswgTaskThreadPool;
 import resources.server_info.Log;
-import utilities.ThreadUtilities;
 
 
 public class IntentManager {
 	
 	private static final IntentManager INSTANCE = new IntentManager();
 	
-	private final Runnable broadcastRunnable;
 	private final Map <String, List<IntentReceiver>> intentRegistrations;
-	private final Queue <Intent> intentQueue;
-	private ExecutorService broadcastThreads;
-	private boolean initialized = false;
-	private boolean terminated = false;
+	private final PswgTaskThreadPool<Intent> broadcastThreads;
+	private final AtomicBoolean initialized;
 	
 	private IntentManager() {
 		intentRegistrations = new HashMap<String, List<IntentReceiver>>();
-		intentQueue = new IntentQueue();
+		initialized = new AtomicBoolean(false);
+		int threadCount = Runtime.getRuntime().availableProcessors() * 10;
+		broadcastThreads = new PswgTaskThreadPool<>(threadCount, "intent-processor-%d", i -> broadcast(i));
+		broadcastThreads.setWaitForTermination(true);
 		initialize();
-		broadcastRunnable = () -> {
-			Intent i;
-			synchronized (intentQueue) {
-				i = intentQueue.poll();
-			}
-			if (i != null)
-				broadcast(i);
-		};
 	}
 	
-	protected void initialize() {
-		if (!initialized) {
-			final int broadcastThreadCount = Runtime.getRuntime().availableProcessors() * 10;
-			broadcastThreads = Executors.newFixedThreadPool(broadcastThreadCount, ThreadUtilities.newThreadFactory("intent-processor-%d"));
-			initialized = true;
-			terminated = false;
-		}
+	public void initialize() {
+		if (initialized.getAndSet(true))
+			return;
+		broadcastThreads.start();
 	}
 	
-	protected void terminate() {
-		if (!terminated) {
-			broadcastThreads.shutdown();
-			initialized = false;
-			terminated = true;
-		}
+	public void terminate() {
+		if (!initialized.getAndSet(false))
+			return;
+		broadcastThreads.stop();
+		broadcastThreads.awaitTermination(5000);
 	}
 	
 	protected void broadcastIntent(Intent i) {
 		if (i == null)
 			throw new NullPointerException("Intent cannot be null!");
-		synchronized (intentQueue) {
-			intentQueue.add(i);
-		}
-		try { broadcastThreads.execute(broadcastRunnable); }
-		catch (RejectedExecutionException e) { } // This error is thrown when the server is being shut down
+		broadcastThreads.addTask(i);
 	}
 	
 	public void registerForIntent(String intentType, IntentReceiver r) {
@@ -143,15 +124,13 @@ public class IntentManager {
 		try {
 			r.onIntentReceived(i);
 		} catch (Throwable t) {
-			Log.e("IntentManager", "Fatal Exception while processing intent: " + i);
-			Log.e("IntentManager", t);
+			Log.e("Fatal Exception while processing intent: " + i);
+			Log.e(t);
 		}
 	}
 	
 	public static int getIntentsQueued() {
-		synchronized (getInstance().intentQueue) {
-			return getInstance().intentQueue.size();
-		}
+		return getInstance().broadcastThreads.getTasks();
 	}
 	
 	public static IntentManager getInstance() {

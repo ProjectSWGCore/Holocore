@@ -59,6 +59,7 @@ import resources.server_info.CrcDatabase;
 import resources.server_info.Log;
 import resources.server_info.RelationalServerData;
 import resources.server_info.RelationalServerFactory;
+import resources.server_info.StandardLog;
 
 public class ClientBuildoutService extends Service {
 	
@@ -81,8 +82,7 @@ public class ClientBuildoutService extends Service {
 	
 	public Map<Long, SWGObject> loadClientObjects() {
 		Map<Long, SWGObject> objects;
-		long startLoad = System.nanoTime();
-		Log.i(this, "Loading client objects...");
+		long startTime = StandardLog.onStartLoad("client objects");
 		try {
 			loadAreas(getEvents());
 			if (getConfig(ConfigFile.PRIMARY).getBoolean("LOAD-OBJECTS", true))
@@ -91,10 +91,9 @@ public class ClientBuildoutService extends Service {
 				objects = new HashMap<>();
 		} catch (SQLException e) {
 			objects = new HashMap<>();
-			Log.e(this, e);
+			Log.e(e);
 		}
-		double loadTime = (System.nanoTime() - startLoad) / 1E6;
-		Log.i(this, "Finished loading %d client objects. Time: %fms", objects.size(), loadTime);
+		StandardLog.onEndLoad(objects.size(), "client objects", startTime);
 		return objects;
 	}
 	
@@ -110,7 +109,7 @@ public class ClientBuildoutService extends Service {
 			}
 			return loadObjects(areaId);
 		} catch (SQLException e) {
-			Log.e(this, e);
+			Log.e(e);
 			return new HashMap<>();
 		}
 	}
@@ -172,7 +171,7 @@ public class ClientBuildoutService extends Service {
 			checkParent(buildouts, obj, set.getString("building_name"), set.getInt("cell_id"));
 			buildouts.put(obj.getObjectId(), obj);
 		} catch (NullPointerException e) {
-			Log.e(this, "File: %s", set.getString("template"));
+			Log.e("File: %s", set.getString("template"));
 		}
 	}
 	
@@ -182,7 +181,7 @@ public class ClientBuildoutService extends Service {
 				statement.setString(1, buildingName);
 				try (ResultSet set = statement.executeQuery()) {
 					if (!set.next()) {
-						Log.e(this, "Unknown building name: %s", buildingName);
+						Log.e("Unknown building name: %s", buildingName);
 						return;
 					}
 					long buildingId = set.getLong("object_id");
@@ -190,16 +189,16 @@ public class ClientBuildoutService extends Service {
 						return;
 					SWGObject buildingUncasted = objects.get(buildingId);
 					if (buildingUncasted == null) {
-						Log.e(this, "Building not found in map: %s / %d", buildingName, buildingId);
+						Log.e("Building not found in map: %s / %d", buildingName, buildingId);
 						return;
 					}
 					if (!(buildingUncasted instanceof BuildingObject)) {
-						Log.e(this, "Building is not an instance of BuildingObject: %s", buildingName);
+						Log.e("Building is not an instance of BuildingObject: %s", buildingName);
 						return;
 					}
 					CellObject cell = ((BuildingObject) buildingUncasted).getCellByNumber(cellId);
 					if (cell == null) {
-						Log.e(this, "Cell is not found! Building: %s Cell: %d", buildingName, cellId);
+						Log.e("Cell is not found! Building: %s Cell: %d", buildingName, cellId);
 						return;
 					}
 					obj.moveToContainer(cell);

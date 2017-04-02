@@ -26,6 +26,9 @@
  ******************************************************************************/
 package services.group;
 
+import java.util.Map;
+import java.util.Set;
+
 import intents.GroupEventIntent;
 import intents.PlayerEventIntent;
 import intents.chat.ChatBroadcastIntent;
@@ -34,7 +37,7 @@ import intents.chat.ChatRoomUpdateIntent.UpdateType;
 import intents.object.DestroyObjectIntent;
 import intents.object.ObjectCreatedIntent;
 import resources.chat.ChatAvatar;
-import resources.control.Intent;
+import resources.control.Assert;
 import resources.control.Service;
 import resources.encodables.ProsePackage;
 import resources.objects.creature.CreatureObject;
@@ -45,74 +48,55 @@ import resources.server_info.SynchronizedMap;
 import services.objects.ObjectCreator;
 import utilities.IntentFactory;
 
-import java.util.Map;
-import java.util.Set;
-
-import resources.control.Assert;
-
 public class GroupService extends Service {
 	
 	private final Map<Long, GroupObject> groups;
 	
 	public GroupService() {
 		groups = new SynchronizedMap<>();
-		registerForIntent(GroupEventIntent.TYPE);
-		registerForIntent(PlayerEventIntent.TYPE);
+		registerForIntent(GroupEventIntent.class, gei -> handleGroupEventIntent(gei));
+		registerForIntent(PlayerEventIntent.class, pei -> handlePlayerEventIntent(pei));
 	}
 	
-	@Override
-	public void onIntentReceived(Intent i) {
-		switch (i.getType()) {
-			case GroupEventIntent.TYPE:
-				if (i instanceof GroupEventIntent)
-					handleGroupEventIntent((GroupEventIntent) i);
-				break;
-			case PlayerEventIntent.TYPE:
-				if (i instanceof PlayerEventIntent)
-					handlePlayerEventIntent((PlayerEventIntent) i);
-				break;
-		}
-	}
-	
-	private void handleGroupEventIntent(GroupEventIntent intent) {
-		switch (intent.getEventType()) {
+	private void handleGroupEventIntent(GroupEventIntent gei) {
+		switch (gei.getEventType()) {
 			case GROUP_INVITE:
-				handleGroupInvite(intent.getPlayer(), intent.getTarget());
+				handleGroupInvite(gei.getPlayer(), gei.getTarget());
 				break;
 			case GROUP_UNINVITE:
-				handleGroupUninvite(intent.getPlayer(), intent.getTarget());
+				handleGroupUninvite(gei.getPlayer(), gei.getTarget());
 				break;
 			case GROUP_JOIN:
-				handleGroupJoin(intent.getPlayer());
+				handleGroupJoin(gei.getPlayer());
 				break;
 			case GROUP_DECLINE:
-				handleGroupDecline(intent.getPlayer());
+				handleGroupDecline(gei.getPlayer());
 				break;
 			case GROUP_DISBAND:
-				handleGroupDisband(intent.getPlayer());
+				handleGroupDisband(gei.getPlayer());
 				break;
 			case GROUP_LEAVE:
-				handleGroupLeave(intent.getPlayer());
+				handleGroupLeave(gei.getPlayer());
 				break;
 			case GROUP_MAKE_LEADER:
-				handleMakeLeader(intent.getPlayer(), intent.getTarget());
+				handleMakeLeader(gei.getPlayer(), gei.getTarget());
 				break;
 			case GROUP_KICK:
-				handleKick(intent.getPlayer(), intent.getTarget());
+				handleKick(gei.getPlayer(), gei.getTarget());
 				break;
 			case GROUP_MAKE_MASTER_LOOTER:
-				handleMakeMasterLooter(intent.getPlayer(), intent.getTarget());
+				handleMakeMasterLooter(gei.getPlayer(), gei.getTarget());
 				break;
 		}
 	}
 	
-	private void handlePlayerEventIntent(PlayerEventIntent intent) {
-		switch (intent.getEvent()) {
+	private void handlePlayerEventIntent(PlayerEventIntent pei) {
+		switch (pei.getEvent()) {
 			case PE_ZONE_IN_SERVER:
-				handleMemberRezoned(intent.getPlayer());
+				handleMemberRezoned(pei.getPlayer());
 				break;
 			case PE_DISAPPEAR:
-				handleMemberDisappeared(intent.getPlayer());
+				handleMemberDisappeared(pei.getPlayer());
 				break;
 			default:
 				break;

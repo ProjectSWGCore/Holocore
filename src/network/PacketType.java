@@ -28,9 +28,8 @@
 package network;
 
 import network.packets.swg.*;
-import network.packets.swg.holo.HoloConnectionStarted;
-import network.packets.swg.holo.HoloConnectionStopped;
-import network.packets.swg.holo.HoloSetProtocolVersion;
+import network.packets.swg.admin.*;
+import network.packets.swg.holo.*;
 import network.packets.swg.login.*;
 import network.packets.swg.login.creation.*;
 import network.packets.swg.zone.*;
@@ -56,6 +55,9 @@ public enum PacketType {
 	HOLO_SET_PROTOCOL_VERSION					(HoloSetProtocolVersion.CRC, HoloSetProtocolVersion.class),
 	HOLO_CONNECTION_STARTED						(HoloConnectionStarted.CRC,	HoloConnectionStarted.class),
 	HOLO_CONNECTION_STOPPED						(HoloConnectionStopped.CRC,	HoloConnectionStopped.class),
+	
+	// Admin
+	ADMIN_SHUTDOWN_SERVER						(AdminShutdownServer.CRC,	AdminShutdownServer.class),
 	
 	// Both
 	SERVER_UNIX_EPOCH_TIME						(ServerUnixEpochTime.CRC, 	ServerUnixEpochTime.class),
@@ -251,8 +253,8 @@ public enum PacketType {
 		try {
 			return c.newInstance();
 		} catch (Exception e) {
-			Log.e("PacketType", "Packet: [%08X] %s", crc, c.getName());
-			Log.e("PacketType", e);
+			Log.e("Packet: [%08X] %s", crc, c.getName());
+			Log.e(e);
 		}
 		return null;
 	}

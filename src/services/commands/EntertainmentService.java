@@ -27,13 +27,6 @@
 ***********************************************************************************/
 package services.commands;
 
-import intents.DanceIntent;
-import intents.FlourishIntent;
-import intents.PlayerEventIntent;
-import intents.WatchIntent;
-import intents.chat.ChatBroadcastIntent;
-import intents.experience.ExperienceIntent;
-import intents.player.PlayerTransformedIntent;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -42,12 +35,19 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+
+import intents.DanceIntent;
+import intents.FlourishIntent;
+import intents.PlayerEventIntent;
+import intents.WatchIntent;
+import intents.chat.ChatBroadcastIntent;
+import intents.experience.ExperienceIntent;
+import intents.player.PlayerTransformedIntent;
 import network.packets.swg.zone.object_controller.Animation;
 import resources.Location;
 import resources.Posture;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
-import resources.control.Intent;
 import resources.control.Service;
 import resources.encodables.ProsePackage;
 import resources.encodables.StringId;
@@ -76,11 +76,11 @@ public class EntertainmentService extends Service {
 		performerMap = new HashMap<>();	// TODO synchronize access?
 		danceMap = new HashMap<>();
 		executorService = Executors.newSingleThreadScheduledExecutor();
-		registerForIntent(DanceIntent.TYPE);
-		registerForIntent(PlayerEventIntent.TYPE);
-		registerForIntent(FlourishIntent.TYPE);
-		registerForIntent(WatchIntent.TYPE);
-		registerForIntent(PlayerTransformedIntent.TYPE);
+		registerForIntent(DanceIntent.class, di -> handleDanceIntent(di));
+		registerForIntent(PlayerEventIntent.class, pei -> handlePlayerEventIntent(pei));
+		registerForIntent(FlourishIntent.class, fi -> handleFlourishIntent(fi));
+		registerForIntent(WatchIntent.class, wi -> handleWatchIntent(wi));
+		registerForIntent(PlayerTransformedIntent.class, pti -> handlePlayerTransformedIntent(pti));
 	}
 
 	@Override
@@ -111,36 +111,15 @@ public class EntertainmentService extends Service {
 		executorService.shutdownNow();
 		return super.terminate();
 	}
-	
-	@Override
-	public void onIntentReceived(Intent i) {
-		switch (i.getType()) {
-			case DanceIntent.TYPE:
-				handleDanceIntent((DanceIntent) i);
-				break;
-			case PlayerEventIntent.TYPE:
-				handlePlayerEventIntent((PlayerEventIntent) i);
-				break;
-			case FlourishIntent.TYPE:
-				handleFlourishIntent((FlourishIntent) i);
-				break;
-			case WatchIntent.TYPE:
-				handleWatchIntent((WatchIntent) i);
-				break;
-			case PlayerTransformedIntent.TYPE:
-				handleTransformIntent((PlayerTransformedIntent) i);
-				break;
-		}
-	}
 
-	private void handleDanceIntent(DanceIntent i) {
-		CreatureObject dancer = i.getCreatureObject();
-		String danceName = i.getDanceName();
+	private void handleDanceIntent(DanceIntent di) {
+		CreatureObject dancer = di.getCreatureObject();
+		String danceName = di.getDanceName();
 		
-		if (i.isStartDance()) {
+		if (di.isStartDance()) {
 			// This intent wants the creature to start dancing
 			// If we're changing dance, allow them to do so
-			boolean changeDance = i.isChangeDance();
+			boolean changeDance = di.isChangeDance();
 			
 			if (!changeDance && dancer.isPerforming()) {
 				new ChatBroadcastIntent(dancer.getOwner(), "@performance:already_performing_self").broadcast();
@@ -167,13 +146,13 @@ public class EntertainmentService extends Service {
 		}
 	}
 	
-	private void handlePlayerEventIntent(PlayerEventIntent i) {
-		CreatureObject creature = i.getPlayer().getCreatureObject();
+	private void handlePlayerEventIntent(PlayerEventIntent pei) {
+		CreatureObject creature = pei.getPlayer().getCreatureObject();
 		
 		if(creature == null)
 			return;
 		
-		switch(i.getEvent()) {
+		switch(pei.getEvent()) {
 			case PE_LOGGED_OUT:
 				// Don't keep giving them XP if they log out
 				if(isEntertainer(creature) && creature.getPosture().equals(Posture.SKILL_ANIMATING)) {
@@ -208,22 +187,22 @@ public class EntertainmentService extends Service {
 		}
 	}
 
-	private void handleFlourishIntent(FlourishIntent i) {
-		Player performer = i.getPerformer();
+	private void handleFlourishIntent(FlourishIntent fi) {
+		Player performer = fi.getPerformer();
 		CreatureObject performerObject = performer.getCreatureObject();
 		
 		performerObject.setPerformanceCounter(performerObject.getPerformanceCounter() + 1);
 		
 		// Send the flourish animation to the owner of the creature and owners of creatures observing
-		performerObject.sendObserversAndSelf(new Animation(performerObject.getObjectId(), i.getFlourishName()));
+		performerObject.sendObserversAndSelf(new Animation(performerObject.getObjectId(), fi.getFlourishName()));
 		new ChatBroadcastIntent(performer, "@performance:flourish_perform").broadcast();
 	}
 	
-	private void handleWatchIntent(WatchIntent i) {
-		SWGObject target = i.getTarget();
+	private void handleWatchIntent(WatchIntent wi) {
+		SWGObject target = wi.getTarget();
 		
 		if(target instanceof CreatureObject) {
-			CreatureObject actor = i.getActor();
+			CreatureObject actor = wi.getActor();
 			CreatureObject creature = (CreatureObject) target;
 			Player actorOwner = actor.getOwner();
 			
@@ -236,7 +215,7 @@ public class EntertainmentService extends Service {
 				if(creature.isPerforming()) {
 					Performance performance = performerMap.get(creature.getObjectId());
 					
-					if(i.isStartWatch()) {
+					if(wi.isStartWatch()) {
 						if(performance.addSpectator(actor)) {
 							startWatching(actor, creature);
 						}
@@ -256,8 +235,8 @@ public class EntertainmentService extends Service {
 		}
 	}
 	
-	private void handleTransformIntent(PlayerTransformedIntent i) {
-		CreatureObject movedPlayer = i.getPlayer();
+	private void handlePlayerTransformedIntent(PlayerTransformedIntent pti) {
+		CreatureObject movedPlayer = pti.getPlayer();
 		long performanceListenTarget = movedPlayer.getPerformanceListenTarget();
 		
 		if(performanceListenTarget != 0) {
@@ -266,21 +245,21 @@ public class EntertainmentService extends Service {
 			Performance performance = performerMap.get(performanceListenTarget);
 			
 			if(performance == null) {
-				Log.e(this, "Couldn't perform range check on %s, because there was no performer with object ID %d", movedPlayer, performanceListenTarget);
+				Log.e("Couldn't perform range check on %s, because there was no performer with object ID %d", movedPlayer, performanceListenTarget);
 				return;
 			}
 			
 			CreatureObject performer = performance.getPerformer();
 			
 			Location performerLocation = performer.getWorldLocation();
-			Location movedPlayerLocation = i.getPlayer().getWorldLocation();	// Ziggy: The newLocation in PlayerTransformedIntent isn't the world location, which is what we need here
+			Location movedPlayerLocation = pti.getPlayer().getWorldLocation();	// Ziggy: The newLocation in PlayerTransformedIntent isn't the world location, which is what we need here
 			
 			if(!movedPlayerLocation.isWithinDistance(performerLocation, WATCH_RADIUS)) {
 				// They moved out of the defined range! Make them stop watching
 				if(performance.removeSpectator(movedPlayer)) {
 					stopWatching(movedPlayer, true);
 				} else {
-					Log.w(this, "%s ran out of range of %s, but couldn't stop watching because they weren't watching in the first place", movedPlayer, performer);
+					Log.w("%s ran out of range of %s, but couldn't stop watching because they weren't watching in the first place", movedPlayer, performer);
 				}
 			}
 		}
@@ -297,7 +276,7 @@ public class EntertainmentService extends Service {
 	}
 	
 	private void scheduleExperienceTask(CreatureObject performer, String performanceName) {
-		Log.d(this, "Scheduled %s to receive XP every %d seconds", performer, XP_CYCLE_RATE);
+		Log.d("Scheduled %s to receive XP every %d seconds", performer, XP_CYCLE_RATE);
 		synchronized(performerMap) {
 			long performerId = performer.getObjectId();
 			Future<?> future = executorService.scheduleAtFixedRate(new EntertainerExperience(performer), XP_CYCLE_RATE, XP_CYCLE_RATE, TimeUnit.SECONDS);
@@ -313,12 +292,12 @@ public class EntertainmentService extends Service {
 	}
 	
 	private void cancelExperienceTask(CreatureObject performer) {
-		Log.d(this, "%s no longer receives XP every %d seconds", performer, XP_CYCLE_RATE);
+		Log.d("%s no longer receives XP every %d seconds", performer, XP_CYCLE_RATE);
 		synchronized (performerMap) {
 			Performance performance = performerMap.get(performer.getObjectId());
 			
 			if(performance == null) {
-				Log.e(this, "Couldn't cancel experience task for %s because they weren't found in performerMap", performer);
+				Log.e("Couldn't cancel experience task for %s because they weren't found in performerMap", performer);
 				return;
 			}
 			
@@ -462,7 +441,7 @@ public class EntertainmentService extends Service {
 			Performance performance = performerMap.get(performer.getObjectId());
 			
 			if(performance == null) {
-				Log.e("EntertainerExperience", "Performer %s wasn't in performermap", performer);
+				Log.e("Performer %s wasn't in performermap", performer);
 				return;
 			}
 			

@@ -88,12 +88,12 @@ public class SWGFile {
 		currentForm = master;
 
 		if (!isValidIff(bb, size)) {
-			Log.e("SWGFile", "Tried to open a file not in a valid Interchangeable File Format: " + file.getAbsolutePath());
+			Log.e("Tried to open a file not in a valid Interchangeable File Format: " + file.getAbsolutePath());
 			return;
 		}
 
 		if (size != master.populateFromBuffer(bb)) {
-			Log.e("SWGFile", "Size mismatch between population result and channel size: " + file.getAbsolutePath());
+			Log.e("Size mismatch between population result and channel size: " + file.getAbsolutePath());
 			return;
 		}
 

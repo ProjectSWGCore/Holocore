@@ -173,7 +173,7 @@ public class ObjectData extends ClientData {
 
 		ClientData attrData = ClientFactory.getInfoFromFile(file, true);
 		if (attrData == null || !(attrData instanceof ObjectData)) {
-			Log.w("ObjectData", "Could not load attribute data from file " + file + "!");
+			Log.w("Could not load attribute data from file " + file + "!");
 			return; // break out of whole method as we should only continue if we have all the extended attributes
 		}
 

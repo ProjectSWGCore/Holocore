@@ -235,7 +235,7 @@ class WebserverHandler {
 		} else if (!session.isAuthenticated() && !type.equals("text/css") && !type.equals("text/js") && !type.startsWith("image"))
 			return null;
 		if (!verifyPath(file)) {
-			Log.e("WebserverHandler", "Cannot access %s - not a valid path", file);
+			Log.e("Cannot access %s - not a valid path", file);
 			return null;
 		}
 		return file;

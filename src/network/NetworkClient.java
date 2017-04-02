@@ -32,7 +32,7 @@ import intents.network.ConnectionOpenedIntent;
 import intents.network.InboundPacketIntent;
 
 import java.io.EOFException;
-import java.net.InetSocketAddress;
+import java.net.SocketAddress;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -45,6 +45,7 @@ import services.network.PacketSender;
 import services.network.HolocoreSessionManager.ResponseAction;
 import utilities.IntentChain;
 import network.packets.Packet;
+import network.packets.swg.admin.AdminPacket;
 import network.packets.swg.holo.HoloConnectionStopped;
 import network.packets.swg.holo.HoloConnectionStopped.ConnectionStoppedReason;
 
@@ -53,7 +54,7 @@ public class NetworkClient {
 	private static final int DEFAULT_BUFFER = 128;
 	
 	private final IntentChain intentChain = new IntentChain();
-	private final InetSocketAddress address;
+	private final SocketAddress address;
 	private final long networkId;
 	private final NetBufferStream buffer;
 	private final HolocoreSessionManager sessionManager;
@@ -61,10 +62,10 @@ public class NetworkClient {
 	private final Object outboundMutex;
 	private final Lock inboundSemaphore;
 	private final Object stateMutex;
+	private final PacketSender sender;
 	private State state;
-	private PacketSender sender;
 	
-	public NetworkClient(InetSocketAddress address, long networkId) {
+	public NetworkClient(SocketAddress address, long networkId, PacketSender sender) {
 		this.address = address;
 		this.networkId = networkId;
 		this.buffer = new NetBufferStream(DEFAULT_BUFFER);
@@ -73,8 +74,8 @@ public class NetworkClient {
 		this.outboundMutex = new Object();
 		this.inboundSemaphore = new ReentrantLock(true);
 		this.stateMutex = new Object();
+		this.sender = sender;
 		this.state = State.DISCONNECTED;
-		this.sender = null;
 	}
 	
 	public void close() {
@@ -82,7 +83,7 @@ public class NetworkClient {
 		intentChain.reset();
 	}
 	
-	public InetSocketAddress getAddress() {
+	public SocketAddress getAddress() {
 		return address;
 	}
 	
@@ -91,15 +92,13 @@ public class NetworkClient {
 	}
 	
 	public void onConnected() {
-		if (getState() != State.DISCONNECTED)
-			return;
+		Assert.test(getState() == State.DISCONNECTED);
 		setState(State.CONNECTED);
 		intentChain.broadcastAfter(new ConnectionOpenedIntent(networkId));
 	}
 	
 	public void onDisconnected(ConnectionStoppedReason reason) {
-		if (getState() != State.CONNECTED)
-			return;
+		Assert.test(getState() == State.CONNECTED);
 		setState(State.CLOSED);
 		intentChain.broadcastAfter(new ConnectionClosedIntent(networkId, reason));
 		sendPacket(new HoloConnectionStopped(reason));
@@ -114,21 +113,17 @@ public class NetworkClient {
 		sessionManager.onSessionDestroyed();
 	}
 	
-	public void setPacketSender(PacketSender sender) {
-		this.sender = sender;
-	}
-	
 	public void processInbound() {
+		if (getState() != State.CONNECTED)
+			return;
 		if (!inboundSemaphore.tryLock())
 			return;
 		try {
-			if (getState() != State.CONNECTED)
-				return;
 			while (processNextPacket()) {
 				
 			}
 		} catch (EOFException e) {
-			Log.e(this, "Read error: " + e.getMessage());
+			Log.e("Read error: " + e.getMessage());
 		} finally {
 			inboundSemaphore.unlock();
 		}
@@ -143,6 +138,8 @@ public class NetworkClient {
 				flushOutbound();
 				return;
 			}
+			if (!isOutboundAllowed(packet))
+				return;
 			sendPacket(packet);
 		}
 	}
@@ -154,6 +151,14 @@ public class NetworkClient {
 		}
 	}
 	
+	protected boolean isInboundAllowed(Packet p) {
+		return !(p instanceof AdminPacket);
+	}
+	
+	protected boolean isOutboundAllowed(Packet p) {
+		return !(p instanceof AdminPacket);
+	}
+	
 	private boolean processNextPacket() throws EOFException {
 		Packet p;
 		synchronized (buffer) {
@@ -163,8 +168,7 @@ public class NetworkClient {
 		}
 		if (p == null)
 			return true;
-		p.setAddress(address.getAddress());
-		p.setPort(address.getPort());
+		p.setSocketAddress(address);
 		if (!processInbound(p)) {
 			flushOutbound();
 			return false;
@@ -179,6 +183,8 @@ public class NetworkClient {
 			return true;
 		if (action == ResponseAction.SHUT_DOWN)
 			return true;
+		if (!isInboundAllowed(p))
+			return true;
 		intentChain.broadcastAfter(new InboundPacketIntent(p, networkId));
 		return true;
 	}
@@ -191,7 +197,7 @@ public class NetworkClient {
 	
 	private void sendPacket(Packet p) {
 		if (sender == null) {
-			Log.w(this, "Unable to send packet %s - sender is null!");
+			Log.w("Unable to send packet %s - sender is null!");
 			return;
 		}
 		sender.sendPacket(address, protocol.encode(p));

@@ -27,15 +27,14 @@
 ***********************************************************************************/
 package services.galaxy;
 
-import intents.PlayerEventIntent;
-import intents.network.GalacticPacketIntent;
-
 import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import intents.PlayerEventIntent;
+import intents.network.GalacticPacketIntent;
 import network.packets.swg.zone.HeartBeat;
 import resources.control.Assert;
 import resources.control.Intent;
@@ -77,8 +76,8 @@ public class ConnectionService extends Service {
 			}
 		};
 		
-		registerForIntent(PlayerEventIntent.TYPE);
-		registerForIntent(GalacticPacketIntent.TYPE);
+		registerForIntent(PlayerEventIntent.class, pei -> handlePlayerEventIntent(pei));
+		registerForIntent(GalacticPacketIntent.class, gpi -> handleGalacticPacketIntent(gpi));
 	}
 	
 	@Override
@@ -88,20 +87,12 @@ public class ConnectionService extends Service {
 		try {
 			success = updateService.awaitTermination(5, TimeUnit.SECONDS);
 		} catch (InterruptedException e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 		return super.terminate() && success;
 	}
 	
-	@Override
-	public void onIntentReceived(Intent i) {
-		if (i instanceof PlayerEventIntent)
-			onPlayerEventIntent((PlayerEventIntent) i);
-		else if (i instanceof GalacticPacketIntent)
-			onGalacticPacketIntent((GalacticPacketIntent) i);
-	}
-	
-	private void onPlayerEventIntent(PlayerEventIntent pei) {
+	private void handlePlayerEventIntent(PlayerEventIntent pei) {
 		Player p = pei.getPlayer();
 		switch (pei.getEvent()) {
 			case PE_FIRST_ZONE:
@@ -115,7 +106,7 @@ public class ConnectionService extends Service {
 		}
 	}
 	
-	private void onGalacticPacketIntent(GalacticPacketIntent gpi) {
+	private void handleGalacticPacketIntent(GalacticPacketIntent gpi) {
 		Player p = gpi.getPlayer();
 		p.updateLastPacketTimestamp();
 		if (gpi.getPacket() instanceof HeartBeat)
@@ -146,7 +137,7 @@ public class ConnectionService extends Service {
 	private void logOut(Player p) {
 		if (!zonedInPlayers.remove(p))
 			return;
-		Log.i("ConnectionService", "Logged out %s with character %s", p.getUsername(), p.getCharacterName());
+		Log.i("Logged out %s with character %s", p.getUsername(), p.getCharacterName());
 		CoreManager.getGalaxy().decrementPopulationCount();
 		setPlayerFlag(p, PlayerFlags.LD);
 		removeFromDisappear(p);
@@ -157,7 +148,7 @@ public class ConnectionService extends Service {
 	private void disappear(Player p, boolean newConnection, DisconnectReason reason) {
 		if (p.getCreatureObject() == null)
 			return;
-		Log.i("ConnectionService", "Disappeared %s with character %s with reason %s", p.getUsername(), p.getCharacterName(), reason);
+		Log.i("Disappeared %s with character %s with reason %s", p.getUsername(), p.getCharacterName(), reason);
 		
 		removeFromDisappear(p);
 		Intent i = new PlayerEventIntent(p, PlayerEvent.PE_DISAPPEAR);

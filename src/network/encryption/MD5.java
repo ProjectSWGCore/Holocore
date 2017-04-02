@@ -42,9 +42,9 @@ public class MD5 {
 			md.update(text.getBytes("iso-8859-1"), 0, text.length());
 			result = convertToHex(md.digest());
 		} catch (NoSuchAlgorithmException e) {
-			Log.e("MD5", e);
+			Log.e(e);
 		} catch (UnsupportedEncodingException e) {
-			Log.e("MD5", e);
+			Log.e(e);
 		}
 		return result;
 	}

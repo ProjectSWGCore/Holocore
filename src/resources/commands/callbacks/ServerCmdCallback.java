@@ -72,7 +72,7 @@ public class ServerCmdCallback implements ICmdCallback {
 				case 2: handleUnbanPlayer(player); break;
 				case 3: handleShutdownServer(player); break;
 				case 4: handleCustomShutdownServer(player); break;
-				default: Log.i("ServerCmdCallback", "There is no handle function for selected list item %d", selection); break;
+				default: Log.i("There is no handle function for selected list item %d", selection); break;
 			}
 		}
 		

@@ -93,7 +93,7 @@ public class RelationalServerData extends RelationalDatabase {
 					return true;
 			}
 		} catch (IOException e) {
-			Log.e(this, e);
+			Log.e(e);
 		}
 		return false;
 	}
@@ -211,13 +211,13 @@ public class RelationalServerData extends RelationalDatabase {
 				if (set.next())
 					return set.getLong("last_imported");
 			} catch (SQLException e) {
-				Log.e(this, e);
+				Log.e(e);
 			} finally {
 				if (set != null) {
 					try {
 						set.close();
 					} catch (SQLException e) {
-						Log.e(this, e);
+						Log.e(e);
 					}
 				}
 			}
@@ -233,7 +233,7 @@ public class RelationalServerData extends RelationalDatabase {
 				if (updateTableMetadata.executeUpdate() > 0)
 					return;
 			} catch (SQLException e) {
-				Log.e(this, e);
+				Log.e(e);
 				return;
 			}
 		}
@@ -243,25 +243,25 @@ public class RelationalServerData extends RelationalDatabase {
 				insertTableMetadata.setLong(2, lastImported);
 				insertTableMetadata.executeUpdate();
 			} catch (SQLException e) {
-				Log.e(this, e);
+				Log.e(e);
 			}
 		}
 	}
 	
 	private boolean importFromSdb(String table, File sdb) {
 		try (TableReader reader = new TableReader(table, sdb)) {
-			Log.i("RelationalServerData", "Importing sdb... '" + sdb + "'");
+			Log.i("Importing sdb... '" + sdb + "'");
 			if (sdb.getName().endsWith(".msdb"))
 				reader.readMaster();
 			else
 				reader.readNormal();
 			return true;
 		} catch (IOException e) {
-			Log.e(this, e);
+			Log.e(e);
 		} catch (SQLException e) {
-			Log.e(this, e);
+			Log.e(e);
 		} catch (IllegalArgumentException e) {
-			Log.e("RelationalServerData", "Invalid file format. Aborting read of %s! Message: %s", sdb, e.getMessage());
+			Log.e("Invalid file format. Aborting read of %s! Message: %s", sdb, e.getMessage());
 		}
 		return false;
 	}
@@ -288,7 +288,7 @@ public class RelationalServerData extends RelationalDatabase {
 				try {
 					insert.close();
 				} catch (SQLException e) {
-					Log.e(this, e);
+					Log.e(e);
 				}
 			}
 		}
@@ -322,15 +322,15 @@ public class RelationalServerData extends RelationalDatabase {
 			while ((line = reader.readLine()) != null) {
 				String [] parts = line.split("\t");
 				if (parts.length != 2) {
-					Log.e("RelationalServerData", "Invalid line [%d]: %s", lineNum, line);
+					Log.e("Invalid line [%d]: %s", lineNum, line);
 					continue;
 				}
 				boolean load = Boolean.parseBoolean(parts[1]);
 				if (load) {
 					File sdb = new File(file.getParent(), parts[0]);
-					Log.i("RelationalServerData", "  Importing sdb... '" + sdb + "'");
+					Log.i("  Importing sdb... '" + sdb + "'");
 					if (!sdb.isFile()) {
-						Log.e("RelationalServerData", "    Failed to import sdb! File is not file or does not exist");
+						Log.e("    Failed to import sdb! File is not file or does not exist");
 						continue;
 					}
 					@SuppressWarnings("resource") // This closes the database.. we don't want to do that yet
@@ -419,7 +419,7 @@ public class RelationalServerData extends RelationalDatabase {
 		
 		private void generateInsert(String [] data, int line) throws SQLException {
 			if (columnTypes.length != data.length) {
-				Log.e("RelationalServerData", "Could not load record: Types length and data length mismatch. Line: " + line);
+				Log.e("Could not load record: Types length and data length mismatch. Line: " + line);
 				return;
 			}
 			int column = 0;
@@ -436,7 +436,7 @@ public class RelationalServerData extends RelationalDatabase {
 				}
 				insert.addBatch();
 			} catch (NumberFormatException e) {
-				Log.e("RelationalServerData", "Could not load record: Record has invalid data. Line: " + line + "  Column: " + column);
+				Log.e("Could not load record: Record has invalid data. Line: " + line + "  Column: " + column);
 			}
 		}
 		
