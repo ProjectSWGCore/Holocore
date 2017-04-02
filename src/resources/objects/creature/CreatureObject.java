@@ -87,7 +87,7 @@ public class CreatureObject extends TangibleObject {
 	
 	private List<CreatureObject> activeDuels		= new SynchronizedList<CreatureObject>();
 	
-	private List<CreatureObject> sentDuels		= new SynchronizedList<CreatureObject>();
+	private List<CreatureObject> sentDuels			= new SynchronizedList<CreatureObject>();
 	
 	public CreatureObject(long objectId) {
 		super(objectId, BaselineType.CREO);
@@ -802,6 +802,10 @@ public class CreatureObject extends TangibleObject {
 		Posture otherPosture = otherObject.getPosture();
 		
 		return isEnemy(otherObject) && otherPosture != Posture.INCAPACITATED && otherPosture != Posture.DEAD;
+	}
+	
+	public boolean sentDuelRequestToPlayer(CreatureObject player) {
+		return sentDuels.contains(player);
 	}
 	
 	public List<CreatureObject> getActiveDuels() {

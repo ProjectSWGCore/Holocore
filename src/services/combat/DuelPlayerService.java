@@ -92,21 +92,12 @@ public class DuelPlayerService extends Service {
 		}
 	}
 	
-	private DuelEventType getTrueEventType(DuelPlayerIntent dpi) {
-		if (dpi.getEventType() == DuelEventType.END && dpi.getSender().getSentDuels().contains(dpi.getReciever())) {
-			return DuelEventType.CANCEL;
-		} else if (dpi.getEventType() == DuelEventType.REQUEST && dpi.getReciever().getSentDuels().contains(dpi.getSender())) {
-			return DuelEventType.ACCEPT;
-		}
-		return dpi.getEventType();
-	}
-	
 	private void handleDuelPlayerIntent(DuelPlayerIntent dpi) {
 		if (dpi.getReciever() == null || !dpi.getReciever().isPlayer() || dpi.getSender().equals(dpi.getReciever())) {
 			return;
 		}
 		
-		switch (getTrueEventType(dpi)) {
+		switch (dpi.getEventType()) {
 			case ACCEPT:
 				handleAcceptDuel(dpi.getSender(), dpi.getReciever());
 				break;
