@@ -30,7 +30,6 @@ package resources.objects.creature;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 import java.util.Set;
 import java.util.Locale;
 import java.util.function.Predicate;
@@ -84,9 +83,9 @@ public class CreatureObject extends TangibleObject {
 	
 	private SWGList<Integer>	baseAttributes		= new SWGList<Integer>(1, 2);
 	
-	private List<CreatureObject> activeDuels		= new ArrayList<CreatureObject>();
+	private ArrayList<CreatureObject> activeDuels	= new ArrayList<CreatureObject>();
 	
-	private List<CreatureObject> sentDuels			= new ArrayList<CreatureObject>();
+	private ArrayList<CreatureObject> sentDuels		= new ArrayList<CreatureObject>();
 	
 	public CreatureObject(long objectId) {
 		super(objectId, BaselineType.CREO);
@@ -811,11 +810,11 @@ public class CreatureObject extends TangibleObject {
 		return activeDuels.contains(player);
 	}
 	
-	public List<CreatureObject> getActiveDuels() {
+	public ArrayList<CreatureObject> getActiveDuels() {
 		return activeDuels;
 	}
 	
-	public List<CreatureObject> getSentDuels() {
+	public ArrayList<CreatureObject> getSentDuels() {
 		return sentDuels;
 	}
 	
