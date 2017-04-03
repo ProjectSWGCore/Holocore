@@ -58,7 +58,6 @@ import resources.objects.tangible.TangibleObject;
 import resources.objects.weapon.WeaponObject;
 import resources.persistable.SWGObjectFactory;
 import resources.player.Player;
-import resources.server_info.SynchronizedList;
 import services.group.GroupInviterData;
 import utilities.Encoder.StringType;
 
@@ -85,9 +84,9 @@ public class CreatureObject extends TangibleObject {
 	
 	private SWGList<Integer>	baseAttributes		= new SWGList<Integer>(1, 2);
 	
-	private List<CreatureObject> activeDuels		= new SynchronizedList<CreatureObject>();
+	private List<CreatureObject> activeDuels		= new ArrayList<CreatureObject>();
 	
-	private List<CreatureObject> sentDuels			= new SynchronizedList<CreatureObject>();
+	private List<CreatureObject> sentDuels			= new ArrayList<CreatureObject>();
 	
 	public CreatureObject(long objectId) {
 		super(objectId, BaselineType.CREO);
