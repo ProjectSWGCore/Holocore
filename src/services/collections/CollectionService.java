@@ -31,7 +31,6 @@ import intents.GrantClickyCollectionIntent;
 import intents.radial.RadialRequestIntent;
 import intents.radial.RadialResponseIntent;
 import intents.radial.RadialSelectionIntent;
-import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.collections.ClickyCollectionItem;
 import resources.objects.collections.CollectionItem;

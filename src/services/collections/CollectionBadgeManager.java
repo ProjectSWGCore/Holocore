@@ -37,7 +37,6 @@ import intents.object.DestroyObjectIntent;
 import network.packets.swg.zone.PlayMusicMessage;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
-import resources.control.Intent;
 import resources.control.Manager;
 import resources.objects.SWGObject;
 import resources.objects.collections.ClickyCollectionItem;

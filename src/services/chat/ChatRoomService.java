@@ -69,7 +69,6 @@ import resources.chat.ChatRoom;
 import resources.client_info.ServerFactory;
 import resources.client_info.visitors.DatatableData;
 import resources.control.Assert;
-import resources.control.Intent;
 import resources.control.Service;
 import resources.objects.player.PlayerObject;
 import resources.player.AccessLevel;
