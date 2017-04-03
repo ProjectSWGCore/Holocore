@@ -54,20 +54,26 @@ public class DuelPlayerService extends Service {
 		target.setPvpFlags(PvpFlag.DUEL);
 	}
 	
+	private void endDuel(CreatureObject ender, CreatureObject target) {
+		ender.clearPvpFlags(PvpFlag.DUEL);
+		target.clearPvpFlags(PvpFlag.DUEL);
+		ender.getActiveDuels().remove(target);
+		target.getActiveDuels().remove(ender);
+		ender.setInCombat(false);
+		target.setInCombat(false);
+		
+		if (ender.getSentDuels().contains(target)) {
+			ender.getSentDuels().remove(target);
+		} else {
+			target.getSentDuels().remove(ender);
+		}
+	}
+	
 	private void handleEndDuel(CreatureObject ender, CreatureObject target) {
 		if (ender.getActiveDuels().contains(target)) {
 			sendSystemMessage(ender, target, "end_self");
 			sendSystemMessage(target, ender, "end_target");
-			ender.clearPvpFlags(PvpFlag.DUEL);
-			target.clearPvpFlags(PvpFlag.DUEL);
-			ender.getActiveDuels().remove(target);
-			target.getActiveDuels().remove(ender);
-			
-			if (ender.getSentDuels().contains(target)) {
-				ender.getSentDuels().remove(target);
-			} else {
-				target.getSentDuels().remove(ender);
-			}
+			endDuel(ender, target);
 		} else {
 			sendSystemMessage(ender, target, "not_dueling");
 		}
