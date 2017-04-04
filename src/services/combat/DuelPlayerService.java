@@ -25,7 +25,6 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
  ***********************************************************************************/
-
 package services.combat;
 
 import intents.chat.ChatBroadcastIntent;
@@ -86,7 +85,9 @@ public class DuelPlayerService extends Service {
 	}
 	
 	private void handleDeclineDuel(CreatureObject decliner, CreatureObject target) {
-		// TODO: Implement
+		target.getSentDuels().remove(decliner);
+		sendSystemMessage(decliner, target, "reject_self");
+		sendSystemMessage(target, decliner, "reject_target");
 	}
 	
 	private void handleRequestDuel(CreatureObject requester, CreatureObject target) {
