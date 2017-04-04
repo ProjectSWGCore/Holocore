@@ -1,5 +1,5 @@
-spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	creature_name	creature_id	spawn_category	spawn_area	amount	behaviour	mood	equipment_id	patrol_id	quest_id	loot_id	max_spawn_time	min_spawn_time	float_radius
-INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGER NOT NULL	REAL	REAL	REAL	REAL	INTEGER	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL	INTEGER NOT NULL	INTEGER
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	spawn_category	spawn_area	amount	behaviour	mood	equipment_id	patrol_id	quest_id	loot_id	max_spawn_time	min_spawn_time	float_radius
+INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGER NOT NULL	REAL	REAL	REAL	INTEGER	INTEGER	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL	INTEGER NOT NULL	INTEGER
 5000003	CORELLIA	cor_world	PATROL	0	6752.00	315.00	-5696.00	0	1	a CorSec trooper	corsec_trooper_32_h_att_n	Presence Imperial	Bela Vistal	1	PATROL	idle	0	999	0	0	300	180	0
 5000004	CORELLIA	cor_world	PATROL	0	6716.10	315.00	-5814.90	130	1	a CorSec trooper	corsec_trooper_32_h_att_n	Presence Imperial	Bela Vistal	1	PATROL	idle	0	999	0	0	300	180	0
 5000005	CORELLIA	cor_world	PATROL	0	6769.50	315.00	-5777.90	91	1	a CorSec trooper	corsec_trooper_32_h_att_n	Presence Imperial	Bela Vistal	1	PATROL	idle	0	999	0	0	300	180	0

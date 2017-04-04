@@ -79,7 +79,7 @@ public class CombatXpService extends Service {
 	
 	private void loadXpData() {
 		long startTime = StandardLog.onStartLoad("combat XP rates");
-		try (RelationalDatabase npcStats = RelationalServerFactory.getServerData("creatures/npc_stats.db", "npc_stats")) {
+		try (RelationalDatabase npcStats = RelationalServerFactory.getServerData("npc/npc_stats.db", "npc_stats")) {
 			try (ResultSet set = npcStats.executeQuery("SELECT * FROM npc_stats")) {
 				while (set.next()) {
 					xpData.put(set.getShort("Level"), new XpData(set.getInt("XP"), set.getInt("Elite_XP"), set.getInt("Boss_XP")));
