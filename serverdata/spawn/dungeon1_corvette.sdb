@@ -1,4 +1,4 @@
-spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	creature_name	creature_id	spawn_category	spawn_area	amount	behaviour	mood	equipment_id	patrol_id	quest_id	loot_id	max_spawn_time	min_spawn_time	float_radius
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	spawn_category	spawn_area	amount	behaviour	mood	equipment_id	patrol_id	quest_id	loot_id	max_spawn_time	min_spawn_time	float_radius
 INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGER NOT NULL	REAL	REAL	REAL	INTEGER	INTEGER	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL	INTEGER NOT NULL	INTEGER
 1140003	DUNGEON1	du1_imp_corvette_1	AREA	1	-41.50	0.00	2.60	-179	1	a 2-1B surgical droid	21b_surgical_droid_clone_droid_100_d_inv_n	dungeon	Imperial Corvette - 1	1	STOP	idle	0	0	0	0	300	120	0
 1140004	DUNGEON1	du1_imp_corvette_1	AREA	10	25.20	0.00	12.95	0	1	a Rebel Midshipman	corvette_reb_midshipman_81_h_agg_e	dungeon	Imperial Corvette - 1	1	GUARD	idle	0	0	0	0	300	120	0

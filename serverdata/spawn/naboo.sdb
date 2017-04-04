@@ -1,4 +1,4 @@
-spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	creature_name	creature_id	spawn_category	spawn_area	amount	behaviour	mood	equipment_id	patrol_id	quest_id	loot_id	max_spawn_time	min_spawn_time	float_radius
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	spawn_category	spawn_area	amount	behaviour	mood	equipment_id	patrol_id	quest_id	loot_id	max_spawn_time	min_spawn_time	float_radius
 INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGER NOT NULL	REAL	REAL	REAL	INTEGER	INTEGER	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL	INTEGER NOT NULL	INTEGER
 600003	NABOO	nab_amidala_hotel	AREA	10	-23.48	1.60	-17.23	0	1	an Event Promoter	event_promoter_100_h_inv_n	city	Lake Retreat	1	STOP	idle	0	0	0	0	300	120	0
 600004	NABOO	nab_black_sun_outpost	AREA	10	5.40	-12.00	76.50	0	1	a Skaak Tipper bruiser	naboo_skaak_tipper_bruiser_25_h_agg_n	dungeon	Blacksun Outpost	1	GUARD	idle	0	0	0	0	300	120	0
