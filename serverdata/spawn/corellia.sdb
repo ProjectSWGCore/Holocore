@@ -1,4 +1,4 @@
-spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	creature_name	creature_id	spawn_category	spawn_area	amount	behaviour	mood	equipment_id	patrol_id	quest_id	loot_id	max_spawn_time	min_spawn_time	float_radius
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	spawn_category	spawn_area	amount	behaviour	mood	equipment_id	patrol_id	quest_id	loot_id	max_spawn_time	min_spawn_time	float_radius
 INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGER NOT NULL	REAL	REAL	REAL	INTEGER	INTEGER	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL	INTEGER NOT NULL	INTEGER
 100003	CORELLIA	cor_bela_asso_hall	AREA	6	-14.81	2.25	10.74	-2	1	Luthin Dlunar	luthin_dlunar_100_h_inv_n	city	Bela Vistal	1	STOP	idle	0	0	0	0	300	120	0
 100004	CORELLIA	cor_bela_cantina	AREA	3	8.61	-0.89	0.40	88	1	a bartender	bartender_100_h_inv_n	city	Bela Vistal	1	STOP	idle	0	0	0	0	300	120	0
