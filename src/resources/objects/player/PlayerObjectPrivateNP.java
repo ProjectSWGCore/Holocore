@@ -27,7 +27,9 @@
  ***********************************************************************************/
 package resources.objects.player;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import resources.collections.SWGList;
 import resources.collections.SWGSet;
@@ -58,50 +60,70 @@ class PlayerObjectPrivateNP implements Persistable {
 		
 	}
 	
-	public void removeFriend(String friend, SWGObject target) {
+	public boolean addFriend(String friend, SWGObject target) {
+		friend = friend.toLowerCase(Locale.US);
 		synchronized (friendsList) {
-			friendsList.remove(friend);
-		}
-		friendsList.sendDeltaMessage(target);
-	}
-	
-	public void addFriend(String friend, SWGObject target) {
-		synchronized (friendsList) {
+			if (friendsList.contains(friend))
+				return false;
 			friendsList.add(friend);
 		}
 		friendsList.sendDeltaMessage(target);
+		return true;
+	}
+	
+	public boolean removeFriend(String friend, SWGObject target) {
+		boolean changed;
+		synchronized (friendsList) {
+			changed = friendsList.remove(friend.toLowerCase(Locale.US));
+		}
+		friendsList.sendDeltaMessage(target);
+		return changed;
 	}
 	
 	public boolean isFriend(String friend) {
 		synchronized (friendsList) {
-			return friendsList.contains(friend);
+			return friendsList.contains(friend.toLowerCase(Locale.US));
 		}
 	}
 	
 	public List<String> getFriendsList() {
-		return friendsList;
+		return new ArrayList<>(friendsList);
 	}
 	
-	public void addIgnored(String ignored, SWGObject target) {
+	public void sendFriendsList(SWGObject target) {
+		friendsList.sendRefreshedListData(target);
+	}
+	
+	public boolean addIgnored(String ignored, SWGObject target) {
+		ignored = ignored.toLowerCase(Locale.US);
 		synchronized (ignoreList) {
+			if (ignoreList.contains(ignored))
+				return false;
 			ignoreList.add(ignored);
 		}
 		ignoreList.sendDeltaMessage(target);
+		return true;
 	}
 	
-	public void removeIgnored(String ignored, SWGObject target) {
+	public boolean removeIgnored(String ignored, SWGObject target) {
+		boolean changed;
 		synchronized (ignoreList) {
-			ignoreList.remove(ignored);
+			changed = ignoreList.remove(ignored.toLowerCase(Locale.US));
 		}
 		ignoreList.sendDeltaMessage(target);
+		return changed;
 	}
 	
 	public boolean isIgnored(String target) {
-		return ignoreList.contains(target);
+		return ignoreList.contains(target.toLowerCase(Locale.US));
 	}
 	
 	public List<String> getIgnoreList() {
-		return ignoreList;
+		return new ArrayList<>(ignoreList);
+	}
+	
+	public void sendIgnoreList(SWGObject target) {
+		ignoreList.sendRefreshedListData(target);
 	}
 	
 	public void addDraftSchematic(String schematic, SWGObject target) {

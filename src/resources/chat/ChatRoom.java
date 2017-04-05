@@ -32,9 +32,7 @@ import network.packets.swg.zone.chat.ChatRoomMessage;
 import resources.encodables.Encodable;
 import resources.encodables.OutOfBandPackage;
 import resources.network.NetBufferStream;
-import resources.objects.player.PlayerObject;
 import resources.persistable.Persistable;
-import resources.player.Player;
 import services.player.PlayerManager;
 
 import java.io.IOException;
@@ -43,9 +41,6 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author Waverunner
- */
 public class ChatRoom implements Encodable, Persistable {
 	
 	private int id;
@@ -61,7 +56,7 @@ public class ChatRoom implements Encodable, Persistable {
 	// Members are only actually apart of a room when they're "in the room", so we don't need to save this info
 	// as each player will automatically re-join the room based on their joined channels list
 	private transient List<ChatAvatar> members;
-
+	
 	// Large amount of data that's sent frequently, best if we can pre-encode everything and save it for later
 	private transient boolean modified = true;
 	private transient byte[] data;
@@ -233,31 +228,17 @@ public class ChatRoom implements Encodable, Persistable {
 
 	public void sendMessage(ChatAvatar sender, String message, OutOfBandPackage oob, PlayerManager playerManager) {
 		ChatRoomMessage chatRoomMessage = new ChatRoomMessage(sender, getId(), message, oob);
-
-		String senderName = sender.getName();
 		for (ChatAvatar member : members) {
-			Player player = playerManager.getPlayerFromNetworkId(member.getNetworkId());
-			if (player == null)
+			if (member.getPlayer().getPlayerObject().isIgnored(sender.getName()))
 				continue;
-
-			PlayerObject ghost = player.getPlayerObject();
-			if (ghost == null)
-				continue;
-
-			if (ghost.isIgnored(senderName))
-				continue;
-
-			player.sendPacket(chatRoomMessage);
+			
+			member.getPlayer().sendPacket(chatRoomMessage);
 		}
 	}
 
 	public void sendPacketToMembers(PlayerManager manager, SWGPacket... packets) {
 		for (ChatAvatar member : members) {
-			Player player = manager.getPlayerFromNetworkId(member.getNetworkId());
-			if (player == null)
-				continue;
-
-			player.sendPacket(packets);
+			member.getPlayer().sendPacket(packets);
 		}
 	}
 

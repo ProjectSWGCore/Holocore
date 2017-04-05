@@ -42,7 +42,6 @@ import resources.player.PlayerFlags;
 import utilities.Encoder.StringType;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class PlayerObject extends IntangibleObject {
@@ -279,36 +278,44 @@ public class PlayerObject extends IntangibleObject {
 		sendDelta(8, 6, activeQuest);
 	}
 
-	public void removeFriend(String friend) {
-		play9.removeFriend(friend, this);
+	public boolean addFriend(String friend) {
+		return play9.addFriend(friend, this);
 	}
 
-	public void addFriend(String friend) {
-		play9.addFriend(friend, this);
+	public boolean removeFriend(String friend) {
+		return play9.removeFriend(friend, this);
 	}
 
 	public boolean isFriend(String target) {
 		return play9.isFriend(target);
 	}
-
+	
 	public List<String> getFriendsList() {
 		return play9.getFriendsList();
 	}
-
-	public void addIgnored(String ignored) {
-		play9.addIgnored(ignored, this);
+	
+	public void sendFriendsList() {
+		play9.sendFriendsList(this);
 	}
 
-	public void removeIgnored(String ignored) {
-		play9.removeIgnored(ignored, this);
+	public boolean addIgnored(String ignored) {
+		return play9.addIgnored(ignored, this);
+	}
+
+	public boolean removeIgnored(String ignored) {
+		return play9.removeIgnored(ignored, this);
 	}
 
 	public boolean isIgnored(String target) {
 		return play9.isIgnored(target);
 	}
-
+	
 	public List<String> getIgnoreList() {
 		return play9.getIgnoreList();
+	}
+	
+	public void sendIgnoreList() {
+		play9.sendIgnoreList(this);
 	}
 
 	public String getProfWheelPosition() {
@@ -333,7 +340,7 @@ public class PlayerObject extends IntangibleObject {
 	}
 
 	public List<String> getJoinedChannels() {
-		return Collections.unmodifiableList(joinedChannels);
+		return new ArrayList<>(joinedChannels);
 	}
 
 	public boolean addJoinedChannel(String path) {

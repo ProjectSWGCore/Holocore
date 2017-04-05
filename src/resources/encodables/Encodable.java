@@ -29,9 +29,6 @@ package resources.encodables;
 
 import java.nio.ByteBuffer;
 
-/**
- * @author Waverunner
- */
 public interface Encodable {
 	byte [] encode();
 	void decode(ByteBuffer data);

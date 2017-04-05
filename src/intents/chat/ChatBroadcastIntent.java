@@ -33,6 +33,7 @@ import resources.encodables.ProsePackage;
 import resources.player.Player;
 
 public class ChatBroadcastIntent extends Intent {
+	
 	public static final String TYPE = "ChatBroadcastIntent";
 	
 	private BroadcastType broadcastType;
@@ -53,26 +54,36 @@ public class ChatBroadcastIntent extends Intent {
 		this(null, receiver, null, BroadcastType.PERSONAL);
 		this.prose = prose;
 	}
+	
 	public ChatBroadcastIntent(String message, BroadcastType type) {
 		this(message, null, null, type);
 	}
+	
 	public ChatBroadcastIntent(Player receiver, String message) {
 		this(message, receiver, null, BroadcastType.PERSONAL);
 	}
-	public ChatBroadcastIntent(String message) {
-		this(message, null, null, BroadcastType.GALAXY);
+	
+	public BroadcastType getBroadcastType() {
+		return broadcastType;
 	}
 	
-	public BroadcastType getBroadcastType() { return broadcastType; }
-	public Player getBroadcaster() { return broadcaster; }
-	public Terrain getTerrain() { return terrain; }
-	public String getMessage() { return message; }
-	public ProsePackage getProse() { return prose; }
+	public Player getBroadcaster() {
+		return broadcaster;
+	}
+	
+	public Terrain getTerrain() {
+		return terrain;
+	}
+	
+	public String getMessage() {
+		return message;
+	}
+	
+	public ProsePackage getProse() {
+		return prose;
+	}
 	
 	public enum BroadcastType {
-		AREA,
-		PLANET,
-		GALAXY,
-		PERSONAL
+		AREA, PLANET, GALAXY, PERSONAL
 	}
 }

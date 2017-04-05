@@ -125,6 +125,14 @@ public class Player implements Comparable<Player> {
 		return "";
 	}
 	
+	public String getCharacterFirstName() {
+		String name = getCharacterName();
+		int spaceIndex = name.indexOf(' ');
+		if (spaceIndex != -1)
+			return name.substring(0, spaceIndex);
+		return name;
+	}
+	
 	public int getUserId() {
 		return userId;
 	}
