@@ -60,18 +60,14 @@ import services.galaxy.GalacticManager;
 
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.Executors;
 import java.util.concurrent.PriorityBlockingQueue;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
+import com.projectswg.common.concurrency.PswgScheduledThreadPool;
 import com.projectswg.common.concurrency.SynchronizedMap;
 import com.projectswg.common.control.Service;
 
@@ -80,24 +76,19 @@ import resources.combat.DelayAttackEggPosition;
 import resources.combat.HitType;
 import resources.commands.DefaultPriority;
 import resources.objects.creature.CreatureObject;
-import utilities.ThreadUtilities;
 
 public class CommandService extends Service {
 	
-	private final Map <Integer, Command>			commands;			// NOTE: CRC's are all lowercased for commands!
-	private final Map <String, Integer>				commandCrcLookup;
-	private final Map <String, List<Command>>		commandByScript;
-	private final Map <Player, BlockingQueue<QueuedCommand>>		combatQueueMap;
+	private final Map <Player, BlockingQueue<QueuedCommand>>combatQueueMap;
 	private final Map <CreatureObject, Set<String>>			cooldownMap;
-	private final ScheduledExecutorService executorService;
+	private final PswgScheduledThreadPool					cooldownThread;
+	private final CommandContainer							commandContainer;
 	
 	public CommandService() {
-		commands = new HashMap<>();
-		commandCrcLookup = new HashMap<>();
-		commandByScript = new HashMap<>();
-		combatQueueMap = new SynchronizedMap<>();
-		cooldownMap = new HashMap<>();
-		executorService = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("command-service"));
+		this.combatQueueMap = new SynchronizedMap<>();
+		this.cooldownMap = new HashMap<>();
+		this.cooldownThread = new PswgScheduledThreadPool(1, "command-service-cooldown-thread");
+		this.commandContainer = new CommandContainer();
 		
 		registerForIntent(GalacticPacketIntent.class, gpi -> handleGalacticPacketIntent(gpi));
 		registerForIntent(PlayerEventIntent.class, pei -> handlePlayerEventIntent(pei));
@@ -110,14 +101,14 @@ public class CommandService extends Service {
 		loadCombatCommands();
 		registerCallbacks();
 		
-		executorService.scheduleAtFixedRate(() -> pollQueues(), 1, 1, TimeUnit.SECONDS);
-		
+		cooldownThread.start();
+		cooldownThread.executeWithFixedRate(1000, 1000, () -> pollQueues());
 		return super.initialize();
 	}
-
+	
 	@Override
 	public boolean terminate() {
-		executorService.shutdown();
+		cooldownThread.stop();
 		return super.terminate();
 	}
 	
@@ -158,13 +149,13 @@ public class CommandService extends Service {
 	}
 	
 	private void handleCommandRequest(Player player, GalacticManager galacticManager, CommandQueueEnqueue request) {
-		if (!commandExists(request.getCommandCrc())) {
+		if (!commandContainer.isCommand(request.getCommandCrc())) {
 			if (request.getCommandCrc() != 0)
 				Log.e("Invalid command crc: %x", request.getCommandCrc());
 			return;
 		}
 		
-		Command command = getCommand(request.getCommandCrc());
+		Command command = commandContainer.getCommand(request.getCommandCrc());
 		// TODO target and target type checks below. Work with Set<TangibleObject> targets from there
 		long targetId = request.getTargetId();
 		final SWGObject target = targetId != 0 ? galacticManager.getObjectManager().getObjectById(targetId) : null;
@@ -256,7 +247,7 @@ public class CommandService extends Service {
 					commandTimer.setSequenceId(sequenceId);
 					creature.sendSelf(commandTimer);
 					
-					executorService.schedule(() -> removeCooldown(creature, cooldownGroup), (long) (cooldownTime * 1000), TimeUnit.MILLISECONDS);
+					cooldownThread.execute((long) (cooldownTime * 1000), () -> removeCooldown(creature, cooldownGroup));
 				}
 			}
 		}
@@ -323,7 +314,7 @@ public class CommandService extends Service {
 			"command_table_space", "client_command_table_ground", "client_command_table_space"
 		};
 		
-		clearCommands();
+		commandContainer.clearCommands();
 		for (String table : commandTables) {
 			loadBaseCommands(table);
 		}
@@ -341,6 +332,9 @@ public class CommandService extends Service {
 		for (int row = 0; row < baseCommands.getRowCount(); row++) {
 			Object [] cmdRow = baseCommands.getRow(row);
 			String commandName = ((String) cmdRow[0]).toLowerCase(Locale.ENGLISH);
+			if (commandContainer.isCommand(commandName))
+				continue; // skip duplicates - first is higher priority
+			
 			Command command = new Command(commandName);
 			
 			command.setCrc(CRC.getCrc(commandName));
@@ -369,7 +363,7 @@ public class CommandService extends Service {
 				command.setGodLevel((int) cmdRow[godLevel]);
 			}
 			
-			addCommand(command);
+			commandContainer.addCommand(command);
 		}
 	}
 	
@@ -421,11 +415,11 @@ public class CommandService extends Service {
 		for (int row = 0; row < combatCommands.getRowCount(); row++) {
 			Object [] cmdRow = combatCommands.getRow(row);
 			
-			Command c = commands.get(CRC.getCrc(((String) cmdRow[0]).toLowerCase(Locale.ENGLISH)));
+			Command c = commandContainer.getCommand(CRC.getCrc(((String) cmdRow[0]).toLowerCase(Locale.ENGLISH)));
 			if (c == null)
 				continue;
 			CombatCommand cc = createAsCombatCommand(c);
-			commands.remove(c.getCrc());
+			commandContainer.removeCommand(c);
 			cc.setValidTarget(ValidTarget.getValidTarget((Integer) cmdRow[validTarget]));
 			cc.setForceCombat(((int) cmdRow[forceCombat]) != 0);
 			cc.setAttackType(AttackType.getAttackType((Integer) cmdRow[attackType]));
@@ -462,7 +456,7 @@ public class CommandService extends Service {
 			cc.setAnimations(WeaponType.ONE_HANDED_SABER, getAnimationList((String) cmdRow[animDefault+11]));
 			cc.setAnimations(WeaponType.TWO_HANDED_SABER, getAnimationList((String) cmdRow[animDefault+12]));
 			cc.setAnimations(WeaponType.POLEARM_SABER, getAnimationList((String) cmdRow[animDefault+13]));
-			addCommand(cc);
+			commandContainer.addCommand(cc);
 		}
 	}
 	
@@ -474,7 +468,7 @@ public class CommandService extends Service {
 	
 	private <T extends ICmdCallback> Command registerCallback(String command, Class<T> callback) {
 		command = command.toLowerCase(Locale.ENGLISH);
-		Command comand = getCommand(command);
+		Command comand = commandContainer.getCommand(command);
 		registerCallback(comand, callback);
 		return comand;
 	}
@@ -488,7 +482,7 @@ public class CommandService extends Service {
 		}
 		command.setJavaCallback(callback);
 
-		List<Command> scriptCommands = getCommandsByScript(command.getDefaultScriptCallback());
+		List<Command> scriptCommands = commandContainer.getScriptCommandList(command.getDefaultScriptCallback());
 		for(Command unregistered : scriptCommands){
 			if(unregistered != command && !unregistered.hasJavaCallback()){
 				registerCallback(unregistered, command.getJavaCallback());
@@ -523,62 +517,6 @@ public class CommandService extends Service {
 		registerCallback("transferItemMisc", TransferItemCallback.class);
 		registerCallback("transferItemArmor", TransferItemCallback.class);
 		registerCallback("transferItemWeapon", TransferItemCallback.class);
-	}
-	
-	private void clearCommands() {
-		synchronized (commands) {
-			commands.clear();
-		}
-		synchronized (commandCrcLookup) {
-			commandCrcLookup.clear();
-		}
-	}
-	
-	private Command getCommand(String name) {
-		synchronized (commandCrcLookup) {
-			return getCommand(commandCrcLookup.get(name));
-		}
-	}
-
-	private List<Command> getCommandsByScript(String script) {
-		synchronized (commandByScript){
-			return commandByScript.get(script);
-		}
-	}
-	
-	private Command getCommand(int crc) {
-		synchronized (commands) {
-			return commands.get(crc);
-		}
-	}
-	
-	private boolean commandExists(int crc) {
-		synchronized (commands) {
-			return commands.containsKey(crc);
-		}
-	}
-	
-	private boolean addCommand(Command command) {
-		if (commands.containsKey(command.getCrc()))
-			return false;
-
-		synchronized (commands) {
-			commands.put(command.getCrc(), command);
-		}
-		synchronized (commandCrcLookup) {
-			commandCrcLookup.put(command.getName(), command.getCrc());
-		}
-		synchronized (commandByScript){
-			String script = command.getDefaultScriptCallback();
-			List<Command> commands = commandByScript.get(script);
-
-			if(commands == null){
-				commands = new LinkedList<>();
-				commandByScript.put(script, commands);
-			}
-			commands.add(command);
-		}
-		return true;
 	}
 	
 	private static class QueuedCommand implements Comparable<QueuedCommand> {
