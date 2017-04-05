@@ -805,10 +805,6 @@ public class CreatureObject extends TangibleObject {
 		return sentDuels.contains(player);
 	}
 	
-	public boolean sentDuelRequestToPlayer(CreatureObject player) {
-		return sentDuels.contains(player);
-	}
-	
 	public boolean isDuelingPlayer(CreatureObject player) {
 		return sentDuelRequestToPlayer(player) && player.sentDuelRequestToPlayer(this);
 	}
