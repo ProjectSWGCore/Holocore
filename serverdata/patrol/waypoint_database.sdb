@@ -1,0 +1,8 @@
+waypoint_id	terrain	building_id	cell_id	x	y	z	pause	comment
+INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER NOT NULL	REAL	REAL	REAL	REAL	TEXT NOT NULL
+0	TATOOINE	tat_world	0	3519.20	4.00	-4800.20	0	Start / Spawner
+1	TATOOINE	tat_world	0	3514.70	4.00	-4805.30	0	Outdoor test
+2	TATOOINE	tat_world	0	3520.90	4.10	-4815.10	0	Outdoor test
+3	TATOOINE	tat_world	0	3530.10	4.00	-4804.80	10	Outdoor test + pause
+4	TATOOINE	tat_moseisley_starport	1	-0.10	0.60	75.10	0	Indoor test
+5	TATOOINE	tat_world	0	3526.90	4.00	-4798.60	0	Waypoint 5
