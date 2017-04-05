@@ -41,12 +41,11 @@ public class DuelPlayerService extends Service {
 	}
 	
 	private void handleAcceptDuel(CreatureObject accepter, CreatureObject target) {
-		if (accepter.getActiveDuels().contains(target)) {
+		if (accepter.isDuelingPlayer(target)) {
 			sendSystemMessage(accepter, target, "already_dueling");
 			return;
 		}
-		accepter.getActiveDuels().add(target);
-		target.getActiveDuels().add(accepter);
+		accepter.addPlayerToSentDuels(target);
 		sendSystemMessage(accepter, target, "accept_self");
 		sendSystemMessage(target, accepter, "accept_target");
 		accepter.setPvpFlags(PvpFlag.DUEL);
@@ -56,20 +55,20 @@ public class DuelPlayerService extends Service {
 	private void endDuel(CreatureObject ender, CreatureObject target) {
 		ender.clearPvpFlags(PvpFlag.DUEL);
 		target.clearPvpFlags(PvpFlag.DUEL);
-		ender.getActiveDuels().remove(target);
-		target.getActiveDuels().remove(ender);
+		ender.removePlayerFromSentDuels(target);
+		target.removePlayerFromSentDuels(ender);
 		ender.setInCombat(false);
 		target.setInCombat(false);
 		
-		if (ender.getSentDuels().contains(target)) {
-			ender.getSentDuels().remove(target);
+		if (ender.sentDuelRequestToPlayer(target)) {
+			ender.removePlayerFromSentDuels(target);
 		} else {
-			target.getSentDuels().remove(ender);
+			target.removePlayerFromSentDuels(ender);
 		}
 	}
 	
 	private void handleEndDuel(CreatureObject ender, CreatureObject target) {
-		if (ender.getActiveDuels().contains(target)) {
+		if (ender.isDuelingPlayer(target)) {
 			sendSystemMessage(ender, target, "end_self");
 			sendSystemMessage(target, ender, "end_target");
 			endDuel(ender, target);
@@ -79,23 +78,23 @@ public class DuelPlayerService extends Service {
 	}
 	
 	private void handleCancelDuel(CreatureObject canceler, CreatureObject target) {
-		canceler.getSentDuels().remove(target);
+		canceler.removePlayerFromSentDuels(target);
 		sendSystemMessage(canceler, target, "cancel_self");
 		sendSystemMessage(target, canceler, "cancel_target");
 	}
 	
 	private void handleDeclineDuel(CreatureObject decliner, CreatureObject target) {
-		target.getSentDuels().remove(decliner);
+		target.removePlayerFromSentDuels(decliner);
 		sendSystemMessage(decliner, target, "reject_self");
 		sendSystemMessage(target, decliner, "reject_target");
 	}
 	
 	private void handleRequestDuel(CreatureObject requester, CreatureObject target) {
-		if (!requester.getSentDuels().contains(target)) {
-			requester.getSentDuels().add(target);
+		if (!requester.sentDuelRequestToPlayer(target)) {
+			requester.addPlayerToSentDuels(target);
 			sendSystemMessage(requester, target, "challenge_self");
 			sendSystemMessage(target, requester, "challenge_target");
-		} else if (requester.getActiveDuels().contains(target)) {
+		} else if (requester.isDuelingPlayer(target)) {
 			sendSystemMessage(requester, target, "already_dueling");
 		} else {
 			sendSystemMessage(requester, target, "already_challenged");

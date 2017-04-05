@@ -84,8 +84,6 @@ public class CreatureObject extends TangibleObject {
 	
 	private SWGList<Integer> baseAttributes			= new SWGList<Integer>(1, 2);
 	
-	private List<CreatureObject> activeDuels		= new ArrayList<>();
-	
 	private List<CreatureObject> sentDuels			= new ArrayList<>();
 	
 	public CreatureObject(long objectId) {
@@ -803,20 +801,24 @@ public class CreatureObject extends TangibleObject {
 		return isEnemy(otherObject) && otherPosture != Posture.INCAPACITATED && otherPosture != Posture.DEAD;
 	}
 	
+	public boolean hasSentDuelRequestToPlayer(CreatureObject player) {
+		return sentDuels.contains(player);
+	}
+	
 	public boolean sentDuelRequestToPlayer(CreatureObject player) {
 		return sentDuels.contains(player);
 	}
 	
-	public boolean isInDuelWithPlayer(CreatureObject player) {
-		return activeDuels.contains(player);
+	public boolean isDuelingPlayer(CreatureObject player) {
+		return sentDuelRequestToPlayer(player) && player.sentDuelRequestToPlayer(this);
 	}
 	
-	public List<CreatureObject> getActiveDuels() {
-		return activeDuels;
+	public void addPlayerToSentDuels(CreatureObject player) {
+		sentDuels.add(player);
 	}
 	
-	public List<CreatureObject> getSentDuels() {
-		return sentDuels;
+	public void removePlayerFromSentDuels(CreatureObject player) {
+		sentDuels.remove(player);
 	}
 	
 	@Override
@@ -827,7 +829,7 @@ public class CreatureObject extends TangibleObject {
 			return tangibleEnemy;
 		}
 		
-		if (activeDuels.contains(otherObject))
+		if (isDuelingPlayer((CreatureObject)otherObject))
 			return true;
 		
 		return isPlayer() && ((CreatureObject) otherObject).isPlayer()
