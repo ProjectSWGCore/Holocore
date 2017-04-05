@@ -122,7 +122,6 @@ public class BuffService extends Service {
 			case PE_FIRST_ZONE:
 				handleFirstZone(creature);
 				break;
-			case PE_LOGGED_OUT:
 			case PE_DISAPPEAR:
 				handleDisappear(creature);
 				break;
@@ -133,17 +132,12 @@ public class BuffService extends Service {
 	
 	private void handleFirstZone(CreatureObject creature) {
 		if (isCreatureBuffed(creature)) {
-			synchronized (monitored) {
-				monitored.add(creature);
-			}
-			updateAllBuffs(creature, creature.getBuffEntries(buff -> !isBuffInfinite(getBuff(buff))));
+			addToMonitored(creature);
 		}
 	}
 	
 	private void handleDisappear(CreatureObject creature) {
-		synchronized (monitored) {
-			monitored.remove(creature);
-		}
+		removeFromMonitored(creature);
 		removeAllBuffs(creature, creature.getBuffEntries(buff -> !isBuffPersistent(buff)));
 	}
 	
@@ -157,6 +151,22 @@ public class BuffService extends Service {
 			// PvE death - remove certain buffs
 			removeAllBuffs(corpse, corpse.getBuffEntries(buff -> isBuffRemovedOnDeath(buff)));
 		}
+	}
+	
+	private void addToMonitored(CreatureObject creature) {
+		synchronized (monitored) {
+			monitored.add(creature);
+		}
+	}
+	
+	private void removeFromMonitored(CreatureObject creature) {
+		synchronized (monitored) {
+			monitored.remove(creature);
+		}
+	}
+	
+	private int getCurrentTime() {
+		return (int)(System.currentTimeMillis() / 1000);
 	}
 	
 	private boolean isBuffExpired(Buff buff) {
@@ -203,7 +213,7 @@ public class BuffService extends Service {
 			receiver.getPlayerObject().updatePlayTime();
 		}
 		
-		int playTime = (int)(System.currentTimeMillis() / 1000);
+		int playTime = getCurrentTime();
 		
 		if (groupBuff.isPresent()) {
 			Buff buff = groupBuff.get();
@@ -235,7 +245,7 @@ public class BuffService extends Service {
 		
 		Buff buff = optionalEntry.get();
 		if (buffData.getMaxStackCount() > 1 && !expired && buff.getStackCount() > 1) {
-			checkStackCount(creature, buff, (int)(System.currentTimeMillis() / 1000), buffData.getMaxStackCount());
+			checkStackCount(creature, buff, getCurrentTime(), buffData.getMaxStackCount());
 		} else {
 			Buff removedBuff = creature.removeBuff(new CRC(buff.getCrc()));
 			Assert.notNull(removedBuff, "Buff must exist if being removed");
@@ -245,24 +255,8 @@ public class BuffService extends Service {
 		}
 		
 		if (!isCreatureBuffed(creature)) {
-			synchronized (monitored) {
-				monitored.remove(creature);
-			}
+			removeFromMonitored(creature);
 		}
-	}
-	
-	private void updateAllBuffs(CreatureObject creature, Stream<Buff> buffStream) {
-		buffStream.forEach(buff -> updateBuffEndTime(creature, buff));
-	}
-	
-	private void updateBuffEndTime(CreatureObject creature, Buff buff) {
-		int oldEndTime = buff.getEndTime();
-		int playTime = creature.getPlayerObject().getPlayTime();
-		long currentTime = System.currentTimeMillis() / 1000;
-		int timeLoggedOut = (int)(currentTime - playTime);
-		int newEndTime = oldEndTime + timeLoggedOut;
-		
-		buff.setEndTime(newEndTime);
 	}
 	
 	private void checkStackCount(CreatureObject receiver, Buff buff, int playTime, int stackMod) {
@@ -304,9 +298,7 @@ public class BuffService extends Service {
 		sendParticleEffect(buffData.getEffectFileName(), receiver, buffData.getParticleHardPoint());
 		sendParticleEffect(buffData.getStanceParticle(), receiver, buffData.getParticleHardPoint());
 		
-		synchronized (monitored) {
-			monitored.add(receiver);
-		}
+		addToMonitored(receiver);
 	}
 	
 	private void sendParticleEffect(String effectFileName, CreatureObject receiver, String hardPoint) {
