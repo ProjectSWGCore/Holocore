@@ -213,7 +213,7 @@ public class ProjectSWG {
 	private void loop() {
 		setStatus((manager.getGalaxyStatus() == GalaxyStatus.UP) ? ServerStatus.OPEN : ServerStatus.LOCKED);
 		while (!shutdownRequested && !manager.isShutdownRequested() && manager.isOperational()) {
-			if (!Delay.sleepMicro(50))
+			if (Delay.sleepMicro(50))
 				throw new CoreException("Main Thread Interrupted");
 		}
 	}
