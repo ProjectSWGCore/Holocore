@@ -60,7 +60,7 @@ public class DuelPlayerService extends Service {
 		ender.setInCombat(false);
 		target.setInCombat(false);
 		
-		if (ender.sentDuelRequestToPlayer(target)) {
+		if (ender.hasSentDuelRequestToPlayer(target)) {
 			ender.removePlayerFromSentDuels(target);
 		} else {
 			target.removePlayerFromSentDuels(ender);
@@ -90,7 +90,7 @@ public class DuelPlayerService extends Service {
 	}
 	
 	private void handleRequestDuel(CreatureObject requester, CreatureObject target) {
-		if (!requester.sentDuelRequestToPlayer(target)) {
+		if (!requester.hasSentDuelRequestToPlayer(target)) {
 			requester.addPlayerToSentDuels(target);
 			sendSystemMessage(requester, target, "challenge_self");
 			sendSystemMessage(target, requester, "challenge_target");
