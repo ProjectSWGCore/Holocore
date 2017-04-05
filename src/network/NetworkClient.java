@@ -36,18 +36,19 @@ import java.net.SocketAddress;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import resources.control.Assert;
-import resources.network.NetBufferStream;
-import resources.server_info.Log;
-import services.network.HolocoreSessionManager;
-import services.network.NetworkProtocol;
-import services.network.PacketSender;
-import services.network.HolocoreSessionManager.ResponseAction;
-import utilities.IntentChain;
 import network.packets.Packet;
 import network.packets.swg.admin.AdminPacket;
 import network.packets.swg.holo.HoloConnectionStopped;
 import network.packets.swg.holo.HoloConnectionStopped.ConnectionStoppedReason;
+import resources.network.NetBufferStream;
+import resources.server_info.Log;
+import services.network.HolocoreSessionManager;
+import services.network.HolocoreSessionManager.ResponseAction;
+import services.network.NetworkProtocol;
+import services.network.PacketSender;
+
+import com.projectswg.common.control.IntentChain;
+import com.projectswg.common.debug.Assert;
 
 public class NetworkClient {
 	

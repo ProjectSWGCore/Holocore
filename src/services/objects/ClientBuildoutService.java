@@ -27,6 +27,9 @@
  ***********************************************************************************/
 package services.objects;
 
+import intents.object.ObjectCreatedIntent;
+import intents.player.PlayerTransformedIntent;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -42,24 +45,24 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import intents.object.ObjectCreatedIntent;
-import intents.player.PlayerTransformedIntent;
 import resources.Location;
 import resources.Terrain;
 import resources.buildout.BuildoutArea;
 import resources.buildout.BuildoutArea.BuildoutAreaBuilder;
 import resources.buildout.BuildoutAreaGrid;
 import resources.config.ConfigFile;
-import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.SWGObject.ObjectClassification;
 import resources.objects.building.BuildingObject;
 import resources.objects.cell.CellObject;
 import resources.server_info.CrcDatabase;
+import resources.server_info.DataManager;
 import resources.server_info.Log;
-import resources.server_info.RelationalServerData;
-import resources.server_info.RelationalServerFactory;
 import resources.server_info.StandardLog;
+
+import com.projectswg.common.control.Service;
+import com.projectswg.common.info.RelationalServerData;
+import com.projectswg.common.info.RelationalServerFactory;
 
 public class ClientBuildoutService extends Service {
 	
@@ -85,7 +88,7 @@ public class ClientBuildoutService extends Service {
 		long startTime = StandardLog.onStartLoad("client objects");
 		try {
 			loadAreas(getEvents());
-			if (getConfig(ConfigFile.PRIMARY).getBoolean("LOAD-OBJECTS", true))
+			if (DataManager.getConfig(ConfigFile.PRIMARY).getBoolean("LOAD-OBJECTS", true))
 				objects = loadObjects();
 			else
 				objects = new HashMap<>();
@@ -209,7 +212,7 @@ public class ClientBuildoutService extends Service {
 	
 	private List<String> getEvents() {
 		List <String> events = new ArrayList<>();
-		String eventStr = getConfig(ConfigFile.FEATURES).getString("EVENTS", "");
+		String eventStr = DataManager.getConfig(ConfigFile.FEATURES).getString("EVENTS", "");
 		String [] eventArray = eventStr.split(",");
 		for (String event : eventArray) {
 			event = event.toLowerCase(Locale.US);

@@ -27,7 +27,8 @@
 ***********************************************************************************/
 package intents;
 
-import resources.control.Intent;
+import com.projectswg.common.control.Intent;
+
 import services.galaxy.GalacticManager;
 import services.objects.ObjectManager;
 import services.player.PlayerManager;
@@ -36,12 +37,11 @@ public abstract class GalacticIntent extends Intent {
 	
 	private GalacticManager galacticManager;
 	
-	protected GalacticIntent(String type) {
-		super(type);
+	protected GalacticIntent() {
+		
 	}
 	
 	protected GalacticIntent(GalacticIntent i) {
-		super(i.getType());
 		setGalacticManager(i.getGalacticManager());
 	}
 	

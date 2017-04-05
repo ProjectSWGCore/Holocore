@@ -27,17 +27,15 @@
 ***********************************************************************************/
 package intents.object;
 
-import resources.control.Intent;
 import resources.objects.SWGObject;
 
+import com.projectswg.common.control.Intent;
+
 public class DestroyObjectIntent extends Intent {
-	
-	public static final String TYPE = "DestroyObjectIntent";
 	
 	private final SWGObject obj;
 	
 	public DestroyObjectIntent(SWGObject obj) {
-		super(TYPE);
 		this.obj = obj;
 	}
 	

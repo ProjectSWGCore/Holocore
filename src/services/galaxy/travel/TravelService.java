@@ -27,6 +27,15 @@
 ***********************************************************************************/
 package services.galaxy.travel;
 
+import intents.chat.ChatBroadcastIntent;
+import intents.network.GalacticPacketIntent;
+import intents.object.DestroyObjectIntent;
+import intents.object.ObjectCreatedIntent;
+import intents.object.ObjectTeleportIntent;
+import intents.travel.TicketPurchaseIntent;
+import intents.travel.TicketUseIntent;
+import intents.travel.TravelPointSelectionIntent;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -43,12 +52,6 @@ import network.packets.Packet;
 import network.packets.swg.zone.EnterTicketPurchaseModeMessage;
 import network.packets.swg.zone.PlanetTravelPointListRequest;
 import network.packets.swg.zone.PlanetTravelPointListResponse;
-import intents.chat.ChatBroadcastIntent;
-import intents.network.GalacticPacketIntent;
-import intents.object.DestroyObjectIntent;
-import intents.object.ObjectCreatedIntent;
-import intents.object.ObjectTeleportIntent;
-import intents.travel.*;
 import resources.Location;
 import resources.Posture;
 import resources.Terrain;
@@ -56,7 +59,6 @@ import resources.TravelPoint;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
 import resources.config.ConfigFile;
-import resources.control.Service;
 import resources.encodables.ProsePackage;
 import resources.encodables.StringId;
 import resources.objects.SWGObject;
@@ -64,16 +66,19 @@ import resources.objects.creature.CreatureObject;
 import resources.objects.staticobject.StaticObject;
 import resources.objects.tangible.OptionFlag;
 import resources.player.Player;
+import resources.server_info.DataManager;
 import resources.server_info.Log;
-import resources.server_info.RelationalServerData;
-import resources.server_info.RelationalServerFactory;
 import resources.sui.SuiButtons;
 import resources.sui.SuiListBox;
 import resources.sui.SuiMessageBox;
-import services.galaxy.travel.TravelGroup;
 import services.galaxy.travel.TravelGroup.ShuttleStatus;
 import services.objects.ObjectCreator;
 import utilities.ThreadUtilities;
+
+import com.projectswg.common.control.Service;
+import com.projectswg.common.info.Config;
+import com.projectswg.common.info.RelationalServerData;
+import com.projectswg.common.info.RelationalServerFactory;
 
 public class TravelService extends Service {
 	
@@ -98,9 +103,10 @@ public class TravelService extends Service {
 		travelFeeTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/travel/travel.iff");
 		travel = new HashMap<>();
 		
-		ticketPriceFactor = getConfig(ConfigFile.FEATURES).getDouble("TICKET-PRICE-FACTOR", 1);
-		groundTime = new AtomicInteger(getConfig(ConfigFile.FEATURES).getInt("SHUTTLE-GROUND-TIME", 120));
-		airTime = new AtomicInteger(getConfig(ConfigFile.FEATURES).getInt("SHUTTLE-AIR-TIME", 60));
+		Config config = DataManager.getConfig(ConfigFile.FEATURES);
+		ticketPriceFactor = config.getDouble("TICKET-PRICE-FACTOR", 1);
+		groundTime = new AtomicInteger(config.getInt("SHUTTLE-GROUND-TIME", 120));
+		airTime = new AtomicInteger(config.getInt("SHUTTLE-AIR-TIME", 60));
 		
 		createGalaxyTravel("object/creature/npc/theme_park/shared_player_shuttle.iff", 17000);
 		createGalaxyTravel("object/creature/npc/theme_park/shared_player_transport.iff", 21000);

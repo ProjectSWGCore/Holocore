@@ -27,6 +27,18 @@
 ***********************************************************************************/
 package resources.objects;
 
+import intents.object.ContainerTransferIntent;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
+
 import network.packets.Packet;
 import network.packets.swg.zone.SceneCreateObjectByCrc;
 import network.packets.swg.zone.SceneDestroyObject;
@@ -40,7 +52,6 @@ import resources.client_info.visitors.ObjectData.ObjectDataAttribute;
 import resources.common.CRC;
 import resources.containers.ContainerPermissionsType;
 import resources.containers.ContainerResult;
-import resources.control.Assert;
 import resources.encodables.StringId;
 import resources.network.BaselineBuilder;
 import resources.network.BaselineObject;
@@ -54,22 +65,13 @@ import resources.persistable.Persistable;
 import resources.persistable.SWGObjectFactory;
 import resources.player.Player;
 import resources.server_info.Log;
-import resources.server_info.SynchronizedMap;
-import resources.server_info.SynchronizedSet;
 import services.CoreManager;
 import services.objects.ObjectCreator;
 import utilities.AwarenessUtilities;
-import intents.object.ContainerTransferIntent;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.atomic.AtomicInteger;
+import com.projectswg.common.concurrency.SynchronizedMap;
+import com.projectswg.common.concurrency.SynchronizedSet;
+import com.projectswg.common.debug.Assert;
 
 public abstract class SWGObject extends BaselineObject implements Comparable<SWGObject>, Persistable {
 	

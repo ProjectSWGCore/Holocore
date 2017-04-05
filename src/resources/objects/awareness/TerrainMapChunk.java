@@ -34,7 +34,8 @@ import java.util.Set;
 
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
-import resources.server_info.SynchronizedSet;
+
+import com.projectswg.common.concurrency.SynchronizedSet;
 
 class TerrainMapChunk {
 	

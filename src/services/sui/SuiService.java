@@ -27,6 +27,9 @@
 ***********************************************************************************/
 package services.sui;
 
+import intents.network.GalacticPacketIntent;
+import intents.sui.SuiWindowIntent;
+
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,14 +37,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import intents.network.GalacticPacketIntent;
-import intents.sui.SuiWindowIntent;
 import network.packets.Packet;
 import network.packets.swg.SWGPacket;
 import network.packets.swg.zone.server_ui.SuiCreatePageMessage;
 import network.packets.swg.zone.server_ui.SuiEventNotification;
 import network.packets.swg.zone.server_ui.SuiForceClosePage;
-import resources.control.Service;
 import resources.player.Player;
 import resources.server_info.Log;
 import resources.sui.ISuiCallback;
@@ -49,6 +49,8 @@ import resources.sui.SuiBaseWindow;
 import resources.sui.SuiComponent;
 import resources.sui.SuiEvent;
 import utilities.Scripts;
+
+import com.projectswg.common.control.Service;
 
 public class SuiService extends Service {
 

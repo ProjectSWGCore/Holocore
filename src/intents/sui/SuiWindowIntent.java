@@ -27,34 +27,44 @@
 ***********************************************************************************/
 package intents.sui;
 
-import resources.control.Intent;
 import resources.player.Player;
 import resources.sui.SuiBaseWindow;
 
+import com.projectswg.common.control.Intent;
+
 public class SuiWindowIntent extends Intent {
-	public static final String TYPE = "SuiWindowIntent";
 	
 	private SuiBaseWindow window;
 	private int windowId;
 	private Player player;
 	private SuiWindowEvent event;
-
+	
 	public SuiWindowIntent(Player player, SuiBaseWindow window, int windowId, SuiWindowEvent event) {
-		super(TYPE);
 		this.player = player;
 		this.window = window;
 		this.windowId = windowId;
 		this.event = event;
 	}
-
+	
 	public SuiWindowIntent(Player player, SuiBaseWindow window, SuiWindowEvent event) {
 		this(player, window, -1, event);
 	}
-
-	public SuiBaseWindow getWindow() { return this.window; }
-	public int getWindowId() { return windowId; }
-	public Player getPlayer() { return this.player; }
-	public SuiWindowEvent getEvent() { return event; }
+	
+	public SuiBaseWindow getWindow() {
+		return this.window;
+	}
+	
+	public int getWindowId() {
+		return windowId;
+	}
+	
+	public Player getPlayer() {
+		return this.player;
+	}
+	
+	public SuiWindowEvent getEvent() {
+		return event;
+	}
 	
 	public enum SuiWindowEvent {
 		NEW,

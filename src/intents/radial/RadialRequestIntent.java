@@ -28,20 +28,18 @@
 package intents.radial;
 
 import network.packets.swg.zone.object_controller.ObjectMenuRequest;
-import resources.control.Intent;
 import resources.objects.SWGObject;
 import resources.player.Player;
 
+import com.projectswg.common.control.Intent;
+
 public class RadialRequestIntent extends Intent {
-	
-	public static final String TYPE = "RadialRequestIntent";
 	
 	private Player player;
 	private SWGObject target;
 	private ObjectMenuRequest request;
 	
 	public RadialRequestIntent(Player player, SWGObject target, ObjectMenuRequest request) {
-		super(TYPE);
 		setPlayer(player);
 		setTarget(target);
 		setRequest(request);

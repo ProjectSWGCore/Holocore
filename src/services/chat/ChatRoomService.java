@@ -61,9 +61,10 @@ import network.packets.swg.zone.insertion.ChatRoomList;
 import resources.chat.ChatAvatar;
 import resources.chat.ChatResult;
 import resources.chat.ChatRoom;
-import resources.control.Service;
-import resources.player.Player;
 import resources.encodables.OutOfBandPackage;
+import resources.player.Player;
+
+import com.projectswg.common.control.Service;
 
 public class ChatRoomService extends Service {
 	

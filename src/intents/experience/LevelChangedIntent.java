@@ -27,38 +27,32 @@
 ***********************************************************************************/
 package intents.experience;
 
-import resources.control.Intent;
 import resources.objects.creature.CreatureObject;
 
-/**
- *
- * @author Mads
- */
+import com.projectswg.common.control.Intent;
+
 public final class LevelChangedIntent extends Intent {
-
-	public static final String TYPE = "LevelChangedIntent";
-
+	
 	private final CreatureObject creatureObject;
 	private final short previousLevel;
 	private final short newLevel;
-
+	
 	public LevelChangedIntent(CreatureObject creatureObject, short previousLevel, short newLevel) {
-		super(TYPE);
 		this.creatureObject = creatureObject;
 		this.previousLevel = previousLevel;
 		this.newLevel = newLevel;
 	}
-
+	
 	public CreatureObject getCreatureObject() {
 		return creatureObject;
 	}
-
+	
 	public short getPreviousLevel() {
 		return previousLevel;
 	}
-
+	
 	public short getNewLevel() {
 		return newLevel;
 	}
-
+	
 }

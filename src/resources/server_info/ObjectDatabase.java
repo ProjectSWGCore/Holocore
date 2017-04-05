@@ -31,8 +31,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-import resources.concurrency.PswgBasicScheduledThread;
 import resources.persistable.Persistable;
+
+import com.projectswg.common.concurrency.PswgBasicScheduledThread;
 
 public abstract class ObjectDatabase<V extends Persistable> {
 	

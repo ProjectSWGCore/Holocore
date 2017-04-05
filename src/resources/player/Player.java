@@ -29,12 +29,13 @@ package resources.player;
 
 import intents.network.OutboundPacketIntent;
 import network.packets.Packet;
-import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
 import services.player.PlayerManager;
-import utilities.IntentChain;
+
+import com.projectswg.common.control.IntentChain;
+import com.projectswg.common.control.Service;
 
 public class Player implements Comparable<Player> {
 	

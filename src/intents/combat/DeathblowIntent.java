@@ -27,30 +27,28 @@
 ***********************************************************************************/
 package intents.combat;
 
-import resources.control.Intent;
 import resources.objects.creature.CreatureObject;
 
-public class DeathblowIntent extends Intent {
+import com.projectswg.common.control.Intent;
 
-	public static final String TYPE = "DeathblowIntent";
+public class DeathblowIntent extends Intent {
 	
 	private final CreatureObject killer;
 	private final CreatureObject corpse;
-
+	
 	/**
 	 * @param killer {@code CreatureObject} that's deathblowing
 	 * @param corpse {@code CreatureObject} that's being deathblown
 	 */
 	public DeathblowIntent(CreatureObject killer, CreatureObject corpse) {
-		super(TYPE);
 		this.killer = killer;
 		this.corpse = corpse;
 	}
-
+	
 	public CreatureObject getKiller() {
 		return killer;
 	}
-
+	
 	public CreatureObject getCorpse() {
 		return corpse;
 	}

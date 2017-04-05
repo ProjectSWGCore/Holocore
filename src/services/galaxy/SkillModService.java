@@ -28,8 +28,9 @@
 package services.galaxy;
 
 import intents.SkillModIntent;
-import resources.control.Service;
 import resources.objects.creature.CreatureObject;
+
+import com.projectswg.common.control.Service;
 
 public class SkillModService extends Service {
 

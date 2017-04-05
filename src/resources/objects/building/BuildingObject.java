@@ -27,23 +27,25 @@
 ***********************************************************************************/
 package resources.objects.building;
 
-import network.packets.swg.zone.baselines.Baseline.BaselineType;
-import resources.Location;
-import resources.client_info.ClientFactory;
-import resources.client_info.visitors.PortalLayoutData;
-import resources.client_info.visitors.ObjectData.ObjectDataAttribute;
-import resources.control.Assert;
-import resources.network.NetBufferStream;
-import resources.objects.SWGObject;
-import resources.objects.cell.CellObject;
-import resources.objects.tangible.TangibleObject;
-import resources.server_info.SynchronizedMap;
-import services.objects.ObjectCreator;
 import intents.object.ObjectCreatedIntent;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import network.packets.swg.zone.baselines.Baseline.BaselineType;
+import resources.Location;
+import resources.client_info.ClientFactory;
+import resources.client_info.visitors.ObjectData.ObjectDataAttribute;
+import resources.client_info.visitors.PortalLayoutData;
+import resources.network.NetBufferStream;
+import resources.objects.SWGObject;
+import resources.objects.cell.CellObject;
+import resources.objects.tangible.TangibleObject;
+import services.objects.ObjectCreator;
+
+import com.projectswg.common.concurrency.SynchronizedMap;
+import com.projectswg.common.debug.Assert;
 
 public class BuildingObject extends TangibleObject {
 	

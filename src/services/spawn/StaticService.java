@@ -39,14 +39,15 @@ import java.util.List;
 import java.util.Map;
 
 import resources.Location;
-import resources.control.Assert;
-import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.building.BuildingObject;
 import resources.server_info.Log;
-import resources.server_info.RelationalServerData;
-import resources.server_info.RelationalServerFactory;
 import services.objects.ObjectCreator;
+
+import com.projectswg.common.control.Service;
+import com.projectswg.common.debug.Assert;
+import com.projectswg.common.info.RelationalServerData;
+import com.projectswg.common.info.RelationalServerFactory;
 
 public class StaticService extends Service {
 	

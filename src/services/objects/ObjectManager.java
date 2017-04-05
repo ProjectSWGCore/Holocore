@@ -27,6 +27,11 @@
 ***********************************************************************************/
 package services.objects;
 
+import intents.RequestZoneInIntent;
+import intents.network.GalacticPacketIntent;
+import intents.object.DestroyObjectIntent;
+import intents.object.ObjectCreatedIntent;
+
 import java.util.Hashtable;
 import java.util.Map;
 import java.util.concurrent.Executors;
@@ -34,15 +39,10 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import intents.object.DestroyObjectIntent;
-import intents.object.ObjectCreatedIntent;
-import intents.RequestZoneInIntent;
-import intents.network.GalacticPacketIntent;
 import network.packets.Packet;
 import network.packets.swg.ErrorMessage;
 import network.packets.swg.zone.insertion.SelectCharacter;
 import network.packets.swg.zone.object_controller.IntendedTarget;
-import resources.control.Manager;
 import resources.objects.SWGObject;
 import resources.objects.building.BuildingObject;
 import resources.objects.cell.CellObject;
@@ -58,6 +58,8 @@ import services.map.MapManager;
 import services.player.PlayerManager;
 import services.spawn.SpawnerService;
 import services.spawn.StaticService;
+
+import com.projectswg.common.control.Manager;
 
 public class ObjectManager extends Manager {
 	

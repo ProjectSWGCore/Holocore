@@ -24,48 +24,41 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>
  ******************************************************************************/
-
 package intents;
 
-import resources.control.Intent;
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
 
-/**
- * Created by Waverunner on 10/4/2015
- */
-public class GroupEventIntent extends Intent {
-	public static final String TYPE = "GroupEventIntent";
+import com.projectswg.common.control.Intent;
 
+public class GroupEventIntent extends Intent {
 	private GroupEventType eventType;
 	private Player player;
 	private CreatureObject target;
-
+	
 	public GroupEventIntent(GroupEventType eventType, Player player, CreatureObject target) {
-		super(TYPE);
 		this.eventType = eventType;
 		this.player = player;
 		this.target = target;
 	}
-
+	
 	public GroupEventIntent(GroupEventType eventType, Player player) {
-		super(TYPE);
 		this.eventType = eventType;
 		this.player = player;
 	}
-
+	
 	public GroupEventType getEventType() {
 		return eventType;
 	}
-
+	
 	public Player getPlayer() {
 		return player;
 	}
-
+	
 	public CreatureObject getTarget() {
 		return target;
 	}
-
+	
 	public enum GroupEventType {
 		GROUP_INVITE,
 		GROUP_UNINVITE,

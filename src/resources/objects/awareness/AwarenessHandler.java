@@ -32,10 +32,11 @@ import java.util.Map;
 
 import resources.Location;
 import resources.Terrain;
-import resources.control.Assert;
 import resources.objects.SWGObject;
 import resources.objects.awareness.TerrainMap.TerrainMapCallback;
 import resources.server_info.Log;
+
+import com.projectswg.common.debug.Assert;
 
 public class AwarenessHandler implements AutoCloseable {
 	

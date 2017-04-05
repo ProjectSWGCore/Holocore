@@ -27,16 +27,17 @@
 ***********************************************************************************/
 package services.chat;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.Locale;
-
 import intents.NotifyPlayersPacketIntent;
 import intents.PlayerEventIntent;
 import intents.chat.ChatAvatarRequestIntent;
 import intents.chat.ChatBroadcastIntent;
 import intents.chat.SpatialChatIntent;
 import intents.network.GalacticPacketIntent;
+
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Locale;
+
 import network.packets.Packet;
 import network.packets.swg.SWGPacket;
 import network.packets.swg.zone.chat.ChatFriendsListUpdate;
@@ -49,8 +50,6 @@ import network.packets.swg.zone.object_controller.SpatialChat;
 import resources.Terrain;
 import resources.chat.ChatAvatar;
 import resources.chat.ChatResult;
-import resources.control.Assert;
-import resources.control.Manager;
 import resources.encodables.OutOfBandPackage;
 import resources.encodables.ProsePackage;
 import resources.objects.SWGObject;
@@ -58,8 +57,11 @@ import resources.objects.player.PlayerObject;
 import resources.player.Player;
 import resources.player.PlayerState;
 import resources.server_info.Log;
-import resources.server_info.RelationalServerData;
-import resources.server_info.RelationalServerFactory;
+
+import com.projectswg.common.control.Manager;
+import com.projectswg.common.debug.Assert;
+import com.projectswg.common.info.RelationalServerData;
+import com.projectswg.common.info.RelationalServerFactory;
 
 public class ChatManager extends Manager {
 	

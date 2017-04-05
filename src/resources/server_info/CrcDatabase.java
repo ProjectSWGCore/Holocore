@@ -35,6 +35,9 @@ import java.util.Map;
 
 import resources.common.CRC;
 
+import com.projectswg.common.info.RelationalDatabase;
+import com.projectswg.common.info.RelationalServerFactory;
+
 public class CrcDatabase implements AutoCloseable {
 	
 	private static final String INSERT_CRC_SQL = "INSERT INTO crcs (string, crc) VALUES (?, ?)";

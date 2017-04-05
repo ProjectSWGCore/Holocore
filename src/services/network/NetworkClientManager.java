@@ -27,6 +27,8 @@
 ***********************************************************************************/
 package services.network;
 
+import intents.network.CloseConnectionIntent;
+
 import java.io.IOException;
 import java.net.BindException;
 import java.net.InetAddress;
@@ -34,20 +36,21 @@ import java.net.Socket;
 import java.net.SocketAddress;
 import java.net.SocketException;
 
-import intents.network.CloseConnectionIntent;
 import main.ProjectSWG.CoreException;
 import network.AdminNetworkClient;
 import network.NetworkClient;
 import network.packets.swg.holo.HoloConnectionStopped.ConnectionStoppedReason;
 import resources.config.ConfigFile;
-import resources.control.Manager;
 import resources.network.NetBuffer;
 import resources.network.NetworkCallback;
 import resources.network.TCPServer;
 import resources.network.UDPServer;
 import resources.network.UDPServer.UDPPacket;
+import resources.server_info.DataManager;
 import resources.server_info.Log;
 import services.CoreManager;
+
+import com.projectswg.common.control.Manager;
 
 public class NetworkClientManager extends Manager {
 	
@@ -125,11 +128,11 @@ public class NetworkClientManager extends Manager {
 	}
 	
 	private int getBindPort() {
-		return getConfig(ConfigFile.NETWORK).getInt("BIND-PORT", 44463);
+		return DataManager.getConfig(ConfigFile.NETWORK).getInt("BIND-PORT", 44463);
 	}
 	
 	private int getBufferSize() {
-		return getConfig(ConfigFile.NETWORK).getInt("BUFFER-SIZE", 4096);
+		return DataManager.getConfig(ConfigFile.NETWORK).getInt("BUFFER-SIZE", 4096);
 	}
 	
 	private void onUdpPacket(UDPPacket packet) {

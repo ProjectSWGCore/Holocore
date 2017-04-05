@@ -41,10 +41,11 @@ import resources.objects.building.BuildingObject;
 import resources.objects.cell.CellObject;
 import resources.player.Player;
 import resources.server_info.Log;
-import resources.server_info.RelationalServerData;
-import resources.server_info.RelationalServerFactory;
 import services.galaxy.GalacticManager;
 import services.objects.ObjectManager;
+
+import com.projectswg.common.info.RelationalServerData;
+import com.projectswg.common.info.RelationalServerFactory;
 
 public class GotoCmdCallback implements ICmdCallback  {
 	

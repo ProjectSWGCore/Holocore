@@ -29,11 +29,11 @@ package intents.server;
 
 import java.util.concurrent.TimeUnit;
 
-import resources.control.Intent;
 import resources.player.Player;
 
+import com.projectswg.common.control.Intent;
+
 public class ServerManagementIntent extends Intent {
-	public static final String TYPE = "ServerManagementIntent";
 	
 	private Player player;
 	private String target;
@@ -42,7 +42,6 @@ public class ServerManagementIntent extends Intent {
 	private TimeUnit timeUnit;
 	
 	public ServerManagementIntent(Player p, String target, ServerManagementEvent event) {
-		super(TYPE);
 		this.player = p;
 		this.target = target;
 		this.event = event;
@@ -54,11 +53,25 @@ public class ServerManagementIntent extends Intent {
 		this.timeUnit = timeUnit;
 	}
 	
-	public long getTime() { return time; }
-	public TimeUnit getTimeUnit() { return timeUnit; }
-	public Player getPlayer() { return player; }
-	public String getTarget() { return target; }
-	public ServerManagementEvent getEvent() { return event; }
+	public long getTime() {
+		return time;
+	}
+	
+	public TimeUnit getTimeUnit() {
+		return timeUnit;
+	}
+	
+	public Player getPlayer() {
+		return player;
+	}
+	
+	public String getTarget() {
+		return target;
+	}
+	
+	public ServerManagementEvent getEvent() {
+		return event;
+	}
 	
 	public enum ServerManagementEvent {
 		LOCK,
@@ -68,4 +81,5 @@ public class ServerManagementIntent extends Intent {
 		BAN,
 		UNBAN
 	}
+	
 }

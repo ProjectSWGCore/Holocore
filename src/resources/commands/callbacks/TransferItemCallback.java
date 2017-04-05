@@ -30,13 +30,14 @@ package resources.commands.callbacks;
 
 import intents.chat.ChatBroadcastIntent;
 import resources.commands.ICmdCallback;
-import resources.control.Assert;
 import resources.objects.GameObjectType;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.weapon.WeaponObject;
 import resources.player.Player;
 import services.galaxy.GalacticManager;
+
+import com.projectswg.common.debug.Assert;
 
 /**
  * This callback is used for all three kinds of transfer commands. The commands

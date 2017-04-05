@@ -27,6 +27,10 @@
 ***********************************************************************************/
 package services.spawn;
 
+import intents.object.DestroyObjectIntent;
+import intents.object.ObjectCreatedIntent;
+import intents.server.ConfigChangedIntent;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -35,15 +39,11 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import intents.object.DestroyObjectIntent;
-import intents.object.ObjectCreatedIntent;
-import intents.server.ConfigChangedIntent;
 import resources.Location;
 import resources.PvpFlag;
 import resources.Terrain;
 import resources.config.ConfigFile;
 import resources.containers.ContainerPermissionsType;
-import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.building.BuildingObject;
 import resources.objects.creature.CreatureDifficulty;
@@ -51,15 +51,18 @@ import resources.objects.creature.CreatureObject;
 import resources.objects.custom.AIBehavior;
 import resources.objects.custom.DefaultAIObject;
 import resources.objects.tangible.OptionFlag;
+import resources.server_info.DataManager;
 import resources.server_info.Log;
-import resources.server_info.RelationalDatabase;
-import resources.server_info.RelationalServerFactory;
 import resources.server_info.StandardLog;
 import resources.spawn.Spawner;
 import resources.spawn.SpawnerType;
 import services.objects.ObjectCreator;
 import services.objects.ObjectManager;
 import utilities.ThreadUtilities;
+
+import com.projectswg.common.control.Service;
+import com.projectswg.common.info.RelationalDatabase;
+import com.projectswg.common.info.RelationalServerFactory;
 
 public final class SpawnerService extends Service {
 	
@@ -88,7 +91,7 @@ public final class SpawnerService extends Service {
 	
 	@Override
 	public boolean initialize() {
-		if(getConfig(ConfigFile.FEATURES).getBoolean("SPAWN-EGGS-ENABLED", true))
+		if(DataManager.getConfig(ConfigFile.FEATURES).getBoolean("SPAWN-EGGS-ENABLED", true))
 			loadSpawners();
 		
 		return super.initialize();

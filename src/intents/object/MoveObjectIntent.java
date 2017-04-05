@@ -28,12 +28,11 @@
 package intents.object;
 
 import resources.Location;
-import resources.control.Intent;
 import resources.objects.SWGObject;
 
+import com.projectswg.common.control.Intent;
+
 public class MoveObjectIntent extends Intent {
-	
-	public static final String TYPE = "MoveObjectIntent";
 	
 	private SWGObject object;
 	private SWGObject parent;
@@ -42,7 +41,6 @@ public class MoveObjectIntent extends Intent {
 	private int updateCounter;
 	
 	public MoveObjectIntent(SWGObject object, Location newLocation, double speed, int updateCounter) {
-		super(TYPE);
 		this.object = object;
 		this.parent = null;
 		this.newLocation = newLocation;
@@ -51,7 +49,6 @@ public class MoveObjectIntent extends Intent {
 	}
 	
 	public MoveObjectIntent(SWGObject object, SWGObject parent, Location newLocation, double speed, int updateCounter) {
-		super(TYPE);
 		this.object = object;
 		this.parent = parent;
 		this.newLocation = newLocation;

@@ -27,19 +27,16 @@
 ***********************************************************************************/
 package intents.network;
 
-import resources.control.Intent;
 import resources.network.DisconnectReason;
 
+import com.projectswg.common.control.Intent;
 
 public class CloseConnectionIntent extends Intent {
-	
-	public static final String TYPE = "CloseConnectionIntent";
 	
 	private long networkId;
 	private DisconnectReason reason;
 	
 	public CloseConnectionIntent(long networkId, DisconnectReason reason) {
-		super(TYPE);
 		setNetworkId(networkId);
 		setDisconnectReason(reason);
 	}

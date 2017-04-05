@@ -27,20 +27,20 @@
 ***********************************************************************************/
 package resources.collections;
 
-import resources.encodables.Encodable;
-import resources.network.NetBuffer;
-import resources.objects.SWGObject;
-import resources.server_info.Log;
-import resources.server_info.SynchronizedMap;
-import utilities.Encoder;
-import utilities.Encoder.StringType;
-
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import network.packets.Packet;
+import resources.encodables.Encodable;
+import resources.network.NetBuffer;
+import resources.objects.SWGObject;
+import resources.server_info.Log;
+import utilities.Encoder;
+import utilities.Encoder.StringType;
+
+import com.projectswg.common.concurrency.SynchronizedMap;
 
 public class SWGMap<K, V> extends SynchronizedMap<K, V> implements Encodable {
 	

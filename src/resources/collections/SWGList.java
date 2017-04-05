@@ -29,12 +29,10 @@ package resources.collections;
 
 import network.packets.Packet;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
-import resources.control.Assert;
 import resources.encodables.Encodable;
 import resources.network.NetBuffer;
 import resources.objects.SWGObject;
 import resources.server_info.Log;
-import resources.server_info.SynchronizedList;
 import utilities.Encoder;
 import utilities.Encoder.StringType;
 
@@ -44,6 +42,9 @@ import java.util.AbstractList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import com.projectswg.common.concurrency.SynchronizedList;
+import com.projectswg.common.debug.Assert;
 
 /**
  * Supports a list of elements which automatically sends data as a delta when changed for baselines.

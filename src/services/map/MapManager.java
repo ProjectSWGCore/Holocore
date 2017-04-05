@@ -29,16 +29,6 @@ package services.map;
 
 import intents.network.GalacticPacketIntent;
 import intents.object.ObjectCreatedIntent;
-import network.packets.Packet;
-import network.packets.swg.SWGPacket;
-import network.packets.swg.zone.spatial.GetMapLocationsMessage;
-import network.packets.swg.zone.spatial.GetMapLocationsResponseMessage;
-import resources.client_info.ClientFactory;
-import resources.client_info.ServerFactory;
-import resources.client_info.visitors.DatatableData;
-import resources.control.Manager;
-import resources.objects.SWGObject;
-import resources.player.Player;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,6 +36,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import network.packets.Packet;
+import network.packets.swg.SWGPacket;
+import network.packets.swg.zone.spatial.GetMapLocationsMessage;
+import network.packets.swg.zone.spatial.GetMapLocationsResponseMessage;
+import resources.client_info.ClientFactory;
+import resources.client_info.ServerFactory;
+import resources.client_info.visitors.DatatableData;
+import resources.objects.SWGObject;
+import resources.player.Player;
+
+import com.projectswg.common.control.Manager;
+import com.sun.prism.PhongMaterial.MapType;
 
 public class MapManager extends Manager {
 	

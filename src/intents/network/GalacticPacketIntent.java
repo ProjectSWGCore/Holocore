@@ -33,13 +33,10 @@ import network.packets.Packet;
 
 public class GalacticPacketIntent extends GalacticIntent {
 	
-	public static final String TYPE = "GalacticPacketIntent";
-	
 	private Packet packet;
 	private Player player;
 	
 	public GalacticPacketIntent(Packet packet, Player player) {
-		super(TYPE);
 		setPacket(packet);
 		setPlayer(player);
 	}

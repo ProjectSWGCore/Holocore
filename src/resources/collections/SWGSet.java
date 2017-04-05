@@ -27,17 +27,6 @@
 ***********************************************************************************/
 package resources.collections;
 
-import network.packets.Packet;
-import network.packets.swg.zone.baselines.Baseline;
-import resources.encodables.Encodable;
-import resources.network.NetBuffer;
-import resources.objects.SWGObject;
-import resources.server_info.Log;
-import resources.server_info.SynchronizedList;
-import resources.server_info.SynchronizedSet;
-import utilities.Encoder;
-import utilities.Encoder.StringType;
-
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.AbstractSet;
@@ -46,6 +35,18 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import network.packets.Packet;
+import network.packets.swg.zone.baselines.Baseline;
+import resources.encodables.Encodable;
+import resources.network.NetBuffer;
+import resources.objects.SWGObject;
+import resources.server_info.Log;
+import utilities.Encoder;
+import utilities.Encoder.StringType;
+
+import com.projectswg.common.concurrency.SynchronizedList;
+import com.projectswg.common.concurrency.SynchronizedSet;
 
 public class SWGSet<E> extends SynchronizedSet<E> implements Encodable {
 	

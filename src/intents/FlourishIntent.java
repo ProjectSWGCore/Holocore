@@ -27,30 +27,24 @@
 ***********************************************************************************/
 package intents;
 
-import resources.control.Intent;
 import resources.player.Player;
 
-/**
- *
- * @author Mads
- */
+import com.projectswg.common.control.Intent;
+
 public class FlourishIntent extends Intent {
-	
-	public static final String TYPE = "FlourishIntent";
 	
 	private final Player performer;
 	private final String flourishName;
-
+	
 	public FlourishIntent(Player performer, String flourishName) {
-		super(TYPE);
 		this.performer = performer;
 		this.flourishName = flourishName;
 	}
-
+	
 	public Player getPerformer() {
 		return performer;
 	}
-
+	
 	public String getFlourishName() {
 		return flourishName;
 	}

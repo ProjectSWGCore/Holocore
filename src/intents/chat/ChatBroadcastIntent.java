@@ -27,14 +27,13 @@
 ***********************************************************************************/
 package intents.chat;
 
+import com.projectswg.common.control.Intent;
+
 import resources.Terrain;
-import resources.control.Intent;
 import resources.encodables.ProsePackage;
 import resources.player.Player;
 
 public class ChatBroadcastIntent extends Intent {
-	
-	public static final String TYPE = "ChatBroadcastIntent";
 	
 	private BroadcastType broadcastType;
 	private Player broadcaster;
@@ -43,7 +42,6 @@ public class ChatBroadcastIntent extends Intent {
 	private ProsePackage prose;
 	
 	public ChatBroadcastIntent(String message, Player broadcaster, Terrain terrain, BroadcastType type) {
-		super(TYPE);
 		this.message = message;
 		this.broadcastType = type;
 		this.broadcaster = broadcaster;

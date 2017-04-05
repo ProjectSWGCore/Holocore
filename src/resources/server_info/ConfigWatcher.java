@@ -33,106 +33,95 @@ import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardWatchEventKinds;
 import java.nio.file.WatchEvent;
-import java.nio.file.WatchEvent.Kind;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicBoolean;
+
+import com.projectswg.common.concurrency.PswgBasicThread;
+import com.projectswg.common.info.Config;
 
 import resources.config.ConfigFile;
-import static java.nio.file.StandardWatchEventKinds.OVERFLOW;
-import static java.nio.file.StandardWatchEventKinds.ENTRY_MODIFY;
 
 public final class ConfigWatcher {
-
-	private final WatchService watcher;
-	private final Map<ConfigFile, Config> configMap;
-	private final Path directory;
-	private ExecutorService executor;
-	private boolean stop;
+	
 	private static final String CFGPATH = "cfg/";
 	
-	public ConfigWatcher(Map<ConfigFile, Config> configMap) throws IOException {
+	private final Map<ConfigFile, Config> configMap;
+	private final Path directory;
+	private final PswgBasicThread watcherThread;
+	private final AtomicBoolean running;
+	
+	private WatchService watcher;
+	
+	public ConfigWatcher(Map<ConfigFile, Config> configMap) {
 		this.configMap = configMap;
-		watcher = FileSystems.getDefault().newWatchService();
-		directory = Paths.get(CFGPATH);
-
-		directory.register(watcher, ENTRY_MODIFY);
+		this.directory = Paths.get(CFGPATH);
+		this.watcherThread = new PswgBasicThread("config-watcher", () -> watch());
+		this.running = new AtomicBoolean(false);
+		
+		try {
+			this.watcher = FileSystems.getDefault().newWatchService();
+			directory.register(watcher, StandardWatchEventKinds.ENTRY_MODIFY);
+		} catch (IOException e) {
+			this.watcher = null;
+		}
+		watcherThread.setWaitForTermination(false);
 	}
-
-	@SuppressWarnings("unchecked")
+	
 	public void start() {
-		executor = Executors.newSingleThreadExecutor();
-		executor.execute(() -> {
-			WatchKey key;
-			Kind<?> eventKind;
-			WatchEvent<Path> ev;
-			Path filename;
-			ConfigFile cfgFile;
-			Config cfg;
-			
-			while (!stop) {
-				try {
-					key = watcher.take(); // We're stuck here until a change is made.
-					if (key == null)
-						break;
-				} catch (Exception e) {
+		watcherThread.start();
+	}
+	
+	public void stop() {
+		watcherThread.stop();
+		watcherThread.awaitTermination(1000);
+	}
+	
+	private void watch() {
+		if (watcher == null) {
+			Log.e("WatcherService is null!");
+			return;
+		}
+		WatchKey key;
+		
+		try {
+			while (running.get()) {
+				key = watcher.take(); // We're stuck here until a change is made.
+				if (key == null)
 					break;
-				}
-	
+				
 				for (WatchEvent<?> event : key.pollEvents()) {
-					eventKind = event.kind();
-	
-					// This key is registered only
-					// for ENTRY_CREATE events,
-					// but an OVERFLOW event can
-					// occur regardless if events
-					// are lost or discarded.
-					if (eventKind == OVERFLOW) {
-						key.reset();
-						continue;
-					}
-	
-					// The context is the name of the file.
-					ev = (WatchEvent<Path>) event;
-					filename = ev.context();
-	
-					cfgFile = ConfigFile.configFileForName(CFGPATH + filename);
-					cfg = configMap.get(cfgFile);
-					
-					if(cfg == null) {
-						key.reset();
-						continue;
-					}
-					
-					Map<String, String> delta = cfg.load();
-	
-					for (Entry<String, String> entry : delta.entrySet()) {
-						String entryKey = entry.getKey();
-	
-						new ConfigChangedIntent(cfgFile, entryKey, entry.getValue(),
-								cfg.getString(entryKey, null)).broadcast();
-					}
-	
-					// We want to receive further watch
-					// events from this key - reset it.
+					processEvents(event);
 					key.reset();
 				}
 			}
+		} catch (Exception e) {
+			// Ignored
+		} finally {
 			try {
 				watcher.close();
 			} catch (Exception e) {
 				Log.e(e);
 			}
-		});
+		}
 	}
 	
-	public void stop() {
-		stop = true;
-		if (executor != null)
-			executor.shutdownNow();
+	private void processEvents(WatchEvent<?> event) {
+		if (event.kind() == StandardWatchEventKinds.OVERFLOW)
+			return;
+		
+		@SuppressWarnings("unchecked")
+		ConfigFile cfgFile = ConfigFile.configFileForName(CFGPATH + ((WatchEvent<Path>) event).context());
+		Config cfg = configMap.get(cfgFile);
+		if (cfg == null)
+			return;
+		
+		for (Entry<String, String> entry : cfg.load().entrySet()) {
+			new ConfigChangedIntent(cfgFile, entry.getKey(), entry.getValue(), cfg.getString(entry.getKey(), null)).broadcast();
+		}
 	}
 }

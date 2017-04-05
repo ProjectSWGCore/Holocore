@@ -27,19 +27,17 @@
 ***********************************************************************************/
 package intents;
 
-import resources.control.Intent;
+import com.projectswg.common.control.Intent;
+
 import resources.player.Player;
 import resources.player.PlayerEvent;
 
 public class PlayerEventIntent extends Intent {
 	
-	public static final String TYPE = "PlayerEventIntent";
-	
 	private Player player;
 	private PlayerEvent event;
 	
 	public PlayerEventIntent(Player p, PlayerEvent event) {
-		super(TYPE);
 		setPlayer(p);
 		setEvent(event);
 	}

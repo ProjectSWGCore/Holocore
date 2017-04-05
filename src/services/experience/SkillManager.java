@@ -27,22 +27,24 @@
 ***********************************************************************************/
 package services.experience;
 
+import intents.SkillModIntent;
+import intents.experience.GrantSkillIntent;
+import intents.network.GalacticPacketIntent;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import intents.SkillModIntent;
-import intents.experience.GrantSkillIntent;
-import intents.network.GalacticPacketIntent;
 import network.packets.Packet;
 import network.packets.swg.zone.object_controller.ChangeRoleIconChoice;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
-import resources.control.Assert;
-import resources.control.Manager;
 import resources.objects.creature.CreatureObject;
 import resources.server_info.Log;
+
+import com.projectswg.common.control.Manager;
+import com.projectswg.common.debug.Assert;
 
 /**
  *

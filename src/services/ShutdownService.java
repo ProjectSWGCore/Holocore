@@ -27,6 +27,10 @@
 ***********************************************************************************/
 package services;
 
+import intents.chat.ChatBroadcastIntent;
+import intents.chat.ChatBroadcastIntent.BroadcastType;
+import intents.server.ServerStatusIntent;
+
 import java.util.Locale;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -34,12 +38,10 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
-import intents.chat.ChatBroadcastIntent;
-import intents.chat.ChatBroadcastIntent.BroadcastType;
-import intents.server.ServerStatusIntent;
 import resources.control.ServerStatus;
-import resources.control.Service;
 import utilities.ThreadUtilities;
+
+import com.projectswg.common.control.Service;
 
 public class ShutdownService extends Service {
 	

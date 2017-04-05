@@ -26,20 +26,6 @@
  ******************************************************************************/
 package resources.objects.group;
 
-import network.packets.Packet;
-import network.packets.swg.zone.baselines.Baseline;
-import resources.Location;
-import resources.Terrain;
-import resources.collections.SWGList;
-import resources.control.Assert;
-import resources.encodables.Encodable;
-import resources.network.BaselineBuilder;
-import resources.objects.SWGObject;
-import resources.objects.creature.CreatureObject;
-import resources.player.Player;
-import resources.server_info.SynchronizedMap;
-import utilities.Encoder;
-
 import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -47,6 +33,21 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
+
+import network.packets.Packet;
+import network.packets.swg.zone.baselines.Baseline;
+import resources.Location;
+import resources.Terrain;
+import resources.collections.SWGList;
+import resources.encodables.Encodable;
+import resources.network.BaselineBuilder;
+import resources.objects.SWGObject;
+import resources.objects.creature.CreatureObject;
+import resources.player.Player;
+import utilities.Encoder;
+
+import com.projectswg.common.concurrency.SynchronizedMap;
+import com.projectswg.common.debug.Assert;
 
 public class GroupObject extends SWGObject {
 	

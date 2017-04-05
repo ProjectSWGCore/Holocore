@@ -28,26 +28,23 @@
 package intents.object;
 
 import resources.Location;
-import resources.control.Intent;
 import resources.objects.SWGObject;
 
+import com.projectswg.common.control.Intent;
+
 public class ObjectTeleportIntent extends Intent {
-	
-	public static final String TYPE = "ObjectTeleportIntent";
 	
 	private SWGObject object;
 	private SWGObject parent;
 	private Location newLocation;
 	
 	public ObjectTeleportIntent(SWGObject object, Location newLocation) {
-		super(TYPE);
 		this.object = object;
 		this.parent = null;
 		this.newLocation = newLocation;
 	}
 	
 	public ObjectTeleportIntent(SWGObject object, SWGObject parent, Location newLocation) {
-		super(TYPE);
 		this.object = object;
 		this.parent = parent;
 		this.newLocation = newLocation;
@@ -56,7 +53,7 @@ public class ObjectTeleportIntent extends Intent {
 	public SWGObject getObject() {
 		return object;
 	}
-
+	
 	public void setObject(SWGObject object) {
 		this.object = object;
 	}
@@ -68,13 +65,13 @@ public class ObjectTeleportIntent extends Intent {
 	public void setParent(SWGObject parent) {
 		this.parent = parent;
 	}
-
+	
 	public Location getNewLocation() {
 		return newLocation;
 	}
-
+	
 	public void setNewLocation(Location newLocation) {
 		this.newLocation = newLocation;
-	}	
-
+	}
+	
 }

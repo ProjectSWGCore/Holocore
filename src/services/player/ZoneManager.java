@@ -31,6 +31,10 @@ import intents.GalacticIntent;
 import intents.PlayerEventIntent;
 import intents.chat.ChatBroadcastIntent;
 import intents.network.GalacticPacketIntent;
+
+import java.io.File;
+import java.io.IOException;
+
 import network.packets.Packet;
 import network.packets.swg.login.AccountFeatureBits;
 import network.packets.swg.login.ClientIdMsg;
@@ -50,18 +54,17 @@ import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 
 import resources.config.ConfigFile;
-import resources.control.Manager;
 import resources.objects.creature.CreatureMood;
 import resources.objects.player.PlayerObject;
 import resources.objects.waypoint.WaypointObject;
 import resources.objects.waypoint.WaypointObject.WaypointColor;
 import resources.player.Player;
-import resources.player.PlayerEvent;
 import resources.player.Player.PlayerServer;
+import resources.player.PlayerEvent;
+import resources.server_info.DataManager;
 import resources.server_info.Log;
 
-import java.io.File;
-import java.io.IOException;
+import com.projectswg.common.control.Manager;
 
 public class ZoneManager extends Manager {
 	
@@ -155,7 +158,7 @@ public class ZoneManager extends Manager {
 	}
 	
 	private void sendMessageOfTheDay(Player player) {
-		String message = getConfig(ConfigFile.FEATURES).getString("FIRST-ZONE-MESSAGE", "");
+		String message = DataManager.getConfig(ConfigFile.FEATURES).getString("FIRST-ZONE-MESSAGE", "");
 		
 		if(!message.isEmpty())	// If the message isn't nothing
 			new ChatBroadcastIntent(player, message).broadcast();	// Send it

@@ -44,31 +44,33 @@ import network.packets.Packet;
 import network.packets.swg.login.creation.ClientCreateCharacter;
 import network.packets.swg.login.creation.ClientVerifyAndLockNameRequest;
 import network.packets.swg.login.creation.ClientVerifyAndLockNameResponse;
+import network.packets.swg.login.creation.ClientVerifyAndLockNameResponse.ErrorMessage;
 import network.packets.swg.login.creation.CreateCharacterFailure;
+import network.packets.swg.login.creation.CreateCharacterFailure.NameFailureReason;
 import network.packets.swg.login.creation.CreateCharacterSuccess;
 import network.packets.swg.login.creation.RandomNameRequest;
 import network.packets.swg.login.creation.RandomNameResponse;
-import network.packets.swg.login.creation.ClientVerifyAndLockNameResponse.ErrorMessage;
-import network.packets.swg.login.creation.CreateCharacterFailure.NameFailureReason;
 import resources.Race;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.ProfTemplateData;
 import resources.config.ConfigFile;
-import resources.control.Assert;
-import resources.control.Service;
 import resources.objects.creature.CreatureObject;
 import resources.player.AccessLevel;
 import resources.player.Player;
 import resources.player.PlayerEvent;
 import resources.player.PlayerState;
+import resources.server_info.DataManager;
 import resources.server_info.Log;
-import resources.server_info.RelationalDatabase;
-import resources.server_info.RelationalServerFactory;
 import resources.zone.NameFilter;
 import services.objects.ObjectManager;
 import services.player.TerrainZoneInsertion.SpawnInformation;
 import services.player.creation.CharacterCreation;
 import utilities.namegen.SWGNameGenerator;
+
+import com.projectswg.common.control.Service;
+import com.projectswg.common.debug.Assert;
+import com.projectswg.common.info.RelationalDatabase;
+import com.projectswg.common.info.RelationalServerFactory;
 
 public class CharacterCreationService extends Service {
 	
@@ -115,7 +117,7 @@ public class CharacterCreationService extends Service {
 	
 	@Override
 	public boolean start() {
-		creationRestriction.setCreationsPerPeriod(getConfig(ConfigFile.PRIMARY).getInt("GALAXY-MAX-CHARACTERS-PER-PERIOD", 2));
+		creationRestriction.setCreationsPerPeriod(DataManager.getConfig(ConfigFile.PRIMARY).getInt("GALAXY-MAX-CHARACTERS-PER-PERIOD", 2));
 		return super.start();
 	}
 	
@@ -180,7 +182,7 @@ public class CharacterCreationService extends Service {
 	private void handleApproveNameRequest(PlayerManager playerMgr, Player player, ClientVerifyAndLockNameRequest request) {
 		String name = request.getName();
 		ErrorMessage err = getNameValidity(name, player.getAccessLevel() != AccessLevel.PLAYER);
-		int max = getConfig(ConfigFile.PRIMARY).getInt("GALAXY-MAX-CHARACTERS", 0);
+		int max = DataManager.getConfig(ConfigFile.PRIMARY).getInt("GALAXY-MAX-CHARACTERS", 0);
 		if (max != 0 && getCharacterCount(player.getUserId()) >= max)
 			err = ErrorMessage.SERVER_CHARACTER_CREATION_MAX_CHARS;
 		if (err == ErrorMessage.NAME_APPROVED_MODIFIED)
@@ -213,7 +215,7 @@ public class CharacterCreationService extends Service {
 			return null;
 		}
 		// Too many characters
-		int max = getConfig(ConfigFile.PRIMARY).getInt("GALAXY-MAX-CHARACTERS", 0);
+		int max = DataManager.getConfig(ConfigFile.PRIMARY).getInt("GALAXY-MAX-CHARACTERS", 0);
 		if (max != 0 && getCharacterCount(player.getUserId()) >= max) {
 			sendCharCreationFailure(player, create, ErrorMessage.SERVER_CHARACTER_CREATION_MAX_CHARS);
 			return null;
@@ -325,7 +327,7 @@ public class CharacterCreationService extends Service {
 	}
 	
 	private CreatureObject createCharacter(ObjectManager objManager, Player player, ClientCreateCharacter create) {
-		String spawnLocation = getConfig(ConfigFile.PRIMARY).getString("PRIMARY-SPAWN-LOCATION", "tat_moseisley");
+		String spawnLocation = DataManager.getConfig(ConfigFile.PRIMARY).getString("PRIMARY-SPAWN-LOCATION", "tat_moseisley");
 		SpawnInformation info = insertion.generateSpawnLocation(spawnLocation);
 		if (info == null) {
 			Log.e("Failed to get spawn information for location: " + spawnLocation);

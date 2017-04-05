@@ -27,36 +27,31 @@
 ***********************************************************************************/
 package intents;
 
-import resources.control.Intent;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 
-/**
- *
- * @author Mads
- */
+import com.projectswg.common.control.Intent;
+
 public class WatchIntent extends Intent {
-	public static final String TYPE = "WatchIntent";
 	
 	private final CreatureObject actor;
 	private final SWGObject target;
 	private final boolean startWatch;
 	
 	public WatchIntent(CreatureObject actor, SWGObject target, boolean startWatch) {
-		super(TYPE);
 		this.actor = actor;
 		this.target = target;
 		this.startWatch = startWatch;
 	}
-
+	
 	public CreatureObject getActor() {
 		return actor;
 	}
-
+	
 	public SWGObject getTarget() {
 		return target;
 	}
-
+	
 	public boolean isStartWatch() {
 		return startWatch;
 	}

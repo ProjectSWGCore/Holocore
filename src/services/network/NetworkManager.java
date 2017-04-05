@@ -27,7 +27,7 @@
 ***********************************************************************************/
 package services.network;
 
-import resources.control.Manager;
+import com.projectswg.common.control.Manager;
 
 public class NetworkManager extends Manager {
 	

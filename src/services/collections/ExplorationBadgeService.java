@@ -28,6 +28,9 @@
 ***********************************************************************************/
 package services.collections;
 
+import intents.GrantBadgeIntent;
+import intents.player.PlayerTransformedIntent;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Locale;
@@ -35,14 +38,13 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 
-import intents.GrantBadgeIntent;
-import intents.player.PlayerTransformedIntent;
 import resources.Point3D;
-import resources.control.Service;
 import resources.objects.creature.CreatureObject;
 import resources.server_info.Log;
-import resources.server_info.RelationalServerData;
-import resources.server_info.RelationalServerFactory;
+
+import com.projectswg.common.control.Service;
+import com.projectswg.common.info.RelationalServerData;
+import com.projectswg.common.info.RelationalServerFactory;
 
 public class ExplorationBadgeService extends Service {
 

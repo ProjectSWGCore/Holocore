@@ -27,21 +27,19 @@
  ***********************************************************************************/
 package intents.radial;
 
-import resources.control.Intent;
 import resources.objects.SWGObject;
 import resources.player.Player;
 import resources.radial.RadialItem;
 
+import com.projectswg.common.control.Intent;
+
 public class RadialSelectionIntent extends Intent {
-	
-	public static final String TYPE = "RadialSelectionIntent";
 	
 	private Player player;
 	private SWGObject target;
 	private RadialItem selection;
 	
 	public RadialSelectionIntent(Player player, SWGObject target, RadialItem selection) {
-		super(TYPE);
 		setPlayer(player);
 		setTarget(target);
 		setSelection(selection);

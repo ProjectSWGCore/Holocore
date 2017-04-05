@@ -27,147 +27,115 @@
  ***********************************************************************************/
 package resources.server_info;
 
-import intents.server.ConfigChangedIntent;
-
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicBoolean;
+
+import com.projectswg.common.concurrency.SynchronizedMap;
+import com.projectswg.common.debug.Assert;
+import com.projectswg.common.info.Config;
+import com.projectswg.common.info.RelationalServerFactory;
 
 import resources.config.ConfigFile;
-import resources.control.Intent;
-import resources.control.IntentManager;
-import resources.control.IntentReceiver;
 
-public class DataManager implements IntentReceiver {
-
+public class DataManager {
+	
 	private static final Object instanceLock = new Object();
-	private static final String ENABLE_LOGGING = "ENABLE-LOGGING";
 	private static DataManager instance = null;
-
-	private Map<ConfigFile, Config> config;
-	private List<ConfigWatcher> watchers;
-	private boolean initialized;
-
+	
+	private final Map<ConfigFile, Config> configs;
+	private final ConfigWatcher watcher;
+	private final AtomicBoolean initialized;
+	
 	private DataManager() {
-		initialized = false;
-		IntentManager.getInstance().registerForIntent(ConfigChangedIntent.TYPE, this);
-		watchers = new ArrayList<>();
-	}
-
-	private synchronized void initialize() {
-		initializeConfig();
-		if (getConfig(ConfigFile.PRIMARY).getBoolean(ENABLE_LOGGING, true))
-			Log.start();
-		initialized = true;
+		this.configs = new SynchronizedMap<>();
+		this.watcher = new ConfigWatcher(configs);
+		this.initialized = new AtomicBoolean(false);
 	}
 	
-	private synchronized void shutdown() {
-		for (ConfigWatcher watcher : watchers)
-			watcher.stop();
+	private void initializeImpl() {
+		if (initialized.getAndSet(true))
+			return;
+		initializeConfig();
+		RelationalServerFactory.setBasePath("serverdata/");
 	}
-
-	private synchronized void initializeConfig() {
-		config = new ConcurrentHashMap<ConfigFile, Config>();
+	
+	private void terminateImpl() {
+		if (!initialized.getAndSet(false))
+			return;
+		watcher.stop();
+		configs.clear();
+	}
+	
+	private Config getConfigImpl(ConfigFile file) {
+		return configs.get(file);
+	}
+	
+	private void initializeConfig() {
+		Assert.test(configs.isEmpty(), "Internal error in DataManager!");
 		for (ConfigFile file : ConfigFile.values()) {
 			File f = new File(file.getFilename());
-			try {
-				if (!createFilesAndDirectories(f)) {
-					Log.w("ConfigFile could not be loaded! " + file.getFilename());
-				} else {
-					config.put(file, new Config(f));
-				}
-
-				ConfigWatcher watcher = new ConfigWatcher(config);
-				watcher.start();
-				watchers.add(watcher);
-			} catch (IOException e) {
-				Log.e(e);
+			if (!createConfig(f)) {
+				Log.w("ConfigFile could not be loaded! " + file.getFilename());
+			} else {
+				configs.put(file, new Config(f));
 			}
 		}
+		watcher.start();
 	}
 	
-	private boolean createFilesAndDirectories(File file) {
+	private boolean createConfig(File file) {
 		if (file.exists())
-			return true;
+			return file.isFile();
 		try {
-			String parentName = file.getParent();
-			if (parentName != null && !parentName.isEmpty()) {
-				File parent = new File(file.getParent());
-				if (!parent.exists() && !parent.mkdirs())
-					Log.e("Failed to create parent directories for ODB: " + file.getCanonicalPath());
+			File parent = file.getParentFile();
+			if (parent != null && !parent.exists() && !parent.mkdirs()) {
+				Log.e("Failed to create parent directories for config: " + file.getCanonicalPath());
+				return false;
 			}
-		} catch (IOException e) {
-			Log.e(e);
-		}
-		try {
-			if (!file.createNewFile())
-				Log.e("Failed to create new ODB: " + file.getCanonicalPath());
+			if (!file.createNewFile()) {
+				Log.e("Failed to create new config: " + file.getCanonicalPath());
+				return false;
+			}
 		} catch (IOException e) {
 			Log.e(e);
 		}
 		return file.exists();
 	}
-
+	
 	/**
-	 * Gets the config object associated with a certain file, or NULL if the
-	 * file failed to load on startup
+	 * Gets the config object associated with a certain file, or NULL if the file failed to load on startup
 	 * 
-	 * @param file
-	 *            the file to get the config for
-	 * @return the config object associated with the file, or NULL if the config
-	 *         failed to load
+	 * @param file the file to get the config for
+	 * @return the config object associated with the file, or NULL if the config failed to load
 	 */
-	public synchronized final Config getConfig(ConfigFile file) {
-		Config c = config.get(file);
-		if (c == null)
-			return new Config(file.getFilename());
-		return c;
+	public static Config getConfig(ConfigFile file) {
+		return getInstance().getConfigImpl(file);
 	}
-
-	public synchronized final boolean isInitialized() {
-		return initialized;
-	}
-
-	public synchronized static final DataManager getInstance() {
+	
+	public static void initialize() {
 		synchronized (instanceLock) {
-			if (instance == null) {
-				instance = new DataManager();
-				instance.initialize();
-			}
+			if (instance != null)
+				return;
+			instance = new DataManager();
+			instance.initializeImpl();
+		}
+	}
+	
+	public static void terminate() {
+		synchronized (instanceLock) {
+			if (instance == null)
+				return;
+			instance.terminateImpl();
+			instance = null;
+		}
+	}
+	
+	private static final DataManager getInstance() {
+		synchronized (instanceLock) {
 			return instance;
 		}
 	}
 	
-	public synchronized static final void terminate() {
-		synchronized (instanceLock) {
-			if (instance != null) {
-				instance.shutdown();
-				instance = null;
-			}
-		}
-	}
-
-	@Override
-	public void onIntentReceived(Intent i) {
-		if (!(i instanceof ConfigChangedIntent))
-			return;
-		ConfigChangedIntent cci = (ConfigChangedIntent) i;
-		if(!cci.getKey().equals(ENABLE_LOGGING))
-			return;
-		boolean log = Boolean.valueOf(cci.getNewValue());
-		boolean oldValue = Boolean.valueOf(cci.getOldValue());
-		
-		// If the value hasn't changed, then do nothing.
-		if(log == oldValue)
-			return;
-
-		if (log)
-			Log.start();
-		else
-			Log.stop();
-	}
-
 }

@@ -46,13 +46,13 @@ import network.packets.swg.ErrorMessage;
 import network.packets.swg.login.CharacterCreationDisabled;
 import network.packets.swg.login.EnumerateCharacterId;
 import network.packets.swg.login.EnumerateCharacterId.SWGCharacter;
-import network.packets.swg.login.creation.DeleteCharacterRequest;
-import network.packets.swg.login.creation.DeleteCharacterResponse;
 import network.packets.swg.login.LoginClientId;
 import network.packets.swg.login.LoginClientToken;
 import network.packets.swg.login.LoginClusterStatus;
 import network.packets.swg.login.LoginEnumCluster;
 import network.packets.swg.login.LoginIncorrectClientId;
+import network.packets.swg.login.creation.DeleteCharacterRequest;
+import network.packets.swg.login.creation.DeleteCharacterResponse;
 import network.packets.swg.zone.GameServerLagResponse;
 import network.packets.swg.zone.LagRequest;
 import network.packets.swg.zone.ServerNowEpochTime;
@@ -60,19 +60,21 @@ import resources.Galaxy;
 import resources.Race;
 import resources.common.BCrypt;
 import resources.config.ConfigFile;
-import resources.control.Assert;
-import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.player.AccessLevel;
 import resources.player.Player;
-import resources.player.PlayerState;
 import resources.player.Player.PlayerServer;
-import resources.server_info.Config;
+import resources.player.PlayerState;
+import resources.server_info.DataManager;
 import resources.server_info.Log;
-import resources.server_info.RelationalDatabase;
-import resources.server_info.RelationalServerFactory;
 import services.CoreManager;
+
+import com.projectswg.common.control.Service;
+import com.projectswg.common.debug.Assert;
+import com.projectswg.common.info.Config;
+import com.projectswg.common.info.RelationalDatabase;
+import com.projectswg.common.info.RelationalServerFactory;
 
 public class LoginService extends Service {
 	
@@ -137,7 +139,7 @@ public class LoginService extends Service {
 	}
 	
 	private String getServerString() {
-		Config c = getConfig(ConfigFile.NETWORK);
+		Config c = DataManager.getConfig(ConfigFile.NETWORK);
 		String name = c.getString("LOGIN-SERVER-NAME", "LoginServer");
 		int id = c.getInt("LOGIN-SERVER-ID", 1);
 		return name + ":" + id;
@@ -169,7 +171,7 @@ public class LoginService extends Service {
 		Assert.test(player.getPlayerServer() == PlayerServer.NONE);
 		player.setPlayerState(PlayerState.LOGGING_IN);
 		player.setPlayerServer(PlayerServer.LOGIN);
-		final boolean doClientCheck = getConfig(ConfigFile.NETWORK).getBoolean("LOGIN-VERSION-CHECKS", true);
+		final boolean doClientCheck = DataManager.getConfig(ConfigFile.NETWORK).getBoolean("LOGIN-VERSION-CHECKS", true);
 		if (!id.getVersion().equals(REQUIRED_VERSION) && doClientCheck) {
 			onLoginClientVersionError(player, id);
 			return;
@@ -259,7 +261,7 @@ public class LoginService extends Service {
 			cluster.addGalaxy(g);
 			clusterStatus.addGalaxy(g);
 		}
-		cluster.setMaxCharacters(getConfig(ConfigFile.PRIMARY).getInt("GALAXY-MAX-CHARACTERS", 2));
+		cluster.setMaxCharacters(DataManager.getConfig(ConfigFile.PRIMARY).getInt("GALAXY-MAX-CHARACTERS", 2));
 		player.sendPacket(new ServerNowEpochTime((int)(System.currentTimeMillis()/1E3)));
 		player.sendPacket(token);
 		player.sendPacket(cluster);

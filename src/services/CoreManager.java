@@ -27,6 +27,11 @@
 ***********************************************************************************/
 package services;
 
+import intents.network.InboundPacketIntent;
+import intents.network.OutboundPacketIntent;
+import intents.server.ServerManagementIntent;
+import intents.server.ServerStatusIntent;
+
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
@@ -39,10 +44,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import intents.network.InboundPacketIntent;
-import intents.network.OutboundPacketIntent;
-import intents.server.ServerManagementIntent;
-import intents.server.ServerStatusIntent;
 import network.packets.Packet;
 import network.packets.swg.admin.AdminShutdownServer;
 import network.packets.swg.zone.baselines.Baseline;
@@ -51,16 +52,17 @@ import network.packets.swg.zone.object_controller.ObjectController;
 import resources.Galaxy;
 import resources.Galaxy.GalaxyStatus;
 import resources.config.ConfigFile;
-import resources.control.Manager;
 import resources.control.ServerStatus;
-import resources.server_info.Config;
+import resources.server_info.DataManager;
 import resources.server_info.Log;
 import resources.server_info.Log.LogLevel;
-import services.admin.OnlineInterfaceService;
 import services.galaxy.GalacticManager;
 import utilities.CrcDatabaseGenerator;
 import utilities.ScheduledUtilities;
 import utilities.ThreadUtilities;
+
+import com.projectswg.common.control.Manager;
+import com.projectswg.common.info.Config;
 
 public class CoreManager extends Manager {
 
@@ -69,7 +71,6 @@ public class CoreManager extends Manager {
 	private static final int GALAXY_ID = 1;
 	
 	private final ScheduledExecutorService shutdownService;
-	private final OnlineInterfaceService onlineInterfaceService;
 	private final EngineManager engineManager;
 	private final GalacticManager galacticManager;
 	private final PrintStream packetStream;
@@ -79,7 +80,7 @@ public class CoreManager extends Manager {
 	private boolean shutdownRequested;
 	
 	public CoreManager(int adminServerPort) {
-		Config c = getConfig(ConfigFile.PRIMARY);
+		Config c = DataManager.getConfig(ConfigFile.PRIMARY);
 		Log.setLogLevel(LogLevel.valueOf(c.getString("LOG-LEVEL", LogLevel.DEBUG.name())));
 		setupGalaxy(c);
 		setupCrcDatabase();
@@ -90,11 +91,9 @@ public class CoreManager extends Manager {
 		packetDebug = packetStream != null;
 		shutdownService = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("core-shutdown-service"));
 		shutdownRequested = false;
-		onlineInterfaceService = new OnlineInterfaceService();
 		engineManager = new EngineManager();
 		galacticManager = new GalacticManager();
 		
-		addChildService(onlineInterfaceService);
 		addChildService(engineManager);
 		addChildService(galacticManager);
 		

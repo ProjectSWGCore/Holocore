@@ -27,16 +27,14 @@
 ***********************************************************************************/
 package services.galaxy;
 
-import java.util.Map;
-
 import intents.network.ConnectionClosedIntent;
 import intents.network.ConnectionOpenedIntent;
 import intents.network.GalacticPacketIntent;
 import intents.network.InboundPacketIntent;
-import resources.control.Assert;
-import resources.control.Manager;
+
+import java.util.Map;
+
 import resources.player.Player;
-import resources.server_info.SynchronizedMap;
 import services.CoreManager;
 import services.chat.ChatManager;
 import services.dev.DeveloperService;
@@ -44,7 +42,11 @@ import services.galaxy.travel.TravelService;
 import services.objects.ObjectManager;
 import services.objects.UniformBoxService;
 import services.player.PlayerManager;
-import utilities.IntentChain;
+
+import com.projectswg.common.concurrency.SynchronizedMap;
+import com.projectswg.common.control.IntentChain;
+import com.projectswg.common.control.Manager;
+import com.projectswg.common.debug.Assert;
 
 public class GalacticManager extends Manager {
 	
@@ -95,9 +97,7 @@ public class GalacticManager extends Manager {
 	}
 	
 	private void handleConnectionOpenedIntent(ConnectionOpenedIntent coi){
-		IntentChain chain = new IntentChain();
-		chain.waitUntilComplete(coi);
-		prevIntentMap.put(((ConnectionOpenedIntent) coi).getNetworkId(), chain);
+		prevIntentMap.put(((ConnectionOpenedIntent) coi).getNetworkId(), new IntentChain(coi));
 	}
 	
 	private void handleConnectionClosedIntent(ConnectionClosedIntent cci){

@@ -27,6 +27,14 @@
  ***********************************************************************************/
 package services.combat;
 
+import intents.BuffIntent;
+import intents.chat.ChatBroadcastIntent;
+import intents.chat.ChatCommandIntent;
+import intents.combat.CreatureKilledIntent;
+import intents.combat.DeathblowIntent;
+import intents.object.DestroyObjectIntent;
+import intents.object.ObjectCreatedIntent;
+
 import java.awt.Color;
 import java.util.Collection;
 import java.util.HashMap;
@@ -41,13 +49,6 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
-import intents.BuffIntent;
-import intents.chat.ChatBroadcastIntent;
-import intents.chat.ChatCommandIntent;
-import intents.combat.CreatureKilledIntent;
-import intents.combat.DeathblowIntent;
-import intents.object.DestroyObjectIntent;
-import intents.object.ObjectCreatedIntent;
 import network.packets.swg.zone.PlayClientEffectObjectMessage;
 import network.packets.swg.zone.object_controller.ShowFlyText;
 import network.packets.swg.zone.object_controller.ShowFlyText.Scale;
@@ -63,7 +64,6 @@ import resources.combat.TrailLocation;
 import resources.commands.CombatCommand;
 import resources.common.CRC;
 import resources.common.RGB;
-import resources.control.Manager;
 import resources.encodables.ProsePackage;
 import resources.encodables.StringId;
 import resources.objects.SWGObject;
@@ -74,6 +74,8 @@ import resources.objects.weapon.WeaponObject;
 import resources.server_info.Log;
 import services.objects.ObjectCreator;
 import utilities.ThreadUtilities;
+
+import com.projectswg.common.control.Manager;
 
 public class CombatManager extends Manager {
 

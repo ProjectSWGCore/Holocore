@@ -32,11 +32,13 @@ import resources.Location;
 import resources.PvpFlag;
 import resources.Terrain;
 import resources.config.ConfigFile;
-import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.custom.DefaultAIObject;
 import resources.objects.tangible.TangibleObject;
+import resources.server_info.DataManager;
 import services.objects.ObjectCreator;
+
+import com.projectswg.common.control.Service;
 
 public class DeveloperService extends Service {
 	
@@ -48,7 +50,7 @@ public class DeveloperService extends Service {
 	public boolean start() {
 		setupDeveloperArea();
 		
-		if (getConfig(ConfigFile.FEATURES).getBoolean("CHARACTER-BUILDER", false))
+		if (DataManager.getConfig(ConfigFile.FEATURES).getBoolean("CHARACTER-BUILDER", false))
 			setupCharacterBuilders();
 		
 		return super.start();

@@ -36,7 +36,6 @@ import resources.HologramColour;
 import resources.collections.SWGList;
 import resources.collections.SWGMap;
 import resources.common.CRC;
-import resources.control.Assert;
 import resources.encodables.player.Equipment;
 import resources.network.BaselineBuilder;
 import resources.network.NetBuffer;
@@ -47,6 +46,8 @@ import resources.persistable.Persistable;
 import resources.persistable.SWGObjectFactory;
 import resources.player.Player;
 import services.group.GroupInviterData;
+
+import com.projectswg.common.debug.Assert;
 
 class CreatureObjectSharedNP implements Persistable {
 	

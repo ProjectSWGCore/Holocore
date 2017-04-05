@@ -29,14 +29,13 @@ package intents.radial;
 
 import java.util.List;
 
-import resources.control.Intent;
 import resources.objects.SWGObject;
 import resources.player.Player;
 import resources.radial.RadialOption;
 
+import com.projectswg.common.control.Intent;
+
 public class RadialResponseIntent extends Intent {
-	
-	public static final String TYPE = "RadialResponseIntent";
 	
 	private Player player;
 	private SWGObject target;
@@ -44,7 +43,6 @@ public class RadialResponseIntent extends Intent {
 	private int counter;
 	
 	public RadialResponseIntent(Player player, SWGObject target, List<RadialOption> options, int counter) {
-		super(TYPE);
 		setPlayer(player);
 		setTarget(target);
 		setOptions(options);

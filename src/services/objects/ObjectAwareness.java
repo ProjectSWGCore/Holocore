@@ -52,9 +52,6 @@ import resources.Location;
 import resources.Point3D;
 import resources.Terrain;
 import resources.config.ConfigFile;
-import resources.control.Assert;
-import resources.control.Intent;
-import resources.control.Service;
 import resources.network.DisconnectReason;
 import resources.objects.SWGObject;
 import resources.objects.awareness.AwarenessHandler;
@@ -64,7 +61,12 @@ import resources.objects.creature.CreatureObject;
 import resources.player.Player;
 import resources.player.PlayerEvent;
 import resources.player.PlayerState;
+import resources.server_info.DataManager;
 import resources.server_info.Log;
+
+import com.projectswg.common.control.Intent;
+import com.projectswg.common.control.Service;
+import com.projectswg.common.debug.Assert;
 
 public class ObjectAwareness extends Service implements TerrainMapCallback {
 	
@@ -76,7 +78,7 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 	public ObjectAwareness() {
 		awarenessHandler = new AwarenessHandler(this);
 		dataTransformHandler = new DataTransformHandler();
-		dataTransformHandler.setSpeedCheck(getConfig(ConfigFile.FEATURES).getBoolean("SPEED-HACK-CHECK", true));
+		dataTransformHandler.setSpeedCheck(DataManager.getConfig(ConfigFile.FEATURES).getBoolean("SPEED-HACK-CHECK", true));
 		
 		registerForIntent(PlayerEventIntent.class, pei -> handlePlayerEventIntent(pei));
 		registerForIntent(ObjectCreatedIntent.class, oci -> handleObjectCreatedIntent(oci));

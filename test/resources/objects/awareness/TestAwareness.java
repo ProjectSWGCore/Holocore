@@ -32,6 +32,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.projectswg.common.info.RelationalServerFactory;
+
 import utilities.CrcDatabaseGenerator;
 
 @RunWith(Suite.class)
@@ -45,6 +47,7 @@ public class TestAwareness {
 	
 	@BeforeClass
 	public static void setupCrcDatabase() {
+		RelationalServerFactory.setBasePath("serverdata/");
 		CrcDatabaseGenerator.generate(false);
 	}
 	

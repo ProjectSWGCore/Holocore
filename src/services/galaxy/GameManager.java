@@ -27,18 +27,19 @@
  ***********************************************************************************/
 package services.galaxy;
 
-import resources.control.Manager;
-import services.commands.BuffService;
-import services.collections.CollectionService;
 import services.collections.CollectionBadgeManager;
+import services.collections.CollectionService;
 import services.combat.CombatManager;
+import services.commands.BuffService;
 import services.commands.CommandService;
 import services.commands.EntertainmentService;
 import services.experience.ExperienceManager;
 import services.faction.FactionService;
 import services.galaxy.terminals.TerminalService;
-import services.sui.SuiService;
 import services.group.GroupService;
+import services.sui.SuiService;
+
+import com.projectswg.common.control.Manager;
 
 public class GameManager extends Manager {
 
@@ -47,7 +48,7 @@ public class GameManager extends Manager {
 	private final SuiService suiService;
 	private final CollectionService collectionService;
 	private final CollectionBadgeManager collectionBadgeManager;
-	private final EnvironmentService weatherService;
+	private final EnvironmentService environmentService;
 	private final TerminalService terminalManager;
 	private final FactionService factionService;
 	private final GroupService groupService;
@@ -63,7 +64,7 @@ public class GameManager extends Manager {
 		suiService = new SuiService();
 		collectionService = new CollectionService();
 		collectionBadgeManager = new CollectionBadgeManager();
-		weatherService = new EnvironmentService();
+		environmentService = new EnvironmentService();
 		terminalManager = new TerminalService();
 		factionService = new FactionService();
 		groupService = new GroupService();
@@ -78,7 +79,7 @@ public class GameManager extends Manager {
 		addChildService(suiService);
 		addChildService(collectionService);
 		addChildService(collectionBadgeManager);
-		addChildService(weatherService);
+		addChildService(environmentService);
 		addChildService(terminalManager);
 		addChildService(factionService);
 		addChildService(groupService);

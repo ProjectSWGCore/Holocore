@@ -33,8 +33,9 @@ import java.net.SocketAddress;
 import java.util.Arrays;
 
 import network.NetworkClient;
-import resources.control.Service;
 import resources.server_info.Log;
+
+import com.projectswg.common.control.Service;
 
 public class InboundNetworkManager extends Service {
 	

@@ -32,12 +32,13 @@ import java.util.Set;
 
 import resources.Location;
 import resources.Terrain;
-import resources.callback.CallbackManager;
-import resources.control.Assert;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.waypoint.WaypointObject;
 import resources.server_info.Log;
+
+import com.projectswg.common.callback.CallbackManager;
+import com.projectswg.common.debug.Assert;
 
 public class TerrainMap {
 	

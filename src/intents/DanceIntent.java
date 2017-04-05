@@ -27,26 +27,22 @@
 ***********************************************************************************/
 package intents;
 
-import resources.control.Intent;
 import resources.objects.creature.CreatureObject;
 
-/**
- *
- * @author Mads
- */
+import com.projectswg.common.control.Intent;
+
 public class DanceIntent extends Intent {
-	public static final String TYPE = "DanceIntent";
 	private final String danceName;
 	private final CreatureObject creatureObject;
 	private final boolean changeDance;
 	
 	/**
 	 * Start dancing
+	 * 
 	 * @param danceName
-	 * @param creatureObject 
+	 * @param creatureObject
 	 */
 	public DanceIntent(String danceName, CreatureObject creatureObject, boolean changeDance) {
-		super(TYPE);
 		this.danceName = danceName;
 		this.creatureObject = creatureObject;
 		this.changeDance = changeDance;
@@ -54,16 +50,17 @@ public class DanceIntent extends Intent {
 	
 	/**
 	 * Stop dancing
-	 * @param creatureObject 
+	 * 
+	 * @param creatureObject
 	 */
 	public DanceIntent(CreatureObject creatureObject) {
 		this(null, creatureObject, false);
 	}
-
+	
 	public String getDanceName() {
 		return danceName;
 	}
-
+	
 	public CreatureObject getCreatureObject() {
 		return creatureObject;
 	}
@@ -71,7 +68,7 @@ public class DanceIntent extends Intent {
 	public boolean isStartDance() {
 		return danceName != null;
 	}
-
+	
 	public boolean isChangeDance() {
 		return changeDance;
 	}

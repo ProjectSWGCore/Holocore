@@ -27,6 +27,14 @@
 ***********************************************************************************/
 package services.commands;
 
+import intents.DanceIntent;
+import intents.FlourishIntent;
+import intents.PlayerEventIntent;
+import intents.WatchIntent;
+import intents.chat.ChatBroadcastIntent;
+import intents.experience.ExperienceIntent;
+import intents.player.PlayerTransformedIntent;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -36,25 +44,19 @@ import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import intents.DanceIntent;
-import intents.FlourishIntent;
-import intents.PlayerEventIntent;
-import intents.WatchIntent;
-import intents.chat.ChatBroadcastIntent;
-import intents.experience.ExperienceIntent;
-import intents.player.PlayerTransformedIntent;
 import network.packets.swg.zone.object_controller.Animation;
 import resources.Location;
 import resources.Posture;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
-import resources.control.Service;
 import resources.encodables.ProsePackage;
 import resources.encodables.StringId;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
 import resources.server_info.Log;
+
+import com.projectswg.common.control.Service;
 
 /**
  *

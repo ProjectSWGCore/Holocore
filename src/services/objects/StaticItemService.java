@@ -27,29 +27,32 @@
  ***********************************************************************************/
 package services.objects;
 
+import intents.chat.ChatBroadcastIntent;
+import intents.object.CreateStaticItemIntent;
+import intents.object.ObjectCreatedIntent;
+import intents.server.ConfigChangedIntent;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
-import intents.chat.ChatBroadcastIntent;
-import intents.object.CreateStaticItemIntent;
-import intents.object.ObjectCreatedIntent;
-import intents.server.ConfigChangedIntent;
 import network.packets.swg.zone.object_controller.ShowLootBox;
 import resources.client_info.ClientFactory;
 import resources.combat.DamageType;
 import resources.config.ConfigFile;
-import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.weapon.WeaponObject;
 import resources.objects.weapon.WeaponType;
 import resources.player.Player;
+import resources.server_info.DataManager;
 import resources.server_info.Log;
-import resources.server_info.RelationalServerData;
-import resources.server_info.RelationalServerFactory;
 import resources.server_info.StandardLog;
+
+import com.projectswg.common.control.Service;
+import com.projectswg.common.info.RelationalServerData;
+import com.projectswg.common.info.RelationalServerFactory;
 
 /**
  * @author mads
@@ -73,7 +76,7 @@ public final class StaticItemService extends Service {
 
 	@Override
 	public boolean initialize() {
-		boolean configEnable = getConfig(ConfigFile.FEATURES).getBoolean(CONFIG_OPTION_NAME, true);
+		boolean configEnable = DataManager.getConfig(ConfigFile.FEATURES).getBoolean(CONFIG_OPTION_NAME, true);
 		
 		if (configEnable) {
 			if (!loadStaticItems())

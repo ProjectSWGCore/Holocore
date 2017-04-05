@@ -27,6 +27,11 @@
  ***********************************************************************************/
 package services.galaxy.terminals;
 
+import intents.radial.RadialRegisterIntent;
+import intents.radial.RadialRequestIntent;
+import intents.radial.RadialResponseIntent;
+import intents.radial.RadialSelectionIntent;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -35,16 +40,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import intents.radial.RadialRegisterIntent;
-import intents.radial.RadialRequestIntent;
-import intents.radial.RadialResponseIntent;
-import intents.radial.RadialSelectionIntent;
-import resources.control.Service;
 import resources.radial.RadialOption;
 import resources.radial.Radials;
 import resources.server_info.Log;
-import resources.server_info.RelationalServerData;
-import resources.server_info.RelationalServerFactory;
+
+import com.projectswg.common.control.Service;
+import com.projectswg.common.info.RelationalServerData;
+import com.projectswg.common.info.RelationalServerFactory;
 
 public class TerminalService extends Service {
 	

@@ -32,7 +32,9 @@ import intents.chat.ChatBroadcastIntent;
 import intents.chat.ChatCommandIntent;
 import intents.network.GalacticPacketIntent;
 import intents.player.PlayerTransformedIntent;
+
 import java.io.FileNotFoundException;
+
 import network.packets.Packet;
 import network.packets.swg.zone.object_controller.CommandQueueDequeue;
 import network.packets.swg.zone.object_controller.CommandQueueEnqueue;
@@ -46,8 +48,6 @@ import resources.commands.Command;
 import resources.commands.ICmdCallback;
 import resources.commands.callbacks.*;
 import resources.common.CRC;
-import resources.control.Intent;
-import resources.control.Service;
 import resources.encodables.ProsePackage;
 import resources.encodables.StringId;
 import resources.objects.SWGObject;
@@ -71,14 +71,16 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.PriorityBlockingQueue;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+
+import com.projectswg.common.concurrency.SynchronizedMap;
+import com.projectswg.common.control.Service;
+
 import network.packets.swg.zone.object_controller.CommandTimer;
 import resources.combat.DelayAttackEggPosition;
 import resources.combat.HitType;
 import resources.commands.DefaultPriority;
 import resources.objects.creature.CreatureObject;
-import resources.server_info.SynchronizedMap;
 import utilities.ThreadUtilities;
-
 
 public class CommandService extends Service {
 	

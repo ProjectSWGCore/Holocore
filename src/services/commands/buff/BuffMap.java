@@ -33,7 +33,8 @@ import java.util.Map;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
 import resources.common.CRC;
-import resources.server_info.SynchronizedMap;
+
+import com.projectswg.common.concurrency.SynchronizedMap;
 
 public class BuffMap {
 	
