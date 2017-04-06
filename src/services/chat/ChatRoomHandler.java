@@ -131,7 +131,6 @@ public class ChatRoomHandler {
 		if (player.getAccessLevel() != AccessLevel.PLAYER)
 			result = ChatResult.SUCCESS;
 		
-		Log.d("enterChatChannel user=%s  player=%s  room=%s  result=%s", player.getUsername(), player.getCharacterName(), room.getPath(), result);
 		if (result != ChatResult.SUCCESS) {
 			player.sendPacket(new ChatOnEnteredRoom(avatar, result, room.getId(), sequence));
 			return;
@@ -181,7 +180,6 @@ public class ChatRoomHandler {
 		if (!room.removeMember(avatar) && !player.getPlayerObject().removeJoinedChannel(room.getPath()))
 			return;
 		
-		Log.d("leaveChatChannel user=%s  player=%s  room=%s", player.getUsername(), player.getCharacterName(), room.getPath());
 		player.sendPacket(new ChatOnLeaveRoom(avatar, ChatResult.SUCCESS.getCode(), room.getId(), sequence));
 		room.sendPacketToMembers(player.getPlayerManager(), new ChatOnLeaveRoom(avatar, ChatResult.SUCCESS.getCode(), room.getId(), 0));
 	}
@@ -301,10 +299,7 @@ public class ChatRoomHandler {
 		String basePath = "SWG." + galaxy + ".";
 		
 		DatatableData rooms = ServerFactory.getDatatable("chat/default_rooms.iff");
-		rooms.handleRows((r) -> {
-			Log.d("Creating room: %s\t\t'%s'", basePath + rooms.getCell(r, 0), rooms.getCell(r, 1));
-			createRoom(systemAvatar, true, false, basePath + rooms.getCell(r, 0), (String) rooms.getCell(r, 1), false);
-		});
+		rooms.handleRows((r) -> createRoom(systemAvatar, true, false, basePath + rooms.getCell(r, 0), (String) rooms.getCell(r, 1), false));
 		
 		createPlanetChannels(systemAvatar, basePath);
 		
