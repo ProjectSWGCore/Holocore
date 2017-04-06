@@ -92,6 +92,7 @@ public class ClientFactory extends DataFactory {
 	 * @param save Future calls for this file will try and obtain this reference if it's not null to prevent the file from being parsed multiple times
 	 */
 	public synchronized static ClientData getInfoFromFile(String file, boolean save) {
+		file = file.intern();
 		ClientFactory factory = ClientFactory.getInstance();
 		SoftReference<ClientData> reference = factory.dataMap.get(file);
 		ClientData data = null;
@@ -130,10 +131,10 @@ public class ClientFactory extends DataFactory {
 
 	public synchronized static String formatToSharedFile(String original) {
 		if (original.contains("shared_"))
-			return original;
+			return original.intern();
 		
 		int index = original.lastIndexOf('/');
-		return original.substring(0, index) + "/shared_" + original.substring(index+1);
+		return (original.substring(0, index) + "/shared_" + original.substring(index+1)).intern();
 	}
 
 	// Any time a new DataObject is coded for parsing a file, it will need to be added in populateTypeMap() along with a new return 

@@ -81,7 +81,8 @@ public final class ObjectCreator {
 			return null;
 		if (!template.endsWith(".iff"))
 			return null;
-		ObjectData attributes = (ObjectData) ClientFactory.getInfoFromFile(ClientFactory.formatToSharedFile(template), true);
+		template = ClientFactory.formatToSharedFile(template);
+		ObjectData attributes = (ObjectData) ClientFactory.getInfoFromFile(template, true);
 		if(attributes == null)
 			return null;
 		GameObjectType type = GameObjectType.getTypeFromId((Integer) attributes.getAttribute(ObjectDataAttribute.GAME_OBJECT_TYPE));
@@ -105,10 +106,10 @@ public final class ObjectCreator {
 		}
 		if (obj == null)
 			return null;
+		template = ClientFactory.formatToSharedFile(template);
 		obj.setTemplate(template);
 
-		ObjectData attributes = (ObjectData) ClientFactory.getInfoFromFile(ClientFactory.formatToSharedFile(template), true);
-		handlePostCreation(obj, attributes);
+		handlePostCreation(obj, (ObjectData) ClientFactory.getInfoFromFile(template, true));
 		updateMaxObjectId(objectId);
 		return obj;
 	}

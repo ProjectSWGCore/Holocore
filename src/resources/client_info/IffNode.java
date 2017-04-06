@@ -156,7 +156,7 @@ public class IffNode {
 		String string = ByteUtilities.nextString(bb);
 		if (bb.hasRemaining())
 			bb.get();
-		return string;
+		return string.intern();
 	}
 
 	public void writeString(String s) {
