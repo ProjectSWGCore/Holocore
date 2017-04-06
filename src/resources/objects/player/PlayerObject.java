@@ -56,6 +56,8 @@ public class PlayerObject extends IntangibleObject {
 	private String			biography		= "";
 	private List<String> 	joinedChannels	= new ArrayList<>();
 	
+	private int	lastUpdatePlayTime = 0;
+	
 	public PlayerObject(long objectId) {
 		super(objectId, BaselineType.PLAY);
 		setVolume(0);
@@ -94,9 +96,11 @@ public class PlayerObject extends IntangibleObject {
 	}
 
 	public void updatePlayTime() {
-		int currentTime = (int) (System.currentTimeMillis() / 1000);
-		int oldPlayTime = getPlayTime();
-		int playTime = oldPlayTime + (currentTime - oldPlayTime);
+		int currentTime = (int)(System.currentTimeMillis() / 1000);
+		
+		// calculate how long it's been since the last updatePlayTime and add it to playTime
+		int playTime = getPlayTime() + (currentTime - lastUpdatePlayTime);
+		lastUpdatePlayTime = currentTime;
 		
 		play3.setPlayTime(playTime);
 		sendDelta(3, 9, playTime);
@@ -385,6 +389,7 @@ public class PlayerObject extends IntangibleObject {
 
 	public void setStartPlayTime(int startPlayTime) {
 		this.startPlayTime = startPlayTime;
+		lastUpdatePlayTime = startPlayTime;
 	}
 	
 	@Override
