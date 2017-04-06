@@ -45,7 +45,7 @@ public class DefaultAIObject extends AIObject {
 		super(objectId);
 		behavior = AIBehavior.STOP;
 		updateCounter = 0;
-		radius = 2;
+		radius = 0;
 	}
 	
 	@Override
