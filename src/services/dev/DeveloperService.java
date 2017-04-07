@@ -62,16 +62,16 @@ public class DeveloperService extends Service {
 	private void setupCharacterBuilders() {
 		
 		Location[] cbtLocations = {
-				new Location(-3989, 124, -10, Terrain.DATHOMIR),
-				new Location(-3989, 124, -10, Terrain.DATHOMIR),
-				new Location(-5786, 510, -6554, Terrain.DATHOMIR),
-				new Location(-4683, 13, 4326, Terrain.ENDOR),
-				new Location(3331, 105, -4912, Terrain.LOK),
-				new Location(-6439, 41, -3265, Terrain.NABOO),
-				new Location(-3941, 60, 6318, Terrain.TATOOINE),
-				new Location(7380, 123, 4298, Terrain.TATOOINE),
-				new Location(3523, 4, -4802, Terrain.TATOOINE),
-				new Location(58, 153, -78, Terrain.TATOOINE)
+			new Location(-3989, 124, -10, Terrain.DATHOMIR),
+			new Location(-3989, 124, -10, Terrain.DATHOMIR),
+			new Location(-5786, 510, -6554, Terrain.DATHOMIR),
+			new Location(-4683, 13, 4326, Terrain.ENDOR),
+			new Location(3331, 105, -4912, Terrain.LOK),
+			new Location(-6439, 41, -3265, Terrain.NABOO),
+			new Location(-3941, 60, 6318, Terrain.TATOOINE),
+			new Location(7380, 123, 4298, Terrain.TATOOINE),
+			new Location(3523, 4, -4802, Terrain.TATOOINE),
+			new Location(58, 153, -78, Terrain.TATOOINE)
 		};
 		
 		for (int i = 0; i < cbtLocations.length; i++) {
