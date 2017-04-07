@@ -35,11 +35,11 @@ public class DuelPlayerIntent extends Intent {
 	
 	public static final String TYPE = "DuelPlayerIntent";
 	
-	private CreatureObject sender;
-	private CreatureObject reciever;
+	private final CreatureObject sender;
+	private final CreatureObject reciever;
 	private DuelEventType eventType;
 	
-	public DuelPlayerIntent(CreatureObject sender, CreatureObject reciever, DuelEventType  eventType) {
+	public DuelPlayerIntent(CreatureObject sender, CreatureObject reciever, DuelEventType eventType) {
 		super(TYPE);
 		this.sender = sender;
 		this.reciever = reciever;
