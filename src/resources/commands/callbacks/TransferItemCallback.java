@@ -137,10 +137,8 @@ public class TransferItemCallback implements ICmdCallback {
 
 			// Only empty containers can be Appearance Equipped
 			if (newContainer.equals(appearanceInventory)) {
-				if (targetGameObjectType == GameObjectType.GOT_MISC_CONTAINER_WEARABLE
-						&& !target.getContainedObjects().isEmpty()) {
-					// Don't be fooled - the message below contains no prose
-					// keys
+				if (targetGameObjectType == GameObjectType.GOT_MISC_CONTAINER_WEARABLE && !target.getContainedObjects().isEmpty()) {
+					// Don't be fooled - the message below contains no prose keys
 					new ChatBroadcastIntent(player, "@container_error_message:container33_prose").broadcast();
 					return;
 				}
