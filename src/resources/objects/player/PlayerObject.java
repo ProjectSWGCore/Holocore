@@ -27,6 +27,10 @@
 ***********************************************************************************/
 package resources.objects.player;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import network.packets.swg.zone.UpdatePostureMessage;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.collections.SWGMap;
@@ -40,10 +44,6 @@ import resources.player.AccessLevel;
 import resources.player.Player;
 import resources.player.PlayerFlags;
 import utilities.Encoder.StringType;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class PlayerObject extends IntangibleObject {
 	
@@ -387,8 +387,8 @@ public class PlayerObject extends IntangibleObject {
 		return startPlayTime;
 	}
 
-	public void setStartPlayTime(int startPlayTime) {
-		this.startPlayTime = startPlayTime;
+	public void initStartPlayTime() {
+		startPlayTime = (int)(System.currentTimeMillis() / 1000);
 		lastUpdatePlayTime = startPlayTime;
 	}
 	
