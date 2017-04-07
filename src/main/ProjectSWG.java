@@ -91,7 +91,7 @@ public class ProjectSWG {
 	/**
 	 * Returns the server's galactic time. This is the official time sent to
 	 * the client and should be used for any official client-time purposes.
-	 * @return the server's galactic time
+	 * @return the server's galactic time in seconds
 	 */
 	public static final long getGalacticTime() {
 		return (long) (System.currentTimeMillis()/1E3 - 1309996800L); // Date is 07/07/2011 GMT

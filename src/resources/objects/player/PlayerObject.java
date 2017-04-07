@@ -27,6 +27,9 @@
 ***********************************************************************************/
 package resources.objects.player;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import network.packets.swg.zone.UpdatePostureMessage;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.collections.SWGMap;
@@ -41,9 +44,6 @@ import resources.player.Player;
 import resources.player.PlayerFlags;
 import utilities.Encoder.StringType;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class PlayerObject extends IntangibleObject {
 	
 	private PlayerObjectShared		play3	= new PlayerObjectShared();
@@ -54,6 +54,8 @@ public class PlayerObject extends IntangibleObject {
 	private int				startPlayTime	= 0;
 	private String			biography		= "";
 	private List<String> 	joinedChannels	= new ArrayList<>();
+	
+	private int	lastUpdatePlayTime = 0;
 	
 	public PlayerObject(long objectId) {
 		super(objectId, BaselineType.PLAY);
@@ -93,9 +95,11 @@ public class PlayerObject extends IntangibleObject {
 	}
 
 	public void updatePlayTime() {
-		int currentTime = (int) (System.currentTimeMillis() / 1000);
-		int oldPlayTime = getPlayTime();
-		int playTime = oldPlayTime + (currentTime - oldPlayTime);
+		int currentTime = (int)(System.currentTimeMillis() / 1000);
+		
+		// calculate how long it's been since the last updatePlayTime and add it to playTime
+		int playTime = getPlayTime() + (currentTime - lastUpdatePlayTime);
+		lastUpdatePlayTime = currentTime;
 		
 		play3.setPlayTime(playTime);
 		sendDelta(3, 9, playTime);
@@ -390,8 +394,9 @@ public class PlayerObject extends IntangibleObject {
 		return startPlayTime;
 	}
 
-	public void setStartPlayTime(int startPlayTime) {
-		this.startPlayTime = startPlayTime;
+	public void initStartPlayTime() {
+		startPlayTime = (int)(System.currentTimeMillis() / 1000);
+		lastUpdatePlayTime = startPlayTime;
 	}
 	
 	@Override

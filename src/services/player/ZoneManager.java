@@ -91,7 +91,7 @@ public class ZoneManager extends Manager {
 	private void handlePlayerEventIntent(Player player, PlayerEvent event) {
 		switch (event) {
 			case PE_FIRST_ZONE:
-				player.getPlayerObject().setStartPlayTime((int) System.currentTimeMillis());
+				player.getPlayerObject().initStartPlayTime();
 				sendCommitHistory(player);
 				sendMessageOfTheDay(player);
 				break;

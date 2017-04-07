@@ -40,6 +40,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 
+import main.ProjectSWG;
 import network.packets.swg.zone.PlayClientEffectObjectMessage;
 import resources.common.CRC;
 import resources.objects.creature.Buff;
@@ -104,7 +105,7 @@ public class BuffService extends Service {
 			creatures = new ArrayList<>(monitored);
 		}
 		for (CreatureObject creature : creatures) {
-			removeAllBuffs(creature, creature.getBuffEntries(buff -> isBuffExpired(buff)));
+			removeAllBuffs(creature, creature.getBuffEntries(buff -> isBuffExpired(creature, buff)));
 		}
 	}
 	
@@ -133,15 +134,13 @@ public class BuffService extends Service {
 	}
 	
 	private void handleFirstZone(CreatureObject creature) {
-		synchronized (monitored) {
-			monitored.add(creature);
+		if (isCreatureBuffed(creature)) {
+			addToMonitored(creature);
 		}
 	}
 	
 	private void handleDisappear(CreatureObject creature) {
-		synchronized (monitored) {
-			monitored.remove(creature);
-		}
+		removeFromMonitored(creature);
 		removeAllBuffs(creature, creature.getBuffEntries(buff -> !isBuffPersistent(buff)));
 	}
 	
@@ -150,19 +149,41 @@ public class BuffService extends Service {
 		
 		if (cki.getKiller().isPlayer()) {
 			// PvP death - decay durations of certain buffs
-			corpse.getBuffEntries(buff -> isBuffDecayable(buff)).forEach(buff -> decayDuration(corpse, buff));
+			corpse.getBuffEntries(buff -> isBuffDecayable(corpse, buff)).forEach(buff -> decayDuration(corpse, buff));
 		} else {
 			// PvE death - remove certain buffs
 			removeAllBuffs(corpse, corpse.getBuffEntries(buff -> isBuffRemovedOnDeath(buff)));
 		}
 	}
 	
-	private boolean isBuffExpired(Buff buff) {
-		return buff.getDuration() >= 0 && System.currentTimeMillis() / 1000 >= buff.getEndTime();
+	private void addToMonitored(CreatureObject creature) {
+		synchronized (monitored) {
+			monitored.add(creature);
+		}
 	}
 	
-	private boolean isBuffDecayable(Buff buff) {
-		return !isBuffExpired(buff) && getBuff(buff).isDecayOnPvpDeath();
+	private void removeFromMonitored(CreatureObject creature) {
+		synchronized (monitored) {
+			monitored.remove(creature);
+		}
+	}
+	
+	private int calculatePlayTime(CreatureObject creature) {
+		if (creature.isPlayer()) {
+			creature.getPlayerObject().updatePlayTime();
+			return creature.getPlayerObject().getPlayTime();
+		}
+		
+		// NPC time is based on the current galactic time because NPCs don't have playTime
+		return (int)ProjectSWG.getGalacticTime();
+	}
+	
+	private boolean isBuffExpired(CreatureObject creature, Buff buff) {
+		return buff.getDuration() >= 0 && calculatePlayTime(creature) >= buff.getEndTime();
+	}
+	
+	private boolean isBuffDecayable(CreatureObject creature, Buff buff) {
+		return !isBuffExpired(creature, buff) && getBuff(buff).isDecayOnPvpDeath();
 	}
 	
 	private boolean isBuffPersistent(Buff buff) {
@@ -177,14 +198,14 @@ public class BuffService extends Service {
 		return buffData.getDefaultDuration() < 0;
 	}
 	
+	private boolean isCreatureBuffed(CreatureObject creature) {
+		return creature.getBuffEntries(buff -> !isBuffInfinite(getBuff(buff))).count() > 0;
+	}
+	
 	private void decayDuration(CreatureObject creature, Buff buff) {
 		int newDuration = (int) (buff.getDuration() * 0.10);	// Duration decays with 10%
 		
-		creature.setBuffDuration(new CRC(buff.getCrc()), creature.getPlayerObject().getPlayTime(), newDuration);
-	}
-	
-	private int calculatePlayTime(CreatureObject creature) {
-		return creature.isPlayer() ? creature.getPlayerObject().getPlayTime() : 0;
+		creature.setBuffDuration(new CRC(buff.getCrc()), buff.getStartTime(), newDuration);
 	}
 	
 	private void removeAllBuffs(CreatureObject creature, Stream<Buff> buffStream) {
@@ -197,11 +218,7 @@ public class BuffService extends Service {
 		String groupName = buffData.getGroupName();
 		Optional<Buff> groupBuff = receiver.getBuffEntries(buff -> groupName.equals(getBuff(buff).getGroupName())).findAny();
 		
-		if (receiver.isPlayer()) {
-			receiver.getPlayerObject().updatePlayTime();
-		}
-		
-		int playTime = calculatePlayTime(receiver);
+		int applyTime = calculatePlayTime(receiver);
 		
 		if (groupBuff.isPresent()) {
 			Buff buff = groupBuff.get();
@@ -211,17 +228,17 @@ public class BuffService extends Service {
 					removeBuff(receiver, buffData, true);
 				} else {
 					// TODO skillmods influencing stack increment
-					checkStackCount(receiver, buff, playTime, 1);
+					checkStackCount(receiver, buff, applyTime, 1);
 				}
 			} else {
 				BuffData oldBuff = getBuff(buff);
 				if (buffData.getGroupPriority() >= oldBuff.getGroupPriority()) {
 					removeBuff(receiver, oldBuff, true);
-					applyBuff(receiver, buffer, buffData, playTime);
+					applyBuff(receiver, buffer, buffData, applyTime);
 				}
 			}
 		} else {
-			applyBuff(receiver, buffer, buffData, playTime);
+			applyBuff(receiver, buffer, buffData, applyTime);
 		}
 	}
 	
@@ -241,9 +258,13 @@ public class BuffService extends Service {
 			checkSkillMods(buffData, creature, -removedBuff.getStackCount());
 			checkCallback(buffData, creature);
 		}
+		
+		if (!isCreatureBuffed(creature)) {
+			removeFromMonitored(creature);
+		}
 	}
 	
-	private void checkStackCount(CreatureObject receiver, Buff buff, int playTime, int stackMod) {
+	private void checkStackCount(CreatureObject receiver, Buff buff, int applyTime, int stackMod) {
 		BuffData buffData = getBuff(buff);
 		Assert.notNull(buffData);
 		// If it's the same buff, we need to check for stacks
@@ -251,7 +272,7 @@ public class BuffService extends Service {
 		
 		if (maxStackCount < 2) {
 			removeBuff(receiver, buffData, true);
-			applyBuff(receiver, receiver, buffData, playTime);
+			applyBuff(receiver, receiver, buffData, applyTime);
 			return;
 		}
 		
@@ -265,21 +286,24 @@ public class BuffService extends Service {
 		
 		// If the stack count was incremented, also renew the duration
 		if (stackMod > 0) {
-			receiver.setBuffDuration(crc, playTime, (int) buffData.getDefaultDuration());
+			receiver.setBuffDuration(crc, applyTime, (int) buffData.getDefaultDuration());
 		}
 	}
 	
-	private void applyBuff(CreatureObject receiver, CreatureObject buffer, BuffData buffData, int playTime) {
+	private void applyBuff(CreatureObject receiver, CreatureObject buffer, BuffData buffData, int applyTime) {
 		// TODO stack counts upon add/remove need to be defined on a per-buff basis due to skillmod influence. Scripts might not be a bad idea.
 		int stackCount = 1;
 		int buffDuration = (int) buffData.getDefaultDuration();
-		Buff buff = new Buff(buffData.getCrc(), playTime + buffDuration, buffData.getEffectValue(0), buffDuration, buffer.getObjectId(), stackCount);
+		Log.d("buff %s applied to %s from %s; applyTime: %d, buffDuration: %d", buffData.getName(), receiver.getObjectName(), buffer.getObjectName(), applyTime, buffDuration);
+		Buff buff = new Buff(buffData.getCrc(), applyTime + buffDuration, buffData.getEffectValue(0), buffDuration, buffer.getObjectId(), stackCount);
 		
 		checkSkillMods(buffData, receiver, 1);
 		receiver.addBuff(buff);
 		
 		sendParticleEffect(buffData.getEffectFileName(), receiver, buffData.getParticleHardPoint());
 		sendParticleEffect(buffData.getStanceParticle(), receiver, buffData.getParticleHardPoint());
+		
+		addToMonitored(receiver);
 	}
 	
 	private void sendParticleEffect(String effectFileName, CreatureObject receiver, String hardPoint) {

@@ -157,6 +157,10 @@ public class Buff implements Encodable, Persistable {
 		this.stackCount += adjust;
 	}
 	
+	public int getStartTime() {
+		return endTime - duration;
+	}
+	
 	@Override
 	public String toString() {
 		return String.format("Buff[End=%d Value=%f Duration=%d Buffer=%d StackCount=%d]", endTime, value, duration, bufferId, stackCount);

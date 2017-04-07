@@ -48,9 +48,6 @@ import com.projectswg.common.control.Service;
 import com.projectswg.common.info.RelationalServerData;
 import com.projectswg.common.info.RelationalServerFactory;
 
-/**
- * Created by skylerlehan on 8/21/16.
- */
 public class CollectionService extends Service {
 
 	private static final String GET_CLICKY_COLLECTION_ITEMS_SQL = "SELECT iff_template FROM collection_clicky";
@@ -207,6 +204,7 @@ public class CollectionService extends Service {
 	}
 
 	private boolean isConsumeCollectionItem(ConsumeCollection collection) {
+		// FINDBUGS ERROR: Bug: String is incompatible with expected argument type CollectionService$ConsumeCollection in services.collections.CollectionService.isConsumeCollectionItem(CollectionService$ConsumeCollection)
 		return consumeCollectionItems.contains(cleanIff(collection.iffTemplate));
 	}
 
