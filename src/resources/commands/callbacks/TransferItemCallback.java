@@ -116,21 +116,17 @@ public class TransferItemCallback implements ICmdCallback {
 				// Check the players level, if they're too low of a level, don't allow them to wear it
 				String reqLevelStr = target.getAttribute("required_combat_level");
 
-				if (reqLevelStr != null) {
-					short reqLevel = Short.parseShort(reqLevelStr);
-					if (actor.getLevel() < reqLevel) {
-						new ChatBroadcastIntent(player, "@base_player:level_too_low").broadcast();
-						return;
-					}
+				if (reqLevelStr != null && actor.getLevel() < Short.parseShort(reqLevelStr)) {
+					new ChatBroadcastIntent(player, "@base_player:level_too_low").broadcast();
+					return;
 				}
 				
 				// Make sure the player can wear it based on their species
-				if (newContainer.equals(actor) && !checkSpeciesRestriction(actor, target))
+				if (!checkSpeciesRestriction(actor, target))
 					return;
 
 				// If the character doesn't have the right profession, reject it
-				if (newContainer.equals(actor) && target.hasAttribute("class_required")
-						&& !target.getAttribute("class_required").equals("None")) {
+				if (target.hasAttribute("class_required") && !target.getAttribute("class_required").equals("None")) {
 					String profession = cleanProfessionString(actor.getPlayerObject().getProfession());
 					if (!target.getAttribute("class_required").contains(profession)) {
 						new ChatBroadcastIntent(player, "@base_player:cannot_use_item").broadcast();
