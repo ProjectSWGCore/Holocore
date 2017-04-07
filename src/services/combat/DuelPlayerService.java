@@ -59,12 +59,6 @@ public class DuelPlayerService extends Service {
 		target.removePlayerFromSentDuels(ender);
 		ender.setInCombat(false);
 		target.setInCombat(false);
-		
-		if (ender.hasSentDuelRequestToPlayer(target)) {
-			ender.removePlayerFromSentDuels(target);
-		} else {
-			target.removePlayerFromSentDuels(ender);
-		}
 	}
 	
 	private void handleEndDuel(CreatureObject ender, CreatureObject target) {

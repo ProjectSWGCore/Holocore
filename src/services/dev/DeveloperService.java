@@ -61,7 +61,7 @@ public class DeveloperService extends Service {
 	
 	private void setupCharacterBuilders() {
 		
-		final Location[] cbtLocations = {
+		Location[] cbtLocations = {
 				new Location(-3989, 124, -10, Terrain.DATHOMIR),
 				new Location(-3989, 124, -10, Terrain.DATHOMIR),
 				new Location(-5786, 510, -6554, Terrain.DATHOMIR),
@@ -72,7 +72,7 @@ public class DeveloperService extends Service {
 				new Location(7380, 123, 4298, Terrain.TATOOINE),
 				new Location(3523, 4, -4802, Terrain.TATOOINE),
 				new Location(58, 153, -78, Terrain.TATOOINE)
-				};
+		};
 		
 		for (int i = 0; i < cbtLocations.length; i++) {
 			spawnObject("object/tangible/terminal/shared_terminal_character_builder.iff", cbtLocations[i] , TangibleObject.class);
