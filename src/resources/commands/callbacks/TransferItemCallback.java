@@ -90,10 +90,8 @@ public class TransferItemCallback implements ICmdCallback {
 
 			Assert.notNull(appearanceInventory);
 
-			// A container can only be the child of another container if the
-			// other container has a larger volume
-			if (newContainer.getContainerType() == 2 && target.getContainerType() == 2
-					&& target.getMaxContainerSize() >= newContainer.getMaxContainerSize()) {
+			// A container can only be the child of another container if the other container has a larger volume
+			if (newContainer.getContainerType() == 2 && target.getContainerType() == 2 && target.getMaxContainerSize() >= newContainer.getMaxContainerSize()) {
 				new ChatBroadcastIntent(player, "@container_error_message:container12").broadcast();
 				return;
 			}
