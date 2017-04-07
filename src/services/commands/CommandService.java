@@ -46,7 +46,6 @@ import resources.commands.Command;
 import resources.commands.ICmdCallback;
 import resources.commands.callbacks.*;
 import resources.common.CRC;
-import resources.control.Intent;
 import resources.control.Service;
 import resources.encodables.ProsePackage;
 import resources.encodables.StringId;

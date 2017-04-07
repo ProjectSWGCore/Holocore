@@ -30,6 +30,7 @@ package resources.objects.creature;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 import java.util.Locale;
 import java.util.function.Predicate;
@@ -79,9 +80,11 @@ public class CreatureObject extends TangibleObject {
 	private long 	statesBitmask			= 0;
 	private long	lastTransform			= 0;
 	
-	private SWGSet<String>		skills				= new SWGSet<String>(1, 3, StringType.ASCII);
+	private SWGSet<String> skills					= new SWGSet<String>(1, 3, StringType.ASCII);
 	
-	private SWGList<Integer>	baseAttributes		= new SWGList<Integer>(1, 2);
+	private SWGList<Integer> baseAttributes			= new SWGList<Integer>(1, 2);
+	
+	private List<CreatureObject> sentDuels			= new ArrayList<>();
 	
 	public CreatureObject(long objectId) {
 		super(objectId, BaselineType.CREO);
@@ -798,6 +801,22 @@ public class CreatureObject extends TangibleObject {
 		return isEnemy(otherObject) && otherPosture != Posture.INCAPACITATED && otherPosture != Posture.DEAD;
 	}
 	
+	public boolean hasSentDuelRequestToPlayer(CreatureObject player) {
+		return sentDuels.contains(player);
+	}
+	
+	public boolean isDuelingPlayer(CreatureObject player) {
+		return hasSentDuelRequestToPlayer(player) && player.hasSentDuelRequestToPlayer(this);
+	}
+	
+	public void addPlayerToSentDuels(CreatureObject player) {
+		sentDuels.add(player);
+	}
+	
+	public void removePlayerFromSentDuels(CreatureObject player) {
+		sentDuels.remove(player);
+	}
+	
 	@Override
 	public boolean isEnemy(TangibleObject otherObject) {
 		boolean tangibleEnemy = super.isEnemy(otherObject);
@@ -805,6 +824,9 @@ public class CreatureObject extends TangibleObject {
 		if (tangibleEnemy || !(otherObject instanceof CreatureObject)) {
 			return tangibleEnemy;
 		}
+		
+		if (isDuelingPlayer((CreatureObject)otherObject))
+			return true;
 		
 		return isPlayer() && ((CreatureObject) otherObject).isPlayer()
 				&& getPvpFaction() != PvpFaction.NEUTRAL

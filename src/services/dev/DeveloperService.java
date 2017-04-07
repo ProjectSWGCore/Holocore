@@ -60,15 +60,23 @@ public class DeveloperService extends Service {
 	}
 	
 	private void setupCharacterBuilders() {
-		spawnObject("object/tangible/terminal/shared_terminal_character_builder.iff", new Location(-3989, 124, -10, Terrain.DATHOMIR), TangibleObject.class);
-		spawnObject("object/tangible/terminal/shared_terminal_character_builder.iff", new Location(-5786, 510, -6554, Terrain.DATHOMIR), TangibleObject.class);
-		spawnObject("object/tangible/terminal/shared_terminal_character_builder.iff", new Location(-4683, 13, 4326, Terrain.ENDOR), TangibleObject.class);
-		spawnObject("object/tangible/terminal/shared_terminal_character_builder.iff", new Location(3331, 105, -4912, Terrain.LOK), TangibleObject.class);
-		spawnObject("object/tangible/terminal/shared_terminal_character_builder.iff", new Location(-6439, 41, -3265, Terrain.NABOO), TangibleObject.class);
-		spawnObject("object/tangible/terminal/shared_terminal_character_builder.iff", new Location(-3941, 60, 6318, Terrain.TATOOINE), TangibleObject.class);
-		spawnObject("object/tangible/terminal/shared_terminal_character_builder.iff", new Location(7380, 123, 4298, Terrain.TATOOINE), TangibleObject.class);
-		spawnObject("object/tangible/terminal/shared_terminal_character_builder.iff", new Location(3523, 4, -4802, Terrain.TATOOINE), TangibleObject.class);
-		spawnObject("object/tangible/terminal/shared_terminal_character_builder.iff", new Location(58, 153, -78, Terrain.TATOOINE), TangibleObject.class);
+		
+		Location[] cbtLocations = {
+			new Location(-3989, 124, -10, Terrain.DATHOMIR),
+			new Location(-3989, 124, -10, Terrain.DATHOMIR),
+			new Location(-5786, 510, -6554, Terrain.DATHOMIR),
+			new Location(-4683, 13, 4326, Terrain.ENDOR),
+			new Location(3331, 105, -4912, Terrain.LOK),
+			new Location(-6439, 41, -3265, Terrain.NABOO),
+			new Location(-3941, 60, 6318, Terrain.TATOOINE),
+			new Location(7380, 123, 4298, Terrain.TATOOINE),
+			new Location(3523, 4, -4802, Terrain.TATOOINE),
+			new Location(58, 153, -78, Terrain.TATOOINE)
+		};
+		
+		for (int i = 0; i < cbtLocations.length; i++) {
+			spawnObject("object/tangible/terminal/shared_terminal_character_builder.iff", cbtLocations[i] , TangibleObject.class);
+		}
 	}
 	
 	private <T extends SWGObject> T spawnObject(String template, Location l, Class<T> c) {
