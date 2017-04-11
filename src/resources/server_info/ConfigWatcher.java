@@ -70,7 +70,7 @@ public final class ConfigWatcher {
 		} catch (IOException e) {
 			this.watcher = null;
 		}
-		watcherThread.setWaitForTermination(false);
+		watcherThread.setInterruptOnStop(true);
 	}
 	
 	public void start() {
