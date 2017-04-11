@@ -142,8 +142,8 @@ public class ChatRoomHandler {
 		
 		// Re-send the player the room list with just this room as it could have been public/hidden
 		// This also "refreshes" the client, not sending this will cause a Chat channel unavailable message.
-		if (!room.isPublic())
-			player.sendPacket(new ChatRoomList(room));
+		// if (!room.isPublic())
+		player.sendPacket(new ChatRoomList(room));
 		
 		// Notify players of success, it's ChatResult.SUCCESS at this point
 		player.sendPacket(new ChatOnEnteredRoom(avatar, result, room.getId(), sequence));
