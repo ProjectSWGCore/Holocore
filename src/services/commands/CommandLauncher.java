@@ -102,10 +102,14 @@ public class CommandLauncher {
 		// TODO implement locomotion and state checks up here. See action and error in CommandQueueDequeue!
 		// TODO target and targetType checks
 		
+		Log.d("doCommand %s", command.getName());
+		
 		sendCommandDequeue(player, command, enqueued.getRequest(), 0, 0);
 		
-		if (!cooldownHandler.startCooldowns(creature, enqueued))
+		if (!cooldownHandler.startCooldowns(creature, enqueued)) {
+			Log.w("Not starting command %s - cooldown not ready yet!", command.getName());
 			return; // This ability is currently on cooldown
+		}
 		
 		executeCommand(player, enqueued);
 		new ChatCommandIntent(creature, enqueued.getTarget(), command, enqueued.getRequest().getArguments().split(" ")).broadcast();
