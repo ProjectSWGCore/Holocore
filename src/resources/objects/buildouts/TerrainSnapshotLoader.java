@@ -41,8 +41,9 @@ import resources.objects.SWGObject;
 import resources.objects.SWGObject.ObjectClassification;
 import resources.objects.building.BuildingObject;
 import resources.objects.cell.CellObject;
-import resources.server_info.Log;
 import services.objects.ObjectCreator;
+
+import com.projectswg.common.debug.Log;
 
 public class TerrainSnapshotLoader {
 	

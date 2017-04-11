@@ -27,14 +27,15 @@
 ***********************************************************************************/
 package resources.client_info.visitors;
 
-import resources.client_info.ClientData;
-import resources.client_info.IffNode;
-import resources.client_info.SWGFile;
-import resources.server_info.Log;
-
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+
+import resources.client_info.ClientData;
+import resources.client_info.IffNode;
+import resources.client_info.SWGFile;
+
+import com.projectswg.common.debug.Log;
 
 public class DatatableData extends ClientData {
 	

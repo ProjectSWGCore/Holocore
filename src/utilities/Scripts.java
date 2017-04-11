@@ -38,7 +38,8 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
-import resources.server_info.Log;
+import com.projectswg.common.debug.Log;
+
 
 public class Scripts {
 

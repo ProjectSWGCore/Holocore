@@ -41,12 +41,12 @@ import network.packets.swg.zone.baselines.Baseline;
 import resources.encodables.Encodable;
 import resources.network.NetBuffer;
 import resources.objects.SWGObject;
-import resources.server_info.Log;
 import utilities.Encoder;
 import utilities.Encoder.StringType;
 
 import com.projectswg.common.concurrency.SynchronizedList;
 import com.projectswg.common.concurrency.SynchronizedSet;
+import com.projectswg.common.debug.Log;
 
 public class SWGSet<E> extends SynchronizedSet<E> implements Encodable {
 	

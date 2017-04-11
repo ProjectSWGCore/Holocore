@@ -36,10 +36,10 @@ import network.packets.swg.zone.object_controller.CommandTimer;
 import resources.commands.Command;
 import resources.common.CRC;
 import resources.objects.creature.CreatureObject;
-import resources.server_info.Log;
 import services.commands.CommandLauncher.EnqueuedCommand;
 
 import com.projectswg.common.concurrency.PswgScheduledThreadPool;
+import com.projectswg.common.debug.Log;
 
 public class CommandCooldownHandler {
 	

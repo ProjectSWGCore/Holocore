@@ -49,7 +49,6 @@ import resources.objects.building.BuildingObject;
 import resources.objects.cell.CellObject;
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
-import resources.server_info.Log;
 import resources.sui.ISuiCallback;
 import resources.sui.SuiButtons;
 import resources.sui.SuiEvent;
@@ -62,6 +61,7 @@ import services.objects.StaticItemService.ObjectCreationHandler;
 import services.player.PlayerManager;
 import utilities.Scripts;
 
+import com.projectswg.common.debug.Log;
 import com.projectswg.common.info.RelationalServerData;
 import com.projectswg.common.info.RelationalServerFactory;
 

@@ -27,12 +27,13 @@
 ***********************************************************************************/
 package network.packets.swg;
 
+import java.nio.ByteBuffer;
+
 import network.PacketType;
 import network.packets.Packet;
 import resources.common.CRC;
-import resources.server_info.Log;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.debug.Log;
 
 
 public class SWGPacket extends Packet {

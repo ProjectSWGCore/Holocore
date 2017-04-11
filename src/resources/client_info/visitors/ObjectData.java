@@ -33,11 +33,12 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
-import resources.client_info.ClientFactory;
 import resources.client_info.ClientData;
+import resources.client_info.ClientFactory;
 import resources.client_info.IffNode;
 import resources.client_info.SWGFile;
-import resources.server_info.Log;
+
+import com.projectswg.common.debug.Log;
 
 public class ObjectData extends ClientData {
 

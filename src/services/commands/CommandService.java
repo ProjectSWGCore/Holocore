@@ -31,33 +31,54 @@ import intents.PlayerEventIntent;
 import intents.network.GalacticPacketIntent;
 import intents.player.PlayerTransformedIntent;
 
+import java.util.List;
+import java.util.Locale;
+
 import network.packets.Packet;
 import network.packets.swg.zone.object_controller.CommandQueueEnqueue;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
 import resources.combat.AttackType;
 import resources.combat.DamageType;
+import resources.combat.DelayAttackEggPosition;
+import resources.combat.HitType;
 import resources.combat.ValidTarget;
 import resources.commands.CombatCommand;
 import resources.commands.Command;
+import resources.commands.DefaultPriority;
 import resources.commands.ICmdCallback;
-import resources.commands.callbacks.*;
+import resources.commands.callbacks.AdminTeleportCallback;
+import resources.commands.callbacks.AttributesCmdCallback;
+import resources.commands.callbacks.ChangeDanceCallback;
+import resources.commands.callbacks.FindFriendCallback;
+import resources.commands.callbacks.FlourishCmdCallback;
+import resources.commands.callbacks.GotoCmdCallback;
+import resources.commands.callbacks.JumpCmdCallback;
+import resources.commands.callbacks.KneelCmdCallback;
+import resources.commands.callbacks.PlayerAppearanceCallback;
+import resources.commands.callbacks.ProneCmdCallback;
+import resources.commands.callbacks.QaToolCmdCallback;
+import resources.commands.callbacks.RequestBiographyCmdCallback;
+import resources.commands.callbacks.RequestWaypointCmdCallback;
+import resources.commands.callbacks.RevertAppearanceCallback;
+import resources.commands.callbacks.ServerCmdCallback;
+import resources.commands.callbacks.ServerDestroyObjectCmdCallback;
+import resources.commands.callbacks.SitOnObjectCmdCallback;
+import resources.commands.callbacks.SocialInternalCmdCallback;
+import resources.commands.callbacks.StandCmdCallback;
+import resources.commands.callbacks.StartDanceCallback;
+import resources.commands.callbacks.TransferItemCallback;
+import resources.commands.callbacks.WaypointCmdCallback;
 import resources.common.CRC;
 import resources.objects.SWGObject;
+import resources.objects.creature.CreatureObject;
 import resources.objects.weapon.WeaponType;
 import resources.player.Player;
-import resources.server_info.Log;
 import services.commands.CommandLauncher.EnqueuedCommand;
 import services.galaxy.GalacticManager;
 
-import java.util.List;
-import java.util.Locale;
 import com.projectswg.common.control.Service;
-
-import resources.combat.DelayAttackEggPosition;
-import resources.combat.HitType;
-import resources.commands.DefaultPriority;
-import resources.objects.creature.CreatureObject;
+import com.projectswg.common.debug.Log;
 
 public class CommandService extends Service {
 	

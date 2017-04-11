@@ -37,7 +37,8 @@ import resources.client_info.SWGFile;
 import resources.client_info.visitors.appearance.render.RenderData;
 import resources.client_info.visitors.appearance.render.RenderableData;
 import resources.client_info.visitors.appearance.render.RenderableDataChild;
-import resources.server_info.Log;
+
+import com.projectswg.common.debug.Log;
 
 public class DetailedAppearanceTemplateData extends ClientData implements RenderableData {
 	

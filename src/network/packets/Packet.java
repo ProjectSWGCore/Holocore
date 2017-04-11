@@ -27,11 +27,6 @@
 ***********************************************************************************/
 package network.packets;
 
-import resources.common.CRC;
-import resources.encodables.Encodable;
-import resources.server_info.Log;
-import utilities.Encoder;
-
 import java.net.SocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -39,6 +34,12 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import resources.common.CRC;
+import resources.encodables.Encodable;
+import utilities.Encoder;
+
+import com.projectswg.common.debug.Log;
 
 
 public class Packet {

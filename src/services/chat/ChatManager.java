@@ -56,10 +56,10 @@ import resources.objects.SWGObject;
 import resources.objects.player.PlayerObject;
 import resources.player.Player;
 import resources.player.PlayerState;
-import resources.server_info.Log;
 
 import com.projectswg.common.control.Manager;
 import com.projectswg.common.debug.Assert;
+import com.projectswg.common.debug.Log;
 import com.projectswg.common.info.RelationalServerData;
 import com.projectswg.common.info.RelationalServerFactory;
 

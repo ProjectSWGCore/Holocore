@@ -62,11 +62,11 @@ import resources.player.Player;
 import resources.player.PlayerEvent;
 import resources.player.PlayerState;
 import resources.server_info.DataManager;
-import resources.server_info.Log;
 
 import com.projectswg.common.control.Intent;
 import com.projectswg.common.control.Service;
 import com.projectswg.common.debug.Assert;
+import com.projectswg.common.debug.Log;
 
 public class ObjectAwareness extends Service implements TerrainMapCallback {
 	

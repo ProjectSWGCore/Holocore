@@ -63,7 +63,6 @@ import resources.objects.building.BuildingObject;
 import resources.objects.cell.CellObject;
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
-import resources.server_info.Log;
 import resources.server_info.StandardLog;
 import resources.sui.SuiButtons;
 import resources.sui.SuiEvent;
@@ -72,6 +71,7 @@ import resources.sui.SuiWindow;
 import utilities.ThreadUtilities;
 
 import com.projectswg.common.control.Service;
+import com.projectswg.common.debug.Log;
 import com.projectswg.common.info.RelationalDatabase;
 import com.projectswg.common.info.RelationalServerFactory;
 

@@ -33,8 +33,9 @@ import resources.Terrain;
 import resources.commands.ICmdCallback;
 import resources.objects.SWGObject;
 import resources.player.Player;
-import resources.server_info.Log;
 import services.galaxy.GalacticManager;
+
+import com.projectswg.common.debug.Log;
 
 public class AdminTeleportCallback implements ICmdCallback {
 

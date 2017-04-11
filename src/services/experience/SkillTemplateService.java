@@ -53,11 +53,11 @@ import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
 import resources.player.Player;
 import resources.rewards.RoadmapReward;
-import resources.server_info.Log;
 import services.objects.ObjectCreator;
 import services.objects.StaticItemService;
 
 import com.projectswg.common.control.Service;
+import com.projectswg.common.debug.Log;
 
 /**
  * This is a service that listens for {@link LevelChangedIntent} and grants

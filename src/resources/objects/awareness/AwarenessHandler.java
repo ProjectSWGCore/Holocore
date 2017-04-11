@@ -34,9 +34,9 @@ import resources.Location;
 import resources.Terrain;
 import resources.objects.SWGObject;
 import resources.objects.awareness.TerrainMap.TerrainMapCallback;
-import resources.server_info.Log;
 
 import com.projectswg.common.debug.Assert;
+import com.projectswg.common.debug.Log;
 
 public class AwarenessHandler implements AutoCloseable {
 	

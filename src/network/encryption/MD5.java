@@ -27,11 +27,12 @@
 ***********************************************************************************/
 package network.encryption;
 
+import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.io.UnsupportedEncodingException;
 
-import resources.server_info.Log;
+import com.projectswg.common.debug.Log;
+
 
 public class MD5 {
 	

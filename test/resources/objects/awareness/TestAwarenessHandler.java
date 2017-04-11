@@ -41,8 +41,9 @@ import resources.Terrain;
 import resources.objects.SWGObject;
 import resources.objects.building.BuildingObject;
 import resources.objects.creature.CreatureObject;
-import resources.server_info.Log;
 import services.objects.ClientBuildoutService;
+
+import com.projectswg.common.debug.Log;
 
 @RunWith(JUnit4.class)
 public class TestAwarenessHandler {

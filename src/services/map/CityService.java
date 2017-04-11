@@ -46,9 +46,9 @@ import resources.objects.creature.CreatureObject;
 import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
 import resources.player.PlayerEvent;
-import resources.server_info.Log;
 
 import com.projectswg.common.control.Service;
+import com.projectswg.common.debug.Log;
 import com.projectswg.common.info.RelationalDatabase;
 import com.projectswg.common.info.RelationalServerFactory;
 

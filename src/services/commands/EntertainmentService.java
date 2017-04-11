@@ -54,9 +54,9 @@ import resources.encodables.StringId;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
-import resources.server_info.Log;
 
 import com.projectswg.common.control.Service;
+import com.projectswg.common.debug.Log;
 
 /**
  *

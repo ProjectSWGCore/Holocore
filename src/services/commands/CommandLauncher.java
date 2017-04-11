@@ -35,7 +35,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Queue;
-import com.projectswg.common.concurrency.PswgScheduledThreadPool;
+
 import network.packets.swg.zone.object_controller.CommandQueueDequeue;
 import network.packets.swg.zone.object_controller.CommandQueueEnqueue;
 import resources.commands.Command;
@@ -45,9 +45,11 @@ import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.player.AccessLevel;
 import resources.player.Player;
-import resources.server_info.Log;
 import services.galaxy.GalacticManager;
 import utilities.Scripts;
+
+import com.projectswg.common.concurrency.PswgScheduledThreadPool;
+import com.projectswg.common.debug.Log;
 
 public class CommandLauncher {
 	

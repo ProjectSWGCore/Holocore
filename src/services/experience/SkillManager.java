@@ -41,10 +41,10 @@ import network.packets.swg.zone.object_controller.ChangeRoleIconChoice;
 import resources.client_info.ClientFactory;
 import resources.client_info.visitors.DatatableData;
 import resources.objects.creature.CreatureObject;
-import resources.server_info.Log;
 
 import com.projectswg.common.control.Manager;
 import com.projectswg.common.debug.Assert;
+import com.projectswg.common.debug.Log;
 
 /**
  *

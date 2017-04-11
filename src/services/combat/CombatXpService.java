@@ -41,10 +41,10 @@ import resources.objects.SWGObject;
 import resources.objects.creature.CreatureDifficulty;
 import resources.objects.creature.CreatureObject;
 import resources.objects.group.GroupObject;
-import resources.server_info.Log;
 import resources.server_info.StandardLog;
 
 import com.projectswg.common.control.Service;
+import com.projectswg.common.debug.Log;
 import com.projectswg.common.info.RelationalDatabase;
 import com.projectswg.common.info.RelationalServerFactory;
 

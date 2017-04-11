@@ -52,7 +52,6 @@ import resources.objects.SWGObject;
 import resources.objects.player.PlayerObject;
 import resources.player.Player;
 import resources.server_info.CachedObjectDatabase;
-import resources.server_info.Log;
 import resources.server_info.ObjectDatabase;
 import services.CoreManager;
 import services.chat.ChatManager.ChatRange;
@@ -60,6 +59,7 @@ import services.chat.ChatManager.ChatType;
 import services.player.PlayerManager;
 
 import com.projectswg.common.control.Service;
+import com.projectswg.common.debug.Log;
 import com.projectswg.common.info.RelationalServerData;
 import com.projectswg.common.info.RelationalServerFactory;
 

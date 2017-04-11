@@ -35,6 +35,7 @@ import java.util.Map;
 
 import resources.common.CRC;
 
+import com.projectswg.common.debug.Log;
 import com.projectswg.common.info.RelationalDatabase;
 import com.projectswg.common.info.RelationalServerFactory;
 

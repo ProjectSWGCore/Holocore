@@ -32,8 +32,8 @@ import java.sql.SQLException;
 
 import resources.Location;
 import resources.Terrain;
-import resources.server_info.Log;
 
+import com.projectswg.common.debug.Log;
 import com.projectswg.common.info.RelationalServerData;
 import com.projectswg.common.info.RelationalServerFactory;
 

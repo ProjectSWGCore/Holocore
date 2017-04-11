@@ -51,7 +51,6 @@ import resources.objects.custom.AIObject;
 import resources.persistable.SWGObjectFactory;
 import resources.player.Player;
 import resources.server_info.CachedObjectDatabase;
-import resources.server_info.Log;
 import resources.server_info.ObjectDatabase;
 import resources.server_info.StandardLog;
 import services.map.MapManager;
@@ -60,6 +59,7 @@ import services.spawn.SpawnerService;
 import services.spawn.StaticService;
 
 import com.projectswg.common.control.Manager;
+import com.projectswg.common.debug.Log;
 
 public class ObjectManager extends Manager {
 	

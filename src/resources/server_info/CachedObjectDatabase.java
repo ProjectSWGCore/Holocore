@@ -39,6 +39,8 @@ import resources.persistable.OutputPersistenceStream;
 import resources.persistable.OutputPersistenceStream.PersistableSaver;
 import resources.persistable.Persistable;
 
+import com.projectswg.common.debug.Log;
+
 public class CachedObjectDatabase<V extends Persistable> extends ObjectDatabase<V> {
 	
 	private final PersistableCreator<V> creator;

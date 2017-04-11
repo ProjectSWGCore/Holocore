@@ -35,7 +35,8 @@ import resources.client_info.IffNode;
 import resources.client_info.SWGFile;
 import resources.client_info.visitors.appearance.render.RenderData;
 import resources.client_info.visitors.appearance.render.RenderableData;
-import resources.server_info.Log;
+
+import com.projectswg.common.debug.Log;
 
 public class AppearanceTemplateList extends ClientData implements RenderableData {
 	

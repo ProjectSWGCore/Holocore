@@ -29,6 +29,8 @@ package main;
 
 import intents.server.ServerStatusIntent;
 
+import java.io.File;
+import java.io.IOException;
 import java.lang.Thread.State;
 import java.util.HashMap;
 import java.util.List;
@@ -39,11 +41,14 @@ import java.util.stream.Collectors;
 import resources.Galaxy.GalaxyStatus;
 import resources.control.ServerStatus;
 import resources.server_info.DataManager;
-import resources.server_info.Log;
 import services.CoreManager;
 
 import com.projectswg.common.concurrency.Delay;
 import com.projectswg.common.control.IntentManager;
+import com.projectswg.common.debug.Log;
+import com.projectswg.common.debug.Log.LogLevel;
+import com.projectswg.common.debug.log_wrapper.ConsoleLogWrapper;
+import com.projectswg.common.debug.log_wrapper.FileLogWrapper;
 
 public class ProjectSWG {
 	
@@ -55,7 +60,9 @@ public class ProjectSWG {
 	private ServerInitStatus initStatus;
 	private int adminServerPort;
 	
-	public static final void main(String [] args) {
+	public static final void main(String [] args) throws IOException {
+		Log.addWrapper(new ConsoleLogWrapper(LogLevel.VERBOSE));
+		Log.addWrapper(new FileLogWrapper(new File("log.txt")));
 		server = new ProjectSWG();
 		AtomicBoolean forcingShutdown = new AtomicBoolean(false);
 		Runtime.getRuntime().addShutdownHook(new Thread(() -> {

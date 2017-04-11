@@ -42,9 +42,9 @@ import resources.objects.collections.ClickyCollectionItem;
 import resources.objects.collections.CollectionItem;
 import resources.radial.RadialOption;
 import resources.radial.Radials;
-import resources.server_info.Log;
 
 import com.projectswg.common.control.Service;
+import com.projectswg.common.debug.Log;
 import com.projectswg.common.info.RelationalServerData;
 import com.projectswg.common.info.RelationalServerFactory;
 

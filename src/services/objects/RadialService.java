@@ -46,10 +46,10 @@ import resources.objects.creature.CreatureObject;
 import resources.player.Player;
 import resources.radial.RadialItem;
 import resources.radial.RadialOption;
-import resources.server_info.Log;
 import services.galaxy.GalacticManager;
 
 import com.projectswg.common.control.Service;
+import com.projectswg.common.debug.Log;
 
 public class RadialService extends Service {
 

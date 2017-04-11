@@ -27,12 +27,13 @@
  ***********************************************************************************/
 package services.network;
 
-import java.net.SocketAddress;
 import java.net.InetSocketAddress;
+import java.net.SocketAddress;
 import java.nio.ByteBuffer;
 
 import resources.network.TCPServer;
-import resources.server_info.Log;
+
+import com.projectswg.common.debug.Log;
 
 public class PacketSender {
 	

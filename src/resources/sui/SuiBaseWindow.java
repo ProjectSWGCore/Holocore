@@ -27,16 +27,17 @@
 ***********************************************************************************/
 package resources.sui;
 
-import network.packets.Packet;
-import resources.encodables.Encodable;
-import resources.server_info.Log;
-
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import network.packets.Packet;
+import resources.encodables.Encodable;
+
+import com.projectswg.common.debug.Log;
 
 public class SuiBaseWindow implements Encodable {
 

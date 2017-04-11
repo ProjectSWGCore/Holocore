@@ -33,9 +33,9 @@ import java.util.List;
 import java.util.Map;
 
 import resources.chat.ChatRoom;
-import resources.server_info.Log;
 
 import com.projectswg.common.debug.Assert;
+import com.projectswg.common.debug.Log;
 
 public class ChatRoomContainer {
 	

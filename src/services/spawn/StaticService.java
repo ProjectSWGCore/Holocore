@@ -41,11 +41,11 @@ import java.util.Map;
 import resources.Location;
 import resources.objects.SWGObject;
 import resources.objects.building.BuildingObject;
-import resources.server_info.Log;
 import services.objects.ObjectCreator;
 
 import com.projectswg.common.control.Service;
 import com.projectswg.common.debug.Assert;
+import com.projectswg.common.debug.Log;
 import com.projectswg.common.info.RelationalServerData;
 import com.projectswg.common.info.RelationalServerFactory;
 

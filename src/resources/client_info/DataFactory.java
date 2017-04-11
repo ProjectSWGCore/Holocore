@@ -31,7 +31,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.channels.ClosedChannelException;
 
-import resources.server_info.Log;
+import com.projectswg.common.debug.Log;
+
 
 /**
  * Created by Waverunner on 6/9/2015

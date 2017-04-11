@@ -51,7 +51,8 @@ import resources.client_info.visitors.appearance.SkeletalAppearanceData;
 import resources.client_info.visitors.appearance.SkeletalMeshGeneratorTemplateData;
 import resources.client_info.visitors.shader.CustomizableShaderData;
 import resources.client_info.visitors.shader.StaticShaderData;
-import resources.server_info.Log;
+
+import com.projectswg.common.debug.Log;
 
 public class ClientFactory extends DataFactory {
 	

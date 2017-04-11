@@ -27,15 +27,16 @@
 
 package resources.sui;
 
-import network.packets.Packet;
-import resources.encodables.Encodable;
-import resources.server_info.Log;
-import utilities.Encoder;
-
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+
+import network.packets.Packet;
+import resources.encodables.Encodable;
+import utilities.Encoder;
+
+import com.projectswg.common.debug.Log;
 
 /**
  * @author Waverunner

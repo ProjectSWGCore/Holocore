@@ -39,7 +39,8 @@ import resources.Posture;
 import resources.Terrain;
 import resources.TravelPoint;
 import resources.objects.creature.CreatureObject;
-import resources.server_info.Log;
+
+import com.projectswg.common.debug.Log;
 
 public class TravelGroup implements Runnable {
 	

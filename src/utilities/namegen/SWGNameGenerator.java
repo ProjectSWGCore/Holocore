@@ -27,10 +27,6 @@
 ***********************************************************************************/
 package utilities.namegen;
 
-import resources.Race;
-import resources.server_info.Log;
-import resources.zone.NameFilter;
-
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -40,6 +36,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+
+import resources.Race;
+import resources.zone.NameFilter;
+
+import com.projectswg.common.debug.Log;
 
 public class SWGNameGenerator {
 

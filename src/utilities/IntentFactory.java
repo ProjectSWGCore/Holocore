@@ -39,9 +39,9 @@ import resources.encodables.player.Mail;
 import resources.objects.SWGObject;
 import resources.objects.waypoint.WaypointObject;
 import resources.player.Player;
-import resources.server_info.Log;
 
 import com.projectswg.common.control.IntentChain;
+import com.projectswg.common.debug.Log;
 
 /**
  * @author Mads

@@ -40,10 +40,10 @@ import resources.objects.SWGObject;
 import resources.objects.building.BuildingObject;
 import resources.objects.cell.CellObject;
 import resources.player.Player;
-import resources.server_info.Log;
 import services.galaxy.GalacticManager;
 import services.objects.ObjectManager;
 
+import com.projectswg.common.debug.Log;
 import com.projectswg.common.info.RelationalServerData;
 import com.projectswg.common.info.RelationalServerFactory;
 

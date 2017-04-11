@@ -27,12 +27,13 @@
 ***********************************************************************************/
 package utilities;
 
-import resources.encodables.Encodable;
-import resources.server_info.Log;
-
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.charset.Charset;
+
+import resources.encodables.Encodable;
+
+import com.projectswg.common.debug.Log;
 
 public class Encoder {
 

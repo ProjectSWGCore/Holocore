@@ -27,10 +27,6 @@
 
 package resources.client_info;
 
-import resources.client_info.visitors.DatatableData;
-import resources.client_info.visitors.DatatableData.ColumnType;
-import resources.server_info.Log;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileVisitResult;
@@ -41,6 +37,11 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import resources.client_info.visitors.DatatableData;
+import resources.client_info.visitors.DatatableData.ColumnType;
+
+import com.projectswg.common.debug.Log;
 
 
 /**

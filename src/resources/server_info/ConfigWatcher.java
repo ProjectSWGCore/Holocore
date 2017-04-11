@@ -41,10 +41,11 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import com.projectswg.common.concurrency.PswgBasicThread;
-import com.projectswg.common.info.Config;
-
 import resources.config.ConfigFile;
+
+import com.projectswg.common.concurrency.PswgBasicThread;
+import com.projectswg.common.debug.Log;
+import com.projectswg.common.info.Config;
 
 public final class ConfigWatcher {
 	

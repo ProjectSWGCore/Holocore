@@ -36,8 +36,9 @@ import resources.collections.SWGList;
 import resources.collections.SWGMap;
 import resources.collections.SWGSet;
 import resources.encodables.Encodable;
-import resources.server_info.Log;
 import utilities.Encoder.StringType;
+
+import com.projectswg.common.debug.Log;
 
 
 public class NetBuffer {

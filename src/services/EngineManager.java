@@ -33,10 +33,10 @@ import java.io.IOException;
 import resources.client_info.ServerFactory;
 import resources.config.ConfigFile;
 import resources.server_info.DataManager;
-import resources.server_info.Log;
 import services.network.NetworkManager;
 
 import com.projectswg.common.control.Manager;
+import com.projectswg.common.debug.Log;
 import com.projectswg.common.info.Config;
 import com.projectswg.common.info.RelationalDatabase;
 import com.projectswg.common.info.RelationalServerFactory;

@@ -36,7 +36,8 @@ import java.util.Map;
 
 import network.packets.Packet;
 import resources.encodables.Encodable;
-import resources.server_info.Log;
+
+import com.projectswg.common.debug.Log;
 
 public class RadialOptionList implements Encodable {
 	

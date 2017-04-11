@@ -71,11 +71,11 @@ import resources.objects.creature.CreatureObject;
 import resources.objects.staticobject.StaticObject;
 import resources.objects.tangible.TangibleObject;
 import resources.objects.weapon.WeaponObject;
-import resources.server_info.Log;
 import services.objects.ObjectCreator;
 import utilities.ThreadUtilities;
 
 import com.projectswg.common.control.Manager;
+import com.projectswg.common.debug.Log;
 
 public class CombatManager extends Manager {
 

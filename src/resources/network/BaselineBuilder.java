@@ -27,16 +27,17 @@
 ***********************************************************************************/
 package resources.network;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.nio.charset.Charset;
+
 import network.packets.swg.zone.baselines.Baseline;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.encodables.Encodable;
 import resources.objects.SWGObject;
 import resources.player.Player;
-import resources.server_info.Log;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.nio.charset.Charset;
+import com.projectswg.common.debug.Log;
 
 public class BaselineBuilder {
 	

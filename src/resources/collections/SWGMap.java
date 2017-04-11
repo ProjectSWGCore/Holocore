@@ -36,11 +36,11 @@ import network.packets.Packet;
 import resources.encodables.Encodable;
 import resources.network.NetBuffer;
 import resources.objects.SWGObject;
-import resources.server_info.Log;
 import utilities.Encoder;
 import utilities.Encoder.StringType;
 
 import com.projectswg.common.concurrency.SynchronizedMap;
+import com.projectswg.common.debug.Log;
 
 public class SWGMap<K, V> extends SynchronizedMap<K, V> implements Encodable {
 	

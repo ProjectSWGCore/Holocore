@@ -35,10 +35,10 @@ import resources.Terrain;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.waypoint.WaypointObject;
-import resources.server_info.Log;
 
 import com.projectswg.common.callback.CallbackManager;
 import com.projectswg.common.debug.Assert;
+import com.projectswg.common.debug.Log;
 
 public class TerrainMap {
 	

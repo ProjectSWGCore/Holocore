@@ -57,10 +57,10 @@ import resources.objects.building.BuildingObject;
 import resources.objects.cell.CellObject;
 import resources.server_info.CrcDatabase;
 import resources.server_info.DataManager;
-import resources.server_info.Log;
 import resources.server_info.StandardLog;
 
 import com.projectswg.common.control.Service;
+import com.projectswg.common.debug.Log;
 import com.projectswg.common.info.RelationalServerData;
 import com.projectswg.common.info.RelationalServerFactory;
 

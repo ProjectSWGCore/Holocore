@@ -41,7 +41,8 @@ import resources.client_info.ClientFactory;
 import resources.client_info.visitors.CrcStringTableData;
 import resources.client_info.visitors.DatatableData;
 import resources.server_info.CrcDatabase;
-import resources.server_info.Log;
+
+import com.projectswg.common.debug.Log;
 
 public class CrcDatabaseGenerator {
 	

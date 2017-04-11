@@ -62,9 +62,9 @@ import resources.player.Player;
 import resources.player.Player.PlayerServer;
 import resources.player.PlayerEvent;
 import resources.server_info.DataManager;
-import resources.server_info.Log;
 
 import com.projectswg.common.control.Manager;
+import com.projectswg.common.debug.Log;
 
 public class ZoneManager extends Manager {
 	

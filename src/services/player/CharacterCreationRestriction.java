@@ -35,7 +35,8 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import resources.player.Player;
-import resources.server_info.Log;
+
+import com.projectswg.common.debug.Log;
 
 public class CharacterCreationRestriction {
 	

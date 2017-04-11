@@ -35,7 +35,8 @@ import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.StandardCharsets;
 
-import resources.server_info.Log;
+import com.projectswg.common.debug.Log;
+
 
 /**
  * Created by Waverunner on 6/4/2015

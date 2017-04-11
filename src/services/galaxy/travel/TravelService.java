@@ -67,7 +67,6 @@ import resources.objects.staticobject.StaticObject;
 import resources.objects.tangible.OptionFlag;
 import resources.player.Player;
 import resources.server_info.DataManager;
-import resources.server_info.Log;
 import resources.sui.SuiButtons;
 import resources.sui.SuiListBox;
 import resources.sui.SuiMessageBox;
@@ -76,6 +75,7 @@ import services.objects.ObjectCreator;
 import utilities.ThreadUtilities;
 
 import com.projectswg.common.control.Service;
+import com.projectswg.common.debug.Log;
 import com.projectswg.common.info.Config;
 import com.projectswg.common.info.RelationalServerData;
 import com.projectswg.common.info.RelationalServerFactory;

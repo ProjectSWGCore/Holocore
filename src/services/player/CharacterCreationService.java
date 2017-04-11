@@ -60,7 +60,6 @@ import resources.player.Player;
 import resources.player.PlayerEvent;
 import resources.player.PlayerState;
 import resources.server_info.DataManager;
-import resources.server_info.Log;
 import resources.zone.NameFilter;
 import services.objects.ObjectManager;
 import services.player.TerrainZoneInsertion.SpawnInformation;
@@ -69,6 +68,7 @@ import utilities.namegen.SWGNameGenerator;
 
 import com.projectswg.common.control.Service;
 import com.projectswg.common.debug.Assert;
+import com.projectswg.common.debug.Log;
 import com.projectswg.common.info.RelationalDatabase;
 import com.projectswg.common.info.RelationalServerFactory;
 

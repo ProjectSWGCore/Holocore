@@ -47,10 +47,10 @@ import resources.network.TCPServer;
 import resources.network.UDPServer;
 import resources.network.UDPServer.UDPPacket;
 import resources.server_info.DataManager;
-import resources.server_info.Log;
 import services.CoreManager;
 
 import com.projectswg.common.control.Manager;
+import com.projectswg.common.debug.Log;
 
 public class NetworkClientManager extends Manager {
 	

@@ -47,12 +47,12 @@ import resources.objects.tangible.TangibleObject;
 import resources.objects.weapon.WeaponObject;
 import resources.objects.weapon.WeaponType;
 import resources.player.AccessLevel;
-import resources.server_info.Log;
 import services.objects.ObjectCreator;
 import services.objects.ObjectManager;
 import services.player.TerrainZoneInsertion.SpawnInformation;
 
 import com.projectswg.common.debug.Assert;
+import com.projectswg.common.debug.Log;
 
 public class CharacterCreation {
 	

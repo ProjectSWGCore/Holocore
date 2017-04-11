@@ -34,6 +34,7 @@ import java.util.concurrent.TimeUnit;
 import resources.persistable.Persistable;
 
 import com.projectswg.common.concurrency.PswgBasicScheduledThread;
+import com.projectswg.common.debug.Log;
 
 public abstract class ObjectDatabase<V extends Persistable> {
 	

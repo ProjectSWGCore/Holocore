@@ -27,16 +27,16 @@
 ***********************************************************************************/
 package resources.encodables;
 
-import network.packets.Packet;
-
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.charset.Charset;
 
+import network.packets.Packet;
 import resources.network.NetBufferStream;
 import resources.persistable.Persistable;
-import resources.server_info.Log;
+
+import com.projectswg.common.debug.Log;
 
 public class ProsePackage implements OutOfBandData {
 	

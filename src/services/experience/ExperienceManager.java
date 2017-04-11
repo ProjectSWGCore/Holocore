@@ -46,9 +46,9 @@ import resources.encodables.StringId;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
 import resources.server_info.DataManager;
-import resources.server_info.Log;
 
 import com.projectswg.common.control.Manager;
+import com.projectswg.common.debug.Log;
 
 /**
  * The {@code ExperienceManager} listens for {@link ExperienceIntent} and

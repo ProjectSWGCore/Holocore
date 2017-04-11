@@ -54,14 +54,13 @@ import resources.Galaxy.GalaxyStatus;
 import resources.config.ConfigFile;
 import resources.control.ServerStatus;
 import resources.server_info.DataManager;
-import resources.server_info.Log;
-import resources.server_info.Log.LogLevel;
 import services.galaxy.GalacticManager;
 import utilities.CrcDatabaseGenerator;
 import utilities.ScheduledUtilities;
 import utilities.ThreadUtilities;
 
 import com.projectswg.common.control.Manager;
+import com.projectswg.common.debug.Log;
 import com.projectswg.common.info.Config;
 
 public class CoreManager extends Manager {
@@ -81,7 +80,6 @@ public class CoreManager extends Manager {
 	
 	public CoreManager(int adminServerPort) {
 		Config c = DataManager.getConfig(ConfigFile.PRIMARY);
-		Log.setLogLevel(LogLevel.valueOf(c.getString("LOG-LEVEL", LogLevel.DEBUG.name())));
 		setupGalaxy(c);
 		setupCrcDatabase();
 		if (adminServerPort <= 0)

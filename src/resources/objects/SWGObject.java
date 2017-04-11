@@ -64,7 +64,6 @@ import resources.objects.creature.CreatureObject;
 import resources.persistable.Persistable;
 import resources.persistable.SWGObjectFactory;
 import resources.player.Player;
-import resources.server_info.Log;
 import services.CoreManager;
 import services.objects.ObjectCreator;
 import utilities.AwarenessUtilities;
@@ -72,6 +71,7 @@ import utilities.AwarenessUtilities;
 import com.projectswg.common.concurrency.SynchronizedMap;
 import com.projectswg.common.concurrency.SynchronizedSet;
 import com.projectswg.common.debug.Assert;
+import com.projectswg.common.debug.Log;
 
 public abstract class SWGObject extends BaselineObject implements Comparable<SWGObject>, Persistable {
 	

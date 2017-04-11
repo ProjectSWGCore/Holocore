@@ -43,7 +43,6 @@ import resources.objects.player.PlayerObject;
 import resources.player.Player;
 import resources.player.PlayerEvent;
 import resources.player.PlayerFlags;
-import resources.server_info.Log;
 import services.CoreManager;
 import utilities.ThreadUtilities;
 
@@ -51,6 +50,7 @@ import com.projectswg.common.concurrency.SynchronizedSet;
 import com.projectswg.common.control.Intent;
 import com.projectswg.common.control.Service;
 import com.projectswg.common.debug.Assert;
+import com.projectswg.common.debug.Log;
 
 public class ConnectionService extends Service {
 	

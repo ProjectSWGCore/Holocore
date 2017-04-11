@@ -53,7 +53,6 @@ import resources.objects.custom.AIBehavior;
 import resources.objects.custom.DefaultAIObject;
 import resources.objects.tangible.OptionFlag;
 import resources.server_info.DataManager;
-import resources.server_info.Log;
 import resources.server_info.StandardLog;
 import resources.spawn.Spawner;
 import resources.spawn.Spawner.SpawnerFlag;
@@ -63,6 +62,7 @@ import services.objects.ObjectManager;
 import utilities.ThreadUtilities;
 
 import com.projectswg.common.control.Service;
+import com.projectswg.common.debug.Log;
 import com.projectswg.common.info.RelationalDatabase;
 import com.projectswg.common.info.RelationalServerFactory;
 

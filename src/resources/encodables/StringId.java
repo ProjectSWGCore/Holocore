@@ -27,13 +27,13 @@
 ***********************************************************************************/
 package resources.encodables;
 
-import network.packets.Packet;
-
 import java.nio.ByteBuffer;
 
+import network.packets.Packet;
 import resources.network.NetBufferStream;
 import resources.persistable.Persistable;
-import resources.server_info.Log;
+
+import com.projectswg.common.debug.Log;
 
 public class StringId implements OutOfBandData, Persistable {
 	
