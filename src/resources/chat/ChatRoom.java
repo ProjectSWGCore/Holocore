@@ -35,8 +35,6 @@ import resources.network.NetBufferStream;
 import resources.persistable.Persistable;
 import services.player.PlayerManager;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
@@ -68,11 +66,6 @@ public class ChatRoom implements Encodable, Persistable {
 		invited = new ArrayList<>();
 		members = new ArrayList<>();
 		banned = new ArrayList<>();
-	}
-	
-	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
-		members = new ArrayList<>();
-		ois.defaultReadObject();
 	}
 	
 	public int getId() {
