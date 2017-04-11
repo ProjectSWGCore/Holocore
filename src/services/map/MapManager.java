@@ -48,7 +48,6 @@ import resources.objects.SWGObject;
 import resources.player.Player;
 
 import com.projectswg.common.control.Manager;
-import com.sun.prism.PhongMaterial.MapType;
 
 public class MapManager extends Manager {
 	
