@@ -29,8 +29,8 @@ package network.packets.swg.zone.chat;
 
 import java.nio.ByteBuffer;
 
-import resources.encodables.OutOfBandPackage;
 import network.packets.swg.SWGPacket;
+import resources.encodables.OutOfBandPackage;
 
 public class ChatSystemMessage extends SWGPacket {
 	public static final int CRC = getCrc("ChatSystemMessage");

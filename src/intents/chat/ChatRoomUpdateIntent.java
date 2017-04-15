@@ -26,10 +26,10 @@
  ******************************************************************************/
 package intents.chat;
 
+import com.projectswg.common.control.Intent;
+
 import resources.chat.ChatAvatar;
 import resources.player.Player;
-
-import com.projectswg.common.control.Intent;
 
 public class ChatRoomUpdateIntent extends Intent {
 	

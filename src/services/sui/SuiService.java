@@ -27,9 +27,6 @@
 ***********************************************************************************/
 package services.sui;
 
-import intents.network.GalacticPacketIntent;
-import intents.sui.SuiWindowIntent;
-
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,6 +34,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.projectswg.common.control.Service;
+import com.projectswg.common.debug.Log;
+
+import intents.network.GalacticPacketIntent;
+import intents.sui.SuiWindowIntent;
 import network.packets.Packet;
 import network.packets.swg.SWGPacket;
 import network.packets.swg.zone.server_ui.SuiCreatePageMessage;
@@ -48,9 +50,6 @@ import resources.sui.SuiBaseWindow;
 import resources.sui.SuiComponent;
 import resources.sui.SuiEvent;
 import utilities.Scripts;
-
-import com.projectswg.common.control.Service;
-import com.projectswg.common.debug.Log;
 
 public class SuiService extends Service {
 

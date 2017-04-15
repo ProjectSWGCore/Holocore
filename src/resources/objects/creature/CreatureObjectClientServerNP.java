@@ -30,17 +30,18 @@ package resources.objects.creature;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.projectswg.common.encoding.StringType;
+import com.projectswg.common.network.NetBuffer;
+import com.projectswg.common.network.NetBufferStream;
+import com.projectswg.common.persistable.Persistable;
+
 import resources.SkillMod;
 import resources.collections.SWGList;
 import resources.collections.SWGMap;
 import resources.collections.SWGSet;
 import resources.network.BaselineBuilder;
-import resources.network.NetBuffer;
-import resources.network.NetBufferStream;
 import resources.objects.SWGObject;
-import resources.persistable.Persistable;
 import resources.player.Player;
-import utilities.Encoder.StringType;
 
 class CreatureObjectClientServerNP implements Persistable {
 	
@@ -248,8 +249,8 @@ class CreatureObjectClientServerNP implements Persistable {
 	public void parseBaseline4(NetBuffer buffer) {
 		accelPercent = buffer.getFloat();
 		accelScale = buffer.getFloat();
-		hamEncumbList = buffer.getSwgList(4, 2, Integer.class);
-		skillMods = buffer.getSwgMap(4, 3, StringType.ASCII, SkillMod.class);
+		hamEncumbList = SWGList.getSwgList(buffer, 4, 2, Integer.class);
+		skillMods = SWGMap.getSwgMap(buffer, 4, 3, StringType.ASCII, SkillMod.class);
 		movementPercent = buffer.getFloat();
 		movementScale = buffer.getFloat();
 		performanceListenTarget = buffer.getLong();
@@ -259,8 +260,8 @@ class CreatureObjectClientServerNP implements Persistable {
 		turnScale = buffer.getFloat();
 		walkSpeed = buffer.getFloat();
 		waterModPercent = buffer.getFloat();
-		missionCriticalObjs = buffer.getSwgSet(4, 13, StringType.ASCII);
-		abilities = buffer.getSwgMap(4, 14, StringType.ASCII, Integer.class);
+		missionCriticalObjs = SWGSet.getSwgSet(buffer, 4, 13, StringType.ASCII);
+		abilities = SWGMap.getSwgMap(buffer, 4, 14, StringType.ASCII, Integer.class);
 		totalLevelXp = buffer.getInt();
 	}
 	

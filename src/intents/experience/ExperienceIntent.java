@@ -27,9 +27,9 @@
 ***********************************************************************************/
 package intents.experience;
 
-import resources.objects.creature.CreatureObject;
-
 import com.projectswg.common.control.Intent;
+
+import resources.objects.creature.CreatureObject;
 
 public final class ExperienceIntent extends Intent {
 	

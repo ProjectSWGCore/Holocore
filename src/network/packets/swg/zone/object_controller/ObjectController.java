@@ -29,11 +29,11 @@ package network.packets.swg.zone.object_controller;
 
 import java.nio.ByteBuffer;
 
+import com.projectswg.common.debug.Log;
+
 import network.packets.swg.SWGPacket;
 import network.packets.swg.zone.object_controller.combat.CombatAction;
 import network.packets.swg.zone.object_controller.combat.CombatSpam;
-
-import com.projectswg.common.debug.Log;
 
 public abstract class ObjectController extends SWGPacket {
 	

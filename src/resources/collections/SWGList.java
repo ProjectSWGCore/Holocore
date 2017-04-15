@@ -34,17 +34,17 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import network.packets.Packet;
-import network.packets.swg.zone.baselines.Baseline.BaselineType;
-import resources.encodables.Encodable;
-import resources.network.NetBuffer;
-import resources.objects.SWGObject;
-import utilities.Encoder;
-import utilities.Encoder.StringType;
-
 import com.projectswg.common.concurrency.SynchronizedList;
 import com.projectswg.common.debug.Assert;
 import com.projectswg.common.debug.Log;
+import com.projectswg.common.encoding.Encodable;
+import com.projectswg.common.encoding.Encoder;
+import com.projectswg.common.encoding.StringType;
+import com.projectswg.common.network.NetBuffer;
+
+import network.packets.Packet;
+import network.packets.swg.zone.baselines.Baseline.BaselineType;
+import resources.objects.SWGObject;
 
 /**
  * Supports a list of elements which automatically sends data as a delta when changed for baselines.
@@ -326,5 +326,17 @@ public class SWGList<E> extends SynchronizedList<E> implements Encodable {
 	@Override
 	public String toString() {
 		return "SWGList[0" + view + ":" + updateType + "]";
+	}
+	
+	public static SWGList<String> getSwgList(NetBuffer buffer, int num, int var, StringType type) {
+		SWGList<String> list = new SWGList<>(num, var, type);
+		list.decode(buffer.getBuffer(), type);
+		return list;
+	}
+	
+	public static <T> SWGList<T> getSwgList(NetBuffer buffer, int num, int var, Class<T> c) {
+		SWGList<T> list = new SWGList<>(num, var);
+		list.decode(buffer.getBuffer(), c);
+		return list;
 	}
 }

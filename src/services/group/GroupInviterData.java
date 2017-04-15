@@ -27,11 +27,12 @@
 
 package services.group;
 
-import network.packets.Packet;
-import resources.encodables.Encodable;
-import resources.player.Player;
-
 import java.nio.ByteBuffer;
+
+import com.projectswg.common.encoding.Encodable;
+
+import network.packets.Packet;
+import resources.player.Player;
 
 /**
  * Created by Waverunner on 10/4/2015

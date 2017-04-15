@@ -27,9 +27,9 @@
 ***********************************************************************************/
 package intents.travel;
 
-import resources.objects.creature.CreatureObject;
-
 import com.projectswg.common.control.Intent;
+
+import resources.objects.creature.CreatureObject;
 
 public final class TicketPurchaseIntent extends Intent {
 	

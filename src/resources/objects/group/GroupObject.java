@@ -34,24 +34,24 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
+import com.projectswg.common.concurrency.SynchronizedMap;
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.debug.Assert;
+import com.projectswg.common.encoding.Encodable;
+import com.projectswg.common.encoding.StringType;
+
 import network.packets.Packet;
 import network.packets.swg.zone.baselines.Baseline;
-import resources.Location;
-import resources.Terrain;
 import resources.collections.SWGList;
-import resources.encodables.Encodable;
 import resources.network.BaselineBuilder;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
-import utilities.Encoder;
-
-import com.projectswg.common.concurrency.SynchronizedMap;
-import com.projectswg.common.debug.Assert;
 
 public class GroupObject extends SWGObject {
 	
-	private final SWGList<GroupMember>	groupMembers		= new SWGList<>(6, 2, Encoder.StringType.ASCII);
+	private final SWGList<GroupMember>	groupMembers		= new SWGList<>(6, 2, StringType.ASCII);
 	private final Map<Long, GroupMember>memberMap			= new SynchronizedMap<>();
 	private final PickupPointTimer		pickupPointTimer	= new PickupPointTimer();
 	

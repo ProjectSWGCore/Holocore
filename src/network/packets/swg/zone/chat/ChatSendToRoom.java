@@ -27,10 +27,10 @@
 
 package network.packets.swg.zone.chat;
 
+import java.nio.ByteBuffer;
+
 import network.packets.swg.SWGPacket;
 import resources.encodables.OutOfBandPackage;
-
-import java.nio.ByteBuffer;
 
 /**
  * @author Waverunner

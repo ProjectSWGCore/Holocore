@@ -27,18 +27,22 @@
  ***********************************************************************************/
 package services.objects;
 
-import intents.chat.ChatBroadcastIntent;
-import intents.object.CreateStaticItemIntent;
-import intents.object.ObjectCreatedIntent;
-import intents.server.ConfigChangedIntent;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.projectswg.common.control.Service;
+import com.projectswg.common.data.info.RelationalServerData;
+import com.projectswg.common.data.info.RelationalServerFactory;
+import com.projectswg.common.data.swgfile.ClientFactory;
+import com.projectswg.common.debug.Log;
+
+import intents.chat.ChatBroadcastIntent;
+import intents.object.CreateStaticItemIntent;
+import intents.object.ObjectCreatedIntent;
+import intents.server.ConfigChangedIntent;
 import network.packets.swg.zone.object_controller.ShowLootBox;
-import resources.client_info.ClientFactory;
 import resources.combat.DamageType;
 import resources.config.ConfigFile;
 import resources.objects.SWGObject;
@@ -48,11 +52,6 @@ import resources.objects.weapon.WeaponType;
 import resources.player.Player;
 import resources.server_info.DataManager;
 import resources.server_info.StandardLog;
-
-import com.projectswg.common.control.Service;
-import com.projectswg.common.debug.Log;
-import com.projectswg.common.info.RelationalServerData;
-import com.projectswg.common.info.RelationalServerFactory;
 
 /**
  * @author mads

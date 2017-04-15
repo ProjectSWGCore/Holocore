@@ -27,8 +27,6 @@
 ***********************************************************************************/
 package services.network;
 
-import intents.network.CloseConnectionIntent;
-
 import java.io.IOException;
 import java.net.BindException;
 import java.net.InetAddress;
@@ -36,21 +34,22 @@ import java.net.Socket;
 import java.net.SocketAddress;
 import java.net.SocketException;
 
+import com.projectswg.common.control.Manager;
+import com.projectswg.common.debug.Log;
+import com.projectswg.common.network.NetBuffer;
+
+import intents.network.CloseConnectionIntent;
 import main.ProjectSWG.CoreException;
 import network.AdminNetworkClient;
 import network.NetworkClient;
 import network.packets.swg.holo.HoloConnectionStopped.ConnectionStoppedReason;
 import resources.config.ConfigFile;
-import resources.network.NetBuffer;
 import resources.network.NetworkCallback;
 import resources.network.TCPServer;
 import resources.network.UDPServer;
 import resources.network.UDPServer.UDPPacket;
 import resources.server_info.DataManager;
 import services.CoreManager;
-
-import com.projectswg.common.control.Manager;
-import com.projectswg.common.debug.Log;
 
 public class NetworkClientManager extends Manager {
 	

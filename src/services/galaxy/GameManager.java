@@ -27,6 +27,8 @@
  ***********************************************************************************/
 package services.galaxy;
 
+import com.projectswg.common.control.Manager;
+
 import services.collections.CollectionBadgeManager;
 import services.collections.CollectionService;
 import services.combat.CombatManager;
@@ -38,8 +40,6 @@ import services.faction.FactionService;
 import services.galaxy.terminals.TerminalService;
 import services.group.GroupService;
 import services.sui.SuiService;
-
-import com.projectswg.common.control.Manager;
 
 public class GameManager extends Manager {
 

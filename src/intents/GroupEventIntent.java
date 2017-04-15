@@ -26,10 +26,10 @@
  ******************************************************************************/
 package intents;
 
+import com.projectswg.common.control.Intent;
+
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
-
-import com.projectswg.common.control.Intent;
 
 public class GroupEventIntent extends Intent {
 	private GroupEventType eventType;

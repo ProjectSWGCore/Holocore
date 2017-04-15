@@ -27,10 +27,10 @@
 ***********************************************************************************/
 package network.packets.swg.zone.server_ui;
 
+import java.nio.ByteBuffer;
+
 import network.packets.swg.SWGPacket;
 import resources.sui.SuiBaseWindow;
-
-import java.nio.ByteBuffer;
 
 public class SuiCreatePageMessage extends SWGPacket {
 	public static final int CRC = getCrc("SuiCreatePageMessage");

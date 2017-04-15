@@ -27,11 +27,11 @@
  ***********************************************************************************/
 package intents;
 
+import com.projectswg.common.control.Intent;
+
 import resources.PvpFaction;
 import resources.PvpStatus;
 import resources.objects.tangible.TangibleObject;
-
-import com.projectswg.common.control.Intent;
 
 public class FactionIntent extends Intent {
 	

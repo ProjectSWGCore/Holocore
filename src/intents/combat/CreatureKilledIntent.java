@@ -27,9 +27,9 @@
 ***********************************************************************************/
 package intents.combat;
 
-import resources.objects.creature.CreatureObject;
-
 import com.projectswg.common.control.Intent;
+
+import resources.objects.creature.CreatureObject;
 
 public class CreatureKilledIntent extends Intent {
 	

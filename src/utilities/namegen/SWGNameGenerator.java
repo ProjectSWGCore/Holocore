@@ -37,10 +37,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import com.projectswg.common.debug.Log;
+
 import resources.Race;
 import resources.zone.NameFilter;
-
-import com.projectswg.common.debug.Log;
 
 public class SWGNameGenerator {
 

@@ -27,10 +27,6 @@
  ***********************************************************************************/
 package services.map;
 
-import intents.PlayerEventIntent;
-import intents.network.GalacticPacketIntent;
-import intents.object.ObjectCreatedIntent;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -38,19 +34,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.projectswg.common.control.Service;
+import com.projectswg.common.data.info.RelationalDatabase;
+import com.projectswg.common.data.info.RelationalServerFactory;
+import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.debug.Log;
+
+import intents.PlayerEventIntent;
+import intents.network.GalacticPacketIntent;
+import intents.object.ObjectCreatedIntent;
 import network.packets.Packet;
 import network.packets.swg.zone.object_controller.DataTransform;
-import resources.Terrain;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
 import resources.player.PlayerEvent;
-
-import com.projectswg.common.control.Service;
-import com.projectswg.common.debug.Log;
-import com.projectswg.common.info.RelationalDatabase;
-import com.projectswg.common.info.RelationalServerFactory;
 
 public class CityService extends Service {
 	

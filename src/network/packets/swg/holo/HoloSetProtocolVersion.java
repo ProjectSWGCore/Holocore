@@ -31,7 +31,7 @@ import java.nio.ByteBuffer;
 
 public class HoloSetProtocolVersion extends HoloPacket {
 	
-	public static final int CRC = resources.common.CRC.getCrc("HoloSetProtocolVersion");
+	public static final int CRC = getCrc("HoloSetProtocolVersion");
 	
 	private String protocol;
 	

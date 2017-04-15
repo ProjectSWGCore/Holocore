@@ -27,9 +27,9 @@
 ***********************************************************************************/
 package intents.network;
 
-import network.packets.Packet;
-
 import com.projectswg.common.control.Intent;
+
+import network.packets.Packet;
 
 public class OutboundPacketIntent extends Intent {
 	

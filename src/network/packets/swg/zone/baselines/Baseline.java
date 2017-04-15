@@ -27,10 +27,10 @@
 ***********************************************************************************/
 package network.packets.swg.zone.baselines;
 
-import network.packets.swg.SWGPacket;
-
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+
+import network.packets.swg.SWGPacket;
 
 public class Baseline extends SWGPacket {
 	public static final int CRC = getCrc("BaselinesMessage");

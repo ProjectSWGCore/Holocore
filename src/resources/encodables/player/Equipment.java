@@ -29,20 +29,20 @@ package resources.encodables.player;
 
 import java.nio.ByteBuffer;
 
+import com.projectswg.common.data.CRC;
+import com.projectswg.common.debug.Log;
+import com.projectswg.common.encoding.Encodable;
+import com.projectswg.common.network.NetBuffer;
+import com.projectswg.common.network.NetBufferStream;
+import com.projectswg.common.persistable.Persistable;
+
 import network.packets.swg.zone.baselines.Baseline;
-import resources.common.CRC;
-import resources.encodables.Encodable;
-import resources.network.NetBuffer;
-import resources.network.NetBufferStream;
 import resources.objects.SWGObject;
 import resources.objects.tangible.TangibleObject;
 import resources.objects.weapon.WeaponObject;
-import resources.persistable.Persistable;
 import resources.persistable.SWGObjectFactory;
 import resources.player.Player;
 import services.objects.ObjectCreator;
-
-import com.projectswg.common.debug.Log;
 
 public class Equipment implements Encodable, Persistable {
 	

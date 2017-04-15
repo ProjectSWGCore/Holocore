@@ -30,8 +30,8 @@ package network.packets.swg.zone.chat;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
-import resources.encodables.player.Mail;
 import network.packets.swg.SWGPacket;
+import resources.encodables.player.Mail;
 
 public class ChatPersistentMessageToClient extends SWGPacket {
 	public static final int CRC = getCrc("ChatPersistentMessageToClient");

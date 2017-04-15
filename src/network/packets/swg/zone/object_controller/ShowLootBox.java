@@ -28,7 +28,8 @@
 package network.packets.swg.zone.object_controller;
 
 import java.nio.ByteBuffer;
-import resources.network.NetBuffer;
+
+import com.projectswg.common.network.NetBuffer;
 
 public class ShowLootBox extends ObjectController {
 	

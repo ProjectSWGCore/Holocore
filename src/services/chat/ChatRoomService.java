@@ -27,6 +27,8 @@
 
 package services.chat;
 
+import com.projectswg.common.control.Service;
+
 import intents.PlayerEventIntent;
 import intents.chat.ChatRoomUpdateIntent;
 import intents.network.GalacticPacketIntent;
@@ -63,8 +65,6 @@ import resources.chat.ChatResult;
 import resources.chat.ChatRoom;
 import resources.encodables.OutOfBandPackage;
 import resources.player.Player;
-
-import com.projectswg.common.control.Service;
 
 public class ChatRoomService extends Service {
 	

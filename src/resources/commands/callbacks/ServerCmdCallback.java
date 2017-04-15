@@ -27,13 +27,14 @@
 ***********************************************************************************/
 package resources.commands.callbacks;
 
-import intents.server.ServerManagementIntent;
-import intents.server.ServerManagementIntent.ServerManagementEvent;
-
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
+import com.projectswg.common.debug.Log;
+
+import intents.server.ServerManagementIntent;
+import intents.server.ServerManagementIntent.ServerManagementEvent;
 import resources.commands.ICmdCallback;
 import resources.objects.SWGObject;
 import resources.player.Player;
@@ -44,8 +45,6 @@ import resources.sui.SuiInputBox;
 import resources.sui.SuiListBox;
 import resources.sui.SuiMessageBox;
 import services.galaxy.GalacticManager;
-
-import com.projectswg.common.debug.Log;
 
 public class ServerCmdCallback implements ICmdCallback {
 

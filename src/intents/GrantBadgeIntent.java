@@ -26,9 +26,9 @@
  ******************************************************************************/
 package intents;
 
-import resources.objects.creature.CreatureObject;
-
 import com.projectswg.common.control.Intent;
+
+import resources.objects.creature.CreatureObject;
 
 public class GrantBadgeIntent extends Intent {
 	

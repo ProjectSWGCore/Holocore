@@ -27,6 +27,14 @@
 ***********************************************************************************/
 package services.objects;
 
+import com.projectswg.common.control.Intent;
+import com.projectswg.common.control.Service;
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.location.Point3D;
+import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.debug.Assert;
+import com.projectswg.common.debug.Log;
+
 import intents.PlayerEventIntent;
 import intents.RequestZoneInIntent;
 import intents.network.CloseConnectionIntent;
@@ -48,9 +56,6 @@ import network.packets.swg.zone.insertion.ChatServerStatus;
 import network.packets.swg.zone.insertion.CmdStartScene;
 import network.packets.swg.zone.object_controller.DataTransform;
 import network.packets.swg.zone.object_controller.DataTransformWithParent;
-import resources.Location;
-import resources.Point3D;
-import resources.Terrain;
 import resources.config.ConfigFile;
 import resources.network.DisconnectReason;
 import resources.objects.SWGObject;
@@ -62,11 +67,6 @@ import resources.player.Player;
 import resources.player.PlayerEvent;
 import resources.player.PlayerState;
 import resources.server_info.DataManager;
-
-import com.projectswg.common.control.Intent;
-import com.projectswg.common.control.Service;
-import com.projectswg.common.debug.Assert;
-import com.projectswg.common.debug.Log;
 
 public class ObjectAwareness extends Service implements TerrainMapCallback {
 	

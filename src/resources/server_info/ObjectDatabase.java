@@ -31,10 +31,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-import resources.persistable.Persistable;
-
 import com.projectswg.common.concurrency.PswgBasicScheduledThread;
 import com.projectswg.common.debug.Log;
+import com.projectswg.common.persistable.Persistable;
 
 public abstract class ObjectDatabase<V extends Persistable> {
 	

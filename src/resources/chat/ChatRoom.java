@@ -26,18 +26,19 @@
  ******************************************************************************/
 package resources.chat;
 
-import network.packets.Packet;
-import network.packets.swg.SWGPacket;
-import network.packets.swg.zone.chat.ChatRoomMessage;
-import resources.encodables.Encodable;
-import resources.encodables.OutOfBandPackage;
-import resources.network.NetBufferStream;
-import resources.persistable.Persistable;
-import services.player.PlayerManager;
-
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.projectswg.common.encoding.Encodable;
+import com.projectswg.common.network.NetBufferStream;
+import com.projectswg.common.persistable.Persistable;
+
+import network.packets.Packet;
+import network.packets.swg.SWGPacket;
+import network.packets.swg.zone.chat.ChatRoomMessage;
+import resources.encodables.OutOfBandPackage;
+import services.player.PlayerManager;
 
 public class ChatRoom implements Encodable, Persistable {
 	

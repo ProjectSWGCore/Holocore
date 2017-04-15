@@ -30,11 +30,13 @@ package resources.objects.player;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.projectswg.common.encoding.StringType;
+import com.projectswg.common.network.NetBufferStream;
+
 import network.packets.swg.zone.UpdatePostureMessage;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.collections.SWGMap;
 import resources.network.BaselineBuilder;
-import resources.network.NetBufferStream;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.intangible.IntangibleObject;
@@ -42,7 +44,6 @@ import resources.objects.waypoint.WaypointObject;
 import resources.player.AccessLevel;
 import resources.player.Player;
 import resources.player.PlayerFlags;
-import utilities.Encoder.StringType;
 
 public class PlayerObject extends IntangibleObject {
 	
@@ -407,21 +408,25 @@ public class PlayerObject extends IntangibleObject {
 			target.sendPacket(new UpdatePostureMessage(((CreatureObject)parent).getPosture().getId(), getObjectId()));
 	}
 	
+	@Override
 	public void createBaseline3(Player target, BaselineBuilder bb) {
 		super.createBaseline3(target, bb); // 5 variables
 		play3.createBaseline3(target, bb);
 	}
 	
+	@Override
 	public void createBaseline6(Player target, BaselineBuilder bb) {
 		super.createBaseline6(target, bb); // 2 variables
 		play6.createBaseline6(target, bb);
 	}
 	
+	@Override
 	public void createBaseline8(Player target, BaselineBuilder bb) {
 		super.createBaseline8(target, bb); // 0 variables
 		play8.createBaseline8(target, bb);
 	}
 	
+	@Override
 	public void createBaseline9(Player target, BaselineBuilder bb) {
 		super.createBaseline9(target, bb); // 0 variables
 		play9.createBaseline9(target, bb);

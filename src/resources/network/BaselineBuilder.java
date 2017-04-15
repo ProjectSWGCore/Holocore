@@ -31,13 +31,13 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
 
+import com.projectswg.common.debug.Log;
+import com.projectswg.common.encoding.Encodable;
+
 import network.packets.swg.zone.baselines.Baseline;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
-import resources.encodables.Encodable;
 import resources.objects.SWGObject;
 import resources.player.Player;
-
-import com.projectswg.common.debug.Log;
 
 public class BaselineBuilder {
 	

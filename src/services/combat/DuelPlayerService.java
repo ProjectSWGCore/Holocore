@@ -27,14 +27,14 @@
  ***********************************************************************************/
 package services.combat;
 
+import com.projectswg.common.control.Service;
+
 import intents.chat.ChatBroadcastIntent;
 import intents.combat.DuelPlayerIntent;
 import resources.PvpFlag;
 import resources.encodables.ProsePackage;
 import resources.encodables.StringId;
 import resources.objects.creature.CreatureObject;
-
-import com.projectswg.common.control.Service;
 
 public class DuelPlayerService extends Service {
 	

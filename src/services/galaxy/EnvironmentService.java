@@ -27,9 +27,6 @@
 ***********************************************************************************/
 package services.galaxy;
 
-import intents.NotifyPlayersPacketIntent;
-import intents.PlayerEventIntent;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -37,17 +34,19 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import com.projectswg.common.control.Service;
+import com.projectswg.common.data.location.Terrain;
+
+import intents.NotifyPlayersPacketIntent;
+import intents.PlayerEventIntent;
 import main.ProjectSWG;
 import network.packets.swg.SWGPacket;
 import network.packets.swg.zone.ServerTimeMessage;
 import network.packets.swg.zone.ServerWeatherMessage;
-import resources.Terrain;
 import resources.WeatherType;
 import resources.player.Player;
 import resources.player.PlayerEvent;
 import utilities.ThreadUtilities;
-
-import com.projectswg.common.control.Service;
 
 public final class EnvironmentService extends Service {
 	

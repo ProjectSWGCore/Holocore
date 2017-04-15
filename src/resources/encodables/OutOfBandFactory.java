@@ -27,7 +27,8 @@
  ***********************************************************************************/
 package resources.encodables;
 
-import resources.network.NetBufferStream;
+import com.projectswg.common.network.NetBufferStream;
+
 import resources.objects.waypoint.WaypointObject;
 import resources.persistable.SWGObjectFactory;
 

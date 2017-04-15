@@ -31,14 +31,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import com.projectswg.common.encoding.StringType;
+import com.projectswg.common.network.NetBufferStream;
+import com.projectswg.common.persistable.Persistable;
+
 import resources.collections.SWGList;
 import resources.collections.SWGSet;
 import resources.network.BaselineBuilder;
-import resources.network.NetBufferStream;
 import resources.objects.SWGObject;
-import resources.persistable.Persistable;
 import resources.player.Player;
-import utilities.Encoder.StringType;
 
 class PlayerObjectPrivateNP implements Persistable {
 

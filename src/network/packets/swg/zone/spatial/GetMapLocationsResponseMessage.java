@@ -27,12 +27,12 @@
 ***********************************************************************************/
 package network.packets.swg.zone.spatial;
 
-import network.packets.swg.SWGPacket;
-import services.map.MapLocation;
-
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.List;
+
+import network.packets.swg.SWGPacket;
+import services.map.MapLocation;
 
 public class GetMapLocationsResponseMessage extends SWGPacket {
 	public static final int CRC = getCrc("GetMapLocationsResponseMessage");

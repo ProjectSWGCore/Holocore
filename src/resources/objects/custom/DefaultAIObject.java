@@ -30,9 +30,10 @@ package resources.objects.custom;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.location.Point3D;
+
 import intents.object.MoveObjectIntent;
-import resources.Location;
-import resources.Point3D;
 
 public class DefaultAIObject extends AIObject {
 	

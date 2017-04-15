@@ -27,11 +27,6 @@
 ***********************************************************************************/
 package services;
 
-import intents.network.InboundPacketIntent;
-import intents.network.OutboundPacketIntent;
-import intents.server.ServerManagementIntent;
-import intents.server.ServerStatusIntent;
-
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
@@ -44,6 +39,14 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import com.projectswg.common.control.Manager;
+import com.projectswg.common.data.info.Config;
+import com.projectswg.common.debug.Log;
+
+import intents.network.InboundPacketIntent;
+import intents.network.OutboundPacketIntent;
+import intents.server.ServerManagementIntent;
+import intents.server.ServerStatusIntent;
 import network.packets.Packet;
 import network.packets.swg.admin.AdminShutdownServer;
 import network.packets.swg.zone.baselines.Baseline;
@@ -55,13 +58,8 @@ import resources.config.ConfigFile;
 import resources.control.ServerStatus;
 import resources.server_info.DataManager;
 import services.galaxy.GalacticManager;
-import utilities.CrcDatabaseGenerator;
 import utilities.ScheduledUtilities;
 import utilities.ThreadUtilities;
-
-import com.projectswg.common.control.Manager;
-import com.projectswg.common.debug.Log;
-import com.projectswg.common.info.Config;
 
 public class CoreManager extends Manager {
 
@@ -81,7 +79,6 @@ public class CoreManager extends Manager {
 	public CoreManager(int adminServerPort) {
 		Config c = DataManager.getConfig(ConfigFile.PRIMARY);
 		setupGalaxy(c);
-		setupCrcDatabase();
 		if (adminServerPort <= 0)
 			adminServerPort = -1;
 		getGalaxy().setAdminServerPort(adminServerPort);
@@ -104,6 +101,7 @@ public class CoreManager extends Manager {
 	 * Determines whether or not the core is operational
 	 * @return TRUE if the core is operational, FALSE otherwise
 	 */
+	@Override
 	public boolean isOperational() {
 		return true;
 	}
@@ -228,11 +226,6 @@ public class CoreManager extends Manager {
 			}
 		}
 		return null;
-	}
-	
-	private void setupCrcDatabase() {
-		Log.i("Generating CRCs...");
-		CrcDatabaseGenerator.generate(false);
 	}
 	
 	public static Galaxy getGalaxy() {

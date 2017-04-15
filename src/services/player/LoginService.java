@@ -27,13 +27,6 @@
 ***********************************************************************************/
 package services.player;
 
-import intents.GalacticIntent;
-import intents.LoginEventIntent;
-import intents.LoginEventIntent.LoginEvent;
-import intents.network.GalacticPacketIntent;
-import intents.object.DestroyObjectIntent;
-import intents.player.DeleteCharacterIntent;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -41,6 +34,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import com.projectswg.common.control.Service;
+import com.projectswg.common.data.BCrypt;
+import com.projectswg.common.data.info.Config;
+import com.projectswg.common.data.info.RelationalDatabase;
+import com.projectswg.common.data.info.RelationalServerFactory;
+import com.projectswg.common.debug.Assert;
+import com.projectswg.common.debug.Log;
+
+import intents.GalacticIntent;
+import intents.LoginEventIntent;
+import intents.LoginEventIntent.LoginEvent;
+import intents.network.GalacticPacketIntent;
+import intents.object.DestroyObjectIntent;
+import intents.player.DeleteCharacterIntent;
 import network.packets.Packet;
 import network.packets.swg.ErrorMessage;
 import network.packets.swg.login.CharacterCreationDisabled;
@@ -58,7 +65,6 @@ import network.packets.swg.zone.LagRequest;
 import network.packets.swg.zone.ServerNowEpochTime;
 import resources.Galaxy;
 import resources.Race;
-import resources.common.BCrypt;
 import resources.config.ConfigFile;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
@@ -68,13 +74,6 @@ import resources.player.Player.PlayerServer;
 import resources.player.PlayerState;
 import resources.server_info.DataManager;
 import services.CoreManager;
-
-import com.projectswg.common.control.Service;
-import com.projectswg.common.debug.Assert;
-import com.projectswg.common.debug.Log;
-import com.projectswg.common.info.Config;
-import com.projectswg.common.info.RelationalDatabase;
-import com.projectswg.common.info.RelationalServerFactory;
 
 public class LoginService extends Service {
 	

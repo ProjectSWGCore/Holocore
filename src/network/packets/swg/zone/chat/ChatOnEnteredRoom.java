@@ -27,11 +27,11 @@
 ***********************************************************************************/
 package network.packets.swg.zone.chat;
 
+import java.nio.ByteBuffer;
+
 import network.packets.swg.SWGPacket;
 import resources.chat.ChatAvatar;
 import resources.chat.ChatResult;
-
-import java.nio.ByteBuffer;
 
 public class ChatOnEnteredRoom extends SWGPacket {
 	

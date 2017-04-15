@@ -27,25 +27,24 @@
  ***********************************************************************************/
 package services.objects;
 
-import intents.object.CreateStaticItemIntent;
-import intents.object.DestroyObjectIntent;
-import intents.radial.RadialSelectionIntent;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import com.projectswg.common.control.Service;
+import com.projectswg.common.data.info.RelationalServerData;
+import com.projectswg.common.data.info.RelationalServerFactory;
+import com.projectswg.common.debug.Log;
+
+import intents.object.CreateStaticItemIntent;
+import intents.object.DestroyObjectIntent;
+import intents.radial.RadialSelectionIntent;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
 import resources.radial.RadialItem;
-
-import com.projectswg.common.control.Service;
-import com.projectswg.common.debug.Log;
-import com.projectswg.common.info.RelationalServerData;
-import com.projectswg.common.info.RelationalServerFactory;
 
 public class UniformBoxService extends Service {
 	

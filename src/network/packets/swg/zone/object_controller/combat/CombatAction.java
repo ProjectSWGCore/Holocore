@@ -31,13 +31,14 @@ import java.nio.ByteBuffer;
 import java.util.HashSet;
 import java.util.Set;
 
-import resources.Point3D;
+import com.projectswg.common.data.location.Point3D;
+import com.projectswg.common.network.NetBuffer;
+
+import network.packets.swg.zone.object_controller.ObjectController;
 import resources.Posture;
 import resources.combat.HitLocation;
 import resources.combat.TrailLocation;
-import resources.network.NetBuffer;
 import resources.objects.creature.CreatureObject;
-import network.packets.swg.zone.object_controller.ObjectController;
 
 public class CombatAction extends ObjectController {
 	

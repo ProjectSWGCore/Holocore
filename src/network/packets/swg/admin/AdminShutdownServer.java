@@ -31,7 +31,7 @@ import java.nio.ByteBuffer;
 
 public class AdminShutdownServer extends AdminPacket {
 	
-	public static final int CRC = resources.common.CRC.getCrc("AdminShutdownServer");
+	public static final int CRC = getCrc("AdminShutdownServer");
 	
 	private int shutdownTime;
 	

@@ -31,7 +31,7 @@ import java.nio.ByteBuffer;
 
 public class HoloConnectionStarted extends HoloPacket {
 	
-	public static final int CRC = resources.common.CRC.getCrc("HoloConnectionStarted");
+	public static final int CRC = getCrc("HoloConnectionStarted");
 	
 	public HoloConnectionStarted() {
 		

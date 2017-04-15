@@ -27,26 +27,25 @@
  ***********************************************************************************/
 package services.combat;
 
-import intents.combat.CreatureKilledIntent;
-import intents.experience.ExperienceIntent;
-import intents.object.DestroyObjectIntent;
-import intents.object.ObjectCreatedIntent;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.projectswg.common.control.Service;
+import com.projectswg.common.data.info.RelationalDatabase;
+import com.projectswg.common.data.info.RelationalServerFactory;
+import com.projectswg.common.debug.Log;
+
+import intents.combat.CreatureKilledIntent;
+import intents.experience.ExperienceIntent;
+import intents.object.DestroyObjectIntent;
+import intents.object.ObjectCreatedIntent;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureDifficulty;
 import resources.objects.creature.CreatureObject;
 import resources.objects.group.GroupObject;
 import resources.server_info.StandardLog;
-
-import com.projectswg.common.control.Service;
-import com.projectswg.common.debug.Log;
-import com.projectswg.common.info.RelationalDatabase;
-import com.projectswg.common.info.RelationalServerFactory;
 
 public class CombatXpService extends Service {
 	

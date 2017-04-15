@@ -30,16 +30,16 @@ package services;
 import java.io.File;
 import java.io.IOException;
 
+import com.projectswg.common.control.Manager;
+import com.projectswg.common.data.info.Config;
+import com.projectswg.common.data.info.RelationalDatabase;
+import com.projectswg.common.data.info.RelationalServerFactory;
+import com.projectswg.common.debug.Log;
+
 import resources.client_info.ServerFactory;
 import resources.config.ConfigFile;
 import resources.server_info.DataManager;
 import services.network.NetworkManager;
-
-import com.projectswg.common.control.Manager;
-import com.projectswg.common.debug.Log;
-import com.projectswg.common.info.Config;
-import com.projectswg.common.info.RelationalDatabase;
-import com.projectswg.common.info.RelationalServerFactory;
 
 public class EngineManager extends Manager {
 	

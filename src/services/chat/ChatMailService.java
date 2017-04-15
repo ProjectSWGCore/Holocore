@@ -27,10 +27,6 @@
  ***********************************************************************************/
 package services.chat;
 
-import intents.PlayerEventIntent;
-import intents.chat.PersistentMessageIntent;
-import intents.network.GalacticPacketIntent;
-
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Date;
@@ -39,6 +35,14 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.atomic.AtomicReference;
 
+import com.projectswg.common.control.Service;
+import com.projectswg.common.data.info.RelationalServerData;
+import com.projectswg.common.data.info.RelationalServerFactory;
+import com.projectswg.common.debug.Log;
+
+import intents.PlayerEventIntent;
+import intents.chat.PersistentMessageIntent;
+import intents.network.GalacticPacketIntent;
 import network.packets.Packet;
 import network.packets.swg.SWGPacket;
 import network.packets.swg.zone.chat.ChatDeletePersistentMessage;
@@ -57,11 +61,6 @@ import services.CoreManager;
 import services.chat.ChatManager.ChatRange;
 import services.chat.ChatManager.ChatType;
 import services.player.PlayerManager;
-
-import com.projectswg.common.control.Service;
-import com.projectswg.common.debug.Log;
-import com.projectswg.common.info.RelationalServerData;
-import com.projectswg.common.info.RelationalServerFactory;
 
 public class ChatMailService extends Service {
 	

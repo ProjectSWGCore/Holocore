@@ -34,7 +34,7 @@ import network.packets.swg.SWGPacket;
 
 public class RequestExtendedClusters extends SWGPacket {
 	
-	public static final int CRC = resources.common.CRC.getCrc("RequestExtendedClusterInfo");
+	public static final int CRC = getCrc("RequestExtendedClusterInfo");
 	
 	public RequestExtendedClusters() {
 		

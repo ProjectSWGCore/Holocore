@@ -26,11 +26,11 @@
  ******************************************************************************/
 package intents;
 
+import com.projectswg.common.control.Intent;
+
 import resources.objects.SWGObject;
 import resources.objects.collections.CollectionItem;
 import resources.objects.creature.CreatureObject;
-
-import com.projectswg.common.control.Intent;
 
 public class GrantClickyCollectionIntent extends Intent {
 	

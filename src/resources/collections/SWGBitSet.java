@@ -27,14 +27,15 @@
  ***********************************************************************************/
 package resources.collections;
 
-import resources.encodables.Encodable;
-import resources.network.NetBufferStream;
-import resources.objects.SWGObject;
-import resources.persistable.Persistable;
-
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.BitSet;
+
+import com.projectswg.common.encoding.Encodable;
+import com.projectswg.common.network.NetBufferStream;
+import com.projectswg.common.persistable.Persistable;
+
+import resources.objects.SWGObject;
 
 public class SWGBitSet extends BitSet implements Encodable, Persistable {
 	

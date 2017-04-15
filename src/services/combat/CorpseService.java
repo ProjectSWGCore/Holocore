@@ -27,15 +27,6 @@
  ***********************************************************************************/
 package services.combat;
 
-import intents.BuffIntent;
-import intents.FactionIntent;
-import intents.PlayerEventIntent;
-import intents.chat.ChatBroadcastIntent;
-import intents.combat.CreatureKilledIntent;
-import intents.object.DestroyObjectIntent;
-import intents.object.ObjectCreatedIntent;
-import intents.object.ObjectTeleportIntent;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -49,13 +40,26 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
+import com.projectswg.common.control.Service;
+import com.projectswg.common.data.info.RelationalDatabase;
+import com.projectswg.common.data.info.RelationalServerFactory;
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.data.swgfile.ClientFactory;
+import com.projectswg.common.debug.Log;
+
+import intents.BuffIntent;
+import intents.FactionIntent;
+import intents.PlayerEventIntent;
+import intents.chat.ChatBroadcastIntent;
+import intents.combat.CreatureKilledIntent;
+import intents.object.DestroyObjectIntent;
+import intents.object.ObjectCreatedIntent;
+import intents.object.ObjectTeleportIntent;
 import network.packets.swg.zone.PlayClientEffectObjectMessage;
-import resources.Location;
 import resources.Posture;
 import resources.PvpFaction;
 import resources.PvpStatus;
-import resources.Terrain;
-import resources.client_info.ClientFactory;
 import resources.encodables.ProsePackage;
 import resources.encodables.StringId;
 import resources.objects.SWGObject;
@@ -69,11 +73,6 @@ import resources.sui.SuiEvent;
 import resources.sui.SuiListBox;
 import resources.sui.SuiWindow;
 import utilities.ThreadUtilities;
-
-import com.projectswg.common.control.Service;
-import com.projectswg.common.debug.Log;
-import com.projectswg.common.info.RelationalDatabase;
-import com.projectswg.common.info.RelationalServerFactory;
 
 /**
  * The {@code CorpseService} removes corpses from the world a while after
@@ -197,7 +196,7 @@ public final class CorpseService extends Service {
 				return;
 			}
 			
-			cloningFacilities.remove((BuildingObject) destroyedObject);
+			cloningFacilities.remove(destroyedObject);
 		}
 	}
 	

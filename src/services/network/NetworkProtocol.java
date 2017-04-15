@@ -31,14 +31,14 @@ import java.io.EOFException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
+import com.projectswg.common.debug.Assert;
+import com.projectswg.common.network.NetBufferStream;
+
 import network.PacketType;
 import network.encryption.Compression;
 import network.packets.Packet;
 import network.packets.swg.SWGPacket;
 import network.packets.swg.zone.object_controller.ObjectController;
-import resources.network.NetBufferStream;
-
-import com.projectswg.common.debug.Assert;
 
 public class NetworkProtocol {
 	

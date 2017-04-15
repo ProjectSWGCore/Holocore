@@ -34,13 +34,13 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
 
-import resources.Location;
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.debug.Log;
+
 import resources.Posture;
-import resources.Terrain;
 import resources.TravelPoint;
 import resources.objects.creature.CreatureObject;
-
-import com.projectswg.common.debug.Log;
 
 public class TravelGroup implements Runnable {
 	

@@ -29,11 +29,11 @@ package intents;
 
 import java.util.List;
 
-import network.packets.Packet;
-import resources.Terrain;
-import resources.player.Player;
-
 import com.projectswg.common.control.Intent;
+import com.projectswg.common.data.location.Terrain;
+
+import network.packets.Packet;
+import resources.player.Player;
 
 public class NotifyPlayersPacketIntent extends Intent {
 	

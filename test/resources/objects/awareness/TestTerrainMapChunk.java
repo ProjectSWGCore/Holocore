@@ -31,11 +31,12 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runners.JUnit4;
 import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
-import resources.Location;
-import resources.Terrain;
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.location.Terrain;
+
 import resources.objects.SWGObject;
 import resources.objects.cell.CellObject;
 

@@ -34,7 +34,7 @@ import network.packets.swg.SWGPacket;
 
 public class ConnectionServerLagResponse extends SWGPacket {
 	
-	public static final int CRC = resources.common.CRC.getCrc("ConnectionServerLagResponse");
+	public static final int CRC = getCrc("ConnectionServerLagResponse");
 	
 	public ConnectionServerLagResponse() {
 		

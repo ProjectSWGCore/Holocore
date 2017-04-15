@@ -32,10 +32,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import resources.chat.ChatRoom;
-
 import com.projectswg.common.debug.Assert;
 import com.projectswg.common.debug.Log;
+
+import resources.chat.ChatRoom;
 
 public class ChatRoomContainer {
 	

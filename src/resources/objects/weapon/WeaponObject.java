@@ -27,11 +27,12 @@
 ***********************************************************************************/
 package resources.objects.weapon;
 
+import com.projectswg.common.network.NetBuffer;
+import com.projectswg.common.network.NetBufferStream;
+
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.combat.DamageType;
 import resources.network.BaselineBuilder;
-import resources.network.NetBuffer;
-import resources.network.NetBufferStream;
 import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
 

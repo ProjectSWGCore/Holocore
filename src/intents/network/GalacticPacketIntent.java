@@ -27,9 +27,9 @@
 ***********************************************************************************/
 package intents.network;
 
-import resources.player.Player;
 import intents.GalacticIntent;
 import network.packets.Packet;
+import resources.player.Player;
 
 public class GalacticPacketIntent extends GalacticIntent {
 	

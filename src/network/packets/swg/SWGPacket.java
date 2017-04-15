@@ -29,11 +29,11 @@ package network.packets.swg;
 
 import java.nio.ByteBuffer;
 
+import com.projectswg.common.data.CRC;
+import com.projectswg.common.debug.Log;
+
 import network.PacketType;
 import network.packets.Packet;
-import resources.common.CRC;
-
-import com.projectswg.common.debug.Log;
 
 
 public class SWGPacket extends Packet {

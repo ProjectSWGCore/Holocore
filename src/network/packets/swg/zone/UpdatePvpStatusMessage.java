@@ -27,11 +27,10 @@
 ***********************************************************************************/
 package network.packets.swg.zone;
 
-import network.packets.swg.SWGPacket;
-
 import java.nio.ByteBuffer;
 import java.util.EnumSet;
 
+import network.packets.swg.SWGPacket;
 import resources.PvpFaction;
 import resources.PvpFlag;
 

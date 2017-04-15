@@ -27,15 +27,20 @@
 ***********************************************************************************/
 package services.galaxy;
 
-import intents.PlayerEventIntent;
-import intents.network.GalacticPacketIntent;
-
 import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import com.projectswg.common.concurrency.SynchronizedSet;
+import com.projectswg.common.control.Intent;
+import com.projectswg.common.control.Service;
+import com.projectswg.common.debug.Assert;
+import com.projectswg.common.debug.Log;
+
+import intents.PlayerEventIntent;
+import intents.network.GalacticPacketIntent;
 import network.packets.swg.zone.HeartBeat;
 import resources.network.DisconnectReason;
 import resources.objects.creature.CreatureObject;
@@ -45,12 +50,6 @@ import resources.player.PlayerEvent;
 import resources.player.PlayerFlags;
 import services.CoreManager;
 import utilities.ThreadUtilities;
-
-import com.projectswg.common.concurrency.SynchronizedSet;
-import com.projectswg.common.control.Intent;
-import com.projectswg.common.control.Service;
-import com.projectswg.common.debug.Assert;
-import com.projectswg.common.debug.Log;
 
 public class ConnectionService extends Service {
 	

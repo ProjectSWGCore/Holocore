@@ -34,9 +34,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import network.packets.swg.zone.object_controller.ObjectController;
-
 import com.projectswg.common.debug.Assert;
+
+import network.packets.swg.zone.object_controller.ObjectController;
 
 public class ResourceWeight extends ObjectController {
 	

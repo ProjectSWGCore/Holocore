@@ -27,6 +27,17 @@
 
 package resources.commands.callbacks;
 
+import java.io.FileNotFoundException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Map;
+
+import com.projectswg.common.data.info.RelationalServerData;
+import com.projectswg.common.data.info.RelationalServerFactory;
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.debug.Log;
+
 import intents.chat.ChatBroadcastIntent;
 import intents.experience.ExperienceIntent;
 import intents.network.CloseConnectionIntent;
@@ -34,14 +45,6 @@ import intents.object.CreateStaticItemIntent;
 import intents.object.DestroyObjectIntent;
 import intents.object.ObjectTeleportIntent;
 import intents.player.DeleteCharacterIntent;
-
-import java.io.FileNotFoundException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Map;
-
-import resources.Location;
-import resources.Terrain;
 import resources.commands.ICmdCallback;
 import resources.network.DisconnectReason;
 import resources.objects.SWGObject;
@@ -60,10 +63,6 @@ import services.objects.ObjectManager;
 import services.objects.StaticItemService.ObjectCreationHandler;
 import services.player.PlayerManager;
 import utilities.Scripts;
-
-import com.projectswg.common.debug.Log;
-import com.projectswg.common.info.RelationalServerData;
-import com.projectswg.common.info.RelationalServerFactory;
 
 /**
  * Created by Waverunner on 8/19/2015

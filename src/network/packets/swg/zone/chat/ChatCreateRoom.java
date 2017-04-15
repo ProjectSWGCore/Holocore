@@ -27,9 +27,9 @@
 
 package network.packets.swg.zone.chat;
 
-import network.packets.swg.SWGPacket;
-
 import java.nio.ByteBuffer;
+
+import network.packets.swg.SWGPacket;
 
 /**
  * @author Waverunner

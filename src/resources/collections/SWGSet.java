@@ -36,23 +36,23 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import network.packets.Packet;
-import network.packets.swg.zone.baselines.Baseline;
-import resources.encodables.Encodable;
-import resources.network.NetBuffer;
-import resources.objects.SWGObject;
-import utilities.Encoder;
-import utilities.Encoder.StringType;
-
 import com.projectswg.common.concurrency.SynchronizedList;
 import com.projectswg.common.concurrency.SynchronizedSet;
 import com.projectswg.common.debug.Log;
+import com.projectswg.common.encoding.Encodable;
+import com.projectswg.common.encoding.Encoder;
+import com.projectswg.common.encoding.StringType;
+import com.projectswg.common.network.NetBuffer;
+
+import network.packets.Packet;
+import network.packets.swg.zone.baselines.Baseline;
+import resources.objects.SWGObject;
 
 public class SWGSet<E> extends SynchronizedSet<E> implements Encodable {
 	
 	private final int view;
 	private final int updateType;
-	private final Encoder.StringType strType;
+	private final StringType strType;
 	private final AtomicInteger updateCount;
 	private final List<byte[]> deltas;
 	private final Set<ByteBuffer> data;
@@ -284,4 +284,17 @@ public class SWGSet<E> extends SynchronizedSet<E> implements Encodable {
 		}
 		return true;
 	}
+	
+	public static SWGSet<String> getSwgSet(NetBuffer buffer, int num, int var, StringType type) {
+		SWGSet<String> set = new SWGSet<>(num, var, type);
+		set.decode(buffer.getBuffer(), type);
+		return set;
+	}
+	
+	public static <T> SWGSet<T> getSwgSet(NetBuffer buffer, int num, int var, Class<T> c) {
+		SWGSet<T> set = new SWGSet<>(num, var);
+		set.decode(buffer.getBuffer(), c);
+		return set;
+	}
+	
 }

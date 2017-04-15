@@ -27,8 +27,8 @@
  ***********************************************************************************/
 package resources.buildout;
 
-import resources.Location;
-import resources.Terrain;
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.location.Terrain;
 
 public class BuildoutArea implements Comparable<BuildoutArea> {
 	

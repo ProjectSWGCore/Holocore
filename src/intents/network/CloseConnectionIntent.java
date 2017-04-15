@@ -27,9 +27,9 @@
 ***********************************************************************************/
 package intents.network;
 
-import resources.network.DisconnectReason;
-
 import com.projectswg.common.control.Intent;
+
+import resources.network.DisconnectReason;
 
 public class CloseConnectionIntent extends Intent {
 	

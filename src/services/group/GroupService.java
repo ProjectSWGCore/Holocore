@@ -26,6 +26,13 @@
  ******************************************************************************/
 package services.group;
 
+import java.util.Map;
+import java.util.Set;
+
+import com.projectswg.common.concurrency.SynchronizedMap;
+import com.projectswg.common.control.Service;
+import com.projectswg.common.debug.Assert;
+
 import intents.GroupEventIntent;
 import intents.PlayerEventIntent;
 import intents.chat.ChatBroadcastIntent;
@@ -33,10 +40,6 @@ import intents.chat.ChatRoomUpdateIntent;
 import intents.chat.ChatRoomUpdateIntent.UpdateType;
 import intents.object.DestroyObjectIntent;
 import intents.object.ObjectCreatedIntent;
-
-import java.util.Map;
-import java.util.Set;
-
 import resources.chat.ChatAvatar;
 import resources.encodables.ProsePackage;
 import resources.objects.creature.CreatureObject;
@@ -45,10 +48,6 @@ import resources.player.Player;
 import resources.player.Player.PlayerServer;
 import services.objects.ObjectCreator;
 import utilities.IntentFactory;
-
-import com.projectswg.common.concurrency.SynchronizedMap;
-import com.projectswg.common.control.Service;
-import com.projectswg.common.debug.Assert;
 
 public class GroupService extends Service {
 	

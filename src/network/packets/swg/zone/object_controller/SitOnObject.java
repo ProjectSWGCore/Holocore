@@ -29,8 +29,6 @@ package network.packets.swg.zone.object_controller;
 
 import java.nio.ByteBuffer;
 
-import network.packets.swg.zone.object_controller.ObjectController;
-
 public class SitOnObject extends ObjectController {
 	
 	public static final int CRC = 0x013B;

@@ -27,10 +27,10 @@
 ***********************************************************************************/
 package intents.chat;
 
+import com.projectswg.common.control.Intent;
+
 import resources.encodables.player.Mail;
 import resources.objects.SWGObject;
-
-import com.projectswg.common.control.Intent;
 
 public class PersistentMessageIntent extends Intent {
 	

@@ -27,16 +27,18 @@
  ***********************************************************************************/
 package services.player.creation;
 
-import intents.experience.GrantSkillIntent;
-import intents.object.ObjectCreatedIntent;
-
 import java.util.Calendar;
 
+import com.projectswg.common.data.swgfile.ClientFactory;
+import com.projectswg.common.data.swgfile.visitors.ProfTemplateData;
+import com.projectswg.common.debug.Assert;
+import com.projectswg.common.debug.Log;
+
+import intents.experience.GrantSkillIntent;
+import intents.object.ObjectCreatedIntent;
 import network.packets.swg.login.creation.ClientCreateCharacter;
 import resources.PvpFlag;
 import resources.Race;
-import resources.client_info.ClientFactory;
-import resources.client_info.visitors.ProfTemplateData;
 import resources.containers.ContainerPermissionsType;
 import resources.objects.SWGObject;
 import resources.objects.building.BuildingObject;
@@ -50,9 +52,6 @@ import resources.player.AccessLevel;
 import services.objects.ObjectCreator;
 import services.objects.ObjectManager;
 import services.player.TerrainZoneInsertion.SpawnInformation;
-
-import com.projectswg.common.debug.Assert;
-import com.projectswg.common.debug.Log;
 
 public class CharacterCreation {
 	

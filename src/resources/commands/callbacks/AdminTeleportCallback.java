@@ -27,15 +27,15 @@
 ***********************************************************************************/
 package resources.commands.callbacks;
 
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.debug.Log;
+
 import intents.object.ObjectTeleportIntent;
-import resources.Location;
-import resources.Terrain;
 import resources.commands.ICmdCallback;
 import resources.objects.SWGObject;
 import resources.player.Player;
 import services.galaxy.GalacticManager;
-
-import com.projectswg.common.debug.Log;
 
 public class AdminTeleportCallback implements ICmdCallback {
 

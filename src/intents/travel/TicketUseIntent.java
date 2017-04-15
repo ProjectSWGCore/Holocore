@@ -27,10 +27,10 @@
 ***********************************************************************************/
 package intents.travel;
 
+import com.projectswg.common.control.Intent;
+
 import resources.objects.SWGObject;
 import resources.player.Player;
-
-import com.projectswg.common.control.Intent;
 
 public class TicketUseIntent extends Intent {
 	

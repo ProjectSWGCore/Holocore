@@ -27,9 +27,9 @@
 ***********************************************************************************/
 package intents.object;
 
-import resources.objects.SWGObject;
-
 import com.projectswg.common.control.Intent;
+
+import resources.objects.SWGObject;
 
 public class DestroyObjectIntent extends Intent {
 	

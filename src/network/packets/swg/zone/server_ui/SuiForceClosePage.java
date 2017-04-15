@@ -27,9 +27,9 @@
 
 package network.packets.swg.zone.server_ui;
 
-import network.packets.swg.SWGPacket;
-
 import java.nio.ByteBuffer;
+
+import network.packets.swg.SWGPacket;
 
 /**
  * Created by Waverunner on 8/17/2015

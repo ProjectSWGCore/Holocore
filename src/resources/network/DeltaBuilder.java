@@ -27,13 +27,14 @@
 ***********************************************************************************/
 package resources.network;
 
+import com.projectswg.common.encoding.Encoder;
+import com.projectswg.common.encoding.StringType;
+
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import network.packets.swg.zone.deltas.DeltasMessage;
 import resources.objects.SWGObject;
 import resources.player.Player;
 import resources.player.PlayerState;
-import utilities.Encoder;
-import utilities.Encoder.StringType;
 
 public class DeltaBuilder {
 	

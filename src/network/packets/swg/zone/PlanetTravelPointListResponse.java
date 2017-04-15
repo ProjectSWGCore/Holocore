@@ -32,12 +32,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import resources.Location;
-import resources.Point3D;
-import resources.Terrain;
-import resources.TravelPoint;
-import utilities.Encoder.StringType;
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.location.Point3D;
+import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.encoding.StringType;
+
 import network.packets.swg.SWGPacket;
+import resources.TravelPoint;
 
 public class PlanetTravelPointListResponse extends SWGPacket {
 

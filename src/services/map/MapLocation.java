@@ -27,11 +27,12 @@
 
 package services.map;
 
-import network.packets.Packet;
-import resources.encodables.Encodable;
-
 import java.io.Serializable;
 import java.nio.ByteBuffer;
+
+import com.projectswg.common.encoding.Encodable;
+
+import network.packets.Packet;
 
 public class MapLocation implements Encodable, Serializable {
 	private static final long serialVersionUID = 1L;

@@ -36,12 +36,13 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import network.packets.Packet;
-import resources.network.NetBufferStream;
-import resources.objects.waypoint.WaypointObject;
-import resources.persistable.Persistable;
-
 import com.projectswg.common.debug.Log;
+import com.projectswg.common.encoding.Encodable;
+import com.projectswg.common.network.NetBufferStream;
+import com.projectswg.common.persistable.Persistable;
+
+import network.packets.Packet;
+import resources.objects.waypoint.WaypointObject;
 
 public class OutOfBandPackage implements Encodable, Persistable {
 	

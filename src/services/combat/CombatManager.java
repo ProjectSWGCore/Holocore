@@ -27,14 +27,6 @@
  ***********************************************************************************/
 package services.combat;
 
-import intents.BuffIntent;
-import intents.chat.ChatBroadcastIntent;
-import intents.chat.ChatCommandIntent;
-import intents.combat.CreatureKilledIntent;
-import intents.combat.DeathblowIntent;
-import intents.object.DestroyObjectIntent;
-import intents.object.ObjectCreatedIntent;
-
 import java.awt.Color;
 import java.util.Collection;
 import java.util.HashMap;
@@ -49,21 +41,31 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
+import com.projectswg.common.control.Manager;
+import com.projectswg.common.data.CRC;
+import com.projectswg.common.data.RGB;
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.swgfile.ClientFactory;
+import com.projectswg.common.debug.Log;
+
+import intents.BuffIntent;
+import intents.chat.ChatBroadcastIntent;
+import intents.chat.ChatCommandIntent;
+import intents.combat.CreatureKilledIntent;
+import intents.combat.DeathblowIntent;
+import intents.object.DestroyObjectIntent;
+import intents.object.ObjectCreatedIntent;
 import network.packets.swg.zone.PlayClientEffectObjectMessage;
 import network.packets.swg.zone.object_controller.ShowFlyText;
 import network.packets.swg.zone.object_controller.ShowFlyText.Scale;
 import network.packets.swg.zone.object_controller.combat.CombatAction;
 import network.packets.swg.zone.object_controller.combat.CombatSpam;
-import resources.Location;
 import resources.Posture;
-import resources.client_info.ClientFactory;
 import resources.combat.AttackInfo;
 import resources.combat.CombatStatus;
 import resources.combat.HitLocation;
 import resources.combat.TrailLocation;
 import resources.commands.CombatCommand;
-import resources.common.CRC;
-import resources.common.RGB;
 import resources.encodables.ProsePackage;
 import resources.encodables.StringId;
 import resources.objects.SWGObject;
@@ -73,9 +75,6 @@ import resources.objects.tangible.TangibleObject;
 import resources.objects.weapon.WeaponObject;
 import services.objects.ObjectCreator;
 import utilities.ThreadUtilities;
-
-import com.projectswg.common.control.Manager;
-import com.projectswg.common.debug.Log;
 
 public class CombatManager extends Manager {
 

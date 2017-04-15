@@ -27,15 +27,14 @@
  ***********************************************************************************/
 package services.network;
 
-import intents.network.InboundPacketPendingIntent;
-
 import java.net.SocketAddress;
 import java.util.Arrays;
 
-import network.NetworkClient;
-
 import com.projectswg.common.control.Service;
 import com.projectswg.common.debug.Log;
+
+import intents.network.InboundPacketPendingIntent;
+import network.NetworkClient;
 
 public class InboundNetworkManager extends Service {
 	

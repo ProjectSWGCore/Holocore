@@ -27,7 +27,8 @@
 ***********************************************************************************/
 package resources.objects.staticobject;
 
-import resources.network.NetBufferStream;
+import com.projectswg.common.network.NetBufferStream;
+
 import resources.objects.creature.CreatureObject;
 
 public class StaticObject extends CreatureObject {

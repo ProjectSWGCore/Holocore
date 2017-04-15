@@ -32,11 +32,11 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-import network.packets.Packet;
-import resources.encodables.Encodable;
-import utilities.Encoder;
-
 import com.projectswg.common.debug.Log;
+import com.projectswg.common.encoding.Encodable;
+import com.projectswg.common.encoding.StringType;
+
+import network.packets.Packet;
 
 /**
  * @author Waverunner
@@ -135,7 +135,7 @@ public class SuiComponent implements Encodable {
 				return -1;
 			}
 
-			return (int) bytes[0];
+			return bytes[0];
 		}
 		return -1;
 	}
@@ -149,8 +149,8 @@ public class SuiComponent implements Encodable {
 
 		ByteBuffer bb = ByteBuffer.allocate(size);
 		Packet.addByte(bb, type.getValue());
-		Packet.addList(bb, wideParams, Encoder.StringType.UNICODE);
-		Packet.addList(bb, narrowParams, Encoder.StringType.ASCII);
+		Packet.addList(bb, wideParams, StringType.UNICODE);
+		Packet.addList(bb, narrowParams, StringType.ASCII);
 
 		return bb.array();
 	}
@@ -158,8 +158,8 @@ public class SuiComponent implements Encodable {
 	@Override
 	public void decode(ByteBuffer data) {
 		type			= Type.valueOf(Packet.getByte(data));
-		wideParams		= Packet.getList(data, Encoder.StringType.UNICODE);
-		narrowParams	= Packet.getList(data, Encoder.StringType.ASCII);
+		wideParams		= Packet.getList(data, StringType.UNICODE);
+		narrowParams	= Packet.getList(data, StringType.ASCII);
 	}
 
 	public enum Type {

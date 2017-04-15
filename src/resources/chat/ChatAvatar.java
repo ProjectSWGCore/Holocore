@@ -26,16 +26,16 @@
  ******************************************************************************/
 package resources.chat;
 
-import resources.encodables.CachedEncode;
-import resources.encodables.Encodable;
-import resources.network.NetBuffer;
-import resources.network.NetBufferStream;
-import resources.persistable.Persistable;
-import resources.player.Player;
-
 import java.nio.ByteBuffer;
 import java.util.Locale;
 
+import com.projectswg.common.encoding.CachedEncode;
+import com.projectswg.common.encoding.Encodable;
+import com.projectswg.common.network.NetBuffer;
+import com.projectswg.common.network.NetBufferStream;
+import com.projectswg.common.persistable.Persistable;
+
+import resources.player.Player;
 import services.CoreManager;
 
 public class ChatAvatar implements Encodable, Persistable {

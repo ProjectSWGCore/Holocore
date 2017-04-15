@@ -27,10 +27,11 @@
  ***********************************************************************************/
 package resources.objects.awareness;
 
-import resources.Location;
-import resources.objects.SWGObject;
+import com.projectswg.common.data.location.Location;
+
 import network.packets.swg.zone.UpdateTransformMessage;
 import network.packets.swg.zone.UpdateTransformWithParentMessage;
+import resources.objects.SWGObject;
 
 public class DataTransformHandler {
 	

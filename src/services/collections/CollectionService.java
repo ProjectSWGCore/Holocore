@@ -27,26 +27,25 @@
  ***********************************************************************************/
 package services.collections;
 
-import intents.GrantClickyCollectionIntent;
-import intents.radial.RadialRequestIntent;
-import intents.radial.RadialResponseIntent;
-import intents.radial.RadialSelectionIntent;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.projectswg.common.control.Service;
+import com.projectswg.common.data.info.RelationalServerData;
+import com.projectswg.common.data.info.RelationalServerFactory;
+import com.projectswg.common.debug.Log;
+
+import intents.GrantClickyCollectionIntent;
+import intents.radial.RadialRequestIntent;
+import intents.radial.RadialResponseIntent;
+import intents.radial.RadialSelectionIntent;
 import resources.objects.collections.ClickyCollectionItem;
 import resources.objects.collections.CollectionItem;
 import resources.radial.RadialOption;
 import resources.radial.Radials;
-
-import com.projectswg.common.control.Service;
-import com.projectswg.common.debug.Log;
-import com.projectswg.common.info.RelationalServerData;
-import com.projectswg.common.info.RelationalServerFactory;
 
 public class CollectionService extends Service {
 

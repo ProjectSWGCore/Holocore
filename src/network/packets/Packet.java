@@ -35,11 +35,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import resources.common.CRC;
-import resources.encodables.Encodable;
-import utilities.Encoder;
-
+import com.projectswg.common.data.CRC;
 import com.projectswg.common.debug.Log;
+import com.projectswg.common.encoding.Encodable;
+import com.projectswg.common.encoding.StringType;
 
 
 public class Packet {
@@ -76,6 +75,10 @@ public class Packet {
 	public int getOpcode() {
 		return opcode;
 	}
+	
+	protected static int getCrc(String str) {
+		return CRC.getCrc(str);
+	}
 
 	public static void addList(ByteBuffer bb, Collection<? extends Encodable> list) {
 		if (list == null) {
@@ -96,7 +99,7 @@ public class Packet {
 		}
 	}
 
-	public static void addList(ByteBuffer bb, List<String> list, Encoder.StringType type) {
+	public static void addList(ByteBuffer bb, List<String> list, StringType type) {
 		addInt(bb, list.size());
 
 		switch(type) {
@@ -319,7 +322,7 @@ public class Packet {
 		return instance;
 	}
 
-	public static List<String> getList(ByteBuffer bb, Encoder.StringType type) {
+	public static List<String> getList(ByteBuffer bb, StringType type) {
 		int size = getInt(bb);
 
 		if (size < 0) {

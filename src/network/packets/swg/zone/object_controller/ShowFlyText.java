@@ -31,10 +31,11 @@ import java.nio.ByteBuffer;
 import java.util.EnumSet;
 import java.util.Set;
 
-import resources.common.RGB;
+import com.projectswg.common.data.RGB;
+import com.projectswg.common.network.NetBuffer;
+
 import resources.encodables.OutOfBandPackage;
 import resources.encodables.StringId;
-import resources.network.NetBuffer;
 
 public class ShowFlyText extends ObjectController {
 	

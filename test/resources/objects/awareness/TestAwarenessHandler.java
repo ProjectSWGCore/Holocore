@@ -36,14 +36,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import resources.Location;
-import resources.Terrain;
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.debug.Log;
+
 import resources.objects.SWGObject;
 import resources.objects.building.BuildingObject;
 import resources.objects.creature.CreatureObject;
 import services.objects.ClientBuildoutService;
-
-import com.projectswg.common.debug.Log;
 
 @RunWith(JUnit4.class)
 public class TestAwarenessHandler {

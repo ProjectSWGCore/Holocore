@@ -29,15 +29,16 @@ package resources.objects.guild;
 
 import java.nio.ByteBuffer;
 
+import com.projectswg.common.encoding.Encodable;
+import com.projectswg.common.encoding.StringType;
+import com.projectswg.common.network.NetBuffer;
+
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.collections.SWGMap;
 import resources.collections.SWGSet;
-import resources.encodables.Encodable;
 import resources.network.BaselineBuilder;
-import resources.network.NetBuffer;
 import resources.objects.SWGObject;
 import resources.player.Player;
-import utilities.Encoder.StringType;
 
 public class GuildObject extends SWGObject {
 	
@@ -73,34 +74,37 @@ public class GuildObject extends SWGObject {
 	@Override
 	protected void parseBaseline3(NetBuffer buffer) {
 		super.parseBaseline3(buffer);
-		abbreviations = buffer.getSwgSet(3, 5, StringType.ASCII);
+		abbreviations = SWGSet.getSwgSet(buffer, 3, 5, StringType.ASCII);
 	}
 	
 	@Override
 	protected void parseBaseline6(NetBuffer buffer) {
 		super.parseBaseline6(buffer);
-		gcwImperialScorePercentileThisGalaxy = buffer.getSwgMap(6, 2, StringType.ASCII, CurrentServerGCWZonePercent.class);
-		gcwGroupImperialScorePercentileThisGalaxy = buffer.getSwgMap(6, 3, StringType.ASCII, CurrentServerGCWZonePercent.class);
-		gcwImperialScorePercentileHistoryThisGalaxy = buffer.getSwgMap(6, 4, StringType.ASCII, CurrentServerGCWZoneHistory.class);
-		gcwGroupImperialScorePercentileHistoryThisGalaxy = buffer.getSwgMap(6, 5, StringType.ASCII, CurrentServerGCWZoneHistory.class);
-		gcwImperialScorePercentileOtherGalaxies = buffer.getSwgMap(6, 6, StringType.ASCII, OtherServerGCWZonePercent.class);
-		gcwGroupImperialScorePercentileOtherGalaxies = buffer.getSwgMap(6, 7, StringType.ASCII, OtherServerGCWZonePercent.class);
+		gcwImperialScorePercentileThisGalaxy = SWGMap.getSwgMap(buffer, 6, 2, StringType.ASCII, CurrentServerGCWZonePercent.class);
+		gcwGroupImperialScorePercentileThisGalaxy = SWGMap.getSwgMap(buffer, 6, 3, StringType.ASCII, CurrentServerGCWZonePercent.class);
+		gcwImperialScorePercentileHistoryThisGalaxy = SWGMap.getSwgMap(buffer, 6, 4, StringType.ASCII, CurrentServerGCWZoneHistory.class);
+		gcwGroupImperialScorePercentileHistoryThisGalaxy = SWGMap.getSwgMap(buffer, 6, 5, StringType.ASCII, CurrentServerGCWZoneHistory.class);
+		gcwImperialScorePercentileOtherGalaxies = SWGMap.getSwgMap(buffer, 6, 6, StringType.ASCII, OtherServerGCWZonePercent.class);
+		gcwGroupImperialScorePercentileOtherGalaxies = SWGMap.getSwgMap(buffer, 6, 7, StringType.ASCII, OtherServerGCWZonePercent.class);
 	}
 	
 	public static class CurrentServerGCWZonePercent implements Encodable {
 		
 		private int percentage = 0;
 		
+		@Override
 		public byte [] encode() {
 			NetBuffer data = NetBuffer.allocate(4);
 			data.addInt(percentage);
 			return data.array();
 		}
 		
+		@Override
 		public void decode(ByteBuffer data) {
 			percentage = data.getInt();
 		}
 		
+		@Override
 		public String toString() {
 			return percentage + "%";
 		}
@@ -111,6 +115,7 @@ public class GuildObject extends SWGObject {
 		private int lastUpdateTime = 0;
 		private int percentage = 0;
 		
+		@Override
 		public byte [] encode() {
 			NetBuffer data = NetBuffer.allocate(8);
 			data.addInt(lastUpdateTime);
@@ -118,12 +123,14 @@ public class GuildObject extends SWGObject {
 			return data.array();
 		}
 		
+		@Override
 		public void decode(ByteBuffer bb) {
 			NetBuffer data = NetBuffer.wrap(bb);
 			lastUpdateTime = data.getInt();
 			percentage = data.getInt();
 		}
 		
+		@Override
 		public String toString() {
 			return lastUpdateTime + ":" + percentage + "%";
 		}
@@ -134,6 +141,7 @@ public class GuildObject extends SWGObject {
 		private String zone = "";
 		private int percentage = 0;
 		
+		@Override
 		public byte [] encode() {
 			NetBuffer data = NetBuffer.allocate(6 + zone.length());
 			data.addAscii(zone);
@@ -141,12 +149,14 @@ public class GuildObject extends SWGObject {
 			return data.array();
 		}
 		
+		@Override
 		public void decode(ByteBuffer bb) {
 			NetBuffer data = NetBuffer.wrap(bb);
 			zone = data.getAscii();
 			percentage = data.getInt();
 		}
 		
+		@Override
 		public String toString() {
 			return zone + ":" + percentage + "%";
 		}

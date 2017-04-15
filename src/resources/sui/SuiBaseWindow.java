@@ -34,10 +34,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import network.packets.Packet;
-import resources.encodables.Encodable;
-
 import com.projectswg.common.debug.Log;
+import com.projectswg.common.encoding.Encodable;
+
+import network.packets.Packet;
 
 public class SuiBaseWindow implements Encodable {
 

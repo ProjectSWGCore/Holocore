@@ -27,11 +27,6 @@
 ***********************************************************************************/
 package services.commands;
 
-import intents.BuffIntent;
-import intents.PlayerEventIntent;
-import intents.SkillModIntent;
-import intents.combat.CreatureKilledIntent;
-
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -40,20 +35,24 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 
+import com.projectswg.common.concurrency.PswgBasicScheduledThread;
+import com.projectswg.common.control.Service;
+import com.projectswg.common.data.CRC;
+import com.projectswg.common.debug.Assert;
+import com.projectswg.common.debug.Log;
+
+import intents.BuffIntent;
+import intents.PlayerEventIntent;
+import intents.SkillModIntent;
+import intents.combat.CreatureKilledIntent;
 import main.ProjectSWG;
 import network.packets.swg.zone.PlayClientEffectObjectMessage;
-import resources.common.CRC;
 import resources.objects.creature.Buff;
 import resources.objects.creature.CreatureObject;
 import resources.server_info.StandardLog;
 import services.commands.buff.BuffData;
 import services.commands.buff.BuffMap;
 import utilities.Scripts;
-
-import com.projectswg.common.concurrency.PswgBasicScheduledThread;
-import com.projectswg.common.control.Service;
-import com.projectswg.common.debug.Assert;
-import com.projectswg.common.debug.Log;
 
 public class BuffService extends Service {
 	

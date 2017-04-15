@@ -27,26 +27,28 @@
 ***********************************************************************************/
 package services.experience;
 
-import intents.GrantBadgeIntent;
-import intents.experience.GrantSkillIntent;
-import intents.experience.LevelChangedIntent;
-import intents.object.CreateStaticItemIntent;
-import intents.object.ObjectCreatedIntent;
-
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.projectswg.common.control.Service;
+import com.projectswg.common.data.RGB;
+import com.projectswg.common.data.swgfile.ClientFactory;
+import com.projectswg.common.data.swgfile.visitors.DatatableData;
+import com.projectswg.common.debug.Log;
+
+import intents.GrantBadgeIntent;
+import intents.experience.GrantSkillIntent;
+import intents.experience.LevelChangedIntent;
+import intents.object.CreateStaticItemIntent;
+import intents.object.ObjectCreatedIntent;
 import network.packets.swg.zone.PlayClientEffectObjectMessage;
 import network.packets.swg.zone.PlayMusicMessage;
 import network.packets.swg.zone.object_controller.ShowFlyText;
 import network.packets.swg.zone.object_controller.ShowFlyText.Scale;
 import resources.Race;
-import resources.client_info.ClientFactory;
-import resources.client_info.visitors.DatatableData;
-import resources.common.RGB;
 import resources.encodables.StringId;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
@@ -55,9 +57,6 @@ import resources.player.Player;
 import resources.rewards.RoadmapReward;
 import services.objects.ObjectCreator;
 import services.objects.StaticItemService;
-
-import com.projectswg.common.control.Service;
-import com.projectswg.common.debug.Log;
 
 /**
  * This is a service that listens for {@link LevelChangedIntent} and grants

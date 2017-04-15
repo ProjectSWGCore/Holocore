@@ -27,14 +27,14 @@
 ***********************************************************************************/
 package resources.commands.callbacks;
 
+import com.projectswg.common.debug.Log;
+
 import network.packets.swg.zone.object_controller.BiographyUpdate;
 import resources.commands.ICmdCallback;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
 import services.galaxy.GalacticManager;
-
-import com.projectswg.common.debug.Log;
 
 /**
  *

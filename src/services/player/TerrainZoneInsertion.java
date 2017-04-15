@@ -30,12 +30,11 @@ package services.player;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import resources.Location;
-import resources.Terrain;
-
+import com.projectswg.common.data.info.RelationalServerData;
+import com.projectswg.common.data.info.RelationalServerFactory;
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.debug.Log;
-import com.projectswg.common.info.RelationalServerData;
-import com.projectswg.common.info.RelationalServerFactory;
 
 public class TerrainZoneInsertion {
 	

@@ -29,7 +29,8 @@ package resources.spawn;
 
 import java.util.Random;
 
-import resources.Location;
+import com.projectswg.common.data.location.Location;
+
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureDifficulty;
 import resources.objects.custom.AIBehavior;

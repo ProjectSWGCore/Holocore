@@ -27,11 +27,12 @@
 
 package network.packets.swg.zone.chat;
 
+import java.nio.ByteBuffer;
+import java.util.List;
+
 import network.packets.swg.SWGPacket;
 import resources.chat.ChatAvatar;
 import resources.chat.ChatRoom;
-import java.nio.ByteBuffer;
-import java.util.List;
 
 /**
  * @author Waverunner

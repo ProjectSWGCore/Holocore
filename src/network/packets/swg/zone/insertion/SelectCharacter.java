@@ -27,9 +27,9 @@
 ***********************************************************************************/
 package network.packets.swg.zone.insertion;
 
-import network.packets.swg.SWGPacket;
-
 import java.nio.ByteBuffer;
+
+import network.packets.swg.SWGPacket;
 
 public class SelectCharacter extends SWGPacket {
 	public static final int CRC = getCrc("SelectCharacter");

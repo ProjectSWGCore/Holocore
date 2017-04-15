@@ -31,9 +31,9 @@ import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.nio.ByteBuffer;
 
-import resources.network.TCPServer;
-
 import com.projectswg.common.debug.Log;
+
+import resources.network.TCPServer;
 
 public class PacketSender {
 	

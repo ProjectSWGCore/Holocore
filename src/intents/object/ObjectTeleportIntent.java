@@ -27,10 +27,10 @@
 ***********************************************************************************/
 package intents.object;
 
-import resources.Location;
-import resources.objects.SWGObject;
-
 import com.projectswg.common.control.Intent;
+import com.projectswg.common.data.location.Location;
+
+import resources.objects.SWGObject;
 
 public class ObjectTeleportIntent extends Intent {
 	

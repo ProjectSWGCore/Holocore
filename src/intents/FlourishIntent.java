@@ -27,9 +27,9 @@
 ***********************************************************************************/
 package intents;
 
-import resources.player.Player;
-
 import com.projectswg.common.control.Intent;
+
+import resources.player.Player;
 
 public class FlourishIntent extends Intent {
 	

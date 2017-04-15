@@ -33,11 +33,13 @@ import java.lang.ref.SoftReference;
 import java.util.ArrayList;
 import java.util.List;
 
-import resources.objects.SWGObject;
-import resources.player.Player;
-import utilities.Encoder.StringType;
+import com.projectswg.common.encoding.StringType;
+import com.projectswg.common.network.NetBuffer;
+
 import network.packets.swg.zone.baselines.Baseline;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
+import resources.objects.SWGObject;
+import resources.player.Player;
 
 public class BaselineObject {
 	

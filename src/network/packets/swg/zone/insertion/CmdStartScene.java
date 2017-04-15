@@ -27,12 +27,13 @@
 ***********************************************************************************/
 package network.packets.swg.zone.insertion;
 
-import network.packets.swg.SWGPacket;
-import resources.Location;
-import resources.Race;
-import resources.Terrain;
-
 import java.nio.ByteBuffer;
+
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.location.Terrain;
+
+import network.packets.swg.SWGPacket;
+import resources.Race;
 
 public class CmdStartScene extends SWGPacket {
 	public static final int CRC = getCrc("CmdStartScene");
@@ -62,6 +63,7 @@ public class CmdStartScene extends SWGPacket {
 		this.serverEpoch = serverEpoch;
 	}
 	
+	@Override
 	public void decode(ByteBuffer data) {
 		if (!super.decode(data, CRC))
 			return;
@@ -81,6 +83,7 @@ public class CmdStartScene extends SWGPacket {
 		serverEpoch = getInt(data);
 	}
 	
+	@Override
 	public ByteBuffer encode() {
 		int length = 47 + l.getTerrain().getFile().length() + race.getFilename().length();
 		ByteBuffer data = ByteBuffer.allocate(length);

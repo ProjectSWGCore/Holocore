@@ -27,10 +27,10 @@
 ***********************************************************************************/
 package intents.object;
 
+import com.projectswg.common.control.Intent;
+
 import resources.objects.SWGObject;
 import services.objects.StaticItemService.ObjectCreationHandler;
-
-import com.projectswg.common.control.Intent;
 
 public final class CreateStaticItemIntent extends Intent {
 	

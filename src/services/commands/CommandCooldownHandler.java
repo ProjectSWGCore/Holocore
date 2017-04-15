@@ -32,14 +32,14 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import com.projectswg.common.concurrency.PswgScheduledThreadPool;
+import com.projectswg.common.data.CRC;
+import com.projectswg.common.debug.Log;
+
 import network.packets.swg.zone.object_controller.CommandTimer;
 import resources.commands.Command;
-import resources.common.CRC;
 import resources.objects.creature.CreatureObject;
 import services.commands.CommandLauncher.EnqueuedCommand;
-
-import com.projectswg.common.concurrency.PswgScheduledThreadPool;
-import com.projectswg.common.debug.Log;
 
 public class CommandCooldownHandler {
 	

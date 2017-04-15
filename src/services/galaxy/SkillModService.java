@@ -27,10 +27,10 @@
 ***********************************************************************************/
 package services.galaxy;
 
+import com.projectswg.common.control.Service;
+
 import intents.SkillModIntent;
 import resources.objects.creature.CreatureObject;
-
-import com.projectswg.common.control.Service;
 
 public class SkillModService extends Service {
 

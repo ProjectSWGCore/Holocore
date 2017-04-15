@@ -32,15 +32,15 @@ import java.nio.ByteOrder;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import network.packets.Packet;
-import resources.encodables.Encodable;
-import resources.network.NetBuffer;
-import resources.objects.SWGObject;
-import utilities.Encoder;
-import utilities.Encoder.StringType;
-
 import com.projectswg.common.concurrency.SynchronizedMap;
 import com.projectswg.common.debug.Log;
+import com.projectswg.common.encoding.Encodable;
+import com.projectswg.common.encoding.Encoder;
+import com.projectswg.common.encoding.StringType;
+import com.projectswg.common.network.NetBuffer;
+
+import network.packets.Packet;
+import resources.objects.SWGObject;
 
 public class SWGMap<K, V> extends SynchronizedMap<K, V> implements Encodable {
 	
@@ -280,4 +280,23 @@ public class SWGMap<K, V> extends SynchronizedMap<K, V> implements Encodable {
 			dataSize -= data.get(key).length;
 		}
 	}
+	
+	public static SWGMap<String, String> getSwgMap(NetBuffer buffer, int num, int var, StringType type) {
+		SWGMap<String, String> set = new SWGMap<>(num, var, type);
+		set.decode(buffer.getBuffer(), type, type);
+		return set;
+	}
+	
+	public static <T> SWGMap<String, T> getSwgMap(NetBuffer buffer, int num, int var, StringType keyType, Class<T> c) {
+		SWGMap<String, T> set = new SWGMap<>(num, var, keyType);
+		set.decode(buffer.getBuffer(), keyType, c);
+		return set;
+	}
+	
+	public static <K, V> SWGMap<K, V> getSwgMap(NetBuffer buffer, int num, int var, Class<K> keyClass, Class<V> valClass) {
+		SWGMap<K, V> set = new SWGMap<>(num, var);
+		set.decode(buffer.getBuffer(), keyClass, valClass);
+		return set;
+	}
+	
 }

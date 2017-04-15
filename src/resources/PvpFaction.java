@@ -30,7 +30,8 @@ package resources;
 import java.util.HashMap;
 import java.util.Map;
 
-import resources.common.CRC;
+import com.projectswg.common.data.CRC;
+
 
 public enum PvpFaction {
 

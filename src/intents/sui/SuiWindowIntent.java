@@ -27,10 +27,10 @@
 ***********************************************************************************/
 package intents.sui;
 
+import com.projectswg.common.control.Intent;
+
 import resources.player.Player;
 import resources.sui.SuiBaseWindow;
-
-import com.projectswg.common.control.Intent;
 
 public class SuiWindowIntent extends Intent {
 	

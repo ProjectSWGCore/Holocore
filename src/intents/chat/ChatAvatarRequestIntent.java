@@ -26,9 +26,9 @@
  ******************************************************************************/
 package intents.chat;
 
-import resources.player.Player;
-
 import com.projectswg.common.control.Intent;
+
+import resources.player.Player;
 
 public class ChatAvatarRequestIntent extends Intent {
 	

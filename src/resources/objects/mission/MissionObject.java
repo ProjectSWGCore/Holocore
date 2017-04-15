@@ -29,18 +29,19 @@ package resources.objects.mission;
 
 import java.nio.ByteBuffer;
 
+import com.projectswg.common.data.CRC;
+import com.projectswg.common.data.location.Point3D;
+import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.encoding.Encodable;
+import com.projectswg.common.network.NetBuffer;
+import com.projectswg.common.network.NetBufferStream;
+import com.projectswg.common.persistable.Persistable;
+
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
-import resources.Point3D;
-import resources.Terrain;
-import resources.common.CRC;
-import resources.encodables.Encodable;
 import resources.encodables.StringId;
 import resources.network.BaselineBuilder;
-import resources.network.NetBuffer;
-import resources.network.NetBufferStream;
 import resources.objects.intangible.IntangibleObject;
 import resources.objects.waypoint.WaypointObject;
-import resources.persistable.Persistable;
 import resources.player.Player;
 
 public class MissionObject extends IntangibleObject {

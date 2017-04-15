@@ -27,17 +27,20 @@
 ***********************************************************************************/
 package services.commands;
 
-import intents.PlayerEventIntent;
-import intents.network.GalacticPacketIntent;
-import intents.player.PlayerTransformedIntent;
-
 import java.util.List;
 import java.util.Locale;
 
+import com.projectswg.common.control.Service;
+import com.projectswg.common.data.CRC;
+import com.projectswg.common.data.swgfile.ClientFactory;
+import com.projectswg.common.data.swgfile.visitors.DatatableData;
+import com.projectswg.common.debug.Log;
+
+import intents.PlayerEventIntent;
+import intents.network.GalacticPacketIntent;
+import intents.player.PlayerTransformedIntent;
 import network.packets.Packet;
 import network.packets.swg.zone.object_controller.CommandQueueEnqueue;
-import resources.client_info.ClientFactory;
-import resources.client_info.visitors.DatatableData;
 import resources.combat.AttackType;
 import resources.combat.DamageType;
 import resources.combat.DelayAttackEggPosition;
@@ -69,16 +72,12 @@ import resources.commands.callbacks.StandCmdCallback;
 import resources.commands.callbacks.StartDanceCallback;
 import resources.commands.callbacks.TransferItemCallback;
 import resources.commands.callbacks.WaypointCmdCallback;
-import resources.common.CRC;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.weapon.WeaponType;
 import resources.player.Player;
 import services.commands.CommandLauncher.EnqueuedCommand;
 import services.galaxy.GalacticManager;
-
-import com.projectswg.common.control.Service;
-import com.projectswg.common.debug.Log;
 
 public class CommandService extends Service {
 	

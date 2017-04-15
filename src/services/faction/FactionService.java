@@ -27,9 +27,6 @@
  ***********************************************************************************/
 package services.faction;
 
-import intents.FactionIntent;
-import intents.chat.ChatBroadcastIntent;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -38,6 +35,10 @@ import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import com.projectswg.common.control.Service;
+
+import intents.FactionIntent;
+import intents.chat.ChatBroadcastIntent;
 import network.packets.swg.zone.UpdatePvpStatusMessage;
 import network.packets.swg.zone.chat.ChatSystemMessage;
 import network.packets.swg.zone.chat.ChatSystemMessage.SystemChatType;
@@ -48,8 +49,6 @@ import resources.objects.creature.CreatureObject;
 import resources.objects.tangible.TangibleObject;
 import resources.player.Player;
 import utilities.ThreadUtilities;
-
-import com.projectswg.common.control.Service;
 
 public final class FactionService extends Service {
 

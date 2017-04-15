@@ -30,6 +30,8 @@ package network;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.projectswg.common.debug.Log;
+
 import network.packets.swg.ErrorMessage;
 import network.packets.swg.SWGPacket;
 import network.packets.swg.ServerUnixEpochTime;
@@ -160,8 +162,6 @@ import network.packets.swg.zone.spatial.AttributeListMessage;
 import network.packets.swg.zone.spatial.GetMapLocationsMessage;
 import network.packets.swg.zone.spatial.GetMapLocationsResponseMessage;
 import network.packets.swg.zone.spatial.NewTicketActivityResponseMessage;
-
-import com.projectswg.common.debug.Log;
 
 
 public enum PacketType {

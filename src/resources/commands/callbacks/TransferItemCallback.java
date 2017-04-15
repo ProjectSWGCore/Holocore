@@ -28,6 +28,8 @@
  */
 package resources.commands.callbacks;
 
+import com.projectswg.common.debug.Assert;
+
 import intents.chat.ChatBroadcastIntent;
 import resources.commands.ICmdCallback;
 import resources.objects.GameObjectType;
@@ -36,8 +38,6 @@ import resources.objects.creature.CreatureObject;
 import resources.objects.weapon.WeaponObject;
 import resources.player.Player;
 import services.galaxy.GalacticManager;
-
-import com.projectswg.common.debug.Assert;
 
 /**
  * This callback is used for all three kinds of transfer commands. The commands

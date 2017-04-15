@@ -27,9 +27,9 @@
 ***********************************************************************************/
 package network.packets.swg.zone;
 
-import network.packets.swg.SWGPacket;
-
 import java.nio.ByteBuffer;
+
+import network.packets.swg.SWGPacket;
 
 public class ClientOpenContainerMessage extends SWGPacket {
 	public static final int CRC = getCrc("ClientOpenContainerMessage");

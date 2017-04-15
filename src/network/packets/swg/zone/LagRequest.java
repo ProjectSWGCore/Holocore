@@ -34,7 +34,7 @@ import network.packets.swg.SWGPacket;
 
 public class LagRequest extends SWGPacket {
 	
-	public static final int CRC = resources.common.CRC.getCrc("LagRequest");
+	public static final int CRC = getCrc("LagRequest");
 	
 	public LagRequest() {
 		

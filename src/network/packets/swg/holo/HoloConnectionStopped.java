@@ -31,7 +31,7 @@ import java.nio.ByteBuffer;
 
 public class HoloConnectionStopped extends HoloPacket {
 	
-	public static final int CRC = resources.common.CRC.getCrc("HoloConnectionStopped");
+	public static final int CRC = getCrc("HoloConnectionStopped");
 	
 	private ConnectionStoppedReason reason;
 	

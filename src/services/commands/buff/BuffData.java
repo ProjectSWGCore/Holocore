@@ -29,8 +29,7 @@ package services.commands.buff;
 
 import java.util.Locale;
 
-import resources.common.CRC;
-
+import com.projectswg.common.data.CRC;
 import com.projectswg.common.debug.Assert;
 
 public class BuffData {

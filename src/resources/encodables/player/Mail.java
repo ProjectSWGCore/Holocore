@@ -27,15 +27,16 @@
 ***********************************************************************************/
 package resources.encodables.player;
 
-import network.packets.Packet;
-import resources.encodables.Encodable;
-import resources.encodables.OutOfBandPackage;
-import resources.network.NetBufferStream;
-import resources.persistable.Persistable;
-import utilities.Encoder;
-
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+
+import com.projectswg.common.encoding.Encodable;
+import com.projectswg.common.encoding.Encoder;
+import com.projectswg.common.network.NetBufferStream;
+import com.projectswg.common.persistable.Persistable;
+
+import network.packets.Packet;
+import resources.encodables.OutOfBandPackage;
 
 public class Mail implements Encodable, Persistable {
 	

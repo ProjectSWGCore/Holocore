@@ -27,9 +27,9 @@
  ***********************************************************************************/
 package intents.network;
 
-import network.NetworkClient;
-
 import com.projectswg.common.control.Intent;
+
+import network.NetworkClient;
 
 public class InboundPacketPendingIntent extends Intent {
 	

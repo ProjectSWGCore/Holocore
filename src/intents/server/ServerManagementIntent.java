@@ -29,9 +29,9 @@ package intents.server;
 
 import java.util.concurrent.TimeUnit;
 
-import resources.player.Player;
-
 import com.projectswg.common.control.Intent;
+
+import resources.player.Player;
 
 public class ServerManagementIntent extends Intent {
 	

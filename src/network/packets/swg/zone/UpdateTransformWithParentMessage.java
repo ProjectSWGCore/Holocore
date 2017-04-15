@@ -27,10 +27,11 @@
 
 package network.packets.swg.zone;
 
-import network.packets.swg.SWGPacket;
-import resources.Location;
-
 import java.nio.ByteBuffer;
+
+import com.projectswg.common.data.location.Location;
+
+import network.packets.swg.SWGPacket;
 
 /**
  * @author Waverunner

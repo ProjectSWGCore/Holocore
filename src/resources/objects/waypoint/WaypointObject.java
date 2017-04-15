@@ -27,17 +27,18 @@
 ***********************************************************************************/
 package resources.objects.waypoint;
 
+import java.nio.ByteBuffer;
+
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.network.NetBufferStream;
+
 import network.packets.Packet;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
-import resources.Location;
-import resources.Terrain;
 import resources.encodables.OutOfBandData;
 import resources.encodables.OutOfBandPackage;
-import resources.network.NetBufferStream;
 import resources.objects.intangible.IntangibleObject;
 import resources.player.Player;
-
-import java.nio.ByteBuffer;
 
 public class WaypointObject extends IntangibleObject implements OutOfBandData {
 	
@@ -50,6 +51,7 @@ public class WaypointObject extends IntangibleObject implements OutOfBandData {
 		super(objectId, BaselineType.WAYP);
 	}
 
+	@Override
 	public String getObjectName() {
 		return name;
 	}
@@ -82,6 +84,7 @@ public class WaypointObject extends IntangibleObject implements OutOfBandData {
 		this.cellId = cellId;
 	}
 
+	@Override
 	public void createObject(Player target) {
 		// NOTE: Client is never sent a WAYP baseline in NGE, WaypointObject's just go inside the Waypoint List in PLAY.
 	}

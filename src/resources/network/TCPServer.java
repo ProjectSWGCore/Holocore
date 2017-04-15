@@ -47,9 +47,9 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import utilities.ThreadUtilities;
-
 import com.projectswg.common.debug.Log;
+
+import utilities.ThreadUtilities;
 
 
 public class TCPServer {

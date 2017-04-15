@@ -27,9 +27,9 @@
 ***********************************************************************************/
 package network.packets.swg.login.creation;
 
-import network.packets.swg.SWGPacket;
-
 import java.nio.ByteBuffer;
+
+import network.packets.swg.SWGPacket;
 
 
 public class ClientCreateCharacter extends SWGPacket {

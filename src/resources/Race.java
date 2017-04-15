@@ -30,8 +30,8 @@ package resources;
 import java.util.HashMap;
 import java.util.Map;
 
-import resources.client_info.ClientFactory;
-import resources.common.CRC;
+import com.projectswg.common.data.CRC;
+import com.projectswg.common.data.swgfile.ClientFactory;
 
 
 public enum Race {

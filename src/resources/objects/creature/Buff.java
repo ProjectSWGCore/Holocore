@@ -28,10 +28,11 @@
 package resources.objects.creature;
 
 import java.nio.ByteBuffer;
-import resources.encodables.Encodable;
-import resources.network.NetBuffer;
-import resources.network.NetBufferStream;
-import resources.persistable.Persistable;
+
+import com.projectswg.common.encoding.Encodable;
+import com.projectswg.common.network.NetBuffer;
+import com.projectswg.common.network.NetBufferStream;
+import com.projectswg.common.persistable.Persistable;
 
 public class Buff implements Encodable, Persistable {
 	

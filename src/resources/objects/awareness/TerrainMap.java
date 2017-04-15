@@ -30,15 +30,15 @@ package resources.objects.awareness;
 import java.util.HashSet;
 import java.util.Set;
 
-import resources.Location;
-import resources.Terrain;
+import com.projectswg.common.callback.CallbackManager;
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.debug.Assert;
+import com.projectswg.common.debug.Log;
+
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.waypoint.WaypointObject;
-
-import com.projectswg.common.callback.CallbackManager;
-import com.projectswg.common.debug.Assert;
-import com.projectswg.common.debug.Log;
 
 public class TerrainMap {
 	

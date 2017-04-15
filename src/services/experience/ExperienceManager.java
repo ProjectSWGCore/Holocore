@@ -27,18 +27,20 @@
 ***********************************************************************************/
 package services.experience;
 
-import intents.experience.ExperienceIntent;
-import intents.experience.LevelChangedIntent;
-
 import java.awt.Color;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.projectswg.common.control.Manager;
+import com.projectswg.common.data.RGB;
+import com.projectswg.common.data.swgfile.ClientFactory;
+import com.projectswg.common.data.swgfile.visitors.DatatableData;
+import com.projectswg.common.debug.Log;
+
+import intents.experience.ExperienceIntent;
+import intents.experience.LevelChangedIntent;
 import network.packets.swg.zone.object_controller.ShowFlyText;
 import network.packets.swg.zone.object_controller.ShowFlyText.Scale;
-import resources.client_info.ClientFactory;
-import resources.client_info.visitors.DatatableData;
-import resources.common.RGB;
 import resources.config.ConfigFile;
 import resources.encodables.OutOfBandPackage;
 import resources.encodables.ProsePackage;
@@ -46,9 +48,6 @@ import resources.encodables.StringId;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
 import resources.server_info.DataManager;
-
-import com.projectswg.common.control.Manager;
-import com.projectswg.common.debug.Log;
 
 /**
  * The {@code ExperienceManager} listens for {@link ExperienceIntent} and

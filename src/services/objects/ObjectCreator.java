@@ -30,11 +30,13 @@ package services.objects;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map.Entry;
 
-import resources.client_info.ClientFactory;
-import resources.client_info.visitors.ObjectData;
-import resources.client_info.visitors.ObjectData.ObjectDataAttribute;
-import resources.client_info.visitors.SlotArrangementData;
-import resources.client_info.visitors.SlotDescriptorData;
+import com.projectswg.common.data.swgfile.ClientFactory;
+import com.projectswg.common.data.swgfile.visitors.ObjectData;
+import com.projectswg.common.data.swgfile.visitors.ObjectData.ObjectDataAttribute;
+import com.projectswg.common.data.swgfile.visitors.SlotArrangementData;
+import com.projectswg.common.data.swgfile.visitors.SlotDescriptorData;
+import com.projectswg.common.debug.Log;
+
 import resources.objects.GameObjectType;
 import resources.objects.GameObjectTypeMask;
 import resources.objects.SWGObject;
@@ -56,8 +58,6 @@ import resources.objects.staticobject.StaticObject;
 import resources.objects.tangible.TangibleObject;
 import resources.objects.waypoint.WaypointObject;
 import resources.objects.weapon.WeaponObject;
-
-import com.projectswg.common.debug.Log;
 
 public final class ObjectCreator {
 	

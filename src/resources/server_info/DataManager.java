@@ -32,13 +32,13 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import resources.config.ConfigFile;
-
 import com.projectswg.common.concurrency.SynchronizedMap;
+import com.projectswg.common.data.info.Config;
+import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.common.debug.Assert;
 import com.projectswg.common.debug.Log;
-import com.projectswg.common.info.Config;
-import com.projectswg.common.info.RelationalServerFactory;
+
+import resources.config.ConfigFile;
 
 public class DataManager {
 	

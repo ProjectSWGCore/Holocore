@@ -27,13 +27,17 @@
 ***********************************************************************************/
 package services.galaxy;
 
+import java.util.Map;
+
+import com.projectswg.common.concurrency.SynchronizedMap;
+import com.projectswg.common.control.IntentChain;
+import com.projectswg.common.control.Manager;
+import com.projectswg.common.debug.Assert;
+
 import intents.network.ConnectionClosedIntent;
 import intents.network.ConnectionOpenedIntent;
 import intents.network.GalacticPacketIntent;
 import intents.network.InboundPacketIntent;
-
-import java.util.Map;
-
 import resources.player.Player;
 import services.CoreManager;
 import services.chat.ChatManager;
@@ -42,11 +46,6 @@ import services.galaxy.travel.TravelService;
 import services.objects.ObjectManager;
 import services.objects.UniformBoxService;
 import services.player.PlayerManager;
-
-import com.projectswg.common.concurrency.SynchronizedMap;
-import com.projectswg.common.control.IntentChain;
-import com.projectswg.common.control.Manager;
-import com.projectswg.common.debug.Assert;
 
 public class GalacticManager extends Manager {
 	

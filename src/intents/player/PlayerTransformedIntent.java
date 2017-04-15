@@ -28,9 +28,9 @@
 package intents.player;
 
 import com.projectswg.common.control.Intent;
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.location.Terrain;
 
-import resources.Location;
-import resources.Terrain;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 

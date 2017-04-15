@@ -27,12 +27,12 @@
 ***********************************************************************************/
 package network.packets.swg.zone.insertion;
 
-import network.packets.swg.SWGPacket;
-import resources.chat.ChatRoom;
-
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.Collection;
+
+import network.packets.swg.SWGPacket;
+import resources.chat.ChatRoom;
 
 public class ChatRoomList extends SWGPacket {
 	public static final int CRC = getCrc("ChatRoomList");

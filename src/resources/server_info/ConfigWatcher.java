@@ -27,8 +27,6 @@
  ***********************************************************************************/
 package resources.server_info;
 
-import intents.server.ConfigChangedIntent;
-
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
@@ -41,11 +39,12 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import resources.config.ConfigFile;
-
 import com.projectswg.common.concurrency.PswgBasicThread;
+import com.projectswg.common.data.info.Config;
 import com.projectswg.common.debug.Log;
-import com.projectswg.common.info.Config;
+
+import intents.server.ConfigChangedIntent;
+import resources.config.ConfigFile;
 
 public final class ConfigWatcher {
 	

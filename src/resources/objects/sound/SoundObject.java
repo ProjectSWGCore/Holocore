@@ -27,7 +27,8 @@
 ***********************************************************************************/
 package resources.objects.sound;
 
-import resources.network.NetBufferStream;
+import com.projectswg.common.network.NetBufferStream;
+
 import resources.objects.staticobject.StaticObject;
 
 public class SoundObject extends StaticObject {

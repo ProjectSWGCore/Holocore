@@ -27,9 +27,10 @@
  ***********************************************************************************/
 package resources.objects.player;
 
+import com.projectswg.common.network.NetBufferStream;
+import com.projectswg.common.persistable.Persistable;
+
 import resources.network.BaselineBuilder;
-import resources.network.NetBufferStream;
-import resources.persistable.Persistable;
 import resources.player.AccessLevel;
 import resources.player.Player;
 

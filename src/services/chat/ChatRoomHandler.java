@@ -33,6 +33,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import com.projectswg.common.data.info.RelationalServerData;
+import com.projectswg.common.data.info.RelationalServerFactory;
+import com.projectswg.common.data.swgfile.visitors.DatatableData;
+import com.projectswg.common.debug.Assert;
+import com.projectswg.common.debug.Log;
+
 import network.packets.swg.zone.chat.ChatOnDestroyRoom;
 import network.packets.swg.zone.chat.ChatOnEnteredRoom;
 import network.packets.swg.zone.chat.ChatOnLeaveRoom;
@@ -42,7 +48,6 @@ import resources.chat.ChatAvatar;
 import resources.chat.ChatResult;
 import resources.chat.ChatRoom;
 import resources.client_info.ServerFactory;
-import resources.client_info.visitors.DatatableData;
 import resources.encodables.OutOfBandPackage;
 import resources.player.AccessLevel;
 import resources.player.Player;
@@ -51,11 +56,6 @@ import resources.server_info.ObjectDatabase;
 import services.CoreManager;
 import services.chat.ChatManager.ChatRange;
 import services.chat.ChatManager.ChatType;
-
-import com.projectswg.common.debug.Assert;
-import com.projectswg.common.debug.Log;
-import com.projectswg.common.info.RelationalServerData;
-import com.projectswg.common.info.RelationalServerFactory;
 
 public class ChatRoomHandler {
 	

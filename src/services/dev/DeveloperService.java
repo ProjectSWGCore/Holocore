@@ -27,18 +27,18 @@
  ***********************************************************************************/
 package services.dev;
 
+import com.projectswg.common.control.Service;
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.location.Terrain;
+
 import intents.object.ObjectCreatedIntent;
-import resources.Location;
 import resources.PvpFlag;
-import resources.Terrain;
 import resources.config.ConfigFile;
 import resources.objects.SWGObject;
 import resources.objects.custom.DefaultAIObject;
 import resources.objects.tangible.TangibleObject;
 import resources.server_info.DataManager;
 import services.objects.ObjectCreator;
-
-import com.projectswg.common.control.Service;
 
 public class DeveloperService extends Service {
 	

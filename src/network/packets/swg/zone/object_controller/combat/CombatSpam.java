@@ -29,13 +29,14 @@ package network.packets.swg.zone.object_controller.combat;
 
 import java.nio.ByteBuffer;
 
+import com.projectswg.common.data.location.Point3D;
+import com.projectswg.common.network.NetBuffer;
+
 import network.packets.swg.zone.object_controller.ObjectController;
-import resources.Point3D;
 import resources.combat.AttackInfo;
 import resources.combat.DamageType;
 import resources.combat.HitLocation;
 import resources.encodables.StringId;
-import resources.network.NetBuffer;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 

@@ -27,10 +27,6 @@
 ***********************************************************************************/
 package services.player;
 
-import intents.GalacticIntent;
-import intents.PlayerEventIntent;
-import intents.object.DestroyObjectIntent;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -40,6 +36,17 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.projectswg.common.control.Service;
+import com.projectswg.common.data.info.RelationalDatabase;
+import com.projectswg.common.data.info.RelationalServerFactory;
+import com.projectswg.common.data.swgfile.ClientFactory;
+import com.projectswg.common.data.swgfile.visitors.ProfTemplateData;
+import com.projectswg.common.debug.Assert;
+import com.projectswg.common.debug.Log;
+
+import intents.GalacticIntent;
+import intents.PlayerEventIntent;
+import intents.object.DestroyObjectIntent;
 import network.packets.Packet;
 import network.packets.swg.login.creation.ClientCreateCharacter;
 import network.packets.swg.login.creation.ClientVerifyAndLockNameRequest;
@@ -51,8 +58,6 @@ import network.packets.swg.login.creation.CreateCharacterSuccess;
 import network.packets.swg.login.creation.RandomNameRequest;
 import network.packets.swg.login.creation.RandomNameResponse;
 import resources.Race;
-import resources.client_info.ClientFactory;
-import resources.client_info.visitors.ProfTemplateData;
 import resources.config.ConfigFile;
 import resources.objects.creature.CreatureObject;
 import resources.player.AccessLevel;
@@ -65,12 +70,6 @@ import services.objects.ObjectManager;
 import services.player.TerrainZoneInsertion.SpawnInformation;
 import services.player.creation.CharacterCreation;
 import utilities.namegen.SWGNameGenerator;
-
-import com.projectswg.common.control.Service;
-import com.projectswg.common.debug.Assert;
-import com.projectswg.common.debug.Log;
-import com.projectswg.common.info.RelationalDatabase;
-import com.projectswg.common.info.RelationalServerFactory;
 
 public class CharacterCreationService extends Service {
 	

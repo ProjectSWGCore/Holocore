@@ -29,15 +29,16 @@
 package services.collections;
 
 
+import java.util.BitSet;
+
+import com.projectswg.common.control.Manager;
+import com.projectswg.common.data.swgfile.ClientFactory;
+import com.projectswg.common.data.swgfile.visitors.DatatableData;
+
 import intents.GrantBadgeIntent;
 import intents.GrantClickyCollectionIntent;
 import intents.object.DestroyObjectIntent;
-
-import java.util.BitSet;
-
 import network.packets.swg.zone.PlayMusicMessage;
-import resources.client_info.ClientFactory;
-import resources.client_info.visitors.DatatableData;
 import resources.objects.SWGObject;
 import resources.objects.collections.ClickyCollectionItem;
 import resources.objects.collections.CollectionItem;
@@ -45,8 +46,6 @@ import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
 import resources.player.Player;
 import utilities.IntentFactory;
-
-import com.projectswg.common.control.Manager;
 
 public class CollectionBadgeManager extends Manager {
 

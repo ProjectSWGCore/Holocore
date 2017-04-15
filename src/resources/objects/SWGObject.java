@@ -27,8 +27,6 @@
 ***********************************************************************************/
 package resources.objects;
 
-import intents.object.ContainerTransferIntent;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -39,39 +37,40 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import com.projectswg.common.concurrency.SynchronizedMap;
+import com.projectswg.common.concurrency.SynchronizedSet;
+import com.projectswg.common.data.CRC;
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.data.swgfile.visitors.ObjectData.ObjectDataAttribute;
+import com.projectswg.common.debug.Assert;
+import com.projectswg.common.debug.Log;
+import com.projectswg.common.network.NetBuffer;
+import com.projectswg.common.network.NetBufferStream;
+import com.projectswg.common.persistable.Persistable;
+
+import intents.object.ContainerTransferIntent;
 import network.packets.Packet;
 import network.packets.swg.zone.SceneCreateObjectByCrc;
 import network.packets.swg.zone.SceneDestroyObject;
 import network.packets.swg.zone.SceneEndBaselines;
 import network.packets.swg.zone.UpdateContainmentMessage;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
-import resources.Location;
-import resources.Terrain;
 import resources.buildout.BuildoutArea;
-import resources.client_info.visitors.ObjectData.ObjectDataAttribute;
-import resources.common.CRC;
 import resources.containers.ContainerPermissionsType;
 import resources.containers.ContainerResult;
 import resources.encodables.StringId;
 import resources.network.BaselineBuilder;
 import resources.network.BaselineObject;
-import resources.network.NetBuffer;
-import resources.network.NetBufferStream;
 import resources.objects.awareness.ObjectAware;
 import resources.objects.building.BuildingObject;
 import resources.objects.cell.CellObject;
 import resources.objects.creature.CreatureObject;
-import resources.persistable.Persistable;
 import resources.persistable.SWGObjectFactory;
 import resources.player.Player;
 import services.CoreManager;
 import services.objects.ObjectCreator;
 import utilities.AwarenessUtilities;
-
-import com.projectswg.common.concurrency.SynchronizedMap;
-import com.projectswg.common.concurrency.SynchronizedSet;
-import com.projectswg.common.debug.Assert;
-import com.projectswg.common.debug.Log;
 
 public abstract class SWGObject extends BaselineObject implements Comparable<SWGObject>, Persistable {
 	

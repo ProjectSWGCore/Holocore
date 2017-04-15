@@ -27,14 +27,22 @@
 ***********************************************************************************/
 package services.player;
 
+import java.io.File;
+import java.io.IOException;
+
+import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.api.errors.GitAPIException;
+import org.eclipse.jgit.lib.Constants;
+import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.revwalk.RevCommit;
+
+import com.projectswg.common.control.Manager;
+import com.projectswg.common.debug.Log;
+
 import intents.GalacticIntent;
 import intents.PlayerEventIntent;
 import intents.chat.ChatBroadcastIntent;
 import intents.network.GalacticPacketIntent;
-
-import java.io.File;
-import java.io.IOException;
-
 import network.packets.Packet;
 import network.packets.swg.login.AccountFeatureBits;
 import network.packets.swg.login.ClientIdMsg;
@@ -46,13 +54,6 @@ import network.packets.swg.zone.SetWaypointColor;
 import network.packets.swg.zone.ShowBackpack;
 import network.packets.swg.zone.ShowHelmet;
 import network.packets.swg.zone.chat.ChatSystemMessage;
-
-import org.eclipse.jgit.api.Git;
-import org.eclipse.jgit.api.errors.GitAPIException;
-import org.eclipse.jgit.lib.Constants;
-import org.eclipse.jgit.lib.Repository;
-import org.eclipse.jgit.revwalk.RevCommit;
-
 import resources.config.ConfigFile;
 import resources.objects.creature.CreatureMood;
 import resources.objects.player.PlayerObject;
@@ -62,9 +63,6 @@ import resources.player.Player;
 import resources.player.Player.PlayerServer;
 import resources.player.PlayerEvent;
 import resources.server_info.DataManager;
-
-import com.projectswg.common.control.Manager;
-import com.projectswg.common.debug.Log;
 
 public class ZoneManager extends Manager {
 	
