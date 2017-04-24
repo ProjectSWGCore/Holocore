@@ -62,16 +62,58 @@ public class DeveloperService extends Service {
 	private void setupCharacterBuilders() {
 		
 		Location[] cbtLocations = {
-			new Location(-3989, 124, -10, Terrain.DATHOMIR),
-			new Location(-3989, 124, -10, Terrain.DATHOMIR),
+			
+			// Planet: Corellia
+			new Location(4735, 26.5, -5676, Terrain.CORELLIA),
+			new Location(5137, 16.9, 1518, Terrain.CORELLIA),
+			new Location(213, 50.5, 4533, Terrain.CORELLIA),
+			
+			// Planet: Dantooine
+			new Location(4078, 10.1, 5370, Terrain.DANTOOINE),						
+			new Location(-6225, 48.8, 7381, Terrain.DANTOOINE),
+			new Location(-564, 1, -3789, Terrain.DANTOOINE),
+			
+			// Planet: Dathomir
+			new Location(-6079, 132, 971, Terrain.DATHOMIR),
+			new Location(-3989, 124.7, -10, Terrain.DATHOMIR),
+			new Location(-2457, 117.9, 1530, Terrain.DATHOMIR),
 			new Location(-5786, 510, -6554, Terrain.DATHOMIR),
-			new Location(-4683, 13, 4326, Terrain.ENDOR),
-			new Location(3331, 105, -4912, Terrain.LOK),
+			
+			// Planet: Endor
+			new Location(-1714, 31.5, -8, Terrain.ENDOR),
+			new Location(-4683, 13.3, 4326, Terrain.ENDOR),			
+			
+			// Planet: Lok
+			new Location(3331, 106, -4912, Terrain.LOK),
+			new Location(3848, 62, -464, Terrain.LOK),
+			new Location(-1914, 12, -3299, Terrain.LOK),
+			new Location(-70, 41.1, 2768, Terrain.LOK),
+			
+			// Planet: Naboo
+			new Location(2535, 295.9, -3887, Terrain.NABOO),
 			new Location(-6439, 41, -3265, Terrain.NABOO),
+			
+			// Planet: Rori
+			new Location(-1211, 97.8, 4552, Terrain.RORI),
+			
+			// Planet: Talus
+			new Location(4958, 449.9, -5983, Terrain.TALUS),
+			
+			// Planet: Tatooine
 			new Location(-3941, 60, 6318, Terrain.TATOOINE),
-			new Location(7380, 123, 4298, Terrain.TATOOINE),
-			new Location(3523, 4, -4802, Terrain.TATOOINE),
-			new Location(58, 153, -78, Terrain.TATOOINE)
+			new Location(7380, 122.8, 4298, Terrain.TATOOINE),
+			new Location(3525, 4, -4807, Terrain.TATOOINE),
+			new Location(3684, 7.8, 2357, Terrain.TATOOINE),
+			new Location(57, 152.3, -79, Terrain.TATOOINE),
+			new Location(-5458, 11, 2601, Terrain.TATOOINE),
+			
+			// Planet: Yavin 4
+			new Location(-947, 86.4, -2131, Terrain.YAVIN4),
+			new Location(4928, 103.4, 5587, Terrain.YAVIN4),
+			new Location(5107, 81.7, 301, Terrain.YAVIN4),
+			new Location(-5575, 88, 4902, Terrain.YAVIN4),
+			new Location(-6485, 84, -446, Terrain.YAVIN4),
+
 		};
 		
 		for (int i = 0; i < cbtLocations.length; i++) {
