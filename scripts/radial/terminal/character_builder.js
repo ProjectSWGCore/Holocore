@@ -1154,8 +1154,8 @@ function handleTravelSelection(player, creature, eventType, parameters) {
 		case 8: handleDatNSvsSMC(player); break;
 		case 9: handleDatQz(player); break;
 		// Planet: Endor
-		case 10: handleEndJindaCave(player); break;
-		case 11: handleEndDwb(player); break;
+		case 10: handleEndDwb(player); break;
+		case 11: handleEndJindaCave(player); break;
 		// Planet: Lok
 		case 12: handleLokDroidCave(player); break;
 		case 13: handleLokGreatMaze(player); break;
