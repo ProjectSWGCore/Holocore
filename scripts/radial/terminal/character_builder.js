@@ -1104,6 +1104,9 @@ function handleTravel(player) {
 	listBox.addListItem("Dathomir - Quarantine Zone");
 	listBox.addListItem("Endor - DWB");
 	listBox.addListItem("Endor - Jinda Cave");
+	listBox.addListItem("Kashyyyk - Etyyy, The Hunting Grounds");
+	listBox.addListItem("Kashyyyk - Kachirho, Slaver Camp");
+	listBox.addListItem("Kashyyyk - Kkowir, The Dead Forest");	
 	listBox.addListItem("Lok - Droid Cave");
 	listBox.addListItem("Lok - Great Maze of Lok");
 	listBox.addListItem("Lok - Imperial Outpost");
@@ -1156,31 +1159,35 @@ function handleTravelSelection(player, creature, eventType, parameters) {
 		// Planet: Endor
 		case 10: handleEndDwb(player); break;
 		case 11: handleEndJindaCave(player); break;
+		// Planet: Kashyyyk
+		case 12: handleKasEtyyy(player); break;
+		case 13: handleKasKachirho(player); break;
+		case 14: handleKasKkowir(player); break;		
 		// Planet: Lok
-		case 12: handleLokDroidCave(player); break;
-		case 13: handleLokGreatMaze(player); break;
-		case 14: handleLokImperialOutpost(player); break;
-		case 15: handleLokKimogilaTown(player); break;
+		case 15: handleLokDroidCave(player); break;
+		case 16: handleLokGreatMaze(player); break;
+		case 17: handleLokImperialOutpost(player); break;
+		case 18: handleLokKimogilaTown(player); break;
 		// Planet: Naboo
-		case 16: handleNabEmperorsRetreat(player); break;
-		case 17: handleNabWeaponFac(player); break;
+		case 19: handleNabEmperorsRetreat(player); break;
+		case 20: handleNabWeaponFac(player); break;
 		// Planet: Rori
-		case 18: handleRorHyperdriveFacility(player); break;
+		case 21: handleRorHyperdriveFacility(player); break;
 		// Planet: Talus
-		case 19: handleTalDetainmentCenter(player); break;
+		case 22: handleTalDetainmentCenter(player); break;
 		// Planet: Tatooine
-		case 20: handleTatFortTusken(player); break;
-		case 21: handleTatImperialOasis(player); break;
-		case 22: handleTatKraytGrave(player); break;
-		case 23: handleTatMosEisley(player); break;
-		case 24: handleTatMosTaike(player); break;
-		case 25: handleTatSquillCave(player); break;
+		case 23: handleTatFortTusken(player); break;
+		case 24: handleTatImperialOasis(player); break;
+		case 25: handleTatKraytGrave(player); break;
+		case 26: handleTatMosEisley(player); break;
+		case 27: handleTatMosTaike(player); break;
+		case 28: handleTatSquillCave(player); break;
 		// Planet: Yavin 4
-		case 26: handleYavBlueleafTemple(player); break;
-		case 27: handleYavDarkEnclave(player); break;
-		case 28: handleYavExarKun(player); break;
-		case 29: handleYavGeoCave(player); break;
-		case 30: handleYavLightEnclave(player); break;
+		case 29: handleYavBlueleafTemple(player); break;
+		case 30: handleYavDarkEnclave(player); break;
+		case 31: handleYavExarKun(player); break;
+		case 32: handleYavGeoCave(player); break;
+		case 33: handleYavLightEnclave(player); break;
 		
 	}
 }
@@ -1275,6 +1282,30 @@ function handleEndDwb(player) {
 	var Location = Java.type('resources.Location');
 	var Terrain = Java.type('resources.Terrain');
 	new ObjectTeleportIntent(player.getCreatureObject(), new Location(-4683, 13, 4326, Terrain.ENDOR)).broadcast();
+}
+
+// Planet: Kashyyyk
+
+function handleKasEtyyy(player) {
+	var ObjectTeleportIntent = Java.type('intents.object.ObjectTeleportIntent');
+	var Location = Java.type('resources.Location');
+	var Terrain = Java.type('resources.Terrain');
+	new ObjectTeleportIntent(player.getCreatureObject(), new Location(275, 48, 503, Terrain.KASHYYYK_HUNTING)).broadcast();
+}
+
+function handleKasKachirho(player) {
+	var ObjectTeleportIntent = Java.type('intents.object.ObjectTeleportIntent');
+	var Location = Java.type('resources.Location');
+	var Terrain = Java.type('resources.Terrain');
+	new ObjectTeleportIntent(player.getCreatureObject(), new Location(146, 19, 162, Terrain.KASHYYYK_MAIN)).broadcast();
+}
+
+
+function handleKasKkowir(player) {
+	var ObjectTeleportIntent = Java.type('intents.object.ObjectTeleportIntent');
+	var Location = Java.type('resources.Location');
+	var Terrain = Java.type('resources.Terrain');
+	new ObjectTeleportIntent(player.getCreatureObject(), new Location(-164, 16, -262, Terrain.KASHYYYK_DEAD_FOREST)).broadcast();
 }
 
 // Planet: Lok
