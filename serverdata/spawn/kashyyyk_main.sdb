@@ -1,12 +1,12 @@
-spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	spawn_category	spawn_area	amount	behaviour	mood	equipment_id	patrol_id	quest_id	loot_id	max_spawn_time	min_spawn_time	float_radius
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	creature_name	creature_id	spawn_category	spawn_area	amount	behaviour	mood	equipment_id	patrol_id	quest_id	loot_id	max_spawn_time	min_spawn_time	float_radius
 INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGER NOT NULL	REAL	REAL	REAL	INTEGER	INTEGER	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL	INTEGER NOT NULL	INTEGER
-1220003	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	AREA	10	1.60	-20.75	32.67	179	1	Darth Vader	clone_darth_vader_300_h_att_b	city	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
-1220004	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	AREA	10	-0.23	-20.75	30.50	179	1	a Dark Trooper	imp_dark_trooper_32_d_att_n	city	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
-1220005	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	AREA	10	3.58	-20.75	30.50	179	1	a Dark Trooper	imp_dark_trooper_32_d_att_n	city	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
-1220006	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	AREA	10	3.59	-20.75	28.00	179	1	a Dark Trooper	imp_dark_trooper_32_d_att_n	city	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
-1220007	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	AREA	10	-0.45	-20.75	28.00	179	1	a Dark Trooper	imp_dark_trooper_32_d_att_n	city	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
-1220008	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	AREA	7	-6.37	-13.75	6.20	0	1	Admiral Krieg	clone_admiral_krieg_100_h_inv_n	city	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
-1220009	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	AREA	7	-1.15	-13.75	9.50	163	1	a comm operator	imp_comm_operator_14_h_att_n	city	Kachirho	1	STOP	npc_sitting_chair	0	0	0	0	300	120	0
-1220010	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	AREA	7	-7.97	-13.75	6.87	106	1	an Imperial First Lieutenant	imp_first_lieutenant_20_h_att_n	city	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
-1220011	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	AREA	7	2.07	-13.75	4.50	0	1	a Stormtrooper	stormtrooper_25_h_att_n	city	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
-1220012	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	AREA	7	4.90	-13.75	4.50	0	1	a Stormtrooper	stormtrooper_25_h_att_n	city	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
+1220003	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	AREA	10	1.60	-20.75	32.67	179	1	Darth Vader	darth_vader_100_h_inv_n	City	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
+1220004	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	AREA	10	-0.23	-20.75	30.50	179	1	a Dark Trooper	imp_dark_trooper_100_d_inv_n	City	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
+1220005	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	AREA	10	3.58	-20.75	30.50	179	1	a Dark Trooper	imp_dark_trooper_100_d_inv_n	City	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
+1220006	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	AREA	10	3.59	-20.75	28.00	179	1	a Dark Trooper	imp_dark_trooper_100_d_inv_n	City	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
+1220007	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	AREA	10	-0.45	-20.75	28.00	179	1	a Dark Trooper	imp_dark_trooper_100_d_inv_n	City	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
+1220008	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	AREA	7	-6.37	-13.75	6.20	0	1	Admiral Krieg	clone_admiral_krieg_100_h_inv_n	City	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
+1220009	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	AREA	7	-1.15	-13.75	9.50	163	1	a comm operator	imp_comm_operator_14_h_att_n	City	Kachirho	1	STOP	npc_sitting_chair	0	0	0	0	300	120	0
+1220010	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	AREA	7	-7.97	-13.75	6.87	106	1	an Imperial First Lieutenant	imp_first_lieutenant_20_h_att_n	City	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
+1220011	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	AREA	7	2.07	-13.75	4.50	0	1	a Stormtrooper	stormtrooper_25_h_att_n	City	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
+1220012	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	AREA	7	4.90	-13.75	4.50	0	1	a Stormtrooper	stormtrooper_25_h_att_n	City	Kachirho	1	STOP	idle	0	0	0	0	300	120	0
