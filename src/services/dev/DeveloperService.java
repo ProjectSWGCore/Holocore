@@ -84,9 +84,9 @@ public class DeveloperService extends Service {
 			new Location(-4683, 13.3, 4326, Terrain.ENDOR),		
 			
 			// Planet: Kashyyyk
-			new Location(275, 48, 503, Terrain.KASHYYYK_HUNTING),
-			new Location(146, 19, 162, Terrain.KASHYYYK_MAIN),
-			new Location(-164, 16, -262, Terrain.KASHYYYK_DEAD_FOREST),
+			new Location(275, 48.1, 503, Terrain.KASHYYYK_HUNTING),
+			new Location(146, 19.1, 162, Terrain.KASHYYYK_MAIN),
+			new Location(-164, 16.5, -262, Terrain.KASHYYYK_DEAD_FOREST),
 			
 			// Planet: Lok
 			new Location(3331, 106, -4912, Terrain.LOK),
