@@ -1,85 +1,124 @@
 spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	spawn_category	spawn_area	amount	behaviour	mood	equipment_id	patrol_id	quest_id	loot_id	max_spawn_time	min_spawn_time	float_radius
 INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGER NOT NULL	REAL	REAL	REAL	INTEGER	INTEGER	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER NOT NULL	TEXT NOT NULL	TEXT NOT NULL	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER NOT NULL	INTEGER NOT NULL	INTEGER
-1210018	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1116.10	1.70	-430.47	0	1	a walluga	ep3_walluga_44_c_agg_n	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
-1210021	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1132.36	1.96	-370.02	0	1	a walluga	ep3_walluga_44_c_agg_n	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
-1210032	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1169.58	23.29	739.08	0	1	Brightclaw (a mouf)	ep3_mouf_brightclaw_47_c_agg_e	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	600	450	0
-1210040	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-119.59	8.31	647.03	0	1	a Kashyyyk bantha matriarch	ep3_bantha_kash_matriarch_42_c_att_n	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
-1210050	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1212.96	3.62	-127.24	0	1	Laen Pieweto (Chiss poacher leader)	ep3_laen_pieweto_47_h_agg_e	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	600	300	0
-1210053	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-122.40	1.30	-782.45	0	1	a blackscale guard	ep3_blackscale_guard_46_h_agg_e	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
-1210057	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-125.28	8.34	647.74	0	1	a Kashyyyk bantha	ep3_bantha_kash_38_c_att_n	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
-1210058	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-126.77	1.30	-788.59	0	1	a blackscale guard	ep3_blackscale_guard_46_h_agg_e	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
-1210061	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-129.80	1.30	-782.02	0	1	Slaver Master Klesk	ep3_qst_slavemaster_klesk_50_h_agg_n	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
-1210065	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-15.39	8.30	311.71	0	1	a Kashyyyk bantha	ep3_bantha_kash_38_c_att_n	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
-1210076	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-242.46	8.40	676.24	0	1	a vibrant mouf	ep3_mouf_vibrant_45_c_agg_n	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
-1210078	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-263.42	6.56	357.63	0	1	a Kashyyyk bantha herdleader	ep3_bantha_kash_herdleader_40_c_att_n	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
-1210081	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-274.86	44.31	485.83	0	1	a Kashyyyk bantha herdleader	ep3_bantha_kash_herdleader_40_c_att_n	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
-1210082	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-277.06	44.31	482.87	0	1	Greyclimber (a Kashyyyk bantha)	ep3_bantha_kash_greyclimber_40_c_att_e	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	600	450	0
-1210089	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-36.40	17.41	-208.82	0	1	a Rodian hunter (Ziven's clan)	ep3_npc_rodian_zivenclan_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	STOP	idle	0	0	0	0	300	120	0
-1210091	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-378.80	54.21	784.30	-94	1	a recovering Arcona	ep3_npc_arcona_addict_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	STOP	idle	0	0	0	0	300	120	0
-1210094	KASHYYYK_HUNTING	kas_hunting_world	PATROL	0	-390.62	53.86	779.67	0	1	a recovering Arcona	ep3_npc_arcona_addict_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	PATROL	idle	0	999	0	0	300	120	0
-1210098	KASHYYYK_HUNTING	kas_hunting_world	PATROL	0	-400.24	54.21	807.42	0	1	a recovering Arcona	ep3_npc_arcona_addict_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	PATROL	idle	0	999	0	0	300	120	0
-1210103	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-478.67	35.84	-791.44	0	1	a walluga	ep3_walluga_44_c_agg_n	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
-1210105	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-480.85	33.92	808.82	0	1	a recovering Arcona	ep3_npc_arcona_addict_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
-1210118	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-575.81	8.77	910.21	-67	1	a recovering Arcona	ep3_npc_arcona_addict_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	STOP	idle	0	0	0	0	300	120	0
-1210119	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-59.80	6.35	143.62	0	1	a Kashyyyk bantha matriarch	ep3_bantha_kash_matriarch_42_c_att_n	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
-1210120	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-6.59	17.49	-194.01	0	1	a Rodian hunter (Ziven's clan)	ep3_npc_rodian_zivenclan_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
-1210121	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-603.32	02.09	565.42	0	1	a vibrant mouf	ep3_mouf_vibrant_45_c_agg_n	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
-1210122	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-606.12	7.77	884.2	-120	1	a recovering Arcona	ep3_npc_arcona_addict_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	STOP	idle	0	0	0	0	300	120	0
-1210123	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-609.37	7.77	879.46	16	1	a recovering Arcona	ep3_npc_arcona_addict_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	STOP	idle	0	0	0	0	300	120	0
-1210124	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-612.22	7.77	884.04	103	1	a recovering Arcona	ep3_npc_arcona_addict_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	STOP	idle	0	0	0	0	300	120	0
-1210127	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-636.19	22.21	-680.16	0	1	a walluga	ep3_walluga_44_c_agg_n	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
-1210131	KASHYYYK_HUNTING	kas_hunting_world	PATROL	0	-64.76	4.58	-27.30	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	PATROL	idle	0	999	0	0	300	120	0
-1210133	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-682.14	3.40	-519.07	0	1	Stoneleg (a walluga)	ep3_walluga_stoneleg_50_c_agg_e	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	600	450	0
-1210134	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-688.14	3.70	-517.56	0	1	a frenzied walluga	ep3_walluga_frenzied_48_c_agg_e	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
-1210138	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-720.70	23.39	-769.64	0	1	a walluga	ep3_walluga_44_c_agg_n	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
-1210140	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-740.46	8.42	599.78	0	1	a vibrant mouf	ep3_mouf_vibrant_45_c_agg_n	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
-1210146	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-824.76	17.65	874.52	0	1	a vibrant mouf	ep3_mouf_vibrant_45_c_agg_n	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
-1210148	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-84.18	26.85	-220.96	106	1	a Rodian hunter (Ziven's clan)	ep3_npc_rodian_zivenclan_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	STOP	idle	0	0	0	0	300	120	0
-1210161	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-922.57	13.02	921.25	0	1	Paleclaw (a mouf)	ep3_mouf_paleclaw_48_c_agg_e	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	600	450	0
-1210163	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-967.08	2.62	-528.49	0	1	a walluga	ep3_walluga_44_c_agg_n	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
-1210164	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-967.70	2.62	-544.71	0	1	a walluga	ep3_walluga_44_c_agg_n	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
-1210167	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	0.24	10.72	349.02	0	1	a Kashyyyk bantha	ep3_bantha_kash_38_c_att_n	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
-1210170	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	102.53	8.24	-78.68	-9	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	STOP	idle	0	0	0	0	300	120	0
-1210176	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	108.00	34.26	449.37	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
-1210177	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	108.21	31.46	465.59	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
-1210178	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	1095.75	5.59	161.83	0	1	Spiketop (an uller)	ep3_uller_spiketop_46_c_agg_e	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	600	450	0
-1210180	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	1110.71	9.63	-422.78	0	1	Silkthrower (a webweaver)	ep3_webweaver_silkthrower_49_c_agg_e	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	600	450	0
-1210183	KASHYYYK_HUNTING	kas_hunting_world	PATROL	0	114.50	25.98	537.21	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	PATROL	idle	0	999	0	0	300	120	0
-1210189	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	125.33	3.91	-56.30	-63	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	STOP	idle	0	0	0	0	300	120	0
-1210190	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	151.63	34.60	409.05	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
-1210191	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	164.26	44.13	609.93	133	1	a Rodian hunter (Tripp's clan)	ep3_npc_rodian_trippclan_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	STOP	idle	0	0	0	0	300	120	0
-1210193	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	175.72	44.19	608.45	-172	1	a Rodian hunter (Tripp's clan)	ep3_npc_rodian_trippclan_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
-1210194	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	176.15	24.38	459.46	0	1	a Rodian hunter (Ehartt's clan)	ep3_npc_rodian_eharttclan_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
-1210195	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	186.74	43.90	606.14	86	1	a Rodian hunter (Tripp's clan)	ep3_npc_rodian_trippclan_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
-1210196	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	190.17	44.21	606.07	-89	1	a Rodian hunter (Tripp's clan)	ep3_npc_rodian_trippclan_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
-1210197	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	191.06	25.74	465.62	0	1	a Rodian hunter (Ehartt's clan)	ep3_npc_rodian_eharttclan_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
-1210199	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	194.26	26.09	467.68	0	1	a Rodian hunter (Ehartt's clan)	ep3_npc_rodian_eharttclan_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
-1210200	KASHYYYK_HUNTING	kas_hunting_world	PATROL	0	214.60	32.27	511.50	0	1	a Rodian hunter (Ehartt's clan)	ep3_npc_rodian_eharttclan_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	PATROL	idle	0	999	0	0	300	120	0
-1210201	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	221.45	22.99	567.74	95	1	a 2-1B surgical droid	21b_surgical_droid_clone_droid_100_d_inv_n	dungeon	Etyyy Hunting Grounds	1	STOP	idle	0	0	0	0	300	120	0
-1210204	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	239.63	41.37	477.52	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
-1210205	KASHYYYK_HUNTING	kas_hunting_world	PATROL	0	268.20	46.62	489.16	0	1	a Rodian hunter (Ziven's clan)	ep3_npc_rodian_zivenclan_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	PATROL	idle	0	999	0	0	300	120	0
-1210207	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	275.74	47.00	484.38	-74	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
-1210208	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	281.89	49.03	511.24	-157	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
-1210212	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	31.89	17.84	-228.97	77	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	STOP	conversation	0	0	0	0	300	120	0
-1210215	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	312.44	43.15	537.55	76	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
-1210216	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	314.58	43.13	537.95	-101	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
-1210218	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	34.45	17.89	-228.48	-101	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	STOP	idle	0	0	0	0	300	120	0
-1210219	KASHYYYK_HUNTING	kas_hunting_world	PATROL	0	379.36	41.55	495.41	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	PATROL	idle	0	999	0	0	300	120	0
-1210221	KASHYYYK_HUNTING	kas_hunting_world	PATROL	0	403.03	48.35	525.28	0	1	a Rodian hunter (Ziven's clan)	ep3_npc_rodian_zivenclan_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	PATROL	idle	0	999	0	0	300	120	0
-1210222	KASHYYYK_HUNTING	kas_hunting_world	PATROL	0	404.47	47.27	508.54	0	1	a Rodian hunter (Ziven's clan)	ep3_npc_rodian_zivenclan_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	PATROL	idle	0	999	0	0	300	120	0
-1210223	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	409.79	48.34	528.18	177	1	a Rodian hunter (Ziven's clan)	ep3_npc_rodian_zivenclan_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
-1210224	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	410.65	46.17	494.04	0	1	a Rodian hunter (Ziven's clan)	ep3_npc_rodian_zivenclan_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
-1210225	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	429.08	46.64	499.32	0	1	a Rodian hunter (Ziven's clan)	ep3_npc_rodian_zivenclan_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
-1210231	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	51.27	3.96	-55.10	77	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	STOP	conversation	0	0	0	0	300	120	0
-1210232	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	52.76	3.96	-54.87	-98	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	STOP	conversation	0	0	0	0	300	120	0
-1210235	KASHYYYK_HUNTING	kas_hunting_world	PATROL	0	561.52	23.99	536.48	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	PATROL	idle	0	999	0	0	300	120	0
-1210236	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	564.70	23.13	528.10	-31	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
-1210238	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	590.53	26.30	549.35	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
-1210240	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	596.62	23.61	553.95	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
-1210245	KASHYYYK_HUNTING	kas_hunting_world	PATROL	0	67.67	17.64	-121.86	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	PATROL	idle	0	999	0	0	300	120	0
-1210250	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	69.39	34.78	-186.45	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
-1210253	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	74.59	37.11	-183.71	-30	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	STOP	idle	0	0	0	0	300	120	0
-1210258	KASHYYYK_HUNTING	kas_hunting_world	PATROL	0	82.87	25.94	420.85	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	PATROL	idle	0	999	0	0	300	120	0
-1210264	KASHYYYK_HUNTING	kas_hunting_world	PATROL	0	85.96	33.96	-193.59	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	PATROL	idle	0	999	0	0	300	120	0
-1210265	KASHYYYK_HUNTING	kas_hunting_world	PATROL	0	87.35	16.22	-123.60	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	PATROL	idle	0	999	0	0	300	120	0
-1210271	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	91.29	33.86	-199.73	66	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	dungeon	Etyyy Hunting Grounds	1	STOP	idle	0	0	0	0	300	120	0
+1210018	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1116.10	1.70	-430.47	0	1	a walluga	ep3_walluga_44_c_agg_n	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
+1210021	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1132.36	1.96	-370.02	0	1	a walluga	ep3_walluga_44_c_agg_n	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
+1210032	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1169.58	23.29	739.08	0	1	Brightclaw (a mouf)	ep3_mouf_brightclaw_47_c_agg_e	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	600	450	0
+1210040	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-119.59	8.31	647.03	0	1	a Kashyyyk bantha matriarch	ep3_bantha_kash_matriarch_42_c_att_n	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
+1210050	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1212.96	3.62	-127.24	0	1	Laen Pieweto (Chiss poacher leader)	ep3_laen_pieweto_47_h_agg_e	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	600	300	0
+1210053	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-122.40	1.30	-782.45	0	1	a blackscale guard	ep3_blackscale_guard_46_h_agg_e	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
+1210057	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-125.28	8.34	647.74	0	1	a Kashyyyk bantha	ep3_bantha_kash_38_c_att_n	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
+1210058	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-126.77	1.30	-788.59	0	1	a blackscale guard	ep3_blackscale_guard_46_h_agg_e	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
+1210061	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-129.80	1.30	-782.02	0	1	Slaver Master Klesk	ep3_qst_slavemaster_klesk_50_h_agg_n	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
+1210065	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-15.39	8.30	311.71	0	1	a Kashyyyk bantha	ep3_bantha_kash_38_c_att_n	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
+1210076	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-242.46	8.40	676.24	0	1	a vibrant mouf	ep3_mouf_vibrant_45_c_agg_n	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
+1210078	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-263.42	6.56	357.63	0	1	a Kashyyyk bantha herdleader	ep3_bantha_kash_herdleader_40_c_att_n	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
+1210081	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-274.86	44.31	485.83	0	1	a Kashyyyk bantha herdleader	ep3_bantha_kash_herdleader_40_c_att_n	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
+1210082	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-277.06	44.31	482.87	0	1	Greyclimber (a Kashyyyk bantha)	ep3_bantha_kash_greyclimber_40_c_att_e	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	600	450	0
+1210089	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-36.40	17.41	-208.82	0	1	a Rodian hunter (Ziven's clan)	ep3_npc_rodian_zivenclan_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	STOP	idle	0	0	0	0	300	120	0
+1210091	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-378.80	54.21	784.30	-94	1	a recovering Arcona	ep3_npc_arcona_addict_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	STOP	idle	0	0	0	0	300	120	0
+1210094	KASHYYYK_HUNTING	kas_hunting_world	PATROL	0	-390.62	53.86	779.67	0	1	a recovering Arcona	ep3_npc_arcona_addict_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	PATROL	idle	0	999	0	0	300	120	0
+1210098	KASHYYYK_HUNTING	kas_hunting_world	PATROL	0	-400.24	54.21	807.42	0	1	a recovering Arcona	ep3_npc_arcona_addict_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	PATROL	idle	0	999	0	0	300	120	0
+1210103	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-478.67	35.84	-791.44	0	1	a walluga	ep3_walluga_44_c_agg_n	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
+1210105	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-480.85	33.92	808.82	0	1	a recovering Arcona	ep3_npc_arcona_addict_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
+1210118	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-575.81	8.77	910.21	-67	1	a recovering Arcona	ep3_npc_arcona_addict_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	STOP	idle	0	0	0	0	300	120	0
+1210119	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-59.80	6.35	143.62	0	1	a Kashyyyk bantha matriarch	ep3_bantha_kash_matriarch_42_c_att_n	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
+1210120	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-6.59	17.49	-194.01	0	1	a Rodian hunter (Ziven's clan)	ep3_npc_rodian_zivenclan_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
+1210121	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-603.32	02.09	565.42	0	1	a vibrant mouf	ep3_mouf_vibrant_45_c_agg_n	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
+1210122	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-606.12	7.77	884.2	-120	1	a recovering Arcona	ep3_npc_arcona_addict_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	STOP	idle	0	0	0	0	300	120	0
+1210123	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-609.37	7.77	879.46	16	1	a recovering Arcona	ep3_npc_arcona_addict_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	STOP	idle	0	0	0	0	300	120	0
+1210124	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-612.22	7.77	884.04	103	1	a recovering Arcona	ep3_npc_arcona_addict_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	STOP	idle	0	0	0	0	300	120	0
+1210127	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-636.19	22.21	-680.16	0	1	a walluga	ep3_walluga_44_c_agg_n	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
+1210131	KASHYYYK_HUNTING	kas_hunting_world	PATROL	0	-64.76	4.58	-27.30	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	PATROL	idle	0	999	0	0	300	120	0
+1210133	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-682.14	3.40	-519.07	0	1	Stoneleg (a walluga)	ep3_walluga_stoneleg_50_c_agg_e	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	600	450	0
+1210134	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-688.14	3.70	-517.56	0	1	a frenzied walluga	ep3_walluga_frenzied_48_c_agg_e	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
+1210138	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-720.70	23.39	-769.64	0	1	a walluga	ep3_walluga_44_c_agg_n	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
+1210140	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-740.46	8.42	599.78	0	1	a vibrant mouf	ep3_mouf_vibrant_45_c_agg_n	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
+1210146	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-824.76	17.65	874.52	0	1	a vibrant mouf	ep3_mouf_vibrant_45_c_agg_n	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
+1210148	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-84.18	26.85	-220.96	106	1	a Rodian hunter (Ziven's clan)	ep3_npc_rodian_zivenclan_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	STOP	idle	0	0	0	0	300	120	0
+1210161	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-922.57	13.02	921.25	0	1	Paleclaw (a mouf)	ep3_mouf_paleclaw_48_c_agg_e	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	600	450	0
+1210163	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-967.08	2.62	-528.49	0	1	a walluga	ep3_walluga_44_c_agg_n	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
+1210164	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-967.70	2.62	-544.71	0	1	a walluga	ep3_walluga_44_c_agg_n	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
+1210167	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	0.24	10.72	349.02	0	1	a Kashyyyk bantha	ep3_bantha_kash_38_c_att_n	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
+1210170	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	102.53	8.24	-78.68	-9	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	STOP	idle	0	0	0	0	300	120	0
+1210176	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	108.00	34.26	449.37	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
+1210177	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	108.21	31.46	465.59	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
+1210178	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	1095.75	5.59	161.83	0	1	Spiketop (an uller)	ep3_uller_spiketop_46_c_agg_e	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	600	450	0
+1210180	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	1110.71	9.63	-422.78	0	1	Silkthrower (a webweaver)	ep3_webweaver_silkthrower_49_c_agg_e	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	600	450	0
+1210183	KASHYYYK_HUNTING	kas_hunting_world	PATROL	0	114.50	25.98	537.21	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	PATROL	idle	0	999	0	0	300	120	0
+1210189	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	125.33	3.91	-56.30	-63	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	STOP	idle	0	0	0	0	300	120	0
+1210190	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	151.63	34.60	409.05	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
+1210191	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	164.26	44.13	609.93	133	1	a Rodian hunter (Tripp's clan)	ep3_npc_rodian_trippclan_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	STOP	idle	0	0	0	0	300	120	0
+1210193	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	175.72	44.19	608.45	-172	1	a Rodian hunter (Tripp's clan)	ep3_npc_rodian_trippclan_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
+1210194	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	176.15	24.38	459.46	0	1	a Rodian hunter (Ehartt's clan)	ep3_npc_rodian_eharttclan_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
+1210195	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	186.74	43.90	606.14	86	1	a Rodian hunter (Tripp's clan)	ep3_npc_rodian_trippclan_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
+1210196	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	190.17	44.21	606.07	-89	1	a Rodian hunter (Tripp's clan)	ep3_npc_rodian_trippclan_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
+1210197	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	191.06	25.74	465.62	0	1	a Rodian hunter (Ehartt's clan)	ep3_npc_rodian_eharttclan_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
+1210199	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	194.26	26.09	467.68	0	1	a Rodian hunter (Ehartt's clan)	ep3_npc_rodian_eharttclan_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
+1210200	KASHYYYK_HUNTING	kas_hunting_world	PATROL	0	214.60	32.27	511.50	0	1	a Rodian hunter (Ehartt's clan)	ep3_npc_rodian_eharttclan_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	PATROL	idle	0	999	0	0	300	120	0
+1210201	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	221.45	22.99	567.74	95	1	a 2-1B surgical droid	21b_surgical_droid_clone_droid_100_d_inv_n	Dungeon	Etyyy Hunting Grounds	1	STOP	idle	0	0	0	0	300	120	0
+1210204	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	239.63	41.37	477.52	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
+1210205	KASHYYYK_HUNTING	kas_hunting_world	PATROL	0	268.20	46.62	489.16	0	1	a Rodian hunter (Ziven's clan)	ep3_npc_rodian_zivenclan_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	PATROL	idle	0	999	0	0	300	120	0
+1210207	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	275.74	47.00	484.38	-74	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
+1210208	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	281.89	49.03	511.24	-157	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
+1210212	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	31.89	17.84	-228.97	77	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	STOP	conversation	0	0	0	0	300	120	0
+1210215	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	312.44	43.15	537.55	76	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
+1210216	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	314.58	43.13	537.95	-101	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
+1210218	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	34.45	17.89	-228.48	-101	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	STOP	idle	0	0	0	0	300	120	0
+1210219	KASHYYYK_HUNTING	kas_hunting_world	PATROL	0	379.36	41.55	495.41	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	PATROL	idle	0	999	0	0	300	120	0
+1210221	KASHYYYK_HUNTING	kas_hunting_world	PATROL	0	403.03	48.35	525.28	0	1	a Rodian hunter (Ziven's clan)	ep3_npc_rodian_zivenclan_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	PATROL	idle	0	999	0	0	300	120	0
+1210222	KASHYYYK_HUNTING	kas_hunting_world	PATROL	0	404.47	47.27	508.54	0	1	a Rodian hunter (Ziven's clan)	ep3_npc_rodian_zivenclan_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	PATROL	idle	0	999	0	0	300	120	0
+1210223	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	409.79	48.34	528.18	177	1	a Rodian hunter (Ziven's clan)	ep3_npc_rodian_zivenclan_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
+1210224	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	410.65	46.17	494.04	0	1	a Rodian hunter (Ziven's clan)	ep3_npc_rodian_zivenclan_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
+1210225	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	429.08	46.64	499.32	0	1	a Rodian hunter (Ziven's clan)	ep3_npc_rodian_zivenclan_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
+1210231	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	51.27	3.96	-55.10	77	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	STOP	conversation	0	0	0	0	300	120	0
+1210232	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	52.76	3.96	-54.87	-98	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	STOP	conversation	0	0	0	0	300	120	0
+1210235	KASHYYYK_HUNTING	kas_hunting_world	PATROL	0	561.52	23.99	536.48	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	PATROL	idle	0	999	0	0	300	120	0
+1210236	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	564.70	23.13	528.10	-31	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
+1210238	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	590.53	26.30	549.35	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
+1210240	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	596.62	23.61	553.95	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
+1210245	KASHYYYK_HUNTING	kas_hunting_world	PATROL	0	67.67	17.64	-121.86	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	PATROL	idle	0	999	0	0	300	120	0
+1210250	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	69.39	34.78	-186.45	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	GUARD	idle	0	0	0	0	300	120	0
+1210253	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	74.59	37.11	-183.71	-30	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	STOP	idle	0	0	0	0	300	120	0
+1210258	KASHYYYK_HUNTING	kas_hunting_world	PATROL	0	82.87	25.94	420.85	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	PATROL	idle	0	999	0	0	300	120	0
+1210264	KASHYYYK_HUNTING	kas_hunting_world	PATROL	0	85.96	33.96	-193.59	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	PATROL	idle	0	999	0	0	300	120	0
+1210265	KASHYYYK_HUNTING	kas_hunting_world	PATROL	0	87.35	16.22	-123.60	0	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	PATROL	idle	0	999	0	0	300	120	0
+1210271	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	91.29	33.86	-199.73	66	1	a Rodian hunter (Sordaan's clan)	ep3_npc_rodian_sordaanclan_100_h_inv_n	Dungeon	Etyyy Hunting Grounds	1	STOP	idle	0	0	0	0	300	120	0
+1210275	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	1021.80	3.80	140.80	0	1	an uller	ep3_uller_44_c_agg_n	Dungeon	Etyyy Hunting Grounds	3	FLOAT	idle	0	0	0	0	600	450	10
+1210276	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	1021.90	7.50	207.20	0	1	an uller	ep3_uller_44_c_agg_n	Dungeon	Etyyy Hunting Grounds	3	FLOAT	idle	0	0	0	0	600	450	10
+1210277	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	900.30	5.20	93.00	0	1	an uller	ep3_uller_44_c_agg_n	Dungeon	Etyyy Hunting Grounds	3	FLOAT	idle	0	0	0	0	600	450	10
+1210278	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	826.00	3.60	127.10	0	1	an uller	ep3_uller_44_c_agg_n	Dungeon	Etyyy Hunting Grounds	3	FLOAT	idle	0	0	0	0	600	450	10
+1210279	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	883.90	9.50	382.80	0	1	an uller	ep3_uller_44_c_agg_n	Dungeon	Etyyy Hunting Grounds	2	FLOAT	idle	0	0	0	0	600	450	7
+1210280	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	1083.00	10.90	379.90	0	1	an uller	ep3_uller_44_c_agg_n	Dungeon	Etyyy Hunting Grounds	2	FLOAT	idle	0	0	0	0	600	450	7
+1210281	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	1035.90	6.40	585.00	0	1	an uller	ep3_uller_44_c_agg_n	Dungeon	Etyyy Hunting Grounds	3	FLOAT	idle	0	0	0	0	600	450	10
+1210282	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	685.60	4.70	50.70	0	1	an uller	ep3_uller_44_c_agg_n	Dungeon	Etyyy Hunting Grounds	3	FLOAT	idle	0	0	0	0	600	450	10
+1210283	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	595.60	4.10	-164.00	0	1	an uller	ep3_uller_44_c_agg_n	Dungeon	Etyyy Hunting Grounds	3	FLOAT	idle	0	0	0	0	600	450	10
+1210284	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	458.10	1.80	-370.50	0	1	a webweaver	ep3_webweaver_47_c_agg_n	Dungeon	Etyyy Hunting Grounds	1	FLOAT	idle	0	0	0	0	600	450	3
+1210285	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	617.50	3.50	-381.50	0	1	a webweaver	ep3_webweaver_47_c_agg_n	Dungeon	Etyyy Hunting Grounds	2	FLOAT	idle	0	0	0	0	600	450	7
+1210286	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	785.00	8.30	-417.50	0	1	a webweaver spiker	ep3_etyyy_webweaver_spiker	Dungeon	Etyyy Hunting Grounds	2	FLOAT	idle	0	0	0	0	600	450	7
+1210287	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	900.30	8.30	-414.20	0	1	a webweaver warrior	ep3_etyyy_webweaver_warrior	Dungeon	Etyyy Hunting Grounds	2	FLOAT	idle	0	0	0	0	600	450	7
+1210288	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	970.50	5.40	-487.20	0	1	a webweaver	ep3_webweaver_47_c_agg_n	Dungeon	Etyyy Hunting Grounds	3	FLOAT	idle	0	0	0	0	600	450	10
+1210289	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	1064.10	5.70	-576.00	0	1	a webweaver warrior	ep3_etyyy_webweaver_warrior	Dungeon	Etyyy Hunting Grounds	3	FLOAT	idle	0	0	0	0	600	450	10
+1210290	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	1153.00	6.90	-465.80	0	1	a webweaver	ep3_webweaver_47_c_agg_n	Dungeon	Etyyy Hunting Grounds	2	FLOAT	idle	0	0	0	0	600	450	6
+1210291	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	1040.40	31.60	-613.00	0	1	a webweaver spiker	ep3_etyyy_webweaver_spiker	Dungeon	Etyyy Hunting Grounds	3	FLOAT	idle	0	0	0	0	600	450	10
+1210292	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	875.50	42.10	-513.10	0	1	a webweaver	ep3_webweaver_47_c_agg_n	Dungeon	Etyyy Hunting Grounds	1	FLOAT	idle	0	0	0	0	600	450	3
+1210293	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	703.20	23.70	-608.60	0	1	a crazed webweaver	ep3_etyyy_webweaver_crazed	Dungeon	Etyyy Hunting Grounds	3	FLOAT	idle	0	0	0	0	600	450	10
+1210294	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	542.50	31.10	-581.60	0	1	a webweaver spiker	ep3_etyyy_webweaver_spiker	Dungeon	Etyyy Hunting Grounds	3	FLOAT	idle	0	0	0	0	600	450	10
+1210295	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	441.10	30.50	-493.90	0	1	a webweaver	ep3_webweaver_47_c_agg_n	Dungeon	Etyyy Hunting Grounds	3	FLOAT	idle	0	0	0	0	600	450	10
+1210296	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-321.00	24.20	-814.60	0	1	a walluga	ep3_walluga_44_c_agg_n	Dungeon	Etyyy Hunting Grounds	3	FLOAT	idle	0	0	0	0	600	450	10
+1210297	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-489.70	27.50	-901.80	0	1	a walluga	ep3_walluga_44_c_agg_n	Dungeon	Etyyy Hunting Grounds	3	FLOAT	idle	0	0	0	0	600	450	10
+1210298	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-537.70	24.00	-533.20	0	1	an elder walluga	ep3_etyyy_walluga_elder	Dungeon	Etyyy Hunting Grounds	3	FLOAT	idle	0	0	0	0	600	450	10
+1210299	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-786.80	24.20	-505.90	0	1	a frenzied walluga	ep3_etyyy_walluga_frenzied	Dungeon	Etyyy Hunting Grounds	3	FLOAT	idle	0	0	0	0	600	450	10
+1210300	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-717.40	3.90	-690.90	0	1	a walluga	ep3_walluga_44_c_agg_n	Dungeon	Etyyy Hunting Grounds	3	FLOAT	idle	0	0	0	0	600	450	10
+1210301	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-902.00	15.80	500.60	0	1	a mouf	ep3_mouf_44_c_agg_n	Dungeon	Etyyy Hunting Grounds	3	FLOAT	idle	0	0	0	0	600	450	10
+1210302	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1113.10	6.80	540.00	0	1	a vibrant mouf	ep3_etyyy_mouf_vibrant	Dungeon	Etyyy Hunting Grounds	3	FLOAT	idle	0	0	0	0	600	450	10
+1210303	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1153.50	23.90	654.90	0	1	a vicious mouf	ep3_etyyy_mouf_vicious	Dungeon	Etyyy Hunting Grounds	3	FLOAT	idle	0	0	0	0	600	450	10
+1210304	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-1098.50	23.30	783.20	0	1	a mouf	ep3_mouf_44_c_agg_n	Dungeon	Etyyy Hunting Grounds	3	FLOAT	idle	0	0	0	0	600	450	10
+1210305	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-999.00	2.20	688.40	0	1	a vibrant mouf	ep3_etyyy_mouf_vibrant	Dungeon	Etyyy Hunting Grounds	3	FLOAT	idle	0	0	0	0	600	450	10
+1210306	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-887.40	1.00	571.30	0	1	a vicious mouf	ep3_etyyy_mouf_vicious	Dungeon	Etyyy Hunting Grounds	1	FLOAT	idle	0	0	0	0	600	450	3
+1210307	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-785.40	8.40	672.70	0	1	a mouf	ep3_mouf_44_c_agg_n	Dungeon	Etyyy Hunting Grounds	3	FLOAT	idle	0	0	0	0	600	450	10
+1210308	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-267.10	30.40	588.20	0	1	a Kashyyyk bantha	ep3_bantha_kash_38_c_att_n	Dungeon	Etyyy Hunting Grounds	3	FLOAT	idle	0	0	0	0	600	450	10
+1210309	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-365.40	27.40	496.90	0	1	a Kashyyyk bantha	ep3_bantha_kash_38_c_att_n	Dungeon	Etyyy Hunting Grounds	3	FLOAT	idle	0	0	0	0	600	450	10
+1210310	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-291.70	6.40	292.30	0	1	a Kashyyyk bantha	ep3_bantha_kash_38_c_att_n	Dungeon	Etyyy Hunting Grounds	3	FLOAT	idle	0	0	0	0	600	450	10
+1210311	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-127.30	29.00	205.80	0	1	a Kashyyyk bantha	ep3_bantha_kash_38_c_att_n	Dungeon	Etyyy Hunting Grounds	3	FLOAT	idle	0	0	0	0	600	450	10
+1210312	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-45.40	26.70	251.90	0	1	a Kashyyyk bantha	ep3_bantha_kash_38_c_att_n	Dungeon	Etyyy Hunting Grounds	3	FLOAT	idle	0	0	0	0	600	450	10
+1210313	KASHYYYK_HUNTING	kas_hunting_world	AREA	0	-85.50	8.40	376.20	0	1	a Kashyyyk bantha	ep3_bantha_kash_38_c_att_n	Dungeon	Etyyy Hunting Grounds	3	FLOAT	idle	0	0	0	0	600	450	10
