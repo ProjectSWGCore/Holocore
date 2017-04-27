@@ -333,8 +333,8 @@ end_smuggler_outpost_med_center	ENDOR	1414856	pirate_outpost.iff	Endor - Smuggle
 end_smuggler_outpost_starport	ENDOR	6705352	outpost_starport.iff	Endor - Smuggler Outpost / Starport	1	-978	73	1554
 end_tao_ni_security_compound	ENDOR	-436004740850026373	naboo_deeja_peak_stonewall_labs.iff	Endor - Tao-Ni Security Compound	22	2614	199	6663
 end_world	ENDOR	0	empty	Endor - World	0	0	0	0
-kas_dead_f_shadowwave_caverns	KASHYYYK_DEAD_FOREST	-281474976740656	ep3_forest_webweaver.iff	Kashyyyk - Dead Forest / ShadowWeave Caverns	11	212	10	326
-kas_dead_f_world	KASHYYYK_DEAD_FOREST	0	empty	Kashyyyk Dead Forest / World	0	0	0	0
+kas_dead_f_shadowweave_caverns	KASHYYYK_DEAD_FOREST	-281474976740656	ep3_forest_webweaver.iff	Kashyyyk - Dead Forest / ShadowWeave Caverns	11	212	10	326
+kas_dead_f_world	KASHYYYK_DEAD_FOREST	0	empty	Kashyyyk - Dead Forest / World	0	0	0	0
 kas_hunting_chiss_hut1	KASHYYYK_HUNTING	-28428972650806242	poi_kash_chiss_hut.iff	Kashyyyk - Hunting grounds / Chiss Hut 1	1	-1239	10	-104
 kas_hunting_chiss_hut10	KASHYYYK_HUNTING	-28428972650806254	poi_kash_chiss_hut.iff	Kashyyyk - Hunting grounds / Chiss Hut 10	1	-1088	4	75
 kas_hunting_chiss_hut11	KASHYYYK_HUNTING	-28428972650806236	poi_kash_chiss_hut.iff	Kashyyyk - Hunting grounds / Chiss Hut 11	1	-1077	7	-80
