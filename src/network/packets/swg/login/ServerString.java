@@ -27,7 +27,7 @@
 ***********************************************************************************/
 package network.packets.swg.login;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 
@@ -45,17 +45,17 @@ public class ServerString extends SWGPacket {
 		this.serverName = name;
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		serverName = getAscii(data);
+		serverName = data.getAscii();
 	}
 	
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(8 + serverName.length());
-		addShort(data, 2);
-		addInt(  data, CRC);
-		addAscii(data, serverName);
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(8 + serverName.length());
+		data.addShort(2);
+		data.addInt(CRC);
+		data.addAscii(serverName);
 		return data;
 	}
 	

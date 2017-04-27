@@ -28,9 +28,8 @@
 package network.packets.swg.zone.object_controller;
 
 
-import java.nio.ByteBuffer;
-
 import com.projectswg.common.data.location.Location;
+import com.projectswg.common.network.NetBuffer;
 
 public class DataTransformWithParent extends ObjectController {
 	
@@ -48,25 +47,25 @@ public class DataTransformWithParent extends ObjectController {
 		super(objectId, CRC);
 	}
 	
-	public DataTransformWithParent(ByteBuffer data) {
+	public DataTransformWithParent(NetBuffer data) {
 		super(CRC);
 		decode(data);
 	}
 	
 	@Override
-	public void decode(ByteBuffer data) {
+	public void decode(NetBuffer data) {
 		decodeHeader(data);
-		timestamp = getInt(data); // Timestamp
-		counter = getInt(data);
-		cellId = getLong(data);
-		l = getEncodable(data, Location.class);
-		speed = getFloat(data);
-		lookAtYaw = getFloat(data);
-		useLookAtYaw = getBoolean(data);
+		timestamp = data.getInt(); // Timestamp
+		counter = data.getInt();
+		cellId = data.getLong();
+		l = data.getEncodable(Location.class);
+		speed = data.getFloat();
+		lookAtYaw = data.getFloat();
+		useLookAtYaw = data.getBoolean();
 	}
 	
 	@Override
-	public ByteBuffer encode() {
+	public NetBuffer encode() {
 		return null;
 	}
 	

@@ -27,8 +27,11 @@
 ***********************************************************************************/
 package network.packets.swg.login;
 
-import java.nio.ByteBuffer;
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.projectswg.common.encoding.Encodable;
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 
@@ -36,49 +39,42 @@ import network.packets.swg.SWGPacket;
 public class EnumerateCharacterId extends SWGPacket {
 	public static final int CRC = getCrc("EnumerateCharacterId");
 	
-	private SWGCharacter [] characters;
+	private List<SWGCharacter> characters;
 	
 	public EnumerateCharacterId() {
-		characters = new SWGCharacter[0];
+		this.characters = new ArrayList<>();
 	}
 	
-	public EnumerateCharacterId(SWGCharacter [] characters) {
-		this.characters = characters;
+	public EnumerateCharacterId(List<SWGCharacter> characters) {
+		this.characters = new ArrayList<>(characters);
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	@Override
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		int characterLength = getInt(data);
-		Vector <SWGCharacter> _characters = new Vector<SWGCharacter>();
-		for (int i = 0; i < characterLength; i++) {
-			SWGCharacter c = new SWGCharacter();
-			c.decode(data);
-			_characters.add(c);
-		}
-		characters = _characters.toArray(new SWGCharacter[characters.length]);
+		characters = data.getList(SWGCharacter.class);
 	}
 	
-	public ByteBuffer encode() {
+	@Override
+	public NetBuffer encode() {
 		int length = 10;
-		for (int i = 0; i < characters.length; i++) {
-			length += characters[i].getLength();
-		}
-		ByteBuffer data = ByteBuffer.allocate(length);
-		addShort(data, 2);
-		addInt(  data, CRC);
-		addInt(  data, characters.length);
 		for (SWGCharacter c : characters) {
-			data.put(c.encode().array());
+			length += c.getLength();
 		}
+		NetBuffer data = NetBuffer.allocate(length);
+		data.addShort(2);
+		data.addInt(CRC);
+		data.addList(characters);
 		return data;
 	}
 	
-	public SWGCharacter [] getCharacters () {
+	public List<SWGCharacter> getCharacters() {
 		return characters;
 	}
 	
-	public static class SWGCharacter extends EnumerateCharacterId {
+	public static class SWGCharacter implements Encodable {
+		
 		private String name;
 		private int raceCrc;
 		private long id;
@@ -101,22 +97,24 @@ public class EnumerateCharacterId extends SWGPacket {
 			return 24 + name.length() * 2;
 		}
 		
-		public void decode(ByteBuffer data) {
-			name     = getUnicode(data);
-			raceCrc  = getInt(data);
-			id       = getLong(data);
-			galaxyId = getInt(data);
-			type   = getInt(data);
+		@Override
+		public void decode(NetBuffer data) {
+			name     = data.getUnicode();
+			raceCrc  = data.getInt();
+			id       = data.getLong();
+			galaxyId = data.getInt();
+			type   = data.getInt();
 		}
 		
-		public ByteBuffer encode() {
-			ByteBuffer data = ByteBuffer.allocate(getLength());
-			addUnicode(data, name);
-			addInt(    data, raceCrc);
-			addLong(   data, id);
-			addInt(    data, galaxyId);
-			addInt(    data, type);
-			return data;
+		@Override
+		public byte [] encode() {
+			NetBuffer data = NetBuffer.allocate(getLength());
+			data.addUnicode(name);
+			data.addInt(raceCrc);
+			data.addLong(id);
+			data.addInt(galaxyId);
+			data.addInt(type);
+			return data.array();
 		}
 		
 		public void		setId(long id)			{ this.id = id; }
@@ -131,6 +129,7 @@ public class EnumerateCharacterId extends SWGPacket {
 		public int		getGalaxyId()	{ return galaxyId; }
 		public int		getType()		{ return type; }
 		
+		@Override
 		public String toString() {
 			return String.format("SWGCharacter[id=%d  name=%s  race=%d  galaxy=%d  type=%d", id, name, raceCrc, galaxyId, type);
 		}

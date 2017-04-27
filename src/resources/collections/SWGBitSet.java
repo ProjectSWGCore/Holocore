@@ -27,11 +27,10 @@
  ***********************************************************************************/
 package resources.collections;
 
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 import java.util.BitSet;
 
 import com.projectswg.common.encoding.Encodable;
+import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.persistable.Persistable;
 
@@ -52,19 +51,23 @@ public class SWGBitSet extends BitSet implements Encodable, Persistable {
 	
 	@Override
 	public byte[] encode() {
-		BitSet b = ((BitSet) this);
 		byte[] bytes = toByteArray();
-		ByteBuffer buffer = ByteBuffer.allocate(8 + bytes.length).order(ByteOrder.LITTLE_ENDIAN);
-		buffer.putInt(bytes.length);
-		buffer.putInt(b.length());
-		buffer.put(bytes);
+		NetBuffer buffer = NetBuffer.allocate(8 + bytes.length);
+		buffer.addInt(bytes.length);
+		buffer.addInt(super.length());
+		buffer.addRawArray(bytes);
 		return buffer.array();
 	}
 	
 	@Override
-	public void decode(ByteBuffer data) {
+	public void decode(NetBuffer data) {
 		// TODO: Decode method for SWGBitSet
 		throw new UnsupportedOperationException("Unable to decode bitset!");
+	}
+	
+	@Override
+	public int getLength() {
+		return 8 + (super.length()+7) / 8;
 	}
 	
 	@Override

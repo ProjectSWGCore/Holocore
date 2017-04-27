@@ -27,7 +27,7 @@
 ***********************************************************************************/
 package network.packets.swg.zone.chat;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 import resources.encodables.OutOfBandPackage;
@@ -61,31 +61,35 @@ public class ChatSystemMessage extends SWGPacket {
 		this(type.ordinal(), oob);
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	@Override
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		type = getByte(data);
-		message = getUnicode(data);
-		getUnicode(data);
+		type = data.getByte();
+		message = data.getUnicode();
+		data.getUnicode();
 	}
 	
-	public ByteBuffer encode() {
-		byte[] oobData = (oob != null ? oob.encode() : null);
+	@Override
+	public NetBuffer encode() {
+		boolean oobExists = (oob != null);
 		int length = 7;
 		
-		if (oobData == null) length+= 15 + message.length() * 2;
-		else length+=  4 + oobData.length;
+		if (oobExists)
+			length += 4 + oob.getLength();
+		else
+			length += 15 + message.length() * 2;
 		
-		ByteBuffer data = ByteBuffer.allocate(length);
-		addShort(  data, 4);
-		addInt(    data, CRC);
-		addByte(   data, type);
-		if (oobData == null) {
-			addUnicode(data, message);
-			addUnicode(data, "");
+		NetBuffer data = NetBuffer.allocate(length);
+		data.addShort(4);
+		data.addInt(CRC);
+		data.addByte(type);
+		if (oobExists) {
+			data.addInt(0);
+			data.addEncodable(oob);
 		} else {
-			addInt(data, 0);
-			addData(data, oobData);
+			data.addUnicode(message);
+			data.addInt(0);
 		}
 		
 		return data;

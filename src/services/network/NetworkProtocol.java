@@ -28,10 +28,9 @@
 package services.network;
 
 import java.io.EOFException;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 
 import com.projectswg.common.debug.Assert;
+import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
 
 import network.PacketType;
@@ -42,13 +41,13 @@ import network.packets.swg.zone.object_controller.ObjectController;
 
 public class NetworkProtocol {
 	
-	public ByteBuffer encode(Packet p) {
-		ByteBuffer encoded = p.encode();
+	public NetBuffer encode(Packet p) {
+		NetBuffer encoded = p.encode();
 		encoded.position(0);
 		int decompressedLength = encoded.remaining();
 		boolean compressed = false;
 		if (compressed) {
-			ByteBuffer compress = compress(encoded);
+			NetBuffer compress = compress(encoded);
 			compressed = compress != encoded;
 			encoded = compress;
 		}
@@ -88,26 +87,26 @@ public class NetworkProtocol {
 		return processSWG(pData);
 	}
 	
-	private ByteBuffer compress(ByteBuffer data) {
-		ByteBuffer compressedBuffer = ByteBuffer.allocate(Compression.getMaxCompressedLength(data.remaining()));
+	private NetBuffer compress(NetBuffer data) {
+		NetBuffer compressedBuffer = NetBuffer.allocate(Compression.getMaxCompressedLength(data.remaining()));
 		int length = Compression.compress(data.array(), compressedBuffer.array());
-		compressedBuffer.position(0);
-		compressedBuffer.limit(length);
+		compressedBuffer.position(length);
+		compressedBuffer.flip();
 		if (length >= data.remaining())
 			return data;
 		else
 			return compressedBuffer;
 	}
 	
-	private ByteBuffer preparePacket(ByteBuffer packet, boolean compressed, int rawLength) {
-		ByteBuffer data = ByteBuffer.allocate(packet.remaining() + 5).order(ByteOrder.LITTLE_ENDIAN);
+	private NetBuffer preparePacket(NetBuffer packet, boolean compressed, int rawLength) {
+		NetBuffer data = NetBuffer.allocate(packet.remaining() + 5);
 		byte bitmask = 0;
 		bitmask |= (compressed?1:0) << 0; // Compressed
 		bitmask |= 1 << 1; // SWG
-		data.put(bitmask);
-		data.putShort((short) packet.remaining());
-		data.putShort((short) rawLength);
-		data.put(packet);
+		data.addByte(bitmask);
+		data.addShort((short) packet.remaining());
+		data.addShort((short) rawLength);
+		data.addRawArray(packet.array());
 		data.flip();
 		return data;
 	}
@@ -115,11 +114,13 @@ public class NetworkProtocol {
 	private SWGPacket processSWG(byte [] data) throws EOFException {
 		if (data.length < 6)
 			throw new EOFException("Length too small: " + data.length);
-		ByteBuffer buffer = ByteBuffer.wrap(data).order(ByteOrder.LITTLE_ENDIAN);
-		int crc = buffer.getInt(2);
-		if (crc == 0x80CE5E46)
+		NetBuffer buffer = NetBuffer.wrap(data);
+		buffer.getShort();
+		int crc = buffer.getInt();
+		buffer.position(0);
+		if (crc == 0x80CE5E46) {
 			return ObjectController.decodeController(buffer);
-		else {
+		} else {
 			SWGPacket packet = PacketType.getForCrc(crc);
 			if (packet != null)
 				packet.decode(buffer);

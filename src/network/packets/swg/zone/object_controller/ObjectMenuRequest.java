@@ -27,8 +27,9 @@
 ***********************************************************************************/
 package network.packets.swg.zone.object_controller;
 
-import java.nio.ByteBuffer;
 import java.util.List;
+
+import com.projectswg.common.network.NetBuffer;
 
 import resources.radial.RadialOption;
 import resources.radial.RadialOptionList;
@@ -47,27 +48,27 @@ public class ObjectMenuRequest extends ObjectController {
 		options = new RadialOptionList();
 	}
 	
-	public ObjectMenuRequest(ByteBuffer data) {
+	public ObjectMenuRequest(NetBuffer data) {
 		super(CRC);
 		options = new RadialOptionList();
 		decode(data);
 	}
 	
-	public void decode(ByteBuffer data) {
+	public void decode(NetBuffer data) {
 		decodeHeader(data);
-		targetId = getLong(data);
-		requestorId = getLong(data);
-		options = getEncodable(data, RadialOptionList.class);
-		counter = getByte(data);
+		targetId = data.getLong();
+		requestorId = data.getLong();
+		options = data.getEncodable(RadialOptionList.class);
+		counter = data.getByte();
 	}
 	
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + options.getSize() + 17);
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(HEADER_LENGTH + options.getSize() + 17);
 		encodeHeader(data);
-		addLong(data, targetId);
-		addLong(data, requestorId);
-		addEncodable(data, options);
-		addByte(data, counter);
+		data.addLong(targetId);
+		data.addLong(requestorId);
+		data.addEncodable(options);
+		data.addByte(counter);
 		return data;
 	}
 	

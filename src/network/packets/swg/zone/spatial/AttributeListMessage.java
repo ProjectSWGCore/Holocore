@@ -27,10 +27,11 @@
 ***********************************************************************************/
 package network.packets.swg.zone.spatial;
 
-import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 
@@ -49,40 +50,40 @@ public class AttributeListMessage extends SWGPacket {
 		this.attributes = attributes;
 	}
 	
-	public AttributeListMessage(ByteBuffer data) {
+	public AttributeListMessage(NetBuffer data) {
 		decode(data);
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		objectId = getLong(data);
-		getAscii(data); // static item name
-		int count = getInt(data);
+		objectId = data.getLong();
+		data.getAscii(); // static item name
+		int count = data.getInt();
 		for (int i = 0; i < count; i++) {
-			String name = getAscii(data);
-			String attr = getUnicode(data);
+			String name = data.getAscii();
+			String attr = data.getUnicode();
 			attributes.put(name, attr);
 		}
-		getInt(data);
+		data.getInt();
 	}
 	
-	public ByteBuffer encode() {
+	public NetBuffer encode() {
 		int size = 0;
 		for (Entry <String, String> e : attributes.entrySet()) {
 			size += 6 + e.getKey().length() + (e.getValue().length() * 2);
 		}
-		ByteBuffer data = ByteBuffer.allocate(24 + size);
-		addShort(data, 3);
-		addInt  (data, CRC);
-		addLong (data, objectId);
-		addShort(data, 0);
-		addInt  (data, attributes.size());
+		NetBuffer data = NetBuffer.allocate(24 + size);
+		data.addShort(3);
+		data.addInt(CRC);
+		data.addLong(objectId);
+		data.addShort(0);
+		data.addInt(attributes.size());
 		for (Entry <String, String> e : attributes.entrySet()) {
-			addAscii(data, e.getKey());
-			addUnicode(data, e.getValue());
+			data.addAscii(e.getKey());
+			data.addUnicode(e.getValue());
 		}
-		addInt  (data, 0);
+		data.addInt(0);
 		return data;
 	}
 	

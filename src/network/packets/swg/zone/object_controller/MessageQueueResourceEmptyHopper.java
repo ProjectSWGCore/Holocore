@@ -27,7 +27,7 @@
  ***********************************************************************************/
 package network.packets.swg.zone.object_controller;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 public class MessageQueueResourceEmptyHopper extends ObjectController {
 
@@ -48,30 +48,30 @@ public class MessageQueueResourceEmptyHopper extends ObjectController {
 		this.sequenceId = sequenceId;
 	}
 	
-	public MessageQueueResourceEmptyHopper(ByteBuffer data){
+	public MessageQueueResourceEmptyHopper(NetBuffer data){
 		super(CRC);
 		decode(data);
 	}	
 
 	@Override
-	public void decode(ByteBuffer data) {
+	public void decode(NetBuffer data) {
 		decodeHeader(data);
-		playerId = getLong(data);
-		harvesterId = getLong(data);
-		amount = getInt(data);
-		discard = getBoolean(data);
-		sequenceId = getInt(data);
+		playerId = data.getLong();
+		harvesterId = data.getLong();
+		amount = data.getInt();
+		discard = data.getBoolean();
+		sequenceId = data.getInt();
 	}
 
 	@Override
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + 25 );
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(HEADER_LENGTH + 25 );
 		encodeHeader(data);
-		addLong(data, playerId);
-		addLong(data, harvesterId);
-		addInt(data, amount);
-		addBoolean(data, discard);
-		addInt(data, sequenceId);
+		data.addLong(playerId);
+		data.addLong(harvesterId);
+		data.addInt(amount);
+		data.addBoolean(discard);
+		data.addInt(sequenceId);
 		return data;
 	}
 

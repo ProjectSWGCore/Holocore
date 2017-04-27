@@ -26,21 +26,23 @@
  ******************************************************************************/
 package resources.chat;
 
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.projectswg.common.encoding.CachedEncode;
 import com.projectswg.common.encoding.Encodable;
+import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.persistable.Persistable;
 
-import network.packets.Packet;
 import network.packets.swg.SWGPacket;
 import network.packets.swg.zone.chat.ChatRoomMessage;
 import resources.encodables.OutOfBandPackage;
 import services.player.PlayerManager;
 
 public class ChatRoom implements Encodable, Persistable {
+	
+	private final CachedEncode cache;
 	
 	private int id;
 	private int type;
@@ -56,11 +58,8 @@ public class ChatRoom implements Encodable, Persistable {
 	// as each player will automatically re-join the room based on their joined channels list
 	private transient List<ChatAvatar> members;
 	
-	// Large amount of data that's sent frequently, best if we can pre-encode everything and save it for later
-	private transient boolean modified = true;
-	private transient byte[] data;
-
 	public ChatRoom() {
+		this.cache = new CachedEncode(() -> encodeImpl());
 		owner = new ChatAvatar();
 		creator = new ChatAvatar();
 		moderators = new ArrayList<>();
@@ -72,154 +71,170 @@ public class ChatRoom implements Encodable, Persistable {
 	public int getId() {
 		return id;
 	}
-
+	
 	public void setId(int id) {
+		this.cache.clearCached();
 		this.id = id;
 	}
-
+	
 	public int getType() {
 		return type;
 	}
-
+	
 	public void setType(int type) {
+		this.cache.clearCached();
 		this.type = type;
 	}
-
+	
 	public String getPath() {
 		return path;
 	}
-
+	
 	public void setPath(String path) {
+		this.cache.clearCached();
 		this.path = path;
 	}
-
+	
 	public ChatAvatar getOwner() {
 		return owner;
 	}
-
+	
 	public void setOwner(ChatAvatar owner) {
+		this.cache.clearCached();
 		this.owner = owner;
 	}
-
+	
 	public ChatAvatar getCreator() {
 		return creator;
 	}
-
+	
 	public void setCreator(ChatAvatar creator) {
+		this.cache.clearCached();
 		this.creator = creator;
 	}
-
+	
 	public String getTitle() {
 		return title;
 	}
-
+	
 	public void setTitle(String title) {
+		this.cache.clearCached();
 		this.title = title;
 	}
-
+	
 	public List<ChatAvatar> getModerators() {
 		return moderators;
 	}
-
+	
 	public List<ChatAvatar> getInvited() {
 		return invited;
 	}
-
+	
 	public boolean isModerated() {
 		return moderated;
 	}
-
+	
 	public void setModerated(boolean moderated) {
+		this.cache.clearCached();
 		this.moderated = moderated;
 	}
-
+	
 	public List<ChatAvatar> getMembers() {
 		return members;
 	}
-
+	
 	public boolean isPublic() {
 		return type == 0;
 	}
-
+	
 	public void setIsPublic(boolean isPublic) {
+		this.cache.clearCached();
 		this.type = (isPublic ? 0 : 1);
 	}
-
+	
 	public List<ChatAvatar> getBanned() {
 		return banned;
 	}
-
+	
 	public ChatResult canJoinRoom(ChatAvatar avatar, boolean ignoreInvitation) {
 		if (banned.contains(avatar))
 			return ChatResult.ROOM_AVATAR_BANNED;
-
+		
 		if (members.contains(avatar))
 			return ChatResult.ROOM_ALREADY_JOINED;
-
+		
 		if (isPublic() || ignoreInvitation || invited.contains(avatar) || moderators.contains(avatar))
 			return ChatResult.SUCCESS;
-
+		
 		return ChatResult.ROOM_AVATAR_NO_PERMISSION;
 	}
-
+	
 	public ChatResult canSendMessage(ChatAvatar avatar) {
 		if (banned.contains(avatar))
 			return ChatResult.ROOM_AVATAR_BANNED;
-
+		
 		if (moderated && !moderators.contains(avatar))
 			return ChatResult.CUSTOM_FAILURE;
-
+		
 		return ChatResult.SUCCESS;
 	}
-
+	
 	public boolean isModerator(ChatAvatar avatar) {
 		return avatar.equals(owner) || moderators.contains(avatar);
 	}
-
+	
 	public boolean isMember(ChatAvatar avatar) {
 		return members.contains(avatar);
 	}
-
+	
 	public boolean isBanned(ChatAvatar avatar) {
 		return banned.contains(avatar);
 	}
-
+	
 	public boolean isInvited(ChatAvatar avatar) {
 		return invited.contains(avatar);
 	}
-
+	
 	public boolean addMember(ChatAvatar avatar) {
+		this.cache.clearCached();
 		return members.add(avatar);
 	}
-
+	
 	public boolean removeMember(ChatAvatar avatar) {
+		this.cache.clearCached();
 		return members.remove(avatar);
 	}
-
+	
 	public boolean addModerator(ChatAvatar avatar) {
+		this.cache.clearCached();
 		return moderators.add(avatar);
 	}
-
+	
 	public boolean removeModerator(ChatAvatar avatar) {
+		this.cache.clearCached();
 		return moderators.remove(avatar);
 	}
-
+	
 	public boolean addInvited(ChatAvatar avatar) {
+		this.cache.clearCached();
 		return invited.add(avatar);
 	}
-
+	
 	public boolean removeInvited(ChatAvatar avatar) {
+		this.cache.clearCached();
 		return invited.remove(avatar);
 	}
-
+	
 	public boolean addBanned(ChatAvatar avatar) {
+		this.cache.clearCached();
 		return banned.add(avatar);
 	}
-
+	
 	public boolean removeBanned(ChatAvatar avatar) {
+		this.cache.clearCached();
 		return banned.remove(avatar);
 	}
-
+	
 	public void sendMessage(ChatAvatar sender, String message, OutOfBandPackage oob, PlayerManager playerManager) {
 		ChatRoomMessage chatRoomMessage = new ChatRoomMessage(sender, getId(), message, oob);
 		for (ChatAvatar member : members) {
@@ -229,69 +244,59 @@ public class ChatRoom implements Encodable, Persistable {
 			member.getPlayer().sendPacket(chatRoomMessage);
 		}
 	}
-
+	
 	public void sendPacketToMembers(PlayerManager manager, SWGPacket... packets) {
 		for (ChatAvatar member : members) {
 			member.getPlayer().sendPacket(packets);
 		}
 	}
-
+	
 	@Override
-	public void decode(ByteBuffer data) {
-		id			= Packet.getInt(data);
-		type		= Packet.getInt(data);
-		moderated 	= Packet.getBoolean(data);
-		path		= Packet.getAscii(data);
-		owner		= Packet.getEncodable(data, ChatAvatar.class);
-		creator		= Packet.getEncodable(data, ChatAvatar.class);
-		title		= Packet.getUnicode(data);
-		moderators	= Packet.getList(data, ChatAvatar.class);
-		invited		= Packet.getList(data, ChatAvatar.class);
+	public void decode(NetBuffer data) {
+		id = data.getInt();
+		type = data.getInt();
+		moderated = data.getBoolean();
+		path = data.getAscii();
+		owner = data.getEncodable(ChatAvatar.class);
+		creator = data.getEncodable(ChatAvatar.class);
+		title = data.getUnicode();
+		moderators = data.getList(ChatAvatar.class);
+		invited = data.getList(ChatAvatar.class);
 	}
-
+	
 	@Override
 	public byte[] encode() {
-		if (!modified && data != null)
-			return data;
-
-		int avatarIdSize = 0; // The encode method for ChatAvatar saves the encode result if the class was modified/null data
-		for (ChatAvatar moderator : moderators) {
-			avatarIdSize += moderator.encode().length;
-		}
-
-		for (ChatAvatar invitee : invited) {
-			avatarIdSize += invitee.encode().length;
-		}
-		avatarIdSize += owner.encode().length + creator.encode().length;
-
-		ByteBuffer bb = ByteBuffer.allocate(23 + path.length() + (title.length() * 2) + avatarIdSize);
-		Packet.addInt(bb, id);
-		Packet.addInt(bb, type);
-		Packet.addBoolean(bb, moderated);
-		Packet.addAscii(bb, path);
-		Packet.addEncodable(bb, owner);
-		Packet.addEncodable(bb, creator);
-		Packet.addUnicode(bb, title);
-		Packet.addList(bb, moderators);
-		Packet.addList(bb, invited);
-
-		data = bb.array();
-		modified = false;
-
-		return data;
+		return cache.encode();
 	}
-	/*
-	private int id;
-	private int type;
-	private String path;
-	private ChatAvatar owner;
-	private ChatAvatar creator;
-	private String title;
-	private List<ChatAvatar> moderators;
-	private List<ChatAvatar> invited;
-	private boolean moderated; // No one but moderators can talk
-	private List<ChatAvatar> banned;
-	 */
+	
+	private byte[] encodeImpl() {
+		NetBuffer data = NetBuffer.allocate(getLength());
+		data.addInt(id);
+		data.addInt(type);
+		data.addBoolean(moderated);
+		data.addAscii(path);
+		data.addEncodable(owner);
+		data.addEncodable(creator);
+		data.addUnicode(title);
+		data.addList(moderators);
+		data.addList(invited);
+		return data.array();
+	}
+	
+	public int getLength() {
+		int avatarIdSize = 0; // The encode method for ChatAvatar saves the encode result if the class was modified/null data
+		
+		for (ChatAvatar moderator : moderators) {
+			avatarIdSize += moderator.getLength();
+		}
+		for (ChatAvatar invitee : invited) {
+			avatarIdSize += invitee.getLength();
+		}
+		
+		avatarIdSize += owner.getLength() + creator.getLength();
+		return 23 + path.length() + (title.length() * 2) + avatarIdSize;
+	}
+	
 	@Override
 	public void save(NetBufferStream stream) {
 		stream.addByte(0);
@@ -327,11 +332,10 @@ public class ChatRoom implements Encodable, Persistable {
 		avatar.read(stream);
 		return avatar;
 	}
-
+	
 	@Override
 	public String toString() {
-		return "ChatRoom[id=" + id + ", type=" + type + ", path='" + path + "', title='" + title + '\'' +
-				", creator=" + creator + ", moderated=" + moderated + ", isPublic=" + isPublic() + "]";
+		return "ChatRoom[id=" + id + ", type=" + type + ", path='" + path + "', title='" + title + '\'' + ", creator=" + creator + ", moderated=" + moderated + ", isPublic=" + isPublic() + "]";
 	}
 	
 	public static ChatRoom create(NetBufferStream stream) {

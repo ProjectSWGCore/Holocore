@@ -27,7 +27,7 @@
  ***********************************************************************************/
 package network.packets.swg.zone.object_controller;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 public class MessageQueueCraftIngredients extends ObjectController {
 	
@@ -46,34 +46,34 @@ public class MessageQueueCraftIngredients extends ObjectController {
 		this.quantity = quantity;
 	}
 	
-	public MessageQueueCraftIngredients(ByteBuffer data) {
+	public MessageQueueCraftIngredients(NetBuffer data) {
 		super(CRC);
 		decode(data);
 	}
 
 	@Override
-	public void decode(ByteBuffer data) {
+	public void decode(NetBuffer data) {
 		decodeHeader(data);
-		count = getInt(data);
+		count = data.getInt();
 		for(int i = 0; i < count; i++){
-			resourceName[i] = getUnicode(data);
-			type[i] = getByte(data);
-			quantity[i] = getInt(data);
+			resourceName[i] = data.getUnicode();
+			type[i] = data.getByte();
+			quantity[i] = data.getInt();
 		}		
 	}
 
 	@Override
-	public ByteBuffer encode() {
+	public NetBuffer encode() {
 		 int len = 4;
 		for (int i = 0; i < count; i++)
 		    len += 9 + resourceName[i].length();
-		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + 4 + len);
+		NetBuffer data = NetBuffer.allocate(HEADER_LENGTH + 4 + len);
 		encodeHeader(data);
-		addInt(data, count);
+		data.addInt(count);
 		for(int i = 0; i < count; i++){
-			addUnicode(data, resourceName[i] );
-			addByte(data, type[i]);
-			addInt(data, quantity[i]);
+			data.addUnicode(resourceName[i] );
+			data.addByte(type[i]);
+			data.addInt(quantity[i]);
 		}
 		return data;
 	}

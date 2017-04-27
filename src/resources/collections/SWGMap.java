@@ -39,7 +39,6 @@ import com.projectswg.common.encoding.Encoder;
 import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
 
-import network.packets.Packet;
 import resources.objects.SWGObject;
 
 public class SWGMap<K, V> extends SynchronizedMap<K, V> implements Encodable {
@@ -135,15 +134,20 @@ public class SWGMap<K, V> extends SynchronizedMap<K, V> implements Encodable {
 	}
 	
 	@Override
-	public void decode(ByteBuffer data) {
+	public void decode(NetBuffer data) {
 		throw new UnsupportedOperationException("Use decode(ByteBuffer data, Class<K> kType, Class<V> vType) instead");
+	}
+	
+	@Override
+	public int getLength() {
+		return 8 + dataSize + data.size();
 	}
 	
 	@SuppressWarnings("unchecked")
 	// Unfortunately the exception is just caught
 	public void decode(ByteBuffer data, StringType keyType, StringType valType) {
-		int size = Packet.getInt(data);
-		updateCount.set(Packet.getInt(data));
+		int size = data.getInt();
+		updateCount.set(data.getInt());
 		NetBuffer buffer = NetBuffer.wrap(data);
 		try {
 			for (int i = 0; i < size; i++) {
@@ -159,8 +163,8 @@ public class SWGMap<K, V> extends SynchronizedMap<K, V> implements Encodable {
 	@SuppressWarnings("unchecked")
 	// Unfortunately the exception is just caught
 	public void decode(ByteBuffer data, StringType keyType, Class<V> vType) {
-		int size = Packet.getInt(data);
-		updateCount.set(Packet.getInt(data));
+		int size = data.getInt();
+		updateCount.set(data.getInt());
 		NetBuffer buffer = NetBuffer.wrap(data);
 		try {
 			for (int i = 0; i < size; i++) {
@@ -181,8 +185,8 @@ public class SWGMap<K, V> extends SynchronizedMap<K, V> implements Encodable {
 	@SuppressWarnings("unchecked")
 	// There is type checking in the respective if's
 	public void decode(ByteBuffer data, Class<K> kType, Class<V> vType) {
-		int size = Packet.getInt(data);
-		updateCount.set(Packet.getInt(data));
+		int size = data.getInt();
+		updateCount.set(data.getInt());
 		
 		NetBuffer buffer = NetBuffer.wrap(data);
 		for (int i = 0; i < size; i++) {

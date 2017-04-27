@@ -27,7 +27,7 @@
 
 package network.packets.swg.zone.chat;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 import resources.chat.ChatAvatar;
@@ -42,22 +42,22 @@ public class ChatRemoveAvatarFromRoom extends SWGPacket {
 	private String path;
 
 	@Override
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
 
-		avatar 	= getEncodable(data, ChatAvatar.class);
-		path 	= getAscii(data);
+		avatar 	= data.getEncodable(ChatAvatar.class);
+		path 	= data.getAscii();
 	}
 
 	@Override
-	public ByteBuffer encode() {
-		ByteBuffer bb = ByteBuffer.allocate(6 + path.length() + avatar.getSize());
-		addShort(bb, 3);
-		addInt(bb, CRC);
-		addEncodable(bb, avatar);
-		addAscii(bb, path);
-		return bb;
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(6 + path.length() + avatar.getLength());
+		data.addShort(3);
+		data.addInt(CRC);
+		data.addEncodable(avatar);
+		data.addAscii(path);
+		return data;
 	}
 
 	public ChatAvatar getAvatar() {

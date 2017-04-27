@@ -27,7 +27,7 @@
 
 package network.packets.swg.zone.chat;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 import resources.chat.ChatAvatar;
@@ -49,21 +49,21 @@ public class ChatInviteAvatarToRoom extends SWGPacket {
 	}
 
 	@Override
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		avatar 	= getEncodable(data, ChatAvatar.class);
-		room 	= getAscii(data);
+		avatar 	= data.getEncodable(ChatAvatar.class);
+		room 	= data.getAscii();
 	}
-
+	
 	@Override
-	public ByteBuffer encode() {
-		ByteBuffer bb = ByteBuffer.allocate(8 + avatar.getSize() + room.length());
-		addShort(bb, 3);
-		addInt(bb, CRC);
-		addEncodable(bb, avatar);
-		addAscii(bb, room);
-		return bb;
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(8 + avatar.getLength() + room.length());
+		data.addShort(3);
+		data.addInt(CRC);
+		data.addEncodable(avatar);
+		data.addAscii(room);
+		return data;
 	}
 
 	public ChatAvatar getAvatar() {

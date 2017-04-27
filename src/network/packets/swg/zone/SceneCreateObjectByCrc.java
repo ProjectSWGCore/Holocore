@@ -27,9 +27,8 @@
 ***********************************************************************************/
 package network.packets.swg.zone;
 
-import java.nio.ByteBuffer;
-
 import com.projectswg.common.data.location.Location;
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 
@@ -52,23 +51,23 @@ public class SceneCreateObjectByCrc extends SWGPacket {
 		this.hyperspace = hyperspace;
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		objId = getLong(data);
-		l = getEncodable(data, Location.class);
-		objCrc = getInt(data);
-		hyperspace = getBoolean(data);
+		objId = data.getLong();
+		l = data.getEncodable(Location.class);
+		objCrc = data.getInt();
+		hyperspace = data.getBoolean();
 	}
 	
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(47);
-		addShort(data, 5);
-		addInt(  data, CRC);
-		addLong( data, objId);
-		addEncodable(data, l);
-		addInt(  data, objCrc);
-		addBoolean(data, hyperspace);
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(47);
+		data.addShort(5);
+		data.addInt(CRC);
+		data.addLong(objId);
+		data.addEncodable(l);
+		data.addInt(objCrc);
+		data.addBoolean(hyperspace);
 		return data;
 	}
 	

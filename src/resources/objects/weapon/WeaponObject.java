@@ -152,6 +152,7 @@ public class WeaponObject extends TangibleObject {
 		return super.hashCode() * 7 + type.getNum();
 	}
 	
+	@Override
 	public void createBaseline3(Player target, BaselineBuilder bb) {
 		super.createBaseline3(target, bb);
 		
@@ -166,6 +167,7 @@ public class WeaponObject extends TangibleObject {
 		bb.incrementOperandCount(7);
 	}
 	
+	@Override
 	public void createBaseline6(Player target, BaselineBuilder bb) {
 		super.createBaseline6(target, bb);
 
@@ -174,6 +176,7 @@ public class WeaponObject extends TangibleObject {
 		bb.incrementOperandCount(1);
 	}
 	
+	@Override
 	public void parseBaseline3(NetBuffer buffer) {
 		super.parseBaseline3(buffer);
 		attackSpeed = buffer.getFloat();
@@ -185,6 +188,7 @@ public class WeaponObject extends TangibleObject {
 		buffer.getInt(); // elementalValue
 	}
 	
+	@Override
 	public void parseBaseline6(NetBuffer buffer) {
 		super.parseBaseline6(buffer);
 		type = WeaponType.getWeaponType(buffer.getInt());

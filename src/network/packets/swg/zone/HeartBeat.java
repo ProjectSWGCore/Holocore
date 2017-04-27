@@ -27,7 +27,7 @@
 ***********************************************************************************/
 package network.packets.swg.zone;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 
@@ -38,14 +38,17 @@ public class HeartBeat extends SWGPacket {
 		
 	}
 	
-	public void decode(ByteBuffer data) {
-		super.decode(data, CRC);
+	@Override
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
+			return;
 	}
 	
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(6);
-		addShort(data, 1);
-		addInt(  data, CRC);
+	@Override
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(6);
+		data.addShort(1);
+		data.addInt(CRC);
 		return data;
 	}
 }

@@ -27,7 +27,7 @@
 ***********************************************************************************/
 package network.packets.swg.zone;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 
@@ -48,21 +48,21 @@ public class EnterTicketPurchaseModeMessage extends SWGPacket {
 		this.instant = instant;
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		planetName = getAscii(data);
-		nearestPointName = getAscii(data);
-		instant = getBoolean(data);
+		planetName = data.getAscii();
+		nearestPointName = data.getAscii();
+		instant = data.getBoolean();
 	}
 	
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(11 + planetName.length() + nearestPointName.length());	// 2x ascii length shorts, 1x opcount short, 1x boolean, int CRC = 11
-		addShort(data, 3);	// Operand count of 3
-		addInt(data, CRC);
-		addAscii(data, planetName);
-		addAscii(data, nearestPointName);
-		addBoolean(data, instant);
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(11 + planetName.length() + nearestPointName.length());	// 2x ascii length shorts, 1x opcount short, 1x boolean, int CRC = 11
+		data.addShort(3);	// Operand count of 3
+		data.addInt(CRC);
+		data.addAscii(planetName);
+		data.addAscii(nearestPointName);
+		data.addBoolean(instant);
 		return data;
 	}
 	

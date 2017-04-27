@@ -27,9 +27,8 @@
 ***********************************************************************************/
 package network.packets.swg.zone.object_controller;
 
-import java.nio.ByteBuffer;
-
 import com.projectswg.common.data.location.Location;
+import com.projectswg.common.network.NetBuffer;
 
 public class DataTransform extends ObjectController {
 	
@@ -65,33 +64,33 @@ public class DataTransform extends ObjectController {
 		this.updateCounter = counter;
 	}
 	
-	public DataTransform(ByteBuffer data) {
+	public DataTransform(NetBuffer data) {
 		super(CRC);
 		this.l = new Location();
 		decode(data);
 	}
 	
 	@Override
-	public void decode(ByteBuffer data) {
+	public void decode(NetBuffer data) {
 		decodeHeader(data);
-		timestamp = getInt(data);
-		updateCounter = getInt(data);
-		l = getEncodable(data, Location.class);
-		speed = getFloat(data);
-		lookAtYaw = getFloat(data);
-		useLookAtYaw = getBoolean(data);
+		timestamp = data.getInt();
+		updateCounter = data.getInt();
+		l = data.getEncodable(Location.class);
+		speed = data.getFloat();
+		lookAtYaw = data.getFloat();
+		useLookAtYaw = data.getBoolean();
 	}
 	
 	@Override
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + 45);
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(HEADER_LENGTH + 45);
 		encodeHeader(data);
-		addInt(data, timestamp);
-		addInt(data, updateCounter);
-		addEncodable(data, l);
-		addFloat(data, speed);
-		addFloat(data, lookAtYaw);
-		addBoolean(data, useLookAtYaw);
+		data.addInt(timestamp);
+		data.addInt(updateCounter);
+		data.addEncodable(l);
+		data.addFloat(speed);
+		data.addFloat(lookAtYaw);
+		data.addBoolean(useLookAtYaw);
 		return data;
 	}
 	

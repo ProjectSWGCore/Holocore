@@ -255,7 +255,7 @@ public class LoginService extends Service {
 		LoginEnumCluster cluster = new LoginEnumCluster();
 		LoginClusterStatus clusterStatus = new LoginClusterStatus();
 		List <Galaxy> galaxies = getGalaxies(player);
-		SWGCharacter [] characters = getCharacters(player.getUserId());
+		List<SWGCharacter> characters = getCharacters(player.getUserId());
 		for (Galaxy g : galaxies) {
 			cluster.addGalaxy(g);
 			clusterStatus.addGalaxy(g);
@@ -304,7 +304,7 @@ public class LoginService extends Service {
 		return galaxies;
 	}
 	
-	private SWGCharacter [] getCharacters(int userId) {
+	private List<SWGCharacter> getCharacters(int userId) {
 		List <SWGCharacter> characters = new ArrayList<>();
 		synchronized (getCharacters) {
 			try {
@@ -324,7 +324,7 @@ public class LoginService extends Service {
 				Log.e(e);
 			}
 		}
-		return characters.toArray(new SWGCharacter[characters.size()]);
+		return characters;
 	}
 	
 	private boolean deleteCharacter(SWGObject obj) {

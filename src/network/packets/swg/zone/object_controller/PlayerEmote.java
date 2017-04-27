@@ -27,7 +27,7 @@
 ***********************************************************************************/
 package network.packets.swg.zone.object_controller;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 public class PlayerEmote extends ObjectController {
 	
@@ -41,7 +41,7 @@ public class PlayerEmote extends ObjectController {
 		super(objectId, CRC);
 	}
 	
-	public PlayerEmote(ByteBuffer data) {
+	public PlayerEmote(NetBuffer data) {
 		super(CRC);
 		decode(data);
 	}
@@ -60,23 +60,23 @@ public class PlayerEmote extends ObjectController {
 		this.emoteId = emote.emoteId;
 	}
 	
-	public void decode(ByteBuffer data) {
+	public void decode(NetBuffer data) {
 		decodeHeader(data);
-		sourceId = getLong(data);
-		targetId = getLong(data);
-		emoteId = getShort(data);
-		getShort(data); // Should be 0
-		getByte(data); // Should be 3
+		sourceId = data.getLong();
+		targetId = data.getLong();
+		emoteId = data.getShort();
+		data.getShort(); // Should be 0
+		data.getByte(); // Should be 3
 	}
 	
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + 21);
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(HEADER_LENGTH + 21);
 		encodeHeader(data);
-		addLong(data, sourceId);
-		addLong(data, targetId);
-		addShort(data, emoteId);
-		addShort(data, (short) 0);
-		addByte(data, (byte) 3);
+		data.addLong(sourceId);
+		data.addLong(targetId);
+		data.addShort(emoteId);
+		data.addShort((short) 0);
+		data.addByte((byte) 3);
 		return data;
 	}
 	

@@ -27,9 +27,8 @@
 
 package network.packets.swg.zone;
 
-import java.nio.ByteBuffer;
-
 import com.projectswg.common.data.location.Location;
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 
@@ -71,37 +70,37 @@ public class UpdateTransformWithParentMessage extends SWGPacket {
 	}
 
 	@Override
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		cellId			= getLong(data);
-		objectId		= getLong(data);
-		x				= getShort(data);
-		y				= getShort(data);
-		z				= getShort(data);
-		updateCounter	= getInt(data);
-		speed			= getByte(data);
-		direction		= getByte(data);
-		lookDirection	= getByte(data);
-		useLookDirection= getBoolean(data);
+		cellId			= data.getLong();
+		objectId		= data.getLong();
+		x				= data.getShort();
+		y				= data.getShort();
+		z				= data.getShort();
+		updateCounter	= data.getInt();
+		speed			= data.getByte();
+		direction		= data.getByte();
+		lookDirection	= data.getByte();
+		useLookDirection= data.getBoolean();
 	}
 
 	@Override
-	public ByteBuffer encode() {
-		ByteBuffer bb = ByteBuffer.allocate(36);
-		addShort(bb, 11);
-		addInt(bb, CRC);
-		addLong(bb, cellId);
-		addLong(bb, objectId);
-		addShort(bb, x);
-		addShort(bb, y);
-		addShort(bb, z);
-		addInt(bb, updateCounter);
-		addByte(bb, speed);
-		addByte(bb, direction);
-		addByte(bb, lookDirection);
-		addBoolean(bb, useLookDirection);
-		return bb;
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(36);
+		data.addShort(11);
+		data.addInt(CRC);
+		data.addLong(cellId);
+		data.addLong(objectId);
+		data.addShort(x);
+		data.addShort(y);
+		data.addShort(z);
+		data.addInt(updateCounter);
+		data.addByte(speed);
+		data.addByte(direction);
+		data.addByte(lookDirection);
+		data.addBoolean(useLookDirection);
+		return data;
 	}
 	
 	public void setCellId(long cellId) {

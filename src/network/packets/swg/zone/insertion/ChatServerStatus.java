@@ -27,7 +27,7 @@
 ***********************************************************************************/
 package network.packets.swg.zone.insertion;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 
@@ -44,18 +44,18 @@ public class ChatServerStatus extends SWGPacket {
 		this.online = online;
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		online = getBoolean(data);
+		online = data.getBoolean();
 	}
 	
-	public ByteBuffer encode() {
+	public NetBuffer encode() {
 		int length = 7;
-		ByteBuffer data = ByteBuffer.allocate(length);
-		addShort(  data, 2);
-		addInt(    data, CRC);
-		addBoolean(data, online);
+		NetBuffer data = NetBuffer.allocate(length);
+		data.addShort(2);
+		data.addInt(CRC);
+		data.addBoolean(online);
 		return data;
 	}
 }

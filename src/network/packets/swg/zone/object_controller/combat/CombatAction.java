@@ -27,7 +27,6 @@
  ***********************************************************************************/
 package network.packets.swg.zone.object_controller.combat;
 
-import java.nio.ByteBuffer;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -61,44 +60,44 @@ public class CombatAction extends ObjectController {
 		defenders = new HashSet<>();
 	}
 	
-	public CombatAction(ByteBuffer data) {
+	public CombatAction(NetBuffer data) {
 		super(CRC);
 		defenders = new HashSet<>();
 		decode(data);
 	}
 	
 	@Override
-	public void decode(ByteBuffer data) {
+	public void decode(NetBuffer data) {
 		decodeHeader(data);
-		actionCrc = getInt(data);
-		attackerId = getLong(data);
-		weaponId = getLong(data);
-		posture = Posture.getFromId(getByte(data));
-		trail = TrailLocation.getTrailLocation(getByte(data));
-		clientEffectId = getByte(data);
-		commandCrc = getInt(data);
-		useLocation = getBoolean(data);
+		actionCrc = data.getInt();
+		attackerId = data.getLong();
+		weaponId = data.getLong();
+		posture = Posture.getFromId(data.getByte());
+		trail = TrailLocation.getTrailLocation(data.getByte());
+		clientEffectId = data.getByte();
+		commandCrc = data.getInt();
+		useLocation = data.getBoolean();
 		if (useLocation) {
-			position = getEncodable(data, Point3D.class);
-			cell = getLong(data);
+			position = data.getEncodable(Point3D.class);
+			cell = data.getLong();
 		}
-		int count = getShort(data);
+		int count = data.getShort();
 		for (int i = 0; i < count; i++) {
 			Defender d = new Defender();
-			d.setCreatureId(getLong(data));
-			d.setPosture(Posture.getFromId(getByte(data)));
-			d.setDefense(getBoolean(data));
-			d.setClientEffectId(getByte(data));
-			d.setHitLocation(HitLocation.getHitLocation(getByte(data)));
-			d.setDamage(getShort(data));
+			d.setCreatureId(data.getLong());
+			d.setPosture(Posture.getFromId(data.getByte()));
+			d.setDefense(data.getBoolean());
+			d.setClientEffectId(data.getByte());
+			d.setHitLocation(HitLocation.getHitLocation(data.getByte()));
+			d.setDamage(data.getShort());
 			defenders.add(d);
 		}
 	}
 	
 	@Override
-	public ByteBuffer encode() {
+	public NetBuffer encode() {
 		NetBuffer data = NetBuffer.allocate(HEADER_LENGTH + 30 + defenders.size() * 14 + (useLocation ? 20 : 0));
-		encodeHeader(data.getBuffer());
+		encodeHeader(data);
 		data.addInt(actionCrc);
 		data.addLong(attackerId);
 		data.addLong(weaponId);
@@ -120,7 +119,7 @@ public class CombatAction extends ObjectController {
 			data.addByte(d.getHitLocation().getNum());
 			data.addShort(d.getDamage());
 		}
-		return data.getBuffer();
+		return data;
 	}
 	
 	public int getActionCrc() {

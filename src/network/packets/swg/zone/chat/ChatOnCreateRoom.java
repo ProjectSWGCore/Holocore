@@ -27,7 +27,7 @@
 
 package network.packets.swg.zone.chat;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 import resources.chat.ChatRoom;
@@ -51,22 +51,22 @@ public class ChatOnCreateRoom extends SWGPacket {
 	}
 
 	@Override
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		result 		= getInt(data);
-		room		= getEncodable(data, ChatRoom.class);
-		sequence	= getInt(data);
+		result 		= data.getInt();
+		room		= data.getEncodable(ChatRoom.class);
+		sequence	= data.getInt();
 	}
 
 	@Override
-	public ByteBuffer encode() {
-		ByteBuffer bb = ByteBuffer.allocate(14 + room.encode().length);
-		addShort(bb, 1);
-		addInt(bb, CRC);
-		addInt(bb, result);
-		addEncodable(bb, room);
-		addInt(bb, sequence);
-		return bb;
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(14 + room.encode().length);
+		data.addShort(1);
+		data.addInt(CRC);
+		data.addInt(result);
+		data.addEncodable(room);
+		data.addInt(sequence);
+		return data;
 	}
 }

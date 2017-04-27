@@ -27,7 +27,7 @@
  ***********************************************************************************/
 package network.packets.swg.zone.object_controller;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 public class MessageQueueCraftCustomization extends ObjectController {
 
@@ -50,37 +50,37 @@ public class MessageQueueCraftCustomization extends ObjectController {
 		this.value = value;
 	}
 	
-	public MessageQueueCraftCustomization(ByteBuffer data) {
+	public MessageQueueCraftCustomization(NetBuffer data) {
 		super(CRC);
 		decode(data);
 	} 
 
 	@Override
-	public void decode(ByteBuffer data) {
+	public void decode(NetBuffer data) {
 		decodeHeader(data);
-		itemName = getUnicode(data);	
-		appearenceTemplate = getByte(data);
-		itemAmount = getInt(data);
-		count = getByte(data);
+		itemName = data.getUnicode();	
+		appearenceTemplate = data.getByte();
+		itemAmount = data.getInt();
+		count = data.getByte();
 		
 		for(int i = 0; i < count; i++){
-			property[i] = getInt(data);
-			value[i] = getInt(data);
+			property[i] = data.getInt();
+			value[i] = data.getInt();
 		}		
 	}
 
 	@Override
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + 10 + itemName.length()*2 + count * 8);
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(HEADER_LENGTH + 10 + itemName.length()*2 + count * 8);
 		encodeHeader(data);
-		addUnicode(data, itemName);
-		addByte(data, appearenceTemplate);
-		addInt(data, itemAmount);
-		addByte(data, count);
+		data.addUnicode(itemName);
+		data.addByte(appearenceTemplate);
+		data.addInt(itemAmount);
+		data.addByte(count);
 		
 		for(int i = 0; i < count; i++){
-			addInt(data, property[i] );
-			addInt(data, value[i]);
+			data.addInt(property[i] );
+			data.addInt(value[i]);
 		}
 		return data;
 	}

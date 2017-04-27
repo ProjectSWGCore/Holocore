@@ -26,7 +26,6 @@
  ******************************************************************************/
 package resources.chat;
 
-import java.nio.ByteBuffer;
 import java.util.Locale;
 
 import com.projectswg.common.encoding.CachedEncode;
@@ -77,14 +76,14 @@ public class ChatAvatar implements Encodable, Persistable {
 	}
 	
 	private byte [] encodeImpl() {
-		NetBuffer buffer = NetBuffer.allocate(getSize());
+		NetBuffer buffer = NetBuffer.allocate(getLength());
 		buffer.addAscii("SWG");
 		buffer.addAscii(getCoreGalaxy());
 		buffer.addAscii(name);
 		return buffer.array();
 	}
 	
-	public int getSize() {
+	public int getLength() {
 		return 9 + name.length() + getCoreGalaxy().length();
 	}
 	
@@ -94,8 +93,7 @@ public class ChatAvatar implements Encodable, Persistable {
 	}
 	
 	@Override
-	public void decode(ByteBuffer bb) {
-		NetBuffer data = NetBuffer.wrap(bb);
+	public void decode(NetBuffer data) {
 		data.getAscii(); // SWG
 		data.getAscii();
 		name = data.getAscii().toLowerCase(Locale.US);

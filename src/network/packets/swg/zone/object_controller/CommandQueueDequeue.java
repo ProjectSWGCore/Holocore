@@ -27,7 +27,7 @@
 ***********************************************************************************/
 package network.packets.swg.zone.object_controller;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 
 public class CommandQueueDequeue extends ObjectController {
@@ -43,26 +43,26 @@ public class CommandQueueDequeue extends ObjectController {
 		super(objectId, CRC);
 	}
 	
-	public CommandQueueDequeue(ByteBuffer data) {
+	public CommandQueueDequeue(NetBuffer data) {
 		super(CRC);
 		decode(data);
 	}
 	
-	public void decode(ByteBuffer data) {
+	public void decode(NetBuffer data) {
 		decodeHeader(data);
-		counter = getInt(data);
-		timer = getFloat(data);
-		error = getInt(data);
-		action = getInt(data);
+		counter = data.getInt();
+		timer = data.getFloat();
+		error = data.getInt();
+		action = data.getInt();
 	}
 	
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + 16);
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(HEADER_LENGTH + 16);
 		encodeHeader(data);
-		addInt(data, counter);
-		addFloat(data, timer);
-		addInt(data, error);
-		addInt(data, action);
+		data.addInt(counter);
+		data.addFloat(timer);
+		data.addInt(error);
+		data.addInt(action);
 		return data;
 	}
 	

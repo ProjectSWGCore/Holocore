@@ -27,7 +27,7 @@
 ***********************************************************************************/
 package network.packets.swg.zone.chat;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 
@@ -46,23 +46,23 @@ public class ChatOnSendInstantMessage extends SWGPacket {
 		this.sequence = sequence;
 	}
 	
-	public ChatOnSendInstantMessage(ByteBuffer data) {
+	public ChatOnSendInstantMessage(NetBuffer data) {
 		decode(data);
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		result = getInt(data);
-		sequence = getInt(data);
+		result = data.getInt();
+		sequence = data.getInt();
 	}
 	
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(14);
-		addShort(data, 2);
-		addInt  (data, CRC);
-		addInt  (data, result);
-		addInt  (data, sequence);
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(14);
+		data.addShort(2);
+		data.addInt(CRC);
+		data.addInt(result);
+		data.addInt(sequence);
 		return data;
 	}
 	

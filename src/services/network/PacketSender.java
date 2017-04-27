@@ -29,9 +29,9 @@ package services.network;
 
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
-import java.nio.ByteBuffer;
 
 import com.projectswg.common.debug.Log;
+import com.projectswg.common.network.NetBuffer;
 
 import resources.network.TCPServer;
 
@@ -43,15 +43,15 @@ public class PacketSender {
 		this.tcpServer = server;
 	}
 	
-	public void sendPacket(SocketAddress addr, ByteBuffer data) {
+	public void sendPacket(SocketAddress addr, NetBuffer data) {
 		if (addr instanceof InetSocketAddress)
 			sendPacket((InetSocketAddress) addr, data);
 		else
 			Log.e("Unknown socket address: %s", addr);
 	}
 	
-	public void sendPacket(InetSocketAddress addr, ByteBuffer data) {
-		tcpServer.send(addr, data);
+	public void sendPacket(InetSocketAddress addr, NetBuffer data) {
+		tcpServer.send(addr, data.getBuffer());
 	}
 	
 }

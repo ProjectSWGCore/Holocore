@@ -27,7 +27,7 @@
 ***********************************************************************************/
 package network.packets.swg.zone;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 
@@ -45,22 +45,23 @@ public class PlayClientEffectObjectMessage extends SWGPacket {
 	}
 	
 	@Override
-	public void decode(ByteBuffer data) {
-		super.decode(data, CRC);
-		effectFile = getAscii(data);
-		effectLocation = getAscii(data);
-		objectId = getLong(data);
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
+			return;
+		effectFile = data.getAscii();
+		effectLocation = data.getAscii();
+		objectId = data.getLong();
 	}
 	
 	@Override
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(20 + effectFile.length() + effectLocation.length());
-		addShort(data, 3);
-		addInt(  data, CRC);
-		addAscii(data, effectFile);
-		addAscii(data, effectLocation);
-		addLong(data, objectId);
-		addAscii(data, "");	// TODO not sure what this is
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(20 + effectFile.length() + effectLocation.length());
+		data.addShort(3);
+		data.addInt(CRC);
+		data.addAscii(effectFile);
+		data.addAscii(effectLocation);
+		data.addLong(objectId);
+		data.addAscii("");	// TODO not sure what this is
 		return data;
 	}
 }

@@ -27,7 +27,6 @@
  ***********************************************************************************/
 package network.packets.swg.zone.resource;
 
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -35,6 +34,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.projectswg.common.debug.Assert;
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.zone.object_controller.ObjectController;
 
@@ -54,55 +54,55 @@ public class ResourceWeight extends ObjectController {
 	}
 	
 	@Override
-	public void decode(ByteBuffer data) {
+	public void decode(NetBuffer data) {
 		decodeHeader(data);
-		schematicId = getInt(data);
-		schematicCrc = getInt(data);
-		int count = getByte(data);
+		schematicId = data.getInt();
+		schematicCrc = data.getInt();
+		int count = data.getByte();
 		decodeWeights(data, attributes, count);
 		decodeWeights(data, resourceMaxWeights, count);
 		Assert.test(attributes.size() == resourceMaxWeights.size());
 	}
 	
 	@Override
-	public ByteBuffer encode() {
+	public NetBuffer encode() {
 		int len = HEADER_LENGTH + 9;
 		for (List<Weight> weights : attributes.values())
 			len += 3 + weights.size();
 		for (List<Weight> weights : resourceMaxWeights.values())
 			len += 3 + weights.size();
 		Assert.test(attributes.size() == resourceMaxWeights.size());
-		ByteBuffer data = ByteBuffer.allocate(len);
+		NetBuffer data = NetBuffer.allocate(len);
 		encodeHeader(data);
 		encodeWeights(data, attributes);
 		encodeWeights(data, resourceMaxWeights);
-		addInt(data, attributes.size());
+		data.addInt(attributes.size());
 		return data;
 	}
 	
-	private void decodeWeights(ByteBuffer data, Map<Integer, List<Weight>> map, int count) {
+	private void decodeWeights(NetBuffer data, Map<Integer, List<Weight>> map, int count) {
 		for (int i = 0; i < count; i++) {
-			getByte(data); // index
-			int slot = getByte(data);
-			int weightCount = getByte(data);
+			data.getByte(); // index
+			int slot = data.getByte();
+			int weightCount = data.getByte();
 			List<Weight> weights = new ArrayList<>();
 			map.put(slot, weights);
 			for (int j = 0; j < weightCount; j++) {
-				byte b = getByte(data);
+				byte b = data.getByte();
 				weights.add(new Weight((b & 0xF0) >>> 4, b & 0x0F));
 			}
 		}
 	}
 	
-	private void encodeWeights(ByteBuffer data, Map<Integer, List<Weight>> map) {
+	private void encodeWeights(NetBuffer data, Map<Integer, List<Weight>> map) {
 		int i = 0;
 		for (Entry<Integer, List<Weight>> e : map.entrySet()) {
 			List<Weight> weights = e.getValue();
-			addByte(data, i++);
-			addByte(data, e.getKey());
-			addByte(data, weights.size());
+			data.addByte(i++);
+			data.addByte(e.getKey());
+			data.addByte(weights.size());
 			for (Weight w : weights) {
-				addByte(data, (w.getResourceId() << 4) | w.getWeight());
+				data.addByte((w.getResourceId() << 4) | w.getWeight());
 			}
 		}
 	}

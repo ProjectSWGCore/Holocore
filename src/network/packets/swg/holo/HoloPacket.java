@@ -27,13 +27,13 @@
  ***********************************************************************************/
 package network.packets.swg.holo;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 
 public abstract class HoloPacket extends SWGPacket {
 	
-	public abstract void decode(ByteBuffer data);
-	public abstract ByteBuffer encode();
+	public abstract void decode(NetBuffer data);
+	public abstract NetBuffer encode();
 	
 }

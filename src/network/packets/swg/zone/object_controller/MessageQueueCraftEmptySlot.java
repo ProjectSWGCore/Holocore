@@ -27,7 +27,7 @@
  ***********************************************************************************/
 package network.packets.swg.zone.object_controller;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 public class MessageQueueCraftEmptySlot extends ObjectController{
 
@@ -44,26 +44,26 @@ public class MessageQueueCraftEmptySlot extends ObjectController{
 		this.staleFlag = staleFlag;
 	}
 	
-	public MessageQueueCraftEmptySlot(ByteBuffer data) {
+	public MessageQueueCraftEmptySlot(NetBuffer data) {
 		super(CRC);
 		decode(data);
 	}
 
 	@Override
-	public void decode(ByteBuffer data) {
+	public void decode(NetBuffer data) {
 		decodeHeader(data);
-		slot = getInt(data);
-		containerId = getLong(data);
-		staleFlag = getByte(data);
+		slot = data.getInt();
+		containerId = data.getLong();
+		staleFlag = data.getByte();
 	}
 
 	@Override
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + 13);
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(HEADER_LENGTH + 13);
 		encodeHeader(data);
-		addInt(data, slot);
-		addLong(data, containerId);
-		addByte(data, staleFlag);
+		data.addInt(slot);
+		data.addLong(containerId);
+		data.addByte(staleFlag);
 		return data;
 	}
 

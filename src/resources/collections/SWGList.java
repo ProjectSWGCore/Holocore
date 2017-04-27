@@ -42,7 +42,6 @@ import com.projectswg.common.encoding.Encoder;
 import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
 
-import network.packets.Packet;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.objects.SWGObject;
 
@@ -167,7 +166,7 @@ public class SWGList<E> extends SynchronizedList<E> implements Encodable {
 		synchronized (data) {
 			if (dataSize == 0)
 				return new byte[8];
-			buffer = ByteBuffer.allocate(8 + dataSize).order(ByteOrder.LITTLE_ENDIAN);
+			buffer = ByteBuffer.allocate(getLength()).order(ByteOrder.LITTLE_ENDIAN);
 			
 			buffer.putInt(data.size());
 			buffer.putInt(updateCount.get());
@@ -178,14 +177,19 @@ public class SWGList<E> extends SynchronizedList<E> implements Encodable {
 	}
 	
 	@Override
-	public void decode(ByteBuffer data) {
+	public void decode(NetBuffer data) {
 		// We need specific type information
 		throw new UnsupportedOperationException("Use decode(ByteBuffer data, Class<E> elementType) instead");
 	}
 	
+	@Override
+	public int getLength() {
+		return 8 + dataSize;
+	}
+	
 	public void decode(ByteBuffer data, StringType type) {
-		int size = Packet.getInt(data);
-		updateCount.set(Packet.getInt(data));
+		int size = data.getInt();
+		updateCount.set(data.getInt());
 		NetBuffer buffer = NetBuffer.wrap(data);
 		for (int i = 0; i < size; i++) {
 			@SuppressWarnings("unchecked")
@@ -196,8 +200,8 @@ public class SWGList<E> extends SynchronizedList<E> implements Encodable {
 	}
 	
 	public void decode(ByteBuffer data, Class<E> elementType) {
-		int size = Packet.getInt(data);
-		updateCount.set(Packet.getInt(data));
+		int size = data.getInt();
+		updateCount.set(data.getInt());
 		
 		boolean encodable = Encodable.class.isAssignableFrom(elementType);
 		NetBuffer wrap = NetBuffer.wrap(data);
@@ -213,7 +217,7 @@ public class SWGList<E> extends SynchronizedList<E> implements Encodable {
 			try {
 				E instance = elementType.newInstance();
 				if (instance instanceof Encodable) {
-					((Encodable) instance).decode(wrap.getBuffer());
+					((Encodable) instance).decode(wrap);
 					add(instance);
 				}
 			} catch (InstantiationException | IllegalAccessException e) {

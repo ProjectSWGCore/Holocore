@@ -27,7 +27,7 @@
  ***********************************************************************************/
 package network.packets.swg.holo;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 public class HoloSetProtocolVersion extends HoloPacket {
 	
@@ -44,18 +44,18 @@ public class HoloSetProtocolVersion extends HoloPacket {
 	}
 	
 	@Override
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		protocol = getAscii(data);
+		protocol = data.getAscii();
 	}
 	
 	@Override
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(8 + protocol.length());
-		addShort(data, 2);
-		addInt(data, CRC);
-		addAscii(data, protocol);
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(8 + protocol.length());
+		data.addShort(2);
+		data.addInt(CRC);
+		data.addAscii(protocol);
 		return data;
 	}
 	

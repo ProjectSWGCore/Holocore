@@ -70,13 +70,7 @@ public class DeltaBuilder {
 	}
 	
 	public DeltasMessage getBuiltMessage() {
-		DeltasMessage delta = new DeltasMessage();
-		delta.setId(object.getObjectId());
-		delta.setType(type);
-		delta.setNum(num);
-		delta.setUpdate(updateType);
-		delta.setData(data);
-		return delta;
+		return new DeltasMessage(object.getObjectId(), type, num, updateType, data);
 	}
 	
 }

@@ -1,6 +1,6 @@
 package network.packets.swg.zone.object_controller;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 public class JTLTerminalSharedMessage extends ObjectController {
 
@@ -9,7 +9,7 @@ public class JTLTerminalSharedMessage extends ObjectController {
 	private int tickCount;
 	private long terminalId;	
 	
-	public JTLTerminalSharedMessage(ByteBuffer data) {
+	public JTLTerminalSharedMessage(NetBuffer data) {
 		super(CRC);
 	}
 
@@ -30,7 +30,7 @@ public class JTLTerminalSharedMessage extends ObjectController {
 	}
 
 	@Override
-	public void decode(ByteBuffer data) {
+	public void decode(NetBuffer data) {
 		decodeHeader(data);
 		setTickCount(data.getInt());
 		setTerminalId(data.getLong());	
@@ -38,11 +38,11 @@ public class JTLTerminalSharedMessage extends ObjectController {
 	}
 
 	@Override
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + 12);
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(HEADER_LENGTH + 12);
 		encodeHeader(data);
-		addInt(data, getTickCount());
-		addLong(data, getTerminalId());			
+		data.addInt(getTickCount());
+		data.addLong(getTerminalId());			
 		return data;
 	}
 }

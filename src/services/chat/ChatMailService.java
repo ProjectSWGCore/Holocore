@@ -243,10 +243,10 @@ public class ChatMailService extends Service {
 		
 		switch (requestType) {
 			case FULL_MESSAGE:
-				packet = new ChatPersistentMessageToClient(mail, galaxy, false);
+				packet = new ChatPersistentMessageToClient(mail, false);
 				break;
 			case HEADER_ONLY:
-				packet = new ChatPersistentMessageToClient(mail, galaxy, true);
+				packet = new ChatPersistentMessageToClient(mail, true);
 				break;
 		}
 		

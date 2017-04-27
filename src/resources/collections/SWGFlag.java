@@ -33,6 +33,7 @@ import java.util.Arrays;
 import java.util.BitSet;
 
 import com.projectswg.common.encoding.Encodable;
+import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.persistable.Persistable;
 
@@ -76,8 +77,13 @@ public class SWGFlag extends BitSet implements Encodable, Persistable {
 	}
 	
 	@Override
-	public void decode(ByteBuffer data) {
+	public void decode(NetBuffer data) {
 		throw new UnsupportedOperationException("Unable to decode bitset!");
+	}
+	
+	@Override
+	public int getLength() {
+		return 4 + (int) Math.ceil(super.size()/32.0);
 	}
 	
 	@Override

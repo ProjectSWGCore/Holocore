@@ -27,7 +27,7 @@
 ***********************************************************************************/
 package network.packets.swg.login.creation;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 
@@ -45,17 +45,17 @@ public class DeleteCharacterResponse extends SWGPacket {
 		this.deleted = deleted;
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		deleted = getInt(data) == 0;
+		deleted = data.getInt() == 0;
 	}
 	
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(10);
-		addShort(data, 2);
-		addInt(  data, CRC);
-		addInt(  data, deleted ? 0 : 1);
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(10);
+		data.addShort(2);
+		data.addInt(CRC);
+		data.addInt(deleted ? 0 : 1);
 		return data;
 	}
 }

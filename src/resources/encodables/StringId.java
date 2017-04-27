@@ -27,8 +27,6 @@
 ***********************************************************************************/
 package resources.encodables;
 
-import java.nio.ByteBuffer;
-
 import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
@@ -66,7 +64,7 @@ public class StringId implements OutOfBandData, Persistable {
 	
 	@Override
 	public byte[] encode() {
-		NetBuffer buffer = NetBuffer.allocate(8 + key.length() + file.length());
+		NetBuffer buffer = NetBuffer.allocate(getLength());
 		buffer.addAscii(file);
 		buffer.addInt(0);
 		buffer.addAscii(key);
@@ -74,11 +72,15 @@ public class StringId implements OutOfBandData, Persistable {
 	}
 	
 	@Override
-	public void decode(ByteBuffer data) {
-		NetBuffer buffer = NetBuffer.wrap(data);
-		file = buffer.getAscii();
-		buffer.getInt();
-		key = buffer.getAscii();
+	public void decode(NetBuffer data) {
+		file = data.getAscii();
+		data.getInt();
+		key = data.getAscii();
+	}
+	
+	@Override
+	public int getLength() {
+		return 8 + key.length() + file.length();
 	}
 	
 	@Override

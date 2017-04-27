@@ -27,7 +27,7 @@
 ***********************************************************************************/
 package network.packets.swg.zone.chat;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 import resources.chat.ChatAvatar;
@@ -48,25 +48,27 @@ public class ChatRoomMessage extends SWGPacket {
 		this.outOfBandPackage = oob;
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	@Override
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		avatar				= getEncodable(data, ChatAvatar.class);
-		roomId 				= getInt(data);
-		message 			= getUnicode(data);
-		outOfBandPackage	= getEncodable(data, OutOfBandPackage.class);
+		avatar				= data.getEncodable(ChatAvatar.class);
+		roomId 				= data.getInt();
+		message 			= data.getUnicode();
+		outOfBandPackage	= data.getEncodable(OutOfBandPackage.class);
 	}
 	
-	public ByteBuffer encode() {
+	@Override
+	public NetBuffer encode() {
 		byte[] oob = outOfBandPackage.encode();
-		int length = 14 + avatar.encode().length + oob.length + message.length() * 2;
-		ByteBuffer data = ByteBuffer.allocate(length);
-		addShort(data, 5);
-		addInt(data, CRC);
-		addEncodable(data, avatar);
-		addInt(data, roomId);
-		addUnicode(data, message);
-		addData(data, oob);
+		int length = 14 + avatar.getLength() + oob.length + message.length() * 2;
+		NetBuffer data = NetBuffer.allocate(length);
+		data.addShort(5);
+		data.addInt(CRC);
+		data.addEncodable(avatar);
+		data.addInt(roomId);
+		data.addUnicode(message);
+		data.addRawArray(oob);
 		return data;
 	}
 }

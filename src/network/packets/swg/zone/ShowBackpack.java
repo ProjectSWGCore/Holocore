@@ -27,7 +27,7 @@
 ***********************************************************************************/
 package network.packets.swg.zone;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 
@@ -38,21 +38,21 @@ public class ShowBackpack extends SWGPacket {
 	private boolean showBackpack;
 	
 	@Override
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
 		
-		objectId = getLong(data);
-		showBackpack = getBoolean(data);
+		objectId = data.getLong();
+		showBackpack = data.getBoolean();
 	}
 	
 	@Override
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(15);
-		addShort(data, 3);
-		addInt(data, CRC);
-		addLong(data, objectId);
-		addBoolean(data, showBackpack);
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(15);
+		data.addShort(3);
+		data.addInt(CRC);
+		data.addLong(objectId);
+		data.addBoolean(showBackpack);
 		return data;
 	}
 	

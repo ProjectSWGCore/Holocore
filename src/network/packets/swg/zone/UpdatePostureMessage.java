@@ -27,7 +27,7 @@
 ***********************************************************************************/
 package network.packets.swg.zone;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 import resources.Posture;
@@ -52,20 +52,20 @@ public class UpdatePostureMessage extends SWGPacket {
 		this.objId = objId;
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		posture = getByte(data);
-		objId = getLong(data);
+		posture = data.getByte();
+		objId = data.getLong();
 	}
 	
-	public ByteBuffer encode() {
+	public NetBuffer encode() {
 		int length = 16;
-		ByteBuffer data = ByteBuffer.allocate(length);
-		addShort(data, 3);
-		addInt  (data, CRC);
-		addByte (data, posture);
-		addLong (data, objId);
+		NetBuffer data = NetBuffer.allocate(length);
+		data.addShort(3);
+		data.addInt(CRC);
+		data.addByte(posture);
+		data.addLong(objId);
 		return data;
 	}
 	

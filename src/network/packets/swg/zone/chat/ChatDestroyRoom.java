@@ -27,7 +27,7 @@
 
 package network.packets.swg.zone.chat;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 
@@ -43,21 +43,21 @@ public class ChatDestroyRoom extends SWGPacket {
 	public ChatDestroyRoom() {}
 
 	@Override
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		roomId		= getInt(data);
-		sequence	= getInt(data);
+		roomId		= data.getInt();
+		sequence	= data.getInt();
 	}
 
 	@Override
-	public ByteBuffer encode() {
-		ByteBuffer bb = ByteBuffer.allocate(14);
-		addShort(bb, 3);
-		addInt(bb, CRC);
-		addInt(bb, roomId);
-		addInt(bb, sequence);
-		return bb;
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(14);
+		data.addShort(3);
+		data.addInt(CRC);
+		data.addInt(roomId);
+		data.addInt(sequence);
+		return data;
 	}
 
 	public int getRoomId() {

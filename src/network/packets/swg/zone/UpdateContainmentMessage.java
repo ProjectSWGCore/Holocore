@@ -27,7 +27,7 @@
 ***********************************************************************************/
 package network.packets.swg.zone;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 
@@ -48,21 +48,21 @@ public class UpdateContainmentMessage extends SWGPacket {
 		this.slotIndex = slotIndex;
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		objectId = getLong(data);
-		containerId = getLong(data);
-		slotIndex = getInt(data);
+		objectId = data.getLong();
+		containerId = data.getLong();
+		slotIndex = data.getInt();
 	}
 	
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(26);
-		addShort(data, 4);
-		addInt(  data, CRC);
-		addLong( data, objectId);
-		addLong( data, containerId);
-		addInt(  data, slotIndex);
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(26);
+		data.addShort(4);
+		data.addInt(CRC);
+		data.addLong(objectId);
+		data.addLong(containerId);
+		data.addInt(slotIndex);
 		return data;
 	}
 	

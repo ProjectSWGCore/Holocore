@@ -26,7 +26,6 @@
  ******************************************************************************/
 package resources.objects.group;
 
-import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -40,8 +39,8 @@ import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.debug.Assert;
 import com.projectswg.common.encoding.Encodable;
 import com.projectswg.common.encoding.StringType;
+import com.projectswg.common.network.NetBuffer;
 
-import network.packets.Packet;
 import network.packets.swg.zone.baselines.Baseline;
 import resources.collections.SWGList;
 import resources.network.BaselineBuilder;
@@ -255,13 +254,21 @@ public class GroupObject extends SWGObject {
 		
 		@Override
 		public byte[] encode() {
-			return ByteBuffer.allocate(8).putInt(start).putInt(end).array();
+			NetBuffer data = NetBuffer.allocate(8);
+			data.addInt(start);
+			data.addInt(end);
+			return data.array();
 		}
 		
 		@Override
-		public void decode(ByteBuffer data) {
-			start = Packet.getInt(data);
-			end = Packet.getInt(data);
+		public void decode(NetBuffer data) {
+			start = data.getInt();
+			end = data.getInt();
+		}
+		
+		@Override
+		public int getLength() {
+			return 8;
 		}
 		
 	}
@@ -277,15 +284,20 @@ public class GroupObject extends SWGObject {
 		@Override
 		public byte[] encode() {
 			String name = creature.getObjectName();
-			ByteBuffer bb = ByteBuffer.allocate(10 + name.length());
-			Packet.addLong(bb, creature.getObjectId());
-			Packet.addAscii(bb, name);
-			return bb.array();
+			NetBuffer data = NetBuffer.allocate(10 + name.length());
+			data.addLong(creature.getObjectId());
+			data.addAscii(name);
+			return data.array();
 		}
 		
 		@Override
-		public void decode(ByteBuffer data) {
+		public void decode(NetBuffer data) {
 			
+		}
+		
+		@Override
+		public int getLength() {
+			return 10 + creature.getObjectName().length();
 		}
 
 		public long getId() {

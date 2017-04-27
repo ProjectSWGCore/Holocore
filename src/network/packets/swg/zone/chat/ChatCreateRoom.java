@@ -27,7 +27,7 @@
 
 package network.packets.swg.zone.chat;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 
@@ -47,29 +47,29 @@ public class ChatCreateRoom extends SWGPacket {
 	public ChatCreateRoom() {}
 
 	@Override
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		isPublic 	= getBoolean(data);
-		isModerated	= getBoolean(data);
-		owner		= getAscii(data);
-		roomName	= getAscii(data);
-		roomTitle	= getAscii(data);
-		sequence	= getInt(data);
+		isPublic 	= data.getBoolean();
+		isModerated	= data.getBoolean();
+		owner		= data.getAscii();
+		roomName	= data.getAscii();
+		roomTitle	= data.getAscii();
+		sequence	= data.getInt();
 	}
 
 	@Override
-	public ByteBuffer encode() {
-		ByteBuffer bb = ByteBuffer.allocate(18 + owner.length() + roomName.length() + roomTitle.length());
-		addShort(bb, 7);
-		addInt(bb, CRC);
-		addBoolean(bb, isPublic);
-		addBoolean(bb, isModerated);
-		addAscii(bb, owner);
-		addAscii(bb, roomName);
-		addAscii(bb, roomTitle);
-		addInt(bb, sequence);
-		return bb;
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(18 + owner.length() + roomName.length() + roomTitle.length());
+		data.addShort(7);
+		data.addInt(CRC);
+		data.addBoolean(isPublic);
+		data.addBoolean(isModerated);
+		data.addAscii(owner);
+		data.addAscii(roomName);
+		data.addAscii(roomTitle);
+		data.addInt(sequence);
+		return data;
 	}
 
 	public boolean isPublic() {

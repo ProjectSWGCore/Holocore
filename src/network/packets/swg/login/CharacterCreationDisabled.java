@@ -27,7 +27,7 @@
 ***********************************************************************************/
 package network.packets.swg.login;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 
@@ -46,26 +46,26 @@ public class CharacterCreationDisabled extends SWGPacket {
 		this.serverNames = serverNames;
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		int listSize = getInt(data);
+		int listSize = data.getInt();
 		serverNames = new String[listSize];
 		for (int i = 0; i < listSize; i++) {
-			serverNames[i] = getAscii(data);
+			serverNames[i] = data.getAscii();
 		}
 	}
 	
-	public ByteBuffer encode() {
+	public NetBuffer encode() {
 		int length = 10;
 		for (int i = 0; i < serverNames.length; i++)
 			length += 2 + serverNames[i].length();
-		ByteBuffer data = ByteBuffer.allocate(length);
-		addShort(data, 2);
-		addInt(  data, CRC);
-		addInt(  data, serverNames.length);
+		NetBuffer data = NetBuffer.allocate(length);
+		data.addShort(2);
+		data.addInt(CRC);
+		data.addInt(serverNames.length);
 		for (int i = 0; i < serverNames.length; i++) {
-			addAscii(data, serverNames[i]);
+			data.addAscii(serverNames[i]);
 		}
 		return data;
 	}

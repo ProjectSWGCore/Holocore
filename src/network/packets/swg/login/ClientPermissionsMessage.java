@@ -27,7 +27,7 @@
 ***********************************************************************************/
 package network.packets.swg.login;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 
@@ -47,23 +47,23 @@ public class ClientPermissionsMessage extends SWGPacket {
 		canSkipTutorial = true;
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		canLogin = getBoolean(data);
-		canCreateRegularCharacter = getBoolean(data);
-		canCreateJediCharacter = getBoolean(data);
-		canSkipTutorial = getBoolean(data);
+		canLogin = data.getBoolean();
+		canCreateRegularCharacter = data.getBoolean();
+		canCreateJediCharacter = data.getBoolean();
+		canSkipTutorial = data.getBoolean();
 	}
 	
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(10);
-		addShort(  data, 5);
-		addInt(    data, CRC);
-		addBoolean(data, canLogin);
-		addBoolean(data, canCreateRegularCharacter);
-		addBoolean(data, canCreateJediCharacter);
-		addBoolean(data, canSkipTutorial);
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(10);
+		data.addShort(5);
+		data.addInt(CRC);
+		data.addBoolean(canLogin);
+		data.addBoolean(canCreateRegularCharacter);
+		data.addBoolean(canCreateJediCharacter);
+		data.addBoolean(canSkipTutorial);
 		return data;
 	}
 	

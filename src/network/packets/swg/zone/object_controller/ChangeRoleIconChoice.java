@@ -27,7 +27,7 @@
 ***********************************************************************************/
 package network.packets.swg.zone.object_controller;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 public class ChangeRoleIconChoice extends ObjectController {
 	
@@ -39,7 +39,7 @@ public class ChangeRoleIconChoice extends ObjectController {
 		super(objectId, CRC);
 	}
 	
-	public ChangeRoleIconChoice(ByteBuffer data) {
+	public ChangeRoleIconChoice(NetBuffer data) {
 		super(CRC);
 		decode(data);
 	}
@@ -50,16 +50,16 @@ public class ChangeRoleIconChoice extends ObjectController {
 	}
 	
 	@Override
-	public void decode(ByteBuffer data) {
+	public void decode(NetBuffer data) {
 		decodeHeader(data);
-		iconChoice = getInt(data);
+		iconChoice = data.getInt();
 	}
 	
 	@Override
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + Integer.BYTES);
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(HEADER_LENGTH + Integer.BYTES);
 		encodeHeader(data);
-		addInt(data, iconChoice);
+		data.addInt(iconChoice);
 		return data;
 	}
 

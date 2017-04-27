@@ -27,9 +27,9 @@
 ***********************************************************************************/
 package network.packets.swg.zone.spatial;
 
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 import java.util.List;
+
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 import services.map.MapLocation;
@@ -62,20 +62,20 @@ public class GetMapLocationsResponseMessage extends SWGPacket {
 	}
 
 	@Override
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		planet					= getAscii(data);
-		updatedStaticLocations = getList(data, MapLocation.class);
-		updatedDynamicLocations = getList(data, MapLocation.class);
-		updatedPersistLocations = getList(data, MapLocation.class);
-		staticLocVersion		= getInt(data);
-		dynamicLocVersion		= getInt(data);
-		persistentLocVersion	= getInt(data);
+		planet					= data.getAscii();
+		updatedStaticLocations = data.getList(MapLocation.class);
+		updatedDynamicLocations = data.getList(MapLocation.class);
+		updatedPersistLocations = data.getList(MapLocation.class);
+		staticLocVersion		= data.getInt();
+		dynamicLocVersion		= data.getInt();
+		persistentLocVersion	= data.getInt();
 	}
 
 	@Override
-	public ByteBuffer encode() {
+	public NetBuffer encode() {
 		int size = planet.length() + 34;
 
 		// Get size of data
@@ -101,19 +101,19 @@ public class GetMapLocationsResponseMessage extends SWGPacket {
 		}
 
 		// Create the packet
-		ByteBuffer data = ByteBuffer.allocate(size).order(ByteOrder.LITTLE_ENDIAN);
-		addShort(data, 8);
-		addInt(data, CRC);
+		NetBuffer data = NetBuffer.allocate(size);
+		data.addShort(8);
+		data.addInt(CRC);
 
-		addAscii(data, planet);
+		data.addAscii(planet);
 
-		addList(data, updatedStaticLocations);
-		addList(data, updatedDynamicLocations);
-		addList(data, updatedPersistLocations);
+		data.addList(updatedStaticLocations);
+		data.addList(updatedDynamicLocations);
+		data.addList(updatedPersistLocations);
 
-		addInt(data, staticLocVersion);
-		addInt(data, dynamicLocVersion);
-		addInt(data, persistentLocVersion);
+		data.addInt(staticLocVersion);
+		data.addInt(dynamicLocVersion);
+		data.addInt(persistentLocVersion);
 		return data;
 	}
 

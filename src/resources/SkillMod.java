@@ -27,10 +27,8 @@
 ***********************************************************************************/
 package resources;
 
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-
 import com.projectswg.common.encoding.Encodable;
+import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.persistable.Persistable;
 
@@ -49,18 +47,23 @@ public class SkillMod implements Encodable, Persistable {
 	
 	@Override
 	public byte[] encode() {
-		ByteBuffer buffer = ByteBuffer.allocate(Integer.BYTES * 2).order(ByteOrder.LITTLE_ENDIAN);
+		NetBuffer data = NetBuffer.allocate(8);
 		
-		buffer.putInt(base);
-		buffer.putInt(modifier);
+		data.addInt(base);
+		data.addInt(modifier);
 		
-		return buffer.array();
+		return data.array();
 	}
 
 	@Override
-	public void decode(ByteBuffer data) {
+	public void decode(NetBuffer data) {
 		base = data.getInt();
 		modifier = data.getInt();
+	}
+	
+	@Override
+	public int getLength() {
+		return 8;
 	}
 	
 	@Override
@@ -87,6 +90,7 @@ public class SkillMod implements Encodable, Persistable {
 		return base + modifier;
 	}
 	
+	@Override
 	public String toString() {
 		return "SkillMod[Base="+base+", Modifier="+modifier+"]";
 	}

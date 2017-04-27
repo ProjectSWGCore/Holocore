@@ -27,8 +27,6 @@
  ***********************************************************************************/
 package resources.objects.guild;
 
-import java.nio.ByteBuffer;
-
 import com.projectswg.common.encoding.Encodable;
 import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
@@ -100,8 +98,13 @@ public class GuildObject extends SWGObject {
 		}
 		
 		@Override
-		public void decode(ByteBuffer data) {
+		public void decode(NetBuffer data) {
 			percentage = data.getInt();
+		}
+		
+		@Override
+		public int getLength() {
+			return 4;
 		}
 		
 		@Override
@@ -124,10 +127,14 @@ public class GuildObject extends SWGObject {
 		}
 		
 		@Override
-		public void decode(ByteBuffer bb) {
-			NetBuffer data = NetBuffer.wrap(bb);
+		public void decode(NetBuffer data) {
 			lastUpdateTime = data.getInt();
 			percentage = data.getInt();
+		}
+		
+		@Override
+		public int getLength() {
+			return 8;
 		}
 		
 		@Override
@@ -150,10 +157,14 @@ public class GuildObject extends SWGObject {
 		}
 		
 		@Override
-		public void decode(ByteBuffer bb) {
-			NetBuffer data = NetBuffer.wrap(bb);
+		public void decode(NetBuffer data) {
 			zone = data.getAscii();
 			percentage = data.getInt();
+		}
+		
+		@Override
+		public int getLength() {
+			return 6 + zone.length();
 		}
 		
 		@Override
