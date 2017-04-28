@@ -60,26 +60,26 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 1200060	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	198.16	12.32	-135.86	0	1	a mouf	ep3_mouf_32_c_att_n	Outback	Shadow Forest	1	FLOAT	idle	0	0	0	0	300	120	5
 1200061	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	15.67	12.86	186.25	0	1	a mouf	ep3_mouf_32_c_att_n	Outback	Shadow Forest	1	FLOAT	idle	0	0	0	0	300	120	5
 1200062	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-226.88	1.39	60.34	0	1	a mouf	ep3_mouf_32_c_att_n	Outback	Shadow Forest	1	FLOAT	idle	0	0	0	0	300	120	5
-1200063	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	37.03	4.80	131.54	0	1	a mouf	ep3_mouf_32_c_att_n	Outback	Shadow Forest	1	STOP	idle	0	0	0	0	300	120	0
-1200064	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	108.48	1.38	121.55	0	1	a mouf	ep3_mouf_32_c_att_n	Outback	Shadow Forest	1	STOP	idle	0	0	0	0	300	120	0
-1200065	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	196.24	21.51	-289.63	0	1	a mouf	ep3_mouf_32_c_att_n	Outback	Shadow Forest	1	STOP	idle	0	0	0	0	300	120	0
-1200066	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	274.94	26.94	-464.55	0	1	a mouf	ep3_mouf_32_c_att_n	Outback	Shadow Forest	1	STOP	idle	0	0	0	0	300	120	0
-1200067	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	314.95	13.77	-103.35	0	1	a mouf	ep3_mouf_32_c_att_n	Outback	Shadow Forest	1	STOP	idle	0	0	0	0	300	120	0
-1200068	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	156.96	1.90	56.06	0	1	a mouf	ep3_mouf_32_c_att_n	Outback	Shadow Forest	1	STOP	idle	0	0	0	0	300	120	0
-1200069	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-155.34	35.03	400.25	0	1	a shadevale stalker	ep3_shadevale_stalker_37_c_agg_n	Outback	Shadow Forest	1	FLOAT	idle	0	0	0	0	300	120	5
-1200070	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-215.91	-0.97	124.26	0	1	a shadevale stalker	ep3_shadevale_stalker_37_c_agg_n	Outback	Shadow Forest	1	FLOAT	idle	0	0	0	0	300	120	5
-1200071	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-313.82	-0.97	42.84	0	1	a shadevale stalker	ep3_shadevale_stalker_37_c_agg_n	Outback	Shadow Forest	1	FLOAT	idle	0	0	0	0	300	120	5
-1200072	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-49.26	-0.97	13.45	0	1	a shadevale stalker	ep3_shadevale_stalker_37_c_agg_n	Outback	Shadow Forest	1	FLOAT	idle	0	0	0	0	300	120	5
-1200073	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	34.65	-0.97	55.90	0	1	a shadevale stalker	ep3_shadevale_stalker_37_c_agg_n	Outback	Shadow Forest	1	FLOAT	idle	0	0	0	0	300	120	5
-1200074	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	23.61	-0.97	237.79	0	1	a shadevale stalker	ep3_shadevale_stalker_37_c_agg_n	Outback	Shadow Forest	1	FLOAT	idle	0	0	0	0	300	120	5
-1200075	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-425.58	-0.97	-172.06	0	1	a shadevale stalker	ep3_shadevale_stalker_37_c_agg_n	Outback	Shadow Forest	1	FLOAT	idle	0	0	0	0	300	120	5
-1200076	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-116.48	-0.97	207.03	0	1	a shadevale venomsting	ep3_shadevale_venomsting_37_c_agg_n	Outback	Shadow Forest	1	FLOAT	idle	0	0	0	0	300	120	5
-1200077	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-179.67	-0.97	0.83	0	1	a shadevale venomsting	ep3_shadevale_venomsting_37_c_agg_n	Outback	Shadow Forest	1	FLOAT	idle	0	0	0	0	300	120	5
-1200078	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	90.97	-0.97	77.01	0	1	a shadevale venomsting	ep3_shadevale_venomsting_37_c_agg_n	Outback	Shadow Forest	1	FLOAT	idle	0	0	0	0	300	120	5
-1200079	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	205.86	-0.97	123.76	0	1	a shadevale venomsting	ep3_shadevale_venomsting_37_c_agg_n	Outback	Shadow Forest	1	FLOAT	idle	0	0	0	0	300	120	5
-1200080	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-375.58	-0.97	-74.16	0	1	a shadevale venomsting	ep3_shadevale_venomsting_37_c_agg_n	Outback	Shadow Forest	1	FLOAT	idle	0	0	0	0	300	120	5
-1200081	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-417.76	-0.97	-306.34	0	1	a shadevale venomsting	ep3_shadevale_venomsting_37_c_agg_n	Outback	Shadow Forest	1	FLOAT	idle	0	0	0	0	300	120	5
-1200082	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	96.21	3.76	-14.55	0	1	Steel Claw	ep3_mouf_steelclaw_36_c_att_e	Outback	Shadow Forest	1	STOP	idle	0	0	0	0	300	120	0
+1200063	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	37.03	4.80	131.54	0	1	a mouf	ep3_mouf_32_c_att_n	Outback	Shadow Forest	1	GUARD	idle	0	0	0	0	300	120	0
+1200064	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	108.48	1.38	121.55	0	1	a mouf	ep3_mouf_32_c_att_n	Outback	Shadow Forest	1	GUARD	idle	0	0	0	0	300	120	0
+1200065	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	196.24	21.51	-289.63	0	1	a mouf	ep3_mouf_32_c_att_n	Outback	Shadow Forest	1	GUARD	idle	0	0	0	0	300	120	0
+1200066	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	274.94	26.94	-464.55	0	1	a mouf	ep3_mouf_32_c_att_n	Outback	Shadow Forest	1	GUARD	idle	0	0	0	0	300	120	0
+1200067	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	314.95	13.77	-103.35	0	1	a mouf	ep3_mouf_32_c_att_n	Outback	Shadow Forest	1	GUARD	idle	0	0	0	0	300	120	0
+1200068	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	156.96	1.90	56.06	0	1	a mouf	ep3_mouf_32_c_att_n	Outback	Shadow Forest	1	GUARD	idle	0	0	0	0	300	120	0
+1200069	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-155.34	35.03	400.25	0	1	a shadevale stalker	ep3_shadevale_stalker_37_c_agg_n	Outback	Shadow Forest	1	FLOAT	idle	0	0	0	0	300	120	10
+1200070	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-215.91	-0.97	124.26	0	1	a shadevale stalker	ep3_shadevale_stalker_37_c_agg_n	Outback	Shadow Forest	1	FLOAT	idle	0	0	0	0	300	120	10
+1200071	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-313.82	-0.97	42.84	0	1	a shadevale stalker	ep3_shadevale_stalker_37_c_agg_n	Outback	Shadow Forest	1	FLOAT	idle	0	0	0	0	300	120	10
+1200072	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-49.26	-0.97	13.45	0	1	a shadevale stalker	ep3_shadevale_stalker_37_c_agg_n	Outback	Shadow Forest	1	FLOAT	idle	0	0	0	0	300	120	10
+1200073	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	34.65	-0.97	55.90	0	1	a shadevale stalker	ep3_shadevale_stalker_37_c_agg_n	Outback	Shadow Forest	1	FLOAT	idle	0	0	0	0	300	120	10
+1200074	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	23.61	-0.97	237.79	0	1	a shadevale stalker	ep3_shadevale_stalker_37_c_agg_n	Outback	Shadow Forest	1	FLOAT	idle	0	0	0	0	300	120	10
+1200075	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-425.58	-0.97	-172.06	0	1	a shadevale stalker	ep3_shadevale_stalker_37_c_agg_n	Outback	Shadow Forest	1	FLOAT	idle	0	0	0	0	300	120	10
+1200076	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-116.48	-0.97	207.03	0	1	a shadevale venomsting	ep3_shadevale_venomsting_37_c_agg_n	Outback	Shadow Forest	1	FLOAT	idle	0	0	0	0	300	120	10
+1200077	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-179.67	-0.97	0.83	0	1	a shadevale venomsting	ep3_shadevale_venomsting_37_c_agg_n	Outback	Shadow Forest	1	FLOAT	idle	0	0	0	0	300	120	10
+1200078	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	90.97	-0.97	77.01	0	1	a shadevale venomsting	ep3_shadevale_venomsting_37_c_agg_n	Outback	Shadow Forest	1	FLOAT	idle	0	0	0	0	300	120	10
+1200079	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	205.86	-0.97	123.76	0	1	a shadevale venomsting	ep3_shadevale_venomsting_37_c_agg_n	Outback	Shadow Forest	1	FLOAT	idle	0	0	0	0	300	120	10
+1200080	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-375.58	-0.97	-74.16	0	1	a shadevale venomsting	ep3_shadevale_venomsting_37_c_agg_n	Outback	Shadow Forest	1	FLOAT	idle	0	0	0	0	300	120	10
+1200081	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-417.76	-0.97	-306.34	0	1	a shadevale venomsting	ep3_shadevale_venomsting_37_c_agg_n	Outback	Shadow Forest	1	FLOAT	idle	0	0	0	0	300	120	10
+1200082	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	96.21	3.76	-14.55	0	1	Steel Claw	ep3_mouf_steelclaw_36_c_att_e	Outback	Shadow Forest	1	GUARD	idle	0	0	0	0	300	120	0
 1200083	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	160.88	6.04	235.02	0	1	a webweaver bloodseeker	ep3_webweaver_bloodseeker_37_c_agg_n	Outback	Shadow Forest	1	FLOAT	idle	0	0	0	0	300	120	5
 1200084	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	211.08	1.39	278.03	0	1	a webweaver gravespinner	ep3_webweaver_gravespinner_37_c_agg_n	Outback	Shadow Forest	1	FLOAT	idle	0	0	0	0	300	120	5
 1200085	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	153.19	1.39	163.36	0	1	a webweaver gravespinner	ep3_webweaver_gravespinner_37_c_agg_n	Outback	Shadow Forest	1	FLOAT	idle	0	0	0	0	300	120	5
@@ -88,7 +88,7 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 1200088	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-297.65	38.72	-209.83	-108	1	Hwroarca (an Arena Guardian)	ep3_forest_arena_guard_outer_100_h_inv_n	Outback	Shadow Forest	1	STOP	idle	0	0	0	0	300	120	0
 1200089	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-293.65	23.82	-393.31	0	1	a blackscale guard	ep3_forest_blackscale_guard_37_h_agg_e	Outback	Shadow Forest	1	GUARD	idle	0	0	0	0	300	120	0
 1200090	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-139.52	33.08	-96.85	-144	1	Chief Kerritamba	ep3_forest_chief_kerritamba_100_h_inv_n	Outback	Shadow Forest	1	STOP	idle	0	0	0	0	300	120	0
-1200091	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	7.26	1.38	218.22	0	1	Exemplar Zheus (Outcast)	ep3_forest_exemplar_zheus_39_h_att_e	Outback	Shadow Forest	1	STOP	idle	0	0	0	0	300	120	0
+1200091	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	7.26	1.38	218.22	0	1	Exemplar Zheus (Outcast)	ep3_forest_exemplar_zheus_39_h_att_e	Outback	Shadow Forest	1	FLOAT	idle	0	0	0	0	300	120	3
 1200092	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-161.23	31.64	-171.69	0	1	a Junk Dealer	ep3_forest_kerritamba_dealer_100_h_inv_n	Outback	Shadow Forest	1	STOP	idle	0	0	0	0	300	120	0
 1200093	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-152.36	16.51	-254.21	0	1	a kerritamba warrior	ep3_forest_kerritamba_warrior_36_h_att_n	Outback	Shadow Forest	1	GUARD	idle	0	0	0	0	300	120	0
 1200094	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-142.31	17.59	-232.57	-168	1	a kerritamba warrior	ep3_forest_kerritamba_warrior_36_h_att_n	Outback	Shadow Forest	1	STOP	idle	0	0	0	0	300	120	0
@@ -105,7 +105,7 @@ INTEGER PRIMARY KEY	TEXT NOT NULL	TEXT REFERENCES buildings	TEXT NOT NULL	INTEGE
 1200105	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-299.33	38.64	-204.28	-146	1	a kerritamba warrior	ep3_forest_kerritamba_warrior_36_h_att_n	Outback	Shadow Forest	1	STOP	idle	0	0	0	0	300	120	0
 1200106	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-304.92	38.42	-199.71	-146	1	a kerritamba warrior	ep3_forest_kerritamba_warrior_36_h_att_n	Outback	Shadow Forest	1	STOP	idle	0	0	0	0	300	120	0
 1200107	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-239.72	1.39	-104.39	0	1	a kerritamba warrior	ep3_forest_kerritamba_warrior_36_h_att_n	Outback	Shadow Forest	1	FLOAT	idle	0	0	0	0	300	120	5
-1200108	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	24.23	26.42	-350.13	0	1	Shaey Kayr (Kashyyyk Explorer)	ep3_forest_npc_greeter_100_h_inv_n	Outback	Shadow Forest	1	STOP	idle	0	0	0	0	300	120	0
+1200108	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	22.70	26.40	-352.80	145	1	Shaey Kayr (Kashyyyk Explorer)	ep3_forest_npc_greeter_100_h_inv_n	Outback	Shadow Forest	1	STOP	idle	0	0	0	0	300	120	0
 1200109	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-114.63	31.96	-165.83	0	1	Zhadran (Outcast Informant)	ep3_forest_outcast_informant_100_h_inv_n	Outback	Shadow Forest	1	STOP	idle	0	0	0	0	300	120	0
 1200110	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	-206.35	17.48	-159.91	0	1	Sertild (Outcast Informant)	ep3_forest_outcast_male_02_100_h_inv_n	Outback	Shadow Forest	1	STOP	idle	0	0	0	0	300	120	0
 1200111	KASHYYYK_DEAD_FOREST	kas_dead_f_world	AREA	0	133.74	8.17	-113.00	2	1	a sayormi monk	ep3_forest_sayormi_monk_32_h_agg_n	Outback	Shadow Forest	1	STOP	idle	0	0	0	0	300	120	0
