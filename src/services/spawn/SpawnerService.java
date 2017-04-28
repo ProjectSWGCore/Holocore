@@ -38,6 +38,7 @@ import java.util.concurrent.TimeUnit;
 import intents.object.DestroyObjectIntent;
 import intents.object.ObjectCreatedIntent;
 import intents.server.ConfigChangedIntent;
+import java.util.Random;
 import resources.Location;
 import resources.PvpFlag;
 import resources.Terrain;
@@ -76,11 +77,13 @@ public final class SpawnerService extends Service {
 	private final ObjectManager objectManager;
 	private final Map<DefaultAIObject, Spawner> spawnerMap;
 	private final ScheduledExecutorService executorService;
+	private final Random random;
 	
 	public SpawnerService(ObjectManager objectManager) {
 		this.objectManager = objectManager;
 		executorService = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("spawner-service"));
 		spawnerMap = new HashMap<>();
+		random = new Random();
 		
 		registerForIntent(ConfigChangedIntent.class, cci -> handleConfigChangedIntent(cci));
 		registerForIntent(DestroyObjectIntent.class, doi -> handleDestroyObjectIntent(doi));
@@ -268,7 +271,7 @@ public final class SpawnerService extends Service {
 		DefaultAIObject object = ObjectCreator.createObjectFromTemplate(createTemplate(spawner.getRandomIffTemplate()), DefaultAIObject.class);
 		SWGObject spawnerObject = spawner.getSpawnerObject();
 		SWGObject spawnerObjectParent = spawnerObject.getParent();
-		object.setLocation(spawnerObject.getLocation());
+		Location aiLocation = spawnerObject.getLocation();	// A copied Location is returned
 		
 		object.setObjectName(spawner.getCreatureName());
 		object.setLevel(spawner.getCombatLevel());
@@ -280,8 +283,26 @@ public final class SpawnerService extends Service {
 		setFlags(object, spawner.getFlagString());
 		
 		object.setBehavior(spawner.getAIBehavior());
-		if (object.getBehavior() == AIBehavior.FLOAT)
-			object.setFloatRadius(spawner.getFloatRadius());
+		
+		switch (object.getBehavior()) {
+			case FLOAT:
+				// Random location within float radius of spawner and 
+				int floatRadius = spawner.getFloatRadius();
+				int offsetX = randomBetween(0, floatRadius);
+				int offsetZ = randomBetween(0, floatRadius);
+				
+				object.setFloatRadius(floatRadius);
+				aiLocation.setPosition(aiLocation.getX() + offsetX, aiLocation.getY(), aiLocation.getZ() + offsetZ);
+	
+				// Doesn't break here - FLOAT NPCs spawn with random heading
+			case GUARD:
+				// Random heading when spawned
+				int randomHeading = randomBetween(0, 360);	// Can't use negative numbers as minimum
+				aiLocation.setHeading(randomHeading - 180);	// -180 to 180
+				break;
+		}
+		
+		object.setLocation(aiLocation);
 		
 		String moodAnimation = spawner.getMoodAnimation();
 		if (moodAnimation != null) {
@@ -323,5 +344,15 @@ public final class SpawnerService extends Service {
 	private void removeSpawners() {
 		spawnerMap.values().forEach(spawner -> new DestroyObjectIntent(spawner.getSpawnerObject()).broadcast());
 		spawnerMap.clear();
+	}
+	
+	/**
+	 * Generates a random number between from (inclusive) and to (inclusive)
+	 * @param from a positive minimum value
+	 * @param to maximum value, which is larger than the minimum value
+	 * @return a random number between the two, both inclusive
+	 */
+	private int randomBetween(int from, int to) {
+		return random.nextInt((to - from) + 1) + from;
 	}
 }
