@@ -1,387 +1,387 @@
 buildout_id	terrain	template	custom_name	x	y	z	heading	building_name	cell_id	radius	active	comment
 INTEGER PRIMARY KEY	TEXT	TEXT	TEXT	REAL	REAL	REAL	REAL	TEXT	INTEGER	REAL	INTEGER	TEXT
-1	CORELLIA	object/building/poi/shared_corellia_afarathu_large1.iff		-5961.01	39.73	-2378.01	0	cor_world	0	256	1	
-2	CORELLIA	object/building/poi/shared_corellia_afarathu_large2.iff		-6156.29	36.46	-2832.06	0	cor_world	0	256	1	
-3	CORELLIA	object/building/poi/shared_corellia_afarathu_medium2.iff		-4405.53	13.39	-2081.47	0	cor_world	0	256	1	
-4	CORELLIA	object/building/poi/shared_corellia_swoop_large1.iff		-6028.87	12.97	-3251.97	0	cor_world	0	256	1	
-5	CORELLIA	object/mobile/shared_distant_ship_controller.iff		-75	28	-4723	0	cor_world	0	1024	1	Coronet Starport
-6	CORELLIA	object/mobile/shared_distant_ship_controller.iff		-4998	21	-2246	0	cor_world	0	1024	1	Tyrena Starport
-7	CORELLIA	object/mobile/shared_distant_ship_controller.iff		-3141	31	2864	0	cor_world	0	1024	1	Kor Vella Starport
-8	CORELLIA	object/mobile/shared_distant_ship_controller.iff		3358	308	5581	0	cor_world	0	1024	1	Doaba Guerfel Starport
-9	CORELLIA	object/tangible/collection/shared_col_jalopy_crate_04.iff		-11.90	0.60	50.80	55	cor_coronet_starport	4	128	1	
-10	CORELLIA	object/tangible/datapad/shared_data_dropoff.iff		-4.16	0.62	-4.08	0	cor_meatlump_hideout_main	3	128	0	
-11	CORELLIA	object/tangible/gcw/shared_pvp_region_watcher.iff		4772.29	95.00	-5233.67	0	cor_world	0	8	0	
-12	CORELLIA	object/tangible/gcw/static_base/shared_invisible_beacon.iff		4242.38	257.00	-4950.64	0	cor_world	0	0	1	Shuttleport: GCW Imp Base Corellia
-13	CORELLIA	object/tangible/gcw/static_base/shared_invisible_beacon.iff		5285.50	27.00	-5624.02	0	cor_world	0	0	1	Shuttleport: GCW Reb Base Corellia
-14	CORELLIA	object/tangible/gcw/static_base/shared_invisible_cloner_imperial.iff		4251.60	257.00	-4945.99	0	cor_world	0	0	1	Cloning Facility
-15	CORELLIA	object/tangible/gcw/static_base/shared_invisible_cloner_rebel.iff		5291.34	27.00	-5618.70	0	cor_world	0	0	1	Cloning Facility
-16	CORELLIA	object/tangible/spawning/shared_auto_invasion_spawner.iff		-51.00	28.00	-4734.00	0	cor_world	0	8	0	
-17	CORELLIA	object/tangible/theme_park/rebel/shared_rtp_wedge_imperial_meeting.iff		6905.82	330.00	-5603.99	0	cor_world	0	256	0	
-18	DANTOOINE	object/mobile/shared_distant_ship_controller.iff		-636	3	2505	0	dan_world	0	1024	1	Mining Outpost
-19	DANTOOINE	object/mobile/shared_distant_ship_controller.iff		-4208	3	-2350	0	dan_world	0	1024	1	Imperial Outpost
-20	DANTOOINE	object/mobile/shared_distant_ship_controller.iff		1569	4	-6415	0	dan_world	0	1024	1	Agro Outpost
-21	DANTOOINE	object/tangible/quest/shared_clone_relics_box_large.iff		9.50	0.60	-4.80	-10	dan_mining_outpost_cantina	4	128	1	
-22	DATHOMIR	object/building/poi/shared_dathomir_freedprisonercamp_small2.iff		-1128.95	108.65	6326.92	0	dat_world	0	256	1	
-23	DATHOMIR	object/mobile/shared_distant_ship_controller.iff		-49	18	-1584	0	dat_world	0	1024	1	Science Outpost
-24	DATHOMIR	object/mobile/shared_distant_ship_controller.iff		618	6	3092	0	dat_world	0	1024	1	Trade Outpost
-25	DATHOMIR	object/static/terrain/corellia/shared_rock_crystl_shrpbush_med.iff		-11.54	-64.63	-202.20	0	dat_ns_rancor_cave	6	128	1	
-26	DATHOMIR	object/tangible/buildout/shared_buildout_placeholder_ring.iff		-4096.00	-195.00	6144.00	0	dat_world	0	8	1	
-27	DATHOMIR	object/tangible/buildout/shared_buildout_placeholder_ring.iff		-2048.00	-195.00	4096.00	0	dat_world	0	8	1	
-28	DATHOMIR	object/tangible/buildout/shared_buildout_placeholder_ring.iff		-2048.00	-195.00	6144.00	0	dat_world	0	8	1	
-29	DATHOMIR	object/tangible/door/shared_heroic_axkva_min_door.iff		-91.04	-101.00	-102.71	180	dat_ns_rancor_cave	11	128	1	
-30	DATHOMIR	object/tangible/quest/imperial/shared_itp_vader_force_crystal.iff		-25.30	-63.70	-254.70	20	dat_ns_rancor_cave	7	128	1	
-31	DATHOMIR	object/tangible/quest/shared_clone_relics_skeleton_human.iff		-87.70	-70.00	-115.40	-128	dat_ns_rancor_cave	8	128	1	
-32	DATHOMIR	object/tangible/quest/township/shared_axkva_nightsister_skull.iff		47.50	-54.50	-155.60	-37	dat_ns_rancor_cave	5	128	1	
-33	DATHOMIR	object/tangible/quest/township/shared_axkva_pedastal.iff		47.50	-58.35	-155.60	-37	dat_ns_rancor_cave	5	128	1	
-34	DATHOMIR	object/tangible/quest/township/shared_rohak_figurine_spawner_02.iff		5382.48	98.24	-4065.40	0	dat_world	0	256	0	
-35	DATHOMIR	object/tangible/quest/township/shared_rohak_figurine_spawner_03.iff		5116.33	78.39	-3957.83	0	dat_world	0	256	0	
-36	DATHOMIR	object/tangible/quest/township/shared_rohak_figurine_spawner_04.iff		5408.06	78.87	-4189.11	0	dat_world	0	256	0	
-37	DATHOMIR	object/tangible/quest/township/shared_rohak_figurine_spawner_05.iff		-3.87	0.56	-0.35	0	dat_aurilia_prisoner_hut1	1	128	0	
-38	DATHOMIR	object/tangible/quest/township/shared_rohak_figurine_spawner_06.iff		9.39	1.75	-2.12	0	dat_aurilia_adv_gh	10	256	0	
-39	DATHOMIR	object/tangible/quest/township/shared_rohak_figurine_spawner.iff		5312.49	78.50	-4159.19	0	dat_world	0	256	0	
-40	DATHOMIR	object/tangible/spawning/kashyyyk/shared_rodian_shuttle_spawner.iff		5423.04	83.16	-4125.71	0	dat_world	0	256	0	
-41	DUNGEON1	object/tangible/quest/nova_orion/shared_nova_orion_katiara_grave_node.iff		-27.80	29.00	15.98	0	du1_nova_orion	28	128	1	
-42	ENDOR	object/building/poi/shared_endor_marauder_medium2.iff		672.00	207.70	4956.11	0	end_world	0	256	1	
-43	ENDOR	object/building/poi/shared_endor_marauder_small4.iff		-6883.53	13.71	632.43	0	end_world	0	256	1	
-44	ENDOR	object/mobile/shared_distant_ship_controller.iff		-950	73	1553	0	end_world	0	1024	1	Smuggler Outpost
-45	ENDOR	object/mobile/shared_distant_ship_controller.iff		3201	24	-3500	0	end_world	0	1024	1	Research Outpost
-46	ENDOR	object/tangible/container/general/shared_tech_bookcase.iff		48.07	-32.00	-47.80	0	end_dwb	27	128	1	
-47	ENDOR	object/tangible/container/general/shared_tech_chest.iff		-3.14	-12.00	36.50	180	end_dwb	4	128	1	
-48	ENDOR	object/tangible/dungeon/death_watch_bunker/shared_coal_bin_container.iff		-2.39	-32.00	-27.80	90	end_dwb	21	128	0	
-49	ENDOR	object/tangible/dungeon/death_watch_bunker/shared_coal_bin_container.iff		4.29	-32.00	-102.30	90	end_dwb	23	128	0	
-50	ENDOR	object/tangible/dungeon/death_watch_bunker/shared_door_control_terminal.iff		-151.00	-60.00	-99.00	180	end_dwb	51	128	1	
-51	ENDOR	object/tangible/dungeon/death_watch_bunker/shared_door_control_terminal.iff		-230.00	-60.00	-124.00	90	end_dwb	53	128	1	
-52	ENDOR	object/tangible/dungeon/death_watch_bunker/shared_door_control_terminal.iff		-232.00	-60.00	-220.00	90	end_dwb	59	128	1	
-53	ENDOR	object/tangible/dungeon/death_watch_bunker/shared_door_control_terminal.iff		-84.50	-20.00	-50.50	-90	end_dwb	9	128	1	
-54	ENDOR	object/tangible/dungeon/death_watch_bunker/shared_door_control_terminal.iff		-8.40	-32.00	-95.40	-89	end_dwb	17	128	1	
-55	ENDOR	object/tangible/dungeon/death_watch_bunker/shared_door_control_terminal.iff		25.90	-64.00	-95.40	-179	end_dwb	33	128	1	
-56	ENDOR	object/tangible/dungeon/death_watch_bunker/shared_door_control_terminal.iff		-17.70	-12.00	-8.50	0	end_dwb	1	128	1	
-57	ENDOR	object/tangible/dungeon/death_watch_bunker/shared_filter_dispenser.iff		-13.66	-52.00	-147.70	180	end_dwb	64	128	1	
-58	ENDOR	object/tangible/dungeon/death_watch_bunker/shared_invulnerable_debris.iff		112.90	-64.00	-113.89	178	end_dwb	34	128	1	
-59	ENDOR	object/tangible/dungeon/death_watch_bunker/shared_invulnerable_debris.iff		113.40	-64.00	-151.93	-179	end_dwb	34	128	1	
-60	ENDOR	object/tangible/dungeon/death_watch_bunker/shared_workbench.iff		-15.78	-52.00	-147.50	180	end_dwb	64	128	1	
-61	ENDOR	object/tangible/dungeon/shared_terminal_free_s1.iff		74.50	-54.00	-143.00	-87	end_dwb	34	128	1	
-62	ENDOR	object/tangible/furniture/all/shared_frn_all_light_lamp_death_watch.iff		59.90	0.00	-86.00	0	end_dwb	26	128	0	
-63	ENDOR	object/tangible/furniture/all/shared_frn_all_light_lamp_death_watch.iff		49.00	0.00	-78.70	0	end_dwb	26	128	0	
-64	ENDOR	object/tangible/furniture/all/shared_frn_all_light_lamp_death_watch.iff		56.10	0.00	-68.00	0	end_dwb	26	128	0	
-65	ENDOR	object/tangible/furniture/all/shared_frn_all_light_lamp_death_watch.iff		67.00	0.00	-75.40	0	end_dwb	26	128	0	
-66	ENDOR	object/tangible/newbie_tutorial/shared_debris.iff		66.44	-64.00	-114.48	-177	end_dwb	34	128	1	
-67	ENDOR	object/tangible/space/content_infrastructure/shared_generic_egg_small.iff		-6500.00	-0.92	-7000.00	0	end_world	0	8	1	PvP Battlefield
-68	ENDOR	object/tangible/spawning/shared_auto_invasion_spawner.iff		-977.00	73.00	1554.00	0	end_world	0	8	0	
-69	ENDOR	object/tangible/terminal/shared_terminal_water_pressure.iff		58.00	0.00	-93.00	0	end_dwb	26	128	1	
-70	ENDOR	object/tangible/terminal/shared_terminal_water_pressure.iff		42.00	0.00	-77.00	90	end_dwb	26	128	1	
-71	ENDOR	object/tangible/terminal/shared_terminal_water_pressure.iff		58.00	0.00	-61.00	-179	end_dwb	26	128	1	
-72	ENDOR	object/tangible/terminal/shared_terminal_water_pressure.iff		73.90	0.00	-77.00	-90	end_dwb	26	128	1	
-73	KASHYYYK_MAIN	object/mobile/shared_distant_ship_controller.iff		-689	21	-170	0	kas_main_world	0	1024	1	Kachirho Starport
-74	LOK	object/building/poi/shared_lok_nymshenchman_medium4.iff		3518.54	6.74	2082.32	0	lok_world	0	512	1	
-75	LOK	object/building/poi/shared_lok_nymshenchman_small3.iff		-1975.76	11.81	-3377.64	0	lok_world	0	512	1	
-76	LOK	object/building/poi/shared_lok_nymshenchman_small3.iff		6023.68	11.93	5164.33	0	lok_world	0	512	1	
-77	LOK	object/building/poi/shared_lok_nymshenchman_small4.iff		-3907.09	12.10	-3923.44	0	lok_world	0	512	1	
-78	LOK	object/mobile/shared_distant_ship_controller.iff		479	8	5511	0	lok_world	0	1024	1	Nym's Stronghold
-79	LOK	object/tangible/collection/shared_ore_collectible.iff		-10.80	-30.70	-26.60	-80	lok_imperial_gas_mine	2	128	1	
-80	LOK	object/tangible/collection/shared_ore_collectible.iff		50.50	-45.60	-100.70	176	lok_imperial_gas_mine	4	128	1	
-81	LOK	object/tangible/collection/shared_ore_collectible.iff		-21.90	-65.10	-211.70	-82	lok_imperial_gas_mine	7	128	1	
-82	LOK	object/tangible/collection/shared_ore_collectible.iff		-99.50	-69.40	-91.80	-13	lok_imperial_gas_mine	8	128	1	
-83	LOK	object/tangible/collection/shared_ore_collectible.iff		-82.80	-98.90	-155.00	-25	lok_imperial_gas_mine	8	128	1	
-84	LOK	object/tangible/collection/shared_ore_collectible.iff		-23.60	-62.80	-261.10	-125	lok_imperial_gas_mine	7	128	1	
-85	LOK	object/tangible/collection/shared_ore_collectible.iff		72.80	-58.90	-166.30	74	lok_imperial_gas_mine	5	128	1	
-86	LOK	object/tangible/collection/shared_ore_collectible.iff		54.10	-46.20	-62.60	72	lok_imperial_gas_mine	4	128	1	
-87	LOK	object/tangible/collection/shared_ore_collectible.iff		-1.30	-64.10	-238.00	172	lok_imperial_gas_mine	7	128	1	
-88	LOK	object/tangible/collection/shared_ore_collectible.iff		-84.40	-99.80	-92.20	-1	lok_imperial_gas_mine	11	128	1	
-89	LOK	object/tangible/container/loot/shared_astromech_container.iff		-65.32	-65.98	-177.78	0	lok_evil_droid_eng_cave	28	128	1	
-90	LOK	object/tangible/container/loot/shared_computer_container.iff		-60.60	-20.00	48.26	270	lok_ntp_mercenary_bunker	7	128	1	
-91	LOK	object/tangible/container/loot/shared_gas_filter_container.iff		-87.81	-99.42	-88.93	-90	lok_imperial_gas_mine	11	128	1	
-92	LOK	object/tangible/furniture/nym_themepark/collection/shared_armoire_s01.iff		-12.00	-43.70	-100.30	-138	lok_evil_droid_eng_cave	22	128	1	
-93	LOK	object/tangible/furniture/nym_themepark/collection/shared_frn_all_data_terminal_free_s2.iff		0.10	-22.00	-19.80	0	lok_evil_droid_eng_cave	1	128	1	
-94	LOK	object/tangible/furniture/nym_themepark/collection/shared_frn_all_lamp_free_s04.iff		-61.40	-46.40	-52.00	-40	lok_evil_droid_eng_cave	5	128	1	
-95	LOK	object/tangible/furniture/nym_themepark/collection/shared_frn_all_meatlump_grill_s02.iff		-176.50	-49.50	-60.50	54	lok_evil_droid_eng_cave	10	128	1	
-96	LOK	object/tangible/furniture/nym_themepark/collection/shared_frn_all_plant_potted_lg_s1.iff		-31.60	-29.20	-27.20	23	lok_evil_droid_eng_cave	2	128	1	
-97	LOK	object/tangible/furniture/nym_themepark/collection/shared_frn_all_plant_potted_lg_s2.iff		-50.60	-29.50	-38.10	67	lok_evil_droid_eng_cave	3	128	1	
-98	LOK	object/tangible/furniture/nym_themepark/collection/shared_frn_all_plant_potted_lg_s3.iff		-98.60	-39.40	-86.00	-97	lok_evil_droid_eng_cave	11	128	1	
-99	LOK	object/tangible/furniture/nym_themepark/collection/shared_frn_all_plant_potted_lg_s4.iff		-111.80	-57.20	-37.70	38	lok_evil_droid_eng_cave	16	128	1	
-100	LOK	object/tangible/furniture/nym_themepark/collection/shared_table_work_bench.iff		-101.10	-55.20	-80.90	90	lok_evil_droid_eng_cave	11	128	1	
-101	LOK	object/tangible/quest/shared_nym_grenade_container.iff		-7.00	-20.00	78.40	180	lok_ntp_mercenary_bunker	21	128	1	
-102	LOK	object/tangible/terminal/shared_systems_control_terminal.iff		9.50	-12.00	43.80	90	lok_ntp_mercenary_bunker	5	128	1	
-103	LOK	object/tangible/terminal/shared_systems_control_terminal.iff		11.00	-12.00	64.30	-90	lok_ntp_mercenary_bunker	5	128	1	
-104	LOK	object/tangible/terminal/shared_systems_control_terminal.iff		-47.10	-20.00	42.90	-90	lok_ntp_mercenary_bunker	7	128	1	
-105	LOK	object/tangible/terminal/shared_systems_control_terminal.iff		-78.70	-20.00	46.90	90	lok_ntp_mercenary_bunker	7	128	1	
-106	LOK	object/tangible/terminal/shared_systems_control_terminal.iff		3.30	0.30	-5.50	0	lok_ntp_mercenary_bunker	3	128	1	
-107	LOK	object/tangible/terminal/shared_systems_control_terminal.iff		19.10	-12.00	26.40	180	lok_ntp_mercenary_bunker	14	128	1	
-108	LOK	object/tangible/terminal/shared_systems_control_terminal.iff		-9.10	-20.00	-0.30	-90	lok_ntp_mercenary_bunker	16	128	1	
-109	LOK	object/tangible/terminal/shared_systems_control_terminal.iff		-34.50	-20.00	93.60	0	lok_ntp_mercenary_bunker	19	128	1	
-110	LOK	object/tangible/terminal/shared_systems_control_terminal.iff		74.60	-12.00	51.60	0	lok_ntp_mercenary_bunker	12	128	1	
-111	LOK	object/tangible/terminal/shared_systems_control_terminal.iff		24.20	-20.00	115.60	0	lok_ntp_mercenary_bunker	13	128	1	
-112	LOK	object/tangible/terminal/shared_terminal_nym_cave.iff		-60.62	-65.84	-142.28	-90	lok_evil_droid_eng_cave	25	128	1	
-113	LOK	object/tangible/theme_park/nym/shared_dungeon_boss_terminal_02.iff		-91.80	-100.40	-93.60	0	lok_imperial_gas_mine	11	128	1	
-114	LOK	object/tangible/theme_park/nym/shared_dungeon_boss_terminal_02.iff		-54.20	-20.00	74.00	0	lok_ntp_mercenary_bunker	9	128	1	
-115	LOK	object/tangible/theme_park/nym/shared_dungeon_boss_terminal.iff		49.20	-65.80	-83.30	-90	lok_evil_droid_eng_cave	27	128	1	
-116	LOK	object/tangible/theme_park/nym/shared_dungeon_boss_terminal.iff		-81.00	-99.00	-163.30	0	lok_imperial_gas_mine	8	128	1	
-117	LOK	object/tangible/theme_park/nym/shared_dungeon_boss_terminal.iff		-54.40	-20.00	12.80	-90	lok_ntp_mercenary_bunker	8	128	1	
-118	LOK	object/tangible/theme_park/rebel/shared_rtp_hansolo_banners.iff		-1901.00	12.00	-3079.03	0	lok_world	0	256	0	
-119	LOK	object/tangible/theme_park/rebel/shared_rtp_hansolo_banners.iff		-1998.04	12.00	-3073.79	0	lok_world	0	256	0	
-120	LOK	object/tangible/theme_park/rebel/shared_rtp_hansolo_banners.iff		-1819.74	12.00	-3049.98	0	lok_world	0	256	0	
-121	LOK	object/tangible/theme_park/rebel/shared_rtp_hansolo_banners.iff		-1974.10	12.00	-2997.94	0	lok_world	0	256	0	
-122	LOK	object/tangible/theme_park/rebel/shared_rtp_hansolo_banners.iff		-1894.11	12.00	-3049.90	0	lok_world	0	256	0	
-123	LOK	object/tangible/theme_park/rebel/shared_rtp_hansolo_banners.iff		-1871.90	12.00	-3123.73	0	lok_world	0	256	0	
-124	LOK	object/tangible/theme_park/rebel/shared_rtp_hansolo_banners.iff		-1892.49	12.00	-3173.81	0	lok_world	0	256	0	
-125	LOK	object/tangible/theme_park/rebel/shared_rtp_hansolo_banners.iff		-1957.84	12.00	-3076.44	0	lok_world	0	256	0	
-126	LOK	object/tangible/theme_park/rebel/shared_rtp_hansolo_banners.iff		-1970.07	12.00	-3150.02	0	lok_world	0	256	0	
-127	LOK	object/tangible/theme_park/rebel/shared_rtp_hansolo_banners.iff		-1905.32	12.00	-3137.57	0	lok_world	0	256	0	
-128	MUSTAFAR	object/mobile/shared_distant_ship_controller.iff		407	230	-1355	0	mus_world	0	1024	1	Mensix Mining Facility
-129	NABOO	object/building/poi/shared_naboo_borvos_large1.iff		5233.69	-195.53	6346.93	0	nab_world	0	256	1	
-130	NABOO	object/building/poi/shared_naboo_borvos_medium.iff		5719.21	-192.90	6600.43	0	nab_world	0	256	1	
-131	NABOO	object/building/poi/shared_naboo_gunrunners_small2.iff		5327.28	186.36	-1102.78	0	nab_world	0	256	1	
-132	NABOO	object/building/poi/shared_naboo_gunrunners_small2.iff		5012.48	90.84	-940.61	0	nab_world	0	256	1	
-133	NABOO	object/building/poi/shared_naboo_mauler_large1.iff		2540.89	18.47	1901.71	0	nab_world	0	256	1	
-134	NABOO	object/building/poi/shared_naboo_mauler_large2.iff		2498.90	13.97	2276.62	0	nab_world	0	256	1	
-135	NABOO	object/building/poi/shared_naboo_mauler_medium.iff		2268.97	12.24	1908.58	0	nab_world	0	256	1	
-136	NABOO	object/mobile/shared_distant_ship_controller.iff		5295	-192	6675	0	nab_world	0	1024	1	Kaadara Starport
-137	NABOO	object/mobile/shared_distant_ship_controller.iff		1377	13	2760	0	nab_world	0	1024	1	Keren Starport
-138	NABOO	object/mobile/shared_distant_ship_controller.iff		4745	4	-4672	0	nab_world	0	1024	1	Moenia Starport
-139	NABOO	object/mobile/shared_distant_ship_controller.iff		-4866	6	4155	0	nab_world	0	1024	1	Theed Spaceport
-140	NABOO	object/static/item/shared_item_container_weapons.iff		-10.60	6.10	-10.30	90	nab_deeja_house2	5	128	1	
-141	NABOO	object/static/item/shared_item_container_weapons.iff		-10.60	6.10	-8.80	90	nab_deeja_house2	5	128	1	
-142	NABOO	object/static/item/shared_item_container_weapons.iff		-10.60	6.10	-7.30	90	nab_deeja_house2	5	128	1	
-143	NABOO	object/static/item/shared_item_container_weapons.iff		-10.60	6.10	-5.80	90	nab_deeja_house2	5	128	1	
-144	NABOO	object/static/item/shared_item_container_weapons.iff		-10.60	6.10	-4.30	90	nab_deeja_house2	5	128	1	
-145	NABOO	object/tangible/collection/shared_col_jalopy_crate_03.iff		-11.90	0.60	50.80	55	nab_kaadara_starport	4	128	1	
-146	NABOO	object/tangible/collection/shared_col_jalopy_crate_08.iff		49.10	8.00	-21.40	-160	nab_theed_hangar	5	128	1	
-147	NABOO	object/tangible/container/drum/shared_large_plain_crate_s01.iff		29.71	-36.00	172.03	-179	nab_borvos_vault	40	128	1	
-148	NABOO	object/tangible/container/drum/shared_large_plain_crate_s01.iff		54.52	-36.00	182.33	-91	nab_borvos_vault	21	128	1	
-149	NABOO	object/tangible/container/drum/shared_large_plain_crate_s02.iff		18.55	-36.00	200.98	178	nab_borvos_vault	18	128	1	
-150	NABOO	object/tangible/container/drum/shared_large_plain_crate_s03.iff		11.82	-36.00	189.18	-177	nab_borvos_vault	18	128	1	
-151	NABOO	object/tangible/container/drum/shared_large_plain_crate_s03.iff		-17.39	-36.00	241.06	-12	nab_borvos_vault	15	128	1	
-152	NABOO	object/tangible/container/drum/shared_large_plain_crate_s04.iff		44.90	-36.00	127.12	86	nab_borvos_vault	6	128	1	
-153	NABOO	object/tangible/container/drum/shared_large_plain_crate_s04.iff		-52.71	-36.00	50.18	179	nab_borvos_vault	11	128	1	
-154	NABOO	object/tangible/datapad/shared_droid_datapad_1.iff		-6590.93	-209.78	5982.81	0	nab_world	0	256	1	
-155	NABOO	object/tangible/datapad/shared_droid_datapad_6.iff		-6586.38	-209.86	5984.31	0	nab_world	0	256	1	
-156	NABOO	object/tangible/gcw/static_base/shared_invisible_beacon.iff		1504.75	303.00	-1556.86	0	nab_world	0	8	1	Shuttleport: GCW Imp Base Naboo
-157	NABOO	object/tangible/gcw/static_base/shared_invisible_beacon.iff		536.58	343.00	-1447.10	0	nab_world	0	8	1	Shuttleport: GCW Reb Base Naboo
-158	NABOO	object/tangible/gcw/static_base/shared_invisible_cloner_imperial.iff		1512.79	303.00	-1552.96	0	nab_world	0	8	1	Cloning Facility
-159	NABOO	object/tangible/gcw/static_base/shared_invisible_cloner_rebel.iff		528.61	343.00	-1455.53	0	nab_world	0	8	1	Cloning Facility
-160	NABOO	object/tangible/quest/shared_clone_relics_box_large.iff		-4.80	-4.90	-8.10	-19	nab_deeja_house2	6	128	1	
-161	NABOO	object/tangible/quest/shared_mauler_stronghold_terminal.iff		8.09	-12.00	54.40	-171	nab_mauler_stronghold	5	128	1	
-162	NABOO	object/tangible/quest/shared_mauler_stronghold_terminal.iff		-3.86	-12.00	51.87	84	nab_mauler_stronghold	5	128	1	
-163	NABOO	object/tangible/quest/shared_mauler_stronghold_terminal.iff		3.59	-16.00	115.25	180	nab_mauler_stronghold	10	128	1	
-164	NABOO	object/tangible/quest/shared_mauler_stronghold_terminal.iff		9.00	-16.00	120.38	91	nab_mauler_stronghold	10	128	1	
-165	NABOO	object/tangible/quest/shared_mauler_stronghold_terminal.iff		27.00	-16.00	121.06	-93	nab_mauler_stronghold	10	128	1	
-166	NABOO	object/tangible/quest/shared_mauler_stronghold_terminal.iff		3.43	-16.00	126.50	-1	nab_mauler_stronghold	10	128	1	
-167	NABOO	object/tangible/quest/shared_mauler_stronghold_terminal.iff		-2.00	-16.00	121.76	-88	nab_mauler_stronghold	10	128	1	
-168	NABOO	object/tangible/quest/shared_mauler_stronghold_terminal.iff		-34.70	-12.00	166.63	88	nab_mauler_stronghold	12	128	1	
-169	NABOO	object/tangible/quest/shared_mauler_stronghold_terminal.iff		-18.30	-12.00	167.43	-90	nab_mauler_stronghold	12	128	1	
-170	NABOO	object/tangible/quest/shared_mauler_stronghold_terminal.iff		-160.26	-44.00	68.80	0	nab_mauler_stronghold	29	128	1	
-171	NABOO	object/tangible/quest/shared_mauler_stronghold_terminal.iff		-144.99	-44.00	68.80	1	nab_mauler_stronghold	29	128	1	
-172	NABOO	object/tangible/quest/shared_mauler_stronghold_terminal.iff		-102.70	-44.00	-17.42	98	nab_mauler_stronghold	32	128	1	
-173	NABOO	object/tangible/quest/shared_mauler_stronghold_terminal.iff		-94.13	-44.00	-25.02	3	nab_mauler_stronghold	32	128	1	
-174	NABOO	object/tangible/quest/shared_mauler_stronghold_terminal.iff		-78.29	-44.00	-24.89	-7	nab_mauler_stronghold	32	128	1	
-175	NABOO	object/tangible/quest/shared_mauler_stronghold_terminal.iff		-62.70	-44.00	-25.20	5	nab_mauler_stronghold	32	128	1	
-176	NABOO	object/tangible/quest/shared_rsf_computer.iff		38.60	12.00	44.90	0	nab_theed_palace	8	128	1	
-177	NABOO	object/tangible/quest/shared_typho_mauler_weapons_cache.iff		-20.00	-16.00	121.75	90	nab_mauler_stronghold	10	128	1	
-178	NABOO	object/tangible/quest/shared_typho_mauler_weapons_cache.iff		-26.24	-12.00	175.20	179	nab_mauler_stronghold	12	128	1	
-179	NABOO	object/tangible/quest/shared_typho_mauler_weapons_cache.iff		-96.90	-28.00	127.20	-179	nab_mauler_stronghold	17	128	1	
-180	NABOO	object/tangible/quest/shared_typho_mauler_weapons_cache.iff		-168.70	-44.00	77.20	82	nab_mauler_stronghold	29	128	1	
-181	NABOO	object/tangible/spawning/shared_city_sign_spawner.iff		5315.68	326.00	-1587.87	0	nab_world	0	0	1	object/tangible/sign/all_sign_city_s03.iff
-182	NABOO	object/tangible/spawning/shared_city_sign_spawner.iff		4729.92	305.63	-1502.67	0	nab_world	0	0	1	object/tangible/sign/all_sign_city_s03.iff
-183	NABOO	object/tangible/spawning/shared_city_sign_spawner.iff		4573.04	323.20	-1299.78	0	nab_world	0	0	1	object/tangible/sign/all_sign_city_s03.iff
-184	NABOO	object/tangible/terminal/shared_terminal_borvo_ai_controller.iff		71.30	-36.00	148.90	0	nab_borvos_vault	34	128	1	
-185	NABOO	object/tangible/terminal/shared_terminal_borvo_security_scanner.iff		10.20	-35.00	214.34	270	nab_borvos_vault	14	128	1	
-186	NABOO	object/tangible/terminal/shared_terminal_borvo_security_scanner.iff		0.80	-35.00	227.70	90	nab_borvos_vault	14	128	1	
-187	NABOO	object/tangible/terminal/shared_terminal_borvo_security_scanner.iff		-13.80	-35.00	214.34	-90	nab_borvos_vault	14	128	1	
-188	NABOO	object/tangible/terminal/shared_terminal_borvo_security_scanner.iff		-25.80	-35.00	227.65	90	nab_borvos_vault	14	128	1	
-189	NABOO	object/tangible/terminal/shared_terminal_borvo_security_scanner.iff		-76.70	-35.00	223.00	180	nab_borvos_vault	13	128	1	
-190	NABOO	object/tangible/terminal/shared_terminal_borvo_security_scanner.iff		-92.25	-35.00	223.00	0	nab_borvos_vault	13	128	1	
-191	NABOO	object/tangible/terminal/shared_terminal_borvos_vault.iff		24.25	-36.00	238.11	90	nab_borvos_vault	19	128	1	
-192	NABOO	object/tangible/terminal/shared_terminal_borvos_vault.iff		-47.70	-36.00	242.79	90	nab_borvos_vault	15	128	1	
-193	NABOO	object/tangible/terminal/shared_terminal_borvos_vault.iff		-73.22	-36.00	224.75	270	nab_borvos_vault	36	128	1	
-194	NABOO	object/tangible/terminal/shared_terminal_borvos_vault.iff		-95.74	-36.00	224.96	90	nab_borvos_vault	35	128	1	
-195	NABOO	object/tangible/terminal/shared_terminal_borvos_vault.iff		-12.80	-28.00	170.08	180	nab_borvos_vault	26	128	1	
-196	NABOO	object/tangible/terminal/shared_terminal_borvos_vault.iff		25.90	-36.00	79.20	90	nab_borvos_vault	4	128	1	
-197	NABOO	object/tangible/terminal/shared_terminal_borvos_vault.iff		86.67	-36.00	118.30	180	nab_borvos_vault	1	128	1	
-198	NABOO	object/tangible/terminal/shared_terminal_borvos_vault.iff		-75.84	-36.00	105.95	90	nab_borvos_vault	10	128	1	
-199	NABOO	object/tangible/terminal/shared_terminal_borvos_vault.iff		-11.65	-36.00	169.99	-135	nab_borvos_vault	26	128	1	
-200	NABOO	object/tangible/terminal/shared_terminal_borvos_vault.iff		91.60	-36.00	103.60	0	nab_borvos_vault	1	128	1	
-201	RORI	object/building/poi/shared_lok_nymshenchman_small3.iff		-4809.91	76.49	-2286.07	0	ror_world	0	256	1	
-202	RORI	object/building/poi/shared_lok_nymshenchman_small4.iff		-5203.27	76.54	5080.74	0	ror_world	0	256	1	
-203	RORI	object/building/poi/shared_lok_nymshenchman_small4.iff		2896.18	107.38	-1277.09	0	ror_world	0	256	1	
-204	RORI	object/mobile/shared_distant_ship_controller.iff		-5359	80	-2188	0	ror_world	0	1024	1	Narmle Starport
-205	RORI	object/mobile/shared_distant_ship_controller.iff		3693	96	-6403	0	ror_world	0	1024	1	Rebel Outpost
-206	RORI	object/mobile/shared_distant_ship_controller.iff		5301	80	6190	0	ror_world	0	1024	1	Restuss Starport
-207	RORI	object/tangible/content/shared_u13_ponda_gungan_statue_spawer.iff		-5360.00	80.04	-2291.00	0	ror_world	0	256	0	
-208	RORI	object/tangible/planet_map_location/shared_city.iff		5287.27	80.00	6166.70	0	ror_world	0	8	0	
-209	RORI	object/tangible/theme_park/shared_invisible_object.iff		5295.00	80.00	5690.00	0	ror_world	0	8	0	ph1_restuss_master;restuss_event/city_destruction.iff
-210	RORI	object/tangible/theme_park/shared_invisible_object.iff		5976.02	81.00	5550.89	0	ror_world	0	8	0	ph1_imp_logistics;restuss_event/imperial/logistics.iff
-211	RORI	object/tangible/theme_park/shared_invisible_object.iff		4828.74	80.00	5854.03	0	ror_world	0	8	0	ph1_reb_walls;restuss_event/rebel/walls.iff
-212	RORI	object/tangible/theme_park/shared_invisible_object.iff		4721.33	80.00	5833.37	0	ror_world	0	8	0	ph1_reb_medical;restuss_event/rebel/medical.iff
-213	RORI	object/tangible/theme_park/shared_invisible_object.iff		4721.00	80.00	5848.24	0	ror_world	0	8	0	ph1_reb_logistics;restuss_event/rebel/logistics.iff
-214	RORI	object/tangible/theme_park/shared_invisible_object.iff		5944.37	81.79	5564.63	0	ror_world	0	8	0	ph1_imp_walls;restuss_event/imperial/walls.iff
-215	RORI	object/tangible/theme_park/shared_invisible_object.iff		5898.65	81.00	5644.76	0	ror_world	0	8	0	ph1_imp_medical;restuss_event/imperial/medical.iff
-216	RORI	object/tangible/theme_park/shared_invisible_object.iff		5900.16	81.00	5587.93	0	ror_world	0	8	0	ph1_imp_baracks;restuss_event/imperial/baracks.iff
-217	RORI	object/tangible/theme_park/shared_invisible_object.iff		4778.89	80.00	5880.50	0	ror_world	0	8	0	ph1_reb_communications;restuss_event/rebel/communications.iff
-218	RORI	object/tangible/theme_park/shared_invisible_object.iff		5973.71	81.00	5616.39	0	ror_world	0	8	0	ph1_imp_headquarters;restuss_event/imperial/command.iff
-219	RORI	object/tangible/theme_park/shared_invisible_object.iff		4776.00	80.00	5802.00	0	ror_world	0	8	0	ph1_reb_headquarters;restuss_event/rebel/command.iff
-220	RORI	object/tangible/theme_park/shared_invisible_object.iff		4830.68	80.00	5826.11	0	ror_world	0	8	0	ph1_reb_baracks;restuss_event/rebel/baracks.iff
-221	RORI	object/tangible/theme_park/shared_invisible_object.iff		5916.13	81.00	5549.14	0	ror_world	0	8	0	ph1_imp_communications;restuss_event/imperial/communications.iff
-222	TALUS	object/mobile/shared_distant_ship_controller.iff		274	6	-2933	0	tal_world	0	1024	1	Dearic Starport
-223	TALUS	object/mobile/shared_distant_ship_controller.iff		4461	2	5342	0	tal_world	0	1024	1	Nashal Starport
-224	TALUS	object/mobile/shared_distant_ship_controller.iff		-2227	20	2322	0	tal_world	0	1024	1	Imperial Outpost
-225	TALUS	object/tangible/collection/shared_col_jalopy_crate_06.iff		-11.90	0.60	50.80	55	tal_dearic_starport	4	128	1	
-226	TALUS	object/tangible/collection/shared_col_jalopy_crate_07.iff		-11.90	0.60	50.80	55	tal_nashal_starport	4	128	1	
-227	TALUS	object/tangible/gcw/static_base/shared_invisible_beacon.iff		-4789.65	86.00	-2693.70	0	tal_world	0	8	1	Shuttleport: GCW Imp Base Talus
-228	TALUS	object/tangible/gcw/static_base/shared_invisible_beacon.iff		-5112.69	50.00	-3487.39	0	tal_world	0	8	1	Shuttleport: GCW Reb Base Talus
-229	TALUS	object/tangible/gcw/static_base/shared_invisible_cloner_imperial.iff		-4800.45	86.00	-2681.79	0	tal_world	0	8	1	Cloning Facility
-230	TALUS	object/tangible/gcw/static_base/shared_invisible_cloner_rebel.iff		-5112.27	50.00	-3496.33	0	tal_world	0	8	1	Cloning Facility
-231	TALUS	object/tangible/quest/shared_clone_relics_box_large.iff		-27.20	-0.50	10.50	27	tal_nashal_cantina	13	128	1	
-232	TALUS	object/tangible/quest/shared_talus_grave_robbers_box_magseal.iff		56.00	-0.50	33.70	77	tal_nashal_starport	7	128	1	
-233	TALUS	object/tangible/theme_park/rebel/shared_rtp_leia_crime_scene.iff		4267.31	0.56	5265.10	0	tal_world	0	256	0	
-234	TATOOINE	object/building/poi/shared_anywhere_imperial_base_large_1.iff		989.83	12.59	2514.29	0	tat_world	0	256	1	
-235	TATOOINE	object/building/poi/shared_anywhere_imperial_base_small_1.iff		-855.74	7.17	-3316.04	0	tat_world	0	256	1	
-236	TATOOINE	object/building/poi/shared_anywhere_misc_camp_small_1.iff		16.15	9.07	-5076.65	0	tat_world	0	256	1	
-237	TATOOINE	object/building/poi/shared_scout_camp_s2.iff		-57.07	9.66	-5576.74	0	tat_world	0	256	1	
-238	TATOOINE	object/building/poi/shared_tatooine_dunestalkers_medium.iff		2958.45	8.07	-4592.56	0	tat_world	0	256	1	
-239	TATOOINE	object/building/poi/shared_tatooine_fugitive_camp_medium.iff		-5019.69	39.84	-6122.07	0	tat_world	0	256	1	
-240	TATOOINE	object/building/poi/shared_tatooine_hutt_assassin_camp_medium1.iff		-5147.69	79.77	-6964.29	0	tat_world	0	256	1	
-241	TATOOINE	object/building/poi/shared_tatooine_hutt_assassin_camp_medium1.iff		739.91	31.63	3076.32	0	tat_world	0	256	1	
-242	TATOOINE	object/building/poi/shared_tatooine_hutt_businessmen_camp_small1.iff		-3393.11	7.43	2470.71	0	tat_world	0	256	1	
-243	TATOOINE	object/building/poi/shared_tatooine_hutt_businessmen_camp_small2.iff		-5937.69	58.73	-6030.06	0	tat_world	0	256	1	
-244	TATOOINE	object/building/poi/shared_tatooine_jawa_tradesmen_camp_medium1.iff		-3513.26	13.99	2060.90	0	tat_world	0	256	1	
-245	TATOOINE	object/building/poi/shared_tatooine_tuskenwar_medium.iff		4287.56	9.28	-4739.69	0	tat_world	0	256	1	
-246	TATOOINE	object/building/poi/shared_tatooine_tuskenwar_medium.iff		4251.40	8.75	2488.28	0	tat_world	0	256	1	
-247	TATOOINE	object/mobile/shared_distant_ship_controller.iff		-1350	12	-3586	0	tat_world	0	1024	1	Bestine Starport
-248	TATOOINE	object/mobile/shared_distant_ship_controller.iff		3592	5	-4793	0	tat_world	0	1024	1	Mos Eisley Starport
-249	TATOOINE	object/mobile/shared_distant_ship_controller.iff		-2844	5	2097	0	tat_world	0	1024	1	Mos Espa Starport
-250	TATOOINE	object/mobile/shared_distant_ship_controller.iff		1257	7	3079	0	tat_world	0	1024	1	Mos Entha Starport
-251	TATOOINE	object/tangible/collection/shared_col_jalopy_crate_01.iff		-11.90	0.60	50.80	55	tat_bestine_starport	4	128	1	
-252	TATOOINE	object/tangible/collection/shared_col_jalopy_crate_02.iff		-11.90	0.60	50.80	55	tat_moseisley_starport	4	128	1	
-253	TATOOINE	object/tangible/collection/shared_col_jalopy_crate_05.iff		-11.90	0.60	50.80	55	tat_mosespa_starport	4	128	1	
-254	TATOOINE	object/tangible/collection/shared_col_stage_controller_01.iff		-17.30	7.00	-4.30	143	tat_moseisley_lucky_despot	2	128	1	
-255	TATOOINE	object/tangible/collection/shared_col_stage_controller_02.iff		27.70	-0.30	-2.90	0	tat_moseisley_lucky_despot	27	128	1	
-256	TATOOINE	object/tangible/collection/shared_col_stage_controller_03.iff		-11.60	-0.25	-13.39	0	tat_moseisley_lucky_despot	12	128	1	
-257	TATOOINE	object/tangible/collection/shared_rare_pistol_white_thranta.iff		-2.88	7.79	-8.04	75	tat_moseisley_lucky_despot	2	128	1	
-258	TATOOINE	object/tangible/furniture/house_cleanup/shared_xeno_couch.iff		-2.00	0.00	8.00	-1	tat_moseisley_lucky_despot	15	128	1	
-259	TATOOINE	object/tangible/furniture/house_cleanup/shared_xeno_desk_lamp.iff		1.62	0.80	8.54	-1	tat_moseisley_lucky_despot	15	128	1	
-260	TATOOINE	object/tangible/furniture/house_cleanup/shared_xeno_desk.iff		1.29	0.00	9.07	-90	tat_moseisley_lucky_despot	15	128	1	
-261	TATOOINE	object/tangible/furniture/house_cleanup/shared_xeno_rug.iff		-1.30	0.01	10.69	-1	tat_moseisley_lucky_despot	15	128	1	
-262	TATOOINE	object/tangible/furniture/house_cleanup/shared_xeno_table.iff		-1.70	0.00	12.40	0	tat_moseisley_lucky_despot	15	128	1	
-263	TATOOINE	object/tangible/furniture/house_cleanup/shared_xeno_throne.iff		-1.40	0.00	11.35	-1	tat_moseisley_lucky_despot	15	128	1	
-264	TATOOINE	object/tangible/furniture/house_cleanup/shared_xeno_throne.iff		-0.17	0.00	9.17	90	tat_moseisley_lucky_despot	15	128	1	
-265	TATOOINE	object/tangible/furniture/modern/shared_sofa_chair_modern_style_01.iff		28.80	6.90	5.60	124	tat_moseisley_lucky_despot	9	128	1	
-266	TATOOINE	object/tangible/furniture/modern/shared_sofa_chair_modern_style_01.iff		30.30	7.00	3.00	0	tat_moseisley_lucky_despot	9	128	1	
-267	TATOOINE	object/tangible/instrument/shared_organ_max_rebo.iff		-11.00	2.00	36.00	0	tat_jabbas_palace	22	64	1	
-268	TATOOINE	object/tangible/painting/shared_painting_house_cleanup_imperial.iff		-2.73	1.17	7.01	0	tat_moseisley_lucky_despot	15	128	1	
-269	TATOOINE	object/tangible/painting/shared_painting_house_cleanup_rebel.iff		-4.21	1.17	7.01	0	tat_moseisley_lucky_despot	15	128	1	
-270	TATOOINE	object/tangible/poi/tatooine/shared_interior_2_convo.iff		2042.23	0.01	-6131.96	0	tat_moseisley_lucky_despot	15	128	0	
-271	TATOOINE	object/tangible/poi/tatooine/shared_interior_2_convo.iff		2058.99	0.01	-6141.76	0	tat_moseisley_lucky_despot	20	128	0	
-272	TATOOINE	object/tangible/poi/tatooine/shared_interior_2_convo.iff		2062.38	-0.26	-6137.42	0	tat_moseisley_lucky_despot	25	128	0	
-273	TATOOINE	object/tangible/poi/tatooine/shared_interior_3_convo.iff		2027.41	0.01	-6143.59	0	tat_moseisley_lucky_despot	17	128	0	
-274	TATOOINE	object/tangible/poi/tatooine/shared_interior_3_convo.iff		2077.80	-0.26	-6143.04	0	tat_moseisley_lucky_despot	27	128	0	
-275	TATOOINE	object/tangible/quest/shared_clone_relics_starmap_box.iff		4.20	8.30	-22.10	1	tat_fort_tusken	5	128	1	
-276	TATOOINE	object/tangible/quest/shared_sennex_hq_computer_terminal.iff		-96.90	-28.00	127.20	-179	tat_sennex_camp	17	128	1	
-277	TATOOINE	object/tangible/quest/shared_sennex_hq_computer_terminal.iff		3.59	-16.00	115.25	180	tat_sennex_camp	10	128	1	
-278	TATOOINE	object/tangible/quest/shared_sennex_hq_computer_terminal.iff		9.00	-16.00	120.38	91	tat_sennex_camp	10	128	1	
-279	TATOOINE	object/tangible/quest/shared_sennex_hq_computer_terminal.iff		27.00	-16.00	121.06	-93	tat_sennex_camp	10	128	1	
-280	TATOOINE	object/tangible/quest/shared_sennex_hq_computer_terminal.iff		3.43	-16.00	126.50	-1	tat_sennex_camp	10	128	1	
-281	TATOOINE	object/tangible/quest/shared_sennex_hq_computer_terminal.iff		-20.00	-16.00	121.75	90	tat_sennex_camp	10	128	1	
-282	TATOOINE	object/tangible/quest/shared_sennex_hq_computer_terminal.iff		-2.00	-16.00	121.76	-88	tat_sennex_camp	10	128	1	
-283	TATOOINE	object/tangible/quest/shared_sennex_hq_computer_terminal.iff		8.10	-12.00	54.40	-171	tat_sennex_camp	5	128	1	
-284	TATOOINE	object/tangible/quest/shared_sennex_hq_computer_terminal.iff		-168.70	-44.00	77.20	82	tat_sennex_camp	29	128	1	
-285	TATOOINE	object/tangible/quest/shared_sennex_hq_computer_terminal.iff		-160.26	-44.00	68.80	0	tat_sennex_camp	29	128	1	
-286	TATOOINE	object/tangible/quest/shared_sennex_hq_computer_terminal.iff		-144.99	-44.00	68.80	2	tat_sennex_camp	29	128	1	
-287	TATOOINE	object/tangible/quest/shared_sennex_hq_computer_terminal.iff		-102.70	-44.00	-17.42	98	tat_sennex_camp	32	128	1	
-288	TATOOINE	object/tangible/quest/shared_sennex_hq_computer_terminal.iff		-94.13	-44.00	-25.02	3	tat_sennex_camp	32	128	1	
-289	TATOOINE	object/tangible/quest/shared_sennex_hq_computer_terminal.iff		-78.29	-44.00	-24.89	0	tat_sennex_camp	32	128	1	
-290	TATOOINE	object/tangible/quest/shared_sennex_hq_computer_terminal.iff		-62.70	-44.00	-25.20	6	tat_sennex_camp	32	128	1	
-291	TATOOINE	object/tangible/quest/shared_sennex_hq_computer_terminal.iff		-26.24	-12.00	175.20	179	tat_sennex_camp	12	128	1	
-292	TATOOINE	object/tangible/quest/shared_sennex_hq_computer_terminal.iff		-34.70	-12.00	166.63	88	tat_sennex_camp	12	128	1	
-293	TATOOINE	object/tangible/quest/shared_sennex_hq_computer_terminal.iff		-18.30	-12.00	167.43	-90	tat_sennex_camp	12	128	1	
-294	TATOOINE	object/tangible/quest/shared_sennex_hq_databank.iff		-80.70	-28.00	52.90	0	tat_sennex_camp	26	128	1	
-295	TATOOINE	object/tangible/spawning/shared_city_sign_spawner.iff		-5221.67	75.00	-6455.24	0	tat_world	0	0	1	object/tangible/sign/all_sign_city_s01.iff
-296	TATOOINE	object/tangible/spawning/shared_city_sign_spawner.iff		-5307.69	75.00	-6512.92	0	tat_world	0	0	1	object/tangible/sign/all_sign_city_s01.iff
-297	TATOOINE	object/tangible/spawning/shared_city_sign_spawner.iff		-5033.41	75.00	-6618.27	0	tat_world	0	0	1	object/tangible/sign/all_sign_city_s01.iff
-298	TATOOINE	object/tangible/spawning/shared_city_sign_spawner.iff		-5292.10	75.00	-6590.75	0	tat_world	0	0	1	object/tangible/sign/all_sign_city_s01.iff
-299	TATOOINE	object/tangible/spawning/shared_city_sign_spawner.iff		1425.44	7.00	3525.56	0	tat_world	0	0	1	object/tangible/sign/all_sign_city_s03.iff
-300	TATOOINE	object/tangible/spawning/shared_city_sign_spawner.iff		1252.83	7.00	3438.12	0	tat_world	0	0	1	object/tangible/sign/all_sign_city_s03.iff
-301	TATOOINE	object/tangible/spawning/shared_city_sign_spawner.iff		1285.88	7.86	2877.30	0	tat_world	0	0	1	object/tangible/sign/all_sign_city_s03.iff
-302	TATOOINE	object/tangible/spawning/shared_city_sign_spawner.iff		1821.33	7.00	3185.18	0	tat_world	0	0	1	object/tangible/sign/all_sign_city_s03.iff
-303	TATOOINE	object/tangible/spawning/shared_city_sign_spawner.iff		1635.90	6.83	3484.43	0	tat_world	0	0	1	object/tangible/sign/all_sign_city_s03.iff
-304	TATOOINE	object/tangible/spawning/shared_city_sign_spawner.iff		1203.66	7.74	2897.73	0	tat_world	0	0	1	object/tangible/sign/all_sign_city_s03.iff
-305	TATOOINE	object/tangible/spawning/shared_city_sign_spawner.iff		1127.65	7.00	2982.25	0	tat_world	0	0	1	object/tangible/sign/all_sign_city_s03.iff
-306	TATOOINE	object/tangible/spawning/shared_city_sign_spawner.iff		3882.07	9.79	2447.89	0	tat_world	0	8	1	object/tangible/sign/all_sign_city_s01.iff
-307	TATOOINE	object/tangible/spawning/shared_city_sign_spawner.iff		3712.64	5.78	2387.67	0	tat_world	0	8	1	object/tangible/sign/all_sign_city_s01.iff
-308	YAVIN4	object/mobile/shared_distant_ship_controller.iff		4054	37	-6216	0	yav_world	0	1024	1	Imperial Base
-309	YAVIN4	object/mobile/shared_distant_ship_controller.iff		-6922	73	-5727	0	yav_world	0	1024	1	Labor Outpost
-310	YAVIN4	object/mobile/shared_distant_ship_controller.iff		-267	35	4896	0	yav_world	0	1024	1	Mining Outpost
-311	YAVIN4	object/static/destructible/shared_destructible_cave_wall_damprock.iff		-102.00	-31.40	-368.00	0	yav_geonosian_cave	38	128	1	
-312	YAVIN4	object/static/destructible/shared_destructible_tato_cave_rock_lg.iff		-78.37	-22.06	-111.87	180	yav_geonosian_cave	13	128	1	
-313	YAVIN4	object/static/destructible/shared_destructible_tato_cave_rock_lg.iff		-78.33	-21.56	-110.49	90	yav_geonosian_cave	13	128	1	
-314	YAVIN4	object/static/destructible/shared_destructible_tato_cave_rock_lg.iff		-78.18	-21.75	-109.46	55	yav_geonosian_cave	13	128	1	
-315	YAVIN4	object/static/destructible/shared_destructible_tato_cave_rock_lg.iff		-38.74	-21.96	-99.17	155	yav_geonosian_cave	15	128	1	
-316	YAVIN4	object/static/destructible/shared_destructible_tato_cave_rock_lg.iff		-39.68	-22.20	-97.65	186	yav_geonosian_cave	15	128	1	
-317	YAVIN4	object/static/destructible/shared_destructible_tato_cave_rock_lg.iff		-111.00	-33.73	-228.31	0	yav_geonosian_cave	29	128	1	
-318	YAVIN4	object/static/destructible/shared_destructible_tato_cave_rock_lg.iff		-109.50	-33.31	-227.50	115	yav_geonosian_cave	29	128	1	
-319	YAVIN4	object/static/destructible/shared_destructible_tato_cave_rock_lg.iff		-113.00	-33.42	-229.20	48	yav_geonosian_cave	29	128	1	
-320	YAVIN4	object/static/destructible/shared_destructible_tato_cave_rock_med.iff		-76.57	-21.92	-112.14	64	yav_geonosian_cave	13	128	1	
-321	YAVIN4	object/static/destructible/shared_destructible_tato_cave_rock_med.iff		-76.61	-21.96	-111.16	16	yav_geonosian_cave	13	128	1	
-322	YAVIN4	object/static/destructible/shared_destructible_tato_cave_rock_med.iff		-76.86	-22.03	-110.16	3	yav_geonosian_cave	13	128	1	
-323	YAVIN4	object/static/destructible/shared_destructible_tato_cave_rock_med.iff		-76.90	-22.06	-109.21	22	yav_geonosian_cave	13	128	1	
-324	YAVIN4	object/static/destructible/shared_destructible_tato_cave_rock_med.iff		-38.42	-22.23	-96.50	64	yav_geonosian_cave	15	128	1	
-325	YAVIN4	object/static/destructible/shared_destructible_tato_cave_rock_med.iff		-40.09	-22.18	-99.03	23	yav_geonosian_cave	15	128	1	
-326	YAVIN4	object/static/destructible/shared_destructible_tato_cave_rock_med.iff		-39.74	-22.23	-99.99	3	yav_geonosian_cave	15	128	1	
-327	YAVIN4	object/static/destructible/shared_destructible_tato_crate1.iff		-22.16	-22.00	-132.00	0	yav_geonosian_cave	21	128	1	
-328	YAVIN4	object/static/destructible/shared_destructible_tato_crate1.iff		-22.14	-22.00	-133.00	0	yav_geonosian_cave	21	128	1	
-329	YAVIN4	object/static/destructible/shared_destructible_tato_drum_dented.iff		37.80	-34.00	-333.50	0	yav_geonosian_cave	42	128	1	
-330	YAVIN4	object/static/destructible/shared_destructible_tato_drum_dented.iff		37.29	-34.00	-334.50	90	yav_geonosian_cave	42	128	1	
-331	YAVIN4	object/static/destructible/shared_destructible_tato_drum_dented.iff		37.29	-34.00	-335.56	180	yav_geonosian_cave	42	128	1	
-332	YAVIN4	object/static/destructible/shared_destructible_tato_drum_dented.iff		-23.43	-22.00	-133.02	0	yav_geonosian_cave	21	128	1	
-333	YAVIN4	object/static/destructible/shared_destructible_tato_drum_dented.iff		-23.17	-22.00	-131.00	0	yav_geonosian_cave	21	128	1	
-334	YAVIN4	object/static/destructible/shared_destructible_tato_drum_storage1.iff		32.11	-24.00	-335.58	0	yav_geonosian_cave	42	128	1	
-335	YAVIN4	object/static/destructible/shared_destructible_tato_drum_storage1.iff		32.85	-24.00	-335.12	0	yav_geonosian_cave	42	128	1	
-336	YAVIN4	object/static/destructible/shared_destructible_tato_drum_storage1.iff		33.84	-24.00	-334.96	0	yav_geonosian_cave	42	128	1	
-337	YAVIN4	object/static/destructible/shared_destructible_tato_drum_storage1.iff		34.54	-24.00	-335.47	0	yav_geonosian_cave	42	128	1	
-338	YAVIN4	object/static/destructible/shared_destructible_tato_drum_storage1.iff		35.57	-24.00	-335.06	0	yav_geonosian_cave	42	128	1	
-339	YAVIN4	object/static/destructible/shared_destructible_tato_drum_storage1.iff		35.18	-24.00	-334.29	0	yav_geonosian_cave	42	128	1	
-340	YAVIN4	object/static/destructible/shared_destructible_tato_drum_storage1.iff		-23.16	-22.00	-132.02	0	yav_geonosian_cave	21	128	1	
-341	YAVIN4	object/static/destructible/shared_destructible_tato_drum_storage1.iff		-21.92	-22.00	-130.98	0	yav_geonosian_cave	21	128	1	
-342	YAVIN4	object/tangible/collection/shared_hanging_light_08.iff		28.45	-30.72	-74.72	0	yav_geonosian_cave	18	128	1	
-343	YAVIN4	object/tangible/container/loot/shared_placable_loot_crate_tech_armoire.iff		-53.22	-18.00	-36.59	0	yav_geonosian_cave	5	128	1	
-344	YAVIN4	object/tangible/container/loot/shared_placable_loot_crate_tech_armoire.iff		-44.54	-18.00	-42.97	-90	yav_geonosian_cave	5	128	1	
-345	YAVIN4	object/tangible/container/loot/shared_placable_loot_crate_tech_armoire.iff		-42.98	-18.00	-55.70	0	yav_geonosian_cave	5	128	1	
-346	YAVIN4	object/tangible/container/loot/shared_placable_loot_crate_tech_armoire.iff		-74.80	-22.00	-152.40	180	yav_geonosian_cave	25	128	1	
-347	YAVIN4	object/tangible/container/loot/shared_placable_loot_crate_tech_armoire.iff		-70.15	-34.00	-262.50	180	yav_geonosian_cave	32	128	1	
-348	YAVIN4	object/tangible/container/loot/shared_placable_loot_crate_tech_armoire.iff		-140.10	-34.00	-201.50	0	yav_geonosian_cave	35	128	1	
-349	YAVIN4	object/tangible/dungeon/shared_trash_container.iff		-131.62	-22.21	-70.85	0	yav_geonosian_cave	14	128	1	
-350	YAVIN4	object/tangible/quest/shared_clone_relics_box_magseal.iff		-39.70	-18.00	-36.90	0	yav_geonosian_cave	5	128	1	
-351	YAVIN4	object/tangible/space/content_infrastructure/shared_generic_egg_small.iff		1015.00	68.68	425.00	0	yav_world	0	8	0	PvP Battlefield
-352	YAVIN4	object/tangible/terminal/shared_terminal_geo_bunker.iff		-34.00	-18.00	-30.96	90	yav_geonosian_cave	4	128	1	
-353	YAVIN4	object/tangible/terminal/shared_terminal_geo_bunker.iff		-49.70	-18.00	-55.70	0	yav_geonosian_cave	5	128	1	
-354	YAVIN4	object/tangible/terminal/shared_terminal_geo_bunker.iff		-105.30	-18.00	-64.00	180	yav_geonosian_cave	9	128	1	
-355	YAVIN4	object/tangible/terminal/shared_terminal_geo_bunker.iff		-79.03	-22.00	-146.00	0	yav_geonosian_cave	24	128	1	
-356	YAVIN4	object/tangible/terminal/shared_terminal_geo_bunker.iff		-66.96	-34.00	-260.00	0	yav_geonosian_cave	31	128	1	
-357	YAVIN4	object/tangible/terminal/shared_terminal_geo_bunker.iff		-133.10	-34.00	-204.00	180	yav_geonosian_cave	34	128	1	
-358	YAVIN4	object/tangible/terminal/shared_terminal_geo_bunker.iff		-4.00	-34.00	-416.95	270	yav_geonosian_cave	41	128	1	
-359	YAVIN4	object/tangible/terminal/shared_terminal_geo_bunker.iff		38.00	-34.00	-332.92	270	yav_geonosian_cave	42	128	1	
-360	YAVIN4	object/tangible/theme_park/rebel/shared_rtp_luke_plants.iff		534.51	81.00	-662.71	0	yav_world	0	256	0	
-361	YAVIN4	object/tangible/theme_park/rebel/shared_rtp_luke_plants.iff		515.69	81.00	-666.25	0	yav_world	0	256	0	
-362	YAVIN4	object/tangible/theme_park/rebel/shared_rtp_luke_plants.iff		525.32	81.00	-656.06	0	yav_world	0	256	0	
-363	YAVIN4	object/tangible/theme_park/rebel/shared_rtp_luke_plants.iff		494.47	81.00	-648.29	0	yav_world	0	256	0	
-364	YAVIN4	object/tangible/theme_park/rebel/shared_rtp_luke_plants.iff		500.09	81.00	-620.91	0	yav_world	0	256	0	
-365	YAVIN4	object/tangible/theme_park/rebel/shared_rtp_luke_plants.iff		540.51	81.00	-669.72	0	yav_world	0	256	0	
-366	YAVIN4	object/tangible/theme_park/rebel/shared_rtp_luke_plants.iff		512.91	81.00	-642.20	0	yav_world	0	256	0	
-367	YAVIN4	object/tangible/theme_park/rebel/shared_rtp_luke_plants.iff		529.86	81.00	-682.15	0	yav_world	0	256	0	
-368	YAVIN4	object/tangible/theme_park/rebel/shared_rtp_luke_plants.iff		485.25	81.00	-633.87	0	yav_world	0	256	0	
-369	YAVIN4	object/tangible/theme_park/shared_invisible_object.iff		4.34	-18.24	-27.65	0	yav_geonosian_cave	4	8	1	
-370	YAVIN4	object/tangible/theme_park/shared_invisible_object.iff		-11.65	-30.24	-110.18	0	yav_geonosian_cave	16	8	1	
-371	YAVIN4	object/tangible/theme_park/shared_invisible_object.iff		-103.94	-27.56	-191.13	0	yav_geonosian_cave	27	8	1	
-372	YAVIN4	object/tangible/theme_park/shared_invisible_object.iff		-127.62	-34.00	-250.77	0	yav_geonosian_cave	33	8	1	
-373	YAVIN4	object/tangible/theme_park/shared_invisible_object.iff		47.47	-34.00	-333.93	0	yav_geonosian_cave	43	8	1	
-374	CORELLIA	object/tangible/gcw/static_base/shared_control_terminal.iff		4801.50	95.00	-5207.00	-45	cor_world	0	256	1	Control Terminal
-375	CORELLIA	object/tangible/gcw/static_base/shared_control_terminal.iff		4816.02	95.00	-5231.13	90	cor_world	0	256	1	Control Terminal
-376	CORELLIA	object/tangible/gcw/static_base/shared_control_terminal.iff		4736.00	95.00	-5259.90	55	cor_world	0	256	1	Control Terminal
-377	CORELLIA	object/tangible/gcw/static_base/shared_control_terminal.iff		-2.40	-13.80	-18.00	0	cor_gcw_base_warehouse	9	256	1	Control Terminal
-378	NABOO	object/tangible/gcw/static_base/shared_control_terminal.iff		996.70	298.00	-1521.08	-90	nab_world	0	256	1	Control Terminal
-379	NABOO	object/tangible/gcw/static_base/shared_control_terminal.iff		962.12	298.00	-1497.05	-180	nab_world	0	256	1	Control Terminal
-380	NABOO	object/tangible/gcw/static_base/shared_control_terminal.iff		60.00	-12.00	59.02	-90	nab_gcw_base	9	256	1	Control Terminal
-381	NABOO	object/tangible/gcw/static_base/shared_control_terminal.iff		54.08	-20.00	158.71	-180	nab_gcw_base	21	256	1	Control Terminal
-382	TALUS	object/tangible/gcw/static_base/shared_control_terminal.iff		-4948.06	66.00	-3149.07	-92	cor_world	0	256	1	Control Terminal
-383	TALUS	object/tangible/gcw/static_base/shared_control_terminal.iff		-4957.30	66.00	-3104.74	-90	cor_world	0	256	1	Control Terminal
-384	TALUS	object/tangible/gcw/static_base/shared_control_terminal.iff		-4905.68	66.00	-3106.47	-90	cor_world	0	256	1	Control Terminal
-385	TALUS	object/tangible/gcw/static_base/shared_control_terminal.iff		15.33	-11.50	-22.02	0	tal_gcw_base_bunker	10	256	1	Control Terminal
+1	TATOOINE	object/building/poi/shared_anywhere_imperial_base_large_1.iff		989.83	12.59	2514.29	0	tat_world	0	256	1	
+2	TATOOINE	object/building/poi/shared_anywhere_imperial_base_small_1.iff		-855.74	7.17	-3316.04	0	tat_world	0	256	1	
+3	TATOOINE	object/building/poi/shared_anywhere_misc_camp_small_1.iff		16.15	9.07	-5076.65	0	tat_world	0	256	1	
+4	CORELLIA	object/building/poi/shared_corellia_afarathu_large1.iff		-5961.01	39.73	-2378.01	0	cor_world	0	256	1	
+5	CORELLIA	object/building/poi/shared_corellia_afarathu_large2.iff		-6156.29	36.46	-2832.06	0	cor_world	0	256	1	
+6	CORELLIA	object/building/poi/shared_corellia_afarathu_medium2.iff		-4405.53	13.39	-2081.47	0	cor_world	0	256	1	
+7	CORELLIA	object/building/poi/shared_corellia_swoop_large1.iff		-6028.87	12.97	-3251.97	0	cor_world	0	256	1	
+8	DATHOMIR	object/building/poi/shared_dathomir_freedprisonercamp_small2.iff		-1128.95	108.65	6326.92	0	dat_world	0	256	1	
+9	ENDOR	object/building/poi/shared_endor_marauder_medium2.iff		672.00	207.70	4956.11	0	end_world	0	256	1	
+10	ENDOR	object/building/poi/shared_endor_marauder_small4.iff		-6883.53	13.71	632.43	0	end_world	0	256	1	
+11	LOK	object/building/poi/shared_lok_nymshenchman_medium4.iff		3518.54	6.74	2082.32	0	lok_world	0	512	1	
+12	LOK	object/building/poi/shared_lok_nymshenchman_small3.iff		-1975.76	11.81	-3377.64	0	lok_world	0	512	1	
+13	LOK	object/building/poi/shared_lok_nymshenchman_small3.iff		6023.68	11.93	5164.33	0	lok_world	0	512	1	
+14	RORI	object/building/poi/shared_lok_nymshenchman_small3.iff		-4809.91	76.49	-2286.07	0	ror_world	0	256	1	
+15	LOK	object/building/poi/shared_lok_nymshenchman_small4.iff		-3907.09	12.10	-3923.44	0	lok_world	0	512	1	
+16	RORI	object/building/poi/shared_lok_nymshenchman_small4.iff		-5203.27	76.54	5080.74	0	ror_world	0	256	1	
+17	RORI	object/building/poi/shared_lok_nymshenchman_small4.iff		2896.18	107.38	-1277.09	0	ror_world	0	256	1	
+18	NABOO	object/building/poi/shared_naboo_borvos_large1.iff		5233.69	-195.53	6346.93	0	nab_world	0	256	1	
+19	NABOO	object/building/poi/shared_naboo_borvos_medium.iff		5719.21	-192.90	6600.43	0	nab_world	0	256	1	
+20	NABOO	object/building/poi/shared_naboo_gunrunners_small2.iff		5327.28	186.36	-1102.78	0	nab_world	0	256	1	
+21	NABOO	object/building/poi/shared_naboo_gunrunners_small2.iff		5012.48	90.84	-940.61	0	nab_world	0	256	1	
+22	NABOO	object/building/poi/shared_naboo_mauler_large1.iff		2540.89	18.47	1901.71	0	nab_world	0	256	1	
+23	NABOO	object/building/poi/shared_naboo_mauler_large2.iff		2498.90	13.97	2276.62	0	nab_world	0	256	1	
+24	NABOO	object/building/poi/shared_naboo_mauler_medium.iff		2268.97	12.24	1908.58	0	nab_world	0	256	1	
+25	TATOOINE	object/building/poi/shared_scout_camp_s2.iff		-57.07	9.66	-5576.74	0	tat_world	0	256	1	
+26	TATOOINE	object/building/poi/shared_tatooine_dunestalkers_medium.iff		2958.45	8.07	-4592.56	0	tat_world	0	256	1	
+27	TATOOINE	object/building/poi/shared_tatooine_fugitive_camp_medium.iff		-5019.69	39.84	-6122.07	0	tat_world	0	256	1	
+28	TATOOINE	object/building/poi/shared_tatooine_hutt_assassin_camp_medium1.iff		-5147.69	79.77	-6964.29	0	tat_world	0	256	1	
+29	TATOOINE	object/building/poi/shared_tatooine_hutt_assassin_camp_medium1.iff		739.91	31.63	3076.32	0	tat_world	0	256	1	
+30	TATOOINE	object/building/poi/shared_tatooine_hutt_businessmen_camp_small1.iff		-3393.11	7.43	2470.71	0	tat_world	0	256	1	
+31	TATOOINE	object/building/poi/shared_tatooine_hutt_businessmen_camp_small2.iff		-5937.69	58.73	-6030.06	0	tat_world	0	256	1	
+32	TATOOINE	object/building/poi/shared_tatooine_jawa_tradesmen_camp_medium1.iff		-3513.26	13.99	2060.90	0	tat_world	0	256	1	
+33	TATOOINE	object/building/poi/shared_tatooine_tuskenwar_medium.iff		4287.56	9.28	-4739.69	0	tat_world	0	256	1	
+34	TATOOINE	object/building/poi/shared_tatooine_tuskenwar_medium.iff		4251.40	8.75	2488.28	0	tat_world	0	256	1	
+35	CORELLIA	object/mobile/shared_distant_ship_controller.iff		-75	28	-4723	0	cor_world	0	1024	1	Coronet Starport
+36	CORELLIA	object/mobile/shared_distant_ship_controller.iff		-4998	21	-2246	0	cor_world	0	1024	1	Tyrena Starport
+37	CORELLIA	object/mobile/shared_distant_ship_controller.iff		-3141	31	2864	0	cor_world	0	1024	1	Kor Vella Starport
+38	CORELLIA	object/mobile/shared_distant_ship_controller.iff		3358	308	5581	0	cor_world	0	1024	1	Doaba Guerfel Starport
+39	DANTOOINE	object/mobile/shared_distant_ship_controller.iff		-636	3	2505	0	dan_world	0	512	1	Mining Outpost
+40	DANTOOINE	object/mobile/shared_distant_ship_controller.iff		-4208	3	-2350	0	dan_world	0	512	1	Imperial Outpost
+41	DANTOOINE	object/mobile/shared_distant_ship_controller.iff		1569	4	-6415	0	dan_world	0	512	1	Agro Outpost
+42	DATHOMIR	object/mobile/shared_distant_ship_controller.iff		-49	18	-1584	0	dat_world	0	512	1	Science Outpost
+43	DATHOMIR	object/mobile/shared_distant_ship_controller.iff		618	6	3092	0	dat_world	0	512	1	Trade Outpost
+44	ENDOR	object/mobile/shared_distant_ship_controller.iff		-950	73	1553	0	end_world	0	512	1	Smuggler Outpost
+45	ENDOR	object/mobile/shared_distant_ship_controller.iff		3201	24	-3500	0	end_world	0	512	1	Research Outpost
+46	KASHYYYK_MAIN	object/mobile/shared_distant_ship_controller.iff		-689	21	-170	0	kas_main_world	0	256	1	Kachirho Starport
+47	LOK	object/mobile/shared_distant_ship_controller.iff		479	8	5511	0	lok_world	0	512	1	Nym's Stronghold
+48	MUSTAFAR	object/mobile/shared_distant_ship_controller.iff		407	230	-1355	0	mus_world	0	512	1	Mensix Mining Facility
+49	NABOO	object/mobile/shared_distant_ship_controller.iff		5295	-192	6675	0	nab_world	0	1024	1	Kaadara Starport
+50	NABOO	object/mobile/shared_distant_ship_controller.iff		1377	13	2760	0	nab_world	0	1024	1	Keren Starport
+51	NABOO	object/mobile/shared_distant_ship_controller.iff		4745	0	-4672	0	nab_world	0	1024	1	Moenia Starport
+52	NABOO	object/mobile/shared_distant_ship_controller.iff		-4866	6	4155	0	nab_world	0	1024	1	Theed Spaceport
+53	RORI	object/mobile/shared_distant_ship_controller.iff		-5359	80	-2188	0	ror_world	0	1024	1	Narmle Starport
+54	RORI	object/mobile/shared_distant_ship_controller.iff		3693	96	-6403	0	ror_world	0	512	1	Rebel Outpost
+55	RORI	object/mobile/shared_distant_ship_controller.iff		5301	80	6190	0	ror_world	0	512	1	Restuss Starport
+56	TALUS	object/mobile/shared_distant_ship_controller.iff		274	6	-2933	0	tal_world	0	1024	1	Dearic Starport
+57	TALUS	object/mobile/shared_distant_ship_controller.iff		4461	2	5342	0	tal_world	0	1024	1	Nashal Starport
+58	TALUS	object/mobile/shared_distant_ship_controller.iff		-2227	20	2322	0	tal_world	0	512	1	Imperial Outpost
+59	TATOOINE	object/mobile/shared_distant_ship_controller.iff		-1350	12	-3586	0	tat_world	0	1024	1	Bestine Starport
+60	TATOOINE	object/mobile/shared_distant_ship_controller.iff		3592	5	-4793	0	tat_world	0	1024	1	Mos Eisley Starport
+61	TATOOINE	object/mobile/shared_distant_ship_controller.iff		-2844	5	2097	0	tat_world	0	1024	1	Mos Espa Starport
+62	TATOOINE	object/mobile/shared_distant_ship_controller.iff		1257	7	3079	0	tat_world	0	1024	1	Mos Entha Starport
+63	YAVIN4	object/mobile/shared_distant_ship_controller.iff		4054	37	-6216	0	yav_world	0	512	1	Imperial Base
+64	YAVIN4	object/mobile/shared_distant_ship_controller.iff		-6922	73	-5727	0	yav_world	0	512	1	Labor Outpost
+65	YAVIN4	object/mobile/shared_distant_ship_controller.iff		-267	35	4896	0	yav_world	0	512	1	Mining Outpost
+66	YAVIN4	object/static/destructible/shared_destructible_cave_wall_damprock.iff		-102.00	-31.40	-368.00	0	yav_geonosian_cave	38	128	1	
+67	YAVIN4	object/static/destructible/shared_destructible_tato_cave_rock_lg.iff		-78.37	-22.06	-111.87	180	yav_geonosian_cave	13	128	1	
+68	YAVIN4	object/static/destructible/shared_destructible_tato_cave_rock_lg.iff		-78.33	-21.56	-110.49	90	yav_geonosian_cave	13	128	1	
+69	YAVIN4	object/static/destructible/shared_destructible_tato_cave_rock_lg.iff		-78.18	-21.75	-109.46	55	yav_geonosian_cave	13	128	1	
+70	YAVIN4	object/static/destructible/shared_destructible_tato_cave_rock_lg.iff		-38.74	-21.96	-99.17	155	yav_geonosian_cave	15	128	1	
+71	YAVIN4	object/static/destructible/shared_destructible_tato_cave_rock_lg.iff		-39.68	-22.20	-97.65	186	yav_geonosian_cave	15	128	1	
+72	YAVIN4	object/static/destructible/shared_destructible_tato_cave_rock_lg.iff		-111.00	-33.73	-228.31	0	yav_geonosian_cave	29	128	1	
+73	YAVIN4	object/static/destructible/shared_destructible_tato_cave_rock_lg.iff		-109.50	-33.31	-227.50	115	yav_geonosian_cave	29	128	1	
+74	YAVIN4	object/static/destructible/shared_destructible_tato_cave_rock_lg.iff		-113.00	-33.42	-229.20	48	yav_geonosian_cave	29	128	1	
+75	YAVIN4	object/static/destructible/shared_destructible_tato_cave_rock_med.iff		-76.57	-21.92	-112.14	64	yav_geonosian_cave	13	128	1	
+76	YAVIN4	object/static/destructible/shared_destructible_tato_cave_rock_med.iff		-76.61	-21.96	-111.16	16	yav_geonosian_cave	13	128	1	
+77	YAVIN4	object/static/destructible/shared_destructible_tato_cave_rock_med.iff		-76.86	-22.03	-110.16	3	yav_geonosian_cave	13	128	1	
+78	YAVIN4	object/static/destructible/shared_destructible_tato_cave_rock_med.iff		-76.90	-22.06	-109.21	22	yav_geonosian_cave	13	128	1	
+79	YAVIN4	object/static/destructible/shared_destructible_tato_cave_rock_med.iff		-38.42	-22.23	-96.50	64	yav_geonosian_cave	15	128	1	
+80	YAVIN4	object/static/destructible/shared_destructible_tato_cave_rock_med.iff		-40.09	-22.18	-99.03	23	yav_geonosian_cave	15	128	1	
+81	YAVIN4	object/static/destructible/shared_destructible_tato_cave_rock_med.iff		-39.74	-22.23	-99.99	3	yav_geonosian_cave	15	128	1	
+82	YAVIN4	object/static/destructible/shared_destructible_tato_crate1.iff		-22.16	-22.00	-132.00	0	yav_geonosian_cave	21	128	1	
+83	YAVIN4	object/static/destructible/shared_destructible_tato_crate1.iff		-22.14	-22.00	-133.00	0	yav_geonosian_cave	21	128	1	
+84	YAVIN4	object/static/destructible/shared_destructible_tato_drum_dented.iff		37.80	-34.00	-333.50	0	yav_geonosian_cave	42	128	1	
+85	YAVIN4	object/static/destructible/shared_destructible_tato_drum_dented.iff		37.29	-34.00	-334.50	90	yav_geonosian_cave	42	128	1	
+86	YAVIN4	object/static/destructible/shared_destructible_tato_drum_dented.iff		37.29	-34.00	-335.56	180	yav_geonosian_cave	42	128	1	
+87	YAVIN4	object/static/destructible/shared_destructible_tato_drum_dented.iff		-23.43	-22.00	-133.02	0	yav_geonosian_cave	21	128	1	
+88	YAVIN4	object/static/destructible/shared_destructible_tato_drum_dented.iff		-23.17	-22.00	-131.00	0	yav_geonosian_cave	21	128	1	
+89	YAVIN4	object/static/destructible/shared_destructible_tato_drum_storage1.iff		32.11	-24.00	-335.58	0	yav_geonosian_cave	42	128	1	
+90	YAVIN4	object/static/destructible/shared_destructible_tato_drum_storage1.iff		32.85	-24.00	-335.12	0	yav_geonosian_cave	42	128	1	
+91	YAVIN4	object/static/destructible/shared_destructible_tato_drum_storage1.iff		33.84	-24.00	-334.96	0	yav_geonosian_cave	42	128	1	
+92	YAVIN4	object/static/destructible/shared_destructible_tato_drum_storage1.iff		34.54	-24.00	-335.47	0	yav_geonosian_cave	42	128	1	
+93	YAVIN4	object/static/destructible/shared_destructible_tato_drum_storage1.iff		35.57	-24.00	-335.06	0	yav_geonosian_cave	42	128	1	
+94	YAVIN4	object/static/destructible/shared_destructible_tato_drum_storage1.iff		35.18	-24.00	-334.29	0	yav_geonosian_cave	42	128	1	
+95	YAVIN4	object/static/destructible/shared_destructible_tato_drum_storage1.iff		-23.16	-22.00	-132.02	0	yav_geonosian_cave	21	128	1	
+96	YAVIN4	object/static/destructible/shared_destructible_tato_drum_storage1.iff		-21.92	-22.00	-130.98	0	yav_geonosian_cave	21	128	1	
+97	NABOO	object/static/item/shared_item_container_weapons.iff		-10.60	6.10	-10.30	90	nab_deeja_house2	5	128	1	
+98	NABOO	object/static/item/shared_item_container_weapons.iff		-10.60	6.10	-8.80	90	nab_deeja_house2	5	128	1	
+99	NABOO	object/static/item/shared_item_container_weapons.iff		-10.60	6.10	-7.30	90	nab_deeja_house2	5	128	1	
+100	NABOO	object/static/item/shared_item_container_weapons.iff		-10.60	6.10	-5.80	90	nab_deeja_house2	5	128	1	
+101	NABOO	object/static/item/shared_item_container_weapons.iff		-10.60	6.10	-4.30	90	nab_deeja_house2	5	128	1	
+102	DATHOMIR	object/static/terrain/corellia/shared_rock_crystl_shrpbush_med.iff		-11.54	-64.63	-202.20	0	dat_ns_rancor_cave	6	128	1	
+103	DATHOMIR	object/tangible/buildout/shared_buildout_placeholder_ring.iff		-4096.00	-195.00	6144.00	0	dat_world	0	8	1	
+104	DATHOMIR	object/tangible/buildout/shared_buildout_placeholder_ring.iff		-2048.00	-195.00	4096.00	0	dat_world	0	8	1	
+105	DATHOMIR	object/tangible/buildout/shared_buildout_placeholder_ring.iff		-2048.00	-195.00	6144.00	0	dat_world	0	8	1	
+106	TATOOINE	object/tangible/collection/shared_col_jalopy_crate_01.iff		-11.90	0.60	50.80	55	tat_bestine_starport	4	128	1	
+107	TATOOINE	object/tangible/collection/shared_col_jalopy_crate_02.iff		-11.90	0.60	50.80	55	tat_moseisley_starport	4	128	1	
+108	NABOO	object/tangible/collection/shared_col_jalopy_crate_03.iff		-11.90	0.60	50.80	55	nab_kaadara_starport	4	128	1	
+109	CORELLIA	object/tangible/collection/shared_col_jalopy_crate_04.iff		-11.90	0.60	50.80	55	cor_coronet_starport	4	128	1	
+110	TATOOINE	object/tangible/collection/shared_col_jalopy_crate_05.iff		-11.90	0.60	50.80	55	tat_mosespa_starport	4	128	1	
+111	TALUS	object/tangible/collection/shared_col_jalopy_crate_06.iff		-11.90	0.60	50.80	55	tal_dearic_starport	4	128	1	
+112	TALUS	object/tangible/collection/shared_col_jalopy_crate_07.iff		-11.90	0.60	50.80	55	tal_nashal_starport	4	128	1	
+113	NABOO	object/tangible/collection/shared_col_jalopy_crate_08.iff		49.10	8.00	-21.40	-160	nab_theed_hangar	5	128	1	
+114	TATOOINE	object/tangible/collection/shared_col_stage_controller_01.iff		-17.30	7.00	-4.30	143	tat_moseisley_lucky_despot	2	128	1	
+115	TATOOINE	object/tangible/collection/shared_col_stage_controller_02.iff		27.70	-0.30	-2.90	0	tat_moseisley_lucky_despot	27	128	1	
+116	TATOOINE	object/tangible/collection/shared_col_stage_controller_03.iff		-11.60	-0.25	-13.39	0	tat_moseisley_lucky_despot	12	128	1	
+117	YAVIN4	object/tangible/collection/shared_hanging_light_08.iff		28.45	-30.72	-74.72	0	yav_geonosian_cave	18	128	1	
+118	LOK	object/tangible/collection/shared_ore_collectible.iff		-10.80	-30.70	-26.60	-80	lok_imperial_gas_mine	2	128	1	
+119	LOK	object/tangible/collection/shared_ore_collectible.iff		50.50	-45.60	-100.70	176	lok_imperial_gas_mine	4	128	1	
+120	LOK	object/tangible/collection/shared_ore_collectible.iff		-21.90	-65.10	-211.70	-82	lok_imperial_gas_mine	7	128	1	
+121	LOK	object/tangible/collection/shared_ore_collectible.iff		-99.50	-69.40	-91.80	-13	lok_imperial_gas_mine	8	128	1	
+122	LOK	object/tangible/collection/shared_ore_collectible.iff		-82.80	-98.90	-155.00	-25	lok_imperial_gas_mine	8	128	1	
+123	LOK	object/tangible/collection/shared_ore_collectible.iff		-23.60	-62.80	-261.10	-125	lok_imperial_gas_mine	7	128	1	
+124	LOK	object/tangible/collection/shared_ore_collectible.iff		72.80	-58.90	-166.30	74	lok_imperial_gas_mine	5	128	1	
+125	LOK	object/tangible/collection/shared_ore_collectible.iff		54.10	-46.20	-62.60	72	lok_imperial_gas_mine	4	128	1	
+126	LOK	object/tangible/collection/shared_ore_collectible.iff		-1.30	-64.10	-238.00	172	lok_imperial_gas_mine	7	128	1	
+127	LOK	object/tangible/collection/shared_ore_collectible.iff		-84.40	-99.80	-92.20	-1	lok_imperial_gas_mine	11	128	1	
+128	TATOOINE	object/tangible/collection/shared_rare_pistol_white_thranta.iff		-2.88	7.79	-8.04	75	tat_moseisley_lucky_despot	2	128	1	
+129	NABOO	object/tangible/container/drum/shared_large_plain_crate_s01.iff		29.71	-36.00	172.03	-179	nab_borvos_vault	40	128	1	
+130	NABOO	object/tangible/container/drum/shared_large_plain_crate_s01.iff		54.52	-36.00	182.33	-91	nab_borvos_vault	21	128	1	
+131	NABOO	object/tangible/container/drum/shared_large_plain_crate_s02.iff		18.55	-36.00	200.98	178	nab_borvos_vault	18	128	1	
+132	NABOO	object/tangible/container/drum/shared_large_plain_crate_s03.iff		11.82	-36.00	189.18	-177	nab_borvos_vault	18	128	1	
+133	NABOO	object/tangible/container/drum/shared_large_plain_crate_s03.iff		-17.39	-36.00	241.06	-12	nab_borvos_vault	15	128	1	
+134	NABOO	object/tangible/container/drum/shared_large_plain_crate_s04.iff		44.90	-36.00	127.12	86	nab_borvos_vault	6	128	1	
+135	NABOO	object/tangible/container/drum/shared_large_plain_crate_s04.iff		-52.71	-36.00	50.18	179	nab_borvos_vault	11	128	1	
+136	ENDOR	object/tangible/container/general/shared_tech_bookcase.iff		48.07	-32.00	-47.80	0	end_dwb	27	128	1	
+137	ENDOR	object/tangible/container/general/shared_tech_chest.iff		-3.14	-12.00	36.50	180	end_dwb	4	128	1	
+138	LOK	object/tangible/container/loot/shared_astromech_container.iff		-65.32	-65.98	-177.78	0	lok_evil_droid_eng_cave	28	128	1	
+139	LOK	object/tangible/container/loot/shared_computer_container.iff		-60.60	-20.00	48.26	270	lok_ntp_mercenary_bunker	7	128	1	
+140	LOK	object/tangible/container/loot/shared_gas_filter_container.iff		-87.81	-99.42	-88.93	-90	lok_imperial_gas_mine	11	128	1	
+141	YAVIN4	object/tangible/container/loot/shared_placable_loot_crate_tech_armoire.iff		-53.22	-18.00	-36.59	0	yav_geonosian_cave	5	128	1	
+142	YAVIN4	object/tangible/container/loot/shared_placable_loot_crate_tech_armoire.iff		-44.54	-18.00	-42.97	-90	yav_geonosian_cave	5	128	1	
+143	YAVIN4	object/tangible/container/loot/shared_placable_loot_crate_tech_armoire.iff		-42.98	-18.00	-55.70	0	yav_geonosian_cave	5	128	1	
+144	YAVIN4	object/tangible/container/loot/shared_placable_loot_crate_tech_armoire.iff		-74.80	-22.00	-152.40	180	yav_geonosian_cave	25	128	1	
+145	YAVIN4	object/tangible/container/loot/shared_placable_loot_crate_tech_armoire.iff		-70.15	-34.00	-262.50	180	yav_geonosian_cave	32	128	1	
+146	YAVIN4	object/tangible/container/loot/shared_placable_loot_crate_tech_armoire.iff		-140.10	-34.00	-201.50	0	yav_geonosian_cave	35	128	1	
+147	RORI	object/tangible/content/shared_u13_ponda_gungan_statue_spawer.iff		-5360.00	80.04	-2291.00	0	ror_world	0	256	0	
+148	CORELLIA	object/tangible/datapad/shared_data_dropoff.iff		-4.16	0.62	-4.08	0	cor_meatlump_hideout_main	3	128	0	
+149	NABOO	object/tangible/datapad/shared_droid_datapad_1.iff		-6590.93	-209.78	5982.81	0	nab_world	0	256	1	
+150	NABOO	object/tangible/datapad/shared_droid_datapad_6.iff		-6586.38	-209.86	5984.31	0	nab_world	0	256	1	
+151	DATHOMIR	object/tangible/door/shared_heroic_axkva_min_door.iff		-91.04	-101.00	-102.71	180	dat_ns_rancor_cave	11	128	1	
+152	ENDOR	object/tangible/dungeon/death_watch_bunker/shared_coal_bin_container.iff		-2.39	-32.00	-27.80	90	end_dwb	21	128	0	
+153	ENDOR	object/tangible/dungeon/death_watch_bunker/shared_coal_bin_container.iff		4.29	-32.00	-102.30	90	end_dwb	23	128	0	
+154	ENDOR	object/tangible/dungeon/death_watch_bunker/shared_door_control_terminal.iff		-151.00	-60.00	-99.00	180	end_dwb	51	128	1	
+155	ENDOR	object/tangible/dungeon/death_watch_bunker/shared_door_control_terminal.iff		-230.00	-60.00	-124.00	90	end_dwb	53	128	1	
+156	ENDOR	object/tangible/dungeon/death_watch_bunker/shared_door_control_terminal.iff		-232.00	-60.00	-220.00	90	end_dwb	59	128	1	
+157	ENDOR	object/tangible/dungeon/death_watch_bunker/shared_door_control_terminal.iff		-84.50	-20.00	-50.50	-90	end_dwb	9	128	1	
+158	ENDOR	object/tangible/dungeon/death_watch_bunker/shared_door_control_terminal.iff		-8.40	-32.00	-95.40	-89	end_dwb	17	128	1	
+159	ENDOR	object/tangible/dungeon/death_watch_bunker/shared_door_control_terminal.iff		25.90	-64.00	-95.40	-179	end_dwb	33	128	1	
+160	ENDOR	object/tangible/dungeon/death_watch_bunker/shared_door_control_terminal.iff		-17.70	-12.00	-8.50	0	end_dwb	1	128	1	
+161	ENDOR	object/tangible/dungeon/death_watch_bunker/shared_filter_dispenser.iff		-13.66	-52.00	-147.70	180	end_dwb	64	128	1	
+162	ENDOR	object/tangible/dungeon/death_watch_bunker/shared_invulnerable_debris.iff		112.90	-64.00	-113.89	178	end_dwb	34	128	1	
+163	ENDOR	object/tangible/dungeon/death_watch_bunker/shared_invulnerable_debris.iff		113.40	-64.00	-151.93	-179	end_dwb	34	128	1	
+164	ENDOR	object/tangible/dungeon/death_watch_bunker/shared_workbench.iff		-15.78	-52.00	-147.50	180	end_dwb	64	128	1	
+165	ENDOR	object/tangible/dungeon/shared_terminal_free_s1.iff		74.50	-54.00	-143.00	-87	end_dwb	34	128	1	
+166	YAVIN4	object/tangible/dungeon/shared_trash_container.iff		-131.62	-22.21	-70.85	0	yav_geonosian_cave	14	128	1	
+167	ENDOR	object/tangible/furniture/all/shared_frn_all_light_lamp_death_watch.iff		59.90	0.00	-86.00	0	end_dwb	26	128	0	
+168	ENDOR	object/tangible/furniture/all/shared_frn_all_light_lamp_death_watch.iff		49.00	0.00	-78.70	0	end_dwb	26	128	0	
+169	ENDOR	object/tangible/furniture/all/shared_frn_all_light_lamp_death_watch.iff		56.10	0.00	-68.00	0	end_dwb	26	128	0	
+170	ENDOR	object/tangible/furniture/all/shared_frn_all_light_lamp_death_watch.iff		67.00	0.00	-75.40	0	end_dwb	26	128	0	
+171	TATOOINE	object/tangible/furniture/house_cleanup/shared_xeno_couch.iff		-2.00	0.00	8.00	-1	tat_moseisley_lucky_despot	15	128	1	
+172	TATOOINE	object/tangible/furniture/house_cleanup/shared_xeno_desk_lamp.iff		1.62	0.80	8.54	-1	tat_moseisley_lucky_despot	15	128	1	
+173	TATOOINE	object/tangible/furniture/house_cleanup/shared_xeno_desk.iff		1.29	0.00	9.07	-90	tat_moseisley_lucky_despot	15	128	1	
+174	TATOOINE	object/tangible/furniture/house_cleanup/shared_xeno_rug.iff		-1.30	0.01	10.69	-1	tat_moseisley_lucky_despot	15	128	1	
+175	TATOOINE	object/tangible/furniture/house_cleanup/shared_xeno_table.iff		-1.70	0.00	12.40	0	tat_moseisley_lucky_despot	15	128	1	
+176	TATOOINE	object/tangible/furniture/house_cleanup/shared_xeno_throne.iff		-1.40	0.00	11.35	-1	tat_moseisley_lucky_despot	15	128	1	
+177	TATOOINE	object/tangible/furniture/house_cleanup/shared_xeno_throne.iff		-0.17	0.00	9.17	90	tat_moseisley_lucky_despot	15	128	1	
+178	TATOOINE	object/tangible/furniture/modern/shared_sofa_chair_modern_style_01.iff		28.80	6.90	5.60	124	tat_moseisley_lucky_despot	9	128	1	
+179	TATOOINE	object/tangible/furniture/modern/shared_sofa_chair_modern_style_01.iff		30.30	7.00	3.00	0	tat_moseisley_lucky_despot	9	128	1	
+180	LOK	object/tangible/furniture/nym_themepark/collection/shared_armoire_s01.iff		-12.00	-43.70	-100.30	-138	lok_evil_droid_eng_cave	22	128	1	
+181	LOK	object/tangible/furniture/nym_themepark/collection/shared_frn_all_data_terminal_free_s2.iff		0.10	-22.00	-19.80	0	lok_evil_droid_eng_cave	1	128	1	
+182	LOK	object/tangible/furniture/nym_themepark/collection/shared_frn_all_lamp_free_s04.iff		-61.40	-46.40	-52.00	-40	lok_evil_droid_eng_cave	5	128	1	
+183	LOK	object/tangible/furniture/nym_themepark/collection/shared_frn_all_meatlump_grill_s02.iff		-176.50	-49.50	-60.50	54	lok_evil_droid_eng_cave	10	128	1	
+184	LOK	object/tangible/furniture/nym_themepark/collection/shared_frn_all_plant_potted_lg_s1.iff		-31.60	-29.20	-27.20	23	lok_evil_droid_eng_cave	2	128	1	
+185	LOK	object/tangible/furniture/nym_themepark/collection/shared_frn_all_plant_potted_lg_s2.iff		-50.60	-29.50	-38.10	67	lok_evil_droid_eng_cave	3	128	1	
+186	LOK	object/tangible/furniture/nym_themepark/collection/shared_frn_all_plant_potted_lg_s3.iff		-98.60	-39.40	-86.00	-97	lok_evil_droid_eng_cave	11	128	1	
+187	LOK	object/tangible/furniture/nym_themepark/collection/shared_frn_all_plant_potted_lg_s4.iff		-111.80	-57.20	-37.70	38	lok_evil_droid_eng_cave	16	128	1	
+188	LOK	object/tangible/furniture/nym_themepark/collection/shared_table_work_bench.iff		-101.10	-55.20	-80.90	90	lok_evil_droid_eng_cave	11	128	1	
+189	CORELLIA	object/tangible/gcw/shared_pvp_region_watcher.iff		4772.29	95.00	-5233.67	0	cor_world	0	8	0	
+190	CORELLIA	object/tangible/gcw/static_base/shared_control_terminal.iff		4801.50	95.00	-5207.00	-45	cor_world	0	256	1	Control Terminal
+191	CORELLIA	object/tangible/gcw/static_base/shared_control_terminal.iff		4816.02	95.00	-5231.13	90	cor_world	0	256	1	Control Terminal
+192	CORELLIA	object/tangible/gcw/static_base/shared_control_terminal.iff		4736.00	95.00	-5259.90	55	cor_world	0	256	1	Control Terminal
+193	CORELLIA	object/tangible/gcw/static_base/shared_control_terminal.iff		-2.40	-13.80	-18.00	0	cor_gcw_base_warehouse	9	256	1	Control Terminal
+194	NABOO	object/tangible/gcw/static_base/shared_control_terminal.iff		996.70	298.00	-1521.08	-90	nab_world	0	256	1	Control Terminal
+195	NABOO	object/tangible/gcw/static_base/shared_control_terminal.iff		962.12	298.00	-1497.05	-180	nab_world	0	256	1	Control Terminal
+196	NABOO	object/tangible/gcw/static_base/shared_control_terminal.iff		60.00	-12.00	59.02	-90	nab_gcw_base	9	256	1	Control Terminal
+197	NABOO	object/tangible/gcw/static_base/shared_control_terminal.iff		54.08	-20.00	158.71	-180	nab_gcw_base	21	256	1	Control Terminal
+198	TALUS	object/tangible/gcw/static_base/shared_control_terminal.iff		-4948.06	66.00	-3149.07	-92	cor_world	0	256	1	Control Terminal
+199	TALUS	object/tangible/gcw/static_base/shared_control_terminal.iff		-4957.30	66.00	-3104.74	-90	cor_world	0	256	1	Control Terminal
+200	TALUS	object/tangible/gcw/static_base/shared_control_terminal.iff		-4905.68	66.00	-3106.47	-90	cor_world	0	256	1	Control Terminal
+201	TALUS	object/tangible/gcw/static_base/shared_control_terminal.iff		15.33	-11.50	-22.02	0	tal_gcw_base_bunker	10	256	1	Control Terminal
+202	CORELLIA	object/tangible/gcw/static_base/shared_invisible_beacon.iff		4242.38	257.00	-4950.64	0	cor_world	0	0	1	Shuttleport: GCW Imp Base Corellia
+203	CORELLIA	object/tangible/gcw/static_base/shared_invisible_beacon.iff		5285.50	27.00	-5624.02	0	cor_world	0	0	1	Shuttleport: GCW Reb Base Corellia
+204	NABOO	object/tangible/gcw/static_base/shared_invisible_beacon.iff		1504.75	303.00	-1556.86	0	nab_world	0	8	1	Shuttleport: GCW Imp Base Naboo
+205	NABOO	object/tangible/gcw/static_base/shared_invisible_beacon.iff		536.58	343.00	-1447.10	0	nab_world	0	8	1	Shuttleport: GCW Reb Base Naboo
+206	TALUS	object/tangible/gcw/static_base/shared_invisible_beacon.iff		-4789.65	86.00	-2693.70	0	tal_world	0	8	1	Shuttleport: GCW Imp Base Talus
+207	TALUS	object/tangible/gcw/static_base/shared_invisible_beacon.iff		-5112.69	50.00	-3487.39	0	tal_world	0	8	1	Shuttleport: GCW Reb Base Talus
+208	CORELLIA	object/tangible/gcw/static_base/shared_invisible_cloner_imperial.iff		4251.60	257.00	-4945.99	0	cor_world	0	0	1	Cloning Facility
+209	NABOO	object/tangible/gcw/static_base/shared_invisible_cloner_imperial.iff		1512.79	303.00	-1552.96	0	nab_world	0	8	1	Cloning Facility
+210	TALUS	object/tangible/gcw/static_base/shared_invisible_cloner_imperial.iff		-4800.45	86.00	-2681.79	0	tal_world	0	8	1	Cloning Facility
+211	CORELLIA	object/tangible/gcw/static_base/shared_invisible_cloner_rebel.iff		5291.34	27.00	-5618.70	0	cor_world	0	0	1	Cloning Facility
+212	NABOO	object/tangible/gcw/static_base/shared_invisible_cloner_rebel.iff		528.61	343.00	-1455.53	0	nab_world	0	8	1	Cloning Facility
+213	TALUS	object/tangible/gcw/static_base/shared_invisible_cloner_rebel.iff		-5112.27	50.00	-3496.33	0	tal_world	0	8	1	Cloning Facility
+214	TATOOINE	object/tangible/instrument/shared_organ_max_rebo.iff		-11.00	2.00	36.00	0	tat_jabbas_palace	22	64	1	
+215	ENDOR	object/tangible/newbie_tutorial/shared_debris.iff		66.44	-64.00	-114.48	-177	end_dwb	34	128	1	
+216	TATOOINE	object/tangible/painting/shared_painting_house_cleanup_imperial.iff		-2.73	1.17	7.01	0	tat_moseisley_lucky_despot	15	128	1	
+217	TATOOINE	object/tangible/painting/shared_painting_house_cleanup_rebel.iff		-4.21	1.17	7.01	0	tat_moseisley_lucky_despot	15	128	1	
+218	RORI	object/tangible/planet_map_location/shared_city.iff		5287.27	80.00	6166.70	0	ror_world	0	8	0	
+219	TATOOINE	object/tangible/poi/tatooine/shared_interior_2_convo.iff		2042.23	0.01	-6131.96	0	tat_moseisley_lucky_despot	15	128	0	
+220	TATOOINE	object/tangible/poi/tatooine/shared_interior_2_convo.iff		2058.99	0.01	-6141.76	0	tat_moseisley_lucky_despot	20	128	0	
+221	TATOOINE	object/tangible/poi/tatooine/shared_interior_2_convo.iff		2062.38	-0.26	-6137.42	0	tat_moseisley_lucky_despot	25	128	0	
+222	TATOOINE	object/tangible/poi/tatooine/shared_interior_3_convo.iff		2027.41	0.01	-6143.59	0	tat_moseisley_lucky_despot	17	128	0	
+223	TATOOINE	object/tangible/poi/tatooine/shared_interior_3_convo.iff		2077.80	-0.26	-6143.04	0	tat_moseisley_lucky_despot	27	128	0	
+224	DATHOMIR	object/tangible/quest/imperial/shared_itp_vader_force_crystal.iff		-25.30	-63.70	-254.70	20	dat_ns_rancor_cave	7	128	1	
+225	DUNGEON1	object/tangible/quest/nova_orion/shared_nova_orion_katiara_grave_node.iff		-27.80	29.00	15.98	0	du1_nova_orion	28	128	1	
+226	DANTOOINE	object/tangible/quest/shared_clone_relics_box_large.iff		9.50	0.60	-4.80	-10	dan_mining_outpost_cantina	4	128	1	
+227	NABOO	object/tangible/quest/shared_clone_relics_box_large.iff		-4.80	-4.90	-8.10	-19	nab_deeja_house2	6	128	1	
+228	TALUS	object/tangible/quest/shared_clone_relics_box_large.iff		-27.20	-0.50	10.50	27	tal_nashal_cantina	13	128	1	
+229	YAVIN4	object/tangible/quest/shared_clone_relics_box_magseal.iff		-39.70	-18.00	-36.90	0	yav_geonosian_cave	5	128	1	
+230	DATHOMIR	object/tangible/quest/shared_clone_relics_skeleton_human.iff		-87.70	-70.00	-115.40	-128	dat_ns_rancor_cave	8	128	1	
+231	TATOOINE	object/tangible/quest/shared_clone_relics_starmap_box.iff		4.20	8.30	-22.10	1	tat_fort_tusken	5	128	1	
+232	NABOO	object/tangible/quest/shared_mauler_stronghold_terminal.iff		8.09	-12.00	54.40	-171	nab_mauler_stronghold	5	128	1	
+233	NABOO	object/tangible/quest/shared_mauler_stronghold_terminal.iff		-3.86	-12.00	51.87	84	nab_mauler_stronghold	5	128	1	
+234	NABOO	object/tangible/quest/shared_mauler_stronghold_terminal.iff		3.59	-16.00	115.25	180	nab_mauler_stronghold	10	128	1	
+235	NABOO	object/tangible/quest/shared_mauler_stronghold_terminal.iff		9.00	-16.00	120.38	91	nab_mauler_stronghold	10	128	1	
+236	NABOO	object/tangible/quest/shared_mauler_stronghold_terminal.iff		27.00	-16.00	121.06	-93	nab_mauler_stronghold	10	128	1	
+237	NABOO	object/tangible/quest/shared_mauler_stronghold_terminal.iff		3.43	-16.00	126.50	-1	nab_mauler_stronghold	10	128	1	
+238	NABOO	object/tangible/quest/shared_mauler_stronghold_terminal.iff		-2.00	-16.00	121.76	-88	nab_mauler_stronghold	10	128	1	
+239	NABOO	object/tangible/quest/shared_mauler_stronghold_terminal.iff		-34.70	-12.00	166.63	88	nab_mauler_stronghold	12	128	1	
+240	NABOO	object/tangible/quest/shared_mauler_stronghold_terminal.iff		-18.30	-12.00	167.43	-90	nab_mauler_stronghold	12	128	1	
+241	NABOO	object/tangible/quest/shared_mauler_stronghold_terminal.iff		-160.26	-44.00	68.80	0	nab_mauler_stronghold	29	128	1	
+242	NABOO	object/tangible/quest/shared_mauler_stronghold_terminal.iff		-144.99	-44.00	68.80	1	nab_mauler_stronghold	29	128	1	
+243	NABOO	object/tangible/quest/shared_mauler_stronghold_terminal.iff		-102.70	-44.00	-17.42	98	nab_mauler_stronghold	32	128	1	
+244	NABOO	object/tangible/quest/shared_mauler_stronghold_terminal.iff		-94.13	-44.00	-25.02	3	nab_mauler_stronghold	32	128	1	
+245	NABOO	object/tangible/quest/shared_mauler_stronghold_terminal.iff		-78.29	-44.00	-24.89	-7	nab_mauler_stronghold	32	128	1	
+246	NABOO	object/tangible/quest/shared_mauler_stronghold_terminal.iff		-62.70	-44.00	-25.20	5	nab_mauler_stronghold	32	128	1	
+247	LOK	object/tangible/quest/shared_nym_grenade_container.iff		-7.00	-20.00	78.40	180	lok_ntp_mercenary_bunker	21	128	1	
+248	NABOO	object/tangible/quest/shared_rsf_computer.iff		38.60	12.00	44.90	0	nab_theed_palace	8	128	1	
+249	TATOOINE	object/tangible/quest/shared_sennex_hq_computer_terminal.iff		-96.90	-28.00	127.20	-179	tat_sennex_camp	17	128	1	
+250	TATOOINE	object/tangible/quest/shared_sennex_hq_computer_terminal.iff		3.59	-16.00	115.25	180	tat_sennex_camp	10	128	1	
+251	TATOOINE	object/tangible/quest/shared_sennex_hq_computer_terminal.iff		9.00	-16.00	120.38	91	tat_sennex_camp	10	128	1	
+252	TATOOINE	object/tangible/quest/shared_sennex_hq_computer_terminal.iff		27.00	-16.00	121.06	-93	tat_sennex_camp	10	128	1	
+253	TATOOINE	object/tangible/quest/shared_sennex_hq_computer_terminal.iff		3.43	-16.00	126.50	-1	tat_sennex_camp	10	128	1	
+254	TATOOINE	object/tangible/quest/shared_sennex_hq_computer_terminal.iff		-20.00	-16.00	121.75	90	tat_sennex_camp	10	128	1	
+255	TATOOINE	object/tangible/quest/shared_sennex_hq_computer_terminal.iff		-2.00	-16.00	121.76	-88	tat_sennex_camp	10	128	1	
+256	TATOOINE	object/tangible/quest/shared_sennex_hq_computer_terminal.iff		8.10	-12.00	54.40	-171	tat_sennex_camp	5	128	1	
+257	TATOOINE	object/tangible/quest/shared_sennex_hq_computer_terminal.iff		-168.70	-44.00	77.20	82	tat_sennex_camp	29	128	1	
+258	TATOOINE	object/tangible/quest/shared_sennex_hq_computer_terminal.iff		-160.26	-44.00	68.80	0	tat_sennex_camp	29	128	1	
+259	TATOOINE	object/tangible/quest/shared_sennex_hq_computer_terminal.iff		-144.99	-44.00	68.80	2	tat_sennex_camp	29	128	1	
+260	TATOOINE	object/tangible/quest/shared_sennex_hq_computer_terminal.iff		-102.70	-44.00	-17.42	98	tat_sennex_camp	32	128	1	
+261	TATOOINE	object/tangible/quest/shared_sennex_hq_computer_terminal.iff		-94.13	-44.00	-25.02	3	tat_sennex_camp	32	128	1	
+262	TATOOINE	object/tangible/quest/shared_sennex_hq_computer_terminal.iff		-78.29	-44.00	-24.89	0	tat_sennex_camp	32	128	1	
+263	TATOOINE	object/tangible/quest/shared_sennex_hq_computer_terminal.iff		-62.70	-44.00	-25.20	6	tat_sennex_camp	32	128	1	
+264	TATOOINE	object/tangible/quest/shared_sennex_hq_computer_terminal.iff		-26.24	-12.00	175.20	179	tat_sennex_camp	12	128	1	
+265	TATOOINE	object/tangible/quest/shared_sennex_hq_computer_terminal.iff		-34.70	-12.00	166.63	88	tat_sennex_camp	12	128	1	
+266	TATOOINE	object/tangible/quest/shared_sennex_hq_computer_terminal.iff		-18.30	-12.00	167.43	-90	tat_sennex_camp	12	128	1	
+267	TATOOINE	object/tangible/quest/shared_sennex_hq_databank.iff		-80.70	-28.00	52.90	0	tat_sennex_camp	26	128	1	
+268	TALUS	object/tangible/quest/shared_talus_grave_robbers_box_magseal.iff		56.00	-0.50	33.70	77	tal_nashal_starport	7	128	1	
+269	NABOO	object/tangible/quest/shared_typho_mauler_weapons_cache.iff		-20.00	-16.00	121.75	90	nab_mauler_stronghold	10	128	1	
+270	NABOO	object/tangible/quest/shared_typho_mauler_weapons_cache.iff		-26.24	-12.00	175.20	179	nab_mauler_stronghold	12	128	1	
+271	NABOO	object/tangible/quest/shared_typho_mauler_weapons_cache.iff		-96.90	-28.00	127.20	-179	nab_mauler_stronghold	17	128	1	
+272	NABOO	object/tangible/quest/shared_typho_mauler_weapons_cache.iff		-168.70	-44.00	77.20	82	nab_mauler_stronghold	29	128	1	
+273	DATHOMIR	object/tangible/quest/township/shared_axkva_nightsister_skull.iff		47.50	-54.50	-155.60	-37	dat_ns_rancor_cave	5	128	1	
+274	DATHOMIR	object/tangible/quest/township/shared_axkva_pedastal.iff		47.50	-58.35	-155.60	-37	dat_ns_rancor_cave	5	128	1	
+275	DATHOMIR	object/tangible/quest/township/shared_rohak_figurine_spawner_02.iff		5382.48	98.24	-4065.40	0	dat_world	0	256	0	
+276	DATHOMIR	object/tangible/quest/township/shared_rohak_figurine_spawner_03.iff		5116.33	78.39	-3957.83	0	dat_world	0	256	0	
+277	DATHOMIR	object/tangible/quest/township/shared_rohak_figurine_spawner_04.iff		5408.06	78.87	-4189.11	0	dat_world	0	256	0	
+278	DATHOMIR	object/tangible/quest/township/shared_rohak_figurine_spawner_05.iff		-3.87	0.56	-0.35	0	dat_aurilia_prisoner_hut1	1	128	0	
+279	DATHOMIR	object/tangible/quest/township/shared_rohak_figurine_spawner_06.iff		9.39	1.75	-2.12	0	dat_aurilia_adv_gh	10	256	0	
+280	DATHOMIR	object/tangible/quest/township/shared_rohak_figurine_spawner.iff		5312.49	78.50	-4159.19	0	dat_world	0	256	0	
+281	ENDOR	object/tangible/space/content_infrastructure/shared_generic_egg_small.iff		-6500.00	-0.92	-7000.00	0	end_world	0	8	1	PvP Battlefield
+282	YAVIN4	object/tangible/space/content_infrastructure/shared_generic_egg_small.iff		1015.00	68.68	425.00	0	yav_world	0	8	0	PvP Battlefield
+283	DATHOMIR	object/tangible/spawning/kashyyyk/shared_rodian_shuttle_spawner.iff		5423.04	83.16	-4125.71	0	dat_world	0	256	0	
+284	CORELLIA	object/tangible/spawning/shared_auto_invasion_spawner.iff		-51.00	28.00	-4734.00	0	cor_world	0	8	0	
+285	ENDOR	object/tangible/spawning/shared_auto_invasion_spawner.iff		-977.00	73.00	1554.00	0	end_world	0	8	0	
+286	NABOO	object/tangible/spawning/shared_city_sign_spawner.iff		5315.68	326.00	-1587.87	0	nab_world	0	0	1	object/tangible/sign/all_sign_city_s03.iff
+287	NABOO	object/tangible/spawning/shared_city_sign_spawner.iff		4729.92	305.63	-1502.67	0	nab_world	0	0	1	object/tangible/sign/all_sign_city_s03.iff
+288	NABOO	object/tangible/spawning/shared_city_sign_spawner.iff		4573.04	323.20	-1299.78	0	nab_world	0	0	1	object/tangible/sign/all_sign_city_s03.iff
+289	TATOOINE	object/tangible/spawning/shared_city_sign_spawner.iff		-5221.67	75.00	-6455.24	0	tat_world	0	0	1	object/tangible/sign/all_sign_city_s01.iff
+290	TATOOINE	object/tangible/spawning/shared_city_sign_spawner.iff		-5307.69	75.00	-6512.92	0	tat_world	0	0	1	object/tangible/sign/all_sign_city_s01.iff
+291	TATOOINE	object/tangible/spawning/shared_city_sign_spawner.iff		-5033.41	75.00	-6618.27	0	tat_world	0	0	1	object/tangible/sign/all_sign_city_s01.iff
+292	TATOOINE	object/tangible/spawning/shared_city_sign_spawner.iff		-5292.10	75.00	-6590.75	0	tat_world	0	0	1	object/tangible/sign/all_sign_city_s01.iff
+293	TATOOINE	object/tangible/spawning/shared_city_sign_spawner.iff		1425.44	7.00	3525.56	0	tat_world	0	0	1	object/tangible/sign/all_sign_city_s03.iff
+294	TATOOINE	object/tangible/spawning/shared_city_sign_spawner.iff		1252.83	7.00	3438.12	0	tat_world	0	0	1	object/tangible/sign/all_sign_city_s03.iff
+295	TATOOINE	object/tangible/spawning/shared_city_sign_spawner.iff		1285.88	7.86	2877.30	0	tat_world	0	0	1	object/tangible/sign/all_sign_city_s03.iff
+296	TATOOINE	object/tangible/spawning/shared_city_sign_spawner.iff		1821.33	7.00	3185.18	0	tat_world	0	0	1	object/tangible/sign/all_sign_city_s03.iff
+297	TATOOINE	object/tangible/spawning/shared_city_sign_spawner.iff		1635.90	6.83	3484.43	0	tat_world	0	0	1	object/tangible/sign/all_sign_city_s03.iff
+298	TATOOINE	object/tangible/spawning/shared_city_sign_spawner.iff		1203.66	7.74	2897.73	0	tat_world	0	0	1	object/tangible/sign/all_sign_city_s03.iff
+299	TATOOINE	object/tangible/spawning/shared_city_sign_spawner.iff		1127.65	7.00	2982.25	0	tat_world	0	0	1	object/tangible/sign/all_sign_city_s03.iff
+300	TATOOINE	object/tangible/spawning/shared_city_sign_spawner.iff		3882.07	9.79	2447.89	0	tat_world	0	8	1	object/tangible/sign/all_sign_city_s01.iff
+301	TATOOINE	object/tangible/spawning/shared_city_sign_spawner.iff		3712.64	5.78	2387.67	0	tat_world	0	8	1	object/tangible/sign/all_sign_city_s01.iff
+302	LOK	object/tangible/terminal/shared_systems_control_terminal.iff		9.50	-12.00	43.80	90	lok_ntp_mercenary_bunker	5	128	1	
+303	LOK	object/tangible/terminal/shared_systems_control_terminal.iff		11.00	-12.00	64.30	-90	lok_ntp_mercenary_bunker	5	128	1	
+304	LOK	object/tangible/terminal/shared_systems_control_terminal.iff		-47.10	-20.00	42.90	-90	lok_ntp_mercenary_bunker	7	128	1	
+305	LOK	object/tangible/terminal/shared_systems_control_terminal.iff		-78.70	-20.00	46.90	90	lok_ntp_mercenary_bunker	7	128	1	
+306	LOK	object/tangible/terminal/shared_systems_control_terminal.iff		3.30	0.30	-5.50	0	lok_ntp_mercenary_bunker	3	128	1	
+307	LOK	object/tangible/terminal/shared_systems_control_terminal.iff		19.10	-12.00	26.40	180	lok_ntp_mercenary_bunker	14	128	1	
+308	LOK	object/tangible/terminal/shared_systems_control_terminal.iff		-9.10	-20.00	-0.30	-90	lok_ntp_mercenary_bunker	16	128	1	
+309	LOK	object/tangible/terminal/shared_systems_control_terminal.iff		-34.50	-20.00	93.60	0	lok_ntp_mercenary_bunker	19	128	1	
+310	LOK	object/tangible/terminal/shared_systems_control_terminal.iff		74.60	-12.00	51.60	0	lok_ntp_mercenary_bunker	12	128	1	
+311	LOK	object/tangible/terminal/shared_systems_control_terminal.iff		24.20	-20.00	115.60	0	lok_ntp_mercenary_bunker	13	128	1	
+312	NABOO	object/tangible/terminal/shared_terminal_borvo_ai_controller.iff		71.30	-36.00	148.90	0	nab_borvos_vault	34	128	1	
+313	NABOO	object/tangible/terminal/shared_terminal_borvo_security_scanner.iff		10.20	-35.00	214.34	270	nab_borvos_vault	14	128	1	
+314	NABOO	object/tangible/terminal/shared_terminal_borvo_security_scanner.iff		0.80	-35.00	227.70	90	nab_borvos_vault	14	128	1	
+315	NABOO	object/tangible/terminal/shared_terminal_borvo_security_scanner.iff		-13.80	-35.00	214.34	-90	nab_borvos_vault	14	128	1	
+316	NABOO	object/tangible/terminal/shared_terminal_borvo_security_scanner.iff		-25.80	-35.00	227.65	90	nab_borvos_vault	14	128	1	
+317	NABOO	object/tangible/terminal/shared_terminal_borvo_security_scanner.iff		-76.70	-35.00	223.00	180	nab_borvos_vault	13	128	1	
+318	NABOO	object/tangible/terminal/shared_terminal_borvo_security_scanner.iff		-92.25	-35.00	223.00	0	nab_borvos_vault	13	128	1	
+319	NABOO	object/tangible/terminal/shared_terminal_borvos_vault.iff		24.25	-36.00	238.11	90	nab_borvos_vault	19	128	1	
+320	NABOO	object/tangible/terminal/shared_terminal_borvos_vault.iff		-47.70	-36.00	242.79	90	nab_borvos_vault	15	128	1	
+321	NABOO	object/tangible/terminal/shared_terminal_borvos_vault.iff		-73.22	-36.00	224.75	270	nab_borvos_vault	36	128	1	
+322	NABOO	object/tangible/terminal/shared_terminal_borvos_vault.iff		-95.74	-36.00	224.96	90	nab_borvos_vault	35	128	1	
+323	NABOO	object/tangible/terminal/shared_terminal_borvos_vault.iff		-12.80	-28.00	170.08	180	nab_borvos_vault	26	128	1	
+324	NABOO	object/tangible/terminal/shared_terminal_borvos_vault.iff		25.90	-36.00	79.20	90	nab_borvos_vault	4	128	1	
+325	NABOO	object/tangible/terminal/shared_terminal_borvos_vault.iff		86.67	-36.00	118.30	180	nab_borvos_vault	1	128	1	
+326	NABOO	object/tangible/terminal/shared_terminal_borvos_vault.iff		-75.84	-36.00	105.95	90	nab_borvos_vault	10	128	1	
+327	NABOO	object/tangible/terminal/shared_terminal_borvos_vault.iff		-11.65	-36.00	169.99	-135	nab_borvos_vault	26	128	1	
+328	NABOO	object/tangible/terminal/shared_terminal_borvos_vault.iff		91.60	-36.00	103.60	0	nab_borvos_vault	1	128	1	
+329	YAVIN4	object/tangible/terminal/shared_terminal_geo_bunker.iff		-34.00	-18.00	-30.96	90	yav_geonosian_cave	4	128	1	
+330	YAVIN4	object/tangible/terminal/shared_terminal_geo_bunker.iff		-49.70	-18.00	-55.70	0	yav_geonosian_cave	5	128	1	
+331	YAVIN4	object/tangible/terminal/shared_terminal_geo_bunker.iff		-105.30	-18.00	-64.00	180	yav_geonosian_cave	9	128	1	
+332	YAVIN4	object/tangible/terminal/shared_terminal_geo_bunker.iff		-79.03	-22.00	-146.00	0	yav_geonosian_cave	24	128	1	
+333	YAVIN4	object/tangible/terminal/shared_terminal_geo_bunker.iff		-66.96	-34.00	-260.00	0	yav_geonosian_cave	31	128	1	
+334	YAVIN4	object/tangible/terminal/shared_terminal_geo_bunker.iff		-133.10	-34.00	-204.00	180	yav_geonosian_cave	34	128	1	
+335	YAVIN4	object/tangible/terminal/shared_terminal_geo_bunker.iff		-4.00	-34.00	-416.95	270	yav_geonosian_cave	41	128	1	
+336	YAVIN4	object/tangible/terminal/shared_terminal_geo_bunker.iff		38.00	-34.00	-332.92	270	yav_geonosian_cave	42	128	1	
+337	LOK	object/tangible/terminal/shared_terminal_nym_cave.iff		-60.62	-65.84	-142.28	-90	lok_evil_droid_eng_cave	25	128	1	
+338	ENDOR	object/tangible/terminal/shared_terminal_water_pressure.iff		58.00	0.00	-93.00	0	end_dwb	26	128	1	
+339	ENDOR	object/tangible/terminal/shared_terminal_water_pressure.iff		42.00	0.00	-77.00	90	end_dwb	26	128	1	
+340	ENDOR	object/tangible/terminal/shared_terminal_water_pressure.iff		58.00	0.00	-61.00	-179	end_dwb	26	128	1	
+341	ENDOR	object/tangible/terminal/shared_terminal_water_pressure.iff		73.90	0.00	-77.00	-90	end_dwb	26	128	1	
+342	LOK	object/tangible/theme_park/nym/shared_dungeon_boss_terminal_02.iff		-91.80	-100.40	-93.60	0	lok_imperial_gas_mine	11	128	1	
+343	LOK	object/tangible/theme_park/nym/shared_dungeon_boss_terminal_02.iff		-54.20	-20.00	74.00	0	lok_ntp_mercenary_bunker	9	128	1	
+344	LOK	object/tangible/theme_park/nym/shared_dungeon_boss_terminal.iff		49.20	-65.80	-83.30	-90	lok_evil_droid_eng_cave	27	128	1	
+345	LOK	object/tangible/theme_park/nym/shared_dungeon_boss_terminal.iff		-81.00	-99.00	-163.30	0	lok_imperial_gas_mine	8	128	1	
+346	LOK	object/tangible/theme_park/nym/shared_dungeon_boss_terminal.iff		-54.40	-20.00	12.80	-90	lok_ntp_mercenary_bunker	8	128	1	
+347	LOK	object/tangible/theme_park/rebel/shared_rtp_hansolo_banners.iff		-1901.00	12.00	-3079.03	0	lok_world	0	256	0	
+348	LOK	object/tangible/theme_park/rebel/shared_rtp_hansolo_banners.iff		-1998.04	12.00	-3073.79	0	lok_world	0	256	0	
+349	LOK	object/tangible/theme_park/rebel/shared_rtp_hansolo_banners.iff		-1819.74	12.00	-3049.98	0	lok_world	0	256	0	
+350	LOK	object/tangible/theme_park/rebel/shared_rtp_hansolo_banners.iff		-1974.10	12.00	-2997.94	0	lok_world	0	256	0	
+351	LOK	object/tangible/theme_park/rebel/shared_rtp_hansolo_banners.iff		-1894.11	12.00	-3049.90	0	lok_world	0	256	0	
+352	LOK	object/tangible/theme_park/rebel/shared_rtp_hansolo_banners.iff		-1871.90	12.00	-3123.73	0	lok_world	0	256	0	
+353	LOK	object/tangible/theme_park/rebel/shared_rtp_hansolo_banners.iff		-1892.49	12.00	-3173.81	0	lok_world	0	256	0	
+354	LOK	object/tangible/theme_park/rebel/shared_rtp_hansolo_banners.iff		-1957.84	12.00	-3076.44	0	lok_world	0	256	0	
+355	LOK	object/tangible/theme_park/rebel/shared_rtp_hansolo_banners.iff		-1970.07	12.00	-3150.02	0	lok_world	0	256	0	
+356	LOK	object/tangible/theme_park/rebel/shared_rtp_hansolo_banners.iff		-1905.32	12.00	-3137.57	0	lok_world	0	256	0	
+357	TALUS	object/tangible/theme_park/rebel/shared_rtp_leia_crime_scene.iff		4267.31	0.56	5265.10	0	tal_world	0	256	0	
+358	YAVIN4	object/tangible/theme_park/rebel/shared_rtp_luke_plants.iff		534.51	81.00	-662.71	0	yav_world	0	256	0	
+359	YAVIN4	object/tangible/theme_park/rebel/shared_rtp_luke_plants.iff		515.69	81.00	-666.25	0	yav_world	0	256	0	
+360	YAVIN4	object/tangible/theme_park/rebel/shared_rtp_luke_plants.iff		525.32	81.00	-656.06	0	yav_world	0	256	0	
+361	YAVIN4	object/tangible/theme_park/rebel/shared_rtp_luke_plants.iff		494.47	81.00	-648.29	0	yav_world	0	256	0	
+362	YAVIN4	object/tangible/theme_park/rebel/shared_rtp_luke_plants.iff		500.09	81.00	-620.91	0	yav_world	0	256	0	
+363	YAVIN4	object/tangible/theme_park/rebel/shared_rtp_luke_plants.iff		540.51	81.00	-669.72	0	yav_world	0	256	0	
+364	YAVIN4	object/tangible/theme_park/rebel/shared_rtp_luke_plants.iff		512.91	81.00	-642.20	0	yav_world	0	256	0	
+365	YAVIN4	object/tangible/theme_park/rebel/shared_rtp_luke_plants.iff		529.86	81.00	-682.15	0	yav_world	0	256	0	
+366	YAVIN4	object/tangible/theme_park/rebel/shared_rtp_luke_plants.iff		485.25	81.00	-633.87	0	yav_world	0	256	0	
+367	CORELLIA	object/tangible/theme_park/rebel/shared_rtp_wedge_imperial_meeting.iff		6905.82	330.00	-5603.99	0	cor_world	0	256	0	
+368	RORI	object/tangible/theme_park/shared_invisible_object.iff		5295.00	80.00	5690.00	0	ror_world	0	8	0	ph1_restuss_master;restuss_event/city_destruction.iff
+369	RORI	object/tangible/theme_park/shared_invisible_object.iff		5976.02	81.00	5550.89	0	ror_world	0	8	0	ph1_imp_logistics;restuss_event/imperial/logistics.iff
+370	RORI	object/tangible/theme_park/shared_invisible_object.iff		4828.74	80.00	5854.03	0	ror_world	0	8	0	ph1_reb_walls;restuss_event/rebel/walls.iff
+371	RORI	object/tangible/theme_park/shared_invisible_object.iff		4721.33	80.00	5833.37	0	ror_world	0	8	0	ph1_reb_medical;restuss_event/rebel/medical.iff
+372	RORI	object/tangible/theme_park/shared_invisible_object.iff		4721.00	80.00	5848.24	0	ror_world	0	8	0	ph1_reb_logistics;restuss_event/rebel/logistics.iff
+373	RORI	object/tangible/theme_park/shared_invisible_object.iff		5944.37	81.79	5564.63	0	ror_world	0	8	0	ph1_imp_walls;restuss_event/imperial/walls.iff
+374	RORI	object/tangible/theme_park/shared_invisible_object.iff		5898.65	81.00	5644.76	0	ror_world	0	8	0	ph1_imp_medical;restuss_event/imperial/medical.iff
+375	RORI	object/tangible/theme_park/shared_invisible_object.iff		5900.16	81.00	5587.93	0	ror_world	0	8	0	ph1_imp_baracks;restuss_event/imperial/baracks.iff
+376	RORI	object/tangible/theme_park/shared_invisible_object.iff		4778.89	80.00	5880.50	0	ror_world	0	8	0	ph1_reb_communications;restuss_event/rebel/communications.iff
+377	RORI	object/tangible/theme_park/shared_invisible_object.iff		5973.71	81.00	5616.39	0	ror_world	0	8	0	ph1_imp_headquarters;restuss_event/imperial/command.iff
+378	RORI	object/tangible/theme_park/shared_invisible_object.iff		4776.00	80.00	5802.00	0	ror_world	0	8	0	ph1_reb_headquarters;restuss_event/rebel/command.iff
+379	RORI	object/tangible/theme_park/shared_invisible_object.iff		4830.68	80.00	5826.11	0	ror_world	0	8	0	ph1_reb_baracks;restuss_event/rebel/baracks.iff
+380	RORI	object/tangible/theme_park/shared_invisible_object.iff		5916.13	81.00	5549.14	0	ror_world	0	8	0	ph1_imp_communications;restuss_event/imperial/communications.iff
+381	YAVIN4	object/tangible/theme_park/shared_invisible_object.iff		4.34	-18.24	-27.65	0	yav_geonosian_cave	4	8	1	
+382	YAVIN4	object/tangible/theme_park/shared_invisible_object.iff		-11.65	-30.24	-110.18	0	yav_geonosian_cave	16	8	1	
+383	YAVIN4	object/tangible/theme_park/shared_invisible_object.iff		-103.94	-27.56	-191.13	0	yav_geonosian_cave	27	8	1	
+384	YAVIN4	object/tangible/theme_park/shared_invisible_object.iff		-127.62	-34.00	-250.77	0	yav_geonosian_cave	33	8	1	
+385	YAVIN4	object/tangible/theme_park/shared_invisible_object.iff		47.47	-34.00	-333.93	0	yav_geonosian_cave	43	8	1	
