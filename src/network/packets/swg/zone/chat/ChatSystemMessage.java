@@ -33,14 +33,15 @@ import network.packets.swg.SWGPacket;
 import resources.encodables.OutOfBandPackage;
 
 public class ChatSystemMessage extends SWGPacket {
+	
 	public static final int CRC = getCrc("ChatSystemMessage");
-
-	private int type = 0;
-	private String message = "";
+	
 	private OutOfBandPackage oob;
+	private String message;
+	private int type;
 	
 	public ChatSystemMessage() {
-		
+		this(0, "");
 	}
 	
 	public ChatSystemMessage(int type, String message) {
@@ -54,11 +55,11 @@ public class ChatSystemMessage extends SWGPacket {
 	}
 	
 	public ChatSystemMessage(SystemChatType type, String message) {
-		this(type.ordinal(), message);
+		this(type.getType(), message);
 	}
 	
 	public ChatSystemMessage(SystemChatType type, OutOfBandPackage oob) {
-		this(type.ordinal(), oob);
+		this(type.getType(), oob);
 	}
 	
 	@Override
@@ -78,7 +79,7 @@ public class ChatSystemMessage extends SWGPacket {
 		if (oobExists)
 			length += 4 + oob.getLength();
 		else
-			length += 15 + message.length() * 2;
+			length += 8 + message.length() * 2;
 		
 		NetBuffer data = NetBuffer.allocate(length);
 		data.addShort(4);
@@ -96,16 +97,35 @@ public class ChatSystemMessage extends SWGPacket {
 	}
 	
 	public SystemChatType getType() {
-		for (SystemChatType t : SystemChatType.values()) {
-			if (type == t.ordinal()) return t;
+		switch (type) {
+			case 0:
+			default:
+				return SystemChatType.SCREEN_AND_CHAT;
+			case 1:
+				return SystemChatType.SCREEN;
+			case 2:
+				return SystemChatType.CHAT;
 		}
-		return SystemChatType.SCREEN_AND_CHAT;
 	}
-	public String getMessage() { return message; }
+	
+	public String getMessage() {
+		return message;
+	}
 	
 	public enum SystemChatType {
-		SCREEN_AND_CHAT,
-		SCREEN,
-		CHAT
+		SCREEN_AND_CHAT	(0x00),
+		SCREEN			(0x01),
+		CHAT			(0x02);
+		
+		int type;
+		
+		SystemChatType(int type) {
+			this.type = type;
+		}
+		
+		public int getType() {
+			return type;
+		}
 	}
+	
 }

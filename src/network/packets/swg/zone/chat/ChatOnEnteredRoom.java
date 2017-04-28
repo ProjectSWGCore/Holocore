@@ -42,6 +42,10 @@ public class ChatOnEnteredRoom extends SWGPacket {
 	private int chatRoomId;
 	private int sequence;
 	
+	public ChatOnEnteredRoom() {
+		
+	}
+	
 	public ChatOnEnteredRoom(ChatAvatar avatar, int chatRoomId, int sequence) {
 		this(avatar, ChatResult.NONE, chatRoomId, sequence);
 	}
@@ -57,6 +61,7 @@ public class ChatOnEnteredRoom extends SWGPacket {
 		decode(data);
 	}
 	
+	@Override
 	public void decode(NetBuffer data) {
 		if (!super.checkDecode(data, CRC))
 			return;
@@ -66,6 +71,7 @@ public class ChatOnEnteredRoom extends SWGPacket {
 		sequence = data.getInt();
 	}
 	
+	@Override
 	public NetBuffer encode() {
 		NetBuffer data = NetBuffer.allocate(avatar.getLength() + 18);
 		data.addShort(5);

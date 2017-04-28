@@ -30,6 +30,7 @@ package services.network;
 import java.io.EOFException;
 
 import com.projectswg.common.debug.Assert;
+import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
 
@@ -43,7 +44,9 @@ public class NetworkProtocol {
 	
 	public NetBuffer encode(Packet p) {
 		NetBuffer encoded = p.encode();
-		encoded.position(0);
+		encoded.flip();
+		if (encoded.remaining() != encoded.capacity())
+			Log.w("Packet %s has invalid array length. Expected: %d  Actual: %d", p, encoded.remaining(), encoded.capacity());
 		int decompressedLength = encoded.remaining();
 		boolean compressed = false;
 		if (compressed) {
@@ -106,7 +109,7 @@ public class NetworkProtocol {
 		data.addByte(bitmask);
 		data.addShort((short) packet.remaining());
 		data.addShort((short) rawLength);
-		data.addRawArray(packet.array());
+		data.add(packet);
 		data.flip();
 		return data;
 	}
@@ -118,7 +121,7 @@ public class NetworkProtocol {
 		buffer.getShort();
 		int crc = buffer.getInt();
 		buffer.position(0);
-		if (crc == 0x80CE5E46) {
+		if (crc == ObjectController.CRC) {
 			return ObjectController.decodeController(buffer);
 		} else {
 			SWGPacket packet = PacketType.getForCrc(crc);

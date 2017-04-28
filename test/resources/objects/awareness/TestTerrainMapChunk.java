@@ -39,6 +39,7 @@ import com.projectswg.common.data.location.Terrain;
 
 import resources.objects.SWGObject;
 import resources.objects.cell.CellObject;
+import test_resources.GenericCreatureObject;
 
 @RunWith(JUnit4.class)
 public class TestTerrainMapChunk {

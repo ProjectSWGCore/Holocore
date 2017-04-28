@@ -42,9 +42,14 @@ public class DeltasMessage extends SWGPacket {
 	private byte[] deltaData;
 	private int update;
 	
+	public DeltasMessage() {
+		
+	}
+	
 	public DeltasMessage(long objId, BaselineType type, int typeNumber, int update, byte[] data) {
 		this.objId = objId;
 		this.type = type;
+		this.update = update;
 		this.num = typeNumber;
 		this.deltaData = data;
 	}
@@ -58,12 +63,12 @@ public class DeltasMessage extends SWGPacket {
 		if (!super.checkDecode(data, CRC))
 			return;
 		objId = data.getLong();
-		type = BaselineType.valueOf(new StringBuffer(new String(data.getArray(4), ascii)).reverse().toString());
+		type = BaselineType.valueOf(reverse(new String(data.getArray(4), ascii)));
 		num = data.getByte();
 		NetBuffer deltaDataBuffer = NetBuffer.wrap(data.getArrayLarge());
 		deltaDataBuffer.getShort();
 		update = deltaDataBuffer.getShort();
-		deltaData = data.getArray(deltaDataBuffer.remaining());
+		deltaData = deltaDataBuffer.getArray(deltaDataBuffer.remaining());
 	}
 	
 	@Override
@@ -72,7 +77,7 @@ public class DeltasMessage extends SWGPacket {
 		data.addShort(5);
 		data.addInt(CRC);
 		data.addLong(objId);
-		data.addRawArray(new StringBuffer(type.toString()).reverse().toString().getBytes(ascii));
+		data.addRawArray(reverse(type.toString()).getBytes(ascii));
 		data.addByte(num);
 		data.addInt(deltaData.length + 4);
 		data.addShort(1); // updates - only 1 cause we're boring
@@ -119,5 +124,9 @@ public class DeltasMessage extends SWGPacket {
 	
 	public void setUpdate(int update) {
 		this.update = update;
+	}
+	
+	private String reverse(String str) {
+		return new StringBuffer(str).reverse().toString();
 	}
 }

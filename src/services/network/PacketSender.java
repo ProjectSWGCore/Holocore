@@ -27,13 +27,14 @@
  ***********************************************************************************/
 package services.network;
 
+import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
+import java.nio.channels.SocketChannel;
 
 import com.projectswg.common.debug.Log;
 import com.projectswg.common.network.NetBuffer;
-
-import resources.network.TCPServer;
+import com.projectswg.common.network.TCPServer;
 
 public class PacketSender {
 	
@@ -51,7 +52,18 @@ public class PacketSender {
 	}
 	
 	public void sendPacket(InetSocketAddress addr, NetBuffer data) {
-		tcpServer.send(addr, data.getBuffer());
+		SocketChannel sc = tcpServer.getChannel(addr);
+		if (sc == null)
+			return;
+		try {
+			while (data.hasRemaining()) {
+				sc.write(data.getBuffer());
+			}
+		} catch (IOException e) {
+			Log.e("Failed to write to channel: %s", addr);
+			Log.e(e);
+			tcpServer.disconnect(addr);
+		}
 	}
 	
 }

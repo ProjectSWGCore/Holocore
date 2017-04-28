@@ -310,16 +310,16 @@ public class ChatManager extends Manager {
 	}
 	
 	private void broadcastAreaMessage(String message, Player broadcaster) {
-		broadcaster.getCreatureObject().sendObserversAndSelf(new ChatSystemMessage(SystemChatType.SCREEN_AND_CHAT.ordinal(), message));
+		broadcaster.getCreatureObject().sendObserversAndSelf(new ChatSystemMessage(SystemChatType.SCREEN_AND_CHAT.getType(), message));
 	}
 	
 	private void broadcastPlanetMessage(String message, Terrain terrain) {
-		ChatSystemMessage packet = new ChatSystemMessage(SystemChatType.SCREEN_AND_CHAT.ordinal(), message);
+		ChatSystemMessage packet = new ChatSystemMessage(SystemChatType.SCREEN_AND_CHAT.getType(), message);
 		new NotifyPlayersPacketIntent(packet, terrain).broadcast();
 	}
 	
 	private void broadcastGalaxyMessage(String message) {
-		ChatSystemMessage packet = new ChatSystemMessage(SystemChatType.SCREEN_AND_CHAT.ordinal(), message);
+		ChatSystemMessage packet = new ChatSystemMessage(SystemChatType.SCREEN_AND_CHAT.getType(), message);
 		new NotifyPlayersPacketIntent(packet).broadcast();
 	}
 	

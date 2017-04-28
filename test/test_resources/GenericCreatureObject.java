@@ -25,15 +25,37 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
  ***********************************************************************************/
-package resources.network;
+package test_resources;
 
-import java.net.Socket;
-import java.net.SocketAddress;
+import network.packets.Packet;
+import resources.objects.creature.CreatureObject;
+import resources.objects.player.PlayerObject;
+import resources.player.Player;
+import resources.player.PlayerState;
 
-public interface NetworkCallback {
+public class GenericCreatureObject extends CreatureObject {
 	
-	void onIncomingConnection(Socket s, SocketAddress addr);
-	void onConnectionDisconnect(Socket s, SocketAddress addr);
-	void onIncomingData(Socket s, SocketAddress addr, byte [] data);
+	private Player player;
+	
+	public GenericCreatureObject(long objectId) {
+		super(objectId);
+		player = new Player() {
+			@Override
+			public void sendPacket(Packet ... packets) {
+				// Nah
+			}
+		};
+		player.setPlayerState(PlayerState.ZONED_IN);
+		setHasOwner(true);
+		setSlot("ghost", new PlayerObject(-objectId));
+	}
+	
+	public void setHasOwner(boolean hasOwner) {
+		if (hasOwner) {
+			player.setCreatureObject(this);
+		} else {
+			player.setCreatureObject(null);
+		}
+	}
 	
 }

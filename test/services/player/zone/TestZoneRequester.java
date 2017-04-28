@@ -25,36 +25,74 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.                *
  *                                                                                  *
  ***********************************************************************************/
-package resources.objects.awareness;
+package services.player.zone;
+
+import java.util.concurrent.atomic.AtomicBoolean;
+
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 import network.packets.Packet;
-import resources.objects.creature.CreatureObject;
+import network.packets.swg.ErrorMessage;
 import resources.objects.player.PlayerObject;
 import resources.player.Player;
-import resources.player.PlayerState;
+import test_resources.GenericCreatureObject;
 
-class GenericCreatureObject extends CreatureObject {
+@RunWith(JUnit4.class)
+public class TestZoneRequester {
 	
-	private Player player;
-	
-	public GenericCreatureObject(long objectId) {
-		super(objectId);
-		player = new Player() {
-			public void sendPacket(Packet ... packets) {
-				// Nah
-			}
-		};
-		player.setPlayerState(PlayerState.ZONED_IN);
-		setHasOwner(true);
-		setSlot("ghost", new PlayerObject(-objectId));
+	@Test
+	public void testNullCreatureObject() {
+		ZoneRequester zr = new ZoneRequester();
+		TZRPlayer player = new TZRPlayer();
+		Assert.assertFalse(zr.onZoneRequested(null, player, 0));
+		Assert.assertTrue(player.isSentError());
 	}
 	
-	public void setHasOwner(boolean hasOwner) {
-		if (hasOwner) {
-			player.setCreatureObject(this);
-		} else {
-			player.setCreatureObject(null);
+	
+	@Test
+	public void testInvalidCreatureObject() {
+		ZoneRequester zr = new ZoneRequester();
+		TZRPlayer player = new TZRPlayer();
+		Assert.assertFalse(zr.onZoneRequested(new PlayerObject(1), player, 0));
+		Assert.assertTrue(player.isSentError());
+	}
+	
+	@Test
+	public void testNullPlayerObject() {
+		ZoneRequester zr = new ZoneRequester();
+		TZRPlayer player = new TZRPlayer();
+		GenericCreatureObject creature = new GenericCreatureObject(5);
+		creature.setSlot("ghost", null);
+		Assert.assertFalse(zr.onZoneRequested(creature, player, 5));
+		Assert.assertTrue(player.isSentError());
+	}
+	
+	@Test
+	public void testValidCreatureObject() {
+		ZoneRequester zr = new ZoneRequester();
+		TZRPlayer player = new TZRPlayer();
+		GenericCreatureObject creature = new GenericCreatureObject(5);
+		Assert.assertTrue(zr.onZoneRequested(creature, player, 5));
+		Assert.assertFalse(player.isSentError());
+	}
+	
+	private static class TZRPlayer extends Player {
+		
+		private final AtomicBoolean sentError = new AtomicBoolean(false);
+		
+		@Override
+		public void sendPacket(Packet ... packets) {
+			if (packets.length == 1 && packets[0] instanceof ErrorMessage)
+				sentError.set(true);
 		}
+		
+		public boolean isSentError() {
+			return sentError.get();
+		}
+		
 	}
 	
 }

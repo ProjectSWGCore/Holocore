@@ -644,8 +644,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		create.setLocation(buildoutLocation);
 		create.setObjectCrc(crc);
 		target.sendPacket(create);
-		if (parent != null)
-			target.sendPacket(new UpdateContainmentMessage(objectId, parent.getObjectId(), slotArrangement));
 	}
 	
 	private final void sendSceneDestroyObject(Player target) {
@@ -672,6 +670,8 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			sendBaselines(target);
 			createChildrenObjects(target);
 			sendFinalBaselinePackets(target);
+			if (parent != null)
+				target.sendPacket(new UpdateContainmentMessage(objectId, parent.getObjectId(), slotArrangement));
 			target.sendPacket(new SceneEndBaselines(getObjectId()));
 		}
 	}
@@ -791,21 +791,27 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		return awareness.getObservers();
 	}
 	
-	public void sendObserversAndSelf(Packet ... packets) {
-		sendSelf(packets);
-		sendObservers(packets);
+	public int sendObserversAndSelf(Packet ... packets) {
+		int sent = 0;
+		sent += sendSelf(packets);
+		sent += sendObservers(packets);
+		return sent;
 	}
 	
-	public void sendObservers(Packet ... packets) {
+	public int sendObservers(Packet ... packets) {
+		int sent = 0;
 		for (Player observer : getObservers()) {
 			observer.sendPacket(packets);
+			sent++;
 		}
+		return sent;
 	}
 	
-	public void sendSelf(Packet ... packets) {
+	public int sendSelf(Packet ... packets) {
 		Player owner = getOwner();
 		if (owner != null)
 			owner.sendPacket(packets);
+		return owner != null ? 1 : 0;
 	}
 	
 	protected void sendBaselines(Player target) {
@@ -871,6 +877,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		return Long.hashCode(getObjectId());
 	}
 	
+	@Override
 	protected void createBaseline3(Player target, BaselineBuilder bb) {
 		super.createBaseline3(target, bb);
 		bb.addFloat(complexity); // 0
@@ -881,6 +888,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		bb.incrementOperandCount(4);
 	}
 	
+	@Override
 	protected void createBaseline6(Player target, BaselineBuilder bb) {
 		super.createBaseline6(target, bb);
 		bb.addInt(CoreManager.getGalaxyId()); // 0
@@ -889,6 +897,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		bb.incrementOperandCount(2);
 	}
 	
+	@Override
 	protected void parseBaseline3(NetBuffer buffer) {
 		super.parseBaseline3(buffer);
 		complexity = buffer.getFloat();
@@ -897,6 +906,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		volume = buffer.getInt();
 	}
 	
+	@Override
 	protected void parseBaseline6(NetBuffer buffer) {
 		super.parseBaseline6(buffer);
 		buffer.getInt(); // Immutable ... can't change the galaxy id
@@ -960,6 +970,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		stream.addList(contained, (c) -> SWGObjectFactory.save(c, stream));
 	}
 	
+	@Override
 	public void read(NetBufferStream stream) {
 		switch(stream.getByte()) {
 			case 4:

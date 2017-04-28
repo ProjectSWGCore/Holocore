@@ -27,6 +27,7 @@
 ***********************************************************************************/
 package network.packets.swg.zone.insertion;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -40,6 +41,10 @@ public class ChatRoomList extends SWGPacket {
 	public static final int CRC = getCrc("ChatRoomList");
 	
 	private Collection<ChatRoom> rooms;
+	
+	public ChatRoomList() {
+		this.rooms = new ArrayList<>();
+	}
 	
 	public ChatRoomList(ChatRoom... rooms) {
 		this.rooms = Arrays.asList(rooms);

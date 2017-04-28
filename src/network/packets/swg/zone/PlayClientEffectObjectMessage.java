@@ -37,7 +37,11 @@ public class PlayClientEffectObjectMessage extends SWGPacket {
 	private String effectFile;
 	private String effectLocation;
 	private long objectId;
-
+	
+	public PlayClientEffectObjectMessage() {
+		
+	}
+	
 	public PlayClientEffectObjectMessage(String effectFile, String effectLocation, long objectId) {
 		this.effectFile = effectFile;
 		this.effectLocation = effectLocation;

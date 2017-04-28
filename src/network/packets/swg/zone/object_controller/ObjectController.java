@@ -91,8 +91,10 @@ public abstract class ObjectController extends SWGPacket {
 	public static final ObjectController decodeController(NetBuffer data) {
 		if (data.array().length < 14)
 			return null;
-		data.position(10);
+		int pos = data.position();
+		data.position(pos+10);
 		int crc = data.getInt();
+		data.position(pos);
 		switch (crc) {
 			case 0x0071: return new DataTransform(data);
 			case 0x00CC: return new CombatAction(data);

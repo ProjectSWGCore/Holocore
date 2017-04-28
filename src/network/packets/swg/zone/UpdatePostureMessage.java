@@ -52,6 +52,7 @@ public class UpdatePostureMessage extends SWGPacket {
 		this.objId = objId;
 	}
 	
+	@Override
 	public void decode(NetBuffer data) {
 		if (!super.checkDecode(data, CRC))
 			return;
@@ -59,9 +60,9 @@ public class UpdatePostureMessage extends SWGPacket {
 		objId = data.getLong();
 	}
 	
+	@Override
 	public NetBuffer encode() {
-		int length = 16;
-		NetBuffer data = NetBuffer.allocate(length);
+		NetBuffer data = NetBuffer.allocate(15);
 		data.addShort(3);
 		data.addInt(CRC);
 		data.addByte(posture);

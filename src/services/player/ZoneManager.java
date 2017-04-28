@@ -54,7 +54,9 @@ import network.packets.swg.zone.SetWaypointColor;
 import network.packets.swg.zone.ShowBackpack;
 import network.packets.swg.zone.ShowHelmet;
 import network.packets.swg.zone.chat.ChatSystemMessage;
+import network.packets.swg.zone.insertion.SelectCharacter;
 import resources.config.ConfigFile;
+import resources.objects.SWGObject;
 import resources.objects.creature.CreatureMood;
 import resources.objects.player.PlayerObject;
 import resources.objects.waypoint.WaypointObject;
@@ -63,15 +65,19 @@ import resources.player.Player;
 import resources.player.Player.PlayerServer;
 import resources.player.PlayerEvent;
 import resources.server_info.DataManager;
+import services.objects.ObjectManager;
+import services.player.zone.ZoneRequester;
 
 public class ZoneManager extends Manager {
 	
 	private final CharacterCreationService characterCreationService;
+	private final ZoneRequester zoneRequester;
 	
 	private String commitHistory;
 	
 	public ZoneManager() {
 		characterCreationService = new CharacterCreationService();
+		zoneRequester = new ZoneRequester();
 		commitHistory = "";
 		
 		addChildService(characterCreationService);
@@ -113,6 +119,8 @@ public class ZoneManager extends Manager {
 			handleShowHelmet(player, (ShowHelmet) p);
 		if (p instanceof LagRequest && player.getPlayerServer() == PlayerServer.ZONE)
 			handleLagRequest(player);
+		if (p instanceof SelectCharacter)
+			handleSelectCharacter(intent.getObjectManager(), player, ((SelectCharacter) p).getCharacterId());
 	}
 	
 	public boolean characterExistsForName(String name) {
@@ -197,6 +205,11 @@ public class ZoneManager extends Manager {
 		player.sendPacket(new HeartBeat());
 		player.sendPacket(new AccountFeatureBits());
 		player.sendPacket(new ClientPermissionsMessage());
+	}
+	
+	private void handleSelectCharacter(ObjectManager objectManager, Player player, long characterId) {
+		SWGObject creatureObj = objectManager.getObjectById(characterId);
+		zoneRequester.onZoneRequested(creatureObj, player, characterId);
 	}
 	
 }

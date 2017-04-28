@@ -374,7 +374,7 @@ public class ChatRoomService extends Service {
 	}
 	
 	private void handleChatRoomListRequest(Player player) {
-		player.sendPacket(new ChatRoomList(chatRoomHandler.getRoomList(player)));
+		player.sendPacket(new ChatRoomList());
 	}
 	
 }

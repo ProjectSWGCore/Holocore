@@ -51,6 +51,7 @@ public class SceneCreateObjectByCrc extends SWGPacket {
 		this.hyperspace = hyperspace;
 	}
 	
+	@Override
 	public void decode(NetBuffer data) {
 		if (!super.checkDecode(data, CRC))
 			return;
@@ -60,6 +61,7 @@ public class SceneCreateObjectByCrc extends SWGPacket {
 		hyperspace = data.getBoolean();
 	}
 	
+	@Override
 	public NetBuffer encode() {
 		NetBuffer data = NetBuffer.allocate(47);
 		data.addShort(5);

@@ -60,17 +60,26 @@ public class DeltaBuilder {
 		this.updateType = updateType;
 	}
 	
-	public void send() {
+	public boolean send() {
 		DeltasMessage message = getBuiltMessage();
 		Player owner = object.getOwner();
-		if (owner != null && owner.getPlayerState() == PlayerState.ZONED_IN)
+		boolean sent = false;
+		if (owner != null && owner.getPlayerState() == PlayerState.ZONED_IN) {
 			owner.sendPacket(message);
-		if (num == 3 || num == 6) // Shared Objects
-			object.sendObservers(message);
+			sent = true;
+		}
+		if (num == 3 || num == 6) { // Shared Objects
+			sent = object.sendObservers(message) > 0 || sent;
+		}
+		return sent;
 	}
 	
 	public DeltasMessage getBuiltMessage() {
 		return new DeltasMessage(object.getObjectId(), type, num, updateType, data);
+	}
+	
+	public byte [] getEncodedData() {
+		return data;
 	}
 	
 }

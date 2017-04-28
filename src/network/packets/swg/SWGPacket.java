@@ -54,7 +54,7 @@ public abstract class SWGPacket extends Packet {
 	}
 	
 	public boolean checkDecode(NetBuffer data, int crc) {
-		data.position(2);
+		data.getShort();
 		this.crc = data.getInt();
 		this.type = PacketType.fromCrc(crc);
 		if (this.crc == crc)

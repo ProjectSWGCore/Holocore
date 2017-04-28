@@ -29,10 +29,10 @@ package services.network;
 
 import com.projectswg.common.control.Service;
 import com.projectswg.common.debug.Assert;
+import com.projectswg.common.network.TCPServer;
 
 import intents.network.OutboundPacketIntent;
 import network.NetworkClient;
-import resources.network.TCPServer;
 
 public class OutboundNetworkManager extends Service {
 	

@@ -271,7 +271,7 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 	
 	private void handleDataTransform(DataTransform dt, ObjectManager objectManager) {
 		SWGObject obj = objectManager.getObjectById(dt.getObjectId());
-		Assert.test(obj instanceof CreatureObject);
+		Assert.test(obj instanceof CreatureObject, "DataTransform object not CreatureObject! Was: " + (obj==null?"null":obj.getClass()));
 		Location requestedLocation = new Location(dt.getLocation());
 		requestedLocation.setTerrain(obj.getTerrain());
 		moveObjectWithTransform(obj, null, requestedLocation, dt.getSpeed(), dt.getUpdateCounter());
@@ -280,7 +280,7 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 	private void handleDataTransformWithParent(DataTransformWithParent dt, ObjectManager objectManager) {
 		SWGObject obj = objectManager.getObjectById(dt.getObjectId());
 		SWGObject parent = objectManager.getObjectById(dt.getCellId());
-		Assert.test(obj instanceof CreatureObject);
+		Assert.test(obj instanceof CreatureObject, "DataTransformWithParent object not CreatureObject! Was: " + (obj==null?"null":obj.getClass()));
 		if (parent == null) {
 			Log.w("Unknown data transform parent! Obj: %d/%s  Parent: %d", dt.getObjectId(), obj, dt.getCellId());
 			return;

@@ -44,6 +44,7 @@ import resources.objects.SWGObject;
 import resources.objects.building.BuildingObject;
 import resources.objects.creature.CreatureObject;
 import services.objects.ClientBuildoutService;
+import test_resources.GenericCreatureObject;
 
 @RunWith(JUnit4.class)
 public class TestAwarenessHandler {
