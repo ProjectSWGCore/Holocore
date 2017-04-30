@@ -41,12 +41,14 @@ import intents.chat.ChatCommandIntent;
 import network.packets.swg.zone.object_controller.CommandQueueDequeue;
 import network.packets.swg.zone.object_controller.CommandQueueEnqueue;
 import resources.commands.Command;
+import resources.config.ConfigFile;
 import resources.encodables.ProsePackage;
 import resources.encodables.StringId;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.player.AccessLevel;
 import resources.player.Player;
+import resources.server_info.DataManager;
 import services.galaxy.GalacticManager;
 import utilities.Scripts;
 
@@ -103,7 +105,8 @@ public class CommandLauncher {
 		// TODO implement locomotion and state checks up here. See action and error in CommandQueueDequeue!
 		// TODO target and targetType checks
 		
-		Log.d("doCommand %s", command.getName());
+		if (DataManager.getConfig(ConfigFile.DEBUG).getBoolean("DEBUG-LOG-COMMAND", false))
+			Log.d("doCommand %s", command.getName());
 		
 		sendCommandDequeue(player, command, enqueued.getRequest(), 0, 0);
 		
