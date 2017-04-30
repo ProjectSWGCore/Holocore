@@ -28,27 +28,29 @@
 package network.packets.swg.zone;
 
 import com.projectswg.common.data.location.Location;
+import com.projectswg.common.debug.Assert;
 import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 
 public class SceneCreateObjectByCrc extends SWGPacket {
+	
 	public static final int CRC = getCrc("SceneCreateObjectByCrc");
-
-	private long objId = 0;
-	private Location l = new Location();
-	private int objCrc = 0;
+	
+	private Location location;
 	private boolean hyperspace;
+	private long objId;
+	private int objCrc;
 	
 	public SceneCreateObjectByCrc() {
 		
 	}
 	
 	public SceneCreateObjectByCrc(long objId, Location l, int objCrc, boolean hyperspace) {
-		this.objId = objId;
-		this.l = l;
-		this.objCrc = objCrc;
-		this.hyperspace = hyperspace;
+		setObjectId(objId);
+		setLocation(l);
+		setObjectCrc(objCrc);
+		setHyperspace(hyperspace);
 	}
 	
 	@Override
@@ -56,30 +58,72 @@ public class SceneCreateObjectByCrc extends SWGPacket {
 		if (!super.checkDecode(data, CRC))
 			return;
 		objId = data.getLong();
-		l = data.getEncodable(Location.class);
+		location = data.getEncodable(Location.class);
 		objCrc = data.getInt();
 		hyperspace = data.getBoolean();
 	}
 	
 	@Override
 	public NetBuffer encode() {
+		verifyObjectId();
+		verifyLocation();
 		NetBuffer data = NetBuffer.allocate(47);
 		data.addShort(5);
 		data.addInt(CRC);
 		data.addLong(objId);
-		data.addEncodable(l);
+		data.addEncodable(location);
 		data.addInt(objCrc);
 		data.addBoolean(hyperspace);
 		return data;
 	}
 	
-	public void setObjectId(long objId) { this.objId = objId; }
-	public void setLocation(Location l) { this.l = l; }
-	public void setObjectCrc(int objCrc) { this.objCrc = objCrc; }
-	public void setHyperspace(boolean hyperspace) { this.hyperspace = hyperspace; }
+	public void setObjectId(long objId) {
+		this.objId = objId;
+		verifyObjectId();
+	}
 	
-	public long getObjectId() { return objId; }
-	public Location getLocation() { return l; }
-	public int getObjectCrc() { return objCrc; }
-	public boolean isHyperspace() { return hyperspace; }
+	public void setLocation(Location l) {
+		this.location = new Location(l);
+		verifyLocation();
+	}
+	
+	public void setObjectCrc(int objCrc) {
+		this.objCrc = objCrc;
+	}
+	
+	public void setHyperspace(boolean hyperspace) {
+		this.hyperspace = hyperspace;
+	}
+	
+	public long getObjectId() {
+		return objId;
+	}
+	
+	public Location getLocation() {
+		return location;
+	}
+	
+	public int getObjectCrc() {
+		return objCrc;
+	}
+	
+	public boolean isHyperspace() {
+		return hyperspace;
+	}
+	
+	private void verifyObjectId() {
+		Assert.test(objId != 0, "Object ID cannot be 0!");
+	}
+	
+	private void verifyLocation() {
+		Assert.notNull(location);
+		Assert.test(!Double.isNaN(location.getX()), "X Coordinate is NaN!");
+		Assert.test(!Double.isNaN(location.getY()), "Y Coordinate is NaN!");
+		Assert.test(!Double.isNaN(location.getZ()), "Z Coordinate is NaN!");
+		Assert.test(!Double.isNaN(location.getOrientationX()), "X Orientation is NaN!");
+		Assert.test(!Double.isNaN(location.getOrientationY()), "Y Orientation is NaN!");
+		Assert.test(!Double.isNaN(location.getOrientationZ()), "Z Orientation is NaN!");
+		Assert.test(!Double.isNaN(location.getOrientationW()), "W Orientation is NaN!");
+	}
+	
 }
