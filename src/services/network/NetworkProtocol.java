@@ -47,14 +47,7 @@ public class NetworkProtocol {
 		encoded.flip();
 		if (encoded.remaining() != encoded.capacity())
 			Log.w("Packet %s has invalid array length. Expected: %d  Actual: %d", p, encoded.remaining(), encoded.capacity());
-		int decompressedLength = encoded.remaining();
-		boolean compressed = false;
-		if (compressed) {
-			NetBuffer compress = compress(encoded);
-			compressed = compress != encoded;
-			encoded = compress;
-		}
-		return preparePacket(encoded, compressed, decompressedLength);
+		return preparePacket(encoded);
 	}
 	
 	public boolean canDecode(NetBufferStream buffer) {
@@ -90,25 +83,12 @@ public class NetworkProtocol {
 		return processSWG(pData);
 	}
 	
-	private NetBuffer compress(NetBuffer data) {
-		NetBuffer compressedBuffer = NetBuffer.allocate(Compression.getMaxCompressedLength(data.remaining()));
-		int length = Compression.compress(data.array(), compressedBuffer.array());
-		compressedBuffer.position(length);
-		compressedBuffer.flip();
-		if (length >= data.remaining())
-			return data;
-		else
-			return compressedBuffer;
-	}
-	
-	private NetBuffer preparePacket(NetBuffer packet, boolean compressed, int rawLength) {
-		NetBuffer data = NetBuffer.allocate(packet.remaining() + 5);
-		byte bitmask = 0;
-		bitmask |= (compressed?1:0) << 0; // Compressed
-		bitmask |= 1 << 1; // SWG
-		data.addByte(bitmask);
-		data.addShort((short) packet.remaining());
-		data.addShort((short) rawLength);
+	private NetBuffer preparePacket(NetBuffer packet) {
+		int remaining = packet.remaining();
+		NetBuffer data = NetBuffer.allocate(remaining + 5);
+		data.addByte(2); // SWG bitmask
+		data.addShort(remaining);
+		data.addShort(remaining);
 		data.add(packet);
 		data.flip();
 		return data;
