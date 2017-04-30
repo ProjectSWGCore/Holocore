@@ -203,7 +203,7 @@ public class BaselineObject {
 	}
 	
 	private boolean isDeltaLogging() {
-		return DataManager.getConfig(ConfigFile.DEBUG).getBoolean("DEBUG-DELTA-LOGGING", false);
+		return DataManager.getConfig(ConfigFile.DEBUG).getBoolean("DEBUG-LOG-DELTA", false);
 	}
 	
 	private Baseline createBaseline(Player target, int num, BaselineCreator bc) {
