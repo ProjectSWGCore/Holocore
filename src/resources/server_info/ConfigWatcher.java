@@ -73,10 +73,12 @@ public final class ConfigWatcher {
 	}
 	
 	public void start() {
+		running.set(true);
 		watcherThread.start();
 	}
 	
 	public void stop() {
+		running.set(false);
 		watcherThread.stop();
 		watcherThread.awaitTermination(1000);
 	}
@@ -88,6 +90,7 @@ public final class ConfigWatcher {
 		}
 		WatchKey key;
 		
+		Log.i("ConfigWatcher started");
 		try {
 			while (running.get()) {
 				key = watcher.take(); // We're stuck here until a change is made.
@@ -108,6 +111,7 @@ public final class ConfigWatcher {
 				Log.e(e);
 			}
 		}
+		Log.i("ConfigWatcher shut down");
 	}
 	
 	private void processEvents(WatchEvent<?> event) {
@@ -115,10 +119,17 @@ public final class ConfigWatcher {
 			return;
 		
 		@SuppressWarnings("unchecked")
-		ConfigFile cfgFile = ConfigFile.configFileForName(CFGPATH + ((WatchEvent<Path>) event).context());
-		Config cfg = configMap.get(cfgFile);
-		if (cfg == null)
+		Path cfgPath = ((WatchEvent<Path>) event).context();
+		ConfigFile cfgFile = ConfigFile.configFileForName(CFGPATH + cfgPath);
+		if (cfgFile == null) {
+			Log.w("Unknown config file: %s", cfgPath);
 			return;
+		}
+		Config cfg = configMap.get(cfgFile);
+		if (cfg == null) {
+			Log.w("Unknown config type: %s", cfgFile);
+			return;
+		}
 		
 		for (Entry<String, String> entry : cfg.load().entrySet()) {
 			new ConfigChangedIntent(cfgFile, entry.getKey(), entry.getValue(), cfg.getString(entry.getKey(), null)).broadcast();
