@@ -466,10 +466,9 @@ class CreatureObjectSharedNP implements Persistable {
 	public void putBuff(Buff buff, SWGObject target) {
 		synchronized (buffs) {
 			CRC crc = new CRC(buff.getCrc());
-			if (!buffs.containsKey(crc)) {
-				buffs.put(crc, buff);
-				buffs.sendDeltaMessage(target);
-			}
+			Assert.test(!buffs.containsKey(crc), "Cannot add a buff twice!");
+			buffs.put(crc, buff);
+			buffs.sendDeltaMessage(target);
 		}
 	}
 	
