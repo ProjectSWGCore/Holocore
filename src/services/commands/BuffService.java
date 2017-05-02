@@ -110,6 +110,8 @@ public class BuffService extends Service {
 	
 	private void handleBuffIntent(BuffIntent bi) {
 		BuffData buffData = getBuff(bi.getBuffName());
+		Assert.notNull(buffData, "No known buff: " + bi.getBuffName());
+		Assert.test(buffData.getName().equals(bi.getBuffName()), "BuffIntent name ["+bi.getBuffName()+"] does not match BuffData name ["+buffData.getName()+"]");
 		if (bi.isRemove()) {
 			removeBuff(bi.getReceiver(), buffData, false);
 		} else {
@@ -245,7 +247,8 @@ public class BuffService extends Service {
 		Assert.notNull(buffData);
 		
 		Optional<Buff> optionalEntry = creature.getBuffEntries(buff -> buff.getCrc() == buffData.getCrc()).findAny();
-		Assert.test(optionalEntry.isPresent(), "Buff must be present if being removed");
+		if (!optionalEntry.isPresent())
+			return; // Obique: Used to be an assertion, however if a service sends the removal after it expires it would assert - so I just removed it.
 		
 		Buff buff = optionalEntry.get();
 		if (buffData.getMaxStackCount() > 1 && !expired && buff.getStackCount() > 1) {
