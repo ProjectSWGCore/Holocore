@@ -51,8 +51,11 @@ import com.projectswg.common.debug.Log;
 import intents.BuffIntent;
 import intents.chat.ChatBroadcastIntent;
 import intents.chat.ChatCommandIntent;
+import intents.combat.CreatureIncapacitatedIntent;
 import intents.combat.CreatureKilledIntent;
 import intents.combat.DeathblowIntent;
+import intents.combat.IncapacitateCreatureIntent;
+import intents.combat.KillCreatureIntent;
 import intents.object.DestroyObjectIntent;
 import intents.object.ObjectCreatedIntent;
 import network.packets.swg.zone.PlayClientEffectObjectMessage;
@@ -112,6 +115,8 @@ public class CombatManager extends Manager {
 		
 		registerForIntent(DeathblowIntent.class, di -> handleDeathblowIntent(di));
 		registerForIntent(ChatCommandIntent.class, cci -> handleChatCommandIntent(cci));
+		registerForIntent(IncapacitateCreatureIntent.class, ici -> incapacitatePlayer(ici.getIncapper(), ici.getIncappee()));
+		registerForIntent(KillCreatureIntent.class, kci -> killCreature(kci.getKiller(), kci.getCorpse()));
 	}
 	
 	@Override
@@ -506,6 +511,7 @@ public class CombatManager extends Manager {
 		new BuffIntent("incapWeaken", incapacitator, incapacitated, false).broadcast();
 		new ChatBroadcastIntent(incapacitator.getOwner(), new ProsePackage(new StringId("base_player", "prose_target_incap"), "TT", incapacitated.getObjectName())).broadcast();
 		new ChatBroadcastIntent(incapacitated.getOwner(), new ProsePackage(new StringId("base_player", "prose_victim_incap"), "TT", incapacitator.getObjectName())).broadcast();
+		new CreatureIncapacitatedIntent(incapacitator, incapacitated).broadcast();
 	}
 	
 	private void expireIncapacitation(CreatureObject incapacitatedPlayer) {
