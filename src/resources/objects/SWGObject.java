@@ -874,7 +874,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	@Override
 	public int hashCode() {
-		return Long.hashCode(getObjectId());
+		return Long.hashCode(objectId);
 	}
 	
 	@Override
