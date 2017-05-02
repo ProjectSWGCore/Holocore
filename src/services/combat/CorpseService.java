@@ -382,7 +382,7 @@ public final class CorpseService extends Service {
 		corpse.sendObserversAndSelf(new PlayClientEffectObjectMessage("clienteffect/player_clone_compile.cef", "", corpse.getObjectId()));
 		
 		BuffIntent cloningSickness = new BuffIntent("cloning_sickness", corpse, corpse, false);
-		new BuffIntent("incapweaken", corpse, corpse, true).broadcastAfterIntent(cloningSickness);
+		new BuffIntent("incapWeaken", corpse, corpse, true).broadcastAfterIntent(cloningSickness);
 		cloningSickness.broadcast();
 	}
 	
