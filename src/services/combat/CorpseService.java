@@ -141,7 +141,7 @@ public final class CorpseService extends Service {
 							factionRestriction = PvpFaction.IMPERIAL;
 							break;
 					}
-
+					
 					FacilityData facilityData = new FacilityData(factionRestriction, set.getFloat("x"), set.getFloat("y"), set.getFloat("z"), set.getString("cell"), FacilityType.valueOf(set.getString("clone_type")), stfName, set.getInt("heading"), tubeData);
 					String objectTemplate = set.getString("structure");
 
@@ -250,11 +250,18 @@ public final class CorpseService extends Service {
 		
 		for (BuildingObject cloningFacility : availableFacilities) {
 			FacilityData facilityData = facilityDataMap.get(cloningFacility.getTemplate());
-			String stfName = facilityData.getStfName();
-
-			suiWindow.addListItem(stfName != null ? stfName : cloningFacility.getCurrentCity());
+			String name;
+			
+			if (facilityData.getStfName() != null)
+				name = facilityData.getStfName();
+			else if (!cloningFacility.getCurrentCity().isEmpty())
+				name = cloningFacility.getCurrentCity();
+			else
+				name = String.format("%s[%d, %d]", cloningFacility.getTerrain(), (int) cloningFacility.getX(), (int) cloningFacility.getZ());
+			
+			suiWindow.addListItem(name);
 		}
-
+		
 		suiWindow.addCallback("handleFacilityChoice", (Player player, SWGObject actor, SuiEvent event, Map<String, String> parameters) -> {
 			int selectionIndex = SuiListBox.getSelectedRow(parameters);
 
