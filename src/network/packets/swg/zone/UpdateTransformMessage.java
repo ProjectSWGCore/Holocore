@@ -27,9 +27,9 @@
 ***********************************************************************************/
 package network.packets.swg.zone;
 
-import network.packets.swg.SWGPacket;
+import com.projectswg.common.network.NetBuffer;
 
-import java.nio.ByteBuffer;
+import network.packets.swg.SWGPacket;
 
 public class UpdateTransformMessage extends SWGPacket {
 	public static final int CRC = getCrc("UpdateTransformMessage");
@@ -54,37 +54,37 @@ public class UpdateTransformMessage extends SWGPacket {
 		this.speed = 0;
 	}
 	
-	public UpdateTransformMessage(ByteBuffer data) {
+	public UpdateTransformMessage(NetBuffer data) {
 		decode(data);
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		objId = getLong(data);
-		posX = getShort(data);
-		posY = getShort(data);
-		posZ = getShort(data);
-		updateCounter = getInt(data);
-		speed = getByte(data);
-		direction = getByte(data);
-		lookAtYaw = getByte(data);
-		useLookAtYaw = getBoolean(data);
+		objId = data.getLong();
+		posX = data.getShort();
+		posY = data.getShort();
+		posZ = data.getShort();
+		updateCounter = data.getInt();
+		speed = data.getByte();
+		direction = data.getByte();
+		lookAtYaw = data.getByte();
+		useLookAtYaw = data.getBoolean();
 	}
 	
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(28);
-		addShort(data, 10);
-		addInt(  data, CRC);
-		addLong( data, objId);
-		addShort(data, posX);
-		addShort(data, posY);
-		addShort(data, posZ);
-		addInt  (data, updateCounter);
-		addByte (data, (byte) speed);
-		addByte (data, direction);
-		addByte (data, lookAtYaw); // lookAtYaw
-		addBoolean (data, useLookAtYaw); // useLookAtYaw
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(28);
+		data.addShort(10);
+		data.addInt(CRC);
+		data.addLong(objId);
+		data.addShort(posX);
+		data.addShort(posY);
+		data.addShort(posZ);
+		data.addInt(updateCounter);
+		data.addByte((byte) speed);
+		data.addByte(direction);
+		data.addByte(lookAtYaw); // lookAtYaw
+		data.addBoolean(useLookAtYaw); // useLookAtYaw
 		return data;
 	}
 	

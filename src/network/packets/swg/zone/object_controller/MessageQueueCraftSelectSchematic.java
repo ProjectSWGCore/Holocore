@@ -27,7 +27,7 @@
  ***********************************************************************************/
 package network.packets.swg.zone.object_controller;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 public class MessageQueueCraftSelectSchematic extends ObjectController {
 
@@ -40,22 +40,22 @@ public class MessageQueueCraftSelectSchematic extends ObjectController {
 		this.schematicId = schematicId;
 	}
 	
-	public MessageQueueCraftSelectSchematic(ByteBuffer data) {
+	public MessageQueueCraftSelectSchematic(NetBuffer data) {
 		super(CRC);
 		decode(data);
 	}
 
 	@Override
-	public void decode(ByteBuffer data) {
+	public void decode(NetBuffer data) {
 		decodeHeader(data);
-		schematicId = getInt(data);		
+		schematicId = data.getInt();		
 	}
 
 	@Override
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + 4 );
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(HEADER_LENGTH + 4 );
 		encodeHeader(data);
-		addInt(data, schematicId);
+		data.addInt(schematicId);
 		return data;
 	}
 }

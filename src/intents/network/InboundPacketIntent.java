@@ -27,18 +27,16 @@
 ***********************************************************************************/
 package intents.network;
 
+import com.projectswg.common.control.Intent;
+
 import network.packets.Packet;
-import resources.control.Intent;
 
 public class InboundPacketIntent extends Intent {
-	
-	public static final String TYPE = "InboundPacketIntent";
 	
 	private Packet packet;
 	private long networkId;
 	
 	public InboundPacketIntent(Packet p, long networkId) {
-		super(TYPE);
 		setPacket(p);
 		setNetworkId(networkId);
 	}

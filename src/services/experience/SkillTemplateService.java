@@ -33,6 +33,12 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.projectswg.common.control.Service;
+import com.projectswg.common.data.RGB;
+import com.projectswg.common.data.swgfile.ClientFactory;
+import com.projectswg.common.data.swgfile.visitors.DatatableData;
+import com.projectswg.common.debug.Log;
+
 import intents.GrantBadgeIntent;
 import intents.experience.GrantSkillIntent;
 import intents.experience.LevelChangedIntent;
@@ -43,17 +49,12 @@ import network.packets.swg.zone.PlayMusicMessage;
 import network.packets.swg.zone.object_controller.ShowFlyText;
 import network.packets.swg.zone.object_controller.ShowFlyText.Scale;
 import resources.Race;
-import resources.client_info.ClientFactory;
-import resources.client_info.visitors.DatatableData;
-import resources.common.RGB;
-import resources.control.Service;
 import resources.encodables.StringId;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
 import resources.player.Player;
 import resources.rewards.RoadmapReward;
-import resources.server_info.Log;
 import services.objects.ObjectCreator;
 import services.objects.StaticItemService;
 

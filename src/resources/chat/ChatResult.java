@@ -27,41 +27,51 @@
 
 package resources.chat;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author Waverunner
  */
 public enum ChatResult {
-	NONE(-1), // The client will just display an "unknown error code" if this is used.
-	SUCCESS(0),
-	TARGET_AVATAR_DOESNT_EXIST(4),
-	ROOM_INVALID_ID(5),
-	ROOM_INVALID_NAME(6),
-	CUSTOM_FAILURE(9),
-	ROOM_AVATAR_BANNED(12),
-	ROOM_PRIVATE(13),
-	ROOM_AVATAR_NO_PERMISSION(16),
-	IGNORED(23),
-	ROOM_ALREADY_EXISTS(24),
-	ROOM_ALREADY_JOINED(36),
-	CHAT_SERVER_UNAVAILABLE(1000000),
-	ROOM_DIFFERENT_FACTION(1000001),
-	ROOM_NOT_GCW_DEFENDER_FACTION(1000005);
-
-
+	NONE							(-1), // The client will just display an "unknown error code" if this is used.
+	SUCCESS							(0),
+	TARGET_AVATAR_DOESNT_EXIST		(4),
+	ROOM_INVALID_ID					(5),
+	ROOM_INVALID_NAME				(6),
+	CUSTOM_FAILURE					(9),
+	ROOM_AVATAR_BANNED				(12),
+	ROOM_PRIVATE					(13),
+	ROOM_AVATAR_NO_PERMISSION		(16),
+	IGNORED							(23),
+	ROOM_ALREADY_EXISTS				(24),
+	ROOM_ALREADY_JOINED				(36),
+	CHAT_SERVER_UNAVAILABLE			(1000000),
+	ROOM_DIFFERENT_FACTION			(1000001),
+	ROOM_NOT_GCW_DEFENDER_FACTION	(1000005);
+	
+	private static final Map<Integer, ChatResult> RESULT_MAP = new HashMap<>();
+	
+	static {
+		for (ChatResult result : values()) {
+			RESULT_MAP.put(result.getCode(), result);
+		}
+	}
+	
 	private final int code;
+	
 	ChatResult(int code) {
 		this.code = code;
 	}
-
+	
 	public int getCode() {
 		return code;
 	}
-
+	
 	public static ChatResult fromInteger(int code) {
-		for (ChatResult result : ChatResult.values()) {
-			if (code == result.getCode())
-				return result;
-		}
-		return NONE;
+		ChatResult result = RESULT_MAP.get(code);
+		if (result == null)
+			return NONE;
+		return result;
 	}
 }

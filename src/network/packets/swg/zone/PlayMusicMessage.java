@@ -27,9 +27,9 @@
 ***********************************************************************************/
 package network.packets.swg.zone;
 
-import network.packets.swg.SWGPacket;
+import com.projectswg.common.network.NetBuffer;
 
-import java.nio.ByteBuffer;
+import network.packets.swg.SWGPacket;
 
 public class PlayMusicMessage extends SWGPacket {
 	public static final int CRC = getCrc("PlayMusicMessage");
@@ -55,23 +55,24 @@ public class PlayMusicMessage extends SWGPacket {
 	}
 	
 	@Override
-	public void decode(ByteBuffer data) {
-		super.decode(data, CRC);
-		soundFile = getAscii(data);
-		objectId = getLong(data);
-		repititions = getInt(data);
-		loop = getBoolean(data);
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
+			return;
+		soundFile = data.getAscii();
+		objectId = data.getLong();
+		repititions = data.getInt();
+		loop = data.getBoolean();
 	}
 	
 	@Override
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(21 + soundFile.length());
-		addShort(data, 5);
-		addInt(  data, CRC);
-		addAscii(data, soundFile);
-		addLong(data, objectId);
-		addInt(data, repititions);
-		addBoolean(data, loop);
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(21 + soundFile.length());
+		data.addShort(5);
+		data.addInt(CRC);
+		data.addAscii(soundFile);
+		data.addLong(objectId);
+		data.addInt(repititions);
+		data.addBoolean(loop);
 		return data;
 	}
 }

@@ -34,12 +34,13 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import resources.Terrain;
-import resources.client_info.ClientFactory;
-import resources.client_info.visitors.CrcStringTableData;
-import resources.client_info.visitors.DatatableData;
+import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.data.swgfile.ClientFactory;
+import com.projectswg.common.data.swgfile.visitors.CrcStringTableData;
+import com.projectswg.common.data.swgfile.visitors.DatatableData;
+import com.projectswg.common.debug.Log;
+
 import resources.objects.SWGObject;
-import resources.server_info.Log;
 
 public class BuildoutLoader {
 	

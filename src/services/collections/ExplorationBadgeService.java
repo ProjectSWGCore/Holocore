@@ -35,14 +35,15 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 
+import com.projectswg.common.control.Service;
+import com.projectswg.common.data.info.RelationalServerData;
+import com.projectswg.common.data.info.RelationalServerFactory;
+import com.projectswg.common.data.location.Point3D;
+import com.projectswg.common.debug.Log;
+
 import intents.GrantBadgeIntent;
 import intents.player.PlayerTransformedIntent;
-import resources.Point3D;
-import resources.control.Service;
 import resources.objects.creature.CreatureObject;
-import resources.server_info.Log;
-import resources.server_info.RelationalServerData;
-import resources.server_info.RelationalServerFactory;
 
 public class ExplorationBadgeService extends Service {
 

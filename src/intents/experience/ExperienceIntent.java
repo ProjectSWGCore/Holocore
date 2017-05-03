@@ -27,36 +27,30 @@
 ***********************************************************************************/
 package intents.experience;
 
-import resources.control.Intent;
+import com.projectswg.common.control.Intent;
+
 import resources.objects.creature.CreatureObject;
 
-/**
- *
- * @author Mads
- */
 public final class ExperienceIntent extends Intent {
-	
-	public static final String TYPE = "ExperienceIntent";
 	
 	private final CreatureObject creatureObject;
 	private final String xpType;
 	private final int experienceGained;
 	
 	public ExperienceIntent(CreatureObject creatureObject, String xpType, int experienceGained) {
-		super(TYPE);
 		this.creatureObject = creatureObject;
 		this.xpType = xpType;
 		this.experienceGained = experienceGained;
 	}
-
+	
 	public CreatureObject getCreatureObject() {
 		return creatureObject;
 	}
-
+	
 	public String getXpType() {
 		return xpType;
 	}
-
+	
 	public int getExperienceGained() {
 		return experienceGained;
 	}

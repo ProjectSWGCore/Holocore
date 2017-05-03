@@ -27,9 +27,9 @@
 ***********************************************************************************/
 package network.packets.swg.zone;
 
-import network.packets.swg.SWGPacket;
+import com.projectswg.common.network.NetBuffer;
 
-import java.nio.ByteBuffer;
+import network.packets.swg.SWGPacket;
 
 public class SceneEndBaselines extends SWGPacket {
 	public static final int CRC = getCrc("SceneEndBaselines");
@@ -44,18 +44,18 @@ public class SceneEndBaselines extends SWGPacket {
 		this.objId = objId;
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		objId = getLong(data);
+		objId = data.getLong();
 	}
 	
-	public ByteBuffer encode() {
+	public NetBuffer encode() {
 		int length = 14;
-		ByteBuffer data = ByteBuffer.allocate(length);
-		addShort(data, 2);
-		addInt(  data, CRC);
-		addLong( data, objId);
+		NetBuffer data = NetBuffer.allocate(length);
+		data.addShort(2);
+		data.addInt(CRC);
+		data.addLong(objId);
 		return data;
 	}
 	

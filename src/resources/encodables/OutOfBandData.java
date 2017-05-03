@@ -24,15 +24,14 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>
  ******************************************************************************/
-
 package resources.encodables;
 
-import resources.persistable.Persistable;
+import com.projectswg.common.encoding.Encodable;
+import com.projectswg.common.persistable.Persistable;
 
-/**
- * @author Waverunner
- */
 public interface OutOfBandData extends Encodable, Persistable {
+	
 	OutOfBandPackage.Type getOobType();
 	int getOobPosition();
+	
 }

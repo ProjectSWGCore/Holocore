@@ -27,14 +27,13 @@
 ***********************************************************************************/
 package intents.chat;
 
+import com.projectswg.common.control.Intent;
+
 import resources.commands.Command;
-import resources.control.Intent;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 
 public class ChatCommandIntent extends Intent {
-	
-	public static final String TYPE = "ChatCommandIntent";
 	
 	private CreatureObject source;
 	private SWGObject target;
@@ -42,7 +41,6 @@ public class ChatCommandIntent extends Intent {
 	private String [] arguments;
 	
 	public ChatCommandIntent() {
-		super(TYPE);
 		setSource(null);
 		setTarget(null);
 		setCommand(null);
@@ -50,7 +48,6 @@ public class ChatCommandIntent extends Intent {
 	}
 	
 	public ChatCommandIntent(CreatureObject source, SWGObject target, Command command, String [] arguments) {
-		super(TYPE);
 		setSource(source);
 		setTarget(target);
 		setCommand(command);

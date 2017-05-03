@@ -29,16 +29,16 @@ package resources.objects.manufacture;
 
 import java.util.Map.Entry;
 
+import com.projectswg.common.data.CRC;
+import com.projectswg.common.network.NetBuffer;
+import com.projectswg.common.network.NetBufferStream;
+
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.collections.SWGMap;
-import resources.common.CRC;
 import resources.encodables.StringId;
 import resources.network.BaselineBuilder;
-import resources.network.NetBuffer;
-import resources.network.NetBufferStream;
 import resources.objects.intangible.IntangibleObject;
 import resources.player.Player;
-import resources.server_info.CrcDatabase;
 
 public class ManufactureSchematicObject extends IntangibleObject {
 	
@@ -142,7 +142,7 @@ public class ManufactureSchematicObject extends IntangibleObject {
 	@Override
 	public void parseBaseline3(NetBuffer buffer) {
 		super.parseBaseline3(buffer);
-		attributes = buffer.getSwgMap(3, 5, StringId.class, Float.class);
+		attributes = SWGMap.getSwgMap(buffer, 3, 5, StringId.class, Float.class);
 		itemsPerContainer = buffer.getInt();
 		manufactureTime = buffer.getFloat();
 	}
@@ -152,9 +152,7 @@ public class ManufactureSchematicObject extends IntangibleObject {
 		super.parseBaseline6(buffer);
 		appearanceData = buffer.getArray();
 		customAppearance = buffer.getArray();
-		try (CrcDatabase db = new CrcDatabase()) {
-			draftSchematicTemplate = db.getString(buffer.getInt());
-		}
+		draftSchematicTemplate = CRC.getString(buffer.getInt());
 		crafting = buffer.getBoolean();
 		schematicChangedSignal = buffer.getByte();
 	}

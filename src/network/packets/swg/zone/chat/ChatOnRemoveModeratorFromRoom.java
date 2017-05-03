@@ -27,10 +27,10 @@
 
 package network.packets.swg.zone.chat;
 
+import com.projectswg.common.network.NetBuffer;
+
 import network.packets.swg.SWGPacket;
 import resources.chat.ChatAvatar;
-
-import java.nio.ByteBuffer;
 
 /**
  * @author Waverunner
@@ -53,26 +53,26 @@ public class ChatOnRemoveModeratorFromRoom extends SWGPacket {
 	}
 
 	@Override
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		target		= getEncodable(data, ChatAvatar.class);
-		moderator	= getEncodable(data, ChatAvatar.class);
-		result		= getInt(data);
-		room		= getAscii(data);
-		sequence	= getInt(data);
+		target		= data.getEncodable(ChatAvatar.class);
+		moderator	= data.getEncodable(ChatAvatar.class);
+		result		= data.getInt();
+		room		= data.getAscii();
+		sequence	= data.getInt();
 	}
 
 	@Override
-	public ByteBuffer encode() {
-		ByteBuffer bb = ByteBuffer.allocate(16 + target.encode().length + moderator.encode().length + room.length());
-		addShort(bb, 1);
-		addInt(bb, CRC);
-		addEncodable(bb, target);
-		addEncodable(bb, moderator);
-		addInt(bb, result);
-		addAscii(bb, room);
-		addInt(bb, sequence);
-		return bb;
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(16 + target.encode().length + moderator.encode().length + room.length());
+		data.addShort(1);
+		data.addInt(CRC);
+		data.addEncodable(target);
+		data.addEncodable(moderator);
+		data.addInt(result);
+		data.addAscii(room);
+		data.addInt(sequence);
+		return data;
 	}
 }

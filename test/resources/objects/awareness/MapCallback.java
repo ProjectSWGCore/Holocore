@@ -31,9 +31,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.junit.Assert;
 
+import com.projectswg.common.debug.Log;
+
 import resources.objects.SWGObject;
 import resources.objects.awareness.TerrainMap.TerrainMapCallback;
-import resources.server_info.Log;
 
 class MapCallback implements TerrainMapCallback {
 	

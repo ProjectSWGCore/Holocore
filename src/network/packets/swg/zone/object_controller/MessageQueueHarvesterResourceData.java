@@ -27,7 +27,7 @@
  ***********************************************************************************/
 package network.packets.swg.zone.object_controller;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 public class MessageQueueHarvesterResourceData extends ObjectController {
 
@@ -50,39 +50,39 @@ public class MessageQueueHarvesterResourceData extends ObjectController {
 		this.resourceDensity = resourceDensity;
 	}
 	
-	public MessageQueueHarvesterResourceData(ByteBuffer data) {
+	public MessageQueueHarvesterResourceData(NetBuffer data) {
 		super(CRC);
 		decode(data);
 	}
 
 	@Override
-	public void decode(ByteBuffer data) {
+	public void decode(NetBuffer data) {
 		decodeHeader(data);
-		harvesterId = getLong(data);
-		resourceListSize = getInt(data);
+		harvesterId = data.getLong();
+		resourceListSize = data.getInt();
 		for(int i = 0; i < resourceListSize; i++){
-			resourceId[i] = getLong(data);
-			resourceName[i] = getUnicode(data);
-			resourceType[i] = getUnicode(data);
-			resourceDensity[i] = getByte(data);
+			resourceId[i] = data.getLong();
+			resourceName[i] = data.getUnicode();
+			resourceType[i] = data.getUnicode();
+			resourceDensity[i] = data.getByte();
 		}
 		
 	}
 
 	@Override
-	public ByteBuffer encode() {
+	public NetBuffer encode() {
 		int len = HEADER_LENGTH + 12;
 		for (int i = 0; i < resourceListSize; i++)
 		    len += 17 + resourceName[i].length() * 2 + resourceType[i].length() * 2;
-		ByteBuffer data = ByteBuffer.allocate(len);
+		NetBuffer data = NetBuffer.allocate(len);
 		encodeHeader(data);
-		addLong(data, harvesterId);
-		addInt(data, resourceListSize);
+		data.addLong(harvesterId);
+		data.addInt(resourceListSize);
 		for(int i = 0; i < resourceListSize; i++){
-			addLong(data, resourceId[i]);
-			addUnicode(data, resourceName[i]);
-			addUnicode(data, resourceType[i]);
-			addByte(data, resourceDensity[i]);
+			data.addLong(resourceId[i]);
+			data.addUnicode(resourceName[i]);
+			data.addUnicode(resourceType[i]);
+			data.addByte(resourceDensity[i]);
 		}
 		
 		return data;

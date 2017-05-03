@@ -34,6 +34,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.projectswg.common.control.Service;
+import com.projectswg.common.debug.Log;
+
 import intents.network.GalacticPacketIntent;
 import intents.sui.SuiWindowIntent;
 import network.packets.Packet;
@@ -41,9 +44,7 @@ import network.packets.swg.SWGPacket;
 import network.packets.swg.zone.server_ui.SuiCreatePageMessage;
 import network.packets.swg.zone.server_ui.SuiEventNotification;
 import network.packets.swg.zone.server_ui.SuiForceClosePage;
-import resources.control.Service;
 import resources.player.Player;
-import resources.server_info.Log;
 import resources.sui.ISuiCallback;
 import resources.sui.SuiBaseWindow;
 import resources.sui.SuiComponent;

@@ -27,20 +27,21 @@
  ***********************************************************************************/
 package network.packets.swg.zone;
 
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import resources.Location;
-import resources.Point3D;
-import resources.Terrain;
-import resources.TravelPoint;
-import utilities.Encoder.StringType;
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.location.Point3D;
+import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.encoding.StringType;
+import com.projectswg.common.network.NetBuffer;
+
 import network.packets.swg.SWGPacket;
+import resources.TravelPoint;
 
 public class PlanetTravelPointListResponse extends SWGPacket {
-
+	
 	public static final int CRC = getCrc("PlanetTravelPointListResponse");
 	
 	private Collection<TravelPoint> travelPoints;
@@ -58,51 +59,52 @@ public class PlanetTravelPointListResponse extends SWGPacket {
 	}
 	
 	@Override
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(calculateSize());
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(calculateSize());
 		
-		addShort(data, 6); // Operand count
-		addInt(data, CRC); // CRC
-		addAscii(data, planetName);	// ASCII planet name
+		data.addShort(6); // Operand count
+		data.addInt(CRC); // CRC
+		data.addAscii(planetName);	// ASCII planet name
 		
-		addInt(data, travelPoints.size()); // List size
-		for(TravelPoint tp : travelPoints) // Point names
-			addAscii(data, tp.getName());
+		data.addInt(travelPoints.size()); // List size
+		for (TravelPoint tp : travelPoints) // Point names
+			data.addAscii(tp.getName());
 		
-		addInt(data, travelPoints.size()); // List size
-		for(TravelPoint tp : travelPoints) { // Point coordinates
-			addFloat(data, (float) tp.getLocation().getX());
-			addFloat(data, (float) tp.getLocation().getY());
-			addFloat(data, (float) tp.getLocation().getZ());
+		data.addInt(travelPoints.size()); // List size
+		for (TravelPoint tp : travelPoints) { // Point coordinates
+			data.addFloat((float) tp.getLocation().getX());
+			data.addFloat((float) tp.getLocation().getY());
+			data.addFloat((float) tp.getLocation().getZ());
 		}
 		
-		addInt(data, additionalCosts.size()); // List size
-		for(int additionalCost : additionalCosts) { // additional costs
-			addInt(data, additionalCost <= 0 ? additionalCost + 50 : additionalCost / 2);
+		data.addInt(additionalCosts.size()); // List size
+		for (int additionalCost : additionalCosts) { // additional costs
+			data.addInt(additionalCost <= 0 ? additionalCost + 50 : additionalCost / 2);
 		}
 		
-		addInt(data, travelPoints.size()); // List size
-		for(TravelPoint tp : travelPoints) { // reachable
-			addBoolean(data, tp.isReachable());
+		data.addInt(travelPoints.size()); // List size
+		for (TravelPoint tp : travelPoints) { // reachable
+			data.addBoolean(tp.isReachable());
 		}
 		
 		return data;
 	}
 	
 	@Override
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		planetName = getAscii(data);
-		List<String> pointNames = getList(data, StringType.ASCII);
-		List<Point3D> points = getList(data, Point3D.class);
-		int[] additionalCosts = getIntArray(data);
-		boolean[] pointsReachable = getBooleanArray(data);
+		planetName = data.getAscii();
+		List<String> pointNames = data.getList(StringType.ASCII);
+		List<Point3D> points = data.getList(Point3D.class);
+		int[] additionalCosts = data.getIntArray();
+		boolean[] pointsReachable = data.getBooleanArray();
 		
-		for(int additionalCost : additionalCosts)
+		for (int additionalCost : additionalCosts) {
 			this.additionalCosts.add(additionalCost * 2);
+		}
 		
-		for(int i = 0; i < pointNames.size(); i++) {
+		for (int i = 0; i < pointNames.size(); i++) {
 			String pointName = pointNames.get(i);
 			Point3D point = points.get(i);
 			boolean reachable = pointsReachable[i];
@@ -116,16 +118,15 @@ public class PlanetTravelPointListResponse extends SWGPacket {
 	}
 	
 	private int calculateSize() {
-		int size =
-				Integer.BYTES * 5 + // CRC, 4x travelpoint list size
+		int size = Integer.BYTES * 5 + // CRC, 4x travelpoint list size
 				Short.BYTES * 2 +	// operand count + ascii string for planet name
 				travelPoints.size() * (3 * Float.BYTES) + // all the floats
 				travelPoints.size() * Integer.BYTES + // prices
 				travelPoints.size() * Byte.BYTES; // the "reachable" booleans
 		
-		for(TravelPoint tp : travelPoints)
+		for (TravelPoint tp : travelPoints)
 			size += tp.getName().length() + Short.BYTES; // length of each actual name + a short to indicate name length
-		
+			
 		size += planetName.length();
 		
 		return size;

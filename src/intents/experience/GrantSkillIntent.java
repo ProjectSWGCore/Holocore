@@ -27,16 +27,11 @@
 ***********************************************************************************/
 package intents.experience;
 
-import resources.control.Intent;
+import com.projectswg.common.control.Intent;
+
 import resources.objects.creature.CreatureObject;
 
-/**
- *
- * @author Mads
- */
 public final class GrantSkillIntent extends Intent {
-	
-	public static final String TYPE = "GrantSkillIntent";
 	
 	private final IntentType intentType;
 	private final String skillName;
@@ -44,31 +39,31 @@ public final class GrantSkillIntent extends Intent {
 	private final boolean grantRequiredSkills;
 	
 	public GrantSkillIntent(IntentType type, String skillName, CreatureObject target, boolean grantRequiredSkills) {
-		super(TYPE);
 		this.intentType = type;
 		this.skillName = skillName;
 		this.target = target;
 		this.grantRequiredSkills = grantRequiredSkills;
 	}
-
+	
 	public IntentType getIntentType() {
 		return intentType;
 	}
-
+	
 	public String getSkillName() {
 		return skillName;
 	}
-
+	
 	public CreatureObject getTarget() {
 		return target;
 	}
-
+	
 	public boolean isGrantRequiredSkills() {
 		return grantRequiredSkills;
 	}
 	
 	public static enum IntentType {
-		GRANT, GIVEN
+		GRANT,
+		GIVEN
 	}
 	
 }

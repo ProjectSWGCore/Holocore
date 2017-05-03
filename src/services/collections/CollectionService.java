@@ -27,28 +27,26 @@
  ***********************************************************************************/
 package services.collections;
 
-import intents.GrantClickyCollectionIntent;
-import intents.radial.RadialRequestIntent;
-import intents.radial.RadialResponseIntent;
-import intents.radial.RadialSelectionIntent;
-import resources.control.Service;
-import resources.objects.collections.ClickyCollectionItem;
-import resources.objects.collections.CollectionItem;
-import resources.radial.RadialOption;
-import resources.radial.Radials;
-import resources.server_info.Log;
-import resources.server_info.RelationalServerData;
-import resources.server_info.RelationalServerFactory;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by skylerlehan on 8/21/16.
- */
+import com.projectswg.common.control.Service;
+import com.projectswg.common.data.info.RelationalServerData;
+import com.projectswg.common.data.info.RelationalServerFactory;
+import com.projectswg.common.debug.Log;
+
+import intents.GrantClickyCollectionIntent;
+import intents.radial.RadialRequestIntent;
+import intents.radial.RadialResponseIntent;
+import intents.radial.RadialSelectionIntent;
+import resources.objects.collections.ClickyCollectionItem;
+import resources.objects.collections.CollectionItem;
+import resources.radial.RadialOption;
+import resources.radial.Radials;
+
 public class CollectionService extends Service {
 
 	private static final String GET_CLICKY_COLLECTION_ITEMS_SQL = "SELECT iff_template FROM collection_clicky";
@@ -205,6 +203,7 @@ public class CollectionService extends Service {
 	}
 
 	private boolean isConsumeCollectionItem(ConsumeCollection collection) {
+		// FINDBUGS ERROR: Bug: String is incompatible with expected argument type CollectionService$ConsumeCollection in services.collections.CollectionService.isConsumeCollectionItem(CollectionService$ConsumeCollection)
 		return consumeCollectionItems.contains(cleanIff(collection.iffTemplate));
 	}
 

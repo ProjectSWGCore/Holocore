@@ -20,6 +20,15 @@ function sendDetails(player, object, args) {
 		intentFactory.sendSystemMessage(player, "False. Checked " + count + " in aware");
 		return;
 	}
+	if (args.length >= 2 && args[1].equalsIgnoreCase("deathblow")) {
+		intentFactory.sendSystemMessage(player, "Dealing deathblow");
+		var KillCreatureIntent = Java.type('intents.combat.KillCreatureIntent');
+		var IncapacitateCreatureIntent = Java.type('intents.combat.IncapacitateCreatureIntent');
+		var incap = new IncapacitateCreatureIntent(object, object);
+		new KillCreatureIntent(object, object).broadcastAfterIntent(incap);
+		incap.broadcast();
+		return;
+	}
 	intentFactory.sendSystemMessage(player, object.getName() + " - " + object.getClass().getSimpleName() + " [" + object.getObjectId() + "]");
 	intentFactory.sendSystemMessage(player, "    STR: " + object.getStringId() + " / " + object.getDetailStringId());
 	intentFactory.sendSystemMessage(player, "    Template: " + object.getTemplate());

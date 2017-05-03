@@ -27,7 +27,7 @@
  ***********************************************************************************/
 package network.packets.swg.zone.object_controller;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 public class MessageQueueDraftSchematics extends ObjectController {
 
@@ -50,35 +50,35 @@ public class MessageQueueDraftSchematics extends ObjectController {
 		System.arraycopy(schematicSubcategories, 0, this.schematicSubcategories, 0, 4);
 	}
 
-	public MessageQueueDraftSchematics(ByteBuffer data) {
+	public MessageQueueDraftSchematics(NetBuffer data) {
 		super(CRC);
 		decode(data);
 	}
 	
 	@Override
-	public void decode(ByteBuffer data) {
+	public void decode(NetBuffer data) {
 		decodeHeader(data);
-		toolId = getLong(data);
-		craftingStationId = getLong(data);
-		schematicsCounter = getInt(data);
+		toolId = data.getLong();
+		craftingStationId = data.getLong();
+		schematicsCounter = data.getInt();
 		for(int i = 0; i < schematicsCounter; i++){
-			schematicsId[i] = getInt(data);
-			schematicsCrc[i] = getInt(data);
-			schematicSubcategories[i] = getArray(data);
+			schematicsId[i] = data.getInt();
+			schematicsCrc[i] = data.getInt();
+			schematicSubcategories[i] = data.getArray(4);
 		}		
 	}
 
 	@Override
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + 20 + schematicsCounter * 12 + schematicSubcategories.length);
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(HEADER_LENGTH + 20 + schematicsCounter * 12 + schematicSubcategories.length);
 		encodeHeader(data);
-		addLong(data, toolId);
-		addLong(data, craftingStationId);
-		addInt(data, schematicsCounter);
+		data.addLong(toolId);
+		data.addLong(craftingStationId);
+		data.addInt(schematicsCounter);
 		for(int i = 0; i< schematicsCounter; i++){
-			addInt(data, schematicsId[i]);
-			addInt(data, schematicsCrc[i]);
-			addData(data, schematicSubcategories[i]);
+			data.addInt(schematicsId[i]);
+			data.addInt(schematicsCrc[i]);
+			data.addRawArray(schematicSubcategories[i]);
 		}
 		return data;
 	}

@@ -27,9 +27,9 @@
 ***********************************************************************************/
 package network.packets.swg.zone;
 
-import network.packets.swg.SWGPacket;
+import com.projectswg.common.network.NetBuffer;
 
-import java.nio.ByteBuffer;
+import network.packets.swg.SWGPacket;
 
 public class SceneDestroyObject extends SWGPacket {
 	public static final int CRC = getCrc("SceneDestroyObject");
@@ -44,23 +44,23 @@ public class SceneDestroyObject extends SWGPacket {
 		this.objId = objId;
 	}
 	
-	public SceneDestroyObject(ByteBuffer data) {
+	public SceneDestroyObject(NetBuffer data) {
 		decode(data);
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		objId = getLong(data);
-		getByte(data);
+		objId = data.getLong();
+		data.getByte();
 	}
 	
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(15);
-		addShort(data, 3);
-		addInt  (data, CRC);
-		addLong (data, objId);
-		addByte (data, 0);
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(15);
+		data.addShort(3);
+		data.addInt(CRC);
+		data.addLong(objId);
+		data.addByte(0);
 		return data;
 	}
 	

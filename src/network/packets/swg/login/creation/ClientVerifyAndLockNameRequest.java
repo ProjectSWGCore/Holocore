@@ -27,7 +27,7 @@
 ***********************************************************************************/
 package network.packets.swg.login.creation;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 
@@ -47,19 +47,19 @@ public class ClientVerifyAndLockNameRequest extends SWGPacket {
 		this.name = name;
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		race = getAscii(data);
-		name = getUnicode(data);
+		race = data.getAscii();
+		name = data.getUnicode();
 	}
 	
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(10 + race.length() + name.length() * 2);
-		addShort(  data, 4);
-		addInt(    data, CRC);
-		addAscii(  data, race);
-		addUnicode(data, name);
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(10 + race.length() + name.length() * 2);
+		data.addShort(4);
+		data.addInt(CRC);
+		data.addAscii(race);
+		data.addUnicode(name);
 		return data;
 	}
 	

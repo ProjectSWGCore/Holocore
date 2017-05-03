@@ -35,19 +35,20 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 
+import com.projectswg.common.concurrency.PswgBasicScheduledThread;
+import com.projectswg.common.control.Service;
+import com.projectswg.common.data.CRC;
+import com.projectswg.common.debug.Assert;
+import com.projectswg.common.debug.Log;
+
 import intents.BuffIntent;
 import intents.PlayerEventIntent;
 import intents.SkillModIntent;
 import intents.combat.CreatureKilledIntent;
 import main.ProjectSWG;
 import network.packets.swg.zone.PlayClientEffectObjectMessage;
-import resources.common.CRC;
-import resources.concurrency.PswgBasicScheduledThread;
-import resources.control.Assert;
-import resources.control.Service;
 import resources.objects.creature.Buff;
 import resources.objects.creature.CreatureObject;
-import resources.server_info.Log;
 import resources.server_info.StandardLog;
 import services.commands.buff.BuffData;
 import services.commands.buff.BuffMap;
@@ -109,6 +110,8 @@ public class BuffService extends Service {
 	
 	private void handleBuffIntent(BuffIntent bi) {
 		BuffData buffData = getBuff(bi.getBuffName());
+		Assert.notNull(buffData, "No known buff: " + bi.getBuffName());
+		Assert.test(buffData.getName().equals(bi.getBuffName()), "BuffIntent name ["+bi.getBuffName()+"] does not match BuffData name ["+buffData.getName()+"]");
 		if (bi.isRemove()) {
 			removeBuff(bi.getReceiver(), buffData, false);
 		} else {
@@ -244,7 +247,8 @@ public class BuffService extends Service {
 		Assert.notNull(buffData);
 		
 		Optional<Buff> optionalEntry = creature.getBuffEntries(buff -> buff.getCrc() == buffData.getCrc()).findAny();
-		Assert.test(optionalEntry.isPresent(), "Buff must be present if being removed");
+		if (!optionalEntry.isPresent())
+			return; // Obique: Used to be an assertion, however if a service sends the removal after it expires it would assert - so I just removed it.
 		
 		Buff buff = optionalEntry.get();
 		if (buffData.getMaxStackCount() > 1 && !expired && buff.getStackCount() > 1) {

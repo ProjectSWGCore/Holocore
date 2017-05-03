@@ -33,11 +33,12 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
-import resources.persistable.InputPersistenceStream;
-import resources.persistable.InputPersistenceStream.PersistableCreator;
-import resources.persistable.OutputPersistenceStream;
-import resources.persistable.OutputPersistenceStream.PersistableSaver;
-import resources.persistable.Persistable;
+import com.projectswg.common.debug.Log;
+import com.projectswg.common.persistable.InputPersistenceStream;
+import com.projectswg.common.persistable.InputPersistenceStream.PersistableCreator;
+import com.projectswg.common.persistable.OutputPersistenceStream;
+import com.projectswg.common.persistable.OutputPersistenceStream.PersistableSaver;
+import com.projectswg.common.persistable.Persistable;
 
 public class CachedObjectDatabase<V extends Persistable> extends ObjectDatabase<V> {
 	

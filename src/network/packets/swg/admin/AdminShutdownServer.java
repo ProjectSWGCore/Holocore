@@ -27,11 +27,11 @@
  ***********************************************************************************/
 package network.packets.swg.admin;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 public class AdminShutdownServer extends AdminPacket {
 	
-	public static final int CRC = resources.common.CRC.getCrc("AdminShutdownServer");
+	public static final int CRC = getCrc("AdminShutdownServer");
 	
 	private int shutdownTime;
 	
@@ -44,18 +44,18 @@ public class AdminShutdownServer extends AdminPacket {
 	}
 	
 	@Override
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		shutdownTime = getShort(data);
+		shutdownTime = data.getShort();
 	}
 	
 	@Override
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(8);
-		addShort(data, 1);
-		addInt(data, CRC);
-		addShort(data, shutdownTime);
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(8);
+		data.addShort(1);
+		data.addInt(CRC);
+		data.addShort(shutdownTime);
 		return data;
 	}
 	

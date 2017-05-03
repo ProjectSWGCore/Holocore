@@ -27,10 +27,10 @@
 ***********************************************************************************/
 package network.packets.swg.zone.chat;
 
+import com.projectswg.common.network.NetBuffer;
+
 import network.packets.swg.SWGPacket;
 import resources.chat.ChatAvatar;
-
-import java.nio.ByteBuffer;
 
 public class ChatOnLeaveRoom extends SWGPacket {
 	public static final int CRC = getCrc("ChatOnLeaveRoom");
@@ -51,27 +51,27 @@ public class ChatOnLeaveRoom extends SWGPacket {
 		this.sequence = sequence;
 	}
 	
-	public ChatOnLeaveRoom(ByteBuffer data) {
+	public ChatOnLeaveRoom(NetBuffer data) {
 		decode(data);
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		avatar 		= getEncodable(data, ChatAvatar.class);
-		result 		= getInt(data);
-		chatRoomId 	= getInt(data);
-		sequence 	= getInt(data);
+		avatar 		= data.getEncodable(ChatAvatar.class);
+		result 		= data.getInt();
+		chatRoomId 	= data.getInt();
+		sequence 	= data.getInt();
 	}
 	
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(18 + avatar.getSize());
-		addShort(data, 5);
-		addInt(  data, CRC);
-		addEncodable(data, avatar);
-		addInt(data, result);
-		addInt  (data, chatRoomId);
-		addInt  (data, sequence);
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(18 + avatar.getLength());
+		data.addShort(5);
+		data.addInt(CRC);
+		data.addEncodable(avatar);
+		data.addInt(result);
+		data.addInt(chatRoomId);
+		data.addInt(sequence);
 		return data;
 	}
 	

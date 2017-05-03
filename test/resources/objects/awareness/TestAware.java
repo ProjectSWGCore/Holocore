@@ -37,6 +37,7 @@ import org.junit.runners.JUnit4;
 import resources.objects.SWGObject;
 import resources.objects.cell.CellObject;
 import resources.player.Player;
+import test_resources.GenericCreatureObject;
 
 @RunWith(JUnit4.class)
 public class TestAware {

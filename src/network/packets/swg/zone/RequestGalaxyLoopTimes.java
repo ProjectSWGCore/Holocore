@@ -27,9 +27,9 @@
 ***********************************************************************************/
 package network.packets.swg.zone;
 
-import network.packets.swg.SWGPacket;
+import com.projectswg.common.network.NetBuffer;
 
-import java.nio.ByteBuffer;
+import network.packets.swg.SWGPacket;
 
 public class RequestGalaxyLoopTimes extends SWGPacket {
 	public static final int CRC = getCrc("RequestGalaxyLoopTimes");
@@ -38,15 +38,18 @@ public class RequestGalaxyLoopTimes extends SWGPacket {
 		
 	}
 	
-	public void decode(ByteBuffer data) {
-		super.decode(data, CRC);
+	@Override
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
+			return;
 	}
 	
-	public ByteBuffer encode() {
+	@Override
+	public NetBuffer encode() {
 		int length = 6;
-		ByteBuffer data = ByteBuffer.allocate(length);
-		addShort(data, 1);
-		addInt(  data, CRC);
+		NetBuffer data = NetBuffer.allocate(length);
+		data.addShort(1);
+		data.addInt(CRC);
 		return data;
 	}
 }

@@ -27,6 +27,8 @@
 ***********************************************************************************/
 package main;
 
+import java.io.File;
+import java.io.IOException;
 import java.lang.Thread.State;
 import java.util.HashMap;
 import java.util.List;
@@ -34,11 +36,17 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
+import com.projectswg.common.concurrency.Delay;
+import com.projectswg.common.control.IntentManager;
+import com.projectswg.common.debug.Log;
+import com.projectswg.common.debug.Log.LogLevel;
+import com.projectswg.common.debug.log_wrapper.ConsoleLogWrapper;
+import com.projectswg.common.debug.log_wrapper.FileLogWrapper;
+
 import intents.server.ServerStatusIntent;
 import resources.Galaxy.GalaxyStatus;
-import resources.control.IntentManager;
 import resources.control.ServerStatus;
-import resources.server_info.Log;
+import resources.server_info.DataManager;
 import services.CoreManager;
 
 public class ProjectSWG {
@@ -51,7 +59,9 @@ public class ProjectSWG {
 	private ServerInitStatus initStatus;
 	private int adminServerPort;
 	
-	public static final void main(String [] args) {
+	public static final void main(String [] args) throws IOException {
+		Log.addWrapper(new ConsoleLogWrapper(LogLevel.VERBOSE));
+		Log.addWrapper(new FileLogWrapper(new File("log.txt")));
 		server = new ProjectSWG();
 		AtomicBoolean forcingShutdown = new AtomicBoolean(false);
 		Runtime.getRuntime().addShutdownHook(new Thread(() -> {
@@ -59,7 +69,7 @@ public class ProjectSWG {
 			server.forceShutdown();
 		}, "main-shutdown-hook"));
 		try {
-			startupIntentManager();
+			startupStaticClasses();
 			server.run(args);
 		} catch (Throwable t) {
 			Log.e(t);
@@ -68,7 +78,7 @@ public class ProjectSWG {
 			server.stop();
 			server.terminate();
 		} finally {
-			shutdownIntentManager();
+			shutdownStaticClasses();
 			printFinalPswgState();
 			Log.i("Server shut down.");
 			if (!forcingShutdown.get())
@@ -93,12 +103,14 @@ public class ProjectSWG {
 		return (long) (System.currentTimeMillis()/1E3 - 1309996800L); // Date is 07/07/2011 GMT
 	}
 	
-	private static void startupIntentManager() {
+	private static void startupStaticClasses() {
+		DataManager.initialize();
 		IntentManager.getInstance().initialize();
 	}
 	
-	private static void shutdownIntentManager() {
+	private static void shutdownStaticClasses() {
 		IntentManager.getInstance().terminate();
+		DataManager.terminate();
 	}
 	
 	private static void printFinalPswgState() {
@@ -207,11 +219,8 @@ public class ProjectSWG {
 	private void loop() {
 		setStatus((manager.getGalaxyStatus() == GalaxyStatus.UP) ? ServerStatus.OPEN : ServerStatus.LOCKED);
 		while (!shutdownRequested && !manager.isShutdownRequested() && manager.isOperational()) {
-			try {
-				Thread.sleep(50);
-			} catch (InterruptedException e) {
-				throw new CoreException("Main Thread Interrupted.");
-			}
+			if (Delay.sleepMicro(50))
+				throw new CoreException("Main Thread Interrupted");
 		}
 	}
 	

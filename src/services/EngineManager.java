@@ -30,13 +30,15 @@ package services;
 import java.io.File;
 import java.io.IOException;
 
+import com.projectswg.common.control.Manager;
+import com.projectswg.common.data.info.Config;
+import com.projectswg.common.data.info.RelationalDatabase;
+import com.projectswg.common.data.info.RelationalServerFactory;
+import com.projectswg.common.debug.Log;
+
 import resources.client_info.ServerFactory;
 import resources.config.ConfigFile;
-import resources.control.Manager;
-import resources.server_info.Config;
-import resources.server_info.Log;
-import resources.server_info.RelationalDatabase;
-import resources.server_info.RelationalServerFactory;
+import resources.server_info.DataManager;
 import services.network.NetworkManager;
 
 public class EngineManager extends Manager {
@@ -56,7 +58,7 @@ public class EngineManager extends Manager {
 	
 	@Override
 	public boolean initialize() {
-		Config config = getConfig(ConfigFile.PRIMARY);
+		Config config = DataManager.getConfig(ConfigFile.PRIMARY);
 		
 		if (config.getInt("CLEAN-CHARACTER-DATA", 0) == 1)
 			wipeCharacterDatabase();

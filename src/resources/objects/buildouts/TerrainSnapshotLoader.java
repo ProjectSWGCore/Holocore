@@ -32,16 +32,17 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import resources.Location;
-import resources.Terrain;
-import resources.client_info.ClientFactory;
-import resources.client_info.visitors.WorldSnapshotData;
-import resources.client_info.visitors.WorldSnapshotData.Node;
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.data.swgfile.ClientFactory;
+import com.projectswg.common.data.swgfile.visitors.WorldSnapshotData;
+import com.projectswg.common.data.swgfile.visitors.WorldSnapshotData.Node;
+import com.projectswg.common.debug.Log;
+
 import resources.objects.SWGObject;
 import resources.objects.SWGObject.ObjectClassification;
 import resources.objects.building.BuildingObject;
 import resources.objects.cell.CellObject;
-import resources.server_info.Log;
 import services.objects.ObjectCreator;
 
 public class TerrainSnapshotLoader {

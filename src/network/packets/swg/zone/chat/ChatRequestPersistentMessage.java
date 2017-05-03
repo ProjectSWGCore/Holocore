@@ -27,7 +27,7 @@
 ***********************************************************************************/
 package network.packets.swg.zone.chat;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 
@@ -38,22 +38,22 @@ public class ChatRequestPersistentMessage extends SWGPacket {
 	private int mailId;
 	
 	@Override
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		sequence 	= getInt(data);
-		mailId 		= getInt(data);
+		sequence 	= data.getInt();
+		mailId 		= data.getInt();
 	}
 
 	@Override
-	public ByteBuffer encode() {
-		ByteBuffer bb = ByteBuffer.allocate(14);
-		addShort(bb, 3);
-		addInt(bb, CRC);
-		addInt(bb, sequence);
-		addInt(bb, mailId);
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(14);
+		data.addShort(3);
+		data.addInt(CRC);
+		data.addInt(sequence);
+		data.addInt(mailId);
 
-		return bb;
+		return data;
 	}
 
 	public int getMailId() { return this.mailId; }

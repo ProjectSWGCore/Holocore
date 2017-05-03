@@ -24,41 +24,36 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>
  ******************************************************************************/
-
 package intents.chat;
 
-import resources.control.Intent;
+import com.projectswg.common.control.Intent;
+
 import resources.player.Player;
 
-/**
- * @author Waverunner
- */
-public class ChatAvatarRequestIntent extends Intent{
-	public static final String TYPE = "ChatAvatarRequestIntent";
-
+public class ChatAvatarRequestIntent extends Intent {
+	
 	private Player player;
 	private String target;
 	private RequestType requestType;
-
+	
 	public ChatAvatarRequestIntent(Player player, String target, RequestType requestType) {
-		super(TYPE);
 		this.player = player;
 		this.target = target;
 		this.requestType = requestType;
 	}
-
+	
 	public Player getPlayer() {
 		return player;
 	}
-
+	
 	public String getTarget() {
 		return target;
 	}
-
+	
 	public RequestType getRequestType() {
 		return requestType;
 	}
-
+	
 	public enum RequestType {
 		FRIEND_LIST,
 		TARGET_STATUS,

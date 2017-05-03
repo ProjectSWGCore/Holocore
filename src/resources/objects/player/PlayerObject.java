@@ -28,14 +28,15 @@
 package resources.objects.player;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+
+import com.projectswg.common.encoding.StringType;
+import com.projectswg.common.network.NetBufferStream;
 
 import network.packets.swg.zone.UpdatePostureMessage;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.collections.SWGMap;
 import resources.network.BaselineBuilder;
-import resources.network.NetBufferStream;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.objects.intangible.IntangibleObject;
@@ -43,7 +44,6 @@ import resources.objects.waypoint.WaypointObject;
 import resources.player.AccessLevel;
 import resources.player.Player;
 import resources.player.PlayerFlags;
-import utilities.Encoder.StringType;
 
 public class PlayerObject extends IntangibleObject {
 	
@@ -283,36 +283,44 @@ public class PlayerObject extends IntangibleObject {
 		sendDelta(8, 6, activeQuest);
 	}
 
-	public void removeFriend(String friend) {
-		play9.removeFriend(friend, this);
+	public boolean addFriend(String friend) {
+		return play9.addFriend(friend, this);
 	}
 
-	public void addFriend(String friend) {
-		play9.addFriend(friend, this);
+	public boolean removeFriend(String friend) {
+		return play9.removeFriend(friend, this);
 	}
 
 	public boolean isFriend(String target) {
 		return play9.isFriend(target);
 	}
-
+	
 	public List<String> getFriendsList() {
 		return play9.getFriendsList();
 	}
-
-	public void addIgnored(String ignored) {
-		play9.addIgnored(ignored, this);
+	
+	public void sendFriendsList() {
+		play9.sendFriendsList(this);
 	}
 
-	public void removeIgnored(String ignored) {
-		play9.removeIgnored(ignored, this);
+	public boolean addIgnored(String ignored) {
+		return play9.addIgnored(ignored, this);
+	}
+
+	public boolean removeIgnored(String ignored) {
+		return play9.removeIgnored(ignored, this);
 	}
 
 	public boolean isIgnored(String target) {
 		return play9.isIgnored(target);
 	}
-
+	
 	public List<String> getIgnoreList() {
 		return play9.getIgnoreList();
+	}
+	
+	public void sendIgnoreList() {
+		play9.sendIgnoreList(this);
 	}
 
 	public String getProfWheelPosition() {
@@ -337,7 +345,7 @@ public class PlayerObject extends IntangibleObject {
 	}
 
 	public List<String> getJoinedChannels() {
-		return Collections.unmodifiableList(joinedChannels);
+		return new ArrayList<>(joinedChannels);
 	}
 
 	public boolean addJoinedChannel(String path) {
@@ -400,21 +408,25 @@ public class PlayerObject extends IntangibleObject {
 			target.sendPacket(new UpdatePostureMessage(((CreatureObject)parent).getPosture().getId(), getObjectId()));
 	}
 	
+	@Override
 	public void createBaseline3(Player target, BaselineBuilder bb) {
 		super.createBaseline3(target, bb); // 5 variables
 		play3.createBaseline3(target, bb);
 	}
 	
+	@Override
 	public void createBaseline6(Player target, BaselineBuilder bb) {
 		super.createBaseline6(target, bb); // 2 variables
 		play6.createBaseline6(target, bb);
 	}
 	
+	@Override
 	public void createBaseline8(Player target, BaselineBuilder bb) {
 		super.createBaseline8(target, bb); // 0 variables
 		play8.createBaseline8(target, bb);
 	}
 	
+	@Override
 	public void createBaseline9(Player target, BaselineBuilder bb) {
 		super.createBaseline9(target, bb); // 0 variables
 		play9.createBaseline9(target, bb);

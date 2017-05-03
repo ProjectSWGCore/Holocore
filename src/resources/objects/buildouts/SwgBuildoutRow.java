@@ -27,9 +27,9 @@
 ***********************************************************************************/
 package resources.objects.buildouts;
 
-import resources.Location;
-import resources.client_info.visitors.CrcStringTableData;
-import resources.common.CRC;
+import com.projectswg.common.data.CRC;
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.swgfile.visitors.CrcStringTableData;
 
 public class SwgBuildoutRow {
 	

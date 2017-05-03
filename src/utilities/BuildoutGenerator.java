@@ -36,16 +36,17 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map.Entry;
 
-import resources.Location;
-import resources.Quaternion;
-import resources.Terrain;
-import resources.client_info.ClientFactory;
-import resources.client_info.visitors.DatatableData;
-import resources.common.CRC;
+import com.projectswg.common.data.CRC;
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.location.Quaternion;
+import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.data.swgfile.ClientFactory;
+import com.projectswg.common.data.swgfile.visitors.DatatableData;
+
 import resources.objects.SWGObject;
-import resources.objects.buildouts.SwgBuildoutArea;
 import resources.objects.buildouts.BuildoutLoader;
 import resources.objects.buildouts.SnapshotLoader;
+import resources.objects.buildouts.SwgBuildoutArea;
 import resources.objects.cell.CellObject;
 
 public class BuildoutGenerator {
@@ -344,6 +345,7 @@ public class BuildoutGenerator {
 			this.adjust = adjust;
 		}
 		
+		@Override
 		public int compareTo(GenBuildoutArea area) {
 			int comp = Integer.compare(index, area.index);
 			if (comp != 0)
@@ -363,6 +365,7 @@ public class BuildoutGenerator {
 			return Integer.compare(getSorting(), area.getSorting());
 		}
 		
+		@Override
 		public boolean equals(Object o) {
 			if (o == null || !(o instanceof GenBuildoutArea))
 				return false;
@@ -376,6 +379,7 @@ public class BuildoutGenerator {
 			return true;
 		}
 		
+		@Override
 		public int hashCode() {
 			return terrain.hashCode() ^ Integer.hashCode(x1) ^ Integer.hashCode(z1);
 		}

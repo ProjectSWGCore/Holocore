@@ -34,11 +34,12 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
+import com.projectswg.common.control.Service;
+
 import intents.chat.ChatBroadcastIntent;
 import intents.chat.ChatBroadcastIntent.BroadcastType;
 import intents.server.ServerStatusIntent;
 import resources.control.ServerStatus;
-import resources.control.Service;
 import utilities.ThreadUtilities;
 
 public class ShutdownService extends Service {

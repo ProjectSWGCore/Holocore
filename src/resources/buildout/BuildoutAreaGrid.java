@@ -30,7 +30,8 @@ package resources.buildout;
 import java.util.ArrayList;
 import java.util.List;
 
-import resources.Terrain;
+import com.projectswg.common.data.location.Terrain;
+
 
 public class BuildoutAreaGrid {
 	

@@ -27,8 +27,6 @@
 ***********************************************************************************/
 package services.spawn;
 
-import intents.object.ObjectCreatedIntent;
-
 import java.lang.ref.SoftReference;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -38,14 +36,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import resources.Location;
-import resources.control.Assert;
-import resources.control.Service;
+import com.projectswg.common.control.Service;
+import com.projectswg.common.data.info.RelationalServerData;
+import com.projectswg.common.data.info.RelationalServerFactory;
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.debug.Assert;
+import com.projectswg.common.debug.Log;
+
+import intents.object.ObjectCreatedIntent;
 import resources.objects.SWGObject;
 import resources.objects.building.BuildingObject;
-import resources.server_info.Log;
-import resources.server_info.RelationalServerData;
-import resources.server_info.RelationalServerFactory;
 import services.objects.ObjectCreator;
 
 public class StaticService extends Service {

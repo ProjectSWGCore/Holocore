@@ -27,6 +27,8 @@
  ***********************************************************************************/
 package resources.server_info;
 
+import com.projectswg.common.debug.Log;
+
 public class StandardLog {
 	
 	public static long onStartLoad(String what) {

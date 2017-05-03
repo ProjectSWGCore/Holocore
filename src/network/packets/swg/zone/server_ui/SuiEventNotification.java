@@ -27,11 +27,12 @@
 ***********************************************************************************/
 package network.packets.swg.zone.server_ui;
 
-import network.packets.swg.SWGPacket;
-
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.projectswg.common.network.NetBuffer;
+
+import network.packets.swg.SWGPacket;
 
 public class SuiEventNotification extends SWGPacket {
 	public static final int CRC = getCrc("SuiEventNotification");
@@ -45,38 +46,38 @@ public class SuiEventNotification extends SWGPacket {
 		subscribedToProperties = new ArrayList<>();
 	}
 	
-	public SuiEventNotification(ByteBuffer data) {
+	public SuiEventNotification(NetBuffer data) {
 		this();
 		decode(data);
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		windowId = getInt(data);
-		eventIndex = getInt(data);
-		int size = getInt(data);
-		updateCount = getInt(data);
+		windowId = data.getInt();
+		eventIndex = data.getInt();
+		int size = data.getInt();
+		updateCount = data.getInt();
 		for (int i = 0; i < size; i++) {
-			subscribedToProperties.add(getUnicode(data));
+			subscribedToProperties.add(data.getUnicode());
 		}
 	}
 	
-	public ByteBuffer encode() {
+	public NetBuffer encode() {
 		int size = 0;
 		for (String property : subscribedToProperties) {
 			size += 4 + (property.length() * 2);
 		}
 
-		ByteBuffer bb = ByteBuffer.allocate(size + 16);
-		addInt(bb, windowId);
-		addInt(bb, eventIndex);
-		addInt(bb, subscribedToProperties.size());
-		addInt(bb, updateCount);
+		NetBuffer data = NetBuffer.allocate(size + 16);
+		data.addInt(windowId);
+		data.addInt(eventIndex);
+		data.addInt(subscribedToProperties.size());
+		data.addInt(updateCount);
 		for (String property : subscribedToProperties) {
-			addUnicode(bb, property);
+			data.addUnicode(property);
 		}
-		return bb;
+		return data;
 	}
 	
 	public int getWindowId() { return this.windowId; }

@@ -27,17 +27,12 @@
 ***********************************************************************************/
 package intents.object;
 
-import resources.control.Intent;
+import com.projectswg.common.control.Intent;
+
 import resources.objects.SWGObject;
 import services.objects.StaticItemService.ObjectCreationHandler;
 
-/**
- *
- * @author mads
- */
 public final class CreateStaticItemIntent extends Intent {
-	
-	public static final String TYPE = "CreateStaticItemIntent";
 	
 	private final SWGObject requester;
 	private final SWGObject container;
@@ -45,25 +40,24 @@ public final class CreateStaticItemIntent extends Intent {
 	private final String[] itemNames;
 	
 	public CreateStaticItemIntent(SWGObject requester, SWGObject container, ObjectCreationHandler objectCreationHandler, String... itemNames) {
-		super(TYPE);
 		this.requester = requester;
 		this.container = container;
 		this.objectCreationHandler = objectCreationHandler;
 		this.itemNames = itemNames;
 	}
-
+	
 	public SWGObject getContainer() {
 		return container;
 	}
-
+	
 	public String[] getItemNames() {
 		return itemNames;
 	}
-
+	
 	public SWGObject getRequester() {
 		return requester;
 	}
-
+	
 	public ObjectCreationHandler getObjectCreationHandler() {
 		return objectCreationHandler;
 	}

@@ -32,17 +32,18 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import com.projectswg.common.control.Manager;
+import com.projectswg.common.data.swgfile.ClientFactory;
+import com.projectswg.common.data.swgfile.visitors.DatatableData;
+import com.projectswg.common.debug.Assert;
+import com.projectswg.common.debug.Log;
+
 import intents.SkillModIntent;
 import intents.experience.GrantSkillIntent;
 import intents.network.GalacticPacketIntent;
 import network.packets.Packet;
 import network.packets.swg.zone.object_controller.ChangeRoleIconChoice;
-import resources.client_info.ClientFactory;
-import resources.client_info.visitors.DatatableData;
-import resources.control.Assert;
-import resources.control.Manager;
 import resources.objects.creature.CreatureObject;
-import resources.server_info.Log;
 
 /**
  *

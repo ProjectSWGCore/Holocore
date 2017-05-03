@@ -27,9 +27,9 @@
 ***********************************************************************************/
 package network.packets.swg.zone.spatial;
 
-import network.packets.swg.SWGPacket;
+import com.projectswg.common.network.NetBuffer;
 
-import java.nio.ByteBuffer;
+import network.packets.swg.SWGPacket;
 
 public class GetMapLocationsMessage extends SWGPacket {
 	public static final int CRC = getCrc("GetMapLocationsMessage");
@@ -42,23 +42,23 @@ public class GetMapLocationsMessage extends SWGPacket {
 	public GetMapLocationsMessage() {
 	}
 
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		planet = getAscii(data);
-		versionStatic = getInt(data);
-		versionDynamic = getInt(data);
-		versionPersist = getInt(data);
+		planet = data.getAscii();
+		versionStatic = data.getInt();
+		versionDynamic = data.getInt();
+		versionPersist = data.getInt();
 	}
 	
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(19 + planet.length());
-		addShort(data, 28);
-		addInt  (data, CRC);
-		addAscii(data, planet);
-		addInt(data, versionStatic);
-		addInt(data, versionDynamic);
-		addInt(data, versionPersist);
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(19 + planet.length());
+		data.addShort(28);
+		data.addInt(CRC);
+		data.addAscii(planet);
+		data.addInt(versionStatic);
+		data.addInt(versionDynamic);
+		data.addInt(versionPersist);
 		return data;
 	}
 	

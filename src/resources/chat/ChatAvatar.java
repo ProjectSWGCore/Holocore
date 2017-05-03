@@ -26,160 +26,119 @@
  ******************************************************************************/
 package resources.chat;
 
-import network.packets.Packet;
-import resources.encodables.Encodable;
-import resources.network.NetBufferStream;
-import resources.persistable.Persistable;
-import resources.player.Player;
-
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.nio.ByteBuffer;
 import java.util.Locale;
+
+import com.projectswg.common.encoding.CachedEncode;
+import com.projectswg.common.encoding.Encodable;
+import com.projectswg.common.network.NetBuffer;
+import com.projectswg.common.network.NetBufferStream;
+import com.projectswg.common.persistable.Persistable;
+
+import resources.player.Player;
 import services.CoreManager;
 
-/**
- * @author Waverunner
- */
 public class ChatAvatar implements Encodable, Persistable {
 	
-	private long networkId;
+	private final CachedEncode cache;
+	
+	private Player player;
 	private String name;
-	private String game = "SWG";
-	private String galaxy;
-
-	// Instances of the class will hardly ever change, so we can just pre-build the data.
-	private transient byte[] data;
-	private transient boolean modified;
-	private transient int size = 0;
-
+	
 	public ChatAvatar() {
-		modified = true;
-		data = null;
-		size = 0;
-	}
-
-	public ChatAvatar(long networkId, String name, String galaxy) {
-		this();
-		this.networkId = networkId;
-		this.name = name;
-		this.galaxy = galaxy;
+		this(null, null);
 	}
 	
-	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
-		ois.defaultReadObject();
-		modified = true;
-		data = null;
-		size = 0;
+	public ChatAvatar(Player player, String name) {
+		this.cache = new CachedEncode(() -> encodeImpl());
+		this.player = player;
+		this.name = name;
 	}
-
+	
 	public String getName() {
 		return name;
 	}
-
+	
 	public void setName(String name) {
 		this.name = name;
-		modified = true;
+		this.cache.clearCached();
 	}
-
-	public String getGame() {
-		return game;
-	}
-
-	public void setGame(String game) {
-		this.game = game;
-		modified = true;
-	}
-
+	
 	public String getGalaxy() {
-		return galaxy;
+		return getCoreGalaxy();
 	}
-
-	public void setGalaxy(String galaxy) {
-		this.galaxy = galaxy;
-		modified = true;
+	
+	public Player getPlayer() {
+		return player;
 	}
-
-	public long getNetworkId() {
-		return networkId;
+	
+	public void setPlayer(Player player) {
+		this.player = player;
 	}
-
-	public int getSize() {
-		if (size == 0)
-			size = 6 + game.length() + name.length() + galaxy.length();
-
-		return size;
+	
+	private byte [] encodeImpl() {
+		NetBuffer buffer = NetBuffer.allocate(getLength());
+		buffer.addAscii("SWG");
+		buffer.addAscii(getCoreGalaxy());
+		buffer.addAscii(name);
+		return buffer.array();
 	}
-
+	
+	public int getLength() {
+		return 9 + name.length() + getCoreGalaxy().length();
+	}
+	
 	@Override
 	public byte[] encode() {
-		if (!modified && data != null)
-			return data;
-
-		ByteBuffer buffer = ByteBuffer.allocate(getSize());
-		Packet.addAscii(buffer, game);
-		Packet.addAscii(buffer, galaxy);
-		Packet.addAscii(buffer, name);
-
-		data = buffer.array();
-		modified = false;
-
-		return data;
+		return cache.encode();
 	}
-
+	
 	@Override
-	public void decode(ByteBuffer data) {
-		game 	= Packet.getAscii(data);
-		galaxy 	= Packet.getAscii(data);
-		name 	= Packet.getAscii(data).toLowerCase(Locale.US);
+	public void decode(NetBuffer data) {
+		data.getAscii(); // SWG
+		data.getAscii();
+		name = data.getAscii().toLowerCase(Locale.US);
 	}
 	
 	@Override
 	public void save(NetBufferStream stream) {
-		stream.addByte(0);
-		stream.addAscii(galaxy);
+		stream.addByte(1);
 		stream.addAscii(name);
 	}
 	
 	@Override
 	public void read(NetBufferStream stream) {
-		stream.getByte();
-		galaxy = stream.getAscii();
+		byte ver = stream.getByte();
+		if (ver == 0)
+			stream.getAscii();
 		name = stream.getAscii();
 	}
 	
 	@Override
 	public String toString() {
-		return "ChatAvatar[networkId=" + networkId +
-				", name='" + name + '\'' + ", game='" + game + '\'' + ", galaxy='" + galaxy + "']";
+		return String.format("ChatAvatar[name='%s']", name);
 	}
-
+	
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null) return false;
-
-		if (getClass() != o.getClass())
+		if (!(o instanceof ChatAvatar))
 			return false;
-
-		// NetworkId will be 0 if decoded from a packet
-		if (networkId != 0) return ((ChatAvatar) o).getNetworkId() == networkId;
-		else return ((ChatAvatar) o).getName().equals(getName());
+		return ((ChatAvatar) o).getName().equals(getName());
 	}
-
+	
 	@Override
 	public int hashCode() {
-		// NetworkId will be 0 if decoded from a packet
-		int result = (networkId != 0 ? (int) (networkId ^ (networkId >>> 32)) : 0);
-		result = 31 * result + name.hashCode();
-		return result;
+		return name.hashCode();
 	}
-
+	
 	public static ChatAvatar getFromPlayer(Player player) {
-		return new ChatAvatar(player.getNetworkId(), player.getCharacterName().split(" ")[0].toLowerCase(Locale.US), CoreManager.getGalaxy().getName());
+		return new ChatAvatar(player, player.getCharacterFirstName().toLowerCase(Locale.US));
 	}
-
-	public static ChatAvatar getSystemAvatar(String galaxy) {
-		return new ChatAvatar(-1, "system", galaxy);
+	
+	public static ChatAvatar getSystemAvatar() {
+		return new ChatAvatar(null, "system");
+	}
+	
+	private static String getCoreGalaxy() {
+		return CoreManager.getGalaxy().getName();
 	}
 }

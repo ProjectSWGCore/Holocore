@@ -27,7 +27,7 @@
 ***********************************************************************************/
 package network.packets.swg.login.creation;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 
@@ -47,19 +47,19 @@ public class DeleteCharacterRequest extends SWGPacket {
 		this.playerId = playerId;
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		serverId = getInt(data);
-		playerId = getLong(data);
+		serverId = data.getInt();
+		playerId = data.getLong();
 	}
 	
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(18);
-		addShort(data, 3);
-		addInt(  data, CRC);
-		addInt(  data, serverId);
-		addLong( data, playerId);
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(18);
+		data.addShort(3);
+		data.addInt(CRC);
+		data.addInt(serverId);
+		data.addLong(playerId);
 		return data;
 	}
 	

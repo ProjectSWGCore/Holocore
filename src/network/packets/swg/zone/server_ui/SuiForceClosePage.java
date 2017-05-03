@@ -27,9 +27,9 @@
 
 package network.packets.swg.zone.server_ui;
 
-import network.packets.swg.SWGPacket;
+import com.projectswg.common.network.NetBuffer;
 
-import java.nio.ByteBuffer;
+import network.packets.swg.SWGPacket;
 
 /**
  * Created by Waverunner on 8/17/2015
@@ -46,19 +46,19 @@ public class SuiForceClosePage extends SWGPacket {
 	public SuiForceClosePage() {}
 
 	@Override
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		windowId = getInt(data);
+		windowId = data.getInt();
 	}
 
 	@Override
-	public ByteBuffer encode() {
-		ByteBuffer bb = ByteBuffer.allocate(10);
-		addShort(bb, 1);
-		addInt(bb, CRC);
-		addInt(bb, windowId);
-		return bb;
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(10);
+		data.addShort(1);
+		data.addInt(CRC);
+		data.addInt(windowId);
+		return data;
 	}
 
 	public int getWindowId() {

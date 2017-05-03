@@ -37,7 +37,8 @@ import java.net.UnknownHostException;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import resources.server_info.Log;
+import com.projectswg.common.debug.Log;
+
 
 /**
  * This class represents a UDP server that listens for packets and

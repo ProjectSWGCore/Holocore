@@ -30,10 +30,10 @@ package services.commands.buff;
 import java.util.Locale;
 import java.util.Map;
 
-import resources.client_info.ClientFactory;
-import resources.client_info.visitors.DatatableData;
-import resources.common.CRC;
-import resources.server_info.SynchronizedMap;
+import com.projectswg.common.concurrency.SynchronizedMap;
+import com.projectswg.common.data.CRC;
+import com.projectswg.common.data.swgfile.ClientFactory;
+import com.projectswg.common.data.swgfile.visitors.DatatableData;
 
 public class BuffMap {
 	

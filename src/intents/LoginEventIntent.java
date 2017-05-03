@@ -27,17 +27,14 @@
 ***********************************************************************************/
 package intents;
 
-import resources.control.Intent;
+import com.projectswg.common.control.Intent;
 
 public class LoginEventIntent extends Intent {
-	
-	public static final String TYPE = "LoginEventIntent";
 	
 	private LoginEvent event;
 	private long networkId;
 	
 	public LoginEventIntent(long networkId, LoginEvent event) {
-		super(TYPE);
 		setNetworkId(networkId);
 		setEvent(event);
 	}
@@ -59,11 +56,7 @@ public class LoginEventIntent extends Intent {
 	}
 	
 	public enum LoginEvent {
-		LOGIN_FAIL_INVALID_VERSION_CODE,
-		LOGIN_FAIL_INVALID_USER_PASS,
-		LOGIN_FAIL_SERVER_ERROR,
-		LOGIN_FAIL_BANNED,
-		LOGIN_SUCCESS
+		LOGIN_FAIL_INVALID_VERSION_CODE, LOGIN_FAIL_INVALID_USER_PASS, LOGIN_FAIL_SERVER_ERROR, LOGIN_FAIL_BANNED, LOGIN_SUCCESS
 	}
 	
 }

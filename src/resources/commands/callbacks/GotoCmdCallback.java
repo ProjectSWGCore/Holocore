@@ -27,22 +27,22 @@
  ***********************************************************************************/
 package resources.commands.callbacks;
 
-import intents.chat.ChatBroadcastIntent;
-import intents.object.ObjectTeleportIntent;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import resources.Location;
-import resources.Terrain;
+import com.projectswg.common.data.info.RelationalServerData;
+import com.projectswg.common.data.info.RelationalServerFactory;
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.debug.Log;
+
+import intents.chat.ChatBroadcastIntent;
+import intents.object.ObjectTeleportIntent;
 import resources.commands.ICmdCallback;
 import resources.objects.SWGObject;
 import resources.objects.building.BuildingObject;
 import resources.objects.cell.CellObject;
 import resources.player.Player;
-import resources.server_info.Log;
-import resources.server_info.RelationalServerData;
-import resources.server_info.RelationalServerFactory;
 import services.galaxy.GalacticManager;
 import services.objects.ObjectManager;
 

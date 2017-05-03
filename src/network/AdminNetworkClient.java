@@ -29,8 +29,8 @@ package network;
 
 import java.net.SocketAddress;
 
-import services.network.PacketSender;
 import network.packets.Packet;
+import services.network.PacketSender;
 
 public class AdminNetworkClient extends NetworkClient {
 

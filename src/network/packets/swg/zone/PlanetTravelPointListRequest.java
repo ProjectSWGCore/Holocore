@@ -27,7 +27,7 @@
  ***********************************************************************************/
 package network.packets.swg.zone;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 
@@ -39,20 +39,20 @@ public class PlanetTravelPointListRequest extends SWGPacket {
 	private String planetName;
 	
 	@Override
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		requesterObjId = getLong(data);
-		planetName = getAscii(data);
+		requesterObjId = data.getLong();
+		planetName = data.getAscii();
 	}
 	
 	@Override
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(16 + planetName.length());	// ascii length short + opcount short + long + int = 16
-		addShort(data, 3);	// Operand count of 3
-		addInt(data, CRC);
-		addLong(data, requesterObjId);
-		addAscii(data, planetName);
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(16 + planetName.length());	// ascii length short + opcount short + long + int = 16
+		data.addShort(3);	// Operand count of 3
+		data.addInt(CRC);
+		data.addLong(requesterObjId);
+		data.addAscii(planetName);
 		return data;
 	}
 	

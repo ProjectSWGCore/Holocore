@@ -27,21 +27,20 @@
  ***********************************************************************************/
 package intents;
 
+import com.projectswg.common.control.Intent;
+
 import resources.PvpFaction;
 import resources.PvpStatus;
-import resources.control.Intent;
 import resources.objects.tangible.TangibleObject;
 
 public class FactionIntent extends Intent {
-
-	public static final String TYPE = "FactionIntent";
+	
 	private TangibleObject target;
 	private PvpFaction newFaction;
 	private FactionIntentType updateType;
 	private PvpStatus newStatus;
 	
 	private FactionIntent(TangibleObject target) {
-		super(TYPE);
 		this.target = target;
 	}
 	
@@ -71,7 +70,7 @@ public class FactionIntent extends Intent {
 	public FactionIntentType getUpdateType() {
 		return updateType;
 	}
-
+	
 	public PvpStatus getNewStatus() {
 		return newStatus;
 	}

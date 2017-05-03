@@ -27,7 +27,7 @@
  ***********************************************************************************/
 package network.packets.swg.zone.object_controller;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 public class MessageQueueSpaceMiningSellResource extends ObjectController{
 	
@@ -46,28 +46,28 @@ public class MessageQueueSpaceMiningSellResource extends ObjectController{
 		this.amount = amount;
 	}
 	
-	public MessageQueueSpaceMiningSellResource(ByteBuffer data) {
+	public MessageQueueSpaceMiningSellResource(NetBuffer data) {
 		super(CRC);
 		decode(data);
 	}
 
 	@Override
-	public void decode(ByteBuffer data) {
+	public void decode(NetBuffer data) {
 		decodeHeader(data);
-		shipId = getLong(data);
-		spaceStationId = getLong(data);
-		resourceId = getLong(data);
-		amount = getInt(data);
+		shipId = data.getLong();
+		spaceStationId = data.getLong();
+		resourceId = data.getLong();
+		amount = data.getInt();
 	}
 
 	@Override
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + 28 );
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(HEADER_LENGTH + 28 );
 		encodeHeader(data);
-		addLong(data, shipId);
-		addLong(data, spaceStationId);
-		addLong(data, resourceId);
-		addInt(data, amount);
+		data.addLong(shipId);
+		data.addLong(spaceStationId);
+		data.addLong(resourceId);
+		data.addInt(amount);
 		return data;
 	}
 

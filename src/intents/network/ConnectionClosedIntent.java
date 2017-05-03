@@ -27,19 +27,16 @@
 ***********************************************************************************/
 package intents.network;
 
-import network.packets.swg.holo.HoloConnectionStopped.ConnectionStoppedReason;
-import resources.control.Intent;
+import com.projectswg.common.control.Intent;
 
+import network.packets.swg.holo.HoloConnectionStopped.ConnectionStoppedReason;
 
 public class ConnectionClosedIntent extends Intent {
-	
-	public static final String TYPE = "ConnectionClosedIntent";
 	
 	private long networkId;
 	private ConnectionStoppedReason reason;
 	
 	public ConnectionClosedIntent(long networkId, ConnectionStoppedReason reason) {
-		super(TYPE);
 		setNetworkId(networkId);
 		setReason(reason);
 	}

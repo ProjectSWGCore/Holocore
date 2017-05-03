@@ -27,7 +27,7 @@
 ***********************************************************************************/
 package network.packets.swg.zone.object_controller;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 import resources.Posture;
 
@@ -42,22 +42,22 @@ public class PostureUpdate extends ObjectController {
 		this.posture = posture;
 	}
 	
-	public PostureUpdate(ByteBuffer data) {
+	public PostureUpdate(NetBuffer data) {
 		super(CRC);
 		decode(data);
 	}
 	
-	public void decode(ByteBuffer data) {
+	public void decode(NetBuffer data) {
 		decodeHeader(data);
-		posture = Posture.getFromId(getByte(data));
-		getBoolean(data); // isClientImmediate
+		posture = Posture.getFromId(data.getByte());
+		data.getBoolean(); // isClientImmediate
 	}
 	
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + 2);
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(HEADER_LENGTH + 2);
 		encodeHeader(data);
-		addByte(data, posture.getId());
-		addBoolean(data, true); // isClientImmediate
+		data.addByte(posture.getId());
+		data.addBoolean(true); // isClientImmediate
 		return data;
 	}
 	

@@ -27,11 +27,12 @@
 ***********************************************************************************/
 package network.packets.swg.zone.auction;
 
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 
@@ -47,106 +48,108 @@ public class AuctionQueryHeadersResponseMessage extends SWGPacket {
 		items = new ArrayList<AuctionItem>();
 	}
 	
-	public AuctionQueryHeadersResponseMessage(ByteBuffer data) {
+	public AuctionQueryHeadersResponseMessage(NetBuffer data) {
 		decode(data);
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	@Override
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		counter = getInt(data);
-		screen = getInt(data);
-		String [] locations = new String[getInt(data)];
+		counter = data.getInt();
+		screen = data.getInt();
+		String [] locations = new String[data.getInt()];
 		for (int i = 0; i < locations.length; i++)
-			locations[i] = getAscii(data);
-		int itemCount = getInt(data);
+			locations[i] = data.getAscii();
+		int itemCount = data.getInt();
 		AuctionItem [] items = new AuctionItem[itemCount];
 		for (int itemI = 0; itemI < itemCount; itemI++) {
 			AuctionItem item = new AuctionItem();
-			item.setItemName(getUnicode(data));
+			item.setItemName(data.getUnicode());
 			items[itemI] = item;
 		}
-		itemCount = getInt(data);
+		itemCount = data.getInt();
 		if (itemCount != items.length)
 			throw new IllegalStateException("I WAS LIED TO!");
 		for (int itemI = 0; itemI < itemCount; itemI++) {
 			AuctionItem item = items[itemI];
-			item.setObjectId(getLong(data));
-			getByte(data);
-			item.setPrice(getInt(data));
-			item.setExpireTime(getInt(data)*1000L+System.currentTimeMillis());
-			if (getInt(data) != item.getPrice())
+			item.setObjectId(data.getLong());
+			data.getByte();
+			item.setPrice(data.getInt());
+			item.setExpireTime(data.getInt()*1000L+System.currentTimeMillis());
+			if (data.getInt() != item.getPrice())
 				throw new IllegalStateException("I WAS LIED TO AT INDEX " + itemI);
-			item.setVuid(locations[getShort(data)]);
-			item.setOwnerId(getLong(data));
-			item.setOwnerName(locations[getShort(data)]);
-			getLong(data);
-			getInt(data);
-			getInt(data);
-			getShort(data);
-			item.setItemType(getInt(data));
-			getInt(data);
-			item.setAuctionOptions(getInt(data));
-			getInt(data);
+			item.setVuid(locations[data.getShort()]);
+			item.setOwnerId(data.getLong());
+			item.setOwnerName(locations[data.getShort()]);
+			data.getLong();
+			data.getInt();
+			data.getInt();
+			data.getShort();
+			item.setItemType(data.getInt());
+			data.getInt();
+			item.setAuctionOptions(data.getInt());
+			data.getInt();
 		}
-		getShort(data);
-		getByte(data);
+		data.getShort();
+		data.getByte();
 	}
 	
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(6);
-		addShort(data, 8);
-		addInt  (data, CRC);
-		addInt  (data, counter);
-		addInt  (data, screen);
+	@Override
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(6);
+		data.addShort(8);
+		data.addInt(CRC);
+		data.addInt(counter);
+		data.addInt(screen);
 		
 		Set <String> locations = new LinkedHashSet<String>();
 		for (AuctionItem item : items) {
 			locations.add(item.getVuid());
 			locations.add(item.getOwnerName());
 		}
-		addInt(data, items.size());
+		data.addInt(items.size());
 		for (String item : locations) {
-			addAscii(data, item);
+			data.addAscii(item);
 		}
 		
-		addInt  (data, items.size());
+		data.addInt(items.size());
 		for (AuctionItem item : items)
-			addUnicode(data, item.getItemName());
+			data.addUnicode(item.getItemName());
 		
-		addInt  (data, items.size());
+		data.addInt(items.size());
 		
 		int i = 0;
 		for(AuctionItem item : items) {
-			addLong(data, item.getObjectId());
-			addByte(data, i);
-			addInt(data, item.getPrice());
-			addInt(data, (int) ((item.getExpireTime() - System.currentTimeMillis()) / 1000));
-			addInt(data, item.getPrice()); // if != price then auction instead of instant sale
-			//addInt(data, 0);
-			addShort(data, getString(locations, item.getVuid()));
-			addLong(data, item.getOwnerId());
-			addShort(data, getString(locations, item.getOwnerName()));
-			addLong(data, 0);
-			addInt(data, 0); // unk seen as 2 mostly, doesnt seem to have any effect
-			addInt(data, 0);
-			addShort(data, (short) 0);
-			addInt(data, item.getItemType()); // gameObjectType/category bitmask
+			data.addLong(item.getObjectId());
+			data.addByte(i);
+			data.addInt(item.getPrice());
+			data.addInt((int) ((item.getExpireTime() - System.currentTimeMillis()) / 1000));
+			data.addInt(item.getPrice()); // if != price then auction instead of instant sale
+			//data.addInt(0);
+			data.addShort(getString(locations, item.getVuid()));
+			data.addLong(item.getOwnerId());
+			data.addShort(getString(locations, item.getOwnerName()));
+			data.addLong(0);
+			data.addInt(0); // unk seen as 2 mostly, doesnt seem to have any effect
+			data.addInt(0);
+			data.addShort((short) 0);
+			data.addInt(item.getItemType()); // gameObjectType/category bitmask
 
-			addInt(data, 0); 
+			data.addInt(0); 
 			int options = 0;
 			
 			if (item.getStatus() == AuctionState.OFFERED || item.getStatus() == AuctionState.FORSALE) 
 				options |= 0x800;
 			
-			addInt(data, item.getAuctionOptions() | options);
-			addInt(data, 0);
+			data.addInt(item.getAuctionOptions() | options);
+			data.addInt(0);
 			i++;
 		}
 		
-		addShort(data, 0);
+		data.addShort(0);
 		
-		addByte(data, (byte) 0);
+		data.addByte((byte) 0);
 		return data;
 	}
 	

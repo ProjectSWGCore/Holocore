@@ -27,15 +27,17 @@
  ***********************************************************************************/
 package services.dev;
 
+import com.projectswg.common.control.Service;
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.location.Terrain;
+
 import intents.object.ObjectCreatedIntent;
-import resources.Location;
 import resources.PvpFlag;
-import resources.Terrain;
 import resources.config.ConfigFile;
-import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.custom.DefaultAIObject;
 import resources.objects.tangible.TangibleObject;
+import resources.server_info.DataManager;
 import services.objects.ObjectCreator;
 
 public class DeveloperService extends Service {
@@ -48,7 +50,7 @@ public class DeveloperService extends Service {
 	public boolean start() {
 		setupDeveloperArea();
 		
-		if (getConfig(ConfigFile.FEATURES).getBoolean("CHARACTER-BUILDER", false))
+		if (DataManager.getConfig(ConfigFile.FEATURES).getBoolean("CHARACTER-BUILDER", false))
 			setupCharacterBuilders();
 		
 		return super.start();
@@ -60,7 +62,6 @@ public class DeveloperService extends Service {
 	}
 	
 	private void setupCharacterBuilders() {
-		
 		Location[] cbtLocations = {
 			
 			// Planet: Corellia
@@ -121,8 +122,8 @@ public class DeveloperService extends Service {
 
 		};
 		
-		for (int i = 0; i < cbtLocations.length; i++) {
-			spawnObject("object/tangible/terminal/shared_terminal_character_builder.iff", cbtLocations[i] , TangibleObject.class);
+		for (Location cbtLocation : cbtLocations) {
+			spawnObject("object/tangible/terminal/shared_terminal_character_builder.iff", cbtLocation, TangibleObject.class);
 		}
 	}
 	

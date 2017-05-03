@@ -27,15 +27,13 @@
 ***********************************************************************************/
 package network.packets.swg.zone.object_controller;
 
-import java.nio.ByteBuffer;
-
-import resources.Location;
-
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.network.NetBuffer;
 
 public class DataTransform extends ObjectController {
 	
 	public static final int CRC = 0x0071;
-
+	
 	private int timestamp;
 	private int updateCounter = 0;
 	private Location l;
@@ -66,68 +64,89 @@ public class DataTransform extends ObjectController {
 		this.updateCounter = counter;
 	}
 	
-	public DataTransform(ByteBuffer data) {
+	public DataTransform(NetBuffer data) {
 		super(CRC);
 		this.l = new Location();
 		decode(data);
 	}
 	
-	public void decode(ByteBuffer data) {
+	@Override
+	public void decode(NetBuffer data) {
 		decodeHeader(data);
-		timestamp = getInt(data);
-		updateCounter = getInt(data);
-		l = getEncodable(data, Location.class);
-		speed = getFloat(data);
-		lookAtYaw = getFloat(data);
-		useLookAtYaw = getBoolean(data);
+		timestamp = data.getInt();
+		updateCounter = data.getInt();
+		l = data.getEncodable(Location.class);
+		speed = data.getFloat();
+		lookAtYaw = data.getFloat();
+		useLookAtYaw = data.getBoolean();
 	}
 	
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + 45);
+	@Override
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(HEADER_LENGTH + 45);
 		encodeHeader(data);
-		addInt(data, timestamp);
-		addInt(data, updateCounter);
-		addEncodable(data, l);
-		addFloat(data, speed);
-		addFloat(data, lookAtYaw);
-		addBoolean(data, useLookAtYaw);
+		data.addInt(timestamp);
+		data.addInt(updateCounter);
+		data.addEncodable(l);
+		data.addFloat(speed);
+		data.addFloat(lookAtYaw);
+		data.addBoolean(useLookAtYaw);
 		return data;
 	}
 	
-	public void setTimestamp(int timestamp) { this.timestamp = timestamp; }
-	public void setUpdateCounter(int counter) { this.updateCounter = counter; }
-	public void setLocation(Location l) { this.l = l; }
-	public void setSpeed(float speed) { this.speed = speed; }
+	public void setTimestamp(int timestamp) {
+		this.timestamp = timestamp;
+	}
 	
-	public int getUpdateCounter() { return updateCounter; }
-	public Location getLocation() { return l; }
-	public float getSpeed() { return speed; }
-
+	public void setUpdateCounter(int counter) {
+		this.updateCounter = counter;
+	}
+	
+	public void setLocation(Location l) {
+		this.l = l;
+	}
+	
+	public void setSpeed(float speed) {
+		this.speed = speed;
+	}
+	
+	public int getUpdateCounter() {
+		return updateCounter;
+	}
+	
+	public Location getLocation() {
+		return l;
+	}
+	
+	public float getSpeed() {
+		return speed;
+	}
+	
 	public boolean isUseLookAtYaw() {
 		return useLookAtYaw;
 	}
-
+	
 	public void setUseLookAtYaw(boolean useLookAtYaw) {
 		this.useLookAtYaw = useLookAtYaw;
 	}
-
+	
 	public float getLookAtYaw() {
 		return lookAtYaw;
 	}
-
+	
 	public void setLookAtYaw(float lookAtYaw) {
 		this.lookAtYaw = lookAtYaw;
 	}
-
+	
 	public int getTimestamp() {
 		return timestamp;
 	}
-
+	
 	public byte getMovementAngle() {
 		byte movementAngle = (byte) 0.0f;
 		double wOrient = l.getOrientationW();
 		double yOrient = l.getOrientationY();
-		double sq = Math.sqrt(1 - (wOrient*wOrient));
+		double sq = Math.sqrt(1 - (wOrient * wOrient));
 		
 		if (sq != 0) {
 			if (l.getOrientationW() > 0 && l.getOrientationY() < 0) {
@@ -139,5 +158,5 @@ public class DataTransform extends ObjectController {
 		
 		return movementAngle;
 	}
-
+	
 }

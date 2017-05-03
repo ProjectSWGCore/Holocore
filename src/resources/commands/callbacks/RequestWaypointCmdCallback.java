@@ -27,9 +27,10 @@
 ***********************************************************************************/
 package resources.commands.callbacks;
 
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.location.Terrain;
+
 import intents.object.ObjectCreatedIntent;
-import resources.Location;
-import resources.Terrain;
 import resources.commands.ICmdCallback;
 import resources.objects.SWGObject;
 import resources.objects.player.PlayerObject;

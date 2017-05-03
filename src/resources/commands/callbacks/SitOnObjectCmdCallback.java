@@ -27,8 +27,9 @@
 ***********************************************************************************/
 package resources.commands.callbacks;
 
+import com.projectswg.common.data.location.Location;
+
 import network.packets.swg.zone.object_controller.SitOnObject;
-import resources.Location;
 import resources.Posture;
 import resources.commands.ICmdCallback;
 import resources.objects.SWGObject;

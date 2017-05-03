@@ -27,12 +27,13 @@
 ***********************************************************************************/
 package network.packets.swg.login;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 
 
 public class ClientIdMsg extends SWGPacket {
+	
 	public static final int CRC = getCrc("ClientIdMsg");
 
 	private int gameBitsToClear;
@@ -43,7 +44,7 @@ public class ClientIdMsg extends SWGPacket {
 		this(0, new byte[0], "");
 	}
 	
-	public ClientIdMsg(ByteBuffer data) {
+	public ClientIdMsg(NetBuffer data) {
 		decode(data);
 	}
 	
@@ -53,24 +54,23 @@ public class ClientIdMsg extends SWGPacket {
 		this.version = version;
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	@Override
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		gameBitsToClear = getInt(data);
-		int sessionKeyLength = getInt(data);
-		sessionToken = new byte[sessionKeyLength];
-		data.get(sessionToken);
-		version = getAscii(data);
+		gameBitsToClear = data.getInt();
+		sessionToken = data.getArrayLarge();
+		version = data.getAscii();
 	}
 	
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(16 + sessionToken.length + version.length());
-		addShort(data, 4);
-		addInt(  data, CRC);
-		addInt(  data, gameBitsToClear);
-		addInt(  data, sessionToken.length);
-		data.put(sessionToken);
-		addAscii(data, version);
+	@Override
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(16 + sessionToken.length + version.length());
+		data.addShort(4);
+		data.addInt(CRC);
+		data.addInt(gameBitsToClear);
+		data.addArrayLarge(sessionToken);
+		data.addAscii(version);
 		return data;
 	}
 	

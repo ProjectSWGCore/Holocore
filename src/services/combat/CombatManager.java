@@ -41,11 +41,21 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
+import com.projectswg.common.control.Manager;
+import com.projectswg.common.data.CRC;
+import com.projectswg.common.data.RGB;
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.swgfile.ClientFactory;
+import com.projectswg.common.debug.Log;
+
 import intents.BuffIntent;
 import intents.chat.ChatBroadcastIntent;
 import intents.chat.ChatCommandIntent;
+import intents.combat.CreatureIncapacitatedIntent;
 import intents.combat.CreatureKilledIntent;
 import intents.combat.DeathblowIntent;
+import intents.combat.IncapacitateCreatureIntent;
+import intents.combat.KillCreatureIntent;
 import intents.object.DestroyObjectIntent;
 import intents.object.ObjectCreatedIntent;
 import network.packets.swg.zone.PlayClientEffectObjectMessage;
@@ -53,17 +63,12 @@ import network.packets.swg.zone.object_controller.ShowFlyText;
 import network.packets.swg.zone.object_controller.ShowFlyText.Scale;
 import network.packets.swg.zone.object_controller.combat.CombatAction;
 import network.packets.swg.zone.object_controller.combat.CombatSpam;
-import resources.Location;
 import resources.Posture;
-import resources.client_info.ClientFactory;
 import resources.combat.AttackInfo;
 import resources.combat.CombatStatus;
 import resources.combat.HitLocation;
 import resources.combat.TrailLocation;
 import resources.commands.CombatCommand;
-import resources.common.CRC;
-import resources.common.RGB;
-import resources.control.Manager;
 import resources.encodables.ProsePackage;
 import resources.encodables.StringId;
 import resources.objects.SWGObject;
@@ -71,7 +76,6 @@ import resources.objects.creature.CreatureObject;
 import resources.objects.staticobject.StaticObject;
 import resources.objects.tangible.TangibleObject;
 import resources.objects.weapon.WeaponObject;
-import resources.server_info.Log;
 import services.objects.ObjectCreator;
 import utilities.ThreadUtilities;
 
@@ -111,6 +115,8 @@ public class CombatManager extends Manager {
 		
 		registerForIntent(DeathblowIntent.class, di -> handleDeathblowIntent(di));
 		registerForIntent(ChatCommandIntent.class, cci -> handleChatCommandIntent(cci));
+		registerForIntent(IncapacitateCreatureIntent.class, ici -> incapacitatePlayer(ici.getIncapper(), ici.getIncappee()));
+		registerForIntent(KillCreatureIntent.class, kci -> killCreature(kci.getKiller(), kci.getCorpse()));
 	}
 	
 	@Override
@@ -505,6 +511,7 @@ public class CombatManager extends Manager {
 		new BuffIntent("incapWeaken", incapacitator, incapacitated, false).broadcast();
 		new ChatBroadcastIntent(incapacitator.getOwner(), new ProsePackage(new StringId("base_player", "prose_target_incap"), "TT", incapacitated.getObjectName())).broadcast();
 		new ChatBroadcastIntent(incapacitated.getOwner(), new ProsePackage(new StringId("base_player", "prose_victim_incap"), "TT", incapacitator.getObjectName())).broadcast();
+		new CreatureIncapacitatedIntent(incapacitator, incapacitated).broadcast();
 	}
 	
 	private void expireIncapacitation(CreatureObject incapacitatedPlayer) {

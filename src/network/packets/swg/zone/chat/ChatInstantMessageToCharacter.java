@@ -27,7 +27,7 @@
 ***********************************************************************************/
 package network.packets.swg.zone.chat;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 
@@ -56,31 +56,31 @@ public class ChatInstantMessageToCharacter extends SWGPacket {
 		this.sequence = sequence;
 	}
 	
-	public ChatInstantMessageToCharacter(ByteBuffer data) {
+	public ChatInstantMessageToCharacter(NetBuffer data) {
 		decode(data);
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		getAscii(data);
-		galaxy = getAscii(data);
-		character = getAscii(data);
-		message = getUnicode(data);
-		outOfBand = getUnicode(data);
-		sequence = getInt(data);
+		data.getAscii();
+		galaxy = data.getAscii();
+		character = data.getAscii();
+		message = data.getUnicode();
+		outOfBand = data.getUnicode();
+		sequence = data.getInt();
 	}
 	
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(27 + galaxy.length() + character.length() + message.length()*2);
-		addShort(data, 2);
-		addInt(  data, CRC);
-		addAscii(data, "SWG");
-		addAscii(data, galaxy);
-		addAscii(data, character);
-		addUnicode(data, message);
-		addUnicode(data, outOfBand);
-		addInt  (data, sequence);
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(27 + galaxy.length() + character.length() + message.length()*2);
+		data.addShort(2);
+		data.addInt(CRC);
+		data.addAscii("SWG");
+		data.addAscii(galaxy);
+		data.addAscii(character);
+		data.addUnicode(message);
+		data.addUnicode(outOfBand);
+		data.addInt(sequence);
 		return data;
 	}
 	

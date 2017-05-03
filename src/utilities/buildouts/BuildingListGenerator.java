@@ -34,7 +34,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 
-import resources.Terrain;
+import com.projectswg.common.data.location.Terrain;
+
 import resources.objects.SWGObject;
 import resources.objects.building.BuildingObject;
 import services.objects.ClientBuildoutService;

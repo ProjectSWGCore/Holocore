@@ -27,20 +27,19 @@
  ***********************************************************************************/
 package resources.objects.mission;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.data.CRC;
+import com.projectswg.common.data.location.Point3D;
+import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.encoding.Encodable;
+import com.projectswg.common.network.NetBuffer;
+import com.projectswg.common.network.NetBufferStream;
+import com.projectswg.common.persistable.Persistable;
 
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
-import resources.Point3D;
-import resources.Terrain;
-import resources.common.CRC;
-import resources.encodables.Encodable;
 import resources.encodables.StringId;
 import resources.network.BaselineBuilder;
-import resources.network.NetBuffer;
-import resources.network.NetBufferStream;
 import resources.objects.intangible.IntangibleObject;
 import resources.objects.waypoint.WaypointObject;
-import resources.persistable.Persistable;
 import resources.player.Player;
 
 public class MissionObject extends IntangibleObject {
@@ -62,6 +61,7 @@ public class MissionObject extends IntangibleObject {
 		super(objectId, BaselineType.MISO);
 	}
 	
+	@Override
 	public void createBaseline3(Player target, BaselineBuilder bb) {
 		super.createBaseline3(target, bb);
 		bb.addInt(difficulty);
@@ -78,11 +78,13 @@ public class MissionObject extends IntangibleObject {
 		bb.addObject(waypoint);
 	}
 	
+	@Override
 	public void createBaseline6(Player target, BaselineBuilder bb) {
 		super.createBaseline6(target, bb);
 		bb.addInt(-1);
 	}
 	
+	@Override
 	public void parseBaseline3(NetBuffer buffer) {
 		super.parseBaseline3(buffer);
 		difficulty = buffer.getInt();
@@ -101,9 +103,10 @@ public class MissionObject extends IntangibleObject {
 		buffer.getUnicode();
 		waypoint = new WaypointObject(buffer.getLong());
 		buffer.position(pos);
-		waypoint.decode(buffer.getBuffer());
+		waypoint.decode(buffer);
 	}
 	
+	@Override
 	public void parseBaseline6(NetBuffer buffer) {
 		super.parseBaseline6(buffer);
 		buffer.getInt();
@@ -159,7 +162,7 @@ public class MissionObject extends IntangibleObject {
 		
 		@Override
 		public byte[] encode() {
-			NetBuffer data = NetBuffer.allocate(24);
+			NetBuffer data = NetBuffer.allocate(getLength());
 			data.addEncodable(location);
 			data.addLong(objectId);
 			data.addInt(terrain.getCrc());
@@ -167,11 +170,15 @@ public class MissionObject extends IntangibleObject {
 		}
 		
 		@Override
-		public void decode(ByteBuffer bb) {
-			NetBuffer data = NetBuffer.wrap(bb);
+		public void decode(NetBuffer data) {
 			location = data.getEncodable(Point3D.class);
 			objectId = data.getLong();
 			terrain = Terrain.getTerrainFromCrc(data.getInt());
+		}
+		
+		@Override
+		public int getLength() {
+			return location.getLength() + 12;
 		}
 		
 		@Override

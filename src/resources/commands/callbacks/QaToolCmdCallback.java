@@ -27,26 +27,25 @@
 
 package resources.commands.callbacks;
 
+import java.io.FileNotFoundException;
+import java.util.Map;
+
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.debug.Log;
+
 import intents.chat.ChatBroadcastIntent;
 import intents.experience.ExperienceIntent;
 import intents.network.CloseConnectionIntent;
+import intents.object.CreateStaticItemIntent;
 import intents.object.DestroyObjectIntent;
 import intents.object.ObjectTeleportIntent;
-import intents.object.CreateStaticItemIntent;
 import intents.player.DeleteCharacterIntent;
-import java.io.FileNotFoundException;
-import resources.Location;
-import resources.Terrain;
 import resources.commands.ICmdCallback;
 import resources.network.DisconnectReason;
 import resources.objects.SWGObject;
-import resources.objects.building.BuildingObject;
-import resources.objects.cell.CellObject;
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
-import resources.server_info.Log;
-import resources.server_info.RelationalServerData;
-import resources.server_info.RelationalServerFactory;
 import resources.sui.ISuiCallback;
 import resources.sui.SuiButtons;
 import resources.sui.SuiEvent;
@@ -55,13 +54,9 @@ import resources.sui.SuiListBox;
 import resources.sui.SuiMessageBox;
 import services.galaxy.GalacticManager;
 import services.objects.ObjectManager;
+import services.objects.StaticItemService.ObjectCreationHandler;
 import services.player.PlayerManager;
 import utilities.Scripts;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Map;
-import services.objects.StaticItemService.ObjectCreationHandler;
 
 /**
  * Created by Waverunner on 8/19/2015
@@ -186,73 +181,17 @@ public class QaToolCmdCallback implements ICmdCallback {
 	}
 	
 	private void recoverPlayer(ObjectManager objManager, PlayerManager playerManager, Player player, String args) {
-		String name = args;
-		String[] nameParts = name.split(" ");
-		String loc = "";
-		if (nameParts.length == 2) {
-			name = nameParts[0];
-			loc = nameParts[1];
-		} else if (nameParts.length == 3) {
-			name = nameParts[0] + " " + nameParts[1];
-			loc = nameParts[1];
-		} else {
-			sendSystemMessage(player, "Invalid arguments! Expected <playername> [opt]<terrain>");
-		}
-		name = name.trim();
-		recoverPlayer(objManager, playerManager, player, name, loc);
-	}
-	
-	private void recoverPlayer(ObjectManager objManager, PlayerManager playerManager, Player player, String name, String loc) {
-		Player recoveree = playerManager.getPlayerByCreatureFirstName(name);
-		
+		args = args.trim();
+		Player recoveree = playerManager.getPlayerByCreatureFirstName(args);
 		if (recoveree == null) {
-			sendSystemMessage(player, "Could not find player by first name: '" + name + "'");
+			sendSystemMessage(player, "Could not find player by first name: '" + args + "'");
 			return;
 		}
 		
-		sendSystemMessage(player, teleportToRecoveryLocation(objManager, recoveree.getCreatureObject(), loc));
-	}
-	
-	private String teleportToRecoveryLocation(ObjectManager objManager, SWGObject obj, String loc) {
-		final String whereClause = "(player_spawns.id = ?) AND (player_spawns.building_id = '' OR buildings.building_id = player_spawns.building_id)";
-		try (RelationalServerData data = RelationalServerFactory.getServerData("player/player_spawns.db", "building/buildings", "player_spawns")) {
-			try (ResultSet set = data.selectFromTable("player_spawns, buildings", new String[] { "player_spawns.*", "buildings.object_id" }, whereClause, loc)) {
-				if (!set.next())
-					return "No such location found: " + loc;
-				return teleportToRecovery(objManager, obj, loc, set);
-			} catch (SQLException e) {
-				Log.e(e);
-				return "Exception thrown. Failed to teleport: [" + e.getErrorCode() + "] " + e.getMessage();
-			}
-		}
-	}
-	
-	private String teleportToRecovery(ObjectManager objManager, SWGObject obj, String loc, ResultSet set) throws SQLException {
-		String building = set.getString("building_id");
-		Terrain t = Terrain.getTerrainFromName(set.getString("terrain"));
-		Location l = new Location(set.getDouble("x"), set.getDouble("y"), set.getDouble("z"), t);
-		if (building.isEmpty())
-			new ObjectTeleportIntent(obj, l).broadcast();
-		else
-			return teleportToRecoveryBuilding(objManager, obj, set.getLong("object_id"), set.getString("cell"), l);
-		return "Sucessfully teleported " + obj.getObjectName() + " to " + loc;
-	}
-	
-	private String teleportToRecoveryBuilding(ObjectManager objManager, SWGObject obj, long buildingId, String cellName, Location l) {
-		SWGObject parent = objManager.getObjectById(buildingId);
-		if (parent == null || !(parent instanceof BuildingObject)) {
-			String err = String.format("Invalid parent! Either null or not a building: %s  BUID: %d", parent, buildingId);
-			Log.e(err);
-			return err;
-		}
-		CellObject cell = ((BuildingObject) parent).getCellByName(cellName);
-		if (cell == null) {
-			String err = String.format("Invalid cell! Cell does not exist: %s  B-Template: %s  BUID: %d", cellName, parent.getTemplate(), buildingId);
-			Log.e(err);
-			return err;
-		}
-		new ObjectTeleportIntent(obj, cell, l).broadcast();
-		return "Successfully teleported " + obj.getObjectName() + " to " + buildingId + "/" + cellName + " " + l;
+		CreatureObject obj = recoveree.getCreatureObject();
+		Location loc = new Location(3525, 4, -4807, Terrain.TATOOINE);
+		new ObjectTeleportIntent(obj, loc).broadcast();
+		sendSystemMessage(player, "Sucessfully teleported " + obj.getObjectName() + " to " + loc.getPosition());
 	}
 	
 	private void displayHelp(Player player) {

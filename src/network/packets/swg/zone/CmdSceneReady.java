@@ -27,9 +27,9 @@
 ***********************************************************************************/
 package network.packets.swg.zone;
 
-import network.packets.swg.SWGPacket;
+import com.projectswg.common.network.NetBuffer;
 
-import java.nio.ByteBuffer;
+import network.packets.swg.SWGPacket;
 
 public class CmdSceneReady extends SWGPacket {
 	public static final int CRC = getCrc("CmdSceneReady");
@@ -38,16 +38,16 @@ public class CmdSceneReady extends SWGPacket {
 		
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
 	}
 	
-	public ByteBuffer encode() {
+	public NetBuffer encode() {
 		int length = 6;
-		ByteBuffer data = ByteBuffer.allocate(length);
-		addShort(data, 1);
-		addInt(  data, CRC);
+		NetBuffer data = NetBuffer.allocate(length);
+		data.addShort(1);
+		data.addInt(CRC);
 		return data;
 	}
 }

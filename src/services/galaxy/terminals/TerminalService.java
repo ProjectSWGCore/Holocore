@@ -35,16 +35,17 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.projectswg.common.control.Service;
+import com.projectswg.common.data.info.RelationalServerData;
+import com.projectswg.common.data.info.RelationalServerFactory;
+import com.projectswg.common.debug.Log;
+
 import intents.radial.RadialRegisterIntent;
 import intents.radial.RadialRequestIntent;
 import intents.radial.RadialResponseIntent;
 import intents.radial.RadialSelectionIntent;
-import resources.control.Service;
 import resources.radial.RadialOption;
 import resources.radial.Radials;
-import resources.server_info.Log;
-import resources.server_info.RelationalServerData;
-import resources.server_info.RelationalServerFactory;
 
 public class TerminalService extends Service {
 	

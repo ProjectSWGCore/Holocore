@@ -27,55 +27,64 @@
 ***********************************************************************************/
 package intents;
 
-import network.packets.Packet;
-import resources.Terrain;
-import resources.control.Intent;
-import resources.player.Player;
-
 import java.util.List;
 
-public class NotifyPlayersPacketIntent extends Intent {
+import com.projectswg.common.control.Intent;
+import com.projectswg.common.data.location.Terrain;
 
-	public static final String TYPE = "GalaxyWidePacketIntent";
+import network.packets.Packet;
+import resources.player.Player;
+
+public class NotifyPlayersPacketIntent extends Intent {
 	
 	private Packet packet;
 	private Terrain terrain;
 	private List<Long> networkIds;
 	private ConditionalNotify condition;
-
+	
 	public NotifyPlayersPacketIntent(Packet packet, Terrain terrain, ConditionalNotify condition, List<Long> networkIds) {
-		super(TYPE);
 		this.packet = packet;
 		this.terrain = terrain;
 		this.condition = condition;
 		this.networkIds = networkIds;
 	}
-
+	
 	public NotifyPlayersPacketIntent(Packet packet, Terrain terrain, ConditionalNotify condition) {
 		this(packet, terrain, condition, null);
 	}
-
+	
 	public NotifyPlayersPacketIntent(Packet packet, ConditionalNotify condition, List<Long> networkIds) {
 		this(packet, null, condition, networkIds);
 	}
-
+	
 	public NotifyPlayersPacketIntent(Packet packet, List<Long> networkIds) {
 		this(packet, null, null, networkIds);
 	}
-
+	
 	public NotifyPlayersPacketIntent(Packet packet, Terrain terrain) {
 		this(packet, terrain, null);
 	}
-
+	
 	public NotifyPlayersPacketIntent(Packet p) {
 		this(p, null, null, null);
 	}
-
-	public Packet getPacket() { return packet; }
-	public Terrain getTerrain() { return terrain; }
-	public ConditionalNotify getCondition() { return condition; }
-	public List<Long> getNetworkIds() { return networkIds; }
-
+	
+	public Packet getPacket() {
+		return packet;
+	}
+	
+	public Terrain getTerrain() {
+		return terrain;
+	}
+	
+	public ConditionalNotify getCondition() {
+		return condition;
+	}
+	
+	public List<Long> getNetworkIds() {
+		return networkIds;
+	}
+	
 	public interface ConditionalNotify {
 		boolean meetsCondition(Player player);
 	}

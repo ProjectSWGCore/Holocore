@@ -42,23 +42,25 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import com.projectswg.common.control.Service;
+import com.projectswg.common.data.CRC;
+import com.projectswg.common.data.info.RelationalServerData;
+import com.projectswg.common.data.info.RelationalServerFactory;
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.debug.Log;
+
 import intents.object.ObjectCreatedIntent;
 import intents.player.PlayerTransformedIntent;
-import resources.Location;
-import resources.Terrain;
 import resources.buildout.BuildoutArea;
 import resources.buildout.BuildoutArea.BuildoutAreaBuilder;
 import resources.buildout.BuildoutAreaGrid;
 import resources.config.ConfigFile;
-import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.SWGObject.ObjectClassification;
 import resources.objects.building.BuildingObject;
 import resources.objects.cell.CellObject;
-import resources.server_info.CrcDatabase;
-import resources.server_info.Log;
-import resources.server_info.RelationalServerData;
-import resources.server_info.RelationalServerFactory;
+import resources.server_info.DataManager;
 import resources.server_info.StandardLog;
 
 public class ClientBuildoutService extends Service {
@@ -85,7 +87,7 @@ public class ClientBuildoutService extends Service {
 		long startTime = StandardLog.onStartLoad("client objects");
 		try {
 			loadAreas(getEvents());
-			if (getConfig(ConfigFile.PRIMARY).getBoolean("LOAD-OBJECTS", true))
+			if (DataManager.getConfig(ConfigFile.PRIMARY).getBoolean("LOAD-OBJECTS", true))
 				objects = loadObjects();
 			else
 				objects = new HashMap<>();
@@ -116,36 +118,30 @@ public class ClientBuildoutService extends Service {
 	
 	private Map<Long, SWGObject> loadObjects() throws SQLException {
 		Map<Long, SWGObject> objects = new Hashtable<>(115000);
-		try (CrcDatabase strings = new CrcDatabase()) {
-			strings.loadStrings();
-			try (BuildoutLoader loader = new BuildoutLoader(areasById, objects, strings, new File("serverdata/buildout/objects.sdb"))) {
-				while (loader.loadNextEntry()) {
-					if (!loader.isValidNextEntry())
-						continue;
-					loader.createObject();
-				}
+		try (BuildoutLoader loader = new BuildoutLoader(areasById, objects, new File("serverdata/buildout/objects.sdb"))) {
+			while (loader.loadNextEntry()) {
+				if (!loader.isValidNextEntry())
+					continue;
+				loader.createObject();
 			}
-			addAdditionalObjects(strings, objects);
 		}
+		addAdditionalObjects(objects);
 		return objects;
 	}
 	
 	private Map<Long, SWGObject> loadObjects(int areaId) throws SQLException {
 		Map<Long, SWGObject> objects = new Hashtable<>();
-		try (CrcDatabase strings = new CrcDatabase()) {
-			strings.loadStrings();
-			try (BuildoutLoader loader = new BuildoutLoader(areasById, objects, strings, new File("serverdata/buildout/objects.sdb"))) {
-				while (loader.loadNextEntry()) {
-					if (!loader.isAreaId(areaId))
-						continue;
-					loader.createObject();
-				}
+		try (BuildoutLoader loader = new BuildoutLoader(areasById, objects, new File("serverdata/buildout/objects.sdb"))) {
+			while (loader.loadNextEntry()) {
+				if (!loader.isAreaId(areaId))
+					continue;
+				loader.createObject();
 			}
 		}
 		return objects;
 	}
 	
-	private void addAdditionalObjects(CrcDatabase strings, Map<Long, SWGObject> buildouts) throws SQLException {
+	private void addAdditionalObjects(Map<Long, SWGObject> buildouts) throws SQLException {
 		try (RelationalServerData data = RelationalServerFactory.getServerData("buildout/additional_buildouts.db", "additional_buildouts")) {
 			try (ResultSet set = data.executeQuery(GET_ADDITIONAL_OBJECTS_SQL)) {
 				set.setFetchSize(4*1024);
@@ -209,7 +205,7 @@ public class ClientBuildoutService extends Service {
 	
 	private List<String> getEvents() {
 		List <String> events = new ArrayList<>();
-		String eventStr = getConfig(ConfigFile.FEATURES).getString("EVENTS", "");
+		String eventStr = DataManager.getConfig(ConfigFile.FEATURES).getString("EVENTS", "");
 		String [] eventArray = eventStr.split(",");
 		for (String event : eventArray) {
 			event = event.toLowerCase(Locale.US);
@@ -303,17 +299,15 @@ public class ClientBuildoutService extends Service {
 		
 		private final Map<Integer, BuildoutArea> areas;
 		private final Map<Long, SWGObject> objects;
-		private final CrcDatabase strings;
 		private final SdbLoader loader;
 		private final Location location;
 		private final ObjectCreationData creationData;
 		private BuildoutArea previousArea;
 		private String line;
 		
-		public BuildoutLoader(Map<Integer, BuildoutArea> areas, Map<Long, SWGObject> objects, CrcDatabase strings, File file) {
+		public BuildoutLoader(Map<Integer, BuildoutArea> areas, Map<Long, SWGObject> objects, File file) {
 			this.areas = areas;
 			this.objects = objects;
-			this.strings = strings;
 			this.loader = new SdbLoader(file);
 			this.creationData = new ObjectCreationData();
 			this.previousArea = areas.values().iterator().next();
@@ -323,6 +317,7 @@ public class ClientBuildoutService extends Service {
 			loader.loadNextLine(); // Skip data types
 		}
 		
+		@Override
 		public void close() {
 			loader.close();
 		}
@@ -345,7 +340,7 @@ public class ClientBuildoutService extends Service {
 		}
 		
 		public void createObject() {
-			SWGObject obj = ObjectCreator.createObjectFromTemplate(creationData.id, strings.getString(creationData.templateCrc));
+			SWGObject obj = ObjectCreator.createObjectFromTemplate(creationData.id, CRC.getString(creationData.templateCrc));
 			obj.setClassification(creationData.snapshot ? ObjectClassification.SNAPSHOT : ObjectClassification.BUILDOUT);
 			obj.setPrefLoadRange(creationData.radius);
 			setObjectLocation(obj);
@@ -449,6 +444,7 @@ public class ClientBuildoutService extends Service {
 			this.reader = br;
 		}
 		
+		@Override
 		public void close() {
 			if (reader != null) {
 				try {

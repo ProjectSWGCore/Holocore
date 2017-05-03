@@ -27,10 +27,10 @@
 
 package network.packets.swg.zone.chat;
 
+import com.projectswg.common.network.NetBuffer;
+
 import network.packets.swg.SWGPacket;
 import resources.chat.ChatAvatar;
-
-import java.nio.ByteBuffer;
 
 /**
  * @author Waverunner
@@ -53,24 +53,24 @@ public class ChatOnInviteToRoom extends SWGPacket {
 	}
 
 	@Override
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		room	= getAscii(data);
-		sender 	= getEncodable(data, ChatAvatar.class);
-		invited = getEncodable(data, ChatAvatar.class);
-		result	= getInt(data);
+		room	= data.getAscii();
+		sender 	= data.getEncodable(ChatAvatar.class);
+		invited = data.getEncodable(ChatAvatar.class);
+		result	= data.getInt();
 	}
 
 	@Override
-	public ByteBuffer encode() {
-		ByteBuffer bb = ByteBuffer.allocate(12 + sender.getSize() + invited.getSize() + room.length());
-		addShort(bb, 5);
-		addInt(bb, CRC);
-		addAscii(bb, room);
-		addEncodable(bb, sender);
-		addEncodable(bb, invited);
-		addInt(bb, result);
-		return bb;
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(12 + sender.getLength() + invited.getLength() + room.length());
+		data.addShort(5);
+		data.addInt(CRC);
+		data.addAscii(room);
+		data.addEncodable(sender);
+		data.addEncodable(invited);
+		data.addInt(result);
+		return data;
 	}
 }

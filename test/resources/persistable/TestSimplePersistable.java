@@ -39,7 +39,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import resources.network.NetBufferStream;
+import com.projectswg.common.network.NetBufferStream;
+import com.projectswg.common.persistable.InputPersistenceStream;
+import com.projectswg.common.persistable.OutputPersistenceStream;
+import com.projectswg.common.persistable.Persistable;
 
 @RunWith(JUnit4.class)
 public class TestSimplePersistable {
