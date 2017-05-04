@@ -30,9 +30,15 @@ package services.network;
 import java.io.IOException;
 import java.net.BindException;
 import java.net.InetAddress;
-import java.net.Socket;
 import java.net.SocketAddress;
 import java.net.SocketException;
+import java.nio.channels.SocketChannel;
+
+import com.projectswg.common.control.Manager;
+import com.projectswg.common.debug.Log;
+import com.projectswg.common.network.NetBuffer;
+import com.projectswg.common.network.TCPServer;
+import com.projectswg.common.network.TCPServer.TCPCallback;
 
 import intents.network.CloseConnectionIntent;
 import main.ProjectSWG.CoreException;
@@ -40,13 +46,9 @@ import network.AdminNetworkClient;
 import network.NetworkClient;
 import network.packets.swg.holo.HoloConnectionStopped.ConnectionStoppedReason;
 import resources.config.ConfigFile;
-import resources.control.Manager;
-import resources.network.NetBuffer;
-import resources.network.NetworkCallback;
-import resources.network.TCPServer;
 import resources.network.UDPServer;
 import resources.network.UDPServer.UDPPacket;
-import resources.server_info.Log;
+import resources.server_info.DataManager;
 import services.CoreManager;
 
 public class NetworkClientManager extends Manager {
@@ -125,11 +127,11 @@ public class NetworkClientManager extends Manager {
 	}
 	
 	private int getBindPort() {
-		return getConfig(ConfigFile.NETWORK).getInt("BIND-PORT", 44463);
+		return DataManager.getConfig(ConfigFile.NETWORK).getInt("BIND-PORT", 44463);
 	}
 	
 	private int getBufferSize() {
-		return getConfig(ConfigFile.NETWORK).getInt("BUFFER-SIZE", 4096);
+		return DataManager.getConfig(ConfigFile.NETWORK).getInt("BUFFER-SIZE", 4096);
 	}
 	
 	private void onUdpPacket(UDPPacket packet) {
@@ -149,7 +151,7 @@ public class NetworkClientManager extends Manager {
 		udpServer.send(port, addr, data.array());
 	}
 	
-	private class StandardNetworkCallback implements NetworkCallback {
+	private class StandardNetworkCallback implements TCPCallback {
 		
 		private final PacketSender sender;
 		
@@ -158,7 +160,7 @@ public class NetworkClientManager extends Manager {
 		}
 		
 		@Override
-		public void onIncomingConnection(Socket s, SocketAddress addr) {
+		public void onIncomingConnection(SocketChannel s, SocketAddress addr) {
 			NetworkClient client = clientManager.createSession(addr, sender);
 			client.onConnected();
 			inboundManager.onSessionCreated(client);
@@ -166,7 +168,7 @@ public class NetworkClientManager extends Manager {
 		}
 		
 		@Override
-		public void onConnectionDisconnect(Socket s, SocketAddress addr) {
+		public void onConnectionDisconnect(SocketChannel s, SocketAddress addr) {
 			NetworkClient client = clientManager.getClient(addr);
 			if (client != null) {
 				client.onDisconnected(ConnectionStoppedReason.APPLICATION);
@@ -178,13 +180,13 @@ public class NetworkClientManager extends Manager {
 		}
 		
 		@Override
-		public void onIncomingData(Socket s, SocketAddress addr, byte [] data) {
+		public void onIncomingData(SocketChannel s, SocketAddress addr, byte [] data) {
 			inboundManager.onInboundData(addr, data);
 		}
 		
 	}
 	
-	private class AdminNetworkCallback implements NetworkCallback {
+	private class AdminNetworkCallback implements TCPCallback {
 		
 		private final PacketSender sender;
 		
@@ -193,7 +195,7 @@ public class NetworkClientManager extends Manager {
 		}
 		
 		@Override
-		public void onIncomingConnection(Socket s, SocketAddress addr) {
+		public void onIncomingConnection(SocketChannel s, SocketAddress addr) {
 			NetworkClient client = clientManager.createAdminSession(addr, sender);
 			client.onConnected();
 			inboundManager.onSessionCreated(client);
@@ -201,7 +203,7 @@ public class NetworkClientManager extends Manager {
 		}
 		
 		@Override
-		public void onConnectionDisconnect(Socket s, SocketAddress addr) {
+		public void onConnectionDisconnect(SocketChannel s, SocketAddress addr) {
 			NetworkClient client = clientManager.getClient(addr);
 			if (client != null) {
 				client.onDisconnected(ConnectionStoppedReason.APPLICATION);
@@ -213,7 +215,7 @@ public class NetworkClientManager extends Manager {
 		}
 		
 		@Override
-		public void onIncomingData(Socket s, SocketAddress addr, byte [] data) {
+		public void onIncomingData(SocketChannel s, SocketAddress addr, byte [] data) {
 			inboundManager.onInboundData(addr, data);
 		}
 		

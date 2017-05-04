@@ -27,21 +27,6 @@
  ***********************************************************************************/
 package services.combat;
 
-import intents.BuffIntent;
-import intents.FactionIntent;
-import intents.PlayerEventIntent;
-import intents.chat.ChatBroadcastIntent;
-
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
-import network.packets.swg.zone.PlayClientEffectObjectMessage;
-import intents.combat.CreatureKilledIntent;
-import intents.object.DestroyObjectIntent;
-import intents.object.ObjectCreatedIntent;
-import intents.object.ObjectTeleportIntent;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -49,16 +34,32 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
-import resources.Location;
+import com.projectswg.common.control.Service;
+import com.projectswg.common.data.info.RelationalDatabase;
+import com.projectswg.common.data.info.RelationalServerFactory;
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.data.swgfile.ClientFactory;
+import com.projectswg.common.debug.Log;
+
+import intents.BuffIntent;
+import intents.FactionIntent;
+import intents.PlayerEventIntent;
+import intents.chat.ChatBroadcastIntent;
+import intents.combat.CreatureKilledIntent;
+import intents.object.DestroyObjectIntent;
+import intents.object.ObjectCreatedIntent;
+import intents.object.ObjectTeleportIntent;
+import network.packets.swg.zone.PlayClientEffectObjectMessage;
 import resources.Posture;
 import resources.PvpFaction;
 import resources.PvpStatus;
-import resources.Terrain;
-import resources.client_info.ClientFactory;
-import resources.control.Service;
 import resources.encodables.ProsePackage;
 import resources.encodables.StringId;
 import resources.objects.SWGObject;
@@ -66,9 +67,6 @@ import resources.objects.building.BuildingObject;
 import resources.objects.cell.CellObject;
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
-import resources.server_info.Log;
-import resources.server_info.RelationalDatabase;
-import resources.server_info.RelationalServerFactory;
 import resources.server_info.StandardLog;
 import resources.sui.SuiButtons;
 import resources.sui.SuiEvent;
@@ -143,7 +141,7 @@ public final class CorpseService extends Service {
 							factionRestriction = PvpFaction.IMPERIAL;
 							break;
 					}
-
+					
 					FacilityData facilityData = new FacilityData(factionRestriction, set.getFloat("x"), set.getFloat("y"), set.getFloat("z"), set.getString("cell"), FacilityType.valueOf(set.getString("clone_type")), stfName, set.getInt("heading"), tubeData);
 					String objectTemplate = set.getString("structure");
 
@@ -198,7 +196,7 @@ public final class CorpseService extends Service {
 				return;
 			}
 			
-			cloningFacilities.remove((BuildingObject) destroyedObject);
+			cloningFacilities.remove(destroyedObject);
 		}
 	}
 	
@@ -252,11 +250,18 @@ public final class CorpseService extends Service {
 		
 		for (BuildingObject cloningFacility : availableFacilities) {
 			FacilityData facilityData = facilityDataMap.get(cloningFacility.getTemplate());
-			String stfName = facilityData.getStfName();
-
-			suiWindow.addListItem(stfName != null ? stfName : cloningFacility.getCurrentCity());
+			String name;
+			
+			if (facilityData.getStfName() != null)
+				name = facilityData.getStfName();
+			else if (!cloningFacility.getCurrentCity().isEmpty())
+				name = cloningFacility.getCurrentCity();
+			else
+				name = String.format("%s[%d, %d]", cloningFacility.getTerrain(), (int) cloningFacility.getX(), (int) cloningFacility.getZ());
+			
+			suiWindow.addListItem(name);
 		}
-
+		
 		suiWindow.addCallback("handleFacilityChoice", (Player player, SWGObject actor, SuiEvent event, Map<String, String> parameters) -> {
 			int selectionIndex = SuiListBox.getSelectedRow(parameters);
 
@@ -377,7 +382,7 @@ public final class CorpseService extends Service {
 		corpse.sendObserversAndSelf(new PlayClientEffectObjectMessage("clienteffect/player_clone_compile.cef", "", corpse.getObjectId()));
 		
 		BuffIntent cloningSickness = new BuffIntent("cloning_sickness", corpse, corpse, false);
-		new BuffIntent("incapweaken", corpse, corpse, true).broadcastAfterIntent(cloningSickness);
+		new BuffIntent("incapWeaken", corpse, corpse, true).broadcastAfterIntent(cloningSickness);
 		cloningSickness.broadcast();
 	}
 	

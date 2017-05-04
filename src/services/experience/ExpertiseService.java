@@ -27,10 +27,6 @@
 ***********************************************************************************/
 package services.experience;
 
-import intents.experience.GrantSkillIntent;
-import intents.experience.LevelChangedIntent;
-import intents.network.GalacticPacketIntent;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -38,17 +34,21 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.projectswg.common.control.Intent;
+import com.projectswg.common.control.Service;
+import com.projectswg.common.data.info.RelationalDatabase;
+import com.projectswg.common.data.info.RelationalServerFactory;
+import com.projectswg.common.data.swgfile.ClientFactory;
+import com.projectswg.common.data.swgfile.visitors.DatatableData;
+import com.projectswg.common.debug.Log;
+
+import intents.experience.GrantSkillIntent;
+import intents.experience.LevelChangedIntent;
+import intents.network.GalacticPacketIntent;
 import network.packets.Packet;
 import network.packets.swg.zone.ExpertiseRequestMessage;
-import resources.client_info.ClientFactory;
-import resources.client_info.visitors.DatatableData;
-import resources.control.Intent;
-import resources.control.Service;
 import resources.objects.creature.CreatureObject;
 import resources.objects.player.PlayerObject;
-import resources.server_info.Log;
-import resources.server_info.RelationalDatabase;
-import resources.server_info.RelationalServerFactory;
 import resources.server_info.StandardLog;
 import resources.sui.SuiButtons;
 import resources.sui.SuiMessageBox;

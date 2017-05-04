@@ -24,19 +24,15 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>
  ******************************************************************************/
-
 package intents.chat;
 
+import com.projectswg.common.control.Intent;
+
 import resources.chat.ChatAvatar;
-import resources.control.Intent;
 import resources.player.Player;
 
-/**
- * @author Waverunner
- */
 public class ChatRoomUpdateIntent extends Intent {
-	public static final String TYPE = "ChatRoomUpdateIntent";
-
+	
 	private String path;
 	private String title;
 	private String target;
@@ -46,30 +42,36 @@ public class ChatRoomUpdateIntent extends Intent {
 	private boolean isPublic;
 	private Player player;
 	private boolean ignoreInvitation;
-
+	
 	public ChatRoomUpdateIntent(String path, String title, String target, ChatAvatar avatar, String message, UpdateType updateType) {
-		super(TYPE);
 		this.path = path;
 		this.updateType = updateType;
 		this.avatar = avatar;
-
-		switch(updateType) {
-			case DESTROY: break;
-			case CREATE: this.title = title; break;
-			case SEND_MESSAGE: this.message = message; break;
-			default: this.target = target; break;
+		
+		switch (updateType) {
+			case DESTROY:
+				break;
+			case CREATE:
+				this.title = title;
+				break;
+			case SEND_MESSAGE:
+				this.message = message;
+				break;
+			default:
+				this.target = target;
+				break;
 		}
 	}
-
+	
 	public ChatRoomUpdateIntent(ChatAvatar avatar, String path, String title, boolean isPublic) {
 		this(path, title, null, avatar, null, UpdateType.CREATE);
 		this.isPublic = isPublic;
 	}
-
+	
 	public ChatRoomUpdateIntent(ChatAvatar avatar, String path, UpdateType updateType) {
 		this(path, null, null, avatar, null, updateType);
 	}
-
+	
 	public ChatRoomUpdateIntent(Player player, String path, String title, String target, String message, UpdateType updateType, boolean ignoreInvitation) {
 		this(path, title, target, ChatAvatar.getFromPlayer(player), message, updateType);
 		this.player = player;
@@ -84,35 +86,35 @@ public class ChatRoomUpdateIntent extends Intent {
 	public String getPath() {
 		return path;
 	}
-
+	
 	public String getTitle() {
 		return title;
 	}
-
+	
 	public String getTarget() {
 		return target;
 	}
-
+	
 	public ChatAvatar getAvatar() {
 		return avatar;
 	}
-
+	
 	public String getMessage() {
 		return message;
 	}
-
+	
 	public UpdateType getUpdateType() {
 		return updateType;
 	}
-
+	
 	public boolean isPublic() {
 		return isPublic;
 	}
-
+	
 	public Player getPlayer() {
 		return player;
 	}
-
+	
 	public boolean isIgnoreInvitation() {
 		return ignoreInvitation;
 	}

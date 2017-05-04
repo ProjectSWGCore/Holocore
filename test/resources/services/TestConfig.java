@@ -35,8 +35,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import resources.server_info.Config;
-import resources.server_info.Log;
+import com.projectswg.common.data.info.Config;
+import com.projectswg.common.debug.Log;
 
 @RunWith(JUnit4.class)
 public class TestConfig {

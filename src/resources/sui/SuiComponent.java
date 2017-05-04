@@ -27,15 +27,14 @@
 
 package resources.sui;
 
-import network.packets.Packet;
-import resources.encodables.Encodable;
-import resources.server_info.Log;
-import utilities.Encoder;
-
-import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.projectswg.common.debug.Log;
+import com.projectswg.common.encoding.Encodable;
+import com.projectswg.common.encoding.StringType;
+import com.projectswg.common.network.NetBuffer;
 
 /**
  * @author Waverunner
@@ -134,31 +133,38 @@ public class SuiComponent implements Encodable {
 				return -1;
 			}
 
-			return (int) bytes[0];
+			return bytes[0];
 		}
 		return -1;
 	}
 
 	@Override
 	public byte[] encode() {
-		int size = 9;
-
-		for (String param : wideParams) { size += 4 + (param.length() * 2); }
-		for (String param : narrowParams) { size += 2 + param.length();}
-
-		ByteBuffer bb = ByteBuffer.allocate(size);
-		Packet.addByte(bb, type.getValue());
-		Packet.addList(bb, wideParams, Encoder.StringType.UNICODE);
-		Packet.addList(bb, narrowParams, Encoder.StringType.ASCII);
-
-		return bb.array();
+		NetBuffer data = NetBuffer.allocate(getLength());
+		data.addByte(type.getValue());
+		data.addList(wideParams, StringType.UNICODE);
+		data.addList(narrowParams, StringType.ASCII);
+		return data.array();
 	}
 
 	@Override
-	public void decode(ByteBuffer data) {
-		type			= Type.valueOf(Packet.getByte(data));
-		wideParams		= Packet.getList(data, Encoder.StringType.UNICODE);
-		narrowParams	= Packet.getList(data, Encoder.StringType.ASCII);
+	public void decode(NetBuffer data) {
+		type			= Type.valueOf(data.getByte());
+		wideParams		= data.getList(StringType.UNICODE);
+		narrowParams	= data.getList(StringType.ASCII);
+	}
+	
+	public int getLength() {
+		int size = 9;
+		
+		for (String param : wideParams) {
+			size += 4 + (param.length() * 2);
+		}
+		for (String param : narrowParams) {
+			size += 2 + param.length();
+		}
+		
+		return size;
 	}
 
 	public enum Type {

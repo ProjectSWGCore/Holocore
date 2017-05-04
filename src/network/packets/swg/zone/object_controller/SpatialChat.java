@@ -27,7 +27,7 @@
 ***********************************************************************************/
 package network.packets.swg.zone.object_controller;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 
 public class SpatialChat extends ObjectController {
@@ -70,39 +70,39 @@ public class SpatialChat extends ObjectController {
 		this.sourceName = chat.sourceName;
 	}
 	
-	public SpatialChat(ByteBuffer data) {
+	public SpatialChat(NetBuffer data) {
 		super(CRC);
 		decode(data);
 	}
 	
-	public void decode(ByteBuffer data) {
+	public void decode(NetBuffer data) {
 		decodeHeader(data);
-		sourceId = getLong(data);
-		targetId = getLong(data);
-		text = getUnicode(data);
-		getInt(data);
-		balloonSize = getShort(data);
-		balloonType = getShort(data);
-		moodId = getShort(data);
-		languageId = getByte(data);
-		outOfBand = getUnicode(data);
-		sourceName = getUnicode(data);
+		sourceId = data.getLong();
+		targetId = data.getLong();
+		text = data.getUnicode();
+		data.getInt();
+		balloonSize = data.getShort();
+		balloonType = data.getShort();
+		moodId = data.getShort();
+		languageId = data.getByte();
+		outOfBand = data.getUnicode();
+		sourceName = data.getUnicode();
 	}
 	
-	public ByteBuffer encode() {
+	public NetBuffer encode() {
 		int length = 39 + text.length()*2 + outOfBand.length()*2 + sourceName.length()*2;
-		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + length);
+		NetBuffer data = NetBuffer.allocate(HEADER_LENGTH + length);
 		encodeHeader(data);
-		addLong(data, sourceId);
-		addLong(data, targetId);
-		addUnicode(data, text);
-		addInt(data, 0); // flags
-		addShort(data, balloonSize);
-		addShort(data, balloonType);
-		addShort(data, moodId);
-		addByte(data, languageId); // languageId
-		addUnicode(data, outOfBand);
-		addUnicode(data, sourceName);
+		data.addLong(sourceId);
+		data.addLong(targetId);
+		data.addUnicode(text);
+		data.addInt(0); // flags
+		data.addShort(balloonSize);
+		data.addShort(balloonType);
+		data.addShort(moodId);
+		data.addByte(languageId); // languageId
+		data.addUnicode(outOfBand);
+		data.addUnicode(sourceName);
 		return data;
 	}
 	

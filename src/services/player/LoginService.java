@@ -27,13 +27,6 @@
 ***********************************************************************************/
 package services.player;
 
-import intents.GalacticIntent;
-import intents.LoginEventIntent;
-import intents.LoginEventIntent.LoginEvent;
-import intents.network.GalacticPacketIntent;
-import intents.object.DestroyObjectIntent;
-import intents.player.DeleteCharacterIntent;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -41,37 +34,45 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import com.projectswg.common.control.Service;
+import com.projectswg.common.data.BCrypt;
+import com.projectswg.common.data.info.Config;
+import com.projectswg.common.data.info.RelationalDatabase;
+import com.projectswg.common.data.info.RelationalServerFactory;
+import com.projectswg.common.debug.Assert;
+import com.projectswg.common.debug.Log;
+
+import intents.GalacticIntent;
+import intents.LoginEventIntent;
+import intents.LoginEventIntent.LoginEvent;
+import intents.network.GalacticPacketIntent;
+import intents.object.DestroyObjectIntent;
+import intents.player.DeleteCharacterIntent;
 import network.packets.Packet;
 import network.packets.swg.ErrorMessage;
 import network.packets.swg.login.CharacterCreationDisabled;
 import network.packets.swg.login.EnumerateCharacterId;
 import network.packets.swg.login.EnumerateCharacterId.SWGCharacter;
-import network.packets.swg.login.creation.DeleteCharacterRequest;
-import network.packets.swg.login.creation.DeleteCharacterResponse;
 import network.packets.swg.login.LoginClientId;
 import network.packets.swg.login.LoginClientToken;
 import network.packets.swg.login.LoginClusterStatus;
 import network.packets.swg.login.LoginEnumCluster;
 import network.packets.swg.login.LoginIncorrectClientId;
+import network.packets.swg.login.creation.DeleteCharacterRequest;
+import network.packets.swg.login.creation.DeleteCharacterResponse;
 import network.packets.swg.zone.GameServerLagResponse;
 import network.packets.swg.zone.LagRequest;
 import network.packets.swg.zone.ServerNowEpochTime;
 import resources.Galaxy;
 import resources.Race;
-import resources.common.BCrypt;
 import resources.config.ConfigFile;
-import resources.control.Assert;
-import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.player.AccessLevel;
 import resources.player.Player;
-import resources.player.PlayerState;
 import resources.player.Player.PlayerServer;
-import resources.server_info.Config;
-import resources.server_info.Log;
-import resources.server_info.RelationalDatabase;
-import resources.server_info.RelationalServerFactory;
+import resources.player.PlayerState;
+import resources.server_info.DataManager;
 import services.CoreManager;
 
 public class LoginService extends Service {
@@ -137,7 +138,7 @@ public class LoginService extends Service {
 	}
 	
 	private String getServerString() {
-		Config c = getConfig(ConfigFile.NETWORK);
+		Config c = DataManager.getConfig(ConfigFile.NETWORK);
 		String name = c.getString("LOGIN-SERVER-NAME", "LoginServer");
 		int id = c.getInt("LOGIN-SERVER-ID", 1);
 		return name + ":" + id;
@@ -169,7 +170,7 @@ public class LoginService extends Service {
 		Assert.test(player.getPlayerServer() == PlayerServer.NONE);
 		player.setPlayerState(PlayerState.LOGGING_IN);
 		player.setPlayerServer(PlayerServer.LOGIN);
-		final boolean doClientCheck = getConfig(ConfigFile.NETWORK).getBoolean("LOGIN-VERSION-CHECKS", true);
+		final boolean doClientCheck = DataManager.getConfig(ConfigFile.NETWORK).getBoolean("LOGIN-VERSION-CHECKS", true);
 		if (!id.getVersion().equals(REQUIRED_VERSION) && doClientCheck) {
 			onLoginClientVersionError(player, id);
 			return;
@@ -254,12 +255,12 @@ public class LoginService extends Service {
 		LoginEnumCluster cluster = new LoginEnumCluster();
 		LoginClusterStatus clusterStatus = new LoginClusterStatus();
 		List <Galaxy> galaxies = getGalaxies(player);
-		SWGCharacter [] characters = getCharacters(player.getUserId());
+		List<SWGCharacter> characters = getCharacters(player.getUserId());
 		for (Galaxy g : galaxies) {
 			cluster.addGalaxy(g);
 			clusterStatus.addGalaxy(g);
 		}
-		cluster.setMaxCharacters(getConfig(ConfigFile.PRIMARY).getInt("GALAXY-MAX-CHARACTERS", 2));
+		cluster.setMaxCharacters(DataManager.getConfig(ConfigFile.PRIMARY).getInt("GALAXY-MAX-CHARACTERS", 2));
 		player.sendPacket(new ServerNowEpochTime((int)(System.currentTimeMillis()/1E3)));
 		player.sendPacket(token);
 		player.sendPacket(cluster);
@@ -303,7 +304,7 @@ public class LoginService extends Service {
 		return galaxies;
 	}
 	
-	private SWGCharacter [] getCharacters(int userId) {
+	private List<SWGCharacter> getCharacters(int userId) {
 		List <SWGCharacter> characters = new ArrayList<>();
 		synchronized (getCharacters) {
 			try {
@@ -323,7 +324,7 @@ public class LoginService extends Service {
 				Log.e(e);
 			}
 		}
-		return characters.toArray(new SWGCharacter[characters.size()]);
+		return characters;
 	}
 	
 	private boolean deleteCharacter(SWGObject obj) {

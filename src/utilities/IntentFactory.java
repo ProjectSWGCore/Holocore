@@ -27,8 +27,14 @@
  ***********************************************************************************/
 package utilities;
 
+import com.projectswg.common.control.IntentChain;
+import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.debug.Log;
+
+import intents.chat.ChatBroadcastIntent;
+import intents.chat.ChatBroadcastIntent.BroadcastType;
+import intents.chat.PersistentMessageIntent;
 import network.packets.swg.zone.chat.ChatSystemMessage;
-import resources.Terrain;
 import resources.encodables.OutOfBandPackage;
 import resources.encodables.ProsePackage;
 import resources.encodables.StringId;
@@ -36,10 +42,6 @@ import resources.encodables.player.Mail;
 import resources.objects.SWGObject;
 import resources.objects.waypoint.WaypointObject;
 import resources.player.Player;
-import intents.chat.ChatBroadcastIntent;
-import intents.chat.ChatBroadcastIntent.BroadcastType;
-import intents.chat.PersistentMessageIntent;
-import resources.server_info.Log;
 
 /**
  * @author Mads

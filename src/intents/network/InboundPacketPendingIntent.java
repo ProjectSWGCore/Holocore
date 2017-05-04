@@ -27,12 +27,11 @@
  ***********************************************************************************/
 package intents.network;
 
+import com.projectswg.common.control.Intent;
+
 import network.NetworkClient;
-import resources.control.Intent;
 
 public class InboundPacketPendingIntent extends Intent {
-	
-	public static final String TYPE = "InboundPacketPendingIntent";
 	
 	private NetworkClient client;
 	
@@ -41,7 +40,6 @@ public class InboundPacketPendingIntent extends Intent {
 	}
 	
 	public InboundPacketPendingIntent(NetworkClient client) {
-		super(TYPE);
 		setClient(client);
 	}
 	

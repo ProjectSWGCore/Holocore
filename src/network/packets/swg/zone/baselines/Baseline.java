@@ -27,10 +27,9 @@
 ***********************************************************************************/
 package network.packets.swg.zone.baselines;
 
-import network.packets.swg.SWGPacket;
+import com.projectswg.common.network.NetBuffer;
 
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
+import network.packets.swg.SWGPacket;
 
 public class Baseline extends SWGPacket {
 	public static final int CRC = getCrc("BaselinesMessage");
@@ -52,36 +51,33 @@ public class Baseline extends SWGPacket {
 		baseData = subData.encodeBaseline().array();
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	@Override
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		objId = getLong(data);
-		byte [] str = new byte[4]; data.get(str);
-		String strType = new StringBuffer(new String(str, ascii)).reverse().toString();
-		for (BaselineType baseType : BaselineType.values())
-			if (baseType.toString().equals(strType))
-				type = baseType;
-		num = getByte(data);
-		baseData = new byte[getInt(data)];
-		data.get(baseData);
+		objId = data.getLong();
+		type = BaselineType.valueOf(new StringBuffer(new String(data.getArray(4), ascii)).reverse().toString());
+		num = data.getByte();
+		baseData = data.getArrayLarge();
 		if (baseData.length >= 2)
-			opCount = ByteBuffer.wrap(baseData).order(ByteOrder.LITTLE_ENDIAN).getShort(0);
+			opCount = NetBuffer.wrap(baseData).getShort();
 	}
 	
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(25 + baseData.length);
-		addShort(data, 5);
-		addInt(  data, CRC);
-		addLong( data, objId);
-		data.put(new StringBuffer(type.toString()).reverse().toString().getBytes(ascii));
-		addByte( data, num);
-		addInt(  data, baseData.length + 2);
-		addShort( data, (opCount == 0 ? 5 : opCount));
-		data.put(baseData);
+	@Override
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(25 + baseData.length);
+		data.addShort(5);
+		data.addInt(CRC);
+		data.addLong(objId);
+		data.addRawArray(new StringBuffer(type.toString()).reverse().toString().getBytes(ascii));
+		data.addByte(num);
+		data.addInt(baseData.length + 2);
+		data.addShort((opCount == 0 ? 5 : opCount));
+		data.addRawArray(baseData);
 		return data;
 	}
 	
-	public ByteBuffer encodeBaseline() { return ByteBuffer.allocate(0); }
+	public NetBuffer encodeBaseline() { return NetBuffer.allocate(0); }
 	
 	public long getObjectId() { return objId; }
 	

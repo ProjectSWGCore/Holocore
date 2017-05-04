@@ -27,16 +27,15 @@
  ***********************************************************************************/
 package resources.radial;
 
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import network.packets.Packet;
-import resources.encodables.Encodable;
-import resources.server_info.Log;
+import com.projectswg.common.debug.Log;
+import com.projectswg.common.encoding.Encodable;
+import com.projectswg.common.network.NetBuffer;
 
 public class RadialOptionList implements Encodable {
 	
@@ -64,16 +63,17 @@ public class RadialOptionList implements Encodable {
 		return Collections.unmodifiableList(options);
 	}
 	
-	public void decode(ByteBuffer data) {
-		int optionsCount = Packet.getInt(data);
+	@Override
+	public void decode(NetBuffer data) {
+		int optionsCount = data.getInt();
 		Map<Integer, RadialOption> optionMap = new HashMap<>();
 		for (int i = 0; i < optionsCount; i++) {
 			RadialOption option = new RadialOption();
-			int opt = Packet.getByte(data); // option number
-			int parent = Packet.getByte(data); // parentId
-			int radialType = Packet.getShort(data); // radialType
-			Packet.getByte(data); // optionType
-			Packet.getUnicode(data); // text
+			int opt = data.getByte(); // option number
+			int parent = data.getByte(); // parentId
+			int radialType = data.getShort(); // radialType
+			data.getByte(); // optionType
+			data.getUnicode(); // text
 			RadialItem item = RadialItem.getFromId(radialType);
 			if (item == null) {
 				Log.e("No radial item found for: %04X");
@@ -94,11 +94,17 @@ public class RadialOptionList implements Encodable {
 		}
 	}
 	
+	@Override
 	public byte [] encode() {
-		ByteBuffer data = ByteBuffer.allocate(4 + getOptionSize());
-		Packet.addInt(data, getOptionCount());
+		NetBuffer data = NetBuffer.allocate(4 + getOptionSize());
+		data.addInt(getOptionCount());
 		addOptions(data);
 		return data.array();
+	}
+	
+	@Override
+	public int getLength() {
+		return 4 + getOptionSize();
 	}
 	
 	public int getSize() {
@@ -121,7 +127,7 @@ public class RadialOptionList implements Encodable {
 		return size;
 	}
 	
-	private void addOptions(ByteBuffer data) {
+	private void addOptions(NetBuffer data) {
 		int index = 1;
 		for (RadialOption option : options) {
 			index = addOption(data, option, 0, index);
@@ -146,16 +152,16 @@ public class RadialOptionList implements Encodable {
 		return size;
 	}
 	
-	private int addOption(ByteBuffer data, RadialOption parent, int parentIndex, int index) {
+	private int addOption(NetBuffer data, RadialOption parent, int parentIndex, int index) {
 		int myIndex = index++;
-		Packet.addByte(data, myIndex);
-		Packet.addByte(data, parentIndex);
-		Packet.addShort(data, parent.getId());
-		Packet.addByte(data, parent.getOptionType());
+		data.addByte(myIndex);
+		data.addByte(parentIndex);
+		data.addShort(parent.getId());
+		data.addByte(parent.getOptionType());
 		if (parent.getText() != null || !parent.getText().isEmpty())
-			Packet.addUnicode(data, parent.getText());
+			data.addUnicode(parent.getText());
 		else
-			data.putInt(0);
+			data.addInt(0);
 		for (RadialOption option : parent.getChildren()) {
 			index = addOption(data, option, myIndex, index);
 		}

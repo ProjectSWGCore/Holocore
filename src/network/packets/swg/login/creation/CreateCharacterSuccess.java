@@ -27,7 +27,7 @@
 ***********************************************************************************/
 package network.packets.swg.login.creation;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 
@@ -45,17 +45,17 @@ public class CreateCharacterSuccess extends SWGPacket {
 		this.id = charId;
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		id = getLong(data);
+		id = data.getLong();
 	}
 	
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(14);
-		addShort(data, 2);
-		addInt(  data, CRC);
-		addLong( data, id);
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(14);
+		data.addShort(2);
+		data.addInt(CRC);
+		data.addLong(id);
 		return data;
 	}
 	

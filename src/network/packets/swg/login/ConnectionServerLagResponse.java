@@ -27,28 +27,28 @@
 ***********************************************************************************/
 package network.packets.swg.login;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 
 
 public class ConnectionServerLagResponse extends SWGPacket {
 	
-	public static final int CRC = resources.common.CRC.getCrc("ConnectionServerLagResponse");
+	public static final int CRC = getCrc("ConnectionServerLagResponse");
 	
 	public ConnectionServerLagResponse() {
 		
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
 	}
 	
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(6);
-		addShort(data, 1);
-		addInt(  data, CRC);
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(6);
+		data.addShort(1);
+		data.addInt(CRC);
 		return data;
 	}
 	

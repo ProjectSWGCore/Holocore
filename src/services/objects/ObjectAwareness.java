@@ -27,6 +27,14 @@
 ***********************************************************************************/
 package services.objects;
 
+import com.projectswg.common.control.Intent;
+import com.projectswg.common.control.Service;
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.location.Point3D;
+import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.debug.Assert;
+import com.projectswg.common.debug.Log;
+
 import intents.PlayerEventIntent;
 import intents.RequestZoneInIntent;
 import intents.network.CloseConnectionIntent;
@@ -48,13 +56,7 @@ import network.packets.swg.zone.insertion.ChatServerStatus;
 import network.packets.swg.zone.insertion.CmdStartScene;
 import network.packets.swg.zone.object_controller.DataTransform;
 import network.packets.swg.zone.object_controller.DataTransformWithParent;
-import resources.Location;
-import resources.Point3D;
-import resources.Terrain;
 import resources.config.ConfigFile;
-import resources.control.Assert;
-import resources.control.Intent;
-import resources.control.Service;
 import resources.network.DisconnectReason;
 import resources.objects.SWGObject;
 import resources.objects.awareness.AwarenessHandler;
@@ -64,7 +66,7 @@ import resources.objects.creature.CreatureObject;
 import resources.player.Player;
 import resources.player.PlayerEvent;
 import resources.player.PlayerState;
-import resources.server_info.Log;
+import resources.server_info.DataManager;
 
 public class ObjectAwareness extends Service implements TerrainMapCallback {
 	
@@ -76,7 +78,7 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 	public ObjectAwareness() {
 		awarenessHandler = new AwarenessHandler(this);
 		dataTransformHandler = new DataTransformHandler();
-		dataTransformHandler.setSpeedCheck(getConfig(ConfigFile.FEATURES).getBoolean("SPEED-HACK-CHECK", true));
+		dataTransformHandler.setSpeedCheck(DataManager.getConfig(ConfigFile.FEATURES).getBoolean("SPEED-HACK-CHECK", true));
 		
 		registerForIntent(PlayerEventIntent.class, pei -> handlePlayerEventIntent(pei));
 		registerForIntent(ObjectCreatedIntent.class, oci -> handleObjectCreatedIntent(oci));
@@ -269,7 +271,7 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 	
 	private void handleDataTransform(DataTransform dt, ObjectManager objectManager) {
 		SWGObject obj = objectManager.getObjectById(dt.getObjectId());
-		Assert.test(obj instanceof CreatureObject);
+		Assert.test(obj instanceof CreatureObject, "DataTransform object not CreatureObject! Was: " + (obj==null?"null":obj.getClass()));
 		Location requestedLocation = new Location(dt.getLocation());
 		requestedLocation.setTerrain(obj.getTerrain());
 		moveObjectWithTransform(obj, null, requestedLocation, dt.getSpeed(), dt.getUpdateCounter());
@@ -278,7 +280,7 @@ public class ObjectAwareness extends Service implements TerrainMapCallback {
 	private void handleDataTransformWithParent(DataTransformWithParent dt, ObjectManager objectManager) {
 		SWGObject obj = objectManager.getObjectById(dt.getObjectId());
 		SWGObject parent = objectManager.getObjectById(dt.getCellId());
-		Assert.test(obj instanceof CreatureObject);
+		Assert.test(obj instanceof CreatureObject, "DataTransformWithParent object not CreatureObject! Was: " + (obj==null?"null":obj.getClass()));
 		if (parent == null) {
 			Log.w("Unknown data transform parent! Obj: %d/%s  Parent: %d", dt.getObjectId(), obj, dt.getCellId());
 			return;

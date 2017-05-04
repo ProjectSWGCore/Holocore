@@ -24,53 +24,51 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>
  ******************************************************************************/
-
 package network.packets.swg.zone.chat;
+
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 import resources.chat.ChatAvatar;
 
-import java.nio.ByteBuffer;
-
-/**
- * @author Waverunner
- */
 public class ChatAddModeratorToRoom extends SWGPacket {
+	
 	public static final int CRC = getCrc("ChatAddModeratorToRoom");
-
+	
 	private ChatAvatar avatar;
 	private String room;
 	private int sequence;
-
+	
 	@Override
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		avatar 		= getEncodable(data, ChatAvatar.class);
-		room		= getAscii(data);
-		sequence	= getInt(data);
+		avatar = data.getEncodable(ChatAvatar.class);
+		room = data.getAscii();
+		sequence = data.getInt();
 	}
-
+	
 	@Override
-	public ByteBuffer encode() {
-		ByteBuffer bb = ByteBuffer.allocate(12 + room.length() + avatar.encode().length);
-		addShort(bb, 4);
-		addInt(bb, CRC);
-		addEncodable(bb, avatar);
-		addAscii(bb, room);
-		addInt(bb, sequence);
-		return bb;
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(12 + room.length() + avatar.encode().length);
+		data.addShort(4);
+		data.addInt(CRC);
+		data.addEncodable(avatar);
+		data.addAscii(room);
+		data.addInt(sequence);
+		return data;
 	}
-
+	
 	public ChatAvatar getAvatar() {
 		return avatar;
 	}
-
+	
 	public String getRoom() {
 		return room;
 	}
-
+	
 	public int getSequence() {
 		return sequence;
 	}
+	
 }

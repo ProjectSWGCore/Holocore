@@ -27,7 +27,7 @@
 ***********************************************************************************/
 package network.packets.swg.login;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 
@@ -43,7 +43,7 @@ public class LoginClientId extends SWGPacket {
 		this("", "", "");
 	}
 	
-	public LoginClientId(ByteBuffer data) {
+	public LoginClientId(NetBuffer data) {
 		decode(data);
 	}
 	
@@ -53,22 +53,22 @@ public class LoginClientId extends SWGPacket {
 		this.version  = version;
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		username  = getAscii(data);
-		password  = getAscii(data);
-		version   = getAscii(data);
+		username  = data.getAscii();
+		password  = data.getAscii();
+		version   = data.getAscii();
 	}
 	
-	public ByteBuffer encode() {
+	public NetBuffer encode() {
 		int length = 6 + 6 + username.length() * 2 + password.length() * 2 + version.length() * 2;
-		ByteBuffer data = ByteBuffer.allocate(length);
-		addShort(data, 4);
-		addInt(  data, CRC);
-		addAscii(data, username);
-		addAscii(data, password);
-		addAscii(data, version);
+		NetBuffer data = NetBuffer.allocate(length);
+		data.addShort(4);
+		data.addInt(CRC);
+		data.addAscii(username);
+		data.addAscii(password);
+		data.addAscii(version);
 		return data;
 	}
 	

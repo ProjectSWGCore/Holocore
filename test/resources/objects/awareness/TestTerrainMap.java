@@ -38,13 +38,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import resources.Location;
-import resources.Terrain;
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.debug.Log;
+
 import resources.objects.SWGObject;
 import resources.objects.cell.CellObject;
 import resources.objects.creature.CreatureObject;
-import resources.server_info.Log;
 import services.objects.ClientBuildoutService;
+import test_resources.GenericCreatureObject;
 
 @RunWith(JUnit4.class)
 public class TestTerrainMap {
@@ -120,6 +122,7 @@ public class TestTerrainMap {
 		AtomicBoolean onlyWithinRange = new AtomicBoolean(true);
 		GenericCreatureObject creature = new GenericCreatureObject(1);
 		MapCallback callback = new MapCallback() {
+			@Override
 			public void onWithinRange(SWGObject obj, SWGObject inRange) {
 				if (obj.equals(creature) && !withinRange.remove(inRange)) {
 					Log.e("Not in list: %s", inRange);

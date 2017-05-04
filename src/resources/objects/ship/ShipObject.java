@@ -27,8 +27,9 @@
 ***********************************************************************************/
 package resources.objects.ship;
 
+import com.projectswg.common.network.NetBufferStream;
+
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
-import resources.network.NetBufferStream;
 import resources.objects.tangible.TangibleObject;
 
 public class ShipObject extends TangibleObject {

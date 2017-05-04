@@ -32,18 +32,19 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
+import com.projectswg.common.data.CRC;
+import com.projectswg.common.debug.Assert;
+import com.projectswg.common.network.NetBuffer;
+import com.projectswg.common.network.NetBufferStream;
+import com.projectswg.common.persistable.Persistable;
+
 import resources.HologramColour;
 import resources.collections.SWGList;
 import resources.collections.SWGMap;
-import resources.common.CRC;
-import resources.control.Assert;
 import resources.encodables.player.Equipment;
 import resources.network.BaselineBuilder;
-import resources.network.NetBuffer;
-import resources.network.NetBufferStream;
 import resources.objects.SWGObject;
 import resources.objects.weapon.WeaponObject;
-import resources.persistable.Persistable;
 import resources.persistable.SWGObjectFactory;
 import resources.player.Player;
 import services.group.GroupInviterData;
@@ -465,10 +466,9 @@ class CreatureObjectSharedNP implements Persistable {
 	public void putBuff(Buff buff, SWGObject target) {
 		synchronized (buffs) {
 			CRC crc = new CRC(buff.getCrc());
-			if (!buffs.containsKey(crc)) {
-				buffs.put(crc, buff);
-				buffs.sendDeltaMessage(target);
-			}
+			Assert.test(!buffs.containsKey(crc), "Cannot add a buff twice!");
+			buffs.put(crc, buff);
+			buffs.sendDeltaMessage(target);
 		}
 	}
 	
@@ -576,19 +576,19 @@ class CreatureObjectSharedNP implements Persistable {
 		moodId = buffer.getByte();
 		performanceCounter = buffer.getInt();
 		performanceId = buffer.getInt();
-		attributes = buffer.getSwgList(6, 21, Integer.class);
-		maxAttributes = buffer.getSwgList(6, 22, Integer.class);
-		equipmentList = buffer.getSwgList(6, 23, Equipment.class);
+		attributes = SWGList.getSwgList(buffer, 6, 21, Integer.class);
+		maxAttributes = SWGList.getSwgList(buffer, 6, 22, Integer.class);
+		equipmentList = SWGList.getSwgList(buffer, 6, 23, Equipment.class);
 		costume = buffer.getAscii();
 		visible = buffer.getBoolean();
-		buffs = buffer.getSwgMap(6, 26, CRC.class, Buff.class);
+		buffs = SWGMap.getSwgMap(buffer, 6, 26, CRC.class, Buff.class);
 		performing = buffer.getBoolean();
 		difficulty = CreatureDifficulty.getForDifficulty(buffer.getByte());
 		hologramColour = HologramColour.getForValue(buffer.getInt());
 		shownOnRadar = buffer.getBoolean();
 		beast = buffer.getBoolean();
 		buffer.getBoolean();
-		appearanceList = buffer.getSwgList(6, 33, Equipment.class);
+		appearanceList = SWGList.getSwgList(buffer, 6, 33, Equipment.class);
 		buffer.getLong();
 		equippedWeapon = null;
 		for (Equipment e : equipmentList) {

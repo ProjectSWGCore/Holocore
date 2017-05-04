@@ -30,14 +30,15 @@ package services.network;
 import java.util.ArrayDeque;
 import java.util.Queue;
 
-import resources.server_info.Log;
+import com.projectswg.common.debug.Log;
+
 import network.packets.Packet;
 import network.packets.swg.ErrorMessage;
 import network.packets.swg.holo.HoloConnectionStarted;
 import network.packets.swg.holo.HoloConnectionStopped;
+import network.packets.swg.holo.HoloConnectionStopped.ConnectionStoppedReason;
 import network.packets.swg.holo.HoloPacket;
 import network.packets.swg.holo.HoloSetProtocolVersion;
-import network.packets.swg.holo.HoloConnectionStopped.ConnectionStoppedReason;
 
 public class HolocoreSessionManager {
 	

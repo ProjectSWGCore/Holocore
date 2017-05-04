@@ -27,11 +27,10 @@
  ***********************************************************************************/
 package resources.objects.creature;
 
-import java.nio.ByteBuffer;
-import resources.encodables.Encodable;
-import resources.network.NetBuffer;
-import resources.network.NetBufferStream;
-import resources.persistable.Persistable;
+import com.projectswg.common.encoding.Encodable;
+import com.projectswg.common.network.NetBuffer;
+import com.projectswg.common.network.NetBufferStream;
+import com.projectswg.common.persistable.Persistable;
 
 public class Buff implements Encodable, Persistable {
 	
@@ -56,7 +55,7 @@ public class Buff implements Encodable, Persistable {
 	}
 	
 	@Override
-	public void decode(ByteBuffer data) {
+	public void decode(NetBuffer data) {
 		endTime = data.getInt();
 		value = data.getFloat();
 		duration = data.getInt();
@@ -73,6 +72,11 @@ public class Buff implements Encodable, Persistable {
 		data.addLong(bufferId);
 		data.addInt(stackCount);
 		return data.array();
+	}
+	
+	@Override
+	public int getLength() {
+		return 24;
 	}
 	
 	@Override
@@ -166,10 +170,12 @@ public class Buff implements Encodable, Persistable {
 		return String.format("Buff[End=%d Value=%f Duration=%d Buffer=%d StackCount=%d]", endTime, value, duration, bufferId, stackCount);
 	}
 	
+	@Override
 	public int hashCode() {
 		return crc;
 	}
 	
+	@Override
 	public boolean equals(Object o) {
 		if (!(o instanceof Buff))
 			return false;

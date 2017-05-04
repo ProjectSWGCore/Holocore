@@ -31,9 +31,9 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import resources.collections.TestSWGList;
 import resources.collections.TestSWGBitSet;
 import resources.collections.TestSWGFlag;
+import resources.collections.TestSWGList;
 import resources.network.TestLittleEndianDataOutputStream;
 import resources.objects.awareness.TestAwareness;
 import resources.objects.quadtree.TestQuadTree;

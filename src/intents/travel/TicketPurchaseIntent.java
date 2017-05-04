@@ -27,12 +27,11 @@
 ***********************************************************************************/
 package intents.travel;
 
-import resources.control.Intent;
+import com.projectswg.common.control.Intent;
+
 import resources.objects.creature.CreatureObject;
 
 public final class TicketPurchaseIntent extends Intent {
-
-	public static final String TYPE = "TicketPurchaseIntent";
 	
 	private final CreatureObject purchaser;
 	private final boolean roundTrip;
@@ -40,7 +39,6 @@ public final class TicketPurchaseIntent extends Intent {
 	private final String destinationPlanet;
 	
 	public TicketPurchaseIntent(CreatureObject purchaser, String destinationPlanet, String destinationName, boolean roundTrip) {
-		super(TYPE);
 		this.purchaser = purchaser;
 		this.destinationPlanet = destinationPlanet;
 		this.destinationName = destinationName;

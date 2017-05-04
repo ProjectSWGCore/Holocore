@@ -27,9 +27,9 @@
 ***********************************************************************************/
 package network.packets.swg.zone.building;
 
-import network.packets.swg.SWGPacket;
+import com.projectswg.common.network.NetBuffer;
 
-import java.nio.ByteBuffer;
+import network.packets.swg.SWGPacket;
 
 public class UpdateCellPermissionMessage extends SWGPacket {
 	public static final int CRC = getCrc("UpdateCellPermissionMessage");
@@ -47,23 +47,23 @@ public class UpdateCellPermissionMessage extends SWGPacket {
 		this.cellId = cellId;
 	}
 	
-	public UpdateCellPermissionMessage(ByteBuffer data) {
+	public UpdateCellPermissionMessage(NetBuffer data) {
 		decode(data);
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		permissionFlag = getByte(data);
-		cellId = getLong(data);
+		permissionFlag = data.getByte();
+		cellId = data.getLong();
 	}
 	
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(15);
-		addShort(data, 2);
-		addInt(  data, CRC);
-		addByte( data, permissionFlag);
-		addLong( data, cellId);
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(15);
+		data.addShort(2);
+		data.addInt(CRC);
+		data.addByte(permissionFlag);
+		data.addLong(cellId);
 		return data;
 	}
 	

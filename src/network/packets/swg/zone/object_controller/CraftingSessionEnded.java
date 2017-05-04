@@ -27,7 +27,7 @@
  ***********************************************************************************/
 package network.packets.swg.zone.object_controller;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 public class CraftingSessionEnded extends ObjectController{
 	
@@ -44,26 +44,26 @@ public class CraftingSessionEnded extends ObjectController{
 		this.count = count;
 	}
 	
-	public CraftingSessionEnded(ByteBuffer data) {
+	public CraftingSessionEnded(NetBuffer data) {
 		super(CRC);
 		decode(data);
 	}
 
 	@Override
-	public void decode(ByteBuffer data) {
+	public void decode(NetBuffer data) {
 		decodeHeader(data);
-		playerId = getLong(data);
-		sessionId = getInt(data);
-		count = getByte(data);
+		playerId = data.getLong();
+		sessionId = data.getInt();
+		count = data.getByte();
 	}
 
 	@Override
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + 13);
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(HEADER_LENGTH + 13);
 		encodeHeader(data);
-		addLong(data, playerId);
-		addInt(data, sessionId);
-		addByte(data, count);
+		data.addLong(playerId);
+		data.addInt(sessionId);
+		data.addByte(count);
 		return data;
 	}
 

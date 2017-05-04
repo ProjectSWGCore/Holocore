@@ -39,6 +39,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import com.projectswg.common.control.Manager;
+import com.projectswg.common.data.info.Config;
+import com.projectswg.common.debug.Log;
+
 import intents.network.InboundPacketIntent;
 import intents.network.OutboundPacketIntent;
 import intents.server.ServerManagementIntent;
@@ -51,14 +55,9 @@ import network.packets.swg.zone.object_controller.ObjectController;
 import resources.Galaxy;
 import resources.Galaxy.GalaxyStatus;
 import resources.config.ConfigFile;
-import resources.control.Manager;
 import resources.control.ServerStatus;
-import resources.server_info.Config;
-import resources.server_info.Log;
-import resources.server_info.Log.LogLevel;
-import services.admin.OnlineInterfaceService;
+import resources.server_info.DataManager;
 import services.galaxy.GalacticManager;
-import utilities.CrcDatabaseGenerator;
 import utilities.ScheduledUtilities;
 import utilities.ThreadUtilities;
 
@@ -69,7 +68,6 @@ public class CoreManager extends Manager {
 	private static final int GALAXY_ID = 1;
 	
 	private final ScheduledExecutorService shutdownService;
-	private final OnlineInterfaceService onlineInterfaceService;
 	private final EngineManager engineManager;
 	private final GalacticManager galacticManager;
 	private final PrintStream packetStream;
@@ -79,10 +77,8 @@ public class CoreManager extends Manager {
 	private boolean shutdownRequested;
 	
 	public CoreManager(int adminServerPort) {
-		Config c = getConfig(ConfigFile.PRIMARY);
-		Log.setLogLevel(LogLevel.valueOf(c.getString("LOG-LEVEL", LogLevel.DEBUG.name())));
+		Config c = DataManager.getConfig(ConfigFile.PRIMARY);
 		setupGalaxy(c);
-		setupCrcDatabase();
 		if (adminServerPort <= 0)
 			adminServerPort = -1;
 		getGalaxy().setAdminServerPort(adminServerPort);
@@ -90,11 +86,9 @@ public class CoreManager extends Manager {
 		packetDebug = packetStream != null;
 		shutdownService = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("core-shutdown-service"));
 		shutdownRequested = false;
-		onlineInterfaceService = new OnlineInterfaceService();
 		engineManager = new EngineManager();
 		galacticManager = new GalacticManager();
 		
-		addChildService(onlineInterfaceService);
 		addChildService(engineManager);
 		addChildService(galacticManager);
 		
@@ -107,6 +101,7 @@ public class CoreManager extends Manager {
 	 * Determines whether or not the core is operational
 	 * @return TRUE if the core is operational, FALSE otherwise
 	 */
+	@Override
 	public boolean isOperational() {
 		return true;
 	}
@@ -231,11 +226,6 @@ public class CoreManager extends Manager {
 			}
 		}
 		return null;
-	}
-	
-	private void setupCrcDatabase() {
-		Log.i("Generating CRCs...");
-		CrcDatabaseGenerator.generate(false);
 	}
 	
 	public static Galaxy getGalaxy() {

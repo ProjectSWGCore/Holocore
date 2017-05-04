@@ -27,10 +27,11 @@
  ***********************************************************************************/
 package network.packets.swg.login;
 
-import java.nio.ByteBuffer;
 import java.time.ZoneOffset;
 import java.util.List;
 import java.util.Vector;
+
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 import resources.Galaxy;
@@ -46,49 +47,49 @@ public class LoginClusterStatus extends SWGPacket {
 		galaxies = new Vector<Galaxy>();
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		int serverCount = getInt(data);
+		int serverCount = data.getInt();
 		for (int i = 0; i < serverCount; i++) {
 			Galaxy g = new Galaxy();
-			g.setId(getInt(data));
-			g.setAddress(getAscii(data));
-			g.setZonePort(getShort(data));
-			g.setPingPort(getShort(data));
-			g.setPopulation(getInt(data));
-			getInt(data); // population status
-			g.setMaxCharacters(getInt(data));
-			g.setZoneOffset(ZoneOffset.ofTotalSeconds(getInt(data)));
-			g.setStatus(getInt(data));
-			g.setRecommended(getBoolean(data));
-			g.setOnlinePlayerLimit(getInt(data));
-			g.setOnlineFreeTrialLimit(getInt(data));
+			g.setId(data.getInt());
+			g.setAddress(data.getAscii());
+			g.setZonePort(data.getShort());
+			g.setPingPort(data.getShort());
+			g.setPopulation(data.getInt());
+			data.getInt(); // population status
+			g.setMaxCharacters(data.getInt());
+			g.setZoneOffset(ZoneOffset.ofTotalSeconds(data.getInt()));
+			g.setStatus(data.getInt());
+			g.setRecommended(data.getBoolean());
+			g.setOnlinePlayerLimit(data.getInt());
+			g.setOnlineFreeTrialLimit(data.getInt());
 			galaxies.add(g);
 		}
 	}
 	
-	public ByteBuffer encode() {
+	public NetBuffer encode() {
 		int length = 10;
 		for (Galaxy g : galaxies)
 			length += 39 + g.getAddress().length();
-		ByteBuffer data = ByteBuffer.allocate(length);
-		addShort(data, 2);
-		addInt(  data, CRC);
-		addInt(  data, galaxies.size());
+		NetBuffer data = NetBuffer.allocate(length);
+		data.addShort(2);
+		data.addInt(CRC);
+		data.addInt(galaxies.size());
 		for (Galaxy g : galaxies) {
-			addInt(    data, g.getId());
-			addAscii(  data, g.getAddress());
-			addShort(  data, g.getZonePort());
-			addShort(  data, g.getPingPort());
-			addInt(    data, g.getPopulation());
-			addInt(    data, g.getPopulationStatus());
-			addInt(    data, g.getMaxCharacters());
-			addInt(    data, g.getDistance());
-			addInt(    data, g.getStatus().getStatus());
-			addBoolean(data, g.isRecommended());
-			addInt(    data, g.getOnlinePlayerLimit());
-			addInt(    data, g.getOnlineFreeTrialLimit());
+			data.addInt(g.getId());
+			data.addAscii(g.getAddress());
+			data.addShort(g.getZonePort());
+			data.addShort(g.getPingPort());
+			data.addInt(g.getPopulation());
+			data.addInt(g.getPopulationStatus());
+			data.addInt(g.getMaxCharacters());
+			data.addInt(g.getDistance());
+			data.addInt(g.getStatus().getStatus());
+			data.addBoolean(g.isRecommended());
+			data.addInt(g.getOnlinePlayerLimit());
+			data.addInt(g.getOnlineFreeTrialLimit());
 		}
 		return data;
 	}

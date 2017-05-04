@@ -27,10 +27,10 @@
 ***********************************************************************************/
 package network.packets.swg.zone;
 
+import com.projectswg.common.network.NetBuffer;
+
 import network.packets.swg.SWGPacket;
 import resources.WeatherType;
-
-import java.nio.ByteBuffer;
 
 public class ServerWeatherMessage extends SWGPacket {
 	public static final int CRC = getCrc("ServerWeatherMessage");
@@ -41,11 +41,11 @@ public class ServerWeatherMessage extends SWGPacket {
 	private float cloudVectorY;
 	
 	@Override
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
 		
-		switch (getInt(data)) {
+		switch (data.getInt()) {
 			case 0:
 			default:
 				type = WeatherType.CLEAR;
@@ -61,22 +61,22 @@ public class ServerWeatherMessage extends SWGPacket {
 				break;
 		}
 		
-		cloudVectorX = getFloat(data);
-		cloudVectorZ = getFloat(data);
-		cloudVectorY = getFloat(data);
+		cloudVectorX = data.getFloat();
+		cloudVectorZ = data.getFloat();
+		cloudVectorY = data.getFloat();
 	}
 	
 	@Override
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(22);
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(22);
 		
-		addShort(data, 3);
-		addInt(data, CRC);
-		addInt(data, type.getValue());
+		data.addShort(3);
+		data.addInt(CRC);
+		data.addInt(type.getValue());
 		
-		addFloat(data, cloudVectorX);
-		addFloat(data, cloudVectorZ);
-		addFloat(data, cloudVectorY);
+		data.addFloat(cloudVectorX);
+		data.addFloat(cloudVectorZ);
+		data.addFloat(cloudVectorY);
 		
 		return data;
 	}

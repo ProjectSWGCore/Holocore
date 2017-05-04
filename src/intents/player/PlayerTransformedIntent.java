@@ -27,15 +27,14 @@
  ***********************************************************************************/
 package intents.player;
 
-import resources.Location;
-import resources.Terrain;
-import resources.control.Intent;
+import com.projectswg.common.control.Intent;
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.location.Terrain;
+
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 
 public class PlayerTransformedIntent extends Intent {
-	
-	public static final String TYPE = "PlayerTransformedIntent";
 	
 	private final CreatureObject object;
 	private final SWGObject oldParent;
@@ -44,7 +43,6 @@ public class PlayerTransformedIntent extends Intent {
 	private final Location newLocation;
 	
 	public PlayerTransformedIntent(CreatureObject object, SWGObject oldParent, SWGObject newParent, Location oldLocation, Location newLocation) {
-		super(TYPE);
 		this.object = object;
 		this.oldParent = oldParent;
 		this.newParent = newParent;

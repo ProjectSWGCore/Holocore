@@ -27,12 +27,13 @@
 ***********************************************************************************/
 package network.packets.swg.zone.server_ui;
 
+import com.projectswg.common.network.NetBuffer;
+
 import network.packets.swg.SWGPacket;
 import resources.sui.SuiBaseWindow;
 
-import java.nio.ByteBuffer;
-
 public class SuiCreatePageMessage extends SWGPacket {
+	
 	public static final int CRC = getCrc("SuiCreatePageMessage");
 
 	private SuiBaseWindow window;
@@ -43,22 +44,23 @@ public class SuiCreatePageMessage extends SWGPacket {
 		this.window = window;
 	}
 	
-	public SuiCreatePageMessage(ByteBuffer data) {
+	public SuiCreatePageMessage(NetBuffer data) {
 		decode(data);
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	@Override
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		window	= getEncodable(data, SuiBaseWindow.class);
+		window	= data.getEncodable(SuiBaseWindow.class);
 	}
 	
-	public ByteBuffer encode() {
-		byte[] windowData = window.encode();
-		ByteBuffer data = ByteBuffer.allocate(6 + windowData.length);
-		addShort(data, 2);
-		addInt(  data, CRC);
-		addData(data, windowData);
+	@Override
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(6 + window.getLength());
+		data.addShort(2);
+		data.addInt(CRC);
+		data.addEncodable(window);
 		return data;
 	}
 

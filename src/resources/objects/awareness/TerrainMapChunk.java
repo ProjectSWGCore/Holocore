@@ -32,9 +32,10 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
+import com.projectswg.common.concurrency.SynchronizedSet;
+
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
-import resources.server_info.SynchronizedSet;
 
 class TerrainMapChunk {
 	

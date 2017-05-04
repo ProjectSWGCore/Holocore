@@ -29,12 +29,13 @@ package resources.objects.player;
 
 import java.util.BitSet;
 
+import com.projectswg.common.network.NetBufferStream;
+import com.projectswg.common.persistable.Persistable;
+
 import resources.collections.SWGBitSet;
 import resources.collections.SWGFlag;
 import resources.network.BaselineBuilder;
-import resources.network.NetBufferStream;
 import resources.objects.SWGObject;
-import resources.persistable.Persistable;
 import resources.player.Player;
 import resources.player.PlayerFlags;
 import utilities.MathUtils;

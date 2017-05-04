@@ -27,7 +27,7 @@
 ***********************************************************************************/
 package network.packets.swg.login;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 
@@ -43,7 +43,7 @@ public class LoginClientToken extends SWGPacket {
 		
 	}
 	
-	public LoginClientToken(ByteBuffer data) {
+	public LoginClientToken(NetBuffer data) {
 		decode(data);
 	}
 	
@@ -53,27 +53,24 @@ public class LoginClientToken extends SWGPacket {
 		this.username = username;
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	@Override
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		int sessionKeyLength = getInt(data);
-		if (sessionKeyLength > data.remaining())
-			return;
-		sessionKey = new byte[sessionKeyLength];
-		data.get(sessionKey);
-		userId = getInt(data);
-		username = getAscii(data);
+		sessionKey = data.getArrayLarge();
+		userId = data.getInt();
+		username = data.getAscii();
 	}
 	
-	public ByteBuffer encode() {
+	@Override
+	public NetBuffer encode() {
 		int length = 16 + sessionKey.length + username.length();
-		ByteBuffer data = ByteBuffer.allocate(length);
-		addShort(data, 4);
-		addInt(  data, CRC);
-		addInt(  data, sessionKey.length);
-		data.put(sessionKey);
-		addInt(  data, userId);
-		addAscii(data, username);
+		NetBuffer data = NetBuffer.allocate(length);
+		data.addShort(4);
+		data.addInt(CRC);
+		data.addArrayLarge(sessionKey);
+		data.addInt(userId);
+		data.addAscii(username);
 		return data;
 	}
 	

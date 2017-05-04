@@ -29,24 +29,21 @@ package intents.server;
 
 import java.util.concurrent.TimeUnit;
 
-import resources.control.Intent;
+import com.projectswg.common.control.Intent;
+
 import resources.control.ServerStatus;
 
 public class ServerStatusIntent extends Intent {
-	
-	public static final String TYPE = "ServerStatusIntent";
 	
 	private ServerStatus status;
 	private long time;
 	private TimeUnit timeUnit;
 	
 	public ServerStatusIntent() {
-		super(TYPE);
-		setStatus(null);
+		this(null);
 	}
 	
 	public ServerStatusIntent(ServerStatus status) {
-		super(TYPE);
 		setStatus(status);
 	}
 	
@@ -59,7 +56,7 @@ public class ServerStatusIntent extends Intent {
 	public void setTime(long time) {
 		this.time = time;
 	}
-
+	
 	public long getTime() {
 		return time;
 	}
@@ -71,7 +68,7 @@ public class ServerStatusIntent extends Intent {
 	public ServerStatus getStatus() {
 		return status;
 	}
-
+	
 	public TimeUnit getTimeUnit() {
 		return timeUnit;
 	}

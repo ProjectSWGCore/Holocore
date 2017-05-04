@@ -1104,6 +1104,9 @@ function handleTravel(player) {
 	listBox.addListItem("Dathomir - Quarantine Zone");
 	listBox.addListItem("Endor - DWB");
 	listBox.addListItem("Endor - Jinda Cave");
+	listBox.addListItem("Kashyyyk - Etyyy, The Hunting Grounds");
+	listBox.addListItem("Kashyyyk - Kachirho, Slaver Camp");
+	listBox.addListItem("Kashyyyk - Kkowir, The Dead Forest");	
 	listBox.addListItem("Lok - Droid Cave");
 	listBox.addListItem("Lok - Great Maze of Lok");
 	listBox.addListItem("Lok - Imperial Outpost");
@@ -1154,33 +1157,37 @@ function handleTravelSelection(player, creature, eventType, parameters) {
 		case 8: handleDatNSvsSMC(player); break;
 		case 9: handleDatQz(player); break;
 		// Planet: Endor
-		case 10: handleEndJindaCave(player); break;
-		case 11: handleEndDwb(player); break;
+		case 10: handleEndDwb(player); break;
+		case 11: handleEndJindaCave(player); break;
+		// Planet: Kashyyyk
+		case 12: handleKasEtyyy(player); break;
+		case 13: handleKasKachirho(player); break;
+		case 14: handleKasKkowir(player); break;		
 		// Planet: Lok
-		case 12: handleLokDroidCave(player); break;
-		case 13: handleLokGreatMaze(player); break;
-		case 14: handleLokImperialOutpost(player); break;
-		case 15: handleLokKimogilaTown(player); break;
+		case 15: handleLokDroidCave(player); break;
+		case 16: handleLokGreatMaze(player); break;
+		case 17: handleLokImperialOutpost(player); break;
+		case 18: handleLokKimogilaTown(player); break;
 		// Planet: Naboo
-		case 16: handleNabEmperorsRetreat(player); break;
-		case 17: handleNabWeaponFac(player); break;
+		case 19: handleNabEmperorsRetreat(player); break;
+		case 20: handleNabWeaponFac(player); break;
 		// Planet: Rori
-		case 18: handleRorHyperdriveFacility(player); break;
+		case 21: handleRorHyperdriveFacility(player); break;
 		// Planet: Talus
-		case 19: handleTalDetainmentCenter(player); break;
+		case 22: handleTalDetainmentCenter(player); break;
 		// Planet: Tatooine
-		case 20: handleTatFortTusken(player); break;
-		case 21: handleTatImperialOasis(player); break;
-		case 22: handleTatKraytGrave(player); break;
-		case 23: handleTatMosEisley(player); break;
-		case 24: handleTatMosTaike(player); break;
-		case 25: handleTatSquillCave(player); break;
+		case 23: handleTatFortTusken(player); break;
+		case 24: handleTatImperialOasis(player); break;
+		case 25: handleTatKraytGrave(player); break;
+		case 26: handleTatMosEisley(player); break;
+		case 27: handleTatMosTaike(player); break;
+		case 28: handleTatSquillCave(player); break;
 		// Planet: Yavin 4
-		case 26: handleYavBlueleafTemple(player); break;
-		case 27: handleYavDarkEnclave(player); break;
-		case 28: handleYavExarKun(player); break;
-		case 29: handleYavGeoCave(player); break;
-		case 30: handleYavLightEnclave(player); break;
+		case 29: handleYavBlueleafTemple(player); break;
+		case 30: handleYavDarkEnclave(player); break;
+		case 31: handleYavExarKun(player); break;
+		case 32: handleYavGeoCave(player); break;
+		case 33: handleYavLightEnclave(player); break;
 		
 	}
 }
@@ -1189,22 +1196,22 @@ function handleTravelSelection(player, creature, eventType, parameters) {
 
 function handleCorStronghold(player) {
 	var ObjectTeleportIntent = Java.type('intents.object.ObjectTeleportIntent');
-	var Location = Java.type('resources.Location');
-	var Terrain = Java.type('resources.Terrain');
+	var Location = Java.type('com.projectswg.common.data.location.Location');
+	var Terrain = Java.type('com.projectswg.common.data.location.Terrain');
 	new ObjectTeleportIntent(player.getCreatureObject(), new Location(4735, 26, -5676, Terrain.CORELLIA)).broadcast();
 }
 
 function handleCorCorsecBase(player) {
 	var ObjectTeleportIntent = Java.type('intents.object.ObjectTeleportIntent');
-	var Location = Java.type('resources.Location');
-	var Terrain = Java.type('resources.Terrain');
+	var Location = Java.type('com.projectswg.common.data.location.Location');
+	var Terrain = Java.type('com.projectswg.common.data.location.Terrain');
 	new ObjectTeleportIntent(player.getCreatureObject(), new Location(5137, 16, 1518, Terrain.CORELLIA)).broadcast();
 }
 
 function handleCorRebelXwingBase(player) {
 	var ObjectTeleportIntent = Java.type('intents.object.ObjectTeleportIntent');
-	var Location = Java.type('resources.Location');
-	var Terrain = Java.type('resources.Terrain');
+	var Location = Java.type('com.projectswg.common.data.location.Location');
+	var Terrain = Java.type('com.projectswg.common.data.location.Terrain');
 	new ObjectTeleportIntent(player.getCreatureObject(), new Location(213, 50, 4533, Terrain.CORELLIA)).broadcast();
 }
 
@@ -1212,22 +1219,22 @@ function handleCorRebelXwingBase(player) {
 
 function handleDanJediTemple(player) {
 	var ObjectTeleportIntent = Java.type('intents.object.ObjectTeleportIntent');
-	var Location = Java.type('resources.Location');
-	var Terrain = Java.type('resources.Terrain');
+	var Location = Java.type('com.projectswg.common.data.location.Location');
+	var Terrain = Java.type('com.projectswg.common.data.location.Terrain');
 	new ObjectTeleportIntent(player.getCreatureObject(), new Location(4078, 10, 5370, Terrain.DANTOOINE)).broadcast();
 }
 
 function handleDanCrystalCave(player) {
 	var ObjectTeleportIntent = Java.type('intents.object.ObjectTeleportIntent');
-	var Location = Java.type('resources.Location');
-	var Terrain = Java.type('resources.Terrain');
+	var Location = Java.type('com.projectswg.common.data.location.Location');
+	var Terrain = Java.type('com.projectswg.common.data.location.Terrain');
 	new ObjectTeleportIntent(player.getCreatureObject(), new Location(-6225, 48, 7381, Terrain.DANTOOINE)).broadcast();
 }
 
 function handleDanWarren(player) {
 	var ObjectTeleportIntent = Java.type('intents.object.ObjectTeleportIntent');
-	var Location = Java.type('resources.Location');
-	var Terrain = Java.type('resources.Terrain');
+	var Location = Java.type('com.projectswg.common.data.location.Location');
+	var Terrain = Java.type('com.projectswg.common.data.location.Terrain');
 	new ObjectTeleportIntent(player.getCreatureObject(), new Location(-564, 1, -3789, Terrain.DANTOOINE)).broadcast();
 }
 
@@ -1235,29 +1242,29 @@ function handleDanWarren(player) {
 
 function handleDatImperialPrison(player) {
 	var ObjectTeleportIntent = Java.type('intents.object.ObjectTeleportIntent');
-	var Location = Java.type('resources.Location');
-	var Terrain = Java.type('resources.Terrain');
+	var Location = Java.type('com.projectswg.common.data.location.Location');
+	var Terrain = Java.type('com.projectswg.common.data.location.Terrain');
 	new ObjectTeleportIntent(player.getCreatureObject(), new Location(-6079, 132, 971, Terrain.DATHOMIR)).broadcast();
 }
 
 function handleDatNS(player) {
 	var ObjectTeleportIntent = Java.type('intents.object.ObjectTeleportIntent');
-	var Location = Java.type('resources.Location');
-	var Terrain = Java.type('resources.Terrain');
+	var Location = Java.type('com.projectswg.common.data.location.Location');
+	var Terrain = Java.type('com.projectswg.common.data.location.Terrain');
 	new ObjectTeleportIntent(player.getCreatureObject(), new Location(-3989, 124, -10, Terrain.DATHOMIR)).broadcast();
 }
 
 function handleDatNSvsSMC(player) {
 	var ObjectTeleportIntent = Java.type('intents.object.ObjectTeleportIntent');
-	var Location = Java.type('resources.Location');
-	var Terrain = Java.type('resources.Terrain');
+	var Location = Java.type('com.projectswg.common.data.location.Location');
+	var Terrain = Java.type('com.projectswg.common.data.location.Terrain');
 	new ObjectTeleportIntent(player.getCreatureObject(), new Location(-2457, 117, 1530, Terrain.DATHOMIR)).broadcast();
 }
 
 function handleDatQz(player) {
 	var ObjectTeleportIntent = Java.type('intents.object.ObjectTeleportIntent');
-	var Location = Java.type('resources.Location');
-	var Terrain = Java.type('resources.Terrain');
+	var Location = Java.type('com.projectswg.common.data.location.Location');
+	var Terrain = Java.type('com.projectswg.common.data.location.Terrain');
 	new ObjectTeleportIntent(player.getCreatureObject(), new Location(-5786, 510, -6554, Terrain.DATHOMIR)).broadcast();
 }
 
@@ -1265,45 +1272,69 @@ function handleDatQz(player) {
 
 function handleEndJindaCave(player) {
 	var ObjectTeleportIntent = Java.type('intents.object.ObjectTeleportIntent');
-	var Location = Java.type('resources.Location');
-	var Terrain = Java.type('resources.Terrain');
+	var Location = Java.type('com.projectswg.common.data.location.Location');
+	var Terrain = Java.type('com.projectswg.common.data.location.Terrain');
 	new ObjectTeleportIntent(player.getCreatureObject(), new Location(-1714, 31, -8, Terrain.ENDOR)).broadcast();
 }
 
 function handleEndDwb(player) {
 	var ObjectTeleportIntent = Java.type('intents.object.ObjectTeleportIntent');
-	var Location = Java.type('resources.Location');
-	var Terrain = Java.type('resources.Terrain');
+	var Location = Java.type('com.projectswg.common.data.location.Location');
+	var Terrain = Java.type('com.projectswg.common.data.location.Terrain');
 	new ObjectTeleportIntent(player.getCreatureObject(), new Location(-4683, 13, 4326, Terrain.ENDOR)).broadcast();
+}
+
+// Planet: Kashyyyk
+
+function handleKasEtyyy(player) {
+	var ObjectTeleportIntent = Java.type('intents.object.ObjectTeleportIntent');
+	var Location = Java.type('com.projectswg.common.data.location.Location');
+	var Terrain = Java.type('com.projectswg.common.data.location.Terrain');
+	new ObjectTeleportIntent(player.getCreatureObject(), new Location(275, 48, 503, Terrain.KASHYYYK_HUNTING)).broadcast();
+}
+
+function handleKasKachirho(player) {
+	var ObjectTeleportIntent = Java.type('intents.object.ObjectTeleportIntent');
+	var Location = Java.type('com.projectswg.common.data.location.Location');
+	var Terrain = Java.type('com.projectswg.common.data.location.Terrain');
+	new ObjectTeleportIntent(player.getCreatureObject(), new Location(146, 19, 162, Terrain.KASHYYYK_MAIN)).broadcast();
+}
+
+
+function handleKasKkowir(player) {
+	var ObjectTeleportIntent = Java.type('intents.object.ObjectTeleportIntent');
+	var Location = Java.type('com.projectswg.common.data.location.Location');
+	var Terrain = Java.type('com.projectswg.common.data.location.Terrain');
+	new ObjectTeleportIntent(player.getCreatureObject(), new Location(-164, 16, -262, Terrain.KASHYYYK_DEAD_FOREST)).broadcast();
 }
 
 // Planet: Lok
 
 function handleLokDroidCave(player) {
 	var ObjectTeleportIntent = Java.type('intents.object.ObjectTeleportIntent');
-	var Location = Java.type('resources.Location');
-	var Terrain = Java.type('resources.Terrain');
+	var Location = Java.type('com.projectswg.common.data.location.Location');
+	var Terrain = Java.type('com.projectswg.common.data.location.Terrain');
 	new ObjectTeleportIntent(player.getCreatureObject(), new Location(3331, 105, -4912, Terrain.LOK)).broadcast();
 }
 
 function handleLokGreatMaze(player) {
 	var ObjectTeleportIntent = Java.type('intents.object.ObjectTeleportIntent');
-	var Location = Java.type('resources.Location');
-	var Terrain = Java.type('resources.Terrain');
+	var Location = Java.type('com.projectswg.common.data.location.Location');
+	var Terrain = Java.type('com.projectswg.common.data.location.Terrain');
 	new ObjectTeleportIntent(player.getCreatureObject(), new Location(3848, 62, -464, Terrain.LOK)).broadcast();
 }
 
 function handleLokImperialOutpost(player) {
 	var ObjectTeleportIntent = Java.type('intents.object.ObjectTeleportIntent');
-	var Location = Java.type('resources.Location');
-	var Terrain = Java.type('resources.Terrain');
+	var Location = Java.type('com.projectswg.common.data.location.Location');
+	var Terrain = Java.type('com.projectswg.common.data.location.Terrain');
 	new ObjectTeleportIntent(player.getCreatureObject(), new Location(-1914, 11, -3299, Terrain.LOK)).broadcast();
 }
 
 function handleLokKimogilaTown(player) {
 	var ObjectTeleportIntent = Java.type('intents.object.ObjectTeleportIntent');
-	var Location = Java.type('resources.Location');
-	var Terrain = Java.type('resources.Terrain');
+	var Location = Java.type('com.projectswg.common.data.location.Location');
+	var Terrain = Java.type('com.projectswg.common.data.location.Terrain');
 	new ObjectTeleportIntent(player.getCreatureObject(), new Location(-70, 42, 2769, Terrain.LOK)).broadcast();
 }
 
@@ -1311,15 +1342,15 @@ function handleLokKimogilaTown(player) {
 
 function handleNabEmperorsRetreat(player) {
 	var ObjectTeleportIntent = Java.type('intents.object.ObjectTeleportIntent');
-	var Location = Java.type('resources.Location');
-	var Terrain = Java.type('resources.Terrain');
+	var Location = Java.type('com.projectswg.common.data.location.Location');
+	var Terrain = Java.type('com.projectswg.common.data.location.Terrain');
 	new ObjectTeleportIntent(player.getCreatureObject(), new Location(2535, 295, -3887, Terrain.NABOO)).broadcast();
 }
 
 function handleNabWeaponFac(player) {
 	var ObjectTeleportIntent = Java.type('intents.object.ObjectTeleportIntent');
-	var Location = Java.type('resources.Location');
-	var Terrain = Java.type('resources.Terrain');
+	var Location = Java.type('com.projectswg.common.data.location.Location');
+	var Terrain = Java.type('com.projectswg.common.data.location.Terrain');
 	new ObjectTeleportIntent(player.getCreatureObject(), new Location(-6439, 41, -3265, Terrain.NABOO)).broadcast();
 }
 
@@ -1327,8 +1358,8 @@ function handleNabWeaponFac(player) {
 
 function handleRorHyperdriveFacility(player) {
 	var ObjectTeleportIntent = Java.type('intents.object.ObjectTeleportIntent');
-	var Location = Java.type('resources.Location');
-	var Terrain = Java.type('resources.Terrain');
+	var Location = Java.type('com.projectswg.common.data.location.Location');
+	var Terrain = Java.type('com.projectswg.common.data.location.Terrain');
 	new ObjectTeleportIntent(player.getCreatureObject(), new Location(-1211, 98, 4552, Terrain.RORI)).broadcast();
 }
 
@@ -1336,8 +1367,8 @@ function handleRorHyperdriveFacility(player) {
 
 function handleTalDetainmentCenter(player) {
 	var ObjectTeleportIntent = Java.type('intents.object.ObjectTeleportIntent');
-	var Location = Java.type('resources.Location');
-	var Terrain = Java.type('resources.Terrain');
+	var Location = Java.type('com.projectswg.common.data.location.Location');
+	var Terrain = Java.type('com.projectswg.common.data.location.Terrain');
 	new ObjectTeleportIntent(player.getCreatureObject(), new Location(4958, 449, -5983, Terrain.TALUS)).broadcast();
 }
 
@@ -1345,43 +1376,43 @@ function handleTalDetainmentCenter(player) {
 
 function handleTatFortTusken(player) {
 	var ObjectTeleportIntent = Java.type('intents.object.ObjectTeleportIntent');
-	var Location = Java.type('resources.Location');
-	var Terrain = Java.type('resources.Terrain');
+	var Location = Java.type('com.projectswg.common.data.location.Location');
+	var Terrain = Java.type('com.projectswg.common.data.location.Terrain');
 	new ObjectTeleportIntent(player.getCreatureObject(), new Location(-3941, 59, 6318, Terrain.TATOOINE)).broadcast();
 }
 
 function handleTatKraytGrave(player) {
 	var ObjectTeleportIntent = Java.type('intents.object.ObjectTeleportIntent');
-	var Location = Java.type('resources.Location');
-	var Terrain = Java.type('resources.Terrain');
+	var Location = Java.type('com.projectswg.common.data.location.Location');
+	var Terrain = Java.type('com.projectswg.common.data.location.Terrain');
 	new ObjectTeleportIntent(player.getCreatureObject(), new Location(7380, 122, 4298, Terrain.TATOOINE)).broadcast();
 }
 
 function handleTatMosEisley(player) {
 	var ObjectTeleportIntent = Java.type('intents.object.ObjectTeleportIntent');
-	var Location = Java.type('resources.Location');
-	var Terrain = Java.type('resources.Terrain');
+	var Location = Java.type('com.projectswg.common.data.location.Location');
+	var Terrain = Java.type('com.projectswg.common.data.location.Terrain');
 	new ObjectTeleportIntent(player.getCreatureObject(), new Location(3525, 4, -4807, Terrain.TATOOINE)).broadcast();
 }
 
 function handleTatMosTaike(player) {
 	var ObjectTeleportIntent = Java.type('intents.object.ObjectTeleportIntent');
-	var Location = Java.type('resources.Location');
-	var Terrain = Java.type('resources.Terrain');
+	var Location = Java.type('com.projectswg.common.data.location.Location');
+	var Terrain = Java.type('com.projectswg.common.data.location.Terrain');
 	new ObjectTeleportIntent(player.getCreatureObject(), new Location(3684, 7, 2357, Terrain.TATOOINE)).broadcast();
 }
 
 function handleTatSquillCave(player) {
 	var ObjectTeleportIntent = Java.type('intents.object.ObjectTeleportIntent');
-	var Location = Java.type('resources.Location');
-	var Terrain = Java.type('resources.Terrain');
+	var Location = Java.type('com.projectswg.common.data.location.Location');
+	var Terrain = Java.type('com.projectswg.common.data.location.Terrain');
 	new ObjectTeleportIntent(player.getCreatureObject(), new Location(57, 152, -79, Terrain.TATOOINE)).broadcast();
 }
 
 function handleTatImperialOasis(player) {
 	var ObjectTeleportIntent = Java.type('intents.object.ObjectTeleportIntent');
-	var Location = Java.type('resources.Location');
-	var Terrain = Java.type('resources.Terrain');
+	var Location = Java.type('com.projectswg.common.data.location.Location');
+	var Terrain = Java.type('com.projectswg.common.data.location.Terrain');
 	new ObjectTeleportIntent(player.getCreatureObject(), new Location(-5458, 10, 2601, Terrain.TATOOINE)).broadcast();
 }
 
@@ -1389,35 +1420,35 @@ function handleTatImperialOasis(player) {
 
 function handleYavBlueleafTemple(player) {
 	var ObjectTeleportIntent = Java.type('intents.object.ObjectTeleportIntent');
-	var Location = Java.type('resources.Location');
-	var Terrain = Java.type('resources.Terrain');
+	var Location = Java.type('com.projectswg.common.data.location.Location');
+	var Terrain = Java.type('com.projectswg.common.data.location.Terrain');
 	new ObjectTeleportIntent(player.getCreatureObject(), new Location(-947, 86, -2131, Terrain.YAVIN4)).broadcast();
 }
 
 function handleYavExarKun(player) {
 	var ObjectTeleportIntent = Java.type('intents.object.ObjectTeleportIntent');
-	var Location = Java.type('resources.Location');
-	var Terrain = Java.type('resources.Terrain');
+	var Location = Java.type('com.projectswg.common.data.location.Location');
+	var Terrain = Java.type('com.projectswg.common.data.location.Terrain');
 	new ObjectTeleportIntent(player.getCreatureObject(), new Location(4928, 103, 5587, Terrain.YAVIN4)).broadcast();
 }
 
 function handleYavDarkEnclave(player) {
 	var ObjectTeleportIntent = Java.type('intents.object.ObjectTeleportIntent');
-	var Location = Java.type('resources.Location');
-	var Terrain = Java.type('resources.Terrain');
+	var Location = Java.type('com.projectswg.common.data.location.Location');
+	var Terrain = Java.type('com.projectswg.common.data.location.Terrain');
 	new ObjectTeleportIntent(player.getCreatureObject(), new Location(5107, 81, 301, Terrain.YAVIN4)).broadcast();
 }
 
 function handleYavLightEnclave(player) {
 	var ObjectTeleportIntent = Java.type('intents.object.ObjectTeleportIntent');
-	var Location = Java.type('resources.Location');
-	var Terrain = Java.type('resources.Terrain');
+	var Location = Java.type('com.projectswg.common.data.location.Location');
+	var Terrain = Java.type('com.projectswg.common.data.location.Terrain');
 	new ObjectTeleportIntent(player.getCreatureObject(), new Location(-5575, 87, 4902, Terrain.YAVIN4)).broadcast();
 }
 
 function handleYavGeoCave(player) {
 	var ObjectTeleportIntent = Java.type('intents.object.ObjectTeleportIntent');
-	var Location = Java.type('resources.Location');
-	var Terrain = Java.type('resources.Terrain');
+	var Location = Java.type('com.projectswg.common.data.location.Location');
+	var Terrain = Java.type('com.projectswg.common.data.location.Terrain');
 	new ObjectTeleportIntent(player.getCreatureObject(), new Location(-6485, 83, -446, Terrain.YAVIN4)).broadcast();
 }

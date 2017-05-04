@@ -27,10 +27,11 @@
 ***********************************************************************************/
 package resources.objects.intangible;
 
+import com.projectswg.common.network.NetBuffer;
+import com.projectswg.common.network.NetBufferStream;
+
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import resources.network.BaselineBuilder;
-import resources.network.NetBuffer;
-import resources.network.NetBufferStream;
 import resources.objects.SWGObject;
 import resources.player.Player;
 
@@ -54,6 +55,7 @@ public class IntangibleObject extends SWGObject {
 		this.count = count;
 	}
 
+	@Override
 	protected void createBaseline3(Player target, BaselineBuilder bb) {
 		super.createBaseline3(target, bb); // 4 variables
 		bb.addInt(count); // 4
@@ -61,19 +63,10 @@ public class IntangibleObject extends SWGObject {
 		bb.incrementOperandCount(1);
 	}
 
+	@Override
 	protected void parseBaseline3(NetBuffer buffer) {
 		super.parseBaseline3(buffer);
 		count = buffer.getInt();
-	}
-	
-	@Override
-	public boolean equals(Object o) {
-		return super.equals(o);
-	}
-	
-	@Override
-	public int hashCode() {
-		return super.hashCode();
 	}
 	
 	@Override

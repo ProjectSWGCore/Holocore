@@ -27,17 +27,6 @@
 ***********************************************************************************/
 package resources.collections;
 
-import network.packets.Packet;
-import network.packets.swg.zone.baselines.Baseline;
-import resources.encodables.Encodable;
-import resources.network.NetBuffer;
-import resources.objects.SWGObject;
-import resources.server_info.Log;
-import resources.server_info.SynchronizedList;
-import resources.server_info.SynchronizedSet;
-import utilities.Encoder;
-import utilities.Encoder.StringType;
-
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.AbstractSet;
@@ -47,11 +36,22 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import com.projectswg.common.concurrency.SynchronizedList;
+import com.projectswg.common.concurrency.SynchronizedSet;
+import com.projectswg.common.debug.Log;
+import com.projectswg.common.encoding.Encodable;
+import com.projectswg.common.encoding.Encoder;
+import com.projectswg.common.encoding.StringType;
+import com.projectswg.common.network.NetBuffer;
+
+import network.packets.swg.zone.baselines.Baseline;
+import resources.objects.SWGObject;
+
 public class SWGSet<E> extends SynchronizedSet<E> implements Encodable {
 	
 	private final int view;
 	private final int updateType;
-	private final Encoder.StringType strType;
+	private final StringType strType;
 	private final AtomicInteger updateCount;
 	private final List<byte[]> deltas;
 	private final Set<ByteBuffer> data;
@@ -216,7 +216,7 @@ public class SWGSet<E> extends SynchronizedSet<E> implements Encodable {
 		synchronized (data) {
 			if (dataSize == 0)
 				return new byte[8];
-			buffer = ByteBuffer.allocate(8 + dataSize).order(ByteOrder.LITTLE_ENDIAN);
+			buffer = ByteBuffer.allocate(getLength()).order(ByteOrder.LITTLE_ENDIAN);
 			
 			buffer.putInt(data.size());
 			buffer.putInt(updateCount.get());
@@ -230,13 +230,18 @@ public class SWGSet<E> extends SynchronizedSet<E> implements Encodable {
 	}
 	
 	@Override
-	public void decode(ByteBuffer data) {
+	public void decode(NetBuffer data) {
 		throw new UnsupportedOperationException("Use decode(ByteBuffer data, Class<E> elementType) instead");
 	}
 	
+	@Override
+	public int getLength() {
+		return 8 + dataSize;
+	}
+	
 	public void decode(ByteBuffer data, StringType type) {
-		int size = Packet.getInt(data);
-		updateCount.set(Packet.getInt(data));
+		int size = data.getInt();
+		updateCount.set(data.getInt());
 		NetBuffer buffer = NetBuffer.wrap(data);
 		for (int i = 0; i < size; i++) {
 			@SuppressWarnings("unchecked")
@@ -247,8 +252,8 @@ public class SWGSet<E> extends SynchronizedSet<E> implements Encodable {
 	}
 	
 	public void decode(ByteBuffer data, Class<E> elementType) {
-		int size = Packet.getInt(data);
-		updateCount.set(Packet.getInt(data));
+		int size = data.getInt();
+		updateCount.set(data.getInt());
 		
 		boolean encodable = Encodable.class.isAssignableFrom(elementType);
 		NetBuffer wrap = NetBuffer.wrap(data);
@@ -264,7 +269,7 @@ public class SWGSet<E> extends SynchronizedSet<E> implements Encodable {
 			try {
 				E instance = elementType.newInstance();
 				if (instance instanceof Encodable) {
-					((Encodable) instance).decode(wrap.getBuffer());
+					((Encodable) instance).decode(wrap);
 					add(instance);
 				}
 			} catch (InstantiationException | IllegalAccessException e) {
@@ -283,4 +288,17 @@ public class SWGSet<E> extends SynchronizedSet<E> implements Encodable {
 		}
 		return true;
 	}
+	
+	public static SWGSet<String> getSwgSet(NetBuffer buffer, int num, int var, StringType type) {
+		SWGSet<String> set = new SWGSet<>(num, var, type);
+		set.decode(buffer.getBuffer(), type);
+		return set;
+	}
+	
+	public static <T> SWGSet<T> getSwgSet(NetBuffer buffer, int num, int var, Class<T> c) {
+		SWGSet<T> set = new SWGSet<>(num, var);
+		set.decode(buffer.getBuffer(), c);
+		return set;
+	}
+	
 }

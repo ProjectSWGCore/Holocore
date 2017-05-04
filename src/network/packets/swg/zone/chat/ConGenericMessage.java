@@ -27,7 +27,7 @@
 ***********************************************************************************/
 package network.packets.swg.zone.chat;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 
@@ -44,23 +44,25 @@ public class ConGenericMessage extends SWGPacket {
 		this.message = message;
 	}
 	
-	public ConGenericMessage(ByteBuffer data) {
+	public ConGenericMessage(NetBuffer data) {
 		decode(data);
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	@Override
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		message = getAscii(data);
-		getInt(data);
+		message = data.getAscii();
+		data.getInt();
 	}
 	
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(8 + message.length());
-		addShort(data, 3);
-		addInt  (data, CRC);
-		addAscii(data, message);
-		addInt  (data, 0);
+	@Override
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(8 + message.length());
+		data.addShort(3);
+		data.addInt(CRC);
+		data.addAscii(message);
+		data.addInt(0);
 		return data;
 	}
 

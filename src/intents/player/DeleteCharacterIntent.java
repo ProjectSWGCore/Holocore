@@ -26,17 +26,15 @@
  ******************************************************************************/
 package intents.player;
 
-import resources.control.Intent;
+import com.projectswg.common.control.Intent;
+
 import resources.objects.creature.CreatureObject;
 
 public class DeleteCharacterIntent extends Intent {
 	
-	public static final String TYPE = "DeleteCharacterIntent";
-	
 	private final CreatureObject creature;
 	
 	public DeleteCharacterIntent(CreatureObject creature) {
-		super(TYPE);
 		this.creature = creature;
 	}
 	

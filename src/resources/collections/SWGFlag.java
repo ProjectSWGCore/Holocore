@@ -27,16 +27,18 @@
 ***********************************************************************************/
 package resources.collections;
 
-import network.packets.swg.zone.baselines.Baseline;
-import resources.encodables.Encodable;
-import resources.network.NetBufferStream;
-import resources.objects.SWGObject;
-import resources.persistable.Persistable;
-
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.Arrays;
 import java.util.BitSet;
+
+import com.projectswg.common.encoding.Encodable;
+import com.projectswg.common.network.NetBuffer;
+import com.projectswg.common.network.NetBufferStream;
+import com.projectswg.common.persistable.Persistable;
+
+import network.packets.swg.zone.baselines.Baseline;
+import resources.objects.SWGObject;
 
 public class SWGFlag extends BitSet implements Encodable, Persistable {
 	
@@ -75,8 +77,13 @@ public class SWGFlag extends BitSet implements Encodable, Persistable {
 	}
 	
 	@Override
-	public void decode(ByteBuffer data) {
+	public void decode(NetBuffer data) {
 		throw new UnsupportedOperationException("Unable to decode bitset!");
+	}
+	
+	@Override
+	public int getLength() {
+		return 4 + (int) Math.ceil(super.size()/32.0);
 	}
 	
 	@Override

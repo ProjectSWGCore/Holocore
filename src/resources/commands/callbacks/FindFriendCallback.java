@@ -27,11 +27,16 @@
 
 package resources.commands.callbacks;
 
+import java.util.Locale;
+import java.util.Map;
+
+import com.projectswg.common.data.location.Location;
+
 import intents.chat.ChatBroadcastIntent;
 import intents.object.ObjectCreatedIntent;
-import resources.Location;
 import resources.commands.ICmdCallback;
 import resources.encodables.ProsePackage;
+import resources.encodables.StringId;
 import resources.objects.SWGObject;
 import resources.objects.player.PlayerObject;
 import resources.objects.waypoint.WaypointObject;
@@ -39,10 +44,6 @@ import resources.player.Player;
 import resources.player.PlayerState;
 import services.galaxy.GalacticManager;
 import services.objects.ObjectCreator;
-
-import java.util.Locale;
-import java.util.Map;
-import resources.encodables.StringId;
 
 /**
  * @author Waverunner

@@ -27,17 +27,13 @@
 ***********************************************************************************/
 package intents.network;
 
-import resources.control.Intent;
-
+import com.projectswg.common.control.Intent;
 
 public class ConnectionOpenedIntent extends Intent {
-	
-	public static final String TYPE = "ConnectionOpenedIntent";
 	
 	private long networkId;
 	
 	public ConnectionOpenedIntent(long networkId) {
-		super(TYPE);
 		setNetworkId(networkId);
 	}
 	

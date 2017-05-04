@@ -58,7 +58,9 @@ public enum SpawnerType {
 	WOD_HERB("object/tangible/spawning/event/shared_wod_themepark_herb_spawner.iff"),
 	UNCHECKED("object/mobile/shared_bossk.iff"),
 	CHECKED("object/mobile/shared_boba_fett.iff");
-		
+	
+	private static final SpawnerType [] VALUES = values();
+	
 	private String objectTemplate;
 	
 	SpawnerType(String objectTemplate) {
@@ -67,6 +69,14 @@ public enum SpawnerType {
 	
 	public String getObjectTemplate() {
 		return objectTemplate;
+	}
+	
+	public static SpawnerType getSpawnerTypeFromName(String name) {
+		for (SpawnerType type : VALUES) {
+			if (type.name().hashCode() == name.hashCode())
+				return type;
+		}
+		return null;
 	}
 	
 }

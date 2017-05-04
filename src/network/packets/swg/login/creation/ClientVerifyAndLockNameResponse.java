@@ -27,8 +27,9 @@
 ***********************************************************************************/
 package network.packets.swg.login.creation;
 
-import java.nio.ByteBuffer;
 import java.util.Locale;
+
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 
@@ -48,23 +49,23 @@ public class ClientVerifyAndLockNameResponse extends SWGPacket {
 		this.error = error;
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		name = getUnicode(data);
-		getAscii(data); // ui
-		getInt(data);
-		error = ErrorMessage.valueOf(getAscii(data).toUpperCase(Locale.US));
+		name = data.getUnicode();
+		data.getAscii(); // ui
+		data.getInt();
+		error = ErrorMessage.valueOf(data.getAscii().toUpperCase(Locale.US));
 	}
 	
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(20 + error.name().length() + name.length() * 2);
-		addShort(  data, 9);
-		addInt(    data, CRC);
-		addUnicode(data, name);
-		addAscii(  data, "ui");
-		addInt(    data, 0);
-		addAscii(  data, error.name().toLowerCase(Locale.US));
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(20 + error.name().length() + name.length() * 2);
+		data.addShort(9);
+		data.addInt(CRC);
+		data.addUnicode(name);
+		data.addAscii("ui");
+		data.addInt(0);
+		data.addAscii(error.name().toLowerCase(Locale.US));
 		return data;
 	}
 	

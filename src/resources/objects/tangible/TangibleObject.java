@@ -31,6 +31,10 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.Set;
 
+import com.projectswg.common.encoding.StringType;
+import com.projectswg.common.network.NetBuffer;
+import com.projectswg.common.network.NetBufferStream;
+
 import intents.FactionIntent;
 import intents.FactionIntent.FactionIntentType;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
@@ -40,12 +44,9 @@ import resources.PvpStatus;
 import resources.collections.SWGMap;
 import resources.collections.SWGSet;
 import resources.network.BaselineBuilder;
-import resources.network.NetBuffer;
-import resources.network.NetBufferStream;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 import resources.player.Player;
-import utilities.Encoder.StringType;
 
 public class TangibleObject extends SWGObject {
 	
@@ -290,6 +291,7 @@ public class TangibleObject extends SWGObject {
 		return super.hashCode();
 	}
 	
+	@Override
 	protected void createBaseline3(Player target, BaselineBuilder bb) {
 		super.createBaseline3(target, bb); // 4 variables - BASE3 (4)
 		if (getStringId().toString().equals("@obj_n:unknown_object"))
@@ -308,6 +310,7 @@ public class TangibleObject extends SWGObject {
 		bb.incrementOperandCount(9);
 	}
 	
+	@Override
 	protected void createBaseline6(Player target, BaselineBuilder bb) {
 		super.createBaseline6(target, bb);
 		if (getStringId().toString().equals("@obj_n:unknown_object"))
@@ -324,6 +327,7 @@ public class TangibleObject extends SWGObject {
 		bb.incrementOperandCount(6);
 	}
 	
+	@Override
 	protected void parseBaseline3(NetBuffer buffer) {
 		super.parseBaseline3(buffer);
 		if (getStringId().toString().equals("@obj_n:unknown_object"))
@@ -331,7 +335,7 @@ public class TangibleObject extends SWGObject {
 		pvpFaction = PvpFaction.getFactionForCrc(buffer.getInt());
 		pvpStatus = PvpStatus.getStatusForValue(buffer.getInt());
 		appearanceData = buffer.getArray();
-		buffer.getSwgSet(3, 7, Integer.class);
+		SWGSet.getSwgSet(buffer, 3, 7, Integer.class);
 		optionFlags = buffer.getInt();
 		buffer.getInt();
 		condition = buffer.getInt();
@@ -339,16 +343,17 @@ public class TangibleObject extends SWGObject {
 		visibleGmOnly = buffer.getBoolean();
 	}
 	
+	@Override
 	protected void parseBaseline6(NetBuffer buffer) {
 		super.parseBaseline6(buffer);
 		if (getStringId().toString().equals("@obj_n:unknown_object"))
 			return;
 		inCombat = buffer.getBoolean();
-		defenders = buffer.getSwgSet(6, 3, Long.TYPE);
+		defenders = SWGSet.getSwgSet(buffer, 6, 3, Long.TYPE);
 		buffer.getInt();
-		buffer.getSwgSet(6, 5, StringType.ASCII);
-		buffer.getSwgSet(6, 6, StringType.ASCII);
-		effectsMap = buffer.getSwgMap(6, 7, StringType.ASCII);
+		SWGSet.getSwgSet(buffer, 6, 5, StringType.ASCII);
+		SWGSet.getSwgSet(buffer, 6, 6, StringType.ASCII);
+		effectsMap = SWGMap.getSwgMap(buffer, 6, 7, StringType.ASCII);
 	}
 	
 	@Override

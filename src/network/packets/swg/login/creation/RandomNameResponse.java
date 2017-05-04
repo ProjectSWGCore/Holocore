@@ -27,7 +27,7 @@
 ***********************************************************************************/
 package network.packets.swg.login.creation;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 
@@ -48,26 +48,26 @@ public class RandomNameResponse extends SWGPacket {
 		this.randomName = randomName;
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		race = getAscii(data);
-		randomName = getUnicode(data);
-		getAscii(data);
-		getInt(data);
-		getAscii(data);
+		race = data.getAscii();
+		randomName = data.getUnicode();
+		data.getAscii();
+		data.getInt();
+		data.getAscii();
 	}
 	
-	public ByteBuffer encode() {
+	public NetBuffer encode() {
 		int length = 35 + race.length() + randomName.length() * 2;
-		ByteBuffer data = ByteBuffer.allocate(length);
-		addShort(  data, 4);
-		addInt(    data, CRC);
-		addAscii(  data, race);
-		addUnicode(data, randomName);
-		addAscii(  data, "ui");
-		addInt(    data, 0);
-		addAscii(  data, "name_approved");
+		NetBuffer data = NetBuffer.allocate(length);
+		data.addShort(4);
+		data.addInt(CRC);
+		data.addAscii(race);
+		data.addUnicode(randomName);
+		data.addAscii("ui");
+		data.addInt(0);
+		data.addAscii("name_approved");
 		return data;
 	}
 	

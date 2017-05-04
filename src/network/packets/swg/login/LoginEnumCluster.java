@@ -27,10 +27,11 @@
 ***********************************************************************************/
 package network.packets.swg.login;
 
-import java.nio.ByteBuffer;
 import java.time.ZoneOffset;
 import java.util.List;
 import java.util.Vector;
+
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 import resources.Galaxy;
@@ -52,34 +53,34 @@ public class LoginEnumCluster extends SWGPacket {
 		this.maxCharacters = maxCharacters;
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		int serverCount = getInt(data);
+		int serverCount = data.getInt();
 		for (int i = 0; i < serverCount; i++) {
 			Galaxy g = new Galaxy();
-			g.setId(getInt(data));
-			g.setName(getAscii(data));
-			g.setZoneOffset(ZoneOffset.ofTotalSeconds(getInt(data)));
+			g.setId(data.getInt());
+			g.setName(data.getAscii());
+			g.setZoneOffset(ZoneOffset.ofTotalSeconds(data.getInt()));
 			galaxies.add(g);
 		}
-		maxCharacters = getInt(data);
+		maxCharacters = data.getInt();
 	}
 	
-	public ByteBuffer encode() {
+	public NetBuffer encode() {
 		int length = 14;
 		for (Galaxy g : galaxies)
 			length += 10 + g.getName().length();
-		ByteBuffer data = ByteBuffer.allocate(length);
-		addShort(data, 3);
-		addInt(  data, CRC);
-		addInt(  data, galaxies.size());
+		NetBuffer data = NetBuffer.allocate(length);
+		data.addShort(3);
+		data.addInt(CRC);
+		data.addInt(galaxies.size());
 		for (Galaxy g : galaxies) {
-			addInt(  data, g.getId());
-			addAscii(data, g.getName());
-			addInt(  data, g.getDistance());
+			data.addInt(g.getId());
+			data.addAscii(g.getName());
+			data.addInt(g.getDistance());
 		}
-		addInt(data, maxCharacters);
+		data.addInt(maxCharacters);
 		return data;
 	}
 	

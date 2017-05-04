@@ -27,9 +27,9 @@
 ***********************************************************************************/
 package network.packets.swg.login.creation;
 
-import network.packets.swg.SWGPacket;
+import com.projectswg.common.network.NetBuffer;
 
-import java.nio.ByteBuffer;
+import network.packets.swg.SWGPacket;
 
 
 public class ClientCreateCharacter extends SWGPacket {
@@ -53,47 +53,47 @@ public class ClientCreateCharacter extends SWGPacket {
 		
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		charCustomization	= getArray(data);
-		name				= getUnicode(data);
-		race				= getAscii(data);
-		start				= getAscii(data);
-		hair				= getAscii(data);
-		hairCustomization	= getArray(data);
-		clothes				= getAscii(data);
-		jedi				= getBoolean(data);
-		height				= getFloat(data);
-		biography			= getUnicode(data);
-		tutorial			= getBoolean(data);
-		profession			= getAscii(data);
-		startingPhase		= getAscii(data);
+		charCustomization	= data.getArray();
+		name				= data.getUnicode();
+		race				= data.getAscii();
+		start				= data.getAscii();
+		hair				= data.getAscii();
+		hairCustomization	= data.getArray();
+		clothes				= data.getAscii();
+		jedi				= data.getBoolean();
+		height				= data.getFloat();
+		biography			= data.getUnicode();
+		tutorial			= data.getBoolean();
+		profession			= data.getAscii();
+		startingPhase		= data.getAscii();
 	}
 	
-	public ByteBuffer encode() {
+	public NetBuffer encode() {
 		int extraSize = charCustomization.length;
 		extraSize += name.length()*2;
 		extraSize += race.length() + start.length();
 		extraSize += hair.length() + hairCustomization.length;
 		extraSize += clothes.length() + profession.length();
 		extraSize += startingPhase.length();
-		ByteBuffer data = ByteBuffer.allocate(36+extraSize);
-		addShort  (data, 2);
-		addInt    (data, CRC);
-		addArrayList(data, charCustomization);
-		addUnicode(data, name);
-		addAscii  (data, race);
-		addAscii  (data, start);
-		addAscii  (data, hair);
-		addArrayList(data, hairCustomization);
-		addAscii  (data, clothes);
-		addBoolean(data, jedi);
-		addFloat  (data, height);
-		addUnicode(data, biography);
-		addBoolean(data, tutorial);
-		addAscii  (data, profession);
-		addAscii  (data, startingPhase);
+		NetBuffer data = NetBuffer.allocate(36+extraSize);
+		data.addShort(2);
+		data.addInt(CRC);
+		data.addArray(charCustomization);
+		data.addUnicode(name);
+		data.addAscii(race);
+		data.addAscii(start);
+		data.addAscii(hair);
+		data.addArray(hairCustomization);
+		data.addAscii(clothes);
+		data.addBoolean(jedi);
+		data.addFloat(height);
+		data.addUnicode(biography);
+		data.addBoolean(tutorial);
+		data.addAscii(profession);
+		data.addAscii(startingPhase);
 		return data;
 	}
 	

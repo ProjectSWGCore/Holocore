@@ -27,13 +27,14 @@
 
 package resources.collections;
 
-import org.junit.Assert;
-import org.junit.Test;
-import utilities.Encoder;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+import com.projectswg.common.encoding.StringType;
 
 /**
  * Created by Waverunner on 6/7/2015
@@ -48,7 +49,7 @@ public class TestSWGList {
 			strings[i] = "test" + String.valueOf(i);
 		}
 
-		SWGList<String> swgList = new SWGList<>(3, 6, Encoder.StringType.ASCII);
+		SWGList<String> swgList = new SWGList<>(3, 6, StringType.ASCII);
 		Collections.addAll(swgList, strings);
 
 		Assert.assertArrayEquals(strings, swgList.toArray());
@@ -77,7 +78,7 @@ public class TestSWGList {
 			strings[i] = "test" + String.valueOf(i);
 		}
 
-		SWGList<String> swgList = new SWGList<>(3, 6, Encoder.StringType.ASCII);
+		SWGList<String> swgList = new SWGList<>(3, 6, StringType.ASCII);
 		Collections.addAll(swgList, strings);
 		swgList.encode();
 

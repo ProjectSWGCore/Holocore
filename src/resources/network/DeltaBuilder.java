@@ -27,13 +27,14 @@
 ***********************************************************************************/
 package resources.network;
 
+import com.projectswg.common.encoding.Encoder;
+import com.projectswg.common.encoding.StringType;
+
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 import network.packets.swg.zone.deltas.DeltasMessage;
 import resources.objects.SWGObject;
 import resources.player.Player;
 import resources.player.PlayerState;
-import utilities.Encoder;
-import utilities.Encoder.StringType;
 
 public class DeltaBuilder {
 	
@@ -59,23 +60,26 @@ public class DeltaBuilder {
 		this.updateType = updateType;
 	}
 	
-	public void send() {
+	public boolean send() {
 		DeltasMessage message = getBuiltMessage();
 		Player owner = object.getOwner();
-		if (owner != null && owner.getPlayerState() == PlayerState.ZONED_IN)
+		boolean sent = false;
+		if (owner != null && owner.getPlayerState() == PlayerState.ZONED_IN) {
 			owner.sendPacket(message);
-		if (num == 3 || num == 6) // Shared Objects
-			object.sendObservers(message);
+			sent = true;
+		}
+		if (num == 3 || num == 6) { // Shared Objects
+			sent = object.sendObservers(message) > 0 || sent;
+		}
+		return sent;
 	}
 	
 	public DeltasMessage getBuiltMessage() {
-		DeltasMessage delta = new DeltasMessage();
-		delta.setId(object.getObjectId());
-		delta.setType(type);
-		delta.setNum(num);
-		delta.setUpdate(updateType);
-		delta.setData(data);
-		return delta;
+		return new DeltasMessage(object.getObjectId(), type, num, updateType, data);
+	}
+	
+	public byte [] getEncodedData() {
+		return data;
 	}
 	
 }

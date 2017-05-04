@@ -27,9 +27,9 @@
 ***********************************************************************************/
 package network.packets.swg.zone;
 
-import network.packets.swg.SWGPacket;
+import com.projectswg.common.network.NetBuffer;
 
-import java.nio.ByteBuffer;
+import network.packets.swg.SWGPacket;
 
 public class ServerNowEpochTime extends SWGPacket {
 	public static final int CRC = getCrc("ServerNowEpochTime");
@@ -44,17 +44,17 @@ public class ServerNowEpochTime extends SWGPacket {
 		this.time = time;
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		time = getInt(data);
+		time = data.getInt();
 	}
 	
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(10);
-		addShort(data, 2);
-		addInt  (data, CRC);
-		addInt  (data, time);
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(10);
+		data.addShort(2);
+		data.addInt(CRC);
+		data.addInt(time);
 		return data;
 	}
 	

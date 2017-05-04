@@ -30,9 +30,11 @@ package resources.radial;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.projectswg.common.debug.Log;
+
 import resources.objects.SWGObject;
 import resources.player.Player;
-import resources.server_info.Log;
 import utilities.Scripts;
 
 public class Radials {

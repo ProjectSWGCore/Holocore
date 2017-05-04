@@ -27,15 +27,11 @@
 
 package services.group;
 
-import network.packets.Packet;
-import resources.encodables.Encodable;
+import com.projectswg.common.encoding.Encodable;
+import com.projectswg.common.network.NetBuffer;
+
 import resources.player.Player;
 
-import java.nio.ByteBuffer;
-
-/**
- * Created by Waverunner on 10/4/2015
- */
 public class GroupInviterData implements Encodable {
 	
 	private long id;
@@ -53,54 +49,56 @@ public class GroupInviterData implements Encodable {
 		this.name = name;
 		this.counter = counter;
 	}
-
+	
 	@Override
 	public byte[] encode() {
-		ByteBuffer bb = ByteBuffer.allocate(name.length() + 18);
-
-		Packet.addLong(bb, id);
-		Packet.addAscii(bb, name);
-		Packet.addLong(bb, counter);
-
-		return bb.array();
+		NetBuffer data = NetBuffer.allocate(getLength());
+		data.addLong(id);
+		data.addAscii(name);
+		data.addLong(counter);
+		return data.array();
 	}
-
+	
 	@Override
-	public void decode(ByteBuffer data) {
-		id = Packet.getLong(data);
-		name = Packet.getAscii(data);
-		counter = Packet.getLong(data);
+	public void decode(NetBuffer data) {
+		id = data.getLong();
+		name = data.getAscii();
+		counter = data.getLong();
 	}
-
-
+	
+	@Override
+	public int getLength() {
+		return name.length() + 18;
+	}
+	
 	public long getId() {
 		return id;
 	}
-
+	
 	public void setId(long id) {
 		this.id = id;
 	}
-
+	
 	public String getName() {
 		return name;
 	}
-
+	
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
 	public long getCounter() {
 		return counter;
 	}
-
+	
 	public void incrementCounter() {
 		counter++;
 	}
-
+	
 	public Player getSender() {
 		return sender;
 	}
-
+	
 	public void setSender(Player sender) {
 		this.sender = sender;
 	}

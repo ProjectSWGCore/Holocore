@@ -27,8 +27,7 @@
  ***********************************************************************************/
 package network.packets.swg.zone.object_controller;
 
-import java.nio.ByteBuffer;
-import resources.network.NetBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 public class ShowLootBox extends ObjectController {
 	
@@ -41,13 +40,13 @@ public class ShowLootBox extends ObjectController {
 		this.items = items;
 	}
 	
-	public ShowLootBox(ByteBuffer data) {
+	public ShowLootBox(NetBuffer data) {
 		super(CRC);
 		decode(data);
 	}
 	
 	@Override
-	public void decode(ByteBuffer data) {
+	public void decode(NetBuffer data) {
 		decodeHeader(data);
 		
 		int itemCount = data.getInt();
@@ -59,17 +58,17 @@ public class ShowLootBox extends ObjectController {
 	}
 	
 	@Override
-	public ByteBuffer encode() {
-		NetBuffer data = NetBuffer.allocate(HEADER_LENGTH + Integer.BYTES + items.length * Long.BYTES);
-		encodeHeader(data.getBuffer());
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(HEADER_LENGTH + 4 + items.length * 8);
+		encodeHeader(data);
+		
 		
 		data.addInt(items.length);
-		
-		for(long objectId : items) {
+		for (long objectId : items) {
 			data.addLong(objectId);
 		}
 		
-		return data.getBuffer();
+		return data;
 	}
 
 }

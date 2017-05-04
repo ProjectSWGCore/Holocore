@@ -27,40 +27,6 @@
 ***********************************************************************************/
 package resources.objects;
 
-import network.packets.Packet;
-import network.packets.swg.zone.SceneCreateObjectByCrc;
-import network.packets.swg.zone.SceneDestroyObject;
-import network.packets.swg.zone.SceneEndBaselines;
-import network.packets.swg.zone.UpdateContainmentMessage;
-import network.packets.swg.zone.baselines.Baseline.BaselineType;
-import resources.Location;
-import resources.Terrain;
-import resources.buildout.BuildoutArea;
-import resources.client_info.visitors.ObjectData.ObjectDataAttribute;
-import resources.common.CRC;
-import resources.containers.ContainerPermissionsType;
-import resources.containers.ContainerResult;
-import resources.control.Assert;
-import resources.encodables.StringId;
-import resources.network.BaselineBuilder;
-import resources.network.BaselineObject;
-import resources.network.NetBuffer;
-import resources.network.NetBufferStream;
-import resources.objects.awareness.ObjectAware;
-import resources.objects.building.BuildingObject;
-import resources.objects.cell.CellObject;
-import resources.objects.creature.CreatureObject;
-import resources.persistable.Persistable;
-import resources.persistable.SWGObjectFactory;
-import resources.player.Player;
-import resources.server_info.Log;
-import resources.server_info.SynchronizedMap;
-import resources.server_info.SynchronizedSet;
-import services.CoreManager;
-import services.objects.ObjectCreator;
-import utilities.AwarenessUtilities;
-import intents.object.ContainerTransferIntent;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -70,6 +36,41 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import com.projectswg.common.concurrency.SynchronizedMap;
+import com.projectswg.common.concurrency.SynchronizedSet;
+import com.projectswg.common.data.CRC;
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.data.swgfile.visitors.ObjectData.ObjectDataAttribute;
+import com.projectswg.common.debug.Assert;
+import com.projectswg.common.debug.Log;
+import com.projectswg.common.network.NetBuffer;
+import com.projectswg.common.network.NetBufferStream;
+import com.projectswg.common.persistable.Persistable;
+
+import intents.object.ContainerTransferIntent;
+import network.packets.Packet;
+import network.packets.swg.zone.SceneCreateObjectByCrc;
+import network.packets.swg.zone.SceneDestroyObject;
+import network.packets.swg.zone.SceneEndBaselines;
+import network.packets.swg.zone.UpdateContainmentMessage;
+import network.packets.swg.zone.baselines.Baseline.BaselineType;
+import resources.buildout.BuildoutArea;
+import resources.containers.ContainerPermissionsType;
+import resources.containers.ContainerResult;
+import resources.encodables.StringId;
+import resources.network.BaselineBuilder;
+import resources.network.BaselineObject;
+import resources.objects.awareness.ObjectAware;
+import resources.objects.building.BuildingObject;
+import resources.objects.cell.CellObject;
+import resources.objects.creature.CreatureObject;
+import resources.persistable.SWGObjectFactory;
+import resources.player.Player;
+import services.CoreManager;
+import services.objects.ObjectCreator;
+import utilities.AwarenessUtilities;
 
 public abstract class SWGObject extends BaselineObject implements Comparable<SWGObject>, Persistable {
 	
@@ -643,8 +644,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		create.setLocation(buildoutLocation);
 		create.setObjectCrc(crc);
 		target.sendPacket(create);
-		if (parent != null)
-			target.sendPacket(new UpdateContainmentMessage(objectId, parent.getObjectId(), slotArrangement));
 	}
 	
 	private final void sendSceneDestroyObject(Player target) {
@@ -671,6 +670,8 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			sendBaselines(target);
 			createChildrenObjects(target);
 			sendFinalBaselinePackets(target);
+			if (parent != null)
+				target.sendPacket(new UpdateContainmentMessage(objectId, parent.getObjectId(), slotArrangement));
 			target.sendPacket(new SceneEndBaselines(getObjectId()));
 		}
 	}
@@ -790,21 +791,27 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		return awareness.getObservers();
 	}
 	
-	public void sendObserversAndSelf(Packet ... packets) {
-		sendSelf(packets);
-		sendObservers(packets);
+	public int sendObserversAndSelf(Packet ... packets) {
+		int sent = 0;
+		sent += sendSelf(packets);
+		sent += sendObservers(packets);
+		return sent;
 	}
 	
-	public void sendObservers(Packet ... packets) {
+	public int sendObservers(Packet ... packets) {
+		int sent = 0;
 		for (Player observer : getObservers()) {
 			observer.sendPacket(packets);
+			sent++;
 		}
+		return sent;
 	}
 	
-	public void sendSelf(Packet ... packets) {
+	public int sendSelf(Packet ... packets) {
 		Player owner = getOwner();
 		if (owner != null)
 			owner.sendPacket(packets);
+		return owner != null ? 1 : 0;
 	}
 	
 	protected void sendBaselines(Player target) {
@@ -867,9 +874,10 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	@Override
 	public int hashCode() {
-		return Long.hashCode(getObjectId());
+		return Long.hashCode(objectId);
 	}
 	
+	@Override
 	protected void createBaseline3(Player target, BaselineBuilder bb) {
 		super.createBaseline3(target, bb);
 		bb.addFloat(complexity); // 0
@@ -880,6 +888,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		bb.incrementOperandCount(4);
 	}
 	
+	@Override
 	protected void createBaseline6(Player target, BaselineBuilder bb) {
 		super.createBaseline6(target, bb);
 		bb.addInt(CoreManager.getGalaxyId()); // 0
@@ -888,6 +897,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		bb.incrementOperandCount(2);
 	}
 	
+	@Override
 	protected void parseBaseline3(NetBuffer buffer) {
 		super.parseBaseline3(buffer);
 		complexity = buffer.getFloat();
@@ -896,6 +906,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		volume = buffer.getInt();
 	}
 	
+	@Override
 	protected void parseBaseline6(NetBuffer buffer) {
 		super.parseBaseline6(buffer);
 		buffer.getInt(); // Immutable ... can't change the galaxy id
@@ -959,6 +970,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		stream.addList(contained, (c) -> SWGObjectFactory.save(c, stream));
 	}
 	
+	@Override
 	public void read(NetBufferStream stream) {
 		switch(stream.getByte()) {
 			case 4:

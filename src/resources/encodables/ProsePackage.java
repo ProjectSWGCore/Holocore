@@ -27,206 +27,200 @@
 ***********************************************************************************/
 package resources.encodables;
 
-import network.packets.Packet;
-
 import java.math.BigInteger;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.charset.Charset;
 
-import resources.network.NetBufferStream;
-import resources.persistable.Persistable;
-import resources.server_info.Log;
+import com.projectswg.common.debug.Log;
+import com.projectswg.common.encoding.Encodable;
+import com.projectswg.common.network.NetBuffer;
+import com.projectswg.common.network.NetBufferStream;
+import com.projectswg.common.persistable.Persistable;
 
 public class ProsePackage implements OutOfBandData {
 	
-	private StringId base = new StringId("", "");
-
-	private Prose actor = new Prose();
-	private Prose target = new Prose();
-	private Prose other = new Prose();
-
-	// Decimal Integer
-	private int di;
-	// Decimal Float
-	private float df;
-
-	private boolean grammarFlag = false;
-
-	public ProsePackage() {}
-
+	private StringId base;
+	private Prose actor;
+	private Prose target;
+	private Prose other;
+	private int di; // decimal integer
+	private float df; // decimal float
+	private boolean grammarFlag;
+	
+	public ProsePackage() {
+		this.base = new StringId("", "");
+		this.actor = new Prose();
+		this.target = new Prose();
+		this.other = new Prose();
+		this.di = 0;
+		this.df = 0;
+		this.grammarFlag = false;
+	}
+	
 	/**
 	 * Creates a new ProsePackage that only specifies a StringId
+	 * 
 	 * @param table Base stf table for this ProsePackage
 	 * @param key The key for the provided table to use
 	 */
 	public ProsePackage(String table, String key) {
+		this();
 		setStringId(new StringId(table, key));
 	}
-
+	
 	/**
-	 * Creates a new ProsePackage that contains only 1 parameter for the specified StringId object
-	 * <br><br>
-	 * Example: <br> 
+	 * Creates a new ProsePackage that contains only 1 parameter for the specified StringId object <br>
+	 * <br>
+	 * Example: <br>
 	 * &nbsp&nbsp&nbsp&nbsp ProsePackage("@base_player:prose_deposit_success", "DI", 500)
+	 * 
 	 * @param stringId The base stringId for this ProsePackage
 	 * @param proseKey The key in the message, can either be TU, TT, TO, or DI.
 	 * @param prose Value to set for this key, instance depends on the key.
 	 */
 	public ProsePackage(StringId stringId, String proseKey, Object prose) {
+		this();
 		setStringId(stringId);
 		setProse(proseKey, prose);
 	}
 	
 	/**
-	 * Creates a new ProsePackage with multiple defined parameters. The first Object must be the prose key, followed by the keys value, and so on. If you're only setting 1 parameter,
-	 * you should use the ProsePackage(key, prose) constructor instead.
-	 * <br><br>
+	 * Creates a new ProsePackage with multiple defined parameters. The first Object must be the prose key, followed by the keys value, and so on. If you're only setting 1 parameter, you should use the ProsePackage(key, prose) constructor instead. <br>
+	 * <br>
 	 * Example: <br>
 	 * &nbsp&nbsp&nbsp&nbsp ProsePackage("StringId", new StringId("base_player", "prose_deposit_success"), "DI", 500)
+	 * 
 	 * @param objects Key followed by the value. Can either be STF, TU, TT, TO, or DI.
 	 */
 	public ProsePackage(Object ... objects) {
+		this();
 		int length = objects.length;
-		for (int i = 0; i < length-1; i++) {
+		for (int i = 0; i < length - 1; i++) {
 			if (!(objects[i] instanceof String)) // Make sure that it's a key, chance of it being a customString though
 				continue;
 			
-			setProse((String) objects[i], objects[i+1]);
+			setProse((String) objects[i], objects[i + 1]);
 		}
 	}
 	
 	private void setProse(String key, Object prose) {
 		switch (key) {
-		
-		case "StringId":
-			setStringId(prose);
-			break;
-		case "TU":
-			setTU(prose);
-			break;
-		case "TT":
-			setTT(prose);
-			break;
-		case "TO":
-			setTO(prose);
-			break;
-		case "DI":
-			if (prose instanceof Integer)
-				setDI((Integer) prose);
-			else { Log.w("DI can only be a Integer!"); }
-			break;
+			case "StringId":
+				setStringId(prose);
+				break;
+			case "TU":
+				setTU(prose);
+				break;
+			case "TT":
+				setTT(prose);
+				break;
+			case "TO":
+				setTO(prose);
+				break;
+			case "DI":
+				if (prose instanceof Integer)
+					setDI((Integer) prose);
+				else {
+					Log.w("DI can only be a Integer!");
+				}
+				break;
+			case "DF":
+				if (prose instanceof Float)
+					setDF((Float) prose);
+				else {
+					Log.w("DF can only be a Float!");
+				}
+				break;
+			default:
+				break;
 			
-		case "DF":
-			if (prose instanceof Float)
-				setDF((Float) prose);
-			else { Log.w("DF can only be a Float!"); }
-			break;
-			
-		default: break;
-		
 		}
 	}
 	
 	public void setStringId(Object prose) {
-		if (prose instanceof StringId) { base = (StringId) prose; }
-		else if (prose instanceof String) {
-			if (((String) prose).startsWith("@")) { base = new StringId((String) prose); }
-			else { Log.w("The base STF cannot be a custom string!"); }
-		} else { Log.w("The base STF must be either a Stf or a String! Received class: " + prose.getClass().getName()); }
+		if (prose instanceof StringId) {
+			base = (StringId) prose;
+		} else if (prose instanceof String) {
+			if (((String) prose).startsWith("@")) {
+				base = new StringId((String) prose);
+			} else {
+				Log.w("The base STF cannot be a custom string!");
+			}
+		} else {
+			Log.w("The base STF must be either a Stf or a String! Received class: " + prose.getClass().getName());
+		}
 	}
 	
 	public void setTU(Object prose) {
-		if (prose instanceof StringId)
-			actor.setStringId((StringId) prose);
-		else if (prose instanceof String) {
-			if (((String) prose).startsWith("@"))
-				actor.setStringId(new StringId((String) prose));
-			else actor.setText((String) prose);
-		}
-		else if (prose instanceof Long)
-			actor.setObjectId((Long) prose);
-		else if (prose instanceof BigInteger)
-			actor.setObjectId(((BigInteger) prose).longValue());
-		else
-			Log.w("Proses can only be Strings or Longs! Received class: " + prose.getClass().getName());
+		setProse(actor, prose);
 	}
 	
 	public void setTT(Object prose) {
-		if (prose instanceof StringId)
-			target.setStringId((StringId) prose);
-		else if (prose instanceof String) {
-			if (((String) prose).startsWith("@"))
-				target.setStringId(new StringId((String) prose));
-			else target.setText((String) prose);
-		}
-		else if (prose instanceof Long)
-			target.setObjectId((Long) prose);
-		else if (prose instanceof BigInteger)
-			target.setObjectId(((BigInteger) prose).longValue());
-		else
-			Log.w("Proses can only be Strings or Longs! Received class: " + prose.getClass().getName());
+		setProse(target, prose);
 	}
 	
 	public void setTO(Object prose) {
-		if (prose instanceof StringId)
-			other.setStringId((StringId) prose);
-		else if (prose instanceof String) {
-			if (((String) prose).startsWith("@"))
-				other.setStringId(new StringId((String) prose));
-			else other.setText((String) prose);
-		}
-		else if (prose instanceof Long)
-			other.setObjectId((Long) prose);
-		else if (prose instanceof BigInteger)
-			other.setObjectId(((BigInteger) prose).longValue());
-		else
-			Log.w("Proses can only be Strings or Longs! Received class: " + prose.getClass().getName());
+		setProse(other, prose);
 	}
 	
 	public void setDI(Integer prose) {
 		di = prose;
 	}
-
+	
 	public void setDF(Float prose) {
 		df = prose;
 	}
-
+	
 	public void setGrammarFlag(boolean useGrammar) {
 		grammarFlag = useGrammar;
 	}
-
+	
+	private void setProse(Prose prose, Object obj) {
+		if (obj instanceof StringId) {
+			prose.setStringId((StringId) obj);
+		} else if (obj instanceof String) {
+			if (((String) obj).startsWith("@")) {
+				prose.setStringId(new StringId((String) obj));
+			} else {
+				prose.setText((String) obj);
+			}
+		} else if (obj instanceof Long) {
+			prose.setObjectId((Long) obj);
+		} else if (obj instanceof BigInteger) {
+			prose.setObjectId(((BigInteger) obj).longValue());
+		} else {
+			Log.w("Proses can only be Strings or Longs! Received class: " + prose.getClass().getName());
+		}
+	}
+	
 	@Override
 	public byte[] encode() {
 		if (base == null) // There must be a base stf always
 			return null;
 		
-		byte[] stringData = base.encode();
-		byte[] actorData = actor.encode();
-		byte[] targetData = target.encode();
-		byte[] otherData = other.encode();
-
-		ByteBuffer bb = ByteBuffer.allocate(9 + stringData.length + actorData.length + targetData.length + otherData.length);
-		Packet.addData(bb, stringData);
-		Packet.addData(bb, actorData);
-		Packet.addData(bb, targetData);
-		Packet.addData(bb, otherData);
-		Packet.addInt(bb, di);
-		Packet.addFloat(bb, df);
-		Packet.addBoolean(bb, grammarFlag);
-
-		return bb.array();
+		NetBuffer data = NetBuffer.allocate(getLength());
+		data.addEncodable(base);
+		data.addEncodable(actor);
+		data.addEncodable(target);
+		data.addEncodable(other);
+		data.addInt(di);
+		data.addFloat(df);
+		data.addBoolean(grammarFlag);
+		return data.array();
 	}
-
+	
 	@Override
-	public void decode(ByteBuffer data) {
-		base		= Packet.getEncodable(data, StringId.class);
-		actor		= Packet.getEncodable(data, Prose.class);
-		target		= Packet.getEncodable(data, Prose.class);
-		other		= Packet.getEncodable(data, Prose.class);
-		di			= Packet.getInt(data);
-		df			= Packet.getInt(data);
-		grammarFlag	= Packet.getBoolean(data);
+	public void decode(NetBuffer data) {
+		base = data.getEncodable(StringId.class);
+		actor = data.getEncodable(Prose.class);
+		target = data.getEncodable(Prose.class);
+		other = data.getEncodable(Prose.class);
+		di = data.getInt();
+		df = data.getInt();
+		grammarFlag = data.getBoolean();
+	}
+	
+	@Override
+	public int getLength() {
+		return 9 + base.getLength() + actor.getLength() + target.getLength() + other.getLength();
 	}
 	
 	@Override
@@ -252,69 +246,68 @@ public class ProsePackage implements OutOfBandData {
 		di = stream.getInt();
 		df = stream.getFloat();
 	}
-
+	
 	@Override
 	public OutOfBandPackage.Type getOobType() {
 		return OutOfBandPackage.Type.PROSE_PACKAGE;
 	}
-
+	
 	@Override
 	public int getOobPosition() {
 		return -1;
 	}
-
+	
 	@Override
 	public String toString() {
-		return "ProsePackage[base=" + base + ", grammarFlag=" + grammarFlag +
-				", actor=" + actor + ", target=" + target + ", other=" + other +
-				", di=" + di + ", df=" + df +
-				"]";
+		return "ProsePackage[base=" + base + ", grammarFlag=" + grammarFlag + ", actor=" + actor + ", target=" + target + ", other=" + other + ", di=" + di + ", df=" + df + "]";
 	}
-
+	
 	private static class Prose implements Encodable, Persistable {
 		
 		private long objectId;
 		private StringId stringId;
 		private String text;
-
+		
 		public Prose() {
 			stringId = new StringId("", "");
 		}
-
+		
 		public void setObjectId(long objectId) {
 			this.objectId = objectId;
 		}
-
+		
 		public void setStringId(StringId stringId) {
 			this.stringId = stringId;
 		}
-
+		
 		public void setText(String text) {
 			this.text = text;
 		}
-
+		
 		@Override
 		public byte[] encode() {
-			byte[] stfData = stringId.encode();
-			ByteBuffer bb = ByteBuffer.allocate(12 + stfData.length + (text != null ? (4 + (text.length() * 2)) : 0)).order(ByteOrder.LITTLE_ENDIAN);
-
-			bb.putLong(objectId);
-			bb.put(stfData);
+			NetBuffer data = NetBuffer.allocate(getLength());
+			data.addLong(objectId);
+			data.addEncodable(stringId);
 			if (text != null && !text.isEmpty()) {
-				bb.putInt(text.length());
-				bb.put(text.getBytes(Charset.forName("UTF-16LE")));
+				data.addInt(text.length());
+				data.addUnicode(text);
 			} else {
-				bb.putInt(0);
+				data.addInt(0);
 			}
-
-			return bb.array();
+			return data.array();
 		}
-
+		
 		@Override
-		public void decode(ByteBuffer data) {
-			objectId 	= Packet.getLong(data);
-			stringId	= Packet.getEncodable(data, StringId.class);
-			text		= Packet.getUnicode(data);
+		public void decode(NetBuffer data) {
+			objectId 	= data.getLong();
+			stringId	= data.getEncodable(StringId.class);
+			text		= data.getUnicode();
+		}
+		
+		@Override
+		public int getLength() {
+			return 12 + stringId.getLength() + (text != null ? (4 + (text.length() * 2)) : 0);
 		}
 		
 		@Override
@@ -338,4 +331,5 @@ public class ProsePackage implements OutOfBandData {
 			return "Prose[objectId=" + objectId + ", stringId=" + stringId + ", text='" + text + "']";
 		}
 	}
+	
 }

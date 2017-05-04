@@ -35,16 +35,23 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import com.projectswg.common.control.Service;
+import com.projectswg.common.data.info.RelationalDatabase;
+import com.projectswg.common.data.info.RelationalServerFactory;
+import com.projectswg.common.data.location.Location;
+import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.data.swgfile.ClientFactory;
+import com.projectswg.common.debug.Log;
+
+import java.util.Random;
+
 import intents.object.DestroyObjectIntent;
 import intents.object.ObjectCreatedIntent;
 import intents.server.ConfigChangedIntent;
-import java.util.Random;
-import resources.Location;
+
 import resources.PvpFlag;
-import resources.Terrain;
 import resources.config.ConfigFile;
 import resources.containers.ContainerPermissionsType;
-import resources.control.Service;
 import resources.objects.SWGObject;
 import resources.objects.building.BuildingObject;
 import resources.objects.creature.CreatureDifficulty;
@@ -52,11 +59,10 @@ import resources.objects.creature.CreatureObject;
 import resources.objects.custom.AIBehavior;
 import resources.objects.custom.DefaultAIObject;
 import resources.objects.tangible.OptionFlag;
-import resources.server_info.Log;
-import resources.server_info.RelationalDatabase;
-import resources.server_info.RelationalServerFactory;
+import resources.server_info.DataManager;
 import resources.server_info.StandardLog;
 import resources.spawn.Spawner;
+import resources.spawn.Spawner.SpawnerFlag;
 import resources.spawn.SpawnerType;
 import services.objects.ObjectCreator;
 import services.objects.ObjectManager;
@@ -75,7 +81,7 @@ public final class SpawnerService extends Service {
 	private static final String IDLE_MOOD = "idle";
 	
 	private final ObjectManager objectManager;
-	private final Map<DefaultAIObject, Spawner> spawnerMap;
+	private final Map<Long, Spawner> spawnerMap;
 	private final ScheduledExecutorService executorService;
 	private final Random random;
 	
@@ -91,7 +97,7 @@ public final class SpawnerService extends Service {
 	
 	@Override
 	public boolean initialize() {
-		if(getConfig(ConfigFile.FEATURES).getBoolean("SPAWN-EGGS-ENABLED", true))
+		if(DataManager.getConfig(ConfigFile.FEATURES).getBoolean("SPAWN-EGGS-ENABLED", true))
 			loadSpawners();
 		
 		return super.initialize();
@@ -123,19 +129,17 @@ public final class SpawnerService extends Service {
 	
 	private void handleDestroyObjectIntent(DestroyObjectIntent doi) {
 		SWGObject destroyedObject = doi.getObject();
+		if (!(destroyedObject instanceof DefaultAIObject))
+			return;
 		
-		if(destroyedObject instanceof DefaultAIObject) {
-			DefaultAIObject killedAIObject = (DefaultAIObject) destroyedObject;
-			
-			Spawner spawner = spawnerMap.remove(killedAIObject);
-			
-			if(spawner == null) {
-				Log.e("Killed AI object %s has no linked Spawner - it cannot respawn!", killedAIObject);
-				return;
-			}
-			
-			executorService.schedule(() -> spawnNPC(spawner), spawner.getRespawnDelay(), TimeUnit.SECONDS);
+		Spawner spawner = spawnerMap.remove(destroyedObject.getObjectId());
+		
+		if (spawner == null) {
+			Log.e("Killed AI object %s has no linked Spawner - it cannot respawn!", destroyedObject);
+			return;
 		}
+		
+		executorService.schedule(() -> spawnNPC(spawner), spawner.getRespawnDelay(), TimeUnit.SECONDS);
 	}
 	
 	private void loadSpawners() {
@@ -158,121 +162,134 @@ public final class SpawnerService extends Service {
 	}
 	
 	private void loadSpawner(ResultSet set, Location loc) throws SQLException {
+		Spawner spawner = new Spawner(set.getInt("spawn_id"));
+		spawner.setIffTemplates(createTemplateList(set.getString("iff")));
+		spawner.setCreatureName(set.getString("npc_name").intern());
+		spawner.setCombatLevel(set.getShort("combat_level"));
+		spawner.setSpawnerFlag(SpawnerFlag.valueOf(set.getString("attackable")));
+		setRespawnDelay(spawner, set);
+		setDifficulty(spawner, set);
+		setMoodAnimation(spawner, set);
+		setAiBehavior(spawner, set);
+		setLocation(spawner, loc, set);
+		createEgg(spawner, set);
+		
+		int amount = set.getInt("amount");
+		for (int i = 0; i < amount; i++) {
+			spawnNPC(spawner);
+		}
+	}
+	
+	private void createEgg(Spawner spawner, ResultSet set) throws SQLException {
+		SpawnerType spawnerType = SpawnerType.valueOf(set.getString("spawner_type"));
+		SWGObject egg = ObjectCreator.createObjectFromTemplate(spawnerType.getObjectTemplate());
+		egg.setContainerPermissions(ContainerPermissionsType.ADMIN);
+		egg.moveToContainer(getCell(spawner.getSpawnerId(), set));
+		egg.setLocation(spawner.getLocation());
+		spawner.setSpawnerObject(egg);
+		new ObjectCreatedIntent(egg).broadcast();
+	}
+	
+	private void setRespawnDelay(Spawner spawner, ResultSet set) throws SQLException {
 		int minRespawnDelay = set.getInt("min_spawn_time");
 		int maxRespawnDelay = set.getInt("max_spawn_time");
-		Terrain terrain = Terrain.valueOf(set.getString("building_terrain"));
-		int spawnId = set.getInt("spawn_id");
 		
 		if (minRespawnDelay > maxRespawnDelay) {
-			Log.e("Spawner on %s at with ID %d has a minimum respawn time larger than the maximum respawn time", terrain, spawnId);
-			return;
+			Log.e("Spawner with ID %d has a minimum respawn time larger than the maximum respawn time", spawner.getSpawnerId());
+			maxRespawnDelay = minRespawnDelay;
 		}
-		
-		loc.setTerrain(terrain);
-		loc.setPosition(set.getFloat("x"), set.getFloat("y"), set.getFloat("z"));
-		loc.setHeading(set.getFloat("heading"));
-		int cellId = set.getInt("cell_id");
-		long buildingId = set.getLong("building_id");
-		
-		SWGObject cellObject = null;
-		
-		if (buildingId != 0 && cellId == 0) {
-			Log.e("No cell ID specified for spawner with ID %d on terrain %s", spawnId, terrain);
-			return;
-		} else if (buildingId == 0 && cellId != 0) {
-			Log.w("Unnecessary cell ID specified for spawner with ID %d on terrain %s", spawnId, terrain);
-			return;
-		}
-		
-		if (buildingId != 0) {
-			SWGObject building = objectManager.getObjectById(buildingId);
-			
-			if (!(building instanceof BuildingObject)) {
-				Log.w("Skipping spawner with ID %d on terrain %s - building_id %d didn't reference a BuildingObject!", spawnId, terrain, buildingId);
-				return;
-			}
-			
-			cellObject = ((BuildingObject) building).getCellByNumber(cellId);
-			
-			if (cellObject == null) {
-				Log.e("Spawner with ID %d on terrain %s - building %d didn't have cell ID %d!", spawnId, terrain, buildingId, cellId);
-				return;
-			}
-		}
-		
-		String difficultyChar = set.getString("difficulty");
+		spawner.setMinRespawnDelay(minRespawnDelay);
+		spawner.setMaxRespawnDelay(maxRespawnDelay);
+	}
+	
+	private void setDifficulty(Spawner spawner, ResultSet set) throws SQLException {
+		char difficultyChar = set.getString("difficulty").charAt(0);
 		CreatureDifficulty difficulty;
 		int maxHealth = 0;
 		int maxAction = 0;
 		
-		switch(difficultyChar) {
-			default: Log.w("An unknown creature difficulty of %s was set for spawner with ID %d on terrain %s. Using default NORMAL", difficultyChar, spawnId, terrain);
-			case "N":
+		switch (difficultyChar) {
+			default:
+				Log.w("Unknown creature difficulty: %s", difficultyChar);
+			case 'N':
 				difficulty = CreatureDifficulty.NORMAL;
 				maxHealth = set.getInt("HP");
 				maxAction = set.getInt("Action");
 				break;
-			case "E":
+			case 'E':
 				difficulty = CreatureDifficulty.ELITE;
 				maxHealth = set.getInt("Elite_HP");
 				maxAction = set.getInt("Elite_Action");
 				break;
-			case "B":
+			case 'B':
 				difficulty = CreatureDifficulty.BOSS;
 				maxHealth = set.getInt("Boss_HP");
 				maxAction = set.getInt("Boss_Action");
 				break;
 		}
-		
-		SpawnerType spawnerType = SpawnerType.valueOf(set.getString("spawner_type"));
-		SWGObject egg = ObjectCreator.createObjectFromTemplate(spawnerType.getObjectTemplate());
-		Spawner spawner = new Spawner(egg);
-		
-		spawner.setIffTemplates(set.getString("iff").split(";"));
-		spawner.setCreatureName(set.getString("npc_name"));
-		spawner.setMinRespawnDelay(minRespawnDelay);
-		spawner.setMaxRespawnDelay(maxRespawnDelay);
 		spawner.setMaxHealth(maxHealth);
 		spawner.setMaxAction(maxAction);
 		spawner.setCreatureDifficulty(difficulty);
-		spawner.setCombatLevel(set.getShort("combat_level"));
-		spawner.setFlagString(set.getString("attackable"));
-
+	}
+	
+	private void setLocation(Spawner spawner, Location loc, ResultSet set) throws SQLException {
+		Terrain terrain = Terrain.valueOf(set.getString("building_terrain"));
+		loc.setTerrain(terrain);
+		loc.setPosition(set.getFloat("x"), set.getFloat("y"), set.getFloat("z"));
+		loc.setHeading(set.getFloat("heading"));
+		spawner.setLocation(loc);
+	}
+	
+	private void setMoodAnimation(Spawner spawner, ResultSet set) throws SQLException {
+		String moodAnimation = set.getString("mood").intern();
+		
+		if (moodAnimation == IDLE_MOOD) // since the string is intern'd, this will work
+			moodAnimation = "neutral";
+		spawner.setMoodAnimation(moodAnimation);
+	}
+	
+	private void setAiBehavior(Spawner spawner, ResultSet set) throws SQLException {
 		AIBehavior aiBehavior = AIBehavior.valueOf(set.getString("behaviour"));
 		spawner.setAIBehavior(aiBehavior);
-		
-		String moodAnimation = set.getString("mood");
-
-		if (!moodAnimation.equals(IDLE_MOOD)) {
-			spawner.setMoodAnimation(moodAnimation);
-		}
-
 		if (aiBehavior == AIBehavior.FLOAT) {
 			spawner.setFloatRadius(set.getInt("float_radius"));
 		}
+	}
+	
+	private SWGObject getCell(int spawnId, ResultSet set) throws SQLException {
+		int cellId = set.getInt("cell_id");
+		long buildingId = set.getLong("building_id");
 		
-		egg.setContainerPermissions(ContainerPermissionsType.ADMIN);
-		egg.setLocation(loc);
-		egg.moveToContainer(cellObject);
-		new ObjectCreatedIntent(egg).broadcast();
-		
-		int amount = set.getInt("amount");
-		
-		for (int i = 0; i < amount; i++) {
-			spawnNPC(spawner);
+		if (buildingId != 0 && cellId == 0) {
+			Log.e("No cell ID specified for spawner with ID %d", spawnId);
+			return null;
+		} else if (buildingId == 0) {
+			if (cellId != 0)
+				Log.w("Unnecessary cell ID specified for spawner with ID %d", spawnId);
+			return null; // No cell to find
 		}
+		
+		SWGObject building = objectManager.getObjectById(buildingId);
+		if (!(building instanceof BuildingObject)) {
+			Log.w("Skipping spawner with ID %d - building_id %d didn't reference a BuildingObject!", spawnId, buildingId);
+			return null;
+		}
+		
+		SWGObject cellObject = ((BuildingObject) building).getCellByNumber(cellId);
+		if (cellObject == null) {
+			Log.e("Spawner with ID %d - building %d didn't have cell ID %d!", spawnId, buildingId, cellId);
+		}
+		return cellObject;
 	}
 	
 	private void spawnNPC(Spawner spawner) {
 		spawnerMap.put(createNPC(spawner), spawner);
 	}
 	
-	private DefaultAIObject createNPC(Spawner spawner) {
-		DefaultAIObject object = ObjectCreator.createObjectFromTemplate(createTemplate(spawner.getRandomIffTemplate()), DefaultAIObject.class);
-		SWGObject spawnerObject = spawner.getSpawnerObject();
-		SWGObject spawnerObjectParent = spawnerObject.getParent();
-		Location aiLocation = spawnerObject.getLocation();	// A copied Location is returned
+	private long createNPC(Spawner spawner) {
+		DefaultAIObject object = ObjectCreator.createObjectFromTemplate(spawner.getRandomIffTemplate(), DefaultAIObject.class);
 		
+		object.setLocation(behaviorLocation(spawner));
 		object.setObjectName(spawner.getCreatureName());
 		object.setLevel(spawner.getCombatLevel());
 		object.setDifficulty(spawner.getCreatureDifficulty());
@@ -280,18 +297,55 @@ public final class SpawnerService extends Service {
 		object.setHealth(spawner.getMaxHealth());
 		object.setMaxAction(spawner.getMaxAction());
 		object.setAction(spawner.getMaxAction());
-		setFlags(object, spawner.getFlagString());
-		
+		object.setMoodAnimation(spawner.getMoodAnimation());
 		object.setBehavior(spawner.getAIBehavior());
+		object.setFloatRadius(spawner.getFloatRadius());
+		setFlags(object, spawner.getSpawnerFlag());
 		
-		switch (object.getBehavior()) {
+		object.moveToContainer(spawner.getSpawnerObject().getParent());
+		new ObjectCreatedIntent(object).broadcast();
+		return object.getObjectId();
+	}
+	
+	private void setFlags(CreatureObject creature, SpawnerFlag flags) {
+		switch (flags) {
+			case AGGRESSIVE:
+				creature.setPvpFlags(PvpFlag.AGGRESSIVE);
+				creature.addOptionFlags(OptionFlag.AGGRESSIVE);
+			case ATTACKABLE:
+				creature.setPvpFlags(PvpFlag.ATTACKABLE);
+				creature.addOptionFlags(OptionFlag.HAM_BAR);
+				break;
+			case INVULNERABLE:
+				creature.addOptionFlags(OptionFlag.INVULNERABLE);
+				break;
+		}
+	}
+	
+	private String [] createTemplateList(String templates) {
+		String [] templateList = templates.split(";");
+		for (int i = 0; i < templateList.length; ++i) {
+			templateList[i] = ClientFactory.formatToSharedFile("object/mobile/"+templateList[i]);
+		}
+		return templateList;
+	}
+	
+	private void removeSpawners() {
+		spawnerMap.values().forEach(spawner -> new DestroyObjectIntent(spawner.getSpawnerObject()).broadcast());
+		spawnerMap.clear();
+	}
+	
+	private Location behaviorLocation(Spawner spawner) {
+		Location aiLocation = spawner.getLocation();
+		
+		switch (spawner.getAIBehavior()) {
 			case FLOAT:
 				// Random location within float radius of spawner and 
 				int floatRadius = spawner.getFloatRadius();
 				int offsetX = randomBetween(0, floatRadius);
 				int offsetZ = randomBetween(0, floatRadius);
 				
-				object.setFloatRadius(floatRadius);
+				spawner.setFloatRadius(floatRadius);
 				aiLocation.setPosition(aiLocation.getX() + offsetX, aiLocation.getY(), aiLocation.getZ() + offsetZ);
 	
 				// Doesn't break here - FLOAT NPCs spawn with random heading
@@ -302,48 +356,7 @@ public final class SpawnerService extends Service {
 				break;
 		}
 		
-		object.setLocation(aiLocation);
-		
-		String moodAnimation = spawner.getMoodAnimation();
-		if (moodAnimation != null) {
-			object.setMoodAnimation(moodAnimation);
-		}
-		
-		if (spawnerObjectParent != null)
-			object.moveToContainer(spawnerObjectParent);
-		new ObjectCreatedIntent(object).broadcast();
-		return object;
-	}
-	
-	private void setFlags(CreatureObject creature, String flagString) {
-		switch (flagString) {
-			case "AGGRESSIVE":
-				creature.setPvpFlags(PvpFlag.AGGRESSIVE);
-				creature.addOptionFlags(OptionFlag.AGGRESSIVE);
-			case "ATTACKABLE":
-				creature.setPvpFlags(PvpFlag.ATTACKABLE);
-				creature.addOptionFlags(OptionFlag.HAM_BAR);
-				break;
-			case "INVULNERABLE":
-				creature.addOptionFlags(OptionFlag.INVULNERABLE);
-				break;
-			default:
-				Log.w("An unknown attackable type of %s was specified for %s", flagString, creature.getObjectName());
-				break;
-		}
-	}
-	
-	private String createTemplate(String template) {
-		if (template.indexOf('/') != -1) {
-			int ind = template.lastIndexOf('/');
-			return "object/mobile/" + template.substring(0, ind) + "/shared_" + template.substring(ind+1);
-		} else
-			return "object/mobile/shared_" + template;
-	}
-	
-	private void removeSpawners() {
-		spawnerMap.values().forEach(spawner -> new DestroyObjectIntent(spawner.getSpawnerObject()).broadcast());
-		spawnerMap.clear();
+		return aiLocation;
 	}
 	
 	/**

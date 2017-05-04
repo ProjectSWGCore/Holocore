@@ -27,11 +27,11 @@
 ***********************************************************************************/
 package network.packets.swg.zone;
 
-import network.packets.swg.SWGPacket;
-
-import java.nio.ByteBuffer;
 import java.util.EnumSet;
 
+import com.projectswg.common.network.NetBuffer;
+
+import network.packets.swg.SWGPacket;
 import resources.PvpFaction;
 import resources.PvpFlag;
 
@@ -54,29 +54,29 @@ public class UpdatePvpStatusMessage extends SWGPacket {
 		this.objId = objId;
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		EnumSet<PvpFlag> enumFlags = PvpFlag.getFlags(getInt(data));
+		EnumSet<PvpFlag> enumFlags = PvpFlag.getFlags(data.getInt());
 		
 		pvpFlags = enumFlags.toArray(new PvpFlag[enumFlags.size()]);
-		pvpFaction = PvpFaction.getFactionForCrc(getInt(data));
-		objId = getLong(data);
+		pvpFaction = PvpFaction.getFactionForCrc(data.getInt());
+		objId = data.getLong();
 	}
 	
-	public ByteBuffer encode() {
+	public NetBuffer encode() {
 		int length = 22;
 		int flagBitmask = 0;
-		ByteBuffer data = ByteBuffer.allocate(length);
+		NetBuffer data = NetBuffer.allocate(length);
 		
 		for(PvpFlag pvpFlag : pvpFlags)
 			flagBitmask |= pvpFlag.getBitmask();
 		
-		addShort(data, 4);
-		addInt(  data, CRC);
-		addInt(  data, flagBitmask);
-		addInt(  data, pvpFaction.getCrc());
-		addLong( data, objId);
+		data.addShort(4);
+		data.addInt(CRC);
+		data.addInt(flagBitmask);
+		data.addInt(pvpFaction.getCrc());
+		data.addLong(objId);
 		return data;
 	}
 	

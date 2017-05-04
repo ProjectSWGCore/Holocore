@@ -33,11 +33,17 @@ import java.lang.ref.SoftReference;
 import java.util.ArrayList;
 import java.util.List;
 
-import resources.objects.SWGObject;
-import resources.player.Player;
-import utilities.Encoder.StringType;
+import com.projectswg.common.debug.Log;
+import com.projectswg.common.encoding.StringType;
+import com.projectswg.common.network.NetBuffer;
+import com.projectswg.common.utilities.ByteUtilities;
+
 import network.packets.swg.zone.baselines.Baseline;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
+import resources.config.ConfigFile;
+import resources.objects.SWGObject;
+import resources.player.Player;
+import resources.server_info.DataManager;
 
 public class BaselineObject {
 	
@@ -180,7 +186,9 @@ public class BaselineObject {
 			baselineData.set(type-1, null);
 		}
 		DeltaBuilder builder = new DeltaBuilder((SWGObject) this, this.type, type, update, value);
-		builder.send();
+		boolean sent = builder.send();
+		if (sent && isDeltaLogging())
+			Log.v("Delta [type=%d, update=%d, value=%s] = %s", type, update, value, ByteUtilities.getHexString(builder.getEncodedData()));
 	}
 	
 	public final void sendDelta(int type, int update, Object value, StringType strType) {
@@ -189,7 +197,13 @@ public class BaselineObject {
 			baselineData.set(type-1, null);
 		}
 		DeltaBuilder builder = new DeltaBuilder((SWGObject) this, this.type, type, update, value, strType);
-		builder.send();
+		boolean sent = builder.send();
+		if (sent && isDeltaLogging())
+			Log.v("Delta %s: [type=%d, update=%d, value=%s, strType=%s] = %s", this, type, update, value, strType, ByteUtilities.getHexString(builder.getEncodedData()));
+	}
+	
+	private boolean isDeltaLogging() {
+		return DataManager.getConfig(ConfigFile.DEBUG).getBoolean("DEBUG-LOG-DELTA", false);
 	}
 	
 	private Baseline createBaseline(Player target, int num, BaselineCreator bc) {

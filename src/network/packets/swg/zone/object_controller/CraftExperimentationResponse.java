@@ -27,7 +27,7 @@
  ***********************************************************************************/
 package network.packets.swg.zone.object_controller;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 public class CraftExperimentationResponse extends ObjectController{
 	
@@ -44,26 +44,26 @@ public class CraftExperimentationResponse extends ObjectController{
 		this.staleFlag = staleFlag;
 	}
 
-	public CraftExperimentationResponse(ByteBuffer data) {
+	public CraftExperimentationResponse(NetBuffer data) {
 		super(CRC);
 		decode(data);
 	}
 	
 	@Override
-	public void decode(ByteBuffer data) {
+	public void decode(NetBuffer data) {
 		decodeHeader(data);
-		acknowledgeId = getInt(data);
-		stringId = getInt(data);
-		staleFlag = getByte(data);
+		acknowledgeId = data.getInt();
+		stringId = data.getInt();
+		staleFlag = data.getByte();
 	}
 
 	@Override
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + 9);
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(HEADER_LENGTH + 9);
 		encodeHeader(data);
-		addInt(data, acknowledgeId);
-		addInt(data, stringId);
-		addByte(data, staleFlag);
+		data.addInt(acknowledgeId);
+		data.addInt(stringId);
+		data.addByte(staleFlag);
 		return data;
 	}
 

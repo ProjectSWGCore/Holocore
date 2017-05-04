@@ -24,17 +24,13 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>
  ******************************************************************************/
-
 package network.packets.swg.zone.chat;
+
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 import resources.encodables.OutOfBandPackage;
 
-import java.nio.ByteBuffer;
-
-/**
- * @author Waverunner
- */
 public class ChatSendToRoom extends SWGPacket {
 	public static final int CRC = getCrc("ChatSendToRoom");
 
@@ -44,21 +40,27 @@ public class ChatSendToRoom extends SWGPacket {
 	private int sequence; // This seems to vary from room to room, client keeps track individually for each room?
 
 	@Override
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
 
-		message 			= getUnicode(data);
-		outOfBandPackage 	= getEncodable(data, OutOfBandPackage.class);
-		roomId 				= getInt(data);
-		sequence 			= getInt(data);
+		message 			= data.getUnicode();
+		outOfBandPackage 	= data.getEncodable(OutOfBandPackage.class);
+		roomId 				= data.getInt();
+		sequence 			= data.getInt();
 	}
 
 	@Override
-	public ByteBuffer encode() {
-		return super.encode();
+	public NetBuffer encode() {
+		byte [] oobRaw = outOfBandPackage.encode();
+		NetBuffer data = NetBuffer.allocate(12 + message.length()*2 + oobRaw.length);
+		data.addUnicode(message);
+		data.addRawArray(oobRaw);
+		data.addInt(roomId);
+		data.addInt(sequence);
+		return data;
 	}
-
+	
 	public String getMessage() {
 		return message;
 	}

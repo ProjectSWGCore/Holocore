@@ -27,10 +27,11 @@
 ***********************************************************************************/
 package network.packets.swg.zone.auction;
 
-import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 
@@ -52,40 +53,40 @@ public class GetAuctionDetailsResponse extends SWGPacket {
 		this.itemName = itemName;
 	}
 	
-	public GetAuctionDetailsResponse(ByteBuffer data) {
+	public GetAuctionDetailsResponse(NetBuffer data) {
 		decode(data);
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		itemId = getLong(data);
-		getInt(data);
-		int count = getInt(data);
+		itemId = data.getLong();
+		data.getInt();
+		int count = data.getInt();
 		for (int i = 0; i < count; i++) {
-			String key = getAscii(data);
-			String val = getUnicode(data);
+			String key = data.getAscii();
+			String val = data.getUnicode();
 			properties.put(key, val);
 		}
-		itemName = getAscii(data);
-		getShort(data); // 0
+		itemName = data.getAscii();
+		data.getShort(); // 0
 	}
 	
-	public ByteBuffer encode() {
+	public NetBuffer encode() {
 		int strSize = 0;
 		for (Entry <String, String> e : properties.entrySet())
 			strSize += 6 + e.getKey().length() + e.getValue().length()*2;
-		ByteBuffer data = ByteBuffer.allocate(18 + strSize);
-		addShort(data, 9);
-		addInt  (data, CRC);
-		addLong (data, itemId);
-		addInt  (data, properties.size());
+		NetBuffer data = NetBuffer.allocate(18 + strSize);
+		data.addShort(9);
+		data.addInt(CRC);
+		data.addLong(itemId);
+		data.addInt(properties.size());
 		for (Entry <String, String> e : properties.entrySet()) {
-			addAscii(data, e.getKey());
-			addUnicode(data, e.getValue());
+			data.addAscii(e.getKey());
+			data.addUnicode(e.getValue());
 		}
-		addAscii(data, itemName);
-		addShort(data, 0);
+		data.addAscii(itemName);
+		data.addShort(0);
 		return data;
 	}
 

@@ -27,27 +27,27 @@
 ***********************************************************************************/
 package network;
 
-import intents.network.ConnectionClosedIntent;
-import intents.network.ConnectionOpenedIntent;
-import intents.network.InboundPacketIntent;
-
 import java.io.EOFException;
 import java.net.SocketAddress;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import resources.control.Assert;
-import resources.network.NetBufferStream;
-import resources.server_info.Log;
-import services.network.HolocoreSessionManager;
-import services.network.NetworkProtocol;
-import services.network.PacketSender;
-import services.network.HolocoreSessionManager.ResponseAction;
-import utilities.IntentChain;
+import com.projectswg.common.control.IntentChain;
+import com.projectswg.common.debug.Assert;
+import com.projectswg.common.debug.Log;
+import com.projectswg.common.network.NetBufferStream;
+
+import intents.network.ConnectionClosedIntent;
+import intents.network.ConnectionOpenedIntent;
+import intents.network.InboundPacketIntent;
 import network.packets.Packet;
 import network.packets.swg.admin.AdminPacket;
 import network.packets.swg.holo.HoloConnectionStopped;
 import network.packets.swg.holo.HoloConnectionStopped.ConnectionStoppedReason;
+import services.network.HolocoreSessionManager;
+import services.network.HolocoreSessionManager.ResponseAction;
+import services.network.NetworkProtocol;
+import services.network.PacketSender;
 
 public class NetworkClient {
 	

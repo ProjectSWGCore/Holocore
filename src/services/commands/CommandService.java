@@ -27,74 +27,66 @@
 ***********************************************************************************/
 package services.commands;
 
+import java.util.List;
+import java.util.Locale;
+
+import com.projectswg.common.control.Service;
+import com.projectswg.common.data.CRC;
+import com.projectswg.common.data.swgfile.ClientFactory;
+import com.projectswg.common.data.swgfile.visitors.DatatableData;
+import com.projectswg.common.debug.Log;
+
 import intents.PlayerEventIntent;
-import intents.chat.ChatBroadcastIntent;
-import intents.chat.ChatCommandIntent;
 import intents.network.GalacticPacketIntent;
 import intents.player.PlayerTransformedIntent;
-import java.io.FileNotFoundException;
 import network.packets.Packet;
-import network.packets.swg.zone.object_controller.CommandQueueDequeue;
 import network.packets.swg.zone.object_controller.CommandQueueEnqueue;
-import resources.client_info.ClientFactory;
-import resources.client_info.visitors.DatatableData;
 import resources.combat.AttackType;
 import resources.combat.DamageType;
+import resources.combat.DelayAttackEggPosition;
+import resources.combat.HitType;
 import resources.combat.ValidTarget;
 import resources.commands.CombatCommand;
 import resources.commands.Command;
-import resources.commands.ICmdCallback;
-import resources.commands.callbacks.*;
-import resources.common.CRC;
-import resources.control.Service;
-import resources.encodables.ProsePackage;
-import resources.encodables.StringId;
-import resources.objects.SWGObject;
-import resources.objects.weapon.WeaponType;
-import resources.player.AccessLevel;
-import resources.player.Player;
-import resources.server_info.Log;
-import utilities.Scripts;
-import services.galaxy.GalacticManager;
-
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Queue;
-import java.util.Set;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.Executors;
-import java.util.concurrent.PriorityBlockingQueue;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-import network.packets.swg.zone.object_controller.CommandTimer;
-import resources.combat.DelayAttackEggPosition;
-import resources.combat.HitType;
 import resources.commands.DefaultPriority;
+import resources.commands.ICmdCallback;
+import resources.commands.callbacks.AdminTeleportCallback;
+import resources.commands.callbacks.AttributesCmdCallback;
+import resources.commands.callbacks.ChangeDanceCallback;
+import resources.commands.callbacks.FindFriendCallback;
+import resources.commands.callbacks.FlourishCmdCallback;
+import resources.commands.callbacks.GotoCmdCallback;
+import resources.commands.callbacks.JumpCmdCallback;
+import resources.commands.callbacks.KneelCmdCallback;
+import resources.commands.callbacks.PlayerAppearanceCallback;
+import resources.commands.callbacks.ProneCmdCallback;
+import resources.commands.callbacks.QaToolCmdCallback;
+import resources.commands.callbacks.RequestBiographyCmdCallback;
+import resources.commands.callbacks.RequestWaypointCmdCallback;
+import resources.commands.callbacks.RevertAppearanceCallback;
+import resources.commands.callbacks.ServerCmdCallback;
+import resources.commands.callbacks.ServerDestroyObjectCmdCallback;
+import resources.commands.callbacks.SitOnObjectCmdCallback;
+import resources.commands.callbacks.SocialInternalCmdCallback;
+import resources.commands.callbacks.StandCmdCallback;
+import resources.commands.callbacks.StartDanceCallback;
+import resources.commands.callbacks.TransferItemCallback;
+import resources.commands.callbacks.WaypointCmdCallback;
+import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
-import resources.server_info.SynchronizedMap;
-import utilities.ThreadUtilities;
-
+import resources.objects.weapon.WeaponType;
+import resources.player.Player;
+import services.commands.CommandLauncher.EnqueuedCommand;
+import services.galaxy.GalacticManager;
 
 public class CommandService extends Service {
 	
-	private final Map <Integer, Command>			commands;			// NOTE: CRC's are all lowercased for commands!
-	private final Map <String, Integer>				commandCrcLookup;
-	private final Map <String, List<Command>>		commandByScript;
-	private final Map <Player, BlockingQueue<QueuedCommand>>		combatQueueMap;
-	private final Map <CreatureObject, Set<String>>			cooldownMap;
-	private final ScheduledExecutorService executorService;
+	private final CommandContainer					commandContainer;
+	private final CommandLauncher					commandLauncher;
 	
 	public CommandService() {
-		commands = new HashMap<>();
-		commandCrcLookup = new HashMap<>();
-		commandByScript = new HashMap<>();
-		combatQueueMap = new SynchronizedMap<>();
-		cooldownMap = new HashMap<>();
-		executorService = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("command-service"));
+		this.commandContainer = new CommandContainer();
+		this.commandLauncher = new CommandLauncher();
 		
 		registerForIntent(GalacticPacketIntent.class, gpi -> handleGalacticPacketIntent(gpi));
 		registerForIntent(PlayerEventIntent.class, pei -> handlePlayerEventIntent(pei));
@@ -106,15 +98,13 @@ public class CommandService extends Service {
 		loadBaseCommands();
 		loadCombatCommands();
 		registerCallbacks();
-		
-		executorService.scheduleAtFixedRate(() -> pollQueues(), 1, 1, TimeUnit.SECONDS);
-		
+		commandLauncher.start();
 		return super.initialize();
 	}
-
+	
 	@Override
 	public boolean terminate() {
-		executorService.shutdown();
+		commandLauncher.stop();
 		return super.terminate();
 	}
 	
@@ -127,11 +117,11 @@ public class CommandService extends Service {
 	}
 	
 	private void handlePlayerEventIntent(PlayerEventIntent pei) {
-		switch(pei.getEvent()) {
+		switch (pei.getEvent()) {
 			case PE_LOGGED_OUT:
 				// No reason to keep their combat queue in the map if they log out
 				// This also prevents queued commands from executing after the player logs out
-				combatQueueMap.remove(pei.getPlayer());
+				commandLauncher.removePlayerFromQueue(pei.getPlayer());
 				break;
 			default:
 				break;
@@ -140,210 +130,70 @@ public class CommandService extends Service {
 	
 	private void handlePlayerTransformedIntent(PlayerTransformedIntent pti) {
 		CreatureObject creature = pti.getPlayer();
-
+		
 		if (creature.isPerforming()) {
 			// A performer can transform while dancing...
 			return;
 		}
-
-		Player player = creature.getOwner();
-		Queue<QueuedCommand> combatQueue = combatQueueMap.get(player);
-
-		if (combatQueue != null) {
-			combatQueue.clear();
-		}
+		
+		commandLauncher.removePlayerFromQueue(creature.getOwner());
 	}
 	
 	private void handleCommandRequest(Player player, GalacticManager galacticManager, CommandQueueEnqueue request) {
-		if (!commandExists(request.getCommandCrc())) {
+		if (!commandContainer.isCommand(request.getCommandCrc())) {
 			if (request.getCommandCrc() != 0)
 				Log.e("Invalid command crc: %x", request.getCommandCrc());
 			return;
 		}
 		
-		Command command = getCommand(request.getCommandCrc());
+		Command command = commandContainer.getCommand(request.getCommandCrc());
 		// TODO target and target type checks below. Work with Set<TangibleObject> targets from there
 		long targetId = request.getTargetId();
-		final SWGObject target = targetId != 0 ? galacticManager.getObjectManager().getObjectById(targetId) : null;
+		SWGObject target = targetId != 0 ? galacticManager.getObjectManager().getObjectById(targetId) : null;
 		
+		EnqueuedCommand enqueued = new EnqueuedCommand(command, galacticManager, target, request);
 		if (!command.getCooldownGroup().equals("defaultCooldownGroup") && command.isAddToCombatQueue()) {
-			// Schedule for later execution
-			BlockingQueue<QueuedCommand> combatQueue = combatQueueMap.get(player);
-
-			if (combatQueue == null) {
-				combatQueue = new PriorityBlockingQueue<>();	// Has natural ordering. QueuedCommand implements Comparable for this purpose.
-				combatQueueMap.put(player, combatQueue);
-			}
-
-			if (!combatQueue.offer(new QueuedCommand(command, galacticManager, target, request))) {
-				// Ziggy: Shouldn't happen, unless the Queue implementation is changed
-				Log.e("Unable to enqueue command %s from %s because the combat queue is full", command.getName(), player.getCreatureObject());
-			}
+			commandLauncher.addToQueue(player, enqueued);
 		} else {
 			// Execute it now
-			doCommand(galacticManager, player, command, target, request);
+			commandLauncher.doCommand(player, enqueued);
 		}
-	}
-	
-	private void pollQueues() {
-		// Takes the head of each queue and executes the command
-		combatQueueMap.forEach((player, combatQueue) -> {
-			QueuedCommand queueHead = combatQueue.poll();
-
-			if (queueHead != null) { // Can be null if the combat queue is empty
-				doCommand(queueHead.getGalacticManager(), player, queueHead.getCommand(), queueHead.getTarget(), queueHead.getRequest());
-			}
-		});
-	}
-	
-	private void doCommand(GalacticManager galacticManager, Player player, Command command, SWGObject target, CommandQueueEnqueue request) {
-		CreatureObject creature = player.getCreatureObject();
-		// TODO implement locomotion and state checks up here. See action and error in CommandQueueDequeue!
-		
-		// TODO target and targetType checks
-		
-		// Let's check if this ability is on cooldown
-		String cooldownGroup = command.getCooldownGroup();
-		String cooldownGroup2 = command.getCooldownGroup2();
-		
-		synchronized (cooldownMap) {
-			Set<String> cooldowns = cooldownMap.get(creature);
-
-			if (cooldowns == null) {
-				// This is the first time they're using a cooldown command
-				cooldowns = new HashSet<>();
-				cooldownMap.put(creature, cooldowns);
-			} else if (cooldowns.contains(cooldownGroup) || cooldowns.contains(cooldownGroup2)) {
-				// This ability is currently on cooldown
-				sendCommandDequeue(player, command, request, 0, 0);
-				return;
-			}
-		}
-		
-		sendCommandDequeue(player, command, request, 0, 0);
-		
-		String argumentString = request.getArguments();
-		String[] arguments = argumentString.split(" ");
-		executeCommand(galacticManager, player, command, target, argumentString);
-		new ChatCommandIntent(creature, target, command, arguments).broadcast();
-		
-		// TODO custom cooldown times. Scripts might be a good idea.
-		
-		startCooldownGroup(creature, request.getCounter(), command.getCrc(), cooldownGroup, command.getCooldownTime());
-		startCooldownGroup(creature, request.getCounter(), command.getCrc(), cooldownGroup2, command.getCooldownTime2());
-	}
-	
-	private void sendCommandDequeue(Player player, Command command, CommandQueueEnqueue request, int action, int error) {
-		CommandQueueDequeue dequeue = new CommandQueueDequeue(player.getCreatureObject().getObjectId());
-		dequeue.setCounter(request.getCounter());
-		dequeue.setAction(action);
-		dequeue.setError(error);
-		dequeue.setTimer(command.getExecuteTime());
-		player.sendPacket(dequeue);
-	}
-	
-	private void startCooldownGroup(CreatureObject creature, int sequenceId, int commandNameCrc, String cooldownGroup, float cooldownTime) {
-		if(!cooldownGroup.isEmpty() && !cooldownGroup.equals("defaultCooldownGroup")) {
-			synchronized(cooldownMap) {
-				if(cooldownMap.get(creature).add(cooldownGroup)) {
-					CommandTimer commandTimer = new CommandTimer(creature.getObjectId());
-					commandTimer.setCooldownGroupCrc(CRC.getCrc(cooldownGroup));
-					commandTimer.setCooldownMax(cooldownTime);
-					commandTimer.setCommandNameCrc(commandNameCrc);
-					commandTimer.setSequenceId(sequenceId);
-					creature.sendSelf(commandTimer);
-					
-					executorService.schedule(() -> removeCooldown(creature, cooldownGroup), (long) (cooldownTime * 1000), TimeUnit.MILLISECONDS);
-				}
-			}
-		}
-	}
-	
-	private void removeCooldown(CreatureObject creature, String cooldownGroup) {
-		synchronized (cooldownMap) {
-			Set<String> cooldownGroups = cooldownMap.get(creature);
-			if (cooldownGroups.remove(cooldownGroup)) {
-				
-			} else {
-				Log.w("%s doesn't have cooldown group %s!", creature, cooldownGroup);
-			}
-		}
-	}
-	
-	private void executeCommand(GalacticManager galacticManager, Player player, Command command, SWGObject target, String args) {
-		if (player.getCreatureObject() == null) {
-			Log.e("No creature object associated with the player '%s'!", player.getUsername());
-			return;
-		}
-
-		if(player.getAccessLevel().getValue() < command.getGodLevel()) {
-			String commandAccessLevel = AccessLevel.getFromValue(command.getGodLevel()).toString();
-			String playerAccessLevel = player.getAccessLevel().toString();
-			Log.i("[%s] attempted to use the command \"%s\", but did not have the minimum access level. Access Level Required: %s, Player Access Level: %s",
-					player.getCharacterName(), command.getName(), commandAccessLevel, playerAccessLevel);
-			String errorProseString1 = "use that command";
-			new ChatBroadcastIntent(player, new ProsePackage("StringId", new StringId("cmd_err", "state_must_have_prose"), "TO", errorProseString1, "TU", commandAccessLevel)).broadcast();
-			return;
-		}
-
-		if(!command.getCharacterAbility().isEmpty() && !player.getCreatureObject().hasAbility(command.getCharacterAbility())){
-			Log.i("[%s] attempted to use the command \"%s\", but did not have the required ability. Ability Required: %s",
-					player.getCharacterName(), command.getName(), command.getCharacterAbility());
-			String errorProseString = String.format("use the %s command", command.getName());
-			new ChatBroadcastIntent(player, new ProsePackage("StringId", new StringId("cmd_err", "ability_prose"), "TO", errorProseString)).broadcast();
-			return;
-		}
-
-		// TODO: Check if the player has the ability
-		// TODO: Cool-down checks
-		// TODO: Handle for different target
-		// TODO: Handle for different targetType
-		
-		if (command.hasJavaCallback()) {
-			try {
-				command.getJavaCallback().newInstance().execute(galacticManager, player, target, args);
-			} catch (InstantiationException | IllegalAccessException e) {
-				Log.e(e);
-			}
-		}
-		else
-			try {
-				Scripts.invoke("commands/generic/" + command.getDefaultScriptCallback(), "executeCommand", galacticManager, player, target, args);
-			} catch (FileNotFoundException ex) {
-			}
 	}
 	
 	private void loadBaseCommands() {
 		// First = Higher Priority, Last = Lower Priority ---- Some tables contain duplicates, ORDER MATTERS!
-		final String [] commandTables = new String [] {
-			"command_table", "command_table_ground", "client_command_table",
-			"command_table_space", "client_command_table_ground", "client_command_table_space"
+		String [] commandTables = new String[] {
+				"command_table", "command_table_ground", "client_command_table",
+				"command_table_space", "client_command_table_ground", "client_command_table_space"
 		};
 		
-		clearCommands();
+		commandContainer.clearCommands();
 		for (String table : commandTables) {
 			loadBaseCommands(table);
 		}
 	}
 	
 	private void loadBaseCommands(String table) {
-		DatatableData baseCommands = (DatatableData) ClientFactory.getInfoFromFile("datatables/command/"+table+".iff");
-
+		DatatableData baseCommands = (DatatableData) ClientFactory.getInfoFromFile("datatables/command/" + table + ".iff");
+		
 		int godLevel = baseCommands.getColumnFromName("godLevel");
 		int cooldownGroup = baseCommands.getColumnFromName("cooldownGroup");
 		int cooldownGroup2 = baseCommands.getColumnFromName("cooldownGroup2");
 		int cooldownTime = baseCommands.getColumnFromName("cooldownTime");
 		int cooldownTime2 = baseCommands.getColumnFromName("cooldownTime2");
-
+		
 		for (int row = 0; row < baseCommands.getRowCount(); row++) {
-			Object [] cmdRow = baseCommands.getRow(row);
+			Object[] cmdRow = baseCommands.getRow(row);
 			String commandName = ((String) cmdRow[0]).toLowerCase(Locale.ENGLISH);
+			if (commandContainer.isCommand(commandName))
+				continue; // skip duplicates - first is higher priority
+			
 			Command command = new Command(commandName);
 			
 			command.setCrc(CRC.getCrc(commandName));
 			command.setDefaultPriority(DefaultPriority.getDefaultPriority((int) cmdRow[1]));
 			command.setScriptHook((String) cmdRow[2]);
-			command.setCppHook((String)cmdRow[4]);
+			command.setCppHook((String) cmdRow[4]);
 			command.setDefaultTime((float) cmdRow[6]);
 			command.setCharacterAbility((String) cmdRow[7]);
 			command.setCombatCommand(false);
@@ -353,20 +203,20 @@ public class CommandService extends Service {
 			command.setCooldownTime2((float) cmdRow[cooldownTime2]);
 			
 			// Ziggy: The amount of columns in the table seems to change for each row
-			if(cmdRow.length >= 83) {
+			if (cmdRow.length >= 83) {
 				Object addToCombatQueue = cmdRow[82];
-
+				
 				// Ziggy: Sometimes this column contains a String... uwot SOE?
-				if(addToCombatQueue instanceof Boolean) {
+				if (addToCombatQueue instanceof Boolean) {
 					command.setAddToCombatQueue((Boolean) addToCombatQueue);
 				}
 			}
 			
-			if(godLevel >= 0){ 
+			if (godLevel >= 0) {
 				command.setGodLevel((int) cmdRow[godLevel]);
 			}
 			
-			addCommand(command);
+			commandContainer.addCommand(command);
 		}
 	}
 	
@@ -412,17 +262,17 @@ public class CommandService extends Service {
 		int delayAttackLoops = combatCommands.getColumnFromName("delayAttackLoops");
 		int delayAttackEggPosition = combatCommands.getColumnFromName("delayAttackEggPosition");
 		int coneLength = combatCommands.getColumnFromName("coneLength");
-		// animDefault	anim_unarmed	anim_onehandmelee	anim_twohandmelee	anim_polearm
-		// anim_pistol	anim_lightRifle	anim_carbine	anim_rifle	anim_heavyweapon
-		// anim_thrown	anim_onehandlightsaber	anim_twohandlightsaber	anim_polearmlightsaber
+		// animDefault anim_unarmed anim_onehandmelee anim_twohandmelee anim_polearm
+		// anim_pistol anim_lightRifle anim_carbine anim_rifle anim_heavyweapon
+		// anim_thrown anim_onehandlightsaber anim_twohandlightsaber anim_polearmlightsaber
 		for (int row = 0; row < combatCommands.getRowCount(); row++) {
-			Object [] cmdRow = combatCommands.getRow(row);
+			Object[] cmdRow = combatCommands.getRow(row);
 			
-			Command c = commands.get(CRC.getCrc(((String) cmdRow[0]).toLowerCase(Locale.ENGLISH)));
+			Command c = commandContainer.getCommand(CRC.getCrc(((String) cmdRow[0]).toLowerCase(Locale.ENGLISH)));
 			if (c == null)
 				continue;
 			CombatCommand cc = createAsCombatCommand(c);
-			commands.remove(c.getCrc());
+			commandContainer.removeCommand(c);
 			cc.setValidTarget(ValidTarget.getValidTarget((Integer) cmdRow[validTarget]));
 			cc.setForceCombat(((int) cmdRow[forceCombat]) != 0);
 			cc.setAttackType(AttackType.getAttackType((Integer) cmdRow[attackType]));
@@ -446,24 +296,24 @@ public class CommandService extends Service {
 			cc.setDelayAttackLoops((int) cmdRow[delayAttackLoops]);
 			cc.setEggPosition(DelayAttackEggPosition.getEggPosition((int) cmdRow[delayAttackEggPosition]));
 			cc.setConeLength((float) cmdRow[coneLength]);
-			cc.setAnimations(WeaponType.UNARMED, getAnimationList((String) cmdRow[animDefault+1]));
-			cc.setAnimations(WeaponType.ONE_HANDED_MELEE, getAnimationList((String) cmdRow[animDefault+2]));
-			cc.setAnimations(WeaponType.TWO_HANDED_MELEE, getAnimationList((String) cmdRow[animDefault+3]));
-			cc.setAnimations(WeaponType.POLEARM_MELEE, getAnimationList((String) cmdRow[animDefault+4]));
-			cc.setAnimations(WeaponType.POLEARM_MELEE, getAnimationList((String) cmdRow[animDefault+5]));
-			cc.setAnimations(WeaponType.PISTOL, getAnimationList((String) cmdRow[animDefault+6]));
-			cc.setAnimations(WeaponType.LIGHT_RIFLE, getAnimationList((String) cmdRow[animDefault+7]));
-			cc.setAnimations(WeaponType.CARBINE, getAnimationList((String) cmdRow[animDefault+8]));
-			cc.setAnimations(WeaponType.RIFLE, getAnimationList((String) cmdRow[animDefault+9]));
-			cc.setAnimations(WeaponType.THROWN, getAnimationList((String) cmdRow[animDefault+10]));
-			cc.setAnimations(WeaponType.ONE_HANDED_SABER, getAnimationList((String) cmdRow[animDefault+11]));
-			cc.setAnimations(WeaponType.TWO_HANDED_SABER, getAnimationList((String) cmdRow[animDefault+12]));
-			cc.setAnimations(WeaponType.POLEARM_SABER, getAnimationList((String) cmdRow[animDefault+13]));
-			addCommand(cc);
+			cc.setAnimations(WeaponType.UNARMED, getAnimationList((String) cmdRow[animDefault + 1]));
+			cc.setAnimations(WeaponType.ONE_HANDED_MELEE, getAnimationList((String) cmdRow[animDefault + 2]));
+			cc.setAnimations(WeaponType.TWO_HANDED_MELEE, getAnimationList((String) cmdRow[animDefault + 3]));
+			cc.setAnimations(WeaponType.POLEARM_MELEE, getAnimationList((String) cmdRow[animDefault + 4]));
+			cc.setAnimations(WeaponType.POLEARM_MELEE, getAnimationList((String) cmdRow[animDefault + 5]));
+			cc.setAnimations(WeaponType.PISTOL, getAnimationList((String) cmdRow[animDefault + 6]));
+			cc.setAnimations(WeaponType.LIGHT_RIFLE, getAnimationList((String) cmdRow[animDefault + 7]));
+			cc.setAnimations(WeaponType.CARBINE, getAnimationList((String) cmdRow[animDefault + 8]));
+			cc.setAnimations(WeaponType.RIFLE, getAnimationList((String) cmdRow[animDefault + 9]));
+			cc.setAnimations(WeaponType.THROWN, getAnimationList((String) cmdRow[animDefault + 10]));
+			cc.setAnimations(WeaponType.ONE_HANDED_SABER, getAnimationList((String) cmdRow[animDefault + 11]));
+			cc.setAnimations(WeaponType.TWO_HANDED_SABER, getAnimationList((String) cmdRow[animDefault + 12]));
+			cc.setAnimations(WeaponType.POLEARM_SABER, getAnimationList((String) cmdRow[animDefault + 13]));
+			commandContainer.addCommand(cc);
 		}
 	}
 	
-	private String [] getAnimationList(String cell) {
+	private String[] getAnimationList(String cell) {
 		if (cell.isEmpty())
 			return new String[0];
 		return cell.split(",");
@@ -471,11 +321,11 @@ public class CommandService extends Service {
 	
 	private <T extends ICmdCallback> Command registerCallback(String command, Class<T> callback) {
 		command = command.toLowerCase(Locale.ENGLISH);
-		Command comand = getCommand(command);
+		Command comand = commandContainer.getCommand(command);
 		registerCallback(comand, callback);
 		return comand;
 	}
-
+	
 	private <T extends ICmdCallback> void registerCallback(Command command, Class<T> callback) {
 		try {
 			if (callback.getConstructor() == null)
@@ -484,18 +334,17 @@ public class CommandService extends Service {
 			Log.e(e);
 		}
 		command.setJavaCallback(callback);
-
-		List<Command> scriptCommands = getCommandsByScript(command.getDefaultScriptCallback());
-		for(Command unregistered : scriptCommands){
-			if(unregistered != command && !unregistered.hasJavaCallback()){
+		
+		List<Command> scriptCommands = commandContainer.getScriptCommandList(command.getDefaultScriptCallback());
+		for (Command unregistered : scriptCommands) {
+			if (unregistered != command && !unregistered.hasJavaCallback()) {
 				registerCallback(unregistered, command.getJavaCallback());
 			}
 		}
-
+		
 	}
 	
 	private void registerCallbacks() {
-
 		registerCallback("waypoint", WaypointCmdCallback.class);
 		registerCallback("requestWaypointAtPosition", RequestWaypointCmdCallback.class);
 		registerCallback("server", ServerCmdCallback.class);
@@ -522,96 +371,4 @@ public class CommandService extends Service {
 		registerCallback("transferItemWeapon", TransferItemCallback.class);
 	}
 	
-	private void clearCommands() {
-		synchronized (commands) {
-			commands.clear();
-		}
-		synchronized (commandCrcLookup) {
-			commandCrcLookup.clear();
-		}
-	}
-	
-	private Command getCommand(String name) {
-		synchronized (commandCrcLookup) {
-			return getCommand(commandCrcLookup.get(name));
-		}
-	}
-
-	private List<Command> getCommandsByScript(String script) {
-		synchronized (commandByScript){
-			return commandByScript.get(script);
-		}
-	}
-	
-	private Command getCommand(int crc) {
-		synchronized (commands) {
-			return commands.get(crc);
-		}
-	}
-	
-	private boolean commandExists(int crc) {
-		synchronized (commands) {
-			return commands.containsKey(crc);
-		}
-	}
-	
-	private boolean addCommand(Command command) {
-		if (commands.containsKey(command.getCrc()))
-			return false;
-
-		synchronized (commands) {
-			commands.put(command.getCrc(), command);
-		}
-		synchronized (commandCrcLookup) {
-			commandCrcLookup.put(command.getName(), command.getCrc());
-		}
-		synchronized (commandByScript){
-			String script = command.getDefaultScriptCallback();
-			List<Command> commands = commandByScript.get(script);
-
-			if(commands == null){
-				commands = new LinkedList<>();
-				commandByScript.put(script, commands);
-			}
-			commands.add(command);
-		}
-		return true;
-	}
-	
-	private static class QueuedCommand implements Comparable<QueuedCommand> {
-
-		private final Command command;
-		private final GalacticManager galacticManager;
-		private final SWGObject target;
-		private final CommandQueueEnqueue request;
-
-		public QueuedCommand(Command command, GalacticManager galacticManager, SWGObject target, CommandQueueEnqueue request) {
-			this.command = command;
-			this.galacticManager = galacticManager;
-			this.target = target;
-			this.request = request;
-		}
-		
-		@Override
-		public int compareTo(QueuedCommand o) {
-			return command.getDefaultPriority().compareTo(o.getCommand().getDefaultPriority());
-		}
-
-		public Command getCommand() {
-			return command;
-		}
-
-		public GalacticManager getGalacticManager() {
-			return galacticManager;
-		}
-
-		public SWGObject getTarget() {
-			return target;
-		}
-
-		public CommandQueueEnqueue getRequest() {
-			return request;
-		}
-		
-	}
 }

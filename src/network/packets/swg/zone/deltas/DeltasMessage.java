@@ -27,73 +27,106 @@
 ***********************************************************************************/
 package network.packets.swg.zone.deltas;
 
+import com.projectswg.common.network.NetBuffer;
+
 import network.packets.swg.SWGPacket;
 import network.packets.swg.zone.baselines.Baseline.BaselineType;
 
-import java.nio.ByteBuffer;
-
 public class DeltasMessage extends SWGPacket {
+	
 	public static final int CRC = getCrc("DeltasMessage");
 	
 	private long objId;
 	private BaselineType type;
 	private int num;
-	private byte [] deltaData;
+	private byte[] deltaData;
 	private int update;
 	
-	public DeltasMessage() { }
+	public DeltasMessage() {
+		
+	}
 	
-	public DeltasMessage(long objId, BaselineType type, int typeNumber, byte [] data) {
+	public DeltasMessage(long objId, BaselineType type, int typeNumber, int update, byte[] data) {
 		this.objId = objId;
 		this.type = type;
+		this.update = update;
 		this.num = typeNumber;
 		this.deltaData = data;
 	}
 	
-	public DeltasMessage(ByteBuffer data) {
+	public DeltasMessage(NetBuffer data) {
 		decode(data);
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	@Override
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		objId = getLong(data);
-		byte [] str = new byte[4]; data.get(str);
-		String strType = new StringBuffer(new String(str, ascii)).reverse().toString();
-		for (BaselineType baseType : BaselineType.values())
-			if (baseType.toString().equals(strType))
-				type = baseType;
-		num = getByte(data);
-		int length = getInt(data);
-		this.deltaData = getArray(data, length);
-		data = ByteBuffer.wrap(deltaData);
-		getShort(data);
-		update = getShort(data);
+		objId = data.getLong();
+		type = BaselineType.valueOf(reverse(new String(data.getArray(4), ascii)));
+		num = data.getByte();
+		NetBuffer deltaDataBuffer = NetBuffer.wrap(data.getArrayLarge());
+		deltaDataBuffer.getShort();
+		update = deltaDataBuffer.getShort();
+		deltaData = deltaDataBuffer.getArray(deltaDataBuffer.remaining());
 	}
 	
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(27 + deltaData.length);
-		addShort(data, 5);
-		addInt(  data, CRC);
-		addLong(data, objId);
-		data.put(new StringBuffer(type.toString()).reverse().toString().getBytes(ascii));
-		addByte(data, num);
-		addInt(data, deltaData.length + 4);
-		addShort(data, 1); // TODO: How many updates there is (1 always for now until a queue system is built
-		addShort(data, update);
-		data.put(deltaData);
+	@Override
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(27 + deltaData.length);
+		data.addShort(5);
+		data.addInt(CRC);
+		data.addLong(objId);
+		data.addRawArray(reverse(type.toString()).getBytes(ascii));
+		data.addByte(num);
+		data.addInt(deltaData.length + 4);
+		data.addShort(1); // updates - only 1 cause we're boring
+		data.addShort(update);
+		data.addRawArray(deltaData);
 		return data;
 	}
 	
-	public long getObjectId() { return objId; }
-	public BaselineType getType() { return type; }
-	public int getNum() { return num; }
-	public int getUpdate() { return update; }
-	public byte [] getDeltaData() { return deltaData; }
+	public long getObjectId() {
+		return objId;
+	}
 	
-	public void setType(BaselineType type) { this.type = type; }
-	public void setNum(int num) { this.num = num; }
-	public void setId(long id) { this.objId = id; }
-	public void setData(byte[] data) { this.deltaData = data; }
-	public void setUpdate(int update) { this.update = update; }
+	public BaselineType getType() {
+		return type;
+	}
+	
+	public int getNum() {
+		return num;
+	}
+	
+	public int getUpdate() {
+		return update;
+	}
+	
+	public byte[] getDeltaData() {
+		return deltaData;
+	}
+	
+	public void setType(BaselineType type) {
+		this.type = type;
+	}
+	
+	public void setNum(int num) {
+		this.num = num;
+	}
+	
+	public void setId(long id) {
+		this.objId = id;
+	}
+	
+	public void setData(byte[] data) {
+		this.deltaData = data;
+	}
+	
+	public void setUpdate(int update) {
+		this.update = update;
+	}
+	
+	private String reverse(String str) {
+		return new StringBuffer(str).reverse().toString();
+	}
 }

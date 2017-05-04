@@ -27,10 +27,6 @@
  ***********************************************************************************/
 package services.chat;
 
-import intents.PlayerEventIntent;
-import intents.chat.PersistentMessageIntent;
-import intents.network.GalacticPacketIntent;
-
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Date;
@@ -39,6 +35,14 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.atomic.AtomicReference;
 
+import com.projectswg.common.control.Service;
+import com.projectswg.common.data.info.RelationalServerData;
+import com.projectswg.common.data.info.RelationalServerFactory;
+import com.projectswg.common.debug.Log;
+
+import intents.PlayerEventIntent;
+import intents.chat.PersistentMessageIntent;
+import intents.network.GalacticPacketIntent;
 import network.packets.Packet;
 import network.packets.swg.SWGPacket;
 import network.packets.swg.zone.chat.ChatDeletePersistentMessage;
@@ -47,16 +51,12 @@ import network.packets.swg.zone.chat.ChatPersistentMessageToClient;
 import network.packets.swg.zone.chat.ChatPersistentMessageToServer;
 import network.packets.swg.zone.chat.ChatRequestPersistentMessage;
 import resources.chat.ChatResult;
-import resources.control.Service;
 import resources.encodables.player.Mail;
 import resources.objects.SWGObject;
 import resources.objects.player.PlayerObject;
 import resources.player.Player;
 import resources.server_info.CachedObjectDatabase;
-import resources.server_info.Log;
 import resources.server_info.ObjectDatabase;
-import resources.server_info.RelationalServerData;
-import resources.server_info.RelationalServerFactory;
 import services.CoreManager;
 import services.chat.ChatManager.ChatRange;
 import services.chat.ChatManager.ChatType;
@@ -243,10 +243,10 @@ public class ChatMailService extends Service {
 		
 		switch (requestType) {
 			case FULL_MESSAGE:
-				packet = new ChatPersistentMessageToClient(mail, galaxy, false);
+				packet = new ChatPersistentMessageToClient(mail, false);
 				break;
 			case HEADER_ONLY:
-				packet = new ChatPersistentMessageToClient(mail, galaxy, true);
+				packet = new ChatPersistentMessageToClient(mail, true);
 				break;
 		}
 		

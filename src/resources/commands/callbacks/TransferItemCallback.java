@@ -28,9 +28,10 @@
  */
 package resources.commands.callbacks;
 
+import com.projectswg.common.debug.Assert;
+
 import intents.chat.ChatBroadcastIntent;
 import resources.commands.ICmdCallback;
-import resources.control.Assert;
 import resources.objects.GameObjectType;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;

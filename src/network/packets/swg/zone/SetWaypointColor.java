@@ -27,9 +27,9 @@
 ***********************************************************************************/
 package network.packets.swg.zone;
 
-import network.packets.swg.SWGPacket;
+import com.projectswg.common.network.NetBuffer;
 
-import java.nio.ByteBuffer;
+import network.packets.swg.SWGPacket;
 
 public class SetWaypointColor extends SWGPacket {
 	public static final int CRC = getCrc("SetWaypointColor");
@@ -40,21 +40,21 @@ public class SetWaypointColor extends SWGPacket {
 	public SetWaypointColor() { }
 	
 	@Override
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
 		
-		objId = getLong(data);
-		color = getAscii(data);
+		objId = data.getLong();
+		color = data.getAscii();
 	}
 	
 	@Override
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(16 + color.length());
-		addShort(data, 3);
-		addInt(data, CRC);
-		addLong(data, objId);
-		addAscii(data, color);
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(16 + color.length());
+		data.addShort(3);
+		data.addInt(CRC);
+		data.addLong(objId);
+		data.addAscii(color);
 		return data;
 	}
 

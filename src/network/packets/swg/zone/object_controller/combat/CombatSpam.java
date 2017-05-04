@@ -27,15 +27,14 @@
  ***********************************************************************************/
 package network.packets.swg.zone.object_controller.combat;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.data.location.Point3D;
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.zone.object_controller.ObjectController;
-import resources.Point3D;
 import resources.combat.AttackInfo;
 import resources.combat.DamageType;
 import resources.combat.HitLocation;
 import resources.encodables.StringId;
-import resources.network.NetBuffer;
 import resources.objects.SWGObject;
 import resources.objects.creature.CreatureObject;
 
@@ -59,66 +58,66 @@ public class CombatSpam extends ObjectController {
 		super(objectId, CRC);
 	}
 	
-	public CombatSpam(ByteBuffer data) {
+	public CombatSpam(NetBuffer data) {
 		super(CRC);
 		decode(data);
 	}
 	
 	@Override
-	public void decode(ByteBuffer data) {
+	public void decode(NetBuffer data) {
 		decodeHeader(data);
 		info = new AttackInfo();
-		dataType = getByte(data);
-		attacker = getLong(data);
-		attackerPosition = getEncodable(data, Point3D.class);
-		defender = getLong(data);
-		defenderPosition = getEncodable(data, Point3D.class);
+		dataType = data.getByte();
+		attacker = data.getLong();
+		attackerPosition = data.getEncodable(Point3D.class);
+		defender = data.getLong();
+		defenderPosition = data.getEncodable(Point3D.class);
 		if (isAttackDataWeaponObject(dataType) || isAttackWeaponName(dataType)) {
 			if (isAttackDataWeaponObject(dataType))
-				weapon = getLong(data);
+				weapon = data.getLong();
 			else
-				weaponName = getEncodable(data, StringId.class);
-			attackName = getEncodable(data, StringId.class);
-			info.setSuccess(getBoolean(data));
+				weaponName = data.getEncodable(StringId.class);
+			attackName = data.getEncodable(StringId.class);
+			info.setSuccess(data.getBoolean());
 			if (info.isSuccess()) {
-				info.setArmor(getLong(data));
-				info.setRawDamage(getInt(data));
-				info.setDamageType(DamageType.getDamageType(getInt(data)));
-				info.setElementalDamage(getInt(data));
-				info.setElementalDamageType(DamageType.getDamageType(getInt(data)));
-				info.setBleedDamage(getInt(data));
-				info.setCriticalDamage(getInt(data));
-				info.setBlockedDamage(getInt(data));
-				info.setFinalDamage(getInt(data));
-				info.setHitLocation(HitLocation.getHitLocation(getInt(data)));
-				info.setCrushing(getBoolean(data));
-				info.setStrikethrough(getBoolean(data));
-				info.setStrikethroughAmount(getFloat(data));
-				info.setEvadeResult(getBoolean(data));
-				info.setEvadeAmount(getFloat(data));
-				info.setBlockResult(getBoolean(data));
-				info.setBlock(getInt(data));
+				info.setArmor(data.getLong());
+				info.setRawDamage(data.getInt());
+				info.setDamageType(DamageType.getDamageType(data.getInt()));
+				info.setElementalDamage(data.getInt());
+				info.setElementalDamageType(DamageType.getDamageType(data.getInt()));
+				info.setBleedDamage(data.getInt());
+				info.setCriticalDamage(data.getInt());
+				info.setBlockedDamage(data.getInt());
+				info.setFinalDamage(data.getInt());
+				info.setHitLocation(HitLocation.getHitLocation(data.getInt()));
+				info.setCrushing(data.getBoolean());
+				info.setStrikethrough(data.getBoolean());
+				info.setStrikethroughAmount(data.getFloat());
+				info.setEvadeResult(data.getBoolean());
+				info.setEvadeAmount(data.getFloat());
+				info.setBlockResult(data.getBoolean());
+				info.setBlock(data.getInt());
 			} else {
-				info.setDodge(getBoolean(data));
-				info.setParry(getBoolean(data));
+				info.setDodge(data.getBoolean());
+				info.setParry(data.getBoolean());
 			}
 		} else {
-			// spamMessage = getUnicode(data);
-			getInt(data);
+			// spamMessage = data.getUnicode();
+			data.getInt();
 		}
-		info.setCritical(getBoolean(data));
-		info.setGlancing(getBoolean(data));
-		info.setProc(getBoolean(data));
-		spamType = getInt(data);
+		info.setCritical(data.getBoolean());
+		info.setGlancing(data.getBoolean());
+		info.setProc(data.getBoolean());
+		spamType = data.getInt();
 		if (isMessageData(dataType)) {
 			// Extra stuff?
 		}
 	}
 	
 	@Override
-	public ByteBuffer encode() {
+	public NetBuffer encode() {
 		NetBuffer data = NetBuffer.allocate(getEncodeSize());
-		encodeHeader(data.getBuffer());
+		encodeHeader(data);
 		data.addByte(dataType);
 		data.addLong(attacker);
 		data.addEncodable(attackerPosition);
@@ -160,7 +159,7 @@ public class CombatSpam extends ObjectController {
 		data.addBoolean(info.isGlancing());
 		data.addBoolean(info.isProc());
 		data.addInt(spamType);
-		return data.getBuffer();
+		return data;
 	}
 	
 	private int getEncodeSize() {

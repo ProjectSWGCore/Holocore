@@ -27,9 +27,10 @@
 ***********************************************************************************/
 package network.packets.swg.zone.chat;
 
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 
@@ -45,7 +46,7 @@ public class ChatIgnoreList extends SWGPacket {
 		ignoreList = new ArrayList<IgnoreListItem>();
 	}
 	
-	public ChatIgnoreList(ByteBuffer data) {
+	public ChatIgnoreList(NetBuffer data) {
 		decode(data);
 	}
 	
@@ -57,32 +58,32 @@ public class ChatIgnoreList extends SWGPacket {
 		ignoreList.add(name);
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		objectId = getLong(data);
-		int listCount = getInt(data);
+		objectId = data.getLong();
+		int listCount = data.getInt();
 		for (int i = 0; i < listCount; i++) {
-			String game = getAscii(data);
-			String galaxy = getAscii(data);
-			String name = getAscii(data);
+			String game = data.getAscii();
+			String galaxy = data.getAscii();
+			String name = data.getAscii();
 			addName(game, galaxy, name);
 		}
 	}
 	
-	public ByteBuffer encode() {
+	public NetBuffer encode() {
 		int extraSize = 0;
 		for (IgnoreListItem item : ignoreList)
 			extraSize += 6 + item.getGame().length() + item.getGalaxy().length() + item.getName().length();
-		ByteBuffer data = ByteBuffer.allocate(18 + extraSize);
-		addShort  (data, 3);
-		addInt    (data, CRC);
-		addLong   (data, objectId);
-		addInt    (data, ignoreList.size());
+		NetBuffer data = NetBuffer.allocate(18 + extraSize);
+		data.addShort(3);
+		data.addInt(CRC);
+		data.addLong(objectId);
+		data.addInt(ignoreList.size());
 		for (IgnoreListItem item : ignoreList) {
-			addAscii(data, item.getGame());
-			addAscii(data, item.getGalaxy());
-			addAscii(data, item.getName());
+			data.addAscii(item.getGame());
+			data.addAscii(item.getGalaxy());
+			data.addAscii(item.getName());
 		}
 		return data;
 	}

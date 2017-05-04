@@ -27,9 +27,10 @@
 ***********************************************************************************/
 package network.packets.swg.login;
 
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.projectswg.common.network.NetBuffer;
 
 import network.packets.swg.SWGPacket;
 
@@ -47,29 +48,29 @@ public class OfflineServersMessage extends SWGPacket {
 		this.offlineServers = offline;
 	}
 	
-	public OfflineServersMessage(ByteBuffer data) {
+	public OfflineServersMessage(NetBuffer data) {
 		decode(data);
 	}
 	
-	public void decode(ByteBuffer data) {
-		if (!super.decode(data, CRC))
+	public void decode(NetBuffer data) {
+		if (!super.checkDecode(data, CRC))
 			return;
-		int listCount = getInt(data);
+		int listCount = data.getInt();
 		offlineServers = new ArrayList<String>(listCount);
 		for (int i = 0 ; i < listCount; i++)
-			offlineServers.add(getAscii(data));
+			offlineServers.add(data.getAscii());
 	}
 	
-	public ByteBuffer encode() {
+	public NetBuffer encode() {
 		int strLength = 0;
 		for (String str : offlineServers)
 			strLength += 2 + str.length();
-		ByteBuffer data = ByteBuffer.allocate(10 + strLength);
-		addShort(data, 2);
-		addInt(  data, CRC);
-		addInt(data, offlineServers.size());
+		NetBuffer data = NetBuffer.allocate(10 + strLength);
+		data.addShort(2);
+		data.addInt(CRC);
+		data.addInt(offlineServers.size());
 		for (String str : offlineServers)
-			addAscii(data, str);
+			data.addAscii(str);
 		return data;
 	}
 	

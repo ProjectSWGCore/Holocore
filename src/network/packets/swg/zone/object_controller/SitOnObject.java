@@ -27,9 +27,7 @@
 ***********************************************************************************/
 package network.packets.swg.zone.object_controller;
 
-import java.nio.ByteBuffer;
-
-import network.packets.swg.zone.object_controller.ObjectController;
+import com.projectswg.common.network.NetBuffer;
 
 public class SitOnObject extends ObjectController {
 	
@@ -44,7 +42,7 @@ public class SitOnObject extends ObjectController {
 		super(objectId, CRC);
 	}
 	
-	public SitOnObject(ByteBuffer data) {
+	public SitOnObject(NetBuffer data) {
 		super(CRC);
 		decode(data);
 	}
@@ -66,22 +64,22 @@ public class SitOnObject extends ObjectController {
 	}
 	
 	@Override
-	public void decode(ByteBuffer data) {
+	public void decode(NetBuffer data) {
 		decodeHeader(data);
-		cellId = getLong(data);
-		x = getFloat(data);
-		z = getFloat(data);
-		y = getFloat(data);
+		cellId = data.getLong();
+		x = data.getFloat();
+		z = data.getFloat();
+		y = data.getFloat();
 	}
 	
 	@Override
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + 20);
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(HEADER_LENGTH + 20);
 		encodeHeader(data);
-		addLong(data, cellId);
-		addFloat(data, x);
-		addFloat(data, z);
-		addFloat(data, y);
+		data.addLong(cellId);
+		data.addFloat(x);
+		data.addFloat(z);
+		data.addFloat(y);
 		return data;
 	}
 	

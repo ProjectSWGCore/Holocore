@@ -28,19 +28,17 @@
 
 package intents.combat;
 
-import resources.control.Intent;
+import com.projectswg.common.control.Intent;
+
 import resources.objects.creature.CreatureObject;
 
 public class DuelPlayerIntent extends Intent {
-	
-	public static final String TYPE = "DuelPlayerIntent";
 	
 	private final CreatureObject sender;
 	private final CreatureObject reciever;
 	private DuelEventType eventType;
 	
 	public DuelPlayerIntent(CreatureObject sender, CreatureObject reciever, DuelEventType eventType) {
-		super(TYPE);
 		this.sender = sender;
 		this.reciever = reciever;
 		this.eventType = eventType;

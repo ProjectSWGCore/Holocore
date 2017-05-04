@@ -27,7 +27,7 @@
  ***********************************************************************************/
 package network.packets.swg.zone.object_controller;
 
-import java.nio.ByteBuffer;
+import com.projectswg.common.network.NetBuffer;
 
 public class MessageQueueCraftFillSlot extends ObjectController{
 	
@@ -46,28 +46,28 @@ public class MessageQueueCraftFillSlot extends ObjectController{
 		this.sequenceId = sequenceId;
 	}
 	
-	public MessageQueueCraftFillSlot(ByteBuffer data) {
+	public MessageQueueCraftFillSlot(NetBuffer data) {
 		super(CRC);
 		decode(data);
 	}
 
 	@Override
-	public void decode(ByteBuffer data) {
+	public void decode(NetBuffer data) {
 		decodeHeader(data);
-		resourceId = getLong(data);
-		slotId = getInt(data);
-		option = getInt(data);
-		sequenceId = getByte(data);
+		resourceId = data.getLong();
+		slotId = data.getInt();
+		option = data.getInt();
+		sequenceId = data.getByte();
 	}
 
 	@Override
-	public ByteBuffer encode() {
-		ByteBuffer data = ByteBuffer.allocate(HEADER_LENGTH + 17 );
+	public NetBuffer encode() {
+		NetBuffer data = NetBuffer.allocate(HEADER_LENGTH + 17 );
 		encodeHeader(data);
-		addLong(data, resourceId);
-		addInt(data, slotId);
-		addInt(data, option);
-		addByte(data, sequenceId);
+		data.addLong(resourceId);
+		data.addInt(slotId);
+		data.addInt(option);
+		data.addByte(sequenceId);
 		return data;
 	}
 
