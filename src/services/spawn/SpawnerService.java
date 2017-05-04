@@ -336,7 +336,7 @@ public final class SpawnerService extends Service {
 	}
 	
 	private Location behaviorLocation(Spawner spawner) {
-		Location aiLocation = spawner.getLocation();
+		Location aiLocation = new Location(spawner.getLocation());
 		
 		switch (spawner.getAIBehavior()) {
 			case FLOAT:
@@ -348,11 +348,11 @@ public final class SpawnerService extends Service {
 				spawner.setFloatRadius(floatRadius);
 				aiLocation.setPosition(aiLocation.getX() + offsetX, aiLocation.getY(), aiLocation.getZ() + offsetZ);
 	
-				// Doesn't break here - FLOAT NPCs spawn with random heading
+				// Doesn't break here - FLOAT NPCs also have GUARD behavior
 			case GUARD:
 				// Random heading when spawned
 				int randomHeading = randomBetween(0, 360);	// Can't use negative numbers as minimum
-				aiLocation.setHeading(randomHeading - 180);	// -180 to 180
+				aiLocation.setHeading(randomHeading);	// -180 to 180
 				break;
 		}
 		
