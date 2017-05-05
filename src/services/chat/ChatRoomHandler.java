@@ -35,6 +35,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import com.projectswg.common.data.info.RelationalServerData;
 import com.projectswg.common.data.info.RelationalServerFactory;
+import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.data.swgfile.visitors.DatatableData;
 import com.projectswg.common.debug.Assert;
 import com.projectswg.common.debug.Log;
@@ -111,7 +112,7 @@ public class ChatRoomHandler {
 		}
 		
 		// Enter the new zone-only chat channels
-		String planetPath = "SWG." + player.getGalaxyName() + "." + player.getCreatureObject().getTerrain().getName() + ".";
+		String planetPath = "SWG." + player.getGalaxyName() + "." + getPlanetChatName(player.getCreatureObject().getTerrain()) + ".";
 		Assert.test(rooms.hasRoomWithPath(planetPath + "Planet"), "Planet chat does not exist! planetPath = " + planetPath);
 		Assert.test(rooms.hasRoomWithPath(planetPath + "system"), "System chat does not exist! planetPath = " + planetPath);
 		enterChatChannel(player, planetPath + "Planet", false);
@@ -316,6 +317,22 @@ public class ChatRoomHandler {
 			createRoom(systemAvatar, true, false, path + "system", "system messages for this planet, cannot create rooms here", false);
 			createRoom(systemAvatar, true, false, path + "Chat", "public chat for this planet, can create rooms here", false);
 		});
+	}
+	
+	private String getPlanetChatName(Terrain terrain) {
+		switch (terrain) {
+			case KASHYYYK:
+			case KASHYYYK_DEAD_FOREST:
+			case KASHYYYK_HUNTING:
+			case KASHYYYK_MAIN:
+			case KASHYYYK_NORTH_DUNGEONS:
+			case KASHYYYK_POB_DUNGEONS:
+			case KASHYYYK_RRYATT_TRAIL:
+			case KASHYYYK_SOUTH_DUNGEONS:
+				return "kashyyyk";
+			default:
+				return terrain.getName();
+		}
 	}
 	
 	public ChatRoom getRoomById(int roomId) {
