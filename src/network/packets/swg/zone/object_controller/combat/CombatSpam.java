@@ -163,18 +163,14 @@ public class CombatSpam extends ObjectController {
 	}
 	
 	private int getEncodeSize() {
-		int size = HEADER_LENGTH + 48;
+		int size = HEADER_LENGTH + 24 + attackerPosition.getLength() + defenderPosition.getLength();
 		if (isAttackDataWeaponObject(dataType))
-			size += 9 + getStringIdSize(attackName) + (info.isSuccess() ? 97 : 2);
+			size += 9 + attackName.getLength() + (info.isSuccess() ? 60 : 2);
 		else if (isAttackWeaponName(dataType))
-			size += 1 + getStringIdSize(attackName) + getStringIdSize(weaponName) + (info.isSuccess() ? 97 : 2);
+			size += 1 + attackName.getLength() + weaponName.getLength() + (info.isSuccess() ? 60 : 2);
 		else
 			size += 4; // I have no idea what's in this struct
 		return size;
-	}
-	
-	private int getStringIdSize(StringId sid) {
-		return 8 + sid.getFile().length() + sid.getKey().length();
 	}
 	
 	/**
