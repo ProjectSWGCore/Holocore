@@ -58,7 +58,7 @@ class PlayerObjectPrivate  implements Persistable {
 				waypoints.put(waypoint.getObjectId(), waypoint);
 				waypoints.sendDeltaMessage(target);
 			} else {
-				target.sendSelf(new ChatSystemMessage(ChatSystemMessage.SystemChatType.SCREEN_AND_CHAT, "@base_player:too_many_waypoints"));
+				target.sendSelf(new ChatSystemMessage(ChatSystemMessage.SystemChatType.PERSONAL, "@base_player:too_many_waypoints"));
 			}
 		}
 	}

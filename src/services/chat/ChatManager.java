@@ -310,25 +310,25 @@ public class ChatManager extends Manager {
 	}
 	
 	private void broadcastAreaMessage(String message, Player broadcaster) {
-		broadcaster.getCreatureObject().sendObserversAndSelf(new ChatSystemMessage(SystemChatType.SCREEN_AND_CHAT.getType(), message));
+		broadcaster.getCreatureObject().sendObserversAndSelf(new ChatSystemMessage(SystemChatType.PERSONAL, message));
 	}
 	
 	private void broadcastPlanetMessage(String message, Terrain terrain) {
-		ChatSystemMessage packet = new ChatSystemMessage(SystemChatType.SCREEN_AND_CHAT.getType(), message);
+		ChatSystemMessage packet = new ChatSystemMessage(SystemChatType.PERSONAL, message);
 		new NotifyPlayersPacketIntent(packet, terrain).broadcast();
 	}
 	
 	private void broadcastGalaxyMessage(String message) {
-		ChatSystemMessage packet = new ChatSystemMessage(SystemChatType.SCREEN_AND_CHAT.getType(), message);
+		ChatSystemMessage packet = new ChatSystemMessage(SystemChatType.PERSONAL, message);
 		new NotifyPlayersPacketIntent(packet).broadcast();
 	}
 	
 	private void broadcastPersonalMessage(Player player, String message) {
-		player.sendPacket(new ChatSystemMessage(SystemChatType.SCREEN_AND_CHAT, message));
+		player.sendPacket(new ChatSystemMessage(SystemChatType.PERSONAL, message));
 	}
 	
 	private void broadcastPersonalMessage(Player player, ProsePackage prose) {
-		player.sendPacket(new ChatSystemMessage(SystemChatType.SCREEN_AND_CHAT, new OutOfBandPackage(prose)));
+		player.sendPacket(new ChatSystemMessage(SystemChatType.PERSONAL, new OutOfBandPackage(prose)));
 	}
 	
 	private void logChat(Player broadcaster, ChatType type, ChatRange range, String message) {

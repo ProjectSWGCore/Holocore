@@ -160,7 +160,7 @@ public class ZoneManager extends Manager {
 	}
 	
 	private void sendCommitHistory(Player player) {
-		player.sendPacket(new ChatSystemMessage(ChatSystemMessage.SystemChatType.CHAT, commitHistory));
+		player.sendPacket(new ChatSystemMessage(ChatSystemMessage.SystemChatType.CHAT_BOX, commitHistory));
 	}
 	
 	private void sendMessageOfTheDay(Player player) {

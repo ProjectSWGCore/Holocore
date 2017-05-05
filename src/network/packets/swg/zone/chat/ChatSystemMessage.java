@@ -38,35 +38,31 @@ public class ChatSystemMessage extends SWGPacket {
 	
 	private OutOfBandPackage oob;
 	private String message;
-	private int type;
+	private SystemChatType type;
 	
 	public ChatSystemMessage() {
-		this(0, "");
-	}
-	
-	public ChatSystemMessage(int type, String message) {
-		this.type = type;
-		this.message = message;
-	}
-	
-	public ChatSystemMessage(int type, OutOfBandPackage oob) {
-		this.type = type;
-		this.oob = oob;
+		this(SystemChatType.PERSONAL, "", null);
 	}
 	
 	public ChatSystemMessage(SystemChatType type, String message) {
-		this(type.getType(), message);
+		this(type, message, null);
 	}
 	
 	public ChatSystemMessage(SystemChatType type, OutOfBandPackage oob) {
-		this(type.getType(), oob);
+		this(type, "", oob);
+	}
+	
+	public ChatSystemMessage(SystemChatType type, String message, OutOfBandPackage oob) {
+		this.type = type;
+		this.message = message;
+		this.oob = oob;
 	}
 	
 	@Override
 	public void decode(NetBuffer data) {
 		if (!super.checkDecode(data, CRC))
 			return;
-		type = data.getByte();
+		type = SystemChatType.getType(data.getByte());
 		message = data.getUnicode();
 		data.getUnicode();
 	}
@@ -74,38 +70,16 @@ public class ChatSystemMessage extends SWGPacket {
 	@Override
 	public NetBuffer encode() {
 		boolean oobExists = (oob != null);
-		int length = 7;
-		
-		if (oobExists)
-			length += 4 + oob.getLength();
-		else
-			length += 8 + message.length() * 2;
-		
-		NetBuffer data = NetBuffer.allocate(length);
+		NetBuffer data = NetBuffer.allocate(11 + message.length()*2 + (oobExists ? oob.getLength() : 4));
 		data.addShort(4);
 		data.addInt(CRC);
-		data.addByte(type);
-		if (oobExists) {
-			data.addInt(0);
+		data.addByte(type.getType());
+		data.addUnicode(message);
+		if (oobExists)
 			data.addEncodable(oob);
-		} else {
-			data.addUnicode(message);
+		else
 			data.addInt(0);
-		}
-		
 		return data;
-	}
-	
-	public SystemChatType getType() {
-		switch (type) {
-			case 0:
-			default:
-				return SystemChatType.SCREEN_AND_CHAT;
-			case 1:
-				return SystemChatType.SCREEN;
-			case 2:
-				return SystemChatType.CHAT;
-		}
 	}
 	
 	public String getMessage() {
@@ -113,9 +87,10 @@ public class ChatSystemMessage extends SWGPacket {
 	}
 	
 	public enum SystemChatType {
-		SCREEN_AND_CHAT	(0x00),
-		SCREEN			(0x01),
-		CHAT			(0x02);
+		PERSONAL	(0x00),
+		BROADCAST	(0x01),
+		CHAT_BOX	(0x02),
+		QUEST		(0x04);
 		
 		int type;
 		
@@ -125,6 +100,18 @@ public class ChatSystemMessage extends SWGPacket {
 		
 		public int getType() {
 			return type;
+		}
+		
+		public static SystemChatType getType(int type) {
+			switch (type) {
+				case 0:
+				default:
+					return SystemChatType.PERSONAL;
+				case 1:
+					return SystemChatType.BROADCAST;
+				case 2:
+					return SystemChatType.CHAT_BOX;
+			}
 		}
 	}
 	

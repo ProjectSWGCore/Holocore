@@ -122,7 +122,7 @@ public final class IntentFactory {
 	 * @param message Message to display in the players chat console.
 	 */
 	public void sendConsoleMessage(Player target, String message) {
-		target.sendPacket(new ChatSystemMessage(ChatSystemMessage.SystemChatType.CHAT, message));
+		target.sendPacket(new ChatSystemMessage(ChatSystemMessage.SystemChatType.CHAT_BOX, message));
 	}
 
 	/**

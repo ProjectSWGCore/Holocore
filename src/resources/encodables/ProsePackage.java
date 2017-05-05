@@ -29,6 +29,7 @@ package resources.encodables;
 
 import java.math.BigInteger;
 
+import com.projectswg.common.debug.Assert;
 import com.projectswg.common.debug.Log;
 import com.projectswg.common.encoding.Encodable;
 import com.projectswg.common.network.NetBuffer;
@@ -193,9 +194,7 @@ public class ProsePackage implements OutOfBandData {
 	
 	@Override
 	public byte[] encode() {
-		if (base == null) // There must be a base stf always
-			return null;
-		
+		Assert.notNull(base, "There must be a StringId base!");
 		NetBuffer data = NetBuffer.allocate(getLength());
 		data.addEncodable(base);
 		data.addEncodable(actor);
@@ -269,7 +268,9 @@ public class ProsePackage implements OutOfBandData {
 		private String text;
 		
 		public Prose() {
-			stringId = new StringId("", "");
+			this.objectId = 0;
+			this.stringId = new StringId("", "");
+			this.text = "";
 		}
 		
 		public void setObjectId(long objectId) {
@@ -277,10 +278,12 @@ public class ProsePackage implements OutOfBandData {
 		}
 		
 		public void setStringId(StringId stringId) {
+			Assert.notNull(stringId, "StringId cannot be null!");
 			this.stringId = stringId;
 		}
 		
 		public void setText(String text) {
+			Assert.notNull(text, "Text cannot be null!");
 			this.text = text;
 		}
 		
@@ -289,12 +292,7 @@ public class ProsePackage implements OutOfBandData {
 			NetBuffer data = NetBuffer.allocate(getLength());
 			data.addLong(objectId);
 			data.addEncodable(stringId);
-			if (text != null && !text.isEmpty()) {
-				data.addInt(text.length());
-				data.addUnicode(text);
-			} else {
-				data.addInt(0);
-			}
+			data.addUnicode(text);
 			return data.array();
 		}
 		
@@ -307,7 +305,7 @@ public class ProsePackage implements OutOfBandData {
 		
 		@Override
 		public int getLength() {
-			return 12 + stringId.getLength() + (text != null ? (4 + (text.length() * 2)) : 0);
+			return 12 + stringId.getLength() + text.length()*2;
 		}
 		
 		@Override
