@@ -43,9 +43,12 @@ import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.debug.Log;
 
+import java.util.Random;
+
 import intents.object.DestroyObjectIntent;
 import intents.object.ObjectCreatedIntent;
 import intents.server.ConfigChangedIntent;
+
 import resources.PvpFlag;
 import resources.config.ConfigFile;
 import resources.containers.ContainerPermissionsType;
@@ -80,11 +83,13 @@ public final class SpawnerService extends Service {
 	private final ObjectManager objectManager;
 	private final Map<Long, Spawner> spawnerMap;
 	private final ScheduledExecutorService executorService;
+	private final Random random;
 	
 	public SpawnerService(ObjectManager objectManager) {
 		this.objectManager = objectManager;
 		executorService = Executors.newSingleThreadScheduledExecutor(ThreadUtilities.newThreadFactory("spawner-service"));
 		spawnerMap = new HashMap<>();
+		random = new Random();
 		
 		registerForIntent(ConfigChangedIntent.class, cci -> handleConfigChangedIntent(cci));
 		registerForIntent(DestroyObjectIntent.class, doi -> handleDestroyObjectIntent(doi));
@@ -284,7 +289,7 @@ public final class SpawnerService extends Service {
 	private long createNPC(Spawner spawner) {
 		DefaultAIObject object = ObjectCreator.createObjectFromTemplate(spawner.getRandomIffTemplate(), DefaultAIObject.class);
 		
-		object.setLocation(spawner.getLocation());
+		object.setLocation(behaviorLocation(spawner));
 		object.setObjectName(spawner.getCreatureName());
 		object.setLevel(spawner.getCombatLevel());
 		object.setDifficulty(spawner.getCreatureDifficulty());
@@ -328,5 +333,39 @@ public final class SpawnerService extends Service {
 	private void removeSpawners() {
 		spawnerMap.values().forEach(spawner -> new DestroyObjectIntent(spawner.getSpawnerObject()).broadcast());
 		spawnerMap.clear();
+	}
+	
+	private Location behaviorLocation(Spawner spawner) {
+		Location aiLocation = new Location(spawner.getLocation());
+		
+		switch (spawner.getAIBehavior()) {
+			case FLOAT:
+				// Random location within float radius of spawner and 
+				int floatRadius = spawner.getFloatRadius();
+				int offsetX = randomBetween(0, floatRadius);
+				int offsetZ = randomBetween(0, floatRadius);
+				
+				spawner.setFloatRadius(floatRadius);
+				aiLocation.setPosition(aiLocation.getX() + offsetX, aiLocation.getY(), aiLocation.getZ() + offsetZ);
+	
+				// Doesn't break here - FLOAT NPCs also have GUARD behavior
+			case GUARD:
+				// Random heading when spawned
+				int randomHeading = randomBetween(0, 360);	// Can't use negative numbers as minimum
+				aiLocation.setHeading(randomHeading);	// -180 to 180
+				break;
+		}
+		
+		return aiLocation;
+	}
+	
+	/**
+	 * Generates a random number between from (inclusive) and to (inclusive)
+	 * @param from a positive minimum value
+	 * @param to maximum value, which is larger than the minimum value
+	 * @return a random number between the two, both inclusive
+	 */
+	private int randomBetween(int from, int to) {
+		return random.nextInt((to - from) + 1) + from;
 	}
 }
