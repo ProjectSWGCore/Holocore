@@ -34,12 +34,14 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import com.projectswg.common.concurrency.SynchronizedSet;
-import com.projectswg.common.control.Intent;
+import com.projectswg.common.control.IntentChain;
 import com.projectswg.common.control.Service;
 import com.projectswg.common.debug.Assert;
 import com.projectswg.common.debug.Log;
 
 import intents.PlayerEventIntent;
+import intents.connection.ForceLogoutIntent;
+import intents.network.CloseConnectionIntent;
 import intents.network.GalacticPacketIntent;
 import network.packets.swg.zone.HeartBeat;
 import resources.network.DisconnectReason;
@@ -79,6 +81,7 @@ public class ConnectionService extends Service {
 		
 		registerForIntent(PlayerEventIntent.class, pei -> handlePlayerEventIntent(pei));
 		registerForIntent(GalacticPacketIntent.class, gpi -> handleGalacticPacketIntent(gpi));
+		registerForIntent(ForceLogoutIntent.class, fli -> handleForceLogoutIntent(fli));
 	}
 	
 	@Override
@@ -112,6 +115,13 @@ public class ConnectionService extends Service {
 		p.updateLastPacketTimestamp();
 		if (gpi.getPacket() instanceof HeartBeat)
 			p.sendPacket(gpi.getPacket());
+	}
+	
+	private void handleForceLogoutIntent(ForceLogoutIntent fli) {
+		Player player = fli.getPlayer();
+		Assert.notNull(player.getCreatureObject(), "ForceLogoutIntent must have a valid player with creature object!");
+		logOut(player);
+		disappear(player, false, DisconnectReason.APPLICATION);
 	}
 	
 	private void setPlayerFlag(Player p, PlayerFlags flag) {
@@ -152,9 +162,10 @@ public class ConnectionService extends Service {
 		Log.i("Disappeared %s with character %s with reason %s", p.getUsername(), p.getCharacterName(), reason);
 		
 		removeFromDisappear(p);
-		Intent i = new PlayerEventIntent(p, PlayerEvent.PE_DISAPPEAR);
-		new PlayerEventIntent(p, PlayerEvent.PE_DESTROYED).broadcastAfterIntent(i);
-		i.broadcast();
+		IntentChain.broadcastChain(
+				new PlayerEventIntent(p, PlayerEvent.PE_DISAPPEAR),
+				new PlayerEventIntent(p, PlayerEvent.PE_DESTROYED),
+				new CloseConnectionIntent(p.getNetworkId(), DisconnectReason.APPLICATION));
 	}
 	
 	private void updatePlayTime(Player p) {
