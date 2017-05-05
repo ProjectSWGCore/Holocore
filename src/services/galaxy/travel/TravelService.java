@@ -85,10 +85,7 @@ public class TravelService extends Service {
 	private static final byte PLANET_NAMES_COLUMN_INDEX = 0;
 	private static final short TICKET_USE_RADIUS = 8;	// The distance a player needs to be within in order to use their ticket
 	
-	private Terrain[] travelPlanets;
 	private final Map<Terrain, Map<Terrain, Integer>> allowedRoutes; // Describes which planets are linked and base prices.
-	private final DatatableData travelFeeTable;
-	
 	private final AtomicInteger groundTime;
 	private final AtomicInteger airTime;
 	private final double ticketPriceFactor;
@@ -99,7 +96,6 @@ public class TravelService extends Service {
 	
 	public TravelService() {
 		allowedRoutes = new HashMap<>();
-		travelFeeTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/travel/travel.iff");
 		travel = new HashMap<>();
 		
 		Config config = DataManager.getConfig(ConfigFile.FEATURES);
@@ -110,7 +106,6 @@ public class TravelService extends Service {
 		createGalaxyTravel("object/creature/npc/theme_park/shared_player_shuttle.iff", 17000);
 		createGalaxyTravel("object/creature/npc/theme_park/shared_player_transport.iff", 21000);
 		createGalaxyTravel("object/creature/npc/theme_park/shared_player_transport_theed_hangar.iff", 24000);
-		loadTravelPlanetNames();
 		loadAllowedRoutesAndPrices();
 		loadTravelPoints();
 		
@@ -142,13 +137,11 @@ public class TravelService extends Service {
 		travel.put(template, new TravelGroup(template, landTime, groundTime.get() * 1000L, airTime.get() * 1000L));
 	}
 	
-	private void loadTravelPlanetNames() {
-		travelPlanets = new Terrain[travelFeeTable.getRowCount()];
-		
-		travelFeeTable.handleRows(currentRow -> travelPlanets[currentRow] = Terrain.getTerrainFromName((String) travelFeeTable.getCell(currentRow, PLANET_NAMES_COLUMN_INDEX)));
-	}
-	
 	private void loadAllowedRoutesAndPrices() {
+		DatatableData travelFeeTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/travel/travel.iff");
+		Terrain [] travelPlanets = new Terrain[travelFeeTable.getRowCount()];
+		travelFeeTable.handleRows(currentRow -> travelPlanets[currentRow] = Terrain.getTerrainFromName((String) travelFeeTable.getCell(currentRow, PLANET_NAMES_COLUMN_INDEX)));
+		
 		for(Terrain travelPlanet : travelPlanets) {
 			int rowIndex = travelFeeTable.getColumnFromName(travelPlanet.getName()) - 1;
 			Map<Terrain, Integer> prices = new HashMap<>();
@@ -298,6 +291,10 @@ public class TravelService extends Service {
 		}
 	}
 	
+	private boolean isValidRoute(Terrain departurePlanet, Terrain arrivalPlanet) {
+		return allowedRoutes.get(departurePlanet) != null && allowedRoutes.get(departurePlanet).get(arrivalPlanet) != null;
+	}
+	
 	private int getTicketBasePrice(Terrain departurePlanet, Terrain arrivalPlanet) {
 		return allowedRoutes.get(departurePlanet).get(arrivalPlanet);
 	}
@@ -330,7 +327,7 @@ public class TravelService extends Service {
 		Player purchaserOwner = purchaser.getOwner();
 		boolean roundTrip = i.isRoundTrip();
 		
-		if (nearestPoint == null || destinationPoint == null) {
+		if (nearestPoint == null || destinationPoint == null || !isValidRoute(nearestPoint.getLocation().getTerrain(), destinationPoint.getLocation().getTerrain())) {
 			Log.w("Unable to purchase ticket! Nearest Point: %s  Destination Point: %s", nearestPoint, destinationPoint);
 			return;
 		}
