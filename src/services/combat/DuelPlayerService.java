@@ -28,6 +28,7 @@
 package services.combat;
 
 import com.projectswg.common.control.Service;
+import com.projectswg.common.data.location.Location;
 
 import intents.chat.ChatBroadcastIntent;
 import intents.combat.DuelPlayerIntent;
@@ -43,6 +44,12 @@ public class DuelPlayerService extends Service {
 	}
 	
 	private void handleAcceptDuel(CreatureObject accepter, CreatureObject target) {
+		if (!isLocationValidToDuel(accepter, target)) {
+			sendSystemMessage(accepter, target, "not_available_to_duel");
+			accepter.removePlayerFromSentDuels(target);
+			target.removePlayerFromSentDuels(accepter);
+			return;
+		}
 		if (accepter.isDuelingPlayer(target)) {
 			sendSystemMessage(accepter, target, "already_dueling");
 			return;
@@ -86,6 +93,10 @@ public class DuelPlayerService extends Service {
 	}
 	
 	private void handleRequestDuel(CreatureObject requester, CreatureObject target) {
+		if (!isLocationValidToDuel(requester, target)) {
+			sendSystemMessage(requester, target, "not_available_to_duel");
+			return;
+		}
 		if (!requester.hasSentDuelRequestToPlayer(target)) {
 			requester.addPlayerToSentDuels(target);
 			sendSystemMessage(requester, target, "challenge_self");
@@ -119,6 +130,14 @@ public class DuelPlayerService extends Service {
 				handleRequestDuel(dpi.getSender(), dpi.getReciever());
 				break;
 		}
+	}
+	
+	private boolean isLocationValidToDuel(CreatureObject creature1, CreatureObject creature2) {
+		Location location1 = creature1.getLocation();
+		Location location2 = creature2.getLocation();
+		if (location1.getTerrain() != location2.getTerrain())
+			return false;
+		return location1.isWithinDistance(location2, 32);
 	}
 	
 	private void sendSystemMessage(CreatureObject playerToMessage, CreatureObject playerToMessageAbout, String message) {
